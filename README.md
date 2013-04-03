@@ -1,6 +1,6 @@
 # poche
 
-Abandon Pocket, Instapaper and other Readibility service : adopt poche. It is the same, but it is open source.
+Abandon Pocket, Instapaper and other Readability service : adopt poche. It is the same, but it is open source.
 
 ## Usage
 

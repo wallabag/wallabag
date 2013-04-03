@@ -51,6 +51,11 @@ switch ($action) {
     default:
         break;
 }
+
+function url(){
+  $protocol = ($_SERVER['HTTPS'] && $_SERVER['HTTPS'] != "off") ? "https" : "http";
+  return $protocol . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+}
 ?>
 <!DOCTYPE html>
 <!--[if lte IE 6]> <html class="no-js ie6 ie67 ie678" lang="en"> <![endif]-->
@@ -75,7 +80,7 @@ switch ($action) {
 				<li><a href="index.php">home</a></li>
 				<li><a href="#">favorites</a></li>
 				<li><a href="#">archive</a></li>
-                <li><a href="javascript:(function(){var%20url%20=%20location.href;var%20title%20=%20document.title%20||%20url;window.open('http://localhost/poche/index.php?action=add&url='%20+%20encodeURIComponent(url),'_self');})();">bookmarklet</a></li>
+                <li><a href="javascript:(function(){var%20url%20=%20location.href;var%20title%20=%20document.title%20||%20url;window.open('<? echo url()?>index.php?action=add&url='%20+%20encodeURIComponent(url),'_self');})();">poche it !</a></li>
 			</ul>
 		<?php
 			$query = $db_handle->prepare("SELECT * FROM entries WHERE read=?");
@@ -91,7 +96,7 @@ switch ($action) {
 			</ul>
 		</div>
 		<footer class="mr2 mt3">
-            <p class="smaller">poche is a read it later open source system, based on <a href="http://www.memiks.fr/readityourself/">ReadItYourself</a>. poche is developed by <a href="http://nicolas.loeuillet.org">Nicolas Lœuillet</a> under the <a href="http://www.wtfpl.net/">Do What the Fuck You Want to Public License</a></p>
+            <p class="smaller"><a href="http://github.com/nicosomb/poche">poche</a> is a read it later open source system, based on <a href="http://www.memiks.fr/readityourself/">ReadItYourself</a>. poche is developed by <a href="http://nicolas.loeuillet.org">Nicolas Lœuillet</a> under the <a href="http://www.wtfpl.net/">Do What the Fuck You Want to Public License</a></p>
         </footer>
 	</body>
 </html>
