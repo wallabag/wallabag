@@ -1,0 +1,35 @@
+body {
+    color: #222222;
+    font: 20px/1.3em Palatino,Georgia,serif;
+    background-color: #e6e6e6;
+}
+
+a, a:hover, a:visited {
+    color: #000;
+}
+header {
+    text-align: center;
+}
+
+#main {
+    margin: 0 auto;
+}
+
+#main ul#links {
+    padding: 0;
+    list-style-type: none;
+    text-align: center;
+}
+
+#main ul#links li {
+    display: inline;
+    padding: 15px;
+}
+
+#main a.tool {
+    text-decoration: none;
+}
+
+footer {
+    text-align: right;
+}

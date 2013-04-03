@@ -1,0 +1,85 @@
+
+body { 
+	font:1em/1.625em "lucida grande","lucida sans unicode", sans-serif; background-color:#FFFEF0;  
+	font-size-adjust:none;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	padding: 15px;
+	margin: 15px auto;
+}
+
+article {
+	border: 3px solid grey;
+	max-width:700px;
+	margin: 15px auto;
+	padding: 15px;
+}
+
+footer {
+	border: 1px solid black;
+	padding: 15px;
+	margin: 15px auto;
+}
+
+p { padding:0 0  0.8125em 0; color:#111; font-weight:300;}
+
+p + p { text-indent:1.625em;}
+
+img       { display: block; margin: 0.5em 0.8125em 0.8125em 0; padding: 0; }
+
+p > img { display: inline-block; margin: 0; }
+
+h1,h2{ font-weight:normal; color: #333; font-family:Georgia, serif;  }
+h3,h4,h5,h6 { font-weight: normal; color: #333; font-family:Georgia, serif; }
+
+
+h1 { font-size: 2.125em; margin-bottom: 0.765em; line-height: 1.5em;}
+h2 { font-size: 1.9em;  margin-bottom: 0.855em; }
+h3 { font-size: 1.7em;  margin-bottom: 0.956em; }
+h4 { font-size: 1.4em;  margin-bottom: 1.161em; }
+h5,h6 { font-size: 1.313em;  margin-bottom: 1.238em; }
+
+
+
+ul{list-style-position:outside;}
+li ul, 
+li ol  { margin:0 1.625em;  }
+ul, ol { margin: 0 0 1.625em 0; }
+
+
+dl { margin: 0 0 1.625em 0; }
+dl dt { font-weight: bold; }
+dl dd { margin-left: 1.625em; }
+
+a { color:#005AF2; text-decoration:none; }
+a:hover { text-decoration: underline; }
+
+
+table { margin-bottom:1.625em; border-collapse: collapse; }
+th { font-weight:bold; }
+tr,th,td { margin:0; padding:0 1.625em 0 1em; height:26px; }
+tfoot { font-style: italic; }
+caption { text-align:center; font-family:Georgia, serif; }
+
+
+abbr, acronym { border-bottom:1px dotted #000; }
+address { margin-top:1.625em; font-style: italic; }
+del {color:#000;}
+
+
+blockquote { padding:1em 1em 1.625em 1em; font-family:georgia,serif;font-style: italic;  }
+blockquote:before { content:"\201C";font-size:3em;margin-left:-.625em; font-family:georgia,serif;color:#aaa;line-height:0;}/* From Tripoli  */
+blockquote > p {padding:0; margin:0; }
+
+strong { font-weight: bold; }
+em, dfn { font-style: italic; }
+dfn { font-weight: bold; }
+pre, code { margin: 1.625em 0; white-space: pre; }
+pre, code, tt { font: 1em monospace; line-height: 1.5; } 
+tt { display: block; margin: 1.625em 0; }
+hr { margin-bottom:1.625em; }
+
+.oldbook { font-family:"Warnock Pro","Goudy Old Style","Book Antiqua","Palatino",Georgia,serif; }
+.note { font-family:Georgia, "Times New Roman", Times, serif; font-style:italic; font-size:0.9em; margin:0.1em; color:#333; } 
+.mono { font-family:"Courier New", Courier, monospace; }

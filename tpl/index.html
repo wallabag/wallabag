@@ -1,0 +1,18 @@
+<html>
+	<head>
+		<link rel='stylesheet' href='./css/reset.css' type='text/css' media='all' />
+		<link rel='stylesheet' href='./css/typography.css' type='text/css' media='all' />
+	
+		<title>{$title}</title>
+	</head>
+	<body>
+		<article>
+			<h1><a href="{$url}">{$title}</a></h1>
+			<div id="readityourselfcontent">
+				{$content}
+			</div>
+			<span class="comeFrom">Come From : <a href="{$url}">{$url}</a>
+		</article>
+		{include="footer"}
+	</body>
+</html>
