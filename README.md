@@ -1,6 +1,8 @@
 # poche
 Abandon Pocket, Instapaper and other Readability service : adopt poche. It is the same, but it is open source.
 
+![poche](http://cdetc.fr/poche/img/logo.png)
+
 To get news from poche, [follow us on twitter](http://twitter.com/getpoche).
 
 ## Usage
