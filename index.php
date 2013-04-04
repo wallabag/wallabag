@@ -133,7 +133,7 @@ catch (Exception $e)
     </head>
     <body>
         <header>
-            <h1>poche, a read it later open source system</h1>
+            <h1><img src="img/logo.png" alt="logo poche" />poche, a read it later open source system</h1>
         </header>
         <div id="main" class="w800p">
             <ul id="links">
@@ -151,7 +151,7 @@ catch (Exception $e)
             </ul>
         </div>
         <footer class="mr2 mt3">
-            <p class="smaller"><a href="http://github.com/nicosomb/poche">poche</a> is a read it later open source system, based on <a href="http://www.memiks.fr/readityourself/">ReadItYourself</a>. poche is developed by <a href="http://nicolas.loeuillet.org">Nicolas Lœuillet</a> under the <a href="http://www.wtfpl.net/">WTFPL</a>.</p>
+            <p class="smaller"><a href="http://github.com/nicosomb/poche">poche</a> is a read it later open source system, based on <a href="http://www.memiks.fr/readityourself/">ReadItYourself</a>. Logo by <a href="http://www.iconfinder.com/icondetails/43256/128/jeans_monotone_pocket_icon">Brightmix</a>. poche is developed by <a href="http://nicolas.loeuillet.org">Nicolas Lœuillet</a> under the <a href="http://www.wtfpl.net/">WTFPL</a>.</p>
         </footer>
     </body>
 </html>
