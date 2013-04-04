@@ -22,6 +22,9 @@
  * afficher liens mis en favoris et archivés
  * tri des liens
  */
+require_once dirname(__FILE__).'/inc/Readability.php';
+require_once dirname(__FILE__).'/inc/Encoding.php';
+include dirname(__FILE__).'/inc/functions.php';
 
 try
 {
@@ -39,8 +42,21 @@ $id = (isset ($_GET['id'])) ? htmlspecialchars($_GET['id']) : '';
 
 switch ($action) {
     case 'add':
-        $url = (isset ($_GET['url'])) ? htmlspecialchars($_GET['url']) : '';
+        $url = (isset ($_GET['url'])) ? $_GET['url'] : '';
+        $url = html_entity_decode(trim($url));
         $title = $url;
+        // if url use https protocol change it to http
+        if (!preg_match('!^https?://!i', $url)) $url = 'http://'.$url;
+        // convert page to utf-8
+        $html = Encoding::toUTF8(get_external_file($url,15));
+        if(isset($html) and strlen($html) > 0) {
+            // send result to readability library
+            $r = new Readability($html, $url);
+            if($r->init()) {
+                $title = $r->articleTitle->innerHTML;
+            }
+        }
+
         $query = $db_handle->prepare('INSERT INTO entries ( url, title ) VALUES (?, ?)');
         $query->execute(array($url, $title));
         break;
@@ -53,6 +69,8 @@ switch ($action) {
         $params_action = array($id);
         break;
     case 'delete':
+        $sql_action = "DELETE FROM entries WHERE id=?";
+        $params_action = array($id);
         break;
     default:
         break;
@@ -98,16 +116,6 @@ catch (Exception $e)
     die('query error : '.$e->getMessage());
 }
 
-function url() {
-    $protocol = "http";
-    if(isset($_SERVER['HTTPS'])) {
-        if($_SERVER['HTTPS'] != "off") {
-            $protocol = "https";
-        }
-    }
-
-    return $protocol . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-}
 ?>
 <!DOCTYPE html>
 <!--[if lte IE 6]> <html class="no-js ie6 ie67 ie678" lang="en"> <![endif]-->
@@ -137,13 +145,13 @@ function url() {
             <ul id="entries">
                 <?php
                 foreach ($entries as $entry) {
-                    echo '<li><a href="readityourself.php?url='.urlencode($entry['url']).'">' . $entry['title'] . '</a> <a href="?action=toggle_archive&id='.$entry['id'].'" title="toggle mark as read" class="tool">&#10003;</a> <a href="?action=toggle_fav&id='.$entry['id'].'" title="toggle favorite" class="tool">'.(($entry['is_fav'] == 0) ? '&#9734;' : '&#9733;' ).'</a> <a href="#" title="toggle delete" class="tool">&#10799;</a></li>';
+                    echo '<li><a href="readityourself.php?url='.urlencode($entry['url']).'">' . $entry['title'] . '</a> <a href="?action=toggle_archive&id='.$entry['id'].'" title="toggle mark as read" class="tool">&#10003;</a> <a href="?action=toggle_fav&id='.$entry['id'].'" title="toggle favorite" class="tool">'.(($entry['is_fav'] == 0) ? '&#9734;' : '&#9733;' ).'</a> <a href="?action=delete&id='.$entry['id'].'" title="toggle delete" class="tool">&#10799;</a></li>';
                 }
                 ?>
             </ul>
         </div>
         <footer class="mr2 mt3">
-            <p class="smaller"><a href="http://github.com/nicosomb/poche">poche</a> is a read it later open source system, based on <a href="http://www.memiks.fr/readityourself/">ReadItYourself</a>. poche is developed by <a href="http://nicolas.loeuillet.org">Nicolas Lœuillet</a> under the <a href="http://www.wtfpl.net/">Do What the Fuck You Want to Public License</a></p>
+            <p class="smaller"><a href="http://github.com/nicosomb/poche">poche</a> is a read it later open source system, based on <a href="http://www.memiks.fr/readityourself/">ReadItYourself</a>. poche is developed by <a href="http://nicolas.loeuillet.org">Nicolas Lœuillet</a> under the <a href="http://www.wtfpl.net/">WTFPL</a>.</p>
         </footer>
     </body>
 </html>
