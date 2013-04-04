@@ -92,7 +92,7 @@ function get_external_file($url, $timeout) {
 	}
 
 	// if response is not empty and response is OK
-	if (isset($data) and isset($httpcodeOK) and httpcodeOK ) {
+	if (isset($data) and isset($httpcodeOK) and $httpcodeOK ) {
 
 		// take charset of page and get it
 		preg_match('#<meta .*charset=.*>#Usi', $data, $meta);
