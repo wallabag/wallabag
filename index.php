@@ -25,7 +25,7 @@
 
 try
 {
-    $db_handle = new PDO('sqlite:poche.sqlite');
+    $db_handle = new PDO('sqlite:db/poche.sqlite');
     $db_handle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }
 catch (Exception $e)

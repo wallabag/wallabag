@@ -6,6 +6,16 @@ Abandon Pocket, Instapaper and other Readability service : adopt poche. It is th
 
 ...
 
+## Security
+
+You **have** to protect your db/poche.sqlite file. Modify the virtual host of your website to add this condition :
+```apache
+<Files ~ "\.sqlite$">
+    Order allow,deny
+    Deny from all
+</Files>
+```
+
 ## License
 Copyright © 2010-2013 Nicolas Lœuillet <nicolas@loeuillet.org>
 This work is free. You can redistribute it and/or modify it under the
