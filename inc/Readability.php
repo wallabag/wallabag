@@ -80,7 +80,7 @@ class Readability
 	public $debug = false;
 	protected $body = null; // 
 	protected $bodyCache = null; // Cache the body HTML in case we need to re-use it later
-	protected $flags = FLAG_CLEAN_CONDITIONALLY; // 1 | 2 | 4;   // Start with all flags set.
+	protected $flags = self::FLAG_CLEAN_CONDITIONALLY; // 1 | 2 | 4;   // Start with all flags set.
 	protected $success = false; // indicates whether we were able to extract or not
 	
 	/**
