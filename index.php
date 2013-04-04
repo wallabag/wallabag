@@ -84,7 +84,7 @@ function url(){
 				<li><a href="index.php">home</a></li>
 				<li><a href="#">favorites</a></li>
 				<li><a href="#">archive</a></li>
-                <li><a href="javascript:(function(){var%20url%20=%20location.href;var%20title%20=%20document.title%20||%20url;window.open('<?php echo url()?>index.php?action=add&url='%20+%20encodeURIComponent(url),'_self');})();">poche it !</a></li>
+                <li><a href="javascript:(function(){var%20url%20=%20location.href;var%20title%20=%20document.title%20||%20url;window.open('<?php echo url()?>?action=add&url='%20+%20encodeURIComponent(url),'_self');})();">poche it !</a></li>
 			</ul>
 		<?php
 			$query = $db_handle->prepare("SELECT * FROM entries WHERE read=?");
