@@ -24,7 +24,7 @@ catch (Exception $e)
 
 $action = (isset ($_GET['action'])) ? htmlspecialchars($_GET['action']) : '';
 $view   = (isset ($_GET['view'])) ? htmlspecialchars($_GET['view']) : '';
-$in     = (isset ($_GET['id'])) ? htmlspecialchars($_GET['id']) : '';
+$id     = (isset ($_GET['id'])) ? htmlspecialchars($_GET['id']) : '';
 
 switch ($action)
 {
@@ -128,21 +128,31 @@ catch (Exception $e)
         <header>
             <h1><img src="img/logo.png" alt="logo poche" />poche</h1>
         </header>
-        <div id="main" class="w800p">
+        <div id="main" class="w960p">
             <ul id="links">
                 <li><a href="index.php">home</a></li>
                 <li><a href="?view=fav">favorites</a></li>
                 <li><a href="?view=archive">archive</a></li>
                 <li><a title="i am a bookmarklet, use me !" href="javascript:(function(){var%20url%20=%20location.href;var%20title%20=%20document.title%20||%20url;window.open('<?php echo url()?>?action=add&url='%20+%20encodeURIComponent(url),'_self');})();">poche it !</a></li>
             </ul>
-            <ul id="entries">
+            <div id="entries">
                 <?php
+                $i = 0;
                 foreach ($entries as $entry)
                 {
-                    echo '<li><a href="readityourself.php?url='.urlencode($entry['url']).'">' . $entry['title'] . '</a> <a href="?action=toggle_archive&id='.$entry['id'].'" title="toggle mark as read" class="tool">&#10003;</a> <a href="?action=toggle_fav&id='.$entry['id'].'" title="toggle favorite" class="tool">'.(($entry['is_fav'] == 0) ? '&#9734;' : '&#9733;' ).'</a> <a href="?action=delete&id='.$entry['id'].'" title="toggle delete" class="tool">&#10799;</a></li>';
+                    if ($i == 0) {
+                        echo '<section class="line grid3">';
+                    }
+                    echo '<aside class="mod entrie mb2"><h2 class="h6-like"><a href="readityourself.php?url='.urlencode($entry['url']).'">' . $entry['title'] . '</h2><div class="tools"><a href="?action=toggle_archive&id='.$entry['id'].'" title="toggle mark as read" class="tool">&#10003;</a> <a href="?action=toggle_fav&id='.$entry['id'].'" title="toggle favorite" class="tool">'.(($entry['is_fav'] == 0) ? '&#9734;' : '&#9733;' ).'</a> <a href="?action=delete&id='.$entry['id'].'" title="toggle delete" class="tool">&#10799;</a></div></aside>';
+
+                    $i++;
+                    if ($i == 3) {
+                        echo '</section>';
+                        $i = 0;
+                    }
                 }
                 ?>
-            </ul>
+            </div>
         </div>
         <footer class="mr2 mt3">
             <p class="smaller"><a href="http://github.com/nicosomb/poche">poche</a> is a read it later open source system, based on <a href="http://www.memiks.fr/readityourself/">ReadItYourself</a>. <a href="https://twitter.com/getpoche" title="follow us on twitter">@getpoche</a>. Logo by <a href="http://www.iconfinder.com/icondetails/43256/128/jeans_monotone_pocket_icon">Brightmix</a>. poche is developed by <a href="http://nicolas.loeuillet.org">Nicolas Lœuillet</a> under the <a href="http://www.wtfpl.net/">WTFPL</a>.</p>

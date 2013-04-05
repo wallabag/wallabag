@@ -1,7 +1,11 @@
 body {
     color: #222222;
     font: 20px/1.3em Palatino,Georgia,serif;
-    background-color: #e6e6e6;
+    background-color: #F1F1F1;
+}
+
+body.article {
+    background-color: #ffffff;
 }
 
 a, a:hover, a:visited {
@@ -11,7 +15,20 @@ header {
     text-align: center;
 }
 
-#main {
+#article header {
+    text-align: left;
+    border-bottom: 1px solid #222222;
+}
+
+#article header a {
+    text-decoration: none;
+}
+
+#article header .vieworiginal a {
+    color: #888888;
+}
+
+#main, #article {
     margin: 0 auto;
 }
 
@@ -24,6 +41,32 @@ header {
 #main ul#links li {
     display: inline;
     padding: 15px;
+}
+
+#main #entries {
+    margin-top: 20px;
+}
+
+#main #entries .entrie {
+    color: rgb(46, 46, 46);
+    position:relative;
+    background-color: #ffffff;
+    height: 8em;
+}
+
+#main #entries .entrie h2 a {
+    text-decoration: none;
+}
+
+#main #entries .entrie h2 a:hover {
+    color: #F5BE00;
+}
+
+#main #entries .entrie .tools {
+    position:absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: right;
 }
 
 #main a.tool {

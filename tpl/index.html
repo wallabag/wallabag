@@ -1,18 +1,32 @@
+<!DOCTYPE html>
+<!--[if lte IE 6]> <html class="no-js ie6 ie67 ie678" lang="en"> <![endif]-->
+<!--[if lte IE 7]> <html class="no-js ie7 ie67 ie678" lang="en"> <![endif]-->
+<!--[if IE 8]> <html class="no-js ie8 ie678" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <html>
-	<head>
-		<link rel='stylesheet' href='./css/reset.css' type='text/css' media='all' />
-		<link rel='stylesheet' href='./css/typography.css' type='text/css' media='all' />
-	
-		<title>{$title}</title>
-	</head>
-	<body>
-		<article>
-			<h1><a href="{$url}">{$title}</a></h1>
-			<div id="readityourselfcontent">
-				{$content}
-			</div>
-			<span class="comeFrom">Come From : <a href="{$url}">{$url}</a>
-		</article>
-		{include="footer"}
-	</body>
+    <head>
+        <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=10">
+        <link rel="stylesheet" href="./css/knacss.css" media="all">
+        <link rel="stylesheet" href="./css/style.css" media="all">
+        <title>{$title}</title>
+    </head>
+    <body class="article">
+        <div id="article" class="w600p">
+        	<div>
+        		<a href="index.php" title="back to home">&larr;</a>
+        	</div>
+            <header class="mbm">
+                <h1><a href="{$url}">{$title}</a></h1>
+                <div class="vieworiginal txtright small"><a href="{$url}" target="_blank">view original</a></div>
+            </header>
+            <article>
+                <div id="readityourselfcontent">
+                    {$content}
+                </div>
+            </article>
+        </div>
+        {include="footer"}
+    </body>
 </html>
