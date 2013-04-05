@@ -8,20 +8,6 @@
  * @license    http://www.wtfpl.net/ see COPYING file
  */
 
-/**
- * TODO
- * gestion des erreurs sqlite (duplicate tout ça)
- * gérer si url vide
- * traiter les variables passées en get
- * récupérer le titre de la page pochée (cf readityourself.php)
- * actions archive, fav et delete à traiter
- * bookmarklet
- * améliorer présentation des liens
- * améliorer présentation d'un article
- * aligner verticalement les icones d'action
- * afficher liens mis en favoris et archivés
- * tri des liens
- */
 require_once dirname(__FILE__).'/inc/Readability.php';
 require_once dirname(__FILE__).'/inc/Encoding.php';
 include dirname(__FILE__).'/inc/functions.php';
@@ -37,22 +23,27 @@ catch (Exception $e)
 }
 
 $action = (isset ($_GET['action'])) ? htmlspecialchars($_GET['action']) : '';
-$view = (isset ($_GET['view'])) ? htmlspecialchars($_GET['view']) : '';
-$id = (isset ($_GET['id'])) ? htmlspecialchars($_GET['id']) : '';
+$view   = (isset ($_GET['view'])) ? htmlspecialchars($_GET['view']) : '';
+$in     = (isset ($_GET['id'])) ? htmlspecialchars($_GET['id']) : '';
 
-switch ($action) {
+switch ($action)
+{
     case 'add':
         $url = (isset ($_GET['url'])) ? $_GET['url'] : '';
-        $url = html_entity_decode(trim($url));
-        $title = $url;
-        // if url use https protocol change it to http
-        if (!preg_match('!^https?://!i', $url)) $url = 'http://'.$url;
-        // convert page to utf-8
+        if ($url == '')
+            continue;
+
+        $url    = html_entity_decode(trim($url));
+        $title  = $url;
+        if (!preg_match('!^https?://!i', $url))
+            $url = 'http://' . $url;
+
         $html = Encoding::toUTF8(get_external_file($url,15));
-        if(isset($html) and strlen($html) > 0) {
-            // send result to readability library
+        if (isset($html) and strlen($html) > 0)
+        {
             $r = new Readability($html, $url);
-            if($r->init()) {
+            if($r->init())
+            {
                 $title = $r->articleTitle->innerHTML;
             }
         }
@@ -61,16 +52,16 @@ switch ($action) {
         $query->execute(array($url, $title));
         break;
     case 'toggle_fav' :
-        $sql_action = "UPDATE entries SET is_fav=~is_fav WHERE id=?";
-        $params_action = array($id);
+        $sql_action     = "UPDATE entries SET is_fav=~is_fav WHERE id=?";
+        $params_action  = array($id);
         break;
     case 'toggle_archive' :
-        $sql_action = "UPDATE entries SET is_read=~is_read WHERE id=?";
-        $params_action = array($id);
+        $sql_action     = "UPDATE entries SET is_read=~is_read WHERE id=?";
+        $params_action  = array($id);
         break;
     case 'delete':
-        $sql_action = "DELETE FROM entries WHERE id=?";
-        $params_action = array($id);
+        $sql_action     = "DELETE FROM entries WHERE id=?";
+        $params_action  = array($id);
         break;
     default:
         break;
@@ -79,7 +70,8 @@ switch ($action) {
 try
 {
     # action query
-    if (isset($sql_action)) {
+    if (isset($sql_action))
+    {
         $query = $db_handle->prepare($sql_action);
         $query->execute($params_action);
     }
@@ -89,17 +81,18 @@ catch (Exception $e)
     die('query error : '.$e->getMessage());
 }
 
-switch ($view) {
+switch ($view)
+{
     case 'archive':
-        $sql = "SELECT * FROM entries WHERE is_read=?";
+        $sql    = "SELECT * FROM entries WHERE is_read=?";
         $params = array(-1);
         break;
     case 'fav' :
-        $sql = "SELECT * FROM entries WHERE is_fav=?";
+        $sql    = "SELECT * FROM entries WHERE is_fav=?";
         $params = array(-1);
         break;
     default:
-        $sql = "SELECT * FROM entries WHERE is_read=?";
+        $sql    = "SELECT * FROM entries WHERE is_read=?";
         $params = array(0);
         break;
 }
@@ -107,7 +100,7 @@ switch ($view) {
 # view query
 try
 {
-    $query = $db_handle->prepare($sql);
+    $query  = $db_handle->prepare($sql);
     $query->execute($params);
     $entries = $query->fetchAll();
 }
@@ -127,13 +120,13 @@ catch (Exception $e)
         <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=10">
-        <title>poche : queue</title>
+        <title>poche, a read it later open source system</title>
         <link rel="stylesheet" href="css/knacss.css" media="all">
         <link rel="stylesheet" href="css/style.css" media="all">
     </head>
     <body>
         <header>
-            <h1><img src="img/logo.png" alt="logo poche" />poche, a read it later open source system</h1>
+            <h1><img src="img/logo.png" alt="logo poche" />poche</h1>
         </header>
         <div id="main" class="w800p">
             <ul id="links">
@@ -144,7 +137,8 @@ catch (Exception $e)
             </ul>
             <ul id="entries">
                 <?php
-                foreach ($entries as $entry) {
+                foreach ($entries as $entry)
+                {
                     echo '<li><a href="readityourself.php?url='.urlencode($entry['url']).'">' . $entry['title'] . '</a> <a href="?action=toggle_archive&id='.$entry['id'].'" title="toggle mark as read" class="tool">&#10003;</a> <a href="?action=toggle_fav&id='.$entry['id'].'" title="toggle favorite" class="tool">'.(($entry['is_fav'] == 0) ? '&#9734;' : '&#9733;' ).'</a> <a href="?action=delete&id='.$entry['id'].'" title="toggle delete" class="tool">&#10799;</a></li>';
                 }
                 ?>
