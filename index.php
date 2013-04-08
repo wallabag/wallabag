@@ -34,6 +34,13 @@ switch ($action)
             continue;
 
         $url    = html_entity_decode(trim($url));
+
+        // We remove the annoying parameters added by FeedBurner and GoogleFeedProxy (?utm_source=...)
+        // from shaarli, by sebsauvage
+        $i=strpos($url,'&utm_source='); if ($i!==false) $url=substr($url,0,$i);
+        $i=strpos($url,'?utm_source='); if ($i!==false) $url=substr($url,0,$i);
+        $i=strpos($url,'#xtor=RSS-'); if ($i!==false) $url=substr($url,0,$i);
+
         $title  = $url;
         if (!preg_match('!^https?://!i', $url))
             $url = 'http://' . $url;
