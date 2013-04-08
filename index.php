@@ -121,6 +121,10 @@ catch (Exception $e)
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=10">
         <title>poche, a read it later open source system</title>
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="apple-touch-icon-144x144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="apple-touch-icon-72x72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png">
         <link rel="stylesheet" href="css/knacss.css" media="all">
         <link rel="stylesheet" href="css/style.css" media="all">
     </head>
@@ -133,7 +137,7 @@ catch (Exception $e)
                 <li><a href="index.php">home</a></li>
                 <li><a href="?view=fav">favorites</a></li>
                 <li><a href="?view=archive">archive</a></li>
-                <li><a title="i am a bookmarklet, use me !" href="javascript:(function(){var%20url%20=%20location.href;var%20title%20=%20document.title%20||%20url;window.open('<?php echo url()?>?action=add&url='%20+%20encodeURIComponent(url),'_self');})();">poche it !</a></li>
+                <li><a style="cursor: move" title="i am a bookmarklet, use me !" href="javascript:(function(){var%20url%20=%20location.href;var%20title%20=%20document.title%20||%20url;window.open('<?php echo url()?>?action=add&url='%20+%20encodeURIComponent(url),'_self');})();">poche it !</a></li>
             </ul>
             <div id="entries">
                 <?php
