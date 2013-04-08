@@ -53,7 +53,7 @@ header {
     text-decoration: none;
     padding: 5px 10px;
 }
-#links a:hover, .backhome a{
+#links a:hover, .backhome a:hover{
     -webkit-border-radius: 2px;
     border-radius: 2px;
     background-color: #040707;
