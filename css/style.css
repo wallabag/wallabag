@@ -27,8 +27,13 @@ header {
     text-decoration: none;
 }
 
-#article header .vieworiginal a {
+#article article {
+    border-bottom: 1px solid #222222;
+}
+
+.vieworiginal a {
     color: #888888;
+    text-decoration: none;
 }
 
 #main, #article {
@@ -44,11 +49,11 @@ header {
 #main ul#links li {
     display: inline;
 }
-#links a, #backhome a{
+#links a, .backhome a{
     text-decoration: none;
     padding: 5px 10px;
 }
-#links a:hover, #backhome a{
+#links a:hover, .backhome a{
     -webkit-border-radius: 2px;
     border-radius: 2px;
     background-color: #040707;

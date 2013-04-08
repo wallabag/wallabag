@@ -14,18 +14,22 @@
     </head>
     <body class="article">
         <div id="article" class="w600p">
-        	<div id="backhome">
+        	<div class="backhome">
         		<a href="index.php" title="back to home">&larr;</a>
         	</div>
             <header class="mbm">
                 <h1><a href="{$url}">{$title}</a></h1>
-                <div class="vieworiginal txtright small"><a href="{$url}" target="_blank">view original</a></div>
+                <div class="vieworiginal txtright small"><a href="{$url}" target="_blank" title="original : {$title}">view original</a></div>
             </header>
             <article>
                 <div id="readityourselfcontent">
                     {$content}
                 </div>
             </article>
+            <div class="vieworiginal txtright small"><a href="{$url}" target="_blank" title="original : {$title}">view original</a></div>
+            <div class="backhome">
+                <a href="index.php" title="back to home">&larr;</a>
+            </div>
         </div>
         {include="footer"}
     </body>
