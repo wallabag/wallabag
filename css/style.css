@@ -64,7 +64,7 @@ header {
     position:relative;
     background-color: #ffffff;
     padding: 15px;
-    height: 6em;
+    min-height: 6em;
     -webkit-border-radius: 2px;
     border-radius: 2px;
     -webkit-box-shadow:  0px 0px 2px -1px #000;
