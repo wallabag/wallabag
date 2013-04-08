@@ -128,7 +128,7 @@ catch (Exception $e)
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=10">
         <title>poche, a read it later open source system</title>
-        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico" />
         <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144x144-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72x72-precomposed.png">
         <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-precomposed.png">
@@ -154,7 +154,7 @@ catch (Exception $e)
                     if ($i == 0) {
                         echo '<section class="line grid3">';
                     }
-                    echo '<aside class="mod entrie mb2"><h2 class="h6-like"><a href="readityourself.php?url='.urlencode($entry['url']).'">' . $entry['title'] . '</h2><div class="tools"><a href="?action=toggle_archive&id='.$entry['id'].'" title="toggle mark as read" class="tool">&#10003;</a> <a href="?action=toggle_fav&id='.$entry['id'].'" title="toggle favorite" class="tool">'.(($entry['is_fav'] == 0) ? '&#9734;' : '&#9733;' ).'</a> <a href="?action=delete&id='.$entry['id'].'" title="toggle delete" class="tool">&#10799;</a></div></aside>';
+                    echo '<aside class="mod entrie mb2"><h2 class="h6-like"><a href="readityourself.php?url='.urlencode($entry['url']).'">' . $entry['title'] . '</h2><div class="tools"><a href="?action=toggle_archive&id='.$entry['id'].'" title="toggle mark as read" class="tool">&#10003;</a> <a href="?action=toggle_fav&id='.$entry['id'].'" title="toggle favorite" class="tool">'.(($entry['is_fav'] == 0) ? '&#9734;' : '&#9733;' ).'</a> <a href="?action=delete&id='.$entry['id'].'" title="toggle delete"  onclick="return confirm(\'Are you sure?\')" class="tool">&#10799;</a></div></aside>';
 
                     $i++;
                     if ($i == 3) {
