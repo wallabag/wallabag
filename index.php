@@ -84,15 +84,15 @@ catch (Exception $e)
 switch ($view)
 {
     case 'archive':
-        $sql    = "SELECT * FROM entries WHERE is_read=?";
+        $sql    = "SELECT * FROM entries WHERE is_read=? ORDER BY id desc";
         $params = array(-1);
         break;
     case 'fav' :
-        $sql    = "SELECT * FROM entries WHERE is_fav=?";
+        $sql    = "SELECT * FROM entries WHERE is_fav=? ORDER BY id desc";
         $params = array(-1);
         break;
     default:
-        $sql    = "SELECT * FROM entries WHERE is_read=?";
+        $sql    = "SELECT * FROM entries WHERE is_read=? ORDER BY id desc";
         $params = array(0);
         break;
 }
