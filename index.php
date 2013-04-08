@@ -122,9 +122,9 @@ catch (Exception $e)
         <meta http-equiv="X-UA-Compatible" content="IE=10">
         <title>poche, a read it later open source system</title>
         <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
-        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="apple-touch-icon-144x144-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="apple-touch-icon-72x72-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144x144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72x72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-precomposed.png">
         <link rel="stylesheet" href="css/knacss.css" media="all">
         <link rel="stylesheet" href="css/style.css" media="all">
     </head>
