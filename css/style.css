@@ -1,3 +1,4 @@
+/*** GENERAL ***/
 body {
     color: #222222;
     font: 20px/1.3em Palatino,Georgia,serif;
@@ -5,17 +6,166 @@ body {
     margin: 10px;
 }
 
-body.article {
-    color: #222222;
-    font: 20px/1.3em Palatino,Georgia,serif;
-    background-color: #F1F1F1;
-}
 
 a, a:hover, a:visited {
     color: #000;
 }
+
 header {
     text-align: center;
+}
+
+#main ul#links {
+    padding: 0;
+    list-style-type: none;
+    text-align: center;
+}
+
+#main ul#links li {
+    display: inline;
+}
+
+#main ul#links li a.current {
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    background-color: #040707;
+    color: #F1F1F1;
+}
+
+#main, #article {
+    margin: 0 auto;
+}
+
+#links a, .backhome a{
+    text-decoration: none;
+    padding: 5px 10px;
+}
+#links a:hover, .backhome a:hover{
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    background-color: #040707;
+    color: #F1F1F1;
+}
+
+footer {
+    text-align: right;
+}
+
+/*** ***/
+/*** GRID DISPLAY ***/
+
+#content {
+    width: 800px;
+    margin: 0 auto;
+}
+
+#entries {
+    -moz-column-count: 3;
+    -moz-column-gap: 20px;
+    -webkit-column-count: 3;
+    -webkit-column-gap: 20px;
+    column-count: 3;
+    column-gap: 20px;
+    width: 800px;
+}
+
+#entries span.content {
+    display: inline-block;
+    margin-bottom: 0px;
+    width: 100%;
+}
+
+@media only screen and (max-width : 599px),
+only screen and (max-device-width : 599px){
+    #entries {
+        -moz-column-count: 2;
+        -moz-column-gap: 10px;
+        -webkit-column-count: 2;
+        -webkit-column-gap: 10px;
+        column-count: 2;
+        column-gap: 10px;
+        width: 400px;
+    }
+
+    #content {
+        width: 400px;
+    }
+}
+
+/*** ***/
+/*** LINKS DISPLAY ***/
+
+#main a.tool {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#main #entries {
+    margin-top: 20px;
+}
+
+#main #entries .entrie {
+    color: rgb(46, 46, 46);
+    position:relative;
+    background-color: #ffffff;
+    padding: 15px;
+    min-height: 6em;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -webkit-box-shadow:  0px 0px 2px -1px #000;
+    box-shadow:  0px 0px 2px -1px #000;
+    list-style-type: none;
+}
+
+#main #entries .entrie h2 a {
+    text-decoration: none;
+}
+
+#main #entries .entrie h2 a:hover {
+    color: #F5BE00;
+}
+
+#main #entries .entrie .tools {
+    position:absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: right;
+    margin-left: -20px;
+}
+
+#main #entries .entrie .tools a.tool span {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+}
+
+a.fav span {
+    background: url('../img/fav-on.png') no-repeat;
+}
+
+a.fav-off span {
+    background: url('../img/fav-off.png') no-repeat;
+}
+
+a.archive span {
+    background: url('../img/archive-on.png') no-repeat;
+}
+
+a.archive-off span {
+    background: url('../img/archive-off.png') no-repeat;
+}
+
+a.delete span {
+    background: url('../img/delete.png') no-repeat;
+}
+
+/*** ***/
+/*** ARTICLE PAGE ***/
+
+body.article {
+    color: #222222;
+    font: 20px/1.3em Palatino,Georgia,serif;
+    background-color: #F1F1F1;
 }
 
 #article header {
@@ -36,74 +186,4 @@ header {
     text-decoration: none;
 }
 
-#main, #article {
-    margin: 0 auto;
-}
-
-#main ul#links {
-    padding: 0;
-    list-style-type: none;
-    text-align: center;
-}
-
-#main ul#links li {
-    display: inline;
-}
-
-#main ul#links li a.current {
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-    background-color: #040707;
-    color: #F1F1F1;
-}
-
-#links a, .backhome a{
-    text-decoration: none;
-    padding: 5px 10px;
-}
-#links a:hover, .backhome a:hover{
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-    background-color: #040707;
-    color: #F1F1F1;
-}
-
-#main #entries {
-    margin-top: 20px;
-}
-
-#main #entries .entrie {
-    color: rgb(46, 46, 46);
-    position:relative;
-    background-color: #ffffff;
-    padding: 15px;
-    min-height: 6em;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-    -webkit-box-shadow:  0px 0px 2px -1px #000;
-    box-shadow:  0px 0px 2px -1px #000;
-}
-
-#main #entries .entrie h2 a {
-    text-decoration: none;
-}
-
-#main #entries .entrie h2 a:hover {
-    color: #F5BE00;
-}
-
-#main #entries .entrie .tools {
-    position:absolute;
-    bottom: 0;
-    width: 100%;
-    text-align: right;
-    margin-left: -20px;
-}
-
-#main a.tool {
-    text-decoration: none;
-}
-
-footer {
-    text-align: right;
-}
+/*** ***/

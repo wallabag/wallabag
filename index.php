@@ -8,19 +8,8 @@
  * @license    http://www.wtfpl.net/ see COPYING file
  */
 
-require_once dirname(__FILE__).'/inc/Readability.php';
-require_once dirname(__FILE__).'/inc/Encoding.php';
-include dirname(__FILE__).'/inc/functions.php';
-
-try
-{
-    $db_handle = new PDO('sqlite:db/poche.sqlite');
-    $db_handle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-}
-catch (Exception $e)
-{
-    die('database error : '.$e->getMessage());
-}
+include dirname(__FILE__).'/inc/config.php';
+$db = new db(DB_PATH);
 
 $action = (isset ($_GET['action'])) ? htmlspecialchars($_GET['action']) : '';
 $view   = (isset ($_GET['view'])) ? htmlspecialchars($_GET['view']) : '';
@@ -55,16 +44,8 @@ switch ($action)
             }
         }
 
-        $query = $db_handle->prepare('INSERT INTO entries ( url, title ) VALUES (?, ?)');
+        $query = $db->getHandle()->prepare('INSERT INTO entries ( url, title ) VALUES (?, ?)');
         $query->execute(array($url, $title));
-        break;
-    case 'toggle_fav' :
-        $sql_action     = "UPDATE entries SET is_fav=~is_fav WHERE id=?";
-        $params_action  = array($id);
-        break;
-    case 'toggle_archive' :
-        $sql_action     = "UPDATE entries SET is_read=~is_read WHERE id=?";
-        $params_action  = array($id);
         break;
     case 'delete':
         $sql_action     = "DELETE FROM entries WHERE id=?";
@@ -79,7 +60,7 @@ try
     # action query
     if (isset($sql_action))
     {
-        $query = $db_handle->prepare($sql_action);
+        $query = $db->getHandle()->prepare($sql_action);
         $query->execute($params_action);
     }
 }
@@ -108,7 +89,7 @@ switch ($view)
 # view query
 try
 {
-    $query  = $db_handle->prepare($sql);
+    $query  = $db->getHandle()->prepare($sql);
     $query->execute($params);
     $entries = $query->fetchAll();
 }
@@ -140,30 +121,37 @@ catch (Exception $e)
         <header>
             <h1><img src="img/logo.png" alt="logo poche" />poche</h1>
         </header>
-        <div id="main" class="w960p">
+        <div id="main">
             <ul id="links">
                 <li><a href="index.php" <?php echo (($view == 'index') ? 'class="current"' : ''); ?>>home</a></li>
                 <li><a href="?view=fav" <?php echo (($view == 'fav') ? 'class="current"' : ''); ?>>favorites</a></li>
                 <li><a href="?view=archive" <?php echo (($view == 'archive') ? 'class="current"' : ''); ?>>archive</a></li>
                 <li><a style="cursor: move" title="i am a bookmarklet, use me !" href="javascript:(function(){var%20url%20=%20location.href;var%20title%20=%20document.title%20||%20url;window.open('<?php echo url()?>?action=add&url='%20+%20encodeURIComponent(url),'_self');})();">poche it !</a></li>
             </ul>
-            <div id="entries">
+            <div id="content">
+                <ul id="entries">
                 <?php
-                $i = 0;
+                $i = 1;
                 foreach ($entries as $entry)
                 {
-                    if ($i == 0) {
-                        echo '<section class="line grid3">';
-                    }
-                    echo '<aside class="mod entrie mb2"><h2 class="h6-like"><a href="readityourself.php?url='.urlencode($entry['url']).'">' . $entry['title'] . '</h2><div class="tools"><a href="?action=toggle_archive&id='.$entry['id'].'" title="toggle mark as read" class="tool">&#10003;</a> <a href="?action=toggle_fav&id='.$entry['id'].'" title="toggle favorite" class="tool">'.(($entry['is_fav'] == 0) ? '&#9734;' : '&#9733;' ).'</a> <a href="?action=delete&id='.$entry['id'].'" title="toggle delete"  onclick="return confirm(\'Are you sure?\')" class="tool">&#10799;</a></div></aside>';
-
-                    $i++;
-                    if ($i == 3) {
-                        echo '</section>';
-                        $i = 0;
-                    }
+                    ?>
+                    <li id="entry-<?php echo $entry['id']; ?>" class="entrie mb2">
+                        <span class="content">
+                            <h2 class="h6-like">
+                                <a href="readityourself.php?url=<?php echo urlencode($entry['url']); ?>"><?php echo $entry['title']; ?>
+                            </h2>
+                            <div class="tools">
+                                <a title="toggle mark as read" class="tool archive <?php echo ( ($entry['is_read'] == '0') ? 'archive-off' : '' ); ?>" onclick="toggle_archive(<?php echo $entry['id']; ?>)"><span></span></a>
+                                <a title="toggle favorite" class="tool fav <?php echo ( ($entry['is_fav'] == '0') ? 'fav-off' : '' ); ?>" onclick="toggle_favorite(this, <?php echo $entry['id']; ?>)"><span></span></a>
+                                <a href="?action=delete&id=<?php echo $entry['id']; ?>" title="toggle delete" onclick="return confirm('Are you sure?')" class="tool delete"><span></span></a>
+                            </div>
+                        </span>
+                    </li>
+                <?php
+                $i++;
                 }
                 ?>
+                </ul>
             </div>
         </div>
         <footer class="mr2 mt3 smaller">
@@ -172,5 +160,7 @@ catch (Exception $e)
             Logo by <a href="http://www.iconfinder.com/icondetails/43256/128/jeans_monotone_pocket_icon">Brightmix</a>.<br />
             poche is developed by <a href="http://nicolas.loeuillet.org">Nicolas Lœuillet</a> under the <a href="http://www.wtfpl.net/">WTFPL</a>.</p>
         </footer>
+        <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+        <script type="text/javascript" src="js/poche.js"></script>
     </body>
 </html>
