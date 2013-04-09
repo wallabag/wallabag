@@ -101,6 +101,7 @@ switch ($view)
     default:
         $sql    = "SELECT * FROM entries WHERE is_read=? ORDER BY id desc";
         $params = array(0);
+        $view = 'index';
         break;
 }
 
@@ -141,9 +142,9 @@ catch (Exception $e)
         </header>
         <div id="main" class="w960p">
             <ul id="links">
-                <li><a href="index.php">home</a></li>
-                <li><a href="?view=fav">favorites</a></li>
-                <li><a href="?view=archive">archive</a></li>
+                <li><a href="index.php" <?php echo (($view == 'index') ? 'class="current"' : ''); ?>>home</a></li>
+                <li><a href="?view=fav" <?php echo (($view == 'fav') ? 'class="current"' : ''); ?>>favorites</a></li>
+                <li><a href="?view=archive" <?php echo (($view == 'archive') ? 'class="current"' : ''); ?>>archive</a></li>
                 <li><a style="cursor: move" title="i am a bookmarklet, use me !" href="javascript:(function(){var%20url%20=%20location.href;var%20title%20=%20document.title%20||%20url;window.open('<?php echo url()?>?action=add&url='%20+%20encodeURIComponent(url),'_self');})();">poche it !</a></li>
             </ul>
             <div id="entries">
