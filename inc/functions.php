@@ -1,6 +1,6 @@
 <?php
 
-function url(){
+function url() {
   $protocol = "http";
   if(isset($_SERVER['HTTPS']))
     if($_SERVER['HTTPS'] != "off")
@@ -21,8 +21,6 @@ function generate_page($url,$title,$content) {
     $tpl->assign( "url", $url);
     $tpl->assign( "title", $title);
     $tpl->assign( "content", $content);
-
-    $tpl->assign( "version", VERSION);
 
     $tpl->draw( "index"); // draw the template
 }

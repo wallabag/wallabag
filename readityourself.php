@@ -1,30 +1,13 @@
 <?php
-
-define("VERSION", "0.0.3");
-
 header('Content-type:text/html; charset=utf-8');
-// Set locale to French
-setlocale(LC_ALL, 'fr_FR');
 
-// set timezone to Europe/Paris
+setlocale(LC_ALL, 'fr_FR');
 date_default_timezone_set('Europe/Paris');
 
-// set charset to utf-8 important since all pages will be transform to utf-8
-header('Content-Type: text/html;charset=utf-8');
-
-// get readability library
 require_once dirname(__FILE__).'/inc/Readability.php';
-
-// get Encoding library.
 require_once dirname(__FILE__).'/inc/Encoding.php';
-
-// appel de la libraire RainTPL.
 require_once dirname(__FILE__).'/inc/rain.tpl.class.php';
-
 include dirname(__FILE__).'/inc/functions.php';
-
-// EXUCUTION CODE
-
 
 if(isset($_GET['url']) && $_GET['url'] != null && trim($_GET['url']) != "") {
 	// get url link
@@ -58,4 +41,3 @@ if(isset($_GET['url']) && $_GET['url'] != null && trim($_GET['url']) != "") {
 		}
 	}
 }
-?>
