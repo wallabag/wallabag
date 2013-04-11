@@ -5,6 +5,8 @@ Abandon Pocket, Instapaper and other Readability service : adopt poche. It is th
 
 To get news from poche, [follow us on twitter](http://twitter.com/getpoche).
 
+[If you want to flattr poche, it's here.](https://flattr.com/thing/1225780/nicosombpoche-on-GitHub)
+
 ## Usage
 You can easily add a "poched" page with the bookmarklet.
 
