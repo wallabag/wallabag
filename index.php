@@ -153,7 +153,7 @@ catch (Exception $e)
             </div>
         </div>
         <footer class="mr2 mt3 smaller">
-            <p><a href="https://twitter.com/getpoche" title="follow us on twitter">Follow @getpoche on twitter</a></p>
+            <p>download poche on <a href="http://github.com/nicosomb/github">github</a><br />follow us on <a href="https://twitter.com/getpoche" title="follow us on twitter">twitter</a></p>
         </footer>
         <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
         <script type="text/javascript" src="js/poche.js"></script>
