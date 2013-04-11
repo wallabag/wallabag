@@ -131,7 +131,6 @@ catch (Exception $e)
             <div id="content">
                 <ul id="entries">
                 <?php
-                $i = 1;
                 foreach ($entries as $entry)
                 {
                     ?>
@@ -148,7 +147,6 @@ catch (Exception $e)
                         </span>
                     </li>
                 <?php
-                $i++;
                 }
                 ?>
                 </ul>
