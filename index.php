@@ -44,8 +44,17 @@ switch ($action)
             }
         }
 
-        $query = $db->getHandle()->prepare('INSERT INTO entries ( url, title ) VALUES (?, ?)');
-        $query->execute(array($url, $title));
+        try
+        {
+            # insert query
+            $query = $db->getHandle()->prepare('INSERT INTO entries ( url, title, content ) VALUES (?, ?, ?)');
+            $query->execute(array($url, $title, $r->articleContent->innerHTML));
+        }
+        catch (Exception $e)
+        {
+            error_log('insert query error : '.$e->getMessage());
+        }
+
         break;
     case 'delete':
         $sql_action     = "DELETE FROM entries WHERE id=?";
@@ -66,7 +75,7 @@ try
 }
 catch (Exception $e)
 {
-    die('query error : '.$e->getMessage());
+    die('action query error : '.$e->getMessage());
 }
 
 switch ($view)
@@ -95,7 +104,7 @@ try
 }
 catch (Exception $e)
 {
-    die('query error : '.$e->getMessage());
+    die('view query error : '.$e->getMessage());
 }
 
 ?>
@@ -136,7 +145,7 @@ catch (Exception $e)
                     <div id="entry-<?php echo $entry['id']; ?>" class="entrie mb2">
                         <span class="content">
                             <h2 class="h6-like">
-                                <a href="readityourself.php?url=<?php echo urlencode($entry['url']); ?>"><?php echo $entry['title']; ?>
+                                <a href="view.php?id=<?php echo $entry['id']; ?>"><?php echo $entry['title']; ?>
                             </h2>
                             <div class="tools">
                                 <a title="toggle mark as read" class="tool archive <?php echo ( ($entry['is_read'] == '0') ? 'archive-off' : '' ); ?>" onclick="toggle_archive(<?php echo $entry['id']; ?>)"><span></span></a>

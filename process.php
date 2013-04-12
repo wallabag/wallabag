@@ -14,7 +14,6 @@ $db = new db(DB_PATH);
 $action = (isset ($_GET['action'])) ? htmlspecialchars($_GET['action']) : '';
 $id     = (isset ($_GET['id'])) ? htmlspecialchars($_GET['id']) : '';
 
-
 switch ($action)
 {
     case 'toggle_fav' :
