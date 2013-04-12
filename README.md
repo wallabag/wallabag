@@ -3,7 +3,7 @@ Abandon Pocket, Instapaper and other Readability service : adopt poche. It is th
 
 ![poche](http://cdetc.fr/poche/img/logo.png)
 
-The website of poche is [](http://inthepoche.com).
+The website of poche is [inthepoche.com](http://inthepoche.com).
 
 To get news from poche, [follow us on twitter](http://twitter.com/getpoche).
 
