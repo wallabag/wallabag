@@ -47,101 +47,14 @@ header {
     color: #F1F1F1;
 }
 
-footer {
-    text-align: right;
-}
-
-/*** ***/
-/*** GRID DISPLAY ***/
-
 #content {
-    width: 1000px;
+    width: 800px;
     margin: 0 auto;
 }
 
-#entries {
-    -moz-column-count: 4;
-    -moz-column-gap: 20px;
-    -webkit-column-count: 4;
-    -webkit-column-gap: 20px;
-    column-count: 4;
-    column-gap: 20px;
-    width: 1000px;
-}
 
-#entries span.content {
-    display: inline-block;
-    margin-bottom: 0px;
-    width: 100%;
-}
-
-@media only screen and (max-width : 1199px),
-only screen and (max-device-width : 1199px){
-    #entries {
-        -moz-column-count: 5;
-        -moz-column-gap: 20px;
-        -webkit-column-count: 5;
-        -webkit-column-gap: 20px;
-        column-count: 5;
-        column-gap: 20px;
-        width: 1000px;
-    }
-
-    #content {
-        width: 1000px;
-    }
-}
-
-
-@media only screen and (max-width : 999px),
-only screen and (max-device-width : 999px){
-    #entries {
-        -moz-column-count: 4;
-        -moz-column-gap: 15px;
-        -webkit-column-count: 4;
-        -webkit-column-gap: 15px;
-        column-count: 4;
-        column-gap: 15px;
-        width: 800px;
-    }
-
-    #content {
-        width: 800px;
-    }
-}
-
-@media only screen and (max-width : 799px),
-only screen and (max-device-width : 799px){
-    #entries {
-        -moz-column-count: 3;
-        -moz-column-gap: 10px;
-        -webkit-column-count: 3;
-        -webkit-column-gap: 10px;
-        column-count: 3;
-        column-gap: 10px;
-        width: 600px;
-    }
-
-    #content {
-        width: 600px;
-    }
-}
-
-@media only screen and (max-width : 599px),
-only screen and (max-device-width : 599px){
-    #entries {
-        -moz-column-count: 2;
-        -moz-column-gap: 10px;
-        -webkit-column-count: 2;
-        -webkit-column-gap: 10px;
-        column-count: 2;
-        column-gap: 10px;
-        width: 400px;
-    }
-
-    #content {
-        width: 400px;
-    }
+footer {
+    text-align: right;
 }
 
 /*** ***/
@@ -152,32 +65,34 @@ only screen and (max-device-width : 599px){
     cursor: pointer;
 }
 
-#main #entries {
+#main #content {
     margin-top: 20px;
 }
 
-#main #entries .entrie {
+#main .entrie {
     color: rgb(46, 46, 46);
     position:relative;
     background-color: #ffffff;
     padding: 15px;
-    min-height: 6em;
+    min-height: 8em;
     -webkit-border-radius: 2px;
     border-radius: 2px;
     -webkit-box-shadow:  0px 0px 2px -1px #000;
     box-shadow:  0px 0px 2px -1px #000;
-    list-style-type: none;
+    width: 30%;
+    margin: 10px;
+    float: left;
 }
 
-#main #entries .entrie h2 a {
+#main .entrie h2 a {
     text-decoration: none;
 }
 
-#main #entries .entrie h2 a:hover {
+#main .entrie h2 a:hover {
     color: #F5BE00;
 }
 
-#main #entries .entrie .tools {
+#main .entrie .tools {
     position:absolute;
     bottom: 0;
     width: 100%;
@@ -185,7 +100,7 @@ only screen and (max-device-width : 599px){
     margin-left: -20px;
 }
 
-#main #entries .entrie .tools a.tool span {
+#main .entrie .tools a.tool span {
     display: inline-block;
     width: 16px;
     height: 16px;
@@ -239,3 +154,44 @@ body.article {
 }
 
 /*** ***/
+#main
+{
+    max-width: 60em; /* 960 px */
+    margin: 0 auto;
+}
+    #content
+    {
+        width: 103.125%; /* 990px */
+        overflow: hidden;
+        margin-left: -1.562%; /* 15px */
+        margin-bottom: -1.875em; /* 30px */
+    }
+        .entrie
+        {
+            width: 30.303%; /* 300px */
+            float: left;
+            margin: 0 1.515% 1.875em; /* 15px 30px */
+        }
+
+@media only screen and ( max-width: 40em ) /* 640px */
+{
+    .entrie
+    {
+        width: 46.876%; /* 305px */
+        margin-bottom: 0.938em; /* 15px */
+    }
+}
+@media only screen and ( max-width: 20em ) /* 640px */
+{
+    #content
+    {
+        width: 100%;
+        margin-left: 0;
+    }
+        .entrie
+        {
+            width: 100%;
+            margin-left: 0;
+            margin-right: 0;
+        }
+}

@@ -129,12 +129,11 @@ catch (Exception $e)
                 <li><a style="cursor: move" title="i am a bookmarklet, use me !" href="javascript:(function(){var%20url%20=%20location.href;var%20title%20=%20document.title%20||%20url;window.open('<?php echo url()?>?action=add&url='%20+%20encodeURIComponent(url),'_self');})();">poche it !</a></li>
             </ul>
             <div id="content">
-                <ul id="entries">
                 <?php
                 foreach ($entries as $entry)
                 {
                     ?>
-                    <li id="entry-<?php echo $entry['id']; ?>" class="entrie mb2">
+                    <div id="entry-<?php echo $entry['id']; ?>" class="entrie mb2">
                         <span class="content">
                             <h2 class="h6-like">
                                 <a href="readityourself.php?url=<?php echo urlencode($entry['url']); ?>"><?php echo $entry['title']; ?>
@@ -145,17 +144,33 @@ catch (Exception $e)
                                 <a href="?action=delete&id=<?php echo $entry['id']; ?>" title="toggle delete" onclick="return confirm('Are you sure?')" class="tool delete"><span></span></a>
                             </div>
                         </span>
-                    </li>
+                    </div>
                 <?php
                 }
                 ?>
-                </ul>
             </div>
         </div>
         <footer class="mr2 mt3 smaller">
             <p>download poche on <a href="http://github.com/nicosomb/github">github</a><br />follow us on <a href="https://twitter.com/getpoche" title="follow us on twitter">twitter</a></p>
         </footer>
         <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+        <script type="text/javascript" src="js/jquery.masonry.min.js"></script>
         <script type="text/javascript" src="js/poche.js"></script>
+        <script type="text/javascript">
+            $( window ).load( function()
+            {
+                var columns    = 3,
+                    setColumns = function() { columns = $( window ).width() > 640 ? 3 : $( window ).width() > 320 ? 2 : 1; };
+
+                setColumns();
+                $( window ).resize( setColumns );
+
+                $( '#content' ).masonry(
+                {
+                    itemSelector: '.entrie',
+                    columnWidth:  function( containerWidth ) { return containerWidth / columns; }
+                });
+            });
+        </script>
     </body>
 </html>
