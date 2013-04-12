@@ -1,32 +1,46 @@
 <?php
 
-function url() {
-  $protocol = "http";
-  if(isset($_SERVER['HTTPS']))
-    if($_SERVER['HTTPS'] != "off")
-      $protocol = "https";
+/**
+ * Permet de générer l'URL de poche pour le bookmarklet
+ */
+function url()
+{
+    $protocol = "http";
+    if(isset($_SERVER['HTTPS'])) {
+        if($_SERVER['HTTPS'] != "off") {
+            $protocol = "https";
+        }
+    }
 
-  return $protocol . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    return $protocol . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 }
 
-function generate_page($url,$title,$content) {
-    raintpl::$tpl_dir = './tpl/'; // template directory
-    raintpl::$cache_dir = "./cache/"; // cache directory
-    raintpl::$base_url = url(); // base URL of blog
+/**
+ * Génération de la page "vue d'un article"
+ */
+function generate_page($entry)
+{
+    raintpl::$tpl_dir = './tpl/';
+    raintpl::$cache_dir = "./cache/";
+    raintpl::$base_url = url();
     raintpl::configure( 'path_replace', false );
     raintpl::configure('debug', false);
 
-    $tpl = new raintpl(); //include Rain TPL
+    $tpl = new raintpl();
 
-    $tpl->assign( "url", $url);
-    $tpl->assign( "title", $title);
-    $tpl->assign( "content", $content);
+    $tpl->assign("id", $entry['id']);
+    $tpl->assign("url", $entry['url']);
+    $tpl->assign("title", $entry['title']);
+    $tpl->assign("content", $entry['content']);
+    $tpl->assign("is_fav", $entry['is_fav']);
+    $tpl->assign("is_read", $entry['is_read']);
 
-    $tpl->draw( "index"); // draw the template
+    $tpl->draw( "index");
 }
 
 // function define to retrieve url content
-function get_external_file($url, $timeout) {
+function get_external_file($url, $timeout)
+{
     // spoofing FireFox 18.0
     $useragent="Mozilla/5.0 (Windows NT 5.1; rv:18.0) Gecko/20100101 Firefox/18.0";
 
@@ -96,56 +110,3 @@ function get_external_file($url, $timeout) {
         return FALSE;
     }
 }
-
-function rel2abs($rel, $base)
-{
-    /* return if already absolute URL */
-    if (parse_url($rel, PHP_URL_SCHEME) != '') return $rel;
-
-    /* queries and anchors */
-    if ($rel[0]=='#' || $rel[0]=='?') return $base.$rel;
-
-    /* parse base URL and convert to local variables:
-       $scheme, $host, $path */
-    extract(parse_url($base));
-
-    /* remove non-directory element from path */
-    $path = preg_replace('#/[^/]*$#', '', $path);
-
-    /* destroy path if relative url points to root */
-    if ($rel[0] == '/') $path = '';
-
-    /* dirty absolute URL */
-    $abs = "$host$path/$rel";
-
-    /* replace '//' or '/./' or '/foo/../' with '/' */
-    $re = array('#(/\.?/)#', '#/(?!\.\.)[^/]+/\.\./#');
-    for($n=1; $n>0; $abs=preg_replace($re, '/', $abs, -1, $n)) {}
-
-    /* absolute URL is ready! */
-    return $scheme.'://'.$abs;
-}
-
-// $str=preg_replace('#(href|src)="([^:"]*)("|(?:(?:%20|\s|\+)[^"]*"))#','$1="http://wintermute.com.au/$2$3',$str);
-
-function absolutes_links($data, $base) {
-    // cherche les balises 'a' qui contiennent un href
-    $matches = array();
-    preg_match_all('#(href|src)="([^:"]*)("|(?:(?:%20|\s|\+)[^"]*"))#Si', $data, $matches, PREG_SET_ORDER);
-
-    // ne conserve que les liens ne commençant pas par un protocole « protocole:// » ni par une ancre « # »
-    foreach($matches as $i => $link) {
-        $link[1] = trim($link[1]);
-
-        if (!preg_match('#^(([a-z]+://)|(\#))#', $link[1]) ) {
-
-            $absolutePath=rel2abs($link[2],$base);
-
-            $data = str_replace($matches[$i][2], $absolutePath, $data);
-        }
-
-    }
-    return $data;
-}
-
-?>

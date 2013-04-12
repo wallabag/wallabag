@@ -148,7 +148,7 @@ catch (Exception $e)
                                 <a href="view.php?id=<?php echo $entry['id']; ?>"><?php echo $entry['title']; ?>
                             </h2>
                             <div class="tools">
-                                <a title="toggle mark as read" class="tool archive <?php echo ( ($entry['is_read'] == '0') ? 'archive-off' : '' ); ?>" onclick="toggle_archive(<?php echo $entry['id']; ?>)"><span></span></a>
+                                <a title="toggle mark as read" class="tool archive <?php echo ( ($entry['is_read'] == '0') ? 'archive-off' : '' ); ?>" onclick="toggle_archive(this, <?php echo $entry['id']; ?>)"><span></span></a>
                                 <a title="toggle favorite" class="tool fav <?php echo ( ($entry['is_fav'] == '0') ? 'fav-off' : '' ); ?>" onclick="toggle_favorite(this, <?php echo $entry['id']; ?>)"><span></span></a>
                                 <a href="?action=delete&id=<?php echo $entry['id']; ?>" title="toggle delete" onclick="return confirm('Are you sure?')" class="tool delete"><span></span></a>
                             </div>

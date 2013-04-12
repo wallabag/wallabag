@@ -100,7 +100,15 @@ footer {
     margin-left: -20px;
 }
 
-#main .entrie .tools a.tool span {
+#article .tools {
+    display: inline;
+}
+
+#article .tools a.tool {
+    cursor: pointer;
+}
+
+#main .entrie .tools a.tool span, #article .tools a.tool span {
     display: inline-block;
     width: 16px;
     height: 16px;
@@ -110,16 +118,32 @@ a.fav span {
     background: url('../img/fav-on.png') no-repeat;
 }
 
+a.fav span:hover {
+    background: url('../img/fav-off.png') no-repeat;
+}
+
 a.fav-off span {
     background: url('../img/fav-off.png') no-repeat;
+}
+
+a.fav-off span:hover {
+    background: url('../img/fav-on.png') no-repeat;
 }
 
 a.archive span {
     background: url('../img/archive-on.png') no-repeat;
 }
 
+a.archive span:hover {
+    background: url('../img/archive-off.png') no-repeat;
+}
+
 a.archive-off span {
     background: url('../img/archive-off.png') no-repeat;
+}
+
+a.archive-off span:hover {
+    background: url('../img/archive-on.png') no-repeat;
 }
 
 a.delete span {
@@ -151,6 +175,10 @@ body.article {
 .vieworiginal a {
     color: #888888;
     text-decoration: none;
+}
+
+.backhome {
+    display: inline;
 }
 
 /*** ***/

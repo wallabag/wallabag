@@ -31,5 +31,13 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
         die('query error : '.$e->getMessage());
     }
 
-    generate_page($entry[0]['url'], $entry[0]['title'], $entry[0]['content']);
+    if ($entry != NULL) {
+        generate_page($entry[0]);
+    }
+    else {
+        die('error in view call');
+    }
+}
+else {
+    die('error in view call');
 }
