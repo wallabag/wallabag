@@ -3,7 +3,7 @@
  * poche, a read it later open source system
  *
  * @category   poche
- * @author     Nicolas Lœuillet <nicolas@loeuillet.org>
+ * @author     Nicolas Lœuillet <support@inthepoche.com>
  * @copyright  2013
  * @license    http://www.wtfpl.net/ see COPYING file
  */
@@ -160,7 +160,7 @@ catch (Exception $e)
             </div>
         </div>
         <footer class="mr2 mt3 smaller">
-            <p>download poche on <a href="http://github.com/nicosomb/poche">github</a><br />follow us on <a href="https://twitter.com/getpoche" title="follow us on twitter">twitter</a></p>
+            <p>powered by <a href="http://inthepoche.com">poche</a><br />follow us on <a href="https://twitter.com/getpoche" title="follow us on twitter">twitter</a></p>
         </footer>
         <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
         <script type="text/javascript" src="js/jquery.masonry.min.js"></script>
