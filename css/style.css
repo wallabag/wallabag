@@ -66,7 +66,7 @@ footer {
 }
 
 input[type=submit].delete {
-    background : url('../img/delete.png') no-repeat center center;
+    background : url('../img/remove.png') no-repeat center center;
     width : 16px;
     height :16px;
     border : none;
@@ -145,39 +145,35 @@ input[type=submit].delete {
 }
 
 a.fav span {
-    background: url('../img/fav-on.png') no-repeat;
+    background: url('../img/star-on.png') no-repeat;
 }
 
 a.fav span:hover {
-    background: url('../img/fav-off.png') no-repeat;
+    background: url('../img/star-off.png') no-repeat;
 }
 
 a.fav-off span {
-    background: url('../img/fav-off.png') no-repeat;
+    background: url('../img/star-off.png') no-repeat;
 }
 
 a.fav-off span:hover {
-    background: url('../img/fav-on.png') no-repeat;
+    background: url('../img/star-on.png') no-repeat;
 }
 
 a.archive span {
-    background: url('../img/archive-on.png') no-repeat;
+    background: url('../img/checkmark-on.png') no-repeat;
 }
 
 a.archive span:hover {
-    background: url('../img/archive-off.png') no-repeat;
+    background: url('../img/checkmark-off.png') no-repeat;
 }
 
 a.archive-off span {
-    background: url('../img/archive-off.png') no-repeat;
+    background: url('../img/checkmark-off.png') no-repeat;
 }
 
 a.archive-off span:hover {
-    background: url('../img/archive-on.png') no-repeat;
-}
-
-a.delete span {
-    background: url('../img/delete.png') no-repeat;
+    background: url('../img/checkmark-on.png') no-repeat;
 }
 
 /*** ***/
