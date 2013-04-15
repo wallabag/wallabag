@@ -16,8 +16,9 @@ function get_poche_url()
 }
 
 // function define to retrieve url content
-function get_external_file($url, $timeout)
+function get_external_file($url)
 {
+    $timeout=15; // Timeout : time until we stop waiting for the response.
     // spoofing FireFox 18.0
     $useragent="Mozilla/5.0 (Windows NT 5.1; rv:18.0) Gecko/20100101 Firefox/18.0";
 
@@ -45,10 +46,7 @@ function get_external_file($url, $timeout)
     } else {
 
         // create http context and add timeout and user-agent
-        $context = stream_context_create(array('http'=>array('timeout' => $timeout, // Timeout : time until we stop waiting for the response.
-                                                                                    'header'=> "User-Agent: ".$useragent, // spoot Mozilla Firefox
-                                                                                    'follow_location' => true
-                                                        )));
+        $context = stream_context_create(array('http'=>array('timeout' => $timeout,'header'=> "User-Agent: ".$useragent,/*spoot Mozilla Firefox*/'follow_location' => true)));
 
         // only download page lesser than 4MB
         $data = @file_get_contents($url, false, $context, -1, 4000000); // We download at most 4 MB from source.
