@@ -243,7 +243,9 @@ function verif_token($token)
             {
                 return TRUE;
             }
-            else return FALSE;
+            else {
+                session_destroy();
+            }
         }
         else return FALSE;
     }
