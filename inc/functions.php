@@ -3,7 +3,7 @@
 /**
  * Permet de générer l'URL de poche pour le bookmarklet
  */
-function url()
+function get_poche_url()
 {
     $protocol = "http";
     if(isset($_SERVER['HTTPS'])) {
@@ -13,29 +13,6 @@ function url()
     }
 
     return $protocol . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-}
-
-/**
- * Génération de la page "vue d'un article"
- */
-function generate_page($entry)
-{
-    raintpl::$tpl_dir = './tpl/';
-    raintpl::$cache_dir = "./cache/";
-    raintpl::$base_url = url();
-    raintpl::configure( 'path_replace', false );
-    raintpl::configure('debug', false);
-
-    $tpl = new raintpl();
-
-    $tpl->assign("id", $entry['id']);
-    $tpl->assign("url", $entry['url']);
-    $tpl->assign("title", $entry['title']);
-    $tpl->assign("content", $entry['content']);
-    $tpl->assign("is_fav", $entry['is_fav']);
-    $tpl->assign("is_read", $entry['is_read']);
-
-    $tpl->draw( "index");
 }
 
 // function define to retrieve url content
@@ -111,6 +88,9 @@ function get_external_file($url, $timeout)
     }
 }
 
+/**
+ * Préparation de l'URL avec récupération du contenu avant insertion en base
+ */
 function prepare_url($url)
 {
     $parametres = array();

@@ -1,0 +1,29 @@
+{include="head"}
+    <body class="article">
+        <div id="article" class="w600p">
+        	<div class="backhome">
+        		<a href="index.php" title="back to home">&larr;</a>
+        	</div>
+            <div class="tools">
+                <a title="toggle mark as read" class="tool archive {if="$is_read == 0"}archive-off{/if}" onclick="toggle_archive(this, {$id}, 1)"><span></span></a>
+                <a title="toggle favorite" class="tool fav  {if="$is_fav == 0"}fav-off{/if}" onclick="toggle_favorite(this, {$id})"><span></span></a>
+                <a href="index.php?action=delete&id={$id}" title="toggle delete" onclick="return confirm('Are you sure?')" class="tool delete"><span></span></a>
+            </div>
+            <header class="mbm">
+                <h1><a href="{$url}">{$title}</a></h1>
+                <div class="vieworiginal txtright small"><a href="{$url}" target="_blank" title="original : {$title}">view original</a></div>
+            </header>
+            <article>
+                <div id="readityourselfcontent">
+                    {$content}
+                </div>
+            </article>
+            <div class="vieworiginal txtright small"><a href="{$url}" target="_blank" title="original : {$title}">view original</a></div>
+            <div class="backhome">
+                <a href="index.php" title="back to home">&larr;</a>
+            </div>
+        </div>
+        {include="footer"}
+        {include="js"}
+    </body>
+</html>

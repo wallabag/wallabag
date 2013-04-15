@@ -8,11 +8,7 @@
  * @license    http://www.wtfpl.net/ see COPYING file
  */
 
-header('Content-type:text/html; charset=utf-8');
-
 include dirname(__FILE__).'/inc/config.php';
-require_once dirname(__FILE__).'/inc/rain.tpl.class.php';
-$db = new db(DB_PATH);
 
 if(isset($_GET['id']) && $_GET['id'] != '') {
 
@@ -32,7 +28,14 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
     }
 
     if ($entry != NULL) {
-        generate_page($entry[0]);
+        $tpl->assign('id', $entry[0]['id']);
+        $tpl->assign('url', $entry[0]['url']);
+        $tpl->assign('title', $entry[0]['title']);
+        $tpl->assign('content', $entry[0]['content']);
+        $tpl->assign('is_fav', $entry[0]['is_fav']);
+        $tpl->assign('is_read', $entry[0]['is_read']);
+        $tpl->assign('load_all_js', 0);
+        $tpl->draw('view');
     }
     else {
         die('error in view call');
