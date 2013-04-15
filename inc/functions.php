@@ -121,3 +121,107 @@ function prepare_url($url)
 
     return $parametres;
 }
+
+/**
+ * Appel d'une action (mark as fav, archive, delete)
+ */
+function action_to_do($action, $id)
+{
+    global $db;
+
+    switch ($action)
+    {
+        case 'add':
+            if ($url == '')
+                continue;
+
+            $parametres_url = prepare_url($url);
+            $sql_action     = 'INSERT INTO entries ( url, title, content ) VALUES (?, ?, ?)';
+            $params_action  = array($url, $parametres_url['title'], $parametres_url['content']);
+            break;
+        case 'delete':
+            $sql_action     = "DELETE FROM entries WHERE id=?";
+            $params_action  = array($id);
+            break;
+        default:
+            break;
+    }
+
+    try
+    {
+        # action query
+        if (isset($sql_action))
+        {
+            $query = $db->getHandle()->prepare($sql_action);
+            $query->execute($params_action);
+        }
+    }
+    catch (Exception $e)
+    {
+        die('action query error : '.$e->getMessage());
+    }
+}
+
+/**
+ * Détermine quels liens afficher : home, fav ou archives
+ */
+function display_view($view)
+{
+    global $db;
+
+    switch ($view)
+    {
+        case 'archive':
+            $sql    = "SELECT * FROM entries WHERE is_read=? ORDER BY id desc";
+            $params = array(-1);
+            break;
+        case 'fav' :
+            $sql    = "SELECT * FROM entries WHERE is_fav=? ORDER BY id desc";
+            $params = array(-1);
+            break;
+        default:
+            $sql    = "SELECT * FROM entries WHERE is_read=? ORDER BY id desc";
+            $params = array(0);
+            break;
+    }
+
+    # view query
+    try
+    {
+        $query  = $db->getHandle()->prepare($sql);
+        $query->execute($params);
+        $entries = $query->fetchAll();
+    }
+    catch (Exception $e)
+    {
+        die('view query error : '.$e->getMessage());
+    }
+
+    return $entries;
+}
+
+/**
+ * Récupère un article en fonction d'un ID
+ */
+function get_article($id)
+{
+    global $db;
+
+    $entry  = NULL;
+    $sql    = "SELECT * FROM entries WHERE id=?";
+    $params = array(intval($id));
+
+    # view article query
+    try
+    {
+        $query  = $db->getHandle()->prepare($sql);
+        $query->execute($params);
+        $entry = $query->fetchAll();
+    }
+    catch (Exception $e)
+    {
+        die('query error : '.$e->getMessage());
+    }
+
+    return $entry;
+}

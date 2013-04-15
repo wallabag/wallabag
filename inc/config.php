@@ -23,4 +23,3 @@ raintpl::$base_url  = get_poche_url();
 raintpl::configure('path_replace', false);
 raintpl::configure('debug', false);
 $tpl = new raintpl();
-?>

@@ -10,22 +10,11 @@
 
 include dirname(__FILE__).'/inc/config.php';
 
-if(isset($_GET['id']) && $_GET['id'] != '') {
+$id = (isset ($_GET['id'])) ? htmlspecialchars($_GET['id']) : '';
 
-    $sql    = "SELECT * FROM entries WHERE id=?";
-    $params = array(intval($_GET['id']));
+if(!empty($id)) {
 
-    # view article query
-    try
-    {
-        $query  = $db->getHandle()->prepare($sql);
-        $query->execute($params);
-        $entry = $query->fetchAll();
-    }
-    catch (Exception $e)
-    {
-        die('query error : '.$e->getMessage());
-    }
+    $entry = get_article($id);
 
     if ($entry != NULL) {
         $tpl->assign('id', $entry[0]['id']);
