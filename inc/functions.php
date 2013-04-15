@@ -112,7 +112,7 @@ function prepare_url($url,$id)
         {
             $content = $r->articleContent->innerHTML;  
             $parametres['title'] = $r->articleTitle->innerHTML;
-            $parametres['content']=filtre_img($content, $url, $id);
+            $parametres['content']=base64_encode(gzdeflate(filtre_img($content, $url, $id)));
             return $parametres;
         }
     }
@@ -205,11 +205,14 @@ function makeArchiveRep($rep)
 //supprime le répertoire si on supprime le lien.
 function delArchiveRep($rep)
 {
+    if(is_dir($rep))
+    {
    $files = array_diff(scandir($rep), array('.','..'));
     foreach ($files as $file) {
       (is_dir("$rep/$file")) ? delTree("$rep/$file") : unlink("$rep/$file");
     }
     return rmdir($rep);
+    }
 } 
 
 /**
