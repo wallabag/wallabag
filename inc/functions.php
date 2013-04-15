@@ -89,7 +89,7 @@ function get_external_file($url)
 /**
  * Préparation de l'URL avec récupération du contenu avant insertion en base
  */
-function prepare_url($url)
+function prepare_url($url,$id)
 {
     $parametres = array();
     $url    = html_entity_decode(trim($url));
@@ -110,20 +110,112 @@ function prepare_url($url)
         $r = new Readability($html, $url);
         if($r->init())
         {
-            $title = $r->articleTitle->innerHTML;
+            $content = $r->articleContent->innerHTML;  
+            $parametres['title'] = $r->articleTitle->innerHTML;
+            $parametres['content']=filtre_img($content, $url, $id);
+            return $parametres;
         }
     }
 
-    $parametres['title']    = $title;
-    $parametres['content']  = $r->articleContent->innerHTML;
-
-    return $parametres;
+    return False;    
 }
+
+
+function filtre_img($content, $url, $id)
+{
+    $matches = array();
+    preg_match_all('#<\s*(img)[^>]+src="([^"]*)"[^>]*>#Si', $content, $matches, PREG_SET_ORDER);
+    foreach($matches as $i => $link) 
+    {
+        $link[1] = trim($link[1]);
+
+        // ne conserve que les liens ne commençant pas par un protocole « protocole:// » ni par une ancre « # »
+        if (!preg_match('#^(([a-z]+://)|(\#))#', $link[1]) ) 
+        {
+            //on récupere le chemin absolu pour télécharger l'image.
+            $absolutePath=rel2abs($link[2],$url); 
+            //on récupére le nom du fichier uniquement
+            $nameFileUrl = basename(parse_url($absolutePath,PHP_URL_PATH));
+            //on sauvegarde l'image
+            $rep=makeArchiveRep($id);
+            $fullpath = $rep.'/'.$nameFileUrl;
+            archiveImage($absolutePath,$fullpath);
+            // on remplace le lien originel, par le nouveau lien du dossier local.
+            $content = str_replace($matches[$i][2], $fullpath, $content);
+        }
+
+    }
+    return $content;
+}
+
+//renvoie le lien absolu
+function rel2abs($lien_rel, $url)
+{
+    /* return if already absolute URL */
+    if (parse_url($lien_rel, PHP_URL_SCHEME) != '') return $lien_rel;
+
+    /* queries and anchors */
+    if ($lien_rel[0]=='#' || $lien_rel[0]=='?') return $url.$lien_rel;
+
+    /* parse base URL and convert to local variables:
+       $scheme, $host, $path */
+    extract(parse_url($url));
+
+    /* remove non-directory element from path */
+    $path = preg_replace('#/[^/]*$#', '', $path);
+
+    /* destroy path if relative url points to root */
+    if ($lien_rel[0] == '/') $path = '';
+
+    /* dirty absolute URL */
+    $abs = "$host$path/$lien_rel";
+
+    /* replace '//' or '/./' or '/foo/../' with '/' */
+    $re = array('#(/\.?/)#', '#/(?!\.\.)[^/]+/\.\./#');
+    for($n=1; $n>0; $abs=preg_replace($re, '/', $abs, -1, $n)) {}
+
+    /* absolute URL is ready! */
+    return $scheme.'://'.$abs;
+}
+
+//archive les images en provenance du site
+function archiveImage($img_absolue,$fullpath)
+{
+    $rawdata=get_external_file($img_absolue);
+    
+    if(file_exists($fullpath))
+    {
+        unlink($fullpath);
+    }
+    $fp = fopen($fullpath,'x');
+    fwrite($fp, $rawdata);
+    fclose($fp); 
+}
+
+// crée un répertoire unique par lien, pour archiver les images.
+function makeArchiveRep($rep)
+{
+    $exterPath=ABS_PATH;
+    if(!is_dir($exterPath)){mkdir($exterPath,0705);}
+    $exterPathRep=$exterPath.$rep;
+    if(!is_dir($exterPathRep)){mkdir($exterPathRep,0705);}
+    return $exterPathRep;
+}
+
+//supprime le répertoire si on supprime le lien.
+function delArchiveRep($rep)
+{
+   $files = array_diff(scandir($rep), array('.','..'));
+    foreach ($files as $file) {
+      (is_dir("$rep/$file")) ? delTree("$rep/$file") : unlink("$rep/$file");
+    }
+    return rmdir($rep);
+} 
 
 /**
  * Appel d'une action (mark as fav, archive, delete)
  */
-function action_to_do($action, $id)
+function action_to_do($action, $url,$id)
 {
     global $db;
 
@@ -132,12 +224,22 @@ function action_to_do($action, $id)
         case 'add':
             if ($url == '')
                 continue;
+            //on crée un id
+            $req = $db->getHandle()->query("SELECT id FROM entries ORDER BY id DESC");
+            $id = $req->fetchColumn()+1;
 
-            $parametres_url = prepare_url($url);
-            $sql_action     = 'INSERT INTO entries ( url, title, content ) VALUES (?, ?, ?)';
-            $params_action  = array($url, $parametres_url['title'], $parametres_url['content']);
+            if($parametres_url = prepare_url($url, $id))
+            {
+                $sql_action     = 'INSERT INTO entries ( id, url, title, content ) VALUES (?,?, ?, ?)';
+                $params_action  = array($id,$url, $parametres_url['title'], $parametres_url['content']);
+            }
+            else
+            {
+                continue;
+            }
             break;
         case 'delete':
+            delArchiveRep(ABS_PATH.$id);
             $sql_action     = "DELETE FROM entries WHERE id=?";
             $params_action  = array($id);
             break;

@@ -15,7 +15,7 @@ $view   = (isset ($_GET['view'])) ? htmlspecialchars($_GET['view']) : 'index';
 $id     = (isset ($_GET['id'])) ? htmlspecialchars($_GET['id']) : '';
 $url    = (isset ($_GET['url'])) ? $_GET['url'] : '';
 
-action_to_do($action, $id);
+action_to_do($action, $url, $id);
 $entries = display_view($view);
 
 $tpl->assign('title', 'poche, a read it later open source system');
