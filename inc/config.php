@@ -23,3 +23,11 @@ raintpl::$base_url  = get_poche_url();
 raintpl::configure('path_replace', false);
 raintpl::configure('debug', false);
 $tpl = new raintpl();
+
+session_start();
+
+if (!isset($_SESSION['token_poche'])) {
+    $token = md5(uniqid(rand(), TRUE));
+    $_SESSION['token_poche'] = $token;
+    $_SESSION['token_time_poche'] = time();
+}

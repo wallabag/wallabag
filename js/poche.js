@@ -1,16 +1,16 @@
-function toggle_favorite(element, id) {
+function toggle_favorite(element, id, token) {
     $(element).toggleClass('fav-off');
     $.ajax ({
         url: "process.php?action=toggle_fav",
-        data:{id:id}
+        data:{id:id, token:token}
     });
 }
 
-function toggle_archive(element, id, view_article) {
+function toggle_archive(element, id, token, view_article) {
     $(element).toggleClass('archive-off');
     $.ajax ({
         url: "process.php?action=toggle_archive",
-        data:{id:id}
+        data:{id:id, token:token}
     });
     var obj = $('#entry-'+id);
 

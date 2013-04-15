@@ -8,7 +8,7 @@
                 <li><a href="index.php" {if="$view == 'index'"}class="current"{/if}>home</a></li>
                 <li><a href="?view=fav" {if="$view == 'fav'"}class="current"{/if}>favorites</a></li>
                 <li><a href="?view=archive" {if="$view == 'archive'"}class="current"{/if}>archive</a></li>
-                <li><a style="cursor: move" title="i am a bookmarklet, use me !" href="javascript:(function(){var%20url%20=%20location.href;var%20title%20=%20document.title%20||%20url;window.open('{$poche_url}?action=add&url='%20+%20encodeURIComponent(url),'_self');})();">poche it !</a></li>
+                <li><a style="cursor: move" title="i am a bookmarklet, use me !" href="javascript:(function(){var%20url%20=%20location.href%20||%20url;window.open('{$poche_url}?action=add&url='%20+%20encodeURIComponent(url),'_self');})();">poche it !</a></li>
             </ul>
             <div id="content">
                 {loop="entries"}
@@ -18,9 +18,11 @@
                                 <a href="view.php?id={$value.id}">{$value.title}</a>
                             </h2>
                             <div class="tools">
-                                <a title="toggle mark as read" class="tool archive {if="$value.is_read == '0'"}archive-off{/if}" onclick="toggle_archive(this, {$value.id})"><span></span></a>
-                                <a title="toggle favorite" class="tool fav {if="$value.is_fav == '0'"}fav-off{/if}" onclick="toggle_favorite(this, {$value.id})"><span></span></a>
-                                <a href="?action=delete&id={$value.id}" title="toggle delete" onclick="return confirm('Are you sure?')" class="tool delete"><span></span></a>
+                                <ul>
+                                    <li><a title="toggle mark as read" class="tool archive {if="$value.is_read == '0'"}archive-off{/if}" onclick="toggle_archive(this, {$value.id}, '{$token}')"><span></span></a></li>
+                                    <li><a title="toggle favorite" class="tool fav {if="$value.is_fav == '0'"}fav-off{/if}" onclick="toggle_favorite(this, {$value.id}, '{$token}')"><span></span></a></li>
+                                    <li><form method="post" onsubmit="return confirm('Are you sure?')" style="display: inline;"><input type="hidden" name="token" id="token" value="{$token}" /><input type="hidden" id="action" name="action" value="delete" /><input type="hidden" id="id" name="id" value="{$value.id}" /><input type="submit" class="delete" title="toggle delete" /></form></li>
+                                </ul>
                             </div>
                         </span>
                     </div>

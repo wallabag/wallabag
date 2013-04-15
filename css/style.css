@@ -65,6 +65,16 @@ footer {
     cursor: pointer;
 }
 
+input[type=submit].delete {
+    background : url('../img/delete.png') no-repeat center center;
+    width : 16px;
+    height :16px;
+    border : none;
+    color : transparent;
+    cursor: pointer;
+    font-size : 0;
+}
+
 #main #content {
     margin-top: 20px;
 }
@@ -77,13 +87,15 @@ footer {
     min-height: 8em;
     -webkit-border-radius: 2px;
     border-radius: 2px;
-    -webkit-box-shadow:  0px 0px 2px -1px #000;
-    box-shadow:  0px 0px 2px -1px #000;
+    -webkit-box-shadow:  0px 0px 6px -1px #000;
+    box-shadow:  0px 0px 6px -1px #000;
     width: 30%;
     margin: 10px;
     float: left;
 }
-
+#main .entrie h2 {
+    width: 95%;
+}
 #main .entrie h2 a {
     text-decoration: none;
 }
@@ -92,20 +104,38 @@ footer {
     color: #F5BE00;
 }
 
-#main .entrie .tools {
-    position:absolute;
-    bottom: 0;
-    width: 100%;
+.tools {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 30px;
     text-align: right;
-    margin-left: -20px;
+}
+
+.tools ul {
+    padding: 0; margin: 0;
+    list-style-type: none;
+}
+
+.tools ul li {
+    line-height: 20px;
+}
+
+.tools a.tool {
+    cursor: pointer;
 }
 
 #article .tools {
+    position: relative;
     display: inline;
+    top: 0px;
+    right: 0px;
+    width: 100%;
+    text-align: left;
 }
 
-#article .tools a.tool {
-    cursor: pointer;
+#article.tools ul li{
+    display: inline;
 }
 
 #main .entrie .tools a.tool span, #article .tools a.tool span {

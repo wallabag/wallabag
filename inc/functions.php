@@ -125,7 +125,7 @@ function prepare_url($url)
 /**
  * Appel d'une action (mark as fav, archive, delete)
  */
-function action_to_do($action, $id)
+function action_to_do($action, $id, $url, $token)
 {
     global $db;
 
@@ -140,8 +140,11 @@ function action_to_do($action, $id)
             $params_action  = array($url, $parametres_url['title'], $parametres_url['content']);
             break;
         case 'delete':
-            $sql_action     = "DELETE FROM entries WHERE id=?";
-            $params_action  = array($id);
+            if (verif_token($token)) {
+                $sql_action     = "DELETE FROM entries WHERE id=?";
+                $params_action  = array($id);
+            }
+            else die('CSRF problem');
             break;
         default:
             break;
@@ -224,4 +227,25 @@ function get_article($id)
     }
 
     return $entry;
+}
+
+/**
+ * Vérifie si le jeton passé en $_POST correspond à celui en session
+ */
+function verif_token($token)
+{
+    if(isset($_SESSION['token_poche']) && isset($_SESSION['token_time_poche']) && isset($token))
+    {
+        if($_SESSION['token_poche'] == $token)
+        {
+            $old_timestamp = time() - (15*60);
+            if($_SESSION['token_time_poche'] >= $old_timestamp)
+            {
+                return TRUE;
+            }
+            else return FALSE;
+        }
+        else return FALSE;
+    }
+    else return FALSE;
 }
