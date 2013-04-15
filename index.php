@@ -25,16 +25,8 @@ switch ($action)
 
         $parametres_url = prepare_url($url);
 
-        try
-        {
-            # insert query
-            $query = $db->getHandle()->prepare('INSERT INTO entries ( url, title, content ) VALUES (?, ?, ?)');
-            $query->execute(array($url, $parametres_url['title'], $parametres_url['content']));
-        }
-        catch (Exception $e)
-        {
-            error_log('insert query error : '.$e->getMessage());
-        }
+        $sql_action = 'INSERT INTO entries ( url, title, content ) VALUES (?, ?, ?)';
+        $params_action  = array($url, $parametres_url['title'], $parametres_url['content']);
 
         break;
     case 'delete':
