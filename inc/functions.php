@@ -110,3 +110,34 @@ function get_external_file($url, $timeout)
         return FALSE;
     }
 }
+
+function prepare_url($url)
+{
+    $parametres = array();
+    $url    = html_entity_decode(trim($url));
+
+    // We remove the annoying parameters added by FeedBurner and GoogleFeedProxy (?utm_source=...)
+    // from shaarli, by sebsauvage
+    $i=strpos($url,'&utm_source='); if ($i!==false) $url=substr($url,0,$i);
+    $i=strpos($url,'?utm_source='); if ($i!==false) $url=substr($url,0,$i);
+    $i=strpos($url,'#xtor=RSS-'); if ($i!==false) $url=substr($url,0,$i);
+
+    $title  = $url;
+    if (!preg_match('!^https?://!i', $url))
+        $url = 'http://' . $url;
+
+    $html = Encoding::toUTF8(get_external_file($url,15));
+    if (isset($html) and strlen($html) > 0)
+    {
+        $r = new Readability($html, $url);
+        if($r->init())
+        {
+            $title = $r->articleTitle->innerHTML;
+        }
+    }
+
+    $parametres['title']    = $title;
+    $parametres['content']  = $r->articleContent->innerHTML;
+
+    return $parametres;
+}

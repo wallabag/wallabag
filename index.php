@@ -14,41 +14,22 @@ $db = new db(DB_PATH);
 $action = (isset ($_GET['action'])) ? htmlspecialchars($_GET['action']) : '';
 $view   = (isset ($_GET['view'])) ? htmlspecialchars($_GET['view']) : '';
 $id     = (isset ($_GET['id'])) ? htmlspecialchars($_GET['id']) : '';
+$url    = (isset ($_GET['url'])) ? $_GET['url'] : '';
 
 switch ($action)
 {
     case 'add':
-        $url = (isset ($_GET['url'])) ? $_GET['url'] : '';
+
         if ($url == '')
             continue;
 
-        $url    = html_entity_decode(trim($url));
-
-        // We remove the annoying parameters added by FeedBurner and GoogleFeedProxy (?utm_source=...)
-        // from shaarli, by sebsauvage
-        $i=strpos($url,'&utm_source='); if ($i!==false) $url=substr($url,0,$i);
-        $i=strpos($url,'?utm_source='); if ($i!==false) $url=substr($url,0,$i);
-        $i=strpos($url,'#xtor=RSS-'); if ($i!==false) $url=substr($url,0,$i);
-
-        $title  = $url;
-        if (!preg_match('!^https?://!i', $url))
-            $url = 'http://' . $url;
-
-        $html = Encoding::toUTF8(get_external_file($url,15));
-        if (isset($html) and strlen($html) > 0)
-        {
-            $r = new Readability($html, $url);
-            if($r->init())
-            {
-                $title = $r->articleTitle->innerHTML;
-            }
-        }
+        $parametres_url = prepare_url($url);
 
         try
         {
             # insert query
             $query = $db->getHandle()->prepare('INSERT INTO entries ( url, title, content ) VALUES (?, ?, ?)');
-            $query->execute(array($url, $title, $r->articleContent->innerHTML));
+            $query->execute(array($url, $parametres_url['title'], $parametres_url['content']));
         }
         catch (Exception $e)
         {
