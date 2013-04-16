@@ -101,9 +101,7 @@ input[type=submit].delete {
     min-height: 8em;
     border: 1px solid;
 }
-#main .entrie h2 {
-    width: 95%;
-}
+
 #main .entrie h2 a {
     text-decoration: none;
 }
@@ -113,10 +111,6 @@ input[type=submit].delete {
 }
 
 .tools {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    width: 30px;
     text-align: right;
 }
 
