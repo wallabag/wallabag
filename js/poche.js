@@ -22,6 +22,6 @@ function toggle_archive(element, id, token, view_article) {
     }
 }
 
-function sort_links(sort, token) {
-    $('#content').load('process.php', { sort: sort, token: token } );
+function sort_links(view, sort, token) {
+    $('#content').load('process.php', { view: view, sort: sort, token: token } );
 }

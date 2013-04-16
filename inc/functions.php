@@ -182,7 +182,7 @@ function action_to_do($action, $id, $url, $token)
 /**
  * Détermine quels liens afficher : home, fav ou archives
  */
-function display_view()
+function display_view($view)
 {
     global $db;
 
@@ -205,7 +205,7 @@ function display_view()
             break;
     }
 
-    switch ($_SESSION['view'])
+    switch ($view)
     {
         case 'archive':
             $sql    = "SELECT * FROM entries WHERE is_read=? " . $order;

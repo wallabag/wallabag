@@ -9,10 +9,8 @@
                 <li><a href="?view=archive" {if="$view == 'archive'"}class="current"{/if}>archive</a></li>
                 <li><a style="cursor: move" title="i am a bookmarklet, use me !" href="javascript:(function(){var%20url%20=%20location.href%20||%20url;window.open('{$poche_url}?action=add&url='%20+%20encodeURIComponent(url),'_self');})();">poche it !</a></li>
             </ul>
-<!--             <ul>
-                <li onclick="sort_links('ia', '{$token}');">tri par id asc</li>
-                <li onclick="sort_links('id', '{$token}');">tri par id desc</li>
-                <li onclick="sort_links('ta', '{$token}');">tri par title asc</li>
-                <li onclick="sort_links('td', '{$token}');">tri par title desc</li>
-            </ul> -->
+            <ul id="sort">
+                <li><img src="img/up.png" onclick="sort_links('{$view}', 'ia', '{$token}');" title="by date asc" /> by date <img src="img/down.png" onclick="sort_links('{$view}', 'id', '{$token}');" title="by date desc" /></li>
+                <li><img src="img/up.png" onclick="sort_links('{$view}', 'ta', '{$token}');" title="by title asc" /> by title <img src="img/down.png" onclick="sort_links('{$view}', 'td', '{$token}');" title="by title desc" /></li>
+            </ul>
             <div id="content">

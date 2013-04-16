@@ -35,8 +35,8 @@ if (!isset($_SESSION['token_poche'])) {
 }
 
 # Traitement des paramètres et déclenchement des actions
+$view               = (isset ($_REQUEST['view'])) ? htmlentities($_REQUEST['view']) : 'index';
 $action             = (isset ($_REQUEST['action'])) ? htmlentities($_REQUEST['action']) : '';
-$_SESSION['view']   = (isset ($_GET['view'])) ? htmlentities($_GET['view']) : 'index';
 $_SESSION['sort']   = (isset ($_REQUEST['sort'])) ? htmlentities($_REQUEST['sort']) : 'id';
 $id                 = (isset ($_REQUEST['id'])) ? htmlspecialchars($_REQUEST['id']) : '';
 $url                = (isset ($_GET['url'])) ? $_GET['url'] : '';

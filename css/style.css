@@ -32,6 +32,21 @@ header {
     color: #F1F1F1;
 }
 
+#main ul#sort {
+    padding: 0;
+    list-style-type: none;
+    text-align: center;
+}
+
+#main ul#sort li {
+    display: inline;
+    font-size: 0.9em;
+}
+
+#main ul#sort img:hover {
+    cursor: pointer;
+}
+
 #main, #article {
     margin: 0 auto;
 }
