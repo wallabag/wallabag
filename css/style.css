@@ -62,10 +62,10 @@ header {
     color: #F1F1F1;
 }
 
-#content {
+/*#content {
     width: 800px;
     margin: 0 auto;
-}
+}*/
 
 
 footer {
@@ -96,16 +96,10 @@ input[type=submit].delete {
 
 #main .entrie {
     color: rgb(46, 46, 46);
-    position:relative;
     background-color: #ffffff;
     padding: 15px;
     min-height: 8em;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-    -webkit-box-shadow:  0px 0px 6px -1px #000;
-    box-shadow:  0px 0px 6px -1px #000;
-    margin: 10px;
-    float: left;
+    border: 1px solid;
 }
 #main .entrie h2 {
     width: 95%;
@@ -222,24 +216,27 @@ body.article {
 }
 
 /*** ***/
+
 #main
 {
     max-width: 60em; /* 960 px */
     margin: 0 auto;
 }
-    #content
-    {
-        width: 103.125%; /* 990px */
-        overflow: hidden;
-        margin-left: -1.562%; /* 15px */
-        margin-bottom: -1.875em; /* 30px */
-    }
-        .entrie
-        {
-            width: 30.303%; /* 300px */
-            float: left;
-            margin: 0 1.515% 1.875em; /* 15px 30px */
-        }
+#content
+{
+    width: 103.125%; /* 990px */
+    overflow: hidden;
+    margin-left: -1.562%; /* 15px */
+    margin-bottom: -1.875em; /* 30px */
+}
+
+.entrie
+{
+    width: 30.303%; /* 300px */
+    background-color: #fff;
+    float: left;
+    margin: 0 1.515% 1.875em; /* 15px 30px */
+}
 
 @media only screen and ( max-width: 40em ) /* 640px */
 {
@@ -249,17 +246,21 @@ body.article {
         margin-bottom: 0.938em; /* 15px */
     }
 }
-@media only screen and ( max-width: 20em ) /* 640px */
+
+@media only screen and ( max-width: 20em ) /* 320px */
 {
     #content
     {
         width: 100%;
         margin-left: 0;
     }
-        .entrie
-        {
-            width: 100%;
-            margin-left: 0;
-            margin-right: 0;
-        }
+
+    .entrie
+    {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
 }
+
+
