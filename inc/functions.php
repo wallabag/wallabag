@@ -46,9 +46,9 @@ function get_external_file($url, $timeout)
 
         // create http context and add timeout and user-agent
         $context = stream_context_create(array('http'=>array('timeout' => $timeout, // Timeout : time until we stop waiting for the response.
-                                                                                    'header'=> "User-Agent: ".$useragent, // spoot Mozilla Firefox
-                                                                                    'follow_location' => true
-                                                        )));
+        'header'=> "User-Agent: ".$useragent, // spoot Mozilla Firefox
+        'follow_location' => true
+        )));
 
         // only download page lesser than 4MB
         $data = @file_get_contents($url, false, $context, -1, 4000000); // We download at most 4 MB from source.
@@ -146,6 +146,20 @@ function action_to_do($action, $id, $url, $token)
             }
             else die('CSRF problem');
             break;
+        case 'toggle_fav' :
+            if (verif_token($token)) {
+                $sql_action     = "UPDATE entries SET is_fav=~is_fav WHERE id=?";
+                $params_action  = array($id);
+            }
+            else die('CSRF problem');
+            break;
+        case 'toggle_archive' :
+            if (verif_token($token)) {
+                $sql_action     = "UPDATE entries SET is_read=~is_read WHERE id=?";
+                $params_action  = array($id);
+            }
+            else die('CSRF problem');
+            break;
         default:
             break;
     }
@@ -168,22 +182,41 @@ function action_to_do($action, $id, $url, $token)
 /**
  * Détermine quels liens afficher : home, fav ou archives
  */
-function display_view($view)
+function display_view()
 {
     global $db;
 
-    switch ($view)
+    switch ($_SESSION['sort'])
+    {
+        case 'ia':
+            $order = 'ORDER BY id';
+            break;
+        case 'id':
+            $order = 'ORDER BY id DESC';
+            break;
+        case 'ta':
+            $order = 'ORDER BY lower(title)';
+            break;
+        case 'td':
+            $order = 'ORDER BY lower(title) DESC';
+            break;
+        default:
+            $order = 'ORDER BY id';
+            break;
+    }
+
+    switch ($_SESSION['view'])
     {
         case 'archive':
-            $sql    = "SELECT * FROM entries WHERE is_read=? ORDER BY id desc";
+            $sql    = "SELECT * FROM entries WHERE is_read=? " . $order;
             $params = array(-1);
             break;
         case 'fav' :
-            $sql    = "SELECT * FROM entries WHERE is_fav=? ORDER BY id desc";
+            $sql    = "SELECT * FROM entries WHERE is_fav=? " . $order;
             $params = array(-1);
             break;
         default:
-            $sql    = "SELECT * FROM entries WHERE is_read=? ORDER BY id desc";
+            $sql    = "SELECT * FROM entries WHERE is_read=? " . $order;
             $params = array(0);
             break;
     }

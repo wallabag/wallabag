@@ -1,0 +1,16 @@
+                {loop="entries"}
+                    <div id="entry-{$value.id}" class="entrie mb2">
+                        <span class="content">
+                            <h2 class="h6-like">
+                                <a href="view.php?id={$value.id}">{$value.title}</a>
+                            </h2>
+                            <div class="tools">
+                                <ul>
+                                    <li><a title="toggle mark as read" class="tool archive {if="$value.is_read == '0'"}archive-off{/if}" onclick="toggle_archive(this, {$value.id}, '{$token}')"><span></span></a></li>
+                                    <li><a title="toggle favorite" class="tool fav {if="$value.is_fav == '0'"}fav-off{/if}" onclick="toggle_favorite(this, {$value.id}, '{$token}')"><span></span></a></li>
+                                    <li><form method="post" onsubmit="return confirm('Are you sure?')" style="display: inline;"><input type="hidden" name="token" id="token" value="{$token}" /><input type="hidden" id="action" name="action" value="delete" /><input type="hidden" id="id" name="id" value="{$value.id}" /><input type="submit" class="delete" title="toggle delete" /></form></li>
+                                </ul>
+                            </div>
+                        </span>
+                    </div>
+                {/loop}

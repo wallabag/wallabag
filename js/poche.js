@@ -1,7 +1,7 @@
 function toggle_favorite(element, id, token) {
     $(element).toggleClass('fav-off');
     $.ajax ({
-        url: "process.php?action=toggle_fav",
+        url: "index.php?action=toggle_fav",
         data:{id:id, token:token}
     });
 }
@@ -9,7 +9,7 @@ function toggle_favorite(element, id, token) {
 function toggle_archive(element, id, token, view_article) {
     $(element).toggleClass('archive-off');
     $.ajax ({
-        url: "process.php?action=toggle_archive",
+        url: "index.php?action=toggle_archive",
         data:{id:id, token:token}
     });
     var obj = $('#entry-'+id);
@@ -20,4 +20,8 @@ function toggle_archive(element, id, token, view_article) {
         $('#content').masonry('reloadItems');
         $('#content').masonry('reload');
     }
+}
+
+function sort_links(sort, token) {
+    $('#content').load('process.php', { sort: sort, token: token } );
 }
