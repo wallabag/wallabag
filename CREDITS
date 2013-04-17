@@ -4,6 +4,7 @@ poche is based on :
 * Encoding https://github.com/neitanod/forceutf8
 * logo by Brightmix http://www.iconfinder.com/icondetails/43256/128/jeans_monotone_pocket_icon
 * icons http://icomoon.io
+* PHP Simple HTML DOM Parser (for Pocket import) http://simplehtmldom.sourceforge.net/
 
 poche is developed by Nicolas Lœuillet under the Do What the Fuck You Want to Public License
 
