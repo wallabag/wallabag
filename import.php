@@ -42,7 +42,7 @@ else {
             }
             catch (Exception $e)
             {
-                $errors[] = $e->getMessage();
+                logm('error during pocket import : ' . $e->getMessage());
             }
         }
         # Pocket génère un fichier HTML avec deux <ul>
@@ -52,4 +52,5 @@ else {
     }
 
     echo 'Import from Pocket completed. <a href="index.php">Welcome to #poche !</a>';
+    logm('import from pocket completed');
 }

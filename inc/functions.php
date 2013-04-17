@@ -52,7 +52,6 @@ function get_external_file($url, $timeout)
 
         // only download page lesser than 4MB
         $data = @file_get_contents($url, false, $context, -1, 4000000); // We download at most 4 MB from source.
-        //  echo "<pre>http_response_header : ".print_r($http_response_header);
 
         if(isset($http_response_header) and isset($http_response_header[0])) {
             $httpcodeOK = isset($http_response_header) and isset($http_response_header[0]) and ((strpos($http_response_header[0], '200 OK') !== FALSE) or (strpos($http_response_header[0], '301 Moved Permanently') !== FALSE));
@@ -144,21 +143,21 @@ function action_to_do($action, $id, $url, $token)
                 $sql_action     = "DELETE FROM entries WHERE id=?";
                 $params_action  = array($id);
             }
-            else die('CSRF problem');
+            else logm('csrf problem while deleting entry');
             break;
         case 'toggle_fav' :
             if (verif_token($token)) {
                 $sql_action     = "UPDATE entries SET is_fav=~is_fav WHERE id=?";
                 $params_action  = array($id);
             }
-            else die('CSRF problem');
+            else logm('csrf problem while fav entry');
             break;
         case 'toggle_archive' :
             if (verif_token($token)) {
                 $sql_action     = "UPDATE entries SET is_read=~is_read WHERE id=?";
                 $params_action  = array($id);
             }
-            else die('CSRF problem');
+            else logm('csrf problem while archive entry');
             break;
         default:
             break;
@@ -175,7 +174,7 @@ function action_to_do($action, $id, $url, $token)
     }
     catch (Exception $e)
     {
-        die('action query error : '.$e->getMessage());
+        logm('action query error : '.$e->getMessage());
     }
 }
 
@@ -230,7 +229,7 @@ function display_view($view)
     }
     catch (Exception $e)
     {
-        die('view query error : '.$e->getMessage());
+        logm('view query error : '.$e->getMessage());
     }
 
     return $entries;
@@ -256,7 +255,7 @@ function get_article($id)
     }
     catch (Exception $e)
     {
-        die('query error : '.$e->getMessage());
+        logm('get article query error : '.$e->getMessage());
     }
 
     return $entry;
@@ -278,9 +277,22 @@ function verif_token($token)
             }
             else {
                 session_destroy();
+                logm('session expired');
             }
         }
-        else return FALSE;
+        else {
+            logm('token error : the token is different');
+            return FALSE;
+        }
     }
-    else return FALSE;
+    else {
+        logm('token error : the token is not here');
+        return FALSE;
+    }
+}
+
+function logm($message)
+{
+    $t = strval(date('Y/m/d_H:i:s')).' - '.$_SERVER["REMOTE_ADDR"].' - '.strval($message)."\n";
+    file_put_contents($GLOBALS['config']['DATADIR'].'/log.txt',$t,FILE_APPEND);
 }

@@ -28,9 +28,9 @@ if(!empty($id)) {
         $tpl->draw('view');
     }
     else {
-        die('error in view call');
+        logm('error in view call : entry is NULL');
     }
 }
 else {
-    die('error in view call');
+    logm('error in view call : id is empty');
 }
