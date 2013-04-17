@@ -8,9 +8,12 @@
  * @license    http://www.wtfpl.net/ see COPYING file
  */
 
-if(!is_dir('db/')){mkdir('db/',0705);}
+if (!is_dir('db/')) {
+    @mkdir('db/',0705);
+}
+
 define ('DB_PATH', 'sqlite:./db/poche.sqlite');
-define ('ABS_PATH', 'archiveImg/');
+define ('ABS_PATH', 'assets/');
 
 include 'db.php';
 include 'functions.php';

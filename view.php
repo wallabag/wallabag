@@ -20,7 +20,7 @@ if(!empty($id)) {
         $tpl->assign('id', $entry[0]['id']);
         $tpl->assign('url', $entry[0]['url']);
         $tpl->assign('title', $entry[0]['title']);
-        $tpl->assign('content', gzinflate(base64_decode($entry[0]['content'])));
+        $tpl->assign('content', $entry[0]['content']);
         $tpl->assign('is_fav', $entry[0]['is_fav']);
         $tpl->assign('is_read', $entry[0]['is_read']);
         $tpl->assign('load_all_js', 0);

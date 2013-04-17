@@ -12,11 +12,20 @@ To get news from poche, [follow us on twitter](http://twitter.com/getpoche).
 ## Usage
 You can easily add a "poched" page with the bookmarklet.
 
+poche save the entire content of a poched links : text and pictures are stored on your server.
+
 You can :
 * read a page in a comfortable reading view
 * archive a link
 * put a link in favorite
 * delete a link
+
+## Requirements & installation
+You have to install [sqlite for php](http://www.php.net/manual/en/book.sqlite.php) on your server.
+
+Get the [latest version](https://github.com/nicosomb/poche) of poche on github. Unzip it and upload it on your server. poche must have write access on assets, cache and db directories.
+
+That's all, **poche works** !
 
 ## Security
 You **have** to protect your db/poche.sqlite file. Modify the virtual host of your website to add this condition :
