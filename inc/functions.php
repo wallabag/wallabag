@@ -109,6 +109,7 @@ function prepare_url($url)
     if (isset($html) and strlen($html) > 0)
     {
         $r = new Readability($html, $url);
+        $r->convertLinksToFootnotes = TRUE;
         if($r->init())
         {
             $title = $r->articleTitle->innerHTML;
