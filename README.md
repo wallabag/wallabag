@@ -36,6 +36,14 @@ You **have** to protect your db/poche.sqlite file. Modify the virtual host of yo
 </Files>
 ```
 
+Nginx version:
+```nginx
+location ~ /(db) {
+    deny all;
+    return 404;
+}
+```
+
 ## Import from Pocket
 
 If you want to import your Pocket datas, [export them here](https://getpocket.com/export). Put the HTML file in your poche directory, execute import.php file locally by following instructions. Be careful, the script can take a very long time.
