@@ -137,11 +137,13 @@ function action_to_do($action, $id, $url, $token)
             $parametres_url = prepare_url($url);
             $sql_action     = 'INSERT INTO entries ( url, title, content ) VALUES (?, ?, ?)';
             $params_action  = array($url, $parametres_url['title'], $parametres_url['content']);
+            logm('add link ' . $url);
             break;
         case 'delete':
             if (verif_token($token)) {
                 $sql_action     = "DELETE FROM entries WHERE id=?";
                 $params_action  = array($id);
+                logm('delete link #' . $id);
             }
             else logm('csrf problem while deleting entry');
             break;
@@ -149,6 +151,7 @@ function action_to_do($action, $id, $url, $token)
             if (verif_token($token)) {
                 $sql_action     = "UPDATE entries SET is_fav=~is_fav WHERE id=?";
                 $params_action  = array($id);
+                logm('mark as favorite link #' . $id);
             }
             else logm('csrf problem while fav entry');
             break;
@@ -156,6 +159,7 @@ function action_to_do($action, $id, $url, $token)
             if (verif_token($token)) {
                 $sql_action     = "UPDATE entries SET is_read=~is_read WHERE id=?";
                 $params_action  = array($id);
+                logm('archive link #' . $id);
             }
             else logm('csrf problem while archive entry');
             break;
@@ -294,5 +298,5 @@ function verif_token($token)
 function logm($message)
 {
     $t = strval(date('Y/m/d_H:i:s')).' - '.$_SERVER["REMOTE_ADDR"].' - '.strval($message)."\n";
-    file_put_contents($GLOBALS['config']['DATADIR'].'/log.txt',$t,FILE_APPEND);
+    file_put_contents('./log.txt',$t,FILE_APPEND);
 }
