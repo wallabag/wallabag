@@ -220,8 +220,7 @@ function remove_directory($directory)
     if(is_dir($directory)) {
         $files = array_diff(scandir($directory), array('.','..'));
         foreach ($files as $file) {
-            // FIXME c'est quoi delTree ??
-            (is_dir("$directory/$file")) ? delTree("$directory/$file") : unlink("$directory/$file");
+            (is_dir("$directory/$file")) ? remove_directory("$directory/$file") : unlink("$directory/$file");
         }
         return rmdir($directory);
     }
