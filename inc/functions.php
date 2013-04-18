@@ -7,7 +7,7 @@ function get_poche_url()
 {
     $protocol = "http";
     if(isset($_SERVER['HTTPS'])) {
-        if($_SERVER['HTTPS'] != "off") {
+        if($_SERVER['HTTPS'] != "off" && $_SERVER['HTTPS'] != "") {
             $protocol = "https";
         }
     }
