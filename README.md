@@ -5,18 +5,27 @@ Abandon Pocket, Instapaper and other Readability service : adopt poche. It is th
 
 The website of poche is [inthepoche.com](http://inthepoche.com).
 
-To get news from poche, [follow us on twitter](http://twitter.com/getpoche).
+To get news from poche, [follow us on twitter](http://twitter.com/getpoche) or [read the poche blog](http://inthepoche.com/blog).
 
-[If you want to flattr poche, it's here.](https://flattr.com/thing/1225780/nicosombpoche-on-GitHub)
+[![flattr](http://api.flattr.com/button/flattr-badge-large.png)](http://flattr.com/thing/1265480/poche-a-read-it-later-open-source-system)
 
 ## Usage
 You can easily add a "poched" page with the bookmarklet.
+
+poche save the entire content of a poched links : text and pictures are stored on your server.
 
 You can :
 * read a page in a comfortable reading view
 * archive a link
 * put a link in favorite
 * delete a link
+
+## Requirements & installation
+You have to install [sqlite for php](http://www.php.net/manual/en/book.sqlite.php) on your server.
+
+Get the [latest version](https://github.com/nicosomb/poche) of poche on github. Unzip it and upload it on your server. poche must have write access on assets, cache and db directories.
+
+That's all, **poche works** !
 
 ## Security
 You **have** to protect your db/poche.sqlite file. Modify the virtual host of your website to add this condition :
@@ -26,6 +35,18 @@ You **have** to protect your db/poche.sqlite file. Modify the virtual host of yo
     Deny from all
 </Files>
 ```
+
+Nginx version:
+```nginx
+location ~ /(db) {
+    deny all;
+    return 404;
+}
+```
+
+## Import from Pocket
+
+If you want to import your Pocket datas, [export them here](https://getpocket.com/export). Put the HTML file in your poche directory, execute import.php file locally by following instructions. Be careful, the script can take a very long time.
 
 ## License
 Copyright © 2010-2013 Nicolas Lœuillet <nicolas@loeuillet.org>

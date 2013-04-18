@@ -7,7 +7,7 @@ function get_poche_url()
 {
     $protocol = "http";
     if(isset($_SERVER['HTTPS'])) {
-        if($_SERVER['HTTPS'] != "off") {
+        if($_SERVER['HTTPS'] != "off" && $_SERVER['HTTPS'] != "") {
             $protocol = "https";
         }
     }
@@ -18,7 +18,7 @@ function get_poche_url()
 // function define to retrieve url content
 function get_external_file($url)
 {
-    $timeout=15; // Timeout : time until we stop waiting for the response.
+    $timeout = 15;
     // spoofing FireFox 18.0
     $useragent="Mozilla/5.0 (Windows NT 5.1; rv:18.0) Gecko/20100101 Firefox/18.0";
 
@@ -50,7 +50,6 @@ function get_external_file($url)
 
         // only download page lesser than 4MB
         $data = @file_get_contents($url, false, $context, -1, 4000000); // We download at most 4 MB from source.
-        //  echo "<pre>http_response_header : ".print_r($http_response_header);
 
         if(isset($http_response_header) and isset($http_response_header[0])) {
             $httpcodeOK = isset($http_response_header) and isset($http_response_header[0]) and ((strpos($http_response_header[0], '200 OK') !== FALSE) or (strpos($http_response_header[0], '301 Moved Permanently') !== FALSE));
@@ -89,10 +88,10 @@ function get_external_file($url)
 /**
  * Préparation de l'URL avec récupération du contenu avant insertion en base
  */
-function prepare_url($url,$id)
+function prepare_url($url)
 {
     $parametres = array();
-    $url    = html_entity_decode(trim($url));
+    $url        = html_entity_decode(trim($url));
 
     // We remove the annoying parameters added by FeedBurner and GoogleFeedProxy (?utm_source=...)
     // from shaarli, by sebsauvage
@@ -100,7 +99,7 @@ function prepare_url($url,$id)
     $i=strpos($url,'?utm_source='); if ($i!==false) $url=substr($url,0,$i);
     $i=strpos($url,'#xtor=RSS-'); if ($i!==false) $url=substr($url,0,$i);
 
-    $title  = $url;
+    $title = $url;
     if (!preg_match('!^https?://!i', $url))
         $url = 'http://' . $url;
 
@@ -108,54 +107,55 @@ function prepare_url($url,$id)
     if (isset($html) and strlen($html) > 0)
     {
         $r = new Readability($html, $url);
+        $r->convertLinksToFootnotes = CONVERT_LINKS_FOOTNOTES;
         if($r->init())
         {
-            $content = $r->articleContent->innerHTML;  
+            $content = $r->articleContent->innerHTML;
             $parametres['title'] = $r->articleTitle->innerHTML;
-            $parametres['content']=base64_encode(gzdeflate(filtre_img($content, $url, $id)));
+            $parametres['content'] = $content;
             return $parametres;
         }
     }
 
-    return False;    
+    logm('error during url preparation');
+    return FALSE;
 }
 
-
-function filtre_img($content, $url, $id)
+/**
+ * On modifie les URLS des images dans le corps de l'article
+ */
+function filtre_picture($content, $url, $id)
 {
     $matches = array();
     preg_match_all('#<\s*(img)[^>]+src="([^"]*)"[^>]*>#Si', $content, $matches, PREG_SET_ORDER);
-    foreach($matches as $i => $link) 
+    foreach($matches as $i => $link)
     {
         $link[1] = trim($link[1]);
-
-        // ne conserve que les liens ne commençant pas par un protocole « protocole:// » ni par une ancre « # »
-        if (!preg_match('#^(([a-z]+://)|(\#))#', $link[1]) ) 
+        if (!preg_match('#^(([a-z]+://)|(\#))#', $link[1]) )
         {
-            //on récupere le chemin absolu pour télécharger l'image.
-            $absolutePath=rel2abs($link[2],$url); 
-            //on récupére le nom du fichier uniquement
-            $nameFileUrl = basename(parse_url($absolutePath,PHP_URL_PATH));
-            //on sauvegarde l'image
-            $rep=makeArchiveRep($id);
-            $fullpath = $rep.'/'.$nameFileUrl;
-            archiveImage($absolutePath,$fullpath);
-            // on remplace le lien originel, par le nouveau lien du dossier local.
+            $absolute_path = get_absolute_link($link[2],$url);
+            $filename = basename(parse_url($absolute_path, PHP_URL_PATH));
+            $directory = create_assets_directory($id);
+            $fullpath = $directory . '/' . $filename;
+            download_pictures($absolute_path, $fullpath);
             $content = str_replace($matches[$i][2], $fullpath, $content);
         }
 
     }
+
     return $content;
 }
 
-//renvoie le lien absolu
-function rel2abs($lien_rel, $url)
+/**
+ * Retourne le lien absolu
+ */
+function get_absolute_link($relative_link, $url)
 {
     /* return if already absolute URL */
-    if (parse_url($lien_rel, PHP_URL_SCHEME) != '') return $lien_rel;
+    if (parse_url($relative_link, PHP_URL_SCHEME) != '') return $relative_link;
 
     /* queries and anchors */
-    if ($lien_rel[0]=='#' || $lien_rel[0]=='?') return $url.$lien_rel;
+    if ($relative_link[0]=='#' || $relative_link[0]=='?') return $url . $relative_link;
 
     /* parse base URL and convert to local variables:
        $scheme, $host, $path */
@@ -165,10 +165,10 @@ function rel2abs($lien_rel, $url)
     $path = preg_replace('#/[^/]*$#', '', $path);
 
     /* destroy path if relative url points to root */
-    if ($lien_rel[0] == '/') $path = '';
+    if ($relative_link[0] == '/') $path = '';
 
     /* dirty absolute URL */
-    $abs = "$host$path/$lien_rel";
+    $abs = $host . $path . '/' . $relative_link;
 
     /* replace '//' or '/./' or '/foo/../' with '/' */
     $re = array('#(/\.?/)#', '#/(?!\.\.)[^/]+/\.\./#');
@@ -178,47 +178,59 @@ function rel2abs($lien_rel, $url)
     return $scheme.'://'.$abs;
 }
 
-//archive les images en provenance du site
-function archiveImage($img_absolue,$fullpath)
+/**
+ * Téléchargement des images
+ */
+
+function download_pictures($absolute_path, $fullpath)
 {
-    $rawdata=get_external_file($img_absolue);
-    
-    if(file_exists($fullpath))
-    {
+    $rawdata = get_external_file($absolute_path);
+
+    if(file_exists($fullpath)) {
         unlink($fullpath);
     }
-    $fp = fopen($fullpath,'x');
+    $fp = fopen($fullpath, 'x');
     fwrite($fp, $rawdata);
-    fclose($fp); 
+    fclose($fp);
 }
 
-// crée un répertoire unique par lien, pour archiver les images.
-function makeArchiveRep($rep)
+/**
+ * Crée un répertoire de médias pour l'article
+ */
+function create_assets_directory($id)
 {
-    $exterPath=ABS_PATH;
-    if(!is_dir($exterPath)){mkdir($exterPath,0705);}
-    $exterPathRep=$exterPath.$rep;
-    if(!is_dir($exterPathRep)){mkdir($exterPathRep,0705);}
-    return $exterPathRep;
+    $assets_path = ABS_PATH;
+    if(!is_dir($assets_path)) {
+        mkdir($assets_path, 0705);
+    }
+
+    $article_directory = $assets_path . $id;
+    if(!is_dir($article_directory)) {
+        mkdir($article_directory, 0705);
+    }
+
+    return $article_directory;
 }
 
-//supprime le répertoire si on supprime le lien.
-function delArchiveRep($rep)
+/**
+ * Suppression du répertoire d'images
+ */
+function remove_directory($directory)
 {
-    if(is_dir($rep))
-    {
-   $files = array_diff(scandir($rep), array('.','..'));
-    foreach ($files as $file) {
-      (is_dir("$rep/$file")) ? delTree("$rep/$file") : unlink("$rep/$file");
+    if(is_dir($directory)) {
+        $files = array_diff(scandir($directory), array('.','..'));
+        foreach ($files as $file) {
+            (is_dir("$directory/$file")) ? remove_directory("$directory/$file") : unlink("$directory/$file");
+        }
+        return rmdir($directory);
     }
-    return rmdir($rep);
-    }
-} 
+}
 
 /**
  * Appel d'une action (mark as fav, archive, delete)
  */
-function action_to_do($action, $url,$id)
+
+function action_to_do($action, $url, $id = 0)
 {
     global $db;
 
@@ -227,24 +239,29 @@ function action_to_do($action, $url,$id)
         case 'add':
             if ($url == '')
                 continue;
-            //on crée un id
-            $req = $db->getHandle()->query("SELECT id FROM entries ORDER BY id DESC");
-            $id = $req->fetchColumn()+1;
 
-            if($parametres_url = prepare_url($url, $id))
-            {
-                $sql_action     = 'INSERT INTO entries ( id, url, title, content ) VALUES (?,?, ?, ?)';
-                $params_action  = array($id,$url, $parametres_url['title'], $parametres_url['content']);
+            if($parametres_url = prepare_url($url)) {
+                $sql_action     = 'INSERT INTO entries ( url, title, content ) VALUES (?, ?, ?)';
+                $params_action  = array($url, $parametres_url['title'], $parametres_url['content']);
             }
-            else
-            {
-                continue;
-            }
+
+            logm('add link ' . $url);
             break;
         case 'delete':
-            delArchiveRep(ABS_PATH.$id);
+            remove_directory(ABS_PATH . $id);
             $sql_action     = "DELETE FROM entries WHERE id=?";
             $params_action  = array($id);
+            logm('delete link #' . $id);
+            break;
+        case 'toggle_fav' :
+            $sql_action     = "UPDATE entries SET is_fav=~is_fav WHERE id=?";
+            $params_action  = array($id);
+            logm('mark as favorite link #' . $id);
+            break;
+        case 'toggle_archive' :
+            $sql_action     = "UPDATE entries SET is_read=~is_read WHERE id=?";
+            $params_action  = array($id);
+            logm('archive link #' . $id);
             break;
         default:
             break;
@@ -257,33 +274,63 @@ function action_to_do($action, $url,$id)
         {
             $query = $db->getHandle()->prepare($sql_action);
             $query->execute($params_action);
+            # if we add a link, we have to download pictures
+            if ($action == 'add') {
+                $last_id = $db->getHandle()->lastInsertId();
+                if (DOWNLOAD_PICTURES) {
+                    $content        = filtre_picture($parametres_url['content'], $url, $last_id);
+                    $sql_update     = "UPDATE entries SET content=? WHERE id=?";
+                    $params_update  = array($content, $last_id);
+                    $query_update   = $db->getHandle()->prepare($sql_update);
+                    $query_update->execute($params_update);
+                }
+            }
         }
     }
     catch (Exception $e)
     {
-        die('action query error : '.$e->getMessage());
+        logm('action query error : '.$e->getMessage());
     }
 }
 
 /**
  * Détermine quels liens afficher : home, fav ou archives
  */
-function display_view($view)
+function get_entries($view)
 {
     global $db;
+
+    switch ($_SESSION['sort'])
+    {
+        case 'ia':
+            $order = 'ORDER BY id';
+            break;
+        case 'id':
+            $order = 'ORDER BY id DESC';
+            break;
+        case 'ta':
+            $order = 'ORDER BY lower(title)';
+            break;
+        case 'td':
+            $order = 'ORDER BY lower(title) DESC';
+            break;
+        default:
+            $order = 'ORDER BY id';
+            break;
+    }
 
     switch ($view)
     {
         case 'archive':
-            $sql    = "SELECT * FROM entries WHERE is_read=? ORDER BY id desc";
+            $sql    = "SELECT * FROM entries WHERE is_read=? " . $order;
             $params = array(-1);
             break;
         case 'fav' :
-            $sql    = "SELECT * FROM entries WHERE is_fav=? ORDER BY id desc";
+            $sql    = "SELECT * FROM entries WHERE is_fav=? " . $order;
             $params = array(-1);
             break;
         default:
-            $sql    = "SELECT * FROM entries WHERE is_read=? ORDER BY id desc";
+            $sql    = "SELECT * FROM entries WHERE is_read=? " . $order;
             $params = array(0);
             break;
     }
@@ -297,7 +344,7 @@ function display_view($view)
     }
     catch (Exception $e)
     {
-        die('view query error : '.$e->getMessage());
+        logm('view query error : '.$e->getMessage());
     }
 
     return $entries;
@@ -323,8 +370,14 @@ function get_article($id)
     }
     catch (Exception $e)
     {
-        die('query error : '.$e->getMessage());
+        logm('get article query error : '.$e->getMessage());
     }
 
     return $entry;
+}
+
+function logm($message)
+{
+    $t = strval(date('Y/m/d_H:i:s')).' - '.$_SERVER["REMOTE_ADDR"].' - '.strval($message)."\n";
+    file_put_contents('./log.txt',$t,FILE_APPEND);
 }

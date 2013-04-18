@@ -32,6 +32,21 @@ header {
     color: #F1F1F1;
 }
 
+#main ul#sort {
+    padding: 0;
+    list-style-type: none;
+    text-align: center;
+}
+
+#main ul#sort li {
+    display: inline;
+    font-size: 0.9em;
+}
+
+#main ul#sort img:hover {
+    cursor: pointer;
+}
+
 #main, #article {
     margin: 0 auto;
 }
@@ -47,16 +62,15 @@ header {
     color: #F1F1F1;
 }
 
-#content {
-    width: 800px;
-    margin: 0 auto;
-}
-
-
 footer {
     text-align: right;
 }
 
+/*** ***/
+/*** LOGIN FORM ***/
+ul#login li {
+    list-style-type: none;
+}
 /*** ***/
 /*** LINKS DISPLAY ***/
 
@@ -65,23 +79,26 @@ footer {
     cursor: pointer;
 }
 
+input[type=submit].delete {
+    background : url('../img/remove.png') no-repeat center center;
+    width : 16px;
+    height :16px;
+    border : none;
+    color : transparent;
+    cursor: pointer;
+    font-size : 0;
+}
+
 #main #content {
     margin-top: 20px;
 }
 
 #main .entrie {
     color: rgb(46, 46, 46);
-    position:relative;
     background-color: #ffffff;
     padding: 15px;
     min-height: 8em;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-    -webkit-box-shadow:  0px 0px 2px -1px #000;
-    box-shadow:  0px 0px 2px -1px #000;
-    width: 30%;
-    margin: 10px;
-    float: left;
+    border: 1px solid;
 }
 
 #main .entrie h2 a {
@@ -92,20 +109,34 @@ footer {
     color: #F5BE00;
 }
 
-#main .entrie .tools {
-    position:absolute;
-    bottom: 0;
-    width: 100%;
+.tools {
     text-align: right;
-    margin-left: -20px;
+}
+
+.tools ul {
+    padding: 0; margin: 0;
+    list-style-type: none;
+}
+
+.tools ul li {
+    line-height: 20px;
+}
+
+.tools a.tool {
+    cursor: pointer;
 }
 
 #article .tools {
+    position: relative;
     display: inline;
+    top: 0px;
+    right: 0px;
+    width: 100%;
+    text-align: left;
 }
 
-#article .tools a.tool {
-    cursor: pointer;
+#article.tools ul li{
+    display: inline;
 }
 
 #main .entrie .tools a.tool span, #article .tools a.tool span {
@@ -115,39 +146,35 @@ footer {
 }
 
 a.fav span {
-    background: url('../img/fav-on.png') no-repeat;
+    background: url('../img/star-on.png') no-repeat;
 }
 
 a.fav span:hover {
-    background: url('../img/fav-off.png') no-repeat;
+    background: url('../img/star-off.png') no-repeat;
 }
 
 a.fav-off span {
-    background: url('../img/fav-off.png') no-repeat;
+    background: url('../img/star-off.png') no-repeat;
 }
 
 a.fav-off span:hover {
-    background: url('../img/fav-on.png') no-repeat;
+    background: url('../img/star-on.png') no-repeat;
 }
 
 a.archive span {
-    background: url('../img/archive-on.png') no-repeat;
+    background: url('../img/checkmark-on.png') no-repeat;
 }
 
 a.archive span:hover {
-    background: url('../img/archive-off.png') no-repeat;
+    background: url('../img/checkmark-off.png') no-repeat;
 }
 
 a.archive-off span {
-    background: url('../img/archive-off.png') no-repeat;
+    background: url('../img/checkmark-off.png') no-repeat;
 }
 
 a.archive-off span:hover {
-    background: url('../img/archive-on.png') no-repeat;
-}
-
-a.delete span {
-    background: url('../img/delete.png') no-repeat;
+    background: url('../img/checkmark-on.png') no-repeat;
 }
 
 /*** ***/
@@ -182,24 +209,27 @@ body.article {
 }
 
 /*** ***/
+
 #main
 {
     max-width: 60em; /* 960 px */
     margin: 0 auto;
 }
-    #content
-    {
-        width: 103.125%; /* 990px */
-        overflow: hidden;
-        margin-left: -1.562%; /* 15px */
-        margin-bottom: -1.875em; /* 30px */
-    }
-        .entrie
-        {
-            width: 30.303%; /* 300px */
-            float: left;
-            margin: 0 1.515% 1.875em; /* 15px 30px */
-        }
+#content
+{
+    width: 103.125%; /* 990px */
+    overflow: hidden;
+    margin-left: -1.562%; /* 15px */
+    margin-bottom: -1.875em; /* 30px */
+}
+
+.entrie
+{
+    width: 30.303%; /* 300px */
+    background-color: #fff;
+    float: left;
+    margin: 0 1.515% 1.875em; /* 15px 30px */
+}
 
 @media only screen and ( max-width: 40em ) /* 640px */
 {
@@ -209,17 +239,21 @@ body.article {
         margin-bottom: 0.938em; /* 15px */
     }
 }
-@media only screen and ( max-width: 20em ) /* 640px */
+
+@media only screen and ( max-width: 20em ) /* 320px */
 {
     #content
     {
         width: 100%;
         margin-left: 0;
     }
-        .entrie
-        {
-            width: 100%;
-            margin-left: 0;
-            margin-right: 0;
-        }
+
+    .entrie
+    {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
 }
+
+

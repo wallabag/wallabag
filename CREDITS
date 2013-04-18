@@ -2,11 +2,15 @@ poche is based on :
 * ReadItYourself http://www.memiks.fr/readityourself/
 * PHP Readability http://www.keyvan.net/2010/08/php-readability/
 * Encoding https://github.com/neitanod/forceutf8
-
-The logo is made by Brightmix http://www.iconfinder.com/icondetails/43256/128/jeans_monotone_pocket_icon
+* logo by Brightmix http://www.iconfinder.com/icondetails/43256/128/jeans_monotone_pocket_icon
+* icons http://icomoon.io
+* PHP Simple HTML DOM Parser (for Pocket import) http://simplehtmldom.sourceforge.net/
+* Session https://github.com/tontof/kriss_feed/blob/master/src/class/Session.php
 
 poche is developed by Nicolas Lœuillet under the Do What the Fuck You Want to Public License
 
 Contributors :
 Nicolas Lœuillet aka nico_somb
 Tom.C. aka tmos
+PeaceCopathe
+Gregoire_M
