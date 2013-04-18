@@ -29,26 +29,8 @@ else {
             $a = $li->find('a');
             $url = $a[0]->href;
 
-            # FIXME corriger cette génération d'ID
-            $req = $db->getHandle()->query("SELECT id FROM entries ORDER BY id DESC");
-            $id = $req->fetchColumn()+1;
 
-            $parametres_url = prepare_url($url, $id);
-            $sql_action     = 'INSERT INTO entries ( url, title, content, is_read ) VALUES (?, ?, ?, ?)';
-            $params_action  = array($url, $parametres_url['title'], $parametres_url['content'], $read);
-            try
-            {
-                # action query
-                if (isset($sql_action))
-                {
-                    $query = $db->getHandle()->prepare($sql_action);
-                    $query->execute($params_action);
-                }
-            }
-            catch (Exception $e)
-            {
-                logm('error during pocket import : ' . $e->getMessage());
-            }
+            action_to_do('add', $url, $token);
         }
         # Pocket génère un fichier HTML avec deux <ul>
         # Le premier concerne les éléments non lus

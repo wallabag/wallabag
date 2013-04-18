@@ -14,6 +14,7 @@ if (!is_dir('db/')) {
 
 define ('DB_PATH', 'sqlite:./db/poche.sqlite');
 define ('ABS_PATH', 'assets/');
+define ('CONVERT_LINKS_FOOTNOTES', TRUE);
 define ('DOWNLOAD_PICTURES', TRUE);
 
 include 'db.php';
@@ -50,5 +51,5 @@ $url                = (isset ($_GET['url'])) ? $_GET['url'] : '';
 $token              = (isset ($_REQUEST['token'])) ? $_REQUEST['token'] : '';
 
 if ($action != '') {
-    action_to_do($action, $id, $url, $token);
+    action_to_do($action, $url, $token, $id);
 }

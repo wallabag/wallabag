@@ -88,7 +88,7 @@ function get_external_file($url)
 /**
  * Préparation de l'URL avec récupération du contenu avant insertion en base
  */
-function prepare_url($url, $id)
+function prepare_url($url)
 {
     $parametres = array();
     $url    = html_entity_decode(trim($url));
@@ -107,14 +107,11 @@ function prepare_url($url, $id)
     if (isset($html) and strlen($html) > 0)
     {
         $r = new Readability($html, $url);
-        $r->convertLinksToFootnotes = TRUE;
+        $r->convertLinksToFootnotes = CONVERT_LINKS_FOOTNOTES;
         if($r->init())
         {
             $content = $r->articleContent->innerHTML;
             $parametres['title'] = $r->articleTitle->innerHTML;
-            if (DOWNLOAD_PICTURES) {
-                $content = filtre_picture($content, $url, $id);
-            }
             $parametres['content'] = $content;
             return $parametres;
         }
@@ -233,7 +230,7 @@ function remove_directory($directory)
  * Appel d'une action (mark as fav, archive, delete)
  */
 
-function action_to_do($action, $id, $url, $token)
+function action_to_do($action, $url, $token, $id = 0)
 {
     global $db;
 
@@ -243,13 +240,9 @@ function action_to_do($action, $id, $url, $token)
             if ($url == '')
                 continue;
 
-            # FIXME corriger cette génération d'ID
-            $req = $db->getHandle()->query("SELECT id FROM entries ORDER BY id DESC");
-            $id = $req->fetchColumn()+1;
-
-            if($parametres_url = prepare_url($url, $id)) {
-                $sql_action     = 'INSERT INTO entries ( id, url, title, content ) VALUES (?,?, ?, ?)';
-                $params_action  = array($id,$url, $parametres_url['title'], $parametres_url['content']);
+            if($parametres_url = prepare_url($url)) {
+                $sql_action     = 'INSERT INTO entries ( url, title, content ) VALUES (?, ?, ?)';
+                $params_action  = array($url, $parametres_url['title'], $parametres_url['content']);
             }
 
             logm('add link ' . $url);
@@ -290,6 +283,17 @@ function action_to_do($action, $id, $url, $token)
         {
             $query = $db->getHandle()->prepare($sql_action);
             $query->execute($params_action);
+            # if we add a link, we have to download pictures
+            if ($action == 'add') {
+                $last_id = $db->getHandle()->lastInsertId();
+                if (DOWNLOAD_PICTURES) {
+                    $content        = filtre_picture($parametres_url['content'], $url, $last_id);
+                    $sql_update     = "UPDATE entries SET content=? WHERE id=?";
+                    $params_update  = array($content, $last_id);
+                    $query_update   = $db->getHandle()->prepare($sql_update);
+                    $query_update->execute($params_update);
+                }
+            }
         }
     }
     catch (Exception $e)
