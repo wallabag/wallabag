@@ -7,7 +7,7 @@ The website of poche is [inthepoche.com](http://inthepoche.com).
 
 To get news from poche, [follow us on twitter](http://twitter.com/getpoche).
 
-[If you want to flattr poche, it's here.](https://flattr.com/thing/1225780/nicosombpoche-on-GitHub)
+[![flattr](http://api.flattr.com/button/flattr-badge-large.png)](http://flattr.com/thing/1265480/poche-a-read-it-later-open-source-system)
 
 ## Usage
 You can easily add a "poched" page with the bookmarklet.
