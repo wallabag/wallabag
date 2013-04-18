@@ -1,4 +1,21 @@
-{include="head"}
+<!DOCTYPE html>
+<!--[if lte IE 6]> <html class="no-js ie6 ie67 ie678" lang="en"> <![endif]-->
+<!--[if lte IE 7]> <html class="no-js ie7 ie67 ie678" lang="en"> <![endif]-->
+<!--[if IE 8]> <html class="no-js ie8 ie678" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=10">
+        <title>{$title}</title>
+        <link rel="shortcut icon" type="image/x-icon" href="./img/favicon.ico" />
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="./img/apple-touch-icon-144x144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="./img/apple-touch-icon-72x72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="./img/apple-touch-icon-precomposed.png">
+        <link rel="stylesheet" href="./css/knacss.css" media="all">
+        <link rel="stylesheet" href="./css/style.css" media="all">
+    </head>
     <body class="article">
         <div id="article" class="w600p">
         	<div class="backhome">
@@ -6,9 +23,9 @@
         	</div>
             <div class="tools">
                 <ul>
-                    <li><a title="toggle mark as read" class="tool archive {if="$is_read == '0'"}archive-off{/if}" onclick="toggle_archive(this, {$id}, '{$token}')"><span></span></a></li>
-                    <li><a title="toggle favorite" class="tool fav {if="$is_fav == '0'"}fav-off{/if}" onclick="toggle_favorite(this, {$id}, '{$token}')"><span></span></a></li>
-                    <li><form method="post" onsubmit="return confirm('Are you sure?')" style="display: inline;" action="index.php"><input type="hidden" name="token" id="token" value="{$token}" /><input type="hidden" id="action" name="action" value="delete" /><input type="hidden" id="id" name="id" value="{$id}" /><input type="submit" class="delete" title="toggle delete" /></form></li>
+                    <li><a title="toggle mark as read" class="tool archive {if="$is_read == '0'"}archive-off{/if}" onclick="toggle_archive(this, {$id}, '<?php echo Session::getToken(); ?>')"><span></span></a></li>
+                    <li><a title="toggle favorite" class="tool fav {if="$is_fav == '0'"}fav-off{/if}" onclick="toggle_favorite(this, {$id}, '<?php echo Session::getToken(); ?>')"><span></span></a></li>
+                    <li><form method="post" onsubmit="return confirm('Are you sure?')" style="display: inline;" action="index.php"><input type="hidden" name="token" id="token" value="<?php echo Session::getToken(); ?>" /><input type="hidden" id="action" name="action" value="delete" /><input type="hidden" id="id" name="id" value="{$id}" /><input type="submit" class="delete" title="toggle delete" /></form></li>
                 </ul>
             </div>
             <header class="mbm">
@@ -25,7 +42,12 @@
                 <a href="index.php" title="back to home">&larr;</a>
             </div>
         </div>
-        {include="footer"}
+
         {include="js"}
+
+        <footer class="mr2 mt3 smaller">
+            <p>powered by <a href="http://inthepoche.com">poche</a><br />follow us on <a href="https://twitter.com/getpoche" title="follow us on twitter">twitter</a></p>
+        </footer>
+
     </body>
 </html>

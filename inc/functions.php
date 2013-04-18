@@ -91,7 +91,7 @@ function get_external_file($url)
 function prepare_url($url)
 {
     $parametres = array();
-    $url    = html_entity_decode(trim($url));
+    $url        = html_entity_decode(trim($url));
 
     // We remove the annoying parameters added by FeedBurner and GoogleFeedProxy (?utm_source=...)
     // from shaarli, by sebsauvage
@@ -99,7 +99,7 @@ function prepare_url($url)
     $i=strpos($url,'?utm_source='); if ($i!==false) $url=substr($url,0,$i);
     $i=strpos($url,'#xtor=RSS-'); if ($i!==false) $url=substr($url,0,$i);
 
-    $title  = $url;
+    $title = $url;
     if (!preg_match('!^https?://!i', $url))
         $url = 'http://' . $url;
 
@@ -230,7 +230,7 @@ function remove_directory($directory)
  * Appel d'une action (mark as fav, archive, delete)
  */
 
-function action_to_do($action, $url, $token, $id = 0)
+function action_to_do($action, $url, $id = 0)
 {
     global $db;
 
@@ -248,29 +248,20 @@ function action_to_do($action, $url, $token, $id = 0)
             logm('add link ' . $url);
             break;
         case 'delete':
-            if (verif_token($token)) {
-                remove_directory(ABS_PATH . $id);
-                $sql_action     = "DELETE FROM entries WHERE id=?";
-                $params_action  = array($id);
-                logm('delete link #' . $id);
-            }
-            else logm('csrf problem while deleting entry');
+            remove_directory(ABS_PATH . $id);
+            $sql_action     = "DELETE FROM entries WHERE id=?";
+            $params_action  = array($id);
+            logm('delete link #' . $id);
             break;
         case 'toggle_fav' :
-            if (verif_token($token)) {
-                $sql_action     = "UPDATE entries SET is_fav=~is_fav WHERE id=?";
-                $params_action  = array($id);
-                logm('mark as favorite link #' . $id);
-            }
-            else logm('csrf problem while fav entry');
+            $sql_action     = "UPDATE entries SET is_fav=~is_fav WHERE id=?";
+            $params_action  = array($id);
+            logm('mark as favorite link #' . $id);
             break;
         case 'toggle_archive' :
-            if (verif_token($token)) {
-                $sql_action     = "UPDATE entries SET is_read=~is_read WHERE id=?";
-                $params_action  = array($id);
-                logm('archive link #' . $id);
-            }
-            else logm('csrf problem while archive entry');
+            $sql_action     = "UPDATE entries SET is_read=~is_read WHERE id=?";
+            $params_action  = array($id);
+            logm('archive link #' . $id);
             break;
         default:
             break;
@@ -305,7 +296,7 @@ function action_to_do($action, $url, $token, $id = 0)
 /**
  * Détermine quels liens afficher : home, fav ou archives
  */
-function display_view($view)
+function get_entries($view)
 {
     global $db;
 
@@ -383,36 +374,6 @@ function get_article($id)
     }
 
     return $entry;
-}
-
-/**
- * Vérifie si le jeton passé en $_POST correspond à celui en session
- */
-function verif_token($token)
-{
-    if(isset($_SESSION['token_poche']) && isset($_SESSION['token_time_poche']) && isset($token))
-    {
-        if($_SESSION['token_poche'] == $token)
-        {
-            $old_timestamp = time() - (15*60);
-            if($_SESSION['token_time_poche'] >= $old_timestamp)
-            {
-                return TRUE;
-            }
-            else {
-                session_destroy();
-                logm('session expired');
-            }
-        }
-        else {
-            logm('token error : the token is different');
-            return FALSE;
-        }
-    }
-    else {
-        logm('token error : the token is not here');
-        return FALSE;
-    }
 }
 
 function logm($message)

@@ -24,7 +24,6 @@ if(!empty($id)) {
         $tpl->assign('is_fav', $entry[0]['is_fav']);
         $tpl->assign('is_read', $entry[0]['is_read']);
         $tpl->assign('load_all_js', 0);
-        $tpl->assign('token', $_SESSION['token_poche']);
         $tpl->draw('view');
     }
     else {

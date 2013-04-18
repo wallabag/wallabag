@@ -62,16 +62,15 @@ header {
     color: #F1F1F1;
 }
 
-/*#content {
-    width: 800px;
-    margin: 0 auto;
-}*/
-
-
 footer {
     text-align: right;
 }
 
+/*** ***/
+/*** LOGIN FORM ***/
+ul#login li {
+    list-style-type: none;
+}
 /*** ***/
 /*** LINKS DISPLAY ***/
 

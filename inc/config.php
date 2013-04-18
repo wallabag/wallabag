@@ -22,10 +22,12 @@ include 'functions.php';
 require_once 'Readability.php';
 require_once 'Encoding.php';
 require_once 'rain.tpl.class.php';
+require_once 'MyTool.class.php';
+require_once 'Session.class.php';
 
 $db = new db(DB_PATH);
 
-# Initialisation de RainTPL
+# initialisation de RainTPL
 raintpl::$tpl_dir   = './tpl/';
 raintpl::$cache_dir = './cache/';
 raintpl::$base_url  = get_poche_url();
@@ -33,13 +35,43 @@ raintpl::configure('path_replace', false);
 raintpl::configure('debug', false);
 $tpl = new raintpl();
 
-# Démarrage session et initialisation du jeton de sécurité
-session_start();
+# initialize session
+Session::init();
+# XSRF protection with token
+if (!empty($_POST)) {
+    if (!Session::isToken($_POST['token'])) {
+        die('Wrong token.');
+    }
+    unset($_SESSION['tokens']);
+}
 
-if (!isset($_SESSION['token_poche'])) {
-    $token = md5(uniqid(rand(), TRUE));
-    $_SESSION['token_poche'] = $token;
-    $_SESSION['token_time_poche'] = time();
+$ref = empty($_SERVER['HTTP_REFERER']) ? '' : $_SERVER['HTTP_REFERER'];
+
+if (isset($_GET['login'])) {
+    // Login
+    if (!empty($_POST['login']) && !empty($_POST['password'])) {
+        if (Session::login('poche', 'poche', $_POST['login'], $_POST['password'])) {
+            if (!empty($_POST['longlastingsession'])) {
+                $_SESSION['longlastingsession'] = 31536000;
+                $_SESSION['expires_on'] = time() + $_SESSION['longlastingsession'];
+                session_set_cookie_params($_SESSION['longlastingsession']);
+            } else {
+                session_set_cookie_params(0); // when browser closes
+            }
+            session_regenerate_id(true);
+
+            MyTool::redirect();
+        }
+        logm('login failed');
+        die("Login failed !");
+    } else {
+        logm('login successful');
+    }
+}
+elseif (isset($_GET['logout'])) {
+    logm('logout');
+    Session::logout();
+    MyTool::redirect();
 }
 
 # Traitement des paramètres et déclenchement des actions
@@ -48,8 +80,12 @@ $action             = (isset ($_REQUEST['action'])) ? htmlentities($_REQUEST['ac
 $_SESSION['sort']   = (isset ($_REQUEST['sort'])) ? htmlentities($_REQUEST['sort']) : 'id';
 $id                 = (isset ($_REQUEST['id'])) ? htmlspecialchars($_REQUEST['id']) : '';
 $url                = (isset ($_GET['url'])) ? $_GET['url'] : '';
-$token              = (isset ($_REQUEST['token'])) ? $_REQUEST['token'] : '';
+
+$tpl->assign('isLogged', Session::isLogged());
+$tpl->assign('referer', $ref);
+$tpl->assign('view', $view);
+$tpl->assign('poche_url', get_poche_url());
 
 if ($action != '') {
-    action_to_do($action, $url, $token, $id);
+    action_to_do($action, $url, $id);
 }

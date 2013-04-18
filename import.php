@@ -30,7 +30,7 @@ else {
             $url = $a[0]->href;
 
 
-            action_to_do('add', $url, $token);
+            action_to_do('add', $url);
             if ($read == '1') {
                 $last_id = $db->getHandle()->lastInsertId();
                 $sql_update     = "UPDATE entries SET is_read=~is_read WHERE id=?";

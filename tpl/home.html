@@ -1,16 +1,12 @@
-    <body>
-        <header>
-            <h1><img src="./img/logo.png" alt="logo poche" />poche</h1>
-        </header>
-        <div id="main">
             <ul id="links">
                 <li><a href="index.php" {if="$view == 'index'"}class="current"{/if}>home</a></li>
                 <li><a href="?view=fav" {if="$view == 'fav'"}class="current"{/if}>favorites</a></li>
                 <li><a href="?view=archive" {if="$view == 'archive'"}class="current"{/if}>archive</a></li>
                 <li><a style="cursor: move" title="i am a bookmarklet, use me !" href="javascript:(function(){var%20url%20=%20location.href%20||%20url;window.open('{$poche_url}?action=add&url='%20+%20encodeURIComponent(url),'_self');})();">poche it !</a></li>
+                <li><a href="?logout" title="Logout">logout</a></li>
             </ul>
             <ul id="sort">
-                <li><img src="img/up.png" onclick="sort_links('{$view}', 'ia', '{$token}');" title="by date asc" /> by date <img src="img/down.png" onclick="sort_links('{$view}', 'id', '{$token}');" title="by date desc" /></li>
-                <li><img src="img/up.png" onclick="sort_links('{$view}', 'ta', '{$token}');" title="by title asc" /> by title <img src="img/down.png" onclick="sort_links('{$view}', 'td', '{$token}');" title="by title desc" /></li>
+                <li><img src="img/up.png" onclick="sort_links('{$view}', 'ia', '{'<?php echo Session::getToken(); ?>'}');" title="by date asc" /> by date <img src="img/down.png" onclick="sort_links('{$view}', 'id', '<?php echo Session::getToken(); ?>');" title="by date desc" /></li>
+                <li><img src="img/up.png" onclick="sort_links('{$view}', 'ta', '<?php echo Session::getToken(); ?>');" title="by title asc" /> by title <img src="img/down.png" onclick="sort_links('{$view}', 'td', '<?php echo Session::getToken(); ?>');" title="by title desc" /></li>
             </ul>
             <div id="content">
