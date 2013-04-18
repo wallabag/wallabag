@@ -1,13 +1,21 @@
             <form method="post" action="?login" name="loginform">
-            <fieldset>
-            <h2>login to your poche</h2>
-            <ul id="login">
-                <li><label for="login">Login</label> <input type="text" id="login" name="login" placeholder="Login" tabindex="1"></li>
-                <li><label for="password">Password</label> <input type="password" id="password" name="password" placeholder="Password" tabindex="2"></li>
-                <li><label><input type="checkbox" name="longlastingsession" tabindex="3">&nbsp;Stay signed in (Do not check on public computers)</label></li>
-                <li><button type="submit" tabindex="4">Sign in</button></li>
-            </ul>
-            </fieldset>
-            <input type="hidden" name="returnurl" value="<?php echo htmlspecialchars($referer);?>">
-            <input type="hidden" name="token" value="<?php echo Session::getToken(); ?>">
+                <fieldset>
+                    <h2>login to your poche</h2>
+                    <ul id="login">
+                        <li>
+                            <label for="login">Login</label> <input type="text" id="login" name="login" placeholder="Login" tabindex="1">
+                        </li>
+                        <li>
+                            <label for="password">Password</label> <input type="password" id="password" name="password" placeholder="Password" tabindex="2">
+                        </li>
+                        <li>
+                            <label><input type="checkbox" name="longlastingsession" tabindex="3">&nbsp;Stay signed in (Do not check on public computers)</label>
+                        </li>
+                        <li>
+                            <button type="submit" tabindex="4">Sign in</button>
+                        </li>
+                    </ul>
+                </fieldset>
+                <input type="hidden" name="returnurl" value="<?php echo htmlspecialchars($referer);?>">
+                <input type="hidden" name="token" value="<?php echo Session::getToken(); ?>">
             </form>
