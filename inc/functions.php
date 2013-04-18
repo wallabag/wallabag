@@ -240,6 +240,7 @@ function action_to_do($action, $id, $url, $token)
             if ($url == '')
                 continue;
 
+            # FIXME corriger cette génération d'ID
             $req = $db->getHandle()->query("SELECT id FROM entries ORDER BY id DESC");
             $id = $req->fetchColumn()+1;
 

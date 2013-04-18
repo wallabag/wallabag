@@ -28,7 +28,12 @@ else {
         {
             $a = $li->find('a');
             $url = $a[0]->href;
-            $parametres_url = prepare_url($url);
+
+            # FIXME corriger cette génération d'ID
+            $req = $db->getHandle()->query("SELECT id FROM entries ORDER BY id DESC");
+            $id = $req->fetchColumn()+1;
+
+            $parametres_url = prepare_url($url, $id);
             $sql_action     = 'INSERT INTO entries ( url, title, content, is_read ) VALUES (?, ?, ?, ?)';
             $params_action  = array($url, $parametres_url['title'], $parametres_url['content'], $read);
             try
