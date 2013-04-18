@@ -20,7 +20,7 @@ else {
     $html = new simple_html_dom();
     $html->load_file('ril_export.html');
 
-    $read = '0';
+    $read = 0;
     $errors = array();
     foreach($html->find('ul') as $ul)
     {
@@ -31,11 +31,18 @@ else {
 
 
             action_to_do('add', $url, $token);
+            if ($read == '1') {
+                $last_id = $db->getHandle()->lastInsertId();
+                $sql_update     = "UPDATE entries SET is_read=~is_read WHERE id=?";
+                $params_update  = array($last_id);
+                $query_update   = $db->getHandle()->prepare($sql_update);
+                $query_update->execute($params_update);
+            }
         }
         # Pocket génère un fichier HTML avec deux <ul>
         # Le premier concerne les éléments non lus
         # Le second concerne les éléments archivés
-        $read = '-1';
+        $read = 1;
     }
 
     echo 'Import from Pocket completed. <a href="index.php">Welcome to #poche !</a>';
