@@ -14,6 +14,7 @@ if (!is_dir('db/')) {
 
 define ('DB_PATH', 'sqlite:./db/poche.sqlite');
 define ('ABS_PATH', 'assets/');
+define ('DOWNLOAD_PICTURES', TRUE);
 
 include 'db.php';
 include 'functions.php';

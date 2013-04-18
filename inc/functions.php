@@ -112,7 +112,10 @@ function prepare_url($url, $id)
         {
             $content = $r->articleContent->innerHTML;
             $parametres['title'] = $r->articleTitle->innerHTML;
-            $parametres['content'] = filtre_picture($content, $url, $id);
+            if (DOWNLOAD_PICTURES) {
+                $content = filtre_picture($content, $url, $id);
+            }
+            $parametres['content'] = $content;
             return $parametres;
         }
     }
