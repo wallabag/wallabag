@@ -6,7 +6,7 @@
                 <li><a href="?logout" title="Logout">logout</a></li>
             </ul>
             <ul id="sort">
-                <li><img src="img/up.png" onclick="sort_links('{$view}', 'ia', '{'<?php echo Session::getToken(); ?>'}');" title="by date asc" /> by date <img src="img/down.png" onclick="sort_links('{$view}', 'id', '<?php echo Session::getToken(); ?>');" title="by date desc" /></li>
-                <li><img src="img/up.png" onclick="sort_links('{$view}', 'ta', '<?php echo Session::getToken(); ?>');" title="by title asc" /> by title <img src="img/down.png" onclick="sort_links('{$view}', 'td', '<?php echo Session::getToken(); ?>');" title="by title desc" /></li>
+                <li><img src="img/up.png" onclick="sort_links('{$view}', 'ia');" title="by date asc" /> by date <img src="img/down.png" onclick="sort_links('{$view}', 'id');" title="by date desc" /></li>
+                <li><img src="img/up.png" onclick="sort_links('{$view}', 'ta');" title="by title asc" /> by title <img src="img/down.png" onclick="sort_links('{$view}', 'td');" title="by title desc" /></li>
             </ul>
             <div id="content">

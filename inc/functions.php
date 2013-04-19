@@ -226,10 +226,55 @@ function remove_directory($directory)
     }
 }
 
+function display_view($view, $id = 0, $full_head = 'yes')
+{
+    global $tpl;
+
+    switch ($view)
+    {
+        case 'view':
+            $entry = get_article($id);
+
+            if ($entry != NULL) {
+                $tpl->assign('id', $entry[0]['id']);
+                $tpl->assign('url', $entry[0]['url']);
+                $tpl->assign('title', $entry[0]['title']);
+                $tpl->assign('content', $entry[0]['content']);
+                $tpl->assign('is_fav', $entry[0]['is_fav']);
+                $tpl->assign('is_read', $entry[0]['is_read']);
+                $tpl->assign('load_all_js', 0);
+                $tpl->draw('view');
+            }
+            else {
+                logm('error in view call : entry is NULL');
+            }
+
+            logm('view link #' . $id);
+            break;
+        default: # home view
+            $entries = get_entries($view);
+
+            $tpl->assign('entries', $entries);
+
+            if ($full_head == 'yes') {
+                $tpl->assign('load_all_js', 1);
+                $tpl->draw('head');
+                $tpl->draw('home');
+            }
+
+            $tpl->draw('entries');
+
+            if ($full_head == 'yes') {
+                $tpl->draw('js');
+                $tpl->draw('footer');
+            }
+            break;
+    }
+}
+
 /**
  * Appel d'une action (mark as fav, archive, delete)
  */
-
 function action_to_do($action, $url, $id = 0)
 {
     global $db;

@@ -1,16 +1,16 @@
-function toggle_favorite(element, id, token) {
+function toggle_favorite(element, id) {
     $(element).toggleClass('fav-off');
     $.ajax ({
         url: "index.php?action=toggle_fav",
-        data:{id:id, token:token}
+        data:{id:id}
     });
 }
 
-function toggle_archive(element, id, token, view_article) {
+function toggle_archive(element, id, view_article) {
     $(element).toggleClass('archive-off');
     $.ajax ({
         url: "index.php?action=toggle_archive",
-        data:{id:id, token:token}
+        data:{id:id}
     });
     var obj = $('#entry-'+id);
 
@@ -22,6 +22,9 @@ function toggle_archive(element, id, token, view_article) {
     }
 }
 
-function sort_links(view, sort, token) {
-    $('#content').load('process.php', { view: view, sort: sort, token: token } );
+function sort_links(view, sort) {
+    //$('#content').load('index.php', { view: view, sort: sort, full_head: 'no' } );
+    $.get('index.php', { view: view, sort: sort, full_head: 'no' }, function(data) {
+      $('#content').html(data);
+    });
 }

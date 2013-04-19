@@ -93,7 +93,7 @@ class Session
     // Force logout
     public static function logout()
     {
-        unset($_SESSION['uid'],$_SESSION['info'],$_SESSION['expires_on']);
+        unset($_SESSION['uid'],$_SESSION['info'],$_SESSION['expires_on'],$_SESSION['tokens']);
     }
 
     // Make sure user is logged in.

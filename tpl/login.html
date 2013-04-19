@@ -1,3 +1,4 @@
+{include="head"}
             <form method="post" action="?login" name="loginform">
                 <fieldset>
                     <h2>login to your poche</h2>
@@ -19,3 +20,4 @@
                 <input type="hidden" name="returnurl" value="<?php echo htmlspecialchars($referer);?>">
                 <input type="hidden" name="token" value="<?php echo Session::getToken(); ?>">
             </form>
+{include="footer"}
