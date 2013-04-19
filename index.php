@@ -17,12 +17,20 @@ $tpl->assign('entries', $entries);
 $tpl->assign('load_all_js', 1);
 
 $tpl->draw('head');
-if (Session::isLogged()) {
-    $tpl->draw('home');
-    $tpl->draw('entries');
-    $tpl->draw('js');
+if (Session::isInstall(CONFIG_PATH))
+{
+	if (Session::isLogged()) {
+	    $tpl->draw('home');
+	    $tpl->draw('entries');
+	    $tpl->draw('js');
+	}
+	else {
+	    $tpl->draw('login');
+	}
 }
-else {
-    $tpl->draw('login');
+else
+{
+	install();
+	$tpl->draw('install');
 }
 $tpl->draw('footer');

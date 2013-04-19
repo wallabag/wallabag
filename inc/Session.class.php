@@ -96,6 +96,7 @@ class Session
         unset($_SESSION['uid'],$_SESSION['info'],$_SESSION['expires_on']);
     }
 
+
     // Make sure user is logged in.
     public static function isLogged()
     {
@@ -132,5 +133,25 @@ class Session
             return true; // Token is ok.
         }
         return false; // Wrong token, or already used.
+    }
+
+    public static function isInstall($configPath)
+    {
+            return is_file($configPath);
+    }
+
+    public static function writeConfig($configPath, $setlogin, $setpassword)
+    {
+        $login = $setlogin;
+        $salt = sha1(uniqid('',true).'_'.mt_rand()); // Salt renders rainbow-tables attacks useless.
+        $hash = sha1($setpassword.$login.$salt);
+
+        $config='<?php define (\'LOGIN\','.var_export($login,true).'); define(\'HASH\','.var_export($hash,true).'); define(\'SALT\','.var_export($salt,true).'); ?>';
+
+        if (!file_put_contents($configPath,$config) || strcmp(file_get_contents($configPath),$config)!=0)
+        {
+           return False;
+        }
+        return True;
     }
 }

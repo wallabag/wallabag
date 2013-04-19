@@ -12,18 +12,23 @@ if (!is_dir('db/')) {
     @mkdir('db/',0705);
 }
 
+
+
 define ('DB_PATH', 'sqlite:./db/poche.sqlite');
 define ('ABS_PATH', 'assets/');
+define ('CONFIG_PATH', 'db/user_config.php');
 define ('CONVERT_LINKS_FOOTNOTES', TRUE);
 define ('DOWNLOAD_PICTURES', TRUE);
 
 include 'db.php';
 include 'functions.php';
+@include CONFIG_PATH;
 require_once 'Readability.php';
 require_once 'Encoding.php';
 require_once 'rain.tpl.class.php';
 require_once 'MyTool.class.php';
 require_once 'Session.class.php';
+
 
 $db = new db(DB_PATH);
 
@@ -50,7 +55,7 @@ $ref = empty($_SERVER['HTTP_REFERER']) ? '' : $_SERVER['HTTP_REFERER'];
 if (isset($_GET['login'])) {
     // Login
     if (!empty($_POST['login']) && !empty($_POST['password'])) {
-        if (Session::login('poche', 'poche', $_POST['login'], $_POST['password'])) {
+        if (Session::login(LOGIN, HASH, $_POST['login'], sha1($_POST['password'].$_POST['login'].SALT))) {
             if (!empty($_POST['longlastingsession'])) {
                 $_SESSION['longlastingsession'] = 31536000;
                 $_SESSION['expires_on'] = time() + $_SESSION['longlastingsession'];
@@ -89,3 +94,18 @@ $tpl->assign('poche_url', get_poche_url());
 if ($action != '') {
     action_to_do($action, $url, $id);
 }
+
+
+/**
+ * Installation
+ */
+function install()
+{
+    if (Session::isInstall(CONFIG_PATH)) die('You are not authorized to alter config.');
+    if (!empty($_POST['setlogin']) && !empty($_POST['setpassword']))
+    {
+       if(!Session::writeConfig(CONFIG_PATH,$_POST['setlogin'],$_POST['setpassword']))die('Poche could not create the config file. Please make sure Poche has the right to write in the folder is it installed in.');
+       MyTool::redirect();
+    }   
+}
+
