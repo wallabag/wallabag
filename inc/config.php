@@ -13,7 +13,6 @@ if (!is_dir('db/')) {
 }
 
 
-
 define ('DB_PATH', 'sqlite:./db/poche.sqlite');
 define ('ABS_PATH', 'assets/');
 define ('CONFIG_PATH', 'db/user_config.php');
@@ -28,7 +27,6 @@ require_once 'Encoding.php';
 require_once 'rain.tpl.class.php';
 require_once 'MyTool.class.php';
 require_once 'Session.class.php';
-
 
 $db = new db(DB_PATH);
 
@@ -55,7 +53,9 @@ $ref = empty($_SERVER['HTTP_REFERER']) ? '' : $_SERVER['HTTP_REFERER'];
 if (isset($_GET['login'])) {
     // Login
     if (!empty($_POST['login']) && !empty($_POST['password'])) {
-        if (Session::login(LOGIN, HASH, $_POST['login'], sha1($_POST['password'].$_POST['login'].SALT))) {
+        $login=$_POST['login'];
+        $password=sha1($_POST['password'].$_POST['login'].SALT);
+        if (Session::login(LOGIN, HASH, $login, $password)) {
             if (!empty($_POST['longlastingsession'])) {
                 $_SESSION['longlastingsession'] = 31536000;
                 $_SESSION['expires_on'] = time() + $_SESSION['longlastingsession'];
@@ -101,7 +101,7 @@ if ($action != '') {
  */
 function install()
 {
-    if (Session::isInstall(CONFIG_PATH)) die('You are not authorized to alter config.');
+    if (Session::isInstall(CONFIG_PATH)) die('You are not authorized to install.');
     if (!empty($_POST['setlogin']) && !empty($_POST['setpassword']))
     {
        if(!Session::writeConfig(CONFIG_PATH,$_POST['setlogin'],$_POST['setpassword']))die('Poche could not create the config file. Please make sure Poche has the right to write in the folder is it installed in.');
