@@ -8,6 +8,8 @@
  * @license    http://www.wtfpl.net/ see COPYING file
  */
 
+define ('POCHE_VERSION', '0.1');
+
 if (!is_dir('db/')) {
     @mkdir('db/',0705);
 }
