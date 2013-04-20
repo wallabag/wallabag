@@ -18,6 +18,7 @@ define ('DB_PATH', 'sqlite:./db/poche.sqlite');
 define ('ABS_PATH', 'assets/');
 define ('CONVERT_LINKS_FOOTNOTES', TRUE);
 define ('DOWNLOAD_PICTURES', TRUE);
+define ('INSTALL_PATH', 'db/user_config.php');
 
 include 'db.php';
 include 'functions.php';
@@ -36,3 +37,11 @@ raintpl::$base_url  = get_poche_url();
 raintpl::configure('path_replace', false);
 raintpl::configure('debug', false);
 $tpl = new raintpl();
+
+# on essaye d'inclure le fichier qui contient le mot de passe.
+if(!@include INSTALL_PATH)
+{
+	install();
+	$tpl->draw('install');
+    exit();
+}
