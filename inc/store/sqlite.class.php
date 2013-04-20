@@ -94,10 +94,10 @@ class Sqlite extends Store {
         return $entries;
     }
 
-    public function add() {
+    public function add($url, $title, $content) {
         parent::__construct();
         $sql_action     = 'INSERT INTO entries ( url, title, content ) VALUES (?, ?, ?)';
-        $params_action  = array($url, $parametres_url['title'], $parametres_url['content']);
+        $params_action  = array($url, $title, $content);
         $query          = $this->executeQuery($sql_action, $params_action);
     }
 
