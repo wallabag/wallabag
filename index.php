@@ -23,7 +23,9 @@ if (!empty($_POST)) {
 if (isset($_GET['login'])) {
     // Login
     if (!empty($_POST['login']) && !empty($_POST['password'])) {
-        if (Session::login('poche', 'poche', $_POST['login'], $_POST['password'])) {
+        $login=$_POST['login'];
+        $password=sha1($_POST['password'].$_POST['login'].SALT);
+       if (Session::login(LOGIN, HASH, $login, $password)) {
             logm('login successful');
             if (!empty($_POST['longlastingsession'])) {
                 $_SESSION['longlastingsession'] = 31536000;

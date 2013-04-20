@@ -426,3 +426,16 @@ function logm($message)
     $t = strval(date('Y/m/d_H:i:s')).' - '.$_SERVER["REMOTE_ADDR"].' - '.strval($message)."\n";
     file_put_contents('./log.txt',$t,FILE_APPEND);
 }
+
+function install()
+{
+    if (!empty($_POST['setlogin']) && !empty($_POST['setpassword']))
+    {
+        $login=$_POST['setlogin'];
+        $salt=sha1(uniqid('',true).'_'.mt_rand()); // Un salt différent par installation.
+        $hash=sha1($_POST['setpassword'].$login.$salt);
+        $install_content='<?php define (\'LOGIN\','.var_export($login,true).'); define(\'HASH\','.var_export($hash,true).'); define(\'SALT\','.var_export($salt,true).'); ?>';
+        file_put_contents(INSTALL_PATH,$install_content);
+        MyTool::redirect();
+    }
+}
