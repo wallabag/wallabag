@@ -2,7 +2,6 @@
                 <li><a href="index.php" {if="$view == 'index'"}class="current"{/if}>home</a></li>
                 <li><a href="?view=fav" {if="$view == 'fav'"}class="current"{/if}>favorites</a></li>
                 <li><a href="?view=archive" {if="$view == 'archive'"}class="current"{/if}>archive</a></li>
-                <li><a href="#" id="themeswitch">dark</a></li>
                 <li><a style="cursor: move" title="i am a bookmarklet, use me !" href="javascript:(function(){var%20url%20=%20location.href%20||%20url;window.open('{$poche_url}?action=add&url='%20+%20encodeURIComponent(url),'_self');})();">poche it !</a></li>
                 <li><a href="?logout" title="Logout">logout</a></li>
             </ul>
