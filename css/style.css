@@ -1,15 +1,9 @@
 /*** GENERAL ***/
 body {
-    color: #222222;
     font: 20px/1.3em Palatino,Georgia,serif;
-    background-color: #F1F1F1;
     margin: 10px;
 }
 
-
-a, a:hover, a:visited {
-    color: #000;
-}
 
 header {
     text-align: center;
@@ -28,8 +22,6 @@ header {
 #main ul#links li a.current {
     -webkit-border-radius: 2px;
     border-radius: 2px;
-    background-color: #040707;
-    color: #F1F1F1;
 }
 
 #main ul#sort {
@@ -58,8 +50,6 @@ header {
 #links a:hover, .backhome a:hover{
     -webkit-border-radius: 2px;
     border-radius: 2px;
-    background-color: #040707;
-    color: #F1F1F1;
 }
 
 footer {
@@ -80,11 +70,9 @@ ul#login li {
 }
 
 input[type=submit].delete {
-    background : url('../img/remove.png') no-repeat center center;
     width : 16px;
     height :16px;
     border : none;
-    color : transparent;
     cursor: pointer;
     font-size : 0;
 }
@@ -94,8 +82,6 @@ input[type=submit].delete {
 }
 
 #main .entrie {
-    color: rgb(46, 46, 46);
-    background-color: #ffffff;
     padding: 15px;
     min-height: 8em;
     border: 1px solid;
@@ -103,10 +89,6 @@ input[type=submit].delete {
 
 #main .entrie h2 a {
     text-decoration: none;
-}
-
-#main .entrie h2 a:hover {
-    color: #F5BE00;
 }
 
 .tools {
@@ -145,62 +127,23 @@ input[type=submit].delete {
     height: 16px;
 }
 
-a.fav span {
-    background: url('../img/star-on.png') no-repeat;
-}
-
-a.fav span:hover {
-    background: url('../img/star-off.png') no-repeat;
-}
-
-a.fav-off span {
-    background: url('../img/star-off.png') no-repeat;
-}
-
-a.fav-off span:hover {
-    background: url('../img/star-on.png') no-repeat;
-}
-
-a.archive span {
-    background: url('../img/checkmark-on.png') no-repeat;
-}
-
-a.archive span:hover {
-    background: url('../img/checkmark-off.png') no-repeat;
-}
-
-a.archive-off span {
-    background: url('../img/checkmark-off.png') no-repeat;
-}
-
-a.archive-off span:hover {
-    background: url('../img/checkmark-on.png') no-repeat;
-}
 
 /*** ***/
 /*** ARTICLE PAGE ***/
 
 body.article {
-    color: #222222;
     font: 20px/1.3em Palatino,Georgia,serif;
-    background-color: #F1F1F1;
 }
 
 #article header {
     text-align: left;
-    border-bottom: 1px solid #222222;
 }
 
 #article header a {
     text-decoration: none;
 }
 
-#article article {
-    border-bottom: 1px solid #222222;
-}
-
 .vieworiginal a {
-    color: #888888;
     text-decoration: none;
 }
 
