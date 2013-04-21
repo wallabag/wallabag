@@ -17,6 +17,10 @@ class Store {
 
     }
 
+    public function retrieveAll() {
+        
+    }
+
     public function retrieveOneById($id) {
 
     }

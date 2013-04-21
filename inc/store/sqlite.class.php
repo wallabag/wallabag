@@ -38,6 +38,14 @@ class Sqlite extends Store {
         }
     }
 
+    public function retrieveAll() {
+        $sql        = "SELECT * FROM entries ORDER BY id";
+        $query      = $this->executeQuery($sql, array());
+        $entries    = $query->fetchAll();
+
+        return $entries;
+    }
+
     public function retrieveOneById($id) {
         parent::__construct();
 

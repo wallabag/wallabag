@@ -232,6 +232,12 @@ function display_view($view, $id = 0, $full_head = 'yes')
 
     switch ($view)
     {
+        case 'export':
+            $entries = $store->retrieveAll();
+            $tpl->assign('export', json_encode($entries));
+            $tpl->draw('export');
+            logm('export view');
+            break;
         case 'config':
             $tpl->assign('load_all_js', 0);
             $tpl->draw('head');
@@ -240,7 +246,7 @@ function display_view($view, $id = 0, $full_head = 'yes')
             $tpl->draw('js');
             $tpl->draw('footer');
             logm('config view');
-        break;
+            break;
         case 'view':
             $entry = $store->retrieveOneById($id);
 
