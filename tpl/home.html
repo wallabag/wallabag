@@ -1,3 +1,8 @@
+    <body class="light-style">
+        <header>
+            <h1><img src="./img/logo.png" alt="logo poche" />poche</h1>
+        </header>
+        <div id="main">
             <ul id="links">
                 <li><a href="index.php" {if="$view == 'index'"}class="current"{/if}>home</a></li>
                 <li><a href="?view=fav" {if="$view == 'fav'"}class="current"{/if}>favorites</a></li>
@@ -9,4 +14,3 @@
                 <li><img src="img/up.png" onclick="sort_links('{$view}', 'ia');" title="by date asc" /> by date <img src="img/down.png" onclick="sort_links('{$view}', 'id');" title="by date desc" /></li>
                 <li><img src="img/up.png" onclick="sort_links('{$view}', 'ta');" title="by title asc" /> by title <img src="img/down.png" onclick="sort_links('{$view}', 'td');" title="by title desc" /></li>
             </ul>
-            <div id="content">
