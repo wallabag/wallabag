@@ -23,7 +23,6 @@ function toggle_archive(element, id, view_article) {
 }
 
 function sort_links(view, sort) {
-    //$('#content').load('index.php', { view: view, sort: sort, full_head: 'no' } );
     $.get('index.php', { view: view, sort: sort, full_head: 'no' }, function(data) {
       $('#content').html(data);
     });

@@ -232,6 +232,15 @@ function display_view($view, $id = 0, $full_head = 'yes')
 
     switch ($view)
     {
+        case 'config':
+            $tpl->assign('load_all_js', 0);
+            $tpl->draw('head');
+            $tpl->draw('home');
+            $tpl->draw('config');
+            $tpl->draw('js');
+            $tpl->draw('footer');
+            logm('config view');
+        break;
         case 'view':
             $entry = $store->retrieveOneById($id);
 
