@@ -1,4 +1,12 @@
 <?php
+/**
+ * poche, a read it later open source system
+ *
+ * @category   poche
+ * @author     Nicolas Lœuillet <support@inthepoche.com>
+ * @copyright  2013
+ * @license    http://www.wtfpl.net/ see COPYING file
+ */
 
 /**
  * Permet de générer l'URL de poche pour le bookmarklet
@@ -117,6 +125,7 @@ function prepare_url($url)
         }
     }
 
+    $msg->add('e', 'error during url preparation');
     logm('error during url preparation');
     return FALSE;
 }
@@ -228,20 +237,35 @@ function remove_directory($directory)
 
 function display_view($view, $id = 0, $full_head = 'yes')
 {
-    global $tpl;
+    global $tpl, $store, $msg;
 
     switch ($view)
     {
+        case 'export':
+            $entries = $store->retrieveAll();
+            $tpl->assign('export', myTool::renderJson($entries));
+            $tpl->draw('export');
+            logm('export view');
+            break;
+        case 'config':
+            $tpl->assign('load_all_js', 0);
+            $tpl->draw('head');
+            $tpl->draw('home');
+            $tpl->draw('config');
+            $tpl->draw('js');
+            $tpl->draw('footer');
+            logm('config view');
+            break;
         case 'view':
-            $entry = get_article($id);
+            $entry = $store->retrieveOneById($id);
 
             if ($entry != NULL) {
-                $tpl->assign('id', $entry[0]['id']);
-                $tpl->assign('url', $entry[0]['url']);
-                $tpl->assign('title', $entry[0]['title']);
-                $tpl->assign('content', $entry[0]['content']);
-                $tpl->assign('is_fav', $entry[0]['is_fav']);
-                $tpl->assign('is_read', $entry[0]['is_read']);
+                $tpl->assign('id', $entry['id']);
+                $tpl->assign('url', $entry['url']);
+                $tpl->assign('title', $entry['title']);
+                $tpl->assign('content', $entry['content']);
+                $tpl->assign('is_fav', $entry['is_fav']);
+                $tpl->assign('is_read', $entry['is_read']);
                 $tpl->assign('load_all_js', 0);
                 $tpl->draw('view');
             }
@@ -252,7 +276,7 @@ function display_view($view, $id = 0, $full_head = 'yes')
             logm('view link #' . $id);
             break;
         default: # home view
-            $entries = get_entries($view);
+            $entries = $store->getEntriesByView($view);
 
             $tpl->assign('entries', $entries);
 
@@ -277,7 +301,7 @@ function display_view($view, $id = 0, $full_head = 'yes')
  */
 function action_to_do($action, $url, $id = 0)
 {
-    global $db;
+    global $store, $msg;
 
     switch ($action)
     {
@@ -285,140 +309,42 @@ function action_to_do($action, $url, $id = 0)
             if ($url == '')
                 continue;
 
-            if($parametres_url = prepare_url($url)) {
-                $sql_action     = 'INSERT INTO entries ( url, title, content ) VALUES (?, ?, ?)';
-                $params_action  = array($url, $parametres_url['title'], $parametres_url['content']);
+            if (MyTool::isUrl($url)) {
+                if($parametres_url = prepare_url($url)) {
+                    $store->add($url, $parametres_url['title'], $parametres_url['content']);
+                    $last_id = $store->getLastId();
+                    if (DOWNLOAD_PICTURES) {
+                        $content = filtre_picture($parametres_url['content'], $url, $last_id);
+                    }
+                    $msg->add('s', 'the link has been added successfully');
+                }
+            }
+            else {
+                $msg->add('e', 'the link has been added successfully');
+                logm($url . ' is not a valid url');
             }
 
             logm('add link ' . $url);
             break;
         case 'delete':
             remove_directory(ABS_PATH . $id);
-            $sql_action     = "DELETE FROM entries WHERE id=?";
-            $params_action  = array($id);
+            $store->deleteById($id);
+            $msg->add('s', 'the link has been deleted successfully');
             logm('delete link #' . $id);
             break;
         case 'toggle_fav' :
-            $sql_action     = "UPDATE entries SET is_fav=~is_fav WHERE id=?";
-            $params_action  = array($id);
+            $store->favoriteById($id);
+            $msg->add('s', 'the favorite toggle has been done successfully');
             logm('mark as favorite link #' . $id);
             break;
         case 'toggle_archive' :
-            $sql_action     = "UPDATE entries SET is_read=~is_read WHERE id=?";
-            $params_action  = array($id);
+            $store->archiveById($id);
+            $msg->add('s', 'the archive toggle has been done successfully');
             logm('archive link #' . $id);
             break;
         default:
             break;
     }
-
-    try
-    {
-        # action query
-        if (isset($sql_action))
-        {
-            $query = $db->getHandle()->prepare($sql_action);
-            $query->execute($params_action);
-            # if we add a link, we have to download pictures
-            if ($action == 'add') {
-                $last_id = $db->getHandle()->lastInsertId();
-                if (DOWNLOAD_PICTURES) {
-                    $content        = filtre_picture($parametres_url['content'], $url, $last_id);
-                    $sql_update     = "UPDATE entries SET content=? WHERE id=?";
-                    $params_update  = array($content, $last_id);
-                    $query_update   = $db->getHandle()->prepare($sql_update);
-                    $query_update->execute($params_update);
-                }
-            }
-        }
-    }
-    catch (Exception $e)
-    {
-        logm('action query error : '.$e->getMessage());
-    }
-}
-
-/**
- * Détermine quels liens afficher : home, fav ou archives
- */
-function get_entries($view)
-{
-    global $db;
-
-    switch ($_SESSION['sort'])
-    {
-        case 'ia':
-            $order = 'ORDER BY id';
-            break;
-        case 'id':
-            $order = 'ORDER BY id DESC';
-            break;
-        case 'ta':
-            $order = 'ORDER BY lower(title)';
-            break;
-        case 'td':
-            $order = 'ORDER BY lower(title) DESC';
-            break;
-        default:
-            $order = 'ORDER BY id';
-            break;
-    }
-
-    switch ($view)
-    {
-        case 'archive':
-            $sql    = "SELECT * FROM entries WHERE is_read=? " . $order;
-            $params = array(-1);
-            break;
-        case 'fav' :
-            $sql    = "SELECT * FROM entries WHERE is_fav=? " . $order;
-            $params = array(-1);
-            break;
-        default:
-            $sql    = "SELECT * FROM entries WHERE is_read=? " . $order;
-            $params = array(0);
-            break;
-    }
-
-    # view query
-    try
-    {
-        $query  = $db->getHandle()->prepare($sql);
-        $query->execute($params);
-        $entries = $query->fetchAll();
-    }
-    catch (Exception $e)
-    {
-        logm('view query error : '.$e->getMessage());
-    }
-
-    return $entries;
-}
-
-/**
- * Récupère un article en fonction d'un ID
- */
-function get_article($id)
-{
-    global $db;
-
-    $entry  = NULL;
-    $sql    = "SELECT * FROM entries WHERE id=?";
-    $params = array(intval($id));
-
-    # view article query
-    try
-    {
-        $query  = $db->getHandle()->prepare($sql);
-        $query->execute($params);
-        $entry = $query->fetchAll();
-    }
-    catch (Exception $e)
-    {
-        logm('get article query error : '.$e->getMessage());
-    }
-
-    return $entry;
 }
 
 function logm($message)

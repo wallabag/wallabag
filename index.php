@@ -10,8 +10,8 @@
 
 include dirname(__FILE__).'/inc/config.php';
 
-# initialize session
-Session::init();
+myTool::initPhp();
+
 # XSRF protection with token
 if (!empty($_POST)) {
     if (!Session::isToken($_POST['token'])) {
@@ -19,6 +19,8 @@ if (!empty($_POST)) {
     }
     unset($_SESSION['tokens']);
 }
+
+$ref = empty($_SERVER['HTTP_REFERER']) ? '' : $_SERVER['HTTP_REFERER'];
 
 if (isset($_GET['login'])) {
     // Login
@@ -34,7 +36,7 @@ if (isset($_GET['login'])) {
             }
             session_regenerate_id(true);
 
-            MyTool::redirect();
+            MyTool::redirect($ref);
         }
         logm('login failed');
         die("Login failed !");
@@ -55,12 +57,11 @@ $action             = (isset ($_REQUEST['action'])) ? htmlentities($_REQUEST['ac
 $_SESSION['sort']   = (isset ($_REQUEST['sort'])) ? htmlentities($_REQUEST['sort']) : 'id';
 $id                 = (isset ($_REQUEST['id'])) ? htmlspecialchars($_REQUEST['id']) : '';
 $url                = (isset ($_GET['url'])) ? $_GET['url'] : '';
-$ref                = empty($_SERVER['HTTP_REFERER']) ? '' : $_SERVER['HTTP_REFERER'];
 
 $tpl->assign('isLogged', Session::isLogged());
 $tpl->assign('referer', $ref);
 $tpl->assign('view', $view);
-$tpl->assign('poche_url', get_poche_url());
+$tpl->assign('poche_url', myTool::getUrl());
 $tpl->assign('title', 'poche, a read it later open source system');
 
 if (Session::isLogged()) {

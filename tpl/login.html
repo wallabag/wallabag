@@ -1,4 +1,9 @@
 {include="head"}
+    <body class="light-style">
+        <header>
+            <h1><img src="./img/logo.png" alt="logo poche" />poche</h1>
+        </header>
+        <div id="main">
             <form method="post" action="?login" name="loginform">
                 <fieldset>
                     <h2>login to your poche</h2>
@@ -20,4 +25,7 @@
                 <input type="hidden" name="returnurl" value="<?php echo htmlspecialchars($referer);?>">
                 <input type="hidden" name="token" value="<?php echo Session::getToken(); ?>">
             </form>
+            <script type="text/javascript">
+            window.onload = document.loginform.login.focus();
+            </script>
 {include="footer"}

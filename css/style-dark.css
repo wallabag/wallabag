@@ -1,0 +1,90 @@
+/*** GENERAL ***/
+body {
+    color: #fff;
+    background-color: #0d0d0d;
+}
+
+a, a:hover, a:visited {
+    color: #fff;
+}
+
+#main ul#links li a.current {
+    background-color: #000;
+    color: #fff;
+}
+
+#links a:hover, .backhome a:hover{
+    background-color: #fff;
+    color: #000;
+}
+
+input[type=submit].delete {
+    background : url('../img/dark/remove.png') no-repeat center center;
+    color : transparent;
+}
+
+#main .entrie {
+    color: #fff;
+    background-color: #000;
+    border: 1px solid #fff;
+}
+
+#main .entrie h2 a:hover {
+    color: #29B1E3;
+}
+
+a.fav span {
+    background: url('../img/dark/star-on.png') no-repeat;
+}
+
+a.fav span:hover {
+    background: url('../img/dark/star-off.png') no-repeat;
+}
+
+a.fav-off span {
+    background: url('../img/dark/star-off.png') no-repeat;
+}
+
+a.fav-off span:hover {
+    background: url('../img/dark/star-on.png') no-repeat;
+}
+
+a.archive span {
+    background: url('../img/dark/checkmark-on.png') no-repeat;
+}
+
+a.archive span:hover {
+    background: url('../img/dark/checkmark-off.png') no-repeat;
+}
+
+a.archive-off span {
+    background: url('../img/dark/checkmark-off.png') no-repeat;
+}
+
+a.archive-off span:hover {
+    background: url('../img/dark/checkmark-on.png') no-repeat;
+}
+
+/*** ***/
+/*** ARTICLE PAGE ***/
+
+body.article {
+	color: #fff;
+    background-color: #0d0d0d;
+}
+
+#article header {
+    border-bottom: 1px solid #222222;
+}
+
+#article article {
+    border-bottom: 1px solid #222222;
+}
+
+.vieworiginal a {
+    color: #888888;
+}
+
+.entrie {
+    background-color: #fff;
+}
