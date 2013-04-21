@@ -11,6 +11,7 @@
 include dirname(__FILE__).'/inc/config.php';
 
 # initialize session
+myTool::initPhp();
 Session::init();
 # XSRF protection with token
 if (!empty($_POST)) {
@@ -61,7 +62,7 @@ $url                = (isset ($_GET['url'])) ? $_GET['url'] : '';
 $tpl->assign('isLogged', Session::isLogged());
 $tpl->assign('referer', $ref);
 $tpl->assign('view', $view);
-$tpl->assign('poche_url', get_poche_url());
+$tpl->assign('poche_url', myTool::getUrl());
 $tpl->assign('title', 'poche, a read it later open source system');
 
 if (Session::isLogged()) {

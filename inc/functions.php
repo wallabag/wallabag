@@ -1,4 +1,12 @@
 <?php
+/**
+ * poche, a read it later open source system
+ *
+ * @category   poche
+ * @author     Nicolas Lœuillet <support@inthepoche.com>
+ * @copyright  2013
+ * @license    http://www.wtfpl.net/ see COPYING file
+ */
 
 /**
  * Permet de générer l'URL de poche pour le bookmarklet
@@ -234,7 +242,7 @@ function display_view($view, $id = 0, $full_head = 'yes')
     {
         case 'export':
             $entries = $store->retrieveAll();
-            $tpl->assign('export', json_encode($entries));
+            $tpl->assign('export', myTool::renderJson($entries));
             $tpl->draw('export');
             logm('export view');
             break;
@@ -300,12 +308,17 @@ function action_to_do($action, $url, $id = 0)
             if ($url == '')
                 continue;
 
-            if($parametres_url = prepare_url($url)) {
-                $store->add($url, $parametres_url['title'], $parametres_url['content']);
-                $last_id = $store->getLastId();
-                if (DOWNLOAD_PICTURES) {
-                    $content = filtre_picture($parametres_url['content'], $url, $last_id);
+            if (MyTool::isUrl($url)) {
+                if($parametres_url = prepare_url($url)) {
+                    $store->add($url, $parametres_url['title'], $parametres_url['content']);
+                    $last_id = $store->getLastId();
+                    if (DOWNLOAD_PICTURES) {
+                        $content = filtre_picture($parametres_url['content'], $url, $last_id);
+                    }
                 }
+            }
+            else {
+                logm($url . ' is not a valid url');
             }
 
             logm('add link ' . $url);
