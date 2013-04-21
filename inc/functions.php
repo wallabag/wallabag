@@ -125,6 +125,7 @@ function prepare_url($url)
         }
     }
 
+    $msg->add('e', 'error during url preparation');
     logm('error during url preparation');
     return FALSE;
 }
@@ -236,7 +237,7 @@ function remove_directory($directory)
 
 function display_view($view, $id = 0, $full_head = 'yes')
 {
-    global $tpl, $store;
+    global $tpl, $store, $msg;
 
     switch ($view)
     {
@@ -300,7 +301,7 @@ function display_view($view, $id = 0, $full_head = 'yes')
  */
 function action_to_do($action, $url, $id = 0)
 {
-    global $store;
+    global $store, $msg;
 
     switch ($action)
     {
@@ -315,9 +316,11 @@ function action_to_do($action, $url, $id = 0)
                     if (DOWNLOAD_PICTURES) {
                         $content = filtre_picture($parametres_url['content'], $url, $last_id);
                     }
+                    $msg->add('s', 'the link has been added successfully');
                 }
             }
             else {
+                $msg->add('e', 'the link has been added successfully');
                 logm($url . ' is not a valid url');
             }
 
@@ -326,14 +329,17 @@ function action_to_do($action, $url, $id = 0)
         case 'delete':
             remove_directory(ABS_PATH . $id);
             $store->deleteById($id);
+            $msg->add('s', 'the link has been deleted successfully');
             logm('delete link #' . $id);
             break;
         case 'toggle_fav' :
             $store->favoriteById($id);
+            $msg->add('s', 'the favorite toggle has been done successfully');
             logm('mark as favorite link #' . $id);
             break;
         case 'toggle_archive' :
             $store->archiveById($id);
+            $msg->add('s', 'the archive toggle has been done successfully');
             logm('archive link #' . $id);
             break;
         default:

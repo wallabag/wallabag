@@ -10,9 +10,8 @@
 
 include dirname(__FILE__).'/inc/config.php';
 
-# initialize session
 myTool::initPhp();
-Session::init();
+
 # XSRF protection with token
 if (!empty($_POST)) {
     if (!Session::isToken($_POST['token'])) {

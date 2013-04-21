@@ -28,8 +28,12 @@ require_once 'Session.class.php';
 require_once 'store/store.class.php';
 require_once 'store/sqlite.class.php';
 require_once 'store/file.class.php';
+require_once 'class.messages.php';
 
-$store = new $storage_type();
+Session::init();
+
+$store 	= new $storage_type();
+$msg 	= new Messages();
 
 # initialisation de RainTPL
 raintpl::$tpl_dir   = './tpl/';
@@ -38,3 +42,4 @@ raintpl::$base_url  = get_poche_url();
 raintpl::configure('path_replace', false);
 raintpl::configure('debug', false);
 $tpl = new raintpl();
+$tpl->assign('msg', $msg);
