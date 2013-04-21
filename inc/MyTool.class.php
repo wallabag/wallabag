@@ -1,4 +1,13 @@
 <?php
+/**
+ * poche, a read it later open source system
+ *
+ * @category   poche
+ * @author     Nicolas Lœuillet <support@inthepoche.com>
+ * @copyright  2013
+ * @license    http://www.wtfpl.net/ see COPYING file
+ */
+ 
 class MyTool
 {
     public static function initPhp()
