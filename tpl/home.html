@@ -1,6 +1,6 @@
     <body class="light-style">
         <header>
-            <h1><img src="./img/logo.png" alt="logo poche" />poche</h1>
+            <h1><a href="/"><img src="./img/logo.png" alt="logo poche" /></a>poche</h1>
         </header>
         <div id="main">
             <ul id="links">
@@ -10,7 +10,7 @@
                 <li><a href="?view=config" {if="$view == 'config'"}class="current"{/if}>config</a></li>
                 <li><a href="?logout" title="Logout">logout</a></li>
             </ul>
-            {if condition="isset($entries)"} 
+            {if condition="isset($entries)"}
             <ul id="sort">
                 <li><img src="img/up.png" onclick="sort_links('{$view}', 'ia');" title="by date asc" /> by date <img src="img/down.png" onclick="sort_links('{$view}', 'id');" title="by date desc" /></li>
                 <li><img src="img/up.png" onclick="sort_links('{$view}', 'ta');" title="by title asc" /> by title <img src="img/down.png" onclick="sort_links('{$view}', 'td');" title="by title desc" /></li>
