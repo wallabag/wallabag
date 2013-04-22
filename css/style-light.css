@@ -8,6 +8,16 @@ a, a:hover, a:visited {
     color: #000;
 }
 
+.bouton {
+	background-color: #000;
+    color: #fff;
+    border: none;
+}
+.bouton:hover {
+	background-color: #040707;
+    color: #F1F1F1;
+}
+
 #main ul#links li a.current {
     background-color: #000;
     color: #fff;
