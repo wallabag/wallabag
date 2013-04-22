@@ -76,7 +76,8 @@ input[type=submit].delete {
 }
 
 #main #content {
-    margin-top: 20px;
+    margin: 1%;
+    width: 98%;
 }
 
 #main .entrie {
@@ -96,9 +97,11 @@ input[type=submit].delete {
 .tools ul {
     padding: 0; margin: 0;
     list-style-type: none;
+    display: inline;
 }
 
 .tools ul li {
+    display: inline;
     line-height: 20px;
 }
 
@@ -107,12 +110,12 @@ input[type=submit].delete {
 }
 
 #article .tools {
-    position: relative;
     display: inline;
-    top: 0px;
-    right: 0px;
+    margin: 10px;
+    position: absolute;
+    right: 0;
+    top: 0;
     width: 100%;
-    text-align: left;
 }
 
 #article .tools ul li{
