@@ -131,14 +131,11 @@ function prepare_url($url)
     {
         $r = new Readability($html, $url);
 		
-		error_log("BEFORE:".$html);
-		
-        //$r->convertLinksToFootnotes = CONVERT_LINKS_FOOTNOTES;
+        $r->convertLinksToFootnotes = CONVERT_LINKS_FOOTNOTES;
 		$r->revertForcedParagraphElements = REVERT_FORCED_PARAGRAPH_ELEMENTS;
 
         if($r->init())
         {
-			error_log("AFTER:".$r->articleContent->innerHTML);
             $content = $r->articleContent->innerHTML;
             $parametres['title'] = $r->articleTitle->innerHTML;
             $parametres['content'] = $content;
