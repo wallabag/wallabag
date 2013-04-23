@@ -27,6 +27,7 @@ if (isset($_GET['login'])) {
     if (!empty($_POST['login']) && !empty($_POST['password'])) {
         if (Session::login('poche', 'poche', $_POST['login'], $_POST['password'])) {
             logm('login successful');
+            $msg->add('s', 'welcome in your pocket!');
             if (!empty($_POST['longlastingsession'])) {
                 $_SESSION['longlastingsession'] = 31536000;
                 $_SESSION['expires_on'] = time() + $_SESSION['longlastingsession'];

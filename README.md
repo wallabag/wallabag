@@ -5,6 +5,8 @@ Abandon Pocket, Instapaper and other Readability service : adopt poche. It is th
 
 The website of poche is [inthepoche.com](http://inthepoche.com).
 
+To test poche, a demo website is online : [demo.inthepoche.com](http://demo.inthepoche.com) (login poche, password poche).
+
 To get news from poche, [follow us on twitter](http://twitter.com/getpoche) or [read the poche blog](http://inthepoche.com/blog).
 
 [![flattr](http://api.flattr.com/button/flattr-badge-large.png)](http://flattr.com/thing/1265480/poche-a-read-it-later-open-source-system)
