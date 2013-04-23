@@ -134,8 +134,7 @@ function prepare_url($url)
         $r = new Readability($html, $url);
 		
         $r->convertLinksToFootnotes = CONVERT_LINKS_FOOTNOTES;
-		$r->debug=true;
-		$r->revertForcedParagraphElements = REVERT_FORCED_PARAGRAPH_ELEMENTS;
+	$r->revertForcedParagraphElements = REVERT_FORCED_PARAGRAPH_ELEMENTS;
 
         if($r->init())
         {
