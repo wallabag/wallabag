@@ -125,8 +125,6 @@ function prepare_url($url)
         }
     }
 
-    $msg->add('e', 'error during url preparation');
-    logm('error during url preparation');
     return FALSE;
 }
 
@@ -311,26 +309,39 @@ function action_to_do($action, $url, $id = 0)
 
             if (MyTool::isUrl($url)) {
                 if($parametres_url = prepare_url($url)) {
-                    $store->add($url, $parametres_url['title'], $parametres_url['content']);
-                    $last_id = $store->getLastId();
-                    if (DOWNLOAD_PICTURES) {
-                        $content = filtre_picture($parametres_url['content'], $url, $last_id);
+                    if ($store->add($url, $parametres_url['title'], $parametres_url['content'])) {
+                        $last_id = $store->getLastId();
+                        if (DOWNLOAD_PICTURES) {
+                            $content = filtre_picture($parametres_url['content'], $url, $last_id);
+                        }
+                        $msg->add('s', 'the link has been added successfully');
                     }
-                    $msg->add('s', 'the link has been added successfully');
+                    else {
+                        $msg->add('e', 'error during insertion : the link wasn\'t added');
+                    }
+                }
+                else {
+                    $msg->add('e', 'error during url preparation : the link wasn\'t added');
+                    logm('error during url preparation');
                 }
             }
             else {
-                $msg->add('e', 'the link has been added successfully');
+                $msg->add('e', 'error during url preparation : the link is not valid');
                 logm($url . ' is not a valid url');
             }
 
             logm('add link ' . $url);
             break;
         case 'delete':
-            remove_directory(ABS_PATH . $id);
-            $store->deleteById($id);
-            $msg->add('s', 'the link has been deleted successfully');
-            logm('delete link #' . $id);
+            if ($store->deleteById($id)) {
+                remove_directory(ABS_PATH . $id);
+                $msg->add('s', 'the link has been deleted successfully');
+                logm('delete link #' . $id);
+            }
+            else {
+                $msg->add('e', 'the link wasn\'t deleted');
+                logm('error : can\'t delete link #' . $id);
+            }
             break;
         case 'toggle_fav' :
             $store->favoriteById($id);

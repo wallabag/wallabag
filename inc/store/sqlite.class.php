@@ -107,6 +107,7 @@ class Sqlite extends Store {
         $sql_action     = 'INSERT INTO entries ( url, title, content ) VALUES (?, ?, ?)';
         $params_action  = array($url, $title, $content);
         $query          = $this->executeQuery($sql_action, $params_action);
+        return $query;
     }
 
     public function deleteById($id) {
@@ -114,6 +115,7 @@ class Sqlite extends Store {
         $sql_action     = "DELETE FROM entries WHERE id=?";
         $params_action  = array($id);
         $query          = $this->executeQuery($sql_action, $params_action);
+        return $query;
     }
 
     public function favoriteById($id) {
