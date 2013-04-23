@@ -4,12 +4,9 @@ body {
     margin: 10px;
 }
 
+
 header {
     text-align: center;
-}
-
-.bouton {
-	border-radius: 2px;
 }
 
 #main ul#links {
@@ -60,6 +57,11 @@ footer {
 }
 
 /*** ***/
+/*** LOGIN FORM ***/
+ul#login li {
+    list-style-type: none;
+}
+/*** ***/
 /*** LINKS DISPLAY ***/
 
 #main a.tool {
@@ -76,8 +78,7 @@ input[type=submit].delete {
 }
 
 #main #content {
-    margin: 1%;
-    width: 98%;
+    margin-top: 20px;
 }
 
 #main .entrie {
@@ -97,11 +98,9 @@ input[type=submit].delete {
 .tools ul {
     padding: 0; margin: 0;
     list-style-type: none;
-    display: inline;
 }
 
 .tools ul li {
-    display: inline;
     line-height: 20px;
 }
 
@@ -110,15 +109,15 @@ input[type=submit].delete {
 }
 
 #article .tools {
+    position: relative;
     display: inline;
-    margin: 10px;
-    position: absolute;
-    right: 0;
-    top: 0;
+    top: 0px;
+    right: 0px;
     width: 100%;
+    text-align: left;
 }
 
-#article .tools ul li{
+#article.tools ul li{
     display: inline;
 }
 
@@ -209,7 +208,7 @@ body.article {
 .messages p { margin: 3px 0 3px 10px !important; padding: 0 10px 0 23px !important; font-size: 14px; line-height: 16px; }
 .messages.error { border: 1px solid #C42608; color: #c00 !important; background: #FFF0EF; }
 .messages.error p { background: url(../img/messages/cross.png ) no-repeat 0px 50%; color:#c00 !important; }
-.messages.success {background: #E0FBCC; border: 1px solid #6DC70C; }
+.messages.success {background: #E0FBCC; border: 1px solid #6DC70C; } 
 .messages.success p { background: url(../img/messages/tick.png) no-repeat 0px 50%; color: #2B6301 !important; }
 .messages.warning { background: #FFFCD3; border: 1px solid #EBCD41; color: #000; }
 .messages.warning p { background: url(../img/messages/warning.png ) no-repeat 0px 50%; color: #5F4E01; }
