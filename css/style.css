@@ -117,7 +117,7 @@ input[type=submit].delete {
     text-align: left;
 }
 
-#article .tools ul li{
+#article.tools ul li{
     display: inline;
 }
 
