@@ -110,8 +110,6 @@ function get_external_file($url)
  */
 function prepare_url($url)
 {
-    global $msg;
-
     $parametres = array();
     $url        = html_entity_decode(trim($url));
 
