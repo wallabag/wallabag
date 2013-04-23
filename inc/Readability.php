@@ -80,7 +80,7 @@ class Readability
 	public $debug = false;
 	protected $body = null; // 
 	protected $bodyCache = null; // Cache the body HTML in case we need to re-use it later
-	protected $flags = self::FLAG_CLEAN_CONDITIONALLY; // 1 | 2 | 4;   // Start with all flags set.
+	protected $flags =  Self::FLAG_CLEAN_CONDITIONALLY; // 1 | 2 | 4;   // Start with all flags set.
 	protected $success = false; // indicates whether we were able to extract or not
 	
 	/**
@@ -90,7 +90,7 @@ class Readability
 	public $regexps = array(
 		'unlikelyCandidates' => '/combx|comment|comments|community|disqus|extra|foot|header|menu|remark|rss|shoutbox|sidebar|sponsor|ad-break|agegate|pagination|pager|popup|tweet|twitter/i',
 		'okMaybeItsACandidate' => '/and|article|body|column|main|shadow/i',
-		'positive' => '/article|body|content|entry|hentry|main|page|pagination|post|text|blog|story/i',
+		'positive' => '/article|body|content|entry|hentry|main|page|pagination|post|text|blog|story|attachment/i',
 		'negative' => '/combx|comment|comments|com-|contact|foot|footer|footnote|masthead|media|meta|outbrain|promo|related|scroll|shoutbox|sidebar|sponsor|shopping|tags|tool|widget/i',
 		'divToPElements' => '/<(a|blockquote|dl|div|ol|p|pre|table|ul)/i',
 		'replaceBrs' => '/(<br[^>]*>[ \n\r\t]*){2,}/i',
@@ -106,7 +106,7 @@ class Readability
 	* Create instance of Readability
 	* @param string UTF-8 encoded string
 	* @param string (optional) URL associated with HTML (used for footnotes)
-	*/	
+	*/
 	function __construct($html, $url=null)
 	{
 		/* Turn all double br's into p's */
@@ -185,6 +185,7 @@ class Readability
 			$articleContent = $this->dom->createElement('div');
 			$articleContent->setAttribute('id', 'readability-content');
 			$articleContent->innerHTML = '<p>Sorry, Readability was unable to parse this page for content.</p>';		
+			return $this->success;
 		}
 		
 		$overlay->setAttribute('id', 'readOverlay');
