@@ -127,6 +127,12 @@ function prepare_url($url)
         $html = Encoding::toUTF8(get_external_file($url,15));
     }
 
+    if (function_exists('tidy_parse_string')) {
+        $tidy = tidy_parse_string($html, array(), 'UTF8');
+        $tidy->cleanRepair();
+        $html = $tidy->value;
+    }
+
     if (isset($html) and strlen($html) > 0)
     {
         $r = new Readability($html, $url);
@@ -279,7 +285,13 @@ function display_view($view, $id = 0, $full_head = 'yes')
                 $tpl->assign('id', $entry['id']);
                 $tpl->assign('url', $entry['url']);
                 $tpl->assign('title', $entry['title']);
-                $tpl->assign('content', $entry['content']);
+                $content = $entry['content'];
+                if (function_exists('tidy_parse_string')) {
+                    $tidy = tidy_parse_string($content, array('indent'=>true, 'show-body-only' => true), 'UTF8');
+                    $tidy->cleanRepair();
+                    $content = $tidy->value;
+                }
+                $tpl->assign('content', $content);
                 $tpl->assign('is_fav', $entry['is_fav']);
                 $tpl->assign('is_read', $entry['is_read']);
                 $tpl->assign('load_all_js', 0);
