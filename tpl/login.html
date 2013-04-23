@@ -1,31 +1,33 @@
 {include="head"}
     <body class="light-style">
         <header>
-            <h1><img src="./img/logo.png" alt="logo poche" />poche</h1>
+            <h1><a href="index.php"><img src="./img/logo.png" alt="logo poche" /></a>poche</h1>
         </header>
         <div id="main">
             <form method="post" action="?login" name="loginform">
-                <fieldset>
-                    <h2>login to your poche</h2>
-                    <ul id="login">
-                        <li>
-                            <label for="login">Login</label> <input type="text" id="login" name="login" placeholder="Login" tabindex="1">
-                        </li>
-                        <li>
-                            <label for="password">Password</label> <input type="password" id="password" name="password" placeholder="Password" tabindex="2">
-                        </li>
-                        <li>
-                            <label><input type="checkbox" name="longlastingsession" tabindex="3">&nbsp;Stay signed in (Do not check on public computers)</label>
-                        </li>
-                        <li>
-                            <button type="submit" tabindex="4">Sign in</button>
-                        </li>
-                    </ul>
+                <fieldset class="w500p center">
+                    <h2 class="mbs txtcenter">login to your poche</h2>
+					<div class="row">
+						<label class="col w150p" for="login">Login</label>
+						<input class="col" type="text" id="login" name="login" placeholder="Login" tabindex="1" autofocus />
+					</div>
+					<div class="row">
+						<label class="col w150p" for="password" >Password</label>
+						<input class="col" type="password" id="password" name="password" placeholder="Password" tabindex="2">
+					</div>
+					<div class="row">
+						<label class="col w150p">Stay signed in</label>
+						<div class="col">
+							<input type="checkbox" name="longlastingsession" tabindex="3">
+							<small class="inbl">(Do not check on public computers)</small>
+						</div>
+					</div>
+					<div class="row mts txtcenter">
+						<button class="bouton" type="submit" tabindex="4">Sign in</button>
+					</div>
                 </fieldset>
                 <input type="hidden" name="returnurl" value="<?php echo htmlspecialchars($referer);?>">
                 <input type="hidden" name="token" value="<?php echo Session::getToken(); ?>">
             </form>
-            <script type="text/javascript">
-            window.onload = document.loginform.login.focus();
-            </script>
+
 {include="footer"}
