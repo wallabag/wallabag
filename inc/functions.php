@@ -39,6 +39,10 @@ function get_external_file($url)
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_HEADER, false);
 
+		// FOR SSL do not verified certificate
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+		curl_setopt($curl, CURLOPT_AUTOREFERER, TRUE );
+
         // FeedBurner requires a proper USER-AGENT...
         curl_setopt($curl, CURL_HTTP_VERSION_1_1, true);
         curl_setopt($curl, CURLOPT_ENCODING, "gzip, deflate");
@@ -54,7 +58,15 @@ function get_external_file($url)
     } else {
 
         // create http context and add timeout and user-agent
-        $context = stream_context_create(array('http'=>array('timeout' => $timeout,'header'=> "User-Agent: ".$useragent,/*spoot Mozilla Firefox*/'follow_location' => true)));
+        $context = stream_context_create(array(
+								'http'=>array('timeout' => $timeout,
+										'header'=> "User-Agent: ".$useragent,	/*spoot Mozilla Firefox*/
+										'follow_location' => true),
+								// FOR SSL do not verified certificate
+								'ssl' => array('verify_peer' => false,
+										'allow_self_signed' => true)
+								)
+						);
 
         // only download page lesser than 4MB
         $data = @file_get_contents($url, false, $context, -1, 4000000); // We download at most 4 MB from source.
@@ -108,14 +120,20 @@ function prepare_url($url)
     $i=strpos($url,'#xtor=RSS-'); if ($i!==false) $url=substr($url,0,$i);
 
     $title = $url;
-    if (!preg_match('!^https?://!i', $url))
-        $url = 'http://' . $url;
+	$html = Encoding::toUTF8(get_external_file($url,15));
+	// If get_external_file if not able to retrieve HTTPS content try the same URL with HTTP protocol
+	if (!preg_match('!^https?://!i', $url) && (!isset($html) || strlen($html) <= 0)) {
+			$url = 'http://' . $url;
+			$html = Encoding::toUTF8(get_external_file($url,15));
+	}
 
-    $html = Encoding::toUTF8(get_external_file($url,15));
     if (isset($html) and strlen($html) > 0)
     {
         $r = new Readability($html, $url);
+		
         $r->convertLinksToFootnotes = CONVERT_LINKS_FOOTNOTES;
+		$r->revertForcedParagraphElements = REVERT_FORCED_PARAGRAPH_ELEMENTS;
+
         if($r->init())
         {
             $content = $r->articleContent->innerHTML;

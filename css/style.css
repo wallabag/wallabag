@@ -4,12 +4,9 @@ body {
     margin: 10px;
 }
 
+
 header {
     text-align: center;
-}
-
-.bouton {
-	border-radius: 2px;
 }
 
 #main ul#links {
@@ -59,6 +56,11 @@ footer {
     text-align: right;
 }
 
+/*** ***/
+/*** LOGIN FORM ***/
+ul#login li {
+    list-style-type: none;
+}
 /*** ***/
 /*** LINKS DISPLAY ***/
 
@@ -115,7 +117,7 @@ input[type=submit].delete {
     text-align: left;
 }
 
-#article .tools ul li{
+#article.tools ul li{
     display: inline;
 }
 
@@ -206,7 +208,7 @@ body.article {
 .messages p { margin: 3px 0 3px 10px !important; padding: 0 10px 0 23px !important; font-size: 14px; line-height: 16px; }
 .messages.error { border: 1px solid #C42608; color: #c00 !important; background: #FFF0EF; }
 .messages.error p { background: url(../img/messages/cross.png ) no-repeat 0px 50%; color:#c00 !important; }
-.messages.success {background: #E0FBCC; border: 1px solid #6DC70C; }
+.messages.success {background: #E0FBCC; border: 1px solid #6DC70C; } 
 .messages.success p { background: url(../img/messages/tick.png) no-repeat 0px 50%; color: #2B6301 !important; }
 .messages.warning { background: #FFFCD3; border: 1px solid #EBCD41; color: #000; }
 .messages.warning p { background: url(../img/messages/warning.png ) no-repeat 0px 50%; color: #5F4E01; }

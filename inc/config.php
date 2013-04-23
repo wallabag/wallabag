@@ -17,6 +17,8 @@ if (!is_dir('db/')) {
 define ('ABS_PATH', 'assets/');
 define ('CONVERT_LINKS_FOOTNOTES', TRUE);
 define ('DOWNLOAD_PICTURES', TRUE);
+define ('REVERT_FORCED_PARAGRAPH_ELEMENTS',FALSE);
+
 $storage_type = 'sqlite'; # sqlite or file
 
 include 'functions.php';
