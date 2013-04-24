@@ -310,7 +310,7 @@ function display_view($view, $id = 0, $full_head = 'yes')
 	      $style = file_get_contents('./css/style.css', FILE_USE_INCLUDE_PATH);
 	      $knacss = file_get_contents('./css/knacss.css', FILE_USE_INCLUDE_PATH);
 // Title and Identifier are mandatory!
-	      $epub->setTitle("Poche book View ".$id." date ".time());
+	      $epub->setTitle("Poche book ".$id." ".strftime("%Y_%m_%d",time()));
 	      $epub->setIdentifier("http://JohnJaneDoePublications.com/books/TestBook.html", EPub::IDENTIFIER_URI); 
 	      $epub->setLanguage("en");
 	      $epub->setDescription("Poche Export");
@@ -321,6 +321,7 @@ function display_view($view, $id = 0, $full_head = 'yes')
 	      $epub->addCSSFile("style.css", "css1", $style);
 	      $epub->addCSSFile("knacss.css", "css2", $knacss);
 
+	      $chapter=0;
 	      foreach ($entries as $entry) {
 	       if ($entry != NULL) {
 		 $chapter++;
@@ -341,7 +342,7 @@ function display_view($view, $id = 0, $full_head = 'yes')
 	     $epub->finalize(); // Finalize the book, and build the archive.
 	     $epub->saveBook('epub-filename', './epub');
 	     // Send the book to the client. ".epub" will be appended if missing.
-	     $zipData = $epub->sendBook("Poche_book_View_".$id."_date_".time());
+	     $zipData = $epub->sendBook("Poche_book_".$id."_".strftime("%Y_%m_%d",time()));
  
 	    }
 	    break;
