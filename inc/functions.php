@@ -303,6 +303,49 @@ function display_view($view, $id = 0, $full_head = 'yes')
 
             logm('view link #' . $id);
             break;
+	case 'export_view':
+	    $entries = $store->getEntriesByView($id);
+	    if(isset($entries) && count($entries) > 0) {
+	      $epub = new Epub();
+	      $style = file_get_contents('./css/style.css', FILE_USE_INCLUDE_PATH);
+	      $knacss = file_get_contents('./css/knacss.css', FILE_USE_INCLUDE_PATH);
+// Title and Identifier are mandatory!
+	      $epub->setTitle("Test book");
+	      $epub->setIdentifier("http://JohnJaneDoePublications.com/books/TestBook.html", EPub::IDENTIFIER_URI); 
+	      $epub->setLanguage("en");
+	      $epub->setDescription("Poche Export");
+	      $epub->setAuthor("John Doe Johnson", "Johnson, John Doe");
+	      $epub->setPublisher("Poche", "http://JohnJaneDoePublications.com/");
+	      $epub->setDate(time()); // Strictly not needed as the book date defaults to time().
+
+	      $epub->addCSSFile("style.css", "css1", $style);
+	      $epub->addCSSFile("knacss.css", "css2", $knacss);
+
+	      $chapter = 0;
+	      foreach ($entries as $entry) {
+	       if ($entry != NULL) {
+		 $chapter++;
+                 $tpl->assign('id', $entry['id']);
+                 $tpl->assign('url', $entry['url']);
+                 $tpl->assign('title', $entry['title']);
+                 $content = $entry['content'];
+                 if (function_exists('tidy_parse_string')) {
+                     $tidy = tidy_parse_string($content, array('indent'=>true, 'show-body-only' => true), 'UTF8');
+                     $tidy->cleanRepair();
+                     $content = $tidy->value;
+                 }
+                 $tpl->assign('content', $content);
+		 $epub->addChapter("Chapter ".$chapter, "chapter".$chapter.".html", $tpl->draw('entry',true));
+//                 $tpl->draw('entry',true);
+               }
+	      }
+	     $epub->finalize(); // Finalize the book, and build the archive.
+	     $epub->saveBook('epub-filename', './epub');
+	     // Send the book to the client. ".epub" will be appended if missing.
+	     $zipData = $epub->sendBook("Example1Book");
+ 
+	    }
+	    break;
         default: # home view
             $entries = $store->getEntriesByView($view);
 
