@@ -11,6 +11,59 @@
 /**
  * Permet de gÃ©nÃ©rer l'URL de poche pour le bookmarklet
  */
+
+function rel2abs($rel, $base)
+{
+    /* return if already absolute URL */
+    if (parse_url($rel, PHP_URL_SCHEME) != '') return $rel;
+
+    /* queries and anchors */
+    if ($rel[0]=='#' || $rel[0]=='?') return $base.$rel;
+
+    /* parse base URL and convert to local variables:
+       $scheme, $host, $path */
+    extract(parse_url($base));
+
+    /* remove non-directory element from path */
+    $path = preg_replace('#/[^/]*$#', '', $path);
+
+    /* destroy path if relative url points to root */
+    if ($rel[0] == '/') $path = '';
+
+    /* dirty absolute URL */
+    $abs = "$host$path/$rel";
+
+    /* replace '//' or '/./' or '/foo/../' with '/' */
+    $re = array('#(/\.?/)#', '#/(?!\.\.)[^/]+/\.\./#');
+    for($n=1; $n>0; $abs=preg_replace($re, '/', $abs, -1, $n)) {}
+
+    /* absolute URL is ready! */
+    return $scheme.'://'.$abs;
+}
+
+// $str=preg_replace('#(href|src)="([^:"]*)("|(?:(?:%20|\s|\+)[^"]*"))#','$1="http://wintermute.com.au/$2$3',$str);
+
+function remove_relative_links($data, $base) {
+	// cherche les balises 'a' qui contiennent un href
+	$matches = array();
+	preg_match_all('#(href|src)="([^:"]*)("|(?:(?:%20|\s|\+)[^"]*"))#Si', $data, $matches, PREG_SET_ORDER);
+
+	// ne conserve que les liens ne commençant pas par un protocole « protocole:// » ni par une ancre « # »
+	foreach($matches as $i => $link) {
+		$link[1] = trim($link[1]);
+
+		if (!preg_match('#^(([a-z]+://)|(\#))#', $link[1]) ) {
+
+			$absolutePath=rel2abs($link[2],$base);
+
+			$data = str_replace($matches[$i][2], $absolutePath, $data);
+		}
+
+	}
+	return $data;
+}
+
+
 function get_poche_url()
 {
     $protocol = "http";
@@ -132,6 +185,8 @@ function prepare_url($url)
         $tidy->cleanRepair();
         $html = $tidy->value;
     }
+
+    $html = remove_relative_links($html,$url);
 
     if (isset($html) and strlen($html) > 0)
     {
