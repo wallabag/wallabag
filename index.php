@@ -9,6 +9,7 @@
  */
 
 include dirname(__FILE__).'/inc/config.php';
+include dirname(__FILE__).'/inc/EPub.php';
 
 myTool::initPhp();
 
