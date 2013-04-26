@@ -158,6 +158,28 @@ function get_external_file($url)
     }
 }
 
+function convertImageToBase64($html,$url) {
+    $content = $html;
+	
+	/**
+	 * On modifie les URLS des images dans le corps de l'article
+	 */
+	$matches = array();
+	preg_match_all('#<\s*(img)[^>]+src="([^"]*)"[^>]*>#Si', $content, $matches, PREG_SET_ORDER);
+	foreach($matches as $i => $link)
+	{
+		$link[1] = trim($link[1]);
+		$absolute_path = get_absolute_link($link[2],$url);
+		$type = pathinfo($absolute_path, PATHINFO_EXTENSION);
+		$data = get_external_file($absolute_path);
+		$base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+		$content = str_replace($matches[$i][2], $base64, $content);
+
+	}
+
+	return $content;
+}
+
 /**
  * Préparation de l'URL avec récupération du contenu avant insertion en base
  */
@@ -197,7 +219,8 @@ function prepare_url($url)
         {
             $content = $r->articleContent->innerHTML;
             $parametres['title'] = $r->articleTitle->innerHTML;
-            $parametres['content'] = remove_relative_links($content,$url);
+            $parametres['content'] = convertImageToBase64(remove_relative_links($content,$url),$url);
+
             return $parametres;
         }
     }
