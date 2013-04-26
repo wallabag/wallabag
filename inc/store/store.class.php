@@ -13,7 +13,7 @@ class Store {
 
     }
 
-    public function add() {
+    public function add($url, $title, $content) {
 
     }
 

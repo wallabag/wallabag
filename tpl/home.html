@@ -14,6 +14,7 @@
             <ul id="sort">
                 <li><img src="img/up.png" onclick="sort_links('{$view}', 'ia');" title="by date asc" /> by date <img src="img/down.png" onclick="sort_links('{$view}', 'id');" title="by date desc" /></li>
                 <li><img src="img/up.png" onclick="sort_links('{$view}', 'ta');" title="by title asc" /> by title <img src="img/down.png" onclick="sort_links('{$view}', 'td');" title="by title desc" /></li>
+			 <li>Export to Epub <a href="export.php?view=export_view&id={$view}" title="Export to Epub" ><img src="img/download.png" title="Export to Epub" border="0" /></a></li>
             </ul>
             {/if}
             {include="messages"}
