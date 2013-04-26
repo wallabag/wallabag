@@ -460,10 +460,9 @@ function action_to_do($action, $url, $id = 0)
                 if($parametres_url = prepare_url($url)) {
                     if ($store->add($url, $parametres_url['title'], $parametres_url['content'])) {
                         $last_id = $store->getLastId();
-                        if (DOWNLOAD_PICTURES === TRUE) {
-                           $parametres_url['content']  = filtre_picture($parametres_url['content'], $url, $last_id);
-
-                        }
+//                        if (DOWNLOAD_PICTURES === TRUE) {
+//                           $parametres_url['content']  = filtre_picture($parametres_url['content'], $url, $last_id);
+//                        }
                         $msg->add('s', 'the link has been added successfully');
                     }
                     else {
