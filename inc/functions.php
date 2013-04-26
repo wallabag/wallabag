@@ -183,10 +183,8 @@ function prepare_url($url)
     if (function_exists('tidy_parse_string')) {
         $tidy = tidy_parse_string($html, array(), 'UTF8');
         $tidy->cleanRepair();
-        $html = $tidy->value;
+    	$html = $tidy->value;
     }
-
-    $html = remove_relative_links($html,$url);
 
     if (isset($html) and strlen($html) > 0)
     {
@@ -199,7 +197,7 @@ function prepare_url($url)
         {
             $content = $r->articleContent->innerHTML;
             $parametres['title'] = $r->articleTitle->innerHTML;
-            $parametres['content'] = $content;
+            $parametres['content'] = remove_relative_links($content,$url);
             return $parametres;
         }
     }
@@ -439,8 +437,9 @@ function action_to_do($action, $url, $id = 0)
                 if($parametres_url = prepare_url($url)) {
                     if ($store->add($url, $parametres_url['title'], $parametres_url['content'])) {
                         $last_id = $store->getLastId();
-                        if (DOWNLOAD_PICTURES) {
-                            $content = filtre_picture($parametres_url['content'], $url, $last_id);
+                        if (DOWNLOAD_PICTURES === TRUE) {
+                           $parametres_url['content']  = filtre_picture($parametres_url['content'], $url, $last_id);
+
                         }
                         $msg->add('s', 'the link has been added successfully');
                     }
