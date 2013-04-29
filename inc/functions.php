@@ -158,28 +158,6 @@ function get_external_file($url)
     }
 }
 
-function convertImageToBase64($html,$url) {
-    $content = $html;
-	
-	/**
-	 * On modifie les URLS des images dans le corps de l'article
-	 */
-	$matches = array();
-	preg_match_all('#<\s*(img)[^>]+src="([^"]*)"[^>]*>#Si', $content, $matches, PREG_SET_ORDER);
-	foreach($matches as $i => $link)
-	{
-		$link[1] = trim($link[1]);
-		$absolute_path = get_absolute_link($link[2],$url);
-		$type = pathinfo($absolute_path, PATHINFO_EXTENSION);
-		$data = get_external_file($absolute_path);
-		$base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-		$content = str_replace($matches[$i][2], $base64, $content);
-
-	}
-
-	return $content;
-}
-
 /**
  * Préparation de l'URL avec récupération du contenu avant insertion en base
  */
@@ -219,7 +197,8 @@ function prepare_url($url)
         {
             $content = $r->articleContent->innerHTML;
             $parametres['title'] = $r->articleTitle->innerHTML;
-            $parametres['content'] = convertImageToBase64(remove_relative_links($content,$url),$url);
+			logm($r->articleContent->innerHTML);
+			$parametres['content'] = remove_relative_links($content,$url);
 
             return $parametres;
         }
@@ -234,20 +213,15 @@ function prepare_url($url)
 function filtre_picture($content, $url, $id)
 {
     $matches = array();
-    preg_match_all('#<\s*(img)[^>]+src="([^"]*)"[^>]*>#Si', $content, $matches, PREG_SET_ORDER);
+	preg_match_all('#(http|https)://[^\s]+(?=\.(jpe?g|png|gif|bmp|ico|avi|mp3|wav|mp4|7z|zip|torrent))#i', $content, $matches, PREG_SET_ORDER);
     foreach($matches as $i => $link)
     {
-        $link[1] = trim($link[1]);
-        if (!preg_match('#^(([a-z]+://)|(\#))#', $link[1]) )
-        {
-            $absolute_path = get_absolute_link($link[2],$url);
-            $filename = basename(parse_url($absolute_path, PHP_URL_PATH));
-            $directory = create_assets_directory($id);
-            $fullpath = $directory . '/' . $filename;
-            download_pictures($absolute_path, $fullpath);
-            $content = str_replace($matches[$i][2], $fullpath, $content);
-        }
-
+		$absolute_path = get_absolute_link($link[0].'.'.$link[2],$url);
+		$filename = basename(parse_url($absolute_path, PHP_URL_PATH));
+		$directory = create_assets_directory($id);
+		$fullpath = $directory . '/' . $filename;
+		download_pictures($absolute_path, $fullpath);
+		$content = str_replace($link[0].'.'.$link[2], $fullpath, $content);
     }
 
     return $content;
@@ -302,7 +276,7 @@ function download_pictures($absolute_path, $fullpath)
 }
 
 /**
- * Crée un répertoire de médias pour l'article
+ * Cree un repertoire de medias pour l'article
  */
 function create_assets_directory($id)
 {
@@ -320,7 +294,7 @@ function create_assets_directory($id)
 }
 
 /**
- * Suppression du répertoire d'images
+ * Suppression du repertoire d'images
  */
 function remove_directory($directory)
 {
@@ -331,6 +305,26 @@ function remove_directory($directory)
         }
         return rmdir($directory);
     }
+}
+
+function saveContentOnDisc($id,$content) {
+	$fullpath = create_assets_directory($id)."/content.html";
+    if(file_exists($fullpath)) {
+        unlink($fullpath);
+    }
+    $fp = fopen($fullpath, 'x');
+    fwrite($fp, $content);
+    fclose($fp);
+}
+
+function getContentFromId($id) {
+	$fullpath = create_assets_directory($id)."/content.html";
+
+    if(file_exists($fullpath)) {
+		return file_get_contents($fullpath);
+	} else {
+		return false;
+	}
 }
 
 function display_view($view, $id = 0, $full_head = 'yes')
@@ -361,7 +355,8 @@ function display_view($view, $id = 0, $full_head = 'yes')
                 $tpl->assign('id', $entry['id']);
                 $tpl->assign('url', $entry['url']);
                 $tpl->assign('title', $entry['title']);
-                $content = $entry['content'];
+				$content = getContentFromId($entry['id']);
+
                 if (function_exists('tidy_parse_string')) {
                     $tidy = tidy_parse_string($content, array('indent'=>true, 'show-body-only' => true), 'UTF8');
                     $tidy->cleanRepair();
@@ -404,7 +399,8 @@ function display_view($view, $id = 0, $full_head = 'yes')
                  $tpl->assign('id', $entry['id']);
                  $tpl->assign('url', $entry['url']);
                  $tpl->assign('title', $entry['title']);
-                 $content = $entry['content'];
+                 $content = getContentFromId($entry['id']);
+
                  if (function_exists('tidy_parse_string')) {
                      $tidy = tidy_parse_string($content, array('indent'=>true, 'show-body-only' => true), 'UTF8');
                      $tidy->cleanRepair();
@@ -460,9 +456,13 @@ function action_to_do($action, $url, $id = 0)
                 if($parametres_url = prepare_url($url)) {
                     if ($store->add($url, $parametres_url['title'], $parametres_url['content'])) {
                         $last_id = $store->getLastId();
-//                        if (DOWNLOAD_PICTURES === TRUE) {
-//                           $parametres_url['content']  = filtre_picture($parametres_url['content'], $url, $last_id);
-//                        }
+						$content = $parametres_url['content'];
+
+                        if (DOWNLOAD_PICTURES === TRUE) {
+                           $content  = filtre_picture($content, $url, $last_id);
+                        }
+
+                        saveContentOnDisc($last_id,$content);
                         $msg->add('s', 'the link has been added successfully');
                     }
                     else {

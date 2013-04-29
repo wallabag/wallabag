@@ -17,7 +17,7 @@ class Sqlite extends Store {
         parent::__construct();
 
         $this->handle = new PDO(self::$db_path);
-        $this->handle->exec('CREATE TABLE IF NOT EXISTS "entries" ("id" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , "title" VARCHAR, "url" VARCHAR UNIQUE , "is_read" INTEGER DEFAULT 0, "is_fav" INTEGER DEFAULT 0, "content" BLOB)');
+        $this->handle->exec('CREATE TABLE IF NOT EXISTS "entries" ("id" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , "title" VARCHAR, "url" VARCHAR UNIQUE , "is_read" INTEGER DEFAULT 0, "is_fav" INTEGER DEFAULT 0)');
         $this->handle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
@@ -52,6 +52,18 @@ class Sqlite extends Store {
         $entry  = NULL;
         $sql    = "SELECT * FROM entries WHERE id=?";
         $params = array(intval($id));
+        $query  = $this->executeQuery($sql, $params);
+        $entry  = $query->fetchAll();
+
+        return $entry[0];
+    }
+
+    public function retrieveOneByURL($url) {
+        parent::__construct();
+
+        $entry  = NULL;
+        $sql    = "SELECT * FROM entries WHERE url =?";
+        $params = array(intval($url));
         $query  = $this->executeQuery($sql, $params);
         $entry  = $query->fetchAll();
 
@@ -102,10 +114,10 @@ class Sqlite extends Store {
         return $entries;
     }
 
-    public function add($url, $title, $content) {
+    public function add($url, $title) {
         parent::__construct();
-        $sql_action     = 'INSERT INTO entries ( url, title, content ) VALUES (?, ?, ?)';
-        $params_action  = array($url, $title, $content);
+        $sql_action     = 'INSERT INTO entries ( url, title ) VALUES (?, ?, ?)';
+        $params_action  = array($url, $title);
         $query          = $this->executeQuery($sql_action, $params_action);
         return $query;
     }
@@ -135,12 +147,5 @@ class Sqlite extends Store {
     public function getLastId() {
         parent::__construct();
         return $this->getHandle()->lastInsertId();
-    }
-
-    public function updateContentById($id) {
-        parent::__construct();
-        $sql_update     = "UPDATE entries SET content=? WHERE id=?";
-        $params_update  = array($content, $id);
-        $query          = $this->executeQuery($sql_update, $params_update);
     }
 }
