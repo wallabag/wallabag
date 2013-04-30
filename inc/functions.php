@@ -136,20 +136,15 @@ function prepare_url($url)
 function filtre_picture($content, $url, $id)
 {
     $matches = array();
-    preg_match_all('#<\s*(img)[^>]+src="([^"]*)"[^>]*>#Si', $content, $matches, PREG_SET_ORDER);
+	preg_match_all('#(http|https)://[^\s]+(?=\.(jpe?g|png|gif|bmp|ico|avi|mp3|wav|mp4|7z|zip|torrent))#i', $content, $matches, PREG_SET_ORDER);
     foreach($matches as $i => $link)
     {
-        $link[1] = trim($link[1]);
-        if (!preg_match('#^(([a-z]+://)|(\#))#', $link[1]) )
-        {
-            $absolute_path = get_absolute_link($link[2],$url);
-            $filename = basename(parse_url($absolute_path, PHP_URL_PATH));
-            $directory = create_assets_directory($id);
-            $fullpath = $directory . '/' . $filename;
-            download_pictures($absolute_path, $fullpath);
-            $content = str_replace($matches[$i][2], $fullpath, $content);
-        }
-
+		$absolute_path = get_absolute_link($link[0].'.'.$link[2],$url);
+		$filename = basename(parse_url($absolute_path, PHP_URL_PATH));
+		$directory = create_assets_directory($id);
+		$fullpath = $directory . '/' . $filename;
+		download_pictures($absolute_path, $fullpath);
+		$content = str_replace($link[0].'.'.$link[2], $fullpath, $content);
     }
 
     return $content;
@@ -235,6 +230,26 @@ function remove_directory($directory)
     }
 }
 
+function saveContentOnDisc($id,$content) {
+	$fullpath = create_assets_directory($id)."/content.html";
+    if(file_exists($fullpath)) {
+        unlink($fullpath);
+    }
+    $fp = fopen($fullpath, 'x');
+    fwrite($fp, $content);
+    fclose($fp);
+}
+
+function getContentFromId($id) {
+	$fullpath = create_assets_directory($id)."/content.html";
+
+    if(file_exists($fullpath)) {
+		return file_get_contents($fullpath);
+	} else {
+		return false;
+	}
+}
+
 function display_view($view, $id = 0, $full_head = 'yes')
 {
     global $tpl, $store, $msg;
@@ -263,7 +278,14 @@ function display_view($view, $id = 0, $full_head = 'yes')
                 $tpl->assign('id', $entry['id']);
                 $tpl->assign('url', $entry['url']);
                 $tpl->assign('title', $entry['title']);
-                $tpl->assign('content', $entry['content']);
+				$content = getContentFromId($entry['id']);
+
+                if (function_exists('tidy_parse_string')) {
+                    $tidy = tidy_parse_string($content, array('indent'=>true, 'show-body-only' => true), 'UTF8');
+                    $tidy->cleanRepair();
+                    $content = $tidy->value;
+                }
+                $tpl->assign('content', $content);
                 $tpl->assign('is_fav', $entry['is_fav']);
                 $tpl->assign('is_read', $entry['is_read']);
                 $tpl->assign('load_all_js', 0);
@@ -311,26 +333,43 @@ function action_to_do($action, $url, $id = 0)
 
             if (MyTool::isUrl($url)) {
                 if($parametres_url = prepare_url($url)) {
-                    $store->add($url, $parametres_url['title'], $parametres_url['content']);
-                    $last_id = $store->getLastId();
-                    if (DOWNLOAD_PICTURES) {
-                        $content = filtre_picture($parametres_url['content'], $url, $last_id);
+                    if ($store->add($url, $parametres_url['title'])) {
+                        $last_id = $store->getLastId();
+						$content = $parametres_url['content'];
+
+                        if (DOWNLOAD_PICTURES === TRUE) {
+                           $content  = filtre_picture($content, $url, $last_id);
+                        }
+
+                        saveContentOnDisc($last_id,$content);
+                        $msg->add('s', 'the link has been added successfully');
                     }
-                    $msg->add('s', 'the link has been added successfully');
+                    else {
+                        $msg->add('e', 'error during insertion : the link wasn\'t added');
+                    }
+                }
+                else {
+                    $msg->add('e', 'error during url preparation : the link wasn\'t added');
+                    logm('error during url preparation');
                 }
             }
             else {
-                $msg->add('e', 'the link has been added successfully');
+                $msg->add('e', 'error during url preparation : the link is not valid');
                 logm($url . ' is not a valid url');
             }
 
             logm('add link ' . $url);
             break;
         case 'delete':
-            remove_directory(ABS_PATH . $id);
-            $store->deleteById($id);
-            $msg->add('s', 'the link has been deleted successfully');
-            logm('delete link #' . $id);
+            if ($store->deleteById($id)) {
+                remove_directory(ABS_PATH . $id);
+                $msg->add('s', 'the link has been deleted successfully');
+                logm('delete link #' . $id);
+            }
+            else {
+                $msg->add('e', 'the link wasn\'t deleted');
+                logm('error : can\'t delete link #' . $id);
+            }
             break;
         case 'toggle_fav' :
             $store->favoriteById($id);
