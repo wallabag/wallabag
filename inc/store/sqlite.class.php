@@ -116,7 +116,7 @@ class Sqlite extends Store {
 
     public function add($url, $title) {
         parent::__construct();
-        $sql_action     = 'INSERT INTO entries ( url, title ) VALUES (?, ?, ?)';
+        $sql_action     = 'INSERT INTO entries ( url, title ) VALUES (?, ?)';
         $params_action  = array($url, $title);
         $query          = $this->executeQuery($sql_action, $params_action);
         return $query;
