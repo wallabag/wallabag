@@ -11,6 +11,59 @@
 /**
  * Permet de gÃ©nÃ©rer l'URL de poche pour le bookmarklet
  */
+
+function rel2abs($rel, $base)
+{
+    /* return if already absolute URL */
+    if (parse_url($rel, PHP_URL_SCHEME) != '') return $rel;
+
+    /* queries and anchors */
+    if ($rel[0]=='#' || $rel[0]=='?') return $base.$rel;
+
+    /* parse base URL and convert to local variables:
+       $scheme, $host, $path */
+    extract(parse_url($base));
+
+    /* remove non-directory element from path */
+    $path = preg_replace('#/[^/]*$#', '', $path);
+
+    /* destroy path if relative url points to root */
+    if ($rel[0] == '/') $path = '';
+
+    /* dirty absolute URL */
+    $abs = "$host$path/$rel";
+
+    /* replace '//' or '/./' or '/foo/../' with '/' */
+    $re = array('#(/\.?/)#', '#/(?!\.\.)[^/]+/\.\./#');
+    for($n=1; $n>0; $abs=preg_replace($re, '/', $abs, -1, $n)) {}
+
+    /* absolute URL is ready! */
+    return $scheme.'://'.$abs;
+}
+
+// $str=preg_replace('#(href|src)="([^:"]*)("|(?:(?:%20|\s|\+)[^"]*"))#','$1="http://wintermute.com.au/$2$3',$str);
+
+function remove_relative_links($data, $base) {
+	// cherche les balises 'a' qui contiennent un href
+	$matches = array();
+	preg_match_all('#(href|src)="([^:"]*)("|(?:(?:%20|\s|\+)[^"]*"))#Si', $data, $matches, PREG_SET_ORDER);
+
+	// ne conserve que les liens ne commençant pas par un protocole « protocole:// » ni par une ancre « # »
+	foreach($matches as $i => $link) {
+		$link[1] = trim($link[1]);
+
+		if (!preg_match('#^(([a-z]+://)|(\#))#', $link[1]) ) {
+
+			$absolutePath=rel2abs($link[2],$base);
+
+			$data = str_replace($matches[$i][2], $absolutePath, $data);
+		}
+
+	}
+	return $data;
+}
+
+
 function get_poche_url()
 {
     $protocol = "http";
@@ -130,7 +183,7 @@ function prepare_url($url)
     if (function_exists('tidy_parse_string')) {
         $tidy = tidy_parse_string($html, array(), 'UTF8');
         $tidy->cleanRepair();
-        $html = $tidy->value;
+    	$html = $tidy->value;
     }
 
     if (isset($html) and strlen($html) > 0)
@@ -144,7 +197,9 @@ function prepare_url($url)
         {
             $content = $r->articleContent->innerHTML;
             $parametres['title'] = $r->articleTitle->innerHTML;
-            $parametres['content'] = $content;
+			logm($r->articleContent->innerHTML);
+			$parametres['content'] = remove_relative_links($content,$url);
+
             return $parametres;
         }
     }
@@ -158,20 +213,15 @@ function prepare_url($url)
 function filtre_picture($content, $url, $id)
 {
     $matches = array();
-    preg_match_all('#<\s*(img)[^>]+src="([^"]*)"[^>]*>#Si', $content, $matches, PREG_SET_ORDER);
+	preg_match_all('#(http|https)://[^\s]+(?=\.(jpe?g|png|gif|bmp|ico|avi|mp3|wav|mp4|7z|zip|torrent))#i', $content, $matches, PREG_SET_ORDER);
     foreach($matches as $i => $link)
     {
-        $link[1] = trim($link[1]);
-        if (!preg_match('#^(([a-z]+://)|(\#))#', $link[1]) )
-        {
-            $absolute_path = get_absolute_link($link[2],$url);
-            $filename = basename(parse_url($absolute_path, PHP_URL_PATH));
-            $directory = create_assets_directory($id);
-            $fullpath = $directory . '/' . $filename;
-            download_pictures($absolute_path, $fullpath);
-            $content = str_replace($matches[$i][2], $fullpath, $content);
-        }
-
+		$absolute_path = get_absolute_link($link[0].'.'.$link[2],$url);
+		$filename = basename(parse_url($absolute_path, PHP_URL_PATH));
+		$directory = create_assets_directory($id);
+		$fullpath = $directory . '/' . $filename;
+		download_pictures($absolute_path, $fullpath);
+		$content = str_replace($link[0].'.'.$link[2], $fullpath, $content);
     }
 
     return $content;
@@ -226,7 +276,7 @@ function download_pictures($absolute_path, $fullpath)
 }
 
 /**
- * CrÃ©e un rÃ©pertoire de mÃ©dias pour l'article
+ * Cree un repertoire de medias pour l'article
  */
 function create_assets_directory($id)
 {
@@ -244,7 +294,7 @@ function create_assets_directory($id)
 }
 
 /**
- * Suppression du rÃ©pertoire d'images
+ * Suppression du repertoire d'images
  */
 function remove_directory($directory)
 {
@@ -255,6 +305,26 @@ function remove_directory($directory)
         }
         return rmdir($directory);
     }
+}
+
+function saveContentOnDisc($id,$content) {
+	$fullpath = create_assets_directory($id)."/content.html";
+    if(file_exists($fullpath)) {
+        unlink($fullpath);
+    }
+    $fp = fopen($fullpath, 'x');
+    fwrite($fp, $content);
+    fclose($fp);
+}
+
+function getContentFromId($id) {
+	$fullpath = create_assets_directory($id)."/content.html";
+
+    if(file_exists($fullpath)) {
+		return file_get_contents($fullpath);
+	} else {
+		return false;
+	}
 }
 
 function display_view($view, $id = 0, $full_head = 'yes')
@@ -285,7 +355,8 @@ function display_view($view, $id = 0, $full_head = 'yes')
                 $tpl->assign('id', $entry['id']);
                 $tpl->assign('url', $entry['url']);
                 $tpl->assign('title', $entry['title']);
-                $content = $entry['content'];
+				$content = getContentFromId($entry['id']);
+
                 if (function_exists('tidy_parse_string')) {
                     $tidy = tidy_parse_string($content, array('indent'=>true, 'show-body-only' => true), 'UTF8');
                     $tidy->cleanRepair();
@@ -303,6 +374,50 @@ function display_view($view, $id = 0, $full_head = 'yes')
 
             logm('view link #' . $id);
             break;
+	case 'export_view':
+	    $entries = $store->getEntriesByView($id);
+	    if(isset($entries) && count($entries) > 0) {
+	      $epub = new Epub();
+	      $style = file_get_contents('./css/style.css', FILE_USE_INCLUDE_PATH);
+	      $knacss = file_get_contents('./css/knacss.css', FILE_USE_INCLUDE_PATH);
+// Title and Identifier are mandatory!
+	      $epub->setTitle("Poche book ".$id." ".strftime("%Y_%m_%d",time()));
+	      $epub->setIdentifier("http://JohnJaneDoePublications.com/books/TestBook.html", EPub::IDENTIFIER_URI); 
+	      $epub->setLanguage("en");
+	      $epub->setDescription("Poche Export");
+	      $epub->setAuthor("Poche Export", "Poche Export");
+	      $epub->setPublisher("Poche", "http://JohnJaneDoePublications.com/");
+	      $epub->setDate(time()); // Strictly not needed as the book date defaults to time().
+
+	      $epub->addCSSFile("style.css", "css1", $style);
+	      $epub->addCSSFile("knacss.css", "css2", $knacss);
+
+	      $chapter=0;
+	      foreach ($entries as $entry) {
+	       if ($entry != NULL) {
+		 $chapter++;
+                 $tpl->assign('id', $entry['id']);
+                 $tpl->assign('url', $entry['url']);
+                 $tpl->assign('title', $entry['title']);
+                 $content = getContentFromId($entry['id']);
+
+                 if (function_exists('tidy_parse_string')) {
+                     $tidy = tidy_parse_string($content, array('indent'=>true, 'show-body-only' => true), 'UTF8');
+                     $tidy->cleanRepair();
+                     $content = $tidy->value;
+                 }
+                 $tpl->assign('content', $content);
+		 $epub->addChapter($entry['title'], "chapter".$chapter.".html", $tpl->draw('entry',true));
+//                 $tpl->draw('entry',true);
+               }
+	      }
+	     $epub->finalize(); // Finalize the book, and build the archive.
+	     $epub->saveBook('epub-filename', './epub');
+	     // Send the book to the client. ".epub" will be appended if missing.
+	     $zipData = $epub->sendBook("Poche_book_".$id."_".strftime("%Y_%m_%d",time()));
+ 
+	    }
+	    break;
         default: # home view
             $entries = $store->getEntriesByView($view);
 
@@ -341,9 +456,13 @@ function action_to_do($action, $url, $id = 0)
                 if($parametres_url = prepare_url($url)) {
                     if ($store->add($url, $parametres_url['title'], $parametres_url['content'])) {
                         $last_id = $store->getLastId();
-                        if (DOWNLOAD_PICTURES) {
-                            $content = filtre_picture($parametres_url['content'], $url, $last_id);
+						$content = $parametres_url['content'];
+
+                        if (DOWNLOAD_PICTURES === TRUE) {
+                           $content  = filtre_picture($content, $url, $last_id);
                         }
+
+                        saveContentOnDisc($last_id,$content);
                         $msg->add('s', 'the link has been added successfully');
                     }
                     else {

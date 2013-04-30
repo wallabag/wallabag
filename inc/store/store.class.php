@@ -13,7 +13,7 @@ class Store {
 
     }
 
-    public function add() {
+    public function add($url, $title) {
 
     }
 
@@ -46,10 +46,6 @@ class Store {
     }
 
     public function getLastId() {
-
-    }
-
-    public function updateContentById($id) {
 
     }
 }
