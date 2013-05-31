@@ -23,6 +23,11 @@ function get_poche_url()
     return $protocol . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 }
 
+function encode_string($string) 
+{
+    return sha1($string . SALT);
+}
+
 // function define to retrieve url content
 function get_external_file($url)
 {
@@ -375,12 +380,10 @@ function action_to_do($action, $url, $id = 0)
             break;
         case 'toggle_fav' :
             $store->favoriteById($id);
-            $msg->add('s', 'the favorite toggle has been done successfully');
             logm('mark as favorite link #' . $id);
             break;
         case 'toggle_archive' :
             $store->archiveById($id);
-            $msg->add('s', 'the archive toggle has been done successfully');
             logm('archive link #' . $id);
             break;
         default:

@@ -25,9 +25,14 @@ $ref = empty($_SERVER['HTTP_REFERER']) ? '' : $_SERVER['HTTP_REFERER'];
 if (isset($_GET['login'])) {
     // Login
     if (!empty($_POST['login']) && !empty($_POST['password'])) {
-        if (Session::login('poche', 'poche', $_POST['login'], $_POST['password'])) {
+// echo $_SESSION['login']."<br>";
+// echo $_SESSION['pass']."<br>";
+// echo $_POST['login']."<br>";
+// echo encode_string($_POST['password'] . $_POST['login']);
+//         die;
+        if (Session::login($_SESSION['login'], $_SESSION['pass'], $_POST['login'], encode_string($_POST['password'] . $_POST['login']))) {
             logm('login successful');
-            $msg->add('s', 'welcome in your pocket!');
+            $msg->add('s', 'welcome in your poche!');
             if (!empty($_POST['longlastingsession'])) {
                 $_SESSION['longlastingsession'] = 31536000;
                 $_SESSION['expires_on'] = time() + $_SESSION['longlastingsession'];

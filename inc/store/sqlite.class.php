@@ -17,12 +17,61 @@ class Sqlite extends Store {
         parent::__construct();
 
         $this->handle = new PDO(self::$db_path);
-        $this->handle->exec('CREATE TABLE IF NOT EXISTS "entries" ("id" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , "title" VARCHAR, "url" VARCHAR UNIQUE , "is_read" INTEGER DEFAULT 0, "is_fav" INTEGER DEFAULT 0, "content" BLOB)');
         $this->handle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
     private function getHandle() {
         return $this->handle;
+    }
+
+    public function isInstalled() {
+        $sql        = "SELECT name FROM sqlite_sequence WHERE name=?";
+        $query      = $this->executeQuery($sql, array('config'));
+        $hasConfig  = $query->fetchAll();
+
+        if (count($hasConfig) == 0) 
+            return FALSE;
+
+        if (!$this->getLogin() || !$this->getPassword()) 
+            return FALSE;
+
+        return TRUE;
+    }
+
+    public function install($login, $password) {
+        $this->getHandle()->exec('CREATE TABLE IF NOT EXISTS "config" ("id" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , "name" VARCHAR UNIQUE, "value" BLOB)');
+
+        $this->handle->exec('CREATE TABLE IF NOT EXISTS "entries" ("id" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , "title" VARCHAR, "url" VARCHAR UNIQUE , "is_read" INTEGER DEFAULT 0, "is_fav" INTEGER DEFAULT 0, "content" BLOB)');
+
+        if (!$this->getLogin()) {
+            $sql_login     = 'INSERT INTO config ( name, value ) VALUES (?, ?)';
+            $params_login  = array('login', $login);
+            $query         = $this->executeQuery($sql_login, $params_login);
+        }
+
+        if (!$this->getPassword()) {
+            $sql_pass     = 'INSERT INTO config ( name, value ) VALUES (?, ?)';
+            $params_pass  = array('password', $password);
+            $query        = $this->executeQuery($sql_pass, $params_pass);
+        }
+
+        return TRUE;
+    }
+
+    public function getLogin() {
+        $sql    = "SELECT value FROM config WHERE name=?";
+        $query  = $this->executeQuery($sql, array('login'));
+        $login  = $query->fetchAll();
+
+        return isset($login[0]['value']) ? $login[0]['value'] : FALSE;
+    }
+
+    public function getPassword() {
+        $sql    = "SELECT value FROM config WHERE name=?";
+        $query  = $this->executeQuery($sql, array('password'));
+        $pass   = $query->fetchAll();
+
+        return isset($pass[0]['value']) ? $pass[0]['value'] : FALSE; 
     }
 
     private function executeQuery($sql, $params) {
