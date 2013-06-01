@@ -25,11 +25,6 @@ $ref = empty($_SERVER['HTTP_REFERER']) ? '' : $_SERVER['HTTP_REFERER'];
 if (isset($_GET['login'])) {
     // Login
     if (!empty($_POST['login']) && !empty($_POST['password'])) {
-// echo $_SESSION['login']."<br>";
-// echo $_SESSION['pass']."<br>";
-// echo $_POST['login']."<br>";
-// echo encode_string($_POST['password'] . $_POST['login']);
-//         die;
         if (Session::login($_SESSION['login'], $_SESSION['pass'], $_POST['login'], encode_string($_POST['password'] . $_POST['login']))) {
             logm('login successful');
             $msg->add('s', 'welcome in your poche!');
@@ -54,6 +49,19 @@ elseif (isset($_GET['logout'])) {
     logm('logout');
     Session::logout();
     MyTool::redirect();
+}
+elseif  (isset($_GET['config'])) {
+    if (isset($_POST['password']) && isset($_POST['password_repeat'])) {
+        if ($_POST['password'] == $_POST['password_repeat'] && $_POST['password'] != "") {
+            logm('password updated');
+            $store->updatePassword(encode_string($_POST['password'] . $_SESSION['login']));
+            $msg->add('s', 'your password has been updated');
+        }
+        else
+            $msg->add('e', 'your password can\'t be empty and you have to repeat it in the second field');
+    }
+    else
+        $msg->add('e', 'error in your password update');
 }
 
 # Traitement des paramètres et déclenchement des actions
