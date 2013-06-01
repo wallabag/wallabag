@@ -14,6 +14,7 @@ if (!is_dir('db/')) {
     @mkdir('db/',0705);
 }
 
+define ('MODE_DEMO', FALSE);
 define ('ABS_PATH', 'assets/');
 define ('CONVERT_LINKS_FOOTNOTES', TRUE);
 define ('REVERT_FORCED_PARAGRAPH_ELEMENTS',FALSE);

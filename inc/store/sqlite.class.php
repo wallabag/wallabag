@@ -74,6 +74,13 @@ class Sqlite extends Store {
         return isset($pass[0]['value']) ? $pass[0]['value'] : FALSE; 
     }
 
+    public function updatePassword($password)
+    {
+        $sql_update     = "UPDATE config SET value=? WHERE name='password'";
+        $params_update  = array($password);
+        $query          = $this->executeQuery($sql_update, $params_update);
+    }
+
     private function executeQuery($sql, $params) {
         try
         {
