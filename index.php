@@ -54,7 +54,7 @@ elseif  (isset($_GET['config'])) {
     if (isset($_POST['password']) && isset($_POST['password_repeat'])) {
         if ($_POST['password'] == $_POST['password_repeat'] && $_POST['password'] != "") {
             logm('password updated');
-            if (!DEMO) {
+            if (!MODE_DEMO) {
                 $store->updatePassword(encode_string($_POST['password'] . $_SESSION['login']));
                 $msg->add('s', 'your password has been updated');
             }
@@ -79,6 +79,7 @@ $tpl->assign('isLogged', Session::isLogged());
 $tpl->assign('referer', $ref);
 $tpl->assign('view', $view);
 $tpl->assign('poche_url', myTool::getUrl());
+$tpl->assign('demo', MODE_DEMO);
 $tpl->assign('title', 'poche, a read it later open source system');
 
 if (Session::isLogged()) {
@@ -86,5 +87,6 @@ if (Session::isLogged()) {
     display_view($view, $id, $full_head);
 }
 else {
+
     $tpl->draw('login');
 }

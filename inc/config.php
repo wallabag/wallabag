@@ -8,13 +8,13 @@
  * @license    http://www.wtfpl.net/ see COPYING file
  */
 
-define ('POCHE_VERSION', '0.2.1');
+define ('POCHE_VERSION', '0.3');
 
 if (!is_dir('db/')) {
     @mkdir('db/',0705);
 }
 
-define ('MODE_DEMO', FALSE);
+define ('MODE_DEMO', TRUE);
 define ('ABS_PATH', 'assets/');
 define ('CONVERT_LINKS_FOOTNOTES', TRUE);
 define ('REVERT_FORCED_PARAGRAPH_ELEMENTS',FALSE);

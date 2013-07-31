@@ -9,11 +9,11 @@
                     <h2 class="mbs txtcenter">login to your poche</h2>
 					<div class="row">
 						<label class="col w150p" for="login">Login</label>
-						<input class="col" type="text" id="login" name="login" placeholder="Login" tabindex="1" autofocus />
+						<input class="col" type="text" id="login" name="login" placeholder="Login" tabindex="1" autofocus {if="$demo == '1'"}value="poche"{/if} />
 					</div>
 					<div class="row">
 						<label class="col w150p" for="password">Password</label>
-						<input class="col" type="password" id="password" name="password" placeholder="Password" tabindex="2">
+						<input class="col" type="password" id="password" name="password" placeholder="Password" tabindex="2" {if="$demo == '1'"}value="poche"{/if} />
 					</div>
 					<div class="row">
 						<label class="col w150p">Stay signed in</label>
