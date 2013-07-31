@@ -23,7 +23,7 @@ a, a:hover, a:visited {
     color: #fff;
 }
 
-#links a:hover, .backhome a:hover{
+#links a:hover, .backhome a:hover, .support a:hover{
     background-color: #040707;
     color: #F1F1F1;
 }

@@ -46,13 +46,17 @@ header {
     margin: 0 auto;
 }
 
-#links a, .backhome a{
+#links a, .backhome a, .support a{
     text-decoration: none;
     padding: 5px 10px;
 }
-#links a:hover, .backhome a:hover{
+#links a:hover, .backhome a:hover, .support a:hover{
     -webkit-border-radius: 2px;
     border-radius: 2px;
+}
+
+.support {
+    font-size: 14px;
 }
 
 footer {
