@@ -4,7 +4,7 @@
 *
 * This class extends PHP's DOMElement to allow
 * users to get and set the innerHTML property of
-* HTML elements in the same way it's done in
+* HTML elements in the same way it's done in 
 * JavaScript.
 *
 * Example usage:
@@ -15,16 +15,16 @@
 * $doc->registerNodeClass('DOMElement', 'JSLikeHTMLElement');
 * $doc->loadHTML('<div><p>Para 1</p><p>Para 2</p></div>');
 * $elem = $doc->getElementsByTagName('div')->item(0);
-*
+* 
 * // print innerHTML
 * echo $elem->innerHTML; // prints '<p>Para 1</p><p>Para 2</p>'
 * echo "\n\n";
-*
+* 
 * // set innerHTML
 * $elem->innerHTML = '<a href="http://fivefilters.org">FiveFilters.org</a>';
 * echo $elem->innerHTML; // prints '<a href="http://fivefilters.org">FiveFilters.org</a>'
 * echo "\n\n";
-*
+* 
 * // print document (with our changes)
 * echo $doc->saveXML();
 * @endcode
@@ -59,7 +59,7 @@ class JSLikeHTMLElement extends DOMElement
 					$value = mb_convert_encoding($value, 'HTML-ENTITIES', 'UTF-8');
 					// Using <htmlfragment> will generate a warning, but so will bad HTML
 					// (and by this point, bad HTML is what we've got).
-					// We use it (and suppress the warning) because an HTML fragment will
+					// We use it (and suppress the warning) because an HTML fragment will 
 					// be wrapped around <html><body> tags which we don't really want to keep.
 					// Note: despite the warning, if loadHTML succeeds it will return true.
 					$result = @$f->loadHTML('<htmlfragment>'.$value.'</htmlfragment>');
@@ -86,7 +86,7 @@ class JSLikeHTMLElement extends DOMElement
 	* @code
 	* $string = $div->innerHTML;
 	* @endcode
-	*/
+	*/	
 	public function __get($name)
 	{
 		if ($name == 'innerHTML') {
