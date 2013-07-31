@@ -23,6 +23,11 @@ function get_poche_url()
     return $protocol . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 }
 
+function encode_string($string) 
+{
+    return sha1($string . SALT);
+}
+
 // function define to retrieve url content
 function get_external_file($url)
 {
@@ -39,6 +44,10 @@ function get_external_file($url)
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_HEADER, false);
 
+        // FOR SSL do not verified certificate
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+        curl_setopt($curl, CURLOPT_AUTOREFERER, TRUE );
+
         // FeedBurner requires a proper USER-AGENT...
         curl_setopt($curl, CURL_HTTP_VERSION_1_1, true);
         curl_setopt($curl, CURLOPT_ENCODING, "gzip, deflate");
@@ -54,7 +63,15 @@ function get_external_file($url)
     } else {
 
         // create http context and add timeout and user-agent
-        $context = stream_context_create(array('http'=>array('timeout' => $timeout,'header'=> "User-Agent: ".$useragent,/*spoot Mozilla Firefox*/'follow_location' => true)));
+        $context = stream_context_create(array(
+                                'http'=>array('timeout' => $timeout,
+                                    'header'=> "User-Agent: ".$useragent,	/*spoot Mozilla Firefox*/
+                                    'follow_location' => true),
+                                // FOR SSL do not verified certificate
+                                'ssl' => array('verify_peer' => false,
+                                        'allow_self_signed' => true)
+                                )
+                            );
 
         // only download page lesser than 4MB
         $data = @file_get_contents($url, false, $context, -1, 4000000); // We download at most 4 MB from source.
@@ -108,14 +125,26 @@ function prepare_url($url)
     $i=strpos($url,'#xtor=RSS-'); if ($i!==false) $url=substr($url,0,$i);
 
     $title = $url;
-    if (!preg_match('!^https?://!i', $url))
-        $url = 'http://' . $url;
-
     $html = Encoding::toUTF8(get_external_file($url,15));
+    // If get_external_file if not able to retrieve HTTPS content try the same URL with HTTP protocol
+    if (!preg_match('!^https?://!i', $url) && (!isset($html) || strlen($html) <= 0)) {
+        $url = 'http://' . $url;
+        $html = Encoding::toUTF8(get_external_file($url,15));
+    }
+
+    if (function_exists('tidy_parse_string')) {
+        $tidy = tidy_parse_string($html, array(), 'UTF8');
+        $tidy->cleanRepair();
+        $html = $tidy->value;
+    }
+
     if (isset($html) and strlen($html) > 0)
     {
         $r = new Readability($html, $url);
+
         $r->convertLinksToFootnotes = CONVERT_LINKS_FOOTNOTES;
+        $r->revertForcedParagraphElements = REVERT_FORCED_PARAGRAPH_ELEMENTS;
+
         if($r->init())
         {
             $content = $r->articleContent->innerHTML;
@@ -125,8 +154,6 @@ function prepare_url($url)
         }
     }
 
-    $msg->add('e', 'error during url preparation');
-    logm('error during url preparation');
     return FALSE;
 }
 
@@ -263,7 +290,13 @@ function display_view($view, $id = 0, $full_head = 'yes')
                 $tpl->assign('id', $entry['id']);
                 $tpl->assign('url', $entry['url']);
                 $tpl->assign('title', $entry['title']);
-                $tpl->assign('content', $entry['content']);
+                $content = $entry['content'];
+                if (function_exists('tidy_parse_string')) {
+                    $tidy = tidy_parse_string($content, array('indent'=>true, 'show-body-only' => true), 'UTF8');
+                    $tidy->cleanRepair();
+                    $content = $tidy->value;
+                }
+                $tpl->assign('content', $content);
                 $tpl->assign('is_fav', $entry['is_fav']);
                 $tpl->assign('is_read', $entry['is_read']);
                 $tpl->assign('load_all_js', 0);
@@ -311,35 +344,46 @@ function action_to_do($action, $url, $id = 0)
 
             if (MyTool::isUrl($url)) {
                 if($parametres_url = prepare_url($url)) {
-                    $store->add($url, $parametres_url['title'], $parametres_url['content']);
-                    $last_id = $store->getLastId();
-                    if (DOWNLOAD_PICTURES) {
-                        $content = filtre_picture($parametres_url['content'], $url, $last_id);
+                    if ($store->add($url, $parametres_url['title'], $parametres_url['content'])) {
+                        $last_id = $store->getLastId();
+                        if (DOWNLOAD_PICTURES) {
+                            $content = filtre_picture($parametres_url['content'], $url, $last_id);
+                        }
+                        $msg->add('s', 'the link has been added successfully');
                     }
-                    $msg->add('s', 'the link has been added successfully');
+                    else {
+                        $msg->add('e', 'error during insertion : the link wasn\'t added');
+                    }
+                }
+                else {
+                    $msg->add('e', 'error during url preparation : the link wasn\'t added');
+                    logm('error during url preparation');
                 }
             }
             else {
-                $msg->add('e', 'the link has been added successfully');
+                $msg->add('e', 'error during url preparation : the link is not valid');
                 logm($url . ' is not a valid url');
             }
 
             logm('add link ' . $url);
             break;
         case 'delete':
-            remove_directory(ABS_PATH . $id);
-            $store->deleteById($id);
-            $msg->add('s', 'the link has been deleted successfully');
-            logm('delete link #' . $id);
+            if ($store->deleteById($id)) {
+                remove_directory(ABS_PATH . $id);
+                $msg->add('s', 'the link has been deleted successfully');
+                logm('delete link #' . $id);
+            }
+            else {
+                $msg->add('e', 'the link wasn\'t deleted');
+                logm('error : can\'t delete link #' . $id);
+            }
             break;
         case 'toggle_fav' :
             $store->favoriteById($id);
-            $msg->add('s', 'the favorite toggle has been done successfully');
             logm('mark as favorite link #' . $id);
             break;
         case 'toggle_archive' :
             $store->archiveById($id);
-            $msg->add('s', 'the archive toggle has been done successfully');
             logm('archive link #' . $id);
             break;
         default:

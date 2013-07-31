@@ -25,9 +25,9 @@ $ref = empty($_SERVER['HTTP_REFERER']) ? '' : $_SERVER['HTTP_REFERER'];
 if (isset($_GET['login'])) {
     // Login
     if (!empty($_POST['login']) && !empty($_POST['password'])) {
-        if (Session::login('poche', 'poche', $_POST['login'], $_POST['password'])) {
+        if (Session::login($_SESSION['login'], $_SESSION['pass'], $_POST['login'], encode_string($_POST['password'] . $_POST['login']))) {
             logm('login successful');
-            $msg->add('s', 'welcome in your pocket!');
+            $msg->add('s', 'welcome in your poche!');
             if (!empty($_POST['longlastingsession'])) {
                 $_SESSION['longlastingsession'] = 31536000;
                 $_SESSION['expires_on'] = time() + $_SESSION['longlastingsession'];
@@ -49,6 +49,22 @@ elseif (isset($_GET['logout'])) {
     logm('logout');
     Session::logout();
     MyTool::redirect();
+}
+elseif  (isset($_GET['config'])) {
+    if (isset($_POST['password']) && isset($_POST['password_repeat'])) {
+        if ($_POST['password'] == $_POST['password_repeat'] && $_POST['password'] != "") {
+            logm('password updated');
+            if (!DEMO) {
+                $store->updatePassword(encode_string($_POST['password'] . $_SESSION['login']));
+                $msg->add('s', 'your password has been updated');
+            }
+            else {
+                $msg->add('i', 'in demo mode, you can\'t update password');
+            }
+        }
+        else
+            $msg->add('e', 'your password can\'t be empty and you have to repeat it in the second field');
+    }
 }
 
 # Traitement des paramètres et déclenchement des actions

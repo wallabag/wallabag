@@ -25,7 +25,7 @@ You can :
 ## Requirements & installation
 You have to install [sqlite for php](http://www.php.net/manual/en/book.sqlite.php) on your server.
 
-Get the [latest version](https://github.com/nicosomb/poche) of poche on github. Unzip it and upload it on your server. poche must have write access on assets, cache and db directories.
+Get the [latest version](https://github.com/inthepoche/poche) of poche on github. Unzip it and upload it on your server. poche must have write access on assets, cache and db directories.
 
 That's all, **poche works** !
 
