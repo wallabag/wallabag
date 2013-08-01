@@ -14,37 +14,64 @@ include dirname(__FILE__).'/inc/config.php';
 include dirname(__FILE__).'/inc/simple_html_dom.php';
 
 if (!isset($_GET['start'])) {
-    echo 'Please execute the import script locally, it can take a very long time. <br /><a href="import.php?start">Bye bye Pocket, let\'s go !</a>';
+    echo '
+        Please execute the import script locally, it can take a very long time. <br /><br />
+        Please choose between Pocket & Readabilty :
+        <br /><a href="import.php?start=pocket">Bye bye Pocket, let\'s go !</a>
+        <br /><a href="import.php?start=readability">Bye bye Readability, let\'s go !</a>';
 }
 else {
-    $html = new simple_html_dom();
-    $html->load_file('ril_export.html');
+    if ($_GET['start'] == 'pocket') {
+        $html = new simple_html_dom();
+        $html->load_file('ril_export.html');
 
-    $read = 0;
-    $errors = array();
-    foreach($html->find('ul') as $ul)
-    {
-        foreach($ul->find('li') as $li)
+        $read = 0;
+        $errors = array();
+        foreach($html->find('ul') as $ul)
         {
-            $a = $li->find('a');
-            $url = $a[0]->href;
+            foreach($ul->find('li') as $li)
+            {
+                $a = $li->find('a');
+                $url = $a[0]->href;
 
-
-            action_to_do('add', $url);
-            if ($read == '1') {
-                $last_id = $db->getHandle()->lastInsertId();
-                $sql_update     = "UPDATE entries SET is_read=~is_read WHERE id=?";
-                $params_update  = array($last_id);
-                $query_update   = $db->getHandle()->prepare($sql_update);
-                $query_update->execute($params_update);
+                action_to_do('add', $url);
+                if ($read == '1') {
+                    $last_id = $db->getHandle()->lastInsertId();
+                    $sql_update     = "UPDATE entries SET is_read=~is_read WHERE id=?";
+                    $params_update  = array($last_id);
+                    $query_update   = $db->getHandle()->prepare($sql_update);
+                    $query_update->execute($params_update);
+                }
             }
+            # Pocket génère un fichier HTML avec deux <ul>
+            # Le premier concerne les éléments non lus
+            # Le second concerne les éléments archivés
+            $read = 1;
         }
-        # Pocket génère un fichier HTML avec deux <ul>
-        # Le premier concerne les éléments non lus
-        # Le second concerne les éléments archivés
-        $read = 1;
-    }
 
-    echo 'Import from Pocket completed. <a href="index.php">Welcome to #poche !</a>';
-    logm('import from pocket completed');
+        echo 'Import from Pocket completed. <a href="index.php">Welcome to #poche !</a>';
+        logm('import from pocket completed');
+    }
+    else if ($_GET['start'] == 'readability') {
+        $str_data = file_get_contents("readability");
+        $data = json_decode($str_data,true);
+
+        foreach ($data as $key => $value) {
+            $url = '';
+            foreach ($value as $key2 => $value2) {
+                if ($key2 == 'article__url') {
+                    $url = $value2;
+                }
+            }
+            if ($url != '')
+                action_to_do('add', $url);
+        }
+
+        echo 'Import from Readability completed. <a href="index.php">Welcome to #poche !</a>';
+        logm('import from Readability completed');
+    }
+    else {
+        echo 'Error with the import. <a href="index.php">Welcome to #poche !</a>';
+        logm('error with the import');
+    }
 }
