@@ -2,7 +2,7 @@
             	<h2>Bookmarklet</h2>
             	<p>Thanks to the bookmarklet, you will be able to easily add a link to your poche. If you don't know how use a bookmarklet, <a href="http://support.mozilla.org/en-US/kb/bookmarklets-perform-common-web-page-tasks">have a look here</a>.</p>
             	<p>Drag & drop this link to your bookmarks bar and have fun with poche.</p>
-                <p><a style="cursor: move; border: 1px dashed grey; background: white;" title="i am a bookmarklet, use me !" href="javascript:(function(){var%20url%20=%20location.href%20||%20url;window.open('{$poche_url}?action=add&url='%20+%20encodeURIComponent(url),'_self');})();">poche it !</a></p>
+                <p><a ondragend="this.click();" style="cursor: move; border: 1px dashed grey; background: white;" title="i am a bookmarklet, use me !" href="javascript:if(top['bookmarklet-url@inthepoche.com']){top['bookmarklet-url@inthepoche.com'];}else{(function(){var%20url%20=%20location.href%20||%20url;window.open('{$poche_url}?action=add&url='%20+%20encodeURIComponent(url),'_self');})();void(0);}">poche it !</a></p>
 
                 <h2>Password</h2>
 	            <form method="post" action="?config" name="loginform">
