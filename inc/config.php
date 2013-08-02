@@ -24,17 +24,17 @@ $storage_type = 'sqlite'; # sqlite or file
 
 # /!\ Be careful if you change the lines below /!\
 
-require_once 'pocheCore.php';
-require_once 'Readability.php';
-require_once 'Encoding.php';
-require_once 'pocheTool.class.php';
-require_once 'Session.class.php';
-require_once 'Twig/Autoloader.php';
+require_once 'poche/pocheTool.class.php';
+require_once 'poche/pocheCore.php';
+require_once '3rdparty/Readability.php';
+require_once '3rdparty/Encoding.php';
+require_once '3rdparty/Session.class.php';
+require_once '3rdparty/Twig/Autoloader.php';
 require_once 'store/store.class.php';
 require_once 'store/' . $storage_type . '.class.php';
 
 if (DOWNLOAD_PICTURES) {
-    require_once 'pochePicture.php';
+    require_once 'poche/pochePicture.php';
 }
 
 # i18n
