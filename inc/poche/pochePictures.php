@@ -15,11 +15,9 @@ function filtre_picture($content, $url, $id)
 {
     $matches = array();
     preg_match_all('#<\s*(img)[^>]+src="([^"]*)"[^>]*>#Si', $content, $matches, PREG_SET_ORDER);
-    foreach($matches as $i => $link)
-    {
+    foreach($matches as $i => $link) {
         $link[1] = trim($link[1]);
-        if (!preg_match('#^(([a-z]+://)|(\#))#', $link[1]) )
-        {
+        if (!preg_match('#^(([a-z]+://)|(\#))#', $link[1])) {
             $absolute_path = get_absolute_link($link[2],$url);
             $filename = basename(parse_url($absolute_path, PHP_URL_PATH));
             $directory = create_assets_directory($id);
@@ -36,8 +34,7 @@ function filtre_picture($content, $url, $id)
 /**
  * Retourne le lien absolu
  */
-function get_absolute_link($relative_link, $url)
-{
+function get_absolute_link($relative_link, $url) {
     /* return if already absolute URL */
     if (parse_url($relative_link, PHP_URL_SCHEME) != '') return $relative_link;
 
@@ -68,7 +65,6 @@ function get_absolute_link($relative_link, $url)
 /**
  * Téléchargement des images
  */
-
 function download_pictures($absolute_path, $fullpath)
 {
     $rawdata = get_external_file($absolute_path);

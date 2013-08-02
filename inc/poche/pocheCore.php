@@ -136,10 +136,16 @@ function fetch_url_content($url)
 
 function display_view($view, $id = 0, $full_head = 'yes')
 {
-    global $tpl, $store, $msg;
+    global $tpl, $store;
 
     switch ($view)
     {
+        case 'install':
+            pocheTool::logm('install mode');
+            break;
+        case 'import';
+            pocheTool::logm('import mode');
+            break;
         case 'export':
             $entries = $store->retrieveAll();
             $tpl->assign('export', pocheTool::renderJson($entries));
@@ -157,8 +163,8 @@ function display_view($view, $id = 0, $full_head = 'yes')
             break;
         case 'view':
             $entry = $store->retrieveOneById($id);
-
             if ($entry != NULL) {
+                pocheTool::logm('view link #' . $id);
                 $tpl->assign('id', $entry['id']);
                 $tpl->assign('url', $entry['url']);
                 $tpl->assign('title', $entry['title']);
@@ -177,12 +183,9 @@ function display_view($view, $id = 0, $full_head = 'yes')
             else {
                 pocheTool::logm('error in view call : entry is NULL');
             }
-
-            pocheTool::logm('view link #' . $id);
             break;
         default: # home view
             $entries = $store->getEntriesByView($view);
-
             $tpl->assign('entries', $entries);
 
             if ($full_head == 'yes') {
@@ -192,7 +195,6 @@ function display_view($view, $id = 0, $full_head = 'yes')
             }
 
             $tpl->draw('entries');
-
             if ($full_head == 'yes') {
                 $tpl->draw('js');
                 $tpl->draw('footer');
@@ -202,11 +204,11 @@ function display_view($view, $id = 0, $full_head = 'yes')
 }
 
 /**
- * Appel d'une action (mark as fav, archive, delete)
+ * Call action (mark as fav, archive, delete, etc.)
  */
 function action_to_do($action, $url, $id = 0)
 {
-    global $store, $msg;
+    global $store;
 
     switch ($action)
     {

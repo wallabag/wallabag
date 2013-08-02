@@ -10,6 +10,7 @@
 
 define ('POCHE_VERSION', '0.3');
 define ('MODE_DEMO', FALSE);
+define ('DEBUG_POCHE', TRUE);
 define ('CONVERT_LINKS_FOOTNOTES', FALSE);
 define ('REVERT_FORCED_PARAGRAPH_ELEMENTS', FALSE);
 define ('DOWNLOAD_PICTURES', FALSE);
@@ -24,7 +25,7 @@ $storage_type = 'sqlite'; # sqlite or file
 
 # /!\ Be careful if you change the lines below /!\
 
-require_once 'poche/pocheTool.class.php';
+require_once 'poche/pocheTools.class.php';
 require_once 'poche/pocheCore.php';
 require_once '3rdparty/Readability.php';
 require_once '3rdparty/Encoding.php';
