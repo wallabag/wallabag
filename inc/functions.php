@@ -342,6 +342,8 @@ function action_to_do($action, $url, $id = 0)
             if ($url == '')
                 continue;
 
+            $url = base64_decode($url);
+            error_log(print_r($url, TRUE));
             if (MyTool::isUrl($url)) {
                 if($parametres_url = prepare_url($url)) {
                     if ($store->add($url, $parametres_url['title'], $parametres_url['content'])) {
