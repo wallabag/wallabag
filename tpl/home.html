@@ -3,6 +3,7 @@
             <h1><a href="index.php"><img src="./img/logo.png" alt="logo poche" /></a>poche</h1>
         </header>
         <div id="main">
+{% block menu %}
             <ul id="links">
                 <li><a href="index.php" {if="$view == 'index'"}class="current"{/if}>home</a></li>
                 <li><a href="?view=fav" {if="$view == 'fav'"}class="current"{/if}>favorites</a></li>
@@ -10,10 +11,11 @@
                 <li><a href="?view=config" {if="$view == 'config'"}class="current"{/if}>config</a></li>
                 <li><a href="?logout" title="Logout">logout</a></li>
             </ul>
-            {if condition="isset($entries)"}
+{% endblock %}
+{% block precontent %}
             <ul id="sort">
                 <li><img src="img/up.png" onclick="sort_links('{$view}', 'ia');" title="by date asc" /> by date <img src="img/down.png" onclick="sort_links('{$view}', 'id');" title="by date desc" /></li>
                 <li><img src="img/up.png" onclick="sort_links('{$view}', 'ta');" title="by title asc" /> by title <img src="img/down.png" onclick="sort_links('{$view}', 'td');" title="by title desc" /></li>
             </ul>
-            {/if}
+{% endblock %}
             {include="messages"}

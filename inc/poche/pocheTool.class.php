@@ -38,8 +38,7 @@ class pocheTools
 
     public static function isUrl($url)
     {
-        // http://neo22s.com/check-if-url-exists-and-is-online-php/
-        $pattern='|^http(s)?://[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$|i';
+        $pattern = '|^http(s)?://[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$|i';
 
         return preg_match($pattern, $url);
     }
@@ -65,6 +64,48 @@ class pocheTools
             . $_SERVER["SERVER_NAME"] . $serverport . $scriptname;
     }
 
+    public static function redirect($url = '')
+    {
+        if ($url === '') {
+            $url = (empty($_SERVER['HTTP_REFERER'])?'?':$_SERVER['HTTP_REFERER']);
+            if (isset($_POST['returnurl'])) {
+                $url = $_POST['returnurl'];
+            }
+        }
+
+        # prevent loop
+        if (empty($url) || parse_url($url, PHP_URL_QUERY) === $_SERVER['QUERY_STRING']) {
+            $url = pocheTool::getUrl();
+        }
+
+        if (substr($url, 0, 1) !== '?') {
+            $ref = pocheTool::getUrl();
+            if (substr($url, 0, strlen($ref)) !== $ref) {
+                $url = $ref;
+            }
+        }
+        header('Location: '.$url);
+        exit();
+    }
+
+    public static function cleanURL($url)
+    {
+
+        $url = html_entity_decode(trim($url));
+
+        $stuff = strpos($url,'&utm_source=');
+        if ($stuff !== FALSE)
+            $url = substr($url, 0, $stuff);
+        $stuff = strpos($url,'?utm_source=');
+        if ($stuff !== FALSE)
+            $url = substr($url, 0, $stuff);
+        $stuff = strpos($url,'#xtor=RSS-');
+        if ($stuff !== FALSE)
+            $url = substr($url, 0, $stuff);
+
+        return $url;
+    }
+
     public static function renderJson($data)
     {
         header('Cache-Control: no-cache, must-revalidate');
@@ -75,27 +116,9 @@ class pocheTools
         exit();
     }
 
-    public static function redirect($rurl = '')
+    public static function logm($message)
     {
-        if ($rurl === '') {
-            $rurl = (empty($_SERVER['HTTP_REFERER'])?'?':$_SERVER['HTTP_REFERER']);
-            if (isset($_POST['returnurl'])) {
-                $rurl = $_POST['returnurl'];
-            }
-        }
-
-        // prevent loop
-        if (empty($rurl) || parse_url($rurl, PHP_URL_QUERY) === $_SERVER['QUERY_STRING']) {
-            $rurl = pocheTool::getUrl();
-        }
-
-        if (substr($rurl, 0, 1) !== '?') {
-            $ref = pocheTool::getUrl();
-            if (substr($rurl, 0, strlen($ref)) !== $ref) {
-                $rurl = $ref;
-            }
-        }
-        header('Location: '.$rurl);
-        exit();
+        $t = strval(date('Y/m/d_H:i:s')).' - '.$_SERVER["REMOTE_ADDR"].' - '.strval($message)."\n";
+        file_put_contents('./log.txt',$t,FILE_APPEND);
     }
 }

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: poche\n"
-"POT-Creation-Date: 2013-08-02 10:26+0100\n"
-"PO-Revision-Date: 2013-08-02 10:26+0100\n"
+"POT-Creation-Date: 2013-08-02 15:38+0100\n"
+"PO-Revision-Date: 2013-08-02 21:57+0100\n"
 "Last-Translator: Nicolas Lœuillet <nicolas.loeuillet@gmail.com>\n"
 "Language-Team: poche <support@inthepoche.com>\n"
 "Language: Français\n"
@@ -75,7 +75,7 @@ msgstr ""
 "Votre mot de passe ne peut être vide et vous devez le répéter dans le second "
 "champ."
 
-#: /var/www/poche-i18n/index.php:83
+#: /var/www/poche-i18n/index.php:84
 msgid "poche, a read it later open source system"
 msgstr "poche, a read it later open source system"
 
@@ -83,27 +83,27 @@ msgstr "poche, a read it later open source system"
 msgid "Oops, it seems you don't have PHP 5."
 msgstr "Oups, il semblerait que PHP 5 ne soit pas installé. "
 
-#: /var/www/poche-i18n/inc/functions.php:352
+#: /var/www/poche-i18n/inc/functions.php:354
 msgid "the link has been added successfully"
 msgstr "le lien a été ajouté avec succès"
 
-#: /var/www/poche-i18n/inc/functions.php:355
+#: /var/www/poche-i18n/inc/functions.php:357
 msgid "error during insertion : the link wasn't added"
 msgstr "erreur durant l'insertion : le lien n'a pas été ajouté"
 
-#: /var/www/poche-i18n/inc/functions.php:359
+#: /var/www/poche-i18n/inc/functions.php:361
 msgid "error during url preparation : the link wasn't added"
 msgstr "erreur durant l'insertion : le lien n'a pas été ajouté"
 
-#: /var/www/poche-i18n/inc/functions.php:364
+#: /var/www/poche-i18n/inc/functions.php:366
 msgid "error during url preparation : the link is not valid"
 msgstr "erreur durant la préparation de l'URL : le lien n'est pas valide"
 
-#: /var/www/poche-i18n/inc/functions.php:373
+#: /var/www/poche-i18n/inc/functions.php:375
 msgid "the link has been deleted successfully"
-msgstr "le lien a été ajouté avec succès"
+msgstr "le lien a été supprimé avec succès"
 
-#: /var/www/poche-i18n/inc/functions.php:377
+#: /var/www/poche-i18n/inc/functions.php:379
 msgid "the link wasn't deleted"
 msgstr "le lien n'a pas été supprimé"
 

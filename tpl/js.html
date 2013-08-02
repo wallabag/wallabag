@@ -1,22 +1,22 @@
-        <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
-        <script type="text/javascript" src="js/poche.js"></script>
+            <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+            <script type="text/javascript" src="js/poche.js"></script>
 
-        {if="$load_all_js == '1'"}
-        <script type="text/javascript" src="js/jquery.masonry.min.js"></script>
-        <script type="text/javascript">
-            $( window ).load( function()
-            {
-                var columns    = 3,
-                    setColumns = function() { columns = $( window ).width() > 640 ? 3 : $( window ).width() > 320 ? 2 : 1; };
-
-                setColumns();
-                $( window ).resize( setColumns );
-
-                $( '#content' ).masonry(
+            {if="$load_all_js == '1'"}
+            <script type="text/javascript" src="js/jquery.masonry.min.js"></script>
+            <script type="text/javascript">
+                $( window ).load( function()
                 {
-                    itemSelector: '.entrie',
-                    columnWidth:  function( containerWidth ) { return containerWidth / columns; }
+                    var columns    = 3,
+                        setColumns = function() { columns = $( window ).width() > 640 ? 3 : $( window ).width() > 320 ? 2 : 1; };
+
+                    setColumns();
+                    $( window ).resize( setColumns );
+
+                    $( '#content' ).masonry(
+                    {
+                        itemSelector: '.entrie',
+                        columnWidth:  function( containerWidth ) { return containerWidth / columns; }
+                    });
                 });
-            });
-        </script>
-        {/if}
+            </script>
+            {/if}
