@@ -349,19 +349,19 @@ function action_to_do($action, $url, $id = 0)
                         if (DOWNLOAD_PICTURES) {
                             $content = filtre_picture($parametres_url['content'], $url, $last_id);
                         }
-                        $msg->add('s', 'the link has been added successfully');
+                        $msg->add('s', _('the link has been added successfully'));
                     }
                     else {
-                        $msg->add('e', 'error during insertion : the link wasn\'t added');
+                        $msg->add('e', _('error during insertion : the link wasn\'t added'));
                     }
                 }
                 else {
-                    $msg->add('e', 'error during url preparation : the link wasn\'t added');
+                    $msg->add('e', _('error during url preparation : the link wasn\'t added'));
                     logm('error during url preparation');
                 }
             }
             else {
-                $msg->add('e', 'error during url preparation : the link is not valid');
+                $msg->add('e', _('error during url preparation : the link is not valid'));
                 logm($url . ' is not a valid url');
             }
 
@@ -370,11 +370,11 @@ function action_to_do($action, $url, $id = 0)
         case 'delete':
             if ($store->deleteById($id)) {
                 remove_directory(ABS_PATH . $id);
-                $msg->add('s', 'the link has been deleted successfully');
+                $msg->add('s', _('the link has been deleted successfully'));
                 logm('delete link #' . $id);
             }
             else {
-                $msg->add('e', 'the link wasn\'t deleted');
+                $msg->add('e', _('the link wasn\'t deleted'));
                 logm('error : can\'t delete link #' . $id);
             }
             break;

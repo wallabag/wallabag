@@ -20,6 +20,13 @@ define ('CONVERT_LINKS_FOOTNOTES', TRUE);
 define ('REVERT_FORCED_PARAGRAPH_ELEMENTS',FALSE);
 define ('DOWNLOAD_PICTURES', TRUE);
 define ('SALT', '464v54gLLw928uz4zUBqkRJeiPY68zCX');
+define ('LANG', 'fr_FR.UTF8');
+
+putenv("LC_ALL=".LANG);
+setlocale(LC_ALL, LANG);
+bindtextdomain(LANG, "./locale"); 
+textdomain(LANG); 
+
 $storage_type = 'sqlite'; # sqlite or file
 
 include 'functions.php';

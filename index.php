@@ -15,7 +15,7 @@ myTool::initPhp();
 # XSRF protection with token
 if (!empty($_POST)) {
     if (!Session::isToken($_POST['token'])) {
-        die('Wrong token.');
+        die(_('Wrong token.'));
     }
     unset($_SESSION['tokens']);
 }
@@ -40,7 +40,7 @@ if (isset($_GET['login'])) {
             MyTool::redirect($ref);
         }
         logm('login failed');
-        die("Login failed !");
+        die(_("Login failed !"));
     } else {
         logm('login failed');
     }
@@ -56,14 +56,14 @@ elseif  (isset($_GET['config'])) {
             logm('password updated');
             if (!MODE_DEMO) {
                 $store->updatePassword(encode_string($_POST['password'] . $_SESSION['login']));
-                $msg->add('s', 'your password has been updated');
+                $msg->add('s', _('your password has been updated'));
             }
             else {
-                $msg->add('i', 'in demo mode, you can\'t update password');
+                $msg->add('i', _('in demo mode, you can\'t update password'));
             }
         }
         else
-            $msg->add('e', 'your password can\'t be empty and you have to repeat it in the second field');
+            $msg->add('e', _('your password can\'t be empty and you have to repeat it in the second field'));
     }
 }
 
@@ -80,7 +80,7 @@ $tpl->assign('referer', $ref);
 $tpl->assign('view', $view);
 $tpl->assign('poche_url', myTool::getUrl());
 $tpl->assign('demo', MODE_DEMO);
-$tpl->assign('title', 'poche, a read it later open source system');
+$tpl->assign('title', _('poche, a read it later open source system'));
 
 if (Session::isLogged()) {
     action_to_do($action, $url, $id);

@@ -15,7 +15,7 @@ class MyTool
         define('START_TIME', microtime(true));
 
         if (phpversion() < 5) {
-            die("Argh you don't have PHP 5 !");
+            die(_('Oops, it seems you don\'t have PHP 5.'));
         }
 
         error_reporting(E_ALL);

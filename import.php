@@ -14,11 +14,7 @@ include dirname(__FILE__).'/inc/config.php';
 include dirname(__FILE__).'/inc/simple_html_dom.php';
 
 if (!isset($_GET['start'])) {
-    echo '
-        Please execute the import script locally, it can take a very long time. <br /><br />
-        Please choose between Pocket & Readabilty :
-        <br /><a href="import.php?start=pocket">Bye bye Pocket, let\'s go !</a>
-        <br /><a href="import.php?start=readability">Bye bye Readability, let\'s go !</a>';
+    echo _('Please execute the import script locally, it can take a very long time.') . '<br /><br />' . _('Please choose between Pocket & Readabilty :') . '<br /><a href="import.php?start=pocket">' . _('Bye bye Pocket, let\'s go !') . '</a><br /><a href="import.php?start=readability">' . _('Bye bye Readability, let\'s go !') . '</a>';
 }
 else {
     if ($_GET['start'] == 'pocket') {
@@ -49,7 +45,7 @@ else {
             $read = 1;
         }
 
-        echo 'Import from Pocket completed. <a href="index.php">Welcome to #poche !</a>';
+        echo _('Import from Pocket completed.') . '<a href="index.php">' . _('Welcome to poche !') .'</a>';
         logm('import from pocket completed');
     }
     else if ($_GET['start'] == 'readability') {
@@ -67,11 +63,11 @@ else {
                 action_to_do('add', $url);
         }
 
-        echo 'Import from Readability completed. <a href="index.php">Welcome to #poche !</a>';
+        echo _('Import from Readability completed.') . '<a href="index.php">' . _('Welcome to poche !') . '</a>';
         logm('import from Readability completed');
     }
     else {
-        echo 'Error with the import. <a href="index.php">Welcome to #poche !</a>';
+        echo _('Error with the import.') . '<a href="index.php">' . _('Back to poche'). '</a>';
         logm('error with the import');
     }
 }
