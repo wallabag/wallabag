@@ -58,7 +58,7 @@ $store = new $storage_type();
 # installation
 if(!$store->isInstalled())
 {
-    pocheTool::logm('poche still not installed');
+    pocheTools::logm('poche still not installed');
     echo $twig->render('install.twig', array(
         'token' => Session::getToken(),
     ));
@@ -68,7 +68,7 @@ if(!$store->isInstalled())
             # let's rock, install poche baby !
             $store->install($_POST['login'], encode_string($_POST['password'] . $_POST['login']));
             Session::logout();
-            pocheTool::redirect();
+            pocheTools::redirect();
         }
     }
     exit();

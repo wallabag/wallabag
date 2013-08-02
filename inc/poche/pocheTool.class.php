@@ -75,11 +75,11 @@ class pocheTools
 
         # prevent loop
         if (empty($url) || parse_url($url, PHP_URL_QUERY) === $_SERVER['QUERY_STRING']) {
-            $url = pocheTools::getUrl();
+            $url = pocheTool::getUrl();
         }
 
         if (substr($url, 0, 1) !== '?') {
-            $ref = pocheTools::getUrl();
+            $ref = pocheTool::getUrl();
             if (substr($url, 0, strlen($ref)) !== $ref) {
                 $url = $ref;
             }

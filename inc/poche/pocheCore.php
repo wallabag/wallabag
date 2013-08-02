@@ -93,8 +93,8 @@ function get_external_file($url)
 function fetch_url_content($url)
 {
     $url = base64_decode($url);
-    if (pocheTool::isUrl($url)) {
-        $url = pocheTool::cleanURL($url);
+    if (pocheTools::isUrl($url)) {
+        $url = pocheTools::cleanURL($url);
         $html = Encoding::toUTF8(get_external_file($url));
 
         # if get_external_file if not able to retrieve HTTPS content, try the same URL with HTTP protocol
@@ -128,7 +128,7 @@ function fetch_url_content($url)
     }
     else {
         #$msg->add('e', _('error during url preparation : the link is not valid'));
-        pocheTool::logm($url . ' is not a valid url');
+        pocheTools::logm($url . ' is not a valid url');
     }
 
     return FALSE;
@@ -141,16 +141,16 @@ function display_view($view, $id = 0, $full_head = 'yes')
     switch ($view)
     {
         case 'install':
-            pocheTool::logm('install mode');
+            pocheTools::logm('install mode');
             break;
         case 'import';
-            pocheTool::logm('import mode');
+            pocheTools::logm('import mode');
             break;
         case 'export':
             $entries = $store->retrieveAll();
-            $tpl->assign('export', pocheTool::renderJson($entries));
+            $tpl->assign('export', pocheTools::renderJson($entries));
             $tpl->draw('export');
-            pocheTool::logm('export view');
+            pocheTools::logm('export view');
             break;
         case 'config':
             $tpl->assign('load_all_js', 0);
@@ -159,12 +159,12 @@ function display_view($view, $id = 0, $full_head = 'yes')
             $tpl->draw('config');
             $tpl->draw('js');
             $tpl->draw('footer');
-            pocheTool::logm('config view');
+            pocheTools::logm('config view');
             break;
         case 'view':
             $entry = $store->retrieveOneById($id);
             if ($entry != NULL) {
-                pocheTool::logm('view link #' . $id);
+                pocheTools::logm('view link #' . $id);
                 $tpl->assign('id', $entry['id']);
                 $tpl->assign('url', $entry['url']);
                 $tpl->assign('title', $entry['title']);
@@ -181,7 +181,7 @@ function display_view($view, $id = 0, $full_head = 'yes')
                 $tpl->draw('view');
             }
             else {
-                pocheTool::logm('error in view call : entry is NULL');
+                pocheTools::logm('error in view call : entry is NULL');
             }
             break;
         default: # home view
@@ -215,7 +215,7 @@ function action_to_do($action, $url, $id = 0)
         case 'add':
             if($parametres_url = fetch_url_content($url)) {
                 if ($store->add($url, $parametres_url['title'], $parametres_url['content'])) {
-                    pocheTool::logm('add link ' . $url);
+                    pocheTools::logm('add link ' . $url);
                     $last_id = $store->getLastId();
                     if (DOWNLOAD_PICTURES) {
                         $content = filtre_picture($parametres_url['content'], $url, $last_id);
@@ -224,12 +224,12 @@ function action_to_do($action, $url, $id = 0)
                 }
                 else {
                     #$msg->add('e', _('error during insertion : the link wasn\'t added'));
-                    pocheTool::logm('error during insertion : the link wasn\'t added');
+                    pocheTools::logm('error during insertion : the link wasn\'t added');
                 }
             }
             else {
                 #$msg->add('e', _('error during url preparation : the link wasn\'t added'));
-                pocheTool::logm('error during content fetch');
+                pocheTools::logm('error during content fetch');
             }
             break;
         case 'delete':
@@ -238,20 +238,20 @@ function action_to_do($action, $url, $id = 0)
                     remove_directory(ABS_PATH . $id);
                 }
                 #$msg->add('s', _('the link has been deleted successfully'));
-                pocheTool::logm('delete link #' . $id);
+                pocheTools::logm('delete link #' . $id);
             }
             else {
                 #$msg->add('e', _('the link wasn\'t deleted'));
-                pocheTool::logm('error : can\'t delete link #' . $id);
+                pocheTools::logm('error : can\'t delete link #' . $id);
             }
             break;
         case 'toggle_fav' :
             $store->favoriteById($id);
-            pocheTool::logm('mark as favorite link #' . $id);
+            pocheTools::logm('mark as favorite link #' . $id);
             break;
         case 'toggle_archive' :
             $store->archiveById($id);
-            pocheTool::logm('archive link #' . $id);
+            pocheTools::logm('archive link #' . $id);
             break;
         default:
             break;

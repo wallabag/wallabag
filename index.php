@@ -10,7 +10,7 @@
 
 include dirname(__FILE__).'/inc/config.php';
 
-pocheTool::initPhp();
+pocheTools::initPhp();
 
 # XSRF protection with token
 if (!empty($_POST)) {
@@ -26,7 +26,7 @@ if (isset($_GET['login'])) {
     // Login
     if (!empty($_POST['login']) && !empty($_POST['password'])) {
         if (Session::login($_SESSION['login'], $_SESSION['pass'], $_POST['login'], encode_string($_POST['password'] . $_POST['login']))) {
-            pocheTool::logm('login successful');
+            pocheTools::logm('login successful');
             if (!empty($_POST['longlastingsession'])) {
                 $_SESSION['longlastingsession'] = 31536000;
                 $_SESSION['expires_on'] = time() + $_SESSION['longlastingsession'];
@@ -36,23 +36,23 @@ if (isset($_GET['login'])) {
             }
             session_regenerate_id(true);
 
-            pocheTool::redirect($referer);
+            pocheTools::redirect($referer);
         }
-        pocheTool::logm('login failed');
+        pocheTools::logm('login failed');
         die(_("Login failed !"));
     } else {
-        pocheTool::logm('login failed');
+        pocheTools::logm('login failed');
     }
 }
 elseif (isset($_GET['logout'])) {
-    pocheTool::logm('logout');
+    pocheTools::logm('logout');
     Session::logout();
-    pocheTool::redirect();
+    pocheTools::redirect();
 }
 elseif  (isset($_GET['config'])) {
     if (isset($_POST['password']) && isset($_POST['password_repeat'])) {
         if ($_POST['password'] == $_POST['password_repeat'] && $_POST['password'] != "") {
-            pocheTool::logm('password updated');
+            pocheTools::logm('password updated');
             if (!MODE_DEMO) {
                 $store->updatePassword(encode_string($_POST['password'] . $_SESSION['login']));
                 #your password has been updated
@@ -78,7 +78,7 @@ $tpl_vars = array(
     'isLogged' => Session::isLogged(),
     'referer' => $referer,
     'view' => $view,
-    'poche_url' => pocheTool::getUrl(),
+    'poche_url' => pocheTools::getUrl(),
     'demo' => MODE_DEMO,
     'title' => _('poche, a read it later open source system'),
 );
