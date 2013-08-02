@@ -129,6 +129,10 @@ input[type=submit].delete {
     height: 16px;
 }
 
+#main .entrie .url {
+    font-size: 13px;
+}
+
 
 /*** ***/
 /*** ARTICLE PAGE ***/
