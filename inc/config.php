@@ -24,15 +24,14 @@ define ('LANG', 'fr_FR.UTF8');
 $storage_type = 'sqlite'; # sqlite, file
 
 # /!\ Be careful if you change the lines below /!\
-
 require_once 'poche/pocheTools.class.php';
 require_once 'poche/pocheCore.php';
 require_once '3rdparty/Readability.php';
 require_once '3rdparty/Encoding.php';
 require_once '3rdparty/Session.class.php';
-require_once '3rdparty/Twig/Autoloader.php';
 require_once 'store/store.class.php';
 require_once 'store/' . $storage_type . '.class.php';
+require_once './vendor/autoload.php';
 
 if (DOWNLOAD_PICTURES) {
     require_once 'poche/pochePicture.php';
@@ -45,7 +44,7 @@ bindtextdomain(LANG, LOCALE);
 textdomain(LANG); 
 
 # template engine
-Twig_Autoloader::register();
+// Twig_Autoloader::register();
 $loader = new Twig_Loader_Filesystem(TPL);
 $twig = new Twig_Environment($loader, array(
     'cache' => CACHE,

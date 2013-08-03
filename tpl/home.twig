@@ -11,9 +11,18 @@
 {% endblock %}
 {% block precontent %}
             <ul id="sort">
-                <li><img src="img/up.png" onclick="sort_links('{{ view }}', 'ia');" title="{% trans "by date asc" %}" /> {% trans "by date" %} <img src="img/down.png" onclick="sort_links('{{ view }}', 'id');" title="{% trans "by date desc" %}" /></li>
-                <li><img src="img/up.png" onclick="sort_links('{{ view }}', 'ta');" title="{% trans "by title asc" %}" /> {% trans "by title" %} <img src="img/down.png" onclick="sort_links('{{ view }}', 'td');" title="{% trans "by title desc" %}" /></li>
+                <li><img src="./tpl/img/up.png" onclick="sort_links('{{ view }}', 'ia');" title="{% trans "by date asc" %}" /> {% trans "by date" %} <img src="./tpl/img/down.png" onclick="sort_links('{{ view }}', 'id');" title="{% trans "by date desc" %}" /></li>
+                <li><img src="./tpl/img/up.png" onclick="sort_links('{{ view }}', 'ta');" title="{% trans "by title asc" %}" /> {% trans "by title" %} <img src="./tpl/img/down.png" onclick="sort_links('{{ view }}', 'td');" title="{% trans "by title desc" %}" /></li>
             </ul>
+{% endblock %}
+{% block notices %}
+            <div class="messages">
+                <ul>
+                {% for notice in notices %}
+                    <li>{{ notice.value|e }}</li>
+                {% endfor %}
+                </ul>
+            </div>
 {% endblock %}
 {% block content %}
             <div id="content">
@@ -28,7 +37,7 @@
                                     <li>
                                         <a title="{% trans "toggle mark as read" %}" class="tool archive {% if entry.is_read == 0 %}archive-off{% endif %}" onclick="toggle_archive(this, {{ entry.id|e }})"><span></span></a></li>
                                         <li><a title="{% trans "toggle favorite" %}" class="tool fav {% if entry.is_fav == 0 %}fav-off{% endif %}" onclick="toggle_favorite(this, {{ entry.id|e }})"><span></span></a></li>
-                                        <li><form method="post" onsubmit="return confirm('{% trans "are you sure?" %}')" style="display: inline;"><input type="hidden" name="token" id="token" value="{{ token }}" /><input type="hidden" id="action" name="action" value="delete" /><input type="hidden" id="view" name="view" value="{{ view }}" /><input type="hidden" id="id" name="id" value="{{ entry.id|e }}" /><input type="submit" class="delete" title="{% trans "toggle delete" %}" /></form>
+                                        <li><form method="post" style="display: inline;"><input type="hidden" name="token" id="token" value="{{ token }}" /><input type="hidden" id="action" name="action" value="delete" /><input type="hidden" id="view" name="view" value="{{ view }}" /><input type="hidden" id="id" name="id" value="{{ entry.id|e }}" /><input type="submit" class="delete" title="{% trans "toggle delete" %}" /></form>
                                     </li>
                                 </ul>
                             </div>
@@ -40,9 +49,9 @@
 {% endblock %}
 
 {% block js %}
-            <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
-            <script type="text/javascript" src="js/poche.js"></script>
-            <script type="text/javascript" src="js/jquery.masonry.min.js"></script>
+            <script type="text/javascript" src="./tpl/js/jquery-1.9.1.min.js"></script>
+            <script type="text/javascript" src="./tpl/js/poche.js"></script>
+            <script type="text/javascript" src="./tpl/js/jquery.masonry.min.js"></script>
             <script type="text/javascript">
                 $( window ).load( function()
                 {

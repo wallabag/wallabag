@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         bootstrap="./vendor/autoload.php"
+>
+    <testsuites>
+        <testsuite name="Twig Gettext Extractor Test Suite">
+            <directory>./Twig/Gettext/Test/</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>

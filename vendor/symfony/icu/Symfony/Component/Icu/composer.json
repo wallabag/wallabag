@@ -1,0 +1,26 @@
+{
+    "name": "symfony/icu",
+    "type": "library",
+    "description": "Contains an excerpt of the ICU data and classes to load it.",
+    "keywords": ["icu", "intl"],
+    "homepage": "http://symfony.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bernhard Schussek",
+            "email": "bschussek@gmail.com"
+        },
+        {
+            "name": "Symfony Community",
+            "homepage": "http://symfony.com/contributors"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "symfony/intl": "~2.3"
+    },
+    "autoload": {
+        "psr-0": { "Symfony\\Component\\Icu\\": "" }
+    },
+    "target-dir": "Symfony/Component/Icu"
+}

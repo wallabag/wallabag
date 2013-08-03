@@ -1,0 +1,10 @@
+--TEST--
+"include" tag sandboxed
+--TEMPLATE--
+{{ include("foo.twig", sandboxed = true) }}
+--TEMPLATE(foo.twig)--
+{{ foo|e }}
+--DATA--
+return array()
+--EXCEPTION--
+Twig_Sandbox_SecurityError: Filter "e" is not allowed in "index.twig" at line 2.

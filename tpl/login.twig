@@ -1,11 +1,11 @@
 {% extends "layout.twig" %}
 
 {% block title %}{% trans "login to your poche" %}{% endblock %}
-{% block messages %}
+{% block notices %}
             <div class="messages">
                 <ul>
-                {% for error in errors %}
-                    <li>{{ error.value|e }}</li>
+                {% for notice in notices %}
+                    <li>{{ notice.value|e }}</li>
                 {% endfor %}
                 </ul>
             </div>
@@ -28,7 +28,7 @@
 						<label class="col w150p">{% trans "Stay signed in" %}</label>
 						<div class="col">
 							<input type="checkbox" name="longlastingsession" tabindex="3">
-							<small class="inbl">(Do not check on public computers)</small>
+							<small class="inbl">{% trans "(Do not check on public computers)" %}</small>
 						</div>
 					</div>
 					<div class="row mts txtcenter">

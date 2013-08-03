@@ -1,0 +1,42 @@
+--TEST--
+"slice" filter
+--TEMPLATE--
+{{ [1, 2, 3, 4][1:2]|join('') }}
+{{ {a: 1, b: 2, c: 3, d: 4}[1:2]|join('') }}
+{{ [1, 2, 3, 4][start:length]|join('') }}
+{{ [1, 2, 3, 4]|slice(1, 2)|join('') }}
+{{ [1, 2, 3, 4]|slice(1, 2)|keys|join('') }}
+{{ [1, 2, 3, 4]|slice(1, 2, true)|keys|join('') }}
+{{ {a: 1, b: 2, c: 3, d: 4}|slice(1, 2)|join('') }}
+{{ {a: 1, b: 2, c: 3, d: 4}|slice(1, 2)|keys|join('') }}
+{{ '1234'|slice(1, 2) }}
+{{ '1234'[1:2] }}
+{{ arr|slice(1, 2)|join('') }}
+{{ arr[1:2]|join('') }}
+
+{{ [1, 2, 3, 4]|slice(1)|join('') }}
+{{ [1, 2, 3, 4][1:]|join('') }}
+{{ '1234'|slice(1) }}
+{{ '1234'[1:] }}
+{{ '1234'[:1] }}
+--DATA--
+return array('start' => 1, 'length' => 2, 'arr' => new ArrayObject(array(1, 2, 3, 4)))
+--EXPECT--
+23
+23
+23
+23
+01
+12
+23
+bc
+23
+23
+23
+23
+
+234
+234
+234
+234
+1
