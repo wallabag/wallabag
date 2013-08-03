@@ -134,9 +134,35 @@ function fetch_url_content($url)
     return FALSE;
 }
 
+function get_tpl_file($view)
+{
+    $tpl_file = 'home.twig';
+    switch ($view)
+    {
+        case 'install':
+            $tpl_file = 'install.twig';
+            break;
+        case 'import';
+            $tpl_file = 'import.twig';
+            break;
+        case 'export':
+            $tpl_file = 'export.twig';
+            break;
+        case 'config':
+            $tpl_file = 'config.twig';
+            break;
+        case 'view':
+            $tpl_file = 'view.twig';
+            break;
+        default:
+        break;
+    }
+    return $tpl_file;
+}
+
 function display_view($view, $id = 0)
 {
-    global $tpl, $store;
+    global $store;
 
     $tpl_vars = array();
 
@@ -155,12 +181,6 @@ function display_view($view, $id = 0)
             pocheTools::logm('export view');
             break;
         case 'config':
-            $tpl->assign('load_all_js', 0);
-            $tpl->draw('head');
-            $tpl->draw('home');
-            $tpl->draw('config');
-            $tpl->draw('js');
-            $tpl->draw('footer');
             pocheTools::logm('config view');
             break;
         case 'view':
@@ -191,18 +211,6 @@ function display_view($view, $id = 0)
             $tpl_vars = array(
                 'entries' => $entries,
             );
-
-            // if ($full_head == 'yes') {
-            //     $tpl->assign('load_all_js', 1);
-            //     $tpl->draw('head');
-            //     $tpl->draw('home');
-            // }
-
-            // $tpl->draw('entries');
-            // if ($full_head == 'yes') {
-            //     $tpl->draw('js');
-            //     $tpl->draw('footer');
-            // }
             break;
     }
 

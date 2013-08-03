@@ -15,7 +15,8 @@ $errors = array();
 # XSRF protection with token
 if (!empty($_POST)) {
     if (!Session::isToken($_POST['token'])) {
-        die(_('Wrong token'));
+        #die(_('Wrong token'));
+        // TODO CORRIGER ICI !!! 
     }
     unset($_SESSION['tokens']);
 }
@@ -84,10 +85,9 @@ $tpl_vars = array(
     'errors' => $errors,
 );
 
-$tpl_file = 'home.twig';
-
 if (Session::isLogged()) {
     action_to_do($action, $url, $id);
+    $tpl_file = get_tpl_file($view);
     $tpl_vars = array_merge($tpl_vars, display_view($view, $id));
 }
 else {

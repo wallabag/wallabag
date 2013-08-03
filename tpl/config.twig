@@ -1,3 +1,16 @@
+{% extends "layout.twig" %}
+
+{% block title %}{% trans "config" %}{% endblock %}
+{% block menu %}
+            <ul id="links">
+                <li><a href="./" {% if view == 'home' %}class="current"{% endif %}>{% trans "home" %}</a></li>
+                <li><a href="./?view=fav" {% if view == 'fav' %}class="current"{% endif %}>{% trans "favorites" %}</a></li>
+                <li><a href="./?view=archive" {% if view == 'archive' %}class="current"{% endif %}>{% trans "archive" %}</a></li>
+                <li><a href="./?view=config" {% if view == 'config' %}class="current"{% endif %}>{% trans "config" %}</a></li>
+                <li><a href="./?logout" title="{% trans "logout" %}">{% trans "logout" %}</a></li>
+            </ul>
+{% endblock %}
+{% block content %}
             <div id="content">
             	<h2>Bookmarklet</h2>
             	<p>Thanks to the bookmarklet, you will be able to easily add a link to your poche. If you don't know how use a bookmarklet, <a href="http://support.mozilla.org/en-US/kb/bookmarklets-perform-common-web-page-tasks">have a look here</a>.</p>
@@ -25,3 +38,4 @@
                 <h2>Export</h2>
                 <p><a href="?view=export" target="_blank">Click here</a> to export your poche datas.</p>
             </div>
+{% endblock %}

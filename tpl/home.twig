@@ -1,19 +1,18 @@
 {% extends "layout.twig" %}
-
-{% block title %}Home{% endblock %}
+{% block title %}{% trans "home" %}{% endblock %}
 {% block menu %}
             <ul id="links">
-                <li><a href="index.php" {% if view == 'home' %}class="current"{% endif %}>home</a></li>
-                <li><a href="?view=fav" {% if view == 'fav' %}class="current"{% endif %}>favorites</a></li>
-                <li><a href="?view=archive" {% if view == 'archive' %}class="current"{% endif %}>archive</a></li>
-                <li><a href="?view=config" {% if view == 'config' %}class="current"{% endif %}>config</a></li>
-                <li><a href="?logout" title="Logout">logout</a></li>
+                <li><a href="./" {% if view == 'home' %}class="current"{% endif %}>{% trans "home" %}</a></li>
+                <li><a href="./?view=fav" {% if view == 'fav' %}class="current"{% endif %}>{% trans "favorites" %}</a></li>
+                <li><a href="./?view=archive" {% if view == 'archive' %}class="current"{% endif %}>{% trans "archive" %}</a></li>
+                <li><a href="./?view=config" {% if view == 'config' %}class="current"{% endif %}>{% trans "config" %}</a></li>
+                <li><a href="./?logout" title="{% trans "logout" %}">{% trans "logout" %}</a></li>
             </ul>
 {% endblock %}
 {% block precontent %}
             <ul id="sort">
-                <li><img src="img/up.png" onclick="sort_links('{{ view }}', 'ia');" title="by date asc" /> by date <img src="img/down.png" onclick="sort_links('{{ view }}', 'id');" title="by date desc" /></li>
-                <li><img src="img/up.png" onclick="sort_links('{{ view }}', 'ta');" title="by title asc" /> by title <img src="img/down.png" onclick="sort_links('{{ view }}', 'td');" title="by title desc" /></li>
+                <li><img src="img/up.png" onclick="sort_links('{{ view }}', 'ia');" title="{% trans "by date asc" %}" /> {% trans "by date" %} <img src="img/down.png" onclick="sort_links('{{ view }}', 'id');" title="{% trans "by date desc" %}" /></li>
+                <li><img src="img/up.png" onclick="sort_links('{{ view }}', 'ta');" title="{% trans "by title asc" %}" /> {% trans "by title" %} <img src="img/down.png" onclick="sort_links('{{ view }}', 'td');" title="{% trans "by title desc" %}" /></li>
             </ul>
 {% endblock %}
 {% block content %}
@@ -27,9 +26,9 @@
                             <div class="tools">
                                 <ul>
                                     <li>
-                                        <a title="toggle mark as read" class="tool archive {% if entry.is_read == 0 %}archive-off{% endif %}" onclick="toggle_archive(this, {{ entry.id|e }})"><span></span></a></li>
-                                        <li><a title="toggle favorite" class="tool fav {% if entry.is_fav == 0 %}fav-off{% endif %}" onclick="toggle_favorite(this, {{ entry.id|e }})"><span></span></a></li>
-                                        <li><form method="post" onsubmit="return confirm('Are you sure?')" style="display: inline;"><input type="hidden" name="token" id="token" value="{{ token }}" /><input type="hidden" id="action" name="action" value="delete" /><input type="hidden" id="view" name="view" value="{{ view }}" /><input type="hidden" id="id" name="id" value="{{ entry.id|e }}" /><input type="submit" class="delete" title="toggle delete" /></form>
+                                        <a title="{% trans "toggle mark as read" %}" class="tool archive {% if entry.is_read == 0 %}archive-off{% endif %}" onclick="toggle_archive(this, {{ entry.id|e }})"><span></span></a></li>
+                                        <li><a title="{% trans "toggle favorite" %}" class="tool fav {% if entry.is_fav == 0 %}fav-off{% endif %}" onclick="toggle_favorite(this, {{ entry.id|e }})"><span></span></a></li>
+                                        <li><form method="post" onsubmit="return confirm('{% trans "are you sure?" %}')" style="display: inline;"><input type="hidden" name="token" id="token" value="{{ token }}" /><input type="hidden" id="action" name="action" value="delete" /><input type="hidden" id="view" name="view" value="{{ view }}" /><input type="hidden" id="id" name="id" value="{{ entry.id|e }}" /><input type="submit" class="delete" title="{% trans "toggle delete" %}" /></form>
                                     </li>
                                 </ul>
                             </div>
@@ -38,4 +37,26 @@
                     </div>
                 {% endfor %}
             </div>
+{% endblock %}
+
+{% block js %}
+            <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+            <script type="text/javascript" src="js/poche.js"></script>
+            <script type="text/javascript" src="js/jquery.masonry.min.js"></script>
+            <script type="text/javascript">
+                $( window ).load( function()
+                {
+                    var columns    = 3,
+                        setColumns = function() { columns = $( window ).width() > 640 ? 3 : $( window ).width() > 320 ? 2 : 1; };
+
+                    setColumns();
+                    $( window ).resize( setColumns );
+
+                    $( '#content' ).masonry(
+                    {
+                        itemSelector: '.entrie',
+                        columnWidth:  function( containerWidth ) { return containerWidth / columns; }
+                    });
+                });
+            </script>
 {% endblock %}
