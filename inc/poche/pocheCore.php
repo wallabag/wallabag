@@ -134,9 +134,11 @@ function fetch_url_content($url)
     return FALSE;
 }
 
-function display_view($view, $id = 0, $full_head = 'yes')
+function display_view($view, $id = 0)
 {
     global $tpl, $store;
+
+    $tpl_vars = array();
 
     switch ($view)
     {
@@ -186,21 +188,25 @@ function display_view($view, $id = 0, $full_head = 'yes')
             break;
         default: # home view
             $entries = $store->getEntriesByView($view);
-            $tpl->assign('entries', $entries);
+            $tpl_vars = array(
+                'entries' => $entries,
+            );
 
-            if ($full_head == 'yes') {
-                $tpl->assign('load_all_js', 1);
-                $tpl->draw('head');
-                $tpl->draw('home');
-            }
+            // if ($full_head == 'yes') {
+            //     $tpl->assign('load_all_js', 1);
+            //     $tpl->draw('head');
+            //     $tpl->draw('home');
+            // }
 
-            $tpl->draw('entries');
-            if ($full_head == 'yes') {
-                $tpl->draw('js');
-                $tpl->draw('footer');
-            }
+            // $tpl->draw('entries');
+            // if ($full_head == 'yes') {
+            //     $tpl->draw('js');
+            //     $tpl->draw('footer');
+            // }
             break;
     }
+
+    return $tpl_vars;
 }
 
 /**

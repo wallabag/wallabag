@@ -1,21 +1,41 @@
-    <body class="light-style">
-        <header>
-            <h1><a href="index.php"><img src="./img/logo.png" alt="logo poche" /></a>poche</h1>
-        </header>
-        <div id="main">
+{% extends "layout.twig" %}
+
+{% block title %}Home{% endblock %}
 {% block menu %}
             <ul id="links">
-                <li><a href="index.php" {if="$view == 'index'"}class="current"{/if}>home</a></li>
-                <li><a href="?view=fav" {if="$view == 'fav'"}class="current"{/if}>favorites</a></li>
-                <li><a href="?view=archive" {if="$view == 'archive'"}class="current"{/if}>archive</a></li>
-                <li><a href="?view=config" {if="$view == 'config'"}class="current"{/if}>config</a></li>
+                <li><a href="index.php" {% if view == 'home' %}class="current"{% endif %}>home</a></li>
+                <li><a href="?view=fav" {% if view == 'fav' %}class="current"{% endif %}>favorites</a></li>
+                <li><a href="?view=archive" {% if view == 'archive' %}class="current"{% endif %}>archive</a></li>
+                <li><a href="?view=config" {% if view == 'config' %}class="current"{% endif %}>config</a></li>
                 <li><a href="?logout" title="Logout">logout</a></li>
             </ul>
 {% endblock %}
 {% block precontent %}
             <ul id="sort">
-                <li><img src="img/up.png" onclick="sort_links('{$view}', 'ia');" title="by date asc" /> by date <img src="img/down.png" onclick="sort_links('{$view}', 'id');" title="by date desc" /></li>
-                <li><img src="img/up.png" onclick="sort_links('{$view}', 'ta');" title="by title asc" /> by title <img src="img/down.png" onclick="sort_links('{$view}', 'td');" title="by title desc" /></li>
+                <li><img src="img/up.png" onclick="sort_links('{{ view }}', 'ia');" title="by date asc" /> by date <img src="img/down.png" onclick="sort_links('{{ view }}', 'id');" title="by date desc" /></li>
+                <li><img src="img/up.png" onclick="sort_links('{{ view }}', 'ta');" title="by title asc" /> by title <img src="img/down.png" onclick="sort_links('{{ view }}', 'td');" title="by title desc" /></li>
             </ul>
 {% endblock %}
-            {include="messages"}
+{% block content %}
+            <div id="content">
+                {% for entry in entries %}
+                    <div id="entry-{{ entry.id|e }}" class="entrie mb2">
+                        <span class="content">
+                            <h2 class="h6-like">
+                                <a href="index.php?&view=view&id={{ entry.id|e }}">{{ entry.title|e }}</a>
+                            </h2>
+                            <div class="tools">
+                                <ul>
+                                    <li>
+                                        <a title="toggle mark as read" class="tool archive {% if entry.is_read == 0 %}archive-off{% endif %}" onclick="toggle_archive(this, {{ entry.id|e }})"><span></span></a></li>
+                                        <li><a title="toggle favorite" class="tool fav {% if entry.is_fav == 0 %}fav-off{% endif %}" onclick="toggle_favorite(this, {{ entry.id|e }})"><span></span></a></li>
+                                        <li><form method="post" onsubmit="return confirm('Are you sure?')" style="display: inline;"><input type="hidden" name="token" id="token" value="{{ token }}" /><input type="hidden" id="action" name="action" value="delete" /><input type="hidden" id="view" name="view" value="{{ view }}" /><input type="hidden" id="id" name="id" value="{{ entry.id|e }}" /><input type="submit" class="delete" title="toggle delete" /></form>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="url">{{ entry.url|e }}</div>
+                        </span>
+                    </div>
+                {% endfor %}
+            </div>
+{% endblock %}

@@ -10,12 +10,12 @@
 
 include dirname(__FILE__).'/inc/config.php';
 
-pocheTools::initPhp();
+$errors = array();
 
 # XSRF protection with token
 if (!empty($_POST)) {
     if (!Session::isToken($_POST['token'])) {
-        die(_('Wrong token.'));
+        die(_('Wrong token'));
     }
     unset($_SESSION['tokens']);
 }
@@ -23,10 +23,11 @@ if (!empty($_POST)) {
 $referer = empty($_SERVER['HTTP_REFERER']) ? '' : $_SERVER['HTTP_REFERER'];
 
 if (isset($_GET['login'])) {
-    // Login
     if (!empty($_POST['login']) && !empty($_POST['password'])) {
         if (Session::login($_SESSION['login'], $_SESSION['pass'], $_POST['login'], encode_string($_POST['password'] . $_POST['login']))) {
             pocheTools::logm('login successful');
+            $errors[]['value'] = _('login successful');
+
             if (!empty($_POST['longlastingsession'])) {
                 $_SESSION['longlastingsession'] = 31536000;
                 $_SESSION['expires_on'] = time() + $_SESSION['longlastingsession'];
@@ -35,11 +36,10 @@ if (isset($_GET['login'])) {
                 session_set_cookie_params(0); // when browser closes
             }
             session_regenerate_id(true);
-
             pocheTools::redirect($referer);
         }
         pocheTools::logm('login failed');
-        die(_("Login failed !"));
+        $errors[]['value'] = _('Login failed !');
     } else {
         pocheTools::logm('login failed');
     }
@@ -67,7 +67,7 @@ elseif  (isset($_GET['config'])) {
 }
 
 # Traitement des paramètres et déclenchement des actions
-$view               = (isset ($_REQUEST['view'])) ? htmlentities($_REQUEST['view']) : 'index';
+$view               = (isset ($_REQUEST['view'])) ? htmlentities($_REQUEST['view']) : 'home';
 $full_head          = (isset ($_REQUEST['full_head'])) ? htmlentities($_REQUEST['full_head']) : 'yes';
 $action             = (isset ($_REQUEST['action'])) ? htmlentities($_REQUEST['action']) : '';
 $_SESSION['sort']   = (isset ($_REQUEST['sort'])) ? htmlentities($_REQUEST['sort']) : 'id';
@@ -75,20 +75,23 @@ $id                 = (isset ($_REQUEST['id'])) ? htmlspecialchars($_REQUEST['id
 $url                = (isset ($_GET['url'])) ? $_GET['url'] : '';
 
 $tpl_vars = array(
-    'isLogged' => Session::isLogged(),
     'referer' => $referer,
     'view' => $view,
     'poche_url' => pocheTools::getUrl(),
     'demo' => MODE_DEMO,
     'title' => _('poche, a read it later open source system'),
+    'token' => Session::getToken(),
+    'errors' => $errors,
 );
+
+$tpl_file = 'home.twig';
 
 if (Session::isLogged()) {
     action_to_do($action, $url, $id);
-    display_view($view, $id, $full_head);
+    $tpl_vars = array_merge($tpl_vars, display_view($view, $id));
 }
 else {
-    $template = $twig->loadTemplate('login.twig');
+    $tpl_file = 'login.twig';
 }
 
-echo $template->render($tpl_vars);
+echo $twig->render($tpl_file, $tpl_vars);

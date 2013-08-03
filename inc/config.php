@@ -10,7 +10,7 @@
 
 define ('POCHE_VERSION', '0.3');
 define ('MODE_DEMO', FALSE);
-define ('DEBUG_POCHE', TRUE);
+define ('DEBUG_POCHE', FALSE);
 define ('CONVERT_LINKS_FOOTNOTES', FALSE);
 define ('REVERT_FORCED_PARAGRAPH_ELEMENTS', FALSE);
 define ('DOWNLOAD_PICTURES', FALSE);
@@ -21,7 +21,7 @@ define ('LOCALE', './locale');
 define ('CACHE', './cache');
 define ('LANG', 'fr_FR.UTF8');
 
-$storage_type = 'sqlite'; # sqlite or file
+$storage_type = 'sqlite'; # sqlite, file
 
 # /!\ Be careful if you change the lines below /!\
 
@@ -76,3 +76,5 @@ if(!$store->isInstalled())
 
 $_SESSION['login'] = (isset ($_SESSION['login'])) ? $_SESSION['login'] : $store->getLogin();
 $_SESSION['pass']  = (isset ($_SESSION['pass'])) ? $_SESSION['pass'] : $store->getPassword();
+
+pocheTools::initPhp();

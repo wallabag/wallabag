@@ -1,5 +1,15 @@
 {% extends "layout.twig" %}
+
 {% block title %}Login{% endblock %}
+{% block messages %}
+            <div class="messages">
+                <ul>
+                {% for error in errors %}
+                    <li>{{ error.value|e }}</li>
+                {% endfor %}
+                </ul>
+            </div>
+{% endblock %}
 {% block content %}
             <form method="post" action="?login" name="loginform">
                 <fieldset class="w500p center">
