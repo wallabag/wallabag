@@ -1,8 +1,0 @@
---TEST--
-"replace" filter
---TEMPLATE--
-{{ "I like %this% and %that%."|replace({'%this%': "foo", '%that%': "bar"}) }}
---DATA--
-return array()
---EXPECT--
-I like foo and bar.
