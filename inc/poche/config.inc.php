@@ -32,6 +32,7 @@ require_once './inc/3rdparty/Session.class.php';
 require_once './inc/store/store.class.php';
 require_once './inc/store/' . $storage_type . '.class.php';
 require_once './vendor/autoload.php';
+require_once './inc/3rdparty/simple_html_dom.php';
 
 if (DOWNLOAD_PICTURES) {
     require_once './inc/poche/pochePicture.php';

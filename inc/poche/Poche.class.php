@@ -73,7 +73,7 @@ class Poche
     /**
      * Call action (mark as fav, archive, delete, etc.)
      */
-    public function action($action, Url $url, $id)
+    public function action($action, Url $url, $id = 0)
     {
         switch ($action)
         {
@@ -117,6 +117,8 @@ class Poche
             case 'toggle_archive' :
                 $this->store->archiveById($id);
                 Tools::logm('archive link #' . $id);
+                break;
+            case 'import':
                 break;
             default:
                 break;
@@ -172,5 +174,109 @@ class Poche
         }
 
         return $tpl_vars;
+    }
+
+    public function updatePassword()
+    {
+        if (isset($_POST['password']) && isset($_POST['password_repeat'])) {
+            if ($_POST['password'] == $_POST['password_repeat'] && $_POST['password'] != "") {
+                if (!MODE_DEMO) {
+                    Tools::logm('password updated');
+                    $this->store->updatePassword(Tools::encodeString($_POST['password'] . $_SESSION['login']));
+                    Session::logout();
+                    Tools::redirect();
+                }
+                else {
+                    Tools::logm('in demo mode, you can\'t do this');
+                }
+            }
+        }
+    }
+
+    public function login($referer)
+    {
+        if (!empty($_POST['login']) && !empty($_POST['password'])) {
+            if (Session::login($_SESSION['login'], $_SESSION['pass'], $_POST['login'], Tools::encodeString($_POST['password'] . $_POST['login']))) {
+                Tools::logm('login successful');
+
+                if (!empty($_POST['longlastingsession'])) {
+                    $_SESSION['longlastingsession'] = 31536000;
+                    $_SESSION['expires_on'] = time() + $_SESSION['longlastingsession'];
+                    session_set_cookie_params($_SESSION['longlastingsession']);
+                } else {
+                    session_set_cookie_params(0);
+                }
+                session_regenerate_id(true);
+                Tools::redirect($referer);
+            }
+            Tools::logm('login failed');
+            Tools::redirect();
+        } else {
+            Tools::logm('login failed');
+            Tools::redirect();
+        }
+    }
+
+    public function logout()
+    {
+        Tools::logm('logout');
+        Session::logout();
+        Tools::redirect();
+    }
+
+    public function import($from)
+    {
+        if ($from == 'pocket') {
+            $html = new simple_html_dom();
+            $html->load_file('./ril_export.html');
+
+            $read = 0;
+            $errors = array();
+            foreach($html->find('ul') as $ul)
+            {
+                foreach($ul->find('li') as $li)
+                {
+                    $a = $li->find('a');
+                    $url = new Url($a[0]->href);
+                    $this->action('add', $url);
+                    if ($read == '1') {
+                        $last_id = $this->store->lastInsertId();
+                        $sql_update = "UPDATE entries SET is_read=~is_read WHERE id=?";
+                        $params_update = array($last_id);
+                        $query_update = $this->store->prepare($sql_update);
+                        $query_update->execute($params_update);
+                    }
+                }
+                # Pocket génère un fichier HTML avec deux <ul>
+                # Le premier concerne les éléments non lus
+                # Le second concerne les éléments archivés
+                $read = 1;
+            }
+            logm('import from pocket completed');
+            Tools::redirect();
+        }
+        else if ($from == 'readability') {
+            # TODO finaliser tout ça ici
+            $str_data = file_get_contents("readability");
+            $data = json_decode($str_data,true);
+
+            foreach ($data as $key => $value) {
+                $url = '';
+                foreach ($value as $key2 => $value2) {
+                    if ($key2 == 'article__url') {
+                        $url = new Url($value2);
+                    }
+                }
+                if ($url != '')
+                    action_to_do('add', $url);
+            }
+            logm('import from Readability completed');
+            Tools::redirect();
+        }
+    }
+
+    public function export()
+    {
+
     }
 }

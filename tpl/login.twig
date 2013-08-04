@@ -1,15 +1,6 @@
 {% extends "layout.twig" %}
 
 {% block title %}{% trans "login to your poche" %}{% endblock %}
-{% block notices %}
-            <div class="messages">
-                <ul>
-                {% for notice in notices %}
-                    <li>{{ notice.value|e }}</li>
-                {% endfor %}
-                </ul>
-            </div>
-{% endblock %}
 {% block content %}
             <form method="post" action="?login" name="loginform">
                 <fieldset class="w500p center">

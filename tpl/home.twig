@@ -15,15 +15,6 @@
                 <li><img src="./tpl/img/up.png" onclick="sort_links('{{ view }}', 'ta');" title="{% trans "by title asc" %}" /> {% trans "by title" %} <img src="./tpl/img/down.png" onclick="sort_links('{{ view }}', 'td');" title="{% trans "by title desc" %}" /></li>
             </ul>
 {% endblock %}
-{% block notices %}
-            <div class="messages">
-                <ul>
-                {% for notice in notices %}
-                    <li>{{ notice.value|e }}</li>
-                {% endfor %}
-                </ul>
-            </div>
-{% endblock %}
 {% block content %}
             <div id="content">
                 {% for entry in entries %}
