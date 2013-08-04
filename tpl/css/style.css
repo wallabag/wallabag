@@ -8,6 +8,10 @@ header {
     text-align: center;
 }
 
+header h1 {
+    font-size: 1.3em;
+}
+
 .bouton {
 	border-radius: 2px;
 }
@@ -16,6 +20,7 @@ header {
     padding: 0;
     list-style-type: none;
     text-align: center;
+    font-size: 0.9em;
 }
 
 #main ul#links li {

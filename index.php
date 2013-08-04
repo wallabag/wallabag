@@ -11,13 +11,13 @@
 include dirname(__FILE__).'/inc/poche/config.inc.php';
 
 #XSRF protection with token
-if (!empty($_POST)) {
-    if (!Session::isToken($_POST['token'])) {
-        die(_('Wrong token'));
-        // TODO remettre le test
-    }
-    unset($_SESSION['tokens']);
-}
+// if (!empty($_POST)) {
+//     if (!Session::isToken($_POST['token'])) {
+//         die(_('Wrong token'));
+//         // TODO remettre le test
+//     }
+//     unset($_SESSION['tokens']);
+// }
 
 $referer = empty($_SERVER['HTTP_REFERER']) ? '' : $_SERVER['HTTP_REFERER'];
 $view = Tools::checkVar('view');

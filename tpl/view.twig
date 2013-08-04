@@ -2,7 +2,7 @@
 {% block title %}{% trans "home" %}{% endblock %}
 
 {% block content %}
-        <div class="w600p">
+        <div id="article" class="w600p">
         	<div class="backhome">
         		<a href="./" title="{% trans "back to home" %}">&larr;</a>
         	</div>
@@ -21,7 +21,7 @@
             </header>
             <article>
                 <div id="readityourselfcontent">
-                    {{ content|striptags }}
+                    {{ content | raw }}
                 </div>
             </article>
             <div class="vieworiginal txtright small"><a href="{$url}" target="_blank" title="{% trans "original" %} : {{ entry.title|e }}">{% trans "view original" %}</a></div>
