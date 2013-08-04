@@ -1,58 +1,41 @@
-<!DOCTYPE html>
-<!--[if lte IE 6]> <html class="no-js ie6 ie67 ie678" lang="en"> <![endif]-->
-<!--[if lte IE 7]> <html class="no-js ie7 ie67 ie678" lang="en"> <![endif]-->
-<!--[if IE 8]> <html class="no-js ie8 ie678" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
-<html>
-    <head>
-        <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=10">
-        <title>{$title}</title>
-        <link rel="shortcut icon" type="image/x-icon" href="./img/favicon.ico" />
-        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="./img/apple-touch-icon-144x144-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="./img/apple-touch-icon-72x72-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" href="./img/apple-touch-icon-precomposed.png">
-        <link rel="stylesheet" href="./css/knacss.css" media="all">
-        <link rel="stylesheet" href="./css/style.css" media="all">
-        <!-- Light Theme -->
-        <link rel="stylesheet" href="./css/style-light.css" media="all" title="light-style">
-        <!-- Dark Theme -->
-        <link rel="alternate stylesheet" href="./css/style-dark.css" media="all" title="dark-style">
-    </head>
-    <body class="article light-style">
-        <div id="article" class="w600p">
+{% extends "layout.twig" %}
+{% block title %}{% trans "home" %}{% endblock %}
+
+{% block content %}
+        <div class="w600p">
         	<div class="backhome">
-        		<a href="index.php" title="back to home">&larr;</a>
+        		<a href="./" title="{% trans "back to home" %}">&larr;</a>
         	</div>
             <div class="tools">
                 <ul>
-                    <li><a title="toggle mark as read" class="tool archive {if="$is_read == '0'"}archive-off{/if}" onclick="toggle_archive(this, {$id})"><span></span></a></li>
-                    <li><a href="#" id="themeswitch">dark</a></li>
-                    <li><a title="toggle favorite" class="tool fav {if="$is_fav == '0'"}fav-off{/if}" onclick="toggle_favorite(this, {$id})"><span></span></a></li>
-                    <li><form method="post" onsubmit="return confirm('Are you sure?')" style="display: inline;" action="index.php"><input type="hidden" name="token" id="token" value="<?php echo Session::getToken(); ?>" /><input type="hidden" id="view" name="view" value="index" /><input type="hidden" id="action" name="action" value="delete" /><input type="hidden" id="id" name="id" value="{$id}" /><input type="submit" class="delete" title="toggle delete" /></form></li>
-                    <li><a href="?logout" title="Logout">logout</a></li>
+                    <li><a title="{% trans "toggle mark as read" %}" class="tool archive {% if entry.is_read == 0 %}archive-off{% endif %}" onclick="toggle_archive(this, {{ entry.id|e }})"><span></span></a></li>
+                    <li><a href="#" id="themeswitch">{% trans "dark" %}</a></li>
+                    <li><a title="{% trans "toggle favorite" %}" class="tool fav {% if entry.is_fav == 0 %}fav-off{% endif %}" onclick="toggle_favorite(this, {{ entry.id|e }})"><span></span></a></li>
+                    <li><form method="post" style="display: inline;" action="index.php"><input type="hidden" name="token" id="token" value="{{ token }}" /><input type="hidden" id="view" name="view" value="index" /><input type="hidden" id="action" name="action" value="delete" /><input type="hidden" id="id" name="id" value="{{ entry.id|e }}" /><input type="submit" class="delete" title="{% trans "toggle delete" %}" /></form></li>
+                    <li><a href="./?logout" title="{% trans "logout" %}">{% trans "logout" %}</a></li>
                 </ul>
             </div>
             <header class="mbm">
-                <h1><a href="{$url}">{$title}</a></h1>
-                <div class="vieworiginal txtright small"><a href="{$url}" target="_blank" title="original : {$title}">view original</a></div>
+                <h1><a href="{{ entry.url|e }}">{{ entry.title|e }}</a></h1>
+                <div class="vieworiginal txtright small"><a href="{{ entry.url|e }}" target="_blank" title="{% trans "original" %} : {{ entry.title|e }}">{% trans "view original" %}</a></div>
             </header>
-            {include="messages"}
             <article>
                 <div id="readityourselfcontent">
-                    {$content}
+                    {{ content|striptags }}
                 </div>
             </article>
-            <div class="vieworiginal txtright small"><a href="{$url}" target="_blank" title="original : {$title}">view original</a></div>
+            <div class="vieworiginal txtright small"><a href="{$url}" target="_blank" title="{% trans "original" %} : {{ entry.title|e }}">{% trans "view original" %}</a></div>
             <div class="backhome">
-                <a href="index.php" title="back to home">&larr;</a>
-                <a href="#" title="back to top">&uarr;</a>
+                <a href="./" title="{% trans "back to home" %}">&larr;</a>
+                <a href="#" title="{% trans "back to top" %}">&uarr;</a>
             </div>
             <div class="support">
-                this article appears wrong? <a href="https://github.com/inthepoche/poche/issues/new">create an issue</a> or <a href="mailto:support@inthepoche.com">contact us by mail</a>
+                {% trans "this article appears wrong?" %} <a href="https://github.com/inthepoche/poche/issues/new">{% trans "create an issue" %}</a> {% trans "or" %} <a href="mailto:support@inthepoche.com">{% trans "contact us by mail" %}</a>
             </div>
-            
+        </div>
+{% endblock %}
 
-        {include="js"}
-        {include="footer"}
+{% block js %}
+            <script type="text/javascript" src="./tpl/js/jquery-1.9.1.min.js"></script>
+            <script type="text/javascript" src="./tpl/js/poche.js"></script>
+{% endblock %}

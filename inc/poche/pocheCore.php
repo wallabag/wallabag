@@ -187,20 +187,16 @@ function display_view($view, $id = 0)
             $entry = $store->retrieveOneById($id);
             if ($entry != NULL) {
                 pocheTools::logm('view link #' . $id);
-                $tpl->assign('id', $entry['id']);
-                $tpl->assign('url', $entry['url']);
-                $tpl->assign('title', $entry['title']);
                 $content = $entry['content'];
                 if (function_exists('tidy_parse_string')) {
                     $tidy = tidy_parse_string($content, array('indent'=>true, 'show-body-only' => true), 'UTF8');
                     $tidy->cleanRepair();
                     $content = $tidy->value;
                 }
-                $tpl->assign('content', $content);
-                $tpl->assign('is_fav', $entry['is_fav']);
-                $tpl->assign('is_read', $entry['is_read']);
-                $tpl->assign('load_all_js', 0);
-                $tpl->draw('view');
+                $tpl_vars = array(
+                    'entry' => $entry,
+                    'content' => $content,
+                );
             }
             else {
                 pocheTools::logm('error in view call : entry is NULL');
