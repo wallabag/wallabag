@@ -205,4 +205,9 @@ class Tools
     {
         return sha1($string . SALT);
     }
+
+    public static function checkVar($var)
+    {
+        return ((isset ($_REQUEST["$var"])) ? htmlentities($_REQUEST["$var"]) : '');
+    }
 }

@@ -1,5 +1,5 @@
 # poche
-Abandon Pocket, Instapaper and other Readability service : adopt poche. It is the same, but it is open source.
+Abandon Pocket, Instapaper and other Readability service : adopt poche. It is the same, but it is open source. Moreover, you can migrate from Pocket & Readability.
 
 ![poche](http://inthepoche.com/img/logo.png)
 
@@ -11,23 +11,23 @@ To get news from poche, [follow us on twitter](http://twitter.com/getpoche) or [
 
 [![flattr](http://api.flattr.com/button/flattr-badge-large.png)](http://flattr.com/thing/1265480/poche-a-read-it-later-open-source-system)
 
-## Usage
-You can easily add a "poched" page with the bookmarklet.
-
-poche save the entire content of a poched links : text and pictures are stored on your server.
-
-You can :
-* read a page in a comfortable reading view
-* archive a link
-* put a link in favorite
-* delete a link
-
 ## Requirements & installation
 You have to install [sqlite for php](http://www.php.net/manual/en/book.sqlite.php) on your server.
 
+[PHP cURL](http://www.php.net/manual/en/book.curl.php) & [tidy_parse_string](http://www.php.net/manual/en/tidy.parsestring.php) are recommended.
+
 Get the [latest version](https://github.com/inthepoche/poche) of poche on github. Unzip it and upload it on your server. poche must have write access on assets, cache and db directories.
 
-That's all, **poche works** !
+Install composer in your project : 
+```bash
+curl -s http://getcomposer.org/installer | php
+```
+Install via composer : 
+```bash
+php composer.phar install
+```
+
+That's all, you can use poche ! 
 
 ## Security
 You **have** to protect your db/poche.sqlite file. Modify the virtual host of your website to add this condition :
@@ -46,9 +46,8 @@ location ~ /(db) {
 }
 ```
 
-## Import from Pocket
-
-If you want to import your Pocket datas, [export them here](https://getpocket.com/export). Put the HTML file in your poche directory, execute import.php file locally by following instructions. Be careful, the script can take a very long time.
+## Usage
+See the documentation on our website : [inthepoche.com](http://inthepoche.com).
 
 ## License
 Copyright © 2010-2013 Nicolas Lœuillet <nicolas@loeuillet.org>

@@ -16,9 +16,9 @@
 						<input class="col" type="password" id="password" name="password" placeholder="Password" tabindex="2" {% if demo == 1 %}value="poche"{% endif %} />
 					</div>
 					<div class="row">
-						<label class="col w150p">{% trans "Stay signed in" %}</label>
+						<label class="col w150p" for="longlastingsession">{% trans "Stay signed in" %}</label>
 						<div class="col">
-							<input type="checkbox" name="longlastingsession" tabindex="3">
+							<input type="checkbox" id="longlastingsession" name="longlastingsession" tabindex="3">
 							<small class="inbl">{% trans "(Do not check on public computers)" %}</small>
 						</div>
 					</div>

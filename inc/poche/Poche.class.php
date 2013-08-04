@@ -118,8 +118,6 @@ class Poche
                 $this->store->archiveById($id);
                 Tools::logm('archive link #' . $id);
                 break;
-            case 'import':
-                break;
             default:
                 break;
         }
@@ -131,18 +129,6 @@ class Poche
 
         switch ($view)
         {
-            case 'install':
-                Tools::logm('install mode');
-                break;
-            case 'import';
-                Tools::logm('import mode');
-                break;
-            case 'export':
-                $entries = $this->store->retrieveAll();
-                // $tpl->assign('export', Tools::renderJson($entries));
-                // $tpl->draw('export');
-                Tools::logm('export view');
-                break;
             case 'config':
                 Tools::logm('config view');
                 break;
@@ -224,59 +210,80 @@ class Poche
         Tools::redirect();
     }
 
+    private function importFromInstapaper()
+    {
+        Tools::logm('import from instapaper completed');
+        Tools::redirect();
+    }
+
+    private function importFromPocket()
+    {
+        $html = new simple_html_dom();
+        $html->load_file('./ril_export.html');
+
+        $read = 0;
+        $errors = array();
+        foreach($html->find('ul') as $ul)
+        {
+            foreach($ul->find('li') as $li)
+            {
+                $a = $li->find('a');
+                $url = new Url(base64_encode($a[0]->href));
+                $this->action('add', $url);
+                if ($read == '1') {
+                    $last_id = $this->store->getLastId();
+                    $this->store->archiveById($last_id);
+                }
+            }
+            # Pocket génère un fichier HTML avec deux <ul>
+            # Le premier concerne les éléments non lus
+            # Le second concerne les éléments archivés
+            $read = 1;
+        }
+        Tools::logm('import from pocket completed');
+        Tools::redirect();
+    }
+
+    private function importFromReadability()
+    {
+        # TODO finaliser tout ça ici
+        # noms des variables + gestion des articles lus
+        $str_data = file_get_contents("./readability");
+        $data = json_decode($str_data,true);
+
+        foreach ($data as $key => $value) {
+            $url = '';
+            foreach ($value as $key2 => $value2) {
+                if ($key2 == 'article__url') {
+                    $url = new Url(base64_encode($value2));
+                }
+            }
+            if ($url->isCorrect())
+                $this->action('add', $url);
+        }
+        Tools::logm('import from Readability completed');
+        Tools::redirect();
+    }
+
     public function import($from)
     {
         if ($from == 'pocket') {
-            $html = new simple_html_dom();
-            $html->load_file('./ril_export.html');
-
-            $read = 0;
-            $errors = array();
-            foreach($html->find('ul') as $ul)
-            {
-                foreach($ul->find('li') as $li)
-                {
-                    $a = $li->find('a');
-                    $url = new Url($a[0]->href);
-                    $this->action('add', $url);
-                    if ($read == '1') {
-                        $last_id = $this->store->lastInsertId();
-                        $sql_update = "UPDATE entries SET is_read=~is_read WHERE id=?";
-                        $params_update = array($last_id);
-                        $query_update = $this->store->prepare($sql_update);
-                        $query_update->execute($params_update);
-                    }
-                }
-                # Pocket génère un fichier HTML avec deux <ul>
-                # Le premier concerne les éléments non lus
-                # Le second concerne les éléments archivés
-                $read = 1;
-            }
-            logm('import from pocket completed');
-            Tools::redirect();
+            $this->importFromPocket();
         }
         else if ($from == 'readability') {
-            # TODO finaliser tout ça ici
-            $str_data = file_get_contents("readability");
-            $data = json_decode($str_data,true);
-
-            foreach ($data as $key => $value) {
-                $url = '';
-                foreach ($value as $key2 => $value2) {
-                    if ($key2 == 'article__url') {
-                        $url = new Url($value2);
-                    }
-                }
-                if ($url != '')
-                    action_to_do('add', $url);
-            }
-            logm('import from Readability completed');
-            Tools::redirect();
+            $this->importFromReadability();
+        }
+        else if ($from == 'instapaper') {
+            $this->importFromInstapaper();
         }
     }
 
     public function export()
     {
-
+        $entries = $this->store->retrieveAll();
+        echo $this->tpl->render('export.twig', array(
+            'export' => Tools::renderJson($entries),
+        ));
+        Tools::logm('export view');
     }
 }

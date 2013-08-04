@@ -10,16 +10,21 @@
 
 include dirname(__FILE__).'/inc/poche/config.inc.php';
 
-# XSRF protection with token
-// if (!empty($_POST)) {
-//     if (!Session::isToken($_POST['token'])) {
-//         die(_('Wrong token'));
-//         // TODO remettre le test
-//     }
-//     unset($_SESSION['tokens']);
-// }
+#XSRF protection with token
+if (!empty($_POST)) {
+    if (!Session::isToken($_POST['token'])) {
+        die(_('Wrong token'));
+        // TODO remettre le test
+    }
+    unset($_SESSION['tokens']);
+}
 
 $referer = empty($_SERVER['HTTP_REFERER']) ? '' : $_SERVER['HTTP_REFERER'];
+$view = Tools::checkVar('view');
+$action = Tools::checkVar('action');
+$id = Tools::checkVar('id');
+$_SESSION['sort'] = Tools::checkVar('sort');
+$url = new Url((isset ($_GET['url'])) ? $_GET['url'] : '');
 
 if (isset($_GET['login'])) {
     # hello you
@@ -36,15 +41,9 @@ elseif (isset($_GET['config'])) {
 elseif (isset($_GET['import'])) {
     $poche->import($_GET['from']);
 }
-
-# Aaaaaaand action !
-$view = (isset ($_REQUEST['view'])) ? htmlentities($_REQUEST['view']) : 'home';
-$full_head = (isset ($_REQUEST['full_head'])) ? htmlentities($_REQUEST['full_head']) : 'yes';
-$action = (isset ($_REQUEST['action'])) ? htmlentities($_REQUEST['action']) : '';
-$_SESSION['sort'] = (isset ($_REQUEST['sort'])) ? htmlentities($_REQUEST['sort']) : 'id';
-$id = (isset ($_REQUEST['id'])) ? htmlspecialchars($_REQUEST['id']) : '';
-
-$url = new Url((isset ($_GET['url'])) ? $_GET['url'] : '');
+elseif (isset($_GET['export'])) {
+    $poche->export();
+}
 
 $tpl_vars = array(
     'referer' => $referer,
@@ -64,4 +63,5 @@ else {
     $tpl_file = 'login.twig';
 }
 
+# Aaaaaaand action !
 echo $poche->tpl->render($tpl_file, $tpl_vars);
