@@ -15,7 +15,7 @@
             	<h2>{% trans "Bookmarklet" %}</h2>
             	<p>{% trans "Thanks to the bookmarklet, you will be able to easily add a link to your poche." %} {% trans "Have a look to this documentation:" %} <a href="http://inthepoche.com/?pages/Documentation" target="_blank">http://inthepoche.com/?pages/Documentation</a>.</p>
             	<p>{% trans "Drag & drop this link to your bookmarks bar and have fun with poche." %}</p>
-                <p><a ondragend="this.click();" style="cursor: move; border: 1px dashed grey; background: white;" title="i am a bookmarklet, use me !" href="javascript:if(top['bookmarklet-url@inthepoche.com']){top['bookmarklet-url@inthepoche.com'];}else{(function(){var%20url%20=%20location.href%20||%20url;window.open('{$poche_url}?action=add&url='%20+%20btoa(url),'_self');})();void(0);}">{% trans "poche it!" %}</a></p>
+                <p><a ondragend="this.click();" style="cursor: move; border: 1px dashed grey; background: white;" title="i am a bookmarklet, use me !" href="javascript:if(top['bookmarklet-url@inthepoche.com']){top['bookmarklet-url@inthepoche.com'];}else{(function(){var%20url%20=%20location.href%20||%20url;window.open('{{ poche_url }}?action=add&url='%20+%20btoa(url),'_self');})();void(0);}">{% trans "poche it!" %}</a></p>
 
                 <h2>{% trans "Change your password" %}</h2>
 	            <form method="post" action="?config" name="loginform">

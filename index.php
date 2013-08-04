@@ -8,7 +8,7 @@
  * @license    http://www.wtfpl.net/ see COPYING file
  */
 
-include dirname(__FILE__).'/inc/config.php';
+include dirname(__FILE__).'/inc/poche/config.inc.php';
 
 $notices = array();
 
@@ -26,9 +26,9 @@ $referer = empty($_SERVER['HTTP_REFERER']) ? '' : $_SERVER['HTTP_REFERER'];
 if (isset($_GET['login'])) {
     # hello you
     if (!empty($_POST['login']) && !empty($_POST['password'])) {
-        if (Session::login($_SESSION['login'], $_SESSION['pass'], $_POST['login'], encode_string($_POST['password'] . $_POST['login']))) {
-            pocheTools::logm('login successful');
-            $pocheTools[]['value'] = _('login successful');
+        if (Session::login($_SESSION['login'], $_SESSION['pass'], $_POST['login'], Tools::encodeString($_POST['password'] . $_POST['login']))) {
+            Tools::logm('login successful');
+            $notices['value'] = _('login successful');
 
             if (!empty($_POST['longlastingsession'])) {
                 $_SESSION['longlastingsession'] = 31536000;
@@ -38,34 +38,34 @@ if (isset($_GET['login'])) {
                 session_set_cookie_params(0);
             }
             session_regenerate_id(true);
-            pocheTools::redirect($referer);
+            Tools::redirect($referer);
         }
-        pocheTools::logm('login failed');
-        $notices[]['value'] = _('Login failed !');
-        pocheTools::redirect();
+        Tools::logm('login failed');
+        $notices['value'] = _('Login failed !');
+        Tools::redirect();
     } else {
-        pocheTools::logm('login failed');
-        pocheTools::redirect();
+        Tools::logm('login failed');
+        Tools::redirect();
     }
 }
 elseif (isset($_GET['logout'])) {
     # see you soon !
-    pocheTools::logm('logout');
+    Tools::logm('logout');
     Session::logout();
-    pocheTools::redirect();
+    Tools::redirect();
 }
 elseif  (isset($_GET['config'])) {
     # Update password
     if (isset($_POST['password']) && isset($_POST['password_repeat'])) {
         if ($_POST['password'] == $_POST['password_repeat'] && $_POST['password'] != "") {
             if (!MODE_DEMO) {
-                pocheTools::logm('password updated');
-                $store->updatePassword(encode_string($_POST['password'] . $_SESSION['login']));
+                Tools::logm('password updated');
+                $poche->store->updatePassword(Tools::encodeString($_POST['password'] . $_SESSION['login']));
                 Session::logout();
-                pocheTools::redirect();
+                Tools::redirect();
             }
             else {
-                pocheTools::logm('in demo mode, you can\'t do this');
+                Tools::logm('in demo mode, you can\'t do this');
             }
         }
     }
@@ -77,12 +77,13 @@ $full_head = (isset ($_REQUEST['full_head'])) ? htmlentities($_REQUEST['full_hea
 $action = (isset ($_REQUEST['action'])) ? htmlentities($_REQUEST['action']) : '';
 $_SESSION['sort'] = (isset ($_REQUEST['sort'])) ? htmlentities($_REQUEST['sort']) : 'id';
 $id = (isset ($_REQUEST['id'])) ? htmlspecialchars($_REQUEST['id']) : '';
-$url = (isset ($_GET['url'])) ? $_GET['url'] : '';
+
+$url = new Url((isset ($_GET['url'])) ? $_GET['url'] : '');
 
 $tpl_vars = array(
     'referer' => $referer,
     'view' => $view,
-    'poche_url' => pocheTools::getUrl(),
+    'poche_url' => Tools::getPocheUrl(),
     'demo' => MODE_DEMO,
     'title' => _('poche, a read it later open source system'),
     'token' => Session::getToken(),
@@ -90,12 +91,12 @@ $tpl_vars = array(
 );
 
 if (Session::isLogged()) {
-    action_to_do($action, $url, $id);
-    $tpl_file = get_tpl_file($view);
-    $tpl_vars = array_merge($tpl_vars, display_view($view, $id));
+    $poche->action($action, $url, $id);
+    $tpl_file = Tools::getTplFile($view);
+    $tpl_vars = array_merge($tpl_vars, $poche->displayView($view, $id));
 }
 else {
     $tpl_file = 'login.twig';
 }
 
-echo $twig->render($tpl_file, $tpl_vars);
+echo $poche->tpl->render($tpl_file, $tpl_vars);

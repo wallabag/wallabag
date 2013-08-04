@@ -67,7 +67,7 @@ function get_absolute_link($relative_link, $url) {
  */
 function download_pictures($absolute_path, $fullpath)
 {
-    $rawdata = get_external_file($absolute_path);
+    $rawdata = Tools::getFile($absolute_path);
 
     if(file_exists($fullpath)) {
         unlink($fullpath);

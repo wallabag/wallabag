@@ -90,7 +90,7 @@ class Sqlite extends Store {
         }
         catch (Exception $e)
         {
-            logm('execute query error : '.$e->getMessage());
+            Tools::logm('execute query error : '.$e->getMessage());
         }
     }
 
