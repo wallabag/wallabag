@@ -47,6 +47,10 @@ header h1 {
     cursor: pointer;
 }
 
+ul#messages {
+    
+}
+
 #main, #article {
     margin: 0 auto;
 }
@@ -99,6 +103,7 @@ input[type=submit].delete {
 }
 
 .tools {
+    float: right;
     text-align: right;
 }
 
@@ -121,7 +126,6 @@ input[type=submit].delete {
     top: 0px;
     right: 0px;
     width: 100%;
-    text-align: left;
 }
 
 #article .tools ul li{

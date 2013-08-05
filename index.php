@@ -61,5 +61,8 @@ else {
     $tpl_file = 'login.twig';
 }
 
+# because messages can be added in $poche->action(), we have to add this entry now (we can add it before)
+$tpl_vars = array_merge($tpl_vars, array('messages' => $poche->messages->display()));
+
 # Aaaaaaand action !
 echo $poche->tpl->render($tpl_file, $tpl_vars);

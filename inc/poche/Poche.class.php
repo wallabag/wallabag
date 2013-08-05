@@ -12,6 +12,7 @@ class Poche
 {
     public $store;
     public $tpl;
+    public $messages;
 
     function __construct($storage_type)
     {
@@ -41,6 +42,9 @@ class Poche
             'cache' => CACHE,
         ));
         $this->tpl->addExtension(new Twig_Extensions_Extension_I18n());
+        # filter to display domain name of an url
+        $filter = new Twig_SimpleFilter('getDomain', 'Tools::getDomain');
+        $this->tpl->addFilter($filter);
 
         Tools::initPhp();
         Session::init();
@@ -113,10 +117,12 @@ class Poche
             case 'toggle_fav' :
                 $this->store->favoriteById($id);
                 Tools::logm('mark as favorite link #' . $id);
+                Tools::redirect();
                 break;
             case 'toggle_archive' :
                 $this->store->archiveById($id);
                 Tools::logm('archive link #' . $id);
+                Tools::redirect();
                 break;
             default:
                 break;
@@ -174,16 +180,21 @@ class Poche
 
     public function updatePassword()
     {
-        if (isset($_POST['password']) && isset($_POST['password_repeat'])) {
-            if ($_POST['password'] == $_POST['password_repeat'] && $_POST['password'] != "") {
-                if (!MODE_DEMO) {
+        if (MODE_DEMO) {
+            $this->messages->add('i', 'in demo mode, you can\'t update your password');
+            Tools::logm('in demo mode, you can\'t do this');
+        }
+        else {
+            if (isset($_POST['password']) && isset($_POST['password_repeat'])) {
+                if ($_POST['password'] == $_POST['password_repeat'] && $_POST['password'] != "") {
                     Tools::logm('password updated');
+                    $this->messages->add('s', 'your password has been updated');
                     $this->store->updatePassword(Tools::encodeString($_POST['password'] . $_SESSION['login']));
                     Session::logout();
                     Tools::redirect();
                 }
                 else {
-                    Tools::logm('in demo mode, you can\'t do this');
+                    $this->messages->add('e', 'the two fields have to be filled & the password must be the same in the two fields');
                 }
             }
         }
@@ -194,7 +205,7 @@ class Poche
         if (!empty($_POST['login']) && !empty($_POST['password'])) {
             if (Session::login($_SESSION['login'], $_SESSION['pass'], $_POST['login'], Tools::encodeString($_POST['password'] . $_POST['login']))) {
                 Tools::logm('login successful');
-
+                $this->messages->add('s', 'login successful, welcome to your poche');
                 if (!empty($_POST['longlastingsession'])) {
                     $_SESSION['longlastingsession'] = 31536000;
                     $_SESSION['expires_on'] = time() + $_SESSION['longlastingsession'];
@@ -205,9 +216,11 @@ class Poche
                 session_regenerate_id(true);
                 Tools::redirect($referer);
             }
+            $this->messages->add('e', 'login failed, bad login or password');
             Tools::logm('login failed');
             Tools::redirect();
         } else {
+            $this->messages->add('e', 'login failed, you have to fill all fields');
             Tools::logm('login failed');
             Tools::redirect();
         }
@@ -215,6 +228,7 @@ class Poche
 
     public function logout()
     {
+        $this->messages->add('s', 'logout successful, see you soon!');
         Tools::logm('logout');
         Session::logout();
         Tools::redirect();
@@ -244,6 +258,7 @@ class Poche
             # the second <ol> is for read links
             $read = 1;
         }
+        $this->messages->add('s', 'import from instapaper completed');
         Tools::logm('import from instapaper completed');
         Tools::redirect();
     }
@@ -272,6 +287,7 @@ class Poche
             # the second <ul> is for read links
             $read = 1;
         }
+        $this->messages->add('s', 'import from pocket completed');
         Tools::logm('import from pocket completed');
         Tools::redirect();
     }
@@ -300,6 +316,7 @@ class Poche
             if ($url->isCorrect())
                 $this->action('add', $url);
         }
+        $this->messages->add('s', 'import from Readability completed');
         Tools::logm('import from Readability completed');
         Tools::redirect();
     }

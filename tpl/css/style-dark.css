@@ -65,6 +65,10 @@ a.archive-off span:hover {
     background: url('../img/dark/checkmark-on.png') no-repeat;
 }
 
+a.twitter span {
+    background: url('../img/dark/twitter.png') no-repeat;
+}
+
 /*** ***/
 /*** ARTICLE PAGE ***/
 

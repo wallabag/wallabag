@@ -1,19 +1,16 @@
 {% extends "layout.twig" %}
 {% block title %}{% trans "home" %}{% endblock %}
 {% block menu %}
-            <ul id="links">
-                <li><a href="./" {% if view == 'home' %}class="current"{% endif %}>{% trans "home" %}</a></li>
-                <li><a href="./?view=fav" {% if view == 'fav' %}class="current"{% endif %}>{% trans "favorites" %}</a></li>
-                <li><a href="./?view=archive" {% if view == 'archive' %}class="current"{% endif %}>{% trans "archive" %}</a></li>
-                <li><a href="./?view=config" {% if view == 'config' %}class="current"{% endif %}>{% trans "config" %}</a></li>
-                <li><a href="./?logout" title="{% trans "logout" %}">{% trans "logout" %}</a></li>
-            </ul>
+{% include '_menu.twig' %}
 {% endblock %}
 {% block precontent %}
             <ul id="sort">
-                <li><img src="./tpl/img/up.png" onclick="sort_links('{{ view }}', 'ia');" title="{% trans "by date asc" %}" /> {% trans "by date" %} <img src="./tpl/img/down.png" onclick="sort_links('{{ view }}', 'id');" title="{% trans "by date desc" %}" /></li>
-                <li><img src="./tpl/img/up.png" onclick="sort_links('{{ view }}', 'ta');" title="{% trans "by title asc" %}" /> {% trans "by title" %} <img src="./tpl/img/down.png" onclick="sort_links('{{ view }}', 'td');" title="{% trans "by title desc" %}" /></li>
+                <li><a href="./?sort=ia"><img src="./tpl/img/up.png" title="{% trans "by date asc" %}" /></a> {% trans "by date" %} <a href="./?sort=id"><img src="./tpl/img/down.png" title="{% trans "by date desc" %}" /></a></li>
+                <li><a href="./?sort=ta"><img src="./tpl/img/up.png" title="{% trans "by title asc" %}" /></a> {% trans "by title" %} <a href="./?sort=td"><img src="./tpl/img/down.png" title="{% trans "by title desc" %}" /></a></li>
             </ul>
+{% endblock %}
+{% block messages %}
+{% include '_messages.twig' %}
 {% endblock %}
 {% block content %}
             <div id="content">
@@ -21,18 +18,18 @@
                     <div id="entry-{{ entry.id|e }}" class="entrie mb2">
                         <span class="content">
                             <h2 class="h6-like">
-                                <a href="index.php?&view=view&id={{ entry.id|e }}">{{ entry.title|e }}</a>
+                                <a href="index.php?view=view&id={{ entry.id|e }}">{{ entry.title|e }}</a>
                             </h2>
                             <div class="tools">
                                 <ul>
                                     <li>
-                                        <a title="{% trans "toggle mark as read" %}" class="tool archive {% if entry.is_read == 0 %}archive-off{% endif %}" onclick="toggle_archive(this, {{ entry.id|e }})"><span></span></a></li>
-                                        <li><a title="{% trans "toggle favorite" %}" class="tool fav {% if entry.is_fav == 0 %}fav-off{% endif %}" onclick="toggle_favorite(this, {{ entry.id|e }})"><span></span></a></li>
+                                        <a title="{% trans "toggle mark as read" %}" class="tool archive {% if entry.is_read == 0 %}archive-off{% endif %}" href="./?action=toggle_archive&id={{ entry.id|e }}"><span></span></a></li>
+                                        <li><a title="{% trans "toggle favorite" %}" class="tool fav {% if entry.is_fav == 0 %}fav-off{% endif %}" href="./?action=toggle_fav&id={{ entry.id|e }}"><span></span></a></li>
                                         <li><form method="post" style="display: inline;"><input type="hidden" name="token" id="token" value="{{ token }}" /><input type="hidden" id="action" name="action" value="delete" /><input type="hidden" id="view" name="view" value="{{ view }}" /><input type="hidden" id="id" name="id" value="{{ entry.id|e }}" /><input type="submit" class="delete" title="{% trans "toggle delete" %}" /></form>
                                     </li>
                                 </ul>
                             </div>
-                            <div class="url">{{ entry.url|e }}</div>
+                            <div class="url">{{ entry.url | e | getDomain }}</div>
                         </span>
                     </div>
                 {% endfor %}
@@ -41,22 +38,6 @@
 
 {% block js %}
             <script type="text/javascript" src="./tpl/js/jquery-1.9.1.min.js"></script>
-            <script type="text/javascript" src="./tpl/js/poche.js"></script>
             <script type="text/javascript" src="./tpl/js/jquery.masonry.min.js"></script>
-            <script type="text/javascript">
-                $( window ).load( function()
-                {
-                    var columns    = 3,
-                        setColumns = function() { columns = $( window ).width() > 640 ? 3 : $( window ).width() > 320 ? 2 : 1; };
-
-                    setColumns();
-                    $( window ).resize( setColumns );
-
-                    $( '#content' ).masonry(
-                    {
-                        itemSelector: '.entrie',
-                        columnWidth:  function( containerWidth ) { return containerWidth / columns; }
-                    });
-                });
-            </script>
+            <script type="text/javascript">$(window).load(function(){var e=3,t=function(){e=$(window).width()>640?3:$(window).width()>320?2:1};t();$(window).resize(t);$("#content").masonry({itemSelector:".entrie",columnWidth:function(t){return t/e}})})</script>
 {% endblock %}

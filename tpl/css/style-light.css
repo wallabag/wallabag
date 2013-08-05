@@ -75,6 +75,14 @@ a.archive-off span:hover {
     background: url('../img/light/checkmark-on.png') no-repeat;
 }
 
+a.twitter span {
+    background: url('../img/light/twitter.png') no-repeat;
+}
+
+a.email span {
+    background: url('../img/light/envelop.png') no-repeat;
+}
+
 /*** ***/
 /*** ARTICLE PAGE ***/
 
