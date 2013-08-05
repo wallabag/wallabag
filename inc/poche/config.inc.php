@@ -29,7 +29,6 @@ $storage_type = 'sqlite'; # sqlite, mysql, (file, not yet)
 # /!\ Be careful if you change the lines below /!\
 require_once './inc/poche/Tools.class.php';
 require_once './inc/poche/Url.class.php';
-require_once './inc/3rdparty/Session.class.php';
 require_once './inc/3rdparty/class.messages.php';
 require_once './inc/poche/Poche.class.php';
 require_once './inc/3rdparty/Readability.php';
@@ -39,9 +38,18 @@ require_once './inc/store/' . $storage_type . '.class.php';
 require_once './vendor/autoload.php';
 require_once './inc/3rdparty/simple_html_dom.php';
 require_once './inc/3rdparty/paginator.php';
+require_once './inc/3rdparty/Session.class.php';
 
 if (DOWNLOAD_PICTURES) {
     require_once './inc/poche/pochePictures.php';
 }
 
 $poche = new Poche($storage_type);
+
+#XSRF protection with token
+// if (!empty($_POST)) {
+//     if (!Session::isToken($_POST['token'])) {
+//         die(_('Wrong token'));
+//     }
+//     unset($_SESSION['tokens']);
+// }
