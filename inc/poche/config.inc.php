@@ -8,12 +8,13 @@
  * @license    http://www.wtfpl.net/ see COPYING file
  */
 
-define ('POCHE_VERSION', '0.4');
-define ('MODE_DEMO', FALSE);
+define ('POCHE_VERSION', '1.0-alpha');
+define ('MODE_DEMO', TRUE);
 define ('DEBUG_POCHE', FALSE);
 define ('CONVERT_LINKS_FOOTNOTES', FALSE);
 define ('REVERT_FORCED_PARAGRAPH_ELEMENTS', FALSE);
 define ('DOWNLOAD_PICTURES', FALSE);
+define ('SHARE_TWITTER', TRUE);
 define ('SALT', '464v54gLLw928uz4zUBqkRJeiPY68zCX');
 define ('ABS_PATH', 'assets/');
 define ('TPL', './tpl');

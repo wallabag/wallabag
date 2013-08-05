@@ -49,7 +49,6 @@ $tpl_vars = array(
     'referer' => $referer,
     'view' => $view,
     'poche_url' => Tools::getPocheUrl(),
-    'demo' => MODE_DEMO,
     'title' => _('poche, a read it later open source system'),
     'token' => Session::getToken(),
 );

@@ -212,6 +212,28 @@ class Poche
 
     private function importFromInstapaper()
     {
+        $html = new simple_html_dom();
+        $html->load_file('./instapaper-export.html');
+
+        $read = 0;
+        $errors = array();
+        foreach($html->find('ol') as $ul)
+        {
+            foreach($ul->find('li') as $li)
+            {
+                $a = $li->find('a');
+                $url = new Url(base64_encode($a[0]->href));
+                $this->action('add', $url);
+                if ($read == '1') {
+                    $last_id = $this->store->getLastId();
+                    $this->store->archiveById($last_id);
+                }
+            }
+            # Instapaper génère un fichier HTML avec deux <ol>
+            # Le premier concerne les éléments non lus
+            # Le second concerne les éléments archivés
+            $read = 1;
+        }
         Tools::logm('import from instapaper completed');
         Tools::redirect();
     }
