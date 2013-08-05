@@ -14,7 +14,7 @@ $referer = empty($_SERVER['HTTP_REFERER']) ? '' : $_SERVER['HTTP_REFERER'];
 $view = Tools::checkVar('view', 'home');
 $action = Tools::checkVar('action');
 $id = Tools::checkVar('id');
-$_SESSION['sort'] = Tools::checkVar('sort');
+$_SESSION['sort'] = Tools::checkVar('sort', 'id');
 $url = new Url((isset ($_GET['url'])) ? $_GET['url'] : '');
 
 if (isset($_GET['login'])) {
