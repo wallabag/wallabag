@@ -1,6 +1,6 @@
-/*** GENERAL ***/
 body {
-    font: 20px/1.3em Palatino,Georgia,serif;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
     margin: 10px;
 }
 
@@ -14,6 +14,10 @@ header h1 {
 
 .bouton {
 	border-radius: 2px;
+}
+
+#main {
+    margin: 0 auto;
 }
 
 #main ul#links {
@@ -36,6 +40,7 @@ header h1 {
     padding: 0;
     list-style-type: none;
     text-align: center;
+    opacity: 0.5;
 }
 
 #main ul#sort li {
@@ -47,29 +52,14 @@ header h1 {
     cursor: pointer;
 }
 
-ul#messages {
-    
-}
 
-#main, #article {
-    margin: 0 auto;
-}
-
-#links a, .backhome a, .support a{
+#links a{
     text-decoration: none;
     padding: 5px 10px;
 }
-#links a:hover, .backhome a:hover, .support a:hover{
+#links a:hover{
     -webkit-border-radius: 2px;
     border-radius: 2px;
-}
-
-.support {
-    font-size: 14px;
-}
-
-footer {
-    text-align: right;
 }
 
 /*** ***/
@@ -80,33 +70,41 @@ footer {
     cursor: pointer;
 }
 
-input[type=submit].delete {
-    width : 16px;
-    height :16px;
-    border : none;
-    cursor: pointer;
-    font-size : 0;
-}
-
 #main #content {
     margin-top: 20px;
 }
 
-#main .entrie {
-    padding: 15px;
-    min-height: 8em;
-    border: 1px solid;
+#main #content h2 {
+    font-size: 1.3em;
+    text-decoration: none;
+}
+
+#main #content .entrie {
+    border-bottom: 1px solid #222222;
 }
 
 #main .entrie h2 a {
     text-decoration: none;
 }
 
+#main .entrie ul.tools {
+    list-style-type: none;
+}
+
+#main .entrie ul.tools li {
+    /*display: inline;*/
+}
+
 .tools {
     float: right;
     text-align: right;
+    opacity: 0.5;
 }
 
+.tools p {
+    font-size: 0.8em;}
+
+/*
 .tools ul {
     padding: 0; margin: 0;
     list-style-type: none;
@@ -118,19 +116,7 @@ input[type=submit].delete {
 
 .tools a.tool {
     cursor: pointer;
-}
-
-#article .tools {
-    position: relative;
-    display: inline;
-    top: 0px;
-    right: 0px;
-    width: 100%;
-}
-
-#article .tools ul li{
-    display: inline;
-}
+}*/
 
 #main .entrie .tools a.tool span, #article .tools a.tool span {
     display: inline-block;
@@ -146,10 +132,9 @@ input[type=submit].delete {
 /*** ***/
 /*** ARTICLE PAGE ***/
 
-body.article {
-    font: 20px/1.3em Palatino,Georgia,serif;
+#article {
+    margin: 0 auto;
 }
-
 #article header {
     text-align: left;
 }
@@ -158,58 +143,106 @@ body.article {
     text-decoration: none;
 }
 
-.vieworiginal a {
+.vieworiginal a, .vieworiginal a:hover, .vieworiginal a:visited {
     text-decoration: none;
+    color: #888888;
 }
 
 .backhome {
     display: inline;
 }
 
+#article .tools {
+    position: relative;
+    display: inline;
+    top: 0px;
+    right: 0px;
+    width: 100%;
+}
+
+#article .tools ul li{
+    display: inline;
+}
+
+
+/*** GENERAL ***/
+body {
+    color: #000;
+}
+
+a, a:hover, a:visited {
+    color: #000;
+}
+
+.bouton {
+    background-color: #000;
+    color: #fff;
+    border: none;
+}
+.bouton:hover {
+    background-color: #222222;
+    color: #F1F1F1;
+}
+
+#main ul#links li a.current {
+    background-color: #000;
+    color: #fff;
+}
+
+#links a:hover{
+    background-color: #040707;
+    color: #F1F1F1;
+}
+
+
 /*** ***/
+/*** ARTICLE PAGE ***/
 
-#main
-{
-    max-width: 60em; /* 960 px */
-    margin: 0 auto;
-}
-#content
-{
-    width: 103.125%; /* 990px */
-    overflow: hidden;
-    margin-left: -1.562%; /* 15px */
-    margin-bottom: -1.875em; /* 30px */
+#article header, #article article {
+    border-bottom: 1px solid #222222;
 }
 
-.entrie
-{
-    width: 30.303%; /* 300px */
-    background-color: #fff;
-    float: left;
-    margin: 0 1.515% 1.875em; /* 15px 30px */
+
+/* Pagination */
+.pagination {
+    clear: both;
+    padding-bottom: 20px;
+    padding-top: 10px;
+    text-align: right;
+}
+.pagination a {
+    border: 1px solid #D5D5D5;
+    color: #333;
+    font-size: 11px;
+    font-weight: bold;
+    height: 25px;
+    padding: 4px 8px;
+    text-decoration: none;
+    margin:2px;
+}
+.pagination a:hover, .pagination a:active {
+    background:#efefef;
+}
+.pagination span.current {
+    background-color: #ccc;
+    border: 1px solid #D5D5D5;
+    color: #000;
+    font-size: 11px;
+    font-weight: bold;
+    height: 25px;
+    padding: 4px 8px;
+    text-decoration: none;
+    margin:2px;
+}
+.pagination span.disabled {
+    border: 1px solid #EEEEEE;
+    color: #DDDDDD;
+    margin:2px;
+    padding: 4px 8px;
+    font-size: 11px;
+    font-weight: bold;
 }
 
-@media only screen and ( max-width: 40em ) /* 640px */
-{
-    .entrie
-    {
-        width: 46.876%; /* 305px */
-        margin-bottom: 0.938em; /* 15px */
-    }
-}
-
-@media only screen and ( max-width: 20em ) /* 320px */
-{
-    #content
-    {
-        width: 100%;
-        margin-left: 0;
-    }
-
-    .entrie
-    {
-        width: 100%;
-        margin-left: 0;
-        margin-right: 0;
-    }
+footer {
+    clear: both;
 }

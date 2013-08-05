@@ -114,7 +114,7 @@ class Sqlite extends Store {
         return $entry[0];
     }
 
-    public function getEntriesByView($view) {
+    public function getEntriesByView($view, $limit = '') {
         parent::__construct();
 
         switch ($_SESSION['sort'])
@@ -151,6 +151,8 @@ class Sqlite extends Store {
                 $params = array(0);
                 break;
         }
+
+        $sql .= ' ' . $limit;
 
         $query      = $this->executeQuery($sql, $params);
         $entries    = $query->fetchAll();

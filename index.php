@@ -62,7 +62,8 @@ else {
 }
 
 # because messages can be added in $poche->action(), we have to add this entry now (we can add it before)
-$tpl_vars = array_merge($tpl_vars, array('messages' => $poche->messages->display()));
+$messages = $poche->messages->display('all', FALSE);
+$tpl_vars = array_merge($tpl_vars, array('messages' => $messages));
 
 # Aaaaaaand action !
 echo $poche->tpl->render($tpl_file, $tpl_vars);

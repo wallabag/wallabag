@@ -1,47 +1,12 @@
-/*** GENERAL ***/
-body {
-    color: #222222;
-    background-color: #F1F1F1;
+
+a.back span {
+    background: url('../img/light/left.png') no-repeat;
 }
 
-a, a:hover, a:visited {
-    color: #000;
+a.top span {
+    background: url('../img/light/top.png') no-repeat;
 }
 
-.bouton {
-	background-color: #000;
-    color: #fff;
-    border: none;
-}
-.bouton:hover {
-	background-color: #222222;
-    color: #F1F1F1;
-}
-
-#main ul#links li a.current {
-    background-color: #000;
-    color: #fff;
-}
-
-#links a:hover, .backhome a:hover, .support a:hover{
-    background-color: #040707;
-    color: #F1F1F1;
-}
-
-input[type=submit].delete {
-    background : url('../img/light/remove.png') no-repeat center center;
-    color : transparent;
-}
-
-#main .entrie {
-    color: #2e2e2e;
-    background-color: #ffffff;
-    border: 1px solid #000;
-}
-
-#main .entrie h2 a:hover {
-    color: #F5BE00;
-}
 
 a.fav span {
     background: url('../img/light/star-on.png') no-repeat;
@@ -83,26 +48,6 @@ a.email span {
     background: url('../img/light/envelop.png') no-repeat;
 }
 
-/*** ***/
-/*** ARTICLE PAGE ***/
-
-body.article {
-	color: #222222;
-    background-color: #F1F1F1;
-}
-
-#article header {
-    border-bottom: 1px solid #222222;
-}
-
-#article article {
-    border-bottom: 1px solid #222222;
-}
-
-.vieworiginal a {
-    color: #888888;
-}
-
-.entrie {
-    background-color: #fff;
+a.delete span {
+    background: url('../img/light/remove.png') no-repeat;
 }

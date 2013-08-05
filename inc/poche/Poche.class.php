@@ -13,11 +13,13 @@ class Poche
     public $store;
     public $tpl;
     public $messages;
+    public $pagination;
 
     function __construct($storage_type)
     {
         $this->store = new $storage_type();
         $this->init();
+        $this->messages = new Messages();
 
         # installation
         if(!$this->store->isInstalled())
@@ -46,6 +48,8 @@ class Poche
         $filter = new Twig_SimpleFilter('getDomain', 'Tools::getDomain');
         $this->tpl->addFilter($filter);
 
+        $this->pagination = new Paginator(PAGINATION, 'p');
+
         Tools::initPhp();
         Session::init();
     }
@@ -54,7 +58,7 @@ class Poche
     {
         Tools::logm('poche still not installed');
         echo $this->tpl->render('install.twig', array(
-            'token' => Session::getToken(),
+            'token' => Session::getToken()
         ));
         if (isset($_GET['install'])) {
             if (($_POST['password'] == $_POST['password_repeat']) 
@@ -62,6 +66,11 @@ class Poche
                 # let's rock, install poche baby !
                 $this->store->install($_POST['login'], Tools::encodeString($_POST['password'] . $_POST['login']));
                 Session::logout();
+                Tools::logm('poche is now installed');
+                Tools::redirect();
+            }
+            else {
+                Tools::logm('error during installation');
                 Tools::redirect();
             }
         }
@@ -89,30 +98,32 @@ class Poche
                         if (DOWNLOAD_PICTURES) {
                             $content = filtre_picture($parametres_url['content'], $url->getUrl(), $last_id);
                         }
-                        #$msg->add('s', _('the link has been added successfully'));
+                        $this->messages->add('s', _('the link has been added successfully'));
                     }
                     else {
-                        #$msg->add('e', _('error during insertion : the link wasn\'t added'));
+                        $this->messages->add('e', _('error during insertion : the link wasn\'t added'));
                         Tools::logm('error during insertion : the link wasn\'t added');
                     }
                 }
                 else {
-                    #$msg->add('e', _('error during url preparation : the link wasn\'t added'));
+                    $this->messages->add('e', _('error during fetching content : the link wasn\'t added'));
                     Tools::logm('error during content fetch');
                 }
+                Tools::redirect();
                 break;
             case 'delete':
                 if ($this->store->deleteById($id)) {
                     if (DOWNLOAD_PICTURES) {
                         remove_directory(ABS_PATH . $id);
                     }
-                    #$msg->add('s', _('the link has been deleted successfully'));
+                    $this->messages->add('s', _('the link has been deleted successfully'));
                     Tools::logm('delete link #' . $id);
                 }
                 else {
-                    #$msg->add('e', _('the link wasn\'t deleted'));
+                    $this->messages->add('e', _('the link wasn\'t deleted'));
                     Tools::logm('error : can\'t delete link #' . $id);
                 }
+                Tools::redirect();
                 break;
             case 'toggle_fav' :
                 $this->store->favoriteById($id);
@@ -169,9 +180,14 @@ class Poche
                 break;
             default: # home view
                 $entries = $this->store->getEntriesByView($view);
+                $this->pagination->set_total(count($entries));
+                $page_links = $this->pagination->page_links('?view=' . $view . '&sort=' . $_SESSION['sort'] . '&');
+                $datas = $this->store->getEntriesByView($view, $this->pagination->get_limit());
                 $tpl_vars = array(
-                    'entries' => $entries,
+                    'entries' => $datas,
+                    'page_links' => $page_links,
                 );
+                Tools::logm('display ' . $view . ' view');
                 break;
         }
 
@@ -183,6 +199,7 @@ class Poche
         if (MODE_DEMO) {
             $this->messages->add('i', 'in demo mode, you can\'t update your password');
             Tools::logm('in demo mode, you can\'t do this');
+            Tools::redirect('?view=config');
         }
         else {
             if (isset($_POST['password']) && isset($_POST['password_repeat'])) {
@@ -195,6 +212,7 @@ class Poche
                 }
                 else {
                     $this->messages->add('e', 'the two fields have to be filled & the password must be the same in the two fields');
+                    Tools::redirect('?view=config');
                 }
             }
         }
@@ -205,7 +223,7 @@ class Poche
         if (!empty($_POST['login']) && !empty($_POST['password'])) {
             if (Session::login($_SESSION['login'], $_SESSION['pass'], $_POST['login'], Tools::encodeString($_POST['password'] . $_POST['login']))) {
                 Tools::logm('login successful');
-                $this->messages->add('s', 'login successful, welcome to your poche');
+                $this->messages->add('s', 'welcome to your poche');
                 if (!empty($_POST['longlastingsession'])) {
                     $_SESSION['longlastingsession'] = 31536000;
                     $_SESSION['expires_on'] = time() + $_SESSION['longlastingsession'];
@@ -216,11 +234,11 @@ class Poche
                 session_regenerate_id(true);
                 Tools::redirect($referer);
             }
-            $this->messages->add('e', 'login failed, bad login or password');
+            $this->messages->add('e', 'login failed: bad login or password');
             Tools::logm('login failed');
             Tools::redirect();
         } else {
-            $this->messages->add('e', 'login failed, you have to fill all fields');
+            $this->messages->add('e', 'login failed: you have to fill all fields');
             Tools::logm('login failed');
             Tools::redirect();
         }
@@ -228,7 +246,7 @@ class Poche
 
     public function logout()
     {
-        $this->messages->add('s', 'logout successful, see you soon!');
+        $this->messages->add('s', 'see you soon!');
         Tools::logm('logout');
         Session::logout();
         Tools::redirect();

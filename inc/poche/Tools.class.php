@@ -197,7 +197,7 @@ class Tools
     {
         if (DEBUG_POCHE) {
             $t = strval(date('Y/m/d_H:i:s')) . ' - ' . $_SERVER["REMOTE_ADDR"] . ' - ' . strval($message) . "\n";
-            file_put_contents('./log.txt', $t, FILE_APPEND);
+            file_put_contents(CACHE . '/log.txt', $t, FILE_APPEND);
         }
     }
 

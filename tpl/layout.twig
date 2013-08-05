@@ -12,13 +12,17 @@
         {% include '_head.twig' %}
         {% include '_bookmarklet.twig' %}
     </head>
-    <body class="light-style">
+    <body>
         {% include '_top.twig' %}
         <div id="main">
             {% block menu %}{% endblock %}
             {% block precontent %}{% endblock %}
-            {% block messages %}{% endblock %}
+            {% block messages %}
+            {% include '_messages.twig' %}
+            {% endblock %}
+            <div id="content" class="w600p center">
             {% block content %}{% endblock %}
+            </div>
             {% block js %}{% endblock %}
         </div>
         {% include '_footer.twig' %}
