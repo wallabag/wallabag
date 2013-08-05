@@ -20,8 +20,8 @@
                 <h2>{% trans "Updating poche" %}</h2>
                 <p><ul>
                     <li>{% trans "your version" %} : <strong>{{ constant('POCHE_VERSION') }}</strong></li>
-                    <li>{% trans "latest stable version" %} : {{ prod }}. {% if compare_prod == -1 %}<strong>{% trans "a more recent stable version is available." %}</strong>{% else %}{% trans "you are up to date." %}{% endif %}</li>
-                    <li>{% trans "latest dev version" %} : {{ dev }}. {% if compare_dev == -1 %}<strong>{% trans "a more recent development version is available." %}</strong>{% else %}{% trans "you are up to date." %}{% endif %}</li>
+                    <li>{% trans "latest stable version" %} : {{ prod }}. {% if compare_prod == -1 %}<strong><a href="http://inthepoche.com/?pages/T%C3%A9l%C3%A9charger-poche">{% trans "a more recent stable version is available." %}</a></strong>{% else %}{% trans "you are up to date." %}{% endif %}</li>
+                    <li>{% trans "latest dev version" %} : {{ dev }}. {% if compare_dev == -1 %}<strong><a href="http://inthepoche.com/?pages/T%C3%A9l%C3%A9charger-poche">{% trans "a more recent development version is available." %}</a></strong>{% else %}{% trans "you are up to date." %}{% endif %}</li>
                 </ul>
                 </p>
 
