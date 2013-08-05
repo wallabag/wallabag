@@ -212,6 +212,7 @@ class Poche
 
     private function importFromInstapaper()
     {
+        # TODO gestion des articles favs
         $html = new simple_html_dom();
         $html->load_file('./instapaper-export.html');
 
@@ -229,9 +230,8 @@ class Poche
                     $this->store->archiveById($last_id);
                 }
             }
-            # Instapaper génère un fichier HTML avec deux <ol>
-            # Le premier concerne les éléments non lus
-            # Le second concerne les éléments archivés
+
+            # the second <ol> is for read links
             $read = 1;
         }
         Tools::logm('import from instapaper completed');
@@ -240,6 +240,7 @@ class Poche
 
     private function importFromPocket()
     {
+        # TODO gestion des articles favs
         $html = new simple_html_dom();
         $html->load_file('./ril_export.html');
 
@@ -257,9 +258,8 @@ class Poche
                     $this->store->archiveById($last_id);
                 }
             }
-            # Pocket génère un fichier HTML avec deux <ul>
-            # Le premier concerne les éléments non lus
-            # Le second concerne les éléments archivés
+            
+            # the second <ul> is for read links
             $read = 1;
         }
         Tools::logm('import from pocket completed');
@@ -268,17 +268,24 @@ class Poche
 
     private function importFromReadability()
     {
-        # TODO finaliser tout ça ici
-        # noms des variables + gestion des articles lus
+        # TODO gestion des articles lus / favs
         $str_data = file_get_contents("./readability");
         $data = json_decode($str_data,true);
 
         foreach ($data as $key => $value) {
             $url = '';
-            foreach ($value as $key2 => $value2) {
-                if ($key2 == 'article__url') {
-                    $url = new Url(base64_encode($value2));
+            foreach ($value as $attr => $attr_value) {
+                if ($attr == 'article__url') {
+                    $url = new Url(base64_encode($attr_value));
                 }
+                // if ($attr_value == 'favorite' && $attr_value == 'true') {
+                //     $last_id = $this->store->getLastId();
+                //     $this->store->favoriteById($last_id);
+                // }
+                // if ($attr_value == 'archive' && $attr_value == 'true') {
+                //     $last_id = $this->store->getLastId();
+                //     $this->store->archiveById($last_id);
+                // }
             }
             if ($url->isCorrect())
                 $this->action('add', $url);
