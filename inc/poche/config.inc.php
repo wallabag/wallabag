@@ -36,7 +36,7 @@ require_once './vendor/autoload.php';
 require_once './inc/3rdparty/simple_html_dom.php';
 
 if (DOWNLOAD_PICTURES) {
-    require_once './inc/poche/pochePicture.php';
+    require_once './inc/poche/pochePictures.php';
 }
 
 $poche = new Poche($storage_type);

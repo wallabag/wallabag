@@ -130,6 +130,16 @@ class Poche
         switch ($view)
         {
             case 'config':
+                $dev = $this->getPocheVersion('dev');
+                $prod = $this->getPocheVersion('prod');
+                $compare_dev = version_compare(POCHE_VERSION, $dev);
+                $compare_prod = version_compare(POCHE_VERSION, $prod);
+                $tpl_vars = array(
+                    'dev' => $dev,
+                    'prod' => $prod,
+                    'compare_dev' => $compare_dev,
+                    'compare_prod' => $compare_prod,
+                );
                 Tools::logm('config view');
                 break;
             case 'view':
@@ -314,5 +324,17 @@ class Poche
             'export' => Tools::renderJson($entries),
         ));
         Tools::logm('export view');
+    }
+
+    private function getPocheVersion($which = 'prod')
+    {
+        $cache_file = CACHE . '/' . $which;
+        if (file_exists($cache_file) && (filemtime($cache_file) > (time() - 86400 ))) {
+           $version = file_get_contents($cache_file);
+        } else {
+           $version = file_get_contents('http://www.inthepoche.com/' . $which);
+           file_put_contents($cache_file, $version, LOCK_EX);
+        }
+        return $version;
     }
 }
