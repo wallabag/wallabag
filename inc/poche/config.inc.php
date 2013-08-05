@@ -20,7 +20,7 @@ define ('TPL', './tpl');
 define ('LOCALE', './locale');
 define ('CACHE', './cache');
 define ('LANG', 'fr_FR.UTF8');
-$storage_type = 'sqlite'; # sqlite, file
+$storage_type = 'sqlite'; # sqlite, mysql, (file, not yet)
 
 # /!\ Be careful if you change the lines below /!\
 require_once './inc/poche/Tools.class.php';
