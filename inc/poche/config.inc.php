@@ -9,7 +9,7 @@
  */
 
 define ('POCHE_VERSION', '1.0-alpha');
-define ('MODE_DEMO', TRUE);
+define ('MODE_DEMO', FALSE);
 define ('DEBUG_POCHE', FALSE);
 define ('CONVERT_LINKS_FOOTNOTES', FALSE);
 define ('REVERT_FORCED_PARAGRAPH_ELEMENTS', FALSE);
