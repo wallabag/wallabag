@@ -10,6 +10,7 @@
 
 class Poche
 {
+    public $user;
     public $store;
     public $tpl;
     public $messages;
@@ -26,17 +27,20 @@ class Poche
         {
             $this->install();
         }
-
-        $this->saveUser();
     }
 
     private function init() 
     {
+        Tools::initPhp();
+        Session::init();
+        $this->user = isset($_SESSION['poche_user']) ? $_SESSION['poche_user'] : array();
+
         # l10n
-        putenv('LC_ALL=' . LANG);
-        setlocale(LC_ALL, LANG);
-        bindtextdomain(LANG, LOCALE); 
-        textdomain(LANG); 
+        $language = ($this->user->getConfigValue('language')) ? $this->user->getConfigValue('language') : LANG;
+        putenv('LC_ALL=' . $language);
+        setlocale(LC_ALL, $language);
+        bindtextdomain($language, LOCALE); 
+        textdomain($language); 
 
         # template engine
         $loader = new Twig_Loader_Filesystem(TPL);
@@ -48,10 +52,9 @@ class Poche
         $filter = new Twig_SimpleFilter('getDomain', 'Tools::getDomain');
         $this->tpl->addFilter($filter);
 
-        $this->pagination = new Paginator(PAGINATION, 'p');
-
-        Tools::initPhp();
-        Session::init();
+        # Pagination
+        $pager = ($this->user->getConfigValue('pager')) ? $this->user->getConfigValue('pager') : PAGINATION;
+        $this->pagination = new Paginator($pager, 'p');
     }
 
     private function install() 
@@ -75,12 +78,6 @@ class Poche
             }
         }
         exit();
-    }
-
-    private function saveUser()
-    {
-        $_SESSION['login'] = (isset ($_SESSION['login'])) ? $_SESSION['login'] : $this->store->getLogin();
-        $_SESSION['pass'] = (isset ($_SESSION['pass'])) ? $_SESSION['pass'] : $this->store->getPassword();
     }
 
     /**
@@ -221,7 +218,11 @@ class Poche
     public function login($referer)
     {
         if (!empty($_POST['login']) && !empty($_POST['password'])) {
-            if (Session::login($_SESSION['login'], $_SESSION['pass'], $_POST['login'], Tools::encodeString($_POST['password'] . $_POST['login']))) {
+            $user = $this->store->login($_POST['login'], Tools::encodeString($_POST['password'] . $_POST['login']));
+            if ($user != array()) {
+                # Save login into Session
+                Session::login($user['username'], $user['password'], $_POST['login'], Tools::encodeString($_POST['password'] . $_POST['login']), array('poche_user' => new User($user)));
+
                 Tools::logm('login successful');
                 $this->messages->add('s', 'welcome to your poche');
                 if (!empty($_POST['longlastingsession'])) {
@@ -248,6 +249,7 @@ class Poche
     {
         $this->messages->add('s', 'see you soon!');
         Tools::logm('logout');
+        $this->user = array();
         Session::logout();
         Tools::redirect();
     }

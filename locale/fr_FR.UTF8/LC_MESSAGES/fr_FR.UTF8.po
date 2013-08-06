@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: poche\n"
-"POT-Creation-Date: 2013-08-02 15:38+0100\n"
-"PO-Revision-Date: 2013-08-02 21:57+0100\n"
+"POT-Creation-Date: 2013-08-06 08:35+0100\n"
+"PO-Revision-Date: 2013-08-06 08:35+0100\n"
 "Last-Translator: Nicolas Lœuillet <nicolas.loeuillet@gmail.com>\n"
 "Language-Team: poche <support@inthepoche.com>\n"
 "Language: Français\n"
@@ -16,96 +16,361 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: /var/www/poche-i18n\n"
 
-#: /var/www/poche-i18n/import.php:17
-msgid "Please execute the import script locally, it can take a very long time."
-msgstr "Merci d'exécuter l'import en local, cela peut prendre du temps. "
-
-#: /var/www/poche-i18n/import.php:17
-msgid "Please choose between Pocket & Readabilty :"
-msgstr "Merci de choisir entre Pocket & Readability :"
-
-#: /var/www/poche-i18n/import.php:17
-msgid "Bye bye Pocket, let's go !"
-msgstr "Bye bye Pocket, en route !"
-
-#: /var/www/poche-i18n/import.php:17
-msgid "Bye bye Readability, let's go !"
-msgstr "Bye bye Readability, en route !"
-
-#: /var/www/poche-i18n/import.php:48
-msgid "Import from Pocket completed."
-msgstr "L'import depuis Poche est terminé."
-
-#: /var/www/poche-i18n/import.php:48 /var/www/poche-i18n/import.php:66
-msgid "Welcome to poche !"
-msgstr "Bienvenue dans poche !"
-
-#: /var/www/poche-i18n/import.php:66
-msgid "Import from Readability completed."
-msgstr "L'import depuis Readability est terminé."
-
-#: /var/www/poche-i18n/import.php:70
-msgid "Error with the import."
-msgstr "Erreur durant l'import."
-
-#: /var/www/poche-i18n/import.php:70
-msgid "Back to poche"
-msgstr "Retour à poche"
-
-#: /var/www/poche-i18n/index.php:18
-msgid "Wrong token."
-msgstr "Mauvais jeton."
-
 #: /var/www/poche-i18n/index.php:43
-msgid "Login failed !"
-msgstr "Connexion échouée."
-
-#: /var/www/poche-i18n/index.php:59
-msgid "your password has been updated"
-msgstr "Votre mot de passe a été mis à jour. "
-
-#: /var/www/poche-i18n/index.php:62
-msgid "in demo mode, you can't update password"
-msgstr "En mode démo, le mot de passe ne peut être modifié."
-
-#: /var/www/poche-i18n/index.php:66
-msgid ""
-"your password can't be empty and you have to repeat it in the second field"
-msgstr ""
-"Votre mot de passe ne peut être vide et vous devez le répéter dans le second "
-"champ."
-
-#: /var/www/poche-i18n/index.php:84
 msgid "poche, a read it later open source system"
 msgstr "poche, a read it later open source system"
 
-#: /var/www/poche-i18n/inc/MyTool.class.php:18
-msgid "Oops, it seems you don't have PHP 5."
-msgstr "Oups, il semblerait que PHP 5 ne soit pas installé. "
-
-#: /var/www/poche-i18n/inc/functions.php:354
+#: /var/www/poche-i18n/inc/poche/Poche.class.php:101
 msgid "the link has been added successfully"
 msgstr "le lien a été ajouté avec succès"
 
-#: /var/www/poche-i18n/inc/functions.php:357
+#: /var/www/poche-i18n/inc/poche/Poche.class.php:104
 msgid "error during insertion : the link wasn't added"
 msgstr "erreur durant l'insertion : le lien n'a pas été ajouté"
 
-#: /var/www/poche-i18n/inc/functions.php:361
-msgid "error during url preparation : the link wasn't added"
-msgstr "erreur durant l'insertion : le lien n'a pas été ajouté"
+#: /var/www/poche-i18n/inc/poche/Poche.class.php:109
+msgid "error during fetching content : the link wasn't added"
+msgstr "erreur durant la récupération du contenu : le lien n'a pas été ajouté"
 
-#: /var/www/poche-i18n/inc/functions.php:366
-msgid "error during url preparation : the link is not valid"
-msgstr "erreur durant la préparation de l'URL : le lien n'est pas valide"
-
-#: /var/www/poche-i18n/inc/functions.php:375
+#: /var/www/poche-i18n/inc/poche/Poche.class.php:119
 msgid "the link has been deleted successfully"
 msgstr "le lien a été supprimé avec succès"
 
-#: /var/www/poche-i18n/inc/functions.php:379
+#: /var/www/poche-i18n/inc/poche/Poche.class.php:123
 msgid "the link wasn't deleted"
 msgstr "le lien n'a pas été supprimé"
+
+#: /var/www/poche-i18n/inc/poche/Tools.class.php:18
+msgid "Oops, it seems you don't have PHP 5."
+msgstr "Oups, il semblerait que PHP 5 ne soit pas installé. "
+
+#: /var/www/poche-i18n/cache/c9/b0/845a8dc93165e6c00b6b43068799.php:32
+#: /var/www/poche-i18n/cache/c9/b0/845a8dc93165e6c00b6b43068799.php:70
+#: /var/www/poche-i18n/cache/76/a4/e7c21f2e0ba29104fc654cd8ba41.php:50
+msgid "config"
+msgstr "config"
+
+#: /var/www/poche-i18n/cache/c9/b0/845a8dc93165e6c00b6b43068799.php:46
+#: /var/www/poche-i18n/cache/7a/1e/68e6b4aec1301ae024cc85232e7c.php:31
+#: /var/www/poche-i18n/cache/76/a4/e7c21f2e0ba29104fc654cd8ba41.php:26
+#: /var/www/poche-i18n/cache/dd/a8/530129765655dcde0a70a31a78b6.php:34
+msgid "home"
+msgstr "accueil"
+
+#: /var/www/poche-i18n/cache/c9/b0/845a8dc93165e6c00b6b43068799.php:54
+#: /var/www/poche-i18n/cache/76/a4/e7c21f2e0ba29104fc654cd8ba41.php:34
+msgid "favorites"
+msgstr "favoris"
+
+#: /var/www/poche-i18n/cache/c9/b0/845a8dc93165e6c00b6b43068799.php:62
+#: /var/www/poche-i18n/cache/76/a4/e7c21f2e0ba29104fc654cd8ba41.php:42
+msgid "archive"
+msgstr "archives"
+
+#: /var/www/poche-i18n/cache/c9/b0/845a8dc93165e6c00b6b43068799.php:74
+#: /var/www/poche-i18n/cache/c9/b0/845a8dc93165e6c00b6b43068799.php:76
+#: /var/www/poche-i18n/cache/76/a4/e7c21f2e0ba29104fc654cd8ba41.php:54
+#: /var/www/poche-i18n/cache/76/a4/e7c21f2e0ba29104fc654cd8ba41.php:56
+msgid "logout"
+msgstr "déconnexion"
+
+#: /var/www/poche-i18n/cache/c9/b0/845a8dc93165e6c00b6b43068799.php:87
+msgid "Bookmarklet"
+msgstr "Bookmarklet"
+
+#: /var/www/poche-i18n/cache/c9/b0/845a8dc93165e6c00b6b43068799.php:91
+msgid ""
+"Thanks to the bookmarklet, you will be able to easily add a link to your "
+"poche."
+msgstr ""
+"Grâce au bookmarklet, vous pouvez ajouter facilement un lien dans votre "
+"poche."
+
+#: /var/www/poche-i18n/cache/c9/b0/845a8dc93165e6c00b6b43068799.php:93
+msgid "Have a look to this documentation:"
+msgstr "Jetez un œil à la documentation :"
+
+#: /var/www/poche-i18n/cache/c9/b0/845a8dc93165e6c00b6b43068799.php:97
+msgid "Drag & drop this link to your bookmarks bar and have fun with poche."
+msgstr ""
+"Glissez / déposez ce lien dans votre barre de favoris de votre navigateur et "
+"prenez du bon temps avec poche."
+
+#: /var/www/poche-i18n/cache/c9/b0/845a8dc93165e6c00b6b43068799.php:103
+msgid "poche it!"
+msgstr "poche-le !"
+
+#: /var/www/poche-i18n/cache/c9/b0/845a8dc93165e6c00b6b43068799.php:108
+msgid "Updating poche"
+msgstr "Mettre à jour poche"
+
+#: /var/www/poche-i18n/cache/c9/b0/845a8dc93165e6c00b6b43068799.php:113
+msgid "your version"
+msgstr "votre version"
+
+#: /var/www/poche-i18n/cache/c9/b0/845a8dc93165e6c00b6b43068799.php:119
+msgid "latest stable version"
+msgstr "dernière version stable"
+
+#: /var/www/poche-i18n/cache/c9/b0/845a8dc93165e6c00b6b43068799.php:125
+msgid "a more recent stable version is available."
+msgstr "une version stable plus récente est disponible."
+
+#: /var/www/poche-i18n/cache/c9/b0/845a8dc93165e6c00b6b43068799.php:128
+#: /var/www/poche-i18n/cache/c9/b0/845a8dc93165e6c00b6b43068799.php:142
+msgid "you are up to date."
+msgstr "vous êtes à jour."
+
+#: /var/www/poche-i18n/cache/c9/b0/845a8dc93165e6c00b6b43068799.php:133
+msgid "latest dev version"
+msgstr "dernière version de développement"
+
+#: /var/www/poche-i18n/cache/c9/b0/845a8dc93165e6c00b6b43068799.php:139
+msgid "a more recent development version is available."
+msgstr "une version de développement plus récente est disponible."
+
+#: /var/www/poche-i18n/cache/c9/b0/845a8dc93165e6c00b6b43068799.php:150
+msgid "Change your password"
+msgstr "Modifier votre mot de passe"
+
+#: /var/www/poche-i18n/cache/c9/b0/845a8dc93165e6c00b6b43068799.php:157
+msgid "New password:"
+msgstr "Nouveau mot de passe :"
+
+#: /var/www/poche-i18n/cache/c9/b0/845a8dc93165e6c00b6b43068799.php:161
+#: /var/www/poche-i18n/cache/c9/b0/845a8dc93165e6c00b6b43068799.php:171
+#: /var/www/poche-i18n/cache/d4/28/e0d08991ec2d8a7b133505e7c651.php:60
+#: /var/www/poche-i18n/cache/ae/26/05eb67771213c16bd8c9aaf2d2c4.php:68
+msgid "Password"
+msgstr "Mot de passe"
+
+#: /var/www/poche-i18n/cache/c9/b0/845a8dc93165e6c00b6b43068799.php:167
+msgid "Repeat your new password:"
+msgstr "Répétez le nouveau mot de passe :"
+
+#: /var/www/poche-i18n/cache/c9/b0/845a8dc93165e6c00b6b43068799.php:177
+msgid "Update"
+msgstr "Mettre à jour"
+
+#: /var/www/poche-i18n/cache/c9/b0/845a8dc93165e6c00b6b43068799.php:193
+msgid "Import"
+msgstr "Import"
+
+#: /var/www/poche-i18n/cache/c9/b0/845a8dc93165e6c00b6b43068799.php:197
+msgid "Please execute the import script locally, it can take a very long time."
+msgstr "Merci d'exécuter l'import en local, cela peut prendre du temps. "
+
+#: /var/www/poche-i18n/cache/c9/b0/845a8dc93165e6c00b6b43068799.php:201
+msgid "More infos in the official doc:"
+msgstr "Plus d'infos sur la documentation officielle :"
+
+#: /var/www/poche-i18n/cache/c9/b0/845a8dc93165e6c00b6b43068799.php:206
+msgid "import from Pocket"
+msgstr "l'import depuis Pocket est terminé."
+
+#: /var/www/poche-i18n/cache/c9/b0/845a8dc93165e6c00b6b43068799.php:210
+msgid "import from Readability"
+msgstr "l'import depuis Readability est terminé."
+
+#: /var/www/poche-i18n/cache/c9/b0/845a8dc93165e6c00b6b43068799.php:214
+msgid "import from Instapaper"
+msgstr "Import depuis Instapaper"
+
+#: /var/www/poche-i18n/cache/c9/b0/845a8dc93165e6c00b6b43068799.php:220
+msgid "Export your poche datas"
+msgstr "Exporter vos données de poche"
+
+#: /var/www/poche-i18n/cache/c9/b0/845a8dc93165e6c00b6b43068799.php:224
+msgid "Click here"
+msgstr "Cliquez-ici"
+
+#: /var/www/poche-i18n/cache/c9/b0/845a8dc93165e6c00b6b43068799.php:226
+msgid "to export your poche datas."
+msgstr "pour exporter vos données de poche."
+
+#: /var/www/poche-i18n/cache/7a/1e/68e6b4aec1301ae024cc85232e7c.php:46
+#: /var/www/poche-i18n/cache/7a/1e/68e6b4aec1301ae024cc85232e7c.php:139
+#: /var/www/poche-i18n/cache/30/97/b548692380c89d047a16cec7af79.php:22
+msgid "back to home"
+msgstr "retour à l'accueil"
+
+#: /var/www/poche-i18n/cache/7a/1e/68e6b4aec1301ae024cc85232e7c.php:50
+#: /var/www/poche-i18n/cache/7a/1e/68e6b4aec1301ae024cc85232e7c.php:147
+#: /var/www/poche-i18n/cache/dd/a8/530129765655dcde0a70a31a78b6.php:119
+msgid "toggle mark as read"
+msgstr "marquer comme lu"
+
+#: /var/www/poche-i18n/cache/7a/1e/68e6b4aec1301ae024cc85232e7c.php:60
+#: /var/www/poche-i18n/cache/7a/1e/68e6b4aec1301ae024cc85232e7c.php:157
+#: /var/www/poche-i18n/cache/dd/a8/530129765655dcde0a70a31a78b6.php:129
+msgid "toggle favorite"
+msgstr "favori"
+
+#: /var/www/poche-i18n/cache/7a/1e/68e6b4aec1301ae024cc85232e7c.php:70
+#: /var/www/poche-i18n/cache/7a/1e/68e6b4aec1301ae024cc85232e7c.php:167
+#: /var/www/poche-i18n/cache/dd/a8/530129765655dcde0a70a31a78b6.php:139
+msgid "delete"
+msgstr "supprimer"
+
+#: /var/www/poche-i18n/cache/7a/1e/68e6b4aec1301ae024cc85232e7c.php:82
+#: /var/www/poche-i18n/cache/7a/1e/68e6b4aec1301ae024cc85232e7c.php:179
+msgid "tweet"
+msgstr "tweeter"
+
+#: /var/www/poche-i18n/cache/7a/1e/68e6b4aec1301ae024cc85232e7c.php:93
+#: /var/www/poche-i18n/cache/7a/1e/68e6b4aec1301ae024cc85232e7c.php:190
+msgid "email"
+msgstr "envoyer par email"
+
+#: /var/www/poche-i18n/cache/7a/1e/68e6b4aec1301ae024cc85232e7c.php:109
+#: /var/www/poche-i18n/cache/7a/1e/68e6b4aec1301ae024cc85232e7c.php:125
+#: /var/www/poche-i18n/cache/dd/a8/530129765655dcde0a70a31a78b6.php:153
+msgid "original"
+msgstr "original"
+
+#: /var/www/poche-i18n/cache/7a/1e/68e6b4aec1301ae024cc85232e7c.php:143
+msgid "back to top"
+msgstr "retour en haut de page"
+
+#: /var/www/poche-i18n/cache/7a/1e/68e6b4aec1301ae024cc85232e7c.php:198
+msgid "this article appears wrong?"
+msgstr "cet article s'affiche mal ?"
+
+#: /var/www/poche-i18n/cache/7a/1e/68e6b4aec1301ae024cc85232e7c.php:200
+msgid "create an issue"
+msgstr "créer un ticket"
+
+#: /var/www/poche-i18n/cache/7a/1e/68e6b4aec1301ae024cc85232e7c.php:202
+msgid "or"
+msgstr "ou"
+
+#: /var/www/poche-i18n/cache/7a/1e/68e6b4aec1301ae024cc85232e7c.php:206
+msgid "contact us by mail"
+msgstr "contactez-nous par email"
+
+#: /var/www/poche-i18n/cache/88/8a/ee3b7080c13204391c14947a0c2c.php:22
+msgid "powered by"
+msgstr "propulsé par"
+
+#: /var/www/poche-i18n/cache/d4/28/e0d08991ec2d8a7b133505e7c651.php:31
+msgid "installation"
+msgstr "installation"
+
+#: /var/www/poche-i18n/cache/d4/28/e0d08991ec2d8a7b133505e7c651.php:42
+msgid "install your poche"
+msgstr "installez votre poche"
+
+#: /var/www/poche-i18n/cache/d4/28/e0d08991ec2d8a7b133505e7c651.php:47
+msgid ""
+"poche is still not installed. Please fill the below form to install it. "
+"Don't hesitate to <a href='http://inthepoche.com/?pages/Documentation'>read "
+"the documentation on poche website</a>."
+msgstr ""
+"poche n'est pas encore installé. Merci de remplir les champs ci-dessous pour "
+"l'installer. N'hésitez pas à <a href='http://inthepoche.com/?pages/"
+"Documentation'>lire la documentation sur le site de poche</a>."
+
+#: /var/www/poche-i18n/cache/d4/28/e0d08991ec2d8a7b133505e7c651.php:53
+#: /var/www/poche-i18n/cache/ae/26/05eb67771213c16bd8c9aaf2d2c4.php:55
+msgid "Login"
+msgstr "Nom d'utilisateur"
+
+#: /var/www/poche-i18n/cache/d4/28/e0d08991ec2d8a7b133505e7c651.php:67
+msgid "Repeat your password"
+msgstr "Répétez votre mot de passe"
+
+#: /var/www/poche-i18n/cache/d4/28/e0d08991ec2d8a7b133505e7c651.php:74
+msgid "Install"
+msgstr "Installer"
+
+#: /var/www/poche-i18n/cache/ae/26/05eb67771213c16bd8c9aaf2d2c4.php:31
+#: /var/www/poche-i18n/cache/ae/26/05eb67771213c16bd8c9aaf2d2c4.php:42
+msgid "login to your poche"
+msgstr "Se connecter à votre poche"
+
+#: /var/www/poche-i18n/cache/ae/26/05eb67771213c16bd8c9aaf2d2c4.php:48
+msgid "you are in demo mode, some features may be disabled."
+msgstr ""
+"vous êtes en mode démo, certaines fonctionnalités sont peut-être désactivées."
+
+#: /var/www/poche-i18n/cache/ae/26/05eb67771213c16bd8c9aaf2d2c4.php:80
+msgid "Stay signed in"
+msgstr "rester connecté"
+
+#: /var/www/poche-i18n/cache/ae/26/05eb67771213c16bd8c9aaf2d2c4.php:86
+msgid "(Do not check on public computers)"
+msgstr "(à ne pas cocher sur un ordinateur public)"
+
+#: /var/www/poche-i18n/cache/ae/26/05eb67771213c16bd8c9aaf2d2c4.php:93
+msgid "Sign in"
+msgstr ""
+
+#: /var/www/poche-i18n/cache/dd/a8/530129765655dcde0a70a31a78b6.php:55
+#: /var/www/poche-i18n/cache/dd/a8/530129765655dcde0a70a31a78b6.php:57
+msgid "by date asc"
+msgstr "par date asc"
+
+#: /var/www/poche-i18n/cache/dd/a8/530129765655dcde0a70a31a78b6.php:59
+msgid "by date"
+msgstr "par date"
+
+#: /var/www/poche-i18n/cache/dd/a8/530129765655dcde0a70a31a78b6.php:65
+#: /var/www/poche-i18n/cache/dd/a8/530129765655dcde0a70a31a78b6.php:67
+msgid "by date desc"
+msgstr "par date desc"
+
+#: /var/www/poche-i18n/cache/dd/a8/530129765655dcde0a70a31a78b6.php:75
+#: /var/www/poche-i18n/cache/dd/a8/530129765655dcde0a70a31a78b6.php:77
+msgid "by title asc"
+msgstr "par titre asc"
+
+#: /var/www/poche-i18n/cache/dd/a8/530129765655dcde0a70a31a78b6.php:79
+msgid "by title"
+msgstr "par titre"
+
+#: /var/www/poche-i18n/cache/dd/a8/530129765655dcde0a70a31a78b6.php:85
+#: /var/www/poche-i18n/cache/dd/a8/530129765655dcde0a70a31a78b6.php:87
+msgid "by title desc"
+msgstr "par titre desc"
+
+#~ msgid "Please choose between Pocket & Readabilty :"
+#~ msgstr "Merci de choisir entre Pocket & Readability :"
+
+#~ msgid "Bye bye Pocket, let's go !"
+#~ msgstr "Bye bye Pocket, en route !"
+
+#~ msgid "Bye bye Readability, let's go !"
+#~ msgstr "Bye bye Readability, en route !"
+
+#~ msgid "Welcome to poche !"
+#~ msgstr "Bienvenue dans poche !"
+
+#~ msgid "Error with the import."
+#~ msgstr "Erreur durant l'import."
+
+#~ msgid "Wrong token."
+#~ msgstr "Mauvais jeton."
+
+#~ msgid "Login failed !"
+#~ msgstr "Connexion échouée."
+
+#~ msgid "your password has been updated"
+#~ msgstr "Votre mot de passe a été mis à jour. "
+
+#~ msgid "in demo mode, you can't update password"
+#~ msgstr "En mode démo, le mot de passe ne peut être modifié."
+
+#~ msgid ""
+#~ "your password can't be empty and you have to repeat it in the second field"
+#~ msgstr ""
+#~ "Votre mot de passe ne peut être vide et vous devez le répéter dans le "
+#~ "second champ."
+
+#~ msgid "error during url preparation : the link wasn't added"
+#~ msgstr "erreur durant l'insertion : le lien n'a pas été ajouté"
+
+#~ msgid "error during url preparation : the link is not valid"
+#~ msgstr "erreur durant la préparation de l'URL : le lien n'est pas valide"
 
 #~ msgid "TEST"
 #~ msgstr "NICOLAS"

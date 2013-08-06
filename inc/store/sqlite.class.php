@@ -25,59 +25,59 @@ class Sqlite extends Store {
     }
 
     public function isInstalled() {
-        $sql        = "SELECT name FROM sqlite_sequence WHERE name=?";
-        $query      = $this->executeQuery($sql, array('config'));
-        $hasConfig  = $query->fetchAll();
+        $sql = "SELECT username FROM users WHERE id=?";
+        $query = $this->executeQuery($sql, array('1'));
+        $hasAdmin = $query->fetchAll();
 
-        if (count($hasConfig) == 0) 
-            return FALSE;
-
-        if (!$this->getLogin() || !$this->getPassword()) 
+        if (count($hasAdmin) == 0) 
             return FALSE;
 
         return TRUE;
     }
 
     public function install($login, $password) {
-        $this->getHandle()->exec('CREATE TABLE IF NOT EXISTS "config" ("id" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , "name" VARCHAR UNIQUE, "value" BLOB)');
-
-        $this->handle->exec('CREATE TABLE IF NOT EXISTS "entries" ("id" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , "title" VARCHAR, "url" VARCHAR UNIQUE , "is_read" INTEGER DEFAULT 0, "is_fav" INTEGER DEFAULT 0, "content" BLOB)');
-
-        if (!$this->getLogin()) {
-            $sql_login     = 'INSERT INTO config ( name, value ) VALUES (?, ?)';
-            $params_login  = array('login', $login);
-            $query         = $this->executeQuery($sql_login, $params_login);
-        }
-
-        if (!$this->getPassword()) {
-            $sql_pass     = 'INSERT INTO config ( name, value ) VALUES (?, ?)';
-            $params_pass  = array('password', $password);
-            $query        = $this->executeQuery($sql_pass, $params_pass);
-        }
+        $sql = 'INSERT INTO users ( username, password ) VALUES (?, ?)';
+        $params = array($login, $password);
+        $query = $this->executeQuery($sql, $params);
 
         return TRUE;
     }
 
-    public function getLogin() {
-        $sql    = "SELECT value FROM config WHERE name=?";
-        $query  = $this->executeQuery($sql, array('login'));
+    private function getConfigUser($id) {
+        $sql = "SELECT * FROM users_config WHERE user_id = ?";
+        $query = $this->executeQuery($sql, array($id));
+        $result = $query->fetchAll();
+        $user_config = array();
+        
+        foreach ($result as $key => $value) {
+            $user_config[$value['name']] = $value['value'];
+        }
+
+        return $user_config;
+    }
+
+    public function login($username, $password) {
+        $sql    = "SELECT * FROM users WHERE username=? AND password=?";
+        $query  = $this->executeQuery($sql, array($username, $password));
         $login  = $query->fetchAll();
 
-        return isset($login[0]['value']) ? $login[0]['value'] : FALSE;
+        $user = array();
+        if (isset($login[0])) {
+            $user['id'] = $login[0]['id'];
+            $user['username'] = $login[0]['username'];
+            $user['password'] = $login[0]['password'];
+            $user['name'] = $login[0]['name'];
+            $user['email'] = $login[0]['email'];
+            $user['config'] = $this->getConfigUser($login[0]['id']);
+        }
+
+        return $user;
     }
 
-    public function getPassword() {
-        $sql    = "SELECT value FROM config WHERE name=?";
-        $query  = $this->executeQuery($sql, array('password'));
-        $pass   = $query->fetchAll();
-
-        return isset($pass[0]['value']) ? $pass[0]['value'] : FALSE; 
-    }
-
-    public function updatePassword($password)
+    public function updatePassword($id, $password)
     {
-        $sql_update     = "UPDATE config SET value=? WHERE name='password'";
-        $params_update  = array($password);
+        $sql_update     = "UPDATE users SET password=? WHERE id=?";
+        $params_update  = array($password, $id);
         $query          = $this->executeQuery($sql_update, $params_update);
     }
 

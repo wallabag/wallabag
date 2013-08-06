@@ -13,12 +13,8 @@ class Store {
 
     }
 
-    public function getLogin() {
+    public function login() {
 
-    }
-
-    public function getPassword() {
-        
     }
 
     public function add() {
