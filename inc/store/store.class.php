@@ -52,8 +52,4 @@ class Store {
     public function getLastId() {
 
     }
-
-    public function updateContentById($id) {
-
-    }
 }

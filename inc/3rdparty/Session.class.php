@@ -93,7 +93,7 @@ class Session
     // Force logout
     public static function logout()
     {
-        unset($_SESSION['uid'],$_SESSION['info'],$_SESSION['expires_on'],$_SESSION['tokens'], $_SESSION['login'], $_SESSION['pass']);
+        unset($_SESSION['uid'],$_SESSION['info'],$_SESSION['expires_on'],$_SESSION['tokens'], $_SESSION['login'], $_SESSION['pass'], $_SESSION['poche_user']);
     }
 
     // Make sure user is logged in.

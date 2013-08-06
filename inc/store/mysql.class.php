@@ -192,11 +192,4 @@ class Mysql extends Store {
         parent::__construct();
         return $this->getHandle()->lastInsertId();
     }
-
-    public function updateContentById($id) {
-        parent::__construct();
-        $sql_update     = "UPDATE entries SET content=? WHERE id=?";
-        $params_update  = array($content, $id);
-        $query          = $this->executeQuery($sql_update, $params_update);
-    }
 }

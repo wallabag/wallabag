@@ -10,7 +10,7 @@
 
 define ('POCHE_VERSION', '1.0-beta');
 define ('MODE_DEMO', FALSE);
-define ('DEBUG_POCHE', FALSE);
+define ('DEBUG_POCHE', TRUE);
 define ('CONVERT_LINKS_FOOTNOTES', FALSE);
 define ('REVERT_FORCED_PARAGRAPH_ELEMENTS', FALSE);
 define ('DOWNLOAD_PICTURES', FALSE);

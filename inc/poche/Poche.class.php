@@ -33,10 +33,18 @@ class Poche
     {
         Tools::initPhp();
         Session::init();
-        $this->user = isset($_SESSION['poche_user']) ? $_SESSION['poche_user'] : array();
+
+        if (isset($_SESSION['poche_user'])) {
+            $this->user = $_SESSION['poche_user'];
+        }
+        else {
+            # fake user, just for install & login screens
+            $this->user = new User();
+            $this->user->setConfig($this->getDefaultConfig());
+        }
 
         # l10n
-        $language = ($this->user->getConfigValue('language')) ? $this->user->getConfigValue('language') : LANG;
+        $language = $this->user->getConfigValue('language');
         putenv('LC_ALL=' . $language);
         setlocale(LC_ALL, $language);
         bindtextdomain($language, LOCALE); 
@@ -53,8 +61,7 @@ class Poche
         $this->tpl->addFilter($filter);
 
         # Pagination
-        $pager = ($this->user->getConfigValue('pager')) ? $this->user->getConfigValue('pager') : PAGINATION;
-        $this->pagination = new Paginator($pager, 'p');
+        $this->pagination = new Paginator($this->user->getConfigValue('pager'), 'p');
     }
 
     private function install() 
@@ -80,6 +87,14 @@ class Poche
         exit();
     }
 
+    public function getDefaultConfig()
+    {
+        return array(
+            'pager' => PAGINATION,
+            'language' => LANG,
+            );
+    }
+
     /**
      * Call action (mark as fav, archive, delete, etc.)
      */
@@ -89,7 +104,7 @@ class Poche
         {
             case 'add':
                 if($parametres_url = $url->fetchContent()) {
-                    if ($this->store->add($url->getUrl(), $parametres_url['title'], $parametres_url['content'])) {
+                    if ($this->store->add($url->getUrl(), $parametres_url['title'], $parametres_url['content'], $this->user->getId())) {
                         Tools::logm('add link ' . $url->getUrl());
                         $last_id = $this->store->getLastId();
                         if (DOWNLOAD_PICTURES) {
@@ -109,7 +124,7 @@ class Poche
                 Tools::redirect();
                 break;
             case 'delete':
-                if ($this->store->deleteById($id)) {
+                if ($this->store->deleteById($id, $this->user->getId())) {
                     if (DOWNLOAD_PICTURES) {
                         remove_directory(ABS_PATH . $id);
                     }
@@ -123,12 +138,12 @@ class Poche
                 Tools::redirect();
                 break;
             case 'toggle_fav' :
-                $this->store->favoriteById($id);
+                $this->store->favoriteById($id, $this->user->getId());
                 Tools::logm('mark as favorite link #' . $id);
                 Tools::redirect();
                 break;
             case 'toggle_archive' :
-                $this->store->archiveById($id);
+                $this->store->archiveById($id, $this->user->getId());
                 Tools::logm('archive link #' . $id);
                 Tools::redirect();
                 break;
@@ -157,7 +172,7 @@ class Poche
                 Tools::logm('config view');
                 break;
             case 'view':
-                $entry = $this->store->retrieveOneById($id);
+                $entry = $this->store->retrieveOneById($id, $this->user->getId());
                 if ($entry != NULL) {
                     Tools::logm('view link #' . $id);
                     $content = $entry['content'];
@@ -176,10 +191,10 @@ class Poche
                 }
                 break;
             default: # home view
-                $entries = $this->store->getEntriesByView($view);
+                $entries = $this->store->getEntriesByView($view, $this->user->getId());
                 $this->pagination->set_total(count($entries));
                 $page_links = $this->pagination->page_links('?view=' . $view . '&sort=' . $_SESSION['sort'] . '&');
-                $datas = $this->store->getEntriesByView($view, $this->pagination->get_limit());
+                $datas = $this->store->getEntriesByView($view, $this->user->getId(), $this->pagination->get_limit());
                 $tpl_vars = array(
                     'entries' => $datas,
                     'page_links' => $page_links,
@@ -194,21 +209,21 @@ class Poche
     public function updatePassword()
     {
         if (MODE_DEMO) {
-            $this->messages->add('i', 'in demo mode, you can\'t update your password');
+            $this->messages->add('i', _('in demo mode, you can\'t update your password'));
             Tools::logm('in demo mode, you can\'t do this');
             Tools::redirect('?view=config');
         }
         else {
             if (isset($_POST['password']) && isset($_POST['password_repeat'])) {
                 if ($_POST['password'] == $_POST['password_repeat'] && $_POST['password'] != "") {
-                    Tools::logm('password updated');
-                    $this->messages->add('s', 'your password has been updated');
-                    $this->store->updatePassword(Tools::encodeString($_POST['password'] . $_SESSION['login']));
+                    $this->messages->add('s', _('your password has been updated'));
+                    $this->store->updatePassword($this->user->getId(), Tools::encodeString($_POST['password'] . $this->user->getUsername()));
                     Session::logout();
+                    Tools::logm('password updated');
                     Tools::redirect();
                 }
                 else {
-                    $this->messages->add('e', 'the two fields have to be filled & the password must be the same in the two fields');
+                    $this->messages->add('e', _('the two fields have to be filled & the password must be the same in the two fields'));
                     Tools::redirect('?view=config');
                 }
             }
@@ -223,8 +238,7 @@ class Poche
                 # Save login into Session
                 Session::login($user['username'], $user['password'], $_POST['login'], Tools::encodeString($_POST['password'] . $_POST['login']), array('poche_user' => new User($user)));
 
-                Tools::logm('login successful');
-                $this->messages->add('s', 'welcome to your poche');
+                $this->messages->add('s', _('welcome to your poche'));
                 if (!empty($_POST['longlastingsession'])) {
                     $_SESSION['longlastingsession'] = 31536000;
                     $_SESSION['expires_on'] = time() + $_SESSION['longlastingsession'];
@@ -233,13 +247,14 @@ class Poche
                     session_set_cookie_params(0);
                 }
                 session_regenerate_id(true);
+                Tools::logm('login successful');
                 Tools::redirect($referer);
             }
-            $this->messages->add('e', 'login failed: bad login or password');
+            $this->messages->add('e', _('login failed: bad login or password'));
             Tools::logm('login failed');
             Tools::redirect();
         } else {
-            $this->messages->add('e', 'login failed: you have to fill all fields');
+            $this->messages->add('e', _('login failed: you have to fill all fields'));
             Tools::logm('login failed');
             Tools::redirect();
         }
@@ -247,7 +262,7 @@ class Poche
 
     public function logout()
     {
-        $this->messages->add('s', 'see you soon!');
+        $this->messages->add('s', _('see you soon!'));
         Tools::logm('logout');
         $this->user = array();
         Session::logout();
@@ -271,14 +286,14 @@ class Poche
                 $this->action('add', $url);
                 if ($read == '1') {
                     $last_id = $this->store->getLastId();
-                    $this->store->archiveById($last_id);
+                    $this->action('toggle_archive', $url, $last_id);
                 }
             }
 
             # the second <ol> is for read links
             $read = 1;
         }
-        $this->messages->add('s', 'import from instapaper completed');
+        $this->messages->add('s', _('import from instapaper completed'));
         Tools::logm('import from instapaper completed');
         Tools::redirect();
     }
@@ -300,14 +315,14 @@ class Poche
                 $this->action('add', $url);
                 if ($read == '1') {
                     $last_id = $this->store->getLastId();
-                    $this->store->archiveById($last_id);
+                    $this->action('toggle_archive', $url, $last_id);
                 }
             }
             
             # the second <ul> is for read links
             $read = 1;
         }
-        $this->messages->add('s', 'import from pocket completed');
+        $this->messages->add('s', _('import from pocket completed'));
         Tools::logm('import from pocket completed');
         Tools::redirect();
     }
@@ -327,16 +342,17 @@ class Poche
                 // if ($attr_value == 'favorite' && $attr_value == 'true') {
                 //     $last_id = $this->store->getLastId();
                 //     $this->store->favoriteById($last_id);
+                //     $this->action('toogle_fav', $url, $last_id);
                 // }
                 // if ($attr_value == 'archive' && $attr_value == 'true') {
                 //     $last_id = $this->store->getLastId();
-                //     $this->store->archiveById($last_id);
+                //     $this->action('toggle_archive', $url, $last_id);
                 // }
             }
             if ($url->isCorrect())
                 $this->action('add', $url);
         }
-        $this->messages->add('s', 'import from Readability completed');
+        $this->messages->add('s', _('import from Readability completed'));
         Tools::logm('import from Readability completed');
         Tools::redirect();
     }
@@ -356,7 +372,7 @@ class Poche
 
     public function export()
     {
-        $entries = $this->store->retrieveAll();
+        $entries = $this->store->retrieveAll($this->user->getId());
         echo $this->tpl->render('export.twig', array(
             'export' => Tools::renderJson($entries),
         ));

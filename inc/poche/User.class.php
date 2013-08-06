@@ -17,17 +17,34 @@ class User
     public $email;
     public $config;
 
-    function __construct($user)
+    function __construct($user = array())
     {
-        $this->id = $user['id'];
-        $this->username = $user['username'];
-        $this->name = $user['name'];
-        $this->password = $user['password'];
-        $this->email = $user['email'];
-        $this->config = $user['config'];
+        if ($user != array()) {
+            $this->id = $user['id'];
+            $this->username = $user['username'];
+            $this->name = $user['name'];
+            $this->password = $user['password'];
+            $this->email = $user['email'];
+            $this->config = $user['config'];
+        }
     }
 
-    function getConfigValue($name) {
+    public function getId() 
+    {
+        return $this->id;
+    }
+
+    public function getUsername() 
+    {
+        return $this->username;
+    }
+
+    public function setConfig($config)
+    {
+        $this->config = $config;
+    }
+
+    public function getConfigValue($name) {
         return (isset($this->config[$name])) ? $this->config[$name] : FALSE;
     }
 }

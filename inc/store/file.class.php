@@ -44,8 +44,4 @@ class File extends Store {
     public function getLastId() {
 
     }
-
-    public function updateContentById($id) {
-
-    }
 }

@@ -57,9 +57,9 @@ class Sqlite extends Store {
     }
 
     public function login($username, $password) {
-        $sql    = "SELECT * FROM users WHERE username=? AND password=?";
-        $query  = $this->executeQuery($sql, array($username, $password));
-        $login  = $query->fetchAll();
+        $sql = "SELECT * FROM users WHERE username=? AND password=?";
+        $query = $this->executeQuery($sql, array($username, $password));
+        $login = $query->fetchAll();
 
         $user = array();
         if (isset($login[0])) {
@@ -76,9 +76,9 @@ class Sqlite extends Store {
 
     public function updatePassword($id, $password)
     {
-        $sql_update     = "UPDATE users SET password=? WHERE id=?";
-        $params_update  = array($password, $id);
-        $query          = $this->executeQuery($sql_update, $params_update);
+        $sql_update = "UPDATE users SET password=? WHERE id=?";
+        $params_update = array($password, $id);
+        $query = $this->executeQuery($sql_update, $params_update);
     }
 
     private function executeQuery($sql, $params) {
@@ -94,27 +94,27 @@ class Sqlite extends Store {
         }
     }
 
-    public function retrieveAll() {
-        $sql        = "SELECT * FROM entries ORDER BY id";
-        $query      = $this->executeQuery($sql, array());
+    public function retrieveAll($user_id) {
+        $sql        = "SELECT * FROM entries WHERE user_id=? ORDER BY id";
+        $query      = $this->executeQuery($sql, array($user_id));
         $entries    = $query->fetchAll();
 
         return $entries;
     }
 
-    public function retrieveOneById($id) {
+    public function retrieveOneById($id, $user_id) {
         parent::__construct();
 
         $entry  = NULL;
-        $sql    = "SELECT * FROM entries WHERE id=?";
-        $params = array(intval($id));
+        $sql    = "SELECT * FROM entries WHERE id=? AND user_id=?";
+        $params = array(intval($id), $user_id);
         $query  = $this->executeQuery($sql, $params);
         $entry  = $query->fetchAll();
 
         return $entry[0];
     }
 
-    public function getEntriesByView($view, $limit = '') {
+    public function getEntriesByView($view, $user_id, $limit = '') {
         parent::__construct();
 
         switch ($_SESSION['sort'])
@@ -139,66 +139,59 @@ class Sqlite extends Store {
         switch ($view)
         {
             case 'archive':
-                $sql    = "SELECT * FROM entries WHERE is_read=? " . $order;
-                $params = array(-1);
+                $sql    = "SELECT * FROM entries WHERE user_id=? AND is_read=? " . $order;
+                $params = array($user_id, -1);
                 break;
             case 'fav' :
-                $sql    = "SELECT * FROM entries WHERE is_fav=? " . $order;
-                $params = array(-1);
+                $sql    = "SELECT * FROM entries WHERE user_id=? AND is_fav=? " . $order;
+                $params = array($user_id, -1);
                 break;
             default:
-                $sql    = "SELECT * FROM entries WHERE is_read=? " . $order;
-                $params = array(0);
+                $sql    = "SELECT * FROM entries WHERE user_id=? AND is_read=? " . $order;
+                $params = array($user_id, 0);
                 break;
         }
 
         $sql .= ' ' . $limit;
 
-        $query      = $this->executeQuery($sql, $params);
-        $entries    = $query->fetchAll();
+        $query = $this->executeQuery($sql, $params);
+        $entries = $query->fetchAll();
 
         return $entries;
     }
 
-    public function add($url, $title, $content) {
+    public function add($url, $title, $content, $user_id) {
         parent::__construct();
-        $sql_action     = 'INSERT INTO entries ( url, title, content ) VALUES (?, ?, ?)';
-        $params_action  = array($url, $title, $content);
+        $sql_action = 'INSERT INTO entries ( url, title, content, user_id ) VALUES (?, ?, ?, ?)';
+        $params_action = array($url, $title, $content, $user_id);
+        $query = $this->executeQuery($sql_action, $params_action);
+        return $query;
+    }
+
+    public function deleteById($id, $user_id) {
+        parent::__construct();
+        $sql_action     = "DELETE FROM entries WHERE id=? AND user_id=?";
+        $params_action  = array($id, $user_id);
         $query          = $this->executeQuery($sql_action, $params_action);
         return $query;
     }
 
-    public function deleteById($id) {
+    public function favoriteById($id, $user_id) {
         parent::__construct();
-        $sql_action     = "DELETE FROM entries WHERE id=?";
-        $params_action  = array($id);
-        $query          = $this->executeQuery($sql_action, $params_action);
-        return $query;
-    }
-
-    public function favoriteById($id) {
-        parent::__construct();
-        $sql_action     = "UPDATE entries SET is_fav=~is_fav WHERE id=?";
-        $params_action  = array($id);
+        $sql_action     = "UPDATE entries SET is_fav=~is_fav WHERE id=? AND user_id=?";
+        $params_action  = array($id, $user_id);
         $query          = $this->executeQuery($sql_action, $params_action);
     }
 
-    public function archiveById($id) {
+    public function archiveById($id, $user_id) {
         parent::__construct();
-        $sql_action     = "UPDATE entries SET is_read=~is_read WHERE id=?";
-        $params_action  = array($id);
+        $sql_action     = "UPDATE entries SET is_read=~is_read WHERE id=? AND user_id=?";
+        $params_action  = array($id, $user_id);
         $query          = $this->executeQuery($sql_action, $params_action);
     }
 
     public function getLastId() {
         parent::__construct();
         return $this->getHandle()->lastInsertId();
-    }
-
-    public function updateContentById($id) {
-        parent::__construct();
-        $sql_update     = "UPDATE entries SET content=? WHERE id=?";
-        $params_update  = array($content, $id);
-        $query          = $this->executeQuery($sql_update, $params_update);
     }
 }
