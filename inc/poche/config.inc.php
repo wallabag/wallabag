@@ -24,7 +24,7 @@ define ('CACHE', './cache');
 define ('LANG', 'en_EN.UTF8');
 define ('PAGINATION', '10');
 define ('THEME', 'light');
-$storage_type = 'sqlite'; # sqlite, mysql, (file, not yet)
+define ('STORAGE','postgres'); # postgres, mysql, sqlite
 
 # /!\ Be careful if you change the lines below /!\
 require_once './inc/poche/User.class.php';
@@ -34,8 +34,7 @@ require_once './inc/3rdparty/class.messages.php';
 require_once './inc/poche/Poche.class.php';
 require_once './inc/3rdparty/Readability.php';
 require_once './inc/3rdparty/Encoding.php';
-require_once './inc/store/store.class.php';
-require_once './inc/store/' . $storage_type . '.class.php';
+require_once './inc/poche/Database.class.php';
 require_once './vendor/autoload.php';
 require_once './inc/3rdparty/simple_html_dom.php';
 require_once './inc/3rdparty/paginator.php';
@@ -45,7 +44,7 @@ if (DOWNLOAD_PICTURES) {
     require_once './inc/poche/pochePictures.php';
 }
 
-$poche = new Poche($storage_type);
+$poche = new Poche();
 
 #XSRF protection with token
 // if (!empty($_POST)) {

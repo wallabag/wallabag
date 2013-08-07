@@ -77,6 +77,7 @@ class Tools
                 $url = $ref;
             }
         }
+        self::logm('redirect to ' . $url);
         header('Location: '.$url);
         exit();
     }
@@ -198,6 +199,7 @@ class Tools
         if (DEBUG_POCHE) {
             $t = strval(date('Y/m/d_H:i:s')) . ' - ' . $_SERVER["REMOTE_ADDR"] . ' - ' . strval($message) . "\n";
             file_put_contents(CACHE . '/log.txt', $t, FILE_APPEND);
+            error_log('DEBUG POCHE : ' . $message);
         }
     }
 

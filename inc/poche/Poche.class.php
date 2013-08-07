@@ -16,9 +16,9 @@ class Poche
     public $messages;
     public $pagination;
 
-    function __construct($storage_type)
+    function __construct()
     {
-        $this->store = new $storage_type();
+        $this->store = new Database();
         $this->init();
         $this->messages = new Messages();
 
@@ -52,9 +52,13 @@ class Poche
 
         # template engine
         $loader = new Twig_Loader_Filesystem(TPL);
-        $this->tpl = new Twig_Environment($loader, array(
-            'cache' => CACHE,
-        ));
+        if (DEBUG_POCHE) {
+            $twig_params = array();
+        }
+        else {
+            $twig_params = array('cache' => CACHE);
+        }
+        $this->tpl = new Twig_Environment($loader, $twig_params);
         $this->tpl->addExtension(new Twig_Extensions_Extension_I18n());
         # filter to display domain name of an url
         $filter = new Twig_SimpleFilter('getDomain', 'Tools::getDomain');
@@ -124,18 +128,19 @@ class Poche
                 Tools::redirect();
                 break;
             case 'delete':
+                $msg = 'delete link #' . $id;
                 if ($this->store->deleteById($id, $this->user->getId())) {
                     if (DOWNLOAD_PICTURES) {
                         remove_directory(ABS_PATH . $id);
                     }
                     $this->messages->add('s', _('the link has been deleted successfully'));
-                    Tools::logm('delete link #' . $id);
                 }
                 else {
                     $this->messages->add('e', _('the link wasn\'t deleted'));
-                    Tools::logm('error : can\'t delete link #' . $id);
+                    $msg = 'error : can\'t delete link #' . $id;
                 }
-                Tools::redirect();
+                Tools::logm($msg);
+                Tools::redirect('?');
                 break;
             case 'toggle_fav' :
                 $this->store->favoriteById($id, $this->user->getId());
@@ -385,7 +390,7 @@ class Poche
         if (file_exists($cache_file) && (filemtime($cache_file) > (time() - 86400 ))) {
            $version = file_get_contents($cache_file);
         } else {
-           $version = file_get_contents('http://www.inthepoche.com/' . $which);
+           $version = file_get_contents('http://static.inthepoche.com/versions/' . $which);
            file_put_contents($cache_file, $version, LOCK_EX);
         }
         return $version;
