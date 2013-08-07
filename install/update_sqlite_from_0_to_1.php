@@ -51,6 +51,14 @@ $sql = 'CREATE TABLE users_config (id INTEGER PRIMARY KEY, user_id NUMERIC, name
 $query = $handle->prepare($sql);
 $query->execute();
 
+$sql = 'INSERT INTO users_config (user_id, name, value) VALUES (1, "pager", "10");';
+$query = $handle->prepare($sql);
+$query->execute();
+
+$sql = 'INSERT INTO users_config (user_id, name, value) VALUES (1, "language", "en_EN.UTF8");';
+$query = $handle->prepare($sql);
+$query->execute();
+
 # Suppression de la table temporaire
 $sql = 'DROP TABLE tempEntries;';
 $query = $handle->prepare($sql);
