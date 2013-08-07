@@ -37,19 +37,34 @@ class Database {
     }
 
     public function isInstalled() {
-        $sql = "SELECT username FROM users WHERE id=?";
-        $query = $this->executeQuery($sql, array('1'));
-        $hasAdmin = $query->fetchAll();
+        $sql = "SELECT username FROM users";
+        $query = $this->executeQuery($sql, array());
+        $hasAdmin = count($query->fetchAll());
 
-        if (count($hasAdmin) == 0) 
+        if ($hasAdmin == 0) 
             return FALSE;
 
         return TRUE;
     }
 
     public function install($login, $password) {
-        $sql = 'INSERT INTO users ( username, password ) VALUES (?, ?)';
-        $params = array($login, $password);
+        $sql = 'INSERT INTO users ( username, password, name, email) VALUES (?, ?, ?, ?)';
+        $params = array($login, $password, $login, ' ');
+        $query = $this->executeQuery($sql, $params);
+
+        $sequence = '';
+        if (STORAGE == 'postgres') {
+            $sequence = 'users_id_seq';
+        }
+
+        $id_user = intval($this->getLastId($sequence));
+
+        $sql = 'INSERT INTO users_config ( user_id, name, value ) VALUES (?, ?, ?)';
+        $params = array($id_user, 'pager', '10');
+        $query = $this->executeQuery($sql, $params);
+
+        $sql = 'INSERT INTO users_config ( user_id, name, value ) VALUES (?, ?, ?)';
+        $params = array($id_user, 'language', 'en_EN.UTF8');
         $query = $this->executeQuery($sql, $params);
 
         return TRUE;
@@ -195,7 +210,7 @@ class Database {
         $query          = $this->executeQuery($sql_action, $params_action);
     }
 
-    public function getLastId() {
-        return $this->getHandle()->lastInsertId();
+    public function getLastId($column = '') {
+        return $this->getHandle()->lastInsertId($column);
     }
 }

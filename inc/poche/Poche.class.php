@@ -34,7 +34,7 @@ class Poche
         Tools::initPhp();
         Session::init();
 
-        if (isset($_SESSION['poche_user'])) {
+        if (isset($_SESSION['poche_user']) && $_SESSION['poche_user'] != array()) {
             $this->user = $_SESSION['poche_user'];
         }
         else {
@@ -102,7 +102,7 @@ class Poche
     /**
      * Call action (mark as fav, archive, delete, etc.)
      */
-    public function action($action, Url $url, $id = 0)
+    public function action($action, Url $url, $id = 0, $import = FALSE)
     {
         switch ($action)
         {
@@ -110,22 +110,34 @@ class Poche
                 if($parametres_url = $url->fetchContent()) {
                     if ($this->store->add($url->getUrl(), $parametres_url['title'], $parametres_url['content'], $this->user->getId())) {
                         Tools::logm('add link ' . $url->getUrl());
-                        $last_id = $this->store->getLastId();
+                        $sequence = '';
+                        if (STORAGE == 'postgres') {
+                            $sequence = 'entries_id_seq';
+                        }
+                        $last_id = $this->store->getLastId($sequence);
                         if (DOWNLOAD_PICTURES) {
                             $content = filtre_picture($parametres_url['content'], $url->getUrl(), $last_id);
                         }
-                        $this->messages->add('s', _('the link has been added successfully'));
+                        if (!$import) {
+                            $this->messages->add('s', _('the link has been added successfully'));
+                        }
                     }
                     else {
-                        $this->messages->add('e', _('error during insertion : the link wasn\'t added'));
-                        Tools::logm('error during insertion : the link wasn\'t added');
+                        if (!$import) {
+                            $this->messages->add('e', _('error during insertion : the link wasn\'t added'));
+                            Tools::logm('error during insertion : the link wasn\'t added ' . $url->getUrl());
+                        }
                     }
                 }
                 else {
-                    $this->messages->add('e', _('error during fetching content : the link wasn\'t added'));
-                    Tools::logm('error during content fetch');
+                    if (!$import) {
+                        $this->messages->add('e', _('error during fetching content : the link wasn\'t added'));
+                        Tools::logm('error during content fetch ' . $url->getUrl());
+                    }
                 }
-                Tools::redirect();
+                if (!$import) {
+                    Tools::redirect();
+                }
                 break;
             case 'delete':
                 $msg = 'delete link #' . $id;
@@ -145,12 +157,16 @@ class Poche
             case 'toggle_fav' :
                 $this->store->favoriteById($id, $this->user->getId());
                 Tools::logm('mark as favorite link #' . $id);
-                Tools::redirect();
+                if (!$import) {
+                    Tools::redirect();
+                }
                 break;
             case 'toggle_archive' :
                 $this->store->archiveById($id, $this->user->getId());
                 Tools::logm('archive link #' . $id);
-                Tools::redirect();
+                if (!$import) {
+                    Tools::redirect();
+                }
                 break;
             default:
                 break;
@@ -267,10 +283,10 @@ class Poche
 
     public function logout()
     {
-        $this->messages->add('s', _('see you soon!'));
-        Tools::logm('logout');
         $this->user = array();
         Session::logout();
+        $this->messages->add('s', _('see you soon!'));
+        Tools::logm('logout');
         Tools::redirect();
     }
 
@@ -279,6 +295,7 @@ class Poche
         # TODO gestion des articles favs
         $html = new simple_html_dom();
         $html->load_file('./instapaper-export.html');
+        Tools::logm('starting import from instapaper');
 
         $read = 0;
         $errors = array();
@@ -288,10 +305,14 @@ class Poche
             {
                 $a = $li->find('a');
                 $url = new Url(base64_encode($a[0]->href));
-                $this->action('add', $url);
+                $this->action('add', $url, 0, TRUE);
                 if ($read == '1') {
-                    $last_id = $this->store->getLastId();
-                    $this->action('toggle_archive', $url, $last_id);
+                    $sequence = '';
+                    if (STORAGE == 'postgres') {
+                        $sequence = 'entries_id_seq';
+                    }
+                    $last_id = $this->store->getLastId($sequence);
+                    $this->action('toggle_archive', $url, $last_id, TRUE);
                 }
             }
 
@@ -308,6 +329,7 @@ class Poche
         # TODO gestion des articles favs
         $html = new simple_html_dom();
         $html->load_file('./ril_export.html');
+        Tools::logm('starting import from pocket');
 
         $read = 0;
         $errors = array();
@@ -317,10 +339,14 @@ class Poche
             {
                 $a = $li->find('a');
                 $url = new Url(base64_encode($a[0]->href));
-                $this->action('add', $url);
+                $this->action('add', $url, 0, TRUE);
                 if ($read == '1') {
-                    $last_id = $this->store->getLastId();
-                    $this->action('toggle_archive', $url, $last_id);
+                        $sequence = '';
+                        if (STORAGE == 'postgres') {
+                            $sequence = 'entries_id_seq';
+                        }
+                    $last_id = $this->store->getLastId($sequence);
+                    $this->action('toggle_archive', $url, $last_id, TRUE);
                 }
             }
             
@@ -337,6 +363,7 @@ class Poche
         # TODO gestion des articles lus / favs
         $str_data = file_get_contents("./readability");
         $data = json_decode($str_data,true);
+        Tools::logm('starting import from Readability');
 
         foreach ($data as $key => $value) {
             $url = '';
@@ -344,18 +371,22 @@ class Poche
                 if ($attr == 'article__url') {
                     $url = new Url(base64_encode($attr_value));
                 }
+                $sequence = '';
+                if (STORAGE == 'postgres') {
+                    $sequence = 'entries_id_seq';
+                }
                 // if ($attr_value == 'favorite' && $attr_value == 'true') {
-                //     $last_id = $this->store->getLastId();
+                //     $last_id = $this->store->getLastId($sequence);
                 //     $this->store->favoriteById($last_id);
-                //     $this->action('toogle_fav', $url, $last_id);
+                //     $this->action('toogle_fav', $url, $last_id, TRUE);
                 // }
-                // if ($attr_value == 'archive' && $attr_value == 'true') {
-                //     $last_id = $this->store->getLastId();
-                //     $this->action('toggle_archive', $url, $last_id);
-                // }
+                if ($attr_value == 'archive' && $attr_value == 'true') {
+                    $last_id = $this->store->getLastId($sequence);
+                    $this->action('toggle_archive', $url, $last_id, TRUE);
+                }
             }
             if ($url->isCorrect())
-                $this->action('add', $url);
+                $this->action('add', $url, 0, TRUE);
         }
         $this->messages->add('s', _('import from Readability completed'));
         Tools::logm('import from Readability completed');

@@ -11,7 +11,7 @@ $sql = 'ALTER TABLE entries RENAME TO tempEntries;';
 $query = $handle->prepare($sql);
 $query->execute();
 
-$sql = 'CREATE TABLE entries (id INTEGER PRIMARY KEY, title TEXT, url TEXT, is_read NUMERIC, is_fav NUMERIC, content BLOB, user_id NUMERIC);';
+$sql = 'CREATE TABLE entries (id INTEGER PRIMARY KEY, title TEXT, url TEXT, is_read NUMERIC DEFAULT 0, is_fav NUMERIC DEFAULT 0, content BLOB, user_id NUMERIC);';
 $query = $handle->prepare($sql);
 $query->execute();
 

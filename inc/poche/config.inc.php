@@ -9,7 +9,7 @@
  */
 
 # storage
-define ('STORAGE','postgres'); # postgres, mysql, sqlite
+define ('STORAGE','sqlite'); # postgres, mysql, sqlite
 define ('STORAGE_SERVER', 'localhost'); # leave blank for sqlite
 define ('STORAGE_DB', 'poche'); # only for postgres & mysql
 define ('STORAGE_SQLITE', './db/poche.sqlite');
@@ -52,7 +52,6 @@ if (DOWNLOAD_PICTURES) {
 }
 
 $poche = new Poche();
-
 #XSRF protection with token
 // if (!empty($_POST)) {
 //     if (!Session::isToken($_POST['token'])) {
