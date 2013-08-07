@@ -50,3 +50,6 @@ With poche <= 0.3, all your datas were stored in a sqlite file. The structure of
 You have to execute http://yourpoche/install/update_sqlite_from_0_to_1.php before using this new version.
 
 That's all, you can use poche ! 
+
+## installing poche
+you can go on your poche http://yourpoche. You have to fill the fields and that's all !
