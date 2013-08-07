@@ -29,6 +29,7 @@ class Database {
         }
 
         $this->handle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        Tools::logm('storage type ' . STORAGE);
     }
 
     private function getHandle() {
