@@ -9,24 +9,25 @@
  */
 
 class Database {
-
-    #postgresql
-    public static $db_path = 'pgsql:host=localhost;dbname=poche';
-    public static $user = 'postgres';
-    public static $password = 'postgres';
-    #sqlite
-    // public static $db_path = 'sqlite:./db/poche.sqlite';
-    // public static $user = '';
-    // public static $password = '';
-    #mysql
-    // public static $db_path = 'mysql:host=localhost;dbname=poche';
-    // public static $user = 'root';
-    // public static $password = 'root';
-
     var $handle;
 
-    function __construct() {
-        $this->handle = new PDO(self::$db_path, self::$user, self::$password);
+    function __construct()
+    {
+        switch (STORAGE) {
+            case 'sqlite':
+                $db_path = 'sqlite:' . STORAGE_SQLITE;
+                $this->handle = new PDO($db_path);
+                break;
+            case 'mysql':
+                $db_path = 'mysql:host=' . STORAGE_SERVER . ';dbname=' . STORAGE_DB;
+                $this->handle = new PDO($db_path, STORAGE_USER, STORAGE_PASSWORD); 
+                break;
+            case 'postgres':
+                $db_path = 'pgsql:host=' . STORAGE_SERVER . ';dbname=' . STORAGE_DB;
+                $this->handle = new PDO($db_path, STORAGE_USER, STORAGE_PASSWORD); 
+                break;
+        }
+
         $this->handle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 

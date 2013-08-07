@@ -8,6 +8,14 @@
  * @license    http://www.wtfpl.net/ see COPYING file
  */
 
+# storage
+define ('STORAGE','postgres'); # postgres, mysql, sqlite
+define ('STORAGE_SERVER', 'localhost'); # leave blank for sqlite
+define ('STORAGE_DB', 'poche'); # only for postgres & mysql
+define ('STORAGE_SQLITE', './db/poche.sqlite');
+define ('STORAGE_USER', 'postgres'); # leave blank for sqlite
+define ('STORAGE_PASSWORD', 'postgres'); # leave blank for sqlite
+
 define ('POCHE_VERSION', '1.0-beta');
 define ('MODE_DEMO', FALSE);
 define ('DEBUG_POCHE', TRUE);
@@ -24,7 +32,6 @@ define ('CACHE', './cache');
 define ('LANG', 'en_EN.UTF8');
 define ('PAGINATION', '10');
 define ('THEME', 'light');
-define ('STORAGE','postgres'); # postgres, mysql, sqlite
 
 # /!\ Be careful if you change the lines below /!\
 require_once './inc/poche/User.class.php';
