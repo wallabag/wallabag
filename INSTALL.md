@@ -1,6 +1,6 @@
 # Installing poche
 
-Get the [latest twig version](https://github.com/inthepoche/poche/archive/twig.zip) of poche on github. Unzip it and upload it on your server.
+Get the [latest dev version](https://github.com/inthepoche/poche/archive/dev.zip) of poche on github. Unzip it and upload it on your server.
 
 your datas can be stored on sqlite, postgres or mysql databases.
 
