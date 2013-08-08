@@ -11,6 +11,10 @@ To get news from poche, [follow us on twitter](http://twitter.com/getpoche) or [
 
 [![flattr](http://api.flattr.com/button/flattr-badge-large.png)](http://flattr.com/thing/1265480/poche-a-read-it-later-open-source-system)
 
+## Installation
+
+Read the INSTALL.md file.
+
 ## Security
 You **have** to protect your db/poche.sqlite file. Modify the virtual host of your website to add this condition :
 ```apache
