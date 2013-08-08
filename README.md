@@ -31,6 +31,9 @@ location ~ /(db) {
 ## Usage
 See the documentation on our website : [inthepoche.com](http://inthepoche.com).
 
+## Travis
+[![Build Status](http://travis-ci.org/inthepoche/poche.png)](http://travis-ci.org/#!/inthepoche/poche)
+
 ## License
 Copyright © 2010-2013 Nicolas Lœuillet <nicolas.loeuillet@gmail.com>
 This work is free. You can redistribute it and/or modify it under the
