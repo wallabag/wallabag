@@ -465,13 +465,15 @@ class Poche
     }
 
     /**
-     * Check online the latest version of poche and cache it
+     * Checks online the latest version of poche and cache it
      * @param  string $which 'prod' or 'dev'
      * @return string        latest $which version
      */
     private function getPocheVersion($which = 'prod')
     {
         $cache_file = CACHE . '/' . $which;
+
+        # checks if the cached version file exists
         if (file_exists($cache_file) && (filemtime($cache_file) > (time() - 86400 ))) {
            $version = file_get_contents($cache_file);
         } else {
