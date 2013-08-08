@@ -27,24 +27,10 @@ You have to install [sqlite for php](http://www.php.net/manual/en/book.sqlite.ph
 
 Get the [latest version](https://github.com/inthepoche/poche) of poche on github. Unzip it and upload it on your server. poche must have write access on assets, cache and db directories.
 
+The ./public directory contains files that must be exported through your web server, and
+then placed in the /ad hoc/ directory.
+
 That's all, **poche works** !
-
-## Security
-You **have** to protect your db/poche.sqlite file. Modify the virtual host of your website to add this condition :
-```apache
-<Files ~ "\.sqlite$">
-    Order allow,deny
-    Deny from all
-</Files>
-```
-
-Nginx version:
-```nginx
-location ~ /(db) {
-    deny all;
-    return 404;
-}
-```
 
 ## Import from Pocket
 
