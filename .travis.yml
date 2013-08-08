@@ -1,0 +1,15 @@
+language: php
+
+php:
+  - 5.4
+
+branches:
+  only:
+    - dev
+
+before_script:
+  - composer install
+
+notifications:
+  email:
+    - nicolas.loeuillet@gmail.com
