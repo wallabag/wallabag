@@ -2,3 +2,4 @@ vendor
 composer.phar
 db/poche.sqlite
 output
+phpdoc*
