@@ -8,83 +8,57 @@
  * @license    http://www.wtfpl.net/ see COPYING file
  */
 
-include dirname(__FILE__).'/inc/config.php';
+include dirname(__FILE__).'/inc/poche/config.inc.php';
 
-myTool::initPhp();
+# Parse GET & REFERER vars
+$referer = empty($_SERVER['HTTP_REFERER']) ? '' : $_SERVER['HTTP_REFERER'];
+$view = Tools::checkVar('view', 'home');
+$action = Tools::checkVar('action');
+$id = Tools::checkVar('id');
+$_SESSION['sort'] = Tools::checkVar('sort', 'id');
+$url = new Url((isset ($_GET['url'])) ? $_GET['url'] : '');
 
-# XSRF protection with token
-if (!empty($_POST)) {
-    if (!Session::isToken($_POST['token'])) {
-        die('Wrong token.');
-    }
-    unset($_SESSION['tokens']);
-}
-
-$ref = empty($_SERVER['HTTP_REFERER']) ? '' : $_SERVER['HTTP_REFERER'];
-
+# poche actions
 if (isset($_GET['login'])) {
-    // Login
-    if (!empty($_POST['login']) && !empty($_POST['password'])) {
-        if (Session::login($_SESSION['login'], $_SESSION['pass'], $_POST['login'], encode_string($_POST['password'] . $_POST['login']))) {
-            logm('login successful');
-            $msg->add('s', 'welcome in your poche!');
-            if (!empty($_POST['longlastingsession'])) {
-                $_SESSION['longlastingsession'] = 31536000;
-                $_SESSION['expires_on'] = time() + $_SESSION['longlastingsession'];
-                session_set_cookie_params($_SESSION['longlastingsession']);
-            } else {
-                session_set_cookie_params(0); // when browser closes
-            }
-            session_regenerate_id(true);
-
-            MyTool::redirect($ref);
-        }
-        logm('login failed');
-        die("Login failed !");
-    } else {
-        logm('login failed');
-    }
+    # hello you
+    $poche->login($referer);
 }
 elseif (isset($_GET['logout'])) {
-    logm('logout');
-    Session::logout();
-    MyTool::redirect();
+    # see you soon !
+    $poche->logout();
 }
-elseif  (isset($_GET['config'])) {
-    if (isset($_POST['password']) && isset($_POST['password_repeat'])) {
-        if ($_POST['password'] == $_POST['password_repeat'] && $_POST['password'] != "") {
-            logm('password updated');
-            if (!DEMO) {
-                $store->updatePassword(encode_string($_POST['password'] . $_SESSION['login']));
-                $msg->add('s', 'your password has been updated');
-            }
-            else {
-                $msg->add('i', 'in demo mode, you can\'t update password');
-            }
-        }
-        else
-            $msg->add('e', 'your password can\'t be empty and you have to repeat it in the second field');
-    }
+elseif (isset($_GET['config'])) {
+    # Update password
+    $poche->updatePassword();
+}
+elseif (isset($_GET['import'])) {
+    $import = $poche->import($_GET['from']);
+}
+elseif (isset($_GET['export'])) {
+    $poche->export();
 }
 
-# Traitement des paramètres et déclenchement des actions
-$view               = (isset ($_REQUEST['view'])) ? htmlentities($_REQUEST['view']) : 'index';
-$full_head          = (isset ($_REQUEST['full_head'])) ? htmlentities($_REQUEST['full_head']) : 'yes';
-$action             = (isset ($_REQUEST['action'])) ? htmlentities($_REQUEST['action']) : '';
-$_SESSION['sort']   = (isset ($_REQUEST['sort'])) ? htmlentities($_REQUEST['sort']) : 'id';
-$id                 = (isset ($_REQUEST['id'])) ? htmlspecialchars($_REQUEST['id']) : '';
-$url                = (isset ($_GET['url'])) ? $_GET['url'] : '';
-
-$tpl->assign('isLogged', Session::isLogged());
-$tpl->assign('referer', $ref);
-$tpl->assign('view', $view);
-$tpl->assign('poche_url', myTool::getUrl());
-$tpl->assign('title', 'poche, a read it later open source system');
+# vars to send to templates
+$tpl_vars = array(
+    'referer' => $referer,
+    'view' => $view,
+    'poche_url' => Tools::getPocheUrl(),
+    'title' => _('poche, a read it later open source system'),
+    'token' => Session::getToken(),
+);
 
 if (Session::isLogged()) {
-    action_to_do($action, $url, $id);
-    display_view($view, $id, $full_head);
+    $poche->action($action, $url, $id);
+    $tpl_file = Tools::getTplFile($view);
+    $tpl_vars = array_merge($tpl_vars, $poche->displayView($view, $id));
 }
 else {
-    $tpl->draw('login');
+    $tpl_file = 'login.twig';
 }
+
+# because messages can be added in $poche->action(), we have to add this entry now (we can add it before)
+$messages = $poche->messages->display('all', FALSE);
+$tpl_vars = array_merge($tpl_vars, array('messages' => $messages));
+
+# display poche
+echo $poche->tpl->render($tpl_file, $tpl_vars);
