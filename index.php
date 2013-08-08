@@ -32,7 +32,7 @@ elseif (isset($_GET['config'])) {
     $poche->updatePassword();
 }
 elseif (isset($_GET['import'])) {
-    $poche->import($_GET['from']);
+    $import = $poche->import($_GET['from']);
 }
 elseif (isset($_GET['export'])) {
     $poche->export();
@@ -53,7 +53,6 @@ if (Session::isLogged()) {
     $tpl_vars = array_merge($tpl_vars, $poche->displayView($view, $id));
 }
 else {
-    # login
     $tpl_file = 'login.twig';
 }
 

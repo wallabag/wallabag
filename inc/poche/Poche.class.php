@@ -232,6 +232,13 @@ class Poche
         return $tpl_vars;
     }
 
+    /**
+     * update the password of the current user. 
+     * if MODE_DEMO is TRUE, the password can't be updated. 
+     * @todo add the return value
+     * @todo set the new password in function header like this updatePassword($newPassword)
+     * @return boolean
+     */
     public function updatePassword()
     {
         if (MODE_DEMO) {
@@ -256,6 +263,13 @@ class Poche
         }
     }
 
+    /**
+     * checks if login & password are correct and save the user in session.
+     * it redirects the user to the $referer link
+     * @param  string $referer the url to redirect after login
+     * @todo add the return value
+     * @return boolean
+     */
     public function login($referer)
     {
         if (!empty($_POST['login']) && !empty($_POST['password'])) {
@@ -286,6 +300,11 @@ class Poche
         }
     }
 
+    /**
+     * log out the poche user. It cleans the session.
+     * @todo add the return value
+     * @return boolean 
+     */
     public function logout()
     {
         $this->user = array();
@@ -295,6 +314,11 @@ class Poche
         Tools::redirect();
     }
 
+    /**
+     * import from Instapaper. poche needs a ./instapaper-export.html file
+     * @todo add the return value
+     * @return boolean
+     */
     private function importFromInstapaper()
     {
         # TODO gestion des articles favs
@@ -329,6 +353,11 @@ class Poche
         Tools::redirect();
     }
 
+    /**
+     * import from Pocket. poche needs a ./ril_export.html file
+     * @todo add the return value
+     * @return boolean 
+     */
     private function importFromPocket()
     {
         # TODO gestion des articles favs
@@ -363,6 +392,11 @@ class Poche
         Tools::redirect();
     }
 
+    /**
+     * import from Readability. poche needs a ./readability file
+     * @todo add the return value
+     * @return boolean 
+     */
     private function importFromReadability()
     {
         # TODO gestion des articles lus / favs
@@ -398,19 +432,29 @@ class Poche
         Tools::redirect();
     }
 
+    /**
+     * import datas into your poche
+     * @param  string $from name of the service to import : pocket, instapaper or readability
+     * @todo add the return value
+     * @return boolean       
+     */
     public function import($from)
     {
         if ($from == 'pocket') {
-            $this->importFromPocket();
+            return $this->importFromPocket();
         }
         else if ($from == 'readability') {
-            $this->importFromReadability();
+            return $this->importFromReadability();
         }
         else if ($from == 'instapaper') {
-            $this->importFromInstapaper();
+            return $this->importFromInstapaper();
         }
     }
 
+    /**
+     * export poche entries in json
+     * @return json all poche entries
+     */
     public function export()
     {
         $entries = $this->store->retrieveAll($this->user->getId());
@@ -420,6 +464,11 @@ class Poche
         Tools::logm('export view');
     }
 
+    /**
+     * Check online the latest version of poche and cache it
+     * @param  string $which 'prod' or 'dev'
+     * @return string        latest $which version
+     */
     private function getPocheVersion($which = 'prod')
     {
         $cache_file = CACHE . '/' . $which;
