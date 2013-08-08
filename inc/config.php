@@ -37,8 +37,8 @@ Session::init();
 
 $store     = new $storage_type();
 # initialisation de RainTPL
-raintpl::$tpl_dir   = './tpl/';
-raintpl::$cache_dir = './cache/';
+raintpl::$tpl_dir   = '../tpl/';
+raintpl::$cache_dir = '../cache/';
 raintpl::$base_url  = get_poche_url();
 raintpl::configure('path_replace', false);
 raintpl::configure('debug', false);
