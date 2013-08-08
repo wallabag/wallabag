@@ -10,6 +10,7 @@
 
 include dirname(__FILE__).'/inc/poche/config.inc.php';
 
+# Parse GET & REFERER vars
 $referer = empty($_SERVER['HTTP_REFERER']) ? '' : $_SERVER['HTTP_REFERER'];
 $view = Tools::checkVar('view', 'home');
 $action = Tools::checkVar('action');
@@ -17,6 +18,7 @@ $id = Tools::checkVar('id');
 $_SESSION['sort'] = Tools::checkVar('sort', 'id');
 $url = new Url((isset ($_GET['url'])) ? $_GET['url'] : '');
 
+# poche actions
 if (isset($_GET['login'])) {
     # hello you
     $poche->login($referer);
@@ -36,6 +38,7 @@ elseif (isset($_GET['export'])) {
     $poche->export();
 }
 
+# vars to send to templates
 $tpl_vars = array(
     'referer' => $referer,
     'view' => $view,
@@ -50,6 +53,7 @@ if (Session::isLogged()) {
     $tpl_vars = array_merge($tpl_vars, $poche->displayView($view, $id));
 }
 else {
+    # login
     $tpl_file = 'login.twig';
 }
 
@@ -57,5 +61,5 @@ else {
 $messages = $poche->messages->display('all', FALSE);
 $tpl_vars = array_merge($tpl_vars, array('messages' => $messages));
 
-# Aaaaaaand action !
+# display poche
 echo $poche->tpl->render($tpl_file, $tpl_vars);

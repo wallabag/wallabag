@@ -31,6 +31,11 @@ class Poche
 
     private function init() 
     {
+        if (file_exists('./install') && !DEBUG_POCHE) {
+            Tools::logm('folder /install exists');
+            die('the folder /install exists, you have to delete it before using poche.');
+        }
+
         Tools::initPhp();
         Session::init();
 

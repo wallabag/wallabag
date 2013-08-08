@@ -1,5 +1,5 @@
 <?php
-
+# import script to upgrade from poche 0.3
 $db_path = 'sqlite:../db/poche.sqlite';
 $handle = new PDO($db_path);
 $handle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
