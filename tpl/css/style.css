@@ -242,3 +242,7 @@ a, a:hover, a:visited {
 footer {
     clear: both;
 }
+
+.reading-time {
+    font-size: 13px;
+}

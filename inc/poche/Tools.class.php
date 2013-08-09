@@ -224,4 +224,13 @@ class Tools
       
       return FALSE;
     }
+
+    public static function getReadingTime($text) {
+        $word = str_word_count(strip_tags($text));
+        $minutes = floor($word / 200);
+        $seconds = floor($word % 200 / (200 / 60));
+        $time = array('minutes' => $minutes, 'seconds' => $seconds);
+
+        return $minutes;
+    }
 }
