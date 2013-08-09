@@ -18,6 +18,11 @@ class Poche
 
     function __construct()
     {
+        if (file_exists('./install') && !DEBUG_POCHE) {
+            Tools::logm('folder /install exists');
+            die('To install your poche with sqlite, copy /install/poche.sqlite in /db and delete the folder /install. you have to delete the /install folder before using poche.');
+        }
+
         $this->store = new Database();
         $this->init();
         $this->messages = new Messages();
@@ -31,11 +36,6 @@ class Poche
 
     private function init() 
     {
-        if (file_exists('./install') && !DEBUG_POCHE) {
-            Tools::logm('folder /install exists');
-            die('the folder /install exists, you have to delete it before using poche.');
-        }
-
         Tools::initPhp();
         Session::init();
 
