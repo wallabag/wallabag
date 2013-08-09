@@ -126,6 +126,8 @@ class Poche
                         $last_id = $this->store->getLastId($sequence);
                         if (DOWNLOAD_PICTURES) {
                             $content = filtre_picture($parametres_url['content'], $url->getUrl(), $last_id);
+                            Tools::logm('updating content article');
+                            $this->store->updateContent($last_id, $content, $this->user->getId());
                         }
                         if (!$import) {
                             $this->messages->add('s', _('the link has been added successfully'));

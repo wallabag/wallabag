@@ -184,6 +184,13 @@ class Database {
         return $entries;
     }
 
+    public function updateContent($id, $content, $user_id) {
+        $sql_action = 'UPDATE entries SET content = ? WHERE id=? AND user_id=?';
+        $params_action = array($content, $id, $user_id);
+        $query = $this->executeQuery($sql_action, $params_action);
+        return $query;
+    }
+
     public function add($url, $title, $content, $user_id) {
         $sql_action = 'INSERT INTO entries ( url, title, content, user_id ) VALUES (?, ?, ?, ?)';
         $params_action = array($url, $title, $content, $user_id);
