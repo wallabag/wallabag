@@ -217,7 +217,7 @@ class Poche
                     );
                 }
                 else {
-                    Tools::logm('error in view call : entry is NULL');
+                    Tools::logm('error in view call : entry is null');
                 }
                 break;
             default: # home view
