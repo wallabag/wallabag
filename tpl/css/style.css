@@ -120,11 +120,6 @@ header h1 {
     height: 16px;
 }
 
-#main .entrie .url {
-    font-size: 13px;
-}
-
-
 /*** ***/
 /*** ARTICLE PAGE ***/
 
@@ -244,5 +239,5 @@ footer {
 }
 
 .reading-time {
-    font-size: 13px;
+    font-size: 0.8em;
 }
