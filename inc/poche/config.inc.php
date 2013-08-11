@@ -16,7 +16,7 @@ define ('STORAGE_SQLITE', './db/poche.sqlite');
 define ('STORAGE_USER', 'postgres'); # leave blank for sqlite
 define ('STORAGE_PASSWORD', 'postgres'); # leave blank for sqlite
 
-define ('POCHE_VERSION', '1.0-beta1');
+define ('POCHE_VERSION', '1.0-beta2');
 define ('MODE_DEMO', FALSE);
 define ('DEBUG_POCHE', FALSE);
 define ('CONVERT_LINKS_FOOTNOTES', FALSE);
