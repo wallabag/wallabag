@@ -1,5 +1,9 @@
 # Installing poche
 
+## requirements
+
+it's highly recommended to have php cURL and tidy_parse_string to fetch articles content. 
+
 ## you don't want to install twig (the template engine) by yourself
 
 Download this file http://static.inthepoche.com/files/poche-1.0-latest-with-twig.zip
