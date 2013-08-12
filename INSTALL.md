@@ -1,53 +1,60 @@
 # Installing poche
 
-Get the [latest version](https://github.com/inthepoche/poche/archive/1.0-beta1.zip) of poche on github. Unzip it and upload it on your server.
+## you don't want to install twig (the template engine) by yourself
 
-your datas can be stored on sqlite, postgres or mysql databases.
+Download this file http://static.inthepoche.com/files/poche-1.0-latest-with-twig.zip
 
-Edit /inc/poche/config.inc.php :
+Extract this file on your server.
+
+## you want to install twig by yourself 
+
+Download the latest version here : http://www.inthepoche.com/?pages/T%C3%A9l%C3%A9charger-poche
+
+Extract this file on your server.
 
 ```php
-define ('STORAGE','sqlite'); # postgres, mysql, sqlite
-define ('STORAGE_SERVER', 'localhost'); # leave blank for sqlite
-define ('STORAGE_DB', 'poche'); # only for postgres & mysql
-define ('STORAGE_SQLITE', './db/poche.sqlite');
-define ('STORAGE_USER', 'user'); # leave blank for sqlite
-define ('STORAGE_PASSWORD', 'pass'); # leave blank for sqlite
-```
-
-poche must have write access on assets, cache and db directories.
-
-[PHP cURL](http://www.php.net/manual/en/book.curl.php) & [tidy_parse_string](http://www.php.net/manual/en/tidy.parsestring.php) are recommended.
-
-## twig
-poche now uses twig for templating. You have to install twig. 
-
-Install composer in your project : 
-```bash
 curl -s http://getcomposer.org/installer | php
-```
-Install via composer : 
-```bash
 php composer.phar install
 ```
 
-If you don't want to install twig by yourself, you can download [this file](http://static.inthepoche.com/files/poche-1.0-latest-with-twig.zip).
+### using sqlite
 
-## storage in sqlite 
-You have to install [sqlite for php](http://www.php.net/manual/en/book.sqlite.php) on your server.
+Copy / paste install/poche.sqlite in db folder.
 
-Copy /install/poche.sqlite in /db
+### using mysql or postgresql
 
-## storage in mysql
-Execute /install/mysql.sql file in your database.
+Execute the sql file in /install (mysql.sql or postgres.sql)
 
-## storage in postgres 
-Execute /install/postgres.sql file in your database.
+Then, go to step 3.
 
-## upgrading from poche <= 0.3
-With poche <= 0.3, all your datas were stored in a sqlite file. The structure of this file changed. 
+# Upgrading poche
 
-You have to execute http://yourpoche/install/update_sqlite_from_0_to_1.php before using this new version.
+Replace all the files except **db/poche.sqlite**. Also remember to edit the file /inc/poche/config.inc.php.
 
-## installing poche
-you can go on your poche http://yourpoche. You have to fill the fields and that's all !
+## Upgrading from poche <= 0.3
+
+You have to execute http://yourpoche/install/update_sqlite_from_0_to_1.php
+
+Then, go to step 3.
+
+## Upgrading from poche >= 1.0 beta1
+
+Nothing to do here. 
+
+Then, go to step 3.
+
+# Here is the step 3
+
+You must have write access on assets, cache and db directories. These directories may not exist, you'll have to create them.
+
+You can use poche ! Enjoy.
+
+# Some problems you may encounter
+
+## Blank page
+
+Be sure to have write access on assets, cache and db directories.
+
+## PHP Fatal error:  Call to a member function fetchAll() on a non-object in /var/www/poche/inc/poche/Database.class.php on line 42
+
+If you want to install poche, delete the db/poche.sqlite file and copy / paste the install/poche.sqlite in /db. Be sure to have write access.
