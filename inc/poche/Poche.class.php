@@ -20,7 +20,7 @@ class Poche
     {
         if (file_exists('./install') && !DEBUG_POCHE) {
             Tools::logm('folder /install exists');
-            die('To install your poche with sqlite, copy /install/poche.sqlite in /db and delete the folder /install. you have to delete the /install folder before using poche.');
+            die('If you want to update your poche, you just have to delete /install folder. <br />To install your poche with sqlite, copy /install/poche.sqlite in /db and delete the folder /install. you have to delete the /install folder before using poche.');
         }
 
         $this->store = new Database();
