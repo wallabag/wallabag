@@ -1,42 +1,26 @@
-# poche
-Abandon Pocket, Instapaper and other Readability service : adopt poche. It is the same, but it is open source. Moreover, you can migrate from Pocket & Readability.
+# what is poche ?
+Abandon Pocket, Instapaper and other Readability service : adopt poche. It is the same, but it is free (like in freedom) and open source. 
 
-![poche](http://inthepoche.com/img/logo.png)
+## Some features
 
-The website of poche is [inthepoche.com](http://inthepoche.com).
+* adding, deleting, archiving and setting as favorite a link
+* import from pocket / readability / instapaper
+* share links by email and on twitter
+* a design adapted to tablets and smartphones
+* extensions for Chrome and Firefox
+* Android application
+* multi languages (very soon!)
+* multi users (very soon!)
+* update notification in configuration screen
+* many storage modes (sqlite, mysql, postgresql)
+* many templates
+* ...
 
 To test poche, a demo website is online : [demo.inthepoche.com](http://demo.inthepoche.com) (login poche, password poche).
 
-To get news from poche, [follow us on twitter](http://twitter.com/getpoche) or [read the poche blog](http://inthepoche.com/blog). A Google Group is also available : [poche-users](https://groups.google.com/forum/#!forum/poche-users).
-
-[![flattr](http://api.flattr.com/button/flattr-badge-large.png)](http://flattr.com/thing/1265480/poche-a-read-it-later-open-source-system)
-
 ## Installation
 
-Read the INSTALL.md file.
-
-## Security
-You **have** to protect your db/poche.sqlite file. Modify the virtual host of your website to add this condition :
-```apache
-<Files ~ "\.sqlite$">
-    Order allow,deny
-    Deny from all
-</Files>
-```
-
-Nginx version:
-```nginx
-location ~ /(db) {
-    deny all;
-    return 404;
-}
-```
-
-## Usage
-See the documentation on our website : [inthepoche.com](http://inthepoche.com).
-
-## Travis
-[![Build Status](https://api.travis-ci.org/inthepoche/poche.png?branch=dev)](http://travis-ci.org/#!/inthepoche/poche)
+Read the [INSTALL.md file](https://github.com/inthepoche/poche/blob/master/INSTALL.md).
 
 ## License
 Copyright © 2010-2013 Nicolas Lœuillet <nicolas.loeuillet@gmail.com>
