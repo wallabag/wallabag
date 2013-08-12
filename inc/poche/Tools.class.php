@@ -170,6 +170,7 @@ class Tools
                 preg_match('#charset="?(.*)"#si', $meta[0], $encoding);
                 # if charset is found set it otherwise, set it to utf-8
                 $html_charset = (!empty($encoding[1])) ? strtolower($encoding[1]) : 'utf-8';
+                if (empty($encoding[1])) $encoding[1] = 'utf-8';
             } else {
                 $html_charset = 'utf-8';
                 $encoding[1] = '';
@@ -222,5 +223,14 @@ class Tools
       }
       
       return FALSE;
+    }
+
+    public static function getReadingTime($text) {
+        $word = str_word_count(strip_tags($text));
+        $minutes = floor($word / 200);
+        $seconds = floor($word % 200 / (200 / 60));
+        $time = array('minutes' => $minutes, 'seconds' => $seconds);
+
+        return $minutes;
     }
 }

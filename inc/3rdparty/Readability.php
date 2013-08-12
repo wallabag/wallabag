@@ -810,7 +810,8 @@ class Readability
                 return $this->grabArticle($this->body);
             }
             else {
-                return false;
+                # this line was commented by Nicolas Lœuillet 8/8/13 due to some urls not parsed
+                // return false;
             }
         }
         return $articleContent;
