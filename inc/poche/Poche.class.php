@@ -18,6 +18,11 @@ class Poche
 
     function __construct()
     {
+        if (file_exists('./install') && !DEBUG_POCHE) {
+            Tools::logm('folder /install exists');
+            die('To install your poche with sqlite, copy /install/poche.sqlite in /db and delete the folder /install. you have to delete the /install folder before using poche.');
+        }
+
         $this->store = new Database();
         $this->init();
         $this->messages = new Messages();
@@ -31,11 +36,6 @@ class Poche
 
     private function init() 
     {
-        if (file_exists('./install') && !DEBUG_POCHE) {
-            Tools::logm('folder /install exists');
-            die('the folder /install exists, you have to delete it before using poche.');
-        }
-
         Tools::initPhp();
         Session::init();
 
@@ -67,6 +67,10 @@ class Poche
         $this->tpl->addExtension(new Twig_Extensions_Extension_I18n());
         # filter to display domain name of an url
         $filter = new Twig_SimpleFilter('getDomain', 'Tools::getDomain');
+        $this->tpl->addFilter($filter);
+
+        # filter for reading time
+        $filter = new Twig_SimpleFilter('getReadingTime', 'Tools::getReadingTime');
         $this->tpl->addFilter($filter);
 
         # Pagination
@@ -122,6 +126,8 @@ class Poche
                         $last_id = $this->store->getLastId($sequence);
                         if (DOWNLOAD_PICTURES) {
                             $content = filtre_picture($parametres_url['content'], $url->getUrl(), $last_id);
+                            Tools::logm('updating content article');
+                            $this->store->updateContent($last_id, $content, $this->user->getId());
                         }
                         if (!$import) {
                             $this->messages->add('s', _('the link has been added successfully'));
@@ -213,7 +219,7 @@ class Poche
                     );
                 }
                 else {
-                    Tools::logm('error in view call : entry is NULL');
+                    Tools::logm('error in view call : entry is null');
                 }
                 break;
             default: # home view

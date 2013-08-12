@@ -5,7 +5,7 @@
             <div class="tools">
                 <ul class="tools">
                     <li>
-                        <li><a href="{{ referer }}" title="{% trans "back to home" %}" class="tool back"><span></span></a></li>
+                        <li><a href="./" title="{% trans "back to home" %}" class="tool back"><span></span></a></li>
                         <a title="{% trans "toggle mark as read" %}" class="tool archive {% if entry.is_read == 0 %}archive-off{% endif %}" href="./?action=toggle_archive&id={{ entry.id|e }}"><span></span></a></li>
                         <li><a title="{% trans "toggle favorite" %}" class="tool fav {% if entry.is_fav == 0 %}fav-off{% endif %}" href="./?action=toggle_fav&id={{ entry.id|e }}"><span></span></a></li>
                         <li><a title="{% trans "delete" %}" class="tool delete" href="./?action=delete&id={{ entry.id|e }}"><span></span></a></li>
@@ -25,8 +25,8 @@
             <div class="tools">
                 <ul class="tools">
                     <li>
-                        <li><a href="{{ referer }}" title="{% trans "back to home" %}" class="tool back"><span></span></a></li>
-                        <li><a href="#" title="{% trans "back to top" %}" class="tool top"><span></span></a></li>
+                        <li><a href="./?" title="{% trans "back to home" %}" class="tool back"><span></span></a></li>
+                        <li><a href="#top" title="{% trans "back to top" %}" class="tool top"><span></span></a></li>
                         <a title="{% trans "toggle mark as read" %}" class="tool archive {% if entry.is_read == 0 %}archive-off{% endif %}" href="./?action=toggle_archive&id={{ entry.id|e }}"><span></span></a></li>
                         <li><a title="{% trans "toggle favorite" %}" class="tool fav {% if entry.is_fav == 0 %}fav-off{% endif %}" href="./?action=toggle_fav&id={{ entry.id|e }}"><span></span></a></li>
                         <li><a title="{% trans "delete" %}" class="tool delete" href="./?action=delete&id={{ entry.id|e }}"><span></span></a></li>
