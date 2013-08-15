@@ -211,6 +211,7 @@ class Poche
                 }
                 break;
             default:
+                Tools::logm('action ' . $action . 'doesn\'t exist');
                 break;
         }
     }
@@ -440,9 +441,11 @@ class Poche
         $str_data = file_get_contents("./readability");
         $data = json_decode($str_data,true);
         Tools::logm('starting import from Readability');
-
+        $count = 0;
         foreach ($data as $key => $value) {
-            $url = '';
+            $url = NULL;
+            $favorite = FALSE;
+            $archive = FALSE;
             foreach ($value as $attr => $attr_value) {
                 if ($attr == 'article__url') {
                     $url = new Url(base64_encode($attr_value));
@@ -451,20 +454,30 @@ class Poche
                 if (STORAGE == 'postgres') {
                     $sequence = 'entries_id_seq';
                 }
-                // if ($attr_value == 'favorite' && $attr_value == 'true') {
-                //     $last_id = $this->store->getLastId($sequence);
-                //     $this->store->favoriteById($last_id);
-                //     $this->action('toogle_fav', $url, $last_id, TRUE);
-                // }
-                if ($attr_value == 'archive' && $attr_value == 'true') {
+                if ($attr_value == 'true') {
+                    if ($attr == 'favorite') {
+                        $favorite = TRUE;
+                    }
+                    if ($attr == 'archive') {
+                        $archive = TRUE;
+                    }
+                }
+            }
+            # we can add the url
+            if (!is_null($url) && $url->isCorrect()) {
+                $this->action('add', $url, 0, TRUE);
+                $count++;
+                if ($favorite) {
+                    $last_id = $this->store->getLastId($sequence);
+                    $this->action('toggle_fav', $url, $last_id, TRUE);
+                }
+                if ($archive) {
                     $last_id = $this->store->getLastId($sequence);
                     $this->action('toggle_archive', $url, $last_id, TRUE);
                 }
             }
-            if ($url->isCorrect())
-                $this->action('add', $url, 0, TRUE);
         }
-        $this->messages->add('s', _('import from Readability completed'));
+        $this->messages->add('s', _('import from Readability completed. ' . $count . ' new links.'));
         Tools::logm('import from Readability completed');
         Tools::redirect();
     }
