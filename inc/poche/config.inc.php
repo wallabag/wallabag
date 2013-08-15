@@ -34,6 +34,10 @@ define ('PAGINATION', '10');
 define ('THEME', 'light');
 
 # /!\ Be careful if you change the lines below /!\
+if (!file_exists('./vendor/autoload.php')) {
+    die('Twig does not seem installed. Have a look at <a href="http://inthepoche.com/?pages/Documentation">the documentation.</a>');
+}
+ 
 require_once './inc/poche/User.class.php';
 require_once './inc/poche/Tools.class.php';
 require_once './inc/poche/Url.class.php';

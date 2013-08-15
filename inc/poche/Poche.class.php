@@ -18,11 +18,10 @@ class Poche
 
     function __construct()
     {
-        if (file_exists('./install') && !DEBUG_POCHE) {
-            Tools::logm('folder /install exists');
-            die('If you want to update your poche, you just have to delete /install folder. <br />To install your poche with sqlite, copy /install/poche.sqlite in /db and delete the folder /install. you have to delete the /install folder before using poche.');
+        $this->initTpl();
+        if (!$this->checkBeforeInstall()) {
+            exit;
         }
-
         $this->store = new Database();
         $this->init();
         $this->messages = new Messages();
@@ -32,6 +31,56 @@ class Poche
         {
             $this->install();
         }
+    }
+
+    /**
+     * all checks before installation.
+     * @return boolean 
+     */
+    private function checkBeforeInstall()
+    {
+        $msg = '';
+        $allIsGood = TRUE;
+        if (file_exists('./install') && !DEBUG_POCHE) {
+            Tools::logm('folder /install exists');
+            $msg = 'If you want to update your poche, you just have to delete /install folder. <br />To install your poche with sqlite, copy /install/poche.sqlite in /db and delete the folder /install. you have to delete the /install folder before using poche.';
+            $allIsGood = FALSE;
+        }
+
+        if (STORAGE == 'sqlite' && !is_writable(STORAGE_SQLITE)) {
+            Tools::logm('you don\'t have write access on db file');
+            $msg = 'You don\'t have write access on ' . STORAGE_SQLITE . ' file.';
+            $allIsGood = FALSE;
+        }
+
+        if (!$allIsGood) {
+            echo $this->tpl->render('error.twig', array(
+                'msg' => $msg
+            ));
+        }
+
+        return $allIsGood;
+    }
+
+    private function initTpl()
+    {
+        # template engine
+        $loader = new Twig_Loader_Filesystem(TPL);
+        if (DEBUG_POCHE) {
+            $twig_params = array();
+        }
+        else {
+            $twig_params = array('cache' => CACHE);
+        }
+        $this->tpl = new Twig_Environment($loader, $twig_params);
+        $this->tpl->addExtension(new Twig_Extensions_Extension_I18n());
+        # filter to display domain name of an url
+        $filter = new Twig_SimpleFilter('getDomain', 'Tools::getDomain');
+        $this->tpl->addFilter($filter);
+
+        # filter for reading time
+        $filter = new Twig_SimpleFilter('getReadingTime', 'Tools::getReadingTime');
+        $this->tpl->addFilter($filter);
     }
 
     private function init() 
@@ -54,24 +103,6 @@ class Poche
         setlocale(LC_ALL, $language);
         bindtextdomain($language, LOCALE); 
         textdomain($language); 
-
-        # template engine
-        $loader = new Twig_Loader_Filesystem(TPL);
-        if (DEBUG_POCHE) {
-            $twig_params = array();
-        }
-        else {
-            $twig_params = array('cache' => CACHE);
-        }
-        $this->tpl = new Twig_Environment($loader, $twig_params);
-        $this->tpl->addExtension(new Twig_Extensions_Extension_I18n());
-        # filter to display domain name of an url
-        $filter = new Twig_SimpleFilter('getDomain', 'Tools::getDomain');
-        $this->tpl->addFilter($filter);
-
-        # filter for reading time
-        $filter = new Twig_SimpleFilter('getReadingTime', 'Tools::getReadingTime');
-        $this->tpl->addFilter($filter);
 
         # Pagination
         $this->pagination = new Paginator($this->user->getConfigValue('pager'), 'p');
