@@ -8,6 +8,9 @@
  * @license    http://www.wtfpl.net/ see COPYING file
  */
 
+require_once './inc/poche/Tools.class.php';
+Tools::createMyConfig();
+
 include dirname(__FILE__).'/inc/poche/config.inc.php';
 
 # Parse GET & REFERER vars

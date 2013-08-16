@@ -41,15 +41,23 @@ class Poche
     {
         $msg = '';
         $allIsGood = TRUE;
-        if (file_exists('./install') && !DEBUG_POCHE) {
-            Tools::logm('folder /install exists');
+
+        if (file_exists('./install/update.php') && !DEBUG_POCHE) {
+            $msg = 'A poche update is needed. Please execute this update <a href="install/update.php">by clicking here</a>. If you have already do the update, please delete /install folder.';
+            $allIsGood = FALSE;
+        }
+        else if (file_exists('./install') && !DEBUG_POCHE) {
             $msg = 'If you want to update your poche, you just have to delete /install folder. <br />To install your poche with sqlite, copy /install/poche.sqlite in /db and delete the folder /install. you have to delete the /install folder before using poche.';
             $allIsGood = FALSE;
         }
-
-        if (STORAGE == 'sqlite' && !is_writable(STORAGE_SQLITE)) {
-            Tools::logm('you don\'t have write access on db file');
-            $msg = 'You don\'t have write access on ' . STORAGE_SQLITE . ' file.';
+        else if (STORAGE == 'sqlite' && !is_writable(STORAGE_SQLITE)) {
+            Tools::logm('you don\'t have write access on sqlite file');
+            $msg = 'You don\'t have write access on sqlite file.';
+            $allIsGood = FALSE;
+        }
+        else if (!is_writable(CACHE)) {
+            Tools::logm('you don\'t have write access on cache directory');
+            $msg = 'You don\'t have write access on cache directory.';
             $allIsGood = FALSE;
         }
 
@@ -118,10 +126,12 @@ class Poche
             if (($_POST['password'] == $_POST['password_repeat']) 
                 && $_POST['password'] != "" && $_POST['login'] != "") {
                 # let's rock, install poche baby !
-                $this->store->install($_POST['login'], Tools::encodeString($_POST['password'] . $_POST['login']));
-                Session::logout();
-                Tools::logm('poche is now installed');
-                Tools::redirect();
+                if ($this->store->install($_POST['login'], Tools::encodeString($_POST['password'] . $_POST['login'])))
+                {
+                    Session::logout();
+                    Tools::logm('poche is now installed');
+                    Tools::redirect();
+                }
             }
             else {
                 Tools::logm('error during installation');
