@@ -29,7 +29,7 @@ $old_salt = '464v54gLLw928uz4zUBqkRJeiPY68zCX';
                 <li>spanish language thanks to Nitche</li>
                 <li>new file ./inc/poche/myconfig.inc.php created to store language and salt</li>
                 <li><a href="https://github.com/inthepoche/poche/issues/119">#119</a>: salt is now created when installing poche</li>
-                <li><a href="https://github.com/inthepoche/poche/issues/130">#130</a>: robotx.txt added</li>
+                <li><a href="https://github.com/inthepoche/poche/issues/130">#130</a>: robots.txt added</li>
                 <li><a href="https://github.com/inthepoche/poche/issues/136">#136</a>: error during readability import</li>
                 <li><a href="https://github.com/inthepoche/poche/issues/137">#137</a>: mixed content alert in https</li>
                 <li><a href="https://github.com/inthepoche/poche/issues/138">#138</a>: change pattern to parse url with #</li>
