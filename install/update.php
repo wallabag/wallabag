@@ -35,6 +35,7 @@ $old_salt = '464v54gLLw928uz4zUBqkRJeiPY68zCX';
                 <li><a href="https://github.com/inthepoche/poche/issues/138">#138</a>: change pattern to parse url with #</li>
             </ul>
         </p>
+        <p>To update your poche, please fill the following fields.</p>
         <p>
         <form name="update" method="post">
             <div><label for="login">login:</label> <input type="text" name="login" id="login" /></div>

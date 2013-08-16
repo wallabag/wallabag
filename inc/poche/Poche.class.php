@@ -42,7 +42,11 @@ class Poche
         $msg = '';
         $allIsGood = TRUE;
 
-        if (file_exists('./install/update.php') && !DEBUG_POCHE) {
+        if (!is_writable(CACHE)) {
+            Tools::logm('you don\'t have write access on cache directory');
+            die('You don\'t have write access on cache directory.');
+        }
+        else if (file_exists('./install/update.php') && !DEBUG_POCHE) {
             $msg = 'A poche update is needed. Please execute this update <a href="install/update.php">by clicking here</a>. If you have already do the update, please delete /install folder.';
             $allIsGood = FALSE;
         }
@@ -55,12 +59,7 @@ class Poche
             $msg = 'You don\'t have write access on sqlite file.';
             $allIsGood = FALSE;
         }
-        else if (!is_writable(CACHE)) {
-            Tools::logm('you don\'t have write access on cache directory');
-            $msg = 'You don\'t have write access on cache directory.';
-            $allIsGood = FALSE;
-        }
-
+        
         if (!$allIsGood) {
             echo $this->tpl->render('error.twig', array(
                 'msg' => $msg
