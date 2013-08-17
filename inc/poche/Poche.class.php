@@ -18,11 +18,10 @@ class Poche
 
     function __construct()
     {
-        if (file_exists('./install') && !DEBUG_POCHE) {
-            Tools::logm('folder /install exists');
-            die('To install your poche with sqlite, copy /install/poche.sqlite in /db and delete the folder /install. you have to delete the /install folder before using poche.');
+        $this->initTpl();
+        if (!$this->checkBeforeInstall()) {
+            exit;
         }
-
         $this->store = new Database();
         $this->init();
         $this->messages = new Messages();
@@ -32,6 +31,63 @@ class Poche
         {
             $this->install();
         }
+    }
+
+    /**
+     * all checks before installation.
+     * @return boolean 
+     */
+    private function checkBeforeInstall()
+    {
+        $msg = '';
+        $allIsGood = TRUE;
+
+        if (!is_writable(CACHE)) {
+            Tools::logm('you don\'t have write access on cache directory');
+            die('You don\'t have write access on cache directory.');
+        }
+        else if (file_exists('./install/update.php') && !DEBUG_POCHE) {
+            $msg = 'A poche update is needed. Please execute this update <a href="install/update.php">by clicking here</a>. If you have already do the update, please delete /install folder.';
+            $allIsGood = FALSE;
+        }
+        else if (file_exists('./install') && !DEBUG_POCHE) {
+            $msg = 'If you want to update your poche, you just have to delete /install folder. <br />To install your poche with sqlite, copy /install/poche.sqlite in /db and delete the folder /install. you have to delete the /install folder before using poche.';
+            $allIsGood = FALSE;
+        }
+        else if (STORAGE == 'sqlite' && !is_writable(STORAGE_SQLITE)) {
+            Tools::logm('you don\'t have write access on sqlite file');
+            $msg = 'You don\'t have write access on sqlite file.';
+            $allIsGood = FALSE;
+        }
+        
+        if (!$allIsGood) {
+            echo $this->tpl->render('error.twig', array(
+                'msg' => $msg
+            ));
+        }
+
+        return $allIsGood;
+    }
+
+    private function initTpl()
+    {
+        # template engine
+        $loader = new Twig_Loader_Filesystem(TPL);
+        if (DEBUG_POCHE) {
+            $twig_params = array();
+        }
+        else {
+            $twig_params = array('cache' => CACHE);
+        }
+        $this->tpl = new Twig_Environment($loader, $twig_params);
+        $this->tpl->addExtension(new Twig_Extensions_Extension_I18n());
+        # filter to display domain name of an url
+        $filter = new Twig_SimpleFilter('getDomain', 'Tools::getDomain');
+        $this->tpl->addFilter($filter);
+
+        # filter for reading time
+        $filter = new Twig_SimpleFilter('getReadingTime', 'Tools::getReadingTime');
+        $this->tpl->addFilter($filter);
     }
 
     private function init() 
@@ -55,24 +111,6 @@ class Poche
         bindtextdomain($language, LOCALE); 
         textdomain($language); 
 
-        # template engine
-        $loader = new Twig_Loader_Filesystem(TPL);
-        if (DEBUG_POCHE) {
-            $twig_params = array();
-        }
-        else {
-            $twig_params = array('cache' => CACHE);
-        }
-        $this->tpl = new Twig_Environment($loader, $twig_params);
-        $this->tpl->addExtension(new Twig_Extensions_Extension_I18n());
-        # filter to display domain name of an url
-        $filter = new Twig_SimpleFilter('getDomain', 'Tools::getDomain');
-        $this->tpl->addFilter($filter);
-
-        # filter for reading time
-        $filter = new Twig_SimpleFilter('getReadingTime', 'Tools::getReadingTime');
-        $this->tpl->addFilter($filter);
-
         # Pagination
         $this->pagination = new Paginator($this->user->getConfigValue('pager'), 'p');
     }
@@ -87,10 +125,12 @@ class Poche
             if (($_POST['password'] == $_POST['password_repeat']) 
                 && $_POST['password'] != "" && $_POST['login'] != "") {
                 # let's rock, install poche baby !
-                $this->store->install($_POST['login'], Tools::encodeString($_POST['password'] . $_POST['login']));
-                Session::logout();
-                Tools::logm('poche is now installed');
-                Tools::redirect();
+                if ($this->store->install($_POST['login'], Tools::encodeString($_POST['password'] . $_POST['login'])))
+                {
+                    Session::logout();
+                    Tools::logm('poche is now installed');
+                    Tools::redirect();
+                }
             }
             else {
                 Tools::logm('error during installation');
@@ -180,6 +220,7 @@ class Poche
                 }
                 break;
             default:
+                Tools::logm('action ' . $action . 'doesn\'t exist');
                 break;
         }
     }
@@ -409,9 +450,11 @@ class Poche
         $str_data = file_get_contents("./readability");
         $data = json_decode($str_data,true);
         Tools::logm('starting import from Readability');
-
+        $count = 0;
         foreach ($data as $key => $value) {
-            $url = '';
+            $url = NULL;
+            $favorite = FALSE;
+            $archive = FALSE;
             foreach ($value as $attr => $attr_value) {
                 if ($attr == 'article__url') {
                     $url = new Url(base64_encode($attr_value));
@@ -420,20 +463,30 @@ class Poche
                 if (STORAGE == 'postgres') {
                     $sequence = 'entries_id_seq';
                 }
-                // if ($attr_value == 'favorite' && $attr_value == 'true') {
-                //     $last_id = $this->store->getLastId($sequence);
-                //     $this->store->favoriteById($last_id);
-                //     $this->action('toogle_fav', $url, $last_id, TRUE);
-                // }
-                if ($attr_value == 'archive' && $attr_value == 'true') {
+                if ($attr_value == 'true') {
+                    if ($attr == 'favorite') {
+                        $favorite = TRUE;
+                    }
+                    if ($attr == 'archive') {
+                        $archive = TRUE;
+                    }
+                }
+            }
+            # we can add the url
+            if (!is_null($url) && $url->isCorrect()) {
+                $this->action('add', $url, 0, TRUE);
+                $count++;
+                if ($favorite) {
+                    $last_id = $this->store->getLastId($sequence);
+                    $this->action('toggle_fav', $url, $last_id, TRUE);
+                }
+                if ($archive) {
                     $last_id = $this->store->getLastId($sequence);
                     $this->action('toggle_archive', $url, $last_id, TRUE);
                 }
             }
-            if ($url->isCorrect())
-                $this->action('add', $url, 0, TRUE);
         }
-        $this->messages->add('s', _('import from Readability completed'));
+        $this->messages->add('s', _('import from Readability completed. ' . $count . ' new links.'));
         Tools::logm('import from Readability completed');
         Tools::redirect();
     }

@@ -7,21 +7,21 @@
                 <p>
                     {% trans "poche is still not installed. Please fill the below form to install it. Don't hesitate to <a href='http://inthepoche.com/?pages/Documentation'>read the documentation on poche website</a>." %}
                 </p>
-                <div class="row">
+                <p class="row">
                     <label class="col w150p" for="login">{% trans "Login" %}</label>
                     <input class="col" type="text" id="login" name="login" placeholder="Login" tabindex="1" autofocus />
-                </div>
-                <div class="row">
+                </p>
+                <p class="row">
                     <label class="col w150p" for="password">{% trans "Password" %}</label>
                     <input class="col" type="password" id="password" name="password" placeholder="Password" tabindex="2">
-                </div>
-                <div class="row">
+                </p>
+                <p class="row">
                     <label class="col w150p" for="password_repeat">{% trans "Repeat your password" %}</label>
                     <input class="col" type="password" id="password_repeat" name="password_repeat" placeholder="Password" tabindex="3">
-                </div>
-                <div class="row mts txtcenter">
+                </p>
+                <p class="row mts txtcenter">
                     <button class="bouton" type="submit" tabindex="4">{% trans "Install" %}</button>
-                </div>
+                </p>
             </fieldset>
             <input type="hidden" name="token" value="{{ token }}">
         </form>

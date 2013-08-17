@@ -1,0 +1,114 @@
+#
+# Translators:
+# HLFH <gaspard.dhautefeuille@gmail.com>, 2013
+msgid ""
+msgstr ""
+"Project-Id-Version: poche\n"
+"POT-Creation-Date: 2013-08-02 10:26+0100\n"
+"PO-Revision-Date: 2013-08-06 11:48+0100\n"
+"Last-Translator: Nicolas Lœuillet <nicolas.loeuillet@gmail.com>\n"
+"Language-Team: German (http://www.transifex.com/projects/p/poche/language/"
+"de/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-Basepath: /\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: /var/www/poche-i18n\n"
+
+#: /var/www/poche-i18n/import.php:17
+msgid "Please execute the import script locally, it can take a very long time."
+msgstr ""
+"Wir danken Ihnen, den Import in lokal zu ausführen, kann es einige Zeit "
+"dauern."
+
+#: /var/www/poche-i18n/import.php:17
+msgid "Please choose between Pocket & Readabilty :"
+msgstr "Wir danken Ihnen, zwischen Pocket und Readability zu wählen:"
+
+#: /var/www/poche-i18n/import.php:17
+msgid "Bye bye Pocket, let's go !"
+msgstr "Auf wiedersehen Pocket, auf geht's!"
+
+#: /var/www/poche-i18n/import.php:17
+msgid "Bye bye Readability, let's go !"
+msgstr "Auf wiedersehen Readability, auf geht's!"
+
+#: /var/www/poche-i18n/import.php:48
+msgid "Import from Pocket completed."
+msgstr "Der Import aus Poche ist abgeschlossen."
+
+#: /var/www/poche-i18n/import.php:48 /var/www/poche-i18n/import.php:66
+msgid "Welcome to poche !"
+msgstr "Willkommen in Poche!"
+
+#: /var/www/poche-i18n/import.php:66
+msgid "Import from Readability completed."
+msgstr "Der Import aus Readability ist abgeschlossen."
+
+#: /var/www/poche-i18n/import.php:70
+msgid "Error with the import."
+msgstr "Fehler beim Import."
+
+#: /var/www/poche-i18n/import.php:70
+msgid "Back to poche"
+msgstr "Rückkehr zu Poche"
+
+#: /var/www/poche-i18n/index.php:18
+msgid "Wrong token."
+msgstr "Ungültiges Token."
+
+#: /var/www/poche-i18n/index.php:43
+msgid "Login failed !"
+msgstr "Fehler bei der Anmeldung."
+
+#: /var/www/poche-i18n/index.php:59
+msgid "your password has been updated"
+msgstr "Ihr Passwort wurde aktualisiert."
+
+#: /var/www/poche-i18n/index.php:62
+msgid "in demo mode, you can't update password"
+msgstr "Im Demo-Modus kann das Passwort nicht geändert werden."
+
+#: /var/www/poche-i18n/index.php:66
+msgid ""
+"your password can't be empty and you have to repeat it in the second field"
+msgstr ""
+"Ihr Passwort darf nicht leer sein, und Sie müssen es in das zweite Feld zu "
+"wiederholen."
+
+#: /var/www/poche-i18n/index.php:83
+msgid "poche, a read it later open source system"
+msgstr "Poche, eine Opensourceanwendung, um später zu lesen"
+
+#: /var/www/poche-i18n/inc/MyTool.class.php:18
+msgid "Oops, it seems you don't have PHP 5."
+msgstr "Hoppla, scheint es, dass PHP 5 nicht installiert ist."
+
+#: /var/www/poche-i18n/inc/functions.php:352
+msgid "the link has been added successfully"
+msgstr "der Link wurde erfolgreich hinzugefügt"
+
+#: /var/www/poche-i18n/inc/functions.php:355
+msgid "error during insertion : the link wasn't added"
+msgstr "Fehler beim Einfügen: der Link wurde nicht hinzugefügt"
+
+#: /var/www/poche-i18n/inc/functions.php:359
+msgid "error during url preparation : the link wasn't added"
+msgstr "Fehler beim Einfügen: der Link wurde nicht hinzugefügt"
+
+#: /var/www/poche-i18n/inc/functions.php:364
+msgid "error during url preparation : the link is not valid"
+msgstr "Fehler bei der Herstellung der URL: der Link ist nicht gültig"
+
+#: /var/www/poche-i18n/inc/functions.php:373
+msgid "the link has been deleted successfully"
+msgstr "der Link wurde erfolgreich hinzugefügt"
+
+#: /var/www/poche-i18n/inc/functions.php:377
+msgid "the link wasn't deleted"
+msgstr "der Link wurde nicht entfernt."
