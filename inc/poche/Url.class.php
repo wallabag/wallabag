@@ -27,7 +27,7 @@ class Url
 
     public function isCorrect()
     {
-        $pattern = '|^http(s)?://[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$|i';
+        $pattern = '|^(.*:)//([a-z\-.]+)(:[0-9]+)?(.*)$|i';
 
         return preg_match($pattern, $this->url);
     }

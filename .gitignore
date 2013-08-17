@@ -3,3 +3,4 @@ composer.phar
 db/poche.sqlite
 output
 phpdoc*
+inc/config/myconfig.inc.php
