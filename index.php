@@ -9,9 +9,9 @@
  */
 
 require_once './inc/poche/Tools.class.php';
-Tools::createMyConfig();
 
 include dirname(__FILE__).'/inc/poche/config.inc.php';
+Tools::createMyConfig();
 
 # Parse GET & REFERER vars
 $referer = empty($_SERVER['HTTP_REFERER']) ? '' : $_SERVER['HTTP_REFERER'];
