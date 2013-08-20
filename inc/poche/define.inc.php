@@ -22,6 +22,8 @@ define ('REVERT_FORCED_PARAGRAPH_ELEMENTS', FALSE);
 define ('DOWNLOAD_PICTURES', FALSE);
 define ('SHARE_TWITTER', TRUE);
 define ('SHARE_MAIL', TRUE);
+define ('SHARE_SHAARLI', TRUE);
+define ('SHAARLI_URL', 'http://myshaarliurl.com');
 define ('ABS_PATH', 'assets/');
 define ('TPL', __DIR__ . '/../../tpl');
 define ('LOCALE', __DIR__  . '/../../locale');
