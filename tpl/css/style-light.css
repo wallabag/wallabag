@@ -44,6 +44,10 @@ a.twitter span {
     background: url('../img/light/twitter.png') no-repeat;
 }
 
+a.shaarli span {
+    background: url('../img/light/shaarli.png') no-repeat;
+}
+
 a.email span {
     background: url('../img/light/envelop.png') no-repeat;
 }
