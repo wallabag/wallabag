@@ -6,3 +6,4 @@ db/poche.sqlite
 output
 phpdoc*
 inc/poche/myconfig.inc.php
+install/*
