@@ -238,7 +238,7 @@ class Tools
     public static function createMyConfig()
     {
         $myconfig_file = './inc/poche/myconfig.inc.php';
-        
+
         if (!is_writable('./inc/poche/')) {
             self::logm('you don\'t have write access to create ./inc/poche/myconfig.inc.php');
             die('You don\'t have write access to create ./inc/poche/myconfig.inc.php.');
@@ -248,7 +248,7 @@ class Tools
         {
             $fp = fopen($myconfig_file, 'w');
             fwrite($fp, '<?php'."\r\n");
-            fwrite($fp, "define ('POCHE_VERSION', '1.0-beta3');" . "\r\n");
+            fwrite($fp, "define ('POCHE_VERSION', '1.0-beta4');" . "\r\n");
             fwrite($fp, "define ('SALT', '" . md5(time() . $_SERVER['SCRIPT_FILENAME'] . rand()) . "');" . "\r\n");
             fwrite($fp, "define ('LANG', 'en_EN.utf8');" . "\r\n");
             fclose($fp);
