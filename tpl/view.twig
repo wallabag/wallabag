@@ -5,32 +5,32 @@
             <div class="tools">
                 <ul class="tools">
                     <li><a href="./" title="{% trans "back to home" %}" class="tool back"><span>{% trans "back to home" %}</span></a></li>
-                    <li><a title="{% trans "toggle mark as read" %}" class="tool archive {% if entry.is_read == 0 %}archive-off{% endif %}" href="./?action=toggle_archive&id={{ entry.id|e }}"><span>{% trans "toggle mark as read" %}</span></a></li>
-                    <li><a title="{% trans "toggle favorite" %}" class="tool fav {% if entry.is_fav == 0 %}fav-off{% endif %}" href="./?action=toggle_fav&id={{ entry.id|e }}"><span>{% trans "toggle favorite" %}</span></a></li>
-                    <li><a title="{% trans "delete" %}" class="tool delete" href="./?action=delete&id={{ entry.id|e }}"><span>{% trans "delete" %}</span></a></li>
-                    {% if constant('SHARE_TWITTER') == 1 %}<li><a href="https://twitter.com/home?status={{entry.title}}%20{{ entry.url|e }}%20via%20@getpoche" target="_blank" class="tool twitter" title="{% trans "tweet" %}"><span>{% trans "tweet" %}</span></a></li>{% endif %}
-                    {% if constant('SHARE_MAIL') == 1 %}<li><a href="mailto:?subject={{ entry.title|e }}&body={{ entry.url|e }} via @getpoche" class="tool email" title="{% trans "email" %}"><span>{% trans "email" %}</span></a></li>{% endif %}
+                    <li><a title="{% trans "toggle mark as read" %}" class="tool archive {% if entry.is_read == 0 %}archive-off{% endif %}" href="./?action=toggle_archive&amp;id={{ entry.id|e }}"><span>{% trans "toggle mark as read" %}</span></a></li>
+                    <li><a title="{% trans "toggle favorite" %}" class="tool fav {% if entry.is_fav == 0 %}fav-off{% endif %}" href="./?action=toggle_fav&amp;id={{ entry.id|e }}"><span>{% trans "toggle favorite" %}</span></a></li>
+                    <li><a title="{% trans "delete" %}" class="tool delete" href="./?action=delete&amp;id={{ entry.id|e }}"><span>{% trans "delete" %}</span></a></li>
+                    {% if constant('SHARE_TWITTER') == 1 %}<li><a href="https://twitter.com/home?status={{entry.title|url_encode}}%20{{ entry.url|url_encode }}%20via%20@getpoche" target="_blank" class="tool twitter" title="{% trans "tweet" %}"><span>{% trans "tweet" %}</span></a></li>{% endif %}
+                    {% if constant('SHARE_MAIL') == 1 %}<li><a href="mailto:?subject={{ entry.title|url_encode }}&amp;body={{ entry.url|url_encode }}%20via%20@getpoche" class="tool email" title="{% trans "email" %}"><span>{% trans "email" %}</span></a></li>{% endif %}
                 </ul>
             </div>
             <header class="mbm">
                 <h1>{{ entry.title|raw }}</h1>
-                <div class="vieworiginal txtright small"><a href="{{ entry.url|e }}" target="_blank" title="{% trans "original" %} : {{ entry.title|e }}">{{ entry.url | e | getDomain }}</a></div>
+                <div class="vieworiginal txtright small"><a href="{{ entry.url|url_encode }}" target="_blank" title="{% trans "original" %} : {{ entry.title|e }}">{{ entry.url | e | getDomain }}</a></div>
             </header>
             <article>
                 {{ content | raw }}
-                <div class="vieworiginal txtright small"><a href="{{ entry.url|e }}" target="_blank" title="{% trans "original" %} : {{ entry.title|e }}">{{ entry.url | e | getDomain }}</a></div>
+                <div class="vieworiginal txtright small"><a href="{{ entry.url|url_encode }}" target="_blank" title="{% trans "original" %} : {{ entry.title|e }}">{{ entry.url | e | getDomain }}</a></div>
             </article>
             <div class="tools">
                 <ul class="tools">
                     <li><a href="./?" title="{% trans "back to home" %}" class="tool back"><span>{% trans "back to home" %}</span></a></li>
                     <li><a href="#top" title="{% trans "back to top" %}" class="tool top"><span>{% trans "back to top" %}</span></a></li>
-                    <li><a title="{% trans "toggle mark as read" %}" class="tool archive {% if entry.is_read == 0 %}archive-off{% endif %}" href="./?action=toggle_archive&id={{ entry.id|e }}"><span>{% trans "toggle mark as read" %}</span></a></li>
-                    <li><a title="{% trans "toggle favorite" %}" class="tool fav {% if entry.is_fav == 0 %}fav-off{% endif %}" href="./?action=toggle_fav&id={{ entry.id|e }}"><span>{% trans "toggle favorite" %}</span></a></li>
-                    <li><a title="{% trans "delete" %}" class="tool delete" href="./?action=delete&id={{ entry.id|e }}"><span>{% trans "delete" %}</span></a></li>
-                    {% if constant('SHARE_TWITTER') == 1 %}<li><a href="https://twitter.com/home?status={{entry.title}}%20{{ entry.url|e }}%20via%20@getpoche" target="_blank" class="tool twitter" title="{% trans "tweet" %}"><span>{% trans "tweet" %}</span></a></li>{% endif %}
-                    {% if constant('SHARE_MAIL') == 1 %}<li><a href="mailto:?subject={{ entry.title|e }}&body={{ entry.url|e }} via @getpoche" class="tool email" title="{% trans "email" %}"><span>{% trans "email" %}</span></a></li>{% endif %}
+                    <li><a title="{% trans "toggle mark as read" %}" class="tool archive {% if entry.is_read == 0 %}archive-off{% endif %}" href="./?action=toggle_archive&amp;id={{ entry.id|e }}"><span>{% trans "toggle mark as read" %}</span></a></li>
+                    <li><a title="{% trans "toggle favorite" %}" class="tool fav {% if entry.is_fav == 0 %}fav-off{% endif %}" href="./?action=toggle_fav&amp;id={{ entry.id|e }}"><span>{% trans "toggle favorite" %}</span></a></li>
+                    <li><a title="{% trans "delete" %}" class="tool delete" href="./?action=delete&amp;id={{ entry.id|e }}"><span>{% trans "delete" %}</span></a></li>
+                    {% if constant('SHARE_TWITTER') == 1 %}<li><a href="https://twitter.com/home?status={{entry.title|url_encode}}%20{{ entry.url|url_encode }}%20via%20@getpoche" target="_blank" class="tool twitter" title="{% trans "tweet" %}"><span>{% trans "tweet" %}</span></a></li>{% endif %}
+                    {% if constant('SHARE_MAIL') == 1 %}<li><a href="mailto:?subject={{ entry.title|url_encode }}&amp;body={{ entry.url|url_encode }}%20via%20@getpoche" class="tool email" title="{% trans "email" %}"><span>{% trans "email" %}</span></a></li>{% endif %}
                 </ul>
-                <p>{% trans "this article appears wrong?" %} <a href="https://github.com/inthepoche/poche/issues/new">{% trans "create an issue" %}</a> {% trans "or" %} <a href="mailto:support@inthepoche.com?subject=Wrong display in poche&body={{ entry.url|e }}">{% trans "contact us by mail" %}</a></p>
+                <p>{% trans "this article appears wrong?" %} <a href="https://github.com/inthepoche/poche/issues/new">{% trans "create an issue" %}</a> {% trans "or" %} <a href="mailto:support@inthepoche.com?subject=Wrong%20display%20in%20poche&amp;body={{ entry.url|url_encode }}">{% trans "contact us by mail" %}</a></p>
             </div>
         </div>
 {% endblock %}
