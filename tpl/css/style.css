@@ -1,7 +1,8 @@
 body {
     font-size: 16px;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', Verdana, Geneva, sans-serif;
     margin: 10px;
+    color: #000;
 }
 
 header {
@@ -12,52 +13,67 @@ header h1 {
     font-size: 1.3em;
 }
 
+a, a:hover, a:visited {
+    color: #000;
+}
+
 .bouton {
-	border-radius: 2px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 2px;
+}
+.bouton:hover {
+    background-color: #222;
+    color: #f1f1f1;
+    cursor: pointer;
 }
 
 #main {
     margin: 0 auto;
 }
 
-#main ul#links {
+#main #links {
     padding: 0;
     list-style-type: none;
     text-align: center;
     font-size: 0.9em;
 }
 
-#main ul#links li {
+#main #links li {
     display: inline;
 }
 
-#main ul#links li a.current {
+#main #links li .current {
+    background-color: #000;
+    color: #fff;
     -webkit-border-radius: 2px;
     border-radius: 2px;
 }
 
-#main ul#sort {
+#main #sort {
     padding: 0;
     list-style-type: none;
     text-align: center;
     opacity: 0.5;
 }
 
-#main ul#sort li {
+#main #sort li {
     display: inline;
     font-size: 0.9em;
 }
 
-#main ul#sort img:hover {
+#main #sort img:hover {
     cursor: pointer;
 }
 
-
-#links a{
+#links a {
     text-decoration: none;
     padding: 5px 10px;
 }
-#links a:hover{
+#links a:hover {
+    background-color: #040707;
+    color: #F1F1F1;
     -webkit-border-radius: 2px;
     border-radius: 2px;
 }
@@ -65,7 +81,7 @@ header h1 {
 /*** ***/
 /*** LINKS DISPLAY ***/
 
-#main a.tool {
+#main .tool {
     text-decoration: none;
     cursor: pointer;
 }
@@ -80,16 +96,18 @@ header h1 {
 }
 
 #main #content .entrie {
-    border-bottom: 1px dashed #222222;
+    border-bottom: 1px dashed #222;
 }
 
-#main .entrie ul.tools {
+#main .entrie .tools {
     list-style-type: none;
 }
 
-#main .entrie ul.tools li {
-    /*display: inline;*/
+/*
+#main .entrie .tools li {
+    display: inline;
 }
+*/
 
 .tools {
     float: right;
@@ -98,7 +116,8 @@ header h1 {
 }
 
 .tools p {
-    font-size: 0.8em;}
+    font-size: 0.8em;
+}
 
 /*
 .tools ul {
@@ -110,15 +129,16 @@ header h1 {
     line-height: 20px;
 }
 
-.tools a.tool {
+.tools .tool {
     cursor: pointer;
 }*/
 
-#main .entrie .tools a.tool span, #article .tools a.tool span {
+#main .entrie .tools .tool span, #article .tools .tool span {
     display: inline-block;
     width: 16px;
     height: 16px;
 }
+
 
 /*** ***/
 /*** ARTICLE PAGE ***/
@@ -136,7 +156,7 @@ header h1 {
 
 .vieworiginal a, .vieworiginal a:hover, .vieworiginal a:visited {
     text-decoration: none;
-    color: #888888;
+    color: #888;
 }
 
 .backhome {
@@ -146,43 +166,13 @@ header h1 {
 #article .tools {
     position: relative;
     display: inline;
-    top: 0px;
-    right: 0px;
+    top: 0;
+    right: 0;
     width: 100%;
 }
 
-#article .tools ul li{
+#article .tools ul li {
     display: inline;
-}
-
-
-/*** GENERAL ***/
-body {
-    color: #000;
-}
-
-a, a:hover, a:visited {
-    color: #000;
-}
-
-.bouton {
-    background-color: #000;
-    color: #fff;
-    border: none;
-}
-.bouton:hover {
-    background-color: #222222;
-    color: #F1F1F1;
-}
-
-#main ul#links li a.current {
-    background-color: #000;
-    color: #fff;
-}
-
-#links a:hover{
-    background-color: #040707;
-    color: #F1F1F1;
 }
 
 
@@ -190,7 +180,7 @@ a, a:hover, a:visited {
 /*** ARTICLE PAGE ***/
 
 #article header, #article article {
-    border-bottom: 1px solid #222222;
+    border-bottom: 1px solid #222;
 }
 
 
@@ -202,33 +192,33 @@ a, a:hover, a:visited {
     text-align: right;
 }
 .pagination a {
-    border: 1px solid #D5D5D5;
+    border: 1px solid #d5d5d5;
     color: #333;
     font-size: 11px;
     font-weight: bold;
     height: 25px;
     padding: 4px 8px;
     text-decoration: none;
-    margin:2px;
+    margin: 2px;
 }
 .pagination a:hover, .pagination a:active {
-    background:#efefef;
+    background-color: #efefef;
 }
-.pagination span.current {
+.pagination .current {
     background-color: #ccc;
-    border: 1px solid #D5D5D5;
+    border: 1px solid #d5d5d5;
     color: #000;
     font-size: 11px;
     font-weight: bold;
     height: 25px;
     padding: 4px 8px;
     text-decoration: none;
-    margin:2px;
+    margin: 2px;
 }
-.pagination span.disabled {
-    border: 1px solid #EEEEEE;
-    color: #DDDDDD;
-    margin:2px;
+.pagination .disabled {
+    border: 1px solid #eee;
+    color: #ddd;
+    margin: 2px;
     padding: 4px 8px;
     font-size: 11px;
     font-weight: bold;
