@@ -35,7 +35,7 @@ class Poche
 
     /**
      * all checks before installation.
-     * @return boolean
+     * @return boolean 
      */
     private function checkBeforeInstall()
     {
@@ -47,7 +47,7 @@ class Poche
             die('You don\'t have write access on cache directory.');
         }
         else if (file_exists('./install/update.php') && !DEBUG_POCHE) {
-            $msg = 'A poche update is needed. Please execute this update <a href="install/update.php">by clicking here</a>. If you have already done the update, please delete /install folder.';
+            $msg = 'A poche update is needed. Please execute this update <a href="install/update.php">by clicking here</a>. If you have already do the update, please delete /install folder.';
             $allIsGood = FALSE;
         }
         else if (file_exists('./install') && !DEBUG_POCHE) {
@@ -59,7 +59,7 @@ class Poche
             $msg = 'You don\'t have write access on sqlite file.';
             $allIsGood = FALSE;
         }
-
+        
         if (!$allIsGood) {
             echo $this->tpl->render('error.twig', array(
                 'msg' => $msg
@@ -90,7 +90,7 @@ class Poche
         $this->tpl->addFilter($filter);
     }
 
-    private function init()
+    private function init() 
     {
         Tools::initPhp();
         Session::init();
@@ -108,21 +108,21 @@ class Poche
         $language = $this->user->getConfigValue('language');
         putenv('LC_ALL=' . $language);
         setlocale(LC_ALL, $language);
-        bindtextdomain($language, LOCALE);
-        textdomain($language);
+        bindtextdomain($language, LOCALE); 
+        textdomain($language); 
 
         # Pagination
         $this->pagination = new Paginator($this->user->getConfigValue('pager'), 'p');
     }
 
-    private function install()
+    private function install() 
     {
         Tools::logm('poche still not installed');
         echo $this->tpl->render('install.twig', array(
             'token' => Session::getToken()
         ));
         if (isset($_GET['install'])) {
-            if (($_POST['password'] == $_POST['password_repeat'])
+            if (($_POST['password'] == $_POST['password_repeat']) 
                 && $_POST['password'] != "" && $_POST['login'] != "") {
                 # let's rock, install poche baby !
                 if ($this->store->install($_POST['login'], Tools::encodeString($_POST['password'] . $_POST['login'])))
@@ -280,8 +280,8 @@ class Poche
     }
 
     /**
-     * update the password of the current user.
-     * if MODE_DEMO is TRUE, the password can't be updated.
+     * update the password of the current user. 
+     * if MODE_DEMO is TRUE, the password can't be updated. 
      * @todo add the return value
      * @todo set the new password in function header like this updatePassword($newPassword)
      * @return boolean
@@ -350,7 +350,7 @@ class Poche
     /**
      * log out the poche user. It cleans the session.
      * @todo add the return value
-     * @return boolean
+     * @return boolean 
      */
     public function logout()
     {
@@ -403,7 +403,7 @@ class Poche
     /**
      * import from Pocket. poche needs a ./ril_export.html file
      * @todo add the return value
-     * @return boolean
+     * @return boolean 
      */
     private function importFromPocket()
     {
@@ -430,7 +430,7 @@ class Poche
                     $this->action('toggle_archive', $url, $last_id, TRUE);
                 }
             }
-
+            
             # the second <ul> is for read links
             $read = 1;
         }
@@ -442,7 +442,7 @@ class Poche
     /**
      * import from Readability. poche needs a ./readability file
      * @todo add the return value
-     * @return boolean
+     * @return boolean 
      */
     private function importFromReadability()
     {
@@ -495,7 +495,7 @@ class Poche
      * import datas into your poche
      * @param  string $from name of the service to import : pocket, instapaper or readability
      * @todo add the return value
-     * @return boolean
+     * @return boolean       
      */
     public function import($from)
     {
