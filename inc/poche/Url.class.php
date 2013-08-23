@@ -64,8 +64,15 @@ class Url
             if (function_exists('tidy_parse_string')) {
                 $tidy = tidy_parse_string($html, array(), 'UTF8');
                 $tidy->cleanRepair();
-                $html = $tidy->value;
-            }
+
+				//Warning: tidy might fail so, ensure there is still a content
+				$body = $tidy->body();
+
+				//hasChildren does not seem to work, just check the string
+				//returned (and do not forget to clean the white spaces)
+				if (preg_replace('/\s+/', '', $body->value) !== "<body></body>")
+					$html = $tidy->value;
+            } 
 
             $parameters = array();
             if (isset($html) and strlen($html) > 0)
