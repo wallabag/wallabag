@@ -84,7 +84,7 @@ class Url
                 if($readability->init())
                 {
                     $content = $readability->articleContent->innerHTML;
-                    $parameters['title'] = $readability->articleTitle->innerHTML;
+                    $parameters['title'] = ($readability->articleTitle->innerHTML != '' ? $readability->articleTitle->innerHTML : _('Untitled'));
                     $parameters['content'] = $content;
 
                     return $parameters;
