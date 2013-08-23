@@ -137,6 +137,10 @@ a, a:hover, a:visited {
     display: inline-block;
     width: 16px;
     height: 16px;
+    /* Hide textual content */
+    text-indent: -9999px;
+    text-align: left;
+    overflow: hidden;
 }
 
 
