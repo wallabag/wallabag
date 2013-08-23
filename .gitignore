@@ -1,3 +1,5 @@
+assets/*
+cache/*
 vendor
 composer.phar
 db/poche.sqlite
