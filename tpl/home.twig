@@ -5,19 +5,19 @@
 {% endblock %}
 {% block precontent %}
             <ul id="sort">
-                <li><a href="./?sort=ia&view={{ view }}"><img src="./tpl/img/{{ constant('THEME') }}/top.png" alt="{% trans "by date asc" %}" title="{% trans "by date asc" %}" /></a> {% trans "by date" %} <a href="./?sort=id&view={{ view }}"><img src="./tpl/img/{{ constant('THEME') }}/down.png" alt="{% trans "by date desc" %}" title="{% trans "by date desc" %}" /></a></li>
-                <li><a href="./?sort=ta&view={{ view }}"><img src="./tpl/img/{{ constant('THEME') }}/top.png" alt="{% trans "by title asc" %}" title="{% trans "by title asc" %}" /></a> {% trans "by title" %} <a href="./?sort=td&view={{ view }}"><img src="./tpl/img/{{ constant('THEME') }}/down.png" alt="{% trans "by title desc" %}" title="{% trans "by title desc" %}" /></a></li>
+                <li><a href="./?sort=ia&amp;view={{ view }}"><img src="./tpl/img/{{ constant('THEME') }}/top.png" alt="{% trans "by date asc" %}" title="{% trans "by date asc" %}" /></a> {% trans "by date" %} <a href="./?sort=id&amp;view={{ view }}"><img src="./tpl/img/{{ constant('THEME') }}/down.png" alt="{% trans "by date desc" %}" title="{% trans "by date desc" %}" /></a></li>
+                <li><a href="./?sort=ta&amp;view={{ view }}"><img src="./tpl/img/{{ constant('THEME') }}/top.png" alt="{% trans "by title asc" %}" title="{% trans "by title asc" %}" /></a> {% trans "by title" %} <a href="./?sort=td&amp;view={{ view }}"><img src="./tpl/img/{{ constant('THEME') }}/down.png" alt="{% trans "by title desc" %}" title="{% trans "by title desc" %}" /></a></li>
             </ul>
 {% endblock %}
 {% block content %}
             {{ page_links | raw }}
             {% for entry in entries %}
             <div id="entry-{{ entry.id|e }}" class="entrie">
-                <h2><a href="index.php?view=view&id={{ entry.id|e }}">{{ entry.title|raw }}</a></h2>
+                <h2><a href="index.php?view=view&amp;id={{ entry.id|e }}">{{ entry.title|raw }}</a></h2>
                 <ul class="tools">
-                    <li><a title="{% trans "toggle mark as read" %}" class="tool archive {% if entry.is_read == 0 %}archive-off{% endif %}" href="./?action=toggle_archive&id={{ entry.id|e }}"><span>{% trans "toggle mark as read" %}</span></a></li>
-                    <li><a title="{% trans "toggle favorite" %}" class="tool fav {% if entry.is_fav == 0 %}fav-off{% endif %}" href="./?action=toggle_fav&id={{ entry.id|e }}"><span>{% trans "toggle favorite" %}</span></a></li>
-                    <li><a title="{% trans "delete" %}" class="tool delete" href="./?action=delete&id={{ entry.id|e }}"><span>{% trans "delete" %}</span></a></li>
+                    <li><a title="{% trans "toggle mark as read" %}" class="tool archive {% if entry.is_read == 0 %}archive-off{% endif %}" href="./?action=toggle_archive&amp;id={{ entry.id|e }}"><span>{% trans "toggle mark as read" %}</span></a></li>
+                    <li><a title="{% trans "toggle favorite" %}" class="tool fav {% if entry.is_fav == 0 %}fav-off{% endif %}" href="./?action=toggle_fav&amp;id={{ entry.id|e }}"><span>{% trans "toggle favorite" %}</span></a></li>
+                    <li><a title="{% trans "delete" %}" class="tool delete" href="./?action=delete&amp;id={{ entry.id|e }}"><span>{% trans "delete" %}</span></a></li>
                     <li class="reading-time">{{ entry.content| getReadingTime }} min</li>
                 </ul>
                 <p>{{ entry.content|striptags|slice(0, 300) }}...</p>

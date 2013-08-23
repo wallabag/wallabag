@@ -11,24 +11,21 @@
             </ul>
 {% endblock %}
 {% block content %}
-
             <h2>{% trans "Poching a link" %}</h2>
             <p>You can poche a link by several methods: (<a href="http://www.inthepoche.com/?pages/Documentation" title="{% trans "read the documentation" %}">?</a>)</p>
-            <p>
-                <ul>
-                    <li>firefox: <a href="https://bitbucket.org/jogaulupeau/poche/downloads/poche.xpi" title="download the firefox extension">download the extension</a></li>
-                    <li>chrome: <a href="https://bitbucket.org/jogaulupeau/poche/downloads/poche.crx" title="download the chrome extension">download the extension</a></li>
-                    <li>android: <a href="https://bitbucket.org/jogaulupeau/poche/downloads/Poche.apk" title="download the application">download the application</a></li>
-                    <li>bookmarklet: drag & drop this link to your bookmarks bar <a ondragend="this.click();" style="cursor: move; border: 1px dashed grey; background: white; padding: 5px;" title="i am a bookmarklet, use me !" href="javascript:if(top['bookmarklet-url@inthepoche.com']){top['bookmarklet-url@inthepoche.com'];}else{(function(){var%20url%20=%20location.href%20||%20url;window.open('{{ poche_url }}?action=add&url='%20+%20btoa(url),'_self');})();void(0);}">{% trans "poche it!" %}</a></li>
-                </ul>
-            </p>
+            <ul>
+                <li>firefox: <a href="https://bitbucket.org/jogaulupeau/poche/downloads/poche.xpi" title="download the firefox extension">download the extension</a></li>
+                <li>chrome: <a href="https://bitbucket.org/jogaulupeau/poche/downloads/poche.crx" title="download the chrome extension">download the extension</a></li>
+                <li>android: <a href="https://bitbucket.org/jogaulupeau/poche/downloads/Poche.apk" title="download the application">download the application</a></li>
+                <li>bookmarklet: drag & drop this link to your bookmarks bar <a ondragend="this.click();" style="cursor: move; border: 1px dashed grey; background: white; padding: 5px;" title="i am a bookmarklet, use me !" href="javascript:if(top['bookmarklet-url@inthepoche.com']){top['bookmarklet-url@inthepoche.com'];}else{(function(){var%20url%20=%20location.href%20||%20url;window.open('{{ poche_url }}?action=add&url='%20+%20btoa(url),'_self');})();void(0);}">{% trans "poche it!" %}</a></li>
+            </ul>
+
             <h2>{% trans "Updating poche" %}</h2>
-            <p><ul>
+            <ul>
                 <li>{% trans "your version" %} : <strong>{{ constant('POCHE_VERSION') }}</strong></li>
                 <li>{% trans "latest stable version" %} : {{ prod }}. {% if compare_prod == -1 %}<strong><a href="http://inthepoche.com/?pages/T%C3%A9l%C3%A9charger-poche">{% trans "a more recent stable version is available." %}</a></strong>{% else %}{% trans "you are up to date." %}{% endif %}</li>
                 {% if constant('DEBUG_POCHE') == 1 %}<li>{% trans "latest dev version" %} : {{ dev }}. {% if compare_dev == -1 %}<strong><a href="http://inthepoche.com/?pages/T%C3%A9l%C3%A9charger-poche">{% trans "a more recent development version is available." %}</a></strong>{% else %}{% trans "you are up to date." %}{% endif %}</li>{% endif %}
             </ul>
-            </p>
 
             <h2>{% trans "Change your password" %}</h2>
             <form method="post" action="?config" name="loginform">
@@ -52,11 +49,11 @@
             <h2>{% trans "Import" %}</h2>
             <p>{% trans "Please execute the import script locally, it can take a very long time." %}</p>
             <p>{% trans "More infos in the official doc:" %} <a href="http://inthepoche.com/?pages/Documentation">inthepoche.com</a></p>
-            <p><ul>
-            <li><a href="./?import&from=pocket">{% trans "import from Pocket" %}</a> (you must have a "ril_export.html" file on your server)</li>
-            <li><a href="./?import&from=readability">{% trans "import from Readability" %}</a>  (you must have a "readability" file on your server)</li>
-            <li><a href="./?import&from=instapaper">{% trans "import from Instapaper" %}</a>  (you must have a "instapaper-export.html" file on your server)</li>
-            </ul></p>
+            <ul>
+                <li><a href="./?import&amp;from=pocket">{% trans "import from Pocket" %}</a> (you must have a "ril_export.html" file on your server)</li>
+                <li><a href="./?import&amp;from=readability">{% trans "import from Readability" %}</a>  (you must have a "readability" file on your server)</li>
+                <li><a href="./?import&amp;from=instapaper">{% trans "import from Instapaper" %}</a>  (you must have a "instapaper-export.html" file on your server)</li>
+            </ul>
 
             <h2>{% trans "Export your poche datas" %}</h2>
             <p><a href="./?export" target="_blank">{% trans "Click here" %}</a> {% trans "to export your poche datas." %}</p>
