@@ -13,7 +13,7 @@
             {{ page_links | raw }}
             {% for entry in entries %}
             <div id="entry-{{ entry.id|e }}" class="entrie">
-                <h2><a href="index.php?view=view&id={{ entry.id|e }}">{{ entry.title|e }}</a></h2>
+                <h2><a href="index.php?view=view&id={{ entry.id|e }}">{{ entry.title|raw }}</a></h2>
                 <ul class="tools">
                     <li>
                         <a title="{% trans "toggle mark as read" %}" class="tool archive {% if entry.is_read == 0 %}archive-off{% endif %}" href="./?action=toggle_archive&id={{ entry.id|e }}"><span></span></a></li>
