@@ -1,0 +1,19 @@
+body > header,
+body > footer,
+a.top_link,
+div.tools,
+header div
+{
+	display: none !important;
+}
+
+article
+{
+	border: none !important;
+}
+
+div.vieworiginal a::after
+{
+	margin-left: 5px;
+	content: "("attr(href)")";
+}
