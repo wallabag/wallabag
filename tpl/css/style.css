@@ -150,6 +150,11 @@ a, a:hover, a:visited {
 #article {
     margin: 0 auto;
 }
+
+#article header, #article article {
+    border-bottom: 1px solid #222;
+}
+
 #article header {
     text-align: left;
 }
@@ -177,14 +182,6 @@ a, a:hover, a:visited {
 
 #article .tools ul li {
     display: inline;
-}
-
-
-/*** ***/
-/*** ARTICLE PAGE ***/
-
-#article header, #article article {
-    border-bottom: 1px solid #222;
 }
 
 
