@@ -364,13 +364,14 @@ class Poche
     /**
      * import from Instapaper. poche needs a ./instapaper-export.html file
      * @todo add the return value
+     * @param string $targetFile the file used for importing
      * @return boolean
      */
-    private function importFromInstapaper()
+    private function importFromInstapaper($targetFile)
     {
         # TODO gestion des articles favs
         $html = new simple_html_dom();
-        $html->load_file('./instapaper-export.html');
+        $html->load_file($targetFile);
         Tools::logm('starting import from instapaper');
 
         $read = 0;
@@ -403,13 +404,14 @@ class Poche
     /**
      * import from Pocket. poche needs a ./ril_export.html file
      * @todo add the return value
+     * @param string $targetFile the file used for importing
      * @return boolean 
      */
-    private function importFromPocket()
+    private function importFromPocket($targetFile)
     {
         # TODO gestion des articles favs
         $html = new simple_html_dom();
-        $html->load_file('./ril_export.html');
+        $html->load_file($targetFile);
         Tools::logm('starting import from pocket');
 
         $read = 0;
@@ -442,12 +444,13 @@ class Poche
     /**
      * import from Readability. poche needs a ./readability file
      * @todo add the return value
+     * @param string $targetFile the file used for importing
      * @return boolean 
      */
-    private function importFromReadability()
+    private function importFromReadability($targetFile)
     {
         # TODO gestion des articles lus / favs
-        $str_data = file_get_contents("./readability");
+        $str_data = file_get_contents($targetFile);
         $data = json_decode($str_data,true);
         Tools::logm('starting import from Readability');
         $count = 0;
@@ -499,15 +502,31 @@ class Poche
      */
     public function import($from)
     {
-        if ($from == 'pocket') {
-            return $this->importFromPocket();
+        $providers = array(
+            'pocket' => 'importFromPocket',
+            'readability' => 'importFromReadability',
+            'instapaper' => 'importFromInstapaper'
+        );
+        
+        if (! isset($providers[$from])) {
+            $this->messages->add('e', _('Unknown import provider.'));
+            Tools::redirect();
         }
-        else if ($from == 'readability') {
-            return $this->importFromReadability();
+        
+        $targetDefinition = 'IMPORT_' . strtoupper($from) . '_FILE';
+        $targetFile = constant($targetDefinition);
+        
+        if (! defined($targetDefinition)) {
+            $this->messages->add('e', _('Incomplete inc/poche/define.inc.php file, please define "' . $targetDefinition . '".'));
+            Tools::redirect();
         }
-        else if ($from == 'instapaper') {
-            return $this->importFromInstapaper();
+        
+        if (! file_exists($targetFile)) {
+            $this->messages->add('e', _('Could not find required "' . $targetFile . '" import file.'));
+            Tools::redirect();
         }
+        
+        $this->$providers[$from]($targetFile);
     }
 
     /**
