@@ -27,7 +27,7 @@ class Url
 
     public function isCorrect()
     {
-        return filter_var($this->url, FILTER_VALIDATE_URL);
+        return filter_var($this->url, FILTER_VALIDATE_URL) !== FALSE;
     }
 
     public function clean()
