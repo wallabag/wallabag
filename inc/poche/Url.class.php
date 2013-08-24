@@ -27,9 +27,7 @@ class Url
 
     public function isCorrect()
     {
-        $pattern = '|^(.*:)//([a-z\-.]+)(:[0-9]+)?(.*)$|i';
-
-        return preg_match($pattern, $this->url);
+        return filter_var($this->url, FILTER_VALIDATE_URL) !== FALSE;
     }
 
     public function clean()
@@ -73,7 +71,7 @@ class Url
                 if (preg_replace('/\s+/', '', $body->value) !== "<body></body>") {
                     $html = $tidy->value;
                 }
-            } 
+            }
 
             $parameters = array();
             if (isset($html) and strlen($html) > 0)
