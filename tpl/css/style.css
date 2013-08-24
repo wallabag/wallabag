@@ -103,6 +103,10 @@ a, a:hover, a:visited {
     list-style-type: none;
 }
 
+#main .entrie .tools + p {
+    min-height: 5.5em;
+}
+
 /*
 #main .entrie .tools li {
     display: inline;
