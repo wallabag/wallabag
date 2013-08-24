@@ -27,9 +27,7 @@ class Url
 
     public function isCorrect()
     {
-        $pattern = '|^(.*:)//([a-z\-.\d]+)(:[0-9]+)?(.*)$|i';
-
-        return preg_match($pattern, $this->url);
+        return filter_var($this->url, FILTER_VALIDATE_URL);
     }
 
     public function clean()
