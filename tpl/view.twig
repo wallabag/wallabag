@@ -1,5 +1,5 @@
 {% extends "layout.twig" %}
-{% block title %}{% trans "home" %}{% endblock %}
+{% block title %}{{ entry.title|raw }} ({{ entry.url | e | getDomain }}){% endblock %}
 {% block content %}
         <div id="article">
             <div class="tools">
