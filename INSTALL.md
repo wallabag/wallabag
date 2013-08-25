@@ -1,8 +1,16 @@
 # Installing poche
 
 ## requirements
+* PHP 5.2.0 or higher
+* XML ([?](http://php.net/xml))
+* PCRE ([?](http://php.net/pcre))
+* Data filtering ([?](http://uk.php.net/manual/en/book.filter.php))
+* Tidy ([?](http://php.net/tidy))
+* cURL ([?](http://php.net/curl))
+* Parallel URL fetching
+* allow_url_fopen ([?](http://www.php.net/manual/en/filesystem.configuration.php#ini.allow-url-fopen))
 
-it's highly recommended to have php cURL and tidy_parse_string to fetch articles content. 
+To see if your server is ok to run poche, execute http://yourpoche/poche_compatibility_test.php. 
 
 ## you don't want to install twig (the template engine) by yourself
 

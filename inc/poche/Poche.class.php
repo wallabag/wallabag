@@ -47,16 +47,16 @@ class Poche
             die('You don\'t have write access on cache directory.');
         }
         else if (file_exists('./install/update.php') && !DEBUG_POCHE) {
-            $msg = 'A poche update is needed. Please execute this update <a href="install/update.php">by clicking here</a>. If you have already do the update, please delete /install folder.';
+            $msg = '<h1>setup</h1><p><strong>It\'s your first time here?</strong> Please copy /install/poche.sqlite in db folder. Then, delete install folder.<br /><strong>If you have already installed poche</strong>, an update is needed <a href="install/update.php">by clicking here</a>.</p>';
             $allIsGood = FALSE;
         }
         else if (file_exists('./install') && !DEBUG_POCHE) {
-            $msg = 'If you want to update your poche, you just have to delete /install folder. <br />To install your poche with sqlite, copy /install/poche.sqlite in /db and delete the folder /install. you have to delete the /install folder before using poche.';
+            $msg = '<h1>setup</h1><p><strong>If you want to update your poche</strong>, you just have to delete /install folder. <br /><strong>To install your poche with sqlite</strong>, copy /install/poche.sqlite in /db and delete the folder /install. you have to delete the /install folder before using poche.</p>';
             $allIsGood = FALSE;
         }
         else if (STORAGE == 'sqlite' && !is_writable(STORAGE_SQLITE)) {
             Tools::logm('you don\'t have write access on sqlite file');
-            $msg = 'You don\'t have write access on sqlite file.';
+            $msg = '<h1>error</h1><p>You don\'t have write access on sqlite file.</p>';
             $allIsGood = FALSE;
         }
         
@@ -156,36 +156,31 @@ class Poche
         switch ($action)
         {
             case 'add':
-                if($parametres_url = $url->fetchContent()) {
-                    if ($this->store->add($url->getUrl(), $parametres_url['title'], $parametres_url['content'], $this->user->getId())) {
-                        Tools::logm('add link ' . $url->getUrl());
-                        $sequence = '';
-                        if (STORAGE == 'postgres') {
-                            $sequence = 'entries_id_seq';
-                        }
-                        $last_id = $this->store->getLastId($sequence);
-                        if (DOWNLOAD_PICTURES) {
-                            $content = filtre_picture($parametres_url['content'], $url->getUrl(), $last_id);
-                            Tools::logm('updating content article');
-                            $this->store->updateContent($last_id, $content, $this->user->getId());
-                        }
-                        if (!$import) {
-                            $this->messages->add('s', _('the link has been added successfully'));
-                        }
+                $content = $url->extract();
+
+                if ($this->store->add($url->getUrl(), $content['title'], $content['body'], $this->user->getId())) {
+                    Tools::logm('add link ' . $url->getUrl());
+                    $sequence = '';
+                    if (STORAGE == 'postgres') {
+                        $sequence = 'entries_id_seq';
                     }
-                    else {
-                        if (!$import) {
-                            $this->messages->add('e', _('error during insertion : the link wasn\'t added'));
-                            Tools::logm('error during insertion : the link wasn\'t added ' . $url->getUrl());
-                        }
+                    $last_id = $this->store->getLastId($sequence);
+                    if (DOWNLOAD_PICTURES) {
+                        $content = filtre_picture($parametres_url['body'], $url->getUrl(), $last_id);
+                        Tools::logm('updating content article');
+                        $this->store->updateContent($last_id, $content, $this->user->getId());
+                    }
+                    if (!$import) {
+                        $this->messages->add('s', _('the link has been added successfully'));
                     }
                 }
                 else {
                     if (!$import) {
-                        $this->messages->add('e', _('error during fetching content : the link wasn\'t added'));
-                        Tools::logm('error during content fetch ' . $url->getUrl());
+                        $this->messages->add('e', _('error during insertion : the link wasn\'t added'));
+                        Tools::logm('error during insertion : the link wasn\'t added ' . $url->getUrl());
                     }
                 }
+
                 if (!$import) {
                     Tools::redirect();
                 }
@@ -220,7 +215,6 @@ class Poche
                 }
                 break;
             default:
-                Tools::logm('action ' . $action . 'doesn\'t exist');
                 break;
         }
     }
@@ -364,13 +358,14 @@ class Poche
     /**
      * import from Instapaper. poche needs a ./instapaper-export.html file
      * @todo add the return value
+     * @param string $targetFile the file used for importing
      * @return boolean
      */
-    private function importFromInstapaper()
+    private function importFromInstapaper($targetFile)
     {
         # TODO gestion des articles favs
         $html = new simple_html_dom();
-        $html->load_file('./instapaper-export.html');
+        $html->load_file($targetFile);
         Tools::logm('starting import from instapaper');
 
         $read = 0;
@@ -403,13 +398,14 @@ class Poche
     /**
      * import from Pocket. poche needs a ./ril_export.html file
      * @todo add the return value
+     * @param string $targetFile the file used for importing
      * @return boolean 
      */
-    private function importFromPocket()
+    private function importFromPocket($targetFile)
     {
         # TODO gestion des articles favs
         $html = new simple_html_dom();
-        $html->load_file('./ril_export.html');
+        $html->load_file($targetFile);
         Tools::logm('starting import from pocket');
 
         $read = 0;
@@ -442,12 +438,13 @@ class Poche
     /**
      * import from Readability. poche needs a ./readability file
      * @todo add the return value
+     * @param string $targetFile the file used for importing
      * @return boolean 
      */
-    private function importFromReadability()
+    private function importFromReadability($targetFile)
     {
         # TODO gestion des articles lus / favs
-        $str_data = file_get_contents("./readability");
+        $str_data = file_get_contents($targetFile);
         $data = json_decode($str_data,true);
         Tools::logm('starting import from Readability');
         $count = 0;
@@ -499,15 +496,31 @@ class Poche
      */
     public function import($from)
     {
-        if ($from == 'pocket') {
-            return $this->importFromPocket();
+        $providers = array(
+            'pocket' => 'importFromPocket',
+            'readability' => 'importFromReadability',
+            'instapaper' => 'importFromInstapaper'
+        );
+        
+        if (! isset($providers[$from])) {
+            $this->messages->add('e', _('Unknown import provider.'));
+            Tools::redirect();
         }
-        else if ($from == 'readability') {
-            return $this->importFromReadability();
+        
+        $targetDefinition = 'IMPORT_' . strtoupper($from) . '_FILE';
+        $targetFile = constant($targetDefinition);
+        
+        if (! defined($targetDefinition)) {
+            $this->messages->add('e', _('Incomplete inc/poche/define.inc.php file, please define "' . $targetDefinition . '".'));
+            Tools::redirect();
         }
-        else if ($from == 'instapaper') {
-            return $this->importFromInstapaper();
+        
+        if (! file_exists($targetFile)) {
+            $this->messages->add('e', _('Could not find required "' . $targetFile . '" import file.'));
+            Tools::redirect();
         }
+        
+        $this->$providers[$from]($targetFile);
     }
 
     /**

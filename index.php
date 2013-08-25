@@ -8,6 +8,9 @@
  * @license    http://www.wtfpl.net/ see COPYING file
  */
 
+if (file_exists(__DIR__ . '/inc/poche/myconfig.inc.php')) {
+    require_once __DIR__ . '/inc/poche/myconfig.inc.php';
+}
 require_once './inc/poche/Tools.class.php';
 Tools::createMyConfig();
 
