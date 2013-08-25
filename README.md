@@ -2,7 +2,6 @@
 Abandon Pocket, Instapaper and other Readability service : adopt poche. It is the same, but it is free (like in freedom) and open source. 
 
 ## Some features
-
 * adding, deleting, archiving and setting as favorite a link
 * import from pocket / readability / instapaper
 * share links by email and on twitter
@@ -18,8 +17,9 @@ Abandon Pocket, Instapaper and other Readability service : adopt poche. It is th
 
 To test poche, a demo website is online : [demo.inthepoche.com](http://demo.inthepoche.com) (login poche, password poche).
 
-## Installation
+To use poche hosting, [you can create an account here](http://app.inthepoche.com/).
 
+## Installation
 Read the [INSTALL.md file](https://github.com/inthepoche/poche/blob/master/INSTALL.md).
 
 ## License
