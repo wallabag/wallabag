@@ -15,11 +15,11 @@
             </div>
             <header class="mbm">
                 <h1>{{ entry.title|raw }}</h1>
-                <div class="vieworiginal txtright small"><a href="{{ entry.url|url_encode }}" target="_blank" title="{% trans "original" %} : {{ entry.title|e }}">{{ entry.url | e | getDomain }}</a></div>
+                <div class="vieworiginal txtright small"><a href="{{ entry.url|e }}" target="_blank" title="{% trans "original" %} : {{ entry.title|e }}">{{ entry.url | e | getDomain }}</a></div>
             </header>
             <article>
                 {{ content | raw }}
-                <div class="vieworiginal txtright small"><a href="{{ entry.url|url_encode }}" target="_blank" title="{% trans "original" %} : {{ entry.title|e }}">{{ entry.url | e | getDomain }}</a></div>
+                <div class="vieworiginal txtright small"><a href="{{ entry.url|e }}" target="_blank" title="{% trans "original" %} : {{ entry.title|e }}">{{ entry.url | e | getDomain }}</a></div>
             </article>
             <div class="tools">
                 <ul class="tools">
