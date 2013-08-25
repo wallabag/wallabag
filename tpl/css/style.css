@@ -229,6 +229,13 @@ a, a:hover, a:visited {
     font-weight: bold;
 }
 
+#bookmarklet {
+    padding: 5px;
+    border: 1px dashed #808080;
+    background: #fff;
+    cursor: move;
+}
+
 footer {
     clear: both;
 }
