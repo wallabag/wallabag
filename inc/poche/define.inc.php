@@ -17,8 +17,6 @@ define ('STORAGE_PASSWORD', 'postgres'); # leave blank for sqlite
 
 define ('MODE_DEMO', FALSE);
 define ('DEBUG_POCHE', FALSE);
-define ('CONVERT_LINKS_FOOTNOTES', FALSE);
-define ('REVERT_FORCED_PARAGRAPH_ELEMENTS', FALSE);
 define ('DOWNLOAD_PICTURES', FALSE);
 define ('SHARE_TWITTER', TRUE);
 define ('SHARE_MAIL', TRUE);

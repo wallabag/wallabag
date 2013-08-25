@@ -30,8 +30,23 @@ require_once __DIR__ . '/../../inc/3rdparty/simple_html_dom.php';
 require_once __DIR__ . '/../../inc/3rdparty/paginator.php';
 require_once __DIR__ . '/../../inc/3rdparty/Session.class.php';
 
+require_once __DIR__ . '/../../inc/3rdparty/simplepie/SimplePieAutoloader.php';
+require_once __DIR__ . '/../../inc/3rdparty/simplepie/SimplePie/Core.php';
+require_once __DIR__ . '/../../inc/3rdparty/content-extractor/ContentExtractor.php';
+require_once __DIR__ . '/../../inc/3rdparty/content-extractor/SiteConfig.php';
+require_once __DIR__ . '/../../inc/3rdparty/humble-http-agent/HumbleHttpAgent.php';
+require_once __DIR__ . '/../../inc/3rdparty/humble-http-agent/SimplePie_HumbleHttpAgent.php';
+require_once __DIR__ . '/../../inc/3rdparty/humble-http-agent/CookieJar.php';
+require_once __DIR__ . '/../../inc/3rdparty/feedwriter/FeedItem.php';
+require_once __DIR__ . '/../../inc/3rdparty/feedwriter/FeedWriter.php';
+require_once __DIR__ . '/../../inc/3rdparty/feedwriter/DummySingleItemFeed.php';
+
 if (DOWNLOAD_PICTURES) {
     require_once __DIR__ . '/../../inc/poche/pochePictures.php';
+}
+
+if (!ini_get('date.timezone') || !@date_default_timezone_set(ini_get('date.timezone'))) {
+    date_default_timezone_set('UTC');
 }
 
 $poche = new Poche();
