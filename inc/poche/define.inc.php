@@ -17,14 +17,18 @@ define ('STORAGE_PASSWORD', 'postgres'); # leave blank for sqlite
 
 define ('MODE_DEMO', FALSE);
 define ('DEBUG_POCHE', FALSE);
-define ('CONVERT_LINKS_FOOTNOTES', FALSE);
-define ('REVERT_FORCED_PARAGRAPH_ELEMENTS', FALSE);
 define ('DOWNLOAD_PICTURES', FALSE);
 define ('SHARE_TWITTER', TRUE);
 define ('SHARE_MAIL', TRUE);
+define ('SHARE_SHAARLI', FALSE);
+define ('SHAARLI_URL', 'http://myshaarliurl.com');
 define ('ABS_PATH', 'assets/');
 define ('TPL', __DIR__ . '/../../tpl');
 define ('LOCALE', __DIR__  . '/../../locale');
 define ('CACHE', __DIR__  . '/../../cache');
 define ('PAGINATION', '10');
 define ('THEME', 'light');
+
+define ('IMPORT_POCKET_FILE', './ril_export.html');
+define ('IMPORT_READABILITY_FILE', './readability');
+define ('IMPORT_INSTAPAPER_FILE', './instapaper-export.html');
