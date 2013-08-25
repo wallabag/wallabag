@@ -30,3 +30,7 @@ define ('LOCALE', __DIR__  . '/../../locale');
 define ('CACHE', __DIR__  . '/../../cache');
 define ('PAGINATION', '10');
 define ('THEME', 'light');
+
+define ('IMPORT_POCKET_FILE', './ril_export.html');
+define ('IMPORT_READABILITY_FILE', './readability');
+define ('IMPORT_INSTAPAPER_FILE', './instapaper-export.html');
