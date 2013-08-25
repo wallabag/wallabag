@@ -9,11 +9,11 @@ Abandon Pocket, Instapaper and other Readability service : adopt poche. It is th
 * a design adapted to tablets and smartphones
 * extensions for Chrome and Firefox
 * Android application
-* multi languages (very soon!)
+* multi languages: french, english, spanish, german.
 * multi users (very soon!)
 * update notification in configuration screen
 * many storage modes (sqlite, mysql, postgresql)
-* many templates
+* many templates: [have a look here](https://github.com/inthepoche/poche-themes).
 * ...
 
 To test poche, a demo website is online : [demo.inthepoche.com](http://demo.inthepoche.com) (login poche, password poche).
