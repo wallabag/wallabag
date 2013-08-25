@@ -236,6 +236,20 @@ a, a:hover, a:visited {
     cursor: move;
 }
 
+.top_link {
+    position: fixed;
+    right: 15px;
+    bottom: 15px;
+    display: none;
+    padding: 20px;
+    background: #ccc;
+    -moz-border-radius: 40px;
+    -webkit-border-radius: 40px;
+    border-radius: 40px;
+    opacity: 0.9;
+    z-index: 2000;
+}
+
 footer {
     clear: both;
 }
