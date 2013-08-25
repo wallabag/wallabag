@@ -50,9 +50,9 @@
             <p>{% trans "Please execute the import script locally, it can take a very long time." %}</p>
             <p>{% trans "More infos in the official doc:" %} <a href="http://inthepoche.com/?pages/Documentation">inthepoche.com</a></p>
             <ul>
-                <li><a href="./?import&from=pocket">{% trans "import from Pocket" %}</a> (you must have a "{{ defined('IMPORT_POCKET_FILE') ? constant('IMPORT_POCKET_FILE') ? 'INCORRECT CONFIGURATION' }}" file on your server)</li>
-            <li><a href="./?import&from=readability">{% trans "import from Readability" %}</a> (you must have a "{{ defined('IMPORT_READABILITY_FILE') ? constant('IMPORT_READABILITY_FILE') ? 'INCORRECT CONFIGURATION' }}" file on your server)</li>
-            <li><a href="./?import&from=instapaper">{% trans "import from Instapaper" %}</a> (you must have a "{{ defined('IMPORT_INSTAPAPER_FILE') ? constant('IMPORT_INSTAPAPER_FILE') ? 'INCORRECT CONFIGURATION' }}" file on your server)</li>
+                <li><a href="./?import&from=pocket">{% trans "import from Pocket" %}</a> (you must have a "{{ constant('IMPORT_POCKET_FILE')}}" file on your server)</li>
+            <li><a href="./?import&from=readability">{% trans "import from Readability" %}</a> (you must have a "{{constant('IMPORT_READABILITY_FILE')}}" file on your server)</li>
+            <li><a href="./?import&from=instapaper">{% trans "import from Instapaper" %}</a> (you must have a "{{constant('IMPORT_INSTAPAPER_FILE')}}" file on your server)</li>
             </ul>
 
             <h2>{% trans "Export your poche datas" %}</h2>
