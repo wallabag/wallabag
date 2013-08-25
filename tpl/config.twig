@@ -17,7 +17,7 @@
                 <li>firefox: <a href="https://bitbucket.org/jogaulupeau/poche/downloads/poche.xpi" title="download the firefox extension">download the extension</a></li>
                 <li>chrome: <a href="https://bitbucket.org/jogaulupeau/poche/downloads/poche.crx" title="download the chrome extension">download the extension</a></li>
                 <li>android: <a href="https://bitbucket.org/jogaulupeau/poche/downloads/Poche.apk" title="download the application">download the application</a></li>
-                <li>bookmarklet: drag & drop this link to your bookmarks bar <a ondragend="this.click();" title="i am a bookmarklet, use me !" href="javascript:if(top['bookmarklet-url@inthepoche.com']){top['bookmarklet-url@inthepoche.com'];}else{(function(){var%20url%20=%20location.href%20||%20url;window.open('{{ poche_url }}?action=add&url='%20+%20btoa(url),'_self');})();void(0);}">{% trans "poche it!" %}</a></li>
+                <li>bookmarklet: drag & drop this link to your bookmarks bar <a id="bookmarklet" ondragend="this.click();" title="i am a bookmarklet, use me !" href="javascript:if(top['bookmarklet-url@inthepoche.com']){top['bookmarklet-url@inthepoche.com'];}else{(function(){var%20url%20=%20location.href%20||%20url;window.open('{{ poche_url }}?action=add&url='%20+%20btoa(url),'_self');})();void(0);}">{% trans "poche it!" %}</a></li>
             </ul>
 
             <h2>{% trans "Updating poche" %}</h2>
