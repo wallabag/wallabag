@@ -107,6 +107,8 @@ class Database {
 
     public function updatePassword($userId, $password)
     {
+        $sql_update = "UPDATE users SET password=? WHERE id=?";
+        $params_update = array($password, $id);
         $this->updateUserConfig($userId, 'password', $password);
     }
     
