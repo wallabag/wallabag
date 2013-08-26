@@ -1,5 +1,13 @@
 {% extends "layout.twig" %}
-{% block title %}{% trans "home" %}{% endblock %}
+{% block title %}
+{% if view == 'fav' %}
+{% trans "favoris" %}
+{% elseif view == 'archive' %}
+{% trans "archive" %}
+{% else %}
+{% trans "unread" %}
+{% endif %}
+{% endblock %}
 {% block menu %}
 {% include '_menu.twig' %}
 {% endblock %}
