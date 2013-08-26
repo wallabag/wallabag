@@ -15,78 +15,101 @@ class Poche
     public $tpl;
     public $messages;
     public $pagination;
+    
+    private $currentTheme = '';
+    private $notInstalledMessage = '';
 
     function __construct()
     {
-        $this->initTpl();
-        if (!$this->checkBeforeInstall()) {
-            exit;
-        }
         $this->store = new Database();
         $this->init();
+        $this->initTpl();
+        
         $this->messages = new Messages();
 
         # installation
-        if(!$this->store->isInstalled())
-        {
+        if (!$this->store->isInstalled()) {
             $this->install();
         }
     }
 
     /**
      * all checks before installation.
+     * @todo move HTML to template
      * @return boolean 
      */
-    private function checkBeforeInstall()
+    public function isInstalled()
     {
         $msg = '';
-        $allIsGood = TRUE;
-
-        if (!is_writable(CACHE)) {
+        
+        $configSalt = defined('SALT') ? constant('SALT') : '';
+        
+        if (empty($configSalt)) {
+            $msg = '<h1>error</h1><p>You have not yet filled in the SALT value in the config.inc.php file.</p>';
+        } else if (! is_writable(CACHE)) {
             Tools::logm('you don\'t have write access on cache directory');
-            die('You don\'t have write access on cache directory.');
-        }
-        else if (file_exists('./install/update.php') && !DEBUG_POCHE) {
+            $msg = '<h1>error</h1><p>You don\'t have write access on cache directory.</p>';
+        } else if (file_exists('./install/update.php') && ! DEBUG_POCHE) {
             $msg = '<h1>setup</h1><p><strong>It\'s your first time here?</strong> Please copy /install/poche.sqlite in db folder. Then, delete install folder.<br /><strong>If you have already installed poche</strong>, an update is needed <a href="install/update.php">by clicking here</a>.</p>';
-            $allIsGood = FALSE;
-        }
-        else if (file_exists('./install') && !DEBUG_POCHE) {
+        } else if (file_exists('./install') && ! DEBUG_POCHE) {
             $msg = '<h1>setup</h1><p><strong>If you want to update your poche</strong>, you just have to delete /install folder. <br /><strong>To install your poche with sqlite</strong>, copy /install/poche.sqlite in /db and delete the folder /install. you have to delete the /install folder before using poche.</p>';
-            $allIsGood = FALSE;
-        }
-        else if (STORAGE == 'sqlite' && !is_writable(STORAGE_SQLITE)) {
+        } else if (STORAGE == 'sqlite' && ! is_writable(STORAGE_SQLITE)) {
             Tools::logm('you don\'t have write access on sqlite file');
             $msg = '<h1>error</h1><p>You don\'t have write access on sqlite file.</p>';
-            $allIsGood = FALSE;
         }
         
-        if (!$allIsGood) {
-            echo $this->tpl->render('error.twig', array(
-                'msg' => $msg
-            ));
+        if (! empty($msg)) {
+            $this->notInstalledMessage = $msg;
+            
+            return false;
         }
 
-        return $allIsGood;
+        return true;
+    }
+    
+    public function getNotInstalledMessage() {
+        return $this->notInstalledMessage;
     }
 
     private function initTpl()
     {
-        # template engine
-        $loader = new Twig_Loader_Filesystem(TPL);
+        $themeDirectory = $this->user->getConfigValue('theme');
+        
+        if ($themeDirectory === false) {
+            $themeDirectory = DEFAULT_THEME;
+        }
+        
+        $this->currentTheme = $themeDirectory;
+        
+        $loaderChain = new Twig_Loader_Chain();
+       
+        # if the current theme is not the default theme, add it first to the loader chain so Twig will look there first for overridden template files
+        if ($themeDirectory !== DEFAULT_THEME) {
+            $loaderChain->addLoader(new Twig_Loader_Filesystem(THEME . '/' . $themeDirectory));
+        }
+        
+        # always look in the default theme after that
+        $loaderChain->addLoader(new Twig_Loader_Filesystem(THEME . '/' . DEFAULT_THEME));
+        
         if (DEBUG_POCHE) {
             $twig_params = array();
-        }
-        else {
+        } else {
             $twig_params = array('cache' => CACHE);
         }
-        $this->tpl = new Twig_Environment($loader, $twig_params);
+        
+        $this->tpl = new Twig_Environment($loaderChain, $twig_params);
         $this->tpl->addExtension(new Twig_Extensions_Extension_I18n());
+        
         # filter to display domain name of an url
         $filter = new Twig_SimpleFilter('getDomain', 'Tools::getDomain');
         $this->tpl->addFilter($filter);
 
         # filter for reading time
         $filter = new Twig_SimpleFilter('getReadingTime', 'Tools::getReadingTime');
+        $this->tpl->addFilter($filter);
+        
+        # filter for getting pretty filename for import files
+        $filter = new Twig_SimpleFilter('getPrettyFilename', function($string) { return str_replace(ROOT, '', $string); });
         $this->tpl->addFilter($filter);
     }
 
@@ -139,13 +162,41 @@ class Poche
         }
         exit();
     }
+    
+    public function getTheme() {
+        return $this->currentTheme;
+    }
+    
+    public function getInstalledThemes() {
+        $handle = opendir(THEME);
+        $themes = array();
+        
+        while (($theme = readdir($handle)) !== false) {
+            # Themes are stored in a directory, so all directory names are themes
+            # @todo move theme installation data to database
+            if (! is_dir(THEME . '/' . $theme) || in_array($theme, array('..', '.'))) {
+                continue;
+            }
+            
+            $current = false;
+            
+            if ($theme === $this->getTheme()) {
+                $current = true;
+            }
+            
+            $themes[] = array('name' => $theme, 'current' => $current);
+        }
+        
+        return $themes;
+    }
 
     public function getDefaultConfig()
     {
         return array(
             'pager' => PAGINATION,
             'language' => LANG,
-            );
+            'theme' => DEFAULT_THEME
+        );
     }
 
     /**
@@ -236,7 +287,9 @@ class Poche
                 $prod = $this->getPocheVersion('prod');
                 $compare_dev = version_compare(POCHE_VERSION, $dev);
                 $compare_prod = version_compare(POCHE_VERSION, $prod);
+                $themes = $this->getInstalledThemes();
                 $tpl_vars = array(
+                    'themes' => $themes,
                     'dev' => $dev,
                     'prod' => $prod,
                     'compare_dev' => $compare_dev,
@@ -308,6 +361,44 @@ class Poche
                 }
             }
         }
+    }
+    
+    public function updateTheme()
+    {
+        # no data
+        if (empty($_POST['theme'])) {
+        }
+        
+        # we are not going to change it to the current theme...
+        if ($_POST['theme'] == $this->getTheme()) {
+            $this->messages->add('w', _('still using the "' . $this->getTheme() . '" theme!'));
+            Tools::redirect('?view=config');
+        }
+        
+        $themes = $this->getInstalledThemes();
+        $actualTheme = false;
+        
+        foreach ($themes as $theme) {
+            if ($theme['name'] == $_POST['theme']) {
+                $actualTheme = true;
+                break;
+            }
+        }
+        
+        if (! $actualTheme) {
+            $this->messages->add('e', _('that theme does not seem to be installed'));
+            Tools::redirect('?view=config');
+        }
+        
+        $this->store->updateUserConfig($this->user->getId(), 'theme', $_POST['theme']);
+        $this->messages->add('s', _('you have changed your theme preferences'));
+        
+        $currentConfig = $_SESSION['poche_user']->config;
+        $currentConfig['theme'] = $_POST['theme'];
+        
+        $_SESSION['poche_user']->setConfig($currentConfig);
+        
+        Tools::redirect('?view=config');
     }
 
     /**
