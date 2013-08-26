@@ -166,7 +166,7 @@ class Poche
                     }
                     $last_id = $this->store->getLastId($sequence);
                     if (DOWNLOAD_PICTURES) {
-                        $content = filtre_picture($parametres_url['body'], $url->getUrl(), $last_id);
+                        $content = filtre_picture($content['body'], $url->getUrl(), $last_id);
                         Tools::logm('updating content article');
                         $this->store->updateContent($last_id, $content, $this->user->getId());
                     }
