@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poche\n"
 "POT-Creation-Date: 2013-08-06 08:35+0100\n"
-"PO-Revision-Date: 2013-08-06 08:35+0100\n"
-"Last-Translator: Nicolas Lœuillet <nicolas.loeuillet@gmail.com>\n"
+"PO-Revision-Date: 2013-08-24 10:25+0100\n"
+"Last-Translator: Eric R (NumEricR)\n"
 "Language-Team: poche <support@inthepoche.com>\n"
 "Language: Français\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.5.7\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
 "X-Poedit-Basepath: /\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
@@ -303,7 +303,7 @@ msgstr "(à ne pas cocher sur un ordinateur public)"
 
 #: /var/www/poche-i18n/cache/ae/26/05eb67771213c16bd8c9aaf2d2c4.php:93
 msgid "Sign in"
-msgstr ""
+msgstr "Se connecter"
 
 #: /var/www/poche-i18n/cache/dd/a8/530129765655dcde0a70a31a78b6.php:55
 #: /var/www/poche-i18n/cache/dd/a8/530129765655dcde0a70a31a78b6.php:57

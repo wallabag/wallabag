@@ -227,13 +227,7 @@ class Tools
 
     public static function getDomain($url)
     {
-      $pieces = parse_url($url);
-      $domain = isset($pieces['host']) ? $pieces['host'] : '';
-      if (preg_match('/(?P<domain>[a-z0-9][a-z0-9\-]{1,63}\.[a-z\.]{2,6})$/i', $domain, $regs)) {
-        return $regs['domain'];
-      }
-      
-      return FALSE;
+      return parse_url($url, PHP_URL_HOST);
     }
 
     public static function getReadingTime($text) {

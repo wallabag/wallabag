@@ -207,36 +207,31 @@ class Poche
         switch ($action)
         {
             case 'add':
-                if($parametres_url = $url->fetchContent()) {
-                    if ($this->store->add($url->getUrl(), $parametres_url['title'], $parametres_url['content'], $this->user->getId())) {
-                        Tools::logm('add link ' . $url->getUrl());
-                        $sequence = '';
-                        if (STORAGE == 'postgres') {
-                            $sequence = 'entries_id_seq';
-                        }
-                        $last_id = $this->store->getLastId($sequence);
-                        if (DOWNLOAD_PICTURES) {
-                            $content = filtre_picture($parametres_url['content'], $url->getUrl(), $last_id);
-                            Tools::logm('updating content article');
-                            $this->store->updateContent($last_id, $content, $this->user->getId());
-                        }
-                        if (!$import) {
-                            $this->messages->add('s', _('the link has been added successfully'));
-                        }
+                $content = $url->extract();
+
+                if ($this->store->add($url->getUrl(), $content['title'], $content['body'], $this->user->getId())) {
+                    Tools::logm('add link ' . $url->getUrl());
+                    $sequence = '';
+                    if (STORAGE == 'postgres') {
+                        $sequence = 'entries_id_seq';
                     }
-                    else {
-                        if (!$import) {
-                            $this->messages->add('e', _('error during insertion : the link wasn\'t added'));
-                            Tools::logm('error during insertion : the link wasn\'t added ' . $url->getUrl());
-                        }
+                    $last_id = $this->store->getLastId($sequence);
+                    if (DOWNLOAD_PICTURES) {
+                        $content = filtre_picture($content['body'], $url->getUrl(), $last_id);
+                        Tools::logm('updating content article');
+                        $this->store->updateContent($last_id, $content, $this->user->getId());
+                    }
+                    if (!$import) {
+                        $this->messages->add('s', _('the link has been added successfully'));
                     }
                 }
                 else {
                     if (!$import) {
-                        $this->messages->add('e', _('error during fetching content : the link wasn\'t added'));
-                        Tools::logm('error during content fetch ' . $url->getUrl());
+                        $this->messages->add('e', _('error during insertion : the link wasn\'t added'));
+                        Tools::logm('error during insertion : the link wasn\'t added ' . $url->getUrl());
                     }
                 }
+
                 if (!$import) {
                     Tools::redirect();
                 }
@@ -271,7 +266,6 @@ class Poche
                 }
                 break;
             default:
-                Tools::logm('action ' . $action . 'doesn\'t exist');
                 break;
         }
     }

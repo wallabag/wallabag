@@ -20,18 +20,24 @@ $store = new Database();
 
         <h2>Changelog</h2>
         <ul>
-            <li>this awesome updating step</li>
-            <li>error message when install folder exists</li>
-            <li>more tests before installation (write access, etc.)</li>
-            <li>updated README to make installation easier</li>
-            <li>german language thanks to HLFH</li>
-            <li>spanish language thanks to Nitche</li>
-            <li>new file ./inc/poche/myconfig.inc.php created to store language and salt</li>
-            <li><a href="https://github.com/inthepoche/poche/issues/119">#119</a>: salt is now created when installing poche</li>
-            <li><a href="https://github.com/inthepoche/poche/issues/130">#130</a>: robots.txt added</li>
-            <li><a href="https://github.com/inthepoche/poche/issues/136">#136</a>: error during readability import</li>
-            <li><a href="https://github.com/inthepoche/poche/issues/137">#137</a>: mixed content alert in https</li>
-            <li><a href="https://github.com/inthepoche/poche/issues/138">#138</a>: change pattern to parse url with #</li>
+            <li>enhancement: updating and installing poche are more easier</li>
+            <li>enhancement: poche now uses Full Text RSS to fetch content</li>
+            <li>enhancement: css and twig files are more clean, thanks to NumEricR and nicofrand</li>
+            <li>enhancement: updated german translation, thanks to HLFH</li>
+            <li>enhancement: add db/, cache/ and assets/ directories in versioning</li>
+            <li>enhancement: display messages when error with import, thanks to EliasZ</li>
+            <li>enhancement: poche compatibility test file</li>
+            <li>enhancement: <a href="https://github.com/inthepoche/poche/issues/112">#112</a>: link with shaarli</li>
+            <li>enhancement: <a href="https://github.com/inthepoche/poche/issues/162">#162</a>: links to firefox / chrome / android apps in config screen</li>
+            <li>bug: encode url to share with twitter / email / shaarli</li>
+            <li>bug: Add IPv4 url support (and others beginning by a digit)</li>
+            <li>bug: title page in article view was wrong</li>
+            <li>bug: <a href="https://github.com/inthepoche/poche/issues/148">#148</a>: use of undefined constant POCHE_VERSION</li>
+            <li>bug: <a href="https://github.com/inthepoche/poche/issues/148">#149</a>: can't poche theguardian.com</li>
+            <li>bug: <a href="https://github.com/inthepoche/poche/issues/150">#150</a>: default title for untitled articles</li>
+            <li>bug: <a href="https://github.com/inthepoche/poche/issues/150">#151</a>: HTML entities in titles are encoded twice</li>
+            <li>bug: <a href="https://github.com/inthepoche/poche/issues/169">#169</a>: entries height with short description</li>
+            <li>bug: <a href="https://github.com/inthepoche/poche/issues/175">#175</a>: IP addresses do not appear in "view original"</li>
         </ul>
         <p>To update your poche, please fill the following fields.</p>
         <p>
