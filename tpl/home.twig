@@ -19,7 +19,10 @@
 {% endblock %}
 {% block content %}
             {{ page_links | raw }}
-            {% for entry in entries %}
+            {% if entries is empty %}
+            <div class="messages warning"><p>{% trans "No link available here!" %}</p></div>
+            {% else %}
+                {% for entry in entries %}
             <div id="entry-{{ entry.id|e }}" class="entrie">
                 <h2><a href="index.php?view=view&amp;id={{ entry.id|e }}">{{ entry.title|raw }}</a></h2>
                 <ul class="tools">
@@ -31,6 +34,7 @@
                 <p>{{ entry.content|striptags|slice(0, 300) }}...</p>
                 <p class="vieworiginal txtright small"><a href="{{ entry.url|e }}" target="_blank" title="{% trans "original" %} : {{ entry.title|e }}">{{ entry.url | e | getDomain }}</a></p>
             </div>
-            {% endfor %}
+                {% endfor %}
+            {% endif %}
             {{ page_links | raw }}
 {% endblock %}
