@@ -18,6 +18,15 @@ class Poche
     
     private $currentTheme = '';
     private $notInstalledMessage = '';
+    
+    # @todo make this dynamic (actually install themes and save them in the database including author information et cetera)
+    private $installedThemes = array(
+        'default' => array('requires' => array()),
+        'dark' => array('requires' => array('default')),
+        'dmagenta' => array('requires' => array('default')),
+        'solarized' => array('requires' => array('default')),
+        'solarized-dark' => array('requires' => array('default'))
+    );
 
     function __construct()
     {
@@ -58,6 +67,16 @@ class Poche
             $msg = '<h1>error</h1><p>You don\'t have write access on sqlite file.</p>';
         }
         
+        if (! is_dir(THEME . '/' . $this->getTheme())) {
+            $msg = '<h1>error</h1><p>The currently selected theme (' . $this->getTheme() . ') does not seem to be properly installed.</p>';
+        }
+        
+        foreach ($this->installedThemes[$this->getTheme()]['requires'] as $requiredTheme) {
+            if (! is_dir(THEME . '/' . $requiredTheme)) {
+                $msg = '<h1>error</h1><p>The required "' . $requiredTheme . '" theme is missing for the current theme (' . $this->getTheme() . ')</p>';
+            }
+        }
+        
         if (! empty($msg)) {
             $this->notInstalledMessage = $msg;
             
@@ -83,13 +102,23 @@ class Poche
         
         $loaderChain = new Twig_Loader_Chain();
        
-        # if the current theme is not the default theme, add it first to the loader chain so Twig will look there first for overridden template files
-        if ($themeDirectory !== DEFAULT_THEME) {
+        # add the current theme as first to the loader chain so Twig will look there first for overridden template files
+        try {
             $loaderChain->addLoader(new Twig_Loader_Filesystem(THEME . '/' . $themeDirectory));
+        } catch (Twig_Error_Loader $e) {
+            # @todo isInstalled() should catch this, inject Twig later
+            die('The currently selected theme (' . $this->getTheme() . ') does not seem to be properly installed (' . THEME . '/' . $this->getTheme() .' is missing');
         }
         
-        # always look in the default theme after that
-        $loaderChain->addLoader(new Twig_Loader_Filesystem(THEME . '/' . DEFAULT_THEME));
+        # add all required themes to the loader chain
+        foreach ($this->installedThemes[$themeDirectory]['requires'] as $requiredTheme) {
+            try {
+                $loaderChain->addLoader(new Twig_Loader_Filesystem(THEME . '/' . DEFAULT_THEME));
+            } catch (Twig_Error_Loader $e) {
+                # @todo isInstalled() should catch this, inject Twig later
+                die('The required "' . $requiredTheme . '" theme is missing for the current theme (' . $this->getTheme() . ')');
+            }
+        }
         
         if (DEBUG_POCHE) {
             $twig_params = array();
