@@ -15,17 +15,17 @@ define('INCLUDES', dirname(__FILE__) . '/..');
 define('ROOT', INCLUDES . '/..');
 
 # system configuration; database credentials et cetera
+if (! file_exists(INCLUDES . '/poche/config.inc.php')) {
+    die('Configuration could not be loaded. Please fill in /inc/poche/config.inc.php.new and rename it to config.inc.php');
+}
 require_once INCLUDES . '/poche/config.inc.php';
 
 # Composer its autoloader for automatically loading Twig
+if (! file_exists(ROOT . '/vendor/autoload.php')) {
+    die('Twig does not seem to be installed. Please initialize the Composer installation to automatically fetch dependencies. Have a look at <a href="http://inthepoche.com/?pages/Documentation">the documentation.</a>');
+}
 require_once ROOT . '/vendor/autoload.php';
-//if (! file_exists(__DIR__ . '/../../vendor/autoload.php')) {
-//    die('Twig does not seem installed. Have a look at <a href="http://inthepoche.com/?pages/Documentation">the documentation.</a>');
-//}
 
-// if (file_exists(__DIR__ . '/../../inc/poche/myconfig.inc.php')) {
-    // require_once __DIR__ . '/../../inc/poche/myconfig.inc.php';
-// }
 
 require_once INCLUDES . '/poche/Tools.class.php';
 require_once INCLUDES . '/poche/User.class.php';

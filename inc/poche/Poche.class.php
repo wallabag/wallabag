@@ -28,7 +28,7 @@ class Poche
         $this->messages = new Messages();
 
         # installation
-        if (!$this->store->isInstalled()) {
+        if (! $this->store->isInstalled()) {
             $this->install();
         }
     }
@@ -142,7 +142,9 @@ class Poche
     {
         Tools::logm('poche still not installed');
         echo $this->tpl->render('install.twig', array(
-            'token' => Session::getToken()
+            'token' => Session::getToken(),
+            'theme' => $this->getTheme(),
+            'poche_url' => Tools::getPocheUrl()
         ));
         if (isset($_GET['install'])) {
             if (($_POST['password'] == $_POST['password_repeat']) 
