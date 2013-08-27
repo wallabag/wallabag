@@ -257,7 +257,7 @@ class Poche
                     Tools::logm('error in view call : entry is null');
                 }
                 break;
-            default: # home view
+            default: # home, favorites and archive views
                 $entries = $this->store->getEntriesByView($view, $this->user->getId());
                 $this->pagination->set_total(count($entries));
                 $page_links = $this->pagination->page_links('?view=' . $view . '&sort=' . $_SESSION['sort'] . '&');
