@@ -257,15 +257,19 @@ class Poche
                     Tools::logm('error in view call : entry is null');
                 }
                 break;
-            default: # home view
+            default: # home, favorites and archive views
                 $entries = $this->store->getEntriesByView($view, $this->user->getId());
-                $this->pagination->set_total(count($entries));
-                $page_links = $this->pagination->page_links('?view=' . $view . '&sort=' . $_SESSION['sort'] . '&');
-                $datas = $this->store->getEntriesByView($view, $this->user->getId(), $this->pagination->get_limit());
                 $tpl_vars = array(
-                    'entries' => $datas,
-                    'page_links' => $page_links,
+                    'entries' => '',
+                    'page_links' => '',
                 );
+                if (count($entries) > 0) {
+                    $this->pagination->set_total(count($entries));
+                    $page_links = $this->pagination->page_links('?view=' . $view . '&sort=' . $_SESSION['sort'] . '&');
+                    $datas = $this->store->getEntriesByView($view, $this->user->getId(), $this->pagination->get_limit());
+                    $tpl_vars['entries'] = $datas;
+                    $tpl_vars['page_links'] = $page_links;
+                }
                 Tools::logm('display ' . $view . ' view');
                 break;
         }
