@@ -18,10 +18,17 @@
             </ul>
 {% endblock %}
 {% block content %}
-            {{ page_links | raw }}
             {% if entries is empty %}
             <div class="messages warning"><p>{% trans "No link available here!" %}</p></div>
             {% else %}
+                {% block pager %}
+                    {% if nb_results > 1 %}
+                <div class="results">
+                    <div class="nb-results">{{ nb_results }} {% trans "results" %}</div>
+                        {{ page_links | raw }}
+                </div>
+                    {% endif %}
+                {% endblock %}
                 {% for entry in entries %}
             <div id="entry-{{ entry.id|e }}" class="entrie">
                 <h2><a href="index.php?view=view&amp;id={{ entry.id|e }}">{{ entry.title|raw }}</a></h2>
@@ -36,5 +43,5 @@
             </div>
                 {% endfor %}
             {% endif %}
-            {{ page_links | raw }}
+            {{ block('pager') }}
 {% endblock %}
