@@ -262,6 +262,7 @@ class Poche
                 $tpl_vars = array(
                     'entries' => '',
                     'page_links' => '',
+                    'nb_results' => '',
                 );
                 if (count($entries) > 0) {
                     $this->pagination->set_total(count($entries));
@@ -269,6 +270,7 @@ class Poche
                     $datas = $this->store->getEntriesByView($view, $this->user->getId(), $this->pagination->get_limit());
                     $tpl_vars['entries'] = $datas;
                     $tpl_vars['page_links'] = $page_links;
+                    $tpl_vars['nb_results'] = count($entries);
                 }
                 Tools::logm('display ' . $view . ' view');
                 break;
