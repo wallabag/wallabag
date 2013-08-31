@@ -82,7 +82,7 @@ class Tools
         exit();
     }
 
-    public static function getTplFile($view, $theme)
+    public static function getTplFile($view)
     {
         $default_tpl = 'home.twig';
         

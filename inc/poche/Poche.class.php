@@ -10,6 +10,9 @@
 
 class Poche
 {
+    public static $canRenderTemplates = true;
+    public static $configFileAvailable = true;
+
     public $user;
     public $store;
     public $tpl;
@@ -28,12 +31,21 @@ class Poche
         'solarized-dark' => array('requires' => array('default'))
     );
 
-    function __construct()
+    public function __construct()
     {
-        $this->store = new Database();
         $this->init();
+        
+        if (! $this->themeIsInstalled()) {
+            return;
+        }
+        
         $this->initTpl();
         
+        if (! $this->systemIsInstalled()) {
+            return;
+        }
+           
+        $this->store = new Database();
         $this->messages = new Messages();
 
         # installation
@@ -41,13 +53,76 @@ class Poche
             $this->install();
         }
     }
+    
+    private function init() 
+    {
+        Tools::initPhp();
+        Session::init();
 
+        if (isset($_SESSION['poche_user']) && $_SESSION['poche_user'] != array()) {
+            $this->user = $_SESSION['poche_user'];
+        } else {
+            # fake user, just for install & login screens
+            $this->user = new User();
+            $this->user->setConfig($this->getDefaultConfig());
+        }
+
+        # l10n
+        $language = $this->user->getConfigValue('language');
+        putenv('LC_ALL=' . $language);
+        setlocale(LC_ALL, $language);
+        bindtextdomain($language, LOCALE); 
+        textdomain($language); 
+
+        # Pagination
+        $this->pagination = new Paginator($this->user->getConfigValue('pager'), 'p');
+        
+        # Set up theme
+        $themeDirectory = $this->user->getConfigValue('theme');
+        
+        if ($themeDirectory === false) {
+            $themeDirectory = DEFAULT_THEME;
+        }
+        
+        $this->currentTheme = $themeDirectory;
+    }
+    
+    public function themeIsInstalled() {
+        # Twig is an absolute requirement for Poche to function. Abort immediately if the Composer installer hasn't been run yet
+        if (! self::$canRenderTemplates) {
+            $this->notInstalledMessage = 'Twig does not seem to be installed. Please initialize the Composer installation to automatically fetch dependencies. Have a look at <a href="http://inthepoche.com/?pages/Documentation">the documentation.</a>';
+            
+            return false;
+        }
+        
+        # Check if the selected theme and its requirements are present
+        if (! is_dir(THEME . '/' . $this->getTheme())) {
+            $this->notInstalledMessage = 'The currently selected theme (' . $this->getTheme() . ') does not seem to be properly installed (Missing directory: ' . THEME . '/' . $this->getTheme() . ')';
+            
+            self::$canRenderTemplates = false;
+            
+            return false;
+        }
+        
+        foreach ($this->installedThemes[$this->getTheme()]['requires'] as $requiredTheme) {
+            if (! is_dir(THEME . '/' . $requiredTheme)) {
+                $this->notInstalledMessage = 'The required "' . $requiredTheme . '" theme is missing for the current theme (' . $this->getTheme() . ')';
+                
+                self::$canRenderTemplates = false;
+                
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
     /**
      * all checks before installation.
      * @todo move HTML to template
      * @return boolean 
      */
-    public function isInstalled()
+    public function systemIsInstalled()
     {
         $msg = '';
         
@@ -58,28 +133,19 @@ class Poche
         } else if (! is_writable(CACHE)) {
             Tools::logm('you don\'t have write access on cache directory');
             $msg = '<h1>error</h1><p>You don\'t have write access on cache directory.</p>';
-        } else if (file_exists('./install/update.php') && ! DEBUG_POCHE) {
+        } else if (file_exists(ROOT . '/install/update.php') && ! DEBUG_POCHE) {
             $msg = '<h1>setup</h1><p><strong>It\'s your first time here?</strong> Please copy /install/poche.sqlite in db folder. Then, delete install folder.<br /><strong>If you have already installed poche</strong>, an update is needed <a href="install/update.php">by clicking here</a>.</p>';
-        } else if (file_exists('./install') && ! DEBUG_POCHE) {
+        } else if (is_dir(ROOT . '/install') && ! DEBUG_POCHE) {
             $msg = '<h1>setup</h1><p><strong>If you want to update your poche</strong>, you just have to delete /install folder. <br /><strong>To install your poche with sqlite</strong>, copy /install/poche.sqlite in /db and delete the folder /install. you have to delete the /install folder before using poche.</p>';
         } else if (STORAGE == 'sqlite' && ! is_writable(STORAGE_SQLITE)) {
             Tools::logm('you don\'t have write access on sqlite file');
             $msg = '<h1>error</h1><p>You don\'t have write access on sqlite file.</p>';
         }
         
-        if (! is_dir(THEME . '/' . $this->getTheme())) {
-            $msg = '<h1>error</h1><p>The currently selected theme (' . $this->getTheme() . ') does not seem to be properly installed.</p>';
-        }
-        
-        foreach ($this->installedThemes[$this->getTheme()]['requires'] as $requiredTheme) {
-            if (! is_dir(THEME . '/' . $requiredTheme)) {
-                $msg = '<h1>error</h1><p>The required "' . $requiredTheme . '" theme is missing for the current theme (' . $this->getTheme() . ')</p>';
-            }
-        }
         
         if (! empty($msg)) {
             $this->notInstalledMessage = $msg;
-            
+
             return false;
         }
 
@@ -92,26 +158,18 @@ class Poche
 
     private function initTpl()
     {
-        $themeDirectory = $this->user->getConfigValue('theme');
-        
-        if ($themeDirectory === false) {
-            $themeDirectory = DEFAULT_THEME;
-        }
-        
-        $this->currentTheme = $themeDirectory;
-        
         $loaderChain = new Twig_Loader_Chain();
        
         # add the current theme as first to the loader chain so Twig will look there first for overridden template files
         try {
-            $loaderChain->addLoader(new Twig_Loader_Filesystem(THEME . '/' . $themeDirectory));
+            $loaderChain->addLoader(new Twig_Loader_Filesystem(THEME . '/' . $this->getTheme()));
         } catch (Twig_Error_Loader $e) {
             # @todo isInstalled() should catch this, inject Twig later
-            die('The currently selected theme (' . $this->getTheme() . ') does not seem to be properly installed (' . THEME . '/' . $this->getTheme() .' is missing');
+            die('The currently selected theme (' . $this->getTheme() . ') does not seem to be properly installed (' . THEME . '/' . $this->getTheme() .' is missing)');
         }
         
         # add all required themes to the loader chain
-        foreach ($this->installedThemes[$themeDirectory]['requires'] as $requiredTheme) {
+        foreach ($this->installedThemes[$this->getTheme()]['requires'] as $requiredTheme) {
             try {
                 $loaderChain->addLoader(new Twig_Loader_Filesystem(THEME . '/' . DEFAULT_THEME));
             } catch (Twig_Error_Loader $e) {
@@ -140,31 +198,6 @@ class Poche
         # filter for getting pretty filename for import files
         $filter = new Twig_SimpleFilter('getPrettyFilename', function($string) { return str_replace(ROOT, '', $string); });
         $this->tpl->addFilter($filter);
-    }
-
-    private function init() 
-    {
-        Tools::initPhp();
-        Session::init();
-
-        if (isset($_SESSION['poche_user']) && $_SESSION['poche_user'] != array()) {
-            $this->user = $_SESSION['poche_user'];
-        }
-        else {
-            # fake user, just for install & login screens
-            $this->user = new User();
-            $this->user->setConfig($this->getDefaultConfig());
-        }
-
-        # l10n
-        $language = $this->user->getConfigValue('language');
-        putenv('LC_ALL=' . $language);
-        setlocale(LC_ALL, $language);
-        bindtextdomain($language, LOCALE); 
-        textdomain($language); 
-
-        # Pagination
-        $this->pagination = new Paginator($this->user->getConfigValue('pager'), 'p');
     }
 
     private function install() 

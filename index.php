@@ -12,6 +12,7 @@ require_once 'inc/poche/global.inc.php';
 
 # Start Poche
 $poche = new Poche();
+$notInstalledMessage = $poche -> getNotInstalledMessage();
 
 # Parse GET & REFERER vars
 $referer = empty($_SERVER['HTTP_REFERER']) ? '' : $_SERVER['HTTP_REFERER'];
@@ -31,11 +32,17 @@ $tpl_vars = array(
     'theme' => $poche->getTheme()
 );
 
-if (! $poche->isInstalled()) {
-    $tpl_file = Tools::getTplFile('error', $poche->getTheme());
-    $tpl_vars = array_merge($tpl_vars, array('msg' => $poche->getNotInstalledMessage()));
-    echo $poche->tpl->render($tpl_file, $tpl_vars);
-    exit;
+if (! empty($notInstalledMessage)) {
+    if (! Poche::$canRenderTemplates) {
+        # We cannot use Twig to display the error message 
+        die($poche->getNotInstalledMessage());
+    } else {
+        # Twig is installed, put the error message in the template
+        $tpl_file = Tools::getTplFile('error');
+        $tpl_vars = array_merge($tpl_vars, array('msg' => $poche->getNotInstalledMessage()));
+        echo $poche->tpl->render($tpl_file, $tpl_vars);
+        exit;
+    }
 }
 
 # poche actions
@@ -58,10 +65,10 @@ if (isset($_GET['login'])) {
 
 if (Session::isLogged()) {
     $poche->action($action, $url, $id);
-    $tpl_file = Tools::getTplFile($view, $poche->getTheme());
+    $tpl_file = Tools::getTplFile($view);
     $tpl_vars = array_merge($tpl_vars, $poche->displayView($view, $id));
 } else {
-    $tpl_file = Tools::getTplFile('login', $poche->getTheme());
+    $tpl_file = Tools::getTplFile('login');
 }
 
 # because messages can be added in $poche->action(), we have to add this entry now (we can add it before)
