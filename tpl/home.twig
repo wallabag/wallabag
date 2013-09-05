@@ -12,10 +12,12 @@
 {% include '_menu.twig' %}
 {% endblock %}
 {% block precontent %}
+           {% if entries|length > 1 %}
             <ul id="sort">
                 <li><a href="./?sort=ia&amp;view={{ view }}"><img src="./tpl/img/{{ constant('THEME') }}/top.png" alt="{% trans "by date asc" %}" title="{% trans "by date asc" %}" /></a> {% trans "by date" %} <a href="./?sort=id&amp;view={{ view }}"><img src="./tpl/img/{{ constant('THEME') }}/down.png" alt="{% trans "by date desc" %}" title="{% trans "by date desc" %}" /></a></li>
                 <li><a href="./?sort=ta&amp;view={{ view }}"><img src="./tpl/img/{{ constant('THEME') }}/top.png" alt="{% trans "by title asc" %}" title="{% trans "by title asc" %}" /></a> {% trans "by title" %} <a href="./?sort=td&amp;view={{ view }}"><img src="./tpl/img/{{ constant('THEME') }}/down.png" alt="{% trans "by title desc" %}" title="{% trans "by title desc" %}" /></a></li>
             </ul>
+            {% endif %}
 {% endblock %}
 {% block content %}
             {{ page_links | raw }}
