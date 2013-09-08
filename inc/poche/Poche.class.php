@@ -561,6 +561,6 @@ class Poche
 
     function convertURLToBase64($plainurl){
         $convertedURL = base64_encode($plainurl);
-        $this->action('add', new Url($convertedURL))
+        $this->action('add', new Url($convertedURL));
    }
 }
