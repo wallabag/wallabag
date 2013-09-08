@@ -247,10 +247,15 @@ class Poche
                         $tidy = tidy_parse_string($content, array('indent'=>true, 'show-body-only' => true), 'UTF8');
                         $tidy->cleanRepair();
                         $content = $tidy->value;
-                    }
+
+                        // flattr checking
+                    $flattr = new FlattrItem();
+                    $flattr->checkitem($entry['url']);
+
                     $tpl_vars = array(
                         'entry' => $entry,
                         'content' => $content,
+                        'flattr' => $flattr,
                     );
                 }
                 else {
@@ -557,5 +562,55 @@ class Poche
            file_put_contents($cache_file, $version, LOCK_EX);
         }
         return $version;
+    }
+}
+
+/* class for Flattr querying. Should be put in a separate file
+*   Or maybe just create an array instead of a complete class... My mistake. :-°
+*/
+class FlattrItem{
+    public $status;
+    public $urltoflattr;
+    public $flattrItemURL;
+    public $numflattrs;
+
+    public function checkitem($urltoflattr){
+        $this->cacheflattrfile($urltoflattr);
+        $flattrResponse = file_get_contents("cache/flattr/".base64_encode($urltoflattr).".cache");
+        var_dump($flattrResponse);
+        if($flattrResponse != FALSE){
+            $result = json_decode($flattrResponse);
+            if (isset($result->message)){
+                if ($result->message == "flattrable"){
+                $this->status = "flattrable";
+                        }
+                    } 
+            elseif ($result->link) {
+                            $this->status = "flattred";
+                            $this->flattrItemURL = $result->link;
+                            $this->numflattrs = $result->flattrs_user_count;
+                        }
+            else{
+                $this->status = "not flattrable";
+            }
+        }
+        else
+        {
+            $this->status = "FLATTR_ERR_CONNECTION";
+        }
+    }
+
+    private function cacheflattrfile($urltoflattr){
+        if (!is_dir('cache/flattr')){
+            mkdir('./cache/flattr', 0700);
+        }
+        // if a cache flattr file for this url already exists and it's been less than one day than it have been updated, see in /cache
+        if ((!file_exists("cache/flattr/".base64_encode($urltoflattr).".cache")) || (time() - filemtime("cache/flattr/".base64_encode($urltoflattr).".cache") > 86400))
+        {
+            $askForFlattr = Tools::getFile("https://api.flattr.com/rest/v2/things/lookup/?url=".$urltoflattr);
+             $flattrCacheFile = fopen("cache/flattr/".base64_encode($urltoflattr).".cache", 'w+');
+             fwrite($flattrCacheFile, $askForFlattr);
+             fclose($flattrCacheFile);
+        }
     }
 }
