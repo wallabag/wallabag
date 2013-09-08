@@ -249,20 +249,21 @@ class Poche
                         $content = $tidy->value;
 
                         // flattr checking
-                    $flattr = new FlattrItem();
-                    $flattr->checkitem($entry['url']);
+                        $flattr = new FlattrItem();
+                        $flattr->checkitem($entry['url']);
 
-                    $tpl_vars = array(
+                        $tpl_vars = array(
                         'entry' => $entry,
                         'content' => $content,
-                        'flattr' => $flattr,
-                    );
+                        'flattr' => $flattr
+                        );
+                    }
                 }
                 else {
                     Tools::logm('error in view call : entry is null');
                 }
                 break;
-            default: # home, favorites and archive views
+            default : // home, favorites and archive views
                 $entries = $this->store->getEntriesByView($view, $this->user->getId());
                 $tpl_vars = array(
                     'entries' => '',
@@ -577,7 +578,6 @@ class FlattrItem{
     public function checkitem($urltoflattr){
         $this->cacheflattrfile($urltoflattr);
         $flattrResponse = file_get_contents("cache/flattr/".base64_encode($urltoflattr).".cache");
-        var_dump($flattrResponse);
         if($flattrResponse != FALSE){
             $result = json_decode($flattrResponse);
             if (isset($result->message)){
@@ -588,7 +588,7 @@ class FlattrItem{
             elseif ($result->link) {
                             $this->status = "flattred";
                             $this->flattrItemURL = $result->link;
-                            $this->numflattrs = $result->flattrs_user_count;
+                            $this->numflattrs = $result->flattrs;
                         }
             else{
                 $this->status = "not flattrable";
