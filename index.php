@@ -44,6 +44,9 @@ elseif (isset($_GET['export'])) {
     $poche->export();
 }
 
+if (isset($_GET['plainurl'])){
+  $poche->convertURLToBase64($_GET['plainurl']);}
+
 # vars to send to templates
 $tpl_vars = array(
     'referer' => $referer,
