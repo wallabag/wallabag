@@ -98,6 +98,10 @@ a, a:hover, a:visited {
 #main #content .entrie {
     border-bottom: 1px dashed #222;
 }
+/* First entry */
+#main #content .results + .entrie {
+    clear: both;
+}
 
 #main .entrie .tools {
     list-style-type: none;
@@ -189,11 +193,22 @@ a, a:hover, a:visited {
 }
 
 
-/* Pagination */
-.pagination {
-    clear: both;
+.results {
+    overflow: hidden;
     padding-bottom: 20px;
     padding-top: 10px;
+}
+
+.nb-results {
+    float: left;
+    font-size: 0.9em;
+    line-height: 24px;
+    vertical-align: middle;
+}
+
+/* Pagination */
+.pagination {
+    float: right;
     text-align: right;
 }
 .pagination a {
