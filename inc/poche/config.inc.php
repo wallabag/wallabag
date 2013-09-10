@@ -12,7 +12,7 @@ require_once __DIR__ . '/../../inc/poche/define.inc.php';
 
 # /!\ Be careful if you change the lines below /!\
 if (!file_exists(__DIR__ . '/../../vendor/autoload.php')) {
-    die('Twig does not seem installed. Have a look at <a href="http://inthepoche.com/?pages/Documentation">the documentation.</a>');
+    die('Twig does not seem installed. Have a look at <a href="inthepoche.com/doc">the documentation.</a>');
 }
 
 require_once __DIR__ . '/../../inc/poche/User.class.php';
