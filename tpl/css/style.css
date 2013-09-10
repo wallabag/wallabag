@@ -270,15 +270,15 @@ footer {
 
 #inputform {
     display: none;
-    text-align:center;
-    max-width:300px;
-    margin-left:auto;
-    margin-right:auto;
-    margin-top:5px;
+    text-align: center;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
     padding-bottom: 5px;
     background-color: rgba(0, 0, 0, 0.9);
-    opacity:0.8;
-    color:white;
+    opacity: 0.8;
+    color: #fff;
     border-radius: 3px;
 }
 
