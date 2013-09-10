@@ -281,3 +281,20 @@ footer {
     color:white;
     border-radius: 3px;
 }
+
+a.back span,
+a.top span,
+a.fav span,
+a.fav span:hover,
+a.fav-off span,
+a.fav-off span:hover,
+a.archive span,
+a.archive span:hover,
+a.archive-off span,
+a.archive-off span:hover,
+a.twitter span,
+a.flattr span,
+a.email span,
+a.delete span {
+    background-repeat: no-repeat;
+}
