@@ -3,7 +3,7 @@
  * poche, a read it later open source system
  *
  * @category   poche
- * @author     Nicolas Lœuillet <nicolas@loeuillet.org>
+ * @author     Nicolas Lœuillet <support@inthepoche.com>
  * @copyright  2013
  * @license    http://www.wtfpl.net/ see COPYING file
  */
@@ -15,9 +15,6 @@ if (!file_exists(__DIR__ . '/../../vendor/autoload.php')) {
     die('Twig does not seem installed. Have a look at <a href="http://inthepoche.com/?pages/Documentation">the documentation.</a>');
 }
 
-// if (file_exists(__DIR__ . '/../../inc/poche/myconfig.inc.php')) {
-    // require_once __DIR__ . '/../../inc/poche/myconfig.inc.php';
-// }
 require_once __DIR__ . '/../../inc/poche/User.class.php';
 require_once __DIR__ . '/../../inc/poche/Url.class.php';
 require_once __DIR__ . '/../../inc/3rdparty/class.messages.php';
