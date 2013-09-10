@@ -182,7 +182,7 @@ class Poche
                 }
 
                 if (!$import) {
-                    Tools::redirect();
+                    Tools::redirect('?view=home');
                 }
                 break;
             case 'delete':
@@ -558,9 +558,4 @@ class Poche
         }
         return $version;
     }
-
-    function convertURLToBase64($plainurl){
-        $convertedURL = base64_encode($plainurl);
-        $this->action('add', new Url($convertedURL));
-   }
 }

@@ -2,13 +2,7 @@
 
 {% block title %}{% trans "config" %}{% endblock %}
 {% block menu %}
-            <ul id="links">
-                <li><a href="./" {% if view == 'home' %}class="current"{% endif %}>{% trans "home" %}</a></li>
-                <li><a href="./?view=fav" {% if view == 'fav' %}class="current"{% endif %}>{% trans "favorites" %}</a></li>
-                <li><a href="./?view=archive" {% if view == 'archive' %}class="current"{% endif %}>{% trans "archive" %}</a></li>
-                <li><a href="./?view=config" {% if view == 'config' %}class="current"{% endif %}>{% trans "config" %}</a></li>
-                <li><a href="./?logout" title="{% trans "logout" %}">{% trans "logout" %}</a></li>
-            </ul>
+{% include '_menu.twig' %}
 {% endblock %}
 {% block content %}
             <h2>{% trans "Poching a link" %}</h2>
@@ -17,6 +11,13 @@
                 <li>firefox: <a href="https://bitbucket.org/jogaulupeau/poche/downloads/poche.xpi" title="download the firefox extension">download the extension</a></li>
                 <li>chrome: <a href="https://bitbucket.org/jogaulupeau/poche/downloads/poche.crx" title="download the chrome extension">download the extension</a></li>
                 <li>android: <a href="https://bitbucket.org/jogaulupeau/poche/downloads/Poche.apk" title="download the application">download the application</a></li>
+                <li>
+                    <form method="get" action="index.php">
+                        <label class="addurl" for="plainurl">{% trans "by filling this field" %}:</label>
+                        <input autofocus required placeholder="Ex:mywebsite.com/article" class="addurl" id="plainurl" name="plainurl" type="url" />
+                        <input type="submit" value="{% trans "poche it!" %}" />
+                    </form>
+                </li>
                 <li>bookmarklet: drag & drop this link to your bookmarks bar <a id="bookmarklet" ondragend="this.click();" title="i am a bookmarklet, use me !" href="javascript:if(top['bookmarklet-url@inthepoche.com']){top['bookmarklet-url@inthepoche.com'];}else{(function(){var%20url%20=%20location.href%20||%20url;window.open('{{ poche_url }}?action=add&url='%20+%20btoa(url),'_self');})();void(0);}">{% trans "poche it!" %}</a></li>
             </ul>
 

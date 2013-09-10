@@ -43,9 +43,10 @@ elseif (isset($_GET['import'])) {
 elseif (isset($_GET['export'])) {
     $poche->export();
 }
-
-if (isset($_GET['plainurl'])){
-  $poche->convertURLToBase64($_GET['plainurl']);}
+elseif (isset($_GET['plainurl']) && !empty($_GET['plainurl'])) {
+    $plain_url = new Url(base64_encode($_GET['plainurl']));
+    $poche->action('add', $plain_url);
+}
 
 # vars to send to templates
 $tpl_vars = array(
