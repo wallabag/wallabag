@@ -98,6 +98,10 @@ a, a:hover, a:visited {
 #main #content .entrie {
     border-bottom: 1px dashed #222;
 }
+/* First entry */
+#main #content .results + .entrie {
+    clear: both;
+}
 
 #main .entrie .tools {
     list-style-type: none;
@@ -189,11 +193,22 @@ a, a:hover, a:visited {
 }
 
 
-/* Pagination */
-.pagination {
-    clear: both;
+.results {
+    overflow: hidden;
     padding-bottom: 20px;
     padding-top: 10px;
+}
+
+.nb-results {
+    float: left;
+    font-size: 0.9em;
+    line-height: 24px;
+    vertical-align: middle;
+}
+
+/* Pagination */
+.pagination {
+    float: right;
     text-align: right;
 }
 .pagination a {
@@ -221,12 +236,7 @@ a, a:hover, a:visited {
     margin: 2px;
 }
 .pagination .disabled {
-    border: 1px solid #eee;
-    color: #ddd;
-    margin: 2px;
-    padding: 4px 8px;
-    font-size: 11px;
-    font-weight: bold;
+    display: none;
 }
 
 #bookmarklet {
