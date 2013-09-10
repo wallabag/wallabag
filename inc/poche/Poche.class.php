@@ -247,17 +247,23 @@ class Poche
                         $tidy = tidy_parse_string($content, array('indent'=>true, 'show-body-only' => true), 'UTF8');
                         $tidy->cleanRepair();
                         $content = $tidy->value;
-                    }
-                    $tpl_vars = array(
+
+                        # flattr checking
+                        $flattr = new FlattrItem();
+                        $flattr->checkItem($entry['url']);
+
+                        $tpl_vars = array(
                         'entry' => $entry,
                         'content' => $content,
-                    );
+                        'flattr' => $flattr
+                        );
+                    }
                 }
                 else {
                     Tools::logm('error in view call : entry is null');
                 }
                 break;
-            default: # home, favorites and archive views
+            default: # home, favorites and archive views 
                 $entries = $this->store->getEntriesByView($view, $this->user->getId());
                 $tpl_vars = array(
                     'entries' => '',

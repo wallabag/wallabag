@@ -37,6 +37,7 @@ require_once __DIR__ . '/../../inc/3rdparty/humble-http-agent/CookieJar.php';
 require_once __DIR__ . '/../../inc/3rdparty/feedwriter/FeedItem.php';
 require_once __DIR__ . '/../../inc/3rdparty/feedwriter/FeedWriter.php';
 require_once __DIR__ . '/../../inc/3rdparty/feedwriter/DummySingleItemFeed.php';
+require_once __DIR__ . '/../../inc/3rdparty/FlattrItem.class.php';
 
 if (DOWNLOAD_PICTURES) {
     require_once __DIR__ . '/../../inc/poche/pochePictures.php';
