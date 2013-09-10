@@ -602,7 +602,7 @@ class FlattrItem{
 
     private function cacheflattrfile($urltoflattr){
         if (!is_dir('cache/flattr')){
-            mkdir('./cache/flattr', 0700);
+            mkdir('./cache/flattr', 0777);
         }
         // if a cache flattr file for this url already exists and it's been less than one day than it have been updated, see in /cache
         if ((!file_exists("cache/flattr/".base64_encode($urltoflattr).".cache")) || (time() - filemtime("cache/flattr/".base64_encode($urltoflattr).".cache") > 86400))

@@ -48,6 +48,10 @@ a.shaarli span {
     background: url('../img/light/shaarli.png') no-repeat;
 }
 
+a.flattr span {
+    background: url('../img/light/flattr.png');
+}
+
 a.email span {
     background: url('../img/light/envelop.png') no-repeat;
 }
