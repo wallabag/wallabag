@@ -270,14 +270,31 @@ footer {
 
 #inputform {
     display: none;
-    text-align:center;
-    max-width:300px;
-    margin-left:auto;
-    margin-right:auto;
-    margin-top:5px;
+    text-align: center;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
     padding-bottom: 5px;
     background-color: rgba(0, 0, 0, 0.9);
-    opacity:0.8;
-    color:white;
+    opacity: 0.8;
+    color: #fff;
     border-radius: 3px;
+}
+
+a.back span,
+a.top span,
+a.fav span,
+a.fav span:hover,
+a.fav-off span,
+a.fav-off span:hover,
+a.archive span,
+a.archive span:hover,
+a.archive-off span,
+a.archive-off span:hover,
+a.twitter span,
+a.flattr span,
+a.email span,
+a.delete span {
+    background-repeat: no-repeat;
 }
