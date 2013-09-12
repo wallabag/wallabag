@@ -354,7 +354,7 @@ class Url
         }
         if (isset($splink)) {
             // Build DOM tree from HTML
-            $readability = new Readability($html, $url);
+            $readability = new PocheReadability($html, $url);
             $xpath = new DOMXPath($readability->dom);
             // Loop through single_page_link xpath expressions
             $single_page_url = null;

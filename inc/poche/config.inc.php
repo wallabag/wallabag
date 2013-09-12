@@ -20,6 +20,7 @@ require_once __DIR__ . '/../../inc/poche/Url.class.php';
 require_once __DIR__ . '/../../inc/3rdparty/class.messages.php';
 require_once __DIR__ . '/../../inc/poche/Poche.class.php';
 require_once __DIR__ . '/../../inc/3rdparty/Readability.php';
+require_once __DIR__ . '/../../inc/poche/PocheReadability.php';
 require_once __DIR__ . '/../../inc/3rdparty/Encoding.php';
 require_once __DIR__ . '/../../inc/poche/Database.class.php';
 require_once __DIR__ . '/../../vendor/autoload.php';
@@ -48,10 +49,3 @@ if (!ini_get('date.timezone') || !@date_default_timezone_set(ini_get('date.timez
 }
 
 $poche = new Poche();
-#XSRF protection with token
-// if (!empty($_POST)) {
-//     if (!Session::isToken($_POST['token'])) {
-//         die(_('Wrong token'));
-//     }
-//     unset($_SESSION['tokens']);
-// }
