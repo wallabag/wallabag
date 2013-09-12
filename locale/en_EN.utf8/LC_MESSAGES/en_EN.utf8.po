@@ -1,0 +1,224 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Nicolas Lœuillet <nicolas.loeuillet@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+
+msgid "config"
+msgstr ""
+
+msgid "Poching a link"
+msgstr ""
+
+msgid "read the documentation"
+msgstr ""
+
+msgid "by filling this field"
+msgstr ""
+
+msgid "poche it!"
+msgstr ""
+
+msgid "Updating poche"
+msgstr ""
+
+msgid "your version"
+msgstr ""
+
+msgid "latest stable version"
+msgstr ""
+
+msgid "a more recent stable version is available."
+msgstr ""
+
+msgid "you are up to date."
+msgstr ""
+
+msgid "latest dev version"
+msgstr ""
+
+msgid "a more recent development version is available."
+msgstr ""
+
+msgid "Change your password"
+msgstr ""
+
+msgid "New password:"
+msgstr ""
+
+msgid "Password"
+msgstr ""
+
+msgid "Repeat your new password:"
+msgstr ""
+
+msgid "Update"
+msgstr ""
+
+msgid "Import"
+msgstr ""
+
+msgid "Please execute the import script locally, it can take a very long time."
+msgstr ""
+
+msgid "More infos in the official doc:"
+msgstr ""
+
+msgid "import from Pocket"
+msgstr ""
+
+msgid "import from Readability"
+msgstr ""
+
+msgid "import from Instapaper"
+msgstr ""
+
+msgid "Export your poche datas"
+msgstr ""
+
+msgid "Click here"
+msgstr ""
+
+msgid "to export your poche datas."
+msgstr ""
+
+msgid "back to home"
+msgstr ""
+
+msgid "installation"
+msgstr ""
+
+msgid "install your poche"
+msgstr ""
+
+msgid ""
+"poche is still not installed. Please fill the below form to install it. "
+"Don't hesitate to <a href='http://inthepoche.com/doc'>read the documentation "
+"on poche website</a>."
+msgstr ""
+
+msgid "Login"
+msgstr ""
+
+msgid "Repeat your password"
+msgstr ""
+
+msgid "Install"
+msgstr ""
+
+msgid "back to top"
+msgstr ""
+
+msgid "favoris"
+msgstr ""
+
+msgid "archive"
+msgstr ""
+
+msgid "unread"
+msgstr ""
+
+msgid "by date asc"
+msgstr ""
+
+msgid "by date"
+msgstr ""
+
+msgid "by date desc"
+msgstr ""
+
+msgid "by title asc"
+msgstr ""
+
+msgid "by title"
+msgstr ""
+
+msgid "by title desc"
+msgstr ""
+
+msgid "No link available here!"
+msgstr ""
+
+msgid "toggle mark as read"
+msgstr ""
+
+msgid "toggle favorite"
+msgstr ""
+
+msgid "delete"
+msgstr ""
+
+msgid "original"
+msgstr ""
+
+msgid "results"
+msgstr ""
+
+msgid "tweet"
+msgstr ""
+
+msgid "email"
+msgstr ""
+
+msgid "shaarli"
+msgstr ""
+
+msgid "flattr"
+msgstr ""
+
+msgid "this article appears wrong?"
+msgstr ""
+
+msgid "create an issue"
+msgstr ""
+
+msgid "or"
+msgstr ""
+
+msgid "contact us by mail"
+msgstr ""
+
+msgid "plop"
+msgstr ""
+
+msgid "home"
+msgstr ""
+
+msgid "favorites"
+msgstr ""
+
+msgid "logout"
+msgstr ""
+
+msgid "powered by"
+msgstr ""
+
+msgid "debug mode is on so cache is off."
+msgstr ""
+
+msgid "your poche version:"
+msgstr ""
+
+msgid "storage:"
+msgstr ""
+
+msgid "login to your poche"
+msgstr ""
+
+msgid "you are in demo mode, some features may be disabled."
+msgstr ""
+
+msgid "Stay signed in"
+msgstr ""
+
+msgid "(Do not check on public computers)"
+msgstr ""
+
+msgid "Sign in"
+msgstr ""
