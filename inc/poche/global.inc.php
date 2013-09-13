@@ -37,7 +37,6 @@ if (! file_exists(ROOT . '/vendor/autoload.php')) {
 # system configuration; database credentials et cetera
 if (! file_exists(INCLUDES . '/poche/config.inc.php')) {
     Poche::$configFileAvailable = false;
-    //die('Configuration could not be loaded. Please fill in /inc/poche/config.inc.php.new and rename it to config.inc.php');
 } else {
     require_once INCLUDES . '/poche/config.inc.php';
 }
@@ -45,10 +44,3 @@ if (! file_exists(INCLUDES . '/poche/config.inc.php')) {
 if (DOWNLOAD_PICTURES) {
     require_once  INCLUDES . '/poche/pochePictures.php';
 }
-#XSRF protection with token
-// if (!empty($_POST)) {
-//     if (!Session::isToken($_POST['token'])) {
-//         die(_('Wrong token'));
-//     }
-//     unset($_SESSION['tokens']);
-// }

@@ -34,6 +34,10 @@ class Poche
     public function __construct()
     {
         $this->init();
+
+        if (! $this->configFileIsAvailable()) {
+            return;
+        }
         
         if (! $this->themeIsInstalled()) {
             return;
@@ -86,6 +90,16 @@ class Poche
         
         $this->currentTheme = $themeDirectory;
     }
+
+    public function configFileIsAvailable() {
+        if (! self::$configFileAvailable) {
+            $this->notInstalledMessage = 'You have to rename inc/poche/config.inc.php.new in inc/poche/config.inc.php.';
+
+            return false;
+        }
+
+        return true;
+    }
     
     public function themeIsInstalled() {
         # Twig is an absolute requirement for Poche to function. Abort immediately if the Composer installer hasn't been run yet
@@ -133,6 +147,9 @@ class Poche
         } else if (! is_writable(CACHE)) {
             Tools::logm('you don\'t have write access on cache directory');
             $msg = '<h1>error</h1><p>You don\'t have write access on cache directory.</p>';
+        } else if (STORAGE == 'sqlite' && ! file_exists(STORAGE_SQLITE)) {
+            Tools::logm('sqlite file doesn\'t exist');
+            $msg = '<h1>error</h1><p>sqlite file doesn\'t exist, you can find it in install folder.</p>';
         } else if (file_exists(ROOT . '/install/update.php') && ! DEBUG_POCHE) {
             $msg = '<h1>setup</h1><p><strong>It\'s your first time here?</strong> Please copy /install/poche.sqlite in db folder. Then, delete install folder.<br /><strong>If you have already installed poche</strong>, an update is needed <a href="install/update.php">by clicking here</a>.</p>';
         } else if (is_dir(ROOT . '/install') && ! DEBUG_POCHE) {
@@ -141,8 +158,7 @@ class Poche
             Tools::logm('you don\'t have write access on sqlite file');
             $msg = '<h1>error</h1><p>You don\'t have write access on sqlite file.</p>';
         }
-        
-        
+
         if (! empty($msg)) {
             $this->notInstalledMessage = $msg;
 
