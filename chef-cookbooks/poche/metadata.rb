@@ -1,0 +1,7 @@
+name             "poche"
+maintainer       "Bob Maerten"
+maintainer_email "bob.maerten@gmail.com"
+license          "MIT"
+description      "Installs/Prepare Poche with Nginx & PHP-FPM"
+version          "0.1.0"
+depends          "nginx"

@@ -1,0 +1,60 @@
+{
+  "name": "yum",
+  "version": "2.3.2",
+  "description": "A fabulous new cookbook",
+  "long_description": "yum Cookbook\n============\nConfigures various YUM components on Red Hat-like systems.  Includes LWRP for managing repositories and their GPG keys.\n\nBased on the work done by Eric Wolfe and Charles Duffy on the [yumrepo](https://github.com/atomic-penguin/cookbook-yumrepo) cookbook.\n\n\nRequirements\n------------\nRed Hat Enterprise Linux 5, and 6 distributions within this platform family.\n\n\nAttributes\n----------\n* `yum['exclude']`\n    - An array containing a list of packages to exclude from updates or installs.  Wildcards and shell globs are supported.\n    - Defaults to an empty exclude list.\n\n* `yum['installonlypkgs']`\n    - An array containing a list of packages which should only be\n      installed, never updated.\n    - Defaults to an empty install-only list.\n\n* `yum['ius_release']`\n    - Set the IUS release to install.\n    - Defaults to the current release of the IUS repo.\n\n* `yum['repoforge_release']`\n    - Set the RepoForge release to install.\n    - Defaults to the current release of the repoforge repo.\n\nEPEL attributes used in the `yum::epel` recipe, see `attributes/epel.rb` for default values:\n\n* `yum['epel']['key']`\n    - Name of the GPG key used for the repo.\n\n* `yum['epel']['baseurl']`\n    - Base URL to an EPEL mirror.\n\n* `yum['epel']['url']`\n    - URL to the EPEL mirrorlist.\n\n* `yum['epel']['key_url']`\n    - URL to the GPG key for the repo.\n\n* `yum['epel']['includepkgs']`\n    - list of packages you want to use for the repo.\n\n* `yum['epel']['exclude']`\n    - list of packages you do NOT want to use for the repo.\n\nThe `node['yum']['epel_release']` attribute is removed, see the __epel__ recipe information below.\n\nremi attributes used in the `yum::remi` recipe, see `attributes/remi.rb` for default values:\n\n* `yum['remi']['key']`\n    - Name of the GPG key used for the repo.\n\n* `yum['remi']['url']`\n    - URL to the remi mirrorlist.\n\n* `yum['remi']['key_url']`\n    - URL to the GPG key for the repo.\n\n* `yum['remi']['includepkgs']`\n    - list of packages you want to use for the repo.\n\n* `yum['remi']['exclude']`\n    - list of packages you do NOT want to use for the repo.\n\nProxy settings used in yum.conf on RHEL family 5 and 6:\n\n* `yum['proxy']`\n    - Set the URL for an HTTP proxy\n    - None of the proxy settings are used if this is an empty string\n      (default)\n\n* `yum['proxy_username']`\n    - Set the username for the proxy\n    - not used if `yum['proxy']` above is an empty string\n\n* `yum['proxy_password']`\n    - Set the password for the proxy\n    - not used if `yum['proxy']` above is an empty string\n\n\nRecipes\n-------\n### default\nThe default recipe does nothing.\n\n### yum\nManages the configuration of the `/etc/yum.conf` via attributes.  See the aforementioned Array attributes `yum['exclude']` and `yum['installonlypkgs']`.\n\n### epel\nUses the `yum_key` and `yum_repository` resources from this cookbook are used to manage the main EPEL repository. If you need other EPEL repositories (source, debug-info), use the `yum_repository` LWRP in your own cookbook where those packages are required. The recipe will use the `yum['epel']` attributes (see above) to configure the key, url and download the GPG key for the repo. The defaults are detected by platform and version and should just work without modification in most use cases.\n\nOn all platforms except Amazon, the action is to add the repository. On Amazon, the action is add and update.\n\nAmazon Linux has the EPEL repositories already added in the AMI. In previous versions of this cookbook, they were enabled with `yum-config-manager`, however in the current version, we manage the repository using the LWRP. The main difference is that the source and debuginfo repositories are not available, but if they're needed, add them using the `yum_repository` LWRP in your own cookbook(s).\n\n### ius\nInstalls the [IUS Community repositories](http://iuscommunity.org/Repos) via RPM. Uses the `node['yum']['ius_release']` attribute to select the right version of the package to install.\n\nThe IUS repository requires EPEL, and includes `yum::epel` as a dependency.\n\n### repoforge\nInstalls the [RepoForge repositories](http://repoforge.org/) via RPM. Uses the `node['yum']['repoforge_release']` attribute to select the right version of the package to install.\n\nThe RepoForge repository requires EPEL, and includes `yum::epel` as a dependency.\n\n### remi\nInstall the [Les RPM de Remi - Repository](http://rpms.famillecollet.com/) with the `yum_key` and `yum_repository` resources from this cookbook are used to manage the remi repository.  Use the `yum['remi']` attributes (see above) to configure the key, url and download the GPG key for the repo. The defaults are detected by platform and should just work without modification in most use cases.\n\n\nResources/Providers\n-------------------\n### yum_key\nThis LWRP handles importing GPG keys for YUM repositories. Keys can be imported by the `url` parameter or placed in `/etc/pki/rpm-gpg/` by a recipe and then installed with the LWRP without passing the URL.\n\n#### Actions\n- :add: installs the GPG key into `/etc/pki/rpm-gpg/`\n- :remove: removes the GPG key from `/etc/pki/rpm-gpg/`\n\n#### Attribute Parameters\n- key: name attribute. The name of the GPG key to install.\n- url: if the key needs to be downloaded, the URL providing the download.\n\n#### Example\n\n``` ruby\n# add the Zenoss GPG key\nyum_key \"RPM-GPG-KEY-zenoss\" do\n  url \"http://dev.zenoss.com/yum/RPM-GPG-KEY-zenoss\"\n  action :add\nend\n\n# remove Zenoss GPG key\nyum_key \"RPM-GPG-KEY-zenoss\" do\n  action :remove\nend\n```\n\n### yum_repository\nThis LWRP provides an easy way to manage additional YUM repositories. GPG keys can be managed with the `yum_key` LWRP.  The LWRP automatically updates the package management cache upon the first run, when a new repo is added.\n\n#### Actions\n- :create: creates a repository file and builds the repository listing\n- :add: runs create action if repository file is missing (default)\n- :remove: removes the repository file\n- :update: updates the repository\n\n#### Attribute Parameters\n- repo_name: name attribute. The name of the channel to discover\n- description. The description of the repository\n- url: The URL providing the packages, used for baseurl in the config\n- mirrorlist: Set this as a string containing the URI to the\n  mirrorlist, start with \"http://\", \"ftp://\", \"file://\"; use \"file://\"\n  if the mirrorlist is a text file on the system.\n- key: Optional, the name of the GPG key file installed by the `key`\n  LWRP.\n- enabled: Default is `1`, set to `0` if the repository is disabled.\n- type: Optional, alternate type of repository\n- failovermethod: Optional, failovermethod\n- bootstrapurl: Optional, bootstrapurl\n- make_cache: Optional, Default is `true`, if `false` then `yum -q\n  makecache` will not be ran\n- metadata_expire: Optional, Default is nil (or not applied)\n- type: Optional, Default is nil (or not applied)\n\n*Note*: When using both url (to set baseurl) and mirrorlist, it is probably a good idea to also install the fastestmirror plugin, and use failovermethod \"priority\".\n\n#### Example\n``` ruby\n# add the Zenoss repository\nyum_repository \"zenoss\" do\n  repo_name \"zenoss\"\n  description \"Zenoss Stable repo\"\n  url \"http://dev.zenoss.com/yum/stable/\"\n  key \"RPM-GPG-KEY-zenoss\"\n  action :add\nend\n\n# remove Zenoss repo\nyum_repository \"zenoss\" do\n  action :remove\nend\n```\n\n\nUsage\n-----\nPut `recipe[yum::yum]` in the run list to ensure yum is configured correctly for your environment within your Chef run.\n\nUse the `yum::epel` recipe to enable EPEL, or the `yum::ius` recipe to enable IUS, or the `yum::repoforge` recipe to enable RepoForge, or the `yum::remi` recipe to enable remi per __Recipes__ section above.\n\nYou can manage GPG keys either with cookbook_file in a recipe if you want to package it with a cookbook or use the `url` parameter of the `key` LWRP.\n\n\nLicense & Authors\n-----------------\n- Author:: Eric G. Wolfe\n- Author:: Matt Ray (<matt@opscode.com>)\n- Author:: Joshua Timberman (<joshua@opscode.com>)\n\n```text\nCopyright:: 2010 Tippr Inc.\nCopyright:: 2011 Eric G. Wolfe\nCopyright:: 2011-2012 Opscode, Inc.\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n```\n",
+  "maintainer": "Opscode, Inc.",
+  "maintainer_email": "cookbooks@opscode.com",
+  "license": "Apache 2.0",
+  "platforms": {
+    "redhat": ">= 5.0.0",
+    "centos": ">= 5.0.0",
+    "scientific": ">= 5.0.0",
+    "amazon": ">= 5.0.0"
+  },
+  "dependencies": {
+  },
+  "recommendations": {
+  },
+  "suggestions": {
+  },
+  "conflicting": {
+  },
+  "providing": {
+  },
+  "replacing": {
+  },
+  "attributes": {
+    "yum/exclude": {
+      "display_name": "yum.conf exclude",
+      "description": "List of packages to exclude from updates or installs. This should be an array.  Shell globs using wildcards (eg. * and ?) are allowed.",
+      "required": "optional"
+    },
+    "yum/installonlypkgs": {
+      "display_name": "yum.conf installonlypkgs",
+      "description": "List of packages that should only ever be installed, never updated. Kernels in particular fall into this category. Defaults to kernel, kernel-smp, kernel-bigmem, kernel-enterprise, kernel-debug, kernel-unsupported.",
+      "required": "optional"
+    },
+    "yum/proxy": {
+      "display_name": "yum.conf proxy",
+      "description": "Set the http URL for proxy to use in yum.conf",
+      "required": "optional"
+    },
+    "yum/proxy_username": {
+      "display_name": "yum.conf proxy_username",
+      "description": "Set the proxy_username to use for yum.conf",
+      "required": "optional"
+    },
+    "yum/proxy_password": {
+      "display_name": "yum.conf proxy_password",
+      "description": "Set the proxy_password to use for yum.conf",
+      "required": "optional"
+    }
+  },
+  "groupings": {
+  },
+  "recipes": {
+    "yum": "Empty recipe.",
+    "yum::yum": "Manages yum configuration"
+  }
+}

@@ -1,0 +1,6 @@
+geo $<%= @remote_ip_var %> $authorized_ip {
+  default no;
+  <% @authorized_ips.each do |ip| %>
+  <%= "#{ip} yes;" %>
+  <% end %>
+}

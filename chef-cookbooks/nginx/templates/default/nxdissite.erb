@@ -1,0 +1,29 @@
+#!/bin/sh -e
+
+SYSCONFDIR='<%= node['nginx']['dir'] %>'
+
+if [ -z $1 ]; then
+        echo "Which site would you like to disable?"
+        echo -n "Your choices are: "
+        ls $SYSCONFDIR/sites-enabled/* | \
+        sed -e "s,$SYSCONFDIR/sites-enabled/,,g" | xargs echo
+        echo -n "Site name? "
+        read SITENAME
+else
+        SITENAME=$1
+fi
+
+if [ $SITENAME = "default" ]; then
+        PRIORITY="000"
+fi
+
+if ! [ -e $SYSCONFDIR/sites-enabled/$SITENAME -o \
+       -e $SYSCONFDIR/sites-enabled/"$PRIORITY"-"$SITENAME" ]; then
+        echo "This site is already disabled, or does not exist!"
+        exit 1
+fi
+
+if ! rm $SYSCONFDIR/sites-enabled/$SITENAME 2>/dev/null; then
+        rm -f $SYSCONFDIR/sites-enabled/"$PRIORITY"-"$SITENAME"
+fi
+echo "Site $SITENAME disabled; reload nginx to disable."
