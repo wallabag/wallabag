@@ -248,4 +248,9 @@ class Tools
             fclose($fp);
         }
     }
+
+    public static function getDocLanguage($userlanguage) {
+        $lang = explode('.', $userlanguage);
+        return str_replace('_', '-', $lang[0]);
+    }
 }

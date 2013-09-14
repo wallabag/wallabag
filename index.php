@@ -50,6 +50,7 @@ elseif (isset($_GET['plainurl']) && !empty($_GET['plainurl'])) {
 
 # vars to send to templates
 $tpl_vars = array(
+    'lang' => Tools::getDocLanguage($poche->user->getConfigValue('language')),
     'referer' => $referer,
     'view' => $view,
     'poche_url' => Tools::getPocheUrl(),
