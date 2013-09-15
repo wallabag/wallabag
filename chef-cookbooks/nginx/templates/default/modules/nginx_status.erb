@@ -1,0 +1,14 @@
+include authorized_ip;
+
+server {
+  listen 8090;
+  server_name _;
+
+  location /nginx_status {
+    if ($authorized_ip = no) {
+      return 404;
+    }
+    stub_status on;
+    access_log off;
+  }
+}

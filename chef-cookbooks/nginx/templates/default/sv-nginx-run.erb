@@ -1,0 +1,3 @@
+#!/bin/sh
+exec 2>&1
+exec <%= node['nginx']['src_binary'] %> -c <%= node['nginx']['dir'] %>/nginx.conf

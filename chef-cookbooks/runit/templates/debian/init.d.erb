@@ -1,0 +1,66 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          <%= @name %>
+# Required-Start:
+# Required-Stop:
+# Default-Start:
+# Default-Stop:
+# Short-Description: initscript for runit-managed <%= @name %> service
+### END INIT INFO
+
+# Author: Opscode, Inc. <cookbooks@opscode.com>
+
+PATH=/sbin:/usr/sbin:/bin:/usr/bin
+DESC="runit-managed <%= @name %>"
+NAME=<%= @name %>
+RUNIT=/usr/bin/sv
+SCRIPTNAME=/etc/init.d/$NAME
+
+# Exit if runit is not installed
+[ -x $RUNIT ] || exit 0
+
+# Load the VERBOSE setting and other rcS variables
+. /lib/init/vars.sh
+
+# Define LSB log_* functions.
+# Depend on lsb-base (>= 3.0-6) to ensure that this file is present.
+. /lib/lsb/init-functions
+
+
+case "$1" in
+  start)
+        [ "$VERBOSE" != no ] && log_daemon_msg "Starting $DESC " "$NAME"
+        $RUNIT start $NAME
+        [ "$VERBOSE" != no ] && log_end_msg $?
+        ;;
+  stop)
+        [ "$VERBOSE" != no ] && log_daemon_msg "Stopping $DESC" "$NAME"
+        $RUNIT stop $NAME
+        [ "$VERBOSE" != no ] && log_end_msg $?
+        ;;
+  status)
+        $RUNIT status $NAME && exit 0 || exit $?
+        ;;
+  reload)
+        [ "$VERBOSE" != no ] && log_daemon_msg "Reloading $DESC" "$NAME"
+        $RUNIT reload $NAME
+        [ "$VERBOSE" != no ] && log_end_msg $?
+        ;;
+  force-reload)
+        [ "$VERBOSE" != no ] && log_daemon_msg "Force reloading $DESC" "$NAME"
+        $RUNIT force-reload $NAME
+        [ "$VERBOSE" != no ] && log_end_msg $?
+        ;;
+  restart)
+        [ "$VERBOSE" != no ] && log_daemon_msg "Restarting $DESC" "$NAME"
+        $RUNIT restart $NAME
+        [ "$VERBOSE" != no ] && log_end_msg $?
+        ;;
+  *)
+        echo "Usage: $SCRIPTNAME {start|stop|status|reload|force-reload|restart}" >&2
+        exit 3
+        ;;
+esac
+
+:
+

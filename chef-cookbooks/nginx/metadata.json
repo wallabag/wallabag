@@ -1,0 +1,145 @@
+{
+  "name": "nginx",
+  "version": "1.8.0",
+  "description": "Installs and configures nginx",
+  "long_description": "",
+  "maintainer": "Opscode, Inc.",
+  "maintainer_email": "cookbooks@opscode.com",
+  "license": "Apache 2.0",
+  "platforms": {
+    "ubuntu": ">= 0.0.0",
+    "debian": ">= 0.0.0",
+    "centos": ">= 0.0.0",
+    "redhat": ">= 0.0.0",
+    "amazon": ">= 0.0.0",
+    "scientific": ">= 0.0.0",
+    "oracle": ">= 0.0.0",
+    "fedora": ">= 0.0.0"
+  },
+  "dependencies": {
+    "build-essential": ">= 0.0.0",
+    "yum": ">= 0.0.0",
+    "apt": ">= 0.0.0",
+    "runit": ">= 0.0.0",
+    "ohai": ">= 1.1.4"
+  },
+  "recommendations": {
+  },
+  "suggestions": {
+    "bluepill": ">= 0.0.0"
+  },
+  "conflicting": {
+  },
+  "providing": {
+  },
+  "replacing": {
+  },
+  "attributes": {
+    "nginx/dir": {
+      "display_name": "Nginx Directory",
+      "description": "Location of nginx configuration files",
+      "default": "/etc/nginx"
+    },
+    "nginx/log_dir": {
+      "display_name": "Nginx Log Directory",
+      "description": "Location for nginx logs",
+      "default": "/var/log/nginx"
+    },
+    "nginx/user": {
+      "display_name": "Nginx User",
+      "description": "User nginx will run as",
+      "default": "www-data"
+    },
+    "nginx/binary": {
+      "display_name": "Nginx Binary",
+      "description": "Location of the nginx server binary",
+      "default": "/usr/sbin/nginx"
+    },
+    "nginx/gzip": {
+      "display_name": "Nginx Gzip",
+      "description": "Whether gzip is enabled",
+      "default": "on"
+    },
+    "nginx/gzip_http_version": {
+      "display_name": "Nginx Gzip HTTP Version",
+      "description": "Version of HTTP Gzip",
+      "default": "1.0"
+    },
+    "nginx/gzip_comp_level": {
+      "display_name": "Nginx Gzip Compression Level",
+      "description": "Amount of compression to use",
+      "default": "2"
+    },
+    "nginx/gzip_proxied": {
+      "display_name": "Nginx Gzip Proxied",
+      "description": "Whether gzip is proxied",
+      "default": "any"
+    },
+    "nginx/gzip_types": {
+      "display_name": "Nginx Gzip Types",
+      "description": "Supported MIME-types for gzip",
+      "type": "array",
+      "default": [
+        "text/plain",
+        "text/css",
+        "application/x-javascript",
+        "text/xml",
+        "application/xml",
+        "application/xml+rss",
+        "text/javascript",
+        "application/javascript",
+        "application/json"
+      ]
+    },
+    "nginx/keepalive": {
+      "display_name": "Nginx Keepalive",
+      "description": "Whether to enable keepalive",
+      "default": "on"
+    },
+    "nginx/keepalive_timeout": {
+      "display_name": "Nginx Keepalive Timeout",
+      "default": "65"
+    },
+    "nginx/worker_processes": {
+      "display_name": "Nginx Worker Processes",
+      "description": "Number of worker processes",
+      "default": "1"
+    },
+    "nginx/worker_connections": {
+      "display_name": "Nginx Worker Connections",
+      "description": "Number of connections per worker",
+      "default": "1024"
+    },
+    "nginx/server_names_hash_bucket_size": {
+      "display_name": "Nginx Server Names Hash Bucket Size",
+      "default": "64"
+    },
+    "nginx/types_hash_max_size": {
+      "display_name": "Nginx Types Hash Max Size",
+      "default": "2048"
+    },
+    "nginx/types_hash_bucket_size": {
+      "display_name": "Nginx Types Hash Bucket Size",
+      "default": "64"
+    },
+    "nginx/disable_access_log": {
+      "display_name": "Disable Access Log",
+      "default": "false"
+    },
+    "nginx/default_site_enabled": {
+      "display_name": "Default site enabled",
+      "default": "true"
+    },
+    "nginx/sendfile": {
+      "display_name": "Nginx sendfile",
+      "description": "Whether to enable sendfile",
+      "default": "on"
+    }
+  },
+  "groupings": {
+  },
+  "recipes": {
+    "nginx": "Installs nginx package and sets up configuration with Debian apache style with sites-enabled/sites-available",
+    "nginx::source": "Installs nginx from source and sets up configuration with Debian apache style with sites-enabled/sites-available"
+  }
+}

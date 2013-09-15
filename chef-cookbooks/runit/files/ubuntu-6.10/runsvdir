@@ -1,0 +1,6 @@
+start on runlevel-2
+start on runlevel-3
+start on runlevel-4
+start on runlevel-5
+stop on shutdown
+respawn /usr/sbin/runsvdir-start

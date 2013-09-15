@@ -1,0 +1,32 @@
+#!/sbin/runscript
+# Copyright 1999-2006 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Header: $
+
+depend() {
+    after net
+}
+
+start() {
+    ebegin "Starting runsvdir"
+    start-stop-daemon --start --exec /usr/bin/runsvdir \
+        --background --make-pidfile \
+        --pidfile /var/run/runsvdir.pid -- <%= node.runit.sv_dir %>
+    eend $?
+}
+
+stop() {
+    local ret1 ret2
+    ebegin "Stopping runsvdir"
+    start-stop-daemon --stop --oknodo --pidfile /var/run/runsvdir.pid
+    ret1=$?
+    eend ${ret1}
+
+    ebegin "Stopping services and logging"
+    sv shutdown -w 10 <%= node.runit.sv_dir %>/*
+    ret2=$?
+    eend ${ret2}
+
+    return $((ret1+ret2))
+}
+

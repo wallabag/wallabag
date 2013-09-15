@@ -1,0 +1,111 @@
+#!/bin/sh
+#
+# nginx
+#
+# chkconfig:   - 57 47
+# description: nginx
+# processname:  nginx
+# config:       /etc/sysconfig/nginx
+#
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+# Source networking configuration.
+. /etc/sysconfig/network
+
+# Check that networking is up.
+[ "$NETWORKING" = "no" ] && exit
+exec=<%= @src_binary %>
+prog=$(basename $exec)
+
+# default options, overruled by items in sysconfig
+NGINX_GLOBAL=""
+
+[ -e /etc/sysconfig/nginx ] && . /etc/sysconfig/nginx
+
+lockfile=/var/lock/subsys/nginx
+
+start() {
+    [ -x $exec ] || exit 5
+    echo -n $"Starting $prog: "
+    # if not running, start it up here, usually something like "daemon $exec"
+    options=""
+    if [ "${NGINX_GLOBAL}" != ""  ]; then
+        options="-g ${NGINX_GLOBAL}"
+    fi
+    $exec $options
+    retval=$?
+    echo
+    [ $retval -eq 0 ] && touch $lockfile
+	return $retval
+}
+
+stop() {
+	echo -n $"Stopping $prog: "
+	$exec -s stop
+	retval=$?
+	echo
+	[ $retval -eq 0 ] && rm -f $lockfile
+	return $retval
+}
+
+restart() {
+    stop
+    start
+}
+
+reload() {
+	echo -n $"Reloading $prog: "
+	$exec -s reload
+	retval=$?
+	echo
+	[ $retval -eq 0 ] && rm -f $lockfile
+	return $retval
+}
+
+configtest() {
+    if [ "$#" -ne 0 ] ; then
+        case "$1" in
+            -q)
+                FLAG=$1
+                ;;
+            *)
+                ;;
+        esac
+        shift
+    fi
+    ${exec} -t $FLAG
+    RETVAL=$?
+    return $RETVAL
+}
+
+# See how we were called.
+case "$1" in
+  start)
+        start
+        ;;
+  stop)
+        stop
+        ;;
+  status)
+        status nginx
+        ;;
+  restart)
+        restart
+        ;;
+  reload|force-reload)
+		reload
+		;;
+  condrestart)
+        [ -f $lockfile ] && restart || :
+        ;;
+  configtest)
+        configtest
+        ;;
+  *)
+        echo $"Usage: $0 {start|stop|status|restart|reload|force-reload|condrestart|configtest}"
+        exit 1
+esac
+
+exit $?

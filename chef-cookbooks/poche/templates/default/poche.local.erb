@@ -1,0 +1,50 @@
+server {
+  listen 80;
+  server_name  <%= node['fqdn'] %>;
+  root <%= node['nginx']['webroot'] %>;
+  index index.php index.html index.htm;
+
+  access_log  <%= node['nginx']['log_dir'] %>/<%= node['hostname'] %>.access.log;
+
+  # Turn Off Caching during dev.
+  #
+  # EnableSendfile: Control whether the sendfile kernel support is
+  # used to deliver files (assuming that the OS supports it).
+  # The default is on; turn this off if you serve from NFS-mounted
+  # filesystems. Please see
+  # http://httpd.apache.org/docs/2.2/mod/core.html#enablesendfile
+  #
+  # @source http://abitwiser.wordpress.com/2011/02/24/virtualbox-hates-sendfile/
+  sendfile off;
+  expires off;
+  # This matters if you use drush
+  location = /backup {
+      deny all;
+  }
+
+  location ~ \..*/.*\.php$ {
+      return 403;
+  }
+
+  location / {
+      # This is cool because no php is touched for static content
+      try_files $uri @rewrite;
+  }
+
+
+  location @rewrite {
+      # Some modules enforce no slash (/) at the end of the URL
+      # Else this rewrite block wouldn't be needed (GlobalRedirect)
+      rewrite ^/(.*)$ /index.php?q=$1;
+  }
+
+  location ~ \.php$ {
+      fastcgi_split_path_info ^(.+\.php)(/.+)$;
+      #NOTE: You should have "cgi.fix_pathinfo = 0;" in php.ini
+      include fastcgi_params;
+      fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+      fastcgi_intercept_errors on;
+      fastcgi_pass unix:/var/run/php-fpm-www.sock;
+  }
+}
+

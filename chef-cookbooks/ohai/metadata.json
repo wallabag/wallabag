@@ -1,0 +1,46 @@
+{
+  "name": "ohai",
+  "version": "1.1.12",
+  "description": "Distributes a directory of custom ohai plugins",
+  "long_description": "ohai Cookbook\n=============\nCreates a configured plugin path for distributing custom Ohai plugins, and reloads them via Ohai within the context of a Chef Client run during the compile phase (if needed).\n\n\nAttributes\n----------\n- `node['ohai']['plugin_path']` - location to drop off plugins directory, default is `/etc/chef/ohai_plugins`. This is not FHS-compliant, an FHS location would be something like `/var/lib/ohai/plugins`, or `/var/lib/chef/ohai_plugins` or similar.\n\n    Neither an FHS location or the default value of this attribute are in the default Ohai plugin path. Set the Ohai plugin path with the config setting \"`Ohai::Config[:plugin_path]`\" in the Chef config file (the `chef-client::config` recipe does this automatically for you!). The attribute is not set to the default plugin path that Ohai ships with because we don't want to risk destroying existing essential plugins for Ohai.\n\n- `node['ohai']['plugins']` - sources of plugins, defaults to the `files/default/plugins` directory of this cookbook. You can add additional cookbooks by adding the name of the cookbook as a key and the path of the files directory as the value. You have to make sure that you don't have any file conflicts between multiple cookbooks. The last one to write wins.\n\n\nUsage\n-----\nPut the recipe `ohai` at the start of the node's run list to make sure that custom plugins are loaded early on in the Chef run and data is available for later recipes.\n\nThe execution of the custom plugins occurs within the recipe during the compile phase, so you can write new plugins and use the data they return in your Chef recipes.\n\nFor information on how to write custom plugins for Ohai, please see the Chef wiki pages.\n\nhttp://wiki.opscode.com/display/chef/Writing+Ohai+Plugins\n\n*PLEASE NOTE* - This recipe reloads the Ohai plugins a 2nd time during the Chef run if:\n\n* The \"`Ohai::Config[:plugin_path]`\" config setting has *NOT* been properly set in the Chef config file\n- The \"`Ohai::Config[:plugin_path]`\" config setting has been properly set in the Chef config file and there are updated plugins dropped off at \"`node['ohai']['plugin_path']`\".\n\n\nExample\n-------\nFor an example implementation, inspect the ohai_plugin.rb recipe in the nginx community cookbook.\n\n\nLicense & Authors\n-----------------\n- Author:: Joshua Timberman (<joshua@opscode.com>)\n- Author:: Seth Chisamore (<schisamo@opscode.com>)\n\n```text\nCopyright:: 2010-2011, Opscode, Inc\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n```\n",
+  "maintainer": "Opscode, Inc",
+  "maintainer_email": "cookbooks@opscode.com",
+  "license": "Apache 2.0",
+  "platforms": {
+  },
+  "dependencies": {
+  },
+  "recommendations": {
+  },
+  "suggestions": {
+  },
+  "conflicting": {
+  },
+  "providing": {
+  },
+  "replacing": {
+  },
+  "attributes": {
+    "ohai/plugin_path": {
+      "display_name": "Ohai Plugin Path",
+      "description": "Distribute plugins to this path.",
+      "type": "string",
+      "required": "optional",
+      "default": "/etc/chef/ohai_plugins"
+    },
+    "ohai/plugins": {
+      "display_name": "Ohai Plugin Sources",
+      "description": "Read plugins from these cookbooks and paths",
+      "type": "hash",
+      "required": "optional",
+      "default": {
+        "ohai": "plugins"
+      }
+    }
+  },
+  "groupings": {
+  },
+  "recipes": {
+    "ohai::default": "Distributes a directory of custom ohai plugins"
+  }
+}

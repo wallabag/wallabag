@@ -1,0 +1,40 @@
+# nginx
+
+description "nginx http daemon"
+
+start on (local-filesystems and net-device-up IFACE=lo and runlevel [<%= @runlevels %>])
+stop on runlevel [!<%= @runlevels %>]
+
+env DAEMON=<%= @src_binary %>
+env PID=<%= @pid %>
+env CONFIG=<%= @config %>
+
+respawn
+<% if @respawn_limit %>
+respawn limit <%= @respawn_limit %>
+<% end %>
+
+pre-start script
+  ${DAEMON} -t
+  if [ $? -ne 0 ]; then
+    exit $?
+  fi
+end script
+
+<% unless @foreground %>
+expect fork
+<% else %>
+console output
+<% end %>
+
+exec ${DAEMON} -c "${CONFIG}"
+
+<% if node.recipe?('nginx::passenger') and not @foreground %>
+# classic example of why pidfiles should have gone away
+# with the advent of fork().  we missed that bus a long
+# time ago so hack around it.
+post-stop script
+  start-stop-daemon --stop --pidfile ${PID} --name nginx --exec ${DAEMON} --signal QUIT
+end script
+<% end %>
+
