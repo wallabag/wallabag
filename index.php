@@ -33,9 +33,9 @@ $tpl_vars = array(
 );
 
 if (! empty($notInstalledMessage)) {
-    if (! Poche::$canRenderTemplates) {
+    if (! Poche::$canRenderTemplates || ! Poche::$configFileAvailable) {
         # We cannot use Twig to display the error message 
-        die($poche->getNotInstalledMessage());
+        die($notInstalledMessage);
     } else {
         # Twig is installed, put the error message in the template
         $tpl_file = Tools::getTplFile('error');
