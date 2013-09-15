@@ -1,0 +1,3 @@
+[submodule "themes"]
+	path = themes
+	url = git@github.com:EliasZ/poche-themes.git

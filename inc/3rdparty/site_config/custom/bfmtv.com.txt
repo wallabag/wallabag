@@ -1,0 +1,6 @@
+title: //title
+body: //h2 | //span[@class='masque'] | //article[@class='corps_article_right']
+prune: no
+tidy: no
+
+test_url: http://www.bfmtv.com/societe/cigarette-electronique-dangers-588622.html

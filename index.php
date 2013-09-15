@@ -8,13 +8,11 @@
  * @license    http://www.wtfpl.net/ see COPYING file
  */
 
-if (file_exists(__DIR__ . '/inc/poche/myconfig.inc.php')) {
-    require_once __DIR__ . '/inc/poche/myconfig.inc.php';
-}
-require_once './inc/poche/Tools.class.php';
-Tools::createMyConfig();
+require_once 'inc/poche/global.inc.php';
 
-include dirname(__FILE__).'/inc/poche/config.inc.php';
+# Start Poche
+$poche = new Poche();
+$notInstalledMessage = $poche -> getNotInstalledMessage();
 
 # Parse GET & REFERER vars
 $referer = empty($_SERVER['HTTP_REFERER']) ? '' : $_SERVER['HTTP_REFERER'];
@@ -24,42 +22,53 @@ $id = Tools::checkVar('id');
 $_SESSION['sort'] = Tools::checkVar('sort', 'id');
 $url = new Url((isset ($_GET['url'])) ? $_GET['url'] : '');
 
-# poche actions
-if (isset($_GET['login'])) {
-    # hello you
-    $poche->login($referer);
-}
-elseif (isset($_GET['logout'])) {
-    # see you soon !
-    $poche->logout();
-}
-elseif (isset($_GET['config'])) {
-    # Update password
-    $poche->updatePassword();
-}
-elseif (isset($_GET['import'])) {
-    $import = $poche->import($_GET['from']);
-}
-elseif (isset($_GET['export'])) {
-    $poche->export();
-}
-
-# vars to send to templates
+# vars to _always_ send to templates
 $tpl_vars = array(
     'referer' => $referer,
     'view' => $view,
     'poche_url' => Tools::getPocheUrl(),
     'title' => _('poche, a read it later open source system'),
     'token' => Session::getToken(),
+    'theme' => $poche->getTheme()
 );
+
+if (! empty($notInstalledMessage)) {
+    if (! Poche::$canRenderTemplates || ! Poche::$configFileAvailable) {
+        # We cannot use Twig to display the error message 
+        die($notInstalledMessage);
+    } else {
+        # Twig is installed, put the error message in the template
+        $tpl_file = Tools::getTplFile('error');
+        $tpl_vars = array_merge($tpl_vars, array('msg' => $poche->getNotInstalledMessage()));
+        echo $poche->tpl->render($tpl_file, $tpl_vars);
+        exit;
+    }
+}
+
+# poche actions
+if (isset($_GET['login'])) {
+    # hello you
+    $poche->login($referer);
+} elseif (isset($_GET['logout'])) {
+    # see you soon !
+    $poche->logout();
+} elseif (isset($_GET['config'])) {
+    # Update password
+    $poche->updatePassword();
+} elseif (isset($_GET['import'])) {
+    $import = $poche->import($_GET['from']);
+} elseif (isset($_GET['export'])) {
+    $poche->export();
+} elseif (isset($_GET['updatetheme'])) {
+    $poche->updateTheme();
+}
 
 if (Session::isLogged()) {
     $poche->action($action, $url, $id);
     $tpl_file = Tools::getTplFile($view);
     $tpl_vars = array_merge($tpl_vars, $poche->displayView($view, $id));
-}
-else {
-    $tpl_file = 'login.twig';
+} else {
+    $tpl_file = Tools::getTplFile('login');
 }
 
 # because messages can be added in $poche->action(), we have to add this entry now (we can add it before)
