@@ -1,3 +1,6 @@
 [submodule "inc/3rdparty/site_config"]
 	path = inc/3rdparty/site_config
 	url = git://github.com/inthepoche/site_config.git
+[submodule "themes"]
+	path = themes
+	url = git@github.com:EliasZ/poche-themes.git

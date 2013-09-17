@@ -3,57 +3,54 @@
  * poche, a read it later open source system
  *
  * @category   poche
- * @author     Nicolas Lœuillet <support@inthepoche.com>
+ * @author     Nicolas Lœuillet <nicolas@loeuillet.org>
  * @copyright  2013
  * @license    http://www.wtfpl.net/ see COPYING file
  */
 
-require_once __DIR__ . '/../../inc/poche/define.inc.php';
+define ('SALT', 'strong'); # put a strong string here
+define ('LANG', 'en_EN.utf8');
 
-# /!\ Be careful if you change the lines below /!\
-if (!file_exists(__DIR__ . '/../../vendor/autoload.php')) {
-    die('Twig does not seem installed. Have a look at <a href="inthepoche.com/doc">the documentation.</a>');
-}
+define ('STORAGE', 'sqlite'); # postgres, mysql or sqlite
 
-require_once __DIR__ . '/../../inc/poche/User.class.php';
-require_once __DIR__ . '/../../inc/poche/Url.class.php';
-require_once __DIR__ . '/../../inc/3rdparty/class.messages.php';
-require_once __DIR__ . '/../../inc/poche/Poche.class.php';
-require_once __DIR__ . '/../../inc/3rdparty/Readability.php';
-require_once __DIR__ . '/../../inc/poche/PocheReadability.php';
-require_once __DIR__ . '/../../inc/3rdparty/Encoding.php';
-require_once __DIR__ . '/../../inc/poche/Database.class.php';
-require_once __DIR__ . '/../../vendor/autoload.php';
-require_once __DIR__ . '/../../inc/3rdparty/simple_html_dom.php';
-require_once __DIR__ . '/../../inc/3rdparty/paginator.php';
-require_once __DIR__ . '/../../inc/3rdparty/Session.class.php';
+define ('STORAGE_SQLITE', ROOT . '/db/poche.sqlite'); # if you are using sqlite, where the database file is located
 
-require_once __DIR__ . '/../../inc/3rdparty/simplepie/SimplePieAutoloader.php';
-require_once __DIR__ . '/../../inc/3rdparty/simplepie/SimplePie/Core.php';
-require_once __DIR__ . '/../../inc/3rdparty/content-extractor/ContentExtractor.php';
-require_once __DIR__ . '/../../inc/3rdparty/content-extractor/SiteConfig.php';
-require_once __DIR__ . '/../../inc/3rdparty/humble-http-agent/HumbleHttpAgent.php';
-require_once __DIR__ . '/../../inc/3rdparty/humble-http-agent/SimplePie_HumbleHttpAgent.php';
-require_once __DIR__ . '/../../inc/3rdparty/humble-http-agent/CookieJar.php';
-require_once __DIR__ . '/../../inc/3rdparty/feedwriter/FeedItem.php';
-require_once __DIR__ . '/../../inc/3rdparty/feedwriter/FeedWriter.php';
-require_once __DIR__ . '/../../inc/3rdparty/feedwriter/DummySingleItemFeed.php';
-require_once __DIR__ . '/../../inc/3rdparty/FlattrItem.class.php';
+# only for postgres & mysql
+define ('STORAGE_SERVER', 'localhost');
+define ('STORAGE_DB', 'poche');
+define ('STORAGE_USER', 'poche');
+define ('STORAGE_PASSWORD', 'poche');
 
-if (DOWNLOAD_PICTURES) {
-    require_once __DIR__ . '/../../inc/poche/pochePictures.php';
-}
+#################################################################################
+# Do not trespass unless you know what you are doing
+#################################################################################
 
-if (!ini_get('date.timezone') || !@date_default_timezone_set(ini_get('date.timezone'))) {
-    date_default_timezone_set('UTC');
-}
+define ('MODE_DEMO', FALSE);
+define ('DEBUG_POCHE', true);
+define ('DOWNLOAD_PICTURES', FALSE);
+define ('CONVERT_LINKS_FOOTNOTES', FALSE);
+define ('REVERT_FORCED_PARAGRAPH_ELEMENTS', FALSE);
+define ('SHARE_TWITTER', TRUE);
+define ('SHARE_MAIL', TRUE);
+define ('SHARE_SHAARLI', FALSE);
+define ('SHAARLI_URL', 'http://myshaarliurl.com');
+define ('FLATTR', TRUE);
+define ('FLATTR_API', 'https://api.flattr.com/rest/v2/things/lookup/?url=');
+define ('NOT_FLATTRABLE', '0');
+define ('FLATTRABLE', '1');
+define ('FLATTRED', '2');
+define ('ABS_PATH', 'assets/');
 
-$poche = new Poche();
+define ('DEFAULT_THEME', 'default');
 
-#XSRF protection with token
-if (!empty($_POST)) {
-    if (!Session::isToken($_POST['token'])) {
-        die(_('Wrong token'));
-    }
-    unset($_SESSION['tokens']);
-}
+define ('THEME', ROOT . '/themes');
+define ('LOCALE', ROOT . '/locale');
+define ('CACHE', ROOT . '/cache');
+
+define ('PAGINATION', '10');
+
+define ('POCHE_VERSION', '1.0-beta4');
+
+define ('IMPORT_POCKET_FILE', ROOT . '/ril_export.html');
+define ('IMPORT_READABILITY_FILE', ROOT . '/readability');
+define ('IMPORT_INSTAPAPER_FILE', ROOT . '/instapaper-export.html');
