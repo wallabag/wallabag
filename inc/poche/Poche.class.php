@@ -93,6 +93,7 @@ class Poche
     private function init() 
     {
         Tools::initPhp();
+        Session::$sessionName = 'poche'; 
         Session::init();
 
         if (isset($_SESSION['poche_user']) && $_SESSION['poche_user'] != array()) {

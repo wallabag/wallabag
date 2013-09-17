@@ -49,3 +49,11 @@ if (!ini_get('date.timezone') || !@date_default_timezone_set(ini_get('date.timez
 }
 
 $poche = new Poche();
+
+#XSRF protection with token
+if (!empty($_POST)) {
+    if (!Session::isToken($_POST['token'])) {
+        die(_('Wrong token'));
+    }
+    unset($_SESSION['tokens']);
+}
