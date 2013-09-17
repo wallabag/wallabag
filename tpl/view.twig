@@ -37,4 +37,23 @@
                 <p>{% trans "this article appears wrong?" %} <a href="https://github.com/inthepoche/poche/issues/new">{% trans "create an issue" %}</a> {% trans "or" %} <a href="mailto:support@inthepoche.com?subject=Wrong%20display%20in%20poche&amp;body={{ entry.url|url_encode }}">{% trans "contact us by mail" %}</a></p>
             </div>
         </div>
+        <script src="./tpl/js/restoreScroll.js"></script>
+        <script type="text/javascript">
+        $(document).ready(function() {
+
+            $(window).scroll(function(e){
+                var scrollTop = $(window).scrollTop();
+                var docHeight = $(document).height();
+                var scrollPercent = (scrollTop) / (docHeight);
+                var scrollPercentRounded = Math.round(scrollPercent*100)/100;
+                savePercent({{ entry.id|e }}, scrollPercentRounded);
+            });
+
+            retrievePercent({{ entry.id|e }});
+
+            $(window).resize(function(){
+                retrievePercent({{ entry.id|e }});
+            });
+        });
+        </script>
 {% endblock %}
