@@ -60,11 +60,15 @@ class Database {
         $id_user = intval($this->getLastId($sequence));
 
         $sql = 'INSERT INTO users_config ( user_id, name, value ) VALUES (?, ?, ?)';
-        $params = array($id_user, 'pager', '10');
+        $params = array($id_user, 'pager', PAGINATION);
         $query = $this->executeQuery($sql, $params);
 
         $sql = 'INSERT INTO users_config ( user_id, name, value ) VALUES (?, ?, ?)';
-        $params = array($id_user, 'language', 'en_EN.UTF8');
+        $params = array($id_user, 'language', LANG);
+        $query = $this->executeQuery($sql, $params);
+        
+        $sql = 'INSERT INTO users_config ( user_id, name, value ) VALUES (?, ?, ?)';
+        $params = array($id_user, 'theme', DEFAULT_THEME);
         $query = $this->executeQuery($sql, $params);
 
         return TRUE;
@@ -101,10 +105,16 @@ class Database {
         return $user;
     }
 
-    public function updatePassword($id, $password)
+    public function updatePassword($userId, $password)
     {
         $sql_update = "UPDATE users SET password=? WHERE id=?";
         $params_update = array($password, $id);
+        $this->updateUserConfig($userId, 'password', $password);
+    }
+    
+    public function updateUserConfig($userId, $key, $value) {
+        $sql_update = "UPDATE users_config SET `value`=? WHERE `user_id`=? AND `name`=?";
+        $params_update = array($value, $userId, $key);
         $query = $this->executeQuery($sql_update, $params_update);
     }
 
