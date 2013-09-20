@@ -331,16 +331,7 @@ class Poche
             if ($user != array()) {
                 # Save login into Session
                 Session::login($user['username'], $user['password'], $_POST['login'], Tools::encodeString($_POST['password'] . $_POST['login']), array('poche_user' => new User($user)));
-
                 $this->messages->add('s', _('welcome to your poche'));
-                if (!empty($_POST['longlastingsession'])) {
-                    $_SESSION['longlastingsession'] = 31536000;
-                    $_SESSION['expires_on'] = time() + $_SESSION['longlastingsession'];
-                    session_set_cookie_params($_SESSION['longlastingsession']);
-                } else {
-                    session_set_cookie_params(0);
-                }
-                session_regenerate_id(true);
                 Tools::logm('login successful');
                 Tools::redirect($referer);
             }

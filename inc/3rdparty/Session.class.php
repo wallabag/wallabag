@@ -136,7 +136,7 @@ class Session
      */
     public static function logout()
     {
-        unset($_SESSION['uid'], $_SESSION['ip'], $_SESSION['expires_on']);
+        unset($_SESSION['uid'],$_SESSION['ip'],$_SESSION['expires_on'],$_SESSION['tokens'], $_SESSION['login'], $_SESSION['pass'], $_SESSION['poche_user']);
     }
 
     /**
