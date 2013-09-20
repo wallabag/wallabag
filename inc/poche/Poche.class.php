@@ -150,7 +150,7 @@ class Poche
             $msg = '<h1>error</h1><p>You don\'t have write access on cache directory.</p>';
         } else if (STORAGE == 'sqlite' && ! file_exists(STORAGE_SQLITE)) {
             Tools::logm('sqlite file doesn\'t exist');
-            $msg = '<h1>error</h1><p>sqlite file doesn\'t exist, you can find it in install folder.</p>';
+            $msg = '<h1>error</h1><p>sqlite file doesn\'t exist, you can find it in install folder. Copy it in /db folder.</p>';
         } else if (file_exists(ROOT . '/install/update.php') && ! DEBUG_POCHE) {
             $msg = '<h1>setup</h1><p><strong>It\'s your first time here?</strong> Please copy /install/poche.sqlite in db folder. Then, delete install folder.<br /><strong>If you have already installed poche</strong>, an update is needed <a href="install/update.php">by clicking here</a>.</p>';
         } else if (is_dir(ROOT . '/install') && ! DEBUG_POCHE) {
