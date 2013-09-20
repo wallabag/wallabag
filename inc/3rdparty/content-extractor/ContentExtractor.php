@@ -138,7 +138,7 @@ class ContentExtractor
 		}
 		
 		// load and parse html
-		$this->readability = new Readability($html, $url);		
+		$this->readability = new PocheReadability($html, $url);		
 		
 		// we use xpath to find elements in the given HTML document
 		// see http://en.wikipedia.org/wiki/XPath_1.0
