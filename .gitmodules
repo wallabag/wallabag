@@ -3,4 +3,4 @@
 	url = git@github.com:inthepoche/site_config.git
 [submodule "themes"]
 	path = themes
-	url = git@github.com:inthepoche/poche-themes.git
+	url = git://github.com/inthepoche/poche-themes.git
