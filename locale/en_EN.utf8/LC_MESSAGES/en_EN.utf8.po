@@ -11,164 +11,164 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 
 msgid "config"
-msgstr "configuración"
+msgstr "config"
 
 msgid "Poching a link"
-msgstr ""
+msgstr "Poching a link"
 
 msgid "read the documentation"
-msgstr ""
+msgstr "read the documentation"
 
 msgid "by filling this field"
-msgstr ""
+msgstr "by filling this field"
 
 msgid "poche it!"
-msgstr "pochéalo!"
+msgstr "poche it!"
 
 msgid "Updating poche"
-msgstr "Actualizar"
+msgstr "Updating poche"
 
 msgid "your version"
-msgstr "su versión"
+msgstr "your version"
 
 msgid "latest stable version"
-msgstr "ultima versión estable"
+msgstr "latest stable version"
 
 msgid "a more recent stable version is available."
-msgstr "una versión estable más reciente está disponible."
+msgstr "a more recent stable version is available."
 
 msgid "you are up to date."
-msgstr "estás al día."
+msgstr "you are up to date."
 
 msgid "latest dev version"
-msgstr "ultima versión de desarollo"
+msgstr "latest dev version"
 
 msgid "a more recent development version is available."
-msgstr "una versión de desarollo más reciente está disponible."
+msgstr "a more recent development version is available."
 
 msgid "Change your password"
-msgstr "Modificar tu contraseña"
+msgstr "Change your password"
 
 msgid "New password:"
-msgstr "Nueva contraseña :"
+msgstr "New password:"
 
 msgid "Password"
-msgstr "Contraseña"
+msgstr "Password"
 
 msgid "Repeat your new password:"
-msgstr "Repetir la nueva contraseña :"
+msgstr "Repeat your new password:"
 
 msgid "Update"
-msgstr "Poner al día"
+msgstr "Update"
 
 msgid "Import"
-msgstr "Importar"
+msgstr "Import"
 
 msgid "Please execute the import script locally, it can take a very long time."
 msgstr ""
-"Gracias por ejecutar la importación en local, esto puede demorar un tiempo"
+"Please execute the import script locally, it can take a very long time."
 
 msgid "More infos in the official doc:"
-msgstr "Más información en la documentación oficial :"
+msgstr "More infos in the official doc:"
 
 msgid "import from Pocket"
-msgstr "importación desde Pocket"
+msgstr "import from Pocket"
 
 msgid "import from Readability"
-msgstr "importación desde Readability"
+msgstr "import from Readability"
 
 msgid "import from Instapaper"
-msgstr "importación desde Instapaper"
+msgstr "import from Instapaper"
 
 msgid "Export your poche datas"
-msgstr "Exportar sus datos de poche"
+msgstr "Export your poche datas"
 
 msgid "Click here"
-msgstr "Haga clic aquí"
+msgstr "Click here"
 
 msgid "to export your poche datas."
-msgstr "para exportar sus datos de poche."
+msgstr "to export your poche datas."
 
 msgid "back to home"
-msgstr "volver a la pagina de inicio"
+msgstr "back to home"
 
 msgid "installation"
-msgstr "instalacion"
+msgstr "installation"
 
 msgid "install your poche"
-msgstr "instala tu poche"
+msgstr "install your poche"
 
 msgid ""
 "poche is still not installed. Please fill the below form to install it. "
 "Don't hesitate to <a href='http://inthepoche.com/doc'>read the documentation "
 "on poche website</a>."
 msgstr ""
-"poche todavia no està instalado. Gracias de llenar los campos siguientes "
-"para instalarlo. No dudes de <a href='http://inthepoche.com/doc'>leer la "
-"documentacion en el sitio de poche</a>."
+"poche is still not installed. Please fill the below form to install it. "
+"Don't hesitate to <a href='http://inthepoche.com/doc'>read the documentation "
+"on poche website</a>."
 
 msgid "Login"
-msgstr "Nombre de usuario"
+msgstr "Login"
 
 msgid "Repeat your password"
-msgstr "Repita su contraseña"
+msgstr "Repeat your password"
 
 msgid "Install"
-msgstr "Instalar"
+msgstr "Install"
 
 msgid "back to top"
-msgstr "volver arriba"
+msgstr "back to top"
 
 msgid "favoris"
-msgstr ""
+msgstr "favoris"
 
 msgid "archive"
-msgstr "archivos"
+msgstr "archive"
 
 msgid "unread"
-msgstr ""
+msgstr "unread"
 
 msgid "by date asc"
-msgstr "por fecha ascendiente"
+msgstr "by date asc"
 
 msgid "by date"
-msgstr "por fecha"
+msgstr "by date"
 
 msgid "by date desc"
-msgstr "por fecha descendiente"
+msgstr "by date desc"
 
 msgid "by title asc"
-msgstr "por titulo ascendiente"
+msgstr "by title asc"
 
 msgid "by title"
-msgstr "por fecha"
+msgstr "by title"
 
 msgid "by title desc"
-msgstr "por fecha descendiente"
+msgstr "by title desc"
 
 msgid "No link available here!"
-msgstr ""
+msgstr "No link available here!"
 
 msgid "toggle mark as read"
-msgstr "marcar como leído"
+msgstr "toggle mark as read"
 
 msgid "toggle favorite"
-msgstr "favorito"
+msgstr "toggle favorite"
 
 msgid "delete"
-msgstr "suprimir"
+msgstr "delete"
 
 msgid "original"
 msgstr "original"
 
 msgid "results"
-msgstr ""
+msgstr "results"
 
 msgid "tweet"
-msgstr "tweetear"
+msgstr "tweet"
 
 msgid "email"
-msgstr "enviar por mail"
+msgstr "email"
 
 msgid "shaarli"
 msgstr "shaarli"
@@ -177,54 +177,52 @@ msgid "flattr"
 msgstr "flattr"
 
 msgid "this article appears wrong?"
-msgstr "este articulo no se ve bien ?"
+msgstr "this article appears wrong?"
 
 msgid "create an issue"
-msgstr "crear un ticket"
+msgstr "create an issue"
 
 msgid "or"
-msgstr "o"
+msgstr "or"
 
 msgid "contact us by mail"
-msgstr "contactarnos por mail"
+msgstr "contact us by mail"
 
 msgid "plop"
 msgstr "plop"
 
 msgid "home"
-msgstr "inicio"
+msgstr "home"
 
 msgid "favorites"
-msgstr "favoritos"
+msgstr "favorites"
 
 msgid "logout"
-msgstr "desconexión"
+msgstr "logout"
 
 msgid "powered by"
-msgstr "propulsado por"
+msgstr "powered by"
 
 msgid "debug mode is on so cache is off."
-msgstr ""
+msgstr "debug mode is on so cache is off."
 
 msgid "your poche version:"
-msgstr ""
+msgstr "your poche version:"
 
 msgid "storage:"
-msgstr ""
+msgstr "storage:"
 
 msgid "login to your poche"
-msgstr "conectarse a tu poche"
+msgstr "login to your poche"
 
 msgid "you are in demo mode, some features may be disabled."
-msgstr ""
-"este es el modo de demostración, algunas funcionalidades pueden estar "
-"desactivadas."
+msgstr "you are in demo mode, some features may be disabled."
 
 msgid "Stay signed in"
-msgstr "seguir conectado"
+msgstr "Stay signed in"
 
 msgid "(Do not check on public computers)"
-msgstr "(no marcar en un ordenador publico)"
+msgstr "(Do not check on public computers)"
 
 msgid "Sign in"
-msgstr "conectarse"
+msgstr "Sign in"

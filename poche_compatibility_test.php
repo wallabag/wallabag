@@ -1,18 +1,4 @@
 <?php
-/*
-FULL-TEXT-RSS V2 COMPATIBILITY TEST
-
-1) Upload ftr_compatibility_test.php to the web-accessible root of your website.
-For example, if your website is www.example.com, upload it so that you can get
-to it at www.example.com/ftr_compatibility_test.php
-
-2) Open your web browser and go to the page you just uploaded.
-
-Note: This compatibility test has been borrowed (and slightly adapted) from the one supplied by 
-SimplePie.org. We have kept most of their checks intact as we use SimplePie in our application.
-http://github.com/simplepie/simplepie/tree/master/compatibility_test/
-*/
-
 $app_name = 'poche 1.0';
 
 $php_ok = (function_exists('version_compare') && version_compare(phpversion(), '5.2.0', '>='));

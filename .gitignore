@@ -5,4 +5,4 @@ composer.phar
 db/poche.sqlite
 output
 phpdoc*
-inc/poche/myconfig.inc.php
+inc/poche/config.inc.php

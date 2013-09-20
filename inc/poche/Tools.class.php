@@ -84,9 +84,9 @@ class Tools
 
     public static function getTplFile($view)
     {
-        $tpl_file = 'home.twig';
-        switch ($view)
-        {
+        $default_tpl = 'home.twig';
+        
+        switch ($view) {
             case 'install':
                 $tpl_file = 'install.twig';
                 break;
@@ -102,9 +102,20 @@ class Tools
             case 'view':
                 $tpl_file = 'view.twig';
                 break;
+            
+            case 'login':
+                $tpl_file = 'login.twig';
+                break;
+                
+            case 'error':
+                $tpl_file = 'error.twig';
+                break;
+                
             default:
-            break;
+                $tpl_file = $default_tpl;
+                break;
         }
+        
         return $tpl_file;
     }
 
@@ -228,24 +239,8 @@ class Tools
         return $minutes;
     }
 
-
-    public static function createMyConfig()
-    {
-        $myconfig_file = './inc/poche/myconfig.inc.php';
-
-        if (!is_writable('./inc/poche/')) {
-            self::logm('you don\'t have write access to create ./inc/poche/myconfig.inc.php');
-            die('You don\'t have write access to create ./inc/poche/myconfig.inc.php.');
-        }
-
-        if (!file_exists($myconfig_file))
-        {
-            $fp = fopen($myconfig_file, 'w');
-            fwrite($fp, '<?php'."\r\n");
-            fwrite($fp, "define ('POCHE_VERSION', '1.0-beta4');" . "\r\n");
-            fwrite($fp, "define ('SALT', '" . md5(time() . $_SERVER['SCRIPT_FILENAME'] . rand()) . "');" . "\r\n");
-            fwrite($fp, "define ('LANG', 'en_EN.utf8');" . "\r\n");
-            fclose($fp);
-        }
+    public static function getDocLanguage($userlanguage) {
+        $lang = explode('.', $userlanguage);
+        return str_replace('_', '-', $lang[0]);
     }
 }

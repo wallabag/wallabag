@@ -3,7 +3,7 @@
  * poche, a read it later open source system
  *
  * @category   poche
- * @author     Nicolas Lœuillet <nicolas@loeuillet.org>
+ * @author     Nicolas Lœuillet <support@inthepoche.com>
  * @copyright  2013
  * @license    http://www.wtfpl.net/ see COPYING file
  */
@@ -22,6 +22,11 @@ define ('SHARE_TWITTER', TRUE);
 define ('SHARE_MAIL', TRUE);
 define ('SHARE_SHAARLI', FALSE);
 define ('SHAARLI_URL', 'http://myshaarliurl.com');
+define ('FLATTR', TRUE);
+define ('FLATTR_API', 'https://api.flattr.com/rest/v2/things/lookup/?url=');
+define ('NOT_FLATTRABLE', '0');
+define ('FLATTRABLE', '1');
+define ('FLATTRED', '2');
 define ('ABS_PATH', 'assets/');
 define ('TPL', __DIR__ . '/../../tpl');
 define ('LOCALE', __DIR__  . '/../../locale');
