@@ -381,17 +381,17 @@ class Poche
                         $tidy = tidy_parse_string($content, array('indent'=>true, 'show-body-only' => true), 'UTF8');
                         $tidy->cleanRepair();
                         $content = $tidy->value;
-
-                        # flattr checking
-                        $flattr = new FlattrItem();
-                        $flattr->checkItem($entry['url']);
-
-                        $tpl_vars = array(
-                        'entry' => $entry,
-                        'content' => $content,
-                        'flattr' => $flattr
-                        );
                     }
+
+                    # flattr checking
+                    $flattr = new FlattrItem();
+                    $flattr->checkItem($entry['url']);
+
+                    $tpl_vars = array(
+                    'entry' => $entry,
+                    'content' => $content,
+                    'flattr' => $flattr
+                    );
                 }
                 else {
                     Tools::logm('error in view call : entry is null');
