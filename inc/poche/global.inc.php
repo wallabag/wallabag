@@ -3,7 +3,7 @@
  * poche, a read it later open source system
  *
  * @category   poche
- * @author     Nicolas Lœuillet <nicolas@loeuillet.org>
+ * @author     Nicolas Lœuillet <support@inthepoche.com>
  * @copyright  2013
  * @license    http://www.wtfpl.net/ see COPYING file
  */
@@ -61,12 +61,4 @@ if (Poche::$configFileAvailable && DOWNLOAD_PICTURES) {
 
 if (!ini_get('date.timezone') || !@date_default_timezone_set(ini_get('date.timezone'))) {
     date_default_timezone_set('UTC');
-}
-
-#XSRF protection with token
-if (!empty($_POST)) {
-    if (!Session::isToken($_POST['token'])) {
-        die(_('Wrong token'));
-    }
-    unset($_SESSION['token']);
 }
