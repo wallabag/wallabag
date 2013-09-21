@@ -51,6 +51,10 @@ define ('PAGINATION', '10');
 
 define ('POCHE_VERSION', '1.0-beta5');
 
-define ('IMPORT_POCKET_FILE', ROOT . '/ril_export.html');
-define ('IMPORT_READABILITY_FILE', ROOT . '/readability');
-define ('IMPORT_INSTAPAPER_FILE', ROOT . '/instapaper-export.html');
+define ('POCKET_FILE', '/ril_export.html');
+define ('READABILITY_FILE', '/readability');
+define ('INSTAPAPER_FILE', '/instapaper-export.html');
+
+define ('IMPORT_POCKET_FILE', ROOT . POCKET_FILE);
+define ('IMPORT_READABILITY_FILE', ROOT . READABILITY_FILE);
+define ('IMPORT_INSTAPAPER_FILE', ROOT . INSTAPAPER_FILE);
