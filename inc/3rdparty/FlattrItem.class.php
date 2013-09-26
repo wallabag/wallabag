@@ -11,7 +11,7 @@ class FlattrItem {
 
     public function checkItem($urltoflattr) {
         $this->cacheflattrfile($urltoflattr);
-        $flattrResponse = file_get_contents(CACHE . "/flattr/".base64_encode($urltoflattr).".cache");
+        $flattrResponse = file_get_contents(CACHE . "/flattr/".md5($urltoflattr).".cache");
         if($flattrResponse != FALSE) {
             $result = json_decode($flattrResponse);
             if (isset($result->message)){
@@ -39,9 +39,9 @@ class FlattrItem {
         }
 
         // if a cache flattr file for this url already exists and it's been less than one day than it have been updated, see in /cache
-        if ((!file_exists(CACHE . "/flattr/".base64_encode($urltoflattr).".cache")) || (time() - filemtime(CACHE . "/flattr/".base64_encode($urltoflattr).".cache") > 86400)) {
+        if ((!file_exists(CACHE . "/flattr/".md5($urltoflattr).".cache")) || (time() - filemtime(CACHE . "/flattr/".md5($urltoflattr).".cache") > 86400)) {
             $askForFlattr = Tools::getFile(FLATTR_API . $urltoflattr);
-            $flattrCacheFile = fopen(CACHE . "/flattr/".base64_encode($urltoflattr).".cache", 'w+');
+            $flattrCacheFile = fopen(CACHE . "/flattr/".md5($urltoflattr).".cache", 'w+');
             fwrite($flattrCacheFile, $askForFlattr);
             fclose($flattrCacheFile);
         }
