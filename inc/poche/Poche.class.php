@@ -385,7 +385,7 @@ class Poche
 
                     # flattr checking
                     $flattr = new FlattrItem();
-                    $flattr->checkItem($entry['url']);
+                    $flattr->checkItem($entry['url'],$entry['id']);
 
                     $tpl_vars = array(
                     'entry' => $entry,
