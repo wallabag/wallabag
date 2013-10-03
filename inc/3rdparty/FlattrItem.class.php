@@ -12,7 +12,6 @@ class FlattrItem {
     public function checkItem($urltoflattr,$id) {
         $this->cacheflattrfile($urltoflattr, $id);
         $flattrResponse = file_get_contents(CACHE . "/flattr/".$id.".cache");
-        print_r($flattrResponse);
         if($flattrResponse != FALSE) {
             $result = json_decode($flattrResponse);
             if (isset($result->message)){
