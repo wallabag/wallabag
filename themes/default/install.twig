@@ -1,0 +1,28 @@
+{% extends "layout.twig" %}
+{% block title %}{% trans "installation" %}{% endblock %}
+{% block content %}
+        <form method="post" action="?install" name="loginform">
+            <fieldset class="w500p center">
+                <h2 class="mbs txtcenter">{% trans "install your poche" %}</h2>
+                <p>
+                    {% trans "poche is still not installed. Please fill the below form to install it. Don't hesitate to <a href='http://inthepoche.com/doc'>read the documentation on poche website</a>." %}
+                </p>
+                <p class="row">
+                    <label class="col w150p" for="login">{% trans "Login" %}</label>
+                    <input class="col" type="text" id="login" name="login" placeholder="Login" tabindex="1" autofocus />
+                </p>
+                <p class="row">
+                    <label class="col w150p" for="password">{% trans "Password" %}</label>
+                    <input class="col" type="password" id="password" name="password" placeholder="Password" tabindex="2">
+                </p>
+                <p class="row">
+                    <label class="col w150p" for="password_repeat">{% trans "Repeat your password" %}</label>
+                    <input class="col" type="password" id="password_repeat" name="password_repeat" placeholder="Password" tabindex="3">
+                </p>
+                <p class="row mts txtcenter">
+                    <button class="bouton" type="submit" tabindex="4">{% trans "Install" %}</button>
+                </p>
+            </fieldset>
+            <input type="hidden" name="token" value="{{ token }}">
+        </form>
+{% endblock %}

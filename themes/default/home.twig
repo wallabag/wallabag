@@ -1,0 +1,49 @@
+{% extends "layout.twig" %}
+{% block title %}
+{% if view == 'fav' %}
+{% trans "favoris" %}
+{% elseif view == 'archive' %}
+{% trans "archive" %}
+{% else %}
+{% trans "unread" %}
+{% endif %}
+{% endblock %}
+{% block menu %}
+{% include '_menu.twig' %}
+{% endblock %}
+{% block precontent %}
+            {% if entries|length > 1 %}
+            <ul id="sort">
+                <li><a href="./?sort=ia&amp;view={{ view }}"><img src="{{ poche_url }}/themes/{{ theme }}/img/{{ theme }}/top.png" alt="{% trans "by date asc" %}" title="{% trans "by date asc" %}" /></a> {% trans "by date" %} <a href="./?sort=id&amp;view={{ view }}"><img src="{{ poche_url }}/themes/{{ theme }}/img/{{ theme }}/down.png" alt="{% trans "by date desc" %}" title="{% trans "by date desc" %}" /></a></li>
+                <li><a href="./?sort=ta&amp;view={{ view }}"><img src="{{ poche_url }}/themes/{{ theme }}/img/{{ theme }}/top.png" alt="{% trans "by title asc" %}" title="{% trans "by title asc" %}" /></a> {% trans "by title" %} <a href="./?sort=td&amp;view={{ view }}"><img src="{{ poche_url }}/themes/{{ theme }}/img/{{ theme }}/down.png" alt="{% trans "by title desc" %}" title="{% trans "by title desc" %}" /></a></li>
+            </ul>
+            {% endif %}
+{% endblock %}
+{% block content %}
+            {% if entries is empty %}
+            <div class="messages warning"><p>{% trans "No link available here!" %}</p></div>
+            {% else %}
+                {% block pager %}
+                    {% if nb_results > 1 %}
+                <div class="results">
+                    <div class="nb-results">{{ nb_results }} {% trans "results" %}</div>
+                        {{ page_links | raw }}
+                </div>
+                    {% endif %}
+                {% endblock %}
+                {% for entry in entries %}
+            <div id="entry-{{ entry.id|e }}" class="entrie">
+                <h2><a href="index.php?view=view&amp;id={{ entry.id|e }}">{{ entry.title|raw }}</a></h2>
+                <ul class="tools">
+                    <li><a title="{% trans "toggle mark as read" %}" class="tool {% if entry.is_read == 0 %}archive-off{% else %}archive{% endif %}" href="./?action=toggle_archive&amp;id={{ entry.id|e }}"><span>{% trans "toggle mark as read" %}</span></a></li>
+                    <li><a title="{% trans "toggle favorite" %}" class="tool {% if entry.is_fav == 0 %}fav-off{% else %}fav{% endif %}" href="./?action=toggle_fav&amp;id={{ entry.id|e }}"><span>{% trans "toggle favorite" %}</span></a></li>
+                    <li><a title="{% trans "delete" %}" class="tool delete" href="./?action=delete&amp;id={{ entry.id|e }}"><span>{% trans "delete" %}</span></a></li>
+                    <li><a href="{{ entry.url|e }}" target="_blank" title="{% trans "original" %} : {{ entry.title|e }}" class="tool link"><span>{{ entry.url | e | getDomain }}</span></a></li>
+                    <li><a target="_blank" title="{% trans "estimated reading time:" %} {{ entry.content| getReadingTime }} min" class="tool reading-time"><span>{{ entry.content| getReadingTime }} min</span></a></li>
+                </ul>
+                <p>{{ entry.content|striptags|slice(0, 300) }}...</p>
+            </div>
+                {% endfor %}
+            {% endif %}
+            {{ block('pager') }}
+{% endblock %}
