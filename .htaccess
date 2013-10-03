@@ -1,8 +1,0 @@
-Options +FollowSymlinks
-RewriteEngine On
-RewriteRule ^dl/export_poche.json$ ?export [L]
-
-# Force download
-RewriteCond %{QUERY_STRING} =export
-RewriteRule ([^/]*)$ - [L,E=dl:$1]
-Header onsuccess set Content-disposition "attachment; filename=%{dl}e" env=dl
