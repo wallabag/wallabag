@@ -407,6 +407,12 @@ class Poche
                     'page_links' => '',
                     'nb_results' => '',
                 );
+
+                # want to display a page too far?
+                if ((count($entries) % PAGINATION) + 1 < $_GET['p']) {
+                    Tools::redirect('');
+                }
+                
                 if (count($entries) > 0) {
                     $this->pagination->set_total(count($entries));
                     $page_links = $this->pagination->page_links('?view=' . $view . '&sort=' . $_SESSION['sort'] . '&');
