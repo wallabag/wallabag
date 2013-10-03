@@ -1,0 +1,75 @@
+.messages {
+    display: block;
+    clear: both;
+    width: 400px;
+    margin: 10px auto 10px;
+    padding: 10px 0;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.messages a.closeMessage {
+    display: none;
+    float: right;
+    width: 16px;
+    height: 16px;
+    margin: -14px -8px 0 0;
+    background: url(../img/messages/close.png) no-repeat;
+}
+
+/*.messages:hover a.closeMessage { visibility:visible; }*/
+
+.messages p {
+    margin: 3px 0 3px 10px !important;
+    padding: 0 10px 0 23px !important;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.messages.error {
+    border: 1px solid #c42608;
+    color: #c00 !important;
+    background: #fff0ef;
+}
+
+.messages.error p {
+    color: #c00 !important;
+    background: url(../img/messages/cross.png) no-repeat 0 50%;
+}
+
+.messages.success {
+    border: 1px solid #6dc70c;
+    background: #e0fbcc;
+}
+
+.messages.success p {
+    color: #2b6301 !important;
+    background: url(../img/messages/tick.png) no-repeat 0 50%;
+}
+
+.messages.warning {
+    border: 1px solid #ebcd41;
+    color: #000;
+    background: #fffcd3;
+}
+
+.messages.warning p {
+    color: #5f4e01;
+    background: url(../img/messages/warning.png) no-repeat 0 50%;
+}
+
+.messages.information,
+.messages.info {
+    border: 1px solid #82aee7;
+    background: #dfebfb;
+}
+
+.messages.information p,
+.messages.info p {
+    color: #064393;
+    background: url(../img/messages/help.png) no-repeat 0 50%;
+}
+
+.messages.information a {
+    text-decoration: underline;
+}

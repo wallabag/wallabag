@@ -1,0 +1,7 @@
+title: //title
+body: //div[@class='post-content']
+
+prune: no
+tidy: no
+
+test_url: http://www.inthepoche.com/?post/poche-hosting

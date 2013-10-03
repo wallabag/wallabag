@@ -1,0 +1,78 @@
+body {
+    color: #d4d4d4;
+    background-color: #372d37;
+}
+
+a,
+a:hover,
+a:visited {
+    color: #8d748d;
+}
+
+a.back span {
+    background-image: url('../img/dmagenta/left.png');
+}
+
+a.top span {
+    background-image: url('../img/dmagenta/top.png');
+}
+
+a.fav span,
+a.fav-off span:hover {
+    background-image: url('../img/dmagenta/star-on.png');
+}
+
+a.fav span:hover,
+a.fav-off span {
+    background-image: url('../img/dmagenta/star-off.png');
+}
+
+a.archive span,
+a.archive-off span:hover {
+    background-image: url('../img/dmagenta/checkmark-on.png');
+}
+
+a.archive span:hover,
+a.archive-off span {
+    background-image: url('../img/dmagenta/checkmark-off.png');
+}
+
+a.twitter span {
+    background-image: url('../img/dmagenta/twitter.png');
+}
+
+a.flattr span {
+    background-image: url('../img/dmagenta/flattr.png');
+}
+
+a.shaarli span {
+    background-image: url('../img/dmagenta/shaarli.png');
+}
+
+a.email span {
+    background-image: url('../img/dmagenta/envelop.png');
+}
+
+a.delete span {
+    background-image: url('../img/dmagenta/remove.png');
+}
+
+a.link span {
+    background-image: url('../img/dmagenta/link.png');
+}
+
+a.bad-display span {
+    background-image: url('../img/dmagenta/bad-display.png');
+}
+
+.pagination a {
+    color: #aaa;
+}
+
+#main #links li .current {
+    background-color: #2d372d;
+}
+
+#article_toolbar {
+    background: #372d37;
+}
