@@ -105,10 +105,18 @@ class Poche
     public function themeIsInstalled() {
         # Twig is an absolute requirement for Poche to function. Abort immediately if the Composer installer hasn't been run yet
         if (! self::$canRenderTemplates) {
-            $this->notInstalledMessage = 'Twig does not seem to be installed. Please initialize the Composer installation to automatically fetch dependencies. Have a look at <a href="http://inthepoche.com/?pages/Documentation">the documentation.</a>';
+            $this->notInstalledMessage = 'Twig does not seem to be installed. Please initialize the Composer installation to automatically fetch dependencies. Have a look at <a href="http://doc.inthepoche.com/doku.php?id=users:begin:install">the documentation.</a>';
             
             return false;
         }
+
+        if (! is_writable(CACHE)) {
+            $this->notInstalledMessage = '<h1>error</h1><p>You don\'t have write access on cache directory.</p>';
+
+            self::$canRenderTemplates = false;
+
+            return false;
+        } 
         
         # Check if the selected theme and its requirements are present
         if (! is_dir(THEME . '/' . $this->getTheme())) {
@@ -145,16 +153,11 @@ class Poche
         
         if (empty($configSalt)) {
             $msg = '<h1>error</h1><p>You have not yet filled in the SALT value in the config.inc.php file.</p>';
-        } else if (! is_writable(CACHE)) {
-            Tools::logm('you don\'t have write access on cache directory');
-            $msg = '<h1>error</h1><p>You don\'t have write access on cache directory.</p>';
         } else if (STORAGE == 'sqlite' && ! file_exists(STORAGE_SQLITE)) {
             Tools::logm('sqlite file doesn\'t exist');
             $msg = '<h1>error</h1><p>sqlite file doesn\'t exist, you can find it in install folder. Copy it in /db folder.</p>';
-        } else if (file_exists(ROOT . '/install/update.php') && ! DEBUG_POCHE) {
-            $msg = '<h1>setup</h1><p><strong>It\'s your first time here?</strong> Please copy /install/poche.sqlite in db folder. Then, delete install folder.<br /><strong>If you have already installed poche</strong>, an update is needed <a href="install/update.php">by clicking here</a>.</p>';
         } else if (is_dir(ROOT . '/install') && ! DEBUG_POCHE) {
-            $msg = '<h1>setup</h1><p><strong>If you want to update your poche</strong>, you just have to delete /install folder. <br /><strong>To install your poche with sqlite</strong>, copy /install/poche.sqlite in /db and delete the folder /install. you have to delete the /install folder before using poche.</p>';
+            $msg = '<h1>install folder</h1><p>you have to delete the /install folder before using poche.</p>';
         } else if (STORAGE == 'sqlite' && ! is_writable(STORAGE_SQLITE)) {
             Tools::logm('you don\'t have write access on sqlite file');
             $msg = '<h1>error</h1><p>You don\'t have write access on sqlite file.</p>';
@@ -255,7 +258,7 @@ class Poche
         while (($theme = readdir($handle)) !== false) {
             # Themes are stored in a directory, so all directory names are themes
             # @todo move theme installation data to database
-            if (! is_dir(THEME . '/' . $theme) || in_array($theme, array('..', '.'))) {
+            if (! is_dir(THEME . '/' . $theme) || in_array($theme, array('..', '.', '.git'))) {
                 continue;
             }
             
@@ -330,7 +333,7 @@ class Poche
                     $msg = 'error : can\'t delete link #' . $id;
                 }
                 Tools::logm($msg);
-                Tools::redirect('?');
+                Tools::redirect();
                 break;
             case 'toggle_fav' :
                 $this->store->favoriteById($id, $this->user->getId());
@@ -381,17 +384,17 @@ class Poche
                         $tidy = tidy_parse_string($content, array('indent'=>true, 'show-body-only' => true), 'UTF8');
                         $tidy->cleanRepair();
                         $content = $tidy->value;
-
-                        # flattr checking
-                        $flattr = new FlattrItem();
-                        $flattr->checkItem($entry['url']);
-
-                        $tpl_vars = array(
-                        'entry' => $entry,
-                        'content' => $content,
-                        'flattr' => $flattr
-                        );
                     }
+
+                    # flattr checking
+                    $flattr = new FlattrItem();
+                    $flattr->checkItem($entry['url'],$entry['id']);
+
+                    $tpl_vars = array(
+                    'entry' => $entry,
+                    'content' => $content,
+                    'flattr' => $flattr
+                    );
                 }
                 else {
                     Tools::logm('error in view call : entry is null');
@@ -404,6 +407,7 @@ class Poche
                     'page_links' => '',
                     'nb_results' => '',
                 );
+                
                 if (count($entries) > 0) {
                     $this->pagination->set_total(count($entries));
                     $page_links = $this->pagination->page_links('?view=' . $view . '&sort=' . $_SESSION['sort'] . '&');

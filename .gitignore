@@ -3,6 +3,4 @@ cache/*
 vendor
 composer.phar
 db/poche.sqlite
-output
-phpdoc*
 inc/poche/config.inc.php
