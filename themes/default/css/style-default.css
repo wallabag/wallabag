@@ -53,7 +53,3 @@ a.link span {
 a.bad-display span {
     background-image: url('../img/default/bad-display.png');
 }
-
-a.reading-time span {
-    background-image: url('../img/default/clock.png');
-}

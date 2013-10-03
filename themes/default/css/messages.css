@@ -1,7 +1,7 @@
 .messages {
     display: block;
     clear: both;
-    width: 400px auto;
+    width: 400px;
     margin: 10px auto 10px;
     padding: 10px 0;
     -moz-border-radius: 4px;

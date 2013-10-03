@@ -65,10 +65,6 @@ a.bad-display span {
     background-image: url('../img/dmagenta/bad-display.png');
 }
 
-a.reading-time span {
-    background-image: url('../img/dmagenta/clock.png');
-}
-
 .pagination a {
     color: #aaa;
 }

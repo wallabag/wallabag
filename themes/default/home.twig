@@ -39,7 +39,7 @@
                     <li><a title="{% trans "toggle favorite" %}" class="tool {% if entry.is_fav == 0 %}fav-off{% else %}fav{% endif %}" href="./?action=toggle_fav&amp;id={{ entry.id|e }}"><span>{% trans "toggle favorite" %}</span></a></li>
                     <li><a title="{% trans "delete" %}" class="tool delete" href="./?action=delete&amp;id={{ entry.id|e }}"><span>{% trans "delete" %}</span></a></li>
                     <li><a href="{{ entry.url|e }}" target="_blank" title="{% trans "original" %} : {{ entry.title|e }}" class="tool link"><span>{{ entry.url | e | getDomain }}</span></a></li>
-                    <li><a target="_blank" title="{% trans "estimated reading time:" %} {{ entry.content| getReadingTime }} min" class="tool reading-time"><span>{{ entry.content| getReadingTime }} min</span></a></li>
+                    <li><a target="_blank" title="{% trans "estimated reading time:" %} {{ entry.content| getReadingTime }} min" class="reading-time"><span>{{ entry.content| getReadingTime }} min</span></a></li>
                 </ul>
                 <p>{{ entry.content|striptags|slice(0, 300) }}...</p>
             </div>
