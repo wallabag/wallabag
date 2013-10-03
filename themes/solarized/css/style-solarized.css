@@ -1,0 +1,219 @@
+/*
+ * Solarized - by NumEricR
+ * http://github.com/NumEricR/poche-themes
+ * ==================================================
+ *
+ * Based on Solarized's palette - (c) 2011 Ethan Schoonover
+ * See http://ethanschoonover.com/solarized#usage-development
+ * See http://ethanschoonover.com/solarized#the-values
+ *
+ * Background:              #fdf6e3     base 3
+ * Highlight:               #eee8d5     base 2
+ * Primary content:         #657b83     base 00
+ * Intermediate:            #839496     base 0
+ * Emphasized content:      #586e75     base 01
+ * Secondary content:       #93a1a1     base 1
+ * Green:                   #859900
+ * Orange:                  #cb4b16
+ * Red:                     #dc322f
+ * Blue:                    #268bd2
+ *
+ * ================================================== */
+
+/* Background */
+
+body,
+#article_toolbar {
+    background-color: #fdf6e3;
+}
+
+/* Highlight */
+/* 2 different selectors for selection pseudo-elmt */
+/* See https://developer.mozilla.org/en-US/docs/Web/CSS/::selection */
+::-moz-selection {
+    background-color: #eee8d5;
+}
+::selection {
+    background-color: #eee8d5;
+}
+
+/* Primary content */
+
+body,
+a,
+a:hover,
+a:visited {
+    color: #657b83;
+}
+
+/* Secondary content */
+
+.tools p,
+.vieworiginal a,
+.vieworiginal a:hover,
+.vieworiginal a:visited {
+    color: #93a1a1;
+}
+
+#main #content .entrie,
+#article header,
+#article article {
+    border-bottom-color: #93a1a1;
+}
+
+/* Emphasized content */
+
+.entrie h2 a:hover,
+footer,
+footer a {
+    color: #586e75;
+}
+
+/* Colored content */
+
+#main .messages.success,
+#main .messages.warning,
+#main .messages.error,
+#main .messages.information,
+#main .messages.info {
+    background-color: #eee8d5;
+}
+
+#main .messages.success {
+    border-color: #859900;
+}
+
+#main .messages.success p {
+    color: #859900 !important; /* Overwrites !important used on messages.css */
+}
+
+#main .messages.warning {
+    border-color: #cb4b16;
+}
+
+#main .messages.warning p {
+    color: #cb4b16;
+}
+
+#main .messages.error {
+    border-color: #dc322f;
+}
+
+#main .messages.error p {
+    color: #dc322f !important; /* Overwrites !important used on messages.css */
+}
+
+#main .messages.information,
+#main .messages.info {
+    border-color: #268bd2;
+}
+
+#main .messages.information p,
+#main .messages.info p {
+    color: #268bd2;
+}
+
+/* Miscellaneous */
+
+.bouton,
+.bouton:hover,
+#main #links li a.current,
+#links a:hover,
+.pagination span.current,
+.pagination a:hover,
+.pagination a:active {
+    color: #fdf6e3;
+    background-color: #93a1a1;
+}
+
+.bouton:hover {
+    background-color: #657b83;
+}
+
+#login,
+#password,
+#password_repeat,
+#bookmarklet,
+.top_link {
+    background-color: #eee8d5;
+}
+
+#login,
+#password,
+#password_repeat,
+#bookmarklet {
+    padding: 5px;
+    border: 1px solid #93a1a1;
+    color: #657b83;
+}
+
+#bookmarklet {
+    border-style: dashed;
+}
+
+.pagination a {
+    border-color: #93a1a1;
+    color: #93a1a1;
+}
+
+.pagination span.current {
+    border-color: #eee8d5;
+}
+
+/* Images */
+
+a.back span {
+    background-image: url('../img/solarized/left.png');
+}
+
+a.top span {
+    background-image: url('../img/solarized/top.png');
+}
+
+a.fav span,
+a.fav-off span:hover {
+    background-image: url('../img/solarized/star-on.png');
+}
+
+a.fav span:hover,
+a.fav-off span {
+    background-image: url('../img/solarized/star-off.png');
+}
+
+a.archive span,
+a.archive-off span:hover {
+    background-image: url('../img/solarized/checkmark-on.png');
+}
+
+a.archive span:hover,
+a.archive-off span {
+    background-image: url('../img/solarized/checkmark-off.png');
+}
+
+a.twitter span {
+    background-image: url('../img/solarized/twitter.png');
+}
+
+a.shaarli span {
+    background-image: url('../img/solarized/shaarli.png');
+}
+
+a.flattr span {
+    background-image: url('../img/solarized/flattr.png');
+}
+
+a.email span {
+    background-image: url('../img/solarized/envelop.png');
+}
+
+a.delete span {
+    background-image: url('../img/solarized/remove.png');
+}
+
+a.link span {
+    background-image: url('../img/solarized/link.png');
+}
+
+a.bad-display span {
+    background-image: url('../img/solarized/bad-display.png');
+}

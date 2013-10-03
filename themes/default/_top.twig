@@ -1,0 +1,7 @@
+        <header class="w600p center mbm">
+            <h1>
+                {% if view == 'home' %}{% block logo %}<img src="{{ poche_url }}/themes/{{ constant('DEFAULT_THEME') }}/img/logo.png" alt="logo poche" />{% endblock %}
+                {% else %}<a href="./" title="{% trans "back to home" %}" >{{ block('logo') }}</a>
+                {% endif %}
+            </h1>
+        </header>
