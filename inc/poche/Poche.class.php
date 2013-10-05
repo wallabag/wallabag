@@ -271,6 +271,7 @@ class Poche
             $themes[] = array('name' => $theme, 'current' => $current);
         }
         
+        sort($themes);
         return $themes;
     }
 
