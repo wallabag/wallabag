@@ -366,8 +366,8 @@ class Poche
             case 'config':
                 $dev = $this->getPocheVersion('dev');
                 $prod = $this->getPocheVersion('prod');
-                $compare_dev = version_compare(POCHE_VERSION, $dev);
-                $compare_prod = version_compare(POCHE_VERSION, $prod);
+                $compare_dev = version_compare(POCHE, $dev);
+                $compare_prod = version_compare(POCHE, $prod);
                 $themes = $this->getInstalledThemes();
                 $tpl_vars = array(
                     'themes' => $themes,
