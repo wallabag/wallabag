@@ -41,10 +41,14 @@ class Tools
         $https = (!empty($_SERVER['HTTPS'])
                     && (strtolower($_SERVER['HTTPS']) == 'on'))
             || (isset($_SERVER["SERVER_PORT"])
-                    && $_SERVER["SERVER_PORT"] == '443'); // HTTPS detection.
+                    && $_SERVER["SERVER_PORT"] == '443') // HTTPS detection.
+            || (isset($_SERVER["SERVER_PORT"]) && isset($SSL_PORT) //Custom HTTPS port detection 
+                    && $_SERVER["SERVER_PORT"] == $SSL_PORT);
+
         $serverport = (!isset($_SERVER["SERVER_PORT"])
             || $_SERVER["SERVER_PORT"] == '80'
             || ($https && $_SERVER["SERVER_PORT"] == '443')
+            || ($https && $_SERVER["SERVER_PORT"]==$SSL_PORT) //Custom HTTPS port detection
             ? '' : ':' . $_SERVER["SERVER_PORT"]);
 
         $scriptname = str_replace('/index.php', '/', $_SERVER["SCRIPT_NAME"]);
