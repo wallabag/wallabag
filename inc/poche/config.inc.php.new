@@ -25,6 +25,9 @@ define ('STORAGE_PASSWORD', 'poche');
 # Do not trespass unless you know what you are doing
 #################################################################################
 
+// Change this if not using the standart port for SSL - i.e you server is behind sslh
+define ('SSL_PORT', 443); 
+
 define ('MODE_DEMO', FALSE);
 define ('DEBUG_POCHE', FALSE);
 define ('DOWNLOAD_PICTURES', FALSE);
