@@ -20,7 +20,7 @@ class Poche
     public $pagination;
     
     private $currentTheme = '';
-    private $notInstalledMessage = '';
+    private $notInstalledMessage = array();
     
     # @todo make this dynamic (actually install themes and save them in the database including author information et cetera)
     private $installedThemes = array(
@@ -33,28 +33,21 @@ class Poche
 
     public function __construct()
     {
-        if (! $this->configFileIsAvailable()) {
-            return;
+        if ($this->configFileIsAvailable()) {
+            $this->init();
         }
         
-        $this->init();
-        
-        if (! $this->themeIsInstalled()) {
-            return;
+        if ($this->themeIsInstalled()) {
+            $this->initTpl();
         }
         
-        $this->initTpl();
-        
-        if (! $this->systemIsInstalled()) {
-            return;
-        }
-           
-        $this->store = new Database();
-        $this->messages = new Messages();
-
-        # installation
-        if (! $this->store->isInstalled()) {
-            $this->install();
+        if ($this->systemIsInstalled()) {
+            $this->store = new Database();
+            $this->messages = new Messages();
+            # installation
+            if (! $this->store->isInstalled()) {
+                $this->install();
+            }
         }
     }
     
@@ -94,7 +87,7 @@ class Poche
 
     public function configFileIsAvailable() {
         if (! self::$configFileAvailable) {
-            $this->notInstalledMessage = 'You have to rename <strong>inc/poche/config.inc.php.new</strong> to <strong>inc/poche/config.inc.php</strong>.';
+            $this->notInstalledMessage[] = 'You have to rename inc/poche/config.inc.php.new to inc/poche/config.inc.php.';
 
             return false;
         }
@@ -103,39 +96,44 @@ class Poche
     }
     
     public function themeIsInstalled() {
+        $passTheme = TRUE;
         # Twig is an absolute requirement for Poche to function. Abort immediately if the Composer installer hasn't been run yet
         if (! self::$canRenderTemplates) {
-            $this->notInstalledMessage = 'Twig does not seem to be installed. Please initialize the Composer installation to automatically fetch dependencies. Have a look at <a href="http://doc.inthepoche.com/doku.php?id=users:begin:install">the documentation.</a>';
-            
-            return false;
+            $this->notInstalledMessage[] = 'Twig does not seem to be installed. Please initialize the Composer installation to automatically fetch dependencies. Have a look at <a href="http://doc.inthepoche.com/doku.php?id=users:begin:install">the documentation.</a>';
+            $passTheme = FALSE;
         }
 
         if (! is_writable(CACHE)) {
-            $this->notInstalledMessage = '<h1>error</h1><p>You don\'t have write access on cache directory.</p>';
+            $this->notInstalledMessage[] = 'You don\'t have write access on cache directory.';
 
             self::$canRenderTemplates = false;
 
-            return false;
+            $passTheme = FALSE;
         } 
         
         # Check if the selected theme and its requirements are present
-        if (! is_dir(THEME . '/' . $this->getTheme())) {
-            $this->notInstalledMessage = 'The currently selected theme (' . $this->getTheme() . ') does not seem to be properly installed (Missing directory: ' . THEME . '/' . $this->getTheme() . ')';
+        if ($this->getTheme() != '' && ! is_dir(THEME . '/' . $this->getTheme())) {
+            $this->notInstalledMessage[] = 'The currently selected theme (' . $this->getTheme() . ') does not seem to be properly installed (Missing directory: ' . THEME . '/' . $this->getTheme() . ')';
             
             self::$canRenderTemplates = false;
             
-            return false;
+            $passTheme = FALSE;
         }
         
         foreach ($this->installedThemes[$this->getTheme()]['requires'] as $requiredTheme) {
             if (! is_dir(THEME . '/' . $requiredTheme)) {
-                $this->notInstalledMessage = 'The required "' . $requiredTheme . '" theme is missing for the current theme (' . $this->getTheme() . ')';
+                $this->notInstalledMessage[] = 'The required "' . $requiredTheme . '" theme is missing for the current theme (' . $this->getTheme() . ')';
                 
                 self::$canRenderTemplates = false;
                 
-                return false;
+                $passTheme = FALSE;
             }
         }
+
+        if (!$passTheme) {
+            return FALSE;
+        }
+
         
         return true;
     }
@@ -147,25 +145,30 @@ class Poche
      */
     public function systemIsInstalled()
     {
-        $msg = '';
+        $msg = TRUE;
         
         $configSalt = defined('SALT') ? constant('SALT') : '';
         
         if (empty($configSalt)) {
-            $msg = '<h1>error</h1><p>You have not yet filled in the SALT value in the config.inc.php file.</p>';
-        } else if (STORAGE == 'sqlite' && ! file_exists(STORAGE_SQLITE)) {
+            $this->notInstalledMessage[] = 'You have not yet filled in the SALT value in the config.inc.php file.';
+            $msg = FALSE;
+        }
+        if (STORAGE == 'sqlite' && ! file_exists(STORAGE_SQLITE)) {
             Tools::logm('sqlite file doesn\'t exist');
-            $msg = '<h1>error</h1><p>sqlite file doesn\'t exist, you can find it in install folder. Copy it in /db folder.</p>';
-        } else if (is_dir(ROOT . '/install') && ! DEBUG_POCHE) {
-            $msg = '<h1>install folder</h1><p>you have to delete the /install folder before using poche.</p>';
-        } else if (STORAGE == 'sqlite' && ! is_writable(STORAGE_SQLITE)) {
+            $this->notInstalledMessage[] = 'sqlite file doesn\'t exist, you can find it in install folder. Copy it in /db folder.';
+            $msg = FALSE;
+        }
+        if (is_dir(ROOT . '/install') && ! DEBUG_POCHE) {
+            $this->notInstalledMessage[] = 'you have to delete the /install folder before using poche.';
+            $msg = FALSE;
+        }
+        if (STORAGE == 'sqlite' && ! is_writable(STORAGE_SQLITE)) {
             Tools::logm('you don\'t have write access on sqlite file');
-            $msg = '<h1>error</h1><p>You don\'t have write access on sqlite file.</p>';
+            $this->notInstalledMessage[] = 'You don\'t have write access on sqlite file.';
+            $msg = FALSE;
         }
 
-        if (! empty($msg)) {
-            $this->notInstalledMessage = $msg;
-
+        if (! $msg) {
             return false;
         }
 
@@ -363,8 +366,8 @@ class Poche
             case 'config':
                 $dev = $this->getPocheVersion('dev');
                 $prod = $this->getPocheVersion('prod');
-                $compare_dev = version_compare(POCHE_VERSION, $dev);
-                $compare_prod = version_compare(POCHE_VERSION, $prod);
+                $compare_dev = version_compare(POCHE, $dev);
+                $compare_prod = version_compare(POCHE, $prod);
                 $themes = $this->getInstalledThemes();
                 $tpl_vars = array(
                     'themes' => $themes,

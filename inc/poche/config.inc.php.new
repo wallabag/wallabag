@@ -52,8 +52,6 @@ define ('CACHE', ROOT . '/cache');
 
 define ('PAGINATION', '10');
 
-define ('POCHE_VERSION', '1.0.0');
-
 define ('POCKET_FILE', '/ril_export.html');
 define ('READABILITY_FILE', '/readability');
 define ('INSTAPAPER_FILE', '/instapaper-export.html');

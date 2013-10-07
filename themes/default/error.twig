@@ -1,6 +1,11 @@
 {% extends "layout.twig" %}
 {% block title %}{% trans "plop" %}{% endblock %}
 {% block content %}
-        {{ msg|raw }}
-        <p>Don't forget <a href="http://inthepoche.com/doc">the documentation</a>.</p>
+    <h1>Errors</h1>
+    <ol>
+        {% for message in msg %}
+            <li>{{message}}</li>
+        {% endfor %}
+    </ol>
+    <p>Don't forget <a href="http://inthepoche.com/doc">the documentation</a>.</p>
 {% endblock %}
