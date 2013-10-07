@@ -67,7 +67,10 @@ if (isset($_GET['login'])) {
     $poche->export();
 } elseif (isset($_GET['updatetheme'])) {
     $poche->updateTheme();
+} elseif (isset($_GET['updatelanguage'])) {
+    $poche->updateLanguage();
 }
+
 elseif (isset($_GET['plainurl']) && !empty($_GET['plainurl'])) {
     $plain_url = new Url(base64_encode($_GET['plainurl']));
     $poche->action('add', $plain_url);

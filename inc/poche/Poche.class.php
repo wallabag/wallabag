@@ -20,6 +20,7 @@ class Poche
     public $pagination;
     
     private $currentTheme = '';
+    private $currentLanguage = '';
     private $notInstalledMessage = array();
     
     # @todo make this dynamic (actually install themes and save them in the database including author information et cetera)
@@ -83,6 +84,15 @@ class Poche
         }
         
         $this->currentTheme = $themeDirectory;
+
+        # Set up language
+        $languageDirectory = $this->user->getConfigValue('language');
+        
+        if ($languageDirectory === false) {
+            $languageDirectory = DEFAULT_THEME;
+        }
+        
+        $this->currentLanguage = $languageDirectory;
     }
 
     public function configFileIsAvailable() {
@@ -253,6 +263,10 @@ class Poche
     public function getTheme() {
         return $this->currentTheme;
     }
+
+    public function getLanguage() {
+        return $this->currentLanguage;
+    }
     
     public function getInstalledThemes() {
         $handle = opendir(THEME);
@@ -275,6 +289,29 @@ class Poche
         }
         
         return $themes;
+    }
+
+    public function getInstalledLanguages() {
+        $handle = opendir(LOCALE);
+        $languages = array();
+        
+        while (($language = readdir($handle)) !== false) {
+            # Languages are stored in a directory, so all directory names are languages
+            # @todo move language installation data to database
+            if (! is_dir(LOCALE . '/' . $language) || in_array($language, array('..', '.'))) {
+                continue;
+            }
+            
+            $current = false;
+            
+            if ($language === $this->getLanguage()) {
+                $current = true;
+            }
+            
+            $languages[] = array('name' => $language, 'current' => $current);
+        }
+        
+        return $languages;
     }
 
     public function getDefaultConfig()
@@ -369,8 +406,10 @@ class Poche
                 $compare_dev = version_compare(POCHE, $dev);
                 $compare_prod = version_compare(POCHE, $prod);
                 $themes = $this->getInstalledThemes();
+                $languages = $this->getInstalledLanguages();
                 $tpl_vars = array(
                     'themes' => $themes,
+                    'languages' => $languages,
                     'dev' => $dev,
                     'prod' => $prod,
                     'compare_dev' => $compare_dev,
@@ -489,6 +528,44 @@ class Poche
         
         $currentConfig = $_SESSION['poche_user']->config;
         $currentConfig['theme'] = $_POST['theme'];
+        
+        $_SESSION['poche_user']->setConfig($currentConfig);
+        
+        Tools::redirect('?view=config');
+    }
+
+    public function updateLanguage()
+    {
+        # no data
+        if (empty($_POST['language'])) {
+        }
+        
+        # we are not going to change it to the current language...
+        if ($_POST['language'] == $this->getLanguage()) {
+            $this->messages->add('w', _('still using the "' . $this->getLanguage() . '" language!'));
+            Tools::redirect('?view=config');
+        }
+        
+        $languages = $this->getInstalledLanguages();
+        $actualLanguage = false;
+        
+        foreach ($languages as $language) {
+            if ($language['name'] == $_POST['language']) {
+                $actualLanguage = true;
+                break;
+            }
+        }
+        
+        if (! $actualLanguage) {
+            $this->messages->add('e', _('that language does not seem to be installed'));
+            Tools::redirect('?view=config');
+        }
+        
+        $this->store->updateUserConfig($this->user->getId(), 'language', $_POST['language']);
+        $this->messages->add('s', _('you have changed your language preferences'));
+        
+        $currentConfig = $_SESSION['poche_user']->config;
+        $currentConfig['language'] = $_POST['language'];
         
         $_SESSION['poche_user']->setConfig($currentConfig);
         
