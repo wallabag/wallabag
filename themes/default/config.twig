@@ -47,6 +47,25 @@
                 <input type="hidden" name="token" value="{{ token }}">
             </form>
 
+            <h2>{% trans "Change your language" %}</h2>
+            <form method="post" action="?updatelanguage" name="changelanguageform">
+                <fieldset class="w500p">
+                    <div class="row">
+                        <label class="col w150p" for="language">{% trans "Language:" %}</label>
+                        <select class="col" id="language" name="language">
+                            {% for language in languages %}
+                            <option value="{{ language.name }}" {{ language.current ? 'selected' : '' }}>{{ language.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="row mts txtcenter">
+                        <button class="bouton" type="submit" tabindex="4">{% trans "Update" %}</button>
+                    </div>
+                </fieldset>
+                <input type="hidden" name="returnurl" value="{{ referer }}">
+                <input type="hidden" name="token" value="{{ token }}">
+            </form>
+
             <h2>{% trans "Change your password" %}</h2>
             <form method="post" action="?config" name="loginform">
                 <fieldset class="w500p">
