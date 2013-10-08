@@ -428,6 +428,9 @@ class Poche
                         $content = $tidy->value;
                     }
 
+                    # Just for WP, see issue #258 (yeah, sorry)
+                    $isIE9WP7Browser = (preg_match("#IEMobile/9.0#", $_SERVER["HTTP_USER_AGENT"])) ? (true) : (false);
+
                     # flattr checking
                     $flattr = new FlattrItem();
                     $flattr->checkItem($entry['url'],$entry['id']);
@@ -435,7 +438,8 @@ class Poche
                     $tpl_vars = array(
                     'entry' => $entry,
                     'content' => $content,
-                    'flattr' => $flattr
+                    'flattr' => $flattr,
+                    'isIE9WP7Browser' => $isIE9WP7Browser,
                     );
                 }
                 else {
