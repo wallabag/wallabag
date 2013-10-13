@@ -4,10 +4,10 @@ themes created by poche users
 
 ## list of themes
 
-* dark ([preview](https://raw.github.com/inthepoche/poche-themes/master/dark/screenshot.jpg))
-* dmagenta ([preview](https://raw.github.com/inthepoche/poche-themes/master/dmagenta/screenshot.jpg))
-* solarized ([preview](https://raw.github.com/inthepoche/poche-themes/master/solarized/screenshot.jpg))
-* solarized-dark ([preview](https://raw.github.com/inthepoche/poche-themes/master/solarized-dark/screenshot.jpg))
+* dark ([preview](https://raw.github.com/inthepoche/poche/master/themes/dark/screenshot.jpg))
+* dmagenta ([preview](https://raw.github.com/inthepoche/poche/master/themes/dmagenta/screenshot.jpg))
+* solarized ([preview](https://raw.github.com/inthepoche/poche/master/themes/solarized/screenshot.jpg))
+* solarized-dark ([preview](https://raw.github.com/inthepoche/poche/master/themes/solarized-dark/screenshot.jpg))
 
 ## installation
 
