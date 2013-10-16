@@ -10,6 +10,8 @@
 
 require_once 'inc/poche/global.inc.php';
 
+session_start();
+
 # Start Poche
 $poche = new Poche();
 $notInstalledMessage = $poche -> getNotInstalledMessage();
@@ -34,7 +36,7 @@ $tpl_vars = array(
 
 if (! empty($notInstalledMessage)) {
     if (! Poche::$canRenderTemplates || ! Poche::$configFileAvailable) {
-        # We cannot use Twig to display the error message 
+        # We cannot use Twig to display the error message
         die($notInstalledMessage);
     } else {
         # Twig is installed, put the error message in the template
