@@ -8,18 +8,23 @@
  * @license    http://www.wtfpl.net/ see COPYING file
  */
 
-define ('SALT', ''); # put a strong string here
+define ('SALT', getenv('POCHE_SALT') || ''); # put a strong string here
 define ('LANG', 'en_EN.utf8');
 
-define ('STORAGE', 'sqlite'); # postgres, mysql or sqlite
+# Use mysql://user:pass@localhost/dbname for MySQL
+# Use postgres://user:pass@localhost/dbname for postgres
+define ('DEFAULT_DATABASE_URL', 'sqlite://' . ROOT . '/db/poche.sqlite');
 
-define ('STORAGE_SQLITE', ROOT . '/db/poche.sqlite'); # if you are using sqlite, where the database file is located
+define ('DATABASE_URL', getenv('DATABASE_URL') ? getenv('DATABASE_URL') : DEFAULT_DATABASE_URL);
+
+define ('STORAGE_SQLITE', parse_url(DATABASE_URL, PHP_URL_PATH)); # if you are using sqlite, where the database file is located
+define ('STORAGE', parse_url(DATABASE_URL, PHP_URL_SCHEME)); # postgres, mysql or sqlite
 
 # only for postgres & mysql
-define ('STORAGE_SERVER', 'localhost');
-define ('STORAGE_DB', 'poche');
-define ('STORAGE_USER', 'poche');
-define ('STORAGE_PASSWORD', 'poche');
+define ('STORAGE_SERVER', parse_url(DATABASE_URL, PHP_URL_HOST));
+define ('STORAGE_DB', basename(parse_url(DATABASE_URL, PHP_URL_PATH)));
+define ('STORAGE_USER', parse_url(DATABASE_URL, PHP_URL_USER));
+define ('STORAGE_PASSWORD', parse_url(DATABASE_URL, PHP_URL_PASS));
 
 #################################################################################
 # Do not trespass unless you know what you are doing
