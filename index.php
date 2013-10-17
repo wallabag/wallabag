@@ -10,6 +10,7 @@
 
 define ('POCHE', '1.0.0');
 require_once 'inc/poche/global.inc.php';
+session_start(); 
 
 # Start Poche
 $poche = new Poche();
