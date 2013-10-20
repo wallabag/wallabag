@@ -81,6 +81,8 @@ if (Session::isLogged()) {
     $poche->action($action, $url, $id);
     $tpl_file = Tools::getTplFile($view);
     $tpl_vars = array_merge($tpl_vars, $poche->displayView($view, $id));
+} elseif(isset($_SERVER['PHP_AUTH_USER'])) {
+    $poche->login($referer);
 } else {
     $tpl_file = Tools::getTplFile('login');
 }
