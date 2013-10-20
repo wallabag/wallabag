@@ -23,7 +23,7 @@
 
             <h2>{% trans "Updating poche" %}</h2>
             <ul>
-                <li>{% trans "your version" %} : <strong>{{ constant('POCHE_VERSION') }}</strong></li>
+                <li>{% trans "your version" %} : <strong>{{ constant('POCHE') }}</strong></li>
                 <li>{% trans "latest stable version" %} : {{ prod }}. {% if compare_prod == -1 %}<strong><a href="http://inthepoche.com/">{% trans "a more recent stable version is available." %}</a></strong>{% else %}{% trans "you are up to date." %}{% endif %}</li>
                 {% if constant('DEBUG_POCHE') == 1 %}<li>{% trans "latest dev version" %} : {{ dev }}. {% if compare_dev == -1 %}<strong><a href="http://inthepoche.com/">{% trans "a more recent development version is available." %}</a></strong>{% else %}{% trans "you are up to date." %}{% endif %}</li>{% endif %}
             </ul>
@@ -47,6 +47,26 @@
                 <input type="hidden" name="token" value="{{ token }}">
             </form>
 
+            <h2>{% trans "Change your language" %}</h2>
+            <form method="post" action="?updatelanguage" name="changelanguageform">
+                <fieldset class="w500p">
+                    <div class="row">
+                        <label class="col w150p" for="language">{% trans "Language:" %}</label>
+                        <select class="col" id="language" name="language">
+                            {% for language in languages %}
+                            <option value="{{ language.name }}" {{ language.current ? 'selected' : '' }}>{{ language.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="row mts txtcenter">
+                        <button class="bouton" type="submit" tabindex="4">{% trans "Update" %}</button>
+                    </div>
+                </fieldset>
+                <input type="hidden" name="returnurl" value="{{ referer }}">
+                <input type="hidden" name="token" value="{{ token }}">
+            </form>
+
+            {% if http_auth == 0 %}
             <h2>{% trans "Change your password" %}</h2>
             <form method="post" action="?config" name="loginform">
                 <fieldset class="w500p">
@@ -65,6 +85,7 @@
                 <input type="hidden" name="returnurl" value="{{ referer }}">
                 <input type="hidden" name="token" value="{{ token }}">
             </form>
+            {% endif %}
 
             <h2>{% trans "Import" %}</h2>
             <p>{% trans "Please execute the import script locally, it can take a very long time." %}</p>

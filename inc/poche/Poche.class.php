@@ -20,7 +20,8 @@ class Poche
     public $pagination;
     
     private $currentTheme = '';
-    private $notInstalledMessage = '';
+    private $currentLanguage = '';
+    private $notInstalledMessage = array();
     
     # @todo make this dynamic (actually install themes and save them in the database including author information et cetera)
     private $installedThemes = array(
@@ -33,28 +34,21 @@ class Poche
 
     public function __construct()
     {
-        if (! $this->configFileIsAvailable()) {
-            return;
+        if ($this->configFileIsAvailable()) {
+            $this->init();
         }
         
-        $this->init();
-        
-        if (! $this->themeIsInstalled()) {
-            return;
+        if ($this->themeIsInstalled()) {
+            $this->initTpl();
         }
         
-        $this->initTpl();
-        
-        if (! $this->systemIsInstalled()) {
-            return;
-        }
-           
-        $this->store = new Database();
-        $this->messages = new Messages();
-
-        # installation
-        if (! $this->store->isInstalled()) {
-            $this->install();
+        if ($this->systemIsInstalled()) {
+            $this->store = new Database();
+            $this->messages = new Messages();
+            # installation
+            if (! $this->store->isInstalled()) {
+                $this->install();
+            }
         }
     }
     
@@ -90,11 +84,20 @@ class Poche
         }
         
         $this->currentTheme = $themeDirectory;
+
+        # Set up language
+        $languageDirectory = $this->user->getConfigValue('language');
+        
+        if ($languageDirectory === false) {
+            $languageDirectory = DEFAULT_THEME;
+        }
+        
+        $this->currentLanguage = $languageDirectory;
     }
 
     public function configFileIsAvailable() {
         if (! self::$configFileAvailable) {
-            $this->notInstalledMessage = 'You have to rename <strong>inc/poche/config.inc.php.new</strong> to <strong>inc/poche/config.inc.php</strong>.';
+            $this->notInstalledMessage[] = 'You have to rename inc/poche/config.inc.php.new to inc/poche/config.inc.php.';
 
             return false;
         }
@@ -103,39 +106,44 @@ class Poche
     }
     
     public function themeIsInstalled() {
+        $passTheme = TRUE;
         # Twig is an absolute requirement for Poche to function. Abort immediately if the Composer installer hasn't been run yet
         if (! self::$canRenderTemplates) {
-            $this->notInstalledMessage = 'Twig does not seem to be installed. Please initialize the Composer installation to automatically fetch dependencies. Have a look at <a href="http://doc.inthepoche.com/doku.php?id=users:begin:install">the documentation.</a>';
-            
-            return false;
+            $this->notInstalledMessage[] = 'Twig does not seem to be installed. Please initialize the Composer installation to automatically fetch dependencies. Have a look at <a href="http://doc.inthepoche.com/doku.php?id=users:begin:install">the documentation.</a>';
+            $passTheme = FALSE;
         }
 
         if (! is_writable(CACHE)) {
-            $this->notInstalledMessage = '<h1>error</h1><p>You don\'t have write access on cache directory.</p>';
+            $this->notInstalledMessage[] = 'You don\'t have write access on cache directory.';
 
             self::$canRenderTemplates = false;
 
-            return false;
+            $passTheme = FALSE;
         } 
         
         # Check if the selected theme and its requirements are present
-        if (! is_dir(THEME . '/' . $this->getTheme())) {
-            $this->notInstalledMessage = 'The currently selected theme (' . $this->getTheme() . ') does not seem to be properly installed (Missing directory: ' . THEME . '/' . $this->getTheme() . ')';
+        if ($this->getTheme() != '' && ! is_dir(THEME . '/' . $this->getTheme())) {
+            $this->notInstalledMessage[] = 'The currently selected theme (' . $this->getTheme() . ') does not seem to be properly installed (Missing directory: ' . THEME . '/' . $this->getTheme() . ')';
             
             self::$canRenderTemplates = false;
             
-            return false;
+            $passTheme = FALSE;
         }
         
         foreach ($this->installedThemes[$this->getTheme()]['requires'] as $requiredTheme) {
             if (! is_dir(THEME . '/' . $requiredTheme)) {
-                $this->notInstalledMessage = 'The required "' . $requiredTheme . '" theme is missing for the current theme (' . $this->getTheme() . ')';
+                $this->notInstalledMessage[] = 'The required "' . $requiredTheme . '" theme is missing for the current theme (' . $this->getTheme() . ')';
                 
                 self::$canRenderTemplates = false;
                 
-                return false;
+                $passTheme = FALSE;
             }
         }
+
+        if (!$passTheme) {
+            return FALSE;
+        }
+
         
         return true;
     }
@@ -147,25 +155,30 @@ class Poche
      */
     public function systemIsInstalled()
     {
-        $msg = '';
+        $msg = TRUE;
         
         $configSalt = defined('SALT') ? constant('SALT') : '';
         
         if (empty($configSalt)) {
-            $msg = '<h1>error</h1><p>You have not yet filled in the SALT value in the config.inc.php file.</p>';
-        } else if (STORAGE == 'sqlite' && ! file_exists(STORAGE_SQLITE)) {
+            $this->notInstalledMessage[] = 'You have not yet filled in the SALT value in the config.inc.php file.';
+            $msg = FALSE;
+        }
+        if (STORAGE == 'sqlite' && ! file_exists(STORAGE_SQLITE)) {
             Tools::logm('sqlite file doesn\'t exist');
-            $msg = '<h1>error</h1><p>sqlite file doesn\'t exist, you can find it in install folder. Copy it in /db folder.</p>';
-        } else if (is_dir(ROOT . '/install') && ! DEBUG_POCHE) {
-            $msg = '<h1>install folder</h1><p>you have to delete the /install folder before using poche.</p>';
-        } else if (STORAGE == 'sqlite' && ! is_writable(STORAGE_SQLITE)) {
+            $this->notInstalledMessage[] = 'sqlite file doesn\'t exist, you can find it in install folder. Copy it in /db folder.';
+            $msg = FALSE;
+        }
+        if (is_dir(ROOT . '/install') && ! DEBUG_POCHE) {
+            $this->notInstalledMessage[] = 'you have to delete the /install folder before using poche.';
+            $msg = FALSE;
+        }
+        if (STORAGE == 'sqlite' && ! is_writable(STORAGE_SQLITE)) {
             Tools::logm('you don\'t have write access on sqlite file');
-            $msg = '<h1>error</h1><p>You don\'t have write access on sqlite file.</p>';
+            $this->notInstalledMessage[] = 'You don\'t have write access on sqlite file.';
+            $msg = FALSE;
         }
 
-        if (! empty($msg)) {
-            $this->notInstalledMessage = $msg;
-
+        if (! $msg) {
             return false;
         }
 
@@ -250,6 +263,10 @@ class Poche
     public function getTheme() {
         return $this->currentTheme;
     }
+
+    public function getLanguage() {
+        return $this->currentLanguage;
+    }
     
     public function getInstalledThemes() {
         $handle = opendir(THEME);
@@ -258,7 +275,7 @@ class Poche
         while (($theme = readdir($handle)) !== false) {
             # Themes are stored in a directory, so all directory names are themes
             # @todo move theme installation data to database
-            if (! is_dir(THEME . '/' . $theme) || in_array($theme, array('..', '.', '.git'))) {
+            if (! is_dir(THEME . '/' . $theme) || in_array($theme, array('..', '.'))) {
                 continue;
             }
             
@@ -271,7 +288,31 @@ class Poche
             $themes[] = array('name' => $theme, 'current' => $current);
         }
         
+        sort($themes);
         return $themes;
+    }
+
+    public function getInstalledLanguages() {
+        $handle = opendir(LOCALE);
+        $languages = array();
+        
+        while (($language = readdir($handle)) !== false) {
+            # Languages are stored in a directory, so all directory names are languages
+            # @todo move language installation data to database
+            if (! is_dir(LOCALE . '/' . $language) || in_array($language, array('..', '.'))) {
+                continue;
+            }
+            
+            $current = false;
+            
+            if ($language === $this->getLanguage()) {
+                $current = true;
+            }
+            
+            $languages[] = array('name' => $language, 'current' => $current);
+        }
+        
+        return $languages;
     }
 
     public function getDefaultConfig()
@@ -363,15 +404,19 @@ class Poche
             case 'config':
                 $dev = $this->getPocheVersion('dev');
                 $prod = $this->getPocheVersion('prod');
-                $compare_dev = version_compare(POCHE_VERSION, $dev);
-                $compare_prod = version_compare(POCHE_VERSION, $prod);
+                $compare_dev = version_compare(POCHE, $dev);
+                $compare_prod = version_compare(POCHE, $prod);
                 $themes = $this->getInstalledThemes();
+                $languages = $this->getInstalledLanguages();
+                $http_auth = (isset($_SERVER['PHP_AUTH_USER']))?true:false;
                 $tpl_vars = array(
                     'themes' => $themes,
+                    'languages' => $languages,
                     'dev' => $dev,
                     'prod' => $prod,
                     'compare_dev' => $compare_dev,
                     'compare_prod' => $compare_prod,
+                    'http_auth' => $http_auth,
                 );
                 Tools::logm('config view');
                 break;
@@ -492,6 +537,59 @@ class Poche
         Tools::redirect('?view=config');
     }
 
+    public function updateLanguage()
+    {
+        # no data
+        if (empty($_POST['language'])) {
+        }
+        
+        # we are not going to change it to the current language...
+        if ($_POST['language'] == $this->getLanguage()) {
+            $this->messages->add('w', _('still using the "' . $this->getLanguage() . '" language!'));
+            Tools::redirect('?view=config');
+        }
+        
+        $languages = $this->getInstalledLanguages();
+        $actualLanguage = false;
+        
+        foreach ($languages as $language) {
+            if ($language['name'] == $_POST['language']) {
+                $actualLanguage = true;
+                break;
+            }
+        }
+        
+        if (! $actualLanguage) {
+            $this->messages->add('e', _('that language does not seem to be installed'));
+            Tools::redirect('?view=config');
+        }
+        
+        $this->store->updateUserConfig($this->user->getId(), 'language', $_POST['language']);
+        $this->messages->add('s', _('you have changed your language preferences'));
+        
+        $currentConfig = $_SESSION['poche_user']->config;
+        $currentConfig['language'] = $_POST['language'];
+        
+        $_SESSION['poche_user']->setConfig($currentConfig);
+        
+        Tools::redirect('?view=config');
+    }
+
+    /**
+     * get credentials from differents sources
+     * it redirects the user to the $referer link
+     * @return array
+     */
+     private function credentials() {
+         if(isset($_SERVER['PHP_AUTH_USER'])) {
+             return array($_SERVER['PHP_AUTH_USER'],'php_auth');
+         }
+         if(!empty($_POST['login']) && !empty($_POST['password'])) {
+             return array($_POST['login'],$_POST['password']);
+         }
+         return array(false,false);
+     }
+
     /**
      * checks if login & password are correct and save the user in session.
      * it redirects the user to the $referer link
@@ -501,20 +599,22 @@ class Poche
      */
     public function login($referer)
     {
-        if (!empty($_POST['login']) && !empty($_POST['password'])) {
-            $user = $this->store->login($_POST['login'], Tools::encodeString($_POST['password'] . $_POST['login']));
+        list($login,$password)=$this->credentials();
+        if($login === false || $password === false) {
+            $this->messages->add('e', _('login failed: you have to fill all fields'));
+            Tools::logm('login failed');
+            Tools::redirect();
+        }
+        if (!empty($login) && !empty($password)) {
+            $user = $this->store->login($login, Tools::encodeString($password . $login));
             if ($user != array()) {
                 # Save login into Session
-                Session::login($user['username'], $user['password'], $_POST['login'], Tools::encodeString($_POST['password'] . $_POST['login']), array('poche_user' => new User($user)));
+                Session::login($user['username'], $user['password'], $login, Tools::encodeString($password . $login), array('poche_user' => new User($user)));
                 $this->messages->add('s', _('welcome to your poche'));
                 Tools::logm('login successful');
                 Tools::redirect($referer);
             }
             $this->messages->add('e', _('login failed: bad login or password'));
-            Tools::logm('login failed');
-            Tools::redirect();
-        } else {
-            $this->messages->add('e', _('login failed: you have to fill all fields'));
             Tools::logm('login failed');
             Tools::redirect();
         }

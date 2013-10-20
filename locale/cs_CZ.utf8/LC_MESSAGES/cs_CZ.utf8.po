@@ -1,0 +1,233 @@
+#
+# Translators:
+# David Štancl <dstancl@gmail.com>, 2013
+msgid ""
+msgstr ""
+"Project-Id-Version: poche\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2013-10-08 13:25+0100\n"
+"Last-Translator: Nicolas Lœuillet <nicolas.loeuillet@gmail.com>\n"
+"Language-Team: Czech (http://www.transifex.com/projects/p/poche/language/"
+"cs/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: cs\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Poedit 1.5.4\n"
+
+msgid "config"
+msgstr "nastavení"
+
+msgid "Poching a link"
+msgstr "Odkaz se ukládá"
+
+msgid "read the documentation"
+msgstr "číst dokumentaci"
+
+msgid "by filling this field"
+msgstr "vyplněním tohoto pole"
+
+msgid "poche it!"
+msgstr "uložit!"
+
+msgid "Updating poche"
+msgstr "Poche se aktualizuje"
+
+msgid "your version"
+msgstr "vaše verze"
+
+msgid "latest stable version"
+msgstr "poslední stabilní verze"
+
+msgid "a more recent stable version is available."
+msgstr "je k dispozici novější stabilní verze."
+
+msgid "you are up to date."
+msgstr "je aktuální"
+
+msgid "latest dev version"
+msgstr "poslední vývojová verze"
+
+msgid "a more recent development version is available."
+msgstr "je k dispozici novější vývojová verze."
+
+msgid "Change your password"
+msgstr "Změnit heslo"
+
+msgid "New password:"
+msgstr "Nové heslo:"
+
+msgid "Password"
+msgstr "Heslo"
+
+msgid "Repeat your new password:"
+msgstr "Znovu nové heslo:"
+
+msgid "Update"
+msgstr "Aktualizovat"
+
+msgid "Import"
+msgstr "Importovat"
+
+msgid "Please execute the import script locally, it can take a very long time."
+msgstr "Spusťte importní skript lokálně, může to dlouho trvat."
+
+msgid "More infos in the official doc:"
+msgstr "Více informací v oficiální dokumentaci:"
+
+msgid "import from Pocket"
+msgstr "importovat z Pocket"
+
+msgid "import from Readability"
+msgstr "importovat z Readability"
+
+msgid "import from Instapaper"
+msgstr "importovat z Instapaper"
+
+msgid "Export your poche datas"
+msgstr "Export dat"
+
+msgid "Click here"
+msgstr "Klikněte zde"
+
+msgid "to export your poche datas."
+msgstr "pro export vašich dat."
+
+msgid "back to home"
+msgstr "zpět na úvod"
+
+msgid "installation"
+msgstr "instalace"
+
+msgid "install your poche"
+msgstr "instalovat"
+
+msgid ""
+"poche is still not installed. Please fill the below form to install it. "
+"Don't hesitate to <a href='http://inthepoche.com/doc'>read the documentation "
+"on poche website</a>."
+msgstr ""
+"poche ještě není nainstalováno. Pro instalaci vyplňte níže uvedený formulář. "
+"Nezapomeňte <a href='http://inthepoche.com/doc'>si přečíst dokumentaci</a> "
+"na stránkách programu."
+
+msgid "Login"
+msgstr "Jméno"
+
+msgid "Repeat your password"
+msgstr "Zopakujte heslo"
+
+msgid "Install"
+msgstr "Instalovat"
+
+msgid "back to top"
+msgstr "zpět na začátek"
+
+msgid "favoris"
+msgstr "oblíbené"
+
+msgid "archive"
+msgstr "archív"
+
+msgid "unread"
+msgstr "nepřečtené"
+
+msgid "by date asc"
+msgstr "podle data od nejstarších"
+
+msgid "by date"
+msgstr "podle data"
+
+msgid "by date desc"
+msgstr "podle data od nejnovějších"
+
+msgid "by title asc"
+msgstr "podle nadpisu vzestupně"
+
+msgid "by title"
+msgstr "podle nadpisu"
+
+msgid "by title desc"
+msgstr "podle nadpisu sestupně"
+
+msgid "No link available here!"
+msgstr "Není k dispozici žádný odkaz!"
+
+msgid "toggle mark as read"
+msgstr "označit jako přečtené"
+
+msgid "toggle favorite"
+msgstr "označit jako oblíbené"
+
+msgid "delete"
+msgstr "smazat"
+
+msgid "original"
+msgstr "originál"
+
+msgid "results"
+msgstr "výsledky"
+
+msgid "tweet"
+msgstr "tweetnout"
+
+msgid "email"
+msgstr "email"
+
+msgid "shaarli"
+msgstr "shaarli"
+
+msgid "flattr"
+msgstr "flattr"
+
+msgid "this article appears wrong?"
+msgstr "vypadá tento článek špatně?"
+
+msgid "create an issue"
+msgstr "odeslat požadavek"
+
+msgid "or"
+msgstr "nebo"
+
+msgid "contact us by mail"
+msgstr "kontaktovat e-mailem"
+
+msgid "plop"
+msgstr ""
+
+msgid "home"
+msgstr "domů"
+
+msgid "favorites"
+msgstr "oblíbené"
+
+msgid "logout"
+msgstr "odhlásit se"
+
+msgid "powered by"
+msgstr "běží na"
+
+msgid "debug mode is on so cache is off."
+msgstr "je zapnut ladicí mód, proto je keš vypnuta."
+
+msgid "your poche version:"
+msgstr "verze:"
+
+msgid "storage:"
+msgstr "úložiště:"
+
+msgid "login to your poche"
+msgstr "přihlásit se k poche"
+
+msgid "you are in demo mode, some features may be disabled."
+msgstr "používáte ukázkový mód, některé funkce jsou zakázány."
+
+msgid "Stay signed in"
+msgstr "Zůstat přihlášen(a)"
+
+msgid "(Do not check on public computers)"
+msgstr "(Nezaškrtávejte na veřejně dostupných počítačích)"
+
+msgid "Sign in"
+msgstr "Přihlásit se"
