@@ -66,6 +66,7 @@
                 <input type="hidden" name="token" value="{{ token }}">
             </form>
 
+            {% if http_auth == 0 %}
             <h2>{% trans "Change your password" %}</h2>
             <form method="post" action="?config" name="loginform">
                 <fieldset class="w500p">
@@ -84,6 +85,7 @@
                 <input type="hidden" name="returnurl" value="{{ referer }}">
                 <input type="hidden" name="token" value="{{ token }}">
             </form>
+            {% endif %}
 
             <h2>{% trans "Import" %}</h2>
             <p>{% trans "Please execute the import script locally, it can take a very long time." %}</p>

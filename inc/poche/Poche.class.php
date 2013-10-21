@@ -408,6 +408,7 @@ class Poche
                 $compare_prod = version_compare(POCHE, $prod);
                 $themes = $this->getInstalledThemes();
                 $languages = $this->getInstalledLanguages();
+                $http_auth = (isset($_SERVER['PHP_AUTH_USER']))?true:false;
                 $tpl_vars = array(
                     'themes' => $themes,
                     'languages' => $languages,
@@ -415,6 +416,7 @@ class Poche
                     'prod' => $prod,
                     'compare_dev' => $compare_dev,
                     'compare_prod' => $compare_prod,
+                    'http_auth' => $http_auth,
                 );
                 Tools::logm('config view');
                 break;
@@ -574,6 +576,21 @@ class Poche
     }
 
     /**
+     * get credentials from differents sources
+     * it redirects the user to the $referer link
+     * @return array
+     */
+     private function credentials() {
+         if(isset($_SERVER['PHP_AUTH_USER'])) {
+             return array($_SERVER['PHP_AUTH_USER'],'php_auth');
+         }
+         if(!empty($_POST['login']) && !empty($_POST['password'])) {
+             return array($_POST['login'],$_POST['password']);
+         }
+         return array(false,false);
+     }
+
+    /**
      * checks if login & password are correct and save the user in session.
      * it redirects the user to the $referer link
      * @param  string $referer the url to redirect after login
@@ -582,20 +599,22 @@ class Poche
      */
     public function login($referer)
     {
-        if (!empty($_POST['login']) && !empty($_POST['password'])) {
-            $user = $this->store->login($_POST['login'], Tools::encodeString($_POST['password'] . $_POST['login']));
+        list($login,$password)=$this->credentials();
+        if($login === false || $password === false) {
+            $this->messages->add('e', _('login failed: you have to fill all fields'));
+            Tools::logm('login failed');
+            Tools::redirect();
+        }
+        if (!empty($login) && !empty($password)) {
+            $user = $this->store->login($login, Tools::encodeString($password . $login));
             if ($user != array()) {
                 # Save login into Session
-                Session::login($user['username'], $user['password'], $_POST['login'], Tools::encodeString($_POST['password'] . $_POST['login']), array('poche_user' => new User($user)));
+                Session::login($user['username'], $user['password'], $login, Tools::encodeString($password . $login), array('poche_user' => new User($user)));
                 $this->messages->add('s', _('welcome to your poche'));
                 Tools::logm('login successful');
                 Tools::redirect($referer);
             }
             $this->messages->add('e', _('login failed: bad login or password'));
-            Tools::logm('login failed');
-            Tools::redirect();
-        } else {
-            $this->messages->add('e', _('login failed: you have to fill all fields'));
             Tools::logm('login failed');
             Tools::redirect();
         }

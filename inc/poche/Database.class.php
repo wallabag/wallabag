@@ -87,6 +87,17 @@ class Database {
         return $user_config;
     }
 
+    public function userExists($username) {
+        $sql = "SELECT * FROM users WHERE username=?";
+        $query = $this->executeQuery($sql, array($username));
+        $login = $query->fetchAll();
+        if (isset($login[0])) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function login($username, $password) {
         $sql = "SELECT * FROM users WHERE username=? AND password=?";
         $query = $this->executeQuery($sql, array($username, $password));
