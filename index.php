@@ -81,8 +81,18 @@ if (Session::isLogged()) {
     $poche->action($action, $url, $id);
     $tpl_file = Tools::getTplFile($view);
     $tpl_vars = array_merge($tpl_vars, $poche->displayView($view, $id));
+} elseif(isset($_SERVER['PHP_AUTH_USER'])) {
+    if($poche->store->userExists($_SERVER['PHP_AUTH_USER'])) {
+        $poche->login($referer);
+    } else {
+        $poche->messages->add('e', _('login failed: user doesn\'t exist'));
+        Tools::logm('user doesn\'t exist');
+        $tpl_file = Tools::getTplFile('login');
+        $tpl_vars['http_auth'] = 1;
+    }
 } else {
     $tpl_file = Tools::getTplFile('login');
+    $tpl_vars['http_auth'] = 0;
 }
 
 # because messages can be added in $poche->action(), we have to add this entry now (we can add it before)
