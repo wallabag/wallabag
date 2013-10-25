@@ -1613,6 +1613,7 @@ class SimplePie_Misc
 			case 'utf7':
 				return 'UTF-7';
 
+			case 'utf8lias':
 			case 'utf8':
 				return 'UTF-8';
 
