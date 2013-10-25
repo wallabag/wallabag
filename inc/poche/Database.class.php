@@ -87,6 +87,17 @@ class Database {
         return $user_config;
     }
 
+    public function userExists($username) {
+        $sql = "SELECT * FROM users WHERE username=?";
+        $query = $this->executeQuery($sql, array($username));
+        $login = $query->fetchAll();
+        if (isset($login[0])) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function login($username, $password) {
         $sql = "SELECT * FROM users WHERE username=? AND password=?";
         $query = $this->executeQuery($sql, array($username, $password));
@@ -108,8 +119,8 @@ class Database {
     public function updatePassword($userId, $password)
     {
         $sql_update = "UPDATE users SET password=? WHERE id=?";
-        $params_update = array($password, $id);
-        $this->updateUserConfig($userId, 'password', $password);
+        $params_update = array($password, $userId);
+        $query = $this->executeQuery($sql_update, $params_update);
     }
     
     public function updateUserConfig($userId, $key, $value) {

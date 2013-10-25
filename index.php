@@ -8,7 +8,9 @@
  * @license    http://www.wtfpl.net/ see COPYING file
  */
 
+define ('POCHE', '1.1.0');
 require_once 'inc/poche/global.inc.php';
+session_start(); 
 
 # Start Poche
 $poche = new Poche();
@@ -35,7 +37,12 @@ $tpl_vars = array(
 if (! empty($notInstalledMessage)) {
     if (! Poche::$canRenderTemplates || ! Poche::$configFileAvailable) {
         # We cannot use Twig to display the error message 
-        die($notInstalledMessage);
+        echo '<h1>Errors</h1><ol>';
+        foreach ($notInstalledMessage as $message) {
+            echo '<li>' . $message . '</li>';
+        }
+        echo '</ol>';
+        die();
     } else {
         # Twig is installed, put the error message in the template
         $tpl_file = Tools::getTplFile('error');
@@ -61,7 +68,10 @@ if (isset($_GET['login'])) {
     $poche->export();
 } elseif (isset($_GET['updatetheme'])) {
     $poche->updateTheme();
+} elseif (isset($_GET['updatelanguage'])) {
+    $poche->updateLanguage();
 }
+
 elseif (isset($_GET['plainurl']) && !empty($_GET['plainurl'])) {
     $plain_url = new Url(base64_encode($_GET['plainurl']));
     $poche->action('add', $plain_url);
@@ -71,8 +81,18 @@ if (Session::isLogged()) {
     $poche->action($action, $url, $id);
     $tpl_file = Tools::getTplFile($view);
     $tpl_vars = array_merge($tpl_vars, $poche->displayView($view, $id));
+} elseif(isset($_SERVER['PHP_AUTH_USER'])) {
+    if($poche->store->userExists($_SERVER['PHP_AUTH_USER'])) {
+        $poche->login($referer);
+    } else {
+        $poche->messages->add('e', _('login failed: user doesn\'t exist'));
+        Tools::logm('user doesn\'t exist');
+        $tpl_file = Tools::getTplFile('login');
+        $tpl_vars['http_auth'] = 1;
+    }
 } else {
     $tpl_file = Tools::getTplFile('login');
+    $tpl_vars['http_auth'] = 0;
 }
 
 # because messages can be added in $poche->action(), we have to add this entry now (we can add it before)

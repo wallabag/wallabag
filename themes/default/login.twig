@@ -2,6 +2,7 @@
 
 {% block title %}{% trans "login to your poche" %}{% endblock %}
 {% block content %}
+    {% if http_auth == 0 %}
             <form method="post" action="?login" name="loginform">
                 <fieldset class="w500p center">
                     <h2 class="mbs txtcenter">{% trans "login to your poche" %}</h2>
@@ -29,4 +30,5 @@
                 <input type="hidden" name="returnurl" value="{{ referer }}">
                 <input type="hidden" name="token" value="{{ token }}">
             </form>
+    {% endif %}
 {% endblock %}
