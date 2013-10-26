@@ -327,7 +327,7 @@ class Poche
     /**
      * Call action (mark as fav, archive, delete, etc.)
      */
-    public function action($action, Url $url, $id = 0, $import = FALSE)
+    public function action($action, Url $url, $id = 0, $import = FALSE, $autoclose = FALSE)
     {
         switch ($action)
         {
@@ -358,7 +358,11 @@ class Poche
                 }
 
                 if (!$import) {
-                    Tools::redirect('?view=home');
+                    if ($autoclose == TRUE) {
+                      Tools::redirect('?view=home');
+                    } else {
+                      Tools::redirect('?view=home&autoclose=true');
+                    }
                 }
                 break;
             case 'delete':
