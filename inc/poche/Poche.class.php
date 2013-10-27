@@ -361,7 +361,7 @@ class Poche
                     if ($autoclose == TRUE) {
                       Tools::redirect('?view=home');
                     } else {
-                      Tools::redirect('?view=home&autoclose=true');
+                      Tools::redirect('?view=home&closewin=true');
                     }
                 }
                 break;
