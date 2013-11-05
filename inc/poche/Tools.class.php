@@ -53,12 +53,12 @@ class Tools
 
         $scriptname = str_replace('/index.php', '/', $_SERVER["SCRIPT_NAME"]);
 
-        if (!isset($_SERVER["SERVER_NAME"])) {
+        if (!isset($_SERVER["HTTP_HOST"])) {
             return $scriptname;
         }
 
         return 'http' . ($https ? 's' : '') . '://'
-            . $_SERVER["SERVER_NAME"] . $serverport . $scriptname;
+            . $_SERVER["HTTP_HOST"] . $serverport . $scriptname;
     }
 
     public static function redirect($url = '')
