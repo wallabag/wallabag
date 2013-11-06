@@ -1,0 +1,145 @@
+@import url("../../../assets/css/app.css");
+
+body {
+    background: #222;
+    color: #efefef;
+}
+
+h1, h2, h3 {
+    color: #999;
+}
+
+a {
+    color: #ccc;
+}
+
+a:hover {
+    color: #fff;
+}
+
+pre, code {
+    color: #fff;
+    background: #555;
+    border-color: #888;
+}
+
+.page-header h2 {
+    border-bottom: 1px dotted #555;
+}
+
+.items article {
+    border: 1px dotted #333;
+    background-color: #222;
+    margin-top: 20px
+}
+
+.items p {
+    color: #666;
+}
+
+.items article:hover .preview,
+.items #current-item .preview {
+    color: #aaa;
+}
+
+.items #current-item {
+    border: 3px solid #999;
+}
+
+.item h1 a {
+    color: #eee;
+}
+
+.item h1 a:visited {
+    color: #888;
+}
+
+.infos {
+    color: #777;
+}
+
+.item .infos a {
+    color: #666;
+}
+
+.item {
+    color: #efefef;
+}
+
+.item nav span,
+.item nav a,
+.item nav a:visited {
+    color: #bbb;
+}
+
+blockquote {
+    color: #999;
+}
+
+blockquote + p {
+    color: #999;
+}
+
+nav .active a {
+    color: #ccc;
+}
+
+.logo {
+    color: #efefef;
+}
+
+.alert,
+.alert-success,
+.alert-error,
+.alert-info,
+.alert-normal {
+    color: #efefef;
+    background-color: #333;
+    border-color: #444;
+}
+
+input[type="email"],
+input[type="tel"],
+input[type="password"],
+input[type="text"] {
+    border: 1px solid #333;
+    background: #111;
+    color: #ccc;
+}
+
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="password"]:focus,
+input[type="text"]:focus,
+textarea:focus {
+    color: #efefef;
+    border-color: rgba(82, 168, 236, 0.8);
+    box-shadow: 0 0 8px rgba(82, 168, 236, 0.6);
+}
+
+::-webkit-input-placeholder {
+    color: #666;
+}
+
+::-ms-input-placeholder {
+    color: #666;
+}
+
+::-moz-placeholder {
+    color: #666;
+}
+
+.btn-red,
+.btn-blue {
+    border-color: #444;
+    background: #333;
+    color: #efefef;
+}
+
+.btn-red:hover,
+.btn-red:focus,
+.btn-blue:hover,
+.btn-blue:focus {
+    border-color: #888;
+    background: #555;
+}
