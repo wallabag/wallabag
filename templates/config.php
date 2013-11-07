@@ -74,11 +74,11 @@
                 <a href="javascript:location.href='<?= Helper\get_current_base_url() ?>?action=insert&amp;url='+encodeURIComponent(location.href)"><?= t('poche it!') ?></a> (<?= t('Drag and drop this link to your bookmarks') ?>)
             <li>
                 <?= t('Unread RSS Feed:') ?>
-                <a href="<?= Helper\get_current_base_url().'feed.php?token='.urlencode($values['feed_token']).'&amp;status=unread' ?>" target="_blank"><?= Helper\get_current_base_url().'feed.php?token='.urlencode($values['feed_token']).'&amp;status=unread' ?></a>
+                <a href="<?= Helper\get_current_base_url().'feed.php?id='.$values['id'].'&amp;token='.urlencode($values['feed_token']).'&amp;status=unread' ?>" target="_blank"><?= Helper\get_current_base_url().'feed.php?id='.$values['id'].'&amp;token='.urlencode($values['feed_token']).'&amp;status=unread' ?></a>
             </li>
             <li>
                 <?= t('Bookmarks RSS Feed:') ?>
-                <a href="<?= Helper\get_current_base_url().'feed.php?token='.urlencode($values['feed_token']).'&amp;status=bookmarks' ?>" target="_blank"><?= Helper\get_current_base_url().'feed.php?token='.urlencode($values['feed_token']).'&amp;status=bookmarks' ?></a>
+                <a href="<?= Helper\get_current_base_url().'feed.php?id='.$values['id'].'&amp;token='.urlencode($values['feed_token']).'&amp;status=bookmarks' ?>" target="_blank"><?= Helper\get_current_base_url().'feed.php?id='.$values['id'].'&amp;token='.urlencode($values['feed_token']).'&amp;status=bookmarks' ?></a>
             </li>
             <li><?= t('API endpoint:') ?> <strong><?= Helper\get_current_base_url().'jsonrpc.php' ?></strong></li>
             <li><?= t('API username:') ?> <strong><?= Helper\escape($values['username']) ?></strong></li>
