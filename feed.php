@@ -11,7 +11,9 @@ use PicoFarad\Request;
 use PicoFeed\Writers\Atom;
 
 // Check token
-$feed_token = Model\get_config_value('feed_token');
+$user_id = Request\param('id');
+$user = Model\get_user_by_id($user_id);
+$feed_token = $user['feed_token'];
 $request_token = Request\param('token');
 
 // Check status
@@ -41,18 +43,18 @@ $writer->site_url = Helper\get_current_base_url();
 $writer->feed_url = $writer->site_url.'feed.php?token='.urlencode($feed_token).'&status='.(urlencode($request_status));
 
 if ($request_status === 'bookmarks') {
-    $items = Model\get_bookmarks();
+    $items = Model\get_bookmarks($user_id);
 }
 elseif ($request_status === 'tag') {
     $tag_id = Request\param('value', 0);
-    $items = Model\get_entries_by_tag($tag_id);
+    $items = Model\get_entries_by_tag($tag_id, $user_id);
 } else {
-    $items = Model\get_items('unread');
+    $items = Model\get_items('unread', $user_id);
 }
 
 foreach ($items as $item) {
 
-    $article = Model\get_item($item['id']);
+    $article = Model\get_item($item['id'], $user_id);
 
     $writer->items[] = array(
         'id' => $article['id'],

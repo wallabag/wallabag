@@ -656,6 +656,15 @@ function get_config()
 }
 
 
+function get_user_by_id($id)
+{
+    return \PicoTools\singleton('db')
+        ->table('users')
+        ->eq('id', $id)
+        ->findOne();
+}
+
+
 function get_user($username)
 {
     return \PicoTools\singleton('db')
