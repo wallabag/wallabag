@@ -109,19 +109,19 @@ Router\get_action('show', function() {
 
     $id = Request\param('id');
     $menu = Request\param('menu');
-    $item = Model\get_item($id, $_SESSION['user']['id']);
+    $item = Model\get_item($id, Model\get_user_id());
     $tags = Model\get_tags_by_item($id);
 
     switch ($menu) {
         case 'unread':
-            $nav = Model\get_nav_item($item, $_SESSION['user']['id']);
-            $nb_unread_items = Model\count_entries('unread', $_SESSION['user']['id']);
+            $nav = Model\get_nav_item($item, Model\get_user_id());
+            $nb_unread_items = Model\count_entries('unread', Model\get_user_id());
             break;
         case 'history':
-            $nav = Model\get_nav_item($item, $_SESSION['user']['id'], array('read'));
+            $nav = Model\get_nav_item($item, Model\get_user_id(), array('read'));
             break;
         case 'bookmarks':
-            $nav = Model\get_nav_item($item, $_SESSION['user']['id'], array('unread', 'read'), array(1));
+            $nav = Model\get_nav_item($item, Model\get_user_id(), array('unread', 'read'), array(1));
             break;
     }
 
@@ -143,7 +143,7 @@ Router\get_action('mark-item-read', function() {
     $redirect = Request\param('redirect', 'unread');
     $offset = Request\int_param('offset', 0);
 
-    Model\set_item_read($id, $_SESSION['user']['id']);
+    Model\set_item_read($id, Model\get_user_id());
 
     Response\Redirect('?action='.$redirect.'&offset='.$offset.'#item-'.$id);
 });
@@ -156,7 +156,7 @@ Router\get_action('mark-item-unread', function() {
     $redirect = Request\param('redirect', 'history');
     $offset = Request\int_param('offset', 0);
 
-    Model\set_item_unread($id, $_SESSION['user']['id']);
+    Model\set_item_unread($id, Model\get_user_id());
 
     Response\Redirect('?action='.$redirect.'&offset='.$offset.'#item-'.$id);
 });
@@ -169,7 +169,7 @@ Router\get_action('mark-item-removed', function() {
     $redirect = Request\param('redirect', 'history');
     $offset = Request\int_param('offset', 0);
 
-    Model\set_item_removed($id, $_SESSION['user']['id']);
+    Model\set_item_removed($id, Model\get_user_id());
 
     Response\Redirect('?action='.$redirect.'&offset='.$offset);
 });
@@ -179,7 +179,7 @@ Router\get_action('mark-item-removed', function() {
 Router\post_action('mark-item-read', function() {
 
     $id = Request\param('id');
-    Model\set_item_read($id, $_SESSION['user']['id']);
+    Model\set_item_read($id, Model\get_user_id());
     Response\json(array('Ok'));
 });
 
@@ -188,7 +188,7 @@ Router\post_action('mark-item-read', function() {
 Router\post_action('mark-item-unread', function() {
 
     $id = Request\param('id');
-    Model\set_item_unread($id, $_SESSION['user']['id']);
+    Model\set_item_unread($id, Model\get_user_id());
     Response\json(array('Ok'));
 });
 
@@ -196,11 +196,11 @@ Router\post_action('mark-item-unread', function() {
 // Ajax call change item status
 Router\post_action('change-item-status', function() {
 
-    $id = Request\param('id', $_SESSION['user']['id']);
+    $id = Request\param('id', Model\get_user_id());
 
     Response\json(array(
         'item_id' => $id,
-        'status' => Model\switch_item_status($id, $_SESSION['user']['id'])
+        'status' => Model\switch_item_status($id, Model\get_user_id())
     ));
 });
 
@@ -211,7 +211,7 @@ Router\post_action('bookmark', function() {
     $id = Request\param('id');
     $value = Request\int_param('value');
 
-    Model\set_bookmark_value($id, $value, $_SESSION['user']['id']);
+    Model\set_bookmark_value($id, $value, Model\get_user_id());
 
     Response\json(array('id' => $id, 'value' => $value));
 });
@@ -225,7 +225,7 @@ Router\get_action('bookmark', function() {
     $source = Request\param('source', 'unread');
     $offset = Request\int_param('offset', 0);
 
-    Model\set_bookmark_value($id, Request\int_param('value'), $_SESSION['user']['id']);
+    Model\set_bookmark_value($id, Request\int_param('value'), Model\get_user_id());
 
     if ($source === 'show') {
         Response\Redirect('?action=show&menu='.$menu.'&id='.$id);
@@ -259,12 +259,12 @@ Router\post_action('search', function() {
 Router\get_action('history', function() {
 
     $offset = Request\int_param('offset', 0);
-    $nb_items = Model\count_entries('read', $_SESSION['user']['id']);
+    $nb_items = Model\count_entries('read', Model\get_user_id());
 
     Response\html(Template\layout('history', array(
         'items' => Model\get_items(
             'read',
-            $_SESSION['user']['id'],
+            Model\get_user_id(),
             $offset,
             $_SESSION['user']['items_per_page'],
             'updated',
@@ -302,7 +302,7 @@ Router\get_action('tag', function() {
     $offset = Request\int_param('offset', 0);
     $id = Request\int_param('id', 0);
     $tag = Model\get_tag($id);
-    $items = Model\get_entries_by_tag($id, $_SESSION['user']['id']);
+    $items = Model\get_entries_by_tag($id, Model\get_user_id());
     $nb_items = count($items);
 
     Response\html(Template\layout('tag', array(
@@ -352,7 +352,7 @@ Router\post_action('edit-tags', function() {
 Router\get_action('edit-tags', function() {
 
     $id = Request\int_param('id', 0);
-    $item = Model\get_item($id, $_SESSION['user']['id']);
+    $item = Model\get_item($id, Model\get_user_id());
     $tags = Model\get_tags_by_item($id);
 
     Response\html(Template\layout('edit-tags', array(
@@ -368,12 +368,12 @@ Router\get_action('edit-tags', function() {
 Router\get_action('bookmarks', function() {
 
     $offset = Request\int_param('offset', 0);
-    $nb_items = Model\count_bookmarks($_SESSION['user']['id']);
+    $nb_items = Model\count_bookmarks(Model\get_user_id());
 
     Response\html(Template\layout('bookmarks', array(
         'order' => '',
         'direction' => '',
-        'items' => Model\get_bookmarks($_SESSION['user']['id'], $offset, $_SESSION['user']['items_per_page']),
+        'items' => Model\get_bookmarks(Model\get_user_id(), $offset, $_SESSION['user']['items_per_page']),
         'nb_items' => $nb_items,
         'offset' => $offset,
         'items_per_page' => $_SESSION['user']['items_per_page'],
@@ -386,7 +386,7 @@ Router\get_action('bookmarks', function() {
 // Mark all unread items as read
 Router\get_action('mark-as-read', function() {
 
-    Model\mark_as_read($_SESSION['user']['id']);
+    Model\mark_as_read(Model\get_user_id());
     Response\redirect('?action=unread');
 });
 
@@ -394,7 +394,7 @@ Router\get_action('mark-as-read', function() {
 // Mark sent items id as read (Ajax request)
 Router\post_action('mark-items-as-read', function(){
 
-    Model\mark_items_as_read(Request\values(), $_SESSION['user']['id']);
+    Model\mark_items_as_read(Request\values(), Model\get_user_id());
     Response\json(array('OK'));
 });
 
@@ -434,7 +434,7 @@ Router\action('insert', function() {
     }
 
     $url = trim($url);
-    $result = Model\add_link($url, $_SESSION['user']['id']);
+    $result = Model\add_link($url, Model\get_user_id());
 
     if ($result) {
 
@@ -682,8 +682,8 @@ Router\notfound(function() {
     $order = Request\param('order', 'updated');
     $direction = Request\param('direction', $_SESSION['user']['items_sorting_direction']);
     $offset = Request\int_param('offset', 0);
-    $items = Model\get_items('unread', $_SESSION['user']['id'], $offset, $_SESSION['user']['items_per_page'], $order, $direction);
-    $nb_items = Model\count_entries('unread', $_SESSION['user']['id']);
+    $items = Model\get_items('unread', Model\get_user_id(), $offset, $_SESSION['user']['items_per_page'], $order, $direction);
+    $nb_items = Model\count_entries('unread', Model\get_user_id());
 
     if ($nb_items === 0) Response\redirect('?action=links&nothing_to_read=1');
 

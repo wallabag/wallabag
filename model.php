@@ -108,6 +108,12 @@ function write_debug()
 }
 
 
+function get_user_id()
+{
+    return $_SESSION['user']['id'];
+}
+
+
 function generate_token()
 {
     if (ini_get('open_basedir') === '') {
