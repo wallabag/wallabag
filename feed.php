@@ -33,7 +33,7 @@ if ($feed_token !== $request_token) {
 }
 
 // Load translations
-$language = Model\get_config_value('language') ?: 'en_US';
+$language = $user['language'] ?: 'en_US';
 if ($language !== 'en_US') PicoTools\Translator\load($language);
 
 // Build Feed
