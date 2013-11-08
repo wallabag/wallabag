@@ -1,0 +1,449 @@
+th {
+    text-align: left;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    padding-top: 20px;
+    padding-bottom: 5px;
+    clear: left;
+    margin-bottom: 5px;
+    margin-top: 0px;
+}
+
+h1 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+h1.file {
+    position: fixed;
+    width: 100%;
+    background: #f0f0f0 url('../images/icons/file-php.png') no-repeat left 2px;
+    padding: 10px;
+    padding-left: 34px;
+    margin: 0px;
+    border-bottom: 1px solid silver;
+}
+
+#file-nav-box
+{
+    position:         fixed;
+    width:            100%;
+    top:              39px;
+    display:          none;
+}
+
+#file-nav {
+    margin:  0px;
+    padding: 0px;
+}
+
+#file-nav-options {
+    float: right;
+    border-bottom: 1px solid #e9e9e9;
+    border-left: 1px solid #e9e9e9;
+    border-bottom-left-radius: 5px;
+    padding: 5px;
+    padding-right: 20px;
+    background: #f7f7f7;
+}
+
+#file-nav li {
+    list-style-type: square;
+}
+
+#file-nav > li {
+    float: left;
+    list-style: none;
+}
+
+#file-nav > li > a {
+    font-weight: bold;
+}
+
+#file-nav li a {
+    display: block;
+    padding: 0px 5px;
+    text-decoration: none;
+    color: black;
+    white-space: nowrap;
+}
+
+#file-nav li a:hover {
+    background: #f6f6f6;
+}
+
+#file-nav-container {
+    background: #f9f9f9;
+    display: none;
+}
+
+#file-nav-tab {
+    margin: 0px auto;
+    width: 200px;
+    text-align: center;
+    font-weight: bold;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-left: 1px solid #e9e9e9;
+    border-right: 1px solid #e9e9e9;
+    border-bottom: 1px solid #e9e9e9;
+    background: #f9f9f9;
+}
+
+#file-description
+{
+    padding-top: 60px;
+}
+
+h2 {
+    color: navy;
+    padding-top: 30px;
+}
+
+h2.class, h2.interface {
+    clear: both;
+}
+
+h4 {
+    font-style: italic;
+    margin-bottom: 5px;
+    margin-top: 20px;
+    padding-top: 0px;
+}
+
+h4.method, h4.function {
+    margin: 0px;
+    font-size: 1.15em;
+    color: teal;
+}
+
+h4.info {
+    margin-top: 0px;
+    margin-left: 10px;
+}
+
+.file_menu {
+    background-color: #f0f0f0;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 3px;
+    margin-bottom: 5px;
+}
+
+.file_menu a {
+    border-right: 1px solid silver;
+    padding: 0px 10px;
+}
+
+.file_menu a:last-of-type {
+    border: none;
+}
+
+.file-info, .class-info {
+    border-left: 1px solid #5f9ea0;
+    padding: 5px 0px 5px 7px;
+}
+
+dl.function-info, dl.constant-info {
+    width: 100%;
+}
+
+dt {
+    float: left;
+    clear: left;
+}
+
+dd {
+    display: block;
+    margin-bottom: 0em;
+    margin-left: 150px;
+}
+
+dd, dt {
+    background: transparent;
+}
+
+dd pre {
+    margin: 0px;
+    background: #f9f9f9;
+}
+
+p, div dl, h4.arguments, div.arguments {
+    margin-left: 10px;
+}
+
+table.argument-info {
+    font-size: 1.0em;
+}
+
+table.argument-info tr.odd {
+    background-color: #f0f0f0;
+}
+
+table.argument-info thead {
+    background-color: #f9f9f9;
+    border-bottom: 1px dashed gray;
+    color: gray;
+}
+
+code {
+    background:   #f9f9f9;
+    color:        #707079;
+    font-weight:  bold;
+}
+
+code span.highlight {
+    color: navy;
+    font-size: 1.1em;
+    font-family: helvetica sans-serif;
+    padding-right: 5px;
+}
+
+code a {
+    color: silver;
+}
+
+div.class code, div.function code, div.property code,
+div.method code, div.constant code
+{
+    display: block;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 5px 10px;
+    margin-right: 5px;
+}
+
+div.long-description {
+    font-size: 1.0em;
+    padding: 5px;
+    background: #f9f9f9;
+}
+
+div.long-description p {
+    margin-bottom: 0em;
+}
+
+div.long-description code {
+    display:       inline;
+    margin-left:   0px;
+    background:    gray;
+    white-space:   pre;
+    color:         white;
+    border-bottom: none;
+    padding:       3px 10px;
+}
+
+div.long-description pre code {
+    padding: 0px;
+    font-size: 0.8em;
+}
+
+div.long-description pre {
+    background: gray;
+    color: white;
+    padding: 5px 10px;
+    margin-right: 5px;
+}
+
+div.constant dd, div.constant dt,
+div.property dd, div.property dt,
+.function-info dd, .function-info dt,
+.return-info dd, .return-info dt {
+    float: left;
+}
+
+div.constant dt, div.property dt, .function-info dt, .return-info dt {
+    width: 150px;
+    clear: left;
+    word-wrap: break-word;
+}
+
+.file-info dd, .class-info dd {
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.file-info dd a.class {
+    background: transparent url('../images/icons/class.png') no-repeat 0px 0px;
+    padding-left: 20px;
+    margin-left: -10px;
+}
+
+.file-info dd a.interface {
+    background: transparent url('../images/icons/interface.png') no-repeat 0px 0px;
+    padding-left: 20px;
+    margin-left: -10px;
+}
+
+.file-info dd a.function {
+    background: transparent url('../images/icons/function.png') no-repeat 0px 0px;
+    padding-left: 20px;
+    margin-left: -10px;
+}
+
+.file-info dd a.constant, .class-info dd a.constant {
+    background: transparent url('../images/icons/constant.png') no-repeat 0px 0px;
+    padding-left: 20px;
+    margin-left: -10px;
+}
+
+.class-info dd a.property {
+    background: transparent url('../images/icons/property.png') no-repeat 0px 0px;
+    padding-left: 20px;
+    margin-left: -10px;
+}
+
+.class-info dd a.method {
+    background: transparent url('../images/icons/method.png') no-repeat 0px 0px;
+    padding-left: 20px;
+    margin-left: -10px;
+}
+
+h3.constant, h4.constant {
+    background: transparent url('../images/icons/constant.png') no-repeat 0px 20px;
+    padding-left: 20px;
+}
+
+h3.function {
+    background: transparent url('../images/icons/function.png') no-repeat 0px 20px;
+    padding-left: 20px;
+}
+
+h4.method {
+    background: transparent url('../images/icons/method.png') no-repeat 0px 0px;
+    padding-left: 20px;
+}
+
+h4.property {
+    background: transparent url('../images/icons/property.png') no-repeat 0px 0px;
+    padding-left: 20px;
+}
+
+h2.class {
+    background: transparent url('../images/icons/class.png') no-repeat left 31px;
+    padding-left: 20px;
+}
+
+h2.interface {
+    background: transparent url('../images/icons/interface.png') no-repeat left 31px;
+    padding-left: 20px;
+}
+
+h4.constant {
+    background-position: 0px 0px;
+}
+
+div.api-section {
+    background: #fbfbfb;
+    border: 1px solid #eee;
+    margin-top: 5px;
+    padding: 5px;
+}
+
+div.api-section h4, div.api-section h5 {
+    font-size: 1em;
+    font-style: italic;
+    margin-top: 3px;
+    padding-top: 0px;
+}
+
+div.clear {
+    clear: left;
+}
+
+div.class {
+    padding-left: 20px;
+}
+
+div.constant, div.function, div.method, div.property {
+    border: 1px solid silver;
+    border-bottom: none;
+}
+
+div.method div.description {
+    padding: 10px;
+    padding-top: 0px;
+}
+
+div.method div.description small {
+    color: silver;
+    display: block;
+}
+
+div.method div.description small a {
+    color: gray;
+}
+
+div.class h3 {
+    color: navy;
+}
+
+div.to-top {
+    float: right;
+    text-align: right;
+    width: 100px;
+    font-size: 11px;
+    font-variant: small-caps;
+    font-style: normal;
+}
+
+div.to-top a {
+    color: silver;
+    padding-right: 10px;
+}
+
+span.attribute {
+    padding: 2px 5px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    background: gray;
+    font-weight: bold;
+    font-variant: small-caps;
+    color: white;
+    font-size: 0.92em;
+}
+
+div.method span.attribute, div.property span.attribute {
+    float: right;
+}
+
+div.code-tabs {
+    margin-left: 24px;
+}
+
+a.gripper {
+    display: none;
+    float: left;
+    background-color: #f0f0f0;
+    height: 50px;
+    width: 13px;
+    margin: 5px 10px 5px 0px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border: 1px solid silver;
+    border-left: none;
+}
+
+a.gripper img {
+    margin-top: 6px;
+    width: 12px;
+}
+
+div.inherited_from code span.highlight {
+    color: gray;
+}
+
+small.package {
+    margin-top: -10px;
+    display: block;
+}
+
+.argument-info p
+{
+    margin: 0px;
+}
+
+a.anchor {
+    position: absolute;
+    margin-top: -60px;
+    left: -1000px;
+}

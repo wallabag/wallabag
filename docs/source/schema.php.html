@@ -1,0 +1,136 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+/**
+ * Schema of database
+ *
+ * @package poche
+ * @subpackage schema
+ * @license    http://www.gnu.org/licenses/agpl-3.0.html  GNU Affero GPL
+ * @author     Nicolas L&oelig;uillet &lt;support@inthepoche.com&gt;
+ */
+namespace Schema;
+
+/**
+ * First version of database
+ *
+ * @param  pdo $pdo PDO instanciation
+ */
+function version_1($pdo)
+{
+    $pdo-&gt;exec(&quot;
+        CREATE TABLE config (
+            language TEXT DEFAULT 'en_US',
+            items_per_page INTEGER DEFAULT 100,
+            theme TEXT DEFAULT 'original',
+            items_sorting_direction TEXT DEFAULT 'desc'
+        )
+    &quot;);
+
+    $pdo-&gt;exec(&quot;
+        CREATE TABLE users (
+            id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE,
+            username TEXT DEFAULT 'poche',
+            password TEXT,
+            email TEXT,
+            language TEXT DEFAULT 'en_US',
+            items_per_page INTEGER DEFAULT 100,
+            theme TEXT DEFAULT 'original',
+            items_sorting_direction TEXT DEFAULT 'desc',
+            api_token TEXT DEFAULT '&quot;.\Model\generate_token().&quot;',
+            feed_token TEXT DEFAULT '&quot;.\Model\generate_token().&quot;',
+            auth_google_token TEXT DEFAULT '',
+            auth_mozilla_token TEXT DEFAULT ''
+        )
+    &quot;);
+
+    $pdo-&gt;exec(&quot;
+        INSERT INTO users
+        (password)
+        VALUES ('&quot;.\password_hash('poche', PASSWORD_BCRYPT).&quot;')
+    &quot;);
+
+    $pdo-&gt;exec('
+        CREATE TABLE entries (
+            id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE,
+            url TEXT,
+            title TEXT,
+            content TEXT,
+            updated INTEGER,
+            status TEXT,
+            bookmark INTEGER DEFAULT 0,
+            fetched INTEGER DEFAULT 1, 
+            user_id INTEGER,
+            FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+        )
+    ');
+
+    $pdo-&gt;exec('CREATE INDEX idx_status ON entries(status)');
+
+    $pdo-&gt;exec('
+        CREATE TABLE tags (
+            id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE,
+            value TEXT
+        )
+    ');
+
+    $pdo-&gt;exec('
+        CREATE TABLE tags_entries (
+            id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE,
+            entry_id INTEGER,
+            tag_id INTEGER,
+            FOREIGN KEY(entry_id) REFERENCES entries(id) ON DELETE CASCADE,
+            FOREIGN KEY(tag_id) REFERENCES tags(id) ON DELETE CASCADE
+        )
+    ');
+
+    $pdo-&gt;exec(&quot;
+        CREATE TABLE plugin_options (
+            name TEXT PRIMARY KEY,
+            value TEXT
+        )
+    &quot;);
+}
+</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all()
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

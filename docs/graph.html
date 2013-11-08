@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>API Documentation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="css/template.css" type="text/css" />
+    <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery.tools.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script>
+    <script type="text/javascript" src="js/template.js"></script>
+  </head>
+  <body>
+    <script type="text/javascript" src="js/jquery.panzoom.js"></script>
+    <script>
+            $(document).ready(function () {
+                $('#pan').css('width', jQuery(document).width() - 15);
+                $('#pan').css('height', jQuery(document).height() - jQuery('#intro').height() - 15);
+                $('#pan img').panZoom({
+                    'directedit': true,
+                    'debug':      false,
+                    'zoom_step':  9
+                });
+                $('#pan img').panZoom('fit');
+            });
+
+            $(window).resize(function () {
+                $('#pan').css('width', jQuery(document).width() - 15);
+                $('#pan').css('height', jQuery(document).height() - jQuery('#intro').height() - 15);
+                $('#pan img').css('width', jQuery('#pan').width());
+                $('#pan img').css('height', jQuery('#pan').height());
+            });
+        </script>
+    <div id="content">
+      <div id="intro" style="font-size: 10px; white-space: normal;">
+                The following actions are supported in this diagram:
+                <ul><li><b>Zoom</b>, you can use the scrollwheel, or double-click,
+                        to zoom in or out
+                    </li><li><b>Move</b>, you can move around by dragging
+                        the Diagram
+                    </li></ul></div>
+      <div id="pan" style="overflow: hidden">
+        <img src="classes.svg" />
+      </div>
+    </div>
+  </body>
+</html>

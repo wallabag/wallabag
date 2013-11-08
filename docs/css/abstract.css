@@ -1,0 +1,202 @@
+@import url('sen.full.min.css');
+
+html, body, #page {
+    height: 99.9%;
+    width: 100%;
+}
+
+#frameset {
+    overflow:hidden;
+}
+
+body {
+    /*font: 80% / 1.5em Arial, Helvetica, "DejaVu Sans", "Liberation sans", "Bitstream Vera Sans", sans-serif*/
+}
+
+#sidebar  {
+    width: 200px;
+}
+
+h2 {
+    margin-top: 25px;
+}
+
+h3 {
+    margin: 0 0 0 0.2em;
+}
+
+#sidebar ul {
+    list-style: none;
+    padding: 0px;
+    margin: 0 0 1.5em 0em;
+}
+
+#sidebar ul ul {
+    margin: 0 0 0 0.6em;
+}
+
+#sidebar, #contents {
+    height:100%;
+}
+
+#sidebar iframe, #contents iframe {
+    height: 100%;
+    width: 100%;
+    border: none;
+}
+
+div.success_notification {
+    margin: 5px;
+    padding: 5px;
+    padding-left: 35px;
+    background: #f9f9f9 url('../images/icons/ok.png') no-repeat 5px center;
+    border: 1px solid silver;
+}
+
+#marker-accordion h3 small {
+    float: right;
+    padding: 2px 5px;
+    margin-right: 20px;
+}
+
+span.attribute {
+    padding: 2px 6px;
+    background: #F0F0F0;
+    display: inline-block;
+    border-radius: 3px;
+    margin: 0px 4px;
+    font-weight: bold;
+    color: gray;
+    border: 1px solid silver;
+    font-size: 0.9em;
+}
+
+.description small.inherited_from {
+    display: none;
+}
+
+.to-top {
+    float:        right;
+    margin-right: 20px;
+    font-size:    0.6em;
+}
+
+#marker-accordion h3 {
+    margin-top: 20px;
+}
+
+#marker-accordion h3 a {
+    text-decoration: none;
+    cursor:          text;
+}
+
+#marker-accordion h3 small {
+    float:         right;
+    cursor:        text;
+    background:    #F0F0F0;
+    border:        1px solid silver;
+    font-weight:   normal;
+    border-radius: 3px;
+}
+
+.code-tabs code {
+    display: block;
+    padding: 10px;
+}
+
+#file-nav-tab {
+    display: none;
+}
+
+#file-nav-options {
+    text-align: right;
+}
+
+#file-nav-box {
+    position: fixed;
+    top:      10px;
+    right:    10px;
+}
+
+#file-nav-container {
+    overflow:      auto;
+    max-height:    400px;
+    background:    #f5f5f5;
+    padding:       5px;
+    border:        1px solid silver;
+    border-radius: 3px;
+}
+
+ul#file-nav {
+    margin:     0px;
+    list-style: none;
+}
+
+ul#file-nav ul {
+    list-style: none;
+}
+
+.gripper {
+    display: none;
+}
+
+div.property, div.method, div.function, div.constant {
+    border:     1px solid silver;
+    margin-top: 10px;
+    padding:    5px;
+}
+
+div.class {
+    border-left:  1px solid #e0e0ff;
+    padding-left: 15px;
+}
+
+code.title {
+    font-size:     0.97em;
+    font-weight:   bold;
+    color:         gray;
+    background:    #F9F9F9;
+    padding:       3px;
+    display:       block;
+    border-bottom: 1px solid #F0F0F0;
+    margin-bottom: 3px;
+}
+
+span.highlight {
+    color: #504CC9;
+}
+
+code.title img {
+    padding-right: 5px;
+}
+
+#content table {
+    font-size: 0.9em;
+    border:    1px solid #f0f0f0;
+    margin:    5px;
+}
+
+#content tr {
+    border-bottom: 1px solid #f0f0f0;
+}
+
+#content th {
+    background: #f9f9f9;
+    min-width:  100px;
+    text-align: left;
+}
+
+div.sidebar-section ul span {
+    background: transparent no-repeat top left;
+    padding-left: 20px;
+}
+
+div.sidebar-section ul span.method    { background-image: url('../images/icons/method.png'); }
+div.sidebar-section ul span.function  { background-image: url('../images/icons/function.png'); }
+div.sidebar-section ul span.class     { background-image: url('../images/icons/class.png'); }
+div.sidebar-section ul span.interface { background-image: url('../images/icons/interface.png'); }
+div.sidebar-section ul span.constant  { background-image: url('../images/icons/constant.png'); }
+div.sidebar-section ul span.property  { background-image: url('../images/icons/property.png'); }
+div.sidebar-section ul span.package   { background-image: url('../images/icons/folder.gif'); }
+div.sidebar-section ul span.namespace { background-image: url('../images/icons/namespace.png'); }
+div.sidebar-section ul span.file      { background-image: url('../images/icons/file.gif'); }

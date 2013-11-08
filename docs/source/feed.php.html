@@ -1,0 +1,113 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+
+require 'common.php';
+require 'vendor/PicoTools/Helper.php';
+require 'vendor/PicoFarad/Response.php';
+require 'vendor/PicoFarad/Request.php';
+require 'vendor/PicoFeed/Writers/Atom.php';
+
+use PicoFarad\Response;
+use PicoFarad\Request;
+use PicoFeed\Writers\Atom;
+
+// Check token
+$user_id = Request\param('id');
+$user = Model\get_user_by_id($user_id);
+$feed_token = $user['feed_token'];
+$request_token = Request\param('token');
+
+// Check status
+$authorized_status = array(
+    'unread',
+    'bookmarks',
+    'tag'
+    );
+$request_status = Request\param('status');
+
+if ($request_status === '' || !in_array($request_status, $authorized_status)) {
+    $request_status = 'unread';
+}
+
+if ($feed_token !== $request_token) {
+    Response\text('Access Forbidden', 403);
+}
+
+// Load translations
+$language = $user['language'] ?: 'en_US';
+if ($language !== 'en_US') PicoTools\Translator\load($language);
+
+// Build Feed
+$writer = new Atom;
+$writer-&gt;title = ucfirst($request_status) . ' - poche';
+$writer-&gt;site_url = Helper\get_current_base_url();
+$writer-&gt;feed_url = $writer-&gt;site_url.'feed.php?token='.urlencode($feed_token).'&amp;status='.(urlencode($request_status));
+
+if ($request_status === 'bookmarks') {
+    $items = Model\get_bookmarks($user_id);
+}
+elseif ($request_status === 'tag') {
+    $tag_id = Request\param('value', 0);
+    $items = Model\get_entries_by_tag($tag_id, $user_id);
+} else {
+    $items = Model\get_items('unread', $user_id);
+}
+
+foreach ($items as $item) {
+
+    $article = Model\get_item($item['id'], $user_id);
+
+    $writer-&gt;items[] = array(
+        'id' =&gt; $article['id'],
+        'title' =&gt; $article['title'],
+        'updated' =&gt; $article['updated'],
+        'url' =&gt; $article['url'],
+        'content' =&gt; $article['content'],
+    );
+}
+
+Response\xml($writer-&gt;execute());
+</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all()
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,39 @@
+@import url('sen.full.min.css');
+@import url('jquery-ui.css');
+@import url('phpdoc/jquery-ui-1.8.16.custom.css');
+@import url('jquery.treeview.css');
+@import url('navigation.css');
+@import url('api-content.css');
+@import url('default.css');
+
+#page
+{
+  background: white;
+}
+
+#db-header, #db-menu
+{
+  height: 1px;
+  background: black;
+  padding: 0px;
+}
+
+#db-header *, #db-menu * {
+    display: none !important;
+}
+
+table#overview th
+{
+  text-align: left;
+}
+
+table#overview td
+{
+  border: none;
+}
+
+td#sidebar
+{
+  width: 200px;
+  padding: 0px;
+}

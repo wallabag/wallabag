@@ -1,0 +1,251 @@
+html, body, #page
+{
+  height: 99.9%;
+  width:  100%;
+}
+
+#frameset {
+    overflow:hidden;
+}
+
+body
+{
+    font: 80% / 1.5em Arial, Helvetica, "DejaVu Sans", "Liberation sans", "Bitstream Vera Sans", sans-serif
+}
+
+#db-header, #menubar
+{
+  height: 1px;
+}
+
+#contents {
+    margin-left: 260px;
+}
+
+#sidebar {
+    height: 100%;
+    width: 100%;
+    background: #232325;
+    overflow: auto;
+    color: #f9f9ff
+}
+
+#sidebar-header {
+    border-bottom: 1px solid #333333;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+#sidebar-footer {
+    position: relative;
+    bottom: 0;
+    font-size: 0.7em;
+    color: gray;
+    padding: 15px 5px 5px;
+    border-top: 1px solid #333333;
+    margin-top: 10px;
+}
+
+#sidebar-footer a {
+    color: gray;
+}
+
+#sidebar-header h1 {
+    font-size: 1.2em;
+    padding: 0;
+    margin: 0;
+    display: inline;
+}
+
+#sidebar-logo {
+    float: left;
+    padding-right: 10px;
+}
+
+#sidebar-nav h3 {
+    width: 100%;
+}
+
+#sidebar-nav h3 img {
+    float: right;
+    height: 22px;
+    padding-top: 6px;
+    padding-right: 7px;
+}
+
+#sidebar-nav h3#sidebar-files img {
+    height: auto;
+    margin-top: 2px;
+}
+
+#sidebar-nav {
+    font-size: 1.1em;
+}
+
+.ui-accordion-header {
+    background-image: none;
+    border: none;
+    font-size: 1.1em;
+}
+
+.ui-accordion .sidebar-section {
+    overflow: auto;
+    border-bottom-right-radius: 10px;
+}
+
+.ui-accordion .ui-accordion-content {
+    padding: 0px;
+    padding-bottom: 10px;
+}
+
+.sidebar-section div.search-bar {
+    height: 19px;
+    border-bottom: 1px solid silver;
+    background: #f9f9f9;
+    padding: 6px 3px 4px 3px;
+}
+
+.sidebar-section ul {
+    margin: 10px 10px 0px 32px;
+}
+
+.sidebar-section ul ul, .sidebar-section ul.sidebar-nav-tree {
+    margin: 0px;
+}
+
+.sidebar-section div.search-bar div {
+    padding-right: 48px;
+}
+
+.sidebar-section div.search-bar a {
+    float: right;
+    margin-right: 5px;
+}
+
+.sidebar-section div.search-bar div input {
+    border-radius: 3px;
+    background: white url('images/search.gif') no-repeat right top;
+}
+
+#sidebar, #contents {
+    height:100%;
+}
+
+#sidebar iframe, #contents iframe
+{
+  height: 100%;
+  width:  100%;
+  border: none;
+}
+
+.footer, #footer
+{
+  display: block;
+  clear: both;
+}
+
+#accordion table, #marker-accordion table
+{
+    font-size: 0.95em;
+}
+
+#marker-accordion h3 a small
+{
+    display:        block;
+    float:          right;
+    background:     gray;
+    height:         18px;
+    line-height:    18px;
+    padding:        0px 5px;
+    border-radius:  3px;
+    color:          white;
+    font-weight:    bold;
+}
+
+ul#menu
+{
+  background:         black;
+  display:            block;
+  height:             34px;
+  line-height:        22px;
+  padding:            0px;
+  margin:             0px;
+  font-size:          0.8em;
+}
+
+ul#menu li
+{
+  padding:      0px 10px;
+  margin:       5px 0px;
+  border-right: 1px solid gray;
+  display:      block;
+  float:        left;
+}
+
+ul#menu li:last-of-type
+{
+  border: none;
+}
+
+ul#menu li a
+{
+  color:   white;
+  display: block;
+}
+
+ul.filetree li a
+{
+  display: block;
+}
+
+ul.filetree li a small
+{
+  display: none;
+}
+
+ul.filetree li a:hover small
+{
+  display: inline;
+  color:   gray;
+}
+
+.ui-resizable-helper
+{
+    border-right: 40px solid silver;
+    margin-right: -40px;
+
+    /* 20% opacity; zoom is required for IE */
+    zoom: 1;
+    filter: alpha(opacity = 20);
+    opacity: 0.2;
+}
+
+.splitterMask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: transparent;
+    z-index: 20000;
+}
+
+.vsplitbar {
+    width: 5px;
+    background: #f0f0f0;
+}
+
+.resizable {
+    margin: 0px;
+    padding: 0px;
+}
+
+div.success_notification
+{
+    margin: 5px;
+    padding: 5px;
+    padding-left: 35px;
+    background: #f9f9f9 url('../images/icons/ok.png') no-repeat 5px center;
+    border: 1px solid silver;
+}

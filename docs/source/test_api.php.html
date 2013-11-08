@@ -1,0 +1,118 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+require 'vendor/JsonRPC/Client.php';
+
+use JsonRPC\Client;
+
+$client = new Client('http://localhost/poche/2/jsonrpc.php');
+$client-&gt;authentication('admin', 'PYBRAYc4ebUuRoa');
+
+$user_id = 1;
+
+# poche a link
+// $result = $client-&gt;execute('item.add', array('http://cdetc.fr', $user_id));
+
+# fetch all bookmarks
+// $result = $client-&gt;execute('item.bookmark.list', array($user_id));
+
+# count bookmarks
+// $result = $client-&gt;execute('item.bookmark.count', array($user_id));
+
+# add a bookmark
+// $result = $client-&gt;execute('item.bookmark.create', array(1, $user_id));
+
+# delete a bookmark
+// $result = $client-&gt;execute('item.bookmark.delete', array(1, $user_id));
+
+# get all unread items
+// $result = $client-&gt;execute('item.list_unread', array($user_id));
+
+# count all unread items
+// $result = $client-&gt;execute('item.count_unread', array($user_id));
+
+# get all read items
+// $result = $client-&gt;execute('item.list_read', array($user_id));
+
+# count all read items
+// $result = $client-&gt;execute('item.count_read', array($user_id));
+
+# get one item
+// $result = $client-&gt;execute('item.info', array(1, $user_id));
+
+# delete one item
+// $result = $client-&gt;execute('item.delete', array(1, $user_id));
+
+# mark item as read
+// $result = $client-&gt;execute('item.mark_as_read', array(1, $user_id));
+
+# mark item as unread
+// $result = $client-&gt;execute('item.mark_as_unread', array(1, $user_id));
+
+# change the status of list of items
+// $result = $client-&gt;execute('item.set_list_status', array('unread', array(1, 2, 3), $user_id));
+
+# mark all unread items as read
+// $result = $client-&gt;execute('item.mark_all_as_read', array($user_id));
+
+# get one tag
+// $result = $client-&gt;execute('tag.info', array(1));
+
+# remove a tag to an entry
+// $result = $client-&gt;execute('tag.remove', array(16, 3));
+
+# count tags
+// $result = $client-&gt;execute('tag.count');
+
+# tags list
+// $result = $client-&gt;execute('tag.list');
+
+# list of items with this tag
+// $result = $client-&gt;execute('tag.item.list', array(2, $user_id));
+
+# list of tags for an item
+// $result = $client-&gt;execute('item.tag.list', array(3));
+
+print_r($result);</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all()
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,92 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+
+// PHP 5.3 minimum
+if (version_compare(PHP_VERSION, '5.3.0', '&lt;')) {
+    die('This software require PHP 5.3.0 minimum');
+}
+
+// Short tags must be enabled for PHP &lt; 5.4
+if (version_compare(PHP_VERSION, '5.4.0', '&lt;')) {
+
+    if (! ini_get('short_open_tag')) {
+        die('This software require to have short tags enabled, check your php.ini =&gt; &quot;short_open_tag = On&quot;');
+    }
+}
+
+// Old libxml2 version are not supported (Debian Lenny is too old)
+if (version_compare(LIBXML_DOTTED_VERSION, '2.7.0', '&lt;')) {
+    die('This software require at least libxml2 version 2.7.0');
+}
+
+// Check XML functions
+if (! function_exists('simplexml_load_string')) {
+    die('PHP extension required: SimpleXML');
+}
+
+if (! function_exists('xml_parser_create')) {
+    die('PHP extension required: XML Parser');
+}
+
+if (! function_exists('dom_import_simplexml')) {
+    die('PHP extension required: DOM');
+}
+
+// Check PDO Sqlite
+if (! extension_loaded('pdo_sqlite')) {
+    die('PHP extension required: pdo_sqlite');
+}
+
+// Check for curl
+if (! function_exists('curl_init') &amp;&amp; ! ini_get('allow_url_fopen')) {
+    die('You must have &quot;allow_url_fopen=On&quot; or curl extension installed');
+}
+
+// Check if /data is writeable
+if (! is_writable('data')) {
+    die('The directory &quot;data&quot; must be writeable by your web server user');
+}
+</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all()
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>
