@@ -2,16 +2,17 @@
     <h2><?php echo t('Preferences') ?></h2>
 </div>
 <section>
+    <?php if (DEMO_MODE): ?><div class="alert alert-error">In demo mode, you can't change the password.</div><?php endif;?>
 <form method="post" action="?action=config" autocomplete="off">
 
     <?php echo Helper\form_label(t('Username'), 'username') ?>
-    <?php echo Helper\form_text('username', $values, $errors, array('required')) ?><br/>
+    <?php echo Helper\form_text('username', $values, $errors, array('required', 'readonly')) ?><br/>
 
     <?php echo Helper\form_label(t('Password'), 'password') ?>
-    <?php echo Helper\form_password('password', $values, $errors) ?><br/>
+    <?php echo Helper\form_password('password', $values, $errors, (!DEMO_MODE?array():array('disabled'))) ?><br/>
 
     <?php echo Helper\form_label(t('Confirmation'), 'confirmation') ?>
-    <?php echo Helper\form_password('confirmation', $values, $errors) ?><br/>
+    <?php echo Helper\form_password('confirmation', $values, $errors, (!DEMO_MODE?array():array('disabled'))) ?><br/>
 
     <?php echo Helper\form_label(t('Language'), 'language') ?>
     <?php echo Helper\form_select('language', $languages, $values, $errors) ?><br/>
