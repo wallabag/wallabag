@@ -461,7 +461,7 @@ Router\action('insert', function() {
 // Re-generate tokens
 Router\get_action('generate-tokens', function() {
 
-    Model\new_tokens();
+    Model\new_tokens(Model\get_user_id());
     Response\redirect('?action=config#api');
 });
 
@@ -590,7 +590,7 @@ Router\get_action('google-link', function() {
 
     if ($valid) {
         $_SESSION['user']['auth_google_token'] = $token;
-        Model\save_auth_token('google', $token);
+        Model\save_auth_token('google', $token, Model\get_user_id());
         Session\flash(t('Your Google Account is linked to poche.'));
     }
     else {
@@ -663,7 +663,7 @@ Router\post_action('mozilla-link', function() {
 
     if ($valid && $user != null) {
         $_SESSION['user']['auth_mozilla_token'] = $token;
-        Model\save_auth_token('mozilla', $token);
+        Model\save_auth_token('mozilla', $token, Model\get_user_id());
         Session\flash(t('Your Mozilla Persona Account is linked to poche.'));
     }
     else {

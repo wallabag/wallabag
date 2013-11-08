@@ -172,10 +172,11 @@ function generate_token()
 
 /**
  * Update user profile to store new tokens
- * 
+ *
+ * @param  int $user_id id of the user
  * @return boolean
  */
-function new_tokens()
+function new_tokens($user_id)
 {
     $values = array(
         'api_token' => generate_token(),
@@ -186,7 +187,7 @@ function new_tokens()
         $_SESSION['user'][$key] = $value;
     }
 
-    return \PicoTools\singleton('db')->table('users')->eq('username', $_SESSION['user']['username'])->update($values);
+    return \PicoTools\singleton('db')->table('users')->eq('id', $user_id)->update($values);
 }
 
 
@@ -195,13 +196,14 @@ function new_tokens()
  * 
  * @param  string $type  name of the service (eg: google, mozilla)
  * @param  string $value the new token
+ * @param  int $user_id id of the user
  * @return boolean
  */
-function save_auth_token($type, $value)
+function save_auth_token($type, $value, $user_id)
 {
     return \PicoTools\singleton('db')
         ->table('users')
-        ->eq('username', $_SESSION['user']['username'])
+        ->eq('id', $user_id)
         ->update(array(
             'auth_'.$type.'_token' => $value
         ));
