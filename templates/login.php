@@ -10,40 +10,40 @@
         <link rel="apple-touch-icon" sizes="114x114" href="./assets/img/touch-icon-iphone-retina.png">
         <link rel="apple-touch-icon" sizes="144x144" href="./assets/img/touch-icon-ipad-retina.png">
         <title>poche</title>
-        <link href="<?= Helper\css() ?>" rel="stylesheet" media="screen">
+        <link href="<?php echo Helper\css() ?>" rel="stylesheet" media="screen">
         <script type="text/javascript" src="?action=js" defer></script>
         <script type="text/javascript" src="assets/js/persona.js" defer></script>
     </head>
     <body id="login-page">
         <section class="page">
             <div class="page-header">
-                <h2><?= t('Sign in') ?></h2>
+                <h2><?php echo t('Sign in') ?></h2>
             </div>
             <section>
 
             <?php if (isset($errors['login'])): ?>
-                <p class="alert alert-error"><?= Helper\escape($errors['login']) ?></p>
+                <p class="alert alert-error"><?php echo Helper\escape($errors['login']) ?></p>
             <?php endif ?>
 
             <form method="post" action="?action=login">
 
-                <?= Helper\form_label(t('Username'), 'username') ?>
-                <?= Helper\form_text('username', $values, $errors, array('autofocus', 'required')) ?><br/>
+                <?php echo Helper\form_label(t('Username'), 'username') ?>
+                <?php echo Helper\form_text('username', $values, $errors, array('autofocus', 'required')) ?><br/>
 
-                <?= Helper\form_label(t('Password'), 'password') ?>
-                <?= Helper\form_password('password', $values, $errors, array('required')) ?>
+                <?php echo Helper\form_label(t('Password'), 'password') ?>
+                <?php echo Helper\form_password('password', $values, $errors, array('required')) ?>
 
-                <p><br/><a href="?action=google-redirect-auth"><?= t('Login with my Google Account') ?></a></p>
-                <p><br/><a href="#" data-action="mozilla-login"><?= t('Login with my Mozilla Persona Account') ?></a></p>
+                <p><br/><a href="?action=google-redirect-auth"><?php echo t('Login with my Google Account') ?></a></p>
+                <p><br/><a href="#" data-action="mozilla-login"><?php echo t('Login with my Mozilla Persona Account') ?></a></p>
 
                 <div class="form-actions">
-                    <input type="submit" value="<?= t('Sign in') ?>" class="btn btn-blue"/>
+                    <input type="submit" value="<?php echo t('Sign in') ?>" class="btn btn-blue"/>
                 </div>
             </form>
             </section>
         </section>
          <footer>
-            <p><?= t('powered by <a href="http://inthepoche.com">poche</a>') ?></p>
+            <p><?php echo t('powered by <a href="http://inthepoche.com">poche</a>') ?></p>
          </footer>
     </body>
 </html>

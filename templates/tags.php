@@ -1,9 +1,9 @@
 <?php if (empty($tags)): ?>
-    <p class="alert alert-info"><?= t('No tag') ?></p>
+    <p class="alert alert-info"><?php echo t('No tag') ?></p>
 <?php else: ?>
 
     <div class="page-header">
-        <h2><?= t('Tags') ?> (<?= $nb_items ?>)</h2>
+        <h2><?php echo t('Tags') ?> (<?php echo $nb_items ?>)</h2>
     </div>
 
     <section class="items" id="listing">

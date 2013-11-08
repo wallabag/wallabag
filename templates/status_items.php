@@ -1,25 +1,25 @@
 <?php if ($item['status'] == 'unread'): ?>
     <a
-        id="status-<?= $item['id'] ?>"
-        href="?action=mark-item-read&amp;id=<?= $item['id'] ?>&amp;offset=<?= $offset ?>&amp;redirect=<?= $redirect ?>"
+        id="status-<?php echo $item['id'] ?>"
+        href="?action=mark-item-read&amp;id=<?php echo $item['id'] ?>&amp;offset=<?php echo $offset ?>&amp;redirect=<?php echo $redirect ?>"
         data-action="mark-read"
-        data-item-id="<?= $item['id'] ?>"
-        data-reverse-label="<?= t('mark as unread') ?>"
+        data-item-id="<?php echo $item['id'] ?>"
+        data-reverse-label="<?php echo t('mark as unread') ?>"
     >
-        <?= t('mark as read') ?></a> |
+        <?php echo t('mark as read') ?></a> |
 <?php else: ?>
     <a
-        id="status-<?= $item['id'] ?>"
-        href="?action=mark-item-unread&amp;id=<?= $item['id'] ?>&amp;offset=<?= $offset ?>&amp;redirect=<?= $redirect ?>"
+        id="status-<?php echo $item['id'] ?>"
+        href="?action=mark-item-unread&amp;id=<?php echo $item['id'] ?>&amp;offset=<?php echo $offset ?>&amp;redirect=<?php echo $redirect ?>"
         data-action="mark-unread"
-        data-item-id="<?= $item['id'] ?>"
-        data-reverse-label="<?= t('mark as read') ?>"
+        data-item-id="<?php echo $item['id'] ?>"
+        data-reverse-label="<?php echo t('mark as read') ?>"
     >
-        <?= t('mark as unread') ?></a> |
+        <?php echo t('mark as unread') ?></a> |
 <?php endif ?>
 <span class="hide-mobile">
     <a
-        href="?action=mark-item-removed&amp;id=<?= $item['id'] ?>&amp;offset=<?= $offset ?>&amp;redirect=<?= $redirect ?>"
+        href="?action=mark-item-removed&amp;id=<?php echo $item['id'] ?>&amp;offset=<?php echo $offset ?>&amp;redirect=<?php echo $redirect ?>"
     >
-        <?= t('remove') ?></a> |
+        <?php echo t('remove') ?></a> |
 </span>

@@ -12,42 +12,42 @@
         <![endif]-->
         <link rel="icon" type="image/png" href="assets/img/favicon.ico">
         <link rel="shortcut icon" href="favicon.ico">
-        <title><?= isset($title) ? Helper\escape($title) : 'poche' ?></title>
-        <link href="<?= Helper\css() ?>" rel="stylesheet" media="screen">
+        <title><?php echo isset($title) ? Helper\escape($title) : 'poche' ?></title>
+        <link href="<?php echo Helper\css() ?>" rel="stylesheet" media="screen">
         <script type="text/javascript" src="?action=js" defer></script>
     </head>
     <body>
         <header>
             <nav>
                 <ul>
-                    <li <?= isset($menu) && $menu === 'unread' ? 'class="active"' : '' ?>>
-                        <a href="?action=unread"><?= t('unread') ?> <span id="nav-counter"><?= isset($nb_unread_items) ? '('.$nb_unread_items.')' : '' ?></span></a>
+                    <li <?php echo isset($menu) && $menu === 'unread' ? 'class="active"' : '' ?>>
+                        <a href="?action=unread"><?php echo t('unread') ?> <span id="nav-counter"><?php echo isset($nb_unread_items) ? '('.$nb_unread_items.')' : '' ?></span></a>
                     </li>
-                    <li <?= isset($menu) && $menu === 'bookmarks' ? 'class="active"' : '' ?>>
-                        <a href="?action=bookmarks"><?= t('bookmarks') ?></a>
+                    <li <?php echo isset($menu) && $menu === 'bookmarks' ? 'class="active"' : '' ?>>
+                        <a href="?action=bookmarks"><?php echo t('bookmarks') ?></a>
                     </li>
-                    <li <?= isset($menu) && $menu === 'history' ? 'class="active"' : '' ?>>
-                        <a href="?action=history"><?= t('archive') ?></a>
+                    <li <?php echo isset($menu) && $menu === 'history' ? 'class="active"' : '' ?>>
+                        <a href="?action=history"><?php echo t('archive') ?></a>
                     </li>
-                    <li <?= isset($menu) && $menu === 'tags' ? 'class="active"' : '' ?>>
-                        <a href="?action=tags"><?= t('tags') ?></a>
+                    <li <?php echo isset($menu) && $menu === 'tags' ? 'class="active"' : '' ?>>
+                        <a href="?action=tags"><?php echo t('tags') ?></a>
                     </li>
-                    <li <?= isset($menu) && $menu === 'add' ? 'class="active"' : '' ?>>
-                        <a href="?action=add"><?= t('add') ?></a>
+                    <li <?php echo isset($menu) && $menu === 'add' ? 'class="active"' : '' ?>>
+                        <a href="?action=add"><?php echo t('add') ?></a>
                     </li>
-                    <li <?= isset($menu) && $menu === 'config' ? 'class="active"' : '' ?>>
-                        <a href="?action=config"><?= t('preferences') ?></a>
+                    <li <?php echo isset($menu) && $menu === 'config' ? 'class="active"' : '' ?>>
+                        <a href="?action=config"><?php echo t('preferences') ?></a>
                     </li>
                     <li>
-                        <a href="?action=logout"><?= t('logout') ?></a>
+                        <a href="?action=logout"><?php echo t('logout') ?></a>
                     </li>
                 </ul>
             </nav>
         </header>
         <section class="page">
-            <?= Helper\flash('<div class="alert alert-success">%s</div>') ?>
-            <?= Helper\flash_error('<div class="alert alert-error">%s</div>') ?>
-            <?= $content_for_layout ?>
+            <?php echo Helper\flash('<div class="alert alert-success">%s</div>') ?>
+            <?php echo Helper\flash_error('<div class="alert alert-error">%s</div>') ?>
+            <?php echo $content_for_layout ?>
         </section>
     </body>
 </html>

@@ -1,13 +1,13 @@
 <div class="page-header">
-    <h2><?= t('Console') ?></h2>
+    <h2><?php echo t('Console') ?></h2>
     <ul>
-        <li><a href="?action=console"><?= t('refresh') ?></a></li>
-        <li><a href="?action=flush-console"><?= t('flush messages') ?></a></li>
+        <li><a href="?action=console"><?php echo t('refresh') ?></a></li>
+        <li><a href="?action=flush-console"><?php echo t('flush messages') ?></a></li>
     </ul>
 </div>
 
 <?php if (empty($content)): ?>
-    <p class="alert alert-info"><?= t('No message') ?></p>
+    <p class="alert alert-info"><?php echo t('No message') ?></p>
 <?php else: ?>
-    <pre id="console"><code><?= Helper\escape($content) ?></code></pre>
+    <pre id="console"><code><?php echo Helper\escape($content) ?></code></pre>
 <?php endif ?>

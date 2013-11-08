@@ -1,73 +1,73 @@
 <?php if (empty($item)): ?>
 
-    <p class="alert alert-info"><?= t('Item not found') ?></p>
+    <p class="alert alert-info"><?php echo t('Item not found') ?></p>
 
 <?php else: ?>
     <article
         class="item"
         id="current-item"
-        data-item-id="<?= $item['id'] ?>"
-        data-item-status="<?= $item['status'] ?>"
-        data-item-bookmark="<?= $item['bookmark'] ?>"
-        data-item-page="<?= $menu ?>"
+        data-item-id="<?php echo $item['id'] ?>"
+        data-item-status="<?php echo $item['status'] ?>"
+        data-item-bookmark="<?php echo $item['bookmark'] ?>"
+        data-item-page="<?php echo $menu ?>"
     >
         <h1>
-            <a href="<?= $item['url'] ?>" rel="noreferrer" target="_blank" id="original-<?= $item['id'] ?>">
-                <?= Helper\escape($item['title']) ?>
+            <a href="<?php echo $item['url'] ?>" rel="noreferrer" target="_blank" id="original-<?php echo $item['id'] ?>">
+                <?php echo Helper\escape($item['title']) ?>
             </a>
         </h1>
 
         <p class="infos">
             <?php if ($item['bookmark']): ?>
                 <a
-                    id="bookmark-<?=$item['id'] ?>"
-                    href="?action=bookmark&amp;value=0&amp;id=<?= $item['id'] ?>&amp;source=show&amp;menu=<?= $menu ?>"
-                    title="<?= t('remove bookmark') ?>"
+                    id="bookmark-<?php echo $item['id'] ?>"
+                    href="?action=bookmark&amp;value=0&amp;id=<?php echo $item['id'] ?>&amp;source=show&amp;menu=<?php echo $menu ?>"
+                    title="<?php echo t('remove bookmark') ?>"
                     class="bookmark-icon"
                     data-action="bookmark"
-                    data-item-id="<?= $item['id'] ?>"
+                    data-item-id="<?php echo $item['id'] ?>"
                 >★</a>
             <?php else: ?>
                 <a
-                    id="bookmark-<?=$item['id'] ?>"
-                    href="?action=bookmark&amp;value=1&amp;id=<?= $item['id'] ?>&amp;source=show&amp;menu=<?= $menu ?>"
-                    title="<?= t('bookmark') ?>"
+                    id="bookmark-<?php echo $item['id'] ?>"
+                    href="?action=bookmark&amp;value=1&amp;id=<?php echo $item['id'] ?>&amp;source=show&amp;menu=<?php echo $menu ?>"
+                    title="<?php echo t('bookmark') ?>"
                     class="bookmark-icon"
                     data-action="bookmark"
-                    data-item-id="<?= $item['id'] ?>"
+                    data-item-id="<?php echo $item['id'] ?>"
                 >☆</a>
             <?php endif ?> |
 
-            <span class="hide-mobile"><?= dt('%e %B %Y %k:%M', $item['updated']) ?> |</span>
+            <span class="hide-mobile"><?php echo dt('%e %B %Y %k:%M', $item['updated']) ?> |</span>
 
             <?php if (count($tags) > 0) : ?>
                 tags
             <?php foreach ($tags as $tag) : ?>
-                <a href="?action=tag&amp;id=<?= $tag['id'] ?>"><?php echo $tag['value'] ?></a>
+                <a href="?action=tag&amp;id=<?php echo $tag['id'] ?>"><?php echo $tag['value'] ?></a>
             <?php endforeach; ?>
             <?php endif; ?>
-            <a href="?action=edit-tags&amp;id=<?= $item['id'] ?>" title="<?= t('Edit tags'); ?>">✎</a>
+            <a href="?action=edit-tags&amp;id=<?php echo $item['id'] ?>" title="<?php echo t('Edit tags'); ?>">✎</a>
         </p>
 
         <div id="item-content">
-            <?= $item['content'] ?>
+            <?php echo $item['content'] ?>
         </div>
 
         <?php if (isset($item_nav)): ?>
         <nav>
             <span class="nav-left">
                 <?php if ($item_nav['previous']): ?>
-                    <a href="?action=show&amp;menu=<?= $menu ?>&amp;id=<?= $item_nav['previous']['id'] ?>" id="previous-item" title="<?= t($item_nav['previous']['title']) ?>">« <?= t('Previous') ?></a>
+                    <a href="?action=show&amp;menu=<?php echo $menu ?>&amp;id=<?php echo $item_nav['previous']['id'] ?>" id="previous-item" title="<?php echo t($item_nav['previous']['title']) ?>">« <?php echo t('Previous') ?></a>
                 <?php else: ?>
-                    « <?= t('Previous') ?>
+                    « <?php echo t('Previous') ?>
                 <?php endif ?>
             </span>
 
             <span class="nav-right">
                 <?php if ($item_nav['next']): ?>
-                    <a href="?action=show&amp;menu=<?= $menu ?>&amp;id=<?= $item_nav['next']['id'] ?>" id="next-item" title="<?= t($item_nav['next']['title']) ?>"><?= t('Next') ?> »</a>
+                    <a href="?action=show&amp;menu=<?php echo $menu ?>&amp;id=<?php echo $item_nav['next']['id'] ?>" id="next-item" title="<?php echo t($item_nav['next']['title']) ?>"><?php echo t('Next') ?> »</a>
                 <?php else: ?>
-                    <?= t('Next') ?> »
+                    <?php echo t('Next') ?> »
                 <?php endif ?>
             </span>
         </nav>
