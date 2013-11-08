@@ -1,5 +1,4 @@
 <?php
-
 require 'vendor/JsonRPC/Client.php';
 
 use JsonRPC\Client;

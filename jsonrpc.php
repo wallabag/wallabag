@@ -1,5 +1,4 @@
 <?php
-
 require 'common.php';
 require 'vendor/JsonRPC/Server.php';
 

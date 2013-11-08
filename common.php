@@ -1,5 +1,4 @@
 <?php
-
 require 'check_setup.php';
 require 'vendor/password.php';
 require 'vendor/PicoTools/Dependency_Injection.php';

@@ -114,14 +114,14 @@ Router\get_action('show', function() {
 
     switch ($menu) {
         case 'unread':
-            $nav = Model\get_nav_item($item, Model\get_user_id());
+            $nav = Model\get_nav_item($item, Model\get_user_by_id(Model\get_user_id()));
             $nb_unread_items = Model\count_entries('unread', Model\get_user_id());
             break;
         case 'history':
-            $nav = Model\get_nav_item($item, Model\get_user_id(), array('read'));
+            $nav = Model\get_nav_item($item, Model\get_user_by_id(Model\get_user_id()), array('read'));
             break;
         case 'bookmarks':
-            $nav = Model\get_nav_item($item, Model\get_user_id(), array('unread', 'read'), array(1));
+            $nav = Model\get_nav_item($item, Model\get_user_by_id(Model\get_user_id()), array('unread', 'read'), array(1));
             break;
     }
 
@@ -373,7 +373,11 @@ Router\get_action('bookmarks', function() {
     Response\html(Template\layout('bookmarks', array(
         'order' => '',
         'direction' => '',
-        'items' => Model\get_bookmarks(Model\get_user_id(), $offset, $_SESSION['user']['items_per_page']),
+        'items' => Model\get_bookmarks(
+            Model\get_user_id(),
+            $offset,
+            $_SESSION['user']['items_per_page'],
+            $_SESSION['user']['items_sorting_direction']),
         'nb_items' => $nb_items,
         'offset' => $offset,
         'items_per_page' => $_SESSION['user']['items_per_page'],

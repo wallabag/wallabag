@@ -1,12 +1,33 @@
 <?php
+/**
+ * Manage the plugins (installing, enabling, disabling)
+ *
+ * @package poche
+ * @subpackage plugin
+ * @license    http://www.gnu.org/licenses/agpl-3.0.html  GNU Affero GPL
+ * @author     Nicolas Lœuillet <support@inthepoche.com>
+ */
 
+/**
+ * Plugin class
+ */
 class Plugin
 {
+   /**
+    * array with the enabled plugins
+    * @static
+    */
     private static $enabled_menu = array();
+   /**
+    * array with the disabled plugins
+    * @static
+    */
     private static $disabled_menu = array();
 
 
-    // Load all plugins
+    /**
+     * Parse PLUGIN_DIRECTORY and load plugin.php of each plugin 
+     */
     public static function loadPlugins()
     {
         if (file_exists(PLUGIN_DIRECTORY)) {
@@ -34,6 +55,12 @@ class Plugin
     }
 
 
+    /**
+     * When enabling/disabling a plugin, it adds it in the good menu
+     *
+     * @param string $status 'enabled' or 'disabled'
+     * @param string $name   name of the plugin
+     */
     public static function addMenu($status, $name)
     {
         if ($status === 'enabled') {
@@ -45,6 +72,12 @@ class Plugin
     }
 
 
+    /**
+     * When enabling/disabling a plugin, it deletes it in the good menu
+     *
+     * @param string $menu 'enabled_menu' or 'disabled_menu'
+     * @param string $name   name of the plugin
+     */
     public static function delMenu($menu, $name)
     {
         if (isset(self::$$menu[$name])) {
@@ -53,6 +86,12 @@ class Plugin
     }
 
 
+    /**
+     * Build the HTML render of a menu
+     * 
+     * @param  string $status 'enabled' or 'disabled'
+     * @return string html view
+     */
     public static function buildMenu($status)
     {
         $html = '<ul>';

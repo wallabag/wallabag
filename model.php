@@ -1,5 +1,13 @@
 <?php
-
+/**
+ * Model calls
+ *
+ * All the calls to the models
+ * @package poche
+ * @subpackage model
+ * @license    http://www.gnu.org/licenses/agpl-3.0.html  GNU Affero GPL
+ * @author     Nicolas Lœuillet <support@inthepoche.com>
+ */
 namespace Model;
 
 require_once 'vendor/PicoFeed/Filter.php';
@@ -22,12 +30,22 @@ use PicoFeed\Import;
 use PicoFeed\Reader;
 use PicoFeed\Export;
 
+/**
+ * database version
+ */
+const DB_VERSION = 1;
 
-const DB_VERSION     = 1;
-const HTTP_USERAGENT = 'poche - http://inthepoche.com';
-const HTTP_FAKE_USERAGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.62 Safari/537.36';
+/**
+ * user agent used to fetch content
+ */
+const HTTP_USERAGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.62 Safari/537.36';
 
 
+/**
+ * Return an array of sorting directions
+ * 
+ * @return array list of sorting descriptions
+ */
 function get_sorting_directions()
 {
     return array(
@@ -36,7 +54,11 @@ function get_sorting_directions()
     );
 }
 
-
+/**
+ * Return an array with available languages
+ * 
+ * @return array list of available languages
+ */
 function get_languages()
 {
     $languages = array(
@@ -56,6 +78,11 @@ function get_languages()
 }
 
 
+/**
+ * Return an array with available themes
+ * 
+ * @return array list of available themes
+ */
 function get_themes()
 {
     $themes = array(
@@ -78,6 +105,11 @@ function get_themes()
 }
 
 
+/**
+ * Return an array of paging options
+ * 
+ * @return array list of paging options
+ */
 function get_paging_options()
 {
     return array(
@@ -93,6 +125,9 @@ function get_paging_options()
 }
 
 
+/**
+ * If DEBUG is enabled, logs are written in DEBUG_FILENAME file
+ */
 function write_debug()
 {
     if (DEBUG) {
@@ -108,12 +143,22 @@ function write_debug()
 }
 
 
+/**
+ * Return the id of current user
+ * 
+ * @return int id of current user
+ */
 function get_user_id()
 {
     return $_SESSION['user']['id'];
 }
 
 
+/**
+ * Generate a new token
+ * 
+ * @return string a token generated with /dev/urandom or mt_rand()
+ */
 function generate_token()
 {
     if (ini_get('open_basedir') === '') {
@@ -125,6 +170,11 @@ function generate_token()
 }
 
 
+/**
+ * Update user profile to store new tokens
+ * 
+ * @return boolean
+ */
 function new_tokens()
 {
     $values = array(
@@ -140,6 +190,13 @@ function new_tokens()
 }
 
 
+/**
+ * Save the third authentication 
+ * 
+ * @param  string $type  name of the service (eg: google, mozilla)
+ * @param  string $value the new token
+ * @return boolean
+ */
 function save_auth_token($type, $value)
 {
     return \PicoTools\singleton('db')
@@ -151,6 +208,12 @@ function save_auth_token($type, $value)
 }
 
 
+/**
+ * Remove the third authentication
+ * 
+ * @param  string $type  name of the service (eg: google, mozilla)
+ * @return string $value the new token
+ */
 function remove_auth_token($type)
 {
     \PicoTools\singleton('db')
@@ -163,6 +226,14 @@ function remove_auth_token($type)
     $_SESSION['user']['auth_'.$type.'_token'] = '';
 }
 
+
+/**
+ * Search a query in the poched links
+ * 
+ * @param  string $query   the query to search
+ * @param  int $user_id id of the user
+ * @return array list of poched links which contain $query term
+ */
 function search_items($query, $user_id)
 {
     return \PicoTools\singleton('db')
@@ -185,6 +256,28 @@ function search_items($query, $user_id)
 }
 
 
+/**
+ * Update an item 
+ * 
+ * @param  array $item New values of the item (the id is necessary)
+ * @return boolean
+ */
+function update_item($item) 
+{
+    return \PicoTools\singleton('db')
+    ->table('entries')
+    ->eq('id', $item['id'])
+    ->save($item);
+}
+
+/**
+ * Save a new link for a given user
+ * 
+ * @param string  $url the URL to save
+ * @param int  $user_id the user who wants to save a link
+ * @param boolean $fetch_it if true, the content will be fetched
+ * @return integer the id of the poched link
+ */
 function add_link($url, $user_id, $fetch_it = true)
 {
     $title = $content = '';
@@ -208,13 +301,23 @@ function add_link($url, $user_id, $fetch_it = true)
     write_debug();
 
     if ($fetch_it) {
-        list($title, $content) = fetch_content($id, $user_id);
+        if ($item = fetch_content($id, $user_id)) {
+            update_item($item);
+        }
+
     }
 
     return $id;
 }
 
 
+/**
+ * Parse the fetched content with Readability to remove useless components
+ * 
+ * @param  string $content content of the poched link
+ * @param  string $url URL of the poched link
+ * @return array array with title and content
+ */
 function parse_content_with_readability($content, $url)
 {
     require_once 'vendor/Readability/Readability.php';
@@ -222,7 +325,6 @@ function parse_content_with_readability($content, $url)
     if (! empty($content)) {
 
         $readability = new \Readability($content, $url);
-
         if ($readability->init()) {
             return array(
                 'content' => $readability->getContent()->innerHTML,
@@ -231,10 +333,24 @@ function parse_content_with_readability($content, $url)
         }
     }
 
-    return '';
+    return array(
+        'content' => 'Problem with fetching content',
+        'title' => 'Untitled'
+    );
 }
 
 
+/**
+ * Return a list of items, filtered by $status
+ * 
+ * @param  string $status status of the returned items (unread, read)
+ * @param  int $user_id id of the user 
+ * @param  int $offset the offset where start the list 
+ * @param  int $limit number of items to return
+ * @param  string $order_column the column to sort
+ * @param  string $order_direction the direction (asc or desc) to sort
+ * @return array list of the items
+ */
 function get_items($status, $user_id, $offset = null, $limit = null, $order_column = 'updated', $order_direction = 'desc')
 {
     return \PicoTools\singleton('db')
@@ -258,6 +374,13 @@ function get_items($status, $user_id, $offset = null, $limit = null, $order_colu
 }
 
 
+/**
+ * Count the $status entries
+ * 
+ * @param  string $status status of the items (unread, read)
+ * @param  int $user_id id of the user 
+ * @return int number of $status entries
+ */
 function count_entries($status, $user_id)
 {
     return \PicoTools\singleton('db')
@@ -269,6 +392,12 @@ function count_entries($status, $user_id)
 }
 
 
+/**
+ * Count the bookmarked entries
+ * 
+ * @param  int $user_id id of the user 
+ * @return int number of bookmarked entries
+ */
 function count_bookmarks($user_id)
 {
     return \PicoTools\singleton('db')
@@ -281,7 +410,16 @@ function count_bookmarks($user_id)
 }
 
 
-function get_bookmarks($user_id, $offset = null, $limit = null)
+/**
+ * Return a list of bookmarked items
+ * 
+ * @param  int $user_id id of the user 
+ * @param  int $offset the offset where start the list 
+ * @param  int $limit number of items to return
+ * @param  string $items_sorting_direction sort by asc or desc
+ * @return array list of the bookmarked items
+ */
+function get_bookmarks($user_id, $offset = null, $limit = null, $items_sorting_direction)
 {
     return \PicoTools\singleton('db')
         ->table('entries')
@@ -298,13 +436,20 @@ function get_bookmarks($user_id, $offset = null, $limit = null)
         ->eq('user_id', $user_id)
         ->eq('bookmark', 1)
         ->eq('fetched', '1')
-        ->orderBy('updated', get_config_value('items_sorting_direction'))
+        ->orderBy('updated', $items_sorting_direction)
         ->offset($offset)
         ->limit($limit)
         ->findAll();
 }
 
 
+/**
+ * Get the informations of an item
+ * 
+ * @param  int $id id of the item
+ * @param  int $user_id id of the user 
+ * @return array array with the informations
+ */
 function get_item($id, $user_id)
 {
     return \PicoTools\singleton('db')
@@ -315,6 +460,13 @@ function get_item($id, $user_id)
 }
 
 
+/**
+ * Remove a tag to an entry
+ * 
+ * @param  int $tag_id id of the tag
+ * @param  int $entry_id id of the entry
+ * @return boolean
+ */
 function remove_tag($tag_id, $entry_id)
 {
     return \PicoTools\singleton('db')
@@ -325,9 +477,14 @@ function remove_tag($tag_id, $entry_id)
 }
 
 
+/**
+ * Get the tags list
+ *
+ * @todo get tags of the current user
+ * @return array list of tags
+ */
 function get_tags()
 {
-    //TODO get tags of the current user
     return \PicoTools\singleton('db')
         ->table('tags')
         ->columns(
@@ -337,7 +494,13 @@ function get_tags()
         ->findAll();
 }
 
-
+/**
+ * Get the items associated to a tag
+ * 
+ * @param  int $tag_id id of the tag
+ * @param  int $user_id id of the user
+ * @return array list of items which have the tag $tag_id
+ */
 function get_entries_by_tag($tag_id, $user_id) 
 {
     return \PicoTools\singleton('db')
@@ -358,6 +521,13 @@ function get_entries_by_tag($tag_id, $user_id)
         ->findAll();
 }
 
+
+/**
+ * Get information about a tag
+ * 
+ * @param  int $id id of the tag
+ * @return array array with the information of the tag
+ */
 function get_tag($id)
 {
     return \PicoTools\singleton('db')
@@ -366,7 +536,12 @@ function get_tag($id)
         ->findOne();
 }
 
-
+/**
+ * Get all the tags of an item
+ *
+ * @param  int $item_id id of the item
+ * @return array array of the tags
+ */
 function get_tags_by_item($item_id) 
 {
     return \PicoTools\singleton('db')
@@ -381,15 +556,24 @@ function get_tags_by_item($item_id)
 }
 
 
-function get_nav_item($item, $user_id, $status = array('unread'), $bookmark = array(1, 0))
+/**
+ * Get an array to create a navigation system, around an item
+ * 
+ * @param  array $item the item
+ * @param  array $user the user
+ * @param  array  $status array of the items status
+ * @param  array  $bookmark array with bookmark values
+ * @return array list of the items near $item
+ */
+function get_nav_item($item, $user, $status = array('unread'), $bookmark = array(1, 0))
 {
     $query = \PicoTools\singleton('db')
         ->table('entries')
         ->columns('id', 'status', 'title', 'bookmark')
         ->neq('status', 'removed')
         ->eq('fetched', '1')
-        ->eq('user_id', $user_id)
-        ->orderBy('updated', get_config_value('items_sorting_direction'));
+        ->eq('user_id', $user['id'])
+        ->orderBy('updated', $user['items_sorting_direction']);
 
     $items = $query->findAll();
 
@@ -441,6 +625,13 @@ function get_nav_item($item, $user_id, $status = array('unread'), $bookmark = ar
 }
 
 
+/**
+ * Remove an item 
+ * 
+ * @param int $id id of the item
+ * @param int $user_id id of the user
+ * @return boolean
+ */
 function set_item_removed($id, $user_id)
 {
     return \PicoTools\singleton('db')
@@ -451,6 +642,13 @@ function set_item_removed($id, $user_id)
 }
 
 
+/**
+ * Mark an item as read
+ * 
+ * @param int $id id of the item
+ * @param int $user_id id of the user
+ * @return boolean
+ */
 function set_item_read($id, $user_id)
 {
     return \PicoTools\singleton('db')
@@ -461,6 +659,13 @@ function set_item_read($id, $user_id)
 }
 
 
+/**
+ * Mark an item as unread
+ * 
+ * @param int $id id of the item
+ * @param int $user_id id of the user
+ * @return boolean
+ */
 function set_item_unread($id, $user_id)
 {
     return \PicoTools\singleton('db')
@@ -471,6 +676,14 @@ function set_item_unread($id, $user_id)
 }
 
 
+/**
+ * Mark a list of items as $status
+ *
+ * @param string $status the $items will have this status
+ * @param array $items array of items to update
+ * @param int $user_id id of the user
+ * @return boolean
+ */
 function set_items_status($status, array $items, $user_id)
 {
     if (! in_array($status, array('read', 'unread', 'removed'))) return false;
@@ -483,6 +696,14 @@ function set_items_status($status, array $items, $user_id)
 }
 
 
+/**
+ * Un/bookmark an item
+ * 
+ * @param int $id id of the item
+ * @param int $value 0 if unbookmark, 1 if bookmark
+ * @param int $user_id id of the user
+ * @return boolean
+ */
 function set_bookmark_value($id, $value, $user_id)
 {
     return \PicoTools\singleton('db')
@@ -493,6 +714,13 @@ function set_bookmark_value($id, $value, $user_id)
 }
 
 
+/**
+ * Change the status of item
+ * 
+ * @param  int $id id of the item
+ * @param  id $user_id id of the user
+ * @return string the new status of the item
+ */
 function switch_item_status($id, $user_id)
 {
     $item = \PicoTools\singleton('db')
@@ -525,7 +753,12 @@ function switch_item_status($id, $user_id)
 }
 
 
-// Mark all items as read
+/**
+ * Mark all items of a user as read
+ * 
+ * @param  int $user_id id of the user
+ * @return boolean
+ */
 function mark_as_read($user_id)
 {
     return \PicoTools\singleton('db')
@@ -536,7 +769,12 @@ function mark_as_read($user_id)
 }
 
 
-// Mark only specified items as read
+/**
+ * Mark the $items_id of $user_id as read
+ * 
+ * @param  array  $items_id [description]
+ * @param  int $user_id id of the user
+ */
 function mark_items_as_read(array $items_id, $user_id)
 {
     \PicoTools\singleton('db')->startTransaction();
@@ -549,6 +787,12 @@ function mark_items_as_read(array $items_id, $user_id)
 }
 
 
+/**
+ * Remove all items of a user
+ * 
+ * @param  int $user_id id of the user
+ * @return boolean
+ */
 function mark_as_removed($user_id)
 {
     return \PicoTools\singleton('db')
@@ -560,6 +804,13 @@ function mark_as_removed($user_id)
 }
 
 
+/**
+ * Get the list of unfetched items of a user
+ * 
+ * @param  int $user_id id of the user
+ * @param  int $limit number of items to return
+ * @return array array of unfetched items
+ */
 function unfetched_items($user_id, $limit)
 {
     return \PicoTools\singleton('db')
@@ -581,45 +832,52 @@ function unfetched_items($user_id, $limit)
 }
 
 
-function fetch_content($id, $user_id)
+/**
+ * Fetch the content of the $item_id
+ * 
+ * @param  int $item_id id of the item
+ * @param  int $user_id id of the user
+ * @return array array with id, title, content, updated time and fetched boolean
+ */
+function fetch_content($item_id, $user_id)
 {
-    $item = get_item($id, $user_id);
+    $item = get_item($item_id, $user_id);
     $url = $item['url'];
-    # Fetch the URL to store the content in database
-    # Else, the crontab will execute mass import
+
     $client = \PicoFeed\Client::create();
     $client->url = $url;
     $client->timeout = HTTP_TIMEOUT;
-    $client->user_agent = HTTP_FAKE_USERAGENT;
+    $client->user_agent = HTTP_USERAGENT;
     $client->execute();
 
     $html = $client->getContent();
 
-    if (! empty($html)) {
+    if (!empty($html)) {
         $results = parse_content_with_readability($html, $url);
-
-        // Filter content
         $filter = new \PicoFeed\Filter($results['content'], $url);
         $content = $filter->execute();
         $title = $results['title'];
 
-        \PicoTools\singleton('db')
-        ->table('entries')
-        ->eq('id', $id)
-        ->save(array(
+        return array(
+            'id' => $item_id,
             'title' => $title,
             'updated' => time(),
             'content' => $content,
             'fetched' => 1,
-        ));
-
-        return true;
+        );
     }
 
     return false;
 }
 
 
+/**
+ * Get a user with $value (only used for token)
+ * 
+ * @param  string $column column (auth_mozilla_token, auth_google_token)
+ * @param  string $value value of the token
+ * @return array a user
+ */
 function get_user_by_config($column, $value)
 {
     return \PicoTools\singleton('db')
@@ -629,39 +887,12 @@ function get_user_by_config($column, $value)
 }
 
 
-function get_config_value($name)
-{
-    if (! isset($_SESSION)) {
-
-        return \PicoTools\singleton('db')->table('config')->findOneColumn($name);
-    }
-    else {
-        if (! isset($_SESSION['config'])) {
-            $_SESSION['config'] = get_config();
-        }
-
-        if (isset($_SESSION['config'][$name])) {
-            return $_SESSION['config'][$name];
-        }
-    }
-    return null;
-}
-
-
-function get_config()
-{
-    return \PicoTools\singleton('db')
-        ->table('config')
-        ->columns(
-            'language',
-            'items_per_page',
-            'theme',
-            'items_sorting_direction'
-        )
-        ->findOne();
-}
-
-
+/**
+ * Get a user by id
+ * 
+ * @param  int $id the id of the user
+ * @return array a user
+ */
 function get_user_by_id($id)
 {
     return \PicoTools\singleton('db')
@@ -671,6 +902,12 @@ function get_user_by_id($id)
 }
 
 
+/**
+ * Get a user by username
+ * 
+ * @param  string $username the username of the user
+ * @return array a user
+ */
 function get_user($username)
 {
     return \PicoTools\singleton('db')
@@ -680,6 +917,12 @@ function get_user($username)
 }
 
 
+/**
+ * Validate the filled field while login and create the user session
+ * 
+ * @param  array $values fields to validate
+ * @return array the user if login is right and errors if it's not
+ */
 function validate_login(array $values)
 {
     $v = new Validator($values, array(
@@ -697,9 +940,7 @@ function validate_login(array $values)
         if ($user && \password_verify($values['password'], $user['password'])) {
 
             unset($user['password']);
-
             $_SESSION['user'] = $user;
-            $_SESSION['config'] = get_config();
         }
         else {
 
@@ -715,6 +956,12 @@ function validate_login(array $values)
 }
 
 
+/**
+ * Validate the field when a tag is added
+ * 
+ * @param  array $values fields to validate
+ * @return array the tag if right, errors if not
+ */
 function validate_tags(array $values)
 {
     $v = new Validator($values, array(
@@ -728,6 +975,13 @@ function validate_tags(array $values)
 }
 
 
+/**
+ * Save the tags in database
+ * If the tags exists, we get its id and we don't recreate it
+ * 
+ * @param  array  $values values of the tag
+ * @return boolean
+ */
 function save_tags(array $values)
 {
 
@@ -769,6 +1023,12 @@ function save_tags(array $values)
 }
 
 
+/**
+ * Validate the filled field while updating preferences
+ * 
+ * @param  array $values fields to validate
+ * @return array the user if updating is right and errors if it's not
+ */
 function validate_config_update(array $values)
 {
     if (! empty($values['password'])) {
@@ -803,6 +1063,12 @@ function validate_config_update(array $values)
 }
 
 
+/**
+ * Save the preferences in database
+ * 
+ * @param  array  $values values of the user
+ * @return boolean
+ */
 function save_config(array $values)
 {
     // Update the password if needed
@@ -826,6 +1092,13 @@ function save_config(array $values)
 }
 
 
+/**
+ * Add a value for a plugin option 
+ * 
+ * @param string $name name of the plugin 
+ * @param string $value value of the option
+ * @return boolean
+ */
 function add_plugin_option($name, $value)
 {
     $db = \PicoTools\singleton('db');
@@ -835,16 +1108,23 @@ function add_plugin_option($name, $value)
         'name' => $name,
         'value' => $value
     ))) {
+
         return false;
     }
 
     $id = $db->getConnection()->getLastId();
-
     $db->closeTransaction();
+
     return true;
 }
 
 
+/**
+ * Get a value for a plugin option
+ * 
+ * @param  string $name name of the plugin 
+ * @return array the value
+ */
 function get_plugin_option($name)
 {
     return \PicoTools\singleton('db')
@@ -854,6 +1134,12 @@ function get_plugin_option($name)
 }
 
 
+/**
+ * Remove an option for a plugin
+ * 
+ * @param  string $name name of the plugin 
+ * @return boolean
+ */
 function remove_plugin_option($name)
 {
     return \PicoTools\singleton('db')

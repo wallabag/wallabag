@@ -1,7 +1,19 @@
 <?php
-
+/**
+ * Schema of database
+ *
+ * @package poche
+ * @subpackage schema
+ * @license    http://www.gnu.org/licenses/agpl-3.0.html  GNU Affero GPL
+ * @author     Nicolas Lœuillet <support@inthepoche.com>
+ */
 namespace Schema;
 
+/**
+ * First version of database
+ *
+ * @param  pdo $pdo PDO instanciation
+ */
 function version_1($pdo)
 {
     $pdo->exec("
