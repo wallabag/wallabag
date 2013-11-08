@@ -18,3 +18,4 @@ Thumbs.db
 # App specific #
 ################
 config.php
+make-doc.sh
