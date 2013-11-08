@@ -1,4 +1,12 @@
 <?php
+/**
+ * poche RSS feeds
+ *
+ * @package poche
+ * @subpackage feeds
+ * @license    http://www.gnu.org/licenses/agpl-3.0.html  GNU Affero GPL
+ * @author     Nicolas Lœuillet <support@inthepoche.com>
+ */
 
 require 'common.php';
 require 'vendor/PicoTools/Helper.php';

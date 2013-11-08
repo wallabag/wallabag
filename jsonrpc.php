@@ -1,4 +1,13 @@
 <?php
+/**
+ * poche API
+ *
+ * @package poche
+ * @subpackage api
+ * @license    http://www.gnu.org/licenses/agpl-3.0.html  GNU Affero GPL
+ * @author     Nicolas Lœuillet <support@inthepoche.com>
+ */
+
 require 'common.php';
 require 'vendor/JsonRPC/Server.php';
 
@@ -134,6 +143,5 @@ $server->register('item.tag.list', function ($item_id) {
 
     return Model\get_tags_by_item($item_id);
 });
-
 
 echo $server->execute();

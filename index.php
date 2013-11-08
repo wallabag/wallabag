@@ -1,4 +1,13 @@
 <?php
+/**
+ * poche routes
+ *
+ * @package poche
+ * @subpackage routes
+ * @license    http://www.gnu.org/licenses/agpl-3.0.html  GNU Affero GPL
+ * @author     Nicolas Lœuillet <support@inthepoche.com>
+ */
+
 require 'common.php';
 require 'vendor/PicoTools/Template.php';
 require 'vendor/PicoTools/Helper.php';
@@ -500,6 +509,7 @@ Router\get_action('console', function() {
 });
 
 
+// Enable a plugin
 Router\get_action('enable-plugin', function() {
 
     $plugin = Request\param('plugin_name');
@@ -512,6 +522,7 @@ Router\get_action('enable-plugin', function() {
 });
 
 
+// Disable a plugin
 Router\get_action('disable-plugin', function() {
 
     $plugin = Request\param('plugin_name');

@@ -35,6 +35,15 @@
     </head>
     <body>
         <pre class="brush: php">&lt;?php
+/**
+ * poche API
+ *
+ * @package poche
+ * @subpackage api
+ * @license    http://www.gnu.org/licenses/agpl-3.0.html  GNU Affero GPL
+ * @author     Nicolas L&oelig;uillet &lt;support@inthepoche.com&gt;
+ */
+
 require 'common.php';
 require 'vendor/JsonRPC/Server.php';
 
@@ -170,7 +179,6 @@ $server-&gt;register('item.tag.list', function ($item_id) {
 
     return Model\get_tags_by_item($item_id);
 });
-
 
 echo $server-&gt;execute();</pre>
         <script type="text/javascript">
