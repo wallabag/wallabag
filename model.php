@@ -1073,15 +1073,18 @@ function validate_config_update(array $values)
  */
 function save_config(array $values)
 {
-    // Update the password if needed
-    if (! empty($values['password'])) {
-        $values['password'] = \password_hash($values['password'], PASSWORD_BCRYPT);
-    } else {
-        unset($values['password']);
+    if (! DEMO_MODE) {
+        // Update the password if needed
+        if (! empty($values['password'])) {
+            $values['password'] = \password_hash($values['password'], PASSWORD_BCRYPT);
+        } else {
+            unset($values['password']);
+        }
+
+        unset($values['confirmation']);
     }
-
-    unset($values['confirmation']);
-
+    
+    unset($values['username']);
     // Reload configuration in session
     foreach ($values as $key => $value) {
         $_SESSION['user'][$key] = $value;

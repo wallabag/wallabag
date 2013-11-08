@@ -28,10 +28,10 @@
             <form method="post" action="?action=login">
 
                 <?php echo Helper\form_label(t('Username'), 'username') ?>
-                <?php echo Helper\form_text('username', $values, $errors, array('autofocus', 'required')) ?><br/>
+                <?php echo Helper\form_text('username', (!DEMO_MODE?$values:array('username'=>'poche')), $errors, array('autofocus', 'required')) ?><br/>
 
                 <?php echo Helper\form_label(t('Password'), 'password') ?>
-                <?php echo Helper\form_password('password', $values, $errors, array('required')) ?>
+                <?php echo Helper\form_password('password', (!DEMO_MODE?$values:array('password'=>'poche')), $errors, array('required')) ?>
 
                 <p><br/><a href="?action=google-redirect-auth"><?php echo t('Login with my Google Account') ?></a></p>
                 <p><br/><a href="#" data-action="mozilla-login"><?php echo t('Login with my Mozilla Persona Account') ?></a></p>
