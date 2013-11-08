@@ -7,7 +7,7 @@
         <form method="post" action="?action=export2pdf">
         <ul>
         <?php foreach ($unread_items as $item): ?>
-            <li><?= Helper\form_checkbox('chk_unread', Helper\escape($item['title']), $item['id'], false, '') ?></li>
+            <li><?= Helper\form_checkbox('chk_unread_' . $item['id'], Helper\escape($item['title']), $item['id'], false, 'chk_unread') ?></li>
         <?php endforeach ?>
         </ul>
         <div class="form-actions">
@@ -19,7 +19,7 @@
         <form method="post" action="?action=import">
         <ul>
         <?php foreach ($bookmarked_items as $item): ?>
-            <li><?= Helper\form_checkbox('chk_bookmarked', Helper\escape($item['title']), $item['id'], false, '') ?></li>
+            <li><?= Helper\form_checkbox('chk_bookmarked_' . $item['id'], Helper\escape($item['title']), $item['id'], false, 'chk_bookmarked') ?></li>
         <?php endforeach ?>
         </ul>
         <div class="form-actions">
@@ -31,7 +31,7 @@
         <form method="post" action="?action=import">
         <ul>
         <?php foreach ($read_items as $item): ?>
-            <li><?= Helper\form_checkbox('chk_read', Helper\escape($item['title']), $item['id'], false, '') ?></li>
+            <li><?= Helper\form_checkbox('chk_read_' . $item['id'], Helper\escape($item['title']), $item['id'], false, 'chk_read') ?></li>
         <?php endforeach ?>
         </ul>
         <div class="form-actions">

@@ -33,9 +33,10 @@ Router\get_action('export2pdf', function() {
         Response\redirect('?action=config');
     }
 
-    $unread_items = Model\get_items('unread', $_SESSION['user']['id']);
-    $bookmarked_items = Model\get_bookmarks($_SESSION['user']['id']);
-    $read_items = Model\get_items('read', $_SESSION['user']['id']);
+    $user_id = Model\get_user_id();
+    $unread_items = Model\get_items('unread', $user_id);
+    $bookmarked_items = Model\get_bookmarks($user_id);
+    $read_items = Model\get_items('read', $user_id);
 
     Response\html(Template\layout('export2pdf/templates/export2pdf', array(
         'unread_items' => $unread_items,
@@ -55,10 +56,11 @@ Router\post_action('export2pdf', function() {
     }
 
     $values = Request\values();
-    $items = array();
+    $user_id = Model\get_user_id();
 
+    $items = array();
     foreach ($values as $key => $value) {
-        $items[] = Model\get_item($value, $_SESSION['user']['id']);
+        $items[] = Model\get_item($value, $user_id);
     }
 
     export_items_to_pdf($items);
