@@ -5,7 +5,8 @@ require 'common.php';
 if (php_sapi_name() === 'cli') {
 
     $options = getopt('', array(
-        'limit::'
+        'limit::',
+        'user-id::',
     ));
 }
 else {
@@ -14,12 +15,17 @@ else {
 }
 
 $limit = ! empty($options['limit']) && ctype_digit($options['limit']) ? (int) $options['limit'] : 10;
+$user_id = ! empty($options['user-id']) && ctype_digit($options['user-id']) ? (int) $options['user-id'] : null;
 
-$user_id = 1;
+if (is_null($user_id)) {
+    die('You must give a user id');
+}
 
 $items = Model\unfetched_items($user_id, $limit);
 foreach ($items as $item) {
-    Model\fetch_content($item['id'], $user_id);    
+    if ($item_to_update = Model\fetch_content($item['id'], $user_id)) {
+        Model\update_item($item_to_update);
+    }
 }
 
 Model\write_debug();

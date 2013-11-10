@@ -306,7 +306,6 @@ function add_link($url, $user_id, $fetch_it = true)
         if ($item = fetch_content($id, $user_id)) {
             update_item($item);
         }
-
     }
 
     return $id;
