@@ -157,7 +157,7 @@ poche.Item = (function() {
     {
         var request = new XMLHttpRequest();
         request.onload = function() {
-            if (poche.Nav.IsListing()) showItemAsRead(item_id);
+            showItemAsRead(item_id);
         };
         request.open("POST", "?action=mark-item-read&id=" + item_id, true);
         request.send();
@@ -167,7 +167,7 @@ poche.Item = (function() {
     {
         var request = new XMLHttpRequest();
         request.onload = function() {
-            if (poche.Nav.IsListing()) showItemAsUnread(item_id);
+            showItemAsUnread(item_id);
         };
         request.open("POST", "?action=mark-item-unread&id=" + item_id, true);
         request.send();
