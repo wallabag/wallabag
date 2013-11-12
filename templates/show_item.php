@@ -57,7 +57,17 @@
                     <?php echo t('mark as unread') ?></a> |
             <?php endif ?>
 
-            <span class="hide-mobile"><?php echo dt('%e %B %Y %k:%M', $item['updated']) ?> |</span>
+            <a
+                href="<?php echo $item['url'] ?>"
+                id="original-<?php echo $item['id'] ?>"
+                rel="noreferrer"
+                target="_blank"
+                data-item-id="<?php echo $item['id'] ?>"
+            >
+                <?php echo Helper\get_host_from_url($item['url']) ?>
+            </a> |
+
+            <span class="hide-mobile"><?php echo dt('%e %b %Y %k:%M', $item['updated']) ?> |</span>
 
             <?php if (count($tags) > 0) : ?>
                 tags

@@ -25,7 +25,7 @@
         <?php echo Helper\get_host_from_url($item['url']) ?> |
 
         <span class="hide-mobile">
-            <?php echo dt('%e %B %Y %k:%M', $item['updated']) ?> |
+            <?php echo dt('%e %b %Y %k:%M', $item['updated']) ?> |
             <?php echo \PicoTools\Template\load('bookmark_items', array('item' => $item, 'menu' => $menu, 'offset' => $offset, 'source' => '')) ?>
         </span>
 
@@ -40,6 +40,6 @@
         >
             <?php echo t('original link') ?>
         </a> |
-        ⌚ <?php echo \Helper\reading_time($item['content']) . ' ' . t('minutes')?>
+        ⌚ <?php echo \Helper\reading_time($item['content']) . ' ' . t('min.')?>
     </p>
 </article>
