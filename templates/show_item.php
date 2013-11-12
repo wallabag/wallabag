@@ -54,8 +54,7 @@
                     data-item-id="<?php echo $item['id'] ?>"
                     data-reverse-label="<?php echo t('mark as read') ?>"
                 >
-                    <?php echo t('mark as unread') ?></a> |
-            <?php endif ?>
+                    <?php echo t('mark as unread') ?></a> |<?php endif ?>
 
             <a
                 href="<?php echo $item['url'] ?>"
@@ -64,8 +63,7 @@
                 target="_blank"
                 data-item-id="<?php echo $item['id'] ?>"
             >
-                <?php echo Helper\get_host_from_url($item['url']) ?>
-            </a> |
+                <?php echo Helper\get_host_from_url($item['url']) ?></a> |
 
             <span class="hide-mobile"><?php echo dt('%e %b %Y %k:%M', $item['updated']) ?> |</span>
 
