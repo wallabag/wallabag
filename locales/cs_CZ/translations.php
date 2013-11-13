@@ -20,6 +20,7 @@ return array(
     'Italian' => 'Italština',
     'Simplified Chinese' => 'Zjednodušená čínština',
     'Czech' => 'Čeština',
+    'Russian' => 'Ruština',
     'unread' => 'nepřečtené',
     'bookmark' => 'přidat do záložek',
     'remove bookmark' => 'odstranit záložku',

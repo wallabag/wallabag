@@ -76,6 +76,7 @@ return array(
     'English' => 'Inglés',
     'German' => 'Alemán',
     'Italian' => 'Italiano',
+    'Russian' => 'Ruso',
     'Simplified Chinese' => 'Chino simplificado',
     'Czech' => 'Checo',
     'Spanish' => 'Español',

@@ -14,6 +14,7 @@ return array(
     'English' => 'Englisch',
     'German' => 'Deutsch',
     'Italian' => 'Italienisch',
+    'Russian' => 'Russisch',
     'Simplified Chinese' => 'Vereinfachtes Chinesisch',
     'unread' => 'ungelesen',
     'bookmarks' => 'lesezeichen',
