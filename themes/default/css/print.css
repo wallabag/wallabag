@@ -32,6 +32,10 @@ article {
     border: none !important;
 }
 
+#article_toolbar {
+    display: none;
+}
+
 /* Add URL after links */
 .vieworiginal a:after {
     content: " (" attr(href) ")";
