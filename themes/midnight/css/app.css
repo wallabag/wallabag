@@ -9,11 +9,11 @@ h1, h2, h3 {
     color: #999;
 }
 
-a {
-    color: #ccc;
-}
-
-a:hover {
+a,
+a:link,
+a:hover,
+a:visited,
+a:active {
     color: #fff;
 }
 
