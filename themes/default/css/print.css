@@ -24,16 +24,13 @@ body > footer,
 div.tools,
 header div,
 .messages,
-.entrie + .results {
+.entrie + .results,
+#article_toolbar {
     display: none !important;
 }
 
 article {
     border: none !important;
-}
-
-#article_toolbar {
-    display: none;
 }
 
 /* Add URL after links */
