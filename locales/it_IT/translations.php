@@ -15,6 +15,7 @@ return array(
     'English' => 'Inglese',
     'German' => 'Tedesco',
     'Italian' => 'Italiano',
+    'Russian' => 'Russo',
     'Simplified Chinese' => 'Cinese semplificato',
     'Czech' => 'Ceco',
     'unread' => 'non letti',
