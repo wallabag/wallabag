@@ -40,7 +40,7 @@
             <?php if ($item['status'] == 'unread'): ?>
                 <a
                     id="status-<?php echo $item['id'] ?>"
-                    href="?action=mark-item-read&amp;id=<?php echo $item['id'] ?>&amp;offset=<?php echo $offset ?>&amp;redirect=<?php echo $redirect ?>"
+                    href="?action=mark-item-read&amp;id=<?php echo $item['id'] ?>"
                     data-action="mark-read"
                     data-item-id="<?php echo $item['id'] ?>"
                     data-reverse-label="<?php echo t('mark as unread') ?>"
@@ -49,7 +49,7 @@
             <?php else: ?>
                 <a
                     id="status-<?php echo $item['id'] ?>"
-                    href="?action=mark-item-unread&amp;id=<?php echo $item['id'] ?>&amp;offset=<?php echo $offset ?>&amp;redirect=<?php echo $redirect ?>"
+                    href="?action=mark-item-unread&amp;id=<?php echo $item['id'] ?>"
                     data-action="mark-unread"
                     data-item-id="<?php echo $item['id'] ?>"
                     data-reverse-label="<?php echo t('mark as read') ?>"
