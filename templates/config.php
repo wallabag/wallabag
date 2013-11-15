@@ -82,8 +82,10 @@
                 <a href="<?php echo Helper\get_current_base_url().'feed.php?id='.$values['id'].'&amp;token='.urlencode($values['feed_token']).'&amp;status=bookmarks' ?>" target="_blank"><?php echo Helper\get_current_base_url().'feed.php?id='.$values['id'].'&amp;token='.urlencode($values['feed_token']).'&amp;status=bookmarks' ?></a>
             </li>
             <li><?php echo t('API endpoint:') ?> <strong><?php echo Helper\get_current_base_url().'jsonrpc.php' ?></strong></li>
-            <li><?php echo t('API username:') ?> <strong><?php echo Helper\escape($values['username']) ?></strong></li>
-            <li><?php echo t('API token:') ?> <strong><?php echo Helper\escape($values['api_token']) ?></strong></li>
+            <li><?php echo t('API global username:') ?> <strong><?php echo Helper\escape(API_USER) ?></strong></li>
+            <li><?php echo t('API global token:') ?> <strong><?php echo Helper\escape(Model\get_config_value('api_token')) ?></strong></li>
+            <li><?php echo t('Your API username:') ?> <strong><?php echo Helper\escape($values['username']) ?></strong></li>
+            <li><?php echo t('Your API token:') ?> <strong><?php echo Helper\escape($values['api_token']) ?></strong></li>
             <li><a href="?action=generate-tokens"><?php echo t('Generate new tokens') ?></a></li>
         </ul>
     </div>

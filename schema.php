@@ -18,11 +18,14 @@ function version_1($pdo)
 {
     $pdo->exec("
         CREATE TABLE config (
-            language TEXT DEFAULT 'en_US',
-            items_per_page INTEGER DEFAULT 100,
-            theme TEXT DEFAULT 'original',
-            items_sorting_direction TEXT DEFAULT 'desc'
+            name TEXT,
+            value TEXT
         )
+    ");
+
+    $pdo->exec("
+        INSERT INTO config (name, value)
+        VALUES ('api_token', '".\Model\generate_token()."')
     ");
 
     $pdo->exec("

@@ -24,6 +24,7 @@ defined('PROXY_PORT') or define('PROXY_PORT', 3128);
 defined('PROXY_USERNAME') or define('PROXY_USERNAME', '');
 defined('PROXY_PASSWORD') or define('PROXY_PASSWORD', '');
 defined('DEMO_MODE') or define('DEMO_MODE', false);
+defined('API_USER') or define('API_USER', 'api_user');
 
 PicoFeed\Client::proxy(PROXY_HOSTNAME, PROXY_PORT, PROXY_USERNAME, PROXY_PASSWORD);
 

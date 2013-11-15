@@ -905,6 +905,24 @@ function get_user_by_id($id)
 
 
 /**
+ * Get a config value by name
+ * 
+ * @param  string $name name of the config to return
+ * @return array a config
+ */
+function get_config_value($name)
+{
+    $config = \PicoTools\singleton('db')
+        ->table('config')
+        ->columns('value')
+        ->eq('name', $name)
+        ->findOne();
+
+    return $config['value'];
+}
+
+
+/**
  * Get a user by username
  * 
  * @param  string $username the username of the user
@@ -1151,4 +1169,18 @@ function remove_plugin_option($name)
         ->table('plugin_options')
         ->eq('name', $name)
         ->remove();
+}
+
+
+function check_api_authentication($user_params)
+{
+    $user = \PicoTools\singleton('db')
+        ->table('users')
+        ->eq('username', $user_params['username'])
+        ->eq('api_token', $user_params['api_token'])
+        ->findOne();
+
+    unset($user['password']);
+    
+    return $user;
 }
