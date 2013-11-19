@@ -38,12 +38,12 @@ $server->register('item.add', function ($user_params, $url, $fetch_it = true) {
 });
 
 // Get all bookmark items
-$server->register('item.bookmark.list', function ($user_params, $offset = null, $limit = null) {
+$server->register('item.bookmark.list', function ($user_params, $offset, $limit, $sort) {
 
     if (! ($user = can_call_api($user_params)))
         return false;
 
-    return Model\get_bookmarks($user['id'], $offset, $limit);
+    return Model\get_bookmarks($user['id'], $offset, $limit, $sort);
 });
 
 // Count bookmarks
@@ -74,7 +74,7 @@ $server->register('item.bookmark.delete', function ($user_params, $item_id) {
 });
 
 // Get all unread items
-$server->register('item.list_unread', function ($user_params, $offset = null, $limit = null) {
+$server->register('item.list_unread', function ($user_params, $offset, $limit) {
 
     if (! ($user = can_call_api($user_params)))
         return false;
@@ -92,7 +92,7 @@ $server->register('item.count_unread', function ($user_params) {
 });
 
 // Get all read items
-$server->register('item.list_read', function ($user_params, $offset = null, $limit = null) {
+$server->register('item.list_read', function ($user_params, $offset, $limit) {
 
     if (! ($user = can_call_api($user_params)))
         return false;

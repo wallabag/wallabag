@@ -15,7 +15,7 @@ $user_params = array(
 $result = $client->execute('item.add', array($user_params, 'http://cdetc.fr', true));
 
 # fetch all bookmarks
-// $result = $client->execute('item.bookmark.list', array($user_params));
+// $result = $client->execute('item.bookmark.list', array($user_params, null, null, 'asc'));
 
 # count bookmarks
 // $result = $client->execute('item.bookmark.count', array($user_params));
@@ -27,13 +27,13 @@ $result = $client->execute('item.add', array($user_params, 'http://cdetc.fr', tr
 // $result = $client->execute('item.bookmark.delete', array($user_params, 1));
 
 # get all unread items
-// $result = $client->execute('item.list_unread', array($user_params));
+// $result = $client->execute('item.list_unread', array($user_params, null, null));
 
 # count all unread items
 // $result = $client->execute('item.count_unread', array($user_params));
 
 # get all read items
-// $result = $client->execute('item.list_read', array($user_params));
+// $result = $client->execute('item.list_read', array($user_params, null, null));
 
 # count all read items
 // $result = $client->execute('item.count_read', array($user_params));
