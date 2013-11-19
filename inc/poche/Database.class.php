@@ -20,11 +20,11 @@ class Database {
                 break;
             case 'mysql':
                 $db_path = 'mysql:host=' . STORAGE_SERVER . ';dbname=' . STORAGE_DB;
-                $this->handle = new PDO($db_path, STORAGE_USER, STORAGE_PASSWORD); 
+                $this->handle = new PDO($db_path, STORAGE_USER, STORAGE_PASSWORD);
                 break;
             case 'postgres':
                 $db_path = 'pgsql:host=' . STORAGE_SERVER . ';dbname=' . STORAGE_DB;
-                $this->handle = new PDO($db_path, STORAGE_USER, STORAGE_PASSWORD); 
+                $this->handle = new PDO($db_path, STORAGE_USER, STORAGE_PASSWORD);
                 break;
         }
 
@@ -41,7 +41,7 @@ class Database {
         $query = $this->executeQuery($sql, array());
         $hasAdmin = count($query->fetchAll());
 
-        if ($hasAdmin == 0) 
+        if ($hasAdmin == 0)
             return FALSE;
 
         return TRUE;
@@ -66,7 +66,7 @@ class Database {
         $sql = 'INSERT INTO users_config ( user_id, name, value ) VALUES (?, ?, ?)';
         $params = array($id_user, 'language', LANG);
         $query = $this->executeQuery($sql, $params);
-        
+
         $sql = 'INSERT INTO users_config ( user_id, name, value ) VALUES (?, ?, ?)';
         $params = array($id_user, 'theme', DEFAULT_THEME);
         $query = $this->executeQuery($sql, $params);
@@ -79,7 +79,7 @@ class Database {
         $query = $this->executeQuery($sql, array($id));
         $result = $query->fetchAll();
         $user_config = array();
-        
+
         foreach ($result as $key => $value) {
             $user_config[$value['name']] = $value['value'];
         }
@@ -122,10 +122,10 @@ class Database {
         $params_update = array($password, $userId);
         $query = $this->executeQuery($sql_update, $params_update);
     }
-    
+
     public function updateUserConfig($userId, $key, $value) {
         $config = $this->getConfigUser($userId);
-        
+
         if (!isset ($user_config[$key])) {
             $sql = "INSERT INTO users_config (`value`, `user_id`, `name`) VALUES (?, ?, ?)";
         }
@@ -166,7 +166,7 @@ class Database {
         $query  = $this->executeQuery($sql, $params);
         $entry  = $query->fetchAll();
 
-        return $entry[0];
+        return isset($entry[0]) ? $entry[0] : null;
     }
 
     public function getEntriesByView($view, $user_id, $limit = '') {
