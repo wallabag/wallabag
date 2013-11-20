@@ -1,0 +1,6 @@
+title: //title
+body: //h2 | //p | //ul
+prune: no
+tidy: no
+
+test_url: http://www.tldp.org/HOWTO/Plug-and-Play-HOWTO-7.html

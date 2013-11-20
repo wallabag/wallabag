@@ -322,22 +322,24 @@ function add_link($url, $user_id, $fetch_it = true)
  */
 function parse_content_with_readability($content, $url)
 {
+    require_once 'vendor/PicoTools/Url.php';
     require_once 'vendor/Readability/Readability.php';
+    require_once 'vendor/Readability/simplepie/SimplePieAutoloader.php';
+    require_once 'vendor/Readability/simplepie/SimplePie/Core.php';
+    require_once 'vendor/Readability/content-extractor/ContentExtractor.php';
+    require_once 'vendor/Readability/content-extractor/SiteConfig.php';
+    require_once 'vendor/Readability/humble-http-agent/HumbleHttpAgent.php';
+    require_once 'vendor/Readability/humble-http-agent/SimplePie_HumbleHttpAgent.php';
+    require_once 'vendor/Readability/humble-http-agent/CookieJar.php';
+    require_once 'vendor/Readability/feedwriter/FeedItem.php';
+    require_once 'vendor/Readability/feedwriter/FeedWriter.php';
+    require_once 'vendor/Readability/feedwriter/DummySingleItemFeed.php';
 
-    if (! empty($content)) {
-
-        $readability = new \Readability($content, $url);
-        if ($readability->init()) {
-            return array(
-                'content' => $readability->getContent()->innerHTML,
-                'title' => $readability->getTitle()->textContent
-            );
-        }
-    }
+    $content = \PicoTools\Url::extract($url);
 
     return array(
-        'content' => 'Problem with fetching content',
-        'title' => 'Untitled'
+        'content' => $content['body'],
+        'title' => $content['title']
     );
 }
 

@@ -1,0 +1,6 @@
+title: //title
+body: //h2 | //span[@class='masque'] | //article[@class='corps_article_right']
+prune: no
+tidy: no
+
+test_url: http://www.laffont.fr/site/l_homme_subconscient_&100&9782221115336.html

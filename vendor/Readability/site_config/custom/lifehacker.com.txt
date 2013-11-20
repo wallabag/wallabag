@@ -1,0 +1,47 @@
+# Adds author text: Gawker sites commonly show as "Author: View Profile"
+author://a[@class="plus-icon modfont"]
+
+# Add date and time
+date: //span[@class="date"]
+
+body: //div[contains(@class, 'marquee-asset-wrapper') or contains(@class, 'post-content')]
+
+# Remove date and time from article text
+strip: //span[@class="date"]
+
+# Remove login/comment text
+strip: //*[(@class="presence_control_external smalltype")]
+
+strip: //div[@class="nodebyline modfont"]
+
+# Remove right sidebar
+strip: //div[@id="rightwrapper"]
+
+# Remove print header
+strip: //div[@id='printhead']/h1
+
+# Remove 'content is restricted'
+strip: //div[@id='agegate_IDHERE']
+
+# Remove follow text
+strip: //*[(@class="permalink_ads")]
+
+strip_id_or_class: inset_groups
+
+# Remove view/comment count
+strip: //div[@id='wrapper']/div[2][@class='postmeta_permalink_wrapper']/div[1][@class='postmeta_permalink']/div[2][@class='pm_line']
+
+# Remove contact text
+strip: //div[@id='wrapper']/div[1][@class='content permalink']/p[6][@class='contactinfo']
+
+# Remove medium duplicates of the article image
+strip_image_src: medium.jpg
+
+# Remove "arrow" class at bottom of page
+strip: //p[@class="arrow"]
+
+# Remove "track" image from article body
+strip: //img[@alt="track"]
+test_url: http://lifehacker.com/5925801/how-can-i-turn-vague-goals-into-actionable-to+dos
+test_url: http://lifehacker.com/5941600/hack-an-old-computer-mouse-into-a-wireless-bluetooth-mouse
+test_url: http://lifehacker.com/what-happens-to-the-brain-when-you-meditate-and-how-it-1202533314
