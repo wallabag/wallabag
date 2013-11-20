@@ -14,6 +14,9 @@
     <?php echo Helper\form_label(t('Confirmation'), 'confirmation') ?>
     <?php echo Helper\form_password('confirmation', $values, $errors, (!DEMO_MODE?array():array('disabled'))) ?><br/>
 
+    <?php echo Helper\form_label(t('Email'), 'email') ?>
+    <?php echo Helper\form_text('email', $values, $errors) ?><br/>
+
     <?php echo Helper\form_label(t('Language'), 'language') ?>
     <?php echo Helper\form_select('language', $languages, $values, $errors) ?><br/>
 

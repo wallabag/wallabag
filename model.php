@@ -23,6 +23,7 @@ require_once 'vendor/SimpleValidator/Validators/MinLength.php';
 require_once 'vendor/SimpleValidator/Validators/Integer.php';
 require_once 'vendor/SimpleValidator/Validators/Equals.php';
 require_once 'vendor/SimpleValidator/Validators/Integer.php';
+require_once 'vendor/SimpleValidator/Validators/Email.php';
 
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
@@ -1059,6 +1060,7 @@ function validate_config_update(array $values)
             new Validators\Required('username', t('The user name is required')),
             new Validators\MaxLength('username', t('The maximum length is 50 characters'), 50),
             new Validators\Required('password', t('The password is required')),
+            new Validators\Email('email', t('The email is incorrect')),
             new Validators\MinLength('password', t('The minimum length is 6 characters'), 6),
             new Validators\Required('confirmation', t('The confirmation is required')),
             new Validators\Equals('password', 'confirmation', t('Passwords doesn\'t match')),
@@ -1072,6 +1074,7 @@ function validate_config_update(array $values)
         $v = new Validator($values, array(
             new Validators\Required('username', t('The user name is required')),
             new Validators\MaxLength('username', t('The maximum length is 50 characters'), 50),
+            new Validators\Email('email', t('The email is incorrect')),
             new Validators\Required('items_per_page', t('Value required')),
             new Validators\Integer('items_per_page', t('Must be an integer')),
             new Validators\Required('theme', t('Value required')),
