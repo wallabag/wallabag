@@ -424,7 +424,7 @@ function count_bookmarks($user_id)
  * @param  string $items_sorting_direction sort by asc or desc
  * @return array list of the bookmarked items
  */
-function get_bookmarks($user_id, $offset = null, $limit = null, $items_sorting_direction)
+function get_bookmarks($user_id, $offset = null, $limit = null, $items_sorting_direction = 'desc')
 {
     return \PicoTools\singleton('db')
         ->table('entries')
