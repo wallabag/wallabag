@@ -2,5 +2,4 @@ assets/*
 cache/*
 vendor
 composer.phar
-db/poche.sqlite
-inc/poche/config.inc.php
+composer.lock
