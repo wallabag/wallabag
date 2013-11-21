@@ -17,12 +17,18 @@ class UnitTestsCommand extends BaseCommand
     protected function configure()
     {
         $this
-            ->setName('tests:units')
+            ->setName('tests:unit')
             ->setDescription('Launches units tests with Atoum')
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $atoum = $this->getProjectDirectory().'/vendor/bin/atoum';
+        $unitTests = $this->getProjectDirectory().'/tests';
+
+        passthru(sprintf('%s -d %s -ft', $atoum, $unitTests), $status);
+
+        return $status;
     }
 }
