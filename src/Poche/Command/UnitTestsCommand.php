@@ -26,8 +26,9 @@ class UnitTestsCommand extends BaseCommand
     {
         $atoum = $this->getProjectDirectory().'/vendor/bin/atoum';
         $unitTests = $this->getProjectDirectory().'/tests';
+        $bootstrapFile = $this->getProjectDirectory().'/tests/bootstrap.php';
 
-        passthru(sprintf('%s -d %s -ft', $atoum, $unitTests), $status);
+        passthru(sprintf('%s -d %s -bf %s -ft', $atoum, $unitTests, $bootstrapFile), $status);
 
         return $status;
     }

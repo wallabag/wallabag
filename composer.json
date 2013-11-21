@@ -7,6 +7,6 @@
         "knplabs/console-service-provider": "dev-master"
     },
     "autoload": {
-        "psr-0": { "Poche": "src/" }
+        "psr-0": { "Poche\\": "src/" }
     }
 }
