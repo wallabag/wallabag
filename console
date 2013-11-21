@@ -1,0 +1,10 @@
+#!/usr/bin/env php
+<?php
+set_time_limit(0);
+
+require_once __DIR__.'/vendor/autoload.php';
+require_once __DIR__.'/src/app.php';
+
+$console = $app['console'];
+
+echo "Hi there";
