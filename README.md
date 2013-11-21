@@ -1,6 +1,6 @@
 # Poche v2
 
-This a Proof of Concept of Poche v2 using the PHP micro-framework [Silex](http://silex.sensiolabs.org).
+This is a Proof of Concept of Poche v2 using the PHP micro-framework [Silex](http://silex.sensiolabs.org).
 
 # Installation
 
