@@ -2,6 +2,7 @@
 namespace Poche\Command;
 
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 use Knp\Command\Command as BaseCommand;
@@ -19,6 +20,7 @@ class UnitTestsCommand extends BaseCommand
         $this
             ->setName('tests:unit')
             ->setDescription('Launches units tests with Atoum')
+            ->addOption('loop', null, InputOption::VALUE_NONE, 'Execute tests in an infinite loop')
         ;
     }
 
@@ -27,8 +29,12 @@ class UnitTestsCommand extends BaseCommand
         $atoum = $this->getProjectDirectory().'/vendor/bin/atoum';
         $unitTests = $this->getProjectDirectory().'/tests';
         $bootstrapFile = $this->getProjectDirectory().'/tests/bootstrap.php';
+        $command = '%s -d %s -bf %s -ft';
 
-        passthru(sprintf('%s -d %s -bf %s -ft', $atoum, $unitTests, $bootstrapFile), $status);
+        if ($input->getOption('loop')) {
+            $command .= ' -l';
+        }
+        passthru(sprintf($command, $atoum, $unitTests, $bootstrapFile), $status);
 
         return $status;
     }
