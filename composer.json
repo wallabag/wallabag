@@ -1,7 +1,9 @@
 {
     "require": {
         "silex/silex": "~1.1",
-        "atoum/atoum" : "dev-master"
+        "atoum/atoum" : "dev-master",
+        "twig/twig": ">=1.8,<2.0-dev",
+        "symfony/twig-bridge": "~2.3"
     },
     "autoload": {
         "psr-0": { "Poche": "src/" }
