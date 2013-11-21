@@ -7,4 +7,6 @@ require_once __DIR__.'/src/app.php';
 
 $console = $app['console'];
 
-echo "Hi there";
+$console->add(new Poche\Command\UnitTestsCommand());
+
+$console->run();
