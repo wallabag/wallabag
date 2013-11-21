@@ -15,7 +15,7 @@ class Token
             return substr(base64_encode(file_get_contents('/dev/urandom', false, null, 0, 20)), 0, 15);
         }
         else {
-            return substr(base64_encode(uniqid(mt_rand(), true)), 0, 20);
+            return substr(base64_encode(uniqid(mt_rand(), true)), 0, 15);
         }
     }
 
