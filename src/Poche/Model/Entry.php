@@ -16,4 +16,8 @@ class Entry
         return $this->id;
     }
 
+    public function getTitle() {
+        return $this->title;
+    }
+
 }
