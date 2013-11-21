@@ -3,3 +3,4 @@ cache/*
 vendor
 composer.phar
 composer.lock
+poche.db

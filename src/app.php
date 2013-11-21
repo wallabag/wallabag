@@ -13,3 +13,9 @@ $app->register(new ConsoleServiceProvider(), [
     'console.project_directory' => __DIR__.'/..',
 ]);
 
+$app->register(new Silex\Provider\DoctrineServiceProvider(), array(
+    'db.options' => array(
+        'driver'   => 'pdo_sqlite',
+        'path'     => __DIR__.'/../poche.db',
+    ),
+));

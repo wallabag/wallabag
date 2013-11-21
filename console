@@ -8,5 +8,6 @@ require_once __DIR__.'/src/app.php';
 $console = $app['console'];
 
 $console->add(new Poche\Command\UnitTestsCommand());
+$console->add(new Poche\Command\CreateSchemaCommand());
 
 $console->run();

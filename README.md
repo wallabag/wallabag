@@ -17,6 +17,10 @@ If you are using PHP 5.4 you can run Poche v2 by using the embedded webserver:
 
 Poche should now be running at [http://localhost:8080](http://localhost:8080).
 
+Then you should initialize your database by running:
+
+    ./console db:create
+
 # Test
 
 To run the test suite just use:
