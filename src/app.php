@@ -8,7 +8,7 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 ));
 
 $app->register(new ConsoleServiceProvider(), [
-    'console.name' => '%normalized_name%',
-    'console.version' => '0',
+    'console.name' => 'Poche',
+    'console.version' => '1.0.0',
     'console.project_directory' => __DIR__.'/..',
 ]);
