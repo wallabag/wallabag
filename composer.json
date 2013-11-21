@@ -1,5 +1,9 @@
 {
     "require": {
-        "silex/silex": "~1.1"
+        "silex/silex": "~1.1",
+        "atoum/atoum" : "dev-master"
+    },
+    "autoload": {
+        "psr-0": { "Poche": "src/" }
     }
 }
