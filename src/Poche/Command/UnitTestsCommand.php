@@ -27,7 +27,7 @@ class UnitTestsCommand extends BaseCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $atoum = $this->getProjectDirectory().'/vendor/bin/atoum';
-        $unitTests = $this->getProjectDirectory().'/tests';
+        $unitTests = $this->getProjectDirectory().'/tests/units/';
         $bootstrapFile = $this->getProjectDirectory().'/tests/units/bootstrap.php';
         $command = '%s -d %s -bf %s -ft';
 
