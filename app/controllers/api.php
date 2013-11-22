@@ -6,7 +6,7 @@ $api->get('/', function () { return 'API home page'; });
 
 $api->get('/entries', function () use ($app) {
     $entries = $app['entry_api']->getEntries();
-    return $app->json($entry, 200);
+    return $app->json($entries, 200);
 });
 
 return $api;
