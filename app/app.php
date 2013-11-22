@@ -1,5 +1,6 @@
 <?php
 use Knp\Provider\ConsoleServiceProvider;
+use Poche\Api\EntryApi;
 
 $app = new Silex\Application();
 
@@ -19,3 +20,7 @@ $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
         'path'     => __DIR__.'/../poche.db',
     ),
 ));
+
+$app['entry_api'] = $app->share(function ($app) {
+    return new EntryApi($app['db']);
+});
