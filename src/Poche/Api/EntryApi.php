@@ -11,7 +11,8 @@ class EntryApi
     }
 
     public function getEntries() {
-        //Todo
-        return array();
+        $sql = "SELECT * FROM entries";
+        $entries = $this->db->fetchAssoc($sql);
+        return ($entries ? $entries : array());
     }
 }
