@@ -10,6 +10,8 @@ class ApiTest extends WebTestCase
         require __DIR__.'/../../app/app.php';
         require __DIR__ . '/../../app/controllers/controllers.php';
 
+        $app['debug'] = true;
+
         return $app;
     }
 
@@ -18,7 +20,7 @@ class ApiTest extends WebTestCase
         $client = $this->createClient();
         $crawler = $client->request('GET', '/api/entries');
 
-        var_dump($client->getResponse());die;
+        var_dump($client->getResponse()->getContent());die;
 
         $this->assertTrue($client->getResponse()->isOk());
 
