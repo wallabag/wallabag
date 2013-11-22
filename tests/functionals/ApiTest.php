@@ -10,7 +10,6 @@ class ApiTest extends WebTestCase
         require __DIR__.'/../../app/app.php';
         require __DIR__ . '/../../app/controllers/controllers.php';
 
-        $app['debug'] = true;
         return $app;
     }
 
