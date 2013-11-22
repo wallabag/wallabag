@@ -5,7 +5,8 @@
         "twig/twig": ">=1.8,<2.0-dev",
         "symfony/twig-bridge": "~2.3",
         "knplabs/console-service-provider": "dev-master",
-        "doctrine/dbal": "2.2.*"
+        "doctrine/dbal": "2.2.*",
+        "symfony/browser-kit": ">=2.3,<2.4-dev"
     },
     "autoload": {
         "psr-0": { "Poche\\": "src/" }
