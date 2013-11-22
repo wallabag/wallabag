@@ -18,6 +18,8 @@ class ApiTest extends WebTestCase
         $client = $this->createClient();
         $crawler = $client->request('GET', '/api/entries');
 
+        var_dump($client->getResponse());die;
+
         $this->assertTrue($client->getResponse()->isOk());
 
 
