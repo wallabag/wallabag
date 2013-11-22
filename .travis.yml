@@ -9,3 +9,4 @@ before_script:
 
 script:
     - ./console tests:unit
+    - phpunit
