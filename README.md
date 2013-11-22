@@ -23,6 +23,10 @@ Then you should initialize your database by running:
 
 # Test
 
-To run the test suite just use:
+For unit tests (using Atoum) use:
 
     ./console tests:unit
+
+For functional tests you'll need phpunit:
+
+    phpunit
