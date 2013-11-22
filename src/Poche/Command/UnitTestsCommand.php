@@ -28,7 +28,7 @@ class UnitTestsCommand extends BaseCommand
     {
         $atoum = $this->getProjectDirectory().'/vendor/bin/atoum';
         $unitTests = $this->getProjectDirectory().'/tests';
-        $bootstrapFile = $this->getProjectDirectory().'/tests/bootstrap.php';
+        $bootstrapFile = $this->getProjectDirectory().'/tests/units/bootstrap.php';
         $command = '%s -d %s -bf %s -ft';
 
         if ($input->getOption('loop')) {
