@@ -4,3 +4,4 @@ vendor
 composer.phar
 composer.lock
 poche.db
+poche_test.db
