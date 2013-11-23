@@ -28,7 +28,7 @@ class CreateSchemaCommand extends BaseCommand
         $app = $this->getSilexApplication();
         $db = $app['db'];
 
-        Schema::executeSchema($db);
+        Schema::createTables($db);
 
         $output->writeln("<info>Schema created</info>");
     }

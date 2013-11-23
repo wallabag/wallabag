@@ -1,29 +1,17 @@
 <?php
 namespace Poche\Tests\Functionals;
 
-use Silex\WebTestCase;
+require __DIR__.'/PocheWebTestCase.php';
 
-class ApiTest extends WebTestCase
+
+class ApiTest extends PocheWebTestCase
 {
-    public function createApplication()
-    {
-        require __DIR__.'/../../app/app.php';
-        require __DIR__ . '/../../app/controllers/controllers.php';
-
-        $app['debug'] = true;
-
-        return $app;
-    }
-
     public function testGetEntries()
     {
         $client = $this->createClient();
         $crawler = $client->request('GET', '/api/entries');
 
-        echo($client->getResponse()->getContent());die;
-
         $this->assertTrue($client->getResponse()->isOk());
-
 
         // Assert that the "Content-Type" header is "application/json"
         $this->assertTrue(

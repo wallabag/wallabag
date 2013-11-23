@@ -5,7 +5,17 @@ use Poche\Util\Token;
 
 class Schema
 {
-    public static function executeSchema($db) {
+
+    public static function dropTables($db) {
+        $db->query("DROP TABLE IF EXISTS config");
+        $db->query("DROP TABLE IF EXISTS users");
+        $db->query("DROP TABLE IF EXISTS entries");
+        $db->query("DROP TABLE IF EXISTS tags");
+        $db->query("DROP TABLE IF EXISTS tags_entries");
+        $db->query("DROP TABLE IF EXISTS plugin_options");
+    }
+
+    public static function createTables($db) {
 
         $db->query("
             CREATE TABLE config (
