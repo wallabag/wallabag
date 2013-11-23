@@ -1,4 +1,4 @@
-# Poche v2
+# Poche v2 [![Build Status](https://travis-ci.org/inthepoche/poche.png?branch=v2-silex)](https://travis-ci.org/inthepoche/poche)
 
 This is a Proof of Concept of Poche v2 using the PHP micro-framework [Silex](http://silex.sensiolabs.org).
 
