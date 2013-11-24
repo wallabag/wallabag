@@ -1,9 +1,6 @@
 <?php
 namespace Poche\Tests\Functionals;
 
-require __DIR__.'/PocheWebTestCase.php';
-
-
 class ApiTest extends PocheWebTestCase
 {
     public function testGetEntries()
