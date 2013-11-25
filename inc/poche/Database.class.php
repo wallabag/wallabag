@@ -166,7 +166,7 @@ class Database {
         $query  = $this->executeQuery($sql, $params);
         $entry  = $query->fetchAll();
 
-        return $entry[0];
+        return isset($entry[0]) ? $entry[0] : null;
     }
 
     public function getEntriesByView($view, $user_id, $limit = '') {
