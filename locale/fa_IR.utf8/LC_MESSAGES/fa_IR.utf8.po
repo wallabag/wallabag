@@ -11,164 +11,163 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 
 msgid "config"
-msgstr "config"
+msgstr "تنظیمات"
 
 msgid "Poching a link"
-msgstr "Poching a link"
+msgstr "پیوندی را poche کنید"
 
 msgid "read the documentation"
-msgstr "read the documentation"
+msgstr "راهنما را بخوانید"
 
 msgid "by filling this field"
-msgstr "by filling this field"
+msgstr "با پرکردن این بخش"
 
 msgid "poche it!"
-msgstr "poche it!"
+msgstr "poche کنید!"
 
 msgid "Updating poche"
-msgstr "Updating poche"
+msgstr "به‌روزرسانی poche"
 
 msgid "your version"
-msgstr "your version"
+msgstr "نسخهٔ شما"
 
 msgid "latest stable version"
-msgstr "latest stable version"
+msgstr "آخرین نسخهٔ پایدار"
 
 msgid "a more recent stable version is available."
-msgstr "a more recent stable version is available."
+msgstr "نسخهٔ پایدار تازه‌ای منتشر شده است."
 
 msgid "you are up to date."
-msgstr "you are up to date."
+msgstr "شما به‌روز هستید."
 
 msgid "latest dev version"
-msgstr "latest dev version"
+msgstr "آخرین نسخهٔ آزمایشی"
 
 msgid "a more recent development version is available."
-msgstr "a more recent development version is available."
+msgstr "نسخهٔ آزمایشی تازه‌ای منتشر شده است."
 
 msgid "Change your password"
-msgstr "Change your password"
+msgstr "گذرواژهٔ خود را تغییر دهید"
 
 msgid "New password:"
-msgstr "New password:"
+msgstr "گذرواژهٔ تازه:"
 
 msgid "Password"
-msgstr "Password"
+msgstr "گذرواژه"
 
 msgid "Repeat your new password:"
-msgstr "Repeat your new password:"
+msgstr "گذرواژهٔ تازه را دوباره وارد کنید"
 
 msgid "Update"
-msgstr "Update"
+msgstr "به‌روزرسانی"
 
 msgid "Import"
-msgstr "Import"
+msgstr "درون‌ریزی"
 
 msgid "Please execute the import script locally, it can take a very long time."
-msgstr ""
-"Please execute the import script locally, it can take a very long time."
+msgstr "لطفاً برنامهٔ درون‌ریزی را به‌طور محلی اجرا کنید، شاید خیلی طول بکشد."
 
 msgid "More infos in the official doc:"
-msgstr "More infos in the official doc:"
+msgstr "اطلاعات بیشتر در راهنمای رسمی:"
 
 msgid "import from Pocket"
-msgstr "import from Pocket"
+msgstr "درون‌ریزی از Pocket"
 
 msgid "import from Readability"
-msgstr "import from Readability"
+msgstr "درون‌ریزی از Readability"
 
 msgid "import from Instapaper"
-msgstr "import from Instapaper"
+msgstr "درون‌ریزی از Instapaper"
 
 msgid "Export your poche datas"
-msgstr "Export your poche datas"
+msgstr "داده‌های poche خود را برون‌بری کنید"
 
 msgid "Click here"
-msgstr "Click here"
+msgstr "اینجا را کلیک کنید"
 
 msgid "to export your poche datas."
-msgstr "to export your poche datas."
+msgstr "برای برون‌بری داده‌های poche شما"
 
 msgid "back to home"
-msgstr "back to home"
+msgstr "بازگشت به خانه"
 
 msgid "installation"
-msgstr "installation"
+msgstr "نصب"
 
 msgid "install your poche"
-msgstr "install your poche"
+msgstr "poche خود را نصب کنید"
 
 msgid ""
 "poche is still not installed. Please fill the below form to install it. "
 "Don't hesitate to <a href='http://inthepoche.com/doc'>read the documentation "
 "on poche website</a>."
 msgstr ""
-"poche is still not installed. Please fill the below form to install it. "
-"Don't hesitate to <a href='http://inthepoche.com/doc'>read the documentation "
-"on poche website</a>."
+"poche هنوز نصب نیست. برای نصب لطفاً فرم زیر را پر کنید. "
+"خواندن <a href='http://inthepoche.com/doc'>راهنما "
+"در وبگاه poche</a> را از یاد نبرید."
 
 msgid "Login"
-msgstr "Login"
+msgstr "ورود"
 
 msgid "Repeat your password"
-msgstr "Repeat your password"
+msgstr "گذرواژه را دوباره وارد کنید"
 
 msgid "Install"
-msgstr "Install"
+msgstr "نصب"
 
 msgid "back to top"
-msgstr "back to top"
+msgstr "بازگشت به بالای صفحه"
 
 msgid "favoris"
-msgstr "favoris"
+msgstr "بهترین‌ها"
 
 msgid "archive"
-msgstr "archive"
+msgstr "بایگانی"
 
 msgid "unread"
-msgstr "unread"
+msgstr "خوانده‌نشده"
 
 msgid "by date asc"
-msgstr "by date asc"
+msgstr "قدیمی‌ترها بالا"
 
 msgid "by date"
-msgstr "by date"
+msgstr "با تاریخ"
 
 msgid "by date desc"
-msgstr "by date desc"
+msgstr "تازه‌ترها بالا"
 
 msgid "by title asc"
-msgstr "by title asc"
+msgstr "با عنوان (الفبایی)"
 
 msgid "by title"
-msgstr "by title"
+msgstr "با عنوان"
 
 msgid "by title desc"
-msgstr "by title desc"
+msgstr "با عنوان (الفبایی معکوس)"
 
 msgid "No link available here!"
-msgstr "No link available here!"
+msgstr "اینجا پیوندی موجود نیست!"
 
 msgid "toggle mark as read"
-msgstr "toggle mark as read"
+msgstr "خوانده‌شده/خوانده‌نشده"
 
 msgid "toggle favorite"
-msgstr "toggle favorite"
+msgstr "جزء بهترین‌ها هست/نیست"
 
 msgid "delete"
-msgstr "delete"
+msgstr "پاک‌کردن"
 
 msgid "original"
-msgstr "original"
+msgstr "اصلی"
 
 msgid "results"
-msgstr "results"
+msgstr "نتایج"
 
 msgid "tweet"
-msgstr "tweet"
+msgstr "توییت"
 
 msgid "email"
-msgstr "email"
+msgstr "ایمیل"
 
 msgid "shaarli"
 msgstr "shaarli"
@@ -177,52 +176,52 @@ msgid "flattr"
 msgstr "flattr"
 
 msgid "this article appears wrong?"
-msgstr "this article appears wrong?"
+msgstr "این مطلب اشتباه نمایش داده شده؟"
 
 msgid "create an issue"
-msgstr "create an issue"
+msgstr "یک درخواست رفع‌مشکل بنویسید"
 
 msgid "or"
-msgstr "or"
+msgstr "یا"
 
 msgid "contact us by mail"
-msgstr "contact us by mail"
+msgstr "به ما ایمیل بزنید"
 
 msgid "plop"
 msgstr "plop"
 
 msgid "home"
-msgstr "home"
+msgstr "خانه"
 
 msgid "favorites"
-msgstr "favorites"
+msgstr "بهترین‌ها"
 
 msgid "logout"
-msgstr "logout"
+msgstr "بیرون رفتن"
 
 msgid "powered by"
-msgstr "powered by"
+msgstr "نیروگرفته از"
 
 msgid "debug mode is on so cache is off."
-msgstr "debug mode is on so cache is off."
+msgstr "حالت عیب‌یابی فعال است، پس کاشه خاموش است."
 
 msgid "your poche version:"
-msgstr "your poche version:"
+msgstr "نسخهٔ poche شما:"
 
 msgid "storage:"
-msgstr "storage:"
+msgstr "ذخیره‌سازی:"
 
 msgid "login to your poche"
-msgstr "login to your poche"
+msgstr "به poche خود وارد شوید"
 
 msgid "you are in demo mode, some features may be disabled."
-msgstr "you are in demo mode, some features may be disabled."
+msgstr "این تنها نسخهٔ نمایشی است، برخی از ویژگی‌ها کار نمی‌کنند."
 
 msgid "Stay signed in"
-msgstr "Stay signed in"
+msgstr "مرا به خاطر بسپار"
 
 msgid "(Do not check on public computers)"
-msgstr "(Do not check on public computers)"
+msgstr "(روی رایانه‌های عمومی این کار را نکنید)"
 
 msgid "Sign in"
-msgstr "Sign in"
+msgstr "ورود"
