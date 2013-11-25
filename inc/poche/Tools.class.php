@@ -53,12 +53,12 @@ class Tools
 
         $scriptname = str_replace('/index.php', '/', $_SERVER["SCRIPT_NAME"]);
 
-        if (!isset($_SERVER["SERVER_NAME"])) {
+        if (!isset($_SERVER["HTTP_HOST"])) {
             return $scriptname;
         }
 
         return 'http' . ($https ? 's' : '') . '://'
-            . $_SERVER["SERVER_NAME"] . $serverport . $scriptname;
+            . $_SERVER["HTTP_HOST"] . $serverport . $scriptname;
     }
 
     public static function redirect($url = '')
@@ -133,7 +133,9 @@ class Tools
             $curl = curl_init();
             curl_setopt($curl, CURLOPT_URL, $url);
             curl_setopt($curl, CURLOPT_TIMEOUT, $timeout);
-            curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+            if (!ini_get('open_basedir') && !ini_get('safe_mode')) {
+                curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+            }
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($curl, CURLOPT_HEADER, false);
 

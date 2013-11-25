@@ -327,7 +327,7 @@ class Poche
     /**
      * Call action (mark as fav, archive, delete, etc.)
      */
-    public function action($action, Url $url, $id = 0, $import = FALSE)
+    public function action($action, Url $url, $id = 0, $import = FALSE, $autoclose = FALSE)
     {
         switch ($action)
         {
@@ -358,7 +358,11 @@ class Poche
                 }
 
                 if (!$import) {
-                    Tools::redirect('?view=home');
+                    if ($autoclose == TRUE) {
+                      Tools::redirect('?view=home');
+                    } else {
+                      Tools::redirect('?view=home&closewin=true');
+                    }
                 }
                 break;
             case 'delete':
@@ -374,7 +378,7 @@ class Poche
                     $msg = 'error : can\'t delete link #' . $id;
                 }
                 Tools::logm($msg);
-                Tools::redirect();
+                Tools::redirect('?');
                 break;
             case 'toggle_fav' :
                 $this->store->favoriteById($id, $this->user->getId());

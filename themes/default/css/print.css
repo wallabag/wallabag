@@ -24,7 +24,8 @@ body > footer,
 div.tools,
 header div,
 .messages,
-.entrie + .results {
+.entrie + .results,
+#article_toolbar {
     display: none !important;
 }
 

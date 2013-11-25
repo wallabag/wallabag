@@ -1,0 +1,228 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Nicolas Lœuillet <nicolas.loeuillet@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+
+msgid "config"
+msgstr "настройки"
+
+msgid "Poching a link"
+msgstr "Сохраняю ссылку"
+
+msgid "read the documentation"
+msgstr "читать инструкцию"
+
+msgid "by filling this field"
+msgstr "заполнением этого поля"
+
+msgid "poche it!"
+msgstr "Прикарманить!"
+
+msgid "Updating poche"
+msgstr "Обновляю poche"
+
+msgid "your version"
+msgstr "Ваша версия"
+
+msgid "latest stable version"
+msgstr "крайняя стабильная версия"
+
+msgid "a more recent stable version is available."
+msgstr "есть более новая стабильная версия."
+
+msgid "you are up to date."
+msgstr "у Вас всё самое новое."
+
+msgid "latest dev version"
+msgstr "крайняя версия разработчиков"
+
+msgid "a more recent development version is available."
+msgstr "есть более свежая версия разработчиков."
+
+msgid "Change your password"
+msgstr "Смени пароль"
+
+msgid "New password:"
+msgstr "Новый пароль:"
+
+msgid "Password"
+msgstr "Пароль"
+
+msgid "Repeat your new password:"
+msgstr "Ещё раз новый пароль:"
+
+msgid "Update"
+msgstr "Обновить"
+
+msgid "Import"
+msgstr "Импортировать"
+
+msgid "Please execute the import script locally, it can take a very long time."
+msgstr ""
+"Выполните сценарий импорта локально - он может занять слишком много времени."
+
+msgid "More infos in the official doc:"
+msgstr "Больше сведений в официальной документации:"
+
+msgid "import from Pocket"
+msgstr "импортировать из Pocket"
+
+msgid "import from Readability"
+msgstr "импортировать из Readability"
+
+msgid "import from Instapaper"
+msgstr "импортировать из Instapaper"
+
+msgid "Export your poche datas"
+msgstr "Экспортировать данные poche"
+
+msgid "Click here"
+msgstr "Кликни сюда"
+
+msgid "to export your poche datas."
+msgstr "чтобы экспортировать твои записи из poche."
+
+msgid "back to home"
+msgstr "домой"
+
+msgid "installation"
+msgstr "установка"
+
+msgid "install your poche"
+msgstr "установить твой poche"
+
+msgid ""
+"poche is still not installed. Please fill the below form to install it. "
+"Don't hesitate to <a href='http://inthepoche.com/doc'>read the documentation "
+"on poche website</a>."
+msgstr ""
+"poche всё ещё не установлен. Надо заполнить форму ниже, чтобы установить "
+"его. Неплохо также <a href='http://inthepoche.com/doc'>прочесть документацию "
+"на сайте poche</a>."
+
+msgid "Login"
+msgstr "Регистрационное имя"
+
+msgid "Repeat your password"
+msgstr "Повтори пароль"
+
+msgid "Install"
+msgstr "Установить"
+
+msgid "back to top"
+msgstr "наверх"
+
+msgid "favoris"
+msgstr "избранное"
+
+msgid "archive"
+msgstr "архив"
+
+msgid "unread"
+msgstr "нечитанное"
+
+msgid "by date asc"
+msgstr "по дате, сперва старые"
+
+msgid "by date"
+msgstr "по дате"
+
+msgid "by date desc"
+msgstr "по дате, сперва новые"
+
+msgid "by title asc"
+msgstr "по заголовку (прямой)"
+
+msgid "by title"
+msgstr "по заголовку"
+
+msgid "by title desc"
+msgstr "по заголовку (обратный)"
+
+msgid "No link available here!"
+msgstr "Здесь нет линка!"
+
+msgid "toggle mark as read"
+msgstr "изменить отметку 'прочитано'"
+
+msgid "toggle favorite"
+msgstr "изменить избранность"
+
+msgid "delete"
+msgstr "удалить"
+
+msgid "original"
+msgstr "исходный"
+
+msgid "results"
+msgstr "найдено"
+
+msgid "tweet"
+msgstr "твитнуть"
+
+msgid "email"
+msgstr "отправить по почте"
+
+msgid "shaarli"
+msgstr "Шаарли"
+
+msgid "flattr"
+msgstr "проспонсировать"
+
+msgid "this article appears wrong?"
+msgstr "статья выглядит криво?"
+
+msgid "create an issue"
+msgstr "оповестить об ошибке"
+
+msgid "or"
+msgstr "или"
+
+msgid "contact us by mail"
+msgstr "связаться по почте"
+
+msgid "plop"
+msgstr "plop"
+
+msgid "home"
+msgstr "домой"
+
+msgid "favorites"
+msgstr "избранное"
+
+msgid "logout"
+msgstr "выйти"
+
+msgid "powered by"
+msgstr "на основе"
+
+msgid "debug mode is on so cache is off."
+msgstr "включён режим отладки - кеш выключен."
+
+msgid "your poche version:"
+msgstr "Ваша версия poche:"
+
+msgid "storage:"
+msgstr "хранилище:"
+
+msgid "login to your poche"
+msgstr "войти в свой poche"
+
+msgid "you are in demo mode, some features may be disabled."
+msgstr "демонстрационный режим - работают не все возможности."
+
+msgid "Stay signed in"
+msgstr "Оставаться зарегистрированным"
+
+msgid "(Do not check on public computers)"
+msgstr "(Не отмечай на чужих компьютерах)"
+
+msgid "Sign in"
+msgstr "Зарегистрироваться"
