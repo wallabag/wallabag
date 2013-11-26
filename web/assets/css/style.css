@@ -1,0 +1,35 @@
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto Regular'), local('Roboto-Regular'), url(../fonts/Roboto.woff) format('woff');
+}
+
+body {
+    margin: 10px;
+    font-family: 'Roboto',Verdana,Geneva,sans-serif;
+    font-size: 16px;
+    color: #000;
+}
+
+header {
+    text-align: center;
+}
+
+header h1 {
+    font-size: 1.3em;
+}
+
+a,
+a:hover,
+a:visited {
+    color: #000;
+}
+
+footer {
+    clear: both;
+}
+
+.reading-time {
+    font-size: 0.8em;
+}

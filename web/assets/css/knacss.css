@@ -1,0 +1,1121 @@
+/*!
+* www.KNACSS.com V2.9 (2013-10) @author: Raphael Goetter, Alsacreations
+* Licence WTFPL http://www.wtfpl.net/ 
+*/
+
+/* ----------------------------- */
+/* ==reset                       */
+/* ----------------------------- */
+
+/* base font-size corresponds to 10px and is adapted to rem unit */
+html {
+    font-size: 62.5%;
+}
+body {
+    background-color: #fff;
+    color: #000;
+    font-family: helvetica, arial, sans-serif;
+    font-size: 1.4em; /* equiv 14px */
+    line-height: 1.5; /* adapt to your design */
+}
+
+/* font-sizing for content */
+/* preserves vertical-rythm, thanks to http://soqr.fr/vertical-rhythm/ */
+p,
+ul,
+ol,
+dl,
+blockquote,
+pre,
+td,
+th,
+label,
+textarea,
+caption,
+details,
+figure {
+    margin: .75em 0 0;
+    line-height: 1.5;
+}
+h1, .h1-like {
+    margin: 0.6563em 0 0 0;
+    font-size: 2.2857em; /* equiv 32px */
+    line-height: 1.3126;
+}
+h2, .h2-like {
+    margin: 0.75em 0 0 0;
+    font-size: 2em; /* equiv 28px */
+    line-height: 1.5;
+}
+h3, .h3-like {
+    margin: 0.875em 0 0 0;
+    font-size: 1.7143em; /* equiv 24px */
+    line-height: 1.75;
+}
+h4, .h4-like {
+    margin: 1.05em 0 0 0;
+    font-size: 1.4286em; /* equiv 20px */
+    line-height: 1.05;
+}
+h5, .h5-like {
+    margin: 1.1667em 0 0 0;
+    font-size: 1.2857em; /* equiv 18px */
+    line-height: 1.1667;
+}
+h6, .h6-like {
+    margin: 1.3125em 0 0 0;
+    font-size: 1.1429em; /* equiv 16px */
+    line-height: 1.3125;
+}
+
+/* alternate font-sizing */
+.smaller {
+    font-size: .7143em; /* equiv 10px */
+}
+.small {
+    font-size: .8571em; /* equiv 12px */
+}
+.big {
+    font-size: 1.1429em; /* equiv 16px */
+}
+.bigger {
+    font-size: 1.2857em; /* equiv 18px */
+}
+.biggest {
+    font-size: 1.4286em; /* equiv 20px */
+}
+
+/* soft reset */
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+ul,
+ol {
+    padding-left: 2em;
+}
+ul.unstyled {
+    list-style: none;
+}
+code, 
+pre,
+samp,
+kbd {
+    white-space: pre-wrap;
+    font-family: consolas, 'DejaVu Sans Mono', courier, monospace;
+    line-height: 1em;
+}
+code, kbd, mark {
+    border-radius: 2px;
+}
+em {
+    font-style: italic;
+}
+strong {
+    font-weight: bold;
+}
+kbd {
+    padding: 0 2px;
+    border: 1px solid #999;
+}
+code {
+    padding: 2px 4px;
+    background: rgba(0,0,0,.04);
+    color: #b11; 
+}
+mark {
+    padding:2px 4px;
+    background: #ff0;
+}
+sup,
+sub {
+    vertical-align: 0;
+    position: relative;
+}
+sup {
+    bottom: 1ex;
+}
+sub {
+    top: .5ex;
+}
+table { margin-bottom: 1.5em; }
+
+/* avoid top margins on first content element */
+p:first-child,
+ul:first-child,
+ol:first-child,
+dl:first-child,
+blockquote:first-child,
+pre:first-child,
+h1:first-child,
+h2:first-child,
+h3:first-child,
+h4:first-child,
+h5:first-child,
+h6:first-child {
+    margin-top: 0;
+}
+
+/* avoid margins on nested elements */
+li p,
+li ul,
+li ol {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+/* max values */
+img, table, td, blockquote, code, pre, textarea, input, video {
+    max-width: 100%;
+}
+/* pictures */
+img {
+    vertical-align: middle;
+}
+/* Google Gmap3 bug fix on images */
+:not(.gm-style) img {
+    height: auto !important;
+}
+.ie678 .gm-style img {
+    height: 100%;  /* IE678 hack */
+}
+.gm-style img,
+.gmnoscreen img,
+.gmnoprint img {
+    max-width: none !important;
+}
+
+a img { border: 0; }
+
+/* scripts */
+body > script {display: none !important;}
+
+/* skip-links */
+.skip-links {
+    position: absolute;
+}
+.skip-links a {
+    position: absolute;
+    left: -7000px;
+    padding: 0.5em;
+    background: #000;
+    color:#fff;
+    text-decoration: none;
+}
+.skip-links a:focus {
+    position: static;
+}
+
+/* ----------------------------- */
+/* ==layout and modules          */
+/* ----------------------------- */
+
+/* switching box model for all elements */
+* {
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+}
+
+/* float layout */
+/* module, gains superpower "BFC" Block Formating Context */
+.mod { 
+    overflow: hidden;
+}
+
+/* blocks that needs to be placed under floats */
+.clear,
+.line,
+.row {
+    clear: both;
+}
+
+/* blocks that must contain floats */
+.clearfix:after,
+.line:after,
+.mod:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* table layout */
+.row {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+}
+.row > *,
+.col {
+    display: table-cell;
+    vertical-align: top;
+}
+
+/* inline-block */
+.inbl {
+    display: inline-block;
+    vertical-align: top;
+}
+
+/* alignments (blocks and inline) */
+/* ------------------------------ */
+
+/* left elements */
+.left {
+    float: left;
+}
+img.left {
+    margin-right: 1em;
+}
+
+/* right elements */
+.right {
+    float: right;
+}
+img.right {
+    margin-left: 1em;
+}
+
+img.left, img.right {
+    margin-bottom: 5px;
+}
+
+.center    { margin-left: auto; margin-right: auto; }
+.txtleft   { text-align: left; }
+.txtright  { text-align: right; }
+.txtcenter { text-align: center; }
+
+/* blocks widths (percentages and pixels) */
+.w10    { width: 10%; }
+.w20    { width: 20%; }
+.w25    { width: 25%; }
+.w30    { width: 30%; }
+.w33    { width: 33.3333%; }
+.w40    { width: 40%; }
+.w50    { width: 50%; }
+.w60    { width: 60%; }
+.w66    { width: 66.6666%; }
+.w70    { width: 70%; }
+.w75    { width: 75%; }
+.w80    { width: 80%; }
+.w90    { width: 90%; }
+.w100   { width: 100%; }
+
+.w50p   { width: 50px; }
+.w100p  { width: 100px; }
+.w150p  { width: 150px; }
+.w200p  { width: 200px; }
+.w300p  { width: 300px; }
+.w400p  { width: 400px; }
+.w500p  { width: 500px; }
+.w600p  { width: 600px; }
+.w700p  { width: 700px; }
+.w800p  { width: 800px; }
+.w960p  { width: 960px; }
+.mw960p { max-width: 960px; }
+.w1140p  { width: 1140px; }
+.mw1140p { max-width: 1140px; }
+
+/* spacing helpers
+p,m = padding,margin
+a,t,r,b,l = all,top,right,bottom,left
+s,m,l,n,0 = small(10px),medium(20px),large(30px), zero or none(0)
+source https://github.com/stubbornella/oocss/blob/master/core/spacing/space.css
+*/
+.m-reset, .ma0 { margin: 0; }
+.p-reset, .pa0 { padding: 0; }
+.ma1, .mas { margin: 10px; }
+.ma2, .mam { margin: 20px; }
+.ma3, .mal { margin: 30px; }
+.pa1, .pas { padding: 10px; }
+.pa2, .pam { padding: 20px; }
+.pa3, .pal { padding: 30px; }
+
+.mt0, .mtn { margin-top: 0; }
+.mt1, .mts { margin-top: 10px; }
+.mt2, .mtm { margin-top: 20px; }
+.mt3, .mtl { margin-top: 30px; }
+.mr0, .mrn { margin-right: 0; }
+.mr1, .mrs { margin-right: 10px; }
+.mr2, .mrm { margin-right: 20px; }
+.mr3, .mrl { margin-right: 30px; }
+.mb0, .mbn { margin-bottom: 0; }
+.mb1, .mbs { margin-bottom: 10px; }
+.mb2, .mbm { margin-bottom: 20px; }
+.mb3, .mbl { margin-bottom: 30px; }
+.ml0, .mln { margin-left: 0; }
+.ml1, .mls { margin-left: 10px; }
+.ml2, .mlm { margin-left: 20px; }
+.ml3, .mll { margin-left: 30px; }
+
+.pt0, .ptn { padding-top: 0; }
+.pt1, .pts { padding-top: 10px; }
+.pt2, .ptm { padding-top: 20px; }
+.pt3, .ptl { padding-top: 30px; }
+.pr0, .prn { padding-right: 0; }
+.pr1, .prs { padding-right: 10px; }
+.pr2, .prm { padding-right: 20px; }
+.pr3, .prl { padding-right: 30px; }
+.pb0, .pbn { padding-bottom: 0; }
+.pb1, .pbs { padding-bottom: 10px; }
+.pb2, .pbm { padding-bottom: 20px; }
+.pb3, .pbl { padding-bottom: 30px; }
+.pl0, .pln { padding-left: 0; }
+.pl1, .pls { padding-left: 10px; }
+.pl2, .plm { padding-left: 20px; }
+.pl3, .pll { padding-left: 30px; }
+
+/* hiding content */
+.visually-hidden {
+    position: absolute;
+    left: -7000px;
+    overflow: hidden;
+}
+[dir=rtl] .visually-hidden {
+    left: auto;
+    right: -7000px;
+}
+
+.desktop-hidden { display: none; } /* hidden on desktop */
+
+/* ----------------------------- */
+/* ==iefix                       */
+/* ----------------------------- */
+
+/* hasLayout for IE6/IE7 */
+.ie67 .clearfix,
+.ie67 .line,
+.ie67 .mod,
+.ie67 .row,
+.ie67 .col {
+    zoom: 1;
+}
+
+/* inline-block and table-cell for IE6/IE7 */
+/* warning: .col needs a width on IE6/IE7 */
+.ie67 .btn,
+.ie67 .col,
+.ie67 .inbl {
+    display: inline;
+    zoom: 1;
+}
+.ie8 img {
+    width: auto; /* @bugfix for IE8 */
+}
+
+/* Active box-sizing for IE6/IE7 */
+/* @source https://github.com/Schepp/box-sizing-polyfill */
+/*
+.ie67 * {
+    behavior: url(/js/boxsizing.htc);
+}
+*/
+
+/* ----------------------------- */
+/* ==print                       */
+/* ----------------------------- */
+
+/* quick print reset */
+@media print {
+    p,
+    blockquote {
+        orphans: 2;
+        widows: 2;
+    }
+    blockquote,
+    ul,
+    ol {
+        page-break-inside: avoid;
+    }
+    h1,
+    h2,
+    h3,
+    caption {
+        page-break-after: avoid;
+    }
+}
+
+/* debug helper */
+.knacss-debug {
+    background: pink;
+    outline: 3px solid maroon;
+}
+
+/* orientation iOS font-size fix */
+@media (orientation: landscape) and (max-device-width: 768px) {
+    html,
+    body {
+        -webkit-text-size-adjust: 100%;
+    }
+}
+
+/* ----------------------------- */
+/* ==own stylesheet              */
+/* ----------------------------- */
+
+/* Here should go your own CSS styles */
+/* You can link them with an @import or, better for webperf, just paste them here */
+
+/* @import url(my-styles.css); */
+
+
+/* ----------------------------- */
+/* ==grids                       */
+/* ----------------------------- */
+
+/* grids inspired from SUIT https://github.com/suitcss/suit */
+/* font-family hack explained here : https://github.com/raphaelgoetter/KNACSS/issues/37 */
+
+.grid {
+    overflow: hidden;
+    font-family: FreeSans, Arimo, "Droid Sans", Helvetica, Arial, sans-serif;
+}
+.grid > * {
+    display: block;
+    padding: 0;
+    margin-left: -20px; /* gutter value */
+    text-align: left;
+    letter-spacing: -0.31em;
+    text-rendering: optimizespeed;
+}
+/* Opera hack */
+.opera:-o-prefocus,
+.grid > * {
+    word-spacing: -0.43em;
+}
+.grid > * > * {
+    display: inline-block;
+    width: 100%;    
+    padding-left: 20px; /* gutter value */
+    margin-left: 0;
+    vertical-align: top;
+    text-align: left;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-rendering: auto;
+    *display: inline; *zoom: 1; /* IE67 hack */
+    font-family: helvetica, arial, sans-serif;
+}
+.grid2 > * {width: 50%;}
+.grid3 > * {width: 33.333%;}
+.grid4 > * {width: 25%;}
+.grid5 > * {width: 20%;}
+.grid6 > * {width: 16.667%;}
+.grid8 > * {width: 12.5%;}
+.grid10 > * {width: 10%;}
+.grid12 > * {width: 8.333%;}
+
+/* unequal grids (1-2, 2-1, 1-3 and 3-1) for 2 blocks */
+.grid2-1 > *:first-child,
+.grid1-2 > * + * { width: 66.666%; }
+.grid1-2 > *:first-child,
+.grid2-1 > * + * { width: 33.333%; }
+.grid1-3 > *:first-child,
+.grid3-1 > * + * { width: 25%; }
+.grid3-1 > *:first-child,
+.grid1-3 > * + * { width: 75%; }
+
+/* Responsiv-o-matic */
+@media (max-width: 1024px) {
+    .grid5 > *,
+    .grid6 > *,
+    .grid8 > *,
+    .grid10 > *,
+    .grid12 > * {width: 33.333%}
+}
+@media (max-width: 768px) {
+    .grid3 > *,
+    .grid4 > *,
+    .grid5 > *,
+    .grid6 > *,
+    .grid8 > *,
+    .grid10 > *,
+    .grid12 > * {width: 50%}
+}
+@media (max-width: 640px) {
+    .grid > * > * {width: 100% !important}
+}
+
+/* ----------------------------- */
+/* ==tables                      */
+/* ----------------------------- */
+
+table,
+.table {
+    max-width : 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    vertical-align: top;
+}
+table {
+    width: 100%;
+}
+.table {
+    display: table;
+}
+table#recaptcha_table,
+table.table-auto {
+    table-layout:auto;
+}
+caption {
+    padding: 10px;
+    color: #555;
+    font-style: italic; 
+}
+table { 
+    border: 1px solid #ccc;
+}
+tr > * + * {
+    border-left: 1px solid #ccc;
+}
+th,
+td {
+    padding: .3em .8em;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+}
+td {
+    color: #333;
+}
+
+/* alternate tables */
+.alternate { border: 0; }
+.alternate tbody { 
+    border: 1px solid #ccc; 
+}
+.alternate thead tr > * + * {
+    border-left: 0;
+}
+.alternate tbody tr > * + * {
+    border-left: 1px solid #ccc;
+}
+
+/* alternate-vert tables */
+.alternate-vert { 
+    border: 0;
+    border-right: 1px solid #ccc;
+}
+.alternate-vert tr > :first-child {
+    border-bottom: 0;
+}
+.alternate-vert tr > * + * {
+    border-top: 1px solid #ccc;
+}
+
+/* striped tables */
+.striped tbody tr:nth-child(odd) {
+    background: #eee;
+    background: rgba(0, 0, 0, .05);
+}
+
+/* striped-vert tables */
+.striped-vert tr > :first-child {
+    background: #eee;
+    background: rgba(0, 0, 0, .05);
+}
+/* ----------------------------- */
+/* ==forms                       */
+/* ----------------------------- */
+
+/* thanks to HTML5boilerplate,
+* github.com/nathansmith/formalize 
+* and www.sitepen.com
+*/
+
+
+/* buttons */
+.btn {
+    display: inline-block;
+}
+
+/* forms items */
+form,
+fieldset {
+    border: none;
+}
+input,
+button,
+select,
+label,
+.btn {
+    vertical-align: middle;
+    font-family: inherit;
+    font-size: inherit;
+}
+label { 
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+}
+legend {
+    border: 0;
+    white-space: normal;
+}
+textarea {
+    overflow: auto; /* Removes default vertical scrollbar on empty textarea in IE6/7/8/9 */
+    min-height: 5em;
+    vertical-align: top;
+    font-family: inherit;
+    font-size: inherit;
+    resize: vertical;
+}
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+    cursor: pointer;
+    -webkit-appearance: button; /* clickable input types in iOS */
+}
+input[type="checkbox"],
+input[type="radio"] {
+    padding: 0; /* Corrects excess space around these inputs in IE8/9 */
+}
+input[type="search"] {
+    -webkit-appearance: textfield;
+}
+
+/* if select styling bugs on WebKit */
+/* select { -webkit-appearance: none; } */
+
+/* 'x' appears on right of search input when text is entered. This removes it */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+    display: none;
+}
+::-webkit-input-placeholder {
+    color: #777;
+}
+input:-moz-placeholder,
+textarea:-moz-placeholder {
+    color: #777;
+}
+
+/* Removes inner padding and border in FF3+ */
+button::-moz-focus-inner,
+input[type='button']::-moz-focus-inner,
+input[type='reset']::-moz-focus-inner,
+input[type='submit']::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
+/* ----------------------------- */
+/* ==icons and bullets           */
+/* ----------------------------- */
+
+.icon {display: inline-block;}
+
+.icon:before,
+.icon.after:after {
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    position: relative; top: -.1em;
+    margin: 0 0.3em 0 0;
+    font: 1.4em/1 sans-serif;
+    color: #000;
+    text-shadow: 1px 1px 0 rgba(0,0,0,.1);
+    speak: none;
+}
+
+@media (min-device-width: 768px) {
+    .icon:before,
+    .icon.after:after {
+    font: 1em/0.6 sans-serif;
+    -webkit-transform: rotateZ(0.05deg);
+    }
+}
+
+.icon.after:after {
+    margin: 0 0 0 8px;
+}
+.icon.after:before {
+    content: "" !important
+}
+.icon-rate:before,
+.icon-rate.after:after {
+    content: "\2605";
+}
+.icon-unrate:before,
+.icon-unrate.after:after{
+    content: "\2606";
+}
+.icon-check:before,
+.icon-check.after:after{
+    content: "\2713";
+}
+.icon-uncheck:before,
+.icon-uncheck.after:after{
+    content: "\2717";
+}
+.icon-cloud:before,
+.icon-cloud.after:after {
+    content: "\2601";
+}
+.icon-dl:before,
+.icon-dl.after:after {
+    content: "\21E3";
+    font-weight: bold;
+}
+.icon-cross:before,
+.icon-cross.after:after {
+    content: "\2716";
+    font-weight: bold;
+}
+.icon-arrow1:before, 
+.icon-arrow1.after:after {
+    content: "\2192";
+    position: relative; 
+        top: -0.15em;
+}
+.icon-arrow2:before,
+.icon-arrow2.after:after {
+    content: "\279E";
+}
+.icon-arrow3:before,
+.icon-arrow3.after:after {
+    content: "\279A";
+}
+.icon-bracket1:before,
+.icon-bracket1.after:after {
+    content: "\2039";
+    font-weight: bold;
+    font-size: 1.6em;
+    position: relative; 
+        top: -0.15em;
+}
+.icon-bracket2:before,
+.icon-bracket2.after:after {
+    content: "\203A";
+    font-weight: bold;
+    font-size: 1.6em;
+    position: relative; 
+        top: -0.15em;
+}
+.icon-up:before,
+.icon-up.after:after {
+    content: "\25B2";
+}
+.icon-down:before,
+.icon-down.after:after {
+    content: "\25BC";
+}
+.icon-bull:before,
+.icon-bull.after:after {
+    content: "\2022";
+    font-size: 1.2em;
+    top: -0.05em;
+}
+.icon-bull2:before,
+.icon-bull2.after:after {
+    content: "\25E6";
+    top: -0.05em;
+}
+.icon-bull3:before,
+.icon-bull3.after:after{
+    content: "\2023";
+    font-size: 1.6em;
+    top: -0.05em;
+}
+.icon-nav:before,
+.icon-nav.after:after {
+    content: "\2261";
+    font-weight: bold;
+}
+.icon-losange:before,
+.icon-losange.after:after {
+    content: "\25C6";
+}
+.icon-asteri:before,
+.icon-asteri.after:after {
+    content: "\2731";
+    font-weight: bold;
+}
+.icon-mail:before,
+.icon-mail.after:after {
+    content: "\2709";
+    font-size: 1.6em;
+    top: -.05em;
+}
+
+
+/* ----------------------------- */
+/* ==flexbox classes */
+/* ----------------------------- */
+
+/* flexbox layout context on container */
+.flex {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+/* horizontal alignment */
+.flex-h {
+        -webkit-box-orient: horizontal;
+           -moz-box-orient: horizontal;
+    -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+            flex-direction: row;
+}
+/* vertical alignment */
+.flex-v {
+        -webkit-box-orient: vertical;
+           -moz-box-orient: vertical;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
+}
+/* for fluid items */
+.flex-fluid {
+    -moz-box-flex: 1;
+     -webkit-flex: 1;
+        -moz-flex: 1;
+         -ms-flex: 1;
+             flex: 1;
+}
+/* for items that must appear first */
+.flex-start {
+    -webkit-box-ordinal-group: -1;
+       -moz-box-ordinal-group: 0;
+               -ms-flex-order: -1;
+                -webkit-order: -1;
+                   -moz-order: -1;
+                        order: -1;
+}
+/* for items that must appear middle */
+.flex-mid {
+    -webkit-box-ordinal-group: 1;
+       -moz-box-ordinal-group: 1;
+               -ms-flex-order: 1;
+                -webkit-order: 1;
+                   -moz-order: 1;
+                        order: 1;
+}
+/* for items that must appear at the end */
+.flex-end {
+    -webkit-box-ordinal-group: 42;
+       -moz-box-ordinal-group: 42;
+               -ms-flex-order: 42;
+                -webkit-order: 42;
+                   -moz-order: 42;
+                        order: 42;
+}
+
+/* ----------------------------- */
+/* ==viewport fixing for RWD     */
+/* ----------------------------- */
+@-webkit-viewport {
+    width: device-width;
+    zoom: 1.0;
+}
+@-moz-viewport {
+    width: device-width;
+    zoom: 1.0;
+}
+@-ms-viewport {
+    width: device-width;
+    zoom: 1.0;
+}
+@-o-viewport {
+    width: device-width;
+    zoom: 1.0;
+}
+@viewport {
+    width: device-width;
+    zoom: 1.0;
+}
+
+/* ----------------------------- */
+/* ==desktop and retina medias   */
+/* ----------------------------- */
+
+@media (min-width: 641px) {
+/* here go rules for big resources and big screens like: background-images, font-faces, etc. */
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+/* Style adjustments for retina devices */
+}
+
+/* ---------------------------------- */
+/* ==Responsive large / small / tiny  */
+/* ---------------------------------- */
+
+@media (min-width: 1280px) {
+
+    /* layouts for large (l) screens */
+    .large-hidden,
+    .tablet-hidden { display: none !important; }
+    .large-visible { display: block !important; }
+    .large-no-float {float: none; }
+    .large-inbl {
+        display: inline-block;
+        float: none;
+        vertical-align: top;
+    }
+    .large-row {
+        display: table;
+        table-layout: fixed;
+        width: 100% !important;
+    }
+    .large-col {
+        display: table-cell;
+        vertical-align: top;
+    }
+
+    /* widths for large (l) screens */
+    .large-w25 { width: 25% !important; }
+    .large-w33 { width: 33.3333% !important; }
+    .large-w50 { width: 50% !important; }
+    .large-w66 { width: 66.6666% !important; }
+    .large-w75 { width: 75% !important; }
+    .large-w100 {
+        display: block !important;
+        float: none !important;
+        clear: none !important;
+        width: auto !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        border: 0;      
+    }
+
+    /* margins for large (l) screens */
+    .large-ma0 { margin: 0 !important; }
+}
+
+@media (max-width: 768px) {
+
+    /* quick tablet reset */
+    .w600p,
+    .w700p,
+    .w800p,
+    .w960p,
+    .mw960p,
+    .small-wauto { 
+        width: auto;
+        float: none;
+        } 
+
+    /* you shall not pass */
+    div, textarea, table, td, th, code, pre, samp {
+        word-wrap: break-word;
+        -webkit-hyphens: auto;
+           -moz-hyphens: auto;
+            -ms-hyphens: auto;
+             -o-hyphens: auto;
+                hyphens: auto;
+    }
+
+    /* layouts for small (s) screens */
+    .small-hidden,
+    .tablet-hidden { display: none !important; }
+    .small-visible { display: block !important; }
+    .small-no-float {float: none; }
+    .small-inbl {
+        display: inline-block;
+        float: none;
+        vertical-align: top;
+    }
+    .small-row {
+        display: table !important;
+        table-layout: fixed !important;
+        width: 100% !important;
+    }
+    .small-col {
+        display: table-cell !important;
+        vertical-align: top !important;
+    }
+
+    /* widths for small (s) screens */
+    .small-w25 { width: 25% !important; }
+    .small-w33 { width: 33.3333% !important; }
+    .small-w50 { width: 50% !important; }
+    .small-w66 { width: 66.6666% !important; }
+    .small-w75 { width: 75% !important; }
+    .small-w100 {
+        display: block !important;
+        float: none !important;
+        clear: none !important;
+        width: auto !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        border: 0;      
+    }
+    /* margins for small (s) screens */
+    .small-ma0 { margin: 0 !important; }
+}
+
+@media (max-width: 640px) {
+
+    /* quick smartphone reset */
+    .mod,
+    .col,
+    fieldset {
+        display: block !important;
+        float: none !important;
+        clear: none !important;
+        width: auto !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        border: 0;
+    }
+    .w300p,
+    .w400p,
+    .w500p {
+        width: auto;
+        float: none;
+    }
+    .row { 
+        display: block !important;
+        width: 100% !important;
+    }
+
+    /* layouts for tiny (t) screens */
+    .tiny-hidden,
+    .phone-hidden { display: none !important; }
+    .tiny-visible { display: block !important; }
+    .tiny-no-float {float: none;}
+    .tiny-inbl {
+        display: inline-block;
+        float: none;
+        vertical-align: top;
+    }
+    .tiny-row {
+        display: table !important;
+        table-layout: fixed !important;
+        width: 100% !important;
+    }
+    .tiny-col {
+        display: table-cell !important;
+        vertical-align: top !important;
+    }
+    th,
+    td {
+        display: block !important;
+        width: auto !important;
+        text-align: left !important;
+    }
+    thead { display: none; }
+
+    /* widths for tiny (t) screens */
+    .tiny-w25 { width: 25% !important; }
+    .tiny-w33 { width: 33.3333% !important; }
+    .tiny-w50 { width: 50% !important; }
+    .tiny-w66 { width: 66.6666% !important; }
+    .tiny-w75 { width: 75% !important; }
+    .tiny-w100 { 
+        display: block !important;
+        float: none !important;
+        clear: none !important;
+        width: auto !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        border: 0;
+    }
+    /* margins for tiny (t) screens */
+    .tiny-ma0 { margin: 0 !important; }
+}

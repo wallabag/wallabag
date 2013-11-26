@@ -9,5 +9,4 @@ $front->get('/', function () use ($app) {
     return $app['twig']->render('index.twig', array('entry' => $entry));
 });
 
-
 return $front;
