@@ -8,6 +8,10 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/views',
 ));
 
+$app->before(function () use ($app) {
+    $app['twig']->addGlobal('layout', $app['twig']->loadTemplate('layout.twig'));
+});
+ 
 $app->register(new ConsoleServiceProvider(), [
     'console.name' => 'Poche console',
     'console.version' => '0.1',
