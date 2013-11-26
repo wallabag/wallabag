@@ -9,11 +9,4 @@ $front->get('/', function () use ($app) {
     return $app['twig']->render('index.twig', array('entry' => $entry));
 });
 
-$front->get('/unread', function () use ($app) {
-
-    $entries = $app['entry_api']->getEntries();
-    
-    return $app['twig']->render('index.twig', array('entry' => $entry));
-});
-
 return $front;
