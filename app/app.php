@@ -2,6 +2,8 @@
 use Knp\Provider\ConsoleServiceProvider;
 use Poche\Api\EntryApi;
 
+use Silex\Provider\FormServiceProvider;
+
 $app = new Silex\Application();
 
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
@@ -23,6 +25,12 @@ $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
         'driver'   => 'pdo_sqlite',
         'path'     => __DIR__.'/../poche.db',
     ),
+));
+
+$app->register(new FormServiceProvider());
+
+$app->register(new Silex\Provider\TranslationServiceProvider(), array(
+    'translator.messages' => array(),
 ));
 
 $app['entry_api'] = $app->share(function ($app) {
