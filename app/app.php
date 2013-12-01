@@ -1,6 +1,7 @@
 <?php
 use Knp\Provider\ConsoleServiceProvider;
 use Poche\Api\EntryApi;
+use Poche\Repository\EntryRepository;
 
 use Silex\Provider\FormServiceProvider;
 
@@ -13,7 +14,7 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 $app->before(function () use ($app) {
     $app['twig']->addGlobal('layout', $app['twig']->loadTemplate('layout.twig'));
 });
- 
+
 $app->register(new ConsoleServiceProvider(), [
     'console.name' => 'Poche console',
     'console.version' => '0.1',
@@ -33,6 +34,10 @@ $app->register(new Silex\Provider\TranslationServiceProvider(), array(
     'translator.messages' => array(),
 ));
 
+$app['entry_repository'] = $app->share(function ($app) {
+    return new EntryRepository($app['db']);
+});
+
 $app['entry_api'] = $app->share(function ($app) {
-    return new EntryApi($app['db']);
+    return new EntryApi($app['entry_repository']);
 });

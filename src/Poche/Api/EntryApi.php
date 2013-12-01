@@ -4,15 +4,24 @@ namespace Poche\Api;
 
 class EntryApi
 {
-    private $db;
+    private $entryRepository;
 
-    public function __construct($db) {
-        $this->db = $db;
+    public function __construct($entryRepository) {
+        $this->entryRepository = $entryRepository;
     }
 
     public function getEntries() {
-        $sql = "SELECT * FROM entries";
-        $entries = $this->db->fetchAssoc($sql);
-        return ($entries ? $entries : array());
+        return $this->entryRepository->getEntries();
     }
+
+    public function createEntryFromUrl($url) {
+
+        //TODO: Fetch all what we need, fill the title, content …
+
+        $entry = array(
+            'url' => $url
+        );
+        return $entry;
+    }
+
 }
