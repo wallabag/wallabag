@@ -21,9 +21,6 @@ class ApiTest extends PocheWebTestCase
 
         $this->assertEquals($client->getResponse()->getContent(), '[]');
 
-        //Load some entries
-        Fixtures::loadEntries($this->app['db']);
-
     }
 
     public function testGetEntries()
