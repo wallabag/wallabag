@@ -114,7 +114,7 @@ class SiteConfig
 		$split = explode('.', $host);
 		if (count($split) > 1) {
 			array_shift($split);
-			$try[] = '.'.implode('.', $split);
+			$try[] = implode('.', $split);
 		}
 		foreach ($try as $h) {
 			if (array_key_exists($h, self::$config_cache)) {
