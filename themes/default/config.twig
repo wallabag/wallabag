@@ -28,6 +28,16 @@
                 <li>{% trans "latest stable version" %} : {{ prod }}. {% if compare_prod == -1 %}<strong><a href="http://inthepoche.com/">{% trans "a more recent stable version is available." %}</a></strong>{% else %}{% trans "you are up to date." %}{% endif %}</li>
                 {% if constant('DEBUG_POCHE') == 1 %}<li>{% trans "latest dev version" %} : {{ dev }}. {% if compare_dev == -1 %}<strong><a href="http://inthepoche.com/">{% trans "a more recent development version is available." %}</a></strong>{% else %}{% trans "you are up to date." %}{% endif %}</li>{% endif %}
             </ul>
+
+            <h2>{% trans "Feeds" %}</h2>
+            {% if token == '' %}
+                <p>{% trans "The token is empty, you have to generate it to use feeds. Click <a href='?feed&amp;action=generate'>here to generate it</a>." %}</p>
+            {% else %}
+            <ul>
+                <li><a href="?feed&amp;type=home&amp;user_id={{ user_id }}&amp;token={{ token }}" target="_blank">{% trans "unread feed" %}</a></li>
+                <li><a href="?feed&amp;type=fav&amp;user_id={{ user_id }}&amp;token={{ token }}" target="_blank">{% trans "favorites feed" %}</a></li>
+            </ul>
+            {% endif %}
             
             <h2>{% trans "Change your theme" %}</h2>
             <form method="post" action="?updatetheme" name="changethemeform">
