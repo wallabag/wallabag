@@ -71,7 +71,7 @@ if (isset($_GET['login'])) {
 } elseif (isset($_GET['updatelanguage'])) {
     $poche->updateLanguage();
 } elseif (isset($_GET['feed'])) {
-    if ($_GET['action'] == 'generate') {
+    if (isset($_GET['action']) && $_GET['action'] == 'generate') {
         $poche->generateToken();
     }
     else {
