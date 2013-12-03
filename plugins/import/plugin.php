@@ -67,7 +67,7 @@ Router\post_action('import', function() {
     if ($valid) {
 
         if (executeImport($values)) {
-            Session\flash(t('Import finished, just execute the cron to fetch content.'));
+            Session\flash(t('Import finished, execute the cron to fetch any missing content.'));
         }
 
         Response\redirect('?action=import');
