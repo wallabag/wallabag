@@ -101,17 +101,18 @@ function importFromPoche($targetFile)
     $file_content = file_get_contents($targetFile);
     $data = json_decode($file_content, true);
     $count = 0;
-    
+
     foreach ($data as $key => $value) {
         $url = null;
         $favorite = false;
         $archive = false;
+        $fetched = true;
         foreach ($value as $attr => $attr_value) {
             if ($attr == 'url') {
                 $url = $attr_value;
             }
             $sequence = '';
-
+    
             if ($attr_value == '1') {
                 if ($attr == 'is_fav') {
                     $favorite = true;
@@ -119,6 +120,10 @@ function importFromPoche($targetFile)
                 if ($attr == 'is_read') {
                     $archive = true;
                 }
+            }
+
+            if (($attr == 'title' || $attr == 'content') && empty($value[$attr])) {
+              $fetched = false;
             }
         }
 
@@ -131,6 +136,13 @@ function importFromPoche($targetFile)
             }
             if ($archive) {
                 Model\mark_items_as_read(array($id), $_SESSION['user']['id']);
+            }
+            if ($fetched) {
+                $item = Model\get_item($id, $_SESSION['user']['id']);
+                $item['title'] = $value['title'];
+                $item['content'] = $value['content'];
+                $item['fetched'] = $fetched;
+                Model\update_item($item);
             }
         }
     }
