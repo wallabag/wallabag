@@ -70,6 +70,13 @@ if (isset($_GET['login'])) {
     $poche->updateTheme();
 } elseif (isset($_GET['updatelanguage'])) {
     $poche->updateLanguage();
+} elseif (isset($_GET['feed'])) {
+    if ($_GET['action'] == 'generate') {
+        $poche->generateToken();
+    }
+    else {
+        $poche->generateFeeds($_GET['token'], $_GET['user_id'], $_GET['type']);
+    }
 }
 
 elseif (isset($_GET['plainurl']) && !empty($_GET['plainurl'])) {

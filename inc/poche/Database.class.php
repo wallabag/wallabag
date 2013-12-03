@@ -74,7 +74,7 @@ class Database {
         return TRUE;
     }
 
-    private function getConfigUser($id) {
+    public function getConfigUser($id) {
         $sql = "SELECT * FROM users_config WHERE user_id = ?";
         $query = $this->executeQuery($sql, array($id));
         $result = $query->fetchAll();

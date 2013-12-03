@@ -412,6 +412,7 @@ class Poche
                 $compare_prod = version_compare(POCHE, $prod);
                 $themes = $this->getInstalledThemes();
                 $languages = $this->getInstalledLanguages();
+                $token = $this->user->getConfigValue('token');
                 $http_auth = (isset($_SERVER['PHP_AUTH_USER']))?true:false;
                 $tpl_vars = array(
                     'themes' => $themes,
@@ -420,6 +421,8 @@ class Poche
                     'prod' => $prod,
                     'compare_dev' => $compare_dev,
                     'compare_prod' => $compare_prod,
+                    'token' => $token,
+                    'user_id' => $this->user->getId(),
                     'http_auth' => $http_auth,
                 );
                 Tools::logm('config view');
@@ -836,5 +839,53 @@ class Poche
            file_put_contents($cache_file, $version, LOCK_EX);
         }
         return $version;
+    }
+
+    public function generateToken()
+    {
+        if (ini_get('open_basedir') === '') {
+            $token = substr(base64_encode(file_get_contents('/dev/urandom', false, null, 0, 20)), 0, 15);
+        }
+        else {
+            $token = substr(base64_encode(uniqid(mt_rand(), true)), 0, 20);
+        }
+
+        $this->store->updateUserConfig($this->user->getId(), 'token', $token);
+        $currentConfig = $_SESSION['poche_user']->config;
+        $currentConfig['token'] = $token;
+        $_SESSION['poche_user']->setConfig($currentConfig);
+    }
+
+    public function generateFeeds($token, $user_id, $type = 'home')
+    {
+        $allowed_types = array('home', 'fav');
+        $config = $this->store->getConfigUser($user_id);
+
+        if (!in_array($type, $allowed_types) ||
+            $token != $config['token']) {
+            die(_('Uh, there is a problem while generating feeds.'));
+        }
+        // Check the token
+
+        $feed = new FeedWriter(ATOM);
+        $feed->setTitle('poche - ' . $type . ' feed');
+        $feed->setLink(Tools::getPocheUrl());
+        $feed->setChannelElement('updated', date(DATE_ATOM , time()));
+        $feed->setChannelElement('author', 'poche');
+
+        $entries = $this->store->getEntriesByView($type, $user_id);
+        if (count($entries) > 0) {
+            foreach ($entries as $entry) {
+                $newItem = $feed->createNewItem();
+                $newItem->setTitle(htmlentities($entry['title']));
+                $newItem->setLink(Tools::getPocheUrl() . '?view=view&amp;id=' . $entry['id']);
+                $newItem->setDate(time());
+                $newItem->setDescription($entry['content']);
+                $feed->addItem($newItem);
+            }
+        }
+
+        $feed->genarateFeed();
+        exit;
     }
 }
