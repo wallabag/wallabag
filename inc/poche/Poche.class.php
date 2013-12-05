@@ -858,7 +858,7 @@ class Poche
 
     public function generateFeeds($token, $user_id, $type = 'home')
     {
-        $allowed_types = array('home', 'fav');
+        $allowed_types = array('home', 'fav', 'archive');
         $config = $this->store->getConfigUser($user_id);
 
         if (!in_array($type, $allowed_types) ||
