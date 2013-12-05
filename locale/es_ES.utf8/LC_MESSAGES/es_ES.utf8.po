@@ -14,13 +14,13 @@ msgid "config"
 msgstr "configuración"
 
 msgid "Poching a link"
-msgstr ""
+msgstr "Pochear un enlace"
 
 msgid "read the documentation"
-msgstr ""
+msgstr "leer la documentación"
 
 msgid "by filling this field"
-msgstr ""
+msgstr "rellenando este campo"
 
 msgid "poche it!"
 msgstr "pochéalo!"
@@ -38,7 +38,7 @@ msgid "a more recent stable version is available."
 msgstr "una versión estable más reciente está disponible."
 
 msgid "you are up to date."
-msgstr "estás al día."
+msgstr "estás actualizado."
 
 msgid "latest dev version"
 msgstr "ultima versión de desarollo"
@@ -59,14 +59,14 @@ msgid "Repeat your new password:"
 msgstr "Repetir la nueva contraseña :"
 
 msgid "Update"
-msgstr "Poner al día"
+msgstr "Actualizar"
 
 msgid "Import"
 msgstr "Importar"
 
 msgid "Please execute the import script locally, it can take a very long time."
 msgstr ""
-"Gracias por ejecutar la importación en local, esto puede demorar un tiempo"
+"Por favor, ejecute la importación en local, esto puede demorar un tiempo."
 
 msgid "More infos in the official doc:"
 msgstr "Más información en la documentación oficial :"
@@ -90,22 +90,22 @@ msgid "to export your poche datas."
 msgstr "para exportar sus datos de poche."
 
 msgid "back to home"
-msgstr "volver a la pagina de inicio"
+msgstr "volver a la página de inicio"
 
 msgid "installation"
-msgstr "instalacion"
+msgstr "instalación"
 
 msgid "install your poche"
-msgstr "instala tu poche"
+msgstr "instala tu Poche"
 
 msgid ""
-"poche is still not installed. Please fill the below form to install it. "
+"Poche is still not installed. Please fill the below form to install it. "
 "Don't hesitate to <a href='http://inthepoche.com/doc'>read the documentation "
 "on poche website</a>."
 msgstr ""
-"poche todavia no està instalado. Gracias de llenar los campos siguientes "
+"Poche todavia no està instalado. Por favor, completa los campos siguientes "
 "para instalarlo. No dudes de <a href='http://inthepoche.com/doc'>leer la "
-"documentacion en el sitio de poche</a>."
+"documentación en el sitio de Poche</a>."
 
 msgid "Login"
 msgstr "Nombre de usuario"
@@ -120,13 +120,13 @@ msgid "back to top"
 msgstr "volver arriba"
 
 msgid "favoris"
-msgstr ""
+msgstr "preferidos"
 
 msgid "archive"
 msgstr "archivos"
 
 msgid "unread"
-msgstr ""
+msgstr "sin leer"
 
 msgid "by date asc"
 msgstr "por fecha ascendiente"
@@ -141,28 +141,28 @@ msgid "by title asc"
 msgstr "por titulo ascendiente"
 
 msgid "by title"
-msgstr "por fecha"
+msgstr "por título"
 
 msgid "by title desc"
-msgstr "por fecha descendiente"
+msgstr "por título descendiente"
 
 msgid "No link available here!"
-msgstr ""
+msgstr "¡No hay ningún enlace disponible por aquí!"
 
 msgid "toggle mark as read"
 msgstr "marcar como leído"
 
 msgid "toggle favorite"
-msgstr "favorito"
+msgstr "preferido"
 
 msgid "delete"
-msgstr "suprimir"
+msgstr "eliminar"
 
 msgid "original"
 msgstr "original"
 
 msgid "results"
-msgstr ""
+msgstr "resultados"
 
 msgid "tweet"
 msgstr "tweetear"
@@ -177,7 +177,7 @@ msgid "flattr"
 msgstr "flattr"
 
 msgid "this article appears wrong?"
-msgstr "este articulo no se ve bien ?"
+msgstr "este articulo no se ve bien?"
 
 msgid "create an issue"
 msgstr "crear un ticket"
@@ -195,25 +195,25 @@ msgid "home"
 msgstr "inicio"
 
 msgid "favorites"
-msgstr "favoritos"
+msgstr "preferidos"
 
 msgid "logout"
-msgstr "desconexión"
+msgstr "cerrar sesión"
 
 msgid "powered by"
-msgstr "propulsado por"
+msgstr "hecho con"
 
 msgid "debug mode is on so cache is off."
-msgstr ""
+msgstr "el modo de depuración está activado, así que la cache está desactivada."
 
 msgid "your poche version:"
-msgstr ""
+msgstr "tu versión de Poche:"
 
 msgid "storage:"
-msgstr ""
+msgstr "almacenamiento:"
 
 msgid "login to your poche"
-msgstr "conectarse a tu poche"
+msgstr "conectarse a tu Poche"
 
 msgid "you are in demo mode, some features may be disabled."
 msgstr ""
@@ -221,10 +221,10 @@ msgstr ""
 "desactivadas."
 
 msgid "Stay signed in"
-msgstr "seguir conectado"
+msgstr "Seguir conectado"
 
 msgid "(Do not check on public computers)"
-msgstr "(no marcar en un ordenador publico)"
+msgstr "(no marcar en un ordenador público)"
 
 msgid "Sign in"
-msgstr "conectarse"
+msgstr "Iniciar sesión"
