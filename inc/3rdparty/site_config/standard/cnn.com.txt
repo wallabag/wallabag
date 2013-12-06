@@ -1,0 +1,19 @@
+title: //div[@class="cnn_storyarea"]/h1
+author: //div[@class="cnnByline"]/strong
+date: substring-after(//div[@class="cnn_strytmstmp"], 'Sun')
+date: substring-after(//div[@class="cnn_strytmstmp"], 'Mon')
+date: substring-after(//div[@class="cnn_strytmstmp"], 'Tue')
+date: substring-after(//div[@class="cnn_strytmstmp"], 'Wed')
+date: substring-after(//div[@class="cnn_strytmstmp"], 'Thu')
+date: substring-after(//div[@class="cnn_strytmstmp"], 'Fri')
+date: substring-after(//div[@class="cnn_strytmstmp"], 'Sat')
+strip: //div[@class="cnn_storyarea"]/h1
+strip_id_or_class: cnnByline
+strip_id_or_class: cnn_strytmstmp
+strip_id_or_class: cnn_strycaptiontxt
+strip_id_or_class: cnn_strybtntoolsbttm
+strip_id_or_class: cnn_strybtntools
+strip_id_or_class: cnn_strybtmcntnt
+strip_id_or_class: cnn_containerwht
+strip_id_or_class: cnn_stryathrtmp
+test_url: http://www.cnn.com/2012/05/13/us/new-york-police-policy/index.html?eref=rss_topstories

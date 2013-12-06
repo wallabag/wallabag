@@ -1,0 +1,9 @@
+title: //h1[@class="title"]
+
+author: ("Anna Manasova")
+# is ignored, unfortunately
+
+date: //p[@class="date"]
+
+body: //div[@class="entry"]
+test_url: http://annatravelling.wordpress.com/2011/11/07/a-day-of-cooking-thai/

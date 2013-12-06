@@ -1,0 +1,13 @@
+title://div[@class='title']
+author://div[@class='byline']/b
+date:substring-after(//div[@class='byline'], 'posted')
+body://div[@id='body']
+wrap_in(h2)://span[@class='subhead']
+wrap_in(i)://p[@class='bio']
+wrap_in(i)://p[@class='copyright']
+strip://div[@class='title']
+strip://div[@class='deck']
+strip://div[@class='byline']
+strip://div[@class='copyright']
+strip://br
+test_url: http://www.christianitytoday.com/ct/2012/aprilweb-only/my-god-forsaken-me.html

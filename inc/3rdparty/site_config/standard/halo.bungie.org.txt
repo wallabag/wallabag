@@ -1,0 +1,5 @@
+title:substring-before(id("maincontent")/table, 'Posted')
+body:id("maincontent")/p
+# eventually convert linebreaks better
+
+test_url: http://halo.bungie.org/fanfic/?story=Delahunt0312112316071.html

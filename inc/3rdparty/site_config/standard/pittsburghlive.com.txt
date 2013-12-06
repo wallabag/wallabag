@@ -1,0 +1,7 @@
+title: substring-before(//title,'- Pittsburgh Tribune')
+author: substring-before(substring-after(//div[@class='byline'],'By '),',')
+date: substring-after(substring-after(//div[@class='byline'],','),',')
+body: //div[@id='storyBody']
+strip: //div[@class='morestories']
+dissolve: //p[@class='subheader']
+test_url: http://www.pittsburghlive.com/x/pittsburghtrib/sports/columnists/s_785654.html

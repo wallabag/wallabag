@@ -1,0 +1,4 @@
+author: //*[@id="article_wrapper"]/div[1]/a[1]
+body: //*[@id="article_wrapper"]/div[2]
+date: //*[@id="article_wrapper"]/div[1]/text()[2]
+test_url: http://www.avclub.com/articles/forgetmenot,70904

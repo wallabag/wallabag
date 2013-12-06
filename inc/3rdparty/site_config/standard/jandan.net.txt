@@ -1,0 +1,6 @@
+body: //div[@id='content']//div[@class = 'post f']
+strip_id_or_class: comment-big
+strip_id_or_class: avatar
+strip: //div[@class='time_s']
+
+test_url: http://jandan.net/2011/04/03/iphone-5-sony.html

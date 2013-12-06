@@ -1,0 +1,21 @@
+title: //span[@id="showTitle"]
+author: //span[@id="showAuthor"]
+date: //span[@id="showRefDate"]
+
+strip: //span[@class="black_bold"]
+strip: //div[@id="sectionName"]
+strip: //div[@id="storyHeader"]
+
+body: //div[@id="newsBodyText"]
+
+strip_image_src: "http://www.gotomanager.com/img/mgrm/space.gif"
+strip_image_src: "http://www.gotomanager.com/images/separator.gif"
+strip_image_src: "http://www.gotomanager.com/images/spaces.gif"
+
+convert_double_br_tags: yes
+tidy: yes
+
+strip: //div[@id="smallLeadImage"]
+strip: //div[@id="truehitsSurvey"]
+strip: //table[@id="relatedInfoTable"]
+test_url: http://www.gotomanager.com/news/details.aspx?id=86759

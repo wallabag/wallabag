@@ -1,0 +1,13 @@
+title: //title
+author: //span/a
+date: substring-after(//small,'Published:')
+
+strip: //h1[@class='vert_class']
+strip: //h1[@class='headline']
+strip: //img[contains(@src,'logo_triblive.gif')]
+
+#strip: //h6
+#strip_img_src: logo_triblive.gif
+
+single_page_link: //a[@class='stprint']
+test_url: http://triblive.com/sports/2819913-85/lemieux-deal-penguins-burkle-nhl-owners-team-mario-bettman-case

@@ -1,0 +1,13 @@
+strip_image_src: menu
+strip_image_src: templates
+strip: //div/a
+strip: //div/b
+strip: //div/strong
+strip: //td[@width='30%']
+strip: //br[1]
+strip: //br[2]
+strip: //br[3]
+strip: //br[4]
+strip: //a[@href='http://www.moonsault.de/newzboard/index.php?act=home']
+strip_id_or_class: cse-branding-right
+test_url: http://www.moonsault.de/newzboard/index.php?news=22321&act=previous

@@ -1,0 +1,10 @@
+body: //div[@id='content']//div[contains(@class, 'wp-image-') or contains(@class, 'entry')][1]
+author: //span[@class='author']/a
+
+strip_id_or_class: disqus
+strip_id_or_class: paginator
+strip_id_or_class: photo-number
+
+prune: no
+
+test_url: http://hypebeast.com/2012/11/stussy-2012-fall-winter-november-releases/

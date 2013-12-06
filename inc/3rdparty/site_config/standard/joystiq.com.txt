@@ -1,0 +1,8 @@
+author: //a[@class="byline-author"]
+title: //h1[@class="headline"]
+strip: //div[@id="info-card"]
+strip: //div[@id="breaking-news"]
+strip: //div[@class="rmod list-post-mod"]
+strip: //div[@id="footer"]
+strip: //div[@id="GH_strip"]
+test_url: http://www.joystiq.com/2012/06/20/magic-the-gathering-duels-of-the-planeswalkers-2013-review/

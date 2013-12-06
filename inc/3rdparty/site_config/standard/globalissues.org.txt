@@ -1,0 +1,15 @@
+body: //div[@id='content']
+
+strip: //p[@class='top']
+strip: //h2[.='Where next?']
+strip_id_or_class: where-next
+strip_id_or_class: social-bookmarks
+strip_id_or_class: link-to-here
+strip_id_or_class: options-heading
+strip_id_or_class: page-options-content
+strip_id_or_class: page-info-bottom
+
+tidy: no
+prune: no
+
+test_url: http://www.globalissues.org/article/39/a-primer-on-neoliberalism

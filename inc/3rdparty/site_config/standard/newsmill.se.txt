@@ -1,0 +1,12 @@
+title: //h1
+body: (//div[@class='articleImg']//img)[1] | //p[contains(@class, 'commentTextArticle') or contains(@class, 'articlePublished')] | //div[@id='articleLeftContent']
+author: //div[@class='byline']//a[contains(@href, '/user/')]
+
+strip_id_or_class: facts
+strip_id_or_class: articleBlogsHolder
+strip_id_or_class: byline
+
+prune: no
+tidy: no
+
+test_url: http://www.newsmill.se/artikel/2012/05/06/medielogiken-v-ger-tyngre-n-reportrarnas-sikter

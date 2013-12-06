@@ -1,0 +1,10 @@
+prune:yes
+
+date://*[contains(@class,'date')]
+
+body://div[contains(@id,'content')]
+
+next_page_link://a[contains(.,'Next >')]
+
+strip_id_or_class:sponsors
+test_url: http://www.pcmag.com/article2/0,2817,2401676,00.asp

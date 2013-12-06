@@ -1,0 +1,10 @@
+title: //*[@class="article"]/h1
+date: //*[@class="article"]/div[@class="date"]
+
+# strip the title and date from the article text
+strip: //*[@class="article"]/h1
+strip: //*[@class="article"]/div[@class="date"]
+
+# strip annoying <br> between metadata and article
+strip: //*[@class="article"]/div[@class="date"]/following-sibling::br
+test_url: http://minnesota.publicradio.org/display/web/2012/06/19/health/senators-want-health-care-ruling-on-tv/

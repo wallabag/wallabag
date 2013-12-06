@@ -1,0 +1,9 @@
+title: //div[@class='post_content']/h2
+date: //div[@class='dateline']
+body: //div[@class='entry']
+
+strip: //div[@class='closer']
+strip: //div[@class='navigation']
+strip: //div[@class='aux_pane']
+strip: //div[@class='aux_aux_pane']
+test_url: http://www.mikeindustries.com/blog/archive/2011/10/never-be-another

@@ -1,0 +1,6 @@
+title: //h3[@class="post-name"]
+author: //span[@class="user-name"]
+date: //div[@class="post-date"]
+body: //div[@class="post-content user-defined-markup"]
+footnotes: no
+test_url: http://blogs.msdn.com/b/b8/archive/2011/10/04/designing-the-start-screen.aspx

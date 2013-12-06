@@ -1,0 +1,3 @@
+title: //div[@class="bodyText"]/h1
+author: //div[@class="picture"]/a/img/@alt
+test_url: https://developers.facebook.com/blog/post/2012/03/22/developer-spotlight--foodspotting/

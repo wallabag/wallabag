@@ -1,0 +1,9 @@
+# This filter is tested on:
+# http://www.infzm.com/content/71068
+# http://www.infzm.com/content/41577
+
+author://em[contains(@class, 'toAuthor')]
+date:substring(//em[contains(@class, 'pubTime')],1)
+body://section[contains(@id, 'articleContent')]
+title://h1[contains(@class ,'articleHeadline clearfix')]
+test_url: http://www.infzm.com/content/41577

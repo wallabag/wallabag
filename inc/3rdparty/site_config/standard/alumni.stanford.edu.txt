@@ -1,0 +1,10 @@
+title: //h1
+
+author: substring-after(//div[@class="enableBullets"]/preceding-sibling::p[1], "By ")
+
+date: //div/a[contains (@href, "issue")]
+
+move_into(//div[@class="enableBullets"]/p): (//div[@id="content"]//img)[1]
+
+body: //div[@class="enableBullets"]
+test_url: http://alumni.stanford.edu/get/page/magazine/article/?article_id=54819

@@ -1,0 +1,5 @@
+title: //div[@class="article_header"]/h1
+date: //div[@class="article_pub"]/span[@class="time"]
+author: //div[@class="article_pub"]/span[@class="editors"]/a/text()
+body: //div[@class="article_body clear_left"]
+test_url: http://www.digitalspy.co.uk/movies/at-the-movies/a364066/top-5-super-bowl-movie-trailers-the-avengers-battleship-more.html

@@ -1,0 +1,8 @@
+title: //h1[@class='articletitle']
+author: substring-after(//span[@class='author'],'by')
+date: //span[@class='created']
+body: //div[@class='article']
+strip: //div[@class='headline']
+strip: //p[@class='articleinfo']
+#dissolve: //p[@class='subheader']
+test_url: http://www.pittscriptblog.com/2012-articles/march/2012-football-opponents-set-and-the-attendance-dilemma.html

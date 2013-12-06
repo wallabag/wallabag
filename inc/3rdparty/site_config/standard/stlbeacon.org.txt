@@ -1,0 +1,5 @@
+title: article/h1
+author: //p[@class='byline']
+date:  //p[@class='date']
+body: //div[@class='body']
+test_url: https://www.stlbeacon.org/#!/content/23404/mogop_caucus_031712

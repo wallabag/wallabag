@@ -1,0 +1,10 @@
+date: //div[@class='notes']/a
+body: //div[@id='content']
+
+strip_id_or_class: tags
+strip_id_or_class: permalink
+strip_id_or_class: notes
+strip_id_or_class: post_nav
+strip: //div[@id='content']//h2
+strip_id_or_class: right_column
+test_url: http://findtheswagger.tumblr.com/post/11589145141/moe-resners-end-of-an-era-1957-giants-final

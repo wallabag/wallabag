@@ -1,0 +1,41 @@
+title: //h1[@id="headline"]
+author: //div[contains(@class, "editorial-byline-author")]/a
+date: substring-after(//div[contains(@class, "editorial-byline-meta")], " | ")
+
+# The article body contains a mix or article and non-article elements, so lot of manual tweaks are needed
+body: //div[@id="template"]
+strip_id_or_class: editorial-byline-pic
+strip_id_or_class: editorial-byline
+strip_id_or_class: headline
+
+# Include the leadin paragraph in the body text, but remove quotes because they're out of context
+dissolve: //div[contains(@id, "leadin")]
+strip_id_or_class: pullquote
+
+# Image captions removed because they're confusing in body text
+strip_id_or_class: image-caption-content
+
+# Remove header and footer
+strip_id_or_class: header
+strip_id_or_class: footer
+
+# Remove the hidden logo that seems to be used to cause Facebook to show the logo instead of a random article image
+strip: /html/body/span[contains(@style, "display: none")]
+
+# Remove search box
+strip_id_or_class: searchContainer
+strip: //div[contains(@class, "searchInstruction")]
+strip: //div[contains(@class, "searchResults")]/h4
+
+# Remove the 'Letters to the Editor' section
+strip_id_or_class: letter-text
+strip_id_or_class: letter-from
+strip_id_or_class: letter-date
+
+# Remove Like/Tweet links 
+strip_id_or_class: social-tab
+
+# Remove 'divider' which causes an inexplicable slash to appear in the article body
+strip_id_or_class: divider
+
+test_url: http://www.theglobalmail.org/feature/tiramisu-time-in-pyongyang/88/

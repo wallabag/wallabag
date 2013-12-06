@@ -1,0 +1,8 @@
+title: //div[@class="article default-article"]/h1
+author: //p[@class="author"]/a[2]
+
+# Article introduction:
+#move_into(//div[@class="article-bread"]): //p[@class="lead"]
+
+body: //div[@class="article-bread"]
+test_url: http://www.nyteknik.se/nyheter/energi_miljo/energi/article3391426.ece

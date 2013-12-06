@@ -1,0 +1,12 @@
+title: //h1[@class='title']
+author: //h3[@class='byline']/a
+date: //div[@class='ishinfo']
+
+body: //*[@id='articletext']
+strip_id_or_class: 'ishinfo'
+strip_id_or_class: 'metastuff'
+strip_id_or_class: 'learnmore'
+strip_id_or_class: 'discuss'
+
+prune: no
+test_url: http://www.alistapart.com/articles/organizing-mobile/

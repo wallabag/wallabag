@@ -1,0 +1,6 @@
+title: //div[@class='article']/h1
+date: substring-before(//p[@class='articletime'],'|')
+body: //div[@id='articletext']
+strip: //div[@class='inlineDiashow']
+
+test_url: http://diepresse.com/home/politik/aussenpolitik/701905/TibeterProteste_Nonne-verbrennt-sich-selbst?_vl_backlink=/home/politik/index.do

@@ -1,0 +1,9 @@
+body: //div[@id='main']
+strip: //div[@id='sbs']
+strip: //div[@id='fsizeSwitch']
+strip: //div[@id='googleAd']
+strip: //div[@id='detailFoot']
+strip_image_src: counter?key
+convert_double_br_tags: yes
+
+test_url: http://news.kanaloco.jp/localnews/article/1105200018/

@@ -1,0 +1,10 @@
+date://span[contains(@class,'date')]
+
+body://div[contains(@class,'contWarp')]
+
+strip://div[contains(@class,'keyWord')]
+strip://div[contains(@class,'submitComt')]
+strip://div[contains(@class,'cmts')]
+strip://div[contains(@class,'notice')]
+strip://div[contains(@class,'part pt-second')]
+test_url: http://www.nbweekly.com/news/china/201203/29316.aspx

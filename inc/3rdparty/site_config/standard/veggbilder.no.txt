@@ -1,0 +1,5 @@
+author: //div[@class="blogginnleggForfatter"]
+date: concat(//div[@class='blogginnleggDatoDag'],' ',//div[@class='blogginnleggDatoMnd'])
+strip: //div[contains(@id,"bloggDelingslenker")]
+strip: //div[contains(@id,"bloggDelingslenker")]
+test_url: http://veggbilder.no/blogginnlegg/fristelser

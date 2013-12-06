@@ -1,0 +1,8 @@
+title: //h1
+author: //h2/a
+date: substring-after(//h2, '|')
+strip_id_or_class: 'attachment'
+strip: //h3
+
+body: //div[@class='entry']
+test_url: http://buquad.com/2012/04/09/paul-ryan/

@@ -1,0 +1,8 @@
+title: //h1[@class="content-headline"]
+body: //div[@class="headers-container"] | //div[@class="content-container"]
+prune: no
+tidy: no
+
+single_page_link: //li[@class='utility-print']/a
+
+test_url: http://www.details.com/culture-trends/critical-eye/201108/best-new-designers-innovations

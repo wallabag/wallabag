@@ -1,0 +1,11 @@
+body: //div[@class = 'entry']
+date: substring-after(//p[@class="date"],'بتاريخ ')
+strip_id_or_class: date
+strip_id_or_class: follow-single
+strip_id_or_class: ratingblock
+strip_id_or_class: newRatingHolder
+strip_id_or_class: postmetadata
+strip_id_or_class: addthis_toolbox
+strip_id_or_class: addthis_default_style
+strip_id_or_class: size-full
+test_url: http://alphabeta.argaam.com/?p=35657

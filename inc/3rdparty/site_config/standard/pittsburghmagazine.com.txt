@@ -1,0 +1,8 @@
+title: //title
+author: substring-after(//div[@class='by-line'],'BY')
+
+body: //div[@id='article-body']
+
+strip: //div[@class='by-line']
+strip: //div[@id='article-body']/h1
+test_url: http://www.pittsburghmagazine.com/Pittsburgh-Magazine/May-2012/Verde-Lights-the-Night/

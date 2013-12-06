@@ -1,0 +1,15 @@
+title: normalize(//h1)
+
+author: //td/p[position()=last()]/em
+
+# I swear, this is really the best way to do this
+date: normalize(//td[contains(@style, "color: #ffffff")])
+
+# my god, it's full of tables
+body: /table/tbody/tr[5]//table/tbody//table/tbody/tr/td
+strip: //h1
+
+# the following two lines strip the byline at the end of the article (the byline is a <p> that consists of an em dash and then some text in an <em>). I have no idea why I can't just strip //p[position()=last()], but trying to do so includes a bunch of other crap in the output.
+strip: //p[position()=last()]/em
+strip: //p[position()=last()]/child::text()
+test_url: http://www.fnal.gov/pub/today/archive_2011/today11-11-09_MuonDepartmentReadMore.html

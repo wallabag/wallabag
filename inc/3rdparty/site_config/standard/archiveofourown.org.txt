@@ -1,0 +1,18 @@
+# Description: Fix XPaths to include ALL chapters on 'view_full_work' pages.
+# Include: work meta, summary, chapter information, and notes which Instapaper strips out on default.
+# Exclude: header, footer, navigation, comments.
+# Notes: User is a newbie with XPaths.
+
+title: //h2[@class='title']
+author: //h3[@class='byline']
+author: //a[@class='login author']
+
+strip_id_or_class:header
+strip_id_or_class:navigation
+strip_id_or_class:feedback
+strip_id_or_class:kudos
+strip_id_or_class:add_comment_placeholder
+strip_id_or_class:add_comment
+strip_id_or_class:globalize
+strip_id_or_class:footer
+test_url: http://archiveofourown.org/works/229402?view_full_work=true

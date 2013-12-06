@@ -1,0 +1,5 @@
+author: substring-after(//div[@class='author'],'Par ')
+date: //div[@class='date']
+body: //div[@class='content']
+
+test_url: http://www.mac4ever.com/news/64182/icloud_les_prix_en_euros_et_en_chf/

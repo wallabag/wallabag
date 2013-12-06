@@ -1,0 +1,6 @@
+# Remove social buttons
+strip: //div[@id='temp_Content_Right']
+
+# Remove duplicate article title
+strip: //*[(@class='storytitle')]
+test_url: http://isource.com/2010/10/24/swearch-a-cool-iphone-web-app/

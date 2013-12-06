@@ -1,0 +1,10 @@
+title: //div[@class="editorial-content"]/h3
+body: //div[@class="hero-image" or @class="editorial-content"]
+
+strip: //ul[@class="hero-caption"]
+strip_id_or_class: footer
+
+prune: no
+tidy: no
+
+test_url: http://www.americascup.com/en/Latest/News/2012/3/Coutts-and-Peyron-tell-transformative-tale-at-Global-Sports-Forum/

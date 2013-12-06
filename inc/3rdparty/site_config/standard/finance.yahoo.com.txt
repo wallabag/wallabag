@@ -1,0 +1,12 @@
+title: //meta[@property='og:title']/@content
+body: //div[@id='y-article-bd']
+body: //div[contains(@class, 'yom-art-content')]
+strip: //div[contains(@class, 'related-companies')]
+strip: //div[@id='y-article-related']
+strip: //div[@id='ypf-article-related']
+prune: no
+
+single_page_link: //div[@class='ft']//a[contains(@href, 'page=all')]
+
+test_url: http://sg.finance.yahoo.com/news/Motorola-takes-wraps-249-rsg-3508842732.html?x=0&.v=1
+test_url: http://finance.yahoo.com/news/super-young-retirement-savers.html

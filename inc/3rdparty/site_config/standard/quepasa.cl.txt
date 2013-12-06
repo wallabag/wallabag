@@ -1,0 +1,6 @@
+title: //h1
+
+body: //div[@class="cuerpoArticulo"]
+
+
+test_url: http://www.quepasa.cl/magazine/articulo/print.html?id=5299

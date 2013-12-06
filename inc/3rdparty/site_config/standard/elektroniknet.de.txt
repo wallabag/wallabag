@@ -1,0 +1,27 @@
+title: //h1
+date: //div[@class='datum']
+single_page_link: //a[contains(@href, '?type=99')]
+
+# this hack preserves the intro text, because it would be striped otherwise if the title is set to //h1
+dissolve: //div[@class='artikelMeldung']
+
+
+strip_id_or_class: anzeige
+strip_id_or_class: top_page_navigation
+strip_id_or_class: cr_image_container
+strip_id_or_class: cr_image_reference
+strip_id_or_class: cr_image_icon
+strip_id_or_class: _close_txt
+strip_id_or_class: _close_ico
+strip_id_or_class: clearer
+
+strip://h1
+strip://h6
+strip://div[contains(@id, 'plista')]
+strip://img[contains(@id,'tiny')]
+strip://img[@class='cr_image']
+
+# strip url at the top
+strip: //p[@style='font-size: 10px;']
+
+test_url: http://www.elektroniknet.de/automotive/technik-know-how/sicherheitselektronik/article/87717/0/Besser_als_die_Wirklichkeit/

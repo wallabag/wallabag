@@ -1,0 +1,11 @@
+title: //h1[@class="article-title"]
+author: //meta[@name="author"]/@content
+body: //div[@class="article-full"]
+strip_id_or_class: sidebar_inject
+strip_id_or_class: callout
+strip_id_or_class: content-inset
+strip_id_or_class: byline-block
+strip_id_or_class: photo-caption
+strip_id_or_class: foot-tools
+
+test_url: http://www.propublica.org/article/pardon-applicants-benefit-from-friends-in-high-places

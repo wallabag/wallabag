@@ -1,0 +1,6 @@
+strip: //*[(@id = "ja-search")]
+body: //*[(@id = "ja-mainbody")]
+body: //*[(@id = "content-mass-bottom")]
+strip://h3[contains(span,'Related Posts')]
+strip://img
+test_url: http://vitispr.com/blog/coventry-is-a-technology-hotspot

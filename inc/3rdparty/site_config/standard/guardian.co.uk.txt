@@ -1,0 +1,7 @@
+title: //div[@id='main-article-info']//h1
+body: //div[@id='article-wrapper']
+date: //li[@class='publication']//time[@pubdate] | //li[@class='publication']//data[@pubdate]
+author: //li[@class='byline']
+prune: no
+tidy: no
+test_url: http://www.guardian.co.uk/business/2011/oct/06/quantitative-easing-75bn-bank-of-england

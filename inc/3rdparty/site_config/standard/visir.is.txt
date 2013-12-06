@@ -1,0 +1,14 @@
+# Author's name, when present, has 'skrifar:' ('writes:') appended to it.
+# In case of multiple authors, this would be 'skrifa:', hence only 7 characters
+# are stripped off.
+author: substring(//div[@class='paragraph']/div[@class='meta'], 0, string-length(//div[@class='paragraph']/div[@class='meta']) - 7)
+
+date: //span[@class='date']
+title: //h1
+body: //div[@class='paragraph']
+
+# Strip out author string when present
+strip: //div[@class='paragraph']/div[@class='meta']
+
+convert_double_br_tags: yes
+test_url: http://visir.is/esb,-ipa,-bhm-og-bsrb/article/2012701319997

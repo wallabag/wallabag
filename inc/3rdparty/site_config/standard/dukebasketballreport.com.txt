@@ -1,0 +1,11 @@
+title: //h2/a
+author: substring-before(substring-after(//span[@class='byline'], 'by'), ',')
+date: substring-before(substring-after(//span[@class='byline'], ','), '|')
+body: //div[@class='entry']
+
+
+# strip out auction stuff at the end of posts
+# tidy kills the center tag, so disable it
+tidy: no
+strip: //center//table
+test_url: http://www.dukebasketballreport.com/articles/?p=42660

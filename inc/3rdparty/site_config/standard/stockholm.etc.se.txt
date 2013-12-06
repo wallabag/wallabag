@@ -1,0 +1,5 @@
+strip_id_or_class: 'left'
+strip_id_or_class: 'right'
+strip_id_or_class: 'block-belowcontent'
+
+test_url: http://stockholm.etc.se/reportage/bakom-stangda-dorrar-pa-fas-3-massa

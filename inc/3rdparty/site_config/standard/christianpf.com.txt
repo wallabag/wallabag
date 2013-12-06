@@ -1,0 +1,5 @@
+title: //h1[@class="entry-title"]
+author: //*[@class="author vcard fn"]
+date: //*[@class="published"]
+body: //div[(@class = "dd_content_wrap")]
+test_url: http://christianpf.com/do-ibuys-lead-to-more-buying/

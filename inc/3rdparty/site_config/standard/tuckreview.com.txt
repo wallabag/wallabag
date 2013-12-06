@@ -1,0 +1,6 @@
+title: //h1[@class='post-title']
+author: //div[@class='display-name']
+date: //div[@class='date']
+body: //div[@class='body']
+footnotes: no
+test_url: http://tuckreview.com/2012/8/14/migrating-to-v6

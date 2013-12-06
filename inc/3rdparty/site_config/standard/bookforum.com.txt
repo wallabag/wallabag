@@ -1,0 +1,19 @@
+#metadata
+title://div[@class = 'Topper']/h1
+author://div[@class = 'Topper']/h3
+date://div[@class = 'Topper']/h6
+body://div[@class = 'Core']
+
+
+
+# clean up
+strip://div[@class = 'Topper']/h1
+strip://div[@class = 'Topper']/h3
+strip://div[@class = 'Topper']/h4
+strip://div[@class = 'Topper']/h5
+strip://div[@class = 'Topper']/h6
+strip://br[@clear = 'all']
+strip://div[@class = 'adCore']
+strip://div[@class = 'BookR']
+strip://div[@class = 'InfoBox']
+test_url: http://bookforum.com/inprint/018_04/8595

@@ -1,0 +1,6 @@
+title: /html/body/div[3]/div/div/h1
+
+body: //*[@id="article-body"]
+
+
+test_url: http://nplusonemag.com/the-outskirts-of-progress

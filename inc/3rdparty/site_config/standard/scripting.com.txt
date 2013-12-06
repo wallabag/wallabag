@@ -1,0 +1,8 @@
+strip: //a[starts-with(@href, '#')]
+strip: //*[@class='storyByline']
+body: //*[@class='storyPageText']/..
+author: string('Dave Winer')
+date: substring-before(substring-after(//*[@class='storyByline'], 'on'), 'at')
+title: //h1
+footnotes: no
+test_url: http://scripting.com/stories/2011/07/08/yeahImStillYawning.html

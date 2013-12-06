@@ -1,0 +1,21 @@
+# Works with old posts too, such as http://www.joelonsoftware.com/articles/fog0000000332.html
+
+author: substring-after(//div[@class="author"], 'by ')
+date: //div[@class="date"]
+
+## Clean stuff at top ##
+
+strip: //h1[1]
+strip: //h2[1]
+strip: //div[@class="date"]
+strip: //div[@class="author"]
+
+## Clean stuff at bottom ##
+
+strip: //blockquote[@class="textmessage"]
+strip: //div[@style="width:500px"]/p[last()]
+strip: //div[@style="width:500px"]/p[last()-1]
+strip: //div[@style="width:500px"]/h4[last()]
+strip: //div[@style="width:500px"]/h4[last()-1]
+strip: //div[@style="width:500px"]/div[last()]
+test_url: http://www.joelonsoftware.com/items/2011/09/15.html

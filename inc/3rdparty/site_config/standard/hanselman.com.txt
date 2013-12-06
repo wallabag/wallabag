@@ -1,0 +1,4 @@
+date: //span[@class="item-date"]
+body: //div[@class="item-content"]
+strip_comments: no
+test_url: http://www.hanselman.com/blog/BrainBytesBackBunsTheProgrammersPriorities.aspx

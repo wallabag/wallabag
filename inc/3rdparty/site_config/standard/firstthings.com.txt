@@ -1,0 +1,7 @@
+title: //div[@class='articleTitle']
+author: //div[@class='articleAuthor']
+body: //div[@class='articleContent']
+prune: no
+convert_double_br_tags: yes
+
+test_url: http://www.firstthings.com/article/2011/05/the-trouble-with-ayn-rand

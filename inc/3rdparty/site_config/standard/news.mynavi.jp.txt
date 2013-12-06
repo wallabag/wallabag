@@ -1,0 +1,11 @@
+title: //h2[@class="lyt-hdg-02-04"]
+
+author: //div[@class="lyt-namearea"]/a
+
+date: //div[@class="lyt-namearea"]/text()
+
+body: //div[@class="articleContent"]
+
+strip: //div[@id="tab-aside"]
+
+test_url: http://news.mynavi.jp/articles/2011/12/07/nico/index.html

@@ -1,0 +1,4 @@
+title: //h2
+author: //a[starts-with(@href, '/AuthorStories')]
+body: //div[@id='storyinnerbody']
+test_url: http://www.tthfanfic.org/Story-6512/Kudra+Journeys.htm

@@ -1,0 +1,4 @@
+author: //meta[@name="Author"]
+date: //meta[@name="Date"]
+strip: //h5
+test_url: http://www.publications.parliament.uk/pa/ld201011/ldhansrd/text/111109-0003.htm

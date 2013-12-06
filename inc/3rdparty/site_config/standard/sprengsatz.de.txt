@@ -1,0 +1,5 @@
+title: //h2
+author: string('Michael Spreng')
+date: //div[@class='date']
+body: //div[@class='entry']
+test_url: http://www.sprengsatz.de/?p=3691

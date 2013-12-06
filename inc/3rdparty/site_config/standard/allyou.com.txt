@@ -1,0 +1,8 @@
+title: //div[@id='pageHdr']//h1
+body: //div[@id='pageHdr']/*[@class='dek'] | //div[@id='printArticle' or @id='slideShowPrint']
+strip: //div[contains(@class, 'infoBox') or @id='infoBox']
+single_page_link: //li[@id='print']/a
+
+prune: no
+
+test_url: http://www.allyou.com/budget-home/money-shopping/freebies-online-00400000066392/

@@ -1,0 +1,7 @@
+body: //article[contains(@class, 'instapaper_body')]
+
+prune: no
+
+single_page_link: //a[@id='print-button']
+
+test_url: http://www.observer.com/2008/would-you-take-tumblr-man

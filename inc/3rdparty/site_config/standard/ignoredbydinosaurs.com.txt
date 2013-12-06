@@ -1,0 +1,7 @@
+title://h1[@class='page-title']
+body://*[@id='content']//div[contains(@class,'node-content')]
+
+author://*[@id='content']//div[contains(@class,'node-submitted')]/a
+
+date:substring-after(//div[contains(@class,'node-submitted')],' on ')
+test_url: http://ignoredbydinosaurs.com/2011/09/great-lie-lorem-ipsum

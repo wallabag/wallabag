@@ -1,0 +1,9 @@
+next_page_link: //div[@class='pagination']//span[@class='paginationNext']/a
+strip_id_or_class: utility
+strip_id_or_class: keywords
+strip_id_or_class: pagination
+strip_id_or_class: position2_content
+body: //div[@class='article']
+title: //h1[@class='content-headline']
+author: //span[@class='contributor']//a
+test_url: http://www.gq.com/news-politics/newsmakers/201203/terry-thompson-ohio-zoo-massacre-chris-heath-gq-february-2012

@@ -1,0 +1,8 @@
+title: //div[@class="Post-body"]//span[@class="PostHeader"]
+author: //div[@class="PostHeaderIcons metadata"]/a[@title="Author"]
+date: substring-before(//div[@class="PostHeaderIcons metadata"], '|')
+body: //div[@class="Post-body"]
+strip_id_or_class: print1
+strip_id_or_class: metadata
+strip_id_or_class: authorbox
+test_url: http://traningslara.se/skoinlagg-och-skador-finns-det-nagot-samband/

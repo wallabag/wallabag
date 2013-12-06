@@ -1,0 +1,5 @@
+body: //div[contains(@class, "entry")]
+
+date: //div[contains(@class, "entryFooter")]/a
+
+test_url: http://simonwillison.net/2009/Oct/22/redis/

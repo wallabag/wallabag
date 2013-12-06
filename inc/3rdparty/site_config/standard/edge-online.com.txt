@@ -1,0 +1,13 @@
+﻿title: //meta[@property="og:title"]/@content
+body: //h2[@class='strapline'] | //article[contains(@class, 'node-article')]
+date: //time[@pubdate]/@datetime
+author: //span[@class='author-name']
+prune: no
+tidy: no
+strip: //footer
+
+replace_string(<p>[ pagebreak ]</p>): <!-- pagebreak -->
+
+single_page_link: //a[contains(@href, '?page=show')]
+
+test_url: http://www.edge-online.com/features/telling-modern-warfares-story

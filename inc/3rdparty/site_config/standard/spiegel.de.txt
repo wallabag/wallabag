@@ -1,0 +1,75 @@
+# A. Niepel, narya.de@...
+# - added single_page_link
+# - added author for default and single page view
+# - added date for single page view
+# fforst@...
+# - Fixed it
+# bode2104@...
+# - Fixed single_page_link
+# - Included intro text in single page view
+# - Added body in default view
+
+# set body
+tidy: no
+# body in single page view
+body: //div[@id="spArticleContent"]
+# body in default view
+body: //div[@id="spArticleSection"]
+# body in "Fotostrecke"
+body: //div[@id="spBigaContent"]
+
+# set date in single page view
+date: //div[@id="spArticleContent"]/h3
+# strip date
+strip: //div[@id="spArticleContent"]/h3
+# set date in "Fotostrecke"
+date: //div[@id="spBigaDatum"]
+
+#set title in single page view
+title: //div[@id='spArticleContent']/h2
+# strip title
+strip: //div[@id='spArticleContent']/h1
+strip: //div[@id='spArticleContent']/h2
+#set title in "Fotostrecke"
+title: //div[@class='spBigaHeadline']
+
+# set author
+author: //p[@class="spAuthor"]/a
+author: substring-after(//p[@class="spAuthor"], 'Von ')
+# strip author
+strip: //p[@class='spAuthor']
+
+# remove captions
+strip: //*/span[@class='spPicLayerText']
+strip: //*/div[@class='spPanoPlayerPaneControl']
+strip: //*/div[@class='spCredit']
+strip: //*/div[@class='spCredit']/following-sibling::p
+
+# remove ads
+strip: //div[@class='spMInline']
+
+# remove photogalleries and extras
+strip: //div[@class='spPhotoGallery']
+strip: //div[@class='spPhotoGallery']/following-sibling::br
+strip: //div[@class='spAssetAlignleft']
+strip: //div[contains(@class,'spAsset')]
+strip: //br[@clear='all']
+
+# remove community functions
+strip: //div[@id='spSocialBookmark']
+strip: //div[contains(@class, 'spCommunityBox')]
+strip: //div[contains(@class, 'spArticleNewsfeedBox')]
+strip: //div[@class='spArticleCredit']
+
+# remove clutter in "Fotostrecke"
+strip: //div[@id='spBreadcrumb']
+strip: //div[@id='spBigaLatestEntries']
+strip: //div[contains(@class, 'spBigaNavi')]
+strip: //div[@class='spDottedLine']
+
+# Use link to print article for single page view
+single_page_link: //a[contains(@href, '-druck')]
+
+# use next link in "Fotostrecke"
+next_page_link: //a[@class='spBigaControlForw']
+test_url: http://www.spiegel.de/politik/deutschland/0,1518,787602,00.html

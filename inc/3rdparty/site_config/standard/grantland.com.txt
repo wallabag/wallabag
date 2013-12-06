@@ -1,0 +1,20 @@
+# this is fragile with footnotes -- leave it for now
+
+#tidy: no
+#prune: no
+#move_into(//article): //aside[@id='footnotes']
+author: //cite/a
+date: //time
+
+strip: //a[text()='Grantland']
+strip_id_or_class: ad-wrapper
+strip_id_or_class: fb-connect-link
+strip_id_or_class: fb-status
+strip: //li[@class='print']
+strip: //cite
+strip: //a[contains(text(), '[+]')]
+strip: //a[@id='jump-nav-link']
+strip: //h1[text()='Share This']
+strip: //h1[text()='Top Stories']
+strip: //div[@id="update-text-size"]
+test_url: http://www.grantland.com/story/_/id/8421241/examining-new-albums-rock-veterans-no-doubt-green-day

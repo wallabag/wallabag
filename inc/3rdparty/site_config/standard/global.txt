@@ -1,0 +1,4 @@
+# Look for Open Graph data - http://ogp.me
+title: //meta[@property="og:title"]/@content
+date: //meta[@property="article:published_time"]/@content
+# article:author is someties URL, e.g. on guardian.co.uk

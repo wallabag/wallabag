@@ -1,0 +1,4 @@
+title: //h3[@class='post-title']/a[@class='post-title-link']
+body: //div[@class='post-content']
+author: //div[@class='post-meta-under-title']/a
+test_url: http://www.thesimpledollar.com/2011/09/13/determining-the-size-of-your-emergency-fund/

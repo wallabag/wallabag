@@ -1,0 +1,9 @@
+prune: no
+
+author: //meta[@name="dc.publisher"]/@content
+date: //meta[@name="dc.date"]/@content
+strip: //p[contains(@class, 'contributor vcard')]
+replace_string(<ul><li><div class="photo">): <div class="photo">
+strip: //p[a[contains(., 'Click here to read more on this story ')]]
+
+test_url: http://www.foxnews.com/entertainment/2011/05/04/dwayne-johnson-guys-grow-pair-driving-hybrid/

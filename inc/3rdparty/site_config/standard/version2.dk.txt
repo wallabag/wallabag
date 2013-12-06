@@ -1,0 +1,12 @@
+title: //article/header/h1
+
+author: //article/header/section[@class='byline']/span[contains(@class, 'author')]/a
+date: //article/header/section[@class='byline']/span[@class='published']/span
+
+body: //article/section[@class='body']
+
+convert_double_br_tags: yes
+
+# This is required, because Tidy chokes on the HTML5 tags...
+tidy: no
+test_url: http://www.version2.dk/artikel/17069-amerikansk-hit-investor-er-vild-med-danske-net-ivaerksaettere

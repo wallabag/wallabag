@@ -1,0 +1,8 @@
+title://div[@class="content_detail"]/h1
+
+author://div[@class="author"]/strong
+
+date:substring-before(substring-after(//div[@class="content_detail"]/*[@class="date"], ','), ' WIB')
+
+body://div[@class='text_detail']
+test_url: http://sport.detik.com/sepakbola/read/2012/05/23/065011/1922350/71/agen-silva-ingin-bertahan-di-milan?b99220270

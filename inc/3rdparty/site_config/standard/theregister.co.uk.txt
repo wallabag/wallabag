@@ -1,0 +1,5 @@
+title: //div[@id="article"]/h2
+author: //div[@id="article"]/p[@class="byline"]/a[1]
+date: //div[@id="article"]/p[@class="dateline"]/a[2]
+body: //div[@id="article"]/div[@id="body"]
+test_url: http://www.theregister.co.uk/2011/10/06/gas_bill_shocker/

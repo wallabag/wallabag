@@ -1,0 +1,12 @@
+title: //h4
+author: //span[@class="author"]
+body: //div[@id="story"]
+strip_id_or_class: summary
+strip_id_or_class: meta
+strip_id_or_class: storyfoot
+convert_double_br_tags: yes
+prune: no
+
+# Note: this site still has trouble because single <br> tags are stripped, but I don't see a way to fix that with this interface.
+
+test_url: http://www.ficwad.com/story/158977

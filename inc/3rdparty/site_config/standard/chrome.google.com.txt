@@ -1,0 +1,9 @@
+body: //pre[@id='cx-desc-text']
+body: //div[contains(@class, 'overview-tab-right-bar-info')]
+title: //h1[contains(@class, 'detail-dialog-title')]
+tidy: no
+prune: no
+replace_string(<noscript>): <div>
+replace_string(</noscript>): </div>
+
+test_url: https://chrome.google.com/webstore/detail/pnaiinchjaonopoejhknmgjingcnaloc

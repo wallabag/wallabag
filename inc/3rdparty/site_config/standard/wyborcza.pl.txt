@@ -1,0 +1,11 @@
+title:h1
+author: //*[@class = 'author']
+date: //*[@class = 'date']
+body: //*[@id = 'art']
+next_page_link: //*[@id='Str']/a[contains(text(), 'nastepne')]
+strip: //*[@class = 'rel_zdjTOP']
+strip: //*[@id = 'rel']
+strip: //*[@class = 'txt_upl']
+strip: //*[@id='Str']
+strip: //*[@id='source']
+test_url: http://wyborcza.pl/1,123455,11536088,Gdy_peknie_fejs__obryzga_wszystko.html?as=1&startsz=x

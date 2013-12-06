@@ -1,0 +1,5 @@
+title: //span[@class="entry-title"]
+author: //*[contains(@class, 'item')]/p/a/text()
+date: substring-after(//*[contains(@class, 'item')]/p/text()[3], 'Posted:')
+body: //div[@class="entry-content"]
+test_url: http://www.tampabay.com/news/salvador-dali-leaders-want-st-petersburg-city-council-to-put-brakes-on/1236349

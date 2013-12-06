@@ -1,0 +1,12 @@
+body://div[@id="news-content"]/div[@id="intelliTXT"][1]
+
+author://div[@id="header-news-infos"]/a[1]
+
+date: //div[@id="header-news-infos"]/span[1]
+
+title://h1[@id="header-news-title" and @class="hardwareTitle"][1]
+
+strip://div[@id="news-content"]/div[@id="intelliTXT"]/table 
+
+footnotes: no
+test_url: http://www.tomshardware.de/DDR4-DDR3-ISSCC-Samsung-Hynix,news-247133.html

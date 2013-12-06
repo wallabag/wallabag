@@ -1,0 +1,5 @@
+title: //div[@class="blogtitle"]
+strip: //div[@class="blogtitle"]
+
+author: substring-after(//span[@class="blogheader"], 'Author: ')
+test_url: http://www.mikeash.com/pyblog/friday-qa-2012-01-13-the-mac-toolbox.html

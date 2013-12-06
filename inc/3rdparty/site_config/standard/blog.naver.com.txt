@@ -1,0 +1,6 @@
+title: //span[@class='pcol1 itemSubjectBoldfont']
+body: //div[@id='postListBody']
+date: //p[@class='date fil5 pcol2']
+single_page_link: /html/frameset/frame[1]/attribute::src
+strip: //div[@class='post-btn']
+test_url: http://blog.naver.com/how2invest/110135068757

@@ -1,0 +1,3 @@
+strip: //*[(@id = "content")]/h2
+strip: //*[(@class = "wp-notable-line")]
+test_url: http://www.thespoiler.co.uk/index.php/2010/10/21/wayne-rooney-tells-man-utd-its-not-me-its-you

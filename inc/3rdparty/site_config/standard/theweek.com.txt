@@ -1,0 +1,4 @@
+body: //div[@class="briefingEntry"]
+prune: no
+
+test_url: http://theweek.com/article/index/215763/insider-trading-on-capitol-hill

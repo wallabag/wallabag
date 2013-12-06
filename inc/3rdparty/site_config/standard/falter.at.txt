@@ -1,0 +1,18 @@
+title: //h2[@class='related relatedTitle']
+author: //a[contains(@href, 'liste.php?author_id')]
+
+# can't think of a better way unfortunately, really bad markup on this site
+date: substring-after(//td[@style='width:85%;'], 'vom')
+
+# not sure why, but instapaper seems to suck up the teaser paragraph
+# not solved!
+body: //div[contains(@class, 'teaser')]
+body: //div[@id='content']
+
+# cleanup
+strip: //img[@src='http://www.falter.at/web/_pics/falterlogo_dblau.gif']
+strip: //div[@class='servicebox']
+strip: //h1
+strip: //br
+strip: //td[@id='adcol']
+test_url: http://www.falter.at/web/print/detail.php?id=1634

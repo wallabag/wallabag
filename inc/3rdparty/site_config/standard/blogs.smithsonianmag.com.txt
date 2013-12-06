@@ -1,0 +1,15 @@
+# metadata
+author://div[@class = 'post']/div[@class='meta']/a[1]
+date://div[@id = 'rap']/h2[1]
+body://div[@class = 'post']
+
+# wrapping caption and image
+wrap_in(fieldset)://div[contains(@class, 'wp-caption')]
+
+
+# clean up
+strip://div[@class = 'post']/h3[@class = 'storytitle']
+strip://div[@class = 'post']/div[@class = 'social']
+strip://img[@style = 'display:none;']
+strip://img[@height='0' and @width='0']
+test_url: http://blogs.smithsonianmag.com/adventure/2011/10/tips-for-women-traveling-in-turkey/

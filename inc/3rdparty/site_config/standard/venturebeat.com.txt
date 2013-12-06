@@ -1,0 +1,6 @@
+title: //h1[@class="entry-title"]
+author: //div[@class="author-name"]
+date: //span[@class="the-time"]
+body: //div[@class="entry-content"]
+strip: //div[@class="vb-gallery"]
+test_url: http://venturebeat.com/2012/07/17/marissa-mayer-yahoo/#s:mayer-1

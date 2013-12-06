@@ -1,0 +1,4 @@
+title: //p[@id='content']
+
+body: //div[@class='contentblock']
+test_url: http://www.worldwidewords.org/weirdwords/ww-gro1.htm

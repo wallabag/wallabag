@@ -1,0 +1,13 @@
+title: //h1[@class="Headline"]
+date: substring-after(//div[@class="posted"], 'EDT ')
+body: //div[@class="storyBody"]
+
+strip: //td[@class="AssocContentTD"]
+strip: //div[@id="pageTitle"]
+strip: //div[@class="posted"]
+strip: //div[@class="updated"]
+strip: //div[@class="js-kit-disclaimer"]
+strip: //table[@class="row3table"]
+strip: //div[@class="container2"]
+strip: //div[@id="delta"]
+test_url: http://www.theindychannel.com/news/31050840/detail.html

@@ -1,0 +1,11 @@
+body: //div[@class="storybox"]
+title: //div[@class="storybox"]//h1
+strip: //p[@class='metaline']
+date: substring-after(//*[@class='time'],'Erstellt am')
+strip: //div[@class='fact']
+strip: //p[@class='backlink']
+strip: //div[@class='mailto']
+strip: //div[@id='forumDisclaimer']
+strip: //div[@class='forum']
+
+test_url: http://science.orf.at/stories/1700900/

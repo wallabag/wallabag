@@ -1,0 +1,25 @@
+# Jens Kohl, jens.kohl@...
+# - Added publication date
+# - Striped pagination block
+# - Added single page link
+# - Added xpath-querys for the printer friendly version
+
+title: //h1
+body: //div[@class='formatted']
+prune: no
+
+date: substring-after(//li[2][@class="text1"], 'Datum:')
+strip: //ol[@class="list-chapters"]
+strip_comments: yes
+
+# next: commands for printer friendly pages
+single_page_link: //a[contains(@href, 'print.php?a=')]/@href
+title: //body/h3
+strip_image_src: staticrl/images/logo.jpg
+strip_image_src: http://cpx.golem.de/cpx.php?class=7
+strip: //body/h3
+strip: //body/b[1]
+strip: //body/b[2]
+strip: //body/b[3]
+strip: //div[1]
+test_url: http://www.golem.de/1112/88696.html

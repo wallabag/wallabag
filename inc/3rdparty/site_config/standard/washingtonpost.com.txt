@@ -1,0 +1,21 @@
+body: //div[@class="article_body"]
+author://meta[@name='DC.creator']/@content
+title://meta[@name='title']/@content
+date://div[contains(@class,'byline')]//span[contains(@class,'published')]/@title
+date://meta[@name="DC.date.issued"]/@content
+strip://div[@class="relative primary-slot padding-top img-border gallery-container photo-wrapper"]
+strip://div[@id="wp-column six end"]
+strip://div[contains(@class,'hidden')]
+strip://div[@id='article-side-rail']
+strip://div[@class="module component todays-paper-module curved"]
+strip://div[@class="module component live-qa curved img-border"]
+strip://div[@class="module component newsletter-signup curved"]
+strip://div[@class="module featured-stories component curved img-border"]
+
+strip_id_or_class: carousel
+strip_id_or_class: toolbar
+strip_id_or_class: module
+
+test_url: http://www.washingtonpost.com/world/europe/in-europe-new-fears-of-german-might/2011/10/19/gIQA3baZ7L_story.html?hpid=z1
+test_url: http://www.washingtonpost.com/national/health-science/radical-theory-of-first-americans-places-stone-age-europeans-in-delmarva-20000-years-ago/2012/02/28/gIQA4mriiR_story.html
+test_url: http://www.washingtonpost.com/lifestyle/magazine/the-sorry-fate-of-a-tech-pioneer-halsey-minor-and-historic-virginia-estate-carters-grove/2012/05/30/gJQAwdJG4U_story.html

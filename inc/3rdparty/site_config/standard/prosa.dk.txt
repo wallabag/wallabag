@@ -1,0 +1,4 @@
+author: //p[@class='name']
+date: substring-before(//p[@class='date'], ' | ')
+body: //div[@class='news_single_item']
+test_url: http://www.prosa.dk/aktuelt/nyhed/artikel/internetaktivisten-uden-maske/

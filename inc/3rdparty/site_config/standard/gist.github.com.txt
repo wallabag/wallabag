@@ -1,0 +1,6 @@
+body: //div[@class="highlight"]/pre
+
+prune: no
+tidy: no
+
+test_url: https://gist.github.com/1258908

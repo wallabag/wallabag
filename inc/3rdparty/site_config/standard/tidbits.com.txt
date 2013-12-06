@@ -1,0 +1,3 @@
+author: //span[@class='fn']
+date: substring-before(substring-after(//*[@id='center_ajax_sub']/div/div[3],'|'),'|')
+test_url: http://tidbits.com/article/12651

@@ -1,0 +1,9 @@
+body: //div[@class='container_16']//div[@class='grid_11']
+strip: //h2[@class='mast']
+strip: //div[@class='container_16']//div[@class='grid_11']/h1
+strip: //div[@class='container_16']//div[@class='grid_11']/p[1]
+strip: //div[@class='container_16']//div[@class='grid_11']/div
+author: //a[starts-with(@title, 'Posts by')]
+date: substring-before(substring-after(//time, 'Posted on '), ' at')
+test_url: http://www.loopinsight.com/2012/09/13/forget-iphone-5-naysayers-this-thing-is-big/
+test_url: http://www.loopinsight.com/2011/05/20/playbook-returns-high-misses-sales-targets-by-90/

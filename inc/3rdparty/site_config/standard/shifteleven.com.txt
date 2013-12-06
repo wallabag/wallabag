@@ -1,0 +1,6 @@
+body: //div[ @class='entry-content' ]
+
+strip: //div[ contains(@class, 'sharing') ]
+
+date: //div[ @class='entry-meta' ]/a
+test_url: http://shifteleven.com/articles/2008/05/10/issue-tracking-git-ticgit

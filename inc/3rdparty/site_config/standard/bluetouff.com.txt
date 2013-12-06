@@ -1,0 +1,4 @@
+body://div[@class='entry']
+date://div[@class='meta']
+strip://a[@class='FlattrButton']
+test_url: http://bluetouff.com/2012/03/02/polemique-google-vie-privee/

@@ -1,0 +1,5 @@
+date: //div[@class='post_date']
+
+body: //div[@class='post_content']
+
+test_url: http://www.archdaily.com/185325/p10-mixed-use-building-studio-up

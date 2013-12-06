@@ -1,0 +1,5 @@
+title: substring-before(//title, '|')
+body: //div[@class="entry"]
+# Remove the author's picture
+strip: //div[@class="entry"]/a[1]
+test_url: http://www.boundlessline.org/2011/06/the-nyts-on-gender-over-the-weekend.html

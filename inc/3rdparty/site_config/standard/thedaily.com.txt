@@ -1,0 +1,24 @@
+#keep all body text
+prune: no
+
+#title, body, metadata
+title: //div[@class='story_header']/h1
+body: //div[@id='content']
+author: substring-after(//span[@class='byline'], "by ")
+author: substring-after(//span[@class='byline'], "By ")
+author: //span[@class='byline']
+date: //span[@class='date']
+
+#formatting
+convert_double_br_tags: yes
+dissolve: //div[@class='slides_full']/ul/li
+
+# cleanup
+strip: //a[@id='story_note']
+strip: //br
+strip: //div[@class='intro']
+strip: //div[@class='share-block']
+strip: //div[@class='sidebar-social']
+strip: //div[@class='top-stories']
+strip: //div[@class='prevnext']
+test_url: http://www.thedaily.com/page/2012/01/09/010912-news-college-costs-1-5/

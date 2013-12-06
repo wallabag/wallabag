@@ -1,0 +1,5 @@
+body://div[@class='storycontent']
+date://div[@class='date']
+strip://li[@class='sharing_label']
+strip://a[@class='FlattrButton']
+test_url: http://reflets.info/orange-nokia-siemens-deep-packet-inspection/

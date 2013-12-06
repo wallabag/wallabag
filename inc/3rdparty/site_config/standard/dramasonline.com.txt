@@ -1,0 +1,10 @@
+body: //div[@class='postext']
+
+strip_id_or_class: ratingblock
+strip_id_or_class: hreview-aggregate
+strip: //div[contains(@style, 'display: none;')]
+
+tidy: no
+prune: no
+
+test_url: http://www.dramasonline.com/jago-pakistan-jago-7th-december-2012-ali-gul-pir/

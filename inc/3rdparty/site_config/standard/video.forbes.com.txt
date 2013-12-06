@@ -1,0 +1,9 @@
+title: concat("Video: ", //div[@id='currentVideoTitleDivId'])
+body: //div[@id='currentVideoDescriptionId']
+author: //meta[@name='author']/@content
+
+replace_string(<div id="currentVideoDescriptionId" style="display): <div id="currentVideoDescriptionId" style="displayitplease
+
+replace_string(<div id="currentVideoTitleDivId" style="display): <div id="currentVideoTitleDivId" style="displayitplease
+
+test_url: http://video.forbes.com/fvn/business/wells-fargo-inside-the-bank-that-works

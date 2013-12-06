@@ -1,0 +1,8 @@
+# 2011-08-23 [carlo@...] Initial version.
+
+author: //div[@id="blogauthordatebox-node"]//a[@title="View user profile."]/text()
+
+# why yes, I do feel a bit dirty
+date: substring-before( substring-after( substring-after( //div[@id="blogauthordatebox-node"]//td[3], "on " ), ", "), " " )
+
+test_url: http://blogs.aljazeera.net/asia/2011/08/22/peoples-hero

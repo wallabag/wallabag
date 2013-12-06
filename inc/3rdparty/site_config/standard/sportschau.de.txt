@@ -1,0 +1,22 @@
+title://div[@id='ardContent']/h1
+
+author://p[@id='ardAutor']
+author://span[@id='ardQuelle']
+author:string('sportschau.de')
+
+date:substring-after(//span[@id='ardStand'], 'Stand: ')
+
+body://div[@id='ardContent']
+
+strip://div[@id='ardContent']/h1
+strip://p[@id='ardAutor']
+strip: //div[@class='embeddedPlayer_clipinfo']
+strip: //div[@class='ardMehrZumThemaRechts']
+strip: //*[contains(@class, 'inv')]
+
+strip: //p[@id='ardAbbinder']
+strip: //div[@class='socialBookmarks']
+strip: //div[@id='ardContentEnd']
+strip: //div[@id='ardDisclaimer']
+strip: //div[@id='ardRechteSpalte']
+test_url: http://www.sportschau.de/sp/fussball/news201203/17/analyse_leverkusen_gladbach.jsp

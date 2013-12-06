@@ -1,0 +1,26 @@
+title: //div[@class='story_headline']
+author: substring-before(substring-after(//div[@class='story_byline'],'By'),'/')
+date: //div[@class='story_lastupdate'] 
+body: //div[@id='story']
+strip: //div[@class='story_byline']
+strip: //div[@class='story_lastupdate']
+strip: //div[@class='story_headline']
+strip: //div[@id='abuse']
+strip: //h2
+strip: //div[@class='pagenumbers_wrap']
+strip: //ul[@class='pagenumbers']
+strip: //div[starts-with(., 'To report inappropriate comments')]
+
+strip_id_or_class: story_share
+strip_id_or_class: OUTBRAIN
+strip_id_or_class: story_box_right
+strip: //div[a[@href='http://www.post-gazette.com/pg/12062/1213990-42.stm']]
+strip: //ul[@id='pikame']/li[position()>1]
+
+prune: no
+tidy: no
+
+single_page_link: //a[contains(@href, '?p=0')]
+
+test_url: http://www.post-gazette.com/stories/sports/penguins/pens-crosby-expects-to-return-thursday-226648/
+test_url: http://www.post-gazette.com/stories/sports/pirates/pirates-fork-over-changes-for-fans-at-pnc-park-629789

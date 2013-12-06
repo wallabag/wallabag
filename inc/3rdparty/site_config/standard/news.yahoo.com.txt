@@ -1,0 +1,12 @@
+title: //meta[@property='og:title']/@content
+title: //h1[@class='headline']
+author: //cite[contains(@class, 'byline') and contains(@class, 'vcard')]//span[@class='fn']
+date: //cite[contains(@class, 'byline') and contains(@class, 'vcard')]//abbr/@title
+body: //div[@id='mediaarticlelead']//a[@class='media'] | //div[contains(@class,'yom-art-content')]
+#strip: //cite/abbr
+strip_id_or_class: action
+strip_id_or_class: prefetch
+tidy: no
+prune: no
+
+test_url: http://news.yahoo.com/cold-la-nina-winter-forecast-west-coast-183535067.html

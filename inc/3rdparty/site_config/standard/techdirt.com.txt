@@ -1,0 +1,12 @@
+body: //div[@class='story']
+title: //div[@class='story']/h1
+strip: //div[@class='story']/h1
+
+author: //div[@class='details']/p[contains(., 'by ')]/a
+date: //p[@class='storydate']
+
+strip: //p[a[contains(., 'Leave a Comment')]]
+strip_id_or_class: share
+strip_id_or_class: maincolumn_head
+strip_id_or_class: maincolmod
+test_url: http://www.techdirt.com/articles/20120112/17455117394/sega-gets-it-right-about-sopa-its-time-hard-reset-copyright-law-congress.shtml

@@ -1,0 +1,7 @@
+author: //div[@class='authorDescription']/h2
+body: //div[@id='story']
+date: substring-before(substring-after(//p[@class='date'],'Erstellt am:'), '-')
+title: //h1[@class='detail']
+strip: //div[@class='fact']
+
+test_url: http://fm4.orf.at/stories/1689156/

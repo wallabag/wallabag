@@ -1,0 +1,6 @@
+title: //div[@class="mod-bostonarticleheader mod-articleheader"]/h1
+author: substring-after(//div[@class="mod-bostonarticlebyline mod-articlebyline"]/span[3],"By ")
+date: //div[@class="mod-bostonarticlebyline mod-articlebyline"]/span[@class="pubdate"]
+
+strip_id_or_class: mod-pagination
+test_url: http://articles.boston.com/2011-10-23/news/30313691_1_bigfoot-free-speech-monadnock-state-park

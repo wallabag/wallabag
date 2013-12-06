@@ -1,0 +1,6 @@
+title: //*[@class="header_title"]/h1
+date: //*[@class="field-date"]
+author: //*[@class="field-author"]
+body: //div[contains(@class, 'content')]
+
+test_url: http://www.mlssoccer.com/news/article/2012/06/19/lack-depth-front-forces-arena-alter-las-formation

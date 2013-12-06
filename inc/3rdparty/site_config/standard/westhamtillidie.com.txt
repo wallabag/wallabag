@@ -1,0 +1,6 @@
+title: substring-before(//title, '«')
+
+body: //div[@class='entry']
+strip: //div[@class='sharing_label']
+strip: //div[@class='snap_nopreview sharing robots-nocontent']
+test_url: http://www.westhamtillidie.com/2012/03/11/twelve-things-we-learned-from-the-doncaster-game/

@@ -1,0 +1,2 @@
+body: //*[(@class = "historia")]
+test_url: http://appleweblog.com/2011/09/encontrada-vulnerabilidad-grave-en-skype-para-ios

@@ -1,0 +1,5 @@
+title: //*[@id="article-title"]
+author: //*[@id="article-info"]/strong
+date: //*[@class="article-dateline"]/strong
+body: //*[@id="article-content"]
+test_url: http://www.itworld.com/open-source/140916/android-sued-microsoft-not-linux

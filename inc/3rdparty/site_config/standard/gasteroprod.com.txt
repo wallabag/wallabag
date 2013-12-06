@@ -1,0 +1,4 @@
+# These should work, but don't. They were given by Firefox XPather extension
+title: //article//header//a//h1
+body: //article//section
+test_url: http://gasteroprod.com/blog/faut-il-continuer-a-supporter-internet-explorer-6.html

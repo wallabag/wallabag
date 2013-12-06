@@ -1,0 +1,16 @@
+﻿title: //meta[@property="og:title"]/@content
+body: //div[img[starts-with(@id, 'img_caption')]] | //div[@class="big_photo"] | //div[contains(@class, 'entry_body_text')]
+date: //meta[@name="publish_date"]/@content
+author: //a[@rel="author"]
+author: //meta[@name="author"]/@content
+prune: no
+tidy: no
+strip: //footer
+strip_id_or_class: ps-slideshow
+strip_id_or_class: fs-slideshow
+strip: //p[contains(., 'Related on HuffPost:')]
+# end early
+replace_string(<div class="sbm-main): </body></html><div class="not-interested 
+
+test_url: http://www.huffingtonpost.com/mitch-moxley/tracking-beijings-boom-th_b_1209828.html
+test_url: http://www.huffingtonpost.com/2012/09/11/president-obama-iphone-throwdown_n_1873826.html

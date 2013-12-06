@@ -1,0 +1,6 @@
+title://div[@class="paste_box_line1"]/h1
+author://div[@class="paste_box_line2"]/a
+body://div[@class="text"]
+date:substring-before(substring-after(//div[@class="paste_box_line2"],'|'),'|')
+dissolve://li
+test_url: http://pastebin.com/LAykd1es

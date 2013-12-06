@@ -1,0 +1,17 @@
+author: substring-before(substring-after(//div[@class='post-byline'], 'By '), ', on')
+date: substring-after(//div[@class='post-byline'], ', on')
+
+# for some reason, the following is producing a "no text [48]" error
+#title: //div[@class='post-headline']
+
+# for some reason, the following doesn't appear to isolate just the body copy
+body: //div[@class='post-bodycopy']
+
+# we solve the above issue by stripping out everything else we don't want
+# these can probably all be removed if the body: command above worked
+strip_id_or_class: reply
+strip_id_or_class: left
+strip_id_or_class: post-headline
+strip_id_or_class: post-byline
+strip_id_or_class: footer
+test_url: http://www.uni-watch.com/2011/10/18/the-curious-case-of-steve-debergs-microphone-and-speaker/

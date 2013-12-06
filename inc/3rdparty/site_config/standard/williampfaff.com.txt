@@ -1,0 +1,3 @@
+title: substring-after(//span[@class='itemTitle'], ':') 
+body: //div[@id='content']
+test_url: http://www.williampfaff.com/modules/news/article.php?storyid=491

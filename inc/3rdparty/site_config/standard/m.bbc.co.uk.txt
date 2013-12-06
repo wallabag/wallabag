@@ -1,0 +1,8 @@
+title: //div[@class="story-body"]/div[@class="story-inner"]/h1
+body: //div[@class="story-body"]
+date: //p[@class='date']/strong
+author: substring-after(//div[@class="story-inner"]/div[@class="byline"]//span[@class='name'], 'By')
+
+strip: //div[@class="story-inner"]/div[@class="byline"]
+
+test_url: http://m.bbc.co.uk/news/science-environment-19144464

@@ -1,0 +1,6 @@
+author: //p[@class = 'writer']
+
+date: //p[@class = 'published-time']
+
+body: //div[@class = 'text main']
+test_url: http://www.itavisen.no/899786/old-republic-blir-gratis

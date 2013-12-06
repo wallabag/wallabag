@@ -1,0 +1,8 @@
+title: //title
+author: //p[@id='author-name-role']/a
+date: substring-after(//p[@class='time'],'Posted')
+body: //div[@id='main']
+strip: //div[@id='author-info']
+strip: //div[@id='author-links']
+strip: //h1
+test_url: http://www.scotusblog.com/2012/04/shaken-baby-case-an-update/

@@ -1,0 +1,10 @@
+title: //*[@id='Content']/span[1]
+author: substring-after(substring-before(//*[@id='Content']/span[2], ')'), '(')
+date: substring-before(substring-after(//*[@id='Content']/span[2], 'Updated: '), 'Counter')
+
+strip: //*[@id='Content']/span[1]
+strip: //*[@id='Content']/span[2]
+
+body: //*[@id='Content']
+
+test_url: http://www.chinamining.org/News/2011-07-22/1311319069d48087.html

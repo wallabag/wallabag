@@ -1,0 +1,3 @@
+body: //div[@id = 'article']
+strip: //div[@id = 'klasbox']
+test_url: http://www.geenstijl.nl/mt/archieven/2010/10/vrouw_lange_frans_wou_baas_b_d.html

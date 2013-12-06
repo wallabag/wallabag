@@ -1,0 +1,6 @@
+strip_id_or_class: 'left'
+strip_id_or_class: 'right'
+strip_id_or_class: 'block-belowcontent'
+author: //span[@class = 'name']/a
+date: //div[@class= 'datum']
+test_url: http://www.etc.se/intervju/lonsamt-att-radda-jorden

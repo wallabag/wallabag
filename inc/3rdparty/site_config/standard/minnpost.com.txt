@@ -1,0 +1,5 @@
+title: //*[@id="content-header"]/h1
+author: //*[contains(@class, 'byline')]/a/text()
+date: substring-after(//*[contains(@class, 'byline')]/text()[2], '|')
+body: //*[contains(@class, 'node-body')]
+test_url: http://www.minnpost.com/eric-black-ink/2012/06/overturning-obamacare-would-be-game-changer-supreme-court

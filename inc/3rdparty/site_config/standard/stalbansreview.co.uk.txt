@@ -1,0 +1,14 @@
+title: //div[@class='articleLeft']/h3
+
+author: substring-after(//span[@class='articleAuthor']/a,'By ')
+
+date: substring-before(//span[@class='articleDateTime'],'in ')
+
+body: //div[@class='articleLeft']
+strip: //div[@class='articleMoreNews']
+strip: //div[@class='articleLeft']/h3
+strip: //div[@class='articleLeft']/p[@class='articleInfo clearfix']
+
+# Remove duplicate title from text
+strip: //div[@id='site']/div[5][@class='holder']/div[1][@class='hBlock']/div[1][@class='sglCol article']/h3
+test_url: http://www.stalbansreview.co.uk/news/9581446.New_roundabout_in_King_Harry_Lane/r/?ref=rss

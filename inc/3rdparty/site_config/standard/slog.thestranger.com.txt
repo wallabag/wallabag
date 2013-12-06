@@ -1,0 +1,4 @@
+strip_id_or_class: postCategory
+title: //h3[@class='postTitle']
+body: //div[@class='postBody']
+test_url: http://slog.thestranger.com/slog/archives/2010/10/12/sl-letter-of-the-day-leave-it-alone

@@ -1,0 +1,9 @@
+title: //h2[@class='border']
+body: //div[@class='padding']
+
+convert_double_br_tags: yes
+
+strip: //div[@id='social_sharing']
+strip: //div[@class='socialLinks']
+
+test_url: http://www.944.com/articles/mild-obsessions-frock-la-get-to-know-victoria-tik-s-haute-sustainable-fashion-line/

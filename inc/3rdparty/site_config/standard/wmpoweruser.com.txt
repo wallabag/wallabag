@@ -1,0 +1,4 @@
+date://*[@class="entry-date"]
+author://*[@class="author vcard"]
+strip://*[@style="position:relative;left:72px;top:2px;"]|//*[@id="authorbox"]
+test_url: http://wmpoweruser.com/breaking-nokia-announces-nfc-support-in-lumia-610-windows-phone-device/

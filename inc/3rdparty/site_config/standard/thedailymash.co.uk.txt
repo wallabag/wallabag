@@ -1,0 +1,14 @@
+# Remove duplicated title
+strip: //div[@id='content']/div[1][@class='full_intro']/h2
+
+# Remove links, ads etc.
+strip: //*[(@class= "aside")]
+
+# Remove the  date and add it to the date published field in Instapaper
+strip: //div[@class="date"]
+date: //div[@class="date"]
+
+# There is no byline on The Daily Mash.
+
+convert_double_br_tags: yes
+test_url: http://www.thedailymash.co.uk/index.php?option=com_content&task=view&id=4994&Itemid=81&utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+thedailymash+%28The+Daily+Mash.+It%27s+news+to+us.%29

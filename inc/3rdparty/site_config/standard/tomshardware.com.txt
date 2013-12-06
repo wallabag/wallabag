@@ -1,0 +1,8 @@
+tidy: no
+title: //title
+author: //a[@itemprop = 'author']
+date: //time[@itemprop = 'datePublished']
+body: //div[@id = 'intelliTXT']
+
+next_page_link: //li[@class="pagin next"]/a
+test_url: http://www.tomshardware.com/reviews/gaming-graphics-card-review,3107.html

@@ -1,0 +1,9 @@
+title://h1[@class="title"]
+author://div[@class="submitted"]/span/a
+date://div[@class="submitted"]/span
+body://div[@class="content-wrapper"]
+
+strip://div[@id="skip-link"]
+strip://div[@id="region-content-3-3"]
+strip://div[@id="section-footer"]
+test_url: https://www.acquia.com/blog/drupals-long-warmth-toward-third-party-code

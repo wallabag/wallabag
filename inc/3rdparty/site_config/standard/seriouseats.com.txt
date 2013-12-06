@@ -1,0 +1,15 @@
+body: //div[@id='content']
+
+# clean up recipe pages
+strip: //h2[@class='fn'] | //h2[@class='double-lined'] | //h3 | //div[@id='threeColumn2'] | //div[@id='threeColumn3']
+
+#recipe pages
+strip_id_or_class: "recipe-feedback"
+strip_id_or_class: "comments"
+strip_id_or_class: "procedure-number"
+strip_id_or_class: "more-with-author"
+
+#slice
+strip_id_or_class: "inner"
+
+test_url: http://www.seriouseats.com/recipes/2010/09/peking-duck-mandarin-pancakes-plum-sauce-recipe.html

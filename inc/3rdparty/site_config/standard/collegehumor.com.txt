@@ -1,0 +1,14 @@
+title: //h1[@class='title']
+author: //p[@class='byline']/a[1]
+date: //*[@class='date']
+
+body: //div[@class='article_body']
+strip: //p[@class='ca_intro']
+strip: //div[@id='action_bar']
+strip: //div[@class='below_content']
+strip: //div[@id='announcement']
+strip: //div[@id='leftovers']
+strip: //div[@class='form']
+strip: //div[@id='email_overlay']
+strip: //a[@class='close']
+test_url: http://www.collegehumor.com/article/6599562/how-it-happened-the-necktie

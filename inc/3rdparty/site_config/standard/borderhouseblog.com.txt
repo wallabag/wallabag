@@ -1,0 +1,7 @@
+title://h1
+author://div[@class="meta"]/span/a
+date://div[@class="date"]
+body://div[@class="content article"]
+strip://div[@class="content article"]/h1
+
+test_url: http://borderhouseblog.com/?p=7832

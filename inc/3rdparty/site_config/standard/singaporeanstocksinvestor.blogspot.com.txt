@@ -1,0 +1,5 @@
+body: //div[@class='post-body']
+strip: //div[@id='lws_0']
+prune: no
+
+test_url: http://singaporeanstocksinvestor.blogspot.com/2011/04/aims-amp-capital-industrial-reit.html

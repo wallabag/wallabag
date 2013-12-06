@@ -1,0 +1,5 @@
+author: substring-before(substring-after(//div[@class='dateNews'],'par '),' le')
+date: substring-after(//div[@class='dateNews'],' le ')
+body: //div[@class='singleNews zoneApple']
+
+test_url: http://www.macgeneration.com/news/voir/211162/dropbox-encore-un-mac-et-deux-comptes-dropbox

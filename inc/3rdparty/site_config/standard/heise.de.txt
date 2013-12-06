@@ -1,0 +1,7 @@
+single_page_link: //p[@class='news_option']/a
+
+date: //p[@class='news_datum']
+title: //h1
+body: //div[@class='meldung_wrapper']
+
+test_url: http://www.heise.de/newsticker/meldung/Europa-soll-Grundrechteschutz-im-Netz-staerken-1392664.html

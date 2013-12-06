@@ -1,0 +1,4 @@
+title: //span[@class='StoryHeadline']
+strip: //div[@class='fivevert']
+body: //div[@id='Content']
+test_url: http://www.pittsburghpanthers.com/sports/m-baskbl/recaps/031412aaa.html

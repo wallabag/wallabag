@@ -1,0 +1,2 @@
+next_page_link: //a[contains(., 'Next:')]
+test_url: http://www.pentaxforums.com/reviews/long-exposure-handhelds/introduction.html

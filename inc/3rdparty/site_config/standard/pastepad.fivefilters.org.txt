@@ -1,0 +1,5 @@
+title: //h1
+body: //div[@id='ff-pastepad-content']
+prune: no
+# todo: add test file
+test_url: http://pastepad.fivefilters.org/test.html

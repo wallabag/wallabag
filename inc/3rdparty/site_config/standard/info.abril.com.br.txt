@@ -1,0 +1,4 @@
+title://h1
+body://div[@id='texto_link']
+
+test_url: http://info.abril.com.br/noticias/internet/filme-do-youtube-vai-estrear-nos-cinemas-22042011-6.shl

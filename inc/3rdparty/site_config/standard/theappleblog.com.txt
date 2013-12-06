@@ -1,0 +1,3 @@
+# Remove home link
+strip: //div[@id='blog-title']/a
+test_url: http://theappleblog.com/2010/10/21/the-new-macbook-air-is-underwhelming/

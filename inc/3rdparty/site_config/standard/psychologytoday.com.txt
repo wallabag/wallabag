@@ -1,0 +1,9 @@
+title: //div[@class="page-title"]/h1
+author: //a[@title="View Bio"]
+date: substring-before(substring-after(//span[@class="submitted"], 'Published on '), ' by')
+strip://div[@class="page-title"]/h1
+strip://div[@class="article-abstract"]
+strip://div[@class="article-meta"]
+strip://div[@id="rightColumn"]
+strip://div[@id="inline-content-bottom-left"]
+test_url: http://www.psychologytoday.com/blog/how-happiness/201205/my-quibble-facebook

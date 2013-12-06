@@ -1,0 +1,7 @@
+title: //h2[@class="post-title"]
+date: //span[@class="post-date"]
+body: //div[@class="post-entry"]
+
+#This is also good for *.streetsblog.org, for example:
+#http://dc.streetsblog.org/2011/10/21/friday-job-market/
+test_url: http://streetsblog.net/2011/10/20/look-out-below-one-in-nine-bridges-structurally-deficient-reports-t4a/

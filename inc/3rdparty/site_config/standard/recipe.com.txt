@@ -1,0 +1,10 @@
+body: //div[@class='recipedetailsleft' or @id='recipePrepAndServe' or @id='recipeingredients']
+
+strip_id_or_class: location
+strip_id_or_class: savings
+strip_id_or_class: recipeDetailDescButton
+
+prune: no
+tidy: no
+
+test_url: http://www.recipe.com/avocado-basil-pasta/

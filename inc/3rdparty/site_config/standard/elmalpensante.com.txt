@@ -1,0 +1,4 @@
+single_page_link: //a[contains(@href, 'print_contenido')]
+title: //h2
+author: //div[@class="autor"]
+test_url: http://www.elmalpensante.com/index.php?doc=display_contenido&id=668

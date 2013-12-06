@@ -1,0 +1,17 @@
+tidy: no
+prune: no
+body: //div[contains(@class, 'main_col')]
+title: //h1
+
+strip_id_or_class: hidden
+strip_id_or_class: item_action_bar
+strip_id_or_class: answer_voters
+strip_id_or_class: question_topics
+strip_id_or_class: answer_header_text
+strip_id_or_class: editor_link
+strip_id_or_class: view_tag
+strip_id_or_class: include_details
+strip_id_or_class: sig_edit
+strip_id_or_class: profile_photo_img
+
+test_url: http://www.quora.com/What-everyday-habit-do-you-wish-you-had-developed-earlier-in-life

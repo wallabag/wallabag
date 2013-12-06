@@ -1,0 +1,8 @@
+title: //h1
+
+date: substring-after(//p[@class='overline']/strong, ',')
+body: //div[@class="maintext"]
+strip: //p[@class='overline']
+strip: //h1
+tidy: no
+test_url: http://www.useit.com/alertbox/mobile-startup-screen.html

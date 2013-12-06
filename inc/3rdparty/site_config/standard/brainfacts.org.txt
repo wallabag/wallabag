@@ -1,0 +1,10 @@
+title: //div[@class="standard"]/h1
+author: string("BrainFacts.org")
+date: //div[@class="meta"]/strong
+
+strip: //p[@class="skip"]
+strip: //div[@class="meta"]
+strip: //div[@class="standard"]/h1
+strip: //div[@class="modal"]
+strip: //div[@class="columnRight"]
+test_url: http://brainfacts.org/diseases-disorders/childhood-disorders/articles/2011/autism-the-pervasive-developmental-disorder/

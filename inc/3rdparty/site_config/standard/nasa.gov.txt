@@ -1,0 +1,8 @@
+title: //div[@class='address']/span
+author: substring-before(//span[@class='credits'],',')
+date: //div[@class='promodatepress']/span
+body: //div[@class='default_style_wrap']
+strip: //div[@class='text_adjust']
+strip: //div[@class='skiplink']
+strip: //h2
+test_url: http://www.nasa.gov/mission_pages/kepler/news/kepler-21b.html

@@ -1,0 +1,6 @@
+title: //h1[@class="title"]
+author: //div[@class="hosted"]/a
+date: substring-after(//div[@class="dateline"]/text(), '|')
+
+strip: //a[@class="top" and @href="#"]
+test_url: http://econlog.econlib.org/archives/2012/04/blinder_on_heal.html

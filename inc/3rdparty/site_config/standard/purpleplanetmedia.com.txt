@@ -1,0 +1,4 @@
+title: //div[@class='title']
+body: //div[@class='body']
+next_page_link: //div[@class='source']/text()[contains(., 'page')]/following-sibling::a
+test_url: http://purpleplanetmedia.com/eye/inte/ngaiman.php

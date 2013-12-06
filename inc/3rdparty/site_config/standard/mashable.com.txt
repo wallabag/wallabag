@@ -1,0 +1,4 @@
+title: //header[@class='entry-title']/h1
+body: //div[@class='description']
+strip: //div[@class='ytm-gallery-box']
+test_url: http://mashable.com/2011/12/05/india-wants-google-and-facebook-to-censor-user-content/

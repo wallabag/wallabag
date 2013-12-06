@@ -1,0 +1,9 @@
+title: //div[@id='pg-content']//h1
+body: //div[@id='articleBody0']
+replace_string(</table>): </table><br /><br />
+
+single_page_link: //div[@class="up-header"]/a
+
+prune: no
+
+test_url: http://hvg.hu/w/20111125_sparta

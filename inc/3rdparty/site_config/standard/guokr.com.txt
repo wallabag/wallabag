@@ -1,0 +1,22 @@
+# To administrator:
+# Please change the hostname to "www.guokr.com/article/*"
+# Not working for "www.guokr.com/post/" pages configured by carlosliu913@gmail.com
+
+# This filter is tested on:
+# http://www.guokr.com/article/274325/
+# http://www.guokr.com/article/275013/
+
+title://h1
+author://div[contains(@class, 'content-th-info')]/a
+date://div[contains(@class, 'content-th-info')]/span
+body://div[contains(@class, 'Content')]
+
+strip://div[contains(@class, 'bottom-i')]
+strip://div[contains(@class, 'copyright')]
+strip://div[contains(@class, 'fr')]
+strip://div[contains(@class, 'content-th-info')]
+strip://h1[contains(@id, 'articleTitle')]
+strip://div[contains(@class, 'side')]
+strip://div[contains(@class, 'top-wp')]
+test_url: http://www.guokr.com/article/275013/
+test_url: http://www.guokr.com/article/338387/
