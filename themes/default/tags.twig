@@ -4,5 +4,5 @@
 {% include '_menu.twig' %}
 {% endblock %}
 {% block content %}
-{% for tag in tags %}<a href="#">{{ tag.value }}</a> {% endfor %}
+{% for tag in tags %}<a href="./?view=tag&amp;id={{ tag.id }}">{{ tag.value }}</a> {% endfor %}
 {% endblock %}

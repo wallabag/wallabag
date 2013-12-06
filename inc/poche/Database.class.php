@@ -258,6 +258,27 @@ class Database {
         return $tags;
     }
 
+    public function retrieveTag($id) {
+        $tag  = NULL;
+        $sql    = "SELECT * FROM tags WHERE id=?";
+        $params = array(intval($id));
+        $query  = $this->executeQuery($sql, $params);
+        $tag  = $query->fetchAll();
+
+        return isset($tag[0]) ? $tag[0] : null;
+    }
+
+    public function retrieveEntriesByTag($tag_id) {
+        $sql = 
+            "SELECT * FROM entries
+            LEFT JOIN tags_entries ON tags_entries.entry_id=entries.id
+            WHERE tags_entries.tag_id = ?";
+        $query = $this->executeQuery($sql, array($tag_id));
+        $entries = $query->fetchAll();
+
+        return $entries;
+    }
+
     public function retrieveTagsByEntry($entry_id) {
         $sql = 
             "SELECT * FROM tags

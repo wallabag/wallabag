@@ -437,6 +437,14 @@ class Poche
                     'tags' => $tags,
                 );
                 break;
+            case 'tag':
+                $entries = $this->store->retrieveEntriesByTag($id);
+                $tag = $this->store->retrieveTag($id);
+                $tpl_vars = array(
+                    'tag' => $tag,
+                    'entries' => $entries,
+                );
+                break;
             case 'tags':
                 $tags = $this->store->retrieveAllTags();
                 $tpl_vars = array(
