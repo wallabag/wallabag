@@ -249,4 +249,15 @@ class Database {
     public function getLastId($column = '') {
         return $this->getHandle()->lastInsertId($column);
     }
+
+    public function retrieveTagsByEntry($entry_id) {
+        $sql        = 
+            "SELECT * FROM tags
+            LEFT JOIN tags_entries ON tags_entries.tag_id=tags.id
+            WHERE tags_entries.entry_id = ?";
+        $query      = $this->executeQuery($sql, array($entry_id));
+        $tags    = $query->fetchAll();
+
+        return $tags;
+    }
 }
