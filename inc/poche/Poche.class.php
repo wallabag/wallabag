@@ -443,12 +443,16 @@ class Poche
 
                     # flattr checking
                     $flattr = new FlattrItem();
-                    $flattr->checkItem($entry['url'],$entry['id']);
+                    $flattr->checkItem($entry['url'], $entry['id']);
+
+                    # tags
+                    $tags = $this->store->retrieveTagsByEntry($entry['id']);
 
                     $tpl_vars = array(
-                    'entry' => $entry,
-                    'content' => $content,
-                    'flattr' => $flattr
+                        'entry' => $entry,
+                        'content' => $content,
+                        'flattr' => $flattr,
+                        'tags' => $tags
                     );
                 }
                 else {
