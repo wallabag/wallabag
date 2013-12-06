@@ -103,14 +103,15 @@ class Tools
             case 'config':
                 $tpl_file = 'config.twig';
                 break;
+            case 'tags':
+                $tpl_file = 'tags.twig';
+                break;
             case 'view':
                 $tpl_file = 'view.twig';
                 break;
-            
             case 'login':
                 $tpl_file = 'login.twig';
                 break;
-                
             case 'error':
                 $tpl_file = 'error.twig';
                 break;

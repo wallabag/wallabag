@@ -1,0 +1,8 @@
+{% extends "layout.twig" %}
+{% block title %}tags{% endblock %}
+{% block menu %}
+{% include '_menu.twig' %}
+{% endblock %}
+{% block content %}
+{% for tag in tags %}<a href="#">{{ tag.value }}</a> {% endfor %}
+{% endblock %}

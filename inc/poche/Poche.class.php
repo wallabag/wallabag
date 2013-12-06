@@ -430,6 +430,12 @@ class Poche
                 );
                 Tools::logm('config view');
                 break;
+            case 'tags':
+                $tags = $this->store->retrieveAllTags();
+                $tpl_vars = array(
+                    'tags' => $tags,
+                );
+                break;
             case 'view':
                 $entry = $this->store->retrieveOneById($id, $this->user->getId());
                 if ($entry != NULL) {

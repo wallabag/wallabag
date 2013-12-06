@@ -250,13 +250,21 @@ class Database {
         return $this->getHandle()->lastInsertId($column);
     }
 
+    public function retrieveAllTags() {
+        $sql = "SELECT * FROM tags";
+        $query = $this->executeQuery($sql, array());
+        $tags = $query->fetchAll();
+
+        return $tags;
+    }
+
     public function retrieveTagsByEntry($entry_id) {
-        $sql        = 
+        $sql = 
             "SELECT * FROM tags
             LEFT JOIN tags_entries ON tags_entries.tag_id=tags.id
             WHERE tags_entries.entry_id = ?";
-        $query      = $this->executeQuery($sql, array($entry_id));
-        $tags    = $query->fetchAll();
+        $query = $this->executeQuery($sql, array($entry_id));
+        $tags = $query->fetchAll();
 
         return $tags;
     }
