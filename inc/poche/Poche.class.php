@@ -446,8 +446,11 @@ class Poche
                 );
                 break;
             case 'tags':
+                $token = $this->user->getConfigValue('token');
                 $tags = $this->store->retrieveAllTags();
                 $tpl_vars = array(
+                    'token' => $token,
+                    'user_id' => $this->user->getId(),
                     'tags' => $tags,
                 );
                 break;
@@ -884,9 +887,9 @@ class Poche
         $_SESSION['poche_user']->setConfig($currentConfig);
     }
 
-    public function generateFeeds($token, $user_id, $type = 'home')
+    public function generateFeeds($token, $user_id, $tag_id, $type = 'home')
     {
-        $allowed_types = array('home', 'fav', 'archive');
+        $allowed_types = array('home', 'fav', 'archive', 'tag');
         $config = $this->store->getConfigUser($user_id);
 
         if (!in_array($type, $allowed_types) ||
@@ -901,7 +904,13 @@ class Poche
         $feed->setChannelElement('updated', date(DATE_RSS , time()));
         $feed->setChannelElement('author', 'poche');
 
-        $entries = $this->store->getEntriesByView($type, $user_id);
+        if ($type == 'tag') {
+            $entries = $this->store->retrieveEntriesByTag($tag_id);
+        }
+        else {
+            $entries = $this->store->getEntriesByView($type, $user_id);
+        }
+
         if (count($entries) > 0) {
             foreach ($entries as $entry) {
                 $newItem = $feed->createNewItem();
