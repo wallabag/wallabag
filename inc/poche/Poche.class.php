@@ -397,6 +397,36 @@ class Poche
                     Tools::redirect();
                 }
                 break;
+            case 'add_tag' :
+                $tags = explode(',', $_POST['value']);
+                $entry_id = $_POST['entry_id'];
+                foreach($tags as $key => $tag_value) {
+                    $value = trim($tag_value);
+                    $tag = $this->store->retrieveTagByValue($value);
+
+                    if (is_null($tag)) {
+                        # we create the tag
+                        $tag = $this->store->createTag($value);
+                        $sequence = '';
+                        if (STORAGE == 'postgres') {
+                            $sequence = 'tags_id_seq';
+                        }
+                        $tag_id = $this->store->getLastId($sequence);
+                    }
+                    else {
+                        $tag_id = $tag['id'];
+                    }
+
+                    # we assign the tag to the article
+                    $this->store->setTagToEntry($tag_id, $entry_id);
+                }
+                Tools::redirect();
+                break;
+            case 'remove_tag' :
+                $tag_id = $_GET['tag_id'];
+                $this->store->removeTagForEntry($id, $tag_id);
+                Tools::redirect();
+                break;
             default:
                 break;
         }
@@ -434,6 +464,7 @@ class Poche
                 # tags
                 $tags = $this->store->retrieveTagsByEntry($id);
                 $tpl_vars = array(
+                    'entry_id' => $id,
                     'tags' => $tags,
                 );
                 break;

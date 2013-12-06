@@ -289,4 +289,35 @@ class Database {
 
         return $tags;
     }
+
+    public function removeTagForEntry($entry_id, $tag_id) {
+        $sql_action     = "DELETE FROM tags_entries WHERE tag_id=? AND entry_id=?";
+        $params_action  = array($tag_id, $entry_id);
+        $query          = $this->executeQuery($sql_action, $params_action);
+        return $query;
+    }
+
+    public function retrieveTagByValue($value) {
+        $tag  = NULL;
+        $sql    = "SELECT * FROM tags WHERE value=?";
+        $params = array($value);
+        $query  = $this->executeQuery($sql, $params);
+        $tag  = $query->fetchAll();
+
+        return isset($tag[0]) ? $tag[0] : null;
+    }
+
+    public function createTag($value) {
+        $sql_action = 'INSERT INTO tags ( value ) VALUES (?)';
+        $params_action = array($value);
+        $query = $this->executeQuery($sql_action, $params_action);
+        return $query;
+    }
+
+    public function setTagToEntry($tag_id, $entry_id) {
+        $sql_action = 'INSERT INTO tags_entries ( tag_id, entry_id ) VALUES (?, ?)';
+        $params_action = array($tag_id, $entry_id);
+        $query = $this->executeQuery($sql_action, $params_action);
+        return $query;
+    }
 }
