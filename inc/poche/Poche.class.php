@@ -332,9 +332,12 @@ class Poche
         switch ($action)
         {
             case 'add':
-                $content = $url->extract();
+                $json = file_get_contents(Tools::getPocheUrl() . '/inc/3rdparty/makefulltextfeed.php?url='.urlencode($url->getUrl()).'&max=5&links=preserve&exc=&format=json&submit=Create+Feed');
+                $content = json_decode($json, true);
+                $title = $content['rss']['channel']['item']['title'];
+                $body = $content['rss']['channel']['item']['description'];
 
-                if ($this->store->add($url->getUrl(), $content['title'], $content['body'], $this->user->getId())) {
+                if ($this->store->add($url->getUrl(), $title, $body, $this->user->getId())) {
                     Tools::logm('add link ' . $url->getUrl());
                     $sequence = '';
                     if (STORAGE == 'postgres') {
@@ -342,7 +345,7 @@ class Poche
                     }
                     $last_id = $this->store->getLastId($sequence);
                     if (DOWNLOAD_PICTURES) {
-                        $content = filtre_picture($content['body'], $url->getUrl(), $last_id);
+                        $content = filtre_picture($body, $url->getUrl(), $last_id);
                         Tools::logm('updating content article');
                         $this->store->updateContent($last_id, $content, $this->user->getId());
                     }
