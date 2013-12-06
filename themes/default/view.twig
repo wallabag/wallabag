@@ -20,6 +20,9 @@
             <header class="mbm">
                 <h1>{{ entry.title|raw }}</h1>
             </header>
+            <aside class="tags">
+                tags: {% for tag in tags %}<a href="#">{{ tag.value }}</a> {% endfor %}<a href="#" title="{% trans "edit tags" %}">✎</a>
+            </aside>
             <article>
                 {{ content | raw }}
             </article>
