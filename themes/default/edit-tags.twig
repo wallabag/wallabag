@@ -1,0 +1,18 @@
+{% extends "layout.twig" %}
+{% block title %}edit tags{% endblock %}
+{% block menu %}
+{% include '_menu.twig' %}
+{% endblock %}
+{% block content %}
+{% if tags is empty %}
+no tags
+{% endif %}
+<ul>
+{% for tag in tags %}<li>{{ tag.value }} <a href="#">✘</a></li>{% endfor %}
+</ul>
+<form method="post" action="#">
+    <label for="value">New tags: </label><input type="text" id="value" name="value" required="required" />
+    {% trans "you can type several tags, separated by comma" %}<br />
+    <input type="submit" value="add tags" />
+</form>
+{% endblock %}

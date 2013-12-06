@@ -430,6 +430,13 @@ class Poche
                 );
                 Tools::logm('config view');
                 break;
+            case 'edit-tags':
+                # tags
+                $tags = $this->store->retrieveTagsByEntry($id);
+                $tpl_vars = array(
+                    'tags' => $tags,
+                );
+                break;
             case 'tags':
                 $tags = $this->store->retrieveAllTags();
                 $tpl_vars = array(

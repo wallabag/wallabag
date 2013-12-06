@@ -106,6 +106,9 @@ class Tools
             case 'tags':
                 $tpl_file = 'tags.twig';
                 break;
+            case 'edit-tags':
+                $tpl_file = 'edit-tags.twig';
+                break;
             case 'view':
                 $tpl_file = 'view.twig';
                 break;
