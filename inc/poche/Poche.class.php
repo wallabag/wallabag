@@ -870,10 +870,10 @@ class Poche
         }
         // Check the token
 
-        $feed = new FeedWriter(ATOM);
+        $feed = new FeedWriter(RSS2);
         $feed->setTitle('poche - ' . $type . ' feed');
         $feed->setLink(Tools::getPocheUrl());
-        $feed->setChannelElement('updated', date(DATE_ATOM , time()));
+        $feed->setChannelElement('updated', date(DATE_RSS , time()));
         $feed->setChannelElement('author', 'poche');
 
         $entries = $this->store->getEntriesByView($type, $user_id);

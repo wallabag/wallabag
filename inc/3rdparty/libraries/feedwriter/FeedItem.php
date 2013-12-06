@@ -101,7 +101,7 @@
 	*/
 	public function setDescription($description) 
 	{
-		$tag = ($this->version == ATOM)? 'summary' : 'description'; 
+		$tag = 'description'; 
 		$this->setElement($tag, $description);
 	}
 	
@@ -129,13 +129,8 @@
 		{
 			$date = strtotime($date);
 		}
-		
-		if($this->version == ATOM)
-		{
-			$tag    = 'updated';
-			$value  = date(DATE_ATOM, $date);
-		}        
-		elseif($this->version == RSS2) 
+      
+		if($this->version == RSS2) 
 		{
 			$tag    = 'pubDate';
 			$value  = date(DATE_RSS, $date);
