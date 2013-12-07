@@ -412,7 +412,7 @@ class Poche
                 $compare_prod = version_compare(POCHE, $prod);
                 $themes = $this->getInstalledThemes();
                 $languages = $this->getInstalledLanguages();
-                $http_auth = (isset($_SERVER['PHP_AUTH_USER']))?true:false;
+                $http_auth = (isset($_SERVER['PHP_AUTH_USER']) || isset($_SERVER['REMOTE_USER'])) ? true : false;
                 $tpl_vars = array(
                     'themes' => $themes,
                     'languages' => $languages,
@@ -587,6 +587,9 @@ class Poche
      private function credentials() {
          if(isset($_SERVER['PHP_AUTH_USER'])) {
              return array($_SERVER['PHP_AUTH_USER'],'php_auth');
+         }
+         if(isset($_SERVER['REMOTE_USER'])) {
+             return array($_SERVER['REMOTE_USER'],'http_auth');
          }
          if(!empty($_POST['login']) && !empty($_POST['password'])) {
              return array($_POST['login'],$_POST['password']);
