@@ -1,6 +1,7 @@
 <?php
 use Knp\Provider\ConsoleServiceProvider;
 use Poche\Api\EntryApi;
+use Poche\Api\ContentFullTextRssApi;
 use Poche\Repository\EntryRepository;
 
 use Silex\Provider\FormServiceProvider;
@@ -38,6 +39,12 @@ $app['entry_repository'] = $app->share(function ($app) {
     return new EntryRepository($app['db']);
 });
 
-$app['entry_api'] = $app->share(function ($app) {
-    return new EntryApi($app['entry_repository']);
+$app['content_api'] = $app->share(function ($app) {
+    return new ContentFullTextRssApi();
 });
+
+$app['entry_api'] = $app->share(function ($app) {
+    return new EntryApi($app['entry_repository'], $app['content_api']);
+});
+
+

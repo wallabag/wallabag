@@ -59,7 +59,7 @@ class ApiTest extends PocheWebTestCase
             array(),
             array(),
             array('CONTENT_TYPE' => 'application/json'),
-            '{"url":"http:\/\/deboutlesgens.com\/blog\/le-courage-de-vivre-consciemment\/"}'
+            '{"url":"http:\/\/perdu.com"}'
         );
 
         $this->assertEquals($client->getResponse()->getStatusCode(), 201);
@@ -72,7 +72,8 @@ class ApiTest extends PocheWebTestCase
             )
         );
 
-        $this->assertEquals($client->getResponse()->getContent(),'{"url":"http:\/\/deboutlesgens.com\/blog\/le-courage-de-vivre-consciemment\/"}');
+        $this->assertEquals($client->getResponse()->getContent(),'{"url":"http:\/\/perdu.com","title":"Vous Etes Perdu ?","content":"[unable to retrieve full-text content]"}');
+
 
     }
 }

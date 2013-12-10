@@ -55,7 +55,7 @@ class Url
 
     function __construct($url)
     {
-        $this->url = base64_decode($url);
+        $this->url = $url;
     }
 
     public function getUrl() {
@@ -136,6 +136,7 @@ class Url
                     // look for full mime type (e.g. image/jpeg) or just type (e.g. image)
                     $match[1] = strtolower(trim($match[1]));
                     $match[2] = strtolower(trim($match[2]));
+
                     foreach (array($match[1], $match[2]) as $_mime) {
                         if (isset($this->content_type_exc[$_mime])) {
                             $type = $match[1];
