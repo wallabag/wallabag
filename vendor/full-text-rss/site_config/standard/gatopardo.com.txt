@@ -1,0 +1,8 @@
+body: //div[@class='panel']
+strip: //div[@style='float:right']
+strip: //span[@class='titulosHomePublicidad']
+strip: //div[@id='TitTop5Der']
+strip: //img[@src='/ImagesGatoPardo/LogoGatopardo.png']
+
+prune: yes
+test_url: http://www.gatopardo.com/ReportajesGP.php?R=95

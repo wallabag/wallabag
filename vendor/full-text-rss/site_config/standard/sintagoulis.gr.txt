@@ -1,0 +1,6 @@
+title: //div[@class='headline']//h2
+body: //div[contains(@class, 'storycontent')]
+
+prune: no
+
+test_url: http://sintagoulis.gr/sokolatenia/sokolatenia-mpompa-me-amaretti-

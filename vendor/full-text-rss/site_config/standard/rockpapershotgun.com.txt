@@ -1,0 +1,8 @@
+title: //h2
+
+strip: //div[ contains(@class, 'respond') ]  |  //h2  |  //h1
+
+date: substring-after(//p[@class='info'], ' on ')
+
+author: //p[@class='info']//a
+test_url: http://www.rockpapershotgun.com/2010/07/29/rps-half-verdict-starcraft-2/

@@ -1,0 +1,23 @@
+# 2012-01-14 carlo@... - fixed title, body; added author, date
+
+title: //div[@class="title"]/h2/a
+# body: //div[@class="post"]
+# author: //p[@class="iconEmail"]/a
+# date: //p[@class="iconDate"]
+
+# 1/24/2013 yosoyju - fixed author, date, and body, added support for PA Report
+
+# Penny Arcade
+
+author: //li[@class="iconEmail"]/a
+date: //li[@class="iconDate"]
+body: //div[@class="body"]
+
+# PA Report
+
+author: //div[@class="meta"]/p/a
+date: substring-after(//div[@class="meta"]/p, '/ ')
+title: substring-after(//title, '- ')
+
+test_url: http://penny-arcade.com/2012/01/13/i-put-some-news-in-your-news
+test_url: http://penny-arcade.com/report/editorial-article/the-dystopian-future-of-casual-games-personalized-targeted-pricing-and-mech

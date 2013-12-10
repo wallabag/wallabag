@@ -1,0 +1,16 @@
+body: //div[@class="entry-content"]
+
+# Remove text &lsquo;Tweet&rsquo;
+strip: //div[@class="entry-content"]/div[last()]
+
+title: h1[@class="entry-title"]
+
+# If the Instapaper text parser worked with HTML5 tags, we would use:
+date: //time[@class="entry-date"]
+
+# But since it does not, use this more complicated rule:
+date: //div[@class="entry-meta"]/a[@rel="bookmark"]
+
+# Unfortunately, the following rule is overridden by the automatically found author.
+author: ("Benoit Maison")
+test_url: http://www.benoitmaison.org/2011/12/06/why-siri-had-to-start-in-beta/

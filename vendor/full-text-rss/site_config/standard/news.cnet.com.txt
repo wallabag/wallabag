@@ -1,0 +1,12 @@
+#This should apply to *.cnet.com. Not just news.cnet.com.
+title: //h1
+author: //img[@class="mugshot"]/@alt
+strip: //h1
+strip_id_or_class: breadcrumb
+strip: //p[@id="introP"]
+strip: //div[@class="postByline"]
+strip: //div[@class="editorBio"]
+strip: //div[@class="inline-slideshow"]
+strip: //div[@class="related"]
+body: //div[@class="postBody txtWrap"]
+test_url: http://news.cnet.com/8301-27076_3-57405303-248/apple-ipad-charging-fine-keep-it-plugged-in/?tag=mncol;posts

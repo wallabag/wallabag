@@ -1,0 +1,2 @@
+prune: no
+test_url: http://www.tthor.com/06/

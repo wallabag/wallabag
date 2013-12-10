@@ -1,0 +1,12 @@
+single_page_link: //div[@class='toppaginate']//a[@rel='nofollow']
+convert_double_br_tags: yes
+
+title: //div[@class="story"]/h1
+body: //div[@id="story-body-text"]
+author: //span[@class="byline"]
+date: //p[@class="date"]
+
+strip: //*[@class='all']
+strip: //*[@class='articlerail']
+
+test_url: http://www.baltimoresun.com/news/maryland/bs-md-omalley-budget-2-20120116,0,5340585.story

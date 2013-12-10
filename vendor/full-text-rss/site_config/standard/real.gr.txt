@@ -1,0 +1,3 @@
+body: //div[@id='_ctl12__ctl0_Article']
+prune: no
+autodetect_on_failure: no

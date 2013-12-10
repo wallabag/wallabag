@@ -1,0 +1,6 @@
+title: //div[@id='maincontent']//div[@class='title']
+body: //div[@id='maincontent']//div[@class='byline'] | //div[@id='maincontent']//div[@class='meat']
+
+tidy: no
+
+test_url: http://www.tomdispatch.com/post/175436/tomgram:_noam_chomsky%2C_the_imperial_mentality_and_9_11/

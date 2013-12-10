@@ -1,0 +1,30 @@
+# story has several pages, should be detected
+body: //div[@id='storyBody']
+body: //div[@id='article_body']
+body: //div[@id='story_body']
+
+title://h1[@id='article_headline']
+
+# article author
+author: //p[@class='author']/a
+# story author(s)
+author: substring-after(//p[@class='byline'], 'By ')
+
+# article date
+date: //span[@class='published_date']
+# story date
+date: //span[@class='date']
+
+date: substring-after(//div[contains(@class,'attributor')],'on')
+strip_id_or_class: inset
+strip: //p/span[@class='photoCredit']
+strip: //h1
+
+strip_id_or_class: page_count
+strip_id_or_class: tools
+strip_id_or_class: pagination
+
+single_page_link: //li[@id='stPrint']/a
+
+test_url: http://www.businessweek.com/magazine/buyback-insurance-a-good-deal-for-retailers-07282011.html
+test_url: http://www.businessweek.com/articles/2012-06-06/american-pain-the-largest-u-dot-s-dot-pill-mills-rise-and-fall

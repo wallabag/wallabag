@@ -1,0 +1,26 @@
+# Sina blog, the most popular blog host in China.
+# Its source code is horrible.
+#  
+# Issue:
+# Only the first image in the article is displayed.
+# The rest images are replace by a 1x1 transparent gif by sina blog host.
+# 
+
+title://*[contains(@class,'titName SG_txta')]
+author://*[contains(@id,'ownernick')]
+date://*[contains(@class,'time SG_txtc')]
+body://div[contains(@class,'articalContent')]
+
+# Remove redundant content which has span class start with "MASS"
+# Example <span class="MASSf21674ffeef7"></span>
+strip://span[contains(@class,'MASS')]
+
+# Remove comment
+strip://div[contains(@class,'allComm')]
+
+# Remove hiden text and link
+strip://ins
+
+tidy:no
+convert_double_br_tags:yes
+test_url: http://blog.sina.com.cn/s/blog_5054769e0102dtja.html

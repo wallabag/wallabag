@@ -1,0 +1,6 @@
+title: //h2[@class="posttitle"]
+body: //div[@class="post"]
+strip: //h2[@class="posttitle"]
+strip: //p[@class="filed-under"]
+convert_double_br_tags: yes
+test_url: http://wow.joystiq.com/2011/06/20/the-overachiever-guide-to-midsummer-festival-2011-achievements/

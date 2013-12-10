@@ -1,0 +1,5 @@
+body: id('storytext')
+author: //a[starts-with(@href, '/u/')]
+#next_page_link: substring-after(//input[contains(@value, 'Next')]/@onclick, "self.location='")
+strip_id_or_class: 'a2a_kit'
+test_url: http://www.fictionpress.com/s/2897964/1/All_We_Knew

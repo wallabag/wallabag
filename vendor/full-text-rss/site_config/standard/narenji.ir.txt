@@ -1,0 +1,2 @@
+body: //div[@class='node']	
+test_url: http://www.narenji.ir/2806

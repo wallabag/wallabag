@@ -1,0 +1,9 @@
+body: //*[@id="episode"]
+prune: no
+tidy: no
+
+autodetect_next_page: no
+strip_id_or_class: player
+
+strip://*[@id="header"]
+test_url: http://5by5.tv/buildanalyze/60

@@ -1,0 +1,3 @@
+author: //p[contains(@class,'author')]/a
+date: //div[contains(@class,'date')]
+test_url: http://www.crn.de/netzwerke-tk/artikel-93103.html

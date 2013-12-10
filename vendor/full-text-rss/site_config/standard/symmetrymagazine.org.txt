@@ -1,0 +1,12 @@
+title: //div[contains(@class, "post")]/h2
+
+author: //div[contains(@class, "post")]/p[position()=last()]/text()[1]
+
+date: //div[contains(@class, "post")]/p[1]
+
+body: //div[contains(@class, "post")]
+
+strip: //div[contains(@class, "post")]/h2[1]
+strip: //div[contains(@class, "post")]/p[1]
+strip: //div[contains(@class, "post")]/p[position()=last()]
+test_url: http://www.symmetrymagazine.org/breaking/?p=12784

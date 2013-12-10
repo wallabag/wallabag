@@ -1,0 +1,6 @@
+title: //title
+strip_image_src: 'l-stat.livejournal.com'
+strip_image_src: 'www.livejournal.com'
+strip_image_src: 'l-userpic.livejournal.com'
+test_url: http://news.livejournal.com/136664.html
+test_url: http://stelazin.livejournal.com/91363.html

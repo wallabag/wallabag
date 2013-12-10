@@ -1,0 +1,7 @@
+strip: //p[@class='sosumi']
+# Aren't they witty?
+
+# I can't work out what causes the ﻿ before the title. 
+title: //h1[@class='title']
+strip: //h1[@class='title']
+test_url: http://www.apple.com/pr/library/2011/02/15appstore.html

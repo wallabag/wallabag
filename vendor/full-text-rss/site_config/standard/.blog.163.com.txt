@@ -1,0 +1,26 @@
+# To administrator:
+# Please replace the hostname with "*.blog.163.com"
+
+# This filter is tested on:
+# http://wangzeke.blog.163.com/blog/static/933015402012410105922228/
+# http://wavow.blog.163.com/blog/static/532284320124117211245/
+# http://elainejeff.blog.163.com/blog/static/1671902912012498727253/
+
+
+strip://*[contains(@class, 'mcnt ztag')]//span[@style = 'display:none;']
+strip://*[contains(@id, 'divTopLink')]
+strip://*[contains(@class, 'phide')]
+strip://*[contains(@class, 'thide')]
+strip://*[contains(@id, 'topbar')]
+strip://*[contains(@class, 'tbar')]
+strip://*[contains(@class, 'snl')]
+strip://*[contains(@id, 'banner')]
+
+
+title://h3
+author://span[contains(@class, 'ztag pre')]
+date://span[contains(@class, 'blogsep')]
+body://div[contains(@class, 'mcnt ztag')]
+
+convert_double_br_tags: yes
+test_url: http://lvqiuluwei1510.blog.163.com/blog/static/9028525120124146100841/

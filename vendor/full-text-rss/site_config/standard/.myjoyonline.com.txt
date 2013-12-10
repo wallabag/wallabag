@@ -1,0 +1,6 @@
+title: //meta[@property="og:title"]/@content
+body: //div[@id='story_photo'] | //span[@class='story_text_1']
+
+prune: no
+
+test_url: http://business.myjoyonline.com/pages/news/201202/81349.php

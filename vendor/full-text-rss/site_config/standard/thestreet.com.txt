@@ -1,0 +1,25 @@
+title: //div[@id='storyHdr']/h1
+title: //div[@id='print']//h2
+body: //div[@class="virtualpage"]
+body: //div[@id='print']//div[@id='bd']
+author: //meta[@name="AUTHOR"]/@content
+author: (//div[@id='print']//div[@id='bd']/h4)[1]
+date: //meta[@name="DATE"]/@content
+date: //div[@id='print']//div[@id='dte']
+
+strip_id_or_class: articleFooter
+strip_id_or_class: sidebar
+strip_id_or_class: ie6PrintSubhead
+strip_id_or_class: subHdr
+
+
+replace_string(<P/>): </p><p>
+
+prune: no
+
+#TODO: redirects back - perhaps needs referer to work
+single_page_link: //div[@id='storyDetail']//a[contains(@href, '/print/')]
+
+test_url: http://www.thestreet.com/story/11386556/1/which-of-these-10-dividend-stocks-is-worth-the-risk.html
+# multi page
+test_url: http://www.thestreet.com/story/11387090/1/7-ubs-stock-picks-for-2012.html

@@ -1,0 +1,8 @@
+title: //div[@id="main-content"]//h2
+
+author: //div[@id="main-content"]//span[@class="authors"]
+
+date: //div[@id="main-content"]//span[@class="timestamp"]
+
+body: //div[@id="main-content"]//div[@class="content"]
+test_url: http://www.news-gazette.com/news/business/economy/2011-08-08/ibm-drops-out-blue-waters-project.html

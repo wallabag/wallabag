@@ -1,0 +1,16 @@
+# This setup grabs the text from a Reddit self post. It ignores all comments etc.
+
+title: //p[@class="title"]/a/text()
+
+author: //p[@class="tagline"]/a
+
+# this doesn't work for some reason...?
+date: //p[@class="tagline"]//@datetime
+
+body: //div[@class="expando"]//div[@class="usertext-body"]
+
+strip_id_or_class: tagline
+strip_id_or_class: unvotable-message
+strip_id_or_class: buttons
+
+test_url: http://www.reddit.com/r/truegaming/comments/wfe7r/i_wrote_about_the_problems_i_honestly_feel_that/

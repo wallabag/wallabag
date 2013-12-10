@@ -1,0 +1,23 @@
+title://h1[1]
+
+author: substring-after(//em, 'Von ')
+author:string('tagesschau.de')
+
+date:substring-after(//div[@class='standDatum'], 'Stand: ')
+
+body://div[contains(@class, 'article')] | //div[contains(@class, 'centerCol')]
+
+strip://h1[1]
+strip: //div[contains(@class, 'directLinks')]
+strip: //div[contains(@class, 'zitatBox')]
+strip: //div[contains(@class, 'teaserBox metaBlock')]
+strip: //*[contains(@class, 'inv')]
+strip: //span[@class='imgSubline']
+strip: //*[contains(@class, 'topline')][1]
+strip: //div[@id='rightCol'][1]
+strip: //div[@id="footer"][1]
+strip: //div[@class="fPlayer"] 
+strip: //div[@id='seitenanfang']
+strip: //div[@class='standDatum']
+strip: //em
+test_url: http://www.tagesschau.de/ausland/wahlkampffrankreich102.html

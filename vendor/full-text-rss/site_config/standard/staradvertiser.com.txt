@@ -1,0 +1,11 @@
+title: //h1[@id='storyTitle']
+author: substring-after(//span[@class='hsa_postCredit'], 'By ') 
+date://span[@class='hsa_dateStamp']
+body: //div[@class='storytext']
+strip_id_or_class: insideStoryAd 
+strip_id_or_class: printDesc
+strip_id_or_class: sb_2010_story_tools
+strip_id_or_class: FBConnectButton_Text
+strip_id_or_class: breadcrumbs
+prune: no
+test_url: http://www.staradvertiser.com/news/20111112_World_leaders_step_onto_isle_stage.html

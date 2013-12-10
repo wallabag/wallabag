@@ -1,0 +1,4 @@
+title: //h2[@class='jcw-pagetitle'
+date: //p[@class='postinfo']
+body: //div[@class='contenttext']
+test_url: http://plzkthxbai.com/blog/2011/06/28/1password-and-internet-security/

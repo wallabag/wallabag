@@ -1,0 +1,3 @@
+title: //h1
+body: //div[@class='entrytext']
+test_url: http://voices.washingtonpost.com/ezra-klein/2010/10/why_isnt_monetary_policy_discr.html

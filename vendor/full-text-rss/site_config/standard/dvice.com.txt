@@ -1,0 +1,9 @@
+strip://*[@id = 'blog_top_stories']
+strip://*[@id = 'takeover_off']
+strip://*[@id = 'right_gray_box']
+strip://*[@class = 'blog_topics']
+strip://*[@class = 'section_titles']
+
+author://div[@class = 'post_author_info']/a
+date://div[@class = 'post_date_info']
+test_url: http://dvice.com/archives/2012/05/is-nfc-and-smar.php

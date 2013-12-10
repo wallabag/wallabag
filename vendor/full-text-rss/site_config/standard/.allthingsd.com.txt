@@ -1,0 +1,6 @@
+body: //div[@id='content-left']/div[@class='post']
+strip_id_or_class: social
+strip_id_or_class: atd-disqus-disclaimer
+tidy: no
+
+test_url: http://mediamemo.allthingsd.com/20110516/bit-ly-gets-a-new-boss/

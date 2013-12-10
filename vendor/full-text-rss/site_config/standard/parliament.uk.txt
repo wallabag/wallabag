@@ -1,0 +1,3 @@
+title: //h1
+body: //div[@id='news-article']
+test_url: http://www.parliament.uk/business/committees/committees-a-z/commons-select/backbench-business-committee/news/guidance-for-e-petitioners/

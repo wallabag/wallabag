@@ -1,0 +1,4 @@
+body: //div[@id='entry-body']
+strip_id_or_class: paginate
+strip: //p[contains(., 'Additional Resources')]
+test_url: http://hometheaterreview.com/dreamvision-starlight-3-three-chip-d-ila-projector-reviewed/

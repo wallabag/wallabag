@@ -1,0 +1,4 @@
+body: //div[@class='entry']
+prune: no
+
+test_url: http://www.jjahnke.net/rundbr87.html#2514

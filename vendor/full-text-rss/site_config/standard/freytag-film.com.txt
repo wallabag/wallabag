@@ -1,0 +1,5 @@
+body: //div[@class = 'instapaperbody']
+convert_double_br_tags: no
+date: //div[@class='instadate']
+title: //h2[@class = 'instatitle']
+test_url: http://freytag-film.com/blog/artikel/shooting_a_feature_film_in_10_days

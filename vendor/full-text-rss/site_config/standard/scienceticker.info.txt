@@ -1,0 +1,11 @@
+body: //div[@class='post']
+title: //h1[@id='singlePageTitle']
+date: substring-before(//small,'&bull; Rubrik')
+
+strip: //div[@class='post-ratings']
+strip: //div[@class='post-ratings-loading']
+strip: //a[@title='Empfehlen Sie den Text weiter!']
+strip: //a[@title='Drucken']
+strip: //div[@class='share']
+
+test_url: http://www.scienceticker.info/2011/11/24/forscher-finden-gedachtnismolekul/

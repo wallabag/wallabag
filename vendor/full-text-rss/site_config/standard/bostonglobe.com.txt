@@ -1,0 +1,16 @@
+# NOTE:  If testing this configuration yields bad results, including junk text like "Try BostonGlobe.com today" and "THIS STORY APPEARED IN", please replace the Test URL with a current-day headline link from bostonglobe.com.
+
+title: //div[@class="header"]/h1
+author: substring-after(//div[@class="byline"]/h2[@class="author"],"By ")
+date: //div[@class="byline"]/p[last()]
+body: //div[@class="article-body"]
+
+strip_id_or_class: aside
+strip_id_or_class: promo
+strip_id_or_class: skip-nav
+strip_id_or_class: article-more
+strip_id_or_class: article-bar
+
+# This removes image captions.  If the parser starts saving images from bostonglobe.com (currently, it does not), then this directive should be removed.
+strip_id_or_class: figure
+test_url: http://bostonglobe.com/news/nation/2012/03/17/illinois-primary-could-pivotal/PsDzFZqvhEYyXbOcF9FOkO/story.html

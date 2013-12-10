@@ -1,0 +1,18 @@
+title: //h1[contains(@class, 'title')#
+body: //div[@id='mainContent']//div[contains(@class, 'section_content')] | //ul[@class='section_footer']
+date: //div[@class='date']
+
+strip_id_or_class: sharethis
+strip_id_or_class: stats
+strip_id_or_class: apply_form
+strip_id_or_class: job_map
+strip_id_or_class: respond
+strip: //h1//span[@class='type']
+strip: //li[@class='print' or @class='map']
+
+replace_string(<ul class="section_footer" style="display): <ul class="section_footer" style="display-bla
+
+prune: no
+tidy: no
+
+test_url: http://applature.com/mining-jobs/jobs/nickel-west-leinster-analytical-laboratory-technician/

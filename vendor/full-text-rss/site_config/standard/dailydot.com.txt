@@ -1,0 +1,4 @@
+tidy: no
+body: //article
+
+test_url: http://www.dailydot.com/entertainment/tumblr-christopher-price-topherchris/

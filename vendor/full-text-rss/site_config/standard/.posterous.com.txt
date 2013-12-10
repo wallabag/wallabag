@@ -1,0 +1,11 @@
+body: //div[starts-with(@id, 'post_') and @class='post'] | //article[starts-with(@id, 'post_')]
+strip: //div[contains(@class, 'sharing') or contains(@class, 'infobar') or contains(@class, 'editbox')]
+strip: //aside[contains(@class, 'p_responses')]
+strip: //h2[starts-with(@id, 'posttitle_')]
+strip: //header | //footer
+strip: //*[@id='extra_links']
+strip: //img[contains(@class, 'profile_border')]
+# fixes paragraphing issues
+replace_string(<p />): <br /><br />
+prune: no
+test_url: http://blog.mariosc.com/book-recommendation-we-are-all-weird

@@ -1,0 +1,4 @@
+body: //img[contains(@src, "photos")] | //span[@class='peace_content_text_1']
+strip_image_src: photos/gallery
+
+test_url: http://news.peacefmonline.com/news/201104/150881.php

@@ -1,0 +1,8 @@
+convert_double_br_tags: yes
+
+title: substring(substring-after(//title, ':'), 1, string-length(substring-after(//title, ':')) - 10)
+body: //*[contains(@class, 'SB_Content')]
+author: string('Scott Adams')
+date: //*[contains(@class, 'SB_Detail')]/text()[1]
+
+test_url: http://dilbert.com/blog/entry/death_by_hypnosis_or_not/

@@ -1,0 +1,9 @@
+body: //div[@id='cnnContentContainer']//div[contains(@class, 'cnn_strycntntlft')]
+strip: //div[@id='cnnCVP2']
+strip_id_or_class: cnn_strylftcexpbx
+strip_id_or_class: cnn_strylctcqrelt
+strip_id_or_class: cnn_strybtntoolsbttm
+strip_id_or_class: cnn_stryftsbttm
+strip_id_or_class: cnn_strybtmcntnt
+prune: no
+test_url: http://edition.cnn.com/2011/US/04/29/severe.weather/index.html

@@ -1,0 +1,9 @@
+body: //div[@id='content']
+
+strip_id_or_class: featured-box
+strip_id_or_class: postmeta
+strip_id_or_class: respond
+
+author: //a[contains(@href, '/author/') and contains(@title, 'Posts by')]
+date: substring-before(//a[contains(@href, '/author/') and contains(@title, 'Posts by')]/.., ' by ')
+test_url: http://www.tipb.com/2011/10/17/iphone-4s-review/

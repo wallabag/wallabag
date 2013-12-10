@@ -1,0 +1,35 @@
+Updating Full-Text RSS
+======================
+
+To update your copy of Full-Text RSS to ensure feeds continue to be processed as they were before, we suggest the following steps:
+
+1. Keep your current installation in place for now (we'll deal with it later)
+
+2. Extract this updated package to a new folder -- for example, if the last version is in a folder called 'full-text-rss', extract this version to a new folder called 'full-text-rss-updated'
+
+3. Upload the new folder to your server
+
+4. Access index.php in the new folder through your browser -- for example http://example.org/full-text-rss-updated/index.php
+
+5. Enter a URL in the form field to test the updated code
+
+6. If you'd configured the last version, copy custom_config.php from your old version to the new installation.
+
+7. If you'd added custom site config files (in site_config/custom/), copy those over to the new installation.
+
+8. If you'd enabled caching, make sure the cache folder (and its 2 sub folders) is writable. (You might need to change the permissions of these folders to 777 through your FTP client.)
+
+9. Test the new copy again to make sure the config values are now applied to the new version.
+
+10. Now simply rename the folder with your old copy to 'full-text-rss-old' and then rename the folder with the new copy to 'full-text-rss' (or whatever name you'd given the original folder).
+
+That's all that's needed. Your feeds should continue to work as they did before. Let us know if you have any trouble: help@fivefilters.org.
+
+Updating Site Patterns
+======================
+
+Site patterns are used by Full-Text RSS to improve extraction for certain sites. These are simple text files which are updated more frequently than the Full-Text RSS software itself. 
+
+To make sure your copy of Full-Text RSS is using the latest site patterns, We've created a simple tool to help you get the latest copy of these site patterns from FiveFilters.org. To use it, access the admin/ folder in your browser and follow the instructions.
+
+Alternatively, you can download the latest set of site config files via GitHub: https://github.com/fivefilters/ftr-site-config

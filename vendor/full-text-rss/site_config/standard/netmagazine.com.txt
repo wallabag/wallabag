@@ -1,0 +1,16 @@
+title: //h1
+author: //div[@class="submitted"]/span
+
+# seems like this should work, but nothing is returned. Issue with xpath parser?
+date: //div[@class="submitted"]/time
+
+body: //div[@id="main-content"]
+
+strip_comments: no
+
+strip: //h1
+strip: //div[@class="submitted"]
+strip: //dd[@class="profile-avatar"]
+strip: //div[@class="author-profile"]/dl/dt[1]
+strip: //div[@id="right-col"]
+test_url: http://www.netmagazine.com/opinions/nielsen-wrong-mobile

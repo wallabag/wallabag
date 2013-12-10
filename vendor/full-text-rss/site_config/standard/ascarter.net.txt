@@ -1,0 +1,5 @@
+title: //h1[@class='article_title']
+author: //span[@class='author']
+date: //h2[@class='dateline']
+body: //div[@class='article_body']
+test_url: http://ascarter.net/2012/02/20/enough-is-enough.html

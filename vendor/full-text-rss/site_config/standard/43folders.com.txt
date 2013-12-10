@@ -1,0 +1,4 @@
+body: //*[@class = 'content']
+author: //*[@class = 'submitted']/a
+date: substring-after(//*[@class = 'submitted']/text(), '|')
+test_url: http://www.43folders.com/2011/04/22/cranking

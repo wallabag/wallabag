@@ -1,0 +1,9 @@
+title: //title
+body: (//p[contains(@class, 'js-tweet-text')])[1]
+author: (//strong[contains(@class, 'fullname')])[1]
+date: //span[contains(@class, 'js-short-timestamp')]/@data-time
+
+prune: no
+tidy: no
+
+test_url: https://twitter.com/medialens/status/216883678582804480

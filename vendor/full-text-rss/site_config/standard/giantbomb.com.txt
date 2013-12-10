@@ -1,0 +1,11 @@
+# 2011-11-19 - carlo@... - Initial setup.
+
+strip_id_or_class: user-review-detail
+strip: //h1
+
+body: //div[@class="wiki-content"]  |  //div[@class="section-bd"]  |  //div[@class="news-story"]
+
+author: //span[@class="reviewer"]  |  //p[@class="byline"]/a/text()
+date: //span[@class="dtreviewed"]
+
+test_url: http://www.giantbomb.com/the-elder-scrolls-v-skyrim/61-33394/

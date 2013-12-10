@@ -1,0 +1,8 @@
+author: //div[@class='meta clearfix']/a
+body: //div[@class='post']
+
+strip: //div[@class='metaCat']
+strip: //div[@class='post']/h1
+strip: //div[@class='post']/div[@class='meta clearfix']
+strip: //div[@class='post']/div[@class='social-bar clearfix']
+test_url: http://thisismynext.com/2011/10/18/galaxy-nexus-android-ice-cream-sandwich-pictures-video-hands-on/

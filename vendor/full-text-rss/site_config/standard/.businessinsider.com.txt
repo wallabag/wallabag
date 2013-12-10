@@ -1,0 +1,9 @@
+title://div[@class="sl-layout-post"]/h1
+body: //div[contains(@class, 'post-content') or contains(@class, 'KonaBody')]
+strip: //div[contains(@class, "post-sidebar")]
+strip: //div[@id='related-links']
+author://div[@class="byline"]/a
+date://div[@class="byline"]/span[@class="date"]
+prune: no
+
+test_url: http://www.businessinsider.com/as-europe-booms-on-bailout-deal-john-boehner-just-confirmed-that-the-us-is-nowhere-2011-7

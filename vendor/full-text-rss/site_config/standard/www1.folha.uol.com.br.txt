@@ -1,0 +1,15 @@
+body://div[@id='articleNew']
+strip://div[@id='articleBy']
+strip://div[@id='articleDate']
+strip://td[@class='articleGraphicCredit']
+strip://h1
+strip://div[@id='articleEnd']
+strip://p[@class='tagline']
+strip://div[@class='openBox adslibraryArticle']
+strip_id_or_class:ad-180x150-1
+
+
+title: //div[@id="articleNew"]/h1
+author: //div[@id="articleBy"]/p/b
+date: substring-before(//div[@id="articleDate"], "-")
+test_url: http://www1.folha.uol.com.br/mundo/1115805-ex-ditador-argentino-videla-e-condenado-a-50-anos-de-prisao.shtml

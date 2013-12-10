@@ -1,0 +1,6 @@
+title: //a[@class="blog_title"]
+date: //p[@class="when"]/a
+body: //div[@class="blog_entry"]
+strip_id_or_class:blog_title
+strip_id_or_class:when
+test_url: http://blog.pinboard.in/2011/11/the_social_graph_is_neither/

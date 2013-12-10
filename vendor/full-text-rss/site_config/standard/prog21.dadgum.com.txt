@@ -1,0 +1,9 @@
+title: //h1
+body: //div[@id='left']
+strip: //h1
+convert_double_br_tags: yes
+strip_id_or_class: entry-footer
+strip: //h1[. = 'Previously']/following::*
+author: string('James Hague')
+date: //div[@class = 'entry-footer']/text()
+test_url: http://prog21.dadgum.com/105.html

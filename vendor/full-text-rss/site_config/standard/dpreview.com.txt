@@ -1,0 +1,9 @@
+# next_page_link for product review
+# example: http://www.dpreview.com/reviews/lytro/
+next_page_link: //img[@alt = 'Next page']/../@href
+
+# next_page_link for other articles
+# example: http://www.dpreview.com/articles/6126592906/first-impressions-using-the-fujifilm-x-pro1
+next_page_link: //*[@class = 'pages']/*/td[@class = 'next enabled']/a
+single_page_link: //a[contains(.,'Print view')]
+test_url: http://www.dpreview.com/articles/6126592906/first-impressions-using-the-fujifilm-x-pro1

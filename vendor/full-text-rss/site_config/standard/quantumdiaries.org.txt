@@ -1,0 +1,14 @@
+title: //div[contains(@class, "hentry")]/h3
+
+author: //div[contains(@class, "hentry")]/h2[contains(@class, "author_bio")]
+
+date: substring-before(substring-after(normalize-space(//p[contains(@class, "postmetadata")]/small), "was posted on "), " and is filed under")
+
+body: //div[contains(@class, "entry")]
+
+strip_id_or_class: addtoany_share_save_container
+strip_id_or_class: postmetadata
+strip_id_or_class: author_bio
+strip_id_or_class: author_bio_2
+strip: //div[contains(@class, "hentry")]/h3
+test_url: http://www.quantumdiaries.org/2011/10/25/piling-up/

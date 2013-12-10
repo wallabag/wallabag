@@ -1,0 +1,136 @@
+FiveFilters.org: Full-Text RSS
+http://fivefilters.org/content-only/
+CHANGELOG
+------------------------------------
+3.1 (2013-03-06)
+ - PHP Readability updated to preserve more images/videos
+ - Site config files updated for better extraction
+ - SimplePie updated
+ - New site config option favour_feed_titles and request parameter use_extracted_title to allow extracted titles to be used in generated feed
+ - Remove image lazy loading (looks for markup used by http://wordpress.org/extend/plugins/lazy-load/)
+ - <category> elements appearing inside <item> elements are now preserved in generated feed
+ - <media:thumbnail> elements now preserved
+ - Allow multiple <media:content> elements (previously only one was preserved)
+ - Bug fix: No more self-closing iframe elements
+ - Bug fix: Fixed manifest.yml to prevent error message when deploying to AppFog
+ - Other minor fixes/improvements
+
+3.0 (2012-09-04)
+ - Multi-page support - next_page_link now supported in site config (enable/disable with $options->multipage)
+ - HTML5 parser available - use parser: html5lib in site config, also see $options->allowed_parsers
+ - Updated site patterns for better extraction
+ - New global site config to be applied to all sites (global.txt)
+ - APC caching of site config files to improve performance, if APC available - see $options->apc 
+ - Site config editor in admin/ - easily find, edit, test, and test site config files, or add new ones
+ - Debug mode to see what's happening behind the scenes - see $options->debug
+ - Removed deprecated config options: restrict, message_to_prepend_with_key, message_to_append_with_key, error_message_with_key
+ - Removed extraction with CSS via querystring
+ - Removed config option: $options->alternative_url
+ - Bug fix: allow extraction of a single element
+ - Bug fix: redirect handling improved
+ - Strip 'http://' prefix when API key is supplied
+ - Site config merging (custom + standard + fingerprint + global)
+ - Site config command replace_string(find): replace can now be split over two lines: find_string: find, replace_string: replace
+ - YouTube and Vimeo URLs now return iframe embed code
+ - We now look for OpenGraph title and date elements
+ - Improved extraction from AJAX pages - we now look for AJAX triggers embedded in HTML, per Google spec
+ - JSONP support - use &format=json&callback=functionName in querystring
+ - New config option to enable Cross-Origin Resource Sharing (CORS): $option->cors
+ - New config option to enable XSS filtering, if required: $option->xss_filter
+ - Zend_Cache updated
+ - Smart caching - experimental feature to store cache IDs in APC first, and write output to disk on subsequent request (see $options->smart_cache)
+ - Easier cloud deploy - manifest.yml added for AppFog
+ - Override most config options with environment variables, e.g. ftr_max_entries: 3
+
+2.9.5 (2012-04-29)
+ - Language detection using Text_LanguageDetect or PHP-CLD (dc:language field in output and $options->detect_language in config)
+ - New site patterns added and old ones updated
+ - Experimental tool for simpler site pattern updates (access admin/ folder)
+ - Plus other fixes/improvements
+
+2.9.1 (2011-11-02)
+ - Fix: Character encoding issue affecting some non-English articles (makefulltextfeed.php and SimplePie/Misc.php changed)
+
+2.9 (2011-11-01)
+ - New site patterns added and old ones updated
+ - New config option: require_key - restrict access to those with password/key
+ - New config option: rewrite_url - URL rewrite rules to be applied before HTTP request
+ - New site config options to extract author(s) and publication date (matches included in feed item as <dc:creator> and <pubDate>)
+ - New site config option: replace_string([string to find]): [replacement string]
+ - New site identification method: site fingerprints (HTML fragments linked to site config)
+ - Update check now also checks for new site patterns
+ - Effective URL (URL after redirects/rewrites) now included in feed item as <dc:identifier>
+ - Prevent indexing of generated feeds by search engines
+ - Enclosure support (enclosures preserved as <media:content> elements)
+ - Better handling of non-HTML content types
+ - Sending custom User-Agent HTTP header for matching sites now supported
+ - CSS extraction deprecated in favour of site patterns (still works, but form field removed and feature may disappear in 3.0)
+ - Fix: Improved character-encoding detection
+ - Fix: URL parsing issues for certain URLs (SimplePie updated)
+ - Fix: Author and other Dublin Core (<dc:..>) elements now appear in JSON output
+ - Fix: Minor fixes for PHP Readability
+ - Plus other minor fixes/improvements
+ 
+2.8 (2011-05-30)
+ - Tidy no longer stripping HTML5 elements
+ - JSON output (pass &format=json in querystring)
+ - New site patterns added and old ones updated
+ - New site config option to force full-page retrieval on multi-page articles: single_page_link
+ - User Guide (PDF) now included (although still a work in progress)
+ - URL placeholders now accepted in message_to_prepend/append config options
+ - Plus minor fixes...
+
+2.7 (2011-03-21)
+ - Site patterns for better control over extraction (see site_config/README.txt)
+ - hNews support (improves content extraction for sites using hNews microformatting)
+ - Cookie Jar now used to store and sends cookies when following HTTP redirects
+ - Better handling of certain cases where HTML Tidy fails to clean up properly
+ - Bug fix: curl_multi_select() timing out in certain environments (fixed in HumbleHttpAgent.php)
+ - Bug fix: broken HTTP header parsing in some environments (fixed in SimplePie_HumbleHttpAgent.php)
+ - Bug fix: invalid API URL shown (fixed in index.php)
+ - Plus other minor fixes...
+
+2.6 (2011-03-02)
+ - Rewriting of hash-bang (#!) URLs (see http://www.tbray.org/ongoing/When/201x/2011/02/09/Hash-Blecch for an explanation)
+ - Improved parallel fetching support (HumbleHttpAgent uses curl_multi_* functions if PECL HTTP extension is not present)
+ - Improved HTTP redirect support (now handled in HumbleHttpAgent, no longer relies on PHP)
+ - Improved performance for single page (non-feed) requests: (SimplePie connected to HumbleHttpAgent)
+ - Improved memory use for processing large feeds (HumbleHttpAgent's stored responses cleared as they're retrieved)
+ - Bug fix: exclude on fail option no longer requires valid key
+ - Bug fix: workaround for PHP bug http://bugs.php.net/51192 (fixed in makefulltextfeed.php)
+ - Plus other minor changes...
+
+2.5 (2011-01-08)
+ - New option: custom extraction pattern (CSS selectors)
+ - New option: allowed URLs (restrict service to pre-defined feeds/domains)
+ - New option: exclude items on fail (remove items from feed if content extraction fails)
+ - Remove 'http://' from URL before form submission (prevents errors on hosts which have overly vigilant security software)
+ - Allow overriding of index.php with custom_index.php
+ - config.php now required (override with custom_config.php)
+ - index.php now uses config.php to determine what to display
+ - Bug fix: occasional fatal error in IRI::__toString() (IRI updated)
+ - Bug fix: workaround for PHP bug http://bugs.php.net/51192 (fixed in HumbleHttpAgent.php)
+
+2.2 (2010-10-30)
+ - Character-encoding detection improved (minor change)
+ - Rewriting of relative URLs improved (tracks redirect URLs)
+ - Minor changes to prevent errors in certain hosting environments
+ - Compatibility test file updated with more tests
+
+2.1 (2010-09-13)
+ - Better content extraction (using PHP Readability 1.7.1)
+ - Parallel HTTP requests (using Humble HTTP Agent)
+ - Auto loading of necessary classes
+ - Rewriting of relative URLs (using IRI)
+ - Added compatibility test file (to check if server meets requirements)
+ - Character-encoding support improved (using SimplePie)
+
+1.5 (2010-05-30)
+ - Support for PHP 5.3 (thanks Murilo!)
+ - Character-encoding support improved (favours iconv over mb_convert_encoding)
+
+1.0 (2010-03-05)
+ - Better support for different character-encodings
+ - Auto-cleanup of cache files
+ - Very basic option for load distribution (if you're planning on installing the code on multiple servers)
+ - Separate config file (see config-sample.php) 

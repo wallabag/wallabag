@@ -1,0 +1,2 @@
+strip: //div[contains(@class, 'article-tools')]
+test_url: http://www.medialens.org/index.php/alerts/alert-archive/2012/713-the-illusion-of-democracy.html

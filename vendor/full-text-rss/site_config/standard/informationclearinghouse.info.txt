@@ -1,0 +1,6 @@
+title: //head/title
+body: //table[@id='table3']//div[@class='postContent']
+prune: no
+tidy: no
+
+test_url: http://www.informationclearinghouse.info/article28238.htm

@@ -1,0 +1,17 @@
+title: //div[contains(@class, 'article_detail')]/div[@class='entry_header']/h1
+title: //div[contains(@class, 'article_detail')]//h1
+title: //h1
+
+body: //div[contains(@class, 'article_detail')]
+
+author: //div[@class='article_detail']/div[@class='entry_header']/li/div[@class='author']//h3
+author: div[@class='author']//h3
+strip: //div[contains(@class, 'field-field-book-cover')]
+
+date: translate(//*[@class='post_date' and contains(., ' 20')], '|', '')
+
+prune: no
+
+single_page_link: //a[@class='print-page']
+
+test_url: http://www.tnr.com/blog/jonathan-chait/92991/did-obama-get-rolled

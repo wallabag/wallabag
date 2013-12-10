@@ -1,0 +1,5 @@
+title://div[@class='entry-title']
+body://div[@class='entry-content']
+strip_comments:yes
+convert_double_br_tags:yes
+test_url: http://www.yostivanich.com/2010/07/11/wired-com-with-world-watching-wikileaks-falls-into-disrepair/

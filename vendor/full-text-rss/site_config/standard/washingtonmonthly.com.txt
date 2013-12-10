@@ -1,0 +1,10 @@
+title://a[@class = 'headline-article']
+
+author: substring-after(//div[@class = 'article']/p[@class = 'author'], 'By ')
+date://div[@class = 'article']/span[@class = 'date']
+body://div[@class = 'article']
+single_page_link://a[@class = 'print']
+strip://p[@class = 'author']
+strip://a[@class = 'headline-article']
+strip://span[@class = 'date']
+test_url: http://www.washingtonmonthly.com/magazine/julyaugust_2011/features/the_trinity_sisters030380.php

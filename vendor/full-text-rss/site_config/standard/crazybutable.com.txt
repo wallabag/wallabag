@@ -1,0 +1,3 @@
+title://h2
+body://div[contains(@class, 'entrytext')]
+test_url: http://www.crazybutable.com/weblog/archives/2010/07/01/house-ideas-that-worked/

@@ -1,0 +1,6 @@
+title: //h1[@class='headline']
+body: //cite[contains(@class,'byline')] | //div[contains(@class,'yom-art-content')]
+strip: //cite/abbr
+tidy: no
+
+test_url: http://ca.news.yahoo.com/cold-la-nina-winter-forecast-west-coast-183535067.html

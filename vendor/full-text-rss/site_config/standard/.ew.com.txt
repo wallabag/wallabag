@@ -1,0 +1,14 @@
+next_page_link: //span[@class='paging-next']/a[contains(., 'NEXT')]
+strip_id_or_class: article-paging
+strip_id_or_class: eyebrow
+strip_id_or_class: underbar
+strip_id_or_class: extras
+strip_id_or_class: share
+strip_id_or_class: recap-links
+strip_id_or_class: tvr-author
+strip_id_or_class: pub-date
+strip_id_or_class: post-title
+
+title: //h1[@class='post-title']
+
+test_url: http://tvrecaps.ew.com/recap/fringe-season-4-episode-2/

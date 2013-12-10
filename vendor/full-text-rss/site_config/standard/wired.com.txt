@@ -1,0 +1,22 @@
+title: //meta[@property="og:title"]/@content 
+title: //h1
+title: //*[@class='posttitle']
+author: //*[@class='entryAuthor']/a[1]
+author://*[@class='member-title']
+author://li[@class='author']/a[contains(@href, '/author/')]
+date: substring-after(//div[@class='entryAuthor'], '·')
+date: substring-before(//*[@class='entryDate'], '|')
+body: //div[@class='entry']
+strip: //span[contains(@class, 'nextprev')]
+#strip_id_or_class: ngg-galleryoverview 
+# ngg-galleryoverview is the whole content sometimes, e.g. http://www.wired.com/underwire/2011/12/best-mixtapes-of-2011/?pid=5736&viewall=true
+
+strip: //p[span[contains(@class, 'contentjump')]]
+strip: //text()[contains(., 'nextpage')]
+
+prune: no
+
+single_page_link: //a[contains(@href, '/all/1') and contains(@class, 'contentjumpall')]
+
+test_url: http://www.wired.com/cloudline/2011/10/meet-arms-cortex-a15-the-future-of-the-ipad-and-possibly-the-macbook-air/
+test_url: http://www.wired.com/threatlevel/2012/05/ff_counterfeiter/all/1

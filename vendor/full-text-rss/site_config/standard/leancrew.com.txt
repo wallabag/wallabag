@@ -1,0 +1,9 @@
+title: //div[@id="content"]/h1[1]
+date: substring-before(//p[@class="postdate"], ' at ')
+author: ("Dr. Drang")
+
+strip: //div[@id="content"]/h1[1]
+strip: //p[@class="postdate"]
+strip: //h2[@id="respond"]
+strip: //blockquote[@class="bbpTweet"]/p/span/a/img
+test_url: http://www.leancrew.com/all-this/2011/12/more-shell-less-egg/

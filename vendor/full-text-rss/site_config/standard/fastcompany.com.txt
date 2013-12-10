@@ -1,0 +1,16 @@
+title: //h1
+author: //h5[@class='byline']//a
+date: //h5[@class='date']
+body: //figure[@class='node-poster'] | //div[contains(@class, "node-content")]
+strip_id_or_class: article-top-wrapper
+strip_id_or_class: footer-message
+strip_id_or_class: print-logo
+strip: //cite
+strip://*[@class='timestamp']
+strip://div[@id='page_right']
+strip://section[@id='header_region']
+strip://h1[@class='node-title']
+strip://div[@class='node-submitted']
+strip_id_or_class: skipnav
+test_url: http://www.fastcompany.com/3000226/link-between-quietness-and-productivity
+test_url: http://www.fastcompany.com/3003586/6-simple-rituals-reach-your-potential-every-day

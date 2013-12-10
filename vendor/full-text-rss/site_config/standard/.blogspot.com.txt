@@ -1,0 +1,11 @@
+date: //*[contains(@class, 'date-header')]
+title://*[contains(@class,'post-title')]
+body://div[contains(@class,'post-body')]
+body://div[contains(@class,'entry-content')]
+strip_comments:no
+prune:no
+
+tidy:yes
+
+test_url: http://themerryone.blogspot.com/2010/08/new-move-new-blog.html
+test_url: http://strobist.blogspot.com/2012/01/qa-down-phase-one-rabbit-hole.html

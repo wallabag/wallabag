@@ -1,0 +1,27 @@
+# try to target content block within div#content
+body: //div[@id="content"]//div[contains(@class, 'entry-content') or contains(@class, 'entrytext') or @class='main' or @class='entry']
+# if that fails, get div#content
+body: //div[@id='content']
+title: //meta[@property='og:title']/@content
+
+date: //div[@id='content']//span[contains(@class, 'entry-date')]
+date: //div[contains(@class, 'entry-meta')]//time[@pubdate or @pubDate]
+author: //div[contains(@class, 'entry-meta')]//a[@rel='author']
+
+prune: no
+
+strip: //nav
+strip: //header
+strip: //*[@id='comments' or @id='respond']
+strip: //div[contains(@class, 'comments')]
+strip_id_or_class: sharedaddy
+strip_id_or_class: wpadvert
+strip_id_or_class: commentlist
+strip_id_or_class: sociable
+strip_id_or_class: related_post
+strip_id_or_class: wp-socializer
+strip_id_or_class: addtoany
+strip: //div[contains(@class, 'navigation')]
+#strip: //iframe
+
+test_url: https://elisehahn.wordpress.com/2011/11/10/the-vatican-and-st-peters-basilica/

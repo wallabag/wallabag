@@ -1,0 +1,4 @@
+body: //div[starts-with(@id, 'news-id-')]
+prune: no
+
+test_url: http://izismile.com/2011/06/13/uncanny_factoid_fashion_or_creepy_2_pics.html

@@ -1,0 +1,4 @@
+title: //*[@id='title']//h1
+body: //*[(@id = "articlebody")]
+date: //*[(@id = "date")]
+test_url: http://nutrition.about.com/od/changeyourdiet/qt/healthysnacks.htm

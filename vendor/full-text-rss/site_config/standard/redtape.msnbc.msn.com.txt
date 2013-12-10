@@ -1,0 +1,20 @@
+# Think there might be something up with your parser that it strips out 'print' from the title :)
+
+title: //meta[@name='title']/@content
+author: //meta[@name='author']/@content
+date: //meta[@name='date']/@content
+
+body: //div[@class='articleText']
+
+strip: //div[contains(@class, 'day')]
+strip: //div[contains(@class, 'month')]
+strip: //div[contains(@class, 'year')]
+strip: //div[contains(@class, 'time')]
+strip: //h1[@class='gl_headline']
+strip: //div[@class='byline']
+strip: //div[@id='left_ear']
+strip: //div[@id='right_ear']
+strip: //div[contains(@class, 'PopularPosts')]
+strip ://div[@class='discuss_page_break']
+strip ://div[contains(@class, 'p-content_TagList')]
+test_url: http://redtape.msnbc.msn.com/_news/2011/09/28/8020661-sprint-raises-fee-but-wont-free-users-from-two-year-contracts?preview=true

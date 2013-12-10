@@ -1,0 +1,9 @@
+body: //div[@id = "article-view"]
+body: //div[contains(@class, 'article')]//div[contains(@class, 'photo_bg')]
+author: //p[@class = "author"]
+strip: //h1
+strip: //h2
+strip_id_or_class: author
+prune: no
+test_url: http://www.alriyadh.com/2011/10/10/article674357.html
+test_url: http://www.alriyadh.com/net/article/780935

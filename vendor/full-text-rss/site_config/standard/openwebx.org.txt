@@ -1,0 +1,4 @@
+body: //div[@class="chapter"]
+prune: no
+tidy: no
+test_url: http://openwebx.org/docs/springext.html

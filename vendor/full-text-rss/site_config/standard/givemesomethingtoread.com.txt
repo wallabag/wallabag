@@ -1,0 +1,3 @@
+single_page_link: //div[@id="content"]//h2/a
+
+test_url: http://givemesomethingtoread.com/post/6285838917/the-baddest-lawyer-in-the-history-of-jersey

@@ -1,0 +1,6 @@
+title: //h2
+date: substring-before(//small," &bull; Permalink")
+author:string('Martin Hering')
+
+Strip: //p/small
+test_url: http://vemedio.com/blog/posts/state-of-support-and-icloud

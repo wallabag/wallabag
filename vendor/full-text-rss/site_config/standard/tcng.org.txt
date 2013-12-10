@@ -1,0 +1,4 @@
+title: //div[@id='main-content']/h1
+body: //div[@id='main-content']
+strip: //div[@id='main-content']/h1
+test_url: http://www.tcng.org/index.php/blog/view/teaching-basic-health-cutting-down-costs

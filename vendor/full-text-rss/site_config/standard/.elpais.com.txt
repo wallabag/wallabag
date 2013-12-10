@@ -1,0 +1,13 @@
+title: //meta[@name='DC.title']/@content
+date: //meta[@name='DC.date']/@content
+body: //div[@class='columna_texto']
+body: //div[@id='cuerpo_noticia']
+prune: no
+
+strip_id_or_class: disposicion_vertical
+strip_id_or_class: ampliar_foto
+
+strip: //div[starts-with(@id, 'sumario') and contains(., 'más información')]
+
+test_url: http://economia.elpais.com/economia/2012/02/07/actualidad/1328611790_342868.html
+test_url: http://internacional.elpais.com/internacional/2012/02/07/actualidad/1328602145_448315.html

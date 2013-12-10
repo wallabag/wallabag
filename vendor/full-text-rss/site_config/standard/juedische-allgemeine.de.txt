@@ -1,0 +1,19 @@
+body: //div[@id='article_container']
+author: //h4//a[@class='author']
+title: //h1
+
+replace_string(lang="en"): lang="de"
+replace_string(/>1</a>):/></a>
+
+strip_id_or_class: share_toolbox
+strip_id_or_class: article_header
+strip_id_or_class: phototext
+
+strip_image_src: icon_author.gif
+
+strip: //img[@src='']
+strip: //h4[@id='author']
+
+prune: no
+
+test_url: http://www.juedische-allgemeine.de/article/view/id/13366

@@ -1,0 +1,8 @@
+# set body
+body: //div[@class='post-listing']
+
+# remove clutter
+strip: //a/big
+strip: //a/em
+strip: //p/em
+test_url: http://inhabitat.com/2010/11/18/sliding-walls-transform-this-tokyo-house-into-an-office/

@@ -1,0 +1,6 @@
+title: //h2[@class='posttitle']
+date: substring-before(substring-after(//span[@class='postdate'], 'on '), ' by')
+date: //span[@class='postdate']
+author: //span[@class='postdate']/a
+body: //div[@class='entry line_top']
+test_url: http://videogum.com/395042/here-are-some-afternoon-links-92/list/

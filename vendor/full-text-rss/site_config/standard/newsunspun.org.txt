@@ -1,0 +1,10 @@
+body: //div[@class='right']//div[@class='articles']
+author: //div[@id='artinfo']//a[contains(@href, '/author/')]
+strip: //div[@id='artinfo']
+strip: //table[//a[contains(@href, 'twitter.com')]]
+strip_id_or_class: twitter
+
+prune: no
+tidy: no
+
+test_url: http://www.newsunspun.org/eotn/bbc-headline-change-iran-goes-from-not-building-to-undecided-on-nuclear-bomb

@@ -1,0 +1,28 @@
+title: //h1[@id='stream_title']
+
+# Author and date don't work
+author: //div[@class='byline']
+date: //div[@class='date-stamp']
+
+body: //div[@class='node-article']
+
+strip_id_or_class: fb-like-box
+strip_id_or_class: stream-fb-like
+strip_id_or_class: social-meta
+strip_id_or_class: social-spoken
+strip_id_or_class: twitter-share-button
+strip_id_or_class: twitter-follow-button
+strip_id_or_class: spinner_node_list
+strip_id_or_class: node-sort-link
+strip_id_or_class: stream_title
+strip_id_or_class: stream_summary
+strip_id_or_class: update-count-container
+strip_id_or_class: major-updates
+strip_id_or_class: newsletter-slide
+strip_id_or_class: author-mini-profile
+strip_id_or_class: byline
+strip_id_or_class: header
+strip_id_or_class: footer
+
+# Works, but "no text" errors on: http://www.sbnation.com/nba/2012/3/9/2856780/nba-scores-dwight-howard-bulls-magic-mavs-suns
+test_url: http://www.sbnation.com/nba/2012/3/13/2867226/dwight-howard-trade-rumors-2012-faq-orlando-magic

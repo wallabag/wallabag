@@ -1,0 +1,8 @@
+title: //h1
+date: /html/head/meta[@name="date"]/@content
+body: //div[@id="featuredlinksbox"]
+strip: //div[@class="relatedbox"]
+strip: //h1
+strip: //br
+strip_image_src: "/images"
+test_url: http://www.prb.org/Journalists/Webcasts/2011/military-families.aspx

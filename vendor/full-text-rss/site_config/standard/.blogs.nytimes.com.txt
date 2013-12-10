@@ -1,0 +1,17 @@
+body: //div[@class='entry-content']
+title: //h1[@class='entry-title']
+# Two author lines because krugman.blogs.nytimes.com is a special case
+author: substring-after(//div[@class="box module nocontent"]/h4, "About ")
+author: //address/a
+date: //meta[@name="PUD"]/@content
+date: //*[@class='date']
+
+#Removes related content but cleans up article text
+strip: //ul[@class='toolsList wrap']
+strip_id_or_class:inlineModule
+strip_id_or_class:module
+strip_id_or_class:toolsListContainer
+prune: no
+test_url: http://opinionator.blogs.nytimes.com/2011/02/03/lost-and-gone-forever/
+test_url: http://krugman.blogs.nytimes.com/2012/09/12/a-vote-of-confidence/
+test_url: http://bits.blogs.nytimes.com/2012/01/16/wikipedia-plans-to-go-dark-on-wednesday-to-protest-sopa/

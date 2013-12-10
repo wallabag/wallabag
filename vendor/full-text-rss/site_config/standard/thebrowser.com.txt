@@ -1,0 +1,10 @@
+title: //h2[contains(@class, 'page-title')]
+body: //div[@id='content']/div[contains(@id, 'node-')]/div[@class='content']
+
+prune: no
+
+strip: //div[contains(@class, 'node-book')]//a[@class='button']
+
+single_page_link: //a[@class='tool-print']
+
+test_url: http://thebrowser.com/interviews/yotam-ottolenghi-on-his-favourite-cookery-books

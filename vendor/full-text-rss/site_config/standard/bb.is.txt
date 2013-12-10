@@ -1,0 +1,13 @@
+author: substring(//h3[@class='headlines']/span[@class='dates'],0,string-length(//h3[@class='headlines']/span[@class='dates'])-20)
+
+
+date: substring((//h3[@class='headlines']/span[@class='dates']),string-length(//h3[@class='headlines']/span[@class='dates'])-18,12)
+
+
+body:  //div[@class='first-article-big']
+strip: //table[@class='newsimagecontainer']
+strip: //h3[@class='headlines']
+strip: //iframe[@class='headlines']
+strip: //a[@class='newslink']
+convert_double_br_tags: yes
+test_url: http://bb.is/Pages/82?NewsID=174119

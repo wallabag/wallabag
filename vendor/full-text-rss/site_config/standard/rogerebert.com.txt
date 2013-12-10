@@ -1,0 +1,8 @@
+title: substring-before(//title,':')
+author: substring-after(substring-before(//div[@class='text']/b,'/'),'BY')
+
+body: //div[@class='text']
+
+strip: //a[contains(@href,'printart')]
+strip_id_or_class: enlarge_photo
+test_url: http://rogerebert.com/apps/pbcs.dll/article?AID=/20120411/REVIEWS/120419998/1005/GLOSSARY

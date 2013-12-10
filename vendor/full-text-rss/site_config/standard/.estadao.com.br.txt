@@ -1,0 +1,15 @@
+title: //span[@id='ctl00_ctl00_MainContent_MainContent_RecipeImage1_lblRecipeTitle']
+body: //div[@class='img_article'] | //div[@class='article']//div[@class='article_header' or @class='article_content']
+body: //div[@class='texto-noticia']
+
+author: //div[@class='autor']//em
+author: //div[@class='bb-md-noticia-autor']
+
+strip_id_or_class: divulgar
+strip_id_or_class: innerRight
+strip: //div[@class='size' or @class='imprimir']
+
+prune: no
+
+test_url: http://revistapiaui.estadao.com.br/edicao-62/carta-de-havana/la-vida-por-la-izquierda
+test_url: http://economia.estadao.com.br/noticias/economia,pf-panamericano-tambem-irrigou-contas-de-executivos-do-grupo-silvio-santos,94648,0.htm

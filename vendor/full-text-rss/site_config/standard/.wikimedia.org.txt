@@ -1,0 +1,12 @@
+title: //h1[@id='firstHeading']
+body: //div[@id = 'bodyContent']
+strip_id_or_class: editsection
+strip_id_or_class: toc
+strip_id_or_class: vertical-navbox
+strip: //div[@id='catlinks']
+strip: //div[@id='jump-to-nav']
+strip: //div[@class='thumbcaption']//div[@class='magnify']
+strip: //table[@class='navbox']
+prune: no
+tidy: no
+test_url: https://secure.wikimedia.org/wikipedia/en/wiki/Christopher_Lloyd

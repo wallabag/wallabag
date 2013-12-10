@@ -1,0 +1,7 @@
+title: //div[@class='abstitle']//h1
+author: //div[@class='authorList']
+body: //div[@id='fulltext_body']
+
+prune: no
+
+test_url: http://www.physicstoday.org/resource/1/phtoad/v64/i10/p48_s1?bypassSSO=1

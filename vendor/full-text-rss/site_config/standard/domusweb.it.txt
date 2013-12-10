@@ -1,0 +1,21 @@
+# TODO: clean up the extra junk at the end of articles
+
+# general text formatting
+prune: no
+convert_double_br_tags:yes
+
+# where to find the basic metadata
+author://a[@class='articleauthor']
+date://a[starts-with(@href,'/en/search/published/')]
+title:substring-before(//h2[@class='title'],'&mdash;')
+body://div[@id='maincontainer']
+
+dissolve://div[starts-with(@id,'commentableblock')]
+
+# clean up the crap
+strip://div[contains(@class,'domusnetwork')]
+strip://div[contains(@class,'relative_wrapper')]
+
+strip://div[contains(@class,'captionsubimage')]/img[contains(@class,'arrow')]
+wrap_in(em): //div[contains(@class,'captionsubimage')]/span
+test_url: http://www.domusweb.it/en/design/in-praise-of-lost-time/

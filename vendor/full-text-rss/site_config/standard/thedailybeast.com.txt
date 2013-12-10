@@ -1,0 +1,7 @@
+title: //h1
+body: //article/div[contains(@class, 'article-body')]
+#strip: //header/hgroup/h1
+strip: //footer[@class='storyFooter']
+single_page_link: //li[@class='print']/a
+prune: no
+test_url: http://www.thedailybeast.com/articles/2010/04/06/how-mastercard-predicts-divorce.html

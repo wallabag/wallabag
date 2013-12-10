@@ -1,0 +1,20 @@
+tidy:no
+title://h2[@class="title"]
+# author:"Ben Miller"
+date://div[@id="stats"]/span
+strip_id_or_class:stats
+strip_id_or_class:breadcrumbs
+strip_id_or_class:gn-why-content
+strip_id_or_class:single-social
+strip_id_or_class:sidebar-ads
+strip_id_or_class:sidebar-top
+strip_id_or_class:footer
+strip_id_or_class:post_meta
+# strip_id_or_class:
+# strip_id_or_class:
+# strip_id_or_class:
+# strip_id_or_class:
+# strip_id_or_class:
+# strip_id_or_class:
+
+test_url: http://www.giga.de/benm/2011/10/17/probleme-mit-ios-5-wenn-die-daten-weg-sind/#more-58033

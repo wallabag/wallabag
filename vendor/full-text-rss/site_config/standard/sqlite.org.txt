@@ -1,0 +1,7 @@
+body: //div[@id='ff-body']
+
+replace_string(<h1 align=center>): <div id="ff-body"><h1 align=center>
+
+prune: no
+
+test_url: http://www.sqlite.org/fileformat2.html

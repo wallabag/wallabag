@@ -1,0 +1,13 @@
+# this config useful for the jive forum part of the ibm site. would probably work on any like jive forum
+# suggest URL path filter of "*.ibm.com/developerworks/forums/*"
+title://h1
+body://div[@id='jive-message-holder']
+strip_id_or_class:jive-first
+strip_id_or_class:jive-buttons
+strip_id_or_class:jive-description
+strip_id_or_class:jive-rating-buttons
+strip_id_or_class:jive-message-list-footer
+
+test_url: http://www.ibm.com/developerworks/cloud/library/cl-userappdev/
+
+test_url: http://www.ibm.com/developerworks/forums/thread.jspa?messageID=14547837&tstart=0#14547837

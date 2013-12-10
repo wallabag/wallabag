@@ -1,0 +1,25 @@
+title://h1
+
+# my section divs seem to interfere with the Instapaper parser, so I ditch 'em
+dissolve://div[contains(@class, 'section')]
+
+#these don't seem to be necessary, but just in case
+strip_id_or_class:'masthead'
+strip_id_or_class:'footer'
+
+#again, Instapaper seems to understand where my content is, but just in case
+body://div[@id='content']
+
+# in general, I want the Instapaper view to look like my print CSS, so I remove things specified for the screen or non-printing
+strip_id_or_class:'screen-only'
+strip_id_or_class:'no-print'
+
+#other misc removals and simplifications
+strip_id_or_class:'popup'
+strip_id_or_class:'ZoomSpin'
+
+#I have a lot of content in sidebars and "meta" asides that can work inline just fine, but has to be distinguished somehow with some minimal formatting, so I put them in blockquotes
+wrap_in(blockquote)://div[contains(@class, 'sidebar')]
+wrap_in(blockquote)://div[contains(@class, 'meta')]
+wrap_in(blockquote)://p[contains(@class, 'meta')]
+test_url: http://saveyourself.ca/tutorials/low-back-pain.php

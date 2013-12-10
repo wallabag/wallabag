@@ -1,0 +1,6 @@
+title: //div[@class='post-title']/h1
+author: //a[@href='#author']
+body: //div[@class='post-content']
+strip: //div[@class='post-meta']
+
+test_url: http://www.digital-photography-school.com/10-ways-to-develop-yourself-photographically

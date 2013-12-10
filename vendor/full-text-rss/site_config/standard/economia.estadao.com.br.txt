@@ -1,0 +1,7 @@
+date: //div[@class="bb-md-noticia-fecha"]
+body: //div[@class="corpo"]
+dissolve: //div[@class="bb-md-noticia-extras"]
+strip: //strong
+strip_id_or_class: bb-md-noticia-foto-autor
+strip_id_or_class: bb-md-noticia-foto-bajada
+test_url: http://economia.estadao.com.br/noticias/economia,cmn-aprova-r-67-bi-em-credito-para-20-setores-da-economia,118501,0.htm

@@ -1,0 +1,7 @@
+# Please convert this to *.dreamwidth.org, as users receive individual subdomains.
+convert_double_br_tags: yes
+strip_image_src: 'dreamwidth.org'
+strip_id_or_class: 'currents'
+title: //div[contains(@id, 'entrysubj')]
+body: //div[contains(@class, 'usercontent')]
+test_url: http://dw-news.dreamwidth.org/28922.html

@@ -1,0 +1,6 @@
+title: //h1
+body: //div[@class='article']
+body: //div[@class='post']
+date: //*[@id='single']/span
+prune: no
+test_url: http://brooksreview.net/2011/11/readability-agency/

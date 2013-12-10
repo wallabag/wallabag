@@ -1,0 +1,10 @@
+title: //h1[@class='headline3']
+author: substring-after(//p[@class="byline"], 'By ')
+date: //meta[@name="REVISION_DATE"]/@content
+body: //div[@id='articleImage' or @id='frame_fd1fade'] | //span[@id='articleText'] | //div[@class='pageNavigation']
+strip: //li[@class='next']
+strip: //span[@class='articleLocation']
+prune: no
+tidy: no
+
+test_url: http://www.reuters.com/article/2011/04/08/us-ivorycoast-killings-idUSTRE73732A20110408

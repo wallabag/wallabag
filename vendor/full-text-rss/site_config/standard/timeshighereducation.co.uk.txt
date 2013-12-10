@@ -1,0 +1,6 @@
+title: //h1
+body: //div[@class="storytext"]
+strip: //div[@id="thelogin"]
+strip: //*[@class="hide"]
+strip: //div[@id="anchored"]
+test_url: http://www.timeshighereducation.co.uk/story.asp?sectioncode=26&storycode=416124&c=1

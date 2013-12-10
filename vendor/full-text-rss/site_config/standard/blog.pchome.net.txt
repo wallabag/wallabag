@@ -1,0 +1,12 @@
+# PCHOME blog, a popular Chinese blog host
+# Oct 15, 2011
+#  
+
+title://*[contains(@class,'imp')]/h2
+
+date://*[contains(@class,'imp')]/span
+body://div[contains(@id,'blog_content')]
+
+
+
+test_url: http://blog.pchome.net/article/462502.html

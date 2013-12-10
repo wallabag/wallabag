@@ -1,0 +1,5 @@
+author: //address/a
+date: //article/abbr/@title
+
+# Please consider *.calepin.co
+test_url: http://jokull.calepin.co/nutrition-pt-1.html

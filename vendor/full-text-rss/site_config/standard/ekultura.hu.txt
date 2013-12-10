@@ -1,0 +1,11 @@
+title: //h1[@class='style6 nevek']
+
+body: //div[@class='bal3']
+
+
+prune: yes
+
+tidy: yes
+convert_double_br_tags: yes
+
+test_url: http://ekultura.hu/olvasnivalo/egyeb/cikk/2010-12-15/interju-galvolgyi-judit-2010-december

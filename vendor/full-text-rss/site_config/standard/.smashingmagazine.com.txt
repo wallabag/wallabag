@@ -1,0 +1,7 @@
+title://article[contains(@id, "post-")]/h2
+author://ul[@class="postmetadata clearfix"]/li[@class="author"]
+date://ul[@class="postmetadata clearfix"]/li[@class="date"]
+body://article[contains(@id, "post-")]
+strip://div[@class="ad ed"]
+prune:yes
+test_url: http://wp.smashingmagazine.com/2012/11/08/complete-guide-custom-post-types/

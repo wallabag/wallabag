@@ -1,0 +1,11 @@
+title: //h1[@class='title']
+body: //div[@id='itemBody']
+
+strip_id_or_class: itemFooter
+
+replace_string(90%;">Lees ook): 0%;"></h3></div></body></html>
+
+tidy: no
+prune: no
+
+test_url: http://sport.fok.nl/nieuws/548725/1/1/50/rosicky-traint-weer-mee-bij-tsjechie.html

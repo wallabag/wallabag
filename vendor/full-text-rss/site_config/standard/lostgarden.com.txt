@@ -1,0 +1,3 @@
+prune: no
+convert_double_br_tags: yes
+test_url: http://www.lostgarden.com/2012/04/loops-and-arcs.html

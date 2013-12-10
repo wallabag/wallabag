@@ -1,0 +1,12 @@
+title: //p[@class="txhead"]
+author: //div[@class='txb']
+wrap_in(p): //div[@class='para']
+date: //div[@class='txb']/following-sibling::p/text()[substring(., 14)]
+strip: //table[@class="tlogo"]
+strip: //div[@class="cookieText"]
+strip: //*[@class="sltb"]
+strip: //*[@class="ijobs-x-link"]
+strip: //*[@class="sponscolour"]
+strip: //*[@class="sponsouter"]
+strip: //div[@id="bottom-nav-block"]/following::*
+test_url: http://m.guardian.co.uk/ms/p/gnm/op/s3OOwgO3yIhGuj41C1_S3Xg/view.m?id=15&gid=world/2012/jul/26/arctic-climate-change&cat=top-stories

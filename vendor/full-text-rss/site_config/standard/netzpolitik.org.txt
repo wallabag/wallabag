@@ -1,0 +1,6 @@
+title: //h1[@class='entry-title']
+author: //a[@ref='author']
+date: //span[@class='entry-date']
+body: //div[@class='entry-content']
+
+test_url: http://netzpolitik.org/2011/buch-generation-facebook/

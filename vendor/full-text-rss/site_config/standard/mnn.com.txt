@@ -1,0 +1,11 @@
+tidy: no
+author: //div[@id="above-content"]//img/@alt | //div[@class="comment-auth"]/span[1]/a/text()
+date: //div[@class="comment-auth"]/div | //div[@class="comment-auth"]/span[2]
+body: //div[@class="node"]
+
+strip_id_or_class: vertical-social-bar
+strip_id_or_class: blogs_paginator
+strip_id_or_class: horizontal-social-links
+strip_id_or_class: servicelinksdiv
+
+test_url: http://www.mnn.com/green-tech/research-innovations/blogs/5-breakthroughs-that-will-make-solar-power-cheaper-than-coal

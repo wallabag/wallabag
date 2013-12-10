@@ -1,0 +1,6 @@
+body: //figure[@class='mainVideo']
+strip: //figcaption
+
+prune: no
+
+test_url: http://www.indiatimes.com/bollywood/kareena-insecure-about-saif-working-with-bipasha-23386.html

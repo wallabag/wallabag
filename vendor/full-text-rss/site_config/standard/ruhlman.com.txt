@@ -1,0 +1,6 @@
+title: //h1[@class='entry-title']
+author: ///span[@class='author vcard']
+date: //abbr[@class='published']
+body: //div[@class='entry-content']
+
+test_url: http://ruhlman.com/2009/05/cookbooks-that-teach/

@@ -1,0 +1,6 @@
+body: //div[@id='article']
+title: //div[@id='article']//div[contains(@class, 'content')]/h1
+strip: //div[@class='art-right']
+strip: //img[contains(@src, 'img/px.gif')]
+prune: no
+test_url: http://kvp.expressen.se/nyheter/1.2575726/kvinna-misstankt-for-angelholmsmord

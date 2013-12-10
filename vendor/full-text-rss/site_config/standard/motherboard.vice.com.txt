@@ -1,0 +1,5 @@
+author: //span[@class="author"]/a
+date: //span[@class="date"]
+body: //div[@class="story-content"]
+strip: //aside
+test_url: http://motherboard.vice.com/blog/you-can-carry-a-copy-of-the-pirate-bay-in-your-pocket

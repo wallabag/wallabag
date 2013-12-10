@@ -1,0 +1,3 @@
+title: //h2[@class="entry-title"]
+body: //div[@class="entry-content"]
+test_url: http://www.lifeandculture.fr/digital/facebook-and-the-epiphanator-an-end-to-endings/

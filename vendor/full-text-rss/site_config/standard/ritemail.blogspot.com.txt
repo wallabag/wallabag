@@ -1,0 +1,5 @@
+body: //div[@class='post-body entry-content']
+strip: //div[@id='lws_0']
+prune: no
+
+test_url: http://ritemail.blogspot.com/2011/06/hayden-panettiere-candids-in-los.html

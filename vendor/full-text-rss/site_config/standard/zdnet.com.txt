@@ -1,0 +1,10 @@
+title: //h1[@class="h s-1"]
+author: substring-before(substring-after(//p[@class="meta s-10"], 'By'), '|')
+author: substring-after(//div[@class="bio"]//h3, 'About ')
+date: substring-after(//p[@class="meta s-10"], '|')
+date: substring-after(//p[@class="meta"], '|')
+body: //div[@class="content-1 entry space-1 clear"]
+body: //div[@class="storyBody"]
+
+test_url: http://www.zdnet.com/blog/microsoft/the-bing-back-end-more-on-cosmos-tiger-and-scope/10920
+test_url: http://www.zdnet.com/researchers-find-web-tracking-up-privacy-down-7000000358/

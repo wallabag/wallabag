@@ -1,0 +1,9 @@
+title: //div[@id='squeeze']/h1
+strip: //div[@id='squeeze']/h1
+author: //div[@class='submitted']/a
+strip: //div[@class='submitted']/a
+convert_double_br_tags: yes
+
+
+
+test_url: http://omiliya.org/content/predchuvstvie.html

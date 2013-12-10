@@ -1,0 +1,9 @@
+# get author from string like "Posted by <author> on <date>"
+author: substring-before(substring-after(//div[@class='post']/p[@class='post-meta'], 'by'), 'on')
+
+# get date from string like "Posted by <author> on <date>"
+date: substring-after(//div[@class='post']/p[@class='post-meta'], 'on')
+
+# this keeps thumbnail images
+prune: no
+test_url: http://www.contemporist.com/2011/11/02/landing-200-lamp-by-kim-hyunjoo

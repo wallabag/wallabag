@@ -1,0 +1,28 @@
+title: substring-before(//title, '|')
+body: //*[@id='content-left']
+
+# Why is this not working here?
+# body: //*[@id='content-left']/div[@class='content-container'][2]/div[@class='content-body']/div[@class='inner-container']/div[@class='detail']
+
+
+#Header
+strip_id_or_class: 'subHead'
+strip_id_or_class: 'fl_right'
+strip_id_or_class: 'infolink'
+strip_id_or_class: 'content-head'
+strip_id_or_class: 'tab'
+strip_id_or_class: 'tab-active'
+strip: //*[contains(@class,'trenner')]
+
+# Headline
+strip: //h1/*
+strip_id_or_class: 'font16'
+
+#Images
+strip_id_or_class: 'leftimage'
+strip_id_or_class: 'rightimage'
+
+#Comments
+strip: //table
+strip: //p/following-sibling::*[0]
+test_url: http://www.mainpost.de/ueberregional/meinung/Dioxin-Skandal-bringt-Agrarministerin-in-Bedraengnis;art9517,5920211

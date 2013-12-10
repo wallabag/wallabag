@@ -1,0 +1,19 @@
+title: //div[@id="newsDetailTitle"]
+author: //span[@id="showAuthor"]
+date: //span[@id="showRefDate"]
+
+strip: //div[@id="breadcrumbs"]
+strip: //span[@id="PageTitle"]
+strip: //div[@id="newsDetailAuthorPublish"]
+
+strip: //div[@class="leadPix"]
+
+strip: //span[@id="ctl00_PageTitle"]
+strip: //div[@id="newsDetailTitle"]
+convert_double_br_tags:yes
+
+strip: //div[@id="newsDetailCredential"]
+strip: //div[@id="sidebar2"]
+strip: //div[@id="footer"]
+
+test_url: http://www.positioningmag.com/magazine/details.aspx?id=41083

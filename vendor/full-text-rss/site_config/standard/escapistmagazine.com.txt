@@ -1,0 +1,2 @@
+strip_comments: no
+test_url: http://www.escapistmagazine.com/articles/view/columns/extraconsideration/8717-Extra-Consideration-The-Story

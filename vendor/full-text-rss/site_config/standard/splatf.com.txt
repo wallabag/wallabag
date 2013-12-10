@@ -1,0 +1,5 @@
+author:string('Dan Frommer/SplatF')
+date://div[@class='postdate']
+body://div[@class='entry']
+title://div[@class='post']/h1
+test_url: http://www.splatf.com/2012/02/month-six/

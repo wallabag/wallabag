@@ -1,0 +1,33 @@
+# fforst@...
+
+# Use link to print article for single page view
+single_page_link: //a[@class="print"]
+
+# set body
+tidy: no
+body: //div[@class='artikel-content']
+
+# strip title and subtitle since we got it already
+strip: //div[@class='issue']
+strip: //div[@class='artikel-content']/h2
+
+# some authors are known and have a link, others don't
+author: //a[contains(@href, 'autor?')]
+
+#date
+date: //span[@class='article-date']
+
+# Strip author since we got him
+strip_id_or_class: author
+
+#strip captions
+strip_id_or_class: field-name-field-image-credit
+strip_id_or_class: field-name-field-article-image-subtitle
+
+# remove community functions
+strip: //div[@class='meta']
+strip: //div[@id='comments']
+
+# remove "continue on the next page" text
+strip: //p[text()="[SEITE]"]
+test_url: http://www.cicero.de/weltbuehne/ihre-wut-ist-global-krise-jugend-revolten-aufstaende-zelte/43049

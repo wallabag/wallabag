@@ -1,0 +1,7 @@
+strip: //div[@class="navigation"]
+strip: //div[@id="sidebar"]
+strip: //div[@id="post-extra-content"]
+strip: //div[@id="footer"]
+strip: //div[contains(@class, "sharing")]
+
+test_url: http://whatever.scalzi.com/2011/01/09/quick-giffords-follow-up/

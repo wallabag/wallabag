@@ -1,0 +1,6 @@
+body: //div[contains(@class, 'inhoud')]
+date: //span[@class ='published']
+author: //span[@class ='author']
+strip: //div[@class = 'grid_2']
+strip: //div[@class = 'block-citation-text']
+test_url: http://www.rolfinjapan.nl/2011/06/duizend-kraanvogels/

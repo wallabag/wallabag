@@ -1,0 +1,6 @@
+body: //p[@class='subhead' or @class='attribution'] | //div[@class='article-body']
+prune: no
+
+single_page_link: //li[@class='print']/a
+
+test_url: http://www.cjr.org/behind_the_news/from_breaking_news_to_baseless.php

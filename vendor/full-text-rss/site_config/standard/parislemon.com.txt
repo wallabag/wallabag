@@ -1,0 +1,6 @@
+title: //h2[@class="post-title"]
+author: substring-after(//div[@class="description"],'Words by ')
+date: //li[@class="date"]
+strip: //h2[@class="post-title"]
+body: //div[@class="copy"]
+test_url: http://parislemon.com/post/13462682469/the-15-inch-air

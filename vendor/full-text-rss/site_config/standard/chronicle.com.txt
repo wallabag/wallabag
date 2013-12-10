@@ -1,0 +1,17 @@
+title: //h1[contains(@class, "entry-title")]
+author: //p[contains(@class, "byline")]
+
+# blog articles (chronicle.com/blogs/*)
+body: //div[contains(@class, "abstract")]
+date: //p[contains(@class, "time")]
+
+# all (?) other articles
+body: //div[@id="article-body"]
+date: //p[contains(@class, "dateline")]
+
+# remove sidebars containing images (I assume this is desired for Instapaper)
+strip: //div[@id="related"]
+strip: //div[contains(@class, "image")]
+
+# note that if you're not a Chronicle subscriber (personally or institutionally), you'll only see the first couple of paragraphs of the article, and Instapaper will display that with some crap above and below. thank goodness for that bookmarklet
+test_url: http://chronicle.com/article/In-a-Land-of-Second-Chances/128375/

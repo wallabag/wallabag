@@ -1,0 +1,19 @@
+title: //h1
+
+author: //div[@class='articleContent small']/div[@class='textBlock']//span[@class='created']
+
+date: //div[@class='articleHead']/span[@class='created']
+
+body: //div[@id='article']
+
+strip: //span[@class='markerText']
+strip: //div[@class='articleContent small']/div[@class='textBlock']//span[@class='created']
+strip: //div[@class='sidebar']
+strip: //div[@class='starbar']
+strip: //div[@class='actions clearfix']
+strip: //div[@id='commentForm']
+strip: //div[@id='commentSent']
+strip: //div[@id='comments']
+strip: //div[@class='similarityBlock']
+
+test_url: http://www.focus.de/politik/ausland/ein-jahr-nach-bombenanschlag-u-bahn-attentaeter-von-minsk-hingerichtet_aid_724958.html

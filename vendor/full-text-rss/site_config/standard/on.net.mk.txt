@@ -1,0 +1,5 @@
+body: //div[(@class = "statija")]
+strip: //div[(@class = "relatedBlock")]
+strip: //div[(@class = "swftools")]
+strip: //table[(@class = "links")]
+test_url: http://on.net.mk/video/na-trkala/lamborghini-aventador-avionot-shto-ne-leta

@@ -1,0 +1,11 @@
+title: //div[@class="mod-courantarticleheader mod-articleheader"]/h1
+date: //div[@class="mod-courantarticlebyline mod-articlebyline"]/span[@class="pubdate"]
+author: //div[@class="mod-courantarticlebyline mod-articlebyline"]/span[3]
+
+strip_id_or_class: mod-article-byline
+strip_id_or_class: mod-article-header
+strip_id_or_class: mod-article-subtitle
+#This leaves some crud after the article, but it's better than nothing.
+#It would be ideal if we could set the body to every element matching //div[contains(@class, "mod-articletext")]/p, but it seems like body only takes the first matching element.
+
+test_url: http://articles.courant.com/2011-10-22/news/hc-green-drugsearch--1022-20111022_1_drugs-in-student-lockers-police-dogs-lockdown

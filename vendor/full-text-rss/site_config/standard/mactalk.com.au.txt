@@ -1,0 +1,4 @@
+author://div[@class="article_username_container_full"]
+date://div[@class="article_username_container"]
+body://div[@class="article cms_clear restore postcontainer"]
+test_url: http://www.mactalk.com.au/content/chat-basil-shkara-developer-taptax-2452/

@@ -1,0 +1,14 @@
+# copied from .wikipedia.org.txt
+title: //h1[@id='firstHeading' or @class='firstHeading']
+body: //div[@id = 'bodyContent']
+strip_id_or_class: editsection
+#strip_id_or_class: toc
+strip_id_or_class: vertical-navbox
+strip: //table[@id='toc'] | //div[@id='p-toc']
+strip: //div[@id='catlinks' or @id='contentSub']
+strip: //div[@id='jump-to-nav']
+strip: //div[@class='thumbcaption']//div[@class='magnify']
+strip: //table[@class='navbox']
+prune: no
+tidy: no
+test_url: http://wikitravel.org/wiki/en/index.php?title=Bangkok&printable=yes

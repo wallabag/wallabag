@@ -1,0 +1,6 @@
+strip_comments: no
+strip: //a[. = 'Subscribe']
+strip: //h1/span[@class = 'smallcopy']
+strip: //a[@class = 'skip']
+strip: //div[@id = 'logo']
+test_url: http://ask.metafilter.com/159539/Connect-ZERO-I-feel-like-an-idiot

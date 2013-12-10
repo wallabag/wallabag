@@ -1,0 +1,13 @@
+body: //div[@id="main"]
+title: //div[@id="main"]/h3
+
+# Remove &lsquo;Review&rsquo; and &lsquo;Wii&rsquo;.
+strip: //div[@class="badge"]
+
+# Remove duplicate title and country flag.
+strip: //h3
+
+# Commented out below are attempts to extract the author and date, which did not work.
+# author: //p[@class="extra "]/a
+# date: //p[@class="extra "]/span[@class="when"]
+test_url: http://www.nintendoworldreport.com/review/28400

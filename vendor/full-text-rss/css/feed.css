@@ -1,0 +1,30 @@
+/* RSS CSS Document */
+
+* { margin:0; padding:0; }
+
+p { padding: .5em 0; }
+
+h1,h2,h3,h4,h5,h6 { font-size: 1em; padding: .5em 0; }
+
+html { display:block; padding-bottom:50px; }
+body { font:80% Verdana, sans-serif; color:#000; padding:25px 0 0 35px; }
+
+a { color:#5BAB03; text-decoration:none; }
+a:hover { color:#5BAB03; text-decoration: underline;}
+
+ul { margin-left:1.5em; }
+li { margin-bottom:0.4em; }
+div#content>ul { list-style-type: none; }
+div.article>li>a { font-weight:bold; font-size: 1.3em;}
+
+
+div { line-height:1.6em; }
+
+div#content { background:#fff; margin-right:15px; padding-left:1em;}
+div#content div { margin:0 1em 1em 0; }
+
+div#explanation { padding:1em 1em 0 1em; border:1px solid #ddd; background:#efefef; margin:0 2em 2em 0; }
+div#explanation h1 { font-weight:normal; font-size:1.8em; margin-bottom:0.3em; }
+div#explanation p { margin-bottom:1em; }
+
+.small { font-size: .7em; color: #666; }

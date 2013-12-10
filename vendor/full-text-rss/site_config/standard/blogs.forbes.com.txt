@@ -1,0 +1,2 @@
+body: //div[@class='entry']
+test_url: http://blogs.forbes.com/adamhartung/2011/04/08/apple-is-better-managed-than-microsoft/

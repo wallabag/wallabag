@@ -1,0 +1,19 @@
+title: //div[@class='newsdetbd']
+body: //div[@id='innerleft'] 
+#//p[@class = 'plnht']
+strip_image_src: /albums/
+strip: //div[@class='mrrt']
+prune: yes
+strip_id_or_class: 'fdpd'
+strip_id_or_class: 'epapt' 
+strip_id_or_class: 'newsrtwd'
+strip_id_or_class: 'padtp'
+strip_id_or_class: 'newdt'
+strip_id_or_class: 'newdlt'
+strip: //div[@id='selNotes']
+strip_id_or_class: 'clsNotes'
+strip_id_or_class: 'clear'
+strip_id_or_class: 'cmtwrap'
+strip_id_or_class: 'sess'
+strip_id_or_class: 'parents'
+test_url: http://www.dinamalar.com/News_Detail.asp?Id=295725

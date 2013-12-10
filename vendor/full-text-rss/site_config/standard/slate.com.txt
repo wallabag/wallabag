@@ -1,0 +1,19 @@
+title: //h1[@class="sl-art-head-dek"]
+body: //article//div[@class='sl-art-body']/div[contains(@class, 'body')]
+strip: //div[@class="department_kicker"]
+strip: //div[@id="insider_ad_wrapper" or @id="insider_ad_inner"]
+strip: //div[@id="bottom_sponsored_links"]
+strip: //div[@class="sl-art-ad-midflex"]
+#strip: //dl
+#strip: //p[em/a[contains(@href, 'facebook.com')]]
+prune: no
+
+author: //div[@id='author_bio']//a[contains(@href, '/author/')]
+author: //a[contains(@href, '/authors.')]
+
+date: substring-before(substring-after(//span[@class='sl-art-byline'], 'Posted '), ', at ')
+
+single_page_link: //a[@class='sl-art-sinpage']
+
+test_url: http://www.slate.com/id/2274583/pagenum/all/
+test_url: http://www.slate.com/id/2293116/

@@ -1,0 +1,21 @@
+# Remove sliders
+strip: //*[(@class="slides_container")]
+strip: //div[(@id="slides_two")]
+
+# Remove tag cloud
+strip: //span[(@class="secao")]
+
+# Fix date article
+# TODO
+
+# Remove other stuff
+strip: //div[(@id="idc-container")]
+strip: //div[(@id="idc-noscript")]
+strip: //div[(@class="linkwithin_div")]
+strip: //div[(@class="navPosts")]
+strip: //div[(@id="lateral")]
+strip: //div[(@id="autor")]
+strip: //div[(@id="rodape")]
+strip: //div[(@id="post")]/h1
+strip: //div[(@id="post")]/div[(@id="boxInformacoes")]
+test_url: http://macmagazine.com.br/2011/08/01/skype-para-ipad-esta-finalmente-chegando-a-app-store/

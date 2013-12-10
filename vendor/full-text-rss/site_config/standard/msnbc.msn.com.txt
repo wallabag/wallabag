@@ -1,0 +1,21 @@
+title: //title
+author: //div[@id='byline']
+
+date: //div[contains(@class,'timestamp')]/abbr/text()
+
+body: //div[@id='intellitTXT']
+
+strip: //div[@id='byline']
+strip: //div[contains(@class,'timestamp')]
+strip: //div[contains(@class, 'ad-label')]
+strip: //div[contains(@class, 'ad-break')]
+strip: //span[contains(@class, 'x-video')]
+strip: //span[contains(@class, 'inline')]
+strip: //div[contains(@class, 'video')]
+strip: //div[contains(@class, 'discuss')]
+strip: //div[@id='most-popular']
+strip: //div[contains(@class,'drawer')]
+strip: //*[contains(@class, 'hide')]
+
+footnotes: no
+test_url: http://www.msnbc.msn.com/id/44748412/ns/business-world_business/#.TolUv-vfDbE

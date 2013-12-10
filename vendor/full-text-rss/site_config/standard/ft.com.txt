@@ -1,0 +1,5 @@
+body: //div[contains(@class, 'ft-story-body')]
+
+author: substring-after(//div[contains(@class, 'ft-story-header')]/p[1], 'By ')
+date: substring-before(substring-after(//div[contains(@class, 'ft-story-header')]/p[2], 'Published:'), '|')
+test_url: http://www.ft.com/cms/s/2/e1be4b5a-620c-11e0-8ee4-00144feab49a.html

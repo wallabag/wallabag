@@ -1,0 +1,15 @@
+title: substring-before(//title,'| /Film')
+date: substring-before(substring-after(//p[@class='post-info'],'Posted on '),'by')
+strip: //div[@class='pm-left']
+strip: //div[@class='pm-right']
+strip: //h2/span
+next_page_link: //h2/strong/a
+strip: //h2/strong/a
+strip: //p[contains(text(),'we have to split this post over')]
+strip: //p[@class='post-info']
+strip: //h1/a
+strip: //img[contains(@src,'siteimages/authors')]
+strip: //div[@id='header']
+strip: //div[@class='topad-right']
+strip: //strong[contains(text(),'Cool Posts From Around the Web:')]
+test_url: http://www.slashfilm.com/superhero-bits-206/

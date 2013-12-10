@@ -1,0 +1,8 @@
+title: //h3[@class='jhl']
+body: //div[@class='storyBody']
+strip: //p[contains(., 'Please Add Comments')]//following-sibling::*
+strip: //p[contains(., 'Please Add Comments')]
+strip: //p[em[contains(., 'This story has been updated from its original version')]]
+strip: //hr
+
+test_url: http://montreal.ctv.ca/servlet/an/local/CTVNews/20110914/mtl_construction_110914/20110915?hub=MontrealHome

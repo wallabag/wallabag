@@ -1,0 +1,6 @@
+title: //h2
+author: //*[@id='main']/div/a[1]
+date: substring-before(substring-after(//div[@class='meta'],'&bull;'),'&bull;')
+body: //div[@id='main']
+strip: //div[@class='meta']
+test_url: http://kottke.org/08/02/king-of-kong-a-fistful-of-quarters

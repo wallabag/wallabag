@@ -1,0 +1,14 @@
+# Please change host to *.ifeng.com
+# same config works well on other subdomains
+# tested on following links
+# http://phtv.ifeng.com/program/qqsrx/detail_2012_11/28/19613849_0.shtml
+# http://finance.ifeng.com/news/corporate/20121128/7359279.shtml
+
+tidy:no
+
+title://h1[contains(@id,'artical_topic')]
+
+body://div[contains(@id,'artical_real')]
+
+next_page_link://*[contains(@id,'pagenext')]
+test_url: http://news.ifeng.com/history/zhongguojindaishi/detail_2012_04/01/13605159_0.shtml

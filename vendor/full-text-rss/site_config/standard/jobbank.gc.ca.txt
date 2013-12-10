@@ -1,0 +1,5 @@
+body: //div[@id='formatCont_en']
+
+prune: no
+
+test_url: http://www.jobbank.gc.ca/detail-eng.aspx?Source=JobPosting&OrderNum=6397922

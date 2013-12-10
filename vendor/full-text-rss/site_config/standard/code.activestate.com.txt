@@ -1,0 +1,10 @@
+body: //div[@id='content']
+title: //div[@id='page_header']/h1
+
+strip_id_or_class: 'lineno'
+strip_id_or_class: 'block-toolbar-button'
+strip_id_or_class: 'recipe_score'
+strip: //div[@id='recipe_tools']
+strip: //div[@id='addcomment']
+
+test_url: http://code.activestate.com/recipes/500261-named-tuples/

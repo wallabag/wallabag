@@ -1,0 +1,3 @@
+title: //h2
+body: //div[@class='body']
+test_url: http://scraplab.net/2010/10/26/please-keep-your-belongings-with-you-at-all-times/

@@ -1,0 +1,5 @@
+body: //div[@id="gc-pagecontent"]
+strip: //a[@class="backtotop"]
+prune: no
+
+test_url: http://code.google.com/apis/analytics/docs/tracking/gaTrackingEcommerce.html

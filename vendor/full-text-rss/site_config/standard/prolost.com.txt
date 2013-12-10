@@ -1,0 +1,4 @@
+body: //div[@class='body']
+title: //h2[@class='title']
+date: //span[@class='posted-on']
+test_url: http://prolost.com/blog/2011/10/13/real-men-comp-with-film.html

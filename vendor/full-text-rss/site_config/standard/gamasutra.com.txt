@@ -1,0 +1,20 @@
+# default view title
+title: //span[@class='newsTitle']
+# print view title
+title: //h3[@class='title']
+
+# default view author
+author: //span[@class='newsAuth']/a
+author: substring-after(//span[@class='newsAuth'], 'by ')
+
+# default view date
+date: //td[@class='newsDate']
+
+# default view body
+body: //td[@class='featureText']
+body: //td[@class='newsText']
+
+strip: //h3[@class='title']
+
+single_page_link: //a[contains(@href, '?print=1')]
+test_url: http://www.gamasutra.com/view/feature/132559/staying_power_rethinking_feedback_.php
