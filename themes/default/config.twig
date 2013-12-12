@@ -109,5 +109,7 @@
             </ul>
 
             <h2>{% trans "Export your poche datas" %}</h2>
+            {% if constant('STORAGE') == 'sqlite' %}
+            <p><a href="?download" target="_blank">{% trans "Click here" %}</a> {% trans "to download your database." %}</p>{% endif %}
             <p><a href="?export" target="_blank">{% trans "Click here" %}</a> {% trans "to export your poche datas." %}</p>
 {% endblock %}

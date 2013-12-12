@@ -249,4 +249,28 @@ class Tools
         $lang = explode('.', $userlanguage);
         return str_replace('_', '-', $lang[0]);
     }
+
+    public static function status($status_code)
+    {
+        if (strpos(php_sapi_name(), 'apache') !== false) {
+
+            header('HTTP/1.0 '.$status_code);
+        }
+        else {
+
+            header('Status: '.$status_code);
+        }
+    }
+
+
+    public static function download_db() {
+        header('Content-Disposition: attachment; filename="poche.sqlite.gz"');
+        self::status(200);
+
+        header('Content-Transfer-Encoding: binary');
+        header('Content-Type: application/octet-stream');
+        echo gzencode(file_get_contents(STORAGE_SQLITE));
+
+        exit;
+    }
 }
