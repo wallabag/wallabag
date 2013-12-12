@@ -249,4 +249,75 @@ class Database {
     public function getLastId($column = '') {
         return $this->getHandle()->lastInsertId($column);
     }
+
+    public function retrieveAllTags() {
+        $sql = "SELECT * FROM tags";
+        $query = $this->executeQuery($sql, array());
+        $tags = $query->fetchAll();
+
+        return $tags;
+    }
+
+    public function retrieveTag($id) {
+        $tag  = NULL;
+        $sql    = "SELECT * FROM tags WHERE id=?";
+        $params = array(intval($id));
+        $query  = $this->executeQuery($sql, $params);
+        $tag  = $query->fetchAll();
+
+        return isset($tag[0]) ? $tag[0] : null;
+    }
+
+    public function retrieveEntriesByTag($tag_id) {
+        $sql = 
+            "SELECT * FROM entries
+            LEFT JOIN tags_entries ON tags_entries.entry_id=entries.id
+            WHERE tags_entries.tag_id = ?";
+        $query = $this->executeQuery($sql, array($tag_id));
+        $entries = $query->fetchAll();
+
+        return $entries;
+    }
+
+    public function retrieveTagsByEntry($entry_id) {
+        $sql = 
+            "SELECT * FROM tags
+            LEFT JOIN tags_entries ON tags_entries.tag_id=tags.id
+            WHERE tags_entries.entry_id = ?";
+        $query = $this->executeQuery($sql, array($entry_id));
+        $tags = $query->fetchAll();
+
+        return $tags;
+    }
+
+    public function removeTagForEntry($entry_id, $tag_id) {
+        $sql_action     = "DELETE FROM tags_entries WHERE tag_id=? AND entry_id=?";
+        $params_action  = array($tag_id, $entry_id);
+        $query          = $this->executeQuery($sql_action, $params_action);
+        return $query;
+    }
+
+    public function retrieveTagByValue($value) {
+        $tag  = NULL;
+        $sql    = "SELECT * FROM tags WHERE value=?";
+        $params = array($value);
+        $query  = $this->executeQuery($sql, $params);
+        $tag  = $query->fetchAll();
+
+        return isset($tag[0]) ? $tag[0] : null;
+    }
+
+    public function createTag($value) {
+        $sql_action = 'INSERT INTO tags ( value ) VALUES (?)';
+        $params_action = array($value);
+        $query = $this->executeQuery($sql_action, $params_action);
+        return $query;
+    }
+
+    public function setTagToEntry($tag_id, $entry_id) {
+        $sql_action = 'INSERT INTO tags_entries ( tag_id, entry_id ) VALUES (?, ?)';
+        $params_action = array($tag_id, $entry_id);
+        $query = $this->executeQuery($sql_action, $params_action);
+        return $query;
+    }
 }

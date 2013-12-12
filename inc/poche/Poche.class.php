@@ -397,6 +397,36 @@ class Poche
                     Tools::redirect();
                 }
                 break;
+            case 'add_tag' :
+                $tags = explode(',', $_POST['value']);
+                $entry_id = $_POST['entry_id'];
+                foreach($tags as $key => $tag_value) {
+                    $value = trim($tag_value);
+                    $tag = $this->store->retrieveTagByValue($value);
+
+                    if (is_null($tag)) {
+                        # we create the tag
+                        $tag = $this->store->createTag($value);
+                        $sequence = '';
+                        if (STORAGE == 'postgres') {
+                            $sequence = 'tags_id_seq';
+                        }
+                        $tag_id = $this->store->getLastId($sequence);
+                    }
+                    else {
+                        $tag_id = $tag['id'];
+                    }
+
+                    # we assign the tag to the article
+                    $this->store->setTagToEntry($tag_id, $entry_id);
+                }
+                Tools::redirect();
+                break;
+            case 'remove_tag' :
+                $tag_id = $_GET['tag_id'];
+                $this->store->removeTagForEntry($id, $tag_id);
+                Tools::redirect();
+                break;
             default:
                 break;
         }
@@ -430,6 +460,31 @@ class Poche
                 );
                 Tools::logm('config view');
                 break;
+            case 'edit-tags':
+                # tags
+                $tags = $this->store->retrieveTagsByEntry($id);
+                $tpl_vars = array(
+                    'entry_id' => $id,
+                    'tags' => $tags,
+                );
+                break;
+            case 'tag':
+                $entries = $this->store->retrieveEntriesByTag($id);
+                $tag = $this->store->retrieveTag($id);
+                $tpl_vars = array(
+                    'tag' => $tag,
+                    'entries' => $entries,
+                );
+                break;
+            case 'tags':
+                $token = $this->user->getConfigValue('token');
+                $tags = $this->store->retrieveAllTags();
+                $tpl_vars = array(
+                    'token' => $token,
+                    'user_id' => $this->user->getId(),
+                    'tags' => $tags,
+                );
+                break;
             case 'view':
                 $entry = $this->store->retrieveOneById($id, $this->user->getId());
                 if ($entry != NULL) {
@@ -443,12 +498,16 @@ class Poche
 
                     # flattr checking
                     $flattr = new FlattrItem();
-                    $flattr->checkItem($entry['url'],$entry['id']);
+                    $flattr->checkItem($entry['url'], $entry['id']);
+
+                    # tags
+                    $tags = $this->store->retrieveTagsByEntry($entry['id']);
 
                     $tpl_vars = array(
-                    'entry' => $entry,
-                    'content' => $content,
-                    'flattr' => $flattr
+                        'entry' => $entry,
+                        'content' => $content,
+                        'flattr' => $flattr,
+                        'tags' => $tags
                     );
                 }
                 else {
@@ -859,9 +918,9 @@ class Poche
         $_SESSION['poche_user']->setConfig($currentConfig);
     }
 
-    public function generateFeeds($token, $user_id, $type = 'home')
+    public function generateFeeds($token, $user_id, $tag_id, $type = 'home')
     {
-        $allowed_types = array('home', 'fav', 'archive');
+        $allowed_types = array('home', 'fav', 'archive', 'tag');
         $config = $this->store->getConfigUser($user_id);
 
         if (!in_array($type, $allowed_types) ||
@@ -876,7 +935,13 @@ class Poche
         $feed->setChannelElement('updated', date(DATE_RSS , time()));
         $feed->setChannelElement('author', 'poche');
 
-        $entries = $this->store->getEntriesByView($type, $user_id);
+        if ($type == 'tag') {
+            $entries = $this->store->retrieveEntriesByTag($tag_id);
+        }
+        else {
+            $entries = $this->store->getEntriesByView($type, $user_id);
+        }
+
         if (count($entries) > 0) {
             foreach ($entries as $entry) {
                 $newItem = $feed->createNewItem();

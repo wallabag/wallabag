@@ -176,6 +176,12 @@ a:visited {
     text-decoration: none;
 }
 
+#article .tags {
+    font-size: 0.8em;
+    color: #888;
+    padding-bottom: 5px;
+}
+
 .backhome {
     display: inline;
 }

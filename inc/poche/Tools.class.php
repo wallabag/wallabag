@@ -88,39 +88,16 @@ class Tools
 
     public static function getTplFile($view)
     {
-        $default_tpl = 'home.twig';
-        
-        switch ($view) {
-            case 'install':
-                $tpl_file = 'install.twig';
-                break;
-            case 'import';
-                $tpl_file = 'import.twig';
-                break;
-            case 'export':
-                $tpl_file = 'export.twig';
-                break;
-            case 'config':
-                $tpl_file = 'config.twig';
-                break;
-            case 'view':
-                $tpl_file = 'view.twig';
-                break;
-            
-            case 'login':
-                $tpl_file = 'login.twig';
-                break;
-                
-            case 'error':
-                $tpl_file = 'error.twig';
-                break;
-                
-            default:
-                $tpl_file = $default_tpl;
-                break;
+        $views = array(
+            'install', 'import', 'export', 'config', 'tags',
+            'edit-tags', 'view', 'login', 'error', 'tag'
+            );
+
+        if (in_array($view, $views)) {
+            return $view . '.twig';
         }
-        
-        return $tpl_file;
+
+        return 'home.twig';
     }
 
     public static function getFile($url)
