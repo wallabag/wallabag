@@ -20,7 +20,6 @@ class EntryRepository
     //TODO don't hardcode the user ;)
     public function saveEntry($entry, $userId = 1) {
 
-        $sql = "INSERT INTO entries (url, title, content, user_id) values (:url, :title, :content, :user_id)";
         return $this->db->insert('entries', array_merge($entry, array('user_id' => $userId)));
     }
 }
