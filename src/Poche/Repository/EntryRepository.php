@@ -14,6 +14,7 @@ class EntryRepository
     public function getEntries($userId = 1) {
         $sql = "SELECT * FROM entries where user_id = ?";
         $entries = $this->db->fetchAll($sql, array($userId));
+
         return $entries ? $entries : array();
     }
 
