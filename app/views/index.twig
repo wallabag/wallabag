@@ -3,7 +3,7 @@
 {% block content %}
 
 {% if entries is empty %}
-<div class="messages warning"><p>No link available here!</p></div>
+<div class="messages warning"><p>{{ 'No link available here!'|trans }}</p></div>
 {% else %}
 
     {% for entry in entries %}
@@ -12,7 +12,7 @@
         <p>{{ entry.content|striptags|slice(0, 300) }}...</p>
 
     {% endfor %}
-    <p><a href="index.php/add">poche a new link</a></p>
+    <p><a href="index.php/add">{{ 'poche a new link'|trans }}</a></p>
 
 {% endif %}
 
