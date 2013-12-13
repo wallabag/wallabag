@@ -6,9 +6,9 @@ use Symfony\Component\HttpFoundation\Request;
 $front = $app['controllers_factory'];
 $front->get('/', function () use ($app) {
 
-    $entry = new Entry(1, "Titre de test");
+    $entries = $app['entry_api']->getEntries();
 
-    return $app['twig']->render('index.twig', array('entry' => $entry));
+    return $app['twig']->render('index.twig', array('entries' => $entries));
 });
 
 $front->match('/add', function (Request $request) use ($app) {
@@ -23,8 +23,8 @@ $front->match('/add', function (Request $request) use ($app) {
     if ($form->isValid()) {
         $data = $form->getData();
 
-        // do something with the url
-        
+        $entry = $app['entry_api']->createAndSaveEntryFromUrl($data['url']);
+
         return $app->redirect('/');
     }
 

@@ -1,6 +1,8 @@
 {% extends layout %}
 
 {% block content %}
-{{ entry.id }} - {{ entry.title }}
+{% for entry in entries %}
+    {{ entry.id }} - {{ entry.title }}
+{% endfor %}
 <p><a href="index.php/add">poche a new link</a></p>
 {% endblock %}

@@ -29,4 +29,11 @@ class EntryApi
         return $entry;
     }
 
+
+    public function createAndSaveEntryFromUrl($url) {
+
+        $entry = $this->createEntryFromUrl($url);
+        return $this->entryRepository->saveEntry($entry);
+
+    }
 }
