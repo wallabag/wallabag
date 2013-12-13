@@ -1,8 +1,19 @@
 {% extends layout %}
 
 {% block content %}
-{% for entry in entries %}
-    {{ entry.id }} - {{ entry.title }}
-{% endfor %}
-<p><a href="index.php/add">poche a new link</a></p>
+
+{% if entries is empty %}
+<div class="messages warning"><p>No link available here!</p></div>
+{% else %}
+
+    {% for entry in entries %}
+        {{ entry.id }} - {{ entry.title }}
+
+        <p>{{ entry.content|striptags|slice(0, 300) }}...</p>
+
+    {% endfor %}
+    <p><a href="index.php/add">poche a new link</a></p>
+
+{% endif %}
+
 {% endblock %}
