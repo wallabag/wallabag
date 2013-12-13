@@ -19,7 +19,7 @@ class ApiTest extends PocheWebTestCase
             )
         );
 
-        $this->assertEquals($client->getResponse()->getContent(), '[]');
+        $this->assertEquals('[]', $client->getResponse()->getContent());
 
     }
 
@@ -42,7 +42,7 @@ class ApiTest extends PocheWebTestCase
             )
         );
 
-        $this->assertEquals($client->getResponse()->getContent(),'{"id":"1","url":"http:\/\/deboutlesgens.com\/blog\/le-courage-de-vivre-consciemment\/","title":"Le courage de vivre consciemment","content":"Test content","updated":null,"status":null,"bookmark":"0","fetched":"1","user_id":"1"}');
+        $this->assertEquals('[{"id":"1","url":"http:\/\/deboutlesgens.com\/blog\/le-courage-de-vivre-consciemment\/","title":"Le courage de vivre consciemment","content":"Test content","updated":null,"status":null,"bookmark":"0","fetched":"1","user_id":"1"}]', $client->getResponse()->getContent());
 
     }
 

@@ -12,11 +12,9 @@ class EntryRepository
 
     //TODO don't hardcode the user ;)
     public function getEntries($userId = 1) {
-        $sql = "SELECT * FROM entries where user_id = :userId";
-        $stmt = $this->db->prepare($sql);
-        $stmt->bindValue('userId', $userId);
-        $entries = $stmt->fetchAll();
-        return $entries;
+        $sql = "SELECT * FROM entries where user_id = ?";
+        $entries = $this->db->fetchAll($sql, array($userId));
+        return $entries ? $entries : array();
     }
 
     //TODO don't hardcode the user ;)
