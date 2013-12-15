@@ -3,17 +3,17 @@
 {% block content %}
         <div id="article_toolbar">
             <ul>
-                <li><a href="./" title="{% trans "back to home" %}" class="tool back"><span>{% trans "back to home" %}</span></a></li>
-                <li><a href="#top" title="{% trans "back to top" %}" class="tool top"><span>{% trans "back to top" %}</span></a></li>
+                <li><a href="./" title="{% trans "Return home" %}" class="tool back"><span>{% trans "Return home" %}</span></a></li>
+                <li><a href="#top" title="{% trans "Back to top" %}" class="tool top"><span>{% trans "Back to top" %}</span></a></li>
                 <li><a href="{{ entry.url|e }}" target="_blank" title="{% trans "original" %} : {{ entry.title|e }}" class="tool link"><span>{{ entry.url | e | getDomain }}</span></a></li>
-                <li><a title="{% trans "toggle mark as read" %}" class="tool {% if entry.is_read == 0 %}archive-off{% else %}archive{% endif %}" href="./?action=toggle_archive&amp;id={{ entry.id|e }}"><span>{% trans "toggle mark as read" %}</span></a></li>
-                <li><a title="{% trans "toggle favorite" %}" class="tool {% if entry.is_fav == 0 %}fav-off{% else %}fav{% endif %}" href="./?action=toggle_fav&amp;id={{ entry.id|e }}"><span>{% trans "toggle favorite" %}</span></a></li>
-                <li><a title="{% trans "delete" %}" class="tool delete" href="./?action=delete&amp;id={{ entry.id|e }}"><span>{% trans "delete" %}</span></a></li>
-                {% if constant('SHARE_TWITTER') == 1 %}<li><a href="https://twitter.com/home?status={{entry.title|url_encode}}%20{{ entry.url|url_encode }}%20via%20@getpoche" target="_blank" class="tool twitter" title="{% trans "tweet" %}"><span>{% trans "tweet" %}</span></a></li>{% endif %}
-                {% if constant('SHARE_MAIL') == 1 %}<li><a href="mailto:?subject={{ entry.title|url_encode }}&amp;body={{ entry.url|url_encode }}%20via%20@getpoche" class="tool email" title="{% trans "email" %}"><span>{% trans "email" %}</span></a></li>{% endif %}
+                <li><a title="{% trans "Mark as read" %}" class="tool {% if entry.is_read == 0 %}archive-off{% else %}archive{% endif %}" href="./?action=toggle_archive&amp;id={{ entry.id|e }}"><span>{% trans "Toggle mark as read" %}</span></a></li>
+                <li><a title="{% trans "Favorite" %}" class="tool {% if entry.is_fav == 0 %}fav-off{% else %}fav{% endif %}" href="./?action=toggle_fav&amp;id={{ entry.id|e }}"><span>{% trans "Toggle favorite" %}</span></a></li>
+                <li><a title="{% trans "Delete" %}" class="tool delete" href="./?action=delete&amp;id={{ entry.id|e }}"><span>{% trans "Delete" %}</span></a></li>
+                {% if constant('SHARE_TWITTER') == 1 %}<li><a href="https://twitter.com/home?status={{entry.title|url_encode}}%20{{ entry.url|url_encode }}%20via%20@getpoche" target="_blank" class="tool twitter" title="{% trans "Tweet" %}"><span>{% trans "Tweet" %}</span></a></li>{% endif %}
+                {% if constant('SHARE_MAIL') == 1 %}<li><a href="mailto:?subject={{ entry.title|url_encode }}&amp;body={{ entry.url|url_encode }}%20via%20@getpoche" class="tool email" title="{% trans "Email" %}"><span>{% trans "Email" %}</span></a></li>{% endif %}
                 {% if constant('SHARE_SHAARLI') == 1 %}<li><a href="{{ constant('SHAARLI_URL') }}/index.php?post={{ entry.url|url_encode }}&amp;title={{ entry.title|url_encode }}" target="_blank" class="tool shaarli" title="{% trans "shaarli" %}"><span>{% trans "shaarli" %}</span></a></li>{% endif %}
                 {% if constant('FLATTR') == 1 %}{% if flattr.status == constant('FLATTRABLE') %}<li><a href="http://flattr.com/submit/auto?url={{ entry.url }}" class="tool flattr" target="_blank" title="{% trans "flattr" %}"><span>{% trans "flattr" %}</span></a></li>{% elseif flattr.status == constant('FLATTRED') %}<li><a href="{{ flattr.flattrItemURL }}" class="tool flattr" target="_blank" title="{% trans "flattr" %}"><span>{% trans "flattr" %}</span>{{ flattr.numflattrs }}</a></li>{% endif %}{% endif %}
-                <li><a href="mailto:support@inthepoche.com?subject=Wrong%20display%20in%20poche&amp;body={{ entry.url|url_encode }}" title="{% trans "this article appears wrong?" %}" class="tool bad-display"><span>{% trans "this article appears wrong?" %}</span></a></li>
+                <li><a href="mailto:support@inthepoche.com?subject=Wrong%20display%20in%20poche&amp;body={{ entry.url|url_encode }}" title="{% trans "Report article appears wrong?" %}" class="tool bad-display"><span>{% trans "this article appears wrong?" %}</span></a></li>
             </ul>
         </div>
         <div id="article">
@@ -21,7 +21,7 @@
                 <h1>{{ entry.title|raw }}</h1>
             </header>
             <aside class="tags">
-                tags: {% for tag in tags %}<a href="./?view=tag&amp;id={{ tag.id }}">{{ tag.value }}</a> {% endfor %}<a href="./?view=edit-tags&amp;id={{ entry.id|e }}" title="{% trans "edit tags" %}">✎</a>
+                tags: {% for tag in tags %}<a href="./?view=tag&amp;id={{ tag.id }}">{{ tag.value }}</a> {% endfor %}<a href="./?view=edit-tags&amp;id={{ entry.id|e }}" title="{% trans "Edit tags" %}">✎</a>
             </aside>
             <article>
                 {{ content | raw }}
