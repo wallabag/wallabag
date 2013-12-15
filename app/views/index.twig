@@ -1,18 +1,21 @@
 {% extends layout %}
 
 {% block content %}
+{% set count = entries|length %}
 
 {% if entries is empty %}
 <div class="messages warning"><p>{{ 'No link available here!'|trans }}</p></div>
 {% else %}
-
+    {{ 'msg.results'|transchoice(count) }}
     {% for entry in entries %}
+    <div>
         {{ entry.id }} - {{ entry.title }}
 
         <p>{{ entry.content|striptags|slice(0, 300) }}...</p>
 
+    </div>
     {% endfor %}
-    <p><a href="index.php/add">{{ 'poche a new link'|trans }}</a></p>
+    <p><a href="index.php/add">{{ 'entry.add'|trans }}</a></p>
 
 {% endif %}
 

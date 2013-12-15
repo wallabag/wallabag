@@ -5,6 +5,7 @@ use Poche\Api\ContentFullTextRssApi;
 use Poche\Repository\EntryRepository;
 
 use Silex\Provider\FormServiceProvider;
+use Symfony\Component\Translation\Loader\PoFileLoader;
 
 $app = new Silex\Application();
 
@@ -32,8 +33,17 @@ $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
 $app->register(new FormServiceProvider());
 
 $app->register(new Silex\Provider\TranslationServiceProvider(), array(
-    'translator.messages' => array(),
+    'locale_fallbacks' => array('en'),
 ));
+
+$app['translator'] = $app->share($app->extend('translator', function($translator, $app) {
+    $translator->addLoader('po', new PoFileLoader());
+
+    $translator->addResource('po', __DIR__.'/locales/fr_FR.utf8/LC_MESSAGES/fr_FR.utf8.po', 'fr');
+    $translator->addResource('po', __DIR__.'/locales/en_EN.utf8/LC_MESSAGES/en_EN.utf8.po', 'en');
+
+    return $translator;
+}));
 
 $app['entry_repository'] = $app->share(function ($app) {
     return new EntryRepository($app['db']);

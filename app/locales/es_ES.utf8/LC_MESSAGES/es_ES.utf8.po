@@ -1,0 +1,230 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Nicolas Lœuillet <nicolas.loeuillet@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+
+msgid "config"
+msgstr "configuración"
+
+msgid "Poching a link"
+msgstr "Pochear un enlace"
+
+msgid "read the documentation"
+msgstr "leer la documentación"
+
+msgid "by filling this field"
+msgstr "rellenando este campo"
+
+msgid "poche it!"
+msgstr "pochéalo!"
+
+msgid "Updating poche"
+msgstr "Actualizar"
+
+msgid "your version"
+msgstr "su versión"
+
+msgid "latest stable version"
+msgstr "ultima versión estable"
+
+msgid "a more recent stable version is available."
+msgstr "una versión estable más reciente está disponible."
+
+msgid "you are up to date."
+msgstr "estás actualizado."
+
+msgid "latest dev version"
+msgstr "ultima versión de desarollo"
+
+msgid "a more recent development version is available."
+msgstr "una versión de desarollo más reciente está disponible."
+
+msgid "Change your password"
+msgstr "Modificar tu contraseña"
+
+msgid "New password:"
+msgstr "Nueva contraseña :"
+
+msgid "Password"
+msgstr "Contraseña"
+
+msgid "Repeat your new password:"
+msgstr "Repetir la nueva contraseña :"
+
+msgid "Update"
+msgstr "Actualizar"
+
+msgid "Import"
+msgstr "Importar"
+
+msgid "Please execute the import script locally, it can take a very long time."
+msgstr ""
+"Por favor, ejecute la importación en local, esto puede demorar un tiempo."
+
+msgid "More infos in the official doc:"
+msgstr "Más información en la documentación oficial :"
+
+msgid "import from Pocket"
+msgstr "importación desde Pocket"
+
+msgid "import from Readability"
+msgstr "importación desde Readability"
+
+msgid "import from Instapaper"
+msgstr "importación desde Instapaper"
+
+msgid "Export your poche datas"
+msgstr "Exportar sus datos de poche"
+
+msgid "Click here"
+msgstr "Haga clic aquí"
+
+msgid "to export your poche datas."
+msgstr "para exportar sus datos de poche."
+
+msgid "back to home"
+msgstr "volver a la página de inicio"
+
+msgid "installation"
+msgstr "instalación"
+
+msgid "install your poche"
+msgstr "instala tu Poche"
+
+msgid ""
+"Poche is still not installed. Please fill the below form to install it. "
+"Don't hesitate to <a href='http://inthepoche.com/doc'>read the documentation "
+"on poche website</a>."
+msgstr ""
+"Poche todavia no està instalado. Por favor, completa los campos siguientes "
+"para instalarlo. No dudes de <a href='http://inthepoche.com/doc'>leer la "
+"documentación en el sitio de Poche</a>."
+
+msgid "Login"
+msgstr "Nombre de usuario"
+
+msgid "Repeat your password"
+msgstr "Repita su contraseña"
+
+msgid "Install"
+msgstr "Instalar"
+
+msgid "back to top"
+msgstr "volver arriba"
+
+msgid "favoris"
+msgstr "preferidos"
+
+msgid "archive"
+msgstr "archivos"
+
+msgid "unread"
+msgstr "sin leer"
+
+msgid "by date asc"
+msgstr "por fecha ascendiente"
+
+msgid "by date"
+msgstr "por fecha"
+
+msgid "by date desc"
+msgstr "por fecha descendiente"
+
+msgid "by title asc"
+msgstr "por titulo ascendiente"
+
+msgid "by title"
+msgstr "por título"
+
+msgid "by title desc"
+msgstr "por título descendiente"
+
+msgid "No link available here!"
+msgstr "¡No hay ningún enlace disponible por aquí!"
+
+msgid "toggle mark as read"
+msgstr "marcar como leído"
+
+msgid "toggle favorite"
+msgstr "preferido"
+
+msgid "delete"
+msgstr "eliminar"
+
+msgid "original"
+msgstr "original"
+
+msgid "results"
+msgstr "resultados"
+
+msgid "tweet"
+msgstr "tweetear"
+
+msgid "email"
+msgstr "enviar por mail"
+
+msgid "shaarli"
+msgstr "shaarli"
+
+msgid "flattr"
+msgstr "flattr"
+
+msgid "this article appears wrong?"
+msgstr "este articulo no se ve bien?"
+
+msgid "create an issue"
+msgstr "crear un ticket"
+
+msgid "or"
+msgstr "o"
+
+msgid "contact us by mail"
+msgstr "contactarnos por mail"
+
+msgid "plop"
+msgstr "plop"
+
+msgid "home"
+msgstr "inicio"
+
+msgid "favorites"
+msgstr "preferidos"
+
+msgid "logout"
+msgstr "cerrar sesión"
+
+msgid "powered by"
+msgstr "hecho con"
+
+msgid "debug mode is on so cache is off."
+msgstr "el modo de depuración está activado, así que la cache está desactivada."
+
+msgid "your poche version:"
+msgstr "tu versión de Poche:"
+
+msgid "storage:"
+msgstr "almacenamiento:"
+
+msgid "login to your poche"
+msgstr "conectarse a tu Poche"
+
+msgid "you are in demo mode, some features may be disabled."
+msgstr ""
+"este es el modo de demostración, algunas funcionalidades pueden estar "
+"desactivadas."
+
+msgid "Stay signed in"
+msgstr "Seguir conectado"
+
+msgid "(Do not check on public computers)"
+msgstr "(no marcar en un ordenador público)"
+
+msgid "Sign in"
+msgstr "Iniciar sesión"
