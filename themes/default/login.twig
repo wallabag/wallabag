@@ -5,10 +5,10 @@
     {% if http_auth == 0 %}
             <form method="post" action="?login" name="loginform">
                 <fieldset class="w500p center">
-                    <h2 class="mbs txtcenter">{% trans "login to your poche" %}</h2>
+                    <h2 class="mbs txtcenter">{% trans "Login to poche" %}</h2>
                     {% if constant('MODE_DEMO') == 1 %}<p>{% trans "you are in demo mode, some features may be disabled." %}</p>{% endif %}
 					<div class="row">
-						<label class="col w150p" for="login">{% trans "Login" %}</label>
+						<label class="col w150p" for="login">{% trans "Username" %}</label>
 						<input class="col" type="text" id="login" name="login" placeholder="Login" tabindex="1" autofocus {% if constant('MODE_DEMO') == 1 %}value="poche"{% endif %} />
 					</div>
 
