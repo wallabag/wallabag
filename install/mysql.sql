@@ -33,13 +33,13 @@ CREATE TABLE IF NOT EXISTS `users_config` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE tags (
+CREATE TABLE IF NOT EXISTS `tags` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `value` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE tags_entries (
+CREATE TABLE IF NOT EXISTS `tags_entries` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `entry_id` int(11) NOT NULL,
   `tag_id` int(11) NOT NULL,
