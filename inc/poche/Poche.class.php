@@ -678,7 +678,8 @@ class Poche
             $user = $this->store->login($login, Tools::encodeString($password . $login));
             if ($user != array()) {
                 # Save login into Session
-                Session::login($user['username'], $user['password'], $login, Tools::encodeString($password . $login), array('poche_user' => new User($user)));
+            	$longlastingsession = isset($_POST['longlastingsession']);
+                Session::login($user['username'], $user['password'], $login, Tools::encodeString($password . $login), $longlastingsession, array('poche_user' => new User($user)));
                 $this->messages->add('s', _('welcome to your poche'));
                 Tools::logm('login successful');
                 Tools::redirect($referer);
