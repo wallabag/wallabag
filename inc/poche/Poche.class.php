@@ -49,6 +49,7 @@ class Poche
             if (! $this->store->isInstalled()) {
                 $this->install();
             }
+            $this->store->checkTags();
         }
     }
     
@@ -659,7 +660,7 @@ class Poche
         if(isset($_SERVER['REMOTE_USER'])) {
             return array($_SERVER['REMOTE_USER'],'http_auth');
         }
-        
+
         return array(false,false);
      }
 

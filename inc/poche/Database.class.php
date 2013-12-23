@@ -39,12 +39,79 @@ class Database {
     public function isInstalled() {
         $sql = "SELECT username FROM users";
         $query = $this->executeQuery($sql, array());
+        if ($query == false) {
+            die(STORAGE . ' database looks empty. You have to create it (you can find database structure in install folder).');
+        }
         $hasAdmin = count($query->fetchAll());
 
         if ($hasAdmin == 0) 
-            return FALSE;
+            return false;
 
-        return TRUE;
+        return true;
+    }
+
+    public function checkTags() {
+
+        if (STORAGE == 'sqlite') {
+            $sql = '
+                CREATE TABLE IF NOT EXISTS tags (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE,
+                    value TEXT
+                )';
+        }
+        elseif(STORAGE == 'mysql') {
+            $sql = '
+                CREATE TABLE IF NOT EXISTS `tags` (
+                  `id` int(11) NOT NULL AUTO_INCREMENT,
+                  `value` varchar(255) NOT NULL,
+                  PRIMARY KEY (`id`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+            ';
+        }
+        else {
+            $sql = '
+                CREATE TABLE tags (
+                  id bigserial primary key,
+                  value varchar(255) NOT NULL
+                );
+            ';
+        }
+
+        $query = $this->executeQuery($sql, array());
+
+        if (STORAGE == 'sqlite') {
+            $sql = '
+                CREATE TABLE tags_entries (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE,
+                    entry_id INTEGER,
+                    tag_id INTEGER,
+                    FOREIGN KEY(entry_id) REFERENCES entries(id) ON DELETE CASCADE,
+                    FOREIGN KEY(tag_id) REFERENCES tags(id) ON DELETE CASCADE
+                )';
+        }
+        elseif(STORAGE == 'mysql') {
+            $sql = '
+                CREATE TABLE IF NOT EXISTS `tags_entries` (
+                  `id` int(11) NOT NULL AUTO_INCREMENT,
+                  `entry_id` int(11) NOT NULL,
+                  `tag_id` int(11) NOT NULL,
+                  FOREIGN KEY(entry_id) REFERENCES entries(id) ON DELETE CASCADE,
+                  FOREIGN KEY(tag_id) REFERENCES tags(id) ON DELETE CASCADE,
+                  PRIMARY KEY (`id`)
+                ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+            ';
+        }
+        else {
+            $sql = '
+                CREATE TABLE tags_entries (
+                  id bigserial primary key,
+                  entry_id integer NOT NULL,
+                  tag_id integer NOT NULL
+                )
+            ';
+        }
+
+        $query = $this->executeQuery($sql, array());
     }
 
     public function install($login, $password) {
