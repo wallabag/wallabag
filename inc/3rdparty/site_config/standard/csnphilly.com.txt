@@ -1,0 +1,22 @@
+# author's name is not isolated as a tag.... ugh
+convert_double_br_tags: yes
+body: //csn_blogST_main
+
+#junk above and around the article
+strip: /html/body/div[4]/div[3]/div/div/div/section/div/div/div/div/div/div
+strip: /html/body/div[4]/header
+strip_id_or_class: article-right-sidebar
+strip_id_or_class: rsn-gigya-sharebar-container
+strip_id_or_class: article-bottom
+strip_id_or_class: hider
+strip_id_or_class: footer
+strip_id_or_class: masthead
+strip_id_or_class: block-menu-menu-rsn-login-or-register
+strip_id_or_class: block-menu-menu-header-links
+strip_id_or_class: block-rsn-follow-bar-follow-bar
+strip_id_or_class: block-rsn-weather-rsn-weather-scoreboard
+strip_id_or_class: logo
+strip_id_or_class: element-invisible
+strip_id_or_class: site-name
+strip: //div[contains(@style, 'none')]
+test_url: http://www.csnphilly.com/eagles/can-stoutland-save-danny-watkins-career

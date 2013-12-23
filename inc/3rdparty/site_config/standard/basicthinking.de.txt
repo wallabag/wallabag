@@ -1,0 +1,7 @@
+title: //h2
+date: //span[@class='date']
+body: //div[@class='entry']
+
+strip: //div[@class='zusatz']
+
+test_url: http://www.basicthinking.de/blog/2011/12/13/sagt-social-networks-adieu-begrust-private-networks/

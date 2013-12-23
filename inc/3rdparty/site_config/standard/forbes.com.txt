@@ -1,0 +1,16 @@
+title: //hgroup//h1
+title: //span[@class='mainarttitle']
+
+body: //div[@id='leftRail']//div[contains(@class, 'body')]
+
+author: //meta[@name="author"]/@content
+author: //span[@class='mainartauthor']
+
+date: substring-before(//hgroup//h6, '@')
+date: //span[@class='mainartdate']
+
+prune: no
+
+single_page_link: //a[contains(@href, '/print/')]
+
+test_url: http://www.forbes.com/forbes/2011/0509/technology-frog-design-jan-chipchase-ethnographer-birth-cool_print.html

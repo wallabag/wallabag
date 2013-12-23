@@ -1,0 +1,6 @@
+title: //*[@itemprop='headline']
+author: //*[@itemprop='author']
+date: //*[@itemprop='datePublished']
+body: //*[@itemprop='articleBody']
+strip: //*[contains(@class, 'instapaper_ignore')]
+test_url: http://www.essentialpublicradio.org/story/2011-11-14/volunteers-sought-federal-tax-assistance-program-pennsylvania-9421

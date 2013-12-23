@@ -1,0 +1,6 @@
+title: //h1
+author: //a[@class='a_aut']
+body: //div[@class='content_dossier']
+strip: //div[@id='pagination']
+next_page_link: //div[@class='sommaire_colonne']//span[@class='page_actuelle']/following::span[@class='autres_page']//a/@href
+test_url: http://www.hardware.fr/articles/850-1/pci-express-3-0-impact-performances.html

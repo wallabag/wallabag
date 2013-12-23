@@ -1,0 +1,12 @@
+title: //div[@class='headline'] | //div[@class='mod-header']/h3
+body: //div[contains(@class, 'article')]
+strip: //div[contains(@class, 'mod-inline')]
+strip: //*/span[@class='page-actions']
+strip: //div[@class='page-actions']/*
+strip: //div[@class='headline'] | //div[@class='mod-header']/h3
+strip: //div[@class='mod-blog-navigation']
+strip: //div[@class='monthday']
+strip: //div[@class='time']
+strip: //div[@class='timeofday']
+strip: //div[contains(@class, 'mod-conversations')]
+test_url: http://espn.go.com/boston/mlb/story/_/id/7092528/terry-francona-victim-latest-red-sox-smear-campaign

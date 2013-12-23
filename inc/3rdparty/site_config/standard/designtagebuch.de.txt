@@ -1,0 +1,11 @@
+tidy: no
+body: //div[@class='main']
+
+author: substring-before(substring-after(//div[@class='meta-single'], 'erstellt von '), ' am')
+date: substring-before(substring-after(//div[@class='meta-single'], ' am '), ' | ')
+
+strip_id_or_class: pagelink
+strip_id_or_class: wp-polls 
+
+next_page_link: //div[@class='post-page-next']/a
+test_url: http://www.designtagebuch.de/die-gefuehlte-lesbarkeit/

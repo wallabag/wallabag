@@ -1,0 +1,10 @@
+title: //div[@class="article_header"]/h3
+author: //div[@class="autor"]/p/*
+date: substring-after(substring-after(//div[@class="flt-left"],"> "), "> ")
+
+move_into(//div[@class="new_article"]): //div[@class="img_article"]/img
+
+body: //div[@class="article_content"]
+convert_double_br_tags: yes
+
+test_url: http://revistapiaui.estadao.com.br/edicao-68/questoes-latino-americanas/filhos-da-guerra-suja

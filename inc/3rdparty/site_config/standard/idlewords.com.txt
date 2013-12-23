@@ -1,0 +1,7 @@
+title: //a[@class='post_title']
+body: //div[@class='entrybox']
+strip_id_or_class: post_title
+date: //div[@class='entrybox']/b[1]
+strip: //div[@class='entrybox']/b[1]
+author: string('Maciej Cegłowski')
+test_url: http://idlewords.com/2011/08/why_arabic_is_terrific.htm

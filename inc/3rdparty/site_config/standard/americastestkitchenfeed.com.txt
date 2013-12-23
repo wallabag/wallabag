@@ -1,0 +1,5 @@
+title: //h1[@class="post-title"]
+author: //span[@class="author"]/a
+date: //span[@class="date"]
+body: //div[@class="post-content main"]
+test_url: http://www.americastestkitchenfeed.com/gadgets-and-gear/2012/07/chill-out-with-tovolos-king-cube-silicone-ice-cube-tray/

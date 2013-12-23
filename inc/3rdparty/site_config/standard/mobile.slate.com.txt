@@ -1,0 +1,5 @@
+title: //h2[@class="article_title"]
+strip: //a[@class="houseAdLink"]
+strip: //h1
+strip: //div[@class="more_articles"]
+test_url: http://mobile.slate.com/rss.jsp?rssid=411&item=http%3a%2f%2fwww.slate.com%2fdefault.aspx%3fdisplaymode%3d201%26id%3d2293749%26device%3drss

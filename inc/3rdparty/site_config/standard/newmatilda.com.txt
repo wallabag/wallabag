@@ -1,0 +1,9 @@
+title: //div[@id="maincontent"]/h1
+body: //div[@id="maincontent"]
+date: //div[@id="maincontent"]/p[2]
+author: //ul[@id="contributors"]/li/p/b
+
+strip: //p[@*]
+strip: //h1
+strip: //div[@id="maincontent"]/div
+test_url: http://newmatilda.com/2011/07/22/turnbull-makes-sense-climate

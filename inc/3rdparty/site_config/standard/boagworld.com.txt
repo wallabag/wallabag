@@ -1,0 +1,8 @@
+title: //h1[@class="entry-title"][2]
+author: string("Paul Boag")
+date: substring(//span[@class="meta"], 11)
+body: //article
+strip: //h2
+strip: //h1
+strip: //div[@id="callsToAction"]
+test_url: http://boagworld.com/working-in-web-design/dealing-with-the-dickheads/

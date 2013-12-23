@@ -1,0 +1,15 @@
+title: //span[@id='ctl00_ctl00_MainContent_MainContent_RecipeImage1_lblRecipeTitle']
+body: //div[@id='RDNEW']//*[@class='Recipe-imgCon' or @class='Recipe-Intro' or @class='recipeDetails']
+strip_id_or_class: rec-ExRightPanel
+strip_id_or_class: divCarousel
+strip_id_or_class: preptimeOuter
+strip_id_or_class: cooktimeOuter
+strip_id_or_class: durationOuter
+strip_id_or_class: divImageFooter
+strip_id_or_class: microFormatFnIngred
+strip: //span[@class='Recipe-Intro']//*[@class='link' or @class='rating']
+
+prune: no
+tidy: no
+
+test_url: http://www.tasteofhome.com/recipes/Grinch-Punch

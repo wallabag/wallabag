@@ -1,0 +1,5 @@
+﻿title: //div[@class='HomeLeftPannel IMGCTRL']/h2
+body: //div[@class='HomeLeftPannel IMGCTRL']//div[@class='Brownalink' or @id='shortdesc']
+tidy: no
+
+test_url: http://edge.org/print/conversation.php?cid=the-argumentative-theory

@@ -1,0 +1,10 @@
+title: //h1
+author: //div[@class="byline"]/a
+date: //span[@class="timestamp"]
+
+strip: //p[@class="topics"]
+strip: //h1
+strip: //div[@class="byline"]
+strip: //p[@class="published"]
+strip: //div[contains(@class,"featured-scroller")]
+test_url: http://www.abc.net.au/news/2011-11-08/crabb-carbon-legislation-abbott-demolition/3652544

@@ -1,0 +1,3 @@
+title: //h1[@class='headline']
+body: //div[contains(@class, 'article-wrapper')]
+test_url: http://www.berlingske.dk/danmark/festen-er-flyttet-nordpaa

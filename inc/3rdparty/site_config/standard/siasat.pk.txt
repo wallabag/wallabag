@@ -1,0 +1,11 @@
+#body: (//div[@class='ftr-yt-vid'])[1]
+body: (//blockquote[contains(@class, 'postcontent')])[1]
+body: (//div[starts-with(@id, 'post_message')])[1]
+
+prune: no
+tidy: no
+
+#replace_string(<iframe title="YouTube video player"): <div class="ftr-yt-vid"><iframe title="YouTube video player"
+#replace_string(</iframe>): </iframe>&nbsp;</div>
+
+test_url: http://www.siasat.pk/forum/showthread.php?107668-Policy-Matters-17th-March-2012-Dr-Shahid-Masood-Gen-Hameed-gul-amp-Fawad-Chudhary-Pak-US-Relationship&p=787733

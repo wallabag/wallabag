@@ -1,0 +1,7 @@
+# Remove right column
+strip: //*[(@class = 'right_col')]
+
+# Remove comments etc.
+strip: //*[(@class = 'category')]
+strip: /html/body/div[1][@class='absolute_content_high']/div[1][@class='wrapper']/div[1][@class='main_col']/div[@class='main_content']/h3
+test_url: http://hammers.theoffside.com/carling-cup/a-funny-thing-happened-on-the-way-to-4-nil.html

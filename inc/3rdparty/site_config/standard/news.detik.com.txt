@@ -1,0 +1,8 @@
+title://div[@class="content_detail"]/h1
+
+author://div[@class="author"]/strong
+
+date:substring-before(substring-after(//div[@class="content_detail"]/span[@class="date"], ','), ' WIB')
+
+body://div[@class="text_detail"]
+test_url: http://news.detik.com/read/2012/05/22/225531/1922307/10/menkeu-cek-soal-lolosnya-315-kg-sabu-dari-bea-cukai

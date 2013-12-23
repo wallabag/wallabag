@@ -1,0 +1,7 @@
+title: //div[@class='entry-header']
+author: //span[@class='vcard author']
+date: //abbr[@class='published']
+#move_into(//div[@class='entry-body']): //img[@id='photo_1']
+body: //div[@class='entry-body']
+strip: //div[@class='galleryEaseThumbs']
+test_url: http://gothamist.com/2012/03/15/fancy_cocktail_lounge_the_randolph.php

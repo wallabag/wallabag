@@ -1,0 +1,15 @@
+title: //div[@id='divAdnetKeyword']/h1
+body: //div[@id='_middle_content_bottom']
+
+wrap_in(fieldset)://div[@id='_middle_content_bottom_child2']/img
+
+strip: //div[@id='_middle_content_bottom_child1']
+strip: //div[@id='_middle_content_bottom_child4']
+strip: //div[@class='cls']
+strip: //div[@class='iphoneBox']
+strip: //ul[@class='ilgiliHaber']
+strip: //div[@class='yorumlar']
+strip: //div[@class='kategoriler']
+strip: //div[@class='textSize']
+strip: //span[@class='tarih']
+test_url: http://www.posta.com.tr/yasam/teknoloji/HaberDetay/Fedailer_Istanbul_da.htm?ArticleID=101044

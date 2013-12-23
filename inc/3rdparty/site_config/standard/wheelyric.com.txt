@@ -1,0 +1,11 @@
+body://div[contains(@class,'oAndtLyrics')]
+strip://div[contains(@class,'info')]
+strip://div[contains(@id,'romanization')]
+strip://div[contains(@id,'youtube')]
+strip://div[contains(@id,'romanizationSelector')]
+strip://div[contains(@id,'langSelectWrap')]
+strip://div[contains(@id,'requestTranslationWrap')]
+strip://div[contains(@id,'viewMore')]
+strip://div[contains(@class,'lyricsListInMainContent')]
+strip://div[contains(@class,'descIpNoti')]
+test_url: http://wheelyric.com/lyrics/121#2

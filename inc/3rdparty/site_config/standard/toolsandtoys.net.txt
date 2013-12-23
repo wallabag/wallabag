@@ -1,0 +1,6 @@
+body: //div[@class='post']
+
+strip: //div[@class='social']
+strip: //span[@class='next']
+strip: //span[@class='previous']
+test_url: http://toolsandtoys.net/noble-tonic-02/

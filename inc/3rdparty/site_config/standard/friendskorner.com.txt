@@ -1,0 +1,11 @@
+#body: (//div[@class='ftr-yt-vid'])[1]
+body: (//blockquote[contains(@class, 'postcontent')])[1]
+body: (//div[starts-with(@id, 'post_message')])[1]
+
+prune: no
+tidy: no
+
+#replace_string(<iframe title="YouTube video player"): <div class="ftr-yt-vid"><iframe title="YouTube video player"
+#replace_string(</iframe>): </iframe>&nbsp;</div>
+
+test_url: http://www.friendskorner.com/forum/f137/debate-personal-lives-leaders-west-vs-pakistan-must-read-297989/

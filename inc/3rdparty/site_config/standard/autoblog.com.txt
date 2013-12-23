@@ -1,0 +1,6 @@
+prune: no
+body: //div[@class='post-body']
+author: //p[@class='byline']//a
+date: substring-after(//div[@class='about']/p[2], 'Posted')
+strip: //div[@class='body']/div[@class='meta']
+test_url: http://www.autoblog.com/2012/01/17/next-gen-bmw-x5-caught-again/

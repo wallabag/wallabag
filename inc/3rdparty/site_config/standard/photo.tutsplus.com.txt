@@ -1,0 +1,6 @@
+author: substring-before(//div[@class='post_meta'],' on')
+date: substring-after(substring-before(//div[@class='post_meta'],'with'),' on')
+title: //h1[class='post_title']
+body: //div[@class='article']
+
+test_url: http://photo.tutsplus.com/articles/news/a-brilliant-beginners-guide-to-architectural-photography/

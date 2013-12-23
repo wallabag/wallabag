@@ -1,0 +1,12 @@
+title: //h1[@class="entry-title"]
+body: //div[@class='format_text entry-content']
+author: //span[@class="author vcard"]/a
+date: //abbr[@class="published"]
+
+strip_id_or_class:  related-posts
+strip_id_or_class: membershipbox
+strip_id_or_class: share_this_compact_bt
+
+
+footnotes: no
+test_url: http://www.itstactical.com/warcom/knives/exclusive-triple-aught-design-production-dauntless-knife-video-walkthrough/

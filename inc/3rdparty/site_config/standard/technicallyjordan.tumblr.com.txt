@@ -1,0 +1,8 @@
+title: //h2
+author: //meta[@name="author"]/@content
+date: //h3
+body: //div[@class="postBody"]
+strip: //h1
+strip: //h2
+strip: //h3
+test_url: http://technicallyjordan.tumblr.com/post/22914659822/facebook-to-launch-app-store-knock-off

@@ -1,0 +1,5 @@
+title: //div[@id="habermetni"]/h1[@id="haber_baslik"]
+body: //div[@id="habermetni"]/p
+strip: //img[@class='newsDetailLeft']
+strip_image_src: /haber-resimleri/
+test_url: http://www.haberler.com/emniyete-atacakti-elinde-patladi-3198733-haberi/

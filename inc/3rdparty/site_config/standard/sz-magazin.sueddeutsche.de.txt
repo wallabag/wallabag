@@ -1,0 +1,15 @@
+title: //h1
+body://div[@class='drucken']
+author: substring-after(//span[@class='autor'], 'Von ')
+author: //span[@class='autor']
+
+single_page_link://a[contains(@href, '/drucken/')]
+convert_double_br_tags:yes
+
+dissolve://div[@class='vorspann']
+
+strip://h1
+strip_id_or_class: klassifizierung
+strip_id_or_class: source
+strip_id_or_class: autor
+test_url: http://sz-magazin.sueddeutsche.de/texte/anzeigen/37567

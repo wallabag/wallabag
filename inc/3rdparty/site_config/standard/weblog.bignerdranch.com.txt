@@ -1,0 +1,5 @@
+title://div[@class="post"]/h2
+author://p[@class="postinfo"]/a
+date:substring-before(substring-after(//p[@class="postinfo"],' on '),' under ')
+body://div[@class="contenttext"]
+test_url: http://weblog.bignerdranch.com/?p=304

@@ -1,0 +1,24 @@
+title: //meta[@property="og:title"]/@content
+title: //h1[@class='storyheadline']
+author: //meta[@name="AUTHOR"]/@content
+date: //span[@class='cnnDateStamp']
+date: //meta[@name="DATE"]/@content
+body: //div[@id='storytext' or @class='storytext']
+
+strip_id_or_class: ie_column
+strip_id_or_class: sharewidgets
+strip_image_src: bug.gif
+
+strip: //div[@class="hed_side"]
+strip: //span[@class="byline"]
+strip: //a[@class="soc-twtname"]
+strip: //span[@class="cnnDateStamp"]
+strip: //div[@class="storytimestamp"]
+strip: //div[@class="cnnCol_side"]
+
+prune: no
+tidy: no
+
+test_url: http://money.cnn.com/2011/03/15/news/companies/steve_jobs_thought_process.fortune/index.htm?section=money_topstories&utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+rss%2Fmoney_topstories+%28Top+Stories%29
+test_url: http://money.cnn.com/2012/01/27/markets/markets_newyork/index.htm
+test_url: http://money.cnn.com/2012/05/13/technology/yahoo-ceo-out-rumor/index.htm

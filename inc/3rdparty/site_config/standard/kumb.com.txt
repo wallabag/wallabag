@@ -1,0 +1,10 @@
+title: //div[@id='centrediv']/h1
+
+author: substring-after(//div[@id='centrediv']/h3,'By: ')
+
+date: substring-after(substring-before(//div[@id='centrediv']/h3,'By: '),'Filed: ')
+
+body: //div[@class='KonaBody']
+
+convert_double_br_tags: yes
+test_url: http://www.kumb.com/story.php?id=126084

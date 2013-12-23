@@ -1,0 +1,9 @@
+body: //div[@class='content']
+date: //div[@class='content']/h2
+strip: //div[@class='content']/h2
+title: //div[@class='content']/h3
+
+strip: //div[@id='postmenu']
+strip: //div[@class='trackback']
+tidy: no
+test_url: http://www.3quarksdaily.com/3quarksdaily/2012/01/martin-luther-king-i-have-a-dream.html

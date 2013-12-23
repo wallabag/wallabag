@@ -1,0 +1,14 @@
+title: //title
+
+author: //div[@class="author"]
+
+strip_id_or_class: 'header'
+strip_id_or_class: 'cikk_ajanlo'
+strip_id_or_class: 'buttons'
+strip_id_or_class: 'related'
+strip_id_or_class: 'adbox ad_cikk_kozepre'
+strip_id_or_class: 'cikk-cimkek'
+strip_id_or_class: 'cikk_ertekeles'
+
+strip_comments: yes
+test_url: http://mno.hu/grund/a-gumibottal-hadonaszo-rendort-joval-konnyebb-utalni-1055351

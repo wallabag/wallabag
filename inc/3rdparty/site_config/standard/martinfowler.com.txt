@@ -1,0 +1,8 @@
+date: //div[@id="main"]/p[@class="date"]
+author: string("Martin Fowler")
+body: //div[@id="main"]
+strip_id_or_class: date
+strip_id_or_class: tags
+strip_id_or_class: tagLabel
+strip: //div[@id="main"]/h1[1]
+test_url: http://martinfowler.com/bliki/DatabaseThaw.html

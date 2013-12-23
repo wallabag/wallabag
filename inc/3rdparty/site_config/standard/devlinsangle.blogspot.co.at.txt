@@ -1,0 +1,6 @@
+date: //h2[@class='date-header']
+body: //div[@class='post hentry']
+title: //h3
+strip: //div[@class='post-footer']
+
+test_url: http://devlinsangle.blogspot.co.at/2012/03/difference-between-teaching-and_01.html

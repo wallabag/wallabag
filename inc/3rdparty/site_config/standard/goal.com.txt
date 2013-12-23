@@ -1,0 +1,16 @@
+title: //div[@id='article_headline']//h1
+date: //div[contains(@class, 'articleDate')]//h4
+body: //div[@id='article_headline']/h2 | //div[@id='large_article_image' or @id='article_content']
+
+strip_id_or_class: relatedLinksBox
+strip_id_or_class: betting-widget
+strip_image_src: install_flash.gif
+
+strip: //table[contains(@style, 'float: right; width: 285px;')]
+strip: //div[@class='caption']
+
+tidy: no
+prune: no
+
+test_url: http://www.goal.com/en-gb/news/3284/euro-2012/2012/05/31/3139032/video-profile-back-to-his-very-best-for-bayern-frances-flair-and-
+test_url: http://www.goal.com/en-gb/news/3284/euro-2012/2012/05/31/3139869/lampard-injury-a-bitter-blow-for-england-and-sorry-way-to#

@@ -1,0 +1,11 @@
+body: //div[@class='entry-content']
+date: //meta[@name="date"]/@content
+author: //meta[@name="author"]/@content
+
+strip_id_or_class: ecapShell
+strip_id_or_class: noindent
+strip_id_or_class: targetedPromotion
+
+prune: no
+
+test_url: http://www.fool.com/investing/general/2012/01/27/dfc-global-beats-up-on-analysts-yet-again.aspx

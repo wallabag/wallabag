@@ -1,0 +1,7 @@
+title: //meta[@property='og:title']/@content
+author: //*[@property='dc:creator']
+date: //*[@property='dc:date']/@content
+body: //div[@id='page-content']//div[contains(@class, 'article-body')]
+
+tidy: no
+test_url: http://www.information.dk/282307

@@ -1,0 +1,13 @@
+# Get proper Title, Author and Date info
+title: substring-before(//title, '|')
+author: substring-after(//h4/a[@href='http://www.ilounge.com/index.php/ilounge/aboutus/'], 'By')
+date: //span[@class='instapaper_date']
+
+# For Reviews & First Looks, get the intro paragraph and put it in front of the main body.
+move_into(//div[@id='instapaper_para1']): //div[@id='instapaper_body']
+body: //div[@id='instapaper_para1']
+strip: //div[@class='reviewinfo']
+
+# We don't use footnotes, so why bother checking for them? 
+footnotes: no
+test_url: http://www.ilounge.com/index.php/reviews/entry/luxa2-alum-x-for-iphone-4-4s/?utm_source=twitterfeed&utm_medium=twitter

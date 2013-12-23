@@ -1,0 +1,4 @@
+author: //span[@class='author']//a
+date: //span[@class='date']
+test_url: http://zerodistraction.com/blog/2012/3/11/retina-ipad-that-means-i-am-going-digital-only-for-comic-boo.html
+test_url: http://zerodistraction.com/notes/unreasonably-grumpy

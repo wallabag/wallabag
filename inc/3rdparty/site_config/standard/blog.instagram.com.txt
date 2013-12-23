@@ -1,0 +1,11 @@
+# clean Instagram blog a little bit
+
+tidy:no
+prune:no
+
+body://div[contains(@id,'content')]
+
+strip_id_or_class:meta
+strip_id_or_class:notes
+strip_id_or_class:pagination
+test_url: http://blog.instagram.com/post/8757832007/fromwhereistand

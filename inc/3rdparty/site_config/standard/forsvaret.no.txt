@@ -1,0 +1,9 @@
+title: //div[@class="articleHeader"]/h1
+author: //p[@class="byline"]
+date: //p[contains(@class,"publishedDate")]/span
+# remove the right menu
+strip: //div[contains(@class,"aside")]
+# remove some SharePoint webpart label junk
+strip: //div[@id="ctl00_PlaceHolderMain_ArticleLeadField_label"]
+strip: //div[@id="ctl00_PlaceHolderMain_PublishingPageContentField_label"]
+test_url: http://forsvaret.no/aktuelt/publisert/nyheter/Sider/F5-fly-til-Skedsmo.aspx

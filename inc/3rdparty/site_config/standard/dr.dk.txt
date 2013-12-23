@@ -1,0 +1,9 @@
+title: //meta[@property='og:title']/@content
+author: //div[@class='articleFunctions']//a
+date: //meta[@name='pubdate']/@content
+
+# Can you strip elements from the body only? It is required here (`//div[@class='articleContent']/p` breaks for some reason)
+body: //div[@class='articleContent']
+
+tidy: no
+test_url: http://www.dr.dk/Nyheder/Udland/2011/10/24/150115.htm

@@ -1,0 +1,11 @@
+title://h1[contains(@id,'artibodyTitle')]
+
+date://span[contains(@id,'pub_date')]
+
+body://div[contains(@id,'artibody')]
+
+strip://div[contains(@class,'otherContent')]
+
+next_page_link://p[@class='page']/a[contains(.,'下一页')]
+
+test_url: http://tech.sina.com.cn/mobile/n/2012-03-22/07476863046.shtml

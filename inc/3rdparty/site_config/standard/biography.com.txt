@@ -1,0 +1,8 @@
+title: //div[contains(@class, 'main-content')]//h1
+body: //div[@class='summary-column'] | //div[contains(@class, 'main-content')]
+
+prune: no
+
+single_page_link: //div[@id='biography-action-links']//a[contains(@href, '/print/')]
+
+test_url: http://www.biography.com/print/profile/martin-luther-9389283

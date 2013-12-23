@@ -1,0 +1,11 @@
+title: //div[@class="blogpost"]/h2
+author: //div[@class="blogpost"]/p[@class="byline"]/a
+date: //div[@class="blogpost"]/p[@class="byline"]/span[@class="time_posted"]
+body: //div[@class="blogpost"]
+strip_id_or_class: flag
+strip_id_or_class: byline
+strip_id_or_class: post_footer
+strip_id_or_class: related_posts
+strip_id_or_class: post_author_bios
+strip: //h2
+test_url: http://greatergreaterwashington.org/post/12457/ask-ggw-what-will-happen-to-the-1000-series-railcars/

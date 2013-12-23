@@ -1,0 +1,11 @@
+title: //h1
+author: //a[@class='auteur']
+body: //div[@class='editorial']
+next_page_link: //a[contains(text(),'Page suivante')]
+strip: //a[contains(text(),'Page suivante')]
+strip: //a[contains(text(),'Page précédente')]
+strip_id_or_class: slideshow
+
+prune: no
+
+test_url: http://www.clubic.com/carte-graphique/carte-graphique-amd/radeon-hd-7770/article-478936-1-radeon-hd-7750-7770.html

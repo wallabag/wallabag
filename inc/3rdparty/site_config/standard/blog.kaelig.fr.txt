@@ -1,0 +1,5 @@
+body: //*[contains(@class, 'post_content')]
+author: string('Kaelig Deloumeau-Prigent')
+title: //h1[@class='title']
+date: //span[@class='date']
+test_url: http://blog.kaelig.fr/post/24877648508/preprocesseurs-css-renoncer-par-choix-ou-par

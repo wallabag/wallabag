@@ -1,0 +1,17 @@
+#host configuration should be http://www.neh.gov/news/humanities/
+
+
+#meta data 
+title:substring-after(substring-after(//title,':'),':')
+author:substring-after(//h2[@class = 'subHead'],'By')
+date:substring-before(substring-after(//title,':'),':')
+
+#img and caption handling
+wrap_in(small)://div[@id = 'mainContent']/table/descendant::p/descendant::text()
+wrap_in(fieldset)://div[@id = 'mainContent']/table
+
+# clean up
+strip: //table[@class = 'marginpaddingTop']
+strip: //h2[@class = 'subHead']
+
+test_url: http://www.neh.gov/news/humanities/2011-11/IslamicScholar.html

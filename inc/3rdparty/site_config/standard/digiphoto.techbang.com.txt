@@ -1,0 +1,8 @@
+# default parser works great
+# only add "author" and "next page link" reference
+# 2012-04-13
+
+next_page_link: //div[@class = 'pagination']/a[@class = 'next_page']
+
+author: //*[@class = 'author metadata']/a
+test_url: http://digiphoto.techbang.com/posts/2433--commercial-photography-communication-is-the-key-to-a-good-work

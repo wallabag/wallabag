@@ -1,0 +1,4 @@
+body: //div[@id = 'content-inner']
+strip: //div[@id = 'content-bottom']
+strip_id_or_class: print_sharebutton
+test_url: http://openthemagazine.com/article/nation/sania-vs-saina

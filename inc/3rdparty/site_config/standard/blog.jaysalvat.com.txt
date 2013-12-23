@@ -1,0 +1,4 @@
+date: //span[contains(@class, 'date-links')]
+author: //span[contains(@class, 'author-links')]
+body: //div[contains(@class, 'entry-content')] 
+test_url: http://blog.jaysalvat.com/article/celui-qui-avait-refait-son-site-web

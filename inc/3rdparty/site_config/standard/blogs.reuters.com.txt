@@ -1,0 +1,3 @@
+title: //div[@id='single']/h1
+body: //div[@id='postcontent']
+test_url: http://blogs.reuters.com/felix-salmon/2010/07/16/the-value-of-a-strong-brand-apple-edition/

@@ -1,0 +1,11 @@
+body: //div[@class='movie_content_area']
+strip_id_or_class: tomatometer_bar_help
+strip_id_or_class: critic-links
+strip_id_or_class: top-critics-numbers
+strip_id_or_class: fan_side
+strip_id_or_class: fblike
+strip_id_or_class: rating_widget
+strip_id_or_class: friend_reviews
+prune: no
+
+test_url: http://www.rottentomatoes.com/m/thor/

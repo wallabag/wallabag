@@ -1,0 +1,13 @@
+title://div[contains(@class, "article")]/h1
+body://div[contains(@class,"story-text")]
+
+# Why doesn't this work? next_page_link://ul[contains(@class,"pagination")]/li/a[@rel="next"]
+
+next_page_link://ul[contains(@class,"pagination")]/li[contains(@class, "current")]/following-sibling::node()/a
+date://meta[@name="publish_date"]/@content
+
+strip://div[contains(@class, "breadcrumbs")]
+strip://a[contains(@class, "hidden")]
+strip://div[contains(@class, "story-embed")]
+strip://div[contains(@class, "story-text")]//p/a[contains(text(), "Also on POLITICO:")]/..
+test_url: http://www.politico.com/news/stories/0712/78105.html

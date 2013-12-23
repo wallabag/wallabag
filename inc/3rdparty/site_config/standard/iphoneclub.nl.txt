@@ -1,0 +1,7 @@
+body: //div[@id = 'post']
+strip: //div[@class = 'postinfo']
+strip: //div[@id = 'postmetanew']
+strip: //div[@class = 'paginator']
+strip: //div[@class = 'col-2']
+strip: //div[@id = 'adfactor-label']
+test_url: http://www.iphoneclub.nl/105808/t-mobile-mobiel-internet-wordt-duurder-maar-blijft-onbeperkt/

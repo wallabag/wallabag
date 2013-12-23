@@ -1,0 +1,3 @@
+single_page_link: //p[@id='skip']//a[contains(@href, 'skip')]
+
+test_url: http://gihyo.jp/dev/serial/01/machine-learning/0010

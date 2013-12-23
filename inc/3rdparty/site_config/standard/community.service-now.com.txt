@@ -1,0 +1,8 @@
+body: //div[@id="center"]//div[@class="node"]
+title: //div[@id="center"]//h2
+author: substring-after(//div[@id="center"]//div[@class="node"]//span[@class="submitted"], "&mdash;")
+date: substring-before(//div[@id="center"]//div[@class="node"]//span[@class="submitted"], "&mdash;")
+strip: //div[@id="center"]//h2[1]
+strip: //span[@class="submitted"][1]
+move_into(//div[@class="node"])://div[@class="breadcrumb"]
+test_url: http://community.service-now.com/blog/lawrenceeng/seasons-greetings-servicenow-team

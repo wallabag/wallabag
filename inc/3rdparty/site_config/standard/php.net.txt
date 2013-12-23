@@ -1,0 +1,6 @@
+body: //div[@id='content']
+strip_id_or_class: manualnavbar
+
+prune: no
+
+test_url: http://www.php.net/manual/en/migration5.incompatible.php

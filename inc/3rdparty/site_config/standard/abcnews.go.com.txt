@@ -1,0 +1,27 @@
+title: //h1[@class='headline']
+body: //div[@id='storyText']
+# for video entries
+body: //img[@id='ff-img'] | //div[@id='meta']//div[contains(@class, 'overview')]
+author: //div[@class='byline']
+date: //div[@class='date']
+strip: //*[@id='date_partner']
+
+strip: //div[@class='breadcrumb']
+strip: //div[contains(@class,'show_tools')]
+strip: //div[@id='sponsoredByAd']
+strip: //div[contains(@class,'rel_container')]
+strip: //p[a[starts-with(@href, 'http://www.twitter.com')]]
+strip: //p[a[starts-with(@href, 'http://www.facebook.com')]]
+strip: //p[contains(., 'Click here to return to')]
+#strip_id_or_class: media
+strip_id_or_class: mediaplayer
+
+replace_string(<link rel="image_src" href="http): <img id="ff-img" src="http
+
+prune: no
+
+single_page_link: concat(//li[@class='pager']//a/@href, '&singlePage=true')
+
+test_url: http://abcnews.go.com/Politics/newt-gingrich-rocky-rollout-presidential-campaign-recover/story?id=13632744
+# multi-page
+test_url: http://abcnews.go.com/Blotter/family-freed-american-hostage-somalia-seals-obama/story?id=15439544

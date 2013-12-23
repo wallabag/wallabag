@@ -1,0 +1,3 @@
+author: //h1
+date: //p[contains(@class,'date')]
+test_url: http://jouire.com/2011/01/exquisite-whispers/

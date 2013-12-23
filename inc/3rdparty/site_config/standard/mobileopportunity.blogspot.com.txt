@@ -1,0 +1,11 @@
+body: //div[@class='post uncustomized-post-template']
+
+# remove duplicate of post title, which is a link
+strip: //h3[@class='post-title']
+
+# remove permalink and timestamp, which isn't useful as it's a time with no date
+strip: //span[@class='post-timestamp']
+
+# remove labels (tags)
+strip: //span[@class='post-labels']
+test_url: http://mobileopportunity.blogspot.com/2010/12/rims-q3-financials-tale-of-two.html

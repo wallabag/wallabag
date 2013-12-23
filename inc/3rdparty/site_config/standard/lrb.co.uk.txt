@@ -1,0 +1,8 @@
+title: substring-before(//title, ' · LRB')
+
+body: //div[@class="article-body indent"]
+
+date: substring-after(//p[@class="meta-info"]/a, '· ')
+
+prune: no
+test_url: http://www.lrb.co.uk/v33/n18/james-meek/its-already-happened

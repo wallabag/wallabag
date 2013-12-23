@@ -1,0 +1,4 @@
+# FB comments are inside an h2. Weird. Without this, the line 'Comments' is preserved by the text parser
+
+strip: //h2
+test_url: http://www.varsity.co.uk/reviews/2662

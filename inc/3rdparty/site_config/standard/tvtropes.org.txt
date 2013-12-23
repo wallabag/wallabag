@@ -1,0 +1,20 @@
+# Google Custom Search
+strip_id_or_class: google_branding_style
+
+# Avoid double title
+strip_id_or_class: pagetitle
+
+# external links are labelled
+strip_image_src: http://static.mediatropes.info/pmwiki/pub/external_link.gif
+
+title: //div[@class="pagetitle"]
+body: //div[@id="wikitext"]
+
+# don't get clever.
+strip_comments: no
+prune: no
+
+# navigation in footer lives inside the wikitext div, annoyingly.
+strip_id_or_class: pathholder
+
+test_url: http://tvtropes.org/pmwiki/pmwiki.php/Main/WithinParameters

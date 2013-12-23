@@ -1,0 +1,4 @@
+body: //div[@class='main']/div[@class='item']
+strip: //div[@class='right']
+
+test_url: http://news.techmeme.com/110516/fh-rip

@@ -1,0 +1,13 @@
+title: //h1
+
+# they have a single component containing both author and date
+#author: //p[@class='source']
+#date: //p[@class='source']
+
+body: //div[@class='contenu_article']
+#Shoot the insane "conjugaison.lemonde.fr" links :
+strip: //a[contains(@class, 'listLink')]
+
+prune: no
+
+test_url: http://www.lemonde.fr/economie/article/2011/07/05/moody-s-abaisse-la-note-du-portugal-de-quatre-crans_1545237_3234.html

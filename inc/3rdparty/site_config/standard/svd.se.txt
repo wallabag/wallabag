@@ -1,0 +1,4 @@
+# Ads
+strip_id_or_class: articlead
+
+test_url: http://www.svd.se/nyheter/inrikes/manga-huggormsbitna-golfare_5004031.svd

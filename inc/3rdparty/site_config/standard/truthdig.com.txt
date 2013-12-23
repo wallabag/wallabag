@@ -1,0 +1,10 @@
+title: //div[@class='printbody']/h1
+body: //div[@class='printbody']
+prune: no
+
+strip: //div[@class='printbody']/a[@href='http://www.truthdig.com/']
+strip: //table[@class='footer']
+
+single_page_link: //div[@class='article_tools']//a[contains(@href, '/print/')]
+
+test_url: http://www.truthdig.com/report/item/the_election_march_of_the_trolls_20110829/

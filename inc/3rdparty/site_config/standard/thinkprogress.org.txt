@@ -1,0 +1,4 @@
+author: //p[@class="byline"]/a
+body: //div[@class="post"]
+
+test_url: http://thinkprogress.org/special/2011/11/12/367040/harvard-law-professor-criticizes-homeland-security-feel-of-overreaction-to-occupy-harvard/

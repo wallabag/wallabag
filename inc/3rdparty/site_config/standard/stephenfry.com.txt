@@ -1,0 +1,8 @@
+title: /html/head/meta[@name='title']/@content
+author: //span[contains(concat(' ',normalize-space(@class),' '),' article_author ')]/a
+date: //span[contains(concat(' ',normalize-space(@class),' '),' article_date ')]
+
+body: //div[@class='entry-content']
+
+single_page_link: //p[@class='pagination']/a
+test_url: http://www.stephenfry.com/2011/10/06/steve-jobs/

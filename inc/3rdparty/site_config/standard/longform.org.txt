@@ -1,0 +1,3 @@
+single_page_link: //div[@class="post"]/div[@class="title"]/a
+
+test_url: http://longform.org/2011/05/06/disconcerting-new-answers-in-models-suicide/

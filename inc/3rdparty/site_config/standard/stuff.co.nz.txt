@@ -1,0 +1,22 @@
+title://div[@id='left_col']/h1
+author:substring-after(//span[contains(@class,'storycredit')],'BY ')
+author://span[contains(@class,'storycredit')]
+date:substring-after(//div[contains(@class,'toolbox_date')],'Last updated ')
+date://div[contains(@class,'toolbox_date')]
+body://div[@id='left_col']
+
+strip_id_or_class: toolbox
+strip_id_or_class: story_features
+strip_id_or_class: sharebox_new
+strip_id_or_class: related_box
+strip_id_or_class: sponsored_links
+strip_id_or_class: hidden_ad
+strip_id_or_class: story_content_top
+strip_id_or_class: total_number
+strip_id_or_class: sort_order
+strip_id_or_class: subscribe_order
+
+strip://div[contains(@class,'ad_story')]
+
+test_url: http://www.stuff.co.nz/national/politics/3930344/PM-issues-challenge
+test_url: http://www.stuff.co.nz/entertainment/7045944/International-praise-for-Ladyhawke

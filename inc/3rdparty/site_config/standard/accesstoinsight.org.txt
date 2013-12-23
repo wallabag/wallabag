@@ -1,0 +1,9 @@
+title: //div[@id='H_docTitle']
+
+body: //div[@id='H_meta' or @id='H_content' or @id='F_footer']
+
+strip_id_or_class: F_toenail
+
+prune: no
+
+test_url: http://www.accesstoinsight.org/lib/authors/nyanaponika/wheel026.html

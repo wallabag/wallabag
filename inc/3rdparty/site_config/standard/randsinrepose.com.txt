@@ -1,0 +1,11 @@
+title: //div[@id='center-col']/h4
+author: substring-before(//title,'In')
+date: substring-after(//div[@class='commenttext']/span,'#')
+body: //div[@id='center-col']
+strip: //div[@id='center-col']/h4
+strip: //div[@class='graytext']
+
+# Anthony Perez-Sanz 2012.3.14
+# Removed long gif from the end
+strip: //img[@src='http://www.randsinrepose.com/spreader.gif']
+test_url: http://www.randsinrepose.com/archives/2012/03/13/hacking_is_important.html

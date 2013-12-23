@@ -1,0 +1,4 @@
+title: //h3[@class="storytitle"]
+body: //div[@class="post"]
+strip: //div[@class="blurbBox"]
+test_url: http://taptaptap.com/blog/apples-precedents-vs-apples-guidelines/

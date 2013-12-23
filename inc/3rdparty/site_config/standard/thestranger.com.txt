@@ -1,0 +1,12 @@
+# savage* filtering is for Savage Love, such as: http://www.thestranger.com/seattle/SavageLove?oid=5135029
+
+#other filtering are plain articles, such as: http://www.thestranger.com/seattle/the-stranger-election-control-board/Content?oid=5142885
+
+title: //div[@id='savageColumn_head']/h1
+title: //h1[@class="headlineLarge"]
+
+strip: //div[@id='savage_right'] | //div[@id='savageColumn_head'] | //div[@id='savageArticleRight'] | //div[@id='articleRight'] | //div[@class='savAppBanner']
+
+body: //div[@id='savageColumn']
+body: //div[@id='story_text']
+test_url: http://www.thestranger.com/seattle/SavageLove?oid=5135029

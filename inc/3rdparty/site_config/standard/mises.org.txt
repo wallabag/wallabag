@@ -1,0 +1,5 @@
+strip_id_or_class: 'book-ad'
+strip_id_or_class: 'bigger pullquote'
+strip_id_or_class: 'subscribe'
+strip_id_or_class: 'blog-link'
+test_url: http://mises.org/daily/4804

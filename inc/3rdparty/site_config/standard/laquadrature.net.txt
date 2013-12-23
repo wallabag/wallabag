@@ -1,0 +1,10 @@
+body: //div[@id='content-content']//div[@class='content']
+title: //h1[@class='title']
+date: substring-after(//*[@class='submitted'],'Submitted on')
+tidy: no
+strip: //div[@class='terms terms-inline']
+strip: //div[@class='more']
+strip: //div[@class='share-links']
+strip: //table[@id='attachments']
+
+test_url: http://www.laquadrature.net/en/finalization-of-eu-parliaments-weak-net-neutrality-resolution

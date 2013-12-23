@@ -1,0 +1,12 @@
+body: //div[@id='article_detail']
+title: //meta[@property='og:title']/@content
+date: //div[@id='date_com_art']//a[@class='date']
+author: //div[@id='article_detail']//font[@class='auteur']
+
+strip_id_or_class: porte_titre_theme
+strip_id_or_class: cont_param
+strip_id_or_class: date_com_art
+
+prune: no
+
+test_url: http://www.businessnews.com.tn/details_article.php?a=31073&t=522&lang=fr&temp=1

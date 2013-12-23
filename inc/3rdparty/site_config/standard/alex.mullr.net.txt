@@ -1,0 +1,2 @@
+body: //div[@class="entry"]
+test_url: http://alex.mullr.net/blog/2011/05/on-spotify/

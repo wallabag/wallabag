@@ -1,0 +1,31 @@
+title: //h1[contains(@class, "headline")]
+
+author: //p[contains(@class, "byline")]/a[contains(@class, "author")]
+
+date: substring-after(normalize-space(//p[contains(@class, "byline")]/span[contains(@class, "publish-date")]), "on ")
+
+body: //article[contains(@class, 'feature-entry')]
+body: //article
+prune: no
+tidy: no
+
+strip: //article/header
+strip: //*[@id='sticky-menu']
+strip: //aside
+strip: //nav
+
+strip_id_or_class: gallery
+strip_id_or_class: article-meta
+strip_id_or_class: story-navigation
+strip_id_or_class: slegend
+strip_id_or_class: related-product-meta
+strip_id_or_class: comments
+strip_id_or_class: ui-jump-list
+strip_id_or_class: pullquote
+
+strip: //q
+
+strip: //a[contains(@class, 'entry-section-title')]
+
+test_url: http://www.theverge.com/2012/2/29/2821763/lytro-review
+test_url: http://www.theverge.com/2011/11/3/2534861/nokia-lumia-800-review

@@ -1,0 +1,13 @@
+title: //div[@class="bodyText"]/h1/text()
+body: //div[@class="bodyText"]
+
+# author and date are separated by only a newline
+# can't figure out how to tokenize that yet
+author: //div[@class="bodyText"]/span[@class="info"]/text()
+date: //div[@class="bodyText"]/span[@class="info"]/text()
+
+# strip metdata from body text
+strip: //div[@class="bodyText"]/h1/text()
+strip: //div[@class="bodyText"]/span[@class="info"]
+strip: //div[@class="bodyText"]/span[@class="info"]
+test_url: http://www.wmnf.org/news_stories/light-rail-advocates-join-forces-to-combat-opposition-in-pinellas

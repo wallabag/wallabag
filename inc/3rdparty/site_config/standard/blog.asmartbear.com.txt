@@ -1,0 +1,7 @@
+title: //title
+author: //span[@class='author vcard']/a
+date: //p[@class='headline_meta']/abbr[@class='published']
+body: //div[@class='format_text entry-content']
+
+strip: //div[@id='dd_ajax_float']
+test_url: http://blog.asmartbear.com/how-to-get-quality-freelance-graphics-design-work-on-a-budget.html

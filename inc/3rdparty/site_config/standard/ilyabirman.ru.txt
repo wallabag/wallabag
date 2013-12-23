@@ -1,0 +1,5 @@
+title: //div[@class='published visible e2-smart-title']//span
+author: //span[@id='e2-blog-title']
+date: //p[@class='super-h']
+body: //div[@class='text published visible']
+test_url: http://ilyabirman.ru/meanwhile/2011/11/15/2/

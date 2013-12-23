@@ -1,0 +1,8 @@
+convert_double_br_tags: yes
+
+title: //div[@id="storycredits"]/p/span[@class="title"]
+author: //div[@id="storycredits"]/p/br[1]/following-sibling::text()
+
+strip: //div[@id="storycredits"]
+
+test_url: http://www.juppy.org/santa/stories.php?ForAuthorID=35&Year=2005

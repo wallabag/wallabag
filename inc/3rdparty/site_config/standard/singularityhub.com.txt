@@ -1,0 +1,2 @@
+body://div[contains(@class,"entry-content")]
+test_url: http://singularityhub.com/2011/05/21/google-invades-your-home-android-phones-control-your-appliances-and-accessories-video/

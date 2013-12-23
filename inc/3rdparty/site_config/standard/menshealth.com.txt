@@ -1,0 +1,16 @@
+# need to find a way to eliminate <span> content for "related content" without eliminating important content
+
+convert_double_br_tags: [yes]
+#body: //div[@id='leftside']
+title: //h1
+title: //h2
+Author: substring-after(//h4, 'By ')
+Author: substring-after(//h4, 'By: ')
+#Strip: //span
+strip_id_or_class: morefromcat
+strip_id_or_class: mostpopular
+strip_id_or_class: articlepagination
+strip_id_or_class: toolbar
+body: //div[@id='zmodcontent']
+single_page_link: //li[@class='onepage'] //a[contains (@href, 'printer.php')]
+test_url: http://www.menshealth.com/mhlists/pursuit_of_happiness/index.php

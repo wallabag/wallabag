@@ -1,0 +1,13 @@
+title: //div[@id='artikelHeader']/h1
+author: //span[@class='author']
+date: //span[@class='date']
+body: //div[@class='copytext']
+strip: //ul[@class='lookupLinksArtikel']
+
+strip: //div[@id='pageTop']
+strip: //div[@id='toolbar']
+strip: //div[@id='articleTools']
+strip: //div[@id='weiterlesen']
+strip: //div[@id='communityCanvas']
+
+test_url: http://derstandard.at/1318726018343/Breitband-LTE-Was-bringt-die-neue-Mobilfunk-Generation

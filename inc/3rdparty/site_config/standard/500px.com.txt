@@ -1,0 +1,27 @@
+# very loose setup for both 500px.com/photo/* and 500px.com/blog/*
+# photo page example: http://500px.com/photo/4181666
+# blog page example: http://500px.com/blog/110
+
+# avoid "no text" error
+tidy:no
+prune:no
+
+# reorganize photo page elements
+#body://div[contains(@class,'container')]
+move_into(body)://div[contains(@id,'thephoto')]
+move_into(body)://div[contains(@id,'description')]
+move_into(body)://div[contains(@id,'tags')]
+move_into(body)://div[contains(@id,'photo-info')]
+
+# clean photo page info
+strip://span[contains(@id,'copyright')]
+strip://*[contains(@id,'store')]
+strip://*[contains(@id,'user-info')]
+strip://*[contains(@id,'photo-stats')]
+strip://*[contains(@id,'voting_controls_container')]
+strip://*[contains(@id,'more-photos')]
+strip://*[contains(@id,'embed-photo')]
+
+# clean blog page side bar
+strip://*[contains(@class,'col d3 clearafter')]
+test_url: http://500px.com/photo/3641041?from=editors

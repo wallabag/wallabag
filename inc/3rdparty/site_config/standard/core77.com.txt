@@ -1,0 +1,7 @@
+body: //div[@id="permalink"]/div[@class="post"]
+
+strip: //div[@id='backArrow']
+strip: //div[@id='fwdArrow']
+strip: //div[@class="post-title"]
+strip: //div[@class="sharing"]
+test_url: http://www.core77.com/blog/columns/why_design_education_must_change_17993.asp

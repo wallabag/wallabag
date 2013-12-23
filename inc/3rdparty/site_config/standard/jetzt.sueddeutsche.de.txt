@@ -1,0 +1,22 @@
+title: //h1
+author: //p[contains(@class, 'author')]/a
+date: //p[contains(@class, 'time')]
+body: //div[@class='content']/div[contains(@class, 'text')]
+
+# prevent "no text" errors on multi-page articles
+tidy: no
+
+# we use a custom next-link detector instead of the print view because
+# it's pretty hard to strip out the unwanted parts in the print view
+autodetect_next_page: no
+next_page_link: //div[contains(@class, 'text')]/div/div[contains(@class, 'paging')]/a[@class='more ']
+
+strip: //h1
+
+strip_id_or_class: meta
+strip_id_or_class: author
+strip_id_or_class: paging
+
+# prevent "Report an Error" from being recognized as footnote
+footnotes: no
+test_url: http://jetzt.sueddeutsche.de/texte/anzeigen/544308/Alles-flicken

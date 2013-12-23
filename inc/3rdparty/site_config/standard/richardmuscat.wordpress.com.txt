@@ -1,0 +1,5 @@
+body: //div[@id="post"]
+strip: //div[@id="author-description"]
+date: //span[@class="entry-date"]
+author: //span[@class="author vcard"]
+test_url: http://richardmuscat.wordpress.com/2011/06/20/the-price-of-free/?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+TheBrooksReview+%28The+Brooks+Review%29

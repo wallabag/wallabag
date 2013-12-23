@@ -1,0 +1,8 @@
+title: //div [@class="post contain"]/h1
+strip: //div [@class="post contain"]/h1
+body: //div [@class="post contain"]
+author: substring-before(//title, ':')
+author: substring-before(//title, ' ')
+
+
+test_url: http://eamesinerudition.com/2012/03/hospital-numbers-are-bad-for-you

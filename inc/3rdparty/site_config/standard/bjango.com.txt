@@ -1,0 +1,7 @@
+title: //h1[@class='articlehead']
+body: //div[@class='column']
+strip: //h1
+strip: //div[@class='help']
+
+#no author or date/time provided in current layout
+test_url: http://bjango.com/articles/actions/

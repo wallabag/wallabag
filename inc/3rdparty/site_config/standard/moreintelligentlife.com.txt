@@ -1,0 +1,7 @@
+title: //h1[@class='print-title']
+body: //div[@class='print-submitted' or @class='print-created' or @class='print-content']
+prune: no
+
+single_page_link: //li[@class='print']/a
+
+test_url: http://moreintelligentlife.com/content/places/paul-markillie/they-trash-cars-dont-they

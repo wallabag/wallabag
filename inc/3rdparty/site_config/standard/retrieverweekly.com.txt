@@ -1,0 +1,6 @@
+single_page_link://a[contains(@href, 'print')]
+
+# Grab metadata from the "printer-friendly" page, after specifying single_page_link
+title://h2
+date://cite
+test_url: http://www.retrieverweekly.com/?cmd=displaystory&story_id=7548&format=html

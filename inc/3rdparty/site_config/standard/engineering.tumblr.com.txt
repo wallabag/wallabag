@@ -1,0 +1,7 @@
+title: //h2
+body: //div[@class="post_content"]
+author: //p[@class="author"]/a
+date: //p[@class="date"]
+strip: //h2
+strip: //header
+test_url: http://engineering.tumblr.com/post/21276808338/tumblr-firehose

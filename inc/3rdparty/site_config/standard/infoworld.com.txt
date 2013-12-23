@@ -1,0 +1,12 @@
+body: //div[@id='main_text']
+title: //div[@id='main_text']/h1
+strip: //div[@id='main_text']/h1
+strip: //div[@id='main_text']/h2
+strip_id_or_class: tools
+strip_id_or_class: articleTools
+strip_id_or_class: pagination
+strip_id_or_class: byline
+strip_id_or_class: tweet
+date: //div[@class='date']
+strip: //div[@class='date']
+test_url: http://www.infoworld.com/d/the-industry-standard/it-jobs-the-rise-both-offshore-and-in-us-187689

@@ -1,0 +1,5 @@
+tidy: no
+body: //section[contains(@class, 'main')]
+strip: //footer
+strip: //a[@class='paginated']
+test_url: http://www.spin.com/articles/bathlands-deep-heart-americas-new-drug-nightmare

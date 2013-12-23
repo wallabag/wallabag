@@ -1,0 +1,5 @@
+body: //*[@class="entry-content"]
+title: //h1[@class="entry-title"]
+date: //*[@class="entry-date"]
+author: //*[@class="author vcard"]
+test_url: http://sct.temple.edu/blogs/news-events/2011/05/congratulations-sct-class-of-2011/

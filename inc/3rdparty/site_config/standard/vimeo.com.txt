@@ -1,0 +1,17 @@
+title: //title
+body: //iframe
+
+find_string: <html>&lt;iframe 
+replace_string: <iframe id="video" 
+
+find_string: &gt;&lt;/iframe&gt;</html>
+replace_string: ></iframe>
+
+replace_string(&quot;): "
+
+single_page_link: //link[@type='text/xml+oembed']
+
+prune: no
+tidy: no
+
+test_url: http://vimeo.com/35941909

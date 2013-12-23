@@ -1,0 +1,7 @@
+body: single-review
+strip_id_or_class: featured-review
+strip_id_or_class: resources
+strip_id_or_class: rate-the-book
+strip_id_or_class: write-review
+
+test_url: http://themuseumofinnocence.com/review.php?id=1179

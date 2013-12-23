@@ -1,0 +1,9 @@
+author: //div[contains(@class, 'author_text')]/h4/text()
+date: //li[@class='date']
+
+# stripping excessive tags
+strip: //div[contains(@class, 'entry_meta')]
+strip: //div[contains(@class, 'single_meta')]
+strip: //br[contains(@class, 'clear')]
+strip: //h3[contains(., 'Komentarz')]
+test_url: http://rubysfera.pl/2011/09/10-porad-o-rvm/

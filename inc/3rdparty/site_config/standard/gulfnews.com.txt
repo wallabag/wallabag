@@ -1,0 +1,5 @@
+body: //div[@class='wrapper_half']//ul[@class='details'] | //div[@class='wrapper_half']//p[@class='synopsis'] | //div[@class='wrapper_half']//div[@class='image'] | //div[@class='wrapper_half']//div[@class='article']
+strip: //div[@class='wrapper_half']//ul[@class='details']/li[position()>1]
+prune: no
+tidy: no
+test_url: http://gulfnews.com/news/gulf/uae/government/abu-dhabi-centre-offers-useful-information-1.811084

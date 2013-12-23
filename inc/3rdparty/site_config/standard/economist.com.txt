@@ -1,0 +1,10 @@
+title: //div[@class='ec-blog-headline']
+body: //div[@class='ec-blog-body']
+body: //div[@class='ec-article-content clear']
+strip: //div[@class='related-items']
+date: substring-before(//p[@class='ec-article-info'], '|')
+prune: no
+
+autodetect_next_page: no
+
+test_url: http://www.economist.com/node/21528429

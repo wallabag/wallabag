@@ -1,0 +1,6 @@
+title: //h2/a[@class="no-link title"]
+author: //h2[@id="blog_owner"]
+date: //time
+strip: //h2/a[@class="no-link title"]
+test_url: http://blog.wells.ee/retina
+test_url: http://blog.wells.ee/skeuomorphism

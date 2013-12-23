@@ -1,0 +1,9 @@
+title: //h1/following::span[@class='fn']
+# Author: should stop parsing until <br> reached, but I don't know how to do this.
+author: //following::div[@class='PDate2']
+date: //following::div[@class='PDate2']/strong
+
+body: //div[@class='ArTexte']
+body: //div[@id='prod_txt_b']
+body: //div[@class='ArPhotoP']
+test_url: http://www.lesnumeriques.com/disque-dur-multimedia/popcorn-hour-300-p12231/test.html

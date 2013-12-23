@@ -1,0 +1,20 @@
+# meta data
+title://h1[@id = 'articleTitle']
+author:substring-after(//ul[@id = 'byLine']/li[1],'By ')
+date:substring-before(substring-after(//ul[@id = 'byLine']/li[last()],','),',')
+body://div[@id = 'article-body']
+
+# full content
+single_page_link://td/li[@class = 'article-singlepage']/a
+
+# caption clean up
+wrap_in(i)://span[@class='articleImageCaptionwide']
+move_into (//span[@class='articleImageCaptionwide'])://div[@id = 'articleImage']/p
+
+
+# clean up
+strip://p[@id = 'articlePaginationWrapper']
+strip://ul[contains(@class, 'cat-breadcrumb')]
+strip://div [@class= 'viewMorePhotos']
+
+test_url: http://www.smithsonianmag.com/history-archaeology/The-Goddess-Goes-Home.html

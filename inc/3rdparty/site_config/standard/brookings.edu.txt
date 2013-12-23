@@ -1,0 +1,13 @@
+title: //div[@id='contentheader']/h1
+author: //p[@class='attribution']/span[@class='author']/*
+# Is there a way to pull multiple authors? My XPath here is just grabbing the first
+
+date: /html/head/meta[@name="date"]/@content
+body: //div[@class='main-content']
+
+strip: //p[@class='byline']
+strip: //div[@class='img-gallery']
+strip: //div[@class='callout']
+strip: //div[@class='add-your-view']
+convert_double_br_tags: yes
+test_url: http://www.brookings.edu/opinions/2011/1018_cyberattack_libya_goldsmith.aspx

@@ -1,0 +1,6 @@
+title: //h1
+author: //a[contains(@href, '/author/')]
+date: //*[@class='post-date']
+strip: //*[@class='post-date']
+strip: //h1
+test_url: http://bygonebureau.com/2011/06/20/an-existential-psychoanalysis/

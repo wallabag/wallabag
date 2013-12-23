@@ -1,0 +1,10 @@
+body: //div[@id='content']
+strip: //div[@class='rl'] 
+strip: //p[@class='authdesc']
+strip: //p[@class='strybtm']
+strip: //div[@id='stryFtrLft']
+strip: //div[@id='f1Conversation']
+strip: //div[@id='cmtSpncrRuler']
+strip: //div[@id='stryComments']
+strip: //div[@id='athrData']
+test_url: http://en.espnf1.com/monaco/motorsport/story/50529.html

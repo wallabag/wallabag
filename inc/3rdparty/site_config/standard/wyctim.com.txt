@@ -1,0 +1,3 @@
+body: //div[@class='article-body']
+title: //h1
+test_url: http://wyctim.com/icloud-sync-regebbi-rendszereken/

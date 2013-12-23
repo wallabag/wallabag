@@ -1,0 +1,12 @@
+#meta data
+title:substring-after(title,'|')
+
+author:substring-before( substring-after(//meta[@name = 'description']/@content, normalize-space(substring-after(//title,'|'))),' respond ')
+date://h5[@class = 'postDate']
+
+#text
+body://div[@class = 'articleBody']
+
+#clean up
+strip://center
+test_url: http://lareviewofbooks.org/post/14066007115/literary-transactions-and-their-vicissitudes

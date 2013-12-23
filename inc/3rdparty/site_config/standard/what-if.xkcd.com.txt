@@ -1,0 +1,2 @@
+autodetect_next_page: no
+test_url: http://what-if.xkcd.com/1/

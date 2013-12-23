@@ -1,0 +1,18 @@
+title: //div[@class='title_text']
+
+author: //div[@class='author_text']
+
+body: //div[@class='story_text']/..
+
+strip: //b
+
+strip_id_or_class: back_to_top
+strip_id_or_class: author_text
+strip_id_or_class: title_text
+
+wrap_in(center): //a
+
+dissolve: //a
+ 
+footnotes: no
+test_url: http://www.eastoftheweb.com/short-stories/UBooks/Horl.shtml

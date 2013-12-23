@@ -1,0 +1,10 @@
+title: //h1[@id='articlehed'] | //h2[@id="articleintro"]
+body: //div[@id='articletext']
+
+strip: //ul[@id="bc"] | //div[@id="yrail"] | //div[@class="entry-keywords"] | //div[@class="entry-categories"] | //div[@class="socialUtils"] | //div[@id="footer"]
+
+date: //h4[@id='articleauthor']/span[@class='dd dds']
+date: //div[@id="pagebody"]/div[@class='hentry entry']/div[@class='published']
+
+single_page_link: //div[@class='paginationViewSinglePage']/a
+test_url: http://www.newyorker.com/online/blogs/culture/2012/06/mug-shot-web-sites.html

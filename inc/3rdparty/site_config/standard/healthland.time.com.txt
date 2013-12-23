@@ -1,0 +1,10 @@
+date: //span[@class = 'date']
+body: //div[@class = 'entry-content']
+strip://div[@class='more-ways']
+strip://div[@id = 'stayConnected']
+strip://p[child::a[@rel = 'bookmark']]
+strip://p[starts-with(string(.),'(MORE:')]
+strip://p[starts-with(string(.),'(PHOTOS:')]
+move_into(//p[../@class = 'entry-content'][position() = last()])://div[@id = 'featbox']
+
+test_url: http://healthland.time.com/2011/07/24/amy-winehouse-and-the-pain-of-addiction/?preview=true&preview_id=39210&preview_nonce=0777d4e408

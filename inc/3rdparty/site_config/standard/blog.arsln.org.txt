@@ -1,0 +1,8 @@
+tidy: no
+prune: no
+date: //article/header/h6/time
+title: //article/header/h3
+author: //meta[@name='author']/@content
+body: //article//post
+
+test_url: http://blog.arsln.org/aska-ayip-oluyor/

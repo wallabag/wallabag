@@ -1,0 +1,11 @@
+# doesn't look like selecting an attribute value works?
+# author: //meta[@id="authorName"]@value
+
+author: substring-after(//li[@id="article-hdr-meta-author"]/text(), "By ")
+date: //abbr[@id="article-time"]
+title: //div[@id="article-hdr"]/h1
+body: //div[@class="articleText"]
+
+# strip miscellaneous teasers & etc
+strip: //div[@class="removeformobile"]
+test_url: http://www.nfl.com/news/story/09000d5d82388707/article/close-shave-chiefs-haley-perseveres-through-rough-start?module=HP11_content_stream

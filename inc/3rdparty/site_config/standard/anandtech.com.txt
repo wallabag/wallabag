@@ -1,0 +1,11 @@
+author: //a[@class='b'][1]
+date: substring-after(substring-before(//div, 'Posted in'), ' on ')
+strip_image_src: /content/images/globals/
+strip: //h2[. = 'Page 1']/preceding::p
+strip: //h2
+
+prune: no
+
+single_page_link: concat('http://www.anandtech.com/print/', substring-after(//meta[@property='og:url']/@content, '/show/'))
+
+test_url: http://www.anandtech.com/show/5812/eurocom-monster-10-clevos-little-monster/

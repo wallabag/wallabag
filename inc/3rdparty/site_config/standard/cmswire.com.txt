@@ -1,0 +1,6 @@
+body: //div[contains(@id,'article-body')]
+strip://div[contains(@id,'disqus_count_block')]
+strip://div[contains(@id,'col-left')]
+strip://div[contains(@id,'col-right')]
+
+test_url: http://www.cmswire.com/cms/customer-experience/for-apps-and-appstores-the-singularity-is-approaching-014888.php

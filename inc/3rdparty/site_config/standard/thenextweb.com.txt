@@ -1,0 +1,12 @@
+body: //div[@class= 'article-body']
+author: //div[@class='featured mb-1']//a[starts-with(@href,'/author')]
+
+strip: //div[@class = 'bargo']
+strip: //div[@class = 'tf']
+strip: //div[@class = 'article']/div[@class = 'blue-box']
+strip_id_or_class: respond
+
+tidy: no
+next_page_link: //div[@class='pages-wrapper']//span/following-sibling::a/@href
+
+test_url: http://thenextweb.com/apple/2011/10/12/tnw-review-a-complete-guide-to-apples-ios-5-with-icloud-an-os-14-years-in-the-making/

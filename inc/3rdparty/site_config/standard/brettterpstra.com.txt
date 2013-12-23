@@ -1,0 +1,5 @@
+body: //div[@class='post full']
+title: //h1
+author: substring-after(//title, '- ')
+date: //span[@class='date']
+test_url: http://brettterpstra.com/byword-for-ios/

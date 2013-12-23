@@ -1,0 +1,26 @@
+# main sportsillustrated.com articles
+
+body: //div[@id="cnnStoryContent"]
+title: //div[@id="cnnStoryHeadline"]//h1
+author: //div[@id="cnnSubBanner"]//strong
+date: substring-after(//div[@id="cnnTimeStamp"], "Updated: ")
+date: substring-after(//div[@id="cnnTimeStamp"], "Posted: ")
+
+# kill ugly font buttons
+strip: //div[@id="cnnSCFontButtons"]
+
+# kill misc filler videos & etc
+strip: //div[@class="cnnDivideContent"]
+strip: //*[@class="cnnTMbox"]
+
+# si vault articles
+# -------------
+body: //div[@class="siv_artPara"]
+title: //div[@class="siv_artHeader"]//h1
+author: //div[@class="byline"]
+date: //div[@class="date"]
+
+next_page_link: //div[@id='cnnStoryContinue']/a
+strip_id_or_class: cnnstorypagination
+
+test_url: http://cnnsi.com/2012/writers/peter_king/01/08/wild.card.round/index.html

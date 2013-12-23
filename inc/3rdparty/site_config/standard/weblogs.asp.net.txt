@@ -1,0 +1,9 @@
+title: //h2[@class="pageTitle"]
+strip: //div[@class="postfoot"]
+strip: //h2[@class="pageTitle"]
+strip: //h3[@class="pageTitle"]
+body: //div[@class="post"]
+author: substring-before(substring-after(//div[@class="postfoot"], 'by'), 'Filed')
+date: substring-before(substring-after(//div[@class="postfoot"], 'Published'), 'by')
+
+test_url: http://weblogs.asp.net/scottgu/archive/2011/08/31/html-editor-smart-tasks-and-event-handler-generation-asp-net-vnext-series.aspx

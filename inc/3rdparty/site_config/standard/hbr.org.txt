@@ -1,0 +1,6 @@
+title: //div[@id='article-title']
+author: //div[@id='articleAuthors']
+body: //div[@id='article']
+strip: //div[@class='module wide']
+next_page_link: //a[@title='Next Page']
+test_url: http://hbr.org/2012/04/the-real-leadership-lessons-of-steve-jobs/ar/

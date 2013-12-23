@@ -1,0 +1,7 @@
+title: //meta[@name='og:title']/@content
+date: //meta[@name='created']/@content
+body: //div[@class="StoryBody" or @class="storyTeaser"]
+
+replace_string(<p></p>): <br /><br />
+
+test_url: http://www.thebostonchannel.com/slideshow/news/28210648/detail.html

@@ -1,0 +1,7 @@
+author: ("Arturo Toledo")
+title: //div[@class="post"]/h2
+body: //div[@class="entry"]
+
+# Remove Twitter button
+strip: //div[@class="entry"]/p[2]/a/img
+test_url: http://ux.artu.tv/?p=192

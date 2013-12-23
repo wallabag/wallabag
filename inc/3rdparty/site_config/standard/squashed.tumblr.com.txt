@@ -1,0 +1,4 @@
+body: //div[@class='content']
+date: substring-before( //div[@class='unit dateAndNotes'], 'with')
+title: //h3
+test_url: http://squashed.tumblr.com/post/17613522228/lets-stop-blaming-the-victims-of-predatory-lending

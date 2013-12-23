@@ -1,0 +1,4 @@
+body: //div[@class = 'pd']
+strip: //div[@id = 'overzicht-albumrecensies']
+strip: //div[@id = 'jc']
+test_url: http://hiphopleeft.nl/index.php?option=com_content&view=article&id=2767:mark-ronson-record-collection&catid=66:m&Itemid=142

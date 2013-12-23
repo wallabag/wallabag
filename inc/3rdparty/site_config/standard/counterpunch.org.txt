@@ -1,0 +1,6 @@
+title: //div[@class='main']//h1[contains(@class, 'article-title')]
+author: //div[@class='mainauthorstyle']
+body: //div[@class='main']//div[@class='main-text']
+strip: //td[@width='140']
+
+test_url: http://www.counterpunch.org/johnstone05172011.html

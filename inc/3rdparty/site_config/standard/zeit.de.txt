@@ -1,0 +1,44 @@
+# 2012-12-23 [carlo@...] fixed half-assed headlines in articles, removed inline author profiles, adjusted picture captions
+# 2012-03-17 [dkless@...] Cut metadata parts in the beginning and the ends of the content block; copyright entries for pictures removed; Author fixed, not sure if old entries still valid (I left them); Weird problems with some pages addressed (see last section for removing hidden section)
+# 2011-12-09 [carlo@...] Removed "related articles" block
+# 2011-08-23 [carlo@...] changed single page link to use print version: page works better, less ambiguity. Related cleanups and simplifications.
+# 2011-08-20 [carlo@...] added author, fixed date
+
+
+single_page_link: //a[@title='Druckversion']
+tidy: no
+
+title: //title
+date: substring-before( //li[@class="date"], " " )
+author: //li[@class="author"]/a/text() | //li[@class="author first"]/a/text()
+author: substring-after(//li[@class='source first '], 'Quelle: ')
+
+strip_id_or_class: articleheader
+strip: //div[@id="comments"] | //div[@class="pagination block"] | //p[@class="ressortbacklink"] | //div[@id="relatedArticles"]  |  // div[@class="inline portrait"]
+
+#Removes author and date from the start
+strip: //ul[@class="tools"]
+#Removes copyright statement - often disturb as first line of the news
+strip: //p[@class="copyright"]
+strip: //div[@class="copyright"]
+#Removes pagination links at the end
+strip: //div[@class="pagination"]
+
+# Fix picture captions
+wrap_in(small): //p[@class="caption"]/text()
+
+# Fix sub-headlines
+wrap_in(h2): //p/strong
+dissolve: //h2/strong
+
+#Sometimes things are embedded in the print version that are not displayed on the web, but will be displayed in the mobilized versions and lead even to problems. These sections are removed here.
+strip_id_or_class:"informatives"
+strip_id_or_class:"bottom"
+strip_id_or_class:"teasermosaic"
+strip_id_or_class:"comments"
+strip_id_or_class:"articlefooter af"
+strip_id_or_class:"relateds"
+strip_id_or_class:"pagination"
+
+footnotes: no
+test_url: http://www.zeit.de/kultur/film/2012-12/Kurzfilmtag

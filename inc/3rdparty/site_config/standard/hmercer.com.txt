@@ -1,0 +1,5 @@
+title: //*[@class='ptitle']
+date: //span[@class='date']
+body: //div[@class='body']
+prune: no
+test_url: http://hmercer.com/2011/07/why-i-switched-to-jekyll/

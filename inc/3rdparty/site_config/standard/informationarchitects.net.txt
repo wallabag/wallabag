@@ -1,0 +1,10 @@
+title://h1[@class="post_title"]
+body://article[@class="post"]
+date://h1[@class="section_separator"]
+author://span[@class="post_author"]
+strip://nav[@class="arrow_nav"]
+strip://section[@id="contact"]
+strip_id_or_class:post_title
+strip_id_or_class:post_author
+strip_id_or_class:section_separator
+test_url: http://informationarchitects.net/blog/nzz-relaunch-a-quick-review/

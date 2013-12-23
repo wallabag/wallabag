@@ -1,0 +1,7 @@
+title: //div[@id='content']/h1
+body: //div[@id="content"]
+strip: //img[contains(@src, 'informit_printer.png')]
+single_page_link: //div[contains(@class, 'articleTools')]//a[contains(@href, '/printerfriendly.')]
+prune: no
+
+test_url: http://www.informit.com/articles/article.aspx?p=1729268

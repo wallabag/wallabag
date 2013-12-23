@@ -1,0 +1,10 @@
+title: //h1[@class='entry-title']
+author: //p[@class='byline']/span
+body: //@id='body-content'
+date: //div[@class='article_timestamp']/span
+
+strip: //@class=b-group
+strip: //*[contains(@style, 'none')]
+strip: //a[contains(@href, 'comments')]
+strip: //*[contains(@class, 'comment')]
+test_url: http://www.philly.com/philly/sports/eagles/20120127_Ohio_State_s_Posey_didn_t_waste_time_lost_to_suspension.html

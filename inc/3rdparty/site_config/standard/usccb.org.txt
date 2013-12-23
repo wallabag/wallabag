@@ -1,0 +1,6 @@
+body: //div[@id='CS_Element_maincontent']
+
+tidy: no
+prune: no
+
+test_url: http://www.usccb.org/bible/readings/072412.cfm

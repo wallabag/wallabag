@@ -1,0 +1,8 @@
+title: //h1[@class='producttabbed-title']
+body: //div[@class='postTabs_divs postTabs_curr_div']
+strip: //div[@class='ratingblock2']
+strip: //p[@id='breadcrumbs']
+strip: //div[@style='display: none']
+
+
+test_url: http://www.cardboardconnection.com/2012-topps-archives-baseball-cards

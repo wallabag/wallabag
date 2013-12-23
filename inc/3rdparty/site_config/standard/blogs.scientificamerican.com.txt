@@ -1,0 +1,16 @@
+# meta data
+title://h1[@class = 'postTitle']
+author:substring-before(substring-after(//span[@class = 'byline'],'By '),'|')
+date://span[@class = 'datestamp']
+
+#body content
+body://div[@id = 'singleBlogPost']
+
+#reclaim author info
+move_into(//div[@id = 'singleBlogPost'])://div[@id = 'aboutAuthorDiv']
+strip://p[@class = 'moreLink mobileHide']
+
+#cleanup comments, there might be some open <div> sections
+strip://div[@id = 'comments2']
+strip://h3[a[@href = '#add-comment']]
+test_url: http://blogs.scientificamerican.com/a-blog-around-the-clock/2012/07/10/science-blogs-definition-and-a-history/

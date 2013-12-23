@@ -1,0 +1,11 @@
+title: concat(//div[@class='doc_author'], ' - ', upper-case(//div[@class='doc_title']))
+
+body: //div[@class='doc']
+
+prune: yes
+
+tidy: yes
+convert_double_br_tags: yes
+
+strip: //a[contains(@href, 'www.facebook.com/pages/Elet-es-Irodalom/')]
+test_url: http://www.es.hu/2010-12-08_vissza-a-partpenzt

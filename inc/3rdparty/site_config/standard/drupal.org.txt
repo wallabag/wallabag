@@ -1,0 +1,8 @@
+title://h1
+author://div[@class="submitted"]/a
+date:substring-after(//div[@class="meta"],'modified: ')
+date:substring-after(//div[@class="submitted"],'on ')
+body://div[@class="node-content"]
+strip://div[@class="meta"]
+strip_id_or_class:book-navigation
+test_url: http://drupal.org/node/1327354

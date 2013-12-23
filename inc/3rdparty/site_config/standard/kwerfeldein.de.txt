@@ -1,0 +1,9 @@
+date: //span[@class='datum']
+title: //div[@class='artikel']/h2
+body: //div[@class='entry']
+strip: //p[@class='tags']
+author: substring-after(//div[@class='authorinfo']/em,'Dies ist ein Artikel von ')
+strip: //div[@class='authorinfo']
+strip: //div[@class='authorpic']
+
+test_url: http://kwerfeldein.de/index.php/2011/10/17/doppelbelichtungen-mit-konzept/
