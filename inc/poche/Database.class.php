@@ -194,10 +194,10 @@ class Database {
         $config = $this->getConfigUser($userId);
         
         if (!isset ($user_config[$key])) {
-            $sql = "INSERT INTO users_config (`value`, `user_id`, `name`) VALUES (?, ?, ?)";
+            $sql = "INSERT INTO users_config (value, user_id, name) VALUES (?, ?, ?)";
         }
         else {
-            $sql = "UPDATE users_config SET `value`=? WHERE `user_id`=? AND `name`=?";
+            $sql = "UPDATE users_config SET value=? WHERE user_id=? AND name=?";
         }
 
         $params = array($value, $userId, $key);
