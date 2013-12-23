@@ -446,7 +446,7 @@ class Poche
                 $themes = $this->getInstalledThemes();
                 $languages = $this->getInstalledLanguages();
                 $token = $this->user->getConfigValue('token');
-                $http_auth = (isset($_SERVER['PHP_AUTH_USER']))?true:false;
+                $http_auth = (isset($_SERVER['PHP_AUTH_USER']) || isset($_SERVER['REMOTE_USER'])) ? true : false;
                 $tpl_vars = array(
                     'themes' => $themes,
                     'languages' => $languages,
@@ -649,14 +649,18 @@ class Poche
      * it redirects the user to the $referer link
      * @return array
      */
-     private function credentials() {
-         if(isset($_SERVER['PHP_AUTH_USER'])) {
-             return array($_SERVER['PHP_AUTH_USER'],'php_auth');
-         }
-         if(!empty($_POST['login']) && !empty($_POST['password'])) {
-             return array($_POST['login'],$_POST['password']);
-         }
-         return array(false,false);
+    private function credentials() {
+        if(isset($_SERVER['PHP_AUTH_USER'])) {
+            return array($_SERVER['PHP_AUTH_USER'],'php_auth');
+        }
+        if(!empty($_POST['login']) && !empty($_POST['password'])) {
+            return array($_POST['login'],$_POST['password']);
+        }
+        if(isset($_SERVER['REMOTE_USER'])) {
+            return array($_SERVER['REMOTE_USER'],'http_auth');
+        }
+        
+        return array(false,false);
      }
 
     /**

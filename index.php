@@ -100,6 +100,15 @@ if (Session::isLogged()) {
         $tpl_file = Tools::getTplFile('login');
         $tpl_vars['http_auth'] = 1;
     }
+} elseif(isset($_SERVER['REMOTE_USER'])) {
+    if($poche->store->userExists($_SERVER['REMOTE_USER'])) {
+        $poche->login($referer);
+    } else {
+        $poche->messages->add('e', _('login failed: user doesn\'t exist'));
+        Tools::logm('user doesn\'t exist');
+        $tpl_file = Tools::getTplFile('login');
+        $tpl_vars['http_auth'] = 1;
+    }
 } else {
     $tpl_file = Tools::getTplFile('login');
     $tpl_vars['http_auth'] = 0;
