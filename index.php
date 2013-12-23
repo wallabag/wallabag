@@ -8,7 +8,7 @@
  * @license    http://www.wtfpl.net/ see COPYING file
  */
 
-define ('POCHE', '1.2.0');
+define ('POCHE', '1.3.0');
 require_once 'inc/poche/global.inc.php';
 session_start(); 
 
