@@ -84,12 +84,12 @@ function create_assets_directory($id)
 {
     $assets_path = ABS_PATH;
     if(!is_dir($assets_path)) {
-        mkdir($assets_path, 0705);
+        mkdir($assets_path, 0755);
     }
 
     $article_directory = $assets_path . $id;
     if(!is_dir($article_directory)) {
-        mkdir($article_directory, 0705);
+        mkdir($article_directory, 0755);
     }
 
     return $article_directory;
