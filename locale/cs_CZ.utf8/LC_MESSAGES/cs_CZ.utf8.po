@@ -73,7 +73,7 @@ msgstr "Importovat"
 msgid "Please execute the import script locally, it can take a very long time."
 msgstr "Spusťte importní skript lokálně, může to dlouho trvat."
 
-msgid "More infos in the official doc:"
+msgid "More info in the official doc:"
 msgstr "Více informací v oficiální dokumentaci:"
 
 msgid "import from Pocket"
@@ -85,13 +85,13 @@ msgstr "importovat z Readability"
 msgid "import from Instapaper"
 msgstr "importovat z Instapaper"
 
-msgid "Export your poche datas"
+msgid "Export your poche data"
 msgstr "Export dat"
 
 msgid "Click here"
 msgstr "Klikněte zde"
 
-msgid "to export your poche datas."
+msgid "to export your poche data."
 msgstr "pro export vašich dat."
 
 msgid "back to home"
@@ -105,11 +105,11 @@ msgstr "instalovat"
 
 msgid ""
 "poche is still not installed. Please fill the below form to install it. "
-"Don't hesitate to <a href='http://inthepoche.com/doc'>read the documentation "
+"Don't hesitate to <a href='http://doc.inthepoche.com'>read the documentation "
 "on poche website</a>."
 msgstr ""
 "poche ještě není nainstalováno. Pro instalaci vyplňte níže uvedený formulář. "
-"Nezapomeňte <a href='http://inthepoche.com/doc'>si přečíst dokumentaci</a> "
+"Nezapomeňte <a href='http://doc.inthepoche.com'>si přečíst dokumentaci</a> "
 "na stránkách programu."
 
 msgid "Login"
