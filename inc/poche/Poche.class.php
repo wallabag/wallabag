@@ -333,7 +333,9 @@ class Poche
         switch ($action)
         {
             case 'add':
-                $json = file_get_contents(Tools::getPocheUrl() . '/inc/3rdparty/makefulltextfeed.php?url='.urlencode($url->getUrl()).'&max=5&links=preserve&exc=&format=json&submit=Create+Feed');
+                $options  = array('http' => array('user_agent' => 'poche'));
+                $context  = stream_context_create($options);
+                $json = file_get_contents(Tools::getPocheUrl() . '/inc/3rdparty/makefulltextfeed.php?url='.urlencode($url->getUrl()).'&max=5&links=preserve&exc=&format=json&submit=Create+Feed', false, $context);
                 $content = json_decode($json, true);
                 $title = $content['rss']['channel']['item']['title'];
                 $body = $content['rss']['channel']['item']['description'];
