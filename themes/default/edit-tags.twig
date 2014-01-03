@@ -11,10 +11,10 @@ no tags
 {% for tag in tags %}<li>{{ tag.value }} <a href="./?action=remove_tag&amp;tag_id={{ tag.id }}&amp;id={{ entry_id }}">✘</a></li>{% endfor %}
 </ul>
 <form method="post" action="./?action=add_tag">
-    <label for="value">New tags: </label><input type="text" id="value" name="value" required="required" />
-    <p>{% trans "you can type several tags, separated by comma" %}</p>
+    <label for="value">Add tags: </label><input type="text" placeholder="interview, editorial, video" id="value" name="value" required="required" />
+    <p>{% trans "You can enter multiple tags, separated by commas." %}</p>
     <input type="hidden" name="entry_id" value="{{ entry_id }}" />
-    <input type="submit" value="add tags" />
+    <input type="submit" value="Tag" />
 </form>
-<a href="./?view=view&id={{ entry_id }}">{% trans "back to the article" %}</a>
+<a href="./?view=view&id={{ entry_id }}">{% trans "return to article" %}</a>
 {% endblock %}
