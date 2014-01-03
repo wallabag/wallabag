@@ -68,7 +68,7 @@ msgid "Please execute the import script locally, it can take a very long time."
 msgstr ""
 "Por favor, ejecute la importación en local, esto puede demorar un tiempo."
 
-msgid "More infos in the official doc:"
+msgid "More info in the official doc:"
 msgstr "Más información en la documentación oficial :"
 
 msgid "import from Pocket"
@@ -80,13 +80,13 @@ msgstr "importación desde Readability"
 msgid "import from Instapaper"
 msgstr "importación desde Instapaper"
 
-msgid "Export your poche datas"
+msgid "Export your poche data"
 msgstr "Exportar sus datos de poche"
 
 msgid "Click here"
 msgstr "Haga clic aquí"
 
-msgid "to export your poche datas."
+msgid "to export your poche data."
 msgstr "para exportar sus datos de poche."
 
 msgid "back to home"
@@ -100,11 +100,11 @@ msgstr "instala tu Poche"
 
 msgid ""
 "Poche is still not installed. Please fill the below form to install it. "
-"Don't hesitate to <a href='http://inthepoche.com/doc'>read the documentation "
+"Don't hesitate to <a href='http://doc.inthepoche.com'>read the documentation "
 "on poche website</a>."
 msgstr ""
 "Poche todavia no està instalado. Por favor, completa los campos siguientes "
-"para instalarlo. No dudes de <a href='http://inthepoche.com/doc'>leer la "
+"para instalarlo. No dudes de <a href='http://doc.inthepoche.com'>leer la "
 "documentación en el sitio de Poche</a>."
 
 msgid "Login"
