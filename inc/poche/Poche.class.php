@@ -806,34 +806,37 @@ class Poche
             $url = NULL;
             $favorite = FALSE;
             $archive = FALSE;
-            foreach ($value as $attr => $attr_value) {
-                if ($attr == 'article__url') {
-                    $url = new Url(base64_encode($attr_value));
-                }
-                $sequence = '';
-                if (STORAGE == 'postgres') {
-                    $sequence = 'entries_id_seq';
-                }
-                if ($attr_value == 'true') {
-                    if ($attr == 'favorite') {
-                        $favorite = TRUE;
+            foreach ($value as $item) {
+                foreach ($item as $attr => $value) {
+                    if ($attr == 'article__url') {
+                        $url = new Url(base64_encode($value));
                     }
-                    if ($attr == 'archive') {
-                        $archive = TRUE;
+                    $sequence = '';
+                    if (STORAGE == 'postgres') {
+                        $sequence = 'entries_id_seq';
+                    }
+                    if ($value == 'true') {
+                        if ($attr == 'favorite') {
+                            $favorite = TRUE;
+                        }
+                        if ($attr == 'archive') {
+                            $archive = TRUE;
+                        }
                     }
                 }
-            }
-            # we can add the url
-            if (!is_null($url) && $url->isCorrect()) {
-                $this->action('add', $url, 0, TRUE);
-                $count++;
-                if ($favorite) {
-                    $last_id = $this->store->getLastId($sequence);
-                    $this->action('toggle_fav', $url, $last_id, TRUE);
-                }
-                if ($archive) {
-                    $last_id = $this->store->getLastId($sequence);
-                    $this->action('toggle_archive', $url, $last_id, TRUE);
+
+                # we can add the url
+                if (!is_null($url) && $url->isCorrect()) {
+                    $this->action('add', $url, 0, TRUE);
+                    $count++;
+                    if ($favorite) {
+                        $last_id = $this->store->getLastId($sequence);
+                        $this->action('toggle_fav', $url, $last_id, TRUE);
+                    }
+                    if ($archive) {
+                        $last_id = $this->store->getLastId($sequence);
+                        $this->action('toggle_archive', $url, $last_id, TRUE);
+                    }
                 }
             }
         }
