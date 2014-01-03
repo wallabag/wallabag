@@ -1,0 +1,4 @@
+title: //title
+body: //div[contains(@class, 'block')]
+
+test_url: http://www.interviewmagazine.com/film/spike-jonze
