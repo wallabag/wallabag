@@ -33,6 +33,10 @@ article {
     border: none !important;
 }
 
+pre code {
+    line-height: 1.6em;
+}
+
 /* Add URL after links */
 .vieworiginal a:after {
     content: " (" attr(href) ")";
