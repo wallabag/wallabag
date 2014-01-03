@@ -337,7 +337,7 @@ class Database {
 
     public function retrieveEntriesByTag($tag_id) {
         $sql = 
-            "SELECT * FROM entries
+            "SELECT entries.* FROM entries
             LEFT JOIN tags_entries ON tags_entries.entry_id=entries.id
             WHERE tags_entries.tag_id = ?";
         $query = $this->executeQuery($sql, array($tag_id));
@@ -348,7 +348,7 @@ class Database {
 
     public function retrieveTagsByEntry($entry_id) {
         $sql = 
-            "SELECT * FROM tags
+            "SELECT tags.* FROM tags
             LEFT JOIN tags_entries ON tags_entries.tag_id=tags.id
             WHERE tags_entries.entry_id = ?";
         $query = $this->executeQuery($sql, array($entry_id));
