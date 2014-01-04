@@ -1,0 +1,10 @@
+title: //h1
+author: //h3[@class="byline"]/strong
+
+body: //div[@id='main']/h2 | //div[@id='main']//div[@class='body']
+
+prune: no
+
+single_page_link: //a[@class='print-page']
+
+test_url: http://www.rollingstone.com/politics/news/the-plastic-bag-wars-20110725

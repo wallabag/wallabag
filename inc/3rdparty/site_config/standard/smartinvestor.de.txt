@@ -1,0 +1,5 @@
+title: //td[@class='hweissblau2']
+body: //p[@class='copy'] | //div[@class='Section1']
+prune: no
+
+test_url: http://www.smartinvestor.de/news/smartinvestor/detail.hbs?itemid=item949496655&recnr=14593

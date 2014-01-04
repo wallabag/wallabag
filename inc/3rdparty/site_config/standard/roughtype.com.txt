@@ -1,0 +1,5 @@
+body: //div[@class='content']
+strip: //p[@class='postmeta']/following::*
+strip: //p[@class='postmeta']
+strip: //p[@align='left']
+test_url: http://www.roughtype.com/archives/2012/01/power_to_the_da.php

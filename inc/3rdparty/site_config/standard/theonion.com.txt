@@ -1,0 +1,11 @@
+title: //h2[@class='title']
+date: substring-before(//p[@class='meta'], '|')
+body: //div[@class='story']
+#body: //div[@class='article_body']
+
+strip: //h2[@class='title']
+strip: //p[@class='meta']
+strip: //div[@class='ga_section']
+strip: //div[@id='recent_slider']
+
+test_url: http://www.theonion.com/articles/pathetic-bobcats-owner-again-regaling-players-with,27572/

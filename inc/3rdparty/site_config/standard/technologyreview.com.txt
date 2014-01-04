@@ -1,0 +1,16 @@
+title: //header[@class='article-meta']/h1
+title: substring-before(//title, '|')
+
+body: //section[contains(@class, 'body')]
+
+# Author & Date for News and Featured Stories
+author: //ul[@class='byline']/li/a
+author: substring-before(substring-after(//ul[@class='byline']/li, 'By '), ' on')
+date: substring-after(//ul[@class='byline']/li, 'on ')
+
+# Author & Date for "Views"
+author: //div[@class='view-byline']/div[@class='meta']/h2[1]
+date: //div[@class='view-byline']/div[@class='meta']/h2[2]
+
+next_page_link: //section[@class='pagination']/a[contains(@class, 'continue')]
+test_url: http://www.technologyreview.com/news/427567/facebooks-telescope-on-human-behavior/

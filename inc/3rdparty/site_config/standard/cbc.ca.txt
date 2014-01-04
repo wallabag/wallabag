@@ -1,0 +1,5 @@
+title: //div[contains(@class, 'headline')]/h1
+author: //h5[contains(@class, 'byline')]
+date: substring-after(//h4[contains(@class, 'posted')], 'Posted: ')
+body: //div[@id="storyboard"]
+test_url: http://www.cbc.ca/news/world/story/2012/01/16/cruise-ship-monday.html

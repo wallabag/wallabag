@@ -1,0 +1,8 @@
+title: //h1
+date: //div[@class="et_dateUnderTitle"]
+author: substring-after(//div[@class="et_authorUnderTitle"], 'By ')
+body: //div[@id="et_leftCol640split"]
+
+strip: //div[@id="et_leftCol640splitRight"]
+strip: //div[@class="et_light_greybgboxlower"]
+test_url: http://eandt.theiet.org/magazine/2011/12/this-festive-waste.cfm

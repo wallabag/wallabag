@@ -1,0 +1,9 @@
+date: //meta[@name='og:article:published_time']/@value
+
+body: //div[@class='itemIntroText' or @class='itemImageBlock' or @class='itemFullText']
+
+strip_id_or_class: itemImageGallery
+
+prune: no
+
+test_url: http://www.newsbomb.gr/gossip/story/257234/i-proin-moy-protimoyse-na-serfarei-apo-to-na-kanoyme-sex

@@ -1,0 +1,9 @@
+title: //div[@id='article']/div[contains(@class, 'content')]/h1
+body: //div[@id='article']/div[contains(@class, 'content')]
+date: //div[contains(@class, 'article-slot')]/descendant::div[contains(@id, 'articledates')]
+
+strip: //img[contains(@src, 'img/px.gif')]
+prune: no
+# remove Facebook banner and obtrusive ad
+strip: //div[@id='article']/div[contains(@class, 'content')]/div[contains(@class, 'art-right')]
+test_url: http://www.expressen.se/kultur/1.2683904/medan-natet-dras-at

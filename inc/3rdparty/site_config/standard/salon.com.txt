@@ -1,0 +1,11 @@
+title: //meta[@property='og:title']/@content
+author: (//span[@class="byline"]/a)[1]
+date: //span[contains(@class, "toLocalTime")]
+body: (//div[contains(@class, "articleInner")]//img[contains(@src, 'media.salon.com') and contains(@src, '460x')])[1] | //div[contains(@class, "articleContent") or contains(@class, "writerMeta")]
+
+prune: no
+
+# deal with singleton links
+single_page_link: (//h1/a[contains(@href, '/singleton')])[1]
+
+test_url: http://www.salon.com/2011/10/25/occupying_the_rust_belt/singleton/

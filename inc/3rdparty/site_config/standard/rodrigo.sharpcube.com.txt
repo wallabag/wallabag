@@ -1,0 +1,7 @@
+author: //article/header/span[@class='author']
+title://article/header/h1
+body: //article
+strip: //article/header
+strip: //article/p[@class='metadata']
+footnotes: yes
+test_url: http://rodrigo.sharpcube.com/2010/06/20/using-and-sharing-a-vpn-connection-on-your-mac/

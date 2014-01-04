@@ -1,0 +1,22 @@
+title: //meta[@name='DC.title']/@content
+title: //div[contains(@class, 'cabecera_noticia')]//h1
+date: //meta[@name='DC.date']/@content
+date: //meta[@name='date']/@content
+body: //div[@class='columna_texto']
+body: //div[@id='cuerpo_noticia']
+body: //div[@class='estructura_2col_1zq']//div[@class='margen_n']
+
+prune: no
+
+strip_id_or_class: disposicion_vertical
+strip_id_or_class: ampliar_foto
+strip_id_or_class: utilidades
+strip_id_or_class: info_relacionada
+strip_id_or_class: m-kiosko
+strip_id_or_class: info_complementa
+
+strip: //div[starts-with(@id, 'sumario') and contains(., 'más información')]
+strip: //div[@id='coment' or @id='foros_not']
+
+test_url: http://elpais.com/elpais/2012/02/06/gente/1328526783_491687.html
+test_url: http://www.elpais.com/articulo/cultura/mano/retrato/materia/elpepicul/20120207elpepicul_2/Tes

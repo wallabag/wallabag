@@ -1,0 +1,6 @@
+title: //div[@class='caption']
+author: //p[@class='username']
+
+strip: //div[@class='contents']/h3
+strip: //div[@class='location']
+test_url: http://instagr.am/p/G-s_aciyDJ/

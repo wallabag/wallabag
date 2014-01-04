@@ -1,0 +1,12 @@
+single_page_link: //div[@class='c2c1']/div[@class='toptheme further line']//ul//li/a
+
+author: //div[@class='details clear']//a[@class='hi']
+body: //div[@class='title']
+strip: //p[@class='entrypagination']
+strip: //p[@class='details_top']
+date: //p[@class='details_top']
+title: //div[@class='title']/h1
+strip: //p[@class='details']
+strip: //p[@class='details_bottom']
+
+test_url: http://www.scienceblogs.de/astrodicticum-simplex/2011/10/weltuntergang-reloaded-das-jungste-gericht-findet-am-21-oktober-statt.php

@@ -1,0 +1,8 @@
+tidy: no
+prune: no
+date: //article//time[@pubdate]
+title: //article/header/h2
+body: //article
+strip: //header
+test_url: http://www.marco.org/2012/09/08/businessweek-gruber
+test_url: http://www.marco.org/2012/04/24/might-upgrade-someday

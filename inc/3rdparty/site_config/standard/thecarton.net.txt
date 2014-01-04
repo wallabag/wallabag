@@ -1,0 +1,10 @@
+title: substring-before(//title, ' &ndash; ') 
+author:string('Shawn')
+date: //*/time/@pubdate
+
+
+strip: //header
+strip: //div[@id='prev_next']
+strip: //div[@id='masthead']
+
+test_url: http://thecarton.net/2012/12/20/imdb

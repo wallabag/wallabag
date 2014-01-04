@@ -1,0 +1,8 @@
+title: //h1[@itemprop="name"]
+
+author: //div[contains(@class, 'author')]//div[contains(@class, 'name')]/a
+
+date: //div[contains(@class, 'b-info')]//span[contains(@class, 'date')]
+
+body: //div[contains(@class, 'b-typo')]
+test_url: http://dou.ua/lenta/interviews/andrej-havryuchenko/?from=sb_mostcomm

@@ -1,0 +1,5 @@
+title: //h2[@class='custom-entry-title']
+author: substring-after(//span[@class='author vcard'],'by ')
+date: substring-after(//span[@class='publ'],'Published on ')
+body: //div[@class='postentry-content']
+test_url: http://smokingapples.com/software/popclip-for-mac/

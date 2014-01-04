@@ -1,0 +1,8 @@
+title: //meta[@property="og:title"]/@content
+author: //meta[@name="author"]/@content
+date: //span[@class='date1']
+body: //div[@id='newsimage'] | //div[@id='bodytext']
+tidy: no
+prune: no
+
+test_url: http://www.modernghana.com/news/323765/1/039ghost039-teachers-removed-salaries-allowances-p.html

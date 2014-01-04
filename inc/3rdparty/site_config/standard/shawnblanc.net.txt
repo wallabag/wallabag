@@ -1,0 +1,11 @@
+title://*[@class='primary']/h1
+date: //*[@class='articledate']
+author: substring-before(substring-after(//*[@class='block first']/p,'2012 '),'.')
+body: //div[@class='primary']
+footnotes: yes
+strip: //*[@class='primary']/h1
+strip: //*[@class='articledate']
+strip: //*[@class='detailsarticle']
+strip: //*[@class='endnav']
+strip: //*[@class='endmeta']
+test_url: http://shawnblanc.net/2011/11/kindle-touch-review/

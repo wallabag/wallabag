@@ -1,0 +1,5 @@
+title://h2
+author://div[@class="posted"]/a
+date://div[@class="date"]
+body://div[@class="entry"]
+test_url: http://pandagon.net/index.php/site/its-okay-to-admit-that-mass-hysteria-is-real

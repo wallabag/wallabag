@@ -1,0 +1,7 @@
+# Ads
+strip: //table[@align="right"][@width="120"]
+
+# Affiliate link paragraphs
+strip: //a[.="Adorama"]/parent::p[contains(., "goodies")]
+strip: //a[.="Adorama"]/parent::p[contains(., "This free website's biggest source of")]
+test_url: http://www.kenrockwell.com/tech/composition.htm

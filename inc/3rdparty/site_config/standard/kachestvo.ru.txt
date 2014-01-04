@@ -1,0 +1,3 @@
+body: //div[contains(@class, 'inner_content')]
+
+test_url: http://kachestvo.ru/promtovar/odezhda/denim.html

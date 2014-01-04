@@ -1,0 +1,12 @@
+title: //h2[contains(@class, 'name')]
+body: //div[@class='printFullPageContentContainer']//div[contains(@class, 'recipe')]
+
+strip_id_or_class: photoBy
+strip_id_or_class: link
+
+single_page_link: //li[@class='print']/a[contains(@href, '/print/')]
+
+prune: no
+tidy: no
+
+test_url: http://www.myrecipes.com/recipe/hummingbird-cake-10000000387218/

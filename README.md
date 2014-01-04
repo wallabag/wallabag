@@ -12,7 +12,7 @@ Abandon Pocket, Instapaper and other Readability service : adopt poche. It is th
 * multi users (very soon!)
 * update notification in configuration screen
 * many storage modes (sqlite, mysql, postgresql)
-* many templates: [have a look here](https://github.com/inthepoche/poche-themes).
+* many templates: [have a look here](https://github.com/inthepoche/poche/tree/master/themes).
 * ...
 
 To test poche, a demo website is online : [demo.inthepoche.com](http://demo.inthepoche.com) (login poche, password poche).

@@ -1,0 +1,22 @@
+# set body
+tidy: no
+body: //div[contains(@class, 'articleContent')]
+
+# remove clutter
+strip: //div[@class='advertising']
+strip: //div[@class='themenalarm']
+strip: //div[contains(@class, 'inTextTeaser')]
+
+# remove captions
+strip: //span[@class='copyRight']
+
+# remove photo galleries and extras
+strip: //div[contains(@class, 'textGallery')]
+strip: //div[contains(@class, 'videoGallery')]
+strip: //div[contains(@class, 'imageGallery')]
+strip: //div[contains(@class, 'openContent')]
+
+# remove comments
+strip: //div[@id = 'writeComment']
+
+test_url: http://www.welt.de/vermischtes/weltgeschehen/article11050589/27-Bergleute-in-neuseelaendischer-Mine-vermisst.html

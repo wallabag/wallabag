@@ -1,0 +1,9 @@
+body: //div[@id='artikelKolom']
+strip: //div[@class='broodMediaBox']/div[@class='docbox' or @class='artBannerWrapper']
+strip: //div[@id='artikeltoolbar']
+strip: //div[@class='reactiebalk artspacer' or @class='bannercenter clearfix artspacer']
+strip: //div[@id='artikelKolomRechts' or @id='TMGTweetWidget']
+tidy: no
+prune: no
+
+test_url: http://www.telegraaf.nl/binnenland/10275097/__Identiteit_man_in_sloot_onbekend__.html?cid=rss

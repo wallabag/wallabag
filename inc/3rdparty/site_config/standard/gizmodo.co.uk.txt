@@ -1,0 +1,7 @@
+body: //div[@id="leadimage" or @class="postcontent"]
+author: //div[@class="contentauthor"]
+date: //div[@class="timestamp"]
+
+prune: no
+
+test_url: http://www.gizmodo.co.uk/2013/02/bbc-forcing-poor-old-sir-david-attenborough-to-go-on-twitter/

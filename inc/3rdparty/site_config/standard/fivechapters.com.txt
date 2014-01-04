@@ -1,0 +1,2 @@
+body: //div[@class='entry']
+test_url: http://www.fivechapters.com/2010/paris-part-one/

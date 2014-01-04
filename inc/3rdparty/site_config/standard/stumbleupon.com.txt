@@ -1,0 +1,3 @@
+single_page_link: //iframe[@id='stumbleFrame']/@src
+
+test_url: www.stumbleupon.com/su/35V0wB/zouchmagazine.com/poetry-violet/

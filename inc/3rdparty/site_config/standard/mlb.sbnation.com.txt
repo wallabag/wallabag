@@ -1,0 +1,14 @@
+title: //h1[@id = 'stream_title']
+author: //p[@class = 'byline']/a
+date: //span[@class = 'datetime']
+
+body: //div[@id = 'stream_container']
+strip: //p[@class = 'byline']
+strip_id_or_class: stream_summary
+strip_id_or_class: social-spoken
+strip_id_or_class: datetime
+strip_id_or_class: author-mini-profile
+strip_id_or_class: social-tools
+strip_id_or_class: entry-tags
+strip_id_or_class: fb-like-box
+test_url: http://mlb.sbnation.com/2011/10/17/2495845/2011-world-series-st-louis-cardinals-texas-rangers-home-field-advantage

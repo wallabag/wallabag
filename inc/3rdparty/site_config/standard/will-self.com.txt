@@ -1,0 +1,4 @@
+strip: //div[@class="widget-area"]
+title: //*[@class="entry-title"]
+date: //time[@class="entry-date"]
+test_url: http://will-self.com/2012/02/01/real-meals-dominos-pizza/

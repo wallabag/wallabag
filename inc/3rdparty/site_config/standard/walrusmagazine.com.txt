@@ -1,0 +1,14 @@
+title: //div[@id='pr']/h3
+author: //div[@class='dateline']//a[contains(@href, '/author/')]
+
+# print page
+body: //div[@id='prbody']
+# standard page
+body: //div[@id='pgbody']
+
+# for multi-page articles
+single_page_link: //div[@class='tipjar']//a[contains(@href, '/printerFriendly.php?')]
+
+prune: no
+
+test_url: http://www.walrusmagazine.com/articles/2011.12-memoir-kidnapped

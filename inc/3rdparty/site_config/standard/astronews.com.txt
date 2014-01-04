@@ -1,0 +1,7 @@
+title: //span[@class='titel']
+author: //span[@class='metadaten_C']/a//span[@class='metadaten_C']
+date: substring-after(//span[@class='metadaten_C'],'astronews.com')
+strip: //span[@class='bu']
+strip_image_src: '/_images/'
+
+test_url: http://www.astronews.com/news/artikel/2011/10/1110-021.shtml

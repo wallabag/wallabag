@@ -1,0 +1,7 @@
+body: //div[(@id = "content")]
+strip: //div[(@class = "links-bar")]
+strip: //div[(@class = "povrzani")]
+strip: //div[(@class = "povrzani-dolu")]
+strip: //div[(@class = "tags")]
+strip: //h1[(@id = "page-title")]
+test_url: http://off.net.mk/zhivot-i-zabava/gadzheti/dzhabe-raboti-dzhabe-ne-dishi

@@ -1,0 +1,6 @@
+body: //div[@id='template_article']
+
+strip_id_or_class: article_more
+strip: //hr
+
+test_url: http://www.web-libre.org/dossiers/jacuzzi-gonflable,8493.html

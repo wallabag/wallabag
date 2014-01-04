@@ -1,0 +1,14 @@
+title: //h1[@class='article-headline']
+date: //span[@class='timeStamp']
+author: substring-before(//p[@class='article-byline'], '/')
+body: //div[@id='article']
+#strip: //div[@class='inner']
+strip: //div[@id='article_head']
+strip: //p[@class='tagLine']
+strip: //div[@id='article_related_links']
+strip: //div[@id='article_related_mlb']
+strip: //span[@class='more']
+strip: //div[@class='article_component']
+strip: //span[@class='screen_reader']
+strip: //ul[@class='columnists_blurb']
+test_url: http://mlb.mlb.com/news/article.jsp?ymd=20120403&content_id=27880830

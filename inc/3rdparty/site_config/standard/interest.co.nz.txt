@@ -1,0 +1,2 @@
+body: //div[@id='content']
+test_url: http://www.interest.co.nz/opinion/opinion-when-our-fear-corporate-way-and-our-love-small-business-man-dangerous-thing

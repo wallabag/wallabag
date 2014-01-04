@@ -1,0 +1,18 @@
+body: //div[contains(@class, 'media-container') or contains(@class, 'body-copy')]
+
+author: //a[@class="name"]
+
+date: //div[@class="post-time"]
+
+title: //h1[@class="headline"]
+strip_id_or_class: module-crunchbase
+
+# The following is for the mobile site
+body: //div[@id="singlentry"]
+author: substring-after(//span[@class="single-post-meta-top"],'rsaquo; ')
+date: substring-before(//div[@class="single-post-meta-top"],' @')
+title: //a[@class="sh2"]
+
+prune: no
+
+test_url: http://techcrunch.com/2011/10/18/apples-insanely-great-q1-2012/

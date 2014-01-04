@@ -1,0 +1,21 @@
+# This filter is tested on:
+# http://www.douban.com/note/215003067/
+# http://www.douban.com/note/213540049/
+# http://www.douban.com/group/topic/31140104/
+
+title: //div[@class='note-header']/h1
+title: //div[@id='content']/h1
+
+author: //div[@class='info']/ul/li/a
+author: //h3/span/a
+
+date://div[@class='note-header']/div/span
+date://h3/span[contains(@class, 'color-green')]
+
+body://div[contains(@class, 'note')]
+body://div[contains(@class, 'topic-content')]
+
+strip://h3
+
+convert_double_br_tags: yes
+test_url: http://www.douban.com/group/topic/31140104/

@@ -1,0 +1,9 @@
+title: //h1[contains(@class, 'cTitle')]
+body: //div[contains(@class, 'KonaBody') or @id='articleimageright']
+author: //meta[@name='Author']/@content
+date: //meta[@name='OriginalPublicationDate']/@content
+
+prune: no
+tidy: no
+
+test_url: http://www.thespoof.com/news/spoof.cfm?headline=s8i108389

@@ -1,0 +1,12 @@
+title: /html/head/title
+
+body: //div[@id = 'articlecontent']/div[contains(@class, 'bodytext')]
+author: //div[@class = 'articleheadings']/p[contains(@class,'author')]/span[@class = 'fn']
+date: //div[@class = 'articleheadings']/span[@class = 'updated']
+strip: //div[div[contains(@class, 'imgbox')]]
+
+body: //div[@class = 'blogitem']
+author: //p[@class="credit"]/span[@class="author"]/a[position() = 1]
+date: //span[@class = 'pubdate']
+
+test_url: http://www.sfgate.com/columnists/garchik/

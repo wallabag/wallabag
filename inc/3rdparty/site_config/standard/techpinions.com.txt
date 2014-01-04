@@ -1,0 +1,7 @@
+body: //div[@class="post"]
+
+strip: //div[@class="post-meta"]
+strip: //div[@id="socialicons"]
+strip: //div[@id="authorbox"]
+
+test_url: http://techpinions.com/why-google-and-microsoft-hate-siri/3572

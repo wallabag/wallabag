@@ -1,0 +1,9 @@
+title: //h2[@class='headline']
+
+body: //div[@class='ContentPrint']
+
+prune: no
+
+single_page_link: //a[contains(@href, '/printVersion/')]
+
+test_url: http://www.villagevoice.com/2010-03-16/news/new-york-s-ten-worst-landlords/

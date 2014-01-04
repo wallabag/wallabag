@@ -1,0 +1,9 @@
+body: //article
+title: //h1
+author: //span[@class='b-article-source-dropdown']
+strip: //span[@class='b-article-photo-incut__source']
+strip: //a[@class='b-read-more b-read-more_bottom']
+
+
+tidy:no
+test_url: http://news.rambler.ru/12972208/

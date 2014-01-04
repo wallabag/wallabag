@@ -28,3 +28,14 @@ CREATE TABLE users_config (
     name varchar(255) NOT NULL,
     value varchar(255) NOT NULL
 );
+
+CREATE TABLE tags (
+  id bigserial primary key,
+  value varchar(255) NOT NULL
+);
+
+CREATE TABLE tags_entries (
+  id bigserial primary key,
+  entry_id integer NOT NULL,
+  tag_id integer NOT NULL
+)

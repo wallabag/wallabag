@@ -1,0 +1,3 @@
+body: //div[@id='content']/div
+date: //p[@class='author_date']/span[@class='date']
+test_url: http://heise-online.mobi/newsticker/meldung/Amazons-Appstore-in-der-Kritik-Ein-Desaster-fuer-Kunden-und-Entwickler-1273936.html

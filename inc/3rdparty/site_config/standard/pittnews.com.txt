@@ -1,0 +1,8 @@
+title: //h2[@class='post-title']
+author: substring-before(substring-after(//h3[@class='post-byline'],'By:'),'/')
+date: substring-before(substring-after(//p[@class='post-details'],'Posted on '),'in')
+strip: //h2[@class='post-title']
+strip: //p[@class='post-details']
+strip: //h3[@class='post-byline']
+body: //div[@id='content']
+test_url: http://pittnews.com/newsstory/mens-basketball-pitt-recruit-robinson-to-bring-leadership/

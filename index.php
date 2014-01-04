@@ -8,8 +8,9 @@
  * @license    http://www.wtfpl.net/ see COPYING file
  */
 
-define ('POCHE', '1.0.0');
+define ('POCHE', '1.3.0');
 require_once 'inc/poche/global.inc.php';
+session_start(); 
 
 # Start Poche
 $poche = new Poche();
@@ -63,12 +64,22 @@ if (isset($_GET['login'])) {
     $poche->updatePassword();
 } elseif (isset($_GET['import'])) {
     $import = $poche->import($_GET['from']);
+} elseif (isset($_GET['download'])) {
+    Tools::download_db();;
 } elseif (isset($_GET['export'])) {
     $poche->export();
 } elseif (isset($_GET['updatetheme'])) {
     $poche->updateTheme();
 } elseif (isset($_GET['updatelanguage'])) {
     $poche->updateLanguage();
+} elseif (isset($_GET['feed'])) {
+    if (isset($_GET['action']) && $_GET['action'] == 'generate') {
+        $poche->generateToken();
+    }
+    else {
+        $tag_id = (isset($_GET['tag_id']) ? intval($_GET['tag_id']) : 0);
+        $poche->generateFeeds($_GET['token'], $_GET['user_id'], $tag_id, $_GET['type']);
+    }
 }
 
 elseif (isset($_GET['plainurl']) && !empty($_GET['plainurl'])) {
@@ -80,8 +91,27 @@ if (Session::isLogged()) {
     $poche->action($action, $url, $id);
     $tpl_file = Tools::getTplFile($view);
     $tpl_vars = array_merge($tpl_vars, $poche->displayView($view, $id));
+} elseif(isset($_SERVER['PHP_AUTH_USER'])) {
+    if($poche->store->userExists($_SERVER['PHP_AUTH_USER'])) {
+        $poche->login($referer);
+    } else {
+        $poche->messages->add('e', _('login failed: user doesn\'t exist'));
+        Tools::logm('user doesn\'t exist');
+        $tpl_file = Tools::getTplFile('login');
+        $tpl_vars['http_auth'] = 1;
+    }
+} elseif(isset($_SERVER['REMOTE_USER'])) {
+    if($poche->store->userExists($_SERVER['REMOTE_USER'])) {
+        $poche->login($referer);
+    } else {
+        $poche->messages->add('e', _('login failed: user doesn\'t exist'));
+        Tools::logm('user doesn\'t exist');
+        $tpl_file = Tools::getTplFile('login');
+        $tpl_vars['http_auth'] = 1;
+    }
 } else {
     $tpl_file = Tools::getTplFile('login');
+    $tpl_vars['http_auth'] = 0;
 }
 
 # because messages can be added in $poche->action(), we have to add this entry now (we can add it before)

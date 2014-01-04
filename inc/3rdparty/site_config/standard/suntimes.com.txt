@@ -1,0 +1,14 @@
+title: //div[@class='story-details']/h1
+date: //span[@class='date-time']
+Author: substring-after(//p[@class='by-line'], 'By ')
+
+strip: //div[@class='videoThumbnails']
+strip: //div[@class='ad-square2-container']
+strip: //div[@class='homeDeliveryContainer5']
+
+strip: //div[@class='image-description']
+strip: //div[@id='internal-side-bar']
+
+strip: //span[@class='hide']
+strip: //div[@class='date']
+test_url: http://www.suntimes.com/technology/ihnatko/8816567-452/review-kindle-fire-is-no-ipad-killer-but-it-is-a-killer-device.html

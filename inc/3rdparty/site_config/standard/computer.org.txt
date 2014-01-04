@@ -1,0 +1,5 @@
+strip_id_or_class:column-3
+strip_id_or_class:portlet-boundary
+strip_id_or_class:banner
+
+test_url: http://www.computer.org/portal/web/buildyourcareer/careerwatch/jt19

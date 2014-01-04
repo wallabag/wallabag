@@ -1,0 +1,4 @@
+title: //title
+body: //div[@id='question']//div[contains(@class,'post-text')] | //div[@id='answers-header']//h2 | //div[contains(@class,'accepted-answer')]//div[contains(@class,'post-text')]
+
+test_url: http://stackoverflow.com/questions/20302422/calling-a-function-from-a-javascript-object

@@ -1,0 +1,11 @@
+author: substring-after(//div[@class='articleauthor'],'By ')
+
+# Blog posts
+date: //div[@class='articledate']
+# News
+date: //div[@class='articledate_b']
+
+body: //div[@class='articletext']
+
+convert_double_br_tags: yes
+test_url: http://www.evo.co.uk/carreviews/evolongtermtests/280072/bmw_330d_sport_touring.html

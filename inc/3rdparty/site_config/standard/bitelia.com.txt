@@ -1,0 +1,2 @@
+body: //*[(@class = "historia")]
+test_url: http://bitelia.com/2011/09/klout-midiendo-influencia

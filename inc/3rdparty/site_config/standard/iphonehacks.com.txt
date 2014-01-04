@@ -1,0 +1,9 @@
+title: //meta[@name='og:title']/@content
+body: //small[@class='postmetadata'] | //div[contains(@class, 'entry-content')]
+
+strip: //span[@vanilla-identifier]
+
+prune: no
+tidy: no
+
+test_url: http://www.iphonehacks.com/2012/07/app-review-process-behind-the-scenes.html

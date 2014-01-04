@@ -1,0 +1,15 @@
+title: //h1
+body: //div[@id = 'content-area']
+next_page_link: //div[@class='node-pager']/a[contains(@class, 'next')]
+tidy: no
+author: //p[contains(@class, 'byline')]/a
+
+strip_id_or_class: node-header
+strip_id_or_class: hdr-tools
+strip_id_or_class: node-body-break
+strip_id_or_class: pullquote
+strip_id_or_class: node-pager
+strip_id_or_class: author-bio
+strip_id_or_class: node-footer
+
+test_url: http://motherjones.com/politics/2012/02/mac-mcclelland-free-online-shipping-warehouses-labor

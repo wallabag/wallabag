@@ -1,0 +1,7 @@
+body: //div[@id = 'post']
+strip: //div[@class = 'postinfo']
+strip: //div[@id = 'postmetanew']
+strip: //div[@class = 'paginator']
+strip: //div[@class = 'col-2']
+strip: //div[@id = 'adfactor-label']
+test_url: http://www.ipadplanet.nl/11723/steve-jobs-bevestigt-verdwijnen-fysieke-rotatieschakelaar-in-ios-4-2/

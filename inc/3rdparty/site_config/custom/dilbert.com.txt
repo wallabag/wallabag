@@ -1,0 +1,4 @@
+title: //div[contains(@class, 'SB_Title')]//a
+body: //div[contains(@class, 'STR_Content')]
+
+test_url: http://dilbert.com/strips/comic/2013-10-22

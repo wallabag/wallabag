@@ -1,0 +1,10 @@
+author://div[@class = 'article-author']/span[@class = 'byline']
+title://h1[@class = 'heading']
+body://div[@id = 'related-article-links']
+strip://div[@id = 'comment-sort-order']
+strip://div[@id = 'my-profile']
+strip://div[@class = 'article-author']
+strip://div[@class = 'bg-f8f1d8 width-385 text-left']
+strip://div[@id = 'login-status']
+strip://div[@class = 'puff-padding']
+test_url: http://entertainment.timesonline.co.uk/tol/arts_and_entertainment/the_tls/article7177738.ece

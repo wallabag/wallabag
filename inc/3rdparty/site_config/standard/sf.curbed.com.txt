@@ -1,0 +1,7 @@
+title: //h1[@class='post-title']
+author: //div[@class='post-byline']/a
+date: substring-before(//div[@class='post-byline'], ', by')
+
+body: //div[@class='post-body']
+dissolve: //noscript
+test_url: http://sf.curbed.com/archives/2011/10/17/lower_haight_loft_would_really_really_really_like_a_buyer.php

@@ -1,0 +1,23 @@
+# applies to uk.ds.ign.com, uk.wii.ign.com etc.
+# possibly to non-UK versions, but I can&rsquo;t test that
+
+title: //h1[@class="headline"]
+author: //div[@class="hdr-sub byline"]/a
+date: //h2[@class="publish-date"]/span
+body: //div[@id="main-article-content"]
+
+strip: //ul[@class="lnks-readmore"]
+
+strip: //div[@class="inlineImageCaption"]
+# can&rsquo;t make the images appear, so remove the captions
+
+strip: //div[@style="width:468px"]
+# video caption links
+
+convert_double_br_tags: yes
+
+strip_comments: no
+# otherwise the &lsquo;Closing Comments&rsquo; are removed
+
+# Ratings box could do with some rearranging, but it&rsquo;s tricky
+test_url: http://uk.xbox360.ign.com/articles/121/1210717p1.html

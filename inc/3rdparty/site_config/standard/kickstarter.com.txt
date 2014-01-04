@@ -1,0 +1,7 @@
+title: //h1[@id='name']
+body: //*[@id='leftcol']
+
+strip_id_or_class: 'share-box'
+strip_id_or_class: 'project-faqs'
+strip_id_or_class: 'report-issue-wrap'
+test_url: http://www.kickstarter.com/projects/hop/elevation-dock-the-best-dock-for-iphone

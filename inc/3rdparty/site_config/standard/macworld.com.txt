@@ -1,0 +1,24 @@
+title: //article//h1
+date: //meta[@name="date"]/@content
+author: //div[@class="author-name" or @class="article-byline"]/a[1]
+
+body: //section[@class="page"]
+
+# remove 'From the Lab' and 'Recent posts' text
+strip: //div[@class='blogLabel']
+
+# remove byline and meta info
+strip: //div[@class="article-meta"]
+strip: //div[@class="author-info"]
+
+#strip tags and categories
+strip: //div[@class="department"]
+
+#strip product cap links
+strip: //div[@class="cap-main"]
+strip: //div[@id="compare-lede"]
+
+prune: no
+
+# copes less well with Review pages, seems fine for News
+test_url: http://www.macworld.com/article/163184/2011/10/the_ipod_as_an_iconic_cultural_force.html

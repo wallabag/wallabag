@@ -1,0 +1,4 @@
+title: //div[@class='post']/h2
+body: //div[@class='entry']
+strip: //p[contains(.,'Tags:')]
+test_url: http://www.kingarthurflour.com/blog/2011/01/28/a-big-sandwich-for-the-big-game/

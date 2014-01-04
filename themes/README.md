@@ -24,7 +24,7 @@ That's all !
 
 ## create a theme
 
-Just have a look to this short documentation : http://inthepoche.com/doc/doku.php?id=designers:creating_theme
+Just have a look to this short documentation : http://doc.inthepoche.com/doku.php?id=designers:creating_theme
 
 ## send a theme
 

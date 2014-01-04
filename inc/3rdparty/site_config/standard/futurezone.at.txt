@@ -1,0 +1,11 @@
+date: //span[@class='date']
+strip: //div[@class='postsidebar']
+body: //div[@class='singlepost']
+title: //div[@class='singlepost']/h1
+move_into(//div[@class='singlepost']): //div[@class='info']
+strip: //div[@class='gallery']
+strip: //div[@class='biggallery']
+strip: //ul[@class='social']
+strip: //ul[@class='social_mail']
+
+test_url: http://futurezone.at/future/5502-erste-galileo-satelliten-starten-ins-all.php

@@ -1,0 +1,5 @@
+title: //h1
+body: //div[@id = 'article_content']/div[contains(@class,'article')]
+author: //sub[@class = 'article_promoted_text']/a[starts-with(@href, 'member')]
+date: //div[@class = 'article_username_container']
+test_url: http://www.mmo-champion.com/content/2688-Other-Press-Tour-Interviews-A-Night-in-Mists-of-Pandaria-Blue-Posts-MoP-Screenshot

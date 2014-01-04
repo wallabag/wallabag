@@ -1,0 +1,8 @@
+next_page_link: //div[@id='longPagination']/a[@class='next']
+
+title: //div[@id='contentHeader']//h1
+
+body: //div[@id='articleBody']
+# this is so sad
+body: //div[@id='intelliTXT']
+test_url: http://www.popularmechanics.com/technology/aviation/crashes/what-really-happened-aboard-air-france-447-6611877

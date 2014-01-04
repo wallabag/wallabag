@@ -1,0 +1,7 @@
+title: //meta[@property="og:title"]/@content
+body: //div[@class='post_body']
+date: //*[@class='post_time']
+
+prune: no
+
+test_url: http://www.engadget.com/2011/05/20/screen-grabs-the-mentalist-takes-the-ipad-to-new-heights/

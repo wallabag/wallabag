@@ -1,0 +1,5 @@
+strip: //div[contains(@class, 'articleAdtechAd')]
+title: //div[@id='article']/h1
+title: //div[contains(@class, 'article')]/h1
+body: //div[@id='articleText']
+test_url: http://www.computerworld.dk/art/56748/test-din-viden-med-computerworlds-store-sommerquiz?a=fp_1&i=0

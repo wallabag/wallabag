@@ -1,0 +1,13 @@
+title: //div[@class='posthead']//h2
+body: //div[contains(@class, 'postcontent') or @class='posthead']
+author: //div[@class='posthead']//a[@rel='author']
+
+strip: //div[@class='posthead']//h2
+replace_string(>Advertisements</div>): ></div>
+replace_string(<p>You can follow us on): <p style="display:none;">
+strip_id_or_class: likeThisPost
+
+prune: no
+tidy: no
+
+test_url: http://www.redmondpie.com/how-to-play-music-directly-from-home-screen-folders-on-iphone/

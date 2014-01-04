@@ -1,0 +1,2 @@
+body://div[@class='post']
+test_url: http://blog.spu.edu/lectio/from-the-frying-pan-into-the-fire/

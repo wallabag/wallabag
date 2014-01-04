@@ -1,0 +1,12 @@
+title: //h1/span
+
+body: //div[@id="news_content"]
+
+author: //div[@class="bookmarks_btm"]/p[1]/a[1]/text()
+
+date: //span[@class='date']
+
+# Rubrikenbild entfernen
+strip: //div[@id="news_content"]/a[1]
+
+test_url: http://winfuture.de/news,69672.html

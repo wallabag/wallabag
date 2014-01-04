@@ -1,0 +1,5 @@
+body: (//blockquote[contains(@class, 'postcontent')])[1]
+body: (//div[starts-with(@id, 'post_message')])[1]
+
+prune: no
+tidy: no

@@ -1,0 +1,11 @@
+single_page_link: //div[@id='content']//p[@class='readMore']/a
+
+title: //div[@class='hidden offscreen']/h2
+body: //div[@id="storyText"]
+move_into(//div[@id='storyText']): //div[@class='fact']
+strip: //small[@class='credit']
+strip: //small[@class='caption']
+date: substring-after(//div[@id='storyMeta']//p[@class='date'],'Publiziert am')
+strip: //p[@class='toplink']
+
+test_url: http://sport.orf.at/stories/2084851/

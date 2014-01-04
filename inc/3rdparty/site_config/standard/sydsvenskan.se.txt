@@ -1,0 +1,11 @@
+title: //h1
+
+author: //a[contains(@href, '/sok/?')]/text()
+
+date: substring-after(//span[@class='date'], 'Publicerad ')
+
+body: //div[@class='two_column_left']
+strip_id_or_class: story
+strip: //div[@class='leadText saplo:lead']/h5
+
+test_url: http://www.sydsvenskan.se/kultur-och-nojen/-jag-vill-garna--stanna--

@@ -1,0 +1,10 @@
+title: //meta[@property='og:title']/@content
+body: //*[@class='fliesstext_detail' or @class='detail_fliesstext'] | //img[@itemprop="image" and starts-with(@src, "/sixcms/media.php/")]
+
+strip_id_or_class: socialshareprivacy1
+strip_id_or_class: zvaFacebookButton
+
+tidy: no
+prune: no
+
+test_url: http://www.aachener-nachrichten.de/lokales/aachen-detail-an/2517757

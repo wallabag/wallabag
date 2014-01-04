@@ -1,0 +1,7 @@
+title: //div[@class='HaberDetayTitleHold Title']/h1
+body: //div[@id='YazarDetayText']
+author: //div[@class='HaberDetayTitleHold Title']/h1
+prune: no
+
+test_url: http://www.hurriyet.com.tr/ekonomi/19490260.asp
+test_url: http://www.hurriyet.com.tr/yazarlar/22078439.asp

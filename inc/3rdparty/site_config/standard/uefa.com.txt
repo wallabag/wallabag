@@ -1,0 +1,6 @@
+body: //div[@class='d3cmsCBody']//div[@class='pubText pubDate' or @class='newsComment' or contains(@class, 'newsPhoto') or @class='newsText']
+strip: //div[contains(@class, 'mpindex')]
+prune: no
+tidy: no
+
+test_url: http://www.uefa.com/uefaeuropaleague/news/newsid=1617320.html

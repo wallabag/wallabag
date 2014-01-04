@@ -49,6 +49,7 @@ class Poche
             if (! $this->store->isInstalled()) {
                 $this->install();
             }
+            $this->store->checkTags();
         }
     }
     
@@ -327,14 +328,17 @@ class Poche
     /**
      * Call action (mark as fav, archive, delete, etc.)
      */
-    public function action($action, Url $url, $id = 0, $import = FALSE)
+    public function action($action, Url $url, $id = 0, $import = FALSE, $autoclose = FALSE)
     {
         switch ($action)
         {
             case 'add':
-                $content = $url->extract();
+                $json = file_get_contents(Tools::getPocheUrl() . '/inc/3rdparty/makefulltextfeed.php?url='.urlencode($url->getUrl()).'&max=5&links=preserve&exc=&format=json&submit=Create+Feed');
+                $content = json_decode($json, true);
+                $title = $content['rss']['channel']['item']['title'];
+                $body = $content['rss']['channel']['item']['description'];
 
-                if ($this->store->add($url->getUrl(), $content['title'], $content['body'], $this->user->getId())) {
+                if ($this->store->add($url->getUrl(), $title, $body, $this->user->getId())) {
                     Tools::logm('add link ' . $url->getUrl());
                     $sequence = '';
                     if (STORAGE == 'postgres') {
@@ -342,7 +346,7 @@ class Poche
                     }
                     $last_id = $this->store->getLastId($sequence);
                     if (DOWNLOAD_PICTURES) {
-                        $content = filtre_picture($content['body'], $url->getUrl(), $last_id);
+                        $content = filtre_picture($body, $url->getUrl(), $last_id);
                         Tools::logm('updating content article');
                         $this->store->updateContent($last_id, $content, $this->user->getId());
                     }
@@ -358,7 +362,11 @@ class Poche
                 }
 
                 if (!$import) {
-                    Tools::redirect('?view=home');
+                    if ($autoclose == TRUE) {
+                      Tools::redirect('?view=home');
+                    } else {
+                      Tools::redirect('?view=home&closewin=true');
+                    }
                 }
                 break;
             case 'delete':
@@ -374,7 +382,7 @@ class Poche
                     $msg = 'error : can\'t delete link #' . $id;
                 }
                 Tools::logm($msg);
-                Tools::redirect();
+                Tools::redirect('?');
                 break;
             case 'toggle_fav' :
                 $this->store->favoriteById($id, $this->user->getId());
@@ -389,6 +397,36 @@ class Poche
                 if (!$import) {
                     Tools::redirect();
                 }
+                break;
+            case 'add_tag' :
+                $tags = explode(',', $_POST['value']);
+                $entry_id = $_POST['entry_id'];
+                foreach($tags as $key => $tag_value) {
+                    $value = trim($tag_value);
+                    $tag = $this->store->retrieveTagByValue($value);
+
+                    if (is_null($tag)) {
+                        # we create the tag
+                        $tag = $this->store->createTag($value);
+                        $sequence = '';
+                        if (STORAGE == 'postgres') {
+                            $sequence = 'tags_id_seq';
+                        }
+                        $tag_id = $this->store->getLastId($sequence);
+                    }
+                    else {
+                        $tag_id = $tag['id'];
+                    }
+
+                    # we assign the tag to the article
+                    $this->store->setTagToEntry($tag_id, $entry_id);
+                }
+                Tools::redirect();
+                break;
+            case 'remove_tag' :
+                $tag_id = $_GET['tag_id'];
+                $this->store->removeTagForEntry($id, $tag_id);
+                Tools::redirect();
                 break;
             default:
                 break;
@@ -408,6 +446,8 @@ class Poche
                 $compare_prod = version_compare(POCHE, $prod);
                 $themes = $this->getInstalledThemes();
                 $languages = $this->getInstalledLanguages();
+                $token = $this->user->getConfigValue('token');
+                $http_auth = (isset($_SERVER['PHP_AUTH_USER']) || isset($_SERVER['REMOTE_USER'])) ? true : false;
                 $tpl_vars = array(
                     'themes' => $themes,
                     'languages' => $languages,
@@ -415,8 +455,36 @@ class Poche
                     'prod' => $prod,
                     'compare_dev' => $compare_dev,
                     'compare_prod' => $compare_prod,
+                    'token' => $token,
+                    'user_id' => $this->user->getId(),
+                    'http_auth' => $http_auth,
                 );
                 Tools::logm('config view');
+                break;
+            case 'edit-tags':
+                # tags
+                $tags = $this->store->retrieveTagsByEntry($id);
+                $tpl_vars = array(
+                    'entry_id' => $id,
+                    'tags' => $tags,
+                );
+                break;
+            case 'tag':
+                $entries = $this->store->retrieveEntriesByTag($id);
+                $tag = $this->store->retrieveTag($id);
+                $tpl_vars = array(
+                    'tag' => $tag,
+                    'entries' => $entries,
+                );
+                break;
+            case 'tags':
+                $token = $this->user->getConfigValue('token');
+                $tags = $this->store->retrieveAllTags();
+                $tpl_vars = array(
+                    'token' => $token,
+                    'user_id' => $this->user->getId(),
+                    'tags' => $tags,
+                );
                 break;
             case 'view':
                 $entry = $this->store->retrieveOneById($id, $this->user->getId());
@@ -431,12 +499,16 @@ class Poche
 
                     # flattr checking
                     $flattr = new FlattrItem();
-                    $flattr->checkItem($entry['url'],$entry['id']);
+                    $flattr->checkItem($entry['url'], $entry['id']);
+
+                    # tags
+                    $tags = $this->store->retrieveTagsByEntry($entry['id']);
 
                     $tpl_vars = array(
-                    'entry' => $entry,
-                    'content' => $content,
-                    'flattr' => $flattr
+                        'entry' => $entry,
+                        'content' => $content,
+                        'flattr' => $flattr,
+                        'tags' => $tags
                     );
                 }
                 else {
@@ -574,6 +646,25 @@ class Poche
     }
 
     /**
+     * get credentials from differents sources
+     * it redirects the user to the $referer link
+     * @return array
+     */
+    private function credentials() {
+        if(isset($_SERVER['PHP_AUTH_USER'])) {
+            return array($_SERVER['PHP_AUTH_USER'],'php_auth');
+        }
+        if(!empty($_POST['login']) && !empty($_POST['password'])) {
+            return array($_POST['login'],$_POST['password']);
+        }
+        if(isset($_SERVER['REMOTE_USER'])) {
+            return array($_SERVER['REMOTE_USER'],'http_auth');
+        }
+
+        return array(false,false);
+     }
+
+    /**
      * checks if login & password are correct and save the user in session.
      * it redirects the user to the $referer link
      * @param  string $referer the url to redirect after login
@@ -582,20 +673,23 @@ class Poche
      */
     public function login($referer)
     {
-        if (!empty($_POST['login']) && !empty($_POST['password'])) {
-            $user = $this->store->login($_POST['login'], Tools::encodeString($_POST['password'] . $_POST['login']));
+        list($login,$password)=$this->credentials();
+        if($login === false || $password === false) {
+            $this->messages->add('e', _('login failed: you have to fill all fields'));
+            Tools::logm('login failed');
+            Tools::redirect();
+        }
+        if (!empty($login) && !empty($password)) {
+            $user = $this->store->login($login, Tools::encodeString($password . $login));
             if ($user != array()) {
                 # Save login into Session
-                Session::login($user['username'], $user['password'], $_POST['login'], Tools::encodeString($_POST['password'] . $_POST['login']), array('poche_user' => new User($user)));
+            	$longlastingsession = isset($_POST['longlastingsession']);
+                Session::login($user['username'], $user['password'], $login, Tools::encodeString($password . $login), $longlastingsession, array('poche_user' => new User($user)));
                 $this->messages->add('s', _('welcome to your poche'));
                 Tools::logm('login successful');
                 Tools::redirect($referer);
             }
             $this->messages->add('e', _('login failed: bad login or password'));
-            Tools::logm('login failed');
-            Tools::redirect();
-        } else {
-            $this->messages->add('e', _('login failed: you have to fill all fields'));
             Tools::logm('login failed');
             Tools::redirect();
         }
@@ -712,34 +806,37 @@ class Poche
             $url = NULL;
             $favorite = FALSE;
             $archive = FALSE;
-            foreach ($value as $attr => $attr_value) {
-                if ($attr == 'article__url') {
-                    $url = new Url(base64_encode($attr_value));
-                }
-                $sequence = '';
-                if (STORAGE == 'postgres') {
-                    $sequence = 'entries_id_seq';
-                }
-                if ($attr_value == 'true') {
-                    if ($attr == 'favorite') {
-                        $favorite = TRUE;
+            foreach ($value as $item) {
+                foreach ($item as $attr => $value) {
+                    if ($attr == 'article__url') {
+                        $url = new Url(base64_encode($value));
                     }
-                    if ($attr == 'archive') {
-                        $archive = TRUE;
+                    $sequence = '';
+                    if (STORAGE == 'postgres') {
+                        $sequence = 'entries_id_seq';
+                    }
+                    if ($value == 'true') {
+                        if ($attr == 'favorite') {
+                            $favorite = TRUE;
+                        }
+                        if ($attr == 'archive') {
+                            $archive = TRUE;
+                        }
                     }
                 }
-            }
-            # we can add the url
-            if (!is_null($url) && $url->isCorrect()) {
-                $this->action('add', $url, 0, TRUE);
-                $count++;
-                if ($favorite) {
-                    $last_id = $this->store->getLastId($sequence);
-                    $this->action('toggle_fav', $url, $last_id, TRUE);
-                }
-                if ($archive) {
-                    $last_id = $this->store->getLastId($sequence);
-                    $this->action('toggle_archive', $url, $last_id, TRUE);
+
+                # we can add the url
+                if (!is_null($url) && $url->isCorrect()) {
+                    $this->action('add', $url, 0, TRUE);
+                    $count++;
+                    if ($favorite) {
+                        $last_id = $this->store->getLastId($sequence);
+                        $this->action('toggle_fav', $url, $last_id, TRUE);
+                    }
+                    if ($archive) {
+                        $last_id = $this->store->getLastId($sequence);
+                        $this->action('toggle_archive', $url, $last_id, TRUE);
+                    }
                 }
             }
         }
@@ -813,5 +910,59 @@ class Poche
            file_put_contents($cache_file, $version, LOCK_EX);
         }
         return $version;
+    }
+
+    public function generateToken()
+    {
+        if (ini_get('open_basedir') === '') {
+            $token = substr(base64_encode(file_get_contents('/dev/urandom', false, null, 0, 20)), 0, 15);
+        }
+        else {
+            $token = substr(base64_encode(uniqid(mt_rand(), true)), 0, 20);
+        }
+
+        $this->store->updateUserConfig($this->user->getId(), 'token', $token);
+        $currentConfig = $_SESSION['poche_user']->config;
+        $currentConfig['token'] = $token;
+        $_SESSION['poche_user']->setConfig($currentConfig);
+    }
+
+    public function generateFeeds($token, $user_id, $tag_id, $type = 'home')
+    {
+        $allowed_types = array('home', 'fav', 'archive', 'tag');
+        $config = $this->store->getConfigUser($user_id);
+
+        if (!in_array($type, $allowed_types) ||
+            $token != $config['token']) {
+            die(_('Uh, there is a problem while generating feeds.'));
+        }
+        // Check the token
+
+        $feed = new FeedWriter(RSS2);
+        $feed->setTitle('poche - ' . $type . ' feed');
+        $feed->setLink(Tools::getPocheUrl());
+        $feed->setChannelElement('updated', date(DATE_RSS , time()));
+        $feed->setChannelElement('author', 'poche');
+
+        if ($type == 'tag') {
+            $entries = $this->store->retrieveEntriesByTag($tag_id);
+        }
+        else {
+            $entries = $this->store->getEntriesByView($type, $user_id);
+        }
+
+        if (count($entries) > 0) {
+            foreach ($entries as $entry) {
+                $newItem = $feed->createNewItem();
+                $newItem->setTitle($entry['title']);
+                $newItem->setLink(Tools::getPocheUrl() . '?view=view&amp;id=' . $entry['id']);
+                $newItem->setDate(time());
+                $newItem->setDescription($entry['content']);
+                $feed->addItem($newItem);
+            }
+        }
+
+        $feed->genarateFeed();
+        exit;
     }
 }

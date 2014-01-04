@@ -1,0 +1,6 @@
+author: //article//*[@class="author"]
+date: //article//*[@class="publication-date"]
+body: //article
+strip: //article/header
+strip: //article/section
+test_url: http://www.playboy.com/playground/view/playboy-interview-jon-hamm

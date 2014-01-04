@@ -1,0 +1,6 @@
+title: //h1[@class='posttitle']
+author: //span[@class='author']/a
+date: //span[@class='timestamp']
+body: //div[@class='body']
+
+test_url: http://www.tuaw.com/2011/10/19/apple-posts-fans-memories-of-steve-jobs/

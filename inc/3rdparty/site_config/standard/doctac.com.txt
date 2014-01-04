@@ -1,0 +1,8 @@
+strip: //*[(@id = "featured")]
+
+author:substring-after( //div[@class='posttitle']/h2[@class='author'],'by ')
+
+date: concat(//div[@class='month'],' ',//div[@class='day'])
+
+#doctac doesn't provide a year, but month/day is better than nothing
+test_url: http://www.doctac.com/mac/iphone/instapaper-update-app/

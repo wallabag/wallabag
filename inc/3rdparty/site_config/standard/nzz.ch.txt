@@ -1,0 +1,12 @@
+body: //*[@class='article-full']
+title: //h3
+strip: //header[@class='group']
+#body: //p[@class='lead']
+#move_into(//p[@class='lead']): //*[@class='article-full']/figure
+#move_into(//p[@class='lead']): //div[@id='articleBodyText']
+strip: //div[@id='social-media-floater']
+strip: //div[@class='advertisement']
+strip: //div[@class='infobox']
+strip: //div[@id='articleComments']
+
+test_url: http://www.nzz.ch/wissen/wissenschaft/sonnenschutz-fuer-die-erde-1.17282213

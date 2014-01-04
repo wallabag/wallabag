@@ -1,0 +1,11 @@
+title: //h1[@class='post-title']
+body: //div[@class='post']
+author: //p[@class='posted-by']
+date: //div[@class='sprite post-date']
+
+# The body of the post doesn't have it's own div so we have to strip out the metadata
+strip: //div[@class='author_avatar']
+strip: //div[@class='sprite post-date']
+strip: //h1[@class='post-title']
+strip: //p[@class='posted-by']
+test_url: http://thepioneerwoman.com/cooking/2011/08/pie-fats-a-comparison/

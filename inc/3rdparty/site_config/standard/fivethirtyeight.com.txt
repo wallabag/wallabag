@@ -1,0 +1,7 @@
+title: substring-after(//title, 'Right:')
+body: //div[@class = 'post-body']
+author: substring-after(//*[@class='post-author'], 'by')
+date: concat(//*[@class='date-header'], ' ', //*[@class='post-timestamp']/a)
+convert_double_br_tags: yes
+
+test_url: http://www.fivethirtyeight.com/2010/07/does-rnc-have-structural-problems.html

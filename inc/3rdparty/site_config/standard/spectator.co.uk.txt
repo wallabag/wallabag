@@ -1,0 +1,7 @@
+author: /html/body/div[@id='wrapper']/div[@id='main-content']/div[@class='article_body']/a[@class='author-link']/child::text()
+
+body: /html/body/div[@id='wrapper']/div[@id='main-content']/div[@class='article_body']
+
+# Not very helpfull, the title and author are container by the same element that contains the body
+strip: /html/body/div[@id='wrapper']/div[@id='main-content']/div[@class='article_body']/h2 | /html/body/div[@id='wrapper']/div[@id='main-content']/div[@class='article_body']/a[@class='author-link']
+test_url: http://www.spectator.co.uk/arts-and-culture/night-and-day/7449683/spotify-sunday-my-personal-soundtrack.thtml

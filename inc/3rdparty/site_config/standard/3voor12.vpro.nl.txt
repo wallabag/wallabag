@@ -1,0 +1,11 @@
+body: //div[@id='main']
+title: //div[@class='intro']/h1
+author: //ul[@class='text-data']/li[@class='author']
+date: //ul[@class='text-data']/li[@class='date']
+convert_double_br_tags: yes
+tidy: no
+
+strip: //div[@class='share']
+strip: //*[@class='zoom']
+strip: //div[@id='disqus_thread']
+test_url: http://3voor12.vpro.nl/nieuws/2012/januari/Ook-website-GroenLinks-woensdag-op-zwart-i-v-m--SOPA.html

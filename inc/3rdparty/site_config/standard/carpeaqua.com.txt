@@ -1,0 +1,6 @@
+title: //h2
+body: //div[@class='entry']
+
+prune: no
+# otherwise the footnotes are removed
+test_url: http://carpeaqua.com/2011/03/27/the-intersection-of-power-and-portability/

@@ -1,0 +1,8 @@
+title: (//article//h2)[1]
+body: //article[contains(@class, 'post')]
+date: //time[@id='top_time']/@datetime
+
+prune: no
+tidy: no
+
+test_url: http://dcurt.is/predictions-txt

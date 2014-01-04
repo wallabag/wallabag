@@ -1,0 +1,16 @@
+author: //p[@class='byline']/a
+body: //div[contains(@class,'article-content')]
+strip: //h2[@class='title']
+strip_id_or_class: byline
+prune: no
+
+date: //div[@class='byline']/span[@class='posted']//abbr/@original-title
+date: //div[@class='byline']/span[@class='posted']//abbr
+
+title: //div[@id='story']//h2[@class='title']
+
+strip: //div[@class='pager']
+next_page_link: //nav//a[span/@class='next']/@href
+
+test_url: http://arstechnica.com/tech-policy/news/2012/02/gigabit-internet-for-80-the-unlikely-success-of-californias-sonicnet.ars
+test_url: http://arstechnica.com/apple/2005/04/macosx-10-4/

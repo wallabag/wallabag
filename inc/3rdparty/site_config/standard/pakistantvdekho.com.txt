@@ -1,0 +1,11 @@
+#body: (//div[@class='ftr-yt-vid'])[1]
+body: (//blockquote[contains(@class, 'postcontent')])[1]
+body: (//div[starts-with(@id, 'post_message')])[1]
+
+prune: no
+tidy: no
+
+#replace_string(<iframe title="YouTube video player"): <div class="ftr-yt-vid"><iframe title="YouTube video player"
+#replace_string(</iframe>): </iframe>&nbsp;</div>
+
+test_url: http://pakistantvdekho.com/showthread.php?647741-Sitam-Gar-by-HUM-TV-Episode-07&p=659080#post659080

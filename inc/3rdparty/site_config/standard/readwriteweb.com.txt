@@ -1,0 +1,8 @@
+title: //h1[@class="titlelink"]
+date: //span[@class="timestamp"]/@data-published
+body: //div[@class="asset-content"]
+strip_id_or_class: related-entries
+strip_id_or_class: like-and-retweet
+
+author: //div[@id="submeta"]/a[1]
+test_url: http://www.readwriteweb.com/archives/why_facebook_terrifies_google.php

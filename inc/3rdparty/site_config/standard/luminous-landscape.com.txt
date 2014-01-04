@@ -1,0 +1,6 @@
+title: //h2
+
+body: // div[@id='content']
+
+strip: //div[@class='sidebar_wrapper']
+test_url: http://www.luminous-landscape.com/tutorials/optimizing_exposure.shtml

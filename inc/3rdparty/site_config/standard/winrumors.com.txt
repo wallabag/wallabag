@@ -1,0 +1,6 @@
+title: //h1[@class='page-heading']
+author: //small/strong/a
+#their date string is relative, so if you save the page 2 hours after it is posted it may say 'two hours ago, instead of providing a useful date/time'
+date: substring-before(substring-after(//small,'on'),'with')
+body: //div[@class='entry']
+test_url: http://www.winrumors.com/chinese-windows-phone-launch-still-on-track-for-early-2012/

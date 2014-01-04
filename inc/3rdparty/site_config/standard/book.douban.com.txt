@@ -1,0 +1,6 @@
+body: //span[@property='v:description']
+date: //span[@property='v:dtreviewed']
+author: //span[@property='v:reviewer']
+prune: no
+
+test_url: http://book.douban.com/review/2422662/

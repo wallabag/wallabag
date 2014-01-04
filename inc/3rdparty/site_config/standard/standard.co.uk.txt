@@ -1,0 +1,16 @@
+autodetect_next_page: no
+footnotes: no
+dissolve: //div[@class="column-2"]//div[@class="widget"]
+dissolve: //div[@class="column-2"]//div
+
+author: //div[@class="innerbyline"]/a
+strip: //div[@class="innerbyline"]/a
+
+strip: //p[@class="dateline"]
+date: //p[@class="dateline"]
+
+title: //h1[@class="title"]
+author: //div[@class="innerbyline"]/a
+date: //p[@class="dateline"]
+body: //div[@class="column-2"]
+test_url: http://www.standard.co.uk/lifestyle/esmagazine/grace-and-flavour-pizarro-7938350.html

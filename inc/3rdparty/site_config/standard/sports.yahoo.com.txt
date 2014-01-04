@@ -1,0 +1,9 @@
+title: //div[@id='article']/div[@class='hd']/h1
+body: //p[@id='byline'] | //div[@id='article']//div[@class='body_copy 0']
+strip: //div[@class='foot']
+strip: //div[@id='sidebar']//div[@class='ft']
+strip: //p[@id='byline']//em
+tidy: no
+prune: no
+
+test_url: http://sports.yahoo.com/nba/news?slug=ap-nbafinals

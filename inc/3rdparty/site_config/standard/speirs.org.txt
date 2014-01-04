@@ -1,0 +1,2 @@
+body://div[@class="body"]
+test_url: http://speirs.org/blog/2011/5/5/ipad-trials-at-oklahoma-state.html

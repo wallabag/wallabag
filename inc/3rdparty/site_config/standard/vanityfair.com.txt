@@ -1,0 +1,30 @@
+title: //meta[@property="og:title"]/@content
+author: //div[contains(@class, 'byline')]//span[contains(@class, 'name')]
+date: //div[contains(@class, 'cn_date_time')]
+body: //div[contains(@class, 'pageContainers')]
+body: //article[@id='items-container']
+#body: //h2[@class='sub-header'] | //div[contains(@class, 'contributor-type') or @class='display-date' or @class='content-container']
+
+strip_id_or_class: bc
+strip_id_or_class: utilities
+strip_id_or_class: list-supporting
+strip_id_or_class: yrail
+strip_id_or_class: urail
+
+prune: no
+#tidy: no
+
+strip_id_or_class: super-rubric-section
+strip_id_or_class: cn_date_time
+strip_id_or_class: cn_contributors
+strip_id_or_class: cn_pagination_controls
+strip_id_or_class: cn_features_container
+strip_id_or_class: global-footer
+strip_id_or_class: cn_ecom_placement
+strip: //li[@class='blogNavPrev']
+
+single_page_link: //a[@title='Print this page']
+
+test_url: http://www.vanityfair.com/politics/features/2011/05/egypt-revolutionaries-201105
+test_url: http://www.vanityfair.com/politics/features/2008/08/hitchens200808
+test_url: http://www.vanityfair.com/style/2012/01/prisoners-of-style-201201

@@ -1,0 +1,5 @@
+title://h1
+
+date://p[@class='articleDate']
+body://div[@class='articleBody wzStandardArticle']
+test_url: http://www.wz-newsline.de/home/sport/tennis/federer-zum-vierten-mal-sieger-in-indian-wells-1.938050

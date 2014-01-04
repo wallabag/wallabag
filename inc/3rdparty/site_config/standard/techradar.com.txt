@@ -1,0 +1,12 @@
+# Title without news/reviews etc. appended
+title: //div[@id='subColumn1Pad']/div[1][@class='article']/div[1][@class='articleHead']/h1
+
+# Remove home link
+strip: //div[@id='page_logo']/a
+
+# Remove utilities
+strip: //*[(@id = "utilities")]
+
+# Remove comments link
+strip: //div[@id='subColumn1Pad']/div[1][@class='article']/div[1][@class='articleHead']/p[@class='tiny']
+test_url: http://www.techradar.com/news/television/sky-to-rebrand-living-as-sky-living-903105

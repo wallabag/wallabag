@@ -1,0 +1,17 @@
+body: //div[@id='contentPane']//div[@class='vg']
+body: //div[@id='contentPane']
+
+# Grab the author by finding the first profile pic, then backing up a node and getting the title of <a> tag which will be the author hopefully. Sorry can't test this due to parser errors, thanks google :(
+
+author: //div[@id='contentPane']//img[contains(@alt, 'profile photo')][1]/../@title
+
+
+strip: //*[@title="People who +1'd this"]/../..
+strip: //*[contains(@class, 'a-b-f-i-Hg-Uf')]
+strip: //*[@role='menu']
+strip: //img[contains(@alt, 'profile photo')]
+strip: //*[@class='a-f-i-Ad']
+
+tidy: no
+
+test_url: http://plus.google.com/u/0/117840649766034848455/posts/FddaP6jeCqp

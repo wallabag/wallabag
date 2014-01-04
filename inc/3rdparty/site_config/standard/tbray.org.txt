@@ -1,0 +1,5 @@
+body: //div[@id='centercontent']
+strip: //div[@id='rightcontent']
+date: substring-before( //div[@id='cats'], '·')
+title: //h1
+test_url: http://www.tbray.org/ongoing/When/201x/2012/03/04/Mobile-Money

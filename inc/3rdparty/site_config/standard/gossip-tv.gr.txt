@@ -1,0 +1,14 @@
+date: //meta[@name='og:article:published_time']/@value
+
+body: //div[@class='itemIntroText' or @class='itemImageBlock' or @class='itemFullText']
+
+strip_id_or_class: itemImageGallery
+
+# remove extras at end of post content
+find_string: <div style="margin:5px 0 10px;">
+replace_string: </div></body></html><!--
+
+prune: no
+
+test_url: http://www.gossip-tv.gr/story/158902/aggelike-daliane-semera-duskoleuontai-oloi-sta-epaggelmatika-tous
+test_url: http://www.gossip-tv.gr/lifestyle/Taste/story/230266/lahtaristo-kai-ygieino-tost-sokolatas

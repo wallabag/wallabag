@@ -1,0 +1,8 @@
+title: //h1[@id='query_h1']
+body: //div[contains(@class, 'lunatext results_content')]
+strip_id_or_class: spl_unshd
+#replace_string(<div class="dicTl">): <div class="dicTl">------------------<br />
+
+prune: no
+
+test_url: http://www.wired.com/cloudline/2011/10/meet-arms-cortex-a15-the-future-of-the-ipad-and-possibly-the-macbook-air/

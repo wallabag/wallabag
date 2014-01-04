@@ -1,0 +1,13 @@
+title: //h1[@class='headline']
+body: //div[@class='article']
+strip: //div[@class='article']//h3[contains(@class, 'section')]
+strip: //div[@class='article']//ul[contains(@class, 'article-actions')]
+strip: //div[@id='syndication-upper']
+strip: //a[@id='syndication']
+strip: //dl[@id='article-tags']
+strip: //div[@id='article-like']
+prune: no
+
+single_page_link: //li[@class='single-page']/a
+
+test_url: http://www.laphamsquarterly.org/essays/balanced-diets.php

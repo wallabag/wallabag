@@ -1,0 +1,18 @@
+title://h1
+
+author://div[@id="news-meta"]/a
+
+body://*[@id="main"]/div[1]
+
+strip://*[@id="main"]/div[2]
+strip://*[@id="main"]/div[3]
+strip://*[@id="page"]//footer
+
+#date: didn't manage to parse it
+
+#Images have to be stripped because the page does it with overlay
+strip://img
+
+#figures are not displayed in instapaper...
+strip://figure | //figcaption
+test_url: http://www.computerbase.de/news/2012-06/verbraucherzentrale-mahnt-blizzard-fuer-diablo-3-ab/

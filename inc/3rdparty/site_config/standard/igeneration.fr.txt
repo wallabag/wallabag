@@ -1,0 +1,5 @@
+author: substring-after(substring-after(//span[@class='submitted'],'- '),'- ')
+date: substring-before(//span[@class='submitted'], concat('- ',substring-after(substring-after(//span[@class='submitted'],'- '),'- ')))
+body: //div[@class='content clear-block zoneApple']
+
+test_url: http://www.igeneration.fr/iphone/l-iphone-et-l-ipad-chouchous-des-tpe-et-pme-55112

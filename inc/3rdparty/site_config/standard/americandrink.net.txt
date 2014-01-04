@@ -1,0 +1,6 @@
+title: //div[@class='head']/h2/a
+author: //div[@class='head']/a
+date: //div[@class='head']/p[@class='date']/a
+body: //div[@class='copy']
+strip: //p[@class='meta']
+test_url: http://americandrink.net/post/10567188712/free-the-hooch

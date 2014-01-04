@@ -1,0 +1,3 @@
+title: //h2[@class='entry-title']
+body: //div[@class='entry-content']
+test_url: http://boldizsar.palotas.eu/blog/?p=1394

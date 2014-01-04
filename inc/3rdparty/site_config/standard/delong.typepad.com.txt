@@ -1,0 +1,4 @@
+strip_id_or_class: banner
+strip_id_or_class: gamma
+strip_id_or_class: module-list
+test_url: http://delong.typepad.com/sdj/2011/02/in-which-suresh-naidu-visits-the-new-jerusalem.html

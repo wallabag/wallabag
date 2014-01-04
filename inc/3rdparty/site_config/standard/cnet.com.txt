@@ -1,0 +1,16 @@
+title: //meta[@property="og:title"]/@content
+body: //div[contains(@class, 'postBody')]
+date: //div[@id='nameAndTime']/time
+author: //div[@id='nameAndTime']/span[@class='author']
+
+strip_id_or_class: image-credit
+strip_id_or_class: noAutolink
+strip_id_or_class: related
+
+prune: no
+tidy: no
+
+# early end
+replace_string(Download today's podcast</a>): Download today's podcast</a></div></body></html>
+
+test_url: http://www.cnet.com/8301-13952_1-57367607-81/the-404-981-where-the-world-is-a-vampire-podcast/

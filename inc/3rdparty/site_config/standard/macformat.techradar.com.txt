@@ -1,0 +1,9 @@
+# Remove news feed
+strip: //div[@id='news_feed_front']
+
+# Remove pull quote
+strip: //div[@class='field field-type-text field-field-pull-quote']
+
+# Remove login
+strip: //div[@class='right_bar_login']
+test_url: http://macformat.techradar.com/blog/solid-state-storage-bringing-parity-back-mac-29-10-10&article=89189666

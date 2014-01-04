@@ -1,0 +1,14 @@
+body: //div[@id="intTranscript"]
+body: //div[@class="box-content"]
+title: //div[@class="box-content"]//h1[1]
+author: //p[@class="info"]/strong 
+date: substring-before(substring-after(//p[@class="info"], "on"), "Length")
+strip: //div[@class="box-content"]//h1[1]
+strip: //div[@class="box-content"]//p[@class="info"]
+strip_id_or_class: vendor-content-box
+strip_id_or_class: tags2
+strip_id_or_class: instructions
+strip_id_or_class: comments
+strip_id_or_class: forum-list-tree
+strip: //div[@class="addthis_toolbox addthis_default_style"]
+test_url: http://www.infoq.com/interviews/oleg-zhurakousky-javaone2011-interview

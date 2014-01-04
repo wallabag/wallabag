@@ -1,0 +1,7 @@
+title: //title
+body: //div[contains(@class, 'printRecipe')]
+strip: //div[@class='recipeHeader']
+prune: no
+tidy: no
+single_page_link: //ul[@class='printOptions']//a[contains(@href, 'detail.aspx?p=1&showphoto=true')]
+test_url: http://www.verybestbaking.com/recipes/143190/Penne-Pasta-with-Sun-dried-Tomato-Cream-Sauce/detail.aspx

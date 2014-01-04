@@ -1,0 +1,5 @@
+title: //div[@class='ArticleHeadlineDetailedView']
+date:  //span[@class='ArticlePublicationDateTimeDetailedView']
+author://span[@class='ArticleBylineDetailedView']
+body: //div[@class='ArticleTextDetailedView']
+test_url: http://www.varingen.no/Nyheter/tabid/392/Default.aspx?ModuleId=56651&articleView=true

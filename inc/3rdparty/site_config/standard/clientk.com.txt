@@ -1,0 +1,6 @@
+title://div[@class="entrytitle"]/a
+author:substring-after(substring-before(//div[@class="entrytime"], "|"), "By ")
+date:substring-before(substring-after(//div[@class="entrytime"], "|"), "- Posted")
+body://div[@class="entrybody"]
+strip://div[@class="entrybody"]//p[@class="singleinfo"]
+test_url: http://clientk.com/2011/12/19/the-impact-of-more/

@@ -1,0 +1,17 @@
+title: //*[@id='posts']/div[1]/h2
+author: //*[@id='posts']/div[1]/div[2]/span[2]/a
+date: //*[@class='date']
+body: //div[@class='body-lead']
+
+# take out the bit saying 'body'
+strip: //div[@class='body-lead']/div[@class='info-label']
+
+
+
+
+
+
+
+
+
+test_url: http://www.subtraction.com/2011/02/01/unnecessary-explanations

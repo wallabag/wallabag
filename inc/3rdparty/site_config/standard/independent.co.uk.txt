@@ -1,0 +1,9 @@
+title: //meta[@property='og:title']/@content
+body: //div[contains(@class, 'articleContent')]
+date: //meta[@property='article:published_time']/@content
+author: //div[@id='main']//div[@class='byline']//span[@class='authorName']
+
+strip_id_or_class: RelatedArtTag
+
+tidy: no
+test_url: http://www.independent.co.uk/news/world/middle-east/syria-could-face-human-rights-probe-2274326.html

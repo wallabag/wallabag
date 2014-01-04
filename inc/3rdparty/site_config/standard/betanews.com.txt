@@ -1,0 +1,7 @@
+# some articles at this site like this one doesn't
+# seem to pick up the article body via normal 
+# processing, other articles come through fine
+# http://www.betanews.com/joewilcox/article
+#  /Google-is-a-marketing-sensation/1309708375
+body: //*[@id="article"]
+test_url: http://www.betanews.com/joewilcox/article/Google-is-a-marketing-sensation/1309708375

@@ -1,0 +1,15 @@
+# Creator: Greg Leuch <greg@...>
+
+# It can be messy.
+tidy:no
+
+# The basic template.
+title: //h1[@data-print='title']
+author: //a[@data-print='author']
+date: //time[@data-print='date']
+body: //div[@data-print='body']
+body: //section[@data-print='body']
+
+# For various things...
+strip: *[@data-print="ignore"]
+test_url: http://www.buzzfeed.com/hgrant/35-reasons-why-dogs-hate-the-holidays

@@ -1,0 +1,9 @@
+title: //h2
+author: string('Andy Rutledge')
+date: //div[@class='articledate']
+body: //div[@class='copybody']
+
+strip: //*[@class='space']
+strip: //*[@class='articleFoot']
+
+test_url: http://www.andyrutledge.com/hungry-for-a-better-menu.php

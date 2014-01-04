@@ -24,12 +24,17 @@ body > footer,
 div.tools,
 header div,
 .messages,
-.entrie + .results {
+.entrie + .results,
+#article_toolbar {
     display: none !important;
 }
 
 article {
     border: none !important;
+}
+
+pre code {
+    line-height: 1.6em;
 }
 
 /* Add URL after links */

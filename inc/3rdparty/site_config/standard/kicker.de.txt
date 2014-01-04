@@ -1,0 +1,21 @@
+# set body
+body: //div[@id='ovArtikel']
+
+# set title
+title: //div[@id='ovArtikel']/h1
+# strip main title and leave sub title
+strip: //div[@id='ovArtikel']/h1
+
+date: //div[@class='publicdate']
+
+#remove captions
+strip: //*/div[@class='bu']
+strip: //*/div[@class='credit']
+
+#remove adds
+strip: //*/div[@class='ad-head']
+strip: //*/div[@class='linksebay']
+
+# remove video content
+strip: //*/div[@class='ovVideo']
+test_url: http://www.kicker.de/news/fussball/frauen/wmfr/frauen-weltmeisterschaft/2011/3/1123662/spielbericht_frankreich-frauen_deutschland-frauen.html

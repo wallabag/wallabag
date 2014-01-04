@@ -1,0 +1,15 @@
+title: substring-before(//title,'pirates.com')
+date: //span[@class='timeStamp']
+author: substring-before(substring-after(//div[@class='byLine'],'By'),'/')
+body: //div[@id='article']
+#strip: //div[@class='inner']
+strip: //div[@id='article_head']
+strip: //p[@class='tagLine']
+strip: //div[@id='article_related_links']
+strip: //div[@id='article_related_mlb']
+strip: //div[@id='article_related_club']
+strip: //span[@class='more']
+strip: //div[@class='article_component']
+strip: //span[@class='screen_reader']
+strip: //ul[@class='columnists_blurb']
+test_url: http://pittsburgh.pirates.mlb.com/news/article.jsp?ymd=20120330&content_id=27759040&vkey=news_pit&c_id=pit

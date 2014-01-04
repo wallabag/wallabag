@@ -1,0 +1,8 @@
+date: //div[@class='secthead']
+body: //div[@class='sectbody']
+title: concat(//div[@class='sectbody']/h4,': ',//div[@class='sectbody']/h1)
+author: //span[@class='author']
+strip: //p[@class='caption']
+strip_id_or_class: rack
+
+test_url: http://www.taz.de/Protestbewegung-Occupy/!80188/

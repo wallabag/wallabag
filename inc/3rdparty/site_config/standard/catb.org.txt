@@ -1,0 +1,7 @@
+body: //div[@class='article']
+strip: //div[@class='revhistory']
+strip: //div[@class='toc']
+tidy: no
+prune: no
+
+test_url: http://catb.org/~esr/faqs/smart-questions.html

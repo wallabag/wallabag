@@ -1,0 +1,10 @@
+title://div[@class="article-title"]/h1[@class="title"]
+date: //p[@class="article-date"]
+body://*[@class="article-body article-text"]
+# Trim out related posts at bottom of article
+strip://blockquote[@class="memo"]
+
+# Yup, no idea why author won't work...
+author://div[@class="page-header article-header clearfix"]/p[@class="title"]
+# [Marco:] Author won't work here because the page defines the "home" link under the author's name as rel="author", which always gets priority if the page has defined it.
+test_url: http://allthingsd.com/20120513/exclusive-yahoos-thompson-out-levinsohn-in-board-settlement-with-loeb-nears-completion/

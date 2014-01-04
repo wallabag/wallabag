@@ -1,0 +1,6 @@
+body: //*[@id = 'story text']
+author: //a[starts-with(@href, '/u/')]
+next_page_link: substring-after(//input[contains(@value, 'Next')]/@onclick, "self.location='")
+autodetect_next_page:yes
+strip_id_or_class: 'a2a_kit'
+test_url: http://www.fanfiction.net/s/6497403/1/Spartan_Love

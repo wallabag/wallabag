@@ -1,0 +1,19 @@
+title: //span[@id = 'btAsinTitle']
+body: (//*[@id='prodImageCell']//a)[1] | //div[@id = 'ps-content'] | //span[@id='actualPriceValue'] | //h2[.='Product Details']/following-sibling::div | //div[@class='h2' and .='Product Description']/following-sibling::div
+#strip_id_or_class: quantityDropdownDiv
+#strip_id_or_class: addToCartSpan
+#strip_id_or_class: oneClickDiv
+strip_id_or_class: nocontent
+strip_id_or_class: masDynamicConten
+strip_id_or_class: dynamic-content
+prune: no
+
+find_string: <span id="actualPriceValue">
+replace_string: <span id="actualPriceValue"><br />Price: 
+
+strip_id_or_class: collapsePS
+strip_id_or_class: expandPS
+strip_id_or_class: psPlaceHolde
+strip: //li[contains(., 'update product info') or contains(., 'give feedback on images')]
+
+test_url: http://www.amazon.com/Common-Sense-Forestry-Living-Mother/dp/1931498210/

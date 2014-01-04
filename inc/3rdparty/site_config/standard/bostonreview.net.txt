@@ -1,0 +1,15 @@
+#basics
+title://h3[@class = 'article_title']
+date://span[@class = 'article_date']
+body://div[@id = 'center_column_article']
+#correct, but author not being picked up in preview
+author://span[@class = 'article_author']
+
+#strips basics from article
+strip_id_or_class:article_title
+strip_id_or_class:article_date
+strip_id_or_class:article_author
+
+#strips pull quotes
+strip_id_or_class:pull_quote
+test_url: http://www.bostonreview.net/BR36.4/megan_pugh_agnes_de_mille_dance.php

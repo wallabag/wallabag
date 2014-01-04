@@ -1,0 +1,3 @@
+author: //a[@class='author']
+tidy: no
+test_url: http://ruttloff.org/2012/06/13/intervention

@@ -1,0 +1,5 @@
+title: //div[@class="content article"]/h1
+date: substring-after(//*[@class='date'], '//')
+body: //*[@class='article-content']
+strip: //*[@id='nomodal']
+test_url: http://www.worldpoultry.net/news/kyrgyzstan-restricts-poultry-imports-from-russia-and-kazakhstan-9332.html

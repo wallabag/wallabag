@@ -32,6 +32,8 @@ class Session
     // If the user does not access any page within this time,
     // his/her session is considered expired (3600 sec. = 1 hour)
     public static $inactivityTimeout = 3600;
+    // Extra timeout for long sessions (if enabled) (82800 sec. = 23 hours)
+    public static $longSessionTimeout = 82800;
     // If you get disconnected often or if your IP address changes often.
     // Let you disable session cookie hijacking protection
     public static $disableSessionProtection = false;
@@ -106,6 +108,7 @@ class Session
         $password,
         $loginTest,
         $passwordTest,
+    	$longlastingsession,
         $pValues = array())
     {
         self::banInit();
@@ -118,7 +121,11 @@ class Session
                 $_SESSION['username'] = $login;
                 // Set session expiration.
                 $_SESSION['expires_on'] = time() + self::$inactivityTimeout;
-
+                if ($longlastingsession) {
+                	$_SESSION['longlastingsession'] = self::$longSessionTimeout;
+                	$_SESSION['expires_on'] += $_SESSION['longlastingsession'];
+                }
+                
                 foreach ($pValues as $key => $value) {
                     $_SESSION[$key] = $value;
                 }
@@ -136,7 +143,7 @@ class Session
      */
     public static function logout()
     {
-        unset($_SESSION['uid'],$_SESSION['ip'],$_SESSION['expires_on'],$_SESSION['tokens'], $_SESSION['login'], $_SESSION['pass'], $_SESSION['poche_user']);
+        unset($_SESSION['uid'],$_SESSION['ip'],$_SESSION['expires_on'],$_SESSION['tokens'], $_SESSION['login'], $_SESSION['pass'], $_SESSION['longlastingsession'], $_SESSION['poche_user']);
     }
 
     /**

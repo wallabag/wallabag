@@ -1,0 +1,25 @@
+author: //p[@class='mastname']
+
+body: //div[@class='indivbody']
+date: //div[@class='indivbody']/h2[1]
+
+# Remove blog title. Specify first occurrence in case h1 is used in article
+strip: //div[@class='indivbody']/h1[1]
+
+# Remove blog description (the first p element)
+strip: //div[@class='indivbody']/p[1]
+
+# Remove navigation (second p element)
+strip: //div[@class='indivbody']/p[2]
+
+# Remove duplicate of article title. Specify first occurrence in case h3 is used in article
+strip: //div[@class='indivbody']/h3[1]
+
+# Remove publishing date, it's extracted by rule above
+strip: //div[@class='indivbody']/h2[1]
+
+# Remove duplicate of date at end, and newsletter signup
+strip: //p[@class='posted']
+
+# Leave date at top
+test_url: http://www.schneier.com/blog/archives/2010/12/security_in_202.html

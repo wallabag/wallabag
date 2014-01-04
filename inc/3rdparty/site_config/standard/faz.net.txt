@@ -1,0 +1,30 @@
+# Title
+title: //p[@class='Content HeadlineShort']
+
+# Authors
+# some are known and have a link, others don't
+author: substring-after(//span[@class='Autor'], 'Von')
+
+# Date
+date: //span[@class='Datum']
+
+# Body
+body: //div[@class='Artikel']
+
+# Removements before body text
+strip: //div[@class='Breadcrumbs']
+strip: //div[@class='QuickSearchBox']
+strip: //div[@class='FAZArtikelEinleitung']
+strip: //div[@class='FAZArtikelReiter']
+strip: //div[@class='clear']
+
+# General removements
+strip: //span[@class='Bildnachweis']
+
+# Removements after body text
+strip: //div[@class='ArtikelAbbinder']
+strip: //div[@class='ArtikelKommentieren Artikelfuss GETS;tk;boxen.top-lesermeinungen;tp;content']
+strip: //div[@class='FAZArtikelKommentare FAZArtikelContent']
+strip: //div[@class='FAZArtikelFunktionen']
+strip: //div[@id='FAZContentRight']
+test_url: http://www.faz.net/aktuell/gesellschaft/ehe-haltbarkeitsformel-verliebe-dich-oft-verlobe-dich-selten-heirate-vielleicht-11685306.html

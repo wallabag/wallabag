@@ -1,0 +1,26 @@
+# Since this element has class="clear", the Instapaper stylesheets (at least this text parser preview), will render it unreadable, with a 1px font size and line height.
+
+body: //div[@id="article-content"]
+
+
+# Ads
+strip_id_or_class: advert-space
+
+# Read more, recommend, comments etc
+strip_id_or_class: fbc-recommend
+strip_id_or_class: recommend
+strip_id_or_class: article-readers
+strip_id_or_class: article-addons
+strip_id_or_class: hook
+strip_id_or_class: right
+strip_id_or_class: footer
+
+# Other news
+strip: //div[@id="mirrors"]
+
+# Author
+author: //div[@id="byline"]/div/p/strong
+
+# Date
+date: substring(substring-after(//p[@class="published"], 'Publicerad '), 0, 11)
+test_url: http://www.dn.se/nyheter/varlden/landade-flygplan-mitt-i-villaomrade

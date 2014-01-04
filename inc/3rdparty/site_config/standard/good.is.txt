@@ -1,0 +1,4 @@
+title: //div[@class="title"]/div/h1
+body: //div[@class="body"]
+date: //li[@class="date-time"]
+test_url: http://www.good.is/post/why-amazon-is-the-next-top-tech-company/

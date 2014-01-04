@@ -1,0 +1,2 @@
+body: //div[@class='content clear-block']
+test_url: http://opensource.org/node/537

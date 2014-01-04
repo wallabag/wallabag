@@ -1,0 +1,7 @@
+title: //span[@id='DetailedTitle']
+body: //div[@id='ctl00_cphBody_dvArticleInfoBlock'] | //td[@class='DetailedSummary']
+strip_id_or_class: sidebar
+strip_id_or_class: Skyscrapper_Body
+strip: //td[@class='DetailedSummary']/table[position() != 1]
+prune: no
+test_url: http://english.aljazeera.net//news/middleeast/2011/04/20114681444376835.html

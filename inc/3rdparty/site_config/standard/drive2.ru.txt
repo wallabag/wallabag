@@ -1,0 +1,12 @@
+body: //div[@class = "description"]
+body: //div[@id = "post"]
+
+strip_id_or_class: vcard
+strip_id_or_class: journallist
+strip_id_or_class: infobox
+strip_id_or_class: terms
+strip_id_or_class: replieslist
+strip_id_or_class: communityside
+
+
+test_url: http://www.drive2.ru/cars/audi/a6/a6_c5/elysey/journal/288230376151836654/

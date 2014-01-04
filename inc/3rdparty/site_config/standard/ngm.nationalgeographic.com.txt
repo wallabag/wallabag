@@ -1,0 +1,7 @@
+next_page_link: //div[@class='nextpage_continue']/a
+strip: //div[@class='nextpage_continue']
+strip_id_or_class: nextpage
+title: //div[@class='article_title']//h1
+body: //div[@class='article_title']/..
+body: //div[@class='content']
+test_url: http://ngm.nationalgeographic.com/2012/02/tsunami/folger-text

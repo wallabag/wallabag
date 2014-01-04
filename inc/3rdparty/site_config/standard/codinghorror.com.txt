@@ -1,0 +1,15 @@
+body: //div[@class='blogbody']
+strip: //h3[@class='title']
+date: //h2[@class='date']
+#Should Atwood just be a literal?
+author: substring-before( substring-after(//div[@class='posted'], 'y'), 'V')
+
+# tim.kingman@... 2011-07-26
+# Prune:no to retain all-link ULs that are part of the body content like
+# http://www.codinghorror.com/blog/2011/07/building-a-pc-part-vii-rebooting.html
+# Then explicitly strip the "Posted By" and prev/next links that Prune:yes would have removed.
+
+prune: no
+strip: //div[@class='posted']/following-sibling::*
+strip: //div[@class='posted']
+test_url: http://www.codinghorror.com/blog/2011/07/building-a-pc-part-vii-rebooting.html

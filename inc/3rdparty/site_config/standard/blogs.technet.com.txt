@@ -1,0 +1,6 @@
+title: //h3[@class="post-name"]
+author: //span[@class="user-name"]
+date: //div[@class="post-date"]
+body: //div[@class="post-content user-defined-markup"]
+footnotes: no
+test_url: http://blogs.technet.com/b/dlemson/archive/2004/03/03/83304.aspx

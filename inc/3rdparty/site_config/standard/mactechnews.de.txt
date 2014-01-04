@@ -1,0 +1,3 @@
+title: substring-after(substring-after(//title, '>'), '>')
+body: //div[@class='NewsArticleContent']
+test_url: http://www.mactechnews.de/news/index/Apple-Pressekonferenz-zum-iPhone-4-147316.html
