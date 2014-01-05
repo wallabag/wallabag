@@ -81,7 +81,7 @@ class Database {
 
         if (STORAGE == 'sqlite') {
             $sql = '
-                CREATE TABLE tags_entries (
+                CREATE TABLE IF NOT EXISTS tags_entries (
                     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE,
                     entry_id INTEGER,
                     tag_id INTEGER,
