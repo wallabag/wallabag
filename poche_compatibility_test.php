@@ -1,5 +1,5 @@
 <?php
-$app_name = 'poche 1.0';
+$app_name = 'poche 1.3';
 
 $php_ok = (function_exists('version_compare') && version_compare(phpversion(), '5.3.3', '>='));
 $pcre_ok = extension_loaded('pcre');
