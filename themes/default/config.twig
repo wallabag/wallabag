@@ -105,8 +105,9 @@
             <p>{% trans "More info in the official docs:" %} <a href="http://doc.inthepoche.com/doku.php?id=users:migrate">inthepoche.com</a></p>
             <ul>
                 <li><a href="./?import&amp;from=pocket">{% trans "Import from Pocket" %}</a> {{ '(you must have a %s file on your server)'|trans|format(constant('POCKET_FILE')) }}</li>
-            <li><a href="./?import&amp;from=readability">{% trans "Import from Readability" %}</a> {{ '(you must have a %s file on your server)'|trans|format(constant('READABILITY_FILE')) }}</li>
-            <li><a href="./?import&amp;from=instapaper">{% trans "Import from Instapaper" %}</a> {{ '(you must have a %s file on your server)'|trans|format(constant('INSTAPAPER_FILE')) }}</li>
+                <li><a href="./?import&amp;from=readability">{% trans "Import from Readability" %}</a> {{ '(you must have a %s file on your server)'|trans|format(constant('READABILITY_FILE')) }}</li>
+                <li><a href="./?import&amp;from=instapaper">{% trans "Import from Instapaper" %}</a> {{ '(you must have a %s file on your server)'|trans|format(constant('INSTAPAPER_FILE')) }}</li>
+                <li><a href="./?import&amp;from=poche">{% trans "Import from poche" %}</a> {{ '(you must have a %s file on your server)'|trans|format(constant('POCHE_FILE')) }}</li>
             </ul>
 
             <h2>{% trans "Export your poche data" %}</h2>
