@@ -14,12 +14,12 @@ class FlattrItem {
         $flattrResponse = file_get_contents(CACHE . "/flattr/".$id.".cache");
         if($flattrResponse != FALSE) {
             $result = json_decode($flattrResponse);
-            if (isset($result->message)){
+			if (isset($result->message)){
                 if ($result->message == "flattrable") {
                     $this->status = FLATTRABLE;
                 }
             } 
-            elseif ($result->link) {
+ 		elseif (is_object($result) && $result->link) {
                 $this->status = FLATTRED;
                 $this->flattrItemURL = $result->link;
                 $this->numflattrs = $result->flattrs;
