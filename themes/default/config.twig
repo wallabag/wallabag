@@ -6,11 +6,11 @@
 {% endblock %}
 {% block content %}
             <h2>{% trans "Poching links" %}</h2>
-            <p>{% trans "There are several ways to poche a link::" %} (<a href="http://doc.inthepoche.com/" title="{% trans "read the documentation" %}">?</a>)</p>
+            <p>{% trans "There are several ways to poche a link:" %} (<a href="http://doc.inthepoche.com/" title="{% trans "read the documentation" %}">?</a>)</p>
             <ul>
                 <li>Firefox: <a href="https://addons.mozilla.org/firefox/addon/poche/" title="download the firefox extension">{% trans "download the extension" %}</a></li>
                 <li>Chrome: <a href="http://doc.inthepoche.com/doku.php?id=users:chrome_extension" title="download the chrome extension">{% trans "download the extension" %}</a></li>
-                <li>Android: <a href="https://f-droid.org/repository/browse/?fdid=fr.gaulupeau.apps.Poche" title="download the application">{% trans "via f-droid" %}</a> {% trans " or " %} <a href="https://play.google.com/store/apps/details?id=fr.gaulupeau.apps.InThePoche" title="download the application">{% trans "via Google Play" %}</a></li>
+                <li>Android: <a href="https://f-droid.org/repository/browse/?fdid=fr.gaulupeau.apps.Poche" title="download the application">{% trans "via F-Droid" %}</a> {% trans " or " %} <a href="https://play.google.com/store/apps/details?id=fr.gaulupeau.apps.InThePoche" title="download the application">{% trans "via Google Play" %}</a></li>
                 <li>Windows Phone: <a href="https://www.windowsphone.com/en-us/store/app/poche/334de2f0-51b5-4826-8549-a3d805a37e83" title="download the window phone application">{% trans "download the application" %}</a></li>
                 <li>
                     <form method="get" action="index.php">
@@ -31,12 +31,12 @@
 
             <h2>{% trans "Feeds" %}</h2>
             {% if token == '' %}
-                <p>{% trans "The token is empty, you have to generate it to use feeds. Click <a href='?feed&amp;action=generate'>here to generate it</a>." %}</p>
+                <p>{% trans "Your feed token is currently empty and must first be generated to enable feeds. Click <a href='?feed&amp;action=generate'>here to generate it</a>." %}</p>
             {% else %}
             <ul>
-                <li><a href="?feed&amp;type=home&amp;user_id={{ user_id }}&amp;token={{ token }}" target="_blank">{% trans "unread feed" %}</a></li>
-                <li><a href="?feed&amp;type=fav&amp;user_id={{ user_id }}&amp;token={{ token }}" target="_blank">{% trans "favorites feed" %}</a></li>
-                <li><a href="?feed&amp;type=archive&amp;user_id={{ user_id }}&amp;token={{ token }}" target="_blank">{% trans "archive feed" %}</a></li>
+                <li><a href="?feed&amp;type=home&amp;user_id={{ user_id }}&amp;token={{ token }}" target="_blank">{% trans "Unread feed" %}</a></li>
+                <li><a href="?feed&amp;type=fav&amp;user_id={{ user_id }}&amp;token={{ token }}" target="_blank">{% trans "Favorites feed" %}</a></li>
+                <li><a href="?feed&amp;type=archive&amp;user_id={{ user_id }}&amp;token={{ token }}" target="_blank">{% trans "Archive feed" %}</a></li>
             </ul>
             <p>{% trans "You can regenerate your token: <a href='?feed&amp;action=generate'>generate!</a>." %}</p>
             {% endif %}
@@ -101,12 +101,12 @@
             {% endif %}
 
             <h2>{% trans "Import" %}</h2>
-            <p>{% trans "Please execute the import script locally, it can take a very long time." %}</p>
-            <p>{% trans "More info in the official docs:" %} <a href="http://doc.inthepoche.com/">inthepoche.com</a></p>
+            <p>{% trans "Please execute the import script locally as it can take a very long time." %}</p>
+            <p>{% trans "More info in the official docs:" %} <a href="http://doc.inthepoche.com/doku.php?id=users:migrate">inthepoche.com</a></p>
             <ul>
-                <li><a href="./?import&amp;from=pocket">{% trans "import from Pocket" %}</a> {{ '(you must have a %s file on your server)'|trans|format(constant('POCKET_FILE')) }}</li>
-            <li><a href="./?import&amp;from=readability">{% trans "import from Readability" %}</a> {{ '(you must have a %s file on your server)'|trans|format(constant('READABILITY_FILE')) }}</li>
-            <li><a href="./?import&amp;from=instapaper">{% trans "import from Instapaper" %}</a> {{ '(you must have a %s file on your server)'|trans|format(constant('INSTAPAPER_FILE')) }}</li>
+                <li><a href="./?import&amp;from=pocket">{% trans "Import from Pocket" %}</a> {{ '(you must have a %s file on your server)'|trans|format(constant('POCKET_FILE')) }}</li>
+            <li><a href="./?import&amp;from=readability">{% trans "Import from Readability" %}</a> {{ '(you must have a %s file on your server)'|trans|format(constant('READABILITY_FILE')) }}</li>
+            <li><a href="./?import&amp;from=instapaper">{% trans "Import from Instapaper" %}</a> {{ '(you must have a %s file on your server)'|trans|format(constant('INSTAPAPER_FILE')) }}</li>
             </ul>
 
             <h2>{% trans "Export your poche data" %}</h2>

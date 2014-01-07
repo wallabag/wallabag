@@ -67,7 +67,7 @@ msgstr "درون‌ریزی"
 msgid "Please execute the import script locally, it can take a very long time."
 msgstr "لطفاً برنامهٔ درون‌ریزی را به‌طور محلی اجرا کنید، شاید خیلی طول بکشد."
 
-msgid "More infos in the official doc:"
+msgid "More info in the official doc:"
 msgstr "اطلاعات بیشتر در راهنمای رسمی:"
 
 msgid "import from Pocket"
@@ -79,13 +79,13 @@ msgstr "درون‌ریزی از Readability"
 msgid "import from Instapaper"
 msgstr "درون‌ریزی از Instapaper"
 
-msgid "Export your poche datas"
+msgid "Export your poche data"
 msgstr "داده‌های poche خود را برون‌بری کنید"
 
 msgid "Click here"
 msgstr "اینجا را کلیک کنید"
 
-msgid "to export your poche datas."
+msgid "to export your poche data."
 msgstr "برای برون‌بری داده‌های poche شما"
 
 msgid "back to home"
@@ -99,11 +99,11 @@ msgstr "poche خود را نصب کنید"
 
 msgid ""
 "poche is still not installed. Please fill the below form to install it. "
-"Don't hesitate to <a href='http://inthepoche.com/doc'>read the documentation "
+"Don't hesitate to <a href='http://doc.inthepoche.com'>read the documentation "
 "on poche website</a>."
 msgstr ""
 "poche هنوز نصب نیست. برای نصب لطفاً فرم زیر را پر کنید. خواندن <a "
-"href='http://inthepoche.com/doc'>راهنما در وبگاه poche</a> را از یاد نبرید."
+"href='http://doc.inthepoche.com'>راهنما در وبگاه poche</a> را از یاد نبرید."
 
 msgid "Login"
 msgstr "ورود"

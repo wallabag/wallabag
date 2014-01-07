@@ -75,7 +75,7 @@ msgstr ""
 "Si prega di eseguire lo script di importazione a livello locale, può "
 "richiedere un tempo molto lungo."
 
-msgid "More infos in the official doc:"
+msgid "More info in the official doc:"
 msgstr "Maggiori info nella documentazione ufficiale"
 
 msgid "import from Pocket"
@@ -87,13 +87,13 @@ msgstr "Importa da Readability"
 msgid "import from Instapaper"
 msgstr "Importa da Instapaper"
 
-msgid "Export your poche datas"
+msgid "Export your poche data"
 msgstr "Esporta i tuoi dati di poche"
 
 msgid "Click here"
 msgstr "Fai clic qui"
 
-msgid "to export your poche datas."
+msgid "to export your poche data."
 msgstr "per esportare i tuoi dati di poche."
 
 msgid "back to home"
@@ -107,11 +107,11 @@ msgstr "installa il tuo poche"
 
 msgid ""
 "poche is still not installed. Please fill the below form to install it. "
-"Don't hesitate to <a href='http://inthepoche.com/doc'>read the documentation "
+"Don't hesitate to <a href='http://doc.inthepoche.com'>read the documentation "
 "on poche website</a>."
 msgstr ""
 "poche non è ancora installato. Si prega di riempire il modulo sottostante "
-"per completare l'installazione. <a href='http://inthepoche.com/doc'>Leggere "
+"per completare l'installazione. <a href='http://doc.inthepoche.com'>Leggere "
 "la documentazione sul sito di poche</a>."
 
 msgid "Login"
