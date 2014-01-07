@@ -848,6 +848,52 @@ class Poche
     }
 
     /**
+     * import from Poche exported file
+     * @param string $targetFile the file used for importing
+     * @return boolean 
+     */
+    private function importFromPoche($targetFile)
+    {
+        $str_data = file_get_contents($targetFile);
+        $data = json_decode($str_data,true);
+        Tools::logm('starting import from Poche');
+
+
+    	$sequence = '';
+        if (STORAGE == 'postgres') {
+        	$sequence = 'entries_id_seq';
+    	}
+
+        $count = 0;
+        foreach ($data as $value) {
+
+    		$url = new Url(base64_encode($value['url']));
+    		$favorite = ($value['is_fav'] == -1);
+    		$archive = ($value['is_read'] == -1);
+    
+    		# we can add the url
+    		if (!is_null($url) && $url->isCorrect()) {
+    		    
+    		    $this->action('add', $url, 0, TRUE);
+    		    
+    		    $count++;
+    		    if ($favorite) {
+        			$last_id = $this->store->getLastId($sequence);
+        			$this->action('toggle_fav', $url, $last_id, TRUE);
+    		    }
+    		    if ($archive) {
+        			$last_id = $this->store->getLastId($sequence);
+        			$this->action('toggle_archive', $url, $last_id, TRUE);
+    		    }
+    		}
+            
+        }
+        $this->messages->add('s', _('import from Poche completed. ' . $count . ' new links.'));
+        Tools::logm('import from Poche completed');
+        Tools::redirect();
+    }
+
+    /**
      * import datas into your poche
      * @param  string $from name of the service to import : pocket, instapaper or readability
      * @todo add the return value
@@ -856,6 +902,7 @@ class Poche
     public function import($from)
     {
         $providers = array(
+            'poche' => 'importFromPoche',
             'pocket' => 'importFromPocket',
             'readability' => 'importFromReadability',
             'instapaper' => 'importFromInstapaper'
