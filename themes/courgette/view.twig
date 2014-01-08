@@ -1,0 +1,45 @@
+{% extends "layout.twig" %}
+{% block title %}{{ entry.title|raw }} ({{ entry.url | e | getDomain }}){% endblock %}
+{% block content %}
+        <div id="article_toolbar">
+            <ul>
+                <li><a href="./" title="{% trans "back to home" %}" class="tool back"><span>{% trans "back to home" %}</span></a></li>
+                <li><a href="{{ entry.url|e }}" target="_blank" title="{% trans "original" %} : {{ entry.title|e }}" class="tool link"><span>{{ entry.url | e | getDomain }}</span></a></li>
+                <li><a title="{% trans "toggle mark as read" %}" class="tool {% if entry.is_read == 0 %}archive-off{% else %}archive{% endif %}" href="./?action=toggle_archive&amp;id={{ entry.id|e }}"><span>{% trans "toggle mark as read" %}</span></a></li>
+                <li><a title="{% trans "toggle favorite" %}" class="tool {% if entry.is_fav == 0 %}fav-off{% else %}fav{% endif %}" href="./?action=toggle_fav&amp;id={{ entry.id|e }}"><span>{% trans "toggle favorite" %}</span></a></li>
+                <li><a title="{% trans "delete" %}" class="tool delete" href="./?action=delete&amp;id={{ entry.id|e }}"><span>{% trans "delete" %}</span></a></li>
+                {% if constant('SHARE_TWITTER') == 1 %}<li><a href="https://twitter.com/home?status={{entry.title|url_encode}}%20{{ entry.url|url_encode }}%20via%20@getpoche" target="_blank" class="tool twitter" title="{% trans "tweet" %}"><span>{% trans "tweet" %}</span></a></li>{% endif %}
+                {% if constant('SHARE_MAIL') == 1 %}<li><a href="mailto:?subject={{ entry.title|url_encode }}&amp;body={{ entry.url|url_encode }}%20via%20@getpoche" class="tool email" title="{% trans "email" %}"><span>{% trans "email" %}</span></a></li>{% endif %}
+                {% if constant('SHARE_SHAARLI') == 1 %}<li><a href="{{ constant('SHAARLI_URL') }}/index.php?post={{ entry.url|url_encode }}&amp;title={{ entry.title|url_encode }}" target="_blank" class="tool shaarli" title="{% trans "shaarli" %}"><span>{% trans "shaarli" %}</span></a></li>{% endif %}
+                {% if constant('FLATTR') == 1 %}{% if flattr.status == constant('FLATTRABLE') %}<li class="flattrli"><a href="http://flattr.com/submit/auto?url={{ entry.url }}" class="tool flattr" target="_blank" title="{% trans "flattr" %}"><span>{% trans "flattr" %}</span></a></li>{% elseif flattr.status == constant('FLATTRED') %}<li><a href="{{ flattr.flattrItemURL }}" class="tool flattr" target="_blank" title="{% trans "flattr" %}"><span>{% trans "flattr" %}</span>{{ flattr.numflattrs }}</a></li>{% endif %}{% endif %}
+                <li><a href="mailto:support@inthepoche.com?subject=Wrong%20display%20in%20poche&amp;body={{ entry.url|url_encode }}" title="{% trans "this article appears wrong?" %}" class="tool bad-display"><span>{% trans "this article appears wrong?" %}</span></a></li>
+            </ul>
+        </div>
+        <div id="article">
+            <header class="mbm">
+                <h1>{{ entry.title|raw }}</h1>
+            </header>
+            <article>
+                {{ content | raw }}
+            </article>
+        </div>
+        <script src="{{ poche_url }}/themes/{{ constant('DEFAULT_THEME') }}/js/restoreScroll.js"></script>
+        <script type="text/javascript">
+        $(document).ready(function() {
+
+            $(window).scroll(function(e){
+                var scrollTop = $(window).scrollTop();
+                var docHeight = $(document).height();
+                var scrollPercent = (scrollTop) / (docHeight);
+                var scrollPercentRounded = Math.round(scrollPercent*100)/100;
+                savePercent({{ entry.id|e }}, scrollPercentRounded);
+            });
+
+            retrievePercent({{ entry.id|e }});
+
+            $(window).resize(function(){
+                retrievePercent({{ entry.id|e }});
+            });
+        });
+        </script> 
+{% endblock %}

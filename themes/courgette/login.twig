@@ -1,0 +1,32 @@
+{% extends "layout.twig" %}
+
+{% block title %}{% trans "login to your poche" %}{% endblock %}
+{% block content %}
+            <form method="post" action="?login" name="loginform" id="loginForm">
+                <fieldset class="w500p center">
+                    <h2 class="mbs txtcenter">{% trans "login to your poche" %}</h2>
+                    {% if constant('MODE_DEMO') == 1 %}<p>{% trans "you are in demo mode, some features may be disabled." %}</p>{% endif %}
+					<div class="row">
+						<label class="col w150p" for="login">{% trans "Login" %}</label>
+						<input class="col" type="text" id="login" name="login" placeholder="Login" tabindex="1" autofocus {% if constant('MODE_DEMO') == 1 %}value="poche"{% endif %} />
+					</div>
+
+					<div class="row">
+						<label class="col w150p" for="password">{% trans "Password" %}</label>
+						<input class="col" type="password" id="password" name="password" placeholder="Password" tabindex="2" {% if constant('MODE_DEMO') == 1 %}value="poche"{% endif %} />
+					</div>
+					<div class="row">
+						<label class="col w150p" for="longlastingsession">{% trans "Stay signed in" %}</label>
+						<div class="col">
+							<input type="checkbox" id="longlastingsession" name="longlastingsession" tabindex="3">
+							<small class="inbl">{% trans "(Do not check on public computers)" %}</small>
+						</div>
+					</div>
+					<div class="row mts txtcenter">
+						<button class="bouton" type="submit" tabindex="4">{% trans "Login" %}</button>
+					</div>
+                </fieldset>
+                <input type="hidden" name="returnurl" value="{{ referer }}">
+                <input type="hidden" name="token" value="{{ token }}">
+            </form>
+{% endblock %}

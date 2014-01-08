@@ -1,0 +1,9 @@
+        <header>
+            <h1>
+                {% if view == 'home' %}{% block logo %}<img src="{{ poche_url }}/themes/{{ constant('DEFAULT_THEME') }}/img/logo.png" alt="logo poche" />{% endblock %}
+                {% elseif view == 'fav' %}<a href="./" title="{% trans "back to home" %}" >{{ block('logo') }} <span>Favoris</span></a>
+                {% elseif view == 'archive' %}<a href="./" title="{% trans "back to home" %}" >{{ block('logo') }} <span>Archive</span></a>
+                {% else %}<a href="./" title="{% trans "back to home" %}" >{{ block('logo') }}</a>
+                {% endif %}
+            </h1>
+        </header>

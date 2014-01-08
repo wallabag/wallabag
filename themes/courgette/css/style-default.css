@@ -1,0 +1,59 @@
+a.back span {
+    background-image: url('../img/default/left.png');
+}
+
+a.top span {
+    background-image: url('../img/default/top.png');
+}
+
+a.fav span,
+a.fav-off span:hover {
+    background-image: url('../img/default/star-on.png');
+}
+
+a.fav span:hover,
+a.fav-off span {
+    background-image: url('../img/default/star-off.png');
+}
+
+a.archive span,
+a.archive-off span:hover {
+    background-image: url('../img/default/checkmark-on.png');
+}
+
+a.archive span:hover,
+a.archive-off span {
+    background-image: url('../img/default/checkmark-off.png');
+}
+
+a.twitter span {
+    background-image: url('../img/default/twitter.png');
+}
+
+a.shaarli span {
+    background-image: url('../img/default/shaarli.png');
+}
+
+a.flattr span {
+    background-image: url('../img/default/flattr.png');
+}
+
+a.email span {
+    background-image: url('../img/default/envelop.png');
+}
+
+a.delete span {
+    background-image: url('../img/default/remove.png');
+}
+
+a.link span {
+    background-image: url('../img/default/link.png');
+}
+
+a.bad-display span {
+    background-image: url('../img/default/bad-display.png');
+}
+
+a.reading-time span {
+    background-image: url('../img/default/clock.png');
+}

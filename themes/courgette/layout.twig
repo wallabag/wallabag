@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<!--[if lte IE 6]><html class="no-js ie6 ie67 ie678" lang="{{ lang }}"><![endif]-->
+<!--[if lte IE 7]><html class="no-js ie7 ie67 ie678" lang="{{ lang }}"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 ie678" lang="{{ lang }}"><![endif]-->
+<!--[if gt IE 8]><html class="no-js" lang="{{ lang }}"><![endif]-->
+<html lang="{{ lang }}">
+    <head>
+        <meta name="viewport" content="initial-scale=1.0">
+        <meta charset="utf-8">
+        <!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=10">
+        <![endif]-->
+        <title>{% block title %}{% endblock %} - poche</title>
+{% include '_head.twig' %}
+{% include '_bookmarklet.twig' %}
+    </head>
+    <body>
+        {% include '_top.twig' %}
+        <div id="main">
+            <button id="menu"><span>Menu</span></button>
+            {% block menu %}{% endblock %}
+            {% block precontent %}{% endblock %}
+            {% block messages %}
+            {% include '_messages.twig' %}
+            {% endblock %}
+            <div id="content" class="w600p center">
+            {% block content %}{% endblock %}
+            </div>
+        </div>
+{% include '_footer.twig' %}
+    </body>
+</html>

@@ -1,0 +1,82 @@
+{% extends "layout.twig" %}
+
+{% block title %}{% trans "config" %}{% endblock %}
+{% block menu %}
+{% include '_menu.twig' %}
+{% endblock %}
+{% block content %}
+        <div id="config">
+            <h2>{% trans "Poching a link" %}</h2>
+            <p>{% trans "You can poche a link by several methods:" %} (<a class="special" href="http://inthepoche.com/doc" title="{% trans "read the documentation" %}">?</a>)</p>
+            <ul>
+                <li>firefox: <a href="https://bitbucket.org/jogaulupeau/poche/downloads/poche.xpi" title="download the firefox extension">{% trans "download the extension" %}</a></li>
+                <li>chrome: <a href="https://bitbucket.org/jogaulupeau/poche/downloads/poche.crx" title="download the chrome extension">{% trans "download the extension" %}</a></li>
+                <li>android: <a href="https://bitbucket.org/jogaulupeau/poche/downloads/Poche.apk" title="download the application">{% trans "download the application" %}</a></li>
+                <li>
+                    <form method="get" action="index.php">
+                        <label class="addurl" for="plainurl">{% trans "by filling this field" %}:</label>
+                        <input required placeholder="Ex:mywebsite.com/article" class="addurl" id="plainurl" name="plainurl" type="url" />
+                        <input type="submit" value="{% trans "poche it!" %}" />
+                    </form>
+                </li>
+                <li>{% trans "bookmarklet: drag & drop this link to your bookmarks bar" %} <a id="bookmarklet" ondragend="this.click();" title="i am a bookmarklet, use me !" href="javascript:if(top['bookmarklet-url@inthepoche.com']){top['bookmarklet-url@inthepoche.com'];}else{(function(){var%20url%20=%20location.href%20||%20url;window.open('{{ poche_url }}?action=add&url='%20+%20btoa(url),'_self');})();void(0);}">{% trans "poche it!" %}</a></li>
+            </ul>
+
+            <h2>{% trans "Updating poche" %}</h2>
+            <ul>
+                <li>{% trans "your version" %} : <strong>{{ constant('POCHE_VERSION') }}</strong></li>
+                <li>{% trans "latest stable version" %} : {{ prod }}. {% if compare_prod == -1 %}<strong><a href="http://inthepoche.com/">{% trans "a more recent stable version is available." %}</a></strong>{% else %}{% trans "you are up to date." %}{% endif %}</li>
+                {% if constant('DEBUG_POCHE') == 1 %}<li>{% trans "latest dev version" %} : {{ dev }}. {% if compare_dev == -1 %}<strong><a href="http://inthepoche.com/">{% trans "a more recent development version is available." %}</a></strong>{% else %}{% trans "you are up to date." %}{% endif %}</li>{% endif %}
+            </ul>
+            
+            <h2>{% trans "Change your theme" %}</h2>
+            <form method="post" action="?updatetheme" name="changethemeform">
+                <fieldset class="w500p">
+                    <div class="row">
+                        <label class="col w150p" for="theme">{% trans "Theme:" %}</label>
+                        <select class="col" id="theme" name="theme">
+                            {% for theme in themes %}
+                            <option value="{{ theme.name }}" {{ theme.current ? 'selected' : '' }}>{{ theme.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="row mts txtcenter">
+                        <button class="bouton" type="submit" tabindex="4">{% trans "Update" %}</button>
+                    </div>
+                </fieldset>
+                <input type="hidden" name="returnurl" value="{{ referer }}">
+                <input type="hidden" name="token" value="{{ token }}">
+            </form>
+
+            <h2>{% trans "Change your password" %}</h2>
+            <form method="post" action="?config" name="loginform">
+                <fieldset class="w500p">
+                    <div class="row">
+                        <label class="col w150p" for="password">{% trans "New password:" %}</label>
+                        <input class="col" type="password" id="password" name="password" placeholder="{% trans "Password" %}" tabindex="2">
+                    </div>
+                    <div class="row">
+                        <label class="col w150p" for="password_repeat">{% trans "Repeat your new password:" %}</label>
+                        <input class="col" type="password" id="password_repeat" name="password_repeat" placeholder="{% trans "Password" %}" tabindex="3">
+                    </div>
+                    <div class="row mts txtcenter">
+                        <button class="bouton" type="submit" tabindex="4">{% trans "Update" %}</button>
+                    </div>
+                </fieldset>
+                <input type="hidden" name="returnurl" value="{{ referer }}">
+                <input type="hidden" name="token" value="{{ token }}">
+            </form>
+
+            <h2>{% trans "Import" %}</h2>
+            <p>{% trans "Please execute the import script locally, it can take a very long time." %}</p>
+            <p>{% trans "More infos in the official doc:" %} <a href="http://inthepoche.com/doc">inthepoche.com</a></p>
+            <ul>
+                <li><a href="./?import&amp;from=pocket">{% trans "import from Pocket" %}</a> {{ '(you must have a %s file on your server)'|trans|format(constant('POCKET_FILE')) }}</li>
+            <li><a href="./?import&amp;from=readability">{% trans "import from Readability" %}</a> {{ '(you must have a %s file on your server)'|trans|format(constant('READABILITY_FILE')) }}</li>
+            <li><a href="./?import&amp;from=instapaper">{% trans "import from Instapaper" %}</a> {{ '(you must have a %s file on your server)'|trans|format(constant('INSTAPAPER_FILE')) }}</li>
+            </ul>
+
+            <h2>{% trans "Export your poche datas" %}</h2>
+            <p><a href="./?export" target="_blank">{% trans "Click here" %}</a> {% trans "to export your poche datas." %}</p>
+        </div>
+{% endblock %}

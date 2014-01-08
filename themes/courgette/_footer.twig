@@ -1,0 +1,4 @@
+        <footer class="w600p center mt3 mb3 smaller txtright">
+            <p>{% trans "powered by" %} <a href="http://inthepoche.com">poche</a></p>
+            {% if constant('DEBUG_POCHE') == 1 %}<p><strong>{% trans "debug mode is on so cache is off." %} {% trans "your poche version:" %}{{constant('POCHE_VERSION')}}. {% trans "storage:" %} {{constant('STORAGE')}}</strong></p>{% endif %}
+        </footer>
