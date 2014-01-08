@@ -15,6 +15,10 @@ class EntryApi
         return $this->entryRepository->getEntries();
     }
 
+    public function getEntryById($id) {
+        return $this->entryRepository->getEntryById($id);
+    }
+
     public function createEntryFromUrl($url) {
 
         //TODO: Fetch all what we need, fill the title, content …
