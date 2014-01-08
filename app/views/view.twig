@@ -1,0 +1,15 @@
+{% extends layout %}
+
+{% block content %}
+
+{% if entry is empty %}
+<div class="messages warning"><p>{{ 'No link available here!'|trans }}</p></div>
+{% else %}
+    <h1>{{ entry.title }}</h1>
+    <div><a href="{{ entry.url }}">{{ 'view original'|trans }}</a></div>
+
+    <article>{{ entry.content|striptags }}</article>
+
+{% endif %}
+
+{% endblock %}
