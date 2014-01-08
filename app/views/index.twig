@@ -9,7 +9,7 @@
     {{ 'msg.results'|transchoice(count) }}
     {% for entry in entries %}
     <div>
-        {{ entry.id }} - {{ entry.title }}
+        <a href="index.php/view/{{entry.id}}">{{ entry.title }}</a>
 
         <p>{{ entry.content|striptags|slice(0, 300) }}...</p>
 
