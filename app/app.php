@@ -4,7 +4,6 @@ use Poche\Api\EntryApi;
 use Poche\Api\ContentFullTextRssApi;
 use Poche\Repository\EntryRepository;
 
-use Silex\Provider\FormServiceProvider;
 use Symfony\Component\Translation\Loader\PoFileLoader;
 
 $app = new Silex\Application();
@@ -12,6 +11,9 @@ $app = new Silex\Application();
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/views',
 ));
+
+//Generate url in templates
+$app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 
 $app->before(function () use ($app) {
     $app['twig']->addGlobal('layout', $app['twig']->loadTemplate('layout.twig'));
@@ -30,7 +32,7 @@ $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
     ),
 ));
 
-$app->register(new FormServiceProvider());
+$app->register(new Silex\Provider\FormServiceProvider());
 
 $app->register(new Silex\Provider\TranslationServiceProvider(), array(
     'locale_fallbacks' => array('en'),
