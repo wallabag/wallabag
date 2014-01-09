@@ -35,4 +35,12 @@ $api->get('/get', function (Request $request) use ($app) {
     return $app->json($entry, 201);
 });
 
+$api->get('/mark-read', function (Request $request) use ($app) {
+    $id = $request->request->get('id');
+
+    $entry = $app['entry_api']->markAsRead($id);
+
+    return $app->json($entry, 201);
+});
+
 return $api;
