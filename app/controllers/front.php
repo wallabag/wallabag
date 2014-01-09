@@ -38,6 +38,7 @@ $front->match('/add', function (Request $request) use ($app) {
 
     // display the form
     return $app['twig']->render('add.twig', array('form' => $form->createView()));
-});
+})
+->bind('add');
 
 return $front;
