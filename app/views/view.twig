@@ -5,8 +5,13 @@
 {% if entry is empty %}
 <div class="messages warning"><p>{{ 'No link available here!'|trans }}</p></div>
 {% else %}
-    <h1>{{ entry.title }}</h1>
-    <div><a href="{{ entry.url }}">{{ 'view original'|trans }}</a></div>
+    <h2>{{ entry.title }}</h2>
+    <ul>
+        <li><a href="#">{{ 'mark as read'|trans }}</a></li>
+        <li><a href="#">{{ 'star'|trans }}</a></li>
+        <li><a href="#">{{ 'delete'|trans }}</a></li>
+        <li><a href="{{ entry.url }}">{{ 'view original'|trans }}</a></li>
+    </ul>
 
     <article>{{ entry.content|striptags }}</article>
 
