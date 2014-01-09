@@ -46,6 +46,36 @@ class ApiTest extends PocheWebTestCase
 
     }
 
+    public function testGetEntryById()
+    {
+
+        //Load some entries
+        Fixtures::loadEntries($this->app['db']);
+
+        $client = $this->createClient();
+        $crawler = $client->request(
+            'GET',
+            '/api/get',
+            array(),
+            array(),
+            array('CONTENT_TYPE' => 'application/json'),
+            '{"id":"1"}'
+        );
+
+        $this->assertEquals($client->getResponse()->getStatusCode(), 201);
+
+        // Assert that the "Content-Type" header is "application/json"
+        $this->assertTrue(
+            $client->getResponse()->headers->contains(
+                'Content-Type',
+                'application/json'
+            )
+        );
+
+        $this->assertEquals('[{"id":"1","url":"http:\/\/deboutlesgens.com\/blog\/le-courage-de-vivre-consciemment\/","title":"Le courage de vivre consciemment","content":"Test content","updated":null,"status":null,"bookmark":"0","fetched":"1","user_id":"1"}]', $client->getResponse()->getContent());
+
+    }
+
     public function testPostEntries()
     {
 
