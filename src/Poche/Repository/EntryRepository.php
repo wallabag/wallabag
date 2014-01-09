@@ -39,5 +39,13 @@ class EntryRepository
 
         return $count;
     }
+
+    //TODO don't hardcode the user ;)
+    public function markAsUnread($id, $userId = 1) {
+        $sql = "UPDATE entries SET status = 'unread' where id = ? AND user_id = ?";
+        $count = $this->db->executeUpdate($sql, array($id, $userId));
+
+        return $count;
+    }
 }
 
