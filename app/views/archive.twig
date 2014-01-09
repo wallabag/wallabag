@@ -1,16 +1,19 @@
 {% extends layout %}
 
-{% block content %}
+{% block menu %}
 {% set count = entries|length %}
 
 <nav role="navigation">
     <ul>
-        <li><a href="/">{{ 'unread'|trans }}</a></li>
+        <li><a href="/">{{ 'unread'|trans }}</a> ({{count}})</li>
         <li>{{ 'starred'|trans }}</li>
-        <li><a href="/archive">{{ 'archive'|trans }}</a> ({{count}})</li>
+        <li><a href="/archive">{{ 'archive'|trans }}</a></li>
+        <li><a href="{{ path('add') }}">{{ 'entry.add'|trans }}</a></li>
     </ul>
 </nav>
+{% endblock %}
 
+{% block content %}
 {% if entries is empty %}
 <div class="messages warning"><p>{{ 'No link available here!'|trans }}</p></div>
 {% else %}
@@ -28,7 +31,6 @@
     </li>
     {% endfor %}
     </ul>
-    <p><a href="{{ path('add') }}">{{ 'entry.add'|trans }}</a></p>
 
 {% endif %}
 

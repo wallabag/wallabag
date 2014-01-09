@@ -18,6 +18,7 @@
 {% include '_top.twig' %}
         <div id="main">
             <div id="content" class="w600p center">
+            {% block menu %}{% endblock %}
             {% block content %}{% endblock %}
             </div>
         </div>
