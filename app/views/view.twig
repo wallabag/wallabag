@@ -13,7 +13,7 @@
         <li><a href="{{ entry.url }}">{{ 'view original'|trans }}</a></li>
     </ul>
 
-    <article>{{ entry.content|striptags }}</article>
+    <article>{{ entry.content|raw }}</article>
 
 {% endif %}
 
