@@ -37,7 +37,7 @@ class EntryRepository
         $sql = "UPDATE entries SET status = 'read' where id = ? AND user_id = ?";
         $entry = $this->db->fetchAll($sql, array($id, $userId));
 
-        return $entry ? true : false;
+        return true;
     }
 }
 
