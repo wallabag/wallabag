@@ -19,6 +19,14 @@ $front->get('/view/{id}', function (Request $request, $id) use ($app) {
 })
 ->bind('view_entry');
 
+$front->get('/mark-read/{id}', function (Request $request, $id) use ($app) {
+
+    $entry = $app['entry_api']->markAsRead($id);
+
+    return $app->redirect('/view/' . $id);
+})
+->bind('mark_entry_read');
+
 $front->match('/add', function (Request $request) use ($app) {
     $data = array('url');
 
