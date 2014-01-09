@@ -11,9 +11,9 @@ class EntryRepository
     }
 
     //TODO don't hardcode the user ;)
-    public function getEntries($userId = 1) {
-        $sql = "SELECT * FROM entries where user_id = ? AND status = 'unread' ORDER BY id DESC";
-        $entries = $this->db->fetchAll($sql, array($userId));
+    public function getEntries($status, $userId = 1) {
+        $sql = "SELECT * FROM entries where user_id = ? AND status = ? ORDER BY id DESC";
+        $entries = $this->db->fetchAll($sql, array($userId, $status));
 
         return $entries ? $entries : array();
     }

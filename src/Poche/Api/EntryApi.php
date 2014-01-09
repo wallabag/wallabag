@@ -11,8 +11,8 @@ class EntryApi
         $this->contentApi = $contentApi;
     }
 
-    public function getEntries() {
-        return $this->entryRepository->getEntries();
+    public function getEntries($status) {
+        return $this->entryRepository->getEntries($status);
     }
 
     public function getEntryById($id) {
