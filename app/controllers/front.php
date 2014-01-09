@@ -23,9 +23,21 @@ $front->get('/mark-read/{id}', function (Request $request, $id) use ($app) {
 
     $entry = $app['entry_api']->markAsRead($id);
 
-    return $app->redirect('/view/' . $id);
+    $referer = $request->headers->get('referer');
+
+    return $app->redirect($referer);
 })
 ->bind('mark_entry_read');
+
+$front->get('/mark-unread/{id}', function (Request $request, $id) use ($app) {
+
+    $entry = $app['entry_api']->markAsUnread($id);
+
+    $referer = $request->headers->get('referer');
+
+    return $app->redirect($referer);
+})
+->bind('mark_entry_unread');
 
 $front->match('/add', function (Request $request) use ($app) {
     $data = array('url');

@@ -14,10 +14,9 @@ $api->before(function (Request $request) {
 $api->get('/', function () { return 'API home page'; });
 
 $api->get('/entries', function () use ($app) {
-    $entries = $app['entry_api']->getEntries();
+    $entries = $app['entry_api']->getEntries('unread');
     return $app->json($entries, 200);
 });
-
 
 $api->post('/entries', function (Request $request) use ($app) {
     $url = $request->request->get('url');
@@ -25,6 +24,11 @@ $api->post('/entries', function (Request $request) use ($app) {
     $entry = $app['entry_api']->createEntryFromUrl($url);
 
     return $app->json($entry, 201);
+});
+
+$api->get('/archives', function () use ($app) {
+    $entries = $app['entry_api']->getEntries('read');
+    return $app->json($entries, 200);
 });
 
 $api->get('/get', function (Request $request) use ($app) {
@@ -39,6 +43,14 @@ $api->get('/mark-read', function (Request $request) use ($app) {
     $id = $request->request->get('id');
 
     $entry = $app['entry_api']->markAsRead($id);
+
+    return $app->json($entry, 201);
+});
+
+$api->get('/mark-unread', function (Request $request) use ($app) {
+    $id = $request->request->get('id');
+
+    $entry = $app['entry_api']->markAsUnread($id);
 
     return $app->json($entry, 201);
 });
