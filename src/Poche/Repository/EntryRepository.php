@@ -12,7 +12,7 @@ class EntryRepository
 
     //TODO don't hardcode the user ;)
     public function getEntries($userId = 1) {
-        $sql = "SELECT * FROM entries where user_id = ? ORDER BY id DESC";
+        $sql = "SELECT * FROM entries where user_id = ? AND status = 'unread' ORDER BY id DESC";
         $entries = $this->db->fetchAll($sql, array($userId));
 
         return $entries ? $entries : array();
@@ -21,7 +21,7 @@ class EntryRepository
     //TODO don't hardcode the user ;)
     public function saveEntry($entry, $userId = 1) {
 
-        return $this->db->insert('entries', array_merge($entry, array('user_id' => $userId)));
+        return $this->db->insert('entries', array_merge($entry, array('user_id' => $userId, 'status' => 'unread')));
     }
 
     //TODO don't hardcode the user ;)
@@ -30,6 +30,14 @@ class EntryRepository
         $entry = $this->db->fetchAll($sql, array($id, $userId));
 
         return $entry ? $entry : array();
+    }
+
+    //TODO don't hardcode the user ;)
+    public function markAsRead($id, $userId = 1) {
+        $sql = "UPDATE entries SET status = 'read' where id = ? AND user_id = ?";
+        $entry = $this->db->fetchAll($sql, array($id, $userId));
+
+        return $entry ? true : false;
     }
 }
 

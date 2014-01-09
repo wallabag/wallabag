@@ -19,6 +19,10 @@ class EntryApi
         return $this->entryRepository->getEntryById($id);
     }
 
+    public function markAsRead($id) {
+        return $this->entryRepository->markAsRead($id);
+    }
+
     public function createEntryFromUrl($url) {
 
         //TODO: Fetch all what we need, fill the title, content …
