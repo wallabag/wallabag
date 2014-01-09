@@ -7,7 +7,7 @@
 {% else %}
     <h2>{{ entry.title }}</h2>
     <ul>
-        <li><a href="#">{{ 'mark as read'|trans }}</a></li>
+        <li><a href="{{ path('mark_entry_read', {'id': entry.id}) }}">{{ 'mark as read'|trans }}</a></li>
         <li><a href="#">{{ 'star'|trans }}</a></li>
         <li><a href="#">{{ 'delete'|trans }}</a></li>
         <li><a href="{{ entry.url }}">{{ 'view original'|trans }}</a></li>
