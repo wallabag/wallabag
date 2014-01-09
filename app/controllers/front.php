@@ -15,7 +15,7 @@ $front->get('/view/{id}', function (Request $request, $id) use ($app) {
 
     $entry = $app['entry_api']->getEntryById($id);
 
-    return $app['twig']->render('view.twig', array('entry' => $entry));
+    return $app['twig']->render('view.twig', array('entry' => $entry[0]));
 })
 ->bind('view_entry');
 

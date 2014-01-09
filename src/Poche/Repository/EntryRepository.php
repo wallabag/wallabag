@@ -29,7 +29,7 @@ class EntryRepository
         $sql = "SELECT * FROM entries where id = ? AND user_id = ?";
         $entry = $this->db->fetchAll($sql, array($id, $userId));
 
-        return $entry ? $entry[0] : array();
+        return $entry ? $entry : array();
     }
 }
 
