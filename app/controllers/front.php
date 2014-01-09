@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 $front = $app['controllers_factory'];
 $front->get('/', function () use ($app) {
 
-    $entries = $app['entry_api']->getEntries();
+    $entries = $app['entry_api']->getEntries('unread');
 
     return $app['twig']->render('index.twig', array('entries' => $entries));
 });
@@ -48,5 +48,12 @@ $front->match('/add', function (Request $request) use ($app) {
     return $app['twig']->render('add.twig', array('form' => $form->createView()));
 })
 ->bind('add');
+
+$front->get('/archive', function () use ($app) {
+
+    $entries = $app['entry_api']->getEntries('read');
+
+    return $app['twig']->render('archive.twig', array('entries' => $entries));
+});
 
 return $front;
