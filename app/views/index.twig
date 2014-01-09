@@ -3,18 +3,31 @@
 {% block content %}
 {% set count = entries|length %}
 
+<nav role="navigation">
+    <ul>
+        <li>{{ 'unread'|trans }} ({{count}})</li>
+        <li>{{ 'starred'|trans }}</li>
+        <li>{{ 'archive'|trans }}</li>
+    </ul>
+</nav>
+
 {% if entries is empty %}
 <div class="messages warning"><p>{{ 'No link available here!'|trans }}</p></div>
 {% else %}
-    {{ 'msg.results'|transchoice(count) }}
+    <ul>
     {% for entry in entries %}
-    <div>
-        <a href="{{ path('view_entry', {'id': entry.id}) }}">{{ entry.title }}</a>
-
-        <p>{{ entry.content|striptags|slice(0, 300) }}...</p>
-
-    </div>
+    <li>
+        <h2><a href="{{ path('view_entry', {'id': entry.id}) }}">{{ entry.title }}</a></h2>
+        <p>{{ entry.content|striptags|slice(0, 300) }}&hellip;</p>
+        <ul>
+            <li><a href="{{ path('mark_entry_read', {'id': entry.id}) }}">{{ 'mark as read'|trans }}</a></li>
+            <li><a href="#">{{ 'star'|trans }}</a></li>
+            <li><a href="#">{{ 'delete'|trans }}</a></li>
+            <li><a href="{{ entry.url }}">{{ 'view original'|trans }}</a></li>
+        </ul>
+    </li>
     {% endfor %}
+    </ul>
     <p><a href="{{ path('add') }}">{{ 'entry.add'|trans }}</a></p>
 
 {% endif %}
