@@ -35,9 +35,9 @@ class EntryRepository
     //TODO don't hardcode the user ;)
     public function markAsRead($id, $userId = 1) {
         $sql = "UPDATE entries SET status = 'read' where id = ? AND user_id = ?";
-        $entry = $this->db->fetchAll($sql, array($id, $userId));
+        $count = $this->db->executeUpdate($sql, array($id, $userId));
 
-        return true;
+        return $count;
     }
 }
 
