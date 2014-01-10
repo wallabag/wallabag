@@ -20,6 +20,10 @@ header h1 {
     font-size: 1.3em;
 }
 
+nav ul li {
+  display: inline-block;
+}
+
 a,
 a:hover,
 a:visited {
