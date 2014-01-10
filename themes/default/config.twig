@@ -38,6 +38,8 @@
                 <li><a href="?feed&amp;type=fav&amp;user_id={{ user_id }}&amp;token={{ token }}" target="_blank">{% trans "Favorites feed" %}</a></li>
                 <li><a href="?feed&amp;type=archive&amp;user_id={{ user_id }}&amp;token={{ token }}" target="_blank">{% trans "Archive feed" %}</a></li>
             </ul>
+            <p>{% trans "Your token:" %} <strong>{{token}}</strong></p>
+            <p>{% trans "Your user id:" %} <strong>{{user_id}}</strong></p>
             <p>{% trans "You can regenerate your token: <a href='?feed&amp;action=generate'>generate!</a>." %}</p>
             {% endif %}
             
