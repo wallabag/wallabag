@@ -325,6 +325,22 @@ class Poche
         );
     }
 
+    protected function getPageContent(Url $url)
+    {
+        $options = array('http' => array('user_agent' => 'poche'));
+        if (isset($_SERVER['AUTH_TYPE']) && "basic" === strtolower($_SERVER['AUTH_TYPE'])) {
+            $options['http']['header'] = sprintf(
+                "Authorization: Basic %s", 
+                base64_encode(
+                    sprintf('%s:%s', $_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'])
+                )
+            );
+        }
+        $context = stream_context_create($options);
+        $json = file_get_contents(Tools::getPocheUrl() . '/inc/3rdparty/makefulltextfeed.php?url='.urlencode($url->getUrl()).'&max=5&links=preserve&exc=&format=json&submit=Create+Feed', false, $context);
+        return json_decode($json, true);
+    }
+
     /**
      * Call action (mark as fav, archive, delete, etc.)
      */
@@ -333,10 +349,7 @@ class Poche
         switch ($action)
         {
             case 'add':
-                $options = array('http' => array('user_agent' => 'poche'));
-                $context = stream_context_create($options);
-                $json = file_get_contents(Tools::getPocheUrl() . '/inc/3rdparty/makefulltextfeed.php?url='.urlencode($url->getUrl()).'&max=5&links=preserve&exc=&format=json&submit=Create+Feed', false, $context);
-                $content = json_decode($json, true);
+                $content = $this->getPageContent($url);
                 $title = $content['rss']['channel']['item']['title'];
                 $body = $content['rss']['channel']['item']['description'];
 
