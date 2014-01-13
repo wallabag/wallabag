@@ -1,17 +1,5 @@
 {% extends layout %}
-
-{% block menu %}
-{% set count = entries|length %}
-
-<nav role="navigation">
-    <ul>
-        <li><a href="/">{{ 'unread'|trans }}</a></li>
-        <li>{{ 'starred'|trans }}</li>
-        <li><a href="/archive">{{ 'archive'|trans }}</a> ({{count}})</li>
-        <li><a href="{{ path('add') }}">{{ 'entry.add'|trans }}</a></li>
-    </ul>
-</nav>
-{% endblock %}
+{% block title %}archive{% endblock %}
 
 {% block content %}
 {% if entries is empty %}
@@ -19,16 +7,7 @@
 {% else %}
     <ul>
     {% for entry in entries %}
-    <li>
-        <h2><a href="{{ path('view_entry', {'id': entry.id}) }}">{{ entry.title }}</a></h2>
-        <p>{{ entry.content|striptags|slice(0, 300) }}&hellip;</p>
-        <ul>
-            <li>{% if entry.status == "read" %}<a href="{{ path('mark_entry_unread', {'id': entry.id}) }}">{{ 'mark as unread'|trans }}</a>{% else %}<a href="{{ path('mark_entry_read', {'id': entry.id}) }}">{{ 'mark as read'|trans }}</a>{% endif %}</li>
-            <li><a href="#">{{ 'star'|trans }}</a></li>
-            <li><a href="#">{{ 'delete'|trans }}</a></li>
-            <li><a href="{{ entry.url }}">{{ 'view original'|trans }}</a></li>
-        </ul>
-    </li>
+        {% include "entry.twig" %}
     {% endfor %}
     </ul>
 

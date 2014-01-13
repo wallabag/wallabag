@@ -1,0 +1,10 @@
+    <li>
+        <h2><a href="{{ path('view_entry', {'id': entry.id}) }}">{{ entry.title }}</a></h2>
+        <p>{{ entry.content|striptags|slice(0, 300) }}&hellip;</p>
+        <ul>
+            <li>{% if entry.status == "read" %}<a href="{{ path('mark_entry_unread', {'id': entry.id}) }}">{{ 'mark as unread'|trans }}</a>{% else %}<a href="{{ path('mark_entry_read', {'id': entry.id}) }}">{{ 'mark as read'|trans }}</a>{% endif %}</li>
+            <li><a href="#">{% if entry.bookmark == 1 %}<a href="{{ path('unstar_entry', {'id': entry.id}) }}">{{ 'unstar'|trans }}</a>{% else %}<a href="{{ path('star_entry', {'id': entry.id}) }}">{{ 'star'|trans }}</a>{% endif %}</a></li>
+            <li><a href="#">{{ 'delete'|trans }}</a></li>
+            <li><a href="{{ entry.url }}">{{ 'view original'|trans }}</a></li>
+        </ul>
+    </li>

@@ -10,7 +10,7 @@
         <!--[if IE]>
         <meta http-equiv="X-UA-Compatible" content="IE=10">
         <![endif]-->
-        <title>poche</title>
+        <title>{% block title %}{% endblock %} – poche</title>
         <link rel="stylesheet" href="/assets/css/knacss.css" media="all">
         <link rel="stylesheet" href="/assets/css/style.css" media="all">
     </head>
@@ -18,7 +18,7 @@
 {% include '_top.twig' %}
         <div id="main">
             <div id="content" class="w600p center">
-            {% block menu %}{% endblock %}
+            {% include "menu.twig" %}
             {% block content %}{% endblock %}
             </div>
         </div>

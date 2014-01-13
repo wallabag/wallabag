@@ -1,0 +1,11 @@
+{% if entries is defined %} 
+{% set count = entries|length %}
+{% endif %}
+<nav role="navigation">
+    <ul>
+        <li><a href="/">{{ 'unread'|trans }}</a>{% if app.request.requesturi == '/' %} ({{count}}){% endif %}</li>
+        <li><a href="/bookmarks">{{ 'bookmarks'|trans }}</a>{% if app.request.requesturi == '/bookmarks' %} ({{count}}){% endif %}</li>
+        <li><a href="/archive">{{ 'archive'|trans }}</a>{% if app.request.requesturi == '/archive' %} ({{count}}){% endif %}</li>
+        <li><a href="{{ path('add') }}">{{ 'entry.add'|trans }}</a></li>
+    </ul>
+</nav>
