@@ -88,4 +88,11 @@ $front->get('/archive', function () use ($app) {
     return $app['twig']->render('archive.twig', array('entries' => $entries));
 });
 
+$front->get('/bookmarks', function () use ($app) {
+
+    $entries = $app['entry_api']->getBookmarks();
+
+    return $app['twig']->render('bookmarks.twig', array('entries' => $entries));
+});
+
 return $front;
