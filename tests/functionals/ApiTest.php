@@ -102,7 +102,7 @@ class ApiTest extends PocheWebTestCase
             )
         );
 
-        $this->assertEquals('true', $client->getResponse()->getContent());
+        $this->assertEquals('1', $client->getResponse()->getContent());
 
     }
 
