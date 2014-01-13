@@ -39,6 +39,26 @@ $front->get('/mark-unread/{id}', function (Request $request, $id) use ($app) {
 })
 ->bind('mark_entry_unread');
 
+$front->get('/star/{id}', function (Request $request, $id) use ($app) {
+
+    $entry = $app['entry_api']->star($id);
+
+    $referer = $request->headers->get('referer');
+
+    return $app->redirect($referer);
+})
+->bind('star_entry');
+
+$front->get('/unstar/{id}', function (Request $request, $id) use ($app) {
+
+    $entry = $app['entry_api']->unstar($id);
+
+    $referer = $request->headers->get('referer');
+
+    return $app->redirect($referer);
+})
+->bind('unstar_entry');
+
 $front->match('/add', function (Request $request) use ($app) {
     $data = array('url');
 

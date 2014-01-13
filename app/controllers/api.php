@@ -55,4 +55,19 @@ $api->get('/mark-unread', function (Request $request) use ($app) {
     return $app->json($entry, 201);
 });
 
+$api->get('/star', function (Request $request) use ($app) {
+    $id = $request->request->get('id');
+
+    $entry = $app['entry_api']->star($id);
+
+    return $app->json($entry, 201);
+});
+
+$api->get('/unstar', function (Request $request) use ($app) {
+    $id = $request->request->get('id');
+
+    $entry = $app['entry_api']->unstar($id);
+
+    return $app->json($entry, 201);
+});
 return $api;
