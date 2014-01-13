@@ -20,7 +20,7 @@ header h1 {
     font-size: 1.3em;
 }
 
-nav ul li {
+nav ul li, ul.entry_options li {
   display: inline-block;
 }
 
