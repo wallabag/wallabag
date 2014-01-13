@@ -19,6 +19,14 @@ class EntryRepository
     }
 
     //TODO don't hardcode the user ;)
+    public function getBookmarks($userId = 1) {
+        $sql = "SELECT * FROM entries where user_id = ? AND bookmark = 1 ORDER BY id DESC";
+        $entries = $this->db->fetchAll($sql, array($userId));
+
+        return $entries ? $entries : array();
+    }
+
+    //TODO don't hardcode the user ;)
     public function saveEntry($entry, $userId = 1) {
 
         return $this->db->insert('entries', array_merge($entry, array('user_id' => $userId, 'status' => 'unread')));

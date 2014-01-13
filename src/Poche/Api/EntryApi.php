@@ -15,6 +15,10 @@ class EntryApi
         return $this->entryRepository->getEntries($status);
     }
 
+    public function getBookmarks() {
+        return $this->entryRepository->getBookmarks();
+    }
+
     public function getEntryById($id) {
         return $this->entryRepository->getEntryById($id);
     }
