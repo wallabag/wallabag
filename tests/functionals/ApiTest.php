@@ -106,6 +106,36 @@ class ApiTest extends PocheWebTestCase
 
     }
 
+    public function testMarkAsUnread()
+    {
+
+        //Load some entries
+        Fixtures::loadEntries($this->app['db']);
+
+        $client = $this->createClient();
+        $crawler = $client->request(
+            'GET',
+            '/api/mark-unread',
+            array(),
+            array(),
+            array('CONTENT_TYPE' => 'application/json'),
+            '{"id":"1"}'
+        );
+
+        $this->assertEquals($client->getResponse()->getStatusCode(), 201);
+
+        // Assert that the "Content-Type" header is "application/json"
+        $this->assertTrue(
+            $client->getResponse()->headers->contains(
+                'Content-Type',
+                'application/json'
+            )
+        );
+
+        $this->assertEquals('1', $client->getResponse()->getContent());
+
+    }
+
     public function testPostEntries()
     {
 
