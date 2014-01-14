@@ -20,7 +20,7 @@ class EntryRepository
 
     //TODO don't hardcode the user ;)
     public function getBookmarks($userId = 1) {
-        $sql = "SELECT * FROM entries where user_id = ? AND bookmark = 1 ORDER BY id DESC";
+        $sql = "SELECT * FROM entries where user_id = ? AND bookmark = 1 and status <> 'removed' ORDER BY id DESC";
         $entries = $this->db->fetchAll($sql, array($userId));
 
         return $entries ? $entries : array();
@@ -34,7 +34,7 @@ class EntryRepository
 
     //TODO don't hardcode the user ;)
     public function getEntryById($id, $userId = 1) {
-        $sql = "SELECT * FROM entries where id = ? AND user_id = ?";
+        $sql = "SELECT * FROM entries where id = ? AND user_id = ? AND status <> 'removed'";
         $entry = $this->db->fetchAll($sql, array($id, $userId));
 
         return $entry ? $entry : array();
@@ -67,6 +67,14 @@ class EntryRepository
     //TODO don't hardcode the user ;)
     public function unstar($id, $userId = 1) {
         $sql = "UPDATE entries SET bookmark = 0 where id = ? AND user_id = ?";
+        $count = $this->db->executeUpdate($sql, array($id, $userId));
+
+        return $count;
+    }
+
+    //TODO don't hardcode the user ;)
+    public function remove($id, $userId = 1) {
+        $sql = "UPDATE entries SET status = 'removed' where id = ? AND user_id = ?";
         $count = $this->db->executeUpdate($sql, array($id, $userId));
 
         return $count;

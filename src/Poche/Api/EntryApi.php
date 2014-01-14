@@ -39,6 +39,10 @@ class EntryApi
         return $this->entryRepository->unstar($id);
     }
 
+    public function remove($id) {
+        return $this->entryRepository->remove($id);
+    }
+
     public function createEntryFromUrl($url) {
 
         //TODO: Fetch all what we need, fill the title, content …

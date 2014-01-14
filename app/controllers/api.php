@@ -70,4 +70,12 @@ $api->get('/unstar', function (Request $request) use ($app) {
 
     return $app->json($entry, 201);
 });
+
+$api->get('/remove', function (Request $request) use ($app) {
+    $id = $request->request->get('id');
+
+    $entry = $app['entry_api']->remove($id);
+
+    return $app->json($entry, 201);
+});
 return $api;

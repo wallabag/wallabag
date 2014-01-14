@@ -59,6 +59,16 @@ $front->get('/unstar/{id}', function (Request $request, $id) use ($app) {
 })
 ->bind('unstar_entry');
 
+$front->get('/remove/{id}', function (Request $request, $id) use ($app) {
+
+    $entry = $app['entry_api']->remove($id);
+
+    $referer = $request->headers->get('referer');
+
+    return $app->redirect($referer);
+})
+->bind('remove_entry');
+
 $front->match('/add', function (Request $request) use ($app) {
     $data = array('url');
 
