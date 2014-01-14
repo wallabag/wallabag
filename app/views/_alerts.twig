@@ -1,0 +1,13 @@
+{% spaceless %}
+{% set alertTypeAvaillable = [ 'info', 'success', 'warning', 'error'] %}
+{% if app.session.flashBag is defined %}
+    {%- for alertType in alertTypeAvaillable %}
+        {%- for alert in app.session.flashBag.get(alertType) %}
+                    <div class="alert alert-{{ alertType }}" >
+                        {% if alert.title %}<h4 class="alert-heading">{{ alert.title|trans }}</h4>{% endif %}
+                        {{ alert.message|trans|raw }}
+                    </div>
+        {%- endfor %}
+    {%- endfor %}
+{% endif %}
+{% endspaceless %}

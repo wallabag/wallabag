@@ -62,12 +62,29 @@ $front->get('/unstar/{id}', function (Request $request, $id) use ($app) {
 $front->get('/remove/{id}', function (Request $request, $id) use ($app) {
 
     $entry = $app['entry_api']->remove($id);
+    $app['session']->getFlashBag()->add(
+            'info',
+            array(
+                'title'   => 'success',
+                'message' => 'entry #' . $id . ' removed. <a href="'.$app['url_generator']->generate('restore_entry', array('id' => $id)).'">undo</a>',
+            )
+    );
 
     $referer = $request->headers->get('referer');
 
     return $app->redirect($referer);
 })
 ->bind('remove_entry');
+
+$front->get('/restore/{id}', function (Request $request, $id) use ($app) {
+
+    $entry = $app['entry_api']->restore($id);
+
+    $referer = $request->headers->get('referer');
+
+    return $app->redirect($referer);
+})
+->bind('restore_entry');
 
 $front->match('/add', function (Request $request) use ($app) {
     $data = array('url');
