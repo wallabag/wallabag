@@ -1,15 +1,18 @@
 <?php
 use Poche\Model\Entry;
+use Poche\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 
 $front = $app['controllers_factory'];
-$front->get('/', function () use ($app) {
+// $front->get('/', function () use ($app) {
 
-    $entries = $app['entry_api']->getEntries('unread');
+//     $entries = $app['entry_api']->getEntries('unread');
 
-    return $app['twig']->render('index.twig', array('entries' => $entries));
-});
+//     return $app['twig']->render('index.twig', array('entries' => $entries));
+// });
+
+$front->get('/', 'Poche\Controller\EntryController::indexAction');
 
 $front->get('/view/{id}', function (Request $request, $id) use ($app) {
 
