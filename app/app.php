@@ -27,6 +27,18 @@ $app['twig'] = $app->share($app->extend('twig', function($twig) {
   return $twig;
 }));
 
+$app['twig'] = $app->share($app->extend('twig', function($twig) {
+  $twig->addFilter(new Twig_SimpleFilter('getReadingTime', function ($text) {
+    $word = str_word_count(strip_tags($text));
+    $minutes = floor($word / 200);
+    $seconds = floor($word % 200 / (200 / 60));
+    $time = array('minutes' => $minutes, 'seconds' => $seconds);
+
+    return $minutes;
+  }));
+  return $twig;
+}));
+
 $app->register(new ConsoleServiceProvider(), [
     'console.name' => 'Poche console',
     'console.version' => '0.1',
