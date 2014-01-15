@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<!doctype html>
 <!--[if lte IE 6]><html class="no-js ie6 ie67 ie678" lang="en"><![endif]-->
 <!--[if lte IE 7]><html class="no-js ie7 ie67 ie678" lang="en"><![endif]-->
 <!--[if IE 8]><html class="no-js ie8 ie678" lang="en"><![endif]-->
 <!--[if gt IE 8]><html class="no-js" lang="en"><![endif]-->
-<html lang="en">
+<html dir="ltr" lang="en">
     <head>
         <meta name="viewport" content="initial-scale=1.0">
         <meta charset="utf-8">
@@ -11,18 +11,21 @@
         <meta http-equiv="X-UA-Compatible" content="IE=10">
         <![endif]-->
         <title>{% block title %}{% endblock %} – poche</title>
-        <link rel="stylesheet" href="/assets/css/knacss.css" media="all">
-        <link rel="stylesheet" href="/assets/css/style.css" media="all">
+        <link rel="stylesheet" href="/assets/css/reset.css" media="all">
+        <link rel="stylesheet" href="/assets/css/tinytypo.css" media="all">
+        <link rel="stylesheet" href="/assets/css/typo.css" media="all">
+        <link rel="stylesheet" href="/assets/css/custom.css" media="all">
     </head>
     <body>
+        <div id="main" class="page">
 {% include '_top.twig' %}
-        <div id="main">
-            <div id="content" class="w600p center">
-            {% include "_menu.twig" %}
+        <main role="main">
+            <div id="content">
             {% include '_alerts.twig' %}
             {% block content %}{% endblock %}
             </div>
-        </div>
+        </main>
 {% include '_footer.twig' %}
+        </div>
     </body>
 </html>

@@ -20,6 +20,13 @@ $app->before(function () use ($app) {
     $app['twig']->addGlobal('layout', $app['twig']->loadTemplate('layout.twig'));
 });
 
+$app['twig'] = $app->share($app->extend('twig', function($twig) {
+  $twig->addFilter(new Twig_SimpleFilter('getDomain', function ($url) {
+    return parse_url($url, PHP_URL_HOST);
+  }));
+  return $twig;
+}));
+
 $app->register(new ConsoleServiceProvider(), [
     'console.name' => 'Poche console',
     'console.version' => '0.1',

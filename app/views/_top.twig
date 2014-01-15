@@ -1,5 +1,14 @@
-        <header class="w600p center mbm">
-            <h1>
-                <a href="/" title="back to home" ><img src="/assets/img/logo.png" alt="poche logo" /></a>
-            </h1>
-        </header>
+{% if entries is defined %} 
+{% set count = entries|length %}
+{% endif %}
+    <header>
+        <nav role="navigation">
+            <a class="logo" href="/">poche</a>
+            <ul>
+                <li {% if app.request.requesturi == '/' %}class="active"{% endif %}><a href="/">{{ 'unread'|trans }}</a>{% if app.request.requesturi == '/' %} ({{count}}){% endif %}</li>
+                <li {% if app.request.requesturi == '/bookmarks' %}class="active"{% endif %}><a href="/bookmarks">{{ 'bookmarks'|trans }}</a></li>
+                <li {% if app.request.requesturi == '/archive' %}class="active"{% endif %}><a href="/archive">{{ 'archive'|trans }}</a></li>
+                <li {% if app.request.requesturi == '/add' %}class="active"{% endif %}><a href="{{ path('add') }}">{{ 'entry.add'|trans }}</a></li>
+            </ul>
+        </nav>
+    </header>

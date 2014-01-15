@@ -7,11 +7,11 @@
 <div class="messages warning"><p>{{ 'No link available here!'|trans }}</p></div>
 {% else %}
     <h2>{{ entry.title }}</h2>
-    <ul class="entry_options">
+    <ul class="tools">
         <li>{% if entry.status == "read" %}<a href="{{ path('mark_entry_unread', {'id': entry.id}) }}">{{ 'mark as unread'|trans }}</a>{% else %}<a href="{{ path('mark_entry_read', {'id': entry.id}) }}">{{ 'mark as read'|trans }}</a>{% endif %}</li>
         <li>{% if entry.bookmark == 1 %}<a href="{{ path('unstar_entry', {'id': entry.id}) }}">{{ 'unstar'|trans }}</a>{% else %}<a href="{{ path('star_entry', {'id': entry.id}) }}">{{ 'star'|trans }}</a>{% endif %}</li>
         <li><a href="{{ path('remove_entry', {'id': entry.id}) }}">{{ 'delete'|trans }}</a></li>
-        <li><a href="{{ entry.url }}">{{ 'view original'|trans }}</a></li>
+        <li><a href="{{ entry.url }}" class="external" title="{{ 'view original'|trans }}">{{ entry.url | getDomain }}</a></li>
     </ul>
 
     <article>{{ entry.content|raw }}</article>

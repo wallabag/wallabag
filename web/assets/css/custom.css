@@ -1,0 +1,139 @@
+/* --------------------------------------------------
+
+   custom.css
+
+----------------------------------------------------- */
+/* Add your styles here
+[fr] Ajoutez vos styles ici */
+
+body {
+  text-align: center;
+}
+
+.page {
+  width: 50%;
+  max-width: 700px;
+  margin: 1em auto;
+  text-align: left;
+}
+
+@media ( max-width: 940px) {
+  .page { width: 80%; }
+}
+
+@media ( max-width: 400px) {
+  .page { width: auto; margin: 1em 10px; }
+}
+
+header {
+    margin-top: 10px;
+}
+
+.logo {
+    color: #000;
+    letter-spacing: 1px;
+    float: left;
+}
+
+header ul {
+    text-align: right;
+    font-size: 90%;
+}
+
+header li {
+    display: inline;  
+}
+
+header a {
+    color: #777;
+    text-decoration: none;
+}
+
+nav .active a {
+    color: #333;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 1.2em;
+}
+
+.preview {
+    margin-bottom: 0;
+}
+
+.items article .preview {
+    color: #888;
+}
+
+.items article:hover .preview {
+    color: #333;
+}
+
+.tools li {
+  display: inline-block;
+  font-size: 0.8em;
+  color: #888;
+}
+
+.alert {
+  padding: 8px 35px 8px 14px;
+  margin-bottom: 20px;
+  color: #c09853;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  background-color: #fcf8e3;
+  border: 1px solid #fbeed5;
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+}
+
+.alert h4 {
+  margin: 0;
+}
+
+.alert .close {
+  position: relative;
+  top: -2px;
+  right: -21px;
+  line-height: 20px;
+}
+
+.alert-success {
+  color: #468847;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+}
+
+.alert-danger,
+.alert-error {
+  color: #b94a48;
+  background-color: #f2dede;
+  border-color: #eed3d7;
+}
+
+.alert-info {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+.alert-block {
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
+.alert-block > p,
+.alert-block > ul {
+  margin-bottom: 0;
+}
+
+.alert-block p + p {
+  margin-top: 5px;
+}
+
+footer {
+  text-align: right;
+  color: #555;
+  font-size: 0.8em;
+}

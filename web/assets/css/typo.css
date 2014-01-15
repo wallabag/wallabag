@@ -1,0 +1,575 @@
+/* --------------------------------------------------
+
+   Typographical base
+   
+   Tiny Typo v1.0 | MIT License
+   (c) 2010-2013 tinytypo.tetue.net
+
+----------------------------------------------------- */
+html {
+  font-size: 100.01%;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+/* Cf.: http://www.pompage.net/pompe/definir-des-tailles-de-polices-en-CSS/
+et http://forum.alsacreations.com/topic-4-54377-1.html
+[en] http://stackoverflow.com/questions/2703056/body-font-size-100-01-vs-body-font-size-100 */
+body {
+  font-size: 1em;
+  line-height: 1.5;
+}
+/* Titraille / Intertitres */
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
+  display: block;
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+  font-weight: normal;
+}
+h1,
+.h1 {
+  font-size: 2em;
+  line-height: 1.5;
+  margin-bottom: .75em;
+}
+h2,
+.h2 {
+  font-size: 1.5em;
+  line-height: 1;
+  margin-bottom: 1em;
+}
+h3,
+.h3 {
+  font-size: 1.25em;
+  line-height: 1.2;
+  margin-bottom: 1.2em;
+}
+h4,
+.h4 {
+  font-size: 1.1em;
+  line-height: 1.364;
+  margin-bottom: 1.364em;
+}
+h5,
+.h5 {
+  font-size: 1em;
+  font-weight: bold;
+  margin-bottom: 1.5em;
+}
+h6,
+.h6 {
+  font-size: 1em;
+  font-weight: bold;
+}
+h1 small,
+.h1 small,
+h2 small,
+.h2 small,
+h3 small,
+.h3 small,
+h4 small,
+.h4 small,
+h5 small,
+.h5 small,
+h6 small,
+.h6 small {
+  font-size: 60%;
+  line-height: 0;
+}
+hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0;
+  margin: 1.5em 0;
+  border: solid;
+  border-width: 1px 0 0;
+}
+/* Typographical enhancements */
+em,
+i,
+.i {
+  font-style: italic;
+}
+strong,
+b,
+.b {
+  font-weight: bold;
+}
+mark,
+.mark {
+  background: #ff0;
+  color: #000;
+}
+.smaller {
+  font-size: 75%;
+}
+small,
+.small {
+  font-size: 80%;
+}
+big,
+.big {
+  font-size: 130%;
+}
+.bigger {
+  font-size: 175%;
+}
+.biggest {
+  font-size: 200%;
+}
+abbr[title],
+acronym[title] {
+  border-bottom: .1em dotted;
+  cursor: help;
+}
+@media print {
+  abbr[title] {
+    border-bottom: 0;
+  }
+  abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+}
+dfn,
+.dfn {
+  font-weight: bold;
+  font-style: italic;
+}
+s,
+strike,
+del,
+.del {
+  opacity: .5;
+  text-decoration: line-through;
+}
+ins,
+.ins {
+  background-color: rgba(255, 255, 204, 0.5);
+  text-decoration: none;
+}
+u,
+.u {
+  text-decoration: underline;
+}
+sup,
+.sup,
+sub,
+.sub {
+  font-size: 80%;
+  font-variant: normal;
+  line-height: 0;
+}
+sup,
+.sup {
+  vertical-align: super;
+}
+.ie sup {
+  vertical-align: text-top;
+}
+sub,
+.sub {
+  vertical-align: sub;
+}
+.ie sub {
+  vertical-align: text-bottom;
+}
+.lead {
+  font-size: 120%;
+}
+.caps {
+  font-variant: small-caps;
+}
+.quiet {
+  color: #555555;
+}
+/* Alignment */
+.text-left {
+  text-align: left;
+}
+.text-right {
+  text-align: right;
+}
+.text-center {
+  text-align: center;
+}
+.text-justify {
+  text-align: justify;
+  text-justify: newspaper;
+}
+/* Lists */
+ul {
+  list-style-type: disc;
+}
+ul ul {
+  list-style-type: circle;
+}
+ul ul ul {
+  list-style-type: square;
+}
+ol {
+  list-style-type: decimal;
+}
+ol ol {
+  list-style-type: lower-alpha;
+}
+ol ol ol {
+  list-style-type: lower-greek;
+}
+ul ul,
+ol ol,
+ul ol,
+ol ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+ol,
+ul {
+  margin-left: 1.5em;
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+}
+dt {
+  font-weight: bold;
+}
+dd {
+  margin-left: 1.5em;
+}
+.list-none {
+  margin-left: 0;
+  list-style: none;
+}
+.list-none li:before {
+  content: '';
+}
+.list-square {
+  margin-left: 1.5em;
+  list-style: square;
+}
+.list-square li:before {
+  content: '';
+}
+.list-disc {
+  margin-left: 1.5em;
+  list-style: disc;
+}
+.list-disc li:before {
+  content: '';
+}
+.list-circle {
+  margin-left: 1.5em;
+  list-style: circle;
+}
+.list-circle li:before {
+  content: '';
+}
+.list-decimal {
+  margin-left: 1.5em;
+  list-style: decimal;
+}
+.list-decimal li:before {
+  content: '';
+}
+.list-inline {
+  margin-left: 0;
+}
+.list-inline li {
+  display: inline-block;
+  margin: 0;
+  margin-right: 1em;
+}
+.list-inline li:Last-Child {
+  margin-right: 0;
+}
+.list-inline.list-inline-sep li {
+  margin-right: 0;
+}
+.list-inline.list-inline-sep li:after {
+  content: " | ";
+}
+.list-inline.list-inline-sep li:Last-Child:after {
+  content: '';
+}
+.list-inline.list-inline-dash li {
+  margin-right: 0;
+}
+.list-inline.list-inline-dash li:after {
+  content: " - ";
+}
+.list-inline.list-inline-dash li:Last-Child:after {
+  content: '';
+}
+.list-inline.list-inline-comma li {
+  margin-right: 0;
+}
+.list-inline.list-inline-comma li:after {
+  content: ", ";
+}
+.list-inline.list-inline-comma li:Last-Child:after {
+  content: ". ";
+}
+.list-block li {
+  display: block;
+  margin-right: 0;
+}
+/* Tables */
+table {
+  max-width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+.table {
+  width: 100%;
+}
+.table caption,
+.table th,
+.table td {
+  padding: 0.375em;
+}
+.table caption {
+  font-weight: bold;
+  text-align: left;
+  border-bottom: 2px solid;
+}
+.table th {
+  font-weight: bold;
+}
+.table th,
+.table td {
+  border-bottom: 1px solid;
+}
+.table thead th {
+  vertical-align: bottom;
+}
+.table tbody tr:hover td {
+  background-color: rgba(34, 34, 34, 0.050000000000000044);
+}
+.table tfoot {
+  font-style: italic;
+}
+.table tfoot td {
+  border-bottom: 0;
+  vertical-align: top;
+}
+@media (max-width: 640px) {
+  .table-responsive {
+    width: 100%;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    margin-bottom: 1.5em;
+  }
+  .table-responsive table {
+    width: 100%;
+    margin-bottom: 0;
+  }
+  .table-responsive thead,
+  .table-responsive tbody,
+  .table-responsive tfoot,
+  .table-responsive tr,
+  .table-responsive th,
+  .table-responsive td {
+    white-space: nowrap;
+  }
+}
+/* Quotes, code and poetry */
+q {
+  quotes: "\201C" "\201D" "\2018" "\2019";
+}
+:lang(en) > q {
+  quotes: "\201C" "\201D" "\2018" "\2019";
+}
+:lang(fr) > q {
+  quotes: "\00AB\A0" "\A0\00BB" "\201C" "\201D" "\2018" "\2019";
+}
+:lang(es) > q {
+  quotes: "\00AB" "\00BB" "\201C" "\201D";
+}
+:lang(it) > q {
+  quotes: "\00AB\A0" "\A0\00BB" "\201C" "\201D";
+}
+:lang(de) > q {
+  quotes: "\00BB" "\00AB" "\203A" "\2039";
+}
+:lang(no) > q {
+  quotes: "\00AB\A0" "\A0\00BB" "\2039" "\203A";
+}
+/* [en] http://en.wikipedia.org/wiki/International_variation_in_quotation_marks */
+q:before {
+  content: open-quote;
+}
+q:after {
+  content: close-quote;
+}
+blockquote {
+  position: relative;
+  padding-left: 1.5em;
+  border: solid rgba(34, 34, 34, 0.19999999999999996);
+  border-width: 0 0 0 5px;
+}
+blockquote:before {
+  z-index: -1;
+  position: absolute;
+  left: 0;
+  top: 0;
+  content: "\00AB";
+  line-height: 0;
+  font-size: 10em;
+  color: rgba(34, 34, 34, 0.09999999999999998);
+}
+cite,
+.cite {
+  font-style: italic;
+}
+address {
+  font-style: italic;
+}
+pre,
+code,
+kbd,
+samp,
+var,
+tt {
+  font-family: monospace;
+  font-size: 1em;
+}
+pre {
+  white-space: pre-wrap;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+kbd {
+  white-space: nowrap;
+  padding: .1em .3em;
+  background-color: #eee;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px #ffffff inset;
+  color: #333;
+}
+samp {
+  font-weight: bold;
+}
+var {
+  font-style: italic;
+}
+/* Box */
+.box {
+  display: block;
+  margin-bottom: 1.5em;
+  padding: 1.5em 1.5em;
+  padding-bottom: .1em;
+  border: 1px solid;
+}
+@media print {
+  .box {
+    border: 1px solid !important;
+  }
+}
+@media (min-width: 640px) {
+  .box.right {
+    width: 33%;
+    margin-left: 1.5em;
+  }
+  .box.left {
+    width: 33%;
+    margin-right: 1.5em;
+  }
+  .box.center {
+    width: 75%;
+  }
+}
+/* Paragraphs */
+p,
+.p,
+ul,
+ol,
+dl,
+dd,
+blockquote,
+address,
+pre,
+.table,
+fieldset {
+  margin-bottom: 1.5em;
+}
+/* Typography for small screens
+[fr] http://www.alsacreations.com/astuce/lire/1177 */
+@media (max-width: 640px) {
+  /* fixer une largeur maximale  de 100 % aux elements potentiellement problematiques */
+  img,
+  table,
+  td,
+  blockquote,
+  code,
+  pre,
+  textarea,
+  input,
+  iframe,
+  object,
+  embed,
+  video {
+    max-width: 100% !important;
+  }
+  /* gestion des mots longs */
+  textarea,
+  table,
+  td,
+  th,
+  pre,
+  code,
+  samp {
+    word-wrap: break-word;
+    /* cesure forcee */
+  }
+  pre,
+  code,
+  samp {
+    white-space: pre-line;
+    /* passage a la ligne specifique pour les elements a chasse fixe */
+  }
+}
+/* orientation iOS5 font-size fix */
+@media (orientation: landscape) and (max-device-width: 640px) {
+  html,
+  body {
+    -webkit-text-size-adjust: 100%;
+  }
+}
+/* Print styles from HTML5 Boilerplate
+Inlined to avoid required HTTP connection: h5bp.com/r */
+@media print {
+  pre,
+  blockquote {
+    page-break-inside: avoid;
+  }
+  thead {
+    display: table-header-group;
+  }
+  tr,
+  img {
+    page-break-inside: avoid;
+  }
+  @page  {
+    margin: 2cm .5cm;
+  }
+  p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3;
+  }
+  h2,
+  h3 {
+    page-break-after: avoid;
+  }
+}
