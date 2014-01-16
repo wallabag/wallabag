@@ -1,5 +1,11 @@
     <article id="item-{{entry.id}}">
         <h2><a href="{{ path('view_entry', {'id': entry.id}) }}">{{ entry.title }}</a></h2>
+        {% set picture = entry.content|getPicture %}
+        {% if picture != "" %}
+        <figure class="right">
+           <img src="{{ picture }}" class="picturepreview thumb round border right" />
+        </figure>
+        {% endif %}
         <p class="preview">{{ entry.content|striptags|slice(0, 300) }}&hellip;</p>
         <ul class="tools">
             <li>{% if entry.status == "read" %}<a href="{{ path('mark_entry_unread', {'id': entry.id}) }}">{{ 'mark as unread'|trans }}</a>{% else %}<a href="{{ path('mark_entry_read', {'id': entry.id}) }}">{{ 'mark as read'|trans }}</a>{% endif %}</li>

@@ -70,6 +70,10 @@ h2 {
     color: #333;
 }
 
+img.picturepreview {
+  max-width:100px;
+}
+
 .tools li {
   display: inline-block;
   font-size: 0.8em;
