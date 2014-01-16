@@ -12,12 +12,12 @@ namespace Poche\Twig;
 
 class Filter
 {
-    public function getDomain($url)
+    public static function getDomain($url)
     {
         return parse_url($url, PHP_URL_HOST);
     }
 
-    public function getReadingTime($text) 
+    public static function getReadingTime($text) 
     {
         $word = str_word_count(strip_tags($text));
         $minutes = floor($word / 200);
@@ -27,7 +27,7 @@ class Filter
         return $minutes;
     }
 
-    public function getPicture($text) 
+    public static function getPicture($text) 
     {
         $output = preg_match('/<img.+src=[\'"]([^\'"]+)[\'"].*>/Ui', $text, $result);
 
