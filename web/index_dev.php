@@ -10,4 +10,6 @@ require_once __DIR__.'/../vendor/full-text-rss/autoload.php';
 require_once __DIR__.'/../app/app.php';
 require_once __DIR__.'/../app/controllers/controllers.php';
 
+$app['debug'] = true;
+
 $app->run();
