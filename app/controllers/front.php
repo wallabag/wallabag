@@ -12,6 +12,10 @@ $front->get('/view/{id}', function (Request $request, $id) use ($app) {
 
     $entry = $app['entry_api']->getEntryById($id);
 
+    if (empty($entry)) {
+        $app->abort(404, "Post $id does not exist.");
+    }
+
     return $app['twig']->render('view.twig', array('entry' => $entry[0]));
 })
 ->bind('view_entry');
