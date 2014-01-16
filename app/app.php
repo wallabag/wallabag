@@ -3,6 +3,7 @@ use Knp\Provider\ConsoleServiceProvider;
 use Poche\Api\EntryApi;
 use Poche\Api\ContentFullTextRssApi;
 use Poche\Repository\EntryRepository;
+use Poche\Twig;
 
 use Symfony\Component\Translation\Loader\PoFileLoader;
 use Silex\Provider\SessionServiceProvider;
@@ -21,21 +22,17 @@ $app->before(function () use ($app) {
 });
 
 $app['twig'] = $app->share($app->extend('twig', function($twig) {
-  $twig->addFilter(new Twig_SimpleFilter('getDomain', function ($url) {
-    return parse_url($url, PHP_URL_HOST);
-  }));
+  $twig->addFilter(new Twig_SimpleFilter('getDomain', 'Poche\Twig\Filter::getDomain'));
   return $twig;
 }));
 
 $app['twig'] = $app->share($app->extend('twig', function($twig) {
-  $twig->addFilter(new Twig_SimpleFilter('getReadingTime', function ($text) {
-    $word = str_word_count(strip_tags($text));
-    $minutes = floor($word / 200);
-    $seconds = floor($word % 200 / (200 / 60));
-    $time = array('minutes' => $minutes, 'seconds' => $seconds);
+  $twig->addFilter(new Twig_SimpleFilter('getReadingTime', 'Poche\Twig\Filter::getReadingTime'));
+  return $twig;
+}));
 
-    return $minutes;
-  }));
+$app['twig'] = $app->share($app->extend('twig', function($twig) {
+  $twig->addFilter(new Twig_SimpleFilter('getPicture', 'Poche\Twig\Filter::getPicture'));
   return $twig;
 }));
 
