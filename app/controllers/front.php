@@ -6,121 +6,29 @@ use Symfony\Component\HttpFoundation\Request;
 
 $front = $app['controllers_factory'];
 
+// entry
 $front->get('/', 'Poche\Controller\EntryController::indexAction');
-
-$front->get('/view/{id}', function (Request $request, $id) use ($app) {
-
-    $entry = $app['entry_api']->getEntryById($id);
-
-    if (empty($entry)) {
-        $app->abort(404, "Post $id does not exist.");
-    }
-
-    return $app['twig']->render('view.twig', array('entry' => $entry[0]));
-})
+$front->get('/view/{id}', 'Poche\Controller\EntryController::showAction')
 ->bind('view_entry');
-
-$front->get('/mark-read/{id}', function (Request $request, $id) use ($app) {
-
-    $entry = $app['entry_api']->markAsRead($id);
-
-    $referer = $request->headers->get('referer');
-
-    return $app->redirect($referer);
-})
-->bind('mark_entry_read');
-
-$front->get('/mark-unread/{id}', function (Request $request, $id) use ($app) {
-
-    $entry = $app['entry_api']->markAsUnread($id);
-
-    $referer = $request->headers->get('referer');
-
-    return $app->redirect($referer);
-})
-->bind('mark_entry_unread');
-
-$front->get('/star/{id}', function (Request $request, $id) use ($app) {
-
-    $entry = $app['entry_api']->star($id);
-
-    $referer = $request->headers->get('referer');
-
-    return $app->redirect($referer);
-})
-->bind('star_entry');
-
-$front->get('/unstar/{id}', function (Request $request, $id) use ($app) {
-
-    $entry = $app['entry_api']->unstar($id);
-
-    $referer = $request->headers->get('referer');
-
-    return $app->redirect($referer);
-})
-->bind('unstar_entry');
-
-$front->get('/remove/{id}', function (Request $request, $id) use ($app) {
-
-    $entry = $app['entry_api']->remove($id);
-    $app['session']->getFlashBag()->add(
-            'info',
-            array(
-                'title'   => 'success',
-                'message' => 'entry #' . $id . ' removed. <a href="'.$app['url_generator']->generate('restore_entry', array('id' => $id)).'">undo</a>',
-            )
-    );
-
-    $referer = $request->headers->get('referer');
-
-    return $app->redirect($referer);
-})
+$front->match('/add', 'Poche\Controller\EntryController::addAction')
+->bind('add');
+$front->get('/remove/{id}', 'Poche\Controller\EntryController::removeAction')
 ->bind('remove_entry');
-
-$front->get('/restore/{id}', function (Request $request, $id) use ($app) {
-
-    $entry = $app['entry_api']->restore($id);
-
-    $referer = $request->headers->get('referer');
-
-    return $app->redirect($referer);
-})
+$front->get('/restore/{id}', 'Poche\Controller\EntryController::restoreAction')
 ->bind('restore_entry');
 
-$front->match('/add', function (Request $request) use ($app) {
-    $data = array('url');
+// bookmarks
+$front->get('/bookmarks', 'Poche\Controller\BookmarkController::indexAction');
+$front->get('/star/{id}', 'Poche\Controller\BookmarkController::addAction')
+->bind('star_entry');
+$front->get('/unstar/{id}', 'Poche\Controller\BookmarkController::removeAction')
+->bind('unstar_entry');
 
-    $form = $app['form.factory']->createBuilder('form', $data)
-        ->add('url')
-        ->getForm();
-
-    $form->handleRequest($request);
-
-    if ($form->isValid()) {
-        $data = $form->getData();
-
-        $entry = $app['entry_api']->createAndSaveEntryFromUrl($data['url']);
-
-        return $app->redirect('/');
-    }
-
-    // display the form
-    return $app['twig']->render('add.twig', array('form' => $form->createView()));
-})
-->bind('add');
-
-$front->get('/archive', function () use ($app) {
-
-    $entries = $app['entry_api']->getEntries('read');
-
-    return $app['twig']->render('archive.twig', array('entries' => $entries));
-});
-
-$front->get('/bookmarks', function () use ($app) {
-
-    $entries = $app['entry_api']->getBookmarks();
-
-    return $app['twig']->render('bookmarks.twig', array('entries' => $entries));
-});
+// archive
+$front->get('/archive', 'Poche\Controller\ArchiveController::indexAction');
+$front->get('/mark-read/{id}', 'Poche\Controller\ArchiveController::readAction')
+->bind('mark_entry_read');
+$front->get('/mark-unread/{id}', 'Poche\Controller\ArchiveController::unreadAction')
+->bind('mark_entry_unread');
 
 return $front;
