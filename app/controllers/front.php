@@ -19,9 +19,9 @@ $front->get('/restore/{id}', 'Poche\Controller\EntryController::restoreAction')
 
 // bookmarks
 $front->get('/bookmarks', 'Poche\Controller\BookmarkController::indexAction');
-$front->get('/star/{id}', 'Poche\Controller\BookmarkController::addAction')
+$front->match('/star/{id}', 'Poche\Controller\BookmarkController::addAction')
 ->bind('star_entry');
-$front->get('/unstar/{id}', 'Poche\Controller\BookmarkController::removeAction')
+$front->match('/unstar/{id}', 'Poche\Controller\BookmarkController::removeAction')
 ->bind('unstar_entry');
 
 // archive

@@ -20,17 +20,21 @@ poche.Event = (function() {
                             e.preventDefault();
                             poche.Item.MarkAsUnread(e.target.getAttribute("data-entry-id"));
                             break;
-                        case 'bookmark':
+                        case 'unstar_entry':
                             e.preventDefault();
-                            poche.Item.SwitchBookmark(poche.Item.Get(e.target.getAttribute("data-entry-id")));
+                            poche.Item.MarkAsUnstarred(e.target.getAttribute("data-entry-id"));
                             break;
-                        case 'original-link':
-                            poche.Item.OpenOriginal(e.target.getAttribute("data-entry-id"));
-                            break;
-                        case 'mark-all-read':
+                        case 'star_entry':
                             e.preventDefault();
-                            poche.Item.MarkListingAsRead("?action=unread");
+                            poche.Item.MarkAsStarred(e.target.getAttribute("data-entry-id"));
                             break;
+                        // case 'original-link':
+                        //     poche.Item.OpenOriginal(e.target.getAttribute("data-entry-id"));
+                        //     break;
+                        // case 'mark-all-read':
+                        //     e.preventDefault();
+                        //     poche.Item.MarkListingAsRead("?action=unread");
+                        //     break;
                     }
                 }
             };
