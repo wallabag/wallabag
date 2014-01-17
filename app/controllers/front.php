@@ -26,9 +26,9 @@ $front->get('/unstar/{id}', 'Poche\Controller\BookmarkController::removeAction')
 
 // archive
 $front->get('/archive', 'Poche\Controller\ArchiveController::indexAction');
-$front->get('/mark-read/{id}', 'Poche\Controller\ArchiveController::readAction')
+$front->match('/mark-read/{id}', 'Poche\Controller\ArchiveController::readAction')
 ->bind('mark_entry_read');
-$front->get('/mark-unread/{id}', 'Poche\Controller\ArchiveController::unreadAction')
+$front->match('/mark-unread/{id}', 'Poche\Controller\ArchiveController::unreadAction')
 ->bind('mark_entry_unread');
 
 return $front;
