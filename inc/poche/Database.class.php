@@ -193,7 +193,7 @@ class Database {
     public function updateUserConfig($userId, $key, $value) {
         $config = $this->getConfigUser($userId);
         
-        if (!isset ($user_config[$key])) {
+        if (! isset($config[$key])) {
             $sql = "INSERT INTO users_config (value, user_id, name) VALUES (?, ?, ?)";
         }
         else {
