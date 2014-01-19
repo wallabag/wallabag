@@ -49,8 +49,8 @@
                     <div class="row">
                         <label class="col w150p" for="theme">{% trans "Theme:" %}</label>
                         <select class="col" id="theme" name="theme">
-                            {% for theme in themes %}
-                            <option value="{{ theme.name }}" {{ theme.current ? 'selected' : '' }}>{{ theme.name }}</option>
+                            {% for key, theme in themes %}
+                            <option value="{{ key }}" {{ theme.current ? 'selected' : '' }}>{{ theme.name }}</option>
                             {% endfor %}
                         </select>
                     </div>
