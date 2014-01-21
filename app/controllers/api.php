@@ -31,6 +31,11 @@ $api->get('/archives', function () use ($app) {
     return $app->json($entries, 200);
 });
 
+$api->get('/bookmarks', function () use ($app) {
+    $entries = $app['entry_api']->getBookmarks();
+    return $app->json($entries, 200);
+});
+
 $api->get('/get', function (Request $request) use ($app) {
     $id = $request->request->get('id');
 
@@ -75,6 +80,13 @@ $api->get('/remove', function (Request $request) use ($app) {
     $id = $request->request->get('id');
 
     $entry = $app['entry_api']->remove($id);
+
+    return $app->json($entry, 201);
+});
+$api->get('/restore', function (Request $request) use ($app) {
+    $id = $request->request->get('id');
+
+    $entry = $app['entry_api']->restore($id);
 
     return $app->json($entry, 201);
 });
