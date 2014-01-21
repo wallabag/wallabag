@@ -18,7 +18,7 @@ $api->get('/entries', function () use ($app) {
     return $app->json($entries, 200);
 });
 
-$api->post('/entries', function (Request $request) use ($app) {
+$api->post('/add', function (Request $request) use ($app) {
     $url = $request->request->get('url');
 
     $entry = $app['entry_api']->createEntryFromUrl($url);

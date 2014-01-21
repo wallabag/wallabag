@@ -270,7 +270,7 @@ class ApiTest extends PocheWebTestCase
         $client = $this->createClient();
         $crawler = $client->request(
             'POST',
-            '/api/entries',
+            '/api/add',
             array(),
             array(),
             array('CONTENT_TYPE' => 'application/json'),
