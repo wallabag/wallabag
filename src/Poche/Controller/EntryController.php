@@ -15,7 +15,10 @@ class EntryController
     {
         $entries = $app['entry_api']->getEntries('unread');
 
-        return $app['twig']->render('index.twig', array('entries' => $entries));
+        return $app['twig']->render('index.twig', array(
+            'error' => $app['security.last_error']($request),
+            'entries' => $entries,
+        ));
     }
 
     public function showAction(Request $request, Application $app, $id)

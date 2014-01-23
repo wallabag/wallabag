@@ -7,6 +7,7 @@ use Poche\Twig;
 
 use Symfony\Component\Translation\Loader\PoFileLoader;
 use Silex\Provider\SessionServiceProvider;
+use Silex\Provider\SecurityServiceProvider;
 
 $app = new Silex\Application();
 
@@ -56,6 +57,25 @@ $app->register(new Silex\Provider\TranslationServiceProvider(), array(
 ));
 
 $app->register(new SessionServiceProvider());
+
+$app->register(new SecurityServiceProvider(), array(
+    'security.firewalls' => array(
+        'help' => array('pattern' => '^/help'),
+        'default' => array(
+            'pattern' => '^.*$',
+            'anonymous' => true, 
+            'form' => array('login_path' => '/', 'check_path' => 'login'),
+            'logout' => array('logout_path' => '/logout'), 
+            'users' => $app->share(function() use ($app) {
+                return new Poche\User\UserProvider($app['db']);
+            }),
+        ),
+    ),
+    'security.access_rules' => array(
+        array('^/.+$', 'ROLE_USER'),
+        array('^/help$', ''), 
+    )
+));
 
 $app['translator'] = $app->share($app->extend('translator', function($translator, $app) {
     $translator->addLoader('po', new PoFileLoader());
