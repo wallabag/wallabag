@@ -11,7 +11,8 @@
         "symfony/validator": "~2.3",
         "symfony/config": "~2.3",
         "symfony/translation": "~2.3",
-        "symfony/locale": "~2.3"
+        "symfony/locale": "~2.3",
+        "symfony/security": "2.3.*@dev"
     },
     "autoload": {
         "psr-0": { "Poche\\": "src/" }
