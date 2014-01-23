@@ -26,8 +26,6 @@ class PocheWebTestCase extends WebTestCase
         Schema::dropTables($app['db']);
         Schema::createTables($app['db']);
 
-        Fixtures::loadUsers($app['db']);
-
         $this->app = $app;
 
         return $app;
