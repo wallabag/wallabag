@@ -22,6 +22,7 @@ class PocheWebTestCase extends WebTestCase
         );
 
         $app['debug'] = true;
+        $app['session.test'] = true;
 
         Schema::dropTables($app['db']);
         Schema::createTables($app['db']);
