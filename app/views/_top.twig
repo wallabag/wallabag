@@ -9,6 +9,7 @@
                 <li {% if app.request.requesturi == '/bookmarks' %}class="active"{% endif %}><a href="/bookmarks">{{ 'bookmarks'|trans }}</a></li>
                 <li {% if app.request.requesturi == '/archive' %}class="active"{% endif %}><a href="/archive">{{ 'archive'|trans }}</a></li>
                 <li {% if app.request.requesturi == '/add' %}class="active"{% endif %}><a href="{{ path('add') }}">{{ 'entry.add'|trans }}</a></li>
+                <li><a href="{{ path('logout') }}">{{ 'logout'|trans }}</a></li>
             </ul>
         </nav>
     </header>

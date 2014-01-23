@@ -22,14 +22,23 @@
     </head>
     <body>
         <div id="main" class="page">
-{% include '_top.twig' %}
-        <main role="main">
-            <div id="content">
-            {% include '_alerts.twig' %}
-            {% block content %}{% endblock %}
-            </div>
-        </main>
-{% include '_footer.twig' %}
+            <main role="main">
+                <div id="content">
+            {% if is_granted('ROLE_USER') %}
+
+                {% include '_top.twig' %}
+                {% include '_alerts.twig' %}
+                {% block content %}{% endblock %}
+
+            {% else %}
+                {% include '_login.twig' %}
+
+            {% endif %}
+            
+                </div>
+            </main>
+
+        {% include '_footer.twig' %}
         </div>
     </body>
 </html>
