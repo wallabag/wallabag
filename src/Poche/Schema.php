@@ -36,6 +36,7 @@ class Schema
                 id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE,
                 username TEXT DEFAULT 'poche',
                 password TEXT,
+                roles TEXT DEFAULT '',
                 email TEXT,
                 language TEXT DEFAULT 'en_US',
                 items_per_page INTEGER DEFAULT 100,
@@ -48,11 +49,11 @@ class Schema
             )
         ");
 
-        //$db->query("
-        //    INSERT INTO users
-        //    (password)
-        //    VALUES ('".\password_hash('poche', PASSWORD_BCRYPT)."')
-        //");
+        $db->query("
+           INSERT INTO users
+           (password, roles)
+           VALUES ('BFEQkknI/c+Nd7BaG7AaiyTfUFby/pkMHy3UsYqKqDcmvHoPRX/ame9TnVuOV2GrBH0JK9g4koW+CgTYI9mK+w==', 'ROLE_USER')
+        ");
 
         $db->query('
             CREATE TABLE entries (
