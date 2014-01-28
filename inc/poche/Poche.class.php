@@ -22,16 +22,6 @@ class Poche
     private $currentTheme = '';
     private $currentLanguage = '';
     private $notInstalledMessage = array();
-    
-    # @todo make this dynamic (actually install themes and save them in the database including author information et cetera)
-    private $installedThemes = array(
-        'default' => array('requires' => array()),
-        'dark' => array('requires' => array('default')),
-        'dmagenta' => array('requires' => array('default')),
-        'solarized' => array('requires' => array('default')),
-        'solarized-dark' => array('requires' => array('default')),
-        'courgette' => array('requires' => array())
-    );
 
     public function __construct()
     {
@@ -124,21 +114,26 @@ class Poche
         } 
         
         # Check if the selected theme and its requirements are present
-        if ($this->getTheme() != '' && ! is_dir(THEME . '/' . $this->getTheme())) {
-            $this->notInstalledMessage[] = 'The currently selected theme (' . $this->getTheme() . ') does not seem to be properly installed (Missing directory: ' . THEME . '/' . $this->getTheme() . ')';
+        $theme = $this->getTheme();
+
+        if ($theme != '' && ! is_dir(THEME . '/' . $theme)) {
+            $this->notInstalledMessage[] = 'The currently selected theme (' . $theme . ') does not seem to be properly installed (Missing directory: ' . THEME . '/' . $theme . ')';
             
             self::$canRenderTemplates = false;
             
             $passTheme = FALSE;
         }
         
-        foreach ($this->installedThemes[$this->getTheme()]['requires'] as $requiredTheme) {
-            if (! is_dir(THEME . '/' . $requiredTheme)) {
-                $this->notInstalledMessage[] = 'The required "' . $requiredTheme . '" theme is missing for the current theme (' . $this->getTheme() . ')';
+        $themeInfo = $this->getThemeInfo($theme);
+        if (isset($themeInfo['requirements']) && is_array($themeInfo['requirements'])) {
+            foreach ($themeInfo['requirements'] as $requiredTheme) {
+                if (! is_dir(THEME . '/' . $requiredTheme)) {
+                    $this->notInstalledMessage[] = 'The required "' . $requiredTheme . '" theme is missing for the current theme (' . $theme . ')';
                 
-                self::$canRenderTemplates = false;
+                    self::$canRenderTemplates = false;
                 
-                $passTheme = FALSE;
+                    $passTheme = FALSE;
+                }
             }
         }
 
@@ -194,32 +189,36 @@ class Poche
     private function initTpl()
     {
         $loaderChain = new Twig_Loader_Chain();
+        $theme = $this->getTheme();
        
         # add the current theme as first to the loader chain so Twig will look there first for overridden template files
         try {
-            $loaderChain->addLoader(new Twig_Loader_Filesystem(THEME . '/' . $this->getTheme()));
+            $loaderChain->addLoader(new Twig_Loader_Filesystem(THEME . '/' . $theme));
         } catch (Twig_Error_Loader $e) {
             # @todo isInstalled() should catch this, inject Twig later
-            die('The currently selected theme (' . $this->getTheme() . ') does not seem to be properly installed (' . THEME . '/' . $this->getTheme() .' is missing)');
+            die('The currently selected theme (' . $theme . ') does not seem to be properly installed (' . THEME . '/' . $theme .' is missing)');
         }
         
         # add all required themes to the loader chain
-        foreach ($this->installedThemes[$this->getTheme()]['requires'] as $requiredTheme) {
-            try {
-                $loaderChain->addLoader(new Twig_Loader_Filesystem(THEME . '/' . DEFAULT_THEME));
-            } catch (Twig_Error_Loader $e) {
-                # @todo isInstalled() should catch this, inject Twig later
-                die('The required "' . $requiredTheme . '" theme is missing for the current theme (' . $this->getTheme() . ')');
+        $themeInfo = $this->getThemeInfo($theme);
+        if (isset($themeInfo['requirements']) && is_array($themeInfo['requirements'])) {
+            foreach ($themeInfo['requirements'] as $requiredTheme) {
+                try {
+                    $loaderChain->addLoader(new Twig_Loader_Filesystem(THEME . '/' . $requiredTheme));
+                } catch (Twig_Error_Loader $e) {
+                    # @todo isInstalled() should catch this, inject Twig later
+                    die('The required "' . $requiredTheme . '" theme is missing for the current theme (' . $theme . ')');
+                }
             }
         }
         
         if (DEBUG_POCHE) {
-            $twig_params = array();
+            $twigParams = array();
         } else {
-            $twig_params = array('cache' => CACHE);
+            $twigParams = array('cache' => CACHE);
         }
         
-        $this->tpl = new Twig_Environment($loaderChain, $twig_params);
+        $this->tpl = new Twig_Environment($loaderChain, $twigParams);
         $this->tpl->addExtension(new Twig_Extensions_Extension_I18n());
         
         # filter to display domain name of an url
@@ -235,7 +234,7 @@ class Poche
         $this->tpl->addFilter($filter);
     }
 
-    private function install() 
+    private function install()
     {
         Tools::logm('poche still not installed');
         echo $this->tpl->render('install.twig', array(
@@ -266,32 +265,57 @@ class Poche
         return $this->currentTheme;
     }
 
-    public function getLanguage() {
-        return $this->currentLanguage;
+    /**
+     * Provides theme information by parsing theme.ini file if present in the theme's root directory.
+     * In all cases, the following data will be returned:
+     * - name: theme's name, or key if the theme is unnamed,
+     * - current: boolean informing if the theme is the current user theme.
+     *
+     * @param string $theme Theme key (directory name)
+     * @return array|boolean Theme information, or false if the theme doesn't exist.
+     */
+    public function getThemeInfo($theme) {
+        if (!is_dir(THEME . '/' . $theme)) {
+            return false;
+        }
+
+        $themeIniFile = THEME . '/' . $theme . '/theme.ini';
+        $themeInfo = array();
+
+        if (is_file($themeIniFile) && is_readable($themeIniFile)) {
+            $themeInfo = parse_ini_file($themeIniFile);
+        }
+        
+        if ($themeInfo === false) {
+            $themeInfo = array();
+        }
+        if (!isset($themeInfo['name'])) {
+            $themeInfo['name'] = $theme;
+        }
+        $themeInfo['current'] = ($theme === $this->getTheme());
+
+        return $themeInfo;
     }
     
     public function getInstalledThemes() {
         $handle = opendir(THEME);
         $themes = array();
-        
+
         while (($theme = readdir($handle)) !== false) {
             # Themes are stored in a directory, so all directory names are themes
             # @todo move theme installation data to database
-            if (! is_dir(THEME . '/' . $theme) || in_array($theme, array('..', '.'))) {
+            if (!is_dir(THEME . '/' . $theme) || in_array($theme, array('.', '..'))) {
                 continue;
             }
-            
-            $current = false;
-            
-            if ($theme === $this->getTheme()) {
-                $current = true;
-            }
-            
-            $themes[] = array('name' => $theme, 'current' => $current);
+
+            $themes[$theme] = $this->getThemeInfo($theme);
         }
-        
-        sort($themes);
+
         return $themes;
+    }
+
+    public function getLanguage() {
+        return $this->currentLanguage;
     }
 
     public function getInstalledLanguages() {
@@ -600,8 +624,8 @@ class Poche
         $themes = $this->getInstalledThemes();
         $actualTheme = false;
         
-        foreach ($themes as $theme) {
-            if ($theme['name'] == $_POST['theme']) {
+        foreach (array_keys($themes) as $theme) {
+            if ($theme == $_POST['theme']) {
                 $actualTheme = true;
                 break;
             }
