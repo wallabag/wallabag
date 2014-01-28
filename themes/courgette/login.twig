@@ -1,10 +1,10 @@
 {% extends "layout.twig" %}
 
-{% block title %}{% trans "login to your poche" %}{% endblock %}
+{% block title %}{% trans "login to your wallabag" %}{% endblock %}
 {% block content %}
             <form method="post" action="?login" name="loginform" id="loginForm">
                 <fieldset class="w500p center">
-                    <h2 class="mbs txtcenter">{% trans "login to your poche" %}</h2>
+                    <h2 class="mbs txtcenter">{% trans "login to your wallabag" %}</h2>
                     {% if constant('MODE_DEMO') == 1 %}<p>{% trans "you are in demo mode, some features may be disabled." %}</p>{% endif %}
 					<div class="row">
 						<label class="col w150p" for="login">{% trans "Login" %}</label>
