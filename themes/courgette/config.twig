@@ -7,7 +7,7 @@
 {% block content %}
         <div id="config">
             <h2>{% trans "Poching a link" %}</h2>
-            <p>{% trans "You can poche a link by several methods:" %} (<a class="special" href="http://inthepoche.com/doc" title="{% trans "read the documentation" %}">?</a>)</p>
+            <p>{% trans "You can poche a link by several methods:" %} (<a class="special" href="http://doc.wallabag.org" title="{% trans "read the documentation" %}">?</a>)</p>
             <ul>
                 <li>firefox: <a href="https://bitbucket.org/jogaulupeau/poche/downloads/poche.xpi" title="download the firefox extension">{% trans "download the extension" %}</a></li>
                 <li>chrome: <a href="https://bitbucket.org/jogaulupeau/poche/downloads/poche.crx" title="download the chrome extension">{% trans "download the extension" %}</a></li>
@@ -19,14 +19,14 @@
                         <input type="submit" value="{% trans "poche it!" %}" />
                     </form>
                 </li>
-                <li>{% trans "bookmarklet: drag & drop this link to your bookmarks bar" %} <a id="bookmarklet" ondragend="this.click();" title="i am a bookmarklet, use me !" href="javascript:if(top['bookmarklet-url@inthepoche.com']){top['bookmarklet-url@inthepoche.com'];}else{(function(){var%20url%20=%20location.href%20||%20url;window.open('{{ poche_url }}?action=add&url='%20+%20btoa(url),'_self');})();void(0);}">{% trans "poche it!" %}</a></li>
+                <li>{% trans "bookmarklet: drag & drop this link to your bookmarks bar" %} <a id="bookmarklet" ondragend="this.click();" title="i am a bookmarklet, use me !" href="javascript:if(top['bookmarklet-url@wallabag.org']){top['bookmarklet-url@wallabag.org'];}else{(function(){var%20url%20=%20location.href%20||%20url;window.open('{{ poche_url }}?action=add&url='%20+%20btoa(url),'_self');})();void(0);}">{% trans "poche it!" %}</a></li>
             </ul>
 
             <h2>{% trans "Updating poche" %}</h2>
             <ul>
                 <li>{% trans "your version" %} : <strong>{{ constant('POCHE_VERSION') }}</strong></li>
-                <li>{% trans "latest stable version" %} : {{ prod }}. {% if compare_prod == -1 %}<strong><a href="http://inthepoche.com/">{% trans "a more recent stable version is available." %}</a></strong>{% else %}{% trans "you are up to date." %}{% endif %}</li>
-                {% if constant('DEBUG_POCHE') == 1 %}<li>{% trans "latest dev version" %} : {{ dev }}. {% if compare_dev == -1 %}<strong><a href="http://inthepoche.com/">{% trans "a more recent development version is available." %}</a></strong>{% else %}{% trans "you are up to date." %}{% endif %}</li>{% endif %}
+                <li>{% trans "latest stable version" %} : {{ prod }}. {% if compare_prod == -1 %}<strong><a href="http://wallabag.org/">{% trans "a more recent stable version is available." %}</a></strong>{% else %}{% trans "you are up to date." %}{% endif %}</li>
+                {% if constant('DEBUG_POCHE') == 1 %}<li>{% trans "latest dev version" %} : {{ dev }}. {% if compare_dev == -1 %}<strong><a href="http://wallabag.org/">{% trans "a more recent development version is available." %}</a></strong>{% else %}{% trans "you are up to date." %}{% endif %}</li>{% endif %}
             </ul>
             
             <h2>{% trans "Change your theme" %}</h2>
@@ -69,7 +69,7 @@
 
             <h2>{% trans "Import" %}</h2>
             <p>{% trans "Please execute the import script locally, it can take a very long time." %}</p>
-            <p>{% trans "More infos in the official doc:" %} <a href="http://inthepoche.com/doc">inthepoche.com</a></p>
+            <p>{% trans "More infos in the official doc:" %} <a href="http://doc.wallabag.org">wallabag.org</a></p>
             <ul>
                 <li><a href="./?import&amp;from=pocket">{% trans "import from Pocket" %}</a> {{ '(you must have a %s file on your server)'|trans|format(constant('POCKET_FILE')) }}</li>
             <li><a href="./?import&amp;from=readability">{% trans "import from Readability" %}</a> {{ '(you must have a %s file on your server)'|trans|format(constant('READABILITY_FILE')) }}</li>

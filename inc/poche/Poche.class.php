@@ -111,7 +111,7 @@ class Poche
         $passTheme = TRUE;
         # Twig is an absolute requirement for Poche to function. Abort immediately if the Composer installer hasn't been run yet
         if (! self::$canRenderTemplates) {
-            $this->notInstalledMessage[] = 'Twig does not seem to be installed. Please initialize the Composer installation to automatically fetch dependencies. Have a look at <a href="http://doc.inthepoche.com/doku.php?id=users:begin:install">the documentation.</a>';
+            $this->notInstalledMessage[] = 'Twig does not seem to be installed. Please initialize the Composer installation to automatically fetch dependencies. Have a look at <a href="http://doc.wallabag.org/doku.php?id=users:begin:install">the documentation.</a>';
             $passTheme = FALSE;
         }
 
@@ -956,7 +956,7 @@ class Poche
         if (file_exists($cache_file) && (filemtime($cache_file) > (time() - 86400 ))) {
            $version = file_get_contents($cache_file);
         } else {
-           $version = file_get_contents('http://static.inthepoche.com/versions/' . $which);
+           $version = file_get_contents('http://static.wallabag.org/versions/' . $which);
            file_put_contents($cache_file, $version, LOCK_EX);
         }
         return $version;

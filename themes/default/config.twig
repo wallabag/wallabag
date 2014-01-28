@@ -6,10 +6,10 @@
 {% endblock %}
 {% block content %}
             <h2>{% trans "Poching links" %}</h2>
-            <p>{% trans "There are several ways to poche a link:" %} (<a href="http://doc.inthepoche.com/" title="{% trans "read the documentation" %}">?</a>)</p>
+            <p>{% trans "There are several ways to poche a link:" %} (<a href="http://doc.wallabag.org/" title="{% trans "read the documentation" %}">?</a>)</p>
             <ul>
                 <li>Firefox: <a href="https://addons.mozilla.org/firefox/addon/poche/" title="download the firefox extension">{% trans "download the extension" %}</a></li>
-                <li>Chrome: <a href="http://doc.inthepoche.com/doku.php?id=users:chrome_extension" title="download the chrome extension">{% trans "download the extension" %}</a></li>
+                <li>Chrome: <a href="http://doc.wallabag.org/doku.php?id=users:chrome_extension" title="download the chrome extension">{% trans "download the extension" %}</a></li>
                 <li>Android: <a href="https://f-droid.org/repository/browse/?fdid=fr.gaulupeau.apps.Poche" title="download the application">{% trans "via F-Droid" %}</a> {% trans " or " %} <a href="https://play.google.com/store/apps/details?id=fr.gaulupeau.apps.InThePoche" title="download the application">{% trans "via Google Play" %}</a></li>
                 <li>Windows Phone: <a href="https://www.windowsphone.com/en-us/store/app/poche/334de2f0-51b5-4826-8549-a3d805a37e83" title="download the window phone application">{% trans "download the application" %}</a></li>
                 <li>
@@ -19,14 +19,14 @@
                         <input type="submit" value="{% trans "poche it!" %}" />
                     </form>
                 </li>
-                <li>{% trans "Bookmarklet: drag & drop this link to your bookmarks bar" %} <a id="bookmarklet" ondragend="this.click();" title="i am a bookmarklet, use me !" href="javascript:if(top['bookmarklet-url@inthepoche.com']){top['bookmarklet-url@inthepoche.com'];}else{(function(){var%20url%20=%20location.href%20||%20url;window.open('{{ poche_url }}?action=add&url='%20+%20btoa(url),'_self');})();void(0);}">{% trans "poche it!" %}</a></li>
+                <li>{% trans "Bookmarklet: drag & drop this link to your bookmarks bar" %} <a id="bookmarklet" ondragend="this.click();" title="i am a bookmarklet, use me !" href="javascript:if(top['bookmarklet-url@wallabag.org']){top['bookmarklet-url@wallabag.org'];}else{(function(){var%20url%20=%20location.href%20||%20url;window.open('{{ poche_url }}?action=add&url='%20+%20btoa(url),'_self');})();void(0);}">{% trans "poche it!" %}</a></li>
             </ul>
 
             <h2>{% trans "Updating poche" %}</h2>
             <ul>
                 <li>{% trans "Installed version" %} : <strong>{{ constant('POCHE') }}</strong></li>
-                <li>{% trans "Latest stable version" %} : {{ prod }}. {% if compare_prod == -1 %}<strong><a href="http://inthepoche.com/">{% trans "A more recent stable version is available." %}</a></strong>{% else %}{% trans "You are up to date." %}{% endif %}</li>
-                {% if constant('DEBUG_POCHE') == 1 %}<li>{% trans "latest dev version" %} : {{ dev }}. {% if compare_dev == -1 %}<strong><a href="http://inthepoche.com/">{% trans "a more recent development version is available." %}</a></strong>{% else %}{% trans "you are up to date." %}{% endif %}</li>{% endif %}
+                <li>{% trans "Latest stable version" %} : {{ prod }}. {% if compare_prod == -1 %}<strong><a href="http://wallabag.org/">{% trans "A more recent stable version is available." %}</a></strong>{% else %}{% trans "You are up to date." %}{% endif %}</li>
+                {% if constant('DEBUG_POCHE') == 1 %}<li>{% trans "latest dev version" %} : {{ dev }}. {% if compare_dev == -1 %}<strong><a href="http://wallabag.org/">{% trans "a more recent development version is available." %}</a></strong>{% else %}{% trans "you are up to date." %}{% endif %}</li>{% endif %}
             </ul>
 
             <h2>{% trans "Feeds" %}</h2>
@@ -104,7 +104,7 @@
 
             <h2>{% trans "Import" %}</h2>
             <p>{% trans "Please execute the import script locally as it can take a very long time." %}</p>
-            <p>{% trans "More info in the official docs:" %} <a href="http://doc.inthepoche.com/doku.php?id=users:migrate">inthepoche.com</a></p>
+            <p>{% trans "More info in the official docs:" %} <a href="http://doc.wallabag.org/doku.php?id=users:migrate">wallabag.org</a></p>
             <ul>
                 <li><a href="./?import&amp;from=pocket">{% trans "Import from Pocket" %}</a> {{ '(you must have a %s file on your server)'|trans|format(constant('POCKET_FILE')) }}</li>
                 <li><a href="./?import&amp;from=readability">{% trans "Import from Readability" %}</a> {{ '(you must have a %s file on your server)'|trans|format(constant('READABILITY_FILE')) }}</li>
