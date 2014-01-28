@@ -1,9 +1,9 @@
 <?php
 /**
- * poche, a read it later open source system
+ * wallabag, self hostable application allowing you to not miss any content anymore
  *
- * @category   poche
- * @author     Nicolas Lœuillet <support@inthepoche.com>
+ * @category   wallabag
+ * @author     Nicolas Lœuillet <nicolas@loeuillet.org>
  * @copyright  2013
  * @license    http://www.wtfpl.net/ see COPYING file
  */
@@ -29,7 +29,8 @@ class Poche
         'dark' => array('requires' => array('default')),
         'dmagenta' => array('requires' => array('default')),
         'solarized' => array('requires' => array('default')),
-        'solarized-dark' => array('requires' => array('default'))
+        'solarized-dark' => array('requires' => array('default')),
+        'courgette' => array('requires' => array())
     );
 
     public function __construct()
