@@ -1,5 +1,5 @@
-# what is poche ?
-Abandon Pocket, Instapaper and other Readability service : adopt poche. It is the same, but it is free (like in freedom) and open source. 
+# what is wallabag ?
+Abandon proprietary readability service : adopt wallabag. It is the same, but it is free (like in freedom) and open source. 
 
 ## Some features
 * adding, deleting, archiving and setting as favorite a link
@@ -12,15 +12,15 @@ Abandon Pocket, Instapaper and other Readability service : adopt poche. It is th
 * multi users (very soon!)
 * update notification in configuration screen
 * many storage modes (sqlite, mysql, postgresql)
-* many templates: [have a look here](https://github.com/inthepoche/poche/tree/master/themes).
+* many templates: [have a look here](https://github.com/wallabag/wallabag/tree/master/themes).
 * ...
 
-To test poche, a demo website is online : [demo.inthepoche.com](http://demo.inthepoche.com) (login poche, password poche).
+To test wallabag, a demo website is online : [demo.wallabag.com](http://demo.wallabag.com) (login poche, password poche).
 
-To use poche hosting, [you can create an account here](http://app.inthepoche.com/).
+To use wallabase hosting, [you can create an account here](http://app.inthepoche.com/).
 
 ## Installation
-Read the [INSTALL.md file](https://github.com/inthepoche/poche/blob/master/INSTALL.md).
+Read the [INSTALL.md file](https://github.com/wallabag/wallabag/blob/master/INSTALL.md).
 
 ## License
 Copyright © 2010-2013 Nicolas Lœuillet <nicolas.loeuillet@gmail.com>
