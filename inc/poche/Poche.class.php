@@ -692,17 +692,17 @@ class Poche
      */
     private function credentials() {
         if(isset($_SERVER['PHP_AUTH_USER'])) {
-            return array($_SERVER['PHP_AUTH_USER'],'php_auth');
+            return array($_SERVER['PHP_AUTH_USER'],'php_auth',true);
         }
         if(!empty($_POST['login']) && !empty($_POST['password'])) {
-            return array($_POST['login'],$_POST['password']);
+            return array($_POST['login'],$_POST['password'],false);
         }
         if(isset($_SERVER['REMOTE_USER'])) {
-            return array($_SERVER['REMOTE_USER'],'http_auth');
+            return array($_SERVER['REMOTE_USER'],'http_auth',true);
         }
 
-        return array(false,false);
-     }
+        return array(false,false,false);
+    }
 
     /**
      * checks if login & password are correct and save the user in session.
@@ -713,18 +713,19 @@ class Poche
      */
     public function login($referer)
     {
-        list($login,$password)=$this->credentials();
+        list($login,$password,$isauthenticated)=$this->credentials();
         if($login === false || $password === false) {
             $this->messages->add('e', _('login failed: you have to fill all fields'));
             Tools::logm('login failed');
             Tools::redirect();
         }
         if (!empty($login) && !empty($password)) {
-            $user = $this->store->login($login, Tools::encodeString($password . $login));
+            $user = $this->store->login($login, Tools::encodeString($password . $login), $isauthenticated);
             if ($user != array()) {
                 # Save login into Session
-            	$longlastingsession = isset($_POST['longlastingsession']);
-                Session::login($user['username'], $user['password'], $login, Tools::encodeString($password . $login), $longlastingsession, array('poche_user' => new User($user)));
+                $longlastingsession = isset($_POST['longlastingsession']);
+                $passwordTest = ($isauthenticated) ? $user['password'] : Tools::encodeString($password . $login);
+                Session::login($user['username'], $user['password'], $login, $passwordTest, $longlastingsession, array('poche_user' => new User($user)));
                 $this->messages->add('s', _('welcome to your poche'));
                 Tools::logm('login successful');
                 Tools::redirect($referer);

@@ -165,9 +165,14 @@ class Database {
         }
     }
 
-    public function login($username, $password) {
-        $sql = "SELECT * FROM users WHERE username=? AND password=?";
-        $query = $this->executeQuery($sql, array($username, $password));
+    public function login($username, $password, $isauthenticated=false) {
+        if ($isauthenticated) {
+          $sql = "SELECT * FROM users WHERE username=?";
+          $query = $this->executeQuery($sql, array($username));
+        } else {
+          $sql = "SELECT * FROM users WHERE username=? AND password=?";
+          $query = $this->executeQuery($sql, array($username, $password));
+        }
         $login = $query->fetchAll();
 
         $user = array();
