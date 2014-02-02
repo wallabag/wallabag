@@ -24,7 +24,7 @@
 
             <h2>{% trans "Updating poche" %}</h2>
             <ul>
-                <li>{% trans "your version" %} : <strong>{{ constant('POCHE_VERSION') }}</strong></li>
+                <li>{% trans "your version" %} : <strong>{{ constant('POCHE') }}</strong></li>
                 <li>{% trans "latest stable version" %} : {{ prod }}. {% if compare_prod == -1 %}<strong><a href="http://wallabag.org/">{% trans "a more recent stable version is available." %}</a></strong>{% else %}{% trans "you are up to date." %}{% endif %}</li>
                 {% if constant('DEBUG_POCHE') == 1 %}<li>{% trans "latest dev version" %} : {{ dev }}. {% if compare_dev == -1 %}<strong><a href="http://wallabag.org/">{% trans "a more recent development version is available." %}</a></strong>{% else %}{% trans "you are up to date." %}{% endif %}</li>{% endif %}
             </ul>
