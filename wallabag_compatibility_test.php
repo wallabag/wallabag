@@ -1,5 +1,5 @@
 <?php
-$app_name = 'wallabag 1.3';
+$app_name = 'wallabag 1';
 
 $php_ok = (function_exists('version_compare') && version_compare(phpversion(), '5.3.3', '>='));
 $pcre_ok = extension_loaded('pcre');
