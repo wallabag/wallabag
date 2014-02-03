@@ -1,9 +1,9 @@
 <?php
 /**
- * poche, a read it later open source system
+ * wallabag, self hostable application allowing you to not miss any content anymore
  *
- * @category   poche
- * @author     Nicolas Lœuillet <support@inthepoche.com>
+ * @category   wallabag
+ * @author     Nicolas Lœuillet <nicolas@loeuillet.org>
  * @copyright  2013
  * @license    http://www.wtfpl.net/ see COPYING file
  */
@@ -22,15 +22,6 @@ class Poche
     private $currentTheme = '';
     private $currentLanguage = '';
     private $notInstalledMessage = array();
-    
-    # @todo make this dynamic (actually install themes and save them in the database including author information et cetera)
-    private $installedThemes = array(
-        'default' => array('requires' => array()),
-        'dark' => array('requires' => array('default')),
-        'dmagenta' => array('requires' => array('default')),
-        'solarized' => array('requires' => array('default')),
-        'solarized-dark' => array('requires' => array('default'))
-    );
 
     public function __construct()
     {
@@ -110,7 +101,7 @@ class Poche
         $passTheme = TRUE;
         # Twig is an absolute requirement for Poche to function. Abort immediately if the Composer installer hasn't been run yet
         if (! self::$canRenderTemplates) {
-            $this->notInstalledMessage[] = 'Twig does not seem to be installed. Please initialize the Composer installation to automatically fetch dependencies. Have a look at <a href="http://doc.inthepoche.com/doku.php?id=users:begin:install">the documentation.</a>';
+            $this->notInstalledMessage[] = 'Twig does not seem to be installed. Please initialize the Composer installation to automatically fetch dependencies. Have a look at <a href="http://doc.wallabag.org/doku.php?id=users:begin:install">the documentation.</a>';
             $passTheme = FALSE;
         }
 
@@ -123,21 +114,26 @@ class Poche
         } 
         
         # Check if the selected theme and its requirements are present
-        if ($this->getTheme() != '' && ! is_dir(THEME . '/' . $this->getTheme())) {
-            $this->notInstalledMessage[] = 'The currently selected theme (' . $this->getTheme() . ') does not seem to be properly installed (Missing directory: ' . THEME . '/' . $this->getTheme() . ')';
+        $theme = $this->getTheme();
+
+        if ($theme != '' && ! is_dir(THEME . '/' . $theme)) {
+            $this->notInstalledMessage[] = 'The currently selected theme (' . $theme . ') does not seem to be properly installed (Missing directory: ' . THEME . '/' . $theme . ')';
             
             self::$canRenderTemplates = false;
             
             $passTheme = FALSE;
         }
         
-        foreach ($this->installedThemes[$this->getTheme()]['requires'] as $requiredTheme) {
-            if (! is_dir(THEME . '/' . $requiredTheme)) {
-                $this->notInstalledMessage[] = 'The required "' . $requiredTheme . '" theme is missing for the current theme (' . $this->getTheme() . ')';
+        $themeInfo = $this->getThemeInfo($theme);
+        if (isset($themeInfo['requirements']) && is_array($themeInfo['requirements'])) {
+            foreach ($themeInfo['requirements'] as $requiredTheme) {
+                if (! is_dir(THEME . '/' . $requiredTheme)) {
+                    $this->notInstalledMessage[] = 'The required "' . $requiredTheme . '" theme is missing for the current theme (' . $theme . ')';
                 
-                self::$canRenderTemplates = false;
+                    self::$canRenderTemplates = false;
                 
-                $passTheme = FALSE;
+                    $passTheme = FALSE;
+                }
             }
         }
 
@@ -193,32 +189,36 @@ class Poche
     private function initTpl()
     {
         $loaderChain = new Twig_Loader_Chain();
+        $theme = $this->getTheme();
        
         # add the current theme as first to the loader chain so Twig will look there first for overridden template files
         try {
-            $loaderChain->addLoader(new Twig_Loader_Filesystem(THEME . '/' . $this->getTheme()));
+            $loaderChain->addLoader(new Twig_Loader_Filesystem(THEME . '/' . $theme));
         } catch (Twig_Error_Loader $e) {
             # @todo isInstalled() should catch this, inject Twig later
-            die('The currently selected theme (' . $this->getTheme() . ') does not seem to be properly installed (' . THEME . '/' . $this->getTheme() .' is missing)');
+            die('The currently selected theme (' . $theme . ') does not seem to be properly installed (' . THEME . '/' . $theme .' is missing)');
         }
         
         # add all required themes to the loader chain
-        foreach ($this->installedThemes[$this->getTheme()]['requires'] as $requiredTheme) {
-            try {
-                $loaderChain->addLoader(new Twig_Loader_Filesystem(THEME . '/' . DEFAULT_THEME));
-            } catch (Twig_Error_Loader $e) {
-                # @todo isInstalled() should catch this, inject Twig later
-                die('The required "' . $requiredTheme . '" theme is missing for the current theme (' . $this->getTheme() . ')');
+        $themeInfo = $this->getThemeInfo($theme);
+        if (isset($themeInfo['requirements']) && is_array($themeInfo['requirements'])) {
+            foreach ($themeInfo['requirements'] as $requiredTheme) {
+                try {
+                    $loaderChain->addLoader(new Twig_Loader_Filesystem(THEME . '/' . $requiredTheme));
+                } catch (Twig_Error_Loader $e) {
+                    # @todo isInstalled() should catch this, inject Twig later
+                    die('The required "' . $requiredTheme . '" theme is missing for the current theme (' . $theme . ')');
+                }
             }
         }
         
         if (DEBUG_POCHE) {
-            $twig_params = array();
+            $twigParams = array();
         } else {
-            $twig_params = array('cache' => CACHE);
+            $twigParams = array('cache' => CACHE);
         }
         
-        $this->tpl = new Twig_Environment($loaderChain, $twig_params);
+        $this->tpl = new Twig_Environment($loaderChain, $twigParams);
         $this->tpl->addExtension(new Twig_Extensions_Extension_I18n());
         
         # filter to display domain name of an url
@@ -234,7 +234,7 @@ class Poche
         $this->tpl->addFilter($filter);
     }
 
-    private function install() 
+    private function install()
     {
         Tools::logm('poche still not installed');
         echo $this->tpl->render('install.twig', array(
@@ -265,32 +265,57 @@ class Poche
         return $this->currentTheme;
     }
 
-    public function getLanguage() {
-        return $this->currentLanguage;
+    /**
+     * Provides theme information by parsing theme.ini file if present in the theme's root directory.
+     * In all cases, the following data will be returned:
+     * - name: theme's name, or key if the theme is unnamed,
+     * - current: boolean informing if the theme is the current user theme.
+     *
+     * @param string $theme Theme key (directory name)
+     * @return array|boolean Theme information, or false if the theme doesn't exist.
+     */
+    public function getThemeInfo($theme) {
+        if (!is_dir(THEME . '/' . $theme)) {
+            return false;
+        }
+
+        $themeIniFile = THEME . '/' . $theme . '/theme.ini';
+        $themeInfo = array();
+
+        if (is_file($themeIniFile) && is_readable($themeIniFile)) {
+            $themeInfo = parse_ini_file($themeIniFile);
+        }
+        
+        if ($themeInfo === false) {
+            $themeInfo = array();
+        }
+        if (!isset($themeInfo['name'])) {
+            $themeInfo['name'] = $theme;
+        }
+        $themeInfo['current'] = ($theme === $this->getTheme());
+
+        return $themeInfo;
     }
     
     public function getInstalledThemes() {
         $handle = opendir(THEME);
         $themes = array();
-        
+
         while (($theme = readdir($handle)) !== false) {
             # Themes are stored in a directory, so all directory names are themes
             # @todo move theme installation data to database
-            if (! is_dir(THEME . '/' . $theme) || in_array($theme, array('..', '.'))) {
+            if (!is_dir(THEME . '/' . $theme) || in_array($theme, array('.', '..'))) {
                 continue;
             }
-            
-            $current = false;
-            
-            if ($theme === $this->getTheme()) {
-                $current = true;
-            }
-            
-            $themes[] = array('name' => $theme, 'current' => $current);
+
+            $themes[$theme] = $this->getThemeInfo($theme);
         }
-        
-        sort($themes);
+
         return $themes;
+    }
+
+    public function getLanguage() {
+        return $this->currentLanguage;
     }
 
     public function getInstalledLanguages() {
@@ -325,6 +350,22 @@ class Poche
         );
     }
 
+    protected function getPageContent(Url $url)
+    {
+        $options = array('http' => array('user_agent' => 'poche'));
+        if (isset($_SERVER['AUTH_TYPE']) && "basic" === strtolower($_SERVER['AUTH_TYPE'])) {
+            $options['http']['header'] = sprintf(
+                "Authorization: Basic %s", 
+                base64_encode(
+                    sprintf('%s:%s', $_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'])
+                )
+            );
+        }
+        $context = stream_context_create($options);
+        $json = file_get_contents(Tools::getPocheUrl() . '/inc/3rdparty/makefulltextfeed.php?url='.urlencode($url->getUrl()).'&max=5&links=preserve&exc=&format=json&submit=Create+Feed', false, $context);
+        return json_decode($json, true);
+    }
+
     /**
      * Call action (mark as fav, archive, delete, etc.)
      */
@@ -333,11 +374,8 @@ class Poche
         switch ($action)
         {
             case 'add':
-                $options = array('http' => array('user_agent' => 'poche'));
-                $context = stream_context_create($options);
-                $json = file_get_contents(Tools::getPocheUrl() . '/inc/3rdparty/makefulltextfeed.php?url='.urlencode($url->getUrl()).'&max=5&links=preserve&exc=&format=json&submit=Create+Feed', false, $context);
-                $content = json_decode($json, true);
-                $title = $content['rss']['channel']['item']['title'];
+                $content = $this->getPageContent($url);
+                $title = ($content['rss']['channel']['item']['title'] != '') ? $content['rss']['channel']['item']['title'] : _('Untitled');
                 $body = $content['rss']['channel']['item']['description'];
 
                 if ($this->store->add($url->getUrl(), $title, $body, $this->user->getId())) {
@@ -586,8 +624,8 @@ class Poche
         $themes = $this->getInstalledThemes();
         $actualTheme = false;
         
-        foreach ($themes as $theme) {
-            if ($theme['name'] == $_POST['theme']) {
+        foreach (array_keys($themes) as $theme) {
+            if ($theme == $_POST['theme']) {
                 $actualTheme = true;
                 break;
             }
@@ -654,17 +692,17 @@ class Poche
      */
     private function credentials() {
         if(isset($_SERVER['PHP_AUTH_USER'])) {
-            return array($_SERVER['PHP_AUTH_USER'],'php_auth');
+            return array($_SERVER['PHP_AUTH_USER'],'php_auth',true);
         }
         if(!empty($_POST['login']) && !empty($_POST['password'])) {
-            return array($_POST['login'],$_POST['password']);
+            return array($_POST['login'],$_POST['password'],false);
         }
         if(isset($_SERVER['REMOTE_USER'])) {
-            return array($_SERVER['REMOTE_USER'],'http_auth');
+            return array($_SERVER['REMOTE_USER'],'http_auth',true);
         }
 
-        return array(false,false);
-     }
+        return array(false,false,false);
+    }
 
     /**
      * checks if login & password are correct and save the user in session.
@@ -675,18 +713,19 @@ class Poche
      */
     public function login($referer)
     {
-        list($login,$password)=$this->credentials();
+        list($login,$password,$isauthenticated)=$this->credentials();
         if($login === false || $password === false) {
             $this->messages->add('e', _('login failed: you have to fill all fields'));
             Tools::logm('login failed');
             Tools::redirect();
         }
         if (!empty($login) && !empty($password)) {
-            $user = $this->store->login($login, Tools::encodeString($password . $login));
+            $user = $this->store->login($login, Tools::encodeString($password . $login), $isauthenticated);
             if ($user != array()) {
                 # Save login into Session
-            	$longlastingsession = isset($_POST['longlastingsession']);
-                Session::login($user['username'], $user['password'], $login, Tools::encodeString($password . $login), $longlastingsession, array('poche_user' => new User($user)));
+                $longlastingsession = isset($_POST['longlastingsession']);
+                $passwordTest = ($isauthenticated) ? $user['password'] : Tools::encodeString($password . $login);
+                Session::login($user['username'], $user['password'], $login, $passwordTest, $longlastingsession, array('poche_user' => new User($user)));
                 $this->messages->add('s', _('welcome to your poche'));
                 Tools::logm('login successful');
                 Tools::redirect($referer);
@@ -848,6 +887,52 @@ class Poche
     }
 
     /**
+     * import from Poche exported file
+     * @param string $targetFile the file used for importing
+     * @return boolean 
+     */
+    private function importFromPoche($targetFile)
+    {
+        $str_data = file_get_contents($targetFile);
+        $data = json_decode($str_data,true);
+        Tools::logm('starting import from Poche');
+
+
+        $sequence = '';
+        if (STORAGE == 'postgres') {
+            $sequence = 'entries_id_seq';
+        }
+
+        $count = 0;
+        foreach ($data as $value) {
+
+            $url = new Url(base64_encode($value['url']));
+            $favorite = ($value['is_fav'] == -1);
+            $archive = ($value['is_read'] == -1);
+    
+            # we can add the url
+            if (!is_null($url) && $url->isCorrect()) {
+                
+                $this->action('add', $url, 0, TRUE);
+                
+                $count++;
+                if ($favorite) {
+                    $last_id = $this->store->getLastId($sequence);
+                    $this->action('toggle_fav', $url, $last_id, TRUE);
+                }
+                if ($archive) {
+                    $last_id = $this->store->getLastId($sequence);
+                    $this->action('toggle_archive', $url, $last_id, TRUE);
+                }
+            }
+            
+        }
+        $this->messages->add('s', _('import from Poche completed. ' . $count . ' new links.'));
+        Tools::logm('import from Poche completed');
+        Tools::redirect();
+    }
+
+    /**
      * import datas into your poche
      * @param  string $from name of the service to import : pocket, instapaper or readability
      * @todo add the return value
@@ -858,7 +943,8 @@ class Poche
         $providers = array(
             'pocket' => 'importFromPocket',
             'readability' => 'importFromReadability',
-            'instapaper' => 'importFromInstapaper'
+            'instapaper' => 'importFromInstapaper',
+            'poche' => 'importFromPoche',
         );
         
         if (! isset($providers[$from])) {
@@ -908,7 +994,7 @@ class Poche
         if (file_exists($cache_file) && (filemtime($cache_file) > (time() - 86400 ))) {
            $version = file_get_contents($cache_file);
         } else {
-           $version = file_get_contents('http://static.inthepoche.com/versions/' . $which);
+           $version = file_get_contents('http://static.wallabag.org/versions/' . $which);
            file_put_contents($cache_file, $version, LOCK_EX);
         }
         return $version;

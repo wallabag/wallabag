@@ -1,9 +1,9 @@
 <?php
 /**
- * poche, a read it later open source system
+ * wallabag, self hostable application allowing you to not miss any content anymore
  *
- * @category   poche
- * @author     Nicolas Lœuillet <support@inthepoche.com>
+ * @category   wallabag
+ * @author     Nicolas Lœuillet <nicolas@loeuillet.org>
  * @copyright  2013
  * @license    http://www.wtfpl.net/ see COPYING file
  */
@@ -165,9 +165,14 @@ class Database {
         }
     }
 
-    public function login($username, $password) {
-        $sql = "SELECT * FROM users WHERE username=? AND password=?";
-        $query = $this->executeQuery($sql, array($username, $password));
+    public function login($username, $password, $isauthenticated=false) {
+        if ($isauthenticated) {
+          $sql = "SELECT * FROM users WHERE username=?";
+          $query = $this->executeQuery($sql, array($username));
+        } else {
+          $sql = "SELECT * FROM users WHERE username=? AND password=?";
+          $query = $this->executeQuery($sql, array($username, $password));
+        }
         $login = $query->fetchAll();
 
         $user = array();
@@ -193,7 +198,7 @@ class Database {
     public function updateUserConfig($userId, $key, $value) {
         $config = $this->getConfigUser($userId);
         
-        if (!isset ($user_config[$key])) {
+        if (! isset($config[$key])) {
             $sql = "INSERT INTO users_config (value, user_id, name) VALUES (?, ?, ?)";
         }
         else {

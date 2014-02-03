@@ -42,7 +42,8 @@ body,
 body,
 a,
 a:hover,
-a:visited {
+a:visited,
+td {
     color: #839496;
 }
 

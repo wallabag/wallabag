@@ -1,9 +1,9 @@
 <?php
 /**
- * poche, a read it later open source system
+ * wallabag, self hostable application allowing you to not miss any content anymore
  *
- * @category   poche
- * @author     Nicolas Lœuillet <support@inthepoche.com>
+ * @category   wallabag
+ * @author     Nicolas Lœuillet <nicolas@loeuillet.org>
  * @copyright  2013
  * @license    http://www.wtfpl.net/ see COPYING file
  */
@@ -43,7 +43,9 @@ class Tools
             || (isset($_SERVER["SERVER_PORT"])
                     && $_SERVER["SERVER_PORT"] == '443') // HTTPS detection.
             || (isset($_SERVER["SERVER_PORT"]) //Custom HTTPS port detection 
-                    && $_SERVER["SERVER_PORT"] == SSL_PORT);
+                    && $_SERVER["SERVER_PORT"] == SSL_PORT)
+             || (isset($_SERVER['HTTP_X_FORWARDED_PROTO'])
+                    && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https');
 
         $serverport = (!isset($_SERVER["SERVER_PORT"])
             || $_SERVER["SERVER_PORT"] == '80'

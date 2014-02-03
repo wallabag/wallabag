@@ -1,9 +1,9 @@
 <?php
 /**
- * poche, a read it later open source system
+ * wallabag, self hostable application allowing you to not miss any content anymore
  *
- * @category   poche
- * @author     Nicolas Lœuillet <support@inthepoche.com>
+ * @category   wallabag
+ * @author     Nicolas Lœuillet <nicolas@loeuillet.org>
  * @copyright  2013
  * @license    http://www.wtfpl.net/ see COPYING file
  */
@@ -55,7 +55,9 @@ define ('PAGINATION', '10');
 define ('POCKET_FILE', '/ril_export.html');
 define ('READABILITY_FILE', '/readability');
 define ('INSTAPAPER_FILE', '/instapaper-export.html');
+define ('POCHE_FILE', '/poche-export');
 
 define ('IMPORT_POCKET_FILE', ROOT . POCKET_FILE);
 define ('IMPORT_READABILITY_FILE', ROOT . READABILITY_FILE);
 define ('IMPORT_INSTAPAPER_FILE', ROOT . INSTAPAPER_FILE);
+define ('IMPORT_POCHE_FILE', ROOT . POCHE_FILE);
