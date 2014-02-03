@@ -375,7 +375,7 @@ class Poche
         {
             case 'add':
                 $content = $this->getPageContent($url);
-                $title = $content['rss']['channel']['item']['title'];
+                $title = ($content['rss']['channel']['item']['title'] != '') ? $content['rss']['channel']['item']['title'] : _('Untitled');
                 $body = $content['rss']['channel']['item']['description'];
 
                 if ($this->store->add($url->getUrl(), $title, $body, $this->user->getId())) {
