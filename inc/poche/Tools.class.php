@@ -43,7 +43,9 @@ class Tools
             || (isset($_SERVER["SERVER_PORT"])
                     && $_SERVER["SERVER_PORT"] == '443') // HTTPS detection.
             || (isset($_SERVER["SERVER_PORT"]) //Custom HTTPS port detection 
-                    && $_SERVER["SERVER_PORT"] == SSL_PORT);
+                    && $_SERVER["SERVER_PORT"] == SSL_PORT)
+             || (isset($_SERVER['HTTP_X_FORWARDED_PROTO'])
+                    && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https');
 
         $serverport = (!isset($_SERVER["SERVER_PORT"])
             || $_SERVER["SERVER_PORT"] == '80'
