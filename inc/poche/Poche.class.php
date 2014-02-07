@@ -565,7 +565,8 @@ class Poche
                 
                 if (count($entries) > 0) {
                     $this->pagination->set_total(count($entries));
-                    $page_links = $this->pagination->page_links('?view=' . $view . '&sort=' . $_SESSION['sort'] . '&');
+                    $page_links = str_replace(array('previous', 'next'), array(_('previous'), _('next')),
+                        $this->pagination->page_links('?view=' . $view . '&sort=' . $_SESSION['sort'] . '&'));
                     $datas = $this->store->getEntriesByView($view, $this->user->getId(), $this->pagination->get_limit());
                     $tpl_vars['entries'] = $datas;
                     $tpl_vars['page_links'] = $page_links;
