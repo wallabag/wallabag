@@ -8,3 +8,15 @@
   font-weight: normal;
   font-style: normal;
 }
+
+@font-face {
+  font-family: 'icomoon';
+  src:url('../font/icomoon.eot?-72nnzw');
+  src:url('../font/icomoon.eot?#iefix-72nnzw') format('embedded-opentype'),
+    url('../font/icomoon.woff?-72nnzw') format('woff'),
+    url('../font/comoon.ttf?-72nnzw') format('truetype'),
+    url('../font/icomoon.svg?-72nnzw#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
