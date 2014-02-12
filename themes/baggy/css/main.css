@@ -269,6 +269,18 @@ footer a {
   margin-bottom: 2em;
 }
 
+.estimatedTime a {
+  color: #999;
+  font-style: italic;
+  font-weight: normal;
+  font-size: 0.9em;
+}
+
+.estimatedTime small {
+  position: relative;
+  top: -1px;
+}
+
 .entrie {
   background: #FFF;
   letter-spacing:normal;
@@ -339,6 +351,7 @@ footer a {
 
 .entrie h2 {
   text-transform: none;
+  margin-bottom: 0;
 }
 
   .entrie h2:after {
