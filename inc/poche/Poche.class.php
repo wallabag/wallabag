@@ -434,6 +434,13 @@ class Poche
                     Tools::redirect();
                 }
                 break;
+            case 'archive_all' :
+                $this->store->archiveAll($this->user->getId());
+                Tools::logm('archive all links');
+                if (!$import) {
+                    Tools::redirect();
+                }
+                break;
             case 'add_tag' :
                 $tags = explode(',', $_POST['value']);
                 $entry_id = $_POST['entry_id'];
