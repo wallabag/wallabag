@@ -157,6 +157,8 @@ h1 a {
   transition-delay:1.55ms;
 }
 
+#article_toolbar li:nth-child(2) { display: none; }
+
 #menu:before {
   content: "\e801";
   display: block;
@@ -299,7 +301,7 @@ ul li {
   color:#000;
 }
 
-.tools a:before { display: block; font-family: 'fontello'; }
+.tools a:before { display: block; font-family: 'icomoon'; }
 
 
 .fav-off:before, .fav:before { content: '\e805'; } /* '' */
@@ -308,13 +310,13 @@ ul li {
   background: #FFF;
   color:#000;
 }
-.link:before { content: '\e800'; } /* '' */
-.delete:before { content: '\e803'; } /* '' */
-.reading-time:before { content: '\e802'; } /* '' */
+.link:before { content: '\e801'; } /* '' */
+.delete:before { content: '\e80c'; } /* '' */
+.reading-time:before { content: '\e803'; } /* '' */
 
 #article_toolbar a:before {
   display: block;
-  font-family: 'fontello'; 
+  font-family: 'icomoon'; 
 }
 
 #article_toolbar a {
@@ -343,7 +345,8 @@ ul li {
 .email:before { content: '\e80a'; } /* '' */
 .icon-check:before { content: '\e804'; } /* '' */
 .back:before { content: '\e806'; } /* '' */
-.bad-display:before { content: '\e808'; } /* '' */
+.flattr:before { content: '\e800'; } /* '' */
+.bad-display:before { content: '\e600'; } /* '' */
 .twitter:before { content: '\e807'; } /* '' */
 
 #article_toolbar .flattrli {
@@ -617,4 +620,65 @@ form button:hover, form button:focus, form input[type="submit"]:hover, form inpu
   footer {
     position:static;
   }
+}
+
+
+.w600p {
+  width: 70%;
+  margin: auto;
+}
+
+.tagForm {
+  margin: 1em 0;
+}
+
+.tagForm p {
+  font-style: italic;
+  margin: 0;
+  font-size: 0.8em;
+  color: #999;
+}
+
+.tagForm label {
+  width: auto;
+  margin-right: 1em;
+}
+
+.back:before {
+  font-family: "icomoon";
+}
+
+.back.link {
+  color: #000;
+  text-decoration: none;
+}
+
+.back.link:before {
+  margin-right: 0.5em;
+}
+
+.tag-list a {
+  color: #000;
+  text-decoration: none;
+}
+
+.tag-list li {
+  display: inline-block;
+  margin-right: 1em;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.tag {
+  background: #000;
+  color: #FFF;
+  padding: 0.5em 1em;
+  text-decoration: none;
+}
+
+.tag:hover, .tag:focus {
+  background: #FFF;
+  color: #000;
 }

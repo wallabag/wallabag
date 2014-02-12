@@ -1,0 +1,428 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: wballabag\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-07 17:38+0300\n"
+"PO-Revision-Date: 2014-02-07 17:43+0300\n"
+"Last-Translator: Maryana <mariroz@mr.lviv.ua>\n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-Language: Polish\n"
+"X-Poedit-Country: POLAND\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SearchPath-0: /home/mariroz/_DEV/web/wallabag/wallabag\n"
+
+msgid "poche, a read it later open source system"
+msgstr "poche, serwis odrocznego czytania open source"
+
+msgid "login failed: user doesn't exist"
+msgstr "logowanie nie udało się: użytkownik nie istnieje"
+
+msgid "Return home"
+msgstr "Wrocic do głównej"
+
+msgid "Back to top"
+msgstr "Wrócić na górę"
+
+msgid "original"
+msgstr "oryginal"
+
+msgid "Mark as read"
+msgstr "Zaznacz jako przeczytane"
+
+msgid "Toggle mark as read"
+msgstr "Przełącz jako przeczytane"
+
+msgid "Favorite"
+msgstr "Ulubiony"
+
+msgid "Toggle favorite"
+msgstr "Zaznacz jako ulubione"
+
+msgid "Delete"
+msgstr "Usuń"
+
+msgid "Tweet"
+msgstr "Tweet"
+
+msgid "Email"
+msgstr "Wyslij email"
+
+msgid "shaarli"
+msgstr "shaarli"
+
+msgid "flattr"
+msgstr "flattr"
+
+msgid "Does this article appear wrong?"
+msgstr "Czy ten artykuł wygląda nieprawidłowo?"
+
+msgid "tags:"
+msgstr "tegi:"
+
+msgid "Edit tags"
+msgstr "Redagowac tegi"
+
+msgid "return home"
+msgstr "wrócić do głównej"
+
+msgid "powered by"
+msgstr "zasilany przez"
+
+msgid "debug mode is on so cache is off."
+msgstr "tryb debugowania jest włączony, więc cash jest wyłączony."
+
+msgid "your poche version:"
+msgstr "twoja wersja poche:"
+
+msgid "storage:"
+msgstr "magazyn:"
+
+msgid "favoris"
+msgstr "ulubione"
+
+msgid "archive"
+msgstr "archiwum"
+
+msgid "unread"
+msgstr "nieprzeczytane"
+
+msgid "by date asc"
+msgstr "według daty rosnąco"
+
+msgid "by date"
+msgstr "wg daty"
+
+msgid "by date desc"
+msgstr "według daty spadająco"
+
+msgid "by title asc"
+msgstr "według tytułu rosnąco"
+
+msgid "by title"
+msgstr "wg tytułu"
+
+msgid "by title desc"
+msgstr "według tytułu malejąco"
+
+msgid "No articles found."
+msgstr "Nie znaleziono artykułów."
+
+msgid "toggle favorite"
+msgstr "przełączyc ulubione"
+
+msgid "delete"
+msgstr "usunąć"
+
+msgid "estimated reading time:"
+msgstr "szacowany czas odczytu:"
+
+msgid "results"
+msgstr "wyniki"
+
+msgid "home"
+msgstr "główna"
+
+msgid "favorites"
+msgstr "ulubione"
+
+msgid "tags"
+msgstr "tagi"
+
+msgid "config"
+msgstr "ustawienia"
+
+msgid "logout"
+msgstr "wyloguj"
+
+msgid "Poching links"
+msgstr "Zapisywanie linków"
+
+msgid "There are several ways to poche a link:"
+msgstr "Istnieje kilka sposobów aby zapisać link:"
+
+msgid "read the documentation"
+msgstr "zapoznać się z dokumentacją"
+
+msgid "download the extension"
+msgstr "pobrać rozszerzenie"
+
+msgid "via F-Droid"
+msgstr "przez F-Droid"
+
+msgid " or "
+msgstr "albo"
+
+msgid "via Google Play"
+msgstr "przez Google Play"
+
+msgid "download the application"
+msgstr "pobrać aplikację"
+
+msgid "By filling this field"
+msgstr "Poprzez wypełnienie tego pola"
+
+msgid "poche it!"
+msgstr "zapisać!"
+
+msgid "Bookmarklet: drag & drop this link to your bookmarks bar"
+msgstr "Bookmarklet: przeciągnij i upucs ten link na pasek zakladek"
+
+msgid "Updating poche"
+msgstr "Aktualizacja poche"
+
+msgid "Installed version"
+msgstr "Zainstalowana wersja "
+
+msgid "Latest stable version"
+msgstr "Najnowsza stabilna wersja"
+
+msgid "A more recent stable version is available."
+msgstr "Nowsza stabilna wersja jest dostępna."
+
+msgid "You are up to date."
+msgstr "Masz wszystko najnowsze."
+
+msgid "latest dev version"
+msgstr "najnowsza wersja dev"
+
+msgid "a more recent development version is available."
+msgstr "Nowsza wersja rozwojowa jest dostępna."
+
+msgid "you are up to date."
+msgstr "masz wszystko najnowsze."
+
+msgid "Feeds"
+msgstr "Kanały (feeds)"
+
+msgid "Your feed token is currently empty and must first be generated to enable feeds. Click <a href='?feed&amp;action=generate'>here to generate it</a>."
+msgstr "Twój znak kanału jest pusty i musi najpierw zostac wygenerowany. Kliknij <a href='?feed&action=generate'>tu dla jego generacji</a>."
+
+msgid "Unread feed"
+msgstr "Kanał nieprzeczytanego"
+
+msgid "Favorites feed"
+msgstr "Kanał ulubionego"
+
+msgid "Archive feed"
+msgstr "Kanał archiwum"
+
+msgid "Your token:"
+msgstr "Twój znak (token): "
+
+msgid "Your user id:"
+msgstr "Twój id użytkownika (user id):"
+
+msgid "You can regenerate your token: <a href='?feed&amp;action=generate'>generate!</a>."
+msgstr "Mozna zgenerowac nowy znak: kliknij <a href='?feed&amp;action=generate'>zgenerowac!</a>."
+
+msgid "Change your theme"
+msgstr "Zmienic motyw"
+
+msgid "Theme:"
+msgstr "Motyw:"
+
+msgid "Update"
+msgstr "Aktualizacja"
+
+msgid "Change your language"
+msgstr "Zmienić język"
+
+msgid "Language:"
+msgstr "Język:"
+
+msgid "Change your password"
+msgstr "Zmień hasło"
+
+msgid "New password:"
+msgstr "Nowe hasło:"
+
+msgid "Password"
+msgstr "Hasło"
+
+msgid "Repeat your new password:"
+msgstr "Powtórz hasło jeszcze raz:"
+
+msgid "Import"
+msgstr "Import"
+
+msgid "Please execute the import script locally as it can take a very long time."
+msgstr "Proszę wykonać skrypt import lokalnie, gdyż moze to trwać bardzo długo."
+
+msgid "More info in the official docs:"
+msgstr "Więcej informacji w oficjalnej dokumentacji:"
+
+msgid "Import from Pocket"
+msgstr "Іmport z Pocket'a"
+
+#, php-format
+msgid "(you must have a %s file on your server)"
+msgstr "(musisz mieć plik %s na serwerze)"
+
+msgid "Import from Readability"
+msgstr "Import z Readability"
+
+msgid "Import from Instapaper"
+msgstr "Import z Instapaper"
+
+msgid "Import from poche"
+msgstr "Import z poche"
+
+msgid "Export your poche data"
+msgstr "Eksportowac dane poche"
+
+msgid "Click here"
+msgstr "Kliknij tu"
+
+msgid "to download your database."
+msgstr "aby pobrac bazę danych."
+
+msgid "to export your poche data."
+msgstr "aby eksportować dane poche."
+
+msgid "Tag"
+msgstr "Teg"
+
+msgid "No link available here!"
+msgstr "Brak dostępnych linków!"
+
+msgid "toggle mark as read"
+msgstr "przełączyć znak jako przeczytane"
+
+msgid "You can enter multiple tags, separated by commas."
+msgstr "Mozna wprowadzić wiele tagów rozdzielajac je przecinkami."
+
+msgid "return to article"
+msgstr "wrócić do artykułu"
+
+msgid "plop"
+msgstr "plop"
+
+msgid "You can <a href='wallabag_compatibility_test.php'>check your configuration here</a>."
+msgstr "Można <a href='wallabag_compatibility_test.php'>sprawdzić swoją konfigurację tu</a>."
+
+msgid "installation"
+msgstr "instalacja"
+
+msgid "install your wallabag"
+msgstr "zainstalować wallabag"
+
+msgid "wallabag is still not installed. Please fill the below form to install it. Don't hesitate to <a href='http://doc.wallabag.org/'>read the documentation on wallabag website</a>."
+msgstr "wallabag nie jest jeszcze zainstalowany. Proszę wypełnić poniższy formularz, aby go zainstalowac. Nie wahaj się <a href='http://doc.wallabag.org/'>zapoznac się z dokumentacja na stronie wallabag</a>."
+
+msgid "Login"
+msgstr "Login"
+
+msgid "Repeat your password"
+msgstr "Powtórz hasło"
+
+msgid "Install"
+msgstr "Instalowac"
+
+msgid "login to your wallabag"
+msgstr "zalogować się do swojego wallabag"
+
+msgid "Login to wallabag"
+msgstr "Zalogować się do wallabag"
+
+msgid "you are in demo mode, some features may be disabled."
+msgstr "jesteś w trybie demo, niektóre funkcje mogą być niedostępne."
+
+msgid "Username"
+msgstr "Imię użytkownika"
+
+msgid "Stay signed in"
+msgstr "Pozostań zalogowany"
+
+msgid "(Do not check on public computers)"
+msgstr "(Nie sprawdzaj na publicznych komputerach"
+
+msgid "Untitled"
+msgstr "Bez nazwy"
+
+msgid "the link has been added successfully"
+msgstr "link pozostał pomyślnie dodany"
+
+msgid "error during insertion : the link wasn't added"
+msgstr "błąd podczas wprowadzania: link nie zostal dodany"
+
+msgid "the link has been deleted successfully"
+msgstr "link zostal pomyślnie usunięty"
+
+msgid "the link wasn't deleted"
+msgstr "link nie został usunięty"
+
+msgid "previous"
+msgstr "poprzednia"
+
+msgid "next"
+msgstr "następna"
+
+msgid "in demo mode, you can't update your password"
+msgstr "w trybie demo, nie można zmieniać hasła"
+
+msgid "your password has been updated"
+msgstr "twoje hasło zmienione"
+
+msgid "the two fields have to be filled & the password must be the same in the two fields"
+msgstr "oba pola muszą być wypełnione i hasła muszę być takie same w obu polach"
+
+msgid "still using the \""
+msgstr "nadal w użyciu  \""
+
+msgid "that theme does not seem to be installed"
+msgstr "wydaje się że motyw nie był zainstalowany"
+
+msgid "you have changed your theme preferences"
+msgstr "ustawienia motywu zostałe zmienione"
+
+msgid "that language does not seem to be installed"
+msgstr "wydaje się że język nie był zainstalowany"
+
+msgid "you have changed your language preferences"
+msgstr "ustawienia języka zostałe zmienione"
+
+msgid "login failed: you have to fill all fields"
+msgstr "logowanie nie powiodlo się: musisz wypełnić wszystkie pola"
+
+msgid "welcome to your poche"
+msgstr "witamy w poche"
+
+msgid "login failed: bad login or password"
+msgstr "logowanie nie powiodlo się: zly login lub hasło"
+
+msgid "see you soon!"
+msgstr "do zobaczenia wkrótce!"
+
+msgid "import from instapaper completed"
+msgstr "import з instapaper'a zakończony"
+
+msgid "import from pocket completed"
+msgstr "import z pocket'a zakończony"
+
+msgid "import from Readability completed. "
+msgstr "import z Readability zakończony. "
+
+msgid "import from Poche completed. "
+msgstr "import z Poche zakończony. "
+
+msgid "Unknown import provider."
+msgstr "Nieznany dostawca importu."
+
+msgid "Incomplete inc/poche/define.inc.php file, please define \""
+msgstr "Niekompletny plik inc/poche/define.inc.php, proszę definiować \""
+
+msgid "Could not find required \""
+msgstr "Nie znaleziono potrzebnego \""
+
+msgid "Uh, there is a problem while generating feeds."
+msgstr "Uh, jest problem podczas generowania kanałów (feeds)."
+
+msgid "Oops, it seems you don't have PHP 5."
+msgstr "Oops, wygląda ze u was niema PHP 5."
+

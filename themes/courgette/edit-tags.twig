@@ -1,0 +1,20 @@
+{% extends "layout.twig" %}
+{% block title %}edit tags{% endblock %}
+{% block menu %}
+{% include '_menu.twig' %}
+{% endblock %}
+{% block content %}
+{% if tags is empty %}
+<em>no tags</em>
+{% endif %}
+<ul class='tag-list'>
+{% for tag in tags %}<li>{{ tag.value }} <a href="./?action=remove_tag&amp;tag_id={{ tag.id }}&amp;id={{ entry_id }}">✘</a></li>{% endfor %}
+</ul>
+<form method="post" action="./?action=add_tag" class="tagForm">
+    <label for="value">Add tags: </label><input type="text" placeholder="interview, editorial, video" id="value" name="value" required="required" />
+    <p>{% trans "You can enter multiple tags, separated by commas." %}</p>
+    <input type="hidden" name="entry_id" value="{{ entry_id }}" />
+    <input type="submit" value="Tag" />
+</form>
+<a class="back link" href="./?view=view&id={{ entry_id }}">{% trans "return to article" %}</a>
+{% endblock %}
