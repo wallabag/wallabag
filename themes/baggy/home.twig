@@ -1,0 +1,48 @@
+{% extends "layout.twig" %}
+{% block title %}
+{% if view == 'fav' %}
+{% trans "favoris" %}
+{% elseif view == 'archive' %}
+{% trans "archive" %}
+{% else %}
+{% trans "unread" %}
+{% endif %}
+{% endblock %}
+{% block menu %}
+{% include '_menu.twig' %}
+{% endblock %}
+{% block content %}
+            {% if entries is empty %}
+            <div class="messages warning"><p>{% trans "No articles found." %}</p></div>
+            {% else %}
+                {% block pager %}
+                    {% if nb_results > 1 %}
+                <div class="results">
+                    <div class="nb-results">{{ nb_results }} {% trans "results" %}</div>
+                        {{ page_links | raw }}
+                </div>
+                    {% endif %}
+                {% endblock %}
+            <div class="list-entries">
+                    {% for entry in entries %}
+                <div id="entry-{{ entry.id|e }}" class="entrie">
+                    <h2><a href="index.php?view=view&amp;id={{ entry.id|e }}">{{ entry.title|raw }}</a></h2>
+                    {% if entry.content| getReadingTime > 0 %}
+                        <div class="estimatedTime"><a target="_blank" title="{% trans "estimated reading time:" %} {{ entry.content| getReadingTime }} min" class="tool reading-time"><span>{% trans "estimated reading time :" %} {{ entry.content| getReadingTime }} min</span></div>
+                    {% else %}
+                        <div class="estimatedTime"><a target="_blank" title="{% trans "estimated reading time:" %} {{ entry.content| getReadingTime }} min" class="tool reading-time"><span>{% trans "estimated reading time :" %} <small class="inferieur"><</small> 1 min</span></div>
+                    {% endif %}
+                    <ul class="tools links">
+                        <li><a title="{% trans "Toggle mark as read" %}" class="tool icon-check icon {% if entry.is_read == 0 %}archive-off{% else %}archive{% endif %}" href="./?action=toggle_archive&amp;id={{ entry.id|e }}"><span>{% trans "Toggle mark as read" %}</span></a></li>
+                        <li><a title="{% trans "toggle favorite" %}" class="tool icon-star icon {% if entry.is_fav == 0 %}fav-off{% else %}fav{% endif %}" href="./?action=toggle_fav&amp;id={{ entry.id|e }}"><span>{% trans "toggle favorite" %}</span></a></li>
+                        <li><a title="{% trans "delete" %}" class="tool delete icon-trash icon" href="./?action=delete&amp;id={{ entry.id|e }}"><span>{% trans "delete" %}</span></a></li>
+                        <li><a href="{{ entry.url|e }}" target="_blank" title="{% trans "original" %} : {{ entry.title|e }}" class="tool link icon-link icon"><span>{{ entry.url | e | getDomain }}</span></a></li>
+                    </ul>
+                    <p>{{ entry.content|striptags|slice(0, 300) }}...</p>
+                </div>
+            
+                {% endfor %}
+            </div>
+            {% endif %}
+            {{ block('pager') }}
+{% endblock %}
