@@ -18,6 +18,33 @@ body {
   background: #EEE;
 }
 
+.login {
+  background: #333;
+}
+
+.login #main {
+  padding: 0;
+  margin: 0;
+}
+
+.login form {
+  background: #FFF;
+  padding: 1.5em;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.9);
+  width: 20em;
+  position: absolute;
+  top: 8em;
+  left: 50%;
+  margin-left: -10em;
+}
+
+.login .logo {
+  position: absolute;
+  top: 2em;
+  left: 50%;
+  margin-left: -55px; 
+}
+
 /* ==========================================================================
    1 = Style Guide
    ========================================================================== */
@@ -35,12 +62,7 @@ body {
   position: fixed;
   z-index: 20;
   top: 0.4em;
-  left: 0.6em;
-  
-}
-
-h1 img {
-  background: #FFF;
+  left: 0.6em; 
 }
 
 h2, h3, h4 {
@@ -155,7 +177,7 @@ h2:after {
   left: 0;
   text-align: right;
   background: #333;
-  padding-top: 8em;
+  padding-top: 9em;
   height: 100%;
   box-shadow:inset -4px 0 20px rgba(0,0,0,0.6);
   z-index: 10;
@@ -266,10 +288,28 @@ footer a {
           transition: all 0.5s ease;
 }
 
+.entrie:before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-style:solid;
+  border-color: transparent transparent #000 transparent;
+  border-width: 10px;
+  position: absolute;
+  bottom: 0.3em;
+  z-index: 10;
+  right: 1.5em;
+  -webkit-transition: all 0.5s ease;
+     -moz-transition: all 0.5s ease;
+      -ms-transition: all 0.5s ease;
+       -o-transition: all 0.5s ease;
+          transition: all 0.5s ease;
+}
+
 .entrie:after {
   content: "";
   position: absolute;
-  height: 10px;
+  height: 7px;
   width: 100%;
   bottom: 0;
   left: 0;
@@ -287,6 +327,10 @@ footer a {
 
 .entrie:hover:after {
   height: 40px;
+}
+
+.entrie:hover:before {
+  bottom: 2.4em;
 }
 
 .entrie:hover h2 a {
@@ -371,7 +415,6 @@ footer a {
 }
 
 .results {
-  text-align: center;
   letter-spacing: -5px;
   padding: 0 0 0.5em;
 }
@@ -700,6 +743,22 @@ blockquote {
     height: 1.5em;
     left: 0;
     top: 0;
+  }
+  .login > header {
+    position: static;
+  }
+  .login form {
+    width: 100%;
+    position: static;
+    margin-left: 0;
+  }
+  .login .logo {
+    width: auto;
+    height: auto;
+    top: 0.5em;
+    width: 75px;
+    height: 75px;
+    margin-left: -37.5px;
   }
   .desktopHide {
     display: block;
