@@ -44,7 +44,7 @@ define ('FLATTRABLE', '1');
 define ('FLATTRED', '2');
 define ('ABS_PATH', 'assets/');
 
-define ('DEFAULT_THEME', 'default');
+define ('DEFAULT_THEME', 'baggy');
 
 define ('THEME', ROOT . '/themes');
 define ('LOCALE', ROOT . '/locale');
