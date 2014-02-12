@@ -722,7 +722,7 @@ class Poche
                 $longlastingsession = isset($_POST['longlastingsession']);
                 $passwordTest = ($isauthenticated) ? $user['password'] : Tools::encodeString($password . $login);
                 Session::login($user['username'], $user['password'], $login, $passwordTest, $longlastingsession, array('poche_user' => new User($user)));
-                $this->messages->add('s', _('welcome to your poche'));
+                $this->messages->add('s', _('welcome to your wallabag'));
                 Tools::logm('login successful');
                 Tools::redirect($referer);
             }
