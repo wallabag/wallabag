@@ -228,10 +228,6 @@ class Poche
         # filter for reading time
         $filter = new Twig_SimpleFilter('getReadingTime', 'Tools::getReadingTime');
         $this->tpl->addFilter($filter);
-        
-        # filter for simple filenames in config view
-        $filter = new Twig_SimpleFilter('getPrettyFilename', function($string) { return str_replace(ROOT, '', $string); });
-        $this->tpl->addFilter($filter);
     }
 
     private function install()
@@ -480,8 +476,8 @@ class Poche
         switch ($view)
         {
             case 'config':
-                $dev = $this->getPocheVersion('dev');
-                $prod = $this->getPocheVersion('prod');
+                $dev = trim($this->getPocheVersion('dev'));
+                $prod = trim($this->getPocheVersion('prod'));
                 $compare_dev = version_compare(POCHE, $dev);
                 $compare_prod = version_compare(POCHE, $prod);
                 $themes = $this->getInstalledThemes();
@@ -745,7 +741,6 @@ class Poche
     {
         $this->user = array();
         Session::logout();
-        $this->messages->add('s', _('see you soon!'));
         Tools::logm('logout');
         Tools::redirect();
     }
@@ -1009,6 +1004,7 @@ class Poche
             $token = substr(base64_encode(uniqid(mt_rand(), true)), 0, 20);
         }
 
+        $token = str_replace('+', '', $token);
         $this->store->updateUserConfig($this->user->getId(), 'token', $token);
         $currentConfig = $_SESSION['poche_user']->config;
         $currentConfig['token'] = $token;
