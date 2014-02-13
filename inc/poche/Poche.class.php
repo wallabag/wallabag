@@ -101,7 +101,7 @@ class Poche
         $passTheme = TRUE;
         # Twig is an absolute requirement for Poche to function. Abort immediately if the Composer installer hasn't been run yet
         if (! self::$canRenderTemplates) {
-            $this->notInstalledMessage[] = 'Twig does not seem to be installed. Please initialize the Composer installation to automatically fetch dependencies. Have a look at <a href="http://doc.wallabag.org/doku.php?id=users:begin:install">the documentation.</a>';
+            $this->notInstalledMessage[] = 'Twig does not seem to be installed. Please initialize the Composer installation to automatically fetch dependencies. You can also download <a href="http://wllbg.org/vendor">vendor.zip</a> and extract it in your wallabag folder.';
             $passTheme = FALSE;
         }
 
