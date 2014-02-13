@@ -1031,10 +1031,10 @@ class Poche
         // Check the token
 
         $feed = new FeedWriter(RSS2);
-        $feed->setTitle('poche - ' . $type . ' feed');
+        $feed->setTitle('wallabag — ' . $type . ' feed');
         $feed->setLink(Tools::getPocheUrl());
         $feed->setChannelElement('updated', date(DATE_RSS , time()));
-        $feed->setChannelElement('author', 'poche');
+        $feed->setChannelElement('author', 'wallabag');
 
         if ($type == 'tag') {
             $entries = $this->store->retrieveEntriesByTag($tag_id);
