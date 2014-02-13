@@ -318,6 +318,12 @@ class Database {
         $query          = $this->executeQuery($sql_action, $params_action);
     }
 
+    public function archiveAll($user_id) {
+        $sql_action     = "UPDATE entries SET is_read=? WHERE user_id=? AND is_read=?";
+        $params_action  = array($user_id, 1, 0);
+        $query          = $this->executeQuery($sql_action, $params_action);
+    }
+
     public function getLastId($column = '') {
         return $this->getHandle()->lastInsertId($column);
     }

@@ -21,7 +21,7 @@
                 <h1>{{ entry.title|raw }}</h1>
             </header>
             <aside class="tags">
-                tags: {% for tag in tags %}<a href="./?view=tag&amp;id={{ tag.id }}">{{ tag.value }}</a> {% endfor %}<a href="./?view=edit-tags&amp;id={{ entry.id|e }}" title="{% trans "Edit tags" %}">✎</a>
+                {% trans "tags:" %} {% for tag in tags %}<a href="./?view=tag&amp;id={{ tag.id }}">{{ tag.value }}</a> {% endfor %}<a href="./?view=edit-tags&amp;id={{ entry.id|e }}" title="{% trans "Edit tags" %}">✎</a>
             </aside>
             <article>
                 {{ content | raw }}

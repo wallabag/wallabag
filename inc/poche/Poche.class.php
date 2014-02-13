@@ -101,7 +101,7 @@ class Poche
         $passTheme = TRUE;
         # Twig is an absolute requirement for Poche to function. Abort immediately if the Composer installer hasn't been run yet
         if (! self::$canRenderTemplates) {
-            $this->notInstalledMessage[] = 'Twig does not seem to be installed. Please initialize the Composer installation to automatically fetch dependencies. Have a look at <a href="http://doc.wallabag.org/doku.php?id=users:begin:install">the documentation.</a>';
+            $this->notInstalledMessage[] = 'Twig does not seem to be installed. Please initialize the Composer installation to automatically fetch dependencies. You can also download <a href="http://wllbg.org/vendor">vendor.zip</a> and extract it in your wallabag folder.';
             $passTheme = FALSE;
         }
 
@@ -227,10 +227,6 @@ class Poche
 
         # filter for reading time
         $filter = new Twig_SimpleFilter('getReadingTime', 'Tools::getReadingTime');
-        $this->tpl->addFilter($filter);
-        
-        # filter for simple filenames in config view
-        $filter = new Twig_SimpleFilter('getPrettyFilename', function($string) { return str_replace(ROOT, '', $string); });
         $this->tpl->addFilter($filter);
     }
 
@@ -438,6 +434,13 @@ class Poche
                     Tools::redirect();
                 }
                 break;
+            case 'archive_all' :
+                $this->store->archiveAll($this->user->getId());
+                Tools::logm('archive all links');
+                if (!$import) {
+                    Tools::redirect();
+                }
+                break;
             case 'add_tag' :
                 $tags = explode(',', $_POST['value']);
                 $entry_id = $_POST['entry_id'];
@@ -480,8 +483,8 @@ class Poche
         switch ($view)
         {
             case 'config':
-                $dev = $this->getPocheVersion('dev');
-                $prod = $this->getPocheVersion('prod');
+                $dev = trim($this->getPocheVersion('dev'));
+                $prod = trim($this->getPocheVersion('prod'));
                 $compare_dev = version_compare(POCHE, $dev);
                 $compare_prod = version_compare(POCHE, $prod);
                 $themes = $this->getInstalledThemes();
@@ -565,7 +568,8 @@ class Poche
                 
                 if (count($entries) > 0) {
                     $this->pagination->set_total(count($entries));
-                    $page_links = $this->pagination->page_links('?view=' . $view . '&sort=' . $_SESSION['sort'] . '&');
+                    $page_links = str_replace(array('previous', 'next'), array(_('previous'), _('next')),
+                        $this->pagination->page_links('?view=' . $view . '&sort=' . $_SESSION['sort'] . '&'));
                     $datas = $this->store->getEntriesByView($view, $this->user->getId(), $this->pagination->get_limit());
                     $tpl_vars['entries'] = $datas;
                     $tpl_vars['page_links'] = $page_links;
@@ -726,7 +730,7 @@ class Poche
                 $longlastingsession = isset($_POST['longlastingsession']);
                 $passwordTest = ($isauthenticated) ? $user['password'] : Tools::encodeString($password . $login);
                 Session::login($user['username'], $user['password'], $login, $passwordTest, $longlastingsession, array('poche_user' => new User($user)));
-                $this->messages->add('s', _('welcome to your poche'));
+                $this->messages->add('s', _('welcome to your wallabag'));
                 Tools::logm('login successful');
                 Tools::redirect($referer);
             }
@@ -745,7 +749,6 @@ class Poche
     {
         $this->user = array();
         Session::logout();
-        $this->messages->add('s', _('see you soon!'));
         Tools::logm('logout');
         Tools::redirect();
     }
@@ -1009,6 +1012,7 @@ class Poche
             $token = substr(base64_encode(uniqid(mt_rand(), true)), 0, 20);
         }
 
+        $token = str_replace('+', '', $token);
         $this->store->updateUserConfig($this->user->getId(), 'token', $token);
         $currentConfig = $_SESSION['poche_user']->config;
         $currentConfig['token'] = $token;
@@ -1027,10 +1031,10 @@ class Poche
         // Check the token
 
         $feed = new FeedWriter(RSS2);
-        $feed->setTitle('poche - ' . $type . ' feed');
+        $feed->setTitle('wallabag — ' . $type . ' feed');
         $feed->setLink(Tools::getPocheUrl());
         $feed->setChannelElement('updated', date(DATE_RSS , time()));
-        $feed->setChannelElement('author', 'poche');
+        $feed->setChannelElement('author', 'wallabag');
 
         if ($type == 'tag') {
             $entries = $this->store->retrieveEntriesByTag($tag_id);

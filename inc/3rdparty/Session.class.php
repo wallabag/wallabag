@@ -31,9 +31,9 @@ class Session
     public static $sessionName = '';
     // If the user does not access any page within this time,
     // his/her session is considered expired (3600 sec. = 1 hour)
-    public static $inactivityTimeout = 3600;
+    public static $inactivityTimeout = 86400;
     // Extra timeout for long sessions (if enabled) (82800 sec. = 23 hours)
-    public static $longSessionTimeout = 82800;
+    public static $longSessionTimeout = 31536000;
     // If you get disconnected often or if your IP address changes often.
     // Let you disable session cookie hijacking protection
     public static $disableSessionProtection = false;
