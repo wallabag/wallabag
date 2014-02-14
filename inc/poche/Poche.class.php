@@ -1057,4 +1057,20 @@ class Poche
         $feed->genarateFeed();
         exit;
     }
+
+    public function emptyCache() {
+        $files = new RecursiveIteratorIterator(
+            new RecursiveDirectoryIterator(CACHE, RecursiveDirectoryIterator::SKIP_DOTS),
+            RecursiveIteratorIterator::CHILD_FIRST
+        );
+
+        foreach ($files as $fileinfo) {
+            $todo = ($fileinfo->isDir() ? 'rmdir' : 'unlink');
+            $todo($fileinfo->getRealPath());
+        }
+
+        Tools::logm('empty cache');
+        $this->messages->add('s', _('Cache deleted.'));
+        Tools::redirect();
+    }
 }
