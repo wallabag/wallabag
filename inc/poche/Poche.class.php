@@ -365,7 +365,7 @@ class Poche
     /**
      * Call action (mark as fav, archive, delete, etc.)
      */
-    public function action($action, Url $url, $id = 0, $import = FALSE, $autoclose = FALSE)
+    public function action($action, Url $url, $id = 0, $import = FALSE, $autoclose = FALSE, $tags = null)
     {
         switch ($action)
         {
@@ -442,8 +442,14 @@ class Poche
                 }
                 break;
             case 'add_tag' :
-                $tags = explode(',', $_POST['value']);
-                $entry_id = $_POST['entry_id'];
+                if($import){
+                    $entry_id = $id;
+                    $tags = explode(',', $tags);
+                }
+                else{
+                    $tags = explode(',', $_POST['value']);
+                    $entry_id = $_POST['entry_id'];
+                }
                 foreach($tags as $key => $tag_value) {
                     $value = trim($tag_value);
                     $tag = $this->store->retrieveTagByValue($value);
@@ -464,7 +470,9 @@ class Poche
                     # we assign the tag to the article
                     $this->store->setTagToEntry($tag_id, $entry_id);
                 }
-                Tools::redirect();
+                if(!$import) {
+                    Tools::redirect();
+                }
                 break;
             case 'remove_tag' :
                 $tag_id = $_GET['tag_id'];
@@ -815,13 +823,17 @@ class Poche
                 $a = $li->find('a');
                 $url = new Url(base64_encode($a[0]->href));
                 $this->action('add', $url, 0, TRUE);
+                $sequence = '';
+                if (STORAGE == 'postgres') {
+                    $sequence = 'entries_id_seq';
+                }
+                $last_id = $this->store->getLastId($sequence);
                 if ($read == '1') {
-                        $sequence = '';
-                        if (STORAGE == 'postgres') {
-                            $sequence = 'entries_id_seq';
-                        }
-                    $last_id = $this->store->getLastId($sequence);
                     $this->action('toggle_archive', $url, $last_id, TRUE);
+                }
+                $tags = $a[0]->tags;
+                if(!empty($tags)) {
+                    $this->action('add_tag',$url,$last_id,true,false,$tags);
                 }
             }
             
