@@ -9,6 +9,7 @@
  */
 
 define ('POCHE', '1.5.0');
+require 'check_setup.php';
 require_once 'inc/poche/global.inc.php';
 session_start(); 
 
