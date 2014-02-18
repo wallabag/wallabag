@@ -374,6 +374,11 @@ class Poche
                 $title = ($content['rss']['channel']['item']['title'] != '') ? $content['rss']['channel']['item']['title'] : _('Untitled');
                 $body = $content['rss']['channel']['item']['description'];
 
+                //search for possible duplicate if not in import mode
+                if (!$import) {
+                    $duplicate = $this->store->retrieveOneByURL($url->getUrl(), $this->user->getId());
+                }
+
                 if ($this->store->add($url->getUrl(), $title, $body, $this->user->getId())) {
                     Tools::logm('add link ' . $url->getUrl());
                     $sequence = '';
@@ -386,6 +391,20 @@ class Poche
                         Tools::logm('updating content article');
                         $this->store->updateContent($last_id, $content, $this->user->getId());
                     }
+
+                    if ($duplicate != NULL) {
+                        // duplicate exists, so, older entry needs to be deleted (as new entry should go to the top of list), BUT favorite mark and tags should be preserved
+                        Tools::logm('link ' . $url->getUrl() . ' is a duplicate');
+                        // 1) - preserve tags and favorite, then drop old entry
+                        $this->store->reassignTags($duplicate['id'], $last_id);
+                        if ($duplicate['is_fav']) {
+                          $this->store->favoriteById($last_id, $this->user->getId());
+                        }
+                        if ($this->store->deleteById($duplicate['id'], $this->user->getId())) {
+                          Tools::logm('previous link ' . $url->getUrl() .' entry deleted');
+                        }
+                    }
+
                     if (!$import) {
                         $this->messages->add('s', _('the link has been added successfully'));
                     }
