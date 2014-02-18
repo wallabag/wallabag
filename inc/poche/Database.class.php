@@ -241,6 +241,22 @@ class Database {
         return isset($entry[0]) ? $entry[0] : null;
     }
 
+    public function retrieveOneByURL($url, $user_id) {
+        $entry  = NULL;
+        $sql    = "SELECT * FROM entries WHERE url=? AND user_id=?";
+        $params = array($url, $user_id);
+        $query  = $this->executeQuery($sql, $params);
+        $entry  = $query->fetchAll();
+
+        return isset($entry[0]) ? $entry[0] : null;
+    }
+
+    public function reassignTags($old_entry_id, $new_entry_id) {
+        $sql    = "UPDATE tags_entries SET entry_id=? WHERE entry_id=?";
+        $params = array($new_entry_id, $old_entry_id);
+        $query  = $this->executeQuery($sql, $params);
+    }
+
     public function getEntriesByView($view, $user_id, $limit = '') {
         switch ($_SESSION['sort'])
         {
