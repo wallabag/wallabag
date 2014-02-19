@@ -1,18 +1,18 @@
-.messages.error {
+.install .messages.error {
     border: 1px solid #c42608;
     color: #c00 !important;
     background: #fff0ef;
     text-align: left;
 }
 
-.messages.notice {
+.install .messages.notice {
     border: 1px solid #ebcd41;
     color: #000;
     background: #fffcd3;
     text-align: left;
 }
 
-.messages.success {
+.install .messages.success {
     border: 1px solid #6dc70c;
     background: #e0fbcc;
     text-align: left;

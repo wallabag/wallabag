@@ -172,7 +172,7 @@ else if ($_POST['install']) {
                 <li><a href="http://www.wallabag.org/">wallabag.org</a></li>
             </ul> 
             <?php if (!empty($errors)) : ?>
-                <div class='messages error'>
+                <div class='install messages error'>
                     <p>Errors during installation:</p>
                     <p>
                         <ul>
@@ -185,7 +185,7 @@ else if ($_POST['install']) {
                 </div>
             <?php endif; ?>
             <?php if (!empty($successes)) : ?>
-                <div class='messages success'>
+                <div class='install messages success'>
                     <p>
                         <ul>
                         <?php foreach($successes as $success) :?>
@@ -201,7 +201,7 @@ else if ($_POST['install']) {
                 <fieldset>
                     <legend><strong>Technical settings</strong></legend>
                     <?php if (!is_dir('vendor')) : ?>
-                        <div class='messages notice'>wallabag needs twig, a template engine (<a href="http://twig.sensiolabs.org/">?</a>). Two ways to install it: 
+                        <div class='install messages notice'>wallabag needs twig, a template engine (<a href="http://twig.sensiolabs.org/">?</a>). Two ways to install it: 
                         <ul>
                             <li>automatically download and extract vendor.zip into your wallabag folder. 
                             <p><input type="submit" name="download" value="Download vendor.zip" /></p>
