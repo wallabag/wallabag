@@ -46,4 +46,5 @@
                 {% endfor %}
             {% endif %}
             {{ block('pager') }}
+            {% if view == 'home' %}{% if nb_results > 1 %}<a title="{% trans "mark all the entries as read" %}"  href="./?action=archive_all">{% trans "mark all the entries as read" %}</a>{% endif %}{% endif %}
 {% endblock %}
