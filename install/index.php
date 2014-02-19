@@ -2,8 +2,8 @@
 $errors = array();
 $successes = array();
 if ($_POST['download']) {
-    if (!file_put_contents("cache/vendor.zip", fopen("http://wllbg.org/vendor", 'r'))) {
-        $errors[] = 'Impossible to download vendor.zip. Please <a href="http://wllbg.org/vendor">download it here manually<∕a> and unzip it in your wallabag folder.';
+    if (!file_put_contents("cache/vendor.zip", fopen("http://static.wallabag.org/files/vendor.zip", 'r'))) {
+        $errors[] = 'Impossible to download vendor.zip. Please <a href="http://wllbg.org/vendor">download it manually<∕a> and unzip it in your wallabag folder.';
     }
     else {
         if (extension_loaded('zip')) {
@@ -129,7 +129,7 @@ else if ($_POST['install']) {
                 $params = array($id_user, 'language', 'en_EN.UTF8');
                 $query = executeQuery($handle, $sql, $params);
 
-                $successes[] = 'wallabag is now installed. Don\'t forget to delete install folder.';
+                $successes[] = 'wallabag is now installed. Don\'t forget to delete install folder. Then, <a href="index.php">reload this page</a>.';
             }
         }
     }
