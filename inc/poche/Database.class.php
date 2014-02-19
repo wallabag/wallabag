@@ -241,6 +241,22 @@ class Database {
         return isset($entry[0]) ? $entry[0] : null;
     }
 
+    public function retrieveOneByURL($url, $user_id) {
+        $entry  = NULL;
+        $sql    = "SELECT * FROM entries WHERE url=? AND user_id=?";
+        $params = array($url, $user_id);
+        $query  = $this->executeQuery($sql, $params);
+        $entry  = $query->fetchAll();
+
+        return isset($entry[0]) ? $entry[0] : null;
+    }
+
+    public function reassignTags($old_entry_id, $new_entry_id) {
+        $sql    = "UPDATE tags_entries SET entry_id=? WHERE entry_id=?";
+        $params = array($new_entry_id, $old_entry_id);
+        $query  = $this->executeQuery($sql, $params);
+    }
+
     public function getEntriesByView($view, $user_id, $limit = '') {
         switch ($_SESSION['sort'])
         {
@@ -328,30 +344,36 @@ class Database {
         return $this->getHandle()->lastInsertId($column);
     }
 
-    public function retrieveAllTags() {
-        $sql = "SELECT * FROM tags";
-        $query = $this->executeQuery($sql, array());
+    public function retrieveAllTags($user_id) {
+        $sql = "SELECT tags.* FROM tags
+          LEFT JOIN tags_entries ON tags_entries.tag_id=tags.id
+          LEFT JOIN entries ON tags_entries.entry_id=entries.id
+          WHERE entries.user_id=?";
+        $query = $this->executeQuery($sql, array($user_id));
         $tags = $query->fetchAll();
 
         return $tags;
     }
 
-    public function retrieveTag($id) {
+    public function retrieveTag($id, $user_id) {
         $tag  = NULL;
-        $sql    = "SELECT * FROM tags WHERE id=?";
-        $params = array(intval($id));
+        $sql    = "SELECT tags.* FROM tags
+          LEFT JOIN tags_entries ON tags_entries.tag_id=tags.id
+          LEFT JOIN entries ON tags_entries.entry_id=entries.id
+          WHERE tags.id=? AND entries.user_id=?";
+        $params = array(intval($id), $user_id);
         $query  = $this->executeQuery($sql, $params);
         $tag  = $query->fetchAll();
 
         return isset($tag[0]) ? $tag[0] : null;
     }
 
-    public function retrieveEntriesByTag($tag_id) {
+    public function retrieveEntriesByTag($tag_id, $user_id) {
         $sql = 
             "SELECT entries.* FROM entries
             LEFT JOIN tags_entries ON tags_entries.entry_id=entries.id
-            WHERE tags_entries.tag_id = ?";
-        $query = $this->executeQuery($sql, array($tag_id));
+            WHERE tags_entries.tag_id = ? AND entries.user_id=?";
+        $query = $this->executeQuery($sql, array($tag_id, $user_id));
         $entries = $query->fetchAll();
 
         return $entries;

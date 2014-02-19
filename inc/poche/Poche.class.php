@@ -374,6 +374,11 @@ class Poche
                 $title = ($content['rss']['channel']['item']['title'] != '') ? $content['rss']['channel']['item']['title'] : _('Untitled');
                 $body = $content['rss']['channel']['item']['description'];
 
+                //search for possible duplicate if not in import mode
+                if (!$import) {
+                    $duplicate = $this->store->retrieveOneByURL($url->getUrl(), $this->user->getId());
+                }
+
                 if ($this->store->add($url->getUrl(), $title, $body, $this->user->getId())) {
                     Tools::logm('add link ' . $url->getUrl());
                     $sequence = '';
@@ -386,6 +391,20 @@ class Poche
                         Tools::logm('updating content article');
                         $this->store->updateContent($last_id, $content, $this->user->getId());
                     }
+
+                    if ($duplicate != NULL) {
+                        // duplicate exists, so, older entry needs to be deleted (as new entry should go to the top of list), BUT favorite mark and tags should be preserved
+                        Tools::logm('link ' . $url->getUrl() . ' is a duplicate');
+                        // 1) - preserve tags and favorite, then drop old entry
+                        $this->store->reassignTags($duplicate['id'], $last_id);
+                        if ($duplicate['is_fav']) {
+                          $this->store->favoriteById($last_id, $this->user->getId());
+                        }
+                        if ($this->store->deleteById($duplicate['id'], $this->user->getId())) {
+                          Tools::logm('previous link ' . $url->getUrl() .' entry deleted');
+                        }
+                    }
+
                     if (!$import) {
                         $this->messages->add('s', _('the link has been added successfully'));
                     }
@@ -444,6 +463,12 @@ class Poche
             case 'add_tag' :
                 $tags = explode(',', $_POST['value']);
                 $entry_id = $_POST['entry_id'];
+                $entry = $this->store->retrieveOneById($entry_id, $this->user->getId());
+                if (!$entry) {
+                    $this->messages->add('e', _('Article not found!'));
+                    Tools::logm('error : article not found');
+                    Tools::redirect();
+                }
                 foreach($tags as $key => $tag_value) {
                     $value = trim($tag_value);
                     $tag = $this->store->retrieveTagByValue($value);
@@ -468,6 +493,12 @@ class Poche
                 break;
             case 'remove_tag' :
                 $tag_id = $_GET['tag_id'];
+                $entry = $this->store->retrieveOneById($id, $this->user->getId());
+                if (!$entry) {
+                    $this->messages->add('e', _('Article not found!'));
+                    Tools::logm('error : article not found');
+                    Tools::redirect();
+                }
                 $this->store->removeTagForEntry($id, $tag_id);
                 Tools::redirect();
                 break;
@@ -506,6 +537,12 @@ class Poche
                 break;
             case 'edit-tags':
                 # tags
+                $entry = $this->store->retrieveOneById($id, $this->user->getId());
+                if (!$entry) {
+                    $this->messages->add('e', _('Article not found!'));
+                    Tools::logm('error : article not found');
+                    Tools::redirect();
+                }
                 $tags = $this->store->retrieveTagsByEntry($id);
                 $tpl_vars = array(
                     'entry_id' => $id,
@@ -513,8 +550,8 @@ class Poche
                 );
                 break;
             case 'tag':
-                $entries = $this->store->retrieveEntriesByTag($id);
-                $tag = $this->store->retrieveTag($id);
+                $entries = $this->store->retrieveEntriesByTag($id, $this->user->getId());
+                $tag = $this->store->retrieveTag($id, $this->user->getId());
                 $tpl_vars = array(
                     'tag' => $tag,
                     'entries' => $entries,
@@ -522,7 +559,7 @@ class Poche
                 break;
             case 'tags':
                 $token = $this->user->getConfigValue('token');
-                $tags = $this->store->retrieveAllTags();
+                $tags = $this->store->retrieveAllTags($this->user->getId());
                 $tpl_vars = array(
                     'token' => $token,
                     'user_id' => $this->user->getId(),
@@ -1037,7 +1074,7 @@ class Poche
         $feed->setChannelElement('author', 'wallabag');
 
         if ($type == 'tag') {
-            $entries = $this->store->retrieveEntriesByTag($tag_id);
+            $entries = $this->store->retrieveEntriesByTag($tag_id, $user_id);
         }
         else {
             $entries = $this->store->getEntriesByView($type, $user_id);
@@ -1056,5 +1093,21 @@ class Poche
 
         $feed->genarateFeed();
         exit;
+    }
+
+    public function emptyCache() {
+        $files = new RecursiveIteratorIterator(
+            new RecursiveDirectoryIterator(CACHE, RecursiveDirectoryIterator::SKIP_DOTS),
+            RecursiveIteratorIterator::CHILD_FIRST
+        );
+
+        foreach ($files as $fileinfo) {
+            $todo = ($fileinfo->isDir() ? 'rmdir' : 'unlink');
+            $todo($fileinfo->getRealPath());
+        }
+
+        Tools::logm('empty cache');
+        $this->messages->add('s', _('Cache deleted.'));
+        Tools::redirect();
     }
 }

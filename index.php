@@ -9,6 +9,7 @@
  */
 
 define ('POCHE', '1.5.0');
+require 'check_setup.php';
 require_once 'inc/poche/global.inc.php';
 session_start(); 
 
@@ -65,7 +66,9 @@ if (isset($_GET['login'])) {
 } elseif (isset($_GET['import'])) {
     $import = $poche->import($_GET['from']);
 } elseif (isset($_GET['download'])) {
-    Tools::download_db();;
+    Tools::download_db();
+} elseif (isset($_GET['empty-cache'])) {
+    $poche->emptyCache();
 } elseif (isset($_GET['export'])) {
     $poche->export();
 } elseif (isset($_GET['updatetheme'])) {
