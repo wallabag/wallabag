@@ -463,6 +463,12 @@ class Poche
             case 'add_tag' :
                 $tags = explode(',', $_POST['value']);
                 $entry_id = $_POST['entry_id'];
+                $entry = $this->store->retrieveOneById($entry_id, $this->user->getId());
+                if (!$entry) {
+                    $this->messages->add('e', _('Article not found!'));
+                    Tools::logm('error : article not found');
+                    Tools::redirect();
+                }
                 foreach($tags as $key => $tag_value) {
                     $value = trim($tag_value);
                     $tag = $this->store->retrieveTagByValue($value);
@@ -487,6 +493,12 @@ class Poche
                 break;
             case 'remove_tag' :
                 $tag_id = $_GET['tag_id'];
+                $entry = $this->store->retrieveOneById($id, $this->user->getId());
+                if (!$entry) {
+                    $this->messages->add('e', _('Article not found!'));
+                    Tools::logm('error : article not found');
+                    Tools::redirect();
+                }
                 $this->store->removeTagForEntry($id, $tag_id);
                 Tools::redirect();
                 break;
@@ -525,6 +537,12 @@ class Poche
                 break;
             case 'edit-tags':
                 # tags
+                $entry = $this->store->retrieveOneById($id, $this->user->getId());
+                if (!$entry) {
+                    $this->messages->add('e', _('Article not found!'));
+                    Tools::logm('error : article not found');
+                    Tools::redirect();
+                }
                 $tags = $this->store->retrieveTagsByEntry($id);
                 $tpl_vars = array(
                     'entry_id' => $id,
@@ -532,8 +550,8 @@ class Poche
                 );
                 break;
             case 'tag':
-                $entries = $this->store->retrieveEntriesByTag($id);
-                $tag = $this->store->retrieveTag($id);
+                $entries = $this->store->retrieveEntriesByTag($id, $this->user->getId());
+                $tag = $this->store->retrieveTag($id, $this->user->getId());
                 $tpl_vars = array(
                     'tag' => $tag,
                     'entries' => $entries,
@@ -541,7 +559,7 @@ class Poche
                 break;
             case 'tags':
                 $token = $this->user->getConfigValue('token');
-                $tags = $this->store->retrieveAllTags();
+                $tags = $this->store->retrieveAllTags($this->user->getId());
                 $tpl_vars = array(
                     'token' => $token,
                     'user_id' => $this->user->getId(),
@@ -1056,7 +1074,7 @@ class Poche
         $feed->setChannelElement('author', 'wallabag');
 
         if ($type == 'tag') {
-            $entries = $this->store->retrieveEntriesByTag($tag_id);
+            $entries = $this->store->retrieveEntriesByTag($tag_id, $user_id);
         }
         else {
             $entries = $this->store->getEntriesByView($type, $user_id);
