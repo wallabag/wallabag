@@ -218,3 +218,15 @@ a.link span {
 a.bad-display span {
     background-image: url('../img/solarized-dark/bad-display.png');
 }
+
+.arrow-down {
+    width: 0px;
+    height: 0px;
+    border-style: solid;
+    border-width: 10px 10px 0 10px;
+    border-color: #586E75 transparent transparent transparent;
+
+    position: absolute;
+    margin-top: 1.5em;
+    margin-left: -30px;
+}

@@ -563,7 +563,8 @@ footer a {
    ========================================================================== */
 
 .messages {
-  text-align: center;
+  text-align: left;
+  margin-top: 1em;
 }
 
 .messages > * { display: inline-block;}
