@@ -307,6 +307,8 @@ class Poche
             $themes[$theme] = $this->getThemeInfo($theme);
         }
 
+        ksort($themes);
+
         return $themes;
     }
 
