@@ -345,7 +345,7 @@ class Database {
     }
 
     public function retrieveAllTags($user_id) {
-        $sql = "SELECT tags.* FROM tags
+        $sql = "SELECT DISTINCT tags.* FROM tags
           LEFT JOIN tags_entries ON tags_entries.tag_id=tags.id
           LEFT JOIN entries ON tags_entries.entry_id=entries.id
           WHERE entries.user_id=?";
@@ -357,7 +357,7 @@ class Database {
 
     public function retrieveTag($id, $user_id) {
         $tag  = NULL;
-        $sql    = "SELECT tags.* FROM tags
+        $sql    = "SELECT DISTINCT tags.* FROM tags
           LEFT JOIN tags_entries ON tags_entries.tag_id=tags.id
           LEFT JOIN entries ON tags_entries.entry_id=entries.id
           WHERE tags.id=? AND entries.user_id=?";
