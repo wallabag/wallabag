@@ -348,7 +348,7 @@ class Database {
         $sql = "SELECT tags.* FROM tags
           LEFT JOIN tags_entries ON tags_entries.tag_id=tags.id
           LEFT JOIN entries ON tags_entries.entry_id=entries.id
-          WHERE entries.user_id=?";
+          WHERE entries.user_id=? GROUP BY value";
         $query = $this->executeQuery($sql, array($user_id));
         $tags = $query->fetchAll();
 
