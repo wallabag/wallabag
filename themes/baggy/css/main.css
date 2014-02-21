@@ -473,11 +473,11 @@ footer a {
    
 @font-face {
   font-family: 'icomoon';
-  src:url('../font/icomoon.eot?-s0mcsx');
-  src:url('../font/icomoon.eot?#iefix-s0mcsx') format('embedded-opentype'),
-    url('../font/icomoon.woff?-s0mcsx') format('woff'),
-    url('../font/icomoon.ttf?-s0mcsx') format('truetype'),
-    url('../font/icomoon.svg?-s0mcsx#icomoon') format('svg');
+  src:url('../fonts/icomoon.eot?-s0mcsx');
+  src:url('../fonts/icomoon.eot?#iefix-s0mcsx') format('embedded-opentype'),
+    url('../fonts/icomoon.woff?-s0mcsx') format('woff'),
+    url('../fonts/icomoon.ttf?-s0mcsx') format('truetype'),
+    url('../fonts/icomoon.svg?-s0mcsx#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
