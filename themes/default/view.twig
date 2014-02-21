@@ -20,12 +20,15 @@
             <header class="mbm">
                 <h1>{{ entry.title|raw }}</h1>
             </header>
-            <aside class="tags">
-                {% trans "tags:" %} {% for tag in tags %}<a href="./?view=tag&amp;id={{ tag.id }}">{{ tag.value }}</a> {% endfor %}<a href="./?view=edit-tags&amp;id={{ entry.id|e }}" title="{% trans "Edit tags" %}">✎</a>
-            </aside>
+            {% block tags %}
+              <aside class="tags">
+                  {% trans "tags:" %} {% for tag in tags %}<a href="./?view=tag&amp;id={{ tag.id }}">{{ tag.value }}</a> {% endfor %}<a href="./?view=edit-tags&amp;id={{ entry.id|e }}" title="{% trans "Edit tags" %}">✎</a>
+              </aside>
+            {% endblock %}
             <article>
                 {{ content | raw }}
             </article>
+            {{ block('tags') }}
         </div>
         <script src="{{ poche_url }}/themes/{{ constant('DEFAULT_THEME') }}/js/restoreScroll.js"></script>
         <script type="text/javascript">
@@ -50,5 +53,5 @@
                 $('#article_toolbar .tool.top').parent().hide();
             }
         });
-        </script> 
+        </script>
 {% endblock %}

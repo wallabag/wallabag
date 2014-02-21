@@ -4,6 +4,13 @@
 {% include '_menu.twig' %}
 {% endblock %}
 {% block content %}
+
+<div id="article">
+  <header class="mbm">
+      <h1>{{ entry.title|raw }}</h1>
+  </header>
+</div>
+
 {% if tags is empty %}
 no tags
 {% endif %}
@@ -11,10 +18,12 @@ no tags
 {% for tag in tags %}<li>{{ tag.value }} <a href="./?action=remove_tag&amp;tag_id={{ tag.id }}&amp;id={{ entry_id }}">✘</a></li>{% endfor %}
 </ul>
 <form method="post" action="./?action=add_tag">
-    <label for="value">Add tags: </label><input type="text" placeholder="interview, editorial, video" id="value" name="value" required="required" />
-    <p>{% trans "You can enter multiple tags, separated by commas." %}</p>
     <input type="hidden" name="entry_id" value="{{ entry_id }}" />
+    <label for="value">Add tags: </label>
+    <input type="text" placeholder="interview, editorial, video" id="value" name="value" required="required" />
     <input type="submit" value="Tag" />
+    <p>{% trans "You can enter multiple tags, separated by commas." %}</p>
+
 </form>
-<a href="./?view=view&id={{ entry_id }}">{% trans "return to article" %}</a>
+<a href="./?view=view&id={{ entry_id }}">&laquo; {% trans "return to article" %}</a>
 {% endblock %}

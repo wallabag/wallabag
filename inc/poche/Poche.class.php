@@ -595,14 +595,7 @@ class Poche
                 $tpl_vars = array(
                     'entry_id' => $id,
                     'tags' => $tags,
-                );
-                break;
-            case 'tag':
-                $entries = $this->store->retrieveEntriesByTag($id, $this->user->getId());
-                $tag = $this->store->retrieveTag($id, $this->user->getId());
-                $tpl_vars = array(
-                    'tag' => $tag,
-                    'entries' => $entries,
+                    'entry' => $entry,
                 );
                 break;
             case 'tags':
@@ -643,22 +636,28 @@ class Poche
                     Tools::logm('error in view call : entry is null');
                 }
                 break;
-            default: # home, favorites and archive views 
-                $entries = $this->store->getEntriesByView($view, $this->user->getId());
+            default: # home, favorites, archive and tag views
                 $tpl_vars = array(
                     'entries' => '',
                     'page_links' => '',
                     'nb_results' => '',
                 );
                 
-                if (count($entries) > 0) {
-                    $this->pagination->set_total(count($entries));
+                //if id is given - we retrive entries by tag: id is tag id
+                if ($id) {
+                  $tpl_vars['tag'] = $this->store->retrieveTag($id, $this->user->getId());
+                  $tpl_vars['id'] = intval($id);
+                }
+
+                $count = $this->store->getEntriesByViewCount($view, $this->user->getId(), $id);
+
+                if ($count > 0) {
+                    $this->pagination->set_total($count);
                     $page_links = str_replace(array('previous', 'next'), array(_('previous'), _('next')),
-                        $this->pagination->page_links('?view=' . $view . '&sort=' . $_SESSION['sort'] . '&'));
-                    $datas = $this->store->getEntriesByView($view, $this->user->getId(), $this->pagination->get_limit());
-                    $tpl_vars['entries'] = $datas;
+                        $this->pagination->page_links('?view=' . $view . '&sort=' . $_SESSION['sort'] . (($id)?'&id='.$id:'') . '&' ));
+                    $tpl_vars['entries'] = $this->store->getEntriesByView($view, $this->user->getId(), $this->pagination->get_limit(), $id);
                     $tpl_vars['page_links'] = $page_links;
-                    $tpl_vars['nb_results'] = count($entries);
+                    $tpl_vars['nb_results'] = $count;
                 }
                 Tools::logm('display ' . $view . ' view');
                 break;

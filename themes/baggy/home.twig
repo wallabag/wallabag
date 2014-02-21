@@ -12,6 +12,9 @@
 {% include '_menu.twig' %}
 {% endblock %}
 {% block content %}
+            {% if tag %}
+                <h3>{% trans "Tag" %}: <b>{{ tag.value }}</b></h3>
+            {% endif %}
             {% if entries is empty %}
             <div class="messages warning"><p>{% trans "No articles found." %}</p></div>
             {% else %}
@@ -40,7 +43,7 @@
                     </ul>
                     <p>{{ entry.content|striptags|slice(0, 300) }}...</p>
                 </div>
-            
+
                 {% endfor %}
             </div>
             {% if view == 'home' %}{% if nb_results > 1 %}<a title="{% trans "Mark all the entries as read" %}"  href="./?action=archive_all">{{ "Mark all the entries as read" }}</a>{% endif %}{% endif %}
