@@ -23,6 +23,19 @@ class Poche
     private $currentLanguage = '';
     private $notInstalledMessage = array();
 
+    private $language_names = array(
+      'cs_CZ.utf8' => 'čeština',
+      'de_DE.utf8' => 'German',
+      'en_EN.utf8' => 'English',
+      'es_ES.utf8' => 'Español',
+      'fa_IR.utf8' => 'فارسی',
+      'fr_FR.utf8' => 'Français',
+      'it_IT.utf8' => 'Italiano',
+      'pl_PL.utf8' => 'Polski',
+      'ru_RU.utf8' => 'Pусский',
+      'sl_SI.utf8' => 'Slovenščina',
+      'uk_UA.utf8' => 'Український',
+    );
     public function __construct()
     {
         if ($this->configFileIsAvailable()) {
@@ -333,7 +346,7 @@ class Poche
                 $current = true;
             }
             
-            $languages[] = array('name' => $language, 'current' => $current);
+            $languages[] = array('name' => $this->language_names[$language], 'value' => $language, 'current' => $current);
         }
         
         return $languages;
@@ -751,7 +764,7 @@ class Poche
         $actualLanguage = false;
         
         foreach ($languages as $language) {
-            if ($language['name'] == $_POST['language']) {
+            if ($language['value'] == $_POST['language']) {
                 $actualLanguage = true;
                 break;
             }

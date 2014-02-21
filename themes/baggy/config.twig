@@ -69,7 +69,7 @@
                         <label class="col w150p" for="language">{% trans "Language:" %}</label>
                         <select class="col" id="language" name="language">
                             {% for language in languages %}
-                            <option value="{{ language.name }}" {{ language.current ? 'selected' : '' }}>{{ language.name }}</option>
+                            <option value="{{ language.value }}" {{ language.current ? 'selected' : '' }}>{{ language.name }}</option>
                             {% endfor %}
                         </select>
                     </div>
