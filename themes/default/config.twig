@@ -5,8 +5,8 @@
 {% include '_menu.twig' %}
 {% endblock %}
 {% block content %}
-            <h2>{% trans "Poching links" %}</h2>
-            <p>{% trans "There are several ways to poche a link:" %} (<a href="http://doc.wallabag.org/" title="{% trans "read the documentation" %}">?</a>)</p>
+            <h2>{% trans "Saving articles" %}</h2>
+            <p>{% trans "There are several ways to save an article:" %} (<a href="http://doc.wallabag.org/" title="{% trans "read the documentation" %}">?</a>)</p>
             <ul>
                 <li>Firefox: <a href="https://addons.mozilla.org/firefox/addon/poche/" title="download the firefox extension">{% trans "download the extension" %}</a></li>
                 <li>Chrome: <a href="http://doc.wallabag.org/doku.php?id=users:chrome_extension" title="download the chrome extension">{% trans "download the extension" %}</a></li>
@@ -14,19 +14,19 @@
                 <li>Windows Phone: <a href="https://www.windowsphone.com/en-us/store/app/poche/334de2f0-51b5-4826-8549-a3d805a37e83" title="download the window phone application">{% trans "download the application" %}</a></li>
                 <li>
                     <form method="get" action="index.php">
-                        <label class="addurl" for="plainurl">{% trans "By filling this field" %}:</label>
-                        <input required placeholder="example.com/article" class="addurl" id="plainurl" name="plainurl" type="url" />
-                        <input type="submit" value="{% trans "poche it!" %}" />
+                        <label class="addurl" for="config_plainurl">{% trans "By filling this field" %}:</label>
+                        <input required placeholder="example.com/article" class="addurl" id="config_plainurl" name="plainurl" type="url" />
+                        <input type="submit" value="{% trans "bag it!" %}" />
                     </form>
                 </li>
-                <li>{% trans "Bookmarklet: drag & drop this link to your bookmarks bar" %} <a id="bookmarklet" ondragend="this.click();" title="i am a bookmarklet, use me !" href="javascript:if(top['bookmarklet-url@wallabag.org']){top['bookmarklet-url@wallabag.org'];}else{(function(){var%20url%20=%20location.href%20||%20url;window.open('{{ poche_url }}?action=add&url='%20+%20btoa(url),'_self');})();void(0);}">{% trans "poche it!" %}</a></li>
+                <li>{% trans "Bookmarklet: drag & drop this link to your bookmarks bar" %} <a id="bookmarklet" ondragend="this.click();" title="i am a bookmarklet, use me !" href="javascript:if(top['bookmarklet-url@wallabag.org']){top['bookmarklet-url@wallabag.org'];}else{(function(){var%20url%20=%20location.href%20||%20url;window.open('{{ poche_url }}?action=add&url='%20+%20btoa(url),'_self');})();void(0);}">{% trans "bag it!" %}</a></li>
             </ul>
 
-            <h2>{% trans "Updating poche" %}</h2>
+            <h2>{% trans "Upgrading wallabag" %}</h2>
             <ul>
                 <li>{% trans "Installed version" %} : <strong>{{ constant('POCHE') }}</strong></li>
                 <li>{% trans "Latest stable version" %} : {{ prod }}. {% if compare_prod == -1 %}<strong><a href="http://wallabag.org/">{% trans "A more recent stable version is available." %}</a></strong>{% else %}{% trans "You are up to date." %}{% endif %}</li>
-                {% if constant('DEBUG_POCHE') == 1 %}<li>{% trans "latest dev version" %} : {{ dev }}. {% if compare_dev == -1 %}<strong><a href="http://wallabag.org/">{% trans "a more recent development version is available." %}</a></strong>{% else %}{% trans "you are up to date." %}{% endif %}</li>{% endif %}
+                {% if constant('DEBUG_POCHE') == 1 %}<li>{% trans "Latest dev version" %} : {{ dev }}. {% if compare_dev == -1 %}<strong><a href="http://wallabag.org/">{% trans "A more recent development version is available." %}</a></strong>{% else %}{% trans "You are up to date." %}{% endif %}</li>{% endif %}
             </ul>
 
             <h2>{% trans "Feeds" %}</h2>
@@ -104,16 +104,19 @@
 
             <h2>{% trans "Import" %}</h2>
             <p>{% trans "Please execute the import script locally as it can take a very long time." %}</p>
-            <p>{% trans "More info in the official docs:" %} <a href="http://doc.wallabag.org/doku.php?id=users:migrate">wallabag.org</a></p>
+            <p>{% trans "More info in the official documentation:" %} <a href="http://doc.wallabag.org/doku.php?id=users:migrate">wallabag.org</a></p>
             <ul>
                 <li><a href="./?import&amp;from=pocket">{% trans "Import from Pocket" %}</a> {{ '(you must have a %s file on your server)'|trans|format(constant('POCKET_FILE')) }}</li>
                 <li><a href="./?import&amp;from=readability">{% trans "Import from Readability" %}</a> {{ '(you must have a %s file on your server)'|trans|format(constant('READABILITY_FILE')) }}</li>
                 <li><a href="./?import&amp;from=instapaper">{% trans "Import from Instapaper" %}</a> {{ '(you must have a %s file on your server)'|trans|format(constant('INSTAPAPER_FILE')) }}</li>
-                <li><a href="./?import&amp;from=poche">{% trans "Import from poche" %}</a> {{ '(you must have a %s file on your server)'|trans|format(constant('POCHE_FILE')) }}</li>
+                <li><a href="./?import&amp;from=poche">{% trans "Import from wallabag" %}</a> {{ '(you must have a %s file on your server)'|trans|format(constant('POCHE_FILE')) }}</li>
             </ul>
 
-            <h2>{% trans "Export your poche data" %}</h2>
+            <h2>{% trans "Export your wallabag data" %}</h2>
             {% if constant('STORAGE') == 'sqlite' %}
             <p><a href="?download" target="_blank">{% trans "Click here" %}</a> {% trans "to download your database." %}</p>{% endif %}
-            <p><a href="?export" target="_blank">{% trans "Click here" %}</a> {% trans "to export your poche data." %}</p>
+            <p><a href="?export" target="_blank">{% trans "Click here" %}</a> {% trans "to export your wallabag data." %}</p>
+
+            <h2>{% trans "Cache" %}</h2>
+            <p><a href="?empty-cache">{% trans "Click here" %}</a> {% trans "to delete cache." %}</p>
 {% endblock %}
