@@ -29,6 +29,8 @@ require_once INCLUDES . '/3rdparty/libraries/feedwriter/FeedItem.php';
 require_once INCLUDES . '/3rdparty/libraries/feedwriter/FeedWriter.php';
 require_once INCLUDES . '/3rdparty/FlattrItem.class.php';
 
+require_once INCLUDES . '/3rdparty/htmlpurifier/HTMLPurifier.auto.php';
+
 # Composer its autoloader for automatically loading Twig
 if (! file_exists(ROOT . '/vendor/autoload.php')) {
     Poche::$canRenderTemplates = false;

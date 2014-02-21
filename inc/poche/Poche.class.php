@@ -427,6 +427,12 @@ class Poche
                 $title = ($content['rss']['channel']['item']['title'] != '') ? $content['rss']['channel']['item']['title'] : _('Untitled');
                 $body = $content['rss']['channel']['item']['description'];
 
+                // clean content from prevent xss attack
+                $config = HTMLPurifier_Config::createDefault();
+                $purifier = new HTMLPurifier($config);
+                $title = $purifier->purify($title);
+                $body = $purifier->purify($body);
+
                 //search for possible duplicate if not in import mode
                 if (!$import) {
                     $duplicate = $this->store->retrieveOneByURL($url->getUrl(), $this->user->getId());
