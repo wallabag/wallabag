@@ -10,8 +10,15 @@
 
 class Database {
     var $handle;
+    private $order = array(
+      'ia' => 'ORDER BY entries.id',
+      'id' => 'ORDER BY entries.id DESC',
+      'ta' => 'ORDER BY lower(entries.title)',
+      'td' => 'ORDER BY lower(entries.title) DESC',
+      'default' => 'ORDER BY entries.id'
+    );
 
-    function __construct()
+    function __construct() 
     {
         switch (STORAGE) {
             case 'sqlite':
@@ -257,48 +264,62 @@ class Database {
         $query  = $this->executeQuery($sql, $params);
     }
 
-    public function getEntriesByView($view, $user_id, $limit = '') {
-        switch ($_SESSION['sort'])
-        {
-            case 'ia':
-                $order = 'ORDER BY id';
-                break;
-            case 'id':
-                $order = 'ORDER BY id DESC';
-                break;
-            case 'ta':
-                $order = 'ORDER BY lower(title)';
-                break;
-            case 'td':
-                $order = 'ORDER BY lower(title) DESC';
-                break;
-            default:
-                $order = 'ORDER BY id';
-                break;
-        }
-
-        switch ($view)
-        {
+    public function getEntriesByView($view, $user_id, $limit = '', $tag_id = 0) {
+        switch ($view) {
             case 'archive':
-                $sql    = "SELECT * FROM entries WHERE user_id=? AND is_read=? " . $order;
+                $sql    = "SELECT * FROM entries WHERE user_id=? AND is_read=? ";
                 $params = array($user_id, 1);
                 break;
             case 'fav' :
-                $sql    = "SELECT * FROM entries WHERE user_id=? AND is_fav=? " . $order;
+                $sql    = "SELECT * FROM entries WHERE user_id=? AND is_fav=? ";
                 $params = array($user_id, 1);
                 break;
+            case 'tag' :
+                $sql    = "SELECT entries.* FROM entries
+                LEFT JOIN tags_entries ON tags_entries.entry_id=entries.id
+                WHERE entries.user_id=? AND tags_entries.tag_id = ? ";
+                $params = array($user_id, $tag_id);
+                break;
             default:
-                $sql    = "SELECT * FROM entries WHERE user_id=? AND is_read=? " . $order;
+                $sql    = "SELECT * FROM entries WHERE user_id=? AND is_read=? ";
                 $params = array($user_id, 0);
                 break;
         }
 
-        $sql .= ' ' . $limit;
+                $sql .= $this->getEntriesOrder().' ' . $limit;
+
+                $query = $this->executeQuery($sql, $params);
+                $entries = $query->fetchAll();
+
+                return $entries;
+        }
+
+    public function getEntriesByViewCount($view, $user_id, $tag_id = 0) {
+        switch ($view) {
+            case 'archive':
+                    $sql    = "SELECT count(*) FROM entries WHERE user_id=? AND is_read=? ";
+                $params = array($user_id, 1);
+                break;
+            case 'fav' :
+                    $sql    = "SELECT count(*) FROM entries WHERE user_id=? AND is_fav=? ";
+                $params = array($user_id, 1);
+                break;
+            case 'tag' :
+                $sql    = "SELECT count(*) FROM entries
+                    LEFT JOIN tags_entries ON tags_entries.entry_id=entries.id
+                    WHERE entries.user_id=? AND tags_entries.tag_id = ? ";
+                $params = array($user_id, $tag_id);
+                break;
+            default:
+                $sql    = "SELECT count(*) FROM entries WHERE user_id=? AND is_read=? ";
+                $params = array($user_id, 0);
+                break;
+        }
 
         $query = $this->executeQuery($sql, $params);
-        $entries = $query->fetchAll();
+        list($count) = $query->fetch();
 
-        return $entries;
+        return $count;
     }
 
     public function updateContent($id, $content, $user_id) {
@@ -345,7 +366,7 @@ class Database {
     }
 
     public function retrieveAllTags($user_id) {
-        $sql = "SELECT tags.* FROM tags
+        $sql = "SELECT DISTINCT tags.* FROM tags
           LEFT JOIN tags_entries ON tags_entries.tag_id=tags.id
           LEFT JOIN entries ON tags_entries.entry_id=entries.id
           WHERE entries.user_id=?";
@@ -357,7 +378,7 @@ class Database {
 
     public function retrieveTag($id, $user_id) {
         $tag  = NULL;
-        $sql    = "SELECT tags.* FROM tags
+        $sql    = "SELECT DISTINCT tags.* FROM tags
           LEFT JOIN tags_entries ON tags_entries.tag_id=tags.id
           LEFT JOIN entries ON tags_entries.entry_id=entries.id
           WHERE tags.id=? AND entries.user_id=?";
@@ -420,4 +441,14 @@ class Database {
         $query = $this->executeQuery($sql_action, $params_action);
         return $query;
     }
+
+        private function getEntriesOrder() {
+            if (isset($_SESSION['sort']) and array_key_exists($_SESSION['sort'], $this->order)) {
+                return $this->order[$_SESSION['sort']];
+            }
+            else {
+                return $this->order['default'];
+            }
+        }
+
 }

@@ -92,7 +92,7 @@ class Tools
     {
         $views = array(
             'install', 'import', 'export', 'config', 'tags',
-            'edit-tags', 'view', 'login', 'error', 'tag'
+            'edit-tags', 'view', 'login', 'error'
             );
 
         if (in_array($view, $views)) {

@@ -1,0 +1,239 @@
+#
+# Translators:
+# bungabunga, 2014
+msgid ""
+msgstr ""
+"Project-Id-Version: wallabag\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2014-02-21 15:09+0100\n"
+"Last-Translator: Nicolas Lœuillet <nicolas.loeuillet@gmail.com>\n"
+"Language-Team: Slovenian (Slovenia) (http://www.transifex.com/projects/p/"
+"wallabag/language/sl_SI/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: sl_SI\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3);\n"
+"X-Generator: Poedit 1.5.4\n"
+
+msgid "config"
+msgstr "nastavitve"
+
+msgid "Poching a link"
+msgstr "Shrani povezavo"
+
+msgid "read the documentation"
+msgstr "preberite dokumentacijo"
+
+msgid "by filling this field"
+msgstr "z vnosom v to polje"
+
+msgid "poche it!"
+msgstr "shrani!"
+
+msgid "Updating poche"
+msgstr "Posodabljam Poche"
+
+msgid "your version"
+msgstr "vaša različica"
+
+msgid "latest stable version"
+msgstr "zadnja stabilna različica"
+
+msgid "a more recent stable version is available."
+msgstr "na voljo je nova stabilna različica."
+
+msgid "you are up to date."
+msgstr "imate najnovejšo različico."
+
+msgid "latest dev version"
+msgstr "zadnja razvojna različica"
+
+msgid "a more recent development version is available."
+msgstr "na voljo je nova razvojna različica."
+
+msgid "Change your password"
+msgstr "Zamenjava gesla"
+
+msgid "New password:"
+msgstr "Novo geslo:"
+
+msgid "Password"
+msgstr "Geslo"
+
+msgid "Repeat your new password:"
+msgstr "Ponovite novo geslo:"
+
+msgid "Update"
+msgstr "Posodobi"
+
+msgid "Import"
+msgstr "Uvozi"
+
+msgid "Please execute the import script locally, it can take a very long time."
+msgstr ""
+"Prosimo poženite skripto za uvoz lokalno, saj lahko postopek traja precej "
+"časa."
+
+msgid "More infos in the official doc:"
+msgstr "Več informacij v uradni dokumentaciji:"
+
+msgid "import from Pocket"
+msgstr "Uvoz iz aplikacije Pocket"
+
+msgid "import from Readability"
+msgstr "Uvoz iz aplikacije Readability"
+
+msgid "import from Instapaper"
+msgstr "Uvoz iz aplikacije Instapaper"
+
+msgid "Export your poche datas"
+msgstr "Izvoz vsebine"
+
+msgid "Click here"
+msgstr "Kliknite tukaj"
+
+msgid "to export your poche datas."
+msgstr "za izvoz vsebine aplikacije Poche."
+
+msgid "back to home"
+msgstr "Nazaj domov"
+
+msgid "installation"
+msgstr "Namestitev"
+
+msgid "install your poche"
+msgstr "Namestitev aplikacije Poche"
+
+msgid ""
+"poche is still not installed. Please fill the below form to install it. "
+"Don't hesitate to <a href='http://inthepoche.com/doc'>read the documentation "
+"on poche website</a>."
+msgstr ""
+"Poche še vedno ni nameščen. Za namestitev izpolnite spodnji obrazec. Za več "
+"informacij <a href='http://inthepoche.com/doc'>preberite dokumentacijo na "
+"spletni strani</a>."
+
+msgid "Login"
+msgstr "Prijava"
+
+msgid "Repeat your password"
+msgstr "Ponovite geslo"
+
+msgid "Install"
+msgstr "Namesti"
+
+msgid "back to top"
+msgstr "nazaj na vrh"
+
+msgid "favoris"
+msgstr "priljubljeni"
+
+msgid "archive"
+msgstr "arhiv"
+
+msgid "unread"
+msgstr "neprebrano"
+
+msgid "by date asc"
+msgstr "po datumu - naraščajoče"
+
+msgid "by date"
+msgstr "po datumu"
+
+msgid "by date desc"
+msgstr "po datumu - padajoče"
+
+msgid "by title asc"
+msgstr "po naslovu - naraščajoče"
+
+msgid "by title"
+msgstr "po naslovu"
+
+msgid "by title desc"
+msgstr "po naslovu - padajoče"
+
+msgid "No link available here!"
+msgstr "Povezava ni na voljo!"
+
+msgid "toggle mark as read"
+msgstr "označi kot prebrano"
+
+msgid "toggle favorite"
+msgstr "označi kot priljubljeno"
+
+msgid "delete"
+msgstr "zavrzi"
+
+msgid "original"
+msgstr "izvirnik"
+
+msgid "results"
+msgstr "rezultati"
+
+msgid "tweet"
+msgstr "tvitni"
+
+msgid "email"
+msgstr "pošlji po e-pošti"
+
+msgid "shaarli"
+msgstr "shaarli"
+
+msgid "flattr"
+msgstr "flattr"
+
+msgid "this article appears wrong?"
+msgstr "napaka?"
+
+msgid "create an issue"
+msgstr "prijavi napako"
+
+msgid "or"
+msgstr "ali"
+
+msgid "contact us by mail"
+msgstr "pošlji e-pošto razvijalcem"
+
+msgid "plop"
+msgstr "štrbunk"
+
+msgid "home"
+msgstr "domov"
+
+msgid "favorites"
+msgstr "priljubljeni"
+
+msgid "logout"
+msgstr "odjava"
+
+msgid "powered by"
+msgstr "stran poganja"
+
+msgid "debug mode is on so cache is off."
+msgstr ""
+"vklopljen je način odpravljanja napak, zato je predpomnilnik izključen."
+
+msgid "your poche version:"
+msgstr "vaša verzija Poche:"
+
+msgid "storage:"
+msgstr "pomnilnik:"
+
+msgid "login to your poche"
+msgstr "prijavite se v svoj Poche"
+
+msgid "you are in demo mode, some features may be disabled."
+msgstr ""
+"uporabljate vzorčno različico programa, zato so lahko nekatere funkcije "
+"izklopljene."
+
+msgid "Stay signed in"
+msgstr "Ostani prijavljen"
+
+msgid "(Do not check on public computers)"
+msgstr "(Ne označi na javnih napravah)"
+
+msgid "Sign in"
+msgstr "Prijava"

@@ -424,6 +424,7 @@ $http->rewriteUrls = $options->rewrite_url;
 //////////////////////////////////
 // Set up Content Extractor
 //////////////////////////////////
+global $extractor;
 $extractor = new ContentExtractor(dirname(__FILE__).'/site_config/custom', dirname(__FILE__).'/site_config/standard');
 $extractor->debug = $debug_mode;
 SiteConfig::$debug = $debug_mode;

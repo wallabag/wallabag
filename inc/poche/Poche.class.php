@@ -23,6 +23,19 @@ class Poche
     private $currentLanguage = '';
     private $notInstalledMessage = array();
 
+    private $language_names = array(
+      'cs_CZ.utf8' => 'čeština',
+      'de_DE.utf8' => 'German',
+      'en_EN.utf8' => 'English',
+      'es_ES.utf8' => 'Español',
+      'fa_IR.utf8' => 'فارسی',
+      'fr_FR.utf8' => 'Français',
+      'it_IT.utf8' => 'Italiano',
+      'pl_PL.utf8' => 'Polski',
+      'ru_RU.utf8' => 'Pусский',
+      'sl_SI.utf8' => 'Slovenščina',
+      'uk_UA.utf8' => 'Український',
+    );
     public function __construct()
     {
         if ($this->configFileIsAvailable()) {
@@ -307,6 +320,8 @@ class Poche
             $themes[$theme] = $this->getThemeInfo($theme);
         }
 
+        ksort($themes);
+
         return $themes;
     }
 
@@ -331,7 +346,7 @@ class Poche
                 $current = true;
             }
             
-            $languages[] = array('name' => $language, 'current' => $current);
+            $languages[] = array('name' => $this->language_names[$language], 'value' => $language, 'current' => $current);
         }
         
         return $languages;
@@ -348,24 +363,62 @@ class Poche
 
     protected function getPageContent(Url $url)
     {
-        $options = array('http' => array('user_agent' => 'poche'));
-        if (isset($_SERVER['AUTH_TYPE']) && "basic" === strtolower($_SERVER['AUTH_TYPE'])) {
-            $options['http']['header'] = sprintf(
-                "Authorization: Basic %s", 
-                base64_encode(
-                    sprintf('%s:%s', $_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'])
-                )
-            );
+        // Saving and clearing context
+        $REAL = array();
+        foreach( $GLOBALS as $key => $value ) {
+            if( $key != "GLOBALS" && $key != "_SESSION" ) {
+                $GLOBALS[$key] = array();
+                $REAL[$key] = $value;
+            }
         }
-        $context = stream_context_create($options);
-        $json = file_get_contents(Tools::getPocheUrl() . '/inc/3rdparty/makefulltextfeed.php?url='.urlencode($url->getUrl()).'&max=5&links=preserve&exc=&format=json&submit=Create+Feed', false, $context);
+        // Saving and clearing session
+        $REAL_SESSION = array();
+        foreach( $_SESSION as $key => $value ) {
+            $REAL_SESSION[$key] = $value;
+            unset($_SESSION[$key]);
+        }
+
+        // Running code in different context
+        $scope = function() {
+            extract( func_get_arg(1) );
+            $_GET = $_REQUEST = array(
+                        "url" => $url->getUrl(),
+                        "max" => 5,
+                        "links" => "preserve",
+                        "exc" => "",
+                        "format" => "json",
+                        "submit" => "Create Feed"
+            );
+            ob_start();
+            require func_get_arg(0);
+            $json = ob_get_flush();
+            return $json;
+        };
+        $json = $scope( "inc/3rdparty/makefulltextfeed.php", array("url" => $url) );
+
+        // Clearing and restoring context
+        foreach( $GLOBALS as $key => $value ) {
+            if( $key != "GLOBALS" && $key != "_SESSION" ) {
+                unset($GLOBALS[$key]);
+            }
+        }
+        foreach( $REAL as $key => $value ) {
+            $GLOBALS[$key] = $value;
+        }
+        // Clearing and restoring session
+        foreach( $_SESSION as $key => $value ) {
+            unset($_SESSION[$key]);
+        }
+        foreach( $REAL_SESSION as $key => $value ) {
+            $_SESSION[$key] = $value;
+        }
         return json_decode($json, true);
     }
 
     /**
      * Call action (mark as fav, archive, delete, etc.)
      */
-    public function action($action, Url $url, $id = 0, $import = FALSE, $autoclose = FALSE)
+    public function action($action, Url $url, $id = 0, $import = FALSE, $autoclose = FALSE, $tags = null)
     {
         switch ($action)
         {
@@ -373,6 +426,12 @@ class Poche
                 $content = $this->getPageContent($url);
                 $title = ($content['rss']['channel']['item']['title'] != '') ? $content['rss']['channel']['item']['title'] : _('Untitled');
                 $body = $content['rss']['channel']['item']['description'];
+
+                // clean content from prevent xss attack
+                $config = HTMLPurifier_Config::createDefault();
+                $purifier = new HTMLPurifier($config);
+                $title = $purifier->purify($title);
+                $body = $purifier->purify($body);
 
                 //search for possible duplicate if not in import mode
                 if (!$import) {
@@ -461,8 +520,14 @@ class Poche
                 }
                 break;
             case 'add_tag' :
-                $tags = explode(',', $_POST['value']);
-                $entry_id = $_POST['entry_id'];
+                if($import){
+                    $entry_id = $id;
+                    $tags = explode(',', $tags);
+                }
+                else{
+                    $tags = explode(',', $_POST['value']);
+                    $entry_id = $_POST['entry_id'];
+                }
                 $entry = $this->store->retrieveOneById($entry_id, $this->user->getId());
                 if (!$entry) {
                     $this->messages->add('e', _('Article not found!'));
@@ -489,7 +554,9 @@ class Poche
                     # we assign the tag to the article
                     $this->store->setTagToEntry($tag_id, $entry_id);
                 }
-                Tools::redirect();
+                if(!$import) {
+                    Tools::redirect();
+                }
                 break;
             case 'remove_tag' :
                 $tag_id = $_GET['tag_id'];
@@ -547,14 +614,7 @@ class Poche
                 $tpl_vars = array(
                     'entry_id' => $id,
                     'tags' => $tags,
-                );
-                break;
-            case 'tag':
-                $entries = $this->store->retrieveEntriesByTag($id, $this->user->getId());
-                $tag = $this->store->retrieveTag($id, $this->user->getId());
-                $tpl_vars = array(
-                    'tag' => $tag,
-                    'entries' => $entries,
+                    'entry' => $entry,
                 );
                 break;
             case 'tags':
@@ -595,22 +655,28 @@ class Poche
                     Tools::logm('error in view call : entry is null');
                 }
                 break;
-            default: # home, favorites and archive views 
-                $entries = $this->store->getEntriesByView($view, $this->user->getId());
+            default: # home, favorites, archive and tag views
                 $tpl_vars = array(
                     'entries' => '',
                     'page_links' => '',
                     'nb_results' => '',
                 );
                 
-                if (count($entries) > 0) {
-                    $this->pagination->set_total(count($entries));
+                //if id is given - we retrive entries by tag: id is tag id
+                if ($id) {
+                  $tpl_vars['tag'] = $this->store->retrieveTag($id, $this->user->getId());
+                  $tpl_vars['id'] = intval($id);
+                }
+
+                $count = $this->store->getEntriesByViewCount($view, $this->user->getId(), $id);
+
+                if ($count > 0) {
+                    $this->pagination->set_total($count);
                     $page_links = str_replace(array('previous', 'next'), array(_('previous'), _('next')),
-                        $this->pagination->page_links('?view=' . $view . '&sort=' . $_SESSION['sort'] . '&'));
-                    $datas = $this->store->getEntriesByView($view, $this->user->getId(), $this->pagination->get_limit());
-                    $tpl_vars['entries'] = $datas;
+                        $this->pagination->page_links('?view=' . $view . '&sort=' . $_SESSION['sort'] . (($id)?'&id='.$id:'') . '&' ));
+                    $tpl_vars['entries'] = $this->store->getEntriesByView($view, $this->user->getId(), $this->pagination->get_limit(), $id);
                     $tpl_vars['page_links'] = $page_links;
-                    $tpl_vars['nb_results'] = count($entries);
+                    $tpl_vars['nb_results'] = $count;
                 }
                 Tools::logm('display ' . $view . ' view');
                 break;
@@ -704,7 +770,7 @@ class Poche
         $actualLanguage = false;
         
         foreach ($languages as $language) {
-            if ($language['name'] == $_POST['language']) {
+            if ($language['value'] == $_POST['language']) {
                 $actualLanguage = true;
                 break;
             }
@@ -852,13 +918,17 @@ class Poche
                 $a = $li->find('a');
                 $url = new Url(base64_encode($a[0]->href));
                 $this->action('add', $url, 0, TRUE);
+                $sequence = '';
+                if (STORAGE == 'postgres') {
+                    $sequence = 'entries_id_seq';
+                }
+                $last_id = $this->store->getLastId($sequence);
                 if ($read == '1') {
-                        $sequence = '';
-                        if (STORAGE == 'postgres') {
-                            $sequence = 'entries_id_seq';
-                        }
-                    $last_id = $this->store->getLastId($sequence);
                     $this->action('toggle_archive', $url, $last_id, TRUE);
+                }
+                $tags = $a[0]->tags;
+                if(!empty($tags)) {
+                    $this->action('add_tag',$url,$last_id,true,false,$tags);
                 }
             }
             
