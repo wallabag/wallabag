@@ -254,6 +254,7 @@ footer {
   color: #999;
   font-size: 0.8em;
   font-style: italic;
+  z-index: 20;
 }
 
 footer a {
