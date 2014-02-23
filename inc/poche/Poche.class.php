@@ -1124,6 +1124,7 @@ class Poche
         $currentConfig = $_SESSION['poche_user']->config;
         $currentConfig['token'] = $token;
         $_SESSION['poche_user']->setConfig($currentConfig);
+        Tools::redirect();
     }
 
     public function generateFeeds($token, $user_id, $tag_id, $type = 'home')
