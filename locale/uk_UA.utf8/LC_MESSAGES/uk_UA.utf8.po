@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wballabag\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-06 19:23+0300\n"
-"PO-Revision-Date: 2014-02-06 19:24+0300\n"
+"POT-Creation-Date: 2014-02-24 14:54+0300\n"
+"PO-Revision-Date: 2014-02-24 15:07+0300\n"
 "Last-Translator: Maryana <mariroz@mr.lviv.ua>\n"
 "Language-Team: \n"
 "Language: \n"
@@ -15,25 +15,13 @@ msgstr ""
 "X-Poedit-Language: Ukrainian\n"
 "X-Poedit-Country: UKRAINE\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-SearchPath-0: /home/mariroz/_DEV/web/wallabag/wallabag\n"
+"X-Poedit-SearchPath-0: /home/mariroz/_DEV/web/wallabag/wallabag-master-testing\n"
 
 msgid "poche, a read it later open source system"
 msgstr "poche, сервіс відкладеного читання з відкритим кодом"
 
 msgid "login failed: user doesn't exist"
 msgstr "увійти не вдалося: користувач не існує"
-
-msgid "powered by"
-msgstr "за підтримки"
-
-msgid "debug mode is on so cache is off."
-msgstr "режим відладки включено, отже кеш виключено."
-
-msgid "your poche version:"
-msgstr "версія вашої poche:"
-
-msgid "storage:"
-msgstr "сховище:"
 
 msgid "home"
 msgstr "головна"
@@ -53,14 +41,17 @@ msgstr "налаштування"
 msgid "logout"
 msgstr "вихід"
 
-msgid "return home"
-msgstr "повернутися на головну"
+msgid "back to home"
+msgstr "назад на головну"
 
-msgid "Poching links"
-msgstr "Зберігання посилань"
+msgid "Tags"
+msgstr "Теги"
 
-msgid "There are several ways to poche a link:"
-msgstr "Є кілька способів зберегти посилання:"
+msgid "Poching a link"
+msgstr "Зберігання посилання"
+
+msgid "You can poche a link by several methods:"
+msgstr "Ви можете зберегти посилання кількома способами:"
 
 msgid "read the documentation"
 msgstr "читати документацію"
@@ -68,74 +59,42 @@ msgstr "читати документацію"
 msgid "download the extension"
 msgstr "завантажити розширення"
 
-msgid "via F-Droid"
-msgstr "через F-Droid"
-
-msgid " or "
-msgstr "або"
-
-msgid "via Google Play"
-msgstr "через Google Play"
-
 msgid "download the application"
 msgstr "завантажити додаток"
 
-msgid "By filling this field"
+#, fuzzy
+msgid "by filling this field"
 msgstr "Заповнивши це поле"
 
 msgid "poche it!"
 msgstr "зберегти!"
 
-msgid "Bookmarklet: drag & drop this link to your bookmarks bar"
+#, fuzzy
+msgid "bookmarklet: drag & drop this link to your bookmarks bar"
 msgstr "З допомогою закладки: перетягніть і відпустіть посилання на панель закладок"
 
 msgid "Updating poche"
 msgstr "Оновлення poche"
 
-msgid "Installed version"
-msgstr "Встановлено ​​версію"
+msgid "your version"
+msgstr "ваша версія:"
 
-msgid "Latest stable version"
+#, fuzzy
+msgid "latest stable version"
 msgstr "Остання стабільна версія"
 
-msgid "A more recent stable version is available."
+#, fuzzy
+msgid "a more recent stable version is available."
 msgstr "Є новіша стабільна версія."
 
-msgid "You are up to date."
-msgstr "У вас остання версія."
+msgid "you are up to date."
+msgstr "у вас остання версія."
 
 msgid "latest dev version"
 msgstr "остання версія в розробці"
 
 msgid "a more recent development version is available."
 msgstr "доступна новіша версія в розробці."
-
-msgid "you are up to date."
-msgstr "у вас остання версія."
-
-msgid "Feeds"
-msgstr "Завантаження (feeds)"
-
-msgid "Your feed token is currently empty and must first be generated to enable feeds. Click <a href='?feed&amp;action=generate'>here to generate it</a>."
-msgstr "Ваш маркер завантажень (feed token) не визначено, ви повинні спочатку згенерувати його для того, щоб активувати завантаження. Натисніть <a href='?feed&action=generate'>тут для його генерації</ A>."
-
-msgid "Unread feed"
-msgstr "Завантаження непрочитаного"
-
-msgid "Favorites feed"
-msgstr "Завантаження вибраного"
-
-msgid "Archive feed"
-msgstr "Завантаження архіву"
-
-msgid "Your token:"
-msgstr "Ваш маркер (token): "
-
-msgid "Your user id:"
-msgstr "Ваш ідентифікатор користувача (user id):"
-
-msgid "You can regenerate your token: <a href='?feed&amp;action=generate'>generate!</a>."
-msgstr "Ви можете перестворити ваш маркер: натисніть <a href='?feed&amp;action=generate'>згенерувати!</a>."
 
 msgid "Change your theme"
 msgstr "Змінити тему"
@@ -145,12 +104,6 @@ msgstr "Тема:"
 
 msgid "Update"
 msgstr "Оновити"
-
-msgid "Change your language"
-msgstr "Змінити мову"
-
-msgid "Language:"
-msgstr "Мова:"
 
 msgid "Change your password"
 msgstr "Зміна паролю"
@@ -167,75 +120,61 @@ msgstr "Новий пароль ще раз:"
 msgid "Import"
 msgstr "Імпортування"
 
-msgid "Please execute the import script locally as it can take a very long time."
+#, fuzzy
+msgid "Please execute the import script locally, it can take a very long time."
 msgstr "Будь ласка, виконайте сценарій імпорту локально, оскільки це може тривати досить довго."
 
-msgid "More info in the official docs:"
+#, fuzzy
+msgid "More infos in the official doc:"
 msgstr "Більш детальна інформація в офіційній документації:"
 
-msgid "Import from Pocket"
+#, fuzzy
+msgid "import from Pocket"
 msgstr "Імпорт з Pocket-а"
 
 #, php-format
 msgid "(you must have a %s file on your server)"
 msgstr "(файл %s повинен бути присутнім на вашому сервері)"
 
-msgid "Import from Readability"
+#, fuzzy
+msgid "import from Readability"
 msgstr "Імпорт з Readability"
 
-msgid "Import from Instapaper"
+#, fuzzy
+msgid "import from Instapaper"
 msgstr "Імпорт з Instapaper"
 
-msgid "Import from poche"
-msgstr "Імпорт з poche"
-
-msgid "Export your poche data"
+#, fuzzy
+msgid "Export your poche datas"
 msgstr "Експортувати ваші дані з poche"
 
 msgid "Click here"
 msgstr "Клікніть тут"
 
-msgid "to download your database."
-msgstr "щоб завантажити вашу базу даних."
-
-msgid "to export your poche data."
+#, fuzzy
+msgid "to export your poche datas."
 msgstr "щоб експортувати ваші дані poche."
-
-msgid "Tag"
-msgstr "Тег"
-
-msgid "No link available here!"
-msgstr "Немає доступних посилань!"
-
-msgid "toggle mark as read"
-msgstr "змінити мітку на прочитано"
-
-msgid "toggle favorite"
-msgstr "змінити мітку вибраного"
-
-msgid "delete"
-msgstr "видалити"
-
-msgid "original"
-msgstr "оригінал"
-
-msgid "estimated reading time:"
-msgstr "приблизний час читання:"
-
-msgid "results"
-msgstr "результат(ів)"
-
-msgid "You can enter multiple tags, separated by commas."
-msgstr "Ви можете ввести декілька тегів, розділених комами."
-
-msgid "return to article"
-msgstr "повернутися до статті"
 
 msgid "plop"
 msgstr "plop"
 
-msgid "You can <a href='wallabag_compatibility_test.php'>check your configuration here</a>."
-msgstr "Ви можете <a href='wallabag_compatibility_test.php'>перевірити вашу конфігурацію тут</a>."
+msgid "installation"
+msgstr "інсталяція"
+
+msgid "install your wallabag"
+msgstr "встановити wallabag"
+
+msgid "wallabag is still not installed. Please fill the below form to install it. Don't hesitate to <a href='http://doc.wallabag.org/'>read the documentation on wallabag website</a>."
+msgstr "wallabag ще не встановлено. Будь ласка, заповніть форму нижче, щоб його встановити. Ви можете <a href='http://doc.wallabag.org/'>звертутися до документації на сайті wallabag</ A>."
+
+msgid "Login"
+msgstr "Логін"
+
+msgid "Repeat your password"
+msgstr "Пароль ще раз"
+
+msgid "Install"
+msgstr "Встановити"
 
 msgid "favoris"
 msgstr "вибране"
@@ -261,47 +200,212 @@ msgstr "за назвою"
 msgid "by title desc"
 msgstr "за назвою по спаданню"
 
-msgid "No articles found."
-msgstr "Статей не знайдено."
+msgid "No link available here!"
+msgstr "Немає доступних посилань!"
 
-msgid "Toggle mark as read"
-msgstr "змінити мітку прочитаного"
+msgid "toggle mark as read"
+msgstr "змінити мітку на прочитано"
 
-msgid "installation"
-msgstr "інсталяція"
+msgid "toggle favorite"
+msgstr "змінити мітку вибраного"
 
-msgid "install your wallabag"
-msgstr "встановити wallabag"
+msgid "delete"
+msgstr "видалити"
 
-msgid "wallabag is still not installed. Please fill the below form to install it. Don't hesitate to <a href='http://doc.wallabag.org/'>read the documentation on wallabag website</a>."
-msgstr "wallabag ще не встановлено. Будь ласка, заповніть форму нижче, щоб його встановити. Ви можете <a href='http://doc.wallabag.org/'>звертутися до документації на сайті wallabag</ A>."
+msgid "original"
+msgstr "оригінал"
 
-msgid "Login"
-msgstr "Логін"
+msgid "estimated reading time:"
+msgstr "приблизний час читання:"
 
-msgid "Repeat your password"
-msgstr "Пароль ще раз"
-
-msgid "Install"
-msgstr "Встановити"
+msgid "results"
+msgstr "результат(ів)"
 
 msgid "login to your wallabag"
 msgstr "увійти до wallabag"
 
-msgid "Login to wallabag"
-msgstr "Увійти до wallabag"
-
 msgid "you are in demo mode, some features may be disabled."
 msgstr "ви в демонстраційному режимі, деякі функції можуть бути відключені."
-
-msgid "Username"
-msgstr "Ім’я користувача"
 
 msgid "Stay signed in"
 msgstr "Запам'ятати мене"
 
 msgid "(Do not check on public computers)"
 msgstr "(Не відмічайте на загальнодоступних комп'ютерах)"
+
+msgid "Saving articles"
+msgstr "Зберігання посилань"
+
+msgid "There are several ways to save an article:"
+msgstr "Є кілька способів зберегти статтю:"
+
+msgid "via F-Droid"
+msgstr "через F-Droid"
+
+msgid " or "
+msgstr "або"
+
+msgid "via Google Play"
+msgstr "через Google Play"
+
+msgid "By filling this field"
+msgstr "Заповнивши це поле"
+
+msgid "bag it!"
+msgstr "зберегти!"
+
+msgid "Bookmarklet: drag & drop this link to your bookmarks bar"
+msgstr "З допомогою закладки: перетягніть і відпустіть посилання на панель закладок"
+
+msgid "Upgrading wallabag"
+msgstr "Оновлення wallabag"
+
+msgid "Installed version"
+msgstr "Встановлено ​​версію"
+
+msgid "Latest stable version"
+msgstr "Остання стабільна версія"
+
+msgid "A more recent stable version is available."
+msgstr "Є новіша стабільна версія."
+
+msgid "You are up to date."
+msgstr "У вас остання версія."
+
+#, fuzzy
+msgid "Latest dev version"
+msgstr "остання версія в розробці"
+
+#, fuzzy
+msgid "A more recent development version is available."
+msgstr "доступна новіша версія в розробці."
+
+msgid "Feeds"
+msgstr "Завантаження (feeds)"
+
+msgid "Your feed token is currently empty and must first be generated to enable feeds. Click <a href='?feed&amp;action=generate'>here to generate it</a>."
+msgstr "Ваш маркер завантажень (feed token) не визначено, ви повинні спочатку згенерувати його для того, щоб активувати завантаження. Натисніть <a href='?feed&action=generate'>тут для його генерації</ A>."
+
+msgid "Unread feed"
+msgstr "Завантаження непрочитаного"
+
+msgid "Favorites feed"
+msgstr "Завантаження вибраного"
+
+msgid "Archive feed"
+msgstr "Завантаження архіву"
+
+msgid "Your token:"
+msgstr "Ваш маркер (token): "
+
+msgid "Your user id:"
+msgstr "Ваш ідентифікатор користувача (user id):"
+
+msgid "You can regenerate your token: <a href='?feed&amp;action=generate'>generate!</a>."
+msgstr "Ви можете перестворити ваш маркер: натисніть <a href='?feed&amp;action=generate'>згенерувати!</a>."
+
+msgid "Change your language"
+msgstr "Змінити мову"
+
+msgid "Language:"
+msgstr "Мова:"
+
+msgid "Please execute the import script locally as it can take a very long time."
+msgstr "Будь ласка, виконайте сценарій імпорту локально, оскільки це може тривати досить довго."
+
+#, fuzzy
+msgid "More info in the official documentation:"
+msgstr "Більш детальна інформація в офіційній документації:"
+
+msgid "Import from Pocket"
+msgstr "Імпорт з Pocket-а"
+
+msgid "Import from Readability"
+msgstr "Імпорт з Readability"
+
+msgid "Import from Instapaper"
+msgstr "Імпорт з Instapaper"
+
+msgid "Import from wallabag"
+msgstr "Імпорт з wallabag"
+
+msgid "Export your wallabag data"
+msgstr "Експортувати ваші дані з wallabag"
+
+msgid "to download your database."
+msgstr "щоб завантажити вашу базу даних."
+
+msgid "to export your wallabag data."
+msgstr "щоб експортувати ваші дані wallabag."
+
+msgid "Cache"
+msgstr "Кеш"
+
+msgid "to delete cache."
+msgstr "щоб очистити кеш."
+
+msgid "tweet"
+msgstr "твітнути"
+
+msgid "email"
+msgstr "email"
+
+msgid "shaarli"
+msgstr "shaarli"
+
+msgid "flattr"
+msgstr "flattr"
+
+msgid "this article appears wrong?"
+msgstr "ця стаття виглядає не так, як треба?"
+
+msgid "You can enter multiple tags, separated by commas."
+msgstr "Ви можете ввести декілька тегів, розділених комами."
+
+msgid "return to article"
+msgstr "повернутися до статті"
+
+msgid "powered by"
+msgstr "за підтримки"
+
+msgid "debug mode is on so cache is off."
+msgstr "режим відладки включено, отже кеш виключено."
+
+msgid "your wallabag version:"
+msgstr "версія вашого wallabag:"
+
+msgid "storage:"
+msgstr "сховище:"
+
+msgid "save a link"
+msgstr "зберегти лінк"
+
+msgid "return home"
+msgstr "повернутися на головну"
+
+msgid "You can <a href='wallabag_compatibility_test.php'>check your configuration here</a>."
+msgstr "Ви можете <a href='wallabag_compatibility_test.php'>перевірити вашу конфігурацію тут</a>."
+
+msgid "Tag"
+msgstr "Тег"
+
+msgid "No articles found."
+msgstr "Статей не знайдено."
+
+msgid "Toggle mark as read"
+msgstr "змінити мітку прочитаного"
+
+msgid "mark all the entries as read"
+msgstr "відмітити всі статті як прочитані"
+
+msgid "Login to wallabag"
+msgstr "Увійти до wallabag"
+
+msgid "Username"
+msgstr "Ім’я користувача"
+
+msgid "Sign in"
+msgstr "Увійти"
 
 msgid "Return home"
 msgstr "Повернутися на головну"
@@ -327,12 +431,6 @@ msgstr "Твітнути"
 msgid "Email"
 msgstr "Надіслати по e-mail"
 
-msgid "shaarli"
-msgstr "shaarli"
-
-msgid "flattr"
-msgstr "flattr"
-
 msgid "Does this article appear wrong?"
 msgstr "Ця стаття виглядає не так, як треба?"
 
@@ -342,11 +440,15 @@ msgstr "теги:"
 msgid "Edit tags"
 msgstr "Редагувати теги"
 
-msgid "previous"
-msgstr "попередня"
+msgid "save link!"
+msgstr "зберегти лінк!"
 
-msgid "next"
-msgstr "наступна"
+#, fuzzy
+msgid "estimated reading time :"
+msgstr "приблизний час читання:"
+
+msgid "Mark all the entries as read"
+msgstr "Відмітити все як прочитане"
 
 msgid "Untitled"
 msgstr "Без назви"
@@ -362,6 +464,15 @@ msgstr "посилання успішно видалено"
 
 msgid "the link wasn't deleted"
 msgstr "посилання не було видалено"
+
+msgid "Article not found!"
+msgstr "Статтю не знайдено!"
+
+msgid "previous"
+msgstr "попередня"
+
+msgid "next"
+msgstr "наступна"
 
 msgid "in demo mode, you can't update your password"
 msgstr "в демонстраційному режимі ви не можете змінювати свій пароль"
@@ -390,14 +501,11 @@ msgstr "ви змінили свої налаштування мови"
 msgid "login failed: you have to fill all fields"
 msgstr "увійти не вдалося: ви повинні заповнити всі поля"
 
-msgid "welcome to your poche"
-msgstr "ласкаво просимо до вашого poche"
+msgid "welcome to your wallabag"
+msgstr "ласкаво просимо до вашого wallabag"
 
 msgid "login failed: bad login or password"
 msgstr "увійти не вдалося: не вірний логін або пароль"
-
-msgid "see you soon!"
-msgstr "бувайте, ще побачимось!"
 
 msgid "import from instapaper completed"
 msgstr "імпорт з instapaper-а завершено"
@@ -423,6 +531,17 @@ msgstr "Не вдалося знайти потрібний \""
 msgid "Uh, there is a problem while generating feeds."
 msgstr "Ох, є проблема при створенні завантажень (feeds)."
 
+msgid "Cache deleted."
+msgstr "Кеш очищено."
+
 msgid "Oops, it seems you don't have PHP 5."
 msgstr "Упс, здається, у вас немає PHP 5."
 
+#~ msgid "Import from poche"
+#~ msgstr "Імпорт з poche"
+
+#~ msgid "welcome to your poche"
+#~ msgstr "ласкаво просимо до вашого poche"
+
+#~ msgid "see you soon!"
+#~ msgstr "бувайте, ще побачимось!"

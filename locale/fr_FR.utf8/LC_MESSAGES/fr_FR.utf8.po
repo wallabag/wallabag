@@ -1,29 +1,75 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-24 15:32+0300\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Nicolas Lœuillet <nicolas.loeuillet@gmail.com>\n"
+"Last-Translator: Maryana <mariroz@mr.lviv.ua>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-Language: Franch\n"
+"X-Poedit-Country: FRANCE\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SearchPath-0: /home/mariroz/_DEV/web/wallabag/wallabag-master-testing\n"
+
+msgid "poche, a read it later open source system"
+msgstr ""
+
+msgid "login failed: user doesn't exist"
+msgstr ""
+
+msgid "home"
+msgstr "accueil"
+
+msgid "favorites"
+msgstr "favoris"
+
+msgid "archive"
+msgstr "archive"
+
+msgid "tags"
+msgstr ""
 
 msgid "config"
 msgstr "configuration"
 
+msgid "logout"
+msgstr "déconnexion"
+
+msgid "back to home"
+msgstr "retour à l'accueil"
+
+msgid "Tags"
+msgstr ""
+
 msgid "Poching a link"
 msgstr "Pocher un lien"
 
+msgid "You can poche a link by several methods:"
+msgstr ""
+
 msgid "read the documentation"
 msgstr "lisez la documentation"
+
+msgid "download the extension"
+msgstr ""
+
+msgid "download the application"
+msgstr ""
 
 msgid "by filling this field"
 msgstr "en remplissant ce champ"
 
 msgid "poche it!"
 msgstr "pochez-le !"
+
+msgid "bookmarklet: drag & drop this link to your bookmarks bar"
+msgstr ""
 
 msgid "Updating poche"
 msgstr "Mettre à jour poche"
@@ -46,6 +92,16 @@ msgstr "dernière version de développement"
 msgid "a more recent development version is available."
 msgstr "une version de développement plus récente est disponible."
 
+#, fuzzy
+msgid "Change your theme"
+msgstr "Modifier votre mot de passe"
+
+msgid "Theme:"
+msgstr ""
+
+msgid "Update"
+msgstr "Mettre à jour"
+
 msgid "Change your password"
 msgstr "Modifier votre mot de passe"
 
@@ -58,20 +114,22 @@ msgstr "Mot de passe"
 msgid "Repeat your new password:"
 msgstr "Répétez votre nouveau mot de passe :"
 
-msgid "Update"
-msgstr "Mettre à jour"
-
 msgid "Import"
 msgstr "Importer"
 
 msgid "Please execute the import script locally, it can take a very long time."
 msgstr "Merci d'exécuter l'import en local, cela peut prendre du temps."
 
-msgid "More info in the official doc:"
+#, fuzzy
+msgid "More infos in the official doc:"
 msgstr "Plus d'infos sur la documentation officielle"
 
 msgid "import from Pocket"
 msgstr "import depuis Pocket"
+
+#, php-format
+msgid "(you must have a %s file on your server)"
+msgstr ""
 
 msgid "import from Readability"
 msgstr "import depuis Readability"
@@ -79,32 +137,30 @@ msgstr "import depuis Readability"
 msgid "import from Instapaper"
 msgstr "import depuis Instapaper"
 
-msgid "Export your poche data"
+#, fuzzy
+msgid "Export your poche datas"
 msgstr "Exporter vos données de poche"
 
 msgid "Click here"
 msgstr "Cliquez-ici"
 
-msgid "to export your poche data."
+#, fuzzy
+msgid "to export your poche datas."
 msgstr "pour exporter vos données de poche."
 
-msgid "back to home"
-msgstr "retour à l'accueil"
+msgid "plop"
+msgstr "plop"
 
 msgid "installation"
 msgstr "installation"
 
-msgid "install your poche"
+#, fuzzy
+msgid "install your wallabag"
 msgstr "installez votre poche"
 
-msgid ""
-"poche is still not installed. Please fill the below form to install it. "
-"Don't hesitate to <a href='http://doc.inthepoche.com'>read the documentation "
-"on poche website</a>."
-msgstr ""
-"poche n'est pas encore installé. Merci de remplir le formulaire suivant pour "
-"l'installer. N'hésitez pas à <a href='http://doc.inthepoche.com'>lire la "
-"documentation sur le site de poche</a>."
+#, fuzzy
+msgid "wallabag is still not installed. Please fill the below form to install it. Don't hesitate to <a href='http://doc.wallabag.org/'>read the documentation on wallabag website</a>."
+msgstr "poche n'est pas encore installé. Merci de remplir le formulaire suivant pour l'installer. N'hésitez pas à <a href='http://doc.inthepoche.com'>lire la documentation sur le site de poche</a>."
 
 msgid "Login"
 msgstr "Nom d'utilisateur"
@@ -115,14 +171,8 @@ msgstr "Répétez votre mot de passe"
 msgid "Install"
 msgstr "Installer"
 
-msgid "back to top"
-msgstr "retour en haut de page"
-
 msgid "favoris"
 msgstr "favoris"
-
-msgid "archive"
-msgstr "archive"
 
 msgid "unread"
 msgstr "non lus"
@@ -160,8 +210,150 @@ msgstr "supprimer"
 msgid "original"
 msgstr "original"
 
+msgid "estimated reading time:"
+msgstr ""
+
 msgid "results"
 msgstr "résultats"
+
+#, fuzzy
+msgid "login to your wallabag"
+msgstr "se connecter à votre poche"
+
+msgid "you are in demo mode, some features may be disabled."
+msgstr "vous êtes en mode démo, certaines fonctionnalités peuvent être désactivées."
+
+msgid "Stay signed in"
+msgstr "Rester connecté"
+
+msgid "(Do not check on public computers)"
+msgstr "(ne pas cocher sur un ordinateur public)"
+
+msgid "Saving articles"
+msgstr ""
+
+msgid "There are several ways to save an article:"
+msgstr ""
+
+msgid "via F-Droid"
+msgstr ""
+
+msgid " or "
+msgstr ""
+
+msgid "via Google Play"
+msgstr ""
+
+#, fuzzy
+msgid "By filling this field"
+msgstr "en remplissant ce champ"
+
+msgid "bag it!"
+msgstr ""
+
+msgid "Bookmarklet: drag & drop this link to your bookmarks bar"
+msgstr ""
+
+msgid "Upgrading wallabag"
+msgstr ""
+
+#, fuzzy
+msgid "Installed version"
+msgstr "dernière version stable"
+
+#, fuzzy
+msgid "Latest stable version"
+msgstr "dernière version stable"
+
+#, fuzzy
+msgid "A more recent stable version is available."
+msgstr "une version stable plus récente est disponible."
+
+#, fuzzy
+msgid "You are up to date."
+msgstr "vous êtes à jour."
+
+#, fuzzy
+msgid "Latest dev version"
+msgstr "dernière version de développement"
+
+#, fuzzy
+msgid "A more recent development version is available."
+msgstr "une version de développement plus récente est disponible."
+
+msgid "Feeds"
+msgstr ""
+
+msgid "Your feed token is currently empty and must first be generated to enable feeds. Click <a href='?feed&amp;action=generate'>here to generate it</a>."
+msgstr ""
+
+msgid "Unread feed"
+msgstr ""
+
+#, fuzzy
+msgid "Favorites feed"
+msgstr "favoris"
+
+#, fuzzy
+msgid "Archive feed"
+msgstr "archive"
+
+msgid "Your token:"
+msgstr ""
+
+msgid "Your user id:"
+msgstr ""
+
+msgid "You can regenerate your token: <a href='?feed&amp;action=generate'>generate!</a>."
+msgstr ""
+
+#, fuzzy
+msgid "Change your language"
+msgstr "Modifier votre mot de passe"
+
+msgid "Language:"
+msgstr ""
+
+#, fuzzy
+msgid "Please execute the import script locally as it can take a very long time."
+msgstr "Merci d'exécuter l'import en local, cela peut prendre du temps."
+
+#, fuzzy
+msgid "More info in the official documentation:"
+msgstr "Plus d'infos sur la documentation officielle"
+
+#, fuzzy
+msgid "Import from Pocket"
+msgstr "import depuis Pocket"
+
+#, fuzzy
+msgid "Import from Readability"
+msgstr "import depuis Readability"
+
+#, fuzzy
+msgid "Import from Instapaper"
+msgstr "import depuis Instapaper"
+
+#, fuzzy
+msgid "Import from wallabag"
+msgstr "import depuis Readability"
+
+#, fuzzy
+msgid "Export your wallabag data"
+msgstr "Exporter vos données de poche"
+
+msgid "to download your database."
+msgstr ""
+
+#, fuzzy
+msgid "to export your wallabag data."
+msgstr "pour exporter vos données de poche."
+
+msgid "Cache"
+msgstr ""
+
+msgid "to delete cache."
+msgstr ""
 
 msgid "tweet"
 msgstr "tweet"
@@ -178,26 +370,11 @@ msgstr "flattr"
 msgid "this article appears wrong?"
 msgstr "cet article s'affiche mal ?"
 
-msgid "create an issue"
-msgstr "créez un ticket"
+msgid "You can enter multiple tags, separated by commas."
+msgstr ""
 
-msgid "or"
-msgstr "ou"
-
-msgid "contact us by mail"
-msgstr "contactez-nous par email"
-
-msgid "plop"
-msgstr "plop"
-
-msgid "home"
-msgstr "accueil"
-
-msgid "favorites"
-msgstr "favoris"
-
-msgid "logout"
-msgstr "déconnexion"
+msgid "return to article"
+msgstr ""
 
 msgid "powered by"
 msgstr "propulsé par"
@@ -205,24 +382,195 @@ msgstr "propulsé par"
 msgid "debug mode is on so cache is off."
 msgstr "le mode de debug est actif, le cache est donc désactivé."
 
-msgid "your poche version:"
-msgstr "votre version de poche :"
+#, fuzzy
+msgid "your wallabag version:"
+msgstr "votre version"
 
 msgid "storage:"
 msgstr "stockage :"
 
-msgid "login to your poche"
-msgstr "se connecter à votre poche"
-
-msgid "you are in demo mode, some features may be disabled."
+msgid "save a link"
 msgstr ""
-"vous êtes en mode démo, certaines fonctionnalités peuvent être désactivées."
 
-msgid "Stay signed in"
-msgstr "Rester connecté"
+msgid "return home"
+msgstr ""
 
-msgid "(Do not check on public computers)"
-msgstr "(ne pas cocher sur un ordinateur public)"
+msgid "You can <a href='wallabag_compatibility_test.php'>check your configuration here</a>."
+msgstr ""
+
+msgid "Tag"
+msgstr ""
+
+msgid "No articles found."
+msgstr ""
+
+#, fuzzy
+msgid "Toggle mark as read"
+msgstr "marquer comme lu / non lu"
+
+msgid "mark all the entries as read"
+msgstr ""
+
+msgid "Login to wallabag"
+msgstr ""
+
+msgid "Username"
+msgstr ""
 
 msgid "Sign in"
 msgstr "Se connecter"
+
+msgid "Return home"
+msgstr ""
+
+#, fuzzy
+msgid "Back to top"
+msgstr "retour en haut de page"
+
+#, fuzzy
+msgid "Mark as read"
+msgstr "marquer comme lu / non lu"
+
+#, fuzzy
+msgid "Favorite"
+msgstr "favoris"
+
+#, fuzzy
+msgid "Toggle favorite"
+msgstr "marquer comme favori"
+
+#, fuzzy
+msgid "Delete"
+msgstr "supprimer"
+
+#, fuzzy
+msgid "Tweet"
+msgstr "tweet"
+
+#, fuzzy
+msgid "Email"
+msgstr "email"
+
+#, fuzzy
+msgid "Does this article appear wrong?"
+msgstr "cet article s'affiche mal ?"
+
+msgid "tags:"
+msgstr ""
+
+msgid "Edit tags"
+msgstr ""
+
+msgid "save link!"
+msgstr ""
+
+msgid "estimated reading time :"
+msgstr ""
+
+msgid "Mark all the entries as read"
+msgstr ""
+
+#, fuzzy
+msgid "Untitled"
+msgstr "par titre"
+
+msgid "the link has been added successfully"
+msgstr ""
+
+msgid "error during insertion : the link wasn't added"
+msgstr ""
+
+msgid "the link has been deleted successfully"
+msgstr ""
+
+msgid "the link wasn't deleted"
+msgstr ""
+
+msgid "Article not found!"
+msgstr ""
+
+msgid "previous"
+msgstr ""
+
+msgid "next"
+msgstr ""
+
+msgid "in demo mode, you can't update your password"
+msgstr ""
+
+msgid "your password has been updated"
+msgstr ""
+
+msgid "the two fields have to be filled & the password must be the same in the two fields"
+msgstr ""
+
+msgid "still using the \""
+msgstr ""
+
+msgid "that theme does not seem to be installed"
+msgstr ""
+
+msgid "you have changed your theme preferences"
+msgstr ""
+
+msgid "that language does not seem to be installed"
+msgstr ""
+
+msgid "you have changed your language preferences"
+msgstr ""
+
+msgid "login failed: you have to fill all fields"
+msgstr ""
+
+msgid "welcome to your wallabag"
+msgstr ""
+
+msgid "login failed: bad login or password"
+msgstr ""
+
+#, fuzzy
+msgid "import from instapaper completed"
+msgstr "import depuis Instapaper"
+
+#, fuzzy
+msgid "import from pocket completed"
+msgstr "import depuis Pocket"
+
+#, fuzzy
+msgid "import from Readability completed. "
+msgstr "import depuis Readability"
+
+#, fuzzy
+msgid "import from Poche completed. "
+msgstr "import depuis Pocket"
+
+msgid "Unknown import provider."
+msgstr ""
+
+msgid "Incomplete inc/poche/define.inc.php file, please define \""
+msgstr ""
+
+msgid "Could not find required \""
+msgstr ""
+
+msgid "Uh, there is a problem while generating feeds."
+msgstr ""
+
+#, fuzzy
+msgid "Cache deleted."
+msgstr "supprimer"
+
+msgid "Oops, it seems you don't have PHP 5."
+msgstr ""
+
+#~ msgid "create an issue"
+#~ msgstr "créez un ticket"
+
+#~ msgid "or"
+#~ msgstr "ou"
+
+#~ msgid "contact us by mail"
+#~ msgstr "contactez-nous par email"
+
+#~ msgid "your poche version:"
+#~ msgstr "votre version de poche :"
