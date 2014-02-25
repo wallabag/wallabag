@@ -30,7 +30,7 @@ $tpl_vars = array(
     'referer' => $referer,
     'view' => $view,
     'poche_url' => Tools::getPocheUrl(),
-    'title' => _('poche, a read it later open source system'),
+    'title' => _('wallabag, a read it later open source system'),
     'token' => Session::getToken(),
     'theme' => $poche->getTheme()
 );
