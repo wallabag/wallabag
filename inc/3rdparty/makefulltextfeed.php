@@ -381,6 +381,7 @@ if (!$debug_mode) {
 //////////////////////////////////
 // Set up HTTP agent
 //////////////////////////////////
+global $http;
 $http = new HumbleHttpAgent();
 $http->debug = $debug_mode;
 $http->userAgentMap = $options->user_agents;
