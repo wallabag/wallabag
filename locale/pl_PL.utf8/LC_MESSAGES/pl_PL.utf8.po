@@ -21,16 +21,16 @@ msgid "poche, a read it later open source system"
 msgstr "poche, serwis odrocznego czytania open source"
 
 msgid "login failed: user doesn't exist"
-msgstr "logowanie nie udało się: użytkownik nie istnieje"
+msgstr "logowanie się nie powiodło: użytkownik nie istnieje"
 
 msgid "Return home"
-msgstr "Wrocic do głównej"
+msgstr "Wróć do strony domowej"
 
 msgid "Back to top"
-msgstr "Wrócić na górę"
+msgstr "Wróć na górę"
 
 msgid "original"
-msgstr "oryginal"
+msgstr "oryginał"
 
 msgid "Mark as read"
 msgstr "Zaznacz jako przeczytane"
@@ -66,16 +66,16 @@ msgid "tags:"
 msgstr "tegi:"
 
 msgid "Edit tags"
-msgstr "Redagowac tegi"
+msgstr "Edytuj tagi"
 
 msgid "return home"
-msgstr "wrócić do głównej"
+msgstr "wróć do strony domowej"
 
 msgid "powered by"
 msgstr "zasilany przez"
 
 msgid "debug mode is on so cache is off."
-msgstr "tryb debugowania jest włączony, więc cash jest wyłączony."
+msgstr "tryb debugowania jest włączony, więc cashe jest wyłączony."
 
 msgid "your poche version:"
 msgstr "twoja wersja poche:"
@@ -96,7 +96,7 @@ msgid "by date asc"
 msgstr "według daty rosnąco"
 
 msgid "by date"
-msgstr "wg daty"
+msgstr "według daty"
 
 msgid "by date desc"
 msgstr "według daty spadająco"
@@ -105,7 +105,7 @@ msgid "by title asc"
 msgstr "według tytułu rosnąco"
 
 msgid "by title"
-msgstr "wg tytułu"
+msgstr "według tytułu"
 
 msgid "by title desc"
 msgstr "według tytułu malejąco"
@@ -117,7 +117,7 @@ msgid "toggle favorite"
 msgstr "przełączyc ulubione"
 
 msgid "delete"
-msgstr "usunąć"
+msgstr "usuń"
 
 msgid "estimated reading time:"
 msgstr "szacowany czas odczytu:"
@@ -147,10 +147,10 @@ msgid "There are several ways to poche a link:"
 msgstr "Istnieje kilka sposobów aby zapisać link:"
 
 msgid "read the documentation"
-msgstr "zapoznać się z dokumentacją"
+msgstr "zapoznaj się z dokumentacją"
 
 msgid "download the extension"
-msgstr "pobrać rozszerzenie"
+msgstr "pobierz rozszerzenie"
 
 msgid "via F-Droid"
 msgstr "przez F-Droid"
@@ -162,13 +162,13 @@ msgid "via Google Play"
 msgstr "przez Google Play"
 
 msgid "download the application"
-msgstr "pobrać aplikację"
+msgstr "pobierz aplikację"
 
 msgid "By filling this field"
 msgstr "Poprzez wypełnienie tego pola"
 
 msgid "poche it!"
-msgstr "zapisać!"
+msgstr "zapisz!"
 
 msgid "Bookmarklet: drag & drop this link to your bookmarks bar"
 msgstr "Bookmarklet: przeciągnij i upucs ten link na pasek zakladek"
@@ -189,7 +189,7 @@ msgid "You are up to date."
 msgstr "Masz wszystko najnowsze."
 
 msgid "latest dev version"
-msgstr "najnowsza wersja dev"
+msgstr "najnowsza wersja rozwojowa"
 
 msgid "a more recent development version is available."
 msgstr "Nowsza wersja rozwojowa jest dostępna."
@@ -204,25 +204,25 @@ msgid "Your feed token is currently empty and must first be generated to enable 
 msgstr "Twój znak kanału jest pusty i musi najpierw zostac wygenerowany. Kliknij <a href='?feed&action=generate'>tu dla jego generacji</a>."
 
 msgid "Unread feed"
-msgstr "Kanał nieprzeczytanego"
+msgstr "Kanał nieprzeczytanych"
 
 msgid "Favorites feed"
-msgstr "Kanał ulubionego"
+msgstr "Kanał ulubionych"
 
 msgid "Archive feed"
 msgstr "Kanał archiwum"
 
 msgid "Your token:"
-msgstr "Twój znak (token): "
+msgstr "Twój token:"
 
 msgid "Your user id:"
-msgstr "Twój id użytkownika (user id):"
+msgstr "Twoje id użytkownika (user id):"
 
 msgid "You can regenerate your token: <a href='?feed&amp;action=generate'>generate!</a>."
-msgstr "Mozna zgenerowac nowy znak: kliknij <a href='?feed&amp;action=generate'>zgenerowac!</a>."
+msgstr "Mozna wygenerować nowy token: kliknij <a href='?feed&amp;action=generate'>zgenerowac!</a>."
 
 msgid "Change your theme"
-msgstr "Zmienic motyw"
+msgstr "Zmień motyw"
 
 msgid "Theme:"
 msgstr "Motyw:"
@@ -231,7 +231,7 @@ msgid "Update"
 msgstr "Aktualizacja"
 
 msgid "Change your language"
-msgstr "Zmienić język"
+msgstr "Zmień język"
 
 msgid "Language:"
 msgstr "Język:"
@@ -255,7 +255,7 @@ msgid "Please execute the import script locally as it can take a very long time.
 msgstr "Proszę wykonać skrypt import lokalnie, gdyż moze to trwać bardzo długo."
 
 msgid "More info in the official docs:"
-msgstr "Więcej informacji w oficjalnej dokumentacji:"
+msgstr "Więcej informacji znajduje się w oficjalnej dokumentacji:"
 
 msgid "Import from Pocket"
 msgstr "Іmport z Pocket'a"
@@ -286,19 +286,19 @@ msgid "to export your poche data."
 msgstr "aby eksportować dane poche."
 
 msgid "Tag"
-msgstr "Teg"
+msgstr "Tag"
 
 msgid "No link available here!"
 msgstr "Brak dostępnych linków!"
 
 msgid "toggle mark as read"
-msgstr "przełączyć znak jako przeczytane"
+msgstr "przełączyć zaznaczenie jako przeczytane"
 
 msgid "You can enter multiple tags, separated by commas."
-msgstr "Mozna wprowadzić wiele tagów rozdzielajac je przecinkami."
+msgstr "Mozna wprowadzić wiele tagów rozdzielając je przecinkami."
 
 msgid "return to article"
-msgstr "wrócić do artykułu"
+msgstr "powrót do artykułu"
 
 msgid "plop"
 msgstr "plop"
@@ -322,25 +322,25 @@ msgid "Repeat your password"
 msgstr "Powtórz hasło"
 
 msgid "Install"
-msgstr "Instalowac"
+msgstr "Instaluj"
 
 msgid "login to your wallabag"
-msgstr "zalogować się do swojego wallabag"
+msgstr "zaloguj się do swojego wallabag"
 
 msgid "Login to wallabag"
-msgstr "Zalogować się do wallabag"
+msgstr "Zaloguj się do wallabag"
 
 msgid "you are in demo mode, some features may be disabled."
-msgstr "jesteś w trybie demo, niektóre funkcje mogą być niedostępne."
+msgstr "jesteś w trybie demo, niektóre funkcje mogą być wyłączone."
 
 msgid "Username"
-msgstr "Imię użytkownika"
+msgstr "Nazwa użytkownika"
 
 msgid "Stay signed in"
 msgstr "Pozostań zalogowany"
 
 msgid "(Do not check on public computers)"
-msgstr "(Nie sprawdzaj na publicznych komputerach"
+msgstr "(Nie sprawdzaj na publicznych komputerach)"
 
 msgid "Untitled"
 msgstr "Bez nazwy"
@@ -367,7 +367,7 @@ msgid "in demo mode, you can't update your password"
 msgstr "w trybie demo, nie można zmieniać hasła"
 
 msgid "your password has been updated"
-msgstr "twoje hasło zmienione"
+msgstr "twoje hasło zostało zmienione"
 
 msgid "the two fields have to be filled & the password must be the same in the two fields"
 msgstr "oba pola muszą być wypełnione i hasła muszę być takie same w obu polach"
@@ -385,22 +385,22 @@ msgid "that language does not seem to be installed"
 msgstr "wydaje się że język nie był zainstalowany"
 
 msgid "you have changed your language preferences"
-msgstr "ustawienia języka zostałe zmienione"
+msgstr "ustawienia języka zostały zmienione"
 
 msgid "login failed: you have to fill all fields"
-msgstr "logowanie nie powiodlo się: musisz wypełnić wszystkie pola"
+msgstr "logowanie się nie powiodło: musisz wypełnić wszystkie pola"
 
 msgid "welcome to your poche"
 msgstr "witamy w poche"
 
 msgid "login failed: bad login or password"
-msgstr "logowanie nie powiodlo się: zly login lub hasło"
+msgstr "logowanie się nie powiodlo: niepoprawny login lub hasło"
 
 msgid "see you soon!"
 msgstr "do zobaczenia wkrótce!"
 
 msgid "import from instapaper completed"
-msgstr "import з instapaper'a zakończony"
+msgstr "import z instapaper'a zakończony"
 
 msgid "import from pocket completed"
 msgstr "import z pocket'a zakończony"
@@ -424,5 +424,5 @@ msgid "Uh, there is a problem while generating feeds."
 msgstr "Uh, jest problem podczas generowania kanałów (feeds)."
 
 msgid "Oops, it seems you don't have PHP 5."
-msgstr "Oops, wygląda ze u was niema PHP 5."
+msgstr "Oops, wygląda że nie masz PHP 5."
 
