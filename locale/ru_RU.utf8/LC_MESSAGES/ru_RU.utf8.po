@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-24 15:09+0300\n"
+"POT-Creation-Date: 2014-02-25 15:09+0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Maryana <mariroz@mr.lviv.ua>\n"
 "Language-Team: \n"
@@ -16,222 +16,17 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: /home/mariroz/_DEV/web/wallabag/wallabag-master-testing\n"
 
-msgid "poche, a read it later open source system"
-msgstr "poche, сервис отложенного чтения с открытым исходным кодом"
+msgid "wallabag, a read it later open source system"
+msgstr "wallabag, сервис отложенного чтения с открытым исходным кодом"
 
 msgid "login failed: user doesn't exist"
 msgstr "войти не удалось: пользователь не существует"
 
-msgid "home"
-msgstr "главная"
-
-msgid "favorites"
-msgstr "избранное"
-
-msgid "archive"
-msgstr "архив"
-
-msgid "tags"
-msgstr "теги"
+msgid "return home"
+msgstr "на главную"
 
 msgid "config"
 msgstr "настройки"
-
-msgid "logout"
-msgstr "выход"
-
-msgid "back to home"
-msgstr "домой"
-
-msgid "Tags"
-msgstr "Теги"
-
-#, fuzzy
-msgid "Poching a link"
-msgstr "Сохранение ссылок"
-
-msgid "You can poche a link by several methods:"
-msgstr "Вы можете сохранить ссылку несколькими путями:"
-
-msgid "read the documentation"
-msgstr "читать инструкцию"
-
-msgid "download the extension"
-msgstr "скачать расширение"
-
-msgid "download the application"
-msgstr "скачать приложение"
-
-#, fuzzy
-msgid "by filling this field"
-msgstr "Заполнением этого поля"
-
-msgid "poche it!"
-msgstr "прикарманить!"
-
-#, fuzzy
-msgid "bookmarklet: drag & drop this link to your bookmarks bar"
-msgstr "Закладка: перетащите и опустите ссылку на панель закладок"
-
-msgid "Updating poche"
-msgstr "Обновления poche"
-
-msgid "your version"
-msgstr "Ваша версия"
-
-#, fuzzy
-msgid "latest stable version"
-msgstr "Последняя стабильная версия"
-
-#, fuzzy
-msgid "a more recent stable version is available."
-msgstr "Доступна новая стабильная версия."
-
-msgid "you are up to date."
-msgstr "у вас всё самое новое."
-
-msgid "latest dev version"
-msgstr "последняя версия в разработке"
-
-msgid "a more recent development version is available."
-msgstr "есть более свежая версия в разработке."
-
-msgid "Change your theme"
-msgstr "Изменить тему"
-
-msgid "Theme:"
-msgstr "Тема:"
-
-msgid "Update"
-msgstr "Обновить"
-
-msgid "Change your password"
-msgstr "Смена пароля"
-
-msgid "New password:"
-msgstr "Новый пароль:"
-
-msgid "Password"
-msgstr "Пароль"
-
-msgid "Repeat your new password:"
-msgstr "Ещё раз новый пароль:"
-
-msgid "Import"
-msgstr "Импортировать"
-
-#, fuzzy
-msgid "Please execute the import script locally, it can take a very long time."
-msgstr "Пожалуйста, выполните сценарий импорта локально - это может занять слишком много времени."
-
-#, fuzzy
-msgid "More infos in the official doc:"
-msgstr "Больше сведений в официальной документации:"
-
-#, fuzzy
-msgid "import from Pocket"
-msgstr "Импортировать из Pocket"
-
-#, php-format
-msgid "(you must have a %s file on your server)"
-msgstr "(файл %s должен присутствовать на вашем сервере)"
-
-#, fuzzy
-msgid "import from Readability"
-msgstr "Импортировать из Readability"
-
-#, fuzzy
-msgid "import from Instapaper"
-msgstr "Импортировать из Instapaper"
-
-#, fuzzy
-msgid "Export your poche datas"
-msgstr "Экспортировать данные poche"
-
-msgid "Click here"
-msgstr "Кликните здесь"
-
-#, fuzzy
-msgid "to export your poche datas."
-msgstr "чтобы экспортировать свои записи из poche."
-
-msgid "plop"
-msgstr "plop"
-
-msgid "installation"
-msgstr "установка"
-
-msgid "install your wallabag"
-msgstr "установка wallabag"
-
-msgid "wallabag is still not installed. Please fill the below form to install it. Don't hesitate to <a href='http://doc.wallabag.org/'>read the documentation on wallabag website</a>."
-msgstr "wallabag всё ещё не установлен. Надо заполнить форму ниже, чтобы установить его. Неплохо также <a href='http://doc.wallabag.org'>прочесть документацию на сайте wallabag</a>."
-
-msgid "Login"
-msgstr "Имя пользователя"
-
-msgid "Repeat your password"
-msgstr "Повторите пароль"
-
-msgid "Install"
-msgstr "Установить"
-
-msgid "favoris"
-msgstr "избранное"
-
-msgid "unread"
-msgstr "непрочитанное"
-
-msgid "by date asc"
-msgstr "по дате, сперва старые"
-
-msgid "by date"
-msgstr "по дате"
-
-msgid "by date desc"
-msgstr "по дате, сперва новые"
-
-msgid "by title asc"
-msgstr "по заголовку (прямой)"
-
-msgid "by title"
-msgstr "по заголовку"
-
-msgid "by title desc"
-msgstr "по заголовку (обратный)"
-
-msgid "No link available here!"
-msgstr "Здесь нет ссылки!"
-
-msgid "toggle mark as read"
-msgstr "изменить отметку 'прочитано'"
-
-msgid "toggle favorite"
-msgstr "изменить метку избранного"
-
-msgid "delete"
-msgstr "удалить"
-
-msgid "original"
-msgstr "источник"
-
-msgid "estimated reading time:"
-msgstr "ориентировочное время чтения:"
-
-msgid "results"
-msgstr "найдено"
-
-msgid "login to your wallabag"
-msgstr "войти в свой wallabag"
-
-msgid "you are in demo mode, some features may be disabled."
-msgstr "демонстрационный режим - работают не все возможности."
-
-msgid "Stay signed in"
-msgstr "Запомнить меня"
-
-msgid "(Do not check on public computers)"
-msgstr "(Не отмечайте на чужих компьютерах)"
 
 msgid "Saving articles"
 msgstr "Сохранение статей"
@@ -239,6 +34,12 @@ msgstr "Сохранение статей"
 #, fuzzy
 msgid "There are several ways to save an article:"
 msgstr "Существует несколько способов сохранить ссылку:"
+
+msgid "read the documentation"
+msgstr "читать инструкцию"
+
+msgid "download the extension"
+msgstr "скачать расширение"
 
 msgid "via F-Droid"
 msgstr "с F-Droid"
@@ -248,6 +49,9 @@ msgstr "или"
 
 msgid "via Google Play"
 msgstr "с Google Play"
+
+msgid "download the application"
+msgstr "скачать приложение"
 
 msgid "By filling this field"
 msgstr "Заполнением этого поля"
@@ -305,11 +109,35 @@ msgstr "Ваш идентификатор пользователя (user id):"
 msgid "You can regenerate your token: <a href='?feed&amp;action=generate'>generate!</a>."
 msgstr "Вы можете создать новый ​​маркер: <a href='?feed&action=generate'>сгенерировать!</a>."
 
+msgid "Change your theme"
+msgstr "Изменить тему"
+
+msgid "Theme:"
+msgstr "Тема:"
+
+msgid "Update"
+msgstr "Обновить"
+
 msgid "Change your language"
 msgstr "Изменить язык"
 
 msgid "Language:"
 msgstr "Язык:"
+
+msgid "Change your password"
+msgstr "Смена пароля"
+
+msgid "New password:"
+msgstr "Новый пароль:"
+
+msgid "Password"
+msgstr "Пароль"
+
+msgid "Repeat your new password:"
+msgstr "Ещё раз новый пароль:"
+
+msgid "Import"
+msgstr "Импортировать"
 
 msgid "Please execute the import script locally as it can take a very long time."
 msgstr "Пожалуйста, выполните сценарий импорта локально - это может занять слишком много времени."
@@ -320,6 +148,10 @@ msgstr "Больше сведений в официальной документ
 
 msgid "Import from Pocket"
 msgstr "Импортировать из Pocket"
+
+#, php-format
+msgid "(you must have a %s file on your server)"
+msgstr "(файл %s должен присутствовать на вашем сервере)"
 
 msgid "Import from Readability"
 msgstr "Импортировать из Readability"
@@ -333,6 +165,9 @@ msgstr "Импортировать из wallabag"
 msgid "Export your wallabag data"
 msgstr "Экспортировать данные wallabag"
 
+msgid "Click here"
+msgstr "Кликните здесь"
+
 msgid "to download your database."
 msgstr "чтобы скачать вашу базу данных"
 
@@ -345,48 +180,44 @@ msgstr "Кэш"
 msgid "to delete cache."
 msgstr "чтобы сбросить кэш."
 
-msgid "tweet"
-msgstr "твитнуть"
-
-msgid "email"
-msgstr "email"
-
-msgid "shaarli"
-msgstr "shaarli"
-
-msgid "flattr"
-msgstr "проспонсировать"
-
-#, fuzzy
-msgid "this article appears wrong?"
-msgstr "Статья выглядит криво?"
-
 msgid "You can enter multiple tags, separated by commas."
 msgstr "Вы можете ввести несколько тегов, разделяя их запятой."
 
 msgid "return to article"
 msgstr "вернуться к статье"
 
-msgid "powered by"
-msgstr "при поддержке"
-
-msgid "debug mode is on so cache is off."
-msgstr "включён режим отладки - кеш выключен."
-
-msgid "your wallabag version:"
-msgstr "Ваша версия wallabag:"
-
-msgid "storage:"
-msgstr "хранилище:"
-
-msgid "save a link"
-msgstr "сохранить ссылку"
-
-msgid "return home"
-msgstr "на главную"
+msgid "plop"
+msgstr "plop"
 
 msgid "You can <a href='wallabag_compatibility_test.php'>check your configuration here</a>."
 msgstr "Вы можете <a href='wallabag_compatibility_test.php'>проверить конфигурацию здесь</a>."
+
+msgid "favoris"
+msgstr "избранное"
+
+msgid "archive"
+msgstr "архив"
+
+msgid "unread"
+msgstr "непрочитанное"
+
+msgid "by date asc"
+msgstr "по дате, сперва старые"
+
+msgid "by date"
+msgstr "по дате"
+
+msgid "by date desc"
+msgstr "по дате, сперва новые"
+
+msgid "by title asc"
+msgstr "по заголовку (прямой)"
+
+msgid "by title"
+msgstr "по заголовку"
+
+msgid "by title desc"
+msgstr "по заголовку (обратный)"
 
 msgid "Tag"
 msgstr "Тег"
@@ -397,17 +228,72 @@ msgstr "Статей не найдено."
 msgid "Toggle mark as read"
 msgstr "Изменить отметку 'прочитано'"
 
+msgid "toggle favorite"
+msgstr "изменить метку избранного"
+
+msgid "delete"
+msgstr "удалить"
+
+msgid "original"
+msgstr "источник"
+
+msgid "estimated reading time:"
+msgstr "ориентировочное время чтения:"
+
 msgid "mark all the entries as read"
 msgstr "отметить все статьи как прочитанные "
+
+msgid "results"
+msgstr "найдено"
+
+msgid "installation"
+msgstr "установка"
+
+msgid "install your wallabag"
+msgstr "установка wallabag"
+
+msgid "wallabag is still not installed. Please fill the below form to install it. Don't hesitate to <a href='http://doc.wallabag.org/'>read the documentation on wallabag website</a>."
+msgstr "wallabag всё ещё не установлен. Надо заполнить форму ниже, чтобы установить его. Неплохо также <a href='http://doc.wallabag.org'>прочесть документацию на сайте wallabag</a>."
+
+msgid "Login"
+msgstr "Имя пользователя"
+
+msgid "Repeat your password"
+msgstr "Повторите пароль"
+
+msgid "Install"
+msgstr "Установить"
+
+msgid "login to your wallabag"
+msgstr "войти в свой wallabag"
 
 msgid "Login to wallabag"
 msgstr "Войдите в wallabag"
 
+msgid "you are in demo mode, some features may be disabled."
+msgstr "демонстрационный режим - работают не все возможности."
+
 msgid "Username"
 msgstr "Имя пользователя"
 
+msgid "Stay signed in"
+msgstr "Запомнить меня"
+
+msgid "(Do not check on public computers)"
+msgstr "(Не отмечайте на чужих компьютерах)"
+
 msgid "Sign in"
 msgstr "Зарегистрироваться"
+
+msgid "favorites"
+msgstr "избранное"
+
+#, fuzzy
+msgid "estimated reading time :"
+msgstr "ориентировочное время чтения:"
+
+msgid "Mark all the entries as read"
+msgstr "Отметить все как прочитанное"
 
 msgid "Return home"
 msgstr "На главную"
@@ -433,6 +319,12 @@ msgstr "Твитнуть"
 msgid "Email"
 msgstr "Отправить по почте"
 
+msgid "shaarli"
+msgstr "shaarli"
+
+msgid "flattr"
+msgstr "проспонсировать"
+
 msgid "Does this article appear wrong?"
 msgstr "Статья выглядит криво?"
 
@@ -445,12 +337,103 @@ msgstr "Редактировать теги"
 msgid "save link!"
 msgstr "сохранить ссылку!"
 
-#, fuzzy
-msgid "estimated reading time :"
-msgstr "ориентировочное время чтения:"
+msgid "home"
+msgstr "главная"
 
-msgid "Mark all the entries as read"
-msgstr "Отметить все как прочитанное"
+msgid "tags"
+msgstr "теги"
+
+msgid "logout"
+msgstr "выход"
+
+msgid "powered by"
+msgstr "при поддержке"
+
+msgid "debug mode is on so cache is off."
+msgstr "включён режим отладки - кеш выключен."
+
+msgid "your wallabag version:"
+msgstr "Ваша версия wallabag:"
+
+msgid "storage:"
+msgstr "хранилище:"
+
+msgid "save a link"
+msgstr "сохранить ссылку"
+
+msgid "back to home"
+msgstr "домой"
+
+msgid "toggle mark as read"
+msgstr "изменить отметку 'прочитано'"
+
+msgid "tweet"
+msgstr "твитнуть"
+
+msgid "email"
+msgstr "email"
+
+#, fuzzy
+msgid "this article appears wrong?"
+msgstr "Статья выглядит криво?"
+
+msgid "No link available here!"
+msgstr "Здесь нет ссылки!"
+
+#, fuzzy
+msgid "Poching a link"
+msgstr "Сохранение ссылок"
+
+#, fuzzy
+msgid "by filling this field"
+msgstr "Заполнением этого поля"
+
+#, fuzzy
+msgid "bookmarklet: drag & drop this link to your bookmarks bar"
+msgstr "Закладка: перетащите и опустите ссылку на панель закладок"
+
+msgid "your version"
+msgstr "Ваша версия"
+
+#, fuzzy
+msgid "latest stable version"
+msgstr "Последняя стабильная версия"
+
+#, fuzzy
+msgid "a more recent stable version is available."
+msgstr "Доступна новая стабильная версия."
+
+msgid "you are up to date."
+msgstr "у вас всё самое новое."
+
+msgid "latest dev version"
+msgstr "последняя версия в разработке"
+
+msgid "a more recent development version is available."
+msgstr "есть более свежая версия в разработке."
+
+#, fuzzy
+msgid "Please execute the import script locally, it can take a very long time."
+msgstr "Пожалуйста, выполните сценарий импорта локально - это может занять слишком много времени."
+
+#, fuzzy
+msgid "More infos in the official doc:"
+msgstr "Больше сведений в официальной документации:"
+
+#, fuzzy
+msgid "import from Pocket"
+msgstr "Импортировать из Pocket"
+
+#, fuzzy
+msgid "import from Readability"
+msgstr "Импортировать из Readability"
+
+#, fuzzy
+msgid "import from Instapaper"
+msgstr "Импортировать из Instapaper"
+
+msgid "Tags"
+msgstr "Теги"
 
 msgid "Untitled"
 msgstr "Без названия"
@@ -538,6 +521,23 @@ msgstr "Кэш очищен. "
 
 msgid "Oops, it seems you don't have PHP 5."
 msgstr "Упс, кажется у вас не установлен PHP 5."
+
+#~ msgid "You can poche a link by several methods:"
+#~ msgstr "Вы можете сохранить ссылку несколькими путями:"
+
+#~ msgid "poche it!"
+#~ msgstr "прикарманить!"
+
+#~ msgid "Updating poche"
+#~ msgstr "Обновления poche"
+
+#, fuzzy
+#~ msgid "Export your poche datas"
+#~ msgstr "Экспортировать данные poche"
+
+#, fuzzy
+#~ msgid "to export your poche datas."
+#~ msgstr "чтобы экспортировать свои записи из poche."
 
 #~ msgid "your poche version:"
 #~ msgstr "ваша версия poche:"

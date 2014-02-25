@@ -7,7 +7,7 @@
 {% block content %}
         <div id="config">
             <h2>{% trans "Poching a link" %}</h2>
-            <p>{% trans "You can poche a link by several methods:" %} (<a class="special" href="http://doc.wallabag.org" title="{% trans "read the documentation" %}">?</a>)</p>
+            <p>{% trans "There are several ways to save an article:" %} (<a class="special" href="http://doc.wallabag.org" title="{% trans "read the documentation" %}">?</a>)</p>
             <ul>
                 <li>firefox: <a href="https://bitbucket.org/jogaulupeau/poche/downloads/poche.xpi" title="download the firefox extension">{% trans "download the extension" %}</a></li>
                 <li>chrome: <a href="https://bitbucket.org/jogaulupeau/poche/downloads/poche.crx" title="download the chrome extension">{% trans "download the extension" %}</a></li>
@@ -16,13 +16,13 @@
                     <form method="get" action="index.php">
                         <label class="addurl" for="plainurl">{% trans "by filling this field" %}:</label>
                         <input required placeholder="Ex:mywebsite.com/article" class="addurl" id="plainurl" name="plainurl" type="url" />
-                        <input type="submit" value="{% trans "poche it!" %}" />
+                        <input type="submit" value="{% trans "bag it!" %}" />
                     </form>
                 </li>
-                <li>{% trans "bookmarklet: drag & drop this link to your bookmarks bar" %} <a id="bookmarklet" ondragend="this.click();" title="i am a bookmarklet, use me !" href="javascript:if(top['bookmarklet-url@wallabag.org']){top['bookmarklet-url@wallabag.org'];}else{(function(){var%20url%20=%20location.href%20||%20url;window.open('{{ poche_url }}?action=add&url='%20+%20btoa(url),'_self');})();void(0);}">{% trans "poche it!" %}</a></li>
+                <li>{% trans "bookmarklet: drag & drop this link to your bookmarks bar" %} <a id="bookmarklet" ondragend="this.click();" title="i am a bookmarklet, use me !" href="javascript:if(top['bookmarklet-url@wallabag.org']){top['bookmarklet-url@wallabag.org'];}else{(function(){var%20url%20=%20location.href%20||%20url;window.open('{{ poche_url }}?action=add&url='%20+%20btoa(url),'_self');})();void(0);}">{% trans "bag it!" %}</a></li>
             </ul>
 
-            <h2>{% trans "Updating poche" %}</h2>
+            <h2>{% trans "Upgrading wallabag" %}</h2>
             <ul>
                 <li>{% trans "your version" %} : <strong>{{ constant('POCHE') }}</strong></li>
                 <li>{% trans "latest stable version" %} : {{ prod }}. {% if compare_prod == -1 %}<strong><a href="http://wallabag.org/">{% trans "a more recent stable version is available." %}</a></strong>{% else %}{% trans "you are up to date." %}{% endif %}</li>
@@ -76,7 +76,7 @@
             <li><a href="./?import&amp;from=instapaper">{% trans "import from Instapaper" %}</a> {{ '(you must have a %s file on your server)'|trans|format(constant('INSTAPAPER_FILE')) }}</li>
             </ul>
 
-            <h2>{% trans "Export your poche datas" %}</h2>
-            <p><a href="./?export" target="_blank">{% trans "Click here" %}</a> {% trans "to export your poche datas." %}</p>
+            <h2>{% trans "Export your wallabag data" %}</h2>
+            <p><a href="./?export" target="_blank">{% trans "Click here" %}</a> {% trans "to export your wallabag data." %}</p>
         </div>
 {% endblock %}
