@@ -34,7 +34,7 @@ class Poche
       'pl_PL.utf8' => 'Polski',
       'ru_RU.utf8' => 'Pусский',
       'sl_SI.utf8' => 'Slovenščina',
-      'uk_UA.utf8' => 'Український',
+      'uk_UA.utf8' => 'Українська',
     );
     public function __construct()
     {
@@ -336,7 +336,7 @@ class Poche
         while (($language = readdir($handle)) !== false) {
             # Languages are stored in a directory, so all directory names are languages
             # @todo move language installation data to database
-            if (! is_dir(LOCALE . '/' . $language) || in_array($language, array('..', '.'))) {
+            if (! is_dir(LOCALE . '/' . $language) || in_array($language, array('..', '.', 'tools'))) {
                 continue;
             }
             
@@ -346,7 +346,7 @@ class Poche
                 $current = true;
             }
             
-            $languages[] = array('name' => $this->language_names[$language], 'value' => $language, 'current' => $current);
+            $languages[] = array('name' => (isset($this->language_names[$language]) ? $this->language_names[$language] : $language), 'value' => $language, 'current' => $current);
         }
         
         return $languages;
