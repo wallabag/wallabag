@@ -35,6 +35,7 @@ class Poche
       'ru_RU.utf8' => 'Pусский',
       'sl_SI.utf8' => 'Slovenščina',
       'uk_UA.utf8' => 'Українська',
+      'pt_BR.utf8' => 'Brasileiro',
     );
     public function __construct()
     {
