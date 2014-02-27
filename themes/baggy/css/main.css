@@ -177,7 +177,7 @@ h2:after {
   left: 0;
   text-align: right;
   background: #333;
-  padding-top: 9em;
+  padding-top: 9.5em;
   height: 100%;
   box-shadow:inset -4px 0 20px rgba(0,0,0,0.6);
   z-index: 10;
@@ -188,6 +188,7 @@ h2:after {
   position: relative;
   z-index: 10;
   padding-right: 5%;
+  padding-bottom: 1em;
 }
 
   #links a {
@@ -227,7 +228,7 @@ h2:after {
   #links li:last-child {
     position: fixed;
     bottom: 1em;
-    width: 10%;
+    width: 9em;
   }
 
   #links li:last-child a:before {
@@ -235,6 +236,61 @@ h2:after {
     position: relative;
     top: 2px;
   }
+
+
+#sort {
+    padding: 0;
+    list-style-type: none;
+    opacity: 0.5;
+    display: inline-block;
+}
+
+#sort li {
+    display: inline;
+    font-size: 0.9em;
+}
+
+#sort li + li {
+    margin-left: 10px;
+}
+
+#sort a {
+    padding: 2px 2px 0;
+    vertical-align: middle;
+}
+
+#sort img {
+    vertical-align: baseline;
+}
+#sort img:hover {
+    cursor: pointer;
+}
+
+#display-mode {
+  float: right;
+  vertical-align: middle;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  opacity: 0.5;
+}
+#listmode {
+  width: 16px;
+  display: inline-block;
+  text-decoration: none;
+}
+#listmode a:hover {
+  opacity: 1;
+}
+.tablemode {
+  background-image: url("../img/baggy/table.png");
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
+.listmode {
+  background-image: url("../img/baggy/list.png");
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
 
 
 /* ==========================================================================
@@ -248,7 +304,7 @@ h2:after {
 
 footer {
   text-align: right;
-  position: fixed;
+  position: relative;
   bottom: 0;
   right: 5em;
   color: #999;
@@ -731,6 +787,9 @@ blockquote {
     width: 100%;
     margin-left: 0;
   }
+  #display-mode {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 500px) {
@@ -819,5 +878,9 @@ blockquote {
   }
   #article_toolbar a {
     padding: 0.3em 0.4em 0.2em;
+  }
+  
+  #display-mode {
+    display: none;
   }
 }

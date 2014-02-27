@@ -18,6 +18,10 @@
             {% if entries is empty %}
             <div class="messages warning"><p>{% trans "No articles found." %}</p></div>
             {% else %}
+                 <div>
+                     {% include '_display-mode.twig' %}
+                     {% include '_sorting.twig' %}
+                 </div>
                 {% block pager %}
                     {% if nb_results > 1 %}
                 <div class="results">
