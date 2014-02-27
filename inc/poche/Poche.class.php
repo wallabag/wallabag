@@ -790,6 +790,8 @@ class Poche
         $currentConfig['language'] = $_POST['language'];
         
         $_SESSION['poche_user']->setConfig($currentConfig);
+
+        $this->emptyCache();
         
         Tools::redirect('?view=config');
     }
