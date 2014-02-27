@@ -442,6 +442,7 @@ footer a {
 
 .pagination {
   text-align: right;
+  margin-bottom:50px;
 }
 
 .nb-results {
