@@ -227,7 +227,7 @@ h2:after {
   #links li:last-child {
     position: fixed;
     bottom: 1em;
-    width: 10%;
+    width: 9em;
   }
 
   #links li:last-child a:before {
