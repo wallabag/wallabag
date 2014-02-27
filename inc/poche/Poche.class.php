@@ -750,6 +750,8 @@ class Poche
         $currentConfig['theme'] = $_POST['theme'];
         
         $_SESSION['poche_user']->setConfig($currentConfig);
+
+        $this->emptyCache();
         
         Tools::redirect('?view=config');
     }
