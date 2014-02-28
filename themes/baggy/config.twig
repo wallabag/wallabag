@@ -125,6 +125,14 @@
                 <li><a href="./?import&amp;from=poche">{% trans "Import from wallabag" %}</a> {{ '(after uploaded %s file)'|trans|format(constant('POCHE_FILE')) }}</li>
             </ul>
 
+            {% if token == '' %}
+                <p>{% trans "3. Your feed token is currently empty and must first be generated to fetch content. Click <a href='?feed&amp;action=generate'>here to generate it</a>." %}</p>
+            {% else %}
+            <p>3. {% trans "You can fetch content for imported items." %} <a href="cron.php?limit=10&amp;user-id={{ user_id }}&amp;token={{token}}" target="_blank">Click here</a> to fetch content for 10 articles.</p>
+            <p>{% trans "You can also create a cron task:" %}</p>
+            <pre><code>0 */4 * * *  cd /path/to/wallabag && php cron.php --limit=10 --user-id={{user_id}} --token={{token}} >/dev/null 2>&1</code></pre>
+            {% endif %}
+
             <h2>{% trans "Export your wallabag data" %}</h2>
             {% if constant('STORAGE') == 'sqlite' %}
             <p><a href="?download" target="_blank">{% trans "Click here" %}</a> {% trans "to download your database." %}</p>{% endif %}
