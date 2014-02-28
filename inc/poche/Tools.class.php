@@ -241,7 +241,6 @@ class Tools
         }
     }
 
-
     public static function download_db() {
         header('Content-Disposition: attachment; filename="poche.sqlite.gz"');
         self::status(200);

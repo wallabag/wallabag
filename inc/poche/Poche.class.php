@@ -1068,13 +1068,7 @@ class Poche
             Tools::redirect();
         }
         
-        $targetDefinition = 'IMPORT_' . strtoupper($from) . '_FILE';
-        $targetFile = constant($targetDefinition);
-        
-        if (! defined($targetDefinition)) {
-            $this->messages->add('e', _('Incomplete inc/poche/define.inc.php file, please define "' . $targetDefinition . '".'));
-            Tools::redirect();
-        }
+        $targetFile = CACHE . '/' . constant(strtoupper($from) . '_FILE');
         
         if (! file_exists($targetFile)) {
             $this->messages->add('e', _('Could not find required "' . $targetFile . '" import file.'));
@@ -1082,6 +1076,22 @@ class Poche
         }
         
         $this->$providers[$from]($targetFile);
+    }
+
+    public function uploadFile() {
+        if(isset($_FILES['file']))
+        { 
+            $dir = CACHE . '/';
+            $file = basename($_FILES['file']['name']);
+            if(move_uploaded_file($_FILES['file']['tmp_name'], $dir . $file)) {
+                $this->messages->add('s', _('File uploaded. You can now execute import.'));
+            }
+            else {
+                $this->messages->add('e', _('Error while importing file. Do you have access to upload it?'));
+            }
+        }
+        
+        Tools::redirect('?view=config');
     }
 
     /**

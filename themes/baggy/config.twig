@@ -103,13 +103,26 @@
             {% endif %}
 
             <h2>{% trans "Import" %}</h2>
-            <p>{% trans "Please execute the import script locally as it can take a very long time." %}</p>
-            <p>{% trans "More info in the official documentation:" %} <a href="http://doc.wallabag.org/doku.php?id=users:migrate">wallabag.org</a></p>
+            <p>1. {% trans "Select a file on your computer and upload it." %}</p>
+            <form method="post" action="?uploadfile" name="uploadfile" enctype="multipart/form-data">
+                <fieldset class="w500p">
+                    <div class="row">
+                        <label class="col w150p" for="file">{% trans "File:" %}</label>
+                        <input class="col" type="file" id="file" name="file" tabindex="4">
+                    </div>
+                    <div class="row mts txtcenter">
+                        <button class="bouton" type="submit" tabindex="4">{% trans "Upload" %}</button>
+                    </div>
+                </fieldset>
+                <input type="hidden" name="MAX_FILE_SIZE" value="1048576">
+                <input type="hidden" name="returnurl" value="{{ referer }}">
+            </form>
+            <p>2. {% trans "Then, click on the right link below." %}</p>
             <ul>
-                <li><a href="./?import&amp;from=pocket">{% trans "Import from Pocket" %}</a> {{ '(you must have a %s file on your server)'|trans|format(constant('POCKET_FILE')) }}</li>
-                <li><a href="./?import&amp;from=readability">{% trans "Import from Readability" %}</a> {{ '(you must have a %s file on your server)'|trans|format(constant('READABILITY_FILE')) }}</li>
-                <li><a href="./?import&amp;from=instapaper">{% trans "Import from Instapaper" %}</a> {{ '(you must have a %s file on your server)'|trans|format(constant('INSTAPAPER_FILE')) }}</li>
-                <li><a href="./?import&amp;from=poche">{% trans "Import from wallabag" %}</a> {{ '(you must have a %s file on your server)'|trans|format(constant('POCHE_FILE')) }}</li>
+                <li><a href="./?import&amp;from=pocket">{% trans "Import from Pocket" %}</a> {{ '(after uploaded %s file)'|trans|format(constant('POCKET_FILE')) }}</li>
+                <li><a href="./?import&amp;from=readability">{% trans "Import from Readability" %}</a> {{ '(after uploaded %s file)'|trans|format(constant('READABILITY_FILE')) }}</li>
+                <li><a href="./?import&amp;from=instapaper">{% trans "Import from Instapaper" %}</a> {{ '(after uploaded %s file)'|trans|format(constant('INSTAPAPER_FILE')) }}</li>
+                <li><a href="./?import&amp;from=poche">{% trans "Import from wallabag" %}</a> {{ '(after uploaded %s file)'|trans|format(constant('POCHE_FILE')) }}</li>
             </ul>
 
             <h2>{% trans "Export your wallabag data" %}</h2>
