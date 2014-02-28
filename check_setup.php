@@ -13,16 +13,6 @@ if (version_compare(PHP_VERSION, '5.4.0', '<')) {
     }
 }
 
-// Check PDO Sqlite
-if (! extension_loaded('pdo_sqlite')) {
-    die('PHP extension required: pdo_sqlite');
-}
-
-// Check ZIP
-if (! extension_loaded('zip')) {
-    die('PHP extension required: zip');
-}
-
 // Check if /cache is writeable
 if (! is_writable('cache')) {
     die('The directory "cache" must be writeable by your web server user');

@@ -225,7 +225,11 @@ php composer.phar install</code></pre></li>
                     <p>
                         Database engine:
                         <ul>
-                            <li><label for="sqlite">SQLite</label> <input name="db_engine" type="radio" checked="" id="sqlite" value="sqlite" /></li>
+                            <li><label for="sqlite">SQLite</label> <input name="db_engine" type="radio" checked="" id="sqlite" value="sqlite" />
+                            <div id="pdo_sqlite" class='messages error install'>
+                                <p>You have to enable <a href="http://php.net/manual/ref.pdo-sqlite.php">pdo_sqlite extension</a>.</p>
+                            </div>
+                            </li>
                             <li>
                                 <label for="mysql">MySQL</label> <input name="db_engine" type="radio" id="mysql" value="mysql" />
                                 <ul id="mysql_infos">
@@ -263,26 +267,49 @@ php composer.phar install</code></pre></li>
                     </p>
                 </fieldset>
 
-                <input type="submit" value="Install wallabag" name="install" />
+                <input type="submit" id="install_button" value="Install wallabag" name="install" />
             </form>
         </div>
         <script>
             $("#mysql_infos").hide();
             $("#pg_infos").hide();
+
+            <?php
+            if (!extension_loaded('pdo_sqlite')) : ?>
+            $("#install_button").hide();
+            <?php
+            else :
+            ?>
+            $("#pdo_sqlite").hide();
+            <?php
+            endif;
+            ?>
+
             $("input[name=db_engine]").click(function() 
                 {
                     if ( $("#mysql").prop('checked')) {
                         $("#mysql_infos").show();
                         $("#pg_infos").hide();
+                        $("#pdo_sqlite").hide();
+                        $("#install_button").show();
                     }
                     else {
                         if ( $("#postgresql").prop('checked')) {
                             $("#mysql_infos").hide();
                             $("#pg_infos").show();
+                            $("#pdo_sqlite").hide();
+                            $("#install_button").show();
                         }
                         else {
                             $("#mysql_infos").hide();
                             $("#pg_infos").hide();
+                            <?php
+                            if (!extension_loaded('pdo_sqlite')) : ?>
+                            $("#pdo_sqlite").show();
+                            $("#install_button").hide();
+                            <?php
+                            endif;
+                            ?>
                         }
                     }
                 });
