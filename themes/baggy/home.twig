@@ -32,7 +32,7 @@
                 {% endblock %}
             <div class="list-entries">
                     {% for entry in entries %}
-                <div id="entry-{{ entry.id|e }}" class="entrie">
+                <div id="entry-{{ entry.id|e }}" class="entrie"{% if listmode %} style="width:100%; margin-left:0;"{% endif %}>
                     <h2><a href="index.php?view=view&amp;id={{ entry.id|e }}">{{ entry.title|raw }}</a></h2>
                     {% if entry.content| getReadingTime > 0 %}
                         <div class="estimatedTime"><a target="_blank" title="{% trans "estimated reading time:" %} {{ entry.content| getReadingTime }} min" class="tool reading-time"><span>{% trans "estimated reading time :" %} {{ entry.content| getReadingTime }} min</span></div>

@@ -661,6 +661,7 @@ class Poche
                     'entries' => '',
                     'page_links' => '',
                     'nb_results' => '',
+                    'listmode' => (isset($_COOKIE['listmode']) ? true : false),
                 );
                 
                 //if id is given - we retrive entries by tag: id is tag id
