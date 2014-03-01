@@ -582,8 +582,12 @@ class Poche
         switch ($view)
         {
             case 'config':
-                $dev = trim($this->getPocheVersion('dev'));
-                $prod = trim($this->getPocheVersion('prod'));
+                $dev_infos = $this->getPocheVersion('dev');
+                $dev = trim($dev_infos[0]);
+                $check_time_dev = date('d-M-Y H:i', $dev_infos[1]);
+                $prod_infos = $this->getPocheVersion('prod');
+                $prod = trim($prod_infos[0]);
+                $check_time_prod = date('d-M-Y H:i', $prod_infos[1]);
                 $compare_dev = version_compare(POCHE, $dev);
                 $compare_prod = version_compare(POCHE, $prod);
                 $themes = $this->getInstalledThemes();
@@ -595,6 +599,8 @@ class Poche
                     'languages' => $languages,
                     'dev' => $dev,
                     'prod' => $prod,
+                    'check_time_dev' => $check_time_dev,
+                    'check_time_prod' => $check_time_prod,
                     'compare_dev' => $compare_dev,
                     'compare_prod' => $compare_prod,
                     'token' => $token,
@@ -1105,15 +1111,17 @@ class Poche
     private function getPocheVersion($which = 'prod')
     {
         $cache_file = CACHE . '/' . $which;
+        $check_time = time();
 
         # checks if the cached version file exists
         if (file_exists($cache_file) && (filemtime($cache_file) > (time() - 86400 ))) {
            $version = file_get_contents($cache_file);
+           $check_time = filemtime($cache_file);
         } else {
            $version = file_get_contents('http://static.wallabag.org/versions/' . $which);
            file_put_contents($cache_file, $version, LOCK_EX);
         }
-        return $version;
+        return array($version, $check_time);
     }
 
     public function generateToken()
