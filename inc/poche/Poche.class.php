@@ -1147,8 +1147,9 @@ class Poche
         $feed = new FeedWriter(RSS2);
         $feed->setTitle('wallabag — ' . $type . ' feed');
         $feed->setLink(Tools::getPocheUrl());
-        $feed->setChannelElement('updated', date(DATE_RSS , time()));
-        $feed->setChannelElement('author', 'wallabag');
+        $feed->setChannelElement('pubDate', date(DATE_RSS , time()));
+        $feed->setChannelElement('generator', 'wallabag');
+        $feed->setDescription('wallabag ' . $type . ' elements');
 
         if ($type == 'tag') {
             $entries = $this->store->retrieveEntriesByTag($tag_id, $user_id);
