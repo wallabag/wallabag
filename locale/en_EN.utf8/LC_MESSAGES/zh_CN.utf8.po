@@ -3,166 +3,165 @@ msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
-"Last-Translator: Nicolas Lœuillet <nicolas.loeuillet@gmail.com>\n"
+"Last-Translator: manhere <manhere@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.4\n"
 
 msgid "config"
-msgstr "config"
+msgstr "设置"
 
 msgid "Poching a link"
-msgstr "Poching a link"
+msgstr "转换链接"
 
 msgid "read the documentation"
-msgstr "read the documentation"
+msgstr "阅读文档"
 
 msgid "by filling this field"
-msgstr "by filling this field"
+msgstr "填写该表单"
 
 msgid "poche it!"
-msgstr "poche it!"
+msgstr "转之!"
 
 msgid "Updating poche"
-msgstr "Updating poche"
+msgstr "升级poche"
 
 msgid "your version"
-msgstr "your version"
+msgstr "当前版本"
 
 msgid "latest stable version"
-msgstr "latest stable version"
+msgstr "最新版本"
 
 msgid "a more recent stable version is available."
-msgstr "a more recent stable version is available."
+msgstr "检测到新版本"
 
 msgid "you are up to date."
-msgstr "you are up to date."
+msgstr "当前是最新版本"
 
 msgid "latest dev version"
-msgstr "latest dev version"
+msgstr "最新开发版本"
 
 msgid "a more recent development version is available."
-msgstr "a more recent development version is available."
+msgstr "检测到有新的开发版本."
 
 msgid "Change your password"
-msgstr "Change your password"
+msgstr "修改密码"
 
 msgid "New password:"
-msgstr "New password:"
+msgstr "新密码:"
 
 msgid "Password"
-msgstr "Password"
+msgstr "原密码"
 
 msgid "Repeat your new password:"
-msgstr "Repeat your new password:"
+msgstr "确认新密码:"
 
 msgid "Update"
-msgstr "Update"
+msgstr "更新"
 
 msgid "Import"
-msgstr "Import"
+msgstr "导入"
 
 msgid "Please execute the import script locally, it can take a very long time."
 msgstr ""
-"Please execute the import script locally, it can take a very long time."
+"请本地执行导入脚本，这将会花费较长时间."
 
 msgid "More info in the official doc:"
-msgstr "More info in the official doc:"
+msgstr "更多详情尽在官方文档:"
 
 msgid "import from Pocket"
-msgstr "import from Pocket"
+msgstr "从移动端导入"
 
 msgid "import from Readability"
-msgstr "import from Readability"
+msgstr "从Readability导入"
 
 msgid "import from Instapaper"
-msgstr "import from Instapaper"
+msgstr "从Instapaper导入"
 
 msgid "Export your poche data"
-msgstr "Export your poche data"
+msgstr "导出数据"
 
 msgid "Click here"
-msgstr "Click here"
+msgstr "点此开始"
 
 msgid "to export your poche data."
-msgstr "to export your poche data."
+msgstr "导出您的数据."
 
 msgid "back to home"
-msgstr "back to home"
+msgstr "返回首页"
 
 msgid "installation"
-msgstr "installation"
+msgstr "安装"
 
 msgid "install your poche"
-msgstr "install your poche"
+msgstr "安装poche"
 
 msgid ""
 "poche is still not installed. Please fill the below form to install it. "
 "Don't hesitate to <a href='http://doc.inthepoche.com'>read the documentation "
 "on poche website</a>."
 msgstr ""
-"poche is still not installed. Please fill the below form to install it. "
-"Don't hesitate to <a href='http://doc.inthepoche.com'>read the documentation "
-"on poche website</a>."
+"poche尚未安装，请填写以下表单完成安装. "
+"如需帮助请点击阅读 <a href='http://doc.inthepoche.com'>read the documentation "
+"官方文档</a>."
 
 msgid "Login"
-msgstr "Login"
+msgstr "登入"
 
 msgid "Repeat your password"
-msgstr "Repeat your password"
+msgstr "请再次输入密码"
 
 msgid "Install"
-msgstr "Install"
+msgstr "安装"
 
 msgid "back to top"
-msgstr "back to top"
+msgstr "返回顶部"
 
 msgid "favoris"
-msgstr "favoris"
+msgstr "喜欢"
 
 msgid "archive"
-msgstr "archive"
+msgstr "归档"
 
 msgid "unread"
-msgstr "unread"
+msgstr "未读"
 
 msgid "by date asc"
-msgstr "by date asc"
+msgstr "最旧在前"
 
 msgid "by date"
-msgstr "by date"
+msgstr "按日期"
 
 msgid "by date desc"
-msgstr "by date desc"
+msgstr "最新在前"
 
 msgid "by title asc"
-msgstr "by title asc"
+msgstr "标题正序"
 
 msgid "by title"
-msgstr "by title"
+msgstr "按标题"
 
 msgid "by title desc"
-msgstr "by title desc"
+msgstr "标题逆序"
 
 msgid "No link available here!"
-msgstr "No link available here!"
+msgstr "暂无链接!"
 
 msgid "toggle mark as read"
-msgstr "toggle mark as read"
+msgstr "标记为已读"
 
 msgid "toggle favorite"
-msgstr "toggle favorite"
+msgstr "标记为喜欢"
 
 msgid "delete"
-msgstr "delete"
+msgstr "删除"
 
 msgid "original"
-msgstr "original"
+msgstr "来源"
 
 msgid "results"
-msgstr "results"
+msgstr "结果"
 
 msgid "tweet"
 msgstr "tweet"
@@ -177,16 +176,16 @@ msgid "flattr"
 msgstr "flattr"
 
 msgid "this article appears wrong?"
-msgstr "this article appears wrong?"
+msgstr "该文章不正常?"
 
 msgid "create an issue"
-msgstr "create an issue"
+msgstr "创建反馈"
 
 msgid "or"
 msgstr "or"
 
 msgid "contact us by mail"
-msgstr "contact us by mail"
+msgstr "邮件联系我们"
 
 msgid "plop"
 msgstr "plop"
@@ -198,31 +197,31 @@ msgid "favorites"
 msgstr "favorites"
 
 msgid "logout"
-msgstr "logout"
+msgstr "注销"
 
 msgid "powered by"
 msgstr "powered by"
 
 msgid "debug mode is on so cache is off."
-msgstr "debug mode is on so cache is off."
+msgstr "调试模式开(缓存关)"
 
 msgid "your poche version:"
-msgstr "your poche version:"
+msgstr "您的poche版本:"
 
 msgid "storage:"
-msgstr "storage:"
+msgstr "存储:"
 
 msgid "login to your poche"
-msgstr "login to your poche"
+msgstr "登入"
 
 msgid "you are in demo mode, some features may be disabled."
-msgstr "you are in demo mode, some features may be disabled."
+msgstr "演示模式，部分特性禁用."
 
 msgid "Stay signed in"
-msgstr "Stay signed in"
+msgstr "保持登入"
 
 msgid "(Do not check on public computers)"
-msgstr "(Do not check on public computers)"
+msgstr "(公共场所请勿勾选)"
 
 msgid "Sign in"
-msgstr "Sign in"
+msgstr "登入"
