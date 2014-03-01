@@ -203,7 +203,7 @@ msgid "powered by"
 msgstr "powered by"
 
 msgid "debug mode is on so cache is off."
-msgstr "d调试模式开(缓存关)"
+msgstr "调试模式开(缓存关)"
 
 msgid "your poche version:"
 msgstr "您的poche版本:"
