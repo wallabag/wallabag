@@ -11,7 +11,6 @@
 define ('POCHE', '1.5.3');
 require 'check_setup.php';
 require_once 'inc/poche/global.inc.php';
-session_start(); 
 
 # Start Poche
 $poche = new Poche();
