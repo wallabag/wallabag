@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wallabag\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-01 13:18+0100\n"
+"POT-Creation-Date: 2014-03-04 11:48+0100\n"
 "PO-Revision-Date: \n"
-"Last-Translator: \n"
+"Last-Translator: Kevin Meyer <wallabag@kevin-meyer.de>\n"
 "Language-Team: \n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -65,11 +65,17 @@ msgstr "Eine neuere stabile Version ist verfügbar."
 msgid "You are up to date."
 msgstr "Du bist auf den neuesten Stand."
 
+msgid "Last check:"
+msgstr "Zuletzt geprüft:"
+
 msgid "Latest dev version"
 msgstr "Neuste Entwicklungsversion"
 
 msgid "A more recent development version is available."
 msgstr "Eine neuere Entwicklungsversion ist verfügbar."
+
+msgid "You can clear cache to check the latest release."
+msgstr "Leere den Cache um die neueste Version zu prüfen."
 
 msgid "Feeds"
 msgstr "Feeds"
@@ -176,9 +182,6 @@ msgstr "Cache"
 msgid "to delete cache."
 msgstr "um den Cache zu löschen."
 
-msgid "Tags"
-msgstr "Tags"
-
 msgid "by date asc"
 msgstr "nach Datum aufsteigend"
 
@@ -220,7 +223,13 @@ msgid "logout"
 msgstr "Logout"
 
 msgid "return home"
-msgstr ""
+msgstr "Zurück zum Start"
+
+msgid "You can enter multiple tags, separated by commas."
+msgstr "Du kannst mehrere Tags, durch Kommata getrennt, eingeben."
+
+msgid "return to article"
+msgstr "zurück zum Artikel"
 
 msgid "save link!"
 msgstr "Link speichern!"
@@ -237,6 +246,45 @@ msgstr "Deine wallabag Version"
 msgid "storage:"
 msgstr "Speicher:"
 
+msgid "Back to top"
+msgstr "Nach Oben"
+
+msgid "original"
+msgstr "Original"
+
+msgid "Mark as read"
+msgstr "Als gelesen markieren"
+
+msgid "Toggle mark as read"
+msgstr "Als gelesen markieren"
+
+msgid "Favorite"
+msgstr "Favoriten"
+
+msgid "Toggle favorite"
+msgstr "Favorit"
+
+msgid "Delete"
+msgstr "Löschen"
+
+msgid "Tweet"
+msgstr "Twittern"
+
+msgid "Email"
+msgstr "per E-Mail senden"
+
+msgid "shaarli"
+msgstr "Shaarli"
+
+msgid "flattr"
+msgstr "flattr"
+
+msgid "Does this article appear wrong?"
+msgstr "Erscheint dieser Artikel falsch?"
+
+msgid "Edit tags"
+msgstr "Tags bearbeiten"
+
 msgid "unread"
 msgstr "ungelesen"
 
@@ -252,18 +300,11 @@ msgstr "geschätzte Lesezeit:"
 msgid "estimated reading time :"
 msgstr "geschätzte Lesezeit:"
 
-#, fuzzy
-msgid "Toggle mark as read"
-msgstr "Als gelesen markieren"
-
 msgid "toggle favorite"
 msgstr "Favorit"
 
 msgid "delete"
 msgstr "Löschen"
-
-msgid "original"
-msgstr "Original"
 
 msgid "Mark all the entries as read"
 msgstr "Markiere alle als gelesen"
@@ -367,62 +408,21 @@ msgstr "wallabag, ein Später-Lesen Open Source System"
 msgid "login failed: user doesn't exist"
 msgstr "Anmeldung fehlgeschlagen: Benutzer existiert nicht"
 
-#~ msgid "You can enter multiple tags, separated by commas."
-#~ msgstr "Du kannst mehrere Tags, durch Kommata getrennt, eingeben."
-
-#~ msgid "return to article"
-#~ msgstr "zurück zum Artikel"
+#, fuzzy
+#~ msgid "favoris"
+#~ msgstr "Favoriten"
 
 #~ msgid "mark all the entries as read"
 #~ msgstr "Markiere alle als gelesen"
 
-#, fuzzy
-#~ msgid "Back to top"
-#~ msgstr "Nach Oben"
-
-#, fuzzy
-#~ msgid "Mark as read"
-#~ msgstr "Als gelesen markieren"
-
-#, fuzzy
-#~ msgid "Favorite"
-#~ msgstr "Favoriten"
-
-#, fuzzy
-#~ msgid "Toggle favorite"
-#~ msgstr "Favorit"
-
-#, fuzzy
-#~ msgid "Delete"
-#~ msgstr "Löschen"
-
-#, fuzzy
-#~ msgid "Tweet"
-#~ msgstr "Twittern"
-
-#, fuzzy
-#~ msgid "Email"
-#~ msgstr "senden per E-Mail"
-
-#~ msgid "shaarli"
-#~ msgstr "Shaarli"
-
-#~ msgid "flattr"
-#~ msgstr "flattr"
-
-#, fuzzy
-#~ msgid "Does this article appear wrong?"
-#~ msgstr "dieser Artikel erscheint falsch?"
-
-#~ msgid "Edit tags"
-#~ msgstr "Tags bearbeiten"
+#~ msgid "Return home"
+#~ msgstr "Zurück zum Start"
 
 #~ msgid "tags:"
 #~ msgstr "Tags:"
 
-#, fuzzy
 #~ msgid "login to your wallabag"
-#~ msgstr "Bei Poche anmelden"
+#~ msgstr "Bei wallabag anmelden"
 
 #~ msgid "you are in demo mode, some features may be disabled."
 #~ msgstr ""
@@ -441,6 +441,9 @@ msgstr "Anmeldung fehlgeschlagen: Benutzer existiert nicht"
 #~ msgid "plop"
 #~ msgstr "plop"
 
+#~ msgid "Tags"
+#~ msgstr "Tags"
+
 #~ msgid "Login to wallabag"
 #~ msgstr "Bei wallabag anmelden"
 
@@ -453,20 +456,18 @@ msgstr "Anmeldung fehlgeschlagen: Benutzer existiert nicht"
 #~ msgid "installation"
 #~ msgstr "Installieren"
 
-#, fuzzy
 #~ msgid "install your wallabag"
-#~ msgstr "Installiere dein Poche"
+#~ msgstr "Installiere deine wallabag"
 
-#, fuzzy
 #~ msgid ""
 #~ "wallabag is still not installed. Please fill the below form to install "
 #~ "it. Don't hesitate to <a href='http://doc.wallabag.org/'>read the "
 #~ "documentation on wallabag website</a>."
 #~ msgstr ""
-#~ "Poche ist noch nicht installiert. Bitte fülle die Felder unten aus, um "
-#~ "die Installation durchzuführen. Zögere nicht, <a href='http://inthepoche."
-#~ "com/doc'>die Dokumentation auf der Website von Poche zu lesen falls du "
-#~ "Probleme haben solltest."
+#~ "wallabag ist noch nicht installiert. Bitte fülle die Felder unten aus, um "
+#~ "die Installation durchzuführen. Zögere nicht, <a href='http://doc."
+#~ "wallabag.org/'>die Dokumentation auf der Website von wallabag zu lesen, "
+#~ "falls du Probleme haben solltest."
 
 #~ msgid "Repeat your password"
 #~ msgstr "Wiederhole dein Passwort"
@@ -531,7 +532,6 @@ msgstr "Anmeldung fehlgeschlagen: Benutzer existiert nicht"
 #~ msgstr ""
 #~ "Bitte führe das Import Script lokal aus, dies kann eine Weile dauern."
 
-#, fuzzy
 #~ msgid "More infos in the official doc:"
 #~ msgstr "Mehr Informationen in der offiziellen Dokumentation:"
 
