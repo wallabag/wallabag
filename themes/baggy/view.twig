@@ -29,4 +29,23 @@
                 {{ content | raw }}
             </article>
         </div>
+        <script src="{{ poche_url }}/themes/{{theme}}/js/restoreScroll.js"></script>
+        <script type="text/javascript">
+        $(document).ready(function() {
+
+            $(window).scroll(function(e){
+                var scrollTop = $(window).scrollTop();
+                var docHeight = $(document).height();
+                var scrollPercent = (scrollTop) / (docHeight);
+                var scrollPercentRounded = Math.round(scrollPercent*100)/100;
+                savePercent({{ entry.id|e }}, scrollPercentRounded);
+            });
+
+            retrievePercent({{ entry.id|e }});
+
+            $(window).resize(function(){
+                retrievePercent({{ entry.id|e }});
+            });
+        });
+        </script>
 {% endblock %}
