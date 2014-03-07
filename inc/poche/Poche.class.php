@@ -362,60 +362,6 @@ class Poche
         );
     }
 
-    protected function getPageContent(Url $url)
-    {
-        // Saving and clearing context
-        $REAL = array();
-        foreach( $GLOBALS as $key => $value ) {
-            if( $key != 'GLOBALS' && $key != '_SESSION' && $key != 'HTTP_SESSION_VARS' ) {
-                $GLOBALS[$key] = array();
-                $REAL[$key] = $value;
-            }
-        }
-        // Saving and clearing session
-        $REAL_SESSION = array();
-        foreach( $_SESSION as $key => $value ) {
-            $REAL_SESSION[$key] = $value;
-            unset($_SESSION[$key]);
-        }
-
-        // Running code in different context
-        $scope = function() {
-            extract( func_get_arg(1) );
-            $_GET = $_REQUEST = array(
-                        "url" => $url->getUrl(),
-                        "max" => 5,
-                        "links" => "preserve",
-                        "exc" => "",
-                        "format" => "json",
-                        "submit" => "Create Feed"
-            );
-            ob_start();
-            require func_get_arg(0);
-            $json = ob_get_flush();
-            return $json;
-        };
-        $json = $scope( "inc/3rdparty/makefulltextfeed.php", array("url" => $url) );
-
-        // Clearing and restoring context
-        foreach( $GLOBALS as $key => $value ) {
-            if( $key != "GLOBALS" && $key != "_SESSION" ) {
-                unset($GLOBALS[$key]);
-            }
-        }
-        foreach( $REAL as $key => $value ) {
-            $GLOBALS[$key] = $value;
-        }
-        // Clearing and restoring session
-        foreach( $_SESSION as $key => $value ) {
-            unset($_SESSION[$key]);
-        }
-        foreach( $REAL_SESSION as $key => $value ) {
-            $_SESSION[$key] = $value;
-        }
-        return json_decode($json, true);
-    }
-
     /**
      * Call action (mark as fav, archive, delete, etc.)
      */
@@ -424,15 +370,21 @@ class Poche
         switch ($action)
         {
             case 'add':
-                $content = $this->getPageContent($url);
-                $title = ($content['rss']['channel']['item']['title'] != '') ? $content['rss']['channel']['item']['title'] : _('Untitled');
-                $body = $content['rss']['channel']['item']['description'];
+                if (!$import) {
+                    $content = Tools::getPageContent($url);
+                    $title = ($content['rss']['channel']['item']['title'] != '') ? $content['rss']['channel']['item']['title'] : _('Untitled');
+                    $body = $content['rss']['channel']['item']['description'];
 
-                // clean content from prevent xss attack
-                $config = HTMLPurifier_Config::createDefault();
-                $purifier = new HTMLPurifier($config);
-                $title = $purifier->purify($title);
-                $body = $purifier->purify($body);
+                    // clean content from prevent xss attack
+                    $config = HTMLPurifier_Config::createDefault();
+                    $purifier = new HTMLPurifier($config);
+                    $title = $purifier->purify($title);
+                    $body = $purifier->purify($body);
+                }
+                else {
+                    $title = '';
+                    $body = '';
+                }
 
                 //search for possible duplicate if not in import mode
                 if (!$import) {
@@ -903,7 +855,7 @@ class Poche
             # the second <ol> is for read links
             $read = 1;
         }
-        $this->messages->add('s', _('import from instapaper completed'));
+        $this->messages->add('s', _('import from instapaper completed. You have to execute the cron to fetch content.'));
         Tools::logm('import from instapaper completed');
         Tools::redirect();
     }
@@ -947,7 +899,7 @@ class Poche
             # the second <ul> is for read links
             $read = 1;
         }
-        $this->messages->add('s', _('import from pocket completed'));
+        $this->messages->add('s', _('import from pocket completed. You have to execute the cron to fetch content.'));
         Tools::logm('import from pocket completed');
         Tools::redirect();
     }
@@ -1003,7 +955,7 @@ class Poche
                 }
             }
         }
-        $this->messages->add('s', _('import from Readability completed. ' . $count . ' new links.'));
+        $this->messages->add('s', _('import from Readability completed. You have to execute the cron to fetch content.'));
         Tools::logm('import from Readability completed');
         Tools::redirect();
     }
@@ -1049,7 +1001,7 @@ class Poche
             }
             
         }
-        $this->messages->add('s', _('import from Poche completed. ' . $count . ' new links.'));
+        $this->messages->add('s', _('import from Poche completed. You have to execute the cron to fetch content.'));
         Tools::logm('import from Poche completed');
         Tools::redirect();
     }
@@ -1074,13 +1026,7 @@ class Poche
             Tools::redirect();
         }
         
-        $targetDefinition = 'IMPORT_' . strtoupper($from) . '_FILE';
-        $targetFile = constant($targetDefinition);
-        
-        if (! defined($targetDefinition)) {
-            $this->messages->add('e', _('Incomplete inc/poche/define.inc.php file, please define "' . $targetDefinition . '".'));
-            Tools::redirect();
-        }
+        $targetFile = CACHE . '/' . constant(strtoupper($from) . '_FILE');
         
         if (! file_exists($targetFile)) {
             $this->messages->add('e', _('Could not find required "' . $targetFile . '" import file.'));
@@ -1088,6 +1034,22 @@ class Poche
         }
         
         $this->$providers[$from]($targetFile);
+    }
+
+    public function uploadFile() {
+        if(isset($_FILES['file']))
+        { 
+            $dir = CACHE . '/';
+            $file = basename($_FILES['file']['name']);
+            if(move_uploaded_file($_FILES['file']['tmp_name'], $dir . $file)) {
+                $this->messages->add('s', _('File uploaded. You can now execute import.'));
+            }
+            else {
+                $this->messages->add('e', _('Error while importing file. Do you have access to upload it?'));
+            }
+        }
+        
+        Tools::redirect('?view=config');
     }
 
     /**
