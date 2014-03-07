@@ -377,6 +377,7 @@ class Poche
 
                     // clean content from prevent xss attack
                     $config = HTMLPurifier_Config::createDefault();
+                    $config->set('Cache.SerializerPath', CACHE);
                     $purifier = new HTMLPurifier($config);
                     $title = $purifier->purify($title);
                     $body = $purifier->purify($body);
