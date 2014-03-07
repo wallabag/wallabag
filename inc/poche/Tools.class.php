@@ -263,10 +263,12 @@ class Tools
             }
         }
         // Saving and clearing session
-        $REAL_SESSION = array();
-        foreach( $_SESSION as $key => $value ) {
-            $REAL_SESSION[$key] = $value;
-            unset($_SESSION[$key]);
+        if ( isset($_SESSION) ) {
+            $REAL_SESSION = array();
+            foreach( $_SESSION as $key => $value ) {
+                $REAL_SESSION[$key] = $value;
+                unset($_SESSION[$key]);
+            }
         }
 
         // Running code in different context
@@ -282,7 +284,8 @@ class Tools
             );
             ob_start();
             require func_get_arg(0);
-            $json = ob_get_flush();
+            $json = ob_get_contents();
+            ob_end_clean();
             return $json;
         };
         $json = $scope( "inc/3rdparty/makefulltextfeed.php", array("url" => $url) );
@@ -297,12 +300,15 @@ class Tools
             $GLOBALS[$key] = $value;
         }
         // Clearing and restoring session
-        foreach( $_SESSION as $key => $value ) {
-            unset($_SESSION[$key]);
+        if ( isset($REAL_SESSION) ) {
+            foreach( $_SESSION as $key => $value ) {
+                unset($_SESSION[$key]);
+            }
+            foreach( $REAL_SESSION as $key => $value ) {
+                $_SESSION[$key] = $value;
+            }
         }
-        foreach( $REAL_SESSION as $key => $value ) {
-            $_SESSION[$key] = $value;
-        }
+
         return json_decode($json, true);
     }
 }
