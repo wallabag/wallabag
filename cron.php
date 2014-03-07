@@ -1,5 +1,5 @@
 <?php
-
+error_reporting(E_ALL);
 include_once 'inc/poche/global.inc.php';
 include_once 'inc/poche/config.inc.php';
 
@@ -43,10 +43,10 @@ foreach ($items as $item) {
     $body = $content['rss']['channel']['item']['description'];
 
     // // clean content from prevent xss attack
-    // $config = HTMLPurifier_Config::createDefault();
-    // $purifier = new HTMLPurifier($config);
-    // $title = $purifier->purify($title);
-    // $body = $purifier->purify($body);
+    $config = HTMLPurifier_Config::createDefault();
+    $purifier = new HTMLPurifier($config);
+    $title = $purifier->purify($title);
+    $body = $purifier->purify($body);
 
 
     $store->updateContentAndTitle($item['id'], $title, $body, $user_id);
