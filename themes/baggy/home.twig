@@ -30,7 +30,7 @@
                 </div>
                     {% endif %}
                 {% endblock %}
-            <div class="list-entries">
+            <div id="list-entries" class="list-entries">
                     {% for entry in entries %}
                 <div id="entry-{{ entry.id|e }}" class="entrie"{% if listmode %} style="width:100%; margin-left:0;"{% endif %}>
                     <h2><a href="index.php?view=view&amp;id={{ entry.id|e }}">{{ entry.title|raw }}</a></h2>
