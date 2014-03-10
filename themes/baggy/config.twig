@@ -44,7 +44,7 @@
             <p>{% trans "Your user id:" %} <strong>{{user_id}}</strong></p>
             <p>{% trans "You can regenerate your token: <a href='?feed&amp;action=generate'>generate!</a>." %}</p>
             {% endif %}
-            
+
             <h2>{% trans "Change your theme" %}</h2>
             <form method="post" action="?updatetheme" name="changethemeform">
                 <fieldset class="w500p inline">
@@ -105,7 +105,8 @@
             {% endif %}
 
             <h2>{% trans "Import" %}</h2>
-            <p>1. {% trans "Select a file on your computer and upload it." %}</p>
+            <p>{% trans "Importing from other services can be quite long, and webservers default configuration often prevents long scripts execution time, so it must be done in multiple parts." %}</p>
+            <p>1. {% trans "First, select the export file on your computer and upload it." %}</p>
             <form method="post" action="?uploadfile" name="uploadfile" enctype="multipart/form-data">
                 <fieldset class="w500p">
                     <div class="row">
@@ -130,8 +131,8 @@
             {% if token == '' %}
                 <p>{% trans "3. Your feed token is currently empty and must first be generated to fetch content. Click <a href='?feed&amp;action=generate'>here to generate it</a>." %}</p>
             {% else %}
-            <p>3. {% trans "You can fetch content for imported items." %} <a href="cron.php?limit=10&amp;user-id={{ user_id }}&amp;token={{token}}" target="_blank">Click here</a> to fetch content for 10 articles.</p>
-            <p>{% trans "You can also create a cron task:" %}</p>
+            <p>3. {% trans "Finaly, you have to fetch content for imported items." %} <a href="cron.php?limit=10&amp;user-id={{ user_id }}&amp;token={{token}}" target="_blank">{% trans "Click here" %}</a> {% trans "to fetch content for 10 articles" %}.</p>
+            <p>{% trans "If you have console access to your server, you can also create a cron task:" %}</p>
             <pre><code>0 */4 * * *  cd /path/to/wallabag && php cron.php --limit=10 --user-id={{user_id}} --token={{token}} >/dev/null 2>&1</code></pre>
             {% endif %}
 
