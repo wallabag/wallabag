@@ -1109,6 +1109,10 @@ class Poche
         $allowed_types = array('home', 'fav', 'archive', 'tag');
         $config = $this->store->getConfigUser($user_id);
 
+        if ($config == null) {
+            die(_('User with this id (' . $user_id . ') does not exist.'));
+        }
+
         if (!in_array($type, $allowed_types) ||
             $token != $config['token']) {
             die(_('Uh, there is a problem while generating feeds.'));
