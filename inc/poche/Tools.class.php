@@ -311,4 +311,14 @@ class Tools
 
         return json_decode($json, true);
     }
+
+    /**
+     * Returns whether we handle an AJAX (XMLHttpRequest) request.
+     * @return boolean whether we handle an AJAX (XMLHttpRequest) request.
+     */
+    public static function isAjaxRequest()
+    {
+      return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH']==='XMLHttpRequest';
+    }
+
 }
