@@ -389,12 +389,15 @@ class Database {
         return $this->getHandle()->lastInsertId($column);
     }
 
-    public function retrieveAllTags($user_id) {
-        $sql = "SELECT DISTINCT tags.* FROM tags
+    public function retrieveAllTags($user_id, $term = null) {
+        $sql = "SELECT DISTINCT tags.*, count(entries.id) AS entriescount FROM tags
           LEFT JOIN tags_entries ON tags_entries.tag_id=tags.id
           LEFT JOIN entries ON tags_entries.entry_id=entries.id
-          WHERE entries.content <> '' AND entries.user_id=?";
-        $query = $this->executeQuery($sql, array($user_id));
+          WHERE entries.content <> '' AND entries.user_id=?
+            ". (($term) ? "AND lower(tags.value) LIKE ?" : '') ."
+          GROUP BY tags.id, tags.value
+          ORDER BY tags.value";
+        $query = $this->executeQuery($sql, (($term)? array($user_id, strtolower('%'.$term.'%')) : array($user_id) ));
         $tags = $query->fetchAll();
 
         return $tags;

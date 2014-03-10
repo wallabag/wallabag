@@ -347,3 +347,11 @@ a.reading-time span {
     margin-left: -30px;
 }
 
+.two-column {
+  display: block;
+  width: 50%;
+  paddig-right: 20px;
+  float: left;
+  vertical-align: top;
+}
+

@@ -488,25 +488,33 @@ class Poche
                     Tools::logm('error : article not found');
                     Tools::redirect();
                 }
+                //get all already set tags to preven duplicates
+                $already_set_tags = array();
+                $entry_tags = $this->store->retrieveTagsByEntry($entry_id);
+                foreach ($entry_tags as $tag) {
+                  $already_set_tags[] = $tag['value'];
+                }
                 foreach($tags as $key => $tag_value) {
                     $value = trim($tag_value);
-                    $tag = $this->store->retrieveTagByValue($value);
+                    if ($value && !in_array($value, $already_set_tags)) {
+                      $tag = $this->store->retrieveTagByValue($value);
 
-                    if (is_null($tag)) {
-                        # we create the tag
-                        $tag = $this->store->createTag($value);
-                        $sequence = '';
-                        if (STORAGE == 'postgres') {
-                            $sequence = 'tags_id_seq';
-                        }
-                        $tag_id = $this->store->getLastId($sequence);
-                    }
-                    else {
-                        $tag_id = $tag['id'];
-                    }
+                      if (is_null($tag)) {
+                          # we create the tag
+                          $tag = $this->store->createTag($value);
+                          $sequence = '';
+                          if (STORAGE == 'postgres') {
+                              $sequence = 'tags_id_seq';
+                          }
+                          $tag_id = $this->store->getLastId($sequence);
+                      }
+                      else {
+                          $tag_id = $tag['id'];
+                      }
 
-                    # we assign the tag to the article
-                    $this->store->setTagToEntry($tag_id, $entry_id);
+                      # we assign the tag to the article
+                      $this->store->setTagToEntry($tag_id, $entry_id);
+                    }
                 }
                 if(!$import) {
                     Tools::redirect();
@@ -579,7 +587,17 @@ class Poche
                 break;
             case 'tags':
                 $token = $this->user->getConfigValue('token');
-                $tags = $this->store->retrieveAllTags($this->user->getId());
+                //if term is set - search tags for this term
+                $term = Tools::checkVar('term');
+                $tags = $this->store->retrieveAllTags($this->user->getId(), $term);
+                if (Tools::isAjaxRequest()) {
+                  $result = array();
+                  foreach ($tags as $tag) {
+                    $result[] = $tag['value'];
+                  }
+                  echo json_encode($result);
+                  exit;
+                }
                 $tpl_vars = array(
                     'token' => $token,
                     'user_id' => $this->user->getId(),
