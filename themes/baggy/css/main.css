@@ -534,32 +534,78 @@ footer a {
   display: none;
 }
 
+/* ==========================================================================
+  2.1 = "save a link" popup div related styles
+  ========================================================================== */
+
 #bagit-form {
-  background: rgba(0,0,0,0.8);
-  position: fixed;
+  background: rgba(0,0,0,0.5);
+  position: absolute;
   top: 0;
   left: 10em;
   z-index: 20;
   height: 100%;
   width: 100%;
   margin: 0;
+  margin-top: -30%;
   padding: 2em;
   display: none;
+  border-left: 1px #EEE solid;
 }
 
 #bagit-form form {
   background: #FFF;
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 0;
+  left: 0;
   z-index: 20;
   border: 10px solid #000;
-  width: 600px;
-  height: 300px;
-  margin: -150px 0 0 -300px;
+  width: 400px;
+  height: 200px;
+  /* margin: -150px 0 0 -300px; */
   padding: 2em;
 }
 
+a#bagit-form-close {
+  background: #000;
+  color: #FFF;
+  padding: 0.2em 0.5em;
+  text-decoration: none;
+  display: inline-block;
+  float: right;
+  font-size: 0.6em;
+}
+a#bagit-form-close:hover {
+  background: #999;
+  color: #000;
+}
+
+.active-current {
+  background-color: #999;
+}
+
+.active-current:after {
+  content: "";
+  width: 0;
+  height: 0;
+  position: absolute;
+  border-style: solid;
+  border-width: 10px;
+  border-color:  transparent #EEE transparent transparent;
+  right: 0;
+  top: 50%;
+  margin-top: -10px;
+}
+
+.opacity03 {
+  opacity: 0.3;
+}
+
+.add-to-wallabag-link-after {
+  background-color: #000;
+  color: #fff;
+  padding: 0 3px 2px 3px;
+}
 
 /* ==========================================================================
    3 = Pictos
@@ -919,5 +965,9 @@ blockquote {
   
   #display-mode {
     display: none;
+  }
+
+  #bagit-form {
+    left: 0;
   }
 }
