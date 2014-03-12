@@ -48,31 +48,58 @@ $.fn.ready(function() {
   }
 
   /* ==========================================================================
-     bag it link
-     ========================================================================== */
+    bag it link and close button
+    ========================================================================== */
+
+  function toggleSaveLinkForm(url) {
+    $bagit.toggleClass("active-current");
+    $bagitForm.toggle();
+    $('#content').toggleClass("opacity03");
+    if (url !== 'undefined' && url) {
+      $('#plainurl').val(url);
+    }
+    $('#plainurl').focus();
+  }
 
   $bagit.click(function(){
-    $bagitForm.toggle();
+    toggleSaveLinkForm();
+  });
+
+  $("#bagit-form-close").click(function(){
+    toggleSaveLinkForm();
+  });
+
+  $('#bagit-form form').submit(function(){
+    toggleSaveLinkForm();
+    return true;
   });
 
   /* ==========================================================================
-     Keyboard gestion
-     ========================================================================== */
+    Keyboard gestion
+    ========================================================================== */
 
   $(window).keydown(function(e){
-    if ( e.target.tagName.toLowerCase() !== 'input' ) {
-      switch (e.keyCode) {
-        // s letter
-        case 83:
-          $bagitForm.toggle();
-          return false;
-        break;
-        case 27:
-          $bagitForm.hide();
-        break;
-      }
+    if ( ( e.target.tagName.toLowerCase() !== 'input' && e.keyCode == 83 ) || e.keyCode == 27 ) {
+      toggleSaveLinkForm();
+      return false;
     }
-  })
+  });
+
+  /* ==========================================================================
+  Process all links inside an article
+  ========================================================================== */
+
+  $("article a[href^='http']").after(function() {
+        return " <a href=\"" + $(this).attr('href') + "\" class=\"add-to-wallabag-link-after\" alt=\"add to wallabag\" title=\"add to wallabag\">w</a> ";
+  });
+
+  $(".add-to-wallabag-link-after").click(function(event){
+    event.preventDefault();
+    toggleSaveLinkForm($(this).attr('href'));
+    return false;
+  });
+
+
 
 
 });
