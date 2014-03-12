@@ -60,14 +60,17 @@ $.fn.ready(function() {
      ========================================================================== */
 
   $(window).keydown(function(e){
-    switch (e.keyCode) {
-      // s letter
-      case 83:
-        $bagitForm.toggle();
-      break;
-      case 27:
-        $bagitForm.hide();
-      break;
+    if ( e.target.tagName.toLowerCase() !== 'input' ) {
+      switch (e.keyCode) {
+        // s letter
+        case 83:
+          $bagitForm.toggle();
+          return false;
+        break;
+        case 27:
+          $bagitForm.hide();
+        break;
+      }
     }
   })
 
