@@ -20,7 +20,7 @@ define ('STORAGE_SERVER', 'localhost');
 define ('STORAGE_DB', 'poche');
 define ('STORAGE_USER', 'poche');
 define ('STORAGE_PASSWORD', 'poche');
-define ('STORAGE_PREFIX', 'poche_');
+define ('STORAGE_PREFIX', '');
 
 #################################################################################
 # Do not trespass unless you know what you are doing
