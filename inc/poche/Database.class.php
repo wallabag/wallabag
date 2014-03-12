@@ -10,16 +10,25 @@
 
 class Database {
     var $handle;
+/*
     private $order = array(
-      'ia' => 'ORDER BY entries.id',
-      'id' => 'ORDER BY entries.id DESC',
-      'ta' => 'ORDER BY lower(entries.title)',
-      'td' => 'ORDER BY lower(entries.title) DESC',
-      'default' => 'ORDER BY entries.id'
+      'ia' => 'ORDER BY '.STORAGE_PREFIX.'entries.id',
+      'id' => 'ORDER BY '.STORAGE_PREFIX.'entries.id DESC',
+      'ta' => 'ORDER BY lower('.STORAGE_PREFIX.'entries.title)',
+      'td' => 'ORDER BY lower('.STORAGE_PREFIX.'entries.title) DESC',
+      'default' => 'ORDER BY '.STORAGE_PREFIX.'entries.id'
     );
+*/
+    private $order = array();
 
-    function __construct() 
+    function __construct()
     {
+$this->order['ia'] = 'ORDER BY '.STORAGE_PREFIX.'entries.id';
+$this->order['id'] = 'ORDER BY '.STORAGE_PREFIX.'entries.id DESC';
+$this->order['ta'] = 'ORDER BY lower('.STORAGE_PREFIX.'entries.title)';
+$this->order['td'] = 'ORDER BY lower('.STORAGE_PREFIX.'entries.title) DESC';
+$this->order['default'] = 'ORDER BY '.STORAGE_PREFIX.'entries.id';
+
         switch (STORAGE) {
             case 'sqlite':
                 $db_path = 'sqlite:' . STORAGE_SQLITE;
@@ -27,11 +36,11 @@ class Database {
                 break;
             case 'mysql':
                 $db_path = 'mysql:host=' . STORAGE_SERVER . ';dbname=' . STORAGE_DB;
-                $this->handle = new PDO($db_path, STORAGE_USER, STORAGE_PASSWORD); 
+                $this->handle = new PDO($db_path, STORAGE_USER, STORAGE_PASSWORD);
                 break;
             case 'postgres':
                 $db_path = 'pgsql:host=' . STORAGE_SERVER . ';dbname=' . STORAGE_DB;
-                $this->handle = new PDO($db_path, STORAGE_USER, STORAGE_PASSWORD); 
+                $this->handle = new PDO($db_path, STORAGE_USER, STORAGE_PASSWORD);
                 break;
         }
 
@@ -51,7 +60,7 @@ class Database {
         }
         $hasAdmin = count($query->fetchAll());
 
-        if ($hasAdmin == 0) 
+        if ($hasAdmin == 0)
             return false;
 
         return true;
@@ -140,7 +149,7 @@ class Database {
         $sql = 'INSERT INTO '.STORAGE_PREFIX.'users_config ( user_id, name, value ) VALUES (?, ?, ?)';
         $params = array($id_user, 'language', LANG);
         $query = $this->executeQuery($sql, $params);
-        
+
         $sql = 'INSERT INTO '.STORAGE_PREFIX.'users_config ( user_id, name, value ) VALUES (?, ?, ?)';
         $params = array($id_user, 'theme', DEFAULT_THEME);
         $query = $this->executeQuery($sql, $params);
@@ -153,7 +162,7 @@ class Database {
         $query = $this->executeQuery($sql, array($id));
         $result = $query->fetchAll();
         $user_config = array();
-        
+
         foreach ($result as $key => $value) {
             $user_config[$value['name']] = $value['value'];
         }
@@ -201,10 +210,10 @@ class Database {
         $params_update = array($password, $userId);
         $query = $this->executeQuery($sql_update, $params_update);
     }
-    
+
     public function updateUserConfig($userId, $key, $value) {
         $config = $this->getConfigUser($userId);
-        
+
         if (! isset($config[$key])) {
             $sql = "INSERT INTO ".STORAGE_PREFIX."users_config (value, user_id, name) VALUES (?, ?, ?)";
         }
@@ -311,7 +320,6 @@ class Database {
         }
 
                 $sql .= $this->getEntriesOrder().' ' . $limit;
-
                 $query = $this->executeQuery($sql, $params);
                 $entries = $query->fetchAll();
 
@@ -419,7 +427,7 @@ class Database {
     }
 
     public function retrieveEntriesByTag($tag_id, $user_id) {
-        $sql = 
+        $sql =
             "SELECT ".STORAGE_PREFIX."entries.* FROM ".STORAGE_PREFIX."entries
             LEFT JOIN ".STORAGE_PREFIX."tags_entries ON ".STORAGE_PREFIX."tags_entries.entry_id=".STORAGE_PREFIX."entries.id
             WHERE ".STORAGE_PREFIX."entries.content <> '' AND
@@ -431,7 +439,7 @@ class Database {
     }
 
     public function retrieveTagsByEntry($entry_id) {
-        $sql = 
+        $sql =
             "SELECT ".STORAGE_PREFIX."tags.* FROM ".STORAGE_PREFIX."tags
             LEFT JOIN ".STORAGE_PREFIX."tags_entries ON ".STORAGE_PREFIX."tags_entries.tag_id=".STORAGE_PREFIX."tags.id
             WHERE ".STORAGE_PREFIX."tags_entries.entry_id = ?";
