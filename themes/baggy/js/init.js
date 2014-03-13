@@ -4,6 +4,7 @@ $.fn.ready(function() {
       $listentries = $("#list-entries"),
       $bagit = $('#bagit'),
       $bagitForm = $('#bagit-form');
+      $bagitFormForm = $('#bagit-form-form');
 
   /* ==========================================================================
      Menu
@@ -69,9 +70,30 @@ $.fn.ready(function() {
     toggleSaveLinkForm();
   });
 
-  $('#bagit-form form').submit(function(){
-    toggleSaveLinkForm();
-    return true;
+
+  //send "bag it link" form request via ajax
+  $bagitFormForm.submit( function(event) {
+    $bagitFormForm.css("cursor", "wait");
+    $("#add-link-result").empty();
+
+    $.ajax({
+        type: $bagitFormForm.attr('method'),
+        url: $bagitFormForm.attr('action'),
+        data: $bagitFormForm.serialize(),
+        success: function(data) {
+          $('#add-link-result').html("Done!");
+          $('#plainurl').val('');
+          $('#plainurl').blur('');
+          $bagitFormForm.css("cursor", "auto");
+          //setTimeout( function() { toggleSaveLinkForm(); }, 1000); //close form after 1000 delay
+        },
+        error: function(data) {
+          $('#add-link-result').html("Failed!");
+          $bagitFormForm.css("cursor", "auto");
+        }
+    });
+
+    event.preventDefault();
   });
 
   /* ==========================================================================
@@ -94,9 +116,8 @@ $.fn.ready(function() {
   });
 
   $(".add-to-wallabag-link-after").click(function(event){
-    event.preventDefault();
     toggleSaveLinkForm($(this).attr('href'));
-    return false;
+    event.preventDefault();
   });
 
 

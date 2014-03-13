@@ -607,6 +607,11 @@ a#bagit-form-close:hover {
   padding: 0 3px 2px 3px;
 }
 
+#add-link-result {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
 /* ==========================================================================
    3 = Pictos
    ========================================================================== */
@@ -741,6 +746,7 @@ a#bagit-form-close:hover {
 #article {
   width: 70%;
   margin-bottom: 3em;
+  text-align: justify;
 }
 
 #article .tags {
