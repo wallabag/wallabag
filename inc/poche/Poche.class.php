@@ -1164,7 +1164,7 @@ class Poche
             foreach ($entries as $entry) {
                 $newItem = $feed->createNewItem();
                 $newItem->setTitle($entry['title']);
-                $newItem->setLink(Tools::getPocheUrl() . '?view=view&amp;id=' . $entry['id']);
+                $newItem->setLink($entry['url']);
                 $newItem->setDate(time());
                 $newItem->setDescription($entry['content']);
                 $feed->addItem($newItem);
