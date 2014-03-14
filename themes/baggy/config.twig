@@ -12,7 +12,7 @@
                 <li>Chrome: <a href="http://doc.wallabag.org/doku.php?id=users:chrome_extension" title="download the chrome extension">{% trans "download the extension" %}</a></li>
                 <li>Android: <a href="https://f-droid.org/app/fr.gaulupeau.apps.InThePoche" title="download the application">{% trans "via F-Droid" %}</a> {% trans " or " %} <a href="https://play.google.com/store/apps/details?id=fr.gaulupeau.apps.InThePoche" title="download the application">{% trans "via Google Play" %}</a></li>
                 <li>iOS: <a href="https://itunes.apple.com/app/wallabag/id828331015?mt=8" title="download the iOS application">{% trans "download the application" %}</a></li>
-                <li>Windows Phone: <a href="https://www.windowsphone.com/en-us/store/app/poche/334de2f0-51b5-4826-8549-a3d805a37e83" title="download the window phone application">{% trans "download the application" %}</a></li>
+                <li>Windows Phone: <a href="http://www.windowsphone.com/en-us/store/app/wallabag/ff890514-348c-4d0b-9b43-153fff3f7450" title="download the window phone application">{% trans "download the application" %}</a></li>
                 <li>
                     <form method="get" action="index.php">
                         <label class="addurl" for="config_plainurl">{% trans "By filling this field" %}:</label>
@@ -131,7 +131,7 @@
             {% if token == '' %}
                 <p>{% trans "3. Your feed token is currently empty and must first be generated to fetch content. Click <a href='?feed&amp;action=generate'>here to generate it</a>." %}</p>
             {% else %}
-            <p>3. {% trans "Finaly, you have to fetch content for imported items." %} <a href="cron.php?limit=10&amp;user-id={{ user_id }}&amp;token={{token}}" target="_blank">{% trans "Click here" %}</a> {% trans "to fetch content for 10 articles" %}.</p>
+            <p>3. {% trans "Finally, you have to fetch content for imported items." %} <a href="cron.php?limit=10&amp;user-id={{ user_id }}&amp;token={{token}}" target="_blank">{% trans "Click here" %}</a> {% trans "to fetch content for 10 articles" %}.</p>
             <p>{% trans "If you have console access to your server, you can also create a cron task:" %}</p>
             <pre><code>0 */4 * * *  cd /path/to/wallabag && php cron.php --limit=10 --user-id={{user_id}} --token={{token}} >/dev/null 2>&1</code></pre>
             {% endif %}
