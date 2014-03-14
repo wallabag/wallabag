@@ -388,6 +388,7 @@ class Poche
                 }
 
                 //search for possible duplicate if not in import mode
+                $duplicate = NULL;
                 if (!$import) {
                     $duplicate = $this->store->retrieveOneByURL($url->getUrl(), $this->user->getId());
                 }
@@ -874,6 +875,8 @@ class Poche
             # the second <ol> is for read links
             $read = 1;
         }
+
+        $unlink = unlink($targetFile);
         $this->messages->add('s', _('import from instapaper completed. You have to execute the cron to fetch content.'));
         Tools::logm('import from instapaper completed');
         Tools::redirect();
@@ -918,6 +921,8 @@ class Poche
             # the second <ul> is for read links
             $read = 1;
         }
+
+        $unlink = unlink($targetFile);
         $this->messages->add('s', _('import from pocket completed. You have to execute the cron to fetch content.'));
         Tools::logm('import from pocket completed');
         Tools::redirect();
@@ -974,6 +979,8 @@ class Poche
                 }
             }
         }
+
+        unlink($targetFile);
         $this->messages->add('s', _('import from Readability completed. You have to execute the cron to fetch content.'));
         Tools::logm('import from Readability completed');
         Tools::redirect();
@@ -1020,6 +1027,8 @@ class Poche
             }
             
         }
+
+        unlink($targetFile);
         $this->messages->add('s', _('import from Poche completed. You have to execute the cron to fetch content.'));
         Tools::logm('import from Poche completed');
         Tools::redirect();
