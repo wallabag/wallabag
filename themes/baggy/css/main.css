@@ -173,7 +173,7 @@ h2:after {
 #links {
   position: fixed;
   top: 0;
-  width: 9em;
+  width: 10em;
   left: 0;
   text-align: right;
   background: #333;
@@ -184,7 +184,7 @@ h2:after {
 }
 
 #main {
-  margin-left: 12em;
+  margin-left: 13em;
   position: relative;
   z-index: 10;
   padding-right: 5%;
@@ -228,7 +228,7 @@ h2:after {
   #links li:last-child {
     position: fixed;
     bottom: 1em;
-    width: 9em;
+    width: 10em;
   }
 
   #links li:last-child a:before {
@@ -322,6 +322,15 @@ footer a {
   letter-spacing:-5px;
 }
 
+.listmode .entrie {
+  width: 100%!important;
+  margin-left: 0!important;
+}
+
+.listmode .entrie p {
+  display: none;
+}
+
 .list-entries + .results {
   margin-bottom: 2em;
 }
@@ -343,10 +352,10 @@ footer a {
   letter-spacing:normal;
   box-shadow: 0 3px 7px rgba(0,0,0,0.3);
   display: inline-block;
-  width: 32%;
+  width: 32%!important;
   margin-bottom: 1.5em;
   vertical-align: top;
-  margin-left: 1.5%;
+  margin-left: 1.5%!important;
   position: relative;
   overflow: hidden;
   padding: 1.5em 1.5em 3em 1.5em;
@@ -481,7 +490,7 @@ footer a {
   }
 
 .entrie:nth-child(3n+1) {
-  margin-left: 0;
+  margin-left: 0!important;
 }
 
 .results {
@@ -523,6 +532,84 @@ footer a {
 
 .pagination .disabled {
   display: none;
+}
+
+/* ==========================================================================
+  2.1 = "save a link" popup div related styles
+  ========================================================================== */
+
+#bagit-form {
+  background: rgba(0,0,0,0.5);
+  position: absolute;
+  top: 0;
+  left: 10em;
+  z-index: 20;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  margin-top: -30%;
+  padding: 2em;
+  display: none;
+  border-left: 1px #EEE solid;
+}
+
+#bagit-form form {
+  background: #FFF;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  border: 10px solid #000;
+  width: 400px;
+  height: 200px;
+  /* margin: -150px 0 0 -300px; */
+  padding: 2em;
+}
+
+a#bagit-form-close {
+  background: #000;
+  color: #FFF;
+  padding: 0.2em 0.5em;
+  text-decoration: none;
+  display: inline-block;
+  float: right;
+  font-size: 0.6em;
+}
+a#bagit-form-close:hover {
+  background: #999;
+  color: #000;
+}
+
+.active-current {
+  background-color: #999;
+}
+
+.active-current:after {
+  content: "";
+  width: 0;
+  height: 0;
+  position: absolute;
+  border-style: solid;
+  border-width: 10px;
+  border-color:  transparent #EEE transparent transparent;
+  right: 0;
+  top: 50%;
+  margin-top: -10px;
+}
+
+.opacity03 {
+  opacity: 0.3;
+}
+
+.add-to-wallabag-link-after {
+  background-color: #000;
+  color: #fff;
+  padding: 0 3px 2px 3px;
+}
+
+#add-link-result {
+  font-weight: bold;
+  margin-top: 10px;
 }
 
 /* ==========================================================================
@@ -659,6 +746,7 @@ footer a {
 #article {
   width: 70%;
   margin-bottom: 3em;
+  text-align: justify;
 }
 
 #article .tags {
@@ -883,5 +971,9 @@ blockquote {
   
   #display-mode {
     display: none;
+  }
+
+  #bagit-form {
+    left: 0;
   }
 }

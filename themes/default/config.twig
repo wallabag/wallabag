@@ -8,10 +8,11 @@
             <h2>{% trans "Saving articles" %}</h2>
             <p>{% trans "There are several ways to save an article:" %} (<a href="http://doc.wallabag.org/" title="{% trans "read the documentation" %}">?</a>)</p>
             <ul>
-                <li>Firefox: <a href="https://addons.mozilla.org/firefox/addon/poche/" title="download the firefox extension">{% trans "download the extension" %}</a></li>
+                <li>Firefox: <a href="https://addons.mozilla.org/firefox/addon/wallabag/" title="download the firefox extension">{% trans "download the extension" %}</a></li>
                 <li>Chrome: <a href="http://doc.wallabag.org/doku.php?id=users:chrome_extension" title="download the chrome extension">{% trans "download the extension" %}</a></li>
-                <li>Android: <a href="https://f-droid.org/repository/browse/?fdid=fr.gaulupeau.apps.Poche" title="download the application">{% trans "via F-Droid" %}</a> {% trans " or " %} <a href="https://play.google.com/store/apps/details?id=fr.gaulupeau.apps.InThePoche" title="download the application">{% trans "via Google Play" %}</a></li>
-                <li>Windows Phone: <a href="https://www.windowsphone.com/en-us/store/app/poche/334de2f0-51b5-4826-8549-a3d805a37e83" title="download the window phone application">{% trans "download the application" %}</a></li>
+                <li>Android: <a href="https://f-droid.org/app/fr.gaulupeau.apps.InThePoche" title="download the application">{% trans "via F-Droid" %}</a> {% trans " or " %} <a href="https://play.google.com/store/apps/details?id=fr.gaulupeau.apps.InThePoche" title="download the application">{% trans "via Google Play" %}</a></li>
+                <li>iOS: <a href="https://itunes.apple.com/app/wallabag/id828331015?mt=8" title="download the iOS application">{% trans "download the application" %}</a></li>
+                <li>Windows Phone: <a href="http://www.windowsphone.com/en-us/store/app/wallabag/ff890514-348c-4d0b-9b43-153fff3f7450" title="download the window phone application">{% trans "download the application" %}</a></li>
                 <li>
                     <form method="get" action="index.php">
                         <label class="addurl" for="config_plainurl">{% trans "By filling this field" %}:</label>
@@ -103,14 +104,36 @@
             {% endif %}
 
             <h2>{% trans "Import" %}</h2>
-            <p>{% trans "Please execute the import script locally as it can take a very long time." %}</p>
-            <p>{% trans "More info in the official documentation:" %} <a href="http://doc.wallabag.org/doku.php?id=users:migrate">wallabag.org</a></p>
+            <p>{% trans "Importing from other services can be quite long, and webservers default configuration often prevents long scripts execution time, so it must be done in multiple parts." %}</p>
+            <p>1. {% trans "First, select the export file on your computer and upload it." %}</p>
+            <form method="post" action="?uploadfile" name="uploadfile" enctype="multipart/form-data">
+                <fieldset class="w500p">
+                    <div class="row">
+                        <label class="col w150p" for="file">{% trans "File:" %}</label>
+                        <input class="col" type="file" id="file" name="file" tabindex="4">
+                    </div>
+                    <div class="row mts txtcenter">
+                        <button class="bouton" type="submit" tabindex="4">{% trans "Upload" %}</button>
+                    </div>
+                </fieldset>
+                <input type="hidden" name="MAX_FILE_SIZE" value="1048576">
+                <input type="hidden" name="returnurl" value="{{ referer }}">
+            </form>
+            <p>2. {% trans "Then, click on the right link below." %}</p>
             <ul>
-                <li><a href="./?import&amp;from=pocket">{% trans "Import from Pocket" %}</a> {{ '(you must have a %s file on your server)'|trans|format(constant('POCKET_FILE')) }}</li>
-                <li><a href="./?import&amp;from=readability">{% trans "Import from Readability" %}</a> {{ '(you must have a %s file on your server)'|trans|format(constant('READABILITY_FILE')) }}</li>
-                <li><a href="./?import&amp;from=instapaper">{% trans "Import from Instapaper" %}</a> {{ '(you must have a %s file on your server)'|trans|format(constant('INSTAPAPER_FILE')) }}</li>
-                <li><a href="./?import&amp;from=poche">{% trans "Import from wallabag" %}</a> {{ '(you must have a %s file on your server)'|trans|format(constant('POCHE_FILE')) }}</li>
+                <li><a href="./?import&amp;from=pocket">{% trans "Import from Pocket" %}</a> {{ '(after uploaded %s file)'|trans|format(constant('POCKET_FILE')) }}</li>
+                <li><a href="./?import&amp;from=readability">{% trans "Import from Readability" %}</a> {{ '(after uploaded %s file)'|trans|format(constant('READABILITY_FILE')) }}</li>
+                <li><a href="./?import&amp;from=instapaper">{% trans "Import from Instapaper" %}</a> {{ '(after uploaded %s file)'|trans|format(constant('INSTAPAPER_FILE')) }}</li>
+                <li><a href="./?import&amp;from=poche">{% trans "Import from wallabag" %}</a> {{ '(after uploaded %s file)'|trans|format(constant('POCHE_FILE')) }}</li>
             </ul>
+
+            {% if token == '' %}
+                <p>{% trans "3. Your feed token is currently empty and must first be generated to fetch content. Click <a href='?feed&amp;action=generate'>here to generate it</a>." %}</p>
+            {% else %}
+            <p>3. {% trans "Finally, you have to fetch content for imported items." %} <a href="cron.php?limit=10&amp;user-id={{ user_id }}&amp;token={{token}}" target="_blank">{% trans "Click here" %}</a> {% trans "to fetch content for 10 articles" %}.</p>
+            <p>{% trans "If you have console access to your server, you can also create a cron task:" %}</p>
+            <pre><code>0 */4 * * *  cd /path/to/wallabag && php cron.php --limit=10 --user-id={{user_id}} --token={{token}} >/dev/null 2>&1</code></pre>
+            {% endif %}
 
             <h2>{% trans "Export your wallabag data" %}</h2>
             {% if constant('STORAGE') == 'sqlite' %}

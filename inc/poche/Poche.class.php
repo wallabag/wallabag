@@ -35,6 +35,7 @@ class Poche
       'ru_RU.utf8' => 'Pусский',
       'sl_SI.utf8' => 'Slovenščina',
       'uk_UA.utf8' => 'Українська',
+      'pt_BR.utf8' => 'Brasileiro',
     );
     public function __construct()
     {
@@ -361,60 +362,6 @@ class Poche
         );
     }
 
-    protected function getPageContent(Url $url)
-    {
-        // Saving and clearing context
-        $REAL = array();
-        foreach( $GLOBALS as $key => $value ) {
-            if( $key != "GLOBALS" && $key != "_SESSION" ) {
-                $GLOBALS[$key] = array();
-                $REAL[$key] = $value;
-            }
-        }
-        // Saving and clearing session
-        $REAL_SESSION = array();
-        foreach( $_SESSION as $key => $value ) {
-            $REAL_SESSION[$key] = $value;
-            unset($_SESSION[$key]);
-        }
-
-        // Running code in different context
-        $scope = function() {
-            extract( func_get_arg(1) );
-            $_GET = $_REQUEST = array(
-                        "url" => $url->getUrl(),
-                        "max" => 5,
-                        "links" => "preserve",
-                        "exc" => "",
-                        "format" => "json",
-                        "submit" => "Create Feed"
-            );
-            ob_start();
-            require func_get_arg(0);
-            $json = ob_get_flush();
-            return $json;
-        };
-        $json = $scope( "inc/3rdparty/makefulltextfeed.php", array("url" => $url) );
-
-        // Clearing and restoring context
-        foreach( $GLOBALS as $key => $value ) {
-            if( $key != "GLOBALS" && $key != "_SESSION" ) {
-                unset($GLOBALS[$key]);
-            }
-        }
-        foreach( $REAL as $key => $value ) {
-            $GLOBALS[$key] = $value;
-        }
-        // Clearing and restoring session
-        foreach( $_SESSION as $key => $value ) {
-            unset($_SESSION[$key]);
-        }
-        foreach( $REAL_SESSION as $key => $value ) {
-            $_SESSION[$key] = $value;
-        }
-        return json_decode($json, true);
-    }
-
     /**
      * Call action (mark as fav, archive, delete, etc.)
      */
@@ -423,17 +370,25 @@ class Poche
         switch ($action)
         {
             case 'add':
-                $content = $this->getPageContent($url);
-                $title = ($content['rss']['channel']['item']['title'] != '') ? $content['rss']['channel']['item']['title'] : _('Untitled');
-                $body = $content['rss']['channel']['item']['description'];
+                if (!$import) {
+                    $content = Tools::getPageContent($url);
+                    $title = ($content['rss']['channel']['item']['title'] != '') ? $content['rss']['channel']['item']['title'] : _('Untitled');
+                    $body = $content['rss']['channel']['item']['description'];
 
-                // clean content from prevent xss attack
-                $config = HTMLPurifier_Config::createDefault();
-                $purifier = new HTMLPurifier($config);
-                $title = $purifier->purify($title);
-                $body = $purifier->purify($body);
+                    // clean content from prevent xss attack
+                    $config = HTMLPurifier_Config::createDefault();
+                    $config->set('Cache.SerializerPath', CACHE);
+                    $purifier = new HTMLPurifier($config);
+                    $title = $purifier->purify($title);
+                    $body = $purifier->purify($body);
+                }
+                else {
+                    $title = '';
+                    $body = '';
+                }
 
                 //search for possible duplicate if not in import mode
+                $duplicate = NULL;
                 if (!$import) {
                     $duplicate = $this->store->retrieveOneByURL($url->getUrl(), $this->user->getId());
                 }
@@ -534,25 +489,33 @@ class Poche
                     Tools::logm('error : article not found');
                     Tools::redirect();
                 }
+                //get all already set tags to preven duplicates
+                $already_set_tags = array();
+                $entry_tags = $this->store->retrieveTagsByEntry($entry_id);
+                foreach ($entry_tags as $tag) {
+                  $already_set_tags[] = $tag['value'];
+                }
                 foreach($tags as $key => $tag_value) {
                     $value = trim($tag_value);
-                    $tag = $this->store->retrieveTagByValue($value);
+                    if ($value && !in_array($value, $already_set_tags)) {
+                      $tag = $this->store->retrieveTagByValue($value);
 
-                    if (is_null($tag)) {
-                        # we create the tag
-                        $tag = $this->store->createTag($value);
-                        $sequence = '';
-                        if (STORAGE == 'postgres') {
-                            $sequence = 'tags_id_seq';
-                        }
-                        $tag_id = $this->store->getLastId($sequence);
-                    }
-                    else {
-                        $tag_id = $tag['id'];
-                    }
+                      if (is_null($tag)) {
+                          # we create the tag
+                          $tag = $this->store->createTag($value);
+                          $sequence = '';
+                          if (STORAGE == 'postgres') {
+                              $sequence = 'tags_id_seq';
+                          }
+                          $tag_id = $this->store->getLastId($sequence);
+                      }
+                      else {
+                          $tag_id = $tag['id'];
+                      }
 
-                    # we assign the tag to the article
-                    $this->store->setTagToEntry($tag_id, $entry_id);
+                      # we assign the tag to the article
+                      $this->store->setTagToEntry($tag_id, $entry_id);
+                    }
                 }
                 if(!$import) {
                     Tools::redirect();
@@ -581,8 +544,12 @@ class Poche
         switch ($view)
         {
             case 'config':
-                $dev = trim($this->getPocheVersion('dev'));
-                $prod = trim($this->getPocheVersion('prod'));
+                $dev_infos = $this->getPocheVersion('dev');
+                $dev = trim($dev_infos[0]);
+                $check_time_dev = date('d-M-Y H:i', $dev_infos[1]);
+                $prod_infos = $this->getPocheVersion('prod');
+                $prod = trim($prod_infos[0]);
+                $check_time_prod = date('d-M-Y H:i', $prod_infos[1]);
                 $compare_dev = version_compare(POCHE, $dev);
                 $compare_prod = version_compare(POCHE, $prod);
                 $themes = $this->getInstalledThemes();
@@ -594,6 +561,8 @@ class Poche
                     'languages' => $languages,
                     'dev' => $dev,
                     'prod' => $prod,
+                    'check_time_dev' => $check_time_dev,
+                    'check_time_prod' => $check_time_prod,
                     'compare_dev' => $compare_dev,
                     'compare_prod' => $compare_prod,
                     'token' => $token,
@@ -619,7 +588,17 @@ class Poche
                 break;
             case 'tags':
                 $token = $this->user->getConfigValue('token');
-                $tags = $this->store->retrieveAllTags($this->user->getId());
+                //if term is set - search tags for this term
+                $term = Tools::checkVar('term');
+                $tags = $this->store->retrieveAllTags($this->user->getId(), $term);
+                if (Tools::isAjaxRequest()) {
+                  $result = array();
+                  foreach ($tags as $tag) {
+                    $result[] = $tag['value'];
+                  }
+                  echo json_encode($result);
+                  exit;
+                }
                 $tpl_vars = array(
                     'token' => $token,
                     'user_id' => $this->user->getId(),
@@ -660,6 +639,7 @@ class Poche
                     'entries' => '',
                     'page_links' => '',
                     'nb_results' => '',
+                    'listmode' => (isset($_COOKIE['listmode']) ? true : false),
                 );
                 
                 //if id is given - we retrive entries by tag: id is tag id
@@ -895,7 +875,9 @@ class Poche
             # the second <ol> is for read links
             $read = 1;
         }
-        $this->messages->add('s', _('import from instapaper completed'));
+
+        $unlink = unlink($targetFile);
+        $this->messages->add('s', _('import from instapaper completed. You have to execute the cron to fetch content.'));
         Tools::logm('import from instapaper completed');
         Tools::redirect();
     }
@@ -939,7 +921,9 @@ class Poche
             # the second <ul> is for read links
             $read = 1;
         }
-        $this->messages->add('s', _('import from pocket completed'));
+
+        $unlink = unlink($targetFile);
+        $this->messages->add('s', _('import from pocket completed. You have to execute the cron to fetch content.'));
         Tools::logm('import from pocket completed');
         Tools::redirect();
     }
@@ -995,7 +979,9 @@ class Poche
                 }
             }
         }
-        $this->messages->add('s', _('import from Readability completed. ' . $count . ' new links.'));
+
+        unlink($targetFile);
+        $this->messages->add('s', _('import from Readability completed. You have to execute the cron to fetch content.'));
         Tools::logm('import from Readability completed');
         Tools::redirect();
     }
@@ -1041,7 +1027,9 @@ class Poche
             }
             
         }
-        $this->messages->add('s', _('import from Poche completed. ' . $count . ' new links.'));
+
+        unlink($targetFile);
+        $this->messages->add('s', _('import from Poche completed. You have to execute the cron to fetch content.'));
         Tools::logm('import from Poche completed');
         Tools::redirect();
     }
@@ -1066,13 +1054,7 @@ class Poche
             Tools::redirect();
         }
         
-        $targetDefinition = 'IMPORT_' . strtoupper($from) . '_FILE';
-        $targetFile = constant($targetDefinition);
-        
-        if (! defined($targetDefinition)) {
-            $this->messages->add('e', _('Incomplete inc/poche/define.inc.php file, please define "' . $targetDefinition . '".'));
-            Tools::redirect();
-        }
+        $targetFile = CACHE . '/' . constant(strtoupper($from) . '_FILE');
         
         if (! file_exists($targetFile)) {
             $this->messages->add('e', _('Could not find required "' . $targetFile . '" import file.'));
@@ -1080,6 +1062,22 @@ class Poche
         }
         
         $this->$providers[$from]($targetFile);
+    }
+
+    public function uploadFile() {
+        if(isset($_FILES['file']))
+        { 
+            $dir = CACHE . '/';
+            $file = basename($_FILES['file']['name']);
+            if(move_uploaded_file($_FILES['file']['tmp_name'], $dir . $file)) {
+                $this->messages->add('s', _('File uploaded. You can now execute import.'));
+            }
+            else {
+                $this->messages->add('e', _('Error while importing file. Do you have access to upload it?'));
+            }
+        }
+        
+        Tools::redirect('?view=config');
     }
 
     /**
@@ -1103,15 +1101,17 @@ class Poche
     private function getPocheVersion($which = 'prod')
     {
         $cache_file = CACHE . '/' . $which;
+        $check_time = time();
 
         # checks if the cached version file exists
         if (file_exists($cache_file) && (filemtime($cache_file) > (time() - 86400 ))) {
            $version = file_get_contents($cache_file);
+           $check_time = filemtime($cache_file);
         } else {
            $version = file_get_contents('http://static.wallabag.org/versions/' . $which);
            file_put_contents($cache_file, $version, LOCK_EX);
         }
-        return $version;
+        return array($version, $check_time);
     }
 
     public function generateToken()
@@ -1136,6 +1136,10 @@ class Poche
         $allowed_types = array('home', 'fav', 'archive', 'tag');
         $config = $this->store->getConfigUser($user_id);
 
+        if ($config == null) {
+            die(_('User with this id (' . $user_id . ') does not exist.'));
+        }
+
         if (!in_array($type, $allowed_types) ||
             $token != $config['token']) {
             die(_('Uh, there is a problem while generating feeds.'));
@@ -1145,8 +1149,9 @@ class Poche
         $feed = new FeedWriter(RSS2);
         $feed->setTitle('wallabag — ' . $type . ' feed');
         $feed->setLink(Tools::getPocheUrl());
-        $feed->setChannelElement('updated', date(DATE_RSS , time()));
-        $feed->setChannelElement('author', 'wallabag');
+        $feed->setChannelElement('pubDate', date(DATE_RSS , time()));
+        $feed->setChannelElement('generator', 'wallabag');
+        $feed->setDescription('wallabag ' . $type . ' elements');
 
         if ($type == 'tag') {
             $entries = $this->store->retrieveEntriesByTag($tag_id, $user_id);
@@ -1159,7 +1164,7 @@ class Poche
             foreach ($entries as $entry) {
                 $newItem = $feed->createNewItem();
                 $newItem->setTitle($entry['title']);
-                $newItem->setLink(Tools::getPocheUrl() . '?view=view&amp;id=' . $entry['id']);
+                $newItem->setLink($entry['url']);
                 $newItem->setDate(time());
                 $newItem->setDescription($entry['content']);
                 $feed->addItem($newItem);

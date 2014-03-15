@@ -8,10 +8,9 @@
  * @license    http://www.wtfpl.net/ see COPYING file
  */
 
-define ('POCHE', '1.5.2');
+define ('POCHE', '1.5.3');
 require 'check_setup.php';
 require_once 'inc/poche/global.inc.php';
-session_start(); 
 
 # Start Poche
 $poche = new Poche();
@@ -75,6 +74,8 @@ if (isset($_GET['login'])) {
     $poche->updateTheme();
 } elseif (isset($_GET['updatelanguage'])) {
     $poche->updateLanguage();
+} elseif (isset($_GET['uploadfile'])) {
+    $poche->uploadFile();
 } elseif (isset($_GET['feed'])) {
     if (isset($_GET['action']) && $_GET['action'] == 'generate') {
         $poche->generateToken();

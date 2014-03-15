@@ -62,6 +62,6 @@ So, you are almost done.
 This step may be required if your web server runs php scripts in name of, say, www user (i.e. Apache with mod_php, not cgi).
 
 
-##To create new tanslation 
+##To create new translation 
 Please simple create appropriate directories in locale folder and perform all steps, described above. Instead of opening an existing file just create new one.
 

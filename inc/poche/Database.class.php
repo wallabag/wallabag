@@ -230,8 +230,30 @@ class Database {
         }
     }
 
+    public function updateContentAndTitle($id, $title, $body, $user_id) {
+        $sql_action = 'UPDATE entries SET content = ?, title = ? WHERE id=? AND user_id=?';
+        $params_action = array($body, $title, $id, $user_id);
+        $query = $this->executeQuery($sql_action, $params_action);
+
+        return $query;
+    }
+
+    public function retrieveUnfetchedEntries($user_id, $limit) {
+
+        $sql_limit = "LIMIT 0,".$limit;
+        if (STORAGE == 'postgres') {
+            $sql_limit = "LIMIT ".$limit." OFFSET 0";
+        }
+
+        $sql        = "SELECT * FROM entries WHERE (content = '' OR content IS NULL) AND user_id=? ORDER BY id " . $sql_limit;
+        $query      = $this->executeQuery($sql, array($user_id));
+        $entries    = $query->fetchAll();
+
+        return $entries;
+    }
+
     public function retrieveAll($user_id) {
-        $sql        = "SELECT * FROM entries WHERE user_id=? ORDER BY id";
+        $sql        = "SELECT * FROM entries WHERE content <> '' AND user_id=? ORDER BY id";
         $query      = $this->executeQuery($sql, array($user_id));
         $entries    = $query->fetchAll();
 
@@ -250,7 +272,7 @@ class Database {
 
     public function retrieveOneByURL($url, $user_id) {
         $entry  = NULL;
-        $sql    = "SELECT * FROM entries WHERE url=? AND user_id=?";
+        $sql    = "SELECT * FROM entries WHERE content <> '' AND url=? AND user_id=?";
         $params = array($url, $user_id);
         $query  = $this->executeQuery($sql, $params);
         $entry  = $query->fetchAll();
@@ -267,21 +289,22 @@ class Database {
     public function getEntriesByView($view, $user_id, $limit = '', $tag_id = 0) {
         switch ($view) {
             case 'archive':
-                $sql    = "SELECT * FROM entries WHERE user_id=? AND is_read=? ";
+                $sql    = "SELECT * FROM entries WHERE content <> '' AND user_id=? AND is_read=? ";
                 $params = array($user_id, 1);
                 break;
             case 'fav' :
-                $sql    = "SELECT * FROM entries WHERE user_id=? AND is_fav=? ";
+                $sql    = "SELECT * FROM entries WHERE content <> '' AND user_id=? AND is_fav=? ";
                 $params = array($user_id, 1);
                 break;
             case 'tag' :
                 $sql    = "SELECT entries.* FROM entries
                 LEFT JOIN tags_entries ON tags_entries.entry_id=entries.id
-                WHERE entries.user_id=? AND tags_entries.tag_id = ? ";
+                WHERE entries.content <> '' AND
+                entries.user_id=? AND tags_entries.tag_id = ? ";
                 $params = array($user_id, $tag_id);
                 break;
             default:
-                $sql    = "SELECT * FROM entries WHERE user_id=? AND is_read=? ";
+                $sql    = "SELECT * FROM entries WHERE content <> '' AND user_id=? AND is_read=? ";
                 $params = array($user_id, 0);
                 break;
         }
@@ -297,21 +320,22 @@ class Database {
     public function getEntriesByViewCount($view, $user_id, $tag_id = 0) {
         switch ($view) {
             case 'archive':
-                    $sql    = "SELECT count(*) FROM entries WHERE user_id=? AND is_read=? ";
+                    $sql    = "SELECT count(*) FROM entries WHERE content <> '' AND user_id=? AND is_read=? ";
                 $params = array($user_id, 1);
                 break;
             case 'fav' :
-                    $sql    = "SELECT count(*) FROM entries WHERE user_id=? AND is_fav=? ";
+                    $sql    = "SELECT count(*) FROM entries WHERE content <> '' AND user_id=? AND is_fav=? ";
                 $params = array($user_id, 1);
                 break;
             case 'tag' :
                 $sql    = "SELECT count(*) FROM entries
                     LEFT JOIN tags_entries ON tags_entries.entry_id=entries.id
-                    WHERE entries.user_id=? AND tags_entries.tag_id = ? ";
+                    WHERE entries.content <> '' AND
+                    entries.user_id=? AND tags_entries.tag_id = ? ";
                 $params = array($user_id, $tag_id);
                 break;
             default:
-                $sql    = "SELECT count(*) FROM entries WHERE user_id=? AND is_read=? ";
+                $sql    = "SELECT count(*) FROM entries WHERE content <> '' AND user_id=? AND is_read=? ";
                 $params = array($user_id, 0);
                 break;
         }
@@ -365,12 +389,15 @@ class Database {
         return $this->getHandle()->lastInsertId($column);
     }
 
-    public function retrieveAllTags($user_id) {
-        $sql = "SELECT DISTINCT tags.* FROM tags
+    public function retrieveAllTags($user_id, $term = null) {
+        $sql = "SELECT DISTINCT tags.*, count(entries.id) AS entriescount FROM tags
           LEFT JOIN tags_entries ON tags_entries.tag_id=tags.id
           LEFT JOIN entries ON tags_entries.entry_id=entries.id
-          WHERE entries.user_id=?";
-        $query = $this->executeQuery($sql, array($user_id));
+          WHERE entries.content <> '' AND entries.user_id=?
+            ". (($term) ? "AND lower(tags.value) LIKE ?" : '') ."
+          GROUP BY tags.id, tags.value
+          ORDER BY tags.value";
+        $query = $this->executeQuery($sql, (($term)? array($user_id, strtolower('%'.$term.'%')) : array($user_id) ));
         $tags = $query->fetchAll();
 
         return $tags;
@@ -381,7 +408,7 @@ class Database {
         $sql    = "SELECT DISTINCT tags.* FROM tags
           LEFT JOIN tags_entries ON tags_entries.tag_id=tags.id
           LEFT JOIN entries ON tags_entries.entry_id=entries.id
-          WHERE tags.id=? AND entries.user_id=?";
+          WHERE entries.content <> '' AND tags.id=? AND entries.user_id=?";
         $params = array(intval($id), $user_id);
         $query  = $this->executeQuery($sql, $params);
         $tag  = $query->fetchAll();
@@ -393,7 +420,8 @@ class Database {
         $sql = 
             "SELECT entries.* FROM entries
             LEFT JOIN tags_entries ON tags_entries.entry_id=entries.id
-            WHERE tags_entries.tag_id = ? AND entries.user_id=?";
+            WHERE entries.content <> '' AND
+            tags_entries.tag_id = ? AND entries.user_id=?";
         $query = $this->executeQuery($sql, array($tag_id, $user_id));
         $entries = $query->fetchAll();
 

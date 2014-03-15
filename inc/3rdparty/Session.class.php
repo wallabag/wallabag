@@ -33,7 +33,7 @@ class Session
     // his/her session is considered expired (3600 sec. = 1 hour)
     public static $inactivityTimeout = 86400;
     // Extra timeout for long sessions (if enabled) (82800 sec. = 23 hours)
-    public static $longSessionTimeout = 31536000;
+    public static $longSessionTimeout = 604800; // 604800 = a week
     // If you get disconnected often or if your IP address changes often.
     // Let you disable session cookie hijacking protection
     public static $disableSessionProtection = false;
@@ -61,7 +61,7 @@ class Session
         if (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on") {
             $ssl = true;
         }
-        session_set_cookie_params($cookie['lifetime'], $cookiedir, $_SERVER['HTTP_HOST'], $ssl);
+        session_set_cookie_params(self::$longSessionTimeout, $cookiedir, $_SERVER['HTTP_HOST'], $ssl);
         // Use cookies to store session.
         ini_set('session.use_cookies', 1);
         // Force cookies for session  (phpsessionID forbidden in URL)
@@ -143,7 +143,14 @@ class Session
      */
     public static function logout()
     {
-        unset($_SESSION['uid'],$_SESSION['ip'],$_SESSION['expires_on'],$_SESSION['tokens'], $_SESSION['login'], $_SESSION['pass'], $_SESSION['longlastingsession'], $_SESSION['poche_user']);
+        // unset($_SESSION['uid'],$_SESSION['ip'],$_SESSION['expires_on'],$_SESSION['tokens'], $_SESSION['login'], $_SESSION['pass'], $_SESSION['longlastingsession'], $_SESSION['poche_user']);
+        
+        // Destruction du cookie (le code peut paraître complexe mais c'est pour être certain de reprendre les mêmes paramètres)
+        $args = array_merge(array(session_name(), ''), array_values(session_get_cookie_params()));
+        $args[2] = time() - 3600;
+        call_user_func_array('setcookie', $args);
+        // Suppression physique de la session
+        session_destroy();
     }
 
     /**
