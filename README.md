@@ -1,5 +1,4 @@
 # what is wallabag ?
-teste
 wallabag is a self hostable application allowing you to not miss any content anymore. Click, save, read it when you can. It extracts content so that you can read it when you have time.
 
 More informations on our website: [wallabag.org](http://wallabag.org)
