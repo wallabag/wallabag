@@ -32,10 +32,10 @@ class Poche
       'fr_FR.utf8' => 'Français',
       'it_IT.utf8' => 'Italiano',
       'pl_PL.utf8' => 'Polski',
+      'pt_BR.utf8' => 'Português (Brasil)',
       'ru_RU.utf8' => 'Pусский',
       'sl_SI.utf8' => 'Slovenščina',
       'uk_UA.utf8' => 'Українська',
-      'pt_BR.utf8' => 'Brasileiro',
     );
     public function __construct()
     {
