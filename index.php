@@ -12,6 +12,12 @@ define ('POCHE', '1.5.3');
 require 'check_setup.php';
 require_once 'inc/poche/global.inc.php';
 
+# Start session
+Session::$sessionName = 'poche';
+if ( !isset($_GET['login']) ) {
+    Session::init();
+}
+
 # Start Poche
 $poche = new Poche();
 $notInstalledMessage = $poche -> getNotInstalledMessage();
