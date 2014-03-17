@@ -31,9 +31,9 @@ class Session
     public static $sessionName = '';
     // If the user does not access any page within this time,
     // his/her session is considered expired (3600 sec. = 1 hour)
-    public static $inactivityTimeout = 86400;
+    public static $inactivityTimeout = 3600;
     // Extra timeout for long sessions (if enabled) (82800 sec. = 23 hours)
-    public static $longSessionTimeout = 604800; // 604800 = a week
+    public static $longSessionTimeout = 7776000; // 7776000 = 90 days
     // If you get disconnected often or if your IP address changes often.
     // Let you disable session cookie hijacking protection
     public static $disableSessionProtection = false;
@@ -48,8 +48,13 @@ class Session
     /**
      * Initialize session
      */
-    public static function init()
+    public static function init($longlastingsession = false)
     {
+        //check if session name is correct
+        if ( session_id() && session_id()!=self::$sessionName ) {
+            session_destroy();
+        }
+
         // Force cookie path (but do not change lifetime)
         $cookie = session_get_cookie_params();
         // Default cookie expiration and path.
@@ -61,12 +66,19 @@ class Session
         if (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on") {
             $ssl = true;
         }
-        session_set_cookie_params(self::$longSessionTimeout, $cookiedir, $_SERVER['HTTP_HOST'], $ssl);
+
+        if ( $longlastingsession ) {
+            session_set_cookie_params(self::$longSessionTimeout, $cookiedir, $_SERVER['HTTP_HOST'], $ssl, true);
+        }
+        else {
+            session_set_cookie_params('', $cookiedir, $_SERVER['HTTP_HOST'], $ssl, true);
+        }
+
         // Use cookies to store session.
         ini_set('session.use_cookies', 1);
         // Force cookies for session  (phpsessionID forbidden in URL)
         ini_set('session.use_only_cookies', 1);
-        if (!session_id()) {
+        if ( !session_id() ) {
             // Prevent php to use sessionID in URL if cookies are disabled.
             ini_set('session.use_trans_sid', false);
             if (!empty(self::$sessionName)) {
@@ -115,6 +127,9 @@ class Session
         if (self::banCanLogin()) {
             if ($login === $loginTest && $password === $passwordTest) {
                 self::banLoginOk();
+
+                self::init($longlastingsession);
+
                 // Generate unique random number to sign forms (HMAC)
                 $_SESSION['uid'] = sha1(uniqid('', true).'_'.mt_rand());
                 $_SESSION['ip'] = self::_allIPs();
@@ -135,6 +150,7 @@ class Session
             self::banLoginFailed();
         }
 
+        self::init();
         return false;
     }
 
