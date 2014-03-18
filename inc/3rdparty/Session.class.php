@@ -73,6 +73,9 @@ class Session
         else {
             session_set_cookie_params('', $cookiedir, $_SERVER['HTTP_HOST'], $ssl, true);
         }
+        //set server side valid session timeout
+        //WARNING! this may not work in shared session environment. See http://www.php.net/manual/en/session.configuration.php#ini.session.gc-maxlifetime about min value: it can be set in any application
+        ini_set('session.gc_maxlifetime', self::$longSessionTimeout);
 
         // Use cookies to store session.
         ini_set('session.use_cookies', 1);
