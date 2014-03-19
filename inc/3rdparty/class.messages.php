@@ -59,6 +59,7 @@ class Messages {
 		$this->msgId = md5(uniqid());
 		
 		// Create the session array if it doesnt already exist
+		settype($_SESSION, 'array');
 		if( !array_key_exists('flash_messages', $_SESSION) ) $_SESSION['flash_messages'] = array();
 		
 	}
