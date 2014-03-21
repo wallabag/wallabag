@@ -14,9 +14,7 @@ require_once 'inc/poche/global.inc.php';
 
 # Start session
 Session::$sessionName = 'poche';
-if ( !isset($_GET['login']) ) {
-    Session::init();
-}
+Session::init();
 
 # Start Poche
 $poche = new Poche();
@@ -122,6 +120,7 @@ if (Session::isLogged()) {
 } else {
     $tpl_file = Tools::getTplFile('login');
     $tpl_vars['http_auth'] = 0;
+    Session::logout();
 }
 
 # because messages can be added in $poche->action(), we have to add this entry now (we can add it before)
