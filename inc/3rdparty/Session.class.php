@@ -51,7 +51,7 @@ class Session
     public static function init($longlastingsession = false)
     {
         //check if session name is correct
-        if ( session_id() && session_id()!=self::$sessionName ) {
+        if ( (session_id() && !empty(self::$sessionName) && session_name()!=self::$sessionName) || $longlastingsession ) {
             session_destroy();
         }
 
@@ -71,7 +71,7 @@ class Session
             session_set_cookie_params(self::$longSessionTimeout, $cookiedir, $_SERVER['HTTP_HOST'], $ssl, true);
         }
         else {
-            session_set_cookie_params('', $cookiedir, $_SERVER['HTTP_HOST'], $ssl, true);
+            session_set_cookie_params(0, $cookiedir, $_SERVER['HTTP_HOST'], $ssl, true);
         }
         //set server side valid session timeout
         //WARNING! this may not work in shared session environment. See http://www.php.net/manual/en/session.configuration.php#ini.session.gc-maxlifetime about min value: it can be set in any application
@@ -183,7 +183,7 @@ class Session
             || (self::$disableSessionProtection === false
                 && $_SESSION['ip'] !== self::_allIPs())
             || time() >= $_SESSION['expires_on']) {
-            self::logout();
+            //self::logout();
 
             return false;
         }
