@@ -12,6 +12,10 @@ define ('POCHE', '1.5.3');
 require 'check_setup.php';
 require_once 'inc/poche/global.inc.php';
 
+# Start session
+Session::$sessionName = 'poche';
+Session::init();
+
 # Start Poche
 $poche = new Poche();
 $notInstalledMessage = $poche -> getNotInstalledMessage();
@@ -116,6 +120,7 @@ if (Session::isLogged()) {
 } else {
     $tpl_file = Tools::getTplFile('login');
     $tpl_vars['http_auth'] = 0;
+    Session::logout();
 }
 
 # because messages can be added in $poche->action(), we have to add this entry now (we can add it before)
