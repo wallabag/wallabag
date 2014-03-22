@@ -388,6 +388,14 @@ class Database {
     public function getLastId($column = '') {
         return $this->getHandle()->lastInsertId($column);
     }
+	
+	public function search($term){
+		$search = '%'.$term.'%';
+		$query = $this->getHandle()->prepare("SELECT * FROM entries WHERE content LIKE ?");
+		$query->execute(array($search));
+		$entries = $query->fetchAll();
+		return $entries;
+	}
 
     public function retrieveAllTags($user_id, $term = null) {
         $sql = "SELECT DISTINCT tags.*, count(entries.id) AS entriescount FROM tags

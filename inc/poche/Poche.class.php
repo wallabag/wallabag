@@ -603,6 +603,14 @@ class Poche
                     'tags' => $tags,
                 );
                 break;
+				
+			case 'search':
+				if (isset($_POST['search'])){
+					$search = $_POST['search'];
+					$tpl_vars['entries'] = $this->store->search($search);
+					$tpl_vars['nb_results'] = count($tpl_vars['entries']);
+				}
+				break;
             case 'view':
                 $entry = $this->store->retrieveOneById($id, $this->user->getId());
                 if ($entry != NULL) {
@@ -772,8 +780,7 @@ class Poche
         $this->emptyCache();
         
         Tools::redirect('?view=config');
-    }
-
+    }	
     /**
      * get credentials from differents sources
      * it redirects the user to the $referer link

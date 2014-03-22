@@ -12,7 +12,29 @@
 {% include '_menu.twig' %}
 {% endblock %}
 {% block precontent %}
-            {% include '_sorting.twig' %}
+<div id="search-form" class="messages info">			
+<form method="post" action="index.php?view=search">
+    <p>
+        <label>{% trans "Search" %}</label> : <input type="text" placeholder="{% trans "Enter your search here" %}" name="search" />
+		<input type="submit" value="{% trans "Search" %} !"></input>
+    </p>
+</form>
+</div>
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        $("#search-form").hide();
+
+        $("#search").click(function(){
+            $("#search-form").toggle();
+            $("#search").toggleClass("current");
+            $("#search-arrow").toggleClass("arrow-down");
+        });
+
+
+    });
+</script>
+{% include '_sorting.twig' %}
 {% endblock %}
 {% block content %}
             {% if tag %}

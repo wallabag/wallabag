@@ -38,7 +38,7 @@ if (! file_exists(ROOT . '/vendor/autoload.php')) {
     require_once ROOT . '/vendor/autoload.php';
 }
 
-# system configuration; database credentials et cetera
+# system configuration; database credentials et caetera
 if (! file_exists(INCLUDES . '/poche/config.inc.php')) {
     Poche::$configFileAvailable = false;
 } else {
