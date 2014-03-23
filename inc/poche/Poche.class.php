@@ -605,8 +605,8 @@ class Poche
                 break;
 				
 			case 'search':
-				if (isset($_POST['search'])){
-					$search = $_POST['search'];
+				if (isset($_GET['search'])){
+					$search = $_GET['search'];
 					$tpl_vars['entries'] = $this->store->search($search);
 					$tpl_vars['nb_results'] = count($tpl_vars['entries']);
 				}
