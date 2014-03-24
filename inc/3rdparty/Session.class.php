@@ -68,10 +68,10 @@ class Session
         }
 
         if ( $longlastingsession ) {
-            session_set_cookie_params(self::$longSessionTimeout, $cookiedir, $_SERVER['HTTP_HOST'], $ssl, true);
+            session_set_cookie_params(self::$longSessionTimeout, $cookiedir, null, $ssl, true);
         }
         else {
-            session_set_cookie_params(0, $cookiedir, $_SERVER['HTTP_HOST'], $ssl, true);
+            session_set_cookie_params(0, $cookiedir, null, $ssl, true);
         }
         //set server side valid session timeout
         //WARNING! this may not work in shared session environment. See http://www.php.net/manual/en/session.configuration.php#ini.session.gc-maxlifetime about min value: it can be set in any application
