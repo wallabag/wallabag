@@ -1122,7 +1122,13 @@ class Poche
     public function generateToken()
     {
         if (ini_get('open_basedir') === '') {
-            $token = substr(base64_encode(file_get_contents('/dev/urandom', false, null, 0, 20)), 0, 15);
+			if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+			echo 'This is a server using Windows!';
+			// alternative to /dev/urandom for Windows
+			$token = substr(base64_encode(uniqid(mt_rand(), true)), 0, 20);
+			} else {
+			$token = substr(base64_encode(file_get_contents('/dev/urandom', false, null, 0, 20)), 0, 15);
+			}
         }
         else {
             $token = substr(base64_encode(uniqid(mt_rand(), true)), 0, 20);
