@@ -391,8 +391,8 @@ class Database {
 	
 	public function search($term){
 		$search = '%'.$term.'%';
-		$query = $this->getHandle()->prepare("SELECT * FROM entries WHERE content LIKE ?");
-		$query->execute(array($search));
+		$query = $this->getHandle()->prepare("SELECT * FROM entries WHERE content LIKE ? OR title LIKE ? OR url LIKE ?"); //searches in content, title and URL
+		$query->execute(array($search,$search,$search));
 		$entries = $query->fetchAll();
 		return $entries;
 	}
