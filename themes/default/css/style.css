@@ -355,3 +355,50 @@ a.reading-time span {
   vertical-align: top;
 }
 
+
+/* ==========================================================================
+	"save a link" popup div related styles
+	========================================================================== */
+
+#bagit-form {
+  display: none;
+  padding-left: 30px;
+  width: 450px;
+
+}
+
+a#bagit-form-close {
+  color: #FFF;
+  display: inline-block;
+  float: right;
+  background: url("../img/messages/close.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+  height: 16px;
+  margin: -14px -8px 0 0;
+  width: 16px;
+  text-decoration: none;
+}
+
+
+.add-to-wallabag-link-after {
+  background-color: #000;
+  color: #fff;
+  padding: 0 4px 1px 3px;
+  font-weight: bold;
+  font-size: 0.7em;
+  border-radius: 4px;
+}
+.add-to-wallabag-link-after:hover, .add-to-wallabag-link-after:active {
+  color: #fff;
+}
+.add-to-wallabag-link-after:visited {
+  color: #999;
+}
+
+#add-link-result {
+  display: inline;
+  padding-left: 10px;
+}
+
+.opacity03 {
+  /*opacity: 0.3;*/
+}
