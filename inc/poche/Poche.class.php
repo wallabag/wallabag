@@ -1092,6 +1092,7 @@ class Poche
     public function export()
     {
         $entries = $this->store->retrieveAll($this->user->getId());
+		header('Content-Disposition: attachment; filename=poche-export');
         echo $this->tpl->render('export.twig', array(
             'export' => Tools::renderJson($entries),
         ));
