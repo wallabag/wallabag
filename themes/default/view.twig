@@ -1,6 +1,7 @@
 {% extends "layout.twig" %}
 {% block title %}{{ entry.title|raw }} ({{ entry.url | e | getDomain }}){% endblock %}
 {% block content %}
+        {% include '_pocheit-form.twig' %}
         <div id="article_toolbar">
             <ul>
                 <li><a href="./" title="{% trans "Return home" %}" class="tool back"><span>{% trans "Return home" %}</span></a></li>
@@ -55,3 +56,4 @@
         });
         </script>
 {% endblock %}
+
