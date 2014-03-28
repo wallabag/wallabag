@@ -2,6 +2,7 @@
 define('RSS2', 1, true);
 define('JSON', 2, true);
 define('JSONP', 3, true);
+define('ATOM', 4, true);
 
  /**
  * Univarsel Feed Writer class
