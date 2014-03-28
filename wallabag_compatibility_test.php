@@ -171,7 +171,13 @@ background-color:#FF9500;
 </head>
 
 <body>
-
+<?php
+$frominstall = false;
+if (isset($_GET['from'])){
+	if ($_GET['from'] == 'install'){
+		$frominstall = true;
+		}}
+?>
 <div id="site">
 	<div id="content">
 
@@ -337,15 +343,23 @@ background-color:#FF9500;
 			<?php if ($php_ok && $xml_ok && $pcre_ok && $filter_ok && $allow_url_fopen_ok && $gettext_ok) { ?>
 				<h3>Bottom Line: Yes, you can!</h3>
 				<p><em>Your webhost has its act together!</em></p>
+				<?php if (!$frominstall) { ?>
 				<p>You can download the latest version of <?php echo $app_name; ?> from <a href="http://wallabag.org/download">wallabag.org</a>.</p>
-				<p>If you already have done that, you should access <a href="index.php">the index.php file</a> of your installation to configure and start using wallabag</p>
+				<p>If you already have done that, you should access <a href="index.php">the index.php file</a> of your installation to configure and/or start using wallabag</p>
+				<?php } else { ?>
+				<p>You can now <a href="index.php">return to the installation section</a>.</p>
+				<?php } ?>
 				<p><strong>Note</strong>: Passing this test does not guarantee that <?php echo $app_name; ?> will run on your webhost &mdash; it only ensures that the basic requirements have been addressed. If you experience any problems, please let us know.</p>
 			<?php //} else if ($php_ok && $xml_ok && $pcre_ok && $mbstring_ok && $allow_url_fopen_ok && $filter_ok) { ?>
 			<?php } else if ($php_ok && $xml_ok && $pcre_ok && $allow_url_fopen_ok && $filter_ok && $gettext_ok) { ?>
 				<h3>Bottom Line: Yes, you can!</h3>
 				<p><em>For most feeds, it'll run with no problems.</em> There are certain languages that you might have a hard time with though.</p>
+				<?php if (!$frominstall) { ?>
 				<p>You can download the latest version of <?php echo $app_name; ?> from <a href="http://wallabag.org/download">wallabag.org</a>.</p>
-				<p>If you already have done that, you should access <a href="index.php">the index.php file</a> of your installation to configure and start using wallabag</p>
+				<p>If you already have done that, you should access <a href="index.php">the index.php file</a> of your installation to configure and/or start using wallabag</p>
+				<?php } else { ?>
+				<p>You can now <a href="index.php">return to the installation section</a>.</p>
+				<?php } ?>
 				<p><strong>Note</strong>: Passing this test does not guarantee that <?php echo $app_name; ?> will run on your webhost &mdash; it only ensures that the basic requirements have been addressed. If you experience any problems, please let us know.</p>
 			<?php } else { ?>
 				<h3>Bottom Line: We're sorry…</h3>

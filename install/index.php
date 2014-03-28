@@ -1,7 +1,28 @@
 <?php
 $errors = array();
 $successes = array();
-if ($_POST['download']) {
+
+/* Function taken from at http://php.net/manual/en/function.rmdir.php#110489
+ * Idea : nbari at dalmp dot com
+ * Rights unknown
+ * Here in case of .gitignore files
+ */
+function delTree($dir) {
+    $files = array_diff(scandir($dir), array('.','..'));
+    foreach ($files as $file) {
+      (is_dir("$dir/$file")) ? delTree("$dir/$file") : unlink("$dir/$file");
+    }
+    return rmdir($dir);
+  }
+
+if (isset($_GET['clean'])) {
+	if (is_dir('install')){
+	delTree('install');
+	header('Location: index.php');      
+	}
+}
+
+if (isset($_POST['download'])) {
     if (!file_put_contents("cache/vendor.zip", fopen("http://static.wallabag.org/files/vendor.zip", 'r'))) {
         $errors[] = 'Impossible to download vendor.zip. Please <a href="http://wllbg.org/vendor">download it manually<∕a> and unzip it in your wallabag folder.';
     }
@@ -25,7 +46,7 @@ if ($_POST['download']) {
         }
     }
 }
-else if ($_POST['install']) {
+else if (isset($_POST['install'])) {
     if (!is_dir('vendor')) {
         $errors[] = 'You must install twig before.';
     }
@@ -64,6 +85,7 @@ else if ($_POST['install']) {
                 else {
                     $db_path = 'sqlite:' . realpath('') . '/db/poche.sqlite';
                     $handle = new PDO($db_path);
+					$sql_structure = "";
                 }
             }
             else {
@@ -129,7 +151,7 @@ else if ($_POST['install']) {
                 $params = array($id_user, 'language', 'en_EN.UTF8');
                 $query = executeQuery($handle, $sql, $params);
 
-                $successes[] = 'wallabag is now installed. Don\'t forget to delete install folder. Then, <a href="index.php">reload this page</a>.';
+                $successes[] = 'wallabag is now installed. You can now <a href="index.php?clean=0">access it !</a>';
             }
         }
     }
@@ -198,18 +220,18 @@ else if ($_POST['install']) {
                 <?php if (file_exists('inc/poche/config.inc.php') && is_dir('vendor')) : ?>
                 <div class='messages success install'>
                     <p>
-                        wallabag seems already installed. If you want to update it, you only have to delete install folder.
+                        wallabag seems already installed. If you want to update it, you only have to delete install folder, then <a href="index.php">reload this page</a>.
                     </p>
                 </div>
                 <?php endif; ?>    
             <?php endif; ?>
             <p>To install wallabag, you just have to fill the following fields. That's all.</p>
-            <p>Don't forget to check your server compatibility <a href="wallabag_compatibility_test.php">here</a>.</p>
+            <p>Don't forget to check your server compatibility <a href="wallabag_compatibility_test.php?from=install">here</a>.</p>
             <form method="post">
                 <fieldset>
                     <legend><strong>Technical settings</strong></legend>
                     <?php if (!is_dir('vendor')) : ?>
-                        <div class='messages notice install'>wallabag needs twig, a template engine (<a href="http://twig.sensiolabs.org/">?</a>). Two ways to install it: 
+                        <div class='messages notice install'>wallabag needs twig, a template engine (<a href="http://twig.sensiolabs.org/">?</a>). Two ways to install it:<br />
                         <ul>
                             <li>automatically download and extract vendor.zip into your wallabag folder. 
                             <p><input type="submit" name="download" value="Download vendor.zip" /></p>
@@ -245,7 +267,7 @@ php composer.phar install</code></pre></li>
                                     <li><label for="pg_server">Server</label> <input type="text" placeholder="localhost" id="pg_server" name="pg_server" /></li>
                                     <li><label for="pg_database">Database</label> <input type="text" placeholder="wallabag" id="pg_database" name="pg_database" /></li>
                                     <li><label for="pg_user">User</label> <input type="text" placeholder="user" id="pg_user" name="pg_user" /></li>
-                                  id  <li><label for="pg_password">Password</label> <input type="text" placeholder="p4ssw0rd" id="pg_password" name="pg_password" /></li>
+                                    <li><label for="pg_password">Password</label> <input type="text" placeholder="p4ssw0rd" id="pg_password" name="pg_password" /></li>
                                 </ul>
                             </li>
                         </ul>
