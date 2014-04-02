@@ -9,9 +9,9 @@ define('JSONP', 3, true);
  * Genarate RSS2 or JSON (original: RSS 1.0, RSS2.0 and ATOM Feed)
  *
  * Modified for FiveFilters.org's Full-Text RSS project
- * to allow for inclusion of hubs, JSON output. 
+ * to allow for inclusion of hubs, JSON output.
  * Stripped RSS1 and ATOM support.
- *                             
+ *
  * @package     UnivarselFeedWriter
  * @author      Anis uddin Ahmad <anisniit@gmail.com>
  * @link        http://www.ajaxray.com/projects/rss
@@ -26,32 +26,32 @@ define('JSONP', 3, true);
 	 private $CDATAEncoding = array();  // The tag names which have to encoded as CDATA
 	 private $xsl			= null;		// stylesheet to render RSS (used by Chrome)
 	 private $json			= null;		// JSON object
-	 
-	 private $version   = null; 
-	
+
+	 private $version   = null;
+
 	/**
 	* Constructor
-	* 
-	* @param    constant    the version constant (RSS2 or JSON).       
-	*/ 
+	*
+	* @param    constant    the version constant (RSS2 or JSON).
+	*/
 	function __construct($version = RSS2)
-	{	
+	{
 		$this->version = $version;
-			
+
 		// Setting default value for assential channel elements
 		$this->channels['title']        = $version . ' Feed';
 		$this->channels['link']         = 'http://www.ajaxray.com/blog';
-				
+
 		//Tag names to encode in CDATA
 		$this->CDATAEncoding = array('description', 'content:encoded', 'content', 'subtitle', 'summary');
 	}
-	
+
 	public function setFormat($format) {
 		$this->version = $format;
 	}
 
 	// Start # public functions ---------------------------------------------
-	
+
 	/**
 	* Set a channel element
 	* @access   public
@@ -63,11 +63,11 @@ define('JSONP', 3, true);
 	{
 		$this->channels[$elementName] = $content ;
 	}
-	
+
 	/**
-	* Set multiple channel elements from an array. Array elements 
+	* Set multiple channel elements from an array. Array elements
 	* should be 'channelName' => 'channelContent' format.
-	* 
+	*
 	* @access   public
 	* @param    array   array of channels
 	* @return   void
@@ -75,30 +75,30 @@ define('JSONP', 3, true);
 	public function setChannelElementsFromArray($elementArray)
 	{
 		if(! is_array($elementArray)) return;
-		foreach ($elementArray as $elementName => $content) 
+		foreach ($elementArray as $elementName => $content)
 		{
 			$this->setChannelElement($elementName, $content);
 		}
 	}
-	
+
 	/**
 	* Genarate the actual RSS/JSON file
-	* 
+	*
 	* @access   public
 	* @return   void
-	*/ 
+	*/
 	public function genarateFeed()
 	{
 		if ($this->version == RSS2) {
-			header('Content-type: text/xml; charset=UTF-8');
+// 			header('Content-type: text/xml; charset=UTF-8');
 			// this line prevents Chrome 20 from prompting download
 			// used by Google: https://news.google.com/news/feeds?ned=us&topic=b&output=rss
-			header('X-content-type-options: nosniff');
+// 			header('X-content-type-options: nosniff');
 		} elseif ($this->version == JSON) {
-			header('Content-type: application/json; charset=UTF-8');
+// 			header('Content-type: application/json; charset=UTF-8');
 			$this->json = new stdClass();
 		} elseif ($this->version == JSONP) {
-			header('Content-type: application/javascript; charset=UTF-8');
+// 			header('Content-type: application/javascript; charset=UTF-8');
 			$this->json = new stdClass();
 		}
 		$this->printHead();
@@ -109,10 +109,10 @@ define('JSONP', 3, true);
 			echo json_encode($this->json);
 		}
 	}
-	
+
 	/**
 	* Create a new FeedItem.
-	* 
+	*
 	* @access   public
 	* @return   object  instance of FeedItem class
 	*/
@@ -121,24 +121,24 @@ define('JSONP', 3, true);
 		$Item = new FeedItem($this->version);
 		return $Item;
 	}
-	
+
 	/**
 	* Add a FeedItem to the main class
-	* 
+	*
 	* @access   public
 	* @param    object  instance of FeedItem class
 	* @return   void
 	*/
 	public function addItem($feedItem)
 	{
-		$this->items[] = $feedItem;    
+		$this->items[] = $feedItem;
 	}
-	
+
 	// Wrapper functions -------------------------------------------------------------------
-	
+
 	/**
 	* Set the 'title' channel element
-	* 
+	*
 	* @access   public
 	* @param    srting  value of 'title' channel tag
 	* @return   void
@@ -147,59 +147,59 @@ define('JSONP', 3, true);
 	{
 		$this->setChannelElement('title', $title);
 	}
-	
+
 	/**
 	* Add a hub to the channel element
-	* 
+	*
 	* @access   public
 	* @param    string URL
 	* @return   void
 	*/
 	public function addHub($hub)
 	{
-		$this->hubs[] = $hub;    
+		$this->hubs[] = $hub;
 	}
-	
+
 	/**
 	* Set XSL URL
-	* 
+	*
 	* @access   public
 	* @param    string URL
 	* @return   void
 	*/
 	public function setXsl($xsl)
 	{
-		$this->xsl = $xsl;    
-	}	
-	
+		$this->xsl = $xsl;
+	}
+
 	/**
 	* Set self URL
-	* 
+	*
 	* @access   public
 	* @param    string URL
 	* @return   void
 	*/
 	public function setSelf($self)
 	{
-		$this->self = $self;    
-	}	
-	
+		$this->self = $self;
+	}
+
 	/**
 	* Set the 'description' channel element
-	* 
+	*
 	* @access   public
 	* @param    srting  value of 'description' channel tag
 	* @return   void
 	*/
 	public function setDescription($desciption)
 	{
-		$tag = ($this->version == ATOM)? 'subtitle' : 'description'; 
+		$tag = ($this->version == ATOM)? 'subtitle' : 'description';
 		$this->setChannelElement($tag, $desciption);
 	}
-	
+
 	/**
 	* Set the 'link' channel element
-	* 
+	*
 	* @access   public
 	* @param    srting  value of 'link' channel tag
 	* @return   void
@@ -208,10 +208,10 @@ define('JSONP', 3, true);
 	{
 		$this->setChannelElement('link', $link);
 	}
-	
+
 	/**
 	* Set the 'image' channel element
-	* 
+	*
 	* @access   public
 	* @param    srting  title of image
 	* @param    srting  link url of the imahe
@@ -222,14 +222,14 @@ define('JSONP', 3, true);
 	{
 		$this->setChannelElement('image', array('title'=>$title, 'link'=>$link, 'url'=>$url));
 	}
-	
+
 	// End # public functions ----------------------------------------------
-	
+
 	// Start # private functions ----------------------------------------------
-	
+
 	/**
 	* Prints the xml and rss namespace
-	* 
+	*
 	* @access   private
 	* @return   void
 	*/
@@ -247,10 +247,10 @@ define('JSONP', 3, true);
 			$this->json->rss = array('@attributes' => array('version' => '2.0'));
 		}
 	}
-	
+
 	/**
 	* Closes the open tags at the end of file
-	* 
+	*
 	* @access   private
 	* @return   void
 	*/
@@ -258,14 +258,14 @@ define('JSONP', 3, true);
 	{
 		if ($this->version == RSS2)
 		{
-			echo '</channel>',PHP_EOL,'</rss>'; 
-		}    
+			echo '</channel>',PHP_EOL,'</rss>';
+		}
 		// do nothing for JSON
 	}
 
 	/**
 	* Creates a single node as xml format
-	* 
+	*
 	* @access   private
 	* @param    string  name of the tag
 	* @param    mixed   tag value as string or array of nested tags in 'tagName' => 'tagValue' format
@@ -273,22 +273,22 @@ define('JSONP', 3, true);
 	* @return   string  formatted xml tag
 	*/
 	private function makeNode($tagName, $tagContent, $attributes = null)
-	{        
+	{
 		if ($this->version == RSS2)
 		{
 			$nodeText = '';
 			$attrText = '';
 			if (is_array($attributes))
 			{
-				foreach ($attributes as $key => $value) 
+				foreach ($attributes as $key => $value)
 				{
 					$attrText .= " $key=\"$value\" ";
 				}
 			}
 			$nodeText .= "<{$tagName}{$attrText}>";
 			if (is_array($tagContent))
-			{ 
-				foreach ($tagContent as $key => $value) 
+			{
+				foreach ($tagContent as $key => $value)
 				{
 					$nodeText .= $this->makeNode($key, $value);
 				}
@@ -297,7 +297,7 @@ define('JSONP', 3, true);
 			{
 				//$nodeText .= (in_array($tagName, $this->CDATAEncoding))? $tagContent : htmlentities($tagContent);
 				$nodeText .= htmlspecialchars($tagContent);
-			}           
+			}
 			//$nodeText .= (in_array($tagName, $this->CDATAEncoding))? "]]></$tagName>" : "</$tagName>";
 			$nodeText .= "</$tagName>";
 			return $nodeText . PHP_EOL;
@@ -321,7 +321,7 @@ define('JSONP', 3, true);
 		}
 		return ''; // should not get here
 	}
-	
+
 	private function json_keys(array $array) {
 		$new = array();
 		foreach ($array as $key => $val) {
@@ -334,7 +334,7 @@ define('JSONP', 3, true);
 		}
 		return $new;
 	}
-	
+
 	/**
 	* @desc     Print channels
 	* @access   private
@@ -344,7 +344,7 @@ define('JSONP', 3, true);
 	{
 		//Start channel tag
 		if ($this->version == RSS2) {
-			echo '<channel>' . PHP_EOL;    
+			echo '<channel>' . PHP_EOL;
 			// add hubs
 			foreach ($this->hubs as $hub) {
 				//echo $this->makeNode('link', '', array('rel'=>'hub', 'href'=>$hub, 'xmlns'=>'http://www.w3.org/2005/Atom'));
@@ -356,7 +356,7 @@ define('JSONP', 3, true);
 				echo '<link rel="self" href="'.htmlspecialchars($this->self).'" xmlns="http://www.w3.org/2005/Atom" />' . PHP_EOL;
 			}
 			//Print Items of channel
-			foreach ($this->channels as $key => $value) 
+			foreach ($this->channels as $key => $value)
 			{
 				echo $this->makeNode($key, $value);
 			}
@@ -364,26 +364,26 @@ define('JSONP', 3, true);
 			$this->json->rss['channel'] = (object)$this->json_keys($this->channels);
 		}
 	}
-	
+
 	/**
 	* Prints formatted feed items
-	* 
+	*
 	* @access   private
 	* @return   void
 	*/
 	private function printItems()
-	{    
+	{
 		foreach ($this->items as $item) {
 			$itemElements = $item->getElements();
-			
+
 			echo $this->startItem();
-			
+
 			if ($this->version == JSON || $this->version == JSONP) {
 				$json_item = array();
 			}
-			
+
 			foreach ($itemElements as $thisElement) {
-				foreach ($thisElement as $instance) {			
+				foreach ($thisElement as $instance) {
 					if ($this->version == RSS2) {
 						echo $this->makeNode($instance['name'], $instance['content'], $instance['attributes']);
 					} elseif ($this->version == JSON || $this->version == JSONP) {
@@ -406,10 +406,10 @@ define('JSONP', 3, true);
 			}
 		}
 	}
-	
+
 	/**
 	* Make the starting tag of channels
-	* 
+	*
 	* @access   private
 	* @return   void
 	*/
@@ -417,14 +417,14 @@ define('JSONP', 3, true);
 	{
 		if ($this->version == RSS2)
 		{
-			echo '<item>' . PHP_EOL; 
-		}    
+			echo '<item>' . PHP_EOL;
+		}
 		// nothing for JSON
 	}
-	
+
 	/**
 	* Closes feed item tag
-	* 
+	*
 	* @access   private
 	* @return   void
 	*/
@@ -432,10 +432,10 @@ define('JSONP', 3, true);
 	{
 		if ($this->version == RSS2)
 		{
-			echo '</item>' . PHP_EOL; 
-		}    
+			echo '</item>' . PHP_EOL;
+		}
 		// nothing for JSON
 	}
-	
+
 	// End # private functions ----------------------------------------------
  }

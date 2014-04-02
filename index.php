@@ -40,7 +40,7 @@ $tpl_vars = array(
 
 if (! empty($notInstalledMessage)) {
     if (! Poche::$canRenderTemplates || ! Poche::$configFileAvailable) {
-        # We cannot use Twig to display the error message 
+        # We cannot use Twig to display the error message
         echo '<h1>Errors</h1><ol>';
         foreach ($notInstalledMessage as $message) {
             echo '<li>' . $message . '</li>';
@@ -67,7 +67,8 @@ if (isset($_GET['login'])) {
     # Update password
     $poche->updatePassword();
 } elseif (isset($_GET['import'])) {
-    $import = $poche->import($_GET['from']);
+    $import = $poche->import();
+    $tpl_vars = array_merge($tpl_vars, $import);
 } elseif (isset($_GET['download'])) {
     Tools::download_db();
 } elseif (isset($_GET['empty-cache'])) {
