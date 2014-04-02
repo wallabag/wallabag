@@ -389,12 +389,13 @@ class Database {
         return $this->getHandle()->lastInsertId($column);
     }
 	
-	public function search($term){
-		$search = '%'.$term.'%';
-		$query = $this->getHandle()->prepare("SELECT * FROM entries WHERE content LIKE ? OR title LIKE ? OR url LIKE ?"); //searches in content, title and URL
-		$query->execute(array($search,$search,$search));
-		$entries = $query->fetchAll();
-		return $entries;
+   public function search($term,$id,$limit = ''){
+      $search = '%'.$term.'%';
+      $sql_action     = ("SELECT * FROM entries WHERE user_id=? AND (content LIKE ? OR title LIKE ? OR url LIKE ?) "); //searches in content, title and URL
+      $sql_action .= $this->getEntriesOrder().' ' . $limit;
+      $params_action  = array($id,$search,$search,$search);
+      $query          = $this->executeQuery($sql_action, $params_action);
+      return $query->fetchAll();
 	}
 
     public function retrieveAllTags($user_id, $term = null) {

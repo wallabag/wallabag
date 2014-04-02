@@ -24,7 +24,7 @@ if (isset($_GET['clean'])) {
 
 if (isset($_POST['download'])) {
     if (!file_put_contents("cache/vendor.zip", fopen("http://static.wallabag.org/files/vendor.zip", 'r'))) {
-        $errors[] = 'Impossible to download vendor.zip. Please <a href="http://wllbg.org/vendor">download it manually<âˆ•a> and unzip it in your wallabag folder.';
+        $errors[] = 'Impossible to download vendor.zip. Please <a href="http://wllbg.org/vendor">download it manually</a> and unzip it in your wallabag folder.';
     }
     else {
         if (extension_loaded('zip')) {
@@ -165,7 +165,7 @@ else if (isset($_POST['install'])) {
         <!--[if IE]>
         <meta http-equiv="X-UA-Compatible" content="IE=10">
         <![endif]-->
-        <title>wallabag â€” installation</title>
+        <title>wallabag - installation</title>
         <link rel="shortcut icon" type="image/x-icon" href="themes/baggy/img/favicon.ico" />
         <link rel="apple-touch-icon-precomposed" sizes="144x144" href="themes/baggy/img/apple-touch-icon-144x144-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="themes/baggy/img/apple-touch-icon-72x72-precomposed.png">
@@ -176,7 +176,7 @@ else if (isset($_POST['install'])) {
         <link rel="stylesheet" href="themes/baggy/css/main.css" media="all">
         <link rel="stylesheet" href="themes/baggy/css/messages.css" media="all">
         <link rel="stylesheet" href="themes/baggy/css/print.css" media="print">
-        <script src="themes/baggy/js/jquery-2.0.3.min.js"></script>
+        <script src="themes/default/js/jquery-2.0.3.min.js"></script>
         <script src="themes/baggy/js/init.js"></script>
     </head>
     <body>
