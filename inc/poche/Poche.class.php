@@ -597,14 +597,19 @@ class Poche
                     'tags' => $tags,
                 );
                 break;
-
-			case 'search':
-				if (isset($_GET['search'])){
-					$search = $_GET['search'];
-					$tpl_vars['entries'] = $this->store->search($search);
-					$tpl_vars['nb_results'] = count($tpl_vars['entries']);
-				}
-				break;
+            case 'search':
+                if (isset($_GET['search'])) {
+                   $search = filter_var($_GET['search'], FILTER_SANITIZE_STRING);
+                   $tpl_vars['entries'] = $this->store->search($search, $this->user->getId());
+                   $count = count($tpl_vars['entries']);
+                   $this->pagination->set_total($count);
+                   $page_links = str_replace(array('previous', 'next'), array(_('previous'), _('next')),
+                            $this->pagination->page_links('?view=' . $view . '?search=' . $search . '&sort=' . $_SESSION['sort'] . '&' ));
+                   $tpl_vars['page_links'] = $page_links;
+                   $tpl_vars['nb_results'] = $count;
+                   $tpl_vars['search_term'] = $search;
+                }
+                break;
             case 'view':
                 $entry = $this->store->retrieveOneById($id, $this->user->getId());
                 if ($entry != NULL) {

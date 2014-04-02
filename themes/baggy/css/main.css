@@ -777,7 +777,7 @@ margin-top:1em;
   }
 
 .warning {
-  font-size: 3em;
+  /* font-size: 3em;
   color: #999;
   font-style: italic;
   position: absolute;
@@ -786,7 +786,10 @@ margin-top:1em;
   width: 100%;
   text-align: center;
   padding-right: 5%;
-  margin-top: -2em;
+  margin-top: -2em;*/
+  font-weight: bold;
+  display: block;
+  width: 100%;
 }
 
 /* ==========================================================================
