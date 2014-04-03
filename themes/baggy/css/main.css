@@ -424,6 +424,7 @@ footer a {
     content: none;
   }
 
+
 .entrie h2 a {
   display: block;
   text-decoration: none;
@@ -435,7 +436,7 @@ footer a {
        -o-transition: all 0.5s ease;
           transition: all 0.5s ease;
 }
-
+/*
 .entrie h2 a:after {
   content: "";
   position: absolute;
@@ -444,6 +445,7 @@ footer a {
   height: 100%;
   left: 0;
 }
+*/
 
 .entrie p {
   color: #666;
