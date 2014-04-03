@@ -368,31 +368,23 @@ class Poche
         switch ($action)
         {
             case 'add':
-                if (!$import) {
-                    $content = Tools::getPageContent($url);
-                    $title = ($content['rss']['channel']['item']['title'] != '') ? $content['rss']['channel']['item']['title'] : _('Untitled');
-                    $body = $content['rss']['channel']['item']['description'];
+                $content = Tools::getPageContent($url);
+                $title = ($content['rss']['channel']['item']['title'] != '') ? $content['rss']['channel']['item']['title'] : _('Untitled');
+                $body = $content['rss']['channel']['item']['description'];
 
-                    // clean content from prevent xss attack
-                    $config = HTMLPurifier_Config::createDefault();
-                    $config->set('Cache.SerializerPath', CACHE);
-                    $purifier = new HTMLPurifier($config);
-                    $title = $purifier->purify($title);
-                    $body = $purifier->purify($body);
-                }
-                else {
-                    $title = '';
-                    $body = '';
-                }
+                // clean content from prevent xss attack
+                $config = HTMLPurifier_Config::createDefault();
+                $config->set('Cache.SerializerPath', CACHE);
+                $purifier = new HTMLPurifier($config);
+                $title = $purifier->purify($title);
+                $body = $purifier->purify($body);
 
                 //search for possible duplicate
                 $duplicate = NULL;
-                if (!$import) {
-                  $duplicate = $this->store->retrieveOneByURL($url->getUrl(), $this->user->getId());
-                }
+                $duplicate = $this->store->retrieveOneByURL($url->getUrl(), $this->user->getId());
 
                 $last_id = $this->store->add($url->getUrl(), $title, $body, $this->user->getId());
-                if ( $last_id && !$import ) {
+                if ( $last_id ) {
                     Tools::logm('add link ' . $url->getUrl());
                     if (DOWNLOAD_PICTURES) {
                         $content = filtre_picture($body, $url->getUrl(), $last_id);
@@ -416,18 +408,14 @@ class Poche
                     $this->messages->add('s', _('the link has been added successfully'));
                 }
                 else {
-                    if (!$import) {
-                        $this->messages->add('e', _('error during insertion : the link wasn\'t added'));
-                        Tools::logm('error during insertion : the link wasn\'t added ' . $url->getUrl());
-                    }
+                    $this->messages->add('e', _('error during insertion : the link wasn\'t added'));
+                    Tools::logm('error during insertion : the link wasn\'t added ' . $url->getUrl());
                 }
 
-                if (!$import) {
-                    if ($autoclose == TRUE) {
-                      Tools::redirect('?view=home');
-                    } else {
-                      Tools::redirect('?view=home&closewin=true');
-                    }
+                if ($autoclose == TRUE) {
+                  Tools::redirect('?view=home');
+                } else {
+                  Tools::redirect('?view=home&closewin=true');
                 }
                 break;
             case 'delete':
@@ -448,33 +436,21 @@ class Poche
             case 'toggle_fav' :
                 $this->store->favoriteById($id, $this->user->getId());
                 Tools::logm('mark as favorite link #' . $id);
-                if (!$import) {
-                    Tools::redirect();
-                }
+                Tools::redirect();
                 break;
             case 'toggle_archive' :
                 $this->store->archiveById($id, $this->user->getId());
                 Tools::logm('archive link #' . $id);
-                if (!$import) {
-                    Tools::redirect();
-                }
+                Tools::redirect();
                 break;
             case 'archive_all' :
                 $this->store->archiveAll($this->user->getId());
                 Tools::logm('archive all links');
-                if (!$import) {
-                    Tools::redirect();
-                }
+                Tools::redirect();
                 break;
             case 'add_tag' :
-                if($import){
-                    $entry_id = $id;
-                    $tags = explode(',', $tags);
-                }
-                else{
-                    $tags = explode(',', $_POST['value']);
-                    $entry_id = $_POST['entry_id'];
-                }
+                $tags = explode(',', $_POST['value']);
+                $entry_id = $_POST['entry_id'];
                 $entry = $this->store->retrieveOneById($entry_id, $this->user->getId());
                 if (!$entry) {
                     $this->messages->add('e', _('Article not found!'));
@@ -509,9 +485,7 @@ class Poche
                       $this->store->setTagToEntry($tag_id, $entry_id);
                     }
                 }
-                if(!$import) {
-                    Tools::redirect();
-                }
+                Tools::redirect();
                 break;
             case 'remove_tag' :
                 $tag_id = $_GET['tag_id'];
@@ -845,204 +819,17 @@ class Poche
     }
 
     /**
-     * import from Instapaper. poche needs a ./instapaper-export.html file
-     * @todo add the return value
-     * @param string $targetFile the file used for importing
-     * @return boolean
-     */
-    private function importFromInstapaper($targetFile)
-    {
-        # TODO gestion des articles favs
-        $html = new simple_html_dom();
-        $html->load_file($targetFile);
-        Tools::logm('starting import from instapaper');
-
-        $read = 0;
-        $errors = array();
-        foreach($html->find('ol') as $ul)
-        {
-            foreach($ul->find('li') as $li)
-            {
-                $a = $li->find('a');
-                $url = new Url(base64_encode($a[0]->href));
-                $this->action('add', $url, 0, TRUE);
-                if ($read == '1') {
-                    $sequence = '';
-                    if (STORAGE == 'postgres') {
-                        $sequence = 'entries_id_seq';
-                    }
-                    $last_id = $this->store->getLastId($sequence);
-                    $this->action('toggle_archive', $url, $last_id, TRUE);
-                }
-            }
-
-            # the second <ol> is for read links
-            $read = 1;
-        }
-
-        $unlink = unlink($targetFile);
-        $this->messages->add('s', _('import from instapaper completed. You have to execute the cron to fetch content.'));
-        Tools::logm('import from instapaper completed');
-        Tools::redirect();
-    }
-
-    /**
-     * import from Pocket. poche needs a ./ril_export.html file
-     * @todo add the return value
-     * @param string $targetFile the file used for importing
-     * @return boolean
-     */
-    private function importFromPocket($targetFile)
-    {
-        # TODO gestion des articles favs
-        $html = new simple_html_dom();
-        $html->load_file($targetFile);
-        Tools::logm('starting import from pocket');
-
-        $read = 0;
-        $errors = array();
-        foreach($html->find('ul') as $ul)
-        {
-            foreach($ul->find('li') as $li)
-            {
-                $a = $li->find('a');
-                $url = new Url(base64_encode($a[0]->href));
-                $this->action('add', $url, 0, TRUE);
-                $sequence = '';
-                if (STORAGE == 'postgres') {
-                    $sequence = 'entries_id_seq';
-                }
-                $last_id = $this->store->getLastId($sequence);
-                if ($read == '1') {
-                    $this->action('toggle_archive', $url, $last_id, TRUE);
-                }
-                $tags = $a[0]->tags;
-                if(!empty($tags)) {
-                    $this->action('add_tag',$url,$last_id,true,false,$tags);
-                }
-            }
-
-            # the second <ul> is for read links
-            $read = 1;
-        }
-
-        $unlink = unlink($targetFile);
-        $this->messages->add('s', _('import from pocket completed. You have to execute the cron to fetch content.'));
-        Tools::logm('import from pocket completed');
-        Tools::redirect();
-    }
-
-    /**
-     * import from Readability. poche needs a ./readability file
-     * @todo add the return value
-     * @param string $targetFile the file used for importing
-     * @return boolean
-     */
-    private function importFromReadability($targetFile)
-    {
-        # TODO gestion des articles lus / favs
-        $str_data = file_get_contents($targetFile);
-        $data = json_decode($str_data,true);
-        Tools::logm('starting import from Readability');
-        $count = 0;
-        foreach ($data as $key => $value) {
-            $url = NULL;
-            $favorite = FALSE;
-            $archive = FALSE;
-            foreach ($value as $item) {
-                foreach ($item as $attr => $value) {
-                    if ($attr == 'article__url') {
-                        $url = new Url(base64_encode($value));
-                    }
-                    $sequence = '';
-                    if (STORAGE == 'postgres') {
-                        $sequence = 'entries_id_seq';
-                    }
-                    if ($value == 'true') {
-                        if ($attr == 'favorite') {
-                            $favorite = TRUE;
-                        }
-                        if ($attr == 'archive') {
-                            $archive = TRUE;
-                        }
-                    }
-                }
-
-                # we can add the url
-                if (!is_null($url) && $url->isCorrect()) {
-                    $this->action('add', $url, 0, TRUE);
-                    $count++;
-                    if ($favorite) {
-                        $last_id = $this->store->getLastId($sequence);
-                        $this->action('toggle_fav', $url, $last_id, TRUE);
-                    }
-                    if ($archive) {
-                        $last_id = $this->store->getLastId($sequence);
-                        $this->action('toggle_archive', $url, $last_id, TRUE);
-                    }
-                }
-            }
-        }
-
-        unlink($targetFile);
-        $this->messages->add('s', _('import from Readability completed. You have to execute the cron to fetch content.'));
-        Tools::logm('import from Readability completed');
-        Tools::redirect();
-    }
-
-    /**
-     * import from Poche exported file
-     * @param string $targetFile the file used for importing
-     * @return boolean
-     */
-    private function importFromPoche($targetFile)
-    {
-        $str_data = file_get_contents($targetFile);
-        $data = json_decode($str_data,true);
-        Tools::logm('starting import from Poche');
-
-
-        $sequence = '';
-        if (STORAGE == 'postgres') {
-            $sequence = 'entries_id_seq';
-        }
-
-        $count = 0;
-        foreach ($data as $value) {
-
-            $url = new Url(base64_encode($value['url']));
-            $favorite = ($value['is_fav'] == -1);
-            $archive = ($value['is_read'] == -1);
-
-            # we can add the url
-            if (!is_null($url) && $url->isCorrect()) {
-
-                $this->action('add', $url, 0, TRUE);
-
-                $count++;
-                if ($favorite) {
-                    $last_id = $this->store->getLastId($sequence);
-                    $this->action('toggle_fav', $url, $last_id, TRUE);
-                }
-                if ($archive) {
-                    $last_id = $this->store->getLastId($sequence);
-                    $this->action('toggle_archive', $url, $last_id, TRUE);
-                }
-            }
-
-        }
-
-        unlink($targetFile);
-        $this->messages->add('s', _('import from Poche completed. You have to execute the cron to fetch content.'));
-        Tools::logm('import from Poche completed');
-        Tools::redirect();
-    }
-
-    /**
      * import datas into your poche
      * @return boolean
      */
     public function import() {
+
+      if (!defined('IMPORT_LIMIT')) {
+        define('IMPORT_LIMIT', 5);
+      }
+      if (!defined('IMPORT_DELAY')) {
+      	define('IMPORT_DELAY', 5);
+      }
 
       if ( isset($_FILES['file']) ) {
         // assume, that file is in json format
@@ -1073,21 +860,26 @@ class Poche
           }
         }
 
+        //for readability structure
+        foreach ($data as $record) {
+          if (is_array($record)) {
+            $data[] = $record;
+            foreach ($record as $record2) {
+              if (is_array($record2)) {
+              	$data[] = $record2;
+              }
+            }
+          }
+        }
+
         $i = 0; //counter for articles inserted
         foreach ($data as $record) {
-          //echo '<pre>';
-          //var_dump($record);
-  //         foreach ($record as $key=>$val) {
-  //           echo "\n=================\n$i: $key: $val\n";
-  //         }
-  //         exit;
-
-          $url = trim($record['url']);
+          $url = trim( isset($record['article__url']) ? $record['article__url'] : (isset($record['url']) ? $record['url'] : '') );
           if ( $url ) {
             $title = (isset($record['title']) ? $record['title'] :  _('Untitled - Import - ').'</a> <a href="./?import">'._('click to finish import').'</a><a>');
             $body = (isset($record['content']) ? $record['content'] : '');
-            $isRead = (isset($record['is_read']) ? intval($record['is_read']) : 0);
-            $isFavorite = (isset($record['is_fav']) ? intval($record['is_fav']) : 0);
+            $isRead = (isset($record['is_read']) ? intval($record['is_read']) : (isset($record['archive'])?intval($record['archive']):0));
+            $isFavorite = (isset($record['is_fav']) ? intval($record['is_fav']) : (isset($record['favorite'])?intval($record['favorite']):0) );
             //insert new record
             $id = $this->store->add($url, $title, $body, $this->user->getId(), $isFavorite, $isRead);
             if ( $id ) {
@@ -1144,22 +936,6 @@ class Poche
       }
 
       return array('includeImport'=>true, 'import'=>array('recordsDownloadRequired'=>$recordsDownloadRequired, 'recordsUnderDownload'=> IMPORT_LIMIT, 'delay'=> IMPORT_DELAY * 1000) );
-    }
-
-    public function uploadFile() {
-        if (isset($_FILES['file']))
-        {
-            $dir = CACHE . '/';
-            $file = basename($_FILES['file']['name']);
-            if(move_uploaded_file($_FILES['file']['tmp_name'], $dir . $file)) {
-                $this->messages->add('s', _('File uploaded. You can now execute import.'));
-            }
-            else {
-                $this->messages->add('e', _('Error while importing file. Do you have access to upload it?'));
-            }
-        }
-
-        Tools::redirect('?view=config');
     }
 
     /**
