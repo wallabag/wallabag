@@ -20,7 +20,7 @@ msgid "wallabag, a read it later open source system"
 msgstr "wallabag, un système open source de lecture différé"
 
 msgid "login failed: user doesn't exist"
-msgstr "identification échouée : l'utilisateur n'existe pas"
+msgstr "échec de l'identification : cet utilisateur n'existe pas"
 
 msgid "return home"
 msgstr "retour à l'accueil"
@@ -32,13 +32,13 @@ msgid "Saving articles"
 msgstr "Sauvegarde des articles"
 
 msgid "There are several ways to save an article:"
-msgstr "Il y a plusieurs façons de sauver un article :"
+msgstr "Il y a plusieurs façons d'enregistrer un article :"
 
 msgid "read the documentation"
 msgstr "lisez la documentation"
 
 msgid "download the extension"
-msgstr "télécharger l'extension"
+msgstr "téléchargez l'extension"
 
 msgid "via F-Droid"
 msgstr "via F-Droid"
@@ -50,7 +50,7 @@ msgid "via Google Play"
 msgstr "via Google PlayStore"
 
 msgid "download the application"
-msgstr "télécharger l'application"
+msgstr "téléchargez l'application"
 
 msgid "By filling this field"
 msgstr "En remplissant ce champ"
@@ -86,7 +86,7 @@ msgid "Feeds"
 msgstr "Flux"
 
 msgid "Your feed token is currently empty and must first be generated to enable feeds. Click <a href='?feed&amp;action=generate'>here to generate it</a>."
-msgstr "Votre jeton de flux est actuellement vide doit d'abord être généré pour activer les flux. Cliquez <a href='?feed&amp;action=generate'>ici</a> pour le générer."
+msgstr "Votre jeton de flux est actuellement vide et doit d'abord être généré pour activer les flux. Cliquez <a href='?feed&amp;action=generate'>ici</a> pour le générer."
 
 msgid "Unread feed"
 msgstr "Flux des non lus"
@@ -137,7 +137,7 @@ msgid "Import"
 msgstr "Importer"
 
 msgid "Please execute the import script locally as it can take a very long time."
-msgstr "Merci d'exécuter l'import en local car cela peut prendre du temps."
+msgstr "Merci d'exécuter le script d'importation en local car cela peut prendre du temps."
 
 msgid "More info in the official documentation:"
 msgstr "Plus d'infos dans la documentation officielle :"
@@ -150,13 +150,13 @@ msgid "(you must have a %s file on your server)"
 msgstr "(le fichier %s doit être présent sur le serveur)"
 
 msgid "Import from Readability"
-msgstr "Import depuis Readability"
+msgstr "Importer depuis Readability"
 
 msgid "Import from Instapaper"
-msgstr "Import depuis Instapaper"
+msgstr "Importer depuis Instapaper"
 
 msgid "Import from wallabag"
-msgstr "Import depuis wallabag"
+msgstr "Importer depuis wallabag"
 
 msgid "Export your wallabag data"
 msgstr "Exporter vos données de wallabag"
@@ -318,10 +318,10 @@ msgid "tags:"
 msgstr "tags :"
 
 msgid "Edit tags"
-msgstr "Editer les tags"
+msgstr "Modifier les tags"
 
 msgid "save link!"
-msgstr "sauver le lien !"
+msgstr "enregistrer le lien !"
 
 msgid "powered by"
 msgstr "propulsé par"
@@ -360,7 +360,7 @@ msgid "tweet"
 msgstr "tweet"
 
 msgid "email"
-msgstr "ee-mail"
+msgstr "e-mail"
 
 msgid "this article appears wrong?"
 msgstr "cet article s'affiche mal ?"
@@ -369,7 +369,7 @@ msgid "No link available here!"
 msgstr "Aucun lien n'est disponible ici !"
 
 msgid "Poching a link"
-msgstr "Sauver un lien"
+msgstr "Enregistrer un lien"
 
 msgid "by filling this field"
 msgstr "en remplissant ce champ"
@@ -396,19 +396,19 @@ msgid "a more recent development version is available."
 msgstr "une version de développement plus récente est disponible."
 
 msgid "Please execute the import script locally, it can take a very long time."
-msgstr "Merci d'exécuter l'import en local car cela peut prendre du temps."
+msgstr "Merci d'exécuter le script d'importation en local car cela peut prendre du temps."
 
 msgid "More infos in the official doc:"
 msgstr "Plus d'infos dans la documentation officielle :"
 
 msgid "import from Pocket"
-msgstr "import depuis Pocket"
+msgstr "importation depuis Pocket"
 
 msgid "import from Readability"
-msgstr "import depuis Readability"
+msgstr "importation depuis Readability"
 
 msgid "import from Instapaper"
-msgstr "import depuis Instapaper"
+msgstr "importation depuis Instapaper"
 
 msgid "estimated reading time :"
 msgstr "temps de lecture estimé :"
@@ -459,7 +459,7 @@ msgid "that theme does not seem to be installed"
 msgstr "ce thème ne semble pas installé"
 
 msgid "you have changed your theme preferences"
-msgstr "vous avez changez vos préférences de thème"
+msgstr "vous avez changé vos préférences de thème"
 
 msgid "that language does not seem to be installed"
 msgstr "cette langue ne semble pas être installée"
@@ -468,28 +468,28 @@ msgid "you have changed your language preferences"
 msgstr "vous avez changé vos préférences de langue"
 
 msgid "login failed: you have to fill all fields"
-msgstr "identification échouée : vous devez remplir tous les champs"
+msgstr "échec de l'identification : vous devez remplir tous les champs"
 
 msgid "welcome to your wallabag"
 msgstr "bienvenue dans votre wallabag"
 
 msgid "login failed: bad login or password"
-msgstr "identification échouée : mauvais identifiant ou mot de passe"
+msgstr "échec de l'identification : mauvais identifiant ou mot de passe"
 
 msgid "import from instapaper completed"
-msgstr "Import depuis Instapaper complété"
+msgstr "Importation depuis Instapaper complété"
 
 msgid "import from pocket completed"
-msgstr "Import depuis Pocket complété"
+msgstr "Importatin depuis Pocket complété"
 
 msgid "import from Readability completed. "
-msgstr "Import depuis Readability complété"
+msgstr "Importation depuis Readability complété"
 
 msgid "import from Poche completed. "
-msgstr "Import depuis Pocket complété"
+msgstr "Importation depuis Pocket complété"
 
 msgid "Unknown import provider."
-msgstr "Fournisseur d'import inconnu."
+msgstr "Fournisseur d'importation inconnu."
 
 msgid "Incomplete inc/poche/define.inc.php file, please define \""
 msgstr "Fichier inc/poche/define.inc.php incomplet, merci de définir \""
@@ -498,7 +498,7 @@ msgid "Could not find required \""
 msgstr "Ne peut pas trouver \""
 
 msgid "Uh, there is a problem while generating feeds."
-msgstr "Ih, il y a un problème lors de la génération des flux."
+msgstr "hum, il y a un problème lors de la génération des flux."
 
 msgid "Cache deleted."
 msgstr "Cache effacé."
