@@ -1,0 +1,10 @@
+<div id="bagit-form" class="messages info">
+    <form method="get" action="index.php" target="_blank" id="bagit-form-form">
+        <h2><a href="javascript: void(null);" id="bagit-form-close">X</a>
+        {% trans "Save a link" %}</h2>
+        <input type="hidden" name="autoclose" value="1" />
+        <input required placeholder="example.com/article" class="addurl" id="plainurl" name="plainurl" type="url" />
+        <input type="submit" value="{% trans "save link!" %}" />
+        <div id="add-link-result"></div>
+    </form>
+</div>

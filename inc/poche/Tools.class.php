@@ -7,7 +7,7 @@
  * @copyright  2013
  * @license    http://www.wtfpl.net/ see COPYING file
  */
- 
+
 class Tools
 {
     public static function initPhp()
@@ -42,7 +42,7 @@ class Tools
                     && (strtolower($_SERVER['HTTPS']) == 'on'))
             || (isset($_SERVER["SERVER_PORT"])
                     && $_SERVER["SERVER_PORT"] == '443') // HTTPS detection.
-            || (isset($_SERVER["SERVER_PORT"]) //Custom HTTPS port detection 
+            || (isset($_SERVER["SERVER_PORT"]) //Custom HTTPS port detection
                     && $_SERVER["SERVER_PORT"] == SSL_PORT)
              || (isset($_SERVER['HTTP_X_FORWARDED_PROTO'])
                     && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https');
@@ -148,7 +148,7 @@ class Tools
             );
 
             # only download page lesser than 4MB
-            $data = @file_get_contents($url, false, $context, -1, 4000000); 
+            $data = @file_get_contents($url, false, $context, -1, 4000000);
 
             if (isset($http_response_header) and isset($http_response_header[0])) {
                 $httpcodeOK = isset($http_response_header) and isset($http_response_header[0]) and ((strpos($http_response_header[0], '200 OK') !== FALSE) or (strpos($http_response_header[0], '301 Moved Permanently') !== FALSE));
@@ -193,14 +193,14 @@ class Tools
 
     public static function logm($message)
     {
-        if (DEBUG_POCHE) {
+        if (DEBUG_POCHE && php_sapi_name() != 'cli') {
             $t = strval(date('Y/m/d_H:i:s')) . ' - ' . $_SERVER["REMOTE_ADDR"] . ' - ' . strval($message) . "\n";
             file_put_contents(CACHE . '/log.txt', $t, FILE_APPEND);
             error_log('DEBUG POCHE : ' . $message);
         }
     }
 
-    public static function encodeString($string) 
+    public static function encodeString($string)
     {
         return sha1($string . SALT);
     }
@@ -241,7 +241,6 @@ class Tools
         }
     }
 
-
     public static function download_db() {
         header('Content-Disposition: attachment; filename="poche.sqlite.gz"');
         self::status(200);
@@ -252,4 +251,74 @@ class Tools
 
         exit;
     }
+
+    public static function getPageContent(Url $url)
+    {
+        // Saving and clearing context
+        $REAL = array();
+        foreach( $GLOBALS as $key => $value ) {
+            if( $key != 'GLOBALS' && $key != '_SESSION' && $key != 'HTTP_SESSION_VARS' ) {
+                $GLOBALS[$key] = array();
+                $REAL[$key] = $value;
+            }
+        }
+        // Saving and clearing session
+        if ( isset($_SESSION) ) {
+            $REAL_SESSION = array();
+            foreach( $_SESSION as $key => $value ) {
+                $REAL_SESSION[$key] = $value;
+                unset($_SESSION[$key]);
+            }
+        }
+
+        // Running code in different context
+        $scope = function() {
+            extract( func_get_arg(1) );
+            $_GET = $_REQUEST = array(
+                        "url" => $url->getUrl(),
+                        "max" => 5,
+                        "links" => "preserve",
+                        "exc" => "",
+                        "format" => "json",
+                        "submit" => "Create Feed"
+            );
+            ob_start();
+            require func_get_arg(0);
+            $json = ob_get_contents();
+            ob_end_clean();
+            return $json;
+        };
+        $json = $scope( "inc/3rdparty/makefulltextfeed.php", array("url" => $url) );
+
+        // Clearing and restoring context
+        foreach( $GLOBALS as $key => $value ) {
+            if( $key != "GLOBALS" && $key != "_SESSION" ) {
+                unset($GLOBALS[$key]);
+            }
+        }
+        foreach( $REAL as $key => $value ) {
+            $GLOBALS[$key] = $value;
+        }
+        // Clearing and restoring session
+        if ( isset($REAL_SESSION) ) {
+            foreach( $_SESSION as $key => $value ) {
+                unset($_SESSION[$key]);
+            }
+            foreach( $REAL_SESSION as $key => $value ) {
+                $_SESSION[$key] = $value;
+            }
+        }
+
+        return json_decode($json, true);
+    }
+
+    /**
+     * Returns whether we handle an AJAX (XMLHttpRequest) request.
+     * @return boolean whether we handle an AJAX (XMLHttpRequest) request.
+     */
+    public static function isAjaxRequest()
+    {
+      return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH']==='XMLHttpRequest';
+    }
+
 }

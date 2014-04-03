@@ -18,17 +18,27 @@
             {% if entries is empty %}
             <div class="messages warning"><p>{% trans "No articles found." %}</p></div>
             {% else %}
+                 <div>
+                     {% include '_display-mode.twig' %}
+                     {% include '_sorting.twig' %}
+                 </div>
                 {% block pager %}
                     {% if nb_results > 1 %}
                 <div class="results">
-                    <div class="nb-results">{{ nb_results }} {% trans "results" %}</div>
+                    <div class="nb-results">{{ nb_results }} {% trans "results" %}{% if search_term is defined %}{% trans " found for « " %} {{ search_term }} »{% endif %}</div>
                         {{ page_links | raw }}
                 </div>
+                    {% elseif nb_results == 1 %}
+                        {% if search_term is defined %}
+                     <div class="results">
+                        <div class="nb-results">{% trans "Only one result found for " %} « {{ search_term }} »</div>
+                     </div>
+                        {% endif %}
                     {% endif %}
                 {% endblock %}
-            <div class="list-entries">
+            <div id="list-entries" class="list-entries">
                     {% for entry in entries %}
-                <div id="entry-{{ entry.id|e }}" class="entrie">
+                <div id="entry-{{ entry.id|e }}" class="entrie"{% if listmode %} style="width:100%; margin-left:0;"{% endif %}>
                     <h2><a href="index.php?view=view&amp;id={{ entry.id|e }}">{{ entry.title|raw }}</a></h2>
                     {% if entry.content| getReadingTime > 0 %}
                         <div class="estimatedTime"><a target="_blank" title="{% trans "estimated reading time:" %} {{ entry.content| getReadingTime }} min" class="tool reading-time"><span>{% trans "estimated reading time :" %} {{ entry.content| getReadingTime }} min</span></div>
