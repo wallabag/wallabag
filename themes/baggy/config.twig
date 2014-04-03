@@ -106,7 +106,7 @@
 
             <h2>{% trans "Import" %}</h2>
             <p>{% trans "You can import your Pocket, Readability, Instapaper, Wallabag or any data in appropriate json or html format." %}</p>
-            <p>{% trans "Please select export file on your computer:" %}</p>
+            <p>{% trans "Please select export file on your computer and press \"Import\" button below.<br>Wallabag will parse your file, insert all URLs and start fetching of articles if required.<br>Fetching process is controlled by two constants in your config file: IMPORT_LIMIT (how many articles are fetched at once) and IMPORT_DELAY (delay between fetch of next batch of articles)." %}</p>
             <form method="post" action="?import" name="uploadfile" enctype="multipart/form-data">
                 <fieldset class="w500p">
                     <div class="row">
