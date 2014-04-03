@@ -21,6 +21,9 @@
             {% block precontent %}{% endblock %}
             {% block messages %}
             {% include '_messages.twig' %}
+            {% if includeImport %}
+								{% include '_import.twig' %}
+						{% endif %}
             {% endblock %}
             <div id="content" class="w600p center">
             {% block content %}{% endblock %}

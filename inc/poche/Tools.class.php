@@ -7,7 +7,7 @@
  * @copyright  2013
  * @license    http://www.wtfpl.net/ see COPYING file
  */
- 
+
 class Tools
 {
     public static function initPhp()
@@ -42,7 +42,7 @@ class Tools
                     && (strtolower($_SERVER['HTTPS']) == 'on'))
             || (isset($_SERVER["SERVER_PORT"])
                     && $_SERVER["SERVER_PORT"] == '443') // HTTPS detection.
-            || (isset($_SERVER["SERVER_PORT"]) //Custom HTTPS port detection 
+            || (isset($_SERVER["SERVER_PORT"]) //Custom HTTPS port detection
                     && $_SERVER["SERVER_PORT"] == SSL_PORT)
              || (isset($_SERVER['HTTP_X_FORWARDED_PROTO'])
                     && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https');
@@ -148,7 +148,7 @@ class Tools
             );
 
             # only download page lesser than 4MB
-            $data = @file_get_contents($url, false, $context, -1, 4000000); 
+            $data = @file_get_contents($url, false, $context, -1, 4000000);
 
             if (isset($http_response_header) and isset($http_response_header[0])) {
                 $httpcodeOK = isset($http_response_header) and isset($http_response_header[0]) and ((strpos($http_response_header[0], '200 OK') !== FALSE) or (strpos($http_response_header[0], '301 Moved Permanently') !== FALSE));
@@ -200,7 +200,7 @@ class Tools
         }
     }
 
-    public static function encodeString($string) 
+    public static function encodeString($string)
     {
         return sha1($string . SALT);
     }

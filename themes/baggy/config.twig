@@ -105,37 +105,20 @@
             {% endif %}
 
             <h2>{% trans "Import" %}</h2>
-            <p>{% trans "Importing from other services can be quite long, and webservers default configuration often prevents long scripts execution time, so it must be done in multiple parts." %}</p>
-            <p>1. {% trans "First, select the export file on your computer and upload it." %}</p>
-            <form method="post" action="?uploadfile" name="uploadfile" enctype="multipart/form-data">
+            <p>{% trans "You can import your Pocket, Readability, Instapaper, Wallabag or any data in appropriate json or html format." %}</p>
+            <p>{% trans "Please select export file on your computer and press \"Import\" button below.<br>Wallabag will parse your file, insert all URLs and start fetching of articles if required.<br>Fetching process is controlled by two constants in your config file: IMPORT_LIMIT (how many articles are fetched at once) and IMPORT_DELAY (delay between fetch of next batch of articles)." %}</p>
+            <form method="post" action="?import" name="uploadfile" enctype="multipart/form-data">
                 <fieldset class="w500p">
                     <div class="row">
                         <label class="col w150p" for="file">{% trans "File:" %}</label>
                         <input class="col" type="file" id="file" name="file" tabindex="4">
                     </div>
                     <div class="row mts txtcenter">
-                        <button class="bouton" type="submit" tabindex="4">{% trans "Upload" %}</button>
+                        <button class="bouton" type="submit" tabindex="4">{% trans "Import" %}</button>
                     </div>
                 </fieldset>
-                <input type="hidden" name="MAX_FILE_SIZE" value="1048576">
-                <input type="hidden" name="returnurl" value="{{ referer }}">
             </form>
-            <p>2. {% trans "Then, click on the right link below." %}</p>
-            <ul>
-                <li><a href="./?import&amp;from=pocket">{% trans "Import from Pocket" %}</a> {{ '(after uploaded %s file)'|trans|format(constant('POCKET_FILE')) }}</li>
-                <li><a href="./?import&amp;from=readability">{% trans "Import from Readability" %}</a> {{ '(after uploaded %s file)'|trans|format(constant('READABILITY_FILE')) }}</li>
-                <li><a href="./?import&amp;from=instapaper">{% trans "Import from Instapaper" %}</a> {{ '(after uploaded %s file)'|trans|format(constant('INSTAPAPER_FILE')) }}</li>
-                <li><a href="./?import&amp;from=poche">{% trans "Import from wallabag" %}</a> {{ '(after uploaded %s file)'|trans|format(constant('POCHE_FILE')) }}</li>
-            </ul>
-
-            {% if token == '' %}
-                <p>{% trans "3. Your feed token is currently empty and must first be generated to fetch content. Click <a href='?feed&amp;action=generate'>here to generate it</a>." %}</p>
-            {% else %}
-            <p>3. {% trans "Finally, you have to fetch content for imported items." %} <a href="cron.php?limit=10&amp;user-id={{ user_id }}&amp;token={{token}}" target="_blank">{% trans "Click here" %}</a> {% trans "to fetch content for 10 articles" %}.</p>
-            <p>{% trans "If you have console access to your server, you can also create a cron task:" %}</p>
-            <pre><code>0 */4 * * *  cd /path/to/wallabag && php cron.php --limit=10 --user-id={{user_id}} --token={{token}} >/dev/null 2>&1</code></pre>
-            {% endif %}
-
+            
             <h2>{% trans "Export your wallabag data" %}</h2>
             {% if constant('STORAGE') == 'sqlite' %}
             <p><a href="?download" target="_blank">{% trans "Click here" %}</a> {% trans "to download your database." %}</p>{% endif %}

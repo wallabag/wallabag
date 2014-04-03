@@ -16,6 +16,11 @@
 {% include '_sorting.twig' %}
 {% endblock %}
 {% block content %}
+
+						{% if includeImport %}
+								{% include '_import.twig' %}
+						{% endif %}
+
             {% if tag %}
                 <h3>{% trans "Tag" %}: <b>{{ tag.value }}</b></h3>
             {% endif %}
