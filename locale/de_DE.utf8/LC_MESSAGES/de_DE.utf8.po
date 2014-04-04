@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wallabag\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-04 11:48+0100\n"
+"POT-Creation-Date: 2014-03-27 13:41+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Kevin Meyer <wallabag@kevin-meyer.de>\n"
 "Language-Team: \n"
@@ -51,7 +51,7 @@ msgid "Bookmarklet: drag & drop this link to your bookmarks bar"
 msgstr "Bookmarklet: Ziehe diesen Link in deine Lesezeichen-Leiste"
 
 msgid "Upgrading wallabag"
-msgstr "Upgrade wallabag"
+msgstr "wallabag aktualisieren"
 
 msgid "Installed version"
 msgstr "Installierte Version"
@@ -141,19 +141,32 @@ msgid "Import"
 msgstr "Import"
 
 msgid ""
-"Please execute the import script locally as it can take a very long time."
+"Importing from other services can be quite long, and webservers default "
+"configuration often prevents long scripts execution time, so it must be done "
+"in multiple parts."
 msgstr ""
-"Bitte führe das Import Script lokal aus, da dies eine Weile dauern kann."
+"Der Import von anderen Diensten kann sehr lange dauern. Deswegen bricht der "
+"Webserver diesen in vielen Konfigurationen ab. Daher muss der Import in "
+"mehrere Teile aufgeteilt werden."
 
-msgid "More info in the official documentation:"
-msgstr "Mehr Informationen in der offiziellen Dokumentation:"
+msgid "First, select the export file on your computer and upload it."
+msgstr "Wähle eine Datei von deinem Computer aus und lade sie hoch."
+
+msgid "File:"
+msgstr "Datei:"
+
+msgid "Upload"
+msgstr "Hochladen"
+
+msgid "Then, click on the right link below."
+msgstr "Klicke dann unten auf den entsprechenden Link."
 
 msgid "Import from Pocket"
 msgstr "Import aus Pocket"
 
 #, php-format
-msgid "(you must have a %s file on your server)"
-msgstr "(du brauchst eine %s Datei auf deinem Server)"
+msgid "(after uploaded %s file)"
+msgstr "(nach Upload der Datei %s)"
 
 msgid "Import from Readability"
 msgstr "Import aus Readability"
@@ -164,11 +177,31 @@ msgstr "Import aus Instapaper"
 msgid "Import from wallabag"
 msgstr "Import aus Readability"
 
-msgid "Export your wallabag data"
-msgstr "Exportieren Sie Ihre wallabag Daten."
+msgid ""
+"3. Your feed token is currently empty and must first be generated to fetch "
+"content. Click <a href='?feed&amp;action=generate'>here to generate it</a>."
+msgstr ""
+"3. Dein Feed Token ist noch nicht vorhanden und muss zunächst generiert "
+"werden, um Inhalt abrufen zu können. Klicke <a href='?feed&amp;"
+"action=generate'>hier um ihn zu generieren</a>."
+
+msgid "Finally, you have to fetch content for imported items."
+msgstr "Jetzt musst du den Inhalt der importierten Artikel abrufen."
 
 msgid "Click here"
 msgstr "Klicke hier"
+
+msgid "to fetch content for 10 articles"
+msgstr "um den Inhalt von 10 Artikeln abzurufen"
+
+msgid ""
+"If you have console access to your server, you can also create a cron task:"
+msgstr ""
+"Wenn du Konsolenzugang zu deinem Server hast kannst du auch einen cron "
+"erstellen:"
+
+msgid "Export your wallabag data"
+msgstr "Exportieren deine wallabag Daten"
 
 msgid "to download your database."
 msgstr "um deine Datenbank herunterzuladen"
@@ -181,6 +214,9 @@ msgstr "Cache"
 
 msgid "to delete cache."
 msgstr "um den Cache zu löschen."
+
+msgid "Tags"
+msgstr "Tags"
 
 msgid "by date asc"
 msgstr "nach Datum aufsteigend"
@@ -219,20 +255,18 @@ msgstr "Tags"
 msgid "save a link"
 msgstr "Speichere einen Link"
 
+msgid "search"
+msgstr "Suche"
+
 msgid "logout"
 msgstr "Logout"
 
 msgid "return home"
 msgstr "Zurück zum Start"
 
-msgid "You can enter multiple tags, separated by commas."
-msgstr "Du kannst mehrere Tags, durch Kommata getrennt, eingeben."
-
-msgid "return to article"
-msgstr "zurück zum Artikel"
-
-msgid "save link!"
-msgstr "Link speichern!"
+#, fuzzy
+msgid "Search"
+msgstr "Archiv"
 
 msgid "powered by"
 msgstr "bereitgestellt von"
@@ -246,44 +280,11 @@ msgstr "Deine wallabag Version"
 msgid "storage:"
 msgstr "Speicher:"
 
-msgid "Back to top"
-msgstr "Nach Oben"
+msgid "Save a link"
+msgstr "Speichere einen Link"
 
-msgid "original"
-msgstr "Original"
-
-msgid "Mark as read"
-msgstr "Als gelesen markieren"
-
-msgid "Toggle mark as read"
-msgstr "Als gelesen markieren"
-
-msgid "Favorite"
-msgstr "Favoriten"
-
-msgid "Toggle favorite"
-msgstr "Favorit"
-
-msgid "Delete"
-msgstr "Löschen"
-
-msgid "Tweet"
-msgstr "Twittern"
-
-msgid "Email"
-msgstr "per E-Mail senden"
-
-msgid "shaarli"
-msgstr "Shaarli"
-
-msgid "flattr"
-msgstr "flattr"
-
-msgid "Does this article appear wrong?"
-msgstr "Erscheint dieser Artikel falsch?"
-
-msgid "Edit tags"
-msgstr "Tags bearbeiten"
+msgid "save link!"
+msgstr "Link speichern!"
 
 msgid "unread"
 msgstr "ungelesen"
@@ -300,11 +301,17 @@ msgstr "geschätzte Lesezeit:"
 msgid "estimated reading time :"
 msgstr "geschätzte Lesezeit:"
 
+msgid "Toggle mark as read"
+msgstr "Als gelesen markieren"
+
 msgid "toggle favorite"
 msgstr "Favorit"
 
 msgid "delete"
 msgstr "Löschen"
+
+msgid "original"
+msgstr "Original"
 
 msgid "Mark all the entries as read"
 msgstr "Markiere alle als gelesen"
@@ -312,9 +319,11 @@ msgstr "Markiere alle als gelesen"
 msgid "results"
 msgstr "Ergebnisse"
 
-#, fuzzy
+msgid "Uh, there is a problem with the cron."
+msgstr "Oh, es gab ein Problem mit dem cron."
+
 msgid "Untitled"
-msgstr "nach Titel"
+msgstr "Ohne Titel"
 
 msgid "the link has been added successfully"
 msgstr "Speichern des Links erfolgreich"
@@ -372,26 +381,44 @@ msgstr "Willkommen bei deiner wallabag"
 msgid "login failed: bad login or password"
 msgstr "Anmeldung fehlgeschlagen: Falscher Benutzername oder Passwort"
 
-msgid "import from instapaper completed"
-msgstr "Import aus Instapaper erfolgreich"
+msgid ""
+"import from instapaper completed. You have to execute the cron to fetch "
+"content."
+msgstr ""
+"Import aus Instapaper vollständig. Führe den cronjob aus um den Inhalt "
+"abzurufen."
 
-msgid "import from pocket completed"
-msgstr "Import aus Pocket erfolgreich"
+msgid ""
+"import from pocket completed. You have to execute the cron to fetch content."
+msgstr ""
+"Import aus Pocket vollständig. Führe den cronjob aus um den Inhalt abzurufen."
 
-msgid "import from Readability completed. "
-msgstr "Import aus Readability erfolgreich"
+msgid ""
+"import from Readability completed. You have to execute the cron to fetch "
+"content."
+msgstr ""
+"Import aus Readability vollständig. Führe den cronjob aus um den Inhalt "
+"abzurufen."
 
-msgid "import from Poche completed. "
-msgstr "Import aus Poche erfolgreich"
+msgid ""
+"import from Poche completed. You have to execute the cron to fetch content."
+msgstr ""
+"Import aus Poche vollständig. Führe den cronjob aus um den Inhalt abzurufen."
 
 msgid "Unknown import provider."
 msgstr "Unbekannter Import Anbieter."
 
-msgid "Incomplete inc/poche/define.inc.php file, please define \""
-msgstr "Unvollständige inc/poche/define.inc.php Datei, bitte setze \""
-
 msgid "Could not find required \""
 msgstr "Nicht gefunden: \""
+
+msgid "File uploaded. You can now execute import."
+msgstr "Datei hochgeladen. Du kannst nun importieren."
+
+msgid "Error while importing file. Do you have access to upload it?"
+msgstr "Fehler beim Importieren. Hast du das Recht zum Hochladen?"
+
+msgid "User with this id ("
+msgstr "Nutzer mit dieser id ("
 
 msgid "Uh, there is a problem while generating feeds."
 msgstr "Oh, es gab ein Problem beim Erstellen des Feeds."
@@ -408,12 +435,54 @@ msgstr "wallabag, ein Später-Lesen Open Source System"
 msgid "login failed: user doesn't exist"
 msgstr "Anmeldung fehlgeschlagen: Benutzer existiert nicht"
 
+#~ msgid "You can enter multiple tags, separated by commas."
+#~ msgstr "Du kannst mehrere Tags, durch Kommata getrennt, eingeben."
+
+#~ msgid "return to article"
+#~ msgstr "zurück zum Artikel"
+
 #, fuzzy
 #~ msgid "favoris"
 #~ msgstr "Favoriten"
 
 #~ msgid "mark all the entries as read"
 #~ msgstr "Markiere alle als gelesen"
+
+#~ msgid "Back to top"
+#~ msgstr "Nach Oben"
+
+#~ msgid "Mark as read"
+#~ msgstr "Als gelesen markieren"
+
+#~ msgid "Favorite"
+#~ msgstr "Favoriten"
+
+#~ msgid "Toggle favorite"
+#~ msgstr "Favorit"
+
+#~ msgid "Delete"
+#~ msgstr "Löschen"
+
+#~ msgid "Tweet"
+#~ msgstr "Twittern"
+
+#~ msgid "Email"
+#~ msgstr "per E-Mail senden"
+
+#~ msgid "shaarli"
+#~ msgstr "Shaarli"
+
+#~ msgid "flattr"
+#~ msgstr "flattr"
+
+#~ msgid "Does this article appear wrong?"
+#~ msgstr "Erscheint dieser Artikel falsch?"
+
+#~ msgid "Edit tags"
+#~ msgstr "Tags bearbeiten"
+
+#~ msgid "Start typing for auto complete."
+#~ msgstr "Beginne zu tippen für die Autovervollständigung."
 
 #~ msgid "Return home"
 #~ msgstr "Zurück zum Start"
@@ -441,9 +510,6 @@ msgstr "Anmeldung fehlgeschlagen: Benutzer existiert nicht"
 #~ msgid "plop"
 #~ msgstr "plop"
 
-#~ msgid "Tags"
-#~ msgstr "Tags"
-
 #~ msgid "Login to wallabag"
 #~ msgstr "Bei wallabag anmelden"
 
@@ -452,6 +518,9 @@ msgstr "Anmeldung fehlgeschlagen: Benutzer existiert nicht"
 
 #~ msgid "Sign in"
 #~ msgstr "Einloggen"
+
+#~ msgid "Enter your search here"
+#~ msgstr "Gib hier deine Suchanfrage ein"
 
 #~ msgid "installation"
 #~ msgstr "Installieren"
@@ -538,11 +607,37 @@ msgstr "Anmeldung fehlgeschlagen: Benutzer existiert nicht"
 #~ msgid "import from Pocket"
 #~ msgstr "Import aus Pocket"
 
+#~ msgid "(you must have a %s file on your server)"
+#~ msgstr "(du brauchst eine %s Datei auf deinem Server)"
+
 #~ msgid "import from Readability"
 #~ msgstr "Import aus Readability"
 
 #~ msgid "import from Instapaper"
 #~ msgstr "Import aus Instapaper"
+
+#~ msgid "You can also create a cron task:"
+#~ msgstr "Du kannst auch einen cronjob anlegen:"
+
+#~ msgid ""
+#~ "Please execute the import script locally as it can take a very long time."
+#~ msgstr ""
+#~ "Bitte führe das Import Script lokal aus, da dies eine Weile dauern kann."
+
+#~ msgid "More info in the official documentation:"
+#~ msgstr "Mehr Informationen in der offiziellen Dokumentation:"
+
+#~ msgid "import from instapaper completed"
+#~ msgstr "Import aus Instapaper erfolgreich"
+
+#~ msgid "import from pocket completed"
+#~ msgstr "Import aus Pocket erfolgreich"
+
+#~ msgid "import from Poche completed. "
+#~ msgstr "Import aus Poche erfolgreich"
+
+#~ msgid "Incomplete inc/poche/define.inc.php file, please define \""
+#~ msgstr "Unvollständige inc/poche/define.inc.php Datei, bitte setze \""
 
 #~ msgid "poche it!"
 #~ msgstr "Poche es!"

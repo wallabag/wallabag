@@ -1,5 +1,5 @@
 <?php
-$app_name = 'wallabag 1';
+$app_name = 'wallabag';
 
 $php_ok = (function_exists('version_compare') && version_compare(phpversion(), '5.3.3', '>='));
 $pcre_ok = extension_loaded('pcre');
@@ -11,6 +11,7 @@ $curl_ok = function_exists('curl_exec');
 $parallel_ok = ((extension_loaded('http') && class_exists('HttpRequestPool')) || ($curl_ok && function_exists('curl_multi_init')));
 $allow_url_fopen_ok = (bool)ini_get('allow_url_fopen');
 $filter_ok = extension_loaded('filter');
+$gettext_ok = function_exists("gettext");
 
 if (extension_loaded('xmlreader')) {
 	$xml_ok = true;
@@ -130,8 +131,6 @@ table#chart tr.enabled td {
 
 table#chart tr.disabled td, 
 table#chart tr.disabled td a {
-	color:#999;
-	font-style:italic;
 }
 
 table#chart tr.disabled td a {
@@ -154,12 +153,31 @@ div.chunk {
 	background-color:transparent;
 	font-style:italic;
 }
+
+.good{
+background-color:#52CC5B;
+}
+.bad{
+background-color:#F74343;
+font-style:italic;
+font-weight: bold;
+}
+.pass{
+background-color:#FF9500;
+}
+
 </style>
 
 </head>
 
 <body>
-
+<?php
+$frominstall = false;
+if (isset($_GET['from'])){
+	if ($_GET['from'] == 'install'){
+		$frominstall = true;
+		}}
+?>
 <div id="site">
 	<div id="content">
 
@@ -177,58 +195,63 @@ div.chunk {
 					<tr class="<?php echo ($php_ok) ? 'enabled' : 'disabled'; ?>">
 						<td>PHP</td>
 						<td>5.3.3 or higher</td>
-						<td><?php echo phpversion(); ?></td>
+						<td class="<?php echo ($php_ok) ? 'good' : 'disabled'; ?>"><?php echo phpversion(); ?></td>
 					</tr>
-					<tr class="<?php echo ($xml_ok) ? 'enabled, and sane' : 'disabled, or broken'; ?>">
+					<tr class="<?php echo ($xml_ok) ? 'enabled' : 'disabled'; ?>">
 						<td><a href="http://php.net/xml">XML</a></td>
 						<td>Enabled</td>
-						<td><?php echo ($xml_ok) ? 'Enabled, and sane' : 'Disabled, or broken'; ?></td>
+						<?php echo ($xml_ok) ? '<td class="good">Enabled, and sane</span>' : '<td class="bad">Disabled, or broken'; ?></td>
 					</tr>
 					<tr class="<?php echo ($pcre_ok) ? 'enabled' : 'disabled'; ?>">
 						<td><a href="http://php.net/pcre">PCRE</a></td>
 						<td>Enabled</td>
-						<td><?php echo ($pcre_ok) ? 'Enabled' : 'Disabled'; ?></td>
+						<?php echo ($pcre_ok) ? '<td class="good">Enabled' : '<td class="bad">Disabled'; ?></td>
 					</tr>
 <!-- 					<tr class="<?php echo ($zlib_ok) ? 'enabled' : 'disabled'; ?>">
 						<td><a href="http://php.net/zlib">Zlib</a></td>
 						<td>Enabled</td>
-						<td><?php echo ($zlib_ok) ? 'Enabled' : 'Disabled'; ?></td>
+						<?php echo ($zlib_ok) ? '<td class="good">Enabled' : '<td class="bad">Disabled'; ?></td>
 					</tr> -->
 <!-- 					<tr class="<?php echo ($mbstring_ok) ? 'enabled' : 'disabled'; ?>">
 						<td><a href="http://php.net/mbstring">mbstring</a></td>
 						<td>Enabled</td>
-						<td><?php echo ($mbstring_ok) ? 'Enabled' : 'Disabled'; ?></td>
+						<?php echo ($mbstring_ok) ? '<td class="good">Enabled' : '<td class="bad">Disabled'; ?></td>
 					</tr> -->
 <!-- 					<tr class="<?php echo ($iconv_ok) ? 'enabled' : 'disabled'; ?>">
 						<td><a href="http://php.net/iconv">iconv</a></td>
 						<td>Enabled</td>
-						<td><?php echo ($iconv_ok) ? 'Enabled' : 'Disabled'; ?></td>
+						<?php echo ($iconv_ok) ? '<td class="good">Enabled' : '<td class="bad">Disabled'; ?></td>
 					</tr> -->
 					<tr class="<?php echo ($filter_ok) ? 'enabled' : 'disabled'; ?>">
 						<td><a href="http://uk.php.net/manual/en/book.filter.php">Data filtering</a></td>
 						<td>Enabled</td>
-						<td><?php echo ($filter_ok) ? 'Enabled' : 'Disabled'; ?></td>
+						<?php echo ($filter_ok) ? '<td class="good">Enabled' : '<td class="pass">Disabled'; ?></td>
 					</tr>					
 					<tr class="<?php echo ($tidy_ok) ? 'enabled' : 'disabled'; ?>">
 						<td><a href="http://php.net/tidy">Tidy</a></td>
 						<td>Enabled</td>
-						<td><?php echo ($tidy_ok) ? 'Enabled' : 'Disabled'; ?></td>
+						<?php echo ($tidy_ok) ? '<td class="good">Enabled' : '<td class="pass">Disabled'; ?></td>
 					</tr>
 					<tr class="<?php echo ($curl_ok) ? 'enabled' : 'disabled'; ?>">
 						<td><a href="http://php.net/curl">cURL</a></td>
 						<td>Enabled</td>
-						<td><?php echo (extension_loaded('curl')) ? 'Enabled' : 'Disabled'; ?></td>
+						<?php echo (extension_loaded('curl')) ? '<td class="good">Enabled' : '<td class="pass">Disabled'; ?></td>
 					</tr>
 					<tr class="<?php echo ($parallel_ok) ? 'enabled' : 'disabled'; ?>">
 						<td>Parallel URL fetching</td>
 						<td>Enabled</td>
-						<td><?php echo ($parallel_ok) ? 'Enabled' : 'Disabled'; ?></td>
+						<?php echo ($parallel_ok) ? '<td class="good">Enabled' : '<td class="pass">Disabled'; ?></td>
 					</tr>
 					<tr class="<?php echo ($allow_url_fopen_ok) ? 'enabled' : 'disabled'; ?>">
 						<td><a href="http://www.php.net/manual/en/filesystem.configuration.php#ini.allow-url-fopen">allow_url_fopen</a></td>
 						<td>Enabled</td>
-						<td><?php echo ($allow_url_fopen_ok) ? 'Enabled' : 'Disabled'; ?></td>
-					</tr>						
+						<?php echo ($allow_url_fopen_ok) ? '<td class="good">Enabled' : '<td class="bad">Disabled'; ?></td>
+					</tr>
+					<tr class="<?php echo ($gettext_ok) ? 'enabled' : 'disabled'; ?>">
+						<td><a href="http://php.net/manual/en/book.gettext.php">gettext</a></td>
+						<td>Enabled</td>
+						<?php echo ($gettext_ok) ? '<td class="good">Enabled' : '<td class="bad">Disabled'; ?></td>
+					</tr>
 				</tbody>
 			</table>
 		</div>
@@ -237,7 +260,7 @@ div.chunk {
 			<h3>What does this mean?</h3>
 			<ol>
 				<?php //if ($php_ok && $xml_ok && $pcre_ok && $mbstring_ok && $iconv_ok && $filter_ok && $zlib_ok && $tidy_ok && $curl_ok && $parallel_ok && $allow_url_fopen_ok): ?>
-				<?php if ($php_ok && $xml_ok && $pcre_ok && $filter_ok && $tidy_ok && $curl_ok && $parallel_ok && $allow_url_fopen_ok): ?>
+				<?php if ($php_ok && $xml_ok && $pcre_ok && $filter_ok && $tidy_ok && $curl_ok && $parallel_ok && $allow_url_fopen_ok && $gettext_ok): ?>
 				<li><em>You have everything you need to run <?php echo $app_name; ?> properly!  Congratulations!</em></li>
 				<?php else: ?>
 					<?php if ($php_ok): ?>
@@ -250,59 +273,66 @@ div.chunk {
 								<?php if ($allow_url_fopen_ok): ?>
 									<li><strong>allow_url_fopen:</strong> You have allow_url_fopen enabled. <em>No problems here.</em></li>
 									
-									<?php if ($filter_ok): ?>
-										<li><strong>Data filtering:</strong> You have the PHP filter extension enabled. <em>No problems here.</em></li>
+									<?php if ($gettext_ok): ?>
+										<li><strong>Gettext:</strong> You have <code>gettext</code> enabled. <em>No problems here.</em></li>
+									
+										<?php if ($filter_ok): ?>
+											<li><strong>Data filtering:</strong> You have the PHP filter extension enabled. <em>No problems here.</em></li>
 	
-										<?php if ($zlib_ok): ?>
-											<li><strong>Zlib:</strong> You have <code>Zlib</code> enabled.  This allows SimplePie to support GZIP-encoded feeds.  <em>No problems here.</em></li>
-										<?php else: ?>
-											<li><strong>Zlib:</strong> The <code>Zlib</code> extension is not available.  SimplePie will ignore any GZIP-encoding, and instead handle feeds as uncompressed text.</li>
-										<?php endif; ?>
-			
-										<?php if ($mbstring_ok && $iconv_ok): ?>
-											<li><strong>mbstring and iconv:</strong> You have both <code>mbstring</code> and <code>iconv</code> installed!  This will allow <?php echo $app_name; ?> to handle the greatest number of languages. <em>No problems here.</em></li>
-										<?php elseif ($mbstring_ok): ?>
-											<li><strong>mbstring:</strong> <code>mbstring</code> is installed, but <code>iconv</code> is not.</li>
-										<?php elseif ($iconv_ok): ?>
-											<li><strong>iconv:</strong> <code>iconv</code> is installed, but <code>mbstring</code> is not.</li>
-										<?php else: ?>
-											<li><strong>mbstring and iconv:</strong> <em>You do not have either of the extensions installed.</em> This will significantly impair your ability to read non-English feeds, as well as even some English ones.</li>
-										<?php endif; ?>
+											<?php if ($zlib_ok): ?>
+												<li><strong>Zlib:</strong> You have <code>Zlib</code> enabled.  This allows SimplePie to support GZIP-encoded feeds.  <em>No problems here.</em></li>
+											<?php else: ?>
+												<li><strong>Zlib:</strong> The <code>Zlib</code> extension is not available.  SimplePie will ignore any GZIP-encoding, and instead handle feeds as uncompressed text.</li>
+											<?php endif; ?>
+											
+											<?php if ($mbstring_ok && $iconv_ok): ?>
+												<li><strong>mbstring and iconv:</strong> You have both <code>mbstring</code> and <code>iconv</code> installed!  This will allow <?php echo $app_name; ?> to handle the greatest number of languages. <em>No problems here.</em></li>
+											<?php elseif ($mbstring_ok): ?>
+												<li><strong>mbstring:</strong> <code>mbstring</code> is installed, but <code>iconv</code> is not.</li>
+											<?php elseif ($iconv_ok): ?>
+												<li><strong>iconv:</strong> <code>iconv</code> is installed, but <code>mbstring</code> is not.</li>
+											<?php else: ?>
+												<li><strong>mbstring and iconv:</strong> <em>You do not have either of the extensions installed.</em> This will significantly impair your ability to read non-English feeds, as well as even some English ones.</li>
+											<?php endif; ?>
 
-										<?php if ($tidy_ok): ?>
-											<li><strong>Tidy:</strong> You have <code>Tidy</code> support installed.  <em>No problems here.</em></li>
+											<?php if ($tidy_ok): ?>
+												<li><strong>Tidy:</strong> You have <code>Tidy</code> support installed.  <em>No problems here.</em></li>
+											<?php else: ?>
+												<li><strong>Tidy:</strong> The <code>Tidy</code> extension is not available.  <?php echo $app_name; ?> should still work with most feeds, but you may experience problems with some.</li>
+											<?php endif; ?>
+										
+											<?php if ($curl_ok): ?>
+												<li><strong>cURL:</strong> You have <code>cURL</code> support installed.  <em>No problems here.</em></li>
+											<?php else: ?>
+												<li><strong>cURL:</strong> The <code>cURL</code> extension is not available.  SimplePie will use <code>fsockopen()</code> instead.</li>
+											<?php endif; ?>
+			
+											<?php if ($parallel_ok): ?>
+												<li><strong>Parallel URL fetching:</strong> You have <code>HttpRequestPool</code> or <code>curl_multi</code> support installed.  <em>No problems here.</em></li>
+											<?php else: ?>
+												<li><strong>Parallel URL fetching:</strong> <code>HttpRequestPool</code> or <code>curl_multi</code> support is not available.  <?php echo $app_name; ?> will use <code>file_get_contents()</code> instead to fetch URLs sequentially rather than in parallel.</li>
+											<?php endif; ?>
+
 										<?php else: ?>
-											<li><strong>Tidy:</strong> The <code>Tidy</code> extension is not available.  <?php echo $app_name; ?> should still work with most feeds, but you may experience problems with some.</li>
+											<li><strong>Data filtering:</strong> Your PHP configuration has the filter extension disabled.  <strong><?php echo $app_name; ?> will not work here.</strong></li>
 										<?php endif; ?>
 										
-										<?php if ($curl_ok): ?>
-											<li><strong>cURL:</strong> You have <code>cURL</code> support installed.  <em>No problems here.</em></li>
-										<?php else: ?>
-											<li><strong>cURL:</strong> The <code>cURL</code> extension is not available.  SimplePie will use <code>fsockopen()</code> instead.</li>
-										<?php endif; ?>
-			
-										<?php if ($parallel_ok): ?>
-											<li><strong>Parallel URL fetching:</strong> You have <code>HttpRequestPool</code> or <code>curl_multi</code> support installed.  <em>No problems here.</em></li>
-										<?php else: ?>
-											<li><strong>Parallel URL fetching:</strong> <code>HttpRequestPool</code> or <code>curl_multi</code> support is not available.  <?php echo $app_name; ?> will use <code>file_get_contents()</code> instead to fetch URLs sequentially rather than in parallel.</li>
-										<?php endif; ?>
-
 									<?php else: ?>
-										<li><strong>Data filtering:</strong> Your PHP configuration has the filter extension disabled.  <em><?php echo $app_name; ?> will not work here.</em></li>
-									<?php endif; ?>										
+										<li><strong>GetText:</strong> The <code>gettext</code> extension is not available. The system we use to display wallabag in various languages is not available. <strong><?php echo $app_name; ?> will not work here.</strong></li>
+									<?php endif; ?>
 										
 								<?php else: ?>
-									<li><strong>allow_url_fopen:</strong> Your PHP configuration has allow_url_fopen disabled.  <em><?php echo $app_name; ?> will not work here.</em></li>
+									<li><strong>allow_url_fopen:</strong> Your PHP configuration has allow_url_fopen disabled.  <strong><?php echo $app_name; ?> will not work here.</strong></li>
 								<?php endif; ?>
 									
 							<?php else: ?>
-								<li><strong>PCRE:</strong> Your PHP installation doesn't support Perl-Compatible Regular Expressions.  <em><?php echo $app_name; ?> will not work here.</em></li>
+								<li><strong>PCRE:</strong> Your PHP installation doesn't support Perl-Compatible Regular Expressions.  <strong><?php echo $app_name; ?> will not work here.</strong></li>
 							<?php endif; ?>
 						<?php else: ?>
-							<li><strong>XML:</strong> Your PHP installation doesn't support XML parsing.  <em><?php echo $app_name; ?> will not work here.</em></li>
+							<li><strong>XML:</strong> Your PHP installation doesn't support XML parsing.  <strong><?php echo $app_name; ?> will not work here.</strong></li>
 						<?php endif; ?>
 					<?php else: ?>
-						<li><strong>PHP:</strong> You are running an unsupported version of PHP.  <em><?php echo $app_name; ?> will not work here.</em></li>
+						<li><strong>PHP:</strong> You are running an unsupported version of PHP.  <strong><?php echo $app_name; ?> will not work here.</strong></li>
 					<?php endif; ?>
 				<?php endif; ?>
 			</ol>
@@ -310,16 +340,26 @@ div.chunk {
 
 		<div class="chunk">
 			<?php //if ($php_ok && $xml_ok && $pcre_ok && $mbstring_ok && $iconv_ok && $filter_ok && $allow_url_fopen_ok) { ?>
-			<?php if ($php_ok && $xml_ok && $pcre_ok && $filter_ok && $allow_url_fopen_ok) { ?>
+			<?php if ($php_ok && $xml_ok && $pcre_ok && $filter_ok && $allow_url_fopen_ok && $gettext_ok) { ?>
 				<h3>Bottom Line: Yes, you can!</h3>
 				<p><em>Your webhost has its act together!</em></p>
+				<?php if (!$frominstall) { ?>
 				<p>You can download the latest version of <?php echo $app_name; ?> from <a href="http://wallabag.org/download">wallabag.org</a>.</p>
+				<p>If you already have done that, you should access <a href="index.php">the index.php file</a> of your installation to configure and/or start using wallabag</p>
+				<?php } else { ?>
+				<p>You can now <a href="index.php">return to the installation section</a>.</p>
+				<?php } ?>
 				<p><strong>Note</strong>: Passing this test does not guarantee that <?php echo $app_name; ?> will run on your webhost &mdash; it only ensures that the basic requirements have been addressed. If you experience any problems, please let us know.</p>
 			<?php //} else if ($php_ok && $xml_ok && $pcre_ok && $mbstring_ok && $allow_url_fopen_ok && $filter_ok) { ?>
-			<?php } else if ($php_ok && $xml_ok && $pcre_ok && $allow_url_fopen_ok && $filter_ok) { ?>
+			<?php } else if ($php_ok && $xml_ok && $pcre_ok && $allow_url_fopen_ok && $filter_ok && $gettext_ok) { ?>
 				<h3>Bottom Line: Yes, you can!</h3>
 				<p><em>For most feeds, it'll run with no problems.</em> There are certain languages that you might have a hard time with though.</p>
+				<?php if (!$frominstall) { ?>
 				<p>You can download the latest version of <?php echo $app_name; ?> from <a href="http://wallabag.org/download">wallabag.org</a>.</p>
+				<p>If you already have done that, you should access <a href="index.php">the index.php file</a> of your installation to configure and/or start using wallabag</p>
+				<?php } else { ?>
+				<p>You can now <a href="index.php">return to the installation section</a>.</p>
+				<?php } ?>
 				<p><strong>Note</strong>: Passing this test does not guarantee that <?php echo $app_name; ?> will run on your webhost &mdash; it only ensures that the basic requirements have been addressed. If you experience any problems, please let us know.</p>
 			<?php } else { ?>
 				<h3>Bottom Line: We're sorry…</h3>

@@ -52,12 +52,8 @@ define ('CACHE', ROOT . '/cache');
 
 define ('PAGINATION', '10');
 
-define ('POCKET_FILE', '/ril_export.html');
-define ('READABILITY_FILE', '/readability');
-define ('INSTAPAPER_FILE', '/instapaper-export.html');
-define ('POCHE_FILE', '/poche-export');
+//limit for download of articles during import
+define ('IMPORT_LIMIT', 5);
+//delay between downloads (in sec)
+define ('IMPORT_DELAY', 5);
 
-define ('IMPORT_POCKET_FILE', ROOT . POCKET_FILE);
-define ('IMPORT_READABILITY_FILE', ROOT . READABILITY_FILE);
-define ('IMPORT_INSTAPAPER_FILE', ROOT . INSTAPAPER_FILE);
-define ('IMPORT_POCHE_FILE', ROOT . POCHE_FILE);

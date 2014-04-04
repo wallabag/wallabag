@@ -424,6 +424,7 @@ footer a {
     content: none;
   }
 
+
 .entrie h2 a {
   display: block;
   text-decoration: none;
@@ -435,7 +436,7 @@ footer a {
        -o-transition: all 0.5s ease;
           transition: all 0.5s ease;
 }
-
+/*
 .entrie h2 a:after {
   content: "";
   position: absolute;
@@ -444,6 +445,7 @@ footer a {
   height: 100%;
   left: 0;
 }
+*/
 
 .entrie p {
   color: #666;
@@ -613,6 +615,56 @@ a#bagit-form-close:hover {
 }
 
 /* ==========================================================================
+  2.2 = "search for articles" popup div related styles
+  ========================================================================== */
+#search-form {
+  background: rgba(0,0,0,0.5);
+  position: absolute;
+  top: 0;
+  left: 10em;
+  z-index: 20;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  margin-top: -30%;
+  padding: 2em;
+  display: none;
+  border-left: 1px #EEE solid;
+}
+
+#search-form form {
+  background: #FFF;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  border: 10px solid #000;
+  width: 400px;
+  height: 200px;
+  /* margin: -150px 0 0 -300px; */
+  padding: 2em;
+}
+
+a#search-form-close {
+  background: #000;
+  color: #FFF;
+  padding: 0.2em 0.5em;
+  text-decoration: none;
+  display: inline-block;
+  float: right;
+  font-size: 1.2em;
+}
+a#search-form-close:hover {
+  background: #999;
+  color: #000;
+}
+
+#submit-search{
+margin-left: 4em;
+margin-top:1em;
+}
+
+/* ==========================================================================
    3 = Pictos
    ========================================================================== */
    
@@ -727,7 +779,7 @@ a#bagit-form-close:hover {
   }
 
 .warning {
-  font-size: 3em;
+  /* font-size: 3em;
   color: #999;
   font-style: italic;
   position: absolute;
@@ -736,7 +788,10 @@ a#bagit-form-close:hover {
   width: 100%;
   text-align: center;
   padding-right: 5%;
-  margin-top: -2em;
+  margin-top: -2em;*/
+  font-weight: bold;
+  display: block;
+  width: 100%;
 }
 
 /* ==========================================================================

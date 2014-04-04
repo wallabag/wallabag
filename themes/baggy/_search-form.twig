@@ -1,0 +1,21 @@
+<div id="search-form" class="messages info">			
+<form method="get" action="index.php">
+		<input type="hidden" name="view" value="search"></input>
+        <label><a href="javascript: void(null);" id="search-form-close">X</a>{% trans "Search" %}</label> : <input type="text" name="search" />
+		<input id="submit-search" type="submit" value="{% trans "Search" %} !"></input>
+</form>
+</div>
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        $("#search-form").hide();
+
+        $("#search").click(function(){
+            $("#search-form").toggle();
+            $("#search").toggleClass("current");
+            $("#search-arrow").toggleClass("arrow-down");
+        });
+
+
+    });
+</script>
