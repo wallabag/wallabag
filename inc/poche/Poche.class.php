@@ -241,6 +241,54 @@ class Poche
         $filter = new Twig_SimpleFilter('getReadingTime', 'Tools::getReadingTime');
         $this->tpl->addFilter($filter);
     }
+    
+    public function createNewUser() {
+		if (isset($_GET['newuser'])){
+			if ($_POST['newusername'] != "" &&  $_POST['password4newuser'] != ""){
+				if (!$this->store->userExists($_POST['newusername'])){			
+					if ($this->store->install($_POST['newusername'], Tools::encodeString($_POST['password4newuser'] . $_POST['newusername'])))
+					{
+						Session::logout();
+						Tools::logm('The new user '.$_POST['newusername'].' has been installed');
+						Tools::redirect();
+                  $this->messages->add('s', _('The new user '.$_POST['newusername'].' has been installed'));
+					}
+					else {
+						Tools::logm('error during adding new user');
+						Tools::redirect();
+					}
+				}
+				else {
+					$this->messages->add('e', _('Error : An user with the name '.$_POST['newusername'].' already exists !'));
+					Tools::logm('An user with the name '.$_POST['newusername'].' already exists !');
+					Tools::redirect();
+				}
+			}
+		}
+	}
+   
+   public function deleteUser(){
+      if (isset($_GET['deluser'])){
+			if (Tools::encodeString($_POST['password4deletinguser'].$this->user->getUsername()) == $this->store->getUserPassword($this->user->getId()))
+         {
+            $this->store->deleteUserConfig($this->user->getId());
+            Tools::logm('The configuration for user '. $this->user->getUsername().' has been deleted !');
+            $this->store->deleteUserEntries($this->user->getId());
+            Tools::logm('The entries for user '. $this->user->getUsername().' has been deleted !');
+            $this->store->deleteUser($this->user->getId());
+            Tools::logm('User '. $this->user->getUsername().' has been completely deleted !');
+            Session::logout();
+            Tools::logm('logout');
+            Tools::redirect();
+            $this->messages->add('s', _('User has been successfully deleted !'));
+            
+         }
+         else {
+            Tools::logm('Bad password !');
+            $this->messages->add('e', _('Error : The password is wrong !'));
+         }
+      }
+   }
 
     private function install()
     {
@@ -522,6 +570,7 @@ class Poche
                 $languages = $this->getInstalledLanguages();
                 $token = $this->user->getConfigValue('token');
                 $http_auth = (isset($_SERVER['PHP_AUTH_USER']) || isset($_SERVER['REMOTE_USER'])) ? true : false;
+                $only_user = ($this->store->listUsers() > 1) ? false : true;
                 $tpl_vars = array(
                     'themes' => $themes,
                     'languages' => $languages,
@@ -534,6 +583,7 @@ class Poche
                     'token' => $token,
                     'user_id' => $this->user->getId(),
                     'http_auth' => $http_auth,
+                    'only_user' => $only_user,
                 );
                 Tools::logm('config view');
                 break;
