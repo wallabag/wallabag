@@ -828,7 +828,7 @@ class Poche
         define('IMPORT_LIMIT', 5);
       }
       if (!defined('IMPORT_DELAY')) {
-      	define('IMPORT_DELAY', 5);
+        define('IMPORT_DELAY', 5);
       }
 
       if ( isset($_FILES['file']) ) {
@@ -844,18 +844,18 @@ class Poche
           $read = 0;
           foreach (array('ol','ul') as $list) {
             foreach ($html->find($list) as $ul) {
-            	foreach ($ul->find('li') as $li) {
-            	  $tmpEntry = array();
-            		$a = $li->find('a');
-            		$tmpEntry['url'] = $a[0]->href;
-            		$tmpEntry['tags'] = $a[0]->tags;
-            		$tmpEntry['is_read'] = $read;
-            		if ($tmpEntry['url']) {
-            		  $data[] = $tmpEntry;
-            		}
-            	}
-            	# the second <ol/ul> is for read links
-            	$read = ((sizeof($data) && $read)?0:1);
+                foreach ($ul->find('li') as $li) {
+                  $tmpEntry = array();
+                    $a = $li->find('a');
+                    $tmpEntry['url'] = $a[0]->href;
+                    $tmpEntry['tags'] = $a[0]->tags;
+                    $tmpEntry['is_read'] = $read;
+                    if ($tmpEntry['url']) {
+                      $data[] = $tmpEntry;
+                    }
+                }
+                # the second <ol/ul> is for read links
+                $read = ((sizeof($data) && $read)?0:1);
             }
           }
         }
@@ -866,7 +866,7 @@ class Poche
             $data[] = $record;
             foreach ($record as $record2) {
               if (is_array($record2)) {
-              	$data[] = $record2;
+                $data[] = $record2;
               }
             }
           }
@@ -886,7 +886,7 @@ class Poche
               //increment no of records inserted
               $i++;
               if ( isset($record['tags']) && trim($record['tags']) ) {
-              	//@TODO: set tags
+                //@TODO: set tags
 
               }
             }
@@ -919,17 +919,17 @@ class Poche
           $purifier = new HTMLPurifier($config);
 
           foreach ($items as $item) {
-          	$url = new Url(base64_encode($item['url']));
-          	$content = Tools::getPageContent($url);
+            $url = new Url(base64_encode($item['url']));
+            $content = Tools::getPageContent($url);
 
-          	$title = (($content['rss']['channel']['item']['title'] != '') ? $content['rss']['channel']['item']['title'] : _('Untitled'));
-          	$body = (($content['rss']['channel']['item']['description'] != '') ? $content['rss']['channel']['item']['description'] : _('Undefined'));
+            $title = (($content['rss']['channel']['item']['title'] != '') ? $content['rss']['channel']['item']['title'] : _('Untitled'));
+            $body = (($content['rss']['channel']['item']['description'] != '') ? $content['rss']['channel']['item']['description'] : _('Undefined'));
 
-          	//clean content to prevent xss attack
-          	$title = $purifier->purify($title);
-          	$body = $purifier->purify($body);
+            //clean content to prevent xss attack
+            $title = $purifier->purify($title);
+            $body = $purifier->purify($body);
 
-          	$this->store->updateContentAndTitle($item['id'], $title, $body, $this->user->getId());
+            $this->store->updateContentAndTitle($item['id'], $title, $body, $this->user->getId());
           }
 
         }
@@ -944,8 +944,8 @@ class Poche
      */
     public function export()
     {
-		$filename = "wallabag-export-".$this->user->getId()."-".date("Y-m-d").".json";
-		header('Content-Disposition: attachment; filename='.$filename);
+        $filename = "wallabag-export-".$this->user->getId()."-".date("Y-m-d").".json";
+        header('Content-Disposition: attachment; filename='.$filename);
 
         $entries = $this->store->retrieveAll($this->user->getId());
         echo $this->tpl->render('export.twig', array(
@@ -978,13 +978,13 @@ class Poche
     public function generateToken()
     {
         if (ini_get('open_basedir') === '') {
-			if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-			echo 'This is a server using Windows!';
-			// alternative to /dev/urandom for Windows
-			$token = substr(base64_encode(uniqid(mt_rand(), true)), 0, 20);
-			} else {
-			$token = substr(base64_encode(file_get_contents('/dev/urandom', false, null, 0, 20)), 0, 15);
-			}
+            if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+            echo 'This is a server using Windows!';
+            // alternative to /dev/urandom for Windows
+            $token = substr(base64_encode(uniqid(mt_rand(), true)), 0, 20);
+            } else {
+            $token = substr(base64_encode(file_get_contents('/dev/urandom', false, null, 0, 20)), 0, 15);
+            }
         }
         else {
             $token = substr(base64_encode(uniqid(mt_rand(), true)), 0, 20);
@@ -1031,6 +1031,7 @@ class Poche
             foreach ($entries as $entry) {
                 $newItem = $feed->createNewItem();
                 $newItem->setTitle($entry['title']);
+                $newItem->setSource(Tools::getPocheUrl() . '?view=view&amp;id=' . $entry['id']);
                 $newItem->setLink($entry['url']);
                 $newItem->setDate(time());
                 $newItem->setDescription($entry['content']);
