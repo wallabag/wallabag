@@ -101,8 +101,7 @@
     */
     public function setDescription($description) 
     {
-        $tag = 'description'; 
-        $this->setElement($tag, $description);
+        $this->setElement('description', $description);
     }
     
     /**
