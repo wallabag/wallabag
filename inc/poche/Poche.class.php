@@ -243,33 +243,32 @@ class Poche
     }
     
     public function createNewUser() {
-		if (isset($_GET['newuser'])){
-			if ($_POST['newusername'] != "" &&  $_POST['password4newuser'] != ""){
-				if (!$this->store->userExists($_POST['newusername'])){			
-					if ($this->store->install($_POST['newusername'], Tools::encodeString($_POST['password4newuser'] . $_POST['newusername'])))
-					{
-						Session::logout();
-						Tools::logm('The new user '.$_POST['newusername'].' has been installed');
-						Tools::redirect();
-                  $this->messages->add('s', _('The new user '.$_POST['newusername'].' has been installed'));
-					}
-					else {
-						Tools::logm('error during adding new user');
-						Tools::redirect();
-					}
-				}
-				else {
-					$this->messages->add('e', _('Error : An user with the name '.$_POST['newusername'].' already exists !'));
-					Tools::logm('An user with the name '.$_POST['newusername'].' already exists !');
-					Tools::redirect();
-				}
-			}
-		}
-	}
+      if (isset($_GET['newuser'])){
+         if ($_POST['newusername'] != "" && $_POST['password4newuser'] != ""){
+            if (!$this->store->userExists($_POST['newusername'])){	
+               if ($this->store->install($_POST['newusername'], Tools::encodeString($_POST['password4newuser'] . $_POST['newusername'])))
+               {
+                  $this->messages->add('s', _('The new user '.$_POST['newusername'].' has been installed. Would you like to <a href="?logout">disconnect</a> ?'));
+                  Tools::logm('The new user '.$_POST['newusername'].' has been installed');
+                  Tools::redirect();
+               }
+               else {
+                  Tools::logm('error during adding new user');
+                  Tools::redirect();
+               }
+            }
+            else {
+               $this->messages->add('e', _('Error : An user with the name '.$_POST['newusername'].' already exists !'));
+               Tools::logm('An user with the name '.$_POST['newusername'].' already exists !');
+               Tools::redirect();
+            }
+         }
+       }
+   }
    
    public function deleteUser(){
       if (isset($_GET['deluser'])){
-			if (Tools::encodeString($_POST['password4deletinguser'].$this->user->getUsername()) == $this->store->getUserPassword($this->user->getId()))
+         if (Tools::encodeString($_POST['password4deletinguser'].$this->user->getUsername()) == $this->store->getUserPassword($this->user->getId()))
          {
             $this->store->deleteUserConfig($this->user->getId());
             Tools::logm('The configuration for user '. $this->user->getUsername().' has been deleted !');
@@ -570,7 +569,7 @@ class Poche
                 $languages = $this->getInstalledLanguages();
                 $token = $this->user->getConfigValue('token');
                 $http_auth = (isset($_SERVER['PHP_AUTH_USER']) || isset($_SERVER['REMOTE_USER'])) ? true : false;
-                $only_user = ($this->store->listUsers() > 1) ? false : true;
+                $only_user = ($this->store->listUsers()[0] > 1) ? false : true;
                 $tpl_vars = array(
                     'themes' => $themes,
                     'languages' => $languages,
@@ -878,7 +877,7 @@ class Poche
         define('IMPORT_LIMIT', 5);
       }
       if (!defined('IMPORT_DELAY')) {
-      	define('IMPORT_DELAY', 5);
+        define('IMPORT_DELAY', 5);
       }
 
       if ( isset($_FILES['file']) ) {
@@ -894,18 +893,18 @@ class Poche
           $read = 0;
           foreach (array('ol','ul') as $list) {
             foreach ($html->find($list) as $ul) {
-            	foreach ($ul->find('li') as $li) {
-            	  $tmpEntry = array();
-            		$a = $li->find('a');
-            		$tmpEntry['url'] = $a[0]->href;
-            		$tmpEntry['tags'] = $a[0]->tags;
-            		$tmpEntry['is_read'] = $read;
-            		if ($tmpEntry['url']) {
-            		  $data[] = $tmpEntry;
-            		}
-            	}
-            	# the second <ol/ul> is for read links
-            	$read = ((sizeof($data) && $read)?0:1);
+                foreach ($ul->find('li') as $li) {
+                  $tmpEntry = array();
+                    $a = $li->find('a');
+                    $tmpEntry['url'] = $a[0]->href;
+                    $tmpEntry['tags'] = $a[0]->tags;
+                    $tmpEntry['is_read'] = $read;
+                    if ($tmpEntry['url']) {
+                      $data[] = $tmpEntry;
+                    }
+                }
+                # the second <ol/ul> is for read links
+                $read = ((sizeof($data) && $read)?0:1);
             }
           }
         }
@@ -916,7 +915,7 @@ class Poche
             $data[] = $record;
             foreach ($record as $record2) {
               if (is_array($record2)) {
-              	$data[] = $record2;
+                $data[] = $record2;
               }
             }
           }
@@ -936,7 +935,7 @@ class Poche
               //increment no of records inserted
               $i++;
               if ( isset($record['tags']) && trim($record['tags']) ) {
-              	//@TODO: set tags
+                //@TODO: set tags
 
               }
             }
@@ -969,17 +968,17 @@ class Poche
           $purifier = new HTMLPurifier($config);
 
           foreach ($items as $item) {
-          	$url = new Url(base64_encode($item['url']));
-          	$content = Tools::getPageContent($url);
+            $url = new Url(base64_encode($item['url']));
+            $content = Tools::getPageContent($url);
 
-          	$title = (($content['rss']['channel']['item']['title'] != '') ? $content['rss']['channel']['item']['title'] : _('Untitled'));
-          	$body = (($content['rss']['channel']['item']['description'] != '') ? $content['rss']['channel']['item']['description'] : _('Undefined'));
+            $title = (($content['rss']['channel']['item']['title'] != '') ? $content['rss']['channel']['item']['title'] : _('Untitled'));
+            $body = (($content['rss']['channel']['item']['description'] != '') ? $content['rss']['channel']['item']['description'] : _('Undefined'));
 
-          	//clean content to prevent xss attack
-          	$title = $purifier->purify($title);
-          	$body = $purifier->purify($body);
+            //clean content to prevent xss attack
+            $title = $purifier->purify($title);
+            $body = $purifier->purify($body);
 
-          	$this->store->updateContentAndTitle($item['id'], $title, $body, $this->user->getId());
+            $this->store->updateContentAndTitle($item['id'], $title, $body, $this->user->getId());
           }
 
         }
@@ -994,8 +993,8 @@ class Poche
      */
     public function export()
     {
-		$filename = "wallabag-export-".$this->user->getId()."-".date("Y-m-d").".json";
-		header('Content-Disposition: attachment; filename='.$filename);
+        $filename = "wallabag-export-".$this->user->getId()."-".date("Y-m-d").".json";
+        header('Content-Disposition: attachment; filename='.$filename);
 
         $entries = $this->store->retrieveAll($this->user->getId());
         echo $this->tpl->render('export.twig', array(
@@ -1028,13 +1027,13 @@ class Poche
     public function generateToken()
     {
         if (ini_get('open_basedir') === '') {
-			if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-			echo 'This is a server using Windows!';
-			// alternative to /dev/urandom for Windows
-			$token = substr(base64_encode(uniqid(mt_rand(), true)), 0, 20);
-			} else {
-			$token = substr(base64_encode(file_get_contents('/dev/urandom', false, null, 0, 20)), 0, 15);
-			}
+            if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+            echo 'This is a server using Windows!';
+            // alternative to /dev/urandom for Windows
+            $token = substr(base64_encode(uniqid(mt_rand(), true)), 0, 20);
+            } else {
+            $token = substr(base64_encode(file_get_contents('/dev/urandom', false, null, 0, 20)), 0, 15);
+            }
         }
         else {
             $token = substr(base64_encode(uniqid(mt_rand(), true)), 0, 20);
@@ -1081,6 +1080,7 @@ class Poche
             foreach ($entries as $entry) {
                 $newItem = $feed->createNewItem();
                 $newItem->setTitle($entry['title']);
+                $newItem->setSource(Tools::getPocheUrl() . '?view=view&amp;id=' . $entry['id']);
                 $newItem->setLink($entry['url']);
                 $newItem->setDate(time());
                 $newItem->setDescription($entry['content']);

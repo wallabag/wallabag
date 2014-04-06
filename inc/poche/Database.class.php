@@ -231,9 +231,9 @@ class Database {
     }
     
     public function listUsers(){
-      $sql = "SELECT * from users";
+      $sql = "SELECT COUNT(*) FROM users";
       $query = $this->executeQuery($sql,array());
-      return count($query->fetchAll());
+      return $query->fetch();
     }
     
     public function getUserPassword($userID){
@@ -409,7 +409,7 @@ class Database {
           $id = null;
         }
         else {
-          $id = intval($this->getLastId( (STORAGE == 'postgres') ? 'users_id_seq' : '' ));
+          $id = intval($this->getLastId( (STORAGE == 'postgres') ? 'entries_id_seq' : '') );
         }
         return $id;
     }
