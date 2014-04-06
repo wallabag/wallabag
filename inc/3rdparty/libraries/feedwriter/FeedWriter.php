@@ -193,7 +193,7 @@ define('JSONP', 3, true);
 	*/
 	public function setDescription($desciption)
 	{
-		$tag = ($this->version == ATOM)? 'subtitle' : 'description';
+		$tag = 'description';
 		$this->setChannelElement($tag, $desciption);
 	}
 
