@@ -409,7 +409,7 @@ class Database {
           $id = null;
         }
         else {
-          $id = intval($this->getLastId( (STORAGE == 'postgres') ? 'users_id_seq' : '') );
+          $id = intval($this->getLastId( (STORAGE == 'postgres') ? 'entries_id_seq' : '') );
         }
         return $id;
     }
