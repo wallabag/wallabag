@@ -59,8 +59,10 @@ class Tools
             return $scriptname;
         }
 
+        $host = (isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] : (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME']));
+        
         return 'http' . ($https ? 's' : '') . '://'
-            . $_SERVER["HTTP_HOST"] . $serverport . $scriptname;
+            . $host . $serverport . $scriptname;
     }
 
     public static function redirect($url = '')
