@@ -229,6 +229,41 @@ class Database {
             return FALSE;
         }
     }
+    
+    public function listUsers(){
+      $sql = "SELECT COUNT(*) FROM users";
+      $query = $this->executeQuery($sql,array());
+      return $query->fetch();
+    }
+    
+    public function getUserPassword($userID){
+      $sql = "SELECT * FROM users WHERE id=?";
+      $query = $this->executeQuery($sql, array($userID));
+      $password = $query->fetchAll();
+      return isset($password[0]['password']) ? $password[0]['password'] : null;
+    }
+    
+    public function deleteUserConfig($userID){
+      $sql_action = 'DELETE from users_config WHERE user_id=?';
+      $params_action = array($userID);
+      $query = $this->executeQuery($sql_action, $params_action);
+      
+      return $query;
+    }
+    
+    public function deleteUserEntries($userID){
+      $sql_action = 'DELETE from entries WHERE user_id=?';
+      $params_action = array($userID);
+      $query = $this->executeQuery($sql_action, $params_action);
+      
+      return $query;
+    }
+    
+    public function deleteUser($userID){
+      $sql_action = 'DELETE from users WHERE id=?';
+      $params_action = array($userID);
+      $query = $this->executeQuery($sql_action, $params_action);
+    }
 
     public function updateContentAndTitle($id, $title, $body, $user_id) {
         $sql_action = 'UPDATE entries SET content = ?, title = ? WHERE id=? AND user_id=?';
