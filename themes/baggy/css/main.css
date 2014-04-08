@@ -540,7 +540,7 @@ footer a {
   2.1 = "save a link" popup div related styles
   ========================================================================== */
 
-#bagit-form {
+#bagit-form, #search-form {
   background: rgba(0,0,0,0.5);
   position: absolute;
   top: 0;
@@ -555,7 +555,7 @@ footer a {
   border-left: 1px #EEE solid;
 }
 
-#bagit-form form {
+#bagit-form form, #search-form form {
   background: #FFF;
   position: absolute;
   top: 0;
@@ -568,7 +568,7 @@ footer a {
   padding: 2em;
 }
 
-a#bagit-form-close {
+a#bagit-form-close, a#search-form-close {
   background: #000;
   color: #FFF;
   padding: 0.2em 0.5em;
@@ -577,7 +577,7 @@ a#bagit-form-close {
   float: right;
   font-size: 0.6em;
 }
-a#bagit-form-close:hover {
+a#bagit-form-close:hover, a#search-form-close:hover {
   background: #999;
   color: #000;
 }
@@ -1028,7 +1028,7 @@ blockquote {
     display: none;
   }
 
-  #bagit-form {
+  #bagit-form, #search-form {
     left: 0;
   }
 }
