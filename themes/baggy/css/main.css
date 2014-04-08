@@ -352,10 +352,10 @@ footer a {
   letter-spacing:normal;
   box-shadow: 0 3px 7px rgba(0,0,0,0.3);
   display: inline-block;
-  width: 32%!important;
+  width: 32%;
   margin-bottom: 1.5em;
   vertical-align: top;
-  margin-left: 1.5%!important;
+  margin-left: 1.5%;
   position: relative;
   overflow: hidden;
   padding: 1.5em 1.5em 3em 1.5em;
@@ -492,7 +492,7 @@ footer a {
   }
 
 .entrie:nth-child(3n+1) {
-  margin-left: 0!important;
+  margin-left: 0;
 }
 
 .results {
@@ -540,7 +540,7 @@ footer a {
   2.1 = "save a link" popup div related styles
   ========================================================================== */
 
-#bagit-form {
+#bagit-form, #search-form {
   background: rgba(0,0,0,0.5);
   position: absolute;
   top: 0;
@@ -555,7 +555,7 @@ footer a {
   border-left: 1px #EEE solid;
 }
 
-#bagit-form form {
+#bagit-form form, #search-form form {
   background: #FFF;
   position: absolute;
   top: 0;
@@ -568,7 +568,7 @@ footer a {
   padding: 2em;
 }
 
-a#bagit-form-close {
+a#bagit-form-close, a#search-form-close {
   background: #000;
   color: #FFF;
   padding: 0.2em 0.5em;
@@ -577,7 +577,7 @@ a#bagit-form-close {
   float: right;
   font-size: 0.6em;
 }
-a#bagit-form-close:hover {
+a#bagit-form-close:hover, a#search-form-close:hover {
   background: #999;
   color: #000;
 }
@@ -1028,7 +1028,7 @@ blockquote {
     display: none;
   }
 
-  #bagit-form {
+  #bagit-form, #search-form {
     left: 0;
   }
 }
