@@ -844,18 +844,18 @@ class Poche
           $read = 0;
           foreach (array('ol','ul') as $list) {
             foreach ($html->find($list) as $ul) {
-                foreach ($ul->find('li') as $li) {
-                  $tmpEntry = array();
-                    $a = $li->find('a');
-                    $tmpEntry['url'] = $a[0]->href;
-                    $tmpEntry['tags'] = $a[0]->tags;
-                    $tmpEntry['is_read'] = $read;
-                    if ($tmpEntry['url']) {
-                      $data[] = $tmpEntry;
-                    }
-                }
-                # the second <ol/ul> is for read links
-                $read = ((sizeof($data) && $read)?0:1);
+              foreach ($ul->find('li') as $li) {
+                $tmpEntry = array();
+                  $a = $li->find('a');
+                  $tmpEntry['url'] = $a[0]->href;
+                  $tmpEntry['tags'] = $a[0]->tags;
+                  $tmpEntry['is_read'] = $read;
+                  if ($tmpEntry['url']) {
+                    $data[] = $tmpEntry;
+                  }
+              }
+              # the second <ol/ul> is for read links
+              $read = ((sizeof($data) && $read)?0:1);
             }
           }
         }
@@ -872,10 +872,10 @@ class Poche
           }
         }
 
-        $i = 0; //counter for articles inserted
+        $urlsInserted = array(); //urls of articles inserted
         foreach ($data as $record) {
           $url = trim( isset($record['article__url']) ? $record['article__url'] : (isset($record['url']) ? $record['url'] : '') );
-          if ( $url ) {
+          if ( $url and !in_array($url, $urlsInserted) ) {
             $title = (isset($record['title']) ? $record['title'] :  _('Untitled - Import - ').'</a> <a href="./?import">'._('click to finish import').'</a><a>');
             $body = (isset($record['content']) ? $record['content'] : '');
             $isRead = (isset($record['is_read']) ? intval($record['is_read']) : (isset($record['archive'])?intval($record['archive']):0));
@@ -883,8 +883,8 @@ class Poche
             //insert new record
             $id = $this->store->add($url, $title, $body, $this->user->getId(), $isFavorite, $isRead);
             if ( $id ) {
-              //increment no of records inserted
-              $i++;
+              $urlsInserted[] = $url; //add
+
               if ( isset($record['tags']) && trim($record['tags']) ) {
                 //@TODO: set tags
 
@@ -893,6 +893,7 @@ class Poche
           }
         }
 
+        $i = sizeof($urlsInserted);
         if ( $i > 0 ) {
           $this->messages->add('s', _('Articles inserted: ').$i._('. Please note, that some may be marked as "read".'));
         }
@@ -942,16 +943,15 @@ class Poche
      * export poche entries in json
      * @return json all poche entries
      */
-    public function export()
-    {
-        $filename = "wallabag-export-".$this->user->getId()."-".date("Y-m-d").".json";
-        header('Content-Disposition: attachment; filename='.$filename);
+    public function export() {
+      $filename = "wallabag-export-".$this->user->getId()."-".date("Y-m-d").".json";
+      header('Content-Disposition: attachment; filename='.$filename);
 
-        $entries = $this->store->retrieveAll($this->user->getId());
-        echo $this->tpl->render('export.twig', array(
-            'export' => Tools::renderJson($entries),
-        ));
-        Tools::logm('export view');
+      $entries = $this->store->retrieveAll($this->user->getId());
+      echo $this->tpl->render('export.twig', array(
+          'export' => Tools::renderJson($entries),
+      ));
+      Tools::logm('export view');
     }
 
     /**
@@ -959,43 +959,42 @@ class Poche
      * @param  string $which 'prod' or 'dev'
      * @return string        latest $which version
      */
-    private function getPocheVersion($which = 'prod')
-    {
-        $cache_file = CACHE . '/' . $which;
-        $check_time = time();
+    private function getPocheVersion($which = 'prod') {
+      $cache_file = CACHE . '/' . $which;
+      $check_time = time();
 
-        # checks if the cached version file exists
-        if (file_exists($cache_file) && (filemtime($cache_file) > (time() - 86400 ))) {
-           $version = file_get_contents($cache_file);
-           $check_time = filemtime($cache_file);
-        } else {
-           $version = file_get_contents('http://static.wallabag.org/versions/' . $which);
-           file_put_contents($cache_file, $version, LOCK_EX);
-        }
-        return array($version, $check_time);
+      # checks if the cached version file exists
+      if (file_exists($cache_file) && (filemtime($cache_file) > (time() - 86400 ))) {
+         $version = file_get_contents($cache_file);
+         $check_time = filemtime($cache_file);
+      } else {
+         $version = file_get_contents('http://static.wallabag.org/versions/' . $which);
+         file_put_contents($cache_file, $version, LOCK_EX);
+      }
+      return array($version, $check_time);
     }
 
     public function generateToken()
     {
-        if (ini_get('open_basedir') === '') {
-            if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-            echo 'This is a server using Windows!';
-            // alternative to /dev/urandom for Windows
-            $token = substr(base64_encode(uniqid(mt_rand(), true)), 0, 20);
-            } else {
-            $token = substr(base64_encode(file_get_contents('/dev/urandom', false, null, 0, 20)), 0, 15);
-            }
+      if (ini_get('open_basedir') === '') {
+        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+          echo 'This is a server using Windows!';
+          // alternative to /dev/urandom for Windows
+          $token = substr(base64_encode(uniqid(mt_rand(), true)), 0, 20);
+        } else {
+          $token = substr(base64_encode(file_get_contents('/dev/urandom', false, null, 0, 20)), 0, 15);
         }
-        else {
-            $token = substr(base64_encode(uniqid(mt_rand(), true)), 0, 20);
-        }
+      }
+      else {
+        $token = substr(base64_encode(uniqid(mt_rand(), true)), 0, 20);
+      }
 
-        $token = str_replace('+', '', $token);
-        $this->store->updateUserConfig($this->user->getId(), 'token', $token);
-        $currentConfig = $_SESSION['poche_user']->config;
-        $currentConfig['token'] = $token;
-        $_SESSION['poche_user']->setConfig($currentConfig);
-        Tools::redirect();
+      $token = str_replace('+', '', $token);
+      $this->store->updateUserConfig($this->user->getId(), 'token', $token);
+      $currentConfig = $_SESSION['poche_user']->config;
+      $currentConfig['token'] = $token;
+      $_SESSION['poche_user']->setConfig($currentConfig);
+      Tools::redirect();
     }
 
     public function generateFeeds($token, $user_id, $tag_id, $type = 'home')
