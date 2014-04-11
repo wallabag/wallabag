@@ -77,7 +77,7 @@ class Database {
         }
         else {
             $sql = '
-                CREATE TABLE tags (
+                CREATE TABLE IF NOT EXISTS tags (
                   id bigserial primary key,
                   value varchar(255) NOT NULL
                 );
@@ -110,7 +110,7 @@ class Database {
         }
         else {
             $sql = '
-                CREATE TABLE tags_entries (
+                CREATE TABLE IF NOT EXISTS tags_entries (
                   id bigserial primary key,
                   entry_id integer NOT NULL,
                   tag_id integer NOT NULL
@@ -407,7 +407,7 @@ class Database {
     public function getLastId($column = '') {
         return $this->getHandle()->lastInsertId($column);
     }
-	
+
     public function search($term, $user_id, $limit = '') {
         $search = '%'.$term.'%';
         $sql_action = "SELECT * FROM entries WHERE user_id=? AND (content LIKE ? OR title LIKE ? OR url LIKE ?) "; //searches in content, title and URL
