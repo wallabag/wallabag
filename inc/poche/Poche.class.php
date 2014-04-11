@@ -373,9 +373,7 @@ class Poche
                 $body = $content['rss']['channel']['item']['description'];
 
                 // clean content from prevent xss attack
-                $config = HTMLPurifier_Config::createDefault();
-                $config->set('Cache.SerializerPath', CACHE);
-                $purifier = new HTMLPurifier($config);
+                $purifier = $this->getPurifier();
                 $title = $purifier->purify($title);
                 $body = $purifier->purify($body);
 
@@ -920,9 +918,7 @@ class Poche
           Tools::logm('Fetching next batch of articles...');
           $items = $this->store->retrieveUnfetchedEntries($this->user->getId(), IMPORT_LIMIT);
 
-          $config = HTMLPurifier_Config::createDefault();
-          $config->set('Cache.SerializerPath', CACHE);
-          $purifier = new HTMLPurifier($config);
+          $purifier = $this->getPurifier();
 
           foreach ($items as $item) {
             $url = new Url(base64_encode($item['url']));
@@ -1063,5 +1059,17 @@ class Poche
         Tools::logm('empty cache');
         $this->messages->add('s', _('Cache deleted.'));
         Tools::redirect();
+    }
+
+    /**
+     * return new purifier object with actual config
+     */
+    protected function getPurifier() {
+      $config = HTMLPurifier_Config::createDefault();
+      $config->set('Cache.SerializerPath', CACHE);
+      $config->set('HTML.SafeIframe', true);
+      $config->set('URI.SafeIframeRegexp', '%^(https?:)?//(www\.youtube(?:-nocookie)?\.com/embed/|player\.vimeo\.com/video/)%'); //allow YouTube and Vimeo$purifier = new HTMLPurifier($config);
+
+      return new HTMLPurifier($config);
     }
 }
