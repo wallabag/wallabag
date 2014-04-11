@@ -832,6 +832,8 @@ class Poche
       }
 
       if ( isset($_FILES['file']) ) {
+        Tools::logm('Import stated: parsing file');
+
         // assume, that file is in json format
         $str_data = file_get_contents($_FILES['file']['tmp_name']);
         $data = json_decode($str_data, true);
@@ -897,6 +899,7 @@ class Poche
         if ( $i > 0 ) {
           $this->messages->add('s', _('Articles inserted: ').$i._('. Please note, that some may be marked as "read".'));
         }
+        Tools::logm('Import of articles finished: '.$i.' articles added (w/o content if not provided).');
       }
       //file parsing finished here
 
@@ -907,12 +910,14 @@ class Poche
       if ( $recordsDownloadRequired == 0 ) {
         //nothing to download
         $this->messages->add('s', _('Import finished.'));
+        Tools::logm('Import finished completely');
         Tools::redirect();
       }
       else {
         //if just inserted - don't download anything, download will start in next reload
         if ( !isset($_FILES['file']) ) {
           //download next batch
+          Tools::logm('Fetching next batch of articles...');
           $items = $this->store->retrieveUnfetchedEntries($this->user->getId(), IMPORT_LIMIT);
 
           $config = HTMLPurifier_Config::createDefault();
@@ -921,6 +926,7 @@ class Poche
 
           foreach ($items as $item) {
             $url = new Url(base64_encode($item['url']));
+            Tools::logm('Fetching article '.$item['id']);
             $content = Tools::getPageContent($url);
 
             $title = (($content['rss']['channel']['item']['title'] != '') ? $content['rss']['channel']['item']['title'] : _('Untitled'));
@@ -931,6 +937,7 @@ class Poche
             $body = $purifier->purify($body);
 
             $this->store->updateContentAndTitle($item['id'], $title, $body, $this->user->getId());
+            Tools::logm('Article '.$item['id'].' updated.');
           }
 
         }
