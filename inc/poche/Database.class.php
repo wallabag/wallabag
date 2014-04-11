@@ -77,7 +77,7 @@ class Database {
         }
         else {
             $sql = '
-                CREATE TABLE tags (
+                CREATE TABLE IF NOT EXISTS tags (
                   id bigserial primary key,
                   value varchar(255) NOT NULL
                 );
@@ -110,7 +110,7 @@ class Database {
         }
         else {
             $sql = '
-                CREATE TABLE tags_entries (
+                CREATE TABLE IF NOT EXISTS tags_entries (
                   id bigserial primary key,
                   entry_id integer NOT NULL,
                   tag_id integer NOT NULL
@@ -245,7 +245,7 @@ class Database {
             $sql_limit = "LIMIT ".$limit." OFFSET 0";
         }
 
-        $sql        = "SELECT * FROM entries WHERE (content = '' OR content IS NULL) AND user_id=? ORDER BY id " . $sql_limit;
+        $sql        = "SELECT * FROM entries WHERE (content = '' OR content IS NULL) AND title LIKE 'Untitled - Import%' AND user_id=? ORDER BY id " . $sql_limit;
         $query      = $this->executeQuery($sql, array($user_id));
         $entries    = $query->fetchAll();
 
@@ -253,7 +253,7 @@ class Database {
     }
 
     public function retrieveUnfetchedEntriesCount($user_id) {
-      $sql        = "SELECT count(*) FROM entries WHERE (content = '' OR content IS NULL) AND user_id=?";
+      $sql        = "SELECT count(*) FROM entries WHERE (content = '' OR content IS NULL) AND title LIKE 'Untitled - Import%' AND user_id=?";
       $query      = $this->executeQuery($sql, array($user_id));
       list($count) = $query->fetch();
 
@@ -374,7 +374,7 @@ class Database {
           $id = null;
         }
         else {
-          $id = intval($this->getLastId( (STORAGE == 'postgres') ? 'users_id_seq' : '' ));
+          $id = intval($this->getLastId( (STORAGE == 'postgres') ? 'entries_id_seq' : '') );
         }
         return $id;
     }
@@ -407,7 +407,7 @@ class Database {
     public function getLastId($column = '') {
         return $this->getHandle()->lastInsertId($column);
     }
-	
+
     public function search($term, $user_id, $limit = '') {
         $search = '%'.$term.'%';
         $sql_action = "SELECT * FROM entries WHERE user_id=? AND (content LIKE ? OR title LIKE ? OR url LIKE ?) "; //searches in content, title and URL

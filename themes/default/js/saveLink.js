@@ -75,7 +75,7 @@ $.fn.ready(function() {
    ========================================================================== */
 
   $(window).keydown(function(e){
-    if ( ( e.target.tagName.toLowerCase() !== 'input' && e.keyCode == 83 ) || e.keyCode == 27 ) {
+    if ( ( e.target.tagName.toLowerCase() !== 'input' && e.keyCode == 83 ) || (e.keyCode == 27 && $bagitForm.is(':visible') ) ) {
       $bagit.removeClass("current");
       $("#bagit-arrow").removeClass("arrow-down");
       toggleSaveLinkForm();
