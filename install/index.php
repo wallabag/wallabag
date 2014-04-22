@@ -53,7 +53,7 @@ else if (isset($_POST['install'])) {
     else {
         $continue = true;
         // Create config.inc.php
-        if (!copy('inc/poche/config.inc.php.new', 'inc/poche/config.inc.php')) {
+        if (!copy('inc/poche/config.inc.default.php', 'inc/poche/config.inc.php')) {
             $errors[] = 'Installation aborted, impossible to create inc/poche/config.inc.php file. Maybe you don\'t have write access to create it.';
             $continue = false;
         }

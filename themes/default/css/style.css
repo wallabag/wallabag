@@ -331,7 +331,8 @@ a.email span,
 a.delete span,
 a.link span,
 a.bad-display span,
-a.reading-time span {
+a.reading-time span,
+a.print span {
     background-repeat: no-repeat;
 }
 
@@ -401,4 +402,14 @@ a#bagit-form-close {
 
 .opacity03 {
   /*opacity: 0.3;*/
+}
+
+#readLeftPercent {
+		display: inline-block;
+    /* Show textual content */
+    overflow: visible;
+    text-align: left;
+    text-indent: 0;
+		color: black;
+		width: 50px;
 }
