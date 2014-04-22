@@ -434,12 +434,24 @@ class Poche
             case 'toggle_fav' :
                 $this->store->favoriteById($id, $this->user->getId());
                 Tools::logm('mark as favorite link #' . $id);
-                Tools::redirect();
+                if ( Tools::isAjaxRequest() ) {
+                  echo 1;
+                  exit;
+                }
+                else {
+                  Tools::redirect();
+                }
                 break;
             case 'toggle_archive' :
                 $this->store->archiveById($id, $this->user->getId());
                 Tools::logm('archive link #' . $id);
-                Tools::redirect();
+                if ( Tools::isAjaxRequest() ) {
+                  echo 1;
+                  exit;
+                }
+                else {
+                  Tools::redirect();
+                }
                 break;
             case 'archive_all' :
                 $this->store->archiveAll($this->user->getId());

@@ -17,6 +17,7 @@ img {
 
 /* Hide useless blocks */
 body > header,
+#article_toolbar,
 #links,
 #sort,
 body > footer,
@@ -45,4 +46,17 @@ abbr[title]:after {
 /* Change border on current pager item */
 .pagination span.current {
     border-style: dashed;
+}
+
+#main {
+		width: 100%;
+		padding: 0;
+		margin: 0;
+		margin-left: 0;
+	  padding-right: 0;
+  	padding-bottom: 0;
+}
+
+#article {
+		width: 100%;
 }

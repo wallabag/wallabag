@@ -53,3 +53,7 @@ a.link span {
 a.bad-display span {
     background-image: url('../img/default/bad-display.png');
 }
+
+a.print span {
+		background-image: url('../img/default/print.png');
+}
