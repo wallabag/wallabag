@@ -229,12 +229,49 @@ class Database {
             return FALSE;
         }
     }
+    
+    public function listUsers($username=null) {
+        $sql = 'SELECT count(*) FROM users'.( $username ? ' WHERE username=?' : '');
+        $query = $this->executeQuery($sql, ( $username ? array($username) : array()));
+        list($count) = $query->fetch();
+        return $count;
+    }
+    
+    public function getUserPassword($userID) {
+        $sql = "SELECT * FROM users WHERE id=?";
+        $query = $this->executeQuery($sql, array($userID));
+        $password = $query->fetchAll();
+        return isset($password[0]['password']) ? $password[0]['password'] : null;
+    }
+    
+    public function deleteUserConfig($userID) {
+        $sql_action = 'DELETE from users_config WHERE user_id=?';
+        $params_action = array($userID);
+        $query = $this->executeQuery($sql_action, $params_action);
+        return $query;
+    }
+    
+    public function deleteTagsEntriesAndEntries($userID) {
+        $entries = $this->retrieveAll($userID);
+        foreach($entries as $entryid) {
+            $tags = $this->retrieveTagsByEntry($entryid);
+            foreach($tags as $tag) {
+                $this->removeTagForEntry($entryid,$tags);
+            }
+            $this->deleteById($entryid,$userID);
+        }
+    }
+    
+    public function deleteUser($userID) {
+        $sql_action = 'DELETE from users WHERE id=?';
+        $params_action = array($userID);
+        $query = $this->executeQuery($sql_action, $params_action);
+    }
 
     public function updateContentAndTitle($id, $title, $body, $user_id) {
         $sql_action = 'UPDATE entries SET content = ?, title = ? WHERE id=? AND user_id=?';
         $params_action = array($body, $title, $id, $user_id);
         $query = $this->executeQuery($sql_action, $params_action);
-
         return $query;
     }
 
