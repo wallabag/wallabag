@@ -101,7 +101,7 @@ class Poche
 
     public function configFileIsAvailable() {
         if (! self::$configFileAvailable) {
-            $this->notInstalledMessage[] = 'You have to rename inc/poche/config.inc.php.new to inc/poche/config.inc.php.';
+            $this->notInstalledMessage[] = 'You have to copy (don\'t just rename!) inc/poche/config.inc.default.php to inc/poche/config.inc.php.';
 
             return false;
         }
@@ -486,12 +486,24 @@ class Poche
             case 'toggle_fav' :
                 $this->store->favoriteById($id, $this->user->getId());
                 Tools::logm('mark as favorite link #' . $id);
-                Tools::redirect();
+                if ( Tools::isAjaxRequest() ) {
+                  echo 1;
+                  exit;
+                }
+                else {
+                  Tools::redirect();
+                }
                 break;
             case 'toggle_archive' :
                 $this->store->archiveById($id, $this->user->getId());
                 Tools::logm('archive link #' . $id);
-                Tools::redirect();
+                if ( Tools::isAjaxRequest() ) {
+                  echo 1;
+                  exit;
+                }
+                else {
+                  Tools::redirect();
+                }
                 break;
             case 'archive_all' :
                 $this->store->archiveAll($this->user->getId());
@@ -875,13 +887,6 @@ class Poche
      * @return boolean
      */
     public function import() {
-
-      if (!defined('IMPORT_LIMIT')) {
-        define('IMPORT_LIMIT', 5);
-      }
-      if (!defined('IMPORT_DELAY')) {
-        define('IMPORT_DELAY', 5);
-      }
 
       if ( isset($_FILES['file']) ) {
         Tools::logm('Import stated: parsing file');

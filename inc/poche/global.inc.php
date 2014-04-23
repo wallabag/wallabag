@@ -43,6 +43,7 @@ if (! file_exists(INCLUDES . '/poche/config.inc.php')) {
     Poche::$configFileAvailable = false;
 } else {
     require_once INCLUDES . '/poche/config.inc.php';
+    require_once INCLUDES . '/poche/config.inc.default.php';
 }
 
 if (Poche::$configFileAvailable && DOWNLOAD_PICTURES) {

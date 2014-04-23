@@ -89,18 +89,11 @@ define('JSONP', 3, true);
     */
     public function genarateFeed()
     {
-        if ($this->version == RSS2) {
-//             header('Content-type: text/xml; charset=UTF-8');
-            // this line prevents Chrome 20 from prompting download
-            // used by Google: https://news.google.com/news/feeds?ned=us&topic=b&output=rss
-//             header('X-content-type-options: nosniff');
-        } elseif ($this->version == JSON) {
-//             header('Content-type: application/json; charset=UTF-8');
-            $this->json = new stdClass();
-        } elseif ($this->version == JSONP) {
-//             header('Content-type: application/javascript; charset=UTF-8');
-            $this->json = new stdClass();
-        }
+        header('Content-type: text/xml; charset=UTF-8');
+        // this line prevents Chrome 20 from prompting download
+        // used by Google: https://news.google.com/news/feeds?ned=us&topic=b&output=rss
+        header('X-content-type-options: nosniff');
+
         $this->printHead();
         $this->printChannels();
         $this->printItems();

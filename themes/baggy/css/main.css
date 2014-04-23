@@ -746,6 +746,9 @@ margin-top:1em;
 .icon-rss:before {
   content: "\e808";
 }
+.icon-print:before {
+  content: "\e80d";
+}
 
 /* ==========================================================================
    Icon selected

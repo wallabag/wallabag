@@ -42,6 +42,10 @@ define ('FLATTR_API', 'https://api.flattr.com/rest/v2/things/lookup/?url=');
 define ('NOT_FLATTRABLE', '0');
 define ('FLATTRABLE', '1');
 define ('FLATTRED', '2');
+// display or not print link in article view 
+define ('SHOW_PRINTLINK', '1');
+// display or not percent of read in article view. Affects only default theme. 
+define ('SHOW_READPERCENT', '1');
 define ('ABS_PATH', 'assets/');
 
 define ('DEFAULT_THEME', 'baggy');
