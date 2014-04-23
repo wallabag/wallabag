@@ -33,6 +33,8 @@ class Database {
                 $db_path = 'pgsql:host=' . STORAGE_SERVER . ';dbname=' . STORAGE_DB;
                 $this->handle = new PDO($db_path, STORAGE_USER, STORAGE_PASSWORD);
                 break;
+            default:
+                die(STORAGE . ' is not a recognised database system !');
         }
 
         $this->handle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
