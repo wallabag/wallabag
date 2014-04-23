@@ -66,6 +66,10 @@ if (isset($_GET['login'])) {
 } elseif (isset($_GET['config'])) {
     # Update password
     $poche->updatePassword();
+} elseif (isset($_GET['newuser'])) {
+    $poche->createNewUser();
+} elseif (isset($_GET['deluser'])) {
+    $poche->deleteUser();
 } elseif (isset($_GET['import'])) {
     $import = $poche->import();
     $tpl_vars = array_merge($tpl_vars, $import);
