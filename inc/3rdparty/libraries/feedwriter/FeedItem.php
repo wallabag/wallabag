@@ -174,7 +174,8 @@
     */
     public function setSource($link) 
     {
-        $this->setElement('source', $link);
+        $attributes = array('url'=>$link);
+        $this->setElement('source', "wallabag",$attributes);
     }
     
     /**
