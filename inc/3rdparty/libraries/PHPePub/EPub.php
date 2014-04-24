@@ -343,6 +343,7 @@ class EPub {
         }
         $fileName = Zip::getRelativePath($fileName);
         $fileName = preg_replace('#^[/\.]+#i', "", $fileName);
+        $fileName = $this->sanitizeFileName($fileName);
 
         $chapter = $chapterData;
         if ($autoSplit && is_string($chapterData) && mb_strlen($chapterData) > $this->splitDefaultSize) {
@@ -1699,7 +1700,7 @@ class EPub {
                 while (list($chapterName, $navPoint) = each($this->ncx->chapterList)) {
 					$fileName = $navPoint->getContentSrc();
 					$level = $navPoint->getLevel() -2;
-					$tocData .= "\t<p>" . str_repeat(" &#160;  &#160;  &#160;", $level) . "<a href=\"" . $fileName . "\">" . $chapterName . "</a></p>\n";
+					$tocData .= "\t<p>" . str_repeat(" &#160;  &#160;  &#160;", $level) . "<a href=\"" . $this->sanitizeFileName($fileName) . "\">" . $chapterName . "</a></p>\n";
                 }
             } else if ($this->tocAddReferences === TRUE) {
                 if (array_key_exists($item, $this->ncx->referencesList)) {
