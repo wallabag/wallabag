@@ -1131,4 +1131,87 @@ class Poche
 
       return new HTMLPurifier($config);
     }
+    
+    /**
+     * handle epub
+     */
+    public function createEpub() {
+        
+        if (isset($_GET['epub']) && isset($_GET['id'])) {
+            if ($_GET['id'] == "all") { // we put all entries in the file
+                $entries = $this->store->retrieveAll($this->user->getId());
+            }
+            else { // we put only one entry in the file
+                $entryID = filter_var($_GET['id'],FILTER_SANITIZE_NUMBER_INT);
+                $entry = $this->store->retrieveOneById($entryID, $this->user->getId());
+                $entries = array($entry);
+            }
+        }
+        $content_start =
+        "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
+        . "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\"\n"
+        . " \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">\n"
+        . "<html xmlns=\"http://www.w3.org/1999/xhtml\">\n"
+        . "<head>"
+        . "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n"
+        . "<link rel=\"stylesheet\" type=\"text/css\" href=\"styles.css\" />\n"
+        . "<title>Test Book</title>\n"
+        . "</head>\n"
+        . "<body>\n";
+
+        $bookEnd = "</body>\n</html>\n";
+        
+        $log = new Logger($entryID, TRUE);
+        $fileDir = CACHE;
+
+        
+        $book = new EPub();
+        $log->logLine("new EPub()");
+        $log->logLine("EPub class version: " . EPub::VERSION);
+        $log->logLine("EPub Req. Zip version: " . EPub::REQ_ZIP_VERSION);
+        $log->logLine("Zip version: " . Zip::VERSION);
+        $log->logLine("getCurrentServerURL: " . $book->getCurrentServerURL());
+        $log->logLine("getCurrentPageURL..: " . $book->getCurrentPageURL());
+        
+        $book->setTitle("wallabag's articles");
+        $book->setIdentifier("http://$_SERVER[HTTP_HOST]", EPub::IDENTIFIER_URI); // Could also be the ISBN number, prefered for published books, or a UUID.
+        //$book->setLanguage("en"); // Not needed, but included for the example, Language is mandatory, but EPub defaults to "en". Use RFC3066 Language codes, such as "en", "da", "fr" etc.
+        $book->setDescription("Some articles saved on my wallabag");
+        $book->setAuthor("wallabag","wallabag");
+        $book->setPublisher("wallabag","wallabag"); // I hope this is a non existant address :)
+        $book->setDate(time()); // Strictly not needed as the book date defaults to time().
+        //$book->setRights("Copyright and licence information specific for the book."); // As this is generated, this _could_ contain the name or licence information of the user who purchased the book, if needed. If this is used that way, the identifier must also be made unique for the book.
+        $book->setSourceURL("http://$_SERVER[HTTP_HOST]");
+        
+        $book->addDublinCoreMetadata(DublinCore::CONTRIBUTOR, "PHP");
+        
+        $cssData = "body {\n margin-left: .5em;\n margin-right: .5em;\n text-align: justify;\n}\n\np {\n font-family: serif;\n font-size: 10pt;\n text-align: justify;\n text-indent: 1em;\n margin-top: 0px;\n margin-bottom: 1ex;\n}\n\nh1, h2 {\n font-family: sans-serif;\n font-style: italic;\n text-align: center;\n background-color: #6b879c;\n color: white;\n width: 100%;\n}\n\nh1 {\n margin-bottom: 2px;\n}\n\nh2 {\n margin-top: -2px;\n margin-bottom: 2px;\n}\n";
+        $cover = $content_start . "<h1>My articles on wallabag</h1>\n<h2>As seen on : http://$_SERVER[HTTP_HOST]</h2>\n" . $bookEnd;
+        $book->addChapter("Notices", "Cover.html", $cover);
+        $book->buildTOC(NULL, "toc", "Table of Contents", TRUE, TRUE);
+        
+        foreach ($entries as $entry) {
+            $tags = $this->store->retrieveTagsByEntry($entry['id']);
+            foreach ($tags as $tag) {
+                $book->setSubject($tag);
+            }
+            
+            $log->logLine("Set up parameters");
+            
+            
+            
+            $chapter = $content_start . $entry['content'] . $bookEnd;
+            $book->addChapter("Chapter " . $entry['id'] . ": " . $entry['title'], htmlspecialchars($entry['title']) . ".html", $chapter, true, EPub::EXTERNAL_REF_ADD);
+        }    
+        
+
+        if (true) { 
+        $epuplog = $book->getLog();
+        $book->addChapter("Log", "Log.html", $content_start . $log->getLog() . "\n</pre>" . $bookEnd); // generation log
+        // Only used in case we need to debug EPub.php.
+        //$book->addChapter("ePubLog", "ePubLog.html", $content_start . $epuplog . "\n</pre>" . $bookEnd); 
+        }
+        $book->finalize();
+        $zipData = $book->sendBook("wallabag's articles");
+    }
 }
