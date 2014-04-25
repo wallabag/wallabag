@@ -1136,36 +1136,52 @@ class Poche
      * handle epub
      */
     public function createEpub() {
-        
-        if (isset($_GET['epub']) && isset($_GET['id'])) {
-            if ($_GET['id'] == "all") { // we put all entries in the file
-                $entries = $this->store->retrieveAll($this->user->getId());
-            }
-            else { // we put only one entry in the file
+       
+        switch ($_GET['method']) {
+            case 'id':
                 $entryID = filter_var($_GET['id'],FILTER_SANITIZE_NUMBER_INT);
                 $entry = $this->store->retrieveOneById($entryID, $this->user->getId());
                 $entries = array($entry);
-            }
+                break;
+            case 'all':
+                $entries = $this->store->retrieveAll($this->user->getId());
+                break;
+            case 'tag':
+                $tag = filter_var($_GET['tag'],FILTER_SANITIZE_STRING);
+                $tags_id = $this->store->retrieveAllTags($this->user->getId(),$tag);
+                $tag_id = $tags_id[0]["id"]; // we take the first result, which is supposed to match perfectly. There must be a workaround.
+                $entries = $this->store->retrieveEntriesByTag($tag_id,$this->user->getId());
+                break;
+            case 'category':
+                $category = filter_var($_GET['category'],FILTER_SANITIZE_STRING);
+                $entries = $this->store->getEntriesByView($category,$this->user->getId());
+                break;
+            case 'search':
+                $search = filter_var($_GET['search'],FILTER_SANITIZE_STRING);
+                $entries = $this->store->search($search,$this->user->getId());
+                break;
+            case 'default':
+                die(_('Uh, there is a problem while generating epub.'));
+            
         }
+
         $content_start =
         "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
-        . "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\"\n"
-        . " \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">\n"
-        . "<html xmlns=\"http://www.w3.org/1999/xhtml\">\n"
-        . "<head>"
-        . "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n"
+        . "<!DOCTYPE html>\n"
+        . "<html>\n"
+        . "<head>\n"
         . "<link rel=\"stylesheet\" type=\"text/css\" href=\"styles.css\" />\n"
-        . "<title>Test Book</title>\n"
+        . "<title>wallabag article</title>\n"
         . "</head>\n"
         . "<body>\n";
 
         $bookEnd = "</body>\n</html>\n";
         
-        $log = new Logger($entryID, TRUE);
+        $log = new Logger("wallabag", TRUE);
         $fileDir = CACHE;
 
         
-        $book = new EPub();
+        $book = new EPub(EPub::BOOK_VERSION_EPUB3);
         $log->logLine("new EPub()");
         $log->logLine("EPub class version: " . EPub::VERSION);
         $log->logLine("EPub Req. Zip version: " . EPub::REQ_ZIP_VERSION);
@@ -1186,6 +1202,10 @@ class Poche
         $book->addDublinCoreMetadata(DublinCore::CONTRIBUTOR, "PHP");
         
         $cssData = "body {\n margin-left: .5em;\n margin-right: .5em;\n text-align: justify;\n}\n\np {\n font-family: serif;\n font-size: 10pt;\n text-align: justify;\n text-indent: 1em;\n margin-top: 0px;\n margin-bottom: 1ex;\n}\n\nh1, h2 {\n font-family: sans-serif;\n font-style: italic;\n text-align: center;\n background-color: #6b879c;\n color: white;\n width: 100%;\n}\n\nh1 {\n margin-bottom: 2px;\n}\n\nh2 {\n margin-top: -2px;\n margin-bottom: 2px;\n}\n";
+        
+        $log->logLine("Add Cover Image");
+        $book->setCoverImage("Cover.png", file_get_contents("themes/baggy/img/apple-touch-icon-152.png"), "image/png");
+        
         $cover = $content_start . "<h1>My articles on wallabag</h1>\n<h2>As seen on : http://$_SERVER[HTTP_HOST]</h2>\n" . $bookEnd;
         $book->addChapter("Notices", "Cover.html", $cover);
         $book->buildTOC(NULL, "toc", "Table of Contents", TRUE, TRUE);
@@ -1193,7 +1213,7 @@ class Poche
         foreach ($entries as $entry) {
             $tags = $this->store->retrieveTagsByEntry($entry['id']);
             foreach ($tags as $tag) {
-                $book->setSubject($tag);
+                $book->setSubject($tag['value']);
             }
             
             $log->logLine("Set up parameters");
@@ -1201,11 +1221,11 @@ class Poche
             
             
             $chapter = $content_start . $entry['content'] . $bookEnd;
-            $book->addChapter("Chapter " . $entry['id'] . ": " . $entry['title'], htmlspecialchars($entry['title']) . ".html", $chapter, true, EPub::EXTERNAL_REF_ADD);
+            $book->addChapter($entry['title'], htmlspecialchars($entry['title']) . ".html", $chapter, true, EPub::EXTERNAL_REF_ADD);
         }    
         
 
-        if (true) { 
+        if (DEBUG_POCHE) { 
         $epuplog = $book->getLog();
         $book->addChapter("Log", "Log.html", $content_start . $log->getLog() . "\n</pre>" . $bookEnd); // generation log
         // Only used in case we need to debug EPub.php.
