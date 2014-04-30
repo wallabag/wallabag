@@ -513,7 +513,6 @@ class Poche
             case 'add_tag' :
                 if (isset($_GET['search'])) {
                     //when we want to apply a tag to a search
-                    $search = true;
                     $tags = array($_GET['search']);
                     $allentry_ids = $this->store->search($tags[0], $this->user->getId());
                     $entry_ids = array();
