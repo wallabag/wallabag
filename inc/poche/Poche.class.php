@@ -558,7 +558,7 @@ class Poche
                         }
                     }
                 }
-                $this->messages->add('s', _('the tag has been applied successfully'));
+                $this->messages->add('s', _('The tag has been applied successfully'));
                 Tools::redirect();
                 break;
             case 'remove_tag' :
@@ -570,6 +570,10 @@ class Poche
                     Tools::redirect();
                 }
                 $this->store->removeTagForEntry($id, $tag_id);
+                Tools::logm('tag entry deleted');
+                $this->store->cleanUnusedTags();
+                Tools::logm('old tags cleaned');
+                $this->messages->add('s', _('The tag has been successfully deleted'));
                 Tools::redirect();
                 break;
             default:
@@ -1129,6 +1133,13 @@ class Poche
 
         Tools::logm('empty cache');
         $this->messages->add('s', _('Cache deleted.'));
+        Tools::redirect();
+    }
+    
+    public function cleanTags() {
+        $this->store->cleanUnusedTags();
+        $this->messages->add('s', _('The unused tags have been cleaned.'));
+        Tools::logm('clean tags');
         Tools::redirect();
     }
 
