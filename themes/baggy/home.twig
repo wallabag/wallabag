@@ -57,6 +57,7 @@
                 {% endfor %}
             </div>
             {% if view == 'home' %}{% if nb_results > 1 %}<a title="{% trans "Mark all the entries as read" %}"  href="./?action=archive_all">{{ "Mark all the entries as read" }}</a>{% endif %}{% endif %}
+            {% if search_term is defined %}<a title="{% trans "Apply the tag" %} {{ search_term }} {% trans "to this search" %}" href="./?action=add_tag&search={{ search_term }}">{% trans "Apply the tag" %} {{ search_term }} {% trans "to this search" %}</a>{% endif %}
             {% endif %}
             {{ block('pager') }}
 {% endblock %}
