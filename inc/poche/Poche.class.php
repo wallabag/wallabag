@@ -1189,10 +1189,10 @@ class Poche
         $log->logLine("getCurrentServerURL: " . $book->getCurrentServerURL());
         $log->logLine("getCurrentPageURL..: " . $book->getCurrentPageURL());
         
-        $book->setTitle("wallabag's articles");
+        $book->setTitle(_('wallabag\'s articles'));
         $book->setIdentifier("http://$_SERVER[HTTP_HOST]", EPub::IDENTIFIER_URI); // Could also be the ISBN number, prefered for published books, or a UUID.
         //$book->setLanguage("en"); // Not needed, but included for the example, Language is mandatory, but EPub defaults to "en". Use RFC3066 Language codes, such as "en", "da", "fr" etc.
-        $book->setDescription("Some articles saved on my wallabag");
+        $book->setDescription(_("Some articles saved on my wallabag"));
         $book->setAuthor("wallabag","wallabag");
         $book->setPublisher("wallabag","wallabag"); // I hope this is a non existant address :)
         $book->setDate(time()); // Strictly not needed as the book date defaults to time().
@@ -1206,16 +1206,16 @@ class Poche
         
         $log->logLine("Add Cover");
         if (count($entries)>1){
-            $cover = "<h1>" . $entries[0]['title'] . " and " . count($entries) . " other articles</h1>";
+            $cover = sprintf(_('<h1>%s and %s other articles</h1>'), $entries[0]['title'], count($entries));
         } else {
-            $cover = "<h1>" . $entries[0]['title'] . "</h1>";
+            $cover = sprintf(_('<h1>%s</h1>'), $entries[0]['title']);
         }
         $book->setCover("Cover.png", file_get_contents("themes/baggy/img/apple-touch-icon-152.png"), "image/png", $cover);
         
         
         $book->setCover($cover);
         //$book->addChapter("Notices", "Cover.html", $cover);
-        $book->buildTOC(NULL, "toc", "Table of Contents", TRUE, TRUE);
+        $book->buildTOC(NULL, "toc", _('Table of Contents'), TRUE, TRUE);
         $subject = "";
         
         foreach ($entries as $entry) {
@@ -1239,6 +1239,6 @@ class Poche
         //$book->addChapter("ePubLog", "ePubLog.html", $content_start . $epuplog . "\n</pre>" . $bookEnd); 
         }
         $book->finalize();
-        $zipData = $book->sendBook("wallabag's articles");
+        $zipData = $book->sendBook(_('wallabag\'s articles'));
     }
 }
