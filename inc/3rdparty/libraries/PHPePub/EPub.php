@@ -574,7 +574,7 @@ class EPub {
      * @param string $mimetype Image mimetype, such as "image/jpeg" or "image/png".
      * @return bool $success
      */
-    function setCoverImage($fileName, $imageData = NULL, $mimetype = NULL) {
+    function setCover($fileName, $imageData = NULL, $mimetype = NULL, $coverText=NULL) {
         if ($this->isFinalized || $this->isCoverImageSet || array_key_exists("CoverPage.html", $this->fileList)) {
             return FALSE;
         }
@@ -621,12 +621,13 @@ class EPub {
 				. "<html xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:epub=\"http://www.idpf.org/2007/ops\" xml:lang=\"en\">\n"
 				. "\t<head>\n"
 				. "\t\t<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"/>\n"
-				. "\t\t<title>Cover Image</title>\n"
+				. "\t\t<title>Cover</title>\n"
 				. "\t\t<link type=\"text/css\" rel=\"stylesheet\" href=\"Styles/CoverPage.css\" />\n"
 				. "\t</head>\n"
 				. "\t<body>\n"
+                . "\t\t" . $coverText . "\n"
 				. "\t\t<div>\n"
-				. "\t\t\t<img src=\"" . $imgPath . "\" alt=\"Cover image\" style=\"height: 100%\"/>\n"
+				. "\t\t\t<img src=\"" . $imgPath . "\" alt=\"Cover image\" style=\"height: 40%\"/>\n"
 				. "\t\t</div>\n"
 				. "\t</body>\n"
 				. "</html>\n";
@@ -635,12 +636,13 @@ class EPub {
 				. "<html xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:epub=\"http://www.idpf.org/2007/ops\">\n"
 				. "<head>"
 				. "\t<meta http-equiv=\"Default-Style\" content=\"text/html; charset=utf-8\" />\n"
-				. "\t\t<title>Cover Image</title>\n"
+				. "\t\t<title>Cover</title>\n"
 				. "\t\t<link type=\"text/css\" rel=\"stylesheet\" href=\"Styles/CoverPage.css\" />\n"
 				. "\t</head>\n"
 				. "\t<body>\n"
 				. "\t\t<section epub:type=\"cover\">\n"
-				. "\t\t\t<img src=\"" . $imgPath . "\" alt=\"Cover image\" style=\"height: 100%\"/>\n"
+                . "\t\t" . $coverText . "\n"
+				. "\t\t\t<img src=\"" . $imgPath . "\" alt=\"Cover image\" style=\"height: 40%\"/>\n"
 				. "\t\t</section>\n"
 				. "\t</body>\n"
 				. "</html>\n";

@@ -1200,30 +1200,37 @@ class Poche
         $book->setSourceURL("http://$_SERVER[HTTP_HOST]");
         
         $book->addDublinCoreMetadata(DublinCore::CONTRIBUTOR, "PHP");
+        $book->addDublinCoreMetadata(DublinCore::CONTRIBUTOR, "wallabag");
         
         $cssData = "body {\n margin-left: .5em;\n margin-right: .5em;\n text-align: justify;\n}\n\np {\n font-family: serif;\n font-size: 10pt;\n text-align: justify;\n text-indent: 1em;\n margin-top: 0px;\n margin-bottom: 1ex;\n}\n\nh1, h2 {\n font-family: sans-serif;\n font-style: italic;\n text-align: center;\n background-color: #6b879c;\n color: white;\n width: 100%;\n}\n\nh1 {\n margin-bottom: 2px;\n}\n\nh2 {\n margin-top: -2px;\n margin-bottom: 2px;\n}\n";
         
-        $log->logLine("Add Cover Image");
-        $book->setCoverImage("Cover.png", file_get_contents("themes/baggy/img/apple-touch-icon-152.png"), "image/png");
+        $log->logLine("Add Cover");
+        if (count($entries)>1){
+            $cover = "<h1>" . $entries[0]['title'] . " and " . count($entries) . " other articles</h1>";
+        } else {
+            $cover = "<h1>" . $entries[0]['title'] . "</h1>";
+        }
+        $book->setCover("Cover.png", file_get_contents("themes/baggy/img/apple-touch-icon-152.png"), "image/png", $cover);
         
-        $cover = $content_start . "<h1>My articles on wallabag</h1>\n<h2>As seen on : http://$_SERVER[HTTP_HOST]</h2>\n" . $bookEnd;
-        $book->addChapter("Notices", "Cover.html", $cover);
+        
+        $book->setCover($cover);
+        //$book->addChapter("Notices", "Cover.html", $cover);
         $book->buildTOC(NULL, "toc", "Table of Contents", TRUE, TRUE);
+        $subject = "";
         
         foreach ($entries as $entry) {
             $tags = $this->store->retrieveTagsByEntry($entry['id']);
             foreach ($tags as $tag) {
-                $book->setSubject($tag['value']);
+                $subject =. $tag['value'] . ',';
             }
             
             $log->logLine("Set up parameters");
             
-            
-            
             $chapter = $content_start . $entry['content'] . $bookEnd;
             $book->addChapter($entry['title'], htmlspecialchars($entry['title']) . ".html", $chapter, true, EPub::EXTERNAL_REF_ADD);
+            $log->logLine("Added chapter " . $entry['title']);
         }    
-        
+        $book->setSubject($subject);
 
         if (DEBUG_POCHE) { 
         $epuplog = $book->getLog();
