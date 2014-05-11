@@ -1135,13 +1135,6 @@ class Poche
         $this->messages->add('s', _('Cache deleted.'));
         Tools::redirect();
     }
-    
-    public function cleanTags() {
-        $this->store->cleanUnusedTags();
-        $this->messages->add('s', _('The unused tags have been cleaned.'));
-        Tools::logm('clean tags');
-        Tools::redirect();
-    }
 
     /**
      * return new purifier object with actual config
