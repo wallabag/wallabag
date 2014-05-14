@@ -72,7 +72,7 @@ class Poche
 
         # l10n
         $language = $this->user->getConfigValue('language');
-        putenv('LC_ALL=' . $language);
+        @putenv('LC_ALL=' . $language);
         setlocale(LC_ALL, $language);
         bindtextdomain($language, LOCALE);
         textdomain($language);
@@ -241,12 +241,12 @@ class Poche
         $filter = new Twig_SimpleFilter('getReadingTime', 'Tools::getReadingTime');
         $this->tpl->addFilter($filter);
     }
-    
+
     public function createNewUser() {
         if (isset($_GET['newuser'])){
             if ($_POST['newusername'] != "" && $_POST['password4newuser'] != ""){
                 $newusername = filter_var($_POST['newusername'], FILTER_SANITIZE_STRING);
-                if (!$this->store->userExists($newusername)){	
+                if (!$this->store->userExists($newusername)){
                     if ($this->store->install($newusername, Tools::encodeString($_POST['password4newuser'] . $newusername))) {
                         Tools::logm('The new user '.$newusername.' has been installed');
                         $this->messages->add('s', sprintf(_('The new user %s has been installed. Do you want to <a href="?logout">logout ?</a>'),$newusername));
@@ -265,7 +265,7 @@ class Poche
             }
         }
     }
-   
+
     public function deleteUser(){
         if (isset($_GET['deluser'])){
             if ($this->store->listUsers() > 1) {
