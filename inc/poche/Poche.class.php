@@ -559,6 +559,7 @@ class Poche
                     }
                 }
                 $this->messages->add('s', _('The tag has been applied successfully'));
+                Tools::logm('The tag has been applied successfully');
                 Tools::redirect();
                 break;
             case 'remove_tag' :
@@ -571,8 +572,9 @@ class Poche
                 }
                 $this->store->removeTagForEntry($id, $tag_id);
                 Tools::logm('tag entry deleted');
-                $this->store->cleanUnusedTags();
-                Tools::logm('old tags cleaned');
+                if ($this->store->cleanUnusedTag($tag_id)) {
+                    Tools::logm('tag deleted');
+                }
                 $this->messages->add('s', _('The tag has been successfully deleted'));
                 Tools::redirect();
                 break;
