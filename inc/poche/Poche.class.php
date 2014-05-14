@@ -1142,23 +1142,28 @@ class Poche
                 $entryID = filter_var($_GET['id'],FILTER_SANITIZE_NUMBER_INT);
                 $entry = $this->store->retrieveOneById($entryID, $this->user->getId());
                 $entries = array($entry);
+                $bookTitle = $entry['title'];
                 break;
             case 'all':
                 $entries = $this->store->retrieveAll($this->user->getId());
+                $bookTitle = _('All my articles');
                 break;
             case 'tag':
                 $tag = filter_var($_GET['tag'],FILTER_SANITIZE_STRING);
                 $tags_id = $this->store->retrieveAllTags($this->user->getId(),$tag);
                 $tag_id = $tags_id[0]["id"]; // we take the first result, which is supposed to match perfectly. There must be a workaround.
                 $entries = $this->store->retrieveEntriesByTag($tag_id,$this->user->getId());
+                $bookTitle = sprintf(_('Articles related to %s'),$tag);
                 break;
             case 'category':
                 $category = filter_var($_GET['category'],FILTER_SANITIZE_STRING);
                 $entries = $this->store->getEntriesByView($category,$this->user->getId());
+                $bookTitle = sprintf(_('All my articles in category %s'), $category);
                 break;
             case 'search':
                 $search = filter_var($_GET['search'],FILTER_SANITIZE_STRING);
                 $entries = $this->store->search($search,$this->user->getId());
+                $bookTitle = sprintf(_('All my articles for search %s'), $search);
                 break;
             case 'default':
                 die(_('Uh, there is a problem while generating epub.'));
@@ -1166,12 +1171,11 @@ class Poche
         }
 
         $content_start =
-        "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
-        . "<!DOCTYPE html>\n"
-        . "<html>\n"
-        . "<head>\n"
-        . "<link rel=\"stylesheet\" type=\"text/css\" href=\"styles.css\" />\n"
-        . "<title>wallabag article</title>\n"
+        "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+        . "<html xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:epub=\"http://www.idpf.org/2007/ops\">\n"
+        . "<head>"
+        . "<meta http-equiv=\"Default-Style\" content=\"text/html; charset=utf-8\" />\n"
+        . "<title>wallabag articles book</title>\n"
         . "</head>\n"
         . "<body>\n";
 
@@ -1205,23 +1209,22 @@ class Poche
         $cssData = "body {\n margin-left: .5em;\n margin-right: .5em;\n text-align: justify;\n}\n\np {\n font-family: serif;\n font-size: 10pt;\n text-align: justify;\n text-indent: 1em;\n margin-top: 0px;\n margin-bottom: 1ex;\n}\n\nh1, h2 {\n font-family: sans-serif;\n font-style: italic;\n text-align: center;\n background-color: #6b879c;\n color: white;\n width: 100%;\n}\n\nh1 {\n margin-bottom: 2px;\n}\n\nh2 {\n margin-top: -2px;\n margin-bottom: 2px;\n}\n";
         
         $log->logLine("Add Cover");
-        if (count($entries)>1){
-            $cover = sprintf(_('<h1>%s and %s other articles</h1>'), $entries[0]['title'], count($entries));
-        } else {
-            $cover = sprintf(_('<h1>%s</h1>'), $entries[0]['title']);
-        }
-        $book->setCover("Cover.png", file_get_contents("themes/baggy/img/apple-touch-icon-152.png"), "image/png", $cover);
         
+        $fullTitle = "<h1> " . $bookTitle . "</h1>\n";
         
-        $book->setCover($cover);
-        //$book->addChapter("Notices", "Cover.html", $cover);
-        $book->buildTOC(NULL, "toc", _('Table of Contents'), TRUE, TRUE);
-        $subject = "";
+        $book->setCoverImage("Cover.png", file_get_contents("themes/baggy/img/apple-touch-icon-152.png"), "image/png", $fullTitle);
+        
+        $cover = $content_start . _('<span style="text-align:center;display:block;">Produced by wallabag with PHPePub</span>') . $bookEnd;
+        
+        //$book->addChapter("Table of Contents", "TOC.xhtml", NULL, false, EPub::EXTERNAL_REF_IGNORE);
+        $book->addChapter("Notices", "Cover2.html", $cover);
+        
+        $book->buildTOC();
         
         foreach ($entries as $entry) {
             $tags = $this->store->retrieveTagsByEntry($entry['id']);
             foreach ($tags as $tag) {
-                $subject =. $tag['value'] . ',';
+                $book->setSubject($tag['value']);
             }
             
             $log->logLine("Set up parameters");
@@ -1229,8 +1232,7 @@ class Poche
             $chapter = $content_start . $entry['content'] . $bookEnd;
             $book->addChapter($entry['title'], htmlspecialchars($entry['title']) . ".html", $chapter, true, EPub::EXTERNAL_REF_ADD);
             $log->logLine("Added chapter " . $entry['title']);
-        }    
-        $book->setSubject($subject);
+        }
 
         if (DEBUG_POCHE) { 
         $epuplog = $book->getLog();
