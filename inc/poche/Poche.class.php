@@ -543,6 +543,8 @@ class Poche
                 Tools::redirect($referer);
             }
             $this->messages->add('e', _('login failed: bad login or password'));
+            // log login failure in web server log to allow fail2ban usage
+            error_log('user '.$login.' authentication failure');
             Tools::logm('login failed');
             Tools::redirect();
         }
