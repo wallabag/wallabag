@@ -1143,27 +1143,32 @@ class Poche
                 $entry = $this->store->retrieveOneById($entryID, $this->user->getId());
                 $entries = array($entry);
                 $bookTitle = $entry['title'];
+                $bookFileName = substr($bookTitle, 0, 200);
                 break;
             case 'all':
                 $entries = $this->store->retrieveAll($this->user->getId());
-                $bookTitle = _('All my articles');
+                $bookTitle = sprintf(_('All my articles on '), date(_('d.m.y'))); #translatable because each country has it's own date format system
+                $bookFileName = _('Allarticles') . date(_('dmY'));
                 break;
             case 'tag':
                 $tag = filter_var($_GET['tag'],FILTER_SANITIZE_STRING);
                 $tags_id = $this->store->retrieveAllTags($this->user->getId(),$tag);
                 $tag_id = $tags_id[0]["id"]; // we take the first result, which is supposed to match perfectly. There must be a workaround.
                 $entries = $this->store->retrieveEntriesByTag($tag_id,$this->user->getId());
-                $bookTitle = sprintf(_('Articles related to %s'),$tag);
+                $bookTitle = sprintf(_('Articles tagged %s'),$tag);
+                $bookFileName = substr(sprintf(_('Tag %s'),$tag), 0, 200);
                 break;
             case 'category':
                 $category = filter_var($_GET['category'],FILTER_SANITIZE_STRING);
                 $entries = $this->store->getEntriesByView($category,$this->user->getId());
-                $bookTitle = sprintf(_('All my articles in category %s'), $category);
+                $bookTitle = sprintf(_('All articles in category %s'), $category);
+                $bookFileName = substr(sprintf(_('Category %s'),$category), 0, 200);
                 break;
             case 'search':
                 $search = filter_var($_GET['search'],FILTER_SANITIZE_STRING);
                 $entries = $this->store->search($search,$this->user->getId());
-                $bookTitle = sprintf(_('All my articles for search %s'), $search);
+                $bookTitle = sprintf(_('All articles for search %s'), $search);
+                $bookFileName = substr(sprintf(_('Search %s'), $search), 0, 200);
                 break;
             case 'default':
                 die(_('Uh, there is a problem while generating epub.'));
@@ -1241,6 +1246,6 @@ class Poche
         //$book->addChapter("ePubLog", "ePubLog.html", $content_start . $epuplog . "\n</pre>" . $bookEnd); 
         }
         $book->finalize();
-        $zipData = $book->sendBook(_('wallabag\'s articles'));
+        $zipData = $book->sendBook($bookFileName);
     }
 }
