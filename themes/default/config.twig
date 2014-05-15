@@ -127,6 +127,10 @@
             <h2>{% trans "Cache" %}</h2>
             <p><a href="?empty-cache">{% trans "Click here" %}</a> {% trans "to delete cache." %}</p>
             
+            <h2>{% trans "Fancy an E-Book ?" %}</h2>
+            <p>{% trans "Click on <a href=\"./?epub&amp;method=all\" title=\"Generate ePub\">this link</a> to get all your articles in one ebook (ePub 3 format)." %}
+            <br>{% trans "This can <b>take a while</b> and can <b>even fail</b> if you have too many articles, depending on your server configuration." %}</p>
+            
             <h2>{% trans 'Add user' %}</h2>
             <p>{% trans 'Add a new user :' %}</p>
             <form method="post" action="?newuser">
