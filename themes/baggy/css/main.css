@@ -537,7 +537,7 @@ footer a {
 }
 
 /* ==========================================================================
-  2.1 = "save a link" popup div related styles
+  2.1 = "save a link" related styles
   ========================================================================== */
 
 #bagit-form, #search-form {
@@ -607,6 +607,25 @@ a#bagit-form-close:hover, a#search-form-close:hover {
   background-color: #000;
   color: #fff;
   padding: 0 3px 2px 3px;
+}
+
+a.add-to-wallabag-link-after {
+    visibility: hidden;
+    position: absolute;
+    opacity: 0;
+    transition-duration: 2s;
+    transition-timing-function: ease-out;
+}
+
+#article article a:hover + a.add-to-wallabag-link-after, a.add-to-wallabag-link-after:hover {
+    opacity: 1;
+    visibility: visible;
+    transition-duration: .3s;
+    transition-timing-function: ease-in;
+}
+
+a.add-to-wallabag-link-after:after {
+     content: "w";
 }
 
 #add-link-result {
