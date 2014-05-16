@@ -511,6 +511,25 @@ class Database {
         $query          = $this->executeQuery($sql_action, $params_action);
         return $query;
     }
+    
+    public function cleanUnusedTag($tag_id) {
+        $sql_action = "SELECT tags.* FROM tags JOIN tags_entries ON tags_entries.tag_id=tags.id WHERE tags.id=?";
+        $query = $this->executeQuery($sql_action,array($tag_id));
+        $tagstokeep = $query->fetchAll();
+        $sql_action = "SELECT tags.* FROM tags LEFT JOIN tags_entries ON tags_entries.tag_id=tags.id WHERE tags.id=?";
+        $query = $this->executeQuery($sql_action,array($tag_id));
+        $alltags = $query->fetchAll();
+        
+        foreach ($alltags as $tag) {
+            if ($tag && !in_array($tag,$tagstokeep)) {
+                $sql_action = "DELETE FROM tags WHERE id=?";
+                $params_action = array($tag[0]);
+                $this->executeQuery($sql_action, $params_action);
+                return true;
+            }
+        }
+        
+    }
 
     public function retrieveTagByValue($value) {
         $tag  = NULL;

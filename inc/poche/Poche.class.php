@@ -511,42 +511,55 @@ class Poche
                 Tools::redirect();
                 break;
             case 'add_tag' :
-                $tags = explode(',', $_POST['value']);
-                $entry_id = $_POST['entry_id'];
-                $entry = $this->store->retrieveOneById($entry_id, $this->user->getId());
-                if (!$entry) {
-                    $this->messages->add('e', _('Article not found!'));
-                    Tools::logm('error : article not found');
-                    Tools::redirect();
+                if (isset($_GET['search'])) {
+                    //when we want to apply a tag to a search
+                    $tags = array($_GET['search']);
+                    $allentry_ids = $this->store->search($tags[0], $this->user->getId());
+                    $entry_ids = array();
+                    foreach ($allentry_ids as $eachentry) {
+                        $entry_ids[] = $eachentry[0];
+                    }
+                } else { //add a tag to a single article
+                    $tags = explode(',', $_POST['value']);
+                    $entry_ids = array($_POST['entry_id']);
                 }
-                //get all already set tags to preven duplicates
-                $already_set_tags = array();
-                $entry_tags = $this->store->retrieveTagsByEntry($entry_id);
-                foreach ($entry_tags as $tag) {
-                  $already_set_tags[] = $tag['value'];
-                }
-                foreach($tags as $key => $tag_value) {
-                    $value = trim($tag_value);
-                    if ($value && !in_array($value, $already_set_tags)) {
-                      $tag = $this->store->retrieveTagByValue($value);
-
-                      if (is_null($tag)) {
-                          # we create the tag
-                          $tag = $this->store->createTag($value);
-                          $sequence = '';
-                          if (STORAGE == 'postgres') {
-                              $sequence = 'tags_id_seq';
+                foreach($entry_ids as $entry_id) {
+                    $entry = $this->store->retrieveOneById($entry_id, $this->user->getId());
+                    if (!$entry) {
+                        $this->messages->add('e', _('Article not found!'));
+                        Tools::logm('error : article not found');
+                        Tools::redirect();
+                    }
+                    //get all already set tags to preven duplicates
+                    $already_set_tags = array();
+                    $entry_tags = $this->store->retrieveTagsByEntry($entry_id);
+                    foreach ($entry_tags as $tag) {
+                      $already_set_tags[] = $tag['value'];
+                    }
+                    foreach($tags as $key => $tag_value) {
+                        $value = trim($tag_value);
+                        if ($value && !in_array($value, $already_set_tags)) {
+                          $tag = $this->store->retrieveTagByValue($value);
+                          if (is_null($tag)) {
+                              # we create the tag
+                              $tag = $this->store->createTag($value);
+                              $sequence = '';
+                              if (STORAGE == 'postgres') {
+                                  $sequence = 'tags_id_seq';
+                              }
+                              $tag_id = $this->store->getLastId($sequence);
                           }
-                          $tag_id = $this->store->getLastId($sequence);
-                      }
-                      else {
-                          $tag_id = $tag['id'];
-                      }
+                          else {
+                              $tag_id = $tag['id'];
+                          }
 
-                      # we assign the tag to the article
-                      $this->store->setTagToEntry($tag_id, $entry_id);
+                          # we assign the tag to the article
+                          $this->store->setTagToEntry($tag_id, $entry_id);
+                        }
                     }
                 }
+                $this->messages->add('s', _('The tag has been applied successfully'));
+                Tools::logm('The tag has been applied successfully');
                 Tools::redirect();
                 break;
             case 'remove_tag' :
@@ -558,6 +571,11 @@ class Poche
                     Tools::redirect();
                 }
                 $this->store->removeTagForEntry($id, $tag_id);
+                Tools::logm('tag entry deleted');
+                if ($this->store->cleanUnusedTag($tag_id)) {
+                    Tools::logm('tag deleted');
+                }
+                $this->messages->add('s', _('The tag has been successfully deleted'));
                 Tools::redirect();
                 break;
             default:

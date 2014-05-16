@@ -25,7 +25,7 @@
                 {% block pager %}
                     {% if nb_results > 1 %}
                 <div class="results">
-                    <div class="nb-results">{{ nb_results }} {% trans "results" %}{% if search_term is defined %}{% trans " found for « " %} {{ search_term }} »{% endif %}</div>
+                    <div class="nb-results">{{ nb_results }} {% trans "results" %}{% if search_term is defined %} {% trans %}found for « {{ search_term }} »{% endtrans %}{% endif %}</div>
                         {{ page_links | raw }}
                 </div>
                     {% elseif nb_results == 1 %}
@@ -57,6 +57,7 @@
                 {% endfor %}
             </div>
             {% if view == 'home' %}{% if nb_results > 1 %}<a title="{% trans "Mark all the entries as read" %}"  href="./?action=archive_all">{{ "Mark all the entries as read" }}</a>{% endif %}{% endif %}
+            {% if search_term is defined %}<a title="{% trans %} Apply the tag {{ search_term }} to this search {% endtrans %}" href="./?action=add_tag&search={{ search_term }}">{% trans %} Apply the tag {{ search_term }} to this search {% endtrans %}</a>{% endif %}
             {% endif %}
             {{ block('pager') }}
 {% endblock %}
