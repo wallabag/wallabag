@@ -1237,14 +1237,14 @@ class Poche
         
         $book->setCoverImage("Cover.png", file_get_contents("themes/baggy/img/apple-touch-icon-152.png"), "image/png", $fullTitle);
         
-        $cover = $content_start . _('<span style="text-align:center;display:block;">Produced by wallabag with PHPePub</span>') . $bookEnd;
+        $cover = $content_start . '<div style="text-align:center;"><p>' . _('Produced by wallabag with PHPePub') . '</p><p>'. _('Please open <a href="https://github.com/wallabag/wallabag/issues" >an issue</a> if you have trouble with the display of this E-Book on your device.') . '</p></div>' . $bookEnd;
         
         //$book->addChapter("Table of Contents", "TOC.xhtml", NULL, false, EPub::EXTERNAL_REF_IGNORE);
         $book->addChapter("Notices", "Cover2.html", $cover);
         
         $book->buildTOC();
         
-        foreach ($entries as $entry) {
+        foreach ($entries as $entry) { //set tags as subjects
             $tags = $this->store->retrieveTagsByEntry($entry['id']);
             foreach ($tags as $tag) {
                 $book->setSubject($tag['value']);
@@ -1258,10 +1258,8 @@ class Poche
         }
 
         if (DEBUG_POCHE) { 
-        $epuplog = $book->getLog();
-        $book->addChapter("Log", "Log.html", $content_start . $log->getLog() . "\n</pre>" . $bookEnd); // generation log
-        // Only used in case we need to debug EPub.php.
-        //$book->addChapter("ePubLog", "ePubLog.html", $content_start . $epuplog . "\n</pre>" . $bookEnd); 
+            $epuplog = $book->getLog();
+            $book->addChapter("Log", "Log.html", $content_start . $log->getLog() . "\n</pre>" . $bookEnd); // log generation
         }
         $book->finalize();
         $zipData = $book->sendBook($bookFileName);
