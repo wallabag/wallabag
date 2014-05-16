@@ -88,7 +88,7 @@ $.fn.ready(function() {
    ========================================================================== */
 
   $("article a[href^='http']").after(function() {
-    return " <a href=\"" + $(this).attr('href') + "\" class=\"add-to-wallabag-link-after\" alt=\"add to wallabag\" title=\"add to wallabag\">w</a> ";
+    return " <a href=\"" + $(this).attr('href') + "\" class=\"add-to-wallabag-link-after\" alt=\"add to wallabag\" title=\"add to wallabag\"></a> ";
   });
 
   $(".add-to-wallabag-link-after").click(function(event){
