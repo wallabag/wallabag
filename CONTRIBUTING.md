@@ -1,4 +1,4 @@
-# How contributing
+# How to contribute
 
 ## You found a bug
 Please [open a new issue](https://github.com/wallabag/wallabag/issues/new).
