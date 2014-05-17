@@ -18,6 +18,7 @@ class Poche
     public $tpl;
     public $messages;
     public $pagination;
+    public $actionOnly;
 
     private $currentTheme = '';
     private $currentLanguage = '';
@@ -97,6 +98,7 @@ class Poche
         }
 
         $this->currentLanguage = $languageDirectory;
+	$this->actionOnly = false;
     }
 
     public function configFileIsAvailable() {
@@ -410,11 +412,13 @@ class Poche
                     Tools::logm('error during insertion : the link wasn\'t added ' . $url->getUrl());
                 }
 
+		if (!$this->actionOnly) {
                 if ($autoclose == TRUE) {
                   Tools::redirect('?view=home');
                 } else {
                   Tools::redirect('?view=home&closewin=true');
                 }
+		}
                 break;
             case 'delete':
                 $msg = 'delete link #' . $id;
