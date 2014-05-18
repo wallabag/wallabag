@@ -70,6 +70,8 @@ if (isset($_GET['login'])) {
     $poche->createNewUser();
 } elseif (isset($_GET['deluser'])) {
     $poche->deleteUser();
+} elseif (isset($_GET['epub'])) {
+    $poche->createEpub();
 } elseif (isset($_GET['import'])) {
     $import = $poche->import();
     $tpl_vars = array_merge($tpl_vars, $import);
