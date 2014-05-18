@@ -72,9 +72,39 @@ function download_pictures($absolute_path, $fullpath)
     if(file_exists($fullpath)) {
         unlink($fullpath);
     }
-    $fp = fopen($fullpath, 'x');
-    fwrite($fp, $rawdata);
-    fclose($fp);
+    
+    // check extension
+    $file_ext = strrchr($fullpath, '.');
+    $whitelist = array(".jpg",".jpeg",".gif",".png"); 
+    if (!(in_array($file_ext, $whitelist))) {
+        Tools::logm('processed image with not allowed extension. Skipping ' . $fullpath);
+    } else {
+        // check headers
+        $imageinfo = getimagesize($absolute_path);
+        if ($imageinfo['mime'] != 'image/gif' && $imageinfo['mime'] != 'image/jpeg'&& $imageinfo['mime'] != 'image/jpg'&& $imageinfo['mime'] != 'image/png') {
+            Tools::logm('processed image with bad header. Skipping ' . $fullpath);
+        } else {
+            // regenerate image
+            $im = imagecreatefromstring($rawdata);
+            if ($im) {
+                switch ($imageinfo['mime']) {
+                    case 'image/gif':
+                        imagegif($im, $fullpath);
+                        break;
+                    case 'image/jpeg':
+                    case 'image/jpg':
+                        imagejpeg($im, $fullpath); // default quality is 75%
+                        break;
+                    case 'image/png':
+                        imagepng($im, $fullpath);
+                        break;
+                }
+                imagedestroy($im);
+            } else {
+             Tools::logm('error while regenerating image ' . $fullpath);
+            }
+        }
+    }
 }
 
 /**
