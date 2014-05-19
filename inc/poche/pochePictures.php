@@ -97,7 +97,7 @@ function download_pictures($absolute_path, $fullpath)
                         imagejpeg($im, $fullpath, REGENERATE_PICTURES_QUALITY);
                         break;
                     case 'image/png':
-                        imagepng($im, $fullpath, REGENERATE_PICTURES_QUALITY);
+                        imagepng($im, $fullpath, ceil(REGENERATE_PICTURES_QUALITY / 100 * 9));
                         break;
                 }
                 imagedestroy($im);
