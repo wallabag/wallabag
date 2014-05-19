@@ -94,10 +94,10 @@ function download_pictures($absolute_path, $fullpath)
                         break;
                     case 'image/jpeg':
                     case 'image/jpg':
-                        imagejpeg($im, $fullpath); // default quality is 75%
+                        imagejpeg($im, $fullpath, REGENERATE_PICTURES_QUALITY);
                         break;
                     case 'image/png':
-                        imagepng($im, $fullpath);
+                        imagepng($im, $fullpath, REGENERATE_PICTURES_QUALITY);
                         break;
                 }
                 imagedestroy($im);
