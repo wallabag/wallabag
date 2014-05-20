@@ -1,6 +1,6 @@
 <?php
 
-namespace Poche\Util;
+namespace Wallabag\Util;
 
 class Token
 {

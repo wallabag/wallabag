@@ -1,11 +1,11 @@
 <?php
-namespace Poche\Command;
+namespace Wallabag\Command;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 use Knp\Command\Command as BaseCommand;
-use Poche\Schema;
+use Wallabag\Schema;
 
 /**
  * Application aware command

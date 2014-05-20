@@ -1,9 +1,9 @@
 <?php
 use Knp\Provider\ConsoleServiceProvider;
-use Poche\Api\EntryApi;
-use Poche\Api\ContentFullTextRssApi;
-use Poche\Repository\EntryRepository;
-use Poche\Twig;
+use Wallabag\Api\EntryApi;
+use Wallabag\Api\ContentFullTextRssApi;
+use Wallabag\Repository\EntryRepository;
+use Wallabag\Twig;
 
 use Symfony\Component\Translation\Loader\PoFileLoader;
 use Silex\Provider\SessionServiceProvider;
@@ -23,22 +23,22 @@ $app->before(function () use ($app) {
 });
 
 $app['twig'] = $app->share($app->extend('twig', function($twig) {
-  $twig->addFilter(new Twig_SimpleFilter('getDomain', 'Poche\Twig\Filter::getDomain'));
+  $twig->addFilter(new Twig_SimpleFilter('getDomain', 'Wallabag\Twig\Filter::getDomain'));
   return $twig;
 }));
 
 $app['twig'] = $app->share($app->extend('twig', function($twig) {
-  $twig->addFilter(new Twig_SimpleFilter('getReadingTime', 'Poche\Twig\Filter::getReadingTime'));
+  $twig->addFilter(new Twig_SimpleFilter('getReadingTime', 'Wallabag\Twig\Filter::getReadingTime'));
   return $twig;
 }));
 
 $app['twig'] = $app->share($app->extend('twig', function($twig) {
-  $twig->addFilter(new Twig_SimpleFilter('getPicture', 'Poche\Twig\Filter::getPicture'));
+  $twig->addFilter(new Twig_SimpleFilter('getPicture', 'Wallabag\Twig\Filter::getPicture'));
   return $twig;
 }));
 
 $app->register(new ConsoleServiceProvider(), [
-    'console.name' => 'Poche console',
+    'console.name' => 'Wallabag console',
     'console.version' => '0.1',
     'console.project_directory' => __DIR__.'/..',
 ]);
@@ -46,7 +46,7 @@ $app->register(new ConsoleServiceProvider(), [
 $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
     'db.options' => array(
         'driver'   => 'pdo_sqlite',
-        'path'     => __DIR__.'/../poche.db',
+        'path'     => __DIR__.'/../wallabag.db',
     ),
 ));
 
@@ -67,7 +67,7 @@ $app->register(new SecurityServiceProvider(), array(
             'form' => array('login_path' => '/', 'check_path' => 'login'),
             'logout' => array('logout_path' => '/logout'), 
             'users' => $app->share(function() use ($app) {
-                return new Poche\User\UserProvider($app['db']);
+                return new Wallabag\User\UserProvider($app['db']);
             }),
         ),
     ),

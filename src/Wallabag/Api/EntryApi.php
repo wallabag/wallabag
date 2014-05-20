@@ -1,6 +1,6 @@
 <?php
 
-namespace Poche\Api;
+namespace Wallabag\Api;
 
 class EntryApi
 {

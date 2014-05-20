@@ -1,5 +1,5 @@
 <?php
-namespace Poche\Command;
+namespace Wallabag\Command;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;

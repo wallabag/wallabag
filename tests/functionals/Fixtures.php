@@ -1,12 +1,12 @@
 <?php
 
-namespace Poche\Tests\Functionals;
+namespace Wallabag\Tests\Functionals;
 
 class Fixtures
 {
     public static function loadUsers($db) {
 
-        $db->query("INSERT INTO users (id, username) values (1, 'poche_test');");
+        $db->query("INSERT INTO users (id, username) values (1, 'wallabag_test');");
     }
 
 

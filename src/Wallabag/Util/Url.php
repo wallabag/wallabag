@@ -1,14 +1,14 @@
 <?php
 /**
- * poche, a read it later open source system
+ * wallabag, a read it later open source system
  *
- * @category   poche
- * @author     Nicolas Lœuillet <support@inthepoche.com>
+ * @category   wallabag
+ * @author     Nicolas Lœuillet <hello@wallabag.org>
  * @copyright  2013
  * @license    http://www.wtfpl.net/ see COPYING file
  */
 
-namespace Poche\Util;
+namespace Wallabag\Util;
 
 class Url
 {
@@ -357,7 +357,7 @@ class Url
         }
         if (isset($splink)) {
             // Build DOM tree from HTML
-            $readability = new PocheReadability($html, $url);
+            $readability = new WallabagReadability($html, $url);
             $xpath = new DOMXPath($readability->dom);
             // Loop through single_page_link xpath expressions
             $single_page_url = null;

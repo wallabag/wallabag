@@ -1,6 +1,6 @@
 <?php
 
-namespace Poche\Controller;
+namespace Wallabag\Controller;
 
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;

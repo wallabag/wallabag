@@ -1,4 +1,4 @@
-poche.Item = (function() {
+wallabag.Item = (function() {
 
     function getItem(item_id)
     {
@@ -25,7 +25,7 @@ poche.Item = (function() {
 
     // function showItemBookmarked(item_id, item)
     // {
-    //     if (! poche.Nav.IsListing()) {
+    //     if (! wallabag.Nav.IsListing()) {
 
     //         var link = document.getElementById("bookmark-" + item_id);
     //         if (link) link.innerHTML = "★";
@@ -47,7 +47,7 @@ poche.Item = (function() {
 
     function hideItemBookmarked(item_id, item)
     {
-        if (! poche.Nav.IsListing()) {
+        if (! wallabag.Nav.IsListing()) {
 
             var link = document.getElementById("bookmark-" + item_id);
             if (link) link.innerHTML = "☆";
@@ -147,7 +147,7 @@ poche.Item = (function() {
 
             counter = parseInt(container.textContent.trim(), 10) - 1;
             container.textContent = counter;
-            document.title = "unread (" + counter + ") – poche";
+            document.title = "unread (" + counter + ") – wallabag";
         }
     }
 
@@ -155,7 +155,7 @@ poche.Item = (function() {
     {
         var request = new XMLHttpRequest();
         request.onload = function() {
-            if (poche.Nav.IsListing()) showItemAsStarred(item_id);
+            if (wallabag.Nav.IsListing()) showItemAsStarred(item_id);
         };
         request.open("POST", "star/" + item_id, true);
         request.send();
@@ -165,7 +165,7 @@ poche.Item = (function() {
     {
         var request = new XMLHttpRequest();
         request.onload = function() {
-            if (poche.Nav.IsListing()) showItemAsUnstarred(item_id);
+            if (wallabag.Nav.IsListing()) showItemAsUnstarred(item_id);
         };
         request.open("POST", "unstar/" + item_id, true);
         request.send();
@@ -175,7 +175,7 @@ poche.Item = (function() {
     {
         var request = new XMLHttpRequest();
         request.onload = function() {
-            if (poche.Nav.IsListing()) showItemAsRead(item_id);
+            if (wallabag.Nav.IsListing()) showItemAsRead(item_id);
         };
         request.open("POST", "mark-read/" + item_id, true);
         request.send();
@@ -185,7 +185,7 @@ poche.Item = (function() {
     {
         var request = new XMLHttpRequest();
         request.onload = function() {
-            if (poche.Nav.IsListing()) showItemAsUnread(item_id);
+            if (wallabag.Nav.IsListing()) showItemAsUnread(item_id);
         };
         request.open("POST", "mark-unread/" + item_id, true);
         request.send();
@@ -287,4 +287,4 @@ poche.Item = (function() {
 
 })();
 
-poche.App.Run();
+wallabag.App.Run();

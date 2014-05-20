@@ -1,11 +1,11 @@
-var poche = {};
+var wallabag = {};
 
-poche.App = (function() {
+wallabag.App = (function() {
 
     return {
         Run: function() {
-            // poche.Event.ListenKeyboardEvents();
-            poche.Event.ListenMouseEvents();
+            // wallabag.Event.ListenKeyboardEvents();
+            wallabag.Event.ListenMouseEvents();
         },
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Poche\Model\tests\units;
+namespace Wallabag\Model\tests\units;
 
 use \atoum;
 
@@ -8,7 +8,7 @@ class Entry extends atoum
 {
     public function testGetId()
     {
-        $entry = new \Poche\Model\Entry(1, "Titre test");
+        $entry = new \Wallabag\Model\Entry(1, "Titre test");
 
         $this
             ->integer($entry->getId())

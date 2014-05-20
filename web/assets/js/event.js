@@ -1,4 +1,4 @@
-poche.Event = (function() {
+wallabag.Event = (function() {
 
     var queue = [];
 
@@ -14,26 +14,26 @@ poche.Event = (function() {
                     switch (action) {
                         case 'mark_entry_read':
                             e.preventDefault();
-                            poche.Item.MarkAsRead(e.target.getAttribute("data-entry-id"));
+                            wallabag.Item.MarkAsRead(e.target.getAttribute("data-entry-id"));
                             break;
                         case 'mark_entry_unread':
                             e.preventDefault();
-                            poche.Item.MarkAsUnread(e.target.getAttribute("data-entry-id"));
+                            wallabag.Item.MarkAsUnread(e.target.getAttribute("data-entry-id"));
                             break;
                         case 'unstar_entry':
                             e.preventDefault();
-                            poche.Item.MarkAsUnstarred(e.target.getAttribute("data-entry-id"));
+                            wallabag.Item.MarkAsUnstarred(e.target.getAttribute("data-entry-id"));
                             break;
                         case 'star_entry':
                             e.preventDefault();
-                            poche.Item.MarkAsStarred(e.target.getAttribute("data-entry-id"));
+                            wallabag.Item.MarkAsStarred(e.target.getAttribute("data-entry-id"));
                             break;
                         // case 'original-link':
-                        //     poche.Item.OpenOriginal(e.target.getAttribute("data-entry-id"));
+                        //     wallabag.Item.OpenOriginal(e.target.getAttribute("data-entry-id"));
                         //     break;
                         // case 'mark-all-read':
                         //     e.preventDefault();
-                        //     poche.Item.MarkListingAsRead("?action=unread");
+                        //     wallabag.Item.MarkListingAsRead("?action=unread");
                         //     break;
                     }
                 }
@@ -81,36 +81,36 @@ poche.Event = (function() {
 
                     switch (e.keyCode || e.which) {
                         case 100: // d
-                            poche.Item.DownloadContent(poche.Nav.GetCurrentItemId());
+                            wallabag.Item.DownloadContent(wallabag.Nav.GetCurrentItemId());
                             break;
                         case 112: // p
                         case 107: // k
-                            poche.Nav.SelectPreviousItem();
+                            wallabag.Nav.SelectPreviousItem();
                             break;
                         case 110: // n
                         case 106: // j
-                            poche.Nav.SelectNextItem();
+                            wallabag.Nav.SelectNextItem();
                             break;
                         case 118: // v
-                            poche.Item.OpenOriginal(poche.Nav.GetCurrentItemId());
+                            wallabag.Item.OpenOriginal(wallabag.Nav.GetCurrentItemId());
                             break;
                         case 111: // o
-                            poche.Item.Show(poche.Nav.GetCurrentItemId());
+                            wallabag.Item.Show(wallabag.Nav.GetCurrentItemId());
                             break;
                         case 109: // m
-                            poche.Item.SwitchStatus(poche.Nav.GetCurrentItem());
+                            wallabag.Item.SwitchStatus(wallabag.Nav.GetCurrentItem());
                             break;
                         case 102: // f
-                            poche.Item.SwitchBookmark(poche.Nav.GetCurrentItem());
+                            wallabag.Item.SwitchBookmark(wallabag.Nav.GetCurrentItem());
                             break;
                         case 104: // h
-                            poche.Nav.OpenPreviousPage();
+                            wallabag.Nav.OpenPreviousPage();
                             break
                         case 108: // l
-                            poche.Nav.OpenNextPage();
+                            wallabag.Nav.OpenNextPage();
                             break;
                         case 63: // ?
-                            poche.Nav.ShowHelp();
+                            wallabag.Nav.ShowHelp();
                             break;
                     }
                 }

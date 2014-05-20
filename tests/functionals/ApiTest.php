@@ -1,8 +1,8 @@
 <?php
-namespace Poche\Tests\Functionals;
-use Poche\Tests\Functionals\Fixtures;
+namespace Wallabag\Tests\Functionals;
+use Wallabag\Tests\Functionals\Fixtures;
 
-class ApiTest extends PocheWebTestCase
+class ApiTest extends WallabagWebTestCase
 {
     public function testEmptyGetEntries()
     {

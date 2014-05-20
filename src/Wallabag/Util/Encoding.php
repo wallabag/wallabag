@@ -7,7 +7,7 @@
  * @example  http://www.framework2.com.ar/dzone/forceUTF8-es/
   */
 
-namespace Poche\Util;
+namespace Wallabag\Util;
 
 class Encoding {
 

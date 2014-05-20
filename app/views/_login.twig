@@ -2,7 +2,7 @@
         <div class="alert alert-error" >{{ error }}</div>
     {% endif %}
     <form action="{{ path('login') }}" method="post">
-        <p><label for="username">{{ 'username'|trans }}: </label><input id="username" type="text" name="_username" value="poche"></p>
+        <p><label for="username">{{ 'username'|trans }}: </label><input id="username" type="text" name="_username" value="wallabag"></p>
         <p><label for="password">{{ 'password'|trans }}: </label><input id="password" type="password" name="_password" value="password"></p>
         <p><input type="submit" value="{{ 'login'|trans }}"></p>
     </form>

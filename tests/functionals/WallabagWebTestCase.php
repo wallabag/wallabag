@@ -1,13 +1,13 @@
 <?php
-namespace Poche\Tests\Functionals;
+namespace Wallabag\Tests\Functionals;
 
-use Poche\Tests\Functionals\Fixtures;
+use Wallabag\Tests\Functionals\Fixtures;
 
 use Silex\WebTestCase;
 
-use Poche\Schema;
+use Wallabag\Schema;
 
-class PocheWebTestCase extends WebTestCase
+class WallabagWebTestCase extends WebTestCase
 {
     protected $app;
 
@@ -18,7 +18,7 @@ class PocheWebTestCase extends WebTestCase
 
         $app['db.options'] = array(
             'driver'   => 'pdo_sqlite',
-            'path'     => __DIR__.'/poche_test.db'
+            'path'     => __DIR__.'/wallabag_test.db'
         );
 
         $app['debug'] = true;

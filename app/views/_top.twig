@@ -3,7 +3,7 @@
 {% endif %}
     <header>
         <nav role="navigation">
-            <a class="logo" href="/">poche</a>
+            <a class="logo" href="/">wallabag</a>
             <ul>
                 <li {% if app.request.requesturi == '/' %}class="active"{% endif %}><a href="/">{{ 'unread'|trans }}</a>{% if app.request.requesturi == '/' %} (<span id="counter">{{count}}</span>){% endif %}</li>
                 <li {% if app.request.requesturi == '/bookmarks' %}class="active"{% endif %}><a href="/bookmarks">{{ 'bookmarks'|trans }}</a></li>

@@ -1,14 +1,14 @@
 <?php
 /**
- * poche, a read it later open source system
+ * wallabag, a read it later open source system
  *
- * @category   poche
- * @author     Nicolas Lœuillet <support@inthepoche.com>
+ * @category   wallabag
+ * @author     Nicolas Lœuillet <hello@wallabag.org>
  * @copyright  2013
  * @license    http://www.wtfpl.net/ see COPYING file
  */
 
-namespace Poche\Twig;
+namespace Wallabag\Twig;
 
 class Filter
 {

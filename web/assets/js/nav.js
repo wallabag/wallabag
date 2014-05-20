@@ -1,4 +1,4 @@
-poche.Nav = (function() {
+wallabag.Nav = (function() {
 
     // function scrollPageTo(item)
     // {

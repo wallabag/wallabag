@@ -1,8 +1,8 @@
 <?php
 
-namespace Poche\Api;
+namespace Wallabag\Api;
 
-use Poche\Util\Url;
+use Wallabag\Util\Url;
 
 class ContentFullTextRssApi
 {

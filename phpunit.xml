@@ -11,7 +11,7 @@
          bootstrap="tests/functionals/bootstrap.php"
 >
     <testsuites>
-        <testsuite name="Poche Test Suite">
+        <testsuite name="Wallabag Test Suite">
             <directory>./tests/functionals/</directory>
         </testsuite>
     </testsuites>

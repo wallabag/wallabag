@@ -15,6 +15,6 @@
         "symfony/security": "2.3.*@dev"
     },
     "autoload": {
-        "psr-0": { "Poche\\": "src/" }
+        "psr-0": { "Wallabag\\": "src/" }
     }
 }

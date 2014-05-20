@@ -7,7 +7,7 @@ require_once __DIR__.'/app/app.php';
 
 $console = $app['console'];
 
-$console->add(new Poche\Command\UnitTestsCommand());
-$console->add(new Poche\Command\CreateSchemaCommand());
+$console->add(new Wallabag\Command\UnitTestsCommand());
+$console->add(new Wallabag\Command\CreateSchemaCommand());
 
 $console->run();

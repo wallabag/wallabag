@@ -1,5 +1,5 @@
 <?php
-namespace Poche\Util;
+namespace Wallabag\Util;
 
 class DummySingleItem {
     public $url;

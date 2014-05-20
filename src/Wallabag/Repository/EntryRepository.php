@@ -1,6 +1,6 @@
 <?php
 
-namespace Poche\Repository;
+namespace Wallabag\Repository;
 
 class EntryRepository
 {

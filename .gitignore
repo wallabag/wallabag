@@ -2,8 +2,8 @@ assets/*
 cache/*
 composer.phar
 composer.lock
-poche.db
-poche_test.db
+wallabag.db
+wallabag_test.db
 vendor/atoum
 vendor/bin
 vendor/autoload.php

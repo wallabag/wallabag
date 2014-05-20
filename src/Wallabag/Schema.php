@@ -1,7 +1,7 @@
 <?php
-namespace Poche;
+namespace Wallabag;
 
-use Poche\Util\Token;
+use Wallabag\Util\Token;
 
 class Schema
 {
@@ -34,7 +34,7 @@ class Schema
         $db->query("
             CREATE TABLE users (
                 id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE,
-                username TEXT DEFAULT 'poche',
+                username TEXT DEFAULT 'wallabag',
                 password TEXT,
                 roles TEXT DEFAULT '',
                 email TEXT,

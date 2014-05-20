@@ -1,8 +1,8 @@
 <?php
 
-namespace Poche\Util;
+namespace Wallabag\Util;
 
-class PocheReadability extends Readability
+class WallabagReadability extends Readability
 {
     /**
     * Get the article title as an H1.

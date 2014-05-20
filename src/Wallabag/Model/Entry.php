@@ -1,6 +1,6 @@
 <?php
 
-namespace Poche\Model;
+namespace Wallabag\Model;
 
 class Entry
 {
