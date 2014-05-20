@@ -14,6 +14,7 @@
 function filtre_picture($content, $url, $id)
 {
     $matches = array();
+    $processing_pictures = array(); // list of processing image to avoid processing the same pictures twice
     preg_match_all('#<\s*(img)[^>]+src="([^"]*)"[^>]*>#Si', $content, $matches, PREG_SET_ORDER);
     foreach($matches as $i => $link) {
         $link[1] = trim($link[1]);
@@ -22,8 +23,17 @@ function filtre_picture($content, $url, $id)
             $filename = basename(parse_url($absolute_path, PHP_URL_PATH));
             $directory = create_assets_directory($id);
             $fullpath = $directory . '/' . $filename;
-            download_pictures($absolute_path, $fullpath);
-            $content = str_replace($matches[$i][2], $fullpath, $content);
+            
+            if (in_array($absolute_path, $processing_pictures) === true) {
+                // replace picture's URL only if processing is OK : already processing -> go to next picture
+                continue;
+            }
+            
+            if (download_pictures($absolute_path, $fullpath) === true) {
+                $content = str_replace($matches[$i][2], $fullpath, $content);
+            }
+            
+            $processing_pictures[] = $absolute_path;
         }
 
     }
@@ -64,17 +74,55 @@ function get_absolute_link($relative_link, $url) {
 
 /**
  * Téléchargement des images
+ * 
+ * @return bool true if the download and processing is OK, false else
  */
 function download_pictures($absolute_path, $fullpath)
 {
     $rawdata = Tools::getFile($absolute_path);
+    $fullpath = urldecode($fullpath);
 
     if(file_exists($fullpath)) {
         unlink($fullpath);
     }
-    $fp = fopen($fullpath, 'x');
-    fwrite($fp, $rawdata);
-    fclose($fp);
+    
+    // check extension
+    $file_ext = strrchr($fullpath, '.');
+    $whitelist = array(".jpg",".jpeg",".gif",".png"); 
+    if (!(in_array($file_ext, $whitelist))) {
+        Tools::logm('processed image with not allowed extension. Skipping ' . $fullpath);
+        return false;
+    }
+    
+    // check headers
+    $imageinfo = getimagesize($absolute_path);
+    if ($imageinfo['mime'] != 'image/gif' && $imageinfo['mime'] != 'image/jpeg'&& $imageinfo['mime'] != 'image/jpg'&& $imageinfo['mime'] != 'image/png') {
+        Tools::logm('processed image with bad header. Skipping ' . $fullpath);
+        return false;
+    }
+    
+    // regenerate image
+    $im = imagecreatefromstring($rawdata);
+    if ($im === false) {
+        Tools::logm('error while regenerating image ' . $fullpath);
+        return false;
+    }
+    
+    switch ($imageinfo['mime']) {
+        case 'image/gif':
+            $result = imagegif($im, $fullpath);
+            break;
+        case 'image/jpeg':
+        case 'image/jpg':
+            $result = imagejpeg($im, $fullpath, REGENERATE_PICTURES_QUALITY);
+            break;
+        case 'image/png':
+            $result = imagepng($im, $fullpath, ceil(REGENERATE_PICTURES_QUALITY / 100 * 9));
+            break;
+    }
+    imagedestroy($im);
+    
+    return $result;
 }
 
 /**
