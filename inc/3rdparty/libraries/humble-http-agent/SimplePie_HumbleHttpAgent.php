@@ -76,4 +76,3 @@ class SimplePie_HumbleHttpAgent extends SimplePie_File
 		}
 	}
 }
-?>
