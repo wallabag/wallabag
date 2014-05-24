@@ -384,8 +384,8 @@ a#bagit-form-close {
   background-color: #000;
   color: #fff;
   padding: 0 4px 1px 3px;
-  font-weight: bold;
-  font-size: 0.7em;
+  font-weight: bold; 
+  font-size: 0.7em; 
   border-radius: 4px;
 }
 .add-to-wallabag-link-after:hover, .add-to-wallabag-link-after:active {
@@ -394,6 +394,23 @@ a#bagit-form-close {
 .add-to-wallabag-link-after:visited {
   color: #999;
 }
+a.add-to-wallabag-link-after {
+    visibility: hidden;
+    position: absolute;
+    opacity: 0;
+    transition-duration: 2s;
+    transition-timing-function: ease-out;
+}
+#article article a:hover + a.add-to-wallabag-link-after, a.add-to-wallabag-link-after:hover {
+    opacity: 1;
+    visibility: visible;
+    transition-duration: .3s;
+    transition-timing-function: ease-in;
+}
+a.add-to-wallabag-link-after:after {
+     content: "w";
+}
+
 
 #add-link-result {
   display: inline;
