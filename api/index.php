@@ -30,7 +30,7 @@ if( isset( $_REQUEST['r'] ) && ( isset( $_REQUEST['apikey'] ) && strlen( $_REQUE
         $opt = $_REQUEST['o'];
     }
 
-    if( $valid )
+    if( $valid === TRUE )
     {
         switch( $_REQUEST['r'] )
         {
@@ -39,13 +39,13 @@ if( isset( $_REQUEST['r'] ) && ( isset( $_REQUEST['apikey'] ) && strlen( $_REQUE
                 switch( $opt )
                 {
                     case "all": // Get all but archived
-                        echo json_encode( $db->getEntriesByView( "", $uid ) );
+                        echo json_encode( array_reverse( $db->getEntriesByView( "", $uid ) ) );
                         break;
                     case "fav": // Get only favorites
-                        echo json_encode( $db->getEntriesByView( "fav", $uid ) );
+                        echo json_encode( array_reverse( $db->getEntriesByView( "fav", $uid ) ) );
                         break;
                     case "archive": // Get only archived
-                        echo json_encode( $db->getEntriesByView( "archive", $uid ) );
+                        echo json_encode( array_reverse( $db->getEntriesByView( "archive", $uid ) ) );
                         break;
                 }
                 break;
@@ -72,18 +72,21 @@ if( isset( $_REQUEST['r'] ) && ( isset( $_REQUEST['apikey'] ) && strlen( $_REQUE
                 break;
             // ADD API Call
             case "add":
-                $url = new Url( base64_encode( urldecode( $_REQUEST['url'] ) ) );
+                $de_url = urldecode($_REQUEST['url']);
+                $url = new Url( base64_encode( $de_url ) );
                 $content = getPageContent( $url );
                 $description = $content['rss']['channel']['item']['description'];
                 $title = $content['rss']['channel']['title'];
+                if( strlen( $title ) == 0 )
+                {
+                    $title = $de_url;
+                }
                 $id = $db->add( $url->getUrl(), $title, $description, $uid );
                 echo '{"error":0, "id":' . $id . '}';
                 break;
         }
     }
 }
-
-
 
 function getPageContent(Url $url)
 {
@@ -144,6 +147,4 @@ function getPageContent(Url $url)
 
     return json_decode($json, true);
 }
-
-
 ?>
