@@ -1,0 +1,12 @@
+title: //title
+body: //iframe
+
+replace_string(<![CDATA[): _
+replace_string(]]>): _
+
+single_page_link: //link[@type='application/xml+oembed']
+
+prune: no
+tidy: no
+
+http://www.dailymotion.com/video/x1vk5oh_before-they-were-on-game-of-thrones_people
