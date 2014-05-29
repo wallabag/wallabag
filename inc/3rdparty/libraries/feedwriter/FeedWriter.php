@@ -97,12 +97,15 @@ define('JSONP', 3, true);
               header('X-content-type-options: nosniff');
           } elseif ($this->version == JSON) {
               header('Content-type: application/json; charset=UTF-8');
-              $this->json = new stdClass();
           } elseif ($this->version == JSONP) {
               header('Content-type: application/javascript; charset=UTF-8');
-              $this->json = new stdClass();
           }
         }
+
+        if ($this->version == JSON || $this->version == JSONP) {
+          $this->json = new stdClass();
+        }
+
 
         $this->printHead();
         $this->printChannels();
@@ -202,7 +205,7 @@ define('JSONP', 3, true);
     public function setDescription($description)
     {
         $tag = ($this->version == ATOM)? 'subtitle' : 'description';
-        $this->setChannelElement($tag, $desciption);
+        $this->setChannelElement($tag, $description);
     }
 
     /**
