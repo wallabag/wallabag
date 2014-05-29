@@ -1059,8 +1059,8 @@ class Readability
 					} else if ( $input > floor($p/3) ) {
 						$this->dbg(' too many <input> elements');
 						$toRemove = true; 
-					} else if ($contentLength < 25 && ($embedCount === 0 && ($img === 0 || $img > 2))) {
-						$this->dbg(' content length less than 25 chars, 0 embeds and either 0 images or more than 2 images');
+					} else if ($contentLength < 10 && ($embedCount === 0 && ($img === 0 || $img > 2))) {
+						$this->dbg(' content length less than 10 chars, 0 embeds and either 0 images or more than 2 images');
 						$toRemove = true;
 					} else if($weight < 25 && $linkDensity > 0.2) {
 						$this->dbg(' weight smaller than 25 and link density above 0.2');

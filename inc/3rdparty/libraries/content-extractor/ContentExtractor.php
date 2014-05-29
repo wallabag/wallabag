@@ -230,7 +230,7 @@ class ContentExtractor
 				$this->debug("...XPath match: $pattern");
 				// remove title from document
 				try {
-					$elems->item(0)->parentNode->removeChild($elems->item(0));
+					@$elems->item(0)->parentNode->removeChild($elems->item(0));
 				} catch (DOMException $e) {
 					// do nothing
 				}
@@ -725,4 +725,3 @@ class ContentExtractor
 		return $this->nextPageUrl;
 	}
 }
-?>

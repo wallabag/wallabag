@@ -5,10 +5,10 @@
  * Each instance of this class should hold extraction patterns and other directives
  * for a website. See ContentExtractor class to see how it's used.
  * 
- * @version 0.7
- * @date 2012-08-27
+ * @version 0.8
+ * @date 2013-04-16
  * @author Keyvan Minoukadeh
- * @copyright 2012 Keyvan Minoukadeh
+ * @copyright 2013 Keyvan Minoukadeh
  * @license http://www.gnu.org/licenses/agpl-3.0.html AGPL v3
  */
 
@@ -180,7 +180,7 @@ class SiteConfig
 	
 	public function append(SiteConfig $newconfig) {
 		// check for commands where we accept multiple statements (no test_url)
-		foreach (array('title', 'body', 'author', 'date', 'strip', 'strip_id_or_class', 'strip_image_src', 'single_page_link', 'single_page_link_in_feed', 'next_page_link', 'http_header', 'find_string', 'replace_string') as $var) {
+		foreach (array('title', 'body', 'author', 'date', 'strip', 'strip_id_or_class', 'strip_image_src', 'single_page_link', 'single_page_link_in_feed', 'next_page_link', 'http_header') as $var) {
 			// append array elements for this config variable from $newconfig to this config
 			//$this->$var = $this->$var + $newconfig->$var;
 			$this->$var = array_unique(array_merge($this->$var, $newconfig->$var));
@@ -189,6 +189,12 @@ class SiteConfig
 		// we do not overwrite existing non null values
 		foreach (array('tidy', 'prune', 'parser', 'autodetect_on_failure') as $var) {
 			if ($this->$var === null) $this->$var = $newconfig->$var;
+		}
+		// treat find_string and replace_string separately (don't apply array_unique) (thanks fabrizio!)
+		foreach (array('find_string', 'replace_string') as $var) {
+			// append array elements for this config variable from $newconfig to this config
+			//$this->$var = $this->$var + $newconfig->$var;
+			$this->$var = array_merge($this->$var, $newconfig->$var);
 		}
 	}
 	
@@ -335,4 +341,3 @@ class SiteConfig
 		return $config;
 	}
 }
-?>

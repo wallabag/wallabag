@@ -1145,7 +1145,8 @@ class Poche
       $config = HTMLPurifier_Config::createDefault();
       $config->set('Cache.SerializerPath', CACHE);
       $config->set('HTML.SafeIframe', true);
-      $config->set('URI.SafeIframeRegexp', '%^(https?:)?//(www\.youtube(?:-nocookie)?\.com/embed/|player\.vimeo\.com/video/)%'); //allow YouTube and Vimeo$purifier = new HTMLPurifier($config);
+      //allow YouTube, Vimeo and dailymotion videos
+      $config->set('URI.SafeIframeRegexp', '%^(https?:)?//(www\.youtube(?:-nocookie)?\.com/embed/|player\.vimeo\.com/video/|www\.dailymotion\.com/embed/video/)%');
 
       return new HTMLPurifier($config);
     }

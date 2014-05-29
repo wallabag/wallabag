@@ -134,6 +134,7 @@ class HTML5_TreeBuilder {
 
     // Namespaces for foreign content
     const NS_HTML   = null; // to prevent DOM from requiring NS on everything
+    const NS_XHTML  = 'http://www.w3.org/1999/xhtml';
     const NS_MATHML = 'http://www.w3.org/1998/Math/MathML';
     const NS_SVG    = 'http://www.w3.org/2000/svg';
     const NS_XLINK  = 'http://www.w3.org/1999/xlink';
@@ -3157,11 +3158,19 @@ class HTML5_TreeBuilder {
         }
 
     private function insertElement($token, $append = true) {
-        $el = $this->dom->createElementNS(self::NS_HTML, $token['name']);
+        //$el = $this->dom->createElementNS(self::NS_HTML, $token['name']);
+        $namespaceURI = strpos($token['name'], ':') ? self::NS_XHTML : self::NS_HTML;
+        $el = $this->dom->createElementNS($namespaceURI, $token['name']);
 
         if (!empty($token['attr'])) {
             foreach($token['attr'] as $attr) {
-                if(!$el->hasAttribute($attr['name'])) {
+
+				// mike@macgirvin.com 2011-11-17, check attribute name for
+				// validity (ignoring extenders and combiners) as illegal chars in names
+				// causes everything to abort
+
+ 				$valid = preg_match('/^[a-zA-Z\_\:]([\-a-zA-Z0-9\_\:\.]+$)/',$attr['name']);
+                if($attr['name'] && (!$el->hasAttribute($attr['name'])) && ($valid)) {
                     $el->setAttribute($attr['name'], $attr['value']);
                 }
             }

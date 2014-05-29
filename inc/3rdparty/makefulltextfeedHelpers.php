@@ -66,6 +66,38 @@ class DummySingleItem {
 // HELPER FUNCTIONS
 ///////////////////////////////
 
+// Adapted from WordPress
+// http://core.trac.wordpress.org/browser/tags/3.5.1/wp-includes/formatting.php#L2173
+function get_excerpt($text, $num_words=55, $more=null) {
+	if (null === $more) $more = '&hellip;';
+	$text = strip_tags($text);
+	//TODO: Check if word count is based on single characters (East Asian characters)
+	/*
+	if (1==2) {
+  	$text = trim(preg_replace("/[\n\r\t ]+/", ' ', $text), ' ');
+  	preg_match_all('/./u', $text, $words_array);
+  	$words_array = array_slice($words_array[0], 0, $num_words + 1);
+  	$sep = '';
+	} else {
+  	$words_array = preg_split("/[\n\r\t ]+/", $text, $num_words + 1, PREG_SPLIT_NO_EMPTY);
+  	$sep = ' ';
+	}
+	*/
+	$words_array = preg_split("/[\n\r\t ]+/", $text, $num_words + 1, PREG_SPLIT_NO_EMPTY);
+	$sep = ' ';
+	if (count($words_array) > $num_words) {
+		array_pop($words_array);
+		$text = implode($sep, $words_array);
+		$text = $text.$more;
+	} else {
+		$text = implode($sep, $words_array);
+	}
+	// trim whitespace at beginning or end of string
+	// See: http://stackoverflow.com/questions/4166896/trim-unicode-whitespace-in-php-5-2
+	$text = preg_replace('/^[\pZ\pC]+|[\pZ\pC]+$/u', '', $text);
+	return $text;
+}
+
 function url_allowed($url) {
 	global $options;
 	if (!empty($options->allowed_urls)) {
@@ -165,14 +197,6 @@ function convert_to_utf8($html, $header=null)
 			if (strtolower($encoding) != 'utf-8') {
 				debug('Converting to UTF-8');
 				$html = SimplePie_Misc::change_encoding($html, $encoding, 'utf-8');
-				/*
-				if (function_exists('iconv')) {
-					// iconv appears to handle certain character encodings better than mb_convert_encoding
-					$html = iconv($encoding, 'utf-8', $html);
-				} else {
-					$html = mb_convert_encoding($html, 'utf-8', $encoding);
-				}
-				*/
 			}
 		}
 	}
@@ -196,7 +220,7 @@ function makeAbsolute($base, $elem) {
 }
 function makeAbsoluteAttr($base, $e, $attr) {
 	if ($e->hasAttribute($attr)) {
-		// Trim leading and trailing white space. I don't really like this but 
+		// Trim leading and trailing white space. I don't really like this but
 		// unfortunately it does appear on some sites. e.g.  <img src=" /path/to/image.jpg" />
 		$url = trim(str_replace('%20', ' ', $e->getAttribute($attr)));
 		$url = str_replace(' ', '%20', $url);
