@@ -7,14 +7,17 @@
                 <li><a href="./" title="{% trans "Return home" %}" class="tool back"><span>{% trans "Return home" %}</span></a></li>
                 <li><a href="#top" title="{% trans "Back to top" %}" class="tool top"><span>{% trans "Back to top" %}</span></a></li>
                 <li><a href="{{ entry.url|e }}" target="_blank" title="{% trans "original" %} : {{ entry.title|e }}" class="tool link"><span>{{ entry.url | e | getDomain }}</span></a></li>
-                <li><a title="{% trans "Mark as read" %}" class="tool {% if entry.is_read == 0 %}archive-off{% else %}archive{% endif %}" href="./?action=toggle_archive&amp;id={{ entry.id|e }}"><span>{% trans "Toggle mark as read" %}</span></a></li>
-                <li><a title="{% trans "Favorite" %}" class="tool {% if entry.is_fav == 0 %}fav-off{% else %}fav{% endif %}" href="./?action=toggle_fav&amp;id={{ entry.id|e }}"><span>{% trans "Toggle favorite" %}</span></a></li>
+                <li><a title="{% trans "Mark as read" %}" class="tool {% if entry.is_read == 0 %}archive-off{% else %}archive{% endif %}" href="javascript: void(null);" id="markAsRead"><span>{% trans "Toggle mark as read" %}</span></a></li>
+                <li><a title="{% trans "Favorite" %}" class="tool {% if entry.is_fav == 0 %}fav-off{% else %}fav{% endif %}" href="javascript: void(null);" id="setFav"><span>{% trans "Toggle favorite" %}</span></a></li>
                 <li><a title="{% trans "Delete" %}" class="tool delete" href="./?action=delete&amp;id={{ entry.id|e }}"><span>{% trans "Delete" %}</span></a></li>
                 {% if constant('SHARE_TWITTER') == 1 %}<li><a href="https://twitter.com/home?status={{entry.title|url_encode}}%20{{ entry.url|url_encode }}%20via%20@wallabagapp" target="_blank" class="tool twitter" title="{% trans "Tweet" %}"><span>{% trans "Tweet" %}</span></a></li>{% endif %}
                 {% if constant('SHARE_MAIL') == 1 %}<li><a href="mailto:?subject={{ entry.title|url_encode }}&amp;body={{ entry.url|url_encode }}%20via%20@wallabagapp" class="tool email" title="{% trans "Email" %}"><span>{% trans "Email" %}</span></a></li>{% endif %}
                 {% if constant('SHARE_SHAARLI') == 1 %}<li><a href="{{ constant('SHAARLI_URL') }}/index.php?post={{ entry.url|url_encode }}&amp;title={{ entry.title|url_encode }}" target="_blank" class="tool shaarli" title="{% trans "shaarli" %}"><span>{% trans "shaarli" %}</span></a></li>{% endif %}
                 {% if constant('FLATTR') == 1 %}{% if flattr.status == constant('FLATTRABLE') %}<li><a href="http://flattr.com/submit/auto?url={{ entry.url }}" class="tool flattr" target="_blank" title="{% trans "flattr" %}"><span>{% trans "flattr" %}</span></a></li>{% elseif flattr.status == constant('FLATTRED') %}<li><a href="{{ flattr.flattrItemURL }}" class="tool flattr" target="_blank" title="{% trans "flattr" %}"><span>{% trans "flattr" %}</span>{{ flattr.numflattrs }}</a></li>{% endif %}{% endif %}
+                {% if constant('SHOW_PRINTLINK') == 1 %}<li><a title="{% trans "Print" %}" class="tool print" href="javascript: window.print();"><span>{% trans "Print" %}</span></a></li>{% endif %}
+                <li><a href="./?epub&amp;method=id&amp;id={{ entry.id|e }}" title="Generate epub file">EPUB</a></li>
                 <li><a href="mailto:hello@wallabag.org?subject=Wrong%20display%20in%20wallabag&amp;body={{ entry.url|url_encode }}" title="{% trans "Does this article appear wrong?" %}" class="tool bad-display"><span>{% trans "Does this article appear wrong?" %}</span></a></li>
+                {% if constant('SHOW_READPERCENT') == 1 %}<li><div id="readLeftPercent">0%</div></li>{% endif %}
             </ul>
         </div>
         <div id="article">
@@ -34,6 +37,60 @@
         <script src="{{ poche_url }}themes/{{theme}}/js/restoreScroll.js"></script>
         <script type="text/javascript">
         $(document).ready(function() {
+        
+        		// toggle read property of current article
+        		$('#markAsRead').click(function(){
+        			$("body").css("cursor", "wait");
+					    $.ajax( { url: './?action=toggle_archive&id={{ entry.id|e }}' }).done(
+					    function( data ) {
+				        if ( data == '1' ) {
+				        	if ( $('#markAsRead').hasClass("archive-off") ) {
+				        		$('#markAsRead').removeClass("archive-off");	
+				        		$('#markAsRead').addClass("archive");
+				        	}
+				        	else {
+				        		$('#markAsRead').removeClass("archive");	
+				        		$('#markAsRead').addClass("archive-off");
+				        	}
+				        }
+				        else {
+				          alert('Error! Pls check if you are logged in.');
+				        }
+				      });
+					    $("body").css("cursor", "auto");
+					  });
+					  
+					  // toggle favorite property of current article
+        		$('#setFav').click(function(){
+        			$("body").css("cursor", "wait");
+					    $.ajax( { url: './?action=toggle_fav&id={{ entry.id|e }}' }).done(
+					    function( data ) {
+				        if ( data == '1' ) {
+				        	if ( $('#setFav').hasClass("fav-off") ) {
+				        		$('#setFav').removeClass("fav-off");	
+				        		$('#setFav').addClass("fav");
+				        	}
+				        	else {
+				        		$('#setFav').removeClass("fav");	
+				        		$('#setFav').addClass("fav-off");
+				        	}
+				        }
+				        else {
+				          alert('Error! Pls check if you are logged in.');
+				        }
+				      });
+					    $("body").css("cursor", "auto");
+					  });
+        
+ 						// set percent of read on startup       
+        		if ( $(document).height() <= $(window).innerHeight() ) {
+        		  pp = 100;
+        		}
+        		else {
+        			pp = 0;
+        		}
+        		$('#readLeftPercent').text( pp + '%' );
+        		
 
             $(window).scroll(function(e){
                 var scrollTop = $(window).scrollTop();
@@ -41,6 +98,10 @@
                 var scrollPercent = (scrollTop) / (docHeight);
                 var scrollPercentRounded = Math.round(scrollPercent*100)/100;
                 savePercent({{ entry.id|e }}, scrollPercentRounded);
+                
+                // change percent of read on scroll
+                pp = Math.round(scrollTop * 100 / ( docHeight - $(window).innerHeight() ));
+                $('#readLeftPercent').text( pp + '%' );
             });
 
             retrievePercent({{ entry.id|e }});

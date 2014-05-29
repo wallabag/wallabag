@@ -124,8 +124,44 @@
             {% if constant('STORAGE') == 'sqlite' %}
             <p><a href="?download" target="_blank">{% trans "Click here" %}</a> {% trans "to download your database." %}</p>{% endif %}
             <p><a href="?export" target="_blank">{% trans "Click here" %}</a> {% trans "to export your wallabag data." %}</p>
+            
+            <h2>{% trans "Fancy an E-Book ?" %}</h2>
+            <p>{% trans "Click on <a href=\"./?epub&amp;method=all\" title=\"Generate ePub\">this link</a> to get all your articles in one ebook (ePub 3 format)." %}
+            <br>{% trans "This can <b>take a while</b> and can <b>even fail</b> if you have too many articles, depending on your server configuration." %}</p>
 
             <h2>{% trans "Cache" %}</h2>
             <p><a href="?empty-cache">{% trans "Click here" %}</a> {% trans "to delete cache." %}</p>
 
+            <h2>{% trans 'Add user' %}</h2>
+            <p>{% trans 'Add a new user :' %}</p>
+            <form method="post" action="?newuser">
+                <fieldset class="w500p">
+                <div class="row">
+                    <label class="col w150p" for="newusername">{% trans 'Login for new user' %}</label>
+                    <input class="col" type="text" id="newusername" name="newusername" placeholder="{% trans 'Login' %}">
+                </div>
+                <div class="row">
+                    <label class="col w150p" for="password4newuser">{% trans "Password for new user" %}</label>
+                    <input class="col" type="password" id="password4newuser" name="password4newuser" placeholder="{% trans "Password" %}">
+                </div>
+                <div class="row mts txtcenter">
+                    <button type="submit">{% trans "Send" %}</button>	
+                </div>
+                </fieldset>
+            </form>
+            
+            <h2>{% trans "Delete account" %}</h2>
+            {% if not only_user %}<form method="post" action="?deluser">
+            <p>{% trans "You can delete your account by entering your password and validating." %}<br /><b>{% trans "Be careful, data will be erased forever (that is a very long time)." %}</b></p>
+            <fieldset class="w500p">
+                <div class="row">
+                    <label class="col w150p" for="password4deletinguser">{% trans "Type here your password" %}</label>
+                    <input class="col" type="password" id="password4deletinguser" name="password4deletinguser" placeholder="{% trans "Password" %}">
+                </div>
+            <div class="row mts txtcenter">
+                <button type="submit">{% trans "Send" %}</button>
+            </div>
+            </form>
+            {% else %}<p>{% trans "You are the only user, you cannot delete your own account." %}<br />
+            {% trans "To completely remove wallabag, delete the wallabag folder on your web server." %}</p>{% endif %}
 {% endblock %}

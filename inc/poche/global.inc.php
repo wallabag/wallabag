@@ -31,6 +31,11 @@ require_once INCLUDES . '/3rdparty/FlattrItem.class.php';
 
 require_once INCLUDES . '/3rdparty/htmlpurifier/HTMLPurifier.auto.php';
 
+# epub library
+require_once INCLUDES . '/3rdparty/libraries/PHPePub/Logger.php';
+require_once INCLUDES . '/3rdparty/libraries/PHPePub/EPub.php';
+require_once INCLUDES . '/3rdparty/libraries/PHPePub/EPubChapterSplitter.php';
+
 # Composer its autoloader for automatically loading Twig
 if (! file_exists(ROOT . '/vendor/autoload.php')) {
     Poche::$canRenderTemplates = false;
@@ -43,6 +48,7 @@ if (! file_exists(INCLUDES . '/poche/config.inc.php')) {
     Poche::$configFileAvailable = false;
 } else {
     require_once INCLUDES . '/poche/config.inc.php';
+    require_once INCLUDES . '/poche/config.inc.default.php';
 }
 
 if (Poche::$configFileAvailable && DOWNLOAD_PICTURES) {

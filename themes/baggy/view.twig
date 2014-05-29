@@ -8,13 +8,15 @@
             <ul class="links">
                 <li class="topPosF"><a href="#top" title="{% trans "Back to top" %}" class="tool top icon icon-arrow-up-thick"><span>{% trans "Back to top" %}</span></a></li>
                 <li><a href="{{ entry.url|e }}" target="_blank" title="{% trans "original" %} : {{ entry.title|e }}" class="tool link icon icon-link"><span>{{ entry.url | e | getDomain }}</span></a></li>
-                <li><a title="{% trans "Mark as read" %}" class="tool icon icon-check {% if entry.is_read == 0 %}archive-off{% else %}archive{% endif %}" href="./?action=toggle_archive&amp;id={{ entry.id|e }}"><span>{% trans "Toggle mark as read" %}</span></a></li>
-                <li><a title="{% trans "Favorite" %}" class="tool icon icon-star {% if entry.is_fav == 0 %}fav-off{% else %}fav{% endif %}" href="./?action=toggle_fav&amp;id={{ entry.id|e }}"><span>{% trans "Toggle favorite" %}</span></a></li>
+                <li><a title="{% trans "Mark as read" %}" class="tool icon icon-check {% if entry.is_read == 0 %}archive-off{% else %}archive{% endif %}" href="javascript: void(null);" id="markAsRead"><span>{% trans "Toggle mark as read" %}</span></a></li>
+                <li><a title="{% trans "Favorite" %}" class="tool icon icon-star {% if entry.is_fav == 0 %}fav-off{% else %}fav{% endif %}" href="javascript: void(null);" id="setFav"><span>{% trans "Toggle favorite" %}</span></a></li>
                 <li><a title="{% trans "Delete" %}" class="tool delete icon icon-trash" href="./?action=delete&amp;id={{ entry.id|e }}"><span>{% trans "Delete" %}</span></a></li>
                 {% if constant('SHARE_TWITTER') == 1 %}<li><a href="https://twitter.com/home?status={{entry.title|url_encode}}%20{{ entry.url|url_encode }}%20via%20@wallabagapp" target="_blank" class="tool twitter icon icon-twitter" title="{% trans "Tweet" %}"><span>{% trans "Tweet" %}</span></a></li>{% endif %}
                 {% if constant('SHARE_MAIL') == 1 %}<li><a href="mailto:?subject={{ entry.title|url_encode }}&amp;body={{ entry.url|url_encode }}%20via%20@wallabagapp" class="tool email icon icon-mail" title="{% trans "Email" %}"><span>{% trans "Email" %}</span></a></li>{% endif %}
                 {% if constant('SHARE_SHAARLI') == 1 %}<li><a href="{{ constant('SHAARLI_URL') }}/index.php?post={{ entry.url|url_encode }}&amp;title={{ entry.title|url_encode }}" target="_blank" class="tool shaarli" title="{% trans "shaarli" %}"><span>{% trans "shaarli" %}</span></a></li>{% endif %}
                 {% if constant('FLATTR') == 1 %}{% if flattr.status == constant('FLATTRABLE') %}<li><a href="http://flattr.com/submit/auto?url={{ entry.url }}" class="tool flattr icon icon-flattr" target="_blank" title="{% trans "flattr" %}"><span>{% trans "flattr" %}</span></a></li>{% elseif flattr.status == constant('FLATTRED') %}<li><a href="{{ flattr.flattrItemURL }}" class="tool flattr icon icon-flattr" target="_blank" title="{% trans "flattr" %}"><span>{% trans "flattr" %}</span> ({{ flattr.numflattrs }})</a></li>{% endif %}{% endif %}
+                {% if constant('SHOW_PRINTLINK') == 1 %}<li><a title="{% trans "Print" %}" class="tool icon icon-print" href="javascript: window.print();"><span>{% trans "Print" %}</span></a></li>{% endif %}
+                <li><a href="./?epub&amp;method=id&amp;id={{ entry.id|e }}" title="Generate epub file">EPUB</a></li>
                 <li><a href="mailto:hello@wallabag.org?subject=Wrong%20display%20in%20wallabag&amp;body={{ entry.url|url_encode }}" title="{% trans "Does this article appear wrong?" %}" class="tool bad-display icon icon-delete"><span>{% trans "Does this article appear wrong?" %}</span></a></li>
             </ul>
         </div>
@@ -32,6 +34,50 @@
         <script src="{{ poche_url }}themes/{{theme}}/js/restoreScroll.js"></script>
         <script type="text/javascript">
         $(document).ready(function() {
+        
+        		// toggle read property of current article
+        		$('#markAsRead').click(function(){
+        			$("body").css("cursor", "wait");
+					    $.ajax( { url: './?action=toggle_archive&id={{ entry.id|e }}' }).done(
+					    function( data ) {
+				        if ( data == '1' ) {
+				        	if ( $('#markAsRead').hasClass("archive-off") ) {
+				        		$('#markAsRead').removeClass("archive-off");	
+				        		$('#markAsRead').addClass("archive");
+				        	}
+				        	else {
+				        		$('#markAsRead').removeClass("archive");	
+				        		$('#markAsRead').addClass("archive-off");
+				        	}
+				        }
+				        else {
+				          alert('Error! Pls check if you are logged in.');
+				        }
+				      });
+					    $("body").css("cursor", "auto");
+					  });
+					  
+					  // toggle favorite property of current article
+        		$('#setFav').click(function(){
+        			$("body").css("cursor", "wait");
+					    $.ajax( { url: './?action=toggle_fav&id={{ entry.id|e }}' }).done(
+					    function( data ) {
+				        if ( data == '1' ) {
+				        	if ( $('#setFav').hasClass("fav-off") ) {
+				        		$('#setFav').removeClass("fav-off");	
+				        		$('#setFav').addClass("fav");
+				        	}
+				        	else {
+				        		$('#setFav').removeClass("fav");	
+				        		$('#setFav').addClass("fav-off");
+				        	}
+				        }
+				        else {
+				          alert('Error! Pls check if you are logged in.');
+				        }
+				      });
+					    $("body").css("cursor", "auto");
+					  });
 
             $(window).scroll(function(e){
                 var scrollTop = $(window).scrollTop();

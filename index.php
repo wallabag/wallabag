@@ -8,7 +8,7 @@
  * @license    http://www.wtfpl.net/ see COPYING file
  */
 
-define ('POCHE', '1.6.1');
+define ('POCHE', '1.7.0');
 require 'check_setup.php';
 require_once 'inc/poche/global.inc.php';
 
@@ -66,6 +66,12 @@ if (isset($_GET['login'])) {
 } elseif (isset($_GET['config'])) {
     # Update password
     $poche->updatePassword();
+} elseif (isset($_GET['newuser'])) {
+    $poche->createNewUser();
+} elseif (isset($_GET['deluser'])) {
+    $poche->deleteUser();
+} elseif (isset($_GET['epub'])) {
+    $poche->createEpub();
 } elseif (isset($_GET['import'])) {
     $import = $poche->import();
     $tpl_vars = array_merge($tpl_vars, $import);

@@ -53,7 +53,7 @@ else if (isset($_POST['install'])) {
     else {
         $continue = true;
         // Create config.inc.php
-        if (!copy('inc/poche/config.inc.php.new', 'inc/poche/config.inc.php')) {
+        if (!copy('inc/poche/config.inc.default.php', 'inc/poche/config.inc.php')) {
             $errors[] = 'Installation aborted, impossible to create inc/poche/config.inc.php file. Maybe you don\'t have write access to create it.';
             $continue = false;
         }
@@ -101,7 +101,7 @@ else if (isset($_POST['install'])) {
 
                     $sql_structure = file_get_contents('install/mysql.sql');
                 }
-                else if ($_POST['db_engine'] == 'postgresql') {
+                else if ($_POST['db_engine'] == 'postgres') {
                     $db_path = 'pgsql:host=' . $_POST['pg_server'] . ';dbname=' . $_POST['pg_database'];
                     $content = str_replace("define ('STORAGE_SERVER', 'localhost');", "define ('STORAGE_SERVER', '".$_POST['pg_server']."');", $content);
                     $content = str_replace("define ('STORAGE_DB', 'poche');", "define ('STORAGE_DB', '".$_POST['pg_database']."');", $content);
@@ -262,7 +262,7 @@ php composer.phar install</code></pre></li>
                                 </ul>
                             </li>
                             <li>
-                                <label for="postgresql">PostgreSQL</label> <input name="db_engine" type="radio" id="postgresql" value="postgresql" />
+                                <label for="postgres">PostgreSQL</label> <input name="db_engine" type="radio" id="postgres" value="postgres" />
                                 <ul id="pg_infos">
                                     <li><label for="pg_server">Server</label> <input type="text" placeholder="localhost" id="pg_server" name="pg_server" /></li>
                                     <li><label for="pg_database">Database</label> <input type="text" placeholder="wallabag" id="pg_database" name="pg_database" /></li>
@@ -316,7 +316,7 @@ php composer.phar install</code></pre></li>
                         $("#install_button").show();
                     }
                     else {
-                        if ( $("#postgresql").prop('checked')) {
+                        if ( $("#postgres").prop('checked')) {
                             $("#mysql_infos").hide();
                             $("#pg_infos").show();
                             $("#pdo_sqlite").hide();

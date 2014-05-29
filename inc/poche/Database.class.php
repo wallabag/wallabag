@@ -33,6 +33,8 @@ class Database {
                 $db_path = 'pgsql:host=' . STORAGE_SERVER . ';dbname=' . STORAGE_DB;
                 $this->handle = new PDO($db_path, STORAGE_USER, STORAGE_PASSWORD);
                 break;
+            default:
+                die(STORAGE . ' is not a recognised database system !');
         }
 
         $this->handle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -229,12 +231,49 @@ class Database {
             return FALSE;
         }
     }
+    
+    public function listUsers($username=null) {
+        $sql = 'SELECT count(*) FROM users'.( $username ? ' WHERE username=?' : '');
+        $query = $this->executeQuery($sql, ( $username ? array($username) : array()));
+        list($count) = $query->fetch();
+        return $count;
+    }
+    
+    public function getUserPassword($userID) {
+        $sql = "SELECT * FROM users WHERE id=?";
+        $query = $this->executeQuery($sql, array($userID));
+        $password = $query->fetchAll();
+        return isset($password[0]['password']) ? $password[0]['password'] : null;
+    }
+    
+    public function deleteUserConfig($userID) {
+        $sql_action = 'DELETE from users_config WHERE user_id=?';
+        $params_action = array($userID);
+        $query = $this->executeQuery($sql_action, $params_action);
+        return $query;
+    }
+    
+    public function deleteTagsEntriesAndEntries($userID) {
+        $entries = $this->retrieveAll($userID);
+        foreach($entries as $entryid) {
+            $tags = $this->retrieveTagsByEntry($entryid);
+            foreach($tags as $tag) {
+                $this->removeTagForEntry($entryid,$tags);
+            }
+            $this->deleteById($entryid,$userID);
+        }
+    }
+    
+    public function deleteUser($userID) {
+        $sql_action = 'DELETE from users WHERE id=?';
+        $params_action = array($userID);
+        $query = $this->executeQuery($sql_action, $params_action);
+    }
 
     public function updateContentAndTitle($id, $title, $body, $user_id) {
         $sql_action = 'UPDATE entries SET content = ?, title = ? WHERE id=? AND user_id=?';
         $params_action = array($body, $title, $id, $user_id);
         $query = $this->executeQuery($sql_action, $params_action);
-
         return $query;
     }
 
@@ -471,6 +510,25 @@ class Database {
         $params_action  = array($tag_id, $entry_id);
         $query          = $this->executeQuery($sql_action, $params_action);
         return $query;
+    }
+    
+    public function cleanUnusedTag($tag_id) {
+        $sql_action = "SELECT tags.* FROM tags JOIN tags_entries ON tags_entries.tag_id=tags.id WHERE tags.id=?";
+        $query = $this->executeQuery($sql_action,array($tag_id));
+        $tagstokeep = $query->fetchAll();
+        $sql_action = "SELECT tags.* FROM tags LEFT JOIN tags_entries ON tags_entries.tag_id=tags.id WHERE tags.id=?";
+        $query = $this->executeQuery($sql_action,array($tag_id));
+        $alltags = $query->fetchAll();
+        
+        foreach ($alltags as $tag) {
+            if ($tag && !in_array($tag,$tagstokeep)) {
+                $sql_action = "DELETE FROM tags WHERE id=?";
+                $params_action = array($tag[0]);
+                $this->executeQuery($sql_action, $params_action);
+                return true;
+            }
+        }
+        
     }
 
     public function retrieveTagByValue($value) {

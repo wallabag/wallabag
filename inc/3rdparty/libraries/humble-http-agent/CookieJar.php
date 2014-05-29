@@ -401,4 +401,3 @@ class CookieJar
         return false;
     }
 }
-?>

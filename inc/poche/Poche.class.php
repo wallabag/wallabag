@@ -72,7 +72,7 @@ class Poche
 
         # l10n
         $language = $this->user->getConfigValue('language');
-        putenv('LC_ALL=' . $language);
+        @putenv('LC_ALL=' . $language);
         setlocale(LC_ALL, $language);
         bindtextdomain($language, LOCALE);
         textdomain($language);
@@ -101,7 +101,7 @@ class Poche
 
     public function configFileIsAvailable() {
         if (! self::$configFileAvailable) {
-            $this->notInstalledMessage[] = 'You have to rename inc/poche/config.inc.php.new to inc/poche/config.inc.php.';
+            $this->notInstalledMessage[] = 'You have to copy (don\'t just rename!) inc/poche/config.inc.default.php to inc/poche/config.inc.php.';
 
             return false;
         }
@@ -240,6 +240,58 @@ class Poche
         # filter for reading time
         $filter = new Twig_SimpleFilter('getReadingTime', 'Tools::getReadingTime');
         $this->tpl->addFilter($filter);
+    }
+
+    public function createNewUser() {
+        if (isset($_GET['newuser'])){
+            if ($_POST['newusername'] != "" && $_POST['password4newuser'] != ""){
+                $newusername = filter_var($_POST['newusername'], FILTER_SANITIZE_STRING);
+                if (!$this->store->userExists($newusername)){
+                    if ($this->store->install($newusername, Tools::encodeString($_POST['password4newuser'] . $newusername))) {
+                        Tools::logm('The new user '.$newusername.' has been installed');
+                        $this->messages->add('s', sprintf(_('The new user %s has been installed. Do you want to <a href="?logout">logout ?</a>'),$newusername));
+                        Tools::redirect();
+                    }
+                    else {
+                        Tools::logm('error during adding new user');
+                        Tools::redirect();
+                    }
+                }
+                else {
+                    $this->messages->add('e', sprintf(_('Error : An user with the name %s already exists !'),$newusername));
+                    Tools::logm('An user with the name '.$newusername.' already exists !');
+                    Tools::redirect();
+                }
+            }
+        }
+    }
+
+    public function deleteUser(){
+        if (isset($_GET['deluser'])){
+            if ($this->store->listUsers() > 1) {
+                if (Tools::encodeString($_POST['password4deletinguser'].$this->user->getUsername()) == $this->store->getUserPassword($this->user->getId())) {
+                    $username = $this->user->getUsername();
+                    $this->store->deleteUserConfig($this->user->getId());
+                    Tools::logm('The configuration for user '. $username .' has been deleted !');
+                    $this->store->deleteTagsEntriesAndEntries($this->user->getId());
+                    Tools::logm('The entries for user '. $username .' has been deleted !');
+                    $this->store->deleteUser($this->user->getId());
+                    Tools::logm('User '. $username .' has been completely deleted !');
+                    Session::logout();
+                    Tools::logm('logout');
+                    Tools::redirect();
+                    $this->messages->add('s', sprintf(_('User %s has been successfully deleted !'),$newusername));
+                }
+                else {
+                    Tools::logm('Bad password !');
+                    $this->messages->add('e', _('Error : The password is wrong !'));
+                }
+            }
+            else {
+                Tools::logm('Only user !');
+                $this->messages->add('e', _('Error : You are the only user, you cannot delete your account !'));
+            }
+        }
     }
 
     private function install()
@@ -434,12 +486,24 @@ class Poche
             case 'toggle_fav' :
                 $this->store->favoriteById($id, $this->user->getId());
                 Tools::logm('mark as favorite link #' . $id);
-                Tools::redirect();
+                if ( Tools::isAjaxRequest() ) {
+                  echo 1;
+                  exit;
+                }
+                else {
+                  Tools::redirect();
+                }
                 break;
             case 'toggle_archive' :
                 $this->store->archiveById($id, $this->user->getId());
                 Tools::logm('archive link #' . $id);
-                Tools::redirect();
+                if ( Tools::isAjaxRequest() ) {
+                  echo 1;
+                  exit;
+                }
+                else {
+                  Tools::redirect();
+                }
                 break;
             case 'archive_all' :
                 $this->store->archiveAll($this->user->getId());
@@ -447,42 +511,55 @@ class Poche
                 Tools::redirect();
                 break;
             case 'add_tag' :
-                $tags = explode(',', $_POST['value']);
-                $entry_id = $_POST['entry_id'];
-                $entry = $this->store->retrieveOneById($entry_id, $this->user->getId());
-                if (!$entry) {
-                    $this->messages->add('e', _('Article not found!'));
-                    Tools::logm('error : article not found');
-                    Tools::redirect();
+                if (isset($_GET['search'])) {
+                    //when we want to apply a tag to a search
+                    $tags = array($_GET['search']);
+                    $allentry_ids = $this->store->search($tags[0], $this->user->getId());
+                    $entry_ids = array();
+                    foreach ($allentry_ids as $eachentry) {
+                        $entry_ids[] = $eachentry[0];
+                    }
+                } else { //add a tag to a single article
+                    $tags = explode(',', $_POST['value']);
+                    $entry_ids = array($_POST['entry_id']);
                 }
-                //get all already set tags to preven duplicates
-                $already_set_tags = array();
-                $entry_tags = $this->store->retrieveTagsByEntry($entry_id);
-                foreach ($entry_tags as $tag) {
-                  $already_set_tags[] = $tag['value'];
-                }
-                foreach($tags as $key => $tag_value) {
-                    $value = trim($tag_value);
-                    if ($value && !in_array($value, $already_set_tags)) {
-                      $tag = $this->store->retrieveTagByValue($value);
-
-                      if (is_null($tag)) {
-                          # we create the tag
-                          $tag = $this->store->createTag($value);
-                          $sequence = '';
-                          if (STORAGE == 'postgres') {
-                              $sequence = 'tags_id_seq';
+                foreach($entry_ids as $entry_id) {
+                    $entry = $this->store->retrieveOneById($entry_id, $this->user->getId());
+                    if (!$entry) {
+                        $this->messages->add('e', _('Article not found!'));
+                        Tools::logm('error : article not found');
+                        Tools::redirect();
+                    }
+                    //get all already set tags to preven duplicates
+                    $already_set_tags = array();
+                    $entry_tags = $this->store->retrieveTagsByEntry($entry_id);
+                    foreach ($entry_tags as $tag) {
+                      $already_set_tags[] = $tag['value'];
+                    }
+                    foreach($tags as $key => $tag_value) {
+                        $value = trim($tag_value);
+                        if ($value && !in_array($value, $already_set_tags)) {
+                          $tag = $this->store->retrieveTagByValue($value);
+                          if (is_null($tag)) {
+                              # we create the tag
+                              $tag = $this->store->createTag($value);
+                              $sequence = '';
+                              if (STORAGE == 'postgres') {
+                                  $sequence = 'tags_id_seq';
+                              }
+                              $tag_id = $this->store->getLastId($sequence);
                           }
-                          $tag_id = $this->store->getLastId($sequence);
-                      }
-                      else {
-                          $tag_id = $tag['id'];
-                      }
+                          else {
+                              $tag_id = $tag['id'];
+                          }
 
-                      # we assign the tag to the article
-                      $this->store->setTagToEntry($tag_id, $entry_id);
+                          # we assign the tag to the article
+                          $this->store->setTagToEntry($tag_id, $entry_id);
+                        }
                     }
                 }
+                $this->messages->add('s', _('The tag has been applied successfully'));
+                Tools::logm('The tag has been applied successfully');
                 Tools::redirect();
                 break;
             case 'remove_tag' :
@@ -494,6 +571,11 @@ class Poche
                     Tools::redirect();
                 }
                 $this->store->removeTagForEntry($id, $tag_id);
+                Tools::logm('tag entry deleted');
+                if ($this->store->cleanUnusedTag($tag_id)) {
+                    Tools::logm('tag deleted');
+                }
+                $this->messages->add('s', _('The tag has been successfully deleted'));
                 Tools::redirect();
                 break;
             default:
@@ -520,6 +602,7 @@ class Poche
                 $languages = $this->getInstalledLanguages();
                 $token = $this->user->getConfigValue('token');
                 $http_auth = (isset($_SERVER['PHP_AUTH_USER']) || isset($_SERVER['REMOTE_USER'])) ? true : false;
+                $only_user = ($this->store->listUsers() > 1) ? false : true;
                 $tpl_vars = array(
                     'themes' => $themes,
                     'languages' => $languages,
@@ -532,6 +615,7 @@ class Poche
                     'token' => $token,
                     'user_id' => $this->user->getId(),
                     'http_auth' => $http_auth,
+                    'only_user' => $only_user
                 );
                 Tools::logm('config view');
                 break;
@@ -822,13 +906,6 @@ class Poche
      */
     public function import() {
 
-      if (!defined('IMPORT_LIMIT')) {
-        define('IMPORT_LIMIT', 5);
-      }
-      if (!defined('IMPORT_DELAY')) {
-        define('IMPORT_DELAY', 5);
-      }
-
       if ( isset($_FILES['file']) ) {
         Tools::logm('Import stated: parsing file');
 
@@ -1068,8 +1145,124 @@ class Poche
       $config = HTMLPurifier_Config::createDefault();
       $config->set('Cache.SerializerPath', CACHE);
       $config->set('HTML.SafeIframe', true);
-      $config->set('URI.SafeIframeRegexp', '%^(https?:)?//(www\.youtube(?:-nocookie)?\.com/embed/|player\.vimeo\.com/video/)%'); //allow YouTube and Vimeo$purifier = new HTMLPurifier($config);
+      //allow YouTube, Vimeo and dailymotion videos
+      $config->set('URI.SafeIframeRegexp', '%^(https?:)?//(www\.youtube(?:-nocookie)?\.com/embed/|player\.vimeo\.com/video/|www\.dailymotion\.com/embed/video/)%');
 
       return new HTMLPurifier($config);
+    }
+    
+    /**
+     * handle epub
+     */
+    public function createEpub() {
+       
+        switch ($_GET['method']) {
+            case 'id':
+                $entryID = filter_var($_GET['id'],FILTER_SANITIZE_NUMBER_INT);
+                $entry = $this->store->retrieveOneById($entryID, $this->user->getId());
+                $entries = array($entry);
+                $bookTitle = $entry['title'];
+                $bookFileName = substr($bookTitle, 0, 200);
+                break;
+            case 'all':
+                $entries = $this->store->retrieveAll($this->user->getId());
+                $bookTitle = sprintf(_('All my articles on '), date(_('d.m.y'))); #translatable because each country has it's own date format system
+                $bookFileName = _('Allarticles') . date(_('dmY'));
+                break;
+            case 'tag':
+                $tag = filter_var($_GET['tag'],FILTER_SANITIZE_STRING);
+                $tags_id = $this->store->retrieveAllTags($this->user->getId(),$tag);
+                $tag_id = $tags_id[0]["id"]; // we take the first result, which is supposed to match perfectly. There must be a workaround.
+                $entries = $this->store->retrieveEntriesByTag($tag_id,$this->user->getId());
+                $bookTitle = sprintf(_('Articles tagged %s'),$tag);
+                $bookFileName = substr(sprintf(_('Tag %s'),$tag), 0, 200);
+                break;
+            case 'category':
+                $category = filter_var($_GET['category'],FILTER_SANITIZE_STRING);
+                $entries = $this->store->getEntriesByView($category,$this->user->getId());
+                $bookTitle = sprintf(_('All articles in category %s'), $category);
+                $bookFileName = substr(sprintf(_('Category %s'),$category), 0, 200);
+                break;
+            case 'search':
+                $search = filter_var($_GET['search'],FILTER_SANITIZE_STRING);
+                $entries = $this->store->search($search,$this->user->getId());
+                $bookTitle = sprintf(_('All articles for search %s'), $search);
+                $bookFileName = substr(sprintf(_('Search %s'), $search), 0, 200);
+                break;
+            case 'default':
+                die(_('Uh, there is a problem while generating epub.'));
+            
+        }
+
+        $content_start =
+        "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+        . "<html xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:epub=\"http://www.idpf.org/2007/ops\">\n"
+        . "<head>"
+        . "<meta http-equiv=\"Default-Style\" content=\"text/html; charset=utf-8\" />\n"
+        . "<title>wallabag articles book</title>\n"
+        . "</head>\n"
+        . "<body>\n";
+
+        $bookEnd = "</body>\n</html>\n";
+        
+        $log = new Logger("wallabag", TRUE);
+        $fileDir = CACHE;
+
+        
+        $book = new EPub(EPub::BOOK_VERSION_EPUB3);
+        $log->logLine("new EPub()");
+        $log->logLine("EPub class version: " . EPub::VERSION);
+        $log->logLine("EPub Req. Zip version: " . EPub::REQ_ZIP_VERSION);
+        $log->logLine("Zip version: " . Zip::VERSION);
+        $log->logLine("getCurrentServerURL: " . $book->getCurrentServerURL());
+        $log->logLine("getCurrentPageURL..: " . $book->getCurrentPageURL());
+        
+        $book->setTitle(_('wallabag\'s articles'));
+        $book->setIdentifier("http://$_SERVER[HTTP_HOST]", EPub::IDENTIFIER_URI); // Could also be the ISBN number, prefered for published books, or a UUID.
+        //$book->setLanguage("en"); // Not needed, but included for the example, Language is mandatory, but EPub defaults to "en". Use RFC3066 Language codes, such as "en", "da", "fr" etc.
+        $book->setDescription(_("Some articles saved on my wallabag"));
+        $book->setAuthor("wallabag","wallabag");
+        $book->setPublisher("wallabag","wallabag"); // I hope this is a non existant address :)
+        $book->setDate(time()); // Strictly not needed as the book date defaults to time().
+        //$book->setRights("Copyright and licence information specific for the book."); // As this is generated, this _could_ contain the name or licence information of the user who purchased the book, if needed. If this is used that way, the identifier must also be made unique for the book.
+        $book->setSourceURL("http://$_SERVER[HTTP_HOST]");
+        
+        $book->addDublinCoreMetadata(DublinCore::CONTRIBUTOR, "PHP");
+        $book->addDublinCoreMetadata(DublinCore::CONTRIBUTOR, "wallabag");
+        
+        $cssData = "body {\n margin-left: .5em;\n margin-right: .5em;\n text-align: justify;\n}\n\np {\n font-family: serif;\n font-size: 10pt;\n text-align: justify;\n text-indent: 1em;\n margin-top: 0px;\n margin-bottom: 1ex;\n}\n\nh1, h2 {\n font-family: sans-serif;\n font-style: italic;\n text-align: center;\n background-color: #6b879c;\n color: white;\n width: 100%;\n}\n\nh1 {\n margin-bottom: 2px;\n}\n\nh2 {\n margin-top: -2px;\n margin-bottom: 2px;\n}\n";
+        
+        $log->logLine("Add Cover");
+        
+        $fullTitle = "<h1> " . $bookTitle . "</h1>\n";
+        
+        $book->setCoverImage("Cover.png", file_get_contents("themes/baggy/img/apple-touch-icon-152.png"), "image/png", $fullTitle);
+        
+        $cover = $content_start . '<div style="text-align:center;"><p>' . _('Produced by wallabag with PHPePub') . '</p><p>'. _('Please open <a href="https://github.com/wallabag/wallabag/issues" >an issue</a> if you have trouble with the display of this E-Book on your device.') . '</p></div>' . $bookEnd;
+        
+        //$book->addChapter("Table of Contents", "TOC.xhtml", NULL, false, EPub::EXTERNAL_REF_IGNORE);
+        $book->addChapter("Notices", "Cover2.html", $cover);
+        
+        $book->buildTOC();
+        
+        foreach ($entries as $entry) { //set tags as subjects
+            $tags = $this->store->retrieveTagsByEntry($entry['id']);
+            foreach ($tags as $tag) {
+                $book->setSubject($tag['value']);
+            }
+            
+            $log->logLine("Set up parameters");
+            
+            $chapter = $content_start . $entry['content'] . $bookEnd;
+            $book->addChapter($entry['title'], htmlspecialchars($entry['title']) . ".html", $chapter, true, EPub::EXTERNAL_REF_ADD);
+            $log->logLine("Added chapter " . $entry['title']);
+        }
+
+        if (DEBUG_POCHE) { 
+            $epuplog = $book->getLog();
+            $book->addChapter("Log", "Log.html", $content_start . $log->getLog() . "\n</pre>" . $bookEnd); // log generation
+        }
+        $book->finalize();
+        $zipData = $book->sendBook($bookFileName);
     }
 }

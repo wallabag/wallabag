@@ -19,7 +19,7 @@ if (!isset($options)) $options = new stdClass();
 // Enable service
 // ----------------------
 // Set this to false if you want to disable the service.
-// If set to false, no feed is produced and users will 
+// If set to false, no feed is produced and users will
 // be told that the service is disabled.
 $options->enabled = true;
 
@@ -43,9 +43,63 @@ $options->default_entries = 5;
 // ----------------------
 // The maximum number of feed items to process when no access key is supplied.
 // This limits the user-supplied &max=x value. For example, if the user
-// asks for 20 items to be processed (&max=20), if max_entries is set to 
+// asks for 20 items to be processed (&max=20), if max_entries is set to
 // 10, only 10 will be processed.
 $options->max_entries = 10;
+
+// Full content
+// ----------------------
+// By default Full-Text RSS includes the extracted content in the output.
+// You can exclude this from the output by passing '&content=0' in the querystring.
+//
+// Possible values...
+// Always include: true
+// Never include: false
+// Include unless user overrides (&content=0): 'user' (default)
+//
+// Note: currently this does not disable full content extraction. It simply omits it
+// from the output.
+$options->content = 'user';
+
+// Excerpts
+// ----------------------
+// By default Full-Text RSS does not include excerpts in the output.
+// You can enable this by passing '&summary=1' in the querystring.
+// This will include a plain text excerpt from the extracted content.
+//
+// Possible values...
+// Always include: true (recommended for new users)
+// Never include: false
+// Don't include unless user overrides (&summary=1): 'user' (default)
+//
+// Important: if both content and excerpts are requested, the excerpt will be
+// placed in the description element and the full content inside content:encoded.
+// If excerpts are not requested, the full content will go inside the description element.
+//
+// Why are we not returning both excerpts and content by default?
+// Mainly for backward compatibility.
+// Excerpts should appear in the feed item's description element. Previous versions
+// of Full-Text RSS did not return excerpts, so the description element was always
+// used for the full content (as recommended by the RSS advisory). When returning both,
+// we need somewhere else to place the content (content:encoded).
+// Having both enabled should not create any problems for news readers, but it may create
+// problems for developers upgrading from one of our earlier versions who may now find
+// their applications are returning excerpts instead of the full content they were
+// expecting. To avoid such surprises for users who are upgrading Full-Text RSS,
+// excerpts must be explicitly requested in the querystring by default.
+//
+// Why not use a different element name for excerpts?
+// According to the RSS advisory:
+// "Publishers who employ summaries should store the summary in description and
+// the full content in content:encoded, ordering description first within the item.
+// On items with no summary, the full content should be stored in description."
+// See: http://www.rssboard.org/rss-profile#namespace-elements-content-encoded
+//
+// For more consistent element naming, we recommend new users set this option to true.
+// The full content can still be excluded via the querystring, but the element names
+// will not change: when $options->summary = true, the description element will always
+// be reserved for the excerpt and content:encoded always for full content.
+$options->summary = 'user';
 
 // Rewrite relative URLs
 // ----------------------
@@ -67,7 +121,7 @@ $options->exclude_items_on_fail = 'user';
 // Enable multi-page support
 // -------------------------
 // If enabled, we will try to follow next page links on multi-page articles.
-// Currently this only happens for sites where next_page_link has been defined 
+// Currently this only happens for sites where next_page_link has been defined
 // in a site config file.
 $options->multipage = true;
 
@@ -125,10 +179,10 @@ $options->detect_language = 1;
 
 // Registration key
 // ---------------
-// The registration key is optional. It is not required to use Full-Text RSS, 
-// and does not affect the normal operation of Full-Text RSS. It is currently 
-// only used on admin pages which help you update site patterns with the 
-// latest version offered by FiveFilters.org. For these admin-related 
+// The registration key is optional. It is not required to use Full-Text RSS,
+// and does not affect the normal operation of Full-Text RSS. It is currently
+// only used on admin pages which help you update site patterns with the
+// latest version offered by FiveFilters.org. For these admin-related
 // tasks to complete, we will require a valid registration key.
 // If you would like one, you can purchase the latest version of Full-Text RSS
 // at http://fivefilters.org/content-only/
@@ -144,12 +198,12 @@ $options->registration_key = '';
 // ----------------------
 // Certain pages/actions, e.g. updating site patterns with our online tool, will require admin credentials.
 // To use these pages, enter a password here and you'll be prompted for it when you try to access those pages.
-// If no password or username is set, pages requiring admin privelages will be inaccessible. 
+// If no password or username is set, pages requiring admin privelages will be inaccessible.
 // The default username is 'admin'.
 // If overriding with an environment variable, separate username and password with a colon, e.g.:
 // ftr_admin_credentials: admin:my-secret-password
 // Example: $options->admin_credentials = array('username'=>'admin', 'password'=>'my-secret-password');
-$options->admin_credentials = array('username'=>'admin', 'password'=>'admin');
+$options->admin_credentials = array('username'=>'admin', 'password'=>'');
 
 // URLs to allow
 // ----------------------
@@ -178,12 +232,12 @@ $options->key_required = false;
 // ----------------------
 // By default, when processing feeds, we assume item titles in the feed
 // have not been truncated. So after processing web pages, the extracted titles
-// are not used in the generated feed. If you prefer to have extracted titles in 
-// the feed you can either set this to false, in which case we will always favour 
-// extracted titles. Alternatively, if set to 'user' (default) we'll use the 
+// are not used in the generated feed. If you prefer to have extracted titles in
+// the feed you can either set this to false, in which case we will always favour
+// extracted titles. Alternatively, if set to 'user' (default) we'll use the
 // extracted title if you pass '&use_extracted_title' in the querystring.
 // Possible values:
-// * Favour feed titles: true 
+// * Favour feed titles: true
 // * Favour extracted titles: false
 // * Favour feed titles with user override: 'user' (default)
 // Note: this has no effect when the input URL is to a web page - in these cases
@@ -192,17 +246,17 @@ $options->favour_feed_titles = 'user';
 
 // Access keys (password protected access)
 // ------------------------------------
-// NOTE: You do not need an API key from fivefilters.org to run your own 
+// NOTE: You do not need an API key from fivefilters.org to run your own
 // copy of the code. This is here if you'd like to restrict access to
 // _your_ copy.
 // Keys let you group users - those with a key and those without - and
 // restrict access to the service to those without a key.
 // If you want everyone to access the service in the same way, you can
 // leave the array below empty and ignore the access key options further down.
-// The options further down let you control how the service should behave 
+// The options further down let you control how the service should behave
 // in each mode.
-// Note: Explicitly including the index number (1 and 2 in the examples below) 
-// is highly recommended (when generating feeds, we encode the key and 
+// Note: Explicitly including the index number (1 and 2 in the examples below)
+// is highly recommended (when generating feeds, we encode the key and
 // refer to it by index number and hash).
 $options->api_keys = array();
 // Example:
@@ -232,13 +286,13 @@ $options->max_entries_with_key = 10;
 // filter the resulting HTML for XSS attacks, making it redundant for
 // Full-Text RSS do the same. Similarly with frameworks/CMS which display
 // feed content - the content should be treated like any other user-submitted content.
-// 
+//
 // If you are writing an application yourself which is processing feeds generated by
 // Full-Text RSS, you can either filter the HTML yourself to remove potential XSS attacks
 // or enable this option. This might be useful if you are processing our generated
 // feeds with JavaScript on the client side - although there's client side xss
 // filtering available too, e.g. https://code.google.com/p/google-caja/wiki/JsHtmlSanitizer
-// 
+//
 // If enabled, we'll pass retrieved HTML content through htmLawed with
 // safe flag on and style attributes denied, see
 // http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed/htmLawed_README.htm#s3.6
@@ -253,8 +307,8 @@ $options->xss_filter = 'user';
 // Allowed parsers
 // ----------------------
 // Full-Text RSS attempts to use PHP's libxml extension to process HTML.
-// While fast, on some sites it may not always produce good results. 
-// For these sites, you can specify an alternative HTML parser: 
+// While fast, on some sites it may not always produce good results.
+// For these sites, you can specify an alternative HTML parser:
 // parser: html5lib
 // The html5lib parser is bundled with Full-Text RSS.
 // see http://code.google.com/p/html5lib/
@@ -273,7 +327,7 @@ $options->cors = false;
 
 // Use APC user cache?
 // ----------------------
-// If enabled we will store site config files (when requested 
+// If enabled we will store site config files (when requested
 // for the first time) in APC's user cache. Keys prefixed with 'sc.'
 // This improves performance by reducing disk access.
 // Note: this has no effect if APC is unavailable on your server.
@@ -346,7 +400,7 @@ $options->rewrite_url = array(
 // Valid actions:
 // * 'exclude' - exclude this item from the result
 // * 'link' - create HTML link to the item
-$options->content_type_exc = array( 
+$options->content_type_exc = array(
 							   'application/pdf' => array('action'=>'link', 'name'=>'PDF'),
 							   'image' => array('action'=>'link', 'name'=>'Image'),
 							   'audio' => array('action'=>'link', 'name'=>'Audio'),
@@ -375,13 +429,13 @@ $options->cache_cleanup = 100;
 /// DO NOT CHANGE ANYTHING BELOW THIS ///////////
 /////////////////////////////////////////////////
 
-if (!defined('_FF_FTR_VERSION')) define('_FF_FTR_VERSION', '3.1');
+if (!defined('_FF_FTR_VERSION')) define('_FF_FTR_VERSION', '3.2');
 
 if (basename(__FILE__) == 'config.php') {
 	if (file_exists(dirname(__FILE__).'/custom_config.php')) {
 		require_once dirname(__FILE__).'/custom_config.php';
 	}
-	
+
 	// check for environment variables - often used on cloud platforms
 	// environment variables should be prefixed with 'ftr_', e.g.
 	// ftr_max_entries: 1
