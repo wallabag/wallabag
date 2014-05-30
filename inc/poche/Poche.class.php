@@ -1083,7 +1083,7 @@ class Poche
         $config = $this->store->getConfigUser($user_id);
 
         if ($config == null) {
-            die(_( sprintf('User with this id (%d) does not exist.', $user_id) ));
+            die(sprintf(_('User with this id (%d) does not exist.'), $user_id));
         }
 
         if (!in_array($type, $allowed_types) || $token != $config['token']) {
