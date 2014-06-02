@@ -12,6 +12,11 @@ define ('POCHE', '1.7.0');
 require 'check_setup.php';
 require_once 'inc/poche/global.inc.php';
 
+# Set error reporting level
+if (defined('ERROR_REPORTING')) {
+	error_reporting(ERROR_REPORTING);
+}
+
 # Start session
 Session::$sessionName = 'poche';
 Session::init();

@@ -28,7 +28,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // Request this file passing it a web page or feed URL in the querystring: makefulltextfeed.php?url=example.org/article
 // For more request parameters, see http://help.fivefilters.org/customer/portal/articles/226660-usage
 
-error_reporting(E_ALL ^ E_NOTICE);
+//error_reporting(E_ALL ^ E_NOTICE);
 ini_set("display_errors", 1);
 @set_time_limit(120);
 

@@ -18,8 +18,6 @@ class Tools
             die(_('Oops, it seems you don\'t have PHP 5.'));
         }
 
-        error_reporting(E_ALL);
-
         function stripslashesDeep($value) {
             return is_array($value)
                 ? array_map('stripslashesDeep', $value)
@@ -64,7 +62,7 @@ class Tools
         if (strpos($host, ':') !== false) {
             $serverport = '';
         }
-        
+
         return 'http' . ($https ? 's' : '') . '://'
             . $host . $serverport . $scriptname;
     }
