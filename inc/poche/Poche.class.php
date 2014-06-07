@@ -1208,7 +1208,7 @@ class Poche
         $fileDir = CACHE;
 
         
-        $book = new EPub(EPub::BOOK_VERSION_EPUB3);
+        $book = new EPub(EPub::BOOK_VERSION_EPUB3, DEBUG_POCHE);
         $log->logLine("new EPub()");
         $log->logLine("EPub class version: " . EPub::VERSION);
         $log->logLine("EPub Req. Zip version: " . EPub::REQ_ZIP_VERSION);
