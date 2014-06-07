@@ -8,7 +8,7 @@
  * @author      Nicholas Pisarro
  * @copyright   2006
  * @license     BSD
- * @version     CVS: $Id: Parser.php,v 1.5 2006/03/11 05:45:05 taak Exp $
+ * @version     CVS: $Id: Parser.php 322327 2012-01-15 17:55:59Z cweiske $
  * @link        http://pear.php.net/package/Text_LanguageDetect/
  * @link        http://langdetect.blogspot.com/
  */
@@ -28,7 +28,7 @@
  * @author      Nicholas Pisarro
  * @copyright   2006
  * @license     BSD
- * @version     release: 0.2.3
+ * @version     release: 0.3.0
  */
 class Text_LanguageDetect_Parser extends Text_LanguageDetect
 {
@@ -102,21 +102,17 @@ class Text_LanguageDetect_Parser extends Text_LanguageDetect
      * @access  private
      * @param   string  $string     string to be parsed
      */
-    function Text_LanguageDetect_Parser($string, $db=null, $unicode_db=null) {
-		if (isset($db)) $this->_db_filename = $db;
-		if (isset($unicode_db)) $this->_unicode_db_filename = $unicode_db;	
+    function Text_LanguageDetect_Parser($string) {
         $this->_string = $string;
     }
 
     /**
      * Returns true if a string is suitable for parsing
      *
-     * @static
-     * @access  public
      * @param   string  $str    input string to test
      * @return  bool            true if acceptable, false if not
      */
-    function validateString($str) {
+    public static function validateString($str) {
         if (!empty($str) && strlen($str) > 3 && preg_match('/\S/', $str)) {
             return true;
         } else {
@@ -222,8 +218,7 @@ class Text_LanguageDetect_Parser extends Text_LanguageDetect
 
         // unicode startup
         if ($this->_compile_unicode) {
-            $blocks =& $this->_read_unicode_block_db();
-
+            $blocks = $this->_read_unicode_block_db();
             $block_count = count($blocks);
 
             $skipped_count = 0;
@@ -350,5 +345,3 @@ class Text_LanguageDetect_Parser extends Text_LanguageDetect
 }
 
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-
-?>

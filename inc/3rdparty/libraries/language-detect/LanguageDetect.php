@@ -6,23 +6,24 @@
  * Attempts to detect the language of a sample of text by correlating ranked
  * 3-gram frequencies to a table of 3-gram frequencies of known languages.
  *
- * Implements a version of a technique originally proposed by Cavnar & Trenkle 
- * (1994): "N-Gram-Based Text Categorization" 
+ * Implements a version of a technique originally proposed by Cavnar & Trenkle
+ * (1994): "N-Gram-Based Text Categorization"
  *
- * PHP versions 4 and 5
+ * PHP version 5
  *
- * @category   Text
- * @package    Text_LanguageDetect
- * @author     Nicholas Pisarro <infinityminusnine+pear@gmail.com>
- * @copyright  2005-2006 Nicholas Pisarro
- * @license    http://www.debian.org/misc/bsd.license BSD
- * @version    CVS: $Id: LanguageDetect.php,v 1.20 2008/07/01 02:09:15 taak Exp $
- * @link       http://pear.php.net/package/Text_LanguageDetect/
- * @link       http://langdetect.blogspot.com/
+ * @category  Text
+ * @package   Text_LanguageDetect
+ * @author    Nicholas Pisarro <infinityminusnine+pear@gmail.com>
+ * @copyright 2005-2006 Nicholas Pisarro
+ * @license   http://www.debian.org/misc/bsd.license BSD
+ * @version   SVN: $Id: LanguageDetect.php 322353 2012-01-16 08:41:43Z cweiske $
+ * @link      http://pear.php.net/package/Text_LanguageDetect/
+ * @link      http://langdetect.blogspot.com/
  */
 
-//require_once 'PEAR.php';
-require_once 'Parser.php';
+require_once 'LanguageDetect/Exception.php';
+require_once 'LanguageDetect/Parser.php';
+require_once 'LanguageDetect/ISO639.php';
 
 /**
  * Language detection class
@@ -41,9 +42,10 @@ require_once 'Parser.php';
  *
  * echo "Supported languages:\n";
  *
- * $langs = $l->getLanguages();
- * if (PEAR::isError($langs)) {
- *     die($langs->getMessage());
+ * try {
+ *     $langs = $l->getLanguages();
+ * } catch (Text_LanguageDetect_Exception $e) {
+ *     die($e->getMessage());
  * }
  *
  * sort($langs);
@@ -54,38 +56,38 @@ require_once 'Parser.php';
  * }
  * </code>
  *
- * @category   Text
- * @package    Text_LanguageDetect
- * @author     Nicholas Pisarro <infinityminusnine+pear@gmail.com>
- * @copyright  2005 Nicholas Pisarro
- * @license    http://www.debian.org/misc/bsd.license BSD
- * @version    Release: @package_version@
- * @todo       allow users to generate their own language models
+ * @category  Text
+ * @package   Text_LanguageDetect
+ * @author    Nicholas Pisarro <infinityminusnine+pear@gmail.com>
+ * @copyright 2005 Nicholas Pisarro
+ * @license   http://www.debian.org/misc/bsd.license BSD
+ * @version   Release: @package_version@
+ * @link      http://pear.php.net/package/Text_LanguageDetect/
+ * @todo      allow users to generate their own language models
  */
- 
 class Text_LanguageDetect
 {
-    /** 
+    /**
      * The filename that stores the trigram data for the detector
      *
-     * If this value starts with a slash (/) or a dot (.) the value of 
+     * If this value starts with a slash (/) or a dot (.) the value of
      * $this->_data_dir will be ignored
-     * 
+     *
      * @var      string
      * @access   private
      */
-    var $_db_filename = './lang.dat';
+    var $_db_filename = 'lang.dat';
 
     /**
      * The filename that stores the unicode block definitions
      *
-     * If this value starts with a slash (/) or a dot (.) the value of 
+     * If this value starts with a slash (/) or a dot (.) the value of
      * $this->_data_dir will be ignored
-     * 
+     *
      * @var string
      * @access private
      */
-    var $_unicode_db_filename = './unicode_blocks.dat';
+    var $_unicode_db_filename = 'unicode_blocks.dat';
 
     /**
      * The data directory
@@ -99,11 +101,8 @@ class Text_LanguageDetect
 
     /**
      * The trigram data for comparison
-     * 
-     * Will be loaded on start from $this->_db_filename
      *
-     * May be set to a PEAR_Error object if there is an error during its 
-     * initialization
+     * Will be loaded on start from $this->_db_filename
      *
      * @var      array
      * @access   private
@@ -120,7 +119,7 @@ class Text_LanguageDetect
 
     /**
      * The size of the trigram data arrays
-     * 
+     *
      * @var      int
      * @access   private
      */
@@ -140,7 +139,7 @@ class Text_LanguageDetect
 
     /**
      * Whether or not to simulate perl's Language::Guess exactly
-     * 
+     *
      * @access  private
      * @var     bool
      * @see     setPerlCompatible()
@@ -165,18 +164,24 @@ class Text_LanguageDetect
     var $_clusters;
 
     /**
+     * Which type of "language names" are accepted and returned:
+     *
+     * 0 - language name ("english")
+     * 2 - 2-letter ISO 639-1 code ("en")
+     * 3 - 3-letter ISO 639-2 code ("eng")
+     */
+    var $_name_mode = 0;
+
+    /**
      * Constructor
      *
      * Will attempt to load the language database. If it fails, you will get
-     * a PEAR_Error object returned when you try to use detect()
-     *
+     * an exception.
      */
-    function Text_LanguageDetect($db=null, $unicode_db=null)
+    function __construct()
     {
-		if (isset($db)) $this->_db_filename = $db;
-		if (isset($unicode_db)) $this->_unicode_db_filename = $unicode_db;
-		
         $data = $this->_readdb($this->_db_filename);
+        $this->_checkTrigram($data['trigram']);
         $this->_lang_db = $data['trigram'];
 
         if (isset($data['trigram-unicodemap'])) {
@@ -186,29 +191,32 @@ class Text_LanguageDetect
         // Not yet implemented:
         if (isset($data['trigram-clusters'])) {
             $this->_clusters = $data['trigram-clusters'];
-        }		
+        }
     }
 
     /**
      * Returns the path to the location of the database
      *
-     * @access    private
-     * @return    string    expected path to the language model database
+     * @param string $fname File name to load
+     *
+     * @return string expected path to the language model database
+     * @access private
      */
     function _get_data_loc($fname)
     {
-        return $fname;
+        return dirname(__FILE__).'/'.$fname;
     }
 
     /**
      * Loads the language trigram database from filename
      *
      * Trigram datbase should be a serialize()'d array
-     * 
-     * @access    private
-     * @param     string      $fname   the filename where the data is stored
-     * @return    array                the language model data
-     * @throws    PEAR_Error
+     *
+     * @param string $fname the filename where the data is stored
+     *
+     * @return array the language model data
+     * @throws Text_LanguageDetect_Exception
+     * @access private
      */
     function _readdb($fname)
     {
@@ -217,79 +225,74 @@ class Text_LanguageDetect
 
         // input check
         if (!file_exists($fname)) {
-            throw new Exception('Language database does not exist.');
+            throw new Text_LanguageDetect_Exception(
+                'Language database does not exist: ' . $fname,
+                Text_LanguageDetect_Exception::DB_NOT_FOUND
+            );
         } elseif (!is_readable($fname)) {
-            throw new Exception('Language database is not readable.');
+            throw new Text_LanguageDetect_Exception(
+                'Language database is not readable: ' . $fname,
+                Text_LanguageDetect_Exception::DB_NOT_READABLE
+            );
         }
 
-        if (function_exists('file_get_contents')) {
-            return unserialize(file_get_contents($fname));
-        } else {
-            // if you don't have file_get_contents(), 
-            // then this is the next fastest way
-            ob_start();
-            readfile($fname);
-            $contents = ob_get_contents();
-            ob_end_clean();
-            return unserialize($contents);
-        }
+        return unserialize(file_get_contents($fname));
     }
 
 
     /**
      * Checks if this object is ready to detect languages
-     * 
-     * @access   private
-     * @param    mixed   &$err  error object to be returned by reference, if any
-     * @return   bool           true if no errors
+     *
+     * @param array $trigram Trigram data from database
+     *
+     * @return void
+     * @access private
      */
-    function _setup_ok(&$err)
+    function _checkTrigram($trigram)
     {
-        if (!is_array($this->_lang_db)) {
+        if (!is_array($trigram)) {
             if (ini_get('magic_quotes_runtime')) {
-                throw new Exception('Error loading database. Try turning magic_quotes_runtime off.');
-            } else {
-                throw new Exception('Language database is not an array.');
+                throw new Text_LanguageDetect_Exception(
+                    'Error loading database. Try turning magic_quotes_runtime off.',
+                    Text_LanguageDetect_Exception::MAGIC_QUOTES
+                );
             }
-            return false;
-
-        } elseif (empty($this->_lang_db)) {
-            throw new Exception('Language database has no elements.');
-            return false;
-
-        } else {
-            return true;
+            throw new Text_LanguageDetect_Exception(
+                'Language database is not an array.',
+                Text_LanguageDetect_Exception::DB_NOT_ARRAY
+            );
+        } elseif (empty($trigram)) {
+            throw new Text_LanguageDetect_Exception(
+                'Language database has no elements.',
+                Text_LanguageDetect_Exception::DB_EMPTY
+            );
         }
     }
 
     /**
      * Omits languages
      *
-     * Pass this function the name of or an array of names of 
+     * Pass this function the name of or an array of names of
      * languages that you don't want considered
      *
-     * If you're only expecting a limited set of languages, this can greatly 
+     * If you're only expecting a limited set of languages, this can greatly
      * speed up processing
      *
-     * @access   public
-     * @param    mixed  $omit_list      language name or array of names to omit
-     * @param    bool   $include_only   if true will include (rather than 
-     *                                  exclude) only those in the list
-     * @return   int                    number of languages successfully deleted
-     * @throws   PEAR_Error
+     * @param mixed $omit_list    language name or array of names to omit
+     * @param bool  $include_only if true will include (rather than
+     *                            exclude) only those in the list
+     *
+     * @return int number of languages successfully deleted
+     * @throws Text_LanguageDetect_Exception
      */
-    function omitLanguages($omit_list, $include_only = false)
+    public function omitLanguages($omit_list, $include_only = false)
     {
-
-        // setup check
-        if (!$this->_setup_ok($err)) {
-            return $err;
-        }
-
         $deleted = 0;
 
-        // deleting the given languages
+        $omit_list = $this->_convertFromNameMode($omit_list);
+
         if (!$include_only) {
+            // deleting the given languages
             if (!is_array($omit_list)) {
                 $omit_list = strtolower($omit_list); // case desensitize
                 if (isset($this->_lang_db[$omit_list])) {
@@ -301,12 +304,12 @@ class Text_LanguageDetect
                     if (isset($this->_lang_db[$omit_lang])) {
                         unset($this->_lang_db[$omit_lang]);
                         $deleted++;
-                    } 
+                    }
                 }
             }
 
-        // deleting all except the given languages
         } else {
+            // deleting all except the given languages
             if (!is_array($omit_list)) {
                 $omit_list = array($omit_list);
             }
@@ -327,7 +330,7 @@ class Text_LanguageDetect
         // reset the cluster cache if the number of languages changes
         // this will then have to be recalculated
         if (isset($this->_clusters) && $deleted > 0) {
-            unset($this->_clusters);
+            $this->_clusters = null;
         }
 
         return $deleted;
@@ -339,49 +342,40 @@ class Text_LanguageDetect
      *
      * @access public
      * @return int            the number of languages
-     * @throws PEAR_Error
+     * @throws   Text_LanguageDetect_Exception
      */
     function getLanguageCount()
     {
-        if (!$this->_setup_ok($err)) {
-            return $err;
-        } else {
-            return count($this->_lang_db);
-        }
+        return count($this->_lang_db);
     }
 
     /**
-     * Returns true if a given language exists
+     * Checks if the language with the given name exists in the database
      *
-     * If passed an array of names, will return true only if all exist
+     * @param mixed $lang Language name or array of language names
      *
-     * @access    public
-     * @param     mixed       $lang    language name or array of language names
-     * @return    bool                 true if language model exists
-     * @throws    PEAR_Error
+     * @return bool true if language model exists
      */
-    function languageExists($lang)
+    public function languageExists($lang)
     {
-        if (!$this->_setup_ok($err)) {
-            return $err;
-        } else {
-            // string
-            if (is_string($lang)) {
-                return isset($this->_lang_db[strtolower($lang)]);
+        $lang = $this->_convertFromNameMode($lang);
 
-            // array
-            } elseif (is_array($lang)) {
-                foreach ($lang as $test_lang) {
-                    if (!isset($this->_lang_db[strtolower($test_lang)])) {
-                        return false;
-                    } 
+        if (is_string($lang)) {
+            return isset($this->_lang_db[strtolower($lang)]);
+
+        } elseif (is_array($lang)) {
+            foreach ($lang as $test_lang) {
+                if (!isset($this->_lang_db[strtolower($test_lang)])) {
+                    return false;
                 }
-                return true;
-
-            // other (error)
-            } else {
-                throw new Exception('Unknown type passed to languageExists()');
             }
+            return true;
+
+        } else {
+            throw new Text_LanguageDetect_Exception(
+                'Unsupported parameter type passed to languageExists()',
+                Text_LanguageDetect_Exception::PARAM_TYPE
+            );
         }
     }
 
@@ -389,25 +383,24 @@ class Text_LanguageDetect
      * Returns the list of detectable languages
      *
      * @access public
-     * @return array        the names of the languages known to this object
-     * @throws PEAR_Error
+     * @return array        the names of the languages known to this object<<<<<<<
+     * @throws   Text_LanguageDetect_Exception
      */
     function getLanguages()
     {
-        if (!$this->_setup_ok($err)) {
-            return $err;
-        } else {
-            return array_keys($this->_lang_db);
-        }
+        return $this->_convertToNameMode(
+            array_keys($this->_lang_db)
+        );
     }
 
     /**
      * Make this object behave like Language::Guess
-     * 
-     * @access    public
-     * @param     bool     $setting     false to turn off perl compatibility
+     *
+     * @param bool $setting false to turn off perl compatibility
+     *
+     * @return void
      */
-    function setPerlCompatible($setting = true)
+    public function setPerlCompatible($setting = true)
     {
         if (is_bool($setting)) { // input check
             $this->_perl_compatible = $setting;
@@ -422,6 +415,21 @@ class Text_LanguageDetect
     }
 
     /**
+     * Sets the way how language names are accepted and returned.
+     *
+     * @param integer $name_mode One of the following modes:
+     *                           0 - language name ("english")
+     *                           2 - 2-letter ISO 639-1 code ("en")
+     *                           3 - 3-letter ISO 639-2 code ("eng")
+     *
+     * @return void
+     */
+    function setNameMode($name_mode)
+    {
+        $this->_name_mode = $name_mode;
+    }
+
+    /**
      * Whether to use unicode block ranges in detection
      *
      * Should speed up most detections if turned on (detault is on). In some
@@ -429,10 +437,11 @@ class Text_LanguageDetect
      * in languages that use latin scripts. In other cases it should speed up
      * detection noticeably.
      *
-     * @access  public
-     * @param   bool    $setting    false to turn off
+     * @param bool $setting false to turn off
+     *
+     * @return void
      */
-    function useUnicodeBlocks($setting = true)
+    public function useUnicodeBlocks($setting = true)
     {
         if (is_bool($setting)) {
             $this->_use_unicode_narrowing = $setting;
@@ -442,15 +451,15 @@ class Text_LanguageDetect
     /**
      * Converts a piece of text into trigrams
      *
-     * Superceded by the Text_LanguageDetect_Parser class 
+     * @param string $text text to convert
      *
-     * @access    private
-     * @param     string    $text    text to convert
-     * @return    array              array of trigram frequencies
+     * @return     array array of trigram frequencies
+     * @access     private
+     * @deprecated Superceded by the Text_LanguageDetect_Parser class
      */
     function _trigram($text)
     {
-        $s = new Text_LanguageDetect_Parser($text, $this->_db_filename, $this->_unicode_db_filename);
+        $s = new Text_LanguageDetect_Parser($text);
         $s->prepareTrigram();
         $s->prepareUnicode(false);
         $s->setPadStart(!$this->_perl_compatible);
@@ -463,11 +472,12 @@ class Text_LanguageDetect
      *
      * Thresholds (cuts off) the list at $this->_threshold
      *
-     * @access    protected
-     * @param     array     $arr     array of trgram 
-     * @return    array              ranks of trigrams
+     * @param array $arr array of trigram
+     *
+     * @return array ranks of trigrams
+     * @access protected
      */
-    function _arr_rank(&$arr)
+    function _arr_rank($arr)
     {
 
         // sorts alphabetically first as a standard way of breaking rank ties
@@ -494,14 +504,17 @@ class Text_LanguageDetect
 
     /**
      * Sorts an array by value breaking ties alphabetically
-     * 
-     * @access   private
-     * @param    array     &$arr     the array to sort
+     *
+     * @param array &$arr the array to sort
+     *
+     * @return void
+     * @access private
      */
     function _bub_sort(&$arr)
     {
         // should do the same as this perl statement:
-        // sort { $trigrams{$b} == $trigrams{$a} ?  $a cmp $b : $trigrams{$b} <=> $trigrams{$a} }
+        // sort { $trigrams{$b} == $trigrams{$a}
+        //   ?  $a cmp $b : $trigrams{$b} <=> $trigrams{$a} }
 
         // needs to sort by both key and value at once
         // using the key to break ties for the value
@@ -528,13 +541,14 @@ class Text_LanguageDetect
     /**
      * Sort function used by bubble sort
      *
-     * Callback function for usort(). 
+     * Callback function for usort().
      *
-     * @access   private
-     * @param    array        first param passed by usort()
-     * @param    array        second param passed by usort()
-     * @return   int          1 if $a is greater, -1 if not
-     * @see      _bub_sort()
+     * @param array $a first param passed by usort()
+     * @param array $b second param passed by usort()
+     *
+     * @return int 1 if $a is greater, -1 if not
+     * @see    _bub_sort()
+     * @access private
      */
     function _sort_func($a, $b)
     {
@@ -542,12 +556,12 @@ class Text_LanguageDetect
         list($a_key, $a_value) = $a;
         list($b_key, $b_value) = $b;
 
-        // if the values are the same, break ties using the key
         if ($a_value == $b_value) {
+            // if the values are the same, break ties using the key
             return strcmp($a_key, $b_key);
 
-        // if not, just sort normally
         } else {
+            // if not, just sort normally
             if ($a_value > $b_value) {
                 return -1;
             } else {
@@ -559,23 +573,24 @@ class Text_LanguageDetect
     }
 
     /**
-     * Calculates a linear rank-order distance statistic between two sets of 
+     * Calculates a linear rank-order distance statistic between two sets of
      * ranked trigrams
      *
-     * Sums the differences in rank for each trigram. If the trigram does not 
+     * Sums the differences in rank for each trigram. If the trigram does not
      * appear in both, consider it a difference of $this->_threshold.
      *
      * This distance measure was proposed by Cavnar & Trenkle (1994). Despite
      * its simplicity it has been shown to be highly accurate for language
      * identification tasks.
      *
-     * @access  private
-     * @param   array    $arr1  the reference set of trigram ranks
-     * @param   array    $arr2  the target set of trigram ranks
-     * @return  int             the sum of the differences between the ranks of
-     *                          the two trigram sets
+     * @param array $arr1 the reference set of trigram ranks
+     * @param array $arr2 the target set of trigram ranks
+     *
+     * @return int the sum of the differences between the ranks of
+     *             the two trigram sets
+     * @access private
      */
-    function _distance(&$arr1, &$arr2)
+    function _distance($arr1, $arr2)
     {
         $sumdist = 0;
 
@@ -598,14 +613,15 @@ class Text_LanguageDetect
 
     /**
      * Normalizes the score returned by _distance()
-     * 
+     *
      * Different if perl compatible or not
      *
-     * @access    private
-     * @param     int    $score          the score from _distance()
-     * @param     int    $base_count     the number of trigrams being considered
-     * @return    float                  the normalized score
-     * @see       _distance()
+     * @param int $score      the score from _distance()
+     * @param int $base_count the number of trigrams being considered
+     *
+     * @return float the normalized score
+     * @see    _distance()
+     * @access private
      */
     function _normalize_score($score, $base_count = null)
     {
@@ -630,29 +646,24 @@ class Text_LanguageDetect
      *
      * If perl compatible, the score is 300-0, 0 being most similar.
      * Otherwise, it's 0-1 with 1 being most similar.
-     * 
+     *
      * The $sample text should be at least a few sentences in length;
      * should be ascii-7 or utf8 encoded, if another and the mbstring extension
      * is present it will try to detect and convert. However, experience has
-     * shown that mb_detect_encoding() *does not work very well* with at least 
+     * shown that mb_detect_encoding() *does not work very well* with at least
      * some types of encoding.
      *
-     * @access  public
-     * @param   string  $sample a sample of text to compare.
-     * @param   int     $limit  if specified, return an array of the most likely
-     *                           $limit languages and their scores.
-     * @return  mixed       sorted array of language scores, blank array if no 
-     *                      useable text was found, or PEAR_Error if error 
-     *                      with the object setup
-     * @see     _distance()
-     * @throws  PEAR_Error
+     * @param string $sample a sample of text to compare.
+     * @param int    $limit  if specified, return an array of the most likely
+     *                       $limit languages and their scores.
+     *
+     * @return mixed sorted array of language scores, blank array if no
+     *               useable text was found
+     * @see    _distance()
+     * @throws Text_LanguageDetect_Exception
      */
-    function detect($sample, $limit = 0)
+    public function detect($sample, $limit = 0)
     {
-        if (!$this->_setup_ok($err)) {
-            return $err;
-        }
-
         // input check
         if (!Text_LanguageDetect_Parser::validateString($sample)) {
             return array();
@@ -660,36 +671,27 @@ class Text_LanguageDetect
 
         // check char encoding
         // (only if mbstring extension is compiled and PHP > 4.0.6)
-        if (function_exists('mb_detect_encoding') 
-            && function_exists('mb_convert_encoding')) {
-
+        if (function_exists('mb_detect_encoding')
+            && function_exists('mb_convert_encoding')
+        ) {
             // mb_detect_encoding isn't very reliable, to say the least
-            // detection should still work with a sufficient sample of ascii characters
+            // detection should still work with a sufficient sample
+            //  of ascii characters
             $encoding = mb_detect_encoding($sample);
 
             // mb_detect_encoding() will return FALSE if detection fails
             // don't attempt conversion if that's the case
-            if ($encoding != 'ASCII' && $encoding != 'UTF-8' && $encoding !== false) {
-            
-                if (function_exists('mb_list_encodings')) {
- 
-                    // verify the encoding exists in mb_list_encodings
-                    if (in_array($encoding, mb_list_encodings())) {
-                        $sample = mb_convert_encoding($sample, 'UTF-8', $encoding);
-                    }
-
-                    // if the previous condition failed:
-                    // somehow we detected an encoding that also we don't support
-
-                } else {
-                    // php 4 doesnt have mb_list_encodings()
-                    // so attempt with error suppression
-                    $sample = @mb_convert_encoding($sample, 'UTF-8', $encoding);
+            if ($encoding != 'ASCII' && $encoding != 'UTF-8'
+                && $encoding !== false
+            ) {
+                // verify the encoding exists in mb_list_encodings
+                if (in_array($encoding, mb_list_encodings())) {
+                    $sample = mb_convert_encoding($sample, 'UTF-8', $encoding);
                 }
             }
         }
 
-        $sample_obj = new Text_LanguageDetect_Parser($sample, $this->_db_filename, $this->_unicode_db_filename);
+        $sample_obj = new Text_LanguageDetect_Parser($sample);
         $sample_obj->prepareTrigram();
         if ($this->_use_unicode_narrowing) {
             $sample_obj->prepareUnicode();
@@ -713,7 +715,10 @@ class Text_LanguageDetect
             if (is_array($blocks)) {
                 $present_blocks = array_keys($blocks);
             } else {
-                throw new Exception('Error during block detection');
+                throw new Text_LanguageDetect_Exception(
+                    'Error during block detection',
+                    Text_LanguageDetect_Exception::BLOCK_DETECTION
+                );
             }
 
             $possible_langs = array();
@@ -731,30 +736,30 @@ class Text_LanguageDetect
             }
 
             // could also try an intersect operation rather than a union
-            // in other words, choose languages whose trigrams contain 
+            // in other words, choose languages whose trigrams contain
             // ALL of the unicode blocks found in this sample
             // would improve speed but would be completely thrown off by an
             // unexpected character, like an umlaut appearing in english text
 
             $possible_langs = array_intersect(
-                        array_keys($this->_lang_db),
-                        array_unique($possible_langs)
+                array_keys($this->_lang_db),
+                array_unique($possible_langs)
             );
 
-            // needs to intersect it with the keys of _lang_db in case 
+            // needs to intersect it with the keys of _lang_db in case
             // languages have been omitted
 
-        // or just try 'em all
         } else {
+            // or just try 'em all
             $possible_langs = array_keys($this->_lang_db);
         }
 
 
         foreach ($possible_langs as $lang) {
-            $scores[$lang] =
-                $this->_normalize_score(
-                        $this->_distance($this->_lang_db[$lang], $trigram_freqs),
-                        $trigram_count);
+            $scores[$lang] = $this->_normalize_score(
+                $this->_distance($this->_lang_db[$lang], $trigram_freqs),
+                $trigram_count
+            );
         }
 
         unset($sample_obj);
@@ -772,7 +777,6 @@ class Text_LanguageDetect
             $limited_scores = array();
 
             $i = 0;
-
             foreach ($scores as $key => $value) {
                 if ($i++ >= $limit) {
                     break;
@@ -781,9 +785,9 @@ class Text_LanguageDetect
                 $limited_scores[$key] = $value;
             }
 
-            return $limited_scores;
+            return $this->_convertToNameMode($limited_scores, true);
         } else {
-            return $scores;
+            return $this->_convertToNameMode($scores, true);
         }
     }
 
@@ -791,35 +795,33 @@ class Text_LanguageDetect
      * Returns only the most similar language to the text sample
      *
      * Calls $this->detect() and returns only the top result
-     * 
-     * @access   public
-     * @param    string    $sample    text to detect the language of
-     * @return   string               the name of the most likely language
-     *                                or null if no language is similar
-     * @see      detect()
-     * @throws   PEAR_Error
+     *
+     * @param string $sample text to detect the language of
+     *
+     * @return string the name of the most likely language
+     *                or null if no language is similar
+     * @see    detect()
+     * @throws Text_LanguageDetect_Exception
      */
-    function detectSimple($sample)
+    public function detectSimple($sample)
     {
         $scores = $this->detect($sample, 1);
 
         // if top language has the maximum possible score,
         // then the top score will have been picked at random
-        if (    !is_array($scores) 
-                || empty($scores) 
-                || current($scores) == $this->_max_score) {
-
+        if (!is_array($scores) || empty($scores)
+            || current($scores) == $this->_max_score
+        ) {
             return null;
-
         } else {
-            return ucfirst(key($scores));
+            return key($scores);
         }
     }
 
     /**
      * Returns an array containing the most similar language and a confidence
      * rating
-     * 
+     *
      * Confidence is a simple measure calculated from the similarity score
      * minus the similarity score from the next most similar language
      * divided by the highest possible score. Languages that have closely
@@ -827,46 +829,43 @@ class Text_LanguageDetect
      * confidence scores.
      *
      * The similarity score answers the question "How likely is the text the
-     * returned language regardless of the other languages considered?" The 
+     * returned language regardless of the other languages considered?" The
      * confidence score is one way of answering the question "how likely is the
      * text the detected language relative to the rest of the language model
      * set?"
      *
      * To see how similar languages are a priori, see languageSimilarity()
-     * 
-     * @access   public
-     * @param    string    $sample    text for which language will be detected
-     * @return   array     most similar language, score and confidence rating
-     *                     or null if no language is similar
-     * @see      detect()
-     * @throws   PEAR_Error
+     *
+     * @param string $sample text for which language will be detected
+     *
+     * @return array most similar language, score and confidence rating
+     *               or null if no language is similar
+     * @see    detect()
+     * @throws Text_LanguageDetect_Exception
      */
-    function detectConfidence($sample)
+    public function detectConfidence($sample)
     {
         $scores = $this->detect($sample, 2);
 
-        // if most similar language has the max score, it 
+        // if most similar language has the max score, it
         // will have been picked at random
-        if (    !is_array($scores) 
-                || empty($scores) 
-                || current($scores) == $this->_max_score) {
-
+        if (!is_array($scores) || empty($scores)
+            || current($scores) == $this->_max_score
+        ) {
             return null;
         }
 
-        $arr['language'] = ucfirst(key($scores));
+        $arr['language'] = key($scores);
         $arr['similarity'] = current($scores);
         if (next($scores) !== false) { // if false then no next element
             // the goal is to return a higher value if the distance between
             // the similarity of the first score and the second score is high
 
             if ($this->_perl_compatible) {
-
-                $arr['confidence'] =
-                    (current($scores) - $arr['similarity']) / $this->_max_score;
+                $arr['confidence'] = (current($scores) - $arr['similarity'])
+                    / $this->_max_score;
 
             } else {
-
                 $arr['confidence'] = $arr['similarity'] - current($scores);
 
             }
@@ -882,32 +881,26 @@ class Text_LanguageDetect
      * Returns the distribution of unicode blocks in a given utf8 string
      *
      * For the block name of a single char, use unicodeBlockName()
-     * 
-     * @access public
-     * @param string $str input string. Must be ascii or utf8
-     * @param bool $skip_symbols if true, skip ascii digits, symbols and 
-     *                           non-printing characters. Includes spaces,
-     *                           newlines and common punctutation characters.
+     *
+     * @param string $str          input string. Must be ascii or utf8
+     * @param bool   $skip_symbols if true, skip ascii digits, symbols and
+     *                             non-printing characters. Includes spaces,
+     *                             newlines and common punctutation characters.
+     *
      * @return array
-     * @throws PEAR_Error
+     * @throws Text_LanguageDetect_Exception
      */
-    function detectUnicodeBlocks($str, $skip_symbols)
+    public function detectUnicodeBlocks($str, $skip_symbols)
     {
-        // input check
-        if (!is_bool($skip_symbols)) {
-            throw new Exception('Second parameter must be boolean');
-        } 
+        $skip_symbols = (bool)$skip_symbols;
+        $str          = (string)$str;
 
-        if (!is_string($str)) {
-            throw new Exception('First parameter was not a string');
-        }
-
-        $sample_obj = new Text_LanguageDetect_Parser($str, $this->_db_filename, $this->_unicode_db_filename);
+        $sample_obj = new Text_LanguageDetect_Parser($str);
         $sample_obj->prepareUnicode();
         $sample_obj->prepareTrigram(false);
         $sample_obj->setUnicodeSkipSymbols($skip_symbols);
         $sample_obj->analyze();
-        $blocks =& $sample_obj->getUnicodeBlocks();
+        $blocks = $sample_obj->getUnicodeBlocks();
         unset($sample_obj);
         return $blocks;
     }
@@ -915,38 +908,37 @@ class Text_LanguageDetect
     /**
      * Returns the block name for a given unicode value
      *
-     * If passed a string, will assume it is being passed a UTF8-formatted 
+     * If passed a string, will assume it is being passed a UTF8-formatted
      * character and will automatically convert. Otherwise it will assume it
      * is being passed a numeric unicode value.
      *
      * Make sure input is of the correct type!
      *
-     * @access public
      * @param mixed $unicode unicode value or utf8 char
+     *
      * @return mixed the block name string or false if not found
-     * @throws PEAR_Error
+     * @throws Text_LanguageDetect_Exception
      */
-    function unicodeBlockName($unicode) {
+    public function unicodeBlockName($unicode)
+    {
         if (is_string($unicode)) {
             // assume it is being passed a utf8 char, so convert it
-
-            // input check
-            if ($this->utf8strlen($unicode) > 1) {
-                throw new Exception('Pass this function only a single char');
+            if (self::utf8strlen($unicode) > 1) {
+                throw new Text_LanguageDetect_Exception(
+                    'Pass a single char only to this method',
+                    Text_LanguageDetect_Exception::PARAM_TYPE
+                );
             }
-
             $unicode = $this->_utf8char2unicode($unicode);
 
-            if ($unicode == -1) {
-                throw new Exception('Malformatted char');
-            }
-
-        // input check
         } elseif (!is_int($unicode)) {
-            throw new Exception('Input must be of type string or int.');
+            throw new Text_LanguageDetect_Exception(
+                'Input must be of type string or int.',
+                Text_LanguageDetect_Exception::PARAM_TYPE
+            );
         }
 
-        $blocks =& $this->_read_unicode_block_db();
+        $blocks = $this->_read_unicode_block_db();
 
         $result = $this->_unicode_block_name($unicode, $blocks);
 
@@ -964,14 +956,17 @@ class Text_LanguageDetect
      * the public interface for this function, which does input checks which
      * this function omits for speed.
      *
-     * @access  protected
-     * @param   int     $unicode the unicode value
-     * @param   array   &$blocks the block database
-     * @param   int     $block_count the number of defined blocks in the database
-     * @see     unicodeBlockName()
+     * @param int   $unicode     the unicode value
+     * @param array $blocks      the block database
+     * @param int   $block_count the number of defined blocks in the database
+     *
+     * @return mixed Block name, -1 if it failed
+     * @see    unicodeBlockName()
+     * @access protected
      */
-    function _unicode_block_name($unicode, &$blocks, $block_count = -1) {
-        // for a reference, see 
+    function _unicode_block_name($unicode, $blocks, $block_count = -1)
+    {
+        // for a reference, see
         // http://www.unicode.org/Public/UNIDATA/Blocks.txt
 
         // assume that ascii characters are the most common
@@ -994,35 +989,36 @@ class Text_LanguageDetect
         while ($low <= $high) {
             $mid = floor(($low + $high) / 2);
 
-            // if it's lower than the lower bound
             if ($unicode < $blocks[$mid][0]) {
+                // if it's lower than the lower bound
                 $high = $mid - 1;
 
-            // if it's higher than the upper bound
             } elseif ($unicode > $blocks[$mid][1]) {
+                // if it's higher than the upper bound
                 $low = $mid + 1;
 
-            // found it
             } else {
+                // found it
                 return $blocks[$mid];
             }
         }
 
-        // failed to find the block 
+        // failed to find the block
         return -1;
 
-        // todo: differentiate when it's out of range or when it falls 
+        // todo: differentiate when it's out of range or when it falls
         //       into an unassigned range?
     }
 
     /**
      * Brings up the unicode block database
      *
-     * @access protected
      * @return array the database of unicode block definitions
-     * @throws PEAR_Error
+     * @throws Text_LanguageDetect_Exception
+     * @access protected
      */
-    function &_read_unicode_block_db() {
+    function _read_unicode_block_db()
+    {
         // since the unicode definitions are always going to be the same,
         // might as well share the memory for the db with all other instances
         // of this class
@@ -1037,29 +1033,27 @@ class Text_LanguageDetect
 
     /**
      * Calculate the similarities between the language models
-     * 
+     *
      * Use this function to see how similar languages are to each other.
      *
      * If passed 2 language names, will return just those languages compared.
      * If passed 1 language name, will return that language compared to
      * all others.
-     * If passed none, will return an array of every language model compared 
+     * If passed none, will return an array of every language model compared
      * to every other one.
      *
-     * @access  public
-     * @param   string   $lang1   the name of the first language to be compared
-     * @param   string   $lang2   the name of the second language to be compared
-     * @return  array    scores of every language compared
-     *                   or the score of just the provided languages
-     *                   or null if one of the supplied languages does not exist
-     * @throws  PEAR_Error
+     * @param string $lang1 the name of the first language to be compared
+     * @param string $lang2 the name of the second language to be compared
+     *
+     * @return array scores of every language compared
+     *               or the score of just the provided languages
+     *               or null if one of the supplied languages does not exist
+     * @throws Text_LanguageDetect_Exception
      */
-    function languageSimilarity($lang1 = null, $lang2 = null)
+    public function languageSimilarity($lang1 = null, $lang2 = null)
     {
-        if (!$this->_setup_ok($err)) {
-            return $err;
-        }
-
+        $lang1 = $this->_convertFromNameMode($lang1);
+        $lang2 = $this->_convertFromNameMode($lang2);
         if ($lang1 != null) {
             $lang1 = strtolower($lang1);
 
@@ -1069,12 +1063,8 @@ class Text_LanguageDetect
             }
 
             if ($lang2 != null) {
-
-                // can't only set the second param
-                if ($lang1 == null) {
-                    return null;
-                // check if language model exists
-                } elseif (!isset($this->_lang_db[$lang2])) {
+                if (!isset($this->_lang_db[$lang2])) {
+                    // check if language model exists
                     return null;
                 }
 
@@ -1088,14 +1078,15 @@ class Text_LanguageDetect
                     )
                 );
 
-
-            // compare just $lang1 to all languages
             } else {
+                // compare just $lang1 to all languages
                 $return_arr = array();
                 foreach ($this->_lang_db as $key => $value) {
-                    if ($key != $lang1) { // don't compare a language to itself
+                    if ($key != $lang1) {
+                        // don't compare a language to itself
                         $return_arr[$key] = $this->_normalize_score(
-                            $this->_distance($this->_lang_db[$lang1], $value));
+                            $this->_distance($this->_lang_db[$lang1], $value)
+                        );
                     }
                 }
                 asort($return_arr);
@@ -1104,30 +1095,27 @@ class Text_LanguageDetect
             }
 
 
-        // compare all languages to each other
         } else {
+            // compare all languages to each other
             $return_arr = array();
             foreach (array_keys($this->_lang_db) as $lang1) {
                 foreach (array_keys($this->_lang_db) as $lang2) {
-
                     // skip comparing languages to themselves
-                    if ($lang1 != $lang2) { 
-                    
-                        // don't re-calculate what's already been done
+                    if ($lang1 != $lang2) {
+
                         if (isset($return_arr[$lang2][$lang1])) {
+                            // don't re-calculate what's already been done
+                            $return_arr[$lang1][$lang2]
+                                = $return_arr[$lang2][$lang1];
 
-                            $return_arr[$lang1][$lang2] =
-                                $return_arr[$lang2][$lang1];
-
-                        // calculate
                         } else {
-
-                            $return_arr[$lang1][$lang2] = 
-                                $this->_normalize_score(
-                                        $this->_distance(
-                                            $this->_lang_db[$lang1],
-                                            $this->_lang_db[$lang2]
-                                        )
+                            // calculate
+                            $return_arr[$lang1][$lang2]
+                                = $this->_normalize_score(
+                                    $this->_distance(
+                                        $this->_lang_db[$lang1],
+                                        $this->_lang_db[$lang2]
+                                    )
                                 );
 
                         }
@@ -1150,20 +1138,14 @@ class Text_LanguageDetect
      *
      * @access      public
      * @return      array language cluster data
-     * @throws      PEAR_Error
+     * @throws      Text_LanguageDetect_Exception
      * @see         languageSimilarity()
-     * @deprecated  this function will eventually be removed and placed into 
+     * @deprecated  this function will eventually be removed and placed into
      *              the model generation class
      */
     function clusterLanguages()
     {
         // todo: set the maximum number of clusters
-
-        // setup check
-        if (!$this->_setup_ok($err)) {
-            return $err;
-        }
-
         // return cached result, if any
         if (isset($this->_clusters)) {
             return $this->_clusters;
@@ -1177,7 +1159,10 @@ class Text_LanguageDetect
 
         foreach ($langs as $lang) {
             if (!isset($this->_lang_db[$lang])) {
-                throw new Exception("missing $lang!\n");
+                throw new Text_LanguageDetect_Exception(
+                    "missing $lang!",
+                    Text_LanguageDetect_Exception::UNKNOWN_LANGUAGE
+                );
             }
         }
 
@@ -1186,7 +1171,9 @@ class Text_LanguageDetect
             $langs[$lang1] = $lang1;
             unset($langs[$old_key]);
         }
-        
+
+        $result_data = $really_map = array();
+
         $i = 0;
         while (count($langs) > 2 && $i++ < 200) {
             $highest_score = -1;
@@ -1194,18 +1181,22 @@ class Text_LanguageDetect
             $highest_key2 = '';
             foreach ($langs as $lang1) {
                 foreach ($langs as $lang2) {
-                    if (    $lang1 != $lang2 
-                            && $arr[$lang1][$lang2] > $highest_score) {
+                    if ($lang1 != $lang2
+                        && $arr[$lang1][$lang2] > $highest_score
+                    ) {
                         $highest_score = $arr[$lang1][$lang2];
                         $highest_key1 = $lang1;
                         $highest_key2 = $lang2;
                     }
                 }
             }
-            
+
             if (!$highest_key1) {
                 // should not ever happen
-                throw new Exception("no highest key? (step: $i)");
+                throw new Text_LanguageDetect_Exception(
+                    "no highest key? (step: $i)",
+                    Text_LanguageDetect_Exception::NO_HIGHEST_KEY
+                );
             }
 
             if ($highest_score == 0) {
@@ -1217,7 +1208,7 @@ class Text_LanguageDetect
             $sum1 = array_sum($arr[$highest_key1]);
             $sum2 = array_sum($arr[$highest_key2]);
 
-            // use the score for the one that is most similar to the rest of 
+            // use the score for the one that is most similar to the rest of
             // the field as the score for the group
             // todo: could try averaging or "centroid" method instead
             // seems like that might make more sense
@@ -1248,7 +1239,7 @@ class Text_LanguageDetect
             $really_lang = $replaceme;
             while (isset($really_map[$really_lang])) {
                 $really_lang = $really_map[$really_lang];
-            } 
+            }
             $really_map[$newkey] = $really_lang;
 
 
@@ -1259,8 +1250,8 @@ class Text_LanguageDetect
                         $arr[$key1][$newkey] = $arr[$key1][$key2];
                         unset($arr[$key1][$key2]);
                         // replacing $arr[$key1][$key2] with $arr[$key1][$newkey]
-                    } 
-                    
+                    }
+
                     if ($key1 == $replaceme) {
                         $arr[$newkey][$key2] = $arr[$key1][$key2];
                         unset($arr[$key1][$key2]);
@@ -1273,7 +1264,7 @@ class Text_LanguageDetect
                     }
                 }
             }
-                        
+
 
             unset($langs[$highest_key1]);
             unset($langs[$highest_key2]);
@@ -1293,7 +1284,7 @@ class Text_LanguageDetect
         }
 
         $return_val = array(
-                'open_forks' => $langs, 
+                'open_forks' => $langs,
                         // the top level of clusters
                         // clusters that are mutually exclusive
                         // or specified by a specific maximum
@@ -1323,11 +1314,11 @@ class Text_LanguageDetect
      * use, and it may disappear or its functionality may change in future
      * releases without notice.
      *
-     * This compares the sample text to top the top level of clusters. If the 
+     * This compares the sample text to top the top level of clusters. If the
      * sample is similar to the cluster it will drop down and compare it to the
      * languages in the cluster, and so on until it hits a leaf node.
      *
-     * this should find the language in considerably fewer compares 
+     * this should find the language in considerably fewer compares
      * (the equivalent of a binary search), however clusterLanguages() is costly
      * and the loss of accuracy from this technique is significant.
      *
@@ -1337,15 +1328,14 @@ class Text_LanguageDetect
      * was very large, however in such cases some method of Bayesian inference
      * might be more helpful.
      *
-     * @see     clusterLanguages()
-     * @access  public
-     * @param   string $str input string
-     * @return  array language scores (only those compared)
-     * @throws  PEAR_Error
+     * @param string $str input string
+     *
+     * @return array language scores (only those compared)
+     * @throws Text_LanguageDetect_Exception
+     * @see    clusterLanguages()
      */
-    function clusteredSearch($str)
+    public function clusteredSearch($str)
     {
-
         // input check
         if (!Text_LanguageDetect_Parser::validateString($str)) {
             return array();
@@ -1359,7 +1349,7 @@ class Text_LanguageDetect
         $dendogram_data  = $result['fork_data'];
         $dendogram_alias = $result['name_map'];
 
-        $sample_obj = new Text_LanguageDetect_Parser($str, $this->_db_filename, $this->_unicode_db_filename);
+        $sample_obj = new Text_LanguageDetect_Parser($str);
         $sample_obj->prepareTrigram();
         $sample_obj->setPadStart(!$this->_perl_compatible);
         $sample_obj->analyze();
@@ -1372,7 +1362,7 @@ class Text_LanguageDetect
         }
 
         $i = 0; // counts the number of steps
-        
+
         foreach ($dendogram_start as $lang) {
             if (isset($dendogram_alias[$lang])) {
                 $lang_key = $dendogram_alias[$lang];
@@ -1382,7 +1372,8 @@ class Text_LanguageDetect
 
             $scores[$lang] = $this->_normalize_score(
                 $this->_distance($this->_lang_db[$lang_key], $sample_result),
-                $sample_count);
+                $sample_count
+            );
 
             $i++;
         }
@@ -1411,7 +1402,8 @@ class Text_LanguageDetect
 
                 $scores[$lang] = $this->_normalize_score(
                     $this->_distance($this->_lang_db[$lang_key], $sample_result),
-                    $sample_count);
+                    $sample_count
+                );
 
                 //todo: does not need to do same comparison again
             }
@@ -1428,8 +1420,8 @@ class Text_LanguageDetect
 
             $diff = $scores[$cur_key] - $scores[$loser_key];
 
-            // $cur_key ({$dendogram_alias[$cur_key]}) wins 
-            // over $loser_key ({$dendogram_alias[$loser_key]}) 
+            // $cur_key ({$dendogram_alias[$cur_key]}) wins
+            // over $loser_key ({$dendogram_alias[$loser_key]})
             // with a difference of $diff
         }
 
@@ -1439,9 +1431,9 @@ class Text_LanguageDetect
         // which paths the algorithm decided to take along the tree
 
         // but sometimes the last item is only the second highest
-        if (   ($this->_perl_compatible  && (end($scores) > prev($scores)))
-            || (!$this->_perl_compatible && (end($scores) < prev($scores)))) {
-
+        if (($this->_perl_compatible  && (end($scores) > prev($scores)))
+            || (!$this->_perl_compatible && (end($scores) < prev($scores)))
+        ) {
             $real_last_score = current($scores);
             $real_last_key = key($scores);
 
@@ -1449,7 +1441,7 @@ class Text_LanguageDetect
             unset($scores[$real_last_key]);
             $scores[$real_last_key] = $real_last_score;
         }
-            
+
 
         if (!$this->_perl_compatible) {
             $scores = array_reverse($scores, true);
@@ -1464,12 +1456,11 @@ class Text_LanguageDetect
      *
      * Returns the numbers of characters (not bytes) in a utf8 string
      *
-     * @static
-     * @access  public
-     * @param   string $str string to get the length of
-     * @return  int         number of chars
+     * @param string $str string to get the length of
+     *
+     * @return int number of chars
      */
-    function utf8strlen($str)
+    public static function utf8strlen($str)
     {
         // utf8_decode() will convert unknown chars to '?', which is actually
         // ideal for counting.
@@ -1482,53 +1473,45 @@ class Text_LanguageDetect
     /**
      * Returns the unicode value of a utf8 char
      *
-     * @access  protected
-     * @param   string $char a utf8 (possibly multi-byte) char
-     * @return  int          unicode value or -1 if malformatted
+     * @param string $char a utf8 (possibly multi-byte) char
+     *
+     * @return int unicode value
+     * @access protected
+     * @link   http://en.wikipedia.org/wiki/UTF-8
      */
-    function _utf8char2unicode($char) {
-
+    function _utf8char2unicode($char)
+    {
         // strlen() here will actually get the binary length of a single char
         switch (strlen($char)) {
+        case 1:
+            // normal ASCII-7 byte
+            // 0xxxxxxx -->  0xxxxxxx
+            return ord($char{0});
 
-            // for a reference, see http://en.wikipedia.org/wiki/UTF-8
+        case 2:
+            // 2 byte unicode
+            // 110zzzzx 10xxxxxx --> 00000zzz zxxxxxxx
+            $z = (ord($char{0}) & 0x000001F) << 6;
+            $x = (ord($char{1}) & 0x0000003F);
+            return ($z | $x);
 
-            case 1:
-                // normal ASCII-7 byte
-                // 0xxxxxxx -->  0xxxxxxx
-                return ord($char{0});
+        case 3:
+            // 3 byte unicode
+            // 1110zzzz 10zxxxxx 10xxxxxx --> zzzzzxxx xxxxxxxx
+            $z =  (ord($char{0}) & 0x0000000F) << 12;
+            $x1 = (ord($char{1}) & 0x0000003F) << 6;
+            $x2 = (ord($char{2}) & 0x0000003F);
+            return ($z | $x1 | $x2);
 
-            case 2:
-                // 2 byte unicode
-                // 110zzzzx 10xxxxxx --> 00000zzz zxxxxxxx
-                $z = (ord($char{0}) & 0x000001F) << 6;
-                $x = (ord($char{1}) & 0x0000003F);
-
-                return ($z | $x);
-
-            case 3:
-                // 3 byte unicode
-                // 1110zzzz 10zxxxxx 10xxxxxx --> zzzzzxxx xxxxxxxx 
-                $z =  (ord($char{0}) & 0x0000000F) << 12;
-                $x1 = (ord($char{1}) & 0x0000003F) << 6;
-                $x2 = (ord($char{2}) & 0x0000003F);
-
-                return ($z | $x1 | $x2);
-
-            case 4:
-                // 4 byte unicode
-                // 11110zzz 10zzxxxx 10xxxxxx 10xxxxxx -->
-                // 000zzzzz xxxxxxxx xxxxxxxx
-                $z1 = (ord($char{0}) & 0x00000007) << 18;
-                $z2 = (ord($char{1}) & 0x0000003F) << 12;
-                $x1 = (ord($char{2}) & 0x0000003F) << 6;
-                $x2 = (ord($char{3}) & 0x0000003F);
-
-                return ($z1 | $z2 | $x1 | $x2);
-
-            default:
-                // error: malformatted char?
-                return -1;
+        case 4:
+            // 4 byte unicode
+            // 11110zzz 10zzxxxx 10xxxxxx 10xxxxxx -->
+            // 000zzzzz xxxxxxxx xxxxxxxx
+            $z1 = (ord($char{0}) & 0x00000007) << 18;
+            $z2 = (ord($char{1}) & 0x0000003F) << 12;
+            $x1 = (ord($char{2}) & 0x0000003F) << 6;
+            $x2 = (ord($char{3}) & 0x0000003F);
+            return ($z1 | $z2 | $x1 | $x2);
         }
     }
 
@@ -1536,18 +1519,18 @@ class Text_LanguageDetect
      * utf8-safe fast character iterator
      *
      * Will get the next character starting from $counter, which will then be
-     * incremented. If a multi-byte char the bytes will be concatenated and 
+     * incremented. If a multi-byte char the bytes will be concatenated and
      * $counter will be incremeted by the number of bytes in the char.
      *
-     * @access  private
-     * @param   string  &$str        the string being iterated over
-     * @param   int     &$counter    the iterator, will increment by reference
-     * @param   bool    $special_convert whether to do special conversions
-     * @return  char    the next (possibly multi-byte) char from $counter
+     * @param string $str             the string being iterated over
+     * @param int    &$counter        the iterator, will increment by reference
+     * @param bool   $special_convert whether to do special conversions
+     *
+     * @return char the next (possibly multi-byte) char from $counter
+     * @access private
      */
-    function _next_char(&$str, &$counter, $special_convert = false)
+    static function _next_char($str, &$counter, $special_convert = false)
     {
-
         $char = $str{$counter++};
         $ord = ord($char);
 
@@ -1556,7 +1539,6 @@ class Text_LanguageDetect
 
         // normal ascii one byte char
         if ($ord <= 127) {
-
             // special conversions needed for this package
             // (that only apply to regular ascii characters)
             // lower case, and convert all non-alphanumeric characters
@@ -1571,8 +1553,8 @@ class Text_LanguageDetect
 
             return $char;
 
-        // multi-byte chars
         } elseif ($ord >> 5 == 6) { // two-byte char
+            // multi-byte chars
             $nextchar = $str{$counter++}; // get next byte
 
             // lower-casing of non-ascii characters is still incomplete
@@ -1582,27 +1564,27 @@ class Text_LanguageDetect
                 if ($ord == 195) {
                     $nextord = ord($nextchar);
                     $nextord_adj = $nextord + 64;
-                    // for a reference, see 
+                    // for a reference, see
                     // http://www.ramsch.org/martin/uni/fmi-hp/iso8859-1.html
 
                     // &Agrave; - &THORN; but not &times;
-                    if (    $nextord_adj >= 192
-                            && $nextord_adj <= 222 
-                            && $nextord_adj != 215) {
-
-                        $nextchar = chr($nextord + 32); 
+                    if ($nextord_adj >= 192
+                        && $nextord_adj <= 222
+                        && $nextord_adj != 215
+                    ) {
+                        $nextchar = chr($nextord + 32);
                     }
 
-                // lower case cyrillic alphabet
                 } elseif ($ord == 208) {
+                    // lower case cyrillic alphabet
                     $nextord = ord($nextchar);
                     // if A - Pe
                     if ($nextord >= 144 && $nextord <= 159) {
                         // lower case
                         $nextchar = chr($nextord + 32);
 
-                    // if Er - Ya
                     } elseif ($nextord >= 160 && $nextord <= 175) {
+                        // if Er - Ya
                         // lower case
                         $char = chr(209); // == $ord++
                         $nextchar = chr($nextord - 32);
@@ -1611,12 +1593,11 @@ class Text_LanguageDetect
             }
 
             // tag on next byte
-            return $char . $nextchar; 
-
+            return $char . $nextchar;
         } elseif ($ord >> 4  == 14) { // three-byte char
-            
+
             // tag on next 2 bytes
-            return $char . $str{$counter++} . $str{$counter++}; 
+            return $char . $str{$counter++} . $str{$counter++};
 
         } elseif ($ord >> 3 == 30) { // four-byte char
 
@@ -1628,8 +1609,85 @@ class Text_LanguageDetect
         }
     }
 
+    /**
+     * Converts an $language input parameter from the configured mode
+     * to the language name that is used internally.
+     *
+     * Works for strings and arrays.
+     *
+     * @param string|array $lang       A language description ("english"/"en"/"eng")
+     * @param boolean      $convertKey If $lang is an array, setting $key
+     *                                 converts the keys to the language name.
+     *
+     * @return string|array Language name
+     */
+    function _convertFromNameMode($lang, $convertKey = false)
+    {
+        if ($this->_name_mode == 0) {
+            return $lang;
+        }
+
+        if ($this->_name_mode == 2) {
+            $method = 'code2ToName';
+        } else {
+            $method = 'code3ToName';
+        }
+
+        if (is_string($lang)) {
+            return (string)Text_LanguageDetect_ISO639::$method($lang);
+        }
+
+        $newlang = array();
+        foreach ($lang as $key => $val) {
+            if ($convertKey) {
+                $newkey = (string)Text_LanguageDetect_ISO639::$method($key);
+                $newlang[$newkey] = $val;
+            } else {
+                $newlang[$key] = (string)Text_LanguageDetect_ISO639::$method($val);
+            }
+        }
+        return $newlang;
+    }
+
+    /**
+     * Converts an $language output parameter from the language name that is
+     * used internally to the configured mode.
+     *
+     * Works for strings and arrays.
+     *
+     * @param string|array $lang       A language description ("english"/"en"/"eng")
+     * @param boolean      $convertKey If $lang is an array, setting $key
+     *                                 converts the keys to the language name.
+     *
+     * @return string|array Language name
+     */
+    function _convertToNameMode($lang, $convertKey = false)
+    {
+        if ($this->_name_mode == 0) {
+            return $lang;
+        }
+
+        if ($this->_name_mode == 2) {
+            $method = 'nameToCode2';
+        } else {
+            $method = 'nameToCode3';
+        }
+
+        if (is_string($lang)) {
+            return Text_LanguageDetect_ISO639::$method($lang);
+        }
+
+        $newlang = array();
+        foreach ($lang as $key => $val) {
+            if ($convertKey) {
+                $newkey = Text_LanguageDetect_ISO639::$method($key);
+                $newlang[$newkey] = $val;
+            } else {
+                $newlang[$key] = Text_LanguageDetect_ISO639::$method($val);
+            }
+        }
+        return $newlang;
+    }
 }
 
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-
-?>

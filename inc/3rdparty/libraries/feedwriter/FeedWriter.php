@@ -2,6 +2,7 @@
 define('RSS2', 1, true);
 define('JSON', 2, true);
 define('JSONP', 3, true);
+define('ATOM', 4, true);
 
  /**
  * Univarsel Feed Writer class
@@ -101,11 +102,11 @@ define('JSONP', 3, true);
               header('Content-type: application/javascript; charset=UTF-8');
           }
         }
-      
+
         if ($this->version == JSON || $this->version == JSONP) {
           $this->json = new stdClass();
         }
-      
+
 
         $this->printHead();
         $this->printChannels();
@@ -114,6 +115,11 @@ define('JSONP', 3, true);
         if ($this->version == JSON || $this->version == JSONP) {
             echo json_encode($this->json);
         }
+    }
+
+    public function &getItems()
+    {
+    	return $this->items;
     }
 
     /**
@@ -199,7 +205,8 @@ define('JSONP', 3, true);
     */
     public function setDescription($description)
     {
-        $this->setChannelElement('description', $description);
+        $tag = ($this->version == ATOM)? 'subtitle' : 'description';
+        $this->setChannelElement($tag, $description);
     }
 
     /**
@@ -244,7 +251,7 @@ define('JSONP', 3, true);
         {
             $out  = '<?xml version="1.0" encoding="utf-8"?>'."\n";
             if ($this->xsl) $out .= '<?xml-stylesheet type="text/xsl" href="'.htmlspecialchars($this->xsl).'"?>' . PHP_EOL;
-            $out .= '<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/">' . PHP_EOL;
+            $out .= '<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/">' . PHP_EOL;
             echo $out;
         }
         elseif ($this->version == JSON || $this->version == JSONP)

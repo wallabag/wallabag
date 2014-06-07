@@ -1,0 +1,11 @@
+title: //title
+body: //div[@class='talk-article__body talk-transcript__body'] | //div[@class='media__image media__image--thumb talk-link__image']
+
+strip_id_or_class: talk-transcript__para__time
+
+single_page_link: //a[@id='hero-transcript-link']
+
+#prune: no
+tidy: no
+
+test_url: http://www.ted.com/talks/andrew_solomon_how_the_worst_moments_in_our_lives_make_us_who_we_are

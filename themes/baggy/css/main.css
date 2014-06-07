@@ -979,8 +979,8 @@ blockquote {
     content: none;
   }
   .logo {
-    width: 1.5em;
-    height: 1.5em;
+    width: 1.25em;
+    height: 1.25em;
     left: 0;
     top: 0;
   }
@@ -1030,6 +1030,7 @@ blockquote {
     margin-left: 1.5em;
     padding-right: 1.5em;
     position: static;
+    margin-top: 3em;
   }
   #article_toolbar .topPosF {
     display: none;

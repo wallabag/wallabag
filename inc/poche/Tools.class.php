@@ -18,8 +18,6 @@ class Tools
             die(_('Oops, it seems you don\'t have PHP 5.'));
         }
 
-        error_reporting(E_ALL);
-
         function stripslashesDeep($value) {
             return is_array($value)
                 ? array_map('stripslashesDeep', $value)
@@ -60,7 +58,11 @@ class Tools
         }
 
         $host = (isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] : (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME']));
-        
+
+        if (strpos($host, ':') !== false) {
+            $serverport = '';
+        }
+
         return 'http' . ($https ? 's' : '') . '://'
             . $host . $serverport . $scriptname;
     }

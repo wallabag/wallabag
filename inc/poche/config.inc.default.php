@@ -30,7 +30,12 @@
 
 @define ('MODE_DEMO', FALSE);
 @define ('DEBUG_POCHE', FALSE);
-@define ('DOWNLOAD_PICTURES', FALSE);
+
+//default level of error reporting in application. Developers should override it in their config.inc.php: set to E_ALL.
+@define ('ERROR_REPORTING', E_ALL & ~E_NOTICE);
+
+@define ('DOWNLOAD_PICTURES', FALSE); # This can slow down the process of adding articles
+@define ('REGENERATE_PICTURES_QUALITY', 75);
 @define ('CONVERT_LINKS_FOOTNOTES', FALSE);
 @define ('REVERT_FORCED_PARAGRAPH_ELEMENTS', FALSE);
 @define ('SHARE_TWITTER', TRUE);
