@@ -1144,6 +1144,7 @@ class Poche
       $config = HTMLPurifier_Config::createDefault();
       $config->set('Cache.SerializerPath', CACHE);
       $config->set('HTML.SafeIframe', true);
+
       //allow YouTube, Vimeo and dailymotion videos
       $config->set('URI.SafeIframeRegexp', '%^(https?:)?//(www\.youtube(?:-nocookie)?\.com/embed/|player\.vimeo\.com/video/|www\.dailymotion\.com/embed/video/)%');
 
@@ -1206,9 +1207,8 @@ class Poche
 
         $log = new Logger("wallabag", TRUE);
         $fileDir = CACHE;
-
-
-        $book = new EPub(EPub::BOOK_VERSION_EPUB3);
+        
+        $book = new EPub(EPub::BOOK_VERSION_EPUB3, DEBUG_POCHE);
         $log->logLine("new EPub()");
         $log->logLine("EPub class version: " . EPub::VERSION);
         $log->logLine("EPub Req. Zip version: " . EPub::REQ_ZIP_VERSION);
