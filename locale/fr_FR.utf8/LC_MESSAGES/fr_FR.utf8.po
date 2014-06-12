@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-05-10 20:09+0100\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Mickaël RAYBAUD-ROIG <raybaudroigm@gmail.com>\n"
+"Last-Translator: Gilles Wittezaële <gilles.wittezaele@laposte.net>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
@@ -628,16 +628,16 @@ msgid "click to finish import"
 msgstr "cliquez pour terminer l'importation"
 
 msgid "Articles inserted: "
-msgstr "Articles ajoutés: "
+msgstr "Articles ajoutés : "
 
 msgid ". Please note, that some may be marked as \"read\"."
-msgstr ". Notez que certains pourraient être marqués comme lus."
+msgstr ". Notez que certains pourraient être marqués comme \"lus\"."
 
 msgid "Import finished."
 msgstr "Importation terminée."
 
 msgid "Undefined"
-msgstr "Non définit"
+msgstr "Non défini"
 
 msgid "User with this id ("
 msgstr "Utilisateur avec cet identifiant ("
