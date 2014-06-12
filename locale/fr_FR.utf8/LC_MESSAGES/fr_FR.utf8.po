@@ -528,10 +528,10 @@ msgid "records"
 msgstr " articles"
 
 msgid "Downloading next "
-msgstr "Téléchargement des prochains "
+msgstr "Téléchargement des "
 
 msgid "articles, please wait"
-msgstr " articles, veuillez patienter"
+msgstr " articles suivants, veuillez patienter..."
 
 msgid "Enter your search here"
 msgstr "Entrez votre recherche ici"
