@@ -259,7 +259,7 @@ msgstr ""
 "(le délai d'attente entre deux séquences de téléchargement)."
 
 msgid "File:"
-msgstr "Fichier: "
+msgstr "Fichier : "
 
 msgid "You can click here to fetch content for articles with no content."
 msgstr ""
@@ -287,7 +287,7 @@ msgid "Add user"
 msgstr "Ajouter un utilisateur"
 
 msgid "Add a new user :"
-msgstr "Ajouter un nouvel utilisateur: "
+msgstr "Ajouter un nouvel utilisateur : "
 
 msgid "Login for new user"
 msgstr "Identifiant du nouvel utilisateur"
@@ -296,10 +296,10 @@ msgid "Login"
 msgstr "Nom d'utilisateur"
 
 msgid "Password for new user"
-msgstr "Mot de passe du nouvel utilisateur: "
+msgstr "Mot de passe du nouvel utilisateur"
 
 msgid "Send"
-msgstr "Imvoyer"
+msgstr "Envoyer"
 
 msgid "Delete account"
 msgstr "Supprimer le compte"
@@ -322,7 +322,7 @@ msgstr ""
 msgid ""
 "To completely remove wallabag, delete the wallabag folder on your web server."
 msgstr ""
-"Pour déinstaller complètement Wallabag, supprimez le répertoire "
+"Pour désinstaller complètement Wallabag, supprimez le répertoire "
 "<code>wallabag</code> de votre serveur Web."
 
 msgid "Save a link"
@@ -418,17 +418,17 @@ msgid "More infos in the official doc:"
 msgstr "Plus d'infos dans la documentation officielle :"
 
 msgid "import from Pocket"
-msgstr "importation depuis Pocket"
+msgstr "importer depuis Pocket"
 
 #, php-format
 msgid "(you must have a %s file on your server)"
 msgstr "(le fichier %s doit être présent sur le serveur)"
 
 msgid "import from Readability"
-msgstr "importation depuis Readability"
+msgstr "importer depuis Readability"
 
 msgid "import from Instapaper"
-msgstr "importation depuis Instapaper"
+msgstr "importer depuis Instapaper"
 
 msgid "Start typing for auto complete."
 msgstr "Commencez à taper pour activer l'auto-complétion."
@@ -525,13 +525,13 @@ msgid "Download required for "
 msgstr "Téléchargement requis pour "
 
 msgid "records"
-msgstr " éléments."
+msgstr " enregistrements"
 
 msgid "Downloading next "
-msgstr "Téléchargement des "
+msgstr "Téléchargement des prochains "
 
 msgid "articles, please wait"
-msgstr " prochains éléments, veuillez patienter"
+msgstr " articles, veuillez patienter"
 
 msgid "Enter your search here"
 msgstr "Entrez votre recherche ici"
@@ -546,18 +546,18 @@ msgstr ""
 
 #, php-format
 msgid "Error : An user with the name %s already exists !"
-msgstr "Erreur: Un utilisateur avec le nom « %s » existe déjà."
+msgstr "Erreur : Un utilisateur avec le nom « %s » existe déjà !"
 
 #, php-format
 msgid "User %s has been successfully deleted !"
-msgstr "L'utilisateur « %s » a bien été supprimé !"
+msgstr "L'utilisateur « %s » a été supprimé avec succès !"
 
 msgid "Error : The password is wrong !"
-msgstr "Erreur: Le mot de passe est incorrect !"
+msgstr "Erreur : le mot de passe est incorrect !"
 
 msgid "Error : You are the only user, you cannot delete your account !"
 msgstr ""
-"Erreur: Vous êtes l'unique utilisateur, vous ne pouvez pas supprimer votre "
+"Erreur : Vous êtes l'unique utilisateur, vous ne pouvez pas supprimer votre "
 "compte !"
 
 msgid "Untitled"
@@ -585,7 +585,7 @@ msgid "next"
 msgstr "suivant"
 
 msgid "in demo mode, you can't update your password"
-msgstr "en mode démo, vous ne pouvez pas mettre à jour le mot de passe"
+msgstr "en mode démo, vous ne pouvez pas mettre à jour votre mot de passe"
 
 msgid "your password has been updated"
 msgstr "votre mot de passe a été mis à jour"
@@ -598,7 +598,7 @@ msgstr ""
 "dans les deux"
 
 msgid "still using the \""
-msgstr "Vous utilisez toujours \""
+msgstr "vous utilisez toujours \""
 
 msgid "that theme does not seem to be installed"
 msgstr "ce thème ne semble pas installé"
