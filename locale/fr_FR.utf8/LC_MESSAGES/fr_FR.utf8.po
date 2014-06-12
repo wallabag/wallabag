@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: wallabag 1.6.1\n"
+"Project-Id-Version: wallabag 1.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-05-10 20:09+0100\n"
 "PO-Revision-Date: \n"
@@ -131,7 +131,7 @@ msgid "via F-Droid"
 msgstr "via F-Droid"
 
 msgid " or "
-msgstr "ou"
+msgstr " ou "
 
 msgid "via Google Play"
 msgstr "via Google PlayStore"
@@ -240,7 +240,7 @@ msgid ""
 "You can import your Pocket, Readability, Instapaper, Wallabag or any data in "
 "appropriate json or html format."
 msgstr ""
-"Vous pouvez importer depuis Pocket, Readability, Instapaper, Wallabag, ou "
+"Vous pouvez importer depuis Pocket, Readability, Instapaper, wallabag, ou "
 "n'importe quel fichier au format JSON ou HTML approprié."
 
 msgid ""
@@ -251,7 +251,7 @@ msgid ""
 "IMPORT_DELAY (delay between fetch of next batch of articles)."
 msgstr ""
 "Sélectionner le fichier à importer sur votre disque dur, et pressez la "
-"bouton « Importer » ci-dessous.<br />Wallabag analysera votre fichier, "
+"bouton « Importer » ci-dessous.<br />wallabag analysera votre fichier, "
 "ajoutera toutes les URL trouvées et commencera à télécharger les contenus si "
 "nécessaire.<br />Le processus de téléchargement est contrôlé par deux "
 "constantes dans votre fichier de configuration:<wbr /><code>IMPORT_LIMIT</"
@@ -322,7 +322,7 @@ msgstr ""
 msgid ""
 "To completely remove wallabag, delete the wallabag folder on your web server."
 msgstr ""
-"Pour désinstaller complètement Wallabag, supprimez le répertoire "
+"Pour désinstaller complètement wallabag, supprimez le répertoire "
 "<code>wallabag</code> de votre serveur Web."
 
 msgid "Save a link"
@@ -650,71 +650,3 @@ msgstr "Cache effacé."
 
 msgid "Oops, it seems you don't have PHP 5."
 msgstr "Oups, vous ne semblez pas avoir PHP 5."
-
-#~ msgid ""
-#~ "Please execute the import script locally as it can take a very long time."
-#~ msgstr ""
-#~ "Merci d'exécuter le script d'importation en local car cela peut prendre "
-#~ "du temps."
-
-#~ msgid "More info in the official documentation:"
-#~ msgstr "Plus d'infos dans la documentation officielle :"
-
-#~ msgid "Import from Pocket"
-#~ msgstr "Import depuis Pocket"
-
-#~ msgid "Import from Readability"
-#~ msgstr "Importer depuis Readability"
-
-#~ msgid "Import from Instapaper"
-#~ msgstr "Importer depuis Instapaper"
-
-#~ msgid "Import from wallabag"
-#~ msgstr "Importer depuis wallabag"
-
-#~ msgid "import from instapaper completed"
-#~ msgstr "Importation depuis Instapaper achevée"
-
-#~ msgid "import from pocket completed"
-#~ msgstr "Importation depuis Pocket achevée"
-
-#~ msgid "import from Readability completed. "
-#~ msgstr "Importation depuis Readability achevée"
-
-#~ msgid "import from Poche completed. "
-#~ msgstr "Importation depuis Pocket achevée"
-
-#~ msgid "Unknown import provider."
-#~ msgstr "Format d'importation inconnu."
-
-#~ msgid "Incomplete inc/poche/define.inc.php file, please define \""
-#~ msgstr "Fichier inc/poche/define.inc.php incomplet, merci de définir \""
-
-#~ msgid "Could not find required \""
-#~ msgstr "Impossible de trouver \""
-
-#~ msgid "poche it!"
-#~ msgstr "pochez-le !"
-
-#~ msgid "Updating poche"
-#~ msgstr "Mettre à jour poche"
-
-#, fuzzy
-#~ msgid "Export your poche datas"
-#~ msgstr "Exporter vos données de poche"
-
-#, fuzzy
-#~ msgid "to export your poche datas."
-#~ msgstr "pour exporter vos données de poche."
-
-#~ msgid "create an issue"
-#~ msgstr "créez un ticket"
-
-#~ msgid "or"
-#~ msgstr "ou"
-
-#~ msgid "contact us by mail"
-#~ msgstr "contactez-nous par email"
-
-#~ msgid "your poche version:"
-#~ msgstr "votre version de poche :"
