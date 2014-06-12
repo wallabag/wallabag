@@ -525,7 +525,7 @@ msgid "Download required for "
 msgstr "Téléchargement requis pour "
 
 msgid "records"
-msgstr " enregistrements"
+msgstr " articles"
 
 msgid "Downloading next "
 msgstr "Téléchargement des prochains "
