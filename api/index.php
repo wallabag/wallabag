@@ -11,6 +11,8 @@
 require_once( '../inc/poche/global.inc.php' );
 require_once( 'users.config.php' );
 
+$api_ver = "1.1";
+
 $db = new Database();
 
 if( isset( $_REQUEST['r'] ) && ( isset( $_REQUEST['apikey'] ) && strlen( $_REQUEST['apikey'] ) > 0 ) )
@@ -85,6 +87,13 @@ if( isset( $_REQUEST['r'] ) && ( isset( $_REQUEST['apikey'] ) && strlen( $_REQUE
                 echo '{"error":0, "id":' . $id . '}';
                 break;
         }
+    }
+}
+elseif( isset($_REQUEST['o']) )
+{
+    if( $_REQUEST['o'] == 'check' )
+    {
+        echo '{"api": true, "apiVersion": "' . $api_ver . '"}';
     }
 }
 
