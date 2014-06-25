@@ -34,7 +34,7 @@
  * @author S.C. Chen <me578022@gmail.com>
  * @author John Schlick
  * @author Rus Carroll
- * @version 1.5 ($Rev: 202 $)
+ * @version 1.5 ($Rev: 210 $)
  * @package PlaceLocalInclude
  * @subpackage simple_html_dom
  */
@@ -269,7 +269,10 @@ class simple_html_dom_node
 		{
 			return $this->children;
 		}
-		if (isset($this->children[$idx])) return $this->children[$idx];
+		if (isset($this->children[$idx]))
+		{
+			return $this->children[$idx];
+		}
 		return null;
 	}
 
@@ -330,14 +333,14 @@ class simple_html_dom_node
 	function find_ancestor_tag($tag)
 	{
 		global $debug_object;
-		if (is_object($debug_object)) { $debug_object->debugLogEntry(1); }
+		if (is_object($debug_object)) { $debug_object->debug_log_entry(1); }
 
 		// Start by including ourselves in the comparison.
 		$returnDom = $this;
 
 		while (!is_null($returnDom))
 		{
-			if (is_object($debug_object)) { $debug_object->debugLog(2, "Current tag is: " . $returnDom->tag); }
+			if (is_object($debug_object)) { $debug_object->debug_log(2, "Current tag is: " . $returnDom->tag); }
 
 			if ($returnDom->tag == $tag)
 			{
@@ -374,7 +377,7 @@ class simple_html_dom_node
 					$text = " with text: " . $this->text;
 				}
 			}
-			$debug_object->debugLog(1, 'Innertext of tag: ' . $this->tag . $text);
+			$debug_object->debug_log(1, 'Innertext of tag: ' . $this->tag . $text);
 		}
 
 		if ($this->tag==='root') return $this->innertext();
@@ -532,7 +535,9 @@ class simple_html_dom_node
 			foreach ($head as $k=>$v)
 			{
 				if (!isset($found_keys[$k]))
+				{
 					$found_keys[$k] = 1;
+				}
 			}
 		}
 
@@ -554,7 +559,7 @@ class simple_html_dom_node
 	protected function seek($selector, &$ret, $lowercase=false)
 	{
 		global $debug_object;
-		if (is_object($debug_object)) { $debug_object->debugLogEntry(1); }
+		if (is_object($debug_object)) { $debug_object->debug_log_entry(1); }
 
 		list($tag, $key, $val, $exp, $no_key) = $selector;
 
@@ -615,7 +620,7 @@ class simple_html_dom_node
 					// this is a normal search, we want the value of that attribute of the tag.
 					$nodeKeyValue = $node->attr[$key];
 				}
-				if (is_object($debug_object)) {$debug_object->debugLog(2, "testing node: " . $node->tag . " for attribute: " . $key . $exp . $val . " where nodes value is: " . $nodeKeyValue);}
+				if (is_object($debug_object)) {$debug_object->debug_log(2, "testing node: " . $node->tag . " for attribute: " . $key . $exp . $val . " where nodes value is: " . $nodeKeyValue);}
 
 				//PaperG - If lowercase is set, do a case insensitive test of the value of the selector.
 				if ($lowercase) {
@@ -623,7 +628,7 @@ class simple_html_dom_node
 				} else {
 					$check = $this->match($exp, $val, $nodeKeyValue);
 				}
-				if (is_object($debug_object)) {$debug_object->debugLog(2, "after match: " . ($check ? "true" : "false"));}
+				if (is_object($debug_object)) {$debug_object->debug_log(2, "after match: " . ($check ? "true" : "false"));}
 
 				// handle multiple class
 				if (!$check && strcasecmp($key, 'class')===0) {
@@ -645,12 +650,12 @@ class simple_html_dom_node
 			unset($node);
 		}
 		// It's passed by reference so this is actually what this function returns.
-		if (is_object($debug_object)) {$debug_object->debugLog(1, "EXIT - ret: ", $ret);}
+		if (is_object($debug_object)) {$debug_object->debug_log(1, "EXIT - ret: ", $ret);}
 	}
 
 	protected function match($exp, $pattern, $value) {
 		global $debug_object;
-		if (is_object($debug_object)) {$debug_object->debugLogEntry(1);}
+		if (is_object($debug_object)) {$debug_object->debug_log_entry(1);}
 
 		switch ($exp) {
 			case '=':
@@ -672,7 +677,7 @@ class simple_html_dom_node
 
 	protected function parse_selector($selector_string) {
 		global $debug_object;
-		if (is_object($debug_object)) {$debug_object->debugLogEntry(1);}
+		if (is_object($debug_object)) {$debug_object->debug_log_entry(1);}
 
 		// pattern of CSS selectors, modified from mootools
 		// Paperg: Add the colon to the attrbute, so that it properly finds <tag attr:ibute="something" > like google does.
@@ -683,7 +688,7 @@ class simple_html_dom_node
 //		$pattern = "/([\w-:\*]*)(?:\#([\w-]+)|\.([\w-]+))?(?:\[@?(!?[\w-]+)(?:([!*^$]?=)[\"']?(.*?)[\"']?)?\])?([\/, ]+)/is";
 		$pattern = "/([\w-:\*]*)(?:\#([\w-]+)|\.([\w-]+))?(?:\[@?(!?[\w-:]+)(?:([!*^$]?=)[\"']?(.*?)[\"']?)?\])?([\/, ]+)/is";
 		preg_match_all($pattern, trim($selector_string).' ', $matches, PREG_SET_ORDER);
-		if (is_object($debug_object)) {$debug_object->debugLog(2, "Matches Array: ", $matches);}
+		if (is_object($debug_object)) {$debug_object->debug_log(2, "Matches Array: ", $matches);}
 
 		$selectors = array();
 		$result = array();
@@ -718,12 +723,14 @@ class simple_html_dom_node
 		return $selectors;
 	}
 
-	function __get($name) {
+	function __get($name)
+	{
 		if (isset($this->attr[$name]))
 		{
 			return $this->convert_text($this->attr[$name]);
 		}
-		switch ($name) {
+		switch ($name)
+		{
 			case 'outertext': return $this->outertext();
 			case 'innertext': return $this->innertext();
 			case 'plaintext': return $this->text();
@@ -732,22 +739,30 @@ class simple_html_dom_node
 		}
 	}
 
-	function __set($name, $value) {
-		switch ($name) {
+	function __set($name, $value)
+	{
+		global $debug_object;
+		if (is_object($debug_object)) {$debug_object->debug_log_entry(1);}
+
+		switch ($name)
+		{
 			case 'outertext': return $this->_[HDOM_INFO_OUTER] = $value;
 			case 'innertext':
 				if (isset($this->_[HDOM_INFO_TEXT])) return $this->_[HDOM_INFO_TEXT] = $value;
 				return $this->_[HDOM_INFO_INNER] = $value;
 		}
-		if (!isset($this->attr[$name])) {
+		if (!isset($this->attr[$name]))
+		{
 			$this->_[HDOM_INFO_SPACE][] = array(' ', '', '');
 			$this->_[HDOM_INFO_QUOTE][] = HDOM_QUOTE_DOUBLE;
 		}
 		$this->attr[$name] = $value;
 	}
 
-	function __isset($name) {
-		switch ($name) {
+	function __isset($name)
+	{
+		switch ($name)
+		{
 			case 'outertext': return true;
 			case 'innertext': return true;
 			case 'plaintext': return true;
@@ -765,7 +780,7 @@ class simple_html_dom_node
 	function convert_text($text)
 	{
 		global $debug_object;
-		if (is_object($debug_object)) {$debug_object->debugLogEntry(1);}
+		if (is_object($debug_object)) {$debug_object->debug_log_entry(1);}
 
 		$converted_text = $text;
 
@@ -777,7 +792,7 @@ class simple_html_dom_node
 			$sourceCharset = strtoupper($this->dom->_charset);
 			$targetCharset = strtoupper($this->dom->_target_charset);
 		}
-		if (is_object($debug_object)) {$debug_object->debugLog(3, "source charset: " . $sourceCharset . " target charaset: " . $targetCharset);}
+		if (is_object($debug_object)) {$debug_object->debug_log(3, "source charset: " . $sourceCharset . " target charaset: " . $targetCharset);}
 
 		if (!empty($sourceCharset) && !empty($targetCharset) && (strcasecmp($sourceCharset, $targetCharset) != 0))
 		{
@@ -1045,10 +1060,10 @@ class simple_html_dom
 
 		// prepare
 		$this->prepare($str, $lowercase, $stripRN, $defaultBRText, $defaultSpanText);
-		// strip out comments
-		$this->remove_noise("'<!--(.*?)-->'is");
 		// strip out cdata
 		$this->remove_noise("'<!\[CDATA\[(.*?)\]\]>'is", true);
+		// strip out comments
+		$this->remove_noise("'<!--(.*?)-->'is");
 		// Per sourceforge http://sourceforge.net/tracker/?func=detail&aid=2949097&group_id=218559&atid=1044037
 		// Script tags removal now preceeds style tag removal.
 		// strip out <script> tags
@@ -1078,10 +1093,15 @@ class simple_html_dom
 	// load html from file
 	function load_file()
 	{
+	  //external error: NOT related to dom loading
+	  $extError=error_get_last();
+
 		$args = func_get_args();
 		$this->load(call_user_func_array('file_get_contents', $args), true);
+
 		// Throw an error if we can't properly load the dom.
-		if (($error=error_get_last())!==null) {
+		$error=error_get_last();
+		if ($error!==$extError) {
 			$this->clear();
 			return false;
 		}
@@ -1198,22 +1218,22 @@ class simple_html_dom
 			if ($success)
 			{
 				$charset = $matches[1];
-				if (is_object($debug_object)) {$debug_object->debugLog(2, 'header content-type found charset of: ' . $charset);}
+				if (is_object($debug_object)) {$debug_object->debug_log(2, 'header content-type found charset of: ' . $charset);}
 			}
 
 		}
 
 		if (empty($charset))
 		{
-			$el = $this->root->find('meta[http-equiv=Content-Type]',0);
+			$el = $this->root->find('meta[http-equiv=Content-Type]',0, true);
 			if (!empty($el))
 			{
 				$fullvalue = $el->content;
-				if (is_object($debug_object)) {$debug_object->debugLog(2, 'meta content-type tag found' . $fullvalue);}
+				if (is_object($debug_object)) {$debug_object->debug_log(2, 'meta content-type tag found' . $fullvalue);}
 
 				if (!empty($fullvalue))
 				{
-					$success = preg_match('/charset=(.+)/', $fullvalue, $matches);
+					$success = preg_match('/charset=(.+)/i', $fullvalue, $matches);
 					if ($success)
 					{
 						$charset = $matches[1];
@@ -1221,7 +1241,7 @@ class simple_html_dom
 					else
 					{
 						// If there is a meta tag, and they don't specify the character set, research says that it's typically ISO-8859-1
-						if (is_object($debug_object)) {$debug_object->debugLog(2, 'meta content-type tag couldn\'t be parsed. using iso-8859 default.');}
+						if (is_object($debug_object)) {$debug_object->debug_log(2, 'meta content-type tag couldn\'t be parsed. using iso-8859 default.');}
 						$charset = 'ISO-8859-1';
 					}
 				}
@@ -1231,14 +1251,19 @@ class simple_html_dom
 		// If we couldn't find a charset above, then lets try to detect one based on the text we got...
 		if (empty($charset))
 		{
-			// Have php try to detect the encoding from the text given to us.
-			$charset = mb_detect_encoding($this->root->plaintext . "ascii", $encoding_list = array( "UTF-8", "CP1252" ) );
-			if (is_object($debug_object)) {$debug_object->debugLog(2, 'mb_detect found: ' . $charset);}
+			// Use this in case mb_detect_charset isn't installed/loaded on this machine.
+			$charset = false;
+			if (function_exists('mb_detect_encoding'))
+			{
+				// Have php try to detect the encoding from the text given to us.
+				$charset = mb_detect_encoding($this->root->plaintext . "ascii", $encoding_list = array( "UTF-8", "CP1252" ) );
+				if (is_object($debug_object)) {$debug_object->debug_log(2, 'mb_detect found: ' . $charset);}
+			}
 
 			// and if this doesn't work...  then we need to just wrongheadedly assume it's UTF-8 so that we can move on - cause this will usually give us most of what we need...
 			if ($charset === false)
 			{
-				if (is_object($debug_object)) {$debug_object->debugLog(2, 'since mb_detect failed - using default of utf-8');}
+				if (is_object($debug_object)) {$debug_object->debug_log(2, 'since mb_detect failed - using default of utf-8');}
 				$charset = 'UTF-8';
 			}
 		}
@@ -1246,11 +1271,11 @@ class simple_html_dom
 		// Since CP1252 is a superset, if we get one of it's subsets, we want it instead.
 		if ((strtolower($charset) == strtolower('ISO-8859-1')) || (strtolower($charset) == strtolower('Latin1')) || (strtolower($charset) == strtolower('Latin-1')))
 		{
-			if (is_object($debug_object)) {$debug_object->debugLog(2, 'replacing ' . $charset . ' with CP1252 as its a superset');}
+			if (is_object($debug_object)) {$debug_object->debug_log(2, 'replacing ' . $charset . ' with CP1252 as its a superset');}
 			$charset = 'CP1252';
 		}
 
-		if (is_object($debug_object)) {$debug_object->debugLog(1, 'EXIT - ' . $charset);}
+		if (is_object($debug_object)) {$debug_object->debug_log(1, 'EXIT - ' . $charset);}
 
 		return $this->_charset = $charset;
 	}
@@ -1616,14 +1641,14 @@ class simple_html_dom
 	protected function remove_noise($pattern, $remove_tag=false)
 	{
 		global $debug_object;
-		if (is_object($debug_object)) { $debug_object->debugLogEntry(1); }
+		if (is_object($debug_object)) { $debug_object->debug_log_entry(1); }
 
 		$count = preg_match_all($pattern, $this->doc, $matches, PREG_SET_ORDER|PREG_OFFSET_CAPTURE);
 
 		for ($i=$count-1; $i>-1; --$i)
 		{
 			$key = '___noise___'.sprintf('% 5d', count($this->noise)+1000);
-			if (is_object($debug_object)) { $debug_object->debugLog(2, 'key is: ' . $key); }
+			if (is_object($debug_object)) { $debug_object->debug_log(2, 'key is: ' . $key); }
 			$idx = ($remove_tag) ? 0 : 1;
 			$this->noise[$key] = $matches[$i][$idx][0];
 			$this->doc = substr_replace($this->doc, $key, $matches[$i][$idx][1], strlen($matches[$i][$idx][0]));
@@ -1641,7 +1666,7 @@ class simple_html_dom
 	function restore_noise($text)
 	{
 		global $debug_object;
-		if (is_object($debug_object)) { $debug_object->debugLogEntry(1); }
+		if (is_object($debug_object)) { $debug_object->debug_log_entry(1); }
 
 		while (($pos=strpos($text, '___noise___'))!==false)
 		{
@@ -1649,7 +1674,7 @@ class simple_html_dom
 			if (strlen($text) > $pos+15)
 			{
 				$key = '___noise___'.$text[$pos+11].$text[$pos+12].$text[$pos+13].$text[$pos+14].$text[$pos+15];
-				if (is_object($debug_object)) { $debug_object->debugLog(2, 'located key of: ' . $key); }
+				if (is_object($debug_object)) { $debug_object->debug_log(2, 'located key of: ' . $key); }
 
 				if (isset($this->noise[$key]))
 				{
@@ -1674,7 +1699,7 @@ class simple_html_dom
 	function search_noise($text)
 	{
 		global $debug_object;
-		if (is_object($debug_object)) { $debug_object->debugLogEntry(1); }
+		if (is_object($debug_object)) { $debug_object->debug_log_entry(1); }
 
 		foreach($this->noise as $noiseElement)
 		{
