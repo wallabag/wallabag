@@ -377,3 +377,13 @@ function debug($msg) {
 		flush();
 	}
 }
+
+function get_base_url($dom) {
+	$xpath = new DOMXPath($dom);
+	$base_url = @$xpath->evaluate('string(//head/base/@href)', $dom);
+	if ($base_url !== '') {
+		return $base_url;
+	} else {
+		return false;
+	}
+}

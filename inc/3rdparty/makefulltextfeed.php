@@ -671,7 +671,11 @@ foreach ($items as $key => $item) {
 			$html .= $item->get_description();
 		} else {
 			$readability->clean($content_block, 'select');
-			if ($options->rewrite_relative_urls) makeAbsolute($effective_url, $content_block);
+			// get base URL
+			$base_url = get_base_url($readability->dom);
+			if (!$base_url) $base_url = $effective_url;
+			// rewrite URLs
+			if ($options->rewrite_relative_urls) makeAbsolute($base_url, $content_block);
 			// footnotes
 			if (($links == 'footnotes') && (strpos($effective_url, 'wikipedia.org') === false)) {
 				$readability->addFootnotes($content_block);
