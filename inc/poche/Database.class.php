@@ -487,7 +487,7 @@ class Database {
         $sql =
             "SELECT entries.* FROM entries
             LEFT JOIN tags_entries ON tags_entries.entry_id=entries.id
-            WHERE tags_entries.tag_id = ? AND entries.user_id=?";
+            WHERE tags_entries.tag_id = ? AND entries.user_id=? ORDER by entries.id DESC";
         $query = $this->executeQuery($sql, array($tag_id, $user_id));
         $entries = $query->fetchAll();
 
