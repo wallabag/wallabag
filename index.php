@@ -98,7 +98,7 @@ if (isset($_GET['login'])) {
     }
     else {
         $tag_id = (isset($_GET['tag_id']) ? intval($_GET['tag_id']) : 0);
-        $poche->generateFeeds($_GET['token'], $_GET['user_id'], $tag_id, $_GET['type']);
+        $poche->generateFeeds($_GET['token'], filter_var($_GET['user_id'],FILTER_SANITIZE_NUMBER_INT), $tag_id, $_GET['type']);
     }
 }
 
