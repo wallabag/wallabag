@@ -1,0 +1,9 @@
+title: //div[@id='header']//h1[1]
+
+body: //div[@id='content']
+
+strip_id_or_class: toc
+
+prune: no
+
+test_url: http://moo.nac.uci.edu/~hjm/HOWTO_move_data.html
