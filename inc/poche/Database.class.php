@@ -398,6 +398,21 @@ class Database {
         return $query;
     }
 
+
+    private function _getDomain($url)
+    {
+        return parse_url($url, PHP_URL_HOST);
+    }
+
+    private function _getReadingTime($text) {
+        $word = str_word_count(strip_tags($text));
+        $minutes = floor($word / 200);
+        $seconds = floor($word % 200 / (200 / 60));
+        $time = array('minutes' => $minutes, 'seconds' => $seconds);
+
+        return $minutes;
+    }
+
     /**
      *
      * @param string $url
@@ -407,8 +422,12 @@ class Database {
      * @return integer $id of inserted record
      */
     public function add($url, $title, $content, $user_id, $isFavorite=0, $isRead=0) {
-        $sql_action = 'INSERT INTO entries ( url, title, content, user_id, is_fav, is_read ) VALUES (?, ?, ?, ?, ?, ?)';
-        $params_action = array($url, $title, $content, $user_id, $isFavorite, $isRead);
+        $readingTime = $this->_getReadingTime($content);
+        $domainName  = $this->_getDomain($url);
+        $date        = date('Y-m-d H:i:s');
+
+        $sql_action = 'INSERT INTO entries ( url, title, content, user_id, is_fav, is_read, date, reading_time, domain_name ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
+        $params_action = array($url, $title, $content, $user_id, $isFavorite, $isRead, $date, $readingTime, $domainName);
         if ( !$this->executeQuery($sql_action, $params_action) ) {
           $id = null;
         }
