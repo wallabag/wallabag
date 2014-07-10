@@ -232,6 +232,14 @@ class Poche
 
         $this->tpl = new Twig_Environment($loaderChain, $twigParams);
         $this->tpl->addExtension(new Twig_Extensions_Extension_I18n());
+
+        # filter to display domain name of an url
+        $filter = new Twig_SimpleFilter('getDomain', 'Tools::getDomain');
+        $this->tpl->addFilter($filter);
+
+        # filter for reading time
+        $filter = new Twig_SimpleFilter('getReadingTime', 'Tools::getReadingTime');
+        $this->tpl->addFilter($filter);
     }
 
     public function createNewUser() {

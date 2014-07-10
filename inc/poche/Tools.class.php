@@ -214,6 +214,20 @@ class Tools
         return ((isset ($_REQUEST["$var"])) ? htmlentities($_REQUEST["$var"]) : $default);
     }
 
+    public static function getDomain($url)
+    {
+        return parse_url($url, PHP_URL_HOST);
+    }
+
+    public static function getReadingTime($text) {
+        $word = str_word_count(strip_tags($text));
+        $minutes = floor($word / 200);
+        $seconds = floor($word % 200 / (200 / 60));
+        $time = array('minutes' => $minutes, 'seconds' => $seconds);
+
+        return $minutes;
+    }
+
     public static function getDocLanguage($userlanguage) {
         $lang = explode('.', $userlanguage);
         return str_replace('_', '-', $lang[0]);

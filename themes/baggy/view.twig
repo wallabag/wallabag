@@ -2,12 +2,12 @@
 {% block menu %}
 {% include '_menu.twig' %}
 {% endblock %}
-{% block title %}{{ entry.title|raw }} ({{ entry.domain_name }}){% endblock %}
+{% block title %}{{ entry.title|raw }} ({{ entry.url | e | getDomain }}){% endblock %}
 {% block content %}
         <div id="article_toolbar">
             <ul class="links">
                 <li class="topPosF"><a href="#top" title="{% trans "Back to top" %}" class="tool top icon icon-arrow-up-thick"><span>{% trans "Back to top" %}</span></a></li>
-                <li><a href="{{ entry.url|e }}" target="_blank" title="{% trans "original" %} : {{ entry.title|e }}" class="tool link icon icon-link"><span>{{ entry.url }}</span></a></li>
+                <li><a href="{{ entry.url|e }}" target="_blank" title="{% trans "original" %} : {{ entry.title|e }}" class="tool link icon icon-link"><span>{{ entry.url | e | getDomain }}</span></a></li>
                 <li><a title="{% trans "Mark as read" %}" class="tool icon icon-check {% if entry.is_read == 0 %}archive-off{% else %}archive{% endif %}" href="javascript: void(null);" id="markAsRead"><span>{% trans "Toggle mark as read" %}</span></a></li>
                 <li><a title="{% trans "Favorite" %}" class="tool icon icon-star {% if entry.is_fav == 0 %}fav-off{% else %}fav{% endif %}" href="javascript: void(null);" id="setFav"><span>{% trans "Toggle favorite" %}</span></a></li>
                 <li><a title="{% trans "Delete" %}" class="tool delete icon icon-trash" href="./?action=delete&amp;id={{ entry.id|e }}"><span>{% trans "Delete" %}</span></a></li>
