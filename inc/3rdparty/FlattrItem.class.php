@@ -1,25 +1,32 @@
 <?php
-/* 
-* Class for Flattr querying
-*/
-class FlattrItem {
+/**
+ * wallabag, self hostable application allowing you to not miss any content anymore
+ *
+ * @category   wallabag
+ * @author     Nicolas Lœuillet <nicolas@loeuillet.org>
+ * @copyright  2013
+ * @license    http://opensource.org/licenses/MIT see COPYING file
+ */
 
+class FlattrItem
+{
     public $status;
     public $urltoflattr;
     public $flattrItemURL;
     public $numflattrs;
 
-    public function checkItem($urltoflattr,$id) {
-        $this->cacheflattrfile($urltoflattr, $id);
+    public function checkItem($urltoflattr, $id)
+    {
+        $this->_cacheflattrfile($urltoflattr, $id);
         $flattrResponse = file_get_contents(CACHE . "/flattr/".$id.".cache");
         if($flattrResponse != FALSE) {
             $result = json_decode($flattrResponse);
-			if (isset($result->message)){
+            if (isset($result->message)) {
                 if ($result->message == "flattrable") {
                     $this->status = FLATTRABLE;
                 }
             } 
- 		elseif (is_object($result) && $result->link) {
+            elseif (is_object($result) && $result->link) {
                 $this->status = FLATTRED;
                 $this->flattrItemURL = $result->link;
                 $this->numflattrs = $result->flattrs;
@@ -33,7 +40,8 @@ class FlattrItem {
         }
     }
 
-    private function cacheflattrfile($urltoflattr, $id) {
+    private function _cacheflattrfile($urltoflattr, $id)
+    {
         if (!is_dir(CACHE . '/flattr')) {
             mkdir(CACHE . '/flattr', 0777);
         }

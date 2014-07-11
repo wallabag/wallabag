@@ -5,7 +5,7 @@
  * @category   wallabag
  * @author     Nicolas Lœuillet <nicolas@loeuillet.org>
  * @copyright  2013
- * @license    http://www.wtfpl.net/ see COPYING file
+ * @license    http://opensource.org/licenses/MIT see COPYING file
  */
 
 class Database {
@@ -38,6 +38,7 @@ class Database {
         }
 
         $this->handle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->_checkTags();
         Tools::logm('storage type ' . STORAGE);
     }
 
@@ -45,21 +46,7 @@ class Database {
         return $this->handle;
     }
 
-    public function isInstalled() {
-        $sql = "SELECT username FROM users";
-        $query = $this->executeQuery($sql, array());
-        if ($query == false) {
-            die(STORAGE . ' database looks empty. You have to create it (you can find database structure in install folder).');
-        }
-        $hasAdmin = count($query->fetchAll());
-
-        if ($hasAdmin == 0)
-            return false;
-
-        return true;
-    }
-
-    public function checkTags() {
+    private function _checkTags() {
 
         if (STORAGE == 'sqlite') {
             $sql = '

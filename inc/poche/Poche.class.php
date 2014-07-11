@@ -5,244 +5,77 @@
  * @category   wallabag
  * @author     Nicolas Lœuillet <nicolas@loeuillet.org>
  * @copyright  2013
- * @license    http://www.wtfpl.net/ see COPYING file
+ * @license    http://opensource.org/licenses/MIT see COPYING file
  */
 
 class Poche
 {
-    public static $canRenderTemplates = true;
-    public static $configFileAvailable = true;
-
+    /**
+     * @var User
+     */
     public $user;
+    /**
+     * @var Database
+     */
     public $store;
+    /**
+     * @var Template
+     */
     public $tpl;
+    /**
+     * @var Language
+     */
+    public $language;
+    /**
+     * @var Routing
+     */
+    public $routing;
+    /**
+     * @var Messages
+     */
     public $messages;
+    /**
+     * @var Paginator
+     */
     public $pagination;
 
-    private $currentTheme = '';
-    private $currentLanguage = '';
-    private $notInstalledMessage = array();
-
-    private $language_names = array(
-      'cs_CZ.utf8' => 'čeština',
-      'de_DE.utf8' => 'German',
-      'en_EN.utf8' => 'English',
-      'es_ES.utf8' => 'Español',
-      'fa_IR.utf8' => 'فارسی',
-      'fr_FR.utf8' => 'Français',
-      'it_IT.utf8' => 'Italiano',
-      'pl_PL.utf8' => 'Polski',
-      'pt_BR.utf8' => 'Português (Brasil)',
-      'ru_RU.utf8' => 'Pусский',
-      'sl_SI.utf8' => 'Slovenščina',
-      'uk_UA.utf8' => 'Українська',
-    );
     public function __construct()
     {
-        if ($this->configFileIsAvailable()) {
-            $this->init();
-        }
-
-        if ($this->themeIsInstalled()) {
-            $this->initTpl();
-        }
-
-        if ($this->systemIsInstalled()) {
-            $this->store = new Database();
-            $this->messages = new Messages();
-            # installation
-            if (! $this->store->isInstalled()) {
-                $this->install();
-            }
-            $this->store->checkTags();
-        }
+        $this->init();
     }
 
     private function init()
     {
         Tools::initPhp();
 
-        if (isset($_SESSION['poche_user']) && $_SESSION['poche_user'] != array()) {
-            $this->user = $_SESSION['poche_user'];
+        $pocheUser = Session::getParam('poche_user');
+
+        if ($pocheUser && $pocheUser != array()) {
+            $this->user = $pocheUser;
         } else {
-            # fake user, just for install & login screens
+            // fake user, just for install & login screens
             $this->user = new User();
             $this->user->setConfig($this->getDefaultConfig());
         }
 
-        # l10n
-        $language = $this->user->getConfigValue('language');
-        @putenv('LC_ALL=' . $language);
-        setlocale(LC_ALL, $language);
-        bindtextdomain($language, LOCALE);
-        textdomain($language);
-
-        # Pagination
-        $this->pagination = new Paginator($this->user->getConfigValue('pager'), 'p');
-
-        # Set up theme
-        $themeDirectory = $this->user->getConfigValue('theme');
-
-        if ($themeDirectory === false) {
-            $themeDirectory = DEFAULT_THEME;
-        }
-
-        $this->currentTheme = $themeDirectory;
-
-        # Set up language
-        $languageDirectory = $this->user->getConfigValue('language');
-
-        if ($languageDirectory === false) {
-            $languageDirectory = DEFAULT_THEME;
-        }
-
-        $this->currentLanguage = $languageDirectory;
+        $this->pagination   = new Paginator($this->user->getConfigValue('pager'), 'p');
+        $this->language     = new Language($this);
+        $this->tpl          = new Template($this);
+        $this->store        = new Database();
+        $this->messages     = new Messages();
+        $this->routing      = new Routing($this);
     }
 
-    public function configFileIsAvailable() {
-        if (! self::$configFileAvailable) {
-            $this->notInstalledMessage[] = 'You have to copy (don\'t just rename!) inc/poche/config.inc.default.php to inc/poche/config.inc.php.';
-
-            return false;
-        }
-
-        return true;
-    }
-
-    public function themeIsInstalled() {
-        $passTheme = TRUE;
-        # Twig is an absolute requirement for Poche to function. Abort immediately if the Composer installer hasn't been run yet
-        if (! self::$canRenderTemplates) {
-            $this->notInstalledMessage[] = 'Twig does not seem to be installed. Please initialize the Composer installation to automatically fetch dependencies. You can also download <a href="http://wllbg.org/vendor">vendor.zip</a> and extract it in your wallabag folder.';
-            $passTheme = FALSE;
-        }
-
-        if (! is_writable(CACHE)) {
-            $this->notInstalledMessage[] = 'You don\'t have write access on cache directory.';
-
-            self::$canRenderTemplates = false;
-
-            $passTheme = FALSE;
-        }
-
-        # Check if the selected theme and its requirements are present
-        $theme = $this->getTheme();
-
-        if ($theme != '' && ! is_dir(THEME . '/' . $theme)) {
-            $this->notInstalledMessage[] = 'The currently selected theme (' . $theme . ') does not seem to be properly installed (Missing directory: ' . THEME . '/' . $theme . ')';
-
-            self::$canRenderTemplates = false;
-
-            $passTheme = FALSE;
-        }
-
-        $themeInfo = $this->getThemeInfo($theme);
-        if (isset($themeInfo['requirements']) && is_array($themeInfo['requirements'])) {
-            foreach ($themeInfo['requirements'] as $requiredTheme) {
-                if (! is_dir(THEME . '/' . $requiredTheme)) {
-                    $this->notInstalledMessage[] = 'The required "' . $requiredTheme . '" theme is missing for the current theme (' . $theme . ')';
-
-                    self::$canRenderTemplates = false;
-
-                    $passTheme = FALSE;
-                }
-            }
-        }
-
-        if (!$passTheme) {
-            return FALSE;
-        }
-
-
-        return true;
+    public function run()
+    {
+        $this->routing->run();
     }
 
     /**
-     * all checks before installation.
-     * @todo move HTML to template
-     * @return boolean
+     * Creates a new user
      */
-    public function systemIsInstalled()
+    public function createNewUser()
     {
-        $msg = TRUE;
-
-        $configSalt = defined('SALT') ? constant('SALT') : '';
-
-        if (empty($configSalt)) {
-            $this->notInstalledMessage[] = 'You have not yet filled in the SALT value in the config.inc.php file.';
-            $msg = FALSE;
-        }
-        if (STORAGE == 'sqlite' && ! file_exists(STORAGE_SQLITE)) {
-            Tools::logm('sqlite file doesn\'t exist');
-            $this->notInstalledMessage[] = 'sqlite file doesn\'t exist, you can find it in install folder. Copy it in /db folder.';
-            $msg = FALSE;
-        }
-        if (is_dir(ROOT . '/install') && ! DEBUG_POCHE) {
-            $this->notInstalledMessage[] = 'you have to delete the /install folder before using poche.';
-            $msg = FALSE;
-        }
-        if (STORAGE == 'sqlite' && ! is_writable(STORAGE_SQLITE)) {
-            Tools::logm('you don\'t have write access on sqlite file');
-            $this->notInstalledMessage[] = 'You don\'t have write access on sqlite file.';
-            $msg = FALSE;
-        }
-
-        if (! $msg) {
-            return false;
-        }
-
-        return true;
-    }
-
-    public function getNotInstalledMessage() {
-        return $this->notInstalledMessage;
-    }
-
-    private function initTpl()
-    {
-        $loaderChain = new Twig_Loader_Chain();
-        $theme = $this->getTheme();
-
-        # add the current theme as first to the loader chain so Twig will look there first for overridden template files
-        try {
-            $loaderChain->addLoader(new Twig_Loader_Filesystem(THEME . '/' . $theme));
-        } catch (Twig_Error_Loader $e) {
-            # @todo isInstalled() should catch this, inject Twig later
-            die('The currently selected theme (' . $theme . ') does not seem to be properly installed (' . THEME . '/' . $theme .' is missing)');
-        }
-
-        # add all required themes to the loader chain
-        $themeInfo = $this->getThemeInfo($theme);
-        if (isset($themeInfo['requirements']) && is_array($themeInfo['requirements'])) {
-            foreach ($themeInfo['requirements'] as $requiredTheme) {
-                try {
-                    $loaderChain->addLoader(new Twig_Loader_Filesystem(THEME . '/' . $requiredTheme));
-                } catch (Twig_Error_Loader $e) {
-                    # @todo isInstalled() should catch this, inject Twig later
-                    die('The required "' . $requiredTheme . '" theme is missing for the current theme (' . $theme . ')');
-                }
-            }
-        }
-
-        if (DEBUG_POCHE) {
-            $twigParams = array();
-        } else {
-            $twigParams = array('cache' => CACHE);
-        }
-
-        $this->tpl = new Twig_Environment($loaderChain, $twigParams);
-        $this->tpl->addExtension(new Twig_Extensions_Extension_I18n());
-
-        # filter to display domain name of an url
-        $filter = new Twig_SimpleFilter('getDomain', 'Tools::getDomain');
-        $this->tpl->addFilter($filter);
-
-        # filter for reading time
-        $filter = new Twig_SimpleFilter('getReadingTime', 'Tools::getReadingTime');
-        $this->tpl->addFilter($filter);
-    }
-
-    public function createNewUser() {
         if (isset($_GET['newuser'])){
             if ($_POST['newusername'] != "" && $_POST['password4newuser'] != ""){
                 $newusername = filter_var($_POST['newusername'], FILTER_SANITIZE_STRING);
@@ -266,7 +99,11 @@ class Poche
         }
     }
 
-    public function deleteUser(){
+    /**
+     * Delete an existing user
+     */
+    public function deleteUser()
+    {
         if (isset($_GET['deluser'])){
             if ($this->store->listUsers() > 1) {
                 if (Tools::encodeString($_POST['password4deletinguser'].$this->user->getUsername()) == $this->store->getUserPassword($this->user->getId())) {
@@ -292,115 +129,6 @@ class Poche
                 $this->messages->add('e', _('Error : You are the only user, you cannot delete your account !'));
             }
         }
-    }
-
-    private function install()
-    {
-        Tools::logm('poche still not installed');
-        echo $this->tpl->render('install.twig', array(
-            'token' => Session::getToken(),
-            'theme' => $this->getTheme(),
-            'poche_url' => Tools::getPocheUrl()
-        ));
-        if (isset($_GET['install'])) {
-            if (($_POST['password'] == $_POST['password_repeat'])
-                && $_POST['password'] != "" && $_POST['login'] != "") {
-                # let's rock, install poche baby !
-                if ($this->store->install($_POST['login'], Tools::encodeString($_POST['password'] . $_POST['login'])))
-                {
-                    Session::logout();
-                    Tools::logm('poche is now installed');
-                    Tools::redirect();
-                }
-            }
-            else {
-                Tools::logm('error during installation');
-                Tools::redirect();
-            }
-        }
-        exit();
-    }
-
-    public function getTheme() {
-        return $this->currentTheme;
-    }
-
-    /**
-     * Provides theme information by parsing theme.ini file if present in the theme's root directory.
-     * In all cases, the following data will be returned:
-     * - name: theme's name, or key if the theme is unnamed,
-     * - current: boolean informing if the theme is the current user theme.
-     *
-     * @param string $theme Theme key (directory name)
-     * @return array|boolean Theme information, or false if the theme doesn't exist.
-     */
-    public function getThemeInfo($theme) {
-        if (!is_dir(THEME . '/' . $theme)) {
-            return false;
-        }
-
-        $themeIniFile = THEME . '/' . $theme . '/theme.ini';
-        $themeInfo = array();
-
-        if (is_file($themeIniFile) && is_readable($themeIniFile)) {
-            $themeInfo = parse_ini_file($themeIniFile);
-        }
-
-        if ($themeInfo === false) {
-            $themeInfo = array();
-        }
-        if (!isset($themeInfo['name'])) {
-            $themeInfo['name'] = $theme;
-        }
-        $themeInfo['current'] = ($theme === $this->getTheme());
-
-        return $themeInfo;
-    }
-
-    public function getInstalledThemes() {
-        $handle = opendir(THEME);
-        $themes = array();
-
-        while (($theme = readdir($handle)) !== false) {
-            # Themes are stored in a directory, so all directory names are themes
-            # @todo move theme installation data to database
-            if (!is_dir(THEME . '/' . $theme) || in_array($theme, array('.', '..'))) {
-                continue;
-            }
-
-            $themes[$theme] = $this->getThemeInfo($theme);
-        }
-
-        ksort($themes);
-
-        return $themes;
-    }
-
-    public function getLanguage() {
-        return $this->currentLanguage;
-    }
-
-    public function getInstalledLanguages() {
-        $handle = opendir(LOCALE);
-        $languages = array();
-
-        while (($language = readdir($handle)) !== false) {
-            # Languages are stored in a directory, so all directory names are languages
-            # @todo move language installation data to database
-            if (! is_dir(LOCALE . '/' . $language) || in_array($language, array('..', '.', 'tools'))) {
-                continue;
-            }
-
-            $current = false;
-
-            if ($language === $this->getLanguage()) {
-                $current = true;
-            }
-
-            $languages[] = array('name' => (isset($this->language_names[$language]) ? $this->language_names[$language] : $language), 'value' => $language, 'current' => $current);
-        }
-
-        return $languages;
     }
 
     public function getDefaultConfig()
@@ -437,7 +165,7 @@ class Poche
                 if ( $last_id ) {
                     Tools::logm('add link ' . $url->getUrl());
                     if (DOWNLOAD_PICTURES) {
-                        $content = filtre_picture($body, $url->getUrl(), $last_id);
+                        $content = Picture::filterPicture($body, $url->getUrl(), $last_id);
                         Tools::logm('updating content article');
                         $this->store->updateContent($last_id, $content, $this->user->getId());
                     }
@@ -472,7 +200,7 @@ class Poche
                 $msg = 'delete link #' . $id;
                 if ($this->store->deleteById($id, $this->user->getId())) {
                     if (DOWNLOAD_PICTURES) {
-                        remove_directory(ABS_PATH . $id);
+                        Picture::removeDirectory(ABS_PATH . $id);
                     }
                     $this->messages->add('s', _('the link has been deleted successfully'));
                 }
@@ -598,8 +326,8 @@ class Poche
                 $check_time_prod = date('d-M-Y H:i', $prod_infos[1]);
                 $compare_dev = version_compare(POCHE, $dev);
                 $compare_prod = version_compare(POCHE, $prod);
-                $themes = $this->getInstalledThemes();
-                $languages = $this->getInstalledLanguages();
+                $themes = $this->tpl->getInstalledThemes();
+                $languages = $this->language->getInstalledLanguages();
                 $token = $this->user->getConfigValue('token');
                 $http_auth = (isset($_SERVER['PHP_AUTH_USER']) || isset($_SERVER['REMOTE_USER'])) ? true : false;
                 $only_user = ($this->store->listUsers() > 1) ? false : true;
@@ -703,7 +431,7 @@ class Poche
                     'listmode' => (isset($_COOKIE['listmode']) ? true : false),
                 );
 
-                //if id is given - we retrive entries by tag: id is tag id
+                //if id is given - we retrieve entries by tag: id is tag id
                 if ($id) {
                   $tpl_vars['tag'] = $this->store->retrieveTag($id, $this->user->getId());
                   $tpl_vars['id'] = intval($id);
@@ -757,85 +485,6 @@ class Poche
         }
     }
 
-    public function updateTheme()
-    {
-        # no data
-        if (empty($_POST['theme'])) {
-        }
-
-        # we are not going to change it to the current theme...
-        if ($_POST['theme'] == $this->getTheme()) {
-            $this->messages->add('w', _('still using the "' . $this->getTheme() . '" theme!'));
-            Tools::redirect('?view=config');
-        }
-
-        $themes = $this->getInstalledThemes();
-        $actualTheme = false;
-
-        foreach (array_keys($themes) as $theme) {
-            if ($theme == $_POST['theme']) {
-                $actualTheme = true;
-                break;
-            }
-        }
-
-        if (! $actualTheme) {
-            $this->messages->add('e', _('that theme does not seem to be installed'));
-            Tools::redirect('?view=config');
-        }
-
-        $this->store->updateUserConfig($this->user->getId(), 'theme', $_POST['theme']);
-        $this->messages->add('s', _('you have changed your theme preferences'));
-
-        $currentConfig = $_SESSION['poche_user']->config;
-        $currentConfig['theme'] = $_POST['theme'];
-
-        $_SESSION['poche_user']->setConfig($currentConfig);
-
-        $this->emptyCache();
-
-        Tools::redirect('?view=config');
-    }
-
-    public function updateLanguage()
-    {
-        # no data
-        if (empty($_POST['language'])) {
-        }
-
-        # we are not going to change it to the current language...
-        if ($_POST['language'] == $this->getLanguage()) {
-            $this->messages->add('w', _('still using the "' . $this->getLanguage() . '" language!'));
-            Tools::redirect('?view=config');
-        }
-
-        $languages = $this->getInstalledLanguages();
-        $actualLanguage = false;
-
-        foreach ($languages as $language) {
-            if ($language['value'] == $_POST['language']) {
-                $actualLanguage = true;
-                break;
-            }
-        }
-
-        if (! $actualLanguage) {
-            $this->messages->add('e', _('that language does not seem to be installed'));
-            Tools::redirect('?view=config');
-        }
-
-        $this->store->updateUserConfig($this->user->getId(), 'language', $_POST['language']);
-        $this->messages->add('s', _('you have changed your language preferences'));
-
-        $currentConfig = $_SESSION['poche_user']->config;
-        $currentConfig['language'] = $_POST['language'];
-
-        $_SESSION['poche_user']->setConfig($currentConfig);
-
-        $this->emptyCache();
-
-        Tools::redirect('?view=config');
-    }
     /**
      * get credentials from differents sources
      * it redirects the user to the $referer link

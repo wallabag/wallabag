@@ -1,5 +1,4 @@
 <?php
-
 // PHP 5.3 minimum
 if (version_compare(PHP_VERSION, '5.3.3', '<')) {
     die('This software require PHP 5.3.3 minimum');
@@ -13,14 +12,11 @@ if (version_compare(PHP_VERSION, '5.4.0', '<')) {
     }
 }
 
-// Check if /cache is writeable
-if (! is_writable('cache')) {
-    die('The directory "cache" must be writeable by your web server user');
-}
-
-// Check if /db is writeable
-if (! is_writable('db')) {
-    die('The directory "db" must be writeable by your web server user');
+$writableFolders = array('cache', 'db');
+foreach ($writableFolders as $folder) {
+    if (! is_writable($folder)) {
+        die('The directory "' . $folder . '" must be writeable by your web server user');
+    }
 }
 
 // install folder still present, need to install wallabag
