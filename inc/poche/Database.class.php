@@ -9,6 +9,7 @@
  */
 
 class Database {
+
     var $handle;
     private $order = array(
       'ia' => 'ORDER BY entries.id',
@@ -42,11 +43,13 @@ class Database {
         Tools::logm('storage type ' . STORAGE);
     }
 
-    private function getHandle() {
+    private function getHandle()
+    {
         return $this->handle;
     }
 
-    private function _checkTags() {
+    private function _checkTags()
+    {
 
         if (STORAGE == 'sqlite') {
             $sql = '
@@ -110,7 +113,8 @@ class Database {
         $query = $this->executeQuery($sql, array());
     }
 
-    public function install($login, $password) {
+    public function install($login, $password)
+    {
         $sql = 'INSERT INTO users ( username, password, name, email) VALUES (?, ?, ?, ?)';
         $params = array($login, $password, $login, ' ');
         $query = $this->executeQuery($sql, $params);
@@ -137,7 +141,8 @@ class Database {
         return TRUE;
     }
 
-    public function getConfigUser($id) {
+    public function getConfigUser($id)
+    {
         $sql = "SELECT * FROM users_config WHERE user_id = ?";
         $query = $this->executeQuery($sql, array($id));
         $result = $query->fetchAll();
@@ -150,7 +155,8 @@ class Database {
         return $user_config;
     }
 
-    public function userExists($username) {
+    public function userExists($username)
+    {
         $sql = "SELECT * FROM users WHERE username=?";
         $query = $this->executeQuery($sql, array($username));
         $login = $query->fetchAll();
@@ -161,7 +167,8 @@ class Database {
         }
     }
 
-    public function login($username, $password, $isauthenticated=false) {
+    public function login($username, $password, $isauthenticated = FALSE)
+    {
         if ($isauthenticated) {
           $sql = "SELECT * FROM users WHERE username=?";
           $query = $this->executeQuery($sql, array($username));
@@ -191,7 +198,8 @@ class Database {
         $query = $this->executeQuery($sql_update, $params_update);
     }
 
-    public function updateUserConfig($userId, $key, $value) {
+    public function updateUserConfig($userId, $key, $value)
+    {
         $config = $this->getConfigUser($userId);
 
         if (! isset($config[$key])) {
@@ -205,7 +213,8 @@ class Database {
         $query = $this->executeQuery($sql, $params);
     }
 
-    private function executeQuery($sql, $params) {
+    private function executeQuery($sql, $params)
+    {
         try
         {
             $query = $this->getHandle()->prepare($sql);
@@ -219,28 +228,32 @@ class Database {
         }
     }
     
-    public function listUsers($username=null) {
+    public function listUsers($username = NULL)
+    {
         $sql = 'SELECT count(*) FROM users'.( $username ? ' WHERE username=?' : '');
         $query = $this->executeQuery($sql, ( $username ? array($username) : array()));
         list($count) = $query->fetch();
         return $count;
     }
     
-    public function getUserPassword($userID) {
+    public function getUserPassword($userID)
+    {
         $sql = "SELECT * FROM users WHERE id=?";
         $query = $this->executeQuery($sql, array($userID));
         $password = $query->fetchAll();
         return isset($password[0]['password']) ? $password[0]['password'] : null;
     }
     
-    public function deleteUserConfig($userID) {
+    public function deleteUserConfig($userID)
+    {
         $sql_action = 'DELETE from users_config WHERE user_id=?';
         $params_action = array($userID);
         $query = $this->executeQuery($sql_action, $params_action);
         return $query;
     }
     
-    public function deleteTagsEntriesAndEntries($userID) {
+    public function deleteTagsEntriesAndEntries($userID)
+    {
         $entries = $this->retrieveAll($userID);
         foreach($entries as $entryid) {
             $tags = $this->retrieveTagsByEntry($entryid);
@@ -251,20 +264,23 @@ class Database {
         }
     }
     
-    public function deleteUser($userID) {
+    public function deleteUser($userID)
+    {
         $sql_action = 'DELETE from users WHERE id=?';
         $params_action = array($userID);
         $query = $this->executeQuery($sql_action, $params_action);
     }
 
-    public function updateContentAndTitle($id, $title, $body, $user_id) {
+    public function updateContentAndTitle($id, $title, $body, $user_id)
+    {
         $sql_action = 'UPDATE entries SET content = ?, title = ? WHERE id=? AND user_id=?';
         $params_action = array($body, $title, $id, $user_id);
         $query = $this->executeQuery($sql_action, $params_action);
         return $query;
     }
 
-    public function retrieveUnfetchedEntries($user_id, $limit) {
+    public function retrieveUnfetchedEntries($user_id, $limit)
+    {
 
         $sql_limit = "LIMIT 0,".$limit;
         if (STORAGE == 'postgres') {
@@ -278,7 +294,8 @@ class Database {
         return $entries;
     }
 
-    public function retrieveUnfetchedEntriesCount($user_id) {
+    public function retrieveUnfetchedEntriesCount($user_id)
+    {
       $sql        = "SELECT count(*) FROM entries WHERE (content = '' OR content IS NULL) AND title LIKE 'Untitled - Import%' AND user_id=?";
       $query      = $this->executeQuery($sql, array($user_id));
       list($count) = $query->fetch();
@@ -286,7 +303,8 @@ class Database {
       return $count;
     }
 
-    public function retrieveAll($user_id) {
+    public function retrieveAll($user_id)
+    {
         $sql        = "SELECT * FROM entries WHERE user_id=? ORDER BY id";
         $query      = $this->executeQuery($sql, array($user_id));
         $entries    = $query->fetchAll();
@@ -294,7 +312,8 @@ class Database {
         return $entries;
     }
 
-    public function retrieveOneById($id, $user_id) {
+    public function retrieveOneById($id, $user_id)
+    {
         $entry  = NULL;
         $sql    = "SELECT * FROM entries WHERE id=? AND user_id=?";
         $params = array(intval($id), $user_id);
@@ -304,7 +323,8 @@ class Database {
         return isset($entry[0]) ? $entry[0] : null;
     }
 
-    public function retrieveOneByURL($url, $user_id) {
+    public function retrieveOneByURL($url, $user_id)
+    {
         $entry  = NULL;
         $sql    = "SELECT * FROM entries WHERE url=? AND user_id=?";
         $params = array($url, $user_id);
@@ -314,13 +334,15 @@ class Database {
         return isset($entry[0]) ? $entry[0] : null;
     }
 
-    public function reassignTags($old_entry_id, $new_entry_id) {
+    public function reassignTags($old_entry_id, $new_entry_id)
+    {
         $sql    = "UPDATE tags_entries SET entry_id=? WHERE entry_id=?";
         $params = array($new_entry_id, $old_entry_id);
         $query  = $this->executeQuery($sql, $params);
     }
 
-    public function getEntriesByView($view, $user_id, $limit = '', $tag_id = 0) {
+    public function getEntriesByView($view, $user_id, $limit = '', $tag_id = 0)
+    {
         switch ($view) {
             case 'archive':
                 $sql    = "SELECT * FROM entries WHERE user_id=? AND is_read=? ";
@@ -348,9 +370,10 @@ class Database {
                 $entries = $query->fetchAll();
 
                 return $entries;
-        }
+    }
 
-    public function getEntriesByViewCount($view, $user_id, $tag_id = 0) {
+    public function getEntriesByViewCount($view, $user_id, $tag_id = 0)
+    {
         switch ($view) {
             case 'archive':
                     $sql    = "SELECT count(*) FROM entries WHERE user_id=? AND is_read=? ";
@@ -378,7 +401,8 @@ class Database {
         return $count;
     }
 
-    public function updateContent($id, $content, $user_id) {
+    public function updateContent($id, $content, $user_id)
+    {
         $sql_action = 'UPDATE entries SET content = ? WHERE id=? AND user_id=?';
         $params_action = array($content, $id, $user_id);
         $query = $this->executeQuery($sql_action, $params_action);
@@ -393,7 +417,8 @@ class Database {
      * @param integer $user_id
      * @return integer $id of inserted record
      */
-    public function add($url, $title, $content, $user_id, $isFavorite=0, $isRead=0) {
+    public function add($url, $title, $content, $user_id, $isFavorite=0, $isRead=0)
+    {
         $sql_action = 'INSERT INTO entries ( url, title, content, user_id, is_fav, is_read ) VALUES (?, ?, ?, ?, ?, ?)';
         $params_action = array($url, $title, $content, $user_id, $isFavorite, $isRead);
 
@@ -406,36 +431,42 @@ class Database {
         return $id;
     }
 
-    public function deleteById($id, $user_id) {
+    public function deleteById($id, $user_id)
+    {
         $sql_action     = "DELETE FROM entries WHERE id=? AND user_id=?";
         $params_action  = array($id, $user_id);
         $query          = $this->executeQuery($sql_action, $params_action);
         return $query;
     }
 
-    public function favoriteById($id, $user_id) {
+    public function favoriteById($id, $user_id)
+    {
         $sql_action     = "UPDATE entries SET is_fav=NOT is_fav WHERE id=? AND user_id=?";
         $params_action  = array($id, $user_id);
         $query          = $this->executeQuery($sql_action, $params_action);
     }
 
-    public function archiveById($id, $user_id) {
+    public function archiveById($id, $user_id)
+    {
         $sql_action     = "UPDATE entries SET is_read=NOT is_read WHERE id=? AND user_id=?";
         $params_action  = array($id, $user_id);
         $query          = $this->executeQuery($sql_action, $params_action);
     }
 
-    public function archiveAll($user_id) {
+    public function archiveAll($user_id)
+    {
         $sql_action     = "UPDATE entries SET is_read=? WHERE user_id=? AND is_read=?";
         $params_action  = array($user_id, 1, 0);
         $query          = $this->executeQuery($sql_action, $params_action);
     }
 
-    public function getLastId($column = '') {
+    public function getLastId($column = '')
+    {
         return $this->getHandle()->lastInsertId($column);
     }
 
-    public function search($term, $user_id, $limit = '') {
+    public function search($term, $user_id, $limit = '')
+    {
         $search = '%'.$term.'%';
         $sql_action = "SELECT * FROM entries WHERE user_id=? AND (content LIKE ? OR title LIKE ? OR url LIKE ?) "; //searches in content, title and URL
         $sql_action .= $this->getEntriesOrder().' ' . $limit;
@@ -444,7 +475,8 @@ class Database {
         return $query->fetchAll();
   	}
 
-    public function retrieveAllTags($user_id, $term = null) {
+    public function retrieveAllTags($user_id, $term = NULL)
+    {
         $sql = "SELECT DISTINCT tags.*, count(entries.id) AS entriescount FROM tags
           LEFT JOIN tags_entries ON tags_entries.tag_id=tags.id
           LEFT JOIN entries ON tags_entries.entry_id=entries.id
@@ -458,7 +490,8 @@ class Database {
         return $tags;
     }
 
-    public function retrieveTag($id, $user_id) {
+    public function retrieveTag($id, $user_id)
+    {
         $tag  = NULL;
         $sql    = "SELECT DISTINCT tags.* FROM tags
           LEFT JOIN tags_entries ON tags_entries.tag_id=tags.id
@@ -468,10 +501,11 @@ class Database {
         $query  = $this->executeQuery($sql, $params);
         $tag  = $query->fetchAll();
 
-        return isset($tag[0]) ? $tag[0] : null;
+        return isset($tag[0]) ? $tag[0] : NULL;
     }
 
-    public function retrieveEntriesByTag($tag_id, $user_id) {
+    public function retrieveEntriesByTag($tag_id, $user_id)
+    {
         $sql =
             "SELECT entries.* FROM entries
             LEFT JOIN tags_entries ON tags_entries.entry_id=entries.id
@@ -482,7 +516,8 @@ class Database {
         return $entries;
     }
 
-    public function retrieveTagsByEntry($entry_id) {
+    public function retrieveTagsByEntry($entry_id)
+    {
         $sql =
             "SELECT tags.* FROM tags
             LEFT JOIN tags_entries ON tags_entries.tag_id=tags.id
@@ -493,14 +528,16 @@ class Database {
         return $tags;
     }
 
-    public function removeTagForEntry($entry_id, $tag_id) {
+    public function removeTagForEntry($entry_id, $tag_id)
+    {
         $sql_action     = "DELETE FROM tags_entries WHERE tag_id=? AND entry_id=?";
         $params_action  = array($tag_id, $entry_id);
         $query          = $this->executeQuery($sql_action, $params_action);
         return $query;
     }
     
-    public function cleanUnusedTag($tag_id) {
+    public function cleanUnusedTag($tag_id)
+    {
         $sql_action = "SELECT tags.* FROM tags JOIN tags_entries ON tags_entries.tag_id=tags.id WHERE tags.id=?";
         $query = $this->executeQuery($sql_action,array($tag_id));
         $tagstokeep = $query->fetchAll();
@@ -519,7 +556,8 @@ class Database {
         
     }
 
-    public function retrieveTagByValue($value) {
+    public function retrieveTagByValue($value)
+    {
         $tag  = NULL;
         $sql    = "SELECT * FROM tags WHERE value=?";
         $params = array($value);
@@ -529,27 +567,29 @@ class Database {
         return isset($tag[0]) ? $tag[0] : null;
     }
 
-    public function createTag($value) {
+    public function createTag($value)
+    {
         $sql_action = 'INSERT INTO tags ( value ) VALUES (?)';
         $params_action = array($value);
         $query = $this->executeQuery($sql_action, $params_action);
         return $query;
     }
 
-    public function setTagToEntry($tag_id, $entry_id) {
+    public function setTagToEntry($tag_id, $entry_id)
+    {
         $sql_action = 'INSERT INTO tags_entries ( tag_id, entry_id ) VALUES (?, ?)';
         $params_action = array($tag_id, $entry_id);
         $query = $this->executeQuery($sql_action, $params_action);
         return $query;
     }
 
-        private function getEntriesOrder() {
-            if (isset($_SESSION['sort']) and array_key_exists($_SESSION['sort'], $this->order)) {
-                return $this->order[$_SESSION['sort']];
-            }
-            else {
-                return $this->order['default'];
-            }
+    private function getEntriesOrder()
+    {
+        if (isset($_SESSION['sort']) and array_key_exists($_SESSION['sort'], $this->order)) {
+            return $this->order[$_SESSION['sort']];
         }
-
+        else {
+            return $this->order['default'];
+        }
+    }
 }

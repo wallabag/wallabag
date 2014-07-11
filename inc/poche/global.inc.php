@@ -40,6 +40,12 @@ require_once INCLUDES . '/3rdparty/libraries/PHPePub/Logger.php';
 require_once INCLUDES . '/3rdparty/libraries/PHPePub/EPub.php';
 require_once INCLUDES . '/3rdparty/libraries/PHPePub/EPubChapterSplitter.php';
 
+require_once INCLUDES . '/3rdparty/PicoFarad/Request.php';
+require_once INCLUDES . '/3rdparty/PicoFarad/Response.php';
+require_once INCLUDES . '/3rdparty/PicoFarad/Router.php';
+require_once INCLUDES . '/3rdparty/PicoFarad/Session.php';
+require_once INCLUDES . '/3rdparty/PicoFarad/Template.php';
+
 # system configuration; database credentials et caetera
 require_once INCLUDES . '/poche/config.inc.php';
 require_once INCLUDES . '/poche/config.inc.default.php';
@@ -51,3 +57,14 @@ if (DOWNLOAD_PICTURES) {
 if (!ini_get('date.timezone') || !@date_default_timezone_set(ini_get('date.timezone'))) {
     date_default_timezone_set('UTC');
 }
+
+if (defined('ERROR_REPORTING')) {
+    error_reporting(ERROR_REPORTING);
+}
+
+// Start session
+Session::$sessionName = 'wallabag';
+Session::init();
+
+// Let's rock !
+$wallabag = new Poche();
