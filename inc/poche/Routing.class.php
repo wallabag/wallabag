@@ -11,8 +11,8 @@
 class Routing
 {
     protected $wallabag;
-    public $referer;
-    public $view;
+    protected $referer;
+    protected $view;
     protected $action;
     protected $id;
     protected $url;
@@ -55,7 +55,7 @@ class Routing
         # because messages can be added in $poche->action(), we have to add this entry now (we can add it before)
         $this->vars = array_merge($this->vars, array('messages' => $this->wallabag->messages->display('all', FALSE)));
 
-        $this->render($this->file, $this->vars);
+        $this->_render($this->file, $this->vars);
     }
 
     private function _defineTplInformation()
@@ -142,7 +142,7 @@ class Routing
         }
     }
 
-    public function render($file, $vars)
+    public function _render($file, $vars)
     {
         echo $this->wallabag->tpl->render($file, $vars);
     }
