@@ -18,3 +18,4 @@ Session::init();
 
 // Let's rock !
 $wallabag = new Poche();
+$wallabag->run();
