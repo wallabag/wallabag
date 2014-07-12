@@ -12,7 +12,7 @@ if (version_compare(PHP_VERSION, '5.4.0', '<')) {
     }
 }
 
-$writableFolders = array('cache', 'db');
+$writableFolders = array('cache', 'db', 'inc/3rdparty/htmlpurifier/HTMLPurifier/DefinitionCache/Serializer');
 foreach ($writableFolders as $folder) {
     if (! is_writable($folder)) {
         die('The directory "' . $folder . '" must be writeable by your web server user');
