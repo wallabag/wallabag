@@ -11,11 +11,6 @@
 
 final class Picture
 {
-    private function __construct()
-    {
-
-    }
-
     /**
      * Changing pictures URL in article content
      */

@@ -229,8 +229,7 @@ class Template extends Twig_Environment
 
         $_SESSION['poche_user']->setConfig($currentConfig);
 
-        $this->wallabag->emptyCache();
-
+        Tools::emptyCache();
         Tools::redirect('?view=config');
     }
 }

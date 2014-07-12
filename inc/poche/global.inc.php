@@ -22,6 +22,7 @@ require_once ROOT . '/vendor/autoload.php';
 require_once INCLUDES . '/poche/Template.class.php';
 require_once INCLUDES . '/poche/Language.class.php';
 require_once INCLUDES . '/poche/Routing.class.php';
+require_once INCLUDES . '/poche/WallabagEpub.class.php';
 require_once INCLUDES . '/poche/Poche.class.php';
 
 require_once INCLUDES . '/poche/Database.class.php';

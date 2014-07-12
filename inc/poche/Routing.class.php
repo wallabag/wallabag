@@ -105,20 +105,21 @@ class Routing
             $this->wallabag->logout();
         } elseif (isset($_GET['config'])) {
             // update password
-            $this->wallabag->updatePassword();
+            $this->wallabag->updatePassword($_POST['password'], $_POST['password_repeat']);
         } elseif (isset($_GET['newuser'])) {
-            $this->wallabag->createNewUser();
+            $this->wallabag->createNewUser($_POST['newusername'], $_POST['password4newuser']);
         } elseif (isset($_GET['deluser'])) {
-            $this->wallabag->deleteUser();
+            $this->wallabag->deleteUser($_POST['password4deletinguser']);
         } elseif (isset($_GET['epub'])) {
-            $this->wallabag->createEpub();
+            $epub = new WallabagEpub($this->wallabag, $_GET['method'], $_GET['id'], $_GET['value']);
+            $epub->run();
         } elseif (isset($_GET['import'])) {
             $import = $this->wallabag->import();
             $tplVars = array_merge($this->vars, $import);
         } elseif (isset($_GET['download'])) {
             Tools::downloadDb();
         } elseif (isset($_GET['empty-cache'])) {
-            $this->wallabag->emptyCache();
+            Tools::emptyCache();
         } elseif (isset($_GET['export'])) {
             $this->wallabag->export();
         } elseif (isset($_GET['updatetheme'])) {
@@ -129,7 +130,7 @@ class Routing
             $this->wallabag->uploadFile();
         } elseif (isset($_GET['feed'])) {
             if (isset($_GET['action']) && $_GET['action'] == 'generate') {
-                $this->wallabag->generateToken();
+                $this->wallabag->updateToken();
             }
             else {
                 $tag_id = (isset($_GET['tag_id']) ? intval($_GET['tag_id']) : 0);
