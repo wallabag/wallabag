@@ -1,0 +1,25 @@
+title: //h1[@class="entry-title"]
+
+body: //div[@class='materia-titulo']/h2 | //*[@id="materia-letra"]
+
+date: //abbr[@class="published"]
+date: //abbr[@class="updated"]
+
+author: //*[@class="author"]/strong
+
+strip: //div[contains(@class,'foto')]/strong
+strip: //div[contains(@class,'frase-materia')]/div[@class='autor']
+strip: //div[contains(@class,'saibamais')]
+strip: //*[contains(text(),'Clique aqui e veja mais')]/ancestor::p
+strip: //ul[@class="toolbar"]
+
+# quotes
+wrap_in(blockquote): //div[@id='materia-letra']//div[contains(@class,'frase-materia')]/div[@class='frase']
+
+prune: no
+
+replace_string([Clique aqui e veja mais vídeos do Fluminense]): []
+
+test_url: http://globoesporte.globo.com/atletismo/noticia/2013/08/michael-johnson-diz-que-bolt-e-melhor-da-historia-nao-ha-duvidas.html
+test_url: http://globoesporte.globo.com/futebol/futebol-internacional/futebol-espanhol/noticia/2013/08/barca-atropela-levante-e-neymar-passa-em-branco-em-estreia-oficial.html
+test_url: http://globoesporte.globo.com/futebol/times/fluminense/noticia/2013/08/poupado-no-sabado-felipe-se-diz-pronto-para-ser-titular-contra-o-goias.html

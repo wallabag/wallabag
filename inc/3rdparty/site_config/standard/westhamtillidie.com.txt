@@ -1,4 +1,4 @@
-title: substring-before(//title, '«')
+title: substring-before(//title, 'Â«')
 
 body: //div[@class='entry']
 strip: //div[@class='sharing_label']

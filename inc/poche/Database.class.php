@@ -11,12 +11,12 @@
 class Database {
 
     var $handle;
-    private $order = array(
-      'ia' => 'ORDER BY entries.id',
-      'id' => 'ORDER BY entries.id DESC',
-      'ta' => 'ORDER BY lower(entries.title)',
-      'td' => 'ORDER BY lower(entries.title) DESC',
-      'default' => 'ORDER BY entries.id'
+    private $order = array (
+        'ia' => 'ORDER BY entries.id',
+        'id' => 'ORDER BY entries.id DESC',
+        'ta' => 'ORDER BY lower(entries.title)',
+        'td' => 'ORDER BY lower(entries.title) DESC',
+        'default' => 'ORDER BY entries.id'
     );
 
     function __construct()
@@ -170,11 +170,11 @@ class Database {
     public function login($username, $password, $isauthenticated = FALSE)
     {
         if ($isauthenticated) {
-          $sql = "SELECT * FROM users WHERE username=?";
-          $query = $this->executeQuery($sql, array($username));
+            $sql = "SELECT * FROM users WHERE username=?";
+            $query = $this->executeQuery($sql, array($username));
         } else {
-          $sql = "SELECT * FROM users WHERE username=? AND password=?";
-          $query = $this->executeQuery($sql, array($username, $password));
+            $sql = "SELECT * FROM users WHERE username=? AND password=?";
+            $query = $this->executeQuery($sql, array($username, $password));
         }
         $login = $query->fetchAll();
 

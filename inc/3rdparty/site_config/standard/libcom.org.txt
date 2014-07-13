@@ -1,0 +1,7 @@
+date: //span[contains(@class, 'page-date')]
+body: //div[@id='node-page']
+strip_id_or_class: book-navigation
+prune: no
+
+test_url: http://libcom.org/library/what-was-the-ussr-aufheben-1
+test_url: http://libcom.org/library-latest/feed

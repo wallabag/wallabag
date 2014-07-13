@@ -1,0 +1,6 @@
+tidy: no
+prune: no
+date: //article//time[@pubdate]
+title: //article/h1//span[contains(@class, 'entry-title')]
+body: //article/div[contains(@class, 'entry-content')]
+test_url: http://danleech.com/post/36822126876/simple-icons

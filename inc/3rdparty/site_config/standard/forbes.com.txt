@@ -10,7 +10,18 @@ date: substring-before(//hgroup//h6, '@')
 date: //span[@class='mainartdate']
 
 prune: no
+strip: //aside
+strip_id_or_class: sticky_sharing
+strip_id_or_class: pagination
+strip_id_or_class: controlsbox
+strip_id_or_class: storyboxes
+strip_id_or_class: sponsoredlinks
+strip_id_or_class: nextpage
+strip_id_or_class: contextuallinks
+strip_id_or_class: article_actions
+strip_id_or_class: engagement_block
 
 single_page_link: //a[contains(@href, '/print/')]
 
 test_url: http://www.forbes.com/forbes/2011/0509/technology-frog-design-jan-chipchase-ethnographer-birth-cool_print.html
+test_url: http://www.forbes.com/sites/bruceupbin/2012/09/11/the-iphone-5-winners-and-losers/

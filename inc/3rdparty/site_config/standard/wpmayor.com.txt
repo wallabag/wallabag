@@ -1,0 +1,8 @@
+body: //div[@id='nrelate_flyout_placeholder']
+
+strip_id_or_class: share
+
+prune: no
+
+test_url: http://www.wpmayor.com/themes/wordpress-portfolio-resume-themes/
+test_url: http://www.wpmayor.com/feed/

@@ -1,0 +1,17 @@
+# This filter is tested on:
+# http://www.dushumashang.com/2389
+# http://www.dushumashang.com/2415
+# http://www.dushumashang.com/2355
+
+body://div[@class='main_content']
+#body://section[@class='entry_content fl']
+title://h2
+author://span[@class='article_author']/a
+date://span[@class='pub_date']/time
+
+strip://span[@class='article_author']
+strip://span[@class='pub_date']
+strip://div[@class='page_turn']
+strip://span[@class='source_link']/em
+wrap_in(strong)://span[@class='source_link']/a
+test_url: http://www.dushumashang.com/2355

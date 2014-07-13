@@ -1,0 +1,10 @@
+title: //h1[@class='title']
+
+date: substring-before(substring-after(//div[@class='comment-bubble']/.., 'Posted'), 'by')
+
+body: //div[@class='the-content']
+
+strip: //div[@class='article-image responsive']
+
+strip_id_or_class: 'pullquote'
+test_url: http://gamechurch.com/virtual-gun-control-the-best-amendment/

@@ -1,0 +1,15 @@
+title: //h1
+author: //div[@class='date']/a
+date: substring-after(//div[@class='date'], ',')
+body: //div[@class='entrybody']
+
+strip_id_or_class: socialshareprivacy
+strip: //div[@class='entrybody']/br[1]
+
+# Strip related articles
+# 'p'-Tag strips 'Ähnliche Artikel: ' (<br> tags become <p>)
+strip: //div[@class='entrybody']/p[last()]
+strip: //div[@class='entrybody']/ul[last()]
+
+convert_double_br_tags: yes
+test_url: http://www.scilogs.de/wblogs/blog/formbar/fusion/2012-10-08/rundgang-durch-deutschlands-gr-tes-fusionsexperiment

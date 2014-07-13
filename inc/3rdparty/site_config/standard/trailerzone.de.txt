@@ -1,0 +1,9 @@
+body: //div[@id='video' or @id='main']
+
+strip_id_or_class: socialshareprivacy2
+strip_id_or_class: wp_rp_first
+
+find_string: Genre</strong>
+replace_string: </strong></p><p><strong>Genre</strong>
+
+test_url: http://www.trailerzone.de/g-i-joe-2-die-abrechnung/

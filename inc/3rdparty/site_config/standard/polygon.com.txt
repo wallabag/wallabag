@@ -1,0 +1,34 @@
+body: //div[@id='article-content']
+body: //article[@id='entry-top']/div[@class='float_wrapper']
+author: //header/p[@class='byline']/em/a
+date: //header/p[@class='byline']/span[@class='timestamp']
+
+strip: //div[@id='article-content']//header
+strip: //label
+
+#photos on left column (delete all)
+strip: //div[@class='big_photo']
+
+#photos on left column (remove extras used for scroll effect)
+#strip: //div[@class='big_photo']/div[./img]
+#strip: //div[@class='big_photo']/img[position()>1]
+
+strip_id_or_class: vox-lazy-load
+strip_id_or_class: social_buttons
+strip_id_or_class: feature_toc
+
+prune: no
+
+find_string: <noscript>
+replace_string: <div>
+find_string: </noscript>
+replace_string: </div>
+
+#find_string: <script
+#replace_string: <div style="display:none"
+#find_string: </script>
+#replace_string: </div>
+
+strip: //div[@class='float_wrapper']/header
+test_url: http://www.polygon.com/2013/4/5/4189028/donkey-kong-country-returns-3d-new-content
+test_url: http://www.polygon.com/features/2013/8/22/4602568/30-years-xbox-360-playstation-3-wii

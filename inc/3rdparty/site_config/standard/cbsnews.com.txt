@@ -8,6 +8,7 @@ body: //div[@id='storyMediaBox'] | //div[contains(@class, 'storyText')]
 strip: //div[@class="scrollingArrows"]
 strip: //div[@class="timeLine"]
 strip: //dl[@class="storyBlogByline"]
+strip: //span[@class='image-credit']
 
 prune: no
 

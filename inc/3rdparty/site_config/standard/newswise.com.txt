@@ -1,0 +1,17 @@
+prune: no
+tidy: no
+
+title: //h1/a[2]
+body: //div[@id="main"]
+author: //span[@id="articlesource"]
+date: //span[contains(@class, 'releasedate')]
+
+strip: //div[@class="inst-logo"]
+strip: //h1[1]
+
+strip_id_or_class: addthis
+strip_id_or_class: released
+strip_id_or_class: skiptranslate
+strip_id_or_class: flash
+
+test_url: http://www.newswise.com/articles/first-heat-wave-of-season-puts-elderly-at-risk

@@ -1,0 +1,9 @@
+title: //h2
+body: //div[@id='leftdetail']
+single_page_link: //a[contains(@href, 'printable=1')]
+strip: //a[contains(., 'Full Version')]
+
+prune: no
+
+test_url: http://www.hemmings.com/classifieds/dealer/ferrari/330gtc/1601235.html
+test_url: http://www.hemmings.com/rss/keyword.xml?adtype=carsforsale&make=ferrari

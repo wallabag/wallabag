@@ -1,0 +1,11 @@
+title: //div[@id='content']/div/h1
+
+author: //a[@itemprop='reviewer']
+
+date: //time[@itemprop='dtreviewed']/@datetime
+
+body: //div[@id='breadtext']
+
+# fix for NOT magically removing anchors with text identical to title
+dissolve: //a[text()=//div[@id='content']/div/h1/text()]
+test_url: http://www.gamereactor.no/previews/177481/The+Evil+Within/?sid=38b5bd30f56f1b7214de4ff5bed4b76f

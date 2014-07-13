@@ -1,0 +1,8 @@
+title: //article[@id='material']/header/h1
+author: //article[@id='material']/header/div[2]/p
+date: //article[@id='material']/header/p/time[1]
+body: //section[@id='tresc']
+next_page_link: .//section[@id='tresc']/div[@class='stronicowanie']/a[@rel='next']
+strip://div[@class='podobneSonda']
+
+test_url: http://www.gloswielkopolski.pl/artykul/803547,abc-telemarketingu-praca-ktora-zwalnia-z-myslenia,id,t.html

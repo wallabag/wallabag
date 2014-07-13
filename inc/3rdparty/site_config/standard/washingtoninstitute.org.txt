@@ -1,0 +1,6 @@
+body: //div[@class='main']//article
+
+prune: no
+
+test_url: http://www.washingtoninstitute.org/policy-analysis/view/striking-syria-lessons-from-the-israeli-experience?goback=.gde_3822158_member_273623672
+test_url: http://www.washingtoninstitute.org/rss/11/10

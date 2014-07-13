@@ -1,0 +1,26 @@
+title: //td[@class="headline"]
+author: //font[@color="#003366"]
+date: //td[@class="date"]
+
+strip: //td[@class="headline"]
+strip: //font[@color="#003366"]
+strip: //td[@class="date"]
+
+strip: //img[@src="images/2009/logo_en.gif"]
+
+body: //tbody[@class="body"]
+convert_double_br_tags:yes
+
+strip: //img[@src="/images/TabOver.gif"]
+strip: //td[@width="160"]
+strip: //img[@src="/images/TabUnder.gif"]
+
+strip: //td[@class="small"]
+strip: //td[@height="47"]
+
+strip: //td[@valign="middle"]
+strip: //td[@background="/images/menu_bottombg.gif"]
+strip: //img[@src="/images/sc_footer_l.gif"]
+strip: //img[@src="/images/sc_footer_m.gif"]
+strip: //img[@src="/images/sc_footer_r.gif"]
+test_url: http://www.manager.co.th/Entertainment/ViewNews.aspx?NewsID=9550000101979

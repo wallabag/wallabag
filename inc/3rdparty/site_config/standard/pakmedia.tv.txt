@@ -1,0 +1,17 @@
+title: //h1[@class='entry-title']
+body: //article//div[@class='entry']
+strip_id_or_class: addthis
+strip_id_or_class: gdsrcacheloader
+strip_id_or_class: entry-meta
+strip_id_or_class: entry-tags
+strip_id_or_class: authorbox
+strip: //div[@class='entry']/p[1]
+strip: //img[@width='600' and @height='70']
+# related posts
+strip: //h3[contains(., 'Related posts')]
+strip: //div[contains(@style, 'border: 0pt none ; margin: 0pt; padding: 0pt;')]
+
+prune: no
+tidy: no
+
+test_url: http://pakmedia.tv/tv-one/feed

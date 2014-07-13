@@ -1,0 +1,26 @@
+body: //span[@id='article_content' or @class='text16g']
+
+# ads
+strip: //div[.//div[contains(@id, 'ads.')]]
+# related content heading
+strip: //p[contains(., 'עוד בערוץ החדשות של ynet:')]
+strip: //p[contains(., 'כותרות אחרונות מהעולם בחדשות ynet:')]
+strip: //div[contains(., 'אינציקלופדיית ynet:')]
+# related content links
+strip: //a[@class='bluelink']
+# strip image bullets
+strip_image_src: ynet_manual_bullet.png
+
+prune: no
+tidy: no
+
+# prevent JS issues
+find_string: <script type='text/javascript'>
+replace_string: <div style="display:none;">
+find_string: </script>
+replace_string: </div>
+
+test_url: http://www.ynet.co.il/articles/0,7340,L-4354266,00.html
+test_url: http://www.ynet.co.il/articles/0,7340,L-4354268,00.html
+#feed
+test_url: http://www.ynet.co.il/Integration/StoryRss2.xml

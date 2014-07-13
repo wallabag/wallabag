@@ -1,0 +1,18 @@
+# This filter is tested on:
+# http://select.yeeyan.org/view/18312/332365
+# http://select.yeeyan.org/view/365295/333788
+# http://select.yeeyan.org/view/174464/332336
+
+tidy:no
+prune:no
+title://h1
+author: //div[@class='sa_author']/span/a
+date: substring-after(//div[@class='sa_author']/span/following-sibling::span, '：')
+body: //div[@class='sa_left closetag']
+wrap_in(b)://div[@class='sa_abstract']
+
+strip://ul[@class='sa_next clearfix']
+strip: //div[@class='sa_author']
+strip: //div[@class='sa_title_box']
+
+test_url: http://select.yeeyan.org/view/258033/333481

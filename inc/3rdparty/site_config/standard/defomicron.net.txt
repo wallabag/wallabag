@@ -1,0 +1,9 @@
+title: //article/h1
+author: //hgroup/h3/a
+date: //time
+body: //article
+strip: //aside
+footnotes: yes
+prune: no
+tidy: no
+test_url: https://defomicron.net/2012/09/ios-6/

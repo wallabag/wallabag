@@ -1,0 +1,12 @@
+title: //div[@id='singletext']//h1
+body: //div[contains(@class, 'mypictureborder')] | //div[@id='singletext']
+prune: no
+
+strip_id_or_class: singletostart
+strip_id_or_class: navigation
+strip_id_or_class: social
+strip_id_or_class: single_topwrapper
+strip: //a[contains(., 'Nächster Artikel')]
+
+test_url: http://www.viply.de/?p=87973
+test_url: http://www.viply.de/?feed=rss2

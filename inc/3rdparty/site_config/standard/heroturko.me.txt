@@ -1,0 +1,6 @@
+title: //div[contains(@class, 'title')]//h1
+body: //div[contains(@class, 'story')]
+
+prune: no
+
+test_url: http://www.heroturko.me/5223034-ds-catia-p3-v5-6r2014-gasp0-x86x64-multilanguage-english-docs.html

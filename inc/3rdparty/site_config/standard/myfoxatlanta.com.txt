@@ -1,0 +1,5 @@
+body: //div[@id='WNStoryBody']
+author: //div[@id='WNStoryByline']
+prune: no
+
+test_url: http://www.myfoxatlanta.com/category/233685/local-news?clienttype=rss

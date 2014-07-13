@@ -1,0 +1,8 @@
+body: //h2[contains(@class, 'body_head')] | //div[@id='img_article' or contains(@class, 'body_content')]
+body: //div[contains(@class, 'cpanel')]//div[contains(@class, 'thumbnails')]
+prune: no
+strip: //div[starts-with(@class, 'actu_')]
+strip: //div[contains(@class, 'data')]
+
+test_url: http://www.sport365.fr/basketball/nba/new-york-accord-avec-toronto-pour-bargnani-1038773.shtml
+test_url: http://www.sport365.fr/rss.xml

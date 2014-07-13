@@ -1,0 +1,5 @@
+author: /html/body/center/b
+date: /html/body/table/tr[2]/td/i
+single_page_link: //*[@id='oTxt']/table[3]/tr[2]/td/a[1]
+
+test_url: http://www.racjonalista.pl/kk.php/s,7214/q,Geneza.szubrawstwa

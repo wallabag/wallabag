@@ -1,0 +1,22 @@
+date: //meta[@name='sailthru.date']/@content
+body: //article[contains(@class, 'entry-content')]
+
+strip_image_src: subscribe.png
+
+strip_id_or_class: wpcom-iframe-form
+strip_id_or_class: gallery-thumbs
+strip_id_or_class: twitter
+strip_id_or_class: fb-link
+strip_id_or_class: pinterest
+
+strip: //div[@class='data']
+strip: //iframe[contains(@name, 'wpcom')]
+
+find_string: <a href="http://www.youtube.com/subscription_center?add_user_id=2rJLq19N0dGrxfib80M
+replace_string: </p></div></body></html><!--
+
+find_string: <h3>More
+replace_string: </div></body></html><!--
+
+test_url: http://hollywoodlife.com/2013/10/04/miriam-carey-dead-capitol-hill-car-chase-shooting-postpartum-depression/
+test_url: http://hollywoodlife.com/feed/

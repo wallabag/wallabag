@@ -1,0 +1,11 @@
+body: //div[contains(@class, 'thecontent')]
+
+strip_image_src: loading.gif
+find_string:src="http://cdn.howtogeek.com/public/images/blank.gif"
+replace_string:-
+find_string:data-href=
+replace_string:src=
+
+strip_id_or_class: relatedside
+
+test_url: http://www.howtogeek.com/school/microsoft-excel-formulas-and-functions/lesson1/

@@ -1,0 +1,17 @@
+# To administrator:
+# Please replace the hostname with "*.theatlanticcities.com"
+
+# This filter is tested on:
+# http://m.theatlanticcities.com/arts-and-lifestyle/2012/04/invisible-borders-define-american-culture/1839/
+# http://www.theatlanticcities.com/housing/2012/11/chinas-holdouts/3981/
+# http://www.theatlanticcities.com/arts-and-lifestyle/2012/12/christmas-time-here/4133/
+
+title://h1
+author: //ul[@class='meta']/li/a
+date: //ul[@class='meta']/li/following-sibling::li
+body://article[@class='post']
+
+strip://h1
+strip://ul[@class='meta']
+strip://div[@class='newsletter-slug']
+test_url: http://www.theatlanticcities.com/arts-and-lifestyle/2012/12/christmas-time-here/4133/

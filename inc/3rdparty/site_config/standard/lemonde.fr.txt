@@ -1,12 +1,17 @@
 title: //h1
 
-# they have a single component containing both author and date
-#author: //p[@class='source']
-#date: //p[@class='source']
+# We can have multiple authors
+author: //a[@class='auteur']
 
-body: //div[@class='contenu_article']
+# Last edition date (if any)
+date: //time[@itemprop='dateModified']/@datetime
+# Publication date
+date: //time[@itemprop='datePublished']/@datetime
+
+
+body: //div[@id='articleBody']
 #Shoot the insane "conjugaison.lemonde.fr" links :
-strip: //a[contains(@class, 'listLink')]
+#strip: //a[contains(@class, 'conjug')]
 
 prune: no
 

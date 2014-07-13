@@ -1,0 +1,4 @@
+strip: //body//title
+
+test_url: http://www.gov.ky/pls/portal/PORTAL.wwv_media.show?p_id=7593947&p_settingssetid=1&p_settingssiteid=0&p_siteid=2425&p_type=basetext&p_textid=7593948
+test_url: http://www.rcips.ky/pls/portal/wlacomp.wlafeed.show_cignewsfeed_agency?p_sitecode=POL&p_agency=Police

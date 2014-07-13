@@ -1,0 +1,7 @@
+# This filter is tested on:
+# http://songshuhui.net/archives/65522
+# http://songshuhui.net/archives/75760
+title://h2/span/a
+date:substring-before(substring-after(//div[@class='atrctitle']/div, '发表于'),' |')
+body://div[@class='entry']
+test_url: http://songshuhui.net/archives/74819

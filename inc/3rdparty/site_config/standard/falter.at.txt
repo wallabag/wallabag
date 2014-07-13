@@ -1,18 +1,14 @@
-title: //h2[@class='related relatedTitle']
-author: //a[contains(@href, 'liste.php?author_id')]
-
-# can't think of a better way unfortunately, really bad markup on this site
-date: substring-after(//td[@style='width:85%;'], 'vom')
-
-# not sure why, but instapaper seems to suck up the teaser paragraph
-# not solved!
-body: //div[contains(@class, 'teaser')]
-body: //div[@id='content']
+title: //h1
+author: //a[contains(@href, '/kategorie/autoren')]
+date: //a[contains(@href, '/falter/ausgabe')]
+body: //article[@class='spanMain']
 
 # cleanup
+strip_id_or_class: 'respond'
 strip: //img[@src='http://www.falter.at/web/_pics/falterlogo_dblau.gif']
-strip: //div[@class='servicebox']
-strip: //h1
+strip_id_or_class: 'meta'
+strip_id_or_class: 'servicebox'
+strip_id_or_class: 'related'
+strip_id_or_class: 'twitter-share-button'
 strip: //br
-strip: //td[@id='adcol']
-test_url: http://www.falter.at/web/print/detail.php?id=1634
+test_url: http://www.falter.at/falter/2013/03/26/der-dandy-auf-der-sinkenden-galeere/

@@ -1,0 +1,5 @@
+title: //h1
+author: string("Matt Might")
+strip: //h1/following-sibling::div
+
+test_url: http://matt.might.net/articles/oo-cesk/

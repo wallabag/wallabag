@@ -1,0 +1,6 @@
+title: //div[@id='tab-recept']//h1
+body: //div[@id='tab-recept']//div[contains(@class, 'column-container')]
+strip_id_or_class: ajanlo-box
+prune: no
+
+test_url: http://www.nosalty.hu/recept/szupergyors-fank

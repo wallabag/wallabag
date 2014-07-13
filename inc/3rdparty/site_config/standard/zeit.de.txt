@@ -1,3 +1,4 @@
+# 2013.10.30 [rezor92] fixed single_page_link
 # 2012-12-23 [carlo@...] fixed half-assed headlines in articles, removed inline author profiles, adjusted picture captions
 # 2012-03-17 [dkless@...] Cut metadata parts in the beginning and the ends of the content block; copyright entries for pictures removed; Author fixed, not sure if old entries still valid (I left them); Weird problems with some pages addressed (see last section for removing hidden section)
 # 2011-12-09 [carlo@...] Removed "related articles" block
@@ -5,7 +6,7 @@
 # 2011-08-20 [carlo@...] added author, fixed date
 
 
-single_page_link: //a[@title='Druckversion']
+single_page_link: //a[@title='Auf einer Seite']
 tidy: no
 
 title: //title
