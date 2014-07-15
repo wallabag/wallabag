@@ -1083,11 +1083,10 @@ class Poche
         $config = $this->store->getConfigUser($user_id);
 
         if ($config == null) {
-            die(_('User with this id (' . $user_id . ') does not exist.'));
+            die(sprintf(_('User with this id (%d) does not exist.'), $user_id));
         }
 
-        if (!in_array($type, $allowed_types) ||
-            $token != $config['token']) {
+        if (!in_array($type, $allowed_types) || $token != $config['token']) {
             die(_('Uh, there is a problem while generating feeds.'));
         }
         // Check the token
@@ -1145,17 +1144,18 @@ class Poche
       $config = HTMLPurifier_Config::createDefault();
       $config->set('Cache.SerializerPath', CACHE);
       $config->set('HTML.SafeIframe', true);
+
       //allow YouTube, Vimeo and dailymotion videos
       $config->set('URI.SafeIframeRegexp', '%^(https?:)?//(www\.youtube(?:-nocookie)?\.com/embed/|player\.vimeo\.com/video/|www\.dailymotion\.com/embed/video/)%');
 
       return new HTMLPurifier($config);
     }
-    
+
     /**
      * handle epub
      */
     public function createEpub() {
-       
+
         switch ($_GET['method']) {
             case 'id':
                 $entryID = filter_var($_GET['id'],FILTER_SANITIZE_NUMBER_INT);
@@ -1191,7 +1191,7 @@ class Poche
                 break;
             case 'default':
                 die(_('Uh, there is a problem while generating epub.'));
-            
+
         }
 
         $content_start =
@@ -1204,19 +1204,18 @@ class Poche
         . "<body>\n";
 
         $bookEnd = "</body>\n</html>\n";
-        
+
         $log = new Logger("wallabag", TRUE);
         $fileDir = CACHE;
-
         
-        $book = new EPub(EPub::BOOK_VERSION_EPUB3);
+        $book = new EPub(EPub::BOOK_VERSION_EPUB3, DEBUG_POCHE);
         $log->logLine("new EPub()");
         $log->logLine("EPub class version: " . EPub::VERSION);
         $log->logLine("EPub Req. Zip version: " . EPub::REQ_ZIP_VERSION);
         $log->logLine("Zip version: " . Zip::VERSION);
         $log->logLine("getCurrentServerURL: " . $book->getCurrentServerURL());
         $log->logLine("getCurrentPageURL..: " . $book->getCurrentPageURL());
-        
+
         $book->setTitle(_('wallabag\'s articles'));
         $book->setIdentifier("http://$_SERVER[HTTP_HOST]", EPub::IDENTIFIER_URI); // Could also be the ISBN number, prefered for published books, or a UUID.
         //$book->setLanguage("en"); // Not needed, but included for the example, Language is mandatory, but EPub defaults to "en". Use RFC3066 Language codes, such as "en", "da", "fr" etc.
@@ -1226,39 +1225,39 @@ class Poche
         $book->setDate(time()); // Strictly not needed as the book date defaults to time().
         //$book->setRights("Copyright and licence information specific for the book."); // As this is generated, this _could_ contain the name or licence information of the user who purchased the book, if needed. If this is used that way, the identifier must also be made unique for the book.
         $book->setSourceURL("http://$_SERVER[HTTP_HOST]");
-        
+
         $book->addDublinCoreMetadata(DublinCore::CONTRIBUTOR, "PHP");
         $book->addDublinCoreMetadata(DublinCore::CONTRIBUTOR, "wallabag");
-        
+
         $cssData = "body {\n margin-left: .5em;\n margin-right: .5em;\n text-align: justify;\n}\n\np {\n font-family: serif;\n font-size: 10pt;\n text-align: justify;\n text-indent: 1em;\n margin-top: 0px;\n margin-bottom: 1ex;\n}\n\nh1, h2 {\n font-family: sans-serif;\n font-style: italic;\n text-align: center;\n background-color: #6b879c;\n color: white;\n width: 100%;\n}\n\nh1 {\n margin-bottom: 2px;\n}\n\nh2 {\n margin-top: -2px;\n margin-bottom: 2px;\n}\n";
-        
+
         $log->logLine("Add Cover");
-        
+
         $fullTitle = "<h1> " . $bookTitle . "</h1>\n";
-        
+
         $book->setCoverImage("Cover.png", file_get_contents("themes/baggy/img/apple-touch-icon-152.png"), "image/png", $fullTitle);
-        
+
         $cover = $content_start . '<div style="text-align:center;"><p>' . _('Produced by wallabag with PHPePub') . '</p><p>'. _('Please open <a href="https://github.com/wallabag/wallabag/issues" >an issue</a> if you have trouble with the display of this E-Book on your device.') . '</p></div>' . $bookEnd;
-        
+
         //$book->addChapter("Table of Contents", "TOC.xhtml", NULL, false, EPub::EXTERNAL_REF_IGNORE);
         $book->addChapter("Notices", "Cover2.html", $cover);
-        
+
         $book->buildTOC();
-        
+
         foreach ($entries as $entry) { //set tags as subjects
             $tags = $this->store->retrieveTagsByEntry($entry['id']);
             foreach ($tags as $tag) {
                 $book->setSubject($tag['value']);
             }
-            
+
             $log->logLine("Set up parameters");
-            
+
             $chapter = $content_start . $entry['content'] . $bookEnd;
             $book->addChapter($entry['title'], htmlspecialchars($entry['title']) . ".html", $chapter, true, EPub::EXTERNAL_REF_ADD);
             $log->logLine("Added chapter " . $entry['title']);
         }
 
-        if (DEBUG_POCHE) { 
+        if (DEBUG_POCHE) {
             $epuplog = $book->getLog();
             $book->addChapter("Log", "Log.html", $content_start . $log->getLog() . "\n</pre>" . $bookEnd); // log generation
         }

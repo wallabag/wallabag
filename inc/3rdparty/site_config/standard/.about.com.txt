@@ -1,0 +1,14 @@
+body: //div[@id='articlebody']
+title: //h1
+author: //p[@id='by']//a
+
+next_page_link: //span[@class='next']/a
+# Not the same as below!
+
+prune: yes
+tidy: no
+
+# Annoying 'next' links plainly inside the article body
+strip: //*[text()[contains(.,'Next: ')]]
+
+test_url: http://psychology.about.com/od/theoriesofpersonality/ss/defensemech.htm

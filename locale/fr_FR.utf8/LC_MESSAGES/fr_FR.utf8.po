@@ -1,10 +1,10 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: wallabag 1.6.1\n"
+"Project-Id-Version: wallabag 1.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-05-10 20:09+0100\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Mickaël RAYBAUD-ROIG <raybaudroigm@gmail.com>\n"
+"Last-Translator: Gilles Wittezaële <gilles.wittezaele@laposte.net>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
@@ -131,7 +131,7 @@ msgid "via F-Droid"
 msgstr "via F-Droid"
 
 msgid " or "
-msgstr "ou"
+msgstr " ou "
 
 msgid "via Google Play"
 msgstr "via Google PlayStore"
@@ -240,7 +240,7 @@ msgid ""
 "You can import your Pocket, Readability, Instapaper, Wallabag or any data in "
 "appropriate json or html format."
 msgstr ""
-"Vous pouvez importer depuis Pocket, Readability, Instapaper, Wallabag, ou "
+"Vous pouvez importer depuis Pocket, Readability, Instapaper, wallabag, ou "
 "n'importe quel fichier au format JSON ou HTML approprié."
 
 msgid ""
@@ -251,7 +251,7 @@ msgid ""
 "IMPORT_DELAY (delay between fetch of next batch of articles)."
 msgstr ""
 "Sélectionner le fichier à importer sur votre disque dur, et pressez la "
-"bouton « Importer » ci-dessous.<br />Wallabag analysera votre fichier, "
+"bouton « Importer » ci-dessous.<br />wallabag analysera votre fichier, "
 "ajoutera toutes les URL trouvées et commencera à télécharger les contenus si "
 "nécessaire.<br />Le processus de téléchargement est contrôlé par deux "
 "constantes dans votre fichier de configuration:<wbr /><code>IMPORT_LIMIT</"
@@ -259,7 +259,7 @@ msgstr ""
 "(le délai d'attente entre deux séquences de téléchargement)."
 
 msgid "File:"
-msgstr "Fichier: "
+msgstr "Fichier : "
 
 msgid "You can click here to fetch content for articles with no content."
 msgstr ""
@@ -287,7 +287,7 @@ msgid "Add user"
 msgstr "Ajouter un utilisateur"
 
 msgid "Add a new user :"
-msgstr "Ajouter un nouvel utilisateur: "
+msgstr "Ajouter un nouvel utilisateur : "
 
 msgid "Login for new user"
 msgstr "Identifiant du nouvel utilisateur"
@@ -296,10 +296,10 @@ msgid "Login"
 msgstr "Nom d'utilisateur"
 
 msgid "Password for new user"
-msgstr "Mot de passe du nouvel utilisateur: "
+msgstr "Mot de passe du nouvel utilisateur"
 
 msgid "Send"
-msgstr "Imvoyer"
+msgstr "Envoyer"
 
 msgid "Delete account"
 msgstr "Supprimer le compte"
@@ -322,7 +322,7 @@ msgstr ""
 msgid ""
 "To completely remove wallabag, delete the wallabag folder on your web server."
 msgstr ""
-"Pour déinstaller complètement Wallabag, supprimez le répertoire "
+"Pour désinstaller complètement wallabag, supprimez le répertoire "
 "<code>wallabag</code> de votre serveur Web."
 
 msgid "Save a link"
@@ -418,17 +418,17 @@ msgid "More infos in the official doc:"
 msgstr "Plus d'infos dans la documentation officielle :"
 
 msgid "import from Pocket"
-msgstr "importation depuis Pocket"
+msgstr "importer depuis Pocket"
 
 #, php-format
 msgid "(you must have a %s file on your server)"
 msgstr "(le fichier %s doit être présent sur le serveur)"
 
 msgid "import from Readability"
-msgstr "importation depuis Readability"
+msgstr "importer depuis Readability"
 
 msgid "import from Instapaper"
-msgstr "importation depuis Instapaper"
+msgstr "importer depuis Instapaper"
 
 msgid "Start typing for auto complete."
 msgstr "Commencez à taper pour activer l'auto-complétion."
@@ -525,13 +525,13 @@ msgid "Download required for "
 msgstr "Téléchargement requis pour "
 
 msgid "records"
-msgstr " éléments."
+msgstr " articles"
 
 msgid "Downloading next "
 msgstr "Téléchargement des "
 
 msgid "articles, please wait"
-msgstr " prochains éléments, veuillez patienter"
+msgstr " articles suivants, veuillez patienter..."
 
 msgid "Enter your search here"
 msgstr "Entrez votre recherche ici"
@@ -546,18 +546,18 @@ msgstr ""
 
 #, php-format
 msgid "Error : An user with the name %s already exists !"
-msgstr "Erreur: Un utilisateur avec le nom « %s » existe déjà."
+msgstr "Erreur : Un utilisateur avec le nom « %s » existe déjà !"
 
 #, php-format
 msgid "User %s has been successfully deleted !"
-msgstr "L'utilisateur « %s » a bien été supprimé !"
+msgstr "L'utilisateur « %s » a été supprimé avec succès !"
 
 msgid "Error : The password is wrong !"
-msgstr "Erreur: Le mot de passe est incorrect !"
+msgstr "Erreur : le mot de passe est incorrect !"
 
 msgid "Error : You are the only user, you cannot delete your account !"
 msgstr ""
-"Erreur: Vous êtes l'unique utilisateur, vous ne pouvez pas supprimer votre "
+"Erreur : Vous êtes l'unique utilisateur, vous ne pouvez pas supprimer votre "
 "compte !"
 
 msgid "Untitled"
@@ -585,7 +585,7 @@ msgid "next"
 msgstr "suivant"
 
 msgid "in demo mode, you can't update your password"
-msgstr "en mode démo, vous ne pouvez pas mettre à jour le mot de passe"
+msgstr "en mode démo, vous ne pouvez pas mettre à jour votre mot de passe"
 
 msgid "your password has been updated"
 msgstr "votre mot de passe a été mis à jour"
@@ -598,7 +598,7 @@ msgstr ""
 "dans les deux"
 
 msgid "still using the \""
-msgstr "Vous utilisez toujours \""
+msgstr "vous utilisez toujours \""
 
 msgid "that theme does not seem to be installed"
 msgstr "ce thème ne semble pas installé"
@@ -628,16 +628,16 @@ msgid "click to finish import"
 msgstr "cliquez pour terminer l'importation"
 
 msgid "Articles inserted: "
-msgstr "Articles ajoutés: "
+msgstr "Articles ajoutés : "
 
 msgid ". Please note, that some may be marked as \"read\"."
-msgstr ". Notez que certains pourraient être marqués comme lus."
+msgstr ". Notez que certains pourraient être marqués comme \"lus\"."
 
 msgid "Import finished."
 msgstr "Importation terminée."
 
 msgid "Undefined"
-msgstr "Non définit"
+msgstr "Non défini"
 
 msgid "User with this id ("
 msgstr "Utilisateur avec cet identifiant ("
@@ -650,71 +650,3 @@ msgstr "Cache effacé."
 
 msgid "Oops, it seems you don't have PHP 5."
 msgstr "Oups, vous ne semblez pas avoir PHP 5."
-
-#~ msgid ""
-#~ "Please execute the import script locally as it can take a very long time."
-#~ msgstr ""
-#~ "Merci d'exécuter le script d'importation en local car cela peut prendre "
-#~ "du temps."
-
-#~ msgid "More info in the official documentation:"
-#~ msgstr "Plus d'infos dans la documentation officielle :"
-
-#~ msgid "Import from Pocket"
-#~ msgstr "Import depuis Pocket"
-
-#~ msgid "Import from Readability"
-#~ msgstr "Importer depuis Readability"
-
-#~ msgid "Import from Instapaper"
-#~ msgstr "Importer depuis Instapaper"
-
-#~ msgid "Import from wallabag"
-#~ msgstr "Importer depuis wallabag"
-
-#~ msgid "import from instapaper completed"
-#~ msgstr "Importation depuis Instapaper achevée"
-
-#~ msgid "import from pocket completed"
-#~ msgstr "Importation depuis Pocket achevée"
-
-#~ msgid "import from Readability completed. "
-#~ msgstr "Importation depuis Readability achevée"
-
-#~ msgid "import from Poche completed. "
-#~ msgstr "Importation depuis Pocket achevée"
-
-#~ msgid "Unknown import provider."
-#~ msgstr "Format d'importation inconnu."
-
-#~ msgid "Incomplete inc/poche/define.inc.php file, please define \""
-#~ msgstr "Fichier inc/poche/define.inc.php incomplet, merci de définir \""
-
-#~ msgid "Could not find required \""
-#~ msgstr "Impossible de trouver \""
-
-#~ msgid "poche it!"
-#~ msgstr "pochez-le !"
-
-#~ msgid "Updating poche"
-#~ msgstr "Mettre à jour poche"
-
-#, fuzzy
-#~ msgid "Export your poche datas"
-#~ msgstr "Exporter vos données de poche"
-
-#, fuzzy
-#~ msgid "to export your poche datas."
-#~ msgstr "pour exporter vos données de poche."
-
-#~ msgid "create an issue"
-#~ msgstr "créez un ticket"
-
-#~ msgid "or"
-#~ msgstr "ou"
-
-#~ msgid "contact us by mail"
-#~ msgstr "contactez-nous par email"
-
-#~ msgid "your poche version:"
-#~ msgstr "votre version de poche :"

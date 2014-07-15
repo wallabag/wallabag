@@ -41,6 +41,8 @@ class EPub {
 
     private $bookVersion = EPub::BOOK_VERSION_EPUB2;
 
+    private $debugInside = FALSE;
+
 	public $maxImageWidth = 768;
     public $maxImageHeight = 1024;
 
@@ -132,9 +134,13 @@ class EPub {
      *
      * @return void
      */
-    function __construct($bookVersion = EPub::BOOK_VERSION_EPUB2, $languageCode = "en", $writingDirection = EPub::DIRECTION_LEFT_TO_RIGHT) {
+    function __construct($bookVersion = EPub::BOOK_VERSION_EPUB2, $debugInside = FALSE, $languageCode = "en", $writingDirection = EPub::DIRECTION_LEFT_TO_RIGHT) {
         include_once("Zip.php");
 		include_once("Logger.php");
+
+        if (!$debugInside) {
+            error_reporting(E_ERROR | E_PARSE);
+        }
 
 		$this->bookVersion = $bookVersion;
 		$this->writingDirection = $writingDirection;

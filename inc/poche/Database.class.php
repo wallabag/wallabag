@@ -409,6 +409,7 @@ class Database {
     public function add($url, $title, $content, $user_id, $isFavorite=0, $isRead=0) {
         $sql_action = 'INSERT INTO entries ( url, title, content, user_id, is_fav, is_read ) VALUES (?, ?, ?, ?, ?, ?)';
         $params_action = array($url, $title, $content, $user_id, $isFavorite, $isRead);
+
         if ( !$this->executeQuery($sql_action, $params_action) ) {
           $id = null;
         }
@@ -487,7 +488,7 @@ class Database {
         $sql =
             "SELECT entries.* FROM entries
             LEFT JOIN tags_entries ON tags_entries.entry_id=entries.id
-            WHERE tags_entries.tag_id = ? AND entries.user_id=?";
+            WHERE tags_entries.tag_id = ? AND entries.user_id=? ORDER by entries.id DESC";
         $query = $this->executeQuery($sql, array($tag_id, $user_id));
         $entries = $query->fetchAll();
 

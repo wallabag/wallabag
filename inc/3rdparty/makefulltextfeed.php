@@ -28,7 +28,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // Request this file passing it a web page or feed URL in the querystring: makefulltextfeed.php?url=example.org/article
 // For more request parameters, see http://help.fivefilters.org/customer/portal/articles/226660-usage
 
-error_reporting(E_ALL ^ E_NOTICE);
+//error_reporting(E_ALL ^ E_NOTICE);
 ini_set("display_errors", 1);
 @set_time_limit(120);
 
@@ -671,7 +671,11 @@ foreach ($items as $key => $item) {
 			$html .= $item->get_description();
 		} else {
 			$readability->clean($content_block, 'select');
-			if ($options->rewrite_relative_urls) makeAbsolute($effective_url, $content_block);
+			// get base URL
+			$base_url = get_base_url($readability->dom);
+			if (!$base_url) $base_url = $effective_url;
+			// rewrite URLs
+			if ($options->rewrite_relative_urls) makeAbsolute($base_url, $content_block);
 			// footnotes
 			if (($links == 'footnotes') && (strpos($effective_url, 'wikipedia.org') === false)) {
 				$readability->addFootnotes($content_block);
