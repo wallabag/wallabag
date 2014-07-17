@@ -11,13 +11,13 @@
 class FlattrItem
 {
     public $status;
-    public $urltoflattr;
+    public $urlToFlattr;
     public $flattrItemURL;
-    public $numflattrs;
+    public $numFlattrs;
 
-    public function checkItem($urltoflattr, $id)
+    public function checkItem($urlToFlattr, $id)
     {
-        $this->_cacheflattrfile($urltoflattr, $id);
+        $this->_cacheflattrfile($urlToFlattr, $id);
         $flattrResponse = file_get_contents(CACHE . "/flattr/".$id.".cache");
         if($flattrResponse != FALSE) {
             $result = json_decode($flattrResponse);
@@ -29,7 +29,7 @@ class FlattrItem
             elseif (is_object($result) && $result->link) {
                 $this->status = FLATTRED;
                 $this->flattrItemURL = $result->link;
-                $this->numflattrs = $result->flattrs;
+                $this->numFlattrs = $result->flattrs;
             }
             else {
                 $this->status = NOT_FLATTRABLE;
@@ -40,7 +40,7 @@ class FlattrItem
         }
     }
 
-    private function _cacheflattrfile($urltoflattr, $id)
+    private function _cacheFlattrFile($urlToFlattr, $id)
     {
         if (!is_dir(CACHE . '/flattr')) {
             mkdir(CACHE . '/flattr', 0777);
@@ -48,7 +48,7 @@ class FlattrItem
 
         // if a cache flattr file for this url already exists and it's been less than one day than it have been updated, see in /cache
         if ((!file_exists(CACHE . "/flattr/".$id.".cache")) || (time() - filemtime(CACHE . "/flattr/".$id.".cache") > 86400)) {
-            $askForFlattr = Tools::getFile(FLATTR_API . $urltoflattr);
+            $askForFlattr = Tools::getFile(FLATTR_API . $urlToFlattr);
             $flattrCacheFile = fopen(CACHE . "/flattr/".$id.".cache", 'w+');
             fwrite($flattrCacheFile, $askForFlattr);
             fclose($flattrCacheFile);
