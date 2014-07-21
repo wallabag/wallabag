@@ -1,0 +1,9 @@
+single_page_link: concat('http://www.dn.pt/Common/print.aspx?content_id=', //input[@type='hidden' and @name='link-comments']/@value)
+#<input type="hidden" name="link-comments" class="link-comments" value="3972244">
+
+title: //h1
+author: //div[@class="Author"]
+
+strip: //div[@class="Patrocinio"]
+
+test_url: http://www.dn.pt/inicio/opiniao/interior.aspx?content_id=3972244&seccao=Alberto%20Gon%E7alves&tag=Opini%E3o%20-%20Em%20Foco&page=1
