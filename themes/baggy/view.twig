@@ -4,6 +4,7 @@
 {% endblock %}
 {% block title %}{{ entry.title|raw }} ({{ entry.url | e | getDomain }}){% endblock %}
 {% block content %}
+				{% include '_highlight.twig' %}
         <div id="article_toolbar">
             <ul class="links">
                 <li class="topPosF"><a href="#top" title="{% trans "Back to top" %}" class="tool top icon icon-arrow-up-thick"><span>{% trans "Back to top" %}</span></a></li>
