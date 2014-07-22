@@ -59,7 +59,7 @@
 @define ('LOCALE', ROOT . '/locale');
 @define ('CACHE', ROOT . '/cache');
 
-@define ('PAGINATION', '10');
+@define ('PAGINATION', '12');
 
 //limit for download of articles during import
 @define ('IMPORT_LIMIT', 5);
