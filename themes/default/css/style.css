@@ -430,3 +430,9 @@ a.add-to-wallabag-link-after:after {
 		color: black;
 		width: 50px;
 }
+
+pre code {
+		font-family: "Courier New", Courier, monospace;
+		border: 1px solid #ddd;
+		font-size: 0.96em;
+}
