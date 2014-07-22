@@ -9,8 +9,9 @@
  */
 
 define ('POCHE', '1.7.1');
-require 'check_setup.php';
+require 'check_essentials.php';
 require_once 'inc/poche/global.inc.php';
+require 'check_setup.php';
 
 # Set error reporting level
 if (defined('ERROR_REPORTING')) {
