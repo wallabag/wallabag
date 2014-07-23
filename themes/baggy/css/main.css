@@ -923,6 +923,13 @@ blockquote {
   text-decoration: underline;
 }
 
+pre code {
+		font-family: "Courier New", Courier, monospace;
+		border: 1px solid #ccc;
+		font-size: 0.96em;
+}
+
+
 /* ==========================================================================
    6 = Media Queries
    ========================================================================== */
@@ -1055,3 +1062,4 @@ blockquote {
     left: 0;
   }
 }
+

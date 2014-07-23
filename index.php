@@ -9,8 +9,9 @@
  */
 
 define ('POCHE', '1.8.0');
-require 'check_setup.php';
+require 'check_essentials.php';
 require_once 'inc/poche/global.inc.php';
+require 'check_setup.php';
 
 // Start session
 Session::$sessionName = 'wallabag';
