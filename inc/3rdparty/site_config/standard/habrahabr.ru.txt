@@ -1,0 +1,21 @@
+title: //span[@class="post_title"]
+author: //div[@class="author"]
+date: //div[@class="published
+
+body: //div[@class='content html_format'] | //div[@id='comments']
+
+strip: //a[@class="link_to_comment"]
+strip: //div[@class="show_tree"]
+strip: //a[@class="to_parent"]
+
+
+replace_string(class="reply_comments"): style="padding-left: 20px"
+replace_string(class="voting   "): style="float: right"
+replace_string(src="//habrastorage.org/getpro/habr/avatars/): style="width:24px; height:24px;" class="123" src="//habrastorage.org/getpro/habr/avatars/
+replace_string(class="info  "): style="padding-top:5px;font-size:0.85em;line-height:24px;"
+
+
+prune: no
+tidy: no
+
+test_url: http://habrahabr.ru/post/229883/
