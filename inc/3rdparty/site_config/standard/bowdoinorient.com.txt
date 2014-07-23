@@ -1,0 +1,6 @@
+title: //*[@class='articletitle']
+body: //*[(@id='articlebody')]
+date: //*[(@class='articledate')]
+author: //*[(@class='articleauthor')]
+autodetect_next_page: no
+test_url: http://bowdoinorient.com/article/8045

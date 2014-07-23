@@ -53,9 +53,9 @@
             
             {{ block('pager') }}
             
-            {% if tag %}<a title="{% trans "Download the articles from this tag in an epub" %}" href="./?epub&amp;method=tag&amp;tag={{ tag.value }}">{% trans "Download the articles from this tag in an epub" %}</a>
-            {% elseif search_term is defined %}<a title="{% trans "Download the articles from this search in an epub" %}" href="./?epub&amp;method=search&amp;search={{ search_term }}">{% trans "Download the articles from this search in an epub" %}</a>
-            {% else %}<a title="{% trans "Download the articles from this category in an epub" %}" href="./?epub&amp;method=category&amp;category={{ view }}">{% trans "Download the articles from this category in an epub" %}</a>{% endif %}
+            {% if tag %}<a title="{% trans "Download the articles from this tag in an epub" %}" href="./?epub&amp;method=tag&amp;value={{ tag.value }}">{% trans "Download the articles from this tag in an epub" %}</a>
+            {% elseif search_term is defined %}<a title="{% trans "Download the articles from this search in an epub" %}" href="./?epub&amp;method=search&amp;value={{ search_term }}">{% trans "Download the articles from this search in an epub" %}</a>
+            {% else %}<a title="{% trans "Download the articles from this category in an epub" %}" href="./?epub&amp;method=category&amp;value={{ view }}">{% trans "Download the articles from this category in an epub" %}</a>{% endif %}
             
             {% endif %}
 

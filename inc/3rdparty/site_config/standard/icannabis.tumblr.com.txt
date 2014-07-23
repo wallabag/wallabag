@@ -1,0 +1,9 @@
+tidy:no
+prune:no
+
+body://div[contains(@id,'content')]
+
+strip_id_or_class:meta
+strip_id_or_class:notes
+strip_id_or_class:pagination
+test_url: http://icannabis.tumblr.com/post/28660592471/reviewmswireless3000

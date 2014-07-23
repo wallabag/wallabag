@@ -1,0 +1,6 @@
+title: //h2[@class="page_title"]
+body: //div[@class="entry arquivo"]
+author: //span[@class="author"]
+footnotes: yes
+prune: yes
+test_url: http://papodehomem.com.br/um-relato-confessional-sobre-a-maioridade-penal/

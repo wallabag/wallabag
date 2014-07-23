@@ -1,0 +1,6 @@
+title: //h1[@class='title']
+
+body: //img[@id='relPicsMainPic'] | //div[contains(@class, 'storyContent')]
+
+test_url: http://news247.gr/eidiseis/katatheseis_fwtia_htan_apofasismenoi_akomh_kai_na_afairesoyn_zwes_an_thewrousan_oti_to_thuma_htan_antipalos_toys.2433351.html
+test_url: http://news247.gr/?widget=rssfeed&view=feed&contentId=38291

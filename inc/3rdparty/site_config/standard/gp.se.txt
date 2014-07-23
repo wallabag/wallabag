@@ -1,0 +1,11 @@
+body: //div[@id='articleContainer']
+author: //div[@id='articleContent']//div[contains(@class, 'byline')]//span[contains(@class, 'name fn')]
+strip_id_or_class: toolbar
+strip_id_or_class: ADad
+strip_id_or_class: articleSerieWrapper
+strip_id_or_class: articleFloatContainer
+strip: //div[contains(@class, 'byline')]//img
+prune: no
+
+test_url: http://www.gp.se/nyheter/bohuslan/1.2045564-styckade-mannen-hade-mordat-hustrun
+test_url: http://www.gp.se/1.16560

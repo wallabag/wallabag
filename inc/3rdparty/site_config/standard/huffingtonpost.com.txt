@@ -3,12 +3,17 @@ body: //div[img[starts-with(@id, 'img_caption')]] | //div[@class="big_photo"] | 
 date: //meta[@name="publish_date"]/@content
 author: //a[@rel="author"]
 author: //meta[@name="author"]/@content
+
 prune: no
 tidy: no
+
 strip: //footer
 strip_id_or_class: ps-slideshow
 strip_id_or_class: fs-slideshow
 strip: //p[contains(., 'Related on HuffPost:')]
+strip_id_or_class: contribute-story
+strip_id_or_class: promo_holder
+
 # end early
 replace_string(<div class="sbm-main): </body></html><div class="not-interested 
 

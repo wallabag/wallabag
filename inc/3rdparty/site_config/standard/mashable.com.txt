@@ -1,4 +1,11 @@
-title: //header[@class='entry-title']/h1
-body: //div[@class='description']
+title: //h1[@class='title']
+author: substring-after(//span[@class='author_name'], 'By ')
+date: //time
+
+body: //article
 strip: //div[@class='ytm-gallery-box']
-test_url: http://mashable.com/2011/12/05/india-wants-google-and-facebook-to-censor-user-content/
+strip: //div[contains(@class, 'adsense')]
+strip: //aside[contains(@class, 'social')]
+strip_id_or_class: article-topics
+
+test_url: http://mashable.com/2013/05/24/myspace-architects-rebuilding-a-brand/

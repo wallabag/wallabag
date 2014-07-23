@@ -1,7 +1,7 @@
 # 21/10-2011:
 # Added Author+Date
 # Remove fakta-boks if found
-# Deleted 'Læs også...' filter 
+# Deleted 'LÃ¦s ogsÃ¥...' filter 
 #  - Change in markup caused it to strip too much.
 
 author://span[@class='autor-name']

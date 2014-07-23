@@ -1,0 +1,17 @@
+# Tested on:
+# http://theeuropean-magazine.com/352-dyson-george/353-evolution-and-innovation
+# http://theeuropean-magazine.com/522-casertano-stefano/919-morsi-and-the-future-of-egypt
+
+title://h2[@class='article-title']
+author:substring-before(substring-after(//p[@class='article-meta'], 'by'), '&mdash;')
+date:substring-after(//p[@class='article-meta'], '&mdash;')
+body://div[@class='article']
+
+wrap_in(strong)://p[@class='article-teaser']
+move_into(//div[@class='article-head'])://li/img
+
+strip://h2[@class='article-title']
+strip://p[@class='article-meta']
+strip://div[@class='copyright']
+strip://div[@class='opinions-of-readers']
+test_url: http://theeuropean-magazine.com/522-casertano-stefano/919-morsi-and-the-future-of-egypt

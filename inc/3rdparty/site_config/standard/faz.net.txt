@@ -20,6 +20,9 @@ strip: //div[@class='clear']
 
 # General removements
 strip: //span[@class='Bildnachweis']
+strip: //img[@class='MediaIcon']
+strip: //div[@class='ArtikelMediaLink']
+dissolve: //a[img]
 
 # Removements after body text
 strip: //div[@class='ArtikelAbbinder']
@@ -27,4 +30,7 @@ strip: //div[@class='ArtikelKommentieren Artikelfuss GETS;tk;boxen.top-lesermein
 strip: //div[@class='FAZArtikelKommentare FAZArtikelContent']
 strip: //div[@class='FAZArtikelFunktionen']
 strip: //div[@id='FAZContentRight']
-test_url: http://www.faz.net/aktuell/gesellschaft/ehe-haltbarkeitsformel-verliebe-dich-oft-verlobe-dich-selten-heirate-vielleicht-11685306.html
+
+# Fix picture captions
+wrap_in(small): //span[@class='Bildunterschrift']/text()
+test_url: http://www.faz.net/aktuell/feuilleton/zum-tod-von-margaret-thatcher-die-reizfigur-12141919.html#Drucken

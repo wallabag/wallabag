@@ -5,7 +5,7 @@
  * @category   wallabag
  * @author     Nicolas Lœuillet <nicolas@loeuillet.org>
  * @copyright  2013
- * @license    http://www.wtfpl.net/ see COPYING file
+ * @license    http://opensource.org/licenses/MIT see COPYING file
  */
 
 class User
@@ -44,7 +44,14 @@ class User
         $this->config = $config;
     }
 
-    public function getConfigValue($name) {
+    /**
+     * Returns configuration entry for a user
+     *
+     * @param $name
+     * @return bool
+     */
+    public function getConfigValue($name)
+    {
         return (isset($this->config[$name])) ? $this->config[$name] : FALSE;
     }
 }

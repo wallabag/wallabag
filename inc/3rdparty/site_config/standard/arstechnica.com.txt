@@ -2,6 +2,7 @@ author: //p[@class='byline']/a
 body: //div[contains(@class,'article-content')]
 strip: //h2[@class='title']
 strip_id_or_class: byline
+strip_id_or_class: story-sidebar
 prune: no
 
 date: //div[@class='byline']/span[@class='posted']//abbr/@original-title

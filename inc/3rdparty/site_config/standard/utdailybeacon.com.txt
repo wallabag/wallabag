@@ -1,0 +1,5 @@
+title: //h1
+author: //*[@class='byline']
+date: substring-after(//*[@class='pubdatetime'], 'Published: ')
+body: //*[@class='body-block']
+test_url: http://utdailybeacon.com/news/2012/oct/8/energy-forum-continues/

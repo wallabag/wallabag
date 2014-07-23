@@ -1,0 +1,3 @@
+body: (//div[contains(@class, 'gallery-slides')]//img)[1] | //div[contains(@class, 'node_body_inner')]
+
+test_url: http://www.hiamag.com/rss.xml

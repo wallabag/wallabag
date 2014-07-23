@@ -1,0 +1,23 @@
+title: //title
+
+body: //div[@id='content']
+
+strip: (//div[@id='content']/h2)[1]
+
+strip: //h2[contains(., 'mehr News')]/following::*
+strip: //h2[contains(., 'mehr News')]
+
+strip: //div[contains(@class, 'indizar')]/following::*
+strip: //div[contains(@class, 'indizar')]
+
+strip: //h1[contains(@class, 'single')]/preceding::*
+strip: //h1[contains(@class, 'single')]
+
+strip_id_or_class: plista_widget
+
+prune: no
+
+next_page_link: //a[contains(., 'Weiter')]
+
+test_url: http://www.fertigung.de/2013/04/igus-neuer-energiekettenkatalog/
+test_url: http://www.fertigung.de/2013/04/dynamisch-und-hochpraezise/

@@ -5,7 +5,7 @@
  * @category   wallabag
  * @author     Nicolas Lœuillet <nicolas@loeuillet.org>
  * @copyright  2013
- * @license    http://www.wtfpl.net/ see COPYING file
+ * @license    http://opensource.org/licenses/MIT see COPYING file
  */
 
 class Url

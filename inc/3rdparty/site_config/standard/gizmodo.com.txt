@@ -1,7 +1,11 @@
-body: //div[@class="post-body" or contains(@class, 'illustration top')]
-author: (//cite//span[@class="plus-icon"])[1]
+#body: //div[@class="post-body" or contains(@class, 'illustration top')]
+body: //div[contains(@class, 'image-annotation-box') or contains(@class, 'post-content')]
+#author: (//cite//span[@class="plus-icon"])[1]
+author: //span[contains(@class, 'display-name')]
 date: //span[@class="date"]
 
 prune: no
 
 test_url: http://gizmodo.com/5880147/kuhn-rikon-improves-their-spice-grinder-with-grade-school-science
+test_url: http://gizmodo.com/what-van-goghs-paintings-would-look-like-if-they-came-874035680
+test_url: http://gizmodo.com/vip.xml

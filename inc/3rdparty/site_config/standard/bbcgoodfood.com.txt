@@ -1,0 +1,16 @@
+title: //header//h1
+#body: //article[contains(@class, 'node-full')]
+body: //div[contains(@class, 'recipe-details') or contains(@class, 'tips-carousel')] | //section[@id='recipe-ingredients' or @id='recipe-method']
+
+strip_id_or_class: recipe-rating-wrapper
+strip_id_or_class: magazine-subcribe-header
+strip_id_or_class: hide
+strip_id_or_class: recipe-actions
+strip_id_or_class: buy-ingredients
+strip_id_or_class: related-content
+strip_id_or_class: recipe-magazine-ad
+strip_id_or_class: copy-right
+
+prune: no
+
+test_url: http://www.bbcgoodfood.com/recipes/1131634/minced-beef-wellington

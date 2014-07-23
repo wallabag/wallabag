@@ -1,0 +1,7 @@
+body: //div[contains(@class, 'post-content-inner')]
+strip_id_or_class: follow-ups
+strip_id_or_class: footer
+
+prune: no
+
+test_url: https://medium.com/p/6844c0d7893b

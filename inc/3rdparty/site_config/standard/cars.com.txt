@@ -1,0 +1,7 @@
+title: //div[contains(@class, 'basicInfo')]//h1
+
+body: //img[@id='chosenPhotoIMG'] | //div[@id='aboutThisVehicleBox']
+
+prune: no
+
+test_url: http://www.cars.com/go/search/detail.jsp?listingId=115364779

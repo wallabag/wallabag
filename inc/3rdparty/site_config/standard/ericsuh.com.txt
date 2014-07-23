@@ -1,0 +1,4 @@
+date: //h6[@class='datetime']/child::text()
+author: string("Eric J. Suh")
+footnotes: yes
+test_url: http://www.ericsuh.com/blog/posts/2012/8/strange-numbers.html

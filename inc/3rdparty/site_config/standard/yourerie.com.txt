@@ -1,0 +1,2 @@
+body: //div[@class="nxFullTextData"]
+test_url: http://yourerie.com/fulltext?nxd_id=306552

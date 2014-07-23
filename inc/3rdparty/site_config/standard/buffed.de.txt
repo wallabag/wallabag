@@ -1,0 +1,14 @@
+date: //meta[@itemProp='datePublished']/@content
+body: //div[@class='intro' or contains(@class, 'article_text')]
+prune: no
+strip_id_or_class: embedcode
+strip_id_or_class: EmbedSwitch
+strip_id_or_class: EmbedText
+strip_id_or_class: bildergalerie
+strip_id_or_class: subline_seohour_image
+strip_id_or_class: ova-player
+strip_id_or_class: jcarouseloutput
+strip_id_or_class: cbox_embedded
+
+test_url: http://www.buffed.de/SWTOR-Star-Wars-The-Old-Republic-PC-218697/News/SWTOR-Ab-Patch-24-Lore-Klamotten-faerben-1090051/
+test_url: http://www.buffed.de/feed.cfm?menu_alias=home

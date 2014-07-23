@@ -1,0 +1,4 @@
+body: //section[@class='content']
+date: //span[1]
+author: //h1[@id='sitetitle']
+test_url: https://alexduner.squarespace.com/blog/2013/1/tech-culture-from-the-outside-looking-in

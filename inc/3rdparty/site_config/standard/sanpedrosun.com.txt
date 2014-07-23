@@ -1,0 +1,10 @@
+title: //div[contains(@class, 'post')]//h1
+date: //div[contains(@class, 'post')]//h6
+body: //div[contains(@class, 'entry')]
+strip_id_or_class: post_stats
+strip_id_or_class: related-posts
+strip_id_or_class: after_story
+prune: no
+
+test_url: http://www.sanpedrosun.com/community-and-society/2013/06/05/little-angelspre-school-talent-show/
+test_url: http://www.sanpedrosun.com/feed/

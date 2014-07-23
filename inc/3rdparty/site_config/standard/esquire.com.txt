@@ -8,3 +8,4 @@ single_page_link: concat('http://www.esquire.com/print-this/', substring-after(/
 prune: no
 
 test_url: http://www.esquire.com/features/impossible/price-is-right-perfect-bid-0810
+test_url: http://www.esquire.com/blogs/politics/police-getting-leftover-armoured-iraq-trucks-112513

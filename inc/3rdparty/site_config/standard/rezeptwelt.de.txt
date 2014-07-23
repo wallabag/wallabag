@@ -1,0 +1,5 @@
+body: //div[@class='step-content'] | //div[@class='global-active ingredients-box']
+title: //div[@class='step-1-container']
+
+tidy: no
+test_url: http://www.rezeptwelt.de/backen-herzhaft-rezepte/w%C3%BCrstchen-schlangen/530372

@@ -1,0 +1,13 @@
+author: //article//address[contains(@class, 'author')]
+body: //article[.//div[contains(@class, 'abBodyText')]]//*[contains(@class, 'abLeadText') or contains(@class, 'abBodyText') or contains(@class, 'abImageBlock') or contains(@class, 'abIGSatellite')]
+
+strip: //address//img
+strip: //footer
+strip_id_or_class: abSticky
+
+prune: no
+
+test_url: http://www.aftonbladet.se/sportbladet/hockey/sverige/allsvenskan/article17498194.ab
+test_url: http://www.aftonbladet.se/debatt/article16207536.ab
+test_url: http://www.aftonbladet.se/debatt/debattamnen/politik/article17483377.ab
+test_url: http://www.aftonbladet.se/rss.xml

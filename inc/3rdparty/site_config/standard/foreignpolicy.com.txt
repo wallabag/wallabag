@@ -1,11 +1,15 @@
-title: //div[@id='art-mast']//h1
+title: //div[@class='translateHead']//h1 | //div[@id='art-mast']//h1
 author: substring-after(//span[@id='by-line'], 'BY ')
 date: //span[@id='pub-date']
-body: //div[@id='art-mast']//h2 | //div[@id='art-mast']/h3 | //div[@id='art-body']//div[@class='translateBody']
+body: //div[@id='art-mast']/h2 | //div[@class='translateBody'] | //div[@id='art-body']
+#Strip inside article content
 strip: //div[@id='share-box']
+strip: //div[@id='special-box']
+
 prune: no
 
 single_page_link: //span[@id='controls']/a[contains(@href, 'print=yes')]
+single_page_link: //a[text()='SINGLE PAGE']
 
 test_url: http://www.foreignpolicy.com/articles/2011/08/01/a_murderers_manifesto_and_me
-test_url: test_url: http://www.foreignpolicy.com/articles/2012/02/29/five_years_in_damascus
+test_url: http://www.foreignpolicy.com/articles/2012/02/29/five_years_in_damascus

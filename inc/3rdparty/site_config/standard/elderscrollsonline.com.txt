@@ -1,0 +1,22 @@
+date: //time
+title: //h1[contains(@class, "alpha")]
+body: //article[contains(@class, "news-post")]
+
+# fix dates - dates as they are won't work as strtotime doesn't understand format (03.28.2013)
+replace_string(<time class="gamma">01.): <time class="gamma">January.
+replace_string(<time class="gamma">02.): <time class="gamma">February.
+replace_string(<time class="gamma">03.): <time class="gamma">March.
+replace_string(<time class="gamma">04.): <time class="gamma">April.
+replace_string(<time class="gamma">05.): <time class="gamma">May.
+replace_string(<time class="gamma">06.): <time class="gamma">June.
+replace_string(<time class="gamma">07.): <time class="gamma">July.
+replace_string(<time class="gamma">08.): <time class="gamma">August.
+replace_string(<time class="gamma">09.): <time class="gamma">September.
+replace_string(<time class="gamma">10.): <time class="gamma">October.
+replace_string(<time class="gamma">11.): <time class="gamma">November.
+replace_string(<time class="gamma">12.): <time class="gamma">December.
+
+prune: no
+
+test_url: http://elderscrollsonline.com/en/rss
+test_url: http://elderscrollsonline.com/en/news/post/2013/03/27/developer-question-of-the-week-17

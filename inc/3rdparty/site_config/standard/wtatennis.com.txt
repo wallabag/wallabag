@@ -1,0 +1,7 @@
+title: //h1[contains(@class, 'header-2')]
+body: //article//*[contains(@class, 'teaserText') or contains(@class, 'lastUpdated') or contains(@class, 'image') or contains(@class, 'body')]
+strip_id_or_class: articleIndex
+prune: no
+
+test_url: http://www.wtatennis.com/news/article/3190914
+test_url: http://www.wtatennis.com/news/article/3190244

@@ -1,10 +1,14 @@
 title://div[@class="sl-layout-post"]/h1
-body: //div[contains(@class, 'post-content') or contains(@class, 'KonaBody')]
+body: //div[contains(@class, 'post-content') or contains(@class, 'slide-module') or contains(@class, 'KonaBody')]
 strip: //div[contains(@class, "post-sidebar")]
 strip: //div[@id='related-links']
+strip: //div[@class='related-links-container']
+strip: //p[@class='source']
 author://div[@class="byline"]/a
 date://div[@class="byline"]/span[@class="date"]
 prune: no
+
+single_page_link: //a[contains(text(), 'View as one page')]
 
 strip://*[contains(@class,'sponsored-text')]
 strip: //div[@id='post_footer']

@@ -1,0 +1,6 @@
+body: (//td[starts-with(@id, 'postmessage_')])[1]
+
+prune: no
+
+test_url: http://mforum.cari.com.my/forum.php?mod=viewthread&tid=788033
+test_url: http://mforum.cari.com.my/forum.php?mod=rss&fid=265&auth=0

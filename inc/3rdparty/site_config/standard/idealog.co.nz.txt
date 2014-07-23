@@ -1,0 +1,12 @@
+body: //div[@class='content']
+
+strip: //p[@class='dateline']
+strip: //hr
+strip_id_or_class: share
+strip_id_or_class: comments
+strip_id_or_class: tags
+
+title: substring-before(//title,' ::')
+author: substring-before(//p[@class='dateline'],',') 
+date: //p[@class='dateline']/time
+test_url: http://www.idealog.co.nz/blog/2012/12/geeks-plane-help-kiwis-take-san-francisco

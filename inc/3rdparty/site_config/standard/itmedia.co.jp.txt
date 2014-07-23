@@ -1,0 +1,8 @@
+body: //div[@id='cmsBody']
+
+next_page_link: //span[@id='next']/a
+
+strip_id_or_class: cmsCopyright
+strip_id_or_class: masterSocialbuttonBtm
+
+test_url: http://www.itmedia.co.jp/enterprise/articles/0912/05/news002.html

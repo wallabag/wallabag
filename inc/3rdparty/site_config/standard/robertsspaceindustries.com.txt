@@ -1,0 +1,4 @@
+strip_id_or_class: 'sharedaddy'
+strip_id_or_class: 'respond'
+strip_id_or_class: 'meta'
+test_url: http://www.robertsspaceindustries.com/news-update-ai-pilots/

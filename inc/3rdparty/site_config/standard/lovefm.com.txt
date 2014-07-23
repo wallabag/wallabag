@@ -1,0 +1,6 @@
+title: //*[@id='title']
+date: //*[@id='date']
+body: //*[@id='desc']
+tidy: no
+
+test_url: http://www.lovefm.com/local_news.php?item=2176

@@ -1,0 +1,9 @@
+date: //meta[@name='bi3dPubDate']/@content
+body: //div[contains(@class, 'articleBody')]
+
+prune: no
+
+test_url: http://www.resume.se/nyheter/media/2013/09/18/kvallspress-och-tv-slass-om-playtittarna-men-youtube-ohotat-storst/
+test_url: http://www.resume.se/nyheter/media/2013/09/18/cecilia-blankens-lamnar-mama-for-konkurrent/
+test_url: http://www.resume.se/nyheter/reklam/2013/09/18/ravelli-trodde-jag-var-med-i-blasningen/
+test_url: http://www.resume.se/rss-nyheter

@@ -1,0 +1,4 @@
+body: //div[contains(@class, 'articulum')]
+
+test_url: http://www.appledaily.com.tw/realtimenews/article/new/20140120/330479
+test_url: http://www.appledaily.com.tw/rss/create/kind/rnews/type/new/

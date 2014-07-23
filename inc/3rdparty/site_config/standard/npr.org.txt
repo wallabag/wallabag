@@ -1,11 +1,11 @@
 title: //div[contains(@class, 'storytitle')]//h1
 author: //p[@class="byline"]/span
-body: //div[@id='storyspan02']//*[@class='duration' or @class='download' or contains(@class, 'photo')] | //div[@id='storytext'] | //div[@class='transcript']
+body: //div[@id='primaryaudio']//*[@class='duration' or @class='download' or contains(@class, 'photo')] | //div[@id='storytext' or @id='supplementarycontent' or contains(@class, 'transcript')]
 date: //meta[@name="date"]/@content
 
-strip: //div[@class='enlarge_measure']
-strip: //div[@class='enlarge_html']
-strip: //a[@class='enlargeicon']
+strip_id_or_class: enlarge_measure
+strip_id_or_class: enlarge_html
+strip: //a[contains(@class, 'enlargeicon')]
 strip: //div[contains(@class, 'bookedition')]
 strip: //div[@class='textsize']
 strip: //ul[@class='genres']
@@ -16,6 +16,7 @@ strip: //h3[@class='conheader']
 
 replace_string(<a name="more">&nbsp;</a>): <!-- no more -->
 replace_string(<div class="transcript">): <div class="transcript"><h2>Transcript</h2>
+replace_string(<div class="transcript storytext">): <div class="transcript storytext"><h2>Transcript</h2>
 
 prune: no
 strip://div[@class="ecommercepop"]
@@ -30,3 +31,4 @@ strip://div[contains(@class, "bucketwrap internallink")]
 test_url: http://www.npr.org/blogs/thetwo-way/2011/07/12/137799301/sports-loses-its-escapist-gleam-in-a-summer-of-court-dates
 test_url: http://www.npr.org/2012/07/04/156190948/feeling-under-siege-catholic-leadership-shifts-right
 test_url: http://www.npr.org/2012/12/13/166480907/the-years-best-sci-fi-crosses-galaxies-and-genres
+test_url: http://www.npr.org/templates/story/story.php?storyId=229103221

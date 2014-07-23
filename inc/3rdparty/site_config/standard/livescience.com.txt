@@ -1,0 +1,20 @@
+title: //div[@class="album_title"]//h1
+author: substring-before(//div[@class='by_line'], ',')
+date: substring-after(substring-before(//div[@class="album_time"], ' Time'), 'Date: ')
+body: //div[@class="about_text"]
+
+strip: //div[@class='large_popper']
+strip: //span[contains(@id, 'mag_glass')]
+strip: //span[contains(@class, 'img_overlay')]
+strip: //td//span
+strip: //div[@class="center_adsense"]
+strip: //div[@class="article_info"]//div[@class='asset_section']
+strip: //div[@class="article_additional"]
+strip: //div[contains(@style, 'overflow:hidden')]
+strip: //div[@class="aa_text"]
+strip: //div[@id='nointelliTXT']
+
+prune: no
+autodetect_on_failure: no
+
+test_url: http://www.livescience.com/34569-why-flowers-close-at-night-nyctinasty.html

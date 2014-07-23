@@ -309,4 +309,38 @@ class Session
 
         return true; // User is not banned.
     }
+
+
+    /**
+     * Tells if a param exists in session
+     *
+     * @param $name name of the param to test
+     * @return bool
+     */
+    public static function isInSession($name)
+    {
+        return (isset($_SESSION[$name]) ? : FALSE);
+    }
+
+    /**
+     * Returns param in session
+     *
+     * @param $name name of the param to return
+     * @return mixed param or null
+     */
+    public static function getParam($name)
+    {
+        return (self::isInSession($name) ? $_SESSION[$name] : NULL);
+    }
+
+    /**
+     * Store value in session
+     *
+     * @param $name     name of the variable to store
+     * @param $value    value to store
+     */
+    public static function setParam($name, $value)
+    {
+        $_SESSION[$name] = $value;
+    }
 }

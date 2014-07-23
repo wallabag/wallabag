@@ -1,0 +1,23 @@
+# This filter is tested on:
+# http://www.lifeweek.com.cn/2012/1211/39439.shtml
+# http://www.lifeweek.com.cn/2013/0308/40213.shtml
+
+title:substring-before(//h1, '（')
+title://h1
+date://ul[@class='authorbox']/li
+author: substring-after(//ul[@class='authorbox']/li/following-sibling::li, '作者：')
+
+next_page_link: //div[@class='pageturn_list']/a[@class='pagedown']
+body: //div[@class='original ']
+
+strip://h1
+strip://ul[@class='authorbox']
+strip://span[@class='app_p']
+strip://div[@style='text-align:right;']
+strip://div[@class='pageturn_list']
+strip://div[@class='lifespeaks']
+strip://div[@class='vright fr']
+strip://div[@class='copyrt mg20']
+strip://div[@class='keyabout mg20']
+strip://ul[@class='readabout mg20']
+test_url: http://www.lifeweek.com.cn/2013/0308/40213.shtml

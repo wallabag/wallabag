@@ -1,0 +1,5 @@
+title: //h1[@class='articleTitle ']
+body: //div[@class='bodyText widget storyContent']
+strip: //p/span[@class='quote']/..
+strip_id_or_class: 'pull1'
+test_url: https://www.aftenposten.no/meninger/spaltister/Portrett-av-scenekunstneren-som-ung-mann-7167959.html

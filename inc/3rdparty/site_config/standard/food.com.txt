@@ -1,0 +1,11 @@
+body: //div[@id='print-area']
+title: //h1[contains(@class, 'section-title')]
+single_page_link: //a[@id='prntrec']
+strip_image_src: food-logo-small
+strip_id_or_class: timer
+strip_id_or_class: photo-sm
+strip_id_or_class: page-header
+
+prune: no
+
+test_url: http://www.food.com/recipe/couldnt-be-easier-bbq-pork-tenderloin-crock-pot-317152
