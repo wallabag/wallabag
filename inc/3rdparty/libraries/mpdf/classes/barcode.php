@@ -871,6 +871,7 @@ class PDFBarcode {
 	 * Very capable code, excellent density, high reliability; in very wide use world-wide
 	 */
 	protected function barcode_c128($code, $type='B', $ean=false) {
+		$code = strcode2utf($code);	// mPDF 5.7.1	Allows e.g. <barcode code="5432&#013;1068" type="C128A" />
 		$chr = array(
 			'212222', /* 00 */
 			'222122', /* 01 */

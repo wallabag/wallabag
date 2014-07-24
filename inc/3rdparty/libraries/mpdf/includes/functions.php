@@ -1,5 +1,13 @@
 <?php
 
+// mPDF 5.7
+// Replace a section of an array with the elements in reverse
+function array_splice_reverse(&$arr, $offset, $length) {
+	$tmp = (array_reverse(array_slice($arr, $offset, $length)));
+	array_splice($arr, $offset, $length, $tmp);
+}
+
+
 // mPDF 5.6.23
 function array_insert(&$array, $value, $offset) {
 	if (is_array($array)) {
@@ -92,11 +100,29 @@ function PreparePreText($text,$ff='//FF//') {
 if(!function_exists('strcode2utf')){ 
   function strcode2utf($str,$lo=true) {
 	//converts all the &#nnn; and &#xhhh; in a string to Unicode
-	if ($lo) { $lo = 1; } else { $lo = 0; }
-	$str = preg_replace('/\&\#([0-9]+)\;/me', "code2utf('\\1',{$lo})",$str);
-	$str = preg_replace('/\&\#x([0-9a-fA-F]+)\;/me', "codeHex2utf('\\1',{$lo})",$str);
+	// mPDF 5.7
+	if ($lo) {
+		$str = preg_replace_callback('/\&\#([0-9]+)\;/m', 'code2utf_lo_callback', $str);
+		$str = preg_replace_callback('/\&\#x([0-9a-fA-F]+)\;/m', 'codeHex2utf_lo_callback', $str);
+	}
+	else {
+		$str = preg_replace_callback('/\&\#([0-9]+)\;/m', 'code2utf_callback', $str);
+		$str = preg_replace_callback('/\&\#x([0-9a-fA-F]+)\;/m', 'codeHex2utf_callback', $str);
+	}
 	return $str;
   }
+}
+function code2utf_callback($matches) {
+	return code2utf($matches[1], 0);
+}
+function code2utf_lo_callback($matches) {
+	return code2utf($matches[1], 1);
+}
+function codeHex2utf_callback($matches) {
+	return codeHex2utf($matches[1], 0);
+}
+function codeHex2utf_lo_callback($matches) {
+	return codeHex2utf($matches[1], 1);
 }
 
 if(!function_exists('code2utf')){ 
