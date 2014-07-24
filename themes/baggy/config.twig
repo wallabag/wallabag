@@ -20,7 +20,7 @@
                         <input type="submit" value="{% trans "bag it!" %}" />
                     </form>
                 </li>
-                <li>{% trans "Bookmarklet: drag & drop this link to your bookmarks bar" %} <a id="bookmarklet" ondragend="this.click();" title="i am a bookmarklet, use me !" href="javascript:if(top['bookmarklet-url@wallabag.org']){top['bookmarklet-url@wallabag.org'];}else{(function(){var%20url%20=%20location.href%20||%20url;window.open('{{ poche_url }}?action=add&url='%20+%20btoa(url),'_self');})();void(0);}">{% trans "bag it!" %}</a></li>
+                <li>{% trans "Bookmarklet: drag &amp; drop this link to your bookmarks bar" %} <a id="bookmarklet" ondragend="this.click();" title="i am a bookmarklet, use me !" href="javascript:if(top['bookmarklet-url@wallabag.org']){top['bookmarklet-url@wallabag.org'];}else{(function(){var%20url%20=%20location.href%20||%20url;window.open('{{ poche_url }}?action=add&url='%20+%20btoa(url),'_self');})();void(0);}">{% trans "bag it!" %}</a></li>
             </ul>
 
             <h2>{% trans "Upgrading wallabag" %}</h2>
@@ -126,7 +126,13 @@
             <p><a href="?export" target="_blank">{% trans "Click here" %}</a> {% trans "to export your wallabag data." %}</p>
             
             <h2>{% trans "Fancy an E-Book ?" %}</h2>
-            <p>{% trans "Click on <a href=\"./?epub&amp;method=all\" title=\"Generate ePub\">this link</a> to get all your articles in one ebook (ePub 3 format)." %}
+            <p>{% trans "Click to get all your articles in one ebook :" %}
+            <ul>
+            <li><a href="./?epub&amp;method=all" title="Generate ePub file">ePub 3</a></li>
+            <li><a href="./?mobi&amp;method=all" title="Generate Mobi file">Mobi</a></li>
+            <li><a href="./?pdf&amp;method=all" title="Generate PDF file">PDF</a></li>
+            </ul>
+
             <br>{% trans "This can <b>take a while</b> and can <b>even fail</b> if you have too many articles, depending on your server configuration." %}</p>
 
             <h2>{% trans "Cache" %}</h2>

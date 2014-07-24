@@ -62,21 +62,7 @@ class RecordFactory {
 	}
 
 	public function createFLISRecord(){
-		
-		$this->elements = new FileElement(array(
-			"offsetL0"=>new FileString("FLIS", 4),	//FLIS
-			"offsetL4"=>new FileInt(0x08),
-			"offsetL8"=>new FileShort(0x41),
-			"offsetL10"=>new FileTri(),
-			"offsetL16"=>new FileInt(0xFFFFFFFF),
-			"offsetL20"=>new FileShort(0x01),		
-			"offsetL22"=>new FileShort(0x03),
-			"offsetL24"=>new FileInt(0x03),
-			"offsetL28"=>new FileInt(0x01),
-			"offsetL32"=>new FileInt(0xFFFFFFFF)
-			));
-		
-		/*$r = "FLIS";
+		$r = "FLIS";
 		$r .= $this->asString(8, 4);
 		$r .= $this->asString(65, 2);
 		$r .= $this->asString(0, 2);
@@ -87,7 +73,7 @@ class RecordFactory {
 		$r .= $this->asString(3, 4);
 		$r .= $this->asString(1, 4);
 		$r .= $this->asString(-1, 4);
-		return new Record($r);*/
+		return new Record($r);
 	}
 	
 	private function asString($int, $size){

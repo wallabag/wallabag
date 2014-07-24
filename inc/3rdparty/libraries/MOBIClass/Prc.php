@@ -40,7 +40,7 @@ class Prc extends FileElement {
 		foreach($records as $record){
 			$offset = new FileInt();
 			$attr = new FileByte();
-			$uniqueID = new FileTri(2*$i);
+			$uniqueID = new FileTri($i);
 			
 			$this->elements["recordList"]->add("Rec".$i, new FileElement(array(
 				"offset"=>$offset,
@@ -49,7 +49,7 @@ class Prc extends FileElement {
 			)));
 			
 			$this->elements["records"]->add("Rec".$i, $record);
-			$i+=1;
+			$i++;
 		}
 
 		$this->updateOffsets($records);

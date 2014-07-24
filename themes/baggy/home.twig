@@ -43,7 +43,7 @@
                     {% if entry.content| getReadingTime > 0 %}
                         <div class="estimatedTime"><a target="_blank" title="{% trans "estimated reading time:" %} {{ entry.content| getReadingTime }} min" class="tool reading-time"><span>{% trans "estimated reading time :" %} {{ entry.content| getReadingTime }} min</span></div>
                     {% else %}
-                        <div class="estimatedTime"><a target="_blank" title="{% trans "estimated reading time:" %} {{ entry.content| getReadingTime }} min" class="tool reading-time"><span>{% trans "estimated reading time :" %} <small class="inferieur"><</small> 1 min</span></div>
+                        <div class="estimatedTime"><a target="_blank" title="{% trans "estimated reading time:" %} {{ entry.content| getReadingTime }} min" class="tool reading-time"><span>{% trans "estimated reading time :" %} <small class="inferieur"></small> 1 min</span></div>
                     {% endif %}
                     <ul class="tools links">
                         <li><a title="{% trans "Toggle mark as read" %}" class="tool icon-check icon {% if entry.is_read == 0 %}archive-off{% else %}archive{% endif %}" href="./?action=toggle_archive&amp;id={{ entry.id|e }}"><span>{% trans "Toggle mark as read" %}</span></a></li>
@@ -59,11 +59,21 @@
             {{ block('pager') }}
             {% if view == 'home' %}{% if nb_results > 1 %}<a title="{% trans "Mark all the entries as read" %}"  href="./?action=archive_all">{{ "Mark all the entries as read" }}</a>{% endif %}{% endif %}
 
-            {% if search_term is defined %}<a title="{% trans %} Apply the tag {{ search_term }} to this search {% endtrans %}" href="./?action=add_tag&search={{ search_term }}">{% trans %} Apply the tag {{ search_term }} to this search {% endtrans %}</a>{% endif %}
+            {% if search_term is defined %}<a title="{% trans %} Apply the tag {{ search_term }} to this search {% endtrans %}" href="./?action=add_tag&amp;search={{ search_term }}">{% trans %} Apply the tag {{ search_term }} to this search {% endtrans %}</a>{% endif %}
             
-            {% if tag %}<a title="{% trans "Download the articles from this tag in an epub" %}" href="./?epub&amp;method=tag&amp;value={{ tag.value }}">{% trans "Download the articles from this tag in an epub" %}</a>
-            {% elseif search_term is defined %}<a title="{% trans "Download the articles from this search in an epub" %}" href="./?epub&amp;method=search&amp;value={{ search_term }}">{% trans "Download the articles from this search in an epub" %}</a>
-            {% else %}<a title="{% trans "Download the articles from this category in an epub" %}" href="./?epub&amp;method=category&amp;value={{ view }}">{% trans "Download the articles from this category in an epub" %}</a>{% endif %}
+            {% if tag %}
+            <a title="{% trans "Download the articles from this tag in an epub file" %}" href="./?epub&amp;method=tag&amp;value={{ tag.value }}">{% trans "Download as ePub3" %}</a>
+            <a title="{% trans "Download the articles from this tag in a mobi file" %}" href="./?mobi&amp;method=tag&amp;value={{ tag.value }}">{% trans "Download as Mobi" %}</a>
+            <a title="{% trans "Download the articles from this tag in a pdf file" %}" href="./?pdf&amp;method=tag&amp;value={{ tag.value }}">{% trans "Download as PDF" %}</a>
+            {% elseif search_term is defined %}
+            <a title="{% trans "Download the articles from this search in an epub" %}" href="./?epub&amp;method=search&amp;value={{ search_term }}">{% trans "Download as ePub3" %}</a>
+            <a title="{% trans "Download the articles from this search in a mobi file" %}" href="./?mobi&amp;method=search&amp;value={{ search_term }}">{% trans "Download as Mobi" %}</a>
+            <a title="{% trans "Download the articles from this search in a pdf file" %}" href="./?pdf&amp;method=search&amp;value={{ search_term }}">{% trans "Download as PDF" %}</a>
+            {% else %}
+            <a title="{% trans "Download the articles from this category in an epub" %}" href="./?epub&amp;method=category&amp;value={{ view }}">{% trans "Download as ePub3" %}</a>
+            <a title="{% trans "Download the articles from this category in a mobi file" %}" href="./?mobi&amp;method=category&amp;value={{ view }}">{% trans "Download as Mobi" %}</a>
+            <a title="{% trans "Download the articles from this category in a pdf file" %}" href="./?pdf&amp;method=category&amp;value={{ view }}">{% trans "Download as PDF" %}</a>
+            {% endif %}
             
             {% endif %}
 {% endblock %}

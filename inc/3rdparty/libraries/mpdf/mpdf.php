@@ -7451,7 +7451,7 @@ function Output($name='',$dest='')
 					// don't use length if server using compression
 					header('Content-Length: '.strlen($this->buffer));
 				}
-				header('Content-disposition: inline; filename="'.$name.'"');
+				header('Content-disposition: attachment; filename="'.$name.'"');
 				header('Cache-Control: public, must-revalidate, max-age=0'); 
 				header('Pragma: public');
 				header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); 

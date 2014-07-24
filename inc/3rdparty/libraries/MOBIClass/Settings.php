@@ -19,6 +19,7 @@ class Settings {
 	 * be added with a key/value pair format.
 	 */
 	public function  __construct($additionalSettings = array()) {
+		// Most values shouldn't be changed (the result will be an invalid file)
 		$this->values = array(
 			"attributes"=>0,
 			"version"=>0,
@@ -48,13 +49,14 @@ class Settings {
 			"minimumVersion"=>6,
 			"huffmanRecordOffset"=>0,
 			"huffmanRecordCount"=>0,
-			"exthFlags"=>0x50,
+			"exthFlags"=>0x40,
 			"drmOffset"=>0xFFFFFFFF,
-			"drmCount"=>0xFFFFFFFF,
+			"drmCount"=>0,
 			"drmSize"=>0,
 			"drmFlags"=>0,
 			"extraDataFlags"=>0,
 			"exthIdentifier"=>"EXTH",
+			// These can be changed without any risk
 			"title"=>"Unknown title",
 			"author"=>"Unknown author",
 			"subject"=>"Unknown subject"

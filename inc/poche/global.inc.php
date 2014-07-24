@@ -42,11 +42,7 @@ require_once INCLUDES . '/3rdparty/libraries/PHPePub/EPub.php';
 require_once INCLUDES . '/3rdparty/libraries/PHPePub/EPubChapterSplitter.php';
 
 # mobi library
-require_once INCLUDES . '/3rdparty/libraries/send2kindle/send.php';
-require_once INCLUDES . '/3rdparty/libraries/send2kindle/images.php';
-require_once INCLUDES . '/3rdparty/libraries/send2kindle/storage.php';
-require_once INCLUDES . '/3rdparty/libraries/send2kindle/MOBIClass/MOBI.php';
-require_once INCLUDES . '/3rdparty/libraries/send2kindle/utils.php';
+require_once INCLUDES . '/3rdparty/libraries/MOBIClass/MOBI.php';
 
 # pdf library
 require_once INCLUDES . '/3rdparty/libraries/mpdf/mpdf.php';

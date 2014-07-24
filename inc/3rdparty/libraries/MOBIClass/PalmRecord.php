@@ -38,32 +38,19 @@ class PalmRecord extends FileObject {
 			"huffmanRecordOffset"=>new FileInt(),
 			"huffmanRecordCount"=>new FileInt(),
 			"unused3"=>new FileString(8),
-			"exthFlags"=>new FileInt(0x50),
+			"exthFlags"=>new FileInt(0x40),
 			"unknown"=>new FileString(32),
 			"drmOffset"=>new FileInt(0xFFFFFFFF),
-			"drmCount"=>new FileInt(0xFFFFFFFF),
-			"drmSize"=>new FileInt(),
+			"drmCount"=>new FileShort(0xFFFFFFFF),
+			"drmSize"=>new FileShort(),
 			"drmFlags"=>new FileInt(),
-			"mobiFiller"=>new FileString(12),
-			"offset192"=>new FileShort(0x01),
-			"offset194"=>new FileShort(),
-			"offset196"=>new FileInt(0x01),
-			"offset200"=>new FileInt(),
-			"offset204"=>new FileInt(0x01),
-			"offset208"=>new FileInt(),
-			"offset212"=>new FileInt(0x01),
-			"offset216"=>new FileString(8),
-			"offset224"=>new FileInt(0xFFFFFFFF),
-			"offset228"=>new FileInt(),
-			"offset232"=>new FileString(8),
-			"offset240"=>new FileInt(0x01),
-			"offset244"=>new FileInt(0xFFFFFFFF),
+			"mobiFiller"=>new FileString(72),
 			//EXTH Header
 			"exthIdentifier"=>new FileString("EXTH", 4),
 			"exthHeaderLength"=>new FileInt(),
 			"exthRecordCount"=>new FileInt(),
 			"exthRecords"=>new FileElement(),
-			"exthPadding"=>new FileString(),//added the 2 extra pad bytes that comes before name/title
+			"exthPadding"=>new FileString(),
 			//"fullNamePadding"=>new FileString(100),
 			"fullName"=>new FileString()
 				));
@@ -96,7 +83,7 @@ class PalmRecord extends FileObject {
 		}
 
 		if($images > 0){
-			$this->elements->get("firstImageIndex")->set($textRecords+2);
+			$this->elements->get("firstImageIndex")->set($textRecords+1);
 		}
 		$this->elements->get("firstNonBookIndex")->set($textRecords+2+$images);
 		$this->elements->get("reserved")->set(str_pad("", 40, chr(255), STR_PAD_RIGHT));
@@ -104,21 +91,16 @@ class PalmRecord extends FileObject {
 		$this->elements->set("exthRecords", $exthElems);
 		$pad = $l%4;
 		$pad = (4-$pad)%4;
-		$this->elements->get("exthPadding")->set(str_pad("", $pad+2, "\0", STR_PAD_RIGHT));
+		$this->elements->get("exthPadding")->set(str_pad("", $pad, "\0", STR_PAD_RIGHT));
 		$this->elements->get("exthHeaderLength")->set(12+$l+$pad);
 
 
 		$this->elements->get("recordCount")->set($textRecords);
-		
-		$this->elements->get("fullNameOffset")->set($this->elements->offsetToEntry("fullName"));//need to be checked
+
+		$this->elements->get("fullNameOffset")->set($this->elements->offsetToEntry("fullName"));
 		$this->elements->get("fullNameLength")->set(strlen($settings->get("title")));
 		$this->elements->get("fullName")->set($settings->get("title"));
 		$this->elements->get("textLength")->set($textLength);
-		
-		$this->elements->get("offset194")->set($textRecords+2+$images);
-		$this->elements->get("offset200")->set($textRecords+4+$images);
-		$this->elements->get("offset208")->set($textRecords+3+$images);
-		$this->elements->get("offset232")->set(str_pad("", 8, chr(255), STR_PAD_RIGHT));
 	}
 
 	public function getByteLength(){

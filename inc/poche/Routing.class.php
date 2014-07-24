@@ -112,12 +112,15 @@ class Routing
             $this->wallabag->deleteUser($_POST['password4deletinguser']);
         } elseif (isset($_GET['epub'])) {
             $epub = new WallabagEpub($this->wallabag, $_GET['method'], $_GET['value']);
+            $epub->prepareData();
             $epub->produceEpub();
         } elseif (isset($_GET['mobi'])) {
             $mobi = new WallabagMobi($this->wallabag, $_GET['method'], $_GET['value']);
+            $mobi->prepareData();
             $mobi->produceMobi();
         } elseif (isset($_GET['pdf'])) {
             $pdf = new WallabagPDF($this->wallabag, $_GET['method'], $_GET['value']);
+            $pdf->prepareData();
             $pdf->producePDF();
         } elseif (isset($_GET['import'])) {
             $import = $this->wallabag->import();

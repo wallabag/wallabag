@@ -18,11 +18,9 @@ require_once(dirname(__FILE__).'/FileTri.php');
 require_once(dirname(__FILE__).'/Http.php');
 require_once(dirname(__FILE__).'/http_build_url.php');
 require_once(dirname(__FILE__).'/ImageHandler.php');
+require_once(dirname(__FILE__).'/MOBIFile.php');
 require_once(dirname(__FILE__).'/OnlineArticle.php');
 require_once(dirname(__FILE__).'/PalmRecord.php');
-require_once(dirname(__FILE__).'/PEOFRecord.php');
-require_once(dirname(__FILE__).'/PFCISRecord.php');
-require_once(dirname(__FILE__).'/PFLISRecord.php');
 require_once(dirname(__FILE__).'/Prc.php');
 require_once(dirname(__FILE__).'/PreprocessedArticle.php');
 require_once(dirname(__FILE__).'/RecognizeURL.php');
@@ -43,7 +41,7 @@ require_once(dirname(__FILE__).'/Settings.php');
  * $mobi->setFileSource($file);			//Load a local file without any extra changes
  * $mobi->setData($data);				//Load data
  *
- * //If you want, you can set some optional settings
+ * //If you want, you can set some optional settings (see Settings.php for all recognized settings)
  * $options = array(
  *		"title"=>"Insert title here",
  *		"author"=>"Author"
@@ -86,7 +84,7 @@ class MOBI {
 	 */
 	public function setContentProvider($content){
 		$this->setOptions($content->getMetaData());
-		$this->images = $content->getImages();
+		$this->setImages($content->getImages());
 		$this->setData($content->getTextData());
 	}
 
@@ -149,16 +147,9 @@ class MOBI {
 		$mobiHeader = new PalmRecord($settings, $dataRecords, $nRecords, $len, sizeof($this->images));
 		array_unshift($dataRecords, $mobiHeader);
 		$dataRecords = array_merge($dataRecords, $this->images);
-		$mobiFooter1 = new PFLISRecord($len);
-		$mobiFooter2 = new PFCISRecord($len);
-		$mobiFooter3 = new PEOFRecord($len);
-		$dataRecords[] = $mobiFooter1;
-		$dataRecords[] = $mobiFooter2;
-		$dataRecords[] = $mobiFooter3;
-		/*$dataRecords = array_merge($dataRecords, $mobiFooter);
-		*$dataRecords[] = $rec->createFLISRecord();*
+		$dataRecords[] = $rec->createFLISRecord();
 		$dataRecords[] = $rec->createFCISRecord($len);
-		$dataRecords[] = $rec->createEOFRecord();*/
+		$dataRecords[] = $rec->createEOFRecord();
 		$this->prc = new Prc($settings, $dataRecords);
 		return $this->prc;
 	}
@@ -183,7 +174,7 @@ class MOBI {
 		$length = strlen($data);
 
 		if($this->debug) return;		//In debug mode, don't start the download
-/*
+
 		header("Content-Type: application/x-mobipocket-ebook");
 		header("Content-Disposition: attachment; filename=\"".$name."\"");
 		header("Content-Transfer-Encoding: binary");
@@ -192,12 +183,8 @@ class MOBI {
 		header('Pragma: private');
 		header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
 		header("Content-Length: ".$length);
-		echo $data;*/
 		
-		
-		$hh = fopen("D:\hakuna.mobi", "w");
-		fwrite($hh, $data);
-		fclose($hh);
+		echo $data;
 		//Finished!
 	}
 	

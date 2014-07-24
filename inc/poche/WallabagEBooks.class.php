@@ -30,34 +30,35 @@ class WallabagEBooks
             case 'id':
                 $entryID = filter_var($this->value, FILTER_SANITIZE_NUMBER_INT);
                 $entry = $this->wallabag->store->retrieveOneById($entryID, $this->wallabag->user->getId());
-                $entries = array($entry);
-                $bookTitle = $entry['title'];
-                $bookFileName = substr($bookTitle, 0, 200);
+                $this->entries = array($entry);
+                $this->bookTitle = $entry['title'];
+                $this->bookFileName = substr($this->bookTitle, 0, 200);
                 break;
             case 'all':
-                $entries = $this->wallabag->store->retrieveAll($this->wallabag->user->getId());
-                $bookTitle = sprintf(_('All my articles on '), date(_('d.m.y'))); #translatable because each country has it's own date format system
-                $bookFileName = _('Allarticles') . date(_('dmY'));
+                $this->entries = $this->wallabag->store->retrieveAll($this->wallabag->user->getId());
+                $this->bookTitle = sprintf(_('All my articles on '), date(_('d.m.y'))); #translatable because each country has it's own date format system
+                $this->bookFileName = _('Allarticles') . date(_('dmY'));
                 break;
             case 'tag':
                 $tag = filter_var($this->value, FILTER_SANITIZE_STRING);
                 $tags_id = $this->wallabag->store->retrieveAllTags($this->wallabag->user->getId(), $tag);
                 $tag_id = $tags_id[0]["id"]; // we take the first result, which is supposed to match perfectly. There must be a workaround.
-                $entries = $this->wallabag->store->retrieveEntriesByTag($tag_id, $this->wallabag->user->getId());
-                $bookTitle = sprintf(_('Articles tagged %s'), $tag);
-                $bookFileName = substr(sprintf(_('Tag %s'), $tag), 0, 200);
+                $this->entries = $this->wallabag->store->retrieveEntriesByTag($tag_id, $this->wallabag->user->getId());
+                $this->bookTitle = sprintf(_('Articles tagged %s'), $tag);
+                $this->bookFileName = substr(sprintf(_('Tag %s'), $tag), 0, 200);
                 break;
             case 'category':
                 $category = filter_var($this->value, FILTER_SANITIZE_STRING);
-                $entries = $this->wallabag->store->getEntriesByView($category, $this->wallabag->user->getId());
-                $bookTitle = sprintf(_('All articles in category %s'), $category);
-                $bookFileName = substr(sprintf(_('Category %s'), $category), 0, 200);
+                $this->entries = $this->wallabag->store->getEntriesByView($category, $this->wallabag->user->getId());
+                $this->bookTitle = sprintf(_('All articles in category %s'), $category);
+                $this->bookFileName = substr(sprintf(_('Category %s'), $category), 0, 200);
                 break;
             case 'search':
                 $search = filter_var($this->value, FILTER_SANITIZE_STRING);
-                $entries = $this->store->search($search, $this->wallabag->user->getId());
-                $bookTitle = sprintf(_('All articles for search %s'), $search);
-                $bookFileName = substr(sprintf(_('Search %s'), $search), 0, 200);
+                Tools::logm($search);
+                $this->entries = $this->wallabag->store->search($search, $this->wallabag->user->getId());
+                $this->bookTitle = sprintf(_('All articles for search %s'), $search);
+                $this->bookFileName = substr(sprintf(_('Search %s'), $search), 0, 200);
                 break;
             case 'default':
                 die(_('Uh, there is a problem while generating epub.'));
@@ -94,7 +95,7 @@ class WallabagEpub extends WallabagEBooks
         $log->logLine("getCurrentServerURL: " . $book->getCurrentServerURL());
         $log->logLine("getCurrentPageURL..: " . $book->getCurrentPageURL());
 
-        $book->setTitle($bookTitle);
+        $book->setTitle($this->bookTitle);
         $book->setIdentifier("http://$_SERVER[HTTP_HOST]", EPub::IDENTIFIER_URI); // Could also be the ISBN number, prefered for published books, or a UUID.
         //$book->setLanguage("en"); // Not needed, but included for the example, Language is mandatory, but EPub defaults to "en". Use RFC3066 Language codes, such as "en", "da", "fr" etc.
         $book->setDescription(_("Some articles saved on my wallabag"));
@@ -111,7 +112,7 @@ class WallabagEpub extends WallabagEBooks
 
         $log->logLine("Add Cover");
 
-        $fullTitle = "<h1> " . $bookTitle . "</h1>\n";
+        $fullTitle = "<h1> " . $this->bookTitle . "</h1>\n";
 
         $book->setCoverImage("Cover.png", file_get_contents("themes/baggy/img/apple-touch-icon-152.png"), "image/png", $fullTitle);
 
@@ -122,7 +123,7 @@ class WallabagEpub extends WallabagEBooks
 
         $book->buildTOC();
 
-        foreach ($entries as $entry) { //set tags as subjects
+        foreach ($this->entries as $entry) { //set tags as subjects
             $tags = $this->wallabag->store->retrieveTagsByEntry($entry['id']);
             foreach ($tags as $tag) {
                 $book->setSubject($tag['value']);
@@ -139,97 +140,82 @@ class WallabagEpub extends WallabagEBooks
             $book->addChapter("Log", "Log.html", $content_start . $log->getLog() . "\n</pre>" . $bookEnd); // log generation
         }
         $book->finalize();
-        $zipData = $book->sendBook($bookFileName);
+        $zipData = $book->sendBook($this->bookFileName);
     }
 } 
 
 class WallabagMobi extends WallabagEBooks
 {
 	/**
-	* Adapted from News2Kindle
-	* @author Jakub Westfalewski <jwest@jwest.pl>
-	*
+	* MOBI Class
+	* @author Sander Kromwijk
 	*/
 
-	public function produceMobi()
+	public function produceMobi($send = FALSE)
 	{
-		$storage = new Storage('static');
-		$this->prepareData();
-		foreach ($entries as $i => $item) {
-			$content = $item['content'];
-			$images = new Images($storage, $content);
-            $content = $images->convert();
-			$storage->add_content
-            (
-                md5($item['title']),
-                mb_convert_encoding($item['title'], 'HTML-ENTITIES', 'utf-8'), 
-                $content, 
-                $item['url']], 
-                ""
-            );
-		}
-		$articles = $storage->get_contents();
-		$toc = array();
-        $articles_count = count($articles);
 
-        foreach($articles as $article){
-            if(array_key_exists($article->website->title, $toc)){
-                $toc[$article->website->title]->articles[] = $article;             
-            }else{
-                $toc[$article->website->title] = (object)array(
-                    'articles' => array($article),
-                    'title' => $article->website->title,
-                    'streamId' => $article->website->streamId,
-                    'url' => $article->website->htmlUrl,
-                );
-            }           
+        # Good try
+        $mobi = new MOBI();
+            
+        $content = new MOBIFile();
+            
+        $content->set("title", $this->bookTitle);
+        $content->set("author", "wallabag");
+
+        # introduction
+        //$content->appendChapterTitle("Cover");
+        $content->appendParagraph('<div style="text-align:center;"><p>' . _('Produced by wallabag with PHPMobi') . '</p><p>'. _('Please open <a href="https://github.com/wallabag/wallabag/issues" >an issue</a> if you have trouble with the display of this E-Book on your device.') . '</p></div>');
+        $content->appendImage(imagecreatefrompng("themes/baggy/img/apple-touch-icon-152.png"));
+        $content->appendPageBreak();
+
+        foreach ($this->entries as $item) {
+            $content->appendChapterTitle($item['title']);
+            $content->appendParagraph($item['content']);
+            $content->appendPageBreak();
         }
+        $mobi->setContentProvider($content);
 
-        $mobi = new MOBI(); 
-        $mobi->setData($content);
-        $mobi->setOptions(array( 
-            'title' => 'Articles from '.date('Y-m-d'), 
-            'author' => 'wallabag', 
-            'subject' => 'Articles from '.date('Y-m-d'),
-        ));
-
-        $images = array();
-
-        //prepare images for mobi format
-        foreach ( $storage->info('images') as $n => $image )
-        {
-            $images[$n] = new FileRecord(new Record(file_get_contents($storage->get_path() . $image)));
-        }
-
-        $mobi->setImages($images);
-        $mobi->save( $storage->get_path(FALSE) . 'articles-' . date('Y-m-d') . '.mobi');
-
-        $storage->clean();
-
-        if ($send) {
-        	$files = glob($storage->get_path(FALSE).'*.mobi');
-        	$mail = new Send(KINDLEMAIL,MAIL);
-        	foreach ( $files as $file_mobi )
-        	{
-            	$mail->send( $file_mobi );
-        	}
-        	// clean cache 
-        	foreach ( $files as $file_mobi )
-        	{
-           		unlink( $file_mobi );
-        	}
-        }
-	}
+        $mobi->download($this->bookFileName.".mobi");
+    }
 }
 
 class WallabagPDF extends WallabagEbooks
 {
 	public function producePDF()
 	{
+        //$this->prepareData();
 		$mpdf = new mPDF('c'); 
 
-		$mpdf->WriteHTML($html);
-		$mpdf->Output();
-		exit;
+        # intro
+
+        $html = '<h1>' . $this->bookTitle . '</h1><img src="themes/baggy/img/apple-touch-icon-152.png" />';
+
+        foreach ($this->entries as $item) {
+            $html .= '<h1>' . $item['title'] . '</h1>';
+            $html .= '<indexentry content="'. $item['title'] .'" />';
+            $html .= $item['content'];
+        }
+
+        //$mpdf->h2toc = array('H1'=>0);
+
+        # headers
+        $mpdf->SetHeader('{DATE j-m-Y}|{PAGENO}/{nb}|Produced with wallabag');
+        $mpdf->SetFooter('{PAGENO}');
+		
+        $mpdf->WriteHTML($html);
+
+        # remove characters that make mpdf bug
+        $char_in = array('/', '.', ',', ':', '|');
+        $pdfExportName = preg_replace('/\s+/', '-', str_replace($char_in, '-', $this->bookFileName . '.pdf'));
+		
+        $mpdf->Output('cache/' . $pdfExportName);
+		
+        header('Content-Disposition: attachment; filename="' . $pdfExportName . '"');
+
+        header('Content-Transfer-Encoding: base64');
+        header('Content-Type: application/pdf');
+        echo file_get_contents('cache/' . $pdfExportName);
+
+        //exit;
 	}
 }
