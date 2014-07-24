@@ -118,6 +118,10 @@ class Routing
             $mobi = new WallabagMobi($this->wallabag, $_GET['method'], $_GET['value']);
             $mobi->prepareData();
             $mobi->produceMobi();
+        } elseif (isset($_GET['send2kindle'])) {
+            $mobi = new WallabagMobi($this->wallabag, $_GET['method'], $_GET['value']);
+            $mobi->prepareData();
+            $mobi->produceMobi(TRUE);
         } elseif (isset($_GET['pdf'])) {
             $pdf = new WallabagPDF($this->wallabag, $_GET['method'], $_GET['value']);
             $pdf->prepareData();
