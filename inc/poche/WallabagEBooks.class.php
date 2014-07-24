@@ -185,7 +185,7 @@ class WallabagMobi extends WallabagEBooks
             // we send file to kindle
 
             $char_in = array('/', '.', ',', ':', '|'); # we sanitize filename to avoid conflicts with special characters (for instance, / goes for a directory)
-            $mobiExportName = preg_replace('/\s+/', '-', str_replace($char_in, '-', $this->bookFileName . '.mobi'));
+            $mobiExportName = preg_replace('/\s+/', '-', str_replace($char_in, '-', $this->bookFileName)) . '.mobi';
             
             $file = 'cache/' . $mobiExportName;
             $mobi->save($file);
