@@ -750,8 +750,8 @@ class Poche
             die(sprintf(_('User with this id (%d) does not exist.'), $user_id));
         }
 
-        if (!in_array($type, $allowed_types) || $token != $config['token']) {
-            die(_('Uh, there is a problem while generating feeds.'));
+        if (!in_array($type, $allowed_types) || !isset($config['token']) || $token != $config['token']) {
+            die(_('Uh, there is a problem while generating feed. Wrong token used?'));
         }
 
         $feed = new FeedWriter(RSS2);

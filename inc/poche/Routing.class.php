@@ -98,48 +98,51 @@ class Routing
     private function _launchAction()
     {
         if (isset($_GET['login'])) {
-            // hello you
-            $this->wallabag->login($this->referer);
-        } elseif (isset($_GET['logout'])) {
-            // see you soon !
-            $this->wallabag->logout();
-        } elseif (isset($_GET['config'])) {
-            // update password
-            $this->wallabag->updatePassword($_POST['password'], $_POST['password_repeat']);
-        } elseif (isset($_GET['newuser'])) {
-            $this->wallabag->createNewUser($_POST['newusername'], $_POST['password4newuser']);
-        } elseif (isset($_GET['deluser'])) {
-            $this->wallabag->deleteUser($_POST['password4deletinguser']);
-        } elseif (isset($_GET['epub'])) {
-            $epub = new WallabagEpub($this->wallabag, $_GET['method'], $_GET['id'], $_GET['value']);
-            $epub->run();
-        } elseif (isset($_GET['import'])) {
-            $import = $this->wallabag->import();
-            $tplVars = array_merge($this->vars, $import);
-        } elseif (isset($_GET['download'])) {
-            Tools::downloadDb();
-        } elseif (isset($_GET['empty-cache'])) {
-            Tools::emptyCache();
-        } elseif (isset($_GET['export'])) {
-            $this->wallabag->export();
-        } elseif (isset($_GET['updatetheme'])) {
-            $this->wallabag->tpl->updateTheme($_POST['theme']);
-        } elseif (isset($_GET['updatelanguage'])) {
-            $this->wallabag->language->updateLanguage($_POST['language']);
-        } elseif (isset($_GET['uploadfile'])) {
-            $this->wallabag->uploadFile();
-        } elseif (isset($_GET['feed'])) {
-            if (isset($_GET['action']) && $_GET['action'] == 'generate') {
+        	// hello to you
+        	$this->wallabag->login($this->referer);
+        } elseif (isset($_GET['feed']) && isset($_GET['user_id'])) {
+            $tag_id = (isset($_GET['tag_id']) ? intval($_GET['tag_id']) : 0);
+            $this->wallabag->generateFeeds($_GET['token'], filter_var($_GET['user_id'],FILTER_SANITIZE_NUMBER_INT), $tag_id, $_GET['type']);
+        }
+        
+        //allowed ONLY to logged in user
+        if ( \Session::isLogged() === true ) 
+        {
+            if (isset($_GET['logout'])) {
+                // see you soon !
+                $this->wallabag->logout();
+            } elseif (isset($_GET['config'])) {
+                // update password
+                $this->wallabag->updatePassword($_POST['password'], $_POST['password_repeat']);
+            } elseif (isset($_GET['newuser'])) {
+                $this->wallabag->createNewUser($_POST['newusername'], $_POST['password4newuser']);
+            } elseif (isset($_GET['deluser'])) {
+                $this->wallabag->deleteUser($_POST['password4deletinguser']);
+            } elseif (isset($_GET['epub'])) {
+                $epub = new WallabagEpub($this->wallabag, $_GET['method'], $_GET['id'], $_GET['value']);
+                $epub->run();
+            } elseif (isset($_GET['import'])) {
+                $import = $this->wallabag->import();
+                $tplVars = array_merge($this->vars, $import);
+            } elseif (isset($_GET['download'])) {
+                Tools::downloadDb();
+            } elseif (isset($_GET['empty-cache'])) {
+                Tools::emptyCache();
+            } elseif (isset($_GET['export'])) {
+                $this->wallabag->export();
+            } elseif (isset($_GET['updatetheme'])) {
+                $this->wallabag->tpl->updateTheme($_POST['theme']);
+            } elseif (isset($_GET['updatelanguage'])) {
+                $this->wallabag->language->updateLanguage($_POST['language']);
+            } elseif (isset($_GET['uploadfile'])) {
+                $this->wallabag->uploadFile();
+            } elseif (isset($_GET['feed']) && isset($_GET['action']) && $_GET['action'] == 'generate') {
                 $this->wallabag->updateToken();
             }
-            else {
-                $tag_id = (isset($_GET['tag_id']) ? intval($_GET['tag_id']) : 0);
-                $this->wallabag->generateFeeds($_GET['token'], filter_var($_GET['user_id'],FILTER_SANITIZE_NUMBER_INT), $tag_id, $_GET['type']);
+            elseif (isset($_GET['plainurl']) && !empty($_GET['plainurl'])) {
+                $plainUrl = new Url(base64_encode($_GET['plainurl']));
+                $this->wallabag->action('add', $plainUrl);
             }
-        }
-        elseif (isset($_GET['plainurl']) && !empty($_GET['plainurl'])) {
-            $plainUrl = new Url(base64_encode($_GET['plainurl']));
-            $this->wallabag->action('add', $plainUrl);
         }
     }
 
