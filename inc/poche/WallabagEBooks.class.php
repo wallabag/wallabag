@@ -36,7 +36,7 @@ class WallabagEBooks
                 break;
             case 'all':
                 $this->entries = $this->wallabag->store->retrieveAll($this->wallabag->user->getId());
-                $this->bookTitle = sprintf(_('All my articles on '), date(_('d.m.y'))); #translatable because each country has it's own date format system
+                $this->bookTitle = sprintf(_('All my articles on %s'), date(_('d.m.y'))); #translatable because each country has it's own date format system
                 $this->bookFileName = _('Allarticles') . date(_('dmY'));
                 break;
             case 'tag':
@@ -154,17 +154,17 @@ class WallabagMobi extends WallabagEBooks
 	public function produceMobi($send = FALSE)
 	{
 
-        # Good try
         $mobi = new MOBI();
             
         $content = new MOBIFile();
             
         $content->set("title", $this->bookTitle);
         $content->set("author", "wallabag");
+        $content->set("subject", $this->bookTitle);
 
         # introduction
         //$content->appendChapterTitle("Cover");
-        $content->appendParagraph('<div style="text-align:center;"><p>' . _('Produced by wallabag with PHPMobi') . '</p><p>'. _('Please open <a href="https://github.com/wallabag/wallabag/issues" >an issue</a> if you have trouble with the display of this E-Book on your device.') . '</p></div>');
+        $content->appendParagraph('<div style="text-align:center;" ><p>' . _('Produced by wallabag with PHPMobi') . '</p><p>'. _('Please open <a href="https://github.com/wallabag/wallabag/issues" >an issue</a> if you have trouble with the display of this E-Book on your device.') . '</p></div>');
         $content->appendImage(imagecreatefrompng("themes/baggy/img/apple-touch-icon-152.png"));
         $content->appendPageBreak();
 
@@ -183,20 +183,25 @@ class WallabagPDF extends WallabagEbooks
 {
 	public function producePDF()
 	{
-        //$this->prepareData();
 		$mpdf = new mPDF('c'); 
 
         # intro
 
-        $html = '<h1>' . $this->bookTitle . '</h1><img src="themes/baggy/img/apple-touch-icon-152.png" />';
+        $html = '<h1>' . $this->bookTitle . '<bookmark content="Cover" /></h1><div style="text-align:center;" >
+        <p>' . _('Produced by wallabag with mPDF') . '</p>
+        <p>'. _('Please open <a href="https://github.com/wallabag/wallabag/issues" >an issue</a> if you have trouble with the display of this E-Book on your device.') . '</p>
+        <img src="themes/baggy/img/apple-touch-icon-152.png" /></div>';
+        $html .= '<pagebreak type="next-odd" />';
+        $i = 1;
 
         foreach ($this->entries as $item) {
-            $html .= '<h1>' . $item['title'] . '</h1>';
+            $html .= '<h1>' . $item['title'] . '<bookmark content="' . $item['title'] . '" /></h1>';
             $html .= '<indexentry content="'. $item['title'] .'" />';
             $html .= $item['content'];
+            $html .= '<pagebreak type="next-odd" />';
+            $i = $i+1;
         }
 
-        //$mpdf->h2toc = array('H1'=>0);
 
         # headers
         $mpdf->SetHeader('{DATE j-m-Y}|{PAGENO}/{nb}|Produced with wallabag');
@@ -207,6 +212,13 @@ class WallabagPDF extends WallabagEbooks
         # remove characters that make mpdf bug
         $char_in = array('/', '.', ',', ':', '|');
         $pdfExportName = preg_replace('/\s+/', '-', str_replace($char_in, '-', $this->bookFileName . '.pdf'));
+
+        # index
+        $html = '<h2>Index<bookmark content="Index" /></h2>
+        <indexinsert cols="2" offset="5" usedivletters="on" div-font-size="15" gap="5" font="Trebuchet" div-font="sans-serif" links="on" />
+        ';
+
+        $mpdf->WriteHTML($html);
 		
         $mpdf->Output('cache/' . $pdfExportName);
 		
