@@ -1,0 +1,92 @@
+
+
+/*******************************************************************************
+* Software: FPDF                                                               *
+* Version:  1.53                                                               *
+* Date:     2004-12-31                                                         *
+* Author:   Olivier PLATHEY                                                    *
+* License:  Freeware                                                           *
+*                                                                              *
+* You may use and modify this software as you wish.                            *
+*******************************************************************************/
+
+/*******************************************************************************
+* HTML2FPDF is a php script to read a HTML text and generate a PDF file.       *
+* Copyright (C) 2004-2005 Renato Coelho                                        *
+*	                          					       *
+* html2fpdf.php, htmltoolkit.php                                               *
+*******************************************************************************/
+
+CREDITS From HTML2FPDF:
+
+-Olivier Plathey for the fpdf.php class [http://www.fpdf.org]
+-Damon Kohler for the Flowing Block script [mailto:damonkohler@yahoo.com]
+-Clément Lavoillotte for HTML-oriented FPDF idea
+-Yamasoft for the gif.php class [http://www.yamasoft.com/]
+-Jérôme Fenal for the _parsegif() function
+-"VIETCOM" for the PDFTable code [http://www.freepgs.com/vietcom/tool/pdftable/] [mailto:vncommando@yahoo.com]
+-Yukihiro O. for the SetDash() function [mailto:yukihiro_o@infoseek.jp]
+-Ron Korving for the WordWrap() function
+-Michel Poulain for the DisplayPreferences() function
+-Patrick Benny for the MultiCellBlt() function idea [no longer in use]
+-Seb for the _SetTextRendering() and SetTextOutline() functions [mailto:captainseb@wanadoo.fr]
+-MorphSoft for the colornames list idea
+-W3SCHOOLS for HTML-related reference info [http://www.w3schools.com/]
+
+
+
+/****************************************************************************
+* Software: FPDF_Protection                                                 *
+* Version:  1.02                                                            *
+* Date:     2005/05/08                                                      *
+* Author:   Klemen VODOPIVEC                                                *
+* License:  Freeware                                                        *
+*                                                                           *
+* You may use and modify this software as you wish as stated in original    *
+* FPDF package.                                                             *
+****************************************************************************/
+
+/****************************************************************************
+//  FPDI - Version 1.2
+//
+//    Copyright 2004-2007 Setasign - Jan Slabon
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
+****************************************************************************/
+
+/****************************************************************************
+   * @copyright Khaled Al-Shamaa 2008
+   * @link http://www.ar-php.org
+   * @author Khaled Al-Shamaa <khaled@ar-php.org>
+   * @desc   Set of PHP5 / UTF-8 Classes developed to enhance Arabic web
+   *         applications by providing set of tools includes stem-based searching, 
+   *         translitiration, soundex, Hijri calendar, charset detection and
+   *         converter, spell numbers, keyboard language, Muslim prayer time, 
+   *         auto-summarization, and more...
+   * @package Arabic
+   *    
+   * @version 1.8 released in Feb 15, 2009
+   * 
+   * @license LGPL
+****************************************************************************/
+
+
+This library is free software; you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation;
+This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+Lesser General Public License for more details.
+[http://www.opensource.org/licenses/lgpl-license.php]
+

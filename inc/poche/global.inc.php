@@ -41,6 +41,16 @@ require_once INCLUDES . '/3rdparty/libraries/PHPePub/Logger.php';
 require_once INCLUDES . '/3rdparty/libraries/PHPePub/EPub.php';
 require_once INCLUDES . '/3rdparty/libraries/PHPePub/EPubChapterSplitter.php';
 
+# mobi library
+require_once INCLUDES . '/3rdparty/libraries/send2kindle/send.php';
+require_once INCLUDES . '/3rdparty/libraries/send2kindle/images.php';
+require_once INCLUDES . '/3rdparty/libraries/send2kindle/storage.php';
+require_once INCLUDES . '/3rdparty/libraries/send2kindle/MOBIClass/MOBI.php';
+require_once INCLUDES . '/3rdparty/libraries/send2kindle/utils.php';
+
+# pdf library
+require_once INCLUDES . '/3rdparty/libraries/mpdf/mpdf.php';
+
 # system configuration; database credentials et caetera
 require_once INCLUDES . '/poche/config.inc.php';
 require_once INCLUDES . '/poche/config.inc.default.php';

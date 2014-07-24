@@ -8,11 +8,14 @@
  * @license    http://opensource.org/licenses/MIT see COPYING file
  */
 
-class WallabagEpub
+class WallabagEBooks
 {
-    protected $wallabag;
+	protected $wallabag;
     protected $method;
     protected $value;
+    protected $entries;
+    protected $bookTitle;
+    protected $bookFileName;
 
     public function __construct(Poche $wallabag, $method, $value)
     {
@@ -21,10 +24,7 @@ class WallabagEpub
         $this->value    = $value;
     }
 
-    /**
-     * handle ePub
-     */
-    public function run()
+    public function prepareData()
     {
         switch ($this->method) {
             case 'id':
@@ -62,7 +62,16 @@ class WallabagEpub
             case 'default':
                 die(_('Uh, there is a problem while generating epub.'));
         }
+    }
+}
 
+class WallabagEpub extends WallabagEBooks
+{
+    /**
+     * handle ePub
+     */
+    public function produceEpub()
+    {
         $content_start =
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
             . "<html xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:epub=\"http://www.idpf.org/2007/ops\">\n"
@@ -133,3 +142,94 @@ class WallabagEpub
         $zipData = $book->sendBook($bookFileName);
     }
 } 
+
+class WallabagMobi extends WallabagEBooks
+{
+	/**
+	* Adapted from News2Kindle
+	* @author Jakub Westfalewski <jwest@jwest.pl>
+	*
+	*/
+
+	public function produceMobi()
+	{
+		$storage = new Storage('static');
+		$this->prepareData();
+		foreach ($entries as $i => $item) {
+			$content = $item['content'];
+			$images = new Images($storage, $content);
+            $content = $images->convert();
+			$storage->add_content
+            (
+                md5($item['title']),
+                mb_convert_encoding($item['title'], 'HTML-ENTITIES', 'utf-8'), 
+                $content, 
+                $item['url']], 
+                ""
+            );
+		}
+		$articles = $storage->get_contents();
+		$toc = array();
+        $articles_count = count($articles);
+
+        foreach($articles as $article){
+            if(array_key_exists($article->website->title, $toc)){
+                $toc[$article->website->title]->articles[] = $article;             
+            }else{
+                $toc[$article->website->title] = (object)array(
+                    'articles' => array($article),
+                    'title' => $article->website->title,
+                    'streamId' => $article->website->streamId,
+                    'url' => $article->website->htmlUrl,
+                );
+            }           
+        }
+
+        $mobi = new MOBI(); 
+        $mobi->setData($content);
+        $mobi->setOptions(array( 
+            'title' => 'Articles from '.date('Y-m-d'), 
+            'author' => 'wallabag', 
+            'subject' => 'Articles from '.date('Y-m-d'),
+        ));
+
+        $images = array();
+
+        //prepare images for mobi format
+        foreach ( $storage->info('images') as $n => $image )
+        {
+            $images[$n] = new FileRecord(new Record(file_get_contents($storage->get_path() . $image)));
+        }
+
+        $mobi->setImages($images);
+        $mobi->save( $storage->get_path(FALSE) . 'articles-' . date('Y-m-d') . '.mobi');
+
+        $storage->clean();
+
+        if ($send) {
+        	$files = glob($storage->get_path(FALSE).'*.mobi');
+        	$mail = new Send(KINDLEMAIL,MAIL);
+        	foreach ( $files as $file_mobi )
+        	{
+            	$mail->send( $file_mobi );
+        	}
+        	// clean cache 
+        	foreach ( $files as $file_mobi )
+        	{
+           		unlink( $file_mobi );
+        	}
+        }
+	}
+}
+
+class WallabagPDF extends WallabagEbooks
+{
+	public function producePDF()
+	{
+		$mpdf = new mPDF('c'); 
+
+		$mpdf->WriteHTML($html);
+		$mpdf->Output();
+		exit;
+	}
+}

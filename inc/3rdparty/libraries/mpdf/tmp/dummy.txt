@@ -1,0 +1,2 @@
+This is just a placeholder file so that the folder is created on install.
+It can be deleted once installed.

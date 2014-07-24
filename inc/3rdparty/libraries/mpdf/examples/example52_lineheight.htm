@@ -1,0 +1,36 @@
+<html>
+<head>
+<style>
+body { font-family: Arial, Helvetica, sans-serif; }
+.gradient {
+	border:0.1mm solid #220044; 
+	background-color: #f0f2ff;
+	background-gradient: linear #c7cdde #f0f2ff 0 1 0 0.5;
+}
+</style>
+</head>
+<body>
+<h4>Line-height & vertical alignment</h4>
+<div>In these examples, top and bottom padding are set to 0, so the block height = line height.</div>
+<div>The inline text (set to a larger font-size) inherits the line-height as a factor of the largest font-size i.e. the line height will expand to reflect the largest font on the line.<br />
+Line-height: "normal" (set in mPDF by default as 1.33).</div>
+<p class="gradient" style="font-size: 10pt; line-height: normal; padding: 0 0.3em;">Normal text <span style="font-size: 16pt;">16pt font-size &#194;</span> and normal again</p>
+
+<div>Line-height: 2.0 When using relative line-heights, the text is aligned vertically so that the centre-line of the line goes throught the middle of the largest font.</div>
+<p class="gradient" style="font-size: 10pt; line-height: 2.0; padding: 0 0.3em;">Normal text <span style="font-size: 16pt;">16pt font-size &#194;</span> and normal again</p>
+
+<div>Line-heights set as a percentages are computed on the base font-size, and are then inherited and treated the same as absolute lengths. This is also true for "em" values. The line-height of this line is set as 200% of the paragraph font-size (10pt).<br />
+When using absolute line-heights, the text is aligned vertically so that the centre-line of the line goes throught the middle of the base font.<br />
+This means that as far as possible, multiple lines will remain equally spaced<br />
+Line-height: 200% </div>
+<p class="gradient" style="font-size: 10pt; line-height: 200%; padding: 0 0.3em;">Normal text <span style="font-size: 16pt;">16pt font-size &#194;</span> and normal again</p>
+
+<div>If the line includes a font-size greater than 1.6 times the computed line-height, then the text baseline is dropped so that the text will approximately fit within the line-height.
+<br />Line-height: 2em</div>
+<p class="gradient" style="font-size: 10pt; line-height: 2em; padding: 0 0.3em;">Normal text <span style="font-size: 18pt;">18pt font-size &#194;</span> and normal again</p>
+
+<div>If the line includes a font-size greater than 2 times the computed line-height, then the line-height is increased to accommodate the larger fontsize.<br />
+Line-height: 2em</div>
+<p class="gradient" style="font-size: 10pt; line-height: 2em; padding: 0 0.3em;">Normal text <span style="font-size: 24pt;">24pt font-size &#194;</span> and normal again</p>
+</body>
+</html>
