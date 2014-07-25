@@ -1,0 +1,6 @@
+date: //div[@id='content']//p[contains(@class, 'date')]/span
+author: substring-after(//div[@id='content']//div[contains(@class, 'over-under-bars')]/p[last()]/text(), 'Posted by ')
+body: //div[@id='content']//div[@class='pane-content']
+strip_id_or_class: trackback-url
+strip_id_or_class: over-under-bars
+test_url: http://www.classyllama.com/content/layout-caching

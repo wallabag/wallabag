@@ -1,0 +1,11 @@
+# This filter is tested on:
+# http://blog.renren.com/share/224959024/14260739544
+# http://blog.renren.com/share/231323504/14261768898
+# http://blog.renren.com/share/230305019/1502806705
+
+title://h1[contains(@class, 'title-article')]
+author://span[contains(@class, 'name')]
+body://div[contains(@class, 'content-body')]
+
+convert_double_br_tags:yes
+test_url: http://blog.renren.com/share/230305019/1502806705

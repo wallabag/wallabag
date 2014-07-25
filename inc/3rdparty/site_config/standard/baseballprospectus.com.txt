@@ -1,0 +1,13 @@
+title: //h1[@class='title']
+author: //p[@class="author"]/a[1]
+body: //div[@class="article"]
+date: //p[@class="date"]
+
+# remove user tools
+strip: //div[@class='tools']
+strip: //h1
+strip: //h2[@class='subtitle']
+strip: //p[@class='author']
+strip: //p[@class='date']
+
+test_url: http://www.baseballprospectus.com/article.php?articleid=18463

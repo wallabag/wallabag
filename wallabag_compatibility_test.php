@@ -1,4 +1,13 @@
 <?php
+/**
+ * wallabag, self hostable application allowing you to not miss any content anymore
+ *
+ * @category   wallabag
+ * @author     Nicolas Lœuillet <nicolas@loeuillet.org>
+ * @copyright  2013
+ * @license    http://opensource.org/licenses/MIT see COPYING file
+ */
+
 $app_name = 'wallabag';
 
 $php_ok = (function_exists('version_compare') && version_compare(phpversion(), '5.3.3', '>='));

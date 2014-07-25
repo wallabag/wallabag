@@ -1,0 +1,8 @@
+author: //span[@class="authors"]
+date: //span[@class="date"]
+body: //div[@class="primary"]
+
+strip: //div[@id="controls"]
+strip: //div[@id="read-next"]
+
+test_url: http://www.newrepublic.com/article/112731/moocs-will-online-education-ruin-university-experience

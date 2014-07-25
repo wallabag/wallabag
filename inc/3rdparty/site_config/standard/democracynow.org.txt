@@ -1,0 +1,5 @@
+body: //div[contains(@class, 'blog_body')]
+
+prune: no
+
+test_url: http://www.democracynow.org/blog/2014/1/9/the_fbi_the_nsa_and_a

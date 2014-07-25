@@ -1,0 +1,12 @@
+# This filter is tested on:
+# http://movie.douban.com/review/1062013/
+
+title: //span[contains(@property, 'v:summary')]
+author: //span[contains(@property, 'v:reviewer')]
+date://span[contains(@property, 'v:dtreviewed')]
+body://div[contains(@class, 'main-bd')]
+
+strip://img[contains(@class,'rating')]|//img[contains(@class,'review-stat')]
+convert_double_br_tags: yes
+test_url: http://movie.douban.com/review/1062013/
+test_url: http://movie.douban.com/review/1021870/

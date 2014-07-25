@@ -1,0 +1,11 @@
+body: //div[@class='pageContent description']
+date: //div[@class='authorsAndDateTime']/span[@title]
+single_page_link: //div[@class='pages']/a[last()-1]
+
+# fix images and captions
+wrap_in(figure): //div[contains(concat(' ', @class, ' '), ' image')]
+wrap_in(figcaption): //div[contains(concat(' ', @class, ' '), ' image')]/div[@class='text']/text()
+
+# get rid of videos
+strip_id_or_class: 'video full'
+test_url: http://www.gamer.no/artikler/142455/slik-blei-ambisiose-dragons-dogma-skapt/

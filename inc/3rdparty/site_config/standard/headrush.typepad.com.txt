@@ -1,0 +1,14 @@
+title://div[@class='content']/h3[1]
+body://div[@class='content']
+
+# Article nav
+strip://div[@class='content']/p[1]
+
+# Comments and trackbacks
+strip://h2/following-sibling::p
+strip://h2
+
+# Posted on
+strip://b/p
+strip://div[@class='content']/p[@class='posted']
+test_url: http://headrush.typepad.com/creating_passionate_users/2005/05/the_case_for_ea.html

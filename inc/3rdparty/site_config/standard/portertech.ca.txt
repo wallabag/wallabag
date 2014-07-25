@@ -1,0 +1,3 @@
+author: //*[(@class = "author")]
+date: //*[(@class = "date")]
+test_url: http://portertech.ca/2012/12/10/iac-morning-market/

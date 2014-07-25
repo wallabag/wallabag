@@ -1,0 +1,5 @@
+title: //div[@class="title"]/h1
+title: //div[@class="caption"]/h1
+author: substring-after(//div[@class="metadata"]/div[@class="date"]/a[2], 'by ')
+date: //div[@class="metadata"]/div[@class="date"]/a
+test_url: http://tech.gilt.com/post/46359463184/26-3-13-todays-noon-outage-and-what-were-doing-to

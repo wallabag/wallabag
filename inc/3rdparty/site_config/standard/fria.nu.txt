@@ -1,0 +1,8 @@
+body: //div[contains(@class, 'layout__inner')]//div[contains(@class, 'file-image') or contains(@class, 'node__content')]
+author: //article//div[contains(@class, 'field-byline')]
+strip_id_or_class: rekommenderade
+strip_id_or_class: disqus
+strip_id_or_class: annonser
+
+test_url: http://www.fria.nu/artikel/112079
+test_url: http://www.fria.nu/taxonomy/term/1928/all/feed

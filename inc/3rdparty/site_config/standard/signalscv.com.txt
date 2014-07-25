@@ -1,0 +1,10 @@
+author: //span[contains(@class, 'byline_1')]
+date: //span[@class='posted_date']
+body: //*[contains(@class, 'bigimage_container') or contains(@class, 'overlay_text') or contains(@id, 'articlebody')]
+
+strip_id_or_class: leftWrapper
+
+prune: no
+
+test_url: http://www.signalscv.com/section/46/article/102948/
+test_url: http://www.signalscv.com/syndication/feeds/rss/

@@ -1,0 +1,6 @@
+title: //header/h1/b[contains(@class, 'title')]
+author: substring-after(//article/header/div, 'By ')
+date: //header/h1/span[contains(@class, 'date')]
+body: //div[@id='main]/article
+strip: //header
+test_url: http://chrisltd.com/blog/2012/03/fix-widows-indesign/

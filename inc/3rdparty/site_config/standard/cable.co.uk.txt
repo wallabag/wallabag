@@ -1,0 +1,11 @@
+title: //div[@class='page-content']//h1
+body: //div[@class='page-content']
+strip_id_or_class: editorial-bar-top
+strip_id_or_class: social-bottom
+strip_id_or_class: comment-form
+strip_id_or_class: pc-why
+
+prune: no
+tidy: no
+
+test_url: http://www.cable.co.uk/news/bt-vision-unveils-interactive-guide-application-800734218/

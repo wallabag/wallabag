@@ -1,6 +1,11 @@
 body: //div[@class="story-body"]
+# for video entries
+body: //div[contains(@class, "videoInStory") or @id="meta-information"]
 title: //h1[@class="story-header"]
 date: //span[@class="story-date"]/span[@class='date']
+# for sport site
+date: //meta[@name='DCTERMS.created']/@content
+author: //div[@id='headline']//span[@class='byline-name']
 
 # recipes, e.g. http://www.bbc.co.uk/food/recipes/mymincepies_71055
 body: //div[contains(@class, 'hrecipe')]//div[@id='subcolumn-1']
@@ -22,6 +27,8 @@ strip: //div[contains(@class, 'hypertabs')]
 strip: //div[contains(@class, 'related')]
 strip: //form[@id='comment-form']
 strip: //div[contains(@class, 'comment-introduction')]
+strip: //div[contains(@class, 'share-tools')]
+strip: //div[@id='also-related-links']
 
 replace_string(<noscript>): <div>
 replace_string(</noscript>): </div>
@@ -29,4 +36,7 @@ replace_string(</noscript>): </div>
 prune: no
 
 dissolve: //h2
+test_url: http://www.bbc.co.uk/sport/0/football/23224017
 test_url: http://www.bbc.co.uk/news/business-15060862
+# video entry
+test_url: http://www.bbc.co.uk/news/world-asia-22056933

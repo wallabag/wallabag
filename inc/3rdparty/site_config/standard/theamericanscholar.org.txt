@@ -1,0 +1,13 @@
+# Article Metadata
+title: //meta[@property="og:title"]/@content
+author: substring-after(//h3, 'By ')
+date: //h4/a[2]
+
+# Content Pruning
+strip: //h4
+strip: //a[@id="print_button"]
+strip: //p[@class="excerpt"]
+strip: //h3
+strip: //div[@class="caption"]
+strip: //center/a/img
+test_url: http://theamericanscholar.org/too-big-to-fail-and-too-risky-to-exist/

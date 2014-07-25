@@ -1,0 +1,9 @@
+title: //div[contains(@class, 'post')]//h1
+body: //div[contains(@class, 'post')]
+strip: //hr
+strip_id_or_class: post-meta
+
+prune: no
+
+test_url: http://www.lovetv.com.bz/2013/06/28/recently-discovered-ancient-maya-wooden-canoe-paddle-to-be-handed-over-to-archaeology/
+test_url: http://www.lovetv.com.bz/feed/

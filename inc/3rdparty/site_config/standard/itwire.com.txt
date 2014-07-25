@@ -1,0 +1,5 @@
+author: //a[@rel="author"]
+date: //li[@class="itemDateCreated"]
+strip: //div[contains(@class, 'legend-rounded')]
+
+test_url: http://www.itwire.com/it-industry-news/market/59661-ibm-looks-to-high-value-solutions-to-meet-changing-demands

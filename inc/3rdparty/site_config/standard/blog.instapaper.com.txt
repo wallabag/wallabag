@@ -1,0 +1,9 @@
+author: //a[@href="http://www.marco.org/about"]
+date: //span[@class="date"]
+
+# Remove the date from article body.
+strip: //span[@class="date"]
+
+# Remove pagination links from article body.
+strip: //div[@id="pagination"]
+test_url: http://blog.instapaper.com/post/31303984531

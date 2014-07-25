@@ -1,0 +1,7 @@
+title://div[@class="detail-new-title"]
+body://div[@class="innerpad"]
+strip://div[@class="ArticleUtility"]
+strip://div[@class="commentPost"]
+strip://div[@class="comment-box"]
+strip://div[@id="TinLienQuan"]
+test_url: http://vea.gov.vn/vn/tintuc/tintuchangngay/Pages/T%C4%83ng-c%C6%B0%E1%BB%9Dng-b%E1%BA%A3o-t%E1%BB%93n-%C4%91%E1%BB%99ng-v%E1%BA%ADt-hoang-d%C3%A3-%E1%BB%9F-Vi%E1%BB%87t-Nam.aspx

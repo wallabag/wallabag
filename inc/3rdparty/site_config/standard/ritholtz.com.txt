@@ -1,0 +1,5 @@
+title: //div[@class='post']/h2
+author: substring-before(substring-after(//div[@class='alignright']/small, 'By '),'-')
+date: substring-after(//div[@class='alignright']/small, '-')
+strip: //div[@class='alignleft']
+test_url: http://www.ritholtz.com/blog/2012/09/situational-awareness/

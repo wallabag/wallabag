@@ -1,0 +1,13 @@
+# This filter is tested on: 
+# http://m.douban.com/note/240776310/?session=6ac86d1e 
+# http://m.douban.com/note/208270705/?session=e00ec732_3433229
+
+title: //h2 
+author: //a[@class='founder'] 
+date: substring-after(//span[@class='info'],' | ') 
+body: //div[contains(@class,'entry item')] 
+
+strip://span[contains(@class,'info')] 
+
+convert_double_br_tags: yes
+test_url: http://m.douban.com/note/240776310/?session=6ac86d1e 

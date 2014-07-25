@@ -5,7 +5,7 @@
  * @category   wallabag
  * @author     Nicolas Lœuillet <nicolas@loeuillet.org>
  * @copyright  2013
- * @license    http://www.wtfpl.net/ see COPYING file
+ * @license    http://opensource.org/licenses/MIT see COPYING file
  */
 
 # the poche system root directory (/inc)
@@ -18,6 +18,11 @@ require_once INCLUDES . '/poche/Tools.class.php';
 require_once INCLUDES . '/poche/User.class.php';
 require_once INCLUDES . '/poche/Url.class.php';
 require_once INCLUDES . '/3rdparty/class.messages.php';
+require_once ROOT . '/vendor/autoload.php';
+require_once INCLUDES . '/poche/Template.class.php';
+require_once INCLUDES . '/poche/Language.class.php';
+require_once INCLUDES . '/poche/Routing.class.php';
+require_once INCLUDES . '/poche/WallabagEpub.class.php';
 require_once INCLUDES . '/poche/Poche.class.php';
 
 require_once INCLUDES . '/poche/Database.class.php';
@@ -36,25 +41,18 @@ require_once INCLUDES . '/3rdparty/libraries/PHPePub/Logger.php';
 require_once INCLUDES . '/3rdparty/libraries/PHPePub/EPub.php';
 require_once INCLUDES . '/3rdparty/libraries/PHPePub/EPubChapterSplitter.php';
 
-# Composer its autoloader for automatically loading Twig
-if (! file_exists(ROOT . '/vendor/autoload.php')) {
-    Poche::$canRenderTemplates = false;
-} else {
-    require_once ROOT . '/vendor/autoload.php';
-}
-
 # system configuration; database credentials et caetera
-if (! file_exists(INCLUDES . '/poche/config.inc.php')) {
-    Poche::$configFileAvailable = false;
-} else {
-    require_once INCLUDES . '/poche/config.inc.php';
-    require_once INCLUDES . '/poche/config.inc.default.php';
-}
+require_once INCLUDES . '/poche/config.inc.php';
+require_once INCLUDES . '/poche/config.inc.default.php';
 
-if (Poche::$configFileAvailable && DOWNLOAD_PICTURES) {
+if (DOWNLOAD_PICTURES) {
     require_once  INCLUDES . '/poche/pochePictures.php';
 }
 
 if (!ini_get('date.timezone') || !@date_default_timezone_set(ini_get('date.timezone'))) {
     date_default_timezone_set('UTC');
+}
+
+if (defined('ERROR_REPORTING')) {
+    error_reporting(ERROR_REPORTING);
 }

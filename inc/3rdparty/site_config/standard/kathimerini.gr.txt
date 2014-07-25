@@ -1,0 +1,4 @@
+title: //td[contains(@class, 'articleTitlos')]
+body: //td[contains(@class, 'eelantext')]
+
+test_url: http://www.kathimerini.gr/4dcgi/_w_articles_kathremote_1_03/12/2013_530490

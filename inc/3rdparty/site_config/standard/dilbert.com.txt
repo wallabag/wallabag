@@ -1,8 +1,11 @@
-convert_double_br_tags: yes
-
-title: substring(substring-after(//title, ':'), 1, string-length(substring-after(//title, ':')) - 10)
+#title: substring(substring-after(//title, ':'), 1, string-length(substring-after(//title, ':')) - 10)
+title: //div[contains(@class, 'SB_Title')]//a
+body: //div[contains(@class, 'STR_Image')]
 body: //*[contains(@class, 'SB_Content')]
 author: string('Scott Adams')
 date: //*[contains(@class, 'SB_Detail')]/text()[1]
 
+
 test_url: http://dilbert.com/blog/entry/death_by_hypnosis_or_not/
+test_url: http://dilbert.com/strips/comic/2013-10-22
+test_url: http://feed.dilbert.com/dilbert/daily_strip

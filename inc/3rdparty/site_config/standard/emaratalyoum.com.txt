@@ -1,0 +1,7 @@
+body: //div[@id='main-column']//div[@class='content']
+
+prune: no
+
+test_url: http://www.emaratalyoum.com/sports/arab-and-international/2013-08-29-1.601844
+test_url: http://www.emaratalyoum.com/sports/arab-and-international/2013-08-29-1.601842
+test_url: http://www.emaratalyoum.com/public-sports-1.533088?ot=ot.AjaxPageLayout

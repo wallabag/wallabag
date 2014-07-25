@@ -1,0 +1,5 @@
+title: //div[@id='frnRahmen']/div/div[@id='content']/div[2]/h2
+author: //div[@id='content']/div[1]/div/a
+body: //div[@id='content']/div[2]/span
+strip: //div[@id='commenthead']
+test_url: http://www.planetvita.de/news/10389-psn-store-update-vom-03-april-neue-inhalte-fuer-psvita.html

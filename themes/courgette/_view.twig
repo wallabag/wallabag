@@ -12,7 +12,7 @@
                 {% if constant('SHARE_MAIL') == 1 %}<li><a href="mailto:?subject={{ entry.title|url_encode }}&amp;body={{ entry.url|url_encode }}%20via%20@wallabagapp" class="tool email" title="{% trans "email" %}"><span>{% trans "email" %}</span></a></li>{% endif %}
                 {% if constant('SHARE_SHAARLI') == 1 %}<li><a href="{{ constant('SHAARLI_URL') }}/index.php?post={{ entry.url|url_encode }}&amp;title={{ entry.title|url_encode }}" target="_blank" class="tool shaarli" title="{% trans "shaarli" %}"><span>{% trans "shaarli" %}</span></a></li>{% endif %}
                 {% if constant('FLATTR') == 1 %}{% if flattr.status == constant('FLATTRABLE') %}<li class="flattrli"><a href="http://flattr.com/submit/auto?url={{ entry.url }}" class="tool flattr" target="_blank" title="{% trans "flattr" %}"><span>{% trans "flattr" %}</span></a></li>{% elseif flattr.status == constant('FLATTRED') %}<li><a href="{{ flattr.flattrItemURL }}" class="tool flattr" target="_blank" title="{% trans "flattr" %}"><span>{% trans "flattr" %}</span>{{ flattr.numflattrs }}</a></li>{% endif %}{% endif %}
-                <li><a href="./?epub&amp;method=id&amp;id={{ entry.id|e }}" title="Generate epub file">EPUB</a></li>
+                <li><a href="./?epub&amp;method=id&amp;value={{ entry.id|e }}" title="Generate epub file">EPUB</a></li>
                 <li><a href="mailto:hello@wallabag.org?subject=Wrong%20display%20in%20wallabag&amp;body={{ entry.url|url_encode }}" title="{% trans "this article appears wrong?" %}" class="tool bad-display"><span>{% trans "this article appears wrong?" %}</span></a></li>
             </ul>
         </div>

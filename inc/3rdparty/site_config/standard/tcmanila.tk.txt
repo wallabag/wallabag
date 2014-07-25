@@ -1,0 +1,7 @@
+title: //h2
+body: //div[@class="post_content"]
+author: //span[@class="fn"]
+date: //time[@class="updated"]
+strip_comments: //yes
+footnotes: //yes
+test_url: http://tcmanila.tk/post/29189064358/my-2012-roadmap-is-almost-complete-look-at-the

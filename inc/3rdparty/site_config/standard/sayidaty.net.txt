@@ -1,0 +1,4 @@
+date: //meta[@property='article:published_time']/@content
+body: (//div[contains(@class, 'article-slider')]//img)[1] | //div[contains(@class, 'bottom-article-con')]
+
+test_url: http://www.sayidaty.net/taxonomy/term/10/all/feed
