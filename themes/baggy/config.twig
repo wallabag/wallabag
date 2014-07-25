@@ -138,11 +138,15 @@
                 <fieldset class="w500p">
                 <div class="row">
                     <label class="col w150p" for="newusername">{% trans 'Login for new user' %}</label>
-                    <input class="col" type="text" id="newusername" name="newusername" placeholder="{% trans 'Login' %}">
+                    <input class="col" type="text" id="newusername" name="newusername" placeholder="{% trans 'Login' %}" required>
                 </div>
                 <div class="row">
                     <label class="col w150p" for="password4newuser">{% trans "Password for new user" %}</label>
-                    <input class="col" type="password" id="password4newuser" name="password4newuser" placeholder="{% trans "Password" %}">
+                    <input class="col" type="password" id="password4newuser" name="password4newuser" placeholder="{% trans "Password" %}" required>
+                </div>
+                <div class="row">
+                    <label class="col w150p" for="newuseremail">{% trans 'Email for new user' %}</label>
+                    <input class="col" type="email" id="newuseremail" name="newuseremail" placeholder="{% trans 'Email' %}">
                 </div>
                 <div class="row mts txtcenter">
                     <button type="submit">{% trans "Send" %}</button>	
