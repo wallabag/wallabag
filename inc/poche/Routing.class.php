@@ -106,7 +106,7 @@ class Routing
         }
         
         //allowed ONLY to logged in user
-        if ( \Session::isLogged() === true ) 
+        if (\Session::isLogged() === true) 
         {
             if (isset($_GET['logout'])) {
                 // see you soon !
