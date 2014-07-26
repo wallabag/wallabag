@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wallabag 1.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-10 20:09+0100\n"
+"POT-Creation-Date: 2014-07-26 20:09+0100\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Gilles Wittezaële <gilles.wittezaele@laposte.net>\n"
+"Last-Translator: tcit <tcit@tcit.fr>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.6.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "wallabag, a read it later open source system"
@@ -650,3 +650,61 @@ msgstr "Cache effacé."
 
 msgid "Oops, it seems you don't have PHP 5."
 msgstr "Oups, vous ne semblez pas avoir PHP 5."
+
+msgid "Fancy an E-Book ?"
+msgstr "Envie d'un E-Book ?"
+
+msgid "Click to get all your articles in one ebook :"
+msgstr "Cliquez pour obtenir tous vos articles dans un E-Book :"
+
+msgid "Generate ePub file"
+msgstr "Générer fichier ePub"
+
+msgid "Generate Mobi file"
+msgstr "Générer fichier Mobi"
+
+msgid "Generate PDF file"
+msgstr "Générer fichier PDF"
+
+msgid ""
+"This can <b>take a while</b> and can <b>even fail</b> if you have too many "
+"articles, depending on your server configuration."
+msgstr ""
+"Ceci peut <b>prendre un moment</b> et peut <b>même échouer</b> si vous avez "
+"trop d'articles, selon la configuration de votre serveur."
+
+msgid "Download the articles from this tag in an ePub file"
+msgstr "Télécharger les articles de ce tag dans un fichier ePub"
+
+msgid "Download the articles from this tag in an Mobi file"
+msgstr "Télécharger les articles de ce tag dans un fichier Mobi"
+
+msgid "Download the articles from this tag in an PDF file"
+msgstr "Télécharger les articles de ce tag dans un fichier PDF"
+
+msgid "Download the articles from this search in an ePub"
+msgstr "Télécharger les articles de cette recherche dans un fichier ePub"
+
+msgid "Download the articles from this search in a Mobi file"
+msgstr "Télécharger les articles de cette recherche dans un fichier Mobi"
+
+msgid "Download the articles from this search in a PDF file"
+msgstr "Télécharger les articles de cette recherche dans un fichier PDF"
+
+msgid "Download the articles from this category in an ePub"
+msgstr "Télécharger les articles de cette catégorie dans un fichier ePub"
+
+msgid "Download the articles from this category in a Mobi file"
+msgstr "Télécharger les articles de cette catégorie dans un fichier Mobi"
+
+msgid "Download the articles from this category in a PDF file"
+msgstr "Télécharger les articles de cette catégorie dans un fichier PDF"
+
+msgid "Download as ePub3"
+msgstr "Télécharger en ePub3"
+
+msgid "Download as Mobi"
+msgstr "Télécharger en Mobi"
+
+msgid "Download as PDF"
+msgstr "Télécharger en PDF"

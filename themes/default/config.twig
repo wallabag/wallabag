@@ -124,13 +124,20 @@
             <p><a href="?download" target="_blank">{% trans "Click here" %}</a> {% trans "to download your database." %}</p>{% endif %}
             <p><a href="?export" target="_blank">{% trans "Click here" %}</a> {% trans "to export your wallabag data." %}</p>
 
+            <h2>{% trans "Fancy an E-Book ?" %}</h2>
+            <p>{% trans "Click to get all your articles in one ebook :" %}
+            <ul>
+            <li><a href="./?epub&amp;method=all" title="Generate ePub file">ePub 3</a></li>
+            <li><a href="./?mobi&amp;method=all" title="Generate Mobi file">Mobi</a></li>
+            <li><a href="./?pdf&amp;method=all" title="Generate PDF file">PDF</a></li>
+            </ul>
+
+            <br>{% trans "This can <b>take a while</b> and can <b>even fail</b> if you have too many articles, depending on your server configuration." %}</p>
+
+
             <h2>{% trans "Cache" %}</h2>
             <p><a href="?empty-cache">{% trans "Click here" %}</a> {% trans "to delete cache." %}</p>
-            
-            <h2>{% trans "Fancy an E-Book ?" %}</h2>
-            <p>{% trans "Click on <a href=\"./?epub&amp;method=all\" title=\"Generate ePub\">this link</a> to get all your articles in one ebook (ePub 3 format)." %}
-            <br>{% trans "This can <b>take a while</b> and can <b>even fail</b> if you have too many articles, depending on your server configuration." %}</p>
-            
+                       
             <h2>{% trans 'Add user' %}</h2>
             <p>{% trans 'Add a new user :' %}</p>
             <form method="post" action="?newuser">
