@@ -55,7 +55,7 @@ class WallabagEBooks
             case 'category':
                 $category = filter_var($this->value, FILTER_SANITIZE_STRING);
                 $this->entries = $this->wallabag->store->getEntriesByView($category, $this->wallabag->user->getId());
-                $this->bookTitle = sprintf(_('All articles in category %s'), $category);
+                $this->bookTitle = sprintf(_('Articles in category %s'), $category);
                 $this->bookFileName = substr(sprintf(_('Category %s'), $category), 0, 200);
                 Tools::logm('Producing ebook from category ' . $category);
                 break;
@@ -63,7 +63,7 @@ class WallabagEBooks
                 $search = filter_var($this->value, FILTER_SANITIZE_STRING);
                 Tools::logm($search);
                 $this->entries = $this->wallabag->store->search($search, $this->wallabag->user->getId());
-                $this->bookTitle = sprintf(_('All articles for search %s'), $search);
+                $this->bookTitle = sprintf(_('Articles for search %s'), $search);
                 $this->bookFileName = substr(sprintf(_('Search %s'), $search), 0, 200);
                 Tools::logm('Producing ebook from search ' . $search);
                 break;
@@ -207,7 +207,7 @@ class WallabagMobi extends WallabagEBooks
             $error = FALSE;
             # testing Mail function
             if (!function_exists('mail')) {
-                $error = _('Mail function is unavailable');
+                $error = _("Mail function is disabled. You can't send emails from your server");
             }
 
             $char_in = array('/', '.', ',', ':', '|'); # we sanitize filename to avoid conflicts with special characters (for instance, / goes for a directory)
@@ -244,7 +244,7 @@ class WallabagMobi extends WallabagEBooks
             # trying to get the kindle email adress
             if (!$this->wallabag->user->getConfigValue('kindleemail')) 
             {
-                $error = _('You didn\'t set your kindle\'s email adress !');
+                $error = _("You didn't set your kindle's email adress !");
             }
             if (!$error) {
                 mail($this->wallabag->user->getConfigValue('kindleemail'), '[wallabag] ' . $this->bookTitle, "", $header );

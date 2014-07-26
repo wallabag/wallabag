@@ -708,3 +708,61 @@ msgstr "Télécharger en Mobi"
 
 msgid "Download as PDF"
 msgstr "Télécharger en PDF"
+
+msgid "All my articles on %s"
+msgstr "Tous mes articles le %s"
+
+msgid "Allarticles"
+msgstr "TousArticles"
+
+msgid "Articles tagged %s"
+msgstr "Articles avec le tag %s"
+
+msgid "Tag %s"
+msgstr "Tag %s"
+
+msgid "Articles in category %s"
+msgstr "Articles de la catégorie %s"
+
+msgid "Category %s"
+msgstr "Catégorie %s"
+
+msgid "Articles for search %s"
+msgstr "Articles pour la recherche %s"
+
+msgid "Search %s"
+msgstr "Recherche %s"
+
+msgid "wallabag articles book"
+msgstr "Livre d'articles issus de wallabag"
+
+msgid "Some articles saved on my wallabag"
+msgstr "Des articles sauvegardés sur wallabag"
+
+msgid "Produced by wallabag with PHPePub"
+msgstr "Produit par wallabag avec PHPePub"
+
+msgid ""
+"Please open <a href='https://github.com/wallabag/wallabag/issues'>an issue</"
+"a> if you have trouble with the display of this E-Book on your device."
+msgstr ""
+"Merci d'ouvrir <a href='https://github.com/wallabag/wallabag/issues'>un "
+"ticket</a> si vous avez des problèmes d'affichage de cet E-Book sur votre "
+"appareil."
+
+msgid "Produced by wallabag with PHPMobi"
+msgstr "Produit par wallabag avec PHPMobi"
+
+msgid "Mail function is disabled. You can't send emails from your server"
+msgstr ""
+"La fonction mail est désactivée. Vous ne pouvez pas envoyer d'E-mails depuis "
+"votre serveur"
+
+msgid "You didn't set your kindle's email adress !"
+msgstr "Vous n'avez pas renseigné l'adresse E-mail de votre Kindle !"
+
+msgid "The email has been sent to your kindle !"
+msgstr "L'E-mail a été envoyé à votre Kindle !"
+
+msgid "Produced by wallabag with mPDF"
+msgstr "Produit par wallabag avec mPDF"
