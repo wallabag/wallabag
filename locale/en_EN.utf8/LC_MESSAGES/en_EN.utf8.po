@@ -12,7 +12,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.6.4\n"
 "X-Poedit-Basepath: .\n"
-"testing\n"
 
 msgid "wallabag, a read it later open source system"
 msgstr "wallabag, a read it later open source system"
