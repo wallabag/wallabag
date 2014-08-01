@@ -2,6 +2,10 @@
 $errors = array();
 $successes = array();
 
+if (defined('STORAGE_PREFIX')) {
+    @define ('STORAGE_PREFIX', 'poche_');
+}
+
 /* Function taken from at http://php.net/manual/en/function.rmdir.php#110489
  * Idea : nbari at dalmp dot com
  * Rights unknown
@@ -97,6 +101,7 @@ else if (isset($_POST['install'])) {
                     $content = str_replace("define ('STORAGE_DB', 'poche');", "define ('STORAGE_DB', '".$_POST['mysql_database']."');", $content);
                     $content = str_replace("define ('STORAGE_USER', 'poche');", "define ('STORAGE_USER', '".$_POST['mysql_user']."');", $content);
                     $content = str_replace("define ('STORAGE_PASSWORD', 'poche');", "define ('STORAGE_PASSWORD', '".$_POST['mysql_password']."');", $content);
+                    $content = str_replace("define ('STORAGE_PREFIX', 'poche');", "define ('STORAGE_PREFIX', '".STORAGE_PREFIX."');", $content);
                     $handle = new PDO($db_path, $_POST['mysql_user'], $_POST['mysql_password']); 
 
                     $sql_structure = file_get_contents('install/mysql.sql');
@@ -137,17 +142,17 @@ else if (isset($_POST['install'])) {
                 // Create user
                 $handle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-                $sql = 'INSERT INTO users (username, password, name) VALUES (?, ?, ?)';
+                $sql = 'INSERT INTO '.STORAGE_PREFIX.'users (username, password, name) VALUES (?, ?, ?)';
                 $params = array($username, $salted_password, $username);
                 $query = executeQuery($handle, $sql, $params);
 
                 $id_user = $handle->lastInsertId();
 
-                $sql = 'INSERT INTO users_config ( user_id, name, value ) VALUES (?, ?, ?)';
+                $sql = 'INSERT INTO '.STORAGE_PREFIX.'users_config ( user_id, name, value ) VALUES (?, ?, ?)';
                 $params = array($id_user, 'pager', '10');
                 $query = executeQuery($handle, $sql, $params);
 
-                $sql = 'INSERT INTO users_config ( user_id, name, value ) VALUES (?, ?, ?)';
+                $sql = 'INSERT INTO '.STORAGE_PREFIX.'users_config ( user_id, name, value ) VALUES (?, ?, ?)';
                 $params = array($id_user, 'language', 'en_EN.UTF8');
                 $query = executeQuery($handle, $sql, $params);
 
