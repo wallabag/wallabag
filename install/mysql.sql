@@ -1,11 +1,11 @@
-CREATE TABLE IF NOT EXISTS `config` (
+CREATE TABLE IF NOT EXISTS `poche_config` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `value` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `entries` (
+CREATE TABLE IF NOT EXISTS `poche_entries` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `url` varchar(255) NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS `entries` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `users` (
+CREATE TABLE IF NOT EXISTS `poche_users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `users_config` (
+CREATE TABLE IF NOT EXISTS `poche_users_config` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -33,13 +33,13 @@ CREATE TABLE IF NOT EXISTS `users_config` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `tags` (
+CREATE TABLE IF NOT EXISTS `poche_tags` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `value` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `tags_entries` (
+CREATE TABLE IF NOT EXISTS `poche_tags_entries` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `entry_id` int(11) NOT NULL,
   `tag_id` int(11) NOT NULL,
