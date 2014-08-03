@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: wallabag 1.7\n"
+"Project-Id-Version: wallabag 1.7.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-07-26 20:09+0100\n"
 "PO-Revision-Date: \n"
