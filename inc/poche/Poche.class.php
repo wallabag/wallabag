@@ -906,7 +906,7 @@ class Poche
      */
     public function import() {
 
-      if ( isset($_FILES['file']) ) {
+      if ( isset($_FILES['file']) && $_FILES['file']['tmp_name'] ) {
         Tools::logm('Import stated: parsing file');
 
         // assume, that file is in json format
@@ -975,6 +975,9 @@ class Poche
           $this->messages->add('s', _('Articles inserted: ').$i._('. Please note, that some may be marked as "read".'));
         }
         Tools::logm('Import of articles finished: '.$i.' articles added (w/o content if not provided).');
+      }
+      else {
+        $this->messages->add('s', _('Did you forget to select a file?'));
       }
       //file parsing finished here
 
