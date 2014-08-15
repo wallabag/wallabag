@@ -551,42 +551,39 @@ class Poche
      * import datas into your wallabag
      * @return boolean
      */
-    public function import()
-    {
-        if (isset($_FILES['file'])) {
-            Tools::logm('Import stated: parsing file');
 
-            // assume, that file is in json format
+    public function import() {
 
-            $str_data = file_get_contents($_FILES['file']['tmp_name']);
-            $data = json_decode($str_data, true);
-            if ($data === null) {
+      if ( isset($_FILES['file']) && $_FILES['file']['tmp_name'] ) {
+        Tools::logm('Import stated: parsing file');
 
-                // not json - assume html
+        // assume, that file is in json format
+        $str_data = file_get_contents($_FILES['file']['tmp_name']);
+        $data = json_decode($str_data, true);
 
-                $html = new simple_html_dom();
-                $html->load_file($_FILES['file']['tmp_name']);
-                $data = array();
-                $read = 0;
-                foreach(array('ol','ul') as $list) {
-                    foreach($html->find($list) as $ul) {
-                        foreach($ul->find('li') as $li) {
-                            $tmpEntry = array();
-                            $a = $li->find('a');
-                            $tmpEntry['url'] = $a[0]->href;
-                            $tmpEntry['tags'] = $a[0]->tags;
-                            $tmpEntry['is_read'] = $read;
-                            if ($tmpEntry['url']) {
-                                $data[] = $tmpEntry;
-                            }
-                        }
-
-                        // the second <ol/ul> is for read links
-
-                        $read = ((sizeof($data) && $read) ? 0 : 1);
-                    }
-                }
+        if ( $data === null ) {
+          //not json - assume html
+          $html = new simple_html_dom();
+          $html->load_file($_FILES['file']['tmp_name']);
+          $data = array();
+          $read = 0;
+          foreach (array('ol','ul') as $list) {
+            foreach ($html->find($list) as $ul) {
+              foreach ($ul->find('li') as $li) {
+                $tmpEntry = array();
+                  $a = $li->find('a');
+                  $tmpEntry['url'] = $a[0]->href;
+                  $tmpEntry['tags'] = $a[0]->tags;
+                  $tmpEntry['is_read'] = $read;
+                  if ($tmpEntry['url']) {
+                    $data[] = $tmpEntry;
+                  }
+              }
+              # the second <ol/ul> is for read links
+              $read = ((sizeof($data) && $read)?0:1);
             }
+          }
+    	}
 
             // for readability structure
 
@@ -629,9 +626,11 @@ class Poche
                 $this->messages->add('s', _('Articles inserted: ') . $i . _('. Please note, that some may be marked as "read".'));
             }
 
-            Tools::logm('Import of articles finished: ' . $i . ' articles added (w/o content if not provided).');
-        }
-
+        Tools::logm('Import of articles finished: '.$i.' articles added (w/o content if not provided).');
+      }
+      else {
+        $this->messages->add('s', _('Did you forget to select a file?'));
+      }
         // file parsing finished here
         // now download article contents if any
         // check if we need to download any content
