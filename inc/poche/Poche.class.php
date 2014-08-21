@@ -524,6 +524,14 @@ class Poche
                 $longlastingsession = isset($_POST['longlastingsession']);
                 $passwordTest = ($isauthenticated) ? $user['password'] : Tools::encodeString($password . $login);
                 Session::login($user['username'], $user['password'], $login, $passwordTest, $longlastingsession, array('poche_user' => new User($user)));
+
+                # reload l10n
+                $language = $user['config']['language'];
+                @putenv('LC_ALL=' . $language);
+                setlocale(LC_ALL, $language);
+                bindtextdomain($language, LOCALE);
+                textdomain($language);
+
                 $this->messages->add('s', _('welcome to your wallabag'));
                 Tools::logm('login successful');
                 Tools::redirect($referer);
