@@ -1,0 +1,45 @@
+# Author: zinnober
+
+tidy: no
+prune: no
+
+# Set author
+author: //a[@rel='author']
+
+# Set date
+date: //span[@class='Datum']
+
+# Content is here
+body: //div[@class='Artikel']
+
+# Tidy up before article
+strip: //div[@id='FAZHeaderNeu']
+strip: //h2[@itemprop='headline']
+strip: //span[@class='Datum']
+strip: //span[@class='Autor']
+strip_id_or_class: ArticlePagerTop
+strip: //div[@class='FAZArtikelEinleitung']/h2
+
+# General cleanup
+strip: //div[@class='clear']
+strip: //span[@class='Bildnachweis']
+strip: //iframe
+strip_id_or_class: Community
+strip: ' ·  '
+
+# Remove tracking and ads
+strip_image_src: /l.gif?
+strip: //img[@width='1']
+strip_id_or_class: invisible
+strip_id_or_class: Anzeige
+strip_id_or_class: billboard
+
+# Remove clutter after article
+strip_id_or_class: Tagline
+strip_id_or_class: ArtikelAbbinder
+strip_id_or_class: FAZArtikelKommentare
+strip_id_or_class: ArtikelKommentieren
+strip_id_or_class: FAZContentRight
+
+# Try it yourself
+test_url: http://blogs.faz.net/wost/2014/08/17/viel-fuck-und-wenig-guter-sex-1239/
