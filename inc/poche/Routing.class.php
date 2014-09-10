@@ -124,8 +124,6 @@ class Routing
             } elseif (isset($_GET['import'])) {
                 $import = $this->wallabag->import();
                 $tplVars = array_merge($this->vars, $import);
-            } elseif (isset($_GET['download'])) {
-                Tools::downloadDb();
             } elseif (isset($_GET['empty-cache'])) {
                 Tools::emptyCache();
             } elseif (isset($_GET['export'])) {
