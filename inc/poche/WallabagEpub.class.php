@@ -12,14 +12,12 @@ class WallabagEpub
 {
     protected $wallabag;
     protected $method;
-    protected $id;
     protected $value;
 
-    public function __construct(Poche $wallabag, $method, $id, $value)
+    public function __construct(Poche $wallabag, $method, $value)
     {
         $this->wallabag = $wallabag;
         $this->method   = $method;
-        $this->id       = $id;
         $this->value    = $value;
     }
 
@@ -30,7 +28,7 @@ class WallabagEpub
     {
         switch ($this->method) {
             case 'id':
-                $entryID = filter_var($this->id, FILTER_SANITIZE_NUMBER_INT);
+                $entryID = filter_var($this->value, FILTER_SANITIZE_NUMBER_INT);
                 $entry = $this->wallabag->store->retrieveOneById($entryID, $this->wallabag->user->getId());
                 $entries = array($entry);
                 $bookTitle = $entry['title'];
@@ -87,7 +85,7 @@ class WallabagEpub
         $log->logLine("getCurrentServerURL: " . $book->getCurrentServerURL());
         $log->logLine("getCurrentPageURL..: " . $book->getCurrentPageURL());
 
-        $book->setTitle(_('wallabag\'s articles'));
+        $book->setTitle($bookTitle);
         $book->setIdentifier("http://$_SERVER[HTTP_HOST]", EPub::IDENTIFIER_URI); // Could also be the ISBN number, prefered for published books, or a UUID.
         //$book->setLanguage("en"); // Not needed, but included for the example, Language is mandatory, but EPub defaults to "en". Use RFC3066 Language codes, such as "en", "da", "fr" etc.
         $book->setDescription(_("Some articles saved on my wallabag"));
