@@ -33,7 +33,7 @@ final class Picture
                 }
 
                 if (self::_downloadPictures($absolute_path, $fullpath) === true) {
-                    $content = str_replace($matches[$i][2], $fullpath, $content);
+                    $content = str_replace($matches[$i][2], Tools::getPocheUrl() . $fullpath, $content);
                 }
 
                 $processing_pictures[] = $absolute_path;
