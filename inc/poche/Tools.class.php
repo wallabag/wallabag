@@ -47,6 +47,7 @@ class Tools
 
         $serverport = (!isset($_SERVER["SERVER_PORT"])
             || $_SERVER["SERVER_PORT"] == '80'
+            || $_SERVER["SERVER_PORT"] == HTTP_PORT
             || ($https && $_SERVER["SERVER_PORT"] == '443')
             || ($https && $_SERVER["SERVER_PORT"]==SSL_PORT) //Custom HTTPS port detection
             ? '' : ':' . $_SERVER["SERVER_PORT"]);
