@@ -101,12 +101,14 @@ else if (isset($_POST['install'])) {
                 $content = file_get_contents('inc/poche/config.inc.php');
 
                 if ($_POST['db_engine'] == 'mysql') {
-                    $db_path = 'mysql:host=' . $_POST['mysql_server'] . ';dbname=' . $_POST['mysql_database'];
+                    $db_path = 'mysql:host=' . $_POST['mysql_server'] . ';dbname=' . $_POST['mysql_database'] . ';charset=utf8mb4';
                     $content = str_replace("define ('STORAGE_SERVER', 'localhost');", "define ('STORAGE_SERVER', '".$_POST['mysql_server']."');", $content);
                     $content = str_replace("define ('STORAGE_DB', 'poche');", "define ('STORAGE_DB', '".$_POST['mysql_database']."');", $content);
                     $content = str_replace("define ('STORAGE_USER', 'poche');", "define ('STORAGE_USER', '".$_POST['mysql_user']."');", $content);
                     $content = str_replace("define ('STORAGE_PASSWORD', 'poche');", "define ('STORAGE_PASSWORD', '".$_POST['mysql_password']."');", $content);
-                    $handle = new PDO($db_path, $_POST['mysql_user'], $_POST['mysql_password']); 
+                    $handle = new PDO($db_path, $_POST['mysql_user'], $_POST['mysql_password'], array(
+                        PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8mb4',
+                    ));
 
                     $sql_structure = file_get_contents('install/mysql.sql');
                 }

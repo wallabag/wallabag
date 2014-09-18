@@ -31,8 +31,10 @@ class Database {
                 $this->handle = new PDO($db_path);
                 break;
             case 'mysql':
-                $db_path = 'mysql:host=' . STORAGE_SERVER . ';dbname=' . STORAGE_DB;
-                $this->handle = new PDO($db_path, STORAGE_USER, STORAGE_PASSWORD);
+                $db_path = 'mysql:host=' . STORAGE_SERVER . ';dbname=' . STORAGE_DB . ';charset=utf8mb4';
+                $this->handle = new PDO($db_path, STORAGE_USER, STORAGE_PASSWORD, array(
+                    PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8mb4',
+                ));
                 break;
             case 'postgres':
                 $db_path = 'pgsql:host=' . STORAGE_SERVER . ';dbname=' . STORAGE_DB;
