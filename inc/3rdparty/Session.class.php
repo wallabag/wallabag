@@ -107,54 +107,33 @@ class Session
     }
 
     /**
-     * Check that user/password is correct and then init some SESSION variables.
+     * Store login information in Session
      *
-     * @param string $login        Login reference
-     * @param string $password     Password reference
-     * @param string $loginTest    Login to compare with login reference
-     * @param string $passwordTest Password to compare with password reference
-     * @param array  $pValues      Array of variables to store in SESSION
-     *
-     * @return true|false          True if login and password are correct, false
-     *                             otherwise
+     * @param string $login              Login reference
+     * @param bool   $longlastingsession Boolean to indicate if the
+     *                                   Session-cookie should be long-lasting.
+     * @param array  $pValues            Array of variables to store in SESSION
      */
-    public static function login (
-        $login,
-        $password,
-        $loginTest,
-        $passwordTest,
-    	$longlastingsession,
-        $pValues = array())
+    public static function login($login, $longlastingsession, $pValues = array())
     {
-        self::banInit();
-        if (self::banCanLogin()) {
-            if ($login === $loginTest && $password === $passwordTest) {
-                self::banLoginOk();
+        Session::banLoginOk();
 
-                self::init($longlastingsession);
+        self::init($longlastingsession);
 
-                // Generate unique random number to sign forms (HMAC)
-                $_SESSION['uid'] = sha1(uniqid('', true).'_'.mt_rand());
-                $_SESSION['ip'] = self::_allIPs();
-                $_SESSION['username'] = $login;
-                // Set session expiration.
-                $_SESSION['expires_on'] = time() + self::$inactivityTimeout;
-                if ($longlastingsession) {
-                	$_SESSION['longlastingsession'] = self::$longSessionTimeout;
-                	$_SESSION['expires_on'] += $_SESSION['longlastingsession'];
-                }
-                
-                foreach ($pValues as $key => $value) {
-                    $_SESSION[$key] = $value;
-                }
-
-                return true;
-            }
-            self::banLoginFailed();
+        // Generate unique random number to sign forms (HMAC)
+        $_SESSION['uid'] = sha1(uniqid('', true).'_'.mt_rand());
+        $_SESSION['ip'] = self::_allIPs();
+        $_SESSION['username'] = $login;
+        // Set session expiration.
+        $_SESSION['expires_on'] = time() + self::$inactivityTimeout;
+        if ($longlastingsession) {
+            $_SESSION['longlastingsession'] = self::$longSessionTimeout;
+            $_SESSION['expires_on'] += $_SESSION['longlastingsession'];
         }
 
-        self::init();
-        return false;
+        foreach ($pValues as $key => $value) {
+            $_SESSION[$key] = $value;
+        }
     }
 
     /**

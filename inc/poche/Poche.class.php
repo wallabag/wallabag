@@ -468,7 +468,7 @@ class Poche
             if (isset($password) && isset($confirmPassword)) {
                 if ($password == $confirmPassword && !empty($password)) {
                     $this->messages->add('s', _('your password has been updated'));
-                    $this->store->updatePassword($this->user->getId(), Tools::encodeString($password . $this->user->getUsername()));
+                    $this->store->updatePassword($this->user->getId(), $password);
                     Session::logout();
                     Tools::logm('password updated');
                     Tools::redirect();
@@ -482,8 +482,10 @@ class Poche
     }
 
     /**
-     * Get credentials from differents sources
-     * It redirects the user to the $referer link
+     * Get credentials from differents source. If the PHP_AUTH_USER or REMOTE_USER
+     * headers are present only the username is checked against the known users.
+     * Therefore a bogus password and a boolean indicating password-verification
+     * can be skipped.
      *
      * @return array
      */
@@ -511,35 +513,59 @@ class Poche
      */
     public function login($referer)
     {
-        list($login,$password,$isauthenticated)=$this->credentials();
-        if($login === false || $password === false) {
+        // Initialize the IP-ban list and check if the user is allowed to proceed.
+        Session::banInit();
+        if (!Session::banCanLogin()) {
+            $this->loginFailed();
+        }
+
+        list ($username, $password, $skipPasswordVerification) = $this->credentials();
+        if (empty($username) && empty($password)) {
             $this->messages->add('e', _('login failed: you have to fill all fields'));
             Tools::logm('login failed');
             Tools::redirect();
         }
-        if (!empty($login) && !empty($password)) {
-            $user = $this->store->login($login, Tools::encodeString($password . $login), $isauthenticated);
-            if ($user != array()) {
-                # Save login into Session
-                $longlastingsession = isset($_POST['longlastingsession']);
-                $passwordTest = ($isauthenticated) ? $user['password'] : Tools::encodeString($password . $login);
-                Session::login($user['username'], $user['password'], $login, $passwordTest, $longlastingsession, array('poche_user' => new User($user)));
 
-                # reload l10n
-                $language = $user['config']['language'];
-                @putenv('LC_ALL=' . $language);
-                setlocale(LC_ALL, $language);
-                bindtextdomain($language, LOCALE);
-                textdomain($language);
-
-                $this->messages->add('s', _('welcome to your wallabag'));
-                Tools::logm('login successful');
-                Tools::redirect($referer);
-            }
-            $this->messages->add('e', _('login failed: bad login or password'));
-            Tools::logm('login failed');
-            Tools::redirect();
+        $user = $this->store->getUser($username);
+        if ($user === null) {
+            $this->loginFailed();
         }
+
+        // Some credential sources already verified the credentials, so it can be skipped in
+        // some cases. For a normal login the password is verified against the stored hash.
+        if (!$skipPasswordVerification && !password_verify($password, $user['password'])) {
+            $this->loginFailed();
+        }
+
+        # Save login into Session
+        Session::login(
+            $user['username'],
+            isset($_POST['longlastingsession']),
+            array('poche_user' => new User($user))
+        );
+
+        # reload l10n
+        $language = $user['config']['language'];
+        @putenv('LC_ALL=' . $language);
+        setlocale(LC_ALL, $language);
+        bindtextdomain($language, LOCALE);
+        textdomain($language);
+
+        $this->messages->add('s', _('welcome to your wallabag'));
+        Tools::logm('login successful');
+        Tools::redirect($referer);
+    }
+
+    /**
+     * Somehow the login failed.
+     * Update the IP-ban information, show a message an redirect.
+     */
+    private function loginFailed()
+    {
+        Session::banLoginFailed();
+        $this->messages->add('e', _('login failed: bad login or password'));
+        Tools::logm('login failed');
+        Tools::redirect();
     }
 
     /**
