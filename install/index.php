@@ -141,16 +141,16 @@ else if (isset($_POST['install'])) {
                 }
 
                 // create database structure
-                $query = executeQuery($handle, $sql_structure, array());
+                $query = $handle->exec($sql_structure);
 
                 // Create user
                 $handle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-                $sql = 'INSERT INTO users (username, password, name) VALUES (?, ?, ?)';
+                $sql = "INSERT INTO users (username, password, name, email) VALUES (?, ?, ?, '')";
                 $params = array($username, $salted_password, $username);
                 $query = executeQuery($handle, $sql, $params);
 
-                $id_user = $handle->lastInsertId();
+                $id_user = (int)$handle->lastInsertId('users_id_seq');
 
                 $sql = 'INSERT INTO users_config ( user_id, name, value ) VALUES (?, ?, ?)';
                 $params = array($id_user, 'pager', '10');
