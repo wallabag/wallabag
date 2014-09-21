@@ -120,7 +120,7 @@ class Database {
     public function install($login, $password)
     {
         $sql = 'INSERT INTO users ( username, password, name, email) VALUES (?, ?, ?, ?)';
-        $params = array($login, $password, $login, ' ');
+        $params = array($login, password_hash($password, PASSWORD_DEFAULT), $login, ' ');
         $query = $this->executeQuery($sql, $params);
 
         $sequence = '';
@@ -229,14 +229,6 @@ class Database {
         $query = $this->executeQuery($sql, ( $username ? array($username) : array()));
         list($count) = $query->fetch();
         return $count;
-    }
-    
-    public function getUserPassword($userID)
-    {
-        $sql = "SELECT * FROM users WHERE id=?";
-        $query = $this->executeQuery($sql, array($userID));
-        $password = $query->fetchAll();
-        return isset($password[0]['password']) ? $password[0]['password'] : null;
     }
     
     public function deleteUserConfig($userID)

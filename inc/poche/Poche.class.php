@@ -79,7 +79,7 @@ class Poche
         if (!empty($username) && !empty($password)){
             $newUsername = filter_var($username, FILTER_SANITIZE_STRING);
             if (!$this->store->userExists($newUsername)){
-                if ($this->store->install($newUsername, Tools::encodeString($password . $newUsername))) {
+                if ($this->store->install($newUsername, $password)) {
                     Tools::logm('The new user ' . $newUsername . ' has been installed');
                     $this->messages->add('s', sprintf(_('The new user %s has been installed. Do you want to <a href="?logout">logout ?</a>'), $newUsername));
                     Tools::redirect();
@@ -98,12 +98,36 @@ class Poche
     }
 
     /**
+     * Verified the password of the user. If the old password format is
+     * used, the hashed password will be upgraded to the new version.
+     *
+     * @param array $user
+     * @param string $password
+     * @return bool True if the password is valid, false otherwise.
+     */
+    public function verifyPassword($user, $password)
+    {
+        if (password_verify($password, $user['password'])) {
+            return true;
+        }
+
+        // Verify if the password is in the old format.
+        if ($user['password'] === Tools::encodeString($password . $user['username'])) {
+            // Upgrade the password to the new format.
+            $this->store->updatePassword($user['id'], $password);
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Delete an existing user
      */
     public function deleteUser($password)
     {
         if ($this->store->listUsers() > 1) {
-            if (Tools::encodeString($password . $this->user->getUsername()) == $this->store->getUserPassword($this->user->getId())) {
+            if ($this->verifyPassword($this->user, $password)) {
                 $username = $this->user->getUsername();
                 $this->store->deleteUserConfig($this->user->getId());
                 Tools::logm('The configuration for user '. $username .' has been deleted !');
@@ -533,7 +557,7 @@ class Poche
 
         // Some credential sources already verified the credentials, so it can be skipped in
         // some cases. For a normal login the password is verified against the stored hash.
-        if (!$skipPasswordVerification && !password_verify($password, $user['password'])) {
+        if (!$skipPasswordVerification && !$this->verifyPassword($user, $password)) {
             $this->loginFailed();
         }
 
