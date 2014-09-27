@@ -111,7 +111,7 @@
                 <fieldset class="w500p">
                     <div class="row">
                         <label class="col w150p" for="file">{% trans "File:" %}</label>
-                        <input class="col" type="file" id="file" name="file" tabindex="4">
+                        <input class="col" type="file" id="file" name="file" tabindex="4" required="required">
                     </div>
                     <div class="row mts txtcenter">
                         <button class="bouton" type="submit" tabindex="4">{% trans "Import" %}</button>
@@ -121,8 +121,6 @@
             <p><a href="?import">{% trans "You can click here to fetch content for articles with no content." %}</a></p>
             
             <h2>{% trans "Export your wallabag data" %}</h2>
-            {% if constant('STORAGE') == 'sqlite' %}
-            <p><a href="?download" target="_blank">{% trans "Click here" %}</a> {% trans "to download your database." %}</p>{% endif %}
             <p><a href="?export" target="_blank">{% trans "Click here" %}</a> {% trans "to export your wallabag data." %}</p>
             
             <h2>{% trans "Fancy an E-Book ?" %}</h2>

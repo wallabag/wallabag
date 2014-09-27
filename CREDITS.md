@@ -11,4 +11,6 @@ wallabag is based on :
 
 wallabag is mainly developed by Nicolas Lœuillet under the MIT License
 
+Thank you so much to @tcitworld and @mariroz.
+
 Contributors : https://github.com/wallabag/wallabag/graphs/contributors

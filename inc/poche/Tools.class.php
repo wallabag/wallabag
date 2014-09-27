@@ -54,6 +54,10 @@ final class Tools
             || ($https && $_SERVER["SERVER_PORT"] == '443')
             || ($https && $_SERVER["SERVER_PORT"]==SSL_PORT) //Custom HTTPS port detection
             ? '' : ':' . $_SERVER["SERVER_PORT"]);
+        
+        if (isset($_SERVER["HTTP_X_FORWARDED_PORT"])) {
+            $serverport = ':' . $_SERVER["HTTP_X_FORWARDED_PORT"];
+        }
 
         $scriptname = str_replace('/index.php', '/', $_SERVER["SCRIPT_NAME"]);
 
@@ -292,21 +296,6 @@ final class Tools
 
             header('Status: '.$status_code);
         }
-    }
-
-    /**
-     * Download the sqlite database
-     */
-    public static function downloadDb()
-    {
-        header('Content-Disposition: attachment; filename="poche.sqlite.gz"');
-        self::_status(200);
-
-        header('Content-Transfer-Encoding: binary');
-        header('Content-Type: application/octet-stream');
-        echo gzencode(file_get_contents(STORAGE_SQLITE));
-
-        exit;
     }
 
     /**

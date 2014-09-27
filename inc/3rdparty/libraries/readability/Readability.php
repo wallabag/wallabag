@@ -679,6 +679,7 @@ class Readability
 				} else {
 					$topCandidate->innerHTML = $page->documentElement->innerHTML;
 					$page->documentElement->innerHTML = '';
+					$this->reinitBody();
 					$page->documentElement->appendChild($topCandidate);
 				}
 			} else {
@@ -794,8 +795,7 @@ class Readability
 		{
 			// TODO: find out why element disappears sometimes, e.g. for this URL http://www.businessinsider.com/6-hedge-fund-etfs-for-average-investors-2011-7
 			// in the meantime, we check and create an empty element if it's not there.
-			if (!isset($this->body->childNodes)) $this->body = $this->dom->createElement('body');
-			$this->body->innerHTML = $this->bodyCache;
+			$this->reinitBody();
 			
 			if ($this->flagIsActive(self::FLAG_STRIP_UNLIKELYS)) {
 				$this->removeFlag(self::FLAG_STRIP_UNLIKELYS);
@@ -1134,5 +1134,18 @@ class Readability
 	public function removeFlag($flag) {
 		$this->flags = $this->flags & ~$flag;
 	}
+	
+	/**
+	 * Will recreate previously deleted body property
+	 *
+	 * @return void
+	 */
+	protected function reinitBody() {
+		if (!isset($this->body->childNodes)) {
+			$this->body = $this->dom->createElement('body');
+			$this->body->innerHTML = $this->bodyCache;
+		}
+	}
+		
 }
 ?>

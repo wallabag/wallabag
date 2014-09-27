@@ -1,36 +1,101 @@
+# Author: zinnober
+# Complete rewrite of the faz.net template as the standard one is broken
+# I tried to consider as many page variants as possible, which was some serious work
+
+tidy: no
+prune: no
+
 # Title
 title: //p[@class='Content HeadlineShort']
 
-# Authors
-# some are known and have a link, others don't
-author: substring-after(//span[@class='Autor'], 'Von')
+# Set author
+author: substring-after(//span[@class='Autor'], 'von ')
+author: //span[@class='caps last']/span[@class='caps last']
+author: //a[@rel='author']
 
-# Date
+# Set date
 date: //span[@class='Datum']
+date: //span[@class='Datum'],/span
 
-# Body
+# Fetch full multipage articles
+next_page_link: //a[@title='Nächste Seite']
+
+# Content is here
 body: //div[@class='Artikel']
 
-# Removements before body text
-strip: //div[@class='Breadcrumbs']
-strip: //div[@class='QuickSearchBox']
-strip: //div[@class='FAZArtikelEinleitung']
-strip: //div[@class='FAZArtikelReiter']
+# Tidy up before article
+strip: //div[@id='FAZHeaderNeu']
+strip: //h2[@itemprop='headline']
+strip: //span[@class='Datum']
+strip: //span[@class='Autor']
+strip_id_or_class: ArticlePagerTop
+
+# General cleanup
 strip: //div[@class='clear']
+strip: //a[@title='Zur Homepage FAZ.NET']
+strip: //iframe
+replace_string( ·  ):
 
-# General removements
-strip: //span[@class='Bildnachweis']
-strip: //img[@class='MediaIcon']
-strip: //div[@class='ArtikelMediaLink']
-dissolve: //a[img]
+# Remove tracking and ads
+strip_image_src: /l.gif?
+strip: //div[contains(@style, 'background-image')]
+strip: //img[@width='1']
+strip_id_or_class: invisible
+strip_id_or_class: Anzeige
+strip_id_or_class: billboard
 
-# Removements after body text
-strip: //div[@class='ArtikelAbbinder']
-strip: //div[@class='ArtikelKommentieren Artikelfuss GETS;tk;boxen.top-lesermeinungen;tp;content']
-strip: //div[@class='FAZArtikelKommentare FAZArtikelContent']
-strip: //div[@class='FAZArtikelFunktionen']
-strip: //div[@id='FAZContentRight']
+# Remove various text boxes and social media foo
+strip_id_or_class: WeitereBeitraege
+strip_id_or_class: WBListe
+strip_id_or_class: AutorenModul
+strip_id_or_class: Community
+strip_id_or_class: SocialMediaStatus
+strip_id_or_class: RelatedLinkBox
+strip_id_or_class: MultimediaNavigation
+strip_id_or_class: IndexTitel
 
-# Fix picture captions
-wrap_in(small): //span[@class='Bildunterschrift']/text()
+# Fix picture caps and pictures (use better resolution and remove clutter)
+strip_id_or_class: LightBoxOverlay
+strip_id_or_class: exitLarge
+strip_id_or_class: PagerBox
+strip_id_or_class: Bildnachweis
+strip_id_or_class: Bildueberschrift
+strip_id_or_class: Bildbeschreibung
+strip_id_or_class: ArtikelBild610
+strip_id_or_class: MediaLink
+strip_id_or_class: FotoBoxInnerLeft
+strip_id_or_class: BilderRelatedLinks
+
+# Remove clutter after article
+strip_id_or_class: ArticlePagerBottom
+strip_id_or_class: backToHome
+strip_id_or_class: ArtikelAbbinder
+strip_id_or_class: lesermeinungscontainer
+strip_id_or_class: ThemenLinks
+strip_id_or_class: rechtehinweis
+strip_id_or_class: FAZArtikelMap
+strip_id_or_class: FAZArtikelKommentare
+strip_id_or_class: ArtikelKommentieren
+strip_id_or_class: FAZArtikelFunktionen
+strip_id_or_class: mailLB
+strip_id_or_class: FAZContentRight
+strip_id_or_class: stageModule
+strip_id_or_class: ContentFooter
+strip_id_or_class: ServicesFooter
+strip_id_or_class: FAZFooter
+
+# Clean up stuff present just in some articles
+strip_id_or_class: Teaser620
+strip_id_or_class: TeaserMultimedia
+strip_id_or_class: VideoBox
+
+# Remove as soon as Wallabag maight be able to embed flash video
+strip_id_or_class: mmoObjectAsTeaserInArticle
+strip_id_or_class: additionalStylesAudioVideo
+strip_id_or_class: hideMMElements
+
+# Try it yourself
 test_url: http://www.faz.net/aktuell/feuilleton/zum-tod-von-margaret-thatcher-die-reizfigur-12141919.html#Drucken
+test_url: http://www.faz.net/aktuell/politik/inland/allensbach-analyse-im-namen-des-volkes-13106492.html
+test_url: http://www.faz.net/aktuell/feuilleton/kino/video-filmkritiken/video-filmkritik-when-animals-dream-zerrissene-jugend-13105772.html
+
