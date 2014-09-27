@@ -45,7 +45,8 @@ require_once INCLUDES . '/3rdparty/libraries/PHPePub/EPubChapterSplitter.php';
 require_once INCLUDES . '/3rdparty/libraries/MOBIClass/MOBI.php';
 
 # pdf library
-require_once INCLUDES . '/3rdparty/libraries/mpdf/mpdf.php';
+#require_once INCLUDES . '/3rdparty/libraries/mpdf/mpdf.php';
+require_once  INCLUDES . '/3rdparty/libraries/tcpdf/tcpdf.php';
 
 # system configuration; database credentials et caetera
 require_once INCLUDES . '/poche/config.inc.php';

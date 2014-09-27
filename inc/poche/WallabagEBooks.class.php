@@ -262,53 +262,45 @@ class WallabagPDF extends WallabagEbooks
 {
 	public function producePDF()
 	{
-		$mpdf = new mPDF('c'); 
 
         Tools::logm('Starting to produce PDF file');
 
+        $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+
         Tools::logm('Filling metadata for PDF...');
-
-        # headers
-        $mpdf->SetHeader('{DATE j-m-Y}|{PAGENO}/{nb}|Produced with wallabag');
-        $mpdf->SetFooter('{PAGENO}');
-
-        # intro
-        $html = '<h1>' . $this->bookTitle . '<bookmark content="Cover" /></h1><div style="text-align:center;" >
-        <p>' . _('Produced by wallabag with mPDF') . '</p>
+        $pdf->SetCreator(PDF_CREATOR);
+        $pdf->SetAuthor('');
+        $pdf->SetTitle($this->bookTitle);
+        $pdf->SetSubject('TCPDF Tutorial');
+        $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
+		
+        Tools::logm('Adding introduction...');
+        $pdf->AddPage();
+        $intro = '<h1>' . $this->bookTitle . '</h1><div style="text-align:center;" >
+        <p>' . _('Produced by wallabag with tcpdf') . '</p>
         <p>'. _('Please open <a href="https://github.com/wallabag/wallabag/issues" >an issue</a> if you have trouble with the display of this E-Book on your device.') . '</p>
         <img src="themes/baggy/img/apple-touch-icon-152.png" /></div>';
-        $html .= '<pagebreak type="next-odd" />';
-        $i = 1;
 
+
+        $pdf->writeHTMLCell(0, 0, '', '', $intro, 0, 1, 0, true, '', true);
+
+        $i = 1;
         Tools::logm('Adding actual content...');
         foreach ($this->entries as $item) {
-            $html .= '<h1>' . $item['title'] . '<bookmark content="' . $item['title'] . '" /></h1>';
-            $html .= '<indexentry content="'. $item['title'] .'" />';
+            $pdf->AddPage();
+            $html = '<h1>' . $item['title'] . '</h1>';
             $html .= $item['content'];
-            $html .= '<pagebreak type="next-odd" />';
+            $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
             $i = $i+1;
         }
-		
-        $mpdf->WriteHTML($html);
 
-        # remove characters that make mpdf bug
-        $char_in = array('/', '.', ',', ':', '|');
-        $pdfExportName = preg_replace('/\s+/', '-', str_replace($char_in, '-', $this->bookFileName . '.pdf')); # maybe someone can make a proper regex of this ?
+        // set image scale factor
+        $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 
-        # index
-        $html = '<h2>Index<bookmark content="Index" /></h2>
-        <indexinsert cols="2" offset="5" usedivletters="on" div-font-size="15" gap="5" font="Trebuchet" div-font="sans-serif" links="on" />
-        ';
+        
+        
 
-        $mpdf->WriteHTML($html);
-		
-        $mpdf->Output('cache/' . $pdfExportName);
-		
-        header('Content-Disposition: attachment; filename="' . $pdfExportName . '"');
+        $pdf->Output($this->bookFileName, 'I');
 
-        header('Content-Transfer-Encoding: base64');
-        header('Content-Type: application/pdf');
-        echo file_get_contents('cache/' . $pdfExportName);
-        Tools::logm('PDF file produced');
 	}
 }
