@@ -22,6 +22,7 @@ $parallel_ok = ((extension_loaded('http') && class_exists('HttpRequestPool')) ||
 $allow_url_fopen_ok = (bool)ini_get('allow_url_fopen');
 $filter_ok = extension_loaded('filter');
 $gettext_ok = function_exists("gettext");
+$gd_ok = extension_loaded('gd');
 
 if (extension_loaded('xmlreader')) {
 	$xml_ok = true;
@@ -236,6 +237,11 @@ if (isset($_GET['from'])){
 						<td><a href="http://uk.php.net/manual/en/book.filter.php">Data filtering</a></td>
 						<td>Enabled</td>
 						<?php echo ($filter_ok) ? '<td class="good">Enabled' : '<td class="pass">Disabled'; ?></td>
+					</tr>
+					<tr class="<?php echo ($gd_ok) ? 'enabled' : 'disabled'; ?>">
+						<td><a href="http://php.net/manual/en/book.image.php">GD</a></td>
+						<td>Enabled</td>
+						<?php echo ($gd_ok) ? '<td class="good">Enabled' : '<td class="pass">Disabled'; ?></td>
 					</tr>					
 					<tr class="<?php echo ($tidy_ok) ? 'enabled' : 'disabled'; ?>">
 						<td><a href="http://php.net/tidy">Tidy</a></td>
@@ -275,7 +281,7 @@ if (isset($_GET['from'])){
 			<h3>What does this mean?</h3>
 			<ol>
 				<?php //if ($php_ok && $xml_ok && $pcre_ok && $mbstring_ok && $iconv_ok && $filter_ok && $zlib_ok && $tidy_ok && $curl_ok && $parallel_ok && $allow_url_fopen_ok): ?>
-				<?php if ($php_ok && $xml_ok && $pcre_ok && $filter_ok && $tidy_ok && $curl_ok && $parallel_ok && $allow_url_fopen_ok && $gettext_ok && $parse_ini_ok): ?>
+				<?php if ($php_ok && $xml_ok && $pcre_ok && $filter_ok && $gd_ok && $tidy_ok && $curl_ok && $parallel_ok && $allow_url_fopen_ok && $gettext_ok && $parse_ini_ok): ?>
 				<li><em>You have everything you need to run <?php echo $app_name; ?> properly!  Congratulations!</em></li>
 				<?php else: ?>
 					<?php if ($php_ok): ?>
@@ -310,6 +316,12 @@ if (isset($_GET['from'])){
                                                     <li><strong>iconv:</strong> <code>iconv</code> is installed, but <code>mbstring</code> is not.</li>
                                                 <?php else: ?>
                                                     <li><strong>mbstring and iconv:</strong> <em>You do not have either of the extensions installed.</em> This will significantly impair your ability to read non-English feeds, as well as even some English ones.</li>
+                                                <?php endif; ?>
+
+                                                <?php if ($gd_ok): ?>
+                                                    <li><strong>GD:</strong> You have <code>GD</code> support installed.  <em>No problems here.</em></li>
+                                                <?php else: ?>
+                                                    <li><strong>GD:</strong> The <code>GD</code> extension is not available.  <?php echo $app_name; ?> will not be able to download pictures locally on your server.</li>
                                                 <?php endif; ?>
 
                                                 <?php if ($tidy_ok): ?>
