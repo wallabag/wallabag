@@ -200,6 +200,9 @@ class WallabagMobi extends WallabagEBooks
             Tools::logm('Mobi file produced');
         }
         else {
+        	##					   ##
+        	#   Not working yet !!! #
+        	##					   ##
             // we send file to kindle
 
             Tools::logm('Preparing to send file by email');
@@ -300,7 +303,7 @@ class WallabagPDF extends WallabagEbooks
         
         
 
-        $pdf->Output($this->bookFileName, 'I');
+        $pdf->Output($this->bookFileName, 'FD');
 
 	}
 }
