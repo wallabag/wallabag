@@ -299,11 +299,9 @@ class WallabagPDF extends WallabagEbooks
 
         // set image scale factor
         $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
-
-        
         
 
-        $pdf->Output($this->bookFileName, 'FD');
+        $pdf->Output($this->bookFileName . '.pdf', 'FD');
 
 	}
 }
