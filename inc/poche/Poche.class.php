@@ -74,12 +74,13 @@ class Poche
     /**
      * Creates a new user
      */
-    public function createNewUser($username, $password)
+    public function createNewUser($username, $password, $email = "")
     {
         if (!empty($username) && !empty($password)){
             $newUsername = filter_var($username, FILTER_SANITIZE_STRING);
+            $email = filter_var($email, FILTER_SANITIZE_STRING);
             if (!$this->store->userExists($newUsername)){
-                if ($this->store->install($newUsername, $password)) {
+                if ($this->store->install($newUsername, $password, $email)) {
                     Tools::logm('The new user ' . $newUsername . ' has been installed');
                     $this->messages->add('s', sprintf(_('The new user %s has been installed. Do you want to <a href="?logout">logout ?</a>'), $newUsername));
                     Tools::redirect();

@@ -117,10 +117,10 @@ class Database {
         $query = $this->executeQuery($sql, array());
     }
 
-    public function install($login, $password)
+    public function install($login, $password, $email = '')
     {
         $sql = 'INSERT INTO users ( username, password, name, email) VALUES (?, ?, ?, ?)';
-        $params = array($login, password_hash($password, PASSWORD_DEFAULT), $login, ' ');
+        $params = array($login, password_hash($password, PASSWORD_DEFAULT), $login, $email);
         $query = $this->executeQuery($sql, $params);
 
         $sequence = '';

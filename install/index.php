@@ -141,16 +141,16 @@ else if (isset($_POST['install'])) {
                 }
 
                 // create database structure
-                $query = executeQuery($handle, $sql_structure, array());
+                $query = $handle->exec($sql_structure);
 
                 // Create user
                 $handle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-                $sql = 'INSERT INTO users (username, password, name) VALUES (?, ?, ?)';
+                $sql = "INSERT INTO users (username, password, name, email) VALUES (?, ?, ?, '')";
                 $params = array($username, $hashed_password, $username);
                 $query = executeQuery($handle, $sql, $params);
 
-                $id_user = $handle->lastInsertId();
+                $id_user = (int)$handle->lastInsertId('users_id_seq');
 
                 $sql = 'INSERT INTO users_config ( user_id, name, value ) VALUES (?, ?, ?)';
                 $params = array($id_user, 'pager', '10');
@@ -292,9 +292,11 @@ php composer.phar install</code></pre></li>
                     <p>
                         <label for="password">Password</label>
                         <input type="password" required id="password" name="password" value="wallabag" />
+                        <label for="show">Show password:</label> <input style="margin-left:-80px;" name="show" id="show" type="checkbox" onchange="document.getElementById('password').type = this.checked ? 'text' : 'password'">
                     </p>
                     <p>
-                        <label for="show">Show password:</label> <input name="show" id="show" type="checkbox" onchange="document.getElementById('password').type = this.checked ? 'text' : 'password'">
+                        <label for="email">Email (not required)</label>
+                        <input type="email" id="email" name="email" />
                     </p>
                 </fieldset>
 

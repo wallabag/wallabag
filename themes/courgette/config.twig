@@ -97,6 +97,10 @@
                     <label class="col w150p" for="password4newuser">{% trans "Password for new user" %}</label>
                     <input class="col" type="password" id="password4newuser" name="password4newuser" placeholder="{% trans "Password" %}">
                 </div>
+                <div class="row">
+                    <label class="col w150p" for="newuseremail">{% trans 'Email for new user (not required)' %}</label>
+                    <input class="col" type="email" id="newuseremail" name="newuseremail" placeholder="{% trans 'Email' %}">
+                </div>
                 <div class="row mts txtcenter">
                     <button type="submit">{% trans "Send" %}</button>	
                 </div>
@@ -116,6 +120,6 @@
             </div>
             </form>
             {% else %}<p>{% trans "You are the only user, you cannot delete your own account." %}<br />
-            {% trans "To completely remove wallabag, delete the wallabag folder on your web server." %}</p>{% endif %}
+            {% trans "To completely remove wallabag, delete the wallabag folder on your web server (and eventual databases)." %}</p>{% endif %}
         </div>
 {% endblock %}
