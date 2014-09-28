@@ -165,7 +165,7 @@ class WallabagMobi extends WallabagEBooks
 	* @author Sander Kromwijk
 	*/
 
-	public function produceMobi($sendByMail = FALSE)
+	public function produceMobi()
 	{
 
         Tools::logm('Starting to produce Mobi file');
@@ -194,70 +194,9 @@ class WallabagMobi extends WallabagEBooks
         }
         $mobi->setContentProvider($content);
 
-        if (!$sendByMail) {
-            // we offer file to download
-            $mobi->download($this->bookFileName.'.mobi');
-            Tools::logm('Mobi file produced');
-        }
-        else {
-        	##					   ##
-        	#   Not working yet !!! #
-        	##					   ##
-            // we send file to kindle
-
-            Tools::logm('Preparing to send file by email');
-
-            $error = FALSE;
-            # testing Mail function
-            if (!function_exists('mail')) {
-                $error = _("Mail function is disabled. You can't send emails from your server");
-            }
-
-            $char_in = array('/', '.', ',', ':', '|'); # we sanitize filename to avoid conflicts with special characters (for instance, / goes for a directory)
-            $mobiExportName = preg_replace('/\s+/', '-', str_replace($char_in, '-', $this->bookFileName)) . '.mobi';
-            
-            $file = 'cache/' . $mobiExportName;
-            $mobi->save($file);
-
-            $file_size = filesize($file);
-            $filename = basename($file);
-            $handle = fopen($file, "r");
-            $content = fread($handle, $file_size);
-            fclose($handle);
-            $content = chunk_split(base64_encode($content));
-
-            $uid = md5(uniqid(time())); 
-
-            //generate header for mail
-            $header  = "From: wallabag <". $this->wallabag->user->email .">\r\n";        
-            $header .= "MIME-Version: 1.0\r\n";
-            $header .= "Content-Type: multipart/mixed; boundary=\"".$uid."\"\r\n\r\n";
-            $header .= "This is a multi-part message in MIME format.\r\n";
-            $header .= "--".$uid."\r\n";
-            $header .= "Content-type:text/plain; charset=iso-8859-1\r\n";
-            $header .= "Content-Transfer-Encoding: 7bit\r\n\r\n";
-            $header .= "send via wallabag\r\n\r\n";
-            $header .= "--".$uid."\r\n";
-            $header .= "Content-Type: application/x-mobipocket-ebook; name=\"".$filename."\"\r\n";
-            $header .= "Content-Transfer-Encoding: base64\r\n";
-            $header .= "Content-Disposition: attachment; filename=\"".$filename."\"\r\n\r\n";
-            $header .= $content."\r\n\r\n";
-            $header .= "--".$uid."--";
-
-            # trying to get the kindle email adress
-            if (!$this->wallabag->user->getConfigValue('kindleemail')) 
-            {
-                $error = _("You didn't set your kindle's email adress !");
-            }
-            if (!$error) {
-                mail($this->wallabag->user->getConfigValue('kindleemail'), '[wallabag] ' . $this->bookTitle, "", $header );
-                $messages->add('s', _('The email has been sent to your kindle !'));
-                Tools::logm('Email sent');
-            } else {
-                $messages->add('e', $error);
-                Tools::logm($error);
-            }
-        }
+        // we offer file to download
+        $mobi->download($this->bookFileName.'.mobi');
+        Tools::logm('Mobi file produced');
     }
 }
 
