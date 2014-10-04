@@ -10,6 +10,7 @@ $(document).ready(function() {
 
     $("#search").click(function(){
         closeSearch();
+        $('#searchfield').focus();
     });
 
     $("#search-form-close").click(function(){
