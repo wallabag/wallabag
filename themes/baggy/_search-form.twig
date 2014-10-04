@@ -1,7 +1,7 @@
 <div id="search-form" class="messages info">
 <form method="get" action="index.php">
         <input type="hidden" name="view" value="search"></input>
-        <label><a href="javascript: void(null);" id="search-form-close">X</a>{% trans "Search" %}</label> : <input type="text" name="search" />
+        <label><a href="javascript: void(null);" id="search-form-close">X</a>{% trans "Search" %}</label> : <input required placeholder="{% trans "Enter your search here" %}" type="text" name="search" id="searchfield" />
         <input id="submit-search" type="submit" value="{% trans "Search" %} !"></input>
 </form>
 </div>
