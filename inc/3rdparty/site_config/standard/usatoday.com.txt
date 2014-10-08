@@ -1,0 +1,8 @@
+date: //meta[@itemprop="datePublished"]/@content
+author: //div[@itemprop="author"]
+body: //div[@itemprop='articleBody']
+
+strip_id_or_class: share-tools
+
+test_url: http://www.usatoday.com/story/news/world/2014/03/18/malaysia-plane-search/6552429/
+test_url: http://rssfeeds.usatoday.com/usatoday-NewsTopStories

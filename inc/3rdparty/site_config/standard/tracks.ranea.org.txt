@@ -1,0 +1,14 @@
+# Metadata
+title: substring-after(//title, 'Coyote Tracks - ')
+author: //meta[@name="author"]/@content
+date: //div[@class="post_header"]/a
+
+# Content Pruning
+strip: //div[@class="column left"]
+strip: //div[@class="pages"]
+strip: //a[@class="text_title"]
+strip: //ol[@class="notes"]
+
+dissolve: //div[@class='column right']/ul
+dissolve: //li[@class='post']
+test_url: http://tracks.ranea.org/post/31431060205/the-next-big-uh-slightly-taller-thing

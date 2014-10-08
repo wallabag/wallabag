@@ -1,5 +1,5 @@
 title: //meta[@property='og:title']/@content
-body: //div[@class='datosi' or @class='date' or @class='photo-alt1' or @class='text']
+body: //div[@class='datosi' or @class='date' or @class='photo-alt1' or @class='text' or @itemprop='articleBody']
 strip_id_or_class: colB
 
 prune: no

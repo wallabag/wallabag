@@ -1,0 +1,11 @@
+# Article Metadata
+title: //h1
+author: //span[@class="name"]/a
+date: //time
+
+# Content Pruning
+strip: //h5
+strip: //time
+strip: //div[@class="byline"]
+strip: //h2[@class="headline "]
+test_url: http://m.vanityfair.com/politics/2012/10/michael-lewis-profile-barack-obama

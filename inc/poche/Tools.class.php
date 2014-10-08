@@ -5,18 +5,17 @@
  * @category   wallabag
  * @author     Nicolas Lœuillet <nicolas@loeuillet.org>
  * @copyright  2013
- * @license    http://www.wtfpl.net/ see COPYING file
+ * @license    http://opensource.org/licenses/MIT see COPYING file
  */
 
-class Tools
+final class Tools
 {
+    /**
+     * Initialize PHP environment
+     */
     public static function initPhp()
     {
         define('START_TIME', microtime(true));
-
-        if (phpversion() < 5) {
-            die(_('Oops, it seems you don\'t have PHP 5.'));
-        }
 
         function stripslashesDeep($value) {
             return is_array($value)
@@ -34,6 +33,11 @@ class Tools
         register_shutdown_function('ob_end_flush');
     }
 
+    /**
+     * Get wallabag instance URL
+     *
+     * @return string
+     */
     public static function getPocheUrl()
     {
         $https = (!empty($_SERVER['HTTPS'])
@@ -50,6 +54,10 @@ class Tools
             || ($https && $_SERVER["SERVER_PORT"] == '443')
             || ($https && $_SERVER["SERVER_PORT"]==SSL_PORT) //Custom HTTPS port detection
             ? '' : ':' . $_SERVER["SERVER_PORT"]);
+        
+        if (isset($_SERVER["HTTP_X_FORWARDED_PORT"])) {
+            $serverport = ':' . $_SERVER["HTTP_X_FORWARDED_PORT"];
+        }
 
         $scriptname = str_replace('/index.php', '/', $_SERVER["SCRIPT_NAME"]);
 
@@ -67,6 +75,11 @@ class Tools
             . $host . $serverport . $scriptname;
     }
 
+    /**
+     * Redirects to a URL
+     *
+     * @param string $url
+     */
     public static function redirect($url = '')
     {
         if ($url === '') {
@@ -87,11 +100,18 @@ class Tools
                 $url = $ref;
             }
         }
+
         self::logm('redirect to ' . $url);
         header('Location: '.$url);
         exit();
     }
 
+    /**
+     * Returns name of the template file to display
+     *
+     * @param $view
+     * @return string
+     */
     public static function getTplFile($view)
     {
         $views = array(
@@ -99,13 +119,15 @@ class Tools
             'edit-tags', 'view', 'login', 'error'
             );
 
-        if (in_array($view, $views)) {
-            return $view . '.twig';
-        }
-
-        return 'home.twig';
+        return (in_array($view, $views) ? $view . '.twig' : 'home.twig');
     }
 
+    /**
+     * Download a file (typically, for downloading pictures on web server)
+     *
+     * @param $url
+     * @return bool|mixed|string
+     */
     public static function getFile($url)
     {
         $timeout = 15;
@@ -186,6 +208,11 @@ class Tools
         }
     }
 
+    /**
+     * Headers for JSON export
+     *
+     * @param $data
+     */
     public static function renderJson($data)
     {
         header('Cache-Control: no-cache, must-revalidate');
@@ -195,6 +222,11 @@ class Tools
         exit();
     }
 
+    /**
+     * Create new line in log file
+     *
+     * @param $message
+     */
     public static function logm($message)
     {
         if (DEBUG_POCHE && php_sapi_name() != 'cli') {
@@ -204,36 +236,57 @@ class Tools
         }
     }
 
+    /**
+     * Encode a URL by using a salt
+     *
+     * @param $string
+     * @return string
+     */
     public static function encodeString($string)
     {
         return sha1($string . SALT);
     }
 
+    /**
+     * Cleans a variable
+     *
+     * @param $var
+     * @param string $default
+     * @return string
+     */
     public static function checkVar($var, $default = '')
     {
-        return ((isset ($_REQUEST["$var"])) ? htmlentities($_REQUEST["$var"]) : $default);
+        return ((isset($_REQUEST["$var"])) ? htmlentities($_REQUEST["$var"]) : $default);
     }
 
+    /**
+     * Returns the domain name for a URL
+     *
+     * @param $url
+     * @return string
+     */
     public static function getDomain($url)
     {
         return parse_url($url, PHP_URL_HOST);
     }
 
-    public static function getReadingTime($text) {
-        $word = str_word_count(strip_tags($text));
-        $minutes = floor($word / 200);
-        $seconds = floor($word % 200 / (200 / 60));
-        $time = array('minutes' => $minutes, 'seconds' => $seconds);
-
-        return $minutes;
+    /**
+     * For a given text, we calculate reading time for an article
+     *
+     * @param $text
+     * @return float
+     */
+    public static function getReadingTime($text)
+    {
+        return floor(str_word_count(strip_tags($text)) / 200);
     }
 
-    public static function getDocLanguage($userlanguage) {
-        $lang = explode('.', $userlanguage);
-        return str_replace('_', '-', $lang[0]);
-    }
-
-    public static function status($status_code)
+    /**
+     * Returns the correct header for a status code
+     *
+     * @param $status_code
+     */
+    private static function _status($status_code)
     {
         if (strpos(php_sapi_name(), 'apache') !== false) {
 
@@ -245,29 +298,24 @@ class Tools
         }
     }
 
-    public static function download_db() {
-        header('Content-Disposition: attachment; filename="poche.sqlite.gz"');
-        self::status(200);
-
-        header('Content-Transfer-Encoding: binary');
-        header('Content-Type: application/octet-stream');
-        echo gzencode(file_get_contents(STORAGE_SQLITE));
-
-        exit;
-    }
-
+    /**
+     * Get the content for a given URL (by a call to FullTextFeed)
+     *
+     * @param Url $url
+     * @return mixed
+     */
     public static function getPageContent(Url $url)
     {
         // Saving and clearing context
         $REAL = array();
         foreach( $GLOBALS as $key => $value ) {
             if( $key != 'GLOBALS' && $key != '_SESSION' && $key != 'HTTP_SESSION_VARS' ) {
-                $GLOBALS[$key] = array();
-                $REAL[$key] = $value;
+                $GLOBALS[$key]  = array();
+                $REAL[$key]     = $value;
             }
         }
         // Saving and clearing session
-        if ( isset($_SESSION) ) {
+        if (isset($_SESSION)) {
             $REAL_SESSION = array();
             foreach( $_SESSION as $key => $value ) {
                 $REAL_SESSION[$key] = $value;
@@ -279,12 +327,12 @@ class Tools
         $scope = function() {
             extract( func_get_arg(1) );
             $_GET = $_REQUEST = array(
-                        "url" => $url->getUrl(),
-                        "max" => 5,
-                        "links" => "preserve",
-                        "exc" => "",
-                        "format" => "json",
-                        "submit" => "Create Feed"
+                "url" => $url->getUrl(),
+                "max" => 5,
+                "links" => "preserve",
+                "exc" => "",
+                "format" => "json",
+                "submit" => "Create Feed"
             );
             ob_start();
             require func_get_arg(0);
@@ -292,23 +340,26 @@ class Tools
             ob_end_clean();
             return $json;
         };
-        $json = $scope( "inc/3rdparty/makefulltextfeed.php", array("url" => $url) );
+
+        $json = $scope("inc/3rdparty/makefulltextfeed.php", array("url" => $url));
 
         // Clearing and restoring context
-        foreach( $GLOBALS as $key => $value ) {
-            if( $key != "GLOBALS" && $key != "_SESSION" ) {
+        foreach ($GLOBALS as $key => $value) {
+            if($key != "GLOBALS" && $key != "_SESSION" ) {
                 unset($GLOBALS[$key]);
             }
         }
-        foreach( $REAL as $key => $value ) {
+        foreach ($REAL as $key => $value) {
             $GLOBALS[$key] = $value;
         }
+
         // Clearing and restoring session
-        if ( isset($REAL_SESSION) ) {
-            foreach( $_SESSION as $key => $value ) {
+        if (isset($REAL_SESSION)) {
+            foreach($_SESSION as $key => $value) {
                 unset($_SESSION[$key]);
             }
-            foreach( $REAL_SESSION as $key => $value ) {
+
+            foreach($REAL_SESSION as $key => $value) {
                 $_SESSION[$key] = $value;
             }
         }
@@ -318,11 +369,48 @@ class Tools
 
     /**
      * Returns whether we handle an AJAX (XMLHttpRequest) request.
+     *
      * @return boolean whether we handle an AJAX (XMLHttpRequest) request.
      */
     public static function isAjaxRequest()
     {
-      return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH']==='XMLHttpRequest';
+        return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH']==='XMLHttpRequest';
+    }
+
+    /*
+     * Empty cache folder
+     */
+    public static function emptyCache()
+    {
+        $files = new RecursiveIteratorIterator(
+            new RecursiveDirectoryIterator(CACHE, RecursiveDirectoryIterator::SKIP_DOTS),
+            RecursiveIteratorIterator::CHILD_FIRST
+        );
+
+        foreach ($files as $fileInfo) {
+            $todo = ($fileInfo->isDir() ? 'rmdir' : 'unlink');
+            $todo($fileInfo->getRealPath());
+        }
+
+        Tools::logm('empty cache');
+        Tools::redirect();
+    }
+
+    public static function generateToken()
+    {
+        if (ini_get('open_basedir') === '') {
+            if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+                // alternative to /dev/urandom for Windows
+                $token = substr(base64_encode(uniqid(mt_rand(), true)), 0, 20);
+            } else {
+                $token = substr(base64_encode(file_get_contents('/dev/urandom', false, null, 0, 20)), 0, 15);
+            }
+        }
+        else {
+            $token = substr(base64_encode(uniqid(mt_rand(), true)), 0, 20);
+        }
+
+        return str_replace('+', '', $token);
     }
 
 }

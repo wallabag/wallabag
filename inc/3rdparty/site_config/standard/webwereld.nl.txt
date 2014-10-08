@@ -1,0 +1,8 @@
+strip: //*[@class="paginator"]
+body: //*[@id="articleText"]
+next_page_link: //a[@class="next"]
+
+# No author detection
+# No publishing date detection
+# No author and intro deduplication over multiple pages
+test_url: http://webwereld.nl/analyse/111452/de-code-van-dorifel-nader-bekeken.html

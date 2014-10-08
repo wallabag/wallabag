@@ -1,0 +1,18 @@
+# Modified to define the single_page_link
+# This filter is tested on:
+# http://www.ftchinese.com/story/001047373
+# http://www.ftchinese.com/story/001047631
+# http://www.ftchinese.com/story/001047622/?print=y
+# http://www.ftchinese.com/story/001049052
+# http://www.ftchinese.com/story/001049088
+
+title:substring-before(//title, '-')
+author: //div[@class='byline']/a
+date: //a[@class='storytime']
+#Set date in print view
+#date: //div[@class='byline']/a/following-sibling::a
+body: //div[@id="bodytext"]
+strip://div[@class='pagination']
+single_page_link://div[@class='pagination']/a[.='全文']
+#next_page_link: //div[@class='pagination']//a[.='下一页']
+test_url: http://www.ftchinese.com/story/001049088

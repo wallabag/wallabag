@@ -7,4 +7,4 @@ strip_id_or_class: divider-doodle
 
 prune: no
 
-test_url: http://www.dailykos.com/story/2012/01/26/1058790/-Newt-Gingrichs-campaign-admits-he-lied-during-debate-about-ABC-News-interview-with-his ex-wife
+test_url: http://www.dailykos.com/story/2012/01/26/1058790/-Newt-Gingrich-s-campaign-admits-he-lied-during-debate-about-ABC-News-interview-with-his-ex-wife

@@ -1,0 +1,7 @@
+date: //article//time[@pubdate]
+body: //article/div[@id="post-wide"]
+title: //article/header/h2
+strip: /div[@id="comment"]
+strip: //footer
+author: substring-after(//footer/p[@class='byline'] , 'By')
+test_url: http://hackmake.org/2012/12/21/mindfulness-of-concentration

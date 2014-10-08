@@ -1,0 +1,5 @@
+title: //title
+body: //div[contains(@class, 'imageContainer')]
+
+test_url: http://pinterest.com/pin/380906080954441188/
+test_url: http://pinterest.com/michaelsorm/architecture/rss

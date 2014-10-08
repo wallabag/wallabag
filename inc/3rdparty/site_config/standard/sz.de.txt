@@ -1,0 +1,18 @@
+# 2012-12-04: complete rewrite after Süddeutsche.de relaunch - carlo@...
+
+single_page_link: //a[ contains( @href, "/2.220/" ) ]
+
+body: //article[@id="sitecontent"]/section[@class="body"]
+author: //address[@class="author"]
+date: //div[@class="header"]//h1//span[@class="updated"]
+wrap_in(small): //div[@class="footer"]
+wrap_in(i): //figcaption/h3
+dissolve: //figcaption//h3
+dissolve: //figure/div[@class="body"]
+dissolve: //figure/a
+
+strip: //figure[ not( contains(@class, "zoomimage" ) ) ]
+strip: //div[@data-onlineonly="true"]
+strip: //address[@class="author"]
+
+test_url: http://sz.de/1.1556693

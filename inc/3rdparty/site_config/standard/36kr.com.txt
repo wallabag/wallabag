@@ -1,0 +1,8 @@
+title: //h1[contains(@class, 'entry-title')]
+date: //meta[@name='weibo: article:create_at']/@content
+body: //div[contains(@class, 'mainContent')]
+strip_id_or_class: related_topics
+
+prune: no
+
+test_url: http://www.36kr.com/p/207879.html

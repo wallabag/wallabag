@@ -1,0 +1,31 @@
+#Single Page
+single_page_link: //li[contains(@class,"hcf-print")]/a
+
+# Title  hcf-headline
+title: //span[@class='hcf-headline']
+
+# Authors 
+author: //div[@class="hcf-author"]/a/text()
+author: substring-after(//div[@class='hcf-author'], 'von ')
+
+# Date 
+date: //div[@class='hcf-article-date']
+
+# Body
+body: //div[@class='article']
+
+# General removements
+strip: //div[contains(@class,"hcf-smartbox")]
+strip: //div[contains(@class,"hcf-stopper")]
+strip: //div[contains(@class,"hcf-img-controls")]
+strip: //span[@class='hcf-location-mark']
+strip: //span[@class='hcf-copyright']
+strip: //div[@class='hcf-copyright']
+strip: //div[@class='hcf-origin']
+
+
+
+
+# Fix picture captions
+wrap_in(small): //div[@class="hcf-caption"]
+test_url: http://www.handelsblatt.com/meinung/gastbeitraege/gastkommentar-zum-emissionshandel-kurskorrekturen-fuehren-zum-kentern/8044326.html

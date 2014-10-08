@@ -1,0 +1,6 @@
+body: //a[contains(@rel, 'mainphotos')] | //div[contains(@class, 'article-content')]
+
+prune: no
+
+test_url: http://www.protothema.gr//politics/article/326464/diamadopoulou-floridis-kaminis-kai-boutaris-se-ekdilosi-ton-europaion-fileleutheron/
+test_url: http://www.protothema.gr/rss/news/politics/

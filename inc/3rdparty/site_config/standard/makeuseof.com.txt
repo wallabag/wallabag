@@ -1,3 +1,9 @@
-tidy: no
+title: //h1[@class='entry-title']
 
-test_url: http://www.makeuseof.com/dir/kindle-it-web-pages-kindle-friendly/
+body: //article//header//img | //article//section[@class='post']
+
+strip: //article//section[@class='post']/aside
+strip: //article//section[@class='post']/footer
+
+test_url: http://www.makeuseof.com/tag/cool-websites-and-tools-advanced-photo-editor-keep-your-kids-stuff-online-identify-60-languages/
+test_url: http://www.makeuseof.com/tag/what-do-you-think-of-our-new-look-makeuseof-poll/

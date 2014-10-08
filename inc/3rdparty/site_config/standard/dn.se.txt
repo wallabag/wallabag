@@ -23,4 +23,6 @@ author: //div[@id="byline"]/div/p/strong
 
 # Date
 date: substring(substring-after(//p[@class="published"], 'Publicerad '), 0, 11)
+
 test_url: http://www.dn.se/nyheter/varlden/landade-flygplan-mitt-i-villaomrade
+test_url: http://www.dn.se/m/rss/senaste-nytt

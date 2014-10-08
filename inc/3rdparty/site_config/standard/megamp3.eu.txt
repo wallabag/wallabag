@@ -1,0 +1,8 @@
+title: //h3[@class='episode_title']
+body: //ul[contains(@class, 'episode_imgdesc')]/li/descendant::*
+prune: no
+strip://*[contains(@class, 'plugin')]
+strip://*[contains(@class, 'episode_keywords')]
+
+test_url: http://www.megamp3.eu/?p=episode&name=2013-04-19_la_filiere_progressive_431.mp3
+test_url: http://www.megamp3.eu/feed.xml

@@ -1,0 +1,4 @@
+body: //*[contains(@class,'body')]
+date: //abbr[@class='published']
+
+test_url: http://www.cooper.com/journal/2012/08/2-weeks-left-to-win-your-way-to-the-woodstock-of-ux-coopers-ux-boot-camp.html/

@@ -1,0 +1,14 @@
+author://span[contains(@class,'reporter')]
+
+date://span[contains(@class,'date')]
+
+body://div[contains(@class,'mainContaner')]
+
+strip://div[contains(@class,'mainHeaer')]
+strip://div[contains(@class,'keyW')]
+strip://div[contains(@class,'wonderful')]
+strip://div[contains(@class,'pages')]
+strip://div[contains(@class,'Topics TopicsW3')]
+
+next_page_link://li[@class='pageNext']/a[contains(.,'下一頁')]
+test_url: http://www.cw.com.tw/article/article.action?id=5032848

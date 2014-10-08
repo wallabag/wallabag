@@ -1,0 +1,8 @@
+title: //h1[@class='interior-page-title']
+author: //span[@class='author']/a
+date: //div[@class='byline']/time
+body: //div[@class='rich-text-body']
+
+strip: //div[@class='byline']
+strip: //div[@class='offscreen-menu']
+test_url: http://thenextgeneration.org/blog/post/rebrand-announce/

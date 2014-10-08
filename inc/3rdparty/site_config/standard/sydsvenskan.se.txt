@@ -2,10 +2,17 @@ title: //h1
 
 author: //a[contains(@href, '/sok/?')]/text()
 
-date: substring-after(//span[@class='date'], 'Publicerad ')
+date: //meta[@name='bi3dPubDate']/@content
 
-body: //div[@class='two_column_left']
+body: (//div[contains(@class, 'slider_wrapper')])[1] | //div[@id='article_image' or @class='two_column_left']
 strip_id_or_class: story
+strip_id_or_class: article_body_ad
 strip: //div[@class='leadText saplo:lead']/h5
 
+replace_string(<br />): <br /><br />
+
+prune: no
+
+test_url: http://www.sydsvenskan.se/malmo/allt-jag-ager-ligger-pa-botten/
 test_url: http://www.sydsvenskan.se/kultur-och-nojen/-jag-vill-garna--stanna--
+test_url: http://www.sydsvenskan.se/rss.xml

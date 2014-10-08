@@ -1,0 +1,7 @@
+title: //h1[@id='view_title']
+author: //div[contains(@class, 'content_authors')]//a
+body: //div[@id='view_body']
+
+prune: no
+
+test_url: http://www.zcommunications.org/orwellian-language-update-by-edward-s-herman.html

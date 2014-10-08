@@ -1,0 +1,16 @@
+title: //h1[@class='headline']
+title: //h2[@itemprop='alternativeHeadline']
+title: //h1[@itemprop='headline']
+author: //span[@itemprop='name']
+date: //time[@itemprop='datePublished']
+body: //div[@itemprop='reviewBody']
+
+wrap_in(blockquote): //div[@class='factBox']
+
+next_page_link: //a[@rel='next']
+
+strip_id_or_class: 'product-box'
+strip: //a[@rel='next']
+strip: //a[text()='Del på Facebook']
+strip: //a[text()='Del på Twitter']
+test_url: http://www.hardware.no/artikler/asus-vg248qe/132792

@@ -1,0 +1,7 @@
+body: //div[contains(@class, 'layout__inner')]//div[contains(@class, 'file-image') or contains(@class, 'node__content')]
+author: //article//div[contains(@class, 'field-byline')]
+strip_id_or_class: rekommenderade
+strip_id_or_class: disqus
+strip_id_or_class: annonser
+
+test_url: http://www.landetsfria.se/artikel/112070

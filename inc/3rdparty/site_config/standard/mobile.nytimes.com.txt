@@ -1,0 +1,4 @@
+title: //h1[contains(@class, 'headline')]
+body: //article[contains(@class, 'full-art')]
+strip_id_or_class: image-credit
+test_url: http://mobile.nytimes.com/2014/06/19/opinion/gail-collins-romney-and-the-2016-contenders-huddle.html

@@ -1,0 +1,5 @@
+body: //div[@id='imagestage']
+prune: no
+tidy: no
+
+test_url: https://www.facebook.com/feeds/page.php?id=338077742912613&format=rss20

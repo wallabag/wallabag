@@ -1,0 +1,12 @@
+title: //h1[contains(@class,'articleTitle')]
+author: //span[@itemprop='name']
+date: //time[@class='published']
+body: //div[contains(@class,'bodyText')]
+
+strip_id_or_class: 'pull1'
+strip_id_or_class: 'relationArticle'
+strip: //span[@class='quote']
+
+# strip h2 if at end of article (typically a request for comments)
+strip: //div[contains(@class,'bodyText')]/node()[last()-1]/self::h2
+test_url: http://www.bt.no/meninger/debatt/Typisk-norsk-a-vare-god-nok-2884108.html

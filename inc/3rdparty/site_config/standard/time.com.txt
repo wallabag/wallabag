@@ -1,14 +1,12 @@
-# 2011-10-25 - carlo@... - Initial setup.
+title: //h1[contains(@class, 'article-title')]
+author: //article//span[contains(@class, 'byline')]
+date: //time[@pubdate]/@datetime
+body: //section[contains(@class, 'article-body')]
+prune: no
+tidy: no
 
-single_page_link: //li[@class='print']/a/@href
+strip: //figcaption
+strip: //p[contains(., 'MORE:') and ./a]
+strip: //aside
 
-title: //h1
-author: //meta[@name="byline"]/@content
-date: //meta[@name="date"]/@content
-
-strip: //span[@class="see"]
-strip: //div[@class="byline"]
-strip: //div[@id="date2"]
-strip: //h1
-
-test_url: http://www.time.com/time/specials/packages/article/0,28804,2094921_2094923_2094924,00.html
+test_url: http://time.com/14478/emotions-may-not-be-so-universal-after-all/

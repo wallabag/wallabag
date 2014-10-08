@@ -1,0 +1,8 @@
+body: //div[contains(@class, 'copy') or contains(@class, 'comments')]
+strip_id_or_class: related
+strip: //a[. = 'Subscribe']
+strip: //h1/span[@class = 'smallcopy']
+strip: //a[@class = 'skip']
+strip: //div[@id = 'logo']
+strip: //div[contains(@class, 'comments') and contains(., 'You are not currently logged in')]
+test_url: http://www.metafilter.com/128101/Probably-more-secure-than-the-Drafts-folder-on-a-shared-Gmail-account

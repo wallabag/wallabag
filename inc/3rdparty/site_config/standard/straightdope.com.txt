@@ -1,0 +1,6 @@
+body: //div[@id='article' or @id='current_illustration']
+title: //div[@id='article']//h1
+date: //div[@id='article']//div[@class='date']
+prune: no
+
+test_url: http://www.straightdope.com/columns/read/947/whatever-happened-to-adoption-of-the-metric-system-in-the-u-s

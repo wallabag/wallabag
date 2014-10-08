@@ -1,0 +1,11 @@
+title: //h1[contains(@class, 'mainTitle')]
+author: //ul[@class='author']//a[@rel='author']
+body: //div[@id='article-box']
+prune: no
+tidy: no
+strip_id_or_class: head
+strip_id_or_class: social-nav
+strip_id_or_class: rate
+strip_id_or_class: video
+
+test_url: http://www.themarker.com/markerweek/1.2093167

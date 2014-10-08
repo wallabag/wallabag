@@ -1,0 +1,7 @@
+title: //h1[contains(@class, 'fon31 mt2')]
+body: //h2[contains(@class, 'fon33 mt1')] | //div[contains(@class, 'fon34 mt3')]
+
+prune: no
+
+test_url: http://dantri.com.vn/su-kien/chang-trai-mot-minh-dap-xe-vuot-450km-de-vieng-mo-dai-tuong-869763.htm
+test_url: http://dantri.com.vn/trangchu.rss

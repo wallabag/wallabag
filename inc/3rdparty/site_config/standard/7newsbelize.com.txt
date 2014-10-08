@@ -1,0 +1,7 @@
+title: //*[@id='sstitle']
+body: //div[@id='sstory']
+strip_id_or_class: newsoptions
+prune: no
+
+test_url: http://www.7newsbelize.com/sstory.php?nid=25654
+test_url: http://www.7newsbelize.com/7news.xml

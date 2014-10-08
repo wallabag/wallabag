@@ -1,0 +1,5 @@
+date: substring-after(//p[@class='byline'],'Published')
+
+strip: //div[@class='article-meta']
+
+test_url: http://www.business2community.com/social-media/funky-ways-to-print-instagram-photos-0485340

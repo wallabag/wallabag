@@ -26,3 +26,5 @@ Note : If you have large portions of text, use [Github's Gist service](https://g
 
 ## You want to fix a bug or to add a feature
 Please fork wallabag and work with **the dev branch** only. **Do not work on master branch**.
+
+[Don't forget to read our guidelines](https://github.com/wallabag/wallabag/blob/dev/GUIDELINES.md).

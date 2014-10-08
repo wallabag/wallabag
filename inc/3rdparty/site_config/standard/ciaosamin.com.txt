@@ -1,0 +1,4 @@
+body://div[contains(@class, 'entry-content')]
+date://h2[contains(@class, 'date-header')]
+title://h3[contains(@class, 'post-title')]
+test_url: http://www.ciaosamin.com/2013/04/how-this-happened.html

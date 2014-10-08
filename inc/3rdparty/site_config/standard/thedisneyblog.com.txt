@@ -1,0 +1,7 @@
+title: //h1[contains(@class, 'entry-title')]
+author: //span[contains(@class, 'author vcard')]
+date: //span[@class = 'entry-date']
+body: //div[@class='entry-content']
+strip_id_or_class: bottomcontainerBox
+strip_id_or_class: lightsocial_container
+test_url: http://thedisneyblog.com/2012/11/17/videopolis-one-woman-disney-musical-beauty-and-the-beast/

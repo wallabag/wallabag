@@ -1,0 +1,3 @@
+title: //h1
+strip_id_or_class: syntaxhighlighter
+test_url: http://www.oschina.net/translate/event-based-programming-what-async-has-over-sync?print
