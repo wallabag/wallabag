@@ -155,8 +155,10 @@ else if (isset($_POST['install'])) {
                     }
                 }
 
-                // create database structure
-                $query = $handle->exec($sql_structure);
+                if ($_POST['db_engine'] != "sqlite") {
+                    // create database structure
+                    $query = $handle->exec($sql_structure);
+                }
 
                 // Create user
                 $handle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -254,7 +256,7 @@ else if (isset($_POST['install'])) {
                 <?php endif; ?>    
             <?php endif; ?>
             <p>To install wallabag, you just have to fill the following fields. That's all.</p>
-            <p>Don't forget to check your server compatibility <a href="wallabag_compatibility_test.php?from=install">here</a>.</p>
+            <p>Don't forget to check your server compatibility <a href="install/wallabag_compatibility_test.php?from=install">here</a>.</p>
             <form method="post">
                 <fieldset>
                     <legend><strong>Technical settings</strong></legend>
