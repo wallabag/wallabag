@@ -395,7 +395,7 @@ if (isset($_GET['from'])){
 				<p>You can download the latest version of <?php echo $app_name; ?> from <a href="http://wallabag.org/download">wallabag.org</a>.</p>
 				<p>If you already have done that, you should access <a href="index.php">the index.php file</a> of your installation to configure and/or start using wallabag</p>
 				<?php } else { ?>
-				<p>You can now <a href="index.php">return to the installation section</a>.</p>
+				<p>You can now <a href="../index.php">return to the installation section</a>.</p>
 				<?php } ?>
 				<p><strong>Note</strong>: Passing this test does not guarantee that <?php echo $app_name; ?> will run on your webhost &mdash; it only ensures that the basic requirements have been addressed. If you experience any problems, please let us know.</p>
 			<?php //} else if ($php_ok && $xml_ok && $pcre_ok && $mbstring_ok && $allow_url_fopen_ok && $filter_ok) { ?>
@@ -406,7 +406,7 @@ if (isset($_GET['from'])){
 				<p>You can download the latest version of <?php echo $app_name; ?> from <a href="http://wallabag.org/download">wallabag.org</a>.</p>
 				<p>If you already have done that, you should access <a href="index.php">the index.php file</a> of your installation to configure and/or start using wallabag</p>
 				<?php } else { ?>
-				<p>You can now <a href="index.php">return to the installation section</a>.</p>
+				<p>You can now <a href="../index.php">return to the installation section</a>.</p>
 				<?php } ?>
 				<p><strong>Note</strong>: Passing this test does not guarantee that <?php echo $app_name; ?> will run on your webhost &mdash; it only ensures that the basic requirements have been addressed. If you experience any problems, please let us know.</p>
 			<?php } else { ?>
