@@ -1,0 +1,5 @@
+body: //div[@class='post_content']
+date: //div[@class='date_day'] | div[@class='date_month']
+
+test_url: http://www.androidpolice.com/2014/03/30/music-boss-for-pebble-can-now-control-playback-and-volume-on-chromecast-content-from-your-smartwatch/
+

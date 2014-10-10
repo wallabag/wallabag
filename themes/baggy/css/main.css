@@ -89,7 +89,7 @@ form fieldset {
   margin: 0;
 }
 
-form input[type="text"], select, form input[type="password"], form input[type="url"] {
+form input[type="text"], select, form input[type="password"], form input[type="url"], form input[type="email"] {
   border: 1px solid #999;
   padding: 0.5em 1em;
   min-width: 12em;
@@ -630,7 +630,7 @@ a.add-to-wallabag-link-after:after {
 
 #add-link-result {
   font-weight: bold;
-  margin-top: 10px;
+  font-size: 0.9em;
 }
 
 /* ==========================================================================
@@ -923,6 +923,13 @@ blockquote {
   text-decoration: underline;
 }
 
+pre code {
+		font-family: "Courier New", Courier, monospace;
+		border: 1px solid #ccc;
+		font-size: 0.96em;
+}
+
+
 /* ==========================================================================
    6 = Media Queries
    ========================================================================== */
@@ -1055,3 +1062,4 @@ blockquote {
     left: 0;
   }
 }
+

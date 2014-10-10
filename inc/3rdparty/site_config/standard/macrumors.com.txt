@@ -3,6 +3,8 @@ date: substring-before(//div[@class='byline'], " by ")
 
 # set body
 body: //div[@class='content']
+strip_id_or_class: commentsContainer
+strip_id_or_class: linkback
 
 # set title
 title: //h3

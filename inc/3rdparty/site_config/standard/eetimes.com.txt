@@ -1,0 +1,8 @@
+body: //div[contains(@class, 'grayshowlinks')]
+
+next_page_link: //div[@id='sitecontentcol']//a[.='Next >']
+# Doesn't work (site doesn't always load full content in print view)
+#single_page_link: //div[@id='sitecontentcol']//a[contains(@href, 'print=yes')]
+
+test_url: http://www.eetimes.com/document.asp?doc_id=1319966&
+test_url: http://www.eetimes.com/rss_simple.asp

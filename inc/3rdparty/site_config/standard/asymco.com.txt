@@ -1,4 +1,4 @@
-# Johannes Stühler
+# Johannes StÃ¼hler
 
 title://h2
 author://span[@class='meta-content']

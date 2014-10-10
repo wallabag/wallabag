@@ -1,0 +1,7 @@
+title: //div[@id='articleTitleWrapper' or @id='mainFeature']//h1
+author: //*[@id='authorNameJob']//a
+date: //div[@id='articleMeta']/p
+body: //div[@id='mainFeature']//img | //div[contains(@class, 'fullText')]
+
+test_url: http://www.spiked-online.com/newsite/article/standing_up_to_the_white-coated_gods_of_fortune/13785
+test_url: http://www.spiked-online.com/newsite/article/sex_box_and_the_crisis_of_intimacy/14168

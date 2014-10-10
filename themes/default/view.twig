@@ -1,6 +1,7 @@
 {% extends "layout.twig" %}
 {% block title %}{{ entry.title|raw }} ({{ entry.url | e | getDomain }}){% endblock %}
 {% block content %}
+				{% include '_highlight.twig' %}
         {% include '_pocheit-form.twig' %}
         <div id="article_toolbar">
             <ul>
@@ -15,7 +16,7 @@
                 {% if constant('SHARE_SHAARLI') == 1 %}<li><a href="{{ constant('SHAARLI_URL') }}/index.php?post={{ entry.url|url_encode }}&amp;title={{ entry.title|url_encode }}" target="_blank" class="tool shaarli" title="{% trans "shaarli" %}"><span>{% trans "shaarli" %}</span></a></li>{% endif %}
                 {% if constant('FLATTR') == 1 %}{% if flattr.status == constant('FLATTRABLE') %}<li><a href="http://flattr.com/submit/auto?url={{ entry.url }}" class="tool flattr" target="_blank" title="{% trans "flattr" %}"><span>{% trans "flattr" %}</span></a></li>{% elseif flattr.status == constant('FLATTRED') %}<li><a href="{{ flattr.flattrItemURL }}" class="tool flattr" target="_blank" title="{% trans "flattr" %}"><span>{% trans "flattr" %}</span>{{ flattr.numflattrs }}</a></li>{% endif %}{% endif %}
                 {% if constant('SHOW_PRINTLINK') == 1 %}<li><a title="{% trans "Print" %}" class="tool print" href="javascript: window.print();"><span>{% trans "Print" %}</span></a></li>{% endif %}
-                <li><a href="./?epub&amp;method=id&amp;id={{ entry.id|e }}" title="Generate epub file">EPUB</a></li>
+                <li><a href="./?epub&amp;method=id&amp;value={{ entry.id|e }}" title="Generate epub file">EPUB</a></li>
                 <li><a href="mailto:hello@wallabag.org?subject=Wrong%20display%20in%20wallabag&amp;body={{ entry.url|url_encode }}" title="{% trans "Does this article appear wrong?" %}" class="tool bad-display"><span>{% trans "Does this article appear wrong?" %}</span></a></li>
                 {% if constant('SHOW_READPERCENT') == 1 %}<li><div id="readLeftPercent">0%</div></li>{% endif %}
             </ul>

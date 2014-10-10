@@ -1,0 +1,6 @@
+title: //meta[@property='dc:title']/@content
+date: //div[@class='content']//span[@property='dc:date']/@content
+body: //div[@property='content:encoded']
+prune: no
+
+test_url: http://www.usfirst.org/roboticsprograms/frc/Photo-From-Kickoff-Filming

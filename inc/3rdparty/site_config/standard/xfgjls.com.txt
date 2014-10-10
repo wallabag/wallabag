@@ -1,0 +1,11 @@
+# This filter is tested on:
+# http://www.xfgjls.com/magazine/html/?131.html
+# http://www.xfgjls.com/magazine/html/?170.html
+
+body://h3/following-sibling::div
+title: //h3
+date: substring-before(//h3/following-sibling::div/p, ' ')
+author: substring-before(substring-after(//h3/following-sibling::div/p, '作者:'), '来源')
+wrap_in(strong)://span[contains(@style, "FONT-WEIGHT: bold")]
+dissolve://span[@style="FONT-FAMILY: '宋体'; FONT-SIZE: 10.5pt; FONT-WEIGHT: bold; mso-spacerun: 'yes'"]
+test_url: http://www.xfgjls.com/magazine/html/?170.html

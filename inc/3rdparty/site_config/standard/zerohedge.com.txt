@@ -1,0 +1,10 @@
+author: //span[@class='submitted']/a
+strip: //div[@class='clear-block clr']
+strip: //div[@class='picture']
+strip: //span[@class='submitted']
+strip: //div[@class='breadcrumb']
+strip: //div[@class='fivestar-static-form-item']
+strip: //div[@class='js-links']
+strip: //div[@class='links clear-block clear']
+strip: //div[@class='block block-block']
+test_url: http://www.zerohedge.com/news/bernankes-columbus-voyage-end-monetary-policy-world

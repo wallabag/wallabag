@@ -1,0 +1,4 @@
+single_page_link: //div[contains(@class, 'story_tools')]//a[contains(@href, '/print/')]
+
+test_url: http://www.alternet.org/civil-liberties/noam-chomsky-surveillance-state-beyond-imagination-being-created-one-freest
+test_url: http://feeds.feedblitz.com/alternet

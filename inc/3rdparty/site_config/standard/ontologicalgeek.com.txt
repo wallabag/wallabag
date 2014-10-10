@@ -1,0 +1,8 @@
+title: //h1[@class='entry-title']
+
+author: //a[@rel='author']
+
+date: substring-before(//aside[@class='entry-meta'], '|')
+
+body: //div[@class='entry-content']
+test_url: http://ontologicalgeek.com/change-or-live-final-fantasy-x-as-catholic-dystopia/

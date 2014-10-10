@@ -1,0 +1,19 @@
+# This filter is tested on:
+# http://www.zhihu.com/question/19587406
+# http://www.zhihu.com/question/20649035
+# http://www.zhihu.com/question/20637942
+
+author: //h3[@class='zm-item-answer-author-wrap']
+title://h2[@class='zm-item-title']
+date://a[@class='answer-date-link meta-item']
+convert_double_br_tags: yes
+
+wrap_in(blockquote)://div[@class='zm-editable-content']
+wrap_in(blockquote)://sup/text()
+dissolve://sup
+
+strip://div[@class='zh-answers-title']
+strip:///div[@class='zm-item-vote-info ']
+strip://div[@class='zm-item-answer-author-info']
+strip://div[@class='zu-blue-info-board zg-r3px']
+test_url: http://www.zhihu.com/question/20637942

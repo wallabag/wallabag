@@ -1,0 +1,6 @@
+title: //h1[@id='headline']
+author: substring-after(//section[@class="credits"]/ul/li[1],"Interview by ")
+date: //time[@pubdate]
+body: //article[@class='interview']
+strip: //article[@class='interview']/footer
+test_url: http://thegreatdiscontent.com/jeffrey-zeldman

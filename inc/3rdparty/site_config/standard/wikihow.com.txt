@@ -1,0 +1,15 @@
+# ...&printable=yes
+body: //div[@id='bodycontents']
+prune: no
+tidy: no
+strip_id_or_class: gatEditSection
+strip_id_or_class: relatedwikihows
+#strip: //div[contains(@class, 'step_num')]
+
+replace_string(<script ): <div style="display: none" 
+replace_string(</script>): </div>
+
+single_page_link: //a[@id='gatPrintView']
+single_page_link: concat(//link[@rel='canonical']/@href, '?printable=yes')
+
+test_url: http://www.wikihow.com/Start-Your-Own-Country

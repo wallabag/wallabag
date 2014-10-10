@@ -1,0 +1,6 @@
+body: //div[@id='main-column']//div[@class='content']
+
+prune: no
+
+test_url: http://www.albayan.ae/across-the-uae/education/2013-08-29-1.1949645
+test_url: http://www.albayan.ae/1.448?ot=ot.AjaxPageLayout

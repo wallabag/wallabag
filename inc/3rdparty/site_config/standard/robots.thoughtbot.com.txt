@@ -1,0 +1,5 @@
+body: //section[@class='post text']
+title: //h1[@class='title']
+date: //p[@class='post-date']
+strip: //section[@class='meta-info']
+test_url: http://robots.thoughtbot.com/post/32455387133/four-phase-test

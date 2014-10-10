@@ -1,0 +1,12 @@
+title: //h1[@class="entry-title"]
+author: //span[@class="author"]
+body: //article[@itemtype="http://schema.org/Article"]
+date: //time[@itemprop="dateCreated"]
+
+strip: //header[@class="entry-header single-header"]
+strip: //aside[@class="entry-assets"]
+strip: //div[@class="entry-options entry-options-above group"]
+strip: //div[@class="entry-options entry-options-below group"]
+
+convert_double_br_tags: yes
+test_url: http://www.publico.pt/politica/noticia/passos-diz-que-se-limitacao-de-mandatos-fosse-para-todos-os-concelhos-estaria-claro-na-lei-1577691

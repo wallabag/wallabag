@@ -1,0 +1,17 @@
+title: //h1
+body: //div[@id = 'content-area']
+author: //p[contains(@class, 'byline')]/a
+autodetect_next_page: yes
+tidy: no
+
+strip_id_or_class: articleid
+strip_id_or_class: logo
+strip_id_or_class: pagebar
+strip_id_or_class: featurenavlinks
+strip_id_or_class: featured_frontpage
+strip_id_or_class: sidebar
+strip_id_or_class: footer
+strip_id_or_class: byline
+strip_id_or_class: logo
+strip_id_or_class: nav_network
+test_url: http://www.somethingawful.com/d/dungeons-and-dragons/wtf-monster-manual.php

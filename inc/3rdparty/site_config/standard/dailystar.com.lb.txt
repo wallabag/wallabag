@@ -1,0 +1,6 @@
+title: //div[@class='ec-blog-headline']
+body: //*[@id="divDetails"]
+date: //*[@id="ctl00_ContentPlaceHolder1_tdDate"]
+author: //*[@id="ctl00_ContentPlaceHolder1_anchorAuthor"]/a
+autodetect_next_page: no
+test_url: http://dailystar.com.lb/Opinion/Columnist/2012/Oct-10/190803-americas-new-modesty-in-the-mideast.ashx#axzz2928JP5xE

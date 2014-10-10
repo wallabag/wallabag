@@ -1,0 +1,5 @@
+# this site seems to work OK in the web view, but only occasionally in the instapaper app itself.
+
+body: //div[@class='entry-content']
+author: //span[@class='byline']
+test_url: http://qctimes.com/news/local/woman-faces-perjury-charges-in-meth-case/article_83f4c470-956a-11e2-a921-001a4bcf887a.html

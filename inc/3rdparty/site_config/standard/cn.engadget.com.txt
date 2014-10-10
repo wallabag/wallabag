@@ -1,0 +1,5 @@
+title: //h2[@class="posttitle"]
+body: //div[@class="postbody"]
+prune: no
+
+test_url: http://cn.engadget.com/2013/06/29/google-play-music-all-access/

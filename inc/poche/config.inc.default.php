@@ -5,7 +5,7 @@
  * @category   wallabag
  * @author     Nicolas Lœuillet <nicolas@loeuillet.org>
  * @copyright  2013
- * @license    http://www.wtfpl.net/ see COPYING file
+ * @license    http://opensource.org/licenses/MIT see COPYING file
  */
 
 @define ('SALT', ''); # put a strong string here
@@ -59,7 +59,7 @@
 @define ('LOCALE', ROOT . '/locale');
 @define ('CACHE', ROOT . '/cache');
 
-@define ('PAGINATION', '10');
+@define ('PAGINATION', '12');
 
 //limit for download of articles during import
 @define ('IMPORT_LIMIT', 5);

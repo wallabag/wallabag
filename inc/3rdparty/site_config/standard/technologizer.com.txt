@@ -1,0 +1,5 @@
+next_page_link: //a[contains(., 'NEXT PAGE')]
+# following::node() selects text nodes too whereas following::* selects only elements.
+strip: //span[@class='pageo']/following::node()
+strip: //span[@class='pageo']
+test_url: http://technologizer.com/2010/03/08/the-secret-origin-of-windows/

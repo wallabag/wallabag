@@ -1,0 +1,6 @@
+title://article[contains(@id, "post-")]/h1
+date://article[contains(@id, "post-")]/p[@class="time"]/time
+body://article[contains(@id, "post-")]
+strip://article[contains(@id, "post-")]/p[@class="time"]/time
+prune:yes
+test_url: http://css-tricks.com/off-canvas-menu-with-css-target/

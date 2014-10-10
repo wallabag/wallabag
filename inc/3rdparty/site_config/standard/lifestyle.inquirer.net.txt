@@ -1,0 +1,7 @@
+title: //h1[@class='singlePageTitle']
+
+strip: //p[contains(text(), 'Follow Us')]
+strip: //p/strong[contains(text(), 'Recent Stories:')]
+strip: //div[@id="sharefeature"]
+
+test_url: http://lifestyle.inquirer.net/100223/dusting-your-ceiling-fan

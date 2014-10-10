@@ -1,0 +1,6 @@
+body: //div[@class = 'article-body']
+title: //h1[@class = 'article-title']
+strip: //aside
+
+test_url: http://www.newsweek.com/day-steve-mcqueen-met-his-new-nazi-neighbor-keith-moon-229741
+test_url: http://www.newsweek.com/2014/06/13/how-greylock-partners-finds-next-facebook-253329.html

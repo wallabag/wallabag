@@ -1,0 +1,18 @@
+title: //div[@class='articleHead']//h1
+author: //div[@class="author-name"]/a[1]
+body: //div[@class="main"]
+
+# remove 'From the Lab' and 'Recent posts' text
+strip: //div[@class='blogLabel']
+
+# remove byline and meta info
+strip: //div[@class="article-meta"]
+strip: //div[@class="author-info"]
+
+#strip tags and categories
+strip: //div[@class="department"]
+
+#strip product cap links
+strip: //div[@class="cap-main"]
+strip: //div[@id="compare-lede"]
+test_url: http://www.techhive.com/article/2010549/up-close-with-blackberry-10.html

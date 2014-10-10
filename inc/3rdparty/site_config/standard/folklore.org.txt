@@ -1,0 +1,4 @@
+author: /html/body/table[3]/tbody/tr/td[1]/table[2]/tbody/tr[1]/td[2]
+date: /html/body/table[3]/tbody/tr/td[1]/table[2]/tbody/tr[2]/td[2]
+body: //div[@class='main']
+test_url: http://www.folklore.org/StoryView.py?story=Calculator_Construction_Set.txt

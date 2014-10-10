@@ -1,0 +1,4 @@
+title: //span[@class = 'overskriftEkstrastor']
+author: //em/a
+
+test_url: http://dagogtid.no/nyhet.cfm?nyhetid=2414

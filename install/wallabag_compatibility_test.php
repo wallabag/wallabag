@@ -1,10 +1,20 @@
 <?php
+/**
+ * wallabag, self hostable application allowing you to not miss any content anymore
+ *
+ * @category   wallabag
+ * @author     Nicolas Lœuillet <nicolas@loeuillet.org>
+ * @copyright  2013
+ * @license    http://opensource.org/licenses/MIT see COPYING file
+ */
+
 $app_name = 'wallabag';
 
 $php_ok = (function_exists('version_compare') && version_compare(phpversion(), '5.3.3', '>='));
 $pcre_ok = extension_loaded('pcre');
 $zlib_ok = extension_loaded('zlib');
 $mbstring_ok = extension_loaded('mbstring');
+$dom_ok = extension_loaded('DOM');
 $iconv_ok = extension_loaded('iconv');
 $tidy_ok = function_exists('tidy_parse_string');
 $curl_ok = function_exists('curl_exec');
@@ -13,6 +23,8 @@ $parallel_ok = ((extension_loaded('http') && class_exists('HttpRequestPool')) ||
 $allow_url_fopen_ok = (bool)ini_get('allow_url_fopen');
 $filter_ok = extension_loaded('filter');
 $gettext_ok = function_exists("gettext");
+$gd_ok = extension_loaded('gd');
+
 
 if (extension_loaded('xmlreader')) {
 	$xml_ok = true;
@@ -223,10 +235,20 @@ if (isset($_GET['from'])){
 						<td>Enabled</td>
 						<?php echo ($iconv_ok) ? '<td class="good">Enabled' : '<td class="bad">Disabled'; ?></td>
 					</tr> -->
+					<tr class="<?php echo ($dom_ok) ? 'enabled' : 'disabled'; ?>">
+						<td><a href="http://php.net/manual/en/book.dom.php">DOM / XML extension</a></td>
+						<td>Enabled</td>
+						<?php echo ($dom_ok) ? '<td class="good">Enabled' : '<td class="bad">Disabled'; ?></td>
+					</tr>
 					<tr class="<?php echo ($filter_ok) ? 'enabled' : 'disabled'; ?>">
 						<td><a href="http://uk.php.net/manual/en/book.filter.php">Data filtering</a></td>
 						<td>Enabled</td>
 						<?php echo ($filter_ok) ? '<td class="good">Enabled' : '<td class="pass">Disabled'; ?></td>
+					</tr>
+					<tr class="<?php echo ($gd_ok) ? 'enabled' : 'disabled'; ?>">
+						<td><a href="http://php.net/manual/en/book.image.php">GD</a></td>
+						<td>Enabled</td>
+						<?php echo ($gd_ok) ? '<td class="good">Enabled' : '<td class="pass">Disabled'; ?></td>
 					</tr>					
 					<tr class="<?php echo ($tidy_ok) ? 'enabled' : 'disabled'; ?>">
 						<td><a href="http://php.net/tidy">Tidy</a></td>
@@ -266,7 +288,7 @@ if (isset($_GET['from'])){
 			<h3>What does this mean?</h3>
 			<ol>
 				<?php //if ($php_ok && $xml_ok && $pcre_ok && $mbstring_ok && $iconv_ok && $filter_ok && $zlib_ok && $tidy_ok && $curl_ok && $parallel_ok && $allow_url_fopen_ok): ?>
-				<?php if ($php_ok && $xml_ok && $pcre_ok && $filter_ok && $tidy_ok && $curl_ok && $parallel_ok && $allow_url_fopen_ok && $gettext_ok && $parse_ini_ok): ?>
+				<?php if ($php_ok && $xml_ok && $pcre_ok && $dom_ok && $filter_ok && $gd_ok && $tidy_ok && $curl_ok && $parallel_ok && $allow_url_fopen_ok && $gettext_ok && $parse_ini_ok): ?>
 				<li><em>You have everything you need to run <?php echo $app_name; ?> properly!  Congratulations!</em></li>
 				<?php else: ?>
 					<?php if ($php_ok): ?>
@@ -283,48 +305,62 @@ if (isset($_GET['from'])){
 										<li><strong>Gettext:</strong> You have <code>gettext</code> enabled. <em>No problems here.</em></li>
                                         
                                         <?php if ($parse_ini_ok): ?>
-                                        
-                                            <?php if ($filter_ok): ?>
-                                                <li><strong>Data filtering:</strong> You have the PHP filter extension enabled. <em>No problems here.</em></li>
-        
-                                                <?php if ($zlib_ok): ?>
-                                                    <li><strong>Zlib:</strong> You have <code>Zlib</code> enabled.  This allows SimplePie to support GZIP-encoded feeds.  <em>No problems here.</em></li>
-                                                <?php else: ?>
-                                                    <li><strong>Zlib:</strong> The <code>Zlib</code> extension is not available.  SimplePie will ignore any GZIP-encoding, and instead handle feeds as uncompressed text.</li>
-                                                <?php endif; ?>
-                                                
-                                                <?php if ($mbstring_ok && $iconv_ok): ?>
-                                                    <li><strong>mbstring and iconv:</strong> You have both <code>mbstring</code> and <code>iconv</code> installed!  This will allow <?php echo $app_name; ?> to handle the greatest number of languages. <em>No problems here.</em></li>
-                                                <?php elseif ($mbstring_ok): ?>
-                                                    <li><strong>mbstring:</strong> <code>mbstring</code> is installed, but <code>iconv</code> is not.</li>
-                                                <?php elseif ($iconv_ok): ?>
-                                                    <li><strong>iconv:</strong> <code>iconv</code> is installed, but <code>mbstring</code> is not.</li>
-                                                <?php else: ?>
-                                                    <li><strong>mbstring and iconv:</strong> <em>You do not have either of the extensions installed.</em> This will significantly impair your ability to read non-English feeds, as well as even some English ones.</li>
-                                                <?php endif; ?>
+                                        	<li><strong>Parse ini:</strong> You can parse <em>ini</em> files. <em>No problems here.</em></li>
 
-                                                <?php if ($tidy_ok): ?>
-                                                    <li><strong>Tidy:</strong> You have <code>Tidy</code> support installed.  <em>No problems here.</em></li>
-                                                <?php else: ?>
-                                                    <li><strong>Tidy:</strong> The <code>Tidy</code> extension is not available.  <?php echo $app_name; ?> should still work with most feeds, but you may experience problems with some.</li>
-                                                <?php endif; ?>
-                                            
-                                                <?php if ($curl_ok): ?>
-                                                    <li><strong>cURL:</strong> You have <code>cURL</code> support installed.  <em>No problems here.</em></li>
-                                                <?php else: ?>
-                                                    <li><strong>cURL:</strong> The <code>cURL</code> extension is not available.  SimplePie will use <code>fsockopen()</code> instead.</li>
-                                                <?php endif; ?>
-                
-                                                <?php if ($parallel_ok): ?>
-                                                    <li><strong>Parallel URL fetching:</strong> You have <code>HttpRequestPool</code> or <code>curl_multi</code> support installed.  <em>No problems here.</em></li>
-                                                <?php else: ?>
-                                                    <li><strong>Parallel URL fetching:</strong> <code>HttpRequestPool</code> or <code>curl_multi</code> support is not available.  <?php echo $app_name; ?> will use <code>file_get_contents()</code> instead to fetch URLs sequentially rather than in parallel.</li>
-                                                <?php endif; ?>
-
-                                            <?php else: ?>
-                                                <li><strong>Data filtering:</strong> Your PHP configuration has the filter extension disabled.  <strong><?php echo $app_name; ?> will not work here.</strong></li>
-                                            <?php endif; ?>
+                                        	<?php if ($dom_ok): ?>
+                                        		<li><strong>DOM/XML:</strong> You can parse <em>ini</em> files. <em>No problems here.</em></li>
                                         
+	                                            <?php if ($filter_ok): ?>
+	                                                <li><strong>Data filtering:</strong> You can use the PHP build-in DOM to operate on XML documents. <em>No problems here.</em></li>
+	        
+	                                                <?php if ($zlib_ok): ?>
+	                                                    <li><strong>Zlib:</strong> You have <code>Zlib</code> enabled.  This allows SimplePie to support GZIP-encoded feeds.  <em>No problems here.</em></li>
+	                                                <?php else: ?>
+	                                                    <li><strong>Zlib:</strong> The <code>Zlib</code> extension is not available.  SimplePie will ignore any GZIP-encoding, and instead handle feeds as uncompressed text.</li>
+	                                                <?php endif; ?>
+	                                                
+	                                                <?php if ($mbstring_ok && $iconv_ok): ?>
+	                                                    <li><strong>mbstring and iconv:</strong> You have both <code>mbstring</code> and <code>iconv</code> installed!  This will allow <?php echo $app_name; ?> to handle the greatest number of languages. <em>No problems here.</em></li>
+	                                                <?php elseif ($mbstring_ok): ?>
+	                                                    <li><strong>mbstring:</strong> <code>mbstring</code> is installed, but <code>iconv</code> is not.</li>
+	                                                <?php elseif ($iconv_ok): ?>
+	                                                    <li><strong>iconv:</strong> <code>iconv</code> is installed, but <code>mbstring</code> is not.</li>
+	                                                <?php else: ?>
+	                                                    <li><strong>mbstring and iconv:</strong> <em>You do not have either of the extensions installed.</em> This will significantly impair your ability to read non-English feeds, as well as even some English ones.</li>
+	                                                <?php endif; ?>
+
+	                                                <?php if ($gd_ok): ?>
+	                                                    <li><strong>GD:</strong> You have <code>GD</code> support installed.  <em>No problems here.</em></li>
+	                                                <?php else: ?>
+	                                                    <li><strong>GD:</strong> The <code>GD</code> extension is not available.  <?php echo $app_name; ?> will not be able to download pictures locally on your server.</li>
+	                                                <?php endif; ?>
+
+	                                                <?php if ($tidy_ok): ?>
+	                                                    <li><strong>Tidy:</strong> You have <code>Tidy</code> support installed.  <em>No problems here.</em></li>
+	                                                <?php else: ?>
+	                                                    <li><strong>Tidy:</strong> The <code>Tidy</code> extension is not available.  <?php echo $app_name; ?> should still work with most feeds, but you may experience problems with some.</li>
+	                                                <?php endif; ?>
+	                                            
+	                                                <?php if ($curl_ok): ?>
+	                                                    <li><strong>cURL:</strong> You have <code>cURL</code> support installed.  <em>No problems here.</em></li>
+	                                                <?php else: ?>
+	                                                    <li><strong>cURL:</strong> The <code>cURL</code> extension is not available.  SimplePie will use <code>fsockopen()</code> instead.</li>
+	                                                <?php endif; ?>
+	                
+	                                                <?php if ($parallel_ok): ?>
+	                                                    <li><strong>Parallel URL fetching:</strong> You have <code>HttpRequestPool</code> or <code>curl_multi</code> support installed.  <em>No problems here.</em></li>
+	                                                <?php else: ?>
+	                                                    <li><strong>Parallel URL fetching:</strong> <code>HttpRequestPool</code> or <code>curl_multi</code> support is not available.  <?php echo $app_name; ?> will use <code>file_get_contents()</code> instead to fetch URLs sequentially rather than in parallel.</li>
+	                                                <?php endif; ?>
+
+		                                        <?php else: ?>
+		                                            <li><strong>Data filtering:</strong> Your PHP configuration has the filter extension disabled.  <strong><?php echo $app_name; ?> will not work here.</strong></li>
+		                                        <?php endif; ?>
+
+		                                    <?php else: ?>
+		                                    	<li><strong>DOM/XML:</strong> Your PHP configuration isn't standard, you're missing PHP-DOM.  You may try to install a package or recompile PHP. <strong><?php echo $app_name; ?> will not work here.</strong></li>
+                                        	<?php endif; ?>
+
                                         <?php else : ?>
                                             <li><strong>Parse ini files function :</strong> Bad luck : your webhost has decided to block the use of the <em>parse_ini_file</em> function. <strong><?php echo $app_name; ?> will not work here.</strong>
                                         <?php endif; ?>
@@ -359,7 +395,7 @@ if (isset($_GET['from'])){
 				<p>You can download the latest version of <?php echo $app_name; ?> from <a href="http://wallabag.org/download">wallabag.org</a>.</p>
 				<p>If you already have done that, you should access <a href="index.php">the index.php file</a> of your installation to configure and/or start using wallabag</p>
 				<?php } else { ?>
-				<p>You can now <a href="index.php">return to the installation section</a>.</p>
+				<p>You can now <a href="../index.php">return to the installation section</a>.</p>
 				<?php } ?>
 				<p><strong>Note</strong>: Passing this test does not guarantee that <?php echo $app_name; ?> will run on your webhost &mdash; it only ensures that the basic requirements have been addressed. If you experience any problems, please let us know.</p>
 			<?php //} else if ($php_ok && $xml_ok && $pcre_ok && $mbstring_ok && $allow_url_fopen_ok && $filter_ok) { ?>
@@ -370,7 +406,7 @@ if (isset($_GET['from'])){
 				<p>You can download the latest version of <?php echo $app_name; ?> from <a href="http://wallabag.org/download">wallabag.org</a>.</p>
 				<p>If you already have done that, you should access <a href="index.php">the index.php file</a> of your installation to configure and/or start using wallabag</p>
 				<?php } else { ?>
-				<p>You can now <a href="index.php">return to the installation section</a>.</p>
+				<p>You can now <a href="../index.php">return to the installation section</a>.</p>
 				<?php } ?>
 				<p><strong>Note</strong>: Passing this test does not guarantee that <?php echo $app_name; ?> will run on your webhost &mdash; it only ensures that the basic requirements have been addressed. If you experience any problems, please let us know.</p>
 			<?php } else { ?>

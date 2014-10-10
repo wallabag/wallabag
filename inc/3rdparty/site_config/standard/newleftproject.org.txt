@@ -1,0 +1,3 @@
+title: //div[contains(@class, 'article_header')]//h3
+
+test_url: http://www.newleftproject.org/index.php/site/article_comments/do_we_need_a_facebook_of_the_left

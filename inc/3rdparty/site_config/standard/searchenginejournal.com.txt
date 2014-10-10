@@ -1,0 +1,5 @@
+strip: //ul[contains(@id, "social")]
+strip: //div[contains(@class, "ts-fab-wrapper")]
+strip: //div[contains(@id, 'gpt-ad')]
+
+test_url: http://www.searchenginejournal.com/web-design-vs-seo-it-doesnt-make-much-sense/62294/

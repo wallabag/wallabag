@@ -1,18 +1,20 @@
-title: //h1[contains(@class, "headline")]
-
 author: //p[contains(@class, "byline")]/a[contains(@class, "author")]
 
-date: substring-after(normalize-space(//p[contains(@class, "byline")]/span[contains(@class, "publish-date")]), "on ")
+date: //span[contains(@class, "publish-date")]/time[@pubdate]/@datetime
 
-body: //article[contains(@class, 'feature-entry')]
+body: //div[contains(@class, 'entry-content')]
+# for vergecasts, e.g. http://www.theverge.com/2013/8/22/4648566/the-vergecast-090-august-22th-2013-video
 body: //article
 prune: no
-tidy: no
+#tidy: no
 
 strip: //article/header
 strip: //*[@id='sticky-menu']
 strip: //aside
 strip: //nav
+strip: //img[contains(@class, 'vox-lazy-load')]
+# deal with bad parsing
+strip: //div[contains(@class, 'story-image')]//div[contains(., 'function(')]
 
 strip_id_or_class: gallery
 strip_id_or_class: article-meta
@@ -22,6 +24,18 @@ strip_id_or_class: related-product-meta
 strip_id_or_class: comments
 strip_id_or_class: ui-jump-list
 strip_id_or_class: pullquote
+strip_id_or_class: m-ad
+strip_id_or_class: social-sharing
+strip_id_or_class: m-video-entry__excerpt
+strip_id_or_class: hidden
+
+replace_string(<noscript>): <div>
+replace_string(</noscript>): </div>
+
+find_string: <script
+replace_string: <div style="display:none" 
+find_string: </script>
+replace_string: </div>
 
 strip: //q
 
@@ -29,3 +43,6 @@ strip: //a[contains(@class, 'entry-section-title')]
 
 test_url: http://www.theverge.com/2012/2/29/2821763/lytro-review
 test_url: http://www.theverge.com/2011/11/3/2534861/nokia-lumia-800-review
+test_url: http://www.theverge.com/2013/2/24/4026114/barnes-noble-shifting-focus-away-from-nook-hardware
+test_url: http://www.theverge.com/2014/6/19/5824072/top-shelf-living-the-dream
+test_url: http://www.theverge.com/rss/frontpage

@@ -1,0 +1,4 @@
+body://div[@id="print-news"]
+strip://a
+strip://span[@class="date-line"]
+test_url: http://www.thanhnien.com.vn/pages/20121006/hon-90-trieu-usd-nang-cap-do-thi-can-tho.aspx

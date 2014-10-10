@@ -1,0 +1,6 @@
+title: //article[@class='post']/header[@class='wrapper']//h1/a
+author: //header[@id='masthead']//h1/a
+date: //article[@class='post']/header[@class='wrapper']//p[@class='postdate']
+body: //div[@id='body-content']
+
+test_url: http://sivers.org/delegate/

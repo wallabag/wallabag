@@ -1,0 +1,14 @@
+## ERROR: Removes all images. Please fix, have no idea why (bad HTML?)
+
+title: //h1[@class='featuretitle']
+body: //div[@id='nobordercontentarea']
+
+# remove Twitter badge
+strip: //img[@alt='Follow tgdfweb on Twitter']
+
+# fix for headers not showing for some reason
+wrap_in(h2): //h2[@class='sectionheader']
+dissolve: //h2[@class='sectionheader']
+
+tidy: yes
+test_url: http://thegamedesignforum.com/features/acceleration_flow_1.html

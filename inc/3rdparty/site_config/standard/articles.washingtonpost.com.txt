@@ -1,0 +1,11 @@
+body: //div[contains(@class, "article_body")]
+# print view
+body: //div[@id='print_facet']//div[@id='body']
+
+tidy: no
+prune: no
+
+single_page_link: concat(substring-before(//div[@id="echo_container_a"]/@guid, '_story.html'), '_print.html')
+
+test_url: http://articles.washingtonpost.com/2011-10-22/world/35279694_1_germany-acts-german-leaders-chancellor-angela-merkel
+test_url: http://articles.washingtonpost.com/2013-05-31/opinions/39658000_1_chemical-weapons-mass-destruction-cartels

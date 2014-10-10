@@ -1,0 +1,4 @@
+body: //div[@class='post-content']
+prune: no
+
+test_url: http://www.luxuo.com/watches/feed

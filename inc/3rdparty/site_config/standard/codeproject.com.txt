@@ -1,0 +1,3 @@
+body: //div[@id="contentdiv"]
+date: //span[@class="date"]
+test_url: http://www.codeproject.com/Articles/499902/Profiling-Entity-Framework-5-in-code
