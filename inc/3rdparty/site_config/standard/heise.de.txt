@@ -1,7 +1,9 @@
-single_page_link: //p[@class='news_option']/a
+#second part of single_page_link for telepolis-articles (desktop-version of site)
+single_page_link: //p[@class='news_option']/a | //a[@id='tp-druckversion']
 
 date: //p[@class='news_datum']
 title: //h1
 body: //div[@class='meldung_wrapper']
 
 test_url: http://www.heise.de/newsticker/meldung/Europa-soll-Grundrechteschutz-im-Netz-staerken-1392664.html
+test_url: http://www.heise.de/tp/artikel/42/42579/1.html
