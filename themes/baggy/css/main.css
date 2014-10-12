@@ -180,7 +180,7 @@ h2:after {
   padding-top: 9.5em;
   height: 100%;
   box-shadow:inset -4px 0 20px rgba(0,0,0,0.6);
-  z-index: 10;
+  z-index: 15;
 }
 
 #main {
