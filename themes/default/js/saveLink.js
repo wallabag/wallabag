@@ -13,7 +13,7 @@ $.fn.ready(function() {
 
     $bagit.toggleClass("active-current");
 
-    //only if bagiti link is not presented on page
+    //only if bag-it link is not presented on page
     if ( $bagit.length === 0 ) {
       if ( event !== 'undefined' && event ) {
         $bagitForm.css( {position:"absolute", top:event.pageY, left:event.pageX-200});
@@ -23,6 +23,11 @@ $.fn.ready(function() {
       }
     }
 
+    if ($("#search-form").length != 0) {
+    	$("#search").removeClass("current");
+    	$("#search-arrow").removeClass("arrow-down");
+    	$("#search-form").hide();
+    }
     $bagitForm.toggle();
     $('#content').toggleClass("opacity03");
     if (url !== 'undefined' && url) {
