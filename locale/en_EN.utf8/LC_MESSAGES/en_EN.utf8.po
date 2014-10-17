@@ -571,6 +571,36 @@ msgstr ""
 msgid "Enter your search here"
 msgstr "Enter your search here"
 
+msgid "Apply the tag  %search_term% to this search"
+msgstr "Apply the tag %search_term% to this search"
+
+# ebook
+msgid "Fancy an E-Book ?"
+msgstr "Fancy an E-Book ?"
+
+msgid ""
+"Click on <a href=\"./?epub&amp;method=all\" title=\"Generate ePub\">this "
+"link</a> to get all your articles in one ebook (ePub 3 format)."
+msgstr ""
+"Click on <a href=\"./?epub&amp;method=all\" title=\"Generate ePub\">this "
+"link</a> to get all your articles in one ebook (ePub 3 format)."
+
+msgid ""
+"This can <b>take a while</b> and can <b>even fail</b> if you have too many "
+"articles, depending on your server configuration."
+msgstr ""
+"This can <b>take a while</b> and can <b>even fail</b> if you have too many "
+"articles, depending on your server configuration."
+
+msgid "Download the articles from this tag in an epub"
+msgstr "Download the articles from this tag in an epub"
+
+msgid "Download the articles from this search in an epub"
+msgstr "Download the articles from this search in an epub"
+
+msgid "Download the articles from this category in an epub"
+msgstr "Download the articles from this category in an epub"
+
 #~ msgid "poche it!"
 #~ msgstr "poche it!"
 

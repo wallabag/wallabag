@@ -655,3 +655,33 @@ msgstr "Cache effacé."
 
 msgid "Oops, it seems you don't have PHP 5."
 msgstr "Oups, vous ne semblez pas avoir PHP 5."
+
+msgid "Apply the tag  %search_term% to this search"
+msgstr "Appliquer le tag %search_term% à ces résultats"
+
+# ebook
+msgid "Fancy an E-Book ?"
+msgstr "Envie d'un E-Book ?"
+
+msgid ""
+"Click on <a href=\"./?epub&amp;method=all\" title=\"Generate ePub\">this "
+"link</a> to get all your articles in one ebook (ePub 3 format)."
+msgstr ""
+"Cliquez sur <a href=\"./?epub&amp;method=all\" title=\"Générer ePub\">ce "
+"lien</a> pour obtenir tous vos articles (format ePub 3)."
+
+msgid ""
+"This can <b>take a while</b> and can <b>even fail</b> if you have too many "
+"articles, depending on your server configuration."
+msgstr ""
+"Ceci peut <b>prendre un moment</b> et même <b>échouer</b> si vous avez trop "
+"d'articles, selon la configuration de votre serveur."
+
+msgid "Download the articles from this tag in an epub"
+msgstr "Télécharger les articles de ce tag dans un epub"
+
+msgid "Download the articles from this search in an epub"
+msgstr "Télécharger les articles de cette recherche dans un epub"
+
+msgid "Download the articles from this category in an epub"
+msgstr "Télécharger les articles de cette catégorie dans un epub"
