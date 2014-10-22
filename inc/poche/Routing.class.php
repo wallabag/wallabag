@@ -119,7 +119,7 @@ class Routing
             } elseif (isset($_GET['deluser'])) {
                 $this->wallabag->deleteUser($_POST['password4deletinguser']);
             } elseif (isset($_GET['epub'])) {
-                $epub = new WallabagEpub($this->wallabag, $_GET['method'], $_GET['id'], $_GET['value']);
+                $epub = new WallabagEpub($this->wallabag, $_GET['method'], $_GET['value']);
                 $epub->run();
             } elseif (isset($_GET['import'])) {
                 $import = $this->wallabag->import();
