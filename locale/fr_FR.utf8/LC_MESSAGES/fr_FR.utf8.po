@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-05-10 20:09+0100\n"
 "PO-Revision-Date: \n"
-"Last-Translator: tcit <tcit@tcit.fr>\n"
+"Last-Translator: tcit <tcit@openmailbox.org>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.6.9\n"
+"X-Generator: Poedit 1.5.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "wallabag, a read it later open source system"
@@ -372,6 +372,24 @@ msgstr "Cet article s'affiche mal ?"
 msgid "tags:"
 msgstr "tags :"
 
+msgid "Add tags:"
+msgstr "Ajouter des tags :"
+
+msgid "no tags"
+msgstr "pas de tags"
+
+msgid "The tag has been applied successfully"
+msgstr "Le tag a été appliqué avec succès"
+
+msgid "interview"
+msgstr "interview"
+
+msgid "editorial"
+msgstr "éditorial"
+
+msgid "video"
+msgstr "vidéo"
+
 msgid "Edit tags"
 msgstr "Modifier les tags"
 
@@ -655,3 +673,33 @@ msgstr "Cache effacé."
 
 msgid "Oops, it seems you don't have PHP 5."
 msgstr "Oups, vous ne semblez pas avoir PHP 5."
+
+msgid "Tag these results as"
+msgstr "Appliquer à ces résultats le tag"
+
+# ebook
+msgid "Fancy an E-Book ?"
+msgstr "Envie d'un E-Book ?"
+
+msgid ""
+"Click on <a href=\"./?epub&amp;method=all\" title=\"Generate ePub\">this "
+"link</a> to get all your articles in one ebook (ePub 3 format)."
+msgstr ""
+"Cliquez sur <a href=\"./?epub&amp;method=all\" title=\"Générer ePub\">ce "
+"lien</a> pour obtenir tous vos articles (format ePub 3)."
+
+msgid ""
+"This can <b>take a while</b> and can <b>even fail</b> if you have too many "
+"articles, depending on your server configuration."
+msgstr ""
+"Ceci peut <b>prendre un moment</b> et même <b>échouer</b> si vous avez trop "
+"d'articles, selon la configuration de votre serveur."
+
+msgid "Download the articles from this tag in an epub"
+msgstr "Télécharger les articles de ce tag dans un epub"
+
+msgid "Download the articles from this search in an epub"
+msgstr "Télécharger les articles de cette recherche dans un epub"
+
+msgid "Download the articles from this category in an epub"
+msgstr "Télécharger les articles de cette catégorie dans un epub"
