@@ -589,8 +589,8 @@ msgstr ""
 msgid "Enter your search here"
 msgstr "Enter your search here"
 
-msgid "Apply the tag  %search_term% to this search"
-msgstr "Apply the tag %search_term% to this search"
+msgid "Tag these results as"
+msgstr "Tag these results as"
 
 # ebook
 msgid "Fancy an E-Book ?"

@@ -674,8 +674,8 @@ msgstr "Cache effacé."
 msgid "Oops, it seems you don't have PHP 5."
 msgstr "Oups, vous ne semblez pas avoir PHP 5."
 
-msgid "Apply the tag  %search_term% to this search"
-msgstr "Appliquer le tag %search_term% à ces résultats"
+msgid "Tag these results as"
+msgstr "Appliquer à ces résultats le tag"
 
 # ebook
 msgid "Fancy an E-Book ?"
