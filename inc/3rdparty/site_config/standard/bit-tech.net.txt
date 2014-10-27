@@ -1,0 +1,19 @@
+body: //div[@id='column_1']
+next_page_link: //div[@class='next']/a[not(contains(@href, '/comments') or contains(@href, '/news/'))]
+prune: no
+
+author: substring-after(//p[@class='byline'], 'by ')
+date: substring-before(substring-after(//p[@class='byline'], 'on '), ' by')
+
+strip: //h1
+strip_id_or_class: socialLinks
+strip_id_or_class: byline
+strip_id_or_class: pageSelector
+strip_id_or_class: articleTabs
+strip_id_or_class: pageNav
+strip_id_or_class: share
+strip_id_or_class: commentsContainer
+strip_id_or_class: below_article_related
+
+test_url: http://www.bit-tech.net/hardware/storage/2014/08/13/ocz-arc-100-240gb-review/1
+test_url: http://www.bit-tech.net/news/bits/2014/08/15/google-trojan/1

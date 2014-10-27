@@ -19,5 +19,8 @@ strip: //p[@class='nota_pie']
 strip: //div[starts-with(@id, 'sumario') and contains(., 'más información')]
 strip: //div[@id='coment' or @id='foros_not']
 
-test_url: http://elpais.com/elpais/2012/02/06/gente/1328526783_491687.html
-test_url: http://www.elpais.com/articulo/cultura/mano/retrato/materia/elpepicul/20120207elpepicul_2/Tes
+test_url: http://brasil.elpais.com/brasil/2014/10/15/politica/1413334841_878730.html
+test_contains: O PT quer intensificar a presença do ex-presidente
+
+test_url: http://brasil.elpais.com/brasil/2014/10/13/internacional/1413225730_450761.html
+test_contains: Todos na localidade onde ele nasceu ainda falavam da façanha

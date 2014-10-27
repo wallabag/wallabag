@@ -1,4 +1,3 @@
-# 2014-10-21 [Marmo] added stripping of inline ads and appropriate test_url
 # 2013.10.30 [rezor92] fixed single_page_link
 # 2012-12-23 [carlo@...] fixed half-assed headlines in articles, removed inline author profiles, adjusted picture captions
 # 2012-03-17 [dkless@...] Cut metadata parts in the beginning and the ends of the content block; copyright entries for pictures removed; Author fixed, not sure if old entries still valid (I left them); Weird problems with some pages addressed (see last section for removing hidden section)
@@ -17,8 +16,6 @@ author: substring-after(//li[@class='source first '], 'Quelle: ')
 
 strip_id_or_class: articleheader
 strip: //div[@id="comments"] | //div[@class="pagination block"] | //p[@class="ressortbacklink"] | //div[@id="relatedArticles"]  |  // div[@class="inline portrait"]
-#Remove inline ads
-strip: //div[@class="innerad"]
 
 #Removes author and date from the start
 strip: //ul[@class="tools"]
@@ -46,4 +43,3 @@ strip_id_or_class:"pagination"
 
 footnotes: no
 test_url: http://www.zeit.de/kultur/film/2012-12/Kurzfilmtag
-test_url: http://www.zeit.de/wissen/2014-10/ebola-nigeria-who

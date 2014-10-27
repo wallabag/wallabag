@@ -1,0 +1,25 @@
+# Author: zinnober
+
+tidy: no
+prune: no
+
+# Set author
+author: //a[contains(@rel, 'author')]
+
+# Content is here
+body: //article
+
+# Tidy up before article
+strip: //header
+
+# Get rid of doubled images
+strip: //img[contains(@class, '-hidden')]
+
+# Tidy up after article
+strip_id_or_class: social-list
+strip_id_or_class: meta-info
+strip: //footer
+
+# Try it yourself
+test_url: http://www.thisiscolossal.com/2014/09/chicago-in-the-fog-by-michael-salisbury/
+test_url: http://www.thisiscolossal.com/2014/09/bird-portraits-ruffling-with-personality-by-leila-jeffreys/

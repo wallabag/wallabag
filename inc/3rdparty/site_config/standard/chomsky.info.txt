@@ -3,3 +3,4 @@ author: //div[@class='author']
 prune: no
 
 test_url: http://www.chomsky.info/onchomsky/2002----.htm
+test_contains: The propaganda model argues

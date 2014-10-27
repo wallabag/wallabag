@@ -1,0 +1,7 @@
+title: //div[@itemprop='headline']
+body: //noscript/img | //div[@itemprop='text']
+author: //div[@class='meta meta--post']//a[@class='is-author']
+date: //div[@class='meta meta--post']//time/@datetime
+
+test_url: http://www.lifehacker.co.uk/2014/08/22/dealhacker-10-google-chromecast-super-cheap-batteries-much
+test_url: http://www.lifehacker.co.uk/2014/08/18/andrognito-hides-files-youd-like-keep-away-prying-eyes

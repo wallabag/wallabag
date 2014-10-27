@@ -2,4 +2,4 @@ body: //table[@class='ap-smallphoto-table'] | //div[@class='body']//*[@class='en
 tidy: no
 strip_image_src: analytics.apnewsregistry
 
-test_url: http://hosted.ap.org/dynamic/stories/U/US_SPENDING_SHOWDOWN?SITE=FLPET&SECTION=HOME&TEMPLATE=DEFAULT&CTIME=2011-04-06-07-46-50
+test_url: http://hosted.ap.org/dynamic/stories/E/EU_TURKEY_KURDS?SITE=KSNEW&SECTION=HOME&TEMPLATE=DEFAULT&CTIME=2014-10-14-10-50-25

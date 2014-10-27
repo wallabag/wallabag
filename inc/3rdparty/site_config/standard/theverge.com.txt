@@ -15,6 +15,11 @@ strip: //nav
 strip: //img[contains(@class, 'vox-lazy-load')]
 # deal with bad parsing
 strip: //div[contains(@class, 'story-image')]//div[contains(., 'function(')]
+strip: //div[contains(@class, 'm-linkset')]
+strip: //div[contains(@class, 'm-entry__sidebar')]
+strip: //ul[contains(@class, 'm-article__sources')]
+strip: //div[contains(@class, 'chorus-emc__content')]
+
 
 strip_id_or_class: gallery
 strip_id_or_class: article-meta

@@ -1,0 +1,16 @@
+body: //div[contains(@class, 'article_pages')]
+
+strip_id_or_class: article_page-header
+strip_id_or_class: paginator
+strip_id_or_class: article_info
+
+find_string: src="data:image
+replace_string: ignore-src="data:image
+find_string: data-defer-src="
+replace_string: src="
+
+prune: no
+
+test_url: http://bleacherreport.com/articles/feed
+test_url: http://bleacherreport.com/articles/2137787-christian-ponders-newborn-daughter-was-named-after-fsu-legend-bobby-bowden
+test_url: http://bleacherreport.com/articles/2137596-college-football-week-1-picks-unlv-runnin-rebels-vs-arizona-wildcats/

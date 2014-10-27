@@ -1,4 +1,5 @@
 body: //div[@class='main-content']
+body: //article[contains(@class, 'resp-node')]
 date: //time[@class='date-created']
 strip: //aside
 prune: no
@@ -6,3 +7,7 @@ prune: no
 autodetect_next_page: no
 
 test_url: http://www.economist.com/node/21528429
+
+test_url: http://www.economist.com/news/essays/21623373-which-something-old-and-powerful-encountered-vault
+test_contains: the calfskin pages are smooth
+test_contains: Books will evolve online and off

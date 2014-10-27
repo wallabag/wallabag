@@ -1,0 +1,23 @@
+# Author: zinnober
+
+prune: no
+
+title: substring-before(//div[@id='content']/h1, ',')
+
+single_page_link: //a[@title='Seite drucken']
+
+body: //div[@id='detail-body']
+
+replace_string(<span class="description">): <em>
+replace_string(<p class="leadtext"><small>): <p class="leadtext">
+
+# Fix headlines
+replace_string(Patrick Hollstein): &nbsp;
+replace_string(APOTHEKE ADHOC): &nbsp;
+replace_string(dpa): &nbsp;
+replace_string(Katharina Lübke): &nbsp;
+replace_string(Julia Pradel): &nbsp;
+replace_string(Franziska Gerhardt): &nbsp;
+
+test_url: http://www.apotheke-adhoc.de/nachrichten/politik/nachricht-detail-politik/deutscher-apothekertag-antraege-gegen-lieferengpaesse-2/
+

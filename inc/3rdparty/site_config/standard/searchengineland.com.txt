@@ -1,4 +1,4 @@
-body: //div[@class="storyBox"]
+body: //div[contains(concat(' ',normalize-space(@class),' '),' article ') and (contains(concat(' ',normalize-space(@class),' '),' clear '))]
 title: //div[@class="storyBox"]/h1
 author: //a[@rel="author"]
 date: substring-before(//span[@class="dateline"], 'by')

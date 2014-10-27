@@ -1,3 +1,5 @@
+body: //section[@class='main_cont']/img | //div[@class='articleContent']
+title: //div[@class='blog_top_left']//h2
 author: //a[@class='b'][1]
 date: substring-after(substring-before(//div, 'Posted in'), ' on ')
 strip_image_src: /content/images/globals/
@@ -8,4 +10,6 @@ prune: no
 
 single_page_link: concat('http://www.anandtech.com/print/', substring-after(//meta[@property='og:url']/@content, '/show/'))
 
-test_url: http://www.anandtech.com/show/5812/eurocom-monster-10-clevos-little-monster/
+test_url: http://www.anandtech.com/show/8370/gigabyte-am1m-s2h-review
+test_url: http://www.anandtech.com/show/8402/sandisk-releases-ultra-ii-ssd-the-second-tlc-nand-ssd-in-the-market
+test_url: http://www.anandtech.com/show/8400/arms-cortex-m-even-smaller-and-lower-power-cpu-cores

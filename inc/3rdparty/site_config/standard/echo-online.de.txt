@@ -1,0 +1,24 @@
+# Author: Marvin Dickhaus <github@marvindickhaus.de>
+# 2014-10-08
+
+#Tidy just messes up the DOM
+tidy: no
+
+title: //h1
+body: //h2 | //div[@id='artikelteaser'] | //div[@id='artikeltext']
+
+#Strip 
+strip_image_src: artikel_a_merken.gif
+strip: //div[@class='zusatzinfo']
+
+#Author: substring is used to remove the " Von " prefix.
+author: substring(//li[@class='artikelautor'], 5)
+
+date: //li[@class='artikeldatum']
+
+#The first two URLs will at some point no longer show 
+#the full article. There is a time-based paywall 
+#installed. Using the feed should present valid output
+test_url: http://www.echo-online.de/art1231,5503063
+test_url: http://www.echo-online.de/art1168,5502598
+test_url: http://www.echo-online.de/rss/darmstadt.xml
