@@ -25,4 +25,4 @@ strip_id_or_class: 'rightimage'
 #Comments
 strip: //table
 strip: //p/following-sibling::*[0]
-test_url: http://www.mainpost.de/ueberregional/meinung/Dioxin-Skandal-bringt-Agrarministerin-in-Bedraengnis;art9517,5920211
+test_url: http://www.mainpost.de/regional/wuerzburg/Autobahnschuetze-Staatsanwalt-fordert-zwoelf-Jahre;art492151,8386332

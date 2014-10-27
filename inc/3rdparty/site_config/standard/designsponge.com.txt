@@ -1,0 +1,31 @@
+# Author: zinnober
+
+tidy: no
+prune: no
+
+# Set title
+title: //header/h1
+
+# Set author
+author: //a[rel='author']
+
+# Content is here
+body: //article
+
+# Tidy up before article
+strip: //header
+
+# Tidy up article
+strip: //div[contains(@id, 'gallery-')]
+replace_string(<a rel="attachment): <p rel="attachment
+
+
+# Tidy up after article
+strip: //div[@class='sm']
+strip_id_or_class: related
+strip_id_or_class: comments
+strip: //footer
+
+# Try it yourself
+test_url: http://www.designsponge.com/2010/06/seattle-design-guide.html
+test_url: http://www.designsponge.com/2012/04/sneak-peek-liz-cook.html

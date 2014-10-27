@@ -15,6 +15,8 @@ strip: //div[@class='earthbox']
 
 single_page_link: //article//a[contains(@class, 'print')]
 
+native_ad_clue: //meta[@property="og:url" and contains(@content, '/sponsored/')]
+
 test_url: http://www.theatlantic.com/technology/archive/2011/04/want-to-see-how-crazy-a-bot-run-market-can-be/237773/
 test_url: http://www.theatlantic.com/magazine/archive/2007/11/the-autumn-of-the-multitaskers/6342/
 test_url: http://www.theatlantic.com/entertainment/archive/2012/04/30-rock-live-a-funny-reminder-of-why-sitcoms-arent-shot-live-anymore/256447/

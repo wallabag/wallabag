@@ -1,0 +1,60 @@
+# Author: zinnober
+# Should work with "normal" articles as well as with image galleries
+
+prune: no
+
+# Title
+title: //h1/span[@class='hcf-headline']
+
+# Set author
+author: //a[@rel='author']
+
+# Set date
+date: //span[@class='date hcf-atlas']
+
+# Fetch full multipage articles
+next_page_link: //a[contains(@class, 'hcf-forward')]
+
+# Content is here
+body: //article
+body: //div[contains(@class, 'hcf-screen')]
+
+# Remove tracking and ads
+strip_id_or_class: hcf-ad
+strip_id_or_class: hcf-autoload-ad
+strip_id_or_class: hcf-content-ad
+
+# Tidy up before article
+strip: //article/h1
+strip_id_or_class: hcf-atlas
+strip_id_or_class: hcf-author
+strip_id_or_class: date hcf-atlas
+strip_id_or_class: date hcf-atlas
+
+# General cleanup
+strip: //div[contains(@class, 'hcf-screen')]//h1
+strip: //div[@class='hcf-subpage-titles']//ul
+strip_id_or_class: hcf-doctype-media
+strip_id_or_class: hcf-inline-gallery
+strip_id_or_class: hcf-doctype-video
+strip_id_or_class: hcf-links
+strip_id_or_class: hcf-mini-navi
+strip_id_or_class: hcf-media-control
+strip_id_or_class: hcf-hidden
+replace_string(<span class="hcf-update">Update</span>): <strong>Update: </strong>
+
+# Fix pictures and captions
+replace_string(<a class="hcf-doctype-gallery): <p class="hcf-doctype-gallery
+replace_string(<a class="hcf-doctype-enlarge): <p class="hcf-doctype-enlarge
+replace_string(<figcaption class="hcf-caption">): <br><small><em>
+replace_string(</figcaption>): </em></small>
+
+# Fix image galleries
+replace_string(<a class=" ajaxify): <p class="ajaxify
+replace_string(<div class="hcf-caption"><div><p>): <small><em>
+
+# Try it yourself
+test_url: http://www.tagesspiegel.de/berlin/bezirke/wedding/wedding-jetzt/auf-der-suche-nach-einem-stadtteil-wilder-weiter-wedding/8757156.html
+test_url: http://www.tagesspiegel.de/berlin/olympia-in-berlin-der-flughafen-tegel-soll-das-olympische-dorf-werden/10645036.html
+test_url: http://www.tagesspiegel.de/mediacenter/fotostrecken/berlin/bildergalerie-kreuzberger-der-woche/9305534.html
+

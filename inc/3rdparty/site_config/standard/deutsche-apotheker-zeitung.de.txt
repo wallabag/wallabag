@@ -1,0 +1,29 @@
+# Author: zinnober
+
+prune: yes
+tidy: yes
+
+title: //h1
+date: //p[@class='news_datum']
+author: //span[@class='author']
+
+body: //div[@class='tagesnews-content']
+
+# General clenaup
+strip_id_or_class: dachzeile
+strip: //h3
+strip: //p[@class='bodytext']//a
+strip_id_or_class: autor_datum
+strip_id_or_class: comments
+strip_id_or_class: banner-
+
+strip: //p[contains(., 'Lesen Sie')]
+strip: //p[contains(., '– in DAZ')]
+
+# Fix image captions
+replace_string(<p class="image_caption">): <p><small><em>
+replace_string(</dd>): </em></small></dd>
+
+test_url: http://www.deutsche-apotheker-zeitung.de/pharmazie/news/2014/09/03/weniger-nebenwirkungen-aber-kein-zusatznutzen/13715.html
+test_url: http://www.deutsche-apotheker-zeitung.de/recht/news/2014/09/02/urteile-zum-cannabis-eigenanbau-bfarm-geht-in-berufung/13716.html
+

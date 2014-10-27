@@ -1,0 +1,28 @@
+# Author: zinnober
+
+tidy: no
+prune: no
+
+# Set title
+title: //h2
+
+date: //li[@class='time']
+
+# Set author
+author: //a[contains(@rel, 'author')]
+
+# Content is here
+body: //div[@id='content']
+
+# Tidy up before article
+strip: //div[@class='meta']
+
+# Tidy up after article
+strip_id_or_class: nr_related_placeholder
+strip_id_or_class: twitter-share-button
+strip_id_or_class: afterpost
+strip_id_or_class: tags
+
+# Try it yourself
+test_url: http://www.canonrumors.com/2014/09/chuck-westfall-talks-canon-eos-7d-mark-ii/
+test_url: http://www.canonrumors.com/2014/09/canon-cinema-eos-captures-space-in-4k-for-new-imax-3d-film/

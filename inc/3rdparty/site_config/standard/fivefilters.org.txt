@@ -1,1 +1,4 @@
+body: //section[contains(@class, 'container')]
 prune: no
+
+test_url: http://fivefilters.org/kindle-it/

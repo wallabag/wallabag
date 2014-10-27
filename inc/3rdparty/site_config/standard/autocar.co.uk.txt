@@ -1,0 +1,13 @@
+title: //div[@class='col-center']/h1
+author: //div[@class='personality']/a
+date: //div[@class='personality-date']
+body: //div[@class='content-top ']//div[@class='content'][1] | //div[contains(@class,'article-body')] | //div[contains(@class,'main-article')]
+
+next_page_link: //div[@id='review-link']/a
+
+strip: //div[@class='author-block']
+strip: //p//iframe[contains(@src,'signup')]/preceding::p[1]
+
+test_url: http://www.autocar.co.uk/car-review/volkswagen/golf
+test_url: http://www.autocar.co.uk/car-news/pebble-beach/saleen-unveils-performance-electric-vehicle-based-tesla-model-s
+test_url: http://www.autocar.co.uk/car-review/rolls-royce/first-drives/rolls-royce-ghost-series-ii-first-drive-review

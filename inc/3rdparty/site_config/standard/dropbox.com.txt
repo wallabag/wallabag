@@ -1,1 +1,3 @@
 single_page_link: //a[@id='download_button_link']
+
+test_url: https://www.dropbox.com/s/qmocfrco2t0d28o/Fluffbeast.docx

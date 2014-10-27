@@ -1,0 +1,18 @@
+author: //div[@id='main']//div[@class='col right']//div[contains(@class, 'attribute-author')]
+body: //div[@id='main']//div[@class='col right']
+strip_id_or_class: boxes
+strip_id_or_class: lazy
+strip_id_or_class: comment_box
+strip_id_or_class: fb_comments
+
+find_string: <noscript>
+replace_string: <div>
+find_string: </noscript>
+replace_string: </div>
+
+prune: no
+tidy: no
+
+test_url: http://www.wn.de/Muenster/Kultur/1742956-Wilm-Weppelmann-verlaesst-die-Einsiedelei-Und-dann-ab-unter-die-Dusche
+# feed
+test_url: http://www.wn.de/rss/feed/wn_muenster

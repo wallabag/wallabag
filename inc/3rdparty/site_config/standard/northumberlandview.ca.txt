@@ -8,4 +8,4 @@ strip_id_or_class: news_morearticlesincat
 strip_id_or_class: ezc_comments
 strip_comments: yes
 
-test_url: http://www.northumberlandview.ca/index.php?module=news&func=display&sid=5972
+test_url: http://www.northumberlandview.ca/index.php?module=news&type=user&func=display&sid=31127
