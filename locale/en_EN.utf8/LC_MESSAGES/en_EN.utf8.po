@@ -4,13 +4,13 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-02-25 15:17+0300\n"
 "PO-Revision-Date: \n"
-"Last-Translator: tcit <tcit@tcit.fr>\n"
+"Last-Translator: tcit <tcit@openmailbox.org>\n"
 "Language-Team: \n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.9\n"
+"X-Generator: Poedit 1.5.4\n"
 "X-Poedit-Basepath: .\n"
 
 msgid "wallabag, a read it later open source system"
@@ -185,6 +185,24 @@ msgstr "to delete cache."
 
 msgid "You can enter multiple tags, separated by commas."
 msgstr "You can enter multiple tags, separated by commas."
+
+msgid "Add tags:"
+msgstr "Add tags:"
+
+msgid "no tags"
+msgstr "no tags"
+
+msgid "The tag has been applied successfully"
+msgstr "The tag has been applied successfully"
+
+msgid "interview"
+msgstr "interview"
+
+msgid "editorial"
+msgstr "editorial"
+
+msgid "video"
+msgstr "video"
 
 msgid "return to article"
 msgstr "return to article"

@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-05-10 20:09+0100\n"
 "PO-Revision-Date: \n"
-"Last-Translator: tcit <tcit@tcit.fr>\n"
+"Last-Translator: tcit <tcit@openmailbox.org>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.6.9\n"
+"X-Generator: Poedit 1.5.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "wallabag, a read it later open source system"
@@ -371,6 +371,24 @@ msgstr "Cet article s'affiche mal ?"
 
 msgid "tags:"
 msgstr "tags :"
+
+msgid "Add tags:"
+msgstr "Ajouter des tags :"
+
+msgid "no tags"
+msgstr "pas de tags"
+
+msgid "The tag has been applied successfully"
+msgstr "Le tag a été appliqué avec succès"
+
+msgid "interview"
+msgstr "interview"
+
+msgid "editorial"
+msgstr "éditorial"
+
+msgid "video"
+msgstr "vidéo"
 
 msgid "Edit tags"
 msgstr "Modifier les tags"

@@ -92,6 +92,7 @@ form fieldset {
 form input[type="text"], select, form input[type="password"], form input[type="url"], form input[type="email"] {
   border: 1px solid #999;
   padding: 0.5em 1em;
+  margin-left: 5px;
   min-width: 12em;
   color: #666;
 }
