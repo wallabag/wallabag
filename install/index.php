@@ -290,7 +290,7 @@ php composer.phar install</code></pre></li>
                                     <li><label for="mysql_server">Server</label> <input type="text" placeholder="localhost" id="mysql_server" name="mysql_server" /></li>
                                     <li><label for="mysql_database">Database</label> <input type="text" placeholder="wallabag" id="mysql_database" name="mysql_database" /></li>
                                     <li><label for="mysql_user">User</label> <input type="text" placeholder="user" id="mysql_user" name="mysql_user" /></li>
-                                    <li><label for="mysql_password">Password</label> <input type="text" placeholder="p4ssw0rd" id="mysql_password" name="mysql_password" /></li>
+                                    <li><label for="mysql_password">Password</label> <input type="password" placeholder="p4ssw0rd" id="mysql_password" name="mysql_password" /></li>
                                 </ul>
                             </li>
                             <li>
@@ -299,7 +299,7 @@ php composer.phar install</code></pre></li>
                                     <li><label for="pg_server">Server</label> <input type="text" placeholder="localhost" id="pg_server" name="pg_server" /></li>
                                     <li><label for="pg_database">Database</label> <input type="text" placeholder="wallabag" id="pg_database" name="pg_database" /></li>
                                     <li><label for="pg_user">User</label> <input type="text" placeholder="user" id="pg_user" name="pg_user" /></li>
-                                    <li><label for="pg_password">Password</label> <input type="text" placeholder="p4ssw0rd" id="pg_password" name="pg_password" /></li>
+                                    <li><label for="pg_password">Password</label> <input type="password" placeholder="p4ssw0rd" id="pg_password" name="pg_password" /></li>
                                 </ul>
                             </li>
                         </ul>
