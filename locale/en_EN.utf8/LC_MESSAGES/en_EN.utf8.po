@@ -56,7 +56,7 @@ msgid "bag it!"
 msgstr "bag it!"
 
 msgid "Bookmarklet: drag & drop this link to your bookmarks bar"
-msgstr "Bookmarklet: drag & drop this link to your bookmarks bar"
+msgstr "Bookmarklet: Drag & drop this link to your bookmarks bar"
 
 msgid "Upgrading wallabag"
 msgstr "Upgrading wallabag"
@@ -108,11 +108,10 @@ msgid ""
 "You can regenerate your token: <a href='?feed&amp;action=generate'>generate!"
 "</a>."
 msgstr ""
-"You can regenerate your token: <a href='?feed&amp;action=generate'>generate!"
-"</a>."
+"<a href='?feed&amp;action=generate'>Regenerate Token</a>"
 
 msgid "Change your theme"
-msgstr "Change your theme"
+msgstr "Change Your Theme"
 
 msgid "Theme:"
 msgstr "Theme:"
@@ -121,13 +120,13 @@ msgid "Update"
 msgstr "Update"
 
 msgid "Change your language"
-msgstr "Change your language"
+msgstr "Change Your Language"
 
 msgid "Language:"
 msgstr "Language:"
 
 msgid "Change your password"
-msgstr "Change your password"
+msgstr "Change Your Password"
 
 msgid "New password:"
 msgstr "New password:"
@@ -362,10 +361,10 @@ msgid "tags:"
 msgstr "tags:"
 
 msgid "Edit tags"
-msgstr "Edit tags"
+msgstr "Edit Tags"
 
 msgid "save link!"
-msgstr "Save link"
+msgstr "Save Link"
 
 msgid "home"
 msgstr "Home"
@@ -416,7 +415,7 @@ msgid "by filling this field"
 msgstr "by filling this field"
 
 msgid "bookmarklet: drag & drop this link to your bookmarks bar"
-msgstr "bookmarklet: drag & drop this link to your bookmarks bar"
+msgstr "Bookmarklet: Drag & drop this link to your bookmarks bar"
 
 msgid "your version"
 msgstr "your version"
