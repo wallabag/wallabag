@@ -17,7 +17,7 @@ apt-get clean -y
 echo "ServerName localhost" >> /etc/apache2/apache2.conf
 service apache2 restart
 service mysql restart
-echo "create database kanboard;" | mysql -u root
+echo "create database wallabag;" | mysql -u root
 rm -f /var/www/html/index.html
 date > /etc/vagrant_provisioned_at
 SCRIPT
