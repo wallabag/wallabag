@@ -360,11 +360,15 @@ footer a {
   position: relative;
   overflow: hidden;
   padding: 1.5em 1.5em 3em 1.5em;
-  -webkit-transition: all 0.5s ease;
-     -moz-transition: all 0.5s ease;
-      -ms-transition: all 0.5s ease;
-       -o-transition: all 0.5s ease;
-          transition: all 0.5s ease;
+
+	/* Removing CSS transitions because they make the switch from list view to
+	 * table view jerky
+	 */
+  /* -webkit-transition: all 0.5s ease; */
+  /*    -moz-transition: all 0.5s ease; */
+  /*     -ms-transition: all 0.5s ease; */
+  /*      -o-transition: all 0.5s ease; */
+  /*         transition: all 0.5s ease; */
 }
 
 .entrie:before {
