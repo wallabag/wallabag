@@ -328,10 +328,6 @@ footer a {
   margin-left: 0!important;
 }
 
-.listmode .entrie p {
-  display: none;
-}
-
 .list-entries + .results {
   margin-bottom: 2em;
 }
