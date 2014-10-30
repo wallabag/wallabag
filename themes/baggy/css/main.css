@@ -328,7 +328,7 @@ footer a {
 }
 
 .listmode .entrie p {
-  display: none;
+  /* display: none; */ /* Fixing issue #874 https://github.com/wallabag/wallabag/issues/874 */
 }
 
 .list-entries + .results {
