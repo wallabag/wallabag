@@ -192,7 +192,7 @@ h2:after {
   padding-bottom: 1em;
 }
 
-  #links a {
+  #links > li > a {
     display: block;
     padding: 0.5em 2em 0.5em 1em;
     color: #FFF;
@@ -208,7 +208,7 @@ h2:after {
           transition: all 0.5s ease;
   }
 
-  #links a:hover, #links a:focus {
+  #links > li > a:hover, #links > li > a:focus {
     background: #999;
     color: #000;
   }
@@ -569,19 +569,28 @@ footer a {
   padding: 2em;
 }
 
-a#bagit-form-close, a#search-form-close {
+#bagit-form-form .addurl {
+	margin-left: 0;
+}
+
+.popup-close {
   background: #000;
   color: #FFF;
-  padding: 0.2em 0.5em;
+	font-size: 1.4em;
+	line-height: 1.6em;
+	width: 1.6em;
+	height: 1.6em;
+	text-align: center;
   text-decoration: none;
-  display: inline-block;
-  float: right;
-  font-size: 0.6em;
+	display: inline-block;
+	position: absolute;
+	top: 0;
+	right: 0;
 }
-a#bagit-form-close:hover, a#search-form-close:hover {
-  background: #999;
-  color: #000;
-}
+	.popup-close:hover {
+		background: #999;
+		color: #000;
+	}
 
 .active-current {
   background-color: #999;
@@ -663,20 +672,6 @@ a.add-to-wallabag-link-after:after {
   height: 200px;
   /* margin: -150px 0 0 -300px; */
   padding: 2em;
-}
-
-a#search-form-close {
-  background: #000;
-  color: #FFF;
-  padding: 0.2em 0.5em;
-  text-decoration: none;
-  display: inline-block;
-  float: right;
-  font-size: 1.2em;
-}
-a#search-form-close:hover {
-  background: #999;
-  color: #000;
 }
 
 #submit-search{
