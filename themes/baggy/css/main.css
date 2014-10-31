@@ -104,10 +104,6 @@ form input[type="text"], select, form input[type="password"], form input[type="u
   }
 }
 
-fieldset label {
-  min-width: 12.5em;
-}
-
 .inline .row {
   display: inline-block;
   margin-right: 0.5em;
@@ -119,8 +115,12 @@ fieldset label {
 
 fieldset label {
   display: inline-block;
-  margin-right: 0.5em;
+  min-width: 12.5em;
   color: #666;
+}
+
+label {
+  margin-right: 0.5em;
 }
 
 form .row {
