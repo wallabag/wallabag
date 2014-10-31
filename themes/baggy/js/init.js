@@ -9,9 +9,9 @@ $.fn.ready(function() {
 
   $("#menu").click(function(){
     $("#links").toggle();
-	if ($('#content').hasClass('opacity03')) {
-		$('#content').removeClass('opacity03');
-	}
+    if ($('#content').hasClass('opacity03')) {
+        $('#content').removeClass('opacity03');
+    }
   });
 
   /* ==========================================================================
