@@ -417,6 +417,15 @@ a.add-to-wallabag-link-after:after {
   padding-left: 10px;
 }
 
+/* ==========================================================================
+	"Search" popup div related styles
+	========================================================================== */
+
+/* Search form message needs a little more width, depending on translations */
+#search-form {
+    width: 420px;
+}
+
 .opacity03 {
   /*opacity: 0.3;*/
 }
