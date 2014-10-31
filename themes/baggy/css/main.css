@@ -571,24 +571,32 @@ footer a {
 	margin-left: 0;
 }
 
-.popup-close {
+.closeMessage,
+.close-button {
   background: #000;
   color: #FFF;
-	font-size: 1.4em;
-	line-height: 1.6em;
+	font-size: 1.2em;
+	line-height: 1.6;
 	width: 1.6em;
 	height: 1.6em;
 	text-align: center;
   text-decoration: none;
+}
+	.closeMessage:hover,
+	.closeMessage:focus,
+	.close-button:hover,
+	.close-button:focus {
+		background: #999;
+		color: #000;
+	}
+
+.close-button--popup {
 	display: inline-block;
 	position: absolute;
 	top: 0;
 	right: 0;
+	font-size: 1.4em;
 }
-	.popup-close:hover {
-		background: #999;
-		color: #000;
-	}
 
 .active-current {
   background-color: #999;
@@ -749,18 +757,6 @@ a.add-to-wallabag-link-after:after {
 }
 
 .messages > * { display: inline-block;}
-
-.closeMessage {
-  background: #000;
-  color: #FFF;
-  padding: 0.2em 0.5em;
-  text-decoration: none;
-}
-
-  .closeMessage:hover, .closeMessage:focus {
-    background: #FFF;
-    color: #000;
-  }
 
 .warning {
   /* font-size: 3em;
@@ -1020,8 +1016,16 @@ pre code {
     display: none;
   }
 
-  .popup-form {
+  .popup-form, #bagit-form, #search-form {
     left: 0;
+    width: 100%;
+    border-left: none;
+  }
+
+  .popup-form form,
+  #bagit-form form,
+  #search-form form {
+    width: 100%;
   }
 }
 

@@ -44,7 +44,7 @@ class Messages {
 	var $msgId;
 	var $msgTypes = array( 'help', 'info', 'warning', 'success', 'error' );
 	var $msgClass = 'messages';
-	var $msgWrapper = "<div class='%s %s'><a href='#' class='closeMessage'>X</a>\n%s</div>\n";
+	var $msgWrapper = "<div class='%s %s'><a href='#' class='closeMessage'>&times;</a>\n%s</div>\n";
 	var $msgBefore = '<p>';
 	var $msgAfter = "</p>\n";
 
