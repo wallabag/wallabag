@@ -9,17 +9,17 @@
                     {% if constant('MODE_DEMO') == 1 %}<p>{% trans "you are in demo mode, some features may be disabled." %}</p>{% endif %}
 					<div class="row">
 						<label class="col w150p" for="login">{% trans "Username" %}</label>
-						<input class="col" type="text" id="login" name="login" placeholder="Login" tabindex="1" autofocus {% if constant('MODE_DEMO') == 1 %}value="poche"{% endif %} />
+						<input class="col" type="text" id="login" name="login" placeholder="{% trans "Username" %}" tabindex="1" autofocus {% if constant('MODE_DEMO') == 1 %}value="poche"{% endif %} />
 					</div>
 
 					<div class="row">
 						<label class="col w150p" for="password">{% trans "Password" %}</label>
-						<input class="col" type="password" id="password" name="password" placeholder="Password" tabindex="2" {% if constant('MODE_DEMO') == 1 %}value="poche"{% endif %} />
+						<input class="col" type="password" id="password" name="password" placeholder="{% trans "Password" %}" tabindex="2" {% if constant('MODE_DEMO') == 1 %}value="poche"{% endif %} />
 					</div>
 					<div class="row">
-						<label class="col w150p" for="longlastingsession">{% trans "Stay signed in" %}</label>
+						
 						<div class="col">
-							<input type="checkbox" id="longlastingsession" name="longlastingsession" tabindex="3">
+							<input type="checkbox" id="longlastingsession" name="longlastingsession" tabindex="3" /> <label for="longlastingsession">{% trans "Stay signed in" %}</label><br />
 							<small class="inbl">{% trans "(Do not check on public computers)" %}</small>
 						</div>
 					</div>
