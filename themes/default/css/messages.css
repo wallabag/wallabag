@@ -8,11 +8,6 @@
     border-radius: 4px;
 }
 
-/* Search form message needs a little more width, depending on translations */
-#search-form {
-    width: 420px;
-}
-
 .messages a.closeMessage {
     display: none;
     float: right;
