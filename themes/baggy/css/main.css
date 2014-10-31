@@ -540,7 +540,8 @@ footer a {
   2.1 = "save a link" related styles
   ========================================================================== */
 
-#bagit-form, #search-form {
+#bagit-form,
+#search-form {
   background: rgba(0,0,0,0.5);
   position: absolute;
   top: 0;
@@ -555,18 +556,18 @@ footer a {
   border-left: 1px #EEE solid;
 }
 
-#bagit-form form, #search-form form {
-  background: #FFF;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 20;
-  border: 10px solid #000;
-  width: 400px;
-  height: 200px;
-  /* margin: -150px 0 0 -300px; */
-  padding: 2em;
-}
+	#bagit-form form,
+	#search-form form {
+		background: #FFF;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 20;
+		border: 10px solid #000;
+		width: 400px;
+		height: 200px;
+		padding: 2em;
+	}
 
 #bagit-form-form .addurl {
 	margin-left: 0;
@@ -645,37 +646,10 @@ a.add-to-wallabag-link-after:after {
 /* ==========================================================================
   2.2 = "search for articles" popup div related styles
   ========================================================================== */
-#search-form {
-  background: rgba(0,0,0,0.5);
-  position: absolute;
-  top: 0;
-  left: 10em;
-  z-index: 20;
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  margin-top: -30%;
-  padding: 2em;
-  display: none;
-  border-left: 1px #EEE solid;
-}
-
-#search-form form {
-  background: #FFF;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 20;
-  border: 10px solid #000;
-  width: 400px;
-  height: 200px;
-  /* margin: -150px 0 0 -300px; */
-  padding: 2em;
-}
 
 #submit-search{
-margin-left: 4em;
-margin-top:1em;
+	margin-left: 4em;
+	margin-top: 1em;
 }
 
 /* ==========================================================================
