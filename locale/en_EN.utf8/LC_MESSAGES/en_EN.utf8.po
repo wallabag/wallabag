@@ -599,8 +599,8 @@ msgid ""
 "Click on <a href=\"./?epub&amp;method=all\" title=\"Generate ePub\">this "
 "link</a> to get all your articles in one ebook (ePub 3 format)."
 msgstr ""
-"Click on <a href=\"./?epub&amp;method=all\" title=\"Generate ePub\">this "
-"link</a> to get all your articles in one ebook (ePub 3 format)."
+"Click on <a href=\"./?epub&amp;method=all\" title=\"Generate EPUB\">this "
+"link</a> to get all your articles in one ebook (EPUB 3 format)."
 
 msgid ""
 "This can <b>take a while</b> and can <b>even fail</b> if you have too many "
@@ -610,13 +610,13 @@ msgstr ""
 "articles, depending on your server configuration."
 
 msgid "Download the articles from this tag in an epub"
-msgstr "Download the articles from this tag in an epub"
+msgstr "Download the articles from this tag in an EPUB"
 
 msgid "Download the articles from this search in an epub"
-msgstr "Download the articles from this search in an epub"
+msgstr "Download the articles from this search in an EPUB"
 
 msgid "Download the articles from this category in an epub"
-msgstr "Download the articles from this category in an epub"
+msgstr "Download the articles from this category in an EPUB"
 
 #~ msgid "poche it!"
 #~ msgstr "poche it!"
