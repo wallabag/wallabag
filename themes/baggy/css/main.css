@@ -1053,8 +1053,15 @@ pre code {
     display: none;
   }
 
-  #bagit-form, #search-form {
+  .popup-form, #bagit-form, #search-form {
     left: 0;
+    width: 100%;
+  }
+
+  .popup-form form,
+  #bagit-form form,
+  #search-form form {
+    width: 100%;
   }
 }
 
