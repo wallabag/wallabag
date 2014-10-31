@@ -1016,7 +1016,7 @@ pre code {
     display: none;
   }
 
-  .popup-form {
+  .popup-form, #bagit-form, #search-form {
     left: 0;
     width: 100%;
     border-left: none;
