@@ -37,6 +37,12 @@ msgstr "Read the documentation"
 msgid "download the extension"
 msgstr "Download the extension"
 
+msgid "Firefox Add-On"
+msgstr "Firefox Add-On"
+
+msgid "Chrome Extension"
+msgstr "Chrome Extension"
+
 msgid "via F-Droid"
 msgstr "via F-Droid"
 
@@ -140,13 +146,25 @@ msgstr "Repeat your new password:"
 msgid "Import"
 msgstr "Import"
 
+msgid "You can import your Pocket, Readability, Instapaper, Wallabag or any data in appropriate json or html format."
+msgstr "You can import your Pocket, Readability, Instapaper, wallabag or any fil in appropriate JSON or HTML format."
+
 msgid ""
 "Please execute the import script locally as it can take a very long time."
 msgstr ""
+
+msgid "Please select export file on your computer and press \"Import\" button below. Wallabag will parse your file, insert all URLs and start fetching of articles if required."
+msgstr "Please select export file on your computer and press &ldquo;Import&rdquo; button below. wallabag will parse your file, insert all URLs and start fetching of articles if required."
 "Please execute the import script locally as it can take a very long time."
+
+msgid "You can click here to fetch content for articles with no content."
+msgstr "Fetch content for articles with no content"
 
 msgid "More info in the official documentation:"
 msgstr "More info in the official documentation:"
+
+msgid "(<a href=\"http://doc.wallabag.org/en/User_documentation/Save_your_first_article\" target=\"_blank\" title=\"Documentation\">?</a>)"
+msgstr "(<a href=\"http://doc.wallabag.org/en/User_documentation/Save_your_first_article\" target=\"_blank\" title=\"Documentation\">?</a>)"
 
 msgid "Import from Pocket"
 msgstr "Import from Pocket"
@@ -176,11 +194,17 @@ msgstr "to download your database."
 msgid "to export your wallabag data."
 msgstr "to export your wallabag data."
 
+msgid "Export JSON"
+msgstr "Export JSON"
+
 msgid "Cache"
 msgstr "Cache"
 
 msgid "to delete cache."
 msgstr "to delete cache."
+
+msgid "Delete Cache"
+msgstr "Delete Cache"
 
 msgid "You can enter multiple tags, separated by commas."
 msgstr "You can enter multiple tags, separated by commas."
@@ -417,6 +441,9 @@ msgstr "by filling this field"
 msgid "bookmarklet: drag & drop this link to your bookmarks bar"
 msgstr "Bookmarklet: Drag & drop this link to your bookmarks bar"
 
+msgid "Drag &amp; drop this link to your bookmarks bar:"
+msgstr "Drag &amp; drop this link to your bookmarks bar:"
+
 msgid "your version"
 msgstr "your version"
 
@@ -434,6 +461,9 @@ msgstr "latest dev version"
 
 msgid "a more recent development version is available."
 msgstr "A more recent development version is available."
+
+msgid "You can clear cache to check the latest release."
+msgstr "You can <a href=\"#cache\">clear the cache</a> to check for the latest release."
 
 msgid "Please execute the import script locally, it can take a very long time."
 msgstr ""
