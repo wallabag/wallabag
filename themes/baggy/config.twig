@@ -20,14 +20,14 @@
                         <input type="submit" value="{% trans "bag it!" %}" />
                     </form>
                 </li>
-                <li>{% trans "Bookmarklet: drag & drop this link to your bookmarks bar" %} <a id="bookmarklet" ondragend="this.click();" title="i am a bookmarklet, use me !" href="javascript:if(top['bookmarklet-url@wallabag.org']){top['bookmarklet-url@wallabag.org'];}else{(function(){var%20url%20=%20location.href%20||%20url;window.open('{{ poche_url }}?action=add&url='%20+%20btoa(url),'_self');})();void(0);}">{% trans "bag it!" %}</a></li>
+                <li>{% trans "Bookmarklet: drag & drop this link to your bookmarks bar" %}: <a id="bookmarklet" ondragend="this.click();" title="i am a bookmarklet, use me !" href="javascript:if(top['bookmarklet-url@wallabag.org']){top['bookmarklet-url@wallabag.org'];}else{(function(){var%20url%20=%20location.href%20||%20url;window.open('{{ poche_url }}?action=add&url='%20+%20btoa(url),'_self');})();void(0);}">{% trans "bag it!" %}</a></li>
             </ul>
 
             <h2>{% trans "Upgrading wallabag" %}</h2>
             <ul>
-                <li>{% trans "Installed version" %} : <strong>{{ constant('POCHE') }}</strong></li>
-                <li>{% trans "Latest stable version" %} : {{ prod }}. {% if compare_prod == -1 %}<strong><a href="http://wallabag.org/">{% trans "A more recent stable version is available." %}</a></strong>{% else %}{% trans "You are up to date." %}{% endif %} ({% trans "Last check:" %} {{ check_time_prod }})</li>
-                {% if constant('DEBUG_POCHE') == 1 %}<li>{% trans "Latest dev version" %} : {{ dev }}. {% if compare_dev == -1 %}<strong><a href="http://wallabag.org/">{% trans "A more recent development version is available." %}</a></strong>{% else %}{% trans "You are up to date." %}{% endif %} ({% trans "Last check:" %} {{ check_time_dev }}){% endif %}</li>
+                <li>{% trans "Installed version" %}: <strong>{{ constant('POCHE') }}</strong></li>
+                <li>{% trans "Latest stable version" %}: {{ prod }}. {% if compare_prod == -1 %}<strong><a href="http://wallabag.org/">{% trans "A more recent stable version is available." %}</a></strong>{% else %}{% trans "You are up to date." %}{% endif %} ({% trans "Last check:" %} {{ check_time_prod }})</li>
+                {% if constant('DEBUG_POCHE') == 1 %}<li>{% trans "Latest dev version" %}: {{ dev }}. {% if compare_dev == -1 %}<strong><a href="http://wallabag.org/">{% trans "A more recent development version is available." %}</a></strong>{% else %}{% trans "You are up to date." %}{% endif %} ({% trans "Last check:" %} {{ check_time_dev }}){% endif %}</li>
             </ul>
             <p>{% trans "You can clear cache to check the latest release." %}</p>
 
