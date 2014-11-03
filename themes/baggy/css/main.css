@@ -987,6 +987,9 @@ pre code {
     height: auto;
     padding-top: 3em;
   }
+  #links.open {
+    display: block;
+  }
   footer  {
     position: static;
     margin-right: 3em;
