@@ -70,7 +70,7 @@ h2, h3, h4 {
   text-transform: uppercase;
 }
 
-p, li {
+p, li, label {
   color: #666;
 }
 
@@ -281,12 +281,12 @@ h2:after {
 #listmode a:hover {
   opacity: 1;
 }
-.tablemode {
+#listmode.tablemode {
   background-image: url("../img/baggy/table.png");
   background-repeat: no-repeat;
   background-position: bottom;
 }
-.listmode {
+#listmode.listmode {
   background-image: url("../img/baggy/list.png");
   background-repeat: no-repeat;
   background-position: bottom;
@@ -331,7 +331,7 @@ footer a {
   margin-bottom: 2em;
 }
 
-.estimatedTime a {
+.estimatedTime .reading-time {
   color: #999;
   font-style: italic;
   font-weight: normal;
@@ -418,6 +418,7 @@ footer a {
 .entrie h2 {
   text-transform: none;
   margin-bottom: 0;
+  line-height: 1.2;
 }
 
   .entrie h2:after {
@@ -774,6 +775,16 @@ a.add-to-wallabag-link-after:after {
   width: 100%;
 }
 
+.more-info {
+	font-size: 0.85em;
+  line-height: 1.5;
+	color: #aaa;
+}
+
+	.more-info a {
+		color: #aaa;
+	}
+
 /* ==========================================================================
    5 = Article
    ========================================================================== */
@@ -797,6 +808,10 @@ blockquote {
   background: #FFF;
   padding: 1em;
   margin: 0;
+}
+
+#article h1 {
+  text-align: left;
 }
 
 #article h2, #article h3, #article h4 {
