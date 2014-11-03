@@ -987,7 +987,7 @@ pre code {
     height: auto;
     padding-top: 3em;
   }
-  #links.open {
+  #links.menu--open {
     display: block;
   }
   footer  {
