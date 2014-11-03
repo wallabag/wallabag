@@ -36,18 +36,21 @@ $.fn.ready(function() {
     $('#plainurl').focus();
   }
 
+	//---------------------------------------------------------------------------
+	// These two functions are now taken care of in popupForm.js
+	//---------------------------------------------------------------------------
 
-  $bagit.click(function(){
-    $bagit.toggleClass("current");
-    $("#bagit-arrow").toggleClass("arrow-down");
-    toggleSaveLinkForm();
-  });
+  // $bagit.click(function(){
+  //   $bagit.toggleClass("current");
+  //   $("#bagit-arrow").toggleClass("arrow-down");
+  //   toggleSaveLinkForm();
+  // });
 
-  $("#bagit-form-close").click(function(){
-    $bagit.removeClass("current");
-    $("#bagit-arrow").removeClass("arrow-down");
-    toggleSaveLinkForm();
-  });
+  // $("#bagit-form-close").click(function(){
+  //   $bagit.removeClass("current");
+  //   $("#bagit-arrow").removeClass("arrow-down");
+  //   toggleSaveLinkForm();
+  // });
 
 
   //send "bag it link" form request via ajax
