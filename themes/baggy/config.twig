@@ -27,7 +27,7 @@
             </ul>
                 <h3>{% trans "Bookmarklet" %}</h3>
                 <p>
-                {% trans "Drag &amp; drop this link to your bookmarks bar:" %} <a id="bookmarklet" ondragend="this.click();" title="i am a bookmarklet, use me !" href="javascript:if(top['bookmarklet-url@wallabag.org']){top['bookmarklet-url@wallabag.org'];}else{(function(){var%20url%20=%20location.href%20||%20url;window.open('{{ poche_url }}?action=add&url='%20+%20btoa(url),'_self');})();void(0);}">{% trans "bag it!" %}</a>
+                {% trans "Drag &amp; drop this link to your bookmarks bar:" %} <a id="bookmarklet" ondragend="this.click();" href="javascript:if(top['bookmarklet-url@wallabag.org']){top['bookmarklet-url@wallabag.org'];}else{(function(){var%20url%20=%20location.href%20||%20url;window.open('{{ poche_url }}?action=add&url='%20+%20btoa(url),'_self');})();void(0);}">{% trans "bag it!" %}</a>
                 </p>
 
             <h2>{% trans "Feeds" %}</h2>
