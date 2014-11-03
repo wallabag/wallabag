@@ -314,6 +314,8 @@ class Poche
 
         switch ($view)
         {
+            case 'about':
+                break;
             case 'config':
                 $dev_infos = $this->_getPocheVersion('dev');
                 $dev = trim($dev_infos[0]);
