@@ -1,0 +1,8 @@
+{
+    "favicon": "<theme_url>img/favicon-blue.png",
+    "css": ["<theme_url>css/daux-blue.css"],
+    "fonts": ["//fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700&subset=latin,cyrillic-ext,cyrillic"],
+    "js": [],
+    "require-jquery": true,
+    "bootstrap-js": false
+}
