@@ -1,0 +1,60 @@
+body: //div[@class="story-body"]
+# for video entries
+body: //div[contains(@class, "videoInStory") or @id="meta-information"]
+title: //h1[@class="story-header"]
+date: //span[@class="story-date"]/span[@class='date']
+# for sport site
+date: //meta[@name='DCTERMS.created']/@content
+author: //div[@id='headline']//span[@class='byline-name']
+
+# recipes, e.g. http://www.bbc.co.uk/food/recipes/mymincepies_71055
+body: //div[contains(@class, 'hrecipe')]//div[@id='subcolumn-1']
+
+#strip: //div[@class="story-feature narrow"]
+#strip: //div[@class="story-feature wide"]
+#strip: //div[@class="story-feature dslideshow-enclosure"]
+strip: //div[contains(@class, "story-feature") and not(contains(@class, 'full-width'))]
+strip: //span[@class="story-date"]
+#strip: //div[@class="caption body-narrow-width"]
+strip: //div[@class="warning"]//p
+strip: //div[@id='page-bookmark-links-head']
+strip: //object
+strip: //div[contains(@class, "bbccom_advert_placeholder")]
+strip: //div[contains(@class, "embedded-hyper")]
+strip: //div[contains(@class, 'market-data')]
+strip: //a[contains(@class, 'hidden')]
+strip: //div[contains(@class, 'hypertabs')]
+strip: //div[contains(@class, 'related')]
+strip: //form[@id='comment-form']
+strip: //div[contains(@class, 'comment-introduction')]
+strip: //div[contains(@class, 'share-tools')]
+strip: //div[@id='also-related-links']
+
+strip_id_or_class: share-help
+strip_id_or_class: comments_module
+
+replace_string(<noscript>): <div>
+replace_string(</noscript>): </div>
+
+native_ad_clue: //meta[@property="og:url" and contains(@content, '/sponsored/')]
+
+tidy: no
+prune: no
+
+dissolve: //h2
+
+test_url: http://www.bbc.com/sport/0/football/28918021
+test_contains: Cameroonian footballer Albert Ebosse has died
+
+test_url: http://www.bbc.com/sport/0/football/23224017
+
+test_url: http://www.bbc.com/news/business-15060862
+test_contains: Europe's leaders are meeting again to try
+
+
+# news feed
+test_url: http://feeds.bbci.co.uk/news/rss.xml
+# sports feed
+test_url: http://feeds.bbci.co.uk/sport/0/football/rss.xml?edition=int
+# video entry
+test_url: http://www.bbc.com/news/world-asia-22056933

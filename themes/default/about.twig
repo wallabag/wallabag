@@ -1,0 +1,74 @@
+{% extends "layout.twig" %}
+
+{% block title %}{% trans "About wallabag" %}{% endblock %}
+{% block menu %}
+{% include '_menu.twig' %}
+{% endblock %}
+{% block content %}
+    <h2>{% trans "About wallabag" %}</h2>
+
+    <dl>
+        <dt>{% trans "Project website" %}</dt>
+        <dd><a href="http://www.wallabag.org">http://www.wallabag.org</a></dd>
+
+        <dt>{% trans "Main developer" %}</dt>
+        <dd><a href="mailto:nicolas@loeuillet.org">Nicolas Lœuillet</a> — <a href="http://cdetc.fr">{% trans "website" %}</a></dd>
+
+        <dt>{% trans "Contributors:" %}</dt>
+        <dd><a href="https://github.com/wallabag/wallabag/graphs/contributors">{% trans "on Github" %}</a></dd>
+
+        <dt>{% trans "Bug reports" %}</dt>
+        <dd><a href="http://support.wallabag.org">{% trans "On our support website" %}</a> {% trans "or" %} <a href="https://github.com/wallabag/wallabag/issues">{% trans "on Github" %}</a></dd>
+
+        <dt>{% trans "License" %}</dt>
+        <dd><a href="http://en.wikipedia.org/wiki/MIT_License">MIT</a></dd>
+
+        <dt>{% trans "Version" %}</dt>
+        <dd>{{ constant('POCHE') }}</dd>
+    </dl>
+
+    <p>{% trans "wallabag is a read-it-later application: you can save a web page by keeping only content. Elements like ads or menus are deleted." %}</p>
+
+    <h2>{% trans "Helping wallabag" %}</h2>
+
+    <p>{% trans "wallabag is free and opensource. You can help us:" %}</p>
+
+    <dl>
+        <dt><a href="http://www.wallabag.org">{% trans "via Paypal" %}</a></dt>
+
+        <dt><a href="http://www.wallabag.org">{% trans "via Flattr" %}</a></dt>
+    </dl>
+
+    <h2>{% trans "Credits" %}</h2>
+    <dl>
+        <dt>PHP Readability</dt>
+        <dd><a href="https://bitbucket.org/fivefilters/php-readability">https://bitbucket.org/fivefilters/php-readability</a></dd>
+
+        <dt>Full Text RSS</dt>
+        <dd><a href="http://code.fivefilters.org/full-text-rss/src">http://code.fivefilters.org/full-text-rss/src</a></dd>
+
+        <dt>logo by Maylis Agniel</dt>
+        <dd><a href="https://github.com/wallabag/logo">https://github.com/wallabag/logo</a></dd>
+
+        <dt>icons</dt>
+        <dd><a href="http://icomoon.io">http://icomoon.io</a></dd>
+
+        <dt>PHP Simple HTML DOM Parser</dt>
+        <dd><a href="http://simplehtmldom.sourceforge.net/">http://simplehtmldom.sourceforge.net/</a></dd>
+
+        <dt>Session</dt>
+        <dd><a href="https://github.com/tontof/kriss_feed/blob/master/src/class/Session.php">https://github.com/tontof/kriss_feed/blob/master/src/class/Session.php</a></dd>
+
+        <dt>Twig</dt>
+        <dd><a href="http://twig.sensiolabs.org">http://twig.sensiolabs.org</a></dd>
+
+        <dt>Flash messages</dt>
+        <dd><a href="https://github.com/plasticbrain/PHP-Flash-Messages">https://github.com/plasticbrain/PHP-Flash-Messages</a></dd>
+
+        <dt>Pagination</dt>
+        <dd><a href="https://github.com/daveismyname/pagination">https://github.com/daveismyname/pagination</a></dd>
+
+        <dt>PHPePub</dt>
+        <dd><a href="https://github.com/Grandt/PHPePub/">https://github.com/Grandt/PHPePub/</a></dd>
+    </dl> 
+{% endblock %}

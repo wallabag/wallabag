@@ -1,0 +1,12 @@
+strip: //div[contains(@style, 'float:right') and contains(., 'advertisement')]
+body: //div[@style="float:left;width:740px;"]
+
+tidy: no
+
+test_url: http://www.menshealth.com.sg/fitness/mh-picks-under-armour-clutchfit-nitro-mid-cleats
+test_contains: These cleats are made for one thing
+
+test_url: http://www.menshealth.com.sg/fitness/top-10-fat-burning-bodyweight-moves-you-can-do-10-minutes
+test_contains: let this workout fool you
+
+test_url: http://www.menshealth.com.sg/fitness/feed

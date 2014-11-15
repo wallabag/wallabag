@@ -1,0 +1,14 @@
+body: //div[@id='left-stack' or contains(@class, 'center-stack')]
+
+find_string: class="artwork" src="
+replace_string: class="artwork" src-disabled="
+find_string: src-swap-high-dpi="
+replace_string: src="
+
+strip_id_or_class: rating
+strip_id_or_class: listeners-also-bought
+
+prune: no
+
+test_url: https://itunes.apple.com/us/rss/topaudiobooks/limit=10/xml
+test_url: https://itunes.apple.com/us/audiobook/the-giver-unabridged/id356345850

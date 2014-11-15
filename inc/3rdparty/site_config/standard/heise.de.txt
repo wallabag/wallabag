@@ -1,7 +1,42 @@
-single_page_link: //p[@class='news_option']/a
+# Author: zinnober
+# Template should work well with either desktop or mobile version (m.heise.de)
 
+prune: no
+
+title: //article/h1 | //h1
 date: //p[@class='news_datum']
-title: //h1
-body: //div[@class='meldung_wrapper']
+author: //h4[@class='author']
 
-test_url: http://www.heise.de/newsticker/meldung/Europa-soll-Grundrechteschutz-im-Netz-staerken-1392664.html
+body: //article | //div[@class='meldung_wrapper']
+
+# General cleanup
+strip: //time
+strip: //h4[@class='author']
+strip: //p[@class='news_datum']
+strip: //p[@class='artikel_datum']
+strip: //a[contains(@href, 'mailto')]
+strip_id_or_class: comments
+strip_id_or_class: ISI_IGNORE
+strip_id_or_class: clear
+
+strip_id_or_class: linkurl_grossbild
+strip_id_or_class: image-num
+strip_id_or_class: heisebox_right
+strip_id_or_class: dossier
+
+# Strip Ads
+strip_id_or_class: ad_
+
+# Some optimizations
+replace_string(<h5>): <h2>
+replace_string(</h5>): </h2>
+replace_string(<span class="bild_rechts"): <p
+replace_string(<div class="heisebox">): <blockquote>
+
+
+next_page_link: //a[@class='next']
+next_page_link: //a[@title='vor']
+
+test_url: http://www.heise.de/open/artikel/Die-Neuerungen-von-Linux-3-15-2196231.html
+test_url: http://m.heise.de/open/artikel/Die-Neuerungen-von-Linux-3-15-2196231.html
+test_url: http://www.heise.de/newsticker/meldung/Ueberwachungstechnik-Die-globale-Handy-Standortueberwachung-2301494.html

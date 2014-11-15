@@ -13,5 +13,7 @@ title: //div[@id='story']//h2[@class='title']
 strip: //div[@class='pager']
 next_page_link: //nav//a[span/@class='next']/@href
 
+native_ad_clue: //meta[@property="og:url" and contains(@content, '/sponsored/')]
+
 test_url: http://arstechnica.com/tech-policy/news/2012/02/gigabit-internet-for-80-the-unlikely-success-of-californias-sonicnet.ars
 test_url: http://arstechnica.com/apple/2005/04/macosx-10-4/

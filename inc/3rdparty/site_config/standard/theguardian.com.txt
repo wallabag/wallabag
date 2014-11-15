@@ -6,8 +6,19 @@ strip: //div[contains(@class, 'kindleWidget')]
 #strip: //a[not(text())]
 strip_id_or_class: pocket-btn
 author: //li[@class='byline']
+native_ad_clue: //meta[@property="article:tag" and contains(@content, "Partner zone")]
+native_ad_clue: //meta[@property="video:tag" and contains(@content, "Partner zone")]
 prune: no
 tidy: no
+
 test_url: http://www.theguardian.com/world/2013/oct/04/nsa-gchq-attack-tor-network-encryption
+test_contains: The National Security Agency has made repeated attempts to develop
+test_contains: The agency did not directly address those questions, instead providing a statement.
+
 test_url: http://www.theguardian.com/world/2013/oct/03/edward-snowden-files-john-lanchester
+test_contains: In August, the editor of the Guardian rang me up and asked if I would spend a week in New York
+test_contains: As the second most senior judge in the country, Lord Hoffmann, said in 2004 about a previous version of our anti-terrorism laws
+
 test_url: http://www.theguardian.com/commentisfree/2014/jun/15/britishness-search-identity-my-part-in-camerons-odyssey
+# Native ad
+test_url: http://www.theguardian.com/sustainable-business/2014/jul/18/ben-jerry-turn-ice-cream-into-energy

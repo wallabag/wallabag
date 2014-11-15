@@ -42,7 +42,11 @@ strip://h6[@class = 'kicker']
 author:substring-after(//h6[@class='byline'],'By ')
 
 test_url: http://www.nytimes.com/2011/07/24/books/review/an-academic-authors-unintentional-masterpiece.html
+test_contains: In this column I want to look at a not uncommon way of writing
+
 test_url: http://www.nytimes.com/2012/06/10/arts/television/the-newsroom-aaron-sorkins-return-to-tv.html
+test_contains: IF you’ve seen enough of Aaron Sorkin’s theater
+
 test_url: http://www.nytimes.com/2013/03/25/world/middleeast/israeli-military-responds-after-patrols-come-under-fire-from-syria.html
 test_url: http://www.nytimes.com/2013/08/15/nyregion/when-the-new-york-city-subway-ran-without-rails.html
 test_url: http://www.nytimes.com/2004/02/29/weekinreview/correspondence-class-consciousness-china-s-wealthy-live-creed-hobbes-darwin-meet.html

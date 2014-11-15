@@ -24,6 +24,8 @@
 #################################################################################
 # Do not trespass unless you know what you are doing
 #################################################################################
+// Change this if http is running on nonstandard port - i.e is behind cache proxy
+@define ('HTTP_PORT', 80);
 
 // Change this if not using the standart port for SSL - i.e you server is behind sslh
 @define ('SSL_PORT', 443);

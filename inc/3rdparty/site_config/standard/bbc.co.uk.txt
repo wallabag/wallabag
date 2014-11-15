@@ -13,7 +13,7 @@ body: //div[contains(@class, 'hrecipe')]//div[@id='subcolumn-1']
 #strip: //div[@class="story-feature narrow"]
 #strip: //div[@class="story-feature wide"]
 #strip: //div[@class="story-feature dslideshow-enclosure"]
-strip: //div[contains(@class, "story-feature")]
+strip: //div[contains(@class, "story-feature") and not(contains(@class, 'full-width'))]
 strip: //span[@class="story-date"]
 #strip: //div[@class="caption body-narrow-width"]
 strip: //div[@class="warning"]//p
@@ -30,13 +30,26 @@ strip: //div[contains(@class, 'comment-introduction')]
 strip: //div[contains(@class, 'share-tools')]
 strip: //div[@id='also-related-links']
 
+strip_id_or_class: share-help
+strip_id_or_class: comments_module
+
 replace_string(<noscript>): <div>
 replace_string(</noscript>): </div>
 
+tidy: no
 prune: no
 
 dissolve: //h2
+
 test_url: http://www.bbc.co.uk/sport/0/football/23224017
+test_contains: Swansea City have completed the club-record signing 
+
 test_url: http://www.bbc.co.uk/news/business-15060862
+test_contains: Europe's leaders are meeting again to try to solve
+
+# news feed
+test_url: http://feeds.bbci.co.uk/news/rss.xml
+# sports feed
+test_url: http://feeds.bbci.co.uk/sport/0/football/rss.xml?edition=int
 # video entry
 test_url: http://www.bbc.co.uk/news/world-asia-22056933

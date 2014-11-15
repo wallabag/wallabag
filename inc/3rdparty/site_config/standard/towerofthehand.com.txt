@@ -1,0 +1,10 @@
+title: //div[@id='headline']
+body: //div[@class='entry_text']
+author: //div[text() = 'Author:']/following-sibling::div/a
+date: //div[text() = 'Published:']/following-sibling::div
+single_page_link: //a[@href='noscript.html']
+prune: no
+
+test_url: http://towerofthehand.com/blog/2014/08/08-pitch-this-got-spinoff/index.html
+test_url: http://towerofthehand.com/blog/2014/07/31-definitions-and-embodiments/index.html
+test_url: http://towerofthehand.com/blog/2014/07/03-hero-with-thousand-faces/index.html

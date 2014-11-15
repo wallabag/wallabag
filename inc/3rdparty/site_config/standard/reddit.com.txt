@@ -7,7 +7,7 @@ author: //p[@class="tagline"]/a
 # this doesn't work for some reason...?
 date: //p[@class="tagline"]//@datetime
 
-body: //div[@class="expando"]//div[@class="usertext-body"]
+body: (//div[contains(@class, 'noncollapsed')]//div[contains(@class, 'usertext-body')])[1]
 
 strip_id_or_class: tagline
 strip_id_or_class: unvotable-message
@@ -18,3 +18,4 @@ single_page_link: //p[@class="title"]/a[contains(@href, 'http://')]
 
 test_url: http://www.reddit.com/r/truegaming/comments/wfe7r/i_wrote_about_the_problems_i_honestly_feel_that/
 test_url: http://www.reddit.com/r/worldnews/comments/1as37r/twelve_north_korean_soldiers_attempting_to_defect/
+test_url: http://www.reddit.com/r/WritingPrompts/comments/2786lw/wp_in_a_world_where_puns_are_illegal_one_man/chybk8e

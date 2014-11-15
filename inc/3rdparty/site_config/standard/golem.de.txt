@@ -1,25 +1,34 @@
-# Jens Kohl, jens.kohl@...
-# - Added publication date
-# - Striped pagination block
-# - Added single page link
-# - Added xpath-querys for the printer friendly version
+# Author: zinnober
+# Rewrite of original template which fetched the printer-version without pictures
 
-title: //h1
-body: //div[@class='formatted']
+tidy: no
 prune: no
 
-date: substring-after(//li[2][@class="text1"], 'Datum:')
-strip: //ol[@class="list-chapters"]
-strip_comments: yes
+# Set full title
+title: //h1
 
-# next: commands for printer friendly pages
-single_page_link: //a[contains(@href, 'print.php?a=')]/@href
-title: //body/h3
-strip_image_src: staticrl/images/logo.jpg
-strip_image_src: http://cpx.golem.de/cpx.php?class=7
-strip: //body/h3
-strip: //body/b[1]
-strip: //body/b[2]
-strip: //body/b[3]
-strip: //div[1]
-test_url: http://www.golem.de/1112/88696.html
+date: //time
+
+# Content is here
+body: //article
+
+# Fetch full multipage articles
+next_page_link: //a[@id='atoc_next']
+
+# Remove tracking and ads
+strip_id_or_class: iqadtile4
+
+# General Cleanup
+strip_id_or_class: list-jtoc
+strip_id_or_class: table-jtoc
+strip_id_or_class: implied
+strip_id_or_class: social-
+strip_id_or_class: comments
+strip_id_or_class: footer
+
+# Tidy up galleries (could still be improved, though)
+strip: //img[@src='']
+
+# Try yourself
+test_url: http://www.golem.de/news/intel-core-i7-5960x-im-test-die-pc-revolution-beginnt-mit-octacore-und-ddr4-1408-108893.html
+test_url: http://www.golem.de/news/test-infamous-first-light-neonbunter-actionspass-1408-108914.html

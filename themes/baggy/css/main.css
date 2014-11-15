@@ -70,7 +70,7 @@ h2, h3, h4 {
   text-transform: uppercase;
 }
 
-p, li {
+p, li, label {
   color: #666;
 }
 
@@ -104,10 +104,6 @@ form input[type="text"], select, form input[type="password"], form input[type="u
   }
 }
 
-fieldset label {
-  min-width: 12.5em;
-}
-
 .inline .row {
   display: inline-block;
   margin-right: 0.5em;
@@ -119,8 +115,12 @@ fieldset label {
 
 fieldset label {
   display: inline-block;
-  margin-right: 0.5em;
+  min-width: 12.5em;
   color: #666;
+}
+
+label {
+  margin-right: 0.5em;
 }
 
 form .row {
@@ -180,7 +180,7 @@ h2:after {
   padding-top: 9.5em;
   height: 100%;
   box-shadow:inset -4px 0 20px rgba(0,0,0,0.6);
-  z-index: 10;
+  z-index: 15;
 }
 
 #main {
@@ -191,7 +191,7 @@ h2:after {
   padding-bottom: 1em;
 }
 
-  #links a {
+  #links > li > a {
     display: block;
     padding: 0.5em 2em 0.5em 1em;
     color: #FFF;
@@ -207,7 +207,7 @@ h2:after {
           transition: all 0.5s ease;
   }
 
-  #links a:hover, #links a:focus {
+  #links > li > a:hover, #links > li > a:focus {
     background: #999;
     color: #000;
   }
@@ -281,12 +281,12 @@ h2:after {
 #listmode a:hover {
   opacity: 1;
 }
-.tablemode {
+#listmode.tablemode {
   background-image: url("../img/baggy/table.png");
   background-repeat: no-repeat;
   background-position: bottom;
 }
-.listmode {
+#listmode.listmode {
   background-image: url("../img/baggy/list.png");
   background-repeat: no-repeat;
   background-position: bottom;
@@ -327,15 +327,11 @@ footer a {
   margin-left: 0!important;
 }
 
-.listmode .entrie p {
-  display: none;
-}
-
 .list-entries + .results {
   margin-bottom: 2em;
 }
 
-.estimatedTime a {
+.estimatedTime .reading-time {
   color: #999;
   font-style: italic;
   font-weight: normal;
@@ -359,11 +355,15 @@ footer a {
   position: relative;
   overflow: hidden;
   padding: 1.5em 1.5em 3em 1.5em;
-  -webkit-transition: all 0.5s ease;
-     -moz-transition: all 0.5s ease;
-      -ms-transition: all 0.5s ease;
-       -o-transition: all 0.5s ease;
-          transition: all 0.5s ease;
+
+	/* Removing CSS transitions because they make the switch from list view to
+	 * table view jerky
+	 */
+  /* -webkit-transition: all 0.5s ease; */
+  /*    -moz-transition: all 0.5s ease; */
+  /*     -ms-transition: all 0.5s ease; */
+  /*      -o-transition: all 0.5s ease; */
+  /*         transition: all 0.5s ease; */
 }
 
 .entrie:before {
@@ -418,6 +418,7 @@ footer a {
 .entrie h2 {
   text-transform: none;
   margin-bottom: 0;
+  line-height: 1.2;
 }
 
   .entrie h2:after {
@@ -540,7 +541,7 @@ footer a {
   2.1 = "save a link" related styles
   ========================================================================== */
 
-#bagit-form, #search-form {
+.popup-form {
   background: rgba(0,0,0,0.5);
   position: absolute;
   top: 0;
@@ -549,37 +550,53 @@ footer a {
   height: 100%;
   width: 100%;
   margin: 0;
-  margin-top: -30%;
+  margin-top: -30% !important; /* TODO: get rid of !important here; overridden by .messages selector */
   padding: 2em;
   display: none;
   border-left: 1px #EEE solid;
 }
 
-#bagit-form form, #search-form form {
-  background: #FFF;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 20;
-  border: 10px solid #000;
-  width: 400px;
-  height: 200px;
-  /* margin: -150px 0 0 -300px; */
-  padding: 2em;
+	.popup-form form {
+		background: #FFF;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 20;
+		border: 10px solid #000;
+		width: 400px;
+		height: 200px;
+		padding: 2em;
+	}
+
+#bagit-form-form .addurl {
+	margin-left: 0;
 }
 
-a#bagit-form-close, a#search-form-close {
+.closeMessage,
+.close-button {
   background: #000;
   color: #FFF;
-  padding: 0.2em 0.5em;
+	font-size: 1.2em;
+	line-height: 1.6;
+	width: 1.6em;
+	height: 1.6em;
+	text-align: center;
   text-decoration: none;
-  display: inline-block;
-  float: right;
-  font-size: 0.6em;
 }
-a#bagit-form-close:hover, a#search-form-close:hover {
-  background: #999;
-  color: #000;
+	.closeMessage:hover,
+	.closeMessage:focus,
+	.close-button:hover,
+	.close-button:focus {
+		background: #999;
+		color: #000;
+	}
+
+.close-button--popup {
+	display: inline-block;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: 1.4em;
 }
 
 .active-current {
@@ -631,56 +648,6 @@ a.add-to-wallabag-link-after:after {
 #add-link-result {
   font-weight: bold;
   font-size: 0.9em;
-}
-
-/* ==========================================================================
-  2.2 = "search for articles" popup div related styles
-  ========================================================================== */
-#search-form {
-  background: rgba(0,0,0,0.5);
-  position: absolute;
-  top: 0;
-  left: 10em;
-  z-index: 20;
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  margin-top: -30%;
-  padding: 2em;
-  display: none;
-  border-left: 1px #EEE solid;
-}
-
-#search-form form {
-  background: #FFF;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 20;
-  border: 10px solid #000;
-  width: 400px;
-  height: 200px;
-  /* margin: -150px 0 0 -300px; */
-  padding: 2em;
-}
-
-a#search-form-close {
-  background: #000;
-  color: #FFF;
-  padding: 0.2em 0.5em;
-  text-decoration: none;
-  display: inline-block;
-  float: right;
-  font-size: 1.2em;
-}
-a#search-form-close:hover {
-  background: #999;
-  color: #000;
-}
-
-#submit-search{
-margin-left: 4em;
-margin-top:1em;
 }
 
 /* ==========================================================================
@@ -777,6 +744,10 @@ margin-top:1em;
   color: #FFF;
 }
 
+.icon-check.archive:before {
+  color: #FFF;
+}
+
 /* ==========================================================================
    4 = Messages
    ========================================================================== */
@@ -787,18 +758,6 @@ margin-top:1em;
 }
 
 .messages > * { display: inline-block;}
-
-.closeMessage {
-  background: #000;
-  color: #FFF;
-  padding: 0.2em 0.5em;
-  text-decoration: none;
-}
-
-  .closeMessage:hover, .closeMessage:focus {
-    background: #FFF;
-    color: #000;
-  }
 
 .warning {
   /* font-size: 3em;
@@ -815,6 +774,16 @@ margin-top:1em;
   display: block;
   width: 100%;
 }
+
+.more-info {
+	font-size: 0.85em;
+  line-height: 1.5;
+	color: #aaa;
+}
+
+	.more-info a {
+		color: #aaa;
+	}
 
 /* ==========================================================================
    5 = Article
@@ -839,6 +808,10 @@ blockquote {
   background: #FFF;
   padding: 1em;
   margin: 0;
+}
+
+#article h1 {
+  text-align: left;
 }
 
 #article h2, #article h3, #article h4 {
@@ -1029,6 +1002,9 @@ pre code {
     height: auto;
     padding-top: 3em;
   }
+  #links.menu--open {
+    display: block;
+  }
   footer  {
     position: static;
     margin-right: 3em;
@@ -1058,8 +1034,16 @@ pre code {
     display: none;
   }
 
-  #bagit-form, #search-form {
+  .popup-form, #bagit-form, #search-form {
     left: 0;
+    width: 100%;
+    border-left: none;
+  }
+
+  .popup-form form,
+  #bagit-form form,
+  #search-form form {
+    width: 100%;
   }
 }
 

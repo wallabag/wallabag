@@ -51,6 +51,7 @@ final class Tools
 
         $serverport = (!isset($_SERVER["SERVER_PORT"])
             || $_SERVER["SERVER_PORT"] == '80'
+            || $_SERVER["SERVER_PORT"] == HTTP_PORT
             || ($https && $_SERVER["SERVER_PORT"] == '443')
             || ($https && $_SERVER["SERVER_PORT"]==SSL_PORT) //Custom HTTPS port detection
             ? '' : ':' . $_SERVER["SERVER_PORT"]);
@@ -116,7 +117,7 @@ final class Tools
     {
         $views = array(
             'install', 'import', 'export', 'config', 'tags',
-            'edit-tags', 'view', 'login', 'error'
+            'edit-tags', 'view', 'login', 'error', 'about'
             );
 
         return (in_array($view, $views) ? $view . '.twig' : 'home.twig');

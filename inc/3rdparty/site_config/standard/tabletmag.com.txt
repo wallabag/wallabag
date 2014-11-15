@@ -1,0 +1,5 @@
+body: //div[contains(@class, 'story-text')]
+
+strip_id_or_class: related
+
+test_url: http://www.tabletmag.com/jewish-news-and-politics/181181/mossberg-parallel-states?all=1

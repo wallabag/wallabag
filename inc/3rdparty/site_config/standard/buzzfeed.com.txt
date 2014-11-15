@@ -10,6 +10,15 @@ date: //time[@data-print='date']
 body: //div[@data-print='body']
 body: //section[@data-print='body']
 
+find_string: rel:bf_image_src=
+replace_string: src=
+find_string: src="data:
+replace_string: disabled_src="data:
+
+native_ad_clue: //meta[@property="article:section" and @content="Advertiser"]
+
 # For various things...
 strip: *[@data-print="ignore"]
 test_url: http://www.buzzfeed.com/hgrant/35-reasons-why-dogs-hate-the-holidays
+# Native ad
+test_url: http://www.buzzfeed.com/bravo/ways-to-up-your-online-dating-game

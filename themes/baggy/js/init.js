@@ -8,7 +8,10 @@ $.fn.ready(function() {
      ========================================================================== */
 
   $("#menu").click(function(){
-    $("#links").toggle();
+    $("#links").toggleClass('menu--open');
+    if ($('#content').hasClass('opacity03')) {
+        $('#content').removeClass('opacity03');
+    }
   });
 
   /* ==========================================================================

@@ -1,5 +1,12 @@
 body: //div[@id='imagestage']
+body: //div[contains(@class, 'userContentWrapper')]
+
+strip_id_or_class: commentable
+
 prune: no
 tidy: no
 
-test_url: https://www.facebook.com/feeds/page.php?id=338077742912613&format=rss20
+# single_page_link: replace(substring-after(//noscript//meta[@http-equiv="refresh"]/@content, 'URL='), "&amp;", "&")
+
+test_url: https://www.facebook.com/permalink.php?story_fbid=10154584776550183&id=294468630182
+test_contains: holding an extraordinary session in Brussels this month

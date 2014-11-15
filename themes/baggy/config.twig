@@ -6,30 +6,29 @@
 {% endblock %}
 {% block content %}
             <h2>{% trans "Saving articles" %}</h2>
-            <p>{% trans "There are several ways to save an article:" %} (<a href="http://doc.wallabag.org/" title="{% trans "read the documentation" %}">?</a>)</p>
+            <p>{% trans "There are several ways to save an article:" %} {% trans "(<a href=\"http://doc.wallabag.org/en/User_documentation/Save_your_first_article\" target=\"_blank\" title=\"Documentation\">?</a>)" %}</p>
+            <p>
+                <form method="get" action="index.php">
+                    <label class="addurl" for="config_plainurl">{% trans "By filling this field" %}:</label><br>
+                    <input required placeholder="example.com/article" class="addurl" id="config_plainurl" name="plainurl" type="url" />
+                    <input type="submit" value="{% trans "bag it!" %}" />
+                </form>
+            </p>
+            <h3>Browser Plugins</h3>
             <ul>
-                <li>Firefox: <a href="https://addons.mozilla.org/firefox/addon/wallabag/" title="download the firefox extension">{% trans "download the extension" %}</a></li>
-                <li>Chrome: <a href="http://doc.wallabag.org/doku.php?id=users:chrome_extension" title="download the chrome extension">{% trans "download the extension" %}</a></li>
-                <li>Android: <a href="https://f-droid.org/app/fr.gaulupeau.apps.InThePoche" title="download the application">{% trans "via F-Droid" %}</a> {% trans " or " %} <a href="https://play.google.com/store/apps/details?id=fr.gaulupeau.apps.InThePoche" title="download the application">{% trans "via Google Play" %}</a></li>
-                <li>iOS: <a href="https://itunes.apple.com/app/wallabag/id828331015?mt=8" title="download the iOS application">{% trans "download the application" %}</a></li>
-                <li>Windows Phone: <a href="http://www.windowsphone.com/en-us/store/app/wallabag/ff890514-348c-4d0b-9b43-153fff3f7450" title="download the window phone application">{% trans "download the application" %}</a></li>
-                <li>
-                    <form method="get" action="index.php">
-                        <label class="addurl" for="config_plainurl">{% trans "By filling this field" %}:</label>
-                        <input required placeholder="example.com/article" class="addurl" id="config_plainurl" name="plainurl" type="url" />
-                        <input type="submit" value="{% trans "bag it!" %}" />
-                    </form>
-                </li>
-                <li>{% trans "Bookmarklet: drag & drop this link to your bookmarks bar" %} <a id="bookmarklet" ondragend="this.click();" title="i am a bookmarklet, use me !" href="javascript:if(top['bookmarklet-url@wallabag.org']){top['bookmarklet-url@wallabag.org'];}else{(function(){var%20url%20=%20location.href%20||%20url;window.open('{{ poche_url }}?action=add&url='%20+%20btoa(url),'_self');})();void(0);}">{% trans "bag it!" %}</a></li>
+                <li><a href="https://addons.mozilla.org/firefox/addon/wallabag/" target="_blank">{% trans "Firefox Add-On" %}</a></li>
+                <li><a href="https://chrome.google.com/webstore/detail/wallabag/bepdcjnnkglfjehplaogpoonpffbdcdj" target="_blank">{% trans "Chrome Extension" %}</a></li>
             </ul>
-
-            <h2>{% trans "Upgrading wallabag" %}</h2>
+            <h3>Mobile Apps</h3>
             <ul>
-                <li>{% trans "Installed version" %} : <strong>{{ constant('POCHE') }}</strong></li>
-                <li>{% trans "Latest stable version" %} : {{ prod }}. {% if compare_prod == -1 %}<strong><a href="http://wallabag.org/">{% trans "A more recent stable version is available." %}</a></strong>{% else %}{% trans "You are up to date." %}{% endif %} ({% trans "Last check:" %} {{ check_time_prod }})</li>
-                {% if constant('DEBUG_POCHE') == 1 %}<li>{% trans "Latest dev version" %} : {{ dev }}. {% if compare_dev == -1 %}<strong><a href="http://wallabag.org/">{% trans "A more recent development version is available." %}</a></strong>{% else %}{% trans "You are up to date." %}{% endif %} ({% trans "Last check:" %} {{ check_time_dev }}){% endif %}</li>
+                <li>Android: <a href="https://f-droid.org/app/fr.gaulupeau.apps.InThePoche" target="_blank">{% trans "via F-Droid" %}</a> {% trans " or " %} <a href="https://play.google.com/store/apps/details?id=fr.gaulupeau.apps.InThePoche" target="_blank">{% trans "via Google Play" %}</a></li>
+                <li>iOS: <a href="https://itunes.apple.com/app/wallabag/id828331015?mt=8" target="_blank">{% trans "download the application" %}</a></li>
+                <li>Windows Phone: <a href="http://www.windowsphone.com/en-us/store/app/wallabag/ff890514-348c-4d0b-9b43-153fff3f7450" target="_blank">{% trans "download the application" %}</a></li>
             </ul>
-            <p>{% trans "You can clear cache to check the latest release." %}</p>
+                <h3>{% trans "Bookmarklet" %}</h3>
+                <p>
+                {% trans "Drag &amp; drop this link to your bookmarks bar:" %} <a id="bookmarklet" ondragend="this.click();" href="javascript:if(top['bookmarklet-url@wallabag.org']){top['bookmarklet-url@wallabag.org'];}else{(function(){var%20url%20=%20location.href%20||%20url;window.open('{{ poche_url }}?action=add&url='%20+%20btoa(url),'_self');})();void(0);}">{% trans "bag it!" %}</a>
+                </p>
 
             <h2>{% trans "Feeds" %}</h2>
             {% if token == '' %}
@@ -40,9 +39,11 @@
                 <li><a href="?feed&amp;type=fav&amp;user_id={{ user_id }}&amp;token={{ token }}" target="_blank">{% trans "Favorites feed" %}</a></li>
                 <li><a href="?feed&amp;type=archive&amp;user_id={{ user_id }}&amp;token={{ token }}" target="_blank">{% trans "Archive feed" %}</a></li>
             </ul>
-            <p>{% trans "Your token:" %} <strong>{{token}}</strong></p>
-            <p>{% trans "Your user id:" %} <strong>{{user_id}}</strong></p>
-            <p>{% trans "You can regenerate your token: <a href='?feed&amp;action=generate'>generate!</a>." %}</p>
+            <p class="more-info">
+              {% trans "Your token:" %} <strong>{{token}}</strong><br>
+              {% trans "Your user id:" %} <strong>{{user_id}}</strong><br>
+              {% trans "You can regenerate your token: <a href='?feed&amp;action=generate'>generate!</a>." %}
+            </p>
             {% endif %}
 
             <h2>{% trans "Change your theme" %}</h2>
@@ -83,6 +84,35 @@
                 <input type="hidden" name="token" value="{{ token }}">
             </form>
 
+            <h2><a name="import"></a>{% trans "Import" %}</h2>
+            <p>{% trans "You can import your Pocket, Readability, Instapaper, Wallabag or any data in appropriate json or html format." %}</p>
+            <p>{% trans "Please select export file on your computer and press \"Import\" button below. Wallabag will parse your file, insert all URLs and start fetching of articles if required." %}</p>
+            <form method="post" action="?import" name="uploadfile" enctype="multipart/form-data">
+                <fieldset class="w500p">
+                    <div class="row">
+                        <label class="col w150p" for="file">{% trans "File:" %}</label>
+                        <input class="col" type="file" id="file" name="file" tabindex="4" required="required">
+                    </div>
+                    <div class="row mts txtcenter">
+                        <button class="bouton" type="submit" tabindex="4">{% trans "Import" %}</button>
+                    </div>
+                </fieldset>
+            </form>
+            <p><a href="?import">{% trans "You can click here to fetch content for articles with no content." %}</a></p>
+            <p class="more-info">{% trans "Fetching process is controlled by two constants in your config file: IMPORT_LIMIT (how many articles are fetched at once) and IMPORT_DELAY (delay between fetch of next batch of articles)." %}</p>
+
+            <h2>{% trans "Export your wallabag data" %}</h2>
+            <p><a href="?export" target="_blank">{% trans "Export JSON" %}</a><br>
+            <span class="more-info">Data will be exported in a single JSON file.</span></p>
+
+            <h2>{% trans "Fancy an E-Book ?" %}</h2>
+            <p><a href="./?epub&amp;method=all" title="Generate ePub">Download E-Book</a><br>
+            <span class="more-info">{% trans "Articles will be exported as a single E-book file (EPUB 3 format)." %} {% trans "This can <b>take a while</b> and can <b>even fail</b> if you have too many articles, depending on your server configuration." %}</span></p>
+
+            <h2><a name="cache"></a>{% trans "Cache" %}</h2>
+            <p><a href="?empty-cache">{% trans "Delete Cache" %}</a><br>
+            <span class="more-info">Deleting the cache may help with display or other problems.</span></p>
+
             {% if http_auth == 0 %}
             <h2>{% trans "Change your password" %}</h2>
             <form method="post" action="?config" name="loginform">
@@ -104,34 +134,7 @@
             </form>
             {% endif %}
 
-            <h2>{% trans "Import" %}</h2>
-            <p>{% trans "You can import your Pocket, Readability, Instapaper, Wallabag or any data in appropriate json or html format." %}</p>
-            <p>{% trans "Please select export file on your computer and press \"Import\" button below.<br>Wallabag will parse your file, insert all URLs and start fetching of articles if required.<br>Fetching process is controlled by two constants in your config file: IMPORT_LIMIT (how many articles are fetched at once) and IMPORT_DELAY (delay between fetch of next batch of articles)." %}</p>
-            <form method="post" action="?import" name="uploadfile" enctype="multipart/form-data">
-                <fieldset class="w500p">
-                    <div class="row">
-                        <label class="col w150p" for="file">{% trans "File:" %}</label>
-                        <input class="col" type="file" id="file" name="file" tabindex="4" required="required">
-                    </div>
-                    <div class="row mts txtcenter">
-                        <button class="bouton" type="submit" tabindex="4">{% trans "Import" %}</button>
-                    </div>
-                </fieldset>
-            </form>
-            <p><a href="?import">{% trans "You can click here to fetch content for articles with no content." %}</a></p>
-            
-            <h2>{% trans "Export your wallabag data" %}</h2>
-            <p><a href="?export" target="_blank">{% trans "Click here" %}</a> {% trans "to export your wallabag data." %}</p>
-            
-            <h2>{% trans "Fancy an E-Book ?" %}</h2>
-            <p>{% trans "Click on <a href=\"./?epub&amp;method=all\" title=\"Generate ePub\">this link</a> to get all your articles in one ebook (ePub 3 format)." %}
-            <br>{% trans "This can <b>take a while</b> and can <b>even fail</b> if you have too many articles, depending on your server configuration." %}</p>
-
-            <h2>{% trans "Cache" %}</h2>
-            <p><a href="?empty-cache">{% trans "Click here" %}</a> {% trans "to delete cache." %}</p>
-
             <h2>{% trans 'Add user' %}</h2>
-            <p>{% trans 'Add a new user :' %}</p>
             <form method="post" action="?newuser">
                 <fieldset class="w500p">
                 <div class="row">
@@ -147,7 +150,7 @@
                     <input class="col" type="email" id="newuseremail" name="newuseremail" placeholder="{% trans 'Email' %}">
                 </div>
                 <div class="row mts txtcenter">
-                    <button type="submit">{% trans "Send" %}</button>	
+                    <button type="submit">{% trans "Add user" %}</button>
                 </div>
                 </fieldset>
             </form>
@@ -161,9 +164,18 @@
                     <input class="col" type="password" id="password4deletinguser" name="password4deletinguser" placeholder="{% trans "Password" %}">
                 </div>
             <div class="row mts txtcenter">
-                <button type="submit">{% trans "Send" %}</button>
+                <button type="submit">{% trans "Delete account" %}</button>
             </div>
             </form>
-            {% else %}<p>{% trans "You are the only user, you cannot delete your own account." %}<br />
-            {% trans "To completely remove wallabag, delete the wallabag folder on your web server (and eventual databases)." %}</p>{% endif %}
+            {% else %}<p>{% trans "You are the only user, you cannot delete your own account." %}</p>
+            <p>{% trans "To completely remove wallabag, delete the wallabag folder on your web server (and eventual databases)." %}</p>{% endif %}
+
+            <h2>{% trans "Upgrading wallabag" %}</h2>
+            <ul>
+                <li>{% trans "Installed version" %}: <strong>{{ constant('POCHE') }}</strong></li>
+                <li>{% trans "Latest stable version" %}: {{ prod }}. {% if compare_prod == -1 %}<strong><a href="http://wallabag.org/">{% trans "A more recent stable version is available." %}</a></strong>{% else %}{% trans "You are up to date." %}{% endif %} ({% trans "Last check:" %} {{ check_time_prod }})</li>
+                {% if constant('DEBUG_POCHE') == 1 %}<li>{% trans "Latest dev version" %}: {{ dev }}. {% if compare_dev == -1 %}<strong><a href="http://wallabag.org/">{% trans "A more recent development version is available." %}</a></strong>{% else %}{% trans "You are up to date." %}{% endif %} ({% trans "Last check:" %} {{ check_time_dev }}){% endif %}</li>
+            </ul>
+            <p class="more-info">{% trans "You can clear cache to check the latest release." %}</p>
+
 {% endblock %}

@@ -15,4 +15,4 @@ strip_id_or_class: promotion-tag
 tidy: no
 prune: no
 
-test_url: www.csmonitor.com/World/Middle-East/2011/1108/Imminent-Iran-nuclear-threat-A-timeline-of-warnings-since-1979/Earliest-warnings-1979-84
+test_url: http://www.csmonitor.com/World/Middle-East/2011/1108/Imminent-Iran-nuclear-threat-A-timeline-of-warnings-since-1979/Earliest-warnings-1979-84
