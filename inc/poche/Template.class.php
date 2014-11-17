@@ -181,7 +181,7 @@ class Template extends Twig_Environment
         while (($theme = readdir($handle)) !== false) {
             # Themes are stored in a directory, so all directory names are themes
             # @todo move theme installation data to database
-            if (!is_dir(THEME . '/' . $theme) || in_array($theme, array('.', '..'))) {
+            if (!is_dir(THEME . '/' . $theme) || in_array($theme, array('.', '..', '_global'))) {
                 continue;
             }
 
