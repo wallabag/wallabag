@@ -67,4 +67,3 @@
 @define ('IMPORT_LIMIT', 5);
 //delay between downloads (in sec)
 @define ('IMPORT_DELAY', 5);
-
