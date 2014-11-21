@@ -49,6 +49,7 @@
 @define ('NOT_FLATTRABLE', '0');
 @define ('FLATTRABLE', '1');
 @define ('FLATTRED', '2');
+@define ('CARROT', FALSE);
 // display or not print link in article view
 @define ('SHOW_PRINTLINK', '1');
 // display or not percent of read in article view. Affects only default theme.
