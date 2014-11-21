@@ -39,7 +39,8 @@ a.flattr span {
 }
 
 a.carrot span {
-    background-image: url('../img/default/carrot.png')
+    background-image: url('../../_global/img/icons/carrot-icon--black.png');
+    background-size: 16px 16px;
 }
 
 a.email span {
