@@ -667,8 +667,8 @@ a.add-to-wallabag-link-after:after {
 
 .icon span,
 .icon-image span {
-	display: inline-block;
-	text-indent: -9999px;
+  position: absolute;
+  top: -9999px;
 }
 
 [class^="icon-"]:before, [class*=" icon-"]:before {
