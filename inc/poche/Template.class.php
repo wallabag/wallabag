@@ -24,7 +24,7 @@ class Template extends Twig_Environment
 
         $themeDirectory = (is_null($pocheUser) ? DEFAULT_THEME : $pocheUser->getConfigValue('theme'));
 
-        if ($themeDirectory === false) {
+        if ($themeDirectory === false || !is_dir(THEME . '/' . $themeDirectory)) {
             $themeDirectory = DEFAULT_THEME;
         }
 
