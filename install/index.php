@@ -258,6 +258,7 @@ else if (isset($_POST['install'])) {
                 <?php endif; ?>    
             <?php endif; ?>
             <p>To install wallabag, you just have to fill the following fields. That's all.</p>
+            <p>If you need help, you can read the doc: <a href="docs/">offline documentation</a> and <a href="http://doc.wallabag.org">online one</a> (already up-to-date).</p>
             <p>Don't forget to check your server compatibility <a href="install/wallabag_compatibility_test.php?from=install">here</a>.</p>
             <form method="post">
                 <fieldset>
