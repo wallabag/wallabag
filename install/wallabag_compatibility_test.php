@@ -338,7 +338,7 @@ if (isset($_GET['from'])){
 	                                                <?php if ($tidy_ok): ?>
 	                                                    <li><strong>Tidy:</strong> You have <code>Tidy</code> support installed.  <em>No problems here.</em></li>
 	                                                <?php else: ?>
-	                                                    <li><strong>Tidy:</strong> The <code>Tidy</code> extension is not available.  <?php echo $app_name; ?> should still work with most feeds, but you may experience problems with some.</li>
+	                                                    <li><strong>Tidy:</strong> The <code>Tidy</code> extension is not available.  <?php echo $app_name; ?> should still work with most feeds, but you may experience problems with some. You can install it with <code>sudo apt-get install php5-tidy</code> and then reload Apache <code>sudo service apache2 reload</code>.</li>
 	                                                <?php endif; ?>
 	                                            
 	                                                <?php if ($curl_ok): ?>
