@@ -44,6 +44,8 @@
 @define ('SHARE_MAIL', TRUE);
 @define ('SHARE_SHAARLI', FALSE);
 @define ('SHAARLI_URL', 'http://myshaarliurl.com');
+@define ('SHARE_DIASPORA', FALSE);
+@define ('DIASPORA_URL', 'http://diasporapod.com'); # Don't add a / at the end
 @define ('FLATTR', TRUE);
 @define ('FLATTR_API', 'https://api.flattr.com/rest/v2/things/lookup/?url=');
 @define ('NOT_FLATTRABLE', '0');
