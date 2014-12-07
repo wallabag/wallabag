@@ -754,6 +754,11 @@ a.add-to-wallabag-link-after:after {
 	background-image: url('../../_global/img/icons/carrot-icon--white.png');
 }
 
+/* Diaspora */
+.icon-image--diaspora {
+	background-image: url('../../_global/img/icons/diaspora-icon--black.png');
+}}
+
 /* ==========================================================================
    Icon selected
    ========================================================================== */
