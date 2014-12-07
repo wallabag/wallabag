@@ -445,6 +445,7 @@ class Poche
                     $tpl_vars['entries'] = $this->store->getEntriesByView($view, $this->user->getId(), $this->pagination->get_limit(), $id);
                     $tpl_vars['page_links'] = $page_links;
                     $tpl_vars['nb_results'] = $count;
+                    $tpl_vars['random'] = rand(1,$count);
                 }
                 Tools::logm('display ' . $view . ' view');
                 break;
