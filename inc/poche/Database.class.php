@@ -33,7 +33,7 @@ class Database {
             case 'mysql':
                 $db_path = 'mysql:host=' . STORAGE_SERVER . ';dbname=' . STORAGE_DB . ';charset=utf8mb4';
                 $this->handle = new PDO($db_path, STORAGE_USER, STORAGE_PASSWORD, array(
-                    PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8mb4',
+                    PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
                 ));
                 break;
             case 'postgres':
