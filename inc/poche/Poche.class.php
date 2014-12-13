@@ -303,6 +303,15 @@ class Poche
                 $this->messages->add('s', _('The tag has been successfully deleted'));
                 Tools::redirect();
                 break;
+            case 'reload_article' :
+                Tools::logm('reload article');
+                $id = $_GET['id'];
+                $entry = $this->store->retrieveOneById($id, $this->user->getId());
+                Tools::logm('reload url ' . $entry['url']);
+                $url = new Url(base64_encode($entry['url']));
+                $this->action('add', $url);
+                break;
+                
             default:
                 break;
         }

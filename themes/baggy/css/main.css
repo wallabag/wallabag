@@ -736,6 +736,9 @@ a.add-to-wallabag-link-after:after {
 .icon-print:before {
   content: "\e80d";
 }
+.icon-reload:before {
+/* TODO */
+}
 
 
 /* .icon-image class, for image-based icons

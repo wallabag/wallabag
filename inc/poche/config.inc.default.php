@@ -56,6 +56,7 @@
 @define ('SHOW_PRINTLINK', '1');
 // display or not percent of read in article view. Affects only default theme.
 @define ('SHOW_READPERCENT', '1');
+@define ('RELOAD_ARTICLE', TRUE);
 @define ('ABS_PATH', 'assets/');
 
 @define ('DEFAULT_THEME', 'baggy');

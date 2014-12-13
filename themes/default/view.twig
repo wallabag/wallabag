@@ -19,6 +19,7 @@
                 {% if constant('CARROT') == 1 %}<li><a href="https://secure.carrot.org/GiveAndGetBack.do?url={{ entry.url|url_encode }}&title={{ entry.title|url_encode }}" class="tool carrot icon" target="_blank" title="{% trans "carrot" %}"><span>{% trans "carrot" %}</span></a></li>{% endif %}
                 {% if constant('SHOW_PRINTLINK') == 1 %}<li><a title="{% trans "Print" %}" class="tool print" href="javascript: window.print();"><span>{% trans "Print" %}</span></a></li>{% endif %}
                 <li><a href="./?epub&amp;method=id&amp;value={{ entry.id|e }}" title="Generate epub file">EPUB</a></li>
+                {% if constant('RELOAD_ARTICLE') == 1 %}<li><a class="tool reload" href="./?action=reload_article&amp;id={{ entry.id|e }}" title="{% trans "Reload article" %}"><span>{% trans "Reload article" %}</span></a></li>{% endif %}}
                 <li><a href="mailto:hello@wallabag.org?subject=Wrong%20display%20in%20wallabag&amp;body={{ entry.url|url_encode }}" title="{% trans "Does this article appear wrong?" %}" class="tool bad-display"><span>{% trans "Does this article appear wrong?" %}</span></a></li>
                 {% if constant('SHOW_READPERCENT') == 1 %}<li><div id="readLeftPercent">0%</div></li>{% endif %}
             </ul>
