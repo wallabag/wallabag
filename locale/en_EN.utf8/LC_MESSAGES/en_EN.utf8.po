@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wallabag\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-25 15:17+0300\n"
+"POT-Creation-Date: 2014-07-26 15:17+0300\n"
 "PO-Revision-Date: \n"
-"Last-Translator: tcit <tcit@openmailbox.org>\n"
+"Last-Translator: Thomas Citharel <tcit@openmailbox.org>\n"
 "Language-Team: \n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
@@ -113,8 +113,7 @@ msgstr "Your user ID:"
 msgid ""
 "You can regenerate your token: <a href='?feed&amp;action=generate'>generate!"
 "</a>."
-msgstr ""
-"<a href='?feed&amp;action=generate'>Regenerate Token</a>"
+msgstr "<a href='?feed&amp;action=generate'>Regenerate Token</a>"
 
 msgid "Change your theme"
 msgstr "Change Your Theme"
@@ -146,25 +145,40 @@ msgstr "Repeat your new password:"
 msgid "Import"
 msgstr "Import"
 
-msgid "You can import your Pocket, Readability, Instapaper, Wallabag or any data in appropriate json or html format."
-msgstr "You can import your Pocket, Readability, Instapaper, wallabag or any fil in appropriate JSON or HTML format."
+msgid ""
+"You can import your Pocket, Readability, Instapaper, Wallabag or any data in "
+"appropriate json or html format."
+msgstr ""
+"You can import your Pocket, Readability, Instapaper, wallabag or any fil in "
+"appropriate JSON or HTML format."
 
 msgid ""
-"Please execute the import script locally as it can take a very long time."
+"Please select export file on your computer and press \"Import\" button "
+"below. Wallabag will parse your file, insert all URLs and start fetching of "
+"articles if required."
 msgstr ""
-
-msgid "Please select export file on your computer and press \"Import\" button below. Wallabag will parse your file, insert all URLs and start fetching of articles if required."
-msgstr "Please select export file on your computer and press &ldquo;Import&rdquo; button below. wallabag will parse your file, insert all URLs and start fetching of articles if required."
-"Please execute the import script locally as it can take a very long time."
+"Please select export file on your computer and press &ldquo;Import&rdquo; "
+"button below. wallabag will parse your file, insert all URLs and start "
+"fetching of articles if required.Please execute the import script locally as "
+"it can take a very long time."
 
 msgid "You can click here to fetch content for articles with no content."
 msgstr "Fetch content for articles with no content"
 
+msgid ""
+"Please execute the import script locally as it can take a very long time."
+msgstr ""
+"Please execute the import script locally as it can take a very long time."
+
 msgid "More info in the official documentation:"
 msgstr "More info in the official documentation:"
 
-msgid "(<a href=\"http://doc.wallabag.org/en/User_documentation/Save_your_first_article\" target=\"_blank\" title=\"Documentation\">?</a>)"
-msgstr "(<a href=\"http://doc.wallabag.org/en/User_documentation/Save_your_first_article\" target=\"_blank\" title=\"Documentation\">?</a>)"
+msgid ""
+"(<a href=\"http://doc.wallabag.org/en/User_documentation/"
+"Save_your_first_article\" target=\"_blank\" title=\"Documentation\">?</a>)"
+msgstr ""
+"(<a href=\"http://doc.wallabag.org/en/User_documentation/"
+"Save_your_first_article\" target=\"_blank\" title=\"Documentation\">?</a>)"
 
 msgid "Import from Pocket"
 msgstr "Import from Pocket"
@@ -463,7 +477,9 @@ msgid "a more recent development version is available."
 msgstr "A more recent development version is available."
 
 msgid "You can clear cache to check the latest release."
-msgstr "You can <a href=\"#cache\">clear the cache</a> to check for the latest release."
+msgstr ""
+"You can <a href=\"#cache\">clear the cache</a> to check for the latest "
+"release."
 
 msgid "Please execute the import script locally, it can take a very long time."
 msgstr ""
@@ -518,8 +534,8 @@ msgid ""
 "the two fields have to be filled & the password must be the same in the two "
 "fields"
 msgstr ""
-"The two fields must be filled, and the password must be the same in both "
-"fields"
+"les deux champs doivent être remplis et le mot de passe doit être le même "
+"pour les deux champs"
 
 msgid "still using the \""
 msgstr "Still using the \""
@@ -625,12 +641,17 @@ msgstr "Tag these results as"
 msgid "Fancy an E-Book ?"
 msgstr "Fancy an E-Book?"
 
-msgid ""
-"Click on <a href=\"./?epub&amp;method=all\" title=\"Generate ePub\">this "
-"link</a> to get all your articles in one ebook (ePub 3 format)."
-msgstr ""
-"Click on <a href=\"./?epub&amp;method=all\" title=\"Generate EPUB\">this "
-"link</a> to get all your articles in one ebook (EPUB 3 format)."
+msgid "Click to get all your articles in one ebook :"
+msgstr "Click to get all your articles in one ebook :"
+
+msgid "Generate ePub file"
+msgstr "Generate ePub file"
+
+msgid "Generate Mobi file"
+msgstr "Generate Mobi file"
+
+msgid "Generate PDF file"
+msgstr "Generate PDF file"
 
 msgid ""
 "This can <b>take a while</b> and can <b>even fail</b> if you have too many "
@@ -639,14 +660,96 @@ msgstr ""
 "This can <b>take a while</b> and can <b>even fail</b> if you have too many "
 "articles, depending on your server configuration."
 
-msgid "Download the articles from this tag in an epub"
-msgstr "Download the articles from this tag in an EPUB"
+msgid "Download the articles from this tag in an ePub file"
+msgstr "Download the articles from this tag in an ePub file"
 
-msgid "Download the articles from this search in an epub"
-msgstr "Download the articles from this search in an EPUB"
+msgid "Download the articles from this tag in an Mobi file"
+msgstr "Download the articles from this tag in an Mobi file"
 
-msgid "Download the articles from this category in an epub"
-msgstr "Download the articles from this category in an EPUB"
+msgid "Download the articles from this tag in an PDF file"
+msgstr "Download the articles from this tag in an PDF file"
+
+msgid "Download the articles from this search in an ePub"
+msgstr "Download the articles from this search in an ePub"
+
+msgid "Download the articles from this search in a Mobi file"
+msgstr "Download the articles from this search in a Mobi file"
+
+msgid "Download the articles from this search in a PDF file"
+msgstr "Download the articles from this search in a PDF file"
+
+msgid "Download the articles from this category in an ePub"
+msgstr "Download the articles from this category in an ePub"
+
+msgid "Download the articles from this category in a Mobi file"
+msgstr "Download the articles from this category in a Mobi file"
+
+msgid "Download the articles from this category in a PDF file"
+msgstr "Download the articles from this category in a PDF file"
+
+msgid "Download as ePub3"
+msgstr "Download as ePub3"
+
+msgid "Download as Mobi"
+msgstr "Download as Mobi"
+
+msgid "Download as PDF"
+msgstr "Download as PDF"
+
+msgid "All my articles on %s"
+msgstr "All my articles on %s"
+
+msgid "Allarticles"
+msgstr "Allarticles"
+
+msgid "Articles tagged %s"
+msgstr "Articles tagged %s"
+
+msgid "Tag %s"
+msgstr "Tag %s"
+
+msgid "Articles in category %s"
+msgstr "All articles in category %s"
+
+msgid "Category %s"
+msgstr "Category %s"
+
+msgid "Articles for search %s"
+msgstr "All articles for search %s"
+
+msgid "Search %s"
+msgstr "Search %s"
+
+msgid "wallabag articles book"
+msgstr "wallabag articles book"
+
+msgid "Some articles saved on my wallabag"
+msgstr "Some articles saved on my wallabag"
+
+msgid "Produced by wallabag with PHPePub"
+msgstr "Produced by wallabag with PHPePub"
+
+msgid ""
+"Please open <a href='https://github.com/wallabag/wallabag/issues'>an issue</"
+"a> if you have trouble with the display of this E-Book on your device."
+msgstr ""
+"Please open <a href='https://github.com/wallabag/wallabag/issues'>an issue</"
+"a> if you have trouble with the display of this E-Book on your device."
+
+msgid "Produced by wallabag with PHPMobi"
+msgstr "Produced by wallabag with PHPMobi"
+
+msgid "Mail function is disabled. You can't send emails from your server"
+msgstr "Mail function is disabled. You can't send emails from your server"
+
+msgid "You didn't set your kindle's email adress !"
+msgstr "You didn't set your kindle's email adress !"
+
+msgid "The email has been sent to your kindle !"
+msgstr "The email has been sent to your kindle !"
+
+msgid "Produced by wallabag with mPDF"
+msgstr "Produced by wallabag with mPDF"
 
 #~ msgid "poche it!"
 #~ msgstr "poche it!"
