@@ -106,8 +106,14 @@
             <span class="more-info">Data will be exported in a single JSON file.</span></p>
 
             <h2>{% trans "Fancy an E-Book ?" %}</h2>
-            <p><a href="./?epub&amp;method=all" title="Generate ePub">Download E-Book</a><br>
-            <span class="more-info">{% trans "Articles will be exported as a single E-book file (EPUB 3 format)." %} {% trans "This can <b>take a while</b> and can <b>even fail</b> if you have too many articles, depending on your server configuration." %}</span></p>
+            <p>{% trans "Click to get all your articles in one ebook :" %}
+            <ul>
+            <li><a href="./?epub&amp;method=all" title="{% trans 'Generate ePub file' %}">ePub 3</a></li>
+            <li><a href="./?mobi&amp;method=all" title="{% trans 'Generate Mobi file' %}">Mobi</a></li>
+            <li><a href="./?pdf&amp;method=all" title="{% trans 'Generate PDF file' %}">PDF</a></li>
+            </ul>
+
+            <span class="more-info">{% trans "This can <b>take a while</b> and can <b>even fail</b> if you have too many articles, depending on your server configuration." %}</span></p>
 
             <h2><a name="cache"></a>{% trans "Cache" %}</h2>
             <p><a href="?empty-cache">{% trans "Delete Cache" %}</a><br>
