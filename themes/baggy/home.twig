@@ -25,7 +25,7 @@
                 {% block pager %}
                     {% if nb_results > 1 %}
                 <div class="results">
-                    <div class="nb-results">{{ nb_results }} {% trans "results" %}{% if search_term is defined %} {% trans %}found for « {{ search_term }} »{% endtrans %}{% endif %} <span class="icon icon-random"><a href="?view=view&id={{ random }}"> {% trans "random" %}</span></div>
+                    <div class="nb-results">{{ nb_results }} {% trans "results" %}{% if search_term is defined %} {% trans %}found for « {{ search_term }} »{% endtrans %}{% endif %} <span class="icon icon-random"><a href="?action=random"> {% trans "random" %}</span></div>
                         {{ page_links | raw }}
                 </div>
                     {% elseif nb_results == 1 %}

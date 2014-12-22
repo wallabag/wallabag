@@ -303,6 +303,14 @@ class Poche
                 $this->messages->add('s', _('The tag has been successfully deleted'));
                 Tools::redirect();
                 break;
+            /* For some unknown reason I can't get displayView() to work here (it redirects to home view afterwards). So here's a dirty fix which redirects directly to URL */
+            case 'random':
+                $count = $this->store->getEntriesByViewCount($view, $this->user->getId());
+                $id = rand(1,$count);
+                Tools::logm('get a random article');
+                Tools::redirect('?view=view&id=' . $id);
+                //$this->displayView('view', $id);
+                break;
             default:
                 break;
         }
@@ -445,7 +453,6 @@ class Poche
                     $tpl_vars['entries'] = $this->store->getEntriesByView($view, $this->user->getId(), $this->pagination->get_limit(), $id);
                     $tpl_vars['page_links'] = $page_links;
                     $tpl_vars['nb_results'] = $count;
-                    $tpl_vars['random'] = rand(1,$count);
                 }
                 Tools::logm('display ' . $view . ' view');
                 break;
