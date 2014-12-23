@@ -405,9 +405,12 @@ class Poche
                     }
 
                     # flattr checking
-                    $flattr = new FlattrItem();
-                    $flattr->checkItem($entry['url'], $entry['id']);
-
+                    $flattr = NULL;
+                    if (FLATTR) {
+                        $flattr = new FlattrItem();
+                        $flattr->checkItem($entry['url'], $entry['id']);
+                    }
+                    
                     # tags
                     $tags = $this->store->retrieveTagsByEntry($entry['id']);
 
