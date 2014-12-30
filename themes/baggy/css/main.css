@@ -656,22 +656,16 @@ a.add-to-wallabag-link-after:after {
    
 @font-face {
   font-family: 'icomoon';
-  src:url('../fonts/icomoon.eot?-s0mcsx');
-  src:url('../fonts/icomoon.eot?#iefix-s0mcsx')   format('embedded-opentype'),
-      url('../fonts/icomoon.woff?-s0mcsx')        format('woff'),
-      url('../fonts/icomoon.ttf?-s0mcsx')         format('truetype'),
-      url('../fonts/icomoon.svg?-s0mcsx#icomoon') format('svg');
+  src:url('../fonts/icomoon.eot?-3f6fo5');
+  src:url('../fonts/icomoon.eot?#iefix-3f6fo5') format('embedded-opentype'),
+    url('../fonts/icomoon.woff?-3f6fo5') format('woff'),
+    url('../fonts/icomoon.ttf?-3f6fo5') format('truetype'),
+    url('../fonts/icomoon.svg?-3f6fo5#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
-.icon span,
-.icon-image span {
-  position: absolute;
-  top: -9999px;
-}
-
-[class^="icon-"]:before, [class*=" icon-"]:before {
+[class^="icon-"], [class*=" icon-"] {
   font-family: 'icomoon';
   speak: none;
   font-style: normal;
@@ -685,56 +679,182 @@ a.add-to-wallabag-link-after:after {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-flattr:before {
-  content: "\e800";
+.icon span,
+.icon-image span {
+  position: absolute;
+  top: -9999px;
 }
-.icon-mail:before {
-  content: "\e80a";
+
+.icon-paint-format:before {
+  content: "\e90c";
 }
-.icon-up-open:before {
-  content: "\e80b";
+
+.icon-book:before {
+  content: "\e91f";
 }
-.icon-star:before {
-  content: "\e805";
+
+.icon-file-text2:before {
+  content: "\e926";
 }
-.icon-check:before {
-  content: "\e804";
+
+.icon-file-picture:before {
+  content: "\e927";
 }
+
+.icon-file-video:before {
+  content: "\e92a";
+}
+
+.icon-price-tags:before {
+  content: "\e936";
+}
+
+.icon-lifebuoy:before {
+  content: "\e941";
+}
+
+.icon-envelop:before {
+  content: "\e945";
+}
+
+.icon-printer:before {
+  content: "\e954";
+}
+
+.icon-undo2:before {
+  content: "\e967";
+}
+
+.icon-users:before {
+  content: "\e972";
+}
+
+.icon-user-plus:before {
+  content: "\e973";
+}
+
+.icon-user-minus:before {
+  content: "\e974";
+}
+
+.icon-hour-glass:before {
+  content: "\e979";
+}
+
+.icon-spinner11:before {
+  content: "\e984";
+}
+
+.icon-cog:before {
+  content: "\e994";
+}
+
+.icon-bug:before {
+  content: "\e999";
+}
+
+.icon-pie-chart:before {
+  content: "\e99a";
+}
+
+.icon-bin:before {
+  content: "\e9ac";
+}
+
+.icon-menu2:before {
+  content: "\e9be";
+}
+
+.icon-earth:before {
+  content: "\e9ca";
+}
+
 .icon-link:before {
-  content: "\e801";
+  content: "\e9cb";
 }
-.icon-reply:before {
-  content: "\e806";
+
+.icon-eye-blocked:before {
+  content: "\e9d1";
 }
-.icon-menu:before {
-  content: "\e802";
+
+.icon-bookmarks:before {
+  content: "\e9d3";
 }
-.icon-clock:before {
-  content: "\e803";
+
+.icon-star-full:before {
+  content: "\e9d9";
 }
+
+.icon-sad:before {
+  content: "\e9e5";
+}
+
+.icon-question:before {
+  content: "\ea09";
+}
+
+.icon-checkmark:before {
+  content: "\ea10";
+}
+
+.icon-exit:before {
+  content: "\ea14";
+}
+
+.icon-circle-up:before {
+  content: "\ea41";
+}
+
+.icon-sort-alpha-asc:before {
+  content: "\ea48";
+}
+
+.icon-sort-alpha-desc:before {
+  content: "\ea49";
+}
+
+.icon-share2:before {
+  content: "\ea82";
+}
+
 .icon-twitter:before {
-  content: "\e807";
+  content: "\ea91";
 }
-.icon-down-open:before {
-  content: "\e809";
+
+.icon-feed3:before {
+  content: "\ea95";
 }
-.icon-trash:before {
-  content: "\e80c";
+
+.icon-apple:before {
+  content: "\eabf";
 }
-.icon-delete:before {
-  content: "\e600";
+
+.icon-android:before {
+  content: "\eac1";
 }
-.icon-power:before {
-  content: "\e601";
+
+.icon-windows8:before {
+  content: "\eac3";
 }
-.icon-arrow-up-thick:before {
-  content: "\e602";
+
+.icon-flattr:before {
+  content: "\ead4";
 }
-.icon-rss:before {
-  content: "\e808";
+
+.icon-paypal:before {
+  content: "\ead6";
 }
-.icon-print:before {
-  content: "\e80d";
+
+.icon-file-pdf:before {
+  content: "\eada";
+}
+
+.icon-chrome:before {
+  content: "\eae5";
+}
+
+.icon-firefox:before {
+  content: "\eae6";
 }
 
 
@@ -763,11 +883,11 @@ a.add-to-wallabag-link-after:after {
    Icon selected
    ========================================================================== */
 
-.icon-star.fav:before {
+.icon-star-full.fav:before {
   color: #FFF;
 }
 
-.icon-check.archive:before {
+.icon-checkmark.archive:before {
   color: #FFF;
 }
 
