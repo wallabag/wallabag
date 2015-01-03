@@ -8,6 +8,7 @@ wallabag is based on :
 * Twig http://twig.sensiolabs.org
 * Flash messages https://github.com/plasticbrain/PHP-Flash-Messages
 * Pagination https://github.com/daveismyname/pagination
+* PHPePub https://github.com/Grandt/PHPePub/
 
 wallabag is mainly developed by Nicolas Lœuillet under the MIT License
 
