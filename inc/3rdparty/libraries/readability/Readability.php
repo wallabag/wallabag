@@ -46,6 +46,7 @@
 
 // This class allows us to do JavaScript like assignements to innerHTML
 require_once(dirname(__FILE__).'/JSLikeHTMLElement.php');
+libxml_use_internal_errors(true);
 
 // Alternative usage (for testing only!)
 // uncomment the lines below and call Readability.php in your browser 
@@ -697,7 +698,7 @@ class Readability
 		$articleContent        = $this->dom->createElement('div');
 		$articleContent->setAttribute('id', 'readability-content');
 		$siblingScoreThreshold = max(10, ((int)$topCandidate->getAttribute('readability')) * 0.2);
-		$siblingNodes          = $topCandidate->parentNode->childNodes;
+		$siblingNodes          = @$topCandidate->parentNode->childNodes;
 		if (!isset($siblingNodes)) {
 			$siblingNodes = new stdClass;
 			$siblingNodes->length = 0;
