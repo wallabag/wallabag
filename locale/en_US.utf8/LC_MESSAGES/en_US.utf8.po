@@ -663,6 +663,9 @@ msgstr "Download the articles from this search in an EPUB"
 msgid "Download the articles from this category in an epub"
 msgstr "Download the articles from this category in an EPUB"
 
+msgid "Read the rest at"
+msgstr "Read the rest at"
+
 #~ msgid "poche it!"
 #~ msgstr "poche it!"
 

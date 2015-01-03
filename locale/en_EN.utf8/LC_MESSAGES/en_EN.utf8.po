@@ -751,6 +751,9 @@ msgstr "The email has been sent to your kindle !"
 msgid "Produced by wallabag with mPDF"
 msgstr "Produced by wallabag with mPDF"
 
+msgid "Read the rest at"
+msgstr "Read the rest at"
+
 #~ msgid "poche it!"
 #~ msgstr "poche it!"
 
