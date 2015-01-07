@@ -83,7 +83,7 @@ else if (isset($_POST['install'])) {
             // User informations
             $username = trim($_POST['username']);
             $password = trim($_POST['password']);
-            $salted_password = sha1($password . $username . $salt);
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
             // Database informations
             $moreQueries = array();
@@ -166,7 +166,7 @@ else if (isset($_POST['install'])) {
                 $handle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
                 $sql = "INSERT INTO users (username, password, name, email) VALUES (?, ?, ?, '')";
-                $params = array($username, $salted_password, $username);
+                $params = array($username, $hashed_password, $username);
                 $query = executeQuery($handle, $sql, $params);
 
                 $id_user = (int)$handle->lastInsertId('users_id_seq');

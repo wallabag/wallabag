@@ -122,7 +122,7 @@ class Database {
     public function install($login, $password, $email = '')
     {
         $sql = 'INSERT INTO users ( username, password, name, email) VALUES (?, ?, ?, ?)';
-        $params = array($login, $password, $login, $email);
+        $params = array($login, password_hash($password, PASSWORD_DEFAULT), $login, $email);
         $query = $this->executeQuery($sql, $params);
 
         $sequence = '';
@@ -145,6 +145,20 @@ class Database {
         $query = $this->executeQuery($sql, $params);
 
         return TRUE;
+    }
+
+    public function getUser($username)
+    {
+        $sql = "SELECT * FROM users WHERE username = ?";
+        $query = $this->executeQuery($sql, array($username));
+        $user = $query->fetch(PDO::FETCH_ASSOC);
+        if ($user === null) {
+            return null;
+        }
+
+        $user['config'] = $this->getConfigUser($user['id']);
+
+        return $user;
     }
 
     public function getConfigUser($id)
@@ -173,34 +187,11 @@ class Database {
         }
     }
 
-    public function login($username, $password, $isauthenticated = FALSE)
-    {
-        if ($isauthenticated) {
-            $sql = "SELECT * FROM users WHERE username=?";
-            $query = $this->executeQuery($sql, array($username));
-        } else {
-            $sql = "SELECT * FROM users WHERE username=? AND password=?";
-            $query = $this->executeQuery($sql, array($username, $password));
-        }
-        $login = $query->fetchAll();
-
-        $user = array();
-        if (isset($login[0])) {
-            $user['id'] = $login[0]['id'];
-            $user['username'] = $login[0]['username'];
-            $user['password'] = $login[0]['password'];
-            $user['name'] = $login[0]['name'];
-            $user['email'] = $login[0]['email'];
-            $user['config'] = $this->getConfigUser($login[0]['id']);
-        }
-
-        return $user;
-    }
-
     public function updatePassword($userId, $password)
     {
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
         $sql_update = "UPDATE users SET password=? WHERE id=?";
-        $params_update = array($password, $userId);
+        $params_update = array($hashed_password, $userId);
         $query = $this->executeQuery($sql_update, $params_update);
     }
 
@@ -240,14 +231,6 @@ class Database {
         $query = $this->executeQuery($sql, ( $username ? array($username) : array()));
         list($count) = $query->fetch();
         return $count;
-    }
-    
-    public function getUserPassword($userID)
-    {
-        $sql = "SELECT * FROM users WHERE id=?";
-        $query = $this->executeQuery($sql, array($userID));
-        $password = $query->fetchAll();
-        return isset($password[0]['password']) ? $password[0]['password'] : null;
     }
     
     public function deleteUserConfig($userID)
