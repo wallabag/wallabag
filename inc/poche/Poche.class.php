@@ -180,6 +180,13 @@ class Poche
                         }
                     }
 
+                    // if there are tags, add them to the new article
+                    if (isset($_GET['tags'])) {
+                        $_POST['value'] = $_GET['tags'];
+                        $_POST['entry_id'] = $last_id;
+                        $this->action('add_tag', $url);
+                    }
+
                     $this->messages->add('s', _('the link has been added successfully'));
                 }
                 else {
