@@ -180,6 +180,13 @@ class Poche
                         }
                     }
 
+                    // if there are tags, add them to the new article
+                    if (isset($_GET['tags'])) {
+                        $_POST['value'] = $_GET['tags'];
+                        $_POST['entry_id'] = $last_id;
+                        $this->action('add_tag', $url);
+                    }
+
                     $this->messages->add('s', _('the link has been added successfully'));
                 }
                 else {
@@ -194,18 +201,31 @@ class Poche
                 }
                 break;
             case 'delete':
-                $msg = 'delete link #' . $id;
-                if ($this->store->deleteById($id, $this->user->getId())) {
-                    if (DOWNLOAD_PICTURES) {
-                        Picture::removeDirectory(ABS_PATH . $id);
+                if (isset($_GET['search'])) {
+                    //when we want to apply a delete to a search
+                    $tags = array($_GET['search']);
+                    $allentry_ids = $this->store->search($tags[0], $this->user->getId());
+                    $entry_ids = array();
+                    foreach ($allentry_ids as $eachentry) {
+                        $entry_ids[] = $eachentry[0];
                     }
-                    $this->messages->add('s', _('the link has been deleted successfully'));
+                } else { // delete a single article
+                    $entry_ids = array($id);
                 }
-                else {
-                    $this->messages->add('e', _('the link wasn\'t deleted'));
-                    $msg = 'error : can\'t delete link #' . $id;
+                foreach($entry_ids as $id) {
+                    $msg = 'delete link #' . $id;
+                    if ($this->store->deleteById($id, $this->user->getId())) {
+                        if (DOWNLOAD_PICTURES) {
+                            Picture::removeDirectory(ABS_PATH . $id);
+                        }
+                        $this->messages->add('s', _('the link has been deleted successfully'));
+                    }
+                    else {
+                        $this->messages->add('e', _('the link wasn\'t deleted'));
+                        $msg = 'error : can\'t delete link #' . $id;
+                    }
+                    Tools::logm($msg);
                 }
-                Tools::logm($msg);
                 Tools::redirect('?');
                 break;
             case 'toggle_fav' :
@@ -220,8 +240,21 @@ class Poche
                 }
                 break;
             case 'toggle_archive' :
-                $this->store->archiveById($id, $this->user->getId());
-                Tools::logm('archive link #' . $id);
+                if (isset($_GET['tag_id'])) {
+                    //when we want to archive a whole tag
+                    $tag_id = $_GET['tag_id'];
+                    $allentry_ids = $this->store->retrieveEntriesByTag($tag_id, $this->user->getId());
+                    $entry_ids = array();
+                    foreach ($allentry_ids as $eachentry) {
+                        $entry_ids[] = $eachentry[0];
+                    }
+                } else { //archive a single article
+                    $entry_ids = array($id);
+                }
+                foreach($entry_ids as $id) {
+                    $this->store->archiveById($id, $this->user->getId());
+                    Tools::logm('archive link #' . $id);
+                }
                 if ( Tools::isAjaxRequest() ) {
                   echo 1;
                   exit;
