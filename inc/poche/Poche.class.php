@@ -201,18 +201,31 @@ class Poche
                 }
                 break;
             case 'delete':
-                $msg = 'delete link #' . $id;
-                if ($this->store->deleteById($id, $this->user->getId())) {
-                    if (DOWNLOAD_PICTURES) {
-                        Picture::removeDirectory(ABS_PATH . $id);
+                if (isset($_GET['search'])) {
+                    //when we want to apply a delete to a search
+                    $tags = array($_GET['search']);
+                    $allentry_ids = $this->store->search($tags[0], $this->user->getId());
+                    $entry_ids = array();
+                    foreach ($allentry_ids as $eachentry) {
+                        $entry_ids[] = $eachentry[0];
                     }
-                    $this->messages->add('s', _('the link has been deleted successfully'));
+                } else { // delete a single article
+                    $entry_ids = array($id);
                 }
-                else {
-                    $this->messages->add('e', _('the link wasn\'t deleted'));
-                    $msg = 'error : can\'t delete link #' . $id;
+                foreach($entry_ids as $id) {
+                    $msg = 'delete link #' . $id;
+                    if ($this->store->deleteById($id, $this->user->getId())) {
+                        if (DOWNLOAD_PICTURES) {
+                            Picture::removeDirectory(ABS_PATH . $id);
+                        }
+                        $this->messages->add('s', _('the link has been deleted successfully'));
+                    }
+                    else {
+                        $this->messages->add('e', _('the link wasn\'t deleted'));
+                        $msg = 'error : can\'t delete link #' . $id;
+                    }
+                    Tools::logm($msg);
                 }
-                Tools::logm($msg);
                 Tools::redirect('?');
                 break;
             case 'toggle_fav' :

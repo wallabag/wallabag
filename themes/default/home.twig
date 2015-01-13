@@ -59,7 +59,9 @@
             {{ block('pager') }}
             {% if view == 'home' %}{% if nb_results > 1 %}<p><a title="{% trans "Mark all the entries as read" %}"  href="./?action=archive_all">{% trans "Mark all the entries as read" %}</a></p>{% endif %}{% endif %}
             {% if searchterm is defined %}<a title="{% trans "Tag these results as" %} {{ searchterm }}" href="./?action=add_tag&search={{ searchterm }}">{% trans "Tag these results as" %} {{ searchterm }}</a>{% endif %}<br />
-            
+
+            {% if searchterm is defined %}<a title="{% trans "Delete results matching" %} {{ searchterm }}" href="./?action=delete&search={{ searchterm }}">{% trans "Delete results matching" %} {{ searchterm }}</a>{% endif %}<br />
+
             {% if tag %}
             {% if constant('EPUB') == 1 %}<a title="{% trans "Download the articles from this tag in an epub file" %}" href="./?epub&amp;method=tag&amp;value={{ tag.value }}">{% trans "Download as ePub3" %}</a>{% endif %}
             {% if constant('MOBI') == 1 %}<a title="{% trans "Download the articles from this tag in a mobi file" %}" href="./?mobi&amp;method=tag&amp;value={{ tag.value }}">{% trans "Download as Mobi" %}</a>{% endif %}
