@@ -62,6 +62,8 @@
 
             {% if searchterm is defined %}<a title="{% trans "Delete results matching" %} {{ searchterm }}" href="./?action=delete&search={{ searchterm }}">{% trans "Delete results matching" %} {{ searchterm }}</a>{% endif %}<br />
 
+            {% if tag %}<a title="{% trans "Mark all articles from this tag as read" %}" href="./?action=toggle_archive&amp;tag_id={{ tag.id }}">{% trans "Mark all articles from this tag as read" %}</a><br />{% endif %}
+
             {% if tag %}
             {% if constant('EPUB') == 1 %}<a title="{% trans "Download the articles from this tag in an epub file" %}" href="./?epub&amp;method=tag&amp;value={{ tag.value }}">{% trans "Download as ePub3" %}</a>{% endif %}
             {% if constant('MOBI') == 1 %}<a title="{% trans "Download the articles from this tag in a mobi file" %}" href="./?mobi&amp;method=tag&amp;value={{ tag.value }}">{% trans "Download as Mobi" %}</a>{% endif %}
@@ -75,6 +77,6 @@
             {% if constant('MOBI') == 1 %}<a title="{% trans "Download the articles from this category in a mobi file" %}" href="./?mobi&amp;method=category&amp;value={{ view }}">{% trans "Download as Mobi" %}</a>{% endif %}
             {% if constant('PDF') == 1 %}<a title="{% trans "Download the articles from this category in a pdf file" %}" href="./?pdf&amp;method=category&amp;value={{ view }}">{% trans "Download as PDF" %}</a>{% endif %}
             {% endif %}
-            
+
             {% endif %}
 {% endblock %}
