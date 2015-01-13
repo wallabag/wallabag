@@ -240,8 +240,21 @@ class Poche
                 }
                 break;
             case 'toggle_archive' :
-                $this->store->archiveById($id, $this->user->getId());
-                Tools::logm('archive link #' . $id);
+                if (isset($_GET['tag_id'])) {
+                    //when we want to archive a whole tag
+                    $tag_id = $_GET['tag_id'];
+                    $allentry_ids = $this->store->retrieveEntriesByTag($tag_id, $this->user->getId());
+                    $entry_ids = array();
+                    foreach ($allentry_ids as $eachentry) {
+                        $entry_ids[] = $eachentry[0];
+                    }
+                } else { //archive a single article
+                    $entry_ids = array($id);
+                }
+                foreach($entry_ids as $id) {
+                    $this->store->archiveById($id, $this->user->getId());
+                    Tools::logm('archive link #' . $id);
+                }
                 if ( Tools::isAjaxRequest() ) {
                   echo 1;
                   exit;

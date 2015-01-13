@@ -66,6 +66,8 @@
     {% if searchterm is defined %}<a title="{% trans "Delete results matching" %} {{ searchterm }}" href="./?action=delete&search={{ searchterm }}">
 {% trans "Delete results matching" %} {{ searchterm }}</a>{% endif %}
 
+    {% if tag %}<a title="{% trans "Mark all articles from this tag as read" %}" href="./?action=toggle_archive&amp;tag_id={{ tag.id }}">{% trans "Mark all articles from this tag as read" %}</a>{% endif %}
+
 	{% if tag %}<a title="{% trans "Download the articles from this tag in an epub" %}" href="./?epub&amp;method=tag&amp;value={{ tag.value }}">{% trans "Download the articles from this tag in an epub" %}</a>
             {% elseif searchterm is defined %}<a title="{% trans "Download the articles from this search in an epub" %}" href="./?epub&amp;method=search&amp;value={{ searchterm }}">{% trans "Download the articles from this search in an epub" %}</a>
             {% else %}<a title="{% trans "Download the articles from this category in an epub" %}" href="./?epub&amp;method=category&amp;value={{ view }}">{% trans "Download the articles from this category in an epub" %}</a>{% endif %}
