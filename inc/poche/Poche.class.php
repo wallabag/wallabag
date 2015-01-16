@@ -784,10 +784,11 @@ class Poche
      *
      * @param $token
      * @param $user_id
-     * @param $tag_id
-     * @param string $type
+     * @param $tag_id if $type is 'tag', the id of the tag to generate feed for
+     * @param string $type the type of feed to generate
+     * @param int $limit the maximum number of items (0 means all)
      */
-    public function generateFeeds($token, $user_id, $tag_id, $type = 'home')
+    public function generateFeeds($token, $user_id, $tag_id, $type = 'home', $limit = 0)
     {
         $allowed_types = array('home', 'fav', 'archive', 'tag');
         $config = $this->store->getConfigUser($user_id);
@@ -814,8 +815,13 @@ class Poche
             $entries = $this->store->getEntriesByView($type, $user_id);
         }
 
+        // if $limit is set to zero, use all entries
+        if (0 == $limit) {
+            $limit = count($entries);
+        }
         if (count($entries) > 0) {
-            foreach ($entries as $entry) {
+            for ($i = 0; $i < min(count($entries), $limit); $i++) {
+                $entry = $entries[$i];
                 $newItem = $feed->createNewItem();
                 $newItem->setTitle($entry['title']);
                 $newItem->setSource(Tools::getPocheUrl() . '?view=view&amp;id=' . $entry['id']);
