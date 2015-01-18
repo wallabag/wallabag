@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "67435ca652abe6c90bdd29701ecd679a",
+    "hash": "f5e69c21a929d0997c771526484a9d7e",
     "packages": [
         {
             "name": "ezyang/htmlpurifier",
@@ -1335,6 +1335,52 @@
             ],
             "description": "The Twig Gettext Extractor is Poedit friendly tool which extracts translations from twig templates.",
             "time": "2013-02-14 16:41:48"
+        },
+        {
+            "name": "wallabag/php-flash-messages",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wallabag/PHP-Flash-Messages.git",
+                "reference": "ea68eb768f32156baa15f7a3cd880ba8ff5af6ab"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wallabag/PHP-Flash-Messages/zipball/ea68eb768f32156baa15f7a3cd880ba8ff5af6ab",
+                "reference": "ea68eb768f32156baa15f7a3cd880ba8ff5af6ab",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "class.messages.php"
+                ]
+            },
+            "license": [
+                "Apache"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Lœuillet",
+                    "email": "nicolas@loeuillet.org",
+                    "homepage": "http://www.cdetc.fr"
+                }
+            ],
+            "description": "Session-based Flash Messages class for PHP",
+            "homepage": "https://github.com/wallabag/PHP-Flash-Messages",
+            "keywords": [
+                "flash",
+                "messages",
+                "php-flash-messages",
+                "sessions"
+            ],
+            "support": {
+                "source": "https://github.com/wallabag/PHP-Flash-Messages/tree/master"
+            },
+            "time": "2015-01-18 19:51:55"
         }
     ],
     "packages-dev": [],
@@ -1343,7 +1389,8 @@
     "stability-flags": {
         "fabpot/goutte": 20,
         "ezyang/htmlpurifier": 20,
-        "mgargano/simplehtmldom": 20
+        "mgargano/simplehtmldom": 20,
+        "wallabag/php-flash-messages": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

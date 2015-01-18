@@ -17,7 +17,6 @@ define('ROOT', INCLUDES . '/..');
 require_once INCLUDES . '/poche/Tools.class.php';
 require_once INCLUDES . '/poche/User.class.php';
 require_once INCLUDES . '/poche/Url.class.php';
-require_once INCLUDES . '/3rdparty/class.messages.php';
 require_once ROOT . '/vendor/autoload.php';
 require_once INCLUDES . '/poche/Template.class.php';
 require_once INCLUDES . '/poche/Language.class.php';

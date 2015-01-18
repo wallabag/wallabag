@@ -22,12 +22,19 @@
         "email": "hello@wallabag.org",
         "issues": "https://github.com/wallabag/wallabag/issues"
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/wallabag/PHP-Flash-Messages"
+        }
+    ],
     "require": {
         "twig/twig": "1.*",
         "twig/extensions": "1.0.*",
         "umpirsky/twig-gettext-extractor": "1.1.*",
         "fabpot/goutte": "2.0.*@dev",
         "ezyang/htmlpurifier": "dev-master",
-        "mgargano/simplehtmldom": "dev-master"
+        "mgargano/simplehtmldom": "dev-master",
+        "wallabag/PHP-Flash-Messages": "dev-master"
     }
 }
