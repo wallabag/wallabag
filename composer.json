@@ -26,6 +26,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/wallabag/PHP-Flash-Messages"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/wallabag/kriss_php5"
         }
     ],
     "require": {
@@ -35,6 +39,7 @@
         "fabpot/goutte": "2.0.*@dev",
         "ezyang/htmlpurifier": "dev-master",
         "mgargano/simplehtmldom": "dev-master",
-        "wallabag/PHP-Flash-Messages": "dev-master"
+        "wallabag/PHP-Flash-Messages": "dev-master",
+        "wallabag/kriss_php5": "dev-master"
     }
 }

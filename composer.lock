@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f5e69c21a929d0997c771526484a9d7e",
+    "hash": "aaf0d0bb3208c2dfc0b6cc95cbfab5f6",
     "packages": [
         {
             "name": "ezyang/htmlpurifier",
@@ -1337,6 +1337,43 @@
             "time": "2013-02-14 16:41:48"
         },
         {
+            "name": "wallabag/kriss_php5",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wallabag/kriss_php5.git",
+                "reference": "f2dd88621a04828cdeb8d9a59b72fd34c94658b1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wallabag/kriss_php5/zipball/f2dd88621a04828cdeb8d9a59b72fd34c94658b1",
+                "reference": "f2dd88621a04828cdeb8d9a59b72fd34c94658b1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "Session.php"
+                ]
+            },
+            "authors": [
+                {
+                    "name": "Nicolas Lœuillet",
+                    "email": "nicolas@loeuillet.org",
+                    "homepage": "http://www.cdetc.fr"
+                }
+            ],
+            "description": "A simple and smart (or stupid) php5 snippets repository",
+            "homepage": "https://github.com/wallabag/kriss_php5",
+            "support": {
+                "source": "https://github.com/wallabag/kriss_php5/tree/master"
+            },
+            "time": "2015-01-18 21:21:43"
+        },
+        {
             "name": "wallabag/php-flash-messages",
             "version": "dev-master",
             "source": {
@@ -1390,7 +1427,8 @@
         "fabpot/goutte": 20,
         "ezyang/htmlpurifier": 20,
         "mgargano/simplehtmldom": 20,
-        "wallabag/php-flash-messages": 20
+        "wallabag/php-flash-messages": 20,
+        "wallabag/kriss_php5": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

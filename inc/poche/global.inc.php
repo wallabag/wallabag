@@ -26,7 +26,6 @@ require_once INCLUDES . '/poche/Poche.class.php';
 
 require_once INCLUDES . '/poche/Database.class.php';
 require_once INCLUDES . '/3rdparty/paginator.php';
-require_once INCLUDES . '/3rdparty/Session.class.php';
 
 require_once INCLUDES . '/3rdparty/libraries/feedwriter/FeedItem.php';
 require_once INCLUDES . '/3rdparty/libraries/feedwriter/FeedWriter.php';
