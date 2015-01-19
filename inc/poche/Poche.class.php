@@ -199,6 +199,7 @@ class Poche
                 } else {
                   Tools::redirect('?view=home&closewin=true');
                 }
+                return $last_id;
                 break;
             case 'delete':
                 if (isset($_GET['search'])) {
@@ -663,7 +664,18 @@ class Poche
                         $urlsInserted[] = $url; //add
                         if (isset($record['tags']) && trim($record['tags'])) {
 
-                            // @TODO: set tags
+                            $tags = explode(',', $record['tags']);														
+							foreach($tags as $tag) {
+								$entry_id = $id;
+								$tag_id = $this->store->retrieveTagByValue($tag);
+								if ($tag_id) {
+									$this->store->setTagToEntry($tag_id['id'], $entry_id);									
+								} else {
+									$this->store->createTag($tag);
+									$tag_id = $this->store->retrieveTagByValue($tag);
+									$this->store->setTagToEntry($tag_id['id'], $entry_id);
+								}
+							}
 
                         }
                     }
