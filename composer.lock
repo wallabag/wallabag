@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bc1406a8a4ef54f0927a48c0b7f5eeb1",
+    "hash": "4caad70325b5cf76eb8d4011bae06cbb",
     "packages": [
         {
             "name": "ezyang/htmlpurifier",
@@ -256,6 +256,45 @@
                 "stream"
             ],
             "time": "2014-10-12 19:18:40"
+        },
+        {
+            "name": "htmlawed/htmlawed",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kesar/HTMLawed.git",
+                "reference": "9d292af5f4c288aa68f38b87f5d88c8214f5f233"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kesar/HTMLawed/zipball/9d292af5f4c288aa68f38b87f5d88c8214f5f233",
+                "reference": "9d292af5f4c288aa68f38b87f5d88c8214f5f233",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">4.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "htmLawed.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0+",
+                "LGPL-3.0"
+            ],
+            "description": "htmLawed - Process text with HTML markup to make it more compliant with HTML  standards and administrative policies",
+            "homepage": "http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed/",
+            "keywords": [
+                "HTMLtidy",
+                "html",
+                "sanitize",
+                "strip",
+                "tags"
+            ],
+            "time": "2014-01-05 13:06:52"
         },
         {
             "name": "mgargano/simplehtmldom",
@@ -2345,6 +2384,7 @@
         "mgargano/simplehtmldom": 20,
         "tecnick.com/tcpdf": 20,
         "simplepie/simplepie": 20,
+        "htmlawed/htmlawed": 20,
         "wallabag/php-flash-messages": 20,
         "wallabag/kriss_php5": 20,
         "wallabag/pagination": 20,

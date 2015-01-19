@@ -58,6 +58,7 @@
         "robmorgan/phinx": "*",
         "tecnick.com/tcpdf": "dev-master",
         "simplepie/simplepie": "dev-master",
+        "htmlawed/htmlawed": "dev-master",
         "wallabag/PHP-Flash-Messages": "dev-master",
         "wallabag/kriss_php5": "dev-master",
         "wallabag/pagination": "dev-master",
