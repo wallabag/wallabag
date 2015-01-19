@@ -33,7 +33,7 @@ class WallabagEBooks
                 $entry = $this->wallabag->store->retrieveOneById($entryID, $this->wallabag->user->getId());
                 $this->entries = array($entry);
                 $this->bookTitle = $entry['title'];
-                $this->bookFileName = substr($this->bookTitle, 0, 200);
+                $this->bookFileName = str_replace('/', '_', substr($this->bookTitle, 0, 200));
                 $this->author = preg_replace('#^w{3}.#', '', Tools::getdomain($entry["url"])); # if only one article, set author to domain name (we strip the eventual www part)
                 Tools::logm('Producing ebook from article ' . $this->bookTitle);
                 break;
@@ -81,6 +81,9 @@ class WallabagEpub extends WallabagEBooks
     public function produceEpub()
     {
         Tools::logm('Starting to produce ePub 3 file');
+
+        try {
+
         $content_start =
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
             . "<html xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:epub=\"http://www.idpf.org/2007/ops\">\n"
@@ -155,6 +158,11 @@ class WallabagEpub extends WallabagEBooks
         $book->finalize();
         $zipData = $book->sendBook($this->bookFileName);
         Tools::logm('Ebook produced');
+    	}
+        catch (Exception $e) {
+            Tools::logm('PHPePub has encountered an error : '.$e->getMessage());
+            $this->wallabag->messages->add('e', $e->getMessage());
+        }
     }
 } 
 
@@ -167,7 +175,7 @@ class WallabagMobi extends WallabagEBooks
 
 	public function produceMobi()
 	{
-
+		try {
         Tools::logm('Starting to produce Mobi file');
         $mobi = new MOBI();
         $content = new MOBIFile();
@@ -197,6 +205,11 @@ class WallabagMobi extends WallabagEBooks
         // we offer file to download
         $mobi->download($this->bookFileName.'.mobi');
         Tools::logm('Mobi file produced');
+    	}
+        catch (Exception $e) {
+            Tools::logm('PHPMobi has encountered an error : '.$e->getMessage());
+            $this->wallabag->messages->add('e', $e->getMessage());
+        }
     }
 }
 
@@ -206,15 +219,16 @@ class WallabagPDF extends WallabagEbooks
 	{
 
         Tools::logm('Starting to produce PDF file');
-
+        @define ('K_TCPDF_THROW_EXCEPTION_ERROR', TRUE);
+        try {
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
         Tools::logm('Filling metadata for PDF...');
         $pdf->SetCreator(PDF_CREATOR);
-        $pdf->SetAuthor('');
+        $pdf->SetAuthor('wallabag');
         $pdf->SetTitle($this->bookTitle);
-        $pdf->SetSubject('TCPDF Tutorial');
-        $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
+        $pdf->SetSubject('Articles via wallabag');
+        $pdf->SetKeywords('wallabag');
 		
         Tools::logm('Adding introduction...');
         $pdf->AddPage();
@@ -229,18 +243,26 @@ class WallabagPDF extends WallabagEbooks
         $i = 1;
         Tools::logm('Adding actual content...');
         foreach ($this->entries as $item) {
+        	$tags = $this->wallabag->store->retrieveTagsByEntry($entry['id']);
+        	foreach ($tags as $tag) {
+                $pdf->SetKeywords($tag['value']);
+            }
             $pdf->AddPage();
             $html = '<h1>' . $item['title'] . '</h1>';
             $html .= $item['content'];
             $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
-            $i = $i+1;
         }
 
         // set image scale factor
         $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
         
-
+        
         $pdf->Output($this->bookFileName . '.pdf', 'FD');
+        }
+        catch (Exception $e) {
+            Tools::logm('TCPDF has encountered an error : '.$e->getMessage());
+            $this->wallabag->messages->add('e', $e->getMessage());
+            }
 
 	}
 }
