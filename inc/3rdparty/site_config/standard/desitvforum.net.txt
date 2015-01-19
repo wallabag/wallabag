@@ -1,7 +1,0 @@
-body: (//blockquote[contains(@class, 'postcontent')])[1]
-body: (//div[starts-with(@id, 'post_message')])[1]
-
-prune: no
-tidy: no
-
-test_url: http://www.desitvforum.net/forum/watch-online/431739-creature-3d-2014-watch-online-download-dvd-rip.html

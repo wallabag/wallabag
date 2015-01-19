@@ -1,5 +1,0 @@
-autodetect_next_page: no
-tidy: no
-prune: no
-body: //div[@class='NoOverflow']
-test_url: http://www.dansdata.com/gz129.htm

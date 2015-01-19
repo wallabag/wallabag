@@ -1,5 +1,0 @@
-body: //div[contains(@class, 'article-photo-wrapper')]
-prune: no
-
-test_url: http://www.real.gr/DefaultArthro.aspx?page=arthro&id=360962&catID=1
-test_contains: Επισήμως το αποψινό υπουργικό

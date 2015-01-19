@@ -1,3 +1,0 @@
-body: //div[@id='readme']
-
-test_url: http://code.fivefilters.org/full-text-rss

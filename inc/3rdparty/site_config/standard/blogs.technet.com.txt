@@ -1,9 +1,0 @@
-title: //h3[@class="post-name"]
-author: //span[@class="user-name"]
-date: //div[@class="post-date"]
-body: //div[@class="post-content user-defined-markup"]
-strip_id_or_class: log-feedback-list
-tidy: no
-footnotes: no
-test_url: http://blogs.technet.com/b/dlemson/archive/2004/03/03/83304.aspx
-test_url: http://blogs.technet.com/b/isablog/archive/2009/01/07/a-pptp-client-might-fail-to-connect-to-a-vpn-server-on-the-internet-through-an-isa-server-2006.aspx

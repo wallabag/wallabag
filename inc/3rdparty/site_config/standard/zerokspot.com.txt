@@ -1,3 +1,0 @@
-title: //h1
-body: //div[@id="primarycontent"]
-test_url: http://zerokspot.com/weblog/2011/06/26/europython2011/

@@ -1,2 +1,0 @@
-single_page_link: //iframe/@src
-test_url: http://newsle.com/article/0/15831103/

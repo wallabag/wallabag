@@ -1,3 +1,0 @@
-single_page_link: //iframe[@id='hootFrame']/@src
-
-test_url: http://ht.ly/bOiZV

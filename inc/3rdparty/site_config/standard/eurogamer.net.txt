@@ -1,9 +1,0 @@
-body: //p[@class='strapline'] | //div[@class='cover-image'] | //article[@class='hd']
-strip: //div[@class='social top']
-strip: //p[@class='byline']
-
-date: //span[@itemprop='datePublished']
-author: //a[@itemprop='author']/text()
-
-test_url: http://www.eurogamer.net/articles/2014-08-20-bungie-ordered-to-return-shares-to-composer-marty-odonnell
-test_url: http://www.eurogamer.net/articles/2014-08-20-invisible-inc-does-espionage-justice

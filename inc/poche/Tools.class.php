@@ -345,7 +345,7 @@ final class Tools
 	// Silence $scope function to avoid
 	// issues with FTRSS when error_reporting is to high
 	// FTRSS generates PHP warnings which break output
-        $json = @$scope("inc/3rdparty/makefulltextfeed.php", array("url" => $url));
+        $json = @$scope("vendor/wallabag/Fivefilters_Libraries/makefulltextfeed.php", array("url" => $url));
 
         // Clearing and restoring context
         foreach ($GLOBALS as $key => $value) {

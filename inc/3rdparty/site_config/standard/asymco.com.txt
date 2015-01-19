@@ -1,8 +1,0 @@
-# Johannes Stühler
-
-title://h2
-author://span[@class='meta-content']
-date://abbr[@class='date published']/@title
-body://div[@class='entry-content']
-
-test_url: http://www.asymco.com/2011/01/14/is-android-more-efficient-than-ios-at-generating-search-revenue/

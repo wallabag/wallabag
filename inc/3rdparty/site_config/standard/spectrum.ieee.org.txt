@@ -1,3 +1,0 @@
-body://div[@class="articleBody"]
-author://p[@class="articleBodyTtl"]
-test_url: http://spectrum.ieee.org/semiconductors/processors/behind-intels-new-randomnumber-generator/

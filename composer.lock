@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4caad70325b5cf76eb8d4011bae06cbb",
+    "hash": "93ca2016541bb1e9aaf52a82468ce04d",
     "packages": [
         {
             "name": "ezyang/htmlpurifier",
@@ -1752,6 +1752,36 @@
             "time": "2013-02-14 16:41:48"
         },
         {
+            "name": "wallabag/Fivefilters_Libraries",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wallabag/Fivefilters_Libraries.git",
+                "reference": "93b5469d6036a68ce60f126f8430b3e1fbf1562f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wallabag/Fivefilters_Libraries/zipball/93b5469d6036a68ce60f126f8430b3e1fbf1562f",
+                "reference": "93b5469d6036a68ce60f126f8430b3e1fbf1562f",
+                "shasum": ""
+            },
+            "type": "library",
+            "authors": [
+                {
+                    "name": "Nicolas Lœuillet",
+                    "email": "nicolas@loeuillet.org",
+                    "homepage": "http://www.cdetc.fr"
+                }
+            ],
+            "description": "Libraries from @fivefilters.",
+            "homepage": "https://github.com/wallabag/Fivefilters_Libraries",
+            "support": {
+                "source": "https://github.com/wallabag/Fivefilters_Libraries/tree/master",
+                "issues": "https://github.com/wallabag/Fivefilters_Libraries/issues"
+            },
+            "time": "2015-01-19 20:19:28"
+        },
+        {
             "name": "wallabag/PHPePub",
             "version": "dev-master",
             "source": {
@@ -2390,7 +2420,8 @@
         "wallabag/pagination": 20,
         "wallabag/phpepub": 20,
         "wallabag/php-readability": 20,
-        "wallabag/phpmobi": 20
+        "wallabag/phpmobi": 20,
+        "wallabag/fivefilters_libraries": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

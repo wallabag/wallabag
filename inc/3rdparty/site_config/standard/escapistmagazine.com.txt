@@ -1,8 +1,0 @@
-title: //h1[@class='headline']/div[@class='name']
-
-strip_image_src: 'http://cdn.themis-media.com/media/global/images/library/deriv/115/115825.png'
-
-next_page_link: //a[@class='next_page']
-
-strip_comments: no
-test_url: http://www.escapistmagazine.com/articles/view/columns/criticalintel/10302-I-Hate-Magic

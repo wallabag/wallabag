@@ -1,2 +1,0 @@
-body: //div[@class='entry']
-test_url: http://www.fivechapters.com/2014/the-saddest-writer-in-america-part-two/

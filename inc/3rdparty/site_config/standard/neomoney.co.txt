@@ -1,3 +1,0 @@
-title: //*[@class="header_title"]/h1
-body: //div[contains(@class, 'content')]
-test_url: http://neomoney.co/personal/expatriate-and-migrant-loans/expatriate-loans/

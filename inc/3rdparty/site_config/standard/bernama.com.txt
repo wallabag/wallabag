@@ -1,5 +1,0 @@
-body: //div[contains(@class, "NewsText"]
-prune: no
-
-test_url: http://www.bernama.com/bernama/v7/rss/english.php
-test_url: http://www.bernama.com/bernama/v7/newsindex.php?id=943513

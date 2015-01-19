@@ -46,6 +46,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/wallabag/phpMobi"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/wallabag/Fivefilters_Libraries"
         }
     ],
     "require": {
@@ -64,7 +68,8 @@
         "wallabag/pagination": "dev-master",
         "wallabag/PHPePub": "dev-master",
         "wallabag/php-readability": "dev-master",
-        "wallabag/phpMobi": "dev-master"
+        "wallabag/phpMobi": "dev-master",
+        "wallabag/Fivefilters_Libraries": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "~3.7"

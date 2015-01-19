@@ -1,2 +1,0 @@
-body: //*[(@class = "historia")]
-test_url: http://eternabuenosaires.com/2011/09/calle-adolfo-bioy-casares

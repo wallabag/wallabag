@@ -1,5 +1,0 @@
-title://h1
-author://span[@class="submitted"]/a
-date:substring-after(//span[@class="submitted"],'on ')
-body://div[@class="content"]
-test_url: http://groups.drupal.org/node/36816

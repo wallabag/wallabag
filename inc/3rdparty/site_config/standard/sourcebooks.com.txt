@@ -1,4 +1,0 @@
-#grab the actual content div
-body: //div[@class='rt-article']
-
-test_url: http://www.sourcebooks.com/blog/happy-27th-birthday-sourcebooks.html

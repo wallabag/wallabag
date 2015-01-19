@@ -1,3 +1,0 @@
-strip_comments: no
-strip: //a[. = 'reply']
-test_url: http://news.ycombinator.com/item?id=1516461

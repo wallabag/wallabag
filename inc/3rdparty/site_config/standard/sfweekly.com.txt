@@ -1,3 +1,0 @@
-body: //div[contains(@class, 'content_body')]
-strip_id_or_class: det_rel
-test_url: http://www.sfweekly.com/2012-03-14/news/cia-lsd-wayne-ritchie-george-h-white-mk-ultra/

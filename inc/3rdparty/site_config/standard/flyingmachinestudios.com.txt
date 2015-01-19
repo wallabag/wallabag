@@ -1,2 +1,0 @@
-strip_id_or_class: linenos
-test_url: http://www.flyingmachinestudios.com/programming/whoops-dci-refactoring/

@@ -1,6 +1,0 @@
-body: //div[contains(@class, 'source-data')]
-strip: //button
-
-prune: no
-
-test_url: http://dictionary.reference.com/browse/propaganda
