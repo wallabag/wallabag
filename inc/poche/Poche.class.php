@@ -664,7 +664,7 @@ class Poche
                         $urlsInserted[] = $url; //add
                         if (isset($record['tags']) && trim($record['tags'])) {
 
-                            $tags = explode(' ', $record['tags']);														
+                            $tags = explode(',', $record['tags']);														
 							foreach($tags as $tag) {
 								$entry_id = $id;
 								$tag_id = $this->store->retrieveTagByValue($tag);
