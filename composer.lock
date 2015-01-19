@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "376dd2761a2a44043b834a7cb5897e37",
+    "hash": "40ed8709fd61a419755acbbaecf6b793",
     "packages": [
         {
             "name": "ezyang/htmlpurifier",
@@ -1758,6 +1758,98 @@
                 "source": "https://github.com/wallabag/PHP-Flash-Messages/tree/master"
             },
             "time": "2015-01-18 19:51:55"
+        },
+        {
+            "name": "wallabag/php-readability",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wallabag/php-readability.git",
+                "reference": "a37a1482b9964ae1804dbed0bffa00988523c387"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wallabag/php-readability/zipball/a37a1482b9964ae1804dbed0bffa00988523c387",
+                "reference": "a37a1482b9964ae1804dbed0bffa00988523c387",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Readability": ""
+                }
+            },
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Keyvan Minoukadeh",
+                    "email": "keyvan@keyvan.net",
+                    "homepage": "http://keyvan.net",
+                    "role": "Developer (ported original JS code to PHP)"
+                },
+                {
+                    "name": "Arc90",
+                    "homepage": "http://arc90.com",
+                    "role": "Developer (original JS version)"
+                }
+            ],
+            "description": "Automatic article extraction from HTML",
+            "homepage": "https://github.com/wallabag/php-readability",
+            "keywords": [
+                "article",
+                "article extraction",
+                "content",
+                "content extraction",
+                "extraction",
+                "html"
+            ],
+            "support": {
+                "source": "https://github.com/wallabag/php-readability/tree/master",
+                "issues": "https://github.com/wallabag/php-readability/issues"
+            },
+            "time": "2015-01-19 12:25:38"
+        },
+        {
+            "name": "wallabag/phpMobi",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wallabag/phpMobi.git",
+                "reference": "67fa665a9e5eb78b3e9246629a9be4ef46c884ba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wallabag/phpMobi/zipball/67fa665a9e5eb78b3e9246629a9be4ef46c884ba",
+                "reference": "67fa665a9e5eb78b3e9246629a9be4ef46c884ba",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "MOBIClass/MOBI.php"
+                ]
+            },
+            "authors": [
+                {
+                    "name": "Nicolas Lœuillet",
+                    "email": "nicolas@loeuillet.org",
+                    "homepage": "http://www.cdetc.fr"
+                }
+            ],
+            "description": "An experimental Mobipocket file creator in PHP.",
+            "homepage": "https://github.com/wallabag/phpMobi",
+            "support": {
+                "source": "https://github.com/wallabag/phpMobi/tree/master"
+            },
+            "time": "2015-01-19 12:35:44"
         }
     ],
     "packages-dev": [
@@ -2137,7 +2229,9 @@
         "wallabag/php-flash-messages": 20,
         "wallabag/kriss_php5": 20,
         "wallabag/pagination": 20,
-        "wallabag/phpepub": 20
+        "wallabag/phpepub": 20,
+        "wallabag/php-readability": 20,
+        "wallabag/phpmobi": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

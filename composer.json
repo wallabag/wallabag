@@ -38,6 +38,14 @@
         {
             "type": "vcs",
             "url": "https://github.com/wallabag/PHPePub"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/wallabag/php-readability"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/wallabag/phpMobi"
         }
     ],
     "require": {
@@ -51,7 +59,9 @@
         "wallabag/PHP-Flash-Messages": "dev-master",
         "wallabag/kriss_php5": "dev-master",
         "wallabag/pagination": "dev-master",
-        "wallabag/PHPePub": "dev-master"
+        "wallabag/PHPePub": "dev-master",
+        "wallabag/php-readability": "dev-master",
+        "wallabag/phpMobi": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "~3.7"

@@ -29,8 +29,7 @@ require_once INCLUDES . '/poche/FlattrItem.class.php';
 
 require_once INCLUDES . '/3rdparty/libraries/feedwriter/FeedItem.php';
 require_once INCLUDES . '/3rdparty/libraries/feedwriter/FeedWriter.php';
-# mobi library
-require_once INCLUDES . '/3rdparty/libraries/MOBIClass/MOBI.php';
+
 # pdf library
 require_once  INCLUDES . '/3rdparty/libraries/tcpdf/tcpdf.php';
 
