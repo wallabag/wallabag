@@ -1,6 +1,0 @@
-title: //h2
-body: div[@id='illustration'] | //p
-prune: no
-tidy: no
-
-test_url: http://mobile.lemondeinformatique.fr/actualites/lire-les-datacenters-d-apple-google-et-facebook-eco-responsables-selon-greenpeace-le-monde-informatique-57122.html

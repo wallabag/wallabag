@@ -1,4 +1,0 @@
-body: //section[@class='content']
-date: //span[1]
-author: //h1[@id='sitetitle']
-test_url: http://alexduner.com/blog/something-i-learned-today

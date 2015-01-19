@@ -1,3 +1,0 @@
-body: //div[@id='artikkelspalte']
-strip_id_or_class: 'breadcrumb'
-test_url: http://www.vg.no/spill/artikkel.php?artid=10003628

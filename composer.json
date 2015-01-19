@@ -22,9 +22,59 @@
         "email": "hello@wallabag.org",
         "issues": "https://github.com/wallabag/wallabag/issues"
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/wallabag/PHP-Flash-Messages"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/wallabag/kriss_php5"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/wallabag/pagination"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/wallabag/PHPePub"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/wallabag/php-readability"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/wallabag/phpMobi"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/wallabag/Fivefilters_Libraries"
+        }
+    ],
     "require": {
         "twig/twig": "1.*",
         "twig/extensions": "1.0.*",
-        "umpirsky/twig-gettext-extractor": "1.1.*"
+        "umpirsky/twig-gettext-extractor": "1.1.*",
+        "fabpot/goutte": "2.0.*@dev",
+        "ezyang/htmlpurifier": "dev-master",
+        "mgargano/simplehtmldom": "dev-master",
+        "robmorgan/phinx": "*",
+        "tecnick.com/tcpdf": "dev-master",
+        "simplepie/simplepie": "dev-master",
+        "htmlawed/htmlawed": "dev-master",
+        "wallabag/PHP-Flash-Messages": "dev-master",
+        "wallabag/kriss_php5": "dev-master",
+        "wallabag/pagination": "dev-master",
+        "wallabag/PHPePub": "dev-master",
+        "wallabag/php-readability": "dev-master",
+        "wallabag/phpMobi": "dev-master",
+        "wallabag/Fivefilters_Libraries": "dev-master"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~3.7"
+    },
+    "config": {
+        "bin-dir": "bin"
     }
 }

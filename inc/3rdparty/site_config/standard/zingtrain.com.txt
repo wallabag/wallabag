@@ -1,3 +1,0 @@
-title: substring-after(id, 'post')/h2
-body://div[@class = 'entry']
-test_url: http://www.zingtrain.com/category/ontrack/january-2007/

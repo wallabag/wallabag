@@ -1,3 +1,0 @@
-body: //div[@id='jobDesc-bd']/p
-
-test_url: http://www.elance.com/j/xml-technical-intergration/23687172/

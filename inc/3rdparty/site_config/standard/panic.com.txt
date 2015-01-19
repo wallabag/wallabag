@@ -1,3 +1,0 @@
-body: //div[@class='entry']
-date: //h3[@class='postDate']
-test_url: http://www.panic.com/blog/2011/07/panic-is-ready-for-lion/

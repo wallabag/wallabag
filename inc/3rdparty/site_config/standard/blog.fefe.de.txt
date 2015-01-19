@@ -1,5 +1,0 @@
-title: //h2
-date: //h3
-body: //ul
-
-test_url: http://blog.fefe.de/?ts=b063bf55

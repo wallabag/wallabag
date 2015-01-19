@@ -1,7 +1,0 @@
-title: //div[@id='article-title']
-author: //div[@id='articleAuthors']
-body: //div[@id='article']
-strip: //div[@class='module wide']
-#single_page_link: //a[@class='social-print']
-test_url: http://hbr.org/2012/04/the-real-leadership-lessons-of-steve-jobs/ar/
-test_url: http://hbr.org/2013/03/big-bang-disruption/ar/

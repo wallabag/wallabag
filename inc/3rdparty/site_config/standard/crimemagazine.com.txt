@@ -1,2 +1,0 @@
-autodetect_next_page: no
-test_url: http://www.crimemagazine.com/son-sam

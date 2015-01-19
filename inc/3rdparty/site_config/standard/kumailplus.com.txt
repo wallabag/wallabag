@@ -1,3 +1,0 @@
-body: //div[@class = "entry-full"]
-
-test_url: http://www.kumailplus.com/2011/12/02/24308

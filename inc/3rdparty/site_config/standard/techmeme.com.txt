@@ -1,3 +1,0 @@
-single_page_link_in_feed: //b/a
-
-test_url: http://www.techmeme.com/feed.xml

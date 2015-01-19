@@ -1,7 +1,0 @@
-title: //h3[contains(@class, 'entry-title')]
-date: //abbr[@itemprop='datePublished']/@title
-body: //div[@itemprop='articleBody']
-tidy: no
-
-test_url: http://www.kachiblog.com/2013/05/samsung-galaxy-s4-vs-samsung-galaxy.html
-test_url: http://www.kachiblog.com/feed

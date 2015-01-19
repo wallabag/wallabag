@@ -1,2 +1,0 @@
-title: //meta[@property='og:title']/@content
-test_url: http://www.512pixels.net/blog/2014/10/the-move

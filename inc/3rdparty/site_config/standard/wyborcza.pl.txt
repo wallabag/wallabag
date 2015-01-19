@@ -1,9 +1,0 @@
-body: //div[@id='article']
-strip: //div[@class='head']
-
-strip_id_or_class: txt_upl
-
-single_page_link: //div[@id='gazeta_article_tools']//a[contains(@class, 'print')]
-
-test_url: http://wyborcza.pl/1,123455,11536088,Gdy_peknie_fejs__obryzga_wszystko.html?as=1&startsz=x
-test_url: http://wyborcza.pl/1,75478,14880255,Biskup_Dydycz_o_pedofilii_i_tajemnicy_spowiedzi__Zamiast.html

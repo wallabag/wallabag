@@ -1,9 +1,0 @@
-title: //div[@id='maincontent']//h1
-body: //div[@id='resizeableText']
-
-single_page_link: concat(//link[@rel='canonical']/@href, '?sp=true')
-
-test_url: http://cn.reuters.com/article/CNAnalysesNews/idCNKBS0FF0NM20140710
-test_url: http://cn.reuters.feedsportal.com/CNAnalysesNews
-# multipage link
-test_url: http://cn.reuters.com/article/idCNKBS0FF0UL20140710
