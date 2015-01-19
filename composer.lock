@@ -1820,12 +1820,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/wallabag/phpMobi.git",
-                "reference": "67fa665a9e5eb78b3e9246629a9be4ef46c884ba"
+                "reference": "5137696542f08f8e6a0603c01970c6d3eca9873d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wallabag/phpMobi/zipball/67fa665a9e5eb78b3e9246629a9be4ef46c884ba",
-                "reference": "67fa665a9e5eb78b3e9246629a9be4ef46c884ba",
+                "url": "https://api.github.com/repos/wallabag/phpMobi/zipball/5137696542f08f8e6a0603c01970c6d3eca9873d",
+                "reference": "5137696542f08f8e6a0603c01970c6d3eca9873d",
                 "shasum": ""
             },
             "require": {
@@ -1849,7 +1849,7 @@
             "support": {
                 "source": "https://github.com/wallabag/phpMobi/tree/master"
             },
-            "time": "2015-01-19 12:35:44"
+            "time": "2015-01-19 12:43:17"
         }
     ],
     "packages-dev": [
