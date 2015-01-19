@@ -213,9 +213,8 @@ class WallabagPDF extends WallabagEbooks
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('');
         $pdf->SetTitle($this->bookTitle);
-        $pdf->SetSubject('TCPDF Tutorial');
-        $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
-		
+        $pdf->SetSubject($this->bookTitle);
+        
         Tools::logm('Adding introduction...');
         $pdf->AddPage();
         $intro = '<h1>' . $this->bookTitle . '</h1><div style="text-align:center;" >
@@ -240,7 +239,7 @@ class WallabagPDF extends WallabagEbooks
         $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
         
 
-        $pdf->Output($this->bookFileName . '.pdf', 'FD');
+        $pdf->Output(CACHE . '/' . $this->bookFileName . '.pdf', 'FD');
 
 	}
 }

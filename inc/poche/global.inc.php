@@ -30,9 +30,6 @@ require_once INCLUDES . '/poche/FlattrItem.class.php';
 require_once INCLUDES . '/3rdparty/libraries/feedwriter/FeedItem.php';
 require_once INCLUDES . '/3rdparty/libraries/feedwriter/FeedWriter.php';
 
-# pdf library
-require_once  INCLUDES . '/3rdparty/libraries/tcpdf/tcpdf.php';
-
 # system configuration; database credentials et caetera
 require_once INCLUDES . '/poche/config.inc.php';
 require_once INCLUDES . '/poche/config.inc.default.php';

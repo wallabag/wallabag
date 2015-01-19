@@ -61,7 +61,8 @@
         "wallabag/pagination": "dev-master",
         "wallabag/PHPePub": "dev-master",
         "wallabag/php-readability": "dev-master",
-        "wallabag/phpMobi": "dev-master"
+        "wallabag/phpMobi": "dev-master",
+        "tecnick.com/tcpdf": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "~3.7"
