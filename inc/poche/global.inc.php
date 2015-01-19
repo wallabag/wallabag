@@ -29,7 +29,7 @@ require_once INCLUDES . '/3rdparty/paginator.php';
 
 require_once INCLUDES . '/3rdparty/libraries/feedwriter/FeedItem.php';
 require_once INCLUDES . '/3rdparty/libraries/feedwriter/FeedWriter.php';
-require_once INCLUDES . '/3rdparty/FlattrItem.class.php';
+require_once INCLUDES . '/poche/FlattrItem.class.php';
 
 # epub library
 require_once INCLUDES . '/3rdparty/libraries/PHPePub/Logger.php';

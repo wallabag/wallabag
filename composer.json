@@ -30,6 +30,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/wallabag/kriss_php5"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/wallabag/pagination"
         }
     ],
     "require": {
@@ -40,6 +44,7 @@
         "ezyang/htmlpurifier": "dev-master",
         "mgargano/simplehtmldom": "dev-master",
         "wallabag/PHP-Flash-Messages": "dev-master",
-        "wallabag/kriss_php5": "dev-master"
+        "wallabag/kriss_php5": "dev-master",
+        "wallabag/pagination": "dev-master"
     }
 }

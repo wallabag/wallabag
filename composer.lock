@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "aaf0d0bb3208c2dfc0b6cc95cbfab5f6",
+    "hash": "01683220c560fe335307baeb1018293c",
     "packages": [
         {
             "name": "ezyang/htmlpurifier",
@@ -1374,6 +1374,43 @@
             "time": "2015-01-18 21:21:43"
         },
         {
+            "name": "wallabag/pagination",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wallabag/pagination.git",
+                "reference": "54e442b31c90e50e331cb8ac400537e0eda30deb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wallabag/pagination/zipball/54e442b31c90e50e331cb8ac400537e0eda30deb",
+                "reference": "54e442b31c90e50e331cb8ac400537e0eda30deb",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "paginator.php"
+                ]
+            },
+            "authors": [
+                {
+                    "name": "Nicolas Lœuillet",
+                    "email": "nicolas@loeuillet.org",
+                    "homepage": "http://www.cdetc.fr"
+                }
+            ],
+            "description": "Paginate record sets, not tied in directly to a database.",
+            "homepage": "https://github.com/wallabag/pagination",
+            "support": {
+                "source": "https://github.com/wallabag/pagination/tree/master"
+            },
+            "time": "2015-01-19 09:24:39"
+        },
+        {
             "name": "wallabag/php-flash-messages",
             "version": "dev-master",
             "source": {
@@ -1428,7 +1465,8 @@
         "ezyang/htmlpurifier": 20,
         "mgargano/simplehtmldom": 20,
         "wallabag/php-flash-messages": 20,
-        "wallabag/kriss_php5": 20
+        "wallabag/kriss_php5": 20,
+        "wallabag/pagination": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
