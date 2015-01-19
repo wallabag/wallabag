@@ -45,7 +45,12 @@
         "mgargano/simplehtmldom": "dev-master",
         "wallabag/PHP-Flash-Messages": "dev-master",
         "wallabag/kriss_php5": "dev-master",
-        "wallabag/pagination": "dev-master",
-        "phpunit/phpunit": "4.4.*"
+        "wallabag/pagination": "dev-master"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~3.7"
+    },
+    "config": {
+        "bin-dir": "bin"
     }
 }
