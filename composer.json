@@ -34,6 +34,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/wallabag/pagination"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/wallabag/PHPePub"
         }
     ],
     "require": {
@@ -43,10 +47,11 @@
         "fabpot/goutte": "2.0.*@dev",
         "ezyang/htmlpurifier": "dev-master",
         "mgargano/simplehtmldom": "dev-master",
+        "robmorgan/phinx": "*",
         "wallabag/PHP-Flash-Messages": "dev-master",
         "wallabag/kriss_php5": "dev-master",
         "wallabag/pagination": "dev-master",
-        "robmorgan/phinx": "*"
+        "wallabag/PHPePub": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "~3.7"

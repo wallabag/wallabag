@@ -25,22 +25,13 @@ require_once INCLUDES . '/poche/WallabagEBooks.class.php';
 require_once INCLUDES . '/poche/Poche.class.php';
 
 require_once INCLUDES . '/poche/Database.class.php';
-require_once INCLUDES . '/3rdparty/paginator.php';
+require_once INCLUDES . '/poche/FlattrItem.class.php';
 
 require_once INCLUDES . '/3rdparty/libraries/feedwriter/FeedItem.php';
 require_once INCLUDES . '/3rdparty/libraries/feedwriter/FeedWriter.php';
-require_once INCLUDES . '/poche/FlattrItem.class.php';
-
-# epub library
-require_once INCLUDES . '/3rdparty/libraries/PHPePub/Logger.php';
-require_once INCLUDES . '/3rdparty/libraries/PHPePub/EPub.php';
-require_once INCLUDES . '/3rdparty/libraries/PHPePub/EPubChapterSplitter.php';
-
 # mobi library
 require_once INCLUDES . '/3rdparty/libraries/MOBIClass/MOBI.php';
-
 # pdf library
-#require_once INCLUDES . '/3rdparty/libraries/mpdf/mpdf.php';
 require_once  INCLUDES . '/3rdparty/libraries/tcpdf/tcpdf.php';
 
 # system configuration; database credentials et caetera

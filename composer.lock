@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "256d4b68ab2de1b3aa0dea820f3acdb0",
+    "hash": "376dd2761a2a44043b834a7cb5897e37",
     "packages": [
         {
             "name": "ezyang/htmlpurifier",
@@ -1596,6 +1596,50 @@
             "time": "2013-02-14 16:41:48"
         },
         {
+            "name": "wallabag/PHPePub",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wallabag/PHPePub.git",
+                "reference": "7c78733d33344308520758d7f3f7bc2cc51b3512"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wallabag/PHPePub/zipball/7c78733d33344308520758d7f3f7bc2cc51b3512",
+                "reference": "7c78733d33344308520758d7f3f7bc2cc51b3512",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "EPub.php",
+                    "EPub.HtmlEntities.php",
+                    "EPub.NCX.php",
+                    "EPub.OPF.php",
+                    "EPubChapterSplitter.php",
+                    "lib.uuid.php",
+                    "Logger.php",
+                    "Zip.php"
+                ]
+            },
+            "authors": [
+                {
+                    "name": "Nicolas Lœuillet",
+                    "email": "nicolas@loeuillet.org",
+                    "homepage": "http://www.cdetc.fr"
+                }
+            ],
+            "description": "PHP Classes for dynamically generating EPub files.",
+            "homepage": "https://github.com/wallabag/PHPePub",
+            "support": {
+                "source": "https://github.com/wallabag/PHPePub/tree/master"
+            },
+            "time": "2015-01-19 11:44:19"
+        },
+        {
             "name": "wallabag/kriss_php5",
             "version": "dev-master",
             "source": {
@@ -2092,7 +2136,8 @@
         "mgargano/simplehtmldom": 20,
         "wallabag/php-flash-messages": 20,
         "wallabag/kriss_php5": 20,
-        "wallabag/pagination": 20
+        "wallabag/pagination": 20,
+        "wallabag/phpepub": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
