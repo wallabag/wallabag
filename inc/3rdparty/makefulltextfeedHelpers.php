@@ -12,7 +12,6 @@ function autoload($class_name) {
 		// Include ContentExtractor and Readability for identifying and extracting content from URLs
 		'ContentExtractor' => 'content-extractor/ContentExtractor.php',
 		'SiteConfig' => 'content-extractor/SiteConfig.php',
-		'Readability' => 'readability/Readability.php',
 		// Include Humble HTTP Agent to allow parallel requests and response caching
 		'HumbleHttpAgent' => 'humble-http-agent/HumbleHttpAgent.php',
 		'SimplePie_HumbleHttpAgent' => 'humble-http-agent/SimplePie_HumbleHttpAgent.php',
@@ -35,8 +34,6 @@ function autoload($class_name) {
 	}
 }
 spl_autoload_register('autoload');
-require dirname(__FILE__).'/libraries/simplepie/autoloader.php';
-
 
 class DummySingleItemFeed {
 	public $item;

@@ -56,13 +56,14 @@
         "ezyang/htmlpurifier": "dev-master",
         "mgargano/simplehtmldom": "dev-master",
         "robmorgan/phinx": "*",
+        "tecnick.com/tcpdf": "dev-master",
+        "simplepie/simplepie": "dev-master",
         "wallabag/PHP-Flash-Messages": "dev-master",
         "wallabag/kriss_php5": "dev-master",
         "wallabag/pagination": "dev-master",
         "wallabag/PHPePub": "dev-master",
         "wallabag/php-readability": "dev-master",
-        "wallabag/phpMobi": "dev-master",
-        "tecnick.com/tcpdf": "dev-master"
+        "wallabag/phpMobi": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "~3.7"

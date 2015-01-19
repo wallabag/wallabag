@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "eb0ceaf553732641132346a79d959961",
+    "hash": "bc1406a8a4ef54f0927a48c0b7f5eeb1",
     "packages": [
         {
             "name": "ezyang/htmlpurifier",
@@ -404,6 +404,60 @@
                 "phinx"
             ],
             "time": "2014-12-23 06:06:14"
+        },
+        {
+            "name": "simplepie/simplepie",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/simplepie/simplepie.git",
+                "reference": "9a9faaa0d563426cf6d897c169373c5b62f1b252"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/simplepie/simplepie/zipball/9a9faaa0d563426cf6d897c169373c5b62f1b252",
+                "reference": "9a9faaa0d563426cf6d897c169373c5b62f1b252",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "SimplePie": "library"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Ryan Parman",
+                    "homepage": "http://ryanparman.com/",
+                    "role": "Creator, alumnus developer"
+                },
+                {
+                    "name": "Geoffrey Sneddon",
+                    "homepage": "http://gsnedders.com/",
+                    "role": "Alumnus developer"
+                },
+                {
+                    "name": "Ryan McCue",
+                    "email": "me@ryanmccue.info",
+                    "homepage": "http://ryanmccue.info/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A simple Atom/RSS parsing library for PHP",
+            "homepage": "http://simplepie.org/",
+            "keywords": [
+                "atom",
+                "feeds",
+                "rss"
+            ],
+            "time": "2014-04-28 12:50:39"
         },
         {
             "name": "symfony/browser-kit",
@@ -2289,13 +2343,14 @@
         "fabpot/goutte": 20,
         "ezyang/htmlpurifier": 20,
         "mgargano/simplehtmldom": 20,
+        "tecnick.com/tcpdf": 20,
+        "simplepie/simplepie": 20,
         "wallabag/php-flash-messages": 20,
         "wallabag/kriss_php5": 20,
         "wallabag/pagination": 20,
         "wallabag/phpepub": 20,
         "wallabag/php-readability": 20,
-        "wallabag/phpmobi": 20,
-        "tecnick.com/tcpdf": 20
+        "wallabag/phpmobi": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
