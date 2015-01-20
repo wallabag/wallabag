@@ -10,6 +10,8 @@
 
 namespace Wallabag\Wallabag;
 
+use \Session;
+
 class Language
 {
     protected $wallabag;
@@ -38,7 +40,7 @@ class Language
         $pocheUser = Session::getParam('poche_user');
         $language  = (is_null($pocheUser) ? LANG : $pocheUser->getConfigValue('language'));
 
-        @putenv('LC_ALL=' . $language);
+        putenv('LC_ALL=' . $language);
         setlocale(LC_ALL, $language);
         bindtextdomain($language, LOCALE);
         textdomain($language);

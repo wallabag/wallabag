@@ -10,6 +10,9 @@
 
 namespace Wallabag\Wallabag;
 
+use \RecursiveIteratorIterator;
+use \RecursiveDirectoryIterator;
+
 final class Tools
 {
     /**

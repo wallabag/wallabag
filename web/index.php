@@ -10,6 +10,8 @@
 
 define ('WALLABAG', '2.0.0-alpha');
 
+use Wallabag\Wallabag\Wallabag;
+
 require_once '../app/check_essentials.php';
 require_once '../app/check_setup.php';
 require_once '../app/config/global.inc.php';
@@ -23,5 +25,5 @@ Session::$sessionName = 'wallabag';
 Session::init();
 
 // Let's rock !
-$wallabag = new Wallabag\Wallabag\Wallabag();
+$wallabag = new Wallabag();
 $wallabag->run();

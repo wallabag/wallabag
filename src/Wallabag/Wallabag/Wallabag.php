@@ -10,6 +10,11 @@
 
 namespace Wallabag\Wallabag;
 
+use \Paginator;
+use \Session;
+use \Messages;
+use \FeedWriter;
+
 class Wallabag
 {
     /**
@@ -50,7 +55,7 @@ class Wallabag
     {
         Tools::initPhp();
 
-        $pocheUser = Session::getParam('poche_user');
+        $pocheUser = \Session::getParam('poche_user');
 
         if ($pocheUser && $pocheUser != array()) {
             $this->user = $pocheUser;

@@ -67,7 +67,7 @@
 @define ('DEFAULT_THEME', 'baggy');
 
 @define ('THEME', ROOT . '/themes');
-@define ('LOCALE', ROOT . '/src/Wallabag/Wallabag/Resources/translations/locale');
+@define ('LOCALE', ROOT . '/src/Wallabag/Wallabag/Resources/translations');
 @define ('CACHE', ROOT . '/app/cache');
 
 @define ('PAGINATION', '12');

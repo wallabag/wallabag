@@ -10,6 +10,13 @@
 
 namespace Wallabag\Wallabag;
 
+use \Twig_Environment;
+use \Session;
+use \Twig_Loader_Chain;
+use \Twig_Loader_Filesystem;
+use \Twig_Extensions_Extension_I18n;
+use \Twig_SimpleFilter;
+
 class Template extends Twig_Environment
 {
     protected $wallabag;
@@ -117,11 +124,11 @@ class Template extends Twig_Environment
         $this->addExtension(new Twig_Extensions_Extension_I18n());
 
         # filter to display domain name of an url
-        $filter = new Twig_SimpleFilter('getDomain', 'Tools::getDomain');
+        $filter = new Twig_SimpleFilter('getDomain', 'Wallabag\\Wallabag\\Tools::getDomain');
         $this->addFilter($filter);
 
         # filter for reading time
-        $filter = new Twig_SimpleFilter('getReadingTime', 'Tools::getReadingTime');
+        $filter = new Twig_SimpleFilter('getReadingTime', 'Wallabag\\Wallabag\\Tools::getReadingTime');
         $this->addFilter($filter);
     }
 

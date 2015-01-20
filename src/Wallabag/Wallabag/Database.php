@@ -10,6 +10,8 @@
 
 namespace Wallabag\Wallabag;
 
+use \PDO;
+
 class Database {
 
     var $handle;

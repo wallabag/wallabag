@@ -75,7 +75,7 @@
         "phpunit/phpunit": "~3.7"
     },
     "autoload": {
-        "psr-0": { "Wallabag\\Wallabag": "src/" }
+        "psr-4": { "Wallabag\\": "src/Wallabag" }
     },
     "config": {
         "bin-dir": "bin"
