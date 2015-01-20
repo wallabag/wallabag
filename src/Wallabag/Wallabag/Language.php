@@ -8,6 +8,8 @@
  * @license    http://opensource.org/licenses/MIT see COPYING file
  */
 
+namespace Wallabag\Wallabag;
+
 class Language
 {
     protected $wallabag;
@@ -30,7 +32,7 @@ class Language
         'uk_UA.utf8' => 'Українська',
     );
 
-    public function __construct(Poche $wallabag)
+    public function __construct(Wallabag $wallabag)
     {
         $this->wallabag = $wallabag;
         $pocheUser = Session::getParam('poche_user');

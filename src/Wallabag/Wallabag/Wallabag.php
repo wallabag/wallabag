@@ -8,7 +8,9 @@
  * @license    http://opensource.org/licenses/MIT see COPYING file
  */
 
-class Poche
+namespace Wallabag\Wallabag;
+
+class Wallabag
 {
     /**
      * @var User

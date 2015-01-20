@@ -13,7 +13,7 @@
 
 @define ('STORAGE', 'sqlite'); # postgres, mysql or sqlite
 
-@define ('STORAGE_SQLITE', ROOT . '/db/poche.sqlite'); # if you are using sqlite, where the database file is located
+@define ('STORAGE_SQLITE', ROOT . '/app/db/poche.sqlite'); # if you are using sqlite, where the database file is located
 
 # only for postgres & mysql
 @define ('STORAGE_SERVER', 'localhost');
@@ -62,13 +62,13 @@
 @define ('SHOW_PRINTLINK', '1');
 // display or not percent of read in article view. Affects only default theme.
 @define ('SHOW_READPERCENT', '1');
-@define ('ABS_PATH', 'assets/');
+@define ('ABS_PATH', ROOT . '/app/assets/');
 
 @define ('DEFAULT_THEME', 'baggy');
 
 @define ('THEME', ROOT . '/themes');
-@define ('LOCALE', ROOT . '/locale');
-@define ('CACHE', ROOT . '/cache');
+@define ('LOCALE', ROOT . '/src/Wallabag/Wallabag/Resources/translations/locale');
+@define ('CACHE', ROOT . '/app/cache');
 
 @define ('PAGINATION', '12');
 

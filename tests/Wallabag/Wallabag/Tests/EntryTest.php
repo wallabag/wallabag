@@ -12,7 +12,7 @@ namespace wallabag\wallabag\Tests;
 
 class EntryTest extends \PHPUnit_Framework_TestCase
 {
-    public function testFoo()
+    public function testCreateUser()
     {
         $this->assertTrue(true);
     }

@@ -8,7 +8,9 @@
  * @license    http://opensource.org/licenses/MIT see COPYING file
  */
 
-class WallabagEBooks
+namespace Wallabag\Wallabag;
+
+class Ebooks
 {
 	protected $wallabag;
     protected $method;
@@ -18,7 +20,7 @@ class WallabagEBooks
     protected $bookFileName;
     protected $author = 'wallabag';
 
-    public function __construct(Poche $wallabag, $method, $value)
+    public function __construct(Wallabag $wallabag, $method, $value)
     {
         $this->wallabag = $wallabag;
         $this->method   = $method;

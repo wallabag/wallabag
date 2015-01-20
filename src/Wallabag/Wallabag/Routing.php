@@ -8,6 +8,8 @@
  * @license    http://opensource.org/licenses/MIT see COPYING file
  */
 
+namespace Wallabag\Wallabag;
+
 class Routing
 {
     protected $wallabag;
@@ -20,7 +22,7 @@ class Routing
     protected $defaultVars = array();
     protected $vars = array();
 
-    public function __construct(Poche $wallabag)
+    public function __construct(Wallabag $wallabag)
     {
         $this->wallabag = $wallabag;
         $this->_init();

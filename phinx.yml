@@ -1,0 +1,17 @@
+paths:
+    migrations: %%PHINX_CONFIG_DIR%%/migrations
+
+environments:
+    default_migration_table: phinxlog
+    default_database: development
+    production:
+        adapter: sqlite
+        name: db/poche
+
+    development:
+        adapter: sqlite
+        name: db/poche
+
+    testing:
+        adapter: sqlite
+        name: db/poche

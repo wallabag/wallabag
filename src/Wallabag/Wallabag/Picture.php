@@ -8,6 +8,7 @@
  * @license    http://opensource.org/licenses/MIT see COPYING file
  */
 
+namespace Wallabag\Wallabag;
 
 final class Picture
 {

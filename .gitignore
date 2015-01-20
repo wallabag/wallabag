@@ -1,9 +1,8 @@
 .DS_Store
-assets/*
-cache/*
+.vagrant
+app/assets/*
+app/cache/*
 vendor
 composer.phar
 db/poche.sqlite
-inc/poche/config.inc.php
-inc/3rdparty/htmlpurifier/HTMLPurifier/DefinitionCache/Serializer/
-.vagrant
+app/config/config.inc.php

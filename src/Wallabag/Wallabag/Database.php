@@ -8,6 +8,8 @@
  * @license    http://opensource.org/licenses/MIT see COPYING file
  */
 
+namespace Wallabag\Wallabag;
+
 class Database {
 
     var $handle;
@@ -25,7 +27,7 @@ class Database {
             case 'sqlite':
                 // Check if /db is writeable
                 if ( !is_writable(STORAGE_SQLITE) || !is_writable(dirname(STORAGE_SQLITE))) {
-                	die('An error occured: "db" directory must be writeable for your web server user!');
+                	die('An error occured: ' . STORAGE_SQLITE . ' directory must be writeable for your web server user!');
                 }
                 $db_path = 'sqlite:' . STORAGE_SQLITE;
                 $this->handle = new PDO($db_path);

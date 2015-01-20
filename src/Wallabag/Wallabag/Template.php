@@ -8,6 +8,8 @@
  * @license    http://opensource.org/licenses/MIT see COPYING file
  */
 
+namespace Wallabag\Wallabag;
+
 class Template extends Twig_Environment
 {
     protected $wallabag;
@@ -15,7 +17,7 @@ class Template extends Twig_Environment
     private $canRenderTemplates = TRUE;
     private $currentTheme = '';
 
-    public function __construct(Poche $wallabag)
+    public function __construct(Wallabag $wallabag)
     {
         $this->wallabag = $wallabag;
 
