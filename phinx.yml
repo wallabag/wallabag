@@ -6,12 +6,12 @@ environments:
     default_database: development
     production:
         adapter: sqlite
-        name: db/poche
+        name: app/db/poche
 
     development:
         adapter: sqlite
-        name: db/poche
+        name: app/db/poche
 
     testing:
         adapter: sqlite
-        name: db/poche
+        name: app/db/poche
