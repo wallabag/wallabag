@@ -208,7 +208,7 @@ else if (isset($_POST['install'])) {
         <link rel="stylesheet" href="themes/baggy/css/main.css" media="all">
         <link rel="stylesheet" href="themes/baggy/css/messages.css" media="all">
         <link rel="stylesheet" href="themes/baggy/css/print.css" media="print">
-        <script src="themes/default/js/jquery-2.0.3.min.js"></script>
+        <script src="themes/_global/js/jquery-2.0.3.min.js"></script>
         <script src="themes/baggy/js/init.js"></script>
     </head>
     <body>
@@ -258,6 +258,7 @@ else if (isset($_POST['install'])) {
                 <?php endif; ?>    
             <?php endif; ?>
             <p>To install wallabag, you just have to fill the following fields. That's all.</p>
+            <p>If you need help, you can read the doc: <a href="docs/" target="_blank">offline documentation</a> and <a href="http://doc.wallabag.org" target="_blank">online one</a> (already up-to-date).</p>
             <p>Don't forget to check your server compatibility <a href="install/wallabag_compatibility_test.php?from=install">here</a>.</p>
             <form method="post">
                 <fieldset>
