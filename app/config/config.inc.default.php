@@ -13,7 +13,7 @@
 
 @define ('STORAGE', 'sqlite'); # postgres, mysql or sqlite
 
-@define ('STORAGE_SQLITE', ROOT . '/app/db/poche.sqlite'); # if you are using sqlite, where the database file is located
+@define ('STORAGE_SQLITE', ROOT . '/app/db/poche.sqlite'); # if you are using sqlite, where me database file is located
 
 # only for postgres & mysql
 @define ('STORAGE_SERVER', 'localhost');
@@ -66,7 +66,7 @@
 
 @define ('DEFAULT_THEME', 'baggy');
 
-@define ('THEME', ROOT . '/themes');
+@define ('THEME', ROOT . '/src/Wallabag/Wallabag/Resources/views');
 @define ('LOCALE', ROOT . '/src/Wallabag/Wallabag/Resources/translations');
 @define ('CACHE', ROOT . '/app/cache');
 

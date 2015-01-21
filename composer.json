@@ -77,9 +77,6 @@
     "scripts": {
         "post-install-cmd": [
             "bin/install"
-        ],
-        "post-update-cmd": [
-            "bin/update"
         ]
     },
     "autoload": {
