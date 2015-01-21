@@ -12,9 +12,9 @@ define('ROOT', dirname(__FILE__) . '/../..');
 
 require_once ROOT . '/vendor/autoload.php';
 
-# system configuration; database credentials et caetera
-require_once dirname(__FILE__) . '/config.inc.php';
-require_once dirname(__FILE__) . '/config.inc.default.php';
+# system configuration
+require_once __DIR__ . '/config.inc.php';
+require_once __DIR__ . '/config.inc.default.php';
 
 if (!ini_get('date.timezone') || !@date_default_timezone_set(ini_get('date.timezone'))) {
     date_default_timezone_set('UTC');

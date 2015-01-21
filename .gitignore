@@ -5,5 +5,5 @@ app/assets/*
 app/cache/*
 vendor
 composer.phar
-db/poche.sqlite
+app/db/poche.sqlite
 app/config/config.inc.php

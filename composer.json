@@ -74,6 +74,14 @@
     "require-dev": {
         "phpunit/phpunit": "~3.7"
     },
+    "scripts": {
+        "post-install-cmd": [
+            "bin/install"
+        ],
+        "post-update-cmd": [
+            "bin/update"
+        ]
+    },
     "autoload": {
         "psr-4": { "Wallabag\\": "src/Wallabag" }
     },

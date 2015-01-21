@@ -1,0 +1,68 @@
+#!/usr/bin/php
+<?php
+
+echo 'Okay, you want to install wallabag, let\'s go!';
+echo "\r\n";
+
+function generateSalt() {
+    mt_srand(microtime(true)*100000 + memory_get_usage(true));
+    return md5(uniqid(mt_rand(), true));
+}
+
+function executeQuery($handle, $sql, $params) {
+    try
+    {
+        $query = $handle->prepare($sql);
+        $query->execute($params);
+        return $query->fetchAll();
+    }
+    catch (Exception $e)
+    {
+        return false;
+    }
+}
+
+$configFile      = 'app/config/config.inc.php';
+$dbFile          = 'app/db/poche.sqlite';
+$username        = 'wallabag';
+$password        = 'wallabag';
+$salt            = generateSalt();
+$defaultLanguage = 'en_EN.UTF8';
+
+if (!copy('app/config/config.inc.default.php', $configFile)) {
+    die('Installation aborted, impossible to create ' . $configFile . ' file. Maybe you don\'t have write access to create it.');
+}
+
+$content = file_get_contents($configFile);
+$content = str_replace("define ('SALT', '');", "define ('SALT', '".$salt."');", $content);
+file_put_contents($configFile, $content);
+
+if (!copy('bin/poche.sqlite', $dbFile)) {
+    die('Impossible to create ' . $dbFile . ' file.');
+}
+
+chmod($dbFile, 0777);
+
+$dbPath = 'sqlite:' . realpath('') . '/' . $dbFile;
+
+$handle = new PDO($dbPath);
+
+$handle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+$saltedPassword = sha1($password . $username . $salt);
+
+$sql    = "INSERT INTO users (username, password, name, email) VALUES (?, ?, ?, '')";
+$params = array($username, $saltedPassword, $username);
+$query  = executeQuery($handle, $sql, $params);
+
+$idUser = (int)$handle->lastInsertId('users_id_seq');
+
+$sql    = 'INSERT INTO users_config ( user_id, name, value ) VALUES (?, ?, ?)';
+$params = array($idUser, 'pager', '10');
+$query  = executeQuery($handle, $sql, $params);
+
+$sql    = 'INSERT INTO users_config ( user_id, name, value ) VALUES (?, ?, ?)';
+$params = array($idUser, 'language', $defaultLanguage);
+$query  = executeQuery($handle, $sql, $params);
+
+echo 'wallabag is now installed';

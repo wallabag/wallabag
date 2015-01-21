@@ -13,12 +13,11 @@ define ('WALLABAG', '2.0.0-alpha');
 use Wallabag\Wallabag\Wallabag;
 
 require_once '../app/check_essentials.php';
-require_once '../app/check_setup.php';
 require_once '../app/config/global.inc.php';
 
-// Check if /cache is writeable
+// Check if /cache is writable
 if (! is_writable(CACHE)) {
-    die('The directory ' . CACHE . ' must be writeable by your web server user');
+    die('The directory ' . CACHE . ' must be writable by your web server user');
 }
 
 Session::$sessionName = 'wallabag';
