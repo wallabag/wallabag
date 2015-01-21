@@ -66,3 +66,9 @@ $params = array($idUser, 'language', $defaultLanguage);
 $query  = executeQuery($handle, $sql, $params);
 
 echo 'wallabag is now installed';
+echo "\r\n";
+echo 'Just execute the following commands for using wallabag:';
+echo "\r\n";
+echo 'cd web';
+echo "\r\n";
+echo 'php -S localhost:8000';
