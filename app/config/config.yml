@@ -29,6 +29,21 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    globals:
+        share_twitter: %share_twitter%
+        share_mail: %share_mail%
+        share_shaarli: %share_shaarli%
+        shaarli_url: %shaarli_url%
+        share_diaspora: %share_diaspora%
+        diaspora_url: %diaspora_url%
+        flattr: %flattr%
+        flattrable: 1
+        flattred: 2
+        carrot: %carrot%
+        show_printlink: %show_printlink%
+        export_epub: %export_epub%
+        export_mobi: %export_mobi%
+        export_pdf: %export_pdf%
 
 # Assetic Configuration
 assetic:

@@ -13,19 +13,35 @@ use Doctrine\ORM\EntityRepository;
  */
 class EntriesRepository extends EntityRepository
 {
-  /*  public function findUnreadByUser($userId)
-    {
-        return $this->createQueryBuilder('e')
-            ->where('e.is_read = 0')
-            ->andWhere('e.user_id = :userId')
-            ->setParameter('userId', $userId)
-            ->getQuery();
-    }*/
     public function findUnreadByUser($userId)
     {
         $qb = $this->createQueryBuilder('e')
             ->select('e')
             ->where('e.isRead = 0')
+            ->andWhere('e.userId =:userId')->setParameter('userId', $userId)
+            ->getQuery()
+            ->getResult(Query::HYDRATE_ARRAY);
+
+        return $qb;
+    }
+
+    public function findArchiveByUser($userId)
+    {
+        $qb = $this->createQueryBuilder('e')
+            ->select('e')
+            ->where('e.isRead = 1')
+            ->andWhere('e.userId =:userId')->setParameter('userId', $userId)
+            ->getQuery()
+            ->getResult(Query::HYDRATE_ARRAY);
+
+        return $qb;
+    }
+
+    public function findStarredByUser($userId)
+    {
+        $qb = $this->createQueryBuilder('e')
+            ->select('e')
+            ->where('e.isFav = 1')
             ->andWhere('e.userId =:userId')->setParameter('userId', $userId)
             ->getQuery()
             ->getResult(Query::HYDRATE_ARRAY);
