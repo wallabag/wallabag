@@ -1,26 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-    <phpunit backupGlobals="false"
-         backupStaticAttributes="false"
-         colors="true"
-         convertErrorsToExceptions="true"
-         convertNoticesToExceptions="true"
-         convertWarningsToExceptions="true"
-         processIsolation="false"
-         stopOnFailure="false"
-         syntaxCheck="false"
-         bootstrap="vendor/autoload.php"
+<!-- http://phpunit.de/manual/4.1/en/appendixes.configuration.html -->
+
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.1/phpunit.xsd"
+		 backupGlobals="false"
+		 colors="true"
+		 bootstrap="bootstrap.php.cache"
 		>
 
 	<testsuites>
 		<testsuite name="wallabag Test Suite">
-			<directory>tests</directory>
+			<directory>../src/*/*Bundle/Tests</directory>
+			<directory>../src/*/Bundle/*Bundle/Tests</directory>
+			<directory>../src/*Bundle/Tests</directory>
 		</testsuite>
 	</testsuites>
 
 	<filter>
 		<whitelist>
-			<directory>inc</directory>
+			<directory>../src</directory>
+			<exclude>
+				<directory>../src/*Bundle/Resources</directory>
+				<directory>../src/*Bundle/Tests</directory>
+				<directory>../src/*/*Bundle/Resources</directory>
+				<directory>../src/*/*Bundle/Tests</directory>
+				<directory>../src/*/Bundle/*Bundle/Resources</directory>
+				<directory>../src/*/Bundle/*Bundle/Tests</directory>
+			</exclude>
 		</whitelist>
 	</filter>
 
