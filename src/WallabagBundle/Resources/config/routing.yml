@@ -1,0 +1,3 @@
+_wllbg:
+    resource: "@WallabagBundle/Controller/EntryController.php"
+    type:     annotation

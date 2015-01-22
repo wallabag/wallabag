@@ -1,0 +1,26 @@
+{% extends "WallabagBundle::layout.html.twig" %}
+
+{% block title "Unread" %}
+
+{% block content_header '' %}
+
+{% block content %}
+    {% for entry in entries %}
+        <div id="entry-{{ entry.id|e }}" class="entrie">
+            <h2><a href="index.php?view=view&amp;id={{ entry.id|e }}">{{ entry.title|raw }}</a></h2>
+            {% if entry.content| readingTime > 0 %}
+                <div class="estimatedTime"><span class="tool reading-time">{% trans %}estimated reading time :{% endtrans %} {{ entry.content| readingTime }} min</span></div>
+            {% else %}
+                <div class="estimatedTime"><span class="tool reading-time">{% trans %}estimated reading time :{% endtrans %} <small class="inferieur">&lt;</small> 1 min</span></div>
+            {% endif %}
+
+            <ul class="tools links">
+                <li><a title="{% trans %}Toggle mark as read{% endtrans %}" class="tool icon-check icon {% if entry.isRead == 0 %}archive-off{% else %}archive{% endif %}" href="./?action=toggle_archive&amp;id={{ entry.id|e }}"><span>{% trans %}Toggle mark as read{% endtrans %}</span></a></li>
+                <li><a title="{% trans %}toggle favorite{% endtrans %}" class="tool icon-star icon {% if entry.isFav == 0 %}fav-off{% else %}fav{% endif %}" href="./?action=toggle_fav&amp;id={{ entry.id|e }}"><span>{% trans %}toggle favorite{% endtrans %}</span></a></li>
+                <li><a title="{% trans %}delete{% endtrans %}" class="tool delete icon-trash icon" href="./?action=delete&amp;id={{ entry.id|e }}"><span>{% trans %}delete{% endtrans %}</span></a></li>
+                <li><a href="{{ entry.url|e }}" target="_blank" title="{% trans %}original{% endtrans %} : {{ entry.title|e }}" class="tool link icon-link icon"><span>{{ entry.url | e | domainName }}</span></a></li>
+            </ul>
+            <p>{{ entry.content|striptags|slice(0, 300) }}...</p>
+        </div>
+    {% endfor %}
+{% endblock %}
