@@ -1,0 +1,83 @@
+{% extends 'AcmeDemoBundle::layout.html.twig' %}
+
+{% block title %}Symfony - Welcome{% endblock %}
+
+{% block content_header '' %}
+
+{% block content %}
+    {% set version = constant('Symfony\\Component\\HttpKernel\\Kernel::MAJOR_VERSION') ~ '.' ~ constant('Symfony\\Component\\HttpKernel\\Kernel::MINOR_VERSION')%}
+
+    <h1 class="title">Welcome!</h1>
+
+    <p>Congratulations! You have successfully installed a new Symfony application.</p>
+
+    <div class="symfony-blocks-welcome">
+        <div class="block-quick-tour">
+            <div class="illustration">
+                <img src="{{ asset('bundles/acmedemo/images/welcome-quick-tour.gif') }}" alt="Quick tour" />
+            </div>
+            <a href="http://symfony.com/doc/{{ version }}/quick_tour/index.html" class="sf-button sf-button-selected">
+                <span class="border-l">
+                    <span class="border-r">
+                        <span class="btn-bg">Read the Quick Tour</span>
+                    </span>
+                </span>
+            </a>
+        </div>
+        {% if app.environment == 'dev' %}
+            <div class="block-configure">
+                <div class="illustration">
+                    <img src="{{ asset('bundles/acmedemo/images/welcome-configure.gif') }}" alt="Configure your application" />
+                </div>
+                <a href="{{ path('_configurator_home') }}" class="sf-button sf-button-selected">
+                    <span class="border-l">
+                        <span class="border-r">
+                            <span class="btn-bg">Configure</span>
+                        </span>
+                    </span>
+                </a>
+            </div>
+        {% endif %}
+        <div class="block-demo">
+            <div class="illustration">
+                <img src="{{ asset('bundles/acmedemo/images/welcome-demo.gif') }}" alt="Demo" />
+            </div>
+            <a href="{{ path('_demo') }}" class="sf-button sf-button-selected">
+                <span class="border-l">
+                    <span class="border-r">
+                        <span class="btn-bg">Run The Demo</span>
+                    </span>
+                </span>
+            </a>
+        </div>
+    </div>
+
+    <div class="symfony-blocks-help">
+        <div class="block-documentation">
+            <ul>
+                <li><strong>Documentation</strong></li>
+                <li><a href="http://symfony.com/doc/{{ version }}/book/index.html">The Book</a></li>
+                <li><a href="http://symfony.com/doc/{{ version }}/cookbook/index.html">The Cookbook</a></li>
+                <li><a href="http://symfony.com/doc/{{ version }}/components/index.html">The Components</a></li>
+                <li><a href="http://symfony.com/doc/{{ version }}/reference/index.html">Reference</a></li>
+                <li><a href="http://symfony.com/doc/{{ version }}/glossary.html">Glossary</a></li>
+            </ul>
+        </div>
+        <div class="block-documentation-more">
+            <ul>
+                <li><strong>Sensio</strong></li>
+                <li><a href="http://trainings.sensiolabs.com">Trainings</a></li>
+                <li><a href="http://books.sensiolabs.com">Books</a></li>
+            </ul>
+        </div>
+        <div class="block-community">
+            <ul>
+                <li><strong>Community</strong></li>
+                <li><a href="http://symfony.com/irc">IRC channel</a></li>
+                <li><a href="http://symfony.com/mailing-lists">Mailing lists</a></li>
+                <li><a href="http://forum.symfony-project.org">Forum</a></li>
+                <li><a href="http://symfony.com/doc/{{ version }}/contributing/index.html">Contributing</a></li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}

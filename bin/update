@@ -1,4 +1,0 @@
-#!/bin/sh
-set -e
-
-# What can we do when we update vendor?

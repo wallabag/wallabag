@@ -1,0 +1,18 @@
+{% extends "layout.twig" %}
+{% block title %}tags{% endblock %}
+{% block menu %}
+{% include '_menu.twig' %}
+{% endblock %}
+{% block content %}
+  <div class="two-column">
+    {% for tag in tags %}
+      <a href="./?view=tag&amp;id={{ tag.id }}">{{ tag.value }}</a>  ({{ tag.entriescount }}) {% if token != '' %}<a href="?feed&amp;type=tag&amp;user_id={{ user_id }}&amp;tag_id={{ tag.id }}&amp;token={{ token }}" target="_blank"><img src="{{ poche_url }}themes/{{ theme }}/img/{{ theme }}/rss.png" /></a>{% endif %}
+      <br>
+
+      {% if loop.index  == '%d'|format(loop.length/2 + 0.5)  %}
+        </div><div class="two-column">
+      {% endif %}
+
+    {% endfor %}
+  </div>
+{% endblock %}

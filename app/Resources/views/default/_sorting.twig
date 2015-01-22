@@ -1,0 +1,6 @@
+{% if entries|length > 1 %}
+  <ul id="sort">
+      <li><a href="./?sort=ia&amp;view={{ view }}{% if searchterm is defined %}&amp;search={{ searchterm }}{% endif %}&amp;id={{ id }}"><img src="{{ poche_url }}themes/{{ theme }}/img/{{ theme }}/top.png" alt="{% trans "by date asc" %}" title="{% trans "by date asc" %}" /></a> {% trans "by date" %} <a href="./?sort=id&amp;view={{ view }}{% if searchterm is defined %}&amp;search={{ searchterm }}{% endif %}&amp;id={{ id }}"><img src="{{ poche_url }}themes/{{ theme }}/img/{{ theme }}/down.png" alt="{% trans "by date desc" %}" title="{% trans "by date desc" %}" /></a></li>
+      <li><a href="./?sort=ta&amp;view={{ view }}{% if searchterm is defined %}&amp;search={{ searchterm }}{% endif %}&amp;id={{ id }}"><img src="{{ poche_url }}themes/{{ theme }}/img/{{ theme }}/top.png" alt="{% trans "by title asc" %}" title="{% trans "by title asc" %}" /></a> {% trans "by title" %} <a href="./?sort=td&amp;view={{ view }}{% if searchterm is defined %}&amp;search={{ searchterm }}{% endif %}&amp;id={{ id }}"><img src="{{ poche_url }}themes/{{ theme }}/img/{{ theme }}/down.png" alt="{% trans "by title desc" %}" title="{% trans "by title desc" %}" /></a></li>
+  </ul>
+{% endif %}

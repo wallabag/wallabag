@@ -1,0 +1,53 @@
+/* ### Layout ### */
+
+body {
+    font-family: Serif;
+    background-color: #fff;
+}
+
+@page {
+    margin: 1cm;
+}
+
+img {
+    max-width: 100% !important;
+}
+
+/* ### Content ### */
+
+/* Hide useless blocks */
+body > header,
+#links,
+#sort,
+body > footer,
+.top_link,
+div.tools,
+header div,
+.messages,
+.entrie + .results,
+#article_toolbar {
+    display: none !important;
+}
+
+article {
+    border: none !important;
+}
+
+pre code {
+    line-height: 1.6em;
+}
+
+/* Add URL after links */
+.vieworiginal a:after {
+    content: " (" attr(href) ")";
+}
+
+/* Add explanation after abbr */
+abbr[title]:after {
+    content: " (" attr(title) ")";
+}
+
+/* Change border on current pager item */
+.pagination span.current {
+    border-style: dashed;
+}

@@ -13,7 +13,7 @@
 
 @define ('STORAGE', 'sqlite'); # postgres, mysql or sqlite
 
-@define ('STORAGE_SQLITE', ROOT . '/app/db/poche.sqlite'); # if you are using sqlite, where me database file is located
+@define ('STORAGE_SQLITE', ROOT . '/data/db/poche.sqlite'); # if you are using sqlite, where me database file is located
 
 # only for postgres & mysql
 @define ('STORAGE_SERVER', 'localhost');
@@ -62,7 +62,7 @@
 @define ('SHOW_PRINTLINK', '1');
 // display or not percent of read in article view. Affects only default theme.
 @define ('SHOW_READPERCENT', '1');
-@define ('ABS_PATH', ROOT . '/app/assets/');
+@define ('ABS_PATH', ROOT . '/data/assets/');
 
 @define ('DEFAULT_THEME', 'baggy');
 

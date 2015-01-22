@@ -1,0 +1,211 @@
+/*
+  Ratatouille mini Framework css by Thomas LEBEAU
+  Base on KNACSS => www.KNACSS.com (2013-10) @author: Raphael Goetter, Alsacreations
+  and normalize.css
+*/
+
+* {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html {
+  font-family: sans-serif; /* 1 */
+  -ms-text-size-adjust: 100%; /* 2 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+}
+
+body {
+  font-size: 1em;
+  line-height:1.5;
+  margin: 0;
+}
+
+/* ==========================================================================
+   Mise en forme
+   ========================================================================== */
+
+h1:first-child,
+h2:first-child,
+h3:first-child,
+h4:first-child,
+h5:first-child,
+h6:first-child,
+p:first-child,
+ul:first-child,
+ol:first-child,
+dl:first-child{
+  margin-top: 0;
+}
+
+code,
+kbd,
+pre,
+samp {
+    font-family: monospace, serif;
+}
+
+pre {
+    white-space: pre-wrap;
+}
+
+
+.upper {
+  text-transform: uppercase;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.inner {
+  margin: 0 auto;
+  max-width: 61.25em;/*980px*/
+}
+
+table, img {
+  max-width: 100%;
+  height :auto;
+}
+
+iframe {
+  max-width: 100%;
+}
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+figure {
+  margin: 0;
+}
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+    font-size: 100%;
+    margin: 0;
+}
+
+input[type="search"] {
+    -webkit-appearance: textfield;
+}
+
+/* ==========================================================================
+   Mise en page
+   ========================================================================== */
+
+.dib {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.dnone {
+  display: none;
+}
+
+.dtable { display:table }
+
+  .dtable > * { display:table-row; }
+
+    .dtable > * > * { display:table-cell; }
+
+.element-invisible {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.small {
+  font-size:0.8em;
+}
+
+.big {
+  font-size: 1.2em;
+}
+
+/*Width*/
+
+.w100 { width:100%; }
+.w90 { width:90%; }
+.w80 { width:80%; }
+.w70 { width:70%; }
+.w60 { width:60%; }
+.w50 { width:50%; }
+.w40 { width:40%; }
+.w30 { width:30%; }
+.w20 { width:20%; }
+.w10 { width:10%; }
+
+
+/* ==========================================================================
+   Internet Explorer
+   ========================================================================== */
+
+/*IE8 and IE9*/
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary {
+    display: block;
+}
+
+/*IE8 and IE9*/
+
+audio,
+canvas,
+video {
+    display: inline-block;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0){
+  select{
+    -webkit-appearance: none;
+    border-radius: 0;
+  }
+}
+
+/* ==========================================================================
+   Medias Queries
+   ========================================================================== */
+
+/*Desktop 1080px*/
+
+@media screen and (max-width: 67.50em) {
+}
+
+/*Tablet 800px*/
+
+@media screen and (max-width: 50em) {
+}
+
+/*Mobile 640px*/
+
+@media screen and (max-width: 40em) {
+}
+

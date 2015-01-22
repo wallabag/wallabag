@@ -1,13 +1,13 @@
 #!/usr/bin/php
 <?php
+require_once __DIR__. '/../vendor/autoload.php';
+
+use Symfony\Component\Yaml\Yaml;
+
+$parameters = Yaml::parse(file_get_contents('app/config/parameters.yml'));
 
 echo 'Okay, you want to install wallabag, let\'s go!';
 echo "\r\n";
-
-function generateSalt() {
-    mt_srand(microtime(true)*100000 + memory_get_usage(true));
-    return md5(uniqid(mt_rand(), true));
-}
 
 function executeQuery($handle, $sql, $params) {
     try
@@ -26,7 +26,7 @@ $configFile      = 'app/config/config.inc.php';
 $dbFile          = 'app/db/poche.sqlite';
 $username        = 'wallabag';
 $password        = 'wallabag';
-$salt            = generateSalt();
+$salt            = $parameters['parameters']['secret'];
 $defaultLanguage = 'en_EN.UTF8';
 
 if (!copy('app/config/config.inc.default.php', $configFile)) {

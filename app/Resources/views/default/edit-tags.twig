@@ -1,0 +1,35 @@
+{% extends "layout.twig" %}
+{% block title %}edit tags{% endblock %}
+{% block menu %}
+{% include '_menu.twig' %}
+{% endblock %}
+{% block content %}
+
+<script src="{{ poche_url }}themes/_global/js/jquery-ui-1.10.4.custom.min.js"></script>
+<script src="{{ poche_url }}themes/_global/js/autoCompleteTags.js"></script>
+<link rel="stylesheet" href="{{ poche_url }}themes/_global/css/jquery-ui-1.10.4.custom.min.css" media="all">
+
+<div id="article">
+  <header class="mbm">
+      <h1>{{ entry.title|raw }}</h1>
+  </header>
+</div>
+
+{% if tags is empty %}
+{% trans "no tags" %}
+{% endif %}
+<ul>
+{% for tag in tags %}<li>{{ tag.value }} <a href="./?action=remove_tag&amp;tag_id={{ tag.id }}&amp;id={{ entry_id }}">✘</a></li>{% endfor %}
+</ul>
+<form method="post" action="./?action=add_tag" id="editTags">
+    <input type="hidden" name="entry_id" value="{{ entry_id }}" />
+    <label for="value">{% trans "Add tags:" %}</label>
+    <input type="text" placeholder="{% trans "interview" %}, {% trans "editorial" %}, {% trans "video" %}" id="value" name="value" required="required" />
+    <input type="submit" value="Tag" />
+    <p>{% trans "Start typing for auto complete." %}<br>
+    {% trans "You can enter multiple tags, separated by commas." %}</p>
+
+</form>
+<br>
+<a href="./?view=view&id={{ entry_id }}">&laquo; {% trans "return to article" %}</a>
+{% endblock %}

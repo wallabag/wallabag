@@ -1,0 +1,15 @@
+<script type="text/javascript">
+<!--
+  $(document).ready(function() {
+  	$("body").css("cursor", "wait");
+  	
+    setTimeout(function(){
+      window.location = './?import';
+    }, {{ import.delay }} );
+  });
+//-->
+</script>
+<div class="messages warning">
+  <p>{% trans "Download required for " %} {{ import.recordsDownloadRequired }} {% trans "records" %}.</p>
+  <p>{% trans "Downloading next " %} {{ import.recordsUnderDownload }} {% trans "articles, please wait" %}...</p>
+</div>

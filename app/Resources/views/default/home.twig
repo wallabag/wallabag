@@ -1,0 +1,82 @@
+{% extends "layout.twig" %}
+{% block title %}
+{% if view == 'fav' %}
+{% trans "favoris" %}
+{% elseif view == 'archive' %}
+{% trans "archive" %}
+{% else %}
+{% trans "unread" %}
+{% endif %}
+{% endblock %}
+{% block menu %}
+{% include '_menu.twig' %}
+{% endblock %}
+{% block precontent %}
+
+{% include '_sorting.twig' %}
+{% endblock %}
+{% block content %}
+
+						{% if includeImport %}
+								{% include '_import.twig' %}
+						{% endif %}
+
+            {% if tag %}
+                <h3>{% trans "Tag" %}: <b>{{ tag.value }}</b></h3>
+            {% endif %}
+
+            {% if entries is empty %}
+            <div class="messages warning"><p>{% trans "No articles found." %}</p></div>
+            {% else %}
+                {% block pager %}
+                    {% if nb_results > 1 %}
+                <div class="results">
+                    <div class="nb-results">{{ nb_results }} {% trans "results" %}{% if searchterm is defined %}{% trans " found for « " %} {{ searchterm }} »{% endif %}</div>
+                        {{ page_links | raw }}
+                </div>
+                    {% elseif nb_results == 1 %}
+                        {% if searchterm is defined %}
+                     <div class="results">
+                        <div class="nb-results">{% trans "Only one result found for " %} « {{ searchterm }} »</div>
+                     </div>
+                        {% endif %}
+                    {% endif %}
+                {% endblock %}
+                {% for entry in entries %}
+            <div id="entry-{{ entry.id|e }}" class="entrie">
+                <h2><a href="index.php?view=view&amp;id={{ entry.id|e }}">{{ entry.title|raw }}</a></h2>
+                <ul class="tools">
+                    <li><a title="{% trans "Toggle mark as read" %}" class="tool {% if entry.is_read == 0 %}archive-off{% else %}archive{% endif %}" href="./?action=toggle_archive&amp;id={{ entry.id|e }}"><span>{% trans "Toggle mark as read" %}</span></a></li>
+                    <li><a title="{% trans "toggle favorite" %}" class="tool {% if entry.is_fav == 0 %}fav-off{% else %}fav{% endif %}" href="./?action=toggle_fav&amp;id={{ entry.id|e }}"><span>{% trans "toggle favorite" %}</span></a></li>
+                    <li><a title="{% trans "delete" %}" class="tool delete" href="./?action=delete&amp;id={{ entry.id|e }}"><span>{% trans "delete" %}</span></a></li>
+                    <li><a href="{{ entry.url|e }}" target="_blank" title="{% trans "original" %} : {{ entry.title|e }}" class="tool link"><span>{{ entry.url | e | getDomain }}</span></a></li>
+                    <li><a target="_blank" title="{% trans "estimated reading time:" %} {{ entry.content| getReadingTime }} min" class="reading-time"><span>{{ entry.content| getReadingTime }} min</span></a></li>
+                </ul>
+                <p>{{ entry.content|striptags|slice(0, 300) }}...</p>
+            </div>
+                {% endfor %}
+
+            {{ block('pager') }}
+            {% if view == 'home' %}{% if nb_results > 1 %}<p><a title="{% trans "Mark all the entries as read" %}"  href="./?action=archive_all">{% trans "Mark all the entries as read" %}</a></p>{% endif %}{% endif %}
+            {% if searchterm is defined %}<a title="{% trans "Tag these results as" %} {{ searchterm }}" href="./?action=add_tag&search={{ searchterm }}">{% trans "Tag these results as" %} {{ searchterm }}</a>{% endif %}<br />
+
+            {% if searchterm is defined %}<a title="{% trans "Delete results matching" %} {{ searchterm }}" href="./?action=delete&search={{ searchterm }}">{% trans "Delete results matching" %} {{ searchterm }}</a>{% endif %}<br />
+
+            {% if tag %}<a title="{% trans "Mark all articles from this tag as read" %}" href="./?action=toggle_archive&amp;tag_id={{ tag.id }}">{% trans "Mark all articles from this tag as read" %}</a><br />{% endif %}
+
+            {% if tag %}
+            {% if constant('EPUB') == 1 %}<a title="{% trans "Download the articles from this tag in an epub file" %}" href="./?epub&amp;method=tag&amp;value={{ tag.value }}">{% trans "Download as ePub3" %}</a>{% endif %}
+            {% if constant('MOBI') == 1 %}<a title="{% trans "Download the articles from this tag in a mobi file" %}" href="./?mobi&amp;method=tag&amp;value={{ tag.value }}">{% trans "Download as Mobi" %}</a>{% endif %}
+            {% if constant('PDF') == 1 %}<a title="{% trans "Download the articles from this tag in a pdf file" %}" href="./?pdf&amp;method=tag&amp;value={{ tag.value }}">{% trans "Download as PDF" %}</a>{% endif %}
+            {% elseif searchterm is defined %}
+            {% if constant('EPUB') == 1 %}<a title="{% trans "Download the articles from this search in an epub" %}" href="./?epub&amp;method=search&amp;value={{ searchterm }}">{% trans "Download as ePub3" %}</a>{% endif %}
+            {% if constant('MOBI') == 1 %}<a title="{% trans "Download the articles from this search in a mobi file" %}" href="./?mobi&amp;method=search&amp;value={{ searchterm }}">{% trans "Download as Mobi" %}</a>{% endif %}
+            {% if constant('PDF') == 1 %}<a title="{% trans "Download the articles from this search in a pdf file" %}" href="./?pdf&amp;method=search&amp;value={{ searchterm }}">{% trans "Download as PDF" %}</a>{% endif %}
+            {% else %}
+            {% if constant('EPUB') == 1 %}<a title="{% trans "Download the articles from this category in an epub" %}" href="./?epub&amp;method=category&amp;value={{ view }}">{% trans "Download as ePub3" %}</a>{% endif %}
+            {% if constant('MOBI') == 1 %}<a title="{% trans "Download the articles from this category in a mobi file" %}" href="./?mobi&amp;method=category&amp;value={{ view }}">{% trans "Download as Mobi" %}</a>{% endif %}
+            {% if constant('PDF') == 1 %}<a title="{% trans "Download the articles from this category in a pdf file" %}" href="./?pdf&amp;method=category&amp;value={{ view }}">{% trans "Download as PDF" %}</a>{% endif %}
+            {% endif %}
+
+            {% endif %}
+{% endblock %}
