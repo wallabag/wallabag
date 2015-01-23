@@ -19,9 +19,11 @@
 <div id="main">
     {% block menu %}{% endblock %}
     {% block precontent %}{% endblock %}
-    {% block messages %}
-        {% include "WallabagBundle::_messages.html.twig" %}
-    {% endblock %}
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="flash-notice">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
     <div id="content" class="w600p center">
         {% block content %}{% endblock %}
     </div>

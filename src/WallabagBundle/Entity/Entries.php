@@ -144,6 +144,12 @@ class Entries
         return $this->isRead;
     }
 
+    public function toggleArchive()
+    {
+        $this->isRead = $this->getIsRead() ^ 1;
+        return $this;
+    }
+
     /**
      * Set isFav
      *
@@ -165,6 +171,13 @@ class Entries
     public function getIsFav()
     {
         return $this->isFav;
+    }
+
+    public function toggleStar()
+    {
+        $this->isFav = $this->getIsFav() ^ 1;
+
+        return $this;
     }
 
     /**
