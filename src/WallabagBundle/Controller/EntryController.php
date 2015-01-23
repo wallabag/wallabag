@@ -7,9 +7,51 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use WallabagBundle\Repository;
 use WallabagBundle\Entity\Entries;
+use Wallabag\Wallabag\Tools;
+use Wallabag\Wallabag\Url;
 
 class EntryController extends Controller
 {
+
+    /**
+     * @param Request $request
+     * @Route("/new", name="new_entry")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function addEntryAction(Request $request)
+    {
+        $entry = new Entries();
+        $entry->setUserId(1);
+
+        $form = $this->createFormBuilder($entry)
+            ->add('url', 'url')
+            ->add('save', 'submit')
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+
+            $content = Tools::getPageContent(new Url($entry->getUrl()));
+            var_dump($content);die;
+
+            $em = $this->getDoctrine()->getEntityManager();
+            $em->persist($entry);
+            $em->flush();
+
+            $this->get('session')->getFlashBag()->add(
+                'notice',
+                'Entry saved'
+            );
+
+            return $this->redirect($this->generateUrl('homepage'));
+        }
+
+        return $this->render('WallabagBundle:Entry:new.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
+
     /**
      * Shows unread entries for current user
      *

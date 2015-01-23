@@ -3,6 +3,7 @@
 namespace WallabagBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Entries
@@ -31,6 +32,7 @@ class Entries
     /**
      * @var string
      *
+     * @Assert\NotBlank()
      * @ORM\Column(name="url", type="text", nullable=true)
      */
     private $url;

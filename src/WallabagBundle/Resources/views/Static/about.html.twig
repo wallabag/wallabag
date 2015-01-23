@@ -14,7 +14,7 @@
         <dt>{% trans %}Main developer{% endtrans %}</dt>
         <dd><a href="mailto:nicolas@loeuillet.org">Nicolas Lœuillet</a> — <a href="http://cdetc.fr">{% trans %}website{% endtrans %}</a></dd>
 
-        <dt>{% trans %}Contributors:{% endtrans %}</dt>
+        <dt>{% trans %}Contributors ♥:{% endtrans %}</dt>
         <dd><a href="https://github.com/wallabag/wallabag/graphs/contributors">{% trans %}on Github{% endtrans %}</a></dd>
 
         <dt>{% trans %}Bug reports{% endtrans %}</dt>
@@ -24,7 +24,7 @@
         <dd><a href="http://en.wikipedia.org/wiki/MIT_License">MIT</a></dd>
 
         <dt>{% trans %}Version{% endtrans %}</dt>
-        <dd></dd>
+        <dd>{{ version }}</dd>
     </dl>
 
     <p>{% trans %}wallabag is a read-it-later application: you can save a web page by keeping only content. Elements like ads or menus are deleted.{% endtrans %}</p>
@@ -33,7 +33,7 @@
     
     <dl>
         <dt>{% trans %}Documentation{% endtrans %}</dt>
-        <dd><a href="docs/">Offline documentation</a> and <a href="https://doc.wallabag.org/">online documentation</a> (up to date)</dd>
+        <dd><a href="https://doc.wallabag.org/">Online documentation</a></dd>
         
         <dt>{% trans %}Support{% endtrans %}</dt>
         <dd><a href="http://support.wallabag.org/">http://support.wallabag.org/</a></dd>
@@ -44,41 +44,8 @@
     <p>{% trans %}wallabag is free and opensource. You can help us:{% endtrans %}</p>
 
     <dl>
-        <dt><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9UBA65LG3FX9Y&lc=gb">{% trans %}via Paypal{% endtrans %}</a></dt>
+        <dt><a href="{{ paypal_url }}">{% trans %}via Paypal{% endtrans %}</a></dt>
 
-        <dt><a href="https://flattr.com/thing/1265480">{% trans %}via Flattr{% endtrans %}</a></dt>
+        <dt><a href="{{ flattr_url }}">{% trans %}via Flattr{% endtrans %}</a></dt>
     </dl>
-
-    <h2>{% trans %}Credits{% endtrans %}</h2>
-    <dl>
-        <dt>PHP Readability</dt>
-        <dd><a href="https://bitbucket.org/fivefilters/php-readability">https://bitbucket.org/fivefilters/php-readability</a></dd>
-
-        <dt>Full Text RSS</dt>
-        <dd><a href="http://code.fivefilters.org/full-text-rss/src">http://code.fivefilters.org/full-text-rss/src</a></dd>
-
-        <dt>logo by Maylis Agniel</dt>
-        <dd><a href="https://github.com/wallabag/logo">https://github.com/wallabag/logo</a></dd>
-
-        <dt>icons</dt>
-        <dd><a href="http://icomoon.io">http://icomoon.io</a></dd>
-
-        <dt>PHP Simple HTML DOM Parser</dt>
-        <dd><a href="http://simplehtmldom.sourceforge.net/">http://simplehtmldom.sourceforge.net/</a></dd>
-
-        <dt>Session</dt>
-        <dd><a href="https://github.com/tontof/kriss_feed/blob/master/src/class/Session.php">https://github.com/tontof/kriss_feed/blob/master/src/class/Session.php</a></dd>
-
-        <dt>Twig</dt>
-        <dd><a href="http://twig.sensiolabs.org">http://twig.sensiolabs.org</a></dd>
-
-        <dt>Flash messages</dt>
-        <dd><a href="https://github.com/plasticbrain/PHP-Flash-Messages">https://github.com/plasticbrain/PHP-Flash-Messages</a></dd>
-
-        <dt>Pagination</dt>
-        <dd><a href="https://github.com/daveismyname/pagination">https://github.com/daveismyname/pagination</a></dd>
-
-        <dt>PHPePub</dt>
-        <dd><a href="https://github.com/Grandt/PHPePub/">https://github.com/Grandt/PHPePub/</a></dd>
-    </dl> 
 {% endblock %}

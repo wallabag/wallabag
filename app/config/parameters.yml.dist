@@ -19,4 +19,24 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
 
+    # wallabag misc
+    app.version: 2.0.0-alpha
+
     download_pictures: false # if true, pictures will be stored into data/assets for each article
+
+    # Entry view
+    share_twitter: true
+    share_mail: true
+    share_shaarli: true
+    shaarli_url: http://myshaarli.com
+    share_diaspora: true
+    diaspora_url: http://diasporapod.com
+    flattr: true
+    carrot: true
+    show_printlink: true
+    export_epub: true
+    export_mobi: true
+    export_pdf: true
+
+    # List view
+    items_on_page: 12
