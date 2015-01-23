@@ -76,6 +76,7 @@ class Poche
      */
     public function createNewUser($username, $password, $email = "")
     {
+        Tools::logm('Trying to create a new user...');
         if (!empty($username) && !empty($password)){
             $newUsername = filter_var($username, FILTER_SANITIZE_STRING);
             $email = filter_var($email, FILTER_SANITIZE_STRING);
@@ -95,6 +96,9 @@ class Poche
                 Tools::logm('An user with the name ' . $newUsername . ' already exists !');
                 Tools::redirect();
             }
+        }
+        else {
+            Tools::logm('Password or username were empty');
         }
     }
 

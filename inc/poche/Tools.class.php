@@ -117,7 +117,7 @@ final class Tools
     {
         $views = array(
             'install', 'import', 'export', 'config', 'tags',
-            'edit-tags', 'view', 'login', 'error', 'about'
+            'edit-tags', 'view', 'login', 'error', 'about', 'register'
             );
 
         return (in_array($view, $views) ? $view . '.twig' : 'home.twig');

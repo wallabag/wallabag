@@ -31,7 +31,9 @@
 @define ('SSL_PORT', 443);
 
 @define ('MODE_DEMO', FALSE);
-@define ('DEBUG_POCHE', FALSE);
+@define ('DEBUG_POCHE', TRUE);
+
+@define ('ALLOW_REGISTER', TRUE);
 
 //default level of error reporting in application. Developers should override it in their config.inc.php: set to E_ALL.
 @define ('ERROR_REPORTING', E_ALL & ~E_NOTICE);
