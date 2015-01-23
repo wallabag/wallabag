@@ -1,0 +1,11 @@
+{% extends "WallabagCoreBundle::layout.html.twig" %}
+
+{% block title %}{% trans %}Save new entry{% endtrans %}{% endblock %}
+
+{% block menu %}
+    {% include "WallabagCoreBundle::_menu.html.twig" %}
+{% endblock %}
+
+{% block content %}
+    {{ form(form) }}
+{% endblock %}

@@ -11,7 +11,7 @@
 namespace Wallabag\Wallabag;
 
 use \PDO;
-use WallabagBundle\Entity;
+use CoreBundle\Entity;
 
 class Database {
 

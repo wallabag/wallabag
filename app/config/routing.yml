@@ -1,7 +1,7 @@
 app:
-    resource: @WallabagBundle/Controller/
+    resource: @WallabagCoreBundle/Controller/
     type:     annotation
 
 homepage:
     pattern:   /
-    defaults:  { _controller: WallabagBundle:Entry:showUnread }
+    defaults:  { _controller: CoreBundle:Entry:showUnread }
