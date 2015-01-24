@@ -31,7 +31,7 @@
 @define ('SSL_PORT', 443);
 
 @define ('MODE_DEMO', FALSE);
-@define ('DEBUG_POCHE', TRUE);
+@define ('DEBUG_POCHE', FALSE);
 
 @define ('ALLOW_REGISTER', TRUE);
 
