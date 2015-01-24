@@ -24,7 +24,7 @@ class Template extends Twig_Environment
 
         $themeDirectory = (is_null($pocheUser) ? DEFAULT_THEME : $pocheUser->getConfigValue('theme'));
 
-        if ($themeDirectory === false) {
+        if ($themeDirectory === false || !is_dir(THEME . '/' . $themeDirectory)) {
             $themeDirectory = DEFAULT_THEME;
         }
 
@@ -181,7 +181,7 @@ class Template extends Twig_Environment
         while (($theme = readdir($handle)) !== false) {
             # Themes are stored in a directory, so all directory names are themes
             # @todo move theme installation data to database
-            if (!is_dir(THEME . '/' . $theme) || in_array($theme, array('.', '..'))) {
+            if (!is_dir(THEME . '/' . $theme) || in_array($theme, array('.', '..', '_global'))) {
                 continue;
             }
 

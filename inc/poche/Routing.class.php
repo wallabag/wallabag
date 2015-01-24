@@ -67,6 +67,12 @@ class Routing
             $this->wallabag->action($this->action, $this->url, $this->id);
             $tplFile = Tools::getTplFile($this->view);
             $tplVars = array_merge($this->vars, $this->wallabag->displayView($this->view, $this->id));
+        } elseif(ALLOW_REGISTER && isset($_GET['registerform'])) {
+            Tools::logm('register');
+            $tplFile = Tools::getTplFile('register');
+        } elseif (ALLOW_REGISTER && isset($_GET['register'])){
+            $this->wallabag->createNewUser($_POST['newusername'], $_POST['password4newuser']);
+            Tools::redirect();
         } elseif(isset($_SERVER['PHP_AUTH_USER'])) {
             if($this->wallabag->store->userExists($_SERVER['PHP_AUTH_USER'])) {
                 $this->wallabag->login($this->referer);
@@ -102,8 +108,11 @@ class Routing
         	$this->wallabag->login($this->referer);
         } elseif (isset($_GET['feed']) && isset($_GET['user_id'])) {
             $tag_id = (isset($_GET['tag_id']) ? intval($_GET['tag_id']) : 0);
-            $this->wallabag->generateFeeds($_GET['token'], filter_var($_GET['user_id'],FILTER_SANITIZE_NUMBER_INT), $tag_id, $_GET['type']);
-        }
+            $limit = (isset($_GET['limit']) ? intval($_GET['limit']) : 0);
+            $this->wallabag->generateFeeds($_GET['token'], filter_var($_GET['user_id'],FILTER_SANITIZE_NUMBER_INT), $tag_id, $_GET['type'], $limit);
+        } //elseif (ALLOW_REGISTER && isset($_GET['register'])) {
+            //$this->wallabag->register
+        //}
         
         //allowed ONLY to logged in user
         if (\Session::isLogged() === true) 
@@ -120,7 +129,16 @@ class Routing
                 $this->wallabag->deleteUser($_POST['password4deletinguser']);
             } elseif (isset($_GET['epub'])) {
                 $epub = new WallabagEpub($this->wallabag, $_GET['method'], $_GET['value']);
-                $epub->run();
+                $epub->prepareData();
+                $epub->produceEpub();
+            } elseif (isset($_GET['mobi'])) {
+                $mobi = new WallabagMobi($this->wallabag, $_GET['method'], $_GET['value']);
+                $mobi->prepareData();
+                $mobi->produceMobi();
+            } elseif (isset($_GET['pdf'])) {
+                $pdf = new WallabagPDF($this->wallabag, $_GET['method'], $_GET['value']);
+                $pdf->prepareData();
+                $pdf->producePDF();
             } elseif (isset($_GET['import'])) {
                 $import = $this->wallabag->import();
                 $tplVars = array_merge($this->vars, $import);

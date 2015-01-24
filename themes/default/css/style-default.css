@@ -38,6 +38,16 @@ a.flattr span {
     background-image: url('../img/default/flattr.png');
 }
 
+a.carrot span {
+    background-image: url('../../_global/img/icons/carrot-icon--black.png');
+    background-size: 16px 16px;
+}
+
+a.diaspora span {
+    background-image: url('../../_global/img/icons/diaspora-icon--black.png');
+    background-size: 16px 16px;
+}
+
 a.email span {
     background-image: url('../img/default/envelop.png');
 }
