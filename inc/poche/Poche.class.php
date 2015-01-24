@@ -85,20 +85,20 @@ class Poche
                         // if internal registration
                         $body_internal = "Hi,\r\n\r\nSomeone just created an account for you on " . Tools::getPocheUrl() . ".\r\nHave fun with it !";
                         // if external (public) registration
-                        $body = "Hi, \r\n\r\nYou've just created an account on " . Tools::getPocheUrl() . . ".\r\nHave fun with it !";
+                        $body = "Hi, \r\n\r\nYou've just created an account on " . Tools::getPocheUrl() . ".\r\nHave fun with it !";
                         $body = $internalRegistration ? $body_internal : $body;
                         $body = wordwrap($body, 70, "\r\n"); // cut lines with more than 70 caracters (MIME standard)
-                        if (mail($email, sprintf(_('Your new wallabag account on '), Tools::getPocheUrl()), $body, 'From: {$email}')) {
+                        if (mail($email, sprintf(_('Your new wallabag account on '), Tools::getPocheUrl()), $body, 'X-Mailer: PHP/' . phpversion())) {
                             Tools::logm('The user ' . $newUsername . ' has been emailed');
                             $this->messages->add('i', sprintf(_('The new user %1$s has been sent an email at %2$s.'), $newUsername, $email));
                             
                         } else {
                             Tools::logm('A problem has been encountered while sending an email');
-                            $this->messages->add('e', _('A problem has been encountered while sending an email');
+                            $this->messages->add('e', _('A problem has been encountered while sending an email'));
                         }
                     } else {
                         Tools::logm('The user has been created, but the server did not authorize sending emails');
-                        $this->messages->add('i', _('The server did not authorize sending an email');
+                        $this->messages->add('i', _('The server did not authorize sending an email'));
                     }
                 Tools::logm('The new user ' . $newUsername . ' has been installed');
                 $this->messages->add('s', sprintf(_('The new user %s has been installed. Do you want to <a href="?logout">logout ?</a>'), $newUsername));
