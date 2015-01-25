@@ -547,6 +547,9 @@ php composer.phar install</code></pre></li>
                             </li>
                             <li>
                                 <label for="mysql">MySQL</label> <input name="db_engine" type="radio" id="mysql" value="mysql" />
+                                <div id="pdo_mysql" class='messages notice install'>
+                                    <p>All fields have to be filled.</p>
+                                </div>
                                 <ul id="mysql_infos">
                                     <li><label for="mysql_server">Server</label> <input type="text" placeholder="localhost" id="mysql_server" name="mysql_server" /></li>
                                     <li><label for="mysql_database">Database</label> <input type="text" placeholder="wallabag" id="mysql_database" name="mysql_database" /></li>
@@ -556,6 +559,9 @@ php composer.phar install</code></pre></li>
                             </li>
                             <li>
                                 <label for="postgres">PostgreSQL</label> <input name="db_engine" type="radio" id="postgres" value="postgres" />
+                                <div id="pdo_postgres" class='messages notice install'>
+                                    <p>All fields have to be filled.</p>
+                                </div>
                                 <ul id="pg_infos">
                                     <li><label for="pg_server">Server</label> <input type="text" placeholder="localhost" id="pg_server" name="pg_server" /></li>
                                     <li><label for="pg_database">Database</label> <input type="text" placeholder="wallabag" id="pg_database" name="pg_database" /></li>
@@ -593,6 +599,9 @@ php composer.phar install</code></pre></li>
 
             $(".details").hide();
 
+            $("#pdo_postgres").hide();
+            $("#pdo_mysql").hide();
+
             <?php
             if (!isPassing()) : ?>
                 $('.technical').hide();
@@ -619,20 +628,26 @@ php composer.phar install</code></pre></li>
                 {
                     if ( $("#mysql").prop('checked')) {
                         $("#mysql_infos").show();
+                        $("#pdo_mysql").show();
                         $("#pg_infos").hide();
+                        $("#pdo_postgres").hide();
                         $("#pdo_sqlite").hide();
                         $("#install_button").show();        
                     }
                     else {
                         if ( $("#postgres").prop('checked')) {
                             $("#mysql_infos").hide();
+                            $("#pdo_mysql").hide();
                             $("#pg_infos").show();
+                            $("#pdo_postgres").show();
                             $("#pdo_sqlite").hide();
                             $("#install_button").show();
                         }
                         else {
                             $("#mysql_infos").hide();
                             $("#pg_infos").hide();
+                            $("#pdo_postgres").hide();
+                            $("#pdo_mysql").hide();
                             <?php
                             if (!extension_loaded('pdo_sqlite')) : ?>
                             $("#pdo_sqlite").show();
