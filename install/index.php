@@ -11,6 +11,8 @@
 $errors = array();
 $successes = array();
 
+require_once('wallabag_compatibility_test.php');
+
 /* Function taken from at http://php.net/manual/en/function.rmdir.php#110489
  * Idea : nbari at dalmp dot com
  * Rights unknown
@@ -210,6 +212,117 @@ else if (isset($_POST['install'])) {
         <link rel="stylesheet" href="themes/baggy/css/print.css" media="print">
         <script src="themes/_global/js/jquery-2.0.3.min.js"></script>
         <script src="themes/baggy/js/init.js"></script>
+
+
+        <style type="text/css">
+a {
+color:#000;
+text-decoration:underline;
+padding:0 1px;
+}
+a:hover {
+color:#fff;
+background-color:#333;
+text-decoration:none;
+padding:0 1px;
+}
+p {
+margin:0;
+padding:5px 0;
+}
+em {
+font-style:normal;
+background-color:#ffc;
+padding: 0.1em 0;
+}
+ul, ol {
+margin:10px 0 10px 20px;
+padding:0 0 0 15px;
+}
+ul li, ol li {
+margin:0 0 7px 0;
+padding:0 0 0 3px;
+}
+h2 {
+font-size:18px;
+padding:0;
+}
+h3 {
+font-size:16px;
+padding:0;
+margin:20px 0 5px 0;
+}
+h4 {
+font-size:14px;
+padding:0;
+margin:15px 0 5px 0;
+}
+code {
+font-size:1.1em;
+background-color:#f3f3ff;
+color:#000;
+}
+em strong {
+text-transform: uppercase;
+}
+table#chart {
+border-collapse:collapse;
+}
+table#chart th {
+background-color:#eee;
+padding:2px 3px;
+border:1px solid #fff;
+}
+table#chart td {
+text-align:center;
+padding:2px 3px;
+border:1px solid #eee;
+}
+table#chart tr.enabled td {
+/* Leave this alone */
+}
+table#chart tr.disabled td,
+table#chart tr.disabled td a {
+}
+table#chart tr.disabled td a {
+text-decoration:underline;
+}
+div.chunk {
+margin:20px 0 0 0;
+padding:0 0 10px 0;
+border-bottom:1px solid #ccc;
+}
+.footnote,
+.footnote a {
+font:10px/12px verdana, sans-serif;
+color:#aaa;
+}
+.footnote em {
+background-color:transparent;
+font-style:italic;
+}
+.good{
+background-color:#52CC5B;
+}
+.bad{
+background-color:#F74343;
+font-style:italic;
+font-weight: bold;
+}
+.pass{
+background-color:#FF9500;
+}
+#detail {
+background-color: #000;
+font-size:1.2em;
+line-height: 1.6;
+width: 1.6em;
+height: 1.6em;
+color:white;
+}
+
+</style>
+
     </head>
     <body>
         <header class="w600p center mbm">
@@ -259,11 +372,8 @@ else if (isset($_POST['install'])) {
             <?php endif; ?>
             <p>To install wallabag, you just have to fill the following fields. That's all.</p>
             <p>If you need help, you can read the doc: <a href="docs/" target="_blank">offline documentation</a> and <a href="http://doc.wallabag.org" target="_blank">online one</a> (already up-to-date).</p>
-            <p>Don't forget to check your server compatibility <a href="install/wallabag_compatibility_test.php?from=install">here</a>.</p>
-            <form method="post">
-                <fieldset>
-                    <legend><strong>Technical settings</strong></legend>
-                    <?php if (!is_dir('vendor')) : ?>
+
+            <?php if (!is_dir('vendor')) : ?>
                         <div class='messages notice install'>wallabag needs twig, a template engine (<a href="http://twig.sensiolabs.org/">?</a>). Two ways to install it:<br />
                         <ul>
                             <li>automatically download and extract vendor.zip into your wallabag folder. 
@@ -277,6 +387,159 @@ php composer.phar install</code></pre></li>
                         </ul>
                         </div>
                     <?php endif; ?>
+
+            <p class="detail">Server compatibility test (click to view details) : <?php if (isOkay()) { ?>
+                <span class="good">All good</span>
+            <?php } elseif (isPassing()) { ?>
+                <span class="pass">Some problems, but it's OK !</span>
+            <?php } else  { ?>
+                <span class="bad">Bad news : you can't run wallabag</span>
+            <?php } ?> </p>
+            <?php $status = status(); ?>
+
+            <div class="details">
+                <div>
+                    <h2 style="text-align:center;"><?php echo $status['app_name']; ?>: Compatibility Test</h2>
+                    <table cellpadding="0" cellspacing="0" border="0" width="100%" id="chart">
+                        <thead>
+                            <tr>
+                                <th>Test</th>
+                                <th>Should Be</th>
+                                <th>What You Have</th>
+                                <th>What it means</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="<?php echo ($status['php']) ? 'enabled' : 'disabled'; ?>">
+                                <td>PHP</td>
+                                <td>5.3.3 or higher</td>
+                                <td class="<?php echo ($status['php']) ? 'good' : 'disabled'; ?>"><?php echo phpversion(); ?></td>
+                                <td><?php echo ($status['php']) ? '<strong>PHP:</strong> You are running a supported version of PHP.' : '<strong>PHP:</strong> You are running an unsupported version of PHP. <strong>' . $status['app_name'] . ' will not work here.</strong>' ;?></td>
+                            </tr>
+                            <tr class="<?php echo ($status['pdo']) ? 'enabled' : 'disabled'; ?>">
+                                <td><a href="http://php.net/manual/en/book.pdo.php">PDO</a></td>
+                                <td>Enabled</td>
+                                <?php echo ($status['pdo']) ? '<td class="good">Enabled</span>' : '<td class="bad">Disabled'; ?></td>
+                                <td><?php echo ($status['pdo']) ? '<strong>PDO:</strong> You have PDO support enabled.' : '<strong>PDO:</strong> Your PHP installation doesn\'t support PHP PDO. <strong>' . $status['app_name'] . ' will not work here.</strong>' ?></td>
+                            </tr>
+                            <tr class="<?php echo ($status['xml']) ? 'enabled' : 'disabled'; ?>">
+                                <td><a href="http://php.net/xml">XML</a></td>
+                                <td>Enabled</td>
+                                <?php echo ($status['xml']) ? '<td class="good">Enabled, and sane</span>' : '<td class="bad">Disabled, or broken'; ?></td>
+                                <td><?php echo ($status['xml']) ? '<strong>XML:</strong> You have XMLReader support or a version of XML support that isn\'t broken installed.' : '<strong>XML:</strong> Your PHP installation doesn\'t support XML parsing. <strong>' . $status['app_name'] . ' will not work here.</strong>' ?></td>
+                            </tr>
+                            <tr class="<?php echo ($status['pcre']) ? 'enabled' : 'disabled'; ?>">
+                                <td><a href="http://php.net/pcre">PCRE</a></td>
+                                <td>Enabled</td>
+                                <?php echo ($status['pcre']) ? '<td class="good">Enabled' : '<td class="bad">Disabled'; ?></td>
+                                <td><?php echo ($status['pcre']) ? '<strong>PCRE:</strong> You have PCRE support installed.' : '<strong>PCRE:</strong> Your PHP installation doesn\'t support Perl-Compatible Regular Expressions. <strong>' . $status['app_name'] .' will not work here.</strong>' ?></td>
+                            </tr>
+                            <tr class="<?php echo ($status['zlib']) ? 'enabled' : 'disabled'; ?>">
+                                <td><a href="http://php.net/zlib">Zlib</a></td>
+                                <td>Enabled</td>
+                                <?php echo ($status['zlib']) ? '<td class="good">Enabled' : '<td class="bad">Disabled'; ?></td>
+                                <td><?php echo ($status['zlib']) ? '<strong>Zlib:</strong> You have <code>Zlib</code> enabled.  This allows SimplePie to support GZIP-encoded pages.' : '<strong>Zlib:</strong> The <code>Zlib</code> extension is not available.  SimplePie will ignore any GZIP-encoding, and instead handle pages as uncompressed text.' ?></td>
+                            </tr>
+                            <tr class="<?php echo ($status['mbstring']) ? 'enabled' : 'disabled'; ?>">
+                                <td><a href="http://php.net/mbstring">mbstring</a></td>
+                                <td>Enabled</td>
+                                <?php echo ($status['mbstring']) ? '<td class="good">Enabled' : '<td class="bad">Disabled'; ?></td>
+                                <td rowspan="2"><?php if(($status['mbstring']) && ($status['iconv'])) { ?><strong>mbstring and iconv:</strong> You have both <code>mbstring</code> and <code>iconv</code> installed!  This will allow <?php echo $status['app_name']; ?> to handle the greatest number of languages.
+                                <?php } elseif ($status['mbstring']) { ?><strong>mbstring:</strong> <code>mbstring</code> is installed, but <code>iconv</code> is not.
+                                <?php } elseif ($status['iconv']) { ?><strong>iconv:</strong> <code>iconv</code> is installed, but <code>mbstring</code> is not.
+                                <?php } else { ?><strong>mbstring and iconv:</strong> <em>You do not have either of the extensions installed.</em> This will significantly impair your ability to read non-English pages, as well as even some English ones.
+                                <?php } ?>
+                                </td>
+                            </tr>
+                            <tr class="<?php echo ($status['iconv']) ? 'enabled' : 'disabled'; ?>">
+                                <td><a href="http://php.net/iconv">iconv</a></td>
+                                <td>Enabled</td>
+                                <?php echo ($status['iconv']) ? '<td class="good">Enabled' : '<td class="bad">Disabled'; ?></td>
+                            </tr>
+                            <tr class="<?php echo ($status['dom']) ? 'enabled' : 'disabled'; ?>">
+                                <td><a href="http://php.net/manual/en/book.dom.php">DOM / XML extension</a></td>
+                                <td>Enabled</td>
+                                <?php echo ($status['dom']) ? '<td class="good">Enabled' : '<td class="bad">Disabled'; ?></td>
+                                <td><?php echo ($status['dom']) ? '<strong>DOM/XML:</strong> You can parse <em>ini</em> files.' : '<strong>DOM/XML:</strong> Your PHP configuration isn\'t standard, you\'re missing PHP-DOM.  You may try to install a package or recompile PHP. <strong>' . $status['app_name'] . ' will not work here.</strong>'; ?></td>
+                            </tr>
+                            <tr class="<?php echo ($status['filter']) ? 'enabled' : 'disabled'; ?>">
+                                <td><a href="http://uk.php.net/manual/en/book.filter.php">Data filtering</a></td>
+                                <td>Enabled</td>
+                                <?php echo ($status['filter']) ? '<td class="good">Enabled' : '<td class="pass">Disabled'; ?></td>
+                                <td><?php echo ($status['filter']) ? '<strong>Data filtering:</strong> You can use the PHP build-in DOM to operate on XML documents.' : '<strong>Data filtering:</strong> Your PHP configuration has the filter extension disabled.  <strong>' . $status['app_name'] . ' will not work here.</strong>' ?></td>
+                            </tr>
+                            <tr class="<?php echo ($status['gd']) ? 'enabled' : 'disabled'; ?>">
+                                <td><a href="http://php.net/manual/en/book.image.php">GD</a></td>
+                                <td>Enabled</td>
+                                <?php echo ($status['gd']) ? '<td class="good">Enabled' : '<td class="pass">Disabled'; ?></td>
+                                <td><?php echo($status['gd']) ? '<strong>GD:</strong> You have <code>GD</code> support installed.' : '<strong>GD:</strong> The <code>GD</code> extension is not available.  ' . $status['app_name'] . ' will not be able to download pictures locally on your server.' ?></td>
+                            </tr>                   
+                            <tr class="<?php echo ($status['tidy']) ? 'enabled' : 'disabled'; ?>">
+                                <td><a href="http://php.net/tidy">Tidy</a></td>
+                                <td>Enabled</td>
+                                <?php echo ($status['tidy']) ? '<td class="good">Enabled' : '<td class="pass">Disabled'; ?></td>
+                                <td><?php echo ($status['tidy']) ? '<strong>Tidy:</strong> You have <code>Tidy</code> support installed.' : '<strong>Tidy:</strong> The <code>Tidy</code> extension is not available.' . $status['app_name'] . ' should still work with most pages, but you may experience problems with some. You can install it with <code>sudo apt-get install php5-tidy</code> and then reload Apache <code>sudo service apache2 reload</code>.' ; ?></td>
+                            </tr>
+                            <tr class="<?php echo ($status['curl']) ? 'enabled' : 'disabled'; ?>">
+                                <td><a href="http://php.net/curl">cURL</a></td>
+                                <td>Enabled</td>
+                                <?php echo (extension_loaded('curl')) ? '<td class="good">Enabled' : '<td class="pass">Disabled'; ?></td>
+                                <td><?php echo ($status['curl']) ? '<strong>cURL:</strong> You have <code>cURL</code> support installed.' : '<strong>cURL:</strong> The <code>cURL</code> extension is not available.  SimplePie will use <code>fsockopen()</code> instead.' ?></td>
+                            </tr>
+                            <tr class="<?php echo ($status['parse_ini']) ? 'enabled' : 'disabled'; ?>">
+                                <td><a href="http://uk.php.net/manual/en/function.parse-ini-file.php">Parse ini file</td>
+                                <td>Enabled</td>
+                                <?php echo ($status['parse_ini']) ? '<td class="good">Enabled' : '<td class="bad">Disabled'; ?></td>
+                                <td><?php echo ($status['parse_ini']) ? '<strong>Parse ini:</strong> You can parse <em>ini</em> files.' : '<strong>Parse ini files function :</strong> Bad luck : your webhost has decided to block the use of the <em>parse_ini_file</em> function. <strong>' . $status['app_name'] . ' will not work here.' ?></td>
+                            </tr>
+                            <tr class="<?php echo ($status['parallel']) ? 'enabled' : 'disabled'; ?>">
+                                <td>Parallel URL fetching</td>
+                                <td>Enabled</td>
+                                <?php echo ($status['parallel']) ? '<td class="good">Enabled' : '<td class="pass">Disabled'; ?></td>
+                                <td><?php echo ($status['parallel']) ? '<strong>Parallel URL fetching:</strong> You have <code>HttpRequestPool</code> or <code>curl_multi</code> support installed.' : '<strong>Parallel URL fetching:</strong> <code>HttpRequestPool</code> or <code>curl_multi</code> support is not available. ' . $status['app_name'] . ' will use <code>file_get_contents()</code> instead to fetch URLs sequentially rather than in parallel.' ?></td>
+                            </tr>
+                            <tr class="<?php echo ($status['allow_url_fopen']) ? 'enabled' : 'disabled'; ?>">
+                                <td><a href="http://www.php.net/manual/en/filesystem.configuration.php#ini.allow-url-fopen">allow_url_fopen</a></td>
+                                <td>Enabled</td>
+                                <?php echo ($status['allow_url_fopen']) ? '<td class="good">Enabled' : '<td class="bad">Disabled'; ?></td>
+                                <td><?php echo ($status['allow_url_fopen']) ? '<strong>allow_url_fopen:</strong> You have allow_url_fopen enabled.' : '<strong>allow_url_fopen:</strong> Your PHP configuration has allow_url_fopen disabled.  <strong>' . $status['app_name'] . ' will not work here.</strong>' ?></td>
+                            </tr>
+                            <tr class="<?php echo ($status['gettext']) ? 'enabled' : 'disabled'; ?>">
+                                <td><a href="http://php.net/manual/en/book.gettext.php">gettext</a></td>
+                                <td>Enabled</td>
+                                <?php echo ($status['gettext']) ? '<td class="good">Enabled' : '<td class="bad">Disabled'; ?></td>
+                                <td><?php echo ($status['gettext']) ? '<strong>Gettext:</strong> You have <code>gettext</code> enabled.</em>' : '<strong>GetText:</strong> The <code>gettext</code> extension is not available. The system we use to display wallabag in various languages is not available. <strong>' . $status['app_name'] .' will not work here.</strong>' ?></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="details">
+                    <?php //if ($status['php'] && $status['xml'] && $status['pcre'] && $status['mbstring'] && $status['iconv'] && $status['filter'] && $status['allow_url_fopen']) { ?>
+                    <?php if (isOkay()) { ?>
+                        <h3>Bottom Line: Yes, you can run <?php echo $status['app_name']; ?> !</h3>
+                        <p><em>Your webhost has its act together!</em></p>
+                        <p><strong>Note</strong>: Passing this test does not guarantee that <?php echo $status['app_name']; ?> will run on your webhost &mdash; it only ensures that the basic requirements have been addressed. If you experience any problems, please let us know.</p>
+                    <?php //} else if ($status['php'] && $status['xml'] && $status['pcre'] && $status['mbstring'] && $status['allow_url_fopen'] && $status['filter']) { ?>
+                    <?php } else if (!isOkay() && isPassing()) { ?>
+                        <h3>Bottom Line: Yes, you can run <?php echo $status['app_name']; ?> !</h3>
+                        <p><em>For most pages, it'll run with no problems.</em> There are certain languages that you might have a hard time with though.</p>
+                        <p><strong>Note</strong>: Passing this test does not guarantee that <?php echo $status['app_name']; ?> will run on your webhost &mdash; it only ensures that the basic requirements have been addressed. If you experience any problems, please let us know.</p>
+                    <?php } else { ?>
+                        <h3>Bottom Line: We're sorry…</h3>
+                        <p><em>Your webhost does not support the minimum requirements for <?php echo $status['app_name']; ?>.</em>  It may be a good idea to contact your webhost and point them to the results of this test. They may be able to enable/install the required components.</p>
+                    <?php } ?>
+                </div>
+
+                <div class="chunk">
+                    <p class="footnote">This compatibility test has been borrowed (and slightly adapted by <a href="http://fivefilters.org/content-only/">fivefilters.org</a>) from the one supplied by <a href="http://simplepie.org/">SimplePie.org</a>.</a></p>
+                </div>
+
+                </div>
+
+            <form method="post" class="technical">
+                <fieldset>
+                    <legend><strong>Technical settings</strong></legend>
                     <p>
                         Database engine:
                         <ul>
@@ -331,6 +594,19 @@ php composer.phar install</code></pre></li>
             $("#mysql_infos").hide();
             $("#pg_infos").hide();
 
+            $(".details").hide();
+
+            <?php
+            if (!isPassing()) : ?>
+                $('.technical').hide();
+            <?php
+            else :
+            ?>
+                $('.technical').show();
+            <?php
+            endif;
+            ?>
+
             <?php
             if (!extension_loaded('pdo_sqlite')) : ?>
             $("#install_button").hide();
@@ -370,6 +646,11 @@ php composer.phar install</code></pre></li>
                         }
                     }
                 });
+
+            $(".detail").click(function()
+            {
+                $('.details').toggle();
+            });
         </script>
     </body>
 </html>
