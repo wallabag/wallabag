@@ -312,13 +312,8 @@ font-weight: bold;
 .pass{
 background-color:#FF9500;
 }
-#detail {
-background-color: #000;
-font-size:1.2em;
-line-height: 1.6;
-width: 1.6em;
-height: 1.6em;
-color:white;
+.detail {
+cursor: pointer;
 }
 
 </style>
@@ -399,6 +394,7 @@ php composer.phar install</code></pre></li>
 
             <div class="details">
                 <div>
+                    <hr>
                     <h2 style="text-align:center;"><?php echo $status['app_name']; ?>: Compatibility Test</h2>
                     <table cellpadding="0" cellspacing="0" border="0" width="100%" id="chart">
                         <thead>
@@ -513,7 +509,7 @@ php composer.phar install</code></pre></li>
                         </tbody>
                     </table>
                 </div>
-
+                <hr>
                 <div class="details">
                     <?php //if ($status['php'] && $status['xml'] && $status['pcre'] && $status['mbstring'] && $status['iconv'] && $status['filter'] && $status['allow_url_fopen']) { ?>
                     <?php if (isOkay()) { ?>
@@ -538,6 +534,7 @@ php composer.phar install</code></pre></li>
                 </div>
 
             <form method="post" class="technical">
+            <hr>
                 <fieldset>
                     <legend><strong>Technical settings</strong></legend>
                     <p>
@@ -569,7 +566,7 @@ php composer.phar install</code></pre></li>
                         </ul>
                     </p>
                 </fieldset>
-
+                <hr>
                 <fieldset>
                     <legend><strong>User settings</strong></legend>
                     <p>
@@ -624,7 +621,7 @@ php composer.phar install</code></pre></li>
                         $("#mysql_infos").show();
                         $("#pg_infos").hide();
                         $("#pdo_sqlite").hide();
-                        $("#install_button").show();
+                        $("#install_button").show();        
                     }
                     else {
                         if ( $("#postgres").prop('checked')) {
@@ -651,6 +648,7 @@ php composer.phar install</code></pre></li>
             {
                 $('.details').toggle();
             });
+
         </script>
     </body>
 </html>
