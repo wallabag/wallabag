@@ -202,8 +202,8 @@ class WallabagMobi extends WallabagEBooks
         }
         $mobi->setContentProvider($content);
 
-        // we strip spaces because the browser inside Kindle Devices doesn't likes spaces
-        $this->bookFileName = str_replace(' ', '_', $this->bookFileName);
+        // the browser inside Kindle Devices doesn't likes special caracters either, we limit to A-z/0-9
+        $this->bookFileName = preg_replace('/[^A-Za-z0-9\-]/', '', $this->bookFileName);
 
         // we offer file to download
         $mobi->download($this->bookFileName.'.mobi');
