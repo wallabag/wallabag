@@ -52,4 +52,36 @@ function isPassing() {
 	return !in_array(false, $status);
 }
 
+/* Function taken from at http://php.net/manual/en/function.rmdir.php#110489
+ * Idea : nbari at dalmp dot com
+ * Rights unknown
+ * Here in case of .gitignore files
+ */
+
+function delTree($dir) {
+    $files = array_diff(scandir($dir), array('.','..'));
+    foreach ($files as $file) {
+      (is_dir("$dir/$file")) ? delTree("$dir/$file") : unlink("$dir/$file");
+    }
+    return rmdir($dir);
+  }
+
+function generate_salt() {
+	mt_srand(microtime(true)*100000 + memory_get_usage(true));
+    return md5(uniqid(mt_rand(), true));
+}
+
+function executeQuery($handle, $sql, $params) {
+    try
+    {
+        $query = $handle->prepare($sql);
+        $query->execute($params);
+        return $query->fetchAll();
+    }
+    catch (Exception $e)
+    {
+        return FALSE;
+    }
+}
+
 ?>
