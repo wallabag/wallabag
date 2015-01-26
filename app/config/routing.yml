@@ -4,4 +4,4 @@ app:
 
 homepage:
     pattern:   /
-    defaults:  { _controller: CoreBundle:Entry:showUnread }
+    defaults:  { _controller: WallabagCoreBundle:Entry:showUnread }

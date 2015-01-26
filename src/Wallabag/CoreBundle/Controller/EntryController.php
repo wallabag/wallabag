@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Wallabag\CoreBundle\Repository;
 use Wallabag\CoreBundle\Entity\Entries;
+use Wallabag\CoreBundle\Service\Extractor;
 use Wallabag\Wallabag\Tools;
 use Wallabag\Wallabag\Url;
 
@@ -32,10 +33,12 @@ class EntryController extends Controller
 
         if ($form->isValid()) {
 
-            $content = Tools::getPageContent(new Url($entry->getUrl()));
-            var_dump($content);die;
+            $content = Extractor::extract($entry->getUrl());
 
-            $em = $this->getDoctrine()->getEntityManager();
+            $entry->setTitle($content->getTitle());
+            $entry->setContent($content->getBody());
+
+            $em = $this->getDoctrine()->getManager();
             $em->persist($entry);
             $em->flush();
 
@@ -170,7 +173,7 @@ class EntryController extends Controller
      */
     public function deleteEntryAction(Request $request, Entries $entry)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $em->remove($entry);
         $em->flush();
 
