@@ -8,8 +8,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Wallabag\CoreBundle\Repository;
 use Wallabag\CoreBundle\Entity\Entries;
 use Wallabag\CoreBundle\Service\Extractor;
-use Wallabag\Wallabag\Tools;
-use Wallabag\Wallabag\Url;
+use Wallabag\CoreBundle\Helper\Tools;
+use Wallabag\CoreBundle\Helper\Url;
 
 class EntryController extends Controller
 {

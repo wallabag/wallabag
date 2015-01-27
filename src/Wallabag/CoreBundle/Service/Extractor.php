@@ -3,7 +3,7 @@
 namespace Wallabag\CoreBundle\Service;
 
 use Wallabag\CoreBundle\Helper\Content;
-use Wallabag\Wallabag\Url;
+use Wallabag\CoreBundle\Helper\Url;
 
 final class Extractor
 {
