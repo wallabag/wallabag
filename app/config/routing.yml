@@ -5,3 +5,12 @@ app:
 homepage:
     pattern:   /
     defaults:  { _controller: WallabagCoreBundle:Entry:showUnread }
+
+doc-api:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix: /api/doc
+
+rest :
+    type : rest
+    resource : "routing_rest.yml"
+    prefix : /api
