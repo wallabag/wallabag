@@ -1,0 +1,7 @@
+        <header class="w600p center mbm">
+            <h1 class="logo">
+                {% if view == 'home' %}{% block logo %}<img width="100" height="100" src="{{ poche_url }}themes/{{theme}}/img/logo-w.png" alt="wallabag logo" />{% endblock %}
+                {% else %}<a href="./" title="{% trans "return home" %}" >{{ block('logo') }}</a>
+                {% endif %}
+            </h1>
+        </header>

@@ -1,0 +1,14 @@
+{% extends "layout.twig" %}
+{% block title %}{% trans "plop" %}{% endblock %}
+{% block content %}
+    <h1>Errors</h1>
+    <ol>
+        {% for message in msg %}
+            <li>{{message}}</li>
+        {% endfor %}
+    </ol>
+    <p>Don't forget <a href="http://doc.wallabag.org/">the documentation</a>.</p>
+    <p>
+        {% trans "You can <a href='wallabag_compatibility_test.php'>check your configuration here</a>." %}
+    </p>
+{% endblock %}

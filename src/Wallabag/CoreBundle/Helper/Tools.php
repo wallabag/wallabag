@@ -104,23 +104,6 @@ final class Tools
         return sha1($string . SALT);
     }
 
-    /**
-     * Returns the correct header for a status code
-     *
-     * @param $status_code
-     */
-    private static function _status($status_code)
-    {
-        if (strpos(php_sapi_name(), 'apache') !== false) {
-
-            header('HTTP/1.0 '.$status_code);
-        }
-        else {
-
-            header('Status: '.$status_code);
-        }
-    }
-
     public static function generateToken()
     {
         if (ini_get('open_basedir') === '') {

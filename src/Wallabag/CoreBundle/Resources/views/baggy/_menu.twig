@@ -1,0 +1,17 @@
+            <button id="menu" class="icon icon-menu desktopHide"><span>Menu</span></button>
+            <ul id="links" class="links">
+                <li><a href="./" {% if view == 'home' %}class="current"{% endif %}>{% trans "unread" %}</a></li>
+                <li><a href="./?view=fav" {% if view == 'fav' %}class="current"{% endif %}>{% trans "favorites" %}</a></li>
+                <li><a href="./?view=archive" {% if view == 'archive' %}class="current"{% endif %}>{% trans "archive" %}</a></li>
+                <li><a href="./?view=tags" {% if view == 'tags' %}class="current"{% endif %}>{% trans "tags" %}</a></li>
+                <li style="position: relative;"><a href="javascript: void(null);" id="bagit">{% trans "save a link" %}</a>
+                    {% include '_pocheit-form.twig' %}
+                </li>
+				<li style="position: relative;"><a href="javascript: void(null);" id="search">{% trans "search" %}</a>
+                    {% include '_search-form.twig' %}
+                </li>
+                <li><a href="./?view=config" {% if view == 'config' %}class="current"{% endif %}>{% trans "config" %}</a></li>
+                <li><a href="./?view=about" {% if view == 'about' %}class="current"{% endif %}>{% trans "about" %}</a></li>
+                <li><a class="icon icon-power" href="./?logout" title="{% trans "logout" %}">{% trans "logout" %}</a></li>
+            </ul>
+

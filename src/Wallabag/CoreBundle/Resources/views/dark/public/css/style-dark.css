@@ -1,0 +1,74 @@
+body {
+    color: #d4d4d4;
+    background-color: #262627;
+}
+
+a,
+a:hover,
+a:visited {
+    color: #d4d4d4;
+}
+
+a.back span {
+    background-image: url('../img/dark/left.png');
+}
+
+a.top span {
+    background-image: url('../img/dark/top.png');
+}
+
+a.fav span,
+a.fav-off span:hover {
+    background-image: url('../img/dark/star-on.png');
+}
+
+a.fav span:hover,
+a.fav-off span {
+    background-image: url('../img/dark/star-off.png');
+}
+
+a.archive span,
+a.archive-off span:hover {
+    background-image: url('../img/dark/checkmark-on.png');
+}
+
+a.archive span:hover,
+a.archive-off span {
+    background-image: url('../img/dark/checkmark-off.png');
+}
+
+a.twitter span {
+    background-image: url('../img/dark/twitter.png');
+}
+
+a.shaarli span {
+    background-image: url('../img/dark/shaarli.png');
+}
+
+a.flattr span {
+    background-image: url('../img/dark/flattr.png');
+}
+
+a.email span {
+    background-image: url('../img/dark/envelop.png');
+}
+
+a.delete span {
+    background-image: url('../img/dark/remove.png');
+}
+
+a.link span {
+    background-image: url('../img/dark/link.png');
+}
+
+a.bad-display span {
+    background-image: url('../img/dark/bad-display.png');
+}
+
+.pagination a {
+    color: #aaa;
+}
+
+#article_toolbar {
+    background: #262627;
+}
