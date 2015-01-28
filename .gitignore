@@ -10,7 +10,6 @@
 .DS_Store
 .vagrant
 /vendor/
-app/db/poche.sqlite
 
 /bin/
 !bin/install
