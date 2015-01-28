@@ -17,6 +17,6 @@ app/db/poche.sqlite
 !bin/test
 !bin/symfony
 
-/data/
+/data/*
 
 /web/.htaccess
