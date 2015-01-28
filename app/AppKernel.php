@@ -2,6 +2,7 @@
 
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
+use Wallabag\ApiBundle\WallabagApiBundle;
 
 class AppKernel extends Kernel
 {
@@ -20,6 +21,7 @@ class AppKernel extends Kernel
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
             new Wallabag\CoreBundle\WallabagCoreBundle(),
+            new Wallabag\ApiBundle\WallabagApiBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

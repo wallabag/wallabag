@@ -10,7 +10,7 @@ doc-api:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
     prefix: /api/doc
 
-rest :
-    type : rest
-    resource : "routing_rest.yml"
-    prefix : /api
+wallabag_api:
+    resource: "@WallabagApiBundle/Controller/"
+    type:     annotation
+    prefix:   /api
