@@ -1,7 +1,7 @@
 # This file is a "template" of what your parameters.yml file should look like
 parameters:
     database_driver:   pdo_sqlite
-    database_path: "%kernel.root_dir%/data/db/poche.sqlite"
+    database_path: "%kernel.root_dir%/../data/db/poche.sqlite"
 
     mailer_transport:  smtp
     mailer_host:       127.0.0.1
