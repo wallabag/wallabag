@@ -20,3 +20,5 @@ data/assets/*
 data/db/poche.sqlite
 
 /web/.htaccess
+
+!.gitignore
