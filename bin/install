@@ -23,7 +23,7 @@ function executeQuery($handle, $sql, $params) {
 }
 
 $configFile      = 'app/config/config.inc.php';
-$dbFile          = 'app/db/poche.sqlite';
+$dbFile          = 'data/db/poche.sqlite';
 $username        = 'wallabag';
 $password        = 'wallabag';
 $salt            = $parameters['parameters']['secret'];
