@@ -5,6 +5,7 @@ namespace Wallabag\CoreBundle\Controller;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\Annotations\View;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Wallabag\CoreBundle\Entity\Entries;
 use Wallabag\CoreBundle\Entity\Tags;
@@ -20,9 +21,19 @@ class WallabagRestController
      * )
      * @return Entries
      */
-    public function getEntriesAction()
+    public function getEntriesAction(Request $request)
     {
+        $isArchive = $request->query->get('archive');
+        var_dump($isArchive);
+        $isStarred = $request->query->get('star');
+        $isDeleted = $request->query->get('delete');
+        $sort      = $request->query->get('sort');
+        $order     = $request->query->get('order');
+        $page      = $request->query->get('page');
+        $perPage   = $request->query->get('perPage');
+        $tags      = $request->query->get('tags', array());
 
+        return 'plop';
     }
 
     /**
