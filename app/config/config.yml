@@ -101,6 +101,6 @@ fos_rest:
         failed_validation: HTTP_BAD_REQUEST
         default_engine: twig
     routing_loader:
-        include_format: false
+        default_format: json
 
 nelmio_api_doc: ~
