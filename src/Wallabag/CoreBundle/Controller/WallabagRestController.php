@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Wallabag\CoreBundle\Entity\Entries;
 use Wallabag\CoreBundle\Entity\Tags;
+use Wallabag\CoreBundle\Service\Extractor;
 
 class WallabagRestController extends Controller
 {
@@ -79,9 +80,24 @@ class WallabagRestController extends Controller
      *       }
      * )
      */
-    public function postEntriesAction()
+    public function postEntriesAction(Request $request)
     {
+        //TODO la récup ne marche
+        //TODO gérer si on passe le titre
+        //TODO gérer si on passe les tags
+        //TODO ne pas avoir du code comme ça qui doit se trouver dans le Repository
+        $entry = new Entries();
+        $entry->setUserId(1);
+        $content = Extractor::extract($request->request->get('url'));
 
+        $entry->setTitle($content->getTitle());
+        $entry->setContent($content->getBody());
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($entry);
+        $em->flush();
+
+        return $entry;
     }
 
     /**

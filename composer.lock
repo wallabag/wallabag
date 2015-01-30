@@ -2283,12 +2283,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tecnickcom/TCPDF.git",
-                "reference": "da2fe9359426ca334417549248307f33cd042ace"
+                "reference": "a2e8f5b505a7a14a4ed960313c4baf699fd1f4bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/da2fe9359426ca334417549248307f33cd042ace",
-                "reference": "da2fe9359426ca334417549248307f33cd042ace",
+                "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/a2e8f5b505a7a14a4ed960313c4baf699fd1f4bb",
+                "reference": "a2e8f5b505a7a14a4ed960313c4baf699fd1f4bb",
                 "shasum": ""
             },
             "require": {
@@ -2338,7 +2338,7 @@
                 "pdf417",
                 "qrcode"
             ],
-            "time": "2015-01-24 09:41:10"
+            "time": "2015-01-28 18:51:40"
         },
         {
             "name": "twig/extensions",
