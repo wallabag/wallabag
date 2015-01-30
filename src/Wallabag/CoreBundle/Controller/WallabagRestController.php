@@ -6,38 +6,55 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\Annotations\View;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Wallabag\CoreBundle\Entity\Entries;
 use Wallabag\CoreBundle\Entity\Tags;
-use Wallabag\CoreBundle\Entity\Users;
 
-class WallabagRestController
+class WallabagRestController extends Controller
 {
 
     /**
-     * Fetches all entries
+     * Retrieve all entries. It could be filtered by many options.
      *
      * @ApiDoc(
+     *       parameters={
+     *          {"name"="archive", "dataType"="integer", "required"=false, "format"="'0' or '1', default '0'", "description"="filter by archived status."},
+     *          {"name"="star", "dataType"="integer", "required"=false, "format"="'0' or '1', default '0'", "description"="filter by starred status."},
+     *          {"name"="delete", "dataType"="integer", "required"=false, "format"="'0' or '1', default '0'", "description"="filter by deleted status."},
+     *          {"name"="sort", "dataType"="string", "required"=false, "format"="'created' or 'updated', default 'created'", "description"="sort entries by date."},
+     *          {"name"="order", "dataType"="string", "required"=false, "format"="'asc' or 'desc', default 'desc'", "description"="order of sort."},
+     *          {"name"="page", "dataType"="integer", "required"=false, "format"="default '1'", "description"="what page you want."},
+     *          {"name"="perPage", "dataType"="integer", "required"=false, "format"="default'30'", "description"="results per page."},
+     *          {"name"="tags", "dataType"="string", "required"=false, "format"="api%2Crest", "description"="a list of tags url encoded. Will returns entries that matches ALL tags."},
+     *       }
      * )
      * @return Entries
      */
     public function getEntriesAction(Request $request)
     {
-        $isArchive = $request->query->get('archive');
-        var_dump($isArchive);
-        $isStarred = $request->query->get('star');
-        $isDeleted = $request->query->get('delete');
-        $sort      = $request->query->get('sort');
-        $order     = $request->query->get('order');
-        $page      = $request->query->get('page');
-        $perPage   = $request->query->get('perPage');
-        $tags      = $request->query->get('tags', array());
+        $isArchived = $request->query->get('archive', 0);
+        $isStarred  = $request->query->get('star', 0);
+        $isDeleted  = $request->query->get('delete', 0);
+        $sort       = $request->query->get('sort', 'created');
+        $order      = $request->query->get('order', 'desc');
+        $page       = $request->query->get('page', 1);
+        $perPage    = $request->query->get('perPage', 30);
+        $tags       = $request->query->get('tags', array());
 
-        return 'plop';
+        $entries = $this
+            ->getDoctrine()
+            ->getRepository('WallabagCoreBundle:Entries')
+            ->findEntries(1, (int)$isArchived, (int)$isStarred, (int)$isDeleted, $sort, $order);
+
+        if(!is_array($entries)) {
+            throw $this->createNotFoundException();
+        }
+
+        return $entries;
+
     }
 
     /**
-     * Fetches an entry
+     * Retrieve a single entry
      *
      * @ApiDoc(
      *      requirements={
@@ -52,7 +69,44 @@ class WallabagRestController
     }
 
     /**
-     * Deletes an entry
+     * Create an entry
+     *
+     * @ApiDoc(
+     *       parameters={
+     *          {"name"="url", "dataType"="string", "required"=true, "format"="http://www.test.com/article.html", "description"="Url for the entry."},
+     *          {"name"="title", "dataType"="string", "required"=false, "description"="Optional, we'll get the title from the page."},
+     *          {"name"="tags", "dataType"="string", "required"=false, "format"="tag1,tag2,tag3", "description"="a comma-separated list of tags."},
+     *       }
+     * )
+     */
+    public function postEntriesAction()
+    {
+
+    }
+
+    /**
+     * Change several properties of an entry
+     *
+     * @ApiDoc(
+     *      requirements={
+     *          {"name"="entry", "dataType"="integer", "requirement"="\w+", "description"="The entry ID"}
+     *      },
+     *      parameters={
+     *          {"name"="title", "dataType"="string", "required"=false},
+     *          {"name"="tags", "dataType"="string", "required"=false, "format"="tag1,tag2,tag3", "description"="a comma-separated list of tags."},
+     *          {"name"="archive", "dataType"="integer", "required"=false, "format"="'0' or '1', default '0'", "description"="archived the entry."},
+     *          {"name"="star", "dataType"="integer", "required"=false, "format"="'0' or '1', default '0'", "description"="starred the entry."},
+     *          {"name"="delete", "dataType"="integer", "required"=false, "format"="'0' or '1', default '0'", "description"="flag as deleted. Default false. In case that you don't want to *really* remove it.."},
+     *       }
+     * )
+     */
+    public function patchEntriesAction(Entries $entry)
+    {
+
+    }
+
+    /**
+     * Delete **permanently** an entry
      *
      * @ApiDoc(
      *      requirements={
@@ -65,33 +119,9 @@ class WallabagRestController
 
     }
 
-    /**
-     * Changes several properties of an entry. I.E tags, archived, starred and deleted status
-     *
-     * @ApiDoc(
-     *      requirements={
-     *          {"name"="entry", "dataType"="integer", "requirement"="\w+", "description"="The entry ID"}
-     *      }
-     * )
-     */
-    public function patchEntriesAction(Entries $entry)
-    {
-
-    }
 
     /**
-     * Saves a new entry
-     *
-     * @ApiDoc(
-     * )
-     */
-    public function postEntriesAction()
-    {
-
-    }
-
-    /**
-     * Gets tags for an entry
+     * Retrieve all tags for an entry
      *
      * @ApiDoc(
      *      requirements={
@@ -104,12 +134,15 @@ class WallabagRestController
     }
 
     /**
-     * Saves new tag for an entry
+     * Add one or more tags to an entry
      *
      * @ApiDoc(
      *      requirements={
      *          {"name"="entry", "dataType"="integer", "requirement"="\w+", "description"="The entry ID"}
-     *      }
+     *      },
+     *      parameters={
+     *          {"name"="tags", "dataType"="string", "required"=false, "format"="tag1,tag2,tag3", "description"="a comma-separated list of tags."},
+     *       }
      * )
      */
     public function postEntriesTagsAction(Entries $entry) {
@@ -117,7 +150,7 @@ class WallabagRestController
     }
 
     /**
-     * Remove tag for an entry
+     * Permanently remove one tag for an entry
      *
      * @ApiDoc(
      *      requirements={
@@ -132,7 +165,7 @@ class WallabagRestController
     }
 
     /**
-     * Gets tags for a user
+     * Retrieve all tags
      *
      * @ApiDoc(
      * )
@@ -142,10 +175,12 @@ class WallabagRestController
     }
 
     /**
-     * Gets one tag
+     * Retrieve a single tag
      *
      * @ApiDoc(
+     *       requirements={
      *          {"name"="tag", "dataType"="string", "requirement"="\w+", "description"="The tag"}
+     *       }
      * )
      */
     public function getTagAction(Tags $tag) {
@@ -153,7 +188,7 @@ class WallabagRestController
     }
 
     /**
-     * Delete tag
+     * Permanently remove one tag from **every** entry
      *
      * @ApiDoc(
      *      requirements={

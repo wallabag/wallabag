@@ -64,6 +64,8 @@ class EntryController extends Controller
     public function showUnreadAction()
     {
         $repository = $this->getDoctrine()->getRepository('WallabagCoreBundle:Entries');
+        // TODO don't give the user ID like this
+        // TODO change pagination
         $entries = $repository->findUnreadByUser(1, 0);
 
         return $this->render(
@@ -81,6 +83,8 @@ class EntryController extends Controller
     public function showArchiveAction()
     {
         $repository = $this->getDoctrine()->getRepository('WallabagCoreBundle:Entries');
+        // TODO don't give the user ID like this
+        // TODO change pagination
         $entries = $repository->findArchiveByUser(1, 0);
 
         return $this->render(
@@ -98,6 +102,8 @@ class EntryController extends Controller
     public function showStarredAction()
     {
         $repository = $this->getDoctrine()->getRepository('WallabagCoreBundle:Entries');
+        // TODO don't give the user ID like this
+        // TODO change pagination
         $entries = $repository->findStarredByUser(1, 0);
 
         return $this->render(

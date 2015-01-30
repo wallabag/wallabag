@@ -76,4 +76,17 @@ class EntriesRepository extends EntityRepository
 
         return $paginator;
     }
+
+    public function findEntries($userId, $isArchived, $isStarred, $isDeleted, $sort, $order)
+    {
+        $qb = $this->createQueryBuilder('e')
+            ->select('e')
+            ->where('e.isFav =:isStarred')->setParameter('isStarred', $isStarred)
+            ->andWhere('e.isRead =:isArchived')->setParameter('isArchived', $isArchived)
+            ->andWhere('e.userId =:userId')->setParameter('userId', $userId)
+            ->getQuery()
+            ->getResult(Query::HYDRATE_ARRAY);
+
+        return $qb;
+    }
 }
