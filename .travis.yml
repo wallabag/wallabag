@@ -1,3 +1,4 @@
+language: php
 branches:
   only:
     - refactor
