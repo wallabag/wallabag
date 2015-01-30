@@ -10,22 +10,22 @@
 
 	<testsuites>
 		<testsuite name="wallabag Test Suite">
-			<directory>../src/*/*Bundle/Tests</directory>
-			<directory>../src/*/Bundle/*Bundle/Tests</directory>
-			<directory>../src/*Bundle/Tests</directory>
+			<directory>src/*/*Bundle/Tests</directory>
+			<directory>src/*/Bundle/*Bundle/Tests</directory>
+			<directory>src/*Bundle/Tests</directory>
 		</testsuite>
 	</testsuites>
 
 	<filter>
 		<whitelist>
-			<directory>../src</directory>
+			<directory>src</directory>
 			<exclude>
-				<directory>../src/*Bundle/Resources</directory>
-				<directory>../src/*Bundle/Tests</directory>
-				<directory>../src/*/*Bundle/Resources</directory>
-				<directory>../src/*/*Bundle/Tests</directory>
-				<directory>../src/*/Bundle/*Bundle/Resources</directory>
-				<directory>../src/*/Bundle/*Bundle/Tests</directory>
+				<directory>src/*Bundle/Resources</directory>
+				<directory>src/*Bundle/Tests</directory>
+				<directory>src/*/*Bundle/Resources</directory>
+				<directory>src/*/*Bundle/Tests</directory>
+				<directory>src/*/Bundle/*Bundle/Resources</directory>
+				<directory>src/*/Bundle/*Bundle/Tests</directory>
 			</exclude>
 		</whitelist>
 	</filter>
