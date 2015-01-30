@@ -1,4 +1,6 @@
 language: php
+php:
+  - 5.5
 branches:
   only:
     - refactor
