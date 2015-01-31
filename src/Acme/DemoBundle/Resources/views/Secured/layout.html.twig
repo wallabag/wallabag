@@ -1,6 +1,0 @@
-{% extends "AcmeDemoBundle::layout.html.twig" %}
-
-{% block content_header_more %}
-    {{ parent() }}
-    <li>logged in as <strong>{{ app.user ? app.user.username : 'Anonymous' }}</strong> - <a href="{{ path('_demo_logout') }}">Logout</a></li>
-{% endblock %}
