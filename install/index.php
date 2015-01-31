@@ -288,6 +288,27 @@ cursor: pointer;
     width: 100%;
     overflow: auto;
 }
+.compatibity_result {
+	margin: auto;
+	max-width: 300px;
+	min-height: 50px;
+	line-height: 50px;
+	text-align: center;
+}
+
+h2, legend {
+	font-size: 30px;
+	text-transform: uppercase;
+	font-family: "PT Sans",sans-serif;
+}
+
+legend:after {
+    content: "";
+    height: 4px;
+    width: 70px;
+    background-color: #000;
+    display: block;
+}
 
 </style>
 
@@ -341,14 +362,16 @@ cursor: pointer;
             <p>To install wallabag, you just have to fill the following fields. That's all.</p>
             <p>If you need help, you can read the doc: <a href="docs/" target="_blank">offline documentation</a> and <a href="http://doc.wallabag.org" target="_blank">online one</a> (already up-to-date).</p>
 
-            <p class="detail">Server compatibility test (click to view details) : <?php if (isOkay()) { ?>
-                <span class="good">All good</span>
-            <?php } elseif (isPassing()) { ?>
-                <span class="pass">Some problems, but it's OK !</span>
-            <?php } else  { ?>
-                <span class="bad">Bad news : you can't run wallabag</span>
-            <?php } ?> </p>
-            <?php $status = status(); ?>
+            <div>
+	            <h2>Server compatibility test</h2>
+	            <?php if (isOkay()) { ?>
+	            	<div class="compatibity_result detail good">All good</div>
+		            <?php } elseif (isPassing()) { ?>
+		            <div class="compatibity_result detail pass">Some problems, but it's OK !</div>
+		            <?php } else  { ?>
+		            <div class="compatibity_result detail bad">Bad news : you can't run wallabag</div>
+		            <?php } $status = status(); ?>
+            </div>
 
             <div class="details">
                 <div>
@@ -375,6 +398,12 @@ cursor: pointer;
                                 <td>Enabled</td>
                                 <?php echo ($status['pdo']) ? '<td class="good">Enabled</span>' : '<td class="bad">Disabled'; ?></td>
                                 <td><?php echo ($status['pdo']) ? '<strong>PDO:</strong> You have PDO support enabled.' : '<strong>PDO:</strong> Your PHP installation doesn\'t support PHP PDO. <strong>' . $status['app_name'] . ' will not work here.</strong>' ?></td>
+                            </tr>
+                            <tr class="<?php echo ($status['pdo_drivers_passing']) ? 'enabled' : 'disabled'; ?>">
+                            	<td>PDO Drivers</td>
+                            	<td>One of the PDO drivers must be installed</td>
+                            	<?php echo ($status['pdo_drivers_passing']) ? '<td class="good">One driver is enabled</span>' : '<td class="bad">No driver available'; ?></td>
+                            	<td><?php echo ($status['pdo_drivers_passing']) ? '<strong>PDO:</strong> You have at least one PDO driver installed.' : '<strong>PDO Drivers:</strong> Your PHP installation doesn\'t have any PDO driver installed. <strong>' . $status['app_name'] . ' will not work here.</strong>' ?></td>
                             </tr>
                             <tr class="<?php echo ($status['xml']) ? 'enabled' : 'disabled'; ?>">
                                 <td><a href="http://php.net/xml">XML</a></td>
@@ -466,9 +495,8 @@ cursor: pointer;
                             </tr>
                         </tbody>
                     </table>
-                    <span style="display:inline-block;text-align: right;" class="detail">Close details</span>
+                    <hr>
                 </div>
-                <hr>
                 <div class="details">
                     <?php //if ($status['php'] && $status['xml'] && $status['pcre'] && $status['mbstring'] && $status['iconv'] && $status['filter'] && $status['allow_url_fopen']) { ?>
                     <?php if (isOkay()) { ?>
@@ -486,12 +514,11 @@ cursor: pointer;
                     <?php } ?>
                 </div>
 
-                <div class="chunk">
-                    <p class="footnote">This compatibility test has been borrowed (and slightly adapted by <a href="http://fivefilters.org/content-only/">fivefilters.org</a>) from the one supplied by <a href="http://simplepie.org/">SimplePie.org</a>.</a></p>
+	                <div class="chunk">
+	                    <p class="footnote">This compatibility test has been borrowed (and slightly adapted by <a href="http://fivefilters.org/content-only/">fivefilters.org</a>) from the one supplied by <a href="http://simplepie.org/">SimplePie.org</a>.</a></p>
+	                </div>
+                	<hr>
                 </div>
-
-                </div>
-                <hr>
             <form method="post" class="technical">
                 <?php if (!is_dir('vendor')) : ?>
                     <div class='messages notice install'>wallabag needs twig, a template engine (<a href="http://twig.sensiolabs.org/">?</a>). Two ways to install it:<br />
@@ -502,14 +529,14 @@ cursor: pointer;
                             <b>Be careful, zip extension is not enabled in your PHP configuration. You'll have to unzip vendor.zip manually.</b>
                         <?php endif; ?>
                             <em>This method is mainly recommended if you don't have a dedicated server.</em></li>
-                        <li>use <a href="http://getcomposer.org/">Composer</a> :<pre><code>curl -s http://getcomposer.org/installer | php
+                        <li>use <a href="http://getcomposer.org/">Composer</a> in your wallabag folder :<pre><code>curl -s http://getcomposer.org/installer | php
 php composer.phar install</code></pre></li>
                     </ul>
                     </div>
                 <?php endif; ?>
                 <div class="database_info">
                 <fieldset class="database_inputs">
-                    <legend><strong>Technical settings</strong></legend>
+                    <legend><strong>Database settings</strong></legend>
                     <p>
                         Database engine:
                         <ul>
