@@ -1,6 +1,18 @@
 language: php
+
 php:
+  - 5.4
   - 5.5
+  - 5.6
+
 branches:
   only:
     - refactor
+
+before_script:
+  - composer self-update
+  - echo 'date.timezone = "Europe/Paris"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+
+script:
+  - ant -f app/build.xml prepare
+  - phpunit -c app  --coverage-text
