@@ -275,6 +275,19 @@ background-color:#FF9500;
 .detail {
 cursor: pointer;
 }
+.descriptions {
+    margin-left: 10%;
+    position: relative;
+    top: 50%;
+}
+.database_inputs {
+    float: left;
+    width: 50%
+}
+.database_info {
+    width: 100%;
+    overflow: auto;
+}
 
 </style>
 
@@ -453,6 +466,7 @@ cursor: pointer;
                             </tr>
                         </tbody>
                     </table>
+                    <span style="display:inline-block;text-align: right;" class="detail">Close details</span>
                 </div>
                 <hr>
                 <div class="details">
@@ -493,7 +507,8 @@ php composer.phar install</code></pre></li>
                     </ul>
                     </div>
                 <?php endif; ?>
-                <fieldset>
+                <div class="database_info">
+                <fieldset class="database_inputs">
                     <legend><strong>Technical settings</strong></legend>
                     <p>
                         Database engine:
@@ -530,8 +545,20 @@ php composer.phar install</code></pre></li>
                         </ul>
                     </p>
                 </fieldset>
+                <div class="descriptions">
+                    <div id="sqlite_description">
+                        SQLite is the most simple database system of all three. It is therefore recommended for people who don't want or know how to configure other database systems.
+                    </div>
+                    <div id="mysql_description">
+                        MySQL is one of the most popular database systems. It comes with most shared hosting plans.
+                    </div>
+                    <div id="postgres_description">
+                        PostgreSQL. If you want it, you already know why you want it.
+                    </div>
+                </div>
+                </div>
                 <hr>
-                <fieldset>
+                <fieldset style="clear: both">
                     <legend><strong>User settings</strong></legend>
                     <p>
                         <label for="username">Username</label>
@@ -553,7 +580,10 @@ php composer.phar install</code></pre></li>
         </div>
         <script>
             $("#mysql_infos").hide();
+            $("#mysql_description").hide();
             $("#pg_infos").hide();
+            $("#postgres_description").hide();
+            $("#sqlite_description").show();
 
             $(".details").hide();
 
@@ -590,6 +620,9 @@ php composer.phar install</code></pre></li>
                         $("#pg_infos").hide();
                         $("#pdo_postgres").hide();
                         $("#pdo_sqlite").hide();
+                        $("#sqlite_description").hide();
+                        $("#postgres_description").hide();
+                        $("#mysql_description").show();
                         $("#install_button").show();        
                     }
                     else {
@@ -599,6 +632,9 @@ php composer.phar install</code></pre></li>
                             $("#pg_infos").show();
                             $("#pdo_postgres").show();
                             $("#pdo_sqlite").hide();
+                            $("#sqlite_description").hide();
+                            $("#mysql_description").hide();
+                            $("#postgres_description").show();
                             $("#install_button").show();
                         }
                         else {
@@ -606,6 +642,9 @@ php composer.phar install</code></pre></li>
                             $("#pg_infos").hide();
                             $("#pdo_postgres").hide();
                             $("#pdo_mysql").hide();
+                            $("#sqlite_description").show();
+                            $("#mysql_description").hide();
+                            $("#postgres_description").hide();
                             <?php
                             if (!extension_loaded('pdo_sqlite')) : ?>
                             $("#pdo_sqlite").show();
