@@ -4,7 +4,6 @@ namespace Wallabag\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
 /**
@@ -71,7 +70,7 @@ class Users implements AdvancedUserInterface, \Serializable
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -81,7 +80,7 @@ class Users implements AdvancedUserInterface, \Serializable
     /**
      * Set username
      *
-     * @param string $username
+     * @param  string $username
      * @return Users
      */
     public function setUsername($username)
@@ -94,7 +93,7 @@ class Users implements AdvancedUserInterface, \Serializable
     /**
      * Get username
      *
-     * @return string 
+     * @return string
      */
     public function getUsername()
     {
@@ -120,7 +119,7 @@ class Users implements AdvancedUserInterface, \Serializable
     /**
      * Set password
      *
-     * @param string $password
+     * @param  string $password
      * @return Users
      */
     public function setPassword($password)
@@ -133,7 +132,7 @@ class Users implements AdvancedUserInterface, \Serializable
     /**
      * Get password
      *
-     * @return string 
+     * @return string
      */
     public function getPassword()
     {
@@ -143,7 +142,7 @@ class Users implements AdvancedUserInterface, \Serializable
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string $name
      * @return Users
      */
     public function setName($name)
@@ -156,7 +155,7 @@ class Users implements AdvancedUserInterface, \Serializable
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -166,7 +165,7 @@ class Users implements AdvancedUserInterface, \Serializable
     /**
      * Set email
      *
-     * @param string $email
+     * @param  string $email
      * @return Users
      */
     public function setEmail($email)
@@ -179,7 +178,7 @@ class Users implements AdvancedUserInterface, \Serializable
     /**
      * Get email
      *
-     * @return string 
+     * @return string
      */
     public function getEmail()
     {
@@ -208,7 +207,7 @@ class Users implements AdvancedUserInterface, \Serializable
      */
     public function unserialize($serialized)
     {
-        list (
+        list(
             $this->id,
             ) = unserialize($serialized);
     }

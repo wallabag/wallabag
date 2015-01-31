@@ -3,7 +3,6 @@
 namespace Wallabag\CoreBundle\Controller;
 
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
-use FOS\RestBundle\Controller\Annotations\View;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Wallabag\CoreBundle\Entity\Entries;
@@ -12,7 +11,6 @@ use Wallabag\CoreBundle\Service\Extractor;
 
 class WallabagRestController extends Controller
 {
-
     /**
      * Retrieve all entries. It could be filtered by many options.
      *
@@ -44,14 +42,13 @@ class WallabagRestController extends Controller
         $entries = $this
             ->getDoctrine()
             ->getRepository('WallabagCoreBundle:Entries')
-            ->findEntries(1, (int)$isArchived, (int)$isStarred, (int)$isDeleted, $sort, $order);
+            ->findEntries(1, (int) $isArchived, (int) $isStarred, (int) $isDeleted, $sort, $order);
 
-        if(!is_array($entries)) {
+        if (!is_array($entries)) {
             throw $this->createNotFoundException();
         }
 
         return $entries;
-
     }
 
     /**
@@ -119,7 +116,6 @@ class WallabagRestController extends Controller
      */
     public function patchEntriesAction(Entries $entry)
     {
-
     }
 
     /**
@@ -133,9 +129,7 @@ class WallabagRestController extends Controller
      */
     public function deleteEntriesAction(Entries $entry)
     {
-
     }
-
 
     /**
      * Retrieve all tags for an entry
@@ -146,8 +140,8 @@ class WallabagRestController extends Controller
      *      }
      * )
      */
-    public function getEntriesTagsAction(Entries $entry) {
-
+    public function getEntriesTagsAction(Entries $entry)
+    {
     }
 
     /**
@@ -162,8 +156,8 @@ class WallabagRestController extends Controller
      *       }
      * )
      */
-    public function postEntriesTagsAction(Entries $entry) {
-
+    public function postEntriesTagsAction(Entries $entry)
+    {
     }
 
     /**
@@ -178,7 +172,6 @@ class WallabagRestController extends Controller
      */
     public function deleteEntriesTagsAction(Entries $entry, Tags $tag)
     {
-
     }
 
     /**
@@ -187,8 +180,8 @@ class WallabagRestController extends Controller
      * @ApiDoc(
      * )
      */
-    public function getTagsAction() {
-
+    public function getTagsAction()
+    {
     }
 
     /**
@@ -200,8 +193,8 @@ class WallabagRestController extends Controller
      *       }
      * )
      */
-    public function getTagAction(Tags $tag) {
-
+    public function getTagAction(Tags $tag)
+    {
     }
 
     /**
@@ -215,6 +208,5 @@ class WallabagRestController extends Controller
      */
     public function deleteTagAction(Tags $tag)
     {
-
     }
 }

@@ -42,7 +42,7 @@
         <script src="{{ poche_url }}themes/_global/js/restoreScroll.js"></script>
         <script type="text/javascript">
         $(document).ready(function() {
-        
+
         		// toggle read property of current article
         		$('#markAsRead').click(function(){
         			$("body").css("cursor", "wait");
@@ -50,11 +50,11 @@
 					    function( data ) {
 				        if ( data == '1' ) {
 				        	if ( $('#markAsRead').hasClass("archive-off") ) {
-				        		$('#markAsRead').removeClass("archive-off");	
+				        		$('#markAsRead').removeClass("archive-off");
 				        		$('#markAsRead').addClass("archive");
 				        	}
 				        	else {
-				        		$('#markAsRead').removeClass("archive");	
+				        		$('#markAsRead').removeClass("archive");
 				        		$('#markAsRead').addClass("archive-off");
 				        	}
 				        }
@@ -64,7 +64,7 @@
 				      });
 					    $("body").css("cursor", "auto");
 					  });
-					  
+
 					  // toggle favorite property of current article
         		$('#setFav').click(function(){
         			$("body").css("cursor", "wait");
@@ -72,11 +72,11 @@
 					    function( data ) {
 				        if ( data == '1' ) {
 				        	if ( $('#setFav').hasClass("fav-off") ) {
-				        		$('#setFav').removeClass("fav-off");	
+				        		$('#setFav').removeClass("fav-off");
 				        		$('#setFav').addClass("fav");
 				        	}
 				        	else {
-				        		$('#setFav').removeClass("fav");	
+				        		$('#setFav').removeClass("fav");
 				        		$('#setFav').addClass("fav-off");
 				        	}
 				        }
@@ -86,8 +86,8 @@
 				      });
 					    $("body").css("cursor", "auto");
 					  });
-        
- 						// set percent of read on startup       
+
+ 						// set percent of read on startup
         		if ( $(document).height() <= $(window).innerHeight() ) {
         		  pp = 100;
         		}
@@ -95,7 +95,7 @@
         			pp = 0;
         		}
         		$('#readLeftPercent').text( pp + '%' );
-        		
+
 
             $(window).scroll(function(e){
                 var scrollTop = $(window).scrollTop();
@@ -103,7 +103,7 @@
                 var scrollPercent = (scrollTop) / (docHeight);
                 var scrollPercentRounded = Math.round(scrollPercent*100)/100;
                 savePercent({{ entry.id|e }}, scrollPercentRounded);
-                
+
                 // change percent of read on scroll
                 pp = Math.round(scrollTop * 100 / ( docHeight - $(window).innerHeight() ));
                 $('#readLeftPercent').text( pp + '%' );

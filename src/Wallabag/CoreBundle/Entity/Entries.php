@@ -66,12 +66,10 @@ class Entries
      */
     private $userId;
 
-
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -81,7 +79,7 @@ class Entries
     /**
      * Set title
      *
-     * @param string $title
+     * @param  string  $title
      * @return Entries
      */
     public function setTitle($title)
@@ -94,7 +92,7 @@ class Entries
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -104,7 +102,7 @@ class Entries
     /**
      * Set url
      *
-     * @param string $url
+     * @param  string  $url
      * @return Entries
      */
     public function setUrl($url)
@@ -117,7 +115,7 @@ class Entries
     /**
      * Get url
      *
-     * @return string 
+     * @return string
      */
     public function getUrl()
     {
@@ -127,7 +125,7 @@ class Entries
     /**
      * Set isRead
      *
-     * @param string $isRead
+     * @param  string  $isRead
      * @return Entries
      */
     public function setIsRead($isRead)
@@ -140,7 +138,7 @@ class Entries
     /**
      * Get isRead
      *
-     * @return string 
+     * @return string
      */
     public function getIsRead()
     {
@@ -150,13 +148,14 @@ class Entries
     public function toggleArchive()
     {
         $this->isRead = $this->getIsRead() ^ 1;
+
         return $this;
     }
 
     /**
      * Set isFav
      *
-     * @param string $isFav
+     * @param  string  $isFav
      * @return Entries
      */
     public function setIsFav($isFav)
@@ -169,7 +168,7 @@ class Entries
     /**
      * Get isFav
      *
-     * @return string 
+     * @return string
      */
     public function getIsFav()
     {
@@ -186,7 +185,7 @@ class Entries
     /**
      * Set content
      *
-     * @param string $content
+     * @param  string  $content
      * @return Entries
      */
     public function setContent($content)
@@ -199,7 +198,7 @@ class Entries
     /**
      * Get content
      *
-     * @return string 
+     * @return string
      */
     public function getContent()
     {
@@ -209,7 +208,7 @@ class Entries
     /**
      * Set userId
      *
-     * @param string $userId
+     * @param  string  $userId
      * @return Entries
      */
     public function setUserId($userId)
@@ -222,7 +221,7 @@ class Entries
     /**
      * Get userId
      *
-     * @return string 
+     * @return string
      */
     public function getUserId()
     {
