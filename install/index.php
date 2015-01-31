@@ -294,6 +294,8 @@ cursor: pointer;
 	min-height: 50px;
 	line-height: 50px;
 	text-align: center;
+    margin-bottom: 30px;
+    border-radius: 3px;
 }
 
 h2, legend {
@@ -308,6 +310,18 @@ legend:after {
     width: 70px;
     background-color: #000;
     display: block;
+}
+#reloadpage {
+cursor: pointer;
+background-color: #000;
+color: #FFF;
+padding: 0.5em 1em;
+display: inline-block;
+border: 1px solid #000;
+}
+#reloadpage:hover {
+    background-color: #FFF;
+    color: #000;
 }
 
 </style>
@@ -511,17 +525,21 @@ legend:after {
                     <?php } else { ?>
                         <h3>Bottom Line: We're sorry…</h3>
                         <p><em>Your webhost does not support the minimum requirements for <?php echo $status['app_name']; ?>.</em>  It may be a good idea to contact your webhost and point them to the results of this test. They may be able to enable/install the required components.</p>
+                        <p>If this is your own server and you think you have all the requirements installed, please get in touch with us.</p>
                     <?php } ?>
                 </div>
 
 	                <div class="chunk">
 	                    <p class="footnote">This compatibility test has been borrowed (and slightly adapted by <a href="http://fivefilters.org/content-only/">fivefilters.org</a>) from the one supplied by <a href="http://simplepie.org/">SimplePie.org</a>.</a></p>
 	                </div>
-                	<hr>
                 </div>
             <form method="post" class="technical">
+            <hr>
+            <div class='twig'>
+                <h2>Twig installation</h2>
                 <?php if (!is_dir('vendor')) : ?>
-                    <div class='messages notice install'>wallabag needs twig, a template engine (<a href="http://twig.sensiolabs.org/">?</a>). Two ways to install it:<br />
+                    
+                    <p>wallabag needs twig, a template engine (<a href="http://twig.sensiolabs.org/">?</a>). Two ways to install it:</p>
                     <ul>
                         <li>automatically download and extract vendor.zip into your wallabag folder. 
                         <p><input type="submit" name="download" value="Download vendor.zip" /></p>
@@ -530,11 +548,17 @@ legend:after {
                         <?php endif; ?>
                             <em>This method is mainly recommended if you don't have a dedicated server.</em></li>
                         <li>use <a href="http://getcomposer.org/">Composer</a> in your wallabag folder :<pre><code>curl -s http://getcomposer.org/installer | php
-php composer.phar install</code></pre></li>
+php composer.phar install</code></pre>
+                        <span id="reloadpage">Reload to check</span>
+                        </li>
                     </ul>
-                    </div>
+                    
+                <?php else : ?>
+                    Twig is properly installed.
                 <?php endif; ?>
+                </div>
                 <div class="database_info">
+                <hr>
                 <fieldset class="database_inputs">
                     <legend><strong>Database settings</strong></legend>
                     <p>
@@ -580,11 +604,12 @@ php composer.phar install</code></pre></li>
                         MySQL is one of the most popular database systems. It comes with most shared hosting plans.
                     </div>
                     <div id="postgres_description">
-                        PostgreSQL. If you want it, you already know why you want it.
+                        PostgreSQL. Because some people prefer it to MySQL.
                     </div>
                 </div>
                 </div>
                 <hr>
+                <div class="usersettings">
                 <fieldset style="clear: both">
                     <legend><strong>User settings</strong></legend>
                     <p>
@@ -601,21 +626,31 @@ php composer.phar install</code></pre></li>
                         <input type="email" id="email" name="email" />
                     </p>
                 </fieldset>
-
                 <input type="submit" id="install_button" value="Install wallabag" name="install" />
+                </div>
             </form>
         </div>
         <script>
+            <?php if (!is_dir('vendor')) : ?>
+            $(".database_info").hide();
+            $(".usersettings").hide();
+            <?php endif ?>
+            /* 
+             * Database showing/hiding
+             */ 
             $("#mysql_infos").hide();
             $("#mysql_description").hide();
             $("#pg_infos").hide();
             $("#postgres_description").hide();
             $("#sqlite_description").show();
-
-            $(".details").hide();
-
             $("#pdo_postgres").hide();
             $("#pdo_mysql").hide();
+
+            /*
+             * Details hiding
+             */
+
+            $(".details").hide();
 
             <?php
             if (!isPassing()) : ?>
@@ -686,6 +721,10 @@ php composer.phar install</code></pre></li>
             $(".detail").click(function()
             {
                 $('.details').toggle();
+            });
+            $("#reloadpage").click(function()
+            {
+                 location.reload();
             });
 
         </script>
