@@ -6,7 +6,6 @@ use Doctrine\ORM\Query;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Wallabag\CoreBundle\Entity\Entries;
-use Wallabag\CoreBundle\Service\Extractor;
 
 class EntriesRepository extends EntityRepository
 {
@@ -15,7 +14,7 @@ class EntriesRepository extends EntityRepository
      *
      * @param $userId
      * @param $firstResult
-     * @param int $maxResults
+     * @param  int       $maxResults
      * @return Paginator
      */
     public function findUnreadByUser($userId, $firstResult, $maxResults = 12)
@@ -38,7 +37,7 @@ class EntriesRepository extends EntityRepository
      *
      * @param $userId
      * @param $firstResult
-     * @param int $maxResults
+     * @param  int       $maxResults
      * @return Paginator
      */
     public function findArchiveByUser($userId, $firstResult, $maxResults = 12)
@@ -61,7 +60,7 @@ class EntriesRepository extends EntityRepository
      *
      * @param $userId
      * @param $firstResult
-     * @param int $maxResults
+     * @param  int       $maxResults
      * @return Paginator
      */
     public function findStarredByUser($userId, $firstResult, $maxResults = 12)

@@ -8,14 +8,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Wallabag\CoreBundle\Repository;
 use Wallabag\CoreBundle\Entity\Entries;
 use Wallabag\CoreBundle\Service\Extractor;
-use Wallabag\CoreBundle\Helper\Tools;
 use Wallabag\CoreBundle\Helper\Url;
 
 class EntryController extends Controller
 {
-
     /**
-     * @param Request $request
+     * @param  Request                                    $request
      * @Route("/new", name="new_entry")
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -32,7 +30,6 @@ class EntryController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-
             $content = Extractor::extract($entry->getUrl());
 
             $entry->setTitle($content->getTitle());
@@ -115,7 +112,7 @@ class EntryController extends Controller
     /**
      * Shows entry content
      *
-     * @param Entries $entry
+     * @param  Entries                                    $entry
      * @Route("/view/{id}", requirements={"id" = "\d+"}, name="view")
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -130,8 +127,8 @@ class EntryController extends Controller
     /**
      * Changes read status for an entry
      *
-     * @param Request $request
-     * @param Entries $entry
+     * @param  Request                                            $request
+     * @param  Entries                                            $entry
      * @Route("/archive/{id}", requirements={"id" = "\d+"}, name="archive_entry")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
@@ -151,8 +148,8 @@ class EntryController extends Controller
     /**
      * Changes favorite status for an entry
      *
-     * @param Request $request
-     * @param Entries $entry
+     * @param  Request                                            $request
+     * @param  Entries                                            $entry
      * @Route("/star/{id}", requirements={"id" = "\d+"}, name="star_entry")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
@@ -172,8 +169,8 @@ class EntryController extends Controller
     /**
      * Deletes entry
      *
-     * @param Request $request
-     * @param Entries $entry
+     * @param  Request                                            $request
+     * @param  Entries                                            $entry
      * @Route("/delete/{id}", requirements={"id" = "\d+"}, name="delete_entry")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */

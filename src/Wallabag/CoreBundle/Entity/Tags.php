@@ -28,12 +28,10 @@ class Tags
      */
     private $value;
 
-
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -43,7 +41,7 @@ class Tags
     /**
      * Set value
      *
-     * @param string $value
+     * @param  string $value
      * @return Tags
      */
     public function setValue($value)
@@ -56,7 +54,7 @@ class Tags
     /**
      * Get value
      *
-     * @return string 
+     * @return string
      */
     public function getValue()
     {

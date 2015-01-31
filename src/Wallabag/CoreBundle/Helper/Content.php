@@ -8,8 +8,8 @@ class Content
 
     private $body;
 
-    public function __constructor() {
-
+    public function __constructor()
+    {
     }
 
     public function getTitle()

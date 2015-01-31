@@ -35,12 +35,10 @@ class Config
      */
     private $value;
 
-
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -50,7 +48,7 @@ class Config
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string $name
      * @return Config
      */
     public function setName($name)
@@ -63,7 +61,7 @@ class Config
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -73,7 +71,7 @@ class Config
     /**
      * Set value
      *
-     * @param string $value
+     * @param  string $value
      * @return Config
      */
     public function setValue($value)
@@ -86,7 +84,7 @@ class Config
     /**
      * Get value
      *
-     * @return string 
+     * @return string
      */
     public function getValue()
     {

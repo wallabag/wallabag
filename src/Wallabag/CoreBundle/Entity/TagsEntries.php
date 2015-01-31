@@ -35,12 +35,10 @@ class TagsEntries
      */
     private $tagId;
 
-
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -50,7 +48,7 @@ class TagsEntries
     /**
      * Set entryId
      *
-     * @param integer $entryId
+     * @param  integer     $entryId
      * @return TagsEntries
      */
     public function setEntryId($entryId)
@@ -63,7 +61,7 @@ class TagsEntries
     /**
      * Get entryId
      *
-     * @return integer 
+     * @return integer
      */
     public function getEntryId()
     {
@@ -73,7 +71,7 @@ class TagsEntries
     /**
      * Set tagId
      *
-     * @param integer $tagId
+     * @param  integer     $tagId
      * @return TagsEntries
      */
     public function setTagId($tagId)
@@ -86,7 +84,7 @@ class TagsEntries
     /**
      * Get tagId
      *
-     * @return integer 
+     * @return integer
      */
     public function getTagId()
     {
