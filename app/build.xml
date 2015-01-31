@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="wallabag" default="build">
+    <target name="build" depends="prepare"/>
+
+    <target name="clean" description="Cleanup build artifacts">
+        <delete dir="${basedir}/app/cache"/>
+    </target>
+
+    <target name="prepare" depends="clean" description="Prepare for build">
+        <exec executable="composer">
+            <arg value="install"/>
+            <arg value="--dev"/>
+            <arg value="--no-interaction"/>
+            <arg value="--working-dir=.."/>
+        </exec>
+        <exec executable="php">
+            <arg value="${basedir}/../app/console"/>
+            <arg value="cache:clear"/>
+            <arg value="--env=test"/>
+        </exec>
+    </target>
+</project>
