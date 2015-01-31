@@ -5,6 +5,8 @@ namespace Wallabag\CoreBundle\Repository;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Wallabag\CoreBundle\Entity\Entries;
+use Wallabag\CoreBundle\Service\Extractor;
 
 class EntriesRepository extends EntityRepository
 {
@@ -79,6 +81,7 @@ class EntriesRepository extends EntityRepository
 
     public function findEntries($userId, $isArchived, $isStarred, $isDeleted, $sort, $order)
     {
+        //TODO tous les paramètres ne sont pas utilisés, à corriger
         $qb = $this->createQueryBuilder('e')
             ->select('e')
             ->where('e.isFav =:isStarred')->setParameter('isStarred', $isStarred)

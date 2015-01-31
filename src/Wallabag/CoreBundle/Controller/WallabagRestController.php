@@ -82,17 +82,18 @@ class WallabagRestController extends Controller
      */
     public function postEntriesAction(Request $request)
     {
-        //TODO la récup ne marche
+        //TODO la récup ne marche pas
         //TODO gérer si on passe le titre
         //TODO gérer si on passe les tags
         //TODO ne pas avoir du code comme ça qui doit se trouver dans le Repository
+        $url = $request->request->get('url');
+
+        $content = Extractor::extract($url);
         $entry = new Entries();
         $entry->setUserId(1);
-        $content = Extractor::extract($request->request->get('url'));
-
+        $entry->setUrl($url);
         $entry->setTitle($content->getTitle());
         $entry->setContent($content->getBody());
-
         $em = $this->getDoctrine()->getManager();
         $em->persist($entry);
         $em->flush();

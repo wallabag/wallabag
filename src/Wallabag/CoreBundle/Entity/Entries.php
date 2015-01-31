@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\EntriesRepository")
  * @ORM\Table(name="entries")
+ *
  */
 class Entries
 {

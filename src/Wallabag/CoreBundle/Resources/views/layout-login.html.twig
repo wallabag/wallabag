@@ -12,22 +12,15 @@
         <![endif]-->
         <title>{% block title %}{% endblock %} - wallabag</title>
         {% include "WallabagCoreBundle::_head.html.twig" %}
-        {% include "WallabagCoreBundle::_bookmarklet.html.twig" %}
     </head>
-    <body>
-    {% include "WallabagCoreBundle::_top.html.twig" %}
-    <div id="main">
-        {% block menu %}{% endblock %}
-        {% block precontent %}{% endblock %}
-        {% for flashMessage in app.session.flashbag.get('notice') %}
-            <div class="flash-notice">
-                {{ flashMessage }}
-            </div>
-        {% endfor %}
-        <div id="content" class="w600p center">
+    <body class="login">
+        {% include "WallabagCoreBundle::_top.html.twig" %}
+        <div id="main">
+            {% block menu %}{% endblock %}
+            <div id="content" class="w600p center">
             {% block content %}{% endblock %}
+            </div>
         </div>
-    </div>
-    {% include "WallabagCoreBundle::_footer.html.twig" %}
+        {% include "WallabagCoreBundle::_footer.html.twig" %}
     </body>
 </html>

@@ -1,0 +1,32 @@
+{% extends "WallabagCoreBundle::layout-login.html.twig" %}
+
+{% block title %}{% trans %}login to your wallabag{% endtrans %}{% endblock %}
+{% block content %}
+    {% if error %}
+        <div>{{ error.message }}</div>
+    {% endif %}
+
+        <form action="{{ path('login_check') }}" method="post" name="loginform">
+            <fieldset class="w500p center">
+                <h2 class="mbs txtcenter">{% trans %}Login to wallabag{% endtrans %}</h2>
+
+                <div class="row">
+                    <label class="col w150p" for="username">{% trans %}Username{% endtrans %}</label>
+                    <input type="text" id="username" name="_username" value="{{ last_username }}" />
+                </div>
+
+                <div class="row">
+                    <label class="col w150p" for="password">{% trans %}Password{% endtrans %}</label>
+                    <input type="password" id="password" name="_password" />
+                </div>
+            {#
+                Si vous voulez contrôler l'URL vers laquelle l'utilisateur est redirigé en cas de succès
+                (plus de détails ci-dessous)
+                <input type="hidden" name="_target_path" value="/account" />
+            #}
+                <div class="row mts txtcenter">
+                    <button type="submit">login</button>
+                </div>
+            </fieldset>
+        </form>
+{% endblock %}
