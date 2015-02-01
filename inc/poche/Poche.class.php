@@ -180,6 +180,13 @@ class Poche
                         }
                     }
 
+                    // if there are tags, add them to the new article
+                    if (isset($_GET['tags'])) {
+                        $_POST['value'] = $_GET['tags'];
+                        $_POST['entry_id'] = $last_id;
+                        $this->action('add_tag', $url);
+                    }
+
                     $this->messages->add('s', _('the link has been added successfully'));
                 }
                 else {
@@ -192,20 +199,34 @@ class Poche
                 } else {
                   Tools::redirect('?view=home&closewin=true');
                 }
+                return $last_id;
                 break;
             case 'delete':
-                $msg = 'delete link #' . $id;
-                if ($this->store->deleteById($id, $this->user->getId())) {
-                    if (DOWNLOAD_PICTURES) {
-                        Picture::removeDirectory(ABS_PATH . $id);
+                if (isset($_GET['search'])) {
+                    //when we want to apply a delete to a search
+                    $tags = array($_GET['search']);
+                    $allentry_ids = $this->store->search($tags[0], $this->user->getId());
+                    $entry_ids = array();
+                    foreach ($allentry_ids as $eachentry) {
+                        $entry_ids[] = $eachentry[0];
                     }
-                    $this->messages->add('s', _('the link has been deleted successfully'));
+                } else { // delete a single article
+                    $entry_ids = array($id);
                 }
-                else {
-                    $this->messages->add('e', _('the link wasn\'t deleted'));
-                    $msg = 'error : can\'t delete link #' . $id;
+                foreach($entry_ids as $id) {
+                    $msg = 'delete link #' . $id;
+                    if ($this->store->deleteById($id, $this->user->getId())) {
+                        if (DOWNLOAD_PICTURES) {
+                            Picture::removeDirectory(ABS_PATH . $id);
+                        }
+                        $this->messages->add('s', _('the link has been deleted successfully'));
+                    }
+                    else {
+                        $this->messages->add('e', _('the link wasn\'t deleted'));
+                        $msg = 'error : can\'t delete link #' . $id;
+                    }
+                    Tools::logm($msg);
                 }
-                Tools::logm($msg);
                 Tools::redirect('?');
                 break;
             case 'toggle_fav' :
@@ -220,8 +241,21 @@ class Poche
                 }
                 break;
             case 'toggle_archive' :
-                $this->store->archiveById($id, $this->user->getId());
-                Tools::logm('archive link #' . $id);
+                if (isset($_GET['tag_id'])) {
+                    //when we want to archive a whole tag
+                    $tag_id = $_GET['tag_id'];
+                    $allentry_ids = $this->store->retrieveEntriesByTag($tag_id, $this->user->getId());
+                    $entry_ids = array();
+                    foreach ($allentry_ids as $eachentry) {
+                        $entry_ids[] = $eachentry[0];
+                    }
+                } else { //archive a single article
+                    $entry_ids = array($id);
+                }
+                foreach($entry_ids as $id) {
+                    $this->store->archiveById($id, $this->user->getId());
+                    Tools::logm('archive link #' . $id);
+                }
                 if ( Tools::isAjaxRequest() ) {
                   echo 1;
                   exit;
@@ -414,9 +448,12 @@ class Poche
                     }
 
                     # flattr checking
-                    $flattr = new FlattrItem();
-                    $flattr->checkItem($entry['url'], $entry['id']);
-
+                    $flattr = NULL;
+                    if (FLATTR) {
+                        $flattr = new FlattrItem();
+                        $flattr->checkItem($entry['url'], $entry['id']);
+                    }
+                    
                     # tags
                     $tags = $this->store->retrieveTagsByEntry($entry['id']);
 
@@ -549,6 +586,8 @@ class Poche
                 Tools::redirect($referer);
             }
             $this->messages->add('e', _('login failed: bad login or password'));
+            // log login failure in web server log to allow fail2ban usage
+            error_log('user '.$login.' authentication failure');
             Tools::logm('login failed');
             Tools::redirect();
         }
@@ -634,7 +673,18 @@ class Poche
                         $urlsInserted[] = $url; //add
                         if (isset($record['tags']) && trim($record['tags'])) {
 
-                            // @TODO: set tags
+                            $tags = explode(',', $record['tags']);														
+							foreach($tags as $tag) {
+								$entry_id = $id;
+								$tag_id = $this->store->retrieveTagByValue($tag);
+								if ($tag_id) {
+									$this->store->setTagToEntry($tag_id['id'], $entry_id);									
+								} else {
+									$this->store->createTag($tag);
+									$tag_id = $this->store->retrieveTagByValue($tag);
+									$this->store->setTagToEntry($tag_id['id'], $entry_id);
+								}
+							}
 
                         }
                     }
@@ -757,10 +807,11 @@ class Poche
      *
      * @param $token
      * @param $user_id
-     * @param $tag_id
-     * @param string $type
+     * @param $tag_id if $type is 'tag', the id of the tag to generate feed for
+     * @param string $type the type of feed to generate
+     * @param int $limit the maximum number of items (0 means all)
      */
-    public function generateFeeds($token, $user_id, $tag_id, $type = 'home')
+    public function generateFeeds($token, $user_id, $tag_id, $type = 'home', $limit = 0)
     {
         $allowed_types = array('home', 'fav', 'archive', 'tag');
         $config = $this->store->getConfigUser($user_id);
@@ -787,8 +838,13 @@ class Poche
             $entries = $this->store->getEntriesByView($type, $user_id);
         }
 
+        // if $limit is set to zero, use all entries
+        if (0 == $limit) {
+            $limit = count($entries);
+        }
         if (count($entries) > 0) {
-            foreach ($entries as $entry) {
+            for ($i = 0; $i < min(count($entries), $limit); $i++) {
+                $entry = $entries[$i];
                 $newItem = $feed->createNewItem();
                 $newItem->setTitle($entry['title']);
                 $newItem->setSource(Tools::getPocheUrl() . '?view=view&amp;id=' . $entry['id']);
