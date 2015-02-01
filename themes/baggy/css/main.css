@@ -737,7 +737,7 @@ a.add-to-wallabag-link-after:after {
   content: "\e80d";
 }
 .icon-random:before {
- // RANDOM ICON TO ADD
+ content: "\e915";
 }
 
 
