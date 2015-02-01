@@ -2927,11 +2927,17 @@ class TCPDF {
 	public function Error($msg) {
 		// unset all class variables
 		$this->_destroy(true);
+		throw new Exception('TCPDF ERROR: '.$msg);
+		/* 
+
+		I had problems with the constants for some reason, so here we force
+		
+		$this->_destroy(true);
 		if (defined('K_TCPDF_THROW_EXCEPTION_ERROR') AND !K_TCPDF_THROW_EXCEPTION_ERROR) {
 			die('<strong>TCPDF ERROR: </strong>'.$msg);
 		} else {
 			throw new Exception('TCPDF ERROR: '.$msg);
-		}
+		}*/
 	}
 
 	/**
@@ -6915,7 +6921,7 @@ class TCPDF {
 				$ph = $this->getHTMLUnitToUnits($h, 0, $this->pdfunit, true) * $this->imgscale * $this->k;
 				$imsize = array($pw, $ph);
 			} else {
-				$this->Error('[Image] Unable to get the size of the image: '.$file);
+				$this->Error('[Image] Unable to fetch image: '.$file);
 			}
 		}
 		// file hash

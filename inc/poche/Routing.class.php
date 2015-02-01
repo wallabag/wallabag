@@ -102,7 +102,8 @@ class Routing
         	$this->wallabag->login($this->referer);
         } elseif (isset($_GET['feed']) && isset($_GET['user_id'])) {
             $tag_id = (isset($_GET['tag_id']) ? intval($_GET['tag_id']) : 0);
-            $this->wallabag->generateFeeds($_GET['token'], filter_var($_GET['user_id'],FILTER_SANITIZE_NUMBER_INT), $tag_id, $_GET['type']);
+            $limit = (isset($_GET['limit']) ? intval($_GET['limit']) : 0);
+            $this->wallabag->generateFeeds($_GET['token'], filter_var($_GET['user_id'],FILTER_SANITIZE_NUMBER_INT), $tag_id, $_GET['type'], $limit);
         }
         
         //allowed ONLY to logged in user
@@ -115,7 +116,7 @@ class Routing
                 // update password
                 $this->wallabag->updatePassword($_POST['password'], $_POST['password_repeat']);
             } elseif (isset($_GET['newuser'])) {
-                $this->wallabag->createNewUser($_POST['newusername'], $_POST['password4newuser']);
+                $this->wallabag->createNewUser($_POST['newusername'], $_POST['password4newuser'], $_POST['newuseremail']);
             } elseif (isset($_GET['deluser'])) {
                 $this->wallabag->deleteUser($_POST['password4deletinguser']);
             } elseif (isset($_GET['epub'])) {

@@ -1,5 +1,5 @@
 <?php
-require_once(dirname(__FILE__)."/readability/Readability.php");
+require_once(dirname(__FILE__)."/../readability/Readability.php");
 require_once(dirname(__FILE__).'/CharacterEntities.php');
 require_once(dirname(__FILE__).'/constants.php');
 require_once(dirname(__FILE__).'/ContentProvider.php');

@@ -1,4 +1,27 @@
 {
+    "name": "wallabag/wallabag",
+    "type": "project",
+    "description": "open source self hostable read-it-later web application",
+    "keywords": ["read-it-later","read it later"],
+    "homepage": "https://github.com/wallabag/wallabag",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nicolas Lœuillet",
+            "email": "nicolas@loeuillet.org",
+            "homepage": "http://www.cdetc.fr",
+            "role": "Developer"
+        },
+        {
+            "name": "Thomas Citharel",
+            "homepage": "http://tcit.fr",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "email": "hello@wallabag.org",
+        "issues": "https://github.com/wallabag/wallabag/issues"
+    },
     "require": {
         "twig/twig": "1.*",
         "twig/extensions": "1.0.*",
