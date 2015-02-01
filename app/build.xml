@@ -9,7 +9,6 @@
     <target name="prepare" depends="clean" description="Prepare for build">
         <exec executable="composer">
             <arg value="install"/>
-            <arg value="--dev"/>
             <arg value="--no-interaction"/>
             <arg value="--working-dir=.."/>
         </exec>
