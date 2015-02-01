@@ -32,7 +32,7 @@
                     {% if nb_results > 1 %}
                 <div class="results">
                     <div class="nb-results">{{ nb_results }} {% trans "results" %}{% if searchterm is defined %}{% trans " found for « " %} {{ searchterm }} »{% endif %}
-                    <a class="random" href="?view=view&id={{ random }}"><span>{% trans "random" %}</span></a></div>
+                    <a class="random" href="?action=random"><span>{% trans "random" %}</span></a></div>
                         {{ page_links | raw }}
                 </div>
                     {% elseif nb_results == 1 %}
