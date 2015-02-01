@@ -67,3 +67,6 @@ a.bad-display span {
 a.print span {
 		background-image: url('../img/default/print.png');
 }
+a.reload span {
+    background-image: url('../img/default/reload.png');
+}
