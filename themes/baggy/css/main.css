@@ -736,8 +736,8 @@ a.add-to-wallabag-link-after:after {
 .icon-print:before {
   content: "\e80d";
 }
-.icon-reload:before {
-/* TODO */
+.icon-random:before {
+ content: "\e915";
 }
 
 
