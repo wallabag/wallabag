@@ -736,6 +736,12 @@ a.add-to-wallabag-link-after:after {
 .icon-print:before {
   content: "\e80d";
 }
+.icon-random:before {
+  content: "\e915";
+}
+.icon-reload:before {
+  content: "\ea2e";
+}
 
 
 /* .icon-image class, for image-based icons

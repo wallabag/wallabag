@@ -202,6 +202,9 @@ class WallabagMobi extends WallabagEBooks
         }
         $mobi->setContentProvider($content);
 
+        // the browser inside Kindle Devices doesn't likes special caracters either, we limit to A-z/0-9
+        $this->bookFileName = preg_replace('/[^A-Za-z0-9\-]/', '', $this->bookFileName);
+
         // we offer file to download
         $mobi->download($this->bookFileName.'.mobi');
         Tools::logm('Mobi file produced');
