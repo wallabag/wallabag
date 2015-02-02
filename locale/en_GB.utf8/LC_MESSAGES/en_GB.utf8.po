@@ -1,0 +1,681 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: wallabag\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-25 15:17+0300\n"
+"PO-Revision-Date: \n"
+"Last-Translator: tcit <tcit@openmailbox.org>\n"
+"Language-Team: \n"
+"Language: en-GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-Basepath: .\n"
+
+msgid "wallabag, a read it later open source system"
+msgstr "wallabag, an open source \"Read It Later\" service"
+
+msgid "login failed: user doesn't exist"
+msgstr "Login failed: user doesn't exist"
+
+msgid "return home"
+msgstr "Return Home"
+
+msgid "config"
+msgstr "Config"
+
+msgid "Saving articles"
+msgstr "Saving articles"
+
+msgid "There are several ways to save an article:"
+msgstr "There are several ways to save an article:"
+
+msgid "read the documentation"
+msgstr "Read the documentation"
+
+msgid "download the extension"
+msgstr "Download the extension"
+
+msgid "Firefox Add-On"
+msgstr "Firefox Add-On"
+
+msgid "Chrome Extension"
+msgstr "Chrome Extension"
+
+msgid "via F-Droid"
+msgstr "via F-Droid"
+
+msgid " or "
+msgstr " or "
+
+msgid "via Google Play"
+msgstr "via Google Play"
+
+msgid "download the application"
+msgstr "Download the application"
+
+msgid "By filling this field"
+msgstr "By filling in this field"
+
+msgid "bag it!"
+msgstr "bag it!"
+
+msgid "Bookmarklet: drag & drop this link to your bookmarks bar"
+msgstr "Bookmarklet: Drag & drop this link to your bookmarks bar"
+
+msgid "Upgrading wallabag"
+msgstr "Upgrading wallabag"
+
+msgid "Installed version"
+msgstr "Installed version"
+
+msgid "Latest stable version"
+msgstr "Latest stable version"
+
+msgid "A more recent stable version is available."
+msgstr "A more recent stable version is available."
+
+msgid "You are up to date."
+msgstr "You are up to date."
+
+msgid "Latest dev version"
+msgstr "Latest dev version"
+
+msgid "A more recent development version is available."
+msgstr "A more recent development version is available."
+
+msgid "Feeds"
+msgstr "Feeds"
+
+msgid ""
+"Your feed token is currently empty and must first be generated to enable "
+"feeds. Click <a href='?feed&amp;action=generate'>here to generate it</a>."
+msgstr ""
+"Your feed token is currently empty. You must generated it to enable feeds. "
+"<a href='?feed&amp;action=generate'>Generate Feed Token</a>."
+
+msgid "Unread feed"
+msgstr "Unread feed"
+
+msgid "Favorites feed"
+msgstr "Favourites feed"
+
+msgid "Archive feed"
+msgstr "Archive feed"
+
+msgid "Your token:"
+msgstr "Your token:"
+
+msgid "Your user id:"
+msgstr "Your user ID:"
+
+msgid ""
+"You can regenerate your token: <a href='?feed&amp;action=generate'>generate!"
+"</a>."
+msgstr "<a href='?feed&amp;action=generate'>Regenerate Token</a>"
+
+msgid "Change your theme"
+msgstr "Change Your Theme"
+
+msgid "Theme:"
+msgstr "Theme:"
+
+msgid "Update"
+msgstr "Update"
+
+msgid "Change your language"
+msgstr "Change Your Language"
+
+msgid "Language:"
+msgstr "Language:"
+
+msgid "Change your password"
+msgstr "Change Your Password"
+
+msgid "New password:"
+msgstr "New password:"
+
+msgid "Password"
+msgstr "Password"
+
+msgid "Repeat your new password:"
+msgstr "Repeat your new password:"
+
+msgid "Import"
+msgstr "Import"
+
+msgid ""
+"You can import your Pocket, Readability, Instapaper, Wallabag or any data in "
+"appropriate json or html format."
+msgstr ""
+"You can import your Pocket, Readability, Instapaper, wallabag or any other "
+"data in JSON or HTML format."
+
+msgid ""
+"Please execute the import script locally as it can take a very long time."
+msgstr "Please run the import script locally as it can take a very long time."
+
+msgid ""
+"Please select export file on your computer and press \"Import\" button "
+"below. Wallabag will parse your file, insert all URLs and start fetching of "
+"articles if required."
+msgstr ""
+"Please select export file on your computer and press the &ldquo;"
+"Import&rdquo; button below. wallabag will parse your file, insert all URLs "
+"and start fetching articles if required. Please execute the import script "
+"locally as it can take a very long time."
+
+msgid "You can click here to fetch content for articles with no content."
+msgstr "Fetch content for articles with no content"
+
+msgid "More info in the official documentation:"
+msgstr "More info in the official documentation:"
+
+msgid ""
+"(<a href=\"http://doc.wallabag.org/en/User_documentation/"
+"Save_your_first_article\" target=\"_blank\" title=\"Documentation\">?</a>)"
+msgstr ""
+"(<a href=\"http://doc.wallabag.org/en/User_documentation/"
+"Save_your_first_article\" target=\"_blank\" title=\"Documentation\">?</a>)"
+
+msgid "Import from Pocket"
+msgstr "Import from Pocket"
+
+#, php-format
+msgid "(you must have a %s file on your server)"
+msgstr "(you must have a %s file on your server)"
+
+msgid "Import from Readability"
+msgstr "Import from Readability"
+
+msgid "Import from Instapaper"
+msgstr "Import from Instapaper"
+
+msgid "Import from wallabag"
+msgstr "Import from wallabag"
+
+msgid "Export your wallabag data"
+msgstr "Export your wallabag data"
+
+msgid "Click here"
+msgstr "Click here"
+
+msgid "to download your database."
+msgstr "to download your database."
+
+msgid "to export your wallabag data."
+msgstr "to export your wallabag data."
+
+msgid "Export JSON"
+msgstr "Export JSON"
+
+msgid "Cache"
+msgstr "Cache"
+
+msgid "to delete cache."
+msgstr "to delete cache."
+
+msgid "Delete Cache"
+msgstr "Delete Cache"
+
+msgid "You can enter multiple tags, separated by commas."
+msgstr "You can enter multiple tags, separated by commas."
+
+msgid "Add tags:"
+msgstr "Add tags:"
+
+msgid "no tags"
+msgstr "no tags"
+
+msgid "The tag has been applied successfully"
+msgstr "The tag has been applied successfully"
+
+msgid "interview"
+msgstr "interview"
+
+msgid "editorial"
+msgstr "editorial"
+
+msgid "video"
+msgstr "video"
+
+msgid "return to article"
+msgstr "Return to article"
+
+msgid "plop"
+msgstr "plop"
+
+msgid ""
+"You can <a href='wallabag_compatibility_test.php'>check your configuration "
+"here</a>."
+msgstr ""
+"You can <a href='wallabag_compatibility_test.php'>check your configuration "
+"here</a>."
+
+msgid "favoris"
+msgstr "Favourites"
+
+msgid "archive"
+msgstr "Archive"
+
+msgid "unread"
+msgstr "Unread"
+
+msgid "by date asc"
+msgstr "by date ascending"
+
+msgid "by date"
+msgstr "by date"
+
+msgid "by date desc"
+msgstr "by date descending"
+
+msgid "by title asc"
+msgstr "by title ascending"
+
+msgid "by title"
+msgstr "by title"
+
+msgid "by title desc"
+msgstr "by title descending"
+
+msgid "Tag"
+msgstr "Tag"
+
+msgid "No articles found."
+msgstr "No articles found."
+
+msgid "Toggle mark as read"
+msgstr "Toggle mark as read"
+
+msgid "toggle favorite"
+msgstr "Toggle favourite"
+
+msgid "delete"
+msgstr "Delete"
+
+msgid "original"
+msgstr "Original"
+
+msgid "estimated reading time:"
+msgstr "Estimated reading time:"
+
+msgid "mark all the entries as read"
+msgstr "Mark all the entries as read"
+
+msgid "results"
+msgstr "Results"
+
+msgid "installation"
+msgstr "Installation"
+
+msgid "install your wallabag"
+msgstr "Install your wallabag"
+
+msgid ""
+"wallabag is still not installed. Please fill the below form to install it. "
+"Don't hesitate to <a href='http://doc.wallabag.org/'>read the documentation "
+"on wallabag website</a>."
+msgstr ""
+"wallabag is still not installed. Please fill in the form to install it.  If "
+"you need help, please <a href='http://doc.wallabag.org/'>read the "
+"documentation on wallabag website</a>."
+
+msgid "Login"
+msgstr "Login"
+
+msgid "Repeat your password"
+msgstr "Repeat your password"
+
+msgid "Install"
+msgstr "Install"
+
+msgid "login to your wallabag"
+msgstr "Login to your wallabag"
+
+msgid "Login to wallabag"
+msgstr "Login to wallabag"
+
+msgid "you are in demo mode, some features may be disabled."
+msgstr "You are in demo mode; some features may be disabled."
+
+msgid "Username"
+msgstr "Username"
+
+msgid "Stay signed in"
+msgstr "Stay signed in"
+
+msgid "(Do not check on public computers)"
+msgstr "(Do not check on public computers)"
+
+msgid "Sign in"
+msgstr "Sign in"
+
+msgid "favorites"
+msgstr "Favourites"
+
+msgid "estimated reading time :"
+msgstr "Estimated reading time:"
+
+msgid "Mark all the entries as read"
+msgstr "Mark all the entries as read"
+
+msgid "Return home"
+msgstr "Return home"
+
+msgid "Back to top"
+msgstr "Back to top"
+
+msgid "Mark as read"
+msgstr "Mark as read"
+
+msgid "Favorite"
+msgstr "Favourite"
+
+msgid "Toggle favorite"
+msgstr "Toggle favourite"
+
+msgid "Delete"
+msgstr "Delete"
+
+msgid "Tweet"
+msgstr "Tweet"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "shaarli"
+msgstr "shaarli"
+
+msgid "flattr"
+msgstr "flattr"
+
+msgid "Does this article appear wrong?"
+msgstr "Does this article display incorrectly?"
+
+msgid "tags:"
+msgstr "tags:"
+
+msgid "Edit tags"
+msgstr "Edit Tags"
+
+msgid "save link!"
+msgstr "Save Link"
+
+msgid "home"
+msgstr "Home"
+
+msgid "tags"
+msgstr "Tags"
+
+msgid "logout"
+msgstr "Logout"
+
+msgid "powered by"
+msgstr "Powered by"
+
+msgid "debug mode is on so cache is off."
+msgstr "Debug mode is on, so the cache is off."
+
+msgid "your wallabag version:"
+msgstr "Your wallabag version:"
+
+msgid "storage:"
+msgstr "Storage:"
+
+msgid "save a link"
+msgstr "Save a Link"
+
+msgid "back to home"
+msgstr "Back to Home"
+
+msgid "toggle mark as read"
+msgstr "Toggle mark as read"
+
+msgid "tweet"
+msgstr "Tweet"
+
+msgid "email"
+msgstr "Email"
+
+msgid "this article appears wrong?"
+msgstr "This article displays incorrectly?"
+
+msgid "No link available here!"
+msgstr "No link available here"
+
+msgid "Poching a link"
+msgstr "bagging a link"
+
+msgid "by filling this field"
+msgstr "by filling in this field"
+
+msgid "bookmarklet: drag & drop this link to your bookmarks bar"
+msgstr "Bookmarklet: Drag & drop this link to your bookmarks bar"
+
+msgid "Drag &amp; drop this link to your bookmarks bar:"
+msgstr "Drag &amp; drop this link to your bookmarks bar:"
+
+msgid "your version"
+msgstr "your version"
+
+msgid "latest stable version"
+msgstr "latest stable version"
+
+msgid "a more recent stable version is available."
+msgstr "A more recent stable version is available."
+
+msgid "you are up to date."
+msgstr "You are up to date."
+
+msgid "latest dev version"
+msgstr "latest development version"
+
+msgid "a more recent development version is available."
+msgstr "A more recent development version is available."
+
+msgid "You can clear cache to check the latest release."
+msgstr ""
+"You can <a href=\"#cache\">clear the cache</a> to check for the latest "
+"release."
+
+msgid "Please execute the import script locally, it can take a very long time."
+msgstr "Please run the import script locally as it can take a very long time."
+
+msgid "More infos in the official doc:"
+msgstr "More information in the official doc:"
+
+msgid "import from Pocket"
+msgstr "Import from Pocket"
+
+msgid "import from Readability"
+msgstr "Import from Readability"
+
+msgid "import from Instapaper"
+msgstr "Import from Instapaper"
+
+msgid "Tags"
+msgstr "Tags"
+
+msgid "Untitled"
+msgstr "Untitled"
+
+msgid "the link has been added successfully"
+msgstr "The link has been added successfully."
+
+msgid "error during insertion : the link wasn't added"
+msgstr "Error during insertion: the link wasn't added."
+
+msgid "the link has been deleted successfully"
+msgstr "The link has been deleted successfully."
+
+msgid "the link wasn't deleted"
+msgstr "The link wasn't deleted."
+
+msgid "Article not found!"
+msgstr "Article not found."
+
+msgid "previous"
+msgstr "Previous"
+
+msgid "next"
+msgstr "Next"
+
+msgid "in demo mode, you can't update your password"
+msgstr "In demo mode, you can't update your password."
+
+msgid "your password has been updated"
+msgstr "Your password has been updated."
+
+msgid ""
+"the two fields have to be filled & the password must be the same in the two "
+"fields"
+msgstr ""
+"The two fields must be filled in, and the password must be the same in both "
+"fields"
+
+msgid "still using the \""
+msgstr "Still using the \""
+
+msgid "that theme does not seem to be installed"
+msgstr "That theme is not installed."
+
+msgid "you have changed your theme preferences"
+msgstr "You have changed your theme preferences."
+
+msgid "that language does not seem to be installed"
+msgstr "That language is not installed."
+
+msgid "you have changed your language preferences"
+msgstr "You have changed your language preferences."
+
+msgid "login failed: you have to fill all fields"
+msgstr "Login failed: you have to fill in all the fields."
+
+msgid "welcome to your wallabag"
+msgstr "Welcome to your wallabag."
+
+msgid "login failed: bad login or password"
+msgstr "Login failed: bad login or password."
+
+msgid "import from instapaper completed"
+msgstr "Import from Instapaper completed."
+
+msgid "import from pocket completed"
+msgstr "Import from Pocket completed."
+
+msgid "import from Readability completed. "
+msgstr "Import from Readability completed."
+
+msgid "import from Poche completed. "
+msgstr "Import from Poche completed. "
+
+msgid "Unknown import provider."
+msgstr "Unknown import provider."
+
+msgid "Incomplete inc/poche/define.inc.php file, please define \""
+msgstr "Incomplete inc/poche/define.inc.php file, please define \""
+
+msgid "Could not find required \""
+msgstr "Could not find required \""
+
+msgid "Uh, there is a problem while generating feeds."
+msgstr "There is a problem generating feeds."
+
+msgid "Cache deleted."
+msgstr "Cache deleted."
+
+msgid "Oops, it seems you don't have PHP 5."
+msgstr "Oops, it seems you don't have PHP 5."
+
+msgid "Add user"
+msgstr "Add User"
+
+msgid "Add a new user :"
+msgstr "Add a new user:"
+
+msgid "Login for new user"
+msgstr "Login for new user:"
+
+msgid "Password for new user"
+msgstr "Password for new user:"
+
+msgid "Email for new user (not required)"
+msgstr "Email for new user (not required):"
+
+msgid "Send"
+msgstr "Send"
+
+msgid "Delete account"
+msgstr "Delete Account"
+
+msgid "You can delete your account by entering your password and validating."
+msgstr "You can delete your account by entering your password and confirming."
+
+msgid "Be careful, data will be erased forever (that is a very long time)."
+msgstr "Be careful, data will be erased forever (that is a very long time)."
+
+msgid "Type here your password"
+msgstr "Enter your password"
+
+msgid "You are the only user, you cannot delete your own account."
+msgstr "You are the only user; you cannot delete your own account."
+
+msgid ""
+"To completely remove wallabag, delete the wallabag folder on your web server "
+"(and eventual databases)."
+msgstr ""
+"To completely remove wallabag, delete the wallabag folder on your web "
+"server.  Then delete any any databases you have created for wallabag."
+
+msgid "Enter your search here"
+msgstr "Enter your search here"
+
+msgid "Tag these results as"
+msgstr "Tag these results as"
+
+# ebook
+msgid "Fancy an E-Book ?"
+msgstr "Fancy an E-Book?"
+
+msgid ""
+"Click on <a href=\"./?epub&amp;method=all\" title=\"Generate ePub\">this "
+"link</a> to get all your articles in one ebook (ePub 3 format)."
+msgstr ""
+"You can <a href=\"./?epub&amp;method=all\" title=\"Generate EPUB\">Generate "
+"an EPUB</a> to get all your articles in one ebook (EPUB 3 format)."
+
+msgid ""
+"This can <b>take a while</b> and can <b>even fail</b> if you have too many "
+"articles, depending on your server configuration."
+msgstr ""
+"This can <b>take a while</b> and can <b>even fail</b> if you have too many "
+"articles, depending on your server configuration."
+
+msgid "Download the articles from this tag in an epub"
+msgstr "Download the articles from this tag as an EPUB"
+
+msgid "Download the articles from this search in an epub"
+msgstr "Download the articles from this search as an EPUB"
+
+msgid "Download the articles from this category in an epub"
+msgstr "Download the articles from this category as an EPUB"
+
+#~ msgid "poche it!"
+#~ msgstr "poche it!"
+
+#~ msgid "Updating poche"
+#~ msgstr "Updating poche"
+
+#~ msgid "create an issue"
+#~ msgstr "create an issue"
+
+#~ msgid "or"
+#~ msgstr "or"
+
+#~ msgid "contact us by mail"
+#~ msgstr "contact us by mail"
+
+#~ msgid "your poche version:"
+#~ msgstr "your poche version:"
