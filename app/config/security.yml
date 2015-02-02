@@ -23,36 +23,37 @@ security:
             pattern:    ^/login$
             anonymous:  ~
 
-        secured_area:
-            pattern:    ^/
-            anonymous: ~
-            form_login:
-                login_path:                     /login
-
-                use_forward:                    false
-
-                check_path:                     /login_check
-
-                post_only:                      true
-
-                always_use_default_target_path: true
-                default_target_path:            /
-                target_path_parameter:          redirect_url
-                use_referer:                    true
-
-                failure_path:                   null
-                failure_forward:                false
-
-                username_parameter:             _username
-                password_parameter:             _password
-
-                csrf_parameter:                 _csrf_token
-                intention:                      authenticate
-
-            logout:
-                path:   /logout
-                target: /
+#        secured_area:
+#            pattern:    ^/
+#            anonymous: ~
+#            form_login:
+#                login_path:                     /login
+#
+#                use_forward:                    false
+#
+#                check_path:                     /login_check
+#
+#                post_only:                      true
+#
+#                always_use_default_target_path: true
+#                default_target_path:            /
+#                target_path_parameter:          redirect_url
+#                use_referer:                    true
+#
+#                failure_path:                   null
+#                failure_forward:                false
+#
+#                username_parameter:             _username
+#                password_parameter:             _password
+#
+#                csrf_parameter:                 _csrf_token
+#                intention:                      authenticate
+#
+#            logout:
+#                path:   /logout
+#                target: /
 
     access_control:
+        - { path: ^/api/doc, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/, roles: ROLE_USER }

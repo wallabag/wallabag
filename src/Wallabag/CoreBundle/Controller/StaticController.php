@@ -17,4 +17,13 @@ class StaticController extends Controller
             array()
         );
     }
+
+
+    /**
+     * @Route("/", name="homepage")
+     */
+    public function apiAction()
+    {
+        return $this->redirect($this->generateUrl('nelmio_api_doc_index'));
+    }
 }
