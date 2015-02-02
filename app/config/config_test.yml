@@ -14,3 +14,7 @@ web_profiler:
 
 swiftmailer:
     disable_delivery: true
+
+doctrine:
+    dbal:
+        path: %kernel.root_dir%/../data/db/poche_test.sqlite
