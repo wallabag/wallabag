@@ -36,3 +36,8 @@
 # Data for wallabag
 data/assets/*
 data/db/poche*.sqlite
+
+# Editor and System files
+*~
+.idea/
+.DS_Store
