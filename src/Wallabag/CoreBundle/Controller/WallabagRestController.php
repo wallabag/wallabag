@@ -147,6 +147,9 @@ class WallabagRestController extends Controller
      */
     public function deleteEntriesAction(Entries $entry)
     {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($entry);
+        $em->flush();
     }
 
     /**
