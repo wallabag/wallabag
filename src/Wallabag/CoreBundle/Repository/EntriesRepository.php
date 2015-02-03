@@ -83,10 +83,15 @@ class EntriesRepository extends EntityRepository
         //TODO tous les paramètres ne sont pas utilisés, à corriger
         $qb = $this->createQueryBuilder('e')
             ->select('e')
-            ->where('e.isFav =:isStarred')->setParameter('isStarred', $isStarred)
-            ->andWhere('e.isRead =:isArchived')->setParameter('isArchived', $isArchived)
-            ->andWhere('e.userId =:userId')->setParameter('userId', $userId)
-            ->getQuery()
+            ->where('e.userId =:userId')->setParameter('userId', $userId);
+        if ($isStarred == '1' || $isStarred == '0') {
+            $qb = $qb->andWhere('e.isFav =:isStarred')->setParameter('isStarred', $isStarred);
+        }
+        if ($isArchived == '1' || $isArchived == '0') {
+            $qb = $qb->andWhere('e.isRead =:isArchived')->setParameter('isArchived', $isArchived);
+        }
+
+        $qb = $qb->getQuery()
             ->getResult(Query::HYDRATE_ARRAY);
 
         return $qb;

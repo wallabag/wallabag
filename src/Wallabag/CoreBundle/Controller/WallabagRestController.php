@@ -16,9 +16,9 @@ class WallabagRestController extends Controller
      *
      * @ApiDoc(
      *       parameters={
-     *          {"name"="archive", "dataType"="integer", "required"=false, "format"="'0' or '1', default '0'", "description"="filter by archived status."},
-     *          {"name"="star", "dataType"="integer", "required"=false, "format"="'0' or '1', default '0'", "description"="filter by starred status."},
-     *          {"name"="delete", "dataType"="integer", "required"=false, "format"="'0' or '1', default '0'", "description"="filter by deleted status."},
+     *          {"name"="archive", "dataType"="integer", "required"=false, "format"="'0' or '1', default: not filtered", "description"="filter by archived status."},
+     *          {"name"="star", "dataType"="integer", "required"=false, "format"="'0' or '1', default: not filtered", "description"="filter by starred status."},
+     *          {"name"="delete", "dataType"="integer", "required"=false, "format"="'0' or '1', default: not filtered", "description"="filter by deleted status."},
      *          {"name"="sort", "dataType"="string", "required"=false, "format"="'created' or 'updated', default 'created'", "description"="sort entries by date."},
      *          {"name"="order", "dataType"="string", "required"=false, "format"="'asc' or 'desc', default 'desc'", "description"="order of sort."},
      *          {"name"="page", "dataType"="integer", "required"=false, "format"="default '1'", "description"="what page you want."},
@@ -30,9 +30,9 @@ class WallabagRestController extends Controller
      */
     public function getEntriesAction(Request $request)
     {
-        $isArchived = $request->query->get('archive', 0);
-        $isStarred  = $request->query->get('star', 0);
-        $isDeleted  = $request->query->get('delete', 0);
+        $isArchived = $request->query->get('archive', -1);
+        $isStarred  = $request->query->get('star', -1);
+        $isDeleted  = $request->query->get('delete', -1);
         $sort       = $request->query->get('sort', 'created');
         $order      = $request->query->get('order', 'desc');
         $page       = $request->query->get('page', 1);
