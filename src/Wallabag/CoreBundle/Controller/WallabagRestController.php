@@ -114,8 +114,26 @@ class WallabagRestController extends Controller
      *       }
      * )
      */
-    public function patchEntriesAction(Entries $entry)
+    public function patchEntriesAction(Entries $entry, Request $request)
     {
+        $isStarred = $request->get('star', -1);
+        $isArchived = $request->get('archive', -1);
+        $title = $request->get('title', -1);
+
+        if ($isStarred == '0' || $isStarred == '1') {
+            $entry->setIsFav($isStarred);
+        }
+        if ($isArchived == '0' || $isArchived == '1') {
+            $entry->setIsRead($isArchived);
+        }
+        if (is_string($title)) {
+            $entry->setTitle($title);
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+
+        return $entry;
     }
 
     /**
