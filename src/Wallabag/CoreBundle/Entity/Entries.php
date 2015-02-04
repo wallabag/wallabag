@@ -39,18 +39,25 @@ class Entries
     private $url;
 
     /**
-     * @var string
+     * @var boolean
      *
-     * @ORM\Column(name="is_read", type="decimal", precision=10, scale=0, nullable=true)
+     * @ORM\Column(name="is_read", type="boolean", options={"default" = false})
      */
-    private $isRead = '0';
+    private $isRead;
 
     /**
-     * @var string
+     * @var boolean
      *
-     * @ORM\Column(name="is_fav", type="decimal", precision=10, scale=0, nullable=true)
+     * @ORM\Column(name="is_fav", type="boolean", options={"default" = false})
      */
-    private $isFav = '0';
+    private $isFav;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_deleted", type="boolean", options={"default" = false})
+     */
+    private $isDeleted;
 
     /**
      * @var string
@@ -65,13 +72,6 @@ class Entries
      * @ORM\Column(name="user_id", type="decimal", precision=10, scale=0, nullable=true)
      */
     private $userId;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="is_deleted", type="decimal", precision=10, scale=0, nullable=true)
-     */
-    private $isDeleted = '0';
 
     /**
      * Get id
