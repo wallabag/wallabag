@@ -18,7 +18,6 @@ class StaticController extends Controller
         );
     }
 
-
     /**
      * @Route("/", name="homepage")
      */

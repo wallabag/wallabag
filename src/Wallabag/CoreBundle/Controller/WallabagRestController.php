@@ -33,9 +33,9 @@ class WallabagRestController extends Controller
     {
         // TODO isArchived, isStarred et isDeleted ne doivent pas avoir de valeur par défaut
         // TODO Si on ne passe rien, on ne filtre pas sur le statut.
-        $isArchived = $request->query->get('archive', 0);
-        $isStarred  = $request->query->get('star', 0);
-        $isDeleted  = $request->query->get('delete', 0);
+        $isArchived = $request->query->get('archive');
+        $isStarred  = $request->query->get('star');
+        $isDeleted  = $request->query->get('delete');
         $sort       = $request->query->get('sort', 'created');
         $order      = $request->query->get('order', 'desc');
         $page       = $request->query->get('page', 1);
@@ -45,7 +45,7 @@ class WallabagRestController extends Controller
         $entries = $this
             ->getDoctrine()
             ->getRepository('WallabagCoreBundle:Entries')
-            ->findEntries(1, (int) $isArchived, (int) $isStarred, (int) $isDeleted, $sort, $order);
+            ->findEntries(1, $isArchived, $isStarred, $isDeleted, $sort, $order);
 
         if (!is_array($entries)) {
             throw $this->createNotFoundException();
