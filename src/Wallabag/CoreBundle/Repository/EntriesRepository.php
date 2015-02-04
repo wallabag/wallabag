@@ -86,8 +86,7 @@ class EntriesRepository extends EntityRepository
         //TODO tous les paramètres ne sont pas utilisés, à corriger
         $qb = $this->createQueryBuilder('e')
             ->select('e')
-            ->where('e.userId =:userId')->setParameter('userId', $userId)
-            ->andWhere('e.isDeleted=0');
+            ->where('e.userId =:userId')->setParameter('userId', $userId);
 
         if (!is_null($isArchived)) {
             $qb->andWhere('e.isRead =:isArchived')->setParameter('isArchived', $isArchived);
@@ -95,6 +94,10 @@ class EntriesRepository extends EntityRepository
 
         if (!is_null($isStarred)) {
             $qb->andWhere('e.isFav =:isStarred')->setParameter('isStarred', $isStarred);
+        }
+
+        if (!is_null($isDeleted)) {
+            $qb->andWhere('e.isDeleted =:isDeleted')->setParameter('isDeleted', $isDeleted);
         }
 
         return $qb

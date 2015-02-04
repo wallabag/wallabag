@@ -17,8 +17,8 @@ class WallabagRestController extends Controller
      *
      * @ApiDoc(
      *       parameters={
-     *          {"name"="archive", "dataType"="integer", "required"=false, "format"="'0' or '1', default '0'", "description"="filter by archived status."},
-     *          {"name"="star", "dataType"="integer", "required"=false, "format"="'0' or '1', default '0'", "description"="filter by starred status."},
+     *          {"name"="archive", "dataType"="integer", "required"=false, "format"="'0' or '1', all entries by default", "description"="filter by archived status."},
+     *          {"name"="star", "dataType"="integer", "required"=false, "format"="'0' or '1', all entries by default", "description"="filter by starred status."},
      *          {"name"="delete", "dataType"="integer", "required"=false, "format"="'0' or '1', default '0'", "description"="filter by deleted status."},
      *          {"name"="sort", "dataType"="string", "required"=false, "format"="'created' or 'updated', default 'created'", "description"="sort entries by date."},
      *          {"name"="order", "dataType"="string", "required"=false, "format"="'asc' or 'desc', default 'desc'", "description"="order of sort."},
@@ -31,11 +31,9 @@ class WallabagRestController extends Controller
      */
     public function getEntriesAction(Request $request)
     {
-        // TODO isArchived, isStarred et isDeleted ne doivent pas avoir de valeur par défaut
-        // TODO Si on ne passe rien, on ne filtre pas sur le statut.
         $isArchived = $request->query->get('archive');
         $isStarred  = $request->query->get('star');
-        $isDeleted  = $request->query->get('delete');
+        $isDeleted  = $request->query->get('delete', 0);
         $sort       = $request->query->get('sort', 'created');
         $order      = $request->query->get('order', 'desc');
         $page       = $request->query->get('page', 1);
