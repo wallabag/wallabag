@@ -1,6 +1,10 @@
 # This file is a "template" of what your parameters.yml file should look like
 parameters:
     database_driver:   pdo_sqlite
+    database_port: ~
+    database_name: symfony
+    database_user: root
+    database_password: ~
     database_path: "%kernel.root_dir%/../data/db/poche.sqlite"
 
     mailer_transport:  smtp
