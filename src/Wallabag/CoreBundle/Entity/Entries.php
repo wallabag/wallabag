@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\EntriesRepository")
  * @ORM\Table(name="entries")
+ * @ORM\HasLifecycleCallbacks()
  *
  */
 class Entries
@@ -19,9 +20,9 @@ class Entries
      *
      * @ORM\Column(name="id", type="integer", nullable=true)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    private $id = null;
 
     /**
      * @var string
@@ -41,23 +42,23 @@ class Entries
     /**
      * @var boolean
      *
-     * @ORM\Column(name="is_read", type="boolean", options={"default" = false})
+     * @ORM\Column(name="is_read", type="boolean", nullable=true, options={"default" = false})
      */
-    private $isRead;
+    private $isRead = false;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="is_fav", type="boolean", options={"default" = false})
+     * @ORM\Column(name="is_fav", type="boolean", nullable=true, options={"default" = false})
      */
-    private $isFav;
+    private $isFav = false;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="is_deleted", type="boolean", options={"default" = false})
+     * @ORM\Column(name="is_deleted", type="boolean", nullable=true, options={"default" = false})
      */
-    private $isDeleted;
+    private $isDeleted = false;
 
     /**
      * @var string
@@ -67,11 +68,60 @@ class Entries
     private $content;
 
     /**
+     * @var date
+     *
+     * @ORM\Column(name="created_at", type="datetime", nullable=true)
+     */
+    private $createdAt;
+
+    /**
+     * @var date
+     *
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     */
+    private $updatedAt;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="user_id", type="decimal", precision=10, scale=0, nullable=true)
      */
     private $userId;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="comments", type="text", nullable=true)
+     */
+    private $comments;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="mimetype", type="text", nullable=true)
+     */
+    private $mimetype;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="reading_type", type="integer", nullable=true)
+     */
+    private $readingTime;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="domain_name", type="text", nullable=true)
+     */
+    private $domainName;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_public", type="boolean", nullable=true, options={"default" = false})
+     */
+    private $isPublic;
 
     /**
      * Get id
@@ -249,5 +299,119 @@ class Entries
     public function setDeleted($isDeleted)
     {
         $this->isDeleted = $isDeleted;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param mixed $createdAt
+     * @ORM\PrePersist
+     */
+    public function setCreatedAt()
+    {
+        $this->createdAt = new \DateTime();
+    }
+
+    /**
+     * @return string
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param string $updatedAt
+     * @ORM\PreUpdate
+     */
+    public function setUpdatedAt()
+    {
+        $this->updatedAt = new \DateTime();
+    }
+
+    /**
+     * @return string
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param string $comments
+     */
+    public function setComments($comments)
+    {
+        $this->comments = $comments;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMimetype()
+    {
+        return $this->mimetype;
+    }
+
+    /**
+     * @param string $mimetype
+     */
+    public function setMimetype($mimetype)
+    {
+        $this->mimetype = $mimetype;
+    }
+
+    /**
+     * @return int
+     */
+    public function getReadingTime()
+    {
+        return $this->readingTime;
+    }
+
+    /**
+     * @param int $readingTime
+     */
+    public function setReadingTime($readingTime)
+    {
+        $this->readingTime = $readingTime;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDomainName()
+    {
+        return $this->domainName;
+    }
+
+    /**
+     * @param string $domainName
+     */
+    public function setDomainName($domainName)
+    {
+        $this->domainName = $domainName;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isIsPublic()
+    {
+        return $this->isPublic;
+    }
+
+    /**
+     * @param boolean $isPublic
+     */
+    public function setIsPublic($isPublic)
+    {
+        $this->isPublic = $isPublic;
     }
 }
