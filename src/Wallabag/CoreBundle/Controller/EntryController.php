@@ -177,7 +177,8 @@ class EntryController extends Controller
     public function deleteEntryAction(Request $request, Entries $entry)
     {
         $em = $this->getDoctrine()->getManager();
-        $em->remove($entry);
+        $entry->setDeleted(1);
+        $em->persist($entry);
         $em->flush();
 
         $this->get('session')->getFlashBag()->add(

@@ -25,6 +25,7 @@ class EntriesRepository extends EntityRepository
             ->setMaxResults($maxResults)
             ->where('e.isRead = 0')
             ->andWhere('e.userId =:userId')->setParameter('userId', $userId)
+            ->andWhere('e.isDeleted=0')
             ->getQuery();
 
         $paginator = new Paginator($qb);
@@ -48,6 +49,7 @@ class EntriesRepository extends EntityRepository
             ->setMaxResults($maxResults)
             ->where('e.isRead = 1')
             ->andWhere('e.userId =:userId')->setParameter('userId', $userId)
+            ->andWhere('e.isDeleted=0')
             ->getQuery();
 
         $paginator = new Paginator($qb);
@@ -71,6 +73,7 @@ class EntriesRepository extends EntityRepository
             ->setMaxResults($maxResults)
             ->where('e.isFav = 1')
             ->andWhere('e.userId =:userId')->setParameter('userId', $userId)
+            ->andWhere('e.isDeleted=0')
             ->getQuery();
 
         $paginator = new Paginator($qb);
@@ -86,6 +89,7 @@ class EntriesRepository extends EntityRepository
             ->where('e.isFav =:isStarred')->setParameter('isStarred', $isStarred)
             ->andWhere('e.isRead =:isArchived')->setParameter('isArchived', $isArchived)
             ->andWhere('e.userId =:userId')->setParameter('userId', $userId)
+            ->andWhere('e.isDeleted=0')
             ->getQuery()
             ->getResult(Query::HYDRATE_ARRAY);
 

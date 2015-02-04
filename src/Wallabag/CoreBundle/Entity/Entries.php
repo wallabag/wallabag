@@ -67,6 +67,13 @@ class Entries
     private $userId;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="is_deleted", type="decimal", precision=10, scale=0, nullable=true)
+     */
+    private $isDeleted = '0';
+
+    /**
      * Get id
      *
      * @return integer
@@ -226,5 +233,21 @@ class Entries
     public function getUserId()
     {
         return $this->userId;
+    }
+
+    /**
+     * @return string
+     */
+    public function isDeleted()
+    {
+        return $this->isDeleted;
+    }
+
+    /**
+     * @param string $isDeleted
+     */
+    public function setDeleted($isDeleted)
+    {
+        $this->isDeleted = $isDeleted;
     }
 }

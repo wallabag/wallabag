@@ -5,6 +5,7 @@ namespace Wallabag\CoreBundle\Controller;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Wallabag\CoreBundle\Entity\Entries;
 use Wallabag\CoreBundle\Entity\Tags;
 use Wallabag\CoreBundle\Service\Extractor;
@@ -30,6 +31,8 @@ class WallabagRestController extends Controller
      */
     public function getEntriesAction(Request $request)
     {
+        // TODO isArchived, isStarred et isDeleted ne doivent pas avoir de valeur par défaut
+        // TODO Si on ne passe rien, on ne filtre pas sur le statut.
         $isArchived = $request->query->get('archive', 0);
         $isStarred  = $request->query->get('star', 0);
         $isDeleted  = $request->query->get('delete', 0);
@@ -129,6 +132,16 @@ class WallabagRestController extends Controller
      */
     public function deleteEntriesAction(Entries $entry)
     {
+        if ($entry->isDeleted()) {
+            throw new NotFoundHttpException('This entry is already deleted');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $entry->setDeleted(1);
+        $em->persist($entry);
+        $em->flush();
+
+        return $entry;
     }
 
     /**
