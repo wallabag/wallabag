@@ -11,7 +11,7 @@
 $errors = array();
 $successes = array();
 
-require_once('wallabag_compatibility_test.php');
+require_once('install_functions.php');
 
 if (isset($_GET['clean'])) {
     if (is_dir('install')){
