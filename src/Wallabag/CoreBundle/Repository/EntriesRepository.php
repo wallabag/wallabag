@@ -26,6 +26,7 @@ class EntriesRepository extends EntityRepository
             ->where('e.isRead = 0')
             ->andWhere('e.userId =:userId')->setParameter('userId', $userId)
             ->andWhere('e.isDeleted=0')
+            ->orderBy('e.createdAt', 'desc')
             ->getQuery();
 
         $paginator = new Paginator($qb);
@@ -50,6 +51,7 @@ class EntriesRepository extends EntityRepository
             ->where('e.isRead = 1')
             ->andWhere('e.userId =:userId')->setParameter('userId', $userId)
             ->andWhere('e.isDeleted=0')
+            ->orderBy('e.createdAt', 'desc')
             ->getQuery();
 
         $paginator = new Paginator($qb);
@@ -74,6 +76,7 @@ class EntriesRepository extends EntityRepository
             ->where('e.isFav = 1')
             ->andWhere('e.userId =:userId')->setParameter('userId', $userId)
             ->andWhere('e.isDeleted=0')
+            ->orderBy('e.createdAt', 'desc')
             ->getQuery();
 
         $paginator = new Paginator($qb);
@@ -83,7 +86,6 @@ class EntriesRepository extends EntityRepository
 
     public function findEntries($userId, $isArchived, $isStarred, $isDeleted, $sort, $order)
     {
-        //TODO tous les paramètres ne sont pas utilisés, à corriger
         $qb = $this->createQueryBuilder('e')
             ->select('e')
             ->where('e.userId =:userId')->setParameter('userId', $userId);
@@ -98,6 +100,12 @@ class EntriesRepository extends EntityRepository
 
         if (!is_null($isDeleted)) {
             $qb->andWhere('e.isDeleted =:isDeleted')->setParameter('isDeleted', $isDeleted);
+        }
+
+        if ('created' === $sort) {
+            $qb->orderBy('e.createdAt', $order);
+        } elseif ('updated' === $sort) {
+            $qb->orderBy('e.updatedAt', $order);
         }
 
         return $qb
