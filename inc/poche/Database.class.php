@@ -293,7 +293,7 @@ class Database {
             $sql_limit = "LIMIT ".$limit." OFFSET 0";
         }
 
-        $sql        = "SELECT * FROM entries WHERE (content = '' OR content IS NULL) AND title LIKE 'Untitled - Import%' AND user_id=? ORDER BY id " . $sql_limit;
+        $sql        = "SELECT * FROM entries WHERE (content = '' OR content IS NULL) AND title LIKE '%Import%' AND user_id=? ORDER BY id " . $sql_limit;
         $query      = $this->executeQuery($sql, array($user_id));
         $entries    = $query->fetchAll();
 
@@ -302,7 +302,7 @@ class Database {
 
     public function retrieveUnfetchedEntriesCount($user_id)
     {
-      $sql        = "SELECT count(*) FROM entries WHERE (content = '' OR content IS NULL) AND title LIKE 'Untitled - Import%' AND user_id=?";
+      $sql        = "SELECT count(*) FROM entries WHERE (content = '' OR content IS NULL) AND title LIKE '%Import%' AND user_id=?";
       $query      = $this->executeQuery($sql, array($user_id));
       list($count) = $query->fetch();
 

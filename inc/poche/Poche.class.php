@@ -584,7 +584,8 @@ class Poche
                 $tmpEntry = array();
                   $a = $li->find('a');
                   $tmpEntry['url'] = $a[0]->href;
-                  $tmpEntry['tags'] = $a[0]->tags;
+                  //Don't do if not fetched $tmpEntry['title'] = $a[0]->title;
+                  $tmpEntry['tags'] = json_decode( $a[0]->tags );
                   $tmpEntry['is_read'] = $read;
                   if ($tmpEntry['url']) {
                     $data[] = $tmpEntry;
@@ -623,9 +624,26 @@ class Poche
                     $id = $this->store->add($url, $title, $body, $this->user->getId() , $isFavorite, $isRead);
                     if ($id) {
                         $urlsInserted[] = $url; //add
-                        if (isset($record['tags']) && trim($record['tags'])) {
-
-                            // @TODO: set tags
+                        if (isset($record['tags']) /*&& trim($record['tags'])*/) {
+                            foreach( $record['tags'] as $tag )
+                            {
+                                if( $tag !== "" )
+                                {
+                                    // TODO Optimize this : don't use DB access for each tag !
+                                    $stored_tag = $this->store->retrieveTagByValue($tag);
+                                    if (is_null($stored_tag))
+                                    {
+                                        // new tag
+                                        $this->store->createTag($tag);
+                                        $tag_id = $this->store->getLastId();
+                                    } else
+                                    {
+                                        $tag_id = $stored_tag['id'];
+                                    }
+                                    //Tools::logm( $tag_id ." -> ". $id );
+                                    $this->store->setTagToEntry($tag_id, $id);
+                                }
+                            }
 
                         }
                     }
@@ -669,17 +687,24 @@ class Poche
                 $purifier = $this->_getPurifier();
                 foreach($items as $item) {
                     $url = new Url(base64_encode($item['url']));
-                    Tools::logm('Fetching article ' . $item['id']);
-                    $content = Tools::getPageContent($url);
-                    $title = (($content['rss']['channel']['item']['title'] != '') ? $content['rss']['channel']['item']['title'] : _('Untitled'));
-                    $body = (($content['rss']['channel']['item']['description'] != '') ? $content['rss']['channel']['item']['description'] : _('Undefined'));
+                    // Check URL
+                    if( $url->isCorrect() )
+                    {
+                        Tools::logm('Fetching article ' . $item['id']);
+                        $content = Tools::getPageContent($url);
+                        $title = (($content['rss']['channel']['item']['title'] != '') ? $content['rss']['channel']['item']['title'] : _('Untitled'));
+                        $body = (($content['rss']['channel']['item']['description'] != '') ? $content['rss']['channel']['item']['description'] : _('Undefined'));
 
-                    // clean content to prevent xss attack
+                        // clean content to prevent xss attack
 
-                    $title = $purifier->purify($title);
-                    $body = $purifier->purify($body);
-                    $this->store->updateContentAndTitle($item['id'], $title, $body, $this->user->getId());
-                    Tools::logm('Article ' . $item['id'] . ' updated.');
+                        $title = $purifier->purify($title);
+                        $body = $purifier->purify($body);
+                        $this->store->updateContentAndTitle($item['id'], $title, $body, $this->user->getId());
+                        Tools::logm('Article ' . $item['id'] . ' updated.');
+                    } else
+                    {
+                        $this->messages->add('s', 'URL error :' .$item['url'] );
+                    }
                 }
             }
         }
