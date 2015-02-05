@@ -125,7 +125,7 @@ class WallabagRestController extends Controller
         }
 
         if (!is_null($isArchived)) {
-            $entry->setRead($isArchived);
+            $entry->setArchived($isArchived);
         }
 
         if (!is_null($isDeleted)) {
@@ -133,7 +133,7 @@ class WallabagRestController extends Controller
         }
 
         if (!is_null($isStarred)) {
-            $entry->setFav($isStarred);
+            $entry->setStarred($isStarred);
         }
 
         $em = $this->getDoctrine()->getManager();

@@ -42,16 +42,16 @@ class Entries
     /**
      * @var boolean
      *
-     * @ORM\Column(name="is_read", type="boolean", nullable=true, options={"default" = false})
+     * @ORM\Column(name="is_archived", type="boolean", nullable=true, options={"default" = false})
      */
-    private $isRead = false;
+    private $isArchived = false;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="is_fav", type="boolean", nullable=true, options={"default" = false})
+     * @ORM\Column(name="is_starred", type="boolean", nullable=true, options={"default" = false})
      */
-    private $isFav = false;
+    private $isStarred = false;
 
     /**
      * @var boolean
@@ -180,61 +180,61 @@ class Entries
     }
 
     /**
-     * Set isRead
+     * Set isArchived
      *
-     * @param  string  $isRead
+     * @param  string  $isArchived
      * @return Entries
      */
-    public function setRead($isRead)
+    public function setArchived($isArchived)
     {
-        $this->isRead = $isRead;
+        $this->isArchived = $isArchived;
 
         return $this;
     }
 
     /**
-     * Get isRead
+     * Get isArchived
      *
      * @return string
      */
-    public function isRead()
+    public function isArchived()
     {
-        return $this->isRead;
+        return $this->isArchived;
     }
 
     public function toggleArchive()
     {
-        $this->isRead = $this->getIsRead() ^ 1;
+        $this->isArchived = $this->isArchived() ^ 1;
 
         return $this;
     }
 
     /**
-     * Set isFav
+     * Set isStarred
      *
-     * @param  string  $isFav
+     * @param  string  $isStarred
      * @return Entries
      */
-    public function setFav($isFav)
+    public function setStarred($isStarred)
     {
-        $this->isFav = $isFav;
+        $this->isStarred = $isStarred;
 
         return $this;
     }
 
     /**
-     * Get isFav
+     * Get isStarred
      *
      * @return string
      */
-    public function isFav()
+    public function isStarred()
     {
-        return $this->isFav;
+        return $this->isStarred;
     }
 
     public function toggleStar()
     {
-        $this->isFav = $this->getIsFav() ^ 1;
+        $this->isStarred = $this->isStarred() ^ 1;
 
         return $this;
     }
