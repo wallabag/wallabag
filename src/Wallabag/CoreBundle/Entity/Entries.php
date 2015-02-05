@@ -185,7 +185,7 @@ class Entries
      * @param  string  $isRead
      * @return Entries
      */
-    public function setIsRead($isRead)
+    public function setRead($isRead)
     {
         $this->isRead = $isRead;
 
@@ -197,7 +197,7 @@ class Entries
      *
      * @return string
      */
-    public function getIsRead()
+    public function isRead()
     {
         return $this->isRead;
     }
@@ -215,7 +215,7 @@ class Entries
      * @param  string  $isFav
      * @return Entries
      */
-    public function setIsFav($isFav)
+    public function setFav($isFav)
     {
         $this->isFav = $isFav;
 
@@ -227,7 +227,7 @@ class Entries
      *
      * @return string
      */
-    public function getIsFav()
+    public function isFav()
     {
         return $this->isFav;
     }
@@ -402,7 +402,7 @@ class Entries
     /**
      * @return boolean
      */
-    public function isIsPublic()
+    public function isPublic()
     {
         return $this->isPublic;
     }
@@ -410,7 +410,7 @@ class Entries
     /**
      * @param boolean $isPublic
      */
-    public function setIsPublic($isPublic)
+    public function setPublic($isPublic)
     {
         $this->isPublic = $isPublic;
     }
