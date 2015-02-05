@@ -140,7 +140,6 @@ class WallabagRestController extends Controller
         }
 
         $em = $this->getDoctrine()->getManager();
-        $em->persist($entry);
         $em->flush();
 
         return $entry;
@@ -163,7 +162,6 @@ class WallabagRestController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $entry->setDeleted(1);
-        $em->persist($entry);
         $em->flush();
 
         return $entry;
