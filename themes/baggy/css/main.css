@@ -742,6 +742,9 @@ a.add-to-wallabag-link-after:after {
 .icon-reload:before {
   content: "\ea2e";
 }
+.icon-evernote:before {
+  content: "\e603";
+}
 
 
 /* .icon-image class, for image-based icons

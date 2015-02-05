@@ -43,6 +43,11 @@ a.carrot span {
     background-size: 16px 16px;
 }
 
+a.evernote span {
+    background-image: url('../../_global/img/icons/evernote-icon--black.svg');
+    background-size: 16px 16px;
+}
+
 a.diaspora span {
     background-image: url('../../_global/img/icons/diaspora-icon--black.png');
     background-size: 16px 16px;
