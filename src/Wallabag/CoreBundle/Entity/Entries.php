@@ -68,14 +68,14 @@ class Entries
     private $content;
 
     /**
-     * @var date
+     * @var datetime
      *
      * @ORM\Column(name="created_at", type="datetime", nullable=true)
      */
     private $createdAt;
 
     /**
-     * @var date
+     * @var datetime
      *
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
