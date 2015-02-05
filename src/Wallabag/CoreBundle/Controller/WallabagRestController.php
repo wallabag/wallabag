@@ -17,9 +17,9 @@ class WallabagRestController extends Controller
      *
      * @ApiDoc(
      *       parameters={
-     *          {"name"="archive", "dataType"="integer", "required"=false, "format"="'0' or '1', all entries by default", "description"="filter by archived status."},
-     *          {"name"="star", "dataType"="integer", "required"=false, "format"="'0' or '1', all entries by default", "description"="filter by starred status."},
-     *          {"name"="delete", "dataType"="integer", "required"=false, "format"="'0' or '1', default '0'", "description"="filter by deleted status."},
+     *          {"name"="archive", "dataType"="boolean", "required"=false, "format"="true or false, all entries by default", "description"="filter by archived status."},
+     *          {"name"="star", "dataType"="boolean", "required"=false, "format"="true or false, all entries by default", "description"="filter by starred status."},
+     *          {"name"="delete", "dataType"="boolean", "required"=false, "format"="true or false, default '0'", "description"="filter by deleted status."},
      *          {"name"="sort", "dataType"="string", "required"=false, "format"="'created' or 'updated', default 'created'", "description"="sort entries by date."},
      *          {"name"="order", "dataType"="string", "required"=false, "format"="'asc' or 'desc', default 'desc'", "description"="order of sort."},
      *          {"name"="page", "dataType"="integer", "required"=false, "format"="default '1'", "description"="what page you want."},
@@ -109,14 +109,41 @@ class WallabagRestController extends Controller
      *      parameters={
      *          {"name"="title", "dataType"="string", "required"=false},
      *          {"name"="tags", "dataType"="string", "required"=false, "format"="tag1,tag2,tag3", "description"="a comma-separated list of tags."},
-     *          {"name"="archive", "dataType"="integer", "required"=false, "format"="'0' or '1', default '0'", "description"="archived the entry."},
-     *          {"name"="star", "dataType"="integer", "required"=false, "format"="'0' or '1', default '0'", "description"="starred the entry."},
-     *          {"name"="delete", "dataType"="integer", "required"=false, "format"="'0' or '1', default '0'", "description"="flag as deleted. Default false. In case that you don't want to *really* remove it.."},
+     *          {"name"="archive", "dataType"="boolean", "required"=false, "format"="true or false", "description"="archived the entry."},
+     *          {"name"="star", "dataType"="boolean", "required"=false, "format"="true or false", "description"="starred the entry."},
+     *          {"name"="delete", "dataType"="boolean", "required"=false, "format"="true or false", "description"="flag as deleted. Default false. In case that you don't want to *really* remove it.."},
      *       }
      * )
      */
-    public function patchEntriesAction(Entries $entry)
+    public function patchEntriesAction(Entries $entry, Request $request)
     {
+        $title      = $request->request->get("title");
+        $tags       = $request->request->get("tags", array());
+        $isArchived = $request->request->get("archive");
+        $isDeleted  = $request->request->get("delete");
+        $isStarred  = $request->request->get("star");
+
+        if (!is_null($title)) {
+            $entry->setTitle($title);
+        }
+
+        if (!is_null($isArchived)) {
+            $entry->setRead($isArchived);
+        }
+
+        if (!is_null($isDeleted)) {
+            $entry->setDeleted($isDeleted);
+        }
+
+        if (!is_null($isStarred)) {
+            $entry->setFav($isStarred);
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($entry);
+        $em->flush();
+
+        return $entry;
     }
 
     /**
