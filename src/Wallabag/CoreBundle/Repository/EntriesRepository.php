@@ -23,9 +23,9 @@ class EntriesRepository extends EntityRepository
             ->select('e')
             ->setFirstResult($firstResult)
             ->setMaxResults($maxResults)
-            ->where('e.isRead = 0')
+            ->where('e.isArchived = false')
             ->andWhere('e.userId =:userId')->setParameter('userId', $userId)
-            ->andWhere('e.isDeleted=0')
+            ->andWhere('e.isDeleted=false')
             ->orderBy('e.createdAt', 'desc')
             ->getQuery();
 
@@ -48,9 +48,9 @@ class EntriesRepository extends EntityRepository
             ->select('e')
             ->setFirstResult($firstResult)
             ->setMaxResults($maxResults)
-            ->where('e.isRead = 1')
+            ->where('e.isArchived = true')
             ->andWhere('e.userId =:userId')->setParameter('userId', $userId)
-            ->andWhere('e.isDeleted=0')
+            ->andWhere('e.isDeleted=false')
             ->orderBy('e.createdAt', 'desc')
             ->getQuery();
 
@@ -73,9 +73,9 @@ class EntriesRepository extends EntityRepository
             ->select('e')
             ->setFirstResult($firstResult)
             ->setMaxResults($maxResults)
-            ->where('e.isFav = 1')
+            ->where('e.isStarred = true')
             ->andWhere('e.userId =:userId')->setParameter('userId', $userId)
-            ->andWhere('e.isDeleted=0')
+            ->andWhere('e.isDeleted=false')
             ->orderBy('e.createdAt', 'desc')
             ->getQuery();
 
@@ -91,11 +91,11 @@ class EntriesRepository extends EntityRepository
             ->where('e.userId =:userId')->setParameter('userId', $userId);
 
         if (!is_null($isArchived)) {
-            $qb->andWhere('e.isRead =:isArchived')->setParameter('isArchived', $isArchived);
+            $qb->andWhere('e.isArchived =:isArchived')->setParameter('isArchived', $isArchived);
         }
 
         if (!is_null($isStarred)) {
-            $qb->andWhere('e.isFav =:isStarred')->setParameter('isStarred', $isStarred);
+            $qb->andWhere('e.isStarred =:isStarred')->setParameter('isStarred', $isStarred);
         }
 
         if (!is_null($isDeleted)) {
