@@ -7,7 +7,7 @@ php:
 
 branches:
   only:
-    - refactor
+    - v2
 
 before_script:
   - composer self-update
