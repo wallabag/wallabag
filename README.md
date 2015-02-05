@@ -9,7 +9,7 @@ More informations on our website: [wallabag.org](http://wallabag.org)
 Keep in mind it's an **instable** branch, everything can be broken :)
 
 ```
-git clone https://github.com/wallabag/wallabag.git -b refactor
+git clone https://github.com/wallabag/wallabag.git -b v2
 cd wallabag
 composer install
 php app/console wallabag:install
