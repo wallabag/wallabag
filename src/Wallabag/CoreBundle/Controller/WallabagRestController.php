@@ -87,7 +87,7 @@ class WallabagRestController extends Controller
         $entry = new Entries();
         $entry->setUserId(1);
         $entry->setUrl($url);
-        $entry->setTitle(!is_null($request->request->get('title')) ? $request->request->get('title') : $content->getTitle());
+        $entry->setTitle($request->request->get('title') ?: $content->getTitle());
         $entry->setContent($content->getBody());
         $em = $this->getDoctrine()->getManager();
         $em->persist($entry);
