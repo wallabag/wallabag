@@ -10,6 +10,7 @@
         <exec executable="composer">
             <arg value="install"/>
             <arg value="--no-interaction"/>
+            <arg value="--no-progress"/>
             <arg value="--working-dir=.."/>
         </exec>
         <exec executable="php">
