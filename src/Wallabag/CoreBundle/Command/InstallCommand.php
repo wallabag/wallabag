@@ -5,7 +5,7 @@ namespace Wallabag\CoreBundle\Command;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Wallabag\CoreBundle\Entity\Users;
+use Wallabag\CoreBundle\Entity\User;
 use Wallabag\CoreBundle\Entity\UsersConfig;
 
 class InstallCommand extends ContainerAwareCommand
@@ -128,7 +128,7 @@ class InstallCommand extends ContainerAwareCommand
         $dialog = $this->getHelperSet()->get('dialog');
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
 
-        $user = new Users();
+        $user = new User();
         $user->setUsername($dialog->ask($output, '<question>Username</question> <comment>(default: wallabag)</comment> :', 'wallabag'));
         $user->setPassword($dialog->ask($output, '<question>Password</question> <comment>(default: wallabag)</comment> :', 'wallabag'));
         $user->setEmail($dialog->ask($output, '<question>Email:</question>', ''));

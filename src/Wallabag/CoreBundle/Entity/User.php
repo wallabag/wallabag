@@ -7,30 +7,33 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
 /**
- * Users
+ * User
  *
- * @ORM\Table(name="users")
+ * @ORM\Table(name="user")
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks()
  */
-class Users implements AdvancedUserInterface, \Serializable
+class User implements AdvancedUserInterface, \Serializable
 {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer", nullable=true)
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="username", type="text", nullable=true)
+     * @ORM\Column(name="username", type="text")
      */
     private $username;
 
     /**
+     * @var string
+     *
      * @ORM\Column(type="string", length=32)
      */
     private $salt;
@@ -38,7 +41,7 @@ class Users implements AdvancedUserInterface, \Serializable
     /**
      * @var string
      *
-     * @ORM\Column(name="password", type="text", nullable=true)
+     * @ORM\Column(name="password", type="text")
      */
     private $password;
 
@@ -61,10 +64,37 @@ class Users implements AdvancedUserInterface, \Serializable
      */
     private $isActive;
 
+    /**
+     * @var date
+     *
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @var date
+     *
+     * @ORM\Column(name="updated_at", type="datetime")
+     */
+    private $updatedAt;
+
     public function __construct()
     {
         $this->isActive = true;
         $this->salt = md5(uniqid(null, true));
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function timestamps()
+    {
+        if (is_null($this->createdAt)) {
+            $this->createdAt = new \DateTime();
+        }
+
+        $this->updatedAt = new \DateTime();
     }
 
     /**
@@ -81,7 +111,7 @@ class Users implements AdvancedUserInterface, \Serializable
      * Set username
      *
      * @param  string $username
-     * @return Users
+     * @return User
      */
     public function setUsername($username)
     {
@@ -120,7 +150,7 @@ class Users implements AdvancedUserInterface, \Serializable
      * Set password
      *
      * @param  string $password
-     * @return Users
+     * @return User
      */
     public function setPassword($password)
     {
@@ -143,7 +173,7 @@ class Users implements AdvancedUserInterface, \Serializable
      * Set name
      *
      * @param  string $name
-     * @return Users
+     * @return User
      */
     public function setName($name)
     {
@@ -166,7 +196,7 @@ class Users implements AdvancedUserInterface, \Serializable
      * Set email
      *
      * @param  string $email
-     * @return Users
+     * @return User
      */
     public function setEmail($email)
     {
@@ -183,6 +213,22 @@ class Users implements AdvancedUserInterface, \Serializable
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 
     /**
