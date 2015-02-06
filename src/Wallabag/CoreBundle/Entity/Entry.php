@@ -84,13 +84,6 @@ class Entry
     /**
      * @var string
      *
-     * @ORM\Column(name="user_id", type="decimal", precision=10, scale=0, nullable=true)
-     */
-    private $userId;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="comments", type="text", nullable=true)
      */
     private $comments;
@@ -122,6 +115,19 @@ class Entry
      * @ORM\Column(name="is_public", type="boolean", nullable=true, options={"default" = false})
      */
     private $isPublic;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="entries")
+     */
+    private $user;
+
+    /*
+     * @param User     $user
+     */
+    public function __construct(User $user)
+    {
+        $this->user = $user;
+    }
 
     /**
      * Get id
@@ -263,26 +269,11 @@ class Entry
     }
 
     /**
-     * Set userId
-     *
-     * @param  string $userId
-     * @return Entry
+     * @return User
      */
-    public function setUserId($userId)
+    public function getUser()
     {
-        $this->userId = $userId;
-
-        return $this;
-    }
-
-    /**
-     * Get userId
-     *
-     * @return string
-     */
-    public function getUserId()
-    {
-        return $this->userId;
+        return $this->user;
     }
 
     /**
