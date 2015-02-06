@@ -3,7 +3,6 @@
 namespace Wallabag\CoreBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
 
 class WallabagRestControllerTest extends WebTestCase
 {
