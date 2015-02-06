@@ -35,8 +35,8 @@
                 {% endif %}
 
                 <ul class="tools links">
-                    <li><a title="{% trans %}Toggle mark as read{% endtrans %}" class="tool icon-check icon {% if entry.isRead == 0 %}archive-off{% else %}archive{% endif %}" href="{{ path('archive_entry', { 'id': entry.id }) }}"><span>{% trans %}Toggle mark as read{% endtrans %}</span></a></li>
-                    <li><a title="{% trans %}toggle favorite{% endtrans %}" class="tool icon-star icon {% if entry.isFav == 0 %}fav-off{% else %}fav{% endif %}" href="{{ path('star_entry', { 'id': entry.id }) }}"><span>{% trans %}toggle favorite{% endtrans %}</span></a></li>
+                    <li><a title="{% trans %}Toggle mark as read{% endtrans %}" class="tool icon-check icon {% if entry.isArchived == 0 %}archive-off{% else %}archive{% endif %}" href="{{ path('archive_entry', { 'id': entry.id }) }}"><span>{% trans %}Toggle mark as read{% endtrans %}</span></a></li>
+                    <li><a title="{% trans %}toggle favorite{% endtrans %}" class="tool icon-star icon {% if entry.isStarred == 0 %}fav-off{% else %}fav{% endif %}" href="{{ path('star_entry', { 'id': entry.id }) }}"><span>{% trans %}toggle favorite{% endtrans %}</span></a></li>
                     <li><a title="{% trans %}delete{% endtrans %}" class="tool delete icon-trash icon" href="{{ path('delete_entry', { 'id': entry.id }) }}"><span>{% trans %}delete{% endtrans %}</span></a></li>
                     <li><a href="{{ entry.url|e }}" target="_blank" title="{% trans %}original{% endtrans %} : {{ entry.title|e }}" class="tool link icon-link icon"><span>{{ entry.url | e | domainName }}</span></a></li>
                 </ul>

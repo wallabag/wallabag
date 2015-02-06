@@ -2,6 +2,6 @@
 
 namespace Wallabag\CoreBundle\Helper;
 
-class Entries
+class Entry
 {
 }

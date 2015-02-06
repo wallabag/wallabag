@@ -6,23 +6,23 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Entries
+ * Entry
  *
- * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\EntriesRepository")
- * @ORM\Table(name="entries")
+ * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\EntryRepository")
+ * @ORM\Table(name="entry")
  * @ORM\HasLifecycleCallbacks()
  *
  */
-class Entries
+class Entry
 {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer", nullable=true)
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id = null;
+    private $id;
 
     /**
      * @var string
@@ -42,21 +42,21 @@ class Entries
     /**
      * @var boolean
      *
-     * @ORM\Column(name="is_read", type="boolean", nullable=true, options={"default" = false})
+     * @ORM\Column(name="is_archived", type="boolean")
      */
-    private $isRead = false;
+    private $isArchived = false;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="is_fav", type="boolean", nullable=true, options={"default" = false})
+     * @ORM\Column(name="is_starred", type="boolean")
      */
-    private $isFav = false;
+    private $isStarred = false;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="is_deleted", type="boolean", nullable=true, options={"default" = false})
+     * @ORM\Column(name="is_deleted", type="boolean")
      */
     private $isDeleted = false;
 
@@ -70,14 +70,14 @@ class Entries
     /**
      * @var date
      *
-     * @ORM\Column(name="created_at", type="datetime", nullable=true)
+     * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
 
     /**
      * @var date
      *
-     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
 
@@ -136,8 +136,8 @@ class Entries
     /**
      * Set title
      *
-     * @param  string  $title
-     * @return Entries
+     * @param  string $title
+     * @return Entry
      */
     public function setTitle($title)
     {
@@ -159,8 +159,8 @@ class Entries
     /**
      * Set url
      *
-     * @param  string  $url
-     * @return Entries
+     * @param  string $url
+     * @return Entry
      */
     public function setUrl($url)
     {
@@ -180,61 +180,61 @@ class Entries
     }
 
     /**
-     * Set isRead
+     * Set isArchived
      *
-     * @param  string  $isRead
-     * @return Entries
+     * @param  string $isArchived
+     * @return Entry
      */
-    public function setRead($isRead)
+    public function setArchived($isArchived)
     {
-        $this->isRead = $isRead;
+        $this->isArchived = $isArchived;
 
         return $this;
     }
 
     /**
-     * Get isRead
+     * Get isArchived
      *
      * @return string
      */
-    public function isRead()
+    public function isArchived()
     {
-        return $this->isRead;
+        return $this->isArchived;
     }
 
     public function toggleArchive()
     {
-        $this->isRead = $this->getIsRead() ^ 1;
+        $this->isArchived = $this->isArchived() ^ 1;
 
         return $this;
     }
 
     /**
-     * Set isFav
+     * Set isStarred
      *
-     * @param  string  $isFav
-     * @return Entries
+     * @param  string $isStarred
+     * @return Entry
      */
-    public function setFav($isFav)
+    public function setStarred($isStarred)
     {
-        $this->isFav = $isFav;
+        $this->isStarred = $isStarred;
 
         return $this;
     }
 
     /**
-     * Get isFav
+     * Get isStarred
      *
      * @return string
      */
-    public function isFav()
+    public function isStarred()
     {
-        return $this->isFav;
+        return $this->isStarred;
     }
 
     public function toggleStar()
     {
-        $this->isFav = $this->getIsFav() ^ 1;
+        $this->isStarred = $this->isStarred() ^ 1;
 
         return $this;
     }
@@ -242,8 +242,8 @@ class Entries
     /**
      * Set content
      *
-     * @param  string  $content
-     * @return Entries
+     * @param  string $content
+     * @return Entry
      */
     public function setContent($content)
     {
@@ -265,8 +265,8 @@ class Entries
     /**
      * Set userId
      *
-     * @param  string  $userId
-     * @return Entries
+     * @param  string $userId
+     * @return Entry
      */
     public function setUserId($userId)
     {
@@ -310,15 +310,6 @@ class Entries
     }
 
     /**
-     * @param mixed $createdAt
-     * @ORM\PrePersist
-     */
-    public function setCreatedAt()
-    {
-        $this->createdAt = new \DateTime();
-    }
-
-    /**
      * @return string
      */
     public function getUpdatedAt()
@@ -327,11 +318,15 @@ class Entries
     }
 
     /**
-     * @param string $updatedAt
+     * @ORM\PrePersist
      * @ORM\PreUpdate
      */
-    public function setUpdatedAt()
+    public function timestamps()
     {
+        if (is_null($this->createdAt)) {
+            $this->createdAt = new \DateTime();
+        }
+
         $this->updatedAt = new \DateTime();
     }
 
