@@ -302,7 +302,7 @@ class Entry
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getCreatedAt()
     {
