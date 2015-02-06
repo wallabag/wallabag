@@ -5,8 +5,8 @@ namespace Wallabag\CoreBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Repository;
-use Wallabag\CoreBundle\Entity\Entries;
 use Wallabag\CoreBundle\Service\Extractor;
 use Wallabag\CoreBundle\Helper\Url;
 
@@ -19,7 +19,7 @@ class EntryController extends Controller
      */
     public function addEntryAction(Request $request)
     {
-        $entry = new Entries();
+        $entry = new Entry();
         $entry->setUserId(1);
 
         $form = $this->createFormBuilder($entry)
@@ -60,7 +60,7 @@ class EntryController extends Controller
      */
     public function showUnreadAction()
     {
-        $repository = $this->getDoctrine()->getRepository('WallabagCoreBundle:Entries');
+        $repository = $this->getDoctrine()->getRepository('WallabagCoreBundle:Entry');
         // TODO don't give the user ID like this
         // TODO change pagination
         $entries = $repository->findUnreadByUser(1, 0);
@@ -79,7 +79,7 @@ class EntryController extends Controller
      */
     public function showArchiveAction()
     {
-        $repository = $this->getDoctrine()->getRepository('WallabagCoreBundle:Entries');
+        $repository = $this->getDoctrine()->getRepository('WallabagCoreBundle:Entry');
         // TODO don't give the user ID like this
         // TODO change pagination
         $entries = $repository->findArchiveByUser(1, 0);
@@ -98,7 +98,7 @@ class EntryController extends Controller
      */
     public function showStarredAction()
     {
-        $repository = $this->getDoctrine()->getRepository('WallabagCoreBundle:Entries');
+        $repository = $this->getDoctrine()->getRepository('WallabagCoreBundle:Entry');
         // TODO don't give the user ID like this
         // TODO change pagination
         $entries = $repository->findStarredByUser(1, 0);
@@ -112,11 +112,11 @@ class EntryController extends Controller
     /**
      * Shows entry content
      *
-     * @param  Entries                                    $entry
+     * @param  Entry                                      $entry
      * @Route("/view/{id}", requirements={"id" = "\d+"}, name="view")
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function viewAction(Entries $entry)
+    public function viewAction(Entry $entry)
     {
         return $this->render(
             'WallabagCoreBundle:Entry:entry.html.twig',
@@ -128,11 +128,11 @@ class EntryController extends Controller
      * Changes read status for an entry
      *
      * @param  Request                                            $request
-     * @param  Entries                                            $entry
+     * @param  Entry                                              $entry
      * @Route("/archive/{id}", requirements={"id" = "\d+"}, name="archive_entry")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function toggleArchiveAction(Request $request, Entries $entry)
+    public function toggleArchiveAction(Request $request, Entry $entry)
     {
         $entry->toggleArchive();
         $this->getDoctrine()->getManager()->flush();
@@ -149,11 +149,11 @@ class EntryController extends Controller
      * Changes favorite status for an entry
      *
      * @param  Request                                            $request
-     * @param  Entries                                            $entry
+     * @param  Entry                                              $entry
      * @Route("/star/{id}", requirements={"id" = "\d+"}, name="star_entry")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function toggleStarAction(Request $request, Entries $entry)
+    public function toggleStarAction(Request $request, Entry $entry)
     {
         $entry->toggleStar();
         $this->getDoctrine()->getManager()->flush();
@@ -170,11 +170,11 @@ class EntryController extends Controller
      * Deletes entry
      *
      * @param  Request                                            $request
-     * @param  Entries                                            $entry
+     * @param  Entry                                              $entry
      * @Route("/delete/{id}", requirements={"id" = "\d+"}, name="delete_entry")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function deleteEntryAction(Request $request, Entries $entry)
+    public function deleteEntryAction(Request $request, Entry $entry)
     {
         $em = $this->getDoctrine()->getManager();
         $entry->setDeleted(1);

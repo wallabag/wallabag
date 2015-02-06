@@ -5,9 +5,8 @@ namespace Wallabag\CoreBundle\Repository;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
-use Wallabag\CoreBundle\Entity\Entries;
 
-class EntriesRepository extends EntityRepository
+class EntryRepository extends EntityRepository
 {
     /**
      * Retrieves unread entries for a user

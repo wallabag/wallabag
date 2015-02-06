@@ -6,7 +6,7 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Wallabag\CoreBundle\Entity\Entries;
+use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tags;
 use Wallabag\CoreBundle\Service\Extractor;
 
@@ -27,7 +27,7 @@ class WallabagRestController extends Controller
      *          {"name"="tags", "dataType"="string", "required"=false, "format"="api%2Crest", "description"="a list of tags url encoded. Will returns entries that matches ALL tags."},
      *       }
      * )
-     * @return Entries
+     * @return Entry
      */
     public function getEntriesAction(Request $request)
     {
@@ -42,7 +42,7 @@ class WallabagRestController extends Controller
 
         $entries = $this
             ->getDoctrine()
-            ->getRepository('WallabagCoreBundle:Entries')
+            ->getRepository('WallabagCoreBundle:Entry')
             ->findEntries(1, $isArchived, $isStarred, $isDeleted, $sort, $order);
 
         if (!is_array($entries)) {
@@ -60,9 +60,9 @@ class WallabagRestController extends Controller
      *          {"name"="entry", "dataType"="integer", "requirement"="\w+", "description"="The entry ID"}
      *      }
      * )
-     * @return Entries
+     * @return Entry
      */
-    public function getEntryAction(Entries $entry)
+    public function getEntryAction(Entry $entry)
     {
         return $entry;
     }
@@ -77,6 +77,7 @@ class WallabagRestController extends Controller
      *          {"name"="tags", "dataType"="string", "required"=false, "format"="tag1,tag2,tag3", "description"="a comma-separated list of tags."},
      *       }
      * )
+     * @return Entry
      */
     public function postEntriesAction(Request $request)
     {
@@ -84,7 +85,7 @@ class WallabagRestController extends Controller
         $url = $request->request->get('url');
 
         $content = Extractor::extract($url);
-        $entry = new Entries();
+        $entry = new Entry();
         $entry->setUserId(1);
         $entry->setUrl($url);
         $entry->setTitle($request->request->get('title') ?: $content->getTitle());
@@ -111,8 +112,9 @@ class WallabagRestController extends Controller
      *          {"name"="delete", "dataType"="boolean", "required"=false, "format"="true or false", "description"="flag as deleted. Default false. In case that you don't want to *really* remove it.."},
      *       }
      * )
+     * @return Entry
      */
-    public function patchEntriesAction(Entries $entry, Request $request)
+    public function patchEntriesAction(Entry $entry, Request $request)
     {
         $title      = $request->request->get("title");
         $tags       = $request->request->get("tags", array());
@@ -150,8 +152,9 @@ class WallabagRestController extends Controller
      *          {"name"="entry", "dataType"="integer", "requirement"="\w+", "description"="The entry ID"}
      *      }
      * )
+     * @return Entry
      */
-    public function deleteEntriesAction(Entries $entry)
+    public function deleteEntriesAction(Entry $entry)
     {
         if ($entry->isDeleted()) {
             throw new NotFoundHttpException('This entry is already deleted');
@@ -173,7 +176,7 @@ class WallabagRestController extends Controller
      *      }
      * )
      */
-    public function getEntriesTagsAction(Entries $entry)
+    public function getEntriesTagsAction(Entry $entry)
     {
     }
 
@@ -189,7 +192,7 @@ class WallabagRestController extends Controller
      *       }
      * )
      */
-    public function postEntriesTagsAction(Entries $entry)
+    public function postEntriesTagsAction(Entry $entry)
     {
     }
 
@@ -203,7 +206,7 @@ class WallabagRestController extends Controller
      *      }
      * )
      */
-    public function deleteEntriesTagsAction(Entries $entry, Tags $tag)
+    public function deleteEntriesTagsAction(Entry $entry, Tags $tag)
     {
     }
 
