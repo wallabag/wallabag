@@ -23,8 +23,9 @@
             <directory>../src</directory>
             <exclude>
                 <directory>../vendor</directory>
-                <directory>../src/Acme</directory>
-                <directory>../src/AppBundle</directory>
+                <directory>../src/Wallabag/CoreBundle/Resources</directory>
+                <directory>../src/Wallabag/CoreBundle/Tests</directory>
+                <directory>../src/Wallabag/CoreBundle/DataFixtures</directory>
             </exclude>
         </whitelist>
     </filter>
