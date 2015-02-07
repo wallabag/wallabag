@@ -19,8 +19,9 @@ class EntryController extends Controller
      */
     public function addEntryAction(Request $request)
     {
-        $entry = new Entry();
-        $entry->setUserId(1);
+        $repository = $this->getDoctrine()->getRepository('WallabagCoreBundle:User');
+        $user = $repository->find(1);
+        $entry = new Entry($user);
 
         $form = $this->createFormBuilder($entry)
             ->add('url', 'url')
