@@ -10,7 +10,7 @@ final class Extractor
     public static function extract($url)
     {
         $pageContent = Extractor::getPageContent(new Url(base64_encode($url)));
-        $title = ($pageContent['rss']['channel']['item']['title'] != '') ? $pageContent['rss']['channel']['item']['title'] : _('Untitled');
+        $title = $pageContent['rss']['channel']['item']['title'] ?: 'Untitled';
         $body = $pageContent['rss']['channel']['item']['description'];
 
         $content = new Content();
@@ -19,6 +19,7 @@ final class Extractor
 
         return $content;
     }
+
     /**
      * Get the content for a given URL (by a call to FullTextFeed)
      *

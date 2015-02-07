@@ -26,6 +26,11 @@
         </exec>
         <exec executable="php">
             <arg value="${basedir}/../app/console"/>
+            <arg value="doctrine:schema:create"/>
+            <arg value="--env=test"/>
+        </exec>
+        <exec executable="php">
+            <arg value="${basedir}/../app/console"/>
             <arg value="cache:clear"/>
             <arg value="--env=test"/>
         </exec>
