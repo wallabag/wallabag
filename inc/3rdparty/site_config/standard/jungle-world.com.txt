@@ -1,0 +1,3 @@
+title: //h1
+body: //div[contains(@class,'story')]
+test_url: http://jungle-world.com/artikel/2015/02/51207.html
