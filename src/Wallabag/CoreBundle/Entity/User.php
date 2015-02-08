@@ -161,7 +161,11 @@ class User implements AdvancedUserInterface, \Serializable
      */
     public function setPassword($password)
     {
-        $this->password = $password;
+        if (!$password && 0 === strlen($password)) {
+            return;
+        }
+
+        $this->password = sha1($password.$this->getUsername().$this->getSalt());
 
         return $this;
     }
