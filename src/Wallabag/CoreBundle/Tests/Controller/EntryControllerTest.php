@@ -2,13 +2,24 @@
 
 namespace Wallabag\CoreBundle\Tests\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Wallabag\CoreBundle\Tests\WallabagTestCase;
 
-class EntryControllerTest extends WebTestCase
+class EntryControllerTest extends WallabagTestCase
 {
+    public function testLogin()
+    {
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/new');
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertContains('login', $client->getResponse()->headers->get('location'));
+    }
+
     public function testGetNew()
     {
-        $client = static::createClient();
+        $this->logIn();
+        $client = $this->getClient();
 
         $crawler = $client->request('GET', '/new');
 
@@ -20,7 +31,8 @@ class EntryControllerTest extends WebTestCase
 
     public function testPostNewEmpty()
     {
-        $client = static::createClient();
+        $this->logIn();
+        $client = $this->getClient();
 
         $crawler = $client->request('GET', '/new');
 
@@ -37,7 +49,8 @@ class EntryControllerTest extends WebTestCase
 
     public function testPostNewOk()
     {
-        $client = static::createClient();
+        $this->logIn();
+        $client = $this->getClient();
 
         $crawler = $client->request('GET', '/new');
 
@@ -55,13 +68,14 @@ class EntryControllerTest extends WebTestCase
 
         $crawler = $client->followRedirect();
 
-        $this->assertCount(1, $alert = $crawler->filter('h2 a')->extract(array('_text')));
+        $this->assertGreaterThan(1, $alert = $crawler->filter('h2 a')->extract(array('_text')));
         $this->assertContains('Mailjet', $alert[0]);
     }
 
     public function testArchive()
     {
-        $client = static::createClient();
+        $this->logIn();
+        $client = $this->getClient();
 
         $crawler = $client->request('GET', '/archive');
 
@@ -70,7 +84,8 @@ class EntryControllerTest extends WebTestCase
 
     public function testStarred()
     {
-        $client = static::createClient();
+        $this->logIn();
+        $client = $this->getClient();
 
         $crawler = $client->request('GET', '/starred');
 
@@ -79,12 +94,17 @@ class EntryControllerTest extends WebTestCase
 
     public function testView()
     {
-        $client = static::createClient();
+        $this->logIn();
+        $client = $this->getClient();
 
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
             ->findOneByIsArchived(false);
+
+        if (!$content) {
+            $this->markTestSkipped('No content found in db.');
+        }
 
         $crawler = $client->request('GET', '/view/'.$content->getId());
 

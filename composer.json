@@ -83,6 +83,7 @@
         "wallabag/Fivefilters_Libraries": "dev-master"
     },
     "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "dev-master",
         "sensio/generator-bundle": "~2.5",
         "phpunit/phpunit": "~4.4"
     },

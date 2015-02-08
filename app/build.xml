@@ -34,5 +34,12 @@
             <arg value="cache:clear"/>
             <arg value="--env=test"/>
         </exec>
+        <exec executable="php">
+            <arg value="${basedir}/../app/console"/>
+            <arg value="doctrine:fixtures:load"/>
+            <arg value="--no-interaction"/>
+            <arg value="--purge-with-truncate"/>
+            <arg value="--env=test"/>
+        </exec>
     </target>
 </project>
