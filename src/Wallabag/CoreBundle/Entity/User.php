@@ -2,6 +2,7 @@
 
 namespace Wallabag\CoreBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
@@ -78,10 +79,16 @@ class User implements AdvancedUserInterface, \Serializable
      */
     private $updatedAt;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Entry", mappedBy="user", cascade={"remove"})
+     */
+    private $entries;
+
     public function __construct()
     {
         $this->isActive = true;
-        $this->salt = md5(uniqid(null, true));
+        $this->salt     = md5(uniqid(null, true));
+        $this->entries  = new ArrayCollection();
     }
 
     /**
@@ -154,7 +161,11 @@ class User implements AdvancedUserInterface, \Serializable
      */
     public function setPassword($password)
     {
-        $this->password = $password;
+        if (!$password && 0 === strlen($password)) {
+            return;
+        }
+
+        $this->password = sha1($password.$this->getUsername().$this->getSalt());
 
         return $this;
     }
@@ -229,6 +240,26 @@ class User implements AdvancedUserInterface, \Serializable
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * @param Entry $entry
+     *
+     * @return User
+     */
+    public function addEntry(Entry $entry)
+    {
+        $this->entries[] = $entry;
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection<Entry>
+     */
+    public function getEntries()
+    {
+        return $this->entries;
     }
 
     /**

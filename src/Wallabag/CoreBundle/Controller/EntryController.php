@@ -19,8 +19,7 @@ class EntryController extends Controller
      */
     public function addEntryAction(Request $request)
     {
-        $entry = new Entry();
-        $entry->setUserId(1);
+        $entry = new Entry($this->getUser());
 
         $form = $this->createFormBuilder($entry)
             ->add('url', 'url')
@@ -60,10 +59,10 @@ class EntryController extends Controller
      */
     public function showUnreadAction()
     {
-        $repository = $this->getDoctrine()->getRepository('WallabagCoreBundle:Entry');
-        // TODO don't give the user ID like this
         // TODO change pagination
-        $entries = $repository->findUnreadByUser(1, 0);
+        $entries = $this->getDoctrine()
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findUnreadByUser($this->getUser()->getId(), 0);
 
         return $this->render(
             'WallabagCoreBundle:Entry:entries.html.twig',
@@ -79,10 +78,10 @@ class EntryController extends Controller
      */
     public function showArchiveAction()
     {
-        $repository = $this->getDoctrine()->getRepository('WallabagCoreBundle:Entry');
-        // TODO don't give the user ID like this
         // TODO change pagination
-        $entries = $repository->findArchiveByUser(1, 0);
+        $entries = $this->getDoctrine()
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findArchiveByUser($this->getUser()->getId(), 0);
 
         return $this->render(
             'WallabagCoreBundle:Entry:entries.html.twig',
@@ -98,10 +97,10 @@ class EntryController extends Controller
      */
     public function showStarredAction()
     {
-        $repository = $this->getDoctrine()->getRepository('WallabagCoreBundle:Entry');
-        // TODO don't give the user ID like this
         // TODO change pagination
-        $entries = $repository->findStarredByUser(1, 0);
+        $entries = $this->getDoctrine()
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findStarredByUser($this->getUser()->getId(), 0);
 
         return $this->render(
             'WallabagCoreBundle:Entry:entries.html.twig',
