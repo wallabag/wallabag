@@ -296,7 +296,7 @@ cursor: pointer;
 }
 .compatibity_result {
 	margin: auto;
-	max-width: 300px;
+	max-width: 350px;
 	min-height: 50px;
 	line-height: 50px;
 	text-align: center;
@@ -386,10 +386,10 @@ border: 1px solid #000;
 	            <?php if (isOkay()) { ?>
 	            	<div class="compatibity_result detail good">All good</div>
 		            <?php } elseif (isPassing()) { ?>
-		            <div class="compatibity_result detail pass">Some problems, but it's OK !</div>
+		            <div class="compatibity_result detail pass">Some warnings, but the minimum is here !</div>
 		            <?php } else  { ?>
 		            <div class="compatibity_result detail bad">Bad news : you can't run wallabag</div>
-		            <?php } $status = status(); ?>
+		            <?php } $status = status(); $pdo_drivers = pdoDrivers(); ?>
             </div>
 
             <div class="details">
@@ -569,38 +569,54 @@ php composer.phar install</code></pre>
                     <p>
                         Database engine:
                         <ul>
-                            <li><label for="sqlite">SQLite</label> <input name="db_engine" type="radio" checked="" id="sqlite" value="sqlite" />
-                            <div id="pdo_sqlite" class='messages error install'>
-                                <p>You have to enable <a href="http://php.net/manual/ref.pdo-sqlite.php">pdo_sqlite extension</a>.</p>
-                            </div>
-                            </li>
-                            <li>
-                                <label for="mysql">MySQL</label> <input name="db_engine" type="radio" id="mysql" value="mysql" />
-                                <div id="pdo_mysql" class='messages notice install'>
-                                    <p>All fields have to be filled.</p>
-                                </div>
-                                <ul id="mysql_infos">
-                                    <li><label for="mysql_server">Server</label> <input type="text" placeholder="localhost" id="mysql_server" name="mysql_server" /></li>
-                                    <li><label for="mysql_database">Database</label> <input type="text" placeholder="wallabag" id="mysql_database" name="mysql_database" /></li>
-                                    <li><label for="mysql_user">User</label> <input type="text" placeholder="user" id="mysql_user" name="mysql_user" /></li>
-                                    <li><label for="mysql_password">Password</label> <input type="password" placeholder="p4ssw0rd" id="mysql_password" name="mysql_password" /></li>
-                                    <li><label for="mysql_utf8_mb4">Use UTF-8 MB4</label> <input id="mysql_utf8_mb4" type="checkbox" name="mysql_utf8_mb4">
-                                    <div id="utf8_mb4_infos"><em>Warning :</em> UTF-8 MB4 is used to fully support unicode characters. It is available only with MySQL starting with version 5.5.3. 
+                           <li>
+                              <?php if ($pdo_drivers['sqlite']) { ?>
+                            	<label for="sqlite">SQLite</label> <input name="db_engine" type="radio" checked="" id="sqlite" value="sqlite" />
+                            	<?php } else { ?>
+                                 <div class="messages notice">
+	                            	   <p>You have to enable <a href="http://php.net/manual/ref.pdo-sqlite.php">pdo_sqlite extension</a> to use SQLite.</p>
+                            	    </div>
+                              <?php } ?>
+                           </li>
+                           <li>
+                              <?php if ($pdo_drivers['mysql']) { ?>
+                              <label for="mysql">MySQL</label> <input name="db_engine" type="radio" id="mysql" value="mysql" />
+                              <div id="pdo_mysql" class='messages notice install'>
+                                 <p>All fields have to be filled.</p>
+                              </div>
+                              <ul id="mysql_infos">
+                                 <li><label for="mysql_server">Server</label> <input type="text" placeholder="localhost" id="mysql_server" name="mysql_server" /></li>
+                                 <li><label for="mysql_database">Database</label> <input type="text" placeholder="wallabag" id="mysql_database" name="mysql_database" /></li>
+                                 <li><label for="mysql_user">User</label> <input type="text" placeholder="user" id="mysql_user" name="mysql_user" /></li>
+                                 <li><label for="mysql_password">Password</label> <input type="password" placeholder="p4ssw0rd" id="mysql_password" name="mysql_password" /></li>
+                                 <li><label for="mysql_utf8_mb4">Use UTF-8 MB4</label> <input id="mysql_utf8_mb4" type="checkbox" name="mysql_utf8_mb4">
+                                 <div id="utf8_mb4_infos"><em>Warning :</em> UTF-8 MB4 is used to fully support unicode characters. It is available only with MySQL starting with version 5.5.3. 
                                     Install will failed if you check this while using an older MySQL server.</div></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <label for="postgres">PostgreSQL</label> <input name="db_engine" type="radio" id="postgres" value="postgres" />
-                                <div id="pdo_postgres" class='messages notice install'>
+                              </ul>
+                              <?php } else { ?>
+                                 <div class="messages notice">
+                                    <p>You have to enable <a href="http://php.net/manual/ref.pdo-mysql.php">pdo_mysql extension</a> to use MySQL.</p>
+                                 </div>
+                              <?php } ?>
+                           </li>
+                           <li>
+                              <?php if ($pdo_drivers['postgres']) { ?>
+                                 <label for="postgres">PostgreSQL</label> <input name="db_engine" type="radio" id="postgres" value="postgres" />
+                                 <div id="pdo_postgres" class='messages notice install'>
                                     <p>All fields have to be filled.</p>
-                                </div>
-                                <ul id="pg_infos">
+                                 </div>
+                                 <ul id="pg_infos">
                                     <li><label for="pg_server">Server</label> <input type="text" placeholder="localhost" id="pg_server" name="pg_server" /></li>
                                     <li><label for="pg_database">Database</label> <input type="text" placeholder="wallabag" id="pg_database" name="pg_database" /></li>
                                     <li><label for="pg_user">User</label> <input type="text" placeholder="user" id="pg_user" name="pg_user" /></li>
                                     <li><label for="pg_password">Password</label> <input type="password" placeholder="p4ssw0rd" id="pg_password" name="pg_password" /></li>
-                                </ul>
-                            </li>
+                                 </ul>
+                              <?php } else { ?>
+                                 <div class="messages notice">
+                                    <p>You have to enable <a href="https://php.net/manual/ref.pdo-pgsql.php">pdo_pgsql extension</a> to use PostgreSQL.</p>
+                                 </div>
+                              <?php } ?>
+                           </li>
                         </ul>
                     </p>
                 </fieldset>
@@ -672,17 +688,6 @@ php composer.phar install</code></pre>
             endif;
             ?>
 
-            <?php
-            if (!extension_loaded('pdo_sqlite')) : ?>
-            $("#install_button").hide();
-            <?php
-            else :
-            ?>
-            $("#pdo_sqlite").hide();
-            <?php
-            endif;
-            ?>
-
             $("#mysql_utf8_mb4").click(function() {
                 $("#utf8_mb4_infos").toggle();
             });
@@ -720,13 +725,6 @@ php composer.phar install</code></pre>
                             $("#sqlite_description").show();
                             $("#mysql_description").hide();
                             $("#postgres_description").hide();
-                            <?php
-                            if (!extension_loaded('pdo_sqlite')) : ?>
-                            $("#pdo_sqlite").show();
-                            $("#install_button").hide();
-                            <?php
-                            endif;
-                            ?>
                         }
                     }
                 });
