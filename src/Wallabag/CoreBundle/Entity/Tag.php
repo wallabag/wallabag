@@ -5,28 +5,28 @@ namespace Wallabag\CoreBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Tags
+ * Tag
  *
- * @ORM\Table(name="tags")
+ * @ORM\Table(name="tag")
  * @ORM\Entity
  */
-class Tags
+class Tag
 {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="value", type="text", nullable=true)
+     * @ORM\Column(name="label", type="text")
      */
-    private $value;
+    private $label;
 
     /**
      * Get id
@@ -39,24 +39,24 @@ class Tags
     }
 
     /**
-     * Set value
+     * Set label
      *
-     * @param  string $value
-     * @return Tags
+     * @param  string $label
+     * @return Tag
      */
-    public function setValue($value)
+    public function setLabel($label)
     {
-        $this->value = $value;
+        $this->label = $label;
 
         return $this;
     }
 
     /**
-     * Get value
+     * Get label
      *
      * @return string
      */
-    public function getValue()
+    public function getLabel()
     {
         return $this->value;
     }

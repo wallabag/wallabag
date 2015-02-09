@@ -15,23 +15,23 @@ class TagsEntries
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="entry_id", type="integer", nullable=true)
+     * @ORM\Column(name="entry_id", type="integer")
      */
     private $entryId;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="tag_id", type="integer", nullable=true)
+     * @ORM\Column(name="tag_id", type="integer")
      */
     private $tagId;
 

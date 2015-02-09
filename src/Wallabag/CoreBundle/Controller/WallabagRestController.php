@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\CoreBundle\Entity\Tags;
+use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Service\Extractor;
 
 class WallabagRestController extends Controller
@@ -206,7 +206,7 @@ class WallabagRestController extends Controller
      *      }
      * )
      */
-    public function deleteEntriesTagsAction(Entry $entry, Tags $tag)
+    public function deleteEntriesTagsAction(Entry $entry, Tag $tag)
     {
     }
 
@@ -229,7 +229,7 @@ class WallabagRestController extends Controller
      *       }
      * )
      */
-    public function getTagAction(Tags $tag)
+    public function getTagAction(Tag $tag)
     {
     }
 
@@ -242,7 +242,7 @@ class WallabagRestController extends Controller
      *      }
      * )
      */
-    public function deleteTagAction(Tags $tag)
+    public function deleteTagAction(Tag $tag)
     {
     }
 }
