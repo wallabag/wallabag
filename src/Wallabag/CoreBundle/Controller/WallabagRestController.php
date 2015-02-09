@@ -43,7 +43,7 @@ class WallabagRestController extends Controller
         $entries = $this
             ->getDoctrine()
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findEntries(1, $isArchived, $isStarred, $isDeleted, $sort, $order);
+            ->findEntries($this->getUser()->getId(), $isArchived, $isStarred, $isDeleted, $sort, $order);
 
         if (!is_array($entries)) {
             throw $this->createNotFoundException();
@@ -86,7 +86,7 @@ class WallabagRestController extends Controller
 
         $content = Extractor::extract($url);
         $entry = new Entry();
-        $entry->setUserId(1);
+        $entry->setUserId($this->getUser()->getId());
         $entry->setUrl($url);
         $entry->setTitle($request->request->get('title') ?: $content->getTitle());
         $entry->setContent($content->getBody());

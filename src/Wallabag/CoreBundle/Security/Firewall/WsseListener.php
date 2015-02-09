@@ -44,6 +44,8 @@ class WsseListener implements ListenerInterface
             $authToken = $this->authenticationManager->authenticate($token);
 
             $this->securityContext->setToken($authToken);
+
+            return;
         } catch (AuthenticationException $failed) {
             $failedMessage = 'WSSE Login failed for '.$token->getUsername().'. Why ? '.$failed->getMessage();
             $this->logger->err($failedMessage);
@@ -56,10 +58,5 @@ class WsseListener implements ListenerInterface
 
             return;
         }
-
-        // By default deny authorization
-        $response = new Response();
-        $response->setStatusCode(403);
-        $event->setResponse($response);
     }
 }
