@@ -23,6 +23,10 @@ class WsseProvider implements AuthenticationProviderInterface
     {
         $user = $this->userProvider->loadUserByUsername($token->getUsername());
 
+        if (!$user) {
+            throw new AuthenticationException("Bad credentials. Did you forgot your username?");
+        }
+
         if ($user && $this->validateDigest($token->digest, $token->nonce, $token->created, $user->getPassword())) {
             $authenticatedToken = new WsseUserToken($user->getRoles());
             $authenticatedToken->setUser($user);
@@ -35,12 +39,17 @@ class WsseProvider implements AuthenticationProviderInterface
 
     protected function validateDigest($digest, $nonce, $created, $secret)
     {
-        // Expire le timestamp après 5 minutes
-        if (time() - strtotime($created) > 300) {
-            return false;
+        // Check created time is not in the future
+        if (strtotime($created) > time()) {
+            throw new AuthenticationException("Back to the future...");
         }
 
-        // Valide que le nonce est unique dans les 5 minutes
+        // Expire timestamp after 5 minutes
+        if (time() - strtotime($created) > 300) {
+            throw new AuthenticationException("Too late for this timestamp... Watch your watch.");
+        }
+
+        // Validate nonce is unique within 5 minutes
         if (file_exists($this->cacheDir.'/'.$nonce) && file_get_contents($this->cacheDir.'/'.$nonce) + 300 > time()) {
             throw new NonceExpiredException('Previously used nonce detected');
         }
@@ -52,8 +61,12 @@ class WsseProvider implements AuthenticationProviderInterface
 
         file_put_contents($this->cacheDir.'/'.$nonce, time());
 
-        // Valide le Secret
+        // Validate Secret
         $expected = base64_encode(sha1(base64_decode($nonce).$created.$secret, true));
+
+        if ($digest !== $expected) {
+            throw new AuthenticationException("Bad credentials ! Digest is not as expected.");
+        }
 
         return $digest === $expected;
     }

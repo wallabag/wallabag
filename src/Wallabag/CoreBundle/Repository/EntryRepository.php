@@ -91,12 +91,12 @@ class EntryRepository extends EntityRepository
     /**
      * Find Entries
      *
-     * @param  int    $userId
-     * @param  bool   $isArchived
-     * @param  bool   $isStarred
-     * @param  bool   $isDeleted
-     * @param  string $sort
-     * @param  string $order
+     * @param int    $userId
+     * @param bool   $isArchived
+     * @param bool   $isStarred
+     * @param bool   $isDeleted
+     * @param string $sort
+     * @param string $order
      *
      * @return ArrayCollection
      */
