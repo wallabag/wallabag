@@ -98,7 +98,7 @@ class EntryRepository extends EntityRepository
      * @param string $sort
      * @param string $order
      *
-     * @return ArrayCollection
+     * @return array
      */
     public function findEntries($userId, $isArchived = null, $isStarred = null, $isDeleted = null, $sort = 'created', $order = 'ASC')
     {
@@ -126,6 +126,6 @@ class EntryRepository extends EntityRepository
 
         return $qb
             ->getQuery()
-            ->getResult(Query::HYDRATE_ARRAY);
+            ->getResult();
     }
 }

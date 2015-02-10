@@ -68,7 +68,7 @@ class WallabagRestController extends Controller
             ->getRepository('WallabagCoreBundle:Entry')
             ->findEntries($this->getUser()->getId(), $isArchived, $isStarred, $isDeleted, $sort, $order);
 
-        if (!is_array($entries)) {
+        if (!($entries)) {
             throw $this->createNotFoundException();
         }
 
