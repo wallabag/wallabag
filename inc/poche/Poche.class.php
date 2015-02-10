@@ -740,17 +740,23 @@ class Poche
                 $purifier = $this->_getPurifier();
                 foreach($items as $item) {
                     $url = new Url(base64_encode($item['url']));
-                    Tools::logm('Fetching article ' . $item['id']);
-                    $content = Tools::getPageContent($url);
-                    $title = (($content['rss']['channel']['item']['title'] != '') ? $content['rss']['channel']['item']['title'] : _('Untitled'));
-                    $body = (($content['rss']['channel']['item']['description'] != '') ? $content['rss']['channel']['item']['description'] : _('Undefined'));
+                    if( $url->isCorrect() )
+                    {
+                        Tools::logm('Fetching article ' . $item['id']);
+                        $content = Tools::getPageContent($url);
+                        $title = (($content['rss']['channel']['item']['title'] != '') ? $content['rss']['channel']['item']['title'] : _('Untitled'));
+                        $body = (($content['rss']['channel']['item']['description'] != '') ? $content['rss']['channel']['item']['description'] : _('Undefined'));
 
-                    // clean content to prevent xss attack
+                        // clean content to prevent xss attack
 
-                    $title = $purifier->purify($title);
-                    $body = $purifier->purify($body);
-                    $this->store->updateContentAndTitle($item['id'], $title, $body, $this->user->getId());
-                    Tools::logm('Article ' . $item['id'] . ' updated.');
+                        $title = $purifier->purify($title);
+                        $body = $purifier->purify($body);
+                        $this->store->updateContentAndTitle($item['id'], $title, $body, $this->user->getId());
+                        Tools::logm('Article ' . $item['id'] . ' updated.');
+                    } else
+                    {
+                        Tools::logm('Unvalid URL (' . $item['url'] .')  to fetch for article ' . $item['id']);
+                    }
                 }
             }
         }
