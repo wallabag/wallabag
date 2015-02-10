@@ -11,6 +11,8 @@
 $errors = array();
 $successes = array();
 
+$final = false;
+
 require_once('install_functions.php');
 
 if (isset($_GET['clean'])) {
@@ -49,7 +51,6 @@ else if (isset($_POST['install'])) {
         $errors[] = 'You must install twig before.';
     } else {
         $continue = true;
-        $final = false;
         $salt = generate_salt();
         $content = file_get_contents('inc/poche/config.inc.default.php');
 

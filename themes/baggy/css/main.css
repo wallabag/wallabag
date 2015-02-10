@@ -745,6 +745,9 @@ a.add-to-wallabag-link-after:after {
 .icon-evernote:before {
   content: "\e603";
 }
+.icon-tags:before {
+  content: "\e936";
+}
 
 
 /* .icon-image class, for image-based icons

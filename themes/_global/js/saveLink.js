@@ -4,6 +4,8 @@ $.fn.ready(function() {
       $bagitForm = $('#bagit-form'),
       $bagitFormForm = $('#bagit-form-form');
 
+$("#tags2add").hide();
+
   /* ==========================================================================
    bag it link and close button
    ========================================================================== */
@@ -77,6 +79,14 @@ $.fn.ready(function() {
 
     event.preventDefault();
   });
+
+$('#showtaginput').click(function(){
+  $('#tags2add').toggle();
+  $('#plainurl').toggle();
+  $('#showtaginput').toggleClass('icon-tags');
+  $('#showtaginput').toggleClass('icon-check');
+});
+
 
   /* ==========================================================================
    Keyboard gestion
