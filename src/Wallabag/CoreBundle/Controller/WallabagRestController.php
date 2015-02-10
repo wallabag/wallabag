@@ -33,7 +33,7 @@ class WallabagRestController extends Controller
             throw $this->createNotFoundException();
         }
 
-        return $user->getSalt();
+        return array($user->getSalt());
     }
     /**
      * Retrieve all entries. It could be filtered by many options.
