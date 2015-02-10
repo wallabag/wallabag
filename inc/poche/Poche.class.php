@@ -195,9 +195,9 @@ class Poche
                 }
 
                 if ($autoclose == TRUE) {
-                  Tools::redirect('?view=home');
+                    Tools::redirect('?view=home&closewin=true');
                 } else {
-                  Tools::redirect('?view=home&closewin=true');
+                    Tools::redirect('?view=home');
                 }
                 return $last_id;
                 break;

@@ -44,6 +44,7 @@
 @define ('SHARE_MAIL', TRUE);
 @define ('SHARE_SHAARLI', FALSE);
 @define ('SHAARLI_URL', 'http://myshaarliurl.com');
+@define ('SHARE_EVERNOTE', FALSE);
 @define ('SHARE_DIASPORA', FALSE);
 @define ('DIASPORA_URL', 'http://diasporapod.com'); # Don't add a / at the end
 @define ('FLATTR', TRUE);
