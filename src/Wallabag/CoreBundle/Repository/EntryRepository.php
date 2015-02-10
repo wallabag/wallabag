@@ -98,7 +98,7 @@ class EntryRepository extends EntityRepository
      * @param  string $sort
      * @param  string $order
      *
-     * @return ArrayCollection
+     * @return Entry
      */
     public function findEntries($userId, $isArchived = null, $isStarred = null, $isDeleted = null, $sort = 'created', $order = 'ASC')
     {
