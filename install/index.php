@@ -49,6 +49,7 @@ else if (isset($_POST['install'])) {
         $errors[] = 'You must install twig before.';
     } else {
         $continue = true;
+        $final = false;
         $salt = generate_salt();
         $content = file_get_contents('inc/poche/config.inc.default.php');
 
@@ -142,7 +143,7 @@ else if (isset($_POST['install'])) {
         foreach ($moreQueries as $query) {
             executeQuery($handle, $query, array());
         }
-        $successes[] = 'wallabag is now installed. You can now <a href="index.php?clean=0">access it !</a>';
+        
 
     if (!copy('inc/poche/config.inc.default.php', 'inc/poche/config.inc.php')) {
         $errors[] = 'Installation aborted, impossible to create inc/poche/config.inc.php file. Maybe you don\'t have write access to create it.';
@@ -153,6 +154,7 @@ else if (isset($_POST['install'])) {
         }
         $content = str_replace("define ('SALT', '');", "define ('SALT', '".$salt."');", $content);
         file_put_contents('inc/poche/config.inc.php', $content);
+        $final = true;
     }
 }
 }
@@ -300,8 +302,8 @@ cursor: pointer;
 	min-height: 50px;
 	line-height: 50px;
 	text-align: center;
-    margin-bottom: 30px;
-    border-radius: 3px;
+   margin-bottom: 30px;
+   border-radius: 3px;
 }
 
 h2, legend {
@@ -329,6 +331,21 @@ border: 1px solid #000;
     background-color: #FFF;
     color: #000;
 }
+.final {
+   margin-top: 10%;
+   margin-left: 30%;
+   max-width: 400px;
+   text-align: center;
+   border-radius: 6px;
+}
+.final h1 {
+   line-height: 50px;
+}
+
+.final em {
+   margin-top: 40px;
+   font-size: 12px;
+}
 
 </style>
 
@@ -346,7 +363,8 @@ border: 1px solid #000;
                 <li><a href="http://doc.wallabag.org/" target="_blank">Online doc</a></li>
                 <li><a href="http://support.wallabag.org/" target="_blank">help</a></li>
                 <li><a href="http://www.wallabag.org/" target="_blank">wallabag.org</a></li>
-            </ul> 
+            </ul>
+            <?php if (!$final) : ?>
             <?php if (!empty($errors)) : ?>
                 <div class='messages error install'>
                     <p>Errors during installation:</p>
@@ -654,6 +672,12 @@ php composer.phar install</code></pre>
                 </div>
             </form>
         </div>
+     <?php else : ?>
+         <div class="final good">
+            <h1>wallabag is now installed ! :-) </h1>
+            <a href="index.php?clean=0">Click here to access the login form</a><br />
+            <em>The installation will now try to delete the install directory. If this fails, delete it manually.</em></div>
+     <?php endif; ?>
         <script>
             <?php if (!is_dir('vendor')) : ?>
             $(".database_info").hide();
