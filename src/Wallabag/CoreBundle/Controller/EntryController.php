@@ -6,7 +6,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\CoreBundle\Repository;
 use Wallabag\CoreBundle\Service\Extractor;
 use Wallabag\CoreBundle\Helper\Url;
 

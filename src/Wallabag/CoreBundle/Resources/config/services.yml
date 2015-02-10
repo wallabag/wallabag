@@ -1,0 +1,15 @@
+services:
+    wallabag_core.twig.wallabag:
+        class: Wallabag\CoreBundle\Twig\Extension\WallabagExtension
+        tags:
+            - { name: twig.extension }
+    wsse.security.authentication.provider:
+        class: Wallabag\CoreBundle\Security\Authentication\Provider\WsseProvider
+        public: false
+        arguments: ['', '%kernel.cache_dir%/security/nonces']
+    wsse.security.authentication.listener:
+        class: Wallabag\CoreBundle\Security\Firewall\WsseListener
+        public: false
+        tags:
+            - { name: monolog.logger, channel: wsse }
+        arguments: ['@security.context', '@security.authentication.manager', '@logger']

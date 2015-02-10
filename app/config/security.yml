@@ -16,9 +16,11 @@ security:
     # the main part of the security, where you can set up firewalls
     # for specific sections of your app
     firewalls:
-        #wsse_secured:
-        #    pattern:   /api/.*
-        #    wsse:      true
+        wsse_secured:
+            pattern:      /api/.*
+            wsse:         true
+            stateless:    true
+            anonymous:    true
         login_firewall:
             pattern:    ^/login$
             anonymous:  ~
@@ -54,6 +56,7 @@ security:
                 target: /
 
     access_control:
+        - { path: ^/api/salt, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/doc, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/, roles: ROLE_USER }
