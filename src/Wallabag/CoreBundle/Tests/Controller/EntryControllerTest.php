@@ -174,4 +174,25 @@ class EntryControllerTest extends WallabagTestCase
 
         $this->assertEquals($res->isDeleted(), true);
     }
+
+    public function testViewOtherUserEntry()
+    {
+        $this->logInAs('bob');
+        $client = $this->getClient();
+
+        $content = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->createQueryBuilder('e')
+            ->select('e.id')
+            ->leftJoin('e.user', 'u')
+            ->where('u.username != :username')->setParameter('username', 'bob')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getSingleResult(AbstractQuery::HYDRATE_ARRAY);
+
+        $client->request('GET', '/view/'.$content['id']);
+
+        $this->assertEquals(403, $client->getResponse()->getStatusCode());
+    }
 }

@@ -12,8 +12,10 @@ use Wallabag\CoreBundle\Helper\Url;
 class EntryController extends Controller
 {
     /**
-     * @param  Request                                    $request
+     * @param Request $request
+     *
      * @Route("/new", name="new_entry")
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function addEntryAction(Request $request)
@@ -54,6 +56,7 @@ class EntryController extends Controller
      * Shows unread entries for current user
      *
      * @Route("/unread", name="unread")
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showUnreadAction()
@@ -73,6 +76,7 @@ class EntryController extends Controller
      * Shows read entries for current user
      *
      * @Route("/archive", name="archive")
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showArchiveAction()
@@ -92,6 +96,7 @@ class EntryController extends Controller
      * Shows starred entries for current user
      *
      * @Route("/starred", name="starred")
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showStarredAction()
@@ -110,12 +115,16 @@ class EntryController extends Controller
     /**
      * Shows entry content
      *
-     * @param  Entry                                      $entry
+     * @param Entry $entry
+     *
      * @Route("/view/{id}", requirements={"id" = "\d+"}, name="view")
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function viewAction(Entry $entry)
     {
+        $this->checkUserAction($entry);
+
         return $this->render(
             'WallabagCoreBundle:Entry:entry.html.twig',
             array('entry' => $entry)
@@ -125,13 +134,17 @@ class EntryController extends Controller
     /**
      * Changes read status for an entry
      *
-     * @param  Request                                            $request
-     * @param  Entry                                              $entry
+     * @param Request $request
+     * @param Entry   $entry
+     *
      * @Route("/archive/{id}", requirements={"id" = "\d+"}, name="archive_entry")
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function toggleArchiveAction(Request $request, Entry $entry)
     {
+        $this->checkUserAction($entry);
+
         $entry->toggleArchive();
         $this->getDoctrine()->getManager()->flush();
 
@@ -146,13 +159,17 @@ class EntryController extends Controller
     /**
      * Changes favorite status for an entry
      *
-     * @param  Request                                            $request
-     * @param  Entry                                              $entry
+     * @param Request $request
+     * @param Entry   $entry
+     *
      * @Route("/star/{id}", requirements={"id" = "\d+"}, name="star_entry")
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function toggleStarAction(Request $request, Entry $entry)
     {
+        $this->checkUserAction($entry);
+
         $entry->toggleStar();
         $this->getDoctrine()->getManager()->flush();
 
@@ -167,17 +184,19 @@ class EntryController extends Controller
     /**
      * Deletes entry
      *
-     * @param  Request                                            $request
-     * @param  Entry                                              $entry
+     * @param Request $request
+     * @param Entry   $entry
+     *
      * @Route("/delete/{id}", requirements={"id" = "\d+"}, name="delete_entry")
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function deleteEntryAction(Request $request, Entry $entry)
     {
-        $em = $this->getDoctrine()->getManager();
+        $this->checkUserAction($entry);
+
         $entry->setDeleted(1);
-        $em->persist($entry);
-        $em->flush();
+        $this->getDoctrine()->getManager()->flush();
 
         $this->get('session')->getFlashBag()->add(
             'notice',
@@ -185,5 +204,17 @@ class EntryController extends Controller
         );
 
         return $this->redirect($request->headers->get('referer'));
+    }
+
+    /**
+     * Check if the logged user can manage the given entry
+     *
+     * @param Entry $entry
+     */
+    private function checkUserAction(Entry $entry)
+    {
+        if ($this->getUser()->getId() != $entry->getUser()->getId()) {
+            throw $this->createAccessDeniedException('You can not use this entry.');
+        }
     }
 }
