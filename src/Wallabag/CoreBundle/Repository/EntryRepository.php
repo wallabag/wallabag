@@ -2,7 +2,6 @@
 
 namespace Wallabag\CoreBundle\Repository;
 
-use Doctrine\ORM\Query;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 

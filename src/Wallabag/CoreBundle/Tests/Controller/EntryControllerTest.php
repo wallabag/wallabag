@@ -3,6 +3,7 @@
 namespace Wallabag\CoreBundle\Tests\Controller;
 
 use Wallabag\CoreBundle\Tests\WallabagTestCase;
+use Doctrine\ORM\AbstractQuery;
 
 class EntryControllerTest extends WallabagTestCase
 {
@@ -10,7 +11,7 @@ class EntryControllerTest extends WallabagTestCase
     {
         $client = $this->getClient();
 
-        $crawler = $client->request('GET', '/new');
+        $client->request('GET', '/new');
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $this->assertContains('login', $client->getResponse()->headers->get('location'));
@@ -18,7 +19,7 @@ class EntryControllerTest extends WallabagTestCase
 
     public function testGetNew()
     {
-        $this->logIn();
+        $this->logInAs('admin');
         $client = $this->getClient();
 
         $crawler = $client->request('GET', '/new');
@@ -31,7 +32,7 @@ class EntryControllerTest extends WallabagTestCase
 
     public function testPostNewEmpty()
     {
-        $this->logIn();
+        $this->logInAs('admin');
         $client = $this->getClient();
 
         $crawler = $client->request('GET', '/new');
@@ -49,7 +50,7 @@ class EntryControllerTest extends WallabagTestCase
 
     public function testPostNewOk()
     {
-        $this->logIn();
+        $this->logInAs('admin');
         $client = $this->getClient();
 
         $crawler = $client->request('GET', '/new');
@@ -74,27 +75,27 @@ class EntryControllerTest extends WallabagTestCase
 
     public function testArchive()
     {
-        $this->logIn();
+        $this->logInAs('admin');
         $client = $this->getClient();
 
-        $crawler = $client->request('GET', '/archive');
+        $client->request('GET', '/archive');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
     public function testStarred()
     {
-        $this->logIn();
+        $this->logInAs('admin');
         $client = $this->getClient();
 
-        $crawler = $client->request('GET', '/starred');
+        $client->request('GET', '/starred');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
     public function testView()
     {
-        $this->logIn();
+        $this->logInAs('admin');
         $client = $this->getClient();
 
         $content = $client->getContainer()
@@ -102,13 +103,75 @@ class EntryControllerTest extends WallabagTestCase
             ->getRepository('WallabagCoreBundle:Entry')
             ->findOneByIsArchived(false);
 
-        if (!$content) {
-            $this->markTestSkipped('No content found in db.');
-        }
-
-        $crawler = $client->request('GET', '/view/'.$content->getId());
+        $client->request('GET', '/view/'.$content->getId());
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertContains($content->getTitle(), $client->getResponse()->getContent());
+    }
+
+    public function testToggleArchive()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $content = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneByIsArchived(false);
+
+        $client->request('GET', '/archive/'.$content->getId());
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+
+        $res = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneById($content->getId());
+
+        $this->assertEquals($res->isArchived(), true);
+    }
+
+    public function testToggleStar()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $content = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneByIsStarred(false);
+
+        $client->request('GET', '/star/'.$content->getId());
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+
+        $res = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneById($content->getId());
+
+        $this->assertEquals($res->isStarred(), true);
+    }
+
+    public function testDelete()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $content = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneByIsDeleted(false);
+
+        $client->request('GET', '/delete/'.$content->getId());
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+
+        $res = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneById($content->getId());
+
+        $this->assertEquals($res->isDeleted(), true);
     }
 }
