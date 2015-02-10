@@ -82,6 +82,9 @@ $("#tags2add").hide();
 
 $('#showtaginput').click(function(){
   $('#tags2add').toggle();
+  $('#plainurl').toggle();
+  $('#showtaginput').toggleClass('icon-tags');
+  $('#showtaginput').toggleClass('icon-check');
 });
 
 
