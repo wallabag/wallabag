@@ -8,7 +8,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tags;
-use Wallabag\CoreBundle\Entity\User;
 use Wallabag\CoreBundle\Service\Extractor;
 
 class WallabagRestController extends Controller
@@ -109,7 +108,7 @@ class WallabagRestController extends Controller
         $url = $request->request->get('url');
 
         $content = Extractor::extract($url);
-        $entry = new Entry($this->getUser()->getId());
+        $entry = new Entry($this->getUser());
         $entry->setUrl($url);
         $entry->setTitle($request->request->get('title') ?: $content->getTitle());
         $entry->setContent($content->getBody());
