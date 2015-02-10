@@ -126,6 +126,6 @@ class EntryRepository extends EntityRepository
 
         return $qb
             ->getQuery()
-            ->getResult(Query::HYDRATE_ARRAY);
+            ->getResult();
     }
 }
