@@ -18,11 +18,6 @@ login_check:
 logout:
     path:   /logout
 
-#wallabag_api:
-#    resource: "@WallabagApiBundle/Controller/"
-#    type:     annotation
-#    prefix:   /api
-
 rest :
   type : rest
   resource : "routing_rest.yml"

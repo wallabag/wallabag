@@ -8,10 +8,34 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tags;
+use Wallabag\CoreBundle\Entity\User;
 use Wallabag\CoreBundle\Service\Extractor;
 
 class WallabagRestController extends Controller
 {
+    /**
+     * Retrieve salt for a giver user.
+     *
+     * @ApiDoc(
+     *       parameters={
+     *          {"name"="username", "dataType"="string", "required"=true, "description"="username"}
+     *       }
+     * )
+     * @return string
+     */
+    public function getSaltAction($username)
+    {
+        $user = $this
+            ->getDoctrine()
+            ->getRepository('WallabagCoreBundle:User')
+            ->findOneByUsername($username);
+
+        if (is_null($user)) {
+            throw $this->createNotFoundException();
+        }
+
+        return $user->getSalt();
+    }
     /**
      * Retrieve all entries. It could be filtered by many options.
      *
@@ -85,8 +109,7 @@ class WallabagRestController extends Controller
         $url = $request->request->get('url');
 
         $content = Extractor::extract($url);
-        $entry = new Entry();
-        $entry->setUserId($this->getUser()->getId());
+        $entry = new Entry($this->getUser()->getId());
         $entry->setUrl($url);
         $entry->setTitle($request->request->get('title') ?: $content->getTitle());
         $entry->setContent($content->getBody());
