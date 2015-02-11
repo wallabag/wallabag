@@ -67,6 +67,15 @@ class WallabagRestControllerTest extends WallabagTestCase
                 'application/json'
             )
         );
+
+        // Now testing with bad headers
+        $badHeaders = array(
+            'HTTP_AUTHORIZATION' => 'Authorization profile="UsernameToken"',
+            'HTTP_x-wsse' => 'X-WSSE: UsernameToken Username="admin", PasswordDigest="Wr0ngDig3st", Nonce="n0Nc3", Created="2015-01-01T13:37:00Z"',
+        );
+
+        $client->request('GET', '/api/entries/'.$entry->getId().'.json', array(), array(), $badHeaders);
+        $this->assertEquals(403, $client->getResponse()->getStatusCode());
     }
 
     public function testGetEntries()
