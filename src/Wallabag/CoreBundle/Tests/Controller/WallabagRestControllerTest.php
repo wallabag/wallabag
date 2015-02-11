@@ -35,6 +35,7 @@ class WallabagRestControllerTest extends WallabagTestCase
         $client = $this->createClient();
         $client->request('GET', '/api/salts/admin.json');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertNotEmpty(json_decode($client->getResponse()->getContent()));
 
         $client->request('GET', '/api/salts/notfound.json');
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
