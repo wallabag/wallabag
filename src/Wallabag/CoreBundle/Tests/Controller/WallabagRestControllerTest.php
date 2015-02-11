@@ -3,7 +3,6 @@
 namespace Wallabag\CoreBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
 
 class WallabagRestControllerTest extends WebTestCase
 {
@@ -31,13 +30,13 @@ class WallabagRestControllerTest extends WebTestCase
         $nonce = substr(md5(uniqid('nonce_', true)), 0, 16);
 
         $now = new \DateTime('now', new \DateTimeZone('UTC'));
-        $created = (string)$now->format( 'Y-m-d\TH:i:s\Z' );
+        $created = (string) $now->format('Y-m-d\TH:i:s\Z');
         $digest = base64_encode(sha1(base64_decode($nonce).$created.$encryptedPassword, true));
 
         $headers = array(
             'PHP_AUTH_USER' => 'username',
             'HTTP_AUTHORIZATION' => 'Authorization profile="UsernameToken"',
-            'HTTP_x-wsse' => 'X-WSSE: UsernameToken Username="'.$username.'", PasswordDigest="'.$digest.'", Nonce="'.$nonce.'", Created="'.$created.'"'
+            'HTTP_x-wsse' => 'X-WSSE: UsernameToken Username="'.$username.'", PasswordDigest="'.$digest.'", Nonce="'.$nonce.'", Created="'.$created.'"',
         );
 
         $client->request('GET', '/api/entries', array(), array(), $headers);
