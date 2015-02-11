@@ -18,12 +18,12 @@ class WallabagTestCase extends WebTestCase
         $this->client = static::createClient();
     }
 
-    public function logIn()
+    public function logInAs($username)
     {
         $crawler = $this->client->request('GET', '/login');
         $form = $crawler->filter('button[type=submit]')->form();
         $data = array(
-            '_username' => 'admin',
+            '_username' => $username,
             '_password' => 'test',
         );
 
