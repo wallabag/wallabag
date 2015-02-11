@@ -20,7 +20,7 @@ class WallabagRestController extends Controller
      *          {"name"="username", "dataType"="string", "required"=true, "description"="username"}
      *       }
      * )
-     * @return string
+     * @return array
      */
     public function getSaltAction($username)
     {

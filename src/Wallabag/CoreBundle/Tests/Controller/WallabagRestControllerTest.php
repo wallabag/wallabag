@@ -2,9 +2,9 @@
 
 namespace Wallabag\CoreBundle\Tests\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Wallabag\CoreBundle\Tests\WallabagTestCase;
 
-class WallabagRestControllerTest extends WebTestCase
+class WallabagRestControllerTest extends WallabagTestCase
 {
     /**
      * Generate HTTP headers for authenticate user on API
