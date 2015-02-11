@@ -25,7 +25,6 @@ class WallabagRestControllerTest extends WebTestCase
         $digest = base64_encode(sha1(base64_decode($nonce).$created.$encryptedPassword, true));
 
         return array(
-            'PHP_AUTH_USER' => 'username',
             'HTTP_AUTHORIZATION' => 'Authorization profile="UsernameToken"',
             'HTTP_x-wsse' => 'X-WSSE: UsernameToken Username="'.$username.'", PasswordDigest="'.$digest.'", Nonce="'.$nonce.'", Created="'.$created.'"',
         );
