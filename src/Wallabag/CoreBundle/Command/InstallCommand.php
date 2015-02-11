@@ -136,18 +136,18 @@ class InstallCommand extends ContainerAwareCommand
         $em->persist($user);
 
         $pagerConfig = new UsersConfig();
-        $pagerConfig->setUserId($user->getId());
+        $pagerConfig->setUser($user);
         $pagerConfig->setName('pager');
         $pagerConfig->setValue(10);
 
         $em->persist($pagerConfig);
 
-        // $languageConfig = new LanguageConfig();
-        // $languageConfig->setUserId($user->getId());
-        // $languageConfig->setName('language');
-        // $languageConfig->setValue('en_EN.UTF8');
+        $languageConfig = new LanguageConfig();
+        $languageConfig->setUser($user);
+        $languageConfig->setName('language');
+        $languageConfig->setValue('en_EN');
 
-        // $em->persist($languageConfig);
+        $em->persist($languageConfig);
 
         $em->flush();
     }

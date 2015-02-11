@@ -22,11 +22,9 @@ class UsersConfig
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="user_id", type="decimal", precision=10, scale=0, nullable=true)
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="config")
      */
-    private $userId;
+    private $user;
 
     /**
      * @var string
@@ -50,29 +48,6 @@ class UsersConfig
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set userId
-     *
-     * @param  string      $userId
-     * @return UsersConfig
-     */
-    public function setUserId($userId)
-    {
-        $this->userId = $userId;
-
-        return $this;
-    }
-
-    /**
-     * Get userId
-     *
-     * @return string
-     */
-    public function getUserId()
-    {
-        return $this->userId;
     }
 
     /**
@@ -119,5 +94,28 @@ class UsersConfig
     public function getValue()
     {
         return $this->value;
+    }
+
+    /**
+     * Set user
+     *
+     * @param  \Wallabag\CoreBundle\Entity\User $user
+     * @return UsersConfig
+     */
+    public function setUser(\Wallabag\CoreBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Wallabag\CoreBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }
