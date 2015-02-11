@@ -45,12 +45,21 @@ class WallabagRestControllerTest extends WebTestCase
     {
         $client = $this->createClient();
         $client->request('GET', '/api/salts/admin.json');
-        $content = json_decode($client->getResponse()->getContent());
+        $salt = json_decode($client->getResponse()->getContent());
 
-        $headers = $this->generateHeaders('admin', 'test', $content[0]);
+        $headers = $this->generateHeaders('admin', 'test', $salt[0]);
 
-        $client->request('GET', '/api/entries/1.json', array(), array(), $headers);
-        $this->assertContains('This is my content', $client->getResponse()->getContent());
+        $entry = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneByIsArchived(false);
+
+        if (!$entry) {
+            $this->markTestSkipped('No content found in db.');
+        }
+
+        $client->request('GET', '/api/entries/'.$entry->getId().'.json', array(), array(), $headers);
+        $this->assertContains($entry->getTitle(), $client->getResponse()->getContent());
 
         $this->assertTrue(
             $client->getResponse()->headers->contains(
@@ -64,9 +73,9 @@ class WallabagRestControllerTest extends WebTestCase
     {
         $client = $this->createClient();
         $client->request('GET', '/api/salts/admin.json');
-        $content = json_decode($client->getResponse()->getContent());
+        $salt = json_decode($client->getResponse()->getContent());
 
-        $headers = $this->generateHeaders('admin', 'test', $content[0]);
+        $headers = $this->generateHeaders('admin', 'test', $salt[0]);
 
         $client->request('GET', '/api/entries', array(), array(), $headers);
         $this->assertContains('Mailjet', $client->getResponse()->getContent());
@@ -77,5 +86,33 @@ class WallabagRestControllerTest extends WebTestCase
                 'application/json'
             )
         );
+    }
+
+    public function testDeleteEntry()
+    {
+        $client = $this->createClient();
+        $client->request('GET', '/api/salts/admin.json');
+        $salt = json_decode($client->getResponse()->getContent());
+
+        $headers = $this->generateHeaders('admin', 'test', $salt[0]);
+
+        $entry = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneByIsDeleted(false);
+
+        if (!$entry) {
+            $this->markTestSkipped('No content found in db.');
+        }
+
+        $client->request('DELETE', '/api/entries/'.$entry->getId().'.json', array(), array(), $headers);
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $res = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneById($entry->getId());
+        $this->assertEquals($res->isDeleted(), true);
     }
 }
