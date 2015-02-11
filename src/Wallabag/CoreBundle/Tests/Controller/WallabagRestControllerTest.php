@@ -41,6 +41,32 @@ class WallabagRestControllerTest extends WallabagTestCase
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
     }
 
+    public function testWithBadHeaders()
+    {
+        $client = $this->createClient();
+        $client->request('GET', '/api/salts/admin.json');
+        $salt = json_decode($client->getResponse()->getContent());
+
+        $headers = $this->generateHeaders('admin', 'test', $salt[0]);
+
+        $entry = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneByIsArchived(false);
+
+        if (!$entry) {
+            $this->markTestSkipped('No content found in db.');
+        }
+
+        $badHeaders = array(
+            'HTTP_AUTHORIZATION' => 'Authorization profile="UsernameToken"',
+            'HTTP_x-wsse' => 'X-WSSE: UsernameToken Username="admin", PasswordDigest="Wr0ngDig3st", Nonce="n0Nc3", Created="2015-01-01T13:37:00Z"',
+        );
+
+        $client->request('GET', '/api/entries/'.$entry->getId().'.json', array(), array(), $badHeaders);
+        $this->assertEquals(403, $client->getResponse()->getStatusCode());
+    }
+
     public function testGetOneEntry()
     {
         $client = $this->createClient();
@@ -67,15 +93,6 @@ class WallabagRestControllerTest extends WallabagTestCase
                 'application/json'
             )
         );
-
-        // Now testing with bad headers
-        $badHeaders = array(
-            'HTTP_AUTHORIZATION' => 'Authorization profile="UsernameToken"',
-            'HTTP_x-wsse' => 'X-WSSE: UsernameToken Username="admin", PasswordDigest="Wr0ngDig3st", Nonce="n0Nc3", Created="2015-01-01T13:37:00Z"',
-        );
-
-        $client->request('GET', '/api/entries/'.$entry->getId().'.json', array(), array(), $badHeaders);
-        $this->assertEquals(403, $client->getResponse()->getStatusCode());
     }
 
     public function testGetEntries()
