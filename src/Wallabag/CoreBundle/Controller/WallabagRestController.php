@@ -20,7 +20,7 @@ class WallabagRestController extends Controller
      *          {"name"="username", "dataType"="string", "required"=true, "description"="username"}
      *       }
      * )
-     * @return string
+     * @return array
      */
     public function getSaltAction($username)
     {
@@ -33,7 +33,7 @@ class WallabagRestController extends Controller
             throw $this->createNotFoundException();
         }
 
-        return $user->getSalt();
+        return array($user->getSalt() ?: null);
     }
     /**
      * Retrieve all entries. It could be filtered by many options.
