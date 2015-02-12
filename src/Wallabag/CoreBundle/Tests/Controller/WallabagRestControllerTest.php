@@ -107,10 +107,6 @@ class WallabagRestControllerTest extends WallabagTestCase
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
-  /*      var_dump(count(json_decode($client->getResponse()->getContent())));
-        var_dump($client->getResponse()->getContent());
-        die;
-*/
         $this->assertGreaterThanOrEqual(1, count(json_decode($client->getResponse()->getContent())));
 
         $this->assertContains('Mailjet', $client->getResponse()->getContent());
