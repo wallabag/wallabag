@@ -74,16 +74,50 @@ class Poche
     /**
      * Creates a new user
      */
-    public function createNewUser($username, $password, $email = "")
+    public function createNewUser($username, $password, $email = "", $internalRegistration = false)
     {
         if (!empty($username) && !empty($password)){
             $newUsername = filter_var($username, FILTER_SANITIZE_STRING);
             $email = filter_var($email, FILTER_SANITIZE_STRING);
             if (!$this->store->userExists($newUsername)){
                 if ($this->store->install($newUsername, Tools::encodeString($password . $newUsername), $email)) {
-                    Tools::logm('The new user ' . $newUsername . ' has been installed');
-                    $this->messages->add('s', sprintf(_('The new user %s has been installed. Do you want to <a href="?logout">logout ?</a>'), $newUsername));
-                    Tools::redirect();
+                    if ($email != "") { // if email is filled
+                        if (SEND_CONFIRMATION_EMAIL && function_exists('mail')) {
+
+                            // if internal registration
+                            $body_internal = _('Hi,') . "\r\n\r\n" . sprintf(_('Someone just created a wallabag account for you on %1$s.'), Tools::getPocheUrl()) . 
+                            "\r\n\r\n" . sprintf(_('Your login is %1$s.'), $newUsername) ."\r\n\r\n" .
+                            _('Note : The password has been chosen by the person who created your account. Get in touch with that person to know your password and change it as soon as possible') . "\r\n\r\n" .
+                            _('Have fun with it !') . "\r\n\r\n" .
+                            _('This is an automatically generated message, no one will answer if you respond to it.');
+                            
+                            // if external (public) registration
+                            $body = "Hi, " . $newUsername . "\r\n\r\nYou've just created a wallabag account on " . Tools::getPocheUrl() . ".\r\nHave fun with it !";
+                            $body = $internalRegistration ? $body_internal : $body;
+
+                            $body = wordwrap($body, 70, "\r\n"); // cut lines with more than 70 caracters (MIME standard)
+                            if (mail($email, sprintf(_('Your new wallabag account on %1$s'), Tools::getPocheUrl()), $body, 
+                                'X-Mailer: PHP/' . phpversion() .  "\r\n" . 
+                                'Content-type: text/plain; charset=UTF-8' . "\r\n" .
+                                "From: " . $newUsername . "@" . gethostname() . "\r\n")) {
+                                Tools::logm('The user ' . $newUsername . ' has been emailed');
+                                $this->messages->add('i', sprintf(_('The new user %1$s has been sent an email at %2$s. You may have to check spam folder.'), $newUsername, $email));
+                                
+                            } else {
+                                Tools::logm('A problem has been encountered while sending an email');
+                                $this->messages->add('e', _('A problem has been encountered while sending an email'));
+                            }
+                        } else {
+                            Tools::logm('The user has been created, but the server did not authorize sending emails');
+                            $this->messages->add('i', _('The server did not authorize sending a confirmation email'));
+                        }
+                } else {
+                    Tools::logm('The user has been created, but no email was saved, so no confimation email was sent');
+                    $this->messages->add('i', _('The user was created, but no email was sent because email was not filled in'));
+                }
+                Tools::logm('The new user ' . $newUsername . ' has been installed');
+                $this->messages->add('s', sprintf(_('The new user %s has been installed. Do you want to <a href="?logout">logout ?</a>'), $newUsername));
+                Tools::redirect();
                 }
                 else {
                     Tools::logm('error during adding new user');
