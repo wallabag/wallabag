@@ -673,6 +673,9 @@ msgstr "Hi, %1$s"
 msgid "Someone just created a wallabag account for you on %1$s."
 msgstr "Someone just created a wallabag account for you on %1$s."
 
+msgid "You've just created a wallabag account on %1$s"
+msgstr "You've just created a wallabag account on %1$s"
+
 msgid "Your login is %1$s."
 msgstr "Your login is %1$s."
 

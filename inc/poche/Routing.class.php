@@ -72,7 +72,7 @@ class Routing
             Tools::logm('register');
             $tplFile = Tools::getTplFile('register');
         } elseif (ALLOW_REGISTER && isset($_GET['register'])){
-            $this->wallabag->createNewUser($_POST['newusername'], $_POST['password4newuser']);
+            $this->wallabag->createNewUser($_POST['newusername'], $_POST['password4newuser'], $_POST['newuseremail']);
             Tools::redirect();
         } elseif(isset($_SERVER['PHP_AUTH_USER'])) {
             if($this->wallabag->store->userExists($_SERVER['PHP_AUTH_USER'])) {

@@ -93,7 +93,9 @@ class Poche
                             _('This is an automatically generated message, no one will answer if you respond to it.');
                             
                             // if external (public) registration
-                            $body = "Hi, " . $newUsername . "\r\n\r\nYou've just created a wallabag account on " . Tools::getPocheUrl() . ".\r\nHave fun with it !";
+                            $body = sprintf(_('Hi, %1$s'), $newUsername) . "\r\n\r\n" . 
+                            sprintf(_('You\'ve just created a wallabag account on %1$s.'), Tools::getPocheUrl()) . 
+                            "\r\n\r\n" . _("Have fun with it !");
                             $body = $internalRegistration ? $body_internal : $body;
 
                             $body = wordwrap($body, 70, "\r\n"); // cut lines with more than 70 caracters (MIME standard)
@@ -117,7 +119,9 @@ class Poche
                     $this->messages->add('i', _('The user was created, but no email was sent because email was not filled in'));
                 }
                 Tools::logm('The new user ' . $newUsername . ' has been installed');
-                $this->messages->add('s', sprintf(_('The new user %s has been installed. Do you want to <a href="?logout">logout ?</a>'), $newUsername));
+                if (\Session::isLogged()) {
+                    $this->messages->add('s', sprintf(_('The new user %s has been installed. Do you want to <a href="?logout">logout ?</a>'), $newUsername));
+                }
                 Tools::redirect();
                 }
                 else {

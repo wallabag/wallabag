@@ -800,6 +800,9 @@ msgid "Someone just created a wallabag account for you on %1$s."
 msgstr ""
 "Quelqu'un vient juste de créer un compte wallabag pour vous à l'adresse %1$s."
 
+msgid "You've just created a wallabag account on %1$s"
+msgstr "Vous venez juste de vous créer un compte wallabag sur %1$s"
+
 msgid "Your login is %1$s."
 msgstr "Votre identifiant is %1$s."
 

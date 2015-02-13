@@ -33,8 +33,6 @@
 @define ('MODE_DEMO', FALSE);
 @define ('DEBUG_POCHE', FALSE);
 
-@define ('ALLOW_REGISTER', TRUE);
-
 //default level of error reporting in application. Developers should override it in their config.inc.php: set to E_ALL.
 @define ('ERROR_REPORTING', E_ALL & ~E_NOTICE);
 
@@ -63,6 +61,7 @@
 
 // registration
 @define ('SEND_CONFIRMATION_EMAIL', TRUE); // TO BE CHANGED DEPENDING ON POLL
+@define ('ALLOW_REGISTER', TRUE);
 
 // display or not print link in article view
 @define ('SHOW_PRINTLINK', '1');
