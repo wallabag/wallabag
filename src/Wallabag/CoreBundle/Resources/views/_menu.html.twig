@@ -1,14 +1,60 @@
-            <button id="menu" class="icon icon-menu desktopHide"><span>Menu</span></button>
-            <ul id="links" class="links">
-                <li><a href="{{ path('unread') }}">{% trans %}unread{% endtrans %}</a></li>
-                <li><a href="{{ path('starred') }}">{% trans %}favorites{% endtrans %}</a></li>
-                <li><a href="{{ path('archive') }}"}>{% trans %}archive{% endtrans %}</a></li>
-                <li><a href="?view=tags">{% trans %}tags{% endtrans %}</a></li>
-                <li><a href="{{ path('new_entry') }}">{% trans %}save a link{% endtrans %}</a></li>
-                <li style="position: relative;"><a href="javascript: void(null);" id="search">{% trans %}search{% endtrans %}</a>
-                    {% include "WallabagCoreBundle::_search_form.html.twig" %}
-                </li>
-                <li><a href="?view=config">{% trans %}config{% endtrans %}</a></li>
-                <li><a href={{ path('about') }}>{% trans %}about{% endtrans %}</a></li>
-                <li><a class="icon icon-power" href="{{ path('logout') }}" title="{% trans %}logout{% endtrans %}">{% trans %}logout{% endtrans %}</a></li>
-            </ul>
+<li class="mt">
+    <a class="active" href="{{ path('unread') }}">
+        <i class="fa fa-dashboard"></i>
+        <span>Unread</span>
+    </a>
+</li>
+
+<li class="sub-menu">
+    <a href="{{ path('starred') }}" >
+        <i class="fa fa-desktop"></i>
+        <span>Starred</span>
+    </a>
+</li>
+<li class="sub-menu">
+    <a href="{{ path('new_entry') }}" >
+    <i class="fa fa-cogs"></i>
+    <span>Save a link</span>
+    </a>
+</li>
+<li class="sub-menu">
+    <a href="{{ path('archive') }}" >
+        <i class="fa fa-cogs"></i>
+        <span>Archive</span>
+    </a>
+</li>
+<li class="sub-menu">
+    <a href="" >
+        <i class="fa fa-book"></i>
+        <span>Tags</span>
+    </a>
+</li>
+<!--<li class="sub-menu">
+    <a href="javascript:;" >
+        <i class="fa fa-tasks"></i>
+        <span>Forms</span>
+    </a>
+    <ul class="sub">
+        <li><a  href="form_component.html">Form Components</a></li>
+    </ul>
+</li>
+<li class="sub-menu">
+    <a href="javascript:;" >
+        <i class="fa fa-th"></i>
+        <span>Data Tables</span>
+    </a>
+    <ul class="sub">
+        <li><a  href="basic_table.html">Basic Table</a></li>
+        <li><a  href="responsive_table.html">Responsive Table</a></li>
+    </ul>
+</li>
+<li class="sub-menu">
+    <a href="javascript:;" >
+        <i class=" fa fa-bar-chart-o"></i>
+        <span>Charts</span>
+    </a>
+    <ul class="sub">
+        <li><a  href="morris.html">Morris</a></li>
+        <li><a  href="chartjs.html">Chartjs</a></li>
+    </ul>
+</li>-->

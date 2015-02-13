@@ -2,10 +2,23 @@
 
 {% block title %}{% trans %}Save new entry{% endtrans %}{% endblock %}
 
-{% block menu %}
-    {% include "WallabagCoreBundle::_menu.html.twig" %}
-{% endblock %}
+
+
+
+
+
 
 {% block content %}
-    {{ form(form) }}
+    <section id="main-content">
+        <section class="wrapper site-min-height">
+            <h3><i class="fa fa-angle-right"></i> Save new entry</h3>
+            <div class="row mt">
+                <div class="col-lg-12">
+                    <p>{{ form(form) }}</p>
+                </div>
+            </div>
+
+        </section>
+    </section>
+
 {% endblock %}

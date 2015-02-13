@@ -6,27 +6,21 @@
         <div>{{ error.message }}</div>
     {% endif %}
 
-        <form action="{{ path('login_check') }}" method="post" name="loginform">
-            <fieldset class="w500p center">
-                <h2 class="mbs txtcenter">{% trans %}Login to wallabag{% endtrans %}</h2>
 
-                <div class="row">
-                    <label class="col w150p" for="username">{% trans %}Username{% endtrans %}</label>
-                    <input type="text" id="username" name="_username" value="{{ last_username }}" />
-                </div>
-
-                <div class="row">
-                    <label class="col w150p" for="password">{% trans %}Password{% endtrans %}</label>
-                    <input type="password" id="password" name="_password" />
-                </div>
+                    <input type="text"  id="username" name="_username" class="form-control" placeholder="User ID" autofocus value="{{ last_username }}">
+                    <br/>
+                    <input type="password" id="password" name="_password" class="form-control" placeholder="Password">
             {#
                 Si vous voulez contrôler l'URL vers laquelle l'utilisateur est redirigé en cas de succès
                 (plus de détails ci-dessous)
                 <input type="hidden" name="_target_path" value="/account" />
             #}
-                <div class="row mts txtcenter">
-                    <button type="submit">login</button>
-                </div>
-            </fieldset>
-        </form>
+            <label class="checkbox">
+		                <span class="pull-right">
+		                    <a data-toggle="modal" href="login.html#myModal"> Forgot Password?</a>
+
+		                </span>
+            </label>
+                <button class="btn btn-theme btn-block" href="index.html" type="submit"><i class="fa fa-lock"></i> SIGN IN</button>
+
 {% endblock %}
