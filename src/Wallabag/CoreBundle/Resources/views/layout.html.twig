@@ -1,32 +1,117 @@
 <!DOCTYPE html>
-<!--[if lte IE 6]><html class="no-js ie6 ie67 ie678" lang="en"><![endif]-->
-<!--[if lte IE 7]><html class="no-js ie7 ie67 ie678" lang="en"><![endif]-->
-<!--[if IE 8]><html class="no-js ie8 ie678" lang="en"><![endif]-->
-<!--[if gt IE 8]><html class="no-js" lang="en"><![endif]-->
 <html lang="en">
-    <head>
-        <meta name="viewport" content="initial-scale=1.0">
-        <meta charset="utf-8">
-        <!--[if IE]>
-        <meta http-equiv="X-UA-Compatible" content="IE=10">
-        <![endif]-->
+<head>
+    <meta charset="utf-8">
         <title>{% block title %}{% endblock %} - wallabag</title>
         {% include "WallabagCoreBundle::_head.html.twig" %}
     </head>
     <body>
-    {% include "WallabagCoreBundle::_top.html.twig" %}
-    <div id="main">
-        {% block menu %}{% endblock %}
-        {% block precontent %}{% endblock %}
-        {% for flashMessage in app.session.flashbag.get('notice') %}
-            <div class="flash-notice">
-                {{ flashMessage }}
+    <section id="container">
+
+
+
+
+
+
+        <aside>
+            <div id="sidebar"  class="nav-collapse ">
+                <!-- sidebar menu start-->
+                <ul class="sidebar-menu" id="nav-accordion">
+
+                    <p class="centered"><a href="{{ path('homepage') }}"><img src="{{ asset('themes/_global/img/logo-wallabag-white.png') }}" class="img-circle" width="60"></a></p>
+                    <h5 class="centered">Nicolas Lœuillet</h5>
+                    {% include "WallabagCoreBundle::_menu.html.twig" %}
+                </ul>
+                <!-- sidebar menu end-->
             </div>
-        {% endfor %}
-        <div id="content" class="w600p center">
-            {% block content %}{% endblock %}
-        </div>
-    </div>
-    {% include "WallabagCoreBundle::_footer.html.twig" %}
+        </aside>
+
+        {% block content %}{% endblock %}
+
+    </section>
+
+
+
+
+
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="{{ asset('themes/_global/js/jquery.js') }}"></script>
+    <script src="{{ asset('themes/_global/js/jquery-1.8.3.min.js') }}"></script>
+    <script src="{{ asset('themes/_global/js/bootstrap.min.js') }}"></script>
+    <script class="include" type="text/javascript" src="{{ asset('themes/_global/js/jquery.dcjqaccordion.2.7.js') }}"></script>
+    <script src="{{ asset('themes/_global/js/jquery.scrollTo.min.js') }}"></script>
+    <script src="{{ asset('themes/_global/js/jquery.nicescroll.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('themes/_global/js/jquery.sparkline.js') }}"></script>
+
+
+    <!--common script for all pages-->
+    <script src="{{ asset('themes/_global/js/common-scripts.js') }}"></script>
+
+    <script type="text/javascript" src="{{ asset('themes/_global/js/gritter/js/jquery.gritter.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('themes/_global/js/gritter-conf.js') }}"></script>
+
+    <!--script for this page-->
+    <script src="{{ asset('themes/_global/js/sparkline-chart.js') }}"></script>
+    <script src="{{ asset('themes/_global/js/zabuto_calendar.js') }}"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var unique_id = $.gritter.add({
+                // (string | mandatory) the heading of the notification
+                title: 'Welcome to wallabag!',
+                // (string | mandatory) the text inside the notification
+                text: 'Hover me to enable the Close Button. You can hide the left sidebar clicking on the button next to the logo. Free version for <a href="http://blacktie.co" target="_blank" style="color:#ffd777">BlackTie.co</a>.',
+                // (string | optional) the image to display on the left
+                image: '{{ asset('themes/_global/img/logo-wallabag-white.png') }}',
+                // (bool | optional) if you want it to fade out on its own or just sit there
+                sticky: true,
+                // (int | optional) the time you want it to be alive for before fading out
+                time: '',
+                // (string | optional) the class name you want to apply to that specific message
+                class_name: 'my-sticky-class'
+            });
+
+            return false;
+        });
+    </script>
+
+    <script type="application/javascript">
+        $(document).ready(function () {
+            $("#date-popover").popover({html: true, trigger: "manual"});
+            $("#date-popover").hide();
+            $("#date-popover").click(function (e) {
+                $(this).hide();
+            });
+
+            $("#my-calendar").zabuto_calendar({
+                action: function () {
+                    return myDateFunction(this.id, false);
+                },
+                action_nav: function () {
+                    return myNavFunction(this.id);
+                },
+                ajax: {
+                    url: "show_data.php?action=1",
+                    modal: true
+                },
+                legend: [
+                    {type: "text", label: "Special event", badge: "00"},
+                    {type: "block", label: "Regular event", }
+                ]
+            });
+        });
+
+
+        function myNavFunction(id) {
+            $("#date-popover").hide();
+            var nav = $("#" + id).data("navigation");
+            var to = $("#" + id).data("to");
+            console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
+        }
+    </script>
+
+
+
+
     </body>
 </html>
