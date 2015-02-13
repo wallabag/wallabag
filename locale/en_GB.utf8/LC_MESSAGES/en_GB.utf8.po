@@ -4,9 +4,9 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-02-25 15:17+0300\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Thomas Citharel <tcit@openmailbox.org>\n"
+"Last-Translator: tcit <tcit@openmailbox.org>\n"
 "Language-Team: \n"
-"Language: en_US\n"
+"Language: en-GB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 
 msgid "wallabag, a read it later open source system"
-msgstr "wallabag, a read it later open source system"
+msgstr "wallabag, an open source \"Read It Later\" service"
 
 msgid "login failed: user doesn't exist"
 msgstr "Login failed: user doesn't exist"
@@ -56,7 +56,7 @@ msgid "download the application"
 msgstr "Download the application"
 
 msgid "By filling this field"
-msgstr "By filling this field"
+msgstr "By filling in this field"
 
 msgid "bag it!"
 msgstr "bag it!"
@@ -85,11 +85,6 @@ msgstr "Latest dev version"
 msgid "A more recent development version is available."
 msgstr "A more recent development version is available."
 
-msgid "You can clear cache to check the latest release."
-msgstr ""
-"You can <a href=\"#cache\">clear the cache</a> to check for the latest "
-"release."
-
 msgid "Feeds"
 msgstr "Feeds"
 
@@ -97,14 +92,14 @@ msgid ""
 "Your feed token is currently empty and must first be generated to enable "
 "feeds. Click <a href='?feed&amp;action=generate'>here to generate it</a>."
 msgstr ""
-"Your feed token is currently empty and must first be generated to enable "
-"feeds. Click <a href='?feed&amp;action=generate'>here to generate it</a>."
+"Your feed token is currently empty. You must generated it to enable feeds. "
+"<a href='?feed&amp;action=generate'>Generate Feed Token</a>."
 
 msgid "Unread feed"
 msgstr "Unread feed"
 
 msgid "Favorites feed"
-msgstr "Favorites feed"
+msgstr "Favourites feed"
 
 msgid "Archive feed"
 msgstr "Archive feed"
@@ -154,22 +149,22 @@ msgid ""
 "You can import your Pocket, Readability, Instapaper, Wallabag or any data in "
 "appropriate json or html format."
 msgstr ""
-"You can import your Pocket, Readability, Instapaper, wallabag or any file in "
-"appropriate JSON or HTML format."
+"You can import your Pocket, Readability, Instapaper, wallabag or any other "
+"data in JSON or HTML format."
 
 msgid ""
 "Please execute the import script locally as it can take a very long time."
-msgstr ""
-"Please execute the import script locally as it can take a very long time."
+msgstr "Please run the import script locally as it can take a very long time."
 
 msgid ""
 "Please select export file on your computer and press \"Import\" button "
 "below. Wallabag will parse your file, insert all URLs and start fetching of "
 "articles if required."
 msgstr ""
-"Please select export file on your computer and press &ldquo;Import&rdquo; "
-"button below. wallabag will parse your file, insert all URLs and start "
-"fetching of articles if required."
+"Please select export file on your computer and press the &ldquo;"
+"Import&rdquo; button below. wallabag will parse your file, insert all URLs "
+"and start fetching articles if required. Please execute the import script "
+"locally as it can take a very long time."
 
 msgid "You can click here to fetch content for articles with no content."
 msgstr "Fetch content for articles with no content"
@@ -259,7 +254,7 @@ msgstr ""
 "here</a>."
 
 msgid "favoris"
-msgstr "Favorites"
+msgstr "Favourites"
 
 msgid "archive"
 msgstr "Archive"
@@ -268,22 +263,22 @@ msgid "unread"
 msgstr "Unread"
 
 msgid "by date asc"
-msgstr "by date asc"
+msgstr "by date ascending"
 
 msgid "by date"
 msgstr "by date"
 
 msgid "by date desc"
-msgstr "by date desc"
+msgstr "by date descending"
 
 msgid "by title asc"
-msgstr "by title asc"
+msgstr "by title ascending"
 
 msgid "by title"
 msgstr "by title"
 
 msgid "by title desc"
-msgstr "by title desc"
+msgstr "by title descending"
 
 msgid "Tag"
 msgstr "Tag"
@@ -295,7 +290,7 @@ msgid "Toggle mark as read"
 msgstr "Toggle mark as read"
 
 msgid "toggle favorite"
-msgstr "Toggle favorite"
+msgstr "Toggle favourite"
 
 msgid "delete"
 msgstr "Delete"
@@ -323,9 +318,9 @@ msgid ""
 "Don't hesitate to <a href='http://doc.wallabag.org/'>read the documentation "
 "on wallabag website</a>."
 msgstr ""
-"wallabag is still not installed. Please fill the below form to install it. "
-"Don't hesitate to <a href='http://doc.wallabag.org/'>read the documentation "
-"on wallabag website</a>."
+"wallabag is still not installed. Please fill in the form to install it.  If "
+"you need help, please <a href='http://doc.wallabag.org/'>read the "
+"documentation on wallabag website</a>."
 
 msgid "Login"
 msgstr "Login"
@@ -358,7 +353,7 @@ msgid "Sign in"
 msgstr "Sign in"
 
 msgid "favorites"
-msgstr "Favorites"
+msgstr "Favourites"
 
 msgid "estimated reading time :"
 msgstr "Estimated reading time:"
@@ -376,10 +371,10 @@ msgid "Mark as read"
 msgstr "Mark as read"
 
 msgid "Favorite"
-msgstr "Favorite"
+msgstr "Favourite"
 
 msgid "Toggle favorite"
-msgstr "Toggle favorite"
+msgstr "Toggle favourite"
 
 msgid "Delete"
 msgstr "Delete"
@@ -397,7 +392,7 @@ msgid "flattr"
 msgstr "flattr"
 
 msgid "Does this article appear wrong?"
-msgstr "Does this article appear wrong?"
+msgstr "Does this article display incorrectly?"
 
 msgid "tags:"
 msgstr "tags:"
@@ -421,7 +416,7 @@ msgid "powered by"
 msgstr "Powered by"
 
 msgid "debug mode is on so cache is off."
-msgstr "Debug mode is on, so cache is off."
+msgstr "Debug mode is on, so the cache is off."
 
 msgid "your wallabag version:"
 msgstr "Your wallabag version:"
@@ -445,7 +440,7 @@ msgid "email"
 msgstr "Email"
 
 msgid "this article appears wrong?"
-msgstr "This article appears wrong?"
+msgstr "This article displays incorrectly?"
 
 msgid "No link available here!"
 msgstr "No link available here"
@@ -454,7 +449,7 @@ msgid "Poching a link"
 msgstr "bagging a link"
 
 msgid "by filling this field"
-msgstr "by filling this field"
+msgstr "by filling in this field"
 
 msgid "bookmarklet: drag & drop this link to your bookmarks bar"
 msgstr "Bookmarklet: Drag & drop this link to your bookmarks bar"
@@ -475,14 +470,18 @@ msgid "you are up to date."
 msgstr "You are up to date."
 
 msgid "latest dev version"
-msgstr "latest dev version"
+msgstr "latest development version"
 
 msgid "a more recent development version is available."
 msgstr "A more recent development version is available."
 
-msgid "Please execute the import script locally, it can take a very long time."
+msgid "You can clear cache to check the latest release."
 msgstr ""
-"Please execute the import script locally, it can take a very long time."
+"You can <a href=\"#cache\">clear the cache</a> to check for the latest "
+"release."
+
+msgid "Please execute the import script locally, it can take a very long time."
+msgstr "Please run the import script locally as it can take a very long time."
 
 msgid "More infos in the official doc:"
 msgstr "More information in the official doc:"
@@ -533,26 +532,26 @@ msgid ""
 "the two fields have to be filled & the password must be the same in the two "
 "fields"
 msgstr ""
-"The two fields must be filled, and the password must be the same in both "
+"The two fields must be filled in, and the password must be the same in both "
 "fields"
 
 msgid "still using the \""
 msgstr "Still using the \""
 
 msgid "that theme does not seem to be installed"
-msgstr "That theme does not seem to be installed."
+msgstr "That theme is not installed."
 
 msgid "you have changed your theme preferences"
 msgstr "You have changed your theme preferences."
 
 msgid "that language does not seem to be installed"
-msgstr "That language does not seem to be installed."
+msgstr "That language is not installed."
 
 msgid "you have changed your language preferences"
 msgstr "You have changed your language preferences."
 
 msgid "login failed: you have to fill all fields"
-msgstr "Login failed: you have to fill all fields."
+msgstr "Login failed: you have to fill in all the fields."
 
 msgid "welcome to your wallabag"
 msgstr "Welcome to your wallabag."
@@ -612,7 +611,7 @@ msgid "Delete account"
 msgstr "Delete Account"
 
 msgid "You can delete your account by entering your password and validating."
-msgstr "You can delete your account by entering your password and validating."
+msgstr "You can delete your account by entering your password and confirming."
 
 msgid "Be careful, data will be erased forever (that is a very long time)."
 msgstr "Be careful, data will be erased forever (that is a very long time)."
@@ -621,14 +620,14 @@ msgid "Type here your password"
 msgstr "Enter your password"
 
 msgid "You are the only user, you cannot delete your own account."
-msgstr "You cannot delete your account because you are the only user."
+msgstr "You are the only user; you cannot delete your own account."
 
 msgid ""
 "To completely remove wallabag, delete the wallabag folder on your web server "
 "(and eventual databases)."
 msgstr ""
-"To completely remove wallabag, delete the wallabag folder and database(s) "
-"from your web server."
+"To completely remove wallabag, delete the wallabag folder on your web "
+"server.  Then delete any any databases you have created for wallabag."
 
 msgid "Enter your search here"
 msgstr "Enter your search here"
@@ -644,8 +643,8 @@ msgid ""
 "Click on <a href=\"./?epub&amp;method=all\" title=\"Generate ePub\">this "
 "link</a> to get all your articles in one ebook (ePub 3 format)."
 msgstr ""
-"Click on <a href=\"./?epub&amp;method=all\" title=\"Generate EPUB\">this "
-"link</a> to get all your articles in one ebook (EPUB 3 format)."
+"You can <a href=\"./?epub&amp;method=all\" title=\"Generate EPUB\">Generate "
+"an EPUB</a> to get all your articles in one ebook (EPUB 3 format)."
 
 msgid ""
 "This can <b>take a while</b> and can <b>even fail</b> if you have too many "
@@ -655,63 +654,13 @@ msgstr ""
 "articles, depending on your server configuration."
 
 msgid "Download the articles from this tag in an epub"
-msgstr "Download the articles from this tag in an EPUB"
+msgstr "Download the articles from this tag as an EPUB"
 
 msgid "Download the articles from this search in an epub"
-msgstr "Download the articles from this search in an EPUB"
+msgstr "Download the articles from this search as an EPUB"
 
 msgid "Download the articles from this category in an epub"
-msgstr "Download the articles from this category in an EPUB"
-
-# registration
-msgid "Hi,"
-msgstr "Hi,"
-
-msgid "Hi, %1$s"
-msgstr "Hi, %1$s"
-
-msgid "Someone just created a wallabag account for you on %1$s."
-msgstr "Someone just created a wallabag account for you on %1$s."
-
-msgid "Your login is %1$s."
-msgstr "Your login is %1$s."
-
-msgid "Have fun with it !"
-msgstr "Have fun with it !"
-
-msgid ""
-"This is an automatically generated message, no one will answer if you "
-"respond to it."
-msgstr ""
-"This is an automatically generated message, no one will answer if you "
-"respond to it."
-
-msgid ""
-"Note : The password has been chosen by the person who created your account. "
-"Get in touch with that person to know your password and change it as soon as "
-"possible"
-msgstr ""
-"Note : The password has been chosen by the person who created your account. "
-"Get in touch with that person to know your password and change it as soon as "
-"possible"
-
-msgid ""
-"The new user %1$s has been sent an email at %2$s. You may have to check spam "
-"folder."
-msgstr ""
-"The new user %1$s has been sent an email at %2$s. You may have to check spam "
-"folder."
-
-msgid "A problem has been encountered while sending the confirmation email"
-msgstr "A problem has been encountered while sending an confirmation email"
-
-msgid "The server did not authorize sending a confirmation email"
-msgstr "The server did not authorize sending a confirmation email"
-
-msgid ""
-"The user was created, but no email was sent because email was not filled in"
-msgstr ""
-"The user was created, but no email was sent because email was not filled in"
+msgstr "Download the articles from this category as an EPUB"
 
 #~ msgid "poche it!"
 #~ msgstr "poche it!"

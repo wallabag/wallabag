@@ -74,7 +74,7 @@ class Poche
     /**
      * Creates a new user
      */
-    public function createNewUser($username, $password, $email = "")
+    public function createNewUser($username, $password, $email = "", $internalRegistration = false)
     {
         Tools::logm('Trying to create a new user...');
         if (!empty($username) && !empty($password)){
@@ -82,9 +82,43 @@ class Poche
             $email = filter_var($email, FILTER_SANITIZE_STRING);
             if (!$this->store->userExists($newUsername)){
                 if ($this->store->install($newUsername, Tools::encodeString($password . $newUsername), $email)) {
-                    Tools::logm('The new user ' . $newUsername . ' has been installed');
-                    $this->messages->add('s', sprintf(_('The new user %s has been installed. Do you want to <a href="?logout">logout ?</a>'), $newUsername));
-                    Tools::redirect();
+                    if ($email != "") { // if email is filled
+                        if (SEND_CONFIRMATION_EMAIL && function_exists('mail')) {
+
+                            // if internal registration
+                            $body_internal = _('Hi,') . "\r\n\r\n" . sprintf(_('Someone just created a wallabag account for you on %1$s.'), Tools::getPocheUrl()) . 
+                            "\r\n\r\n" . sprintf(_('Your login is %1$s.'), $newUsername) ."\r\n\r\n" .
+                            _('Note : The password has been chosen by the person who created your account. Get in touch with that person to know your password and change it as soon as possible') . "\r\n\r\n" .
+                            _('Have fun with it !') . "\r\n\r\n" .
+                            _('This is an automatically generated message, no one will answer if you respond to it.');
+                            
+                            // if external (public) registration
+                            $body = "Hi, " . $newUsername . "\r\n\r\nYou've just created a wallabag account on " . Tools::getPocheUrl() . ".\r\nHave fun with it !";
+                            $body = $internalRegistration ? $body_internal : $body;
+
+                            $body = wordwrap($body, 70, "\r\n"); // cut lines with more than 70 caracters (MIME standard)
+                            if (mail($email, sprintf(_('Your new wallabag account on %1$s'), Tools::getPocheUrl()), $body, 
+                                'X-Mailer: PHP/' . phpversion() .  "\r\n" . 
+                                'Content-type: text/plain; charset=UTF-8' . "\r\n" .
+                                "From: " . $newUsername . "@" . gethostname() . "\r\n")) {
+                                Tools::logm('The user ' . $newUsername . ' has been emailed');
+                                $this->messages->add('i', sprintf(_('The new user %1$s has been sent an email at %2$s. You may have to check spam folder.'), $newUsername, $email));
+                                
+                            } else {
+                                Tools::logm('A problem has been encountered while sending an email');
+                                $this->messages->add('e', _('A problem has been encountered while sending an email'));
+                            }
+                        } else {
+                            Tools::logm('The user has been created, but the server did not authorize sending emails');
+                            $this->messages->add('i', _('The server did not authorize sending a confirmation email'));
+                        }
+                } else {
+                    Tools::logm('The user has been created, but no email was saved, so no confimation email was sent');
+                    $this->messages->add('i', _('The user was created, but no email was sent because email was not filled in'));
+                }
+                Tools::logm('The new user ' . $newUsername . ' has been installed');
+                $this->messages->add('s', sprintf(_('The new user %s has been installed. Do you want to <a href="?logout">logout ?</a>'), $newUsername));
+                Tools::redirect();
                 }
                 else {
                     Tools::logm('error during adding new user');
@@ -199,9 +233,9 @@ class Poche
                 }
 
                 if ($autoclose == TRUE) {
-                  Tools::redirect('?view=home');
+                    Tools::redirect('?view=home&closewin=true');
                 } else {
-                  Tools::redirect('?view=home&closewin=true');
+                    Tools::redirect('?view=home');
                 }
                 return $last_id;
                 break;
@@ -340,6 +374,27 @@ class Poche
                 }
                 $this->messages->add('s', _('The tag has been successfully deleted'));
                 Tools::redirect();
+                break;
+
+            case 'reload_article' :
+                Tools::logm('reload article');
+                $id = $_GET['id'];
+                $entry = $this->store->retrieveOneById($id, $this->user->getId());
+                Tools::logm('reload url ' . $entry['url']);
+                $url = new Url(base64_encode($entry['url']));
+                $this->action('add', $url);
+                break;
+                
+            /* For some unknown reason I can't get displayView() to work here (it redirects to home view afterwards). So here's a dirty fix which redirects directly to URL */
+            case 'random':
+                $id = 0;
+                while ($this->store->retrieveOneById($id,$this->user->getId()) == null) {
+                    $count = $this->store->getEntriesByViewCount($view, $this->user->getId());
+                    $id = rand(1,$count);
+                }
+                Tools::logm('get a random article');
+                Tools::redirect('?view=view&id=' . $id);
+                //$this->displayView('view', $id);
                 break;
             default:
                 break;
@@ -723,17 +778,23 @@ class Poche
                 $purifier = $this->_getPurifier();
                 foreach($items as $item) {
                     $url = new Url(base64_encode($item['url']));
-                    Tools::logm('Fetching article ' . $item['id']);
-                    $content = Tools::getPageContent($url);
-                    $title = (($content['rss']['channel']['item']['title'] != '') ? $content['rss']['channel']['item']['title'] : _('Untitled'));
-                    $body = (($content['rss']['channel']['item']['description'] != '') ? $content['rss']['channel']['item']['description'] : _('Undefined'));
+                    if( $url->isCorrect() )
+                    {
+                        Tools::logm('Fetching article ' . $item['id']);
+                        $content = Tools::getPageContent($url);
+                        $title = (($content['rss']['channel']['item']['title'] != '') ? $content['rss']['channel']['item']['title'] : _('Untitled'));
+                        $body = (($content['rss']['channel']['item']['description'] != '') ? $content['rss']['channel']['item']['description'] : _('Undefined'));
 
-                    // clean content to prevent xss attack
+                        // clean content to prevent xss attack
 
-                    $title = $purifier->purify($title);
-                    $body = $purifier->purify($body);
-                    $this->store->updateContentAndTitle($item['id'], $title, $body, $this->user->getId());
-                    Tools::logm('Article ' . $item['id'] . ' updated.');
+                        $title = $purifier->purify($title);
+                        $body = $purifier->purify($body);
+                        $this->store->updateContentAndTitle($item['id'], $title, $body, $this->user->getId());
+                        Tools::logm('Article ' . $item['id'] . ' updated.');
+                    } else
+                    {
+                        Tools::logm('Unvalid URL (' . $item['url'] .')  to fetch for article ' . $item['id']);
+                    }
                 }
             }
         }

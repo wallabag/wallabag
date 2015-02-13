@@ -151,6 +151,16 @@ a:visited {
     text-indent: -9999px;
 }
 
+.random {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    overflow: hidden;
+    text-align: left;
+    text-indent: -9999px;
+    background-image: url('../img/default/dice.png');
+}
+
 /*** ***/
 
 /*** ARTICLE PAGE ***/

@@ -46,6 +46,7 @@
 @define ('SHARE_MAIL', TRUE);
 @define ('SHARE_SHAARLI', FALSE);
 @define ('SHAARLI_URL', 'http://myshaarliurl.com');
+@define ('SHARE_EVERNOTE', FALSE);
 @define ('SHARE_DIASPORA', FALSE);
 @define ('DIASPORA_URL', 'http://diasporapod.com'); # Don't add a / at the end
 @define ('FLATTR', TRUE);
@@ -60,10 +61,14 @@
 @define ('MOBI', FALSE);
 @define ('PDF', FALSE);
 
+// registration
+@define ('SEND_CONFIRMATION_EMAIL', TRUE); // TO BE CHANGED DEPENDING ON POLL
+
 // display or not print link in article view
 @define ('SHOW_PRINTLINK', '1');
 // display or not percent of read in article view. Affects only default theme.
 @define ('SHOW_READPERCENT', '1');
+@define ('RELOAD_ARTICLE', TRUE);
 @define ('ABS_PATH', 'assets/');
 
 @define ('DEFAULT_THEME', 'baggy');
