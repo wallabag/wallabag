@@ -59,6 +59,9 @@
 @define ('MOBI', FALSE);
 @define ('PDF', FALSE);
 
+// registration
+@define ('SEND_CONFIRMATION_EMAIL', TRUE);
+
 // display or not print link in article view
 @define ('SHOW_PRINTLINK', '1');
 // display or not percent of read in article view. Affects only default theme.

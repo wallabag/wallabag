@@ -663,6 +663,56 @@ msgstr "Download the articles from this search in an EPUB"
 msgid "Download the articles from this category in an epub"
 msgstr "Download the articles from this category in an EPUB"
 
+# registration
+msgid "Hi,"
+msgstr "Hi,"
+
+msgid "Hi, %1$s"
+msgstr "Hi, %1$s"
+
+msgid "Someone just created a wallabag account for you on %1$s."
+msgstr "Someone just created a wallabag account for you on %1$s."
+
+msgid "Your login is %1$s."
+msgstr "Your login is %1$s."
+
+msgid "Have fun with it !"
+msgstr "Have fun with it !"
+
+msgid ""
+"This is an automatically generated message, no one will answer if you "
+"respond to it."
+msgstr ""
+"This is an automatically generated message, no one will answer if you "
+"respond to it."
+
+msgid ""
+"Note : The password has been chosen by the person who created your account. "
+"Get in touch with that person to know your password and change it as soon as "
+"possible"
+msgstr ""
+"Note : The password has been chosen by the person who created your account. "
+"Get in touch with that person to know your password and change it as soon as "
+"possible"
+
+msgid ""
+"The new user %1$s has been sent an email at %2$s. You may have to check spam "
+"folder."
+msgstr ""
+"The new user %1$s has been sent an email at %2$s. You may have to check spam "
+"folder."
+
+msgid "A problem has been encountered while sending the confirmation email"
+msgstr "A problem has been encountered while sending an confirmation email"
+
+msgid "The server did not authorize sending a confirmation email"
+msgstr "The server did not authorize sending a confirmation email"
+
+msgid ""
+"The user was created, but no email was sent because email was not filled in"
+msgstr ""
+"The user was created, but no email was sent because email was not filled in"
+
 #~ msgid "poche it!"
 #~ msgstr "poche it!"
 

@@ -789,6 +789,58 @@ msgstr ""
 msgid "Produced by wallabag with PHPMobi"
 msgstr "Produit par wallabag avec PHPMobi"
 
+# registration
+msgid "Hi,"
+msgstr "Salut,"
+
+msgid "Hi, %1$s"
+msgstr "Salut, %1$s"
+
+msgid "Someone just created a wallabag account for you on %1$s."
+msgstr ""
+"Quelqu'un vient juste de créer un compte wallabag pour vous à l'adresse %1$s."
+
+msgid "Your login is %1$s."
+msgstr "Votre identifiant is %1$s."
+
+msgid "Have fun with it !"
+msgstr "Amusez-vous bien !"
+
+msgid ""
+"This is an automatically generated message, no one will answer if you "
+"respond to it."
+msgstr ""
+"Ceci est un message généré automatiquement, personne ne vous répondra si "
+"vous y répondez."
+
+msgid ""
+"Note : The password has been chosen by the person who created your account. "
+"Get in touch with that person to know your password and change it as soon as "
+"possible"
+msgstr ""
+"Note : Votre mot de passe a été défini par la personne ayant créé votre "
+"compte. Vous devriez entrer en contact avec cette personne pour connaître "
+"votre mot de passe et le changer dès que possible"
+
+msgid ""
+"The new user %1$s has been sent an email at %2$s. You may have to check spam "
+"folder."
+msgstr ""
+"Un email a été envoyé au nouvel utiliateur %1$s à l'adresse %2$s. Il peut "
+"être nécessaire de vérifier le dossier des spams."
+
+msgid "A problem has been encountered while sending the confirmation email"
+msgstr "Un problème a été rencontré lors de l'envoi de l'email de confirmation"
+
+msgid "The server did not authorize sending a confirmation email"
+msgstr "Le serveur n'autorise pas l'envoi d'un email de confirmation"
+
+msgid ""
+"The user was created, but no email was sent because email was not filled in"
+msgstr ""
+"L'utilisateur a été créé, mais aucun mail n'a été envoyé car l'email n'était "
+"pas renseigné"
+
 msgid "Mail function is disabled. You can't send emails from your server"
 msgstr ""
 "La fonction mail est désactivée. Vous ne pouvez pas envoyer d'E-mails depuis "
