@@ -60,7 +60,7 @@
 @define ('PDF', FALSE);
 
 // registration
-@define ('SEND_CONFIRMATION_EMAIL', TRUE);
+@define ('SEND_CONFIRMATION_EMAIL', TRUE); // TO BE CHANGED DEPENDING ON POLL
 
 // display or not print link in article view
 @define ('SHOW_PRINTLINK', '1');
