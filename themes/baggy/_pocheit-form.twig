@@ -4,6 +4,10 @@
         <a href="javascript: void(null);" id="bagit-form-close" class="close-button--popup close-button">&times;</a>
         <input type="hidden" name="autoclose" value="1" />
         <input required placeholder="example.com/article" class="addurl" id="plainurl" name="plainurl" type="url" />
+        <div style="display:inline-block;cursor: pointer;" title="{% trans "Edit tags" %}" id="showtaginput" class="tool icon icon-tags">
+            <span>Add tags</span>
+        </div>
+        <input placeholder="tags, with commas" class="addurl" id="tags2add" name="tags" type="text"/>
         <span id="add-link-result"></span>
         <input type="submit" value="{% trans "save link!" %}" />
     </form>

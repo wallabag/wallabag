@@ -214,9 +214,9 @@ class Poche
                 }
 
                 if ($autoclose == TRUE) {
-                  Tools::redirect('?view=home');
+                    Tools::redirect('?view=home&closewin=true');
                 } else {
-                  Tools::redirect('?view=home&closewin=true');
+                    Tools::redirect('?view=home');
                 }
                 return $last_id;
                 break;
@@ -355,6 +355,27 @@ class Poche
                 }
                 $this->messages->add('s', _('The tag has been successfully deleted'));
                 Tools::redirect();
+                break;
+
+            case 'reload_article' :
+                Tools::logm('reload article');
+                $id = $_GET['id'];
+                $entry = $this->store->retrieveOneById($id, $this->user->getId());
+                Tools::logm('reload url ' . $entry['url']);
+                $url = new Url(base64_encode($entry['url']));
+                $this->action('add', $url);
+                break;
+                
+            /* For some unknown reason I can't get displayView() to work here (it redirects to home view afterwards). So here's a dirty fix which redirects directly to URL */
+            case 'random':
+                $id = 0;
+                while ($this->store->retrieveOneById($id,$this->user->getId()) == null) {
+                    $count = $this->store->getEntriesByViewCount($view, $this->user->getId());
+                    $id = rand(1,$count);
+                }
+                Tools::logm('get a random article');
+                Tools::redirect('?view=view&id=' . $id);
+                //$this->displayView('view', $id);
                 break;
             default:
                 break;
@@ -738,17 +759,23 @@ class Poche
                 $purifier = $this->_getPurifier();
                 foreach($items as $item) {
                     $url = new Url(base64_encode($item['url']));
-                    Tools::logm('Fetching article ' . $item['id']);
-                    $content = Tools::getPageContent($url);
-                    $title = (($content['rss']['channel']['item']['title'] != '') ? $content['rss']['channel']['item']['title'] : _('Untitled'));
-                    $body = (($content['rss']['channel']['item']['description'] != '') ? $content['rss']['channel']['item']['description'] : _('Undefined'));
+                    if( $url->isCorrect() )
+                    {
+                        Tools::logm('Fetching article ' . $item['id']);
+                        $content = Tools::getPageContent($url);
+                        $title = (($content['rss']['channel']['item']['title'] != '') ? $content['rss']['channel']['item']['title'] : _('Untitled'));
+                        $body = (($content['rss']['channel']['item']['description'] != '') ? $content['rss']['channel']['item']['description'] : _('Undefined'));
 
-                    // clean content to prevent xss attack
+                        // clean content to prevent xss attack
 
-                    $title = $purifier->purify($title);
-                    $body = $purifier->purify($body);
-                    $this->store->updateContentAndTitle($item['id'], $title, $body, $this->user->getId());
-                    Tools::logm('Article ' . $item['id'] . ' updated.');
+                        $title = $purifier->purify($title);
+                        $body = $purifier->purify($body);
+                        $this->store->updateContentAndTitle($item['id'], $title, $body, $this->user->getId());
+                        Tools::logm('Article ' . $item['id'] . ' updated.');
+                    } else
+                    {
+                        Tools::logm('Unvalid URL (' . $item['url'] .')  to fetch for article ' . $item['id']);
+                    }
                 }
             }
         }

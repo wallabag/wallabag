@@ -2,6 +2,10 @@
     <a href="javascript: void(null);" id="bagit-form-close">&nbsp;</a>
     <form method="get" action="index.php" id="bagit-form-form">
       <input required placeholder="example.com/article" class="addurl" id="plainurl" name="plainurl" type="url" />
+      <div style="display:inline-block;cursor: pointer;" title="{% trans "Edit tags" %}" id="showtaginput" class="edit-tags">
+         <span id="showtaginput">Add tags</span>
+      </div>
+      <input placeholder="tags, with commas" class="addurl" id="tags2add" name="tags" type="text"/>
       <input type="submit" value="{% trans "save link!" %}" />
       <div id="add-link-result"></div>
     </form>

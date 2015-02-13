@@ -33,6 +33,7 @@ class Routing
         $this->view         = Tools::checkVar('view', 'home');
         $this->action       = Tools::checkVar('action');
         $this->id           = Tools::checkVar('id');
+        $this->autoclose    = Tools::checkVar('autoclose',FALSE);
         $_SESSION['sort']   = Tools::checkVar('sort', 'id');
         $this->url          = new Url((isset ($_GET['url'])) ? $_GET['url'] : '');
     }
@@ -64,7 +65,7 @@ class Routing
         $tplVars = array();
 
         if (\Session::isLogged()) {
-            $this->wallabag->action($this->action, $this->url, $this->id);
+            $this->wallabag->action($this->action, $this->url, $this->id, FALSE, $this->autoclose);
             $tplFile = Tools::getTplFile($this->view);
             $tplVars = array_merge($this->vars, $this->wallabag->displayView($this->view, $this->id));
         } elseif(isset($_SERVER['PHP_AUTH_USER'])) {
