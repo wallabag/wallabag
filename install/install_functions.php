@@ -28,6 +28,7 @@ $gettext_ok = function_exists("gettext");
 $gd_ok = extension_loaded('gd');
 $pdo_drivers = pdoDrivers();
 $pdo_drivers_passing = $pdo_drivers['sqlite'] || $pdo_drivers['mysql'] || $pdo_drivers['postgres'];
+$urlfetching = $curl_ok || $allow_url_fopen_ok;
 
 
 
@@ -46,7 +47,7 @@ $status = array('app_name' => $app_name, 'php' => $php_ok, 'pdo' => $pdo_ok,
   'pdo_drivers_passing' => $pdo_drivers_passing, 'xml' => $xml_ok, 'pcre' => $pcre_ok,
   'zlib' => $zlib_ok, 'mbstring' => $mbstring_ok, 'dom' => $dom_ok, 'iconv' => $iconv_ok, 'tidy' => $tidy_ok, 'curl' => $curl_ok,
    'parse_ini' => $parse_ini_ok, 'parallel' => $parallel_ok, 'allow_url_fopen' => $allow_url_fopen_ok, 'filter' => $filter_ok,
-    'gettext' => $gettext_ok, 'gd' => $gd_ok);
+    'gettext' => $gettext_ok, 'gd' => $gd_ok, 'urlfetching' => $urlfetching);
 
 return $status;
 }
@@ -56,7 +57,7 @@ function isOkay() {
 
 function isPassing() {
 	$status = status();
-	unset($status['curl'], $status['parallel'], $status['tidy'], $status['gd'], $status['filter']);
+	unset($status['curl'], $status['parallel'], $status['tidy'], $status['gd'], $status['filter'], $status['allow_url_fopen']);
 	return !in_array(false, $status);
 }
 

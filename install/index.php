@@ -522,8 +522,16 @@ border: 1px solid #000;
                             <tr class="<?php echo ($status['allow_url_fopen']) ? 'enabled' : 'disabled'; ?>">
                                 <td><a href="http://www.php.net/manual/en/filesystem.configuration.php#ini.allow-url-fopen">allow_url_fopen</a></td>
                                 <td>Enabled</td>
-                                <?php echo ($status['allow_url_fopen']) ? '<td class="good">Enabled' : '<td class="bad">Disabled'; ?></td>
-                                <td><?php echo ($status['allow_url_fopen']) ? '<strong>allow_url_fopen:</strong> You have allow_url_fopen enabled.' : '<strong>allow_url_fopen:</strong> Your PHP configuration has allow_url_fopen disabled.  <strong>' . $status['app_name'] . ' will not work here.</strong>' ?></td>
+                                <?php if ($status['allow_url_fopen']) { ?>
+                                <td class="good">Enabled</td>
+                                <td><strong>allow_url_fopen:</strong> You have allow_url_fopen enabled.
+                                <?php } elseif ($status['curl']) { ?>
+                                <td class="pass">Disabled</td>
+                                <td><strong>allow_url_fopen</strong> is disabled, but curl is supported, so it should be ok.</td>
+                                <?php } else { ?>
+                                <td class="bad">Disabled</td>
+                                <td><strong>allow_url_fopen:</strong> Your PHP configuration has allow_url_fopen disabled.
+                                <strong><?php echo $status['app_name']; ?>  will not work here.</strong><?php } ?></td>
                             </tr>
                             <tr class="<?php echo ($status['gettext']) ? 'enabled' : 'disabled'; ?>">
                                 <td><a href="http://php.net/manual/en/book.gettext.php">gettext</a></td>
