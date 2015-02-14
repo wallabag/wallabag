@@ -67,6 +67,9 @@ msgstr "Se connecter"
 msgid "back to home"
 msgstr "retour à l'accueil"
 
+msgid "back"
+msgstr "retour"
+
 msgid "favorites"
 msgstr "favoris"
 
@@ -356,6 +359,9 @@ msgstr "Tweet"
 
 msgid "Email"
 msgstr "E-mail"
+
+msgid "Email (not required)"
+msgstr "E-mail (non requis)"
 
 msgid "shaarli"
 msgstr "Shaarli"
@@ -835,8 +841,12 @@ msgstr ""
 msgid "A problem has been encountered while sending the confirmation email"
 msgstr "Un problème a été rencontré lors de l'envoi de l'email de confirmation"
 
-msgid "The server did not authorize sending a confirmation email"
-msgstr "Le serveur n'autorise pas l'envoi d'un email de confirmation"
+msgid ""
+"The server did not authorize sending a confirmation email, but the user was "
+"created."
+msgstr ""
+"Le serveur n'autorise pas l'envoi d'un email de confirmation, mais "
+"l'utilisateur a été créé."
 
 msgid ""
 "The user was created, but no email was sent because email was not filled in"

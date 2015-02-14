@@ -85,7 +85,7 @@ class Poche
                     if ($email != "") { // if email is filled
                         if (SEND_CONFIRMATION_EMAIL && function_exists('mail')) {
 
-                            // if internal registration
+                            // if internal registration from config screen
                             $body_internal = _('Hi,') . "\r\n\r\n" . sprintf(_('Someone just created a wallabag account for you on %1$s.'), Tools::getPocheUrl()) . 
                             "\r\n\r\n" . sprintf(_('Your login is %1$s.'), $newUsername) ."\r\n\r\n" .
                             _('Note : The password has been chosen by the person who created your account. Get in touch with that person to know your password and change it as soon as possible') . "\r\n\r\n" .
@@ -96,6 +96,7 @@ class Poche
                             $body = sprintf(_('Hi, %1$s'), $newUsername) . "\r\n\r\n" . 
                             sprintf(_('You\'ve just created a wallabag account on %1$s.'), Tools::getPocheUrl()) . 
                             "\r\n\r\n" . _("Have fun with it !");
+
                             $body = $internalRegistration ? $body_internal : $body;
 
                             $body = wordwrap($body, 70, "\r\n"); // cut lines with more than 70 caracters (MIME standard)
@@ -105,6 +106,7 @@ class Poche
                                 "From: " . $newUsername . "@" . gethostname() . "\r\n")) {
                                 Tools::logm('The user ' . $newUsername . ' has been emailed');
                                 $this->messages->add('i', sprintf(_('The new user %1$s has been sent an email at %2$s. You may have to check spam folder.'), $newUsername, $email));
+                                Tools::redirect('?');
                                 
                             } else {
                                 Tools::logm('A problem has been encountered while sending an email');
