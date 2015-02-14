@@ -83,6 +83,7 @@ else if (isset($_POST['install'])) {
                     $handle = new PDO($db_path, $_POST['mysql_user'], $_POST['mysql_password'], array(
                         PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8mb4',
                     ));
+                    $content = str_replace("define ('MYSQL_USE_UTF8MB4', FALSE);", "define ('MYSQL_USE_UTF8MB4', TRUE);", $content);
                 } else { // regular UTF8
                     $db_path = 'mysql:host=' . $_POST['mysql_server'] . ';dbname=' . $_POST['mysql_database'];
                     $handle = new PDO($db_path, $_POST['mysql_user'], $_POST['mysql_password']);
@@ -126,6 +127,14 @@ else if (isset($_POST['install'])) {
         }
         }
     }
+
+    $usertest = executeQuery($handle,"SELECT * from users WHERE username = ?", array($username));
+    if (!empty($usertest)) {
+        $continue = false;
+        $errors[] = "An user already exists with this username in database.";
+    }
+
+
     if ($continue) {
         $sql = "INSERT INTO users (username, password, name, email) VALUES (?, ?, ?, '')";
         $params = array($username, $salted_password, $username);

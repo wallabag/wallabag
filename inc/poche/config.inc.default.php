@@ -20,6 +20,7 @@
 @define ('STORAGE_DB', 'poche');
 @define ('STORAGE_USER', 'poche');
 @define ('STORAGE_PASSWORD', 'poche');
+@define ('MYSQL_USE_UTF8MB4', FALSE); // This should be false unless you know what it is
 
 #################################################################################
 # Do not trespass unless you know what you are doing
