@@ -114,7 +114,7 @@ class Poche
                             }
                         } else {
                             Tools::logm('The user has been created, but the server did not authorize sending emails');
-                            $this->messages->add('i', _('The server did not authorize sending a confirmation email'));
+                            $this->messages->add('i', _('The server did not authorize sending a confirmation email, but the user was created.'));
                         }
                 } else {
                     Tools::logm('The user has been created, but no email was saved, so no confimation email was sent');
