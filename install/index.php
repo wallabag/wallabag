@@ -17,8 +17,12 @@ require_once('install_functions.php');
 
 if (isset($_GET['clean'])) {
     if (is_dir('install')){
-    delTree('install');
-    header('Location: index.php');      
+        delTree('install');
+        header('Location: index.php');      
+    }
+    if (is_dir('cache')) {
+        delTree('cache', false);
+        header('Location: index.php');      
     }
 }
 
@@ -402,8 +406,10 @@ border: 1px solid #000;
                 <?php if (file_exists('inc/poche/config.inc.php') && is_dir('vendor')) : ?>
                 <div class='messages success install'>
                     <p>
-                        wallabag seems already installed. If you want to update it, you only have to delete install folder, then <a href="index.php">reload this page</a>.
+                        <a href="index.php?clean=0">Click here to finish update.</a><br>
+                        If it fails, just delete the install directory.
                     </p>
+                    <p>You may have to clear cache (by going into config screen) after update.</p>
                 </div>
                 <?php endif; ?>    
             <?php endif; ?>
@@ -701,6 +707,7 @@ php composer.phar install</code></pre>
             $(".database_info").hide();
             $(".usersettings").hide();
             <?php endif ?>
+
             /* 
              * Database showing/hiding
              */ 
@@ -729,6 +736,10 @@ php composer.phar install</code></pre>
             <?php
             endif;
             ?>
+
+            <?php if (file_exists('inc/poche/config.inc.php') && is_dir('vendor')) : ?>
+                $('.technical').hide();
+            <?php endif ?>
 
             $("#mysql_utf8_mb4").click(function() {
                 $("#utf8_mb4_infos").toggle();

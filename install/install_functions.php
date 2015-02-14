@@ -78,12 +78,16 @@ function pdoDrivers() {
  * Here in case of .gitignore files
  */
 
-function delTree($dir) {
+function delTree($dir, $withdirectory="true") {
     $files = array_diff(scandir($dir), array('.','..'));
     foreach ($files as $file) {
       (is_dir("$dir/$file")) ? delTree("$dir/$file") : unlink("$dir/$file");
     }
-    return rmdir($dir);
+    if ($withdirectory) {
+        return rmdir($dir);
+    } else {
+        return true;
+    }
   }
 
 function generate_salt() {
