@@ -369,8 +369,8 @@ msgstr "Mark all the entries as read"
 msgid "Return home"
 msgstr "Return home"
 
-msgid "Back to top"
-msgstr "Back to top"
+msgid "back"
+msgstr "back"
 
 msgid "Mark as read"
 msgstr "Mark as read"
@@ -434,6 +434,9 @@ msgstr "Save a Link"
 
 msgid "back to home"
 msgstr "Back to Home"
+
+msgid "back to login"
+msgstr "back to login"
 
 msgid "toggle mark as read"
 msgstr "Toggle mark as read"
@@ -673,6 +676,9 @@ msgstr "Hi, %1$s"
 msgid "Someone just created a wallabag account for you on %1$s."
 msgstr "Someone just created a wallabag account for you on %1$s."
 
+msgid "You've just created a wallabag account on %1$s"
+msgstr "You've just created a wallabag account on %1$s"
+
 msgid "Your login is %1$s."
 msgstr "Your login is %1$s."
 
@@ -702,8 +708,12 @@ msgstr ""
 "The new user %1$s has been sent an email at %2$s. You may have to check spam "
 "folder."
 
-msgid "A problem has been encountered while sending the confirmation email"
-msgstr "A problem has been encountered while sending an confirmation email"
+msgid ""
+"A problem has been encountered while sending the confirmation email, but the "
+"user was created."
+msgstr ""
+"A problem has been encountered while sending an confirmation email, but the "
+"user was created."
 
 msgid "The server did not authorize sending a confirmation email"
 msgstr "The server did not authorize sending a confirmation email"

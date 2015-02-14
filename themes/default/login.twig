@@ -31,4 +31,9 @@
                 <input type="hidden" name="token" value="{{ token }}">
             </form>
     {% endif %}
+    {% if constant('ALLOW_REGISTER') == 1 %}
+    	<div class="registerform">
+    		<a href="?register">{% trans "Register" %}</a>
+    	</div>
+    {% endif %}
 {% endblock %}
