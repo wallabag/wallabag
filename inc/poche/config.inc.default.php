@@ -61,8 +61,8 @@
 @define ('PDF', FALSE);
 
 // registration
+@define ('ALLOW_REGISTER', FALSE);
 @define ('SEND_CONFIRMATION_EMAIL', FALSE);
-@define ('ALLOW_REGISTER', TRUE);
 
 // display or not print link in article view
 @define ('SHOW_PRINTLINK', '1');
