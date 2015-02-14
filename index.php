@@ -8,7 +8,7 @@
  * @license    http://opensource.org/licenses/MIT see COPYING file
  */
 
-define ('POCHE', '1.8.1');
+define ('POCHE', '1.9.0');
 require 'check_essentials.php';
 require 'check_setup.php';
 require_once 'inc/poche/global.inc.php';
