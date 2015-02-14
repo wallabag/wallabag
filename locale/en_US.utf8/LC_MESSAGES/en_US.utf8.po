@@ -723,6 +723,9 @@ msgid ""
 msgstr ""
 "The user was created, but no email was sent because email was not filled in"
 
+msgid "Read the rest at"
+msgstr "Read the rest at"
+
 #~ msgid "poche it!"
 #~ msgstr "poche it!"
 

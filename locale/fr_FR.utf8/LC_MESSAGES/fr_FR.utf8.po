@@ -867,3 +867,6 @@ msgstr "L'E-mail a été envoyé à votre Kindle !"
 
 msgid "Produced by wallabag with mPDF"
 msgstr "Produit par wallabag avec mPDF"
+
+msgid "Read the rest at"
+msgstr "Lire le reste à l'adresse"
