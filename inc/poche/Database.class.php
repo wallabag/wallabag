@@ -411,6 +411,14 @@ class Database {
 
         return $count;
     }
+    public function getRandomId($row, $user_id) {
+       $sql = "SELECT id FROM entries WHERE user_id=? LIMIT 1 OFFSET ? ";
+       $params = array($user_id, $row);
+       $query = $this->executeQuery($sql, $params);
+
+       return $query->fetchAll();
+    }
+
 
     public function updateContent($id, $content, $user_id)
     {

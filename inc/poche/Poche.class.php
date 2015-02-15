@@ -393,13 +393,12 @@ class Poche
                 
             /* For some unknown reason I can't get displayView() to work here (it redirects to home view afterwards). So here's a dirty fix which redirects directly to URL */
             case 'random':
-                $id = 0;
-                while ($this->store->retrieveOneById($id,$this->user->getId()) == null) {
-                    $count = $this->store->getEntriesByViewCount($view, $this->user->getId());
-                    $id = rand(1,$count);
-                }
+                $count = $this->store->getEntriesByViewCount($view, $this->user->getId());
+                $id_query = $this->store->getRandomId(rand(1,$count)-1, $this->user->getId());
+                $id = $id_query[0];
                 Tools::logm('get a random article');
-                Tools::redirect('?view=view&id=' . $id);
+                Tools::redirect('?view=view&id=' . $id[0]);
+                
                 //$this->displayView('view', $id);
                 break;
             default:
