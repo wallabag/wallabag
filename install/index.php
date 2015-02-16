@@ -68,7 +68,7 @@ else if (isset($_POST['install'])) {
 
         if ($_POST['db_engine'] == 'sqlite') {
             if (!copy('install/poche.sqlite', 'db/poche.sqlite')) {
-                $errors[] = 'Impossible to create the SQLite database file.';
+                $errors[] = 'Impossible to create the SQLite database file. Please check your file permissions.';
             }
             else {
                 $db_path = 'sqlite:' . realpath('') . '/db/poche.sqlite';
@@ -160,7 +160,7 @@ else if (isset($_POST['install'])) {
         
 
     if (!copy('inc/poche/config.inc.default.php', 'inc/poche/config.inc.php')) {
-        $errors[] = 'Installation aborted, impossible to create inc/poche/config.inc.php file. Maybe you don\'t have write access to create it.';
+        $errors[] = 'Installation aborted, impossible to create inc/poche/config.inc.php file. Maybe you don\'t have write access to create it. Check your file permissions.';
     } else {
         if ($_POST['db_engine'] != 'sqlite') {
             $content = str_replace("define ('STORAGE', 'sqlite');", "define ('STORAGE', '".$_POST['db_engine']."');", $content);
@@ -407,7 +407,7 @@ border: 1px solid #000;
                 <div class='messages success install'>
                     <p>
                         <a href="index.php?clean=0">Click here to finish update.</a><br>
-                        If it fails, just delete the install directory.
+                        If it fails, check your file permissions or just delete the install directory.
                     </p>
                     <p>You may have to clear cache (by going into config screen) after update.</p>
                 </div>
