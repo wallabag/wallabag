@@ -1,0 +1,41 @@
+{% extends "WallabagCoreBundle::layout.html.twig" %}
+
+{% block title %}{% trans %}Config{% endtrans %}{% endblock %}
+
+{% block menu %}
+    {% include "WallabagCoreBundle::_menu.html.twig" %}
+{% endblock %}
+
+{% block content %}
+    <h2>Basic config</h2>
+
+    <form action="{{ path('config') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_errors(form) }}
+
+        <fieldset class="w500p inline">
+            <div class="row">
+                {{ form_label(form.theme) }}
+                {{ form_errors(form.theme) }}
+                {{ form_widget(form.theme) }}
+            </div>
+        </fieldset>
+
+        <fieldset class="w500p inline">
+            <div class="row">
+                {{ form_label(form.items_per_page) }}
+                {{ form_errors(form.items_per_page) }}
+                {{ form_widget(form.items_per_page) }}
+            </div>
+        </fieldset>
+
+        <fieldset class="w500p inline">
+            <div class="row">
+                {{ form_label(form.language) }}
+                {{ form_errors(form.language) }}
+                {{ form_widget(form.language) }}
+            </div>
+        </fieldset>
+
+        {{ form_rest(form) }}
+    </form>
+{% endblock %}

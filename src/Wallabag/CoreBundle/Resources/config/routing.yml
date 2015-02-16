@@ -1,3 +1,7 @@
-_wllbg:
+entry:
     resource: "@WallabagCoreBundle/Controller/EntryController.php"
+    type:     annotation
+
+config:
+    resource: "@WallabagCoreBundle/Controller/ConfigController.php"
     type:     annotation

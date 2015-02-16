@@ -8,6 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Config
  *
+ * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\ConfigRepository")
  * @ORM\Table(name="config")
  * @ORM\Entity
  */
@@ -26,16 +27,40 @@ class Config
      * @var string
      *
      * @Assert\NotBlank()
-     * @ORM\Column(name="name", type="string", nullable=false)
+     * @ORM\Column(name="theme", type="string", nullable=false)
      */
-    private $name;
+    private $theme;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="value", type="blob", nullable=true)
+     * @Assert\NotBlank()
+     * @ORM\Column(name="items_per_page", type="integer", nullable=false)
      */
-    private $value;
+    private $items_per_page;
+
+    /**
+     * @var string
+     *
+     * @Assert\NotBlank()
+     * @ORM\Column(name="language", type="string", nullable=false)
+     */
+    private $language;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="config")
+     */
+    private $user;
+
+    /*
+     * @param User     $user
+     */
+    public function __construct(User $user)
+    {
+        $this->user = $user;
+        $this->items_per_page = 12;
+        $this->language = 'en_US';
+    }
 
     /**
      * Get id
@@ -48,48 +73,94 @@ class Config
     }
 
     /**
-     * Set name
+     * Set theme
      *
-     * @param  string $name
+     * @param  string $theme
      * @return Config
      */
-    public function setName($name)
+    public function setTheme($theme)
     {
-        $this->name = $name;
+        $this->theme = $theme;
 
         return $this;
     }
 
     /**
-     * Get name
+     * Get theme
      *
      * @return string
      */
-    public function getName()
+    public function getTheme()
     {
-        return $this->name;
+        return $this->theme;
     }
 
     /**
-     * Set value
+     * Set items_per_page
      *
-     * @param  string $value
+     * @param  integer $itemsPerPage
      * @return Config
      */
-    public function setValue($value)
+    public function setItemsPerPage($itemsPerPage)
     {
-        $this->value = $value;
+        $this->items_per_page = $itemsPerPage;
 
         return $this;
     }
 
     /**
-     * Get value
+     * Get items_per_page
+     *
+     * @return integer
+     */
+    public function getItemsPerPage()
+    {
+        return $this->items_per_page;
+    }
+
+    /**
+     * Set language
+     *
+     * @param  string $language
+     * @return Config
+     */
+    public function setLanguage($language)
+    {
+        $this->language = $language;
+
+        return $this;
+    }
+
+    /**
+     * Get language
      *
      * @return string
      */
-    public function getValue()
+    public function getLanguage()
     {
-        return $this->value;
+        return $this->language;
+    }
+
+    /**
+     * Set user
+     *
+     * @param  \Wallabag\CoreBundle\Entity\User $user
+     * @return Config
+     */
+    public function setUser(\Wallabag\CoreBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Wallabag\CoreBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

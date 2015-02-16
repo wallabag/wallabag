@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Wallabag\CoreBundle\Entity\User;
-use Wallabag\CoreBundle\Entity\UsersConfig;
+use Wallabag\CoreBundle\Entity\Config;
 
 class InstallCommand extends ContainerAwareCommand
 {
@@ -135,21 +135,13 @@ class InstallCommand extends ContainerAwareCommand
 
         $em->persist($user);
 
-        $pagerConfig = new UsersConfig();
-        $pagerConfig->setUser($user);
-        $pagerConfig->setName('pager');
-        $pagerConfig->setValue(10);
+        $config = new Config();
+        $config->setUser($user);
+        $config->setTheme('baggy');
+        $config->setItemsPerPage(10);
+        $config->setLanguage('en_US');
 
-        $em->persist($pagerConfig);
-
-        $languageConfig = new LanguageConfig();
-        $languageConfig->setUser($user);
-        $languageConfig->setName('language');
-        $languageConfig->setValue('en_EN');
-
-        $em->persist($languageConfig);
-
-        $em->flush();
+        $em->persist($config);
     }
 
     protected function runCommand($command, InputInterface $input, OutputInterface $output)

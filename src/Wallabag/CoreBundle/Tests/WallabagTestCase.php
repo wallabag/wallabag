@@ -4,7 +4,7 @@ namespace Wallabag\CoreBundle\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class WallabagTestCase extends WebTestCase
+abstract class WallabagTestCase extends WebTestCase
 {
     private $client = null;
 
