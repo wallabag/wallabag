@@ -60,7 +60,7 @@ class EntryControllerTest extends WallabagTestCase
         $form = $crawler->filter('button[type=submit]')->form();
 
         $data = array(
-            'form[url]' => 'https://www.mailjet.com/blog/mailjet-zapier-integrations-made-easy/',
+            'entry[url]' => 'https://www.mailjet.com/blog/mailjet-zapier-integrations-made-easy/',
         );
 
         $client->submit($form, $data);
