@@ -12,6 +12,7 @@ $errors = array();
 $successes = array();
 
 $final = false;
+$email = "";
 
 require_once('install_functions.php');
 
@@ -61,6 +62,7 @@ else if (isset($_POST['install'])) {
         // User informations
         $username = trim($_POST['username']);
         $password = trim($_POST['password']);
+        $email = trim($_POST['email']);
         $salted_password = sha1($password . $username . $salt);
 
         // Database informations
@@ -140,8 +142,8 @@ else if (isset($_POST['install'])) {
 
 
     if ($continue) {
-        $sql = "INSERT INTO users (username, password, name, email) VALUES (?, ?, ?, '')";
-        $params = array($username, $salted_password, $username);
+        $sql = "INSERT INTO users (username, password, name, email) VALUES (?, ?, ?, ?)";
+        $params = array($username, $salted_password, $username, $email);
         $query = executeQuery($handle, $sql, $params);
 
         $id_user = (int)$handle->lastInsertId('users_id_seq');
