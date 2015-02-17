@@ -7,35 +7,67 @@
 {% endblock %}
 
 {% block content %}
-    <h2>Basic config</h2>
+    <h2>{% trans %}Basic config{% endtrans %}</h2>
 
-    <form action="{{ path('config') }}" method="post" {{ form_enctype(form) }}>
-        {{ form_errors(form) }}
+    <form action="{{ path('config') }}" method="post" {{ form_enctype(configForm) }}>
+        {{ form_errors(configForm) }}
 
         <fieldset class="w500p inline">
             <div class="row">
-                {{ form_label(form.theme) }}
-                {{ form_errors(form.theme) }}
-                {{ form_widget(form.theme) }}
+                {{ form_label(configForm.theme) }}
+                {{ form_errors(configForm.theme) }}
+                {{ form_widget(configForm.theme) }}
             </div>
         </fieldset>
 
         <fieldset class="w500p inline">
             <div class="row">
-                {{ form_label(form.items_per_page) }}
-                {{ form_errors(form.items_per_page) }}
-                {{ form_widget(form.items_per_page) }}
+                {{ form_label(configForm.items_per_page) }}
+                {{ form_errors(configForm.items_per_page) }}
+                {{ form_widget(configForm.items_per_page) }}
             </div>
         </fieldset>
 
         <fieldset class="w500p inline">
             <div class="row">
-                {{ form_label(form.language) }}
-                {{ form_errors(form.language) }}
-                {{ form_widget(form.language) }}
+                {{ form_label(configForm.language) }}
+                {{ form_errors(configForm.language) }}
+                {{ form_widget(configForm.language) }}
             </div>
         </fieldset>
 
-        {{ form_rest(form) }}
+        {{ form_rest(configForm) }}
+    </form>
+
+    <h2>{% trans %}Change your password{% endtrans %}</h2>
+
+    <form action="{{ path('config') }}" method="post" {{ form_enctype(pwdForm) }}>
+        {{ form_errors(pwdForm) }}
+
+        <fieldset class="w500p inline">
+            <div class="row">
+                {{ form_label(pwdForm.old_password) }}
+                {{ form_errors(pwdForm.old_password) }}
+                {{ form_widget(pwdForm.old_password) }}
+            </div>
+        </fieldset>
+
+        <fieldset class="w500p inline">
+            <div class="row">
+                {{ form_label(pwdForm.new_password.first) }}
+                {{ form_errors(pwdForm.new_password.first) }}
+                {{ form_widget(pwdForm.new_password.first) }}
+            </div>
+        </fieldset>
+
+        <fieldset class="w500p inline">
+            <div class="row">
+                {{ form_label(pwdForm.new_password.second) }}
+                {{ form_errors(pwdForm.new_password.second) }}
+                {{ form_widget(pwdForm.new_password.second) }}
+            </div>
+        </fieldset>
+
+        {{ form_rest(pwdForm) }}
     </form>
 {% endblock %}

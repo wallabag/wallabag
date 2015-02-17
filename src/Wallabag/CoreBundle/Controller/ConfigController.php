@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Form\Type\ConfigType;
+use Wallabag\CoreBundle\Form\Type\ChangePasswordType;
 
 class ConfigController extends Controller
 {
@@ -14,19 +15,18 @@ class ConfigController extends Controller
      * @param Request $request
      *
      * @Route("/config", name="config")
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
         $config = $this->getConfig();
 
-        $form = $this->createForm(new ConfigType(), $config);
+        // handle basic config detail
+        $configForm = $this->createForm(new ConfigType(), $config);
+        $configForm->handleRequest($request);
 
-        $form->handleRequest($request);
+        if ($configForm->isValid()) {
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $em->persist($config);
             $em->flush();
 
@@ -38,11 +38,36 @@ class ConfigController extends Controller
             return $this->redirect($this->generateUrl('config'));
         }
 
+        // handle changing password
+        $pwdForm = $this->createForm(new ChangePasswordType());
+        $pwdForm->handleRequest($request);
+
+        if ($pwdForm->isValid()) {
+            $user = $this->getUser();
+            $user->setPassword($pwdForm->get('new_password')->getData());
+            $em->persist($user);
+            $em->flush();
+
+            $this->get('session')->getFlashBag()->add(
+                'notice',
+                'Password updated'
+            );
+
+            return $this->redirect($this->generateUrl('config'));
+        }
+
         return $this->render('WallabagCoreBundle:Config:index.html.twig', array(
-            'form' => $form->createView(),
+            'configForm' => $configForm->createView(),
+            'pwdForm' => $pwdForm->createView(),
         ));
     }
 
+    /**
+     * Retrieve config for the current user.
+     * If no config were found, create a new one.
+     *
+     * @return Wallabag\CoreBundle\Entity\Config
+     */
     private function getConfig()
     {
         $config = $this->getDoctrine()
