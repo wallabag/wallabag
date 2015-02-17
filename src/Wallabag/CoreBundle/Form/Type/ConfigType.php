@@ -21,7 +21,7 @@ class ConfigType extends AbstractType
                     'solarized_dark' => 'Solarized Dark',
                 ),
             ))
-            ->add('items_per_page')
+            ->add('items_per_page', 'text')
             ->add('language')
             ->add('save', 'submit')
         ;

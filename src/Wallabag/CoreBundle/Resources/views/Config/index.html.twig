@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block content %}
-    <h2>{% trans %}Basic config{% endtrans %}</h2>
+    <h2>{% trans %}Wallabag configuration{% endtrans %}</h2>
 
     <form action="{{ path('config') }}" method="post" {{ form_enctype(configForm) }}>
         {{ form_errors(configForm) }}
@@ -37,6 +37,38 @@
         </fieldset>
 
         {{ form_rest(configForm) }}
+    </form>
+
+    <h2>{% trans %}User information{% endtrans %}</h2>
+
+    <form action="{{ path('config') }}" method="post" {{ form_enctype(userForm) }}>
+        {{ form_errors(userForm) }}
+
+        <fieldset class="w500p inline">
+            <div class="row">
+                {{ form_label(userForm.username) }}
+                {{ form_errors(userForm.username) }}
+                {{ form_widget(userForm.username) }}
+            </div>
+        </fieldset>
+
+        <fieldset class="w500p inline">
+            <div class="row">
+                {{ form_label(userForm.name) }}
+                {{ form_errors(userForm.name) }}
+                {{ form_widget(userForm.name) }}
+            </div>
+        </fieldset>
+
+        <fieldset class="w500p inline">
+            <div class="row">
+                {{ form_label(userForm.email) }}
+                {{ form_errors(userForm.email) }}
+                {{ form_widget(userForm.email) }}
+            </div>
+        </fieldset>
+
+        {{ form_rest(userForm) }}
     </form>
 
     <h2>{% trans %}Change your password{% endtrans %}</h2>

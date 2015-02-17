@@ -3,7 +3,6 @@ namespace Wallabag\CoreBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 use Symfony\Component\Validator\Constraints;
 
@@ -23,11 +22,11 @@ class ChangePasswordType extends AbstractType
                 'second_options' => array('label' => 'Repeat new password'),
                 'constraints' => array(
                     new Constraints\Length(array(
-                        'min' => 6,
-                        'minMessage' => 'Password should by at least 6 chars long'
+                        'min' => 8,
+                        'minMessage' => 'Password should by at least 6 chars long',
                     )),
-                    new Constraints\NotBlank()
-                )
+                    new Constraints\NotBlank(),
+                ),
             ))
             ->add('save', 'submit')
         ;
