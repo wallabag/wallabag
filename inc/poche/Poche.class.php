@@ -395,7 +395,8 @@ class Poche
             case 'random':
                 Tools::logm('get a random article');
                 if ($this->store->getRandomId($this->user->getId())) {
-                    $id = $this->store->getRandomId($this->user->getId())[0];
+                    $id_array = $this->store->getRandomId($this->user->getId());
+                    $id = $id_array[0];
                     Tools::redirect('?view=view&id=' . $id[0]);
                     Tools::logm('got the article with id ' . $id[0]);
                 }
