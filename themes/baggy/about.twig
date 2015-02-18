@@ -7,9 +7,11 @@
 {% block content %}
     <h2>{% trans "About wallabag" %}</h2>
 
+    <p>{% trans "wallabag is a read-it-later application: you can save a web page by keeping only content. Elements like ads or menus are deleted." %}</p>
+
     <dl>
         <dt>{% trans "Project website" %}</dt>
-        <dd><a href="http://www.wallabag.org">http://www.wallabag.org</a></dd>
+        <dd><a href="https://www.wallabag.org">https://www.wallabag.org</a></dd>
 
         <dt>{% trans "Main developer" %}</dt>
         <dd><a href="mailto:nicolas@loeuillet.org">Nicolas Lœuillet</a> — <a href="http://cdetc.fr">{% trans "website" %}</a></dd>
@@ -18,7 +20,7 @@
         <dd><a href="https://github.com/wallabag/wallabag/graphs/contributors">{% trans "on Github" %}</a></dd>
 
         <dt>{% trans "Bug reports" %}</dt>
-        <dd><a href="http://support.wallabag.org">{% trans "On our support website" %}</a> {% trans "or" %} <a href="https://github.com/wallabag/wallabag/issues">{% trans "on Github" %}</a></dd>
+        <dd><a href="https://support.wallabag.org">{% trans "On our support website" %}</a> {% trans "or" %} <a href="https://github.com/wallabag/wallabag/issues">{% trans "on Github" %}</a></dd>
 
         <dt>{% trans "License" %}</dt>
         <dd><a href="http://en.wikipedia.org/wiki/MIT_License">MIT</a></dd>
@@ -27,16 +29,24 @@
         <dd>{{ constant('POCHE') }}</dd>
     </dl>
 
-    <p>{% trans "wallabag is a read-it-later application: you can save a web page by keeping only content. Elements like ads or menus are deleted." %}</p>
+    <h2>{% trans "Getting help" %}</h2>
+    
+    <dl>
+        <dt>{% trans "Documentation" %}</dt>
+        <dd><a href="docs/">Offline documentation</a> and <a href="https://doc.wallabag.org/">online documentation</a> (up to date)</dd>
+        
+        <dt>{% trans "Support" %}</dt>
+        <dd><a href="http://support.wallabag.org/">http://support.wallabag.org/</a></dd>
+    </dl>
 
     <h2>{% trans "Helping wallabag" %}</h2>
 
     <p>{% trans "wallabag is free and opensource. You can help us:" %}</p>
 
     <dl>
-        <dt><a href="http://www.wallabag.org">{% trans "via Paypal" %}</a></dt>
+        <dt><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9UBA65LG3FX9Y&lc=gb">{% trans "via Paypal" %}</a></dt>
 
-        <dt><a href="http://www.wallabag.org">{% trans "via Flattr" %}</a></dt>
+        <dt><a href="https://flattr.com/thing/1265480">{% trans "via Flattr" %}</a></dt>
     </dl>
 
     <h2>{% trans "Credits" %}</h2>

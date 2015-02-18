@@ -17,7 +17,7 @@ class Language
     private $languageNames = array(
         'cs_CZ.utf8' => 'čeština',
         'de_DE.utf8' => 'German',
-        'en_EN.utf8' => 'English',
+        'en_GB.utf8' => 'English (GB)',
         'en_US.utf8' => 'English (US)',
         'es_ES.utf8' => 'Español',
         'fa_IR.utf8' => 'فارسی',

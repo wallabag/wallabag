@@ -31,7 +31,8 @@
                 {% block pager %}
                     {% if nb_results > 1 %}
                 <div class="results">
-                    <div class="nb-results">{{ nb_results }} {% trans "results" %}{% if searchterm is defined %}{% trans " found for « " %} {{ searchterm }} »{% endif %}</div>
+                    <div class="nb-results">{{ nb_results }} {% trans "results" %}{% if searchterm is defined %}{% trans " found for « " %} {{ searchterm }} »{% endif %}
+                    <a class="random" href="?action=random"><span>{% trans "random" %}</span></a></div>
                         {{ page_links | raw }}
                 </div>
                     {% elseif nb_results == 1 %}
@@ -57,15 +58,26 @@
                 {% endfor %}
 
             {{ block('pager') }}
-            
-            {% if view == 'home' %}{% if nb_results > 1 %}<a title="{% trans "mark all the entries as read" %}"  href="./?action=archive_all">{% trans "mark all the entries as read" %}</a>{% endif %}{% endif %}
-            
-	{% if searchterm is defined %}<a title="{% trans "Tag these results as" %} {{ searchterm }}" href="./?action=add_tag&search={{ searchterm }}">
-{% trans "Tag these results as" %} {{ searchterm }}</a>{% endif %}            
+            {% if view == 'home' %}{% if nb_results > 1 %}<p><a title="{% trans "Mark all the entries as read" %}"  href="./?action=archive_all">{% trans "Mark all the entries as read" %}</a></p>{% endif %}{% endif %}
+            {% if searchterm is defined %}<a title="{% trans "Tag these results as" %} {{ searchterm }}" href="./?action=add_tag&search={{ searchterm }}">{% trans "Tag these results as" %} {{ searchterm }}</a>{% endif %}<br />
 
-	{% if tag %}<a title="{% trans "Download the articles from this tag in an epub" %}" href="./?epub&amp;method=tag&amp;value={{ tag.value }}">{% trans "Download the articles from this tag in an epub" %}</a>
-            {% elseif searchterm is defined %}<a title="{% trans "Download the articles from this search in an epub" %}" href="./?epub&amp;method=search&amp;value={{ searchterm }}">{% trans "Download the articles from this search in an epub" %}</a>
-            {% else %}<a title="{% trans "Download the articles from this category in an epub" %}" href="./?epub&amp;method=category&amp;value={{ view }}">{% trans "Download the articles from this category in an epub" %}</a>{% endif %}
-            
+            {% if searchterm is defined %}<a title="{% trans "Delete results matching" %} {{ searchterm }}" href="./?action=delete&search={{ searchterm }}">{% trans "Delete results matching" %} {{ searchterm }}</a>{% endif %}<br />
+
+            {% if tag %}<a title="{% trans "Mark all articles from this tag as read" %}" href="./?action=toggle_archive&amp;tag_id={{ tag.id }}">{% trans "Mark all articles from this tag as read" %}</a><br />{% endif %}
+
+            {% if tag %}
+            {% if constant('EPUB') == 1 %}<a title="{% trans "Download the articles from this tag in an epub file" %}" href="./?epub&amp;method=tag&amp;value={{ tag.value }}">{% trans "Download as ePub3" %}</a>{% endif %}
+            {% if constant('MOBI') == 1 %}<a title="{% trans "Download the articles from this tag in a mobi file" %}" href="./?mobi&amp;method=tag&amp;value={{ tag.value }}">{% trans "Download as Mobi" %}</a>{% endif %}
+            {% if constant('PDF') == 1 %}<a title="{% trans "Download the articles from this tag in a pdf file" %}" href="./?pdf&amp;method=tag&amp;value={{ tag.value }}">{% trans "Download as PDF" %}</a>{% endif %}
+            {% elseif searchterm is defined %}
+            {% if constant('EPUB') == 1 %}<a title="{% trans "Download the articles from this search in an epub" %}" href="./?epub&amp;method=search&amp;value={{ searchterm }}">{% trans "Download as ePub3" %}</a>{% endif %}
+            {% if constant('MOBI') == 1 %}<a title="{% trans "Download the articles from this search in a mobi file" %}" href="./?mobi&amp;method=search&amp;value={{ searchterm }}">{% trans "Download as Mobi" %}</a>{% endif %}
+            {% if constant('PDF') == 1 %}<a title="{% trans "Download the articles from this search in a pdf file" %}" href="./?pdf&amp;method=search&amp;value={{ searchterm }}">{% trans "Download as PDF" %}</a>{% endif %}
+            {% else %}
+            {% if constant('EPUB') == 1 %}<a title="{% trans "Download the articles from this category in an epub" %}" href="./?epub&amp;method=category&amp;value={{ view }}">{% trans "Download as ePub3" %}</a>{% endif %}
+            {% if constant('MOBI') == 1 %}<a title="{% trans "Download the articles from this category in a mobi file" %}" href="./?mobi&amp;method=category&amp;value={{ view }}">{% trans "Download as Mobi" %}</a>{% endif %}
+            {% if constant('PDF') == 1 %}<a title="{% trans "Download the articles from this category in a pdf file" %}" href="./?pdf&amp;method=category&amp;value={{ view }}">{% trans "Download as PDF" %}</a>{% endif %}
+            {% endif %}
+
             {% endif %}
 {% endblock %}

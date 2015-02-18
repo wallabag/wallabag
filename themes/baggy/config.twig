@@ -23,11 +23,11 @@
             <ul>
                 <li>Android: <a href="https://f-droid.org/app/fr.gaulupeau.apps.InThePoche" target="_blank">{% trans "via F-Droid" %}</a> {% trans " or " %} <a href="https://play.google.com/store/apps/details?id=fr.gaulupeau.apps.InThePoche" target="_blank">{% trans "via Google Play" %}</a></li>
                 <li>iOS: <a href="https://itunes.apple.com/app/wallabag/id828331015?mt=8" target="_blank">{% trans "download the application" %}</a></li>
-                <li>Windows Phone: <a href="http://www.windowsphone.com/en-us/store/app/wallabag/ff890514-348c-4d0b-9b43-153fff3f7450" target="_blank">{% trans "download the application" %}</a></li>
+                <li>Windows Phone: <a href="http://www.windowsphone.com/en-US/store/app/wallabag/d5226cf1-f422-4e00-996c-88e9c5233332" target="_blank">{% trans "download the application" %}</a></li>
             </ul>
                 <h3>{% trans "Bookmarklet" %}</h3>
                 <p>
-                {% trans "Drag &amp; drop this link to your bookmarks bar:" %} <a id="bookmarklet" ondragend="this.click();" href="javascript:if(top['bookmarklet-url@wallabag.org']){top['bookmarklet-url@wallabag.org'];}else{(function(){var%20url%20=%20location.href%20||%20url;window.open('{{ poche_url }}?action=add&url='%20+%20btoa(url),'_self');})();void(0);}">{% trans "bag it!" %}</a>
+                {% trans "Drag &amp; drop this link to your bookmarks bar:" %} <a id="bookmarklet" ondragend="this.click();" href="javascript:if(top['bookmarklet-url@wallabag.org']){top['bookmarklet-url@wallabag.org'];}else{(function(){var%20url%20=%20location.href%20||%20url;window.open('{{ poche_url }}?action=add&autoclose=true&url='%20+%20btoa(url),'_blank');})();void(0);}">{% trans "bag it!" %}</a>
                 </p>
 
             <h2>{% trans "Feeds" %}</h2>
@@ -106,8 +106,14 @@
             <span class="more-info">Data will be exported in a single JSON file.</span></p>
 
             <h2>{% trans "Fancy an E-Book ?" %}</h2>
-            <p><a href="./?epub&amp;method=all" title="Generate ePub">Download E-Book</a><br>
-            <span class="more-info">{% trans "Articles will be exported as a single E-book file (EPUB 3 format)." %} {% trans "This can <b>take a while</b> and can <b>even fail</b> if you have too many articles, depending on your server configuration." %}</span></p>
+            <p>{% trans "Click to get all your articles in one ebook :" %}
+            <ul>
+            <li><a href="./?epub&amp;method=all" title="{% trans 'Generate ePub file' %}">ePub 3</a></li>
+            <li><a href="./?mobi&amp;method=all" title="{% trans 'Generate Mobi file' %}">Mobi</a></li>
+            <li><a href="./?pdf&amp;method=all" title="{% trans 'Generate PDF file' %}">PDF</a></li>
+            </ul>
+
+            <span class="more-info">{% trans "This can <b>take a while</b> and can <b>even fail</b> if you have too many articles, depending on your server configuration." %}</span></p>
 
             <h2><a name="cache"></a>{% trans "Cache" %}</h2>
             <p><a href="?empty-cache">{% trans "Delete Cache" %}</a><br>

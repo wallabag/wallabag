@@ -20,6 +20,7 @@
 @define ('STORAGE_DB', 'poche');
 @define ('STORAGE_USER', 'poche');
 @define ('STORAGE_PASSWORD', 'poche');
+@define ('MYSQL_USE_UTF8MB4', FALSE); // This should be false unless you know what it is
 
 #################################################################################
 # Do not trespass unless you know what you are doing
@@ -44,15 +45,30 @@
 @define ('SHARE_MAIL', TRUE);
 @define ('SHARE_SHAARLI', FALSE);
 @define ('SHAARLI_URL', 'http://myshaarliurl.com');
+@define ('SHARE_EVERNOTE', FALSE);
+@define ('SHARE_DIASPORA', FALSE);
+@define ('DIASPORA_URL', 'http://diasporapod.com'); # Don't add a / at the end
 @define ('FLATTR', TRUE);
 @define ('FLATTR_API', 'https://api.flattr.com/rest/v2/things/lookup/?url=');
 @define ('NOT_FLATTRABLE', '0');
 @define ('FLATTRABLE', '1');
 @define ('FLATTRED', '2');
+@define ('CARROT', FALSE);
+
+// ebook
+@define ('EPUB', TRUE);
+@define ('MOBI', FALSE);
+@define ('PDF', FALSE);
+
+// registration
+@define ('ALLOW_REGISTER', FALSE);
+@define ('SEND_CONFIRMATION_EMAIL', FALSE);
+
 // display or not print link in article view
 @define ('SHOW_PRINTLINK', '1');
 // display or not percent of read in article view. Affects only default theme.
 @define ('SHOW_READPERCENT', '1');
+@define ('RELOAD_ARTICLE', TRUE);
 @define ('ABS_PATH', 'assets/');
 
 @define ('DEFAULT_THEME', 'baggy');
@@ -67,4 +83,3 @@
 @define ('IMPORT_LIMIT', 5);
 //delay between downloads (in sec)
 @define ('IMPORT_DELAY', 5);
-

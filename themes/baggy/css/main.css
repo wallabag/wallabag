@@ -15,11 +15,11 @@ html {
 }
 
 body {
-  background: #EEE;
+  background-color: #EEE;
 }
 
 .login {
-  background: #333;
+  background-color: #333;
 }
 
 .login #main {
@@ -28,7 +28,7 @@ body {
 }
 
 .login form {
-  background: #FFF;
+  background-color: #FFF;
   padding: 1.5em;
   box-shadow: 0 1px 8px rgba(0,0,0,0.9);
   width: 20em;
@@ -51,7 +51,7 @@ body {
 
 ::selection { 
   color: #FFF;  
-  background: #000;
+  background-color: #000;
 } 
 
 .desktopHide {
@@ -129,7 +129,7 @@ form .row {
 
 form button, input[type="submit"] {
   cursor:pointer;
-  background: #000;
+  background-color: #000;
   color: #FFF;
   border:0;
   padding: 0.5em 1em;
@@ -138,7 +138,7 @@ form button, input[type="submit"] {
 }
 
   form button:hover, form button:focus, input[type="submit"]:hover, input[type="submit"]:focus {
-    background: #FFF;
+    background-color: #FFF;
     color: #000;
     -webkit-transition: all 0.5s ease;
      -moz-transition: all 0.5s ease;
@@ -155,7 +155,7 @@ h2:after {
   content: "";
   height: 4px;
   width: 70px;
-  background: #000;
+  background-color: #000;
   display: block;
 }
 
@@ -176,7 +176,7 @@ h2:after {
   width: 10em;
   left: 0;
   text-align: right;
-  background: #333;
+  background-color: #333;
   padding-top: 9.5em;
   height: 100%;
   box-shadow:inset -4px 0 20px rgba(0,0,0,0.6);
@@ -208,7 +208,7 @@ h2:after {
   }
 
   #links > li > a:hover, #links > li > a:focus {
-    background: #999;
+    background-color: #999;
     color: #000;
   }
 
@@ -344,7 +344,7 @@ footer a {
 }
 
 .entrie {
-  background: #FFF;
+  background-color: #FFF;
   letter-spacing:normal;
   box-shadow: 0 3px 7px rgba(0,0,0,0.3);
   display: inline-block;
@@ -391,7 +391,7 @@ footer a {
   width: 100%;
   bottom: 0;
   left: 0;
-  background: #000;
+  background-color: #000;
   -webkit-transition: all 0.5s ease;
      -moz-transition: all 0.5s ease;
       -ms-transition: all 0.5s ease;
@@ -557,7 +557,7 @@ footer a {
 }
 
 	.popup-form form {
-		background: #FFF;
+		background-color: #FFF;
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -574,7 +574,7 @@ footer a {
 
 .closeMessage,
 .close-button {
-  background: #000;
+  background-color: #000;
   color: #FFF;
 	font-size: 1.2em;
 	line-height: 1.6;
@@ -587,7 +587,7 @@ footer a {
 	.closeMessage:focus,
 	.close-button:hover,
 	.close-button:focus {
-		background: #999;
+		background-color: #999;
 		color: #000;
 	}
 
@@ -657,15 +657,16 @@ a.add-to-wallabag-link-after:after {
 @font-face {
   font-family: 'icomoon';
   src:url('../fonts/icomoon.eot?-s0mcsx');
-  src:url('../fonts/icomoon.eot?#iefix-s0mcsx') format('embedded-opentype'),
-    url('../fonts/icomoon.woff?-s0mcsx') format('woff'),
-    url('../fonts/icomoon.ttf?-s0mcsx') format('truetype'),
-    url('../fonts/icomoon.svg?-s0mcsx#icomoon') format('svg');
+  src:url('../fonts/icomoon.eot?#iefix-s0mcsx')   format('embedded-opentype'),
+      url('../fonts/icomoon.woff?-s0mcsx')        format('woff'),
+      url('../fonts/icomoon.ttf?-s0mcsx')         format('truetype'),
+      url('../fonts/icomoon.svg?-s0mcsx#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
-.icon span {
+.icon span,
+.icon-image span {
   position: absolute;
   top: -9999px;
 }
@@ -735,6 +736,40 @@ a.add-to-wallabag-link-after:after {
 .icon-print:before {
   content: "\e80d";
 }
+.icon-random:before {
+  content: "\e915";
+}
+.icon-reload:before {
+  content: "\ea2e";
+}
+.icon-evernote:before {
+  content: "\e603";
+}
+.icon-tags:before {
+  content: "\e936";
+}
+
+
+/* .icon-image class, for image-based icons
+	 ========================================================================== */
+
+.icon-image {
+	background-size: 16px 16px;
+	background-repeat: no-repeat;
+	background-position: center;
+	padding-right: 1em !important;
+	padding-left: 1em !important;
+}
+
+/* Carrot (http://carrot.org) */
+.icon-image--carrot {
+	background-image: url('../../_global/img/icons/carrot-icon--white.png');
+}
+
+/* Diaspora */
+.icon-image--diaspora {
+	background-image: url('../../_global/img/icons/diaspora-icon--black.png');
+}}
 
 /* ==========================================================================
    Icon selected
@@ -805,7 +840,7 @@ a.add-to-wallabag-link-after:after {
 
 blockquote {
   border:1px solid #999;
-  background: #FFF;
+  background-color: #FFF;
   padding: 1em;
   margin: 0;
 }
@@ -838,14 +873,14 @@ blockquote {
 }
 
 #article_toolbar a {
-  background: #000;
+  background-color: #000;
   padding: 0.3em 0.5em 0.2em;
   color: #FFF;
   text-decoration: none;
 }
   
   #article_toolbar a:hover, #article_toolbar a:focus {
-    background: #999;
+    background-color: #999;
   }
 
 .shaarli:before {
@@ -868,7 +903,7 @@ blockquote {
 }
 
 .icon-rss {
-  background: #000;
+  background-color: #000;
   color: #FFF;
   padding: 0.2em 0.5em;
 }
@@ -883,7 +918,7 @@ blockquote {
 }
 
 .list-tags .icon-rss:hover, .list-tags .icon-rss:focus {
-  background: #FFF;
+  background-color: #FFF;
   color: #000;
   text-decoration: none;
 }
@@ -944,7 +979,7 @@ pre code {
     margin-left: 0;
   }
   body > header {
-    background: #333;
+    background-color: #333;
     position: fixed;
     top: 0;
     width: 100%;
@@ -990,11 +1025,11 @@ pre code {
     width: 2.5em;
     height: 2.5em;
     cursor: pointer;
-    background: #999;
+    background-color: #999;
     font-size: 1.2em;
   }
     .desktopHide:hover, .desktopHide:focus {
-      background: #FFF;
+      background-color: #FFF;
     }
   #links {
     display: none;
@@ -1046,4 +1081,3 @@ pre code {
     width: 100%;
   }
 }
-

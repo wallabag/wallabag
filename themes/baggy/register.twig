@@ -1,0 +1,28 @@
+{% extends "layout-login.twig" %}
+{% block content %}
+
+<form method="post" action="?register">
+<h2>{% trans 'Add user' %}</h2>
+    <fieldset class="w500p">
+    <div class="row">
+        <label class="col w150p" for="newusername">{% trans 'Login' %}</label>
+        <input class="col" type="text" id="newusername" name="newusername" placeholder="{% trans 'Login' %}" required>
+    </div>
+    <div class="row">
+        <label class="col w150p" for="password4newuser">{% trans "Password" %}</label>
+        <input class="col" type="password" id="password4newuser" name="password4newuser" placeholder="{% trans 'Password' %}" required>
+    </div>
+    <div class="row">
+        <label class="col w150p" for="newuseremail">{% trans 'Email (not required)' %}</label>
+        <input class="col" type="email" id="newuseremail" name="newuseremail" placeholder="{% trans 'Email' %}">
+    </div>
+    <div class="row mts txtcenter">
+        <button type="submit">{% trans "Register" %}</button>
+    </div>
+    <div class="register">
+        <a href="?">{% trans "Back" %}</a>
+    </div>
+    </fieldset>
+</form>
+
+{% endblock %}

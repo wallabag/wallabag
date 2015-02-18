@@ -74,16 +74,57 @@ class Poche
     /**
      * Creates a new user
      */
-    public function createNewUser($username, $password, $email = "")
+    public function createNewUser($username, $password, $email = "", $internalRegistration = false)
     {
+        Tools::logm('Trying to create a new user...');
         if (!empty($username) && !empty($password)){
             $newUsername = filter_var($username, FILTER_SANITIZE_STRING);
             $email = filter_var($email, FILTER_SANITIZE_STRING);
             if (!$this->store->userExists($newUsername)){
                 if ($this->store->install($newUsername, Tools::encodeString($password . $newUsername), $email)) {
-                    Tools::logm('The new user ' . $newUsername . ' has been installed');
+                    if ($email != "") { // if email is filled
+                        if (SEND_CONFIRMATION_EMAIL && function_exists('mail')) {
+
+                            // if internal registration from config screen
+                            $body_internal = _('Hi,') . "\r\n\r\n" . sprintf(_('Someone just created a wallabag account for you on %1$s.'), Tools::getPocheUrl()) . 
+                            "\r\n\r\n" . sprintf(_('Your login is %1$s.'), $newUsername) ."\r\n\r\n" .
+                            _('Note : The password has been chosen by the person who created your account. Get in touch with that person to know your password and change it as soon as possible') . "\r\n\r\n" .
+                            _('Have fun with it !') . "\r\n\r\n" .
+                            _('This is an automatically generated message, no one will answer if you respond to it.');
+                            
+                            // if external (public) registration
+                            $body = sprintf(_('Hi, %1$s'), $newUsername) . "\r\n\r\n" . 
+                            sprintf(_('You\'ve just created a wallabag account on %1$s.'), Tools::getPocheUrl()) . 
+                            "\r\n\r\n" . _("Have fun with it !");
+
+                            $body = $internalRegistration ? $body_internal : $body;
+
+                            $body = wordwrap($body, 70, "\r\n"); // cut lines with more than 70 caracters (MIME standard)
+                            if (mail($email, sprintf(_('Your new wallabag account on %1$s'), Tools::getPocheUrl()), $body, 
+                                'X-Mailer: PHP/' . phpversion() .  "\r\n" . 
+                                'Content-type: text/plain; charset=UTF-8' . "\r\n" .
+                                "From: " . $newUsername . "@" . gethostname() . "\r\n")) {
+                                Tools::logm('The user ' . $newUsername . ' has been emailed');
+                                $this->messages->add('i', sprintf(_('The new user %1$s has been sent an email at %2$s. You may have to check spam folder.'), $newUsername, $email));
+                                Tools::redirect('?');
+                                
+                            } else {
+                                Tools::logm('A problem has been encountered while sending an email');
+                                $this->messages->add('e', _('A problem has been encountered while sending an email'));
+                            }
+                        } else {
+                            Tools::logm('The user has been created, but the server did not authorize sending emails');
+                            $this->messages->add('i', _('The server did not authorize sending a confirmation email, but the user was created.'));
+                        }
+                } else {
+                    Tools::logm('The user has been created, but no email was saved, so no confimation email was sent');
+                    $this->messages->add('i', _('The user was created, but no email was sent because email was not filled in'));
+                }
+                Tools::logm('The new user ' . $newUsername . ' has been installed');
+                if (\Session::isLogged()) {
                     $this->messages->add('s', sprintf(_('The new user %s has been installed. Do you want to <a href="?logout">logout ?</a>'), $newUsername));
-                    Tools::redirect();
+                }
+                Tools::redirect();
                 }
                 else {
                     Tools::logm('error during adding new user');
@@ -95,6 +136,9 @@ class Poche
                 Tools::logm('An user with the name ' . $newUsername . ' already exists !');
                 Tools::redirect();
             }
+        }
+        else {
+            Tools::logm('Password or username were empty');
         }
     }
 
@@ -180,6 +224,13 @@ class Poche
                         }
                     }
 
+                    // if there are tags, add them to the new article
+                    if (isset($_GET['tags'])) {
+                        $_POST['value'] = $_GET['tags'];
+                        $_POST['entry_id'] = $last_id;
+                        $this->action('add_tag', $url);
+                    }
+
                     $this->messages->add('s', _('the link has been added successfully'));
                 }
                 else {
@@ -188,24 +239,38 @@ class Poche
                 }
 
                 if ($autoclose == TRUE) {
-                  Tools::redirect('?view=home');
+                    Tools::redirect('?view=home&closewin=true');
                 } else {
-                  Tools::redirect('?view=home&closewin=true');
+                    Tools::redirect('?view=home');
                 }
+                return $last_id;
                 break;
             case 'delete':
-                $msg = 'delete link #' . $id;
-                if ($this->store->deleteById($id, $this->user->getId())) {
-                    if (DOWNLOAD_PICTURES) {
-                        Picture::removeDirectory(ABS_PATH . $id);
+                if (isset($_GET['search'])) {
+                    //when we want to apply a delete to a search
+                    $tags = array($_GET['search']);
+                    $allentry_ids = $this->store->search($tags[0], $this->user->getId());
+                    $entry_ids = array();
+                    foreach ($allentry_ids as $eachentry) {
+                        $entry_ids[] = $eachentry[0];
                     }
-                    $this->messages->add('s', _('the link has been deleted successfully'));
+                } else { // delete a single article
+                    $entry_ids = array($id);
                 }
-                else {
-                    $this->messages->add('e', _('the link wasn\'t deleted'));
-                    $msg = 'error : can\'t delete link #' . $id;
+                foreach($entry_ids as $id) {
+                    $msg = 'delete link #' . $id;
+                    if ($this->store->deleteById($id, $this->user->getId())) {
+                        if (DOWNLOAD_PICTURES) {
+                            Picture::removeDirectory(ABS_PATH . $id);
+                        }
+                        $this->messages->add('s', _('the link has been deleted successfully'));
+                    }
+                    else {
+                        $this->messages->add('e', _('the link wasn\'t deleted'));
+                        $msg = 'error : can\'t delete link #' . $id;
+                    }
+                    Tools::logm($msg);
                 }
-                Tools::logm($msg);
                 Tools::redirect('?');
                 break;
             case 'toggle_fav' :
@@ -220,8 +285,21 @@ class Poche
                 }
                 break;
             case 'toggle_archive' :
-                $this->store->archiveById($id, $this->user->getId());
-                Tools::logm('archive link #' . $id);
+                if (isset($_GET['tag_id'])) {
+                    //when we want to archive a whole tag
+                    $tag_id = $_GET['tag_id'];
+                    $allentry_ids = $this->store->retrieveEntriesByTag($tag_id, $this->user->getId());
+                    $entry_ids = array();
+                    foreach ($allentry_ids as $eachentry) {
+                        $entry_ids[] = $eachentry[0];
+                    }
+                } else { //archive a single article
+                    $entry_ids = array($id);
+                }
+                foreach($entry_ids as $id) {
+                    $this->store->archiveById($id, $this->user->getId());
+                    Tools::logm('archive link #' . $id);
+                }
                 if ( Tools::isAjaxRequest() ) {
                   echo 1;
                   exit;
@@ -302,6 +380,26 @@ class Poche
                 }
                 $this->messages->add('s', _('The tag has been successfully deleted'));
                 Tools::redirect();
+                break;
+
+            case 'reload_article' :
+                Tools::logm('reload article');
+                $id = $_GET['id'];
+                $entry = $this->store->retrieveOneById($id, $this->user->getId());
+                Tools::logm('reload url ' . $entry['url']);
+                $url = new Url(base64_encode($entry['url']));
+                $this->action('add', $url);
+                break;
+                
+            /* For some unknown reason I can't get displayView() to work here (it redirects to home view afterwards). So here's a dirty fix which redirects directly to URL */
+            case 'random':
+                Tools::logm('get a random article');
+                if ($this->store->getRandomId($this->user->getId())) {
+                    $id_array = $this->store->getRandomId($this->user->getId());
+                    $id = $id_array[0];
+                    Tools::redirect('?view=view&id=' . $id[0]);
+                    Tools::logm('got the article with id ' . $id[0]);
+                }
                 break;
             default:
                 break;
@@ -405,9 +503,12 @@ class Poche
                     }
 
                     # flattr checking
-                    $flattr = new FlattrItem();
-                    $flattr->checkItem($entry['url'], $entry['id']);
-
+                    $flattr = NULL;
+                    if (FLATTR) {
+                        $flattr = new FlattrItem();
+                        $flattr->checkItem($entry['url'], $entry['id']);
+                    }
+                    
                     # tags
                     $tags = $this->store->retrieveTagsByEntry($entry['id']);
 
@@ -540,6 +641,8 @@ class Poche
                 Tools::redirect($referer);
             }
             $this->messages->add('e', _('login failed: bad login or password'));
+            // log login failure in web server log to allow fail2ban usage
+            error_log('user '.$login.' authentication failure');
             Tools::logm('login failed');
             Tools::redirect();
         }
@@ -625,7 +728,18 @@ class Poche
                         $urlsInserted[] = $url; //add
                         if (isset($record['tags']) && trim($record['tags'])) {
 
-                            // @TODO: set tags
+                            $tags = explode(',', $record['tags']);														
+							foreach($tags as $tag) {
+								$entry_id = $id;
+								$tag_id = $this->store->retrieveTagByValue($tag);
+								if ($tag_id) {
+									$this->store->setTagToEntry($tag_id['id'], $entry_id);									
+								} else {
+									$this->store->createTag($tag);
+									$tag_id = $this->store->retrieveTagByValue($tag);
+									$this->store->setTagToEntry($tag_id['id'], $entry_id);
+								}
+							}
 
                         }
                     }
@@ -640,7 +754,7 @@ class Poche
         Tools::logm('Import of articles finished: '.$i.' articles added (w/o content if not provided).');
       }
       else {
-        $this->messages->add('s', _('Did you forget to select a file?'));
+        $this->messages->add('e', _('Did you forget to select a file?'));
       }
         // file parsing finished here
         // now download article contents if any
@@ -669,17 +783,23 @@ class Poche
                 $purifier = $this->_getPurifier();
                 foreach($items as $item) {
                     $url = new Url(base64_encode($item['url']));
-                    Tools::logm('Fetching article ' . $item['id']);
-                    $content = Tools::getPageContent($url);
-                    $title = (($content['rss']['channel']['item']['title'] != '') ? $content['rss']['channel']['item']['title'] : _('Untitled'));
-                    $body = (($content['rss']['channel']['item']['description'] != '') ? $content['rss']['channel']['item']['description'] : _('Undefined'));
+                    if( $url->isCorrect() )
+                    {
+                        Tools::logm('Fetching article ' . $item['id']);
+                        $content = Tools::getPageContent($url);
+                        $title = (($content['rss']['channel']['item']['title'] != '') ? $content['rss']['channel']['item']['title'] : _('Untitled'));
+                        $body = (($content['rss']['channel']['item']['description'] != '') ? $content['rss']['channel']['item']['description'] : _('Undefined'));
 
-                    // clean content to prevent xss attack
+                        // clean content to prevent xss attack
 
-                    $title = $purifier->purify($title);
-                    $body = $purifier->purify($body);
-                    $this->store->updateContentAndTitle($item['id'], $title, $body, $this->user->getId());
-                    Tools::logm('Article ' . $item['id'] . ' updated.');
+                        $title = $purifier->purify($title);
+                        $body = $purifier->purify($body);
+                        $this->store->updateContentAndTitle($item['id'], $title, $body, $this->user->getId());
+                        Tools::logm('Article ' . $item['id'] . ' updated.');
+                    } else
+                    {
+                        Tools::logm('Unvalid URL (' . $item['url'] .')  to fetch for article ' . $item['id']);
+                    }
                 }
             }
         }
@@ -748,10 +868,11 @@ class Poche
      *
      * @param $token
      * @param $user_id
-     * @param $tag_id
-     * @param string $type
+     * @param $tag_id if $type is 'tag', the id of the tag to generate feed for
+     * @param string $type the type of feed to generate
+     * @param int $limit the maximum number of items (0 means all)
      */
-    public function generateFeeds($token, $user_id, $tag_id, $type = 'home')
+    public function generateFeeds($token, $user_id, $tag_id, $type = 'home', $limit = 0)
     {
         $allowed_types = array('home', 'fav', 'archive', 'tag');
         $config = $this->store->getConfigUser($user_id);
@@ -778,8 +899,13 @@ class Poche
             $entries = $this->store->getEntriesByView($type, $user_id);
         }
 
+        // if $limit is set to zero, use all entries
+        if (0 == $limit) {
+            $limit = count($entries);
+        }
         if (count($entries) > 0) {
-            foreach ($entries as $entry) {
+            for ($i = 0; $i < min(count($entries), $limit); $i++) {
+                $entry = $entries[$i];
                 $newItem = $feed->createNewItem();
                 $newItem->setTitle($entry['title']);
                 $newItem->setSource(Tools::getPocheUrl() . '?view=view&amp;id=' . $entry['id']);

@@ -31,10 +31,15 @@ class Database {
                 $this->handle = new PDO($db_path);
                 break;
             case 'mysql':
-                $db_path = 'mysql:host=' . STORAGE_SERVER . ';dbname=' . STORAGE_DB . ';charset=utf8mb4';
-                $this->handle = new PDO($db_path, STORAGE_USER, STORAGE_PASSWORD, array(
-                    PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8mb4',
-                ));
+                if (MYSQL_USE_UTF8MB4) {
+                    $db_path = 'mysql:host=' . STORAGE_SERVER . ';dbname=' . STORAGE_DB . ';charset=utf8mb4';
+                    $this->handle = new PDO($db_path, STORAGE_USER, STORAGE_PASSWORD, array(
+                        PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8mb4',
+                    ));
+                } else {
+                    $db_path = 'mysql:host=' . STORAGE_SERVER . ';dbname=' . STORAGE_DB;
+                    $this->handle = new PDO($db_path, STORAGE_USER, STORAGE_PASSWORD);
+                }
                 break;
             case 'postgres':
                 $db_path = 'pgsql:host=' . STORAGE_SERVER . ';dbname=' . STORAGE_DB;
@@ -293,7 +298,7 @@ class Database {
             $sql_limit = "LIMIT ".$limit." OFFSET 0";
         }
 
-        $sql        = "SELECT * FROM entries WHERE (content = '' OR content IS NULL) AND title LIKE 'Untitled - Import%' AND user_id=? ORDER BY id " . $sql_limit;
+        $sql        = "SELECT * FROM entries WHERE (content = '' OR content IS NULL) AND title LIKE '%Import%' AND user_id=? ORDER BY id " . $sql_limit;
         $query      = $this->executeQuery($sql, array($user_id));
         $entries    = $query->fetchAll();
 
@@ -302,7 +307,7 @@ class Database {
 
     public function retrieveUnfetchedEntriesCount($user_id)
     {
-      $sql        = "SELECT count(*) FROM entries WHERE (content = '' OR content IS NULL) AND title LIKE 'Untitled - Import%' AND user_id=?";
+      $sql        = "SELECT count(*) FROM entries WHERE (content = '' OR content IS NULL) AND title LIKE '%Import%' AND user_id=?";
       $query      = $this->executeQuery($sql, array($user_id));
       list($count) = $query->fetch();
 
@@ -406,6 +411,16 @@ class Database {
 
         return $count;
     }
+    public function getRandomId($user_id) {
+        $random = (STORAGE == 'mysql') ? 'RAND()' : 'RANDOM()';
+        $sql = "SELECT id FROM entries WHERE user_id=? ORDER BY ". $random . " LIMIT 1";
+        $params = array($user_id);
+        $query = $this->executeQuery($sql, $params);
+        $id = $query->fetchAll();
+
+        return $id;
+    }
+
 
     public function updateContent($id, $content, $user_id)
     {

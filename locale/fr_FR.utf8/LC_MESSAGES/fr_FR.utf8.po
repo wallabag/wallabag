@@ -1,10 +1,10 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: wallabag 1.7\n"
+"Project-Id-Version: wallabag 1.7.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-10 20:09+0100\n"
+"POT-Creation-Date: 2014-07-26 20:09+0100\n"
 "PO-Revision-Date: \n"
-"Last-Translator: tcit <tcit@openmailbox.org>\n"
+"Last-Translator: Thomas Citharel <tcit@openmailbox.org>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
@@ -66,6 +66,9 @@ msgstr "Se connecter"
 
 msgid "back to home"
 msgstr "retour à l'accueil"
+
+msgid "back"
+msgstr "retour"
 
 msgid "favorites"
 msgstr "favoris"
@@ -356,6 +359,9 @@ msgstr "Tweet"
 
 msgid "Email"
 msgstr "E-mail"
+
+msgid "Email (not required)"
+msgstr "E-mail (non requis)"
 
 msgid "shaarli"
 msgstr "Shaarli"
@@ -681,19 +687,24 @@ msgstr "Appliquer à ces résultats le tag"
 msgid "Fancy an E-Book ?"
 msgstr "Envie d'un E-Book ?"
 
-msgid ""
-"Click on <a href=\"./?epub&amp;method=all\" title=\"Generate ePub\">this "
-"link</a> to get all your articles in one ebook (ePub 3 format)."
-msgstr ""
-"Cliquez sur <a href=\"./?epub&amp;method=all\" title=\"Générer ePub\">ce "
-"lien</a> pour obtenir tous vos articles (format ePub 3)."
+msgid "Click to get all your articles in one ebook :"
+msgstr "Cliquez pour obtenir tous vos articles dans un E-Book :"
+
+msgid "Generate ePub file"
+msgstr "Générer fichier ePub"
+
+msgid "Generate Mobi file"
+msgstr "Générer fichier Mobi"
+
+msgid "Generate PDF file"
+msgstr "Générer fichier PDF"
 
 msgid ""
 "This can <b>take a while</b> and can <b>even fail</b> if you have too many "
 "articles, depending on your server configuration."
 msgstr ""
 "Ceci peut <b>prendre un moment</b> et même <b>échouer</b> si vous avez trop "
-"d'articles, selon la configuration de votre serveur."
+"d'articles, selon la configuration matérielle de votre serveur."
 
 msgid "Download the articles from this tag in an epub"
 msgstr "Télécharger les articles de ce tag dans un epub"
@@ -703,3 +714,159 @@ msgstr "Télécharger les articles de cette recherche dans un epub"
 
 msgid "Download the articles from this category in an epub"
 msgstr "Télécharger les articles de cette catégorie dans un epub"
+
+msgid "Download the articles from this tag in an ePub file"
+msgstr "Télécharger les articles de ce tag dans un fichier ePub"
+
+msgid "Download the articles from this tag in an Mobi file"
+msgstr "Télécharger les articles de ce tag dans un fichier Mobi"
+
+msgid "Download the articles from this tag in an PDF file"
+msgstr "Télécharger les articles de ce tag dans un fichier PDF"
+
+msgid "Download the articles from this search in an ePub"
+msgstr "Télécharger les articles de cette recherche dans un fichier ePub"
+
+msgid "Download the articles from this search in a Mobi file"
+msgstr "Télécharger les articles de cette recherche dans un fichier Mobi"
+
+msgid "Download the articles from this search in a PDF file"
+msgstr "Télécharger les articles de cette recherche dans un fichier PDF"
+
+msgid "Download the articles from this category in an ePub"
+msgstr "Télécharger les articles de cette catégorie dans un fichier ePub"
+
+msgid "Download the articles from this category in a Mobi file"
+msgstr "Télécharger les articles de cette catégorie dans un fichier Mobi"
+
+msgid "Download the articles from this category in a PDF file"
+msgstr "Télécharger les articles de cette catégorie dans un fichier PDF"
+
+msgid "Download as ePub3"
+msgstr "Télécharger en ePub3"
+
+msgid "Download as Mobi"
+msgstr "Télécharger en Mobi"
+
+msgid "Download as PDF"
+msgstr "Télécharger en PDF"
+
+msgid "All my articles on %s"
+msgstr "Tous mes articles le %s"
+
+msgid "Allarticles"
+msgstr "TousArticles"
+
+msgid "Articles tagged %s"
+msgstr "Articles avec le tag %s"
+
+msgid "Tag %s"
+msgstr "Tag %s"
+
+msgid "Articles in category %s"
+msgstr "Articles de la catégorie %s"
+
+msgid "Category %s"
+msgstr "Catégorie %s"
+
+msgid "Articles for search %s"
+msgstr "Articles pour la recherche %s"
+
+msgid "Search %s"
+msgstr "Recherche %s"
+
+msgid "wallabag articles book"
+msgstr "Livre d'articles issus de wallabag"
+
+msgid "Some articles saved on my wallabag"
+msgstr "Des articles sauvegardés sur wallabag"
+
+msgid "Produced by wallabag with PHPePub"
+msgstr "Produit par wallabag avec PHPePub"
+
+msgid ""
+"Please open <a href='https://github.com/wallabag/wallabag/issues'>an issue</"
+"a> if you have trouble with the display of this E-Book on your device."
+msgstr ""
+"Merci d'ouvrir <a href='https://github.com/wallabag/wallabag/issues'>un "
+"ticket</a> si vous avez des problèmes d'affichage de cet E-Book sur votre "
+"appareil."
+
+msgid "Produced by wallabag with PHPMobi"
+msgstr "Produit par wallabag avec PHPMobi"
+
+# registration
+msgid "Hi,"
+msgstr "Salut,"
+
+msgid "Hi, %1$s"
+msgstr "Salut, %1$s"
+
+msgid "Someone just created a wallabag account for you on %1$s."
+msgstr ""
+"Quelqu'un vient juste de créer un compte wallabag pour vous à l'adresse %1$s."
+
+msgid "You've just created a wallabag account on %1$s"
+msgstr "Vous venez juste de vous créer un compte wallabag sur %1$s"
+
+msgid "Your login is %1$s."
+msgstr "Votre identifiant is %1$s."
+
+msgid "Have fun with it !"
+msgstr "Amusez-vous bien !"
+
+msgid ""
+"This is an automatically generated message, no one will answer if you "
+"respond to it."
+msgstr ""
+"Ceci est un message généré automatiquement, personne ne vous répondra si "
+"vous y répondez."
+
+msgid ""
+"Note : The password has been chosen by the person who created your account. "
+"Get in touch with that person to know your password and change it as soon as "
+"possible"
+msgstr ""
+"Note : Votre mot de passe a été défini par la personne ayant créé votre "
+"compte. Vous devriez entrer en contact avec cette personne pour connaître "
+"votre mot de passe et le changer dès que possible"
+
+msgid ""
+"The new user %1$s has been sent an email at %2$s. You may have to check spam "
+"folder."
+msgstr ""
+"Un email a été envoyé au nouvel utiliateur %1$s à l'adresse %2$s. Il peut "
+"être nécessaire de vérifier le dossier des spams."
+
+msgid "A problem has been encountered while sending the confirmation email"
+msgstr "Un problème a été rencontré lors de l'envoi de l'email de confirmation"
+
+msgid ""
+"The server did not authorize sending a confirmation email, but the user was "
+"created."
+msgstr ""
+"Le serveur n'autorise pas l'envoi d'un email de confirmation, mais "
+"l'utilisateur a été créé."
+
+msgid ""
+"The user was created, but no email was sent because email was not filled in"
+msgstr ""
+"L'utilisateur a été créé, mais aucun mail n'a été envoyé car l'email n'était "
+"pas renseigné"
+
+msgid "Mail function is disabled. You can't send emails from your server"
+msgstr ""
+"La fonction mail est désactivée. Vous ne pouvez pas envoyer d'E-mails depuis "
+"votre serveur"
+
+msgid "You didn't set your kindle's email adress !"
+msgstr "Vous n'avez pas renseigné l'adresse E-mail de votre Kindle !"
+
+msgid "The email has been sent to your kindle !"
+msgstr "L'E-mail a été envoyé à votre Kindle !"
+
+msgid "Produced by wallabag with mPDF"
+msgstr "Produit par wallabag avec mPDF"
+
+msgid "Read the rest at"
+msgstr "Lire le reste à l'adresse"

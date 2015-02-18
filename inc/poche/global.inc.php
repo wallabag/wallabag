@@ -22,7 +22,7 @@ require_once ROOT . '/vendor/autoload.php';
 require_once INCLUDES . '/poche/Template.class.php';
 require_once INCLUDES . '/poche/Language.class.php';
 require_once INCLUDES . '/poche/Routing.class.php';
-require_once INCLUDES . '/poche/WallabagEpub.class.php';
+require_once INCLUDES . '/poche/WallabagEBooks.class.php';
 require_once INCLUDES . '/poche/Poche.class.php';
 
 require_once INCLUDES . '/poche/Database.class.php';
@@ -40,6 +40,13 @@ require_once INCLUDES . '/3rdparty/htmlpurifier/HTMLPurifier.auto.php';
 require_once INCLUDES . '/3rdparty/libraries/PHPePub/Logger.php';
 require_once INCLUDES . '/3rdparty/libraries/PHPePub/EPub.php';
 require_once INCLUDES . '/3rdparty/libraries/PHPePub/EPubChapterSplitter.php';
+
+# mobi library
+require_once INCLUDES . '/3rdparty/libraries/MOBIClass/MOBI.php';
+
+# pdf library
+#require_once INCLUDES . '/3rdparty/libraries/mpdf/mpdf.php';
+require_once  INCLUDES . '/3rdparty/libraries/tcpdf/tcpdf.php';
 
 # system configuration; database credentials et caetera
 require_once INCLUDES . '/poche/config.inc.php';

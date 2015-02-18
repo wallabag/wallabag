@@ -13,11 +13,17 @@
                 <li><a title="{% trans "Favorite" %}" class="tool icon icon-star {% if entry.is_fav == 0 %}fav-off{% else %}fav{% endif %}" href="javascript: void(null);" id="setFav"><span>{% trans "Toggle favorite" %}</span></a></li>
                 <li><a title="{% trans "Delete" %}" class="tool delete icon icon-trash" href="./?action=delete&amp;id={{ entry.id|e }}"><span>{% trans "Delete" %}</span></a></li>
                 {% if constant('SHARE_TWITTER') == 1 %}<li><a href="https://twitter.com/home?status={{entry.title|url_encode}}%20{{ entry.url|url_encode }}%20via%20@wallabagapp" target="_blank" class="tool twitter icon icon-twitter" title="{% trans "Tweet" %}"><span>{% trans "Tweet" %}</span></a></li>{% endif %}
-                {% if constant('SHARE_MAIL') == 1 %}<li><a href="mailto:?subject={{ entry.title|url_encode }}&amp;body={{ entry.url|url_encode }}%20via%20@wallabagapp" class="tool email icon icon-mail" title="{% trans "Email" %}"><span>{% trans "Email" %}</span></a></li>{% endif %}
+                {% if constant('SHARE_MAIL') == 1 %}<li><a href="mailto:?subject={{ entry.title }}&amp;body={{ content|striptags|slice(0, 700) }}%2E%2E%2E%0A%0A{% trans "Read the rest at" %} {{ entry.url|url_encode }}%20via%20@wallabagapp" class="tool email icon icon-mail" title="{% trans "Email" %}"><span>{% trans "Email" %}</span></a></li>{% endif %}
                 {% if constant('SHARE_SHAARLI') == 1 %}<li><a href="{{ constant('SHAARLI_URL') }}/index.php?post={{ entry.url|url_encode }}&amp;title={{ entry.title|url_encode }}" target="_blank" class="tool shaarli" title="{% trans "shaarli" %}"><span>{% trans "shaarli" %}</span></a></li>{% endif %}
-                {% if constant('FLATTR') == 1 %}{% if flattr.status == constant('FLATTRABLE') %}<li><a href="http://flattr.com/submit/auto?url={{ entry.url }}" class="tool flattr icon icon-flattr" target="_blank" title="{% trans "flattr" %}"><span>{% trans "flattr" %}</span></a></li>{% elseif flattr.status == constant('FLATTRED') %}<li><a href="{{ flattr.flattrItemURL }}" class="tool flattr icon icon-flattr" target="_blank" title="{% trans "flattr" %}"><span>{% trans "flattr" %}</span> ({{ flattr.numflattrs }})</a></li>{% endif %}{% endif %}
+                {% if constant('SHARE_EVERNOTE') == 1 %}<li><a href="https://www.evernote.com/clip.action?url={{ entry.url|url_encode }}&amp;title={{ entry.title|url_encode }}" target="_blank" class="tool evernote icon icon-evernote" title="{% trans "evernote" %}"><span>{% trans "evernote" %}</span></a></li>{% endif %}
+                {% if constant('SHARE_DIASPORA') == 1 %}<li><a href="{{ constant('DIASPORA_URL') }}/bookmarklet?url={{ entry.url|url_encode }}&title={{ entry.title|url_encode }}&notes=&v=1&noui=1&jump=doclose" target="_blank" class="tool diaspora icon-image icon-image--diaspora" title="{% trans "diaspora" %}"><span>{% trans "diaspora" %}</span></a></li>{% endif %}
+                {% if constant('FLATTR') == 1 %}{% if flattr.status == constant('FLATTRABLE') %}<li><a href="http://flattr.com/submit/auto?url={{ entry.url }}" class="tool flattr icon icon-flattr" target="_blank" title="{% trans "flattr" %}"><span>{% trans "flattr" %}</span></a></li>{% elseif flattr.status == constant('FLATTRED') %}<li><a href="{{ flattr.flattrItemURL }}" class="tool flattr icon icon-flattr" target="_blank" title="{% trans "flattr" %}"><span>{% trans "flattr" %}</span> ({{ flattr.numFlattrs }})</a></li>{% endif %}{% endif %}
+                {% if constant('CARROT') == 1 %}<li><a href="https://secure.carrot.org/GiveAndGetBack.do?url={{ entry.url|url_encode }}&title={{ entry.title|url_encode }}" class="tool carrot icon-image icon-image--carrot" target="_blank" title="{% trans "carrot" %}"><span>Carrot</span></a></li>{% endif %}
                 {% if constant('SHOW_PRINTLINK') == 1 %}<li><a title="{% trans "Print" %}" class="tool icon icon-print" href="javascript: window.print();"><span>{% trans "Print" %}</span></a></li>{% endif %}
-                <li><a href="./?epub&amp;method=id&amp;value={{ entry.id|e }}" title="Generate epub file">EPUB</a></li>
+                {% if constant('RELOAD_ARTICLE') == 1 %}<li><a class="tool reload icon icon-reload" href="./?action=reload_article&amp;id={{ entry.id|e }}" title="{% trans "Reload article" %}"><span>{% trans "Reload article" %}</span></a></li>{% endif %}
+                {% if constant('EPUB') == 1 %}<li><a href="./?epub&amp;method=id&amp;value={{ entry.id|e }}" title="Generate ePub file">EPUB</a></li>{% endif %}
+                {% if constant('MOBI') == 1 %}<li><a href="./?mobi&amp;method=id&amp;value={{ entry.id|e }}" title="Generate Mobi file">MOBI</a></li>{% endif %}
+                {% if constant('PDF') == 1 %}<li><a href="./?pdf&amp;method=id&amp;value={{ entry.id|e }}" title="Generate PDF file">PDF</a></li>{% endif %}
                 <li><a href="mailto:hello@wallabag.org?subject=Wrong%20display%20in%20wallabag&amp;body={{ entry.url|url_encode }}" title="{% trans "Does this article appear wrong?" %}" class="tool bad-display icon icon-delete"><span>{% trans "Does this article appear wrong?" %}</span></a></li>
             </ul>
         </div>
@@ -32,7 +38,7 @@
                 {{ content | raw }}
             </article>
         </div>
-        <script src="{{ poche_url }}themes/{{theme}}/js/restoreScroll.js"></script>
+        <script src="{{ poche_url }}themes/_global/js/restoreScroll.js"></script>
         <script type="text/javascript">
         $(document).ready(function() {
         

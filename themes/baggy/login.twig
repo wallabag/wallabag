@@ -26,6 +26,11 @@
 					<div class="row mts txtcenter">
 						<button class="bouton" type="submit" tabindex="4">{% trans "Sign in" %}</button>
 					</div>
+					{% if constant('ALLOW_REGISTER') == 1 %}
+    				<div class="register">
+    					<a href="?registerform">{% trans "Register" %}</a>
+    				</div>
+    {% endif %}
                 </fieldset>
                 <input type="hidden" name="returnurl" value="{{ referer }}">
                 <input type="hidden" name="token" value="{{ token }}">
