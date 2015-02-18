@@ -4,6 +4,6 @@ wallabag is a self hostable application allowing you to not miss any content any
 More informations on our website: [wallabag.org](http://wallabag.org)
 
 ## License
-Copyright © 2013-2014 Nicolas Lœuillet <nicolas@loeuillet.org>
+Copyright © 2013-2015 Nicolas Lœuillet <nicolas@loeuillet.org>
 This work is free. You can redistribute it and/or modify it under the
 terms of the MIT License. See the COPYING file for more details.
