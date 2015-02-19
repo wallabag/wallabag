@@ -761,7 +761,7 @@ class Poche
         Tools::logm('Import of articles finished: '.$i.' articles added (w/o content if not provided).');
       }
       else {
-        $this->messages->add('s', _('Did you forget to select a file?'));
+        $this->messages->add('e', _('Did you forget to select a file?'));
       }
         // file parsing finished here
         // now download article contents if any
