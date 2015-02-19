@@ -200,27 +200,34 @@ class Poche
 
                 //search for possible duplicate
                 $duplicate = NULL;
-                $duplicate = $this->store->retrieveOneByURL($url->getUrl(), $this->user->getId());
+                $clean_url = $url->getUrl();
 
-                $last_id = $this->store->add($url->getUrl(), $title, $body, $this->user->getId());
+                // Clean URL to remove parameters from feedburner and all this stuff. Taken from Shaarli.
+                $i=strpos($clean_url,'&utm_source='); if ($i!==false) $clean_url=substr($clean_url,0,$i);
+                $i=strpos($clean_url,'?utm_source='); if ($i!==false) $clean_url=substr($clean_url,0,$i);
+                $i=strpos($clean_url,'#xtor=RSS-'); if ($i!==false) $clean_url=substr($clean_url,0,$i);
+
+                $duplicate = $this->store->retrieveOneByURL($clean_url, $this->user->getId());
+
+                $last_id = $this->store->add($clean_url, $title, $body, $this->user->getId());
                 if ( $last_id ) {
-                    Tools::logm('add link ' . $url->getUrl());
+                    Tools::logm('add link ' . $clean_url);
                     if (DOWNLOAD_PICTURES) {
-                        $content = Picture::filterPicture($body, $url->getUrl(), $last_id);
+                        $content = Picture::filterPicture($body, $clean_url, $last_id);
                         Tools::logm('updating content article');
                         $this->store->updateContent($last_id, $content, $this->user->getId());
                     }
 
                     if ($duplicate != NULL) {
                         // duplicate exists, so, older entry needs to be deleted (as new entry should go to the top of list), BUT favorite mark and tags should be preserved
-                        Tools::logm('link ' . $url->getUrl() . ' is a duplicate');
+                        Tools::logm('link ' . $clean_url . ' is a duplicate');
                         // 1) - preserve tags and favorite, then drop old entry
                         $this->store->reassignTags($duplicate['id'], $last_id);
                         if ($duplicate['is_fav']) {
                           $this->store->favoriteById($last_id, $this->user->getId());
                         }
                         if ($this->store->deleteById($duplicate['id'], $this->user->getId())) {
-                          Tools::logm('previous link ' . $url->getUrl() .' entry deleted');
+                          Tools::logm('previous link ' . $clean_url .' entry deleted');
                         }
                     }
 
@@ -235,7 +242,7 @@ class Poche
                 }
                 else {
                     $this->messages->add('e', _('error during insertion : the link wasn\'t added'));
-                    Tools::logm('error during insertion : the link wasn\'t added ' . $url->getUrl());
+                    Tools::logm('error during insertion : the link wasn\'t added ' . $clean_url);
                 }
 
                 if ($autoclose == TRUE) {
