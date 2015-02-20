@@ -161,18 +161,15 @@ class EntryControllerTest extends WallabagTestCase
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneByIsDeleted(false);
+            ->findOneById(1);
 
         $client->request('GET', '/delete/'.$content->getId());
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
 
-        $res = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneById($content->getId());
+        $client->request('GET', '/delete/'.$content->getId());
 
-        $this->assertEquals($res->isDeleted(), true);
+        $this->assertEquals(404, $client->getResponse()->getStatusCode());
     }
 
     public function testViewOtherUserEntry()

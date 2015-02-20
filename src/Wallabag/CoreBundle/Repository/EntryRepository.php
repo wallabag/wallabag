@@ -24,7 +24,6 @@ class EntryRepository extends EntityRepository
             ->leftJoin('e.user', 'u')
             ->where('e.isArchived = false')
             ->andWhere('u.id =:userId')->setParameter('userId', $userId)
-            ->andWhere('e.isDeleted=false')
             ->orderBy('e.createdAt', 'desc')
             ->getQuery();
 
@@ -51,7 +50,6 @@ class EntryRepository extends EntityRepository
             ->leftJoin('e.user', 'u')
             ->where('e.isArchived = true')
             ->andWhere('u.id =:userId')->setParameter('userId', $userId)
-            ->andWhere('e.isDeleted=false')
             ->orderBy('e.createdAt', 'desc')
             ->getQuery();
 
@@ -78,7 +76,6 @@ class EntryRepository extends EntityRepository
             ->leftJoin('e.user', 'u')
             ->where('e.isStarred = true')
             ->andWhere('u.id =:userId')->setParameter('userId', $userId)
-            ->andWhere('e.isDeleted = false')
             ->orderBy('e.createdAt', 'desc')
             ->getQuery();
 
@@ -93,13 +90,12 @@ class EntryRepository extends EntityRepository
      * @param int    $userId
      * @param bool   $isArchived
      * @param bool   $isStarred
-     * @param bool   $isDeleted
      * @param string $sort
      * @param string $order
      *
      * @return array
      */
-    public function findEntries($userId, $isArchived = null, $isStarred = null, $isDeleted = null, $sort = 'created', $order = 'ASC')
+    public function findEntries($userId, $isArchived = null, $isStarred = null, $sort = 'created', $order = 'ASC')
     {
         $qb = $this->createQueryBuilder('e')
             ->where('e.user =:userId')->setParameter('userId', $userId);
@@ -110,10 +106,6 @@ class EntryRepository extends EntityRepository
 
         if (null !== $isStarred) {
             $qb->andWhere('e.isStarred =:isStarred')->setParameter('isStarred', (bool) $isStarred);
-        }
-
-        if (null !== $isDeleted) {
-            $qb->andWhere('e.isDeleted =:isDeleted')->setParameter('isDeleted', (bool) $isDeleted);
         }
 
         if ('created' === $sort) {

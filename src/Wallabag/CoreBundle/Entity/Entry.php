@@ -58,13 +58,6 @@ class Entry
     private $isStarred = false;
 
     /**
-     * @var boolean
-     *
-     * @ORM\Column(name="is_deleted", type="boolean")
-     */
-    private $isDeleted = false;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="content", type="text", nullable=true)
@@ -278,22 +271,6 @@ class Entry
     public function getUser()
     {
         return $this->user;
-    }
-
-    /**
-     * @return string
-     */
-    public function isDeleted()
-    {
-        return $this->isDeleted;
-    }
-
-    /**
-     * @param string $isDeleted
-     */
-    public function setDeleted($isDeleted)
-    {
-        $this->isDeleted = $isDeleted;
     }
 
     /**

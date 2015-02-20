@@ -192,8 +192,9 @@ class EntryController extends Controller
     {
         $this->checkUserAction($entry);
 
-        $entry->setDeleted(1);
-        $this->getDoctrine()->getManager()->flush();
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($entry);
+        $em->flush();
 
         $this->get('session')->getFlashBag()->add(
             'notice',

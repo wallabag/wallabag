@@ -43,7 +43,6 @@ class WallabagRestController extends Controller
      *       parameters={
      *          {"name"="archive", "dataType"="boolean", "required"=false, "format"="true or false, all entries by default", "description"="filter by archived status."},
      *          {"name"="star", "dataType"="boolean", "required"=false, "format"="true or false, all entries by default", "description"="filter by starred status."},
-     *          {"name"="delete", "dataType"="boolean", "required"=false, "format"="true or false, default '0'", "description"="filter by deleted status."},
      *          {"name"="sort", "dataType"="string", "required"=false, "format"="'created' or 'updated', default 'created'", "description"="sort entries by date."},
      *          {"name"="order", "dataType"="string", "required"=false, "format"="'asc' or 'desc', default 'desc'", "description"="order of sort."},
      *          {"name"="page", "dataType"="integer", "required"=false, "format"="default '1'", "description"="what page you want."},
@@ -57,7 +56,6 @@ class WallabagRestController extends Controller
     {
         $isArchived = $request->query->get('archive');
         $isStarred  = $request->query->get('star');
-        $isDeleted  = $request->query->get('delete', 0);
         $sort       = $request->query->get('sort', 'created');
         $order      = $request->query->get('order', 'desc');
         $page       = $request->query->get('page', 1);
@@ -67,7 +65,7 @@ class WallabagRestController extends Controller
         $entries = $this
             ->getDoctrine()
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findEntries($this->getUser()->getId(), $isArchived, $isStarred, $isDeleted, $sort, $order);
+            ->findEntries($this->getUser()->getId(), $isArchived, $isStarred, $sort, $order);
 
         if (!($entries)) {
             throw $this->createNotFoundException();
@@ -138,8 +136,7 @@ class WallabagRestController extends Controller
      *          {"name"="tags", "dataType"="string", "required"=false, "format"="tag1,tag2,tag3", "description"="a comma-separated list of tags."},
      *          {"name"="archive", "dataType"="boolean", "required"=false, "format"="true or false", "description"="archived the entry."},
      *          {"name"="star", "dataType"="boolean", "required"=false, "format"="true or false", "description"="starred the entry."},
-     *          {"name"="delete", "dataType"="boolean", "required"=false, "format"="true or false", "description"="flag as deleted. Default false. In case that you don't want to *really* remove it.."},
-     *       }
+     *      }
      * )
      * @return Entry
      */
@@ -148,7 +145,6 @@ class WallabagRestController extends Controller
         $title      = $request->request->get("title");
         $tags       = $request->request->get("tags", array());
         $isArchived = $request->request->get("archive");
-        $isDeleted  = $request->request->get("delete");
         $isStarred  = $request->request->get("star");
 
         if (!is_null($title)) {
@@ -157,10 +153,6 @@ class WallabagRestController extends Controller
 
         if (!is_null($isArchived)) {
             $entry->setArchived($isArchived);
-        }
-
-        if (!is_null($isDeleted)) {
-            $entry->setDeleted($isDeleted);
         }
 
         if (!is_null($isStarred)) {
@@ -185,15 +177,13 @@ class WallabagRestController extends Controller
      */
     public function deleteEntriesAction(Entry $entry)
     {
-        if ($entry->isDeleted()) {
-            throw new NotFoundHttpException('This entry is already deleted');
-        }
-
         $em = $this->getDoctrine()->getManager();
-        $entry->setDeleted(1);
+        $em->remove($entry);
         $em->flush();
 
-        return $entry;
+        $json = $this->get('serializer')->serialize($entry, 'json');
+
+        return new Response($json, 200, array('application/json'));
     }
 
     /**
