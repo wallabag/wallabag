@@ -3,12 +3,14 @@
 namespace Wallabag\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\XmlRoot;
 
 /**
  * Tag
  *
+ * @XmlRoot("tag")
  * @ORM\Table(name="tag")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\TagRepository")
  */
 class Tag
 {
