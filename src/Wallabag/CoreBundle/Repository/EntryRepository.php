@@ -102,8 +102,7 @@ class EntryRepository extends EntityRepository
     public function findEntries($userId, $isArchived = null, $isStarred = null, $isDeleted = null, $sort = 'created', $order = 'ASC')
     {
         $qb = $this->createQueryBuilder('e')
-            ->leftJoin('e.user', 'u')
-            ->where('u.id =:userId')->setParameter('userId', $userId);
+            ->where('e.user =:userId')->setParameter('userId', $userId);
 
         if (null !== $isArchived) {
             $qb->andWhere('e.isArchived =:isArchived')->setParameter('isArchived', (bool) $isArchived);

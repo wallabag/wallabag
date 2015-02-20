@@ -5,10 +5,12 @@ namespace Wallabag\CoreBundle\Controller;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Service\Extractor;
+use Hateoas\HateoasBuilder;
 
 class WallabagRestController extends Controller
 {
@@ -72,6 +74,9 @@ class WallabagRestController extends Controller
             throw $this->createNotFoundException();
         }
 
+        $hateoas = HateoasBuilder::create()->build();
+        $json = $hateoas->serialize($entries, 'json');
+
         return $entries;
     }
 
@@ -87,7 +92,10 @@ class WallabagRestController extends Controller
      */
     public function getEntryAction(Entry $entry)
     {
-        return $entry;
+        $hateoas = HateoasBuilder::create()->build();
+        $json = $hateoas->serialize($entry, 'json');
+
+        return new Response($json, 200, array('application/json'));
     }
 
     /**
