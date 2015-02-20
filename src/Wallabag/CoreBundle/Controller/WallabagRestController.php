@@ -10,7 +10,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Service\Extractor;
-use Hateoas\HateoasBuilder;
 
 class WallabagRestController extends Controller
 {
@@ -74,8 +73,7 @@ class WallabagRestController extends Controller
             throw $this->createNotFoundException();
         }
 
-        $hateoas = HateoasBuilder::create()->build();
-        $json = $hateoas->serialize($entries, 'json');
+        $json = $this->get('serializer')->serialize($entries, 'json');
 
         return new Response($json, 200, array('application/json'));
     }
@@ -92,8 +90,7 @@ class WallabagRestController extends Controller
      */
     public function getEntryAction(Entry $entry)
     {
-        $hateoas = HateoasBuilder::create()->build();
-        $json = $hateoas->serialize($entry, 'json');
+        $json = $this->get('serializer')->serialize($entry, 'json');
 
         return new Response($json, 200, array('application/json'));
     }
@@ -124,7 +121,9 @@ class WallabagRestController extends Controller
         $em->persist($entry);
         $em->flush();
 
-        return $entry;
+        $json = $this->get('serializer')->serialize($entry, 'json');
+
+        return new Response($json, 200, array('application/json'));
     }
 
     /**
