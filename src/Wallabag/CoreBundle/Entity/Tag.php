@@ -4,6 +4,8 @@ namespace Wallabag\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\XmlRoot;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
 
 /**
  * Tag
@@ -11,12 +13,14 @@ use JMS\Serializer\Annotation\XmlRoot;
  * @XmlRoot("tag")
  * @ORM\Table(name="tag")
  * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\TagRepository")
+ * @ExclusionPolicy("all")
  */
 class Tag
 {
     /**
      * @var integer
      *
+     * @Expose
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -26,9 +30,15 @@ class Tag
     /**
      * @var string
      *
+     * @Expose
      * @ORM\Column(name="label", type="text")
      */
     private $label;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Entry", mappedBy="tags", cascade={"persist", "merge"})
+     */
+    private $entries;
 
     /**
      * Get id

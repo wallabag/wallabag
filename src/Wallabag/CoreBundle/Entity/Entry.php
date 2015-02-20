@@ -2,6 +2,7 @@
 
 namespace Wallabag\CoreBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Hateoas\Configuration\Annotation as Hateoas;
@@ -118,12 +119,22 @@ class Entry
      */
     private $user;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="entries", cascade={"persist", "merge"})
+     * @ORM\JoinTable(name="tags_entries",
+     *   joinColumns={@ORM\JoinColumn(name="entry_id", referencedColumnName="id")},
+     *   inverseJoinColumns={@ORM\JoinColumn(name="tag_id", referencedColumnName="id")}
+     * )
+     */
+    private $tags;
+
     /*
      * @param User     $user
      */
     public function __construct(User $user)
     {
         $this->user = $user;
+        $this->tags = new ArrayCollection();
     }
 
     /**
@@ -380,5 +391,21 @@ class Entry
     public function setPublic($isPublic)
     {
         $this->isPublic = $isPublic;
+    }
+
+    /**
+     * @return ArrayCollection<Tag>
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+    /**
+     * @param Tag $tag
+     */
+    public function addTag(Tag $tag)
+    {
+        $this->tags[] = $tag;
     }
 }
