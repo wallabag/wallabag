@@ -77,7 +77,7 @@ class WallabagRestController extends Controller
         $hateoas = HateoasBuilder::create()->build();
         $json = $hateoas->serialize($entries, 'json');
 
-        return $entries;
+        return new Response($json, 200, array('application/json'));
     }
 
     /**
