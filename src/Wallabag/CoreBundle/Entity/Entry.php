@@ -4,17 +4,21 @@ namespace Wallabag\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Hateoas\Configuration\Annotation as Hateoas;
+use JMS\Serializer\Annotation\XmlRoot;
 
 /**
  * Entry
  *
+ * @XmlRoot("entry")
  * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\EntryRepository")
  * @ORM\Table(name="entry")
  * @ORM\HasLifecycleCallbacks()
- *
+ * @Hateoas\Relation("self", href = "expr('/api/entries/' ~ object.getId())")
  */
 class Entry
 {
+    /** @Serializer\XmlAttribute */
     /**
      * @var integer
      *

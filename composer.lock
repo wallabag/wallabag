@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "fd56c671d70f498ccc1996450479fbdc",
+    "hash": "a078afa674d2816ebe7f7ad333d9f3b4",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1386,16 +1386,16 @@
         },
         {
             "name": "michelf/php-markdown",
-            "version": "1.4.1",
+            "version": "1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/michelf/php-markdown.git",
-                "reference": "de9a19c7bf352d41cc99ed86c3c0ef17e87394b6"
+                "reference": "e1aabe18173231ebcefc90e615565742fc1c7fd9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/michelf/php-markdown/zipball/de9a19c7bf352d41cc99ed86c3c0ef17e87394b6",
-                "reference": "de9a19c7bf352d41cc99ed86c3c0ef17e87394b6",
+                "url": "https://api.github.com/repos/michelf/php-markdown/zipball/e1aabe18173231ebcefc90e615565742fc1c7fd9",
+                "reference": "e1aabe18173231ebcefc90e615565742fc1c7fd9",
                 "shasum": ""
             },
             "require": {
@@ -1418,35 +1418,35 @@
             ],
             "authors": [
                 {
-                    "name": "Michel Fortin",
-                    "email": "michel.fortin@michelf.ca",
-                    "homepage": "http://michelf.ca/",
-                    "role": "Developer"
-                },
-                {
                     "name": "John Gruber",
                     "homepage": "http://daringfireball.net/"
+                },
+                {
+                    "name": "Michel Fortin",
+                    "email": "michel.fortin@michelf.ca",
+                    "homepage": "https://michelf.ca/",
+                    "role": "Developer"
                 }
             ],
             "description": "PHP Markdown",
-            "homepage": "http://michelf.ca/projects/php-markdown/",
+            "homepage": "https://michelf.ca/projects/php-markdown/",
             "keywords": [
                 "markdown"
             ],
-            "time": "2014-05-05 02:43:50"
+            "time": "2015-03-01 12:03:08"
         },
         {
             "name": "monolog/monolog",
-            "version": "1.12.0",
+            "version": "1.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "1fbe8c2641f2b163addf49cc5e18f144bec6b19f"
+                "reference": "c41c218e239b50446fd883acb1ecfd4b770caeae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/1fbe8c2641f2b163addf49cc5e18f144bec6b19f",
-                "reference": "1fbe8c2641f2b163addf49cc5e18f144bec6b19f",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/c41c218e239b50446fd883acb1ecfd4b770caeae",
+                "reference": "c41c218e239b50446fd883acb1ecfd4b770caeae",
                 "shasum": ""
             },
             "require": {
@@ -1463,6 +1463,7 @@
                 "phpunit/phpunit": "~4.0",
                 "raven/raven": "~0.5",
                 "ruflin/elastica": "0.90.*",
+                "swiftmailer/swiftmailer": "~5.3",
                 "videlalvaro/php-amqplib": "~2.4"
             },
             "suggest": {
@@ -1479,7 +1480,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.12.x-dev"
+                    "dev-master": "1.13.x-dev"
                 }
             },
             "autoload": {
@@ -1505,7 +1506,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2014-12-29 21:29:35"
+            "time": "2015-03-05 01:12:12"
         },
         {
             "name": "nelmio/api-doc-bundle",
@@ -2645,7 +2646,7 @@
             "description": "Libraries from @fivefilters.",
             "homepage": "https://github.com/wallabag/Fivefilters_Libraries",
             "support": {
-                "source": "https://github.com/wallabag/Fivefilters_Libraries/tree/1.0.0",
+                "source": "https://github.com/wallabag/Fivefilters_Libraries/tree/master",
                 "issues": "https://github.com/wallabag/Fivefilters_Libraries/issues"
             },
             "time": "2015-01-19 20:19:28"
@@ -2690,7 +2691,7 @@
             "description": "PHP Classes for dynamically generating EPub files.",
             "homepage": "https://github.com/wallabag/PHPePub",
             "support": {
-                "source": "https://github.com/wallabag/PHPePub/tree/2.1.0"
+                "source": "https://github.com/wallabag/PHPePub/tree/master"
             },
             "time": "2015-01-19 11:44:19"
         },
@@ -2727,7 +2728,7 @@
             "description": "A simple and smart (or stupid) php5 snippets repository",
             "homepage": "https://github.com/wallabag/kriss_php5",
             "support": {
-                "source": "https://github.com/wallabag/kriss_php5/tree/1.0.0"
+                "source": "https://github.com/wallabag/kriss_php5/tree/master"
             },
             "time": "2015-01-18 21:21:43"
         },
@@ -2764,7 +2765,7 @@
             "description": "Paginate record sets, not tied in directly to a database.",
             "homepage": "https://github.com/wallabag/pagination",
             "support": {
-                "source": "https://github.com/wallabag/pagination/tree/1.0.0"
+                "source": "https://github.com/wallabag/pagination/tree/master"
             },
             "time": "2015-01-19 09:24:39"
         },
@@ -2810,7 +2811,7 @@
                 "sessions"
             ],
             "support": {
-                "source": "https://github.com/wallabag/PHP-Flash-Messages/tree/1.0.0"
+                "source": "https://github.com/wallabag/PHP-Flash-Messages/tree/master"
             },
             "time": "2015-01-18 19:51:55"
         },
@@ -2864,7 +2865,7 @@
                 "html"
             ],
             "support": {
-                "source": "https://github.com/wallabag/php-readability/tree/1.0.0",
+                "source": "https://github.com/wallabag/php-readability/tree/master",
                 "issues": "https://github.com/wallabag/php-readability/issues"
             },
             "time": "2015-01-19 12:25:38"
@@ -2902,9 +2903,125 @@
             "description": "An experimental Mobipocket file creator in PHP.",
             "homepage": "https://github.com/wallabag/phpMobi",
             "support": {
-                "source": "https://github.com/wallabag/phpMobi/tree/1.0.0"
+                "source": "https://github.com/wallabag/phpMobi/tree/master"
             },
             "time": "2015-01-19 12:43:17"
+        },
+        {
+            "name": "willdurand/hateoas",
+            "version": "v2.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/willdurand/Hateoas.git",
+                "reference": "89fe19ad9ce25f15323d76ac22272282ae8a9f14"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/willdurand/Hateoas/zipball/89fe19ad9ce25f15323d76ac22272282ae8a9f14",
+                "reference": "89fe19ad9ce25f15323d76ac22272282ae8a9f14",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/annotations": "~1.0",
+                "doctrine/common": "~2.0",
+                "jms/metadata": "~1.1",
+                "jms/serializer": "~0.13@dev",
+                "symfony/expression-language": "~2.4"
+            },
+            "require-dev": {
+                "atoum/atoum": "*@dev",
+                "hautelook/frankenstein": "~0.1",
+                "pagerfanta/pagerfanta": "~1.0",
+                "phpunit/phpunit": "~3.7",
+                "symfony/dependency-injection": "~2.0",
+                "symfony/routing": "~2.0",
+                "symfony/yaml": "~2.0",
+                "twig/twig": "~1.12"
+            },
+            "suggest": {
+                "symfony/routing": "To use the SymfonyRouteFactory.",
+                "symfony/yaml": "To use yaml based configuration.",
+                "twig/twig": "To use the Twig extensions."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Hateoas": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Adrien Brault",
+                    "email": "adrien.brault@gmail.com"
+                },
+                {
+                    "name": "William Durand",
+                    "email": "william.durand1@gmail.com"
+                }
+            ],
+            "description": "A PHP library to support implementing representations for HATEOAS REST web services",
+            "time": "2015-02-24 15:28:33"
+        },
+        {
+            "name": "willdurand/hateoas-bundle",
+            "version": "dev-master",
+            "target-dir": "Bazinga/Bundle/HateoasBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/willdurand/BazingaHateoasBundle.git",
+                "reference": "3c86e8080e8a229365a0ce91818da6fe6562376b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/willdurand/BazingaHateoasBundle/zipball/3c86e8080e8a229365a0ce91818da6fe6562376b",
+                "reference": "3c86e8080e8a229365a0ce91818da6fe6562376b",
+                "shasum": ""
+            },
+            "require": {
+                "jms/serializer-bundle": "~0.13",
+                "symfony/framework-bundle": "~2.2",
+                "willdurand/hateoas": "~2.0"
+            },
+            "require-dev": {
+                "symfony/expression-language": "~2.4",
+                "twig/twig": "~1.12"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Bazinga\\Bundle\\HateoasBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "William Durand",
+                    "email": "william.durand1@gmail.com"
+                }
+            ],
+            "description": "Integration of Hateoas into Symfony2.",
+            "keywords": [
+                "HATEOAS",
+                "rest"
+            ],
+            "time": "2015-02-19 16:27:51"
         },
         {
             "name": "willdurand/jsonp-callback-validator",
@@ -4068,6 +4185,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "nelmio/cors-bundle": 20,
+        "willdurand/hateoas-bundle": 20,
         "htmlawed/htmlawed": 20,
         "wallabag/php-flash-messages": 20,
         "wallabag/kriss_php5": 20,
