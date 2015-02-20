@@ -130,7 +130,7 @@ class WallabagRestControllerTest extends WallabagTestCase
         $entry = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneByIsDeleted(false);
+            ->findOneByUser(1);
 
         if (!$entry) {
             $this->markTestSkipped('No content found in db.');
@@ -140,10 +140,14 @@ class WallabagRestControllerTest extends WallabagTestCase
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
-        $res = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneById($entry->getId());
-        $this->assertEquals($res->isDeleted(), true);
+        // We'll try to delete this entry again
+        $client->request('GET', '/api/salts/admin.json');
+        $salt = json_decode($client->getResponse()->getContent());
+
+        $headers = $this->generateHeaders('admin', 'test', $salt[0]);
+
+        $client->request('DELETE', '/api/entries/'.$entry->getId().'.json', array(), array(), $headers);
+
+        $this->assertEquals(404, $client->getResponse()->getStatusCode());
     }
 }
