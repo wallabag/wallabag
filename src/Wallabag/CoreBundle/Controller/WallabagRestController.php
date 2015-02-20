@@ -232,35 +232,11 @@ class WallabagRestController extends Controller
      * Retrieve all tags
      *
      * @ApiDoc(
+     *          {"name"="user", "dataType"="integer", "requirement"="\w+", "description"="The user ID"}
      * )
      */
-    public function getTagsAction()
+    public function getTagsUserAction()
     {
-    }
-
-    /**
-     * Retrieve a single tag
-     *
-     * @ApiDoc(
-     *       requirements={
-     *          {"name"="label", "dataType"="string", "requirement"="\w+", "description"="Label of the tag"}
-     *       }
-     * )
-     */
-    public function getTagAction($label)
-    {
-        $tag = $this
-            ->getDoctrine()
-            ->getRepository('WallabagCoreBundle:Tag')
-            ->findOneByLabel($label);
-
-        if (is_null($tag)) {
-            throw $this->createNotFoundException();
-        }
-
-        $json = $this->get('serializer')->serialize($tag, 'json');
-
-        return new Response($json, 200, array('application/json'));
     }
 
     /**
