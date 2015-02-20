@@ -196,7 +196,7 @@ class WallabagRestController extends Controller
      */
     public function getEntriesTagsAction(Entry $entry)
     {
-        $json = $this->get('serializer')->serialize($entry, 'json');
+        $json = $this->get('serializer')->serialize($entry->getTags(), 'json');
 
         return new Response($json, 200, array('application/json'));
     }
