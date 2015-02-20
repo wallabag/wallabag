@@ -6,7 +6,6 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Service\Extractor;
@@ -244,12 +243,24 @@ class WallabagRestController extends Controller
      *
      * @ApiDoc(
      *       requirements={
-     *          {"name"="tag", "dataType"="string", "requirement"="\w+", "description"="The tag"}
+     *          {"name"="label", "dataType"="string", "requirement"="\w+", "description"="Label of the tag"}
      *       }
      * )
      */
-    public function getTagAction(Tag $tag)
+    public function getTagAction($label)
     {
+        $tag = $this
+            ->getDoctrine()
+            ->getRepository('WallabagCoreBundle:Tag')
+            ->findOneByLabel($label);
+
+        if (is_null($tag)) {
+            throw $this->createNotFoundException();
+        }
+
+        $json = $this->get('serializer')->serialize($tag, 'json');
+
+        return new Response($json, 200, array('application/json'));
     }
 
     /**

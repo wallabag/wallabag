@@ -58,6 +58,6 @@ class Tag
      */
     public function getLabel()
     {
-        return $this->value;
+        return $this->label;
     }
 }
