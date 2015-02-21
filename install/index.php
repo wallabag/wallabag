@@ -18,7 +18,7 @@ require_once('install_functions.php');
 
 if (isset($_GET['clean'])) {
     if (is_dir('install')){
-        delTree('install');
+        delTree('install', false);
         header('Location: index.php');      
     }
     if (is_dir('cache')) {
