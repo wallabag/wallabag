@@ -3,23 +3,16 @@ namespace Wallabag\CoreBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
-class ChangePasswordType extends AbstractType
+class NewUserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('old_password', 'password', array(
-                'constraints' => new UserPassword(array('message' => 'Wrong value for your current password')),
-            ))
-            ->add('new_password', 'repeated', array(
-                'type' => 'password',
-                'invalid_message' => 'The password fields must match.',
-                'required' => true,
-                'first_options'  => array('label' => 'New password'),
-                'second_options' => array('label' => 'Repeat new password'),
+            ->add('username', 'text')
+            ->add('password', 'password', array(
                 'constraints' => array(
                     new Constraints\Length(array(
                         'min' => 8,
@@ -28,12 +21,20 @@ class ChangePasswordType extends AbstractType
                     new Constraints\NotBlank(),
                 ),
             ))
+            ->add('email', 'text')
             ->add('save', 'submit')
         ;
     }
 
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => 'Wallabag\CoreBundle\Entity\User',
+        ));
+    }
+
     public function getName()
     {
-        return 'change_passwd';
+        return 'new_user';
     }
 }

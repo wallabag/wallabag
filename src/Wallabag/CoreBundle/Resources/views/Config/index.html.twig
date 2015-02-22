@@ -102,4 +102,36 @@
 
         {{ form_rest(pwdForm) }}
     </form>
+
+    <h2>{% trans %}Add a user{% endtrans %}</h2>
+
+    <form action="{{ path('config') }}" method="post" {{ form_enctype(newUserForm) }}>
+        {{ form_errors(newUserForm) }}
+
+        <fieldset class="w500p inline">
+            <div class="row">
+                {{ form_label(newUserForm.username) }}
+                {{ form_errors(newUserForm.username) }}
+                {{ form_widget(newUserForm.username) }}
+            </div>
+        </fieldset>
+
+        <fieldset class="w500p inline">
+            <div class="row">
+                {{ form_label(newUserForm.password) }}
+                {{ form_errors(newUserForm.password) }}
+                {{ form_widget(newUserForm.password) }}
+            </div>
+        </fieldset>
+
+        <fieldset class="w500p inline">
+            <div class="row">
+                {{ form_label(newUserForm.email) }}
+                {{ form_errors(newUserForm.email) }}
+                {{ form_widget(newUserForm.email) }}
+            </div>
+        </fieldset>
+
+        {{ form_rest(newUserForm) }}
+    </form>
 {% endblock %}

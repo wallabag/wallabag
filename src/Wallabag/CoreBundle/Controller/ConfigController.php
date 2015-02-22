@@ -6,9 +6,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Wallabag\CoreBundle\Entity\Config;
+use Wallabag\CoreBundle\Entity\User;
 use Wallabag\CoreBundle\Form\Type\ConfigType;
 use Wallabag\CoreBundle\Form\Type\ChangePasswordType;
 use Wallabag\CoreBundle\Form\Type\UserType;
+use Wallabag\CoreBundle\Form\Type\NewUserType;
 
 class ConfigController extends Controller
 {
@@ -72,10 +74,28 @@ class ConfigController extends Controller
             return $this->redirect($this->generateUrl('config'));
         }
 
+        // handle adding new user
+        $newUser = new User();
+        $newUserForm = $this->createForm(new NewUserType(), $newUser);
+        $newUserForm->handleRequest($request);
+
+        if ($newUserForm->isValid()) {
+            $em->persist($newUser);
+            $em->flush();
+
+            $this->get('session')->getFlashBag()->add(
+                'notice',
+                sprintf('User "%s" added', $newUser->getUsername())
+            );
+
+            return $this->redirect($this->generateUrl('config'));
+        }
+
         return $this->render('WallabagCoreBundle:Config:index.html.twig', array(
             'configForm' => $configForm->createView(),
             'pwdForm' => $pwdForm->createView(),
             'userForm' => $userForm->createView(),
+            'newUserForm' => $newUserForm->createView(),
         ));
     }
 

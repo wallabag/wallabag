@@ -128,7 +128,7 @@ class ConfigControllerTest extends WallabagTestCase
                     'change_passwd[new_password][first]' => 'hop',
                     'change_passwd[new_password][second]' => 'hop',
                 ),
-                'Password should by at least 6 chars long',
+                'Password should by at least',
             ),
         );
     }
@@ -259,5 +259,92 @@ class ConfigControllerTest extends WallabagTestCase
 
         $this->assertGreaterThan(1, $alert = $crawler->filter('div.flash-notice')->extract(array('_text')));
         $this->assertContains('Information updated', $alert[0]);
+    }
+
+    public function dataForNewUserFailed()
+    {
+        return array(
+            array(
+                array(
+                    'new_user[username]' => '',
+                    'new_user[password]' => '',
+                    'new_user[email]' => '',
+                ),
+                'This value should not be blank.',
+            ),
+            array(
+                array(
+                    'new_user[username]' => 'ad',
+                    'new_user[password]' => '',
+                    'new_user[email]' => '',
+                ),
+                'This value is too short.',
+            ),
+            array(
+                array(
+                    'new_user[username]' => 'wallace',
+                    'new_user[password]' => '',
+                    'new_user[email]' => 'test',
+                ),
+                'This value is not a valid email address.',
+            ),
+            array(
+                array(
+                    'new_user[username]' => 'wallace',
+                    'new_user[password]' => 'admin',
+                    'new_user[email]' => 'wallace@wallace.me',
+                ),
+                'Password should by at least',
+            ),
+        );
+    }
+
+    /**
+     * @dataProvider dataForNewUserFailed
+     */
+    public function testNewUserFailed($data, $expectedMessage)
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/config');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $form = $crawler->filter('button[id=new_user_save]')->form();
+
+        $crawler = $client->submit($form, $data);
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $this->assertGreaterThan(1, $alert = $crawler->filter('body')->extract(array('_text')));
+        $this->assertContains($expectedMessage, $alert[0]);
+    }
+
+    public function testNewUserCreated()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/config');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $form = $crawler->filter('button[id=new_user_save]')->form();
+
+        $data = array(
+            'new_user[username]' => 'wallace',
+            'new_user[password]' => 'wallace1',
+            'new_user[email]' => 'wallace@wallace.me',
+        );
+
+        $client->submit($form, $data);
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+
+        $crawler = $client->followRedirect();
+
+        $this->assertGreaterThan(1, $alert = $crawler->filter('div.flash-notice')->extract(array('_text')));
+        $this->assertContains('User "wallace" added', $alert[0]);
     }
 }
