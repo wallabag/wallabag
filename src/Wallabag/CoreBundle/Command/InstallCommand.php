@@ -135,11 +135,10 @@ class InstallCommand extends ContainerAwareCommand
 
         $em->persist($user);
 
-        $config = new Config();
-        $config->setUser($user);
-        $config->setTheme('baggy');
-        $config->setItemsPerPage(10);
-        $config->setLanguage('en_US');
+        $config = new Config($user);
+        $config->setTheme($this->getContainer()->getParameter('theme'));
+        $config->setItemsPerPage($this->getContainer()->getParameter('items_on_page'));
+        $config->setLanguage($this->getContainer()->getParameter('language'));
 
         $em->persist($config);
     }

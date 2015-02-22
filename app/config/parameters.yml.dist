@@ -37,5 +37,7 @@ parameters:
     export_mobi: true
     export_pdf: true
 
-    # List view
+    # default user config
     items_on_page: 12
+    theme: baggy
+    language: en_US

@@ -81,6 +81,14 @@ class ConfigController extends Controller
 
         if ($newUserForm->isValid()) {
             $em->persist($newUser);
+
+            $config = new Config($newUser);
+            $config->setTheme($this->container->getParameter('theme'));
+            $config->setItemsPerPage($this->container->getParameter('items_on_page'));
+            $config->setLanguage($this->container->getParameter('language'));
+
+            $em->persist($config);
+
             $em->flush();
 
             $this->get('session')->getFlashBag()->add(
