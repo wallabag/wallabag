@@ -50,7 +50,7 @@ class InstallCommandTest extends WallabagTestCase
 
         $tester = new CommandTester($command);
         $tester->execute(array(
-            'command' => $command->getName()
+            'command' => $command->getName(),
         ));
 
         $this->assertContains('Step 1 of 4. Checking system requirements.', $tester->getDisplay());

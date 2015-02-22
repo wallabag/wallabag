@@ -283,6 +283,17 @@ class InstallCommand extends ContainerAwareCommand
             throw $exception;
         }
 
+        // custom verification for sqlite, since `getListDatabasesSQL` doesn't work for sqlite
+        if ('sqlite' == $schemaManager->getDatabasePlatform()->getName()) {
+            $params = $this->getContainer()->get('doctrine.dbal.default_connection')->getParams();
+
+            if (isset($params['path']) && file_exists($params['path'])) {
+                return true;
+            }
+
+            return false;
+        }
+
         return in_array($databaseName, $schemaManager->listDatabases());
     }
 
