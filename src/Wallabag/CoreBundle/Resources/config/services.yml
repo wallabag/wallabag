@@ -1,15 +1,29 @@
 services:
-    wallabag_core.twig.wallabag:
+    wallabag_core.twig.extension:
         class: Wallabag\CoreBundle\Twig\Extension\WallabagExtension
         tags:
             - { name: twig.extension }
+
     wsse.security.authentication.provider:
         class: Wallabag\CoreBundle\Security\Authentication\Provider\WsseProvider
         public: false
         arguments: ['', '%kernel.cache_dir%/security/nonces']
+
     wsse.security.authentication.listener:
         class: Wallabag\CoreBundle\Security\Firewall\WsseListener
         public: false
         tags:
             - { name: monolog.logger, channel: wsse }
         arguments: ['@security.context', '@security.authentication.manager', '@logger']
+
+    wallabag_core.helper.detect_active_theme:
+        class: Wallabag\CoreBundle\Helper\DetectActiveTheme
+        arguments:
+            - @security.context
+
+    wallabag_core.form.type.config:
+        class: Wallabag\CoreBundle\Form\Type\ConfigType
+        arguments:
+            - %liip_theme.themes%
+        tags:
+            - { name: form.type, alias: config }

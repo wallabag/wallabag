@@ -14,19 +14,16 @@
         {% include "WallabagCoreBundle::_head.html.twig" %}
     </head>
     <body>
-    {% include "WallabagCoreBundle::_top.html.twig" %}
-    <div id="main">
-        {% block menu %}{% endblock %}
-        {% block precontent %}{% endblock %}
-        {% for flashMessage in app.session.flashbag.get('notice') %}
-            <div class="flash-notice">
-                {{ flashMessage }}
+        <h1>DEFAULTDEFAULTDEFAULTDEFAULTDEFAULTDEFAULTDEFAULTDEFAULT</h1>
+        {% include "WallabagCoreBundle::_top.html.twig" %}
+        <div id="main">
+            {% block menu %}{% endblock %}
+            {% block precontent %}{% endblock %}
+            {{ include("WallabagCoreBundle::_messages.html.twig", {'flashMessages': app.session.flashbag.get('notice')}) }}
+            <div id="content" class="w600p center">
+                {% block content %}{% endblock %}
             </div>
-        {% endfor %}
-        <div id="content" class="w600p center">
-            {% block content %}{% endblock %}
         </div>
-    </div>
-    {% include "WallabagCoreBundle::_footer.html.twig" %}
+        {% include "WallabagCoreBundle::_footer.html.twig" %}
     </body>
 </html>

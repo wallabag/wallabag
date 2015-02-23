@@ -7,7 +7,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\User;
-use Wallabag\CoreBundle\Form\Type\ConfigType;
 use Wallabag\CoreBundle\Form\Type\ChangePasswordType;
 use Wallabag\CoreBundle\Form\Type\UserType;
 use Wallabag\CoreBundle\Form\Type\NewUserType;
@@ -25,13 +24,17 @@ class ConfigController extends Controller
         $config = $this->getConfig();
         $user = $this->getUser();
 
-        // handle basic config detail
-        $configForm = $this->createForm(new ConfigType(), $config);
+        // handle basic config detail (this form is defined as a service)
+        $configForm = $this->createForm('config', $config);
         $configForm->handleRequest($request);
 
         if ($configForm->isValid()) {
             $em->persist($config);
             $em->flush();
+
+            // switch active theme
+            $activeTheme = $this->get('liip_theme.active_theme');
+            $activeTheme->setName($config->getTheme());
 
             $this->get('session')->getFlashBag()->add(
                 'notice',

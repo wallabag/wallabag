@@ -1,0 +1,9 @@
+
+{% if flashMessages %}
+<div class="messages success">
+    <a href="#" class="closeMessage">×</a>
+    {% for flashMessage in flashMessages %}
+        <p>{{ flashMessage }}</p>
+    {% endfor %}
+</div>
+{% endif %}

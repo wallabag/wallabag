@@ -48,7 +48,7 @@ class Config
     private $language;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="config")
+     * @ORM\OneToOne(targetEntity="User", inversedBy="config")
      */
     private $user;
 
