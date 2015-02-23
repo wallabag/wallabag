@@ -4,7 +4,7 @@ namespace Wallabag\CoreBundle\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class WallabagTestCase extends WebTestCase
+abstract class WallabagTestCase extends WebTestCase
 {
     private $client = null;
 
@@ -24,7 +24,7 @@ class WallabagTestCase extends WebTestCase
         $form = $crawler->filter('button[type=submit]')->form();
         $data = array(
             '_username' => $username,
-            '_password' => 'test',
+            '_password' => 'mypassword',
         );
 
         $this->client->submit($form, $data);

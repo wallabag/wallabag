@@ -6,7 +6,7 @@ parameters:
     database_name: symfony
     database_user: root
     database_password: ~
-    database_path: "%kernel.root_dir%/../data/db/poche.sqlite"
+    database_path: "%kernel.root_dir%/../data/db/wallabag.sqlite"
 
     mailer_transport:  smtp
     mailer_host:       127.0.0.1
@@ -37,5 +37,7 @@ parameters:
     export_mobi: true
     export_pdf: true
 
-    # List view
+    # default user config
     items_on_page: 12
+    theme: baggy
+    language: en_US

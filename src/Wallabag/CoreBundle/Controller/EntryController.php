@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Service\Extractor;
-use Wallabag\CoreBundle\Helper\Url;
+use Wallabag\CoreBundle\Form\Type\EntryType;
 
 class EntryController extends Controller
 {
@@ -22,10 +22,7 @@ class EntryController extends Controller
     {
         $entry = new Entry($this->getUser());
 
-        $form = $this->createFormBuilder($entry)
-            ->add('url', 'url')
-            ->add('save', 'submit')
-            ->getForm();
+        $form = $this->createForm(new EntryType(), $entry);
 
         $form->handleRequest($request);
 

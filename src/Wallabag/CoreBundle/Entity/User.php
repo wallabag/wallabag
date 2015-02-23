@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
@@ -29,6 +30,11 @@ class User implements AdvancedUserInterface, \Serializable
      * @var string
      *
      * @ORM\Column(name="username", type="text")
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = "3",
+     *      max = "255"
+     * )
      */
     private $username;
 
@@ -56,14 +62,16 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="text", nullable=true)
+     * @ORM\Column(name="email", type="text", nullable=false)
+     * @Assert\Email()
+     * @Assert\NotBlank()
      */
     private $email;
 
     /**
-     * @ORM\Column(name="is_active", type="boolean")
+     * @ORM\Column(name="is_active", type="boolean", nullable=false)
      */
-    private $isActive;
+    private $isActive = true;
 
     /**
      * @var date
@@ -86,9 +94,8 @@ class User implements AdvancedUserInterface, \Serializable
 
     public function __construct()
     {
-        $this->isActive = true;
-        $this->salt     = md5(uniqid(null, true));
-        $this->entries  = new ArrayCollection();
+        $this->salt    = md5(uniqid(null, true));
+        $this->entries = new ArrayCollection();
     }
 
     /**

@@ -41,10 +41,6 @@ class WallabagPasswordEncoder extends BasePasswordEncoder
      */
     public function encodePassword($raw, $salt)
     {
-        if (null === $this->username) {
-            throw new \LogicException('We can not check the password without a username.');
-        }
-
         if ($this->isPasswordTooLong($raw)) {
             throw new BadCredentialsException('Invalid password.');
         }
@@ -71,6 +67,10 @@ class WallabagPasswordEncoder extends BasePasswordEncoder
      */
     protected function mergePasswordAndSalt($password, $salt)
     {
+        if (null === $this->username) {
+            throw new \LogicException('We can not check the password without a username.');
+        }
+
         if (empty($salt)) {
             return $password;
         }

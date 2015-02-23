@@ -1,0 +1,137 @@
+{% extends "WallabagCoreBundle::layout.html.twig" %}
+
+{% block title %}{% trans %}Config{% endtrans %}{% endblock %}
+
+{% block menu %}
+    {% include "WallabagCoreBundle::_menu.html.twig" %}
+{% endblock %}
+
+{% block content %}
+    <h2>{% trans %}Wallabag configuration{% endtrans %}</h2>
+
+    <form action="{{ path('config') }}" method="post" {{ form_enctype(configForm) }}>
+        {{ form_errors(configForm) }}
+
+        <fieldset class="w500p inline">
+            <div class="row">
+                {{ form_label(configForm.theme) }}
+                {{ form_errors(configForm.theme) }}
+                {{ form_widget(configForm.theme) }}
+            </div>
+        </fieldset>
+
+        <fieldset class="w500p inline">
+            <div class="row">
+                {{ form_label(configForm.items_per_page) }}
+                {{ form_errors(configForm.items_per_page) }}
+                {{ form_widget(configForm.items_per_page) }}
+            </div>
+        </fieldset>
+
+        <fieldset class="w500p inline">
+            <div class="row">
+                {{ form_label(configForm.language) }}
+                {{ form_errors(configForm.language) }}
+                {{ form_widget(configForm.language) }}
+            </div>
+        </fieldset>
+
+        {{ form_rest(configForm) }}
+    </form>
+
+    <h2>{% trans %}User information{% endtrans %}</h2>
+
+    <form action="{{ path('config') }}" method="post" {{ form_enctype(userForm) }}>
+        {{ form_errors(userForm) }}
+
+        <fieldset class="w500p inline">
+            <div class="row">
+                {{ form_label(userForm.username) }}
+                {{ form_errors(userForm.username) }}
+                {{ form_widget(userForm.username) }}
+            </div>
+        </fieldset>
+
+        <fieldset class="w500p inline">
+            <div class="row">
+                {{ form_label(userForm.name) }}
+                {{ form_errors(userForm.name) }}
+                {{ form_widget(userForm.name) }}
+            </div>
+        </fieldset>
+
+        <fieldset class="w500p inline">
+            <div class="row">
+                {{ form_label(userForm.email) }}
+                {{ form_errors(userForm.email) }}
+                {{ form_widget(userForm.email) }}
+            </div>
+        </fieldset>
+
+        {{ form_rest(userForm) }}
+    </form>
+
+    <h2>{% trans %}Change your password{% endtrans %}</h2>
+
+    <form action="{{ path('config') }}" method="post" {{ form_enctype(pwdForm) }}>
+        {{ form_errors(pwdForm) }}
+
+        <fieldset class="w500p inline">
+            <div class="row">
+                {{ form_label(pwdForm.old_password) }}
+                {{ form_errors(pwdForm.old_password) }}
+                {{ form_widget(pwdForm.old_password) }}
+            </div>
+        </fieldset>
+
+        <fieldset class="w500p inline">
+            <div class="row">
+                {{ form_label(pwdForm.new_password.first) }}
+                {{ form_errors(pwdForm.new_password.first) }}
+                {{ form_widget(pwdForm.new_password.first) }}
+            </div>
+        </fieldset>
+
+        <fieldset class="w500p inline">
+            <div class="row">
+                {{ form_label(pwdForm.new_password.second) }}
+                {{ form_errors(pwdForm.new_password.second) }}
+                {{ form_widget(pwdForm.new_password.second) }}
+            </div>
+        </fieldset>
+
+        {{ form_rest(pwdForm) }}
+    </form>
+
+    <h2>{% trans %}Add a user{% endtrans %}</h2>
+
+    <form action="{{ path('config') }}" method="post" {{ form_enctype(newUserForm) }}>
+        {{ form_errors(newUserForm) }}
+
+        <fieldset class="w500p inline">
+            <div class="row">
+                {{ form_label(newUserForm.username) }}
+                {{ form_errors(newUserForm.username) }}
+                {{ form_widget(newUserForm.username) }}
+            </div>
+        </fieldset>
+
+        <fieldset class="w500p inline">
+            <div class="row">
+                {{ form_label(newUserForm.password) }}
+                {{ form_errors(newUserForm.password) }}
+                {{ form_widget(newUserForm.password) }}
+            </div>
+        </fieldset>
+
+        <fieldset class="w500p inline">
+            <div class="row">
+                {{ form_label(newUserForm.email) }}
+                {{ form_errors(newUserForm.email) }}
+                {{ form_widget(newUserForm.email) }}
+            </div>
+        </fieldset>
+
+        {{ form_rest(newUserForm) }}
+    </form>
+{% endblock %}
