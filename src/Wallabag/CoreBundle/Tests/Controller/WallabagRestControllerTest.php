@@ -176,4 +176,41 @@ class WallabagRestControllerTest extends WallabagTestCase
 
         $this->assertEquals(json_encode($tags), $client->getResponse()->getContent());
     }
+
+    public function testPostTagsOnEntry()
+    {
+        $client = $this->createClient();
+        $client->request('GET', '/api/salts/admin.json');
+        $salt = json_decode($client->getResponse()->getContent());
+        $headers = $this->generateHeaders('admin', 'test', $salt[0]);
+
+        $entry = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneByUser(1);
+
+        if (!$entry) {
+            $this->markTestSkipped('No content found in db.');
+        }
+
+        $newTags = 'tag1,tag2,tag3';
+
+        $client->request('POST', '/api/entries/'.$entry->getId().'/tags', array('tags' => $newTags), array(), $headers);
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $entryDB = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->find($entry->getId());
+
+        $tagsInDB = array();
+        foreach ($entryDB->getTags()->toArray() as $tag) {
+            $tagsInDB[$tag->getId()] = $tag->getLabel();
+        }
+
+        foreach (explode(',', $newTags) as $tag) {
+            $this->assertContains($tag, $tagsInDB);
+        }
+    }
 }

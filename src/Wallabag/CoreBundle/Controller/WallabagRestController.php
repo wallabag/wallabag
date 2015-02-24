@@ -213,8 +213,34 @@ class WallabagRestController extends Controller
      *       }
      * )
      */
-    public function postEntriesTagsAction(Entry $entry)
+    public function postEntriesTagsAction(Request $request, Entry $entry)
     {
+        $tags = explode(',', $request->request->get('tags'));
+
+        foreach ($tags as $label) {
+            $tagEntity = $this
+                ->getDoctrine()
+                ->getRepository('WallabagCoreBundle:Tag')
+                ->findOneByLabel($label);
+
+            if (is_null($tagEntity)) {
+                $tagEntity = new Tag();
+                $tagEntity->setLabel($label);
+            }
+
+            // only add the tag on the entry if the relation doesn't exist
+            if (!$entry->getTags()->contains($tagEntity)) {
+                $entry->addTag($tagEntity);
+            }
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($entry);
+        $em->flush();
+
+        $json = $this->get('serializer')->serialize($entry, 'json');
+
+        return new Response($json, 200, array('application/json'));
     }
 
     /**

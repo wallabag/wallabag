@@ -119,6 +119,11 @@ class EntryRepository extends EntityRepository
             ->getResult();
     }
 
+    /**
+     * Fetch an entry with a tag. Only used for tests.
+     *
+     * @return Entry
+     */
     public function findOneWithTags()
     {
         $qb = $this->createQueryBuilder('e')
