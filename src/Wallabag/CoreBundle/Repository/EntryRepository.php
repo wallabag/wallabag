@@ -118,4 +118,15 @@ class EntryRepository extends EntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findOneWithTags()
+    {
+        $qb = $this->createQueryBuilder('e')
+            ->innerJoin('e.tags', 't')
+            ->addSelect('t');
+
+        return $qb
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

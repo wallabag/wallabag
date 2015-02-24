@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\XmlRoot;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Tag
@@ -36,10 +37,14 @@ class Tag
     private $label;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Entry", mappedBy="tags", cascade={"persist", "merge"})
+     * @ORM\ManyToMany(targetEntity="Entry", mappedBy="tags", cascade={"persist"})
      */
     private $entries;
 
+    public function __construct()
+    {
+        $this->entries = new ArrayCollection();
+    }
     /**
      * Get id
      *
@@ -71,5 +76,10 @@ class Tag
     public function getLabel()
     {
         return $this->label;
+    }
+
+    public function addEntry(Entry $entry)
+    {
+        $this->entries[] = $entry;
     }
 }
