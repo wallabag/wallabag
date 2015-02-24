@@ -120,11 +120,8 @@ class Entry
     private $user;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="entries", cascade={"persist", "merge"})
-     * @ORM\JoinTable(name="tags_entries",
-     *   joinColumns={@ORM\JoinColumn(name="entry_id", referencedColumnName="id")},
-     *   inverseJoinColumns={@ORM\JoinColumn(name="tag_id", referencedColumnName="id")}
-     * )
+     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="entries", cascade={"persist"})
+     * @ORM\JoinTable(name="entry_tags")
      */
     private $tags;
 
@@ -407,5 +404,6 @@ class Entry
     public function addTag(Tag $tag)
     {
         $this->tags[] = $tag;
+        $tag->addEntry($this);
     }
 }

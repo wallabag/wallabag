@@ -150,4 +150,30 @@ class WallabagRestControllerTest extends WallabagTestCase
 
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
     }
+
+    public function testGetTagsEntry()
+    {
+        $client = $this->createClient();
+        $client->request('GET', '/api/salts/admin.json');
+        $salt = json_decode($client->getResponse()->getContent());
+        $headers = $this->generateHeaders('admin', 'test', $salt[0]);
+
+        $entry = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneWithTags();
+
+        if (!$entry) {
+            $this->markTestSkipped('No content found in db.');
+        }
+
+        $tags = array();
+        foreach ($entry->getTags() as $tag) {
+            $tags[] = array('id' => $tag->getId(), 'label' => $tag->getLabel());
+        }
+
+        $client->request('GET', '/api/entries/'.$entry->getId().'/tags', array(), array(), $headers);
+
+        $this->assertEquals(json_encode($tags), $client->getResponse()->getContent());
+    }
 }
