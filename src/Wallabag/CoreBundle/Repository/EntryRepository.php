@@ -124,11 +124,14 @@ class EntryRepository extends EntityRepository
      *
      * @return Entry
      */
-    public function findOneWithTags()
+    public function findOneWithTags($userId)
     {
         $qb = $this->createQueryBuilder('e')
             ->innerJoin('e.tags', 't')
-            ->addSelect('t');
+            ->addSelect('t')
+            ->where('t.user=:userId')->setParameter('userId', 1);
+
+        return $qb->getQuery()->getOneOrNullResult();
 
         return $qb
             ->getQuery()

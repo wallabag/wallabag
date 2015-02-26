@@ -9,9 +9,35 @@ use Symfony\Component\HttpFoundation\Response;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Service\Extractor;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class WallabagRestController extends Controller
 {
+    /**
+     * @param Entry  $entry
+     * @param string $tags
+     */
+    private function assignTagsToEntry(Entry $entry, $tags)
+    {
+        foreach (explode(',', $tags) as $label) {
+            $label = trim($label);
+            $tagEntity = $this
+                ->getDoctrine()
+                ->getRepository('WallabagCoreBundle:Tag')
+                ->findOneByLabel($label);
+
+            if (is_null($tagEntity)) {
+                $tagEntity = new Tag($this->getUser());
+                $tagEntity->setLabel($label);
+            }
+
+            // only add the tag on the entry if the relation doesn't exist
+            if (!$entry->getTags()->contains($tagEntity)) {
+                $entry->addTag($tagEntity);
+            }
+        }
+    }
+
     /**
      * Retrieve salt for a giver user.
      *
@@ -87,6 +113,10 @@ class WallabagRestController extends Controller
      */
     public function getEntryAction(Entry $entry)
     {
+        if ($entry->getUser()->getId() != $this->getUser()->getId()) {
+            throw $this->createAccessDeniedException();
+        }
+
         $json = $this->get('serializer')->serialize($entry, 'json');
 
         return new Response($json, 200, array('application/json'));
@@ -106,7 +136,6 @@ class WallabagRestController extends Controller
      */
     public function postEntriesAction(Request $request)
     {
-        //TODO gérer si on passe les tags
         $url = $request->request->get('url');
 
         $content = Extractor::extract($url);
@@ -114,6 +143,9 @@ class WallabagRestController extends Controller
         $entry->setUrl($url);
         $entry->setTitle($request->request->get('title') ?: $content->getTitle());
         $entry->setContent($content->getBody());
+
+        $this->assignTagsToEntry($entry, $request->request->get('tags', array()));
+
         $em = $this->getDoctrine()->getManager();
         $em->persist($entry);
         $em->flush();
@@ -141,8 +173,11 @@ class WallabagRestController extends Controller
      */
     public function patchEntriesAction(Entry $entry, Request $request)
     {
+        if ($entry->getUser()->getId() != $this->getUser()->getId()) {
+            throw $this->createAccessDeniedException();
+        }
+
         $title      = $request->request->get("title");
-        $tags       = $request->request->get("tags", array());
         $isArchived = $request->request->get("archive");
         $isStarred  = $request->request->get("star");
 
@@ -157,6 +192,8 @@ class WallabagRestController extends Controller
         if (!is_null($isStarred)) {
             $entry->setStarred($isStarred);
         }
+
+        $this->assignTagsToEntry($entry, $request->request->get('tags', array()));
 
         $em = $this->getDoctrine()->getManager();
         $em->flush();
@@ -176,6 +213,10 @@ class WallabagRestController extends Controller
      */
     public function deleteEntriesAction(Entry $entry)
     {
+        if ($entry->getUser()->getId() != $this->getUser()->getId()) {
+            throw $this->createAccessDeniedException();
+        }
+
         $em = $this->getDoctrine()->getManager();
         $em->remove($entry);
         $em->flush();
@@ -196,6 +237,12 @@ class WallabagRestController extends Controller
      */
     public function getEntriesTagsAction(Entry $entry)
     {
+        var_dump($entry->getUser()->getId());
+        var_dump($this->getUser()->getId());
+        if ($entry->getUser()->getId() != $this->getUser()->getId()) {
+            throw $this->createAccessDeniedException();
+        }
+
         $json = $this->get('serializer')->serialize($entry->getTags(), 'json');
 
         return new Response($json, 200, array('application/json'));
@@ -215,24 +262,11 @@ class WallabagRestController extends Controller
      */
     public function postEntriesTagsAction(Request $request, Entry $entry)
     {
-        $tags = explode(',', $request->request->get('tags'));
-
-        foreach ($tags as $label) {
-            $tagEntity = $this
-                ->getDoctrine()
-                ->getRepository('WallabagCoreBundle:Tag')
-                ->findOneByLabel($label);
-
-            if (is_null($tagEntity)) {
-                $tagEntity = new Tag();
-                $tagEntity->setLabel($label);
-            }
-
-            // only add the tag on the entry if the relation doesn't exist
-            if (!$entry->getTags()->contains($tagEntity)) {
-                $entry->addTag($tagEntity);
-            }
+        if ($entry->getUser()->getId() != $this->getUser()->getId()) {
+            throw $this->createAccessDeniedException();
         }
+
+        $this->assignTagsToEntry($entry, $request->request->get('tags', array()));
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($entry);
@@ -255,17 +289,30 @@ class WallabagRestController extends Controller
      */
     public function deleteEntriesTagsAction(Entry $entry, Tag $tag)
     {
+        if ($entry->getUser()->getId() != $this->getUser()->getId()) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $entry->removeTag($tag);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($entry);
+        $em->flush();
+
+        $json = $this->get('serializer')->serialize($entry, 'json');
+
+        return new Response($json, 200, array('application/json'));
     }
 
     /**
      * Retrieve all tags
      *
-     * @ApiDoc(
-     *          {"name"="user", "dataType"="integer", "requirement"="\w+", "description"="The user ID"}
-     * )
+     * @ApiDoc()
      */
-    public function getTagsUserAction()
+    public function getTagsAction()
     {
+        $json = $this->get('serializer')->serialize($this->getUser()->getTags(), 'json');
+
+        return new Response($json, 200, array('application/json'));
     }
 
     /**
@@ -279,5 +326,16 @@ class WallabagRestController extends Controller
      */
     public function deleteTagAction(Tag $tag)
     {
+        if ($tag->getUser()->getId() != $this->getUser()->getId()) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($tag);
+        $em->flush();
+
+        $json = $this->get('serializer')->serialize($tag, 'json');
+
+        return new Response($json, 200, array('application/json'));
     }
 }

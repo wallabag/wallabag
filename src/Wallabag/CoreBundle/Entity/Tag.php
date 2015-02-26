@@ -41,8 +41,14 @@ class Tag
      */
     private $entries;
 
-    public function __construct()
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="tags")
+     */
+    private $user;
+
+    public function __construct(User $user)
     {
+        $this->user    = $user;
         $this->entries = new ArrayCollection();
     }
     /**

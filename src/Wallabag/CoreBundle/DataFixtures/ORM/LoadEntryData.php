@@ -38,9 +38,9 @@ class LoadEntryData extends AbstractFixture implements OrderedFixtureInterface
         $entry3->setTitle('test title entry3');
         $entry3->setContent('This is my content /o/');
 
-        $tag1 = new Tag();
+        $tag1 = new Tag($this->getReference('admin-user'));
         $tag1->setLabel("foo");
-        $tag2 = new Tag();
+        $tag2 = new Tag($this->getReference('admin-user'));
         $tag2->setLabel("bar");
 
         $entry3->addTag($tag1);

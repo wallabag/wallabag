@@ -161,7 +161,9 @@ class WallabagRestControllerTest extends WallabagTestCase
         $entry = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneWithTags();
+            ->findOneWithTags(1);
+
+        var_dump($entry->getTitle());
 
         if (!$entry) {
             $this->markTestSkipped('No content found in db.');
