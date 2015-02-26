@@ -128,9 +128,11 @@ class EntryRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('e')
             ->innerJoin('e.tags', 't')
-            ->addSelect('t')
-            ->where('t.user=:userId')->setParameter('userId', 1);
+            ->innerJoin('e.user', 'u')
+            ->addSelect('t', 'u')
+            ->where('e.user=:userId')->setParameter('userId', $userId)
+        ;
 
-        return $qb->getQuery()->getOneOrNullResult();
+        return $qb->getQuery()->getResult();
     }
 }

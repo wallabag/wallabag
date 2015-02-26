@@ -5,11 +5,10 @@ namespace Wallabag\CoreBundle\Controller;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Service\Extractor;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class WallabagRestController extends Controller
 {
@@ -48,12 +47,12 @@ class WallabagRestController extends Controller
      * )
      * @return array
      */
-    public function getSaltAction($username)
+    public function getSaltAction(Request $request)
     {
         $user = $this
             ->getDoctrine()
             ->getRepository('WallabagCoreBundle:User')
-            ->findOneByUsername($username);
+            ->findOneByUsername($request->query->get('username'));
 
         if (is_null($user)) {
             throw $this->createNotFoundException();
@@ -98,7 +97,7 @@ class WallabagRestController extends Controller
 
         $json = $this->get('serializer')->serialize($entries, 'json');
 
-        return new Response($json, 200, array('application/json'));
+        return new JsonResponse($json, 200);
     }
 
     /**
@@ -119,7 +118,7 @@ class WallabagRestController extends Controller
 
         $json = $this->get('serializer')->serialize($entry, 'json');
 
-        return new Response($json, 200, array('application/json'));
+        return new JsonResponse($json, 200);
     }
 
     /**
@@ -144,7 +143,10 @@ class WallabagRestController extends Controller
         $entry->setTitle($request->request->get('title') ?: $content->getTitle());
         $entry->setContent($content->getBody());
 
-        $this->assignTagsToEntry($entry, $request->request->get('tags', array()));
+        $tags = $request->request->get('tags', '');
+        if (!empty($tags)) {
+            $this->assignTagsToEntry($entry, $tags);
+        }
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($entry);
@@ -152,7 +154,7 @@ class WallabagRestController extends Controller
 
         $json = $this->get('serializer')->serialize($entry, 'json');
 
-        return new Response($json, 200, array('application/json'));
+        return new JsonResponse($json, 200);
     }
 
     /**
@@ -193,12 +195,17 @@ class WallabagRestController extends Controller
             $entry->setStarred($isStarred);
         }
 
-        $this->assignTagsToEntry($entry, $request->request->get('tags', array()));
+        $tags = $request->request->get('tags', '');
+        if (!empty($tags)) {
+            $this->assignTagsToEntry($entry, $tags);
+        }
 
         $em = $this->getDoctrine()->getManager();
         $em->flush();
 
-        return $entry;
+        $json = $this->get('serializer')->serialize($entry, 'json');
+
+        return new JsonResponse($json, 200);
     }
 
     /**
@@ -223,7 +230,7 @@ class WallabagRestController extends Controller
 
         $json = $this->get('serializer')->serialize($entry, 'json');
 
-        return new Response($json, 200, array('application/json'));
+        return new JsonResponse($json, 200);
     }
 
     /**
@@ -243,7 +250,7 @@ class WallabagRestController extends Controller
 
         $json = $this->get('serializer')->serialize($entry->getTags(), 'json');
 
-        return new Response($json, 200, array('application/json'));
+        return new JsonResponse($json, 200);
     }
 
     /**
@@ -264,7 +271,10 @@ class WallabagRestController extends Controller
             throw $this->createAccessDeniedException();
         }
 
-        $this->assignTagsToEntry($entry, $request->request->get('tags', array()));
+        $tags = $request->request->get('tags', '');
+        if (!empty($tags)) {
+            $this->assignTagsToEntry($entry, $tags);
+        }
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($entry);
@@ -272,7 +282,7 @@ class WallabagRestController extends Controller
 
         $json = $this->get('serializer')->serialize($entry, 'json');
 
-        return new Response($json, 200, array('application/json'));
+        return new JsonResponse($json, 200);
     }
 
     /**
@@ -298,7 +308,7 @@ class WallabagRestController extends Controller
 
         $json = $this->get('serializer')->serialize($entry, 'json');
 
-        return new Response($json, 200, array('application/json'));
+        return new JsonResponse($json, 200);
     }
 
     /**
@@ -310,7 +320,7 @@ class WallabagRestController extends Controller
     {
         $json = $this->get('serializer')->serialize($this->getUser()->getTags(), 'json');
 
-        return new Response($json, 200, array('application/json'));
+        return new JsonResponse($json, 200);
     }
 
     /**
@@ -334,6 +344,6 @@ class WallabagRestController extends Controller
 
         $json = $this->get('serializer')->serialize($tag, 'json');
 
-        return new Response($json, 200, array('application/json'));
+        return new JsonResponse($json, 200);
     }
 }
