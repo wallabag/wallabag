@@ -40,19 +40,15 @@ class WallabagRestController extends Controller
     /**
      * Retrieve salt for a giver user.
      *
-     * @ApiDoc(
-     *       parameters={
-     *          {"name"="username", "dataType"="string", "required"=true, "description"="username"}
-     *       }
-     * )
+     * @ApiDoc()
      * @return array
      */
-    public function getSaltAction(Request $request)
+    public function getSaltAction($username)
     {
         $user = $this
             ->getDoctrine()
             ->getRepository('WallabagCoreBundle:User')
-            ->findOneByUsername($request->query->get('username'));
+            ->findOneByUsername($username);
 
         if (is_null($user)) {
             throw $this->createNotFoundException();
