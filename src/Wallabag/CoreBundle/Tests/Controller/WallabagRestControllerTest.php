@@ -44,10 +44,6 @@ class WallabagRestControllerTest extends WallabagTestCase
     public function testWithBadHeaders()
     {
         $client = $this->createClient();
-        $client->request('GET', '/api/salts/admin.json');
-        $salt = json_decode($client->getResponse()->getContent());
-
-        $headers = $this->generateHeaders('admin', 'mypassword', $salt[0]);
 
         $entry = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
