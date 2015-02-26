@@ -163,8 +163,6 @@ class WallabagRestControllerTest extends WallabagTestCase
             ->getRepository('WallabagCoreBundle:Entry')
             ->findOneWithTags(1);
 
-        var_dump($entry->getTitle());
-
         if (!$entry) {
             $this->markTestSkipped('No content found in db.');
         }

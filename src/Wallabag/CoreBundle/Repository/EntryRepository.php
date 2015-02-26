@@ -132,9 +132,5 @@ class EntryRepository extends EntityRepository
             ->where('t.user=:userId')->setParameter('userId', 1);
 
         return $qb->getQuery()->getOneOrNullResult();
-
-        return $qb
-            ->getQuery()
-            ->getOneOrNullResult();
     }
 }
