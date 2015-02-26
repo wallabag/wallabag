@@ -406,4 +406,9 @@ class Entry
         $this->tags[] = $tag;
         $tag->addEntry($this);
     }
+
+    public function removeTag(Tag $tag)
+    {
+        $this->tags->removeElement($tag);
+    }
 }

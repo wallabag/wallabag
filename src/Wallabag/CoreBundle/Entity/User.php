@@ -96,10 +96,17 @@ class User implements AdvancedUserInterface, \Serializable
      */
     private $entries;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Tag", mappedBy="user", cascade={"remove"})
+     */
+    private $tags;
+
     public function __construct()
     {
-        $this->salt    = md5(uniqid(null, true));
-        $this->entries = new ArrayCollection();
+        $this->isActive = true;
+        $this->salt     = md5(uniqid(null, true));
+        $this->entries  = new ArrayCollection();
+        $this->tags     = new ArrayCollection();
     }
 
     /**
@@ -273,6 +280,25 @@ class User implements AdvancedUserInterface, \Serializable
         return $this->entries;
     }
 
+    /**
+     * @param Entry $entry
+     *
+     * @return User
+     */
+    public function addTag(Tag $tag)
+    {
+        $this->tags[] = $tag;
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection<Tag>
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
     /**
      * @inheritDoc
      */
