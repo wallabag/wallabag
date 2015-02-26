@@ -237,8 +237,6 @@ class WallabagRestController extends Controller
      */
     public function getEntriesTagsAction(Entry $entry)
     {
-        var_dump($entry->getUser()->getId());
-        var_dump($this->getUser()->getId());
         if ($entry->getUser()->getId() != $this->getUser()->getId()) {
             throw $this->createAccessDeniedException();
         }
