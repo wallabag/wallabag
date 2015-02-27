@@ -159,6 +159,8 @@ class WallabagRestControllerTest extends WallabagTestCase
             ->getRepository('WallabagCoreBundle:Entry')
             ->findOneWithTags(1);
 
+        $entry = $entry[0];
+
         if (!$entry) {
             $this->markTestSkipped('No content found in db.');
         }
@@ -170,7 +172,7 @@ class WallabagRestControllerTest extends WallabagTestCase
 
         $client->request('GET', '/api/entries/'.$entry->getId().'/tags', array(), array(), $headers);
 
-        $this->assertEquals(json_encode($tags), $client->getResponse()->getContent());
+        $this->assertEquals(json_encode($tags, JSON_HEX_QUOT), $client->getResponse()->getContent());
     }
 
     public function testPostTagsOnEntry()
