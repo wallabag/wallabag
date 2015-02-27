@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "16c2143e6e1977d625f5557f07dfc118",
+    "hash": "4cbcfeafb3c1dc4ed8c364e93969808f",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -764,17 +764,17 @@
         },
         {
             "name": "friendsofsymfony/rest-bundle",
-            "version": "1.5.0",
+            "version": "1.5.3",
             "target-dir": "FOS/RestBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSRestBundle.git",
-                "reference": "a9377f6a05fb516423d6adf9079c6e5fb41e4799"
+                "reference": "fdd21c4c0cb6222ae37efc9362c6a96bd1432412"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSRestBundle/zipball/a9377f6a05fb516423d6adf9079c6e5fb41e4799",
-                "reference": "a9377f6a05fb516423d6adf9079c6e5fb41e4799",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSRestBundle/zipball/fdd21c4c0cb6222ae37efc9362c6a96bd1432412",
+                "reference": "fdd21c4c0cb6222ae37efc9362c6a96bd1432412",
                 "shasum": ""
             },
             "require": {
@@ -838,7 +838,7 @@
             "keywords": [
                 "rest"
             ],
-            "time": "2015-01-27 09:39:58"
+            "time": "2015-02-16 15:26:12"
         },
         {
             "name": "htmlawed/htmlawed",
@@ -1528,6 +1528,61 @@
             "time": "2014-07-30 09:11:08"
         },
         {
+            "name": "nelmio/cors-bundle",
+            "version": "1.3.3",
+            "target-dir": "Nelmio/CorsBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nelmio/NelmioCorsBundle.git",
+                "reference": "d482c01f6ca0840025b81b65534d0ffb7c18f425"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nelmio/NelmioCorsBundle/zipball/d482c01f6ca0840025b81b65534d0ffb7c18f425",
+                "reference": "d482c01f6ca0840025b81b65534d0ffb7c18f425",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/framework-bundle": "~2.2"
+            },
+            "require-dev": {
+                "matthiasnoback/symfony-dependency-injection-test": "0.2.*",
+                "mockery/mockery": "dev-master"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Nelmio\\CorsBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nelmio",
+                    "homepage": "http://nelm.io"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://github.com/nelmio/NelmioCorsBundle/contributors"
+                }
+            ],
+            "description": "Adds CORS (Cross-Origin Resource Sharing) headers support in your Symfony2 application",
+            "keywords": [
+                "api",
+                "cors",
+                "crossdomain"
+            ],
+            "time": "2014-12-10 17:26:49"
+        },
+        {
             "name": "phpcollection/phpcollection",
             "version": "0.4.0",
             "source": {
@@ -1666,16 +1721,16 @@
         },
         {
             "name": "robmorgan/phinx",
-            "version": "v0.4.2.1",
+            "version": "v0.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/robmorgan/phinx.git",
-                "reference": "1bc1396392d4073b8b29ee5289e445889cbc12b5"
+                "reference": "0d1f9cb9939f65f506a8a3f5fee356764c310fd4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/robmorgan/phinx/zipball/1bc1396392d4073b8b29ee5289e445889cbc12b5",
-                "reference": "1bc1396392d4073b8b29ee5289e445889cbc12b5",
+                "url": "https://api.github.com/repos/robmorgan/phinx/zipball/0d1f9cb9939f65f506a8a3f5fee356764c310fd4",
+                "reference": "0d1f9cb9939f65f506a8a3f5fee356764c310fd4",
                 "shasum": ""
             },
             "require": {
@@ -1724,32 +1779,39 @@
                 "migrations",
                 "phinx"
             ],
-            "time": "2015-02-08 03:41:44"
+            "time": "2015-02-23 16:38:12"
         },
         {
             "name": "sensio/distribution-bundle",
-            "version": "v3.0.16",
+            "version": "v3.0.18",
             "target-dir": "Sensio/Bundle/DistributionBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioDistributionBundle.git",
-                "reference": "aa30f8cd3ee68144e043ca30713aa7d7df35c5fa"
+                "reference": "ac026149ffb1d3a5c893290d2d3ca8795013de08"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/aa30f8cd3ee68144e043ca30713aa7d7df35c5fa",
-                "reference": "aa30f8cd3ee68144e043ca30713aa7d7df35c5fa",
+                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/ac026149ffb1d3a5c893290d2d3ca8795013de08",
+                "reference": "ac026149ffb1d3a5c893290d2d3ca8795013de08",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3",
                 "sensiolabs/security-checker": "~2.0",
                 "symfony/class-loader": "~2.2",
-                "symfony/form": "~2.2",
                 "symfony/framework-bundle": "~2.3",
-                "symfony/process": "~2.2",
+                "symfony/process": "~2.2"
+            },
+            "require-dev": {
+                "symfony/form": "~2.2",
                 "symfony/validator": "~2.2",
                 "symfony/yaml": "~2.2"
+            },
+            "suggest": {
+                "symfony/form": "If you want to use the configurator",
+                "symfony/validator": "If you want to use the configurator",
+                "symfony/yaml": "If you want to use  the configurator"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -1777,7 +1839,7 @@
                 "configuration",
                 "distribution"
             ],
-            "time": "2015-02-01 05:42:21"
+            "time": "2015-02-27 12:59:18"
         },
         {
             "name": "sensio/framework-extra-bundle",
@@ -2347,25 +2409,31 @@
         },
         {
             "name": "twig/extensions",
-            "version": "v1.0.1",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig-extensions.git",
-                "reference": "f91a82ec225e5bb108e01a0f93c9be04f84dcfa0"
+                "reference": "8cf4b9fe04077bd54fc73f4fde83347040c3b8cd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig-extensions/zipball/f91a82ec225e5bb108e01a0f93c9be04f84dcfa0",
-                "reference": "f91a82ec225e5bb108e01a0f93c9be04f84dcfa0",
+                "url": "https://api.github.com/repos/twigphp/Twig-extensions/zipball/8cf4b9fe04077bd54fc73f4fde83347040c3b8cd",
+                "reference": "8cf4b9fe04077bd54fc73f4fde83347040c3b8cd",
                 "shasum": ""
             },
             "require": {
-                "twig/twig": "~1.0"
+                "twig/twig": "~1.12"
+            },
+            "require-dev": {
+                "symfony/translation": "~2.3"
+            },
+            "suggest": {
+                "symfony/translation": "Allow the time_diff output to be translated"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-master": "1.2.x-dev"
                 }
             },
             "autoload": {
@@ -2384,13 +2452,12 @@
                 }
             ],
             "description": "Common additional features for Twig that do not directly belong in core",
-            "homepage": "https://github.com/fabpot/Twig-extensions",
+            "homepage": "http://twig.sensiolabs.org/doc/extensions/index.html",
             "keywords": [
-                "debug",
                 "i18n",
                 "text"
             ],
-            "time": "2013-10-18 19:37:15"
+            "time": "2014-10-30 14:30:03"
         },
         {
             "name": "twig/twig",
@@ -2451,27 +2518,27 @@
         },
         {
             "name": "umpirsky/twig-gettext-extractor",
-            "version": "1.1.3",
+            "version": "1.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/umpirsky/Twig-Gettext-Extractor.git",
-                "reference": "1.1.3"
+                "reference": "a2cdf8693e874ce83603c84e1cc46efb3d516c3f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/umpirsky/Twig-Gettext-Extractor/zipball/1.1.3",
-                "reference": "1.1.3",
+                "url": "https://api.github.com/repos/umpirsky/Twig-Gettext-Extractor/zipball/a2cdf8693e874ce83603c84e1cc46efb3d516c3f",
+                "reference": "a2cdf8693e874ce83603c84e1cc46efb3d516c3f",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3",
-                "symfony/filesystem": ">=2.0,<3.0",
-                "symfony/form": ">=2.0,<3.0",
-                "symfony/routing": ">=2.0,<3.0",
-                "symfony/translation": ">=2.0,<3.0",
-                "symfony/twig-bridge": ">=2.0,<3.0",
-                "twig/extensions": "1.0.*",
-                "twig/twig": ">=1.2.0,<2.0-dev"
+                "symfony/filesystem": "~2.0",
+                "symfony/form": "~2.0",
+                "symfony/routing": "~2.0",
+                "symfony/translation": "~2.0",
+                "symfony/twig-bridge": "~2.0",
+                "twig/extensions": "~1.0",
+                "twig/twig": "~1.2"
             },
             "require-dev": {
                 "symfony/config": "2.1.*"
@@ -2492,12 +2559,11 @@
             "authors": [
                 {
                     "name": "Саша Стаменковић",
-                    "email": "umpirsky@gmail.com",
-                    "homepage": "http://umpirsky.com"
+                    "email": "umpirsky@gmail.com"
                 }
             ],
             "description": "The Twig Gettext Extractor is Poedit friendly tool which extracts translations from twig templates.",
-            "time": "2013-02-14 16:41:48"
+            "time": "2015-02-25 14:41:10"
         },
         {
             "name": "wallabag/Fivefilters_Libraries",
@@ -3896,17 +3962,17 @@
         },
         {
             "name": "sensio/generator-bundle",
-            "version": "v2.5.1",
+            "version": "v2.5.2",
             "target-dir": "Sensio/Bundle/GeneratorBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioGeneratorBundle.git",
-                "reference": "9e23fc3de265ae013690d84aab98e7a84f46edcd"
+                "reference": "4b09746520a826a7bf34a466ba31c7d8740fef7e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioGeneratorBundle/zipball/9e23fc3de265ae013690d84aab98e7a84f46edcd",
-                "reference": "9e23fc3de265ae013690d84aab98e7a84f46edcd",
+                "url": "https://api.github.com/repos/sensiolabs/SensioGeneratorBundle/zipball/4b09746520a826a7bf34a466ba31c7d8740fef7e",
+                "reference": "4b09746520a826a7bf34a466ba31c7d8740fef7e",
                 "shasum": ""
             },
             "require": {
@@ -3940,12 +4006,13 @@
                 }
             ],
             "description": "This bundle generates code for you",
-            "time": "2015-01-13 07:33:46"
+            "time": "2015-02-11 07:21:23"
         }
     ],
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "nelmio/cors-bundle": 20,
         "htmlawed/htmlawed": 20,
         "wallabag/php-flash-messages": 20,
         "wallabag/kriss_php5": 20,

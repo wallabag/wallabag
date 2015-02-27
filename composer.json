@@ -64,6 +64,7 @@
         "sensio/distribution-bundle": "~3.0.12",
         "sensio/framework-extra-bundle": "~3.0",
         "incenteev/composer-parameter-handler": "~2.0",
+        "nelmio/cors-bundle": "1.3.*@dev",
         "umpirsky/twig-gettext-extractor": "1.1.*",
         "friendsofsymfony/rest-bundle": "~1.4",
         "jms/serializer-bundle": "~0.13",
