@@ -6,6 +6,7 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Service\Extractor;
@@ -246,7 +247,7 @@ class WallabagRestController extends Controller
 
         $json = $this->get('serializer')->serialize($entry->getTags(), 'json');
 
-        return new JsonResponse($json, 200);
+        return new Response($json, 200, array('application/json'));
     }
 
     /**
