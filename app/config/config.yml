@@ -133,11 +133,6 @@ liip_theme:
     load_controllers: false
     themes:
         - baggy
-        - dark
-        - default
-        - dmagenta
-        - solarized
-        - solarized-dark
     autodetect_theme: wallabag_core.helper.detect_active_theme
 
     path_patterns:
