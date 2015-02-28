@@ -140,7 +140,7 @@ class WallabagRestControllerTest extends WallabagTestCase
         $client->request('GET', '/api/salts/admin.json');
         $salt = json_decode($client->getResponse()->getContent());
 
-        $headers = $this->generateHeaders('admin', 'test', $salt[0]);
+        $headers = $this->generateHeaders('admin', 'mypassword', $salt[0]);
 
         $client->request('DELETE', '/api/entries/'.$entry->getId().'.json', array(), array(), $headers);
 
@@ -152,7 +152,7 @@ class WallabagRestControllerTest extends WallabagTestCase
         $client = $this->createClient();
         $client->request('GET', '/api/salts/admin.json');
         $salt = json_decode($client->getResponse()->getContent());
-        $headers = $this->generateHeaders('admin', 'test', $salt[0]);
+        $headers = $this->generateHeaders('admin', 'mypassword', $salt[0]);
 
         $entry = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
@@ -180,7 +180,7 @@ class WallabagRestControllerTest extends WallabagTestCase
         $client = $this->createClient();
         $client->request('GET', '/api/salts/admin.json');
         $salt = json_decode($client->getResponse()->getContent());
-        $headers = $this->generateHeaders('admin', 'test', $salt[0]);
+        $headers = $this->generateHeaders('admin', 'mypassword', $salt[0]);
 
         $entry = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
