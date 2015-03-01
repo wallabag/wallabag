@@ -194,7 +194,7 @@ else if (isset($_POST['install'])) {
         <link rel="stylesheet" href="themes/baggy/css/main.css" media="all">
         <link rel="stylesheet" href="themes/baggy/css/messages.css" media="all">
         <link rel="stylesheet" href="themes/baggy/css/print.css" media="print">
-        <script src="themes/_global/js/jquery-2.0.3.min.js"></script>
+        <script src="themes/_global/js/jquery-2.1.3.min.js"></script>
         <script src="themes/baggy/js/init.js"></script>
 
 
