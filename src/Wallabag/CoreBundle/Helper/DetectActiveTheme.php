@@ -12,7 +12,6 @@ use Wallabag\CoreBundle\Entity\User;
  *
  * If no user where logged in, it will returne the default theme
  */
-
 class DetectActiveTheme implements DeviceDetectionInterface
 {
     protected $securityContext;
