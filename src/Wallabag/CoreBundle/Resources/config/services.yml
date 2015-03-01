@@ -20,6 +20,7 @@ services:
         class: Wallabag\CoreBundle\Helper\DetectActiveTheme
         arguments:
             - @security.context
+            - %theme% # default theme from parameters.yml
 
     wallabag_core.form.type.config:
         class: Wallabag\CoreBundle\Form\Type\ConfigType

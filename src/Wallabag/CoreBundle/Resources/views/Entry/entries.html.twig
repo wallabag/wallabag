@@ -2,10 +2,6 @@
 
 {% block title "Unread" %}
 
-{% block menu %}
-    {% include "WallabagCoreBundle::_menu.html.twig" %}
-{% endblock %}
-
 {% block content %}
     {% block pager %}
     {% if entries is not empty %}
