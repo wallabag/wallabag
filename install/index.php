@@ -127,19 +127,19 @@ else if (isset($_POST['install'])) {
             }
             // create database structure
             $query = $handle->exec($sql_structure);
+
+            $usertest = executeQuery($handle,"SELECT * from users WHERE username = ?", array($username));
+            if (!empty($usertest)) {
+                $continue = false;
+                $errors[] = "An user already exists with this username in database.";
+            }
+
         } catch (PDOException $e) {
             $errors[] = $e->getMessage();
             $continue = false;
         }
         }
     }
-
-    $usertest = executeQuery($handle,"SELECT * from users WHERE username = ?", array($username));
-    if (!empty($usertest)) {
-        $continue = false;
-        $errors[] = "An user already exists with this username in database.";
-    }
-
 
     if ($continue) {
         $sql = "INSERT INTO users (username, password, name, email) VALUES (?, ?, ?, ?)";
