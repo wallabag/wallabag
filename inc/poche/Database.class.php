@@ -421,6 +421,26 @@ class Database {
         return $id;
     }
 
+    public function getPreviousArticle($id, $user_id) 
+    {
+        $sql = "SELECT id FROM entries WHERE id = (SELECT max(id) FROM entries WHERE id < ?) AND user_id=? AND is_read=0";
+        $params = array($id, $user_id);
+        $query = $this->executeQuery($sql, $params);
+        $id_entry = $query->fetchAll();
+        $id = $id_entry[0][0];
+        return $id;
+    }
+
+    public function getNextArticle($id, $user_id) 
+    {
+        $sql = "SELECT id FROM entries WHERE id = (SELECT min(id) FROM entries WHERE id > ?) AND user_id=? AND is_read=0";
+        $params = array($id, $user_id);
+        $query = $this->executeQuery($sql, $params);
+        $id_entry = $query->fetchAll();
+        $id = $id_entry[0][0];
+        return $id;
+    }
+
 
     public function updateContent($id, $content, $user_id)
     {

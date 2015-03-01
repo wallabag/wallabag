@@ -310,10 +310,15 @@ class Poche
                 if ( Tools::isAjaxRequest() ) {
                   echo 1;
                   exit;
-                }
-                else {
+                } else {
                   Tools::redirect();
                 }
+                break;
+            case 'archive_and_next' :
+                $nextid = $this->store->getNextArticle($id, $this->user->getId());
+                $this->store->archiveById($id, $this->user->getId());
+                Tools::logm('archive link #' . $id);
+                Tools::redirect('?view=view&id=' . $nextid);
                 break;
             case 'archive_all' :
                 $this->store->archiveAll($this->user->getId());
@@ -516,6 +521,20 @@ class Poche
                         $flattr->checkItem($entry['url'], $entry['id']);
                     }
                     
+                    # previous and next
+                    $previous = FALSE;
+                    $previous_id = $this->store->getPreviousArticle($id, $this->user->getId());
+                    $next = FALSE;
+                    $next_id = $this->store->getNextArticle($id, $this->user->getId());
+
+                    if ($this->store->retrieveOneById($previous_id, $this->user->getId())) {
+                        $previous = TRUE;
+                    }
+                    if ($this->store->retrieveOneById($next_id, $this->user->getId())) {
+                        $next = TRUE;
+                    }
+                    $navigate = $arrayName = array('previous' => $previous, 'previousid' => $previous_id, 'next' => $next, 'nextid' => $next_id);
+
                     # tags
                     $tags = $this->store->retrieveTagsByEntry($entry['id']);
 
@@ -523,7 +542,8 @@ class Poche
                         'entry' => $entry,
                         'content' => $content,
                         'flattr' => $flattr,
-                        'tags' => $tags
+                        'tags' => $tags,
+                        'navigate' => $navigate
                     );
                 }
                 else {

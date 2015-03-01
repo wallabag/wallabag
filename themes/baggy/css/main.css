@@ -748,6 +748,15 @@ a.add-to-wallabag-link-after:after {
 .icon-tags:before {
   content: "\e936";
 }
+.icon-previous:before {
+  content: "\e606";
+}
+.icon-next:before {
+  content: "\e605";
+}
+.icon-archiveandnext:before {
+  content: "\e607";
+}
 
 
 /* .icon-image class, for image-based icons
