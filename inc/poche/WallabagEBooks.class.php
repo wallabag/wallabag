@@ -260,7 +260,7 @@ class WallabagPDF extends WallabagEbooks
         $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
         
         
-        $pdf->Output($this->bookFileName . '.pdf', 'FD');
+        $pdf->Output('cache/' . $this->bookFileName . '.pdf', 'FD');
         }
         catch (Exception $e) {
             Tools::logm('TCPDF has encountered an error : '.$e->getMessage());
