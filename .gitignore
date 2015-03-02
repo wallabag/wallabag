@@ -35,4 +35,4 @@
 
 # Data for wallabag
 data/assets/*
-data/db/poche*.sqlite
+data/db/wallabag*.sqlite

@@ -17,4 +17,6 @@ swiftmailer:
 
 doctrine:
     dbal:
-        path: %kernel.root_dir%/../data/db/poche_test.sqlite
+        driver: pdo_sqlite
+        path: %kernel.root_dir%/../data/db/wallabag_test.sqlite
+        host: localhost

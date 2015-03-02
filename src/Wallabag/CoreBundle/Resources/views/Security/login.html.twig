@@ -1,6 +1,11 @@
-{% extends "WallabagCoreBundle::layout-login.html.twig" %}
+{% extends "WallabagCoreBundle::layout.html.twig" %}
 
 {% block title %}{% trans %}login to your wallabag{% endtrans %}{% endblock %}
+
+{% block body_class %}login{% endblock %}
+
+{% block menu %}{% endblock %}
+
 {% block content %}
     {% if error %}
         <div>{{ error.message }}</div>
@@ -19,11 +24,7 @@
                     <label class="col w150p" for="password">{% trans %}Password{% endtrans %}</label>
                     <input type="password" id="password" name="_password" />
                 </div>
-            {#
-                Si vous voulez contrôler l'URL vers laquelle l'utilisateur est redirigé en cas de succès
-                (plus de détails ci-dessous)
-                <input type="hidden" name="_target_path" value="/account" />
-            #}
+
                 <div class="row mts txtcenter">
                     <button type="submit">login</button>
                 </div>

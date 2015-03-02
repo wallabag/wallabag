@@ -2,10 +2,6 @@
 
 {% block title %}{{ entry.title|raw }} ({{ entry.url | e | domainName }}){% endblock %}
 
-{% block menu %}
-    {% include "WallabagCoreBundle::_menu.html.twig" %}
-{% endblock %}
-
 {% block content %}
     <div id="article_toolbar">
         <ul class="links">

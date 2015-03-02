@@ -92,6 +92,11 @@ class User implements AdvancedUserInterface, \Serializable
      */
     private $entries;
 
+    /**
+     * @ORM\OneToOne(targetEntity="Config", mappedBy="user")
+     */
+    private $config;
+
     public function __construct()
     {
         $this->salt    = md5(uniqid(null, true));
@@ -319,5 +324,27 @@ class User implements AdvancedUserInterface, \Serializable
     public function isEnabled()
     {
         return $this->isActive;
+    }
+    /**
+     * Set config
+     *
+     * @param  \Wallabag\CoreBundle\Entity\Config $config
+     * @return User
+     */
+    public function setConfig(\Wallabag\CoreBundle\Entity\Config $config = null)
+    {
+        $this->config = $config;
+
+        return $this;
+    }
+
+    /**
+     * Get config
+     *
+     * @return \Wallabag\CoreBundle\Entity\Config
+     */
+    public function getConfig()
+    {
+        return $this->config;
     }
 }

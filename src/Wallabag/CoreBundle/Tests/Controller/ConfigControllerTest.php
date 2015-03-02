@@ -53,7 +53,7 @@ class ConfigControllerTest extends WallabagTestCase
 
         $crawler = $client->followRedirect();
 
-        $this->assertGreaterThan(1, $alert = $crawler->filter('div.flash-notice')->extract(array('_text')));
+        $this->assertGreaterThan(1, $alert = $crawler->filter('div.messages.success')->extract(array('_text')));
         $this->assertContains('Config saved', $alert[0]);
     }
 
@@ -178,7 +178,7 @@ class ConfigControllerTest extends WallabagTestCase
 
         $crawler = $client->followRedirect();
 
-        $this->assertGreaterThan(1, $alert = $crawler->filter('div.flash-notice')->extract(array('_text')));
+        $this->assertGreaterThan(1, $alert = $crawler->filter('div.messages.success')->extract(array('_text')));
         $this->assertContains('Password updated', $alert[0]);
     }
 
@@ -257,7 +257,7 @@ class ConfigControllerTest extends WallabagTestCase
 
         $crawler = $client->followRedirect();
 
-        $this->assertGreaterThan(1, $alert = $crawler->filter('div.flash-notice')->extract(array('_text')));
+        $this->assertGreaterThan(1, $alert = $crawler->filter('div.messages.success')->extract(array('_text')));
         $this->assertContains('Information updated', $alert[0]);
     }
 
@@ -344,7 +344,7 @@ class ConfigControllerTest extends WallabagTestCase
 
         $crawler = $client->followRedirect();
 
-        $this->assertGreaterThan(1, $alert = $crawler->filter('div.flash-notice')->extract(array('_text')));
+        $this->assertGreaterThan(1, $alert = $crawler->filter('div.messages.success')->extract(array('_text')));
         $this->assertContains('User "wallace" added', $alert[0]);
     }
 }

@@ -1,0 +1,17 @@
+{% extends "WallabagCoreBundle::base.html.twig" %}
+
+{% block css %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="{{ asset('themes/baggy/css/ratatouille.css') }}" media="all">
+    <link rel="stylesheet" href="{{ asset('themes/baggy/css/font.css') }}" media="all">
+    <link rel="stylesheet" href="{{ asset('themes/baggy/css/main.css') }}" media="all">
+    <link rel="stylesheet" href="{{ asset('themes/baggy/css/messages.css') }}" media="all">
+    <link rel="stylesheet" href="{{ asset('themes/baggy/css/print.css') }}" media="print">
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+
+    <script src="{{ asset('themes/baggy/js/init.js') }}"></script>
+{% endblock %}
