@@ -26,6 +26,7 @@
                 {% if constant('EPUB') == 1 %}<li><a href="./?epub&amp;method=id&amp;value={{ entry.id|e }}" title="Generate ePub file">EPUB</a></li>{% endif %}
                 {% if constant('MOBI') == 1 %}<li><a href="./?mobi&amp;method=id&amp;value={{ entry.id|e }}" title="Generate Mobi file">MOBI</a></li>{% endif %}
                 {% if constant('PDF') == 1 %}<li><a href="./?pdf&amp;method=id&amp;value={{ entry.id|e }}" title="Generate PDF file">PDF</a></li>{% endif %}
+                {% if constant('YARN') == 1 %}{% if yarn.status == 1 %}<li><span>{{ yarn.score }}</span></li>{% endif %}{% endif %}
                 <li><a href="mailto:hello@wallabag.org?subject=Wrong%20display%20in%20wallabag&amp;body={{ entry.url|url_encode }}" title="{% trans "Does this article appear wrong?" %}" class="tool bad-display icon icon-delete"><span>{% trans "Does this article appear wrong?" %}</span></a></li>
                 {% if navigate.next %}<li><a href="./?view=view&amp;id={{ navigate.nextid|e }}" class="tool icon icon-next"><span>{% trans "Next Article" %}</span></a></li>{% endif %}
             </ul>

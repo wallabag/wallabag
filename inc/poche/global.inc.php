@@ -33,6 +33,7 @@ require_once INCLUDES . '/3rdparty/Session.class.php';
 require_once INCLUDES . '/3rdparty/libraries/feedwriter/FeedItem.php';
 require_once INCLUDES . '/3rdparty/libraries/feedwriter/FeedWriter.php';
 require_once INCLUDES . '/3rdparty/FlattrItem.class.php';
+require_once INCLUDES . '/3rdparty/YarnItem.class.php';
 
 require_once INCLUDES . '/3rdparty/htmlpurifier/HTMLPurifier.auto.php';
 

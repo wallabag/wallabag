@@ -416,5 +416,4 @@ final class Tools
 
         return str_replace('+', '', $token);
     }
-
 }

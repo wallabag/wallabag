@@ -54,6 +54,9 @@
 @define ('FLATTRABLE', '1');
 @define ('FLATTRED', '2');
 @define ('CARROT', FALSE);
+@define ('YARN', FALSE);
+@define ('YARNAPIURL', 'https://yarn.p.mashape.com/v1/vocabulate');
+@define ('YARNAPITOKEN', '');
 
 // ebook
 @define ('EPUB', TRUE);
