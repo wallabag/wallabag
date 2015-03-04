@@ -11,31 +11,30 @@
             <arg value="install"/>
             <arg value="--no-interaction"/>
             <arg value="--no-progress"/>
-            <arg value="--working-dir=.."/>
         </exec>
         <exec executable="php">
-            <arg value="${basedir}/../app/console"/>
+            <arg value="${basedir}/app/console"/>
             <arg value="doctrine:database:drop"/>
             <arg value="--force"/>
             <arg value="--env=test"/>
         </exec>
         <exec executable="php">
-            <arg value="${basedir}/../app/console"/>
+            <arg value="${basedir}/app/console"/>
             <arg value="doctrine:database:create"/>
             <arg value="--env=test"/>
         </exec>
         <exec executable="php">
-            <arg value="${basedir}/../app/console"/>
+            <arg value="${basedir}/app/console"/>
             <arg value="doctrine:schema:create"/>
             <arg value="--env=test"/>
         </exec>
         <exec executable="php">
-            <arg value="${basedir}/../app/console"/>
+            <arg value="${basedir}/app/console"/>
             <arg value="cache:clear"/>
             <arg value="--env=test"/>
         </exec>
         <exec executable="php">
-            <arg value="${basedir}/../app/console"/>
+            <arg value="${basedir}/app/console"/>
             <arg value="doctrine:fixtures:load"/>
             <arg value="--no-interaction"/>
             <arg value="--env=test"/>

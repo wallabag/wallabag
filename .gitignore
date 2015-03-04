@@ -26,9 +26,9 @@
 /web/bundles/
 /web/uploads/
 
-# PHPUnit
-/app/phpunit.xml
-/phpunit.xml
+# Build
+/app/build
+/build
 
 # Composer PHAR
 /composer.phar

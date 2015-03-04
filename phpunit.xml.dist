@@ -9,23 +9,27 @@
          processIsolation="false"
          stopOnFailure="false"
          syntaxCheck="false"
-         bootstrap="bootstrap.php.cache"
+         bootstrap="app/bootstrap.php.cache"
         >
 
     <testsuites>
         <testsuite name="wallabag Test Suite">
-            <directory>../src/Wallabag/CoreBundle/Tests</directory>
+            <directory>./src/Wallabag/*Bundle/Tests</directory>
         </testsuite>
     </testsuites>
 
+    <php>
+        <server name="KERNEL_DIR" value="./app/" />
+    </php>
+
     <filter>
         <whitelist>
-            <directory>../src</directory>
+            <directory>./src</directory>
             <exclude>
-                <directory>../vendor</directory>
-                <directory>../src/Wallabag/CoreBundle/Resources</directory>
-                <directory>../src/Wallabag/CoreBundle/Tests</directory>
-                <directory>../src/Wallabag/CoreBundle/DataFixtures</directory>
+                <directory>./vendor</directory>
+                <directory>./src/Wallabag/*Bundle/Resources</directory>
+                <directory>./src/Wallabag/*Bundle/Tests</directory>
+                <directory>./src/Wallabag/*Bundle/DataFixtures</directory>
             </exclude>
         </whitelist>
     </filter>
