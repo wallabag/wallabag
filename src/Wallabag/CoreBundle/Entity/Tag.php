@@ -88,4 +88,12 @@ class Tag
     {
         $this->entries[] = $entry;
     }
+
+    /**
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
 }
