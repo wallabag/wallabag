@@ -40,7 +40,11 @@ class WallabagRestController extends Controller
     /**
      * Retrieve salt for a giver user.
      *
-     * @ApiDoc()
+     * @ApiDoc(
+     *       parameters={
+     *          {"name"="username", "dataType"="string", "required"=true, "description"="username"}
+     *       }
+     * )
      * @return array
      */
     public function getSaltAction($username)
@@ -87,7 +91,7 @@ class WallabagRestController extends Controller
             ->getRepository('WallabagCoreBundle:Entry')
             ->findEntries($this->getUser()->getId(), $isArchived, $isStarred, $sort, $order);
 
-        if (!($entries)) {
+        if (!$entries) {
             throw $this->createNotFoundException();
         }
 
@@ -109,7 +113,7 @@ class WallabagRestController extends Controller
     public function getEntryAction(Entry $entry)
     {
         if ($entry->getUser()->getId() != $this->getUser()->getId()) {
-            throw $this->createAccessDeniedException();
+            throw $this->createAccessDeniedException('Access forbidden. Entry user id: '.$entry->getUser()->getId().', logged user id: '.$this->getUser()->getId());
         }
 
         $json = $this->get('serializer')->serialize($entry, 'json');
@@ -172,7 +176,7 @@ class WallabagRestController extends Controller
     public function patchEntriesAction(Entry $entry, Request $request)
     {
         if ($entry->getUser()->getId() != $this->getUser()->getId()) {
-            throw $this->createAccessDeniedException();
+            throw $this->createAccessDeniedException('Access forbidden. Entry user id: '.$entry->getUser()->getId().', logged user id: '.$this->getUser()->getId());
         }
 
         $title      = $request->request->get("title");
@@ -217,7 +221,7 @@ class WallabagRestController extends Controller
     public function deleteEntriesAction(Entry $entry)
     {
         if ($entry->getUser()->getId() != $this->getUser()->getId()) {
-            throw $this->createAccessDeniedException();
+            throw $this->createAccessDeniedException('Access forbidden. Entry user id: '.$entry->getUser()->getId().', logged user id: '.$this->getUser()->getId());
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -241,7 +245,7 @@ class WallabagRestController extends Controller
     public function getEntriesTagsAction(Entry $entry)
     {
         if ($entry->getUser()->getId() != $this->getUser()->getId()) {
-            throw $this->createAccessDeniedException();
+            throw $this->createAccessDeniedException('Access forbidden. Entry user id: '.$entry->getUser()->getId().', logged user id: '.$this->getUser()->getId());
         }
 
         $json = $this->get('serializer')->serialize($entry->getTags(), 'json');
@@ -264,7 +268,7 @@ class WallabagRestController extends Controller
     public function postEntriesTagsAction(Request $request, Entry $entry)
     {
         if ($entry->getUser()->getId() != $this->getUser()->getId()) {
-            throw $this->createAccessDeniedException();
+            throw $this->createAccessDeniedException('Access forbidden. Entry user id: '.$entry->getUser()->getId().', logged user id: '.$this->getUser()->getId());
         }
 
         $tags = $request->request->get('tags', '');
@@ -294,7 +298,7 @@ class WallabagRestController extends Controller
     public function deleteEntriesTagsAction(Entry $entry, Tag $tag)
     {
         if ($entry->getUser()->getId() != $this->getUser()->getId()) {
-            throw $this->createAccessDeniedException();
+            throw $this->createAccessDeniedException('Access forbidden. Entry user id: '.$entry->getUser()->getId().', logged user id: '.$this->getUser()->getId());
         }
 
         $entry->removeTag($tag);
@@ -331,7 +335,7 @@ class WallabagRestController extends Controller
     public function deleteTagAction(Tag $tag)
     {
         if ($tag->getUser()->getId() != $this->getUser()->getId()) {
-            throw $this->createAccessDeniedException();
+            throw $this->createAccessDeniedException('Access forbidden. Entry user id: '.$tag->getUser()->getId().', logged user id: '.$this->getUser()->getId());
         }
 
         $em = $this->getDoctrine()->getManager();
