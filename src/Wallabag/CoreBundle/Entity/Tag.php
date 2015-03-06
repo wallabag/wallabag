@@ -3,18 +3,25 @@
 namespace Wallabag\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\XmlRoot;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Tag
  *
+ * @XmlRoot("tag")
  * @ORM\Table(name="tag")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\TagRepository")
+ * @ExclusionPolicy("all")
  */
 class Tag
 {
     /**
      * @var integer
      *
+     * @Expose
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -24,10 +31,26 @@ class Tag
     /**
      * @var string
      *
+     * @Expose
      * @ORM\Column(name="label", type="text")
      */
     private $label;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Entry", mappedBy="tags", cascade={"persist"})
+     */
+    private $entries;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="tags")
+     */
+    private $user;
+
+    public function __construct(User $user)
+    {
+        $this->user    = $user;
+        $this->entries = new ArrayCollection();
+    }
     /**
      * Get id
      *
@@ -58,6 +81,19 @@ class Tag
      */
     public function getLabel()
     {
-        return $this->value;
+        return $this->label;
+    }
+
+    public function addEntry(Entry $entry)
+    {
+        $this->entries[] = $entry;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

@@ -7,6 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
 
 /**
  * User
@@ -14,12 +16,14 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="user")
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks()
+ * @ExclusionPolicy("all")
  */
 class User implements AdvancedUserInterface, \Serializable
 {
     /**
      * @var integer
      *
+     * @Expose
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -97,10 +101,17 @@ class User implements AdvancedUserInterface, \Serializable
      */
     private $config;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Tag", mappedBy="user", cascade={"remove"})
+     */
+    private $tags;
+
     public function __construct()
     {
-        $this->salt    = md5(uniqid(null, true));
-        $this->entries = new ArrayCollection();
+        $this->isActive = true;
+        $this->salt     = md5(uniqid(null, true));
+        $this->entries  = new ArrayCollection();
+        $this->tags     = new ArrayCollection();
     }
 
     /**
@@ -274,6 +285,25 @@ class User implements AdvancedUserInterface, \Serializable
         return $this->entries;
     }
 
+    /**
+     * @param Entry $entry
+     *
+     * @return User
+     */
+    public function addTag(Tag $tag)
+    {
+        $this->tags[] = $tag;
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection<Tag>
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
     /**
      * @inheritDoc
      */

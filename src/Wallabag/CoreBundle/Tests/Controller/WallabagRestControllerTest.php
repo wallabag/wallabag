@@ -44,10 +44,6 @@ class WallabagRestControllerTest extends WallabagTestCase
     public function testWithBadHeaders()
     {
         $client = $this->createClient();
-        $client->request('GET', '/api/salts/admin.json');
-        $salt = json_decode($client->getResponse()->getContent());
-
-        $headers = $this->generateHeaders('admin', 'mypassword', $salt[0]);
 
         $entry = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
@@ -130,7 +126,7 @@ class WallabagRestControllerTest extends WallabagTestCase
         $entry = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneByIsDeleted(false);
+            ->findOneByUser(1);
 
         if (!$entry) {
             $this->markTestSkipped('No content found in db.');
@@ -140,10 +136,79 @@ class WallabagRestControllerTest extends WallabagTestCase
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
-        $res = $client->getContainer()
+        // We'll try to delete this entry again
+        $client->request('GET', '/api/salts/admin.json');
+        $salt = json_decode($client->getResponse()->getContent());
+
+        $headers = $this->generateHeaders('admin', 'mypassword', $salt[0]);
+
+        $client->request('DELETE', '/api/entries/'.$entry->getId().'.json', array(), array(), $headers);
+
+        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+    }
+
+    public function testGetTagsEntry()
+    {
+        $client = $this->createClient();
+        $client->request('GET', '/api/salts/admin.json');
+        $salt = json_decode($client->getResponse()->getContent());
+        $headers = $this->generateHeaders('admin', 'mypassword', $salt[0]);
+
+        $entry = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneById($entry->getId());
-        $this->assertEquals($res->isDeleted(), true);
+            ->findOneWithTags(1);
+
+        $entry = $entry[0];
+
+        if (!$entry) {
+            $this->markTestSkipped('No content found in db.');
+        }
+
+        $tags = array();
+        foreach ($entry->getTags() as $tag) {
+            $tags[] = array('id' => $tag->getId(), 'label' => $tag->getLabel());
+        }
+
+        $client->request('GET', '/api/entries/'.$entry->getId().'/tags', array(), array(), $headers);
+
+        $this->assertEquals(json_encode($tags, JSON_HEX_QUOT), $client->getResponse()->getContent());
+    }
+
+    public function testPostTagsOnEntry()
+    {
+        $client = $this->createClient();
+        $client->request('GET', '/api/salts/admin.json');
+        $salt = json_decode($client->getResponse()->getContent());
+        $headers = $this->generateHeaders('admin', 'mypassword', $salt[0]);
+
+        $entry = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneByUser(1);
+
+        if (!$entry) {
+            $this->markTestSkipped('No content found in db.');
+        }
+
+        $newTags = 'tag1,tag2,tag3';
+
+        $client->request('POST', '/api/entries/'.$entry->getId().'/tags', array('tags' => $newTags), array(), $headers);
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $entryDB = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->find($entry->getId());
+
+        $tagsInDB = array();
+        foreach ($entryDB->getTags()->toArray() as $tag) {
+            $tagsInDB[$tag->getId()] = $tag->getLabel();
+        }
+
+        foreach (explode(',', $newTags) as $tag) {
+            $this->assertContains($tag, $tagsInDB);
+        }
     }
 }

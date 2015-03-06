@@ -2,19 +2,24 @@
 
 namespace Wallabag\CoreBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Hateoas\Configuration\Annotation as Hateoas;
+use JMS\Serializer\Annotation\XmlRoot;
 
 /**
  * Entry
  *
+ * @XmlRoot("entry")
  * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\EntryRepository")
  * @ORM\Table(name="entry")
  * @ORM\HasLifecycleCallbacks()
- *
+ * @Hateoas\Relation("self", href = "expr('/api/entries/' ~ object.getId())")
  */
 class Entry
 {
+    /** @Serializer\XmlAttribute */
     /**
      * @var integer
      *
@@ -52,13 +57,6 @@ class Entry
      * @ORM\Column(name="is_starred", type="boolean")
      */
     private $isStarred = false;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="is_deleted", type="boolean")
-     */
-    private $isDeleted = false;
 
     /**
      * @var string
@@ -121,12 +119,19 @@ class Entry
      */
     private $user;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="entries", cascade={"persist"})
+     * @ORM\JoinTable(name="entry_tags")
+     */
+    private $tags;
+
     /*
      * @param User     $user
      */
     public function __construct(User $user)
     {
         $this->user = $user;
+        $this->tags = new ArrayCollection();
     }
 
     /**
@@ -279,22 +284,6 @@ class Entry
     /**
      * @return string
      */
-    public function isDeleted()
-    {
-        return $this->isDeleted;
-    }
-
-    /**
-     * @param string $isDeleted
-     */
-    public function setDeleted($isDeleted)
-    {
-        $this->isDeleted = $isDeleted;
-    }
-
-    /**
-     * @return string
-     */
     public function getCreatedAt()
     {
         return $this->createdAt;
@@ -399,5 +388,27 @@ class Entry
     public function setPublic($isPublic)
     {
         $this->isPublic = $isPublic;
+    }
+
+    /**
+     * @return ArrayCollection<Tag>
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+    /**
+     * @param Tag $tag
+     */
+    public function addTag(Tag $tag)
+    {
+        $this->tags[] = $tag;
+        $tag->addEntry($this);
+    }
+
+    public function removeTag(Tag $tag)
+    {
+        $this->tags->removeElement($tag);
     }
 }
