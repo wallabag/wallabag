@@ -82,7 +82,8 @@
         "wallabag/PHPePub": "dev-master",
         "wallabag/php-readability": "dev-master",
         "wallabag/phpMobi": "dev-master",
-        "wallabag/Fivefilters_Libraries": "dev-master"
+        "wallabag/Fivefilters_Libraries": "dev-master",
+        "pagerfanta/pagerfanta": "~1.0@dev"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "dev-master",
