@@ -4,6 +4,8 @@ namespace Wallabag\CoreBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Pagerfanta;
 
 class EntryRepository extends EntityRepository
 {
@@ -114,9 +116,9 @@ class EntryRepository extends EntityRepository
             $qb->orderBy('e.updatedAt', $order);
         }
 
-        return $qb
-            ->getQuery()
-            ->getResult();
+        $pagerAdapter = new DoctrineORMAdapter($qb);
+
+        return new Pagerfanta($pagerAdapter);
     }
 
     /**
