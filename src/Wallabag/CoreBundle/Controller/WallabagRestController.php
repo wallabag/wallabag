@@ -9,6 +9,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Service\Extractor;
+use Hateoas\Configuration\Route;
+use Hateoas\Representation\Factory\PagerfantaFactory;
 
 class WallabagRestController extends Controller
 {
@@ -82,20 +84,29 @@ class WallabagRestController extends Controller
         $isStarred  = $request->query->get('star');
         $sort       = $request->query->get('sort', 'created');
         $order      = $request->query->get('order', 'desc');
-        $page       = $request->query->get('page', 1);
-        $perPage    = $request->query->get('perPage', 30);
+        $page       = (int) $request->query->get('page', 1);
+        $perPage    = (int) $request->query->get('perPage', 30);
         $tags       = $request->query->get('tags', array());
 
-        $entries = $this
+        $pager = $this
             ->getDoctrine()
             ->getRepository('WallabagCoreBundle:Entry')
             ->findEntries($this->getUser()->getId(), $isArchived, $isStarred, $sort, $order);
 
-        if (!$entries) {
+        if (0 === $pager->getNbResults()) {
             throw $this->createNotFoundException();
         }
 
-        $json = $this->get('serializer')->serialize($entries, 'json');
+        $pager->setCurrentPage($page);
+        $pager->setMaxPerPage($perPage);
+
+        $pagerfantaFactory   = new PagerfantaFactory('page', 'perPage');
+        $paginatedCollection = $pagerfantaFactory->createRepresentation(
+            $pager,
+            new Route('api_get_entries', [], $absolute = true)
+        );
+
+        $json = $this->get('serializer')->serialize($paginatedCollection, 'json');
 
         return new Response($json, 200, array('application/json'));
     }
