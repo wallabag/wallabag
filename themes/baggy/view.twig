@@ -5,6 +5,7 @@
 {% block title %}{{ entry.title|raw }} ({{ entry.url | e | getDomain }}){% endblock %}
 {% block content %}
 				{% include '_highlight.twig' %}
+        {% block toolbar %}
         <div id="article_toolbar">
             <ul class="links">
                 <li class="topPosF"><a href="#top" title="{% trans "Back to top" %}" class="tool top icon icon-arrow-up-thick"><span>{% trans "Back to top" %}</span></a></li>
@@ -30,6 +31,8 @@
                 {% if navigate.previous %}<li class="rightPosF"><a href="./?view=view&amp;id={{ navigate.previousid|e }}" class="tool icon icon-next"><span>{% trans "Previous Article" %}</span></a></li>{% endif %}
             </ul>
         </div>
+        {% endblock %}
+
         <div id="article">
             <header class="mbm">
                 <h1>{{ entry.title|raw }}</h1>
@@ -41,6 +44,7 @@
                 {{ content | raw }}
             </article>
         </div>
+        {{ block('toolbar') }}
         <script src="{{ poche_url }}themes/_global/js/restoreScroll.js"></script>
         <script type="text/javascript">
         $(document).ready(function() {
