@@ -873,6 +873,20 @@ blockquote {
   font-size: 1.5em;
 }
 
+.leftPosF {
+  position: fixed;
+  right: 24%;
+  bottom: 2em;
+  font-size: 1.5em;
+}
+
+.rightPosF {
+  position: fixed;
+  right: 16%;
+  bottom: 2em;
+  font-size: 1.5em;
+}
+
 #article_toolbar {
   margin-bottom: 1em;
 }
@@ -970,6 +984,12 @@ pre code {
   .topPosF {
     right: 2.5em;
   }
+  .leftPosF {
+    right: 4.5em;
+  }
+  .rightPosF {
+    right: 0.5em;
+  }
 }
 
 @media screen and (max-width: 700px) {
@@ -1060,6 +1080,14 @@ pre code {
     margin-top: 3em;
   }
   #article_toolbar .topPosF {
+    display: none;
+  }
+
+  #article_toolbar .leftPosF {
+    display: none;
+  }
+
+  #article_toolbar .rightPosF {
     display: none;
   }
 

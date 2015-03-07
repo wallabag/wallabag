@@ -8,7 +8,7 @@
         <div id="article_toolbar">
             <ul class="links">
                 <li class="topPosF"><a href="#top" title="{% trans "Back to top" %}" class="tool top icon icon-arrow-up-thick"><span>{% trans "Back to top" %}</span></a></li>
-                {% if navigate.previous %}<li><a href="./?view=view&amp;id={{ navigate.previousid|e }}" class="tool icon icon-previous"><span>{% trans "Previous Article" %}</span></a></li>{% endif %}
+                {% if navigate.next %}<li class="leftPosF"><a href="./?view=view&amp;id={{ navigate.nextid|e }}" class="top tool icon icon-previous"><span>{% trans "Next Article" %}</span></a></li>{% endif %}
                 <li><a href="{{ entry.url|e }}" target="_blank" title="{% trans "original" %} : {{ entry.title|e }}" class="tool link icon icon-link"><span>{{ entry.url | e | getDomain }}</span></a></li>
                 <li><a title="{% trans "Mark as read" %}" class="tool icon icon-check {% if entry.is_read == 0 %}archive-off{% else %}archive{% endif %}" href="javascript: void(null);" id="markAsRead"><span>{% trans "Toggle mark as read" %}</span></a></li>
                 {% if navigate.next %}<li><a title="{% trans "Mark as read and go to next article" %}" class="tool icon archiveandnext-icon" href="./?action=archive_and_next&amp;id={{ entry.id|e }}" id="markAsReadAndNext"><span>{% trans "Toggle mark as read and go to next article" %}</span></a></li>{% endif %}
@@ -27,7 +27,7 @@
                 {% if constant('MOBI') == 1 %}<li><a href="./?mobi&amp;method=id&amp;value={{ entry.id|e }}" title="Generate Mobi file">MOBI</a></li>{% endif %}
                 {% if constant('PDF') == 1 %}<li><a href="./?pdf&amp;method=id&amp;value={{ entry.id|e }}" title="Generate PDF file">PDF</a></li>{% endif %}
                 <li><a href="mailto:hello@wallabag.org?subject=Wrong%20display%20in%20wallabag&amp;body={{ entry.url|url_encode }}" title="{% trans "Does this article appear wrong?" %}" class="tool bad-display icon icon-delete"><span>{% trans "Does this article appear wrong?" %}</span></a></li>
-                {% if navigate.next %}<li><a href="./?view=view&amp;id={{ navigate.nextid|e }}" class="tool icon icon-next"><span>{% trans "Next Article" %}</span></a></li>{% endif %}
+                {% if navigate.previous %}<li class="rightPosF"><a href="./?view=view&amp;id={{ navigate.previousid|e }}" class="tool icon icon-next"><span>{% trans "Previous Article" %}</span></a></li>{% endif %}
             </ul>
         </div>
         <div id="article">
@@ -103,5 +103,6 @@
                 retrievePercent({{ entry.id|e }});
             });
         });
+        navigateKeyboard('?view=view&id={{ navigate.nextid|e }}','?view=view&id={{ navigate.previousid|e }}');
         </script>
 {% endblock %}
