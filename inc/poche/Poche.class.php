@@ -315,7 +315,7 @@ class Poche
                 }
                 break;
             case 'archive_and_next' :
-                $nextid = $this->store->getNextArticle($id, $this->user->getId());
+                $nextid = $this->store->getPreviousArticle($id, $this->user->getId());
                 $this->store->archiveById($id, $this->user->getId());
                 Tools::logm('archive link #' . $id);
                 Tools::redirect('?view=view&id=' . $nextid);
