@@ -13,7 +13,9 @@ web_profiler:
     intercept_redirects: false
 
 swiftmailer:
-    disable_delivery: true
+    # to be able to read emails sent
+    spool:
+        type: file
 
 doctrine:
     dbal:

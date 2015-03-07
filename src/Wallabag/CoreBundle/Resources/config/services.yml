@@ -22,9 +22,17 @@ services:
             - @security.context
             - %theme% # default theme from parameters.yml
 
+    # custom form type
     wallabag_core.form.type.config:
         class: Wallabag\CoreBundle\Form\Type\ConfigType
         arguments:
             - %liip_theme.themes%
         tags:
             - { name: form.type, alias: config }
+
+    wallabag_core.form.type.forgot_password:
+        class: Wallabag\CoreBundle\Form\Type\ForgotPasswordType
+        arguments:
+            - @doctrine
+        tags:
+            - { name: form.type, alias: forgot_password }

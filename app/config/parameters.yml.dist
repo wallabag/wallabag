@@ -41,3 +41,4 @@ parameters:
     items_on_page: 12
     theme: baggy
     language: en_US
+    from_email: no-reply@wallabag.org

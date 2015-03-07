@@ -5,15 +5,19 @@
 {% block body_class %}login{% endblock %}
 
 {% block menu %}{% endblock %}
+{% block messages %}{% endblock %}
 
 {% block content %}
-    {% if error %}
-        <div>{{ error.message }}</div>
-    {% endif %}
-
         <form action="{{ path('login_check') }}" method="post" name="loginform">
             <fieldset class="w500p center">
                 <h2 class="mbs txtcenter">{% trans %}Login to wallabag{% endtrans %}</h2>
+                {% if error %}
+                    <div>{{ error.message }}</div>
+                {% endif %}
+
+                {% for flashMessage in app.session.flashbag.get('notice') %}
+                    <p>{{ flashMessage }}</p>
+                {% endfor %}
 
                 <div class="row">
                     <label class="col w150p" for="username">{% trans %}Username{% endtrans %}</label>
@@ -26,7 +30,8 @@
                 </div>
 
                 <div class="row mts txtcenter">
-                    <button type="submit">login</button>
+                    <button type="submit">Login</button>
+                    <a href="{{ path('forgot_password') }}" class="small">Forgot your password?</a>
                 </div>
             </fieldset>
         </form>

@@ -78,6 +78,16 @@ class User implements AdvancedUserInterface, \Serializable
     private $isActive = true;
 
     /**
+     * @ORM\Column(name="confirmation_token", type="string", nullable=true)
+     */
+    private $confirmationToken;
+
+    /**
+     * @ORM\Column(name="password_requested_at", type="datetime", nullable=true)
+     */
+    private $passwordRequestedAt;
+
+    /**
      * @var date
      *
      * @ORM\Column(name="created_at", type="datetime")
@@ -376,5 +386,51 @@ class User implements AdvancedUserInterface, \Serializable
     public function getConfig()
     {
         return $this->config;
+    }
+
+    /**
+     * Set confirmationToken
+     *
+     * @param  string $confirmationToken
+     * @return User
+     */
+    public function setConfirmationToken($confirmationToken)
+    {
+        $this->confirmationToken = $confirmationToken;
+
+        return $this;
+    }
+
+    /**
+     * Get confirmationToken
+     *
+     * @return string
+     */
+    public function getConfirmationToken()
+    {
+        return $this->confirmationToken;
+    }
+
+    /**
+     * Set passwordRequestedAt
+     *
+     * @param  \DateTime $passwordRequestedAt
+     * @return User
+     */
+    public function setPasswordRequestedAt($passwordRequestedAt)
+    {
+        $this->passwordRequestedAt = $passwordRequestedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get passwordRequestedAt
+     *
+     * @return \DateTime
+     */
+    public function getPasswordRequestedAt()
+    {
+        return $this->passwordRequestedAt;
     }
 }
