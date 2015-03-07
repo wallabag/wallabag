@@ -96,7 +96,6 @@ class WallabagEpub extends WallabagEBooks
         $bookEnd = "</body>\n</html>\n";
 
         $log = new Logger("wallabag", TRUE);
-        $fileDir = CACHE;
 
         $book = new EPub(EPub::BOOK_VERSION_EPUB3, DEBUG_POCHE);
         $log->logLine("new EPub()");
