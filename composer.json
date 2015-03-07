@@ -23,6 +23,7 @@
         "issues": "https://github.com/wallabag/wallabag/issues"
     },
     "require": {
+        "php": ">=5.3.3",
         "twig/twig": "1.*",
         "twig/extensions": "1.0.*",
         "umpirsky/twig-gettext-extractor": "1.1.*"
