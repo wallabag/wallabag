@@ -15,6 +15,7 @@ class Routing
     protected $view;
     protected $action;
     protected $id;
+    protected $autoclose;
     protected $url;
     protected $file;
     protected $defaultVars = array();
