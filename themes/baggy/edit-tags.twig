@@ -26,6 +26,6 @@
     {% trans "You can enter multiple tags, separated by commas." %}</p>
 </form>
 All existing tags :
-<ul>{% for eachtag in alltags %}<li class="suggestedtag" style="display: inline-block; margin:10px;">{{ eachtag.value }}</li>{% endfor %}</ul>
+<ul id="tagcloud">{% for eachtag in alltags %}<li class="suggestedtag {{ eachtag.cssclass }}">{{ eachtag.value }}</li>{% endfor %}</ul>
 <a class="icon icon-reply return" href="./?view=view&id={{ entry_id }}">{% trans "return to article" %}</a>
 {% endblock %}

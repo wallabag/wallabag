@@ -960,6 +960,35 @@ pre code {
 		font-size: 0.96em;
 }
 
+/* ==========================================================================
+   5.1 = Tags-related styles
+   ========================================================================== */
+
+.suggestedtag {
+    padding: 4px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+#tagcloud .smallesttag {
+    font-size: x-small;
+}
+
+#tagcloud .smalltag {
+    font-size: small;
+}
+
+#tagcloud .mediumtag {
+    font-size:medium;
+}
+
+#tagcloud .largetag {
+    font-size:large;
+}
+
+#tagcloud .largesttag {
+    font-size:larger;
+}
 
 /* ==========================================================================
    6 = Media Queries

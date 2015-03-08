@@ -466,6 +466,26 @@ class Poche
                 }
                 $tags = $this->store->retrieveTagsByEntry($id);
                 $all_tags = $this->store->retrieveAllTags($this->user->getId());
+                $maximus = 0;
+                foreach ($all_tags as $eachtag) { // search for the most times a tag is present
+                    if ($eachtag["entriescount"] > $maximus) $maximus = $eachtag["entriescount"];
+                }
+                foreach ($all_tags as $key => $eachtag) { // get the percentage of presence of each tag
+                    $percent = floor(($eachtag["entriescount"] / $maximus) * 100);
+
+                    if ($percent < 20): // assign a css class, depending on the number of entries count
+                        $cssclass = 'smallesttag';
+                    elseif ($percent >= 20 and $percent < 40):
+                        $cssclass = 'smalltag';
+                    elseif ($percent >= 40 and $percent < 60):
+                        $cssclass = 'mediumtag';
+                    elseif ($percent >= 60 and $percent < 80):
+                        $cssclass = 'largetag';
+                    else:
+                        $cssclass = 'largesttag';
+                    endif;
+                    $all_tags[$key]['cssclass'] = $cssclass;
+                }
                 $tpl_vars = array(
                     'entry_id' => $id,
                     'tags' => $tags,

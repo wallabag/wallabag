@@ -48,6 +48,9 @@ jQuery(function($) {
     var value = input.val();
     var tag = $(this).text();
     var terms = value.split(','); // tags into the <input>
+    $(".alreadytagged").each(function(index) {
+      terms.push($(this).text() );
+    });
     if (jQuery.inArray(tag, terms) == -1 ) { // if the tag hasn't already been added
       value += tag + ",";
       input.val(value);
