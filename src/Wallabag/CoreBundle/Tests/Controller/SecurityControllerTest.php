@@ -134,4 +134,49 @@ class SecurityControllerTest extends WallabagTestCase
             );
         }
     }
+
+    public function testReset()
+    {
+        $client = $this->getClient();
+        $user = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:User')
+            ->findOneByEmail('bobby@wallabag.org');
+
+        $crawler = $client->request('GET', '/forgot-password/'.$user->getConfirmationToken());
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertCount(2, $crawler->filter('input[type=password]'));
+        $this->assertCount(1, $form = $crawler->filter('button[type=submit]'));
+        $this->assertCount(1, $form);
+
+        $data = array(
+            'change_passwd[new_password][first]' => 'mypassword',
+            'change_passwd[new_password][second]' => 'mypassword',
+        );
+
+        $client->submit($form->form(), $data);
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertContains('login', $client->getResponse()->headers->get('location'));
+    }
+
+    public function testResetBadToken()
+    {
+        $client = $this->getClient();
+
+        $client->request('GET', '/forgot-password/UIZOAU29UE902IEPZO');
+
+        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+    }
+
+    public function testCheckEmailWithoutEmail()
+    {
+        $client = $this->getClient();
+
+        $client->request('GET', '/forgot-password/check-email');
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertContains('forgot-password', $client->getResponse()->headers->get('location'));
+    }
 }

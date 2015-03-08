@@ -103,7 +103,7 @@ class SecurityController extends Controller
         $user = $this->getDoctrine()->getRepository('WallabagCoreBundle:User')->findOneByConfirmationToken($token);
 
         if (null === $user) {
-            $this->createNotFoundException(sprintf('No user found with token "%s"', $token));
+            throw $this->createNotFoundException(sprintf('No user found with token "%s"', $token));
         }
 
         $form = $this->createForm(new ResetPasswordType());
