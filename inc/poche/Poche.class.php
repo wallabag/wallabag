@@ -465,9 +465,11 @@ class Poche
                     Tools::redirect();
                 }
                 $tags = $this->store->retrieveTagsByEntry($id);
+                $all_tags = $this->store->retrieveAllTags($this->user->getId());
                 $tpl_vars = array(
                     'entry_id' => $id,
                     'tags' => $tags,
+                    'alltags' => $all_tags,
                     'entry' => $entry,
                 );
                 break;

@@ -43,5 +43,19 @@ jQuery(function($) {
     }
   });
 
+  $('.suggestedtag').click(function(){
+    var input = $("#value");
+    var value = input.val();
+    var tag = $(this).text();
+    var terms = value.split(','); // tags into the <input>
+    if (jQuery.inArray(tag, terms) == -1 ) { // if the tag hasn't already been added
+      value += tag + ",";
+      input.val(value);
+    }
+    input.focus();
+    input[0].selectionStart = input[0].selectionEnd = input.val().length;
+
+  });
+
 
 });
