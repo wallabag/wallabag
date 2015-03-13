@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-02-25 15:17+0300\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Thomas Citharel <tcit@openmailbox.org>\n"
+"Last-Translator: Thomas Citharel <tcit@tcit.fr>\n"
 "Language-Team: \n"
 "Language: en_US\n"
 "MIME-Version: 1.0\n"
@@ -638,6 +638,66 @@ msgstr "Enter your search here"
 
 msgid "Tag these results as"
 msgstr "Tag these results as"
+
+msgid "Delete results matching"
+msgstr "Delete results matching"
+
+msgid "Mark all articles from this tag as read"
+msgstr "Mark all articles from this tag as read"
+
+msgid "No articles unread. Good job !"
+msgstr "No articles unread. Good job !"
+
+msgid "No articles favourited"
+msgstr "No articles favourited"
+
+msgid "No articles marked as read"
+msgstr "No articles marked as read"
+
+msgid "No articles with this tag found"
+msgstr "No articles with this tag found"
+
+msgid "No articles found for « %searchterm% »"
+msgstr "No articles found for « %searchterm% »"
+
+msgid "articles unread"
+msgstr "articles unread"
+
+msgid "articles favourited"
+msgstr "articles favourited"
+
+msgid "articles marked as read"
+msgstr "articles marked as read"
+
+msgid "articles with this tag"
+msgstr "articles with this tag"
+
+msgid "articles found for « %searchterm% »"
+msgstr "articles found for « %searchterm% »"
+
+msgid "articles"
+msgstr "articles"
+
+msgid "random"
+msgstr "random"
+
+msgid "Only one article unread. Way to go !"
+msgstr "Only one article unread. Way to go !"
+
+msgid "Just one article favourited"
+msgstr "Just one article favourited"
+
+msgid "One article marked as read"
+msgstr "One article marked as read"
+
+msgid "One article with this tag"
+msgstr "One article with this tag"
+
+msgid "Only one result found for « %searchterm% »"
+msgstr "Only one result found for « %searchterm% »"
+
+msgid "One article found"
+msgstr "One article found"
 
 # ebook
 msgid "Fancy an E-Book ?"

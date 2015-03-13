@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-07-26 20:09+0100\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Thomas Citharel <tcit@openmailbox.org>\n"
+"Last-Translator: Thomas Citharel <tcit@tcit.fr>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
@@ -682,6 +682,66 @@ msgstr "Oups, vous ne semblez pas avoir PHP 5."
 
 msgid "Tag these results as"
 msgstr "Appliquer à ces résultats le tag"
+
+msgid "Delete results matching"
+msgstr "Supprimer les résultats correspondants"
+
+msgid "Mark all articles from this tag as read"
+msgstr "Marquer tous les articles de ce tag comme lus"
+
+msgid "No articles unread. Good job !"
+msgstr "Aucun article non lu. Bravo !"
+
+msgid "No articles favourited"
+msgstr "Aucun article favori"
+
+msgid "No articles marked as read"
+msgstr "Aucun article marqué comme lu"
+
+msgid "No articles with this tag found"
+msgstr "Aucun article trouvé avec ce tag"
+
+msgid "No articles found for « %searchterm% »"
+msgstr "Aucun article trouvé pour « %searchterm% »"
+
+msgid "articles unread"
+msgstr "articles non lus"
+
+msgid "articles favourited"
+msgstr "articles favoris"
+
+msgid "articles marked as read"
+msgstr "articles marqués comme lus"
+
+msgid "articles with this tag"
+msgstr "articles avec ce tag"
+
+msgid "articles found for « %searchterm% »"
+msgstr "articles trouvés pour « %searchterm% »"
+
+msgid "articles"
+msgstr "articles"
+
+msgid "random"
+msgstr "aléatoire"
+
+msgid "Only one article unread. Way to go !"
+msgstr "Just un article non lu. Presque au bout !"
+
+msgid "Just one article favourited"
+msgstr "Just un article favori"
+
+msgid "One article marked as read"
+msgstr "Un article marqué comme lu"
+
+msgid "One article with this tag"
+msgstr "Un article avec ce tag"
+
+msgid "Only one result found for « %searchterm% »"
+msgstr "Seulement un article trouvé pour « %searchterm% »"
+
+msgid "One article found"
+msgstr "Un article trouvé"
 
 # ebook
 msgid "Fancy an E-Book ?"
