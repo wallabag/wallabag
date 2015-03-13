@@ -556,7 +556,7 @@ class Poche
                     if ($this->store->retrieveOneById($next_id, $this->user->getId())) {
                         $next = TRUE;
                     }
-                    $navigate = $arrayName = array('previous' => $previous, 'previousid' => $previous_id, 'next' => $next, 'nextid' => $next_id);
+                    $navigate = array('previous' => $previous, 'previousid' => $previous_id, 'next' => $next, 'nextid' => $next_id);
 
                     # tags
                     $tags = $this->store->retrieveTagsByEntry($entry['id']);

@@ -1,0 +1,99 @@
+body {
+    font-size: 19px;
+}
+
+main {
+    margin-top: 90px;
+}
+
+section {
+    margin-bottom: 50px;
+}
+
+h1, h2, h3, h4 {
+    color: #df691a;
+}
+h3 {
+    font-size: 23px;
+}
+
+li {
+    margin-bottom: 3px;
+}
+
+img {
+    max-width: 100%;
+}
+
+header.navbar {
+    opacity: 0.9;
+}
+.navbar .navbar-brand {
+    font-size: 28px;
+    height: auto;
+    line-height: 50px;
+    margin-left: 20px;
+    color: #df691a;
+}
+.navbar a.navbar-brand:hover {
+    color: #df691a;
+}
+.navbar .navbar-brand small {
+    font-size: 18px;
+    font-weight: 300;
+    margin-left: 10px;
+    color: white;
+}
+
+@media (min-width: 768px) {
+    #sidebar {
+        /*position:fixed;*/
+    }
+}
+@media (max-width: 960px) {
+    body {
+        font-size: 17px;
+    }
+    pre {
+        font-size: 12px;
+    }
+}
+
+#sidebar {
+    font-size: 16px;
+}
+
+.page-header {
+    margin-top: 0;
+}
+
+#sidebar .github-star {
+    margin-top: 20px;
+    margin-left: 50px;
+}
+
+#sidebar .text-muted {
+    color: #859AAF;
+}
+
+pre {
+    padding: 0;
+    border-color: #3D5166;
+    background-color: #1D2B3A;
+    border-radius: 4px;
+    margin: 15px;
+}
+pre code {
+    border: none;
+    background-color: #1D2B3A;
+}
+
+code {
+    font-size: 85%;
+    padding: 4px 4px 1px;
+    margin: 0 4px;
+    border-radius: 3px;
+    color: #c5c8c6;
+    border: solid 1px #3D5166;
+    background-color: #1D2B3A;
+}

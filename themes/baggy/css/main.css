@@ -775,6 +775,10 @@ a.add-to-wallabag-link-after:after {
 	background-image: url('../../_global/img/icons/carrot-icon--white.png');
 }
 
+.icon-image--shaarli {
+  background-image: url('../../_global/img/icons/shaarli.png');
+}
+
 /* Diaspora */
 .icon-image--diaspora {
 	background-image: url('../../_global/img/icons/diaspora-icon--black.png');
@@ -905,10 +909,6 @@ blockquote {
   #article_toolbar a:hover, #article_toolbar a:focus {
     background-color: #999;
   }
-
-.shaarli:before {
-  content: "*";
-}
 
 .return {
   text-decoration: none;

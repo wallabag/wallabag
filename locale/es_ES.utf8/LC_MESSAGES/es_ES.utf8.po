@@ -1,250 +1,103 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: wallabag 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-25 15:16+0300\n"
+"POT-Creation-Date: 2014-07-26 20:09+0100\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Maryana <mariroz@mr.lviv.ua>\n"
+"Last-Translator: Thomas Citharel <tcit@tcit.fr>\n"
 "Language-Team: \n"
-"Language: \n"
+"Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 "X-Generator: Poedit 1.5.4\n"
-"X-Poedit-Language: Spanish\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Basepath: .\n"
-"X-Poedit-SearchPath-0: /home/mariroz/_DEV/web/wallabag/wallabag-master-testing\n"
 
 msgid "wallabag, a read it later open source system"
-msgstr ""
+msgstr "Wallabag, un sistema open source para leer después"
 
 msgid "login failed: user doesn't exist"
+msgstr "error de inicio de sesión: no existe el usuario"
+
+msgid "save link!"
+msgstr "¡guardar enlace!"
+
+msgid "plop"
+msgstr "pum"
+
+msgid "powered by"
+msgstr "hecho con"
+
+msgid "debug mode is on so cache is off."
+msgstr "el modo de depuración está activo, el caché se encuentra desactivado."
+
+msgid "your wallabag version:"
+msgstr "su versión de Wallabag:"
+
+msgid "storage:"
+msgstr "almacenamiento:"
+
+msgid "login to your wallabag"
+msgstr "iniciar sesión en su Wallabag"
+
+msgid "Login to wallabag"
+msgstr "Iniciar sesión en Wallabag"
+
+msgid "you are in demo mode, some features may be disabled."
 msgstr ""
+"se encuentra en modo de demostración, algunas funcionalidades pueden estar "
+"desactivadas."
 
-msgid "return home"
-msgstr ""
-
-msgid "config"
-msgstr "configuración"
-
-msgid "Saving articles"
-msgstr ""
-
-msgid "There are several ways to save an article:"
-msgstr ""
-
-msgid "read the documentation"
-msgstr "leer la documentación"
-
-msgid "download the extension"
-msgstr ""
-
-msgid "via F-Droid"
-msgstr ""
-
-msgid " or "
-msgstr ""
-
-msgid "via Google Play"
-msgstr ""
-
-msgid "download the application"
-msgstr ""
-
-#, fuzzy
-msgid "By filling this field"
-msgstr "rellenando este campo"
-
-msgid "bag it!"
-msgstr ""
-
-msgid "Bookmarklet: drag & drop this link to your bookmarks bar"
-msgstr ""
-
-msgid "Upgrading wallabag"
-msgstr ""
-
-#, fuzzy
-msgid "Installed version"
-msgstr "ultima versión estable"
-
-#, fuzzy
-msgid "Latest stable version"
-msgstr "ultima versión estable"
-
-#, fuzzy
-msgid "A more recent stable version is available."
-msgstr "una versión estable más reciente está disponible."
-
-#, fuzzy
-msgid "You are up to date."
-msgstr "estás actualizado."
-
-#, fuzzy
-msgid "Latest dev version"
-msgstr "ultima versión de desarollo"
-
-#, fuzzy
-msgid "A more recent development version is available."
-msgstr "una versión de desarollo más reciente está disponible."
-
-msgid "Feeds"
-msgstr ""
-
-msgid "Your feed token is currently empty and must first be generated to enable feeds. Click <a href='?feed&amp;action=generate'>here to generate it</a>."
-msgstr ""
-
-msgid "Unread feed"
-msgstr ""
-
-#, fuzzy
-msgid "Favorites feed"
-msgstr "preferidos"
-
-#, fuzzy
-msgid "Archive feed"
-msgstr "archivos"
-
-msgid "Your token:"
-msgstr ""
-
-msgid "Your user id:"
-msgstr ""
-
-msgid "You can regenerate your token: <a href='?feed&amp;action=generate'>generate!</a>."
-msgstr ""
-
-#, fuzzy
-msgid "Change your theme"
-msgstr "Modificar tu contraseña"
-
-msgid "Theme:"
-msgstr ""
-
-msgid "Update"
-msgstr "Actualizar"
-
-#, fuzzy
-msgid "Change your language"
-msgstr "Modificar tu contraseña"
-
-msgid "Language:"
-msgstr ""
-
-msgid "Change your password"
-msgstr "Modificar tu contraseña"
-
-msgid "New password:"
-msgstr "Nueva contraseña :"
+msgid "Username"
+msgstr "Nombre de usuario"
 
 msgid "Password"
 msgstr "Contraseña"
 
-msgid "Repeat your new password:"
-msgstr "Repetir la nueva contraseña :"
+msgid "Stay signed in"
+msgstr "Permanecer conectado"
 
-msgid "Import"
-msgstr "Importar"
+msgid "(Do not check on public computers)"
+msgstr "(No seleccionar en un ordenadores públicos)"
 
-#, fuzzy
-msgid "Please execute the import script locally as it can take a very long time."
-msgstr "Por favor, ejecute la importación en local, esto puede demorar un tiempo."
+msgid "Sign in"
+msgstr "Iniciar sesión"
 
-#, fuzzy
-msgid "More info in the official documentation:"
-msgstr "Más información en la documentación oficial :"
+msgid "back to home"
+msgstr "volver a la página de inicio"
 
-#, fuzzy
-msgid "Import from Pocket"
-msgstr "importación desde Pocket"
+msgid "back"
+msgstr "volver"
 
-#, php-format
-msgid "(you must have a %s file on your server)"
-msgstr ""
-
-#, fuzzy
-msgid "Import from Readability"
-msgstr "importación desde Readability"
-
-#, fuzzy
-msgid "Import from Instapaper"
-msgstr "importación desde Instapaper"
-
-#, fuzzy
-msgid "Import from wallabag"
-msgstr "importación desde Readability"
-
-#, fuzzy
-msgid "Export your wallabag data"
-msgstr "Exportar sus datos de poche"
-
-msgid "Click here"
-msgstr "Haga clic aquí"
-
-msgid "to download your database."
-msgstr ""
-
-#, fuzzy
-msgid "to export your wallabag data."
-msgstr "para exportar sus datos de poche."
-
-msgid "Cache"
-msgstr ""
-
-msgid "to delete cache."
-msgstr ""
-
-msgid "You can enter multiple tags, separated by commas."
-msgstr ""
-
-msgid "return to article"
-msgstr ""
-
-msgid "plop"
-msgstr "plop"
-
-msgid "You can <a href='wallabag_compatibility_test.php'>check your configuration here</a>."
-msgstr ""
-
-msgid "favoris"
-msgstr "preferidos"
+msgid "favorites"
+msgstr "favoritos"
 
 msgid "archive"
-msgstr "archivos"
+msgstr "archivo"
 
 msgid "unread"
 msgstr "sin leer"
 
-msgid "by date asc"
-msgstr "por fecha ascendiente"
-
-msgid "by date"
-msgstr "por fecha"
-
-msgid "by date desc"
-msgstr "por fecha descendiente"
-
-msgid "by title asc"
-msgstr "por titulo ascendiente"
-
-msgid "by title"
-msgstr "por título"
-
-msgid "by title desc"
-msgstr "por título descendiente"
-
 msgid "Tag"
-msgstr ""
+msgstr "Etiqueta"
 
 msgid "No articles found."
-msgstr ""
+msgstr "No se encontraron artículos."
 
-#, fuzzy
+msgid "estimated reading time:"
+msgstr "tiempo estimado de lectura:"
+
+msgid "estimated reading time :"
+msgstr "tiempo estimado de lectura:"
+
 msgid "Toggle mark as read"
-msgstr "marcar como leído"
+msgstr "Marcar como leído"
 
 msgid "toggle favorite"
-msgstr "preferido"
+msgstr "marcar como favorito"
 
 msgid "delete"
 msgstr "eliminar"
@@ -252,28 +105,417 @@ msgstr "eliminar"
 msgid "original"
 msgstr "original"
 
-msgid "estimated reading time:"
-msgstr ""
-
-msgid "mark all the entries as read"
-msgstr ""
+msgid "Mark all the entries as read"
+msgstr "marcar todas las entradas como leídas"
 
 msgid "results"
 msgstr "resultados"
 
+msgid " found for « "
+msgstr " encontrado para « "
+
+msgid "Only one result found for "
+msgstr "Sólo se encontró un resultado para"
+
+msgid "config"
+msgstr "configuracíon"
+
+msgid "Saving articles"
+msgstr "Guardando los artículos"
+
+msgid "There are several ways to save an article:"
+msgstr "Existen varias formas para guardar un artículo:"
+
+msgid "read the documentation"
+msgstr "lea la documentación"
+
+msgid "download the extension"
+msgstr "descargar la extensión"
+
+msgid "via F-Droid"
+msgstr "vía F-Droid"
+
+msgid " or "
+msgstr "o"
+
+msgid "via Google Play"
+msgstr "vía Google Play"
+
+msgid "download the application"
+msgstr "descargar la aplicación"
+
+msgid "By filling this field"
+msgstr "Al completar este campo"
+
+msgid "bag it!"
+msgstr "¡embólselo!"
+
+msgid "Bookmarklet: drag & drop this link to your bookmarks bar"
+msgstr "Bookmarklet: arrastre y suelte este enlace en su barra de marcadores"
+
+msgid "Upgrading wallabag"
+msgstr "Actualizar Wallabag"
+
+msgid "Installed version"
+msgstr "Versión instalada"
+
+msgid "Latest stable version"
+msgstr "Última versión estable"
+
+msgid "A more recent stable version is available."
+msgstr "Está disponible una nueva versión estable."
+
+msgid "You are up to date."
+msgstr "Está actualizado."
+
+msgid "Last check:"
+msgstr "Última verificación:"
+
+msgid "Latest dev version"
+msgstr "Última versión de desarrollo"
+
+msgid "A more recent development version is available."
+msgstr "Está disponible una nueva versión de desarrollo."
+
+msgid "You can clear cache to check the latest release."
+msgstr "Puede limpiar el caché para verificar la última versión disponible."
+
+msgid "Feeds"
+msgstr "Feeds"
+
+msgid ""
+"Your feed token is currently empty and must first be generated to enable "
+"feeds. Click <a href='?feed&amp;action=generate'>here to generate it</a>."
+msgstr ""
+"El token para sus feeds actualmente está vacío y debe generarlo primero para "
+"habilitar los feeds. Haga <a href='?feed&amp;action=generate'>clic aquí para "
+"generarlo</a>."
+
+msgid "Unread feed"
+msgstr "Feeds sin leer"
+
+msgid "Favorites feed"
+msgstr "Feeds favoritos"
+
+msgid "Archive feed"
+msgstr "Feeds archivados"
+
+msgid "Your token:"
+msgstr "Su token:"
+
+msgid "Your user id:"
+msgstr "Su id de usuario:"
+
+msgid ""
+"You can regenerate your token: <a href='?feed&amp;action=generate'>generate!"
+"</a>."
+msgstr ""
+"Puede generar su token: <a href='?feed&amp;action=generate'>¡generar!</a>."
+
+msgid "Change your theme"
+msgstr "Cambiar su tema"
+
+msgid "Theme:"
+msgstr "Tema:"
+
+msgid "Update"
+msgstr "Actualizar"
+
+msgid "Change your language"
+msgstr "Cambiar su idioma"
+
+msgid "Language:"
+msgstr "Idioma:"
+
+msgid "Change your password"
+msgstr "Cambiar su contraseña"
+
+msgid "New password:"
+msgstr "Nueva contraseña:"
+
+msgid "Repeat your new password:"
+msgstr "Ingrese nuevamente la nueva contraseña:"
+
+msgid "Import"
+msgstr "Importar"
+
+msgid ""
+"You can import your Pocket, Readability, Instapaper, Wallabag or any data in "
+"appropriate json or html format."
+msgstr ""
+"Puede importar desde Pocket, Readability, Instapaper, Wallabag o cualquier "
+"tipo de dato en formato json o html."
+
+msgid ""
+"Please select export file on your computer and press \"Import\" button below."
+"<br>Wallabag will parse your file, insert all URLs and start fetching of "
+"articles if required.<br>Fetching process is controlled by two constants in "
+"your config file: IMPORT_LIMIT (how many articles are fetched at once) and "
+"IMPORT_DELAY (delay between fetch of next batch of articles)."
+msgstr ""
+"Por favor, seleccione exportar el archivo a su equipo y pulse el botón "
+"\"Importar\" el cual que se ubica más abajo.<br>Wallabag analizará su "
+"archivo, insertará todos los enlaces URL y obtendrá los artículos si es "
+"necesario.<br>El Proceso de búsqueda es controlado por dos constantes en su "
+"archivo de configuración: IMPORT_LIMIT (cuántos artículos se obtendrán a la "
+"vez) e IMPORT_DELAY (el lapso de tiempo que debe esperar para obtener el "
+"próximo lote de artículos)."
+
+msgid "File:"
+msgstr "Archivo:"
+
+msgid "You can click here to fetch content for articles with no content."
+msgstr ""
+"Puede hacer clic aquí para obtener el contenido de los artículos sin "
+"contenido."
+
+msgid "Export your wallabag data"
+msgstr "Exportar sus datos desde Wallabag"
+
+msgid "Click here"
+msgstr "Haga clic aquí"
+
+msgid "to download your database."
+msgstr "para descargar su base de datos."
+
+msgid "to export your wallabag data."
+msgstr "para exportar sus datos desde Wallabag."
+
+msgid "Cache"
+msgstr "Caché"
+
+msgid "to delete cache."
+msgstr "eliminar el caché."
+
+msgid "Add user"
+msgstr "Agregar usuario"
+
+msgid "Add a new user :"
+msgstr "Agregar un nuevo usuario:"
+
+msgid "Login for new user"
+msgstr "Inicio de sesión para el nuevo usuario"
+
+msgid "Login"
+msgstr "Inicio de sesión"
+
+msgid "Password for new user"
+msgstr "Contraseña para el nuevo usuario"
+
+msgid "Email for new user (not required)"
+msgstr "Correo electrónico (no requerido)"
+
+msgid "Send"
+msgstr "Enviar"
+
+msgid "Delete account"
+msgstr "Eliminar cuenta"
+
+msgid "You can delete your account by entering your password and validating."
+msgstr "Puede eliminar su cuenta al introducir su contraseña y validarla."
+
+msgid "Be careful, data will be erased forever (that is a very long time)."
+msgstr ""
+"Tenga cuidado, los datos serán borrados para siempre (lo cual es un tiempo "
+"muy largo)."
+
+msgid "Type here your password"
+msgstr "Introduzca aquí su contraseña"
+
+msgid "You are the only user, you cannot delete your own account."
+msgstr "Es el único usuario, no puede eliminar su propia cuenta."
+
+msgid ""
+"To completely remove wallabag, delete the wallabag folder on your web server "
+"(and eventual databases)."
+msgstr ""
+"Para eliminar completamente Wallabag, borre la carpeta wallabag en su "
+"servidor web (y eventualmente las bases de datos)."
+
+msgid "Save a link"
+msgstr "Guardar un enlace"
+
+msgid "Return home"
+msgstr "Volver a la página de inicio"
+
+msgid "Back to top"
+msgstr "Volver arriba"
+
+msgid "Mark as read"
+msgstr "Marcar como leído"
+
+msgid "Favorite"
+msgstr "Favorito"
+
+msgid "Toggle favorite"
+msgstr "Marcar como favorito"
+
+msgid "Delete"
+msgstr "Eliminar"
+
+msgid "Tweet"
+msgstr "Tuitear"
+
+msgid "Email"
+msgstr "Enviar por correo electrónico"
+
+msgid "Email (not required)"
+msgstr "Correo electrónico (no requerido)"
+
+msgid "shaarli"
+msgstr "Shaarli"
+
+msgid "flattr"
+msgstr "Flattr"
+
+msgid "Print"
+msgstr "Imprimir"
+
+msgid "Does this article appear wrong?"
+msgstr "¿Este artículo no se muestra correctamente?"
+
+msgid "tags:"
+msgstr "etiquetas:"
+
+msgid "Add tags:"
+msgstr "Agregar etiquetas:"
+
+msgid "no tags"
+msgstr "sin etiquetas"
+
+msgid "The tag has been applied successfully"
+msgstr "La etiqueta se ha aplicado exitosamente"
+
+msgid "interview"
+msgstr "entrevista"
+
+msgid "editorial"
+msgstr "editorial"
+
+msgid "video"
+msgstr "vídeo"
+
+msgid "Edit tags"
+msgstr "Editar etiquetas"
+
+msgid "favoris"
+msgstr "favoritos"
+
+msgid "mark all the entries as read"
+msgstr "marcar todas las entradas como leídas"
+
+msgid "toggle view mode"
+msgstr "Cambiar el modo de visualización "
+
+msgid "return home"
+msgstr "volver a la página de inicio"
+
+# Please define the meaning of the "poching" word or provide a synonym. Its meaning is not clear.
+#, fuzzy
+msgid "Poching a link"
+msgstr "Poching un enlace"
+
+msgid "by filling this field"
+msgstr "al completar este campo"
+
+msgid "bookmarklet: drag & drop this link to your bookmarks bar"
+msgstr "bookmarklet: arrastre y suelte este enlace en su barra de marcadores"
+
+msgid "your version"
+msgstr "su versión"
+
+msgid "latest stable version"
+msgstr "última versión estable"
+
+msgid "a more recent stable version is available."
+msgstr "está disponible una nueva versión estable."
+
+msgid "you are up to date."
+msgstr "Está actualizado."
+
+msgid "latest dev version"
+msgstr "última versión de desarrollo"
+
+msgid "a more recent development version is available."
+msgstr "está disponible una nueva versión de desarrollo."
+
+msgid "Please execute the import script locally, it can take a very long time."
+msgstr ""
+"Por favor, ejecute el script de importación localmente, esto puede tardar un "
+"tiempo."
+
+msgid "More infos in the official doc:"
+msgstr "Más información en la documentación oficial:"
+
+msgid "import from Pocket"
+msgstr "importar desde Pocket"
+
+#, php-format
+msgid "(you must have a %s file on your server)"
+msgstr "(debe tener un archivo %s en su servidor)"
+
+msgid "import from Readability"
+msgstr "importar desde Readability"
+
+msgid "import from Instapaper"
+msgstr "importar desde Instapaper"
+
+msgid "Start typing for auto complete."
+msgstr "Comience a escribir para autocompletar."
+
+msgid "You can enter multiple tags, separated by commas."
+msgstr "Puede introducir múltiples etiquetas, separadas por comas."
+
+msgid "return to article"
+msgstr "volver al artículo"
+
+msgid "by date asc"
+msgstr "por fecha ascendente"
+
+msgid "by date"
+msgstr "por fecha"
+
+msgid "by date desc"
+msgstr "por fecha descendente"
+
+msgid "by title asc"
+msgstr "por título ascendente"
+
+msgid "by title"
+msgstr "por título"
+
+msgid "by title desc"
+msgstr "por título descendente"
+
+msgid "home"
+msgstr "página de inicio"
+
+msgid "tags"
+msgstr "etiquetas"
+
+msgid "save a link"
+msgstr "guardar un enlace"
+
+msgid "search"
+msgstr "búsqueda"
+
+msgid "logout"
+msgstr "cerrar sesión"
+
 msgid "installation"
 msgstr "instalación"
 
-#, fuzzy
 msgid "install your wallabag"
-msgstr "instala tu Poche"
+msgstr "instale su Wallabag"
 
-#, fuzzy
-msgid "wallabag is still not installed. Please fill the below form to install it. Don't hesitate to <a href='http://doc.wallabag.org/'>read the documentation on wallabag website</a>."
-msgstr "Poche todavia no està instalado. Por favor, completa los campos siguientes para instalarlo. No dudes de <a href='http://doc.inthepoche.com'>leer la documentación en el sitio de Poche</a>."
-
-msgid "Login"
-msgstr "Nombre de usuario"
+msgid ""
+"wallabag is still not installed. Please fill the below form to install it. "
+"Don't hesitate to <a href='http://doc.wallabag.org/'>read the documentation "
+"on wallabag website</a>."
+msgstr ""
+"Wallabag todavía no se encuentra instalado. Por favor, complete los "
+"siguientes campos para instalarlo. No dude en <a href='http://doc.inthepoche."
+"com'>leer la documentación en el sitio oficial de wallabag</a>."
 
 msgid "Repeat your password"
 msgstr "Repita su contraseña"
@@ -281,283 +523,355 @@ msgstr "Repita su contraseña"
 msgid "Install"
 msgstr "Instalar"
 
-#, fuzzy
-msgid "login to your wallabag"
-msgstr "conectarse a tu Poche"
-
-msgid "Login to wallabag"
+msgid ""
+"You can <a href='wallabag_compatibility_test.php'>check your configuration "
+"here</a>."
 msgstr ""
+"Puede <a href='wallabag_compatibility_test.php'>verificar su configuración "
+"aquí</a>."
 
-msgid "you are in demo mode, some features may be disabled."
-msgstr "este es el modo de demostración, algunas funcionalidades pueden estar desactivadas."
+msgid "Tags"
+msgstr "Etiquetas"
 
-msgid "Username"
-msgstr ""
-
-msgid "Stay signed in"
-msgstr "Seguir conectado"
-
-msgid "(Do not check on public computers)"
-msgstr "(no marcar en un ordenador público)"
-
-msgid "Sign in"
-msgstr "Iniciar sesión"
-
-msgid "favorites"
-msgstr "preferidos"
-
-msgid "estimated reading time :"
-msgstr ""
-
-msgid "Mark all the entries as read"
-msgstr ""
-
-msgid "Return home"
-msgstr ""
-
-#, fuzzy
-msgid "Back to top"
-msgstr "volver arriba"
-
-#, fuzzy
-msgid "Mark as read"
-msgstr "marcar como leído"
-
-#, fuzzy
-msgid "Favorite"
-msgstr "preferidos"
-
-#, fuzzy
-msgid "Toggle favorite"
-msgstr "preferido"
-
-#, fuzzy
-msgid "Delete"
-msgstr "eliminar"
-
-#, fuzzy
-msgid "Tweet"
-msgstr "tweetear"
-
-#, fuzzy
-msgid "Email"
-msgstr "enviar por mail"
-
-msgid "shaarli"
-msgstr "shaarli"
-
-msgid "flattr"
-msgstr "flattr"
-
-#, fuzzy
-msgid "Does this article appear wrong?"
-msgstr "este articulo no se ve bien?"
-
-msgid "tags:"
-msgstr ""
-
-msgid "Edit tags"
-msgstr ""
-
-msgid "save link!"
-msgstr ""
-
-msgid "home"
-msgstr "inicio"
-
-msgid "tags"
-msgstr ""
-
-msgid "logout"
-msgstr "cerrar sesión"
-
-msgid "powered by"
-msgstr "hecho con"
-
-msgid "debug mode is on so cache is off."
-msgstr "el modo de depuración está activado, así que la cache está desactivada."
-
-#, fuzzy
-msgid "your wallabag version:"
-msgstr "su versión"
-
-msgid "storage:"
-msgstr "almacenamiento:"
-
-msgid "save a link"
-msgstr ""
-
-msgid "back to home"
-msgstr "volver a la página de inicio"
+msgid "No link available here!"
+msgstr "¡No hay ningún enlace disponible!"
 
 msgid "toggle mark as read"
 msgstr "marcar como leído"
 
 msgid "tweet"
-msgstr "tweetear"
+msgstr "tuitear"
 
 msgid "email"
-msgstr "enviar por mail"
+msgstr "enviar por email"
 
 msgid "this article appears wrong?"
-msgstr "este articulo no se ve bien?"
+msgstr "¿este artículo no se muestra correctamente?"
 
-msgid "No link available here!"
-msgstr "¡No hay ningún enlace disponible por aquí!"
+msgid "Search"
+msgstr "Búsqueda"
 
-msgid "Poching a link"
-msgstr "Pochear un enlace"
+msgid "Download required for "
+msgstr "Descarga requerida para"
 
-msgid "by filling this field"
-msgstr "rellenando este campo"
+msgid "records"
+msgstr "archivos"
 
-msgid "bookmarklet: drag & drop this link to your bookmarks bar"
+msgid "Downloading next "
+msgstr "Descargando siguientes"
+
+msgid "articles, please wait"
+msgstr "artículos, por favor, espere"
+
+msgid "Enter your search here"
+msgstr "Ingrese su búsqueda aquí"
+
+#, php-format
+msgid ""
+"The new user %s has been installed. Do you want to <a href=\"?logout"
+"\">logout ?</a>"
 msgstr ""
+"El nuevo usuario %s ha sido instalado. ¿Desea <a href=\"?logout\">cerrar la "
+"sesión</a>?"
 
-msgid "your version"
-msgstr "su versión"
+#, php-format
+msgid "Error : An user with the name %s already exists !"
+msgstr "Error: ¡Ya existe un usuario con el nombre %s!"
 
-msgid "latest stable version"
-msgstr "ultima versión estable"
+#, php-format
+msgid "User %s has been successfully deleted !"
+msgstr "¡El usuario %s ha sido eliminado satisfactoriamente!"
 
-msgid "a more recent stable version is available."
-msgstr "una versión estable más reciente está disponible."
+msgid "Error : The password is wrong !"
+msgstr "Error: ¡Contraseña errónea!"
 
-msgid "you are up to date."
-msgstr "estás actualizado."
+msgid "Error : You are the only user, you cannot delete your account !"
+msgstr "Error: ¡Es el único usuario, no puede eliminar su propia cuenta!"
 
-msgid "latest dev version"
-msgstr "ultima versión de desarollo"
-
-msgid "a more recent development version is available."
-msgstr "una versión de desarollo más reciente está disponible."
-
-msgid "Please execute the import script locally, it can take a very long time."
-msgstr "Por favor, ejecute la importación en local, esto puede demorar un tiempo."
-
-#, fuzzy
-msgid "More infos in the official doc:"
-msgstr "Más información en la documentación oficial :"
-
-msgid "import from Pocket"
-msgstr "importación desde Pocket"
-
-msgid "import from Readability"
-msgstr "importación desde Readability"
-
-msgid "import from Instapaper"
-msgstr "importación desde Instapaper"
-
-msgid "Tags"
-msgstr ""
-
-#, fuzzy
 msgid "Untitled"
-msgstr "por título"
+msgstr "Sin título"
 
 msgid "the link has been added successfully"
-msgstr ""
+msgstr "el enlace ha sido añadido satisfactoriamente"
 
 msgid "error during insertion : the link wasn't added"
-msgstr ""
+msgstr "ocurrió un error durante la inserción: el enlace no fue añadido"
 
 msgid "the link has been deleted successfully"
-msgstr ""
+msgstr "el enlace ha sido eliminado satisfactoriamente"
 
 msgid "the link wasn't deleted"
-msgstr ""
+msgstr "el enlace no fue eliminado"
 
 msgid "Article not found!"
-msgstr ""
+msgstr "¡No se encontró el artículo!"
 
 msgid "previous"
-msgstr ""
+msgstr "anterior"
 
 msgid "next"
-msgstr ""
+msgstr "siguiente"
 
 msgid "in demo mode, you can't update your password"
-msgstr ""
+msgstr "en modo de demostración, no puede actualizar su contraseña"
 
 msgid "your password has been updated"
-msgstr ""
+msgstr "su contraseña ha sido actualizada"
 
-msgid "the two fields have to be filled & the password must be the same in the two fields"
+msgid ""
+"the two fields have to be filled & the password must be the same in the two "
+"fields"
 msgstr ""
+"se deben completar ambos campos y la contraseña debe ser la misma para "
+"dichos campos"
 
 msgid "still using the \""
-msgstr ""
+msgstr "continua utilizando el \""
 
 msgid "that theme does not seem to be installed"
-msgstr ""
+msgstr "parece que este tema no se encuentra instalado"
 
 msgid "you have changed your theme preferences"
-msgstr ""
+msgstr "ha cambiado las preferencias de su tema"
 
 msgid "that language does not seem to be installed"
-msgstr ""
+msgstr "parece que este idioma no se encuentra instalado"
 
 msgid "you have changed your language preferences"
-msgstr ""
+msgstr "ha cambiado las preferencias de su idioma"
 
 msgid "login failed: you have to fill all fields"
-msgstr ""
+msgstr "error al iniciar sesión: debe completar todos los campos"
 
 msgid "welcome to your wallabag"
-msgstr ""
+msgstr "bienvenido a su Wallabag"
 
 msgid "login failed: bad login or password"
+msgstr "error al iniciar sesión: nombre de usuario o contraseña incorrecta"
+
+msgid "Untitled - Import - "
+msgstr "Sin título - Importar -"
+
+msgid "click to finish import"
+msgstr "haga clic para completar la importación"
+
+msgid "Articles inserted: "
+msgstr "Artículos insertados:"
+
+msgid ". Please note, that some may be marked as \"read\"."
 msgstr ""
+". Por favor, tenga en cuenta que algunos pueden estar marcados como \"leidos"
+"\"."
 
-#, fuzzy
-msgid "import from instapaper completed"
-msgstr "importación desde Instapaper"
+msgid "Import finished."
+msgstr "Importación finalizada."
 
-#, fuzzy
-msgid "import from pocket completed"
-msgstr "importación desde Pocket"
+msgid "Undefined"
+msgstr "Sin definir"
 
-#, fuzzy
-msgid "import from Readability completed. "
-msgstr "importación desde Readability"
-
-#, fuzzy
-msgid "import from Poche completed. "
-msgstr "importación desde Pocket"
-
-msgid "Unknown import provider."
-msgstr ""
-
-msgid "Incomplete inc/poche/define.inc.php file, please define \""
-msgstr ""
-
-msgid "Could not find required \""
-msgstr ""
+msgid "User with this id ("
+msgstr "El usuario con este id ("
 
 msgid "Uh, there is a problem while generating feeds."
-msgstr ""
+msgstr "Oh!, se encontró un problema al momento de generar los feeds."
 
-#, fuzzy
 msgid "Cache deleted."
-msgstr "eliminar"
+msgstr "Caché eliminado."
 
 msgid "Oops, it seems you don't have PHP 5."
+msgstr "Ups!, parece que no cuenta con PHP 5."
+
+msgid "Tag these results as"
+msgstr "Etiquetar estos resultados como"
+
+# ebook
+msgid "Fancy an E-Book ?"
+msgstr "Fantástico ¿un libro electrónico?"
+
+msgid "Click to get all your articles in one ebook :"
+msgstr "Haga clic para obtener todos sus artículos en un libro electrónico:"
+
+msgid "Generate ePub file"
+msgstr "Generar archivo ePub"
+
+msgid "Generate Mobi file"
+msgstr "Generar archivo Mobi"
+
+msgid "Generate PDF file"
+msgstr "Generar archivo PDF"
+
+msgid ""
+"This can <b>take a while</b> and can <b>even fail</b> if you have too many "
+"articles, depending on your server configuration."
 msgstr ""
+"Esto puede <b>tomar un momento</b> e incluso <b>puede fallar</b> si tiene "
+"demasiados artículos, depende de la configuración del servidor."
 
-#~ msgid "poche it!"
-#~ msgstr "pochéalo!"
+msgid "Download the articles from this tag in an epub"
+msgstr "Descargar los artículos de esta etiqueta en un ePub"
 
-#~ msgid "Updating poche"
-#~ msgstr "Actualizar"
+msgid "Download the articles from this search in an epub"
+msgstr "Descargar los artículos de esta búsqueda en un ePub"
 
-#~ msgid "create an issue"
-#~ msgstr "crear un ticket"
+msgid "Download the articles from this category in an epub"
+msgstr "Descargar los artículos de esta categoría en un ePub"
 
-#~ msgid "or"
-#~ msgstr "o"
+msgid "Download the articles from this tag in an ePub file"
+msgstr "Descargar los artículos de esta etiqueta en un archivo ePub"
 
-#~ msgid "contact us by mail"
-#~ msgstr "contactarnos por mail"
+msgid "Download the articles from this tag in an Mobi file"
+msgstr "Descargar los artículos de esta etiqueta en un archivo Mobi"
 
-#~ msgid "your poche version:"
-#~ msgstr "tu versión de Poche:"
+msgid "Download the articles from this tag in an PDF file"
+msgstr "Descargar los artículos de esta etiqueta en un archivo PDF"
+
+msgid "Download the articles from this search in an ePub"
+msgstr "Descargar los artículos de esta búsqueda en un ePub"
+
+msgid "Download the articles from this search in a Mobi file"
+msgstr "Descargar los artículos de esta búsqueda en un archivo Mobi"
+
+msgid "Download the articles from this search in a PDF file"
+msgstr "Descargar los artículos de esta búsqueda en un archivo PDF"
+
+msgid "Download the articles from this category in an ePub"
+msgstr "Descargar los artículos de esta categoría en un ePub"
+
+msgid "Download the articles from this category in a Mobi file"
+msgstr "Descargar los artículos de esta categoría en un archivo Mobi"
+
+msgid "Download the articles from this category in a PDF file"
+msgstr "Descargar los artículos de esta categoría en un archivo PDF"
+
+msgid "Download as ePub3"
+msgstr "Descargar como ePub3"
+
+msgid "Download as Mobi"
+msgstr "Descargar como Mobi"
+
+msgid "Download as PDF"
+msgstr "Descargar como PDF"
+
+msgid "All my articles on %s"
+msgstr "Todos mis artículos sobre %s"
+
+# All articles
+msgid "Allarticles"
+msgstr "Todos los artículos"
+
+msgid "Articles tagged %s"
+msgstr "Artículos etiquetados %s"
+
+msgid "Tag %s"
+msgstr "Etiqueta %s"
+
+msgid "Articles in category %s"
+msgstr "Artículos en la categoría %s"
+
+msgid "Category %s"
+msgstr "Categoría %s"
+
+msgid "Articles for search %s"
+msgstr "Artículos encontrados para la búsqueda %s"
+
+msgid "Search %s"
+msgstr "Búsqueda %s"
+
+#, fuzzy
+msgid "wallabag articles book"
+msgstr "Wallabag libro de artículos"
+
+msgid "Some articles saved on my wallabag"
+msgstr "Algunos artículos guardados en mi Wallabag"
+
+msgid "Produced by wallabag with PHPePub"
+msgstr "Producido por Wallabag con PHPePub"
+
+msgid ""
+"Please open <a href='https://github.com/wallabag/wallabag/issues'>an issue</"
+"a> if you have trouble with the display of this E-Book on your device."
+msgstr ""
+"Por favor, abra <a href='https://github.com/wallabag/wallabag/issues'>un "
+"reporte</a> si usted tiene problemas con la visualización de este libro "
+"electrónico en su dispositivo."
+
+msgid "Produced by wallabag with PHPMobi"
+msgstr "Producido por Wallabag con PHPMobi"
+
+# registration
+msgid "Hi,"
+msgstr "¡Hola,"
+
+msgid "Hi, %1$s"
+msgstr "¡Hola, %1$s!"
+
+msgid "Someone just created a wallabag account for you on %1$s."
+msgstr "Alguien acaba de crear una cuenta Wallabag para usted en %1$s."
+
+msgid "You've just created a wallabag account on %1$s"
+msgstr "Ha creado una cuenta Wallabag en %1$s"
+
+msgid "Your login is %1$s."
+msgstr "Su inicio de sesión es %1$s."
+
+msgid "Have fun with it !"
+msgstr "¡Diviértase con el!"
+
+msgid ""
+"This is an automatically generated message, no one will answer if you "
+"respond to it."
+msgstr ""
+"Este es un mensaje generado automáticamente, nadie va a contestar si "
+"responde a el."
+
+msgid ""
+"Note : The password has been chosen by the person who created your account. "
+"Get in touch with that person to know your password and change it as soon as "
+"possible"
+msgstr ""
+"Nota: La contraseña ha sido elegida por la persona que creó su cuenta. "
+"Póngase en contacto con esa persona para saber su contraseña y cambiarla lo "
+"antes posible"
+
+msgid ""
+"The new user %1$s has been sent an email at %2$s. You may have to check spam "
+"folder."
+msgstr ""
+"El nuevo usuario %1$s ha enviado un correo electrónico a %2$s. Tal vez tenga "
+"que revisar la carpeta de spam."
+
+msgid "A problem has been encountered while sending the confirmation email"
+msgstr ""
+"Un problema ha sido encontrado al enviar el correo electrónico de "
+"confirmación"
+
+msgid ""
+"The server did not authorize sending a confirmation email, but the user was "
+"created."
+msgstr ""
+"El servidor no autorizó el envío de un correo electrónico de confirmación, "
+"pero el usuario ha sido creado."
+
+#, fuzzy
+msgid ""
+"The user was created, but no email was sent because email was not filled in"
+msgstr ""
+"El usuario ha sido creado, pero no se envió ningún correo electrónico debido "
+"a que el correo electrónico no se llenó en"
+
+msgid "Mail function is disabled. You can't send emails from your server"
+msgstr ""
+"La función de correo está deshabilitada. No puede enviar mensajes de correo "
+"electrónico desde su servidor"
+
+msgid "You didn't set your kindle's email adress !"
+msgstr "¡No ha establecido la dirección de correo electrónico de su kindle!"
+
+msgid "The email has been sent to your kindle !"
+msgstr "¡El correo electrónico ha sido enviado a su kindle!"
+
+msgid "Produced by wallabag with mPDF"
+msgstr "Producido por Wallabag con mPDF"
+
+msgid "Read the rest at"
+msgstr "Leer el resto en"

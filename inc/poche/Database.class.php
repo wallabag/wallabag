@@ -435,7 +435,7 @@ class Database {
 
     public function getPreviousArticle($id, $user_id) 
     {
-        $sql = "SELECT id FROM entries WHERE id = (SELECT max(id) FROM entries WHERE id < ?) AND user_id=? AND is_read=0";
+        $sql = "SELECT id FROM entries WHERE id = (SELECT max(id) FROM entries WHERE id < ? AND is_read=0) AND user_id=? AND is_read=0";
         $params = array($id, $user_id);
         $query = $this->executeQuery($sql, $params);
         $id_entry = $query->fetchAll();
@@ -445,7 +445,7 @@ class Database {
 
     public function getNextArticle($id, $user_id) 
     {
-        $sql = "SELECT id FROM entries WHERE id = (SELECT min(id) FROM entries WHERE id > ?) AND user_id=? AND is_read=0";
+        $sql = "SELECT id FROM entries WHERE id = (SELECT min(id) FROM entries WHERE id > ? AND is_read=0) AND user_id=? AND is_read=0";
         $params = array($id, $user_id);
         $query = $this->executeQuery($sql, $params);
         $id_entry = $query->fetchAll();

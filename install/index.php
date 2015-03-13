@@ -89,7 +89,7 @@ else if (isset($_POST['install'])) {
             try {
 
             if ($_POST['db_engine'] == 'mysql') {
-                if ($_POST['mysql_server'] != "") {$server = $_POST['mysql_server'];}
+                if ($_POST['mysql_server'] != "") {$server = $_POST['mysql_server'];} // if server and database are filled
                 if ($_POST['mysql_database'] != "") {$database = $_POST['mysql_database'];}
 
                 if (isset($_POST['mysql_utf8_mb4'])) {
@@ -100,6 +100,7 @@ else if (isset($_POST['install'])) {
                     ));
                     $content = str_replace("define ('MYSQL_USE_UTF8MB4', FALSE);", "define ('MYSQL_USE_UTF8MB4', TRUE);", $content);
                 } else { // regular UTF8
+                    $content = str_replace(" DEFAULT CHARSET=utf8mb4", "", $content); // replace the UTF8-MB4 occurences inside the mysql.sql file
                     $db_path = 'mysql:host=' . $server . ';dbname=' . $database;
                     $handle = new PDO($db_path, $_POST['mysql_user'], $_POST['mysql_password']);
                 }
@@ -117,7 +118,6 @@ else if (isset($_POST['install'])) {
                 $moreQueries[] = "INSERT INTO `tags` (`id`, `value`) VALUES (1, 'opensource');";
                 $moreQueries[] = "INSERT INTO `tags_entries` (`id`, `entry_id`, `tag_id`) VALUES (1, 2, 1);";
 
-                $sql_structure = file_get_contents('install/mysql.sql');
             }
             else if ($_POST['db_engine'] == 'postgres') {
                 if ($_POST['pg_server'] != "") {$server = $_POST['pg_server'];}
@@ -645,8 +645,8 @@ php composer.phar install</code></pre>
                                  <p>All fields have to be filled.</p>
                               </div>
                               <ul id="mysql_infos">
-                                 <li><label for="mysql_server">Server</label> <input type="text" placeholder="localhost" id="mysql_server" name="mysql_server" /></li>
-                                 <li><label for="mysql_database">Existing database</label> <input type="text" placeholder="wallabag" id="mysql_database" name="mysql_database" /></li>
+                                 <li><label for="mysql_server">Server</label> <input type="text" placeholder="eg : localhost" id="mysql_server" name="mysql_server" /></li>
+                                 <li><label for="mysql_database">Existing database</label> <input type="text" placeholder="eg : wallabag" id="mysql_database" name="mysql_database" /></li>
                                  <li><label for="mysql_user">User</label> <input type="text" placeholder="user" id="mysql_user" name="mysql_user" /></li>
                                  <li><label for="mysql_password">Password</label> <input type="password" placeholder="p4ssw0rd" id="mysql_password" name="mysql_password" /></li>
                                  <li><label for="mysql_utf8_mb4">Use UTF-8 MB4</label> <input id="mysql_utf8_mb4" type="checkbox" name="mysql_utf8_mb4">
@@ -666,8 +666,8 @@ php composer.phar install</code></pre>
                                     <p>All fields have to be filled.</p>
                                  </div>
                                  <ul id="pg_infos">
-                                    <li><label for="pg_server">Server</label> <input type="text" placeholder="localhost" id="pg_server" name="pg_server" /></li>
-                                    <li><label for="pg_database">Existing database</label> <input type="text" placeholder="wallabag" id="pg_database" name="pg_database" /></li>
+                                    <li><label for="pg_server">Server</label> <input type="text" placeholder="eg : localhost" id="pg_server" name="pg_server" /></li>
+                                    <li><label for="pg_database">Existing database</label> <input type="text" placeholder="eg : wallabag" id="pg_database" name="pg_database" /></li>
                                     <li><label for="pg_user">User</label> <input type="text" placeholder="user" id="pg_user" name="pg_user" /></li>
                                     <li><label for="pg_password">Password</label> <input type="password" placeholder="p4ssw0rd" id="pg_password" name="pg_password" /></li>
                                  </ul>

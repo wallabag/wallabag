@@ -1,8 +1,0 @@
-{
-    "favicon": "<theme_url>img/favicon-blue.png",
-    "css": ["<theme_url>css/daux-blue.css"],
-    
-    "js": [],
-    "require-jquery": true,
-    "bootstrap-js": false
-}

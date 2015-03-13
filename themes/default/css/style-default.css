@@ -43,7 +43,8 @@ a.twitter span {
 }
 
 a.shaarli span {
-    background-image: url('../img/default/shaarli.png');
+    background-image: url('../../_global/img/icons/shaarli.png');
+    background-size: 16px 16px;
 }
 
 a.flattr span {
