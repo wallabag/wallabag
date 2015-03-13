@@ -118,6 +118,75 @@ msgstr "Seulement un résultat trouvé pour "
 msgid "config"
 msgstr "configuration"
 
+msgid "about"
+msgstr "À propos"
+
+msgid "About wallabag"
+msgstr "À propos de wallabag"
+
+msgid ""
+"wallabag is a read-it-later application: you can save a web page by keeping "
+"only content. Elements like ads or menus are deleted."
+msgstr ""
+"wallabag est une application de lecture différée : vous pouvez sauver une "
+"page web et garder uniquement son contenu. Les élements comme les publicités "
+"ou les menus sont supprimés."
+
+msgid "Project website"
+msgstr "Site web du projet"
+
+msgid "Main developer"
+msgstr "Développeur principal"
+
+msgid "website"
+msgstr "site web"
+
+msgid "Contributors:"
+msgstr "Contributeurs :"
+
+msgid "Bug reports"
+msgstr "Rapports de bugs"
+
+msgid "on Github"
+msgstr "sur Github"
+
+msgid "On our support website"
+msgstr "Sur notre site de support"
+
+msgid "License"
+msgstr "Licence"
+
+msgid "Version"
+msgstr "Version"
+
+msgid "Getting help"
+msgstr "Obtenir de l'aide"
+
+msgid "Documentation"
+msgstr "Documentation"
+
+msgid ""
+"<a href=\"docs/\">Offline documentation</a> and <a href=\"https://doc."
+"wallabag.org/\">online documentation</a> (up to date)"
+msgstr ""
+"<a href=\"docs/\">Documentation hors-ligne</a> et <a href=\"https://doc."
+"wallabag.org/\">documentation en ligne</a> (à jour)"
+
+msgid "Helping wallabag"
+msgstr "Aider wallabag"
+
+msgid "wallabag is free and opensource. You can help us:"
+msgstr "wallabag est libre et opensource. Vous pouver nous aider :"
+
+msgid "via Paypal"
+msgstr "via Paypal"
+
+msgid "via Flattr"
+msgstr "via Flattr"
+
+msgid "Credits"
+msgstr "Crédits"
+
 msgid "Saving articles"
 msgstr "Sauvegarde des articles"
 
@@ -129,6 +198,12 @@ msgstr "lisez la documentation"
 
 msgid "download the extension"
 msgstr "téléchargez l'extension"
+
+msgid "Firefox Add-On"
+msgstr "Add-On Firefox"
+
+msgid "Chrome Extension"
+msgstr "Extension Chrome"
 
 msgid "via F-Droid"
 msgstr "via F-Droid"
@@ -146,10 +221,16 @@ msgid "By filling this field"
 msgstr "En remplissant ce champ"
 
 msgid "bag it!"
-msgstr "bag it !"
+msgstr "Bag!"
 
-msgid "Bookmarklet: drag & drop this link to your bookmarks bar"
-msgstr "Bookmarklet : glissez-déposez ce lien dans votre barre de favoris"
+msgid "Browser Addons"
+msgstr "Modules pour navigateurs"
+
+msgid "Mobile Apps"
+msgstr "Applications pour appareils mobiles"
+
+msgid "Drag &amp; drop this link to your bookmarks bar:"
+msgstr "Glissez-déposez ce lien dans votre barre de favoris : "
 
 msgid "Upgrading wallabag"
 msgstr "Mise à jour de wallabag"
@@ -247,19 +328,24 @@ msgstr ""
 "n'importe quel fichier au format JSON ou HTML approprié."
 
 msgid ""
-"Please select export file on your computer and press \"Import\" button below."
-"<br>Wallabag will parse your file, insert all URLs and start fetching of "
-"articles if required.<br>Fetching process is controlled by two constants in "
-"your config file: IMPORT_LIMIT (how many articles are fetched at once) and "
-"IMPORT_DELAY (delay between fetch of next batch of articles)."
+"Please select export file on your computer and press \"Import\" button "
+"below. Wallabag will parse your file, insert all URLs and start fetching of "
+"articles if required."
 msgstr ""
-"Sélectionnez le fichier à importer sur votre disque dur, et pressez la "
-"bouton « Importer » ci-dessous.<br />wallabag analysera votre fichier, "
-"ajoutera toutes les URL trouvées et commencera à télécharger les contenus si "
-"nécessaire.<br />Le processus de téléchargement est contrôlé par deux "
-"constantes dans votre fichier de configuration:<wbr /><code>IMPORT_LIMIT</"
-"code> (nombre d'éléments téléchargés à la fois) et <code>IMPORT_DELAY</code> "
-"(le délai d'attente entre deux séquences de téléchargement)."
+"Sélectionnez le fichier à importer sur votre disque dur, et pressez le "
+"bouton « Importer » ci-dessous. wallabag analysera votre fichier, ajoutera "
+"toutes les URL trouvées et commencera à télécharger les contenus si "
+"nécessaire."
+
+msgid ""
+"Fetching process is controlled by two constants in your config file: "
+"IMPORT_LIMIT (how many articles are fetched at once) and IMPORT_DELAY (delay "
+"between fetch of next batch of articles)."
+msgstr ""
+"Le processus d'import peut être paramétré par deux constantes dans votre "
+"fichier de configuration : IMPORT_LIMIT (combien d'articles sont téléchargés "
+"à la fois) et IMPORT_DELAY (le délai entre le téléchargement du prochain lot "
+"d'articles)."
 
 msgid "File:"
 msgstr "Fichier : "
@@ -280,11 +366,21 @@ msgstr "pour télécharger votre base de données."
 msgid "to export your wallabag data."
 msgstr "pour exporter vos données de wallabag."
 
+msgid "JSON export"
+msgstr "Export JSON"
+
+msgid "Data will be exported in a single JSON file."
+msgstr "Les données seront exportées dans un unique fichier JSON."
+
 msgid "Cache"
 msgstr "Cache"
 
-msgid "to delete cache."
-msgstr "pour effacer le cache."
+msgid "Delete Cache"
+msgstr "Vider le cache"
+
+msgid "Deleting the cache may help with display or other problems."
+msgstr ""
+"Vider le cache peut résoudre des problèmes d'affichage ou d'autres problèmes."
 
 msgid "Add user"
 msgstr "Ajouter un utilisateur"
