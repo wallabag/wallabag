@@ -523,7 +523,7 @@ class Poche
                             $this->pagination->page_links('?view=' . $view . '?search=' . $search . '&sort=' . $_SESSION['sort'] . '&' ));
                    $tpl_vars['page_links'] = $page_links;
                    $tpl_vars['nb_results'] = $count;
-                   $tpl_vars['search_term'] = $search;
+                   $tpl_vars['searchterm'] = $search;
                 }
                 break;
             case 'view':
