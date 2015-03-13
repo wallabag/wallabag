@@ -411,10 +411,22 @@ class Database {
 
         return $count;
     }
-    public function getRandomId($user_id) {
+    public function getRandomId($user_id, $view) {
         $random = (STORAGE == 'mysql') ? 'RAND()' : 'RANDOM()';
-        $sql = "SELECT id FROM entries WHERE user_id=? ORDER BY ". $random . " LIMIT 1";
-        $params = array($user_id);
+        switch ($view) {
+            case 'archive': 
+                $sql = "SELECT id FROM entries WHERE user_id=? AND is_read=? ORDER BY ". $random . " LIMIT 1";
+                $params = array($user_id,1);
+                break;
+            case 'fav':
+                $sql = "SELECT id FROM entries WHERE user_id=? AND is_fav=? ORDER BY ". $random . " LIMIT 1";
+                $params = array($user_id,1);
+                break;
+            default:
+                $sql = "SELECT id FROM entries WHERE user_id=? AND is_read=? ORDER BY ". $random . " LIMIT 1";
+                $params = array($user_id,0);
+                break;
+        }
         $query = $this->executeQuery($sql, $params);
         $id = $query->fetchAll();
 

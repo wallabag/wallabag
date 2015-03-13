@@ -406,8 +406,9 @@ class Poche
             /* For some unknown reason I can't get displayView() to work here (it redirects to home view afterwards). So here's a dirty fix which redirects directly to URL */
             case 'random':
                 Tools::logm('get a random article');
-                if ($this->store->getRandomId($this->user->getId())) {
-                    $id_array = $this->store->getRandomId($this->user->getId());
+                $view = $_GET['view'];
+                if ($this->store->getRandomId($this->user->getId(),$view)) {
+                    $id_array = $this->store->getRandomId($this->user->getId(),$view);
                     $id = $id_array[0];
                     Tools::redirect('?view=view&id=' . $id[0]);
                     Tools::logm('got the article with id ' . $id[0]);
@@ -522,7 +523,7 @@ class Poche
                             $this->pagination->page_links('?view=' . $view . '?search=' . $search . '&sort=' . $_SESSION['sort'] . '&' ));
                    $tpl_vars['page_links'] = $page_links;
                    $tpl_vars['nb_results'] = $count;
-                   $tpl_vars['searchterm'] = $search;
+                   $tpl_vars['search_term'] = $search;
                 }
                 break;
             case 'view':
@@ -578,6 +579,7 @@ class Poche
                     'page_links' => '',
                     'nb_results' => '',
                     'listmode' => (isset($_COOKIE['listmode']) ? true : false),
+                    'view' => $view,
                 );
 
                 //if id is given - we retrieve entries by tag: id is tag id
