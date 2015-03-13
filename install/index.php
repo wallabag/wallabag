@@ -18,11 +18,11 @@ require_once('install_functions.php');
 
 if (isset($_GET['clean'])) {
     if (is_dir('install')){
-        delTree('install');
+        delTree('install', true);
         header('Location: index.php');      
     }
     if (is_dir('cache')) {
-        delTree('cache', false);
+        delTree('cache', false, false);
         header('Location: index.php');      
     }
 }

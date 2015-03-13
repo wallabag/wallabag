@@ -392,8 +392,11 @@ final class Tools
         );
 
         foreach ($files as $fileInfo) {
-            $todo = ($fileInfo->isDir() ? 'rmdir' : 'unlink');
-            $todo($fileInfo->getRealPath());
+            $filename = $fileInfo->getFilename();
+            if (!$filename[0] == '.') {
+                $todo = ($fileInfo->isDir() ? 'rmdir' : 'unlink');
+                $todo($fileInfo->getRealPath());
+            }
         }
 
         Tools::logm('empty cache');
