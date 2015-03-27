@@ -27,7 +27,7 @@ class ConfigControllerTest extends WallabagTestCase
 
         $this->assertCount(1, $crawler->filter('button[id=config_save]'));
         $this->assertCount(1, $crawler->filter('button[id=change_passwd_save]'));
-        $this->assertCount(1, $crawler->filter('button[id=user_save]'));
+        $this->assertCount(1, $crawler->filter('button[id=update_user_save]'));
         $this->assertCount(1, $crawler->filter('button[id=new_user_save]'));
         $this->assertCount(1, $crawler->filter('button[id=rss_config_save]'));
     }
@@ -189,25 +189,15 @@ class ConfigControllerTest extends WallabagTestCase
         return array(
             array(
                 array(
-                    'user[username]' => '',
-                    'user[name]' => '',
-                    'user[email]' => '',
+                    'update_user[name]' => '',
+                    'update_user[email]' => '',
                 ),
                 'This value should not be blank.',
             ),
             array(
                 array(
-                    'user[username]' => 'ad',
-                    'user[name]' => '',
-                    'user[email]' => '',
-                ),
-                'This value is too short.',
-            ),
-            array(
-                array(
-                    'user[username]' => 'admin',
-                    'user[name]' => '',
-                    'user[email]' => 'test',
+                    'update_user[name]' => '',
+                    'update_user[email]' => 'test',
                 ),
                 'This value is not a valid email address.',
             ),
@@ -226,7 +216,7 @@ class ConfigControllerTest extends WallabagTestCase
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
-        $form = $crawler->filter('button[id=user_save]')->form();
+        $form = $crawler->filter('button[id=update_user_save]')->form();
 
         $crawler = $client->submit($form, $data);
 
@@ -245,12 +235,11 @@ class ConfigControllerTest extends WallabagTestCase
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
-        $form = $crawler->filter('button[id=user_save]')->form();
+        $form = $crawler->filter('button[id=update_user_save]')->form();
 
         $data = array(
-            'user[username]' => 'admin',
-            'user[name]' => 'new name',
-            'user[email]' => 'admin@wallabag.io',
+            'update_user[name]' => 'new name',
+            'update_user[email]' => 'admin@wallabag.io',
         );
 
         $client->submit($form, $data);
@@ -297,6 +286,14 @@ class ConfigControllerTest extends WallabagTestCase
                     'new_user[email]' => 'wallace@wallace.me',
                 ),
                 'Password should by at least',
+            ),
+            array(
+                array(
+                    'new_user[username]' => 'admin',
+                    'new_user[password]' => 'wallacewallace',
+                    'new_user[email]' => 'wallace@wallace.me',
+                ),
+                'This value is already used',
             ),
         );
     }
