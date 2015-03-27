@@ -1,27 +1,45 @@
 language: php
 
-# use docker-container infra
+# faster builds on docker-container setup
 sudo: false
 
+# cache vendor dirs
+cache:
+    directories:
+        - vendor
+        - $HOME/.composer/cache
+
 php:
-  - 5.4
-  - 5.5
-  - 5.6
-  - hhvm
-  - nightly
+    - 5.4
+    - 5.5
+    - 5.6
+    - hhvm
+    - nightly
 
 matrix:
-  allow_failures:
-    - php: hhvm
-    - php: nightly
+    fast_finish: true
+    allow_failures:
+        - php: hhvm
+        - php: nightly
 
 branches:
-  only:
-    - v2
+    only:
+        - v2
 
+install:
+    - composer self-update
+
+# build coverage only on one build, to speed up results feedbacks
 before_script:
-  - composer self-update
+    - if [[ "$TRAVIS_PHP_VERSION" = "5.6" ]]; then PHPUNIT_FLAGS="--coverage-clover=coverage.clover"; fi;
 
 script:
-  - ant prepare
-  - phpunit --coverage-text
+    - ant prepare
+    - phpunit $PHPUNIT_FLAGS
+
+after_script:
+    - |
+        if [ $TRAVIS_PHP_VERSION = '5.6' ]; then
+            wget https://scrutinizer-ci.com/ocular.phar
+            php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+        fi
