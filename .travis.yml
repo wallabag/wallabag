@@ -1,5 +1,8 @@
 language: php
 
+# use docker-container infra
+sudo: false
+
 php:
   - 5.4
   - 5.5
@@ -11,7 +14,6 @@ branches:
 
 before_script:
   - composer self-update
-  - echo 'date.timezone = "Europe/Paris"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
 script:
   - ant prepare
