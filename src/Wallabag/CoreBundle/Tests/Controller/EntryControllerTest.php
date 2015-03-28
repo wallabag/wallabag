@@ -60,7 +60,7 @@ class EntryControllerTest extends WallabagTestCase
         $form = $crawler->filter('button[type=submit]')->form();
 
         $data = array(
-            'entry[url]' => 'https://www.mailjet.com/blog/mailjet-zapier-integrations-made-easy/',
+            'entry[url]' => 'http://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html',
         );
 
         $client->submit($form, $data);
@@ -70,7 +70,7 @@ class EntryControllerTest extends WallabagTestCase
         $crawler = $client->followRedirect();
 
         $this->assertGreaterThan(1, $alert = $crawler->filter('h2 a')->extract(array('_text')));
-        $this->assertContains('Mailjet', $alert[0]);
+        $this->assertContains('Google', $alert[0]);
     }
 
     public function testArchive()
