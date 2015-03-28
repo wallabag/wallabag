@@ -28,6 +28,8 @@ class ConfigControllerTest extends WallabagTestCase
         $this->assertCount(1, $crawler->filter('button[id=config_save]'));
         $this->assertCount(1, $crawler->filter('button[id=change_passwd_save]'));
         $this->assertCount(1, $crawler->filter('button[id=user_save]'));
+        $this->assertCount(1, $crawler->filter('button[id=new_user_save]'));
+        $this->assertCount(1, $crawler->filter('button[id=rss_config_save]'));
     }
 
     public function testUpdate()
@@ -346,5 +348,129 @@ class ConfigControllerTest extends WallabagTestCase
 
         $this->assertGreaterThan(1, $alert = $crawler->filter('div.messages.success')->extract(array('_text')));
         $this->assertContains('User "wallace" added', $alert[0]);
+    }
+
+    public function testRssUpdateResetToken()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        // reset the token
+        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+        $user = $em
+            ->getRepository('WallabagCoreBundle:User')
+            ->findOneByUsername('admin');
+
+        if (!$user) {
+            $this->markTestSkipped('No user found in db.');
+        }
+
+        $config = $user->getConfig();
+        $config->setRssToken(null);
+        $em->persist($config);
+        $em->flush();
+
+        $crawler = $client->request('GET', '/config');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(array('_text')));
+        $this->assertContains('You need to generate a token first.', $body[0]);
+
+        $client->request('GET', '/generate-token');
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+
+        $crawler = $client->followRedirect();
+
+        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(array('_text')));
+        $this->assertNotContains('You need to generate a token first.', $body[0]);
+    }
+
+    public function testGenerateTokenAjax()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $client->request(
+            'GET',
+            '/generate-token',
+            array(),
+            array(),
+            array('HTTP_X-Requested-With' => 'XMLHttpRequest')
+        );
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $content = json_decode($client->getResponse()->getContent(), true);;
+        $this->assertArrayHasKey('token', $content);
+    }
+
+    public function testRssUpdate()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/config');
+
+        if (500 == $client->getResponse()->getStatusCode()) {
+            var_export($client->getResponse()->getContent());
+            die();
+        }
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $form = $crawler->filter('button[id=rss_config_save]')->form();
+
+        $data = array(
+            'rss_config[rss_limit]' => 12,
+        );
+
+        $client->submit($form, $data);
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+
+        $crawler = $client->followRedirect();
+
+        $this->assertGreaterThan(1, $alert = $crawler->filter('div.messages.success')->extract(array('_text')));
+        $this->assertContains('RSS information updated', $alert[0]);
+    }
+
+    public function dataForRssFailed()
+    {
+        return array(
+            array(
+                array(
+                    'rss_config[rss_limit]' => 0,
+                ),
+                'This value should be 1 or more.',
+            ),
+            array(
+                array(
+                    'rss_config[rss_limit]' => 1000000000000,
+                ),
+                'This will certainly kill the app',
+            ),
+        );
+    }
+
+    /**
+     * @dataProvider dataForRssFailed
+     */
+    public function testRssFailed($data, $expectedMessage)
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/config');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $form = $crawler->filter('button[id=rss_config_save]')->form();
+
+        $crawler = $client->submit($form, $data);
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $this->assertGreaterThan(1, $alert = $crawler->filter('body')->extract(array('_text')));
+        $this->assertContains($expectedMessage, $alert[0]);
     }
 }

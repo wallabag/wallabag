@@ -25,7 +25,7 @@ class RssController extends Controller
             ->findUnreadByUser(
                 $user->getId(),
                 0,
-                $user->getConfig()->getRssLimit() ?: $this->getContainer()->getParameter('rss_limit')
+                $user->getConfig()->getRssLimit() ?: $this->container->getParameter('rss_limit')
             );
 
         return $this->render('WallabagCoreBundle:Entry:entries.xml.twig', array(
@@ -49,7 +49,7 @@ class RssController extends Controller
             ->findArchiveByUser(
                 $user->getId(),
                 0,
-                $user->getConfig()->getRssLimit() ?: $this->getContainer()->getParameter('rss_limit')
+                $user->getConfig()->getRssLimit() ?: $this->container->getParameter('rss_limit')
             );
 
         return $this->render('WallabagCoreBundle:Entry:entries.xml.twig', array(
@@ -73,7 +73,7 @@ class RssController extends Controller
             ->findStarredByUser(
                 $user->getId(),
                 0,
-                $user->getConfig()->getRssLimit() ?: $this->getContainer()->getParameter('rss_limit')
+                $user->getConfig()->getRssLimit() ?: $this->container->getParameter('rss_limit')
             );
 
         return $this->render('WallabagCoreBundle:Entry:entries.xml.twig', array(

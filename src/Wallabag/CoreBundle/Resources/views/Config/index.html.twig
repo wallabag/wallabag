@@ -56,11 +56,15 @@
         <fieldset class="w500p inline">
             <div class="row">
                 <label>Rss links:</label>
-                <ul>
-                    <li><a href="{{ path('unread_rss', {'username': rss.username, 'token': rss.token}) }}">unread</a></li>
-                    <li><a href="{{ path('starred_rss', {'username': rss.username, 'token': rss.token}) }}">fav</a></li>
-                    <li><a href="{{ path('archive_rss', {'username': rss.username, 'token': rss.token}) }}">archives</a></li>
-                </ul>
+                {% if rss.token %}
+                    <ul>
+                        <li><a href="{{ path('unread_rss', {'username': rss.username, 'token': rss.token}) }}">unread</a></li>
+                        <li><a href="{{ path('starred_rss', {'username': rss.username, 'token': rss.token}) }}">fav</a></li>
+                        <li><a href="{{ path('archive_rss', {'username': rss.username, 'token': rss.token}) }}">archives</a></li>
+                    </ul>
+                {% else %}
+                    <strong>You need to generate a token first.</strong>
+                {% endif %}
             </div>
         </fieldset>
 

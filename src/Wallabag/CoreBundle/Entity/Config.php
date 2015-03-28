@@ -35,6 +35,11 @@ class Config
      * @var integer
      *
      * @Assert\NotBlank()
+     * @Assert\Range(
+     *      min = 1,
+     *      max = 100000,
+     *      maxMessage = "This will certainly kill the app"
+     * )
      * @ORM\Column(name="items_per_page", type="integer", nullable=false)
      */
     private $itemsPerPage;
@@ -58,6 +63,11 @@ class Config
      * @var integer
      *
      * @ORM\Column(name="rss_limit", type="integer", nullable=true)
+     * @Assert\Range(
+     *      min = 1,
+     *      max = 100000,
+     *      maxMessage = "This will certainly kill the app"
+     * )
      */
     private $rssLimit;
 

@@ -107,7 +107,7 @@ class ConfigController extends Controller
             $config = new Config($newUser);
             $config->setTheme($this->container->getParameter('theme'));
             $config->setItemsPerPage($this->container->getParameter('items_on_page'));
-            $config->setRssLimit($this->getContainer()->getParameter('rss_limit'));
+            $config->setRssLimit($this->container->getParameter('rss_limit'));
             $config->setLanguage($this->container->getParameter('language'));
 
             $em->persist($config);

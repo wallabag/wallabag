@@ -24,7 +24,7 @@ class ConfigType extends AbstractType
     {
         $builder
             ->add('theme', 'choice', array('choices' => $this->themes))
-            ->add('items_per_page', 'text')
+            ->add('items_per_page')
             ->add('language')
             ->add('save', 'submit')
         ;
