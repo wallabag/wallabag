@@ -26,7 +26,7 @@ class EntryRepository extends EntityRepository
             ->leftJoin('e.user', 'u')
             ->where('e.isArchived = false')
             ->andWhere('u.id =:userId')->setParameter('userId', $userId)
-            ->orderBy('e.createdAt', 'desc')
+            ->orderBy('e.id', 'desc')
             ->getQuery();
 
         $paginator = new Paginator($qb);
@@ -52,7 +52,7 @@ class EntryRepository extends EntityRepository
             ->leftJoin('e.user', 'u')
             ->where('e.isArchived = true')
             ->andWhere('u.id =:userId')->setParameter('userId', $userId)
-            ->orderBy('e.createdAt', 'desc')
+            ->orderBy('e.id', 'desc')
             ->getQuery();
 
         $paginator = new Paginator($qb);
@@ -78,7 +78,7 @@ class EntryRepository extends EntityRepository
             ->leftJoin('e.user', 'u')
             ->where('e.isStarred = true')
             ->andWhere('u.id =:userId')->setParameter('userId', $userId)
-            ->orderBy('e.createdAt', 'desc')
+            ->orderBy('e.id', 'desc')
             ->getQuery();
 
         $paginator = new Paginator($qb);
@@ -111,7 +111,7 @@ class EntryRepository extends EntityRepository
         }
 
         if ('created' === $sort) {
-            $qb->orderBy('e.createdAt', $order);
+            $qb->orderBy('e.id', $order);
         } elseif ('updated' === $sort) {
             $qb->orderBy('e.updatedAt', $order);
         }
