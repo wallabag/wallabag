@@ -5,129 +5,169 @@
 {% block content %}
     <h2>{% trans %}Wallabag configuration{% endtrans %}</h2>
 
-    <form action="{{ path('config') }}" method="post" {{ form_enctype(configForm) }}>
-        {{ form_errors(configForm) }}
+    <form action="{{ path('config') }}" method="post" {{ form_enctype(form.config) }}>
+        {{ form_errors(form.config) }}
 
         <fieldset class="w500p inline">
             <div class="row">
-                {{ form_label(configForm.theme) }}
-                {{ form_errors(configForm.theme) }}
-                {{ form_widget(configForm.theme) }}
+                {{ form_label(form.config.theme) }}
+                {{ form_errors(form.config.theme) }}
+                {{ form_widget(form.config.theme) }}
             </div>
         </fieldset>
 
         <fieldset class="w500p inline">
             <div class="row">
-                {{ form_label(configForm.items_per_page) }}
-                {{ form_errors(configForm.items_per_page) }}
-                {{ form_widget(configForm.items_per_page) }}
+                {{ form_label(form.config.items_per_page) }}
+                {{ form_errors(form.config.items_per_page) }}
+                {{ form_widget(form.config.items_per_page) }}
             </div>
         </fieldset>
 
         <fieldset class="w500p inline">
             <div class="row">
-                {{ form_label(configForm.language) }}
-                {{ form_errors(configForm.language) }}
-                {{ form_widget(configForm.language) }}
+                {{ form_label(form.config.language) }}
+                {{ form_errors(form.config.language) }}
+                {{ form_widget(form.config.language) }}
             </div>
         </fieldset>
 
-        {{ form_rest(configForm) }}
+        {{ form_rest(form.config) }}
+    </form>
+
+    <h2>{% trans %}RSS configuration{% endtrans %}</h2>
+
+    <form action="{{ path('config') }}" method="post" {{ form_enctype(form.rss) }}>
+        {{ form_errors(form.rss) }}
+
+        <fieldset class="w500p inline">
+            <div class="row">
+                <label>Rss token</label>
+                {% if rss.token %}
+                    {{ rss.token }}
+                {% else %}
+                    <em>No token</em>
+                {% endif %}
+                –
+                <a href="{{ path('generate_token') }}">Regenerate ?</a>
+            </div>
+        </fieldset>
+
+        <fieldset class="w500p inline">
+            <div class="row">
+                <label>Rss links:</label>
+                <ul>
+                    <li><a href="{{ path('unread_rss', {'username': rss.username, 'token': rss.token}) }}">unread</a></li>
+                    <li><a href="{{ path('starred_rss', {'username': rss.username, 'token': rss.token}) }}">fav</a></li>
+                    <li><a href="{{ path('archive_rss', {'username': rss.username, 'token': rss.token}) }}">archives</a></li>
+                </ul>
+            </div>
+        </fieldset>
+
+        <fieldset class="w500p inline">
+            <div class="row">
+                {{ form_label(form.rss.rss_limit) }}
+                {{ form_errors(form.rss.rss_limit) }}
+                {{ form_widget(form.rss.rss_limit) }}
+            </div>
+        </fieldset>
+
+        {{ form_rest(form.rss) }}
     </form>
 
     <h2>{% trans %}User information{% endtrans %}</h2>
 
-    <form action="{{ path('config') }}" method="post" {{ form_enctype(userForm) }}>
-        {{ form_errors(userForm) }}
+    <form action="{{ path('config') }}" method="post" {{ form_enctype(form.user) }}>
+        {{ form_errors(form.user) }}
 
         <fieldset class="w500p inline">
             <div class="row">
-                {{ form_label(userForm.username) }}
-                {{ form_errors(userForm.username) }}
-                {{ form_widget(userForm.username) }}
+                {{ form_label(form.user.username) }}
+                {{ form_errors(form.user.username) }}
+                {{ form_widget(form.user.username) }}
             </div>
         </fieldset>
 
         <fieldset class="w500p inline">
             <div class="row">
-                {{ form_label(userForm.name) }}
-                {{ form_errors(userForm.name) }}
-                {{ form_widget(userForm.name) }}
+                {{ form_label(form.user.name) }}
+                {{ form_errors(form.user.name) }}
+                {{ form_widget(form.user.name) }}
             </div>
         </fieldset>
 
         <fieldset class="w500p inline">
             <div class="row">
-                {{ form_label(userForm.email) }}
-                {{ form_errors(userForm.email) }}
-                {{ form_widget(userForm.email) }}
+                {{ form_label(form.user.email) }}
+                {{ form_errors(form.user.email) }}
+                {{ form_widget(form.user.email) }}
             </div>
         </fieldset>
 
-        {{ form_rest(userForm) }}
+        {{ form_rest(form.user) }}
     </form>
 
     <h2>{% trans %}Change your password{% endtrans %}</h2>
 
-    <form action="{{ path('config') }}" method="post" {{ form_enctype(pwdForm) }}>
-        {{ form_errors(pwdForm) }}
+    <form action="{{ path('config') }}" method="post" {{ form_enctype(form.pwd) }}>
+        {{ form_errors(form.pwd) }}
 
         <fieldset class="w500p inline">
             <div class="row">
-                {{ form_label(pwdForm.old_password) }}
-                {{ form_errors(pwdForm.old_password) }}
-                {{ form_widget(pwdForm.old_password) }}
+                {{ form_label(form.pwd.old_password) }}
+                {{ form_errors(form.pwd.old_password) }}
+                {{ form_widget(form.pwd.old_password) }}
             </div>
         </fieldset>
 
         <fieldset class="w500p inline">
             <div class="row">
-                {{ form_label(pwdForm.new_password.first) }}
-                {{ form_errors(pwdForm.new_password.first) }}
-                {{ form_widget(pwdForm.new_password.first) }}
+                {{ form_label(form.pwd.new_password.first) }}
+                {{ form_errors(form.pwd.new_password.first) }}
+                {{ form_widget(form.pwd.new_password.first) }}
             </div>
         </fieldset>
 
         <fieldset class="w500p inline">
             <div class="row">
-                {{ form_label(pwdForm.new_password.second) }}
-                {{ form_errors(pwdForm.new_password.second) }}
-                {{ form_widget(pwdForm.new_password.second) }}
+                {{ form_label(form.pwd.new_password.second) }}
+                {{ form_errors(form.pwd.new_password.second) }}
+                {{ form_widget(form.pwd.new_password.second) }}
             </div>
         </fieldset>
 
-        {{ form_rest(pwdForm) }}
+        {{ form_rest(form.pwd) }}
     </form>
 
     <h2>{% trans %}Add a user{% endtrans %}</h2>
 
-    <form action="{{ path('config') }}" method="post" {{ form_enctype(newUserForm) }}>
-        {{ form_errors(newUserForm) }}
+    <form action="{{ path('config') }}" method="post" {{ form_enctype(form.new_user) }}>
+        {{ form_errors(form.new_user) }}
 
         <fieldset class="w500p inline">
             <div class="row">
-                {{ form_label(newUserForm.username) }}
-                {{ form_errors(newUserForm.username) }}
-                {{ form_widget(newUserForm.username) }}
+                {{ form_label(form.new_user.username) }}
+                {{ form_errors(form.new_user.username) }}
+                {{ form_widget(form.new_user.username) }}
             </div>
         </fieldset>
 
         <fieldset class="w500p inline">
             <div class="row">
-                {{ form_label(newUserForm.password) }}
-                {{ form_errors(newUserForm.password) }}
-                {{ form_widget(newUserForm.password) }}
+                {{ form_label(form.new_user.password) }}
+                {{ form_errors(form.new_user.password) }}
+                {{ form_widget(form.new_user.password) }}
             </div>
         </fieldset>
 
         <fieldset class="w500p inline">
             <div class="row">
-                {{ form_label(newUserForm.email) }}
-                {{ form_errors(newUserForm.email) }}
-                {{ form_widget(newUserForm.email) }}
+                {{ form_label(form.new_user.email) }}
+                {{ form_errors(form.new_user.email) }}
+                {{ form_widget(form.new_user.email) }}
             </div>
         </fieldset>
 
-        {{ form_rest(newUserForm) }}
+        {{ form_rest(form.new_user) }}
     </form>
 {% endblock %}

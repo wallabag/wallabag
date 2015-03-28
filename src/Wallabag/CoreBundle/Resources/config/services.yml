@@ -36,3 +36,10 @@ services:
             - @doctrine
         tags:
             - { name: form.type, alias: forgot_password }
+
+    wallabag_core.param_converter.username_rsstoken_converter:
+        class: Wallabag\CoreBundle\ParamConverter\UsernameRssTokenConverter
+        tags:
+            - { name: request.param_converter, converter: username_rsstoken_converter }
+        arguments:
+            - @doctrine

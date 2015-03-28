@@ -198,6 +198,7 @@ class InstallCommand extends ContainerAwareCommand
         $config = new Config($user);
         $config->setTheme($this->getContainer()->getParameter('theme'));
         $config->setItemsPerPage($this->getContainer()->getParameter('items_on_page'));
+        $config->setRssLimit($this->getContainer()->getParameter('rss_limit'));
         $config->setLanguage($this->getContainer()->getParameter('language'));
 
         $em->persist($config);

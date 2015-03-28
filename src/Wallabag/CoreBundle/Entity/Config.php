@@ -32,12 +32,12 @@ class Config
     private $theme;
 
     /**
-     * @var string
+     * @var integer
      *
      * @Assert\NotBlank()
      * @ORM\Column(name="items_per_page", type="integer", nullable=false)
      */
-    private $items_per_page;
+    private $itemsPerPage;
 
     /**
      * @var string
@@ -46,6 +46,20 @@ class Config
      * @ORM\Column(name="language", type="string", nullable=false)
      */
     private $language;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="rss_token", type="string", nullable=true)
+     */
+    private $rssToken;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="rss_limit", type="integer", nullable=true)
+     */
+    private $rssLimit;
 
     /**
      * @ORM\OneToOne(targetEntity="User", inversedBy="config")
@@ -58,8 +72,6 @@ class Config
     public function __construct(User $user)
     {
         $this->user = $user;
-        $this->items_per_page = 12;
-        $this->language = 'en_US';
     }
 
     /**
@@ -96,26 +108,26 @@ class Config
     }
 
     /**
-     * Set items_per_page
+     * Set itemsPerPage
      *
      * @param  integer $itemsPerPage
      * @return Config
      */
     public function setItemsPerPage($itemsPerPage)
     {
-        $this->items_per_page = $itemsPerPage;
+        $this->itemsPerPage = $itemsPerPage;
 
         return $this;
     }
 
     /**
-     * Get items_per_page
+     * Get itemsPerPage
      *
      * @return integer
      */
     public function getItemsPerPage()
     {
-        return $this->items_per_page;
+        return $this->itemsPerPage;
     }
 
     /**
@@ -162,5 +174,51 @@ class Config
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set rssToken
+     *
+     * @param  string $rssToken
+     * @return Config
+     */
+    public function setRssToken($rssToken)
+    {
+        $this->rssToken = $rssToken;
+
+        return $this;
+    }
+
+    /**
+     * Get rssToken
+     *
+     * @return string
+     */
+    public function getRssToken()
+    {
+        return $this->rssToken;
+    }
+
+    /**
+     * Set rssLimit
+     *
+     * @param  string $rssLimit
+     * @return Config
+     */
+    public function setRssLimit($rssLimit)
+    {
+        $this->rssLimit = $rssLimit;
+
+        return $this;
+    }
+
+    /**
+     * Get rssLimit
+     *
+     * @return string
+     */
+    public function getRssLimit()
+    {
+        return $this->rssLimit;
     }
 }

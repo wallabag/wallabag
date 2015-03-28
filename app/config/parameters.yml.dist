@@ -42,3 +42,4 @@ parameters:
     theme: baggy
     language: en_US
     from_email: no-reply@wallabag.org
+    rss_limit: 50
