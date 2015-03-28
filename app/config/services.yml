@@ -6,6 +6,8 @@ parameters:
     security.validator.user_password.class: Wallabag\CoreBundle\Security\Validator\WallabagUserPasswordValidator
 
 services:
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    # used for tests
+    filesystem_cache:
+        class: Doctrine\Common\Cache\FilesystemCache
+        arguments:
+            - %kernel.cache_dir%/doctrine/metadata

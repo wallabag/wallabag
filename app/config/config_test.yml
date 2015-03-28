@@ -20,3 +20,10 @@ doctrine:
         driver: pdo_sqlite
         path: %kernel.root_dir%/../data/db/wallabag_test.sqlite
         host: localhost
+    orm:
+        metadata_cache_driver:
+            type: service
+            id: filesystem_cache
+        query_cache_driver:
+            type: service
+            id: filesystem_cache
