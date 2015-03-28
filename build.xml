@@ -40,4 +40,11 @@
             <arg value="--env=test"/>
         </exec>
     </target>
+
+    <target name="phpunit" description="Run unit tests with PHPUnit + HTML Coverage">
+        <exec executable="phpunit" failonerror="true">
+            <arg value="--coverage-html"/>
+            <arg value="build/coverage"/>
+        </exec>
+    </target>
 </project>
