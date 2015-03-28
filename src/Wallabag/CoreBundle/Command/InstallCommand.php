@@ -299,7 +299,8 @@ class InstallCommand extends ContainerAwareCommand
     }
 
     /**
-     * Check if the schema is already created
+     * Check if the schema is already created.
+     * If we found at least oen table, it means the schema exists
      *
      * @return boolean
      */
@@ -307,6 +308,6 @@ class InstallCommand extends ContainerAwareCommand
     {
         $schemaManager = $this->getContainer()->get('doctrine')->getManager()->getConnection()->getSchemaManager();
 
-        return $schemaManager->tablesExist(array('entry'));
+        return count($schemaManager->listTableNames()) > 0 ? true : false;
     }
 }

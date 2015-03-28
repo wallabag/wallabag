@@ -75,7 +75,10 @@ doctrine:
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
-        auto_mapping: true
+        entity_managers:
+            default:
+                naming_strategy: wallabag_core.doctrine.prefixed_naming_strategy
+                auto_mapping: true
 
 # Swiftmailer Configuration
 swiftmailer:

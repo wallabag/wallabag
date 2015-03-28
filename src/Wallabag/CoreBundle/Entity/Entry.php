@@ -13,7 +13,7 @@ use JMS\Serializer\Annotation\XmlRoot;
  *
  * @XmlRoot("entry")
  * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\EntryRepository")
- * @ORM\Table(name="entry")
+ * @ORM\Table
  * @ORM\HasLifecycleCallbacks()
  * @Hateoas\Relation("self", href = "expr('/api/entries/' ~ object.getId())")
  */
@@ -121,7 +121,7 @@ class Entry
 
     /**
      * @ORM\ManyToMany(targetEntity="Tag", inversedBy="entries", cascade={"persist"})
-     * @ORM\JoinTable(name="entry_tags")
+     * @ORM\JoinTable
      */
     private $tags;
 

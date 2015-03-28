@@ -43,3 +43,7 @@ services:
             - { name: request.param_converter, converter: username_rsstoken_converter }
         arguments:
             - @doctrine
+
+    wallabag_core.doctrine.prefixed_naming_strategy:
+        class: Wallabag\CoreBundle\Doctrine\Mapping\PrefixedNamingStrategy
+        arguments: [%database_table_prefix%]
