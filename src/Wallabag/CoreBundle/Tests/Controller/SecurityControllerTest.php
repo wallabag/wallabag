@@ -2,11 +2,11 @@
 
 namespace Wallabag\CoreBundle\Tests\Controller;
 
-use Wallabag\CoreBundle\Tests\WallabagTestCase;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
+use Wallabag\CoreBundle\Tests\WallabagCoreTestCase;
 
-class SecurityControllerTest extends WallabagTestCase
+class SecurityControllerTest extends WallabagCoreTestCase
 {
     public function testLogin()
     {

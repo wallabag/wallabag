@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\DependencyInjection\Security\Factory;
+namespace Wallabag\ApiBundle\DependencyInjection\Security\Factory;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;

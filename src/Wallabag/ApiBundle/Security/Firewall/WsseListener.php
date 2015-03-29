@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Security\Firewall;
+namespace Wallabag\ApiBundle\Security\Firewall;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
@@ -8,7 +8,7 @@ use Symfony\Component\Security\Http\Firewall\ListenerInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Security\Core\Authentication\AuthenticationManagerInterface;
-use Wallabag\CoreBundle\Security\Authentication\Token\WsseUserToken;
+use Wallabag\ApiBundle\Security\Authentication\Token\WsseUserToken;
 use Psr\Log\LoggerInterface;
 
 class WsseListener implements ListenerInterface

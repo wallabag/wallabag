@@ -2,9 +2,9 @@
 
 namespace Wallabag\CoreBundle\Tests\Controller;
 
-use Wallabag\CoreBundle\Tests\WallabagTestCase;
+use Wallabag\CoreBundle\Tests\WallabagCoreTestCase;
 
-class ConfigControllerTest extends WallabagTestCase
+class ConfigControllerTest extends WallabagCoreTestCase
 {
     public function testLogin()
     {

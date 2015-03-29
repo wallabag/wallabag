@@ -2,7 +2,7 @@
 
 namespace Wallabag\CoreBundle\Tests\Command;
 
-use Wallabag\CoreBundle\Tests\WallabagTestCase;
+use Wallabag\CoreBundle\Tests\WallabagCoreTestCase;
 use Wallabag\CoreBundle\Command\InstallCommand;
 use Wallabag\CoreBundle\Tests\Mock\InstallCommandMock;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
@@ -12,7 +12,7 @@ use Symfony\Component\Console\Output\NullOutput;
 use Doctrine\Bundle\DoctrineBundle\Command\DropDatabaseDoctrineCommand;
 use Doctrine\Bundle\DoctrineBundle\Command\CreateDatabaseDoctrineCommand;
 
-class InstallCommandTest extends WallabagTestCase
+class InstallCommandTest extends WallabagCoreTestCase
 {
     public static function tearDownAfterClass()
     {
