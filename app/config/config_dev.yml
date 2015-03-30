@@ -44,5 +44,11 @@ monolog:
 assetic:
     use_controller: true
 
-#swiftmailer:
-#    delivery_address: me@example.com
+swiftmailer:
+    # see http://mailcatcher.me/
+    transport: smtp
+    host: 'localhost'
+    port: 1025
+    username: null
+    password: null
+
