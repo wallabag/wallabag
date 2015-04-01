@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\User;
 use Wallabag\CoreBundle\Form\Type\ChangePasswordType;
-use Wallabag\CoreBundle\Form\Type\UserType;
+use Wallabag\CoreBundle\Form\Type\UserInformationType;
 use Wallabag\CoreBundle\Form\Type\NewUserType;
 use Wallabag\CoreBundle\Form\Type\RssType;
 use Wallabag\CoreBundle\Tools\Utils;
@@ -65,7 +65,7 @@ class ConfigController extends Controller
         }
 
         // handle changing user information
-        $userForm = $this->createForm(new UserType(), $user);
+        $userForm = $this->createForm(new UserInformationType(), $user);
         $userForm->handleRequest($request);
 
         if ($userForm->isValid()) {

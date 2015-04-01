@@ -5,12 +5,11 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class UserType extends AbstractType
+class UserInformationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', 'text')
             ->add('name', 'text')
             ->add('email', 'text')
             ->add('save', 'submit')
@@ -26,6 +25,6 @@ class UserType extends AbstractType
 
     public function getName()
     {
-        return 'user';
+        return 'update_user';
     }
 }
