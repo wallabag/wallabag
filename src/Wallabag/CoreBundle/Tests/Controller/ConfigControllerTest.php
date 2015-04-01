@@ -397,7 +397,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         );
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $content = json_decode($client->getResponse()->getContent(), true);;
+        $content = json_decode($client->getResponse()->getContent(), true);
         $this->assertArrayHasKey('token', $content);
     }
 

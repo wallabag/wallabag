@@ -133,7 +133,7 @@ class ConfigController extends Controller
             'rss' => array(
                 'username' => $user->getUsername(),
                 'token' => $config->getRssToken(),
-            )
+            ),
         ));
     }
 

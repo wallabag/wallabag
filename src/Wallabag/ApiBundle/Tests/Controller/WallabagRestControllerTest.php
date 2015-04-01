@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Tests\Controller;
+namespace Wallabag\ApiBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -177,10 +177,10 @@ class WallabagRestControllerTest extends WebTestCase
         $content = json_decode($client->getResponse()->getContent(), true);
 
         $this->assertGreaterThanOrEqual(1, count($content));
-        $this->assertEmpty($content['_embedded']['items']);
-        $this->assertEquals(0, $content['total']);
+        $this->assertNotEmpty($content['_embedded']['items']);
+        $this->assertGreaterThanOrEqual(1, $content['total']);
         $this->assertEquals(1, $content['page']);
-        $this->assertEquals(1, $content['pages']);
+        $this->assertGreaterThanOrEqual(1, $content['pages']);
 
         $this->assertTrue(
             $client->getResponse()->headers->contains(
