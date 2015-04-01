@@ -31,11 +31,11 @@ install:
 
 # build coverage only on one build, to speed up results feedbacks
 before_script:
-    - if [[ "$TRAVIS_PHP_VERSION" = "5.6" ]]; then PHPUNIT_FLAGS="--coverage-clover=coverage.clover"; fi;
+    - if [[ "$TRAVIS_PHP_VERSION" = "5.6" ]]; then PHPUNIT_FLAGS="--coverage-clover=coverage.clover"; else PHPUNIT_FLAGS=""; fi;
 
 script:
     - ant prepare
-    - phpunit $PHPUNIT_FLAGS
+    - phpunit --exclude-group command-doctrine $PHPUNIT_FLAGS
 
 after_script:
     - |

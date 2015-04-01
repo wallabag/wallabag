@@ -7,7 +7,7 @@
    4 = Messages
    5 = Article
    6 = Media queries
-   
+
    ========================================================================== */
 
 html {
@@ -42,17 +42,17 @@ body {
   position: absolute;
   top: 2em;
   left: 50%;
-  margin-left: -55px; 
+  margin-left: -55px;
 }
 
 /* ==========================================================================
    1 = Style Guide
    ========================================================================== */
 
-::selection { 
-  color: #FFF;  
+::selection {
+  color: #FFF;
   background-color: #000;
-} 
+}
 
 .desktopHide {
   display: none;
@@ -62,7 +62,7 @@ body {
   position: fixed;
   z-index: 20;
   top: 0.4em;
-  left: 0.6em; 
+  left: 0.6em;
 }
 
 h2, h3, h4 {
@@ -89,7 +89,7 @@ form fieldset {
   margin: 0;
 }
 
-form input[type="text"], select, form input[type="password"], form input[type="url"], form input[type="email"] {
+form input[type="text"], form input[type="number"], select, form input[type="password"], form input[type="url"], form input[type="email"] {
   border: 1px solid #999;
   padding: 0.5em 1em;
   min-width: 12em;
@@ -149,7 +149,7 @@ form button, input[type="submit"] {
 
 #bookmarklet {
   cursor: move;
-}  
+}
 
 h2:after {
   content: "";
@@ -296,7 +296,7 @@ h2:after {
 /* ==========================================================================
    2 = Layout
    ========================================================================== */
-   
+
 #content {
   margin-top: 5em;
   min-height: 30em;
@@ -653,7 +653,7 @@ a.add-to-wallabag-link-after:after {
 /* ==========================================================================
    3 = Pictos
    ========================================================================== */
-   
+
 @font-face {
   font-family: 'icomoon';
   src:url('../fonts/icomoon.eot?-s0mcsx');
@@ -866,7 +866,7 @@ blockquote {
   color: #FFF;
   text-decoration: none;
 }
-  
+
   #article_toolbar a:hover, #article_toolbar a:focus {
     background-color: #999;
   }
@@ -1052,7 +1052,7 @@ pre code {
   #article_toolbar a {
     padding: 0.3em 0.4em 0.2em;
   }
-  
+
   #display-mode {
     display: none;
   }

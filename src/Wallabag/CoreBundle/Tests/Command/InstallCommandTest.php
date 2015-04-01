@@ -4,6 +4,7 @@ namespace Wallabag\CoreBundle\Tests\Command;
 
 use Wallabag\CoreBundle\Tests\WallabagTestCase;
 use Wallabag\CoreBundle\Command\InstallCommand;
+use Wallabag\CoreBundle\Tests\Mock\InstallCommandMock;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -30,7 +31,7 @@ class InstallCommandTest extends WallabagTestCase
         $this->container = static::$kernel->getContainer();
 
         $application = new Application(static::$kernel);
-        $application->add(new InstallCommand());
+        $application->add(new InstallCommandMock());
 
         $command = $application->find('wallabag:install');
 
@@ -64,7 +65,7 @@ class InstallCommandTest extends WallabagTestCase
         $this->container = static::$kernel->getContainer();
 
         $application = new Application(static::$kernel);
-        $application->add(new InstallCommand());
+        $application->add(new InstallCommandMock());
 
         $command = $application->find('wallabag:install');
 
@@ -97,6 +98,9 @@ class InstallCommandTest extends WallabagTestCase
         $this->assertContains('Droping database, creating database and schema', $tester->getDisplay());
     }
 
+    /**
+     * @group command-doctrine
+     */
     public function testRunInstallCommandWithDatabaseRemoved()
     {
         $this->container = static::$kernel->getContainer();
@@ -148,7 +152,7 @@ class InstallCommandTest extends WallabagTestCase
         $this->container = static::$kernel->getContainer();
 
         $application = new Application(static::$kernel);
-        $application->add(new InstallCommand());
+        $application->add(new InstallCommandMock());
 
         $command = $application->find('wallabag:install');
 
@@ -181,6 +185,9 @@ class InstallCommandTest extends WallabagTestCase
         $this->assertContains('Droping schema and creating schema', $tester->getDisplay());
     }
 
+    /**
+     * @group command-doctrine
+     */
     public function testRunInstallCommandChooseNothing()
     {
         $this->container = static::$kernel->getContainer();
@@ -242,7 +249,7 @@ class InstallCommandTest extends WallabagTestCase
         $this->container = static::$kernel->getContainer();
 
         $application = new Application(static::$kernel);
-        $application->add(new InstallCommand());
+        $application->add(new InstallCommandMock());
 
         $command = $application->find('wallabag:install');
 

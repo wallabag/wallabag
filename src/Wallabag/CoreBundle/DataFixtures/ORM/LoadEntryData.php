@@ -67,6 +67,26 @@ class LoadEntryData extends AbstractFixture implements OrderedFixtureInterface
 
         $this->addReference('entry4', $entry4);
 
+        $entry5 = new Entry($this->getReference('admin-user'));
+        $entry5->setUrl('http://0.0.0.0');
+        $entry5->setTitle('test title entry5');
+        $entry5->setContent('This is my content /o/');
+        $entry5->setStarred(true);
+
+        $manager->persist($entry5);
+
+        $this->addReference('entry5', $entry5);
+
+        $entry6 = new Entry($this->getReference('admin-user'));
+        $entry6->setUrl('http://0.0.0.0');
+        $entry6->setTitle('test title entry6');
+        $entry6->setContent('This is my content /o/');
+        $entry6->setArchived(true);
+
+        $manager->persist($entry6);
+
+        $this->addReference('entry6', $entry6);
+
         $manager->flush();
     }
 

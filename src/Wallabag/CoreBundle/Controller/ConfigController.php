@@ -5,11 +5,14 @@ namespace Wallabag\CoreBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\User;
 use Wallabag\CoreBundle\Form\Type\ChangePasswordType;
 use Wallabag\CoreBundle\Form\Type\UserType;
 use Wallabag\CoreBundle\Form\Type\NewUserType;
+use Wallabag\CoreBundle\Form\Type\RssType;
+use Wallabag\CoreBundle\Tools\Utils;
 
 class ConfigController extends Controller
 {
@@ -77,6 +80,22 @@ class ConfigController extends Controller
             return $this->redirect($this->generateUrl('config'));
         }
 
+        // handle rss information
+        $rssForm = $this->createForm(new RssType(), $config);
+        $rssForm->handleRequest($request);
+
+        if ($rssForm->isValid()) {
+            $em->persist($config);
+            $em->flush();
+
+            $this->get('session')->getFlashBag()->add(
+                'notice',
+                'RSS information updated'
+            );
+
+            return $this->redirect($this->generateUrl('config'));
+        }
+
         // handle adding new user
         $newUser = new User();
         $newUserForm = $this->createForm(new NewUserType(), $newUser);
@@ -88,6 +107,7 @@ class ConfigController extends Controller
             $config = new Config($newUser);
             $config->setTheme($this->container->getParameter('theme'));
             $config->setItemsPerPage($this->container->getParameter('items_on_page'));
+            $config->setRssLimit($this->container->getParameter('rss_limit'));
             $config->setLanguage($this->container->getParameter('language'));
 
             $em->persist($config);
@@ -103,11 +123,41 @@ class ConfigController extends Controller
         }
 
         return $this->render('WallabagCoreBundle:Config:index.html.twig', array(
-            'configForm' => $configForm->createView(),
-            'pwdForm' => $pwdForm->createView(),
-            'userForm' => $userForm->createView(),
-            'newUserForm' => $newUserForm->createView(),
+            'form' => array(
+                'config' => $configForm->createView(),
+                'rss' => $rssForm->createView(),
+                'pwd' => $pwdForm->createView(),
+                'user' => $userForm->createView(),
+                'new_user' => $newUserForm->createView(),
+            ),
+            'rss' => array(
+                'username' => $user->getUsername(),
+                'token' => $config->getRssToken(),
+            )
         ));
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @Route("/generate-token", name="generate_token")
+     *
+     * @return JsonResponse
+     */
+    public function generateTokenAction(Request $request)
+    {
+        $config = $this->getConfig();
+        $config->setRssToken(Utils::generateToken());
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($config);
+        $em->flush();
+
+        if ($request->isXmlHttpRequest()) {
+            return new JsonResponse(array('token' => $config->getRssToken()));
+        }
+
+        return $request->headers->get('referer') ? $this->redirect($request->headers->get('referer')) : $this->redirectToRoute('config');
     }
 
     /**
