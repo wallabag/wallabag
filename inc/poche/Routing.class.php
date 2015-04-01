@@ -15,6 +15,7 @@ class Routing
     protected $view;
     protected $action;
     protected $id;
+    protected $autoclose;
     protected $url;
     protected $file;
     protected $defaultVars = array();
@@ -111,9 +112,7 @@ class Routing
             $tag_id = (isset($_GET['tag_id']) ? intval($_GET['tag_id']) : 0);
             $limit = (isset($_GET['limit']) ? intval($_GET['limit']) : 0);
             $this->wallabag->generateFeeds($_GET['token'], filter_var($_GET['user_id'],FILTER_SANITIZE_NUMBER_INT), $tag_id, $_GET['type'], $limit);
-        } //elseif (ALLOW_REGISTER && isset($_GET['register'])) {
-            //$this->wallabag->register
-        //}
+        }
         
         //allowed ONLY to logged in user
         if (\Session::isLogged() === true) 

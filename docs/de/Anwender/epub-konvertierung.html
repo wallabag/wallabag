@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>wallabag - EPUB-Konvertierung</title>
+
+        <link rel="stylesheet" href="http://doc.wallabag.org/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://doc.wallabag.org/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://doc.wallabag.org/css/highlight.tomorrow-night.css">
+        <link rel="stylesheet" href="http://doc.wallabag.org/css/main.css">
+    </head>
+    <body>
+
+        <header class="navbar navbar-default navbar-fixed-top">
+
+            <a class="navbar-brand" href="http://doc.wallabag.org/">
+                wallabag
+                <small class="hidden-xs hidden-sm">
+                    EPUB-Konvertierung
+                </small>
+            </a>
+            <a href="http://doc.wallabag.org/en">EN</a> - <a href="http://doc.wallabag.org/fr">FR</a> - <a href="http://doc.wallabag.org/de">DE</a> - <a href="http://doc.wallabag.org/ru">RU</a>
+
+            
+        </header>
+
+        <main class="container-fluid">
+            <div class="row">
+
+                
+                    <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
+
+                                                                                                                                                                                            <ul class="nav nav-pills nav-stacked">
+                                    
+                                    <h4 class="text-muted">
+                                        
+                                    </h4>
+
+                                        <ul class="nav nav-pills nav-stacked">
+                                                                                    <li class="test ">
+                                                <a href="http://doc.wallabag.org/de/index.html">
+                                                   erste Schritte
+                                                </a>
+                                            </li>
+                                                                                    <li class="test ">
+                                                <a href="http://doc.wallabag.org/de/wallabag_unterstuetzen.html">
+                                                   wallabag unterstuetzen
+                                                </a>
+                                            </li>
+                                                                                </ul>
+                                    
+                                    <h4 class="text-muted">
+                                        Administrator
+                                    </h4>
+
+                                        <ul class="nav nav-pills nav-stacked">
+                                                                                    <li class="test ">
+                                                <a href="http://doc.wallabag.org/de/Administrator/herunterladen_und_installieren.html">
+                                                   herunterladen und installieren
+                                                </a>
+                                            </li>
+                                                                                </ul>
+                                    
+                                    <h4 class="text-muted">
+                                        User
+                                    </h4>
+
+                                        <ul class="nav nav-pills nav-stacked">
+                                                                                    <li class="test ">
+                                                <a href="http://doc.wallabag.org/de/Anwender/den_ersten_artikel_speichern.html">
+                                                   Den ersten Artikel speichern
+                                                </a>
+                                            </li>
+                                                                                    <li class="test ">
+                                                <a href="http://doc.wallabag.org/de/Anwender/artikel_lesen.html">
+                                                   Artikel lesen
+                                                </a>
+                                            </li>
+                                                                                    <li class="test ">
+                                                <a href="http://doc.wallabag.org/de/Anwender/versteckte_einstellungen.html">
+                                                   Versteckte einstellungen
+                                                </a>
+                                            </li>
+                                                                                    <li class="test ">
+                                                <a href="http://doc.wallabag.org/de/Anwender/wallabag_konfigurieren.html">
+                                                   wallabag konfigurieren
+                                                </a>
+                                            </li>
+                                                                                    <li class="test active">
+                                                <a href="http://doc.wallabag.org/de/Anwender/epub-konvertierung.html">
+                                                   ePub conversion
+                                                </a>
+                                            </li>
+                                                                                    <li class="test ">
+                                                <a href="http://doc.wallabag.org/de/Anwender/ein_artikel_wird_nicht_korrekt_angezeigt.html">
+                                                   Ein Artikel wird nicht korrekt angezeigt
+                                                </a>
+                                            </li>
+                                                                                    <li class="test ">
+                                                <a href="http://doc.wallabag.org/de/Anwender/framabag.html">
+                                                   Framabag Account erstellen
+                                                </a>
+                                            </li>
+                                                                                </ul>
+                                                                    </ul>
+                                                                                                        
+                    </nav>
+
+                
+                <section class="col-lg-10">
+                    <h1 id="e-book-im-epub-format-erstellen">E-Book im EPUB-Format erstellen</h1>
+<p>Damit die gespeicherten Artikel auch bei langen Winterabenden unter dem Leselicht genossen werden können, kann wallabag sie in ein E-Book im EPUB-Format umwandeln.</p>
+<h2 id="warnung">Warnung</h2>
+<p>Bitte beachte jedoch, dass das Erstellen der EPUB-Datei sehr ressourcenintensiv für den Server, auf dem wallabag installiert ist, sein kann.
+Es hängt von der Anzahl der Elemente und deren Länge ab. Daher ist es empfehlenswert, keine übermäßig großen E-Books zu erstellen, sofern dies nicht erforderlich ist.</p>
+<h2 id="wo-kann-ich-meine-artikel-konvertieren">Wo kann ich meine Artikel konvertieren?</h2>
+<p>Sie können Ihre Artikel aus verschiedenen Orten in wallabag konvertieren:</p>
+<ul>
+<li>Bei dem Lesen eines Artikel: wallabag wird nur diesen einen Artikel konvertieren.</li>
+<li>Bei einer Artikelliste (ungelesen, Favoriten, Archiv): Alle Artikel aus dieser Kategorie werden konvertiert.</li>
+<li>Aus der Suche heraus: Am Ende der Seite ist ein Link, der alle Suchergebnisse konvertiert.</li>
+<li>Auf der Konfigurationsseite: Alle Artikel, egal welche Kategorie, können hier in ein E-Book konvertiert werden.</li>
+</ul>
+<p>TODO Calibre mit wallabag verwenden</p>
+                </section>
+
+            </div>
+        </main>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="http://yandex.st/highlightjs/7.5/highlight.min.js"></script>
+
+        <script>
+            $(function() {
+                $("section>h1").wrap('<div class="page-header" />');
+                // Syntax highlighting
+                hljs.initHighlightingOnLoad();
+            });
+        </script>
+
+    </body>
+</html>

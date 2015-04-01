@@ -1,7 +1,6 @@
 FROM    debian:jessie
 
 
-
 RUN     apt-get -qq update && \
         DEBIAN_FRONTEND=noninteractive apt-get install -y curl apache2 php5 php5-xdebug php5-sqlite php5-pgsql php5-mysql php5-gd php5-curl php5-tidy&& \
         apt-get clean -y && \
@@ -26,4 +25,4 @@ RUN     chown www-data: -R assets cache db inc/poche install
 
 EXPOSE  80
 
-CMD     apache2ctl -DFOREGROUND -e info
+CMD     apache2ctl -DFOREGROUND
