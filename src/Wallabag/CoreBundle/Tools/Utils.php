@@ -22,6 +22,7 @@ class Utils
             $token = substr(base64_encode(uniqid(mt_rand(), true)), 0, 20);
         }
 
-        return str_replace('+', '', $token);
+        // remove character which can broken the url
+        return str_replace(array('+', '/'), '', $token);
     }
 }
