@@ -12,7 +12,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Tag
  *
  * @XmlRoot("tag")
- * @ORM\Table(name="tag")
+ * @ORM\Table
  * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\TagRepository")
  * @ExclusionPolicy("all")
  */

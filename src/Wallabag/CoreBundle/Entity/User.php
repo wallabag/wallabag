@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation\Expose;
 /**
  * User
  *
- * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\UserRepository")
+ * @ORM\Table
  * @ORM\HasLifecycleCallbacks()
  * @ExclusionPolicy("all")
  */
