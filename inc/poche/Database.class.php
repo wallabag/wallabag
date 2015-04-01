@@ -411,13 +411,45 @@ class Database {
 
         return $count;
     }
-    public function getRandomId($user_id) {
+    public function getRandomId($user_id, $view) {
         $random = (STORAGE == 'mysql') ? 'RAND()' : 'RANDOM()';
-        $sql = "SELECT id FROM entries WHERE user_id=? ORDER BY ". $random . " LIMIT 1";
-        $params = array($user_id);
+        switch ($view) {
+            case 'archive': 
+                $sql = "SELECT id FROM entries WHERE user_id=? AND is_read=? ORDER BY ". $random . " LIMIT 1";
+                $params = array($user_id,1);
+                break;
+            case 'fav':
+                $sql = "SELECT id FROM entries WHERE user_id=? AND is_fav=? ORDER BY ". $random . " LIMIT 1";
+                $params = array($user_id,1);
+                break;
+            default:
+                $sql = "SELECT id FROM entries WHERE user_id=? AND is_read=? ORDER BY ". $random . " LIMIT 1";
+                $params = array($user_id,0);
+                break;
+        }
         $query = $this->executeQuery($sql, $params);
         $id = $query->fetchAll();
 
+        return $id;
+    }
+
+    public function getPreviousArticle($id, $user_id) 
+    {
+        $sql = "SELECT id FROM entries WHERE id = (SELECT max(id) FROM entries WHERE id < ? AND is_read=0) AND user_id=? AND is_read=0";
+        $params = array($id, $user_id);
+        $query = $this->executeQuery($sql, $params);
+        $id_entry = $query->fetchAll();
+        $id = $id_entry[0][0];
+        return $id;
+    }
+
+    public function getNextArticle($id, $user_id) 
+    {
+        $sql = "SELECT id FROM entries WHERE id = (SELECT min(id) FROM entries WHERE id > ? AND is_read=0) AND user_id=? AND is_read=0";
+        $params = array($id, $user_id);
+        $query = $this->executeQuery($sql, $params);
+        $id_entry = $query->fetchAll();
+        $id = $id_entry[0][0];
         return $id;
     }
 

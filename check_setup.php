@@ -6,7 +6,7 @@ if (! is_writable('cache')) {
 }
 
 // install folder still present, need to install wallabag
-if (is_dir('install')) {
+if (is_file('install/index.php')) {
     require('install/index.php');
     exit;
 }

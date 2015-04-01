@@ -96,7 +96,6 @@ class WallabagEpub extends WallabagEBooks
         $bookEnd = "</body>\n</html>\n";
 
         $log = new Logger("wallabag", TRUE);
-        $fileDir = CACHE;
 
         $book = new EPub(EPub::BOOK_VERSION_EPUB3, DEBUG_POCHE);
         $log->logLine("new EPub()");
@@ -121,8 +120,12 @@ class WallabagEpub extends WallabagEBooks
         $book->addDublinCoreMetadata(DublinCore::CONTRIBUTOR, "PHP");
         $book->addDublinCoreMetadata(DublinCore::CONTRIBUTOR, "wallabag");
 
-        $cssData = "body {\n margin-left: .5em;\n margin-right: .5em;\n text-align: justify;\n}\n\np {\n font-family: serif;\n font-size: 10pt;\n text-align: justify;\n text-indent: 1em;\n margin-top: 0px;\n margin-bottom: 1ex;\n}\n\nh1, h2 {\n font-family: sans-serif;\n font-style: italic;\n text-align: center;\n background-color: #6b879c;\n color: white;\n width: 100%;\n}\n\nh1 {\n margin-bottom: 2px;\n}\n\nh2 {\n margin-top: -2px;\n margin-bottom: 2px;\n}\n";
-
+        /* 
+        * Line not used but planned to be used
+	*        
+        *$cssData = "body {\n margin-left: .5em;\n margin-right: .5em;\n text-align: justify;\n}\n\np {\n font-family: serif;\n font-size: 10pt;\n text-align: justify;\n text-indent: 1em;\n margin-top: 0px;\n margin-bottom: 1ex;\n}\n\nh1, h2 {\n font-family: sans-serif;\n font-style: italic;\n text-align: center;\n background-color: #6b879c;\n color: white;\n width: 100%;\n}\n\nh1 {\n margin-bottom: 2px;\n}\n\nh2 {\n margin-top: -2px;\n margin-bottom: 2px;\n}\n";
+	*/
+	
         $log->logLine("Add Cover");
 
         $fullTitle = "<h1> " . $this->bookTitle . "</h1>\n";
@@ -180,8 +183,6 @@ class WallabagMobi extends WallabagEBooks
         $mobi = new MOBI();
         $content = new MOBIFile();
 
-        $messages = new Messages(); // for later
-        
         Tools::logm('Filling metadata for Mobi...');
 
         $content->set("title", $this->bookTitle);
@@ -243,10 +244,9 @@ class WallabagPDF extends WallabagEbooks
 
         $pdf->writeHTMLCell(0, 0, '', '', $intro, 0, 1, 0, true, '', true);
 
-        $i = 1;
         Tools::logm('Adding actual content...');
         foreach ($this->entries as $item) {
-        	$tags = $this->wallabag->store->retrieveTagsByEntry($entry['id']);
+        	$tags = $this->wallabag->store->retrieveTagsByEntry($item['id']);
         	foreach ($tags as $tag) {
                 $pdf->SetKeywords($tag['value']);
             }
@@ -260,7 +260,7 @@ class WallabagPDF extends WallabagEbooks
         $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
         
         
-        $pdf->Output($this->bookFileName . '.pdf', 'FD');
+        $pdf->Output('cache/' . $this->bookFileName . '.pdf', 'FD');
         }
         catch (Exception $e) {
             Tools::logm('TCPDF has encountered an error : '.$e->getMessage());

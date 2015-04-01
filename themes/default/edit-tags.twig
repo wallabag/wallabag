@@ -19,7 +19,7 @@
 {% trans "no tags" %}
 {% endif %}
 <ul>
-{% for tag in tags %}<li>{{ tag.value }} <a href="./?action=remove_tag&amp;tag_id={{ tag.id }}&amp;id={{ entry_id }}">✘</a></li>{% endfor %}
+{% for tag in tags %}<li><span class="alreadytagged">{{ tag.value }}</span> <a href="./?action=remove_tag&amp;tag_id={{ tag.id }}&amp;id={{ entry_id }}">✘</a></li>{% endfor %}
 </ul>
 <form method="post" action="./?action=add_tag" id="editTags">
     <input type="hidden" name="entry_id" value="{{ entry_id }}" />
@@ -30,6 +30,7 @@
     {% trans "You can enter multiple tags, separated by commas." %}</p>
 
 </form>
-<br>
+All existing tags :
+<ul id="tagcloud">{% for eachtag in alltags %}<li class="suggestedtag {{ eachtag.cssclass }}">{{ eachtag.value }}</li>{% endfor %}</ul>
 <a href="./?view=view&id={{ entry_id }}">&laquo; {% trans "return to article" %}</a>
 {% endblock %}

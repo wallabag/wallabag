@@ -200,27 +200,34 @@ class Poche
 
                 //search for possible duplicate
                 $duplicate = NULL;
-                $duplicate = $this->store->retrieveOneByURL($url->getUrl(), $this->user->getId());
+                $clean_url = $url->getUrl();
 
-                $last_id = $this->store->add($url->getUrl(), $title, $body, $this->user->getId());
+                // Clean URL to remove parameters from feedburner and all this stuff. Taken from Shaarli.
+                $i=strpos($clean_url,'&utm_source='); if ($i!==false) $clean_url=substr($clean_url,0,$i);
+                $i=strpos($clean_url,'?utm_source='); if ($i!==false) $clean_url=substr($clean_url,0,$i);
+                $i=strpos($clean_url,'#xtor=RSS-'); if ($i!==false) $clean_url=substr($clean_url,0,$i);
+
+                $duplicate = $this->store->retrieveOneByURL($clean_url, $this->user->getId());
+
+                $last_id = $this->store->add($clean_url, $title, $body, $this->user->getId());
                 if ( $last_id ) {
-                    Tools::logm('add link ' . $url->getUrl());
+                    Tools::logm('add link ' . $clean_url);
                     if (DOWNLOAD_PICTURES) {
-                        $content = Picture::filterPicture($body, $url->getUrl(), $last_id);
+                        $content = Picture::filterPicture($body, $clean_url, $last_id);
                         Tools::logm('updating content article');
                         $this->store->updateContent($last_id, $content, $this->user->getId());
                     }
 
                     if ($duplicate != NULL) {
                         // duplicate exists, so, older entry needs to be deleted (as new entry should go to the top of list), BUT favorite mark and tags should be preserved
-                        Tools::logm('link ' . $url->getUrl() . ' is a duplicate');
+                        Tools::logm('link ' . $clean_url . ' is a duplicate');
                         // 1) - preserve tags and favorite, then drop old entry
                         $this->store->reassignTags($duplicate['id'], $last_id);
                         if ($duplicate['is_fav']) {
                           $this->store->favoriteById($last_id, $this->user->getId());
                         }
                         if ($this->store->deleteById($duplicate['id'], $this->user->getId())) {
-                          Tools::logm('previous link ' . $url->getUrl() .' entry deleted');
+                          Tools::logm('previous link ' . $clean_url .' entry deleted');
                         }
                     }
 
@@ -235,7 +242,7 @@ class Poche
                 }
                 else {
                     $this->messages->add('e', _('error during insertion : the link wasn\'t added'));
-                    Tools::logm('error during insertion : the link wasn\'t added ' . $url->getUrl());
+                    Tools::logm('error during insertion : the link wasn\'t added ' . $clean_url);
                 }
 
                 if ($autoclose == TRUE) {
@@ -303,10 +310,15 @@ class Poche
                 if ( Tools::isAjaxRequest() ) {
                   echo 1;
                   exit;
-                }
-                else {
+                } else {
                   Tools::redirect();
                 }
+                break;
+            case 'archive_and_next' :
+                $nextid = $this->store->getPreviousArticle($id, $this->user->getId());
+                $this->store->archiveById($id, $this->user->getId());
+                Tools::logm('archive link #' . $id);
+                Tools::redirect('?view=view&id=' . $nextid);
                 break;
             case 'archive_all' :
                 $this->store->archiveAll($this->user->getId());
@@ -394,8 +406,9 @@ class Poche
             /* For some unknown reason I can't get displayView() to work here (it redirects to home view afterwards). So here's a dirty fix which redirects directly to URL */
             case 'random':
                 Tools::logm('get a random article');
-                if ($this->store->getRandomId($this->user->getId())) {
-                    $id_array = $this->store->getRandomId($this->user->getId());
+                $view = $_GET['view'];
+                if ($this->store->getRandomId($this->user->getId(),$view)) {
+                    $id_array = $this->store->getRandomId($this->user->getId(),$view);
                     $id = $id_array[0];
                     Tools::redirect('?view=view&id=' . $id[0]);
                     Tools::logm('got the article with id ' . $id[0]);
@@ -453,9 +466,31 @@ class Poche
                     Tools::redirect();
                 }
                 $tags = $this->store->retrieveTagsByEntry($id);
+                $all_tags = $this->store->retrieveAllTags($this->user->getId());
+                $maximus = 0;
+                foreach ($all_tags as $eachtag) { // search for the most times a tag is present
+                    if ($eachtag["entriescount"] > $maximus) $maximus = $eachtag["entriescount"];
+                }
+                foreach ($all_tags as $key => $eachtag) { // get the percentage of presence of each tag
+                    $percent = floor(($eachtag["entriescount"] / $maximus) * 100);
+
+                    if ($percent < 20): // assign a css class, depending on the number of entries count
+                        $cssclass = 'smallesttag';
+                    elseif ($percent >= 20 and $percent < 40):
+                        $cssclass = 'smalltag';
+                    elseif ($percent >= 40 and $percent < 60):
+                        $cssclass = 'mediumtag';
+                    elseif ($percent >= 60 and $percent < 80):
+                        $cssclass = 'largetag';
+                    else:
+                        $cssclass = 'largesttag';
+                    endif;
+                    $all_tags[$key]['cssclass'] = $cssclass;
+                }
                 $tpl_vars = array(
                     'entry_id' => $id,
                     'tags' => $tags,
+                    'alltags' => $all_tags,
                     'entry' => $entry,
                 );
                 break;
@@ -509,6 +544,20 @@ class Poche
                         $flattr->checkItem($entry['url'], $entry['id']);
                     }
                     
+                    # previous and next
+                    $previous = FALSE;
+                    $previous_id = $this->store->getPreviousArticle($id, $this->user->getId());
+                    $next = FALSE;
+                    $next_id = $this->store->getNextArticle($id, $this->user->getId());
+
+                    if ($this->store->retrieveOneById($previous_id, $this->user->getId())) {
+                        $previous = TRUE;
+                    }
+                    if ($this->store->retrieveOneById($next_id, $this->user->getId())) {
+                        $next = TRUE;
+                    }
+                    $navigate = array('previous' => $previous, 'previousid' => $previous_id, 'next' => $next, 'nextid' => $next_id);
+
                     # tags
                     $tags = $this->store->retrieveTagsByEntry($entry['id']);
 
@@ -516,7 +565,8 @@ class Poche
                         'entry' => $entry,
                         'content' => $content,
                         'flattr' => $flattr,
-                        'tags' => $tags
+                        'tags' => $tags,
+                        'navigate' => $navigate
                     );
                 }
                 else {
@@ -529,6 +579,7 @@ class Poche
                     'page_links' => '',
                     'nb_results' => '',
                     'listmode' => (isset($_COOKIE['listmode']) ? true : false),
+                    'view' => $view,
                 );
 
                 //if id is given - we retrieve entries by tag: id is tag id

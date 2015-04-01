@@ -20,13 +20,23 @@
         <dd><a href="https://github.com/wallabag/wallabag/graphs/contributors">{% trans "on Github" %}</a></dd>
 
         <dt>{% trans "Bug reports" %}</dt>
-        <dd><a href="http://support.wallabag.org">{% trans "On our support website" %}</a> {% trans "or" %} <a href="https://github.com/wallabag/wallabag/issues">{% trans "on Github" %}</a></dd>
+        <dd><a href="http://support.wallabag.org">{% trans "On our support website" %}</a>{% trans " or " %}<a href="https://github.com/wallabag/wallabag/issues">{% trans "on Github" %}</a></dd>
 
         <dt>{% trans "License" %}</dt>
         <dd><a href="http://en.wikipedia.org/wiki/MIT_License">MIT</a></dd>
 
         <dt>{% trans "Version" %}</dt>
         <dd>{{ constant('POCHE') }}</dd>
+    </dl>
+
+    <h2>{% trans "Getting help" %}</h2>
+    
+    <dl>
+        <dt>{% trans "Documentation" %}</dt>
+        <dd>{% trans %}<a href="docs/">Offline documentation</a> and <a href="https://doc.wallabag.org/">online documentation</a> (up to date){% endtrans %}</dd>
+        
+        <dt>{% trans "Support" %}</dt>
+        <dd><a href="http://support.wallabag.org/">http://support.wallabag.org/</a></dd>
     </dl>
 
     <h2>{% trans "Helping wallabag" %}</h2>
