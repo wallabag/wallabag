@@ -35,7 +35,7 @@ before_script:
 
 script:
     - ant prepare
-    - phpunit --exclude-group command-doctrine $PHPUNIT_FLAGS
+    - phpunit --exclude-group command-doctrine --debug $PHPUNIT_FLAGS
 
 after_script:
     - |
