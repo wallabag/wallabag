@@ -144,16 +144,43 @@ else if (isset($_POST['install'])) {
                 $sql_structure = file_get_contents('install/postgres.sql');
             }
             // create database structure
-            $query = $handle->exec($sql_structure);
+            if (!$handle) {
+            	$continue = false;
+                $errors[] = "Couldn't connect to your database server. Please check credentials.";
+            } else {
+	            $query = $handle->exec($sql_structure);
 
-            $usertest = executeQuery($handle,"SELECT * from users WHERE username = ?", array($username));
-            if (!empty($usertest)) {
-                $continue = false;
-                $errors[] = "An user already exists with this username in database.";
-            }
+	            $usertest = executeQuery($handle,"SELECT * from users WHERE username = ?", array($username));
+	            if (!empty($usertest)) {
+	                $continue = false;
+	                $errors[] = "An user already exists with this username in database.";
+	            }
+        }
 
         } catch (PDOException $e) {
-            $errors[] = $e->getMessage();
+        	/* Error codes :
+        	/ 	7 : PostgreSQL issues
+        	/ 	1045 : Access denied to the user : user doesn't exists        		   
+        	/ 	1044 : Access denied to the user : user doesn't have the rights to connect to this database
+        	/	2005 : Unknown database server
+			*/
+        	switch ($e->getCode()) {
+        		case 7:
+        			$errors[] = "PostgreSQL has encountered an issue : " . $e->getMessage();
+        			break;
+        		case 1045:
+        			$errors[] = "The password for this user is incorrect, or this user doesn't exist.";
+        			break;
+        		case 1044:
+        			$errors[] = "The user isn't allowed to use this database.";
+        			break;
+        		case 2005:
+        			$errors[] = "The server can't be reached.";
+        			break;
+        		default:
+        			$errors[] = "A error happened while connecting to your database : " . $e->getMessage();
+        			break;
+        	}
             $continue = false;
         }
         }
