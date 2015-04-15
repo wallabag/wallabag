@@ -11,7 +11,7 @@ class UserInformationType extends AbstractType
     {
         $builder
             ->add('name', 'text')
-            ->add('email', 'text')
+            ->add('email', 'email')
             ->add('save', 'submit')
         ;
     }

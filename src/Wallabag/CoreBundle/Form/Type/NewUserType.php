@@ -11,7 +11,7 @@ class NewUserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', 'text')
+            ->add('username', 'text', array('required' => true))
             ->add('password', 'password', array(
                 'constraints' => array(
                     new Constraints\Length(array(
@@ -21,7 +21,7 @@ class NewUserType extends AbstractType
                     new Constraints\NotBlank(),
                 ),
             ))
-            ->add('email', 'text')
+            ->add('email', 'email')
             ->add('save', 'submit')
         ;
     }
