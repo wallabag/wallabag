@@ -10,7 +10,7 @@ class UserInformationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'text', array('required' => true))
+            ->add('name', 'text')
             ->add('email', 'email')
             ->add('save', 'submit')
         ;
