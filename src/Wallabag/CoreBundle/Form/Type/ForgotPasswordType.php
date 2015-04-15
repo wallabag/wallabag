@@ -20,6 +20,7 @@ class ForgotPasswordType extends AbstractType
     {
         $builder
             ->add('email', 'email', array(
+                'required' => true,
                 'constraints' => array(
                     new Constraints\Email(),
                     new Constraints\NotBlank(),

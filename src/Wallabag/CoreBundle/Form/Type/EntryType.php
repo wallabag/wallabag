@@ -10,7 +10,7 @@ class EntryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('url', 'url')
+            ->add('url', 'url', array('required' => true))
             ->add('save', 'submit')
         ;
     }
