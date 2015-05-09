@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.7.5\n"
 
 msgid "wallabag, a read it later open source system"
 msgstr "wallabag, a read it later open source system"
@@ -319,6 +319,9 @@ msgstr "Add tags:"
 
 msgid "no tags"
 msgstr "no tags"
+
+msgid "No tags found. You must view an article to set tags for it."
+msgstr "No tags found. You must view an article to set tags for it."
 
 msgid "The tag has been applied successfully"
 msgstr "The tag has been applied successfully"
