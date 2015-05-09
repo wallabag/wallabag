@@ -16,6 +16,26 @@ $email = "";
 
 require_once('install_functions.php');
 
+// Start by destroying session to avoid wrong logins from previous installations
+// cookie part
+$cookiedir = '';
+if (dirname($_SERVER['SCRIPT_NAME'])!='/') {
+    $cookiedir = dirname($_SERVER["SCRIPT_NAME"]).'/';
+}
+
+if (isset($_SERVER['HTTP_COOKIE'])) {
+    $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
+    foreach($cookies as $cookie) {
+        $parts = explode('=', $cookie);
+        $name = trim($parts[0]);
+        setcookie($name, '', time()-1000);
+        setcookie($name, '', time()-1000, $cookiedir);
+    }
+}
+// session part
+session_destroy();
+
+
 if (isset($_GET['clean'])) {
     if (is_dir('install')){
         delTree('install', true);
