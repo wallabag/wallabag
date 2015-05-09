@@ -1,5 +1,5 @@
 function navigateKeyboard(leftURL, rightURL) {
-  window.addEventListener("keypress", function (event) {
+  window.addEventListener("keydown", function (event) {
     var key = event.which || event.keyCode; // event.keyCode is used for IE8 and earlier versions
     switch (key) {
       case 37:
