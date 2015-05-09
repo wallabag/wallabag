@@ -33,6 +33,9 @@ if (isset($_SERVER['HTTP_COOKIE'])) {
     }
 }
 // session part
+if (isset($_SESSION['poche_user'])) {
+	unset($_SESSION['poche_user']);
+}
 session_destroy();
 
 
