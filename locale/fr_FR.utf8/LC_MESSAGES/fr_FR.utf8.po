@@ -200,8 +200,11 @@ msgstr "lisez la documentation"
 msgid "download the extension"
 msgstr "téléchargez l'extension"
 
-msgid "Firefox Add-On"
-msgstr "Add-On Firefox"
+msgid "Standard Firefox Add-On"
+msgstr "Add-On Firefox classique"
+
+msgid "Mozilla Services (Social API) Extension"
+msgstr "Extension Mozilla Services (Social API)"
 
 msgid "Chrome Extension"
 msgstr "Extension Chrome"

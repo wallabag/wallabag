@@ -36,3 +36,33 @@
         <script src="{{ poche_url }}themes/_global/js/saveLink.js"></script>
         <script src="{{ poche_url }}themes/_global/js/keyboard.js"></script>
         <script src="{{ poche_url }}themes/_global/js/popupForm.js"></script>
+
+        <!-- Enable Firefox Social Services
+        script put there because of the call to poche_url -->
+
+        <script>
+        var baseurl = "{{ poche_url }}";
+        console.log(baseurl);
+        var data = {
+
+                "name": "wallabag",
+                "iconURL": baseurl + "/themes/_global/img/appicon/firefox-service-icon-16.png",
+                "icon32URL": baseurl + "/themes/_global/img/appicon/firefox-service-icon-32.png",
+                "icon64URL": baseurl + "/themes/_global/img/appicon/firefox-service-icon-64.png",
+
+                "shareURL": baseurl + "/index.php?action=add&plainurl=%{url}",
+
+                "description": "wallabag Extension for Firefox - The (soon to become) best way to save articles, videos and more",
+                "author": "Thomas Citharel",
+                "homepageURL": "http://doc.wallabag.org/en/User/save_your_first_article.html#firefox-social-api-service",
+                "origin": "https://wallabag.org",
+                "postActivationURL": "http://doc.wallabag.org/en/User/save_your_first_article.html#firefox-social-api-service",
+
+                "version": "0.1"
+        };
+        function activateSocialFeature(node) {
+                var event = new CustomEvent("ActivateSocialFeature");
+                node.setAttribute("data-service", JSON.stringify(data));
+                node.dispatchEvent(event);
+        }
+        </script>
