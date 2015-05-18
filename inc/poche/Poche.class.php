@@ -543,6 +543,14 @@ class Poche
                         $flattr = new FlattrItem();
                         $flattr->checkItem($entry['url'], $entry['id']);
                     }
+
+                    # yarn checking
+                    $yarn = NULL;
+                    if (YARN) {
+                        $yarn = new YarnItem();
+                        $yarn->checkItem($entry['url'], $entry['id']);
+                        Tools::logm("Yarn Score : " . $yarn->score);
+                    }
                     
                     # previous and next
                     $previous = FALSE;
@@ -565,6 +573,7 @@ class Poche
                         'entry' => $entry,
                         'content' => $content,
                         'flattr' => $flattr,
+                        'yarn' => $yarn,
                         'tags' => $tags,
                         'navigate' => $navigate
                     );
