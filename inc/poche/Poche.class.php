@@ -732,23 +732,45 @@ class Poche
           $html->load_file($_FILES['file']['tmp_name']);
           $data = array();
           $read = 0;
-          foreach (array('ol','ul') as $list) {
-            foreach ($html->find($list) as $ul) {
-              foreach ($ul->find('li') as $li) {
-                $tmpEntry = array();
-                  $a = $li->find('a');
-                  $tmpEntry['url'] = $a[0]->href;
-                  $tmpEntry['tags'] = $a[0]->tags;
-                  $tmpEntry['is_read'] = $read;
-                  if ($tmpEntry['url']) {
-                    $data[] = $tmpEntry;
+
+          if (Tools:: get_doctype($html)) {
+            // Firefox-bookmarks HTML
+            foreach (array('DL','ul') as $list) {
+                foreach ($html->find($list) as $ul) {
+                  foreach ($ul->find('DT') as $li) {
+                    $tmpEntry = array();
+                      $a = $li->find('A');
+                      $tmpEntry['url'] = $a[0]->href;
+                      $tmpEntry['tags'] = $a[0]->tags;
+                      $tmpEntry['is_read'] = $read;
+                      if ($tmpEntry['url']) {
+                        $data[] = $tmpEntry;
+                      }
                   }
-              }
-              # the second <ol/ul> is for read links
-              $read = ((sizeof($data) && $read)?0:1);
+                  # the second <ol/ul> is for read links
+                  $read = ((sizeof($data) && $read)?0:1);
+                }
             }
-          }
-    	}
+          } else {
+            // regular HTML
+            foreach (array('ol','ul') as $list) {
+                foreach ($html->find($list) as $ul) {
+                  foreach ($ul->find('li') as $li) {
+                    $tmpEntry = array();
+                      $a = $li->find('a');
+                      $tmpEntry['url'] = $a[0]->href;
+                      $tmpEntry['tags'] = $a[0]->tags;
+                      $tmpEntry['is_read'] = $read;
+                      if ($tmpEntry['url']) {
+                        $data[] = $tmpEntry;
+                      }
+                  }
+                  # the second <ol/ul> is for read links
+                  $read = ((sizeof($data) && $read)?0:1);
+                }
+              }
+        	}
+        }
 
             // for readability structure
 
