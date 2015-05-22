@@ -733,7 +733,7 @@ class Poche
           $data = array();
           $read = 0;
 
-          if (Tools:: get_doctype($html)) {
+          if (Tools::get_doctype($html)->innertext == "<!DOCTYPE NETSCAPE-Bookmark-file-1>") {
             // Firefox-bookmarks HTML
             foreach (array('DL','ul') as $list) {
                 foreach ($html->find($list) as $ul) {
