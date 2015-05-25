@@ -428,7 +428,7 @@ final class Tools
     *
     */
 
-    function get_doctype($doc)
+    public static function get_doctype($doc)
     {
         $els = $doc->find('unknown');
 
