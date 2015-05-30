@@ -788,7 +788,7 @@ class Poche
             $urlsInserted = array(); //urls of articles inserted
             foreach($data as $record) {
                 $url = trim(isset($record['article__url']) ? $record['article__url'] : (isset($record['url']) ? $record['url'] : ''));
-                if ($url and !in_array($url, $urlsInserted)) {
+                if (filter_var($url, FILTER_VALIDATE_URL) and !in_array($url, $urlsInserted)) {
                     $title = (isset($record['title']) ? $record['title'] : _('Untitled - Import - ') . '</a> <a href="./?import">' . _('click to finish import') . '</a><a>');
                     $body = (isset($record['content']) ? $record['content'] : '');
                     $isRead = (isset($record['is_read']) ? intval($record['is_read']) : (isset($record['archive']) ? intval($record['archive']) : 0));
