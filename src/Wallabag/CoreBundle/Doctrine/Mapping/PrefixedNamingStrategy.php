@@ -72,4 +72,12 @@ class PrefixedNamingStrategy implements NamingStrategy
     {
         return strtolower($this->classToTableName($entityName) . '_' .($referencedColumnName ?: $this->referenceColumnName()));
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function embeddedFieldToColumnName($propertyName, $embeddedColumnName, $className = null, $embeddedClassName = null)
+    {
+        return $propertyName.'_'.$embeddedColumnName;
+    }
 }
