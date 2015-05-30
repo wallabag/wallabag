@@ -13,9 +13,10 @@ class WallabagExtension extends \Twig_Extension
     }
 
     /**
-     * Returns the domain name for a URL
+     * Returns the domain name for a URL.
      *
      * @param $url
+     *
      * @return string
      */
     public static function getDomainName($url)
@@ -24,9 +25,10 @@ class WallabagExtension extends \Twig_Extension
     }
 
     /**
-     * For a given text, we calculate reading time for an article
+     * For a given text, we calculate reading time for an article.
      *
      * @param $text
+     *
      * @return float
      */
     public static function getReadingTime($text)

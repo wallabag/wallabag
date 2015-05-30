@@ -9,7 +9,7 @@ class WallabagRestControllerTest extends WebTestCase
     protected static $salt;
 
     /**
-     * Grab the salt once and store it to be available for all tests
+     * Grab the salt once and store it to be available for all tests.
      */
     public static function setUpBeforeClass()
     {
@@ -24,7 +24,7 @@ class WallabagRestControllerTest extends WebTestCase
     }
 
     /**
-     * Generate HTTP headers for authenticate user on API
+     * Generate HTTP headers for authenticate user on API.
      *
      * @param string $username
      * @param string $password
@@ -327,7 +327,7 @@ class WallabagRestControllerTest extends WebTestCase
         $content = json_decode($client->getResponse()->getContent(), true);
 
         $this->assertArrayHasKey('tags', $content);
-        $this->assertEquals($nbTags+3, count($content['tags']));
+        $this->assertEquals($nbTags + 3, count($content['tags']));
 
         $entryDB = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
@@ -369,7 +369,7 @@ class WallabagRestControllerTest extends WebTestCase
         $content = json_decode($client->getResponse()->getContent(), true);
 
         $this->assertArrayHasKey('tags', $content);
-        $this->assertEquals($nbTags-1, count($content['tags']));
+        $this->assertEquals($nbTags - 1, count($content['tags']));
     }
 
     public function testGetUserTags()

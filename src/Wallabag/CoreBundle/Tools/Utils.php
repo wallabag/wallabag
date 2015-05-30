@@ -5,7 +5,7 @@ namespace Wallabag\CoreBundle\Tools;
 class Utils
 {
     /**
-     * Generate a token used for RSS
+     * Generate a token used for RSS.
      *
      * @return string
      */

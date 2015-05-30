@@ -47,6 +47,7 @@ class WallabagRestController extends Controller
      *          {"name"="username", "dataType"="string", "required"=true, "description"="username"}
      *       }
      * )
+     *
      * @return array
      */
     public function getSaltAction($username)
@@ -77,6 +78,7 @@ class WallabagRestController extends Controller
      *          {"name"="tags", "dataType"="string", "required"=false, "format"="api%2Crest", "description"="a list of tags url encoded. Will returns entries that matches ALL tags."},
      *       }
      * )
+     *
      * @return Entry
      */
     public function getEntriesAction(Request $request)
@@ -109,13 +111,14 @@ class WallabagRestController extends Controller
     }
 
     /**
-     * Retrieve a single entry
+     * Retrieve a single entry.
      *
      * @ApiDoc(
      *      requirements={
      *          {"name"="entry", "dataType"="integer", "requirement"="\w+", "description"="The entry ID"}
      *      }
      * )
+     *
      * @return Entry
      */
     public function getEntryAction(Entry $entry)
@@ -128,7 +131,7 @@ class WallabagRestController extends Controller
     }
 
     /**
-     * Create an entry
+     * Create an entry.
      *
      * @ApiDoc(
      *       parameters={
@@ -137,6 +140,7 @@ class WallabagRestController extends Controller
      *          {"name"="tags", "dataType"="string", "required"=false, "format"="tag1,tag2,tag3", "description"="a comma-separated list of tags."},
      *       }
      * )
+     *
      * @return Entry
      */
     public function postEntriesAction(Request $request)
@@ -164,7 +168,7 @@ class WallabagRestController extends Controller
     }
 
     /**
-     * Change several properties of an entry
+     * Change several properties of an entry.
      *
      * @ApiDoc(
      *      requirements={
@@ -177,15 +181,16 @@ class WallabagRestController extends Controller
      *          {"name"="star", "dataType"="boolean", "required"=false, "format"="true or false", "description"="starred the entry."},
      *      }
      * )
+     *
      * @return Entry
      */
     public function patchEntriesAction(Entry $entry, Request $request)
     {
         $this->validateUserAccess($entry->getUser()->getId(), $this->getUser()->getId());
 
-        $title      = $request->request->get("title");
-        $isArchived = $request->request->get("archive");
-        $isStarred  = $request->request->get("star");
+        $title      = $request->request->get('title');
+        $isArchived = $request->request->get('archive');
+        $isStarred  = $request->request->get('star');
 
         if (!is_null($title)) {
             $entry->setTitle($title);
@@ -213,13 +218,14 @@ class WallabagRestController extends Controller
     }
 
     /**
-     * Delete **permanently** an entry
+     * Delete **permanently** an entry.
      *
      * @ApiDoc(
      *      requirements={
      *          {"name"="entry", "dataType"="integer", "requirement"="\w+", "description"="The entry ID"}
      *      }
      * )
+     *
      * @return Entry
      */
     public function deleteEntriesAction(Entry $entry)
@@ -236,7 +242,7 @@ class WallabagRestController extends Controller
     }
 
     /**
-     * Retrieve all tags for an entry
+     * Retrieve all tags for an entry.
      *
      * @ApiDoc(
      *      requirements={
@@ -254,7 +260,7 @@ class WallabagRestController extends Controller
     }
 
     /**
-     * Add one or more tags to an entry
+     * Add one or more tags to an entry.
      *
      * @ApiDoc(
      *      requirements={
@@ -284,7 +290,7 @@ class WallabagRestController extends Controller
     }
 
     /**
-     * Permanently remove one tag for an entry
+     * Permanently remove one tag for an entry.
      *
      * @ApiDoc(
      *      requirements={
@@ -308,7 +314,7 @@ class WallabagRestController extends Controller
     }
 
     /**
-     * Retrieve all tags
+     * Retrieve all tags.
      *
      * @ApiDoc()
      */
@@ -320,7 +326,7 @@ class WallabagRestController extends Controller
     }
 
     /**
-     * Permanently remove one tag from **every** entry
+     * Permanently remove one tag from **every** entry.
      *
      * @ApiDoc(
      *      requirements={
@@ -343,10 +349,10 @@ class WallabagRestController extends Controller
 
     /**
      * Validate that the first id is equal to the second one.
-     * If not, throw exception. It means a user try to access information from an other user
+     * If not, throw exception. It means a user try to access information from an other user.
      *
-     * @param integer $requestUserId User id from the requested source
-     * @param integer $currentUserId User id from the retrieved source
+     * @param int $requestUserId User id from the requested source
+     * @param int $currentUserId User id from the retrieved source
      */
     private function validateUserAccess($requestUserId, $currentUserId)
     {
@@ -357,7 +363,7 @@ class WallabagRestController extends Controller
 
     /**
      * Send a JSON Response.
-     * We don't use the Symfony JsonRespone, because it takes an array as parameter instead of a JSON string
+     * We don't use the Symfony JsonRespone, because it takes an array as parameter instead of a JSON string.
      *
      * @param string $json
      *

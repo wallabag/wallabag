@@ -5,15 +5,16 @@ namespace Wallabag\CoreBundle\Helper;
 final class Tools
 {
     /**
-     * Download a file (typically, for downloading pictures on web server)
+     * Download a file (typically, for downloading pictures on web server).
      *
      * @param $url
+     *
      * @return bool|mixed|string
      */
     public static function getFile($url)
     {
         $timeout = 15;
-        $useragent = "Mozilla/5.0 (Windows NT 5.1; rv:18.0) Gecko/20100101 Firefox/18.0";
+        $useragent = 'Mozilla/5.0 (Windows NT 5.1; rv:18.0) Gecko/20100101 Firefox/18.0';
 
         if (in_array('curl', get_loaded_extensions())) {
             # Fetch feed from URL
@@ -32,7 +33,7 @@ final class Tools
 
             # FeedBurner requires a proper USER-AGENT...
             curl_setopt($curl, CURL_HTTP_VERSION_1_1, true);
-            curl_setopt($curl, CURLOPT_ENCODING, "gzip, deflate");
+            curl_setopt($curl, CURLOPT_ENCODING, 'gzip, deflate');
             curl_setopt($curl, CURLOPT_USERAGENT, $useragent);
 
             $data = curl_exec($curl);
@@ -45,7 +46,7 @@ final class Tools
                 array(
                     'http' => array(
                         'timeout' => $timeout,
-                        'header' => "User-Agent: ".$useragent,
+                        'header' => 'User-Agent: '.$useragent,
                         'follow_location' => true,
                     ),
                     'ssl' => array(
@@ -91,9 +92,10 @@ final class Tools
     }
 
     /**
-     * Encode a URL by using a salt
+     * Encode a URL by using a salt.
      *
      * @param $string
+     *
      * @return string
      */
     public static function encodeString($string)

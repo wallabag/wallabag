@@ -1,4 +1,5 @@
 <?php
+
 namespace Wallabag\ApiBundle\Security\Authentication\Provider;
 
 use Symfony\Component\Security\Core\Authentication\Provider\AuthenticationProviderInterface;
@@ -29,7 +30,7 @@ class WsseProvider implements AuthenticationProviderInterface
         $user = $this->userProvider->loadUserByUsername($token->getUsername());
 
         if (!$user) {
-            throw new AuthenticationException("Bad credentials. Did you forgot your username?");
+            throw new AuthenticationException('Bad credentials. Did you forgot your username?');
         }
 
         if ($user && $this->validateDigest($token->digest, $token->nonce, $token->created, $user->getPassword())) {
@@ -46,12 +47,12 @@ class WsseProvider implements AuthenticationProviderInterface
     {
         // Check created time is not in the future
         if (strtotime($created) > time()) {
-            throw new AuthenticationException("Back to the future...");
+            throw new AuthenticationException('Back to the future...');
         }
 
         // Expire timestamp after 5 minutes
         if (time() - strtotime($created) > 300) {
-            throw new AuthenticationException("Too late for this timestamp... Watch your watch.");
+            throw new AuthenticationException('Too late for this timestamp... Watch your watch.');
         }
 
         // Validate nonce is unique within 5 minutes
@@ -65,7 +66,7 @@ class WsseProvider implements AuthenticationProviderInterface
         $expected = base64_encode(sha1(base64_decode($nonce).$created.$secret, true));
 
         if ($digest !== $expected) {
-            throw new AuthenticationException("Bad credentials ! Digest is not as expected.");
+            throw new AuthenticationException('Bad credentials ! Digest is not as expected.');
         }
 
         return $digest === $expected;

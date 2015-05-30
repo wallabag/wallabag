@@ -9,7 +9,7 @@ use Hateoas\Configuration\Annotation as Hateoas;
 use JMS\Serializer\Annotation\XmlRoot;
 
 /**
- * Entry
+ * Entry.
  *
  * @XmlRoot("entry")
  * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\EntryRepository")
@@ -21,7 +21,7 @@ class Entry
 {
     /** @Serializer\XmlAttribute */
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -45,14 +45,14 @@ class Entry
     private $url;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="is_archived", type="boolean")
      */
     private $isArchived = false;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="is_starred", type="boolean")
      */
@@ -94,7 +94,7 @@ class Entry
     private $mimetype;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="reading_type", type="integer", nullable=true)
      */
@@ -108,7 +108,7 @@ class Entry
     private $domainName;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="is_public", type="boolean", nullable=true, options={"default" = false})
      */
@@ -135,9 +135,9 @@ class Entry
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -145,9 +145,10 @@ class Entry
     }
 
     /**
-     * Set title
+     * Set title.
      *
-     * @param  string $title
+     * @param string $title
+     *
      * @return Entry
      */
     public function setTitle($title)
@@ -158,7 +159,7 @@ class Entry
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -168,9 +169,10 @@ class Entry
     }
 
     /**
-     * Set url
+     * Set url.
      *
-     * @param  string $url
+     * @param string $url
+     *
      * @return Entry
      */
     public function setUrl($url)
@@ -181,7 +183,7 @@ class Entry
     }
 
     /**
-     * Get url
+     * Get url.
      *
      * @return string
      */
@@ -191,9 +193,10 @@ class Entry
     }
 
     /**
-     * Set isArchived
+     * Set isArchived.
      *
-     * @param  string $isArchived
+     * @param string $isArchived
+     *
      * @return Entry
      */
     public function setArchived($isArchived)
@@ -204,7 +207,7 @@ class Entry
     }
 
     /**
-     * Get isArchived
+     * Get isArchived.
      *
      * @return string
      */
@@ -221,9 +224,10 @@ class Entry
     }
 
     /**
-     * Set isStarred
+     * Set isStarred.
      *
-     * @param  string $isStarred
+     * @param string $isStarred
+     *
      * @return Entry
      */
     public function setStarred($isStarred)
@@ -234,7 +238,7 @@ class Entry
     }
 
     /**
-     * Get isStarred
+     * Get isStarred.
      *
      * @return string
      */
@@ -251,9 +255,10 @@ class Entry
     }
 
     /**
-     * Set content
+     * Set content.
      *
-     * @param  string $content
+     * @param string $content
+     *
      * @return Entry
      */
     public function setContent($content)
@@ -264,7 +269,7 @@ class Entry
     }
 
     /**
-     * Get content
+     * Get content.
      *
      * @return string
      */
@@ -375,7 +380,7 @@ class Entry
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isPublic()
     {
@@ -383,7 +388,7 @@ class Entry
     }
 
     /**
-     * @param boolean $isPublic
+     * @param bool $isPublic
      */
     public function setPublic($isPublic)
     {

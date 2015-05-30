@@ -225,7 +225,7 @@ class InstallCommand extends ContainerAwareCommand
     }
 
     /**
-     * Run a command
+     * Run a command.
      *
      * @param string $command
      * @param array  $parameters Parameters to this command (usually 'force' => true)
@@ -266,9 +266,9 @@ class InstallCommand extends ContainerAwareCommand
     }
 
     /**
-     * Check if the database already exists
+     * Check if the database already exists.
      *
-     * @return boolean
+     * @return bool
      */
     private function isDatabasePresent()
     {
@@ -300,9 +300,9 @@ class InstallCommand extends ContainerAwareCommand
 
     /**
      * Check if the schema is already created.
-     * If we found at least oen table, it means the schema exists
+     * If we found at least oen table, it means the schema exists.
      *
-     * @return boolean
+     * @return bool
      */
     private function isSchemaPresent()
     {

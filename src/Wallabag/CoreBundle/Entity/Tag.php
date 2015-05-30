@@ -9,7 +9,7 @@ use JMS\Serializer\Annotation\Expose;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Tag
+ * Tag.
  *
  * @XmlRoot("tag")
  * @ORM\Table
@@ -19,7 +19,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 class Tag
 {
     /**
-     * @var integer
+     * @var int
      *
      * @Expose
      * @ORM\Column(name="id", type="integer")
@@ -52,9 +52,9 @@ class Tag
         $this->entries = new ArrayCollection();
     }
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -62,9 +62,10 @@ class Tag
     }
 
     /**
-     * Set label
+     * Set label.
      *
-     * @param  string $label
+     * @param string $label
+     *
      * @return Tag
      */
     public function setLabel($label)
@@ -75,7 +76,7 @@ class Tag
     }
 
     /**
-     * Get label
+     * Get label.
      *
      * @return string
      */

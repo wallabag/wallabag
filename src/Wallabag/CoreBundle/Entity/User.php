@@ -12,7 +12,7 @@ use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 
 /**
- * User
+ * User.
  *
  * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\UserRepository")
  * @ORM\Table
@@ -25,7 +25,7 @@ use JMS\Serializer\Annotation\Expose;
 class User implements AdvancedUserInterface, \Serializable
 {
     /**
-     * @var integer
+     * @var int
      *
      * @Expose
      * @ORM\Column(name="id", type="integer")
@@ -142,9 +142,9 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -152,9 +152,10 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * Set username
+     * Set username.
      *
-     * @param  string $username
+     * @param string $username
+     *
      * @return User
      */
     public function setUsername($username)
@@ -165,7 +166,7 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * Get username
+     * Get username.
      *
      * @return string
      */
@@ -191,9 +192,10 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * Set password
+     * Set password.
      *
-     * @param  string $password
+     * @param string $password
+     *
      * @return User
      */
     public function setPassword($password)
@@ -208,7 +210,7 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * Get password
+     * Get password.
      *
      * @return string
      */
@@ -218,9 +220,10 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * Set name
+     * Set name.
      *
-     * @param  string $name
+     * @param string $name
+     *
      * @return User
      */
     public function setName($name)
@@ -231,7 +234,7 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -241,9 +244,10 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * Set email
+     * Set email.
      *
-     * @param  string $email
+     * @param string $email
+     *
      * @return User
      */
     public function setEmail($email)
@@ -254,7 +258,7 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * Get email
+     * Get email.
      *
      * @return string
      */
@@ -341,8 +345,7 @@ class User implements AdvancedUserInterface, \Serializable
     public function unserialize($serialized)
     {
         list(
-            $this->id,
-            ) = unserialize($serialized);
+            $this->id) = unserialize($serialized);
     }
 
     public function isEqualTo(UserInterface $user)
@@ -370,9 +373,10 @@ class User implements AdvancedUserInterface, \Serializable
         return $this->isActive;
     }
     /**
-     * Set config
+     * Set config.
      *
-     * @param  \Wallabag\CoreBundle\Entity\Config $config
+     * @param \Wallabag\CoreBundle\Entity\Config $config
+     *
      * @return User
      */
     public function setConfig(\Wallabag\CoreBundle\Entity\Config $config = null)
@@ -383,7 +387,7 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * Get config
+     * Get config.
      *
      * @return \Wallabag\CoreBundle\Entity\Config
      */
@@ -393,9 +397,10 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * Set confirmationToken
+     * Set confirmationToken.
      *
-     * @param  string $confirmationToken
+     * @param string $confirmationToken
+     *
      * @return User
      */
     public function setConfirmationToken($confirmationToken)
@@ -406,7 +411,7 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * Get confirmationToken
+     * Get confirmationToken.
      *
      * @return string
      */
@@ -416,9 +421,10 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * Set passwordRequestedAt
+     * Set passwordRequestedAt.
      *
-     * @param  \DateTime $passwordRequestedAt
+     * @param \DateTime $passwordRequestedAt
+     *
      * @return User
      */
     public function setPasswordRequestedAt($passwordRequestedAt)
@@ -429,7 +435,7 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * Get passwordRequestedAt
+     * Get passwordRequestedAt.
      *
      * @return \DateTime
      */
