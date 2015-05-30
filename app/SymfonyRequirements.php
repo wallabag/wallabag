@@ -77,7 +77,7 @@ class Requirement
     }
 
     /**
-     * Returns the help text for resolving the problem
+     * Returns the help text for resolving the problem.
      *
      * @return string The help text
      */
@@ -119,10 +119,10 @@ class PhpIniRequirement extends Requirement
      *
      * @param string        $cfgName           The configuration name used for ini_get()
      * @param bool|callback $evaluation        Either a boolean indicating whether the configuration should evaluate to true or false,
-                                               or a callback function receiving the configuration value as parameter to determine the fulfillment of the requirement
+     *                                         or a callback function receiving the configuration value as parameter to determine the fulfillment of the requirement
      * @param bool          $approveCfgAbsence If true the Requirement will be fulfilled even if the configuration option does not exist, i.e. ini_get() returns false.
-                                               This is helpful for abandoned configs in later PHP versions or configs of an optional extension, like Suhosin.
-                                               Example: You require a config to be true but PHP later removes this config and defaults it to true internally.
+     *                                         This is helpful for abandoned configs in later PHP versions or configs of an optional extension, like Suhosin.
+     *                                         Example: You require a config to be true but PHP later removes this config and defaults it to true internally.
      * @param string|null   $testMessage       The message for testing the requirement (when null and $evaluation is a boolean a default message is derived)
      * @param string|null   $helpHtml          The help text formatted in HTML for resolving the problem (when null and $evaluation is a boolean a default help is derived)
      * @param string|null   $helpText          The help text (when null, it will be inferred from $helpHtml, i.e. stripped from HTML tags)
@@ -221,10 +221,10 @@ class RequirementCollection implements IteratorAggregate
      *
      * @param string        $cfgName           The configuration name used for ini_get()
      * @param bool|callback $evaluation        Either a boolean indicating whether the configuration should evaluate to true or false,
-                                               or a callback function receiving the configuration value as parameter to determine the fulfillment of the requirement
+     *                                         or a callback function receiving the configuration value as parameter to determine the fulfillment of the requirement
      * @param bool          $approveCfgAbsence If true the Requirement will be fulfilled even if the configuration option does not exist, i.e. ini_get() returns false.
-                                               This is helpful for abandoned configs in later PHP versions or configs of an optional extension, like Suhosin.
-                                               Example: You require a config to be true but PHP later removes this config and defaults it to true internally.
+     *                                         This is helpful for abandoned configs in later PHP versions or configs of an optional extension, like Suhosin.
+     *                                         Example: You require a config to be true but PHP later removes this config and defaults it to true internally.
      * @param string        $testMessage       The message for testing the requirement (when null and $evaluation is a boolean a default message is derived)
      * @param string        $helpHtml          The help text formatted in HTML for resolving the problem (when null and $evaluation is a boolean a default help is derived)
      * @param string|null   $helpText          The help text (when null, it will be inferred from $helpHtml, i.e. stripped from HTML tags)
@@ -239,10 +239,10 @@ class RequirementCollection implements IteratorAggregate
      *
      * @param string        $cfgName           The configuration name used for ini_get()
      * @param bool|callback $evaluation        Either a boolean indicating whether the configuration should evaluate to true or false,
-                                               or a callback function receiving the configuration value as parameter to determine the fulfillment of the requirement
+     *                                         or a callback function receiving the configuration value as parameter to determine the fulfillment of the requirement
      * @param bool          $approveCfgAbsence If true the Requirement will be fulfilled even if the configuration option does not exist, i.e. ini_get() returns false.
-                                               This is helpful for abandoned configs in later PHP versions or configs of an optional extension, like Suhosin.
-                                               Example: You require a config to be true but PHP later removes this config and defaults it to true internally.
+     *                                         This is helpful for abandoned configs in later PHP versions or configs of an optional extension, like Suhosin.
+     *                                         Example: You require a config to be true but PHP later removes this config and defaults it to true internally.
      * @param string        $testMessage       The message for testing the requirement (when null and $evaluation is a boolean a default message is derived)
      * @param string        $helpHtml          The help text formatted in HTML for resolving the problem (when null and $evaluation is a boolean a default help is derived)
      * @param string|null   $helpText          The help text (when null, it will be inferred from $helpHtml, i.e. stripped from HTML tags)
@@ -542,11 +542,22 @@ class SymfonyRequirements extends RequirementCollection
 
         /* optional recommendations follow */
 
-        $this->addRecommendation(
-            file_get_contents(__FILE__) === file_get_contents(__DIR__.'/../vendor/sensio/distribution-bundle/Sensio/Bundle/DistributionBundle/Resources/skeleton/app/SymfonyRequirements.php'),
-            'Requirements file should be up-to-date',
-            'Your requirements file is outdated. Run composer install and re-check your configuration.'
-        );
+        if (file_exists(__DIR__.'/../vendor/composer')) {
+            require_once __DIR__.'/../vendor/autoload.php';
+
+            try {
+                $r = new \ReflectionClass('Sensio\Bundle\DistributionBundle\SensioDistributionBundle');
+
+                $contents = file_get_contents(dirname($r->getFileName()).'/Resources/skeleton/app/SymfonyRequirements.php');
+            } catch (\ReflectionException $e) {
+                $contents = '';
+            }
+            $this->addRecommendation(
+                file_get_contents(__FILE__) === $contents,
+                'Requirements file should be up-to-date',
+                'Your requirements file is outdated. Run composer install and re-check your configuration.'
+            );
+        }
 
         $this->addRecommendation(
             version_compare($installedPhpVersion, '5.3.4', '>='),
