@@ -9,7 +9,7 @@ final class Extractor
 {
     public static function extract($url)
     {
-        $pageContent = Extractor::getPageContent(new Url(base64_encode($url)));
+        $pageContent = self::getPageContent(new Url(base64_encode($url)));
         $title = $pageContent['rss']['channel']['item']['title'] ?: 'Untitled';
         $body = $pageContent['rss']['channel']['item']['description'];
 
@@ -21,9 +21,10 @@ final class Extractor
     }
 
     /**
-     * Get the content for a given URL (by a call to FullTextFeed)
+     * Get the content for a given URL (by a call to FullTextFeed).
      *
-     * @param  Url   $url
+     * @param Url $url
+     *
      * @return mixed
      */
     public static function getPageContent(Url $url)
@@ -49,12 +50,12 @@ final class Extractor
         $scope = function () {
             extract(func_get_arg(1));
             $_GET = $_REQUEST = array(
-                "url" => $url->getUrl(),
-                "max" => 5,
-                "links" => "preserve",
-                "exc" => "",
-                "format" => "json",
-                "submit" => "Create Feed",
+                'url' => $url->getUrl(),
+                'max' => 5,
+                'links' => 'preserve',
+                'exc' => '',
+                'format' => 'json',
+                'submit' => 'Create Feed',
             );
             ob_start();
             require func_get_arg(0);
@@ -67,11 +68,11 @@ final class Extractor
         // Silence $scope function to avoid
         // issues with FTRSS when error_reporting is to high
         // FTRSS generates PHP warnings which break output
-        $json = @$scope(__DIR__."/../../../../vendor/wallabag/Fivefilters_Libraries/makefulltextfeed.php", array("url" => $url));
+        $json = @$scope(__DIR__.'/../../../../vendor/wallabag/Fivefilters_Libraries/makefulltextfeed.php', array('url' => $url));
 
         // Clearing and restoring context
         foreach ($GLOBALS as $key => $value) {
-            if ($key != "GLOBALS" && $key != "_SESSION") {
+            if ($key != 'GLOBALS' && $key != '_SESSION') {
                 unset($GLOBALS[$key]);
             }
         }

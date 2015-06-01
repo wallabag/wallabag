@@ -1,0 +1,4 @@
+entries:
+  type: rest
+  resource:     "WallabagApiBundle:WallabagRest"
+  name_prefix:  api_

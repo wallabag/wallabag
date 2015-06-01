@@ -2,9 +2,9 @@
 
 namespace Wallabag\CoreBundle\Tests\Controller;
 
-use Wallabag\CoreBundle\Tests\WallabagTestCase;
+use Wallabag\CoreBundle\Tests\WallabagCoreTestCase;
 
-class ConfigControllerTest extends WallabagTestCase
+class ConfigControllerTest extends WallabagCoreTestCase
 {
     public function testLogin()
     {
@@ -397,7 +397,7 @@ class ConfigControllerTest extends WallabagTestCase
         );
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $content = json_decode($client->getResponse()->getContent(), true);;
+        $content = json_decode($client->getResponse()->getContent(), true);
         $this->assertArrayHasKey('token', $content);
     }
 

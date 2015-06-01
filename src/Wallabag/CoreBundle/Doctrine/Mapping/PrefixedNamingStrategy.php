@@ -25,7 +25,7 @@ class PrefixedNamingStrategy implements NamingStrategy
      */
     public function classToTableName($className)
     {
-        return strtolower($this->prefix . substr($className, strrpos($className, '\\') + 1));
+        return strtolower($this->prefix.substr($className, strrpos($className, '\\') + 1));
     }
 
     /**
@@ -49,7 +49,7 @@ class PrefixedNamingStrategy implements NamingStrategy
      */
     public function joinColumnName($propertyName)
     {
-        return $propertyName . '_' . $this->referenceColumnName();
+        return $propertyName.'_'.$this->referenceColumnName();
     }
 
     /**
@@ -62,7 +62,7 @@ class PrefixedNamingStrategy implements NamingStrategy
         // ie: not "wallabag_entry_wallabag_tag" but "wallabag_entry_tag"
         $target = substr($targetEntity, strrpos($targetEntity, '\\') + 1);
 
-        return strtolower($this->classToTableName($sourceEntity) . '_' .$target);
+        return strtolower($this->classToTableName($sourceEntity).'_'.$target);
     }
 
     /**
@@ -70,6 +70,14 @@ class PrefixedNamingStrategy implements NamingStrategy
      */
     public function joinKeyColumnName($entityName, $referencedColumnName = null)
     {
-        return strtolower($this->classToTableName($entityName) . '_' .($referencedColumnName ?: $this->referenceColumnName()));
+        return strtolower($this->classToTableName($entityName).'_'.($referencedColumnName ?: $this->referenceColumnName()));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function embeddedFieldToColumnName($propertyName, $embeddedColumnName, $className = null, $embeddedClassName = null)
+    {
+        return $propertyName.'_'.$embeddedColumnName;
     }
 }

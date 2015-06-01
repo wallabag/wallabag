@@ -30,16 +30,16 @@ install:
     - composer self-update
 
 # build coverage only on one build, to speed up results feedbacks
-before_script:
-    - if [[ "$TRAVIS_PHP_VERSION" = "5.6" ]]; then PHPUNIT_FLAGS="--coverage-clover=coverage.clover"; else PHPUNIT_FLAGS=""; fi;
+# before_script:
+    # - if [[ "$TRAVIS_PHP_VERSION" = "5.6" ]]; then PHPUNIT_FLAGS="--coverage-clover=coverage.clover"; else PHPUNIT_FLAGS=""; fi;
 
 script:
     - ant prepare
-    - phpunit --exclude-group command-doctrine $PHPUNIT_FLAGS
+    - bin/phpunit --exclude-group command-doctrine --debug $PHPUNIT_FLAGS
 
-after_script:
-    - |
-        if [ $TRAVIS_PHP_VERSION = '5.6' ]; then
-            wget https://scrutinizer-ci.com/ocular.phar
-            php ocular.phar code-coverage:upload --format=php-clover coverage.clover
-        fi
+# after_script:
+    # - |
+        # if [ $TRAVIS_PHP_VERSION = '5.6' ]; then
+            # wget https://scrutinizer-ci.com/ocular.phar
+            # php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+        # fi

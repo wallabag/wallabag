@@ -23,7 +23,8 @@ class AppKernel extends Kernel
             new Nelmio\CorsBundle\NelmioCorsBundle(),
             new Liip\ThemeBundle\LiipThemeBundle(),
             new Wallabag\CoreBundle\WallabagCoreBundle(),
-            new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle()
+            new Wallabag\ApiBundle\WallabagApiBundle(),
+            new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

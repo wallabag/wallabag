@@ -7,8 +7,7 @@ use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 
 /**
  * This override just add en extra variable (username) to be able to salt the password
- * the way Wallabag v1 does. It will avoid to break compatibility with Wallabag v1
- *
+ * the way Wallabag v1 does. It will avoid to break compatibility with Wallabag v1.
  */
 class WallabagPasswordEncoder extends BasePasswordEncoder
 {

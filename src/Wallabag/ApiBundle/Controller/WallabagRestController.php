@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Controller;
+namespace Wallabag\ApiBundle\Controller;
 
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -47,6 +47,7 @@ class WallabagRestController extends Controller
      *          {"name"="username", "dataType"="string", "required"=true, "description"="username"}
      *       }
      * )
+     *
      * @return array
      */
     public function getSaltAction($username)
@@ -62,6 +63,7 @@ class WallabagRestController extends Controller
 
         return array($user->getSalt() ?: null);
     }
+
     /**
      * Retrieve all entries. It could be filtered by many options.
      *
@@ -76,6 +78,7 @@ class WallabagRestController extends Controller
      *          {"name"="tags", "dataType"="string", "required"=false, "format"="api%2Crest", "description"="a list of tags url encoded. Will returns entries that matches ALL tags."},
      *       }
      * )
+     *
      * @return Entry
      */
     public function getEntriesAction(Request $request)
@@ -86,16 +89,12 @@ class WallabagRestController extends Controller
         $order      = $request->query->get('order', 'desc');
         $page       = (int) $request->query->get('page', 1);
         $perPage    = (int) $request->query->get('perPage', 30);
-        $tags       = $request->query->get('tags', array());
+        $tags       = $request->query->get('tags', []);
 
         $pager = $this
             ->getDoctrine()
             ->getRepository('WallabagCoreBundle:Entry')
             ->findEntries($this->getUser()->getId(), $isArchived, $isStarred, $sort, $order);
-
-        if (0 === $pager->getNbResults()) {
-            throw $this->createNotFoundException();
-        }
 
         $pager->setCurrentPage($page);
         $pager->setMaxPerPage($perPage);
@@ -108,32 +107,31 @@ class WallabagRestController extends Controller
 
         $json = $this->get('serializer')->serialize($paginatedCollection, 'json');
 
-        return new Response($json, 200, array('application/json'));
+        return $this->renderJsonResponse($json);
     }
 
     /**
-     * Retrieve a single entry
+     * Retrieve a single entry.
      *
      * @ApiDoc(
      *      requirements={
      *          {"name"="entry", "dataType"="integer", "requirement"="\w+", "description"="The entry ID"}
      *      }
      * )
+     *
      * @return Entry
      */
     public function getEntryAction(Entry $entry)
     {
-        if ($entry->getUser()->getId() != $this->getUser()->getId()) {
-            throw $this->createAccessDeniedException('Access forbidden. Entry user id: '.$entry->getUser()->getId().', logged user id: '.$this->getUser()->getId());
-        }
+        $this->validateUserAccess($entry->getUser()->getId(), $this->getUser()->getId());
 
         $json = $this->get('serializer')->serialize($entry, 'json');
 
-        return new Response($json, 200, array('application/json'));
+        return $this->renderJsonResponse($json);
     }
 
     /**
-     * Create an entry
+     * Create an entry.
      *
      * @ApiDoc(
      *       parameters={
@@ -142,6 +140,7 @@ class WallabagRestController extends Controller
      *          {"name"="tags", "dataType"="string", "required"=false, "format"="tag1,tag2,tag3", "description"="a comma-separated list of tags."},
      *       }
      * )
+     *
      * @return Entry
      */
     public function postEntriesAction(Request $request)
@@ -165,11 +164,11 @@ class WallabagRestController extends Controller
 
         $json = $this->get('serializer')->serialize($entry, 'json');
 
-        return new Response($json, 200, array('application/json'));
+        return $this->renderJsonResponse($json);
     }
 
     /**
-     * Change several properties of an entry
+     * Change several properties of an entry.
      *
      * @ApiDoc(
      *      requirements={
@@ -182,17 +181,16 @@ class WallabagRestController extends Controller
      *          {"name"="star", "dataType"="boolean", "required"=false, "format"="true or false", "description"="starred the entry."},
      *      }
      * )
+     *
      * @return Entry
      */
     public function patchEntriesAction(Entry $entry, Request $request)
     {
-        if ($entry->getUser()->getId() != $this->getUser()->getId()) {
-            throw $this->createAccessDeniedException('Access forbidden. Entry user id: '.$entry->getUser()->getId().', logged user id: '.$this->getUser()->getId());
-        }
+        $this->validateUserAccess($entry->getUser()->getId(), $this->getUser()->getId());
 
-        $title      = $request->request->get("title");
-        $isArchived = $request->request->get("archive");
-        $isStarred  = $request->request->get("star");
+        $title      = $request->request->get('title');
+        $isArchived = $request->request->get('archive');
+        $isStarred  = $request->request->get('star');
 
         if (!is_null($title)) {
             $entry->setTitle($title);
@@ -216,24 +214,23 @@ class WallabagRestController extends Controller
 
         $json = $this->get('serializer')->serialize($entry, 'json');
 
-        return new Response($json, 200, array('application/json'));
+        return $this->renderJsonResponse($json);
     }
 
     /**
-     * Delete **permanently** an entry
+     * Delete **permanently** an entry.
      *
      * @ApiDoc(
      *      requirements={
      *          {"name"="entry", "dataType"="integer", "requirement"="\w+", "description"="The entry ID"}
      *      }
      * )
+     *
      * @return Entry
      */
     public function deleteEntriesAction(Entry $entry)
     {
-        if ($entry->getUser()->getId() != $this->getUser()->getId()) {
-            throw $this->createAccessDeniedException('Access forbidden. Entry user id: '.$entry->getUser()->getId().', logged user id: '.$this->getUser()->getId());
-        }
+        $this->validateUserAccess($entry->getUser()->getId(), $this->getUser()->getId());
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($entry);
@@ -241,11 +238,11 @@ class WallabagRestController extends Controller
 
         $json = $this->get('serializer')->serialize($entry, 'json');
 
-        return new Response($json, 200, array('application/json'));
+        return $this->renderJsonResponse($json);
     }
 
     /**
-     * Retrieve all tags for an entry
+     * Retrieve all tags for an entry.
      *
      * @ApiDoc(
      *      requirements={
@@ -255,17 +252,15 @@ class WallabagRestController extends Controller
      */
     public function getEntriesTagsAction(Entry $entry)
     {
-        if ($entry->getUser()->getId() != $this->getUser()->getId()) {
-            throw $this->createAccessDeniedException('Access forbidden. Entry user id: '.$entry->getUser()->getId().', logged user id: '.$this->getUser()->getId());
-        }
+        $this->validateUserAccess($entry->getUser()->getId(), $this->getUser()->getId());
 
         $json = $this->get('serializer')->serialize($entry->getTags(), 'json');
 
-        return new Response($json, 200, array('application/json'));
+        return $this->renderJsonResponse($json);
     }
 
     /**
-     * Add one or more tags to an entry
+     * Add one or more tags to an entry.
      *
      * @ApiDoc(
      *      requirements={
@@ -278,9 +273,7 @@ class WallabagRestController extends Controller
      */
     public function postEntriesTagsAction(Request $request, Entry $entry)
     {
-        if ($entry->getUser()->getId() != $this->getUser()->getId()) {
-            throw $this->createAccessDeniedException('Access forbidden. Entry user id: '.$entry->getUser()->getId().', logged user id: '.$this->getUser()->getId());
-        }
+        $this->validateUserAccess($entry->getUser()->getId(), $this->getUser()->getId());
 
         $tags = $request->request->get('tags', '');
         if (!empty($tags)) {
@@ -293,24 +286,22 @@ class WallabagRestController extends Controller
 
         $json = $this->get('serializer')->serialize($entry, 'json');
 
-        return new Response($json, 200, array('application/json'));
+        return $this->renderJsonResponse($json);
     }
 
     /**
-     * Permanently remove one tag for an entry
+     * Permanently remove one tag for an entry.
      *
      * @ApiDoc(
      *      requirements={
-     *          {"name"="tag", "dataType"="string", "requirement"="\w+", "description"="The tag"},
+     *          {"name"="tag", "dataType"="integer", "requirement"="\w+", "description"="The tag ID"},
      *          {"name"="entry", "dataType"="integer", "requirement"="\w+", "description"="The entry ID"}
      *      }
      * )
      */
     public function deleteEntriesTagsAction(Entry $entry, Tag $tag)
     {
-        if ($entry->getUser()->getId() != $this->getUser()->getId()) {
-            throw $this->createAccessDeniedException('Access forbidden. Entry user id: '.$entry->getUser()->getId().', logged user id: '.$this->getUser()->getId());
-        }
+        $this->validateUserAccess($entry->getUser()->getId(), $this->getUser()->getId());
 
         $entry->removeTag($tag);
         $em = $this->getDoctrine()->getManager();
@@ -319,11 +310,11 @@ class WallabagRestController extends Controller
 
         $json = $this->get('serializer')->serialize($entry, 'json');
 
-        return new Response($json, 200, array('application/json'));
+        return $this->renderJsonResponse($json);
     }
 
     /**
-     * Retrieve all tags
+     * Retrieve all tags.
      *
      * @ApiDoc()
      */
@@ -331,23 +322,21 @@ class WallabagRestController extends Controller
     {
         $json = $this->get('serializer')->serialize($this->getUser()->getTags(), 'json');
 
-        return new Response($json, 200, array('application/json'));
+        return $this->renderJsonResponse($json);
     }
 
     /**
-     * Permanently remove one tag from **every** entry
+     * Permanently remove one tag from **every** entry.
      *
      * @ApiDoc(
      *      requirements={
-     *          {"name"="tag", "dataType"="string", "requirement"="\w+", "description"="The tag"}
+     *          {"name"="tag", "dataType"="integer", "requirement"="\w+", "description"="The tag"}
      *      }
      * )
      */
     public function deleteTagAction(Tag $tag)
     {
-        if ($tag->getUser()->getId() != $this->getUser()->getId()) {
-            throw $this->createAccessDeniedException('Access forbidden. Entry user id: '.$tag->getUser()->getId().', logged user id: '.$this->getUser()->getId());
-        }
+        $this->validateUserAccess($tag->getUser()->getId(), $this->getUser()->getId());
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($tag);
@@ -355,6 +344,33 @@ class WallabagRestController extends Controller
 
         $json = $this->get('serializer')->serialize($tag, 'json');
 
+        return $this->renderJsonResponse($json);
+    }
+
+    /**
+     * Validate that the first id is equal to the second one.
+     * If not, throw exception. It means a user try to access information from an other user.
+     *
+     * @param int $requestUserId User id from the requested source
+     * @param int $currentUserId User id from the retrieved source
+     */
+    private function validateUserAccess($requestUserId, $currentUserId)
+    {
+        if ($requestUserId != $currentUserId) {
+            throw $this->createAccessDeniedException('Access forbidden. Entry user id: '.$requestUserId.', logged user id: '.$currentUserId);
+        }
+    }
+
+    /**
+     * Send a JSON Response.
+     * We don't use the Symfony JsonRespone, because it takes an array as parameter instead of a JSON string.
+     *
+     * @param string $json
+     *
+     * @return Response
+     */
+    private function renderJsonResponse($json)
+    {
         return new Response($json, 200, array('application/json'));
     }
 }

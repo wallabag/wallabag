@@ -1,5 +1,6 @@
 <?php
-namespace Wallabag\CoreBundle\Security\Authentication\Token;
+
+namespace Wallabag\ApiBundle\Security\Authentication\Token;
 
 use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace Wallabag\CoreBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;

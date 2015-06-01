@@ -2,10 +2,10 @@
 
 namespace Wallabag\CoreBundle\Tests\Controller;
 
-use Wallabag\CoreBundle\Tests\WallabagTestCase;
+use Wallabag\CoreBundle\Tests\WallabagCoreTestCase;
 use Doctrine\ORM\AbstractQuery;
 
-class EntryControllerTest extends WallabagTestCase
+class EntryControllerTest extends WallabagCoreTestCase
 {
     public function testLogin()
     {

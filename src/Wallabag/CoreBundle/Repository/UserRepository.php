@@ -7,7 +7,7 @@ use Doctrine\ORM\EntityRepository;
 class UserRepository extends EntityRepository
 {
     /**
-     * Find a user by its username and rss roken
+     * Find a user by its username and rss roken.
      *
      * @param string $username
      * @param string $rssToken

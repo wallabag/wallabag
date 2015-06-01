@@ -11,7 +11,7 @@ use Wallabag\CoreBundle\Entity\Entry;
 class RssController extends Controller
 {
     /**
-     * Shows unread entries for current user
+     * Shows unread entries for current user.
      *
      * @Route("/{username}/{token}/unread.xml", name="unread_rss", defaults={"_format"="xml"})
      * @ParamConverter("user", class="WallabagCoreBundle:User", converter="username_rsstoken_converter")
@@ -35,7 +35,7 @@ class RssController extends Controller
     }
 
     /**
-     * Shows read entries for current user
+     * Shows read entries for current user.
      *
      * @Route("/{username}/{token}/archive.xml", name="archive_rss")
      * @ParamConverter("user", class="WallabagCoreBundle:User", converter="username_rsstoken_converter")
@@ -59,7 +59,7 @@ class RssController extends Controller
     }
 
     /**
-     * Shows starred entries for current user
+     * Shows starred entries for current user.
      *
      * @Route("/{username}/{token}/starred.xml", name="starred_rss")
      * @ParamConverter("user", class="WallabagCoreBundle:User", converter="username_rsstoken_converter")

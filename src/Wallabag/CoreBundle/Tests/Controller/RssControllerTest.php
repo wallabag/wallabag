@@ -2,9 +2,9 @@
 
 namespace Wallabag\CoreBundle\Tests\Controller;
 
-use Wallabag\CoreBundle\Tests\WallabagTestCase;
+use Wallabag\CoreBundle\Tests\WallabagCoreTestCase;
 
-class RssControllerTest extends WallabagTestCase
+class RssControllerTest extends WallabagCoreTestCase
 {
     public function validateDom($xml, $nb = null)
     {
@@ -36,13 +36,13 @@ class RssControllerTest extends WallabagTestCase
     {
         return array(
             array(
-                '/admin/YZIOAUZIAO/unread.xml'
+                '/admin/YZIOAUZIAO/unread.xml',
             ),
             array(
-                '/wallace/YZIOAUZIAO/starred.xml'
+                '/wallace/YZIOAUZIAO/starred.xml',
             ),
             array(
-                '/wallace/YZIOAUZIAO/archives.xml'
+                '/wallace/YZIOAUZIAO/archives.xml',
             ),
         );
     }

@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Config
+ * Config.
  *
  * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\ConfigRepository")
  * @ORM\Table
@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Config
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -32,7 +32,7 @@ class Config
     private $theme;
 
     /**
-     * @var integer
+     * @var int
      *
      * @Assert\NotBlank()
      * @Assert\Range(
@@ -60,7 +60,7 @@ class Config
     private $rssToken;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="rss_limit", type="integer", nullable=true)
      * @Assert\Range(
@@ -85,9 +85,9 @@ class Config
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -95,9 +95,10 @@ class Config
     }
 
     /**
-     * Set theme
+     * Set theme.
      *
-     * @param  string $theme
+     * @param string $theme
+     *
      * @return Config
      */
     public function setTheme($theme)
@@ -108,7 +109,7 @@ class Config
     }
 
     /**
-     * Get theme
+     * Get theme.
      *
      * @return string
      */
@@ -118,9 +119,10 @@ class Config
     }
 
     /**
-     * Set itemsPerPage
+     * Set itemsPerPage.
      *
-     * @param  integer $itemsPerPage
+     * @param int $itemsPerPage
+     *
      * @return Config
      */
     public function setItemsPerPage($itemsPerPage)
@@ -131,9 +133,9 @@ class Config
     }
 
     /**
-     * Get itemsPerPage
+     * Get itemsPerPage.
      *
-     * @return integer
+     * @return int
      */
     public function getItemsPerPage()
     {
@@ -141,9 +143,10 @@ class Config
     }
 
     /**
-     * Set language
+     * Set language.
      *
-     * @param  string $language
+     * @param string $language
+     *
      * @return Config
      */
     public function setLanguage($language)
@@ -154,7 +157,7 @@ class Config
     }
 
     /**
-     * Get language
+     * Get language.
      *
      * @return string
      */
@@ -164,9 +167,10 @@ class Config
     }
 
     /**
-     * Set user
+     * Set user.
      *
-     * @param  \Wallabag\CoreBundle\Entity\User $user
+     * @param \Wallabag\CoreBundle\Entity\User $user
+     *
      * @return Config
      */
     public function setUser(\Wallabag\CoreBundle\Entity\User $user = null)
@@ -177,7 +181,7 @@ class Config
     }
 
     /**
-     * Get user
+     * Get user.
      *
      * @return \Wallabag\CoreBundle\Entity\User
      */
@@ -187,9 +191,10 @@ class Config
     }
 
     /**
-     * Set rssToken
+     * Set rssToken.
      *
-     * @param  string $rssToken
+     * @param string $rssToken
+     *
      * @return Config
      */
     public function setRssToken($rssToken)
@@ -200,7 +205,7 @@ class Config
     }
 
     /**
-     * Get rssToken
+     * Get rssToken.
      *
      * @return string
      */
@@ -210,9 +215,10 @@ class Config
     }
 
     /**
-     * Set rssLimit
+     * Set rssLimit.
      *
-     * @param  string $rssLimit
+     * @param string $rssLimit
+     *
      * @return Config
      */
     public function setRssLimit($rssLimit)
@@ -223,7 +229,7 @@ class Config
     }
 
     /**
-     * Get rssLimit
+     * Get rssLimit.
      *
      * @return string
      */

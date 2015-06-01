@@ -10,7 +10,7 @@ use Pagerfanta\Pagerfanta;
 class EntryRepository extends EntityRepository
 {
     /**
-     * Retrieves unread entries for a user
+     * Retrieves unread entries for a user.
      *
      * @param int $userId
      * @param int $firstResult
@@ -35,7 +35,7 @@ class EntryRepository extends EntityRepository
     }
 
     /**
-     * Retrieves read entries for a user
+     * Retrieves read entries for a user.
      *
      * @param int $userId
      * @param int $firstResult
@@ -61,7 +61,7 @@ class EntryRepository extends EntityRepository
     }
 
     /**
-     * Retrieves starred entries for a user
+     * Retrieves starred entries for a user.
      *
      * @param int $userId
      * @param int $firstResult
@@ -87,7 +87,7 @@ class EntryRepository extends EntityRepository
     }
 
     /**
-     * Find Entries
+     * Find Entries.
      *
      * @param int    $userId
      * @param bool   $isArchived

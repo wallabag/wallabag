@@ -50,7 +50,7 @@ class EntryController extends Controller
     }
 
     /**
-     * Shows unread entries for current user
+     * Shows unread entries for current user.
      *
      * @Route("/unread", name="unread")
      *
@@ -70,7 +70,7 @@ class EntryController extends Controller
     }
 
     /**
-     * Shows read entries for current user
+     * Shows read entries for current user.
      *
      * @Route("/archive", name="archive")
      *
@@ -90,7 +90,7 @@ class EntryController extends Controller
     }
 
     /**
-     * Shows starred entries for current user
+     * Shows starred entries for current user.
      *
      * @Route("/starred", name="starred")
      *
@@ -110,7 +110,7 @@ class EntryController extends Controller
     }
 
     /**
-     * Shows entry content
+     * Shows entry content.
      *
      * @param Entry $entry
      *
@@ -129,7 +129,7 @@ class EntryController extends Controller
     }
 
     /**
-     * Changes read status for an entry
+     * Changes read status for an entry.
      *
      * @param Request $request
      * @param Entry   $entry
@@ -154,7 +154,7 @@ class EntryController extends Controller
     }
 
     /**
-     * Changes favorite status for an entry
+     * Changes favorite status for an entry.
      *
      * @param Request $request
      * @param Entry   $entry
@@ -179,7 +179,7 @@ class EntryController extends Controller
     }
 
     /**
-     * Deletes entry
+     * Deletes entry.
      *
      * @param Request $request
      * @param Entry   $entry
@@ -205,7 +205,7 @@ class EntryController extends Controller
     }
 
     /**
-     * Check if the logged user can manage the given entry
+     * Check if the logged user can manage the given entry.
      *
      * @param Entry $entry
      */

@@ -30,9 +30,10 @@ class SecurityController extends Controller
     }
 
     /**
-     * Request forgot password: show form
+     * Request forgot password: show form.
      *
      * @Route("/forgot-password", name="forgot_password")
+     *
      * @Method({"GET", "POST"})
      */
     public function forgotPasswordAction(Request $request)
@@ -73,9 +74,10 @@ class SecurityController extends Controller
     }
 
     /**
-     * Tell the user to check his email provider
+     * Tell the user to check his email provider.
      *
      * @Route("/forgot-password/check-email", name="forgot_password_check_email")
+     *
      * @Method({"GET"})
      */
     public function checkEmailAction(Request $request)
@@ -93,9 +95,10 @@ class SecurityController extends Controller
     }
 
     /**
-     * Reset user password
+     * Reset user password.
      *
      * @Route("/forgot-password/{token}", name="forgot_password_reset")
+     *
      * @Method({"GET", "POST"})
      */
     public function resetAction(Request $request, $token)
