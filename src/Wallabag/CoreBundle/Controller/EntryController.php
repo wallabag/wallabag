@@ -7,7 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Service\Extractor;
-use Wallabag\CoreBundle\Form\Type\EntryType;
+use Wallabag\CoreBundle\Form\Type\NewEntryType;
+use Wallabag\CoreBundle\Form\Type\EditEntryType;
 
 class EntryController extends Controller
 {
@@ -22,7 +23,7 @@ class EntryController extends Controller
     {
         $entry = new Entry($this->getUser());
 
-        $form = $this->createForm(new EntryType(), $entry);
+        $form = $this->createForm(new NewEntryType(), $entry);
 
         $form->handleRequest($request);
 
@@ -45,6 +46,42 @@ class EntryController extends Controller
         }
 
         return $this->render('WallabagCoreBundle:Entry:new.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
+
+    /**
+     * Edit an entry content.
+     *
+     * @param Request $request
+     * @param Entry   $entry
+     *
+     * @Route("/edit/{id}", requirements={"id" = "\d+"}, name="edit")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function editEntryAction(Request $request, Entry $entry)
+    {
+        $this->checkUserAction($entry);
+
+        $form = $this->createForm(new EditEntryType(), $entry);
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($entry);
+            $em->flush();
+
+            $this->get('session')->getFlashBag()->add(
+                'notice',
+                'Entry updated'
+            );
+
+            return $this->redirect($this->generateUrl('view', array('id' => $entry->getId())));
+        }
+
+        return $this->render('WallabagCoreBundle:Entry:edit.html.twig', array(
             'form' => $form->createView(),
         ));
     }
@@ -212,7 +249,7 @@ class EntryController extends Controller
     private function checkUserAction(Entry $entry)
     {
         if ($this->getUser()->getId() != $entry->getUser()->getId()) {
-            throw $this->createAccessDeniedException('You can not use this entry.');
+            throw $this->createAccessDeniedException('You can not access this entry.');
         }
     }
 }

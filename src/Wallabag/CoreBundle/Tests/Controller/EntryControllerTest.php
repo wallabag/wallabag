@@ -109,6 +109,54 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertContains($content->getTitle(), $client->getResponse()->getContent());
     }
 
+    public function testEdit()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $content = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneByIsArchived(false);
+
+        $crawler = $client->request('GET', '/edit/'.$content->getId());
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $this->assertCount(1, $crawler->filter('input[id=entry_title]'));
+        $this->assertCount(1, $crawler->filter('button[id=entry_save]'));
+    }
+
+    public function testEditUpdate()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $content = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneByIsArchived(false);
+
+        $crawler = $client->request('GET', '/edit/'.$content->getId());
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $form = $crawler->filter('button[type=submit]')->form();
+
+        $data = array(
+            'entry[title]' => 'My updated title hehe :)',
+        );
+
+        $client->submit($form, $data);
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+
+        $crawler = $client->followRedirect();
+
+        $this->assertGreaterThan(1, $alert = $crawler->filter('div[id=article] h1')->extract(array('_text')));
+        $this->assertContains('My updated title hehe :)', $alert[0]);
+    }
+
     public function testToggleArchive()
     {
         $this->logInAs('admin');

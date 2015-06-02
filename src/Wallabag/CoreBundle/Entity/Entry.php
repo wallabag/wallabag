@@ -390,7 +390,7 @@ class Entry
     /**
      * @param bool $isPublic
      */
-    public function setPublic($isPublic)
+    public function setIsPublic($isPublic)
     {
         $this->isPublic = $isPublic;
     }
