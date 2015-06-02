@@ -278,7 +278,7 @@ class Poche
                     }
                     Tools::logm($msg);
                 }
-                Tools::redirect('?');
+                Tools::redirect();
                 break;
             case 'toggle_fav' :
                 $this->store->favoriteById($id, $this->user->getId());
