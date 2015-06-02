@@ -874,7 +874,7 @@ class Poche
       $filename = "wallabag-export-".$this->user->getId()."-".date("Y-m-d").".json";
       header('Content-Disposition: attachment; filename='.$filename);
 
-      $entries = $this->store->retrieveAll($this->user->getId());
+      $entries = $this->store->retrieveAllWithTags($this->user->getId());
       echo $this->tpl->render('export.twig', array(
           'export' => Tools::renderJson($entries),
       ));

@@ -323,6 +323,21 @@ class Database {
         return $entries;
     }
 
+    public function retrieveAllWithTags($user_id)
+    {
+        $entries = $this->retrieveAll($user_id);
+        $count = count($entries);
+        for ($i = 0; $i < $count; $i++) {
+          $tag_entries = $this->retrieveTagsByEntry($entries[$i]['id']);
+          $tags = [];
+          foreach ($tag_entries as $tag) {
+            $tags[] = $tag[1];
+          }
+          $entries[$i]['tags'] = implode(',', $tags);
+        }
+        return $entries;
+    }
+
     public function retrieveOneById($id, $user_id)
     {
         $entry  = NULL;
