@@ -36,8 +36,6 @@ if (isset($_SERVER['HTTP_COOKIE'])) {
 if (isset($_SESSION['poche_user'])) {
 	unset($_SESSION['poche_user']);
 }
-session_destroy();
-
 
 if (isset($_GET['clean'])) {
     if (is_dir('install')){

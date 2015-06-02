@@ -141,7 +141,7 @@ class Routing
                 $pdf->producePDF();
             } elseif (isset($_GET['import'])) {
                 $import = $this->wallabag->import();
-                $tplVars = array_merge($this->vars, $import);
+                $this->vars = array_merge($this->vars, $import);
             } elseif (isset($_GET['empty-cache'])) {
                 Tools::emptyCache();
             } elseif (isset($_GET['export'])) {

@@ -732,23 +732,45 @@ class Poche
           $html->load_file($_FILES['file']['tmp_name']);
           $data = array();
           $read = 0;
-          foreach (array('ol','ul') as $list) {
-            foreach ($html->find($list) as $ul) {
-              foreach ($ul->find('li') as $li) {
-                $tmpEntry = array();
-                  $a = $li->find('a');
-                  $tmpEntry['url'] = $a[0]->href;
-                  $tmpEntry['tags'] = $a[0]->tags;
-                  $tmpEntry['is_read'] = $read;
-                  if ($tmpEntry['url']) {
-                    $data[] = $tmpEntry;
+
+          if (Tools::get_doctype($html)->innertext == "<!DOCTYPE NETSCAPE-Bookmark-file-1>") {
+            // Firefox-bookmarks HTML
+            foreach (array('DL','ul') as $list) {
+                foreach ($html->find($list) as $ul) {
+                  foreach ($ul->find('DT') as $li) {
+                    $tmpEntry = array();
+                      $a = $li->find('A');
+                      $tmpEntry['url'] = $a[0]->href;
+                      $tmpEntry['tags'] = $a[0]->tags;
+                      $tmpEntry['is_read'] = $read;
+                      if ($tmpEntry['url']) {
+                        $data[] = $tmpEntry;
+                      }
                   }
-              }
-              # the second <ol/ul> is for read links
-              $read = ((sizeof($data) && $read)?0:1);
+                  # the second <ol/ul> is for read links
+                  $read = ((sizeof($data) && $read)?0:1);
+                }
             }
-          }
-    	}
+          } else {
+            // regular HTML
+            foreach (array('ol','ul') as $list) {
+                foreach ($html->find($list) as $ul) {
+                  foreach ($ul->find('li') as $li) {
+                    $tmpEntry = array();
+                      $a = $li->find('a');
+                      $tmpEntry['url'] = $a[0]->href;
+                      $tmpEntry['tags'] = $a[0]->tags;
+                      $tmpEntry['is_read'] = $read;
+                      if ($tmpEntry['url']) {
+                        $data[] = $tmpEntry;
+                      }
+                  }
+                  # the second <ol/ul> is for read links
+                  $read = ((sizeof($data) && $read)?0:1);
+                }
+              }
+        	}
+        }
 
             // for readability structure
 
@@ -766,7 +788,7 @@ class Poche
             $urlsInserted = array(); //urls of articles inserted
             foreach($data as $record) {
                 $url = trim(isset($record['article__url']) ? $record['article__url'] : (isset($record['url']) ? $record['url'] : ''));
-                if ($url and !in_array($url, $urlsInserted)) {
+                if (filter_var($url, FILTER_VALIDATE_URL) and !in_array($url, $urlsInserted)) {
                     $title = (isset($record['title']) ? $record['title'] : _('Untitled - Import - ') . '</a> <a href="./?import">' . _('click to finish import') . '</a><a>');
                     $body = (isset($record['content']) ? $record['content'] : '');
                     $isRead = (isset($record['is_read']) ? intval($record['is_read']) : (isset($record['archive']) ? intval($record['archive']) : 0));

@@ -420,4 +420,23 @@ final class Tools
         return str_replace('+', '', $token);
     }
 
+    /** 
+    *
+    * Returns the doctype for an HTML document (used for Mozilla Bookmarks)
+    * @param simple_html_dom $doc
+    * @return doctype $el
+    *
+    */
+
+    public static function get_doctype($doc)
+    {
+        $els = $doc->find('unknown');
+
+        foreach ($els as $e => $el) 
+            if ($el->parent()->tag == 'root') 
+                return $el;
+
+        return NULL;
+    }
+
 }
