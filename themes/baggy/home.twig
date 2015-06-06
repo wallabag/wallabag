@@ -107,4 +107,8 @@
             {% if constant('PDF') == 1 %}<a title="{% trans "Download the articles from this category in a pdf file" %}" href="./?pdf&amp;method=category&amp;value={{ view }}">{% trans "Download as PDF" %}</a>{% endif %}
             {% endif %}
 {% endif %}
+
+<script type="text/javascript">
+    homeNavigation();
+</script>
 {% endblock %}

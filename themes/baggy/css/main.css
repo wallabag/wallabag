@@ -399,19 +399,19 @@ footer a {
           transition: all 0.5s ease;
 }
 
-.entrie:hover {
+.entrie:hover, .eselected {
   box-shadow: 0 3px 10px rgba(0,0,0,1);
 }
 
-.entrie:hover:after {
+.entrie:hover:after, .eselected:after {
   height: 40px;
 }
 
-.entrie:hover:before {
+.entrie:hover:before, .eselected:before {
   bottom: 2.4em;
 }
 
-.entrie:hover h2 a {
+.entrie:hover h2 a, .eselected h2 a {
   color: #666;
 }
 
@@ -421,9 +421,9 @@ footer a {
   line-height: 1.2;
 }
 
-  .entrie h2:after {
-    content: none;
-  }
+.entrie h2:after {
+  content: none;
+}
 
 
 .entrie h2 a {
@@ -437,16 +437,6 @@ footer a {
        -o-transition: all 0.5s ease;
           transition: all 0.5s ease;
 }
-/*
-.entrie h2 a:after {
-  content: "";
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  left: 0;
-}
-*/
 
 .entrie p {
   color: #666;
@@ -454,12 +444,8 @@ footer a {
   line-height: 1.7;
 }
 
-  .entrie h2 a:first-letter {
-    text-transform: uppercase;
-  }
-
-.entrie:hover .tools {
-  bottom: 0;
+.entrie h2 a:first-letter {
+  text-transform: uppercase;
 }
 
 .entrie .tools {
@@ -477,20 +463,25 @@ footer a {
           transition: all 0.5s ease;
 }
 
-  .entrie .tools a {
-    color: #666;
-    text-decoration: none;
-    display: block;
-    padding: 0.4em;
-  }
+.entrie:hover .tools, .eselected .tools {
+  bottom: 0;
+}
 
-  .entrie .tools a:hover {
-    color: #FFF;
-  }
 
-  .entrie .tools li {
-    display: inline-block;
-  }
+.entrie .tools a {
+  color: #666;
+  text-decoration: none;
+  display: block;
+  padding: 0.4em;
+}
+
+.entrie .tools a:hover {
+  color: #FFF;
+}
+
+.entrie .tools li {
+  display: inline-block;
+}
 
 .entrie:nth-child(3n+1) {
   margin-left: 0;
