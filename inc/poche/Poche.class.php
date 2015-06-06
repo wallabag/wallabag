@@ -278,7 +278,7 @@ class Poche
                     }
                     Tools::logm($msg);
                 }
-                Tools::redirect('?');
+                Tools::redirect();
                 break;
             case 'toggle_fav' :
                 $this->store->favoriteById($id, $this->user->getId());
@@ -896,7 +896,7 @@ class Poche
       $filename = "wallabag-export-".$this->user->getId()."-".date("Y-m-d").".json";
       header('Content-Disposition: attachment; filename='.$filename);
 
-      $entries = $this->store->retrieveAll($this->user->getId());
+      $entries = $this->store->retrieveAllWithTags($this->user->getId());
       echo $this->tpl->render('export.twig', array(
           'export' => Tools::renderJson($entries),
       ));
