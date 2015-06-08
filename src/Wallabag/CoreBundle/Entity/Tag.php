@@ -51,6 +51,12 @@ class Tag
         $this->user    = $user;
         $this->entries = new ArrayCollection();
     }
+
+    public function __toString()
+    {
+        return $this->label;
+    }
+
     /**
      * Get id.
      *

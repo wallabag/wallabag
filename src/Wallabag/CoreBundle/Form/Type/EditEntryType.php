@@ -6,12 +6,18 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class EntryType extends AbstractType
+class EditEntryType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('url', 'url', array('required' => true))
+            ->add('title', 'text', array('required' => true))
+            ->add('is_public', 'checkbox', array('required' => false))
+            // @todo: add autocomplete
+            // ->add('tags', 'entity', array(
+            //     'class' => 'Wallabag\CoreBundle\Entity\Tag',
+            //     'choice_translation_domain' => true,
+            // ))
             ->add('save', 'submit')
         ;
     }
