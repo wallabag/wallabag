@@ -4,7 +4,7 @@ namespace Wallabag\CoreBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ConfigType extends AbstractType
 {
@@ -24,14 +24,17 @@ class ConfigType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('theme', 'choice', array('choices' => $this->themes))
+            ->add('theme', 'choice', array(
+                'choices' => array_flip($this->themes),
+                'choices_as_values' => true,
+            ))
             ->add('items_per_page')
             ->add('language')
             ->add('save', 'submit')
         ;
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'Wallabag\CoreBundle\Entity\Config',
