@@ -51,9 +51,9 @@ class Session
     public static function init($longlastingsession = false)
     {
         //check if session name is correct
-        if ( (session_id() && !empty(self::$sessionName) && session_name()!=self::$sessionName) || $longlastingsession ) {
+        /*if ( (session_id() && !empty(self::$sessionName) && session_name()!=self::$sessionName) || $longlastingsession ) {
             session_destroy();
-        }
+        }*/
 
         // Force cookie path (but do not change lifetime)
         $cookie = session_get_cookie_params();

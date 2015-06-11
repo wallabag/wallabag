@@ -15,7 +15,7 @@ require_once 'inc/poche/global.inc.php';
 
 // Start session
 Session::$sessionName = 'wallabag';
-Session::init();
+Session::init(true);
 
 // Let's rock !
 $wallabag = new Poche();
