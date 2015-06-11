@@ -635,6 +635,7 @@ class Poche
                 setlocale(LC_ALL, $language);
                 bindtextdomain($language, LOCALE);
                 textdomain($language);
+                bind_textdomain_codeset($language, 'UTF-8');
 
                 $this->messages->add('s', _('welcome to your wallabag'));
                 Tools::logm('login successful');
