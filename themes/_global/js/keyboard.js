@@ -88,7 +88,6 @@ function markReadArticle(id) {
 
 function homeNavigation() {
   selectedArticle = $('.entrie:first');
-  console.log("selected first article");
   window.addEventListener("keydown", function (event) {
     var key = event.which || event.keyCode; // event.keyCode is used for IE8 and earlier versions
     switch (key) {
@@ -130,8 +129,6 @@ function goSelectNext(selectedArticle,number) {
     selectedArticle.removeClass("eselected");
     selectedArticle = selectedArticle.next();
     selectedArticle.addClass("eselected");
-    console.log("Changed selected to next");
-    console.log("selectedArticle is now " + selectedArticle.attr("id"));
   }
   return selectedArticle;
 }
@@ -142,9 +139,6 @@ function goSelectPrev(selectedArticle,number) {
     selectedArticle.removeClass("eselected");
     selectedArticle = selectedArticle.prev();
     selectedArticle.addClass("eselected");
-    console.log("Changed selected to previous");
-    console.log("selectedArticle is now " + selectedArticle.attr("id"));
-
   }
   return selectedArticle;
 }
