@@ -72,8 +72,14 @@ final class Tools
             $serverport = '';
         }
 
-        return 'http' . ($https ? 's' : '') . '://'
-            . $host . $serverport . $scriptname;
+	// check if BASE_URL is configured
+	if(BASE_URL != null && BASE_URL != '') {
+		$baseUrl = BASE_URL;
+	} else {
+		$baseUrl = 'http' . ($https ? 's' : '') . '://' . $host . $serverport;
+	}
+
+        return $baseUrl . $scriptname;
     }
 
     /**
