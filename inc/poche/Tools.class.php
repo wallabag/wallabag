@@ -40,6 +40,8 @@ final class Tools
      */
     public static function getPocheUrl()
     {
+    	$baseUrl = "";
+
         $https = (!empty($_SERVER['HTTPS'])
                     && (strtolower($_SERVER['HTTPS']) == 'on'))
             || (isset($_SERVER["SERVER_PORT"])
@@ -72,14 +74,16 @@ final class Tools
             $serverport = '';
         }
 
-	// check if BASE_URL is configured
-	if(BASE_URL != null && BASE_URL != '') {
-		$baseUrl = BASE_URL;
-	} else {
-		$baseUrl = 'http' . ($https ? 's' : '') . '://' . $host . $serverport;
-	}
+		// check if BASE_URL is configured
+		if(BASE_URL) {
+			print_r(BASE_URL);
+			$baseUrl = BASE_URL;
+		} else {
+			$baseUrl = 'http' . ($https ? 's' : '') . '://' . $host . $serverport;
+		}
 
-        return $baseUrl . $scriptname;
+    return $baseUrl . $scriptname;
+    
     }
 
     /**
