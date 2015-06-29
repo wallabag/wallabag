@@ -76,7 +76,6 @@ final class Tools
 
 		// check if BASE_URL is configured
 		if(BASE_URL) {
-			print_r(BASE_URL);
 			$baseUrl = BASE_URL;
 		} else {
 			$baseUrl = 'http' . ($https ? 's' : '') . '://' . $host . $serverport;
