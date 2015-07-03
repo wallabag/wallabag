@@ -1,0 +1,31 @@
+.readRemainingGauge {
+	position: fixed;
+	font-weight: bold;
+	font-size: 13px;
+	border-radius: 3px;
+	right: 40px;
+	bottom: 40px;
+	width: 95px;
+	height: 38px;
+	line-height: 38px;
+	text-align: center;
+	font-family: "Open Sans", sans-serif;
+	font-size: 14px;
+	font-weight: normal;
+	background: rgba(0, 0, 0, 0.4);
+	color: white;
+
+	opacity: 1;
+	-webkit-transition: opacity 0.45s ease;
+	-moz-transition:    opacity 0.45s ease;
+	-o-transition:      opacity 0.45s ease;
+	transition:         opacity 0.45s ease;
+
+}
+.readRemainingGauge.hidden {
+	opacity: 0;
+	-moz-transition-property: none;
+	-webkit-transition-property: none;
+	-o-transition-property: none;
+	transition-property: none;
+}
