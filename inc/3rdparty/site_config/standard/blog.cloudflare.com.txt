@@ -3,7 +3,11 @@ title: substring-before(//title, '-')
 
 author: //a[ contains(@href, '/people') ]
 
-body: //div[ @class='post' ]
+body: //article[contains(concat(' ',normalize-space(@class),' '),' post ')]
+
+strip_id_or_class: section learn-more
+strip_id_or_class: section comments
+strip_id_or_class: disqus_thread
 
 # Date is impossible to retrieve since they use those stupid "fuzzy" dates, inserted through javascript, at posterous.
 test_url: http://blog.cloudflare.com/understanding-analytics-when-is-a-page-view-n
