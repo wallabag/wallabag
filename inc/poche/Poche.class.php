@@ -266,6 +266,15 @@ class Poche
                 }
                 foreach($entry_ids as $id) {
                     $msg = 'delete link #' . $id;
+
+                    // deleting tags and tags_entries
+                    $tags = $this->store->retrieveTagsByEntry($id);
+                    foreach ($tags as $tag) {
+                        $this->store->removeTagForEntry($id, $tag['id']);
+                        $this->store->cleanUnusedTag($tag['id']);
+                    }
+
+                    // deleting pictures
                     if ($this->store->deleteById($id, $this->user->getId())) {
                         if (DOWNLOAD_PICTURES) {
                             Picture::removeDirectory(ABS_PATH . $id);
