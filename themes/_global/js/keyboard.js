@@ -144,5 +144,7 @@ function goSelectPrev(selectedArticle,number) {
 }
 
 function enterArticle(selectedArticle) {
-  window.location = selectedArticle.find('a:first').attr('href');
+  if (!$("#bagit").hasClass("current")) {
+    window.location = selectedArticle.find('a:first').attr('href');
+  }
 }
