@@ -7,7 +7,9 @@ author: //p[@class="tagline"]/a
 # this doesn't work for some reason...?
 date: //p[@class="tagline"]//@datetime
 
-body: (//div[contains(@class, 'noncollapsed')]//div[contains(@class, 'usertext-body')])[1]
+#body: (//div[contains(@class, 'noncollapsed')]//div[contains(@class, 'usertext-body')])[1]
+
+body: //div[contains(concat(' ',normalize-space(@class),' '),' usertext-body ') and (contains(concat(' ',normalize-space(@class),' '),' may-blank-within ')) and (contains(concat(' ',normalize-space(@class),' '),' md-container '))]//div[contains(concat(' ',normalize-space(@class),' '),' md ')]
 
 strip_id_or_class: tagline
 strip_id_or_class: unvotable-message
