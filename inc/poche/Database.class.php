@@ -266,10 +266,10 @@ class Database {
     {
         $entries = $this->retrieveAll($userID);
         if ($entries) {
-            foreach($entries as $entryid) {
-                $tags = $this->retrieveTagsByEntry($entryid);
+            foreach($entries as $entry) {
+                $tags = $this->retrieveTagsByEntry($entry['id']);
                 foreach($tags as $tag) {
-                    $this->removeTagForEntry($entryid,$tags);
+                    $this->removeTagForEntry($entry['id'], $tags);
                 }
                 $this->deleteById($entryid,$userID);
             }
