@@ -156,11 +156,14 @@ class Database {
     {
         $sql = "SELECT * FROM users_config WHERE user_id = ?";
         $query = $this->executeQuery($sql, array($id));
-        $result = $query->fetchAll();
-        $user_config = array();
+        $result = ($query) ? $query->fetchAll() : false;
+        $user_config = false;
+        if ($query) {
+            $user_config = array();
 
-        foreach ($result as $key => $value) {
-            $user_config[$value['name']] = $value['value'];
+            foreach ($result as $key => $value) {
+                $user_config[$value['name']] = $value['value'];
+            }
         }
 
         return $user_config;
@@ -171,11 +174,7 @@ class Database {
         $sql = "SELECT * FROM users WHERE username=?";
         $query = $this->executeQuery($sql, array($username));
         $login = $query->fetchAll();
-        if (isset($login[0])) {
-            return true;
-        } else {
-            return false;
-        }
+        return (isset($login[0]) && $query) ? true : false;
     }
 
     public function login($username, $password, $isauthenticated = FALSE)
@@ -187,10 +186,10 @@ class Database {
             $sql = "SELECT * FROM users WHERE username=? AND password=?";
             $query = $this->executeQuery($sql, array($username, $password));
         }
-        $login = $query->fetchAll();
+        $login = ($query) ? $query->fetchAll() : false;
 
         $user = array();
-        if (isset($login[0])) {
+        if ($login[0]) {
             $user['id'] = $login[0]['id'];
             $user['username'] = $login[0]['username'];
             $user['password'] = $login[0]['password'];
@@ -243,7 +242,7 @@ class Database {
     {
         $sql = 'SELECT count(*) FROM users'.( $username ? ' WHERE username=?' : '');
         $query = $this->executeQuery($sql, ( $username ? array($username) : array()));
-        list($count) = $query->fetch();
+        list($count) = ($query) ? $query->fetch() : false;
         return $count;
     }
     
@@ -252,7 +251,7 @@ class Database {
         $sql = "SELECT * FROM users WHERE id=?";
         $query = $this->executeQuery($sql, array($userID));
         $password = $query->fetchAll();
-        return isset($password[0]['password']) ? $password[0]['password'] : null;
+        return ($query) ? $password[0]['password'] : false;
     }
     
     public function deleteUserConfig($userID)
@@ -260,18 +259,22 @@ class Database {
         $sql_action = 'DELETE from users_config WHERE user_id=?';
         $params_action = array($userID);
         $query = $this->executeQuery($sql_action, $params_action);
-        return $query;
+        return ($query) ? $query : false;
     }
     
     public function deleteTagsEntriesAndEntries($userID)
     {
         $entries = $this->retrieveAll($userID);
-        foreach($entries as $entryid) {
-            $tags = $this->retrieveTagsByEntry($entryid);
-            foreach($tags as $tag) {
-                $this->removeTagForEntry($entryid,$tags);
+        if ($entries) {
+            foreach($entries as $entryid) {
+                $tags = $this->retrieveTagsByEntry($entryid);
+                foreach($tags as $tag) {
+                    $this->removeTagForEntry($entryid,$tags);
+                }
+                $this->deleteById($entryid,$userID);
             }
-            $this->deleteById($entryid,$userID);
+        } else {
+            return false;
         }
     }
     
@@ -302,7 +305,7 @@ class Database {
         $query      = $this->executeQuery($sql, array($user_id));
         $entries    = $query->fetchAll();
 
-        return $entries;
+        return ($query) ? $entries : false;
     }
 
     public function retrieveUnfetchedEntriesCount($user_id)
@@ -320,44 +323,44 @@ class Database {
         $query      = $this->executeQuery($sql, array($user_id));
         $entries    = $query->fetchAll();
 
-        return $entries;
+        return ($query) ? $entries : false;
     }
 
     public function retrieveAllWithTags($user_id)
     {
         $entries = $this->retrieveAll($user_id);
-        $count = count($entries);
-        for ($i = 0; $i < $count; $i++) {
-          $tag_entries = $this->retrieveTagsByEntry($entries[$i]['id']);
-          $tags = [];
-          foreach ($tag_entries as $tag) {
-            $tags[] = $tag[1];
-          }
-          $entries[$i]['tags'] = implode(',', $tags);
+        if ($entries) {
+            $count = count($entries);
+            for ($i = 0; $i < $count; $i++) {
+              $tag_entries = $this->retrieveTagsByEntry($entries[$i]['id']);
+              $tags = [];
+              foreach ($tag_entries as $tag) {
+                $tags[] = $tag[1];
+              }
+              $entries[$i]['tags'] = implode(',', $tags);
+            }         
         }
         return $entries;
     }
 
     public function retrieveOneById($id, $user_id)
     {
-        $entry  = NULL;
         $sql    = "SELECT * FROM entries WHERE id=? AND user_id=?";
         $params = array(intval($id), $user_id);
         $query  = $this->executeQuery($sql, $params);
         $entry  = $query->fetchAll();
 
-        return isset($entry[0]) ? $entry[0] : null;
+        return ($query) ? $entry[0] : false;
     }
 
     public function retrieveOneByURL($url, $user_id)
     {
-        $entry  = NULL;
         $sql    = "SELECT * FROM entries WHERE url=? AND user_id=?";
         $params = array($url, $user_id);
         $query  = $this->executeQuery($sql, $params);
         $entry  = $query->fetchAll();
 
-        return isset($entry[0]) ? $entry[0] : null;
+        return ($query) ? $entry[0] : false;
     }
 
     public function reassignTags($old_entry_id, $new_entry_id)
@@ -395,7 +398,8 @@ class Database {
                 $query = $this->executeQuery($sql, $params);
                 $entries = $query->fetchAll();
 
-                return $entries;
+                return ($query) ? $entries : false;
+
     }
 
     public function getEntriesByViewCount($view, $user_id, $tag_id = 0)
@@ -422,7 +426,7 @@ class Database {
         }
 
         $query = $this->executeQuery($sql, $params);
-        list($count) = $query->fetch();
+        list($count) = ($query) ? $query->fetch() : array(false);
 
         return $count;
     }
@@ -445,7 +449,7 @@ class Database {
         $query = $this->executeQuery($sql, $params);
         $id = $query->fetchAll();
 
-        return $id;
+        return ($query) ? $id : false;
     }
 
     public function getPreviousArticle($id, $user_id) 
@@ -454,7 +458,7 @@ class Database {
         $params = array($id, $user_id);
         $query = $this->executeQuery($sql, $params);
         $id_entry = $query->fetchAll();
-        $id = $id_entry[0][0];
+        $id = ($query) ? $id_entry[0][0] : false;
         return $id;
     }
 
@@ -464,7 +468,7 @@ class Database {
         $params = array($id, $user_id);
         $query = $this->executeQuery($sql, $params);
         $id_entry = $query->fetchAll();
-        $id = $id_entry[0][0];
+        $id = ($query) ? $id_entry[0][0] : false;
         return $id;
     }
 
@@ -540,7 +544,7 @@ class Database {
         $sql_action .= $this->getEntriesOrder().' ' . $limit;
         $params_action = array($user_id, $search, $search, $search);
         $query = $this->executeQuery($sql_action, $params_action);
-        return $query->fetchAll();
+        return ($query) ? $query->fetchAll() : false;
   	}
 
     public function retrieveAllTags($user_id, $term = NULL)
@@ -553,23 +557,23 @@ class Database {
           GROUP BY tags.id, tags.value
           ORDER BY tags.value";
         $query = $this->executeQuery($sql, (($term)? array($user_id, strtolower('%'.$term.'%')) : array($user_id) ));
-        $tags = $query->fetchAll();
+        $tags = ($query) ? $query->fetchAll() : false;
 
         return $tags;
     }
 
     public function retrieveTag($id, $user_id)
     {
-        $tag  = NULL;
         $sql    = "SELECT DISTINCT tags.* FROM tags
           LEFT JOIN tags_entries ON tags_entries.tag_id=tags.id
           LEFT JOIN entries ON tags_entries.entry_id=entries.id
           WHERE tags.id=? AND entries.user_id=?";
         $params = array(intval($id), $user_id);
         $query  = $this->executeQuery($sql, $params);
-        $tag  = $query->fetchAll();
+        $tags  = ($query) ? $query->fetchAll() : false;
+        $tag = ($query) ? $tags[0] : false;
 
-        return isset($tag[0]) ? $tag[0] : NULL;
+        return $tag[0];
     }
 
     public function retrieveEntriesByTag($tag_id, $user_id)
@@ -579,7 +583,7 @@ class Database {
             LEFT JOIN tags_entries ON tags_entries.entry_id=entries.id
             WHERE tags_entries.tag_id = ? AND entries.user_id=? ORDER by entries.id DESC";
         $query = $this->executeQuery($sql, array($tag_id, $user_id));
-        $entries = $query->fetchAll();
+        $entries = ($query) ? $query->fetchAll() : false;
 
         return $entries;
     }
@@ -591,7 +595,7 @@ class Database {
             LEFT JOIN tags_entries ON tags_entries.tag_id=tags.id
             WHERE tags_entries.entry_id = ?";
         $query = $this->executeQuery($sql, array($entry_id));
-        $tags = $query->fetchAll();
+        $tags = ($query) ? $query->fetchAll() : false;
 
         return $tags;
     }
@@ -601,38 +605,40 @@ class Database {
         $sql_action     = "DELETE FROM tags_entries WHERE tag_id=? AND entry_id=?";
         $params_action  = array($tag_id, $entry_id);
         $query          = $this->executeQuery($sql_action, $params_action);
-        return $query;
+        return ($query) ? $query : false;
     }
     
     public function cleanUnusedTag($tag_id)
     {
         $sql_action = "SELECT tags.* FROM tags JOIN tags_entries ON tags_entries.tag_id=tags.id WHERE tags.id=?";
         $query = $this->executeQuery($sql_action,array($tag_id));
-        $tagstokeep = $query->fetchAll();
+        $tagstokeep = ($query) ? $query->fetchAll() : false;
         $sql_action = "SELECT tags.* FROM tags LEFT JOIN tags_entries ON tags_entries.tag_id=tags.id WHERE tags.id=?";
         $query = $this->executeQuery($sql_action,array($tag_id));
-        $alltags = $query->fetchAll();
-        
-        foreach ($alltags as $tag) {
-            if ($tag && !in_array($tag,$tagstokeep)) {
-                $sql_action = "DELETE FROM tags WHERE id=?";
-                $params_action = array($tag[0]);
-                $this->executeQuery($sql_action, $params_action);
-                return true;
+        $alltags = ($query) ? $query->fetchAll() : false;
+
+        if ($tagstokeep && $alltags) {
+            foreach ($alltags as $tag) {
+                if ($tag && !in_array($tag,$tagstokeep)) {
+                    $sql_action = "DELETE FROM tags WHERE id=?";
+                    $params_action = array($tag[0]);
+                    $this->executeQuery($sql_action, $params_action);
+                    return true;
+                }
             }
+        } else {
+            return false;
         }
-        
     }
 
     public function retrieveTagByValue($value)
     {
-        $tag  = NULL;
         $sql    = "SELECT * FROM tags WHERE value=?";
         $params = array($value);
         $query  = $this->executeQuery($sql, $params);
-        $tag  = $query->fetchAll();
+        $tag  = ($query) ? $query->fetchAll() : false;
 
-        return isset($tag[0]) ? $tag[0] : null;
+        return ($query) ? $tag[0] : false;
     }
 
     public function createTag($value)
@@ -640,7 +646,7 @@ class Database {
         $sql_action = 'INSERT INTO tags ( value ) VALUES (?)';
         $params_action = array($value);
         $query = $this->executeQuery($sql_action, $params_action);
-        return $query;
+        return ($query) ? $query : false;
     }
 
     public function setTagToEntry($tag_id, $entry_id)
@@ -648,7 +654,7 @@ class Database {
         $sql_action = 'INSERT INTO tags_entries ( tag_id, entry_id ) VALUES (?, ?)';
         $params_action = array($tag_id, $entry_id);
         $query = $this->executeQuery($sql_action, $params_action);
-        return $query;
+        return ($query) ? $query : false;
     }
 
     private function getEntriesOrder()

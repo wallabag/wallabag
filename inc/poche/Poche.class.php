@@ -599,7 +599,7 @@ class Poche
 
                 $count = $this->store->getEntriesByViewCount($view, $this->user->getId(), $id);
 
-                if ($count > 0) {
+                if ($count && $count > 0) {
                     $this->pagination->set_total($count);
                     $page_links = str_replace(array('previous', 'next'), array(_('previous'), _('next')),
                         $this->pagination->page_links('?view=' . $view . '&sort=' . $_SESSION['sort'] . (($id)?'&id='.$id:'') . '&' ));
@@ -903,14 +903,18 @@ class Poche
      */
     public function export()
     {
-      $filename = "wallabag-export-".$this->user->getId()."-".date("Y-m-d").".json";
-      header('Content-Disposition: attachment; filename='.$filename);
+        $filename = "wallabag-export-".$this->user->getId()."-".date("Y-m-d").".json";
+        header('Content-Disposition: attachment; filename='.$filename);
 
-      $entries = $this->store->retrieveAllWithTags($this->user->getId());
-      echo $this->tpl->render('export.twig', array(
-          'export' => Tools::renderJson($entries),
-      ));
-      Tools::logm('export view');
+        $entries = $this->store->retrieveAllWithTags($this->user->getId());
+        if ($entries) {
+            echo $this->tpl->render('export.twig', array(
+            'export' => Tools::renderJson($entries),
+            ));
+            Tools::logm('export view');
+        } else {
+            Tools::logm('error accessing database while exporting');
+        }
     }
 
     /**
@@ -986,7 +990,7 @@ class Poche
         if (0 == $limit) {
             $limit = count($entries);
         }
-        if (count($entries) > 0) {
+        if ($entries && count($entries) > 0) {
             for ($i = 0; $i < min(count($entries), $limit); $i++) {
                 $entry = $entries[$i];
                 $newItem = $feed->createNewItem();
@@ -998,7 +1002,10 @@ class Poche
                 $feed->addItem($newItem);
             }
         }
-
+        else 
+            {
+                Tools::logm("database error while generating feeds");
+            }
         $feed->genarateFeed();
         exit;
     }
