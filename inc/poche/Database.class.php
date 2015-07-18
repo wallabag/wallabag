@@ -454,20 +454,28 @@ class Database {
 
     public function getPreviousArticle($id, $user_id) 
     {
-        $sql = "SELECT id FROM entries WHERE id = (SELECT max(id) FROM entries WHERE id < ? AND is_read=0) AND user_id=? AND is_read=0";
+        $sqlcondition = "is_read=0";
+        if (STORAGE == 'postgres') {
+            $sqlcondition = "is_read=false";
+        }
+        $sql = "SELECT id FROM entries WHERE id = (SELECT max(id) FROM entries WHERE id < ? AND " . $sqlcondition . ") AND user_id=? AND " . $sqlcondition;
         $params = array($id, $user_id);
         $query = $this->executeQuery($sql, $params);
-        $id_entry = $query->fetchAll();
+        $id_entry = ($query) ? $query->fetchAll() : false;
         $id = ($query) ? $id_entry[0][0] : false;
         return $id;
     }
 
     public function getNextArticle($id, $user_id) 
     {
-        $sql = "SELECT id FROM entries WHERE id = (SELECT min(id) FROM entries WHERE id > ? AND is_read=0) AND user_id=? AND is_read=0";
+        $sqlcondition = "is_read=0";
+        if (STORAGE == 'postgres') {
+            $sqlcondition = "is_read=false";
+        }
+        $sql = "SELECT id FROM entries WHERE id = (SELECT min(id) FROM entries WHERE id > ? AND " . $sqlcondition . ") AND user_id=? AND " . $sqlcondition;
         $params = array($id, $user_id);
         $query = $this->executeQuery($sql, $params);
-        $id_entry = $query->fetchAll();
+        $id_entry = ($query) ? $query->fetchAll() : false;
         $id = ($query) ? $id_entry[0][0] : false;
         return $id;
     }

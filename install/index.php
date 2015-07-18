@@ -94,10 +94,14 @@ else if (isset($_POST['install'])) {
                 $errors[] = 'Impossible to create the SQLite database file. Please check your file permissions.';
             }
             else {
-                $db_path = 'sqlite:' . realpath('') . '/db/poche.sqlite';
-                $handle = new PDO($db_path);
-                $handle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $sql_structure = "";
+                try {
+                    $db_path = 'sqlite:' . realpath('') . '/db/poche.sqlite';
+                    $handle = new PDO($db_path);
+                    $handle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                    $sql_structure = "";
+                } catch (PDOException $e) {
+                    $errors[] = "SQLite has encountered an issue : " . $e->getMessage();
+                }
             }
         } else {
             // MySQL and Postgre
