@@ -63,6 +63,9 @@ function actionArticle(id) {
       case 77:
         markReadArticle(id); // m key letter
       break;
+      case 78:
+        markReadAndNextArticle(id); // n letter
+      break;
     }
 
   }, false);
@@ -83,6 +86,12 @@ function favoriteArticle(id) {
 function markReadArticle(id) {
    if (id) {
           window.location = window.location.origin + window.location.pathname + '?action=toggle_archive&id=' + id;
+  }
+}
+
+function markReadAndNextArticle(id) {
+   if (id) {
+          window.location = window.location.origin + window.location.pathname + '?action=archive_and_next&id=' + id;
   }
 }
 
