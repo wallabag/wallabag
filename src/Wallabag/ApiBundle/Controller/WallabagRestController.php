@@ -189,8 +189,8 @@ class WallabagRestController extends Controller
         $this->validateUserAccess($entry->getUser()->getId(), $this->getUser()->getId());
 
         $title      = $request->request->get('title');
-        $isArchived = $request->request->get('archive');
-        $isStarred  = $request->request->get('star');
+        $isArchived = $request->request->get('is_archived');
+        $isStarred  = $request->request->get('is_starred');
 
         if (!is_null($title)) {
             $entry->setTitle($title);

@@ -6,10 +6,6 @@ app:
     resource: @WallabagCoreBundle/Controller/
     type:     annotation
 
-homepage:
-    pattern:   /
-    defaults:  { _controller: WallabagCoreBundle:Entry:showUnread }
-
 doc-api:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
     prefix: /api/doc
@@ -17,8 +13,10 @@ doc-api:
 login:
     pattern:   /login
     defaults:  { _controller: WallabagCoreBundle:Security:login }
+
 login_check:
     pattern:   /login_check
+
 logout:
     path:   /logout
 
@@ -26,3 +24,9 @@ rest :
     type : rest
     resource : "routing_rest.yml"
     prefix : /api
+
+homepage:
+    pattern:   "/{page}"
+    defaults:  { _controller: WallabagCoreBundle:Entry:showUnread, page : 1 }
+    requirements:
+        page:  \d+

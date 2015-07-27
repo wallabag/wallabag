@@ -78,7 +78,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $client->request('GET', '/archive');
+        $client->request('GET', '/archive/list');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
@@ -88,7 +88,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $client->request('GET', '/starred');
+        $client->request('GET', '/starred/list');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }

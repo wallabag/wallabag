@@ -3,7 +3,6 @@
 namespace Wallabag\CoreBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Tools\Pagination\Paginator;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 
@@ -13,77 +12,66 @@ class EntryRepository extends EntityRepository
      * Retrieves unread entries for a user.
      *
      * @param int $userId
-     * @param int $firstResult
-     * @param int $maxResults
      *
-     * @return Paginator
+     * @return Pagerfanta
      */
-    public function findUnreadByUser($userId, $firstResult, $maxResults = 12)
+    public function findUnreadByUser($userId)
     {
         $qb = $this->createQueryBuilder('e')
-            ->setFirstResult($firstResult)
-            ->setMaxResults($maxResults)
             ->leftJoin('e.user', 'u')
             ->where('e.isArchived = false')
             ->andWhere('u.id =:userId')->setParameter('userId', $userId)
             ->orderBy('e.id', 'desc')
             ->getQuery();
 
-        $paginator = new Paginator($qb);
+        $pagerAdapter = new DoctrineORMAdapter($qb);
 
-        return $paginator;
+        return new Pagerfanta($pagerAdapter);
     }
 
     /**
      * Retrieves read entries for a user.
      *
      * @param int $userId
-     * @param int $firstResult
-     * @param int $maxResults
      *
-     * @return Paginator
+     * @return Pagerfanta
      */
-    public function findArchiveByUser($userId, $firstResult, $maxResults = 12)
+    public function findArchiveByUser($userId)
     {
         $qb = $this->createQueryBuilder('e')
             ->select('e')
-            ->setFirstResult($firstResult)
-            ->setMaxResults($maxResults)
             ->leftJoin('e.user', 'u')
             ->where('e.isArchived = true')
             ->andWhere('u.id =:userId')->setParameter('userId', $userId)
             ->orderBy('e.id', 'desc')
             ->getQuery();
 
-        $paginator = new Paginator($qb);
+        $pagerAdapter = new DoctrineORMAdapter($qb);
 
-        return $paginator;
+        return new Pagerfanta($pagerAdapter);
     }
 
     /**
      * Retrieves starred entries for a user.
      *
      * @param int $userId
-     * @param int $firstResult
-     * @param int $maxResults
      *
-     * @return Paginator
+     * @return Pagerfanta
      */
-    public function findStarredByUser($userId, $firstResult, $maxResults = 12)
+    public function findStarredByUser($userId)
     {
+
         $qb = $this->createQueryBuilder('e')
             ->select('e')
-            ->setFirstResult($firstResult)
-            ->setMaxResults($maxResults)
             ->leftJoin('e.user', 'u')
             ->where('e.isStarred = true')
             ->andWhere('u.id =:userId')->setParameter('userId', $userId)
             ->orderBy('e.id', 'desc')
             ->getQuery();
 
-        $paginator = new Paginator($qb);
+        $pagerAdapter = new DoctrineORMAdapter($qb);
 
-        return $paginator;
+        return new Pagerfanta($pagerAdapter);
     }
 
     /**
