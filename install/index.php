@@ -258,7 +258,6 @@ else if (isset($_POST['install'])) {
         <link rel="apple-touch-icon-precomposed" sizes="144x144" href="themes/baggy/img/apple-touch-icon-144x144-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="themes/baggy/img/apple-touch-icon-72x72-precomposed.png">
         <link rel="apple-touch-icon-precomposed" href="themes/baggy/img/apple-touch-icon-precomposed.png">
-        <link href='//fonts.googleapis.com/css?family=PT+Sans:700' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="themes/baggy/css/ratatouille.css" media="all">
         <link rel="stylesheet" href="themes/baggy/css/font.css" media="all">
         <link rel="stylesheet" href="themes/baggy/css/main.css" media="all">
