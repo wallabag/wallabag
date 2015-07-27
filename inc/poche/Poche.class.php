@@ -450,6 +450,7 @@ class Poche
                 $token = $this->user->getConfigValue('token');
                 $http_auth = (isset($_SERVER['PHP_AUTH_USER']) || isset($_SERVER['REMOTE_USER'])) ? true : false;
                 $only_user = ($this->store->listUsers() > 1) ? false : true;
+                $https = substr(Tools::getPocheUrl(), 0, 5) == 'https';
                 $tpl_vars = array(
                     'themes' => $themes,
                     'languages' => $languages,
@@ -462,7 +463,8 @@ class Poche
                     'token' => $token,
                     'user_id' => $this->user->getId(),
                     'http_auth' => $http_auth,
-                    'only_user' => $only_user
+                    'only_user' => $only_user,
+                    'https' => $https
                 );
                 Tools::logm('config view');
                 break;

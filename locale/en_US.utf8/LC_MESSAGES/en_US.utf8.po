@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.5\n"
+"X-Generator: Poedit 1.5.4\n"
 
 msgid "wallabag, a read it later open source system"
 msgstr "wallabag, a read it later open source system"
@@ -111,6 +111,9 @@ msgstr "Standard Firefox Add-On"
 
 msgid "Mozilla Services (Social API) Extension"
 msgstr "Mozilla Services (Social API) Extension"
+
+msgid "Mozilla Services (Social API) Extension needs an https connection"
+msgstr "Mozilla Services (Social API) Extension needs an https connection"
 
 msgid "Chrome Extension"
 msgstr "Chrome Extension"
