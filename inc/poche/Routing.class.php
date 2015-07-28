@@ -75,15 +75,6 @@ class Routing
         } elseif (ALLOW_REGISTER && isset($_GET['register'])){
             $this->wallabag->createNewUser($_POST['newusername'], $_POST['password4newuser'], $_POST['newuseremail']);
             Tools::redirect();
-        } elseif(isset($_SERVER['PHP_AUTH_USER'])) {
-            if($this->wallabag->store->userExists($_SERVER['PHP_AUTH_USER'])) {
-                $this->wallabag->login($this->referer);
-            } else {
-                $this->wallabag->messages->add('e', _('login failed: user doesn\'t exist'));
-                Tools::logm('user doesn\'t exist');
-                $tplFile = Tools::getTplFile('login');
-                $tplVars['http_auth'] = 1;
-            }
         } elseif(isset($_SERVER['REMOTE_USER'])) {
             if($this->wallabag->store->userExists($_SERVER['REMOTE_USER'])) {
                 $this->wallabag->login($this->referer);

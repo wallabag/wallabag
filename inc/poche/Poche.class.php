@@ -448,7 +448,7 @@ class Poche
                 $themes = $this->tpl->getInstalledThemes();
                 $languages = $this->language->getInstalledLanguages();
                 $token = $this->user->getConfigValue('token');
-                $http_auth = (isset($_SERVER['PHP_AUTH_USER']) || isset($_SERVER['REMOTE_USER'])) ? true : false;
+                $http_auth = isset($_SERVER['REMOTE_USER']);
                 $only_user = ($this->store->listUsers() > 1) ? false : true;
                 $https = substr(Tools::getPocheUrl(), 0, 5) == 'https';
                 $tpl_vars = array(
@@ -655,9 +655,6 @@ class Poche
      */
     private function credentials()
     {
-        if (isset($_SERVER['PHP_AUTH_USER'])) {
-            return array($_SERVER['PHP_AUTH_USER'], 'php_auth', true);
-        }
         if (!empty($_POST['login']) && !empty($_POST['password'])) {
             return array($_POST['login'], $_POST['password'], false);
         }
