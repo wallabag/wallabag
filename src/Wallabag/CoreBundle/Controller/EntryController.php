@@ -89,60 +89,72 @@ class EntryController extends Controller
     /**
      * Shows unread entries for current user.
      *
-     * @Route("/unread", name="unread")
+     * @Route("/unread/list/{page}", name="unread", defaults={"page" = "1"})
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showUnreadAction()
+    public function showUnreadAction($page)
     {
-        // TODO change pagination
         $entries = $this->getDoctrine()
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findUnreadByUser($this->getUser()->getId(), 0);
+            ->findUnreadByUser($this->getUser()->getId());
+
+        $entries->setCurrentPage($page);
 
         return $this->render(
             'WallabagCoreBundle:Entry:entries.html.twig',
-            array('entries' => $entries)
+            array(
+                'entries'       => $entries,
+                'currentPage'   => $page
+            )
         );
     }
 
     /**
      * Shows read entries for current user.
      *
-     * @Route("/archive", name="archive")
+     * @Route("/archive/list/{page}", name="archive", defaults={"page" = "1"})
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showArchiveAction()
+    public function showArchiveAction($page)
     {
-        // TODO change pagination
         $entries = $this->getDoctrine()
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findArchiveByUser($this->getUser()->getId(), 0);
+            ->findArchiveByUser($this->getUser()->getId());
+
+        $entries->setCurrentPage($page);
 
         return $this->render(
             'WallabagCoreBundle:Entry:entries.html.twig',
-            array('entries' => $entries)
+            array(
+                'entries'       => $entries,
+                'currentPage'   => $page
+            )
         );
     }
 
     /**
      * Shows starred entries for current user.
      *
-     * @Route("/starred", name="starred")
+     * @Route("/starred/list/{page}", name="starred", defaults={"page" = "1"})
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showStarredAction()
+    public function showStarredAction($page)
     {
-        // TODO change pagination
         $entries = $this->getDoctrine()
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findStarredByUser($this->getUser()->getId(), 0);
+            ->findStarredByUser($this->getUser()->getId());
+
+        $entries->setCurrentPage($page);
 
         return $this->render(
             'WallabagCoreBundle:Entry:entries.html.twig',
-            array('entries' => $entries)
+            array(
+                'entries'       => $entries,
+                'currentPage'   => $page
+            )
         );
     }
 

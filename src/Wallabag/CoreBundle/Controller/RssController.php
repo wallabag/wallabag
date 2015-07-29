@@ -23,10 +23,11 @@ class RssController extends Controller
         $entries = $this->getDoctrine()
             ->getRepository('WallabagCoreBundle:Entry')
             ->findUnreadByUser(
-                $user->getId(),
-                0,
-                $user->getConfig()->getRssLimit() ?: $this->container->getParameter('rss_limit')
+                $user->getId()
             );
+
+        $perPage = $user->getConfig()->getRssLimit() ?: $this->container->getParameter('rss_limit');
+        $entries->setMaxPerPage($perPage);
 
         return $this->render('WallabagCoreBundle:Entry:entries.xml.twig', array(
             'type' => 'unread',
@@ -47,10 +48,11 @@ class RssController extends Controller
         $entries = $this->getDoctrine()
             ->getRepository('WallabagCoreBundle:Entry')
             ->findArchiveByUser(
-                $user->getId(),
-                0,
-                $user->getConfig()->getRssLimit() ?: $this->container->getParameter('rss_limit')
+                $user->getId()
             );
+
+        $perPage = $user->getConfig()->getRssLimit() ?: $this->container->getParameter('rss_limit');
+        $entries->setMaxPerPage($perPage);
 
         return $this->render('WallabagCoreBundle:Entry:entries.xml.twig', array(
             'type' => 'archive',
@@ -71,10 +73,11 @@ class RssController extends Controller
         $entries = $this->getDoctrine()
             ->getRepository('WallabagCoreBundle:Entry')
             ->findStarredByUser(
-                $user->getId(),
-                0,
-                $user->getConfig()->getRssLimit() ?: $this->container->getParameter('rss_limit')
+                $user->getId()
             );
+
+        $perPage = $user->getConfig()->getRssLimit() ?: $this->container->getParameter('rss_limit');
+        $entries->setMaxPerPage($perPage);
 
         return $this->render('WallabagCoreBundle:Entry:entries.xml.twig', array(
             'type' => 'starred',
