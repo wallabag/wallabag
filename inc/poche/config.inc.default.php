@@ -31,6 +31,9 @@
 // Change this if not using the standart port for SSL - i.e you server is behind sslh
 @define ('SSL_PORT', 443);
 
+// Define this only if you use wallabag behind a proxy and if you encounter problems
+@define ('BASE_URL', ''); 
+
 @define ('MODE_DEMO', FALSE);
 @define ('DEBUG_POCHE', FALSE);
 
