@@ -20,8 +20,8 @@ final class Picture
         $processing_pictures = array(); // list of processing image to avoid processing the same pictures twice
         preg_match_all('#<\s*(img)[^>]+src="([^"]*)"[^>]*>#Si', $content, $matches, PREG_SET_ORDER);
         foreach($matches as $i => $link) {
-            $link[1] = trim($link[1]);
-            if (!preg_match('#^(([a-z]+://)|(\#))#', $link[1])) {
+            $link[2] = trim($link[2]);
+            if (!preg_match('#^(([a-z]+://)|(\#))#', $link[2])) {
                 $absolute_path = self::_getAbsoluteLink($link[2], $url);
                 $filename = basename(parse_url($absolute_path, PHP_URL_PATH));
                 $directory = self::_createAssetsDirectory($id);
