@@ -1,0 +1,4 @@
+
+body: //div[@id='content']//div[@id='mainBlogContentWrapper']//*[self::p or self::img or self::ul] | //div[@class='mainArticleIntro')]
+
+date: //span[@class='date']

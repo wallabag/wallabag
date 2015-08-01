@@ -1,0 +1,3 @@
+body: //div[contains(concat(' ',normalize-space(@class),' '),' entry ') or contains(@class, 'single-post-thumb')]
+test_url: http://www.nbnnews.com.au/2015/03/24/lismore-man-will-attempt-to-run-around-australia/
+test_url: http://www.nbnnews.com.au/category/nthn-rivers-sport/feed/

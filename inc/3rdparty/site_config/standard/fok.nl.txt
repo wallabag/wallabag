@@ -1,0 +1,4 @@
+# skip cookie warning
+single_page_link: concat(//form/@action, '?allowcookies=yes')
+
+test_url: http://fok.nl/687116

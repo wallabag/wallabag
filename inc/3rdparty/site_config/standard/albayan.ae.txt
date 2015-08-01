@@ -1,5 +1,7 @@
 body: //div[@id='main-column']//div[@class='content']
 
+strip_id_or_class: social-buttons
+
 prune: no
 
 test_url: http://www.albayan.ae/across-the-uae/education/2013-08-29-1.1949645

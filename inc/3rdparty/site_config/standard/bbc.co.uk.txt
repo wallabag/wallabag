@@ -30,6 +30,12 @@ strip: //div[contains(@class, 'comment-introduction')]
 strip: //div[contains(@class, 'share-tools')]
 strip: //div[@id='also-related-links']
 
+find_string: http://ichef.bbci.co.uk/news/200/
+replace_string: http://ichef.bbci.co.uk/news/624/
+
+find_string: http://ichef.bbci.co.uk/news/304/
+replace_string: http://ichef.bbci.co.uk/news/624/
+
 strip_id_or_class: share-help
 strip_id_or_class: comments_module
 

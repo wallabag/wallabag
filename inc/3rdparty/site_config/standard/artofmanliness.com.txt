@@ -1,0 +1,6 @@
+parser: html5php
+date: //article/p[contains(@class, 'single-date')]
+author: //article/p[contains(@class, 'byline')]
+
+test_url: http://www.artofmanliness.com/2013/01/31/relationship-red-flags/
+test_contains: It seems that once we get close to a person

@@ -1,0 +1,7 @@
+#bypass cookie check
+single_page_link: //a[contains(@href, '/acceptCookieCheck.do?url=')]
+
+test_url: http://www.ad.nl/ad/nl/10444/Offside/article/detail/4043834/2015/05/31/Dani-Alves-voetbalt-met-drol-op-zijn-hoofd.dhtml
+test_contains: De nieuwe coupe van Alves
+
+test_url: http://www.ad.nl/digitaal/rss.xml

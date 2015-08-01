@@ -1,0 +1,4 @@
+title: //div[@class="content_title"]//h2
+author: substring-after(//div[@class="byline"], "By ")
+date: //div[@class="publish_date"]
+strip: //div[@class="read_image_box"]

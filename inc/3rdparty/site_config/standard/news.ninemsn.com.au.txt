@@ -1,0 +1,3 @@
+strip: //a[@class="contact"]
+strip: //div[@class="article-media video-item"]
+date: //div[@class='display-date']

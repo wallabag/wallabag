@@ -2,7 +2,7 @@ title://h1
 
 author://div[@id="news-meta"]/a
 
-body://*[@id="main"]/div[1]
+body: //div[contains(@class, 'text-content')]
 
 strip://*[@id="main"]/div[2]
 strip://*[@id="main"]/div[3]

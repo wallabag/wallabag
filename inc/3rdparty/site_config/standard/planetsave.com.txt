@@ -1,0 +1,1 @@
+strip_id_or_class: author-bio-box

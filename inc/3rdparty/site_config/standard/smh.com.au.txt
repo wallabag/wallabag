@@ -1,0 +1,14 @@
+body: //div[@id='content']
+title: //h1[@class='cN-headingPage']
+author: //h3[@class='authorName']
+date: //dd[@class='updated dtstamp']
+
+strip: //ul[@class='social sponsored cfix']
+strip: //div[contains(@class, 'hiddenVisually')]
+strip: //dd[@class='updated dtstamp']
+strip: //h3[@class='authorName']
+strip: //ul[@class='social  cfix']
+strip: //div[contains(@id, 'adspot')]
+
+strip: //div[contains(@class, 'overlayPlayCountdown')]
+strip: //div[@class='fdVideoWof']//span[@class='gone']

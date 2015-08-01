@@ -1,0 +1,11 @@
+title: //header[contains(@class, "news-article-title")]//h1
+date: //div[@class="news-article-byline"]//time
+author: //h2[@class="news-article-author"]//cite
+
+# Turns out that westernadvocate is doing funky things with the slide show images. :<
+# body: //ul[@class="slides"]//img | //div[contains(@class, "news-article-body")]
+body: //div[contains(@class, "news-article-body")]
+
+strip: //div[contains(@class, "flexslider")]
+
+test_url: http://www.westernadvocate.com.au/story/1532050/roos-accept-ziebell-ban-commentators-do-not/

@@ -1,0 +1,6 @@
+body: //div[contains(@class, 'content-body')]
+
+prune: no
+
+test_url: http://globalgrind.com/2015/04/26/listen-jeremih-featuring-chance-the-rapper-the-social-experiment-planes-remix-new-music/
+test_contains: The Chicago rapper has made a name for himself

@@ -1,0 +1,13 @@
+body: //div[@id='content']
+title: //h1[@class='cN-headingPage']
+author: //h3[@class='authorName']
+date: //dd[@class='updated dtstamp']
+
+strip: //ul[@class='social sponsored cfix']
+strip: //div[contains(@class, 'hiddenVisually')]
+strip: //dd[@class='updated dtstamp']
+strip: //h3[@class='authorName']
+strip: //ul[@class='social  cfix']
+strip: //div[contains(@id, 'adspot')]
+
+test_url: http://smh.drive.com.au/roads-and-traffic/driver-distraction-responsible-for-more-car-crashes-than-alcohol-20130503-2iyg0.html

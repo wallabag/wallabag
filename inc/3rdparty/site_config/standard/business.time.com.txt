@@ -1,0 +1,17 @@
+# 2011-10-25 - carlo@... - Initial setup.
+
+single_page_link: //li[@class='print']/a/@href
+
+title: //h1
+author: //meta[@name="byline"]/@content
+date: //meta[@name="date"]/@content
+
+strip: //span[@class="see"]
+strip: //div[@class="byline"]
+strip: //div[@id="date2"]
+strip: //h1
+strip: //div[@class='post-rail-ad']
+strip: //div[@class='post-rail-content']
+strip: //aside[@class='post-rail']
+
+test_url: http://www.time.com/time/specials/packages/article/0,28804,2094921_2094923_2094924,00.html

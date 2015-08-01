@@ -1,0 +1,14 @@
+# Author: cirnod@gmail.com
+
+tidy: no
+prune: no
+
+body: //div[@id="article"]/h3 | //*[@id="mainContent"]
+
+# General Cleanup
+#strip_id_or_class: info_panel 
+
+
+# Try yourself
+test_url: http://www.tagesanzeiger.ch/zuerich/stadt/Nach-spektakulaerer-Abseilaktion-verhaftet/story/18039895
+test_url: http://www.tagesanzeiger.ch/ausland/naher-osten-und-afrika/IS-zerstoert-auch-das-antike-Hatra/story/19865699

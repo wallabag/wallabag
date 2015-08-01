@@ -1,0 +1,3 @@
+title: //div[@class='leftCol']/h1
+
+prune: no

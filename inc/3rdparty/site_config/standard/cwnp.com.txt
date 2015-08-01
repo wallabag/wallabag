@@ -1,0 +1,14 @@
+title: //div[@class='entry-pad']//h2
+body: //div[contains(concat(' ',normalize-space(@class),' '),' entry-pad ')]
+strip: //h1
+strip: //p
+strip: //h2
+strip: //div[@class='clear']
+
+prune: no
+tidy: no
+
+autodetect_on_failure: no
+
+test_url: https://www.cwnp.com/wotd.php
+test_url: https://www.cwnp.com/qotd.php

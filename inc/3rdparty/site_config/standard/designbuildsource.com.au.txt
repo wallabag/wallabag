@@ -1,0 +1,2 @@
+date: substring-after(//p[@class='post_date'], 'on')
+

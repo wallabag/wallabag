@@ -1,0 +1,1 @@
+strip: //h3[@class="related-posts"]

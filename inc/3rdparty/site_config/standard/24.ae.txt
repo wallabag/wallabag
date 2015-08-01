@@ -1,0 +1,8 @@
+title: //div[@id='DivTitle']
+body: //div[@id='divImages' or @id='Divkhabarcontent']
+author: //div[@id='DivAuthor']
+
+prune: no
+
+test_url: http://24.ae/article.aspx?ArticleId=123304
+test_url: http://24.ae/rss.aspx?pageId=30

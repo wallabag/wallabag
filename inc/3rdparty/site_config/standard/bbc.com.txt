@@ -33,6 +33,12 @@ strip: //div[@id='also-related-links']
 strip_id_or_class: share-help
 strip_id_or_class: comments_module
 
+find_string: http://ichef.bbci.co.uk/news/200/
+replace_string: http://ichef.bbci.co.uk/news/624/
+
+find_string: http://ichef.bbci.co.uk/news/304/
+replace_string: http://ichef.bbci.co.uk/news/624/
+
 replace_string(<noscript>): <div>
 replace_string(</noscript>): </div>
 

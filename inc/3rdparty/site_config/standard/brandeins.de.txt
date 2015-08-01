@@ -1,7 +1,9 @@
-# set body
-body: //div[@id='theContent']
 
-# set title
-title: //div[@id='theContent']/h3
-strip: //div[@id='theContent']/h3
-test_url: http://www.brandeins.de/archiv/magazin/gegessen-wird-immer/artikel/hunger.html
+body: //div[@class="articleTeaser"] | //section[@class="contentSection"]
+
+strip: //section[@class="greenBox italic"]
+
+author: //div[@class="articleAuthor"]
+# no publish date on page (the articles are from a monthly periodical)
+
+test_url: http://www.brandeins.de/archiv/2015/fuehrung/ministry-group-mach-doch-mal-ne-ansage/

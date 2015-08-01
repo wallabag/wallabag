@@ -1,6 +1,8 @@
 title: //h2
 
 strip: //div[ contains(@class, 'respond') ]  |  //h2  |  //h1
+strip_id_or_class: social
+strip_id_or_class: dd_post_share
 
 date: substring-after(//p[@class='info'], ' on ')
 

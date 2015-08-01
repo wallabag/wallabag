@@ -1,0 +1,24 @@
+# Author: cirnod@gmail.com
+
+tidy: no
+prune: no
+
+title: //h1
+date: /html/body/div[3]/div[1]/div[6]/div/div[1]/div[2]/div[1]/div/p
+body: //div[@class='published clearfix'] | //div[@class='story_titles']/h3 | //div[@class='story_text']
+
+# General Cleanup
+strip_id_or_class: info_panel 
+strip_id_or_class: info_poll 
+strip_id_or_class: teaser 
+strip_id_or_class: panelbox
+strip_id_or_class: polls
+strip_id_or_class: warning 
+strip_id_or_class: vplaceholder
+
+# visual removal only -> complete removal doesn't work
+replace_string(Print</a>): </a>
+
+# Try yourself
+test_url: http://www.20min.ch/wissen/news/story/31588952
+test_url: http://www.20min.ch/digital/dossier/apple/story/So-einfach-laesst-sich-das-iPhone-6-Plus-verbiegen-24651169
