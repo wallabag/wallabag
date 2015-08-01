@@ -1,8 +1,5 @@
 title: //meta[@name='headline']/@content
-date: //meta[@name='date']/@content
-author: //meta[@name='author']/@content
-body: //div[contains(@class, 'article')]
-body://div[@id="article_body"]
+body://div[@id="drr-container"]
 
 strip_id_or_class: banner
 strip: //noscript
