@@ -6,6 +6,8 @@ date: //span[@class="date"]
 
 prune: no
 
+http_header(user-agent): PHP/5.3
+
 test_url: http://gizmodo.com/5880147/kuhn-rikon-improves-their-spice-grinder-with-grade-school-science
 test_url: http://gizmodo.com/what-van-goghs-paintings-would-look-like-if-they-came-874035680
 test_url: http://gizmodo.com/vip.xml

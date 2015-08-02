@@ -1,0 +1,4 @@
+body: //img[@id='main-comic']
+author: substring(//small[@class="author-credit-name"], 4)
+
+test_url: http://explosm.net/comics/3954/

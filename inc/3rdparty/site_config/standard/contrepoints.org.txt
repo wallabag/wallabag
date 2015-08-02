@@ -1,0 +1,21 @@
+# Contrepoints.org
+# As of 2015-04, it's a wordpress-powered website.
+
+title: //h1[contains(concat(' ',normalize-space(@class),' '),' page-title ')]//span[contains(concat(' ',normalize-space(@class),' '),' inner-text ')]
+date: //time[contains(concat(' ',normalize-space(@class),' '),' art-date ')]
+author: //h1[contains(concat(' ',normalize-space(@class),' '),' author-name ')]
+body: //article[contains(concat(' ',normalize-space(@class),' '),' plain-art ')]
+
+# no toolbar, meta, etc, but misses excerpt
+# body: //div[contains(concat(' ',normalize-space(@class),' '),' entry ')]
+
+# Thus, we need to strip useless elements from the "plain-art"
+strip: //div[contains(concat(' ',normalize-space(@class),' '),' plain-post-topbar ')]
+strip: //div[contains(concat(' ',normalize-space(@class),' '),' single-type-block ')]
+strip: //header[contains(concat(' ',normalize-space(@class),' '),' entry-header ')]
+
+# And no pruning is needed because we stripped unwanted elements.
+prune: no
+
+test_url: http://www.contrepoints.org/2015/04/25/205709-leconomie-selon-ray-dalio
+test_url: http://www.contrepoints.org/2015/04/25/205734-huile-et-gaz-de-schiste-revolution-durable

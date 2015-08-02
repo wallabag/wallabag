@@ -1,4 +1,6 @@
+body: //div[@class="highlight"]/pre
 
-title: //div[contains(@class,'gist-description')]
-body: //div[contains(@class,'blob-wrapper')]
-test_url: https://gist.github.com/staltz/868e7e9bc2a7b8c1f754
+prune: no
+tidy: no
+
+test_url: https://gist.github.com/1258908

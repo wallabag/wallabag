@@ -1,0 +1,10 @@
+title: //h1[@id='titre']
+body://h2[@id="surtitre"]|//div[@id="ctn_introarticle"]|//div[@class="ctn_globalcontent"]
+
+strip_id_or_class: qc-container-main
+strip_id_or_class: article_footer
+
+tidy: no
+prune: no
+
+test_url: http://www.quechoisir.org/alimentation/securite-hygiene/actualite-acrylamide-un-contaminant-trop-present-dans-nos-assiettes

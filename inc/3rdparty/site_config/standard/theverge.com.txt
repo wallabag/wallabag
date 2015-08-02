@@ -33,6 +33,8 @@ strip_id_or_class: m-ad
 strip_id_or_class: social-sharing
 strip_id_or_class: m-video-entry__excerpt
 strip_id_or_class: hidden
+strip_id_or_class: m-article__follow-bar
+strip_id_or_class: m-article__share-buttons
 
 replace_string(<noscript>): <div>
 replace_string(</noscript>): </div>

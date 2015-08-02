@@ -1,0 +1,5 @@
+body: //a[@class="photo"]/img[@class="strip"]
+author: //meta[@name="author"]/@content
+date: //meta[@property="gocomics:publish_date"]/@content
+
+test_url: http://www.gocomics.com/garfield/2015/06/13

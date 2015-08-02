@@ -8,6 +8,9 @@
 # - Fixed single_page_link
 # - Included intro text in single page view
 # - Added body in default view
+# stesie@
+# - removed copyright box
+# - removed "print more" box
 
 # set body
 tidy: no
@@ -15,6 +18,7 @@ tidy: no
 body: //div[@id="spArticleContent"]
 # body in default view
 body: //div[@id="spArticleSection"]
+body: //div[contains(@class, 'article-section')] | //div[@id='js-article-top-wide-asset'] | //p[contains(@class, 'article-intro')] | //div[contains(@class, 'js-module-box-image')]
 # body in "Fotostrecke"
 body: //div[@id="spBigaContent"]
 
@@ -25,6 +29,8 @@ strip: //div[@id="spArticleContent"]/h3
 # set date in "Fotostrecke"
 date: //div[@id="spBigaDatum"]
 
+# title in default view
+title: //h2[contains(@class, 'article-title')]
 #set title in single page view
 title: //div[@id='spArticleContent']/h2
 # strip title
@@ -49,7 +55,7 @@ strip: //*/div[@class='spCredit']/following-sibling::p
 strip: //div[@class='spMInline']
 
 # remove photogalleries and extras
-strip: //div[@class='spPhotoGallery']
+strip: //div[contains(@class, 'spPhotoGallery')]
 strip: //div[@class='spPhotoGallery']/following-sibling::br
 strip: //div[@class='spAssetAlignleft']
 strip: //div[contains(@class,'spAsset')]
@@ -67,9 +73,24 @@ strip: //div[@id='spBigaLatestEntries']
 strip: //div[contains(@class, 'spBigaNavi')]
 strip: //div[@class='spDottedLine']
 
+strip: //div[@class='asset-box article-print-more']
+strip: //div[@class='article-copyright']
+strip: //span[@class='image-buttons']
+
 # Use link to print article for single page view
 single_page_link: //a[contains(@href, '-druck')]
+if_page_contains: //div[contains(@class, 'multi-pager-control')]
+
+# Clean up title in print view
+find_string: <title>Druckversion - 
+replace_string: <title>
 
 # use next link in "Fotostrecke"
 next_page_link: //a[@class='spBigaControlForw']
 test_url: http://www.spiegel.de/politik/deutschland/0,1518,787602,00.html
+
+# regular article
+test_url: http://www.spiegel.de/wirtschaft/soziales/griechenland-was-den-griechischen-buergern-nun-droht-a-1042682.html
+
+# multipage article
+test_url: http://www.spiegel.de/spiegel/a-710880.html

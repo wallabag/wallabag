@@ -1,0 +1,4 @@
+strip: //a[contains(text(), "RELATED:")]
+author: //div[@class="info"]//span[@class="association printer-source"]
+author: //div[@class="info"]//span[@class="stamp printer-date"]
+

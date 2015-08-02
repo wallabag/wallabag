@@ -1,0 +1,12 @@
+#body: //div[@class='story-body']
+body: //div[contains(@class, 'story-body')]
+title: //div[@class='story-headline']//h1
+author: //cite[contains(@class, 'author')]
+date: //span[@class='datestamp']
+
+strip_id_or_class: story-info
+strip: //div[contains(@class, 'story-promo')]
+strip: //div[contains(@class, 'story-related')]
+
+prune: no
+tidy: no

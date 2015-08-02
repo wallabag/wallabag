@@ -1,0 +1,11 @@
+body: //div[contains(@class, 'section-content-left')]
+
+strip_id_or_class: related
+strip_id_or_class: nocontent
+strip_id_or_class: comment
+strip_id_or_class: widget
+strip_id_or_class: respond
+strip: //h3[.='Comments']
+strip: //p[.='comments']
+
+test_url: http://saadaalnews.net/?p=42624

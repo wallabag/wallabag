@@ -1,0 +1,13 @@
+# Author: cirnod@gmail.com
+
+tidy: no
+prune: no
+
+body: //div[@id="article"]/h3 | //*[@id="mainContent"]
+
+# General Cleanup
+#strip_id_or_class: info_panel 
+
+
+# Try yourself
+test_url: http://www.derbund.ch/bern/nachrichten/Fossilienforscher-stehen-auf-Heavy-Metal/story/20919522

@@ -1,8 +1,10 @@
 tidy: no
 prune: no
-body: //div[contains(@class, 'main_col')]
-title: //h1
+body: //div[contains(concat(' ',normalize-space(@class),' '),' Answer ')] | //div[contains(concat(' ',normalize-space(@class),' '),' header ')] | //div[contains(concat(' ',normalize-space(@class),' '),' AnswerWikiArea ')] | //hr
+#body: //div[contains(@class, 'main_col')]
 
+strip_id_or_class: AnswerFooter
+strip_id_or_class: ActionBar
 strip_id_or_class: hidden
 strip_id_or_class: item_action_bar
 strip_id_or_class: answer_voters
@@ -13,5 +15,15 @@ strip_id_or_class: view_tag
 strip_id_or_class: include_details
 strip_id_or_class: sig_edit
 strip_id_or_class: profile_photo_img
+strip_id_or_class: question_text_icons
+
+# insert hr between answers
+find_string: <div class="Answer" 
+replace_string: <hr /><div class="Answer" 
 
 test_url: http://www.quora.com/What-everyday-habit-do-you-wish-you-had-developed-earlier-in-life
+test_contains: Please provide a specific practical/measurable action-based everyday
+test_contains: Exercise every day
+
+test_url: http://www.quora.com/What-is-the-greatest-illusion-in-life
+test_contains: What is the greatest illusion in life?

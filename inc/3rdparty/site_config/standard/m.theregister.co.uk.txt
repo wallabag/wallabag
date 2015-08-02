@@ -1,0 +1,4 @@
+strip: //div[@class='wptl btm']
+body: //div[@id='article']//h2 | //div[@id='body']
+
+test_url: http://m.theregister.co.uk/2015/07/06/geeks_guide_spaceguard_center/

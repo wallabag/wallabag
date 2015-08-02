@@ -1,0 +1,9 @@
+prune: false
+tidy: false
+
+body: //div[@class='col-md-9']
+author: //meta[@name='author']
+date: //i[@class='fa fa-calendar']/../span
+title: //div[@class='page-header']/h1
+
+test_url: https://truongtx.me/2014/04/20/emacs-javascript-completion-and-refactoring/

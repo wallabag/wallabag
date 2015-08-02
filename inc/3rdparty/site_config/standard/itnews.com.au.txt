@@ -1,0 +1,5 @@
+title: //h1[@class='article-header']
+body: //div[@class='body-content']
+author: //span[@class='author-byline']/a[contains(@id, 'Author')]
+
+strip: //span[contains(@id, 'Article_SourceLabel')]

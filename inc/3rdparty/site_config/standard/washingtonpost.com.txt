@@ -5,9 +5,14 @@ body: //div[contains(@class, "article_body")]
 body: //div[@id='print_facet']//div[@id='body']
 
 author://meta[@name='DC.creator']/@content
+author://span[@class="pb-byline"]
+author://h3[@property='dc.creator']//a[@rel='author']
 title://meta[@name='title']/@content
 date://div[contains(@class,'byline')]//span[contains(@class,'published')]/@title
 date://meta[@name="DC.date.issued"]/@content
+date://span[contains(@class,"pb-timestamp")]
+date://meta[@name="eomportal-lastUpdate"]/@content
+
 strip://div[@class="relative primary-slot padding-top img-border gallery-container photo-wrapper"]
 strip://div[@id="wp-column six end"]
 strip://div[contains(@class,'hidden')]
@@ -23,6 +28,7 @@ strip_id_or_class: module
 
 # Change gJQAwdJG4U_story.html to gJQAwdJG4U_print.html
 single_page_link: concat(substring-before(//link[@rel="canonical"]/@href, "_story.html"), "_print.html")
+if_page_contains: //link[@rel="canonical" and contains(@href, '_story.html')]
 
 # [OLD] Change gJQAwdJG4U_story.html to gJQAwdJG4U_story_print.html
 #single_page_link: concat(substring-before(//link[@rel="canonical"]/@href, "_story.html"), "_story_print.html")

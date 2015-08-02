@@ -2,7 +2,8 @@ title: //meta[@name='title']/@content
 author: //span[@class='sign']//a[@class='journaliste']
 author: //meta[@name='author']/@content
 body: //*[@id='article']/div[@class='photo'] | //*[@id='article']/h2 | //*[@id='article']/div[@class='texte']
-date: //time[@pubdate]/@datetime
+date: //li[contains(concat(' ',normalize-space(@class),' '),' fig-date-pub ')]//time
 prune: no
 test_url: http://www.lefigaro.fr/environnement/2011/11/10/01029-20111110ARTFIG00801-la-chine-confrontee-a-un-immense-defi-ecologique.php
 test_url: http://www.lefigaro.fr/conjoncture/2012/11/20/20002-20121120ARTFIG00609-l-usager-devrait-payer-plus-pour-financer-les-transports.php
+test_url: http://www.lefigaro.fr/social/2015/03/10/09010-20150310ARTFIG00312-encore-une-annee-noire-pour-l-emploi-salarie.php

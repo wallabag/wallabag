@@ -1,0 +1,10 @@
+body: //section//article//p
+
+strip: //aside
+strip: //div[@class='margin-top-15']
+strip: //p[@class='tags']
+
+author: //span[@class='byline']//ul[@class='piped']//li[1]
+date: //span[@class='byline']//ul[@class='piped']//li[2]
+
+parser: html5lib

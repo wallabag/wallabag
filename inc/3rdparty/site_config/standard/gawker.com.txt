@@ -3,4 +3,6 @@ body: //div[@class="post-body"]
 # Remove 'content is restricted'
 strip: //div[@id='agegate_IDHERE']
 
+http_header(user-agent): PHP/5.3
+
 test_url: http://gawker.com/#!5782070/russian-bomb-squad-successfully-defuses-sex-toy

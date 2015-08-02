@@ -1,0 +1,2 @@
+author: //span[@itemprop="author"]
+date: //span[@itemprop="datePublished"]

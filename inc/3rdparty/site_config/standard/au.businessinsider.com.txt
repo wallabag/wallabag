@@ -1,0 +1,12 @@
+title://div[@class="sl-layout-post"]/h1
+body: //div[@id='content_post']
+strip: //div[contains(@class, "post-sidebar")]
+strip: //div[@id='related-links']
+strip: //img[@class='size_xlarge']
+author://div[@class="byline"]/a
+date://div[@class="byline"]/span[@class="date"]
+prune: no
+tidy: no
+
+
+test_url: http://www.businessinsider.com/microsoft-just-put-one-of-its-hardcore-technical-geniuses-on-xbox-2012-1

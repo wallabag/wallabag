@@ -7,6 +7,9 @@ body://div[@id = 'article-body']
 # full content
 single_page_link://td/li[@class = 'article-singlepage']/a
 
+# continue link
+single_page_link: //a[@id='continue-btn']
+
 # caption clean up
 wrap_in(i)://span[@class='articleImageCaptionwide']
 move_into (//span[@class='articleImageCaptionwide'])://div[@id = 'articleImage']/p

@@ -1,8 +1,9 @@
-# Updated 25-Jan-2014
-single_page_link: //a[contains(@href, '/Print/')]
+single_page_link: //link[contains(@href, 'm.theregister')]
+if_page_contains: //div[@id='nextpage']
+strip: //div[@class='wptl btm']
+body: //div[contains(@class,'article_head')]//h2 | //div[@id='body']
 
-title: //div[@id="article"]/h2
-author: //p[@class="byline"]/a
-date: //p[@class="dateline"]/a[last()]
-
-test_url: http://www.theregister.co.uk/2014/01/24/thirty_years_of_the_apple_macintosh_part_2/
+#multipage
+test_url: http://www.theregister.co.uk/2015/07/06/geeks_guide_spaceguard_center/
+#singlepage
+test_url: http://www.theregister.co.uk/2015/07/06/us_japan_massive_robots_in_the_ring/

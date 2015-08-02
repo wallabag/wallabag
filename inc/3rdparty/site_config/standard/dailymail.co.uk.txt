@@ -7,6 +7,15 @@ strip_id_or_class: googleAds
 strip_id_or_class: digg-button
 strip_id_or_class: article-icon-links-container
 strip_id_or_class: clickToEnlarge
+strip_id_or_class: articleIconLinksContainer
+strip_id_or_class: related-carousel
+strip_id_or_class: reader-comments
+strip_id_or_class: most-watched
+strip_id_or_class: most-read
+
+find_string:blkBorder img-share
+replace_string: nothing
+
 tidy: no
 
 test_url: http://www.dailymail.co.uk/news/article-1375423/Royal-wedding-Texan-billionaire-Joe-Albritton-invited-Prince-Charles.html
