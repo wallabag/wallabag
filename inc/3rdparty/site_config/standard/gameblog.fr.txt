@@ -1,5 +1,7 @@
 title: //meta[@property="og:title"]/@content
 body: //div[@id='GBTVPlayer'] | //div[contains(@class, 'col490')]
+author: //span[contains(concat(' ',normalize-space(@class),' '),' author ')]
+date: //header[@id='gbArticleHeader']//div//time/@datetime
 
 prune: no
 

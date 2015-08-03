@@ -1,0 +1,8 @@
+body: //div[@id='content_post' or @class="post-body" or contains(@class, 'illustration top')]
+author: (//cite//span[@class="plus-icon"])[1]
+date: //span[@class="date"]
+date: //time
+
+prune: no
+
+test_url: http://gizmodo.com/5880147/kuhn-rikon-improves-their-spice-grinder-with-grade-school-science

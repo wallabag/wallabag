@@ -200,27 +200,34 @@ class Poche
 
                 //search for possible duplicate
                 $duplicate = NULL;
-                $duplicate = $this->store->retrieveOneByURL($url->getUrl(), $this->user->getId());
+                $clean_url = $url->getUrl();
 
-                $last_id = $this->store->add($url->getUrl(), $title, $body, $this->user->getId());
+                // Clean URL to remove parameters from feedburner and all this stuff. Taken from Shaarli.
+                $i=strpos($clean_url,'&utm_source='); if ($i!==false) $clean_url=substr($clean_url,0,$i);
+                $i=strpos($clean_url,'?utm_source='); if ($i!==false) $clean_url=substr($clean_url,0,$i);
+                $i=strpos($clean_url,'#xtor=RSS-'); if ($i!==false) $clean_url=substr($clean_url,0,$i);
+
+                $duplicate = $this->store->retrieveOneByURL($clean_url, $this->user->getId());
+
+                $last_id = $this->store->add($clean_url, $title, $body, $this->user->getId());
                 if ( $last_id ) {
-                    Tools::logm('add link ' . $url->getUrl());
+                    Tools::logm('add link ' . $clean_url);
                     if (DOWNLOAD_PICTURES) {
-                        $content = Picture::filterPicture($body, $url->getUrl(), $last_id);
+                        $content = Picture::filterPicture($body, $clean_url, $last_id);
                         Tools::logm('updating content article');
                         $this->store->updateContent($last_id, $content, $this->user->getId());
                     }
 
                     if ($duplicate != NULL) {
                         // duplicate exists, so, older entry needs to be deleted (as new entry should go to the top of list), BUT favorite mark and tags should be preserved
-                        Tools::logm('link ' . $url->getUrl() . ' is a duplicate');
+                        Tools::logm('link ' . $clean_url . ' is a duplicate');
                         // 1) - preserve tags and favorite, then drop old entry
                         $this->store->reassignTags($duplicate['id'], $last_id);
                         if ($duplicate['is_fav']) {
                           $this->store->favoriteById($last_id, $this->user->getId());
                         }
                         if ($this->store->deleteById($duplicate['id'], $this->user->getId())) {
-                          Tools::logm('previous link ' . $url->getUrl() .' entry deleted');
+                          Tools::logm('previous link ' . $clean_url .' entry deleted');
                         }
                     }
 
@@ -235,7 +242,7 @@ class Poche
                 }
                 else {
                     $this->messages->add('e', _('error during insertion : the link wasn\'t added'));
-                    Tools::logm('error during insertion : the link wasn\'t added ' . $url->getUrl());
+                    Tools::logm('error during insertion : the link wasn\'t added ' . $clean_url);
                 }
 
                 if ($autoclose == TRUE) {
@@ -259,6 +266,15 @@ class Poche
                 }
                 foreach($entry_ids as $id) {
                     $msg = 'delete link #' . $id;
+
+                    // deleting tags and tags_entries
+                    $tags = $this->store->retrieveTagsByEntry($id);
+                    foreach ($tags as $tag) {
+                        $this->store->removeTagForEntry($id, $tag['id']);
+                        $this->store->cleanUnusedTag($tag['id']);
+                    }
+
+                    // deleting pictures
                     if ($this->store->deleteById($id, $this->user->getId())) {
                         if (DOWNLOAD_PICTURES) {
                             Picture::removeDirectory(ABS_PATH . $id);
@@ -303,10 +319,15 @@ class Poche
                 if ( Tools::isAjaxRequest() ) {
                   echo 1;
                   exit;
-                }
-                else {
+                } else {
                   Tools::redirect();
                 }
+                break;
+            case 'archive_and_next' :
+                $nextid = $this->store->getPreviousArticle($id, $this->user->getId());
+                $this->store->archiveById($id, $this->user->getId());
+                Tools::logm('archive link #' . $id);
+                Tools::redirect('?view=view&id=' . $nextid);
                 break;
             case 'archive_all' :
                 $this->store->archiveAll($this->user->getId());
@@ -394,8 +415,9 @@ class Poche
             /* For some unknown reason I can't get displayView() to work here (it redirects to home view afterwards). So here's a dirty fix which redirects directly to URL */
             case 'random':
                 Tools::logm('get a random article');
-                if ($this->store->getRandomId($this->user->getId())) {
-                    $id_array = $this->store->getRandomId($this->user->getId());
+                $view = $_GET['view'];
+                if ($this->store->getRandomId($this->user->getId(),$view)) {
+                    $id_array = $this->store->getRandomId($this->user->getId(),$view);
                     $id = $id_array[0];
                     Tools::redirect('?view=view&id=' . $id[0]);
                     Tools::logm('got the article with id ' . $id[0]);
@@ -426,8 +448,9 @@ class Poche
                 $themes = $this->tpl->getInstalledThemes();
                 $languages = $this->language->getInstalledLanguages();
                 $token = $this->user->getConfigValue('token');
-                $http_auth = (isset($_SERVER['PHP_AUTH_USER']) || isset($_SERVER['REMOTE_USER'])) ? true : false;
+                $http_auth = isset($_SERVER['REMOTE_USER']);
                 $only_user = ($this->store->listUsers() > 1) ? false : true;
+                $https = substr(Tools::getPocheUrl(), 0, 5) == 'https';
                 $tpl_vars = array(
                     'themes' => $themes,
                     'languages' => $languages,
@@ -440,7 +463,8 @@ class Poche
                     'token' => $token,
                     'user_id' => $this->user->getId(),
                     'http_auth' => $http_auth,
-                    'only_user' => $only_user
+                    'only_user' => $only_user,
+                    'https' => $https
                 );
                 Tools::logm('config view');
                 break;
@@ -453,9 +477,31 @@ class Poche
                     Tools::redirect();
                 }
                 $tags = $this->store->retrieveTagsByEntry($id);
+                $all_tags = $this->store->retrieveAllTags($this->user->getId());
+                $maximus = 0;
+                foreach ($all_tags as $eachtag) { // search for the most times a tag is present
+                    if ($eachtag["entriescount"] > $maximus) $maximus = $eachtag["entriescount"];
+                }
+                foreach ($all_tags as $key => $eachtag) { // get the percentage of presence of each tag
+                    $percent = floor(($eachtag["entriescount"] / $maximus) * 100);
+
+                    if ($percent < 20): // assign a css class, depending on the number of entries count
+                        $cssclass = 'smallesttag';
+                    elseif ($percent >= 20 and $percent < 40):
+                        $cssclass = 'smalltag';
+                    elseif ($percent >= 40 and $percent < 60):
+                        $cssclass = 'mediumtag';
+                    elseif ($percent >= 60 and $percent < 80):
+                        $cssclass = 'largetag';
+                    else:
+                        $cssclass = 'largesttag';
+                    endif;
+                    $all_tags[$key]['cssclass'] = $cssclass;
+                }
                 $tpl_vars = array(
                     'entry_id' => $id,
                     'tags' => $tags,
+                    'alltags' => $all_tags,
                     'entry' => $entry,
                 );
                 break;
@@ -509,6 +555,20 @@ class Poche
                         $flattr->checkItem($entry['url'], $entry['id']);
                     }
                     
+                    # previous and next
+                    $previous = FALSE;
+                    $previous_id = $this->store->getPreviousArticle($id, $this->user->getId());
+                    $next = FALSE;
+                    $next_id = $this->store->getNextArticle($id, $this->user->getId());
+
+                    if ($this->store->retrieveOneById($previous_id, $this->user->getId())) {
+                        $previous = TRUE;
+                    }
+                    if ($this->store->retrieveOneById($next_id, $this->user->getId())) {
+                        $next = TRUE;
+                    }
+                    $navigate = array('previous' => $previous, 'previousid' => $previous_id, 'next' => $next, 'nextid' => $next_id);
+
                     # tags
                     $tags = $this->store->retrieveTagsByEntry($entry['id']);
 
@@ -516,7 +576,8 @@ class Poche
                         'entry' => $entry,
                         'content' => $content,
                         'flattr' => $flattr,
-                        'tags' => $tags
+                        'tags' => $tags,
+                        'navigate' => $navigate
                     );
                 }
                 else {
@@ -529,6 +590,7 @@ class Poche
                     'page_links' => '',
                     'nb_results' => '',
                     'listmode' => (isset($_COOKIE['listmode']) ? true : false),
+                    'view' => $view,
                 );
 
                 //if id is given - we retrieve entries by tag: id is tag id
@@ -539,7 +601,7 @@ class Poche
 
                 $count = $this->store->getEntriesByViewCount($view, $this->user->getId(), $id);
 
-                if ($count > 0) {
+                if ($count && $count > 0) {
                     $this->pagination->set_total($count);
                     $page_links = str_replace(array('previous', 'next'), array(_('previous'), _('next')),
                         $this->pagination->page_links('?view=' . $view . '&sort=' . $_SESSION['sort'] . (($id)?'&id='.$id:'') . '&' ));
@@ -593,9 +655,6 @@ class Poche
      */
     private function credentials()
     {
-        if (isset($_SERVER['PHP_AUTH_USER'])) {
-            return array($_SERVER['PHP_AUTH_USER'], 'php_auth', true);
-        }
         if (!empty($_POST['login']) && !empty($_POST['password'])) {
             return array($_POST['login'], $_POST['password'], false);
         }
@@ -635,6 +694,7 @@ class Poche
                 setlocale(LC_ALL, $language);
                 bindtextdomain($language, LOCALE);
                 textdomain($language);
+                bind_textdomain_codeset($language, 'UTF-8');
 
                 $this->messages->add('s', _('welcome to your wallabag'));
                 Tools::logm('login successful');
@@ -681,23 +741,45 @@ class Poche
           $html->load_file($_FILES['file']['tmp_name']);
           $data = array();
           $read = 0;
-          foreach (array('ol','ul') as $list) {
-            foreach ($html->find($list) as $ul) {
-              foreach ($ul->find('li') as $li) {
-                $tmpEntry = array();
-                  $a = $li->find('a');
-                  $tmpEntry['url'] = $a[0]->href;
-                  $tmpEntry['tags'] = $a[0]->tags;
-                  $tmpEntry['is_read'] = $read;
-                  if ($tmpEntry['url']) {
-                    $data[] = $tmpEntry;
+
+          if (Tools::get_doctype($html)->innertext == "<!DOCTYPE NETSCAPE-Bookmark-file-1>") {
+            // Firefox-bookmarks HTML
+            foreach (array('DL','ul') as $list) {
+                foreach ($html->find($list) as $ul) {
+                  foreach ($ul->find('DT') as $li) {
+                    $tmpEntry = array();
+                      $a = $li->find('A');
+                      $tmpEntry['url'] = $a[0]->href;
+                      $tmpEntry['tags'] = $a[0]->tags;
+                      $tmpEntry['is_read'] = $read;
+                      if ($tmpEntry['url']) {
+                        $data[] = $tmpEntry;
+                      }
                   }
-              }
-              # the second <ol/ul> is for read links
-              $read = ((sizeof($data) && $read)?0:1);
+                  # the second <ol/ul> is for read links
+                  $read = ((sizeof($data) && $read)?0:1);
+                }
             }
-          }
-    	}
+          } else {
+            // regular HTML
+            foreach (array('ol','ul') as $list) {
+                foreach ($html->find($list) as $ul) {
+                  foreach ($ul->find('li') as $li) {
+                    $tmpEntry = array();
+                      $a = $li->find('a');
+                      $tmpEntry['url'] = $a[0]->href;
+                      $tmpEntry['tags'] = $a[0]->tags;
+                      $tmpEntry['is_read'] = $read;
+                      if ($tmpEntry['url']) {
+                        $data[] = $tmpEntry;
+                      }
+                  }
+                  # the second <ol/ul> is for read links
+                  $read = ((sizeof($data) && $read)?0:1);
+                }
+              }
+        	}
+        }
 
             // for readability structure
 
@@ -715,7 +797,7 @@ class Poche
             $urlsInserted = array(); //urls of articles inserted
             foreach($data as $record) {
                 $url = trim(isset($record['article__url']) ? $record['article__url'] : (isset($record['url']) ? $record['url'] : ''));
-                if ($url and !in_array($url, $urlsInserted)) {
+                if (filter_var($url, FILTER_VALIDATE_URL) and !in_array($url, $urlsInserted)) {
                     $title = (isset($record['title']) ? $record['title'] : _('Untitled - Import - ') . '</a> <a href="./?import">' . _('click to finish import') . '</a><a>');
                     $body = (isset($record['content']) ? $record['content'] : '');
                     $isRead = (isset($record['is_read']) ? intval($record['is_read']) : (isset($record['archive']) ? intval($record['archive']) : 0));
@@ -820,14 +902,18 @@ class Poche
      */
     public function export()
     {
-      $filename = "wallabag-export-".$this->user->getId()."-".date("Y-m-d").".json";
-      header('Content-Disposition: attachment; filename='.$filename);
+        $filename = "wallabag-export-".$this->user->getId()."-".date("Y-m-d").".json";
+        header('Content-Disposition: attachment; filename='.$filename);
 
-      $entries = $this->store->retrieveAll($this->user->getId());
-      echo $this->tpl->render('export.twig', array(
-          'export' => Tools::renderJson($entries),
-      ));
-      Tools::logm('export view');
+        $entries = $this->store->retrieveAllWithTags($this->user->getId());
+        if ($entries) {
+            echo $this->tpl->render('export.twig', array(
+            'export' => Tools::renderJson($entries),
+            ));
+            Tools::logm('export view');
+        } else {
+            Tools::logm('error accessing database while exporting');
+        }
     }
 
     /**
@@ -903,7 +989,7 @@ class Poche
         if (0 == $limit) {
             $limit = count($entries);
         }
-        if (count($entries) > 0) {
+        if ($entries && count($entries) > 0) {
             for ($i = 0; $i < min(count($entries), $limit); $i++) {
                 $entry = $entries[$i];
                 $newItem = $feed->createNewItem();
@@ -915,7 +1001,10 @@ class Poche
                 $feed->addItem($newItem);
             }
         }
-
+        else 
+            {
+                Tools::logm("database error while generating feeds");
+            }
         $feed->genarateFeed();
         exit;
     }

@@ -16,7 +16,7 @@
 <div class="notags">{% trans "no tags" %}</div>
 {% endif %}
 <ul>
-{% for tag in tags %}<li>{{ tag.value }} <a href="./?action=remove_tag&amp;tag_id={{ tag.id }}&amp;id={{ entry_id }}">✘</a></li>{% endfor %}
+{% for tag in tags %}<li><span class="alreadytagged">{{ tag.value }}</span> <a href="./?action=remove_tag&amp;tag_id={{ tag.id }}&amp;id={{ entry_id }}">✘</a></li>{% endfor %}
 </ul>
 <form method="post" action="./?action=add_tag">
     <input type="hidden" name="entry_id" value="{{ entry_id }}" />
@@ -25,5 +25,7 @@
     <p>{% trans "Start typing for auto complete." %}<br>
     {% trans "You can enter multiple tags, separated by commas." %}</p>
 </form>
+All existing tags :
+<ul id="tagcloud">{% for eachtag in alltags %}<li class="suggestedtag {{ eachtag.cssclass }}">{{ eachtag.value }}</li>{% endfor %}</ul>
 <a class="icon icon-reply return" href="./?view=view&id={{ entry_id }}">{% trans "return to article" %}</a>
 {% endblock %}

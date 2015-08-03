@@ -6,8 +6,12 @@
 {% block content %}
 <h2>{% trans "Tags" %}</h2>
 <ul class="list-tags">
+{% if tags is not empty %}
 {% for tag in tags %}<li>{% if token != '' %}<a class="icon icon-rss" href="?feed&amp;type=tag&amp;user_id={{ user_id }}&amp;tag_id={{ tag.id }}&amp;token={{ token }}" target="_blank"><span>rss</span></a>{% endif %} <a href="./?view=tag&amp;id={{ tag.id }}">{{ tag.value }}</a> ({{ tag.entriescount }})
 </li>
 {% endfor %}
+{% else %}
+{% trans "No tags found. You must view an article to set tags for it." %}
+{% endif %}
 </ul>
 {% endblock %}

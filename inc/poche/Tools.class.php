@@ -40,6 +40,8 @@ final class Tools
      */
     public static function getPocheUrl()
     {
+    	$baseUrl = "";
+
         $https = (!empty($_SERVER['HTTPS'])
                     && (strtolower($_SERVER['HTTPS']) == 'on'))
             || (isset($_SERVER["SERVER_PORT"])
@@ -72,8 +74,15 @@ final class Tools
             $serverport = '';
         }
 
-        return 'http' . ($https ? 's' : '') . '://'
-            . $host . $serverport . $scriptname;
+		// check if BASE_URL is configured
+		if(BASE_URL) {
+			$baseUrl = BASE_URL;
+		} else {
+			$baseUrl = 'http' . ($https ? 's' : '') . '://' . $host . $serverport;
+		}
+
+    return $baseUrl . $scriptname;
+    
     }
 
     /**
@@ -392,8 +401,11 @@ final class Tools
         );
 
         foreach ($files as $fileInfo) {
-            $todo = ($fileInfo->isDir() ? 'rmdir' : 'unlink');
-            $todo($fileInfo->getRealPath());
+            $filename = $fileInfo->getFilename();
+            if (!$filename[0] == '.') {
+                $todo = ($fileInfo->isDir() ? 'rmdir' : 'unlink');
+                $todo($fileInfo->getRealPath());
+            }
         }
 
         Tools::logm('empty cache');
@@ -415,6 +427,25 @@ final class Tools
         }
 
         return str_replace('+', '', $token);
+    }
+
+    /** 
+    *
+    * Returns the doctype for an HTML document (used for Mozilla Bookmarks)
+    * @param simple_html_dom $doc
+    * @return doctype $el
+    *
+    */
+
+    public static function get_doctype($doc)
+    {
+        $els = $doc->find('unknown');
+
+        foreach ($els as $e => $el) 
+            if ($el->parent()->tag == 'root') 
+                return $el;
+
+        return NULL;
     }
 
 }

@@ -1,0 +1,6 @@
+body: //div[@class='content-area']
+next_page_link: //a[@title='Go to next page']
+author: //a[@title='View user profile.']
+strip_id_or_class: comments
+
+test_url: http://www.linuxjournal.com/content/be-mechanicwith-android-and-linux

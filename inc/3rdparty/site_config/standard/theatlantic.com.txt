@@ -1,5 +1,6 @@
 title: //div[contains(@class, 'articleHead')]//h1
 
+body: //div[@itemprop='articleBody']
 body: //div[@class='articleText']
 body: //div[@class='articleContent']
 body: //div[@id='article']
@@ -13,9 +14,13 @@ strip: //p[contains(., 'This article available online at:')]
 strip: //p[contains(., 'This article available online at:')]/following::*
 strip: //div[@class='earthbox']
 
-single_page_link: //article//a[contains(@class, 'print')]
+single_page_link: //div[contains(@class, 'article-tools')]//a[contains(@class, 'print')]
 
 native_ad_clue: //meta[@property="og:url" and contains(@content, '/sponsored/')]
+
+#multi-page article
+test_url: http://www.theatlantic.com/magazine/archive/2014/12/the-real-roots-of-midlife-crisis/382235/
+test_contains: The curve tends to evince itself
 
 test_url: http://www.theatlantic.com/technology/archive/2011/04/want-to-see-how-crazy-a-bot-run-market-can-be/237773/
 test_url: http://www.theatlantic.com/magazine/archive/2007/11/the-autumn-of-the-multitaskers/6342/

@@ -8,14 +8,14 @@
  * @license    http://opensource.org/licenses/MIT see COPYING file
  */
 
-define ('POCHE', '1.9.0');
+define ('POCHE', '1.9.1');
 require 'check_essentials.php';
 require 'check_setup.php';
 require_once 'inc/poche/global.inc.php';
 
 // Start session
 Session::$sessionName = 'wallabag';
-Session::init();
+Session::init(true);
 
 // Let's rock !
 $wallabag = new Poche();

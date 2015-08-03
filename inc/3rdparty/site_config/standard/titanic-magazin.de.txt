@@ -1,0 +1,8 @@
+body: //div[contains(@class, 'tt_news-bodytext')]
+
+# cut html short
+find_string: <!--TYPO3SEARCH_end-->
+replace_string: </div></body></html>
+
+test_url: http://www.titanic-magazin.de/ich.war.bei.der.waffen.rss
+test_url: http://www.titanic-magazin.de/news/wenig-bekannte-fakten-ueber-2014-6986/

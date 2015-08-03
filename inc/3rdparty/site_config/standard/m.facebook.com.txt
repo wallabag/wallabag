@@ -1,0 +1,12 @@
+body: //div[@id='m_story_permalink_view' or contains(@data-sigil, 'm-story-view')]
+
+title: //div[@id='m_story_permalink_view' or contains(@data-sigil, 'm-story-view')]//h3
+
+strip_id_or_class: commentable
+strip: //*[contains(@data-sigil, 'm-mentions-expand') or contains(@data-sigil, 'story-popup-context') or contains(@data-sigil, 'share') or contains(@data-sigil, 'translate')]
+
+prune: no
+tidy: no
+
+test_url: https://www.facebook.com/permalink.php?story_fbid=10154584776550183&id=294468630182
+test_contains: holding an extraordinary session in Brussels this month

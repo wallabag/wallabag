@@ -1,3 +1,2 @@
-title: //h3
-body: //div[@class="content_wysiwyg"]
-test_url: http://www.warnerbros.fr/game-of-thrones-un-junket-vu-de-l-interieur-268.html
+body: //div[@class="article-body"]
+test_url: https://www.warnerbros.fr/articles/magic-mike-xxl-adam-rodriguez-portrait

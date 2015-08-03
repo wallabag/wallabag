@@ -15,8 +15,15 @@
             {% if tag %}
                 <h3>{% trans "Tag" %}: <b>{{ tag.value }}</b></h3>
             {% endif %}
-            {% if entries is empty %}
-            <div class="messages warning"><p>{% trans "No articles found." %}</p></div>
+            {% if entries is empty%}
+            <div class="messages warning"><p>
+            {% if view == 'home' %}{% trans "No articles unread. Good job !" %}
+            {% elseif view == 'fav' %}{% trans "No articles favourited" %}
+            {% elseif view == 'archive' %}{% trans "No articles marked as read" %}
+            {% elseif view == 'tags' %}{% trans "No articles with this tag found" %}
+            {% elseif searchterm is defined %} {% trans %}No articles found for « {{ searchterm }} »{% endtrans %}
+            {% else %}{% trans "No articles found" %}{% endif %}
+            </p></div>
             {% else %}
                  <div>
                      {% include '_display-mode.twig' %}
@@ -25,15 +32,35 @@
                 {% block pager %}
                     {% if nb_results > 1 %}
                 <div class="results">
-                    <div class="nb-results">{{ nb_results }} {% trans "results" %}{% if search_term is defined %} {% trans %}found for « {{ search_term }} »{% endtrans %}{% endif %} <a href="?action=random" class="icon icon-random"><span> {% trans "random" %}</span></a></div>
+                    <div class="nb-results">
+                    {% if view == 'home' %}
+                        {{ nb_results }} {% trans "articles unread" %}
+                    {% elseif view == 'fav' %}
+                        {{ nb_results }} {% trans "articles favourited" %}
+                    {% elseif view == 'archive' %}
+                        {{ nb_results }} {% trans "articles marked as read" %}
+                    {% elseif view == 'tag' %}
+                        {{ nb_results }} {% trans "articles with this tag" %}
+                    {% elseif searchterm is defined %}
+                    {{ nb_results }} {% trans %}articles found for « {{ searchterm }} »{% endtrans %}
+                    {% else %}
+                        {{ nb_results }} {% trans "articles" %}
+                    {% endif %}
+                    {% if view == 'home' or view == 'fav' or view == 'archive' %}
+                    <a href="?action=random&amp;view={{ view }}" class="icon icon-random"><span> {% trans "random" %}</span></a>{% endif %}
+                    </div>
                         {{ page_links | raw }}
                 </div>
                     {% elseif nb_results == 1 %}
-                        {% if search_term is defined %}
                      <div class="results">
-                        <div class="nb-results">{% trans "Only one result found for " %} « {{ search_term }} »</div>
+                        <div class="nb-results">
+                        {% if view == 'home' %}{% trans "Only one article unread. Way to go !" %}
+                        {% elseif view == 'fav' %}{% trans "Just one article favourited" %}
+                        {% elseif view == 'archive' %}{% trans "One article marked as read" %}
+                        {% elseif view == 'tag' %}{% trans "One article with this tag" %}
+                        {% elseif searchterm is defined %}{% trans %}Only one result found for « {{ searchterm }} »{% endtrans %}
+                        {% else %}{% trans "One article found" %}{% endif %}</div>
                      </div>
-                        {% endif %}
                     {% endif %}
                 {% endblock %}
             <div id="list-entries" class="list-entries">
@@ -68,14 +95,20 @@
             {% if constant('EPUB') == 1 %}<a title="{% trans "Download the articles from this tag in an epub file" %}" href="./?epub&amp;method=tag&amp;value={{ tag.value }}">{% trans "Download as ePub3" %}</a>{% endif %}
             {% if constant('MOBI') == 1 %}<a title="{% trans "Download the articles from this tag in a mobi file" %}" href="./?mobi&amp;method=tag&amp;value={{ tag.value }}">{% trans "Download as Mobi" %}</a>{% endif %}
             {% if constant('PDF') == 1 %}<a title="{% trans "Download the articles from this tag in a pdf file" %}" href="./?pdf&amp;method=tag&amp;value={{ tag.value }}">{% trans "Download as PDF" %}</a>{% endif %}
+
             {% elseif searchterm is defined %}
             {% if constant('EPUB') == 1 %}<a title="{% trans "Download the articles from this search in an epub" %}" href="./?epub&amp;method=search&amp;value={{ searchterm }}">{% trans "Download as ePub3" %}</a>{% endif %}
             {% if constant('MOBI') == 1 %}<a title="{% trans "Download the articles from this search in a mobi file" %}" href="./?mobi&amp;method=search&amp;value={{ searchterm }}">{% trans "Download as Mobi" %}</a>{% endif %}
             {% if constant('PDF') == 1 %}<a title="{% trans "Download the articles from this search in a pdf file" %}" href="./?pdf&amp;method=search&amp;value={{ searchterm }}">{% trans "Download as PDF" %}</a>{% endif %}
+
             {% else %}
             {% if constant('EPUB') == 1 %}<a title="{% trans "Download the articles from this category in an epub" %}" href="./?epub&amp;method=category&amp;value={{ view }}">{% trans "Download as ePub3" %}</a>{% endif %}
             {% if constant('MOBI') == 1 %}<a title="{% trans "Download the articles from this category in a mobi file" %}" href="./?mobi&amp;method=category&amp;value={{ view }}">{% trans "Download as Mobi" %}</a>{% endif %}
             {% if constant('PDF') == 1 %}<a title="{% trans "Download the articles from this category in a pdf file" %}" href="./?pdf&amp;method=category&amp;value={{ view }}">{% trans "Download as PDF" %}</a>{% endif %}
             {% endif %}
 {% endif %}
+
+<script type="text/javascript">
+    homeNavigation();
+</script>
 {% endblock %}

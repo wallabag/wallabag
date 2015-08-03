@@ -6,7 +6,7 @@
 {% endblock %}
 {% block content %}
             <h2>{% trans "Saving articles" %}</h2>
-            <p>{% trans "There are several ways to save an article:" %} {% trans "(<a href=\"http://doc.wallabag.org/en/User_documentation/Save_your_first_article\" target=\"_blank\" title=\"Documentation\">?</a>)" %}</p>
+            <p>{% trans "There are several ways to save an article:" %} {% trans "(<a href=\"http://doc.wallabag.org/en/User/save_your_first_article.html\" target=\"_blank\" title=\"Documentation\">?</a>)" %}</p>
             <p>
                 <form method="get" action="index.php">
                     <label class="addurl" for="config_plainurl">{% trans "By filling this field" %}:</label><br>
@@ -14,12 +14,13 @@
                     <input type="submit" value="{% trans "bag it!" %}" />
                 </form>
             </p>
-            <h3>Browser Plugins</h3>
+            <h3>{% trans "Browser Addons" %}</h3>
             <ul>
-                <li><a href="https://addons.mozilla.org/firefox/addon/wallabag/" target="_blank">{% trans "Firefox Add-On" %}</a></li>
+                <li><a href="https://addons.mozilla.org/firefox/addon/wallabag/" target="_blank">{% trans "Standard Firefox Add-On" %}</a></li>
+                {% if https %}<li><button onclick="activateSocialFeature(this)">{% trans "Mozilla Services (Social API) Extension" %}</button></li>{% else %}<li>{% trans "Mozilla Services (Social API) Extension needs an https connection" %}</li>{% endif %}
                 <li><a href="https://chrome.google.com/webstore/detail/wallabag/bepdcjnnkglfjehplaogpoonpffbdcdj" target="_blank">{% trans "Chrome Extension" %}</a></li>
             </ul>
-            <h3>Mobile Apps</h3>
+            <h3>{% trans "Mobile Apps" %}</h3>
             <ul>
                 <li>Android: <a href="https://f-droid.org/app/fr.gaulupeau.apps.InThePoche" target="_blank">{% trans "via F-Droid" %}</a> {% trans " or " %} <a href="https://play.google.com/store/apps/details?id=fr.gaulupeau.apps.InThePoche" target="_blank">{% trans "via Google Play" %}</a></li>
                 <li>iOS: <a href="https://itunes.apple.com/app/wallabag/id828331015?mt=8" target="_blank">{% trans "download the application" %}</a></li>
@@ -102,8 +103,8 @@
             <p class="more-info">{% trans "Fetching process is controlled by two constants in your config file: IMPORT_LIMIT (how many articles are fetched at once) and IMPORT_DELAY (delay between fetch of next batch of articles)." %}</p>
 
             <h2>{% trans "Export your wallabag data" %}</h2>
-            <p><a href="?export" target="_blank">{% trans "Export JSON" %}</a><br>
-            <span class="more-info">Data will be exported in a single JSON file.</span></p>
+            <p><a href="?export" target="_blank">{% trans "JSON export" %}</a><br>
+            <span class="more-info">{% trans "Data will be exported in a single JSON file." %}</span></p>
 
             <h2>{% trans "Fancy an E-Book ?" %}</h2>
             <p>{% trans "Click to get all your articles in one ebook :" %}
@@ -117,7 +118,7 @@
 
             <h2><a name="cache"></a>{% trans "Cache" %}</h2>
             <p><a href="?empty-cache">{% trans "Delete Cache" %}</a><br>
-            <span class="more-info">Deleting the cache may help with display or other problems.</span></p>
+            <span class="more-info">{% trans "Deleting the cache may help with display or other problems." %}</span></p>
 
             {% if http_auth == 0 %}
             <h2>{% trans "Change your password" %}</h2>

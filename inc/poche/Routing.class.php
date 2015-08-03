@@ -15,6 +15,7 @@ class Routing
     protected $view;
     protected $action;
     protected $id;
+    protected $autoclose;
     protected $url;
     protected $file;
     protected $defaultVars = array();
@@ -74,15 +75,6 @@ class Routing
         } elseif (ALLOW_REGISTER && isset($_GET['register'])){
             $this->wallabag->createNewUser($_POST['newusername'], $_POST['password4newuser'], $_POST['newuseremail']);
             Tools::redirect();
-        } elseif(isset($_SERVER['PHP_AUTH_USER'])) {
-            if($this->wallabag->store->userExists($_SERVER['PHP_AUTH_USER'])) {
-                $this->wallabag->login($this->referer);
-            } else {
-                $this->wallabag->messages->add('e', _('login failed: user doesn\'t exist'));
-                Tools::logm('user doesn\'t exist');
-                $tplFile = Tools::getTplFile('login');
-                $tplVars['http_auth'] = 1;
-            }
         } elseif(isset($_SERVER['REMOTE_USER'])) {
             if($this->wallabag->store->userExists($_SERVER['REMOTE_USER'])) {
                 $this->wallabag->login($this->referer);
@@ -111,9 +103,7 @@ class Routing
             $tag_id = (isset($_GET['tag_id']) ? intval($_GET['tag_id']) : 0);
             $limit = (isset($_GET['limit']) ? intval($_GET['limit']) : 0);
             $this->wallabag->generateFeeds($_GET['token'], filter_var($_GET['user_id'],FILTER_SANITIZE_NUMBER_INT), $tag_id, $_GET['type'], $limit);
-        } //elseif (ALLOW_REGISTER && isset($_GET['register'])) {
-            //$this->wallabag->register
-        //}
+        }
         
         //allowed ONLY to logged in user
         if (\Session::isLogged() === true) 
@@ -142,7 +132,7 @@ class Routing
                 $pdf->producePDF();
             } elseif (isset($_GET['import'])) {
                 $import = $this->wallabag->import();
-                $tplVars = array_merge($this->vars, $import);
+                $this->vars = array_merge($this->vars, $import);
             } elseif (isset($_GET['empty-cache'])) {
                 Tools::emptyCache();
             } elseif (isset($_GET['export'])) {

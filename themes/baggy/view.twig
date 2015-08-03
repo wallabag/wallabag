@@ -5,16 +5,19 @@
 {% block title %}{{ entry.title|raw }} ({{ entry.url | e | getDomain }}){% endblock %}
 {% block content %}
 				{% include '_highlight.twig' %}
+        {% block toolbar %}
         <div id="article_toolbar">
             <ul class="links">
                 <li class="topPosF"><a href="#top" title="{% trans "Back to top" %}" class="tool top icon icon-arrow-up-thick"><span>{% trans "Back to top" %}</span></a></li>
+                {% if navigate.next %}<li class="leftPosF"><a href="./?view=view&amp;id={{ navigate.nextid|e }}" class="top tool icon icon-previous"><span>{% trans "Next Article" %}</span></a></li>{% endif %}
                 <li><a href="{{ entry.url|e }}" target="_blank" title="{% trans "original" %} : {{ entry.title|e }}" class="tool link icon icon-link"><span>{{ entry.url | e | getDomain }}</span></a></li>
                 <li><a title="{% trans "Mark as read" %}" class="tool icon icon-check {% if entry.is_read == 0 %}archive-off{% else %}archive{% endif %}" href="javascript: void(null);" id="markAsRead"><span>{% trans "Toggle mark as read" %}</span></a></li>
+                {% if navigate.previous %}<li><a title="{% trans "Mark as read and go to next article" %}" class="tool icon icon-archiveandnext" href="./?action=archive_and_next&amp;id={{ entry.id|e }}" id="markAsReadAndNext"><span>{% trans "Toggle mark as read and go to next article" %}</span></a></li>{% endif %}
                 <li><a title="{% trans "Favorite" %}" class="tool icon icon-star {% if entry.is_fav == 0 %}fav-off{% else %}fav{% endif %}" href="javascript: void(null);" id="setFav"><span>{% trans "Toggle favorite" %}</span></a></li>
                 <li><a title="{% trans "Delete" %}" class="tool delete icon icon-trash" href="./?action=delete&amp;id={{ entry.id|e }}"><span>{% trans "Delete" %}</span></a></li>
                 {% if constant('SHARE_TWITTER') == 1 %}<li><a href="https://twitter.com/home?status={{entry.title|url_encode}}%20{{ entry.url|url_encode }}%20via%20@wallabagapp" target="_blank" class="tool twitter icon icon-twitter" title="{% trans "Tweet" %}"><span>{% trans "Tweet" %}</span></a></li>{% endif %}
                 {% if constant('SHARE_MAIL') == 1 %}<li><a href="mailto:?subject={{ entry.title }}&amp;body={{ content|striptags|slice(0, 700) }}%2E%2E%2E%0A%0A{% trans "Read the rest at" %} {{ entry.url|url_encode }}%20via%20@wallabagapp" class="tool email icon icon-mail" title="{% trans "Email" %}"><span>{% trans "Email" %}</span></a></li>{% endif %}
-                {% if constant('SHARE_SHAARLI') == 1 %}<li><a href="{{ constant('SHAARLI_URL') }}/index.php?post={{ entry.url|url_encode }}&amp;title={{ entry.title|url_encode }}" target="_blank" class="tool shaarli" title="{% trans "shaarli" %}"><span>{% trans "shaarli" %}</span></a></li>{% endif %}
+                {% if constant('SHARE_SHAARLI') == 1 %}<li><a href="{{ constant('SHAARLI_URL') }}/index.php?post={{ entry.url|url_encode }}&amp;title={{ entry.title|url_encode }}" target="_blank" class="tool shaarli icon-image icon-image--shaarli" title="{% trans "shaarli" %}"><span>{% trans "shaarli" %}</span></a></li>{% endif %}
                 {% if constant('SHARE_EVERNOTE') == 1 %}<li><a href="https://www.evernote.com/clip.action?url={{ entry.url|url_encode }}&amp;title={{ entry.title|url_encode }}" target="_blank" class="tool evernote icon icon-evernote" title="{% trans "evernote" %}"><span>{% trans "evernote" %}</span></a></li>{% endif %}
                 {% if constant('SHARE_DIASPORA') == 1 %}<li><a href="{{ constant('DIASPORA_URL') }}/bookmarklet?url={{ entry.url|url_encode }}&title={{ entry.title|url_encode }}&notes=&v=1&noui=1&jump=doclose" target="_blank" class="tool diaspora icon-image icon-image--diaspora" title="{% trans "diaspora" %}"><span>{% trans "diaspora" %}</span></a></li>{% endif %}
                 {% if constant('FLATTR') == 1 %}{% if flattr.status == constant('FLATTRABLE') %}<li><a href="http://flattr.com/submit/auto?url={{ entry.url }}" class="tool flattr icon icon-flattr" target="_blank" title="{% trans "flattr" %}"><span>{% trans "flattr" %}</span></a></li>{% elseif flattr.status == constant('FLATTRED') %}<li><a href="{{ flattr.flattrItemURL }}" class="tool flattr icon icon-flattr" target="_blank" title="{% trans "flattr" %}"><span>{% trans "flattr" %}</span> ({{ flattr.numFlattrs }})</a></li>{% endif %}{% endif %}
@@ -25,8 +28,11 @@
                 {% if constant('MOBI') == 1 %}<li><a href="./?mobi&amp;method=id&amp;value={{ entry.id|e }}" title="Generate Mobi file">MOBI</a></li>{% endif %}
                 {% if constant('PDF') == 1 %}<li><a href="./?pdf&amp;method=id&amp;value={{ entry.id|e }}" title="Generate PDF file">PDF</a></li>{% endif %}
                 <li><a href="mailto:hello@wallabag.org?subject=Wrong%20display%20in%20wallabag&amp;body={{ entry.url|url_encode }}" title="{% trans "Does this article appear wrong?" %}" class="tool bad-display icon icon-delete"><span>{% trans "Does this article appear wrong?" %}</span></a></li>
+                {% if navigate.previous %}<li class="rightPosF"><a href="./?view=view&amp;id={{ navigate.previousid|e }}" class="tool icon icon-next"><span>{% trans "Previous Article" %}</span></a></li>{% endif %}
             </ul>
         </div>
+        {% endblock %}
+
         <div id="article">
             <header class="mbm">
                 <h1>{{ entry.title|raw }}</h1>
@@ -38,6 +44,7 @@
                 {{ content | raw }}
             </article>
         </div>
+        {{ block('toolbar') }}
         <script src="{{ poche_url }}themes/_global/js/restoreScroll.js"></script>
         <script type="text/javascript">
         $(document).ready(function() {
@@ -100,5 +107,20 @@
                 retrievePercent({{ entry.id|e }});
             });
         });
+        
+        // Use left and right arrow to navigate on with keyboard
+        navigateKeyboard('?view=view&id={{ navigate.nextid|e }}','?view=view&id={{ navigate.previousid|e }}');
+
+        // use keyboard to do actions
+        actionArticle('{{ entry.id|e }}');
+
+        // swipe to right or left on mobile to navigate
+        $('article').on("swiperight", function(){
+            goLeft('?view=view&id={{ navigate.nextid|e }}');
+        });
+        $('article').on("swipeleft", function(){
+            goRight('?view=view&id={{ navigate.previousid|e }}');
+        });
+
         </script>
 {% endblock %}

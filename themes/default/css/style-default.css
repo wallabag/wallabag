@@ -1,5 +1,17 @@
 a.back span {
+    background-image: url('../img/default/home.png');
+}
+
+a.previous span {
     background-image: url('../img/default/left.png');
+}
+
+a.next span {
+    background-image: url('../img/default/right.png');
+}
+
+a.archiveandnext span {
+    background-image: url('../img/default/forward.png');
 }
 
 a.top span {
@@ -31,7 +43,8 @@ a.twitter span {
 }
 
 a.shaarli span {
-    background-image: url('../img/default/shaarli.png');
+    background-image: url('../../_global/img/icons/shaarli.png');
+    background-size: 16px 16px;
 }
 
 a.flattr span {

@@ -399,19 +399,19 @@ footer a {
           transition: all 0.5s ease;
 }
 
-.entrie:hover {
+.entrie:hover, .eselected {
   box-shadow: 0 3px 10px rgba(0,0,0,1);
 }
 
-.entrie:hover:after {
+.entrie:hover:after, .eselected:after {
   height: 40px;
 }
 
-.entrie:hover:before {
+.entrie:hover:before, .eselected:before {
   bottom: 2.4em;
 }
 
-.entrie:hover h2 a {
+.entrie:hover h2 a, .eselected h2 a {
   color: #666;
 }
 
@@ -421,9 +421,9 @@ footer a {
   line-height: 1.2;
 }
 
-  .entrie h2:after {
-    content: none;
-  }
+.entrie h2:after {
+  content: none;
+}
 
 
 .entrie h2 a {
@@ -437,16 +437,6 @@ footer a {
        -o-transition: all 0.5s ease;
           transition: all 0.5s ease;
 }
-/*
-.entrie h2 a:after {
-  content: "";
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  left: 0;
-}
-*/
 
 .entrie p {
   color: #666;
@@ -454,12 +444,8 @@ footer a {
   line-height: 1.7;
 }
 
-  .entrie h2 a:first-letter {
-    text-transform: uppercase;
-  }
-
-.entrie:hover .tools {
-  bottom: 0;
+.entrie h2 a:first-letter {
+  text-transform: uppercase;
 }
 
 .entrie .tools {
@@ -477,20 +463,25 @@ footer a {
           transition: all 0.5s ease;
 }
 
-  .entrie .tools a {
-    color: #666;
-    text-decoration: none;
-    display: block;
-    padding: 0.4em;
-  }
+.entrie:hover .tools, .eselected .tools {
+  bottom: 0;
+}
 
-  .entrie .tools a:hover {
-    color: #FFF;
-  }
 
-  .entrie .tools li {
-    display: inline-block;
-  }
+.entrie .tools a {
+  color: #666;
+  text-decoration: none;
+  display: block;
+  padding: 0.4em;
+}
+
+.entrie .tools a:hover {
+  color: #FFF;
+}
+
+.entrie .tools li {
+  display: inline-block;
+}
 
 .entrie:nth-child(3n+1) {
   margin-left: 0;
@@ -748,6 +739,15 @@ a.add-to-wallabag-link-after:after {
 .icon-tags:before {
   content: "\e936";
 }
+.icon-previous:before {
+  content: "\e606";
+}
+.icon-next:before {
+  content: "\e605";
+}
+.icon-archiveandnext:before {
+  content: "\e607";
+}
 
 
 /* .icon-image class, for image-based icons
@@ -766,10 +766,14 @@ a.add-to-wallabag-link-after:after {
 	background-image: url('../../_global/img/icons/carrot-icon--white.png');
 }
 
+.icon-image--shaarli {
+  background-image: url('../../_global/img/icons/shaarli.png');
+}
+
 /* Diaspora */
 .icon-image--diaspora {
 	background-image: url('../../_global/img/icons/diaspora-icon--black.png');
-}}
+}
 
 /* ==========================================================================
    Icon selected
@@ -864,6 +868,20 @@ blockquote {
   font-size: 1.5em;
 }
 
+.leftPosF {
+  position: fixed;
+  right: 24%;
+  bottom: 2em;
+  font-size: 1.5em;
+}
+
+.rightPosF {
+  position: fixed;
+  right: 16%;
+  bottom: 2em;
+  font-size: 1.5em;
+}
+
 #article_toolbar {
   margin-bottom: 1em;
 }
@@ -882,10 +900,6 @@ blockquote {
   #article_toolbar a:hover, #article_toolbar a:focus {
     background-color: #999;
   }
-
-.shaarli:before {
-  content: "*";
-}
 
 .return {
   text-decoration: none;
@@ -937,6 +951,35 @@ pre code {
 		font-size: 0.96em;
 }
 
+/* ==========================================================================
+   5.1 = Tags-related styles
+   ========================================================================== */
+
+.suggestedtag {
+    padding: 4px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+#tagcloud .smallesttag {
+    font-size: x-small;
+}
+
+#tagcloud .smalltag {
+    font-size: small;
+}
+
+#tagcloud .mediumtag {
+    font-size:medium;
+}
+
+#tagcloud .largetag {
+    font-size:large;
+}
+
+#tagcloud .largesttag {
+    font-size:larger;
+}
 
 /* ==========================================================================
    6 = Media Queries
@@ -960,6 +1003,12 @@ pre code {
   }
   .topPosF {
     right: 2.5em;
+  }
+  .leftPosF {
+    right: 4.5em;
+  }
+  .rightPosF {
+    right: 0.5em;
   }
 }
 
@@ -1051,6 +1100,14 @@ pre code {
     margin-top: 3em;
   }
   #article_toolbar .topPosF {
+    display: none;
+  }
+
+  #article_toolbar .leftPosF {
+    display: none;
+  }
+
+  #article_toolbar .rightPosF {
     display: none;
   }
 

@@ -1,17 +1,15 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: wallabag\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-25 15:17+0300\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
-"Last-Translator: Thomas Citharel <tcit@openmailbox.org>\n"
-"Language-Team: \n"
+"Last-Translator: Thomas Citharel <tcit@tcit.fr>\n"
 "Language: en_US\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.5.4\n"
-"X-Poedit-Basepath: .\n"
 
 msgid "wallabag, a read it later open source system"
 msgstr "wallabag, a read it later open source system"
@@ -25,6 +23,77 @@ msgstr "Return Home"
 msgid "config"
 msgstr "Config"
 
+msgid "about"
+msgstr "about"
+
+msgid "About wallabag"
+msgstr "About wallabag"
+
+msgid ""
+"wallabag is a read-it-later application: you can save a web page by keeping "
+"only content. Elements like ads or menus are deleted."
+msgstr ""
+"wallabag is a read-it-later application: you can save a web page by keeping "
+"only content. Elements like ads or menus are deleted."
+
+msgid "Project website"
+msgstr "Project website"
+
+msgid "Main developer"
+msgstr "Main developer"
+
+msgid "website"
+msgstr "website"
+
+msgid "Contributors:"
+msgstr "Contributors:"
+
+msgid "Bug reports"
+msgstr "Bug reports"
+
+msgid "On our support website"
+msgstr "On our support website"
+
+msgid "on Github"
+msgstr "on Github"
+
+msgid "License"
+msgstr "License"
+
+msgid "Version"
+msgstr "Version"
+
+msgid "Getting help"
+msgstr "Getting help"
+
+msgid "Documentation"
+msgstr "Documentation"
+
+msgid ""
+"<a href=\"docs/\">Offline documentation</a> and <a href=\"https://doc."
+"wallabag.org/\">online documentation</a> (up to date)"
+msgstr ""
+"<a href=\"docs/\">Offline documentation</a> and <a href=\"https://doc."
+"wallabag.org/\">online documentation</a> (up to date)"
+
+msgid "Support"
+msgstr "Support"
+
+msgid "Helping wallabag"
+msgstr "Helping wallabag"
+
+msgid "wallabag is free and opensource. You can help us:"
+msgstr "wallabag is free and opensource. You can help us:"
+
+msgid "via Paypal"
+msgstr "via Paypal"
+
+msgid "via Flattr"
+msgstr "via Flattr2"
+
+msgid "Credits"
+msgstr "Credits"
+
 msgid "Saving articles"
 msgstr "Saving articles"
 
@@ -37,8 +106,14 @@ msgstr "Read the documentation"
 msgid "download the extension"
 msgstr "Download the extension"
 
-msgid "Firefox Add-On"
-msgstr "Firefox Add-On"
+msgid "Standard Firefox Add-On"
+msgstr "Standard Firefox Add-On"
+
+msgid "Mozilla Services (Social API) Extension"
+msgstr "Mozilla Services (Social API) Extension"
+
+msgid "Mozilla Services (Social API) Extension needs an https connection"
+msgstr "Mozilla Services (Social API) Extension needs an https connection"
 
 msgid "Chrome Extension"
 msgstr "Chrome Extension"
@@ -61,8 +136,14 @@ msgstr "By filling this field"
 msgid "bag it!"
 msgstr "bag it!"
 
-msgid "Bookmarklet: drag & drop this link to your bookmarks bar"
-msgstr "Bookmarklet: Drag & drop this link to your bookmarks bar"
+msgid "Drag &amp; drop this link to your bookmarks bar:"
+msgstr "Drag &amp; drop this link to your bookmarks bar:"
+
+msgid "Browser Addons"
+msgstr "Browser Addons"
+
+msgid "Mobile Apps"
+msgstr "Mobile Apps"
 
 msgid "Upgrading wallabag"
 msgstr "Upgrading wallabag"
@@ -167,9 +248,18 @@ msgid ""
 "below. Wallabag will parse your file, insert all URLs and start fetching of "
 "articles if required."
 msgstr ""
-"Please select export file on your computer and press &ldquo;Import&rdquo; "
-"button below. wallabag will parse your file, insert all URLs and start "
-"fetching of articles if required."
+"Please select export file on your computer and press \"Import\" button "
+"below. Wallabag will parse your file, insert all URLs and start fetching of "
+"articles if required."
+
+msgid ""
+"Fetching process is controlled by two constants in your config file: "
+"IMPORT_LIMIT (how many articles are fetched at once) and IMPORT_DELAY (delay "
+"between fetch of next batch of articles)."
+msgstr ""
+"Fetching process is controlled by two constants in your config file: "
+"IMPORT_LIMIT (how many articles are fetched at once) and IMPORT_DELAY (delay "
+"between fetch of next batch of articles)."
 
 msgid "You can click here to fetch content for articles with no content."
 msgstr "Fetch content for articles with no content"
@@ -212,17 +302,20 @@ msgstr "to download your database."
 msgid "to export your wallabag data."
 msgstr "to export your wallabag data."
 
-msgid "Export JSON"
-msgstr "Export JSON"
+msgid "JSON export "
+msgstr "JSON export"
+
+msgid "Data will be exported in a single JSON file."
+msgstr "Data will be exported in a single JSON file."
 
 msgid "Cache"
 msgstr "Cache"
 
-msgid "to delete cache."
-msgstr "to delete cache."
-
 msgid "Delete Cache"
 msgstr "Delete Cache"
+
+msgid "Deleting the cache may help with display or other problems."
+msgstr " Deleting the cache may help with display or other problems."
 
 msgid "You can enter multiple tags, separated by commas."
 msgstr "You can enter multiple tags, separated by commas."
@@ -232,6 +325,9 @@ msgstr "Add tags:"
 
 msgid "no tags"
 msgstr "no tags"
+
+msgid "No tags found. You must view an article to set tags for it."
+msgstr "No tags found. You must view an article to set tags for it."
 
 msgid "The tag has been applied successfully"
 msgstr "The tag has been applied successfully"
@@ -459,12 +555,6 @@ msgstr "bagging a link"
 msgid "by filling this field"
 msgstr "by filling this field"
 
-msgid "bookmarklet: drag & drop this link to your bookmarks bar"
-msgstr "Bookmarklet: Drag & drop this link to your bookmarks bar"
-
-msgid "Drag &amp; drop this link to your bookmarks bar:"
-msgstr "Drag &amp; drop this link to your bookmarks bar:"
-
 msgid "your version"
 msgstr "your version"
 
@@ -636,8 +726,71 @@ msgstr ""
 msgid "Enter your search here"
 msgstr "Enter your search here"
 
+msgid "search"
+msgstr "Search"
+
 msgid "Tag these results as"
 msgstr "Tag these results as"
+
+msgid "Delete results matching"
+msgstr "Delete results matching"
+
+msgid "Mark all articles from this tag as read"
+msgstr "Mark all articles from this tag as read"
+
+msgid "No articles unread. Good job !"
+msgstr "No articles unread. Good job !"
+
+msgid "No articles favourited"
+msgstr "No articles favourited"
+
+msgid "No articles marked as read"
+msgstr "No articles marked as read"
+
+msgid "No articles with this tag found"
+msgstr "No articles with this tag found"
+
+msgid "No articles found for « %searchterm% »"
+msgstr "No articles found for « %searchterm% »"
+
+msgid "articles unread"
+msgstr "articles unread"
+
+msgid "articles favourited"
+msgstr "articles favourited"
+
+msgid "articles marked as read"
+msgstr "articles marked as read"
+
+msgid "articles with this tag"
+msgstr "articles with this tag"
+
+msgid "articles found for « %searchterm% »"
+msgstr "articles found for « %searchterm% »"
+
+msgid "articles"
+msgstr "articles"
+
+msgid "random"
+msgstr "random"
+
+msgid "Only one article unread. Way to go !"
+msgstr "Only one article unread. Way to go !"
+
+msgid "Just one article favourited"
+msgstr "Just one article favourited"
+
+msgid "One article marked as read"
+msgstr "One article marked as read"
+
+msgid "One article with this tag"
+msgstr "One article with this tag"
+
+msgid "Only one result found for « %searchterm% »"
+msgstr "Only one result found for « %searchterm% »"
+
+msgid "One article found"
+msgstr "One article found"
 
 # ebook
 msgid "Fancy an E-Book ?"

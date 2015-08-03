@@ -1,0 +1,7 @@
+title: //h1[@class="post-title"]
+body: //section[@class="article-content"]
+author: //div[@class="post-bottom-meta"]/span[@class="post-author"]
+date: //div[@class="post-date"]/time/@datetime
+
+test_url: https://entwickler.de/online/mobile-welt-offline-welt-was-der-offline-first-ansatz-fuer-app-entwickler-heisst-140602.html
+test_url: https://entwickler.de/online/development/plex-docker-joomla-165345.html

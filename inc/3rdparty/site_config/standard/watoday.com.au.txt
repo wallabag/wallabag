@@ -1,0 +1,7 @@
+author: //h3[@class="authorName"]
+date: //dd[@class='updated dtstamp']//time
+
+strip: //div[contains(@class, "adspot")]
+strip: //noscript
+strip: //p//small
+

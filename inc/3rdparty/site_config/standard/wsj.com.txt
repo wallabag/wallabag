@@ -1,0 +1,29 @@
+title: //meta[@property="og:title"]/@content
+body: //div[@id='wsj-article-wrap']
+# is this still used?
+body: //div[@id='article_story_body']
+
+author: //h3[@class='byline']/a
+# for slide show content
+body: //ul[@id='imageSlide']//li[@class='firstSlide']//img | (//div[@class='txt_body']//p)[1]
+date: //li[@class='dateStamp']/small
+
+strip_id_or_class: insetFullBracket
+strip_id_or_class: insettipBox
+#strip_id_or_class: legacyInset
+strip_id_or_class: recipeACShopAndBuyText
+
+strip: //div[contains(@class, 'insetContent')]//cite
+strip: //*[contains(@style, 'visibility: hidden;')]
+strip: //div[contains(@class, 'insetContent') and not(contains(@class, 'image'))]
+strip: //div[contains(@class, 'carousel')]
+
+prune: no
+tidy: no
+
+test_url: http://www.wsj.com/articles/airasia-flight-8501-tail-recovered-1420878809
+test_contains: Saturday evening that the black boxes
+test_url: http://www.wsj.com/news/articles/SB10001424052702304626304579509100018004342
+test_url: http://www.wsj.com/article/SB10001424052970203363504577185322849515102.html
+# slide show
+test_url: http://www.wsj.com/article/SB10001424052970204791104577110550376458164.html

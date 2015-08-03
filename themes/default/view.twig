@@ -5,10 +5,12 @@
         {% include '_pocheit-form.twig' %}
         <div id="article_toolbar">
             <ul>
+                {% if navigate.next %}<li><a href="./?view=view&amp;id={{ navigate.nextid|e }}" class="tool previous"><span>{% trans "Next Article" %}</span></a></li>{% endif %}
                 <li><a href="./" title="{% trans "Return home" %}" class="tool back"><span>{% trans "Return home" %}</span></a></li>
                 <li><a href="#top" title="{% trans "Back to top" %}" class="tool top"><span>{% trans "Back to top" %}</span></a></li>
                 <li><a href="{{ entry.url|e }}" target="_blank" title="{% trans "original" %} : {{ entry.title|e }}" class="tool link"><span>{{ entry.url | e | getDomain }}</span></a></li>
                 <li><a title="{% trans "Mark as read" %}" class="tool {% if entry.is_read == 0 %}archive-off{% else %}archive{% endif %}" href="javascript: void(null);" id="markAsRead"><span>{% trans "Toggle mark as read" %}</span></a></li>
+                {% if navigate.next %}<li><a title="{% trans "Mark as read and go to next article" %}" class="tool archiveandnext" href="./?action=archive_and_next&amp;id={{ entry.id|e }}" id="markAsReadAndNext"><span>{% trans "Toggle mark as read and go to next article" %}</span></a></li>{% endif %}
                 <li><a title="{% trans "Favorite" %}" class="tool {% if entry.is_fav == 0 %}fav-off{% else %}fav{% endif %}" href="javascript: void(null);" id="setFav"><span>{% trans "Toggle favorite" %}</span></a></li>
                 <li><a title="{% trans "Delete" %}" class="tool delete" href="./?action=delete&amp;id={{ entry.id|e }}"><span>{% trans "Delete" %}</span></a></li>
                 {% if constant('SHARE_TWITTER') == 1 %}<li><a href="https://twitter.com/home?status={{entry.title|url_encode}}%20{{ entry.url|url_encode }}%20via%20@wallabagapp" target="_blank" class="tool twitter" title="{% trans "Tweet" %}"><span>{% trans "Tweet" %}</span></a></li>{% endif %}
@@ -19,12 +21,13 @@
                 {% if constant('FLATTR') == 1 %}{% if flattr.status == constant('FLATTRABLE') %}<li><a href="http://flattr.com/submit/auto?url={{ entry.url }}" class="tool flattr" target="_blank" title="{% trans "flattr" %}"><span>{% trans "flattr" %}</span></a></li>{% elseif flattr.status == constant('FLATTRED') %}<li><a href="{{ flattr.flattrItemURL }}" class="tool flattr" target="_blank" title="{% trans "flattr" %}"><span>{% trans "flattr" %}</span>{{ flattr.numFlattrs }}</a></li>{% endif %}{% endif %}
                 {% if constant('CARROT') == 1 %}<li><a href="https://secure.carrot.org/GiveAndGetBack.do?url={{ entry.url|url_encode }}&title={{ entry.title|url_encode }}" class="tool carrot icon" target="_blank" title="{% trans "carrot" %}"><span>{% trans "carrot" %}</span></a></li>{% endif %}
                 {% if constant('SHOW_PRINTLINK') == 1 %}<li><a title="{% trans "Print" %}" class="tool print" href="javascript: window.print();"><span>{% trans "Print" %}</span></a></li>{% endif %}
-                {% if constant('RELOAD_ARTICLE') == 1 %}<li><a class="tool reload" href="./?action=reload_article&amp;id={{ entry.id|e }}" title="{% trans "Reload article" %}"><span>{% trans "Reload article" %}</span></a></li>{% endif %}}
+                {% if constant('RELOAD_ARTICLE') == 1 %}<li><a class="tool reload" href="./?action=reload_article&amp;id={{ entry.id|e }}" title="{% trans "Reload article" %}"><span>{% trans "Reload article" %}</span></a></li>{% endif %}
                 {% if constant('EPUB') == 1 %}<li><a href="./?epub&amp;method=id&amp;value={{ entry.id|e }}" title="Generate ePub file">EPUB</a></li>{% endif %}
                 {% if constant('MOBI') == 1 %}<li><a href="./?mobi&amp;method=id&amp;value={{ entry.id|e }}" title="Generate Mobi file">MOBI</a></li>{% endif %}
                 {% if constant('PDF') == 1 %}<li><a href="./?pdf&amp;method=id&amp;value={{ entry.id|e }}" title="Generate PDF file">PDF</a></li>{% endif %}
                 <li><a href="mailto:hello@wallabag.org?subject=Wrong%20display%20in%20wallabag&amp;body={{ entry.url|url_encode }}" title="{% trans "Does this article appear wrong?" %}" class="tool bad-display"><span>{% trans "Does this article appear wrong?" %}</span></a></li>
                 {% if constant('SHOW_READPERCENT') == 1 %}<li><div id="readLeftPercent">0%</div></li>{% endif %}
+                {% if navigate.previous %}<li><a href="./?view=view&amp;id={{ navigate.previousid|e }}" class="tool next"><span>{% trans "Previous Article" %}</span></a></li>{% endif %}
             </ul>
         </div>
         <div id="article">
@@ -122,5 +125,17 @@
                 $('#article_toolbar .tool.top').parent().hide();
             }
         });
+
+        // Use left and right arrow to navigate on with keyboard
+        navigateKeyboard('?view=view&id={{ navigate.nextid|e }}','?view=view&id={{ navigate.previousid|e }}');
+
+        // swipe to right or left on mobile to navigate
+        $('article').on("swiperight", function(){
+            goLeft('?view=view&id={{ navigate.nextid|e }}');
+        });
+        $('article').on("swipeleft", function(){
+            goRight('?view=view&id={{ navigate.previousid|e }}');
+        });
+
         </script>
 {% endblock %}

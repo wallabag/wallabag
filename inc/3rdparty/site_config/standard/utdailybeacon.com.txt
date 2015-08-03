@@ -1,5 +1,2 @@
-title: //h1
-author: //*[@class='byline']
-date: substring-after(//*[@class='pubdatetime'], 'Published: ')
-body: //*[@class='body-block']
-test_url: http://utdailybeacon.com/news/2012/oct/8/energy-forum-continues/
+body: //div[@id='blox-story-text']
+test_url: http://www.utdailybeacon.com/news/article_ccf6d024-0f15-11e5-ae29-9f63598deb81.html

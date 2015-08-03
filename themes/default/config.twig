@@ -16,7 +16,8 @@
             </p>
             <h3>Browser Plugins</h3>
             <ul>
-                <li><a href="https://addons.mozilla.org/firefox/addon/wallabag/" target="_blank">{% trans "Firefox Add-On" %}</a></li>
+                <li><a href="https://addons.mozilla.org/firefox/addon/wallabag/" target="_blank">{% trans "Standard Firefox Add-On" %}</a></li>
+                {% if https %}<li><button onclick="activateSocialFeature(this)">{% trans "Mozilla Services (Social API) Extension" %}</button></li>{% else %}<li>{% trans "Mozilla Services (Social API) Extension needs an https connection" %}</li>{% endif %}
                 <li><a href="https://chrome.google.com/webstore/detail/wallabag/bepdcjnnkglfjehplaogpoonpffbdcdj" target="_blank">{% trans "Chrome Extension" %}</a></li>
             </ul>
             <h3>Mobile Apps</h3>
@@ -102,7 +103,7 @@
             <p class="more-info">{% trans "Fetching process is controlled by two constants in your config file: IMPORT_LIMIT (how many articles are fetched at once) and IMPORT_DELAY (delay between fetch of next batch of articles)." %}</p>
 
             <h2>{% trans "Export your wallabag data" %}</h2>
-            <p><a href="?export" target="_blank">{% trans "Export JSON" %}</a><br>
+            <p><a href="?export" target="_blank">{% trans "JSON export" %}</a><br>
             <span class="more-info">Data will be exported in a single JSON file.</span></p>
 
             <h2>{% trans "Fancy an E-Book ?" %}</h2>

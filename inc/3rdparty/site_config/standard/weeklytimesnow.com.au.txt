@@ -1,0 +1,4 @@
+body: //div[@class='main-col' or @class='article-image-wide']
+title: //h1[@class='article-title']
+author: substring-before(//span[@class='author'], "|")
+date: //span[@class='date']

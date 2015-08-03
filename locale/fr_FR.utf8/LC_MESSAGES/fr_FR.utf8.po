@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-07-26 20:09+0100\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Thomas Citharel <tcit@openmailbox.org>\n"
+"Last-Translator: Thomas Citharel <tcit@tcit.fr>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
@@ -82,6 +82,11 @@ msgstr "non lus"
 msgid "Tag"
 msgstr "Tag"
 
+msgid "No tags found. You must view an article to set tags for it."
+msgstr ""
+"Pas de tags trouvés. Vous devez vous rendre sur un article pour choisir de "
+"lui associer des tags."
+
 msgid "No articles found."
 msgstr "Aucun article trouvé."
 
@@ -118,6 +123,75 @@ msgstr "Seulement un résultat trouvé pour "
 msgid "config"
 msgstr "configuration"
 
+msgid "about"
+msgstr "À propos"
+
+msgid "About wallabag"
+msgstr "À propos de wallabag"
+
+msgid ""
+"wallabag is a read-it-later application: you can save a web page by keeping "
+"only content. Elements like ads or menus are deleted."
+msgstr ""
+"wallabag est une application de lecture différée : vous pouvez sauver une "
+"page web et garder uniquement son contenu. Les élements comme les publicités "
+"ou les menus sont supprimés."
+
+msgid "Project website"
+msgstr "Site web du projet"
+
+msgid "Main developer"
+msgstr "Développeur principal"
+
+msgid "website"
+msgstr "site web"
+
+msgid "Contributors:"
+msgstr "Contributeurs :"
+
+msgid "Bug reports"
+msgstr "Rapports de bugs"
+
+msgid "on Github"
+msgstr "sur Github"
+
+msgid "On our support website"
+msgstr "Sur notre site de support"
+
+msgid "License"
+msgstr "Licence"
+
+msgid "Version"
+msgstr "Version"
+
+msgid "Getting help"
+msgstr "Obtenir de l'aide"
+
+msgid "Documentation"
+msgstr "Documentation"
+
+msgid ""
+"<a href=\"docs/\">Offline documentation</a> and <a href=\"https://doc."
+"wallabag.org/\">online documentation</a> (up to date)"
+msgstr ""
+"<a href=\"docs/\">Documentation hors-ligne</a> et <a href=\"https://doc."
+"wallabag.org/\">documentation en ligne</a> (à jour)"
+
+msgid "Helping wallabag"
+msgstr "Aider wallabag"
+
+msgid "wallabag is free and opensource. You can help us:"
+msgstr "wallabag est libre et opensource. Vous pouver nous aider :"
+
+msgid "via Paypal"
+msgstr "via Paypal"
+
+msgid "via Flattr"
+msgstr "via Flattr"
+
+msgid "Credits"
+msgstr "Crédits"
+
 msgid "Saving articles"
 msgstr "Sauvegarde des articles"
 
@@ -129,6 +203,19 @@ msgstr "lisez la documentation"
 
 msgid "download the extension"
 msgstr "téléchargez l'extension"
+
+msgid "Standard Firefox Add-On"
+msgstr "Add-On Firefox classique"
+
+msgid "Mozilla Services (Social API) Extension"
+msgstr "Extension Mozilla Services (Social API)"
+
+msgid "Mozilla Services (Social API) Extension needs an https connection"
+msgstr ""
+"L'extension Mozilla Services (Social API) nécessite une connection https"
+
+msgid "Chrome Extension"
+msgstr "Extension Chrome"
 
 msgid "via F-Droid"
 msgstr "via F-Droid"
@@ -146,10 +233,16 @@ msgid "By filling this field"
 msgstr "En remplissant ce champ"
 
 msgid "bag it!"
-msgstr "bag it !"
+msgstr "Bag!"
 
-msgid "Bookmarklet: drag & drop this link to your bookmarks bar"
-msgstr "Bookmarklet : glissez-déposez ce lien dans votre barre de favoris"
+msgid "Browser Addons"
+msgstr "Modules pour navigateurs"
+
+msgid "Mobile Apps"
+msgstr "Applications pour appareils mobiles"
+
+msgid "Drag &amp; drop this link to your bookmarks bar:"
+msgstr "Glissez-déposez ce lien dans votre barre de favoris : "
 
 msgid "Upgrading wallabag"
 msgstr "Mise à jour de wallabag"
@@ -247,19 +340,24 @@ msgstr ""
 "n'importe quel fichier au format JSON ou HTML approprié."
 
 msgid ""
-"Please select export file on your computer and press \"Import\" button below."
-"<br>Wallabag will parse your file, insert all URLs and start fetching of "
-"articles if required.<br>Fetching process is controlled by two constants in "
-"your config file: IMPORT_LIMIT (how many articles are fetched at once) and "
-"IMPORT_DELAY (delay between fetch of next batch of articles)."
+"Please select export file on your computer and press \"Import\" button "
+"below. Wallabag will parse your file, insert all URLs and start fetching of "
+"articles if required."
 msgstr ""
-"Sélectionnez le fichier à importer sur votre disque dur, et pressez la "
-"bouton « Importer » ci-dessous.<br />wallabag analysera votre fichier, "
-"ajoutera toutes les URL trouvées et commencera à télécharger les contenus si "
-"nécessaire.<br />Le processus de téléchargement est contrôlé par deux "
-"constantes dans votre fichier de configuration:<wbr /><code>IMPORT_LIMIT</"
-"code> (nombre d'éléments téléchargés à la fois) et <code>IMPORT_DELAY</code> "
-"(le délai d'attente entre deux séquences de téléchargement)."
+"Sélectionnez le fichier à importer sur votre disque dur, et pressez le "
+"bouton « Importer » ci-dessous. wallabag analysera votre fichier, ajoutera "
+"toutes les URL trouvées et commencera à télécharger les contenus si "
+"nécessaire."
+
+msgid ""
+"Fetching process is controlled by two constants in your config file: "
+"IMPORT_LIMIT (how many articles are fetched at once) and IMPORT_DELAY (delay "
+"between fetch of next batch of articles)."
+msgstr ""
+"Le processus d'import peut être paramétré par deux constantes dans votre "
+"fichier de configuration : IMPORT_LIMIT (combien d'articles sont téléchargés "
+"à la fois) et IMPORT_DELAY (le délai entre le téléchargement du prochain lot "
+"d'articles)."
 
 msgid "File:"
 msgstr "Fichier : "
@@ -280,11 +378,21 @@ msgstr "pour télécharger votre base de données."
 msgid "to export your wallabag data."
 msgstr "pour exporter vos données de wallabag."
 
+msgid "JSON export"
+msgstr "Export JSON"
+
+msgid "Data will be exported in a single JSON file."
+msgstr "Les données seront exportées dans un unique fichier JSON."
+
 msgid "Cache"
 msgstr "Cache"
 
-msgid "to delete cache."
-msgstr "pour effacer le cache."
+msgid "Delete Cache"
+msgstr "Vider le cache"
+
+msgid "Deleting the cache may help with display or other problems."
+msgstr ""
+"Vider le cache peut résoudre des problèmes d'affichage ou d'autres problèmes."
 
 msgid "Add user"
 msgstr "Ajouter un utilisateur"
@@ -683,6 +791,66 @@ msgstr "Oups, vous ne semblez pas avoir PHP 5."
 msgid "Tag these results as"
 msgstr "Appliquer à ces résultats le tag"
 
+msgid "Delete results matching"
+msgstr "Supprimer les résultats correspondants"
+
+msgid "Mark all articles from this tag as read"
+msgstr "Marquer tous les articles de ce tag comme lus"
+
+msgid "No articles unread. Good job !"
+msgstr "Aucun article non lu. Bravo !"
+
+msgid "No articles favourited"
+msgstr "Aucun article favori"
+
+msgid "No articles marked as read"
+msgstr "Aucun article marqué comme lu"
+
+msgid "No articles with this tag found"
+msgstr "Aucun article trouvé avec ce tag"
+
+msgid "No articles found for « %searchterm% »"
+msgstr "Aucun article trouvé pour « %searchterm% »"
+
+msgid "articles unread"
+msgstr "articles non lus"
+
+msgid "articles favourited"
+msgstr "articles favoris"
+
+msgid "articles marked as read"
+msgstr "articles marqués comme lus"
+
+msgid "articles with this tag"
+msgstr "articles avec ce tag"
+
+msgid "articles found for « %searchterm% »"
+msgstr "articles trouvés pour « %searchterm% »"
+
+msgid "articles"
+msgstr "articles"
+
+msgid "random"
+msgstr "aléatoire"
+
+msgid "Only one article unread. Way to go !"
+msgstr "Just un article non lu. Presque au bout !"
+
+msgid "Just one article favourited"
+msgstr "Just un article favori"
+
+msgid "One article marked as read"
+msgstr "Un article marqué comme lu"
+
+msgid "One article with this tag"
+msgstr "Un article avec ce tag"
+
+msgid "Only one result found for « %searchterm% »"
+msgstr "Seulement un article trouvé pour « %searchterm% »"
+
+msgid "One article found"
+msgstr "Un article trouvé"
+
 # ebook
 msgid "Fancy an E-Book ?"
 msgstr "Envie d'un E-Book ?"
@@ -835,7 +1003,7 @@ msgid ""
 "The new user %1$s has been sent an email at %2$s. You may have to check spam "
 "folder."
 msgstr ""
-"Un email a été envoyé au nouvel utiliateur %1$s à l'adresse %2$s. Il peut "
+"Un email a été envoyé au nouvel utilisateur %1$s à l'adresse %2$s. Il peut "
 "être nécessaire de vérifier le dossier des spams."
 
 msgid "A problem has been encountered while sending the confirmation email"

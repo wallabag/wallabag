@@ -1,0 +1,24 @@
+# Author: cirnod@gmail.com
+
+tidy: no
+prune: no
+
+body: //div[@id="article-content"]/p | //div[@class="main-article-content clearfix"]
+
+# General Cleanup
+strip_id_or_class: offscreen
+strip_id_or_class: video-description
+strip_id_or_class: v2 big-video
+strip_id_or_class: module smb freetext
+strip_id_or_class: asset span3
+strip_id_or_class: module smb related-links
+
+# fix image-galleries
+strip_id_or_class: module lightbox-gallery image hide
+replace_string(width="624"): width="100%"
+replace_string(height="468"): height="%"
+
+# Try yourself
+test_url: http://www.srf.ch/news/wirtschaft/weltbank-korrigiert-konjunktur-erwartungen-nach-unten
+test_url: http://www.srf.ch/news/wirtschaft/ural-statt-alpen-russische-touristen-bleiben-zuhause
+test_url: http://www.srf.ch/news/international/zwei-schweizer-bei-blutigem-attentat-in-mali-verletzt
