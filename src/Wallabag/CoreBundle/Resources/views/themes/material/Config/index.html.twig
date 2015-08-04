@@ -1,0 +1,221 @@
+{% extends "WallabagCoreBundle::layout.html.twig" %}
+
+{% block title %}{% trans %}Config{% endtrans %}{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col s12">
+            <div class="card-panel">
+
+                <div class="row">
+                    <div class="col s12"  style="padding-bottom: 15px;">
+                        <ul class="tabs">
+                        <li class="tab col s3"><a class="active" href="#set1">{% trans %}Wallabag{% endtrans %}</a></li>
+                        <li class="tab col s3"><a href="#set2">{% trans %}RSS{% endtrans %}</a></li>
+                        <li class="tab col s3"><a href="#set3">{% trans %}User information{% endtrans %}</a></li>
+                        <li class="tab col s3"><a href="#set4">{% trans %}Password{% endtrans %}</a></li>
+                        <li class="tab col s3"><a href="#set5">{% trans %}Add a user{% endtrans %}</a></li>
+                        </ul>
+                    </div>
+
+
+                    <div id="set1" class="col s12">
+                        <form action="{{ path('config') }}" method="post" {{ form_enctype(form.config) }}>
+                            {{ form_errors(form.config) }}
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form_errors(form.config.theme) }}
+                                    {{ form_widget(form.config.theme) }}
+                                    <label class="required">{% trans %}Theme{% endtrans %}</label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form_label(form.config.items_per_page) }}
+                                    {{ form_errors(form.config.items_per_page) }}
+                                    {{ form_widget(form.config.items_per_page) }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form_label(form.config.language) }}
+                                    {{ form_errors(form.config.language) }}
+                                    {{ form_widget(form.config.language) }}
+                                </div>
+                            </div>
+
+                            <div class="hidden">{{ form_rest(form.config) }}</div>
+                            <button class="btn waves-effect waves-light" type="submit" name="action">
+                                {% trans %}send{% endtrans %}
+                            </button>
+                        </form>
+                    </div>
+
+
+                    <div id="set2" class="col s12">
+                        <form action="{{ path('config') }}" method="post" {{ form_enctype(form.rss) }}>
+                            {{ form_errors(form.rss) }}
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <label>Rss token</label>
+                                    {% if rss.token %}
+                                        {{ rss.token }}
+                                    {% else %}
+                                        <em>No token</em>
+                                    {% endif %}
+                                    –
+                                    <a href="{{ path('generate_token') }}">Regenerate ?</a>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <label>Rss links:</label>
+                                    {% if rss.token %}
+                                        <ul>
+                                            <li><a href="{{ path('unread_rss', {'username': rss.username, 'token': rss.token}) }}">unread</a></li>
+                                            <li><a href="{{ path('starred_rss', {'username': rss.username, 'token': rss.token}) }}">fav</a></li>
+                                            <li><a href="{{ path('archive_rss', {'username': rss.username, 'token': rss.token}) }}">archives</a></li>
+                                        </ul>
+                                    {% else %}
+                                        <strong>You need to generate a token first.</strong>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form_label(form.rss.rss_limit) }}
+                                    {{ form_errors(form.rss.rss_limit) }}
+                                    {{ form_widget(form.rss.rss_limit) }}
+                                </div>
+                            </div>
+
+                            <div class="hidden">{{ form_rest(form.rss) }}</div>
+                            <button class="btn waves-effect waves-light" type="submit" name="action">
+                                {% trans %}send{% endtrans %}
+                            </button>
+
+                        </form>
+                    </div>
+
+
+                    <div id="set3" class="col s12">
+                        <form action="{{ path('config') }}" method="post" {{ form_enctype(form.user) }}>
+                            {{ form_errors(form.user) }}
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form_label(form.user.name) }}
+                                    {{ form_errors(form.user.name) }}
+                                    {{ form_widget(form.user.name) }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form_label(form.user.email) }}
+                                    {{ form_errors(form.user.email) }}
+                                    {{ form_widget(form.user.email) }}
+                                </div>
+                            </div>
+
+                            <div class="hidden">{{ form_rest(form.user) }}</div>
+                            <button class="btn waves-effect waves-light" type="submit" name="action">
+                                {% trans %}send{% endtrans %}
+                            </button>
+
+                        </form>
+                    </div>
+
+
+                    <div id="set4" class="col s12">
+                        <form action="{{ path('config') }}" method="post" {{ form_enctype(form.pwd) }}>
+                            {{ form_errors(form.pwd) }}
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form_label(form.pwd.old_password) }}
+                                    {{ form_errors(form.pwd.old_password) }}
+                                    {{ form_widget(form.pwd.old_password) }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form_label(form.pwd.new_password.first) }}
+                                    {{ form_errors(form.pwd.new_password.first) }}
+                                    {{ form_widget(form.pwd.new_password.first) }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form_label(form.pwd.new_password.second) }}
+                                    {{ form_errors(form.pwd.new_password.second) }}
+                                    {{ form_widget(form.pwd.new_password.second) }}
+                                </div>
+                            </div>
+
+                            <div class="hidden">{{ form_rest(form.pwd) }}</div>
+                            <button class="btn waves-effect waves-light" type="submit" name="action">
+                                {% trans %}send{% endtrans %}
+                            </button>
+
+                        </form>
+                    </div>
+
+
+                    <div id="set5" class="col s12">
+                        <form action="{{ path('config') }}" method="post" {{ form_enctype(form.new_user) }}>
+                            {{ form_errors(form.new_user) }}
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form_label(form.new_user.username) }}
+                                    {{ form_errors(form.new_user.username) }}
+                                    {{ form_widget(form.new_user.username) }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form_label(form.new_user.password) }}
+                                    {{ form_errors(form.new_user.password) }}
+                                    {{ form_widget(form.new_user.password) }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form_label(form.new_user.email) }}
+                                    {{ form_errors(form.new_user.email) }}
+                                    {{ form_widget(form.new_user.email) }}
+                                </div>
+                            </div>
+
+                            <div class="hidden">{{ form_rest(form.new_user) }}</div>
+                            <button class="btn waves-effect waves-light" type="submit" name="action">
+                                {% trans %}send{% endtrans %}
+                            </button>
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+<script>
+  $(document).ready(function() {
+    $('select').material_select();
+  });
+</script>
+
+{% endblock %}
