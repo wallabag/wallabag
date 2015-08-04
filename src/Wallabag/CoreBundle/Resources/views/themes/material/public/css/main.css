@@ -129,7 +129,7 @@ main ul.row {
 }
 
 main .card .card-content {
-    min-height: 23em;
+    min-height: 25em;
 }
 
 .card .card-content .card-title {
@@ -150,9 +150,12 @@ main .card .card-content {
     line-height: 24px;
 }
 
-.card .card-action ul.links a {
-    margin-right: 0;
-    margin-left: 15px;
+.card .card-action a {
+    margin: 0;
+}
+
+.settings .div_tabs {
+    padding-bottom: 15px;
 }
 
 /* ==========================================================================
@@ -192,3 +195,51 @@ main .card .card-content {
       padding-left: 0;
     }
   }
+
+@media only screen and (min-width : 993px) and (max-width : 1180px) {
+    .row .col.l1 {
+    width: 25%;
+    margin-left: 0; }
+    .row .col.l2 {
+    width: 33.33333%;
+    margin-left: 0; }
+    .row .col.l3 {
+    width: 41.66667%;
+    margin-left: 0; }
+    .row .col.l4 {
+    width: 50%;
+    margin-left: 0; }
+    .row .col.l5 {
+    width: 58.33333%;
+    margin-left: 0; }
+    .row .col.l6 {
+    width: 66.66667%;
+    margin-left: 0; }
+    .row .col.l7 {
+    width: 75%;
+    margin-left: 0; }
+    .row .col.l8 {
+    width: 83.33333%;
+    margin-left: 0; }
+    .row .col.l9 {
+    width: 91.66667%;
+    margin-left: 0; }
+    .row .col.l10 {
+    width: 100%;
+    margin-left: 0; }
+}
+
+@media only screen and (max-width : 993px) {
+    nav, main, footer {
+        padding-left: 0;
+    }
+    .pagination {
+        width: auto;
+    }
+}
+
+@media only screen and (max-width : 350px) {
+    .nb-results {
+        display: none;
+    }
+}

@@ -6,10 +6,10 @@
 
     <div class="row">
         <div class="col s12">
-            <div class="card-panel">
+            <div class="card-panel settings">
 
                 <div class="row">
-                    <div class="col s12"  style="padding-bottom: 15px;">
+                    <div class="div_tabs col s12">
                         <ul class="tabs">
                         <li class="tab col s3"><a class="active" href="#set1">{% trans %}Wallabag{% endtrans %}</a></li>
                         <li class="tab col s3"><a href="#set2">{% trans %}RSS{% endtrans %}</a></li>
@@ -211,11 +211,4 @@
             </div>
         </div>
     </div>
-
-<script>
-  $(document).ready(function() {
-    $('select').material_select();
-  });
-</script>
-
 {% endblock %}

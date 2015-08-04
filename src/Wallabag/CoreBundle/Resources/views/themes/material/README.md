@@ -1,3 +1,5 @@
-# Baggy Theme
+# Material Theme
 
-theme created by Thomas LEBEAU alias Courgette http://thomaslebeau.fr/
+Theme created by Danilow (@modos189) Alexandr  http://modos189.ru/
+
+Used framework  http://materializecss.com/

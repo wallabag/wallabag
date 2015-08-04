@@ -60,7 +60,7 @@
         <div id="main">
             {% block menu %}
                 <nav class="cyan darken-1">
-                    <ul style="width: 240px; left: 0px;" id="slide-out" class="side-nav fixed">
+                    <ul id="slide-out" class="side-nav fixed">
                         {% block logo %}
                             <li class="logo border-bottom">
                                 <a class="waves-effect" href="{{ path('unread') }}">
@@ -70,16 +70,17 @@
                         {% endblock %}
                         <li class="bold"><a class="waves-effect" href="{{ path('unread') }}">{% trans %}unread{% endtrans %}</a></li>
                         <li class="bold"><a class="waves-effect" href="{{ path('starred') }}">{% trans %}favorites{% endtrans %}</a></li>
-                        <li class="bold"><a class="waves-effect" href="{{ path('archive') }}"}>{% trans %}archive{% endtrans %}</a></li>
+                        <li class="bold"><a class="waves-effect" href="{{ path('archive') }}">{% trans %}archive{% endtrans %}</a></li>
                         <li class="bold border-bottom"><a class="waves-effect" href="?view=tags">{% trans %}tags{% endtrans %}</a></li>
                         <li class="bold"><a class="waves-effect" href="{{ path('config') }}">{% trans %}config{% endtrans %}</a></li>
                         <li class="bold"><a class="waves-effect" class="icon icon-power" href="{{ path('logout') }}" title="{% trans %}logout{% endtrans %}">{% trans %}logout{% endtrans %}</a></li>
                     </ul>
                     <div class="nav-wrapper nav-panels">
+                        <a href="#" data-activates="slide-out" class="nav-panel-menu button-collapse"><i class="mdi-navigation-menu"></i></a>
                         <div class="input-field nav-panel-buttom">
                             <ul>
                                 <li class="bold"><a class="waves-effect" href="{{ path('new_entry') }}" id="nav-btn-add"><i class="mdi-content-add"></i></a></li>
-                                <li style="position: relative;"><a class="waves-effect" href="javascript: void(null);" id="nav-btn-search"><i class="mdi-action-search"></i></a>
+                                <li><a class="waves-effect" href="javascript: void(null);" id="nav-btn-search"><i class="mdi-action-search"></i></a>
                             </ul>
                         </div>
                         <form method="get" action="index.php">
@@ -98,30 +99,6 @@
                         </form>-->
                     </div>
                 </nav>
-
-<script>
-$(document).ready(function() {
-    //$('#nav-btn-add').click(function(){
-    //    $(".nav-panel-buttom").hide(100);
-    //    $(".nav-panel-add").show(100);
-    //    $(".input-field #search").trigger('click');
-    //    return false;
-    //});
-    $('#nav-btn-search').click(function(){
-        $(".nav-panel-buttom").hide(100);
-        $(".nav-panel-search").show(100);
-        $(".input-field #add").trigger('click');
-        return false;
-    });
-    $('.mdi-navigation-close').click(function(){
-        $(".nav-panel-add").hide(100);
-        $(".nav-panel-search").hide(100);
-        $(".nav-panel-buttom").show(100);
-        return false;
-    });
-});
-</script>
-
             {% endblock %}
 
             <main>

@@ -3,7 +3,7 @@
 {% block title %}{{ entry.title|raw }} ({{ entry.url | e | domainName }}){% endblock %}
 
 {% block menu %}
-    <ul style="width: 240px; left: 0px;" id="slide-out" class="collapsible side-nav fixed reader-mode" data-collapsible="accordion">
+    <ul id="slide-out" class="collapsible side-nav fixed reader-mode" data-collapsible="accordion">
         <li class="bold border-bottom">
             <a class="waves-effect collapsible-header" href="/">
                 <i class="mdi-action-exit-to-app small"></i>
@@ -76,15 +76,6 @@
 
     </ul>
 
-<script>
-    $(document).ready(function(){
-        $('.collapsible').collapsible({
-            accordion : false
-        });
-    });
-</script>
-
-</script>
 <style>
 main {
     padding: 0;
