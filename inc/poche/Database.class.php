@@ -333,7 +333,7 @@ class Database {
             $count = count($entries);
             for ($i = 0; $i < $count; $i++) {
               $tag_entries = $this->retrieveTagsByEntry($entries[$i]['id']);
-              $tags = [];
+              $tags = array();
               foreach ($tag_entries as $tag) {
                 $tags[] = $tag[1];
               }
