@@ -1,0 +1,245 @@
+/* ==========================================================================
+   Sommaire
+
+   0 = Common
+   1 = Nav
+   2 = Side-nav
+
+   2 = Layout
+   3 = Pictos
+   4 = Messages
+   5 = Article
+
+   6 = Media queries
+
+   ========================================================================== */
+
+
+/* ==========================================================================
+   0 = Common
+   ========================================================================== */
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    background: #f0f0f0;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #DDD;
+}
+
+nav, main, footer {
+    padding-left: 240px;
+}
+
+#main {
+    flex: 1 0 auto;
+}
+
+.results {
+    height: 1em;
+    line-height: 30px;
+}
+
+.results .nb-results, .results .pagination {
+    margin: 15px;
+    margin-bottom: 0;
+}
+
+.page-footer .footer-copyright p {
+    display: inline;
+}
+
+.hidden {
+    display: none;
+}
+
+/* ==========================================================================
+   1 = Nav
+   ========================================================================== */
+
+.nav-wrapper .button-collapse {
+    padding: 0px 15px;
+}
+
+.nav-input {
+    display: none;
+}
+
+.nav-panels {
+    overflov: hidden;
+}
+
+.nav-panel-buttom li {
+    max-height: 64px;
+}
+
+.nav-panel-buttom {
+    float: right;
+}
+
+/* ==========================================================================
+   2 = Side-nav
+   ========================================================================== */
+
+.side-nav.fixed a {
+    font-size: 13px;
+    line-height: 44px;
+    height: 44px;
+}
+
+.bold > a {
+    font-weight: bold;
+}
+
+.side-nav > li.logo {
+    line-height: 0;
+    text-align: center;
+}
+
+#main .logo a {
+    height: 100pt;
+}
+
+#main .logo img {
+    height: 100pt;
+    width: 100pt;
+}
+
+.side-nav li {
+    padding: 0px;
+}
+
+.side-nav a {
+    margin: 0px 1rem;
+}
+
+/* ==========================================================================
+   3 = Cards
+   ========================================================================== */
+
+main #content {
+    padding: 0px 0.5rem;
+}
+
+main ul.row {
+    padding: 0px 0.75rem;
+}
+
+main .card .card-content {
+    min-height: 25em;
+}
+
+.card .card-content .card-title {
+    line-height: 32px;
+}
+
+.card .card-content .estimatedTime {
+    margin-bottom: 10px;
+}
+
+.card .card-action .original {
+    line-height: 24px;
+}
+
+.card .card-action ul.links {
+    margin: 0;
+    font-size: 24px;
+    line-height: 24px;
+}
+
+.card .card-action a {
+    margin: 0;
+}
+
+.settings .div_tabs {
+    padding-bottom: 15px;
+}
+
+/* ==========================================================================
+   4 = Article
+   ========================================================================== */
+
+#article {
+    font-size: 20px;
+    margin: 0px auto;
+    max-width: 30em;
+}
+
+.reader-mode {
+    width: 95px !important;
+    transition: width 0.2s ease;
+}
+
+.reader-mode:hover {
+    width: 240px !important;
+}
+
+.reader-mode span {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.reader-mode:hover span {
+    opacity: 1;
+}
+
+/* ==========================================================================
+   6 = Media queries
+   ========================================================================== */
+
+  @media only screen and (max-width : 992px) {
+    header, main, footer {
+      padding-left: 0;
+    }
+  }
+
+@media only screen and (min-width : 993px) and (max-width : 1180px) {
+    .row .col.l1 {
+    width: 25%;
+    margin-left: 0; }
+    .row .col.l2 {
+    width: 33.33333%;
+    margin-left: 0; }
+    .row .col.l3 {
+    width: 41.66667%;
+    margin-left: 0; }
+    .row .col.l4 {
+    width: 50%;
+    margin-left: 0; }
+    .row .col.l5 {
+    width: 58.33333%;
+    margin-left: 0; }
+    .row .col.l6 {
+    width: 66.66667%;
+    margin-left: 0; }
+    .row .col.l7 {
+    width: 75%;
+    margin-left: 0; }
+    .row .col.l8 {
+    width: 83.33333%;
+    margin-left: 0; }
+    .row .col.l9 {
+    width: 91.66667%;
+    margin-left: 0; }
+    .row .col.l10 {
+    width: 100%;
+    margin-left: 0; }
+}
+
+@media only screen and (max-width : 993px) {
+    nav, main, footer {
+        padding-left: 0;
+    }
+    .pagination {
+        width: auto;
+    }
+}
+
+@media only screen and (max-width : 350px) {
+    .nb-results {
+        display: none;
+    }
+}

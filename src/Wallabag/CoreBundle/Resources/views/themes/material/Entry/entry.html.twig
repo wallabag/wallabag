@@ -1,0 +1,102 @@
+{% extends "WallabagCoreBundle::layout.html.twig" %}
+
+{% block title %}{{ entry.title|raw }} ({{ entry.url | e | domainName }}){% endblock %}
+
+{% block menu %}
+    <ul id="slide-out" class="collapsible side-nav fixed reader-mode" data-collapsible="accordion">
+        <li class="bold border-bottom">
+            <a class="waves-effect collapsible-header" href="/">
+                <i class="mdi-action-exit-to-app small"></i>
+                <span>{% trans %}back{% endtrans %}</span>
+            </a>
+            <div class="collapsible-body"></div>
+        </li>
+
+        <li class="bold">
+            <a class="waves-effect collapsible-header" title="{% trans %}Mark as read{% endtrans %}" href="{{ path('archive_entry', { 'id': entry.id }) }}" id="markAsRead">
+                <i class="{% if entry.isArchived == 0 %}mdi-action-done{% else %}mdi-content-redo{% endif %} small"></i>
+                <span>{% trans %}Toggle mark as read{% endtrans %}</span>
+            </a>
+            <div class="collapsible-body"></div>
+        </li>
+
+        <li class="bold">
+            <a class="waves-effect collapsible-header" title="{% trans %}Favorite{% endtrans %}" href="{{ path('star_entry', { 'id': entry.id }) }}" id="setFav">
+                <i class="{% if entry.isStarred == 0 %}mdi-action-favorite-outline{% else %}mdi-action-favorite{% endif %} small"></i>
+                <span>{% trans %}Toggle favorite{% endtrans %}</span>
+            </a>
+            <div class="collapsible-body"></div>
+        </li>
+        <li class="bold border-bottom">
+            <a class="waves-effect collapsible-header" title="{% trans %}Delete{% endtrans %}" href="{{ path('delete_entry', { 'id': entry.id }) }}">
+                <i class="mdi-action-delete small"></i>
+                <span>{% trans %}Delete{% endtrans %}</span>
+            </a>
+            <div class="collapsible-body"></div>
+        </li>
+
+        <li class="bold">
+            <a class="waves-effect collapsible-header">
+                <i class="mdi-social-share small"></i>
+                <span>{% trans %}Share{% endtrans %}</span>
+            </a>
+            <div class="collapsible-body">
+                <ul>
+                    {% if share_twitter %}<li><a href="https://twitter.com/home?status={{entry.title|url_encode}}%20{{ entry.url|url_encode }}%20via%20@wallabagapp" target="_blank" class="tool twitter icon icon-twitter" title="{% trans %}Tweet{% endtrans %}"><span>{% trans %}Tweet{% endtrans %}</span></a></li>{% endif %}
+                    {% if share_shaarli %}<li><a href="{{ shaarli_url }}/index.php?post={{ entry.url|url_encode }}&amp;title={{ entry.title|url_encode }}" target="_blank" class="tool shaarli" title="{% trans %}shaarli{% endtrans %}"><span>{% trans %}shaarli{% endtrans %}</span></a></li>{% endif %}
+                    {% if share_diaspora %}<li><a href="{{ diaspora_url }}/bookmarklet?url={{ entry.url|url_encode }}&title={{ entry.title|url_encode }}&notes=&v=1&noui=1&jump=doclose" target="_blank" class="tool diaspora icon-image icon-image--diaspora" title="{% trans %}diaspora{% endtrans %}"><span>{% trans %}diaspora{% endtrans %}</span></a></li>{% endif %}
+                    {# {% if flattr %}{% if flattr.status == flattrable %}<li><a href="http://flattr.com/submit/auto?url={{ entry.url }}" class="tool flattr icon icon-flattr" target="_blank" title="{% trans %}flattr{% endtrans %}"><span>{% trans %}flattr{% endtrans %}</span></a></li>{% elseif flattr.status == flattred %}<li><a href="{{ flattr.flattrItemURL }}" class="tool flattr icon icon-flattr" target="_blank" title="{% trans %}flattr{% endtrans %}><span>{% trans %}flattr{% endtrans %}</span> ({{ flattr.numFlattrs }})</a></li>{% endif %}{% endif %} #}
+                    {% if carrot %}<li><a href="https://secure.carrot.org/GiveAndGetBack.do?url={{ entry.url|url_encode }}&title={{ entry.title|url_encode }}" class="tool carrot icon-image icon-image--carrot" target="_blank" title="{% trans %}carrot{% endtrans %}"><span>Carrot</span></a></li>{% endif %}
+                    {% if share_mail %}<li><a href="mailto:?subject={{ entry.title|url_encode }}&amp;body={{ entry.url|url_encode }}%20via%20@wallabagapp" class="tool email icon icon-mail" title="{% trans %}Email{% endtrans %}"><span>{% trans %}Email{% endtrans %}</span></a></li>{% endif %}
+                </ul>
+            </div>
+        </li>
+
+        <li class="bold">
+            <a class="waves-effect collapsible-header">
+                <i class="mdi-file-file-download small"></i>
+                <span>{% trans %}Download{% endtrans %}</span>
+            </a>
+            <div class="collapsible-body">
+                <ul>
+                    {% if export_epub %}<li><a href="?epub&amp;method=id&amp;value={{ entry.id }}" title="Generate ePub file">EPUB</a></li>{% endif %}
+                    {% if export_mobi %}<li><a href="?mobi&amp;method=id&amp;value={{ entry.id }}" title="Generate Mobi file">MOBI</a></li>{% endif %}
+                    {% if export_pdf %}<li><a href="?pdf&amp;method=id&amp;value={{ entry.id }}" title="Generate PDF file">PDF</a></li>{% endif %}
+                </ul>
+            </div>
+        </li>
+
+        <li class="bold">
+            <a class="waves-effect collapsible-header" href="mailto:hello@wallabag.org?subject=Wrong%20display%20in%20wallabag&amp;body={{ entry.url|url_encode }}" title="{% trans %}Does this article appear wrong?{% endtrans %}">
+                <i class="mdi-alert-error small"></i>
+                <span>{% trans %}Problems?{% endtrans %}</span>
+            </a>
+            <div class="collapsible-body"></div>
+        </li>
+
+    </ul>
+
+<style>
+main {
+    padding: 0;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+    <div id="article">
+        <header class="mbm">
+            <h1>{{ entry.title|raw }} <a href="{{ path('edit', { 'id': entry.id }) }}" title="{% trans %}Edit tags{% endtrans %}">✎</a></h1>
+            <a href="{{ entry.url|e }}" target="_blank" title="{% trans %}original{% endtrans %} : {{ entry.title|e }}" class="tool link"><span>{{ entry.url | e | domainName }}</span></a>
+        </header>
+        <aside class="tags">
+            tags: {% for tag in entry.tags %}<a href="./?view=tag&amp;id={{ tag.id }}">{{ tag.label }}</a> {% endfor %}<a href="./?view=edit-tags&amp;id={{ entry.id }}" title="{% trans %}Edit tags{% endtrans %}">✎</a>
+        </aside>
+        <article>
+            {{ entry.content | raw }}
+        </article>
+    </div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
