@@ -69,7 +69,7 @@ class SecurityControllerTest extends WallabagCoreTestCase
         $client = $parameters['client'];
 
         $data = array(
-            'forgot_password[email]' => 'baggy',
+            'forgot_password[email]' => 'material',
         );
 
         $client->submit($form, $data);

@@ -15,7 +15,7 @@ class LoadConfigData extends AbstractFixture implements OrderedFixtureInterface
     public function load(ObjectManager $manager)
     {
         $adminConfig = new Config($this->getReference('admin-user'));
-        $adminConfig->setTheme('baggy');
+        $adminConfig->setTheme('material');
         $adminConfig->setItemsPerPage(30);
         $adminConfig->setLanguage('en_US');
 

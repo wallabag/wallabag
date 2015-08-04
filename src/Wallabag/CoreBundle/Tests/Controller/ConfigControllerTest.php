@@ -102,7 +102,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         return array(
             array(
                 array(
-                    'change_passwd[old_password]' => 'baggy',
+                    'change_passwd[old_password]' => 'material',
                     'change_passwd[new_password][first]' => '',
                     'change_passwd[new_password][second]' => '',
                 ),
