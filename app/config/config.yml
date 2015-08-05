@@ -139,7 +139,7 @@ liip_theme:
     themes:
         - baggy
         - material
-    autodetect_theme: wallabag_core.helper.detect_active_theme
+    # autodetect_theme: wallabag_core.helper.detect_active_theme
 
     path_patterns:
         # app_resource:

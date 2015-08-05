@@ -24,6 +24,7 @@ security:
         oauth_token:
             pattern:    ^/oauth/v2/token
             security:   false
+
         secured_area:
             pattern:    ^/
             anonymous: ~
@@ -60,17 +61,19 @@ security:
                 path:   /logout
                 target: /
 
-        oauth_authorize:
-            pattern:    ^/oauth/v2/auth
-            form_login:
-                provider: user_provider
-                check_path: _security_check
-                login_path: _demo_login
-            anonymous: true
         api:
             pattern:    ^/api
             fos_oauth:  true
             stateless:  true
+
+        oauth_authorize:
+            pattern:    ^/oauth/v2/auth
+            form_login:
+                provider: user_provider
+                check_path: /oauth/v2/auth_login_check
+                login_path: /oauth/v2/auth_login
+            anonymous: true
+
 
     access_control:
         - { path: ^/api/salt, roles: IS_AUTHENTICATED_ANONYMOUSLY }
