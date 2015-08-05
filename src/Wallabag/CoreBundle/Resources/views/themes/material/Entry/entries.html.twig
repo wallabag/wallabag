@@ -3,12 +3,12 @@
 {% block title %}
   {% set currentRoute = app.request.attributes.get('_route') %}
 
-  {% if currentRoute == 'unread' %}
-    {% trans %}Unread{% endtrans %}
-  {% elseif currentRoute == 'starred' %}
+  {% if currentRoute == 'starred' %}
     {% trans %}Starred{% endtrans %}
   {% elseif currentRoute == 'archive' %}
     {% trans %}Archive{% endtrans %}
+  {% else %}
+    {% trans %}Unread{% endtrans %}
   {% endif %}
 
 {% endblock %}
