@@ -1,6 +1,17 @@
 {% extends "WallabagCoreBundle::layout.html.twig" %}
 
-{% block title "Unread" %}
+{% block title %}
+  {% set currentRoute = app.request.attributes.get('_route') %}
+
+  {% if currentRoute == 'unread' %}
+    {% trans %}Unread{% endtrans %}
+  {% elseif currentRoute == 'starred' %}
+    {% trans %}Starred{% endtrans %}
+  {% elseif currentRoute == 'archive' %}
+    {% trans %}Archive{% endtrans %}
+  {% endif %}
+
+{% endblock %}
 
 {% block content %}
     {% block pager %}
