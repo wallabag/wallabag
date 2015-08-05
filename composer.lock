@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "14a5e3837adfc98bca8d7eef22c9cc45",
+    "hash": "61a9f310d2b50ca59371a735844d7446",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -811,6 +811,129 @@
                 "html"
             ],
             "time": "2015-08-05 01:03:42"
+        },
+        {
+            "name": "friendsofsymfony/oauth-server-bundle",
+            "version": "dev-master",
+            "target-dir": "FOS/OAuthServerBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FriendsOfSymfony/FOSOAuthServerBundle.git",
+                "reference": "0c72d8baf707dce59c59a4daa1549c06e510bbed"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSOAuthServerBundle/zipball/0c72d8baf707dce59c59a4daa1549c06e510bbed",
+                "reference": "0c72d8baf707dce59c59a4daa1549c06e510bbed",
+                "shasum": ""
+            },
+            "require": {
+                "friendsofsymfony/oauth2-php": "~1.1.0",
+                "php": ">=5.3.3",
+                "symfony/framework-bundle": "~2.2",
+                "symfony/security-bundle": "~2.1"
+            },
+            "require-dev": {
+                "doctrine/doctrine-bundle": "~1.0",
+                "doctrine/mongodb-odm": "1.0.*@dev",
+                "doctrine/orm": ">=2.2,<2.5-dev",
+                "symfony/class-loader": "~2.1",
+                "symfony/yaml": "~2.1",
+                "willdurand/propel-typehintable-behavior": "~1.0,>1.0.4"
+            },
+            "suggest": {
+                "doctrine/doctrine-bundle": "*",
+                "doctrine/mongodb-odm-bundle": "*",
+                "propel/propel-bundle": "If you want to use Propel with Symfony2, then you will have to install the PropelBundle",
+                "willdurand/propel-typehintable-behavior": "The Typehintable behavior is useful to add type hints on generated methods, to be compliant with interfaces"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "FOS\\OAuthServerBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Arnaud Le Blanc",
+                    "email": "arnaud.lb@gmail.com"
+                },
+                {
+                    "name": "FriendsOfSymfony Community",
+                    "homepage": "https://github.com/FriendsOfSymfony/FOSOAuthServerBundle/contributors"
+                }
+            ],
+            "description": "Symfony2 OAuth Server Bundle",
+            "homepage": "http://friendsofsymfony.github.com",
+            "keywords": [
+                "oauth",
+                "oauth2",
+                "server"
+            ],
+            "time": "2015-05-01 22:00:52"
+        },
+        {
+            "name": "friendsofsymfony/oauth2-php",
+            "version": "1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FriendsOfSymfony/oauth2-php.git",
+                "reference": "23e76537c4a02e666ab4ba5abe67a69a886a0310"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/oauth2-php/zipball/23e76537c4a02e666ab4ba5abe67a69a886a0310",
+                "reference": "23e76537c4a02e666ab4ba5abe67a69a886a0310",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/http-foundation": "~2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "OAuth2\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Arnaud Le Blanc",
+                    "email": "arnaud.lb@gmail.com"
+                },
+                {
+                    "name": "FriendsOfSymfony Community",
+                    "homepage": "https://github.com/FriendsOfSymfony/oauth2-php/contributors"
+                }
+            ],
+            "description": "OAuth2 library",
+            "homepage": "https://github.com/FriendsOfSymfony/oauth2-php",
+            "keywords": [
+                "oauth",
+                "oauth2"
+            ],
+            "time": "2014-11-03 10:21:20"
         },
         {
             "name": "friendsofsymfony/rest-bundle",
@@ -2540,16 +2663,16 @@
         },
         {
             "name": "tecnick.com/tcpdf",
-            "version": "6.2.11",
+            "version": "6.2.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tecnickcom/TCPDF.git",
-                "reference": "354433a33946ae7497c3eab291eaaf814bccbfab"
+                "reference": "25394f75d63a46d8c60b940e5e8519369b5964eb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/354433a33946ae7497c3eab291eaaf814bccbfab",
-                "reference": "354433a33946ae7497c3eab291eaaf814bccbfab",
+                "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/25394f75d63a46d8c60b940e5e8519369b5964eb",
+                "reference": "25394f75d63a46d8c60b940e5e8519369b5964eb",
                 "shasum": ""
             },
             "require": {
@@ -2599,7 +2722,7 @@
                 "pdf417",
                 "qrcode"
             ],
-            "time": "2015-08-02 12:30:27"
+            "time": "2015-07-28 15:28:45"
         },
         {
             "name": "twig/extensions",
@@ -2655,16 +2778,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.19.0",
+            "version": "v1.20.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "edbeaf43b0a606cdaadc32a11d2673614a377b90"
+                "reference": "1ea4e5f81c6d005fe84d0b38e1c4f1955eb86844"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/edbeaf43b0a606cdaadc32a11d2673614a377b90",
-                "reference": "edbeaf43b0a606cdaadc32a11d2673614a377b90",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/1ea4e5f81c6d005fe84d0b38e1c4f1955eb86844",
+                "reference": "1ea4e5f81c6d005fe84d0b38e1c4f1955eb86844",
                 "shasum": ""
             },
             "require": {
@@ -2673,7 +2796,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.19-dev"
+                    "dev-master": "1.20-dev"
                 }
             },
             "autoload": {
@@ -2708,7 +2831,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2015-07-31 13:45:26"
+            "time": "2015-08-12 15:56:39"
         },
         {
             "name": "umpirsky/twig-gettext-extractor",
@@ -3418,16 +3541,16 @@
         },
         {
             "name": "phpspec/prophecy",
-            "version": "v1.4.1",
+            "version": "v1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "3132b1f44c7bf2ec4c7eb2d3cb78fdeca760d373"
+                "reference": "4745ded9307786b730d7a60df5cb5a6c43cf95f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/3132b1f44c7bf2ec4c7eb2d3cb78fdeca760d373",
-                "reference": "3132b1f44c7bf2ec4c7eb2d3cb78fdeca760d373",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/4745ded9307786b730d7a60df5cb5a6c43cf95f7",
+                "reference": "4745ded9307786b730d7a60df5cb5a6c43cf95f7",
                 "shasum": ""
             },
             "require": {
@@ -3474,7 +3597,7 @@
                 "spy",
                 "stub"
             ],
-            "time": "2015-04-27 22:15:08"
+            "time": "2015-08-13 10:07:40"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -3669,16 +3792,16 @@
         },
         {
             "name": "phpunit/php-token-stream",
-            "version": "1.4.3",
+            "version": "1.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-token-stream.git",
-                "reference": "7a9b0969488c3c54fd62b4d504b3ec758fd005d9"
+                "reference": "8b0723c09dd6593a27319c631bf7152be809bab0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/7a9b0969488c3c54fd62b4d504b3ec758fd005d9",
-                "reference": "7a9b0969488c3c54fd62b4d504b3ec758fd005d9",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/8b0723c09dd6593a27319c631bf7152be809bab0",
+                "reference": "8b0723c09dd6593a27319c631bf7152be809bab0",
                 "shasum": ""
             },
             "require": {
@@ -3714,20 +3837,20 @@
             "keywords": [
                 "tokenizer"
             ],
-            "time": "2015-06-19 03:43:16"
+            "time": "2015-08-13 08:20:49"
         },
         {
             "name": "phpunit/phpunit",
-            "version": "4.8.3",
+            "version": "4.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "fd3050e26e3105f416d74c4d33aea659b406c59d"
+                "reference": "25468d02f8224d6b5ee62407bedbd4cea1f5dd2e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/fd3050e26e3105f416d74c4d33aea659b406c59d",
-                "reference": "fd3050e26e3105f416d74c4d33aea659b406c59d",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/25468d02f8224d6b5ee62407bedbd4cea1f5dd2e",
+                "reference": "25468d02f8224d6b5ee62407bedbd4cea1f5dd2e",
                 "shasum": ""
             },
             "require": {
@@ -3786,7 +3909,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-08-10 09:16:56"
+            "time": "2015-08-07 09:43:11"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -4273,7 +4396,8 @@
         "wallabag/phpepub": 20,
         "wallabag/php-readability": 20,
         "wallabag/phpmobi": 20,
-        "wallabag/fivefilters_libraries": 20
+        "wallabag/fivefilters_libraries": 20,
+        "friendsofsymfony/oauth-server-bundle": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

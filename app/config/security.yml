@@ -12,6 +12,8 @@ security:
     providers:
         administrators:
             entity: { class: WallabagCoreBundle:User, property: username }
+        user_provider:
+            id: platform.user.provider
 
     # the main part of the security, where you can set up firewalls
     # for specific sections of your app
@@ -19,7 +21,9 @@ security:
         login_firewall:
             pattern:    ^/login$
             anonymous:  ~
-
+        oauth_token:
+            pattern:    ^/oauth/v2/token
+            security:   false
         secured_area:
             pattern:    ^/
             anonymous: ~
@@ -55,6 +59,18 @@ security:
             logout:
                 path:   /logout
                 target: /
+
+        oauth_authorize:
+            pattern:    ^/oauth/v2/auth
+            form_login:
+                provider: user_provider
+                check_path: _security_check
+                login_path: _demo_login
+            anonymous: true
+        api:
+            pattern:    ^/api
+            fos_oauth:  true
+            stateless:  true
 
     access_control:
         - { path: ^/api/salt, roles: IS_AUTHENTICATED_ANONYMOUSLY }

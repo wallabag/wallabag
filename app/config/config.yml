@@ -150,3 +150,14 @@ liip_theme:
         # bundle_resource_dir:
         #     - %%dir%%/views/themes/%%current_theme%%/%%bundle_name%%/%%template%%
         #     - %%dir%%/views/%%bundle_name%%/%%override_path%%
+
+fos_oauth_server:
+    db_driver: orm
+    client_class:        Wallabag\CoreBundle\Entity\Client
+    access_token_class:  Wallabag\CoreBundle\Entity\AccessToken
+    refresh_token_class: Wallabag\CoreBundle\Entity\RefreshToken
+    auth_code_class:     Wallabag\CoreBundle\Entity\AuthCode
+    service:
+        user_provider: platform.user.provider
+        options:
+            supported_scopes: user

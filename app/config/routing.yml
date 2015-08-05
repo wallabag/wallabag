@@ -30,3 +30,17 @@ homepage:
     defaults:  { _controller: WallabagCoreBundle:Entry:showUnread, page : 1 }
     requirements:
         page:  \d+
+
+fos_oauth_server_token:
+    resource: "@FOSOAuthServerBundle/Resources/config/routing/token.xml"
+
+fos_oauth_server_authorize:
+    resource: "@FOSOAuthServerBundle/Resources/config/routing/authorize.xml"
+
+wallabag_oauth_server_auth_login:
+    pattern:  /oauth/v2/auth_login
+    defaults: { _controller: WallabagCoreBundle:Security:oauthLogin }
+
+wallabag_oauth_server_auth_login_check:
+    pattern:  /oauth/v2/auth_login_check
+    defaults: { _controller: WallabagCoreBundle:Security:loginCheck }

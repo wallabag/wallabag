@@ -3,8 +3,22 @@
 parameters:
     security.encoder.digest.class: Wallabag\CoreBundle\Security\Authentication\Encoder\WallabagPasswordEncoder
     security.validator.user_password.class: Wallabag\CoreBundle\Security\Validator\WallabagUserPasswordValidator
+    platform.entity.user.class: Wallabag\CoreBundle\Entity\User
+    platform.user.provider.class: Wallabag\CoreBundle\Provider\UserProvider
 
 services:
+    platform.user.manager:
+        class: Doctrine\ORM\EntityManager
+        factory: ["@doctrine", getManagerForClass]
+        arguments: [%platform.entity.user.class%]
+    platform.user.repository:
+        class: Wallabag\CoreBundle\Repository\UserRepository
+        factory: ["@platform.user.manager", getRepository]
+        arguments: [%platform.entity.user.class%]
+    platform.user.provider:
+        class: %platform.user.provider.class%
+        arguments: [@platform.user.repository]
+
     # used for tests
     filesystem_cache:
         class: Doctrine\Common\Cache\FilesystemCache

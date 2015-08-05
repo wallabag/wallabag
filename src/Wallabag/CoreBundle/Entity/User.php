@@ -22,7 +22,7 @@ use JMS\Serializer\Annotation\Expose;
  * @UniqueEntity("email")
  * @UniqueEntity("username")
  */
-class User implements AdvancedUserInterface, \Serializable
+class User implements UserInterface, \Serializable
 {
     /**
      * @var int
@@ -181,6 +181,11 @@ class User implements AdvancedUserInterface, \Serializable
     public function getSalt()
     {
         return $this->salt;
+    }
+
+    public function setSalt($salt)
+    {
+        $this->salt = $salt;
     }
 
     /**
@@ -344,8 +349,7 @@ class User implements AdvancedUserInterface, \Serializable
      */
     public function unserialize($serialized)
     {
-        list(
-            $this->id) = unserialize($serialized);
+        list($this->id) = unserialize($serialized);
     }
 
     public function isEqualTo(UserInterface $user)
