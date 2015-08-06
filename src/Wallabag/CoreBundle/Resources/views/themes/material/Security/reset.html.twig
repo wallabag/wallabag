@@ -1,0 +1,57 @@
+{% extends "WallabagCoreBundle::layout.html.twig" %}
+
+{% block title %}{% trans %}Change password{% endtrans %}{% endblock %}
+
+{% block body_class %}login{% endblock %}
+
+{% block menu %}{% endblock %}
+
+{% block content %}
+    <main class="valign-wrapper">
+        <div class="valign row">
+            <div class="card sw">
+                <form action="{{ path('forgot_password_reset', {'token': token}) }}" method="post" name="loginform">
+                    <div class="card-content">
+
+                        <span class="card-title black-text"><p>{% trans %}Change password{% endtrans %}</p></span>
+
+                        {% if form_errors(form) %}
+                            <span class="black-text">{{ form_errors(form) }}</span>
+                        {% endif %}
+
+                        {% if form_errors(form.new_password.first) %}
+                            <span class="black-text">{{ form_errors(form.new_password.first) }}</span>
+                        {% endif %}
+
+                        {% if form_errors(form.new_password.second) %}
+                            <span class="black-text">{{ form_errors(form.new_password.second) }}</span>
+                        {% endif %}
+
+                        <div class="input-field s12">
+                            {{ form_label(form.new_password.first) }}
+                            {{ form_widget(form.new_password.first) }}
+                        </div>
+
+                        <div class="input-field s12">
+                            {{ form_label(form.new_password.second) }}
+                            {{ form_widget(form.new_password.second) }}
+                        </div>
+
+                    </div>
+                    <div class="card-action">
+                        <button class="btn waves-effect waves-light" type="submit" name="send">
+                            {% trans %}Change password{% endtrans %}
+                            <i class="mdi-content-send right"></i>
+                        </button>
+                    </div>
+                    {{ form_rest(form) }}
+                </form>
+            </div>
+        </div>
+    </main>
+    <style>
+    main {
+        padding: 0;
+    }
+    </style>
+{% endblock %}

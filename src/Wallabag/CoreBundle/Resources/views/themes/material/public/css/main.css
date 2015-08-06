@@ -128,7 +128,7 @@ main ul.row {
     padding: 0px 0.75rem;
 }
 
-main .card .card-content {
+.data .card .card-content {
     min-height: 25em;
 }
 
@@ -156,6 +156,12 @@ main .card .card-content {
 
 .settings .div_tabs {
     padding-bottom: 15px;
+}
+
+.card.sw {
+    max-width: 370px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* ==========================================================================
@@ -194,6 +200,18 @@ main .card .card-content {
     header, main, footer {
       padding-left: 0;
     }
+    nav, main, footer {
+        padding-left: 0;
+    }
+    .pagination {
+        width: auto;
+    }
+    .reader-mode {
+        width: 240px !important;
+    }
+    .reader-mode span {
+        opacity: 1;
+    }
   }
 
 @media only screen and (min-width : 993px) and (max-width : 1180px) {
@@ -227,15 +245,6 @@ main .card .card-content {
     .row .col.l10 {
     width: 100%;
     margin-left: 0; }
-}
-
-@media only screen and (max-width : 993px) {
-    nav, main, footer {
-        padding-left: 0;
-    }
-    .pagination {
-        width: auto;
-    }
 }
 
 @media only screen and (max-width : 350px) {

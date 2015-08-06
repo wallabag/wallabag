@@ -1,0 +1,58 @@
+{% extends "WallabagCoreBundle::layout.html.twig" %}
+
+{% block title %}{% trans %}login to your wallabag{% endtrans %}{% endblock %}
+
+{% block body_class %}login{% endblock %}
+
+{% block menu %}{% endblock %}
+{% block messages %}{% endblock %}
+
+{% block content %}
+    <main class="valign-wrapper">
+        <div class="valign row">
+            <h1>{% trans %}Login to wallabag{% endtrans %}</h1>
+            <div class="card sw">
+                <form action="{{ path('login_check') }}" method="post" name="loginform">
+                    <div class="card-content">
+
+                        {% if error %}
+                            <span class="black-text">{{ error.message }}</span>
+                        {% endif %}
+
+                        {% for flashMessage in app.session.flashbag.get('notice') %}
+                            <span class="black-text"><p>{{ flashMessage }}</p></span>
+                        {% endfor %}
+
+                        <div class="input-field s12">
+                            <label for="username">{% trans %}Username{% endtrans %}</label>
+                            <input type="text" id="username" name="_username" value="{{ last_username }}" />
+                        </div>
+
+                        <div class="input-field s12">
+                            <label for="password">{% trans %}Password{% endtrans %}</label>
+                            <input type="password" id="password" name="_password" />
+                        </div>
+
+                    </div>
+                    <div class="card-action">
+                        <button class="btn waves-effect waves-light" type="submit" name="send">
+                            {% trans %}Login{% endtrans %}
+                            <i class="mdi-content-send right"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="center">
+                <a href="{{ path('forgot_password') }}">{% trans %}Forgot your password?{% endtrans %}</a>
+            </div>
+        </div>
+    </main>
+    <style>
+    main {
+        padding: 0;
+    }
+    </style>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

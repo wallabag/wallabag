@@ -21,7 +21,7 @@
     {% if entries is empty %}
         <div class="messages warning"><p>{% trans %}No articles found.{% endtrans %}</p></div>
     {% else %}
-        <ul class="row">
+        <ul class="row data">
             {% for entry in entries %}
                 <li id="entry-{{ entry.id|e }}" class="col l4 m6 s12">
                     <div class="card">

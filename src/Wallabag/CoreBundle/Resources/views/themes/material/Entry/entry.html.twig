@@ -3,8 +3,36 @@
 {% block title %}{{ entry.title|raw }} ({{ entry.url | e | domainName }}){% endblock %}
 
 {% block menu %}
+    <nav class="hide-on-large-only">
+        <div class="nav-wrapper cyan darken-1">
+            <ul>
+                <li>
+                    <a class="waves-effect" href="/">
+                        <i class="mdi-action-exit-to-app"></i>
+                    </a>
+                </li>
+            </ul>
+            <ul class="right">
+                <li>
+                    <a class="waves-effect" title="{% trans %}Mark as read{% endtrans %}" href="{{ path('archive_entry', { 'id': entry.id }) }}" id="markAsRead">
+                        <i class="{% if entry.isArchived == 0 %}mdi-action-done{% else %}mdi-content-redo{% endif %} small"></i>
+                    </a>
+                </li>
+                <li>
+                    <a class="waves-effect" title="{% trans %}Favorite{% endtrans %}" href="{{ path('star_entry', { 'id': entry.id }) }}" id="setFav">
+                        <i class="{% if entry.isStarred == 0 %}mdi-action-favorite-outline{% else %}mdi-action-favorite{% endif %} small"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-activates="slide-out" class="button-collapse right">
+                        <i class="mdi-navigation-menu"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
     <ul id="slide-out" class="collapsible side-nav fixed reader-mode" data-collapsible="accordion">
-        <li class="bold border-bottom">
+        <li class="bold border-bottom hide-on-med-and-down">
             <a class="waves-effect collapsible-header" href="/">
                 <i class="mdi-action-exit-to-app small"></i>
                 <span>{% trans %}back{% endtrans %}</span>
@@ -12,7 +40,7 @@
             <div class="collapsible-body"></div>
         </li>
 
-        <li class="bold">
+        <li class="bold hide-on-med-and-down">
             <a class="waves-effect collapsible-header" title="{% trans %}Mark as read{% endtrans %}" href="{{ path('archive_entry', { 'id': entry.id }) }}" id="markAsRead">
                 <i class="{% if entry.isArchived == 0 %}mdi-action-done{% else %}mdi-content-redo{% endif %} small"></i>
                 <span>{% trans %}Toggle mark as read{% endtrans %}</span>
@@ -20,14 +48,14 @@
             <div class="collapsible-body"></div>
         </li>
 
-        <li class="bold">
+        <li class="bold hide-on-med-and-down">
             <a class="waves-effect collapsible-header" title="{% trans %}Favorite{% endtrans %}" href="{{ path('star_entry', { 'id': entry.id }) }}" id="setFav">
                 <i class="{% if entry.isStarred == 0 %}mdi-action-favorite-outline{% else %}mdi-action-favorite{% endif %} small"></i>
                 <span>{% trans %}Toggle favorite{% endtrans %}</span>
             </a>
             <div class="collapsible-body"></div>
         </li>
-        <li class="bold border-bottom">
+        <li class="bold border-bottom hide-on-med-and-down">
             <a class="waves-effect collapsible-header" title="{% trans %}Delete{% endtrans %}" href="{{ path('delete_entry', { 'id': entry.id }) }}">
                 <i class="mdi-action-delete small"></i>
                 <span>{% trans %}Delete{% endtrans %}</span>
@@ -66,6 +94,14 @@
             </div>
         </li>
 
+        <li class="bold hide-on-large-only">
+            <a class="waves-effect collapsible-header" title="{% trans %}Delete{% endtrans %}" href="{{ path('delete_entry', { 'id': entry.id }) }}">
+                <i class="mdi-action-delete small"></i>
+                <span>{% trans %}Delete{% endtrans %}</span>
+            </a>
+            <div class="collapsible-body"></div>
+        </li>
+
         <li class="bold">
             <a class="waves-effect collapsible-header" href="mailto:hello@wallabag.org?subject=Wrong%20display%20in%20wallabag&amp;body={{ entry.url|url_encode }}" title="{% trans %}Does this article appear wrong?{% endtrans %}">
                 <i class="mdi-alert-error small"></i>
@@ -86,7 +122,7 @@ main {
 {% block content %}
     <div id="article">
         <header class="mbm">
-            <h1>{{ entry.title|raw }} <a href="{{ path('edit', { 'id': entry.id }) }}" title="{% trans %}Edit tags{% endtrans %}">✎</a></h1>
+            <h1>{{ entry.title|raw }} <a href="{{ path('edit', { 'id': entry.id }) }}" title="{% trans %}Edit title{% endtrans %}">✎</a></h1>
             <a href="{{ entry.url|e }}" target="_blank" title="{% trans %}original{% endtrans %} : {{ entry.title|e }}" class="tool link"><span>{{ entry.url | e | domainName }}</span></a>
         </header>
         <aside class="tags">
