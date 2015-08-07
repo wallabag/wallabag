@@ -52,3 +52,11 @@
         </div>
     </footer>
 {% endblock %}
+
+{% block messages %}
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <script>
+            Materialize.toast('{{ flashMessage }}', 4000);
+        </script>
+    {% endfor %}
+{% endblock %}
