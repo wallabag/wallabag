@@ -15,6 +15,7 @@ $(document).ready(function(){
     $('#nav-btn-search').click(function(){
         $(".nav-panel-buttom").hide(100);
         $(".nav-panel-search").show(100);
+        $(".nav-panels .action").hide(100);
         $(".nav-panel-menu").addClass('hidden');
         $(".nav-panels").css('background', 'white');
         return false;
@@ -23,6 +24,7 @@ $(document).ready(function(){
         $(".nav-panel-add").hide(100);
         $(".nav-panel-search").hide(100);
         $(".nav-panel-buttom").show(100);
+        $(".nav-panels .action").show(100);
         $(".nav-panel-menu").removeClass('hidden');
         $(".nav-panels").css('background', 'transparent');
         return false;
