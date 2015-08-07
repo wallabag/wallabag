@@ -17,8 +17,8 @@
                 <pubDate>{{ entry.createdAt|date('D, d M Y H:i:s') }}</pubDate>
                 <description>
                     <![CDATA[
-                    {%- if entry.content|readingTime > 0 -%}
-                        {% trans %}estimated reading time :{% endtrans %} {{ entry.content|readingTime }} min
+                    {%- if entry.readingTime > 0 -%}
+                        {% trans %}estimated reading time :{% endtrans %} {{ entry.readingTime }} min
                     {%- else -%}
                         {% trans %}estimated reading time :{% endtrans %} &lt; 1 min
                     {%- endif %}

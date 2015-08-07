@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Hateoas\Configuration\Annotation as Hateoas;
 use JMS\Serializer\Annotation\XmlRoot;
+use Wallabag\CoreBundle\Helper\Tools;
 
 /**
  * Entry.
@@ -96,7 +97,7 @@ class Entry
     /**
      * @var int
      *
-     * @ORM\Column(name="reading_type", type="integer", nullable=true)
+     * @ORM\Column(name="reading_time", type="integer", nullable=true)
      */
     private $readingTime;
 
@@ -264,6 +265,7 @@ class Entry
     public function setContent($content)
     {
         $this->content = $content;
+        $this->readingTime = Tools::getReadingTime($content);
 
         return $this;
     }

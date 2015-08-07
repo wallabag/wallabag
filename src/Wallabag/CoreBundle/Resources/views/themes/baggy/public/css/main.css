@@ -322,7 +322,7 @@ footer a {
   letter-spacing:-5px;
 }
 
-.listmode .entrie {
+.listmode .entry {
   width: 100%!important;
   margin-left: 0!important;
 }
@@ -343,7 +343,7 @@ footer a {
   top: -1px;
 }
 
-.entrie {
+.entry {
   background-color: #FFF;
   letter-spacing:normal;
   box-shadow: 0 3px 7px rgba(0,0,0,0.3);
@@ -366,7 +366,7 @@ footer a {
   /*         transition: all 0.5s ease; */
 }
 
-.entrie:before {
+.entry:before {
   content: "";
   width: 0;
   height: 0;
@@ -384,7 +384,7 @@ footer a {
           transition: all 0.5s ease;
 }
 
-.entrie:after {
+.entry:after {
   content: "";
   position: absolute;
   height: 7px;
@@ -399,34 +399,34 @@ footer a {
           transition: all 0.5s ease;
 }
 
-.entrie:hover {
+.entry:hover {
   box-shadow: 0 3px 10px rgba(0,0,0,1);
 }
 
-.entrie:hover:after {
+.entry:hover:after {
   height: 40px;
 }
 
-.entrie:hover:before {
+.entry:hover:before {
   bottom: 2.4em;
 }
 
-.entrie:hover h2 a {
+.entry:hover h2 a {
   color: #666;
 }
 
-.entrie h2 {
+.entry h2 {
   text-transform: none;
   margin-bottom: 0;
   line-height: 1.2;
 }
 
-  .entrie h2:after {
+  .entry h2:after {
     content: none;
   }
 
 
-.entrie h2 a {
+.entry h2 a {
   display: block;
   text-decoration: none;
   color: #000;
@@ -438,7 +438,7 @@ footer a {
           transition: all 0.5s ease;
 }
 /*
-.entrie h2 a:after {
+.entry h2 a:after {
   content: "";
   position: absolute;
   top: 0;
@@ -448,21 +448,21 @@ footer a {
 }
 */
 
-.entrie p {
+.entry p {
   color: #666;
   font-size: 0.9em;
   line-height: 1.7;
 }
 
-  .entrie h2 a:first-letter {
+  .entry h2 a:first-letter {
     text-transform: uppercase;
   }
 
-.entrie:hover .tools {
+.entry:hover .tools {
   bottom: 0;
 }
 
-.entrie .tools {
+.entry .tools {
   position: absolute;
   bottom: -50px;
   left: 0;
@@ -477,22 +477,22 @@ footer a {
           transition: all 0.5s ease;
 }
 
-  .entrie .tools a {
+  .entry .tools a {
     color: #666;
     text-decoration: none;
     display: block;
     padding: 0.4em;
   }
 
-  .entrie .tools a:hover {
+  .entry .tools a:hover {
     color: #FFF;
   }
 
-  .entrie .tools li {
+  .entry .tools li {
     display: inline-block;
   }
 
-.entrie:nth-child(3n+1) {
+.entry:nth-child(3n+1) {
   margin-left: 0;
 }
 
@@ -941,13 +941,13 @@ pre code {
    ========================================================================== */
 
 @media screen and (max-width: 1050px) {
-  .entrie {
+  .entry {
     width: 49%;
   }
-  .entrie:nth-child(3n+1) {
+  .entry:nth-child(3n+1) {
     margin-left: 1.5%;
   }
-  .entrie:nth-child(2n+1) {
+  .entry:nth-child(2n+1) {
     margin-left: 0;
   }
 }
@@ -962,7 +962,7 @@ pre code {
 }
 
 @media screen and (max-width: 700px) {
-  .entrie {
+  .entry {
     width: 100%;
     margin-left: 0;
   }
@@ -972,7 +972,7 @@ pre code {
 }
 
 @media screen and (max-width: 500px) {
-  .entrie {
+  .entry {
     width: 100%;
     margin-left: 0;
   }

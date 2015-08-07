@@ -21,11 +21,12 @@
     {% if entries is empty %}
         <div class="messages warning"><p>{% trans %}No articles found.{% endtrans %}</p></div>
     {% else %}
+        <div><form>{{ form_rest(form) }}<button class="btn waves-effect waves-light" type="submit" id="submit-filter" value="filter">Filter</button></form></div>
         {% for entry in entries %}
-            <div id="entry-{{ entry.id|e }}" class="entrie">
+            <div id="entry-{{ entry.id|e }}" class="entry">
                 <h2><a href="{{ path('view', { 'id': entry.id }) }}">{{ entry.title|raw }}</a></h2>
-                {% if entry.content| readingTime > 0 %}
-                    <div class="estimatedTime"><span class="tool reading-time">{% trans %}estimated reading time :{% endtrans %} {{ entry.content| readingTime }} min</span></div>
+                {% if entry.readingTime > 0 %}
+                    <div class="estimatedTime"><span class="tool reading-time">{% trans %}estimated reading time :{% endtrans %} {{ entry.readingTime }} min</span></div>
                 {% else %}
                     <div class="estimatedTime"><span class="tool reading-time">{% trans %}estimated reading time :{% endtrans %} <small class="inferieur">&lt;</small> 1 min</span></div>
                 {% endif %}

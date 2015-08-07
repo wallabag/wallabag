@@ -13,20 +13,15 @@ class EntryRepository extends EntityRepository
      *
      * @param int $userId
      *
-     * @return Pagerfanta
+     * @return QueryBuilder
      */
     public function findUnreadByUser($userId)
     {
-        $qb = $this->createQueryBuilder('e')
+        return $this->createQueryBuilder('e')
             ->leftJoin('e.user', 'u')
             ->where('e.isArchived = false')
             ->andWhere('u.id =:userId')->setParameter('userId', $userId)
-            ->orderBy('e.id', 'desc')
-            ->getQuery();
-
-        $pagerAdapter = new DoctrineORMAdapter($qb);
-
-        return new Pagerfanta($pagerAdapter);
+            ->orderBy('e.id', 'desc');
     }
 
     /**
@@ -34,21 +29,15 @@ class EntryRepository extends EntityRepository
      *
      * @param int $userId
      *
-     * @return Pagerfanta
+     * @return QueryBuilder
      */
     public function findArchiveByUser($userId)
     {
-        $qb = $this->createQueryBuilder('e')
-            ->select('e')
+        return $this->createQueryBuilder('e')
             ->leftJoin('e.user', 'u')
             ->where('e.isArchived = true')
             ->andWhere('u.id =:userId')->setParameter('userId', $userId)
-            ->orderBy('e.id', 'desc')
-            ->getQuery();
-
-        $pagerAdapter = new DoctrineORMAdapter($qb);
-
-        return new Pagerfanta($pagerAdapter);
+            ->orderBy('e.id', 'desc');
     }
 
     /**
@@ -56,22 +45,15 @@ class EntryRepository extends EntityRepository
      *
      * @param int $userId
      *
-     * @return Pagerfanta
+     * @return QueryBuilder
      */
     public function findStarredByUser($userId)
     {
-
-        $qb = $this->createQueryBuilder('e')
-            ->select('e')
+        return $this->createQueryBuilder('e')
             ->leftJoin('e.user', 'u')
             ->where('e.isStarred = true')
             ->andWhere('u.id =:userId')->setParameter('userId', $userId)
-            ->orderBy('e.id', 'desc')
-            ->getQuery();
-
-        $pagerAdapter = new DoctrineORMAdapter($qb);
-
-        return new Pagerfanta($pagerAdapter);
+            ->orderBy('e.id', 'desc');
     }
 
     /**

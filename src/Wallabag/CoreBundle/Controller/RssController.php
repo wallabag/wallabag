@@ -7,6 +7,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Wallabag\CoreBundle\Entity\User;
 use Wallabag\CoreBundle\Entity\Entry;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Pagerfanta;
 
 class RssController extends Controller
 {
@@ -20,11 +22,14 @@ class RssController extends Controller
      */
     public function showUnreadAction(User $user)
     {
-        $entries = $this->getDoctrine()
+        $qb = $this->getDoctrine()
             ->getRepository('WallabagCoreBundle:Entry')
             ->findUnreadByUser(
                 $user->getId()
             );
+
+        $pagerAdapter = new DoctrineORMAdapter($qb->getQuery());
+        $entries = new Pagerfanta($pagerAdapter);
 
         $perPage = $user->getConfig()->getRssLimit() ?: $this->container->getParameter('rss_limit');
         $entries->setMaxPerPage($perPage);
@@ -45,11 +50,14 @@ class RssController extends Controller
      */
     public function showArchiveAction(User $user)
     {
-        $entries = $this->getDoctrine()
+        $qb = $this->getDoctrine()
             ->getRepository('WallabagCoreBundle:Entry')
             ->findArchiveByUser(
                 $user->getId()
             );
+
+        $pagerAdapter = new DoctrineORMAdapter($qb->getQuery());
+        $entries = new Pagerfanta($pagerAdapter);
 
         $perPage = $user->getConfig()->getRssLimit() ?: $this->container->getParameter('rss_limit');
         $entries->setMaxPerPage($perPage);
@@ -70,11 +78,14 @@ class RssController extends Controller
      */
     public function showStarredAction(User $user)
     {
-        $entries = $this->getDoctrine()
+        $qb = $this->getDoctrine()
             ->getRepository('WallabagCoreBundle:Entry')
             ->findStarredByUser(
                 $user->getId()
             );
+
+        $pagerAdapter = new DoctrineORMAdapter($qb->getQuery());
+        $entries = new Pagerfanta($pagerAdapter);
 
         $perPage = $user->getConfig()->getRssLimit() ?: $this->container->getParameter('rss_limit');
         $entries->setMaxPerPage($perPage);
