@@ -69,7 +69,7 @@ nav, main, footer {
 }
 
 .nav-panels {
-    overflov: hidden;
+    overflow: hidden;
 }
 
 .nav-panel-buttom li {
@@ -143,7 +143,8 @@ main ul.row {
 }
 
 .data .card .card-content {
-    min-height: 25em;
+    height: 22em;
+    overflow: hidden;
 }
 
 .card .card-content .card-title {
