@@ -11,6 +11,7 @@ use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Service\Extractor;
 use Hateoas\Configuration\Route;
 use Hateoas\Representation\Factory\PagerfantaFactory;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class WallabagRestController extends Controller
 {

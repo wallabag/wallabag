@@ -85,7 +85,8 @@
         "wallabag/Fivefilters_Libraries": "dev-master",
         "pagerfanta/pagerfanta": "~1.0.3",
         "lexik/form-filter-bundle": "~4.0",
-        "friendsofsymfony/oauth-server-bundle": "dev-master"
+        "friendsofsymfony/oauth-server-bundle": "dev-master",
+        "friendsofsymfony/user-bundle": "dev-master"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "~2.2.0",

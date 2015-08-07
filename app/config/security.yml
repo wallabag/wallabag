@@ -14,13 +14,10 @@ security:
             entity: { class: WallabagCoreBundle:User, property: username }
         user_provider:
             id: platform.user.provider
+        fos_userbundle:
+            id: fos_user.user_provider.username
 
-    # the main part of the security, where you can set up firewalls
-    # for specific sections of your app
     firewalls:
-        login_firewall:
-            pattern:    ^/login$
-            anonymous:  ~
         oauth_token:
             pattern:    ^/oauth/v2/token
             security:   false
@@ -61,21 +58,39 @@ security:
                 path:   /logout
                 target: /
 
+        oauth_authorize:
+            pattern:    ^/oauth/v2/auth
+            form_login:
+                provider: fos_userbundle
+                check_path: wallabag_oauth_server_auth_login_check
+                login_path: wallabag_oauth_server_auth_login
+            anonymous: true
+
+
         api:
             pattern:    ^/api
             fos_oauth:  true
             stateless:  true
 
-        oauth_authorize:
-            pattern:    ^/oauth/v2/auth
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            pattern: ^/
             form_login:
-                provider: user_provider
-                check_path: /oauth/v2/auth_login_check
-                login_path: /oauth/v2/auth_login
-            anonymous: true
+                provider: fos_userbundle
+                csrf_provider: security.csrf.token_manager # Use form.csrf_provider instead for Symfony <2.4
+
+            logout:       true
+            anonymous:    true
+
+        secured_area:
+            anonymous: ~
 
 
     access_control:
+        - { path: ^/oauth/v2/auth_login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/salt, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/doc, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }

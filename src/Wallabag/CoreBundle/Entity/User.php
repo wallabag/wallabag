@@ -10,6 +10,7 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
+use FOS\UserBundle\Model\User as BaseUser;
 
 /**
  * User.
@@ -22,7 +23,7 @@ use JMS\Serializer\Annotation\Expose;
  * @UniqueEntity("email")
  * @UniqueEntity("username")
  */
-class User implements UserInterface, \Serializable
+class User extends BaseUser implements UserInterface, \Serializable
 {
     /**
      * @var int
@@ -32,98 +33,53 @@ class User implements UserInterface, \Serializable
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="username", type="text")
-     * @Assert\NotBlank()
-     * @Assert\Length(
-     *      min = "3",
-     *      max = "255"
-     * )
-     */
-    private $username;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=32)
-     */
-    private $salt;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="password", type="text")
-     */
-    private $password;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="name", type="text", nullable=true)
      */
-    private $name;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="email", type="text", nullable=false)
-     * @Assert\Email()
-     * @Assert\NotBlank()
-     */
-    private $email;
+    protected $name;
 
     /**
      * @ORM\Column(name="is_active", type="boolean", nullable=false)
      */
-    private $isActive = true;
-
-    /**
-     * @ORM\Column(name="confirmation_token", type="string", nullable=true)
-     */
-    private $confirmationToken;
-
-    /**
-     * @ORM\Column(name="password_requested_at", type="datetime", nullable=true)
-     */
-    private $passwordRequestedAt;
+    protected $isActive = true;
 
     /**
      * @var date
      *
      * @ORM\Column(name="created_at", type="datetime")
      */
-    private $createdAt;
+    protected $createdAt;
 
     /**
      * @var date
      *
      * @ORM\Column(name="updated_at", type="datetime")
      */
-    private $updatedAt;
+    protected $updatedAt;
 
     /**
      * @ORM\OneToMany(targetEntity="Entry", mappedBy="user", cascade={"remove"})
      */
-    private $entries;
+    protected $entries;
 
     /**
      * @ORM\OneToOne(targetEntity="Config", mappedBy="user")
      */
-    private $config;
+    protected $config;
 
     /**
      * @ORM\OneToMany(targetEntity="Tag", mappedBy="user", cascade={"remove"})
      */
-    private $tags;
+    protected $tags;
 
     public function __construct()
     {
+        parent::__construct();
         $this->isActive = true;
-        $this->salt     = md5(uniqid(null, true));
         $this->entries  = new ArrayCollection();
         $this->tags     = new ArrayCollection();
     }
@@ -142,61 +98,6 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set username.
-     *
-     * @param string $username
-     *
-     * @return User
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
-    /**
-     * Get username.
-     *
-     * @return string
-     */
-    public function getUsername()
-    {
-        return $this->username;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getSalt()
-    {
-        return $this->salt;
-    }
-
-    public function setSalt($salt)
-    {
-        $this->salt = $salt;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getRoles()
-    {
-        return array('ROLE_USER');
-    }
-
-    /**
      * Set password.
      *
      * @param string $password
@@ -212,16 +113,6 @@ class User implements UserInterface, \Serializable
         $this->password = sha1($password.$this->getUsername().$this->getSalt());
 
         return $this;
-    }
-
-    /**
-     * Get password.
-     *
-     * @return string
-     */
-    public function getPassword()
-    {
-        return $this->password;
     }
 
     /**
@@ -246,30 +137,6 @@ class User implements UserInterface, \Serializable
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * Set email.
-     *
-     * @param string $email
-     *
-     * @return User
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * Get email.
-     *
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->email;
     }
 
     /**
@@ -327,55 +194,12 @@ class User implements UserInterface, \Serializable
     {
         return $this->tags;
     }
-    /**
-     * @inheritDoc
-     */
-    public function eraseCredentials()
-    {
-    }
-
-    /**
-     * @see \Serializable::serialize()
-     */
-    public function serialize()
-    {
-        return serialize(array(
-            $this->id,
-        ));
-    }
-
-    /**
-     * @see \Serializable::unserialize()
-     */
-    public function unserialize($serialized)
-    {
-        list($this->id) = unserialize($serialized);
-    }
 
     public function isEqualTo(UserInterface $user)
     {
         return $this->username === $user->getUsername();
     }
 
-    public function isAccountNonExpired()
-    {
-        return true;
-    }
-
-    public function isAccountNonLocked()
-    {
-        return true;
-    }
-
-    public function isCredentialsNonExpired()
-    {
-        return true;
-    }
-
-    public function isEnabled()
-    {
-        return $this->isActive;
-    }
     /**
      * Set config.
      *
@@ -398,53 +222,5 @@ class User implements UserInterface, \Serializable
     public function getConfig()
     {
         return $this->config;
-    }
-
-    /**
-     * Set confirmationToken.
-     *
-     * @param string $confirmationToken
-     *
-     * @return User
-     */
-    public function setConfirmationToken($confirmationToken)
-    {
-        $this->confirmationToken = $confirmationToken;
-
-        return $this;
-    }
-
-    /**
-     * Get confirmationToken.
-     *
-     * @return string
-     */
-    public function getConfirmationToken()
-    {
-        return $this->confirmationToken;
-    }
-
-    /**
-     * Set passwordRequestedAt.
-     *
-     * @param \DateTime $passwordRequestedAt
-     *
-     * @return User
-     */
-    public function setPasswordRequestedAt($passwordRequestedAt)
-    {
-        $this->passwordRequestedAt = $passwordRequestedAt;
-
-        return $this;
-    }
-
-    /**
-     * Get passwordRequestedAt.
-     *
-     * @return \DateTime
-     */
-    public function getPasswordRequestedAt()
-    {
-        return $this->passwordRequestedAt;
     }
 }

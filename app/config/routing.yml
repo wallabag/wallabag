@@ -31,6 +31,9 @@ homepage:
     requirements:
         page:  \d+
 
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
 fos_oauth_server_token:
     resource: "@FOSOAuthServerBundle/Resources/config/routing/token.xml"
 
@@ -44,3 +47,6 @@ wallabag_oauth_server_auth_login:
 wallabag_oauth_server_auth_login_check:
     pattern:  /oauth/v2/auth_login_check
     defaults: { _controller: WallabagCoreBundle:Security:loginCheck }
+
+github_login:
+    path: /login/check-github

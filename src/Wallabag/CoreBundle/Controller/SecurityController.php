@@ -12,7 +12,7 @@ use Wallabag\CoreBundle\Form\Type\ResetPasswordType;
 class SecurityController extends Controller
 {
     public function oauthLoginAction(Request $request)
-    {
+    {;
         $session = $request->getSession();
 
         if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {

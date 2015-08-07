@@ -19,6 +19,11 @@ services:
         class: %platform.user.provider.class%
         arguments: [@platform.user.repository]
 
+    wallabag.oauth_user_provider:
+        class: Wallabag\CoreBundle\Provider\UserProvider
+        arguments: [@session, @doctrine, @service_container]
+
+
     # used for tests
     filesystem_cache:
         class: Doctrine\Common\Cache\FilesystemCache
