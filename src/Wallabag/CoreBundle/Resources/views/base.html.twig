@@ -90,20 +90,22 @@
                 </ul>
             {% endblock %}
 
-            {% block precontent %}{% endblock %}
+            <main>
+                {% block precontent %}{% endblock %}
 
-            {% block messages %}
-                {% for flashMessage in app.session.flashbag.get('notice') %}
-                    <div class="messages success">
-                        <a href="#" class="closeMessage">×</a>
-                        <p>{{ flashMessage }}</p>
-                    </div>
-                {% endfor %}
-            {% endblock %}
+                {% block messages %}
+                    {% for flashMessage in app.session.flashbag.get('notice') %}
+                        <div class="messages success">
+                            <a href="#" class="closeMessage">×</a>
+                            <p>{{ flashMessage }}</p>
+                        </div>
+                    {% endfor %}
+                {% endblock %}
 
-            <div id="content" class="w600p center">
-                {% block content %}{% endblock %}
-            </div>
+                <div id="content" class="w600p">
+                    {% block content %}{% endblock %}
+                </div>
+            </main>
         </div>
 
         {% block footer %}
