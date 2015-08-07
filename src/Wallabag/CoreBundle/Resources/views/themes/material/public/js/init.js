@@ -16,6 +16,7 @@ $(document).ready(function(){
         $(".nav-panel-buttom").hide(100);
         $(".nav-panel-search").show(100);
         $(".nav-panel-menu").addClass('hidden');
+        $(".nav-panels").css('background', 'white');
         return false;
     });
     $('.mdi-navigation-close').click(function(){
@@ -23,6 +24,7 @@ $(document).ready(function(){
         $(".nav-panel-search").hide(100);
         $(".nav-panel-buttom").show(100);
         $(".nav-panel-menu").removeClass('hidden');
+        $(".nav-panels").css('background', 'transparent');
         return false;
     });
 });

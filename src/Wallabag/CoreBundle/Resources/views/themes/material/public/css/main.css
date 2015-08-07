@@ -80,6 +80,14 @@ nav, main, footer {
     float: right;
 }
 
+.nav-panels {
+    transition: background 0.2s ease;
+}
+
+.nav-panel-search .mdi-navigation-close, .nav-panel-search .mdi-action-search {
+    color: #444 !important;
+}
+
 /* ==========================================================================
    2 = Side-nav
    ========================================================================== */
