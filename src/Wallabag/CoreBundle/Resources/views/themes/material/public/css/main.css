@@ -84,7 +84,9 @@ nav, main, footer {
     transition: background 0.2s ease;
 }
 
-.nav-panel-search .mdi-navigation-close, .nav-panel-search .mdi-action-search {
+.nav-panel-add .mdi-content-add,
+.nav-panel-search .mdi-action-search,
+.nav-panels .mdi-navigation-close {
     color: #444 !important;
 }
 
