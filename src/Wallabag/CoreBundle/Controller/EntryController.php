@@ -99,6 +99,7 @@ class EntryController extends Controller
             ->getRepository('WallabagCoreBundle:Entry')
             ->findUnreadByUser($this->getUser()->getId());
 
+        $entries->setMaxPerPage($this->getUser()->getConfig()->getItemsPerPage());
         $entries->setCurrentPage($page);
 
         return $this->render(
@@ -123,6 +124,7 @@ class EntryController extends Controller
             ->getRepository('WallabagCoreBundle:Entry')
             ->findArchiveByUser($this->getUser()->getId());
 
+        $entries->setMaxPerPage($this->getUser()->getConfig()->getItemsPerPage());
         $entries->setCurrentPage($page);
 
         return $this->render(
@@ -147,6 +149,7 @@ class EntryController extends Controller
             ->getRepository('WallabagCoreBundle:Entry')
             ->findStarredByUser($this->getUser()->getId());
 
+        $entries->setMaxPerPage($this->getUser()->getConfig()->getItemsPerPage());
         $entries->setCurrentPage($page);
 
         return $this->render(
