@@ -1,0 +1,27 @@
+{% extends "WallabagCoreBundle::layout.html.twig" %}
+
+{% block title "Tags" %}
+
+{% block content %}
+    {% block pager %}
+    {% if tags is not empty %}
+        <div class="results">
+            <div class="nb-results">{{ tags.count }} {% trans %}tags{% endtrans %}</div>
+            <div class="pagination">
+                {% for p in range(1, tags.nbPages) %}
+                    <li>
+                        <a href="{{ path(app.request.attributes.get('_route'), {'page': p}) }}" class="{{ currentPage == p ? 'current':''}}" >{{ p }}</a>
+                    </li>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+    {% endblock %}
+
+    {% if tags is empty %}
+        <div class="messages warning"><p>{% trans %}No tags found.{% endtrans %}</p></div>
+    {% else %}
+        {% for tag in tags %}{{tag.title}}
+        {% endfor %}
+    {% endif %}
+{% endblock %}
