@@ -10,7 +10,7 @@ final class Extractor
     public static function extract($url)
     {
         $pageContent = self::getPageContent(new Url(base64_encode($url)));
-        $title = $pageContent['rss']['channel']['item']['title'] ?: 'Untitled';
+        $title = $pageContent['rss']['channel']['item']['title'] ?: parse_url($url, PHP_URL_HOST);
         $body = $pageContent['rss']['channel']['item']['description'];
 
         $content = new Content();
