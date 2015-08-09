@@ -1,0 +1,13 @@
+{% extends "WallabagCoreBundle::layout.html.twig" %}
+
+{% block title "Tags" %}
+
+{% block content %}
+    {% if tags is empty %}
+        <div class="messages warning"><p>{% trans %}No tags found.{% endtrans %}</p></div>
+    {% else %}
+        {% for tag in tags %}
+            {{tag.label}}
+        {% endfor %}
+    {% endif %}
+{% endblock %}
