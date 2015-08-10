@@ -1,17 +1,7 @@
-<form name="entry" method="post" action="{{ path('new_entry')}}">
+{% extends "WallabagCoreBundle::layout.html.twig" %}
 
-        {% if form_errors(form) %}
-            <span class="black-text">{{ form_errors(form) }}</span>
-        {% endif %}
+{% block title %}{% trans %}Save new entry{% endtrans %}{% endblock %}
 
-        {% if form_errors(form.url) %}
-            <span class="black-text">{{ form_errors(form.url) }}</span>
-        {% endif %}
-
-        {{ form_label(form.url) }}
-        {{ form_widget(form.url) }}
-
-    <div class="hidden">{{ form_rest(form) }}</div>
-</form>
-
-{{ form(form) }}
+{% block content %}
+    {{ render(controller( "WallabagCoreBundle:Entry:addEntryForm" )) }}
+{% endblock %}
