@@ -82,7 +82,7 @@
                         <a href="#" data-activates="slide-out" class="nav-panel-menu button-collapse"><i class="mdi-navigation-menu"></i></a>
                         <div class="input-field nav-panel-buttom">
                             <ul>
-                                <li class="bold"><a class="waves-effect" href="{{ path('new_entry') }}" id="nav-btn-add"><i class="mdi-content-add"></i></a></li>
+                                <li class="bold"><a class="waves-effect" href="javascript: void(null);" id="nav-btn-add"><i class="mdi-content-add"></i></a></li>
                                 <li><a class="waves-effect" href="javascript: void(null);" id="nav-btn-search"><i class="mdi-action-search"></i></a>
                             </ul>
                         </div>
@@ -93,13 +93,11 @@
                                 <i class="mdi-navigation-close"></i>
                             </div>
                         </form>
-                        <!--<form name="entry" method="post" action="{{ path('new_entry') }}">
-                            <div class="input-field nav-panel-add" style="display: none">
-                                <input id="add entry_url" name="entry[url]" type="search" required placeholder="{% trans %}Enter your link here{% endtrans %}">
-                                <label for="add"><i class="mdi-content-add"></i></label>
-                                <i class="mdi-navigation-close"></i>
-                            </div>
-                        </form>-->
+                        <div class="input-field nav-panel-add" style="display: none">
+                            {{ render(controller( "WallabagCoreBundle:Entry:addEntry" )) }}
+                            <label for="add"><i class="mdi-content-add"></i></label>
+                            <i class="mdi-navigation-close"></i>
+                        </div>
                     </div>
                 </nav>
             {% endblock %}

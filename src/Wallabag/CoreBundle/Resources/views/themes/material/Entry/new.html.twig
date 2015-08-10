@@ -1,40 +1,17 @@
-{% extends "WallabagCoreBundle::layout.html.twig" %}
+<form name="entry" method="post" action="{{ path('new_entry')}}">
 
-{% block title %}{% trans %}Save new entry{% endtrans %}{% endblock %}
+        {% if form_errors(form) %}
+            <span class="black-text">{{ form_errors(form) }}</span>
+        {% endif %}
 
-{% block content %}
-    <div class="row">
-        <div class="col s12">
-            <div class="card-panel">
+        {% if form_errors(form.url) %}
+            <span class="black-text">{{ form_errors(form.url) }}</span>
+        {% endif %}
 
-                <form name="entry" method="post" action="">
-                    <div class="card-content">
+        {{ form_label(form.url) }}
+        {{ form_widget(form.url) }}
 
-                        {% if form_errors(form) %}
-                            <span class="black-text">{{ form_errors(form) }}</span>
-                        {% endif %}
+    <div class="hidden">{{ form_rest(form) }}</div>
+</form>
 
-                        {% if form_errors(form.url) %}
-                            <span class="black-text">{{ form_errors(form.url) }}</span>
-                        {% endif %}
-
-                        <div class="input-field s12">
-                            {{ form_label(form.url) }}
-                            {{ form_widget(form.url) }}
-                        </div>
-
-                        <button class="btn waves-effect waves-light" type="submit" name="entry[save]">
-                            {% trans %}Save{% endtrans %}
-                            <i class="mdi-content-send right"></i>
-                        </button>
-                    </div>
-                    <div class="hidden">{{ form_rest(form) }}</div>
-                </form>
-
-
-                {{ form(form) }}
-
-            </div>
-        </div>
-    </div>
-{% endblock %}
+{{ form(form) }}
