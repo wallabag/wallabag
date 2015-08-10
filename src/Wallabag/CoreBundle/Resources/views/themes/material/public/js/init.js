@@ -6,12 +6,12 @@ $(document).ready(function(){
         accordion : false
     });
 
-    //$('#nav-btn-add').click(function(){
-    //    $(".nav-panel-buttom").hide(100);
-    //    $(".nav-panel-add").show(100);
-    //    $(".nav-panel-menu").hide(100);
-    //    return false;
-    //});
+    $('#nav-btn-add').click(function(){
+       $(".nav-panel-buttom").hide(100);
+       $(".nav-panel-add").show(100);
+       $(".nav-panel-menu").hide(100);
+       return false;
+    });
     $('#nav-btn-search').click(function(){
         $(".nav-panel-buttom").hide(100);
         $(".nav-panel-search").show(100);
