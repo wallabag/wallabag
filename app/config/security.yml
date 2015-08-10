@@ -37,9 +37,9 @@ security:
 
                 post_only:                      true
 
-                always_use_default_target_path: true
+                always_use_default_target_path: false
                 default_target_path:            /
-                target_path_parameter:          redirect_url
+                target_path_parameter:          _target_path
                 use_referer:                    true
 
                 failure_path:                   null
