@@ -40,10 +40,11 @@
             {% set currentRoute = app.request.attributes.get('_route') %}
 
             <li class="bold {% if currentRoute == 'unread' or currentRoute == 'homepage' %}active{% endif %}"><a class="waves-effect" href="{{ path('unread') }}">{% trans %}unread{% endtrans %}</a></li>
-            <li class="bold {% if currentRoute == 'starred' %}active{% endif %}"><a class="waves-effect" href="{{ path('starred') }}">{% trans %}favorites{% endtrans %}</a></li>
+            <li class="bold {% if currentRoute == 'starred' %}active{% endif %}"><a class="waves-effect" href="{{ path('starred') }}">{% trans %}starred{% endtrans %}</a></li>
             <li class="bold {% if currentRoute == 'archive' %}active{% endif %}"><a class="waves-effect" href="{{ path('archive') }}">{% trans %}archive{% endtrans %}</a></li>
-            <li class="bold border-bottom {% if currentRoute == 'tags' %}active{% endif %}"><a class="waves-effect" href="?view=tags">{% trans %}tags{% endtrans %}</a></li>
+            <li class="bold border-bottom {% if currentRoute == 'tags' %}active{% endif %}"><a class="waves-effect" href="{{ path('tag') }}">{% trans %}tags{% endtrans %}</a></li>
             <li class="bold {% if currentRoute == 'config' %}active{% endif %}"><a class="waves-effect" href="{{ path('config') }}">{% trans %}config{% endtrans %}</a></li>
+            <li class="bold {% if currentRoute == 'howto' %}active{% endif %}"><a class="waves-effect" href="{{ path('howto') }}">{% trans %}howto{% endtrans %}</a></li>
             <li class="bold"><a class="waves-effect" class="icon icon-power" href="{{ path('logout') }}" title="{% trans %}logout{% endtrans %}">{% trans %}logout{% endtrans %}</a></li>
         </ul>
         <div class="nav-wrapper nav-panels">

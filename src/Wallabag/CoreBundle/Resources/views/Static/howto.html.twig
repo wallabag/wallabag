@@ -1,0 +1,28 @@
+{% extends "WallabagCoreBundle::layout.html.twig" %}
+
+{% block title %}{% trans %}Howto{% endtrans %}{% endblock %}
+
+{% block content %}
+    <h2>{% trans %}Howto{% endtrans %}</h2>
+
+    <p>{% trans %}There are several ways to save an article:{% endtrans %}</p>
+    <ul>
+        <li><a href="{{ path('about') }}">{% trans %}Thanks to this form{% endtrans %}</a></li>
+    </ul>
+    <h3>{% trans %}Browser Addons{% endtrans %}</h3>
+    <ul>
+        <li><a href="https://addons.mozilla.org/firefox/addon/wallabag/" target="_blank">{% trans %}Standard Firefox Add-On{% endtrans %}</a></li>
+        <li><a href="https://chrome.google.com/webstore/detail/wallabag/bepdcjnnkglfjehplaogpoonpffbdcdj" target="_blank">{% trans %}Chrome Extension{% endtrans %}</a></li>
+    </ul>
+    <h3>{% trans %}Mobile Apps{% endtrans %}</h3>
+    <ul>
+        <li>Android: <a href="https://f-droid.org/app/fr.gaulupeau.apps.InThePoche" target="_blank">{% trans %}via F-Droid{% endtrans %}</a> {% trans %} or {% endtrans %} <a href="https://play.google.com/store/apps/details?id=fr.gaulupeau.apps.InThePoche" target="_blank">{% trans %}via Google Play{% endtrans %}</a></li>
+        <li>iOS: <a href="https://itunes.apple.com/app/wallabag/id828331015?mt=8" target="_blank">{% trans %}download the application{% endtrans %}</a></li>
+        <li>Windows Phone: <a href="http://www.windowsphone.com/en-US/store/app/wallabag/d5226cf1-f422-4e00-996c-88e9c5233332" target="_blank">{% trans %}download the application{% endtrans %}</a></li>
+    </ul>
+    <h3>{% trans %}Bookmarklet{% endtrans %}</h3>
+    <p>
+    {% trans %}Drag &amp; drop this link to your bookmarks bar:{% endtrans %} {% trans %}bag it!{% endtrans %}
+    </p>
+
+{% endblock %}

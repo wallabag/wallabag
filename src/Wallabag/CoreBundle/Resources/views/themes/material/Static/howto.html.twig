@@ -1,0 +1,53 @@
+{% extends "WallabagCoreBundle::layout.html.twig" %}
+
+{% block title %}{% trans %}Howto{% endtrans %}{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col s12">
+            <div class="card-panel settings">
+
+                <div class="row">
+                    <div class="div_tabs col s12">
+                        <ul class="tabs">
+                        <li class="tab col s3"><a class="active" href="#set1">{% trans %}Form{% endtrans %}</a></li>
+                        <li class="tab col s3"><a href="#set2">{% trans %}Browser addons{% endtrans %}</a></li>
+                        <li class="tab col s3"><a href="#set3">{% trans %}Mobile apps{% endtrans %}</a></li>
+                        <li class="tab col s3"><a href="#set4">{% trans %}Bookmarklet{% endtrans %}</a></li>
+                        </ul>
+                    </div>
+
+
+                    <div id="set1" class="col s12">
+                        <a href="{{ path('about') }}">{% trans %}Thanks to this form{% endtrans %}</a>
+                    </div>
+
+
+                    <div id="set2" class="col s12">
+                        <ul>
+                            <li><a href="https://addons.mozilla.org/firefox/addon/wallabag/" target="_blank">{% trans %}Standard Firefox Add-On{% endtrans %}</a></li>
+                            <li><a href="https://chrome.google.com/webstore/detail/wallabag/bepdcjnnkglfjehplaogpoonpffbdcdj" target="_blank">{% trans %}Chrome Extension{% endtrans %}</a></li>
+                        </ul>
+                    </div>
+
+
+                    <div id="set3" class="col s12">
+                        <ul>
+                            <li>Android: <a href="https://f-droid.org/app/fr.gaulupeau.apps.InThePoche" target="_blank">{% trans %}via F-Droid{% endtrans %}</a> {% trans %} or {% endtrans %} <a href="https://play.google.com/store/apps/details?id=fr.gaulupeau.apps.InThePoche" target="_blank">{% trans %}via Google Play{% endtrans %}</a></li>
+                            <li>iOS: <a href="https://itunes.apple.com/app/wallabag/id828331015?mt=8" target="_blank">{% trans %}download the application{% endtrans %}</a></li>
+                            <li>Windows Phone: <a href="http://www.windowsphone.com/en-US/store/app/wallabag/d5226cf1-f422-4e00-996c-88e9c5233332" target="_blank">{% trans %}download the application{% endtrans %}</a></li>
+                        </ul>
+                    </div>
+
+
+                    <div id="set4" class="col s12">
+                        {% trans %}Drag &amp; drop this link to your bookmarks bar:{% endtrans %} {% trans %}bag it!{% endtrans %}
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
