@@ -69,7 +69,7 @@ nav, main, footer {
 }
 
 .nav-panels {
-    overflov: hidden;
+    overflow: hidden;
 }
 
 .nav-panel-buttom li {
@@ -78,6 +78,22 @@ nav, main, footer {
 
 .nav-panel-buttom {
     float: right;
+}
+
+.nav-panels {
+    transition: background 0.2s ease;
+}
+
+.nav-panel-add .mdi-content-add,
+.nav-panel-search .mdi-action-search,
+.nav-panels .mdi-navigation-close {
+    color: #444 !important;
+}
+
+.nav-panels .action {
+    padding-left: 0.75rem;
+    font-size: 2.1rem;
+    white-space: nowrap;
 }
 
 /* ==========================================================================
@@ -129,7 +145,8 @@ main ul.row {
 }
 
 .data .card .card-content {
-    min-height: 25em;
+    height: 22em;
+    overflow: hidden;
 }
 
 .card .card-content .card-title {
