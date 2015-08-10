@@ -3,7 +3,6 @@
 namespace Wallabag\CoreBundle\Tests\Controller;
 
 use Wallabag\CoreBundle\Tests\WallabagCoreTestCase;
-use Doctrine\ORM\AbstractQuery;
 
 class StaticControllerTest extends WallabagCoreTestCase
 {
