@@ -21,6 +21,7 @@ $(document).ready(function(){
         $(".nav-panels .action").hide(100);
         $(".nav-panel-menu").addClass('hidden');
         $(".nav-panels").css('background', 'white');
+        $("#searchfield").focus();
         return false;
     });
     $('.mdi-navigation-close').click(function(){
