@@ -47,7 +47,7 @@
                         {{ nb_results }} {% trans "articles" %}
                     {% endif %}
                     {% if view == 'home' or view == 'fav' or view == 'archive' %}
-                    <a href="?action=random&amp;view={{ view }}" class="icon icon-random"><span> {% trans "random" %}</span></a>{% endif %}
+                    <a href="?action=random&amp;view={{ view }}" title="{% trans "random" %}" class="icon icon-random"><span> {% trans "random" %}</span></a>{% endif %}
                     </div>
                         {{ page_links | raw }}
                 </div>
