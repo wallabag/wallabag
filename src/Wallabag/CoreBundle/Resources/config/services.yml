@@ -1,9 +1,4 @@
 services:
-    wallabag_core.twig.extension:
-        class: Wallabag\CoreBundle\Twig\Extension\WallabagExtension
-        tags:
-            - { name: twig.extension }
-
     wallabag_core.helper.detect_active_theme:
         class: Wallabag\CoreBundle\Helper\DetectActiveTheme
         arguments:
