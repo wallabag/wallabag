@@ -1,3 +1,16 @@
+function init_filters() {
+    // no display if filters not aviable
+    if ($("div").is("#filters")) {
+        $('#button_filters').show();
+        $('.button-collapse-right').sideNav({ edge: 'right' });
+        $('#filters').css({ "left": "auto" });
+        $('#clean_form_filters').click(function(){
+            $('#filters input').val('');
+            return false;
+        });
+    }
+}
+
 $(document).ready(function(){
     // sideNav
     $('.button-collapse').sideNav();
@@ -5,6 +18,7 @@ $(document).ready(function(){
     $('.collapsible').collapsible({
         accordion : false
     });
+    init_filters();
 
     $('#nav-btn-add').click(function(){
        $(".nav-panel-buttom").hide(100);
