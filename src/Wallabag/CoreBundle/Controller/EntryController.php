@@ -15,11 +15,11 @@ class EntryController extends Controller
     /**
      * @param Request $request
      *
-     * @Route("/new", name="new_entry")
+     * @Route("/new-entry", name="new_entry")
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function addEntryAction(Request $request)
+    public function addEntryFormAction(Request $request)
     {
         $entry = new Entry($this->getUser());
 
@@ -45,9 +45,21 @@ class EntryController extends Controller
             return $this->redirect($this->generateUrl('homepage'));
         }
 
-        return $this->render('WallabagCoreBundle:Entry:new.html.twig', array(
+        return $this->render('WallabagCoreBundle:Entry:new_form.html.twig', array(
             'form' => $form->createView(),
         ));
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @Route("/new", name="new")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function addEntryAction(Request $request)
+    {
+        return $this->render('WallabagCoreBundle:Entry:new.html.twig');
     }
 
     /**
