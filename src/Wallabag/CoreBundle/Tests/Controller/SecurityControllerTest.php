@@ -40,6 +40,25 @@ class SecurityControllerTest extends WallabagCoreTestCase
         $this->assertContains('Bad credentials', $client->getResponse()->getContent());
     }
 
+    public function testRedirectionAfterLogin()
+    {
+        $client = $this->getClient();
+        $client->followRedirects();
+
+        $crawler = $client->request('GET', '/config');
+
+        $form = $crawler->filter('button[type=submit]')->form();
+
+        $data = array(
+            '_username' => 'admin',
+            '_password' => 'mypassword',
+        );
+
+        $client->submit($form, $data);
+
+        $this->assertContains('RSS', $client->getResponse()->getContent());
+    }
+
     public function testForgotPassword()
     {
         $client = $this->getClient();
