@@ -3,5 +3,5 @@
 {% block title %}{% trans %}Save new entry{% endtrans %}{% endblock %}
 
 {% block content %}
-    {{ form(form) }}
+    {{ render(controller( "WallabagCoreBundle:Entry:addEntryForm" )) }}
 {% endblock %}

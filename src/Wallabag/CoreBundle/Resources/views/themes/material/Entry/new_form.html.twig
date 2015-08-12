@@ -1,0 +1,14 @@
+<form name="entry" method="post" action="{{ path('new_entry')}}">
+
+        {% if form_errors(form) %}
+            <span class="black-text">{{ form_errors(form) }}</span>
+        {% endif %}
+
+        {% if form_errors(form.url) %}
+            <span class="black-text">{{ form_errors(form.url) }}</span>
+        {% endif %}
+
+        {{ form_widget(form.url) }}
+
+    <div class="hidden">{{ form_rest(form) }}</div>
+</form>
