@@ -1,14 +1,10 @@
+{% set placeholder = 'Enter your link here'|trans %}
 <form name="entry" method="post" action="{{ path('new_entry')}}">
+    <div class="input-field nav-panel-add" style="display: none">
+        {{ form_widget(form.url, { 'attr': {'placeholder': placeholder} }) }}
 
-        {% if form_errors(form) %}
-            <span class="black-text">{{ form_errors(form) }}</span>
-        {% endif %}
-
-        {% if form_errors(form.url) %}
-            <span class="black-text">{{ form_errors(form.url) }}</span>
-        {% endif %}
-
-        {{ form_widget(form.url) }}
-
-    <div class="hidden">{{ form_rest(form) }}</div>
+        <label for="add"><i class="mdi-content-add"></i></label>
+        <i class="mdi-navigation-close"></i>
+        <div class="hidden">{{ form_rest(form) }}</div>
+    </div>
 </form>

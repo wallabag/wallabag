@@ -69,18 +69,7 @@
                     <i class="mdi-navigation-close"></i>
                 </div>
             </form>
-            <div class="input-field nav-panel-add" style="display: none">
-                {{ render(controller( "WallabagCoreBundle:Entry:addEntryForm" )) }}
-                <label for="add"><i class="mdi-content-add"></i></label>
-                <i class="mdi-navigation-close"></i>
-            </div>
-            <!--<form name="entry" method="post" action="{{ path('new_entry') }}">
-                <div class="input-field nav-panel-add" style="display: none">
-                    <input id="add entry_url" name="entry[url]" type="search" required placeholder="{% trans %}Enter your link here{% endtrans %}">
-                    <label for="add"><i class="mdi-content-add"></i></label>
-                    <i class="mdi-navigation-close"></i>
-                </div>
-            </form>-->
+            {{ render(controller( "WallabagCoreBundle:Entry:addEntryForm" )) }}
         </div>
     </nav>
 {% endblock %}
