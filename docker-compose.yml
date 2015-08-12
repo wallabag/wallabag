@@ -1,0 +1,14 @@
+---
+mysql:
+  image: mysql
+  environment:
+    - MYSQL_ROOT_PASSWORD=admin123
+    - MYSQL_USER=wallauser
+    - MYSQL_PASSWORD=wallapass
+    - MYSQL_DATABASE=wallabag
+web:
+  build: "."
+  links:
+    - "mysql:mysql"
+  ports:
+    - "8000:80"
