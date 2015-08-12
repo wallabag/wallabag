@@ -60,6 +60,10 @@ nav, main, footer {
    1 = Nav
    ========================================================================== */
 
+nav input {
+    color: #aaa;
+}
+
 .nav-wrapper .button-collapse {
     padding: 0px 15px;
 }
@@ -94,6 +98,34 @@ nav, main, footer {
     padding-left: 0.75rem;
     font-size: 2.1rem;
     white-space: nowrap;
+}
+
+.input-field input {
+    display: block;
+    line-height: inherit;
+    padding-left: 4rem !important;
+    width: calc(100% - 8rem);
+}
+
+.input-field input:focus {
+    background-color: #fff;
+    border: 0;
+    box-shadow: none;
+    color: #444;
+}
+
+.input-field.nav-panel-add label {
+    left: 1rem;
+}
+
+.input-field.nav-panel-add .mdi-navigation-close {
+    position: absolute;
+    top: 0;
+    right: 1rem;
+    color: transparent;
+    cursor: pointer;
+    font-size: 2rem;
+    transition: .3s color;
 }
 
 /* ==========================================================================
