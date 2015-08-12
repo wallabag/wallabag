@@ -51,6 +51,12 @@ security:
                 csrf_parameter:                 _csrf_token
                 intention:                      authenticate
 
+            remember_me:
+                key:      "%secret%"
+                lifetime: 31536000
+                path:     /
+                domain:   ~
+
             logout:
                 path:   /logout
                 target: /
