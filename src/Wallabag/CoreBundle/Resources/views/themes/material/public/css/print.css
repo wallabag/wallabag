@@ -25,7 +25,7 @@ body > footer,
 div.tools,
 header div,
 .messages,
-.entrie + .results {
+.entry + .results {
     display: none !important;
 }
 

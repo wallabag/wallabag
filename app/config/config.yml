@@ -47,7 +47,9 @@ twig:
         version: %app.version%
         paypal_url: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9UBA65LG3FX9Y&lc=gb"
         flattr_url: "https://flattr.com/thing/1265480"
-
+    form:
+        resources:
+            - LexikFormFilterBundle:Form:form_div_layout.html.twig
 # Assetic Configuration
 assetic:
     debug:          "%kernel.debug%"

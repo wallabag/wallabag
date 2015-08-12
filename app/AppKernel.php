@@ -25,6 +25,7 @@ class AppKernel extends Kernel
             new Wallabag\CoreBundle\WallabagCoreBundle(),
             new Wallabag\ApiBundle\WallabagApiBundle(),
             new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
+            new Lexik\Bundle\FormFilterBundle\LexikFormFilterBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

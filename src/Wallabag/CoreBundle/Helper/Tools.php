@@ -118,4 +118,16 @@ final class Tools
 
         return str_replace('+', '', $token);
     }
+
+    /**
+     * For a given text, we calculate reading time for an article.
+     *
+     * @param $text
+     *
+     * @return float
+     */
+    public static function getReadingTime($text)
+    {
+        return floor(str_word_count(strip_tags($text)) / 200);
+    }
 }

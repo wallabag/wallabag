@@ -83,7 +83,8 @@
         "wallabag/php-readability": "dev-master",
         "wallabag/phpMobi": "dev-master",
         "wallabag/Fivefilters_Libraries": "dev-master",
-        "pagerfanta/pagerfanta": "~1.0.3"
+        "pagerfanta/pagerfanta": "~1.0.3",
+        "lexik/form-filter-bundle": "~4.0"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "~2.2.0",

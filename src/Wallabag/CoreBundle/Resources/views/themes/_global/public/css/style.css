@@ -121,7 +121,7 @@ a:visited {
     font-size: 1.3em;
 }
 
-#main #content .entrie {
+#main #content .entry {
     margin-top: 15px;
     padding-bottom: 15px;
     border-bottom: 1px dashed #222;
@@ -129,19 +129,19 @@ a:visited {
 }
 
 /* First entry */
-#main #content .results + .entrie {
+#main #content .results + .entry {
     clear: both;
     margin-top: 0;
 }
 
-#main .entrie .tools {
+#main .entry .tools {
     float: right;
     text-align: right;
     list-style-type: none;
     opacity: 0.5;
 }
 
-#main .entrie .tools .tool span {
+#main .entry .tools .tool span {
     display: inline-block;
     width: 16px;
     height: 16px;
