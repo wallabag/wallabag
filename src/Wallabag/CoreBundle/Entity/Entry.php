@@ -265,6 +265,8 @@ class Entry
     public function setContent($content)
     {
         $this->content = $content;
+        $headers = get_headers($this->url, 1);
+        $this->mimetype = $headers['Content-Type'];
         $this->readingTime = Tools::getReadingTime($content);
 
         return $this;
