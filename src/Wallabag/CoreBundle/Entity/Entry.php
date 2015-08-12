@@ -265,6 +265,8 @@ class Entry
     public function setContent($content)
     {
         $this->content = $content;
+        $headers = get_headers($this->url, 1);
+        $this->mimetype = $headers['Content-Type'];
         $this->readingTime = Tools::getReadingTime($content);
         $this->domainName = parse_url($this->url, PHP_URL_HOST);
 
