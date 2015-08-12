@@ -23,19 +23,23 @@
                             <span class="black-text"><p>{{ flashMessage }}</p></span>
                         {% endfor %}
 
-                        <div class="input-field s12">
-                            <label for="username">{% trans %}Username{% endtrans %}</label>
-                            <input type="text" id="username" name="_username" value="{{ last_username }}" />
-                        </div>
+                        <div class="row">
 
-                        <div class="input-field s12">
-                            <label for="password">{% trans %}Password{% endtrans %}</label>
-                            <input type="password" id="password" name="_password" />
-                        </div>
+                            <div class="input-field col s12">
+                                <label for="username">{% trans %}Username{% endtrans %}</label>
+                                <input type="text" id="username" name="_username" value="{{ last_username }}" />
+                            </div>
 
-                        <div class="input-field s12">
-                            <input type="checkbox" id="remember_me" name="_remember_me" checked />
-                            <label for="remember_me">{% trans %}Keep me logged in{% endtrans %}</label>
+                            <div class="input-field col s12">
+                                <label for="password">{% trans %}Password{% endtrans %}</label>
+                                <input type="password" id="password" name="_password" />
+                            </div>
+
+                            <div class="input-field col s12">
+                                <input type="checkbox" id="remember_me" name="_remember_me" checked />
+                                <label for="remember_me">{% trans %}Keep me logged in{% endtrans %}</label>
+                            </div>
+
                         </div>
 
                     </div>
