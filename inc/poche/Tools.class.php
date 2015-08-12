@@ -141,7 +141,7 @@ final class Tools
     public static function getFile($url)
     {
         $timeout = 15;
-        $useragent = "Mozilla/5.0 (Windows NT 5.1; rv:18.0) Gecko/20100101 Firefox/18.0";
+        $useragent = "Mozilla/5.0 (Windows NT 6.3; rv:36.0) Gecko/20100101 Firefox/36.0";
 
         if (in_array ('curl', get_loaded_extensions())) {
             # Fetch feed from URL
