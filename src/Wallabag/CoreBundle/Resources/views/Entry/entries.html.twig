@@ -8,7 +8,7 @@
         <div class="results">
             <div class="nb-results">{{ entries.count }} {% trans %}entries{% endtrans %}</div>
             <div class="pagination">
-                {% for p in range(1, entries.nbPages) %}
+                {% for p in range(1, entries.nbPages) if entries.nbPages > 1 %}
                     <li>
                         <a href="{{ path(app.request.attributes.get('_route'), {'page': p}) }}" class="{{ currentPage == p ? 'current':''}}" >{{ p }}</a>
                     </li>
