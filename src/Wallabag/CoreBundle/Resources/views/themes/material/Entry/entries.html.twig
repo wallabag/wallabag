@@ -76,12 +76,12 @@
                 </div>
 
                 <div class="input-field col s6">
-                    <input id="entry_filter_readingTime_left_number" name="entry_filter[readingTime][left_number]" type="number">
+                    {{ form_widget(form.readingTime.left_number, {'type': 'number'}) }}
                     <label for="entry_filter_readingTime_left_number">{% trans %}from{% endtrans %}</label>
                 </div>
 
                 <div class="input-field col s6">
-                    <input id="entry_filter_readingTime_right_number" name="entry_filter[readingTime][right_number]" type="number">
+                    {{ form_widget(form.readingTime.right_number, {'type': 'number'}) }}
                     <label for="entry_filter_readingTime_right_number">{% trans %}to{% endtrans %}</label>
                 </div>
 
