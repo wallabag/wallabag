@@ -20,7 +20,7 @@
             <div class="nb-results left">{{ entries.count }} {% trans %}entries{% endtrans %}</div>
             <div class="left"><form>{{ form_rest(form) }}<button class="btn waves-effect waves-light" type="submit" id="submit-filter" value="filter">Filter</button></form></div>
             <ul class="pagination right">
-                {% for p in range(1, entries.nbPages) %}
+                {% for p in range(1, entries.nbPages) if entries.nbPages > 1 %}
                     <li class="{{ currentPage == p ? 'active':'waves-effect'}}">
                         <a href="{{ path(app.request.attributes.get('_route'), {'page': p}) }}"  >{{ p }}</a>
                     </li>
