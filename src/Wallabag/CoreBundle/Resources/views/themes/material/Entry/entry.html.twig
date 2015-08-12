@@ -1,6 +1,6 @@
 {% extends "WallabagCoreBundle::layout.html.twig" %}
 
-{% block title %}{{ entry.title|raw }} ({{ entry.url | e | domainName }}){% endblock %}
+{% block title %}{{ entry.title|raw }} ({{ entry.domainName }}){% endblock %}
 
 {% block menu %}
     <nav class="hide-on-large-only">
@@ -123,7 +123,7 @@ main {
     <div id="article">
         <header class="mbm">
             <h1>{{ entry.title|raw }} <a href="{{ path('edit', { 'id': entry.id }) }}" title="{% trans %}Edit title{% endtrans %}">✎</a></h1>
-            <a href="{{ entry.url|e }}" target="_blank" title="{% trans %}original{% endtrans %} : {{ entry.title|e }}" class="tool link"><span>{{ entry.url | e | domainName }}</span></a>
+            <a href="{{ entry.url|e }}" target="_blank" title="{% trans %}original{% endtrans %} : {{ entry.title|e }}" class="tool link"><span>{{ entry.domainName }}</span></a>
         </header>
         <aside class="tags">
             tags: {% for tag in entry.tags %}<a href="./?view=tag&amp;id={{ tag.id }}">{{ tag.label }}</a> {% endfor %}<a href="./?view=edit-tags&amp;id={{ entry.id }}" title="{% trans %}Edit tags{% endtrans %}">✎</a>
