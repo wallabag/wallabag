@@ -50,11 +50,8 @@
         <div class="nav-wrapper nav-panels">
             <a href="#" data-activates="slide-out" class="nav-panel-menu button-collapse"><i class="mdi-navigation-menu"></i></a>
             <div class="left action">
-                {% if currentRoute == 'unread' or currentRoute == 'homepage' %}{% trans %}Unread{% endtrans %}{% endif %}
-                {% if currentRoute == 'starred' %}{% trans %}Starred{% endtrans %}{% endif %}
-                {% if currentRoute == 'archive' %}{% trans %}Archive{% endtrans %}{% endif %}
-                {% if currentRoute == 'tags' %}{% trans %}Tags{% endtrans %}{% endif %}
-                {% if currentRoute == 'config' %}{% trans %}Config{% endtrans %}{% endif %}
+                {% block title %}
+                {% endblock %}
             </div>
             <div class="input-field nav-panel-buttom">
                 <ul>
@@ -105,15 +102,17 @@
                 <div class="col l4 offset-l2 s12">
                     <h5 class="white-text">{% trans %}Social{% endtrans %}</h5>
                     <ul>
-                        <li><a target="_blank" class="grey-text text-lighten-3" href="https://twitter.com/wallabagapp">Twitter</a></li>
+                        <li><a target="_blank" class="grey-text text-lighten-3" href="https://twitter.com/wallabagapp">twitter</a></li>
+                        <li><a target="_blank" class="grey-text text-lighten-3" href="https://framasphere.org/u/wallabag">diaspora*</a></li>
                         <li><a target="_blank" class="grey-text text-lighten-3" href="https://plus.google.com/+WallabagOrg/posts">Google+</a></li>
+                        <li><a target="_blank" class="grey-text text-lighten-3" href="https://facebook.com/Wallabag">Facebook</a></li>
                     </ul>
                 </div>
             </div>
         </div>
         <div class="footer-copyright">
             <div class="container">
-                <p>{% trans %}powered by{% endtrans %} <a target="_blank" href="http://wallabag.org" class="grey-text text-lighten-4">wallabag</a></p>
+                <p>{% trans %}powered by{% endtrans %} <a target="_blank" href="https://wallabag.org" class="grey-text text-lighten-4">wallabag</a></p>
                 <a class="grey-text text-lighten-4 right" href="{{ path('about') }}">{% trans %}about{% endtrans %}</a>
             </div>
         </div>
