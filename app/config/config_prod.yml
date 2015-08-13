@@ -17,11 +17,6 @@ monolog:
             type:         fingers_crossed
             action_level: error
             handler:      nested
-        wsse:
-            type: stream
-            path: %kernel.logs_dir%/%kernel.environment%.wsse.log
-            level: error
-            channels: [wsse]
         nested:
             type:  stream
             path:  "%kernel.logs_dir%/%kernel.environment%.log"

@@ -139,7 +139,7 @@ liip_theme:
     themes:
         - baggy
         - material
-    autodetect_theme: wallabag_core.helper.detect_active_theme
+    # autodetect_theme: wallabag_core.helper.detect_active_theme
 
     path_patterns:
         # app_resource:
@@ -150,3 +150,17 @@ liip_theme:
         # bundle_resource_dir:
         #     - %%dir%%/views/themes/%%current_theme%%/%%bundle_name%%/%%template%%
         #     - %%dir%%/views/%%bundle_name%%/%%override_path%%
+
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: Wallabag\CoreBundle\Entity\User
+
+fos_oauth_server:
+    db_driver: orm
+    client_class:        Wallabag\CoreBundle\Entity\Client
+    access_token_class:  Wallabag\CoreBundle\Entity\AccessToken
+    refresh_token_class: Wallabag\CoreBundle\Entity\RefreshToken
+    auth_code_class:     Wallabag\CoreBundle\Entity\AuthCode
+    service:
+        user_provider: fos_user.user_manager

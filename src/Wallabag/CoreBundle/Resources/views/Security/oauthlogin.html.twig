@@ -1,0 +1,21 @@
+<div class="form">
+      <form id="login" class="vertical" action="" method="post">
+          <div class="form_title">
+              OAuth Authorization
+          </div>
+          {% if(error) %}
+          <div class='form_error'></div>
+          {% endif %}
+          <div class="form_item">
+              <div class="form_label"><label for="username">Username</label>:</div>
+              <div class="form_widget"><input type="text" id="username" name="_username" /></div>
+          </div>
+          <div class="form_item">
+              <div class="form_label"><label for="password">Password</label>:</div>
+              <div class="form_widget"><input type="password" id="password" name="_password" /></div>
+          </div>
+          <div class="form_button">
+              <input type="submit" id="_submit" name="_submit" value="Log In" />
+          </div>
+      </form>
+  </div>
