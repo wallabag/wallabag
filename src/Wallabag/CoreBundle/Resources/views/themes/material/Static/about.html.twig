@@ -6,51 +6,52 @@
 
     <div class="row">
         <div class="col s12">
-            <div class="card-panel">
+            <div class="card-panel settings">
 
-                <h2>{% trans %}About wallabag{% endtrans %}</h2>
+                <div class="row">
+                    <div class="div_tabs col s12">
+                        <ul class="tabs">
+                        <li class="tab col s3"><a class="active" href="#set1">{% trans %}Who is behind wallabag{% endtrans %}</a></li>
+                        <li class="tab col s3"><a href="#set2">{% trans %}Getting help{% endtrans %}</a></li>
+                        <li class="tab col s3"><a href="#set3">{% trans %}Helping wallabag{% endtrans %}</a></li>
+                        </ul>
+                    </div>
 
-                <dl>
-                    <dt>{% trans %}Project website{% endtrans %}</dt>
-                    <dd><a href="https://www.wallabag.org">https://www.wallabag.org</a></dd>
+                    <div id="set1" class="col s12">
+                        <dt>{% trans %}Developed by{% endtrans %}</dt>
+                        <dd><a href="mailto:nicolas@loeuillet.org">Nicolas Lœuillet</a> — <a href="http://cdetc.fr">{% trans %}website{% endtrans %}</a></dd>
+                        <dd>Thomas Citharel — <a href="https://tcit.fr">{% trans %}website{% endtrans %}</a></dd>
+                        <dd>Jérémy Besnoit — <a href="http://wildtrip.net">{% trans %}website{% endtrans %}</a></dd>
+                        <dt>{% trans %}And many others contributors ♥{% endtrans %} <a href="https://github.com/wallabag/wallabag/graphs/contributors">{% trans %}on Github{% endtrans %}</a></dt>
+                        <dt>{% trans %}Project website{% endtrans %}</dt>
+                        <dd><a href="https://www.wallabag.org">https://www.wallabag.org</a></dd>
+                        <dt>{% trans %}License{% endtrans %}: <a href="http://en.wikipedia.org/wiki/MIT_License">MIT</a></dt>
+                        <dt>{% trans %}Version{% endtrans %}: {{ version }}</dt>
+                    </div>
 
-                    <dt>{% trans %}Main developer{% endtrans %}</dt>
-                    <dd><a href="mailto:nicolas@loeuillet.org">Nicolas Lœuillet</a> — <a href="http://cdetc.fr">{% trans %}website{% endtrans %}</a></dd>
+                    <div id="set2" class="col s12">
+                        <dl>
+                            <dt>{% trans %}Documentation{% endtrans %}</dt>
+                            <dd><a href="https://doc.wallabag.org/en">english</a></dd>
+                            <dd><a href="https://doc.wallabag.org/fr">français</a></dd>
+                            <dd><a href="https://doc.wallabag.org/de">deutsch</a></dd>
 
-                    <dt>{% trans %}Contributors ♥:{% endtrans %}</dt>
-                    <dd><a href="https://github.com/wallabag/wallabag/graphs/contributors">{% trans %}on Github{% endtrans %}</a></dd>
+                            <dt>{% trans %}Bug reports{% endtrans %}</dt>
+                            <dd><a href="https://support.wallabag.org">{% trans %}On our support website{% endtrans %}</a> {% trans %}or{% endtrans %} <a href="https://github.com/wallabag/wallabag/issues">{% trans %}on Github{% endtrans %}</a></dd>
+                        </dl>
+                    </div>
 
-                    <dt>{% trans %}Bug reports{% endtrans %}</dt>
-                    <dd><a href="https://support.wallabag.org">{% trans %}On our support website{% endtrans %}</a> {% trans %}or{% endtrans %} <a href="https://github.com/wallabag/wallabag/issues">{% trans %}on Github{% endtrans %}</a></dd>
+                    <div id="set3" class="col s12">
+                        <dl>
+                            <dt>{% trans %}wallabag is free and opensource. You can help us:{% endtrans %}</dt>
+                            <dd>by contributing to the project: <a href="https://github.com/wallabag/wallabag/issues/1254">an issue lists all our needs</a></dd>
+                            <dd><a href="{{ paypal_url }}">{% trans %}via Paypal{% endtrans %}</a></dd>
 
-                    <dt>{% trans %}License{% endtrans %}</dt>
-                    <dd><a href="http://en.wikipedia.org/wiki/MIT_License">MIT</a></dd>
+                            <dd><a href="{{ flattr_url }}">{% trans %}via Flattr{% endtrans %}</a></dd>
+                        </dl>
+                    </div>
 
-                    <dt>{% trans %}Version{% endtrans %}</dt>
-                    <dd>{{ version }}</dd>
-                </dl>
-
-                <p>{% trans %}wallabag is a read-it-later application: you can save a web page by keeping only content. Elements like ads or menus are deleted.{% endtrans %}</p>
-
-                <h2>{% trans %}Getting help{% endtrans %}</h2>
-
-                <dl>
-                    <dt>{% trans %}Documentation{% endtrans %}</dt>
-                    <dd><a href="https://doc.wallabag.org/">Online documentation</a></dd>
-
-                    <dt>{% trans %}Support{% endtrans %}</dt>
-                    <dd><a href="http://support.wallabag.org/">http://support.wallabag.org/</a></dd>
-                </dl>
-
-                <h2>{% trans %}Helping wallabag{% endtrans %}</h2>
-
-                <p>{% trans %}wallabag is free and opensource. You can help us:{% endtrans %}</p>
-
-                <dl>
-                    <dt><a href="{{ paypal_url }}">{% trans %}via Paypal{% endtrans %}</a></dt>
-
-                    <dt><a href="{{ flattr_url }}">{% trans %}via Flattr{% endtrans %}</a></dt>
-                </dl>
+                </div>
 
             </div>
         </div>
