@@ -36,3 +36,8 @@
 # Data for wallabag
 data/assets/*
 data/db/wallabag*.sqlite
+
+# Capistrano
+/config/deploy.rb
+/config/deploy/production.rb
+/config/deploy/staging.rb
