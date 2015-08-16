@@ -48,6 +48,16 @@ nav, main, footer {
     margin-bottom: 0;
 }
 
+.pagination li {
+    padding: 0;
+}
+
+.pagination a {
+    padding: 0px 10px;
+    height: 30px;
+    display: block;
+}
+
 .page-footer .footer-copyright p {
     display: inline;
 }
@@ -175,6 +185,11 @@ nav input {
 #filters button {
     padding: 0px;
     width: 100%;
+}
+
+.side-nav.fixed.right-aligned {
+    right: -250px;
+    left: auto !important;
 }
 
 /* ==========================================================================
