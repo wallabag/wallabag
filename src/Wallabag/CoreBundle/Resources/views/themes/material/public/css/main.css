@@ -260,6 +260,15 @@ main ul.row {
     width: 240px !important;
 }
 
+.reader-mode .collapsible-body {
+    height: 0;
+    overflow: hidden;
+}
+
+.reader-mode:hover .collapsible-body {
+    height: auto;
+}
+
 .reader-mode span {
     opacity: 0;
     transition: opacity 0.2s ease;
