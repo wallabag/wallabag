@@ -17,7 +17,7 @@ tools:
     php_pdepend: true
     sensiolabs_security_checker: true
     external_code_coverage:
-        timeout: 1800
+        timeout: 3600
     php_code_coverage: true
     php_sim: false
     php_cpd: false
