@@ -17,7 +17,7 @@
     {% block pager %}
     {% if entries is not empty %}
         <div class="results clearfix">
-            <div class="nb-results left">{{ entries.count }} {% trans %}entries{% endtrans %}</div>
+            <div class="nb-results left">{{ entries.count }} {% trans %}entrie{% endtrans %}{% if entries.nbPages > 1 %}s{% endif %}</div>
             <ul class="pagination right">
                 {% for p in range(1, entries.nbPages) if entries.nbPages > 1 %}
                     <li class="{{ currentPage == p ? 'active':'waves-effect'}}">
@@ -85,14 +85,6 @@
 
                 <div class="col s12">
                     <label>{% trans %}Create at{% endtrans %}</label>
-                </div>
-                <div class="input-field col s6">
-                    {{ form_widget(form.createdAt.left_date, {'type': 'date', 'attr': {'class': 'datepicker', 'data-value': form.createdAt.left_date.vars.value} }) }}
-                    <label for="entry_filter_createdAt_left_date" class="active">{% trans %}from{% endtrans %}</label>
-                </div>
-                <div class="input-field col s6">
-                    {{ form_widget(form.createdAt.right_date, {'type': 'date', 'attr': {'class': 'datepicker', 'data-value': form.createdAt.right_date.vars.value} }) }}
-                    <label for="entry_filter_createdAt_right_date" class="active">{% trans %}to{% endtrans %}</label>
                 </div>
 
                 <div class="col s6">
