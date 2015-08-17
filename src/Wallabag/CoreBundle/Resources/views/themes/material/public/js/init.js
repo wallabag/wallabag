@@ -3,7 +3,7 @@ function init_filters() {
     if ($("div").is("#filters")) {
         $('#button_filters').show();
         $('.button-collapse-right').sideNav({ edge: 'right' });
-        $('#clean_form_filters').on('click', function(){
+        $('#clear_form_filters').on('click', function(){
             $('#filters input').val('');
             return false;
         });
