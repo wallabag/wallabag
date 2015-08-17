@@ -40,6 +40,14 @@
             <div class="collapsible-body"></div>
         </li>
 
+        <li class="bold border-bottom hide-on-med-and-down">
+            <a class="waves-effect collapsible-header" href="{{ entry.url|e }}">
+                <i class="mdi-content-link small"></i>
+                <span>{% trans %}original article{% endtrans %}</span>
+            </a>
+            <div class="collapsible-body"></div>
+        </li>
+
         <li class="bold hide-on-med-and-down">
             <a class="waves-effect collapsible-header" title="{% trans %}Mark as read{% endtrans %}" href="{{ path('archive_entry', { 'id': entry.id }) }}" id="markAsRead">
                 <i class="{% if entry.isArchived == 0 %}mdi-action-done{% else %}mdi-content-redo{% endif %} small"></i>
