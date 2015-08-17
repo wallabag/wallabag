@@ -17,6 +17,13 @@ $(document).ready(function(){
     $('.collapsible').collapsible({
         accordion : false
     });
+    $('.datepicker').pickadate({
+        selectMonths: true,
+        selectYears: 15,
+        formatSubmit: 'dd/mm/yyyy',
+        hiddenName: true,
+        format: 'dd/mm/yyyy',
+    });
     init_filters();
 
     $('#nav-btn-add').on('click', function(){
