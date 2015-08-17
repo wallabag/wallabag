@@ -48,6 +48,16 @@ nav, main, footer {
     margin-bottom: 0;
 }
 
+.pagination li {
+    padding: 0;
+}
+
+.pagination a {
+    padding: 0px 10px;
+    height: 30px;
+    display: block;
+}
+
 .page-footer .footer-copyright p {
     display: inline;
 }
@@ -56,9 +66,17 @@ nav, main, footer {
     display: none;
 }
 
+.picker__date-display {
+    display: none;
+}
+
 /* ==========================================================================
    1 = Nav
    ========================================================================== */
+
+nav input {
+    color: #aaa;
+}
 
 .nav-wrapper .button-collapse {
     padding: 0px 15px;
@@ -96,6 +114,38 @@ nav, main, footer {
     white-space: nowrap;
 }
 
+.nav-panels .input-field input {
+    display: block;
+    line-height: inherit;
+    padding-left: 4rem !important;
+    width: calc(100% - 8rem);
+}
+
+.nav-panels .input-field input:focus {
+    background-color: #fff;
+    border: 0;
+    box-shadow: none;
+    color: #444;
+}
+
+.input-field.nav-panel-add label {
+    left: 1rem;
+}
+
+.input-field.nav-panel-add .mdi-navigation-close {
+    position: absolute;
+    top: 0;
+    right: 1rem;
+    color: transparent;
+    cursor: pointer;
+    font-size: 2rem;
+    transition: .3s color;
+}
+
+#button_filters {
+    display: none;
+}
+
 /* ==========================================================================
    2 = Side-nav
    ========================================================================== */
@@ -130,6 +180,21 @@ nav, main, footer {
 
 .side-nav a {
     margin: 0px 1rem;
+}
+
+/* ==========================================================================
+ * 3 = Filters slider
+ * ========================================================================== */
+
+#filters button {
+    padding: 0px;
+    width: 100%;
+}
+
+.side-nav.fixed.right-aligned {
+    right: -250px;
+    left: auto !important;
+    overflow-y: visible;
 }
 
 /* ==========================================================================
@@ -200,6 +265,15 @@ main ul.row {
     width: 240px !important;
 }
 
+.reader-mode .collapsible-body {
+    height: 0;
+    overflow: hidden;
+}
+
+.reader-mode:hover .collapsible-body {
+    height: auto;
+}
+
 .reader-mode span {
     opacity: 0;
     transition: opacity 0.2s ease;
@@ -209,6 +283,14 @@ main ul.row {
     opacity: 1;
 }
 
+.progress {
+    position:fixed;
+    top:0px;
+    width: 100%;
+    height: 3px;
+    margin: 0;
+    z-index: 9999;
+}
 /* ==========================================================================
    6 = Media queries
    ========================================================================== */

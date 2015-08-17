@@ -18,7 +18,6 @@
     {% if entries is not empty %}
         <div class="results clearfix">
             <div class="nb-results left">{{ entries.count }} {% trans %}entries{% endtrans %}</div>
-            <div class="left"><form>{{ form_rest(form) }}<button class="btn waves-effect waves-light" type="submit" id="submit-filter" value="filter">Filter</button></form></div>
             <ul class="pagination right">
                 {% for p in range(1, entries.nbPages) if entries.nbPages > 1 %}
                     <li class="{{ currentPage == p ? 'active':'waves-effect'}}">
@@ -62,4 +61,50 @@
             {% endfor %}
         </ul>
     {% endif %}
+
+
+    <!-- Filters -->
+    <div id="filters" class="side-nav fixed right-aligned">
+        <form>
+
+            <h4 class="center">{% trans %}Filters{% endtrans %}</h1>
+
+            <div class="row">
+
+                <div class="col s12">
+                    <label>{% trans %}Reading time in minutes{% endtrans %}</label>
+                </div>
+                <div class="input-field col s6">
+                    {{ form_widget(form.readingTime.left_number, {'type': 'number'}) }}
+                    <label for="entry_filter_readingTime_left_number">{% trans %}from{% endtrans %}</label>
+                </div>
+                <div class="input-field col s6">
+                    {{ form_widget(form.readingTime.right_number, {'type': 'number'}) }}
+                    <label for="entry_filter_readingTime_right_number">{% trans %}to{% endtrans %}</label>
+                </div>
+
+                <div class="col s12">
+                    <label>{% trans %}Create at{% endtrans %}</label>
+                </div>
+                <div class="input-field col s6">
+                    {{ form_widget(form.createdAt.left_date, {'type': 'date', 'attr': {'class': 'datepicker', 'data-value': form.createdAt.left_date.vars.value} }) }}
+                    <label for="entry_filter_createdAt_left_date" class="active">{% trans %}from{% endtrans %}</label>
+                </div>
+                <div class="input-field col s6">
+                    {{ form_widget(form.createdAt.right_date, {'type': 'date', 'attr': {'class': 'datepicker', 'data-value': form.createdAt.right_date.vars.value} }) }}
+                    <label for="entry_filter_createdAt_right_date" class="active">{% trans %}to{% endtrans %}</label>
+                </div>
+
+                <div class="col s6">
+                    <a href="#!" class="center waves-effect waves-green btn-flat" id="clean_form_filters">{% trans %}Clean{% endtrans %}</a>
+                </div>
+
+                <div class="col s6">
+                    <button class="btn waves-effect waves-light" type="submit" id="submit-filter" value="filter">{% trans %}Filter{% endtrans %}</button>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
 {% endblock %}
