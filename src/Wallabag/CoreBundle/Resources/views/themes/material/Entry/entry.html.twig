@@ -3,6 +3,7 @@
 {% block title %}{{ entry.title|raw }} ({{ entry.domainName }}){% endblock %}
 
 {% block menu %}
+    <progress id="progressbar" value="0" max="100"></progress>
     <nav class="hide-on-large-only">
         <div class="nav-wrapper cyan darken-1">
             <ul>
