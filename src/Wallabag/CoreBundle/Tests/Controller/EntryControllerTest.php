@@ -259,4 +259,26 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $this->assertCount(1, $crawler->filter('div[class=entry]'));
     }
+
+    public function testPaginationWithFilter()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/config');
+
+        $form = $crawler->filter('button[id=config_save]')->form();
+
+        $data = array(
+            'config[items_per_page]' => '1',
+        );
+
+        $client->submit($form, $data);
+
+        $parameters = '?entry_filter%5BreadingTime%5D%5Bleft_number%5D=&amp;entry_filter%5BreadingTime%5D%5Bright_number%5D=';
+
+        $crawler = $client->request('GET', 'unread/list'.$parameters);
+
+        $this->assertContains($parameters, $client->getResponse()->getContent());
+    }
 }

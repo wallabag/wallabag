@@ -22,7 +22,7 @@
             <ul class="pagination right">
                 {% for p in range(1, entries.nbPages) if entries.nbPages > 1 %}
                     <li class="{{ currentPage == p ? 'active':'waves-effect'}}">
-                        <a href="{{ path(app.request.attributes.get('_route'), {'page': p}) }}"  >{{ p }}</a>
+                        <a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'page': p})) }}">{{ p }}</a>
                     </li>
                 {% endfor %}
             </div>
