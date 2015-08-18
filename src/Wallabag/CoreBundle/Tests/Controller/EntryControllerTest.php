@@ -241,7 +241,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertEquals(403, $client->getResponse()->getStatusCode());
     }
 
-    public function testFilterOnUnreadeView()
+    public function testFilterOnReadingTime()
     {
         $this->logInAs('admin');
         $client = $this->getClient();
@@ -258,6 +258,35 @@ class EntryControllerTest extends WallabagCoreTestCase
         $crawler = $client->submit($form, $data);
 
         $this->assertCount(1, $crawler->filter('div[class=entry]'));
+    }
+
+    public function testFilterOnCreationDate()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/unread/list');
+
+        $form = $crawler->filter('button[id=submit-filter]')->form();
+
+        $data = array(
+            'entry_filter[createdAt][left_date]' => date('d/m/Y'),
+            'entry_filter[createdAt][right_date]' => date('d/m/Y', strtotime("+1 day"))
+        );
+
+        $crawler = $client->submit($form, $data);
+
+        $this->assertCount(4, $crawler->filter('div[class=entry]'));
+
+        $data = array(
+            'entry_filter[createdAt][left_date]' => '01/01/1970',
+            'entry_filter[createdAt][right_date]' => '01/01/1970'
+        );
+
+        $crawler = $client->submit($form, $data);
+
+        $this->assertCount(0, $crawler->filter('div[class=entry]'));
+
     }
 
     public function testPaginationWithFilter()
