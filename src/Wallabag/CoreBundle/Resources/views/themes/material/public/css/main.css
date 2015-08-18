@@ -26,6 +26,20 @@ body {
     background: #f0f0f0;
 }
 
+#alphabar {
+    position: fixed;
+    background-color: #ff6347;
+    z-index: 1000;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    color: #000;
+}
+
+#alphabar a {
+    color: #555;
+}
+
 .border-bottom {
     border-bottom: 1px solid #DDD;
 }
