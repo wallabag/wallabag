@@ -1,0 +1,15 @@
+{% extends "WallabagCoreBundle::layout.html.twig" %}
+
+{% block title "Tags" %}
+
+{% block content %}
+    <div class="results clearfix">
+        <div class="nb-results left">{% transchoice tags.count %}{0} There is no tag.|{1} There is one tag.|]1,Inf[ There are %count% tags.{% endtranschoice %}</div>
+    </div>
+    <br />
+    <ul class="row data">
+    {% for tag in tags %}
+        <li id="tag-{{ tag.id|e }}" class="col l4 m6 s12">{{tag.label}}</li>
+    {% endfor %}
+    </ul>
+{% endblock %}
