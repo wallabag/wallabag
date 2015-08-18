@@ -16,6 +16,10 @@
             "name": "Thomas Citharel",
             "homepage": "http://tcit.fr",
             "role": "Developer"
+        },
+        {
+            "name": "Jérémy Benoist",
+            "role": "Developer"
         }
     ],
     "support": {
