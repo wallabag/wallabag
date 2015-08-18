@@ -23,7 +23,7 @@
                     <a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'page': p})) }}">{{ p }}</a>
                 </li>
             {% endfor %}
-        </div>
+        </ul>
     </div>
     {% endblock %}
     <br />
