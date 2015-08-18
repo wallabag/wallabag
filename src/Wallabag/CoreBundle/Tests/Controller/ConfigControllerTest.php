@@ -266,7 +266,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
             array(
                 array(
                     'new_user[username]' => 'ad',
-                    'new_user[password]' => '',
+                    'new_user[password]' => 'mypassword',
                     'new_user[email]' => '',
                 ),
                 'This value is too short.',
@@ -274,7 +274,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
             array(
                 array(
                     'new_user[username]' => 'wallace',
-                    'new_user[password]' => '',
+                    'new_user[password]' => 'mypassword',
                     'new_user[email]' => 'test',
                 ),
                 'This value is not a valid email address.',

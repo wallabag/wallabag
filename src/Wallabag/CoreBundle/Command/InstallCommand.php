@@ -192,6 +192,7 @@ class InstallCommand extends ContainerAwareCommand
         $user->setUsername($dialog->ask($this->defaultOutput, '<question>Username</question> <comment>(default: wallabag)</comment> :', 'wallabag'));
         $user->setPassword($dialog->ask($this->defaultOutput, '<question>Password</question> <comment>(default: wallabag)</comment> :', 'wallabag'));
         $user->setEmail($dialog->ask($this->defaultOutput, '<question>Email:</question>', ''));
+        $user->setEnabled(true);
 
         $em->persist($user);
 

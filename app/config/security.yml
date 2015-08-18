@@ -12,6 +12,8 @@ security:
     providers:
         administrators:
             entity: { class: WallabagCoreBundle:User, property: username }
+        fos_userbundle:
+            id: fos_user.user_provider.username
 
     # the main part of the security, where you can set up firewalls
     # for specific sections of your app
@@ -26,31 +28,12 @@ security:
             anonymous:  ~
 
         secured_area:
-            pattern:    ^/
-            anonymous: ~
+            pattern: ^/
             form_login:
-                login_path:                     /login
+                provider: fos_userbundle
+                csrf_provider: security.csrf.token_manager
 
-                use_forward:                    false
-
-                check_path:                     /login_check
-
-                post_only:                      true
-
-                always_use_default_target_path: false
-                default_target_path:            /
-                target_path_parameter:          _target_path
-                use_referer:                    true
-
-                failure_path:                   null
-                failure_forward:                false
-
-                username_parameter:             _username
-                password_parameter:             _password
-
-                csrf_parameter:                 _csrf_token
-                intention:                      authenticate
-
+            anonymous:    true
             remember_me:
                 key:      "%secret%"
                 lifetime: 31536000

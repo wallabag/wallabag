@@ -30,6 +30,7 @@
                 </div>
 
                 <div class="row mts txtcenter">
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
                     <button type="submit">Login</button>
                     <a href="{{ path('forgot_password') }}" class="small">Forgot your password?</a>
                 </div>

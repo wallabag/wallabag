@@ -75,7 +75,7 @@ class InstallCommandTest extends WallabagCoreTestCase
             ->getMock();
         $dialog->expects($this->any())
             ->method('ask')
-            ->will($this->returnValue('test'));
+            ->will($this->returnValue('test2'));
         $dialog->expects($this->any())
             ->method('askConfirmation')
             ->will($this->returnValue(true));

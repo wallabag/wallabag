@@ -44,6 +44,7 @@
 
                     </div>
                     <div class="card-action">
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
                         <button class="btn waves-effect waves-light" type="submit" name="send">
                             {% trans %}Login{% endtrans %}
                             <i class="mdi-content-send right"></i>
