@@ -5,6 +5,8 @@ namespace Wallabag\CoreBundle\Filter;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Lexik\Bundle\FormFilterBundle\Filter\FilterOperands;
+use Lexik\Bundle\FormFilterBundle\Filter\Query\QueryInterface;
 
 class EntryFilterType extends AbstractType
 {
@@ -24,7 +26,18 @@ class EntryFilterType extends AbstractType
                             'placeholder' => 'dd/mm/yyyy'),
                         'format' => 'dd/MM/yyyy',
                         'widget' => 'single_text'
-                    )));
+                )))
+            ->add('domainName', 'filter_text', array(
+                'apply_filter' => function (QueryInterface $filterQuery, $field, $values)
+                    {
+                        $value = $values['value'];
+                        if (strlen($value) <= 3 || empty($value)) {
+                            return null;
+                        }
+                        $expression = $filterQuery->getExpr()->like($field, $filterQuery->getExpr()->literal('%'.$value.'%'));
+                        return $filterQuery->createCondition($expression);
+                    }
+            ));
     }
 
     public function getName()

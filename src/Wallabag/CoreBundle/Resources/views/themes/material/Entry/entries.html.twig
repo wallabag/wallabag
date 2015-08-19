@@ -77,8 +77,16 @@
                     <label for="entry_filter_readingTime_right_number">{% trans %}to{% endtrans %}</label>
                 </div>
 
+
                 <div class="col s12">
+
                     <label>{% trans %}Create at{% endtrans %}</label>
+
+                    <label>{% trans %}Domain name{% endtrans %}</label>
+                </div>
+                <div class="input-field col s6">
+                    {{ form_widget(form.domainName, {'type': 'text'}) }}
+                    <label for="entry_filter_domainName">{% trans %}www.website.com{% endtrans %}</label>
                 </div>
 
                 <div class="input-field col s6">
