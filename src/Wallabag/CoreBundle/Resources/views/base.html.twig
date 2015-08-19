@@ -113,5 +113,10 @@
                 <p>{% trans %}powered by{% endtrans %} <a href="http://wallabag.org">wallabag</a></p>
             </footer>
         {% endblock %}
+        {% if warning_message %}
+        <div id="warning_message">
+            {{ warning_message | raw }}
+        </div>
+        {% endif %}
     </body>
 </html>
