@@ -265,7 +265,7 @@ class EntryController extends Controller
 
         $this->get('session')->getFlashBag()->add(
             'notice',
-            'Entry archived'
+            'Entry ' . ($entry->isArchived() ? 'archived' : 'unarchived')
         );
 
         return $this->redirect($request->headers->get('referer'));
@@ -290,7 +290,7 @@ class EntryController extends Controller
 
         $this->get('session')->getFlashBag()->add(
             'notice',
-            'Entry starred'
+            'Entry ' . ($entry->isStarred() ? 'starred' : 'unstarred')
         );
 
         return $this->redirect($request->headers->get('referer'));
