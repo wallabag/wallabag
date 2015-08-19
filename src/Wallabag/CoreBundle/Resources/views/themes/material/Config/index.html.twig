@@ -57,7 +57,7 @@
 
 
                     <div id="set2" class="col s12">
-                        <form action="{{ path('config') }}" method="post" {{ form_enctype(form.rss) }}>
+                        <form action="{{ path('config') }}#set2" method="post" {{ form_enctype(form.rss) }}>
                             {{ form_errors(form.rss) }}
 
                             <div class="row">
@@ -106,7 +106,7 @@
 
 
                     <div id="set3" class="col s12">
-                        <form action="{{ path('config') }}" method="post" {{ form_enctype(form.user) }}>
+                        <form action="{{ path('config') }}#set3" method="post" {{ form_enctype(form.user) }}>
                             {{ form_errors(form.user) }}
 
                             <div class="row">
@@ -135,7 +135,7 @@
 
 
                     <div id="set4" class="col s12">
-                        <form action="{{ path('config') }}" method="post" {{ form_enctype(form.pwd) }}>
+                        <form action="{{ path('config') }}#set4" method="post" {{ form_enctype(form.pwd) }}>
                             {{ form_errors(form.pwd) }}
 
                             <div class="row">
@@ -172,7 +172,7 @@
 
 
                     <div id="set5" class="col s12">
-                        <form action="{{ path('config') }}" method="post" {{ form_enctype(form.new_user) }}>
+                        <form action="{{ path('config') }}#set5" method="post" {{ form_enctype(form.new_user) }}>
                             {{ form_errors(form.new_user) }}
 
                             <div class="row">
