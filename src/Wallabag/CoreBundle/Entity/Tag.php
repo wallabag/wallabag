@@ -96,6 +96,11 @@ class Tag
         $this->entries[] = $entry;
     }
 
+    public function hasEntry($entry)
+    {
+        return $this->entries->contains($entry);
+    }
+
     /**
      * @return User
      */
