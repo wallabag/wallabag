@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "14a5e3837adfc98bca8d7eef22c9cc45",
+    "hash": "52545aca8a752dfc2969d6cb9f0cb8d3",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -356,16 +356,16 @@
         },
         {
             "name": "doctrine/doctrine-bundle",
-            "version": "v1.5.0",
+            "version": "v1.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineBundle.git",
-                "reference": "0b9e27037c4fdbad515ee5ec89842e9091a6480f"
+                "reference": "8c5cedb4f2f7ebb66a963ae46ad9daa1e31cee01"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/0b9e27037c4fdbad515ee5ec89842e9091a6480f",
-                "reference": "0b9e27037c4fdbad515ee5ec89842e9091a6480f",
+                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/8c5cedb4f2f7ebb66a963ae46ad9daa1e31cee01",
+                "reference": "8c5cedb4f2f7ebb66a963ae46ad9daa1e31cee01",
                 "shasum": ""
             },
             "require": {
@@ -373,16 +373,16 @@
                 "doctrine/doctrine-cache-bundle": "~1.0",
                 "jdorn/sql-formatter": "~1.1",
                 "php": ">=5.3.2",
-                "symfony/console": "~2.3",
-                "symfony/doctrine-bridge": "~2.2",
-                "symfony/framework-bundle": "~2.3"
+                "symfony/console": "~2.3|~3.0",
+                "symfony/doctrine-bridge": "~2.2|~3.0",
+                "symfony/framework-bundle": "~2.3|~3.0"
             },
             "require-dev": {
                 "doctrine/orm": "~2.3",
                 "phpunit/phpunit": "~4",
                 "satooshi/php-coveralls": "~0.6.1",
-                "symfony/validator": "~2.2",
-                "symfony/yaml": "~2.2",
+                "symfony/validator": "~2.2|~3.0",
+                "symfony/yaml": "~2.2|~3.0",
                 "twig/twig": "~1.10"
             },
             "suggest": {
@@ -430,7 +430,7 @@
                 "orm",
                 "persistence"
             ],
-            "time": "2015-05-28 12:27:15"
+            "time": "2015-08-12 15:52:00"
         },
         {
             "name": "doctrine/doctrine-cache-bundle",
@@ -1491,9 +1491,7 @@
             "authors": [
                 {
                     "name": "S.C. Chen",
-                    "email": "me578022@gmail.com",
-                    "homepage": "http://simplehtmldom.sourceforge.net/",
-                    "role": "Lead Developer"
+                    "email": "me578022@gmail.com"
                 }
             ],
             "description": "Composer package that gives you access to and (unlike all the others at this time) autoloads S.C. Chen's PHP Simple HTML DOM Parser Library",
@@ -2655,16 +2653,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.19.0",
+            "version": "v1.20.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "edbeaf43b0a606cdaadc32a11d2673614a377b90"
+                "reference": "1ea4e5f81c6d005fe84d0b38e1c4f1955eb86844"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/edbeaf43b0a606cdaadc32a11d2673614a377b90",
-                "reference": "edbeaf43b0a606cdaadc32a11d2673614a377b90",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/1ea4e5f81c6d005fe84d0b38e1c4f1955eb86844",
+                "reference": "1ea4e5f81c6d005fe84d0b38e1c4f1955eb86844",
                 "shasum": ""
             },
             "require": {
@@ -2673,7 +2671,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.19-dev"
+                    "dev-master": "1.20-dev"
                 }
             },
             "autoload": {
@@ -2708,69 +2706,20 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2015-07-31 13:45:26"
-        },
-        {
-            "name": "umpirsky/twig-gettext-extractor",
-            "version": "1.1.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/umpirsky/Twig-Gettext-Extractor.git",
-                "reference": "a2cdf8693e874ce83603c84e1cc46efb3d516c3f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/umpirsky/Twig-Gettext-Extractor/zipball/a2cdf8693e874ce83603c84e1cc46efb3d516c3f",
-                "reference": "a2cdf8693e874ce83603c84e1cc46efb3d516c3f",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3",
-                "symfony/filesystem": "~2.0",
-                "symfony/form": "~2.0",
-                "symfony/routing": "~2.0",
-                "symfony/translation": "~2.0",
-                "symfony/twig-bridge": "~2.0",
-                "twig/extensions": "~1.0",
-                "twig/twig": "~1.2"
-            },
-            "require-dev": {
-                "symfony/config": "2.1.*"
-            },
-            "bin": [
-                "twig-gettext-extractor"
-            ],
-            "type": "application",
-            "autoload": {
-                "psr-0": {
-                    "Twig\\Gettext": "."
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Саша Стаменковић",
-                    "email": "umpirsky@gmail.com"
-                }
-            ],
-            "description": "The Twig Gettext Extractor is Poedit friendly tool which extracts translations from twig templates.",
-            "time": "2015-02-25 14:41:10"
+            "time": "2015-08-12 15:56:39"
         },
         {
             "name": "wallabag/Fivefilters_Libraries",
-            "version": "dev-master",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wallabag/Fivefilters_Libraries.git",
-                "reference": "93b5469d6036a68ce60f126f8430b3e1fbf1562f"
+                "reference": "6a07427e07308c746e0216ed254e41e053ab3448"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wallabag/Fivefilters_Libraries/zipball/93b5469d6036a68ce60f126f8430b3e1fbf1562f",
-                "reference": "93b5469d6036a68ce60f126f8430b3e1fbf1562f",
+                "url": "https://api.github.com/repos/wallabag/Fivefilters_Libraries/zipball/6a07427e07308c746e0216ed254e41e053ab3448",
+                "reference": "6a07427e07308c746e0216ed254e41e053ab3448",
                 "shasum": ""
             },
             "type": "library",
@@ -2784,187 +2733,23 @@
             "description": "Libraries from @fivefilters.",
             "homepage": "https://github.com/wallabag/Fivefilters_Libraries",
             "support": {
-                "source": "https://github.com/wallabag/Fivefilters_Libraries/tree/1.0.0",
+                "source": "https://github.com/wallabag/Fivefilters_Libraries/tree/1.0.1",
                 "issues": "https://github.com/wallabag/Fivefilters_Libraries/issues"
             },
-            "time": "2015-01-19 20:19:28"
-        },
-        {
-            "name": "wallabag/PHPePub",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/wallabag/PHPePub.git",
-                "reference": "7c78733d33344308520758d7f3f7bc2cc51b3512"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/wallabag/PHPePub/zipball/7c78733d33344308520758d7f3f7bc2cc51b3512",
-                "reference": "7c78733d33344308520758d7f3f7bc2cc51b3512",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "EPub.php",
-                    "EPub.HtmlEntities.php",
-                    "EPub.NCX.php",
-                    "EPub.OPF.php",
-                    "EPubChapterSplitter.php",
-                    "lib.uuid.php",
-                    "Logger.php",
-                    "Zip.php"
-                ]
-            },
-            "authors": [
-                {
-                    "name": "Nicolas Lœuillet",
-                    "email": "nicolas@loeuillet.org",
-                    "homepage": "http://www.cdetc.fr"
-                }
-            ],
-            "description": "PHP Classes for dynamically generating EPub files.",
-            "homepage": "https://github.com/wallabag/PHPePub",
-            "support": {
-                "source": "https://github.com/wallabag/PHPePub/tree/2.1.0"
-            },
-            "time": "2015-01-19 11:44:19"
-        },
-        {
-            "name": "wallabag/kriss_php5",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/wallabag/kriss_php5.git",
-                "reference": "f2dd88621a04828cdeb8d9a59b72fd34c94658b1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/wallabag/kriss_php5/zipball/f2dd88621a04828cdeb8d9a59b72fd34c94658b1",
-                "reference": "f2dd88621a04828cdeb8d9a59b72fd34c94658b1",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "Session.php"
-                ]
-            },
-            "authors": [
-                {
-                    "name": "Nicolas Lœuillet",
-                    "email": "nicolas@loeuillet.org",
-                    "homepage": "http://www.cdetc.fr"
-                }
-            ],
-            "description": "A simple and smart (or stupid) php5 snippets repository",
-            "homepage": "https://github.com/wallabag/kriss_php5",
-            "support": {
-                "source": "https://github.com/wallabag/kriss_php5/tree/1.0.0"
-            },
-            "time": "2015-01-18 21:21:43"
-        },
-        {
-            "name": "wallabag/pagination",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/wallabag/pagination.git",
-                "reference": "54e442b31c90e50e331cb8ac400537e0eda30deb"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/wallabag/pagination/zipball/54e442b31c90e50e331cb8ac400537e0eda30deb",
-                "reference": "54e442b31c90e50e331cb8ac400537e0eda30deb",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "paginator.php"
-                ]
-            },
-            "authors": [
-                {
-                    "name": "Nicolas Lœuillet",
-                    "email": "nicolas@loeuillet.org",
-                    "homepage": "http://www.cdetc.fr"
-                }
-            ],
-            "description": "Paginate record sets, not tied in directly to a database.",
-            "homepage": "https://github.com/wallabag/pagination",
-            "support": {
-                "source": "https://github.com/wallabag/pagination/tree/1.0.0"
-            },
-            "time": "2015-01-19 09:24:39"
-        },
-        {
-            "name": "wallabag/php-flash-messages",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/wallabag/PHP-Flash-Messages.git",
-                "reference": "ea68eb768f32156baa15f7a3cd880ba8ff5af6ab"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/wallabag/PHP-Flash-Messages/zipball/ea68eb768f32156baa15f7a3cd880ba8ff5af6ab",
-                "reference": "ea68eb768f32156baa15f7a3cd880ba8ff5af6ab",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "class.messages.php"
-                ]
-            },
-            "license": [
-                "Apache"
-            ],
-            "authors": [
-                {
-                    "name": "Nicolas Lœuillet",
-                    "email": "nicolas@loeuillet.org",
-                    "homepage": "http://www.cdetc.fr"
-                }
-            ],
-            "description": "Session-based Flash Messages class for PHP",
-            "homepage": "https://github.com/wallabag/PHP-Flash-Messages",
-            "keywords": [
-                "flash",
-                "messages",
-                "php-flash-messages",
-                "sessions"
-            ],
-            "support": {
-                "source": "https://github.com/wallabag/PHP-Flash-Messages/tree/1.0.0"
-            },
-            "time": "2015-01-18 19:51:55"
+            "time": "2015-08-14 10:11:06"
         },
         {
             "name": "wallabag/php-readability",
-            "version": "dev-master",
+            "version": "v1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wallabag/php-readability.git",
-                "reference": "a37a1482b9964ae1804dbed0bffa00988523c387"
+                "reference": "e25182cdd1ccdebdce1149ab79c886eae1363674"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wallabag/php-readability/zipball/a37a1482b9964ae1804dbed0bffa00988523c387",
-                "reference": "a37a1482b9964ae1804dbed0bffa00988523c387",
+                "url": "https://api.github.com/repos/wallabag/php-readability/zipball/e25182cdd1ccdebdce1149ab79c886eae1363674",
+                "reference": "e25182cdd1ccdebdce1149ab79c886eae1363674",
                 "shasum": ""
             },
             "require": {
@@ -2993,7 +2778,7 @@
                 }
             ],
             "description": "Automatic article extraction from HTML",
-            "homepage": "https://github.com/wallabag/php-readability",
+            "homepage": "http://code.fivefilters.org/php-readability/",
             "keywords": [
                 "article",
                 "article extraction",
@@ -3003,47 +2788,10 @@
                 "html"
             ],
             "support": {
-                "source": "https://github.com/wallabag/php-readability/tree/1.0.0",
+                "source": "https://github.com/wallabag/php-readability/tree/v1.0",
                 "issues": "https://github.com/wallabag/php-readability/issues"
             },
-            "time": "2015-01-19 12:25:38"
-        },
-        {
-            "name": "wallabag/phpMobi",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/wallabag/phpMobi.git",
-                "reference": "5137696542f08f8e6a0603c01970c6d3eca9873d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/wallabag/phpMobi/zipball/5137696542f08f8e6a0603c01970c6d3eca9873d",
-                "reference": "5137696542f08f8e6a0603c01970c6d3eca9873d",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "MOBIClass/MOBI.php"
-                ]
-            },
-            "authors": [
-                {
-                    "name": "Nicolas Lœuillet",
-                    "email": "nicolas@loeuillet.org",
-                    "homepage": "http://www.cdetc.fr"
-                }
-            ],
-            "description": "An experimental Mobipocket file creator in PHP.",
-            "homepage": "https://github.com/wallabag/phpMobi",
-            "support": {
-                "source": "https://github.com/wallabag/phpMobi/tree/1.0.0"
-            },
-            "time": "2015-01-19 12:43:17"
+            "time": "2013-04-17 13:51:09"
         },
         {
             "name": "willdurand/hateoas",
@@ -3418,16 +3166,16 @@
         },
         {
             "name": "phpspec/prophecy",
-            "version": "v1.4.1",
+            "version": "v1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "3132b1f44c7bf2ec4c7eb2d3cb78fdeca760d373"
+                "reference": "4745ded9307786b730d7a60df5cb5a6c43cf95f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/3132b1f44c7bf2ec4c7eb2d3cb78fdeca760d373",
-                "reference": "3132b1f44c7bf2ec4c7eb2d3cb78fdeca760d373",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/4745ded9307786b730d7a60df5cb5a6c43cf95f7",
+                "reference": "4745ded9307786b730d7a60df5cb5a6c43cf95f7",
                 "shasum": ""
             },
             "require": {
@@ -3474,7 +3222,7 @@
                 "spy",
                 "stub"
             ],
-            "time": "2015-04-27 22:15:08"
+            "time": "2015-08-13 10:07:40"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -3669,16 +3417,16 @@
         },
         {
             "name": "phpunit/php-token-stream",
-            "version": "1.4.3",
+            "version": "1.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-token-stream.git",
-                "reference": "7a9b0969488c3c54fd62b4d504b3ec758fd005d9"
+                "reference": "3ab72c62e550370a6cd5dc873e1a04ab57562f5b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/7a9b0969488c3c54fd62b4d504b3ec758fd005d9",
-                "reference": "7a9b0969488c3c54fd62b4d504b3ec758fd005d9",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/3ab72c62e550370a6cd5dc873e1a04ab57562f5b",
+                "reference": "3ab72c62e550370a6cd5dc873e1a04ab57562f5b",
                 "shasum": ""
             },
             "require": {
@@ -3714,20 +3462,20 @@
             "keywords": [
                 "tokenizer"
             ],
-            "time": "2015-06-19 03:43:16"
+            "time": "2015-08-16 08:51:00"
         },
         {
             "name": "phpunit/phpunit",
-            "version": "4.8.3",
+            "version": "4.8.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "fd3050e26e3105f416d74c4d33aea659b406c59d"
+                "reference": "55bf1d6092b0e13a1f26bd5eaffeef3d8ad85ea7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/fd3050e26e3105f416d74c4d33aea659b406c59d",
-                "reference": "fd3050e26e3105f416d74c4d33aea659b406c59d",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/55bf1d6092b0e13a1f26bd5eaffeef3d8ad85ea7",
+                "reference": "55bf1d6092b0e13a1f26bd5eaffeef3d8ad85ea7",
                 "shasum": ""
             },
             "require": {
@@ -3786,7 +3534,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-08-10 09:16:56"
+            "time": "2015-08-15 04:21:23"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -4266,15 +4014,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "wallabag/php-flash-messages": 20,
-        "wallabag/kriss_php5": 20,
-        "wallabag/pagination": 20,
-        "wallabag/phpepub": 20,
-        "wallabag/php-readability": 20,
-        "wallabag/phpmobi": 20,
-        "wallabag/fivefilters_libraries": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
