@@ -26,7 +26,7 @@ body {
     background: #f0f0f0;
 }
 
-#alphabar {
+#warning_message {
     position: fixed;
     background-color: #ff6347;
     z-index: 1000;
@@ -36,7 +36,7 @@ body {
     color: #000;
 }
 
-#alphabar a {
+#warning_message a {
     color: #555;
 }
 
