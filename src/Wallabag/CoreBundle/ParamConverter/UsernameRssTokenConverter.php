@@ -67,7 +67,7 @@ class UsernameRssTokenConverter implements ParamConverterInterface
     public function apply(Request $request, ParamConverter $configuration)
     {
         $username = $request->attributes->get('username');
-        $rssToken  = $request->attributes->get('token');
+        $rssToken = $request->attributes->get('token');
 
         // Check, if route attributes exists
         if (null === $username || null === $rssToken) {

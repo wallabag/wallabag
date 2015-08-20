@@ -136,9 +136,9 @@ class EntryController extends Controller
         return $this->render(
             'WallabagCoreBundle:Entry:entries.html.twig',
             array(
-                'form'          => $form->createView(),
-                'entries'       => $entries,
-                'currentPage'   => $page
+                'form' => $form->createView(),
+                'entries' => $entries,
+                'currentPage' => $page,
             )
         );
     }
@@ -178,9 +178,9 @@ class EntryController extends Controller
         return $this->render(
             'WallabagCoreBundle:Entry:entries.html.twig',
             array(
-                'form'          => $form->createView(),
-                'entries'       => $entries,
-                'currentPage'   => $page
+                'form' => $form->createView(),
+                'entries' => $entries,
+                'currentPage' => $page,
             )
         );
     }
@@ -220,9 +220,9 @@ class EntryController extends Controller
         return $this->render(
             'WallabagCoreBundle:Entry:entries.html.twig',
             array(
-                'form'          => $form->createView(),
-                'entries'       => $entries,
-                'currentPage'   => $page
+                'form' => $form->createView(),
+                'entries' => $entries,
+                'currentPage' => $page,
             )
         );
     }
@@ -265,7 +265,7 @@ class EntryController extends Controller
 
         $this->get('session')->getFlashBag()->add(
             'notice',
-            'Entry ' . ($entry->isArchived() ? 'archived' : 'unarchived')
+            'Entry '.($entry->isArchived() ? 'archived' : 'unarchived')
         );
 
         return $this->redirect($request->headers->get('referer'));
@@ -290,7 +290,7 @@ class EntryController extends Controller
 
         $this->get('session')->getFlashBag()->add(
             'notice',
-            'Entry ' . ($entry->isStarred() ? 'starred' : 'unstarred')
+            'Entry '.($entry->isStarred() ? 'starred' : 'unstarred')
         );
 
         return $this->redirect($request->headers->get('referer'));

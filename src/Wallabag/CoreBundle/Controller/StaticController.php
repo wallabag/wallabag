@@ -10,13 +10,14 @@ class StaticController extends Controller
     /**
      * @Route("/howto", name="howto")
      */
-     public function howtoAction()
-     {
-         return $this->render(
-             'WallabagCoreBundle:Static:howto.html.twig',
-             array()
-         );
-     }
+    public function howtoAction()
+    {
+        return $this->render(
+            'WallabagCoreBundle:Static:howto.html.twig',
+            array()
+        );
+    }
+
     /**
      * @Route("/about", name="about")
      */

@@ -252,7 +252,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $data = array(
             'entry_filter[readingTime][right_number]' => 11,
-            'entry_filter[readingTime][left_number]' => 11
+            'entry_filter[readingTime][left_number]' => 11,
         );
 
         $crawler = $client->submit($form, $data);
@@ -271,7 +271,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $data = array(
             'entry_filter[createdAt][left_date]' => date('d/m/Y'),
-            'entry_filter[createdAt][right_date]' => date('d/m/Y', strtotime("+1 day"))
+            'entry_filter[createdAt][right_date]' => date('d/m/Y', strtotime('+1 day')),
         );
 
         $crawler = $client->submit($form, $data);
@@ -280,13 +280,12 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $data = array(
             'entry_filter[createdAt][left_date]' => '01/01/1970',
-            'entry_filter[createdAt][right_date]' => '01/01/1970'
+            'entry_filter[createdAt][right_date]' => '01/01/1970',
         );
 
         $crawler = $client->submit($form, $data);
 
         $this->assertCount(0, $crawler->filter('div[class=entry]'));
-
     }
 
     public function testPaginationWithFilter()
@@ -318,7 +317,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $crawler = $client->request('GET', '/unread/list');
         $form = $crawler->filter('button[id=submit-filter]')->form();
         $data = array(
-            'entry_filter[domainName]' => 'monde'
+            'entry_filter[domainName]' => 'monde',
         );
 
         $crawler = $client->submit($form, $data);
@@ -326,7 +325,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $form = $crawler->filter('button[id=submit-filter]')->form();
         $data = array(
-            'entry_filter[domainName]' => 'wallabag'
+            'entry_filter[domainName]' => 'wallabag',
         );
 
         $crawler = $client->submit($form, $data);
