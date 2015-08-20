@@ -23,9 +23,8 @@ class TagController extends Controller
         return $this->render(
             'WallabagCoreBundle:Tag:tags.html.twig',
             array(
-                'tags'       => $tags
+                'tags' => $tags,
             )
         );
     }
-
 }

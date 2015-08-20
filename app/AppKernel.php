@@ -2,7 +2,6 @@
 
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
-use Wallabag\ApiBundle\WallabagApiBundle;
 
 class AppKernel extends Kernel
 {

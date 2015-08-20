@@ -15,7 +15,7 @@ class ResetPasswordType extends AbstractType
                 'type' => 'password',
                 'invalid_message' => 'The password fields must match.',
                 'required' => true,
-                'first_options'  => array('label' => 'New password'),
+                'first_options' => array('label' => 'New password'),
                 'second_options' => array('label' => 'Repeat new password'),
                 'constraints' => array(
                     new Constraints\Length(array(

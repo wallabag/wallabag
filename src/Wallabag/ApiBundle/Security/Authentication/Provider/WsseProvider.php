@@ -17,7 +17,7 @@ class WsseProvider implements AuthenticationProviderInterface
     public function __construct(UserProviderInterface $userProvider, $cacheDir)
     {
         $this->userProvider = $userProvider;
-        $this->cacheDir     = $cacheDir;
+        $this->cacheDir = $cacheDir;
 
         // If cache directory does not exist we create it
         if (!is_dir($this->cacheDir)) {

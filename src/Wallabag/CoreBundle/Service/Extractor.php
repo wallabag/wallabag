@@ -33,8 +33,8 @@ final class Extractor
         $REAL = array();
         foreach ($GLOBALS as $key => $value) {
             if ($key != 'GLOBALS' && $key != '_SESSION' && $key != 'HTTP_SESSION_VARS') {
-                $GLOBALS[$key]  = array();
-                $REAL[$key]     = $value;
+                $GLOBALS[$key] = array();
+                $REAL[$key] = $value;
             }
         }
         // Saving and clearing session

@@ -25,7 +25,7 @@ class SecurityController extends Controller
         return $this->render('WallabagCoreBundle:Security:login.html.twig', array(
             // last username entered by the user
             'last_username' => $session->get(SecurityContext::LAST_USERNAME),
-            'error'         => $error,
+            'error' => $error,
         ));
     }
 

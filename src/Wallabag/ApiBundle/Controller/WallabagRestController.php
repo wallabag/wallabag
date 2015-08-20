@@ -84,12 +84,12 @@ class WallabagRestController extends Controller
     public function getEntriesAction(Request $request)
     {
         $isArchived = $request->query->get('archive');
-        $isStarred  = $request->query->get('star');
-        $sort       = $request->query->get('sort', 'created');
-        $order      = $request->query->get('order', 'desc');
-        $page       = (int) $request->query->get('page', 1);
-        $perPage    = (int) $request->query->get('perPage', 30);
-        $tags       = $request->query->get('tags', []);
+        $isStarred = $request->query->get('star');
+        $sort = $request->query->get('sort', 'created');
+        $order = $request->query->get('order', 'desc');
+        $page = (int) $request->query->get('page', 1);
+        $perPage = (int) $request->query->get('perPage', 30);
+        $tags = $request->query->get('tags', []);
 
         $pager = $this
             ->getDoctrine()
@@ -99,7 +99,7 @@ class WallabagRestController extends Controller
         $pager->setCurrentPage($page);
         $pager->setMaxPerPage($perPage);
 
-        $pagerfantaFactory   = new PagerfantaFactory('page', 'perPage');
+        $pagerfantaFactory = new PagerfantaFactory('page', 'perPage');
         $paginatedCollection = $pagerfantaFactory->createRepresentation(
             $pager,
             new Route('api_get_entries', [], $absolute = true)
@@ -188,9 +188,9 @@ class WallabagRestController extends Controller
     {
         $this->validateUserAccess($entry->getUser()->getId(), $this->getUser()->getId());
 
-        $title      = $request->request->get('title');
+        $title = $request->request->get('title');
         $isArchived = $request->request->get('is_archived');
-        $isStarred  = $request->request->get('is_starred');
+        $isStarred = $request->request->get('is_starred');
 
         if (!is_null($title)) {
             $entry->setTitle($title);

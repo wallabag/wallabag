@@ -11,7 +11,7 @@ class TagRepository extends EntityRepository
     /**
      * Find Tags.
      *
-     * @param int    $userId
+     * @param int $userId
      *
      * @return array
      */

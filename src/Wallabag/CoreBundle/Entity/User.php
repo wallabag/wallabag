@@ -123,9 +123,9 @@ class User implements AdvancedUserInterface, \Serializable
     public function __construct()
     {
         $this->isActive = true;
-        $this->salt     = md5(uniqid(null, true));
-        $this->entries  = new ArrayCollection();
-        $this->tags     = new ArrayCollection();
+        $this->salt = md5(uniqid(null, true));
+        $this->entries = new ArrayCollection();
+        $this->tags = new ArrayCollection();
     }
 
     /**
@@ -176,7 +176,7 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getSalt()
     {
@@ -184,7 +184,7 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getRoles()
     {
@@ -323,7 +323,7 @@ class User implements AdvancedUserInterface, \Serializable
         return $this->tags;
     }
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function eraseCredentials()
     {
