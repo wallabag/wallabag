@@ -276,7 +276,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(4, $crawler->filter('div[class=entry]'));
+        $this->assertCount(5, $crawler->filter('div[class=entry]'));
 
         $data = array(
             'entry_filter[createdAt][left_date]' => '01/01/1970',
@@ -307,6 +307,14 @@ class EntryControllerTest extends WallabagCoreTestCase
         $crawler = $client->request('GET', 'unread/list'.$parameters);
 
         $this->assertContains($parameters, $client->getResponse()->getContent());
+
+        // reset pagination
+        $crawler = $client->request('GET', '/config');
+        $form = $crawler->filter('button[id=config_save]')->form();
+        $data = array(
+            'config[items_per_page]' => '12',
+        );
+        $client->submit($form, $data);
     }
 
     public function testFilterOnDomainName()
@@ -330,5 +338,26 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form, $data);
         $this->assertCount(0, $crawler->filter('div[class=entry]'));
+    }
+
+    public function testFilterOnStatus()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/unread/list');
+        $form = $crawler->filter('button[id=submit-filter]')->form();
+        $form['entry_filter[isArchived]']->tick();
+        $form['entry_filter[isStarred]']->untick();
+
+        $crawler = $client->submit($form);
+        $this->assertCount(1, $crawler->filter('div[class=entry]'));
+
+        $form = $crawler->filter('button[id=submit-filter]')->form();
+        $form['entry_filter[isArchived]']->untick();
+        $form['entry_filter[isStarred]']->tick();
+
+        $crawler = $client->submit($form);
+        $this->assertCount(1, $crawler->filter('div[class=entry]'));
     }
 }
