@@ -25,4 +25,17 @@ class Utils
         // remove character which can broken the url
         return str_replace(array('+', '/'), '', $token);
     }
+
+    /**
+     * For a given text, we calculate reading time for an article
+     * based on 200 words per minute
+     *
+     * @param $text
+     *
+     * @return float
+     */
+    public static function getReadingTime($text)
+    {
+        return floor(str_word_count(strip_tags($text)) / 200);
+    }
 }
