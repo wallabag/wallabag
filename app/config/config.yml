@@ -51,6 +51,7 @@ twig:
     form:
         resources:
             - LexikFormFilterBundle:Form:form_div_layout.html.twig
+
 # Assetic Configuration
 assetic:
     debug:          "%kernel.debug%"

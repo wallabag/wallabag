@@ -170,6 +170,31 @@ class WallabagRestControllerTest extends WebTestCase
         $client = $this->createClient();
         $headers = $this->generateHeaders('admin', 'mypassword');
 
+        $client->request('GET', '/api/entries', array('star' => 1, 'sort' => 'updated'), array(), $headers);
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $content = json_decode($client->getResponse()->getContent(), true);
+
+        $this->assertGreaterThanOrEqual(1, count($content));
+        $this->assertNotEmpty($content['_embedded']['items']);
+        $this->assertGreaterThanOrEqual(1, $content['total']);
+        $this->assertEquals(1, $content['page']);
+        $this->assertGreaterThanOrEqual(1, $content['pages']);
+
+        $this->assertTrue(
+            $client->getResponse()->headers->contains(
+                'Content-Type',
+                'application/json'
+            )
+        );
+    }
+
+    public function testGetArchiveEntries()
+    {
+        $client = $this->createClient();
+        $headers = $this->generateHeaders('admin', 'mypassword');
+
         $client->request('GET', '/api/entries', array('archive' => 1), array(), $headers);
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());

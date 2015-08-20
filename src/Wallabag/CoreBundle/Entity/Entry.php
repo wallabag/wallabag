@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Hateoas\Configuration\Annotation as Hateoas;
 use JMS\Serializer\Annotation\XmlRoot;
-use Wallabag\CoreBundle\Helper\Tools;
+use Wallabag\CoreBundle\Tools\Utils;
 
 /**
  * Entry.
@@ -265,7 +265,7 @@ class Entry
     public function setContent($content)
     {
         $this->content = $content;
-        $this->readingTime = Tools::getReadingTime($content);
+        $this->readingTime = Utils::getReadingTime($content);
         $this->domainName = parse_url($this->url, PHP_URL_HOST);
 
         return $this;
