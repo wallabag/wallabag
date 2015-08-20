@@ -113,34 +113,7 @@ class EntryController extends Controller
      */
     public function showUnreadAction(Request $request, $page)
     {
-        $form = $this->get('form.factory')->create(new EntryFilterType());
-
-        $filterBuilder = $this->getDoctrine()
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->findUnreadByUser($this->getUser()->getId());
-
-        if ($request->query->has($form->getName())) {
-            // manually bind values from the request
-            $form->submit($request->query->get($form->getName()));
-
-            // build the query from the given form object
-            $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($form, $filterBuilder);
-        }
-
-        $pagerAdapter = new DoctrineORMAdapter($filterBuilder->getQuery());
-        $entries = new Pagerfanta($pagerAdapter);
-
-        $entries->setMaxPerPage($this->getUser()->getConfig()->getItemsPerPage());
-        $entries->setCurrentPage($page);
-
-        return $this->render(
-            'WallabagCoreBundle:Entry:entries.html.twig',
-            array(
-                'form' => $form->createView(),
-                'entries' => $entries,
-                'currentPage' => $page,
-            )
-        );
+        return $this->showEntries('unread', $request, $page);
     }
 
     /**
@@ -155,34 +128,7 @@ class EntryController extends Controller
      */
     public function showArchiveAction(Request $request, $page)
     {
-        $form = $this->get('form.factory')->create(new EntryFilterType());
-
-        $filterBuilder = $this->getDoctrine()
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->findArchiveByUser($this->getUser()->getId());
-
-        if ($request->query->has($form->getName())) {
-            // manually bind values from the request
-            $form->submit($request->query->get($form->getName()));
-
-            // build the query from the given form object
-            $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($form, $filterBuilder);
-        }
-
-        $pagerAdapter = new DoctrineORMAdapter($filterBuilder->getQuery());
-        $entries = new Pagerfanta($pagerAdapter);
-
-        $entries->setMaxPerPage($this->getUser()->getConfig()->getItemsPerPage());
-        $entries->setCurrentPage($page);
-
-        return $this->render(
-            'WallabagCoreBundle:Entry:entries.html.twig',
-            array(
-                'form' => $form->createView(),
-                'entries' => $entries,
-                'currentPage' => $page,
-            )
-        );
+        return $this->showEntries('archive', $request, $page);
     }
 
     /**
@@ -197,11 +143,64 @@ class EntryController extends Controller
      */
     public function showStarredAction(Request $request, $page)
     {
+        return $this->showEntries('starred', $request, $page);
+    }
+
+    /**
+     * Global method to retrieve entries depending on the given type
+     * It returns the response to be send.
+     *
+     * @param string  $type    Entries type: unread, starred or archive
+     * @param Request $request
+     * @param int     $page
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    private function showEntries($type, Request $request, $page)
+    {
+        $repository = $this->getDoctrine()->getRepository('WallabagCoreBundle:Entry');
+
+        switch ($type) {
+            case 'starred':
+                $qb = $repository->getBuilderForStarredByUser($this->getUser()->getId());
+                break;
+
+            case 'archive':
+                $qb = $repository->getBuilderForArchiveByUser($this->getUser()->getId());
+                break;
+
+            case 'unread':
+                $qb = $repository->getBuilderForUnreadByUser($this->getUser()->getId());
+                break;
+
+            default:
+                throw new \InvalidArgumentException(sprintf('Type "%s" is not implemented.', $type));
+        }
+
         $form = $this->get('form.factory')->create(new EntryFilterType());
 
-        $filterBuilder = $this->getDoctrine()
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->findStarredByUser($this->getUser()->getId());
+        if ($request->query->has($form->getName())) {
+            // manually bind values from the request
+            $form->submit($request->query->get($form->getName()));
+
+            // build the query from the given form object
+            $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($form, $qb);
+        }
+
+        $pagerAdapter = new DoctrineORMAdapter($qb->getQuery());
+        $entries = new Pagerfanta($pagerAdapter);
+
+        $entries->setMaxPerPage($this->getUser()->getConfig()->getItemsPerPage());
+        $entries->setCurrentPage($page);
+
+        return $this->render(
+            'WallabagCoreBundle:Entry:entries.html.twig',
+            array(
+                'form' => $form->createView(),
+                'entries' => $entries,
+                'currentPage' => $page,
+            )
+        );
 
         if ($request->query->has($form->getName())) {
             // manually bind values from the request

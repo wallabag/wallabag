@@ -9,19 +9,34 @@ use Pagerfanta\Pagerfanta;
 class EntryRepository extends EntityRepository
 {
     /**
+     * Return a query builder to used by other getBuilderFor* method.
+     *
+     * @param int $userId
+     *
+     * @return QueryBuilder
+     */
+    private function getBuilderByUser($userId)
+    {
+        return $this->createQueryBuilder('e')
+            ->leftJoin('e.user', 'u')
+            ->andWhere('u.id = :userId')->setParameter('userId', $userId)
+            ->orderBy('e.id', 'desc')
+        ;
+    }
+
+    /**
      * Retrieves unread entries for a user.
      *
      * @param int $userId
      *
      * @return QueryBuilder
      */
-    public function findUnreadByUser($userId)
+    public function getBuilderForUnreadByUser($userId)
     {
-        return $this->createQueryBuilder('e')
-            ->leftJoin('e.user', 'u')
-            ->where('e.isArchived = false')
-            ->andWhere('u.id =:userId')->setParameter('userId', $userId)
-            ->orderBy('e.id', 'desc');
+        return $this
+            ->getBuilderByUser($userId)
+            ->andWhere('e.isArchived = false')
+        ;
     }
 
     /**
@@ -31,13 +46,12 @@ class EntryRepository extends EntityRepository
      *
      * @return QueryBuilder
      */
-    public function findArchiveByUser($userId)
+    public function getBuilderForArchiveByUser($userId)
     {
-        return $this->createQueryBuilder('e')
-            ->leftJoin('e.user', 'u')
-            ->where('e.isArchived = true')
-            ->andWhere('u.id =:userId')->setParameter('userId', $userId)
-            ->orderBy('e.id', 'desc');
+        return $this
+            ->getBuilderByUser($userId)
+            ->andWhere('e.isArchived = true')
+        ;
     }
 
     /**
@@ -47,13 +61,12 @@ class EntryRepository extends EntityRepository
      *
      * @return QueryBuilder
      */
-    public function findStarredByUser($userId)
+    public function getBuilderForStarredByUser($userId)
     {
-        return $this->createQueryBuilder('e')
-            ->leftJoin('e.user', 'u')
-            ->where('e.isStarred = true')
-            ->andWhere('u.id =:userId')->setParameter('userId', $userId)
-            ->orderBy('e.id', 'desc');
+        return $this
+            ->getBuilderByUser($userId)
+            ->andWhere('e.isStarred = true')
+        ;
     }
 
     /**

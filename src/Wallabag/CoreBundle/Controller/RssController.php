@@ -22,22 +22,7 @@ class RssController extends Controller
      */
     public function showUnreadAction(User $user)
     {
-        $qb = $this->getDoctrine()
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->findUnreadByUser(
-                $user->getId()
-            );
-
-        $pagerAdapter = new DoctrineORMAdapter($qb->getQuery());
-        $entries = new Pagerfanta($pagerAdapter);
-
-        $perPage = $user->getConfig()->getRssLimit() ?: $this->container->getParameter('rss_limit');
-        $entries->setMaxPerPage($perPage);
-
-        return $this->render('WallabagCoreBundle:Entry:entries.xml.twig', array(
-            'type' => 'unread',
-            'entries' => $entries,
-        ));
+        return $this->showEntries('unread', $user);
     }
 
     /**
@@ -50,22 +35,7 @@ class RssController extends Controller
      */
     public function showArchiveAction(User $user)
     {
-        $qb = $this->getDoctrine()
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->findArchiveByUser(
-                $user->getId()
-            );
-
-        $pagerAdapter = new DoctrineORMAdapter($qb->getQuery());
-        $entries = new Pagerfanta($pagerAdapter);
-
-        $perPage = $user->getConfig()->getRssLimit() ?: $this->container->getParameter('rss_limit');
-        $entries->setMaxPerPage($perPage);
-
-        return $this->render('WallabagCoreBundle:Entry:entries.xml.twig', array(
-            'type' => 'archive',
-            'entries' => $entries,
-        ));
+        return $this->showEntries('archive', $user);
     }
 
     /**
@@ -78,11 +48,38 @@ class RssController extends Controller
      */
     public function showStarredAction(User $user)
     {
-        $qb = $this->getDoctrine()
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->findStarredByUser(
-                $user->getId()
-            );
+        return $this->showEntries('starred', $user);
+    }
+
+    /**
+     * Global method to retrieve entries depending on the given type
+     * It returns the response to be send.
+     *
+     * @param string $type Entries type: unread, starred or archive
+     * @param User   $user
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    private function showEntries($type, User $user)
+    {
+        $repository = $this->getDoctrine()->getRepository('WallabagCoreBundle:Entry');
+
+        switch ($type) {
+            case 'starred':
+                $qb = $repository->getBuilderForStarredByUser($user->getId());
+                break;
+
+            case 'archive':
+                $qb = $repository->getBuilderForArchiveByUser($user->getId());
+                break;
+
+            case 'unread':
+                $qb = $repository->getBuilderForUnreadByUser($user->getId());
+                break;
+
+            default:
+                throw new \InvalidArgumentException(sprintf('Type "%s" is not implemented.', $type));
+        }
 
         $pagerAdapter = new DoctrineORMAdapter($qb->getQuery());
         $entries = new Pagerfanta($pagerAdapter);
@@ -91,7 +88,7 @@ class RssController extends Controller
         $entries->setMaxPerPage($perPage);
 
         return $this->render('WallabagCoreBundle:Entry:entries.xml.twig', array(
-            'type' => 'starred',
+            'type' => $type,
             'entries' => $entries,
         ));
     }
