@@ -5,6 +5,7 @@ function init_filters() {
         $('.button-collapse-right').sideNav({ edge: 'right' });
         $('#clear_form_filters').on('click', function(){
             $('#filters input').val('');
+            $('#filters :checked').removeAttr('checked');
             return false;
         });
     }
