@@ -55,9 +55,9 @@
             </div>
             <div class="input-field nav-panel-buttom">
                 <ul>
-                    <li class="bold"><a class="waves-effect" href="{{ path('new') }}" id="nav-btn-add"><i class="mdi-content-add"></i></a></li>
-                    <li><a class="waves-effect" href="javascript: void(null);" id="nav-btn-search"><i class="mdi-action-search"></i></a>
-                    <li id="button_filters"><a href="#" data-activates="filters" class="nav-panel-menu button-collapse-right"><i class="mdi-content-filter-list"></i></a></li>
+                    <li class="bold"><a title="{% trans %}Add a new entry{% endtrans %}" class="waves-effect" href="{{ path('new') }}" id="nav-btn-add"><i class="mdi-content-add"></i></a></li>
+                    <li><a title="{% trans %}Search{% endtrans %}" class="waves-effect" href="javascript: void(null);" id="nav-btn-search"><i class="mdi-action-search"></i></a>
+                    <li id="button_filters"><a title="{% trans %}Filter entries{% endtrans %}" href="#" data-activates="filters" class="nav-panel-menu button-collapse-right"><i class="mdi-content-filter-list"></i></a></li>
                 </ul>
             </div>
             <form method="get" action="index.php">
