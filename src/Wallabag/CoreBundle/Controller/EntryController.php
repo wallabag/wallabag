@@ -201,29 +201,6 @@ class EntryController extends Controller
                 'currentPage' => $page,
             )
         );
-
-        if ($request->query->has($form->getName())) {
-            // manually bind values from the request
-            $form->submit($request->query->get($form->getName()));
-
-            // build the query from the given form object
-            $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($form, $filterBuilder);
-        }
-
-        $pagerAdapter = new DoctrineORMAdapter($filterBuilder->getQuery());
-        $entries = new Pagerfanta($pagerAdapter);
-
-        $entries->setMaxPerPage($this->getUser()->getConfig()->getItemsPerPage());
-        $entries->setCurrentPage($page);
-
-        return $this->render(
-            'WallabagCoreBundle:Entry:entries.html.twig',
-            array(
-                'form' => $form->createView(),
-                'entries' => $entries,
-                'currentPage' => $page,
-            )
-        );
     }
 
     /**
