@@ -102,6 +102,21 @@ class EntryController extends Controller
     }
 
     /**
+     * Shows all entries for current user.
+     *
+     * @param Request $request
+     * @param int     $page
+     *
+     * @Route("/all/list/{page}", name="all", defaults={"page" = "1"})
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function showAllAction(Request $request, $page)
+    {
+        return $this->showEntries('all', $request, $page);
+    }
+
+    /**
      * Shows unread entries for current user.
      *
      * @param Request $request
@@ -171,6 +186,10 @@ class EntryController extends Controller
 
             case 'unread':
                 $qb = $repository->getBuilderForUnreadByUser($this->getUser()->getId());
+                break;
+
+            case 'all':
+                $qb = $repository->getBuilderForAllByUser($this->getUser()->getId());
                 break;
 
             default:

@@ -21,7 +21,7 @@
     {% if entries is empty %}
         <div class="messages warning"><p>{% trans %}No articles found.{% endtrans %}</p></div>
     {% else %}
-        <div><form>{{ form_rest(form) }}<button class="btn waves-effect waves-light" type="submit" id="submit-filter" value="filter">Filter</button></form></div>
+        <div><form action="{{ path('all') }}">{{ form_rest(form) }}<button class="btn waves-effect waves-light" type="submit" id="submit-filter" value="filter">Filter</button></form></div>
         {% for entry in entries %}
             <div id="entry-{{ entry.id|e }}" class="entry">
                 <h2><a href="{{ path('view', { 'id': entry.id }) }}">{{ entry.title|raw }}</a></h2>

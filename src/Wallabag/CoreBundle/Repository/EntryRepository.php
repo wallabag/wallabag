@@ -25,6 +25,20 @@ class EntryRepository extends EntityRepository
     }
 
     /**
+     * Retrieves all entries for a user.
+     *
+     * @param int $userId
+     *
+     * @return QueryBuilder
+     */
+    public function getBuilderForAllByUser($userId)
+    {
+        return $this
+            ->getBuilderByUser($userId)
+        ;
+    }
+
+    /**
      * Retrieves unread entries for a user.
      *
      * @param int $userId

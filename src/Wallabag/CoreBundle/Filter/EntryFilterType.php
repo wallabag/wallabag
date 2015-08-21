@@ -39,7 +39,9 @@ class EntryFilterType extends AbstractType
 
                         return $filterQuery->createCondition($expression);
                     },
-            ));
+            ))
+            ->add('isArchived', 'filter_checkbox')
+            ->add('isStarred', 'filter_checkbox');
     }
 
     public function getName()

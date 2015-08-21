@@ -7,6 +7,8 @@
     {% trans %}Starred{% endtrans %}
   {% elseif currentRoute == 'archive' %}
     {% trans %}Archive{% endtrans %}
+  {% elseif currentRoute == 'all' %}
+    {% trans %}Filtered{% endtrans %}
   {% else %}
     {% trans %}Unread{% endtrans %}
   {% endif %}
@@ -59,11 +61,25 @@
 
     <!-- Filters -->
     <div id="filters" class="side-nav fixed right-aligned">
-        <form>
+        <form action="{{ path('all') }}">
 
             <h4 class="center">{% trans %}Filters{% endtrans %}</h1>
 
             <div class="row">
+
+
+                <div class="col s12">
+                    <label>{% trans %}Status{% endtrans %}</label>
+                </div>
+                <div class="input-field col s6">
+                    {{ form_widget(form.isArchived) }}
+                    <label for="entry_filter_isArchived">{% trans %}Archived{% endtrans %}</label>
+                </div>
+
+                <div class="input-field col s6">
+                    {{ form_widget(form.isStarred) }}
+                    <label for="entry_filter_isStarred">{% trans %}Starred{% endtrans %}</label>
+                </div>
 
                 <div class="col s12">
                     <label>{% trans %}Reading time in minutes{% endtrans %}</label>
@@ -76,7 +92,6 @@
                     {{ form_widget(form.readingTime.right_number, {'type': 'number'}) }}
                     <label for="entry_filter_readingTime_right_number">{% trans %}to{% endtrans %}</label>
                 </div>
-
 
                 <div class="input-field col s6">
                     {{ form_widget(form.domainName, {'type': 'text', 'attr' : {'placeholder': 'website.com'} }) }}
