@@ -21,3 +21,7 @@ tools:
     php_code_coverage: true
     php_sim: false
     php_cpd: false
+
+checks:
+    php:
+        code_rating: true
