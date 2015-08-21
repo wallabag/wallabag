@@ -113,34 +113,7 @@ class EntryController extends Controller
      */
     public function showAllAction(Request $request, $page)
     {
-        $form = $this->get('form.factory')->create(new EntryFilterType());
-
-        $filterBuilder = $this->getDoctrine()
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->findAllByUser($this->getUser()->getId());
-
-        if ($request->query->has($form->getName())) {
-            // manually bind values from the request
-            $form->submit($request->query->get($form->getName()));
-
-            // build the query from the given form object
-            $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($form, $filterBuilder);
-        }
-
-        $pagerAdapter = new DoctrineORMAdapter($filterBuilder->getQuery());
-        $entries = new Pagerfanta($pagerAdapter);
-
-        $entries->setMaxPerPage($this->getUser()->getConfig()->getItemsPerPage());
-        $entries->setCurrentPage($page);
-
-        return $this->render(
-            'WallabagCoreBundle:Entry:entries.html.twig',
-            array(
-                'form' => $form->createView(),
-                'entries' => $entries,
-                'currentPage' => $page,
-            )
-        );
+        return $this->showEntries('all', $request, $page);
     }
 
     /**
@@ -213,6 +186,10 @@ class EntryController extends Controller
 
             case 'unread':
                 $qb = $repository->getBuilderForUnreadByUser($this->getUser()->getId());
+                break;
+
+            case 'all':
+                $qb = $repository->getBuilderForAllByUser($this->getUser()->getId());
                 break;
 
             default:
