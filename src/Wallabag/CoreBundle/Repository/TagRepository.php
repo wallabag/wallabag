@@ -24,4 +24,21 @@ class TagRepository extends EntityRepository
 
         return new Pagerfanta($pagerAdapter);
     }
+
+    /**
+     * Find a tag by its label and its owner.
+     *
+     * @param string $label
+     * @param int    $userId
+     *
+     * @return Tag|null
+     */
+    public function findOneByLabelAndUserId($label, $userId)
+    {
+        return $this->createQueryBuilder('t')
+            ->where('t.label = :label')->setParameter('label', $label)
+            ->andWhere('t.user = :user_id')->setParameter('user_id', $userId)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }
