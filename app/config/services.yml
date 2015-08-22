@@ -4,6 +4,7 @@ parameters:
     security.authentication.provider.dao.class: Wallabag\CoreBundle\Security\Authentication\Provider\WallabagAuthenticationProvider
     security.encoder.digest.class: Wallabag\CoreBundle\Security\Authentication\Encoder\WallabagPasswordEncoder
     security.validator.user_password.class: Wallabag\CoreBundle\Security\Validator\WallabagUserPasswordValidator
+    lexik_form_filter.get_filter.doctrine_orm.class: Wallabag\CoreBundle\Event\Subscriber\CustomDoctrineORMSubscriber
 
 services:
     # used for tests
