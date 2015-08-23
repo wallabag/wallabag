@@ -63,13 +63,15 @@
                             <div class="row">
                                 <div class="input-field col s12">
                                     <label>Rss token</label>
-                                    {% if rss.token %}
-                                        {{ rss.token }}
-                                    {% else %}
-                                        <em>No token</em>
-                                    {% endif %}
-                                    –
-                                    <a href="{{ path('generate_token') }}">Regenerate ?</a>
+                                    <div>
+                                        {% if rss.token %}
+                                            {{ rss.token }}
+                                        {% else %}
+                                            <em>No token</em>
+                                        {% endif %}
+                                        –
+                                        <a href="{{ path('generate_token') }}">Regenerate ?</a>
+                                    </div>
                                 </div>
                             </div>
 
