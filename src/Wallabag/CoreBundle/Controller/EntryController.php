@@ -292,16 +292,15 @@ class EntryController extends Controller
     }
 
     /**
-     * Deletes entry.
+     * Deletes entry and redirect to the homepage.
      *
-     * @param Request $request
-     * @param Entry   $entry
+     * @param Entry $entry
      *
      * @Route("/delete/{id}", requirements={"id" = "\d+"}, name="delete_entry")
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function deleteEntryAction(Request $request, Entry $entry)
+    public function deleteEntryAction(Entry $entry)
     {
         $this->checkUserAction($entry);
 
@@ -314,7 +313,7 @@ class EntryController extends Controller
             'Entry deleted'
         );
 
-        return $this->redirect($request->headers->get('referer'));
+        return $this->redirect($this->generateUrl('homepage'));
     }
 
     /**
