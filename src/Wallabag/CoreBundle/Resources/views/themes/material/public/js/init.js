@@ -27,6 +27,12 @@ $(document).ready(function(){
     });
     init_filters();
 
+    $('#nav-btn-add-tag').on('click', function(){
+       $(".nav-panel-add-tag").toggle(100);
+       $(".nav-panel-menu").addClass('hidden');
+       $("#tag_label").focus();
+       return false;
+    });
     $('#nav-btn-add').on('click', function(){
        $(".nav-panel-buttom").hide(100);
        $(".nav-panel-add").show(100);
