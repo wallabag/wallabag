@@ -149,7 +149,7 @@ class WallabagRestController extends Controller
         $content = $this->get('wallabag_core.graby')->fetchContent($url);
 
         $entry = new Entry($this->getUser());
-        $entry->setUrl($url);
+        $entry->setUrl($content['url'] ?: $url);
         $entry->setTitle($request->request->get('title') ?: $content['title']);
         $entry->setContent($content['html']);
         $entry->setMimetype($content['content_type']);

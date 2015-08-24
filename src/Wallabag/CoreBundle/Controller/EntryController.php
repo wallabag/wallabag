@@ -32,6 +32,7 @@ class EntryController extends Controller
         if ($form->isValid()) {
             $content = $this->get('wallabag_core.graby')->fetchContent($entry->getUrl());
 
+            $entry->setUrl($content['url'] ?: $entry->getUrl());
             $entry->setTitle($content['title']);
             $entry->setContent($content['html']);
             $entry->setMimetype($content['content_type']);
