@@ -33,7 +33,7 @@ class EntryFilterType extends AbstractType
             ->add('domainName', 'filter_text', array(
                 'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
                         $value = $values['value'];
-                        if (strlen($value) <= 3 || empty($value)) {
+                        if (strlen($value) <= 2 || empty($value)) {
                             return;
                         }
                         $expression = $filterQuery->getExpr()->like($field, $filterQuery->getExpr()->literal('%'.$value.'%'));
