@@ -31,10 +31,14 @@ class EntryController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $content = Extractor::extract($entry->getUrl());
+            $content = $this->get('wallabag_core.graby')->fetchContent($entry->getUrl());
 
-            $entry->setTitle($content->getTitle());
-            $entry->setContent($content->getBody());
+            $entry->setTitle($content['title']);
+            $entry->setContent($content['html']);
+            $entry->setMimetype($content['content_type']);
+            if (isset($content['open_graph']['og_image'])) {
+                $entry->setPreviewPicture($content['open_graph']['og_image']);
+            }
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($entry);

@@ -10,7 +10,7 @@
         <div class="nav-wrapper cyan darken-1">
             <ul>
                 <li>
-                    <a class="waves-effect" href="/">
+                    <a class="waves-effect" href="{{ path('homepage') }}">
                         <i class="mdi-action-exit-to-app"></i>
                     </a>
                 </li>
@@ -36,7 +36,7 @@
     </nav>
     <ul id="slide-out" class="collapsible side-nav fixed reader-mode" data-collapsible="accordion">
         <li class="bold border-bottom hide-on-med-and-down">
-            <a class="waves-effect collapsible-header" href="/">
+            <a class="waves-effect collapsible-header" href="{{ path('homepage') }}">
                 <i class="mdi-action-exit-to-app small"></i>
                 <span>{% trans %}back{% endtrans %}</span>
             </a>

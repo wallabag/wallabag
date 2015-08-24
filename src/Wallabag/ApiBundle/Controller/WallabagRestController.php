@@ -147,11 +147,16 @@ class WallabagRestController extends Controller
     {
         $url = $request->request->get('url');
 
-        $content = Extractor::extract($url);
+        $content = $this->get('wallabag_core.graby')->fetchContent($url);
+
         $entry = new Entry($this->getUser());
         $entry->setUrl($url);
-        $entry->setTitle($request->request->get('title') ?: $content->getTitle());
-        $entry->setContent($content->getBody());
+        $entry->setTitle($request->request->get('title') ?: $content['title']);
+        $entry->setContent($content['html']);
+        $entry->setMimetype($content['content_type']);
+        if (isset($content['open_graph']['og_image'])) {
+            $entry->setPreviewPicture($content['open_graph']['og_image']);
+        }
 
         $tags = $request->request->get('tags', '');
         if (!empty($tags)) {
