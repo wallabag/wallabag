@@ -2,6 +2,7 @@ $(document).ready(function() {
 
     $("#search-form").hide();
     $("#bagit-form").hide();
+    $("#filter-form").hide();
 
     //---------------------------------------------------------------------------
     // Toggle the "Search" popup in the sidebar
@@ -16,6 +17,13 @@ $(document).ready(function() {
         } else {
             $("#content").removeClass("opacity03");
         }
+    }
+
+    //---------------------------------------------------------------------------
+    // Toggle the "Filter" popup on entries list
+    //---------------------------------------------------------------------------
+    function toggleFilter() {
+        $("#filter-form").toggle();
     }
 
     //---------------------------------------------------------------------------
@@ -50,6 +58,11 @@ $(document).ready(function() {
         $("#searchfield").focus();
     });
 
+    $("#filter").click(function(){
+        closePopups();
+        toggleFilter();
+    });
+
     $("#bagit").click(function(){
         closePopups();
         toggleBagit();
@@ -60,13 +73,11 @@ $(document).ready(function() {
         toggleSearch();
     });
 
+    $("#filter-form-close").click(function(){
+        toggleFilter();
+    });
+
     $("#bagit-form-close").click(function(){
         toggleBagit();
     });
-
-    // $("#").click(function(){
-    //     toggleSearch();
-    // });
-
-
 });
