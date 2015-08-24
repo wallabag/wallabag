@@ -19,3 +19,54 @@
     <script src="{{ asset('themes/baggy/js/saveLink.js') }}"></script>
     <script src="{{ asset('themes/baggy/js/popupForm.js') }}"></script>
 {% endblock %}
+
+{% block header %}
+    <header class="w600p center mbm">
+        <h1 class="logo">
+            {% block logo %}
+                <img width="100" height="100" src="{{ asset('themes/baggy/img/logo-w.png') }}" alt="wallabag logo" />
+            {% endblock %}
+        </h1>
+    </header>
+{% endblock %}
+
+{% block menu %}
+    <button id="menu" class="icon icon-menu desktopHide"><span>Menu</span></button>
+    <ul id="links" class="links">
+        <li><a href="{{ path('unread') }}">{% trans %}unread{% endtrans %}</a></li>
+        <li><a href="{{ path('starred') }}">{% trans %}favorites{% endtrans %}</a></li>
+        <li><a href="{{ path('archive') }}"}>{% trans %}archive{% endtrans %}</a></li>
+        <li><a href="{{ path('all') }}"}>{% trans %}all{% endtrans %}</a></li>
+        <li><a href="{{ path('tag') }}">{% trans %}tags{% endtrans %}</a></li>
+        <li><a href="{{ path('new') }}">{% trans %}save a link{% endtrans %}</a></li>
+        <li style="position: relative;"><a href="javascript: void(null);" id="search">{% trans %}search{% endtrans %}</a>
+            <div id="search-form" class="messages info popup-form">
+                <form method="get" action="index.php">
+                    <h2>{% trans %}Search{% endtrans %}</h2>
+                    <a href="javascript: void(null);" id="search-form-close" class="close-button--popup close-button">&times;</a>
+                    <input type="hidden" name="view" value="search"></input>
+                    <input required placeholder="{% trans %}Enter your search here{% endtrans %}" type="text" name="search" id="searchfield"><br>
+                    <input id="submit-search" type="submit" value="{% trans %}Search{% endtrans %}"></input>
+                </form>
+            </div>
+        </li>
+        <li><a href="{{ path('config') }}">{% trans %}config{% endtrans %}</a></li>
+        <li><a href="{{ path('about') }}">{% trans %}about{% endtrans %}</a></li>
+        <li><a class="icon icon-power" href="{{ path('logout') }}" title="{% trans %}logout{% endtrans %}">{% trans %}logout{% endtrans %}</a></li>
+    </ul>
+{% endblock %}
+
+{% block messages %}
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="messages success">
+            <a href="#" class="closeMessage">×</a>
+            <p>{{ flashMessage }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}
+
+{% block footer %}
+    <footer class="w600p center mt3 mb3 smaller txtright">
+        <p>{% trans %}powered by{% endtrans %} <a href="http://wallabag.org">wallabag</a></p>
+    </footer>
+{% endblock %}
