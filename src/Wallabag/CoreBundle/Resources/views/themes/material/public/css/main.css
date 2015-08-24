@@ -303,6 +303,30 @@ main ul.row {
     margin: 0;
     z-index: 9999;
 }
+
+#article aside .link {
+    color: #000;
+    font-size: 0.6em;
+    text-decoration: none;
+}
+
+#article aside #list {
+    float: right;
+    margin-right: 15px;
+}
+
+#article aside span a {
+    background-color: #039be5;
+    color: #fff;
+    border-radius: 3px;
+    float: left;
+    font-size: 0.6em;
+    margin-left: 0.5em;
+    margin-bottom: 0.5em;
+    padding: 4px;
+    text-decoration: none;
+}
+
 /* ==========================================================================
    6 = Media queries
    ========================================================================== */
