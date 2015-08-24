@@ -4,24 +4,34 @@
 
 {% block content %}
     {% block pager %}
-    {% if entries is not empty %}
         <div class="results">
             <div class="nb-results">{{ entries.count }} {% trans %}entries{% endtrans %}</div>
-            <div class="pagination">
-                {% for p in range(1, entries.nbPages) if entries.nbPages > 1 %}
-                    <li>
-                        <a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'page': p})) }}" class="{{ currentPage == p ? 'current':''}}" >{{ p }}</a>
-                    </li>
-                {% endfor %}
+                <div class="pagination">
+                <a href="#" id="filter">{% trans %}Filter{% endtrans %}</a>
+                {% if entries is not empty %}
+                    –
+                    {% for p in range(1, entries.nbPages) if entries.nbPages > 1 %}
+                        <li>
+                            <a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'page': p})) }}" class="{{ currentPage == p ? 'current':''}}" >{{ p }}</a>
+                        </li>
+                    {% endfor %}
+                {% endif %}
             </div>
         </div>
-    {% endif %}
     {% endblock %}
+
+    <div id="filter-form" class="messages info popup-form">
+        <form method="get" action="{{ path('all') }}">
+            <h2>{% trans %}Filter{% endtrans %}</h2>
+            <a href="javascript: void(null);" id="filter-form-close" class="close-button--popup close-button">&times;</a>
+            {{ form_rest(form) }}
+            <button class="btn waves-effect waves-light" type="submit" id="submit-filter" value="filter">{% trans %}Filter{% endtrans %}</button>
+        </form>
+    </div>
 
     {% if entries is empty %}
         <div class="messages warning"><p>{% trans %}No articles found.{% endtrans %}</p></div>
     {% else %}
-        <div><form action="{{ path('all') }}">{{ form_rest(form) }}<button class="btn waves-effect waves-light" type="submit" id="submit-filter" value="filter">Filter</button></form></div>
         {% for entry in entries %}
             <div id="entry-{{ entry.id|e }}" class="entry">
                 <h2><a href="{{ path('view', { 'id': entry.id }) }}">{{ entry.title|raw }}</a></h2>

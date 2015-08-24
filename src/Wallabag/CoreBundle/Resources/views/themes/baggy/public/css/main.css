@@ -935,6 +935,19 @@ pre code {
 		font-size: 0.96em;
 }
 
+#filter-form {
+    margin-top: 30px !important;
+    width: 500px;
+    height: 370px;
+    right: 5em;
+    left: inherit;
+}
+
+#filter-form form {
+    width: 500px;
+    height: 370px;
+}
+
 
 /* ==========================================================================
    6 = Media Queries
