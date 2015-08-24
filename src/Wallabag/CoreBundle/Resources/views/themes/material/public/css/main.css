@@ -367,6 +367,7 @@ main ul.row {
    7 = Others
    ========================================================================== */
 
-div.input-field div, div.input-field ul {
+/* force height on non-input field in the settings page */
+div.settings div.input-field div, div.settings div.input-field ul {
     margin-top: 40px;
 }
