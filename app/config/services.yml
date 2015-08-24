@@ -12,3 +12,8 @@ services:
         class: Doctrine\Common\Cache\FilesystemCache
         arguments:
             - %kernel.cache_dir%/doctrine/metadata
+
+    twig.extension.text:
+        class: Twig_Extensions_Extension_Text
+        tags:
+            - { name: twig.extension }

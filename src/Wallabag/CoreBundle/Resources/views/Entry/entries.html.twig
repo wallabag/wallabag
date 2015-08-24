@@ -37,7 +37,7 @@
                     <li><a title="{% trans %}delete{% endtrans %}" class="tool delete icon-trash icon" href="{{ path('delete_entry', { 'id': entry.id }) }}"><span>{% trans %}delete{% endtrans %}</span></a></li>
                     <li><a href="{{ entry.url|e }}" target="_blank" title="{% trans %}original{% endtrans %} : {{ entry.title|e }}" class="tool link icon-link icon"><span>{{ entry.domainName }}</span></a></li>
                 </ul>
-                <p>{{ entry.content|striptags|slice(0, 300) }}...</p>
+                <p>{{ entry.content|striptags|slice(0, 300) }}&hellip;</p>
             </div>
         {% endfor %}
     {% endif %}
