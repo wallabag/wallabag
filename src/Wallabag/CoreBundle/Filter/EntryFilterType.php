@@ -27,8 +27,9 @@ class EntryFilterType extends AbstractType
                         ),
                         'format' => 'dd/MM/yyyy',
                         'widget' => 'single_text',
-                ),
-            ))
+                    ),
+                )
+            )
             ->add('domainName', 'filter_text', array(
                 'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
                         $value = $values['value'];
