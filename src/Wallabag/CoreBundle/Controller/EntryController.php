@@ -6,7 +6,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\CoreBundle\Service\Extractor;
 use Wallabag\CoreBundle\Form\Type\NewEntryType;
 use Wallabag\CoreBundle\Form\Type\EditEntryType;
 use Wallabag\CoreBundle\Filter\EntryFilterType;

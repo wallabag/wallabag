@@ -8,7 +8,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
-use Wallabag\CoreBundle\Service\Extractor;
 use Hateoas\Configuration\Route;
 use Hateoas\Representation\Factory\PagerfantaFactory;
 

@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "52545aca8a752dfc2969d6cb9f0cb8d3",
+    "hash": "5799a00ed8336543f0bfe7320df73ca2",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -897,6 +897,165 @@
             "time": "2015-06-16 08:39:26"
         },
         {
+            "name": "guzzlehttp/guzzle",
+            "version": "5.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/guzzle.git",
+                "reference": "f3c8c22471cb55475105c14769644a49c3262b93"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/f3c8c22471cb55475105c14769644a49c3262b93",
+                "reference": "f3c8c22471cb55475105c14769644a49c3262b93",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/ringphp": "^1.1",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "ext-curl": "*",
+                "phpunit/phpunit": "^4.0",
+                "psr/log": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GuzzleHttp\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Guzzle is a PHP HTTP client library and framework for building RESTful web service clients",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "client",
+                "curl",
+                "framework",
+                "http",
+                "http client",
+                "rest",
+                "web service"
+            ],
+            "time": "2015-05-20 03:47:55"
+        },
+        {
+            "name": "guzzlehttp/ringphp",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/RingPHP.git",
+                "reference": "dbbb91d7f6c191e5e405e900e3102ac7f261bc0b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/RingPHP/zipball/dbbb91d7f6c191e5e405e900e3102ac7f261bc0b",
+                "reference": "dbbb91d7f6c191e5e405e900e3102ac7f261bc0b",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/streams": "~3.0",
+                "php": ">=5.4.0",
+                "react/promise": "~2.0"
+            },
+            "require-dev": {
+                "ext-curl": "*",
+                "phpunit/phpunit": "~4.0"
+            },
+            "suggest": {
+                "ext-curl": "Guzzle will use specific adapters if cURL is present"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GuzzleHttp\\Ring\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Provides a simple API and specification that abstracts away the details of HTTP into a single PHP function.",
+            "time": "2015-05-20 03:37:09"
+        },
+        {
+            "name": "guzzlehttp/streams",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/streams.git",
+                "reference": "47aaa48e27dae43d39fc1cea0ccf0d84ac1a2ba5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/streams/zipball/47aaa48e27dae43d39fc1cea0ccf0d84ac1a2ba5",
+                "reference": "47aaa48e27dae43d39fc1cea0ccf0d84ac1a2ba5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GuzzleHttp\\Stream\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Provides a simple abstraction over streams of data",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "Guzzle",
+                "stream"
+            ],
+            "time": "2014-10-12 19:18:40"
+        },
+        {
             "name": "htmlawed/htmlawed",
             "version": "1.1.19",
             "source": {
@@ -992,6 +1151,148 @@
                 "parameters management"
             ],
             "time": "2015-06-03 08:27:03"
+        },
+        {
+            "name": "j0k3r/graby",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/j0k3r/graby.git",
+                "reference": "ee648fa45efb38b6eb35fdf17606ddac1e414665"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/j0k3r/graby/zipball/ee648fa45efb38b6eb35fdf17606ddac1e414665",
+                "reference": "ee648fa45efb38b6eb35fdf17606ddac1e414665",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^5.2.0",
+                "htmlawed/htmlawed": "^1.1.19",
+                "j0k3r/graby-site-config": "*",
+                "j0k3r/php-readability": "^1.0",
+                "monolog/monolog": "^1.13.1",
+                "neitanod/forceutf8": "^1.4",
+                "php": ">=5.4",
+                "simplepie/simplepie": "^1.3.1",
+                "symfony/finder": "^2.6.6",
+                "symfony/options-resolver": "^2.6.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Graby\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "AGPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Jeremy Benoist",
+                    "email": "jeremy.benoist@gmail.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "FiveFilters.org",
+                    "email": "fivefilters@fivefilters.org",
+                    "role": "Developer (original version)"
+                }
+            ],
+            "description": "Graby helps you extract article content from web pages",
+            "time": "2015-08-19 23:05:12"
+        },
+        {
+            "name": "j0k3r/graby-site-config",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/j0k3r/graby-site-config.git",
+                "reference": "13b5e27c8e73580e703cdaec9c8ad3a5ade3c547"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/13b5e27c8e73580e703cdaec9c8ad3a5ade3c547",
+                "reference": "13b5e27c8e73580e703cdaec9c8ad3a5ade3c547",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "AGPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Jeremy Benoist",
+                    "email": "jeremy.benoist@gmail.com"
+                }
+            ],
+            "description": "Graby site config files",
+            "time": "2015-08-07 19:10:45"
+        },
+        {
+            "name": "j0k3r/php-readability",
+            "version": "v1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/j0k3r/php-readability.git",
+                "reference": "91b80b70e2193fb852d96daf1fe17303876881dc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/j0k3r/php-readability/zipball/91b80b70e2193fb852d96daf1fe17303876881dc",
+                "reference": "91b80b70e2193fb852d96daf1fe17303876881dc",
+                "shasum": ""
+            },
+            "require": {
+                "ext-tidy": ">=1.2",
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Readability\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Keyvan Minoukadeh",
+                    "email": "keyvan@keyvan.net",
+                    "homepage": "http://keyvan.net",
+                    "role": "Developer (ported original JS code to PHP)"
+                },
+                {
+                    "name": "Arc90",
+                    "homepage": "http://arc90.com",
+                    "role": "Developer (original JS version)"
+                },
+                {
+                    "name": "Jeremy Benoist",
+                    "email": "jeremy.benoist@gmail.com",
+                    "homepage": "http://www.j0k3r.net",
+                    "role": "Developer"
+                },
+                {
+                    "name": "DitherSky",
+                    "homepage": "https://github.com/Dither",
+                    "role": "Developer (https://github.com/Dither/full-text-rss)"
+                }
+            ],
+            "description": "Automatic article extraction from HTML",
+            "keywords": [
+                "article",
+                "article extraction",
+                "content",
+                "content extraction",
+                "extraction",
+                "html"
+            ],
+            "time": "2015-08-19 21:12:31"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -1463,12 +1764,12 @@
             "version": "1.5",
             "source": {
                 "type": "git",
-                "url": "https://github.com/matgargano/simplehtmldom.git",
+                "url": "https://github.com/matstars/simplehtmldom.git",
                 "reference": "37fb0d7c1bda45c5a4cf14fdef56c1edf6aa42be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/matgargano/simplehtmldom/zipball/37fb0d7c1bda45c5a4cf14fdef56c1edf6aa42be",
+                "url": "https://api.github.com/repos/matstars/simplehtmldom/zipball/37fb0d7c1bda45c5a4cf14fdef56c1edf6aa42be",
                 "reference": "37fb0d7c1bda45c5a4cf14fdef56c1edf6aa42be",
                 "shasum": ""
             },
@@ -1491,7 +1792,9 @@
             "authors": [
                 {
                     "name": "S.C. Chen",
-                    "email": "me578022@gmail.com"
+                    "email": "me578022@gmail.com",
+                    "homepage": "http://simplehtmldom.sourceforge.net/",
+                    "role": "Lead Developer"
                 }
             ],
             "description": "Composer package that gives you access to and (unlike all the others at this time) autoloads S.C. Chen's PHP Simple HTML DOM Parser Library",
@@ -1629,6 +1932,40 @@
                 "psr-3"
             ],
             "time": "2015-08-09 17:44:44"
+        },
+        {
+            "name": "neitanod/forceutf8",
+            "version": "v1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/neitanod/forceutf8.git",
+                "reference": "28d50d579179abac1f6a55b03c6d9d3f6573867c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/neitanod/forceutf8/zipball/28d50d579179abac1f6a55b03c6d9d3f6573867c",
+                "reference": "28d50d579179abac1f6a55b03c6d9d3f6573867c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "ForceUTF8\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Sebastián Grignoli",
+                    "email": "grignoli@gmail.com"
+                }
+            ],
+            "description": "PHP Class Encoding featuring popular Encoding::toUTF8() function --formerly known as forceUTF8()-- that fixes mixed encoded strings.",
+            "homepage": "https://github.com/neitanod/forceutf8",
+            "time": "2014-09-24 14:59:43"
         },
         {
             "name": "nelmio/api-doc-bundle",
@@ -1966,6 +2303,50 @@
                 "psr-3"
             ],
             "time": "2012-12-21 11:40:51"
+        },
+        {
+            "name": "react/promise",
+            "version": "v2.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/reactphp/promise.git",
+                "reference": "3b6fca09c7d56321057fa8867c8dbe1abf648627"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/reactphp/promise/zipball/3b6fca09c7d56321057fa8867c8dbe1abf648627",
+                "reference": "3b6fca09c7d56321057fa8867c8dbe1abf648627",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "React\\Promise\\": "src/"
+                },
+                "files": [
+                    "src/functions_include.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jan Sorgalla",
+                    "email": "jsorgalla@gmail.com"
+                }
+            ],
+            "description": "A lightweight implementation of CommonJS Promises/A for PHP",
+            "time": "2015-07-03 13:48:55"
         },
         {
             "name": "sensio/distribution-bundle",
@@ -2601,20 +2982,20 @@
         },
         {
             "name": "twig/extensions",
-            "version": "v1.2.0",
+            "version": "v1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig-extensions.git",
-                "reference": "8cf4b9fe04077bd54fc73f4fde83347040c3b8cd"
+                "reference": "449e3c8a9ffad7c2479c7864557275a32b037499"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig-extensions/zipball/8cf4b9fe04077bd54fc73f4fde83347040c3b8cd",
-                "reference": "8cf4b9fe04077bd54fc73f4fde83347040c3b8cd",
+                "url": "https://api.github.com/repos/twigphp/Twig-extensions/zipball/449e3c8a9ffad7c2479c7864557275a32b037499",
+                "reference": "449e3c8a9ffad7c2479c7864557275a32b037499",
                 "shasum": ""
             },
             "require": {
-                "twig/twig": "~1.12"
+                "twig/twig": "~1.20|~2.0"
             },
             "require-dev": {
                 "symfony/translation": "~2.3"
@@ -2625,7 +3006,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.2.x-dev"
+                    "dev-master": "1.3-dev"
                 }
             },
             "autoload": {
@@ -2649,7 +3030,7 @@
                 "i18n",
                 "text"
             ],
-            "time": "2014-10-30 14:30:03"
+            "time": "2015-08-22 16:38:35"
         },
         {
             "name": "twig/twig",
@@ -2707,91 +3088,6 @@
                 "templating"
             ],
             "time": "2015-08-12 15:56:39"
-        },
-        {
-            "name": "wallabag/Fivefilters_Libraries",
-            "version": "1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/wallabag/Fivefilters_Libraries.git",
-                "reference": "6a07427e07308c746e0216ed254e41e053ab3448"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/wallabag/Fivefilters_Libraries/zipball/6a07427e07308c746e0216ed254e41e053ab3448",
-                "reference": "6a07427e07308c746e0216ed254e41e053ab3448",
-                "shasum": ""
-            },
-            "type": "library",
-            "authors": [
-                {
-                    "name": "Nicolas Lœuillet",
-                    "email": "nicolas@loeuillet.org",
-                    "homepage": "http://www.cdetc.fr"
-                }
-            ],
-            "description": "Libraries from @fivefilters.",
-            "homepage": "https://github.com/wallabag/Fivefilters_Libraries",
-            "support": {
-                "source": "https://github.com/wallabag/Fivefilters_Libraries/tree/1.0.1",
-                "issues": "https://github.com/wallabag/Fivefilters_Libraries/issues"
-            },
-            "time": "2015-08-14 10:11:06"
-        },
-        {
-            "name": "wallabag/php-readability",
-            "version": "v1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/wallabag/php-readability.git",
-                "reference": "e25182cdd1ccdebdce1149ab79c886eae1363674"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/wallabag/php-readability/zipball/e25182cdd1ccdebdce1149ab79c886eae1363674",
-                "reference": "e25182cdd1ccdebdce1149ab79c886eae1363674",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.2"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Readability": ""
-                }
-            },
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "Keyvan Minoukadeh",
-                    "email": "keyvan@keyvan.net",
-                    "homepage": "http://keyvan.net",
-                    "role": "Developer (ported original JS code to PHP)"
-                },
-                {
-                    "name": "Arc90",
-                    "homepage": "http://arc90.com",
-                    "role": "Developer (original JS version)"
-                }
-            ],
-            "description": "Automatic article extraction from HTML",
-            "homepage": "http://code.fivefilters.org/php-readability/",
-            "keywords": [
-                "article",
-                "article extraction",
-                "content",
-                "content extraction",
-                "extraction",
-                "html"
-            ],
-            "support": {
-                "source": "https://github.com/wallabag/php-readability/tree/v1.0",
-                "issues": "https://github.com/wallabag/php-readability/issues"
-            },
-            "time": "2013-04-17 13:51:09"
         },
         {
             "name": "willdurand/hateoas",
@@ -3466,16 +3762,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "4.8.4",
+            "version": "4.8.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "55bf1d6092b0e13a1f26bd5eaffeef3d8ad85ea7"
+                "reference": "2246830f4a1a551c67933e4171bf2126dc29d357"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/55bf1d6092b0e13a1f26bd5eaffeef3d8ad85ea7",
-                "reference": "55bf1d6092b0e13a1f26bd5eaffeef3d8ad85ea7",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/2246830f4a1a551c67933e4171bf2126dc29d357",
+                "reference": "2246830f4a1a551c67933e4171bf2126dc29d357",
                 "shasum": ""
             },
             "require": {
@@ -3534,24 +3830,24 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-08-15 04:21:23"
+            "time": "2015-08-24 04:09:38"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
-            "version": "2.3.6",
+            "version": "2.3.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
-                "reference": "18dfbcb81d05e2296c0bcddd4db96cade75e6f42"
+                "reference": "5e2645ad49d196e020b85598d7c97e482725786a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/18dfbcb81d05e2296c0bcddd4db96cade75e6f42",
-                "reference": "18dfbcb81d05e2296c0bcddd4db96cade75e6f42",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/5e2645ad49d196e020b85598d7c97e482725786a",
+                "reference": "5e2645ad49d196e020b85598d7c97e482725786a",
                 "shasum": ""
             },
             "require": {
-                "doctrine/instantiator": "~1.0,>=1.0.2",
+                "doctrine/instantiator": "^1.0.2",
                 "php": ">=5.3.3",
                 "phpunit/php-text-template": "~1.2",
                 "sebastian/exporter": "~1.2"
@@ -3590,7 +3886,7 @@
                 "mock",
                 "xunit"
             ],
-            "time": "2015-07-10 06:54:24"
+            "time": "2015-08-19 09:14:08"
         },
         {
             "name": "sebastian/comparator",
@@ -4014,7 +4310,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "j0k3r/graby": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

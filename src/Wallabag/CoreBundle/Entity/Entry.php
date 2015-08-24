@@ -428,7 +428,7 @@ class Entry
     }
 
     /**
-     * Set previewPicture
+     * Set previewPicture.
      *
      * @param string $previewPicture
      *
@@ -442,7 +442,7 @@ class Entry
     }
 
     /**
-     * Get previewPicture
+     * Get previewPicture.
      *
      * @return string
      */
@@ -450,5 +450,4 @@ class Entry
     {
         return $this->previewPicture;
     }
-
 }
