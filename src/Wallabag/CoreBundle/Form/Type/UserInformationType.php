@@ -14,7 +14,14 @@ class UserInformationType extends AbstractType
             ->add('name', 'text')
             ->add('email', 'email')
             ->add('save', 'submit')
+            ->remove('username')
+            ->remove('plainPassword')
         ;
+    }
+
+    public function getParent()
+    {
+        return 'fos_user_registration';
     }
 
     public function configureOptions(OptionsResolver $resolver)
