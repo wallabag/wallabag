@@ -20,15 +20,6 @@
         </div>
     {% endblock %}
 
-    <div id="filter-form" class="messages info popup-form">
-        <form method="get" action="{{ path('all') }}">
-            <h2>{% trans %}Filter{% endtrans %}</h2>
-            <a href="javascript: void(null);" id="filter-form-close" class="close-button--popup close-button">&times;</a>
-            {{ form_rest(form) }}
-            <button class="btn waves-effect waves-light" type="submit" id="submit-filter" value="filter">{% trans %}Filter{% endtrans %}</button>
-        </form>
-    </div>
-
     {% if entries is empty %}
         <div class="messages warning"><p>{% trans %}No articles found.{% endtrans %}</p></div>
     {% else %}
@@ -55,4 +46,70 @@
             </div>
         {% endfor %}
     {% endif %}
+
+    <aside id="filter-form" class="">
+        <form method="get" action="{{ path('all') }}">
+            <h2>{% trans %}Filters{% endtrans %}</h2>
+            <a href="javascript: void(null);" id="filter-form-close" class="close-button--popup close-button">&times;</a>
+
+            <div id="filter-status" class="filter-group">
+                <div class="">
+                    <label>{% trans %}Status{% endtrans %}</label>
+                </div>
+                <div class="input-field">
+                    {{ form_widget(form.isArchived) }}
+                    <label for="entry_filter_isArchived">{% trans %}Archived{% endtrans %}</label>
+                </div>
+
+                <div class="input-field">
+                    {{ form_widget(form.isStarred) }}
+                    <label for="entry_filter_isStarred">{% trans %}Starred{% endtrans %}</label>
+                </div>
+            </div>
+            <div id="filter-reading-time" class="filter-group">
+                <div class="">
+                    <label>{% trans %}Reading time in minutes{% endtrans %}</label>
+                </div>
+                <div class="input-field ">
+                    <label for="entry_filter_readingTime_left_number">{% trans %}from{% endtrans %}</label>
+                    {{ form_widget(form.readingTime.left_number, {'type': 'number'}) }}  
+                </div>
+                <div class="input-field ">
+                    <label for="entry_filter_readingTime_right_number">{% trans %}to{% endtrans %}</label>
+                    {{ form_widget(form.readingTime.right_number, {'type': 'number'}) }}
+                </div>
+            </div>
+
+            <div id="filter-domain-name" class="filter-group">
+                <label for="entry_filter_domainName">{% trans %}Domain name{% endtrans %}</label>
+                <div class="input-field ">
+                    {{ form_widget(form.domainName, {'type': 'text', 'attr' : {'placeholder': 'website.com'} }) }}
+                </div>
+            </div>
+
+            <div id="filter-creation-date" class="filter-group">
+                <div class="">
+                    <label>{% trans %}Creation date{% endtrans %}</label>
+                </div>
+                <div class="input-field ">
+                    <label for="entry_filter_createdAt_left_date" class="active">{% trans %}from{% endtrans %}</label>
+                    {{ form_widget(form.createdAt.left_date, {'type': 'date', 'attr': {'class': 'datepicker', 'data-value': form.createdAt.left_date.vars.value} }) }}
+                </div>
+                <div class="input-field ">
+                    <label for="entry_filter_createdAt_right_date" class="active">{% trans %}to{% endtrans %}</label>
+                    {{ form_widget(form.createdAt.right_date, {'type': 'date', 'attr': {'class': 'datepicker', 'data-value': form.createdAt.right_date.vars.value} }) }}
+                </div>
+            </div>
+            <div id="filter-buttons" class="filter-group">
+
+                <div class="">
+                    <a href="#!" class="center waves-effect waves-green btn-flat" id="clear_form_filters">{% trans %}Clear{% endtrans %}</a>
+                </div>
+
+                <button class="btn waves-effect waves-light" type="submit" id="submit-filter" value="filter">{% trans %}Filters{% endtrans %}</button>
+
+                </div>
+        </form>
+    </aside>
+
 {% endblock %}
