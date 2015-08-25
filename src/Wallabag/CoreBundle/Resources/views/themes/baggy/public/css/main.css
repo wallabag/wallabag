@@ -510,7 +510,6 @@ footer a {
 
 .pagination {
   text-align: right;
-  margin-bottom:50px;
 }
 
 .nb-results {
@@ -604,7 +603,6 @@ footer a {
 .close-button--popup {
 	display: inline-block;
 	position: absolute;
-	top: 0;
 	right: 0;
 	font-size: 1.4em;
 }
@@ -937,16 +935,26 @@ pre code {
 
 #filter-form {
     margin-top: 30px !important;
-    width: 500px;
-    height: 370px;
     right: 5em;
     left: inherit;
+    margin-bottom: 20px;
 }
 
-#filter-form form {
-    width: 500px;
-    height: 370px;
+#filter-form:first-child {
+    float:left; 
 }
+
+#filter-form form .filter-group {
+    display: inline-block;
+    margin-right: 40px;
+    margin-bottom: 5px;
+    overflow:hidden;
+    min-height: 100px;
+    border-left: 3px solid grey;
+    padding-left: 10px;
+    vertical-align:middle;
+}
+
 
 
 /* ==========================================================================
