@@ -1,0 +1,16 @@
+<form name="comment" method="post" action="{{ path('new_comment', { 'entry': entry.id })}}">
+
+        {% if form_errors(form) %}
+            <span class="black-text">{{ form_errors(form) }}</span>
+        {% endif %}
+
+        {% if form_errors(form.content) %}
+            <span class="black-text">{{ form_errors(form.content) }}</span>
+        {% endif %}
+
+        {{ form_widget(form.content, { 'attr': {'autocomplete': 'off'} }) }}
+
+        {{ form_widget(form.save) }}
+
+    <div class="hidden">{{ form_rest(form) }}</div>
+</form>
