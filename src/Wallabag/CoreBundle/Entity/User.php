@@ -70,6 +70,11 @@ class User extends BaseUser implements AdvancedUserInterface, \Serializable
      */
     protected $tags;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="user", cascade={"remove"})
+     */
+    private $comments;
+
     public function __construct()
     {
         parent::__construct();
@@ -186,6 +191,26 @@ class User extends BaseUser implements AdvancedUserInterface, \Serializable
     public function getTags()
     {
         return $this->tags;
+    }
+
+    /**
+     * @param Entry $entry
+     *
+     * @return User
+     */
+    public function addComment(Comment $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection<Comment>
+     */
+    public function getComment()
+    {
+        return $this->comment;
     }
 
     public function isEqualTo(UserInterface $user)
