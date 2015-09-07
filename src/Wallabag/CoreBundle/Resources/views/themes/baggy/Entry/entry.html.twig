@@ -37,6 +37,9 @@
         <article>
             {{ entry.content | raw }}
         </article>
+        <div>
+            {% for comment in entry.comments %}<span>{{ comment.content }}</span>{% endfor %}
+        </div>
     </div>
     <script src="{{ asset('themes/_global/js/restoreScroll.js')}}"></script>
     <script type="text/javascript">
