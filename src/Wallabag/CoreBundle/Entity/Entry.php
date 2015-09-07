@@ -81,7 +81,7 @@ class Entry
     private $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="Comment", mappedBy="entry")
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="entry", cascade={"persist"})
      */
     private $comments;
 
