@@ -81,9 +81,7 @@ class Entry
     private $updatedAt;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="comments", type="text", nullable=true)
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="entry")
      */
     private $comments;
 
@@ -140,6 +138,7 @@ class Entry
     {
         $this->user = $user;
         $this->tags = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     /**
@@ -326,7 +325,7 @@ class Entry
     }
 
     /**
-     * @return string
+     * @return ArrayCollection<Comment>
      */
     public function getComments()
     {
@@ -334,11 +333,19 @@ class Entry
     }
 
     /**
-     * @param string $comments
+     * @param Comment $comment
      */
-    public function setComments($comments)
+    public function addComment(Comment $comment)
     {
-        $this->comments = $comments;
+        $this->comments[] = $comment;
+    }
+
+    /**
+     * @param Comment $comment
+     */
+    public function removeComments(Comment $comment)
+    {
+        $this->comments->removeElement($comment);
     }
 
     /**

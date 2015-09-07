@@ -280,6 +280,7 @@ main ul.row {
 #article {
     font-size: 20px;
     margin: 0px auto;
+    padding-bottom: 1em;
     max-width: 40em;
 }
 
