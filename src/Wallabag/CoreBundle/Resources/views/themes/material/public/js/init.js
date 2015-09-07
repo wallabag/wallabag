@@ -33,6 +33,14 @@ $(document).ready(function(){
        $("#tag_label").focus();
        return false;
     });
+
+    $('#nav-btn-add-comment').on('click', function(){
+       $(".nav-panel-add-comment").toggle(100);
+       $(".nav-panel-menu").addClass('hidden');
+       $("#comment_label").focus();
+       return false;
+    });
+
     $('#nav-btn-add').on('click', function(){
        $(".nav-panel-buttom").hide(100);
        $(".nav-panel-add").show(100);

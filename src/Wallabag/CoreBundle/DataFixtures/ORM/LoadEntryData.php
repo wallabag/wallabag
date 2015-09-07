@@ -98,18 +98,19 @@ class LoadEntryData extends AbstractFixture implements OrderedFixtureInterface
         $entry7->setUrl('http://0.0.0.0');
         $entry7->setTitle('test title entry7');
         $entry7->setContent('This is my content /o/ and my comments.
-            <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-            <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-            <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-            <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-            <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-            Much content before comments');
+            Put much content before comments so that they can be shown on bottom');
 
         $comment1 = new Comment($this->getReference('admin-user'));
         $comment1->setContent("I'm an admin and I write a comment");
 
+        $comment2 = new Comment($this->getReference('admin-user'));
+        $comment2->setContent("I'm still an admin and I write a second comment");
+
         $entry7->addComment($comment1);
         $comment1->setEntry($entry7);
+
+        $entry7->addComment($comment2);
+        $comment2->setEntry($entry7);
 
         $manager->persist($entry7);
         $manager->persist($comment1);
