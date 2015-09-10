@@ -30,15 +30,7 @@ class EntryController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $content = $this->get('wallabag_core.graby')->fetchContent($entry->getUrl());
-
-            $entry->setUrl($content['url'] ?: $entry->getUrl());
-            $entry->setTitle($content['title']);
-            $entry->setContent($content['html']);
-            $entry->setMimetype($content['content_type']);
-            if (isset($content['open_graph']['og_image'])) {
-                $entry->setPreviewPicture($content['open_graph']['og_image']);
-            }
+            $entry = $this->get('wallabag_core.content_proxy')->updateEntry($entry, $entry->getUrl());
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($entry);

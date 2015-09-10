@@ -33,3 +33,10 @@ services:
 
     wallabag_core.graby:
         class: Graby\Graby
+        arguments:
+            - { error_message: false }
+
+    wallabag_core.content_proxy:
+        class: Wallabag\CoreBundle\Helper\ContentProxy
+        arguments:
+            - @wallabag_core.graby
