@@ -68,8 +68,8 @@ class ContentProxyTest extends KernelTestCase
                 'open_graph' => array(
                     'og_title' => 'my OG title',
                     'og_description' => 'OG desc',
-                    'og_image' => 'http://3.3.3.3/cover.jpg'
-                )
+                    'og_image' => 'http://3.3.3.3/cover.jpg',
+                ),
             ));
 
         $proxy = new ContentProxy($graby);

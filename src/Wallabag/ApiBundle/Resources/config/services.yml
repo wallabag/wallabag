@@ -10,6 +10,3 @@ services:
         tags:
             - { name: monolog.logger, channel: wsse }
         arguments: ['@security.context', '@security.authentication.manager', '@logger']
-
-    wallabag_core.graby:
-        class: Graby\Graby

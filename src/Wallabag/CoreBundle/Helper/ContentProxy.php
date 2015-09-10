@@ -7,7 +7,7 @@ use Wallabag\CoreBundle\Entity\Entry;
 
 /**
  * This kind of proxy class take care of getting the content from an url
- * and update the entry with what it found
+ * and update the entry with what it found.
  */
 class ContentProxy
 {
@@ -20,10 +20,10 @@ class ContentProxy
 
     /**
      * Fetch content using graby and hydrate given entry with results information.
-     * In case we couldn't find content, we'll try to use Open Graph data
+     * In case we couldn't find content, we'll try to use Open Graph data.
      *
-     * @param  Entry  $entry Entry to update
-     * @param  string $url   Url to grab content for
+     * @param Entry  $entry Entry to update
+     * @param string $url   Url to grab content for
      *
      * @return Entry
      */
