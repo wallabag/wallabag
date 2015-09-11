@@ -6,7 +6,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\CoreBundle\Service\Extractor;
 use Wallabag\CoreBundle\Form\Type\NewEntryType;
 use Wallabag\CoreBundle\Form\Type\EditEntryType;
 use Wallabag\CoreBundle\Filter\EntryFilterType;
@@ -31,10 +30,7 @@ class EntryController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $content = Extractor::extract($entry->getUrl());
-
-            $entry->setTitle($content->getTitle());
-            $entry->setContent($content->getBody());
+            $entry = $this->get('wallabag_core.content_proxy')->updateEntry($entry, $entry->getUrl());
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($entry);

@@ -27,20 +27,10 @@
         "email": "hello@wallabag.org",
         "issues": "https://github.com/wallabag/wallabag/issues"
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/wallabag/php-readability"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/wallabag/Fivefilters_Libraries"
-        }
-    ],
     "require": {
         "php": ">=5.3.3",
         "symfony/symfony": "~2.7.0",
-        "doctrine/orm": "~2.2,>=2.2.3",
+        "doctrine/orm": "~2.3",
         "doctrine/doctrine-bundle": "~1.2",
         "twig/extensions": "~1.0",
         "symfony/assetic-bundle": "~2.3",
@@ -60,10 +50,9 @@
         "willdurand/hateoas-bundle": "~0.5.0",
         "htmlawed/htmlawed": "~1.1.19",
         "liip/theme-bundle": "~1.1.3",
-        "wallabag/php-readability": "~1.0.0",
-        "wallabag/Fivefilters_Libraries": "~1.0",
         "pagerfanta/pagerfanta": "~1.0.3",
-        "lexik/form-filter-bundle": "~4.0"
+        "lexik/form-filter-bundle": "~4.0",
+        "j0k3r/graby": "~1.0"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "~2.2.0",

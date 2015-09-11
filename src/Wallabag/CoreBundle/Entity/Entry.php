@@ -109,6 +109,13 @@ class Entry
     private $domainName;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="preview_picture", type="text", nullable=true)
+     */
+    private $previewPicture;
+
+    /**
      * @var bool
      *
      * @ORM\Column(name="is_public", type="boolean", nullable=true, options={"default" = false})
@@ -418,5 +425,29 @@ class Entry
     public function removeTag(Tag $tag)
     {
         $this->tags->removeElement($tag);
+    }
+
+    /**
+     * Set previewPicture.
+     *
+     * @param string $previewPicture
+     *
+     * @return Entry
+     */
+    public function setPreviewPicture($previewPicture)
+    {
+        $this->previewPicture = $previewPicture;
+
+        return $this;
+    }
+
+    /**
+     * Get previewPicture.
+     *
+     * @return string
+     */
+    public function getPreviewPicture()
+    {
+        return $this->previewPicture;
     }
 }

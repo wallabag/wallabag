@@ -8,7 +8,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
-use Wallabag\CoreBundle\Service\Extractor;
 use Hateoas\Configuration\Route;
 use Hateoas\Representation\Factory\PagerfantaFactory;
 
@@ -147,11 +146,10 @@ class WallabagRestController extends Controller
     {
         $url = $request->request->get('url');
 
-        $content = Extractor::extract($url);
-        $entry = new Entry($this->getUser());
-        $entry->setUrl($url);
-        $entry->setTitle($request->request->get('title') ?: $content->getTitle());
-        $entry->setContent($content->getBody());
+        $entry = $this->get('wallabag_core.content_proxy')->updateEntry(
+            new Entry($this->getUser()),
+            $url
+        );
 
         $tags = $request->request->get('tags', '');
         if (!empty($tags)) {
