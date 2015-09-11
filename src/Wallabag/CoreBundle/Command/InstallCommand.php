@@ -273,10 +273,11 @@ class InstallCommand extends ContainerAwareCommand
      */
     private function isDatabasePresent()
     {
-        $databaseName = $this->getContainer()->getParameter('database_name');
+        $connection = $this->getContainer()->get('doctrine')->getManager()->getConnection();
+        $databaseName = $connection->getDatabase();
 
         try {
-            $schemaManager = $this->getContainer()->get('doctrine')->getManager()->getConnection()->getSchemaManager();
+            $schemaManager = $connection->getSchemaManager();
         } catch (\Exception $exception) {
             if (false !== strpos($exception->getMessage(), sprintf("Unknown database '%s'", $databaseName))) {
                 return false;
