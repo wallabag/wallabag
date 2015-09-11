@@ -6,8 +6,8 @@ Please [open a new issue](https://github.com/wallabag/wallabag/issues/new).
 To fix the bug quickly, we need some infos:
 * your wallabag version (on top of the ./index.php file, and also on config page)
 * your webserver installation :
-  * type of hosting (shared or dedicaced)
-  * in case of a dedicaced server, the server and OS used
+  * type of hosting (shared or dedicated)
+  * in case of a dedicated server, the server and OS used
   * the php version used, eventually `phpinfo()`
 * which storage system you choose at install (SQLite, MySQL/MariaDB or PostgreSQL)
 * any problem on the `wallabag_compatibility_test.php` page
