@@ -226,6 +226,10 @@ main ul.row {
     overflow: hidden;
 }
 
+img.preview {
+    max-width: 100%;
+}
+
 .card .card-content .card-title {
     line-height: 32px;
 }
