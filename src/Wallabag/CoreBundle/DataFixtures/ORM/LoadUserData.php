@@ -19,6 +19,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
         $userAdmin->setEmail('bigboss@wallabag.org');
         $userAdmin->setUsername('admin');
         $userAdmin->setPassword('mypassword');
+        $userAdmin->setEnabled(true);
 
         $manager->persist($userAdmin);
 
@@ -29,6 +30,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
         $bobUser->setEmail('bobby@wallabag.org');
         $bobUser->setUsername('bob');
         $bobUser->setPassword('mypassword');
+        $bobUser->setEnabled(true);
 
         $manager->persist($bobUser);
 

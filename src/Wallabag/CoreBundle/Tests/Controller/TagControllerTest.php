@@ -24,7 +24,7 @@ class TagControllerTest extends WallabagCoreTestCase
         $entry = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneByIsArchived(false);
+            ->findOneBy(array());
 
         $crawler = $client->request('GET', '/view/'.$entry->getId());
 

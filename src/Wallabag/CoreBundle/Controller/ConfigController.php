@@ -65,7 +65,7 @@ class ConfigController extends Controller
         }
 
         // handle changing user information
-        $userForm = $this->createForm(new UserInformationType(), $user);
+        $userForm = $this->createForm(new UserInformationType(), $user, array('validation_groups' => array('Profile')));
         $userForm->handleRequest($request);
 
         if ($userForm->isValid()) {
@@ -98,7 +98,7 @@ class ConfigController extends Controller
 
         // handle adding new user
         $newUser = new User();
-        $newUserForm = $this->createForm(new NewUserType(), $newUser);
+        $newUserForm = $this->createForm(new NewUserType(), $newUser, array('validation_groups' => array('Profile')));
         $newUserForm->handleRequest($request);
 
         if ($newUserForm->isValid()) {

@@ -41,7 +41,7 @@ class InstallCommandTest extends WallabagCoreTestCase
             ->getMock();
         $dialog->expects($this->any())
             ->method('ask')
-            ->will($this->returnValue('test'));
+            ->will($this->returnValue('test_'.uniqid('', true)));
         $dialog->expects($this->any())
             ->method('askConfirmation')
             ->will($this->returnValue(true));
@@ -75,7 +75,7 @@ class InstallCommandTest extends WallabagCoreTestCase
             ->getMock();
         $dialog->expects($this->any())
             ->method('ask')
-            ->will($this->returnValue('test'));
+            ->will($this->returnValue('test_'.uniqid('', true)));
         $dialog->expects($this->any())
             ->method('askConfirmation')
             ->will($this->returnValue(true));
@@ -125,7 +125,7 @@ class InstallCommandTest extends WallabagCoreTestCase
             ->getMock();
         $dialog->expects($this->any())
             ->method('ask')
-            ->will($this->returnValue('test'));
+            ->will($this->returnValue('test_'.uniqid('', true)));
         $dialog->expects($this->any())
             ->method('askConfirmation')
             ->will($this->returnValue(true));
@@ -259,7 +259,7 @@ class InstallCommandTest extends WallabagCoreTestCase
             ->getMock();
         $dialog->expects($this->any())
             ->method('ask')
-            ->will($this->returnValue('test'));
+            ->will($this->returnValue('test_'.uniqid('', true)));
         $dialog->expects($this->any())
             ->method('askConfirmation')
             ->will($this->returnValue(true));

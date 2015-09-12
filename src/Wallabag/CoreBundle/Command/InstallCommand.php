@@ -192,6 +192,7 @@ class InstallCommand extends ContainerAwareCommand
         $user->setUsername($dialog->ask($this->defaultOutput, '<question>Username</question> <comment>(default: wallabag)</comment> :', 'wallabag'));
         $user->setPassword($dialog->ask($this->defaultOutput, '<question>Password</question> <comment>(default: wallabag)</comment> :', 'wallabag'));
         $user->setEmail($dialog->ask($this->defaultOutput, '<question>Email:</question>', ''));
+        $user->setEnabled(true);
 
         $em->persist($user);
 
@@ -272,10 +273,11 @@ class InstallCommand extends ContainerAwareCommand
      */
     private function isDatabasePresent()
     {
-        $databaseName = $this->getContainer()->getParameter('database_name');
+        $connection = $this->getContainer()->get('doctrine')->getManager()->getConnection();
+        $databaseName = $connection->getDatabase();
 
         try {
-            $schemaManager = $this->getContainer()->get('doctrine')->getManager()->getConnection()->getSchemaManager();
+            $schemaManager = $connection->getSchemaManager();
         } catch (\Exception $exception) {
             if (false !== strpos($exception->getMessage(), sprintf("Unknown database '%s'", $databaseName))) {
                 return false;

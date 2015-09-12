@@ -209,7 +209,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneById(1);
+            ->findOneByIsStarred(false);
 
         $client->request('GET', '/delete/'.$content->getId());
 
@@ -360,13 +360,13 @@ class EntryControllerTest extends WallabagCoreTestCase
         $form['entry_filter[isStarred]']->untick();
 
         $crawler = $client->submit($form);
-        $this->assertCount(1, $crawler->filter('div[class=entry]'));
+        $this->assertCount(2, $crawler->filter('div[class=entry]'));
 
         $form = $crawler->filter('button[id=submit-filter]')->form();
         $form['entry_filter[isArchived]']->untick();
         $form['entry_filter[isStarred]']->tick();
 
         $crawler = $client->submit($form);
-        $this->assertCount(1, $crawler->filter('div[class=entry]'));
+        $this->assertCount(2, $crawler->filter('div[class=entry]'));
     }
 }

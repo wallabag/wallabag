@@ -192,14 +192,14 @@ class ConfigControllerTest extends WallabagCoreTestCase
                     'update_user[name]' => '',
                     'update_user[email]' => '',
                 ),
-                'This value should not be blank.',
+                'Please enter an email',
             ),
             array(
                 array(
                     'update_user[name]' => '',
                     'update_user[email]' => 'test',
                 ),
-                'This value is not a valid email address.',
+                'The email is not valid',
             ),
         );
     }
@@ -261,31 +261,23 @@ class ConfigControllerTest extends WallabagCoreTestCase
                     'new_user[password]' => '',
                     'new_user[email]' => '',
                 ),
-                'This value should not be blank.',
+                'Please enter a username',
             ),
             array(
                 array(
-                    'new_user[username]' => 'ad',
-                    'new_user[password]' => '',
+                    'new_user[username]' => 'a',
+                    'new_user[password]' => 'mypassword',
                     'new_user[email]' => '',
                 ),
-                'This value is too short.',
+                'The username is too short',
             ),
             array(
                 array(
                     'new_user[username]' => 'wallace',
-                    'new_user[password]' => '',
+                    'new_user[password]' => 'mypassword',
                     'new_user[email]' => 'test',
                 ),
-                'This value is not a valid email address.',
-            ),
-            array(
-                array(
-                    'new_user[username]' => 'wallace',
-                    'new_user[password]' => 'admin',
-                    'new_user[email]' => 'wallace@wallace.me',
-                ),
-                'Password should by at least',
+                'The email is not valid',
             ),
             array(
                 array(
@@ -293,7 +285,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
                     'new_user[password]' => 'wallacewallace',
                     'new_user[email]' => 'wallace@wallace.me',
                 ),
-                'This value is already used',
+                'The username is already used',
             ),
         );
     }
