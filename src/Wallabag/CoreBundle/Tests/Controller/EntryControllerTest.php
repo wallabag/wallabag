@@ -369,4 +369,17 @@ class EntryControllerTest extends WallabagCoreTestCase
         $crawler = $client->submit($form);
         $this->assertCount(2, $crawler->filter('div[class=entry]'));
     }
+
+    public function testPreviewPictureFilter()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/unread/list');
+        $form = $crawler->filter('button[id=submit-filter]')->form();
+        $form['entry_filter[previewPicture]']->tick();
+
+        $crawler = $client->submit($form);
+        $this->assertCount(1, $crawler->filter('div[class=entry]'));
+    }
 }

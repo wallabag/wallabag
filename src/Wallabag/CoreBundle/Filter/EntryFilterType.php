@@ -39,10 +39,21 @@ class EntryFilterType extends AbstractType
                         $expression = $filterQuery->getExpr()->like($field, $filterQuery->getExpr()->literal('%'.$value.'%'));
 
                         return $filterQuery->createCondition($expression);
-                    },
+                },
             ))
             ->add('isArchived', 'filter_checkbox')
-            ->add('isStarred', 'filter_checkbox');
+            ->add('isStarred', 'filter_checkbox')
+            ->add('previewPicture', 'filter_checkbox', array(
+                'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
+                    if (false === $values['value']) {
+                        return;
+                    }
+
+                    $expression = $filterQuery->getExpr()->isNotNull($field);
+
+                    return $filterQuery->createCondition($expression);
+                },
+            ));
     }
 
     public function getName()

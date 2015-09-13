@@ -70,6 +70,12 @@
                 <div class="col s12">
                     <label>{% trans %}Status{% endtrans %}</label>
                 </div>
+
+                <div class="input-field col s6">
+                    {{ form_widget(form.previewPicture) }}
+                    <label for="entry_filter_previewPicture">{% trans %}Has a preview picture{% endtrans %}</label>
+                </div>
+
                 <div class="input-field col s6">
                     {{ form_widget(form.isArchived) }}
                     <label for="entry_filter_isArchived">{% trans %}Archived{% endtrans %}</label>
