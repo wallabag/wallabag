@@ -65,6 +65,11 @@
                     {{ form_widget(form.isStarred) }}
                     <label for="entry_filter_isStarred">{% trans %}Starred{% endtrans %}</label>
                 </div>
+
+                <div class="input-field">
+                    {{ form_widget(form.previewPicture) }}
+                    <label for="entry_filter_previewPicture">{% trans %}Has a preview picture{% endtrans %}</label>
+                </div>
             </div>
             <div id="filter-reading-time" class="filter-group">
                 <div class="">
@@ -72,7 +77,7 @@
                 </div>
                 <div class="input-field ">
                     <label for="entry_filter_readingTime_left_number">{% trans %}from{% endtrans %}</label>
-                    {{ form_widget(form.readingTime.left_number, {'type': 'number'}) }}  
+                    {{ form_widget(form.readingTime.left_number, {'type': 'number'}) }}
                 </div>
                 <div class="input-field ">
                     <label for="entry_filter_readingTime_right_number">{% trans %}to{% endtrans %}</label>
