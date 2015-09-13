@@ -45,9 +45,7 @@ class EntryFilterType extends AbstractType
             ->add('isStarred', 'filter_checkbox')
             ->add('previewPicture', 'filter_checkbox', array(
                 'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
-                    $value = $values['value'];
-
-                    if (false === $value) {
+                    if (false === $values['value']) {
                         return;
                     }
 
