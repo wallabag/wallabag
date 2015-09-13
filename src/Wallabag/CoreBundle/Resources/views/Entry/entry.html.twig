@@ -31,6 +31,9 @@
             {% for tag in entry.tags %}<span class="mdi-action-label-outline">{{ tag.label }}</span>{% endfor %}
             {{ render(controller( "WallabagCoreBundle:Tag:addTagForm", { 'id': entry.id } )) }}
         </aside>
+        {% if entry.previewPicture is not null %}
+            <div><img class="preview" src="{{ entry.previewPicture }}" alt="{{ entry.title|raw }}" /></div>
+        {% endif %}
         <article>
             {{ entry.content | raw }}
         </article>
