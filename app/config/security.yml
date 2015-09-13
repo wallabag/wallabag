@@ -18,11 +18,16 @@ security:
     # the main part of the security, where you can set up firewalls
     # for specific sections of your app
     firewalls:
-        wsse_secured:
-            pattern:      /api/.*
-            wsse:         true
-            stateless:    true
-            anonymous:    true
+        oauth_token:
+            pattern: ^/oauth/v2/token
+            security: false
+
+        api:
+            pattern: /api/.*
+            fos_oauth: true
+            stateless: true
+            anonymous: false
+
         login_firewall:
             pattern:    ^/login$
             anonymous:  ~
