@@ -155,5 +155,5 @@ liip_theme:
 
 fos_user:
     db_driver: orm
-    firewall_name: main
+    firewall_name: api
     user_class: Wallabag\CoreBundle\Entity\User

@@ -46,7 +46,7 @@
             <li class="bold border-bottom {% if currentRoute == 'tags' %}active{% endif %}"><a class="waves-effect" href="{{ path('tag') }}">{% trans %}tags{% endtrans %}</a></li>
             <li class="bold {% if currentRoute == 'config' %}active{% endif %}"><a class="waves-effect" href="{{ path('config') }}">{% trans %}config{% endtrans %}</a></li>
             <li class="bold {% if currentRoute == 'howto' %}active{% endif %}"><a class="waves-effect" href="{{ path('howto') }}">{% trans %}howto{% endtrans %}</a></li>
-            <li class="bold"><a class="waves-effect" class="icon icon-power" href="{{ path('logout') }}" title="{% trans %}logout{% endtrans %}">{% trans %}logout{% endtrans %}</a></li>
+            <li class="bold"><a class="waves-effect" class="icon icon-power" href="{{ path('fos_user_security_logout') }}" title="{% trans %}logout{% endtrans %}">{% trans %}logout{% endtrans %}</a></li>
         </ul>
         <div class="nav-wrapper nav-panels">
             <a href="#" data-activates="slide-out" class="nav-panel-menu button-collapse"><i class="mdi-navigation-menu"></i></a>
