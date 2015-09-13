@@ -221,13 +221,9 @@ main ul.row {
     padding: 0px 0.75rem;
 }
 
-.data .card .card-content {
+.data .card .card-body {
     height: 22em;
     overflow: hidden;
-}
-
-img.preview {
-    max-width: 100%;
 }
 
 .card .card-content .card-title {
@@ -260,6 +256,21 @@ img.preview {
     max-width: 370px;
     margin-left: auto;
     margin-right: auto;
+}
+
+.mdi-card-close:before {
+    content: "\e8aa";
+}
+
+.card .card-image {
+    height: 14em;
+}
+
+.card .card-image .preview {
+    height: 14em;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50%;
 }
 
 /* ==========================================================================
