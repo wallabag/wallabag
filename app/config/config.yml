@@ -155,5 +155,14 @@ liip_theme:
 
 fos_user:
     db_driver: orm
-    firewall_name: main
+    firewall_name: api
     user_class: Wallabag\CoreBundle\Entity\User
+
+fos_oauth_server:
+    db_driver:           orm
+    client_class:        Wallabag\ApiBundle\Entity\Client
+    access_token_class:  Wallabag\ApiBundle\Entity\AccessToken
+    refresh_token_class: Wallabag\ApiBundle\Entity\RefreshToken
+    auth_code_class:     Wallabag\ApiBundle\Entity\AuthCode
+    service:
+        user_provider: fos_user.user_manager
