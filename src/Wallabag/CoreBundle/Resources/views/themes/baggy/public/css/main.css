@@ -448,6 +448,10 @@ footer a {
 }
 */
 
+img.preview {
+    max-width: 100%;
+}
+
 .entry p {
   color: #666;
   font-size: 0.9em;
