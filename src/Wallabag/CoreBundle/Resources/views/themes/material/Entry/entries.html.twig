@@ -33,19 +33,48 @@
         {% for entry in entries %}
             <li id="entry-{{ entry.id|e }}" class="col l4 m6 s12">
                 <div class="card">
-                    <div class="card-content">
-                        <span class="card-title"><a href="{{ path('view', { 'id': entry.id }) }}">{{ entry.title|raw }}</a></span>
-                        {% if entry.readingTime > 0 %}
-                            <div class="estimatedTime grey-text"><span class="tool reading-time">{% trans %}estimated reading time: {% endtrans %} {{ entry.readingTime }} min</span></div>
-                        {% else %}
-                            <div class="estimatedTime grey-text"><span class="tool reading-time">{% trans %}estimated reading time: {% endtrans %} <small class="inferieur">&lt;</small> 1 min</span></div>
+
+                    <div class="card-body">
+                        {% if not entry.previewPicture is null %}
+                            <div class="card-image waves-effect waves-block waves-light">
+                                <div class="preview activator" style="background-image: url({{ entry.previewPicture }})"></div>
+                            </div>
                         {% endif %}
-                        {% if entry.previewPicture is null %}
-                            <p>{{ entry.content|striptags|slice(0, 300) }}&hellip;</p>
-                        {% else %}
-                            <img class="preview" src="{{ entry.previewPicture }}" alt="{{ entry.title|raw }}" />
-                        {% endif %}
+
+                        <div class="card-content">
+                            {% if not entry.previewPicture is null %}
+                                <i class="card-title grey-text text-darken-4 activator mdi-navigation-more-vert right"></i>
+                            {% endif %}
+
+                            <span class="card-title"><a href="{{ path('view', { 'id': entry.id }) }}">{{ entry.title|raw|striptags|slice(0, 42) }}</a></span>
+
+                            {% if entry.readingTime > 0 %}
+                                <div class="estimatedTime grey-text"><span class="tool reading-time">{% trans %}estimated reading time: {% endtrans %} {{ entry.readingTime }} min</span></div>
+                            {% else %}
+                                <div class="estimatedTime grey-text"><span class="tool reading-time">{% trans %}estimated reading time: {% endtrans %} <small class="inferieur">&lt;</small> 1 min</span></div>
+                            {% endif %}
+
+                            {% if entry.previewPicture is null %}
+                                <p>{{ entry.content|striptags|slice(0, 300) }}&hellip;</p>
+                            {% endif %}
+                        </div>
                     </div>
+
+                    {% if not entry.previewPicture is null %}
+                        <div class="card-reveal">
+                            <i class="card-title grey-text text-darken-4 mdi-card-close right"></i>
+                            <span class="card-title"><a href="{{ path('view', { 'id': entry.id }) }}">{{ entry.title|raw }}</a></span>
+
+                            {% if entry.readingTime > 0 %}
+                                <div class="estimatedTime grey-text"><span class="tool reading-time">{% trans %}estimated reading time: {% endtrans %} {{ entry.readingTime }} min</span></div>
+                            {% else %}
+                                <div class="estimatedTime grey-text"><span class="tool reading-time">{% trans %}estimated reading time: {% endtrans %} <small class="inferieur">&lt;</small> 1 min</span></div>
+                            {% endif %}
+
+                            <p>{{ entry.content|striptags|slice(0, 300) }}&hellip;</p>
+                        </div>
+                    {% endif %}
+
                     <div class="card-action">
                         <span class="bold"><a href="{{ entry.url|e }}" target="_blank" title="{% trans %}original{% endtrans %}: {{ entry.title|e }} - {{ entry.domainName }}" class="tool original grey-text"><span>{{ entry.domainName | truncate(18) }}</span></a></bold>
 
