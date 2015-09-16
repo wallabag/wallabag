@@ -3,17 +3,16 @@
 namespace Wallabag\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Tag.
+ * Comment.
  *
  * @ORM\Table
  * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\CommentRepository")
  */
 class Comment
 {
-	/**
+    /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
@@ -35,12 +34,12 @@ class Comment
      */
     private $entry;
 
-	/**
-	 * @var datetime $date
-	 *
-	 * @ORM\Column(name="date", type="datetime")
-	 */
-	private $date;
+    /**
+     * @var datetime
+     *
+     * @ORM\Column(name="date", type="datetime")
+     */
+    private $date;
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="comments")
@@ -63,19 +62,19 @@ class Comment
         return $this->id;
     }
 
-    public function setContent($content) 
+    public function setContent($content)
     {
-    	$this->content = $content;
+        $this->content = $content;
     }
 
     public function getContent()
     {
-    	return $this->content;
+        return $this->content;
     }
 
     public function getDate()
     {
-    	return $this->date;
+        return $this->date;
     }
 
     public function setEntry(Entry $entry)
@@ -97,13 +96,12 @@ class Comment
     }
 
     /**
-	 * Set User
-	 *
-	 * @param string $User
-	 */
-	public function setUser($user)
-	{
-		$this->user = $user;
-	}
-
+     * Set User.
+     *
+     * @param string $User
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
 }
