@@ -48,7 +48,7 @@ class CommentController extends Controller
     }
 
     /**
-     * Deletes comment
+     * Deletes comment.
      *
      * @param Comment $comment
      * @param Request $request
@@ -88,5 +88,4 @@ class CommentController extends Controller
             throw $this->createAccessDeniedException('You can not access this entry.');
         }
     }
-
 }
