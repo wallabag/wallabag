@@ -168,23 +168,28 @@ main {
         <article>
             {{ entry.content | raw }}
         </article>
-        <div id="comments" class="mdi-editor-insert-comment"> 
-            Comments<br>
+        <div id="comments"> 
             <div class="nav-panel-add-comment" style="display: none">
                 {{ render(controller( "WallabagCoreBundle:Comment:addCommentForm", { 'id': entry.id } )) }}
             </div>
-            {% if entry.comments %}
+            {% if entry.comments is not empty %}
+                <div id="comments_list" class="mdi-editor-insert-comment">
+                Comments<br>
                 {% for comment in entry.comments %}
                     <div class="comment">
                         <hr>
                         <div class="comment_content">{{ comment.content }}</div>
-                        <div class="comment_author">{{ comment.user.username }}</div>
-                        <div class="comment_date">{{  comment.date | date("d/m/Y") }}</div>
+                        <div class="comment_infos">
+                        <span class="comment_actions">
+                        <a class="mdi-action-delete" href="{{ path('delete_comment', { 'id': comment.id }) }}" ></a></span>
+                        <span class="comment_metadata">
+                        {{ comment.user.username }} - {{  comment.date | date("H:i:s") }} -  {{  comment.date | date("d/m/Y") }}</span>
+                        </div>
                     </div>
                 {% endfor %}
+                </div>
             {% endif %}
         </div>
-    </div>
 {% endblock %}
 
 {% block footer %}

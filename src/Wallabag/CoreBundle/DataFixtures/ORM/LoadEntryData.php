@@ -104,13 +104,11 @@ class LoadEntryData extends AbstractFixture implements OrderedFixtureInterface
         $comment1->setContent("I'm an admin and I write a comment");
 
         $comment2 = new Comment($this->getReference('admin-user'));
-        $comment2->setContent("I'm still an admin and I write a second comment");
+        $comment2->setContent("I'm still an admin and I write a second comment, but different");
 
         $entry7->addComment($comment1);
-        $comment1->setEntry($entry7);
 
         $entry7->addComment($comment2);
-        $comment2->setEntry($entry7);
 
         $manager->persist($entry7);
         $manager->persist($comment1);
