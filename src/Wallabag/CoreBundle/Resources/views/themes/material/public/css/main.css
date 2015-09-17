@@ -349,7 +349,14 @@ main ul.row {
 #comments {
     background-color: #f9f6e4;
     border-radius: 3px;
-    padding: 5px;
+}
+
+.comment_infos {
+    font-size: small;
+}
+
+.comment_metadata {
+    float: right;
 }
 
 /* ==========================================================================

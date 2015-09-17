@@ -338,12 +338,13 @@ class Entry
     public function addComment(Comment $comment)
     {
         $this->comments[] = $comment;
+        $comment->setEntry($this);
     }
 
     /**
      * @param Comment $comment
      */
-    public function removeComments(Comment $comment)
+    public function removeComment(Comment $comment)
     {
         $this->comments->removeElement($comment);
     }
