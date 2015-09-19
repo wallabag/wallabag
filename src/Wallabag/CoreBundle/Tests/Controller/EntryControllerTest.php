@@ -276,7 +276,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(5, $crawler->filter('div[class=entry]'));
+        $this->assertCount(6, $crawler->filter('div[class=entry]'));
 
         $data = array(
             'entry_filter[createdAt][left_date]' => date('d/m/Y'),
@@ -285,7 +285,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(5, $crawler->filter('div[class=entry]'));
+        $this->assertCount(6, $crawler->filter('div[class=entry]'));
 
         $data = array(
             'entry_filter[createdAt][left_date]' => '01/01/1970',
