@@ -95,6 +95,13 @@ class Entry
     private $mimetype;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="language", type="text", nullable=true)
+     */
+    private $language;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="reading_time", type="integer", nullable=true)
@@ -449,5 +456,29 @@ class Entry
     public function getPreviewPicture()
     {
         return $this->previewPicture;
+    }
+
+    /**
+     * Set language.
+     *
+     * @param string $language
+     *
+     * @return Entry
+     */
+    public function setLanguage($language)
+    {
+        $this->language = $language;
+
+        return $this;
+    }
+
+    /**
+     * Get language.
+     *
+     * @return string
+     */
+    public function getLanguage()
+    {
+        return $this->language;
     }
 }

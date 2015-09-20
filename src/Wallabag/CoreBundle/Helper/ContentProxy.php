@@ -49,6 +49,7 @@ class ContentProxy
         $entry->setUrl($content['url'] ?: $url);
         $entry->setTitle($title);
         $entry->setContent($html);
+        $entry->setLanguage($content['language']);
         $entry->setMimetype($content['content_type']);
 
         if (isset($content['open_graph']['og_image'])) {
