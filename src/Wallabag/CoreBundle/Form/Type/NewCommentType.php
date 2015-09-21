@@ -11,8 +11,12 @@ class NewCommentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('content', 'textarea', array('required' => true))
+            ->add('content', 'textarea', array('required' => true,
+                'attr' => array('class' => 'materialize-textarea')
+                ))
+            ->add('dom','hidden')
             ->add('save', 'submit')
+            ->add('reset', 'reset')
         ;
     }
 

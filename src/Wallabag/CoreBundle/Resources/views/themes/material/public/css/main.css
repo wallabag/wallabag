@@ -352,8 +352,6 @@ main ul.row {
    7 = Comments
    ========================================================================== */
 #comments {
-    background-color: #f9f6e4;
-    border-radius: 3px;
 }
 
 .comment_infos {
@@ -362,6 +360,28 @@ main ul.row {
 
 .comment_metadata {
     float: right;
+}
+
+#new-comment-button {
+    display: none;
+    transition: color 100ms ease 0s;
+    cursor: pointer;
+}
+
+.nav-panel-add-comment {
+    width: 280px;
+}
+
+#comment_content {
+    padding: 1rem 0px;
+}
+
+.comment {
+    background-color: #f9f6e4;
+}
+
+.comment-bottom {
+    background-color: #f9f6e4;
 }
 
 /* ==========================================================================
