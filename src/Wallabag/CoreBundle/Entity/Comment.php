@@ -29,6 +29,13 @@ class Comment
     private $content;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="dom", type="text")
+     */
+    private $dom;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Entry", inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -70,6 +77,16 @@ class Comment
     public function getContent()
     {
         return $this->content;
+    }
+
+    public function setDom($dom)
+    {
+        $this->dom = $dom;
+    }
+
+    public function getDom()
+    {
+        return $this->dom;
     }
 
     public function getDate()
