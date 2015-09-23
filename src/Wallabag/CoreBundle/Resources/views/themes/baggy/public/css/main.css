@@ -356,9 +356,9 @@ footer a {
   overflow: hidden;
   padding: 1.5em 1.5em 3em 1.5em;
 
-	/* Removing CSS transitions because they make the switch from list view to
-	 * table view jerky
-	 */
+ /* Removing CSS transitions because they make the switch from list view to
+  * table view jerky
+  */
   /* -webkit-transition: all 0.5s ease; */
   /*    -moz-transition: all 0.5s ease; */
   /*     -ms-transition: all 0.5s ease; */
@@ -570,47 +570,47 @@ img.preview {
   border-left: 1px #EEE solid;
 }
 
-	.popup-form form {
-		background-color: #FFF;
-		position: absolute;
-		top: 0;
-		left: 0;
-		z-index: 20;
-		border: 10px solid #000;
-		width: 400px;
-		height: 200px;
-		padding: 2em;
-	}
+ .popup-form form {
+  background-color: #FFF;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  border: 10px solid #000;
+  width: 400px;
+  height: 200px;
+  padding: 2em;
+ }
 
 #bagit-form-form .addurl {
-	margin-left: 0;
+ margin-left: 0;
 }
 
 .closeMessage,
 .close-button {
   background-color: #000;
   color: #FFF;
-	font-size: 1.2em;
-	line-height: 1.6;
-	width: 1.6em;
-	height: 1.6em;
-	text-align: center;
+ font-size: 1.2em;
+ line-height: 1.6;
+ width: 1.6em;
+ height: 1.6em;
+ text-align: center;
   text-decoration: none;
 }
-	.closeMessage:hover,
-	.closeMessage:focus,
-	.close-button:hover,
-	.close-button:focus {
-		background-color: #999;
-		color: #000;
-	}
+ .closeMessage:hover,
+ .closeMessage:focus,
+ .close-button:hover,
+ .close-button:focus {
+  background-color: #999;
+  color: #000;
+ }
 
 .close-button--popup {
-	display: inline-block;
-	position: absolute;
-	top: 0;
-	right: 0;
-	font-size: 1.4em;
+ display: inline-block;
+ position: absolute;
+ top: 0;
+ right: 0;
+ font-size: 1.4em;
 }
 
 .active-current {
@@ -753,24 +753,24 @@ a.add-to-wallabag-link-after:after {
 
 
 /* .icon-image class, for image-based icons
-	 ========================================================================== */
+  ========================================================================== */
 
 .icon-image {
-	background-size: 16px 16px;
-	background-repeat: no-repeat;
-	background-position: center;
-	padding-right: 1em !important;
-	padding-left: 1em !important;
+ background-size: 16px 16px;
+ background-repeat: no-repeat;
+ background-position: center;
+ padding-right: 1em !important;
+ padding-left: 1em !important;
 }
 
 /* Carrot (http://carrot.org) */
 .icon-image--carrot {
-	background-image: url('../../_global/img/icons/carrot-icon--white.png');
+ background-image: url('../../_global/img/icons/carrot-icon--white.png');
 }
 
 /* Diaspora */
 .icon-image--diaspora {
-	background-image: url('../../_global/img/icons/diaspora-icon--black.png');
+ background-image: url('../../_global/img/icons/diaspora-icon--black.png');
 }}
 
 /* ==========================================================================
@@ -813,14 +813,14 @@ a.add-to-wallabag-link-after:after {
 }
 
 .more-info {
-	font-size: 0.85em;
+ font-size: 0.85em;
   line-height: 1.5;
-	color: #aaa;
+ color: #aaa;
 }
 
-	.more-info a {
-		color: #aaa;
-	}
+ .more-info a {
+  color: #aaa;
+ }
 
 /* ==========================================================================
    5 = Article
@@ -934,9 +934,9 @@ blockquote {
 }
 
 pre code {
-		font-family: "Courier New", Courier, monospace;
-		border: 1px solid #ccc;
-		font-size: 0.96em;
+  font-family: "Courier New", Courier, monospace;
+  border: 1px solid #ccc;
+  font-size: 0.96em;
 }
 
 #filter-form {
@@ -949,18 +949,18 @@ pre code {
   padding: 15px;
   padding-right: 30px;
   padding-top: 30px;
-
+  border-left: 1px #333 solid;
   z-index: 12;
 
   /*transition-property: transform;
   transition-duration: 0.3s;
   transition-delay: 0.3s;
- 
+
   transform: translate3d(100%, 0, 0);*/
 }
 
 #filter-form form {
-    
+
 }
 
 #filter-form form .filter-group {
