@@ -192,7 +192,7 @@ class EntryController extends Controller
                 throw new \InvalidArgumentException(sprintf('Type "%s" is not implemented.', $type));
         }
 
-        $form = $this->get('form.factory')->create(new EntryFilterType());
+        $form = $this->get('form.factory')->create(new EntryFilterType($repository, $this->getUser()));
 
         if ($request->query->has($form->getName())) {
             // manually bind values from the request

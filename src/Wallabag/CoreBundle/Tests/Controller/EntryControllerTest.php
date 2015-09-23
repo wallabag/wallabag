@@ -382,4 +382,27 @@ class EntryControllerTest extends WallabagCoreTestCase
         $crawler = $client->submit($form);
         $this->assertCount(1, $crawler->filter('div[class=entry]'));
     }
+
+    public function testFilterOnLanguage()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/unread/list');
+        $form = $crawler->filter('button[id=submit-filter]')->form();
+        $data = array(
+            'entry_filter[language]' => 'de',
+        );
+
+        $crawler = $client->submit($form, $data);
+        $this->assertCount(1, $crawler->filter('div[class=entry]'));
+
+        $form = $crawler->filter('button[id=submit-filter]')->form();
+        $data = array(
+            'entry_filter[language]' => 'en',
+        );
+
+        $crawler = $client->submit($form, $data);
+        $this->assertCount(2, $crawler->filter('div[class=entry]'));
+    }
 }

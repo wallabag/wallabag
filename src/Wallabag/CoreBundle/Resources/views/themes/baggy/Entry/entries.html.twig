@@ -71,6 +71,14 @@
                     <label for="entry_filter_previewPicture">{% trans %}Has a preview picture{% endtrans %}</label>
                 </div>
             </div>
+
+            <div id="filter-language" class="filter-group">
+                <label for="entry_filter_language">{% trans %}Language{% endtrans %}</label>
+                <div class="input-field ">
+                    {{ form_widget(form.language) }}
+                </div>
+            </div>
+
             <div id="filter-reading-time" class="filter-group">
                 <div class="">
                     <label>{% trans %}Reading time in minutes{% endtrans %}</label>

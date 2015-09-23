@@ -7,7 +7,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
-use Symfony\Component\Validator\Constraints as Assert;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use FOS\UserBundle\Model\User as BaseUser;
@@ -74,8 +73,8 @@ class User extends BaseUser implements AdvancedUserInterface, \Serializable
     public function __construct()
     {
         parent::__construct();
-        $this->entries  = new ArrayCollection();
-        $this->tags     = new ArrayCollection();
+        $this->entries = new ArrayCollection();
+        $this->tags = new ArrayCollection();
     }
 
     /**

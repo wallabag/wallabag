@@ -6,9 +6,26 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Lexik\Bundle\FormFilterBundle\Filter\Query\QueryInterface;
+use Doctrine\ORM\EntityRepository;
+use Wallabag\CoreBundle\Entity\User;
 
 class EntryFilterType extends AbstractType
 {
+    private $user;
+    private $repository;
+
+    /**
+     * Repository & user are used to get a list of language entries for this user
+     *
+     * @param EntityRepository $entryRepository
+     * @param User             $user
+     */
+    public function __construct(EntityRepository $entryRepository, User $user)
+    {
+        $this->repository = $entryRepository;
+        $this->user = $user;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -53,7 +70,11 @@ class EntryFilterType extends AbstractType
 
                     return $filterQuery->createCondition($expression);
                 },
-            ));
+            ))
+            ->add('language', 'filter_choice', array(
+                'choices' => $this->repository->findDistinctLanguageByUser($this->user->getId()),
+            ))
+        ;
     }
 
     public function getName()

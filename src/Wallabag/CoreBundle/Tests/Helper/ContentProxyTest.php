@@ -18,7 +18,13 @@ class ContentProxyTest extends KernelTestCase
 
         $graby->expects($this->any())
             ->method('fetchContent')
-            ->willReturn(array('html' => false, 'title' => '', 'url' => '', 'content_type' => ''));
+            ->willReturn(array(
+                'html' => false,
+                'title' => '',
+                'url' => '',
+                'content_type' => '',
+                'language' => '',
+            ));
 
         $proxy = new ContentProxy($graby);
         $entry = $proxy->updateEntry(new Entry(new User()), 'http://0.0.0.0');
@@ -28,6 +34,7 @@ class ContentProxyTest extends KernelTestCase
         $this->assertEquals('<p>Unable to retrieve readable content.</p>', $entry->getContent());
         $this->assertEmpty($entry->getPreviewPicture());
         $this->assertEmpty($entry->getMimetype());
+        $this->assertEmpty($entry->getLanguage());
     }
 
     public function testWithEmptyContentButOG()
@@ -39,7 +46,17 @@ class ContentProxyTest extends KernelTestCase
 
         $graby->expects($this->any())
             ->method('fetchContent')
-            ->willReturn(array('html' => false, 'title' => '', 'url' => '', 'content_type' => '', 'open_graph' => array('og_title' => 'my title', 'og_description' => 'desc')));
+            ->willReturn(array(
+                'html' => false,
+                'title' => '',
+                'url' => '',
+                'content_type' => '',
+                'language' => '',
+                'open_graph' => array(
+                    'og_title' => 'my title',
+                    'og_description' => 'desc',
+                ),
+            ));
 
         $proxy = new ContentProxy($graby);
         $entry = $proxy->updateEntry(new Entry(new User()), 'http://0.0.0.0');
@@ -48,6 +65,7 @@ class ContentProxyTest extends KernelTestCase
         $this->assertEquals('my title', $entry->getTitle());
         $this->assertEquals('<p>Unable to retrieve readable content.</p><p><i>But we found a short description: </i></p>desc', $entry->getContent());
         $this->assertEmpty($entry->getPreviewPicture());
+        $this->assertEmpty($entry->getLanguage());
         $this->assertEmpty($entry->getMimetype());
     }
 
@@ -65,6 +83,7 @@ class ContentProxyTest extends KernelTestCase
                 'title' => 'this is my title',
                 'url' => 'http://1.1.1.1',
                 'content_type' => 'text/html',
+                'language' => 'fr',
                 'open_graph' => array(
                     'og_title' => 'my OG title',
                     'og_description' => 'OG desc',
@@ -80,5 +99,6 @@ class ContentProxyTest extends KernelTestCase
         $this->assertEquals('this is my content', $entry->getContent());
         $this->assertEquals('http://3.3.3.3/cover.jpg', $entry->getPreviewPicture());
         $this->assertEquals('text/html', $entry->getMimetype());
+        $this->assertEquals('fr', $entry->getLanguage());
     }
 }
