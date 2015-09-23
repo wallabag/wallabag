@@ -134,4 +134,31 @@ class EntryRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    /**
+     * Find distinct language for a given user.
+     * Used to build the filter language list.
+     *
+     * @param int $userId User id
+     *
+     * @return array
+     */
+    public function findDistinctLanguageByUser($userId)
+    {
+        $results = $this->createQueryBuilder('e')
+            ->select('e.language')
+            ->where('e.user = :userId')->setParameter('userId', $userId)
+            ->andWhere('e.language IS NOT NULL')
+            ->groupBy('e.language')
+            ->orderBy('e.language', ' ASC')
+            ->getQuery()
+            ->getResult();
+
+        $languages = array();
+        foreach ($results as $result) {
+            $languages[$result['language']] = $result['language'];
+        }
+
+        return $languages;
+    }
 }

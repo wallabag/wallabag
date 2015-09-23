@@ -121,14 +121,12 @@
                     <label for="entry_filter_previewPicture">{% trans %}Has a preview picture{% endtrans %}</label>
                 </div>
 
-                <div class="input-field col s6">
-                    {{ form_widget(form.isArchived) }}
-                    <label for="entry_filter_isArchived">{% trans %}Archived{% endtrans %}</label>
+                <div class="col s12">
+                    <label>{% trans %}Language{% endtrans %}</label>
                 </div>
 
-                <div class="input-field col s6">
-                    {{ form_widget(form.isStarred) }}
-                    <label for="entry_filter_isStarred">{% trans %}Starred{% endtrans %}</label>
+                <div class="input-field col s12">
+                    {{ form_widget(form.language) }}
                 </div>
 
                 <div class="col s12">

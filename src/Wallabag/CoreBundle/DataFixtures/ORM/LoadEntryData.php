@@ -19,6 +19,7 @@ class LoadEntryData extends AbstractFixture implements OrderedFixtureInterface
         $entry1->setUrl('http://0.0.0.0');
         $entry1->setTitle('test title entry1');
         $entry1->setContent('This is my content /o/');
+        $entry1->setLanguage('en');
 
         $manager->persist($entry1);
 
@@ -28,6 +29,7 @@ class LoadEntryData extends AbstractFixture implements OrderedFixtureInterface
         $entry2->setUrl('http://0.0.0.0');
         $entry2->setTitle('test title entry2');
         $entry2->setContent('This is my content /o/');
+        $entry2->setLanguage('fr');
 
         $manager->persist($entry2);
 
@@ -37,6 +39,7 @@ class LoadEntryData extends AbstractFixture implements OrderedFixtureInterface
         $entry3->setUrl('http://0.0.0.0');
         $entry3->setTitle('test title entry3');
         $entry3->setContent('This is my content /o/');
+        $entry3->setLanguage('en');
 
         $tag1 = new Tag($this->getReference('bob-user'));
         $tag1->setLabel('foo');
@@ -54,6 +57,7 @@ class LoadEntryData extends AbstractFixture implements OrderedFixtureInterface
         $entry4->setUrl('http://0.0.0.0');
         $entry4->setTitle('test title entry4');
         $entry4->setContent('This is my content /o/');
+        $entry4->setLanguage('en');
 
         $tag1 = new Tag($this->getReference('admin-user'));
         $tag1->setLabel('foo');
@@ -72,6 +76,7 @@ class LoadEntryData extends AbstractFixture implements OrderedFixtureInterface
         $entry5->setTitle('test title entry5');
         $entry5->setContent('This is my content /o/');
         $entry5->setStarred(true);
+        $entry5->setLanguage('fr');
 
         $manager->persist($entry5);
 
@@ -82,6 +87,7 @@ class LoadEntryData extends AbstractFixture implements OrderedFixtureInterface
         $entry6->setTitle('test title entry6');
         $entry6->setContent('This is my content /o/');
         $entry6->setArchived(true);
+        $entry6->setLanguage('de');
 
         $manager->persist($entry6);
 
