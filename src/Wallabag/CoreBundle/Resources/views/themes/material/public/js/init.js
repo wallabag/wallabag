@@ -76,7 +76,6 @@ function init_comments() {
     paragraph = $(this);
     offsetcom = paragraph.offset();
     domPath = $(this).attr('data-wallabag-paragraph');
-    //console.log(domPath);
     $("#new-comment-button").show();
     $("#new-comment-button").offset({ top: offsetcom.top, left: (offsetcom.left + em(55)) });
     
