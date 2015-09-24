@@ -108,7 +108,6 @@ class LoadEntryData extends AbstractFixture implements OrderedFixtureInterface
         $comment2->setContent("I'm still an admin and I write a second comment, but different");
         $comment2->setDom("unIDEncoreUniquePourMonDOM");
 
-
         $entry7->addComment($comment1);
 
         $entry7->addComment($comment2);
