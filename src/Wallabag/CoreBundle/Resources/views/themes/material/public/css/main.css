@@ -209,11 +209,6 @@ nav input {
     overflow-y: visible;
 }
 
-#filters div.with-checkbox {
-    height: 3rem;
-    margin-top: 0px;
-}
-
 /* ==========================================================================
    4 = Cards
    ========================================================================== */
@@ -352,6 +347,7 @@ main ul.row {
    7 = Comments
    ========================================================================== */
 #comments {
+    margin-bottom: 20px;
 }
 
 .comment_infos {
@@ -378,10 +374,23 @@ main ul.row {
 
 .comment {
     background-color: #f9f6e4;
+    max-height: 180px;
+    overflow-y: auto;
 }
 
 .comment-bottom {
     background-color: #f9f6e4;
+}
+
+.commentdom {
+    display: none;
+}
+
+#comments_list {
+    margin-bottom: 40px;
+}
+.return-to-paragraph {
+    display: none;
 }
 
 /* ==========================================================================

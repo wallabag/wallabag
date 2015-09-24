@@ -38,7 +38,7 @@ class CommentController extends Controller
                 'Comment added'
             );
 
-            return $this->redirect($this->generateUrl('view', array('id' => $entry->getId())));
+            return $this->redirect($this->generateUrl('view', array('id' => $entry->getId())) . '#' . $comment->getId());
         }
 
         return $this->render('WallabagCoreBundle:Entry:new_comment_form.html.twig', array(

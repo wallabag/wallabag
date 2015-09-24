@@ -12,22 +12,43 @@ function init_filters() {
 }
 
 function init_comments() {
-  var offsetcom, offset, domPath, paragraph;
+  var offsetcom, domPath, paragraph;
   var paragraphsSelector = $('p, blockquote > p, aside > p');
   var commentselector = $('.comment');
   var comment = new Array();
+  var position = new Array();
   var commentdomints = $('.commentdom');
 
   for (var i = 0; i < commentselector.length; i++) {
 
     // define paragraph for comment
     comment['dom'] = commentdomints.eq(i).text();
+    //console.log(comment['dom']);
 
-    // get paragraph id associated to comment
-    comment['paragraphid'] = paragraphsSelector.eq(comment['dom']).attr('id');
-    
-    // set anchor for return button to paragraph
-    commentselector.eq(i).find('.return-to-paragraph').attr('href', '#' + comment['paragraphid']);
+    // get paragraph associated to comment
+    comment['paragraph'] = $("p[data-wallabag-paragraph='" + comment['dom'] + "']");
+
+    /*
+     * If the screen is big enough, show comments
+     */
+    if (window.matchMedia("(min-width:992px)").matches) {
+      comment['paragraph'].after(commentselector.eq(i));
+      position[i] = comment['paragraph'].position();
+      commentselector.eq(i).css('position','absolute');
+      commentselector.eq(i).css('width','250px');
+      commentselector.eq(i).css('top', position[i].top.toString() + 'px');
+      commentselector.eq(i).css('left', em(88).toString() + 'px');
+      $('#comments_list').hide();
+
+    } else 
+    /*
+     * If the screen is small, show the comments on bottom of the article, with an anchor to get up
+     */
+    {
+      // set anchor for return button to paragraph
+      $('.return-to-paragraph').eq(i).css('display','inline');
+      commentselector.eq(i).find('.return-to-paragraph').attr('href', '#' + comment['paragraph'].attr('id'));
+    }
   };
 
       
@@ -54,7 +75,7 @@ function init_comments() {
   $('article p, article blockquote, article aside').mouseover(function(e) {
     paragraph = $(this);
     offsetcom = paragraph.offset();
-    domPath = $(this).index();
+    domPath = $(this).attr('data-wallabag-paragraph');
     //console.log(domPath);
     $("#new-comment-button").show();
     $("#new-comment-button").offset({ top: offsetcom.top, left: (offsetcom.left + em(55)) });
@@ -68,12 +89,14 @@ function init_comments() {
     $('.nav-panel-add-comment').show();
     $(".nav-panel-add-comment").offset({ top: offsetcom.top, left: offsetcom.left + em(57)});
     $("#comment_content").focus();
-    console.log("dom path" + domPath);
     $(".nav-panel-add-comment #comment_dom").val(domPath);
 });
 
 }
 
+/*
+ * Convert em's to pixels
+ */
 function em(input) {
   var emSize = parseFloat($("body").css("font-size"));
   return (emSize * input);

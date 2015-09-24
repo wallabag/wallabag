@@ -177,16 +177,16 @@ main {
                 <div id="comments_list" class="mdi-editor-insert-comment">
                 Comments
                 {% for comment in entry.comments %}
-                    <div id="{{ comment.id }}" class="comment hide-on-med-and-down">
+                    <div id="{{ comment.id }}" class="comment">
                         <hr>
                         <div class="comment_content">{{ comment.content }}</div>
                         <div class="comment_infos">
                             <span class="comment_actions">
                             <a class="mdi-action-delete" href="{{ path('delete_comment', { 'id': comment.id }) }}" ></a></span>
                             <a class="return-to-paragraph" href=""><span class="mdi-navigation-arrow-drop-up"> </span></a>
-                            id : <span class='commentdom'>{{ comment.dom }}</span> 
+                            <span class='commentdom'>{{ comment.dom }}</span> 
                             <span class="comment_metadata"> 
-                             - {{ comment.user.username }} - {{  comment.date | date("H:i:s") }} -  {{  comment.date | date("d/m/Y") }}</span>
+                            {{ comment.user.username }} - {{  comment.date | date("H:i:s") }} -  {{  comment.date | date("d/m/Y") }}</span>
                         </div>
                     </div>
                 {% endfor %}
