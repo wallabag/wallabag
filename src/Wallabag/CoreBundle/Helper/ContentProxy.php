@@ -4,6 +4,7 @@ namespace Wallabag\CoreBundle\Helper;
 
 use Graby\Graby;
 use Wallabag\CoreBundle\Entity\Entry;
+use \Wa72\HtmlPageDom\HtmlPage;
 
 /**
  * This kind of proxy class take care of getting the content from an url
@@ -46,10 +47,19 @@ class ContentProxy
             }
         }
 
+        /*
+         * Set unique ids on paragraphs to set comments on the right ones
+         */
+        $crawler = new HtmlPage($html);
+        $paragraphs = $crawler->filter('p');
+        foreach ($paragraphs as $paragraph) {
+            $paragraph->setAttribute('data-wallabag-paragraph', uniqid());
+        }
+        $html = $crawler->save();
+
         $entry->setUrl($content['url'] ?: $url);
         $entry->setTitle($title);
         $entry->setContent($html);
-        $entry->setLanguage($content['language']);
         $entry->setMimetype($content['content_type']);
 
         if (isset($content['open_graph']['og_image'])) {
