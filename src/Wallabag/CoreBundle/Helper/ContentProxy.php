@@ -52,8 +52,10 @@ class ContentProxy
          */
         $crawler = new HtmlPage($html);
         $paragraphs = $crawler->filter('p');
+        $paragraphId = 0;
         foreach ($paragraphs as $paragraph) {
-            $paragraph->setAttribute('data-wallabag-paragraph', uniqid());
+            $paragraph->setAttribute('data-wallabag-paragraph', $paragraphId);
+            $paragraphId++;
         }
         $html = $crawler->save();
 
