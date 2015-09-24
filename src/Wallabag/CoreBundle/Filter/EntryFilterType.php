@@ -15,7 +15,7 @@ class EntryFilterType extends AbstractType
     private $repository;
 
     /**
-     * Repository & user are used to get a list of language entries for this user
+     * Repository & user are used to get a list of language entries for this user.
      *
      * @param EntityRepository $entryRepository
      * @param User             $user

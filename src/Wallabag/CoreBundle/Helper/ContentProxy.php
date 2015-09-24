@@ -4,7 +4,7 @@ namespace Wallabag\CoreBundle\Helper;
 
 use Graby\Graby;
 use Wallabag\CoreBundle\Entity\Entry;
-use \Wa72\HtmlPageDom\HtmlPage;
+use Wa72\HtmlPageDom\HtmlPage;
 
 /**
  * This kind of proxy class take care of getting the content from an url

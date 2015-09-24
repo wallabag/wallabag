@@ -37,6 +37,7 @@ class CommentController extends Controller
                 'notice',
                 'Comment added'
             );
+
             return $this->redirect($this->generateUrl('view', array('id' => $entry->getId())));
         }
 

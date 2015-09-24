@@ -102,11 +102,11 @@ class LoadEntryData extends AbstractFixture implements OrderedFixtureInterface
 
         $comment1 = new Comment($this->getReference('admin-user'));
         $comment1->setContent("I'm an admin and I write a comment");
-        $comment1->setDom("unIDUniquePourMonDOM");
+        $comment1->setDom('unIDUniquePourMonDOM');
 
         $comment2 = new Comment($this->getReference('admin-user'));
         $comment2->setContent("I'm still an admin and I write a second comment, but different");
-        $comment2->setDom("unIDEncoreUniquePourMonDOM");
+        $comment2->setDom('unIDEncoreUniquePourMonDOM');
 
         $entry7->addComment($comment1);
 
