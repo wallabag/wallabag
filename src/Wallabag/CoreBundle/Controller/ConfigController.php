@@ -98,6 +98,8 @@ class ConfigController extends Controller
 
         // handle adding new user
         $newUser = new User();
+        // enable created user by default
+        $newUser->setEnabled(true);
         $newUserForm = $this->createForm(new NewUserType(), $newUser, array('validation_groups' => array('Profile')));
         $newUserForm->handleRequest($request);
 

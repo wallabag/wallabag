@@ -337,6 +337,14 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $this->assertGreaterThan(1, $alert = $crawler->filter('div.messages.success')->extract(array('_text')));
         $this->assertContains('User "wallace" added', $alert[0]);
+
+        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+        $user = $em
+            ->getRepository('WallabagCoreBundle:User')
+            ->findOneByUsername('wallace');
+
+        $this->assertTrue(false !== $user);
+        $this->assertTrue($user->isEnabled());
     }
 
     public function testRssUpdateResetToken()
