@@ -1355,16 +1355,16 @@
         },
         {
             "name": "j0k3r/php-readability",
-            "version": "v1.0.7",
+            "version": "v1.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/php-readability.git",
-                "reference": "1830dc45d4fccfe09d2d107ab59890f07adc35c4"
+                "reference": "f71c3a419623f821c245e0a003edfbf2c67f278e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/php-readability/zipball/1830dc45d4fccfe09d2d107ab59890f07adc35c4",
-                "reference": "1830dc45d4fccfe09d2d107ab59890f07adc35c4",
+                "url": "https://api.github.com/repos/j0k3r/php-readability/zipball/f71c3a419623f821c245e0a003edfbf2c67f278e",
+                "reference": "f71c3a419623f821c245e0a003edfbf2c67f278e",
                 "shasum": ""
             },
             "require": {
@@ -1414,7 +1414,7 @@
                 "extraction",
                 "html"
             ],
-            "time": "2015-09-20 19:05:55"
+            "time": "2015-09-23 19:09:38"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -2970,20 +2970,20 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v2.7.4",
+            "version": "v2.7.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "1fdf23fe28876844b887b0e1935c9adda43ee645"
+                "reference": "619528a274647cffc1792063c3ea04c4fa8266a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/1fdf23fe28876844b887b0e1935c9adda43ee645",
-                "reference": "1fdf23fe28876844b887b0e1935c9adda43ee645",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/619528a274647cffc1792063c3ea04c4fa8266a0",
+                "reference": "619528a274647cffc1792063c3ea04c4fa8266a0",
                 "shasum": ""
             },
             "require": {
-                "doctrine/common": "~2.3",
+                "doctrine/common": "~2.4",
                 "php": ">=5.3.9",
                 "psr/log": "~1.0",
                 "twig/twig": "~1.20|~2.0"
@@ -3036,9 +3036,9 @@
             },
             "require-dev": {
                 "doctrine/data-fixtures": "1.0.*",
-                "doctrine/dbal": "~2.2",
+                "doctrine/dbal": "~2.4",
                 "doctrine/doctrine-bundle": "~1.2",
-                "doctrine/orm": "~2.2,>=2.2.3",
+                "doctrine/orm": "~2.4,>=2.4.5",
                 "egulias/email-validator": "~1.2",
                 "ircmaxell/password-compat": "~1.0",
                 "monolog/monolog": "~1.11",
@@ -3088,7 +3088,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2015-09-08 14:26:39"
+            "time": "2015-09-25 11:16:52"
         },
         {
             "name": "tecnick.com/tcpdf",

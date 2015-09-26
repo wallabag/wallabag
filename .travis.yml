@@ -13,14 +13,22 @@ php:
     - 5.4
     - 5.5
     - 5.6
+    - 7.0
     - hhvm
-    - nightly
+
+env:
+  - DB=mysql
+  - DB=pgsql
+  - DB=sqlite
 
 matrix:
     fast_finish: true
-    allow_failures:
+    exclude:
         - php: hhvm
-        - php: nightly
+          env: DB=pgsql  # driver for PostgreSQL currently unsupported by HHVM, requires 3rd party dependency
+    allow_failures:
+        - php: 7.0
+        - php: hhvm
 
 branches:
     only:
@@ -29,13 +37,16 @@ branches:
 install:
     - composer self-update
 
-# build coverage only on one build, to speed up results feedbacks
-# before_script:
+before_script:
+    # disable xdebug since we don't use code-coverage for now
+    - phpenv config-rm xdebug.ini
+    # build coverage only on one build, to speed up results feedbacks
     # - if [[ "$TRAVIS_PHP_VERSION" = "5.6" ]]; then PHPUNIT_FLAGS="--coverage-clover=coverage.clover"; else PHPUNIT_FLAGS=""; fi;
+    - if [[ "$DB" = "pgsql" ]]; then psql -c 'create database wallabag;' -U postgres; fi;
 
 script:
-    - ant prepare
-    - bin/phpunit --exclude-group command-doctrine --debug $PHPUNIT_FLAGS
+    - ant prepare-$DB
+    - bin/phpunit --exclude-group command-doctrine -v
 
 # after_script:
     # - |
