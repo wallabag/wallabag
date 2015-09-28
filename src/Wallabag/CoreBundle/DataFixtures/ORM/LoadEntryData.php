@@ -17,6 +17,8 @@ class LoadEntryData extends AbstractFixture implements OrderedFixtureInterface
     {
         $entry1 = new Entry($this->getReference('admin-user'));
         $entry1->setUrl('http://0.0.0.0');
+        $entry1->setReadingTime(11);
+        $entry1->setDomainName('domain.io');
         $entry1->setTitle('test title entry1');
         $entry1->setContent('This is my content /o/');
         $entry1->setLanguage('en');
@@ -27,6 +29,8 @@ class LoadEntryData extends AbstractFixture implements OrderedFixtureInterface
 
         $entry2 = new Entry($this->getReference('admin-user'));
         $entry2->setUrl('http://0.0.0.0');
+        $entry2->setReadingTime(1);
+        $entry2->setDomainName('domain.io');
         $entry2->setTitle('test title entry2');
         $entry2->setContent('This is my content /o/');
         $entry2->setLanguage('fr');
@@ -37,6 +41,8 @@ class LoadEntryData extends AbstractFixture implements OrderedFixtureInterface
 
         $entry3 = new Entry($this->getReference('bob-user'));
         $entry3->setUrl('http://0.0.0.0');
+        $entry3->setReadingTime(1);
+        $entry3->setDomainName('domain.io');
         $entry3->setTitle('test title entry3');
         $entry3->setContent('This is my content /o/');
         $entry3->setLanguage('en');
@@ -55,6 +61,8 @@ class LoadEntryData extends AbstractFixture implements OrderedFixtureInterface
 
         $entry4 = new Entry($this->getReference('admin-user'));
         $entry4->setUrl('http://0.0.0.0');
+        $entry4->setReadingTime(12);
+        $entry4->setDomainName('domain.io');
         $entry4->setTitle('test title entry4');
         $entry4->setContent('This is my content /o/');
         $entry4->setLanguage('en');
@@ -73,6 +81,8 @@ class LoadEntryData extends AbstractFixture implements OrderedFixtureInterface
 
         $entry5 = new Entry($this->getReference('admin-user'));
         $entry5->setUrl('http://0.0.0.0');
+        $entry5->setReadingTime(12);
+        $entry5->setDomainName('domain.io');
         $entry5->setTitle('test title entry5');
         $entry5->setContent('This is my content /o/');
         $entry5->setStarred(true);
@@ -84,6 +94,8 @@ class LoadEntryData extends AbstractFixture implements OrderedFixtureInterface
 
         $entry6 = new Entry($this->getReference('admin-user'));
         $entry6->setUrl('http://0.0.0.0');
+        $entry6->setReadingTime(12);
+        $entry6->setDomainName('domain.io');
         $entry6->setTitle('test title entry6');
         $entry6->setContent('This is my content /o/');
         $entry6->setArchived(true);
