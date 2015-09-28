@@ -87,6 +87,7 @@ class LoadEntryData extends AbstractFixture implements OrderedFixtureInterface
         $entry5->setContent('This is my content /o/');
         $entry5->setStarred(true);
         $entry5->setLanguage('fr');
+        $entry5->setPreviewPicture('http://0.0.0.0/image.jpg');
 
         $manager->persist($entry5);
 
