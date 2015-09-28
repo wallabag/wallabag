@@ -4,11 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
-    "hash": "2dd2fad15a8310c75644ff90347d65f3",
-=======
     "hash": "ea1d98a3385ecfcff59396814a5c069c",
->>>>>>> 50e8bd7c23dc6dc187136b541211b827f9cfd6e3
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -3157,11 +3153,7 @@
             "keywords": [
                 "framework"
             ],
-<<<<<<< HEAD
-            "time": "2015-09-08 14:26:39"
-=======
             "time": "2015-09-25 11:16:52"
->>>>>>> 50e8bd7c23dc6dc187136b541211b827f9cfd6e3
         },
         {
             "name": "tecnickcom/tcpdf",
@@ -3338,56 +3330,6 @@
                 "templating"
             ],
             "time": "2015-09-22 13:59:32"
-        },
-        {
-            "name": "wa72/htmlpagedom",
-            "version": "v1.1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/wasinger/htmlpagedom.git",
-                "reference": "e835991cba69560d0930605b6e0e6f96e41ebd62"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/wasinger/htmlpagedom/zipball/e835991cba69560d0930605b6e0e6f96e41ebd62",
-                "reference": "e835991cba69560d0930605b6e0e6f96e41ebd62",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.1",
-                "symfony/css-selector": "~2.3",
-                "symfony/dom-crawler": "~2.3"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Wa72\\HtmlPageDom\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Christoph Singer",
-                    "email": "singer@webagentur72.de",
-                    "homepage": "http://www.webagentur72.de"
-                }
-            ],
-            "description": "PHP implementation of the jQuery DOM manipulation API for HTML documents",
-            "homepage": "http://github.com/wasinger/htmlpagedom",
-            "keywords": [
-                "crawler",
-                "dom",
-                "html"
-            ],
-            "time": "2015-06-25 08:18:53"
         },
         {
             "name": "willdurand/hateoas",
