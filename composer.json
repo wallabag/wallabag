@@ -54,7 +54,7 @@
         "lexik/form-filter-bundle": "~4.0",
         "j0k3r/graby": "~1.0",
         "friendsofsymfony/user-bundle": "dev-master",
-        "wa72/htmlpagedom": "~1.1"
+        "masterminds/html5": "~3.0"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "~2.2.0",

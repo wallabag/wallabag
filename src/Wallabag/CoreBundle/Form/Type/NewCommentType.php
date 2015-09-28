@@ -12,9 +12,9 @@ class NewCommentType extends AbstractType
     {
         $builder
             ->add('content', 'textarea', array('required' => true,
-                'attr' => array('class' => 'materialize-textarea')
+                'attr' => array('class' => 'materialize-textarea'),
                 ))
-            ->add('dom','hidden')
+            ->add('dom', 'hidden')
             ->add('save', 'submit')
             ->add('reset', 'reset')
         ;

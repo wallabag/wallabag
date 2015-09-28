@@ -31,8 +31,8 @@ class ContentProxyTest extends KernelTestCase
 
         $this->assertEquals('http://0.0.0.0', $entry->getUrl());
         $this->assertEmpty($entry->getTitle());
-        $this->assertEquals('<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body><p data-wallabag-paragraph="0">Unable to retrieve readable content.</p></body></html>
+        $this->assertEquals('<!DOCTYPE html>
+<html><p data-wallabag-paragraph="0">Unable to retrieve readable content.</p></html>
 ', $entry->getContent());
         $this->assertEmpty($entry->getPreviewPicture());
         $this->assertEmpty($entry->getMimetype());
@@ -102,9 +102,7 @@ class ContentProxyTest extends KernelTestCase
 
         $this->assertEquals('http://1.1.1.1', $entry->getUrl());
         $this->assertEquals('this is my title', $entry->getTitle());
-        $this->assertEquals('<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body><p data-wallabag-paragraph="0">this is my content</p></body></html>
-', $entry->getContent());
+        $this->assertEquals('this is my content', $entry->getContent());
         $this->assertEquals('http://3.3.3.3/cover.jpg', $entry->getPreviewPicture());
         $this->assertEquals('text/html', $entry->getMimetype());
         $this->assertEquals('fr', $entry->getLanguage());

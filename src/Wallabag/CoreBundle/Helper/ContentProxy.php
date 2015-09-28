@@ -4,7 +4,7 @@ namespace Wallabag\CoreBundle\Helper;
 
 use Graby\Graby;
 use Wallabag\CoreBundle\Entity\Entry;
-use \Wa72\HtmlPageDom\HtmlPage;
+use Masterminds\Html5;
 
 /**
  * This kind of proxy class take care of getting the content from an url
@@ -50,14 +50,18 @@ class ContentProxy
         /*
          * Set unique ids on paragraphs to set comments on the right ones
          */
-        $crawler = new HtmlPage($html);
-        $paragraphs = $crawler->filter('p');
-        $paragraphId = 0;
-        foreach ($paragraphs as $paragraph) {
-            $paragraph->setAttribute('data-wallabag-paragraph', $paragraphId);
-            $paragraphId++;
+        if (!strcmp($html, strip_tags($html)) == 0) {
+            $html5 = new HTML5();
+            $crawler = $html5->loadHTML($html);
+            $paragraphs = $crawler->getElementsByTagName('p');
+            $paragraphId = 0;
+            foreach ($paragraphs as $paragraph) {
+                $domAttribute = $paragraph->setAttribute('data-wallabag-paragraph', $paragraphId);
+                $paragraph->appendChild($domAttribute);
+                ++$paragraphId;
+            }
+            $html = $html5->saveHTML($crawler);
         }
-        $html = $crawler->save();
 
         $entry->setUrl($content['url'] ?: $url);
         $entry->setTitle($title);
