@@ -101,7 +101,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneByIsArchived(false);
+            ->findOneByUsernameAndNotArchived('admin');
 
         $client->request('GET', '/view/'.$content->getId());
 
@@ -117,7 +117,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneByIsArchived(false);
+            ->findOneByUsernameAndNotArchived('admin');
 
         $crawler = $client->request('GET', '/edit/'.$content->getId());
 
@@ -135,7 +135,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneByIsArchived(false);
+            ->findOneByUsernameAndNotArchived('admin');
 
         $crawler = $client->request('GET', '/edit/'.$content->getId());
 
@@ -165,7 +165,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneByIsArchived(false);
+            ->findOneByUsernameAndNotArchived('admin');
 
         $client->request('GET', '/archive/'.$content->getId());
 
@@ -174,7 +174,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $res = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneById($content->getId());
+            ->find($content->getId());
 
         $this->assertEquals($res->isArchived(), true);
     }
@@ -187,7 +187,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneByIsStarred(false);
+            ->findOneByUsernameAndNotStarred('admin');
 
         $client->request('GET', '/star/'.$content->getId());
 
@@ -209,7 +209,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneByIsStarred(false);
+            ->findOneByUsernameAndNotStarred('admin');
 
         $client->request('GET', '/delete/'.$content->getId());
 
@@ -222,21 +222,15 @@ class EntryControllerTest extends WallabagCoreTestCase
 
     public function testViewOtherUserEntry()
     {
-        $this->logInAs('bob');
+        $this->logInAs('admin');
         $client = $this->getClient();
 
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->createQueryBuilder('e')
-            ->select('e.id')
-            ->leftJoin('e.user', 'u')
-            ->where('u.username != :username')->setParameter('username', 'bob')
-            ->setMaxResults(1)
-            ->getQuery()
-            ->getSingleResult(AbstractQuery::HYDRATE_ARRAY);
+            ->findOneByUsernameAndNotArchived('bob');
 
-        $client->request('GET', '/view/'.$content['id']);
+        $client->request('GET', '/view/'.$content->getId());
 
         $this->assertEquals(403, $client->getResponse()->getStatusCode());
     }
@@ -360,7 +354,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $form['entry_filter[isStarred]']->untick();
 
         $crawler = $client->submit($form);
-        $this->assertCount(2, $crawler->filter('div[class=entry]'));
+        $this->assertCount(1, $crawler->filter('div[class=entry]'));
 
         $form = $crawler->filter('button[id=submit-filter]')->form();
         $form['entry_filter[isArchived]']->untick();
@@ -391,11 +385,11 @@ class EntryControllerTest extends WallabagCoreTestCase
         $crawler = $client->request('GET', '/unread/list');
         $form = $crawler->filter('button[id=submit-filter]')->form();
         $data = array(
-            'entry_filter[language]' => 'de',
+            'entry_filter[language]' => 'fr',
         );
 
         $crawler = $client->submit($form, $data);
-        $this->assertCount(1, $crawler->filter('div[class=entry]'));
+        $this->assertCount(3, $crawler->filter('div[class=entry]'));
 
         $form = $crawler->filter('button[id=submit-filter]')->form();
         $data = array(

@@ -161,4 +161,40 @@ class EntryRepository extends EntityRepository
 
         return $languages;
     }
+
+    /**
+     * Used only in test case to get the right entry associated to the right user
+     *
+     * @param  string $username
+     *
+     * @return Entry
+     */
+    public function findOneByUsernameAndNotStarred($username)
+    {
+        return $this->createQueryBuilder('e')
+            ->leftJoin('e.user', 'u')
+            ->where('u.username = :username')->setParameter('username', $username)
+            ->andWhere('e.isStarred = false')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getSingleResult();
+    }
+
+    /**
+     * Used only in test case to get the right entry associated to the right user
+     *
+     * @param  string $username
+     *
+     * @return Entry
+     */
+    public function findOneByUsernameAndNotArchived($username)
+    {
+        return $this->createQueryBuilder('e')
+            ->leftJoin('e.user', 'u')
+            ->where('u.username = :username')->setParameter('username', $username)
+            ->andWhere('e.isArchived = false')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getSingleResult();
+    }
 }
