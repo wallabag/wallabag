@@ -4,6 +4,7 @@ namespace Wallabag\CoreBundle\Helper;
 
 use Graby\Graby;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\CoreBundle\Tools\Utils;
 
 /**
  * This kind of proxy class take care of getting the content from an url
@@ -51,6 +52,8 @@ class ContentProxy
         $entry->setContent($html);
         $entry->setLanguage($content['language']);
         $entry->setMimetype($content['content_type']);
+        $entry->setReadingTime(Utils::getReadingTime($html));
+        $entry->setDomainName(parse_url($entry->getUrl(), PHP_URL_HOST));
 
         if (isset($content['open_graph']['og_image'])) {
             $entry->setPreviewPicture($content['open_graph']['og_image']);
