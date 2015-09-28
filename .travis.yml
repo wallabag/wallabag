@@ -3,6 +3,12 @@ language: php
 # faster builds on docker-container setup
 sudo: false
 
+# used for HHVM
+addons:
+  apt:
+    packages:
+      - tidy
+
 # cache vendor dirs
 cache:
     directories:
