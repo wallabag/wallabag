@@ -19,9 +19,14 @@ swiftmailer:
 
 doctrine:
     dbal:
-        driver: pdo_sqlite
-        path: %kernel.root_dir%/../data/db/wallabag_test.sqlite
-        host: localhost
+        driver: "%test_database_driver%"
+        host: "%test_database_host%"
+        port: "%test_database_port%"
+        dbname: "%test_database_name%"
+        user: "%test_database_user%"
+        password: "%test_database_password%"
+        charset: UTF8
+        path: "%test_database_path%"
     orm:
         metadata_cache_driver:
             type: service

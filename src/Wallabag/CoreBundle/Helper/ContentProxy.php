@@ -4,6 +4,7 @@ namespace Wallabag\CoreBundle\Helper;
 
 use Graby\Graby;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\CoreBundle\Tools\Utils;
 use Masterminds\Html5;
 
 /**
@@ -67,6 +68,8 @@ class ContentProxy
         $entry->setTitle($title);
         $entry->setContent($html);
         $entry->setMimetype($content['content_type']);
+        $entry->setReadingTime(Utils::getReadingTime($html));
+        $entry->setDomainName(parse_url($entry->getUrl(), PHP_URL_HOST));
 
         if (isset($content['open_graph']['og_image'])) {
             $entry->setPreviewPicture($content['open_graph']['og_image']);

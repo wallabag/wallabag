@@ -37,6 +37,8 @@ class ContentProxyTest extends KernelTestCase
         $this->assertEmpty($entry->getPreviewPicture());
         $this->assertEmpty($entry->getMimetype());
         $this->assertEmpty($entry->getLanguage());
+        $this->assertEquals(0.0, $entry->getReadingTime());
+        $this->assertEquals('0.0.0.0', $entry->getDomainName());
     }
 
     public function testWithEmptyContentButOG()
@@ -61,9 +63,9 @@ class ContentProxyTest extends KernelTestCase
             ));
 
         $proxy = new ContentProxy($graby);
-        $entry = $proxy->updateEntry(new Entry(new User()), 'http://0.0.0.0');
+        $entry = $proxy->updateEntry(new Entry(new User()), 'http://domain.io');
 
-        $this->assertEquals('http://0.0.0.0', $entry->getUrl());
+        $this->assertEquals('http://domain.io', $entry->getUrl());
         $this->assertEquals('my title', $entry->getTitle());
         $this->assertEquals('<!DOCTYPE html>
 <html><p data-wallabag-paragraph="0">Unable to retrieve readable content.</p><p data-wallabag-paragraph="1"><i>But we found a short description: </i></p>desc</html>
@@ -71,6 +73,8 @@ class ContentProxyTest extends KernelTestCase
         $this->assertEmpty($entry->getPreviewPicture());
         $this->assertEmpty($entry->getLanguage());
         $this->assertEmpty($entry->getMimetype());
+        $this->assertEquals(0.0, $entry->getReadingTime());
+        $this->assertEquals('domain.io', $entry->getDomainName());
     }
 
     public function testWithContent()
@@ -83,7 +87,7 @@ class ContentProxyTest extends KernelTestCase
         $graby->expects($this->any())
             ->method('fetchContent')
             ->willReturn(array(
-                'html' => 'this is my content',
+                'html' => str_repeat('this is my content', 325),
                 'title' => 'this is my title',
                 'url' => 'http://1.1.1.1',
                 'content_type' => 'text/html',
@@ -100,9 +104,11 @@ class ContentProxyTest extends KernelTestCase
 
         $this->assertEquals('http://1.1.1.1', $entry->getUrl());
         $this->assertEquals('this is my title', $entry->getTitle());
-        $this->assertEquals('this is my content', $entry->getContent());
+        $this->assertContains('this is my content', $entry->getContent());
         $this->assertEquals('http://3.3.3.3/cover.jpg', $entry->getPreviewPicture());
         $this->assertEquals('text/html', $entry->getMimetype());
         $this->assertEquals('fr', $entry->getLanguage());
+        $this->assertEquals(4.0, $entry->getReadingTime());
+        $this->assertEquals('1.1.1.1', $entry->getDomainName());
     }
 }

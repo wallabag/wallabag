@@ -3,6 +3,12 @@ language: php
 # faster builds on docker-container setup
 sudo: false
 
+# used for HHVM
+addons:
+  apt:
+    packages:
+      - tidy
+
 # cache vendor dirs
 cache:
     directories:
@@ -13,29 +19,39 @@ php:
     - 5.4
     - 5.5
     - 5.6
+    - 7.0
     - hhvm
-    - nightly
+
+env:
+  - DB=mysql
+  - DB=pgsql
+  - DB=sqlite
 
 matrix:
     fast_finish: true
-    allow_failures:
+    exclude:
         - php: hhvm
-        - php: nightly
+          env: DB=pgsql  # driver for PostgreSQL currently unsupported by HHVM, requires 3rd party dependency
+    allow_failures:
+        - php: 7.0
+        - php: hhvm
 
 branches:
     only:
         - v2
 
-install:
+before_script:
     - composer self-update
-
-# build coverage only on one build, to speed up results feedbacks
-# before_script:
+    - if [ -n "$GH_TOKEN" ]; then composer config github-oauth.github.com ${GH_TOKEN}; fi;
+    # disable xdebug since we don't use code-coverage for now
+    - if [[ $TRAVIS_PHP_VERSION != '5.6' && $TRAVIS_PHP_VERSION != 'hhvm' && $TRAVIS_PHP_VERSION != '7.0' ]]; then phpenv config-rm xdebug.ini; fi
+    # build coverage only on one build, to speed up results feedbacks
     # - if [[ "$TRAVIS_PHP_VERSION" = "5.6" ]]; then PHPUNIT_FLAGS="--coverage-clover=coverage.clover"; else PHPUNIT_FLAGS=""; fi;
+    - if [[ "$DB" = "pgsql" ]]; then psql -c 'create database wallabag;' -U postgres; fi;
 
 script:
-    - ant prepare
-    - bin/phpunit --exclude-group command-doctrine --debug $PHPUNIT_FLAGS
+    - ant prepare-$DB
+    - bin/phpunit --exclude-group command-doctrine -v
 
 # after_script:
     # - |

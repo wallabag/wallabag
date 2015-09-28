@@ -24,7 +24,7 @@ class TagControllerTest extends WallabagCoreTestCase
         $entry = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneBy(array());
+            ->findOneByUsernameAndNotArchived('admin');
 
         $crawler = $client->request('GET', '/view/'.$entry->getId());
 
@@ -46,7 +46,7 @@ class TagControllerTest extends WallabagCoreTestCase
         $newEntry = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneById($entry->getId());
+            ->find($entry->getId());
 
         $this->assertEquals(1, count($newEntry->getTags()));
 
@@ -61,7 +61,7 @@ class TagControllerTest extends WallabagCoreTestCase
         $newEntry = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneById($entry->getId());
+            ->find($entry->getId());
 
         $this->assertEquals(2, count($newEntry->getTags()));
     }
