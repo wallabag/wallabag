@@ -65,10 +65,8 @@ class ContentProxyTest extends KernelTestCase
 
         $this->assertEquals('http://0.0.0.0', $entry->getUrl());
         $this->assertEquals('my title', $entry->getTitle());
-        $this->assertEquals('<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<p data-wallabag-paragraph="0">Unable to retrieve readable content.</p>
-<p data-wallabag-paragraph="1"><i>But we found a short description: </i></p>desc</body></html>
+        $this->assertEquals('<!DOCTYPE html>
+<html><p data-wallabag-paragraph="0">Unable to retrieve readable content.</p><p data-wallabag-paragraph="1"><i>But we found a short description: </i></p>desc</html>
 ', $entry->getContent());
         $this->assertEmpty($entry->getPreviewPicture());
         $this->assertEmpty($entry->getLanguage());
