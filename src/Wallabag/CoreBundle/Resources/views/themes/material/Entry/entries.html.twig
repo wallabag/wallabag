@@ -76,7 +76,7 @@
                     {% endif %}
 
                     <div class="card-action">
-                        <span class="bold"><a href="{{ entry.url|e }}" target="_blank" title="{% trans %}original{% endtrans %}: {{ entry.title|e }} - {{ entry.domainName }}" class="tool original grey-text"><span>{{ entry.domainName | truncate(18) }}</span></a></bold>
+                        <span class="bold"><a href="{{ entry.url|e }}" target="_blank" title="{% trans %}original{% endtrans %}: {{ entry.title|e }} - {{ entry.domainName|removeWww }}" class="tool original grey-text"><span>{{ entry.domainName|removeWww|truncate(18) }}</span></a></bold>
 
                         <ul class="tools links right">
                             <li>
