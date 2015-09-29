@@ -78,7 +78,7 @@ class SecurityControllerTest extends WallabagCoreTestCase
                     'fos_user_registration_form[plainPassword][first]' => 'mypassword',
                     'fos_user_registration_form[plainPassword][second]' => 'mypassword',
                 ),
-            )
+            ),
         );
     }
 
@@ -99,6 +99,31 @@ class SecurityControllerTest extends WallabagCoreTestCase
         $crawler = $client->followRedirect();
 
         $this->assertContains('The user has been created successfully', $client->getResponse()->getContent());
+    }
+
+    public function testRegistrationConfirmation()
+    {
+        $client = $this->getClient();
+        $client->followRedirects();
+
+        $user = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:User')
+            ->findOneByUsername('newuser');
+
+        $this->assertNull($user->getConfig());
+
+        $client->request('GET', '/register/confirm/b4dT0k3n');
+        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+
+        $crawler = $client->request('GET', '/register/confirm/'.$user->getConfirmationToken());
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $user = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:User')
+            ->findOneByUsername('newuser');
+        $this->assertNotNull($user->getConfig());
     }
 
     public function testLogin()
