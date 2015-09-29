@@ -67,6 +67,7 @@ class ContentProxy
         $entry->setUrl($content['url'] ?: $url);
         $entry->setTitle($title);
         $entry->setContent($html);
+        $entry->setLanguage($content['language']);
         $entry->setMimetype($content['content_type']);
         $entry->setReadingTime(Utils::getReadingTime($html));
         $entry->setDomainName(parse_url($entry->getUrl(), PHP_URL_HOST));
