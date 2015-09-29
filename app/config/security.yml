@@ -22,7 +22,7 @@ security:
             pattern: /api/.*
             fos_oauth: true
             stateless: true
-            anonymous: false
+            anonymous: true
 
         login_firewall:
             pattern:    ^/login$

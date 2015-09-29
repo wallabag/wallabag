@@ -110,7 +110,9 @@ fos_rest:
     routing_loader:
         default_format: json
 
-nelmio_api_doc: ~
+nelmio_api_doc:
+    sandbox:
+        enabled: false
 
 nelmio_cors:
     defaults:
