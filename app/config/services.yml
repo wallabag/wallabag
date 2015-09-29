@@ -17,3 +17,9 @@ services:
         class: Twig_Extensions_Extension_Text
         tags:
             - { name: twig.extension }
+
+    wallabag.twig_extension:
+        class: Wallabag\CoreBundle\Twig\WallabagExtension
+        public: false
+        tags:
+            - { name: twig.extension }
