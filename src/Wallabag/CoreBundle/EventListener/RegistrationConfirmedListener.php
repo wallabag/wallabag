@@ -9,7 +9,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
 use Wallabag\CoreBundle\Entity\Config;
 
-class AuthenticationListener implements EventSubscriberInterface
+class RegistrationConfirmedListener implements EventSubscriberInterface
 {
     private $em;
     private $container;

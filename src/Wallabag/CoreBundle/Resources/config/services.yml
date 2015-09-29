@@ -47,7 +47,7 @@ services:
             - @wallabag_core.graby
 
     wallabag_core.registration_confirmed:
-        class: Wallabag\CoreBundle\EventListener\AuthenticationListener
+        class: Wallabag\CoreBundle\EventListener\RegistrationConfirmedListener
         arguments: [@service_container, @doctrine.orm.entity_manager]
         tags:
             - { name: kernel.event_subscriber }

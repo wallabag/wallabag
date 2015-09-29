@@ -8,6 +8,99 @@ use Wallabag\CoreBundle\Tests\WallabagCoreTestCase;
 
 class SecurityControllerTest extends WallabagCoreTestCase
 {
+    public function testRegister()
+    {
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/register/');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertContains('Register', $client->getResponse()->getContent());
+    }
+
+    public function dataForCreateAccountFailed()
+    {
+        return array(
+            array(
+                array(
+                    'fos_user_registration_form[email]' => '',
+                    'fos_user_registration_form[username]' => 'newuser',
+                    'fos_user_registration_form[plainPassword][first]' => 'mypassword',
+                    'fos_user_registration_form[plainPassword][second]' => 'mypassword',
+                ),
+                'Please enter an email',
+            ),
+            array(
+                array(
+                    'fos_user_registration_form[email]' => 'newuser@wallabag.org',
+                    'fos_user_registration_form[username]' => 'admin',
+                    'fos_user_registration_form[plainPassword][first]' => 'mypassword',
+                    'fos_user_registration_form[plainPassword][second]' => 'mypassword',
+                ),
+                'The username is already used',
+            ),
+            array(
+                array(
+                    'fos_user_registration_form[email]' => 'newuser@wallabag.org',
+                    'fos_user_registration_form[username]' => 'newuser',
+                    'fos_user_registration_form[plainPassword][first]' => 'mypassword1',
+                    'fos_user_registration_form[plainPassword][second]' => 'mypassword2',
+                ),
+                'The entered passwords don&#039;t match',
+            ),
+        );
+    }
+
+    /**
+     * @dataProvider dataForCreateAccountFailed
+     */
+    public function testCreateAccountFailed($data, $expectedMessage)
+    {
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/register/');
+
+        $form = $crawler->filter('input[type=submit]')->form();
+
+        $client->submit($form, $data);
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertContains($expectedMessage, $client->getResponse()->getContent());
+    }
+
+    public function dataForCreateAccountSuccess()
+    {
+        return array(
+            array(
+                array(
+                    'fos_user_registration_form[email]' => 'newuser@wallabag.org',
+                    'fos_user_registration_form[username]' => 'newuser',
+                    'fos_user_registration_form[plainPassword][first]' => 'mypassword',
+                    'fos_user_registration_form[plainPassword][second]' => 'mypassword',
+                ),
+            )
+        );
+    }
+
+    /**
+     * @dataProvider dataForCreateAccountSuccess
+     */
+    public function testCreateAccountSuccess($data)
+    {
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/register/');
+
+        $form = $crawler->filter('input[type=submit]')->form();
+
+        $client->submit($form, $data);
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+
+        $crawler = $client->followRedirect();
+
+        $this->assertContains('The user has been created successfully', $client->getResponse()->getContent());
+    }
+
     public function testLogin()
     {
         $client = $this->getClient();
