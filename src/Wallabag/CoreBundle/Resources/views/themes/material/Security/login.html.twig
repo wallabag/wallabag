@@ -10,8 +10,8 @@
 {% block content %}
     <main class="valign-wrapper">
         <div class="valign row">
-            <h1>{% trans %}Login to wallabag{% endtrans %}</h1>
             <div class="card sw">
+                <div class="center"><img src="{{ asset('themes/baggy/img/logo-other_themes.png') }}" alt="wallabag logo" /></div>
                 <form action="{{ path('login_check') }}" method="post" name="loginform">
                     <div class="card-content">
 
