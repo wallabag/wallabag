@@ -38,6 +38,13 @@ class WallabagRestController extends FOSRestController
         }
     }
 
+    private function validateAuthentication()
+    {
+        if (false === $this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw new AccessDeniedException();
+        }
+    }
+
     /**
      * Retrieve all entries. It could be filtered by many options.
      *
@@ -57,6 +64,8 @@ class WallabagRestController extends FOSRestController
      */
     public function getEntriesAction(Request $request)
     {
+        $this->validateAuthentication();
+
         $isArchived = $request->query->get('archive');
         $isStarred = $request->query->get('star');
         $sort = $request->query->get('sort', 'created');
@@ -97,6 +106,7 @@ class WallabagRestController extends FOSRestController
      */
     public function getEntryAction(Entry $entry)
     {
+        $this->validateAuthentication();
         $this->validateUserAccess($entry->getUser()->getId());
 
         $json = $this->get('serializer')->serialize($entry, 'json');
@@ -119,6 +129,8 @@ class WallabagRestController extends FOSRestController
      */
     public function postEntriesAction(Request $request)
     {
+        $this->validateAuthentication();
+
         $url = $request->request->get('url');
 
         $entry = $this->get('wallabag_core.content_proxy')->updateEntry(
@@ -159,6 +171,7 @@ class WallabagRestController extends FOSRestController
      */
     public function patchEntriesAction(Entry $entry, Request $request)
     {
+        $this->validateAuthentication();
         $this->validateUserAccess($entry->getUser()->getId());
 
         $title = $request->request->get('title');
@@ -203,6 +216,7 @@ class WallabagRestController extends FOSRestController
      */
     public function deleteEntriesAction(Entry $entry)
     {
+        $this->validateAuthentication();
         $this->validateUserAccess($entry->getUser()->getId());
 
         $em = $this->getDoctrine()->getManager();
@@ -225,6 +239,7 @@ class WallabagRestController extends FOSRestController
      */
     public function getEntriesTagsAction(Entry $entry)
     {
+        $this->validateAuthentication();
         $this->validateUserAccess($entry->getUser()->getId());
 
         $json = $this->get('serializer')->serialize($entry->getTags(), 'json');
@@ -246,6 +261,7 @@ class WallabagRestController extends FOSRestController
      */
     public function postEntriesTagsAction(Request $request, Entry $entry)
     {
+        $this->validateAuthentication();
         $this->validateUserAccess($entry->getUser()->getId());
 
         $tags = $request->request->get('tags', '');
@@ -274,6 +290,7 @@ class WallabagRestController extends FOSRestController
      */
     public function deleteEntriesTagsAction(Entry $entry, Tag $tag)
     {
+        $this->validateAuthentication();
         $this->validateUserAccess($entry->getUser()->getId());
 
         $entry->removeTag($tag);
@@ -293,6 +310,7 @@ class WallabagRestController extends FOSRestController
      */
     public function getTagsAction()
     {
+        $this->validateAuthentication();
         $json = $this->get('serializer')->serialize($this->getUser()->getTags(), 'json');
 
         return $this->renderJsonResponse($json);
@@ -309,6 +327,7 @@ class WallabagRestController extends FOSRestController
      */
     public function deleteTagAction(Tag $tag)
     {
+        $this->validateAuthentication();
         $this->validateUserAccess($tag->getUser()->getId());
 
         $em = $this->getDoctrine()->getManager();
