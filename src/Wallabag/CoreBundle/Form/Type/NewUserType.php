@@ -13,7 +13,8 @@ class NewUserType extends AbstractType
     {
         $builder
             ->add('username', 'text', array('required' => true))
-            ->add('password', 'password', array(
+            ->add('plainPassword', 'repeated', array(
+                'type' => 'password',
                 'constraints' => array(
                     new Constraints\Length(array(
                         'min' => 8,

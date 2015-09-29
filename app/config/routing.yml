@@ -30,3 +30,9 @@ homepage:
     defaults:  { _controller: WallabagCoreBundle:Entry:showUnread, page : 1 }
     requirements:
         page:  \d+
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+fos_oauth_server_token:
+    resource: "@FOSOAuthServerBundle/Resources/config/routing/token.xml"

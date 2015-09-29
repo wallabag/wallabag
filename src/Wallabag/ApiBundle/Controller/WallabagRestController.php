@@ -2,8 +2,8 @@
 
 namespace Wallabag\ApiBundle\Controller;
 
+use FOS\RestBundle\Controller\FOSRestController;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Wallabag\CoreBundle\Entity\Entry;
@@ -11,7 +11,7 @@ use Wallabag\CoreBundle\Entity\Tag;
 use Hateoas\Configuration\Route;
 use Hateoas\Representation\Factory\PagerfantaFactory;
 
-class WallabagRestController extends Controller
+class WallabagRestController extends FOSRestController
 {
     /**
      * @param Entry  $entry
@@ -36,31 +36,6 @@ class WallabagRestController extends Controller
                 $entry->addTag($tagEntity);
             }
         }
-    }
-
-    /**
-     * Retrieve salt for a giver user.
-     *
-     * @ApiDoc(
-     *       parameters={
-     *          {"name"="username", "dataType"="string", "required"=true, "description"="username"}
-     *       }
-     * )
-     *
-     * @return array
-     */
-    public function getSaltAction($username)
-    {
-        $user = $this
-            ->getDoctrine()
-            ->getRepository('WallabagCoreBundle:User')
-            ->findOneByUsername($username);
-
-        if (is_null($user)) {
-            throw $this->createNotFoundException();
-        }
-
-        return array($user->getSalt() ?: null);
     }
 
     /**
@@ -122,7 +97,7 @@ class WallabagRestController extends Controller
      */
     public function getEntryAction(Entry $entry)
     {
-        $this->validateUserAccess($entry->getUser()->getId(), $this->getUser()->getId());
+        $this->validateUserAccess($entry->getUser()->getId());
 
         $json = $this->get('serializer')->serialize($entry, 'json');
 
@@ -184,7 +159,7 @@ class WallabagRestController extends Controller
      */
     public function patchEntriesAction(Entry $entry, Request $request)
     {
-        $this->validateUserAccess($entry->getUser()->getId(), $this->getUser()->getId());
+        $this->validateUserAccess($entry->getUser()->getId());
 
         $title = $request->request->get('title');
         $isArchived = $request->request->get('is_archived');
@@ -228,7 +203,7 @@ class WallabagRestController extends Controller
      */
     public function deleteEntriesAction(Entry $entry)
     {
-        $this->validateUserAccess($entry->getUser()->getId(), $this->getUser()->getId());
+        $this->validateUserAccess($entry->getUser()->getId());
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($entry);
@@ -250,7 +225,7 @@ class WallabagRestController extends Controller
      */
     public function getEntriesTagsAction(Entry $entry)
     {
-        $this->validateUserAccess($entry->getUser()->getId(), $this->getUser()->getId());
+        $this->validateUserAccess($entry->getUser()->getId());
 
         $json = $this->get('serializer')->serialize($entry->getTags(), 'json');
 
@@ -271,7 +246,7 @@ class WallabagRestController extends Controller
      */
     public function postEntriesTagsAction(Request $request, Entry $entry)
     {
-        $this->validateUserAccess($entry->getUser()->getId(), $this->getUser()->getId());
+        $this->validateUserAccess($entry->getUser()->getId());
 
         $tags = $request->request->get('tags', '');
         if (!empty($tags)) {
@@ -299,7 +274,7 @@ class WallabagRestController extends Controller
      */
     public function deleteEntriesTagsAction(Entry $entry, Tag $tag)
     {
-        $this->validateUserAccess($entry->getUser()->getId(), $this->getUser()->getId());
+        $this->validateUserAccess($entry->getUser()->getId());
 
         $entry->removeTag($tag);
         $em = $this->getDoctrine()->getManager();
@@ -334,7 +309,7 @@ class WallabagRestController extends Controller
      */
     public function deleteTagAction(Tag $tag)
     {
-        $this->validateUserAccess($tag->getUser()->getId(), $this->getUser()->getId());
+        $this->validateUserAccess($tag->getUser()->getId());
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($tag);
@@ -350,12 +325,12 @@ class WallabagRestController extends Controller
      * If not, throw exception. It means a user try to access information from an other user.
      *
      * @param int $requestUserId User id from the requested source
-     * @param int $currentUserId User id from the retrieved source
      */
-    private function validateUserAccess($requestUserId, $currentUserId)
+    private function validateUserAccess($requestUserId)
     {
-        if ($requestUserId != $currentUserId) {
-            throw $this->createAccessDeniedException('Access forbidden. Entry user id: '.$requestUserId.', logged user id: '.$currentUserId);
+        $user = $this->get('security.context')->getToken()->getUser();
+        if ($requestUserId != $user->getId()) {
+            throw $this->createAccessDeniedException('Access forbidden. Entry user id: '.$requestUserId.', logged user id: '.$user->getId());
         }
     }
 

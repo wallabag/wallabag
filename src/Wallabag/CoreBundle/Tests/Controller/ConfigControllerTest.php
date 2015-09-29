@@ -258,7 +258,8 @@ class ConfigControllerTest extends WallabagCoreTestCase
             array(
                 array(
                     'new_user[username]' => '',
-                    'new_user[password]' => '',
+                    'new_user[plainPassword][first]' => '',
+                    'new_user[plainPassword][second]' => '',
                     'new_user[email]' => '',
                 ),
                 'Please enter a username',
@@ -266,7 +267,8 @@ class ConfigControllerTest extends WallabagCoreTestCase
             array(
                 array(
                     'new_user[username]' => 'a',
-                    'new_user[password]' => 'mypassword',
+                    'new_user[plainPassword][first]' => 'mypassword',
+                    'new_user[plainPassword][second]' => 'mypassword',
                     'new_user[email]' => '',
                 ),
                 'The username is too short',
@@ -274,7 +276,8 @@ class ConfigControllerTest extends WallabagCoreTestCase
             array(
                 array(
                     'new_user[username]' => 'wallace',
-                    'new_user[password]' => 'mypassword',
+                    'new_user[plainPassword][first]' => 'mypassword',
+                    'new_user[plainPassword][second]' => 'mypassword',
                     'new_user[email]' => 'test',
                 ),
                 'The email is not valid',
@@ -282,10 +285,20 @@ class ConfigControllerTest extends WallabagCoreTestCase
             array(
                 array(
                     'new_user[username]' => 'admin',
-                    'new_user[password]' => 'wallacewallace',
+                    'new_user[plainPassword][first]' => 'wallacewallace',
+                    'new_user[plainPassword][second]' => 'wallacewallace',
                     'new_user[email]' => 'wallace@wallace.me',
                 ),
                 'The username is already used',
+            ),
+            array(
+                array(
+                    'new_user[username]' => 'wallace',
+                    'new_user[plainPassword][first]' => 'mypassword1',
+                    'new_user[plainPassword][second]' => 'mypassword2',
+                    'new_user[email]' => 'wallace@wallace.me',
+                ),
+                'This value is not valid',
             ),
         );
     }
@@ -325,7 +338,8 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $data = array(
             'new_user[username]' => 'wallace',
-            'new_user[password]' => 'wallace1',
+            'new_user[plainPassword][first]' => 'wallace1',
+            'new_user[plainPassword][second]' => 'wallace1',
             'new_user[email]' => 'wallace@wallace.me',
         );
 

@@ -18,8 +18,9 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
         $userAdmin->setName('Big boss');
         $userAdmin->setEmail('bigboss@wallabag.org');
         $userAdmin->setUsername('admin');
-        $userAdmin->setPassword('mypassword');
+        $userAdmin->setPlainPassword('mypassword');
         $userAdmin->setEnabled(true);
+        $userAdmin->addRole('ROLE_SUPER_ADMIN');
 
         $manager->persist($userAdmin);
 
@@ -29,7 +30,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
         $bobUser->setName('Bobby');
         $bobUser->setEmail('bobby@wallabag.org');
         $bobUser->setUsername('bob');
-        $bobUser->setPassword('mypassword');
+        $bobUser->setPlainPassword('mypassword');
         $bobUser->setEnabled(true);
 
         $manager->persist($bobUser);

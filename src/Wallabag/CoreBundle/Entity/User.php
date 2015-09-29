@@ -6,7 +6,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use FOS\UserBundle\Model\User as BaseUser;
@@ -22,7 +21,7 @@ use FOS\UserBundle\Model\User as BaseUser;
  * @UniqueEntity("email")
  * @UniqueEntity("username")
  */
-class User extends BaseUser implements AdvancedUserInterface, \Serializable
+class User extends BaseUser
 {
     /**
      * @var int
@@ -75,6 +74,7 @@ class User extends BaseUser implements AdvancedUserInterface, \Serializable
         parent::__construct();
         $this->entries = new ArrayCollection();
         $this->tags = new ArrayCollection();
+        $this->roles = array('ROLE_USER');
     }
 
     /**
@@ -88,24 +88,6 @@ class User extends BaseUser implements AdvancedUserInterface, \Serializable
         }
 
         $this->updatedAt = new \DateTime();
-    }
-
-    /**
-     * Set password.
-     *
-     * @param string $password
-     *
-     * @return User
-     */
-    public function setPassword($password)
-    {
-        if (!$password && 0 === strlen($password)) {
-            return;
-        }
-
-        $this->password = sha1($password.$this->getUsername().$this->getSalt());
-
-        return $this;
     }
 
     /**
