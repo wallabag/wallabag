@@ -31,27 +31,32 @@ function init_comments() {
     /*
      * If the screen is big enough, show comments
      */
-    if (window.matchMedia("(min-width:992px)").matches) {
+    if (window.matchMedia("(min-width:992px)").matches && comment['dom'] != 'false') {
       comment['paragraph'].after(commentselector.eq(i));
       position[i] = comment['paragraph'].position();
       commentselector.eq(i).css('position','absolute');
       commentselector.eq(i).css('width','250px');
       commentselector.eq(i).css('top', position[i].top.toString() + 'px');
       commentselector.eq(i).css('left', em(88).toString() + 'px');
-      $('#comments_list').hide();
+      if ($('#comments_list').children().length < 2) {
+        $('#comments_list').hide();
+      }
 
-    } else 
+    } else
     /*
      * If the screen is small, show the comments on bottom of the article, with an anchor to get up
      */
     {
-      // set anchor for return button to paragraph
-      $('.return-to-paragraph').eq(i).css('display','inline');
-      commentselector.eq(i).find('.return-to-paragraph').attr('href', '#' + comment['paragraph'].attr('id'));
+        commentselector.eq(i).css('max-width','40em');
+        // set anchor for return button to paragraph
+        if (comment['dom'] != 'false') {
+            $('.return-to-paragraph').eq(i).css('display','inline');
+            commentselector.eq(i).find('.return-to-paragraph').attr('href', '#' + comment['paragraph'].attr('id'));
+      }
     }
   };
 
-      
+
 
   /*
    * Hide comment form if user clicks elsewhere
@@ -72,14 +77,16 @@ function init_comments() {
    * Show comment button when hoovering a paragraph
    */
 
-  $('article p, article blockquote, article aside').mouseover(function(e) {
-    paragraph = $(this);
-    offsetcom = paragraph.offset();
-    domPath = $(this).attr('data-wallabag-paragraph');
-    $("#new-comment-button").show();
-    $("#new-comment-button").offset({ top: offsetcom.top, left: (offsetcom.left + em(55)) });
-    
-});
+    if (window.matchMedia("(min-width:992px)").matches) {
+        $('article p, article blockquote, article aside').mouseover(function(e) {
+            paragraph = $(this);
+            offsetcom = paragraph.offset();
+            domPath = $(this).attr('data-wallabag-paragraph');
+            $("#new-comment-button").show();
+            $("#new-comment-button").offset({ top: offsetcom.top, left: (offsetcom.left + em(55)) });
+            $("#new-comment-button").css('display','inline-block');
+        });
+    }
   /*
    * Add the comment input textarea when clicking on button
    */
@@ -102,7 +109,7 @@ function em(input) {
 }
 
 function getDisplayType (element) {
-    var cStyle = element.currentStyle || window.getComputedStyle(element, ""); 
+    var cStyle = element.currentStyle || window.getComputedStyle(element, "");
     return cStyle.display;
 }
 
@@ -129,10 +136,12 @@ $(document).ready(function(){
        return false;
     });
 
-    $('#nav-btn-add-comment').on('click', function(){
-       $(".nav-panel-add-comment").toggle(100);
-       $(".nav-panel-menu").addClass('hidden');
-       $("#comment_label").focus();
+    $('#nav-btn-add-comment, #new-comment-bottom-link').on('click', function(){
+       //$(".nav-panel-add-comment").toggle(100);
+       $(".nav-panel-menu, #slide-out").addClass('hidden');
+       $(".nav-panel-add-comment").show();
+       $("#comment_content").focus();
+       $(".nav-panel-add-comment #comment_dom").val(false);
        $('html, body').animate({
           scrollTop: $("#comments").offset().top
         }, 1000);

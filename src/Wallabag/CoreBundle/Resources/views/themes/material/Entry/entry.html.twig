@@ -175,7 +175,7 @@ main {
             </div>
             {% if entry.comments is not empty %}
                 <div id="comments_list" class="mdi-editor-insert-comment">
-                Comments
+                Comments <span id="new-comment-bottom-link" class="mdi-content-add-box"></span>
                 {% for comment in entry.comments %}
                     <div id="{{ comment.id }}" class="comment">
                         <hr>
@@ -184,8 +184,8 @@ main {
                             <span class="comment_actions">
                             <a class="mdi-action-delete" href="{{ path('delete_comment', { 'id': comment.id }) }}" ></a></span>
                             <a class="return-to-paragraph" href=""><span class="mdi-navigation-arrow-drop-up"> </span></a>
-                            <span class='commentdom'>{{ comment.dom }}</span> 
-                            <span class="comment_metadata"> 
+                            <span class='commentdom'>{{ comment.dom }}</span>
+                            <span class="comment_metadata">
                             {{ comment.user.username }} - {{  comment.date | date("H:i:s") }} -  {{  comment.date | date("d/m/Y") }}</span>
                         </div>
                     </div>
