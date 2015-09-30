@@ -3,6 +3,7 @@
 namespace Wallabag\CoreBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Helper\ProgressBar;
@@ -15,7 +16,12 @@ class ImportCommand extends ContainerAwareCommand
     {
         $this
             ->setName('import:json')
-            ->setDescription('Import entries from JSON file');
+            ->setDescription('Import entries from JSON file')
+            ->addArgument(
+                'userId',
+                InputArgument::REQUIRED,
+                'user ID to populate'
+            );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -32,6 +38,8 @@ class ImportCommand extends ContainerAwareCommand
 
     protected function import(InputInterface $input, OutputInterface $output)
     {
+        $userId = $input->getArgument('userId');
+
         // Getting php array of data from CSV
         $data = $this->get($input, $output);
 
@@ -48,7 +56,7 @@ class ImportCommand extends ContainerAwareCommand
         $progress->start();
 
         $user = $em->getRepository('WallabagCoreBundle:User')
-            ->findOneById(1);
+            ->findOneById($userId);
 
         foreach ($data as $object) {
             $array = (array) $object;
