@@ -21,7 +21,7 @@
 {% block messages %}
     {% for flashMessage in app.session.flashbag.get('notice') %}
         <script>
-            Materialize.toast('{{ flashMessage }}', 4000);
+            Materialize.toast('{{ flashMessage|trans }}', 4000);
         </script>
     {% endfor %}
 {% endblock %}
