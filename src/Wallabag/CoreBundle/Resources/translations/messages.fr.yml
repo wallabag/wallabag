@@ -1,0 +1,41 @@
+# Menu
+unread: 'Non lus'
+starred: 'Favoris'
+archive: 'Lus'
+all: 'Tous les articles'
+tags: 'Tags'
+config: 'Configuration'
+howto: 'Aide'
+logout: 'Déconnexion'
+
+# Header
+Back to unread articles: 'Retour aux articles non lus'
+Add a new entry: 'Sauvegarder un nouvel article'
+Search: 'Rechercher'
+Filter entries: 'Filtrer les articles'
+Enter your search here: 'Saisissez votre terme de recherche'
+
+# Config screen
+Settings: 'Paramètres'
+User information: 'Mon compte'
+Password: 'Mot de passe'
+RSS: 'RSS'
+Add a user: 'Créer un compte'
+Theme: 'Thème'
+Items per page: "Nombre d'articles par page"
+Language: 'Langue'
+Save: 'Enregistrer'
+RSS token: 'Jeton RSS'
+Name: 'Nom'
+Email: 'Adresse e-mail'
+No token: 'Aucun jeton généré'
+Reset your token: 'Réinitialisez votre jeton'
+Create your token: 'Créez votre jeton'
+Rss limit: "Nombre d'articles dans un flux RSS"
+RSS links: 'URL de vos flux RSS'
+"RSS feeds provided by wallabag allow you to read your saved articles with your favourite RSS reader. You need to generate a token first.": "Les flux RSS fournis par wallabag vous permettent de lire vos articles sauvegardés dans votre lecteur de flux préféré. Pour pouvoir les utiliser, vous devez d'abord créer un jeton."
+Old password: 'Mot de passe actuel'
+New password: 'Nouveau mot de passe'
+Repeat new password: 'Confirmez votre nouveau mot de passe'
+Username: "Nom d'utilisateur"
+
