@@ -163,9 +163,9 @@ class EntryRepository extends EntityRepository
     }
 
     /**
-     * Used only in test case to get the right entry associated to the right user
+     * Used only in test case to get the right entry associated to the right user.
      *
-     * @param  string $username
+     * @param string $username
      *
      * @return Entry
      */

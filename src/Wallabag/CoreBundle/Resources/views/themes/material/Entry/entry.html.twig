@@ -54,7 +54,7 @@
         <li class="bold hide-on-med-and-down">
             <a class="waves-effect collapsible-header" title="{% trans %}Mark as read{% endtrans %}" href="{{ path('archive_entry', { 'id': entry.id }) }}" id="markAsRead">
                 <i class="{% if entry.isArchived == 0 %}mdi-action-done{% else %}mdi-content-redo{% endif %} small"></i>
-                <span>{% trans %}Toggle mark as read{% endtrans %}</span>
+                <span>{% trans %}Mark as read{% endtrans %}</span>
             </a>
             <div class="collapsible-body"></div>
         </li>
@@ -62,7 +62,7 @@
         <li class="bold hide-on-med-and-down">
             <a class="waves-effect collapsible-header" title="{% trans %}Favorite{% endtrans %}" href="{{ path('star_entry', { 'id': entry.id }) }}" id="setFav">
                 <i class="{% if entry.isStarred == 0 %}mdi-action-favorite-outline{% else %}mdi-action-favorite{% endif %} small"></i>
-                <span>{% trans %}Toggle favorite{% endtrans %}</span>
+                <span>{% trans %}Favorite{% endtrans %}</span>
             </a>
             <div class="collapsible-body"></div>
         </li>
