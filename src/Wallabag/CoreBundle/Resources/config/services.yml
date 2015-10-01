@@ -10,6 +10,7 @@ services:
         class: Wallabag\CoreBundle\Form\Type\ConfigType
         arguments:
             - %liip_theme.themes%
+            - %wallabag_core.languages%
         tags:
             - { name: form.type, alias: config }
 

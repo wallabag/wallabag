@@ -108,7 +108,7 @@ download the application: "téléchargez l'application"
 
 # Flash messages
 Information updated: "Vos informations personnelles ont bien été mises à jour"
-Config saved: "Les paramètres de wallabag ont bien été mis à jour"
+"Config saved. Some parameters will be considered after disconnection.": "Les paramètres ont bien été mis à jour. Certains seront pris en compte après déconnexion."
 RSS information updated: "La configuration des flux RSS a bien été mise à jour"
 Password updated: "Votre mot de passe a bien été mis à jour"
 Entry starred: "Article ajouté dans les favoris"

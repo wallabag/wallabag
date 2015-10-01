@@ -18,3 +18,15 @@ services:
         public: false
         tags:
             - { name: twig.extension }
+
+    wallabag.locale_listener:
+        class: Wallabag\CoreBundle\EventListener\LocaleListener
+        arguments: ["%kernel.default_locale%"]
+        tags:
+            - { name: kernel.event_subscriber }
+
+    wallabag.user_locale_listener:
+        class: Wallabag\CoreBundle\EventListener\UserLocaleListener
+        arguments: ["@session"]
+        tags:
+            - { name: kernel.event_listener, event: security.interactive_login, method: onInteractiveLogin }

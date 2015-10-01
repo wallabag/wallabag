@@ -42,7 +42,7 @@ class ConfigController extends Controller
 
             $this->get('session')->getFlashBag()->add(
                 'notice',
-                'Config saved'
+                'Config saved. Some parameters will be considered after disconnection.'
             );
 
             return $this->redirect($this->generateUrl('config'));

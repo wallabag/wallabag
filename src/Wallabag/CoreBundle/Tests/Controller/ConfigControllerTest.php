@@ -46,7 +46,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $data = array(
             'config[theme]' => 0,
             'config[items_per_page]' => '30',
-            'config[language]' => 'fr_FR',
+            'config[language]' => 'en',
         );
 
         $client->submit($form, $data);
@@ -65,12 +65,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
             array(array(
                 'config[theme]' => 0,
                 'config[items_per_page]' => '',
-                'config[language]' => 'fr_FR',
-            )),
-            array(array(
-                'config[theme]' => 0,
-                'config[items_per_page]' => '12',
-                'config[language]' => '',
+                'config[language]' => 'en',
             )),
         );
     }
