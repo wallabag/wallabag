@@ -77,3 +77,40 @@
         </div>
     </nav>
 {% endblock %}
+
+{% block footer %}
+    <footer class="page-footer cyan darken-2">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">{% trans %}Take wallabag with you{% endtrans %}</h5>
+                    <p class="grey-text text-lighten-4">
+                        {% trans %}We are available at{% endtrans %}
+                        <a target="_blank" class="grey-text text-lighten-3" href="https://play.google.com/store/apps/details?id=fr.gaulupeau.apps.InThePoche">android</a> (<a target="_blank" class="grey-text text-lighten-3" href="https://f-droid.org/repository/browse/?fdid=fr.gaulupeau.apps.InThePoche">f-droid</a>)
+                        {% trans %}and{% endtrans %}
+                        <a target="_blank" class="grey-text text-lighten-3" href="https://itunes.apple.com/app/id828331015">iOS</a>.<br>
+                        {% trans %}Install add-ons for{% endtrans %}
+                        <a target="_blank" class="grey-text text-lighten-3" href="https://addons.mozilla.org/ru/firefox/addon/wallabag/">firefox</a>
+                        {% trans %}and{% endtrans %}
+                        <a target="_blank" class="grey-text text-lighten-3" href="https://chrome.google.com/webstore/detail/wallabagit/peehlcgckcnclnjlndmoddifcicdnabm">chrome</a>.
+                    </p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">{% trans %}Social{% endtrans %}</h5>
+                    <ul>
+                        <li><a target="_blank" class="grey-text text-lighten-3" href="https://twitter.com/wallabagapp">twitter</a></li>
+                        <li><a target="_blank" class="grey-text text-lighten-3" href="https://framasphere.org/u/wallabag">diaspora*</a></li>
+                        <li><a target="_blank" class="grey-text text-lighten-3" href="https://plus.google.com/+WallabagOrg/posts">Google+</a></li>
+                        <li><a target="_blank" class="grey-text text-lighten-3" href="https://facebook.com/Wallabag">Facebook</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                <p>{% trans %}powered by{% endtrans %} <a target="_blank" href="https://wallabag.org" class="grey-text text-lighten-4">wallabag</a></p>
+                <a class="grey-text text-lighten-4 right" href="{{ path('about') }}">{% trans %}about{% endtrans %}</a>
+            </div>
+        </div>
+    </footer>
+{% endblock %}
