@@ -34,7 +34,8 @@ services:
 
     wallabag_core.doctrine.prefixed_naming_strategy:
         class: Wallabag\CoreBundle\Doctrine\Mapping\PrefixedNamingStrategy
-        arguments: [%database_table_prefix%]
+        arguments:
+            - %database_table_prefix%
 
     wallabag_core.graby:
         class: Graby\Graby
@@ -48,6 +49,11 @@ services:
 
     wallabag_core.registration_confirmed:
         class: Wallabag\CoreBundle\EventListener\RegistrationConfirmedListener
-        arguments: [@service_container, @doctrine.orm.entity_manager]
+        arguments:
+            - @doctrine.orm.entity_manager
+            - %theme%
+            - %items_on_page%
+            - %rss_limit%
+            - %language%
         tags:
             - { name: kernel.event_subscriber }
