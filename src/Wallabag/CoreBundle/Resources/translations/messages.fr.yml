@@ -24,6 +24,7 @@ Add a new entry: 'Sauvegarder un nouvel article'
 Search: 'Rechercher'
 Filter entries: 'Filtrer les articles'
 Enter your search here: 'Saisissez votre terme de recherche'
+Save new entry: 'Sauvegarder un nouvel article'
 
 # Config screen
 Settings: 'Paramètres'
@@ -115,3 +116,15 @@ Entry unstarred: "Article retiré des favoris"
 Entry archived: "Article marqué comme lu"
 Entry unarchived: "Article marqué comme non lu"
 Entry deleted: "Article supprimé"
+
+# Entry
+Mark as read: 'Marquer comme lu'
+Favorite: 'Mettre en favori'
+back: 'Retour'
+original article: 'Article original'
+Add a tag: 'Ajouter un tag'
+Share: 'Partager'
+Download: 'Télécharger'
+Does this article appear wrong?: "Est-ce que cet article s'affiche mal ?"
+Problems?: 'Un problème ?'
+Edit title: "Modifier le titre"

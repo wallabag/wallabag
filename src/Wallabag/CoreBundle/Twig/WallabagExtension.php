@@ -13,7 +13,7 @@ class WallabagExtension extends \Twig_Extension
 
     public function removeWww($url)
     {
-        return preg_replace('/^www\./i', '',$url);
+        return preg_replace('/^www\./i', '', $url);
     }
 
     public function getName()
