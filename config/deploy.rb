@@ -4,8 +4,8 @@ lock '3.4.0'
 set :application, 'wallabag'
 set :repo_url, 'git@github.com:wallabag/wallabag.git'
 
-set :ssh_user, 'ssh_user'
-server 'server_ip', user: fetch(:ssh_user), roles: %w{web app db}
+set :ssh_user, 'framasoft_bag'
+server '78.46.248.87', user: fetch(:ssh_user), roles: %w{web app db}
 
 set :scm, :git
 

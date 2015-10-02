@@ -21,7 +21,7 @@ abstract class WallabagCoreTestCase extends WebTestCase
     public function logInAs($username)
     {
         $crawler = $this->client->request('GET', '/login');
-        $form = $crawler->filter('button[type=submit]')->form();
+        $form = $crawler->filter('input[type=submit]')->form();
         $data = array(
             '_username' => $username,
             '_password' => 'mypassword',

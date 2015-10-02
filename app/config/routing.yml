@@ -1,3 +1,8 @@
+wallabag_user:
+    resource: "@WallabagUserBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 wallabag_api:
     resource: "@WallabagApiBundle/Resources/config/routing.yml"
     prefix:   /
@@ -10,15 +15,15 @@ doc-api:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
     prefix: /api/doc
 
-login:
-    pattern:   /login
-    defaults:  { _controller: WallabagCoreBundle:Security:login }
-
-login_check:
-    pattern:   /login_check
-
-logout:
-    path:   /logout
+#login:
+#    pattern:   /login
+#    defaults:  { _controller: WallabagCoreBundle:Security:login }
+#
+#login_check:
+#    pattern:   /login_check
+#
+#logout:
+#    path:   /logout
 
 rest :
     type : rest

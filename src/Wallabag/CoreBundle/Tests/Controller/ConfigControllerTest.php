@@ -354,7 +354,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $em = $client->getContainer()->get('doctrine.orm.entity_manager');
         $user = $em
-            ->getRepository('WallabagCoreBundle:User')
+            ->getRepository('WallabagUserBundle:User')
             ->findOneByUsername('wallace');
 
         $this->assertTrue(false !== $user);
@@ -369,7 +369,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         // reset the token
         $em = $client->getContainer()->get('doctrine.orm.entity_manager');
         $user = $em
-            ->getRepository('WallabagCoreBundle:User')
+            ->getRepository('WallabagUserBundle:User')
             ->findOneByUsername('admin');
 
         if (!$user) {

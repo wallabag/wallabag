@@ -27,6 +27,7 @@ class AppKernel extends Kernel
             new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
             new Lexik\Bundle\FormFilterBundle\LexikFormFilterBundle(),
             new FOS\OAuthServerBundle\FOSOAuthServerBundle(),
+            new Wallabag\UserBundle\WallabagUserBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -8,7 +8,7 @@ security:
 
     providers:
         administrators:
-            entity: { class: WallabagCoreBundle:User, property: username }
+            entity: { class: WallabagUserBundle:User, property: username }
         fos_userbundle:
             id: fos_user.user_provider.username
 
@@ -49,6 +49,6 @@ security:
         - { path: ^/api/doc, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/forgot-password, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: /(unread|starred|archive).xml$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/, roles: ROLE_USER }

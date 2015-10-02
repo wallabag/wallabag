@@ -39,7 +39,7 @@ class ForgotPasswordType extends AbstractType
     public function validateEmail($email, ExecutionContextInterface $context)
     {
         $user = $this->doctrine
-            ->getRepository('WallabagCoreBundle:User')
+            ->getRepository('WallabagUserBundle:User')
             ->findOneByEmail($email);
 
         if (!$user) {

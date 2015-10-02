@@ -42,7 +42,7 @@ class Tag
     private $entries;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="tags")
+     * @ORM\ManyToOne(targetEntity="Wallabag\UserBundle\Entity\User", inversedBy="tags")
      */
     private $user;
 

@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Wallabag\CoreBundle\ParamConverter\UsernameRssTokenConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
-use Wallabag\CoreBundle\Entity\User;
+use Wallabag\UserBundle\Entity\User;
 
 class UsernameRssTokenConverterTest extends KernelTestCase
 {
@@ -96,7 +96,7 @@ class UsernameRssTokenConverterTest extends KernelTestCase
 
         $meta->expects($this->once())
             ->method('getName')
-            ->will($this->returnValue('Wallabag\CoreBundle\Entity\User'));
+            ->will($this->returnValue('Wallabag\UserBundle\Entity\User'));
 
         $em = $this->getMockBuilder('Doctrine\Common\Persistence\ObjectManager')
             ->disableOriginalConstructor()
@@ -104,7 +104,7 @@ class UsernameRssTokenConverterTest extends KernelTestCase
 
         $em->expects($this->once())
             ->method('getClassMetadata')
-            ->with('WallabagCoreBundle:User')
+            ->with('WallabagUserBundle:User')
             ->will($this->returnValue($meta));
 
         $registry = $this->getMockBuilder('Doctrine\Common\Persistence\ManagerRegistry')
@@ -117,10 +117,10 @@ class UsernameRssTokenConverterTest extends KernelTestCase
 
         $registry->expects($this->once())
             ->method('getManagerForClass')
-            ->with('WallabagCoreBundle:User')
+            ->with('WallabagUserBundle:User')
             ->will($this->returnValue($em));
 
-        $params = new ParamConverter(array('class' => 'WallabagCoreBundle:User'));
+        $params = new ParamConverter(array('class' => 'WallabagUserBundle:User'));
         $converter = new UsernameRssTokenConverter($registry);
 
         $this->assertTrue($converter->supports($params));
@@ -144,7 +144,7 @@ class UsernameRssTokenConverterTest extends KernelTestCase
      */
     public function testApplyUserNotFound()
     {
-        $repo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\UserRepository')
+        $repo = $this->getMockBuilder('Wallabag\UserBundle\Repository\UserRepository')
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -159,7 +159,7 @@ class UsernameRssTokenConverterTest extends KernelTestCase
 
         $em->expects($this->once())
             ->method('getRepository')
-            ->with('WallabagCoreBundle:User')
+            ->with('WallabagUserBundle:User')
             ->will($this->returnValue($repo));
 
         $registry = $this->getMockBuilder('Doctrine\Common\Persistence\ManagerRegistry')
@@ -168,10 +168,10 @@ class UsernameRssTokenConverterTest extends KernelTestCase
 
         $registry->expects($this->once())
             ->method('getManagerForClass')
-            ->with('WallabagCoreBundle:User')
+            ->with('WallabagUserBundle:User')
             ->will($this->returnValue($em));
 
-        $params = new ParamConverter(array('class' => 'WallabagCoreBundle:User'));
+        $params = new ParamConverter(array('class' => 'WallabagUserBundle:User'));
         $converter = new UsernameRssTokenConverter($registry);
         $request = new Request(array(), array(), array('username' => 'test', 'token' => 'test'));
 
@@ -182,7 +182,7 @@ class UsernameRssTokenConverterTest extends KernelTestCase
     {
         $user = new User();
 
-        $repo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\UserRepository')
+        $repo = $this->getMockBuilder('Wallabag\UserBundle\Repository\UserRepository')
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -197,7 +197,7 @@ class UsernameRssTokenConverterTest extends KernelTestCase
 
         $em->expects($this->once())
             ->method('getRepository')
-            ->with('WallabagCoreBundle:User')
+            ->with('WallabagUserBundle:User')
             ->will($this->returnValue($repo));
 
         $registry = $this->getMockBuilder('Doctrine\Common\Persistence\ManagerRegistry')
@@ -206,10 +206,10 @@ class UsernameRssTokenConverterTest extends KernelTestCase
 
         $registry->expects($this->once())
             ->method('getManagerForClass')
-            ->with('WallabagCoreBundle:User')
+            ->with('WallabagUserBundle:User')
             ->will($this->returnValue($em));
 
-        $params = new ParamConverter(array('class' => 'WallabagCoreBundle:User', 'name' => 'user'));
+        $params = new ParamConverter(array('class' => 'WallabagUserBundle:User', 'name' => 'user'));
         $converter = new UsernameRssTokenConverter($registry);
         $request = new Request(array(), array(), array('username' => 'test', 'token' => 'test'));
 

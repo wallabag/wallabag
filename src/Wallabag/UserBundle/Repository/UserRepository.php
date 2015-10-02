@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Repository;
+namespace Wallabag\UserBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 

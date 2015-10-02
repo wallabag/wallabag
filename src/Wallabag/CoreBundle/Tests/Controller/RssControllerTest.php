@@ -64,7 +64,7 @@ class RssControllerTest extends WallabagCoreTestCase
         $client = $this->getClient();
         $em = $client->getContainer()->get('doctrine.orm.entity_manager');
         $user = $em
-            ->getRepository('WallabagCoreBundle:User')
+            ->getRepository('WallabagUserBundle:User')
             ->findOneByUsername('admin');
 
         $config = $user->getConfig();
@@ -85,7 +85,7 @@ class RssControllerTest extends WallabagCoreTestCase
         $client = $this->getClient();
         $em = $client->getContainer()->get('doctrine.orm.entity_manager');
         $user = $em
-            ->getRepository('WallabagCoreBundle:User')
+            ->getRepository('WallabagUserBundle:User')
             ->findOneByUsername('admin');
 
         $config = $user->getConfig();
@@ -107,7 +107,7 @@ class RssControllerTest extends WallabagCoreTestCase
         $client = $this->getClient();
         $em = $client->getContainer()->get('doctrine.orm.entity_manager');
         $user = $em
-            ->getRepository('WallabagCoreBundle:User')
+            ->getRepository('WallabagUserBundle:User')
             ->findOneByUsername('admin');
 
         $config = $user->getConfig();

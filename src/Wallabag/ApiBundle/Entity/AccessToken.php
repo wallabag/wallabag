@@ -25,7 +25,7 @@ class AccessToken extends BaseAccessToken
     protected $client;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Wallabag\CoreBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="Wallabag\UserBundle\Entity\User")
      */
     protected $user;
 }

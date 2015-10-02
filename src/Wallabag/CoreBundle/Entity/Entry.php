@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Hateoas\Configuration\Annotation as Hateoas;
 use JMS\Serializer\Annotation\XmlRoot;
+use Wallabag\UserBundle\Entity\User;
 
 /**
  * Entry.
@@ -129,7 +130,7 @@ class Entry
     private $isPublic;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="entries")
+     * @ORM\ManyToOne(targetEntity="Wallabag\UserBundle\Entity\User", inversedBy="entries")
      */
     private $user;
 
@@ -142,7 +143,7 @@ class Entry
     /*
      * @param User     $user
      */
-    public function __construct(User $user)
+    public function __construct(Wallabag\UserBundle\Entity\User $user)
     {
         $this->user = $user;
         $this->tags = new ArrayCollection();

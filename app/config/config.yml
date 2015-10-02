@@ -158,7 +158,7 @@ liip_theme:
 fos_user:
     db_driver: orm
     firewall_name: main
-    user_class: Wallabag\CoreBundle\Entity\User
+    user_class: Wallabag\UserBundle\Entity\User
     registration:
         form:
             type: wallabag_user_registration

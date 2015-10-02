@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Entity;
+namespace Wallabag\UserBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -9,11 +9,14 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use FOS\UserBundle\Model\User as BaseUser;
+use Wallabag\CoreBundle\Entity\Config;
+use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\CoreBundle\Entity\Tag;
 
 /**
  * User.
  *
- * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\UserRepository")
+ * @ORM\Entity(repositoryClass="Wallabag\UserBundle\Repository\UserRepository")
  * @ORM\Table
  * @ORM\HasLifecycleCallbacks()
  * @ExclusionPolicy("all")
@@ -55,17 +58,17 @@ class User extends BaseUser
     protected $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="Entry", mappedBy="user", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Wallabag\CoreBundle\Entity\Entry", mappedBy="user", cascade={"remove"})
      */
     protected $entries;
 
     /**
-     * @ORM\OneToOne(targetEntity="Config", mappedBy="user")
+     * @ORM\OneToOne(targetEntity="Wallabag\CoreBundle\Entity\Config", mappedBy="user")
      */
     protected $config;
 
     /**
-     * @ORM\OneToMany(targetEntity="Tag", mappedBy="user", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Wallabag\CoreBundle\Entity\Tag", mappedBy="user", cascade={"remove"})
      */
     protected $tags;
 
@@ -178,11 +181,11 @@ class User extends BaseUser
     /**
      * Set config.
      *
-     * @param \Wallabag\CoreBundle\Entity\Config $config
+     * @param Config $config
      *
      * @return User
      */
-    public function setConfig(\Wallabag\CoreBundle\Entity\Config $config = null)
+    public function setConfig(Config $config = null)
     {
         $this->config = $config;
 
@@ -192,7 +195,7 @@ class User extends BaseUser
     /**
      * Get config.
      *
-     * @return \Wallabag\CoreBundle\Entity\Config
+     * @return Config
      */
     public function getConfig()
     {
