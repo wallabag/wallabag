@@ -18,6 +18,7 @@ security:
         oauth_token:
             pattern: ^/oauth/v2/token
             security: false
+
         api:
             pattern: /api/.*
             fos_oauth: true
