@@ -79,7 +79,7 @@ class Config
     /*
      * @param User     $user
      */
-    public function __construct(Wallabag\UserBundle\Entity\User $user)
+    public function __construct(\Wallabag\UserBundle\Entity\User $user)
     {
         $this->user = $user;
     }

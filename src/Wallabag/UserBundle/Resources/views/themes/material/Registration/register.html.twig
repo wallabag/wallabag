@@ -1,0 +1,32 @@
+{% extends "WallabagCoreBundle::layout.html.twig" %}
+
+{% block title %}{% trans %}create an account{% endtrans %}{% endblock %}
+
+{% block body_class %}register{% endblock %}
+
+{% block menu %}{% endblock %}
+{% block messages %}{% endblock %}
+
+{% block content %}
+<main class="valign-wrapper">
+    <div class="valign row">
+        <div class="card sw">
+            <div class="center"><img src="{{ asset('themes/baggy/img/logo-other_themes.png') }}" alt="wallabag logo" /></div>
+
+            {% include "FOSUserBundle:Registration:register_content.html.twig" %}
+
+        </div>
+        <div class="center">
+            <a href="{{ path('fos_user_security_login') }}">{% trans %}Already have an account?{% endtrans %}</a>
+        </div>
+    </div>
+</main>
+    <style>
+        main {
+            padding: 0;
+        }
+    </style>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

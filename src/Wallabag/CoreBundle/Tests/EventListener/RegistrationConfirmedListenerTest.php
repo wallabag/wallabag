@@ -9,8 +9,8 @@ use Symfony\Component\HttpFoundation\Response;
 use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
 use Wallabag\CoreBundle\EventListener\RegistrationConfirmedListener;
-use Wallabag\CoreBundle\Entity\User;
 use Wallabag\CoreBundle\Entity\Config;
+use Wallabag\UserBundle\Entity\User;
 
 class RegistrationConfirmedListenerTest extends KernelTestCase
 {

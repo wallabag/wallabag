@@ -15,16 +15,6 @@ doc-api:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
     prefix: /api/doc
 
-#login:
-#    pattern:   /login
-#    defaults:  { _controller: WallabagCoreBundle:Security:login }
-#
-#login_check:
-#    pattern:   /login_check
-#
-#logout:
-#    path:   /logout
-
 rest :
     type : rest
     resource : "routing_rest.yml"

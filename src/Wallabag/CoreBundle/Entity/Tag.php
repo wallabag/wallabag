@@ -46,7 +46,7 @@ class Tag
      */
     private $user;
 
-    public function __construct(User $user)
+    public function __construct(\Wallabag\UserBundle\Entity\User $user)
     {
         $this->user = $user;
         $this->entries = new ArrayCollection();
