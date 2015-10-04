@@ -1,0 +1,8 @@
+title: //meta[@name='Title']/@content
+author: //meta[@name='Author']/@content
+date: //meta[@name='DisplayDate']/@content
+body: //div[@class='article-content']
+strip: //div[@class='article-sidebar']
+
+test_url: https://www.wired.de/collection/latest/der-vw-skandal-zeigt-ohne-vertrauen-ist-software-nicht-mehr-als-bose-magie
+

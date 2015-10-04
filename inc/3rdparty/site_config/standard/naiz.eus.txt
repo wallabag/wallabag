@@ -1,0 +1,3 @@
+body: //div[@class='widget full_article']
+
+test_url: http://www.naiz.eus/eu/actualidad/noticia/20151002/adegi-afirma-que-los-jovenes-viven-una-vida-muy-comoda-y-no-tienen-hambre-para-emprender#

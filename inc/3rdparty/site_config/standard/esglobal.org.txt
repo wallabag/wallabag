@@ -1,0 +1,3 @@
+body: //div[@class='blog-content']
+
+test_url: http://www.esglobal.org/el-caos-en-el-este-los-socios-de-la-ue-necesitan-que-se-les-preste-atencion/
