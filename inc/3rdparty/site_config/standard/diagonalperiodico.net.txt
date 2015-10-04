@@ -1,0 +1,4 @@
+body: //div[@class='field__items']
+title: //div[@class='art_titulo']
+
+test_url: https://www.diagonalperiodico.net/global/27947-cuanto-mas-tiempo-nos-aferremos-este-sistema-peor-y-menores-seran-nuestras-opciones
