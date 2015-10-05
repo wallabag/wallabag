@@ -1,13 +1,6 @@
-{% extends "WallabagCoreBundle::layout.html.twig" %}
+{% extends "FOSUserBundle::layout.html.twig" %}
 
-{% block title %}{% trans %}login to your wallabag{% endtrans %}{% endblock %}
-
-{% block body_class %}login{% endblock %}
-
-{% block menu %}{% endblock %}
-{% block messages %}{% endblock %}
-
-{% block content %}
+{% block fos_user_content %}
         <form action="{{ path('fos_user_security_check') }}" method="post" name="loginform">
             <fieldset class="w500p center">
                 <h2 class="mbs txtcenter">{% trans %}Login to wallabag{% endtrans %}</h2>
