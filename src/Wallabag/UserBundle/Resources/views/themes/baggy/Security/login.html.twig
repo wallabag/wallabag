@@ -8,7 +8,7 @@
 {% block messages %}{% endblock %}
 
 {% block content %}
-        <form action="{{ path('login_check') }}" method="post" name="loginform">
+        <form action="{{ path('fos_user_security_check') }}" method="post" name="loginform">
             <fieldset class="w500p center">
                 <h2 class="mbs txtcenter">{% trans %}Login to wallabag{% endtrans %}</h2>
                 {% if error %}
@@ -33,7 +33,7 @@
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
                     <button type="submit">Login</button>
                     <a href="{{ path('fos_user_registration_register') }}" class="button">{% trans %}Register{% endtrans %}</a>
-                    <a href="{{ path('forgot_password') }}" class="small">Forgot your password?</a>
+                    <a href="{{ path('fos_user_resetting_request') }}" class="small">Forgot your password?</a>
                 </div>
             </fieldset>
         </form>

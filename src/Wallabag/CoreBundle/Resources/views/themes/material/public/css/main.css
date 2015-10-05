@@ -250,7 +250,12 @@ main ul.row {
 }
 
 .card .card-action a {
+    color: #ffffff;
     margin: 0;
+}
+
+.card .card-action a:hover {
+    color: #ffffff;
 }
 
 .settings .div_tabs {

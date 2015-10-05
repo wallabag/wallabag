@@ -160,8 +160,6 @@ fos_user:
     firewall_name: main
     user_class: Wallabag\UserBundle\Entity\User
     registration:
-        form:
-            type: wallabag_user_registration
         confirmation:
             enabled: true
 

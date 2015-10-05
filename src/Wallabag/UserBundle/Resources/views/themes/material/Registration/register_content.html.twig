@@ -2,12 +2,44 @@
 
 <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
     <div class="card-content">
-    {{ form_widget(form) }}
-        <input type="submit" value="{{ 'registration.submit'|trans }}" />
+        <div class="row">
+
+            {{ form_errors(form) }}
+            {{ form_widget(form._token) }}
+
+            {% for flashMessage in app.session.flashbag.get('notice') %}
+                <span class="black-text"><p>{{ flashMessage }}</p></span>
+            {% endfor %}
+
+            <div class="input-field col s12">
+                {{ form_errors(form.email) }}
+                <label for="fos_user_registration_form_email">{% trans %}Email{% endtrans %}</label>
+                <input type="text" id="fos_user_registration_form_email" name="fos_user_registration_form[email]" />
+            </div>
+
+            <div class="input-field col s12">
+                {{ form_errors(form.username) }}
+                <label for="fos_user_registration_form_username">{% trans %}Username{% endtrans %}</label>
+                <input type="text" id="fos_user_registration_form_username" name="fos_user_registration_form[username]" />
+            </div>
+
+            <div class="input-field col s12">
+                {{ form_errors(form.plainPassword.first) }}
+                <label for="fos_user_registration_form_plainPassword_first">{% trans %}Password{% endtrans %}</label>
+                <input type="password" id="fos_user_registration_form_plainPassword_first" name="fos_user_registration_form[plainPassword][first]" />
+            </div>
+
+            <div class="input-field col s12">
+                {{ form_errors(form.plainPassword.second) }}
+                <label for="fos_user_registration_form_plainPassword_second">{% trans %}Repeat password{% endtrans %}</label>
+                <input type="password" id="fos_user_registration_form_plainPassword_second" name="fos_user_registration_form[plainPassword][second]" />
+            </div>
+        </div>
     </div>
-    <div class="card-action">
+    <div class="card-action center">
+        <a href="{{ path('fos_user_security_login') }}" class="waves-effect waves-light grey btn"><i class="material-icons left"></i> {% trans %}Login{% endtrans %}</a>
         <button class="btn waves-effect waves-light" type="submit" name="send">
-            {% trans %}Create account{% endtrans %}
+            {{ 'registration.submit'|trans({}, 'FOSUserBundle') }}
             <i class="mdi-content-send right"></i>
         </button>
     </div>

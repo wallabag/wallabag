@@ -1,0 +1,26 @@
+{% extends "WallabagCoreBundle::layout.html.twig" %}
+
+{% block title %}Welcome on wallabag!{% endblock %}
+
+{% block menu %}{% endblock %}
+{% block messages %}{% endblock %}
+
+{% block content %}
+<main class="valign-wrapper">
+    <div class="valign row">
+        <div class="card sw">
+            <div class="center"><img src="{{ asset('themes/material/img/logo-other_themes.png') }}" alt="wallabag logo" /></div>
+            {% block fos_user_content %}
+            {% endblock fos_user_content %}
+        </div>
+    </div>
+</main>
+<style>
+    main {
+        padding: 0;
+    }
+</style>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
