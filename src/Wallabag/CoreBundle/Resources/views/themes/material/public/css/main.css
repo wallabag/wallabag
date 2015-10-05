@@ -24,6 +24,10 @@ body {
     background: #f0f0f0;
 }
 
+body.login main {
+    padding: 0;
+}
+
 #warning_message {
     position: fixed;
     background-color: #ff6347;
