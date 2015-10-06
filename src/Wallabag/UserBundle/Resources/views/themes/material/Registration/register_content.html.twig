@@ -4,7 +4,6 @@
     <div class="card-content">
         <div class="row">
 
-            {{ form_errors(form) }}
             {{ form_widget(form._token) }}
 
             {% for flashMessage in app.session.flashbag.get('notice') %}
@@ -13,26 +12,26 @@
 
             <div class="input-field col s12">
                 {{ form_errors(form.email) }}
-                <label for="fos_user_registration_form_email">{% trans %}Email{% endtrans %}</label>
-                <input type="text" id="fos_user_registration_form_email" name="fos_user_registration_form[email]" />
+                {{ form_label(form.email) }}
+                {{ form_widget(form.email) }}
             </div>
 
             <div class="input-field col s12">
                 {{ form_errors(form.username) }}
-                <label for="fos_user_registration_form_username">{% trans %}Username{% endtrans %}</label>
-                <input type="text" id="fos_user_registration_form_username" name="fos_user_registration_form[username]" />
+                {{ form_label(form.username) }}
+                {{ form_widget(form.username) }}
             </div>
 
             <div class="input-field col s12">
                 {{ form_errors(form.plainPassword.first) }}
-                <label for="fos_user_registration_form_plainPassword_first">{% trans %}Password{% endtrans %}</label>
-                <input type="password" id="fos_user_registration_form_plainPassword_first" name="fos_user_registration_form[plainPassword][first]" />
+                {{ form_label(form.plainPassword.first) }}
+                {{ form_widget(form.plainPassword.first) }}
             </div>
 
             <div class="input-field col s12">
                 {{ form_errors(form.plainPassword.second) }}
-                <label for="fos_user_registration_form_plainPassword_second">{% trans %}Repeat password{% endtrans %}</label>
-                <input type="password" id="fos_user_registration_form_plainPassword_second" name="fos_user_registration_form[plainPassword][second]" />
+                {{ form_label(form.plainPassword.second) }}
+                {{ form_widget(form.plainPassword.second) }}
             </div>
         </div>
     </div>
