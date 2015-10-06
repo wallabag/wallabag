@@ -49,11 +49,11 @@ class Comment
     private $date;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="comments")
+     * @ORM\ManyToOne(targetEntity="Wallabag\UserBundle\Entity\User", inversedBy="comments")
      */
     private $user;
 
-    public function __construct(User $user)
+    public function __construct(\Wallabag\UserBundle\Entity\User $user)
     {
         $this->user = $user;
         $this->date = new \Datetime();

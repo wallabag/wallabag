@@ -12,6 +12,7 @@ use FOS\UserBundle\Model\User as BaseUser;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
+use Wallabag\CoreBundle\Entity\Comment as Comment;
 
 /**
  * User.
@@ -73,7 +74,7 @@ class User extends BaseUser
     protected $tags;
 
     /**
-     * @ORM\OneToMany(targetEntity="Comment", mappedBy="user", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Wallabag\CoreBundle\Entity\Comment", mappedBy="user", cascade={"remove"})
      */
     private $comments;
 
