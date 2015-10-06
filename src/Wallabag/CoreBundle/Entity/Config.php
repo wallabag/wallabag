@@ -173,7 +173,7 @@ class Config
      *
      * @return Config
      */
-    public function setUser(User $user = null)
+    public function setUser(\Wallabag\UserBundle\Entity\User $user = null)
     {
         $this->user = $user;
 
