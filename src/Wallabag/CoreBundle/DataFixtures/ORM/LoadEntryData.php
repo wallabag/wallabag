@@ -126,8 +126,10 @@ class LoadEntryData extends AbstractFixture implements OrderedFixtureInterface
 
         $entry7->addComment($comment2);
 
-        $manager->persist($entry7);
         $manager->persist($comment1);
+        $manager->persist($comment2);
+
+        $manager->persist($entry7);
 
         $this->addReference('entry7', $entry7);
 

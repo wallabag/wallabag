@@ -344,6 +344,8 @@ class Entry
     {
         $this->comments[] = $comment;
         $comment->setEntry($this);
+
+        return $this;
     }
 
     /**
