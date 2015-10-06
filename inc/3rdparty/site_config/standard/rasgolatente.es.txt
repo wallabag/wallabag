@@ -1,5 +1,3 @@
-nte.es.txt                                                                                                 
-
 title: //div[@class='entry-title']
 author: //div[@class='entry-author']
 date: //div[@class='entry-time']
