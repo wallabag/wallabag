@@ -10,8 +10,8 @@ class WallabagExtensionTest extends \PHPUnit_Framework_TestCase
     {
         $extension = new WallabagExtension();
 
-        $this->assertEquals("lemonde.fr", $extension->removeWww('www.lemonde.fr'));
-        $this->assertEquals("lemonde.fr", $extension->removeWww('lemonde.fr'));
-        $this->assertEquals("gist.github.com", $extension->removeWww('gist.github.com'));
+        $this->assertEquals('lemonde.fr', $extension->removeWww('www.lemonde.fr'));
+        $this->assertEquals('lemonde.fr', $extension->removeWww('lemonde.fr'));
+        $this->assertEquals('gist.github.com', $extension->removeWww('gist.github.com'));
     }
 }

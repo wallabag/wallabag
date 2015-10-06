@@ -42,7 +42,13 @@ class DetectActiveTheme implements DeviceDetectionInterface
      */
     public function getType()
     {
-        $user = $this->securityContext->getToken()->getUser();
+        $token = $this->securityContext->getToken();
+
+        if (is_null($token)) {
+            return $this->defaultTheme;
+        }
+
+        $user = $token->getUser();
 
         if (!$user instanceof User) {
             return $this->defaultTheme;
