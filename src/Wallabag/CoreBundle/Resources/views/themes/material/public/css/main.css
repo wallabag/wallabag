@@ -335,16 +335,9 @@ main ul.row {
     margin-right: 15px;
 }
 
-#article aside span a {
+#article aside .chip {
     background-color: #039be5;
-    color: #fff;
-    border-radius: 3px;
-    float: left;
-    font-size: 0.6em;
-    margin-left: 0.5em;
-    margin-bottom: 0.5em;
-    padding: 4px;
-    text-decoration: none;
+    color: #ffffff;
 }
 
 /* ==========================================================================
