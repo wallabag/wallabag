@@ -55,7 +55,8 @@
         "j0k3r/graby": "~1.0",
         "friendsofsymfony/user-bundle": "dev-master",
         "masterminds/html5": "~2.1",
-        "friendsofsymfony/oauth-server-bundle": "^1.4@dev"
+        "friendsofsymfony/oauth-server-bundle": "^1.4@dev",
+        "knplabs/knp-markdown-bundle": "~1.3"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "~2.2.0",

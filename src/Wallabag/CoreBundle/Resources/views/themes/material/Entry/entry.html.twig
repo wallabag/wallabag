@@ -183,7 +183,7 @@ main {
                 {% for comment in entry.comments %}
                     <div id="{{ comment.id }}" class="comment">
                         <hr>
-                        <div class="comment_content">{{ comment.content }}</div>
+                        <div class="comment_content">{{ comment.content|markdown }}</div>
                         <div class="comment_infos">
                             <span class="comment_actions">
                             <a class="mdi-action-delete" href="{{ path('delete_comment', { 'id': comment.id }) }}" ></a></span>
