@@ -1,0 +1,20 @@
+{% extends "WallabagCoreBundle::layout.html.twig" %}
+
+{% block title %}{% trans %}create an account{% endtrans %}{% endblock %}
+
+{% block body_class %}login{% endblock %}
+
+{% block menu %}{% endblock %}
+{% block messages %}{% endblock %}
+
+{% block content %}
+    <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+        <fieldset class="w500p center">
+            <h2 class="mbs txtcenter">{% trans %}create an account{% endtrans %}</h2>
+        {% include "FOSUserBundle:Registration:register_content.html.twig" %}
+        </fieldset>
+    </form>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

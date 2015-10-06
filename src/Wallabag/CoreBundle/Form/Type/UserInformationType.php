@@ -27,7 +27,7 @@ class UserInformationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Wallabag\CoreBundle\Entity\User',
+            'data_class' => 'Wallabag\UserBundle\Entity\User',
         ));
     }
 

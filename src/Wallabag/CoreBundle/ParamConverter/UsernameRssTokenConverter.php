@@ -7,7 +7,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Wallabag\CoreBundle\Entity\User;
+use Wallabag\UserBundle\Entity\User;
 
 /**
  * ParamConverter used in the RSS controller to retrieve the right user according to
@@ -49,7 +49,7 @@ class UsernameRssTokenConverter implements ParamConverterInterface
         $em = $this->registry->getManagerForClass($configuration->getClass());
 
         // Check, if class name is what we need
-        if ('Wallabag\CoreBundle\Entity\User' !== $em->getClassMetadata($configuration->getClass())->getName()) {
+        if ('Wallabag\UserBundle\Entity\User' !== $em->getClassMetadata($configuration->getClass())->getName()) {
             return false;
         }
 

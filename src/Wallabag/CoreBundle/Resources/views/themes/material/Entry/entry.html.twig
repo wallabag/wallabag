@@ -1,6 +1,6 @@
 {% extends "WallabagCoreBundle::layout.html.twig" %}
 
-{% block title %}{{ entry.title|raw }} ({{ entry.domainName }}){% endblock %}
+{% block title %}{{ entry.title|raw }} ({{ entry.domainName|removeWww }}){% endblock %}
 
 {% block menu %}
     <div class="progress">
@@ -54,7 +54,7 @@
         <li class="bold hide-on-med-and-down">
             <a class="waves-effect collapsible-header" title="{% trans %}Mark as read{% endtrans %}" href="{{ path('archive_entry', { 'id': entry.id }) }}" id="markAsRead">
                 <i class="{% if entry.isArchived == 0 %}mdi-action-done{% else %}mdi-content-redo{% endif %} small"></i>
-                <span>{% trans %}Toggle mark as read{% endtrans %}</span>
+                <span>{% trans %}Mark as read{% endtrans %}</span>
             </a>
             <div class="collapsible-body"></div>
         </li>
@@ -62,7 +62,7 @@
         <li class="bold hide-on-med-and-down">
             <a class="waves-effect collapsible-header" title="{% trans %}Favorite{% endtrans %}" href="{{ path('star_entry', { 'id': entry.id }) }}" id="setFav">
                 <i class="{% if entry.isStarred == 0 %}mdi-action-favorite-outline{% else %}mdi-action-favorite{% endif %} small"></i>
-                <span>{% trans %}Toggle favorite{% endtrans %}</span>
+                <span>{% trans %}Favorite{% endtrans %}</span>
             </a>
             <div class="collapsible-body"></div>
         </li>
@@ -152,9 +152,13 @@ main {
             <h1>{{ entry.title|raw }} <a href="{{ path('edit', { 'id': entry.id }) }}" title="{% trans %}Edit title{% endtrans %}">✎</a></h1>
         </header>
         <aside>
-            <a href="{{ entry.url|e }}" target="_blank" title="{% trans %}original{% endtrans %} : {{ entry.title|e }}" class="tool link mdi-content-link"> <span>{{ entry.domainName }}</span></a>
+            <a href="{{ entry.url|e }}" target="_blank" title="{% trans %}original{% endtrans %} : {{ entry.title|e }}" class="tool link mdi-content-link"> <span>{{ entry.domainName|removeWww }}</span></a>
             <div id="list">
-                {% for tag in entry.tags %}<span><a href="#">{{ tag.label }}</a></span>{% endfor %}
+                {% for tag in entry.tags %}
+                    <div class="chip">
+                    {{ tag.label }}
+                    </div>
+                {% endfor %}
             </div>
 
             {% if entry.previewPicture is not null %}

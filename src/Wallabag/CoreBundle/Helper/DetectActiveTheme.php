@@ -4,7 +4,7 @@ namespace Wallabag\CoreBundle\Helper;
 
 use Liip\ThemeBundle\Helper\DeviceDetectionInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
-use Wallabag\CoreBundle\Entity\User;
+use Wallabag\UserBundle\Entity\User;
 
 /**
  * This class intend to detect the active theme for the logged in user.

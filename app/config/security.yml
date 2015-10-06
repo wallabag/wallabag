@@ -1,9 +1,6 @@
 security:
     encoders:
-        Wallabag\CoreBundle\Entity\User:
-            algorithm:        sha1
-            encode_as_base64: false
-            iterations:       1
+        FOS\UserBundle\Model\UserInterface: sha512
 
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
@@ -11,18 +8,23 @@ security:
 
     providers:
         administrators:
-            entity: { class: WallabagCoreBundle:User, property: username }
+            entity: { class: WallabagUserBundle:User, property: username }
         fos_userbundle:
             id: fos_user.user_provider.username
 
     # the main part of the security, where you can set up firewalls
     # for specific sections of your app
     firewalls:
-        wsse_secured:
-            pattern:      /api/.*
-            wsse:         true
-            stateless:    true
-            anonymous:    true
+        oauth_token:
+            pattern: ^/oauth/v2/token
+            security: false
+
+        api:
+            pattern: /api/.*
+            fos_oauth: true
+            stateless: true
+            anonymous: true
+
         login_firewall:
             pattern:    ^/login$
             anonymous:  ~
@@ -45,9 +47,9 @@ security:
                 target: /
 
     access_control:
-        - { path: ^/api/salt, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/doc, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/forgot-password, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: /(unread|starred|archive).xml$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/, roles: ROLE_USER }

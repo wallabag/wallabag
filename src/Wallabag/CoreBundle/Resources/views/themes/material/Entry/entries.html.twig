@@ -4,13 +4,13 @@
   {% set currentRoute = app.request.attributes.get('_route') %}
 
   {% if currentRoute == 'starred' %}
-    {% trans %}Starred{% endtrans %}
+    {% trans %}starred{% endtrans %}
   {% elseif currentRoute == 'archive' %}
-    {% trans %}Archive{% endtrans %}
+    {% trans %}archive{% endtrans %}
   {% elseif currentRoute == 'all' %}
     {% trans %}Filtered{% endtrans %}
   {% else %}
-    {% trans %}Unread{% endtrans %}
+    {% trans %}unread{% endtrans %}
   {% endif %}
 
 {% endblock %}
@@ -49,9 +49,9 @@
                             <span class="card-title"><a href="{{ path('view', { 'id': entry.id }) }}">{{ entry.title|raw|striptags|slice(0, 42) }}</a></span>
 
                             {% if entry.readingTime > 0 %}
-                                <div class="estimatedTime grey-text"><span class="tool reading-time">{% trans %}estimated reading time: {% endtrans %} {{ entry.readingTime }} min</span></div>
+                                <div class="estimatedTime grey-text"><span class="tool reading-time">{% trans %}estimated reading time{% endtrans %}: {{ entry.readingTime }} min</span></div>
                             {% else %}
-                                <div class="estimatedTime grey-text"><span class="tool reading-time">{% trans %}estimated reading time: {% endtrans %} <small class="inferieur">&lt;</small> 1 min</span></div>
+                                <div class="estimatedTime grey-text"><span class="tool reading-time">{% trans %}estimated reading time{% endtrans %}: <small class="inferieur">&lt;</small> 1 min</span></div>
                             {% endif %}
 
                             {% if entry.previewPicture is null %}
@@ -66,9 +66,9 @@
                             <span class="card-title"><a href="{{ path('view', { 'id': entry.id }) }}">{{ entry.title|raw }}</a></span>
 
                             {% if entry.readingTime > 0 %}
-                                <div class="estimatedTime grey-text"><span class="tool reading-time">{% trans %}estimated reading time: {% endtrans %} {{ entry.readingTime }} min</span></div>
+                                <div class="estimatedTime grey-text"><span class="tool reading-time">{% trans %}estimated reading time{% endtrans %}: {{ entry.readingTime }} min</span></div>
                             {% else %}
-                                <div class="estimatedTime grey-text"><span class="tool reading-time">{% trans %}estimated reading time: {% endtrans %} <small class="inferieur">&lt;</small> 1 min</span></div>
+                                <div class="estimatedTime grey-text"><span class="tool reading-time">{% trans %}estimated reading time{% endtrans %}: <small class="inferieur">&lt;</small> 1 min</span></div>
                             {% endif %}
 
                             <p>{{ entry.content|striptags|slice(0, 300) }}&hellip;</p>
@@ -76,7 +76,7 @@
                     {% endif %}
 
                     <div class="card-action">
-                        <span class="bold"><a href="{{ entry.url|e }}" target="_blank" title="{% trans %}original{% endtrans %}: {{ entry.title|e }} - {{ entry.domainName }}" class="tool original grey-text"><span>{{ entry.domainName | truncate(18) }}</span></a></bold>
+                        <span class="bold"><a href="{{ entry.url|e }}" target="_blank" title="{% trans %}original{% endtrans %}: {{ entry.title|e }} - {{ entry.domainName|removeWww }}" class="tool original grey-text"><span>{{ entry.domainName|removeWww|truncate(18) }}</span></a></bold>
 
                         <ul class="tools links right">
                             <li>
@@ -95,7 +95,7 @@
     <div id="filters" class="side-nav fixed right-aligned">
         <form action="{{ path('all') }}">
 
-            <h4 class="center">{% trans %}Filters{% endtrans %}</h1>
+            <h4 class="center">{% trans %}Filters{% endtrans %}</h4>
 
             <div class="row">
                 <div class="col s12">

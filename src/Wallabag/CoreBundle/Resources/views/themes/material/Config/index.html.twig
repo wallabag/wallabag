@@ -1,6 +1,6 @@
 {% extends "WallabagCoreBundle::layout.html.twig" %}
 
-{% block title %}{% trans %}Config{% endtrans %}{% endblock %}
+{% block title %}{% trans %}config{% endtrans %}{% endblock %}
 
 {% block content %}
 
@@ -11,11 +11,13 @@
                 <div class="row">
                     <div class="div_tabs col s12">
                         <ul class="tabs">
-                        <li class="tab col s3"><a class="active" href="#set1">{% trans %}Wallabag{% endtrans %}</a></li>
+                        <li class="tab col s3"><a class="active" href="#set1">{% trans %}Settings{% endtrans %}</a></li>
                         <li class="tab col s3"><a href="#set2">{% trans %}RSS{% endtrans %}</a></li>
                         <li class="tab col s3"><a href="#set3">{% trans %}User information{% endtrans %}</a></li>
                         <li class="tab col s3"><a href="#set4">{% trans %}Password{% endtrans %}</a></li>
+                        {% if is_granted('ROLE_SUPER_ADMIN') %}
                         <li class="tab col s3"><a href="#set5">{% trans %}Add a user{% endtrans %}</a></li>
+                        {% endif %}
                         </ul>
                     </div>
 
@@ -62,33 +64,36 @@
 
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <label>Rss token</label>
-                                    <div>
-                                        {% if rss.token %}
-                                            {{ rss.token }}
-                                        {% else %}
-                                            <em>No token</em>
-                                        {% endif %}
-                                        –
-                                        <a href="{{ path('generate_token') }}">Regenerate ?</a>
-                                    </div>
+                                    {% trans %}RSS feeds provided by wallabag allow you to read your saved articles with your favourite RSS reader. You need to generate a token first.{% endtrans %}
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <label>Rss links:</label>
-                                    {% if rss.token %}
-                                        <ul>
-                                            <li><a href="{{ path('unread_rss', {'username': rss.username, 'token': rss.token}) }}">unread</a></li>
-                                            <li><a href="{{ path('starred_rss', {'username': rss.username, 'token': rss.token}) }}">fav</a></li>
-                                            <li><a href="{{ path('archive_rss', {'username': rss.username, 'token': rss.token}) }}">archives</a></li>
-                                        </ul>
-                                    {% else %}
-                                        <strong>You need to generate a token first.</strong>
-                                    {% endif %}
+                                    <label>{% trans %}RSS token{% endtrans %}</label>
+                                    <div>
+                                        {% if rss.token %}
+                                            {{ rss.token }}
+                                        {% else %}
+                                            <em>{% trans %}No token{% endtrans %}</em>
+                                        {% endif %}
+                                        – <a href="{{ path('generate_token') }}">{% if rss.token %}{% trans %}Reset your token{% endtrans %}{% else %}{% trans %}Create your token{% endtrans %}{% endif %}</a>
+                                    </div>
                                 </div>
                             </div>
+                            {% if rss.token %}
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <label>{% trans %}RSS links{% endtrans %}</label>
+                                        <ul>
+                                            <li><a href="{{ path('unread_rss', {'username': rss.username, 'token': rss.token}) }}">{% trans %}unread{% endtrans %}</a></li>
+                                            <li><a href="{{ path('starred_rss', {'username': rss.username, 'token': rss.token}) }}">{% trans %}starred{% endtrans %}</a></li>
+                                            <li><a href="{{ path('archive_rss', {'username': rss.username, 'token': rss.token}) }}">{% trans %}archive{% endtrans %}</a></li>
+                                        </ul>
+
+                                </div>
+                            </div>
+                            {% endif %}
 
                             <div class="row">
                                 <div class="input-field col s12">
@@ -166,13 +171,13 @@
 
                             <div class="hidden">{{ form_rest(form.pwd) }}</div>
                             <button class="btn waves-effect waves-light" type="submit" name="action">
-                                {% trans %}Update{% endtrans %}
+                                {% trans %}Save{% endtrans %}
                             </button>
 
                         </form>
                     </div>
 
-
+                    {% if is_granted('ROLE_SUPER_ADMIN') %}
                     <div id="set5" class="col s12">
                         <form action="{{ path('config') }}#set5" method="post" {{ form_enctype(form.new_user) }}>
                             {{ form_errors(form.new_user) }}
@@ -187,9 +192,17 @@
 
                             <div class="row">
                                 <div class="input-field col s12">
-                                    {{ form_label(form.new_user.password) }}
-                                    {{ form_errors(form.new_user.password) }}
-                                    {{ form_widget(form.new_user.password) }}
+                                    {{ form_label(form.new_user.plainPassword.first) }}
+                                    {{ form_errors(form.new_user.plainPassword.first) }}
+                                    {{ form_widget(form.new_user.plainPassword.first) }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form_label(form.new_user.plainPassword.second) }}
+                                    {{ form_errors(form.new_user.plainPassword.second) }}
+                                    {{ form_widget(form.new_user.plainPassword.second) }}
                                 </div>
                             </div>
 
@@ -208,6 +221,7 @@
 
                         </form>
                     </div>
+                    {% endif %}
                 </div>
 
             </div>

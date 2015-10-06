@@ -25,6 +25,10 @@ body {
     background: #f0f0f0;
 }
 
+body.login main {
+    padding: 0;
+}
+
 #warning_message {
     position: fixed;
     background-color: #ff6347;
@@ -246,7 +250,12 @@ main ul.row {
 }
 
 .card .card-action a {
+    color: #ffffff;
     margin: 0;
+}
+
+.card .card-action a:hover {
+    color: #ffffff;
 }
 
 .settings .div_tabs {
@@ -332,16 +341,9 @@ main ul.row {
     margin-right: 15px;
 }
 
-#article aside span a {
+#article aside .chip {
     background-color: #039be5;
-    color: #fff;
-    border-radius: 3px;
-    float: left;
-    font-size: 0.6em;
-    margin-left: 0.5em;
-    margin-bottom: 0.5em;
-    padding: 4px;
-    text-decoration: none;
+    color: #ffffff;
 }
 
 /* ==========================================================================

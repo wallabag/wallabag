@@ -5,7 +5,7 @@ namespace Wallabag\CoreBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Wallabag\CoreBundle\Entity\User;
+use Wallabag\UserBundle\Entity\User;
 use Wallabag\CoreBundle\Entity\Entry;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
@@ -16,7 +16,7 @@ class RssController extends Controller
      * Shows unread entries for current user.
      *
      * @Route("/{username}/{token}/unread.xml", name="unread_rss", defaults={"_format"="xml"})
-     * @ParamConverter("user", class="WallabagCoreBundle:User", converter="username_rsstoken_converter")
+     * @ParamConverter("user", class="WallabagUserBundle:User", converter="username_rsstoken_converter")
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -29,7 +29,7 @@ class RssController extends Controller
      * Shows read entries for current user.
      *
      * @Route("/{username}/{token}/archive.xml", name="archive_rss")
-     * @ParamConverter("user", class="WallabagCoreBundle:User", converter="username_rsstoken_converter")
+     * @ParamConverter("user", class="WallabagUserBundle:User", converter="username_rsstoken_converter")
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -42,7 +42,7 @@ class RssController extends Controller
      * Shows starred entries for current user.
      *
      * @Route("/{username}/{token}/starred.xml", name="starred_rss")
-     * @ParamConverter("user", class="WallabagCoreBundle:User", converter="username_rsstoken_converter")
+     * @ParamConverter("user", class="WallabagUserBundle:User", converter="username_rsstoken_converter")
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */

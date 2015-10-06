@@ -72,14 +72,14 @@ class Config
     private $rssLimit;
 
     /**
-     * @ORM\OneToOne(targetEntity="User", inversedBy="config")
+     * @ORM\OneToOne(targetEntity="Wallabag\UserBundle\Entity\User", inversedBy="config")
      */
     private $user;
 
     /*
      * @param User     $user
      */
-    public function __construct(User $user)
+    public function __construct(\Wallabag\UserBundle\Entity\User $user)
     {
         $this->user = $user;
     }
@@ -169,11 +169,11 @@ class Config
     /**
      * Set user.
      *
-     * @param \Wallabag\CoreBundle\Entity\User $user
+     * @param User $user
      *
      * @return Config
      */
-    public function setUser(\Wallabag\CoreBundle\Entity\User $user = null)
+    public function setUser(\Wallabag\UserBundle\Entity\User $user = null)
     {
         $this->user = $user;
 
@@ -183,7 +183,7 @@ class Config
     /**
      * Get user.
      *
-     * @return \Wallabag\CoreBundle\Entity\User
+     * @return User
      */
     public function getUser()
     {
