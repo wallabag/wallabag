@@ -1,0 +1,3 @@
+body: //div[@id='article']
+
+test_url: http://www.pieria.co.uk/articles/need_a_fiscal_rule_george__try_get_the_economy_growing
