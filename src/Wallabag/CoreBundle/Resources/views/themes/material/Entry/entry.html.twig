@@ -146,7 +146,11 @@ main {
         <aside>
             <a href="{{ entry.url|e }}" target="_blank" title="{% trans %}original{% endtrans %} : {{ entry.title|e }}" class="tool link mdi-content-link"> <span>{{ entry.domainName }}</span></a>
             <div id="list">
-                {% for tag in entry.tags %}<span><a href="#">{{ tag.label }}</a></span>{% endfor %}
+                {% for tag in entry.tags %}
+                    <div class="chip">
+                    {{ tag.label }}
+                    </div>
+                {% endfor %}
             </div>
 
             {% if entry.previewPicture is not null %}
