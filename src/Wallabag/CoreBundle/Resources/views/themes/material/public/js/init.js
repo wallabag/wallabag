@@ -34,7 +34,8 @@ function init_comments() {
             comment['paragraph'].after(commentselector.eq(i));
             position[i] = comment['paragraph'].position();
             commentselector.eq(i).css('position','absolute');
-            commentselector.eq(i).css('width','250px');
+            commentselector.eq(i).css('width','270px');
+            commentselector.eq(i).css('max-height','120px');
             commentselector.eq(i).css('top', position[i].top.toString() + 'px'); // take them next to the paragraph
             commentselector.eq(i).css('left', em(88).toString() + 'px');
             if ($('#comments_list').children().length < 2) { // if there isn't any comments to show on bottom, hide list of comments
