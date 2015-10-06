@@ -13,7 +13,8 @@ class NewUserType extends AbstractType
     {
         $builder
             ->add('username', 'text', array('required' => true))
-            ->add('password', 'password', array(
+            ->add('plainPassword', 'repeated', array(
+                'type' => 'password',
                 'constraints' => array(
                     new Constraints\Length(array(
                         'min' => 8,
@@ -30,7 +31,7 @@ class NewUserType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Wallabag\CoreBundle\Entity\User',
+            'data_class' => 'Wallabag\UserBundle\Entity\User',
         ));
     }
 

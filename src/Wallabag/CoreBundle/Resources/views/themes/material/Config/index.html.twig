@@ -15,7 +15,9 @@
                         <li class="tab col s3"><a href="#set2">{% trans %}RSS{% endtrans %}</a></li>
                         <li class="tab col s3"><a href="#set3">{% trans %}User information{% endtrans %}</a></li>
                         <li class="tab col s3"><a href="#set4">{% trans %}Password{% endtrans %}</a></li>
+                        {% if is_granted('ROLE_SUPER_ADMIN') %}
                         <li class="tab col s3"><a href="#set5">{% trans %}Add a user{% endtrans %}</a></li>
+                        {% endif %}
                         </ul>
                     </div>
 
@@ -175,7 +177,7 @@
                         </form>
                     </div>
 
-
+                    {% if is_granted('ROLE_SUPER_ADMIN') %}
                     <div id="set5" class="col s12">
                         <form action="{{ path('config') }}#set5" method="post" {{ form_enctype(form.new_user) }}>
                             {{ form_errors(form.new_user) }}
@@ -190,9 +192,17 @@
 
                             <div class="row">
                                 <div class="input-field col s12">
-                                    {{ form_label(form.new_user.password) }}
-                                    {{ form_errors(form.new_user.password) }}
-                                    {{ form_widget(form.new_user.password) }}
+                                    {{ form_label(form.new_user.plainPassword.first) }}
+                                    {{ form_errors(form.new_user.plainPassword.first) }}
+                                    {{ form_widget(form.new_user.plainPassword.first) }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form_label(form.new_user.plainPassword.second) }}
+                                    {{ form_errors(form.new_user.plainPassword.second) }}
+                                    {{ form_widget(form.new_user.plainPassword.second) }}
                                 </div>
                             </div>
 
@@ -211,6 +221,7 @@
 
                         </form>
                     </div>
+                    {% endif %}
                 </div>
 
             </div>

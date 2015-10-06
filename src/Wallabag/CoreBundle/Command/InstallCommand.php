@@ -8,7 +8,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Output\NullOutput;
-use Wallabag\CoreBundle\Entity\User;
+use Wallabag\UserBundle\Entity\User;
 use Wallabag\CoreBundle\Entity\Config;
 
 class InstallCommand extends ContainerAwareCommand
@@ -188,9 +188,10 @@ class InstallCommand extends ContainerAwareCommand
 
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
 
-        $user = new User();
+        $userManager = $this->getContainer()->get('fos_user.user_manager');
+        $user = $userManager->createUser();
         $user->setUsername($dialog->ask($this->defaultOutput, '<question>Username</question> <comment>(default: wallabag)</comment> :', 'wallabag'));
-        $user->setPassword($dialog->ask($this->defaultOutput, '<question>Password</question> <comment>(default: wallabag)</comment> :', 'wallabag'));
+        $user->setPlainPassword($dialog->ask($this->defaultOutput, '<question>Password</question> <comment>(default: wallabag)</comment> :', 'wallabag'));
         $user->setEmail($dialog->ask($this->defaultOutput, '<question>Email:</question>', ''));
         $user->setEnabled(true);
 

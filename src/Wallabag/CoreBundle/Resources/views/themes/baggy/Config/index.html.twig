@@ -135,6 +135,7 @@
         {{ form_rest(form.pwd) }}
     </form>
 
+    {% if is_granted('ROLE_SUPER_ADMIN') %}
     <h2>{% trans %}Add a user{% endtrans %}</h2>
 
     <form action="{{ path('config') }}" method="post" {{ form_enctype(form.new_user) }}>
@@ -150,9 +151,17 @@
 
         <fieldset class="w500p inline">
             <div class="row">
-                {{ form_label(form.new_user.password) }}
-                {{ form_errors(form.new_user.password) }}
-                {{ form_widget(form.new_user.password) }}
+                {{ form_label(form.new_user.plainPassword.first) }}
+                {{ form_errors(form.new_user.plainPassword.first) }}
+                {{ form_widget(form.new_user.plainPassword.first) }}
+            </div>
+        </fieldset>
+
+        <fieldset class="w500p inline">
+            <div class="row">
+                {{ form_label(form.new_user.plainPassword.second) }}
+                {{ form_errors(form.new_user.plainPassword.second) }}
+                {{ form_widget(form.new_user.plainPassword.second) }}
             </div>
         </fieldset>
 
@@ -165,5 +174,6 @@
         </fieldset>
 
         {{ form_rest(form.new_user) }}
+        {% endif %}
     </form>
 {% endblock %}

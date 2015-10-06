@@ -10,16 +10,6 @@ doc-api:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
     prefix: /api/doc
 
-login:
-    pattern:   /login
-    defaults:  { _controller: WallabagCoreBundle:Security:login }
-
-login_check:
-    pattern:   /login_check
-
-logout:
-    path:   /logout
-
 rest :
     type : rest
     resource : "routing_rest.yml"
@@ -30,3 +20,9 @@ homepage:
     defaults:  { _controller: WallabagCoreBundle:Entry:showUnread, page : 1 }
     requirements:
         page:  \d+
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+fos_oauth_server_token:
+    resource: "@FOSOAuthServerBundle/Resources/config/routing/token.xml"

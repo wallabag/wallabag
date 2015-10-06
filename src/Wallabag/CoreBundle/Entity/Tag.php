@@ -42,11 +42,11 @@ class Tag
     private $entries;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="tags")
+     * @ORM\ManyToOne(targetEntity="Wallabag\UserBundle\Entity\User", inversedBy="tags")
      */
     private $user;
 
-    public function __construct(User $user)
+    public function __construct(\Wallabag\UserBundle\Entity\User $user)
     {
         $this->user = $user;
         $this->entries = new ArrayCollection();

@@ -45,7 +45,7 @@
                 <script src="{{ asset('themes/_global/js/bookmarklet.js') }}"></script>
             {% endblock %}
 
-            <title>{% block title %}{% endblock %} - wallabag</title>
+            <title>{% block title %}{% endblock %}</title>
         {% endblock %}
     </head>
 
@@ -60,7 +60,7 @@
 
                 {% block messages %}{% endblock %}
 
-                <div id="content" class="w600p">
+                <div id="content">
                     {% block content %}{% endblock %}
                 </div>
             </main>

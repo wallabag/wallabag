@@ -1,0 +1,45 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+    <div class="card-content">
+        <div class="row">
+
+            {{ form_widget(form._token) }}
+
+            {% for flashMessage in app.session.flashbag.get('notice') %}
+                <span class="black-text"><p>{{ flashMessage }}</p></span>
+            {% endfor %}
+
+            <div class="input-field col s12">
+                {{ form_errors(form.email) }}
+                {{ form_label(form.email) }}
+                {{ form_widget(form.email) }}
+            </div>
+
+            <div class="input-field col s12">
+                {{ form_errors(form.username) }}
+                {{ form_label(form.username) }}
+                {{ form_widget(form.username) }}
+            </div>
+
+            <div class="input-field col s12">
+                {{ form_errors(form.plainPassword.first) }}
+                {{ form_label(form.plainPassword.first) }}
+                {{ form_widget(form.plainPassword.first) }}
+            </div>
+
+            <div class="input-field col s12">
+                {{ form_errors(form.plainPassword.second) }}
+                {{ form_label(form.plainPassword.second) }}
+                {{ form_widget(form.plainPassword.second) }}
+            </div>
+        </div>
+    </div>
+    <div class="card-action center">
+        <a href="{{ path('fos_user_security_login') }}" class="waves-effect waves-light grey btn"><i class="material-icons left"></i> {% trans %}Login{% endtrans %}</a>
+        <button class="btn waves-effect waves-light" type="submit" name="send">
+            {{ 'registration.submit'|trans({}, 'FOSUserBundle') }}
+            <i class="mdi-content-send right"></i>
+        </button>
+    </div>
+</form>

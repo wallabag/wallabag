@@ -2,99 +2,15 @@
 
 namespace Wallabag\ApiBundle\Tests\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Wallabag\ApiBundle\Tests\AbstractControllerTest;
 
-class WallabagRestControllerTest extends WebTestCase
+class WallabagRestControllerTest extends AbstractControllerTest
 {
     protected static $salt;
 
-    /**
-     * Grab the salt once and store it to be available for all tests.
-     */
-    public static function setUpBeforeClass()
-    {
-        $client = self::createClient();
-
-        $user = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:User')
-            ->findOneByUsername('admin');
-
-        self::$salt = $user->getSalt();
-    }
-
-    /**
-     * Generate HTTP headers for authenticate user on API.
-     *
-     * @param string $username
-     * @param string $password
-     *
-     * @return array
-     */
-    private function generateHeaders($username, $password)
-    {
-        $encryptedPassword = sha1($password.$username.self::$salt);
-        $nonce = substr(md5(uniqid('nonce_', true)), 0, 16);
-
-        $now = new \DateTime('now', new \DateTimeZone('UTC'));
-        $created = (string) $now->format('Y-m-d\TH:i:s\Z');
-        $digest = base64_encode(sha1(base64_decode($nonce).$created.$encryptedPassword, true));
-
-        return array(
-            'HTTP_AUTHORIZATION' => 'Authorization profile="UsernameToken"',
-            'HTTP_x-wsse' => 'X-WSSE: UsernameToken Username="'.$username.'", PasswordDigest="'.$digest.'", Nonce="'.$nonce.'", Created="'.$created.'"',
-        );
-    }
-
-    public function testGetSalt()
-    {
-        $client = $this->createClient();
-        $client->request('GET', '/api/salts/admin.json');
-
-        $user = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:User')
-            ->findOneByUsername('admin');
-
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-
-        $content = json_decode($client->getResponse()->getContent(), true);
-
-        $this->assertArrayHasKey(0, $content);
-        $this->assertEquals($user->getSalt(), $content[0]);
-
-        $client->request('GET', '/api/salts/notfound.json');
-        $this->assertEquals(404, $client->getResponse()->getStatusCode());
-    }
-
-    public function testWithBadHeaders()
-    {
-        $client = $this->createClient();
-
-        $entry = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneByIsArchived(false);
-
-        if (!$entry) {
-            $this->markTestSkipped('No content found in db.');
-        }
-
-        $badHeaders = array(
-            'HTTP_AUTHORIZATION' => 'Authorization profile="UsernameToken"',
-            'HTTP_x-wsse' => 'X-WSSE: UsernameToken Username="admin", PasswordDigest="Wr0ngDig3st", Nonce="n0Nc3", Created="2015-01-01T13:37:00Z"',
-        );
-
-        $client->request('GET', '/api/entries/'.$entry->getId().'.json', array(), array(), $badHeaders);
-        $this->assertEquals(403, $client->getResponse()->getStatusCode());
-    }
-
     public function testGetOneEntry()
     {
-        $client = $this->createClient();
-        $headers = $this->generateHeaders('admin', 'mypassword');
-
-        $entry = $client->getContainer()
+        $entry = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
             ->findOneBy(array('user' => 1, 'isArchived' => false));
@@ -103,18 +19,17 @@ class WallabagRestControllerTest extends WebTestCase
             $this->markTestSkipped('No content found in db.');
         }
 
-        $client->request('GET', '/api/entries/'.$entry->getId().'.json', array(), array(), $headers);
+        $this->client->request('GET', '/api/entries/'.$entry->getId().'.json');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-
-        $content = json_decode($client->getResponse()->getContent(), true);
+        $content = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->assertEquals($entry->getTitle(), $content['title']);
         $this->assertEquals($entry->getUrl(), $content['url']);
         $this->assertCount(count($entry->getTags()), $content['tags']);
 
         $this->assertTrue(
-            $client->getResponse()->headers->contains(
+            $this->client->getResponse()->headers->contains(
                 'Content-Type',
                 'application/json'
             )
@@ -123,10 +38,7 @@ class WallabagRestControllerTest extends WebTestCase
 
     public function testGetOneEntryWrongUser()
     {
-        $client = $this->createClient();
-        $headers = $this->generateHeaders('admin', 'mypassword');
-
-        $entry = $client->getContainer()
+        $entry = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
             ->findOneBy(array('user' => 2, 'isArchived' => false));
@@ -135,21 +47,18 @@ class WallabagRestControllerTest extends WebTestCase
             $this->markTestSkipped('No content found in db.');
         }
 
-        $client->request('GET', '/api/entries/'.$entry->getId().'.json', array(), array(), $headers);
+        $this->client->request('GET', '/api/entries/'.$entry->getId().'.json');
 
-        $this->assertEquals(403, $client->getResponse()->getStatusCode());
+        $this->assertEquals(403, $this->client->getResponse()->getStatusCode());
     }
 
     public function testGetEntries()
     {
-        $client = $this->createClient();
-        $headers = $this->generateHeaders('admin', 'mypassword');
+        $this->client->request('GET', '/api/entries');
 
-        $client->request('GET', '/api/entries', array(), array(), $headers);
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-
-        $content = json_decode($client->getResponse()->getContent(), true);
+        $content = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->assertGreaterThanOrEqual(1, count($content));
         $this->assertNotEmpty($content['_embedded']['items']);
@@ -158,7 +67,7 @@ class WallabagRestControllerTest extends WebTestCase
         $this->assertGreaterThanOrEqual(1, $content['pages']);
 
         $this->assertTrue(
-            $client->getResponse()->headers->contains(
+            $this->client->getResponse()->headers->contains(
                 'Content-Type',
                 'application/json'
             )
@@ -167,14 +76,11 @@ class WallabagRestControllerTest extends WebTestCase
 
     public function testGetStarredEntries()
     {
-        $client = $this->createClient();
-        $headers = $this->generateHeaders('admin', 'mypassword');
+        $this->client->request('GET', '/api/entries', array('star' => 1, 'sort' => 'updated'));
 
-        $client->request('GET', '/api/entries', array('star' => 1, 'sort' => 'updated'), array(), $headers);
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-
-        $content = json_decode($client->getResponse()->getContent(), true);
+        $content = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->assertGreaterThanOrEqual(1, count($content));
         $this->assertNotEmpty($content['_embedded']['items']);
@@ -183,7 +89,7 @@ class WallabagRestControllerTest extends WebTestCase
         $this->assertGreaterThanOrEqual(1, $content['pages']);
 
         $this->assertTrue(
-            $client->getResponse()->headers->contains(
+            $this->client->getResponse()->headers->contains(
                 'Content-Type',
                 'application/json'
             )
@@ -192,14 +98,11 @@ class WallabagRestControllerTest extends WebTestCase
 
     public function testGetArchiveEntries()
     {
-        $client = $this->createClient();
-        $headers = $this->generateHeaders('admin', 'mypassword');
+        $this->client->request('GET', '/api/entries', array('archive' => 1));
 
-        $client->request('GET', '/api/entries', array('archive' => 1), array(), $headers);
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-
-        $content = json_decode($client->getResponse()->getContent(), true);
+        $content = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->assertGreaterThanOrEqual(1, count($content));
         $this->assertNotEmpty($content['_embedded']['items']);
@@ -208,7 +111,7 @@ class WallabagRestControllerTest extends WebTestCase
         $this->assertGreaterThanOrEqual(1, $content['pages']);
 
         $this->assertTrue(
-            $client->getResponse()->headers->contains(
+            $this->client->getResponse()->headers->contains(
                 'Content-Type',
                 'application/json'
             )
@@ -217,10 +120,7 @@ class WallabagRestControllerTest extends WebTestCase
 
     public function testDeleteEntry()
     {
-        $client = $this->createClient();
-        $headers = $this->generateHeaders('admin', 'mypassword');
-
-        $entry = $client->getContainer()
+        $entry = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
             ->findOneByUser(1);
@@ -229,36 +129,31 @@ class WallabagRestControllerTest extends WebTestCase
             $this->markTestSkipped('No content found in db.');
         }
 
-        $client->request('DELETE', '/api/entries/'.$entry->getId().'.json', array(), array(), $headers);
+        $this->client->request('DELETE', '/api/entries/'.$entry->getId().'.json');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
-        $content = json_decode($client->getResponse()->getContent(), true);
+        $content = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->assertEquals($entry->getTitle(), $content['title']);
         $this->assertEquals($entry->getUrl(), $content['url']);
 
         // We'll try to delete this entry again
-        $headers = $this->generateHeaders('admin', 'mypassword');
+        $this->client->request('DELETE', '/api/entries/'.$entry->getId().'.json');
 
-        $client->request('DELETE', '/api/entries/'.$entry->getId().'.json', array(), array(), $headers);
-
-        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+        $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
     }
 
     public function testPostEntry()
     {
-        $client = $this->createClient();
-        $headers = $this->generateHeaders('admin', 'mypassword');
-
-        $client->request('POST', '/api/entries.json', array(
+        $this->client->request('POST', '/api/entries.json', array(
             'url' => 'http://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html',
             'tags' => 'google',
-        ), array(), $headers);
+        ));
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
-        $content = json_decode($client->getResponse()->getContent(), true);
+        $content = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->assertGreaterThan(0, $content['id']);
         $this->assertEquals('http://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html', $content['url']);
@@ -269,10 +164,7 @@ class WallabagRestControllerTest extends WebTestCase
 
     public function testPatchEntry()
     {
-        $client = $this->createClient();
-        $headers = $this->generateHeaders('admin', 'mypassword');
-
-        $entry = $client->getContainer()
+        $entry = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
             ->findOneByUser(1);
@@ -284,16 +176,16 @@ class WallabagRestControllerTest extends WebTestCase
         // hydrate the tags relations
         $nbTags = count($entry->getTags());
 
-        $client->request('PATCH', '/api/entries/'.$entry->getId().'.json', array(
+        $this->client->request('PATCH', '/api/entries/'.$entry->getId().'.json', array(
             'title' => 'New awesome title',
             'tags' => 'new tag '.uniqid(),
             'star' => true,
             'archive' => false,
-        ), array(), $headers);
+        ));
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
-        $content = json_decode($client->getResponse()->getContent(), true);
+        $content = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->assertEquals($entry->getId(), $content['id']);
         $this->assertEquals($entry->getUrl(), $content['url']);
@@ -303,10 +195,7 @@ class WallabagRestControllerTest extends WebTestCase
 
     public function testGetTagsEntry()
     {
-        $client = $this->createClient();
-        $headers = $this->generateHeaders('admin', 'mypassword');
-
-        $entry = $client->getContainer()
+        $entry = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
             ->findOneWithTags(1);
@@ -322,17 +211,14 @@ class WallabagRestControllerTest extends WebTestCase
             $tags[] = array('id' => $tag->getId(), 'label' => $tag->getLabel());
         }
 
-        $client->request('GET', '/api/entries/'.$entry->getId().'/tags', array(), array(), $headers);
+        $this->client->request('GET', '/api/entries/'.$entry->getId().'/tags');
 
-        $this->assertEquals(json_encode($tags, JSON_HEX_QUOT), $client->getResponse()->getContent());
+        $this->assertEquals(json_encode($tags, JSON_HEX_QUOT), $this->client->getResponse()->getContent());
     }
 
     public function testPostTagsOnEntry()
     {
-        $client = $this->createClient();
-        $headers = $this->generateHeaders('admin', 'mypassword');
-
-        $entry = $client->getContainer()
+        $entry = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
             ->findOneByUser(1);
@@ -345,16 +231,16 @@ class WallabagRestControllerTest extends WebTestCase
 
         $newTags = 'tag1,tag2,tag3';
 
-        $client->request('POST', '/api/entries/'.$entry->getId().'/tags', array('tags' => $newTags), array(), $headers);
+        $this->client->request('POST', '/api/entries/'.$entry->getId().'/tags', array('tags' => $newTags));
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
-        $content = json_decode($client->getResponse()->getContent(), true);
+        $content = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->assertArrayHasKey('tags', $content);
         $this->assertEquals($nbTags + 3, count($content['tags']));
 
-        $entryDB = $client->getContainer()
+        $entryDB = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
             ->find($entry->getId());
@@ -369,15 +255,13 @@ class WallabagRestControllerTest extends WebTestCase
         }
     }
 
-    public function testDeleteOneTagEntrie()
+    public function testDeleteOneTagEntry()
     {
-        $client = $this->createClient();
-        $headers = $this->generateHeaders('admin', 'mypassword');
-
-        $entry = $client->getContainer()
+        $entry = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneByUser(1);
+            ->findOneWithTags(1);
+        $entry = $entry[0];
 
         if (!$entry) {
             $this->markTestSkipped('No content found in db.');
@@ -387,11 +271,11 @@ class WallabagRestControllerTest extends WebTestCase
         $nbTags = count($entry->getTags());
         $tag = $entry->getTags()[0];
 
-        $client->request('DELETE', '/api/entries/'.$entry->getId().'/tags/'.$tag->getId().'.json', array(), array(), $headers);
+        $this->client->request('DELETE', '/api/entries/'.$entry->getId().'/tags/'.$tag->getId().'.json');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
-        $content = json_decode($client->getResponse()->getContent(), true);
+        $content = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->assertArrayHasKey('tags', $content);
         $this->assertEquals($nbTags - 1, count($content['tags']));
@@ -399,14 +283,11 @@ class WallabagRestControllerTest extends WebTestCase
 
     public function testGetUserTags()
     {
-        $client = $this->createClient();
-        $headers = $this->generateHeaders('admin', 'mypassword');
+        $this->client->request('GET', '/api/tags.json');
 
-        $client->request('GET', '/api/tags.json', array(), array(), $headers);
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-
-        $content = json_decode($client->getResponse()->getContent(), true);
+        $content = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->assertGreaterThan(0, $content);
         $this->assertArrayHasKey('id', $content[0]);
@@ -420,14 +301,11 @@ class WallabagRestControllerTest extends WebTestCase
      */
     public function testDeleteUserTag($tag)
     {
-        $client = $this->createClient();
-        $headers = $this->generateHeaders('admin', 'mypassword');
+        $this->client->request('DELETE', '/api/tags/'.$tag['id'].'.json');
 
-        $client->request('DELETE', '/api/tags/'.$tag['id'].'.json', array(), array(), $headers);
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-
-        $content = json_decode($client->getResponse()->getContent(), true);
+        $content = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->assertArrayHasKey('label', $content);
         $this->assertEquals($tag['label'], $content['label']);

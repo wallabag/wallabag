@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Wallabag\CoreBundle\Entity\Config;
-use Wallabag\CoreBundle\Entity\User;
+use Wallabag\UserBundle\Entity\User;
 use Wallabag\CoreBundle\Form\Type\ChangePasswordType;
 use Wallabag\CoreBundle\Form\Type\UserInformationType;
 use Wallabag\CoreBundle\Form\Type\NewUserType;
@@ -25,6 +25,7 @@ class ConfigController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $config = $this->getConfig();
+        $userManager = $this->container->get('fos_user.user_manager');
         $user = $this->getUser();
 
         // handle basic config detail (this form is defined as a service)
@@ -52,9 +53,8 @@ class ConfigController extends Controller
         $pwdForm->handleRequest($request);
 
         if ($pwdForm->isValid()) {
-            $user->setPassword($pwdForm->get('new_password')->getData());
-            $em->persist($user);
-            $em->flush();
+            $user->setPlainPassword($pwdForm->get('new_password')->getData());
+            $userManager->updateUser($user, true);
 
             $this->get('session')->getFlashBag()->add(
                 'notice',
@@ -69,8 +69,7 @@ class ConfigController extends Controller
         $userForm->handleRequest($request);
 
         if ($userForm->isValid()) {
-            $em->persist($user);
-            $em->flush();
+            $userManager->updateUser($user, true);
 
             $this->get('session')->getFlashBag()->add(
                 'notice',
@@ -97,14 +96,14 @@ class ConfigController extends Controller
         }
 
         // handle adding new user
-        $newUser = new User();
+        $newUser = $userManager->createUser();
         // enable created user by default
         $newUser->setEnabled(true);
         $newUserForm = $this->createForm(new NewUserType(), $newUser, array('validation_groups' => array('Profile')));
         $newUserForm->handleRequest($request);
 
-        if ($newUserForm->isValid()) {
-            $em->persist($newUser);
+        if ($newUserForm->isValid() && $this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')) {
+            $userManager->updateUser($newUser, true);
 
             $config = new Config($newUser);
             $config->setTheme($this->container->getParameter('theme'));
