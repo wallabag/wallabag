@@ -31,6 +31,31 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertCount(1, $crawler->filter('button[type=submit]'));
     }
 
+    public function testPostNewViaBookmarklet()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/');
+
+        $this->assertCount(4, $crawler->filter('div[class=entry]'));
+
+        // Good URL
+        $crawler = $client->request('GET', '/bookmarklet', array('url' => $this->url));
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $crawler = $client->followRedirect();
+        $crawler = $client->request('GET', '/');
+        $this->assertCount(5, $crawler->filter('div[class=entry]'));
+
+        $em = $client->getContainer()
+            ->get('doctrine.orm.entity_manager');
+        $entry = $em
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneByUrl($this->url);
+        $em->remove($entry);
+        $em->flush();
+    }
+
     public function testPostNewEmpty()
     {
         $this->logInAs('admin');
