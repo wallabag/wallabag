@@ -76,6 +76,10 @@ nav, main, footer {
     padding-left: 240px;
 }
 
+main, #content, .valign-wrapper {
+    height: 100%;
+}
+
 #main {
     flex: 1 0 auto;
 }
@@ -223,6 +227,10 @@ nav input {
 #main .logo img {
     height: 100pt;
     width: 100pt;
+}
+
+#main .logo:hover {
+    background: transparent;
 }
 
 .side-nav li {
