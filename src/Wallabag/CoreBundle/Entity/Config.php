@@ -76,12 +76,18 @@ class Config
      */
     private $user;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Wallabag\CoreBundle\Entity\TaggingRule", mappedBy="config", cascade={"remove"})
+     */
+    private $taggingRules;
+
     /*
      * @param User     $user
      */
     public function __construct(\Wallabag\UserBundle\Entity\User $user)
     {
         $this->user = $user;
+        $this->taggingRules = new ArrayCollection();
     }
 
     /**
@@ -236,5 +242,25 @@ class Config
     public function getRssLimit()
     {
         return $this->rssLimit;
+    }
+
+    /**
+     * @param TaggingRule $rule
+     *
+     * @return Config
+     */
+    public function addTaggingRule(TaggingRule $rule)
+    {
+        $this->taggingRules[] = $rule;
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection<TaggingRule>
+     */
+    public function getTaggingRules()
+    {
+        return $this->taggingRules;
     }
 }

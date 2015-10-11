@@ -30,11 +30,11 @@ class RuleBasedTagger
         $rules = $this->getRulesForUser($entry->getUser());
 
         foreach ($rules as $rule) {
-            if (!$this->rulerz->satisfies($entry, $rule['rule'])) {
+            if (!$this->rulerz->satisfies($entry, $rule->getRule())) {
                 continue;
             }
 
-            foreach ($rule['tags'] as $label) {
+            foreach ($rule->getTags() as $label) {
                 $tag = $this->getTag($entry->getUser(), $label);
 
                 $entry->addTag($tag);
@@ -62,21 +62,15 @@ class RuleBasedTagger
         return $tag;
     }
 
+    /**
+     * Retrieves the tagging rules for a given user.
+     *
+     * @param User $user
+     *
+     * @return array<TaggingRule>
+     */
     private function getRulesForUser(User $user)
     {
-        return [
-            [
-                'rule' => 'domainName = "github.com"',
-                'tags' => ['github'],
-            ],
-            [
-                'rule' => 'readingTime >= 15',
-                'tags' => ['long reading'],
-            ],
-            [
-                'rule' => 'readingTime <= 3 ',
-                'tags' => ['short reading'],
-            ],
-        ];
+        return $user->getConfig()->getTaggingRules();
     }
 }
