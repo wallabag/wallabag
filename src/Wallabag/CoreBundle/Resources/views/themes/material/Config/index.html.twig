@@ -185,6 +185,18 @@
                     </div>
 
                     <div id="set5" class="col s12">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <ul>
+                                    {% for tagging_rule in app.user.config.taggingRules %}
+                                    <li>
+                                        if « {{ tagging_rule.rule }} » then tag as « {{ tagging_rule.tags|join(', ') }} »
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+
                         <form action="{{ path('config') }}#set5" method="post" {{ form_enctype(form.pwd) }}>
                             {{ form_errors(form.pwd) }}
 
