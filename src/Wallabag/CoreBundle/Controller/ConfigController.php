@@ -7,9 +7,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Wallabag\CoreBundle\Entity\Config;
+use Wallabag\CoreBundle\Entity\TaggingRule;
 use Wallabag\UserBundle\Entity\User;
 use Wallabag\CoreBundle\Form\Type\ChangePasswordType;
 use Wallabag\CoreBundle\Form\Type\UserInformationType;
+use Wallabag\CoreBundle\Form\Type\TaggingRuleType;
 use Wallabag\CoreBundle\Form\Type\NewUserType;
 use Wallabag\CoreBundle\Form\Type\RssType;
 use Wallabag\CoreBundle\Tools\Utils;
@@ -98,6 +100,24 @@ class ConfigController extends Controller
             return $this->redirect($this->generateUrl('config'));
         }
 
+        // handle tagging rule
+        $taggingRule = new TaggingRule();
+        $newTaggingRule = $this->createForm(new TaggingRuleType(), $taggingRule);
+        $newTaggingRule->handleRequest($request);
+
+        if ($newTaggingRule->isValid()) {
+            $taggingRule->setConfig($config);
+            $em->persist($taggingRule);
+            $em->flush();
+
+            $this->get('session')->getFlashBag()->add(
+                'notice',
+                'Tagging rules updated'
+            );
+
+            return $this->redirect($this->generateUrl('config'));
+        }
+
         // handle adding new user
         $newUser = $userManager->createUser();
         // enable created user by default
@@ -136,6 +156,7 @@ class ConfigController extends Controller
                 'pwd' => $pwdForm->createView(),
                 'user' => $userForm->createView(),
                 'new_user' => $newUserForm->createView(),
+                'new_tagging_rule' => $newTaggingRule->createView(),
             ),
             'rss' => array(
                 'username' => $user->getUsername(),

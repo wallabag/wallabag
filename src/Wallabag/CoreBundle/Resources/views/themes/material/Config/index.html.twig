@@ -15,8 +15,9 @@
                         <li class="tab col s3"><a href="#set2">{% trans %}RSS{% endtrans %}</a></li>
                         <li class="tab col s3"><a href="#set3">{% trans %}User information{% endtrans %}</a></li>
                         <li class="tab col s3"><a href="#set4">{% trans %}Password{% endtrans %}</a></li>
+                        <li class="tab col s3"><a href="#set5">{% trans %}Tags{% endtrans %}</a></li>
                         {% if is_granted('ROLE_SUPER_ADMIN') %}
-                        <li class="tab col s3"><a href="#set5">{% trans %}Add a user{% endtrans %}</a></li>
+                        <li class="tab col s3"><a href="#set6">{% trans %}Add a user{% endtrans %}</a></li>
                         {% endif %}
                         </ul>
                     </div>
@@ -176,6 +177,34 @@
                             </div>
 
                             <div class="hidden">{{ form_rest(form.pwd) }}</div>
+                            <button class="btn waves-effect waves-light" type="submit" name="action">
+                                {% trans %}Save{% endtrans %}
+                            </button>
+
+                        </form>
+                    </div>
+
+                    <div id="set5" class="col s12">
+                        <form action="{{ path('config') }}#set5" method="post" {{ form_enctype(form.pwd) }}>
+                            {{ form_errors(form.pwd) }}
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form_label(form.new_tagging_rule.rule) }}
+                                    {{ form_errors(form.new_tagging_rule.rule) }}
+                                    {{ form_widget(form.new_tagging_rule.rule) }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form_label(form.new_tagging_rule.tags) }}
+                                    {{ form_errors(form.new_tagging_rule.tags) }}
+                                    {{ form_widget(form.new_tagging_rule.tags) }}
+                                </div>
+                            </div>
+
+                            <div class="hidden">{{ form_rest(form.new_tagging_rule) }}</div>
                             <button class="btn waves-effect waves-light" type="submit" name="action">
                                 {% trans %}Save{% endtrans %}
                             </button>
