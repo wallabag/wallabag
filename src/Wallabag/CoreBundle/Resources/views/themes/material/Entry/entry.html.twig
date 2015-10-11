@@ -82,6 +82,14 @@
             <div class="collapsible-body"></div>
         </li>
 
+        <li class="bold border-bottom">
+            <a class="waves-effect collapsible-header" id="nav-btn-add-comment">
+                <i class="mdi-editor-insert-comment small"></i>
+                <span>{% trans %}Add a comment{% endtrans %}</span>
+            </a>
+            <div class="collapsible-body"></div>
+        </li>
+
         <li class="bold">
             <a class="waves-effect collapsible-header">
                 <i class="mdi-social-share small"></i>
@@ -160,12 +168,35 @@ main {
             <div class="input-field nav-panel-add-tag" style="display: none">
                 {{ render(controller( "WallabagCoreBundle:Tag:addTagForm", { 'id': entry.id } )) }}
             </div>
-
         </aside>
         <article>
             {{ entry.content | raw }}
         </article>
-    </div>
+        <div id="comments" class="comments-section">
+            <span class="mdi-editor-insert-comment" id="new-comment-button"></span>
+            <div class="nav-panel-add-comment input-field" style="display: none">
+                {{ render(controller( "WallabagCoreBundle:Comment:addCommentForm", { 'id': entry.id } )) }}
+            </div>
+            {% if entry.comments is not empty %}
+                <div id="comments_list" class="mdi-editor-insert-comment">
+                Comments <span id="new-comment-bottom-link" class="mdi-content-add-box"></span>
+                {% for comment in entry.comments %}
+                    <div id="{{ comment.id }}" class="comment">
+                        <hr>
+                        <div class="comment_content">{{ comment.content|markdown }}</div>
+                        <div class="comment_infos">
+                            <span class="comment_actions">
+                            <a class="mdi-action-delete" href="{{ path('delete_comment', { 'id': comment.id }) }}" ></a></span>
+                            <a class="return-to-paragraph" href=""><span class="mdi-navigation-arrow-drop-up"> </span></a>
+                            <span class='commentdom'>{{ comment.dom }}</span>
+                            <span class="comment_metadata">
+                            {{ comment.user.username }} - {{  comment.date | date("H:i:s") }} -  {{  comment.date | date("d/m/Y") }}</span>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+            {% endif %}
+        </div>
 {% endblock %}
 
 {% block footer %}

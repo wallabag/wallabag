@@ -5,6 +5,7 @@ namespace Wallabag\CoreBundle\Helper;
 use Graby\Graby;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Tools\Utils;
+use Masterminds\HTML5;
 
 /**
  * This kind of proxy class take care of getting the content from an url
@@ -45,6 +46,22 @@ class ContentProxy
                 $html .= '<p><i>But we found a short description: </i></p>';
                 $html .= $content['open_graph']['og_description'];
             }
+        }
+
+        /*
+         * Set unique ids on paragraphs to set comments on the right ones
+         */
+        if (!strcmp($html, strip_tags($html)) == 0) {
+            $html5 = new HTML5();
+            $crawler = $html5->loadHTML($html);
+            $paragraphs = $crawler->getElementsByTagName('p');
+            $paragraphId = 0;
+            foreach ($paragraphs as $paragraph) {
+                $domAttribute = $paragraph->setAttribute('data-wallabag-paragraph', $paragraphId);
+                $paragraph->appendChild($domAttribute);
+                ++$paragraphId;
+            }
+            $html = $html5->saveHTML($crawler);
         }
 
         $entry->setUrl($content['url'] ?: $url);

@@ -31,7 +31,9 @@ class ContentProxyTest extends KernelTestCase
 
         $this->assertEquals('http://0.0.0.0', $entry->getUrl());
         $this->assertEmpty($entry->getTitle());
-        $this->assertEquals('<p>Unable to retrieve readable content.</p>', $entry->getContent());
+        $this->assertEquals('<!DOCTYPE html>
+<html><p data-wallabag-paragraph="0">Unable to retrieve readable content.</p></html>
+', $entry->getContent());
         $this->assertEmpty($entry->getPreviewPicture());
         $this->assertEmpty($entry->getMimetype());
         $this->assertEmpty($entry->getLanguage());
@@ -65,7 +67,9 @@ class ContentProxyTest extends KernelTestCase
 
         $this->assertEquals('http://domain.io', $entry->getUrl());
         $this->assertEquals('my title', $entry->getTitle());
-        $this->assertEquals('<p>Unable to retrieve readable content.</p><p><i>But we found a short description: </i></p>desc', $entry->getContent());
+        $this->assertEquals('<!DOCTYPE html>
+<html><p data-wallabag-paragraph="0">Unable to retrieve readable content.</p><p data-wallabag-paragraph="1"><i>But we found a short description: </i></p>desc</html>
+', $entry->getContent());
         $this->assertEmpty($entry->getPreviewPicture());
         $this->assertEmpty($entry->getLanguage());
         $this->assertEmpty($entry->getMimetype());

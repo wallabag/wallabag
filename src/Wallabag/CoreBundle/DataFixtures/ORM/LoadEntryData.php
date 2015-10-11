@@ -7,6 +7,7 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
+use Wallabag\CoreBundle\Entity\Comment;
 
 class LoadEntryData extends AbstractFixture implements OrderedFixtureInterface
 {
@@ -105,6 +106,32 @@ class LoadEntryData extends AbstractFixture implements OrderedFixtureInterface
         $manager->persist($entry6);
 
         $this->addReference('entry6', $entry6);
+
+        $entry7 = new Entry($this->getReference('admin-user'));
+        $entry7->setUrl('http://0.0.0.0');
+        $entry7->setTitle('test title entry7');
+        $entry7->setContent('This is my content /o/ and my comments.
+            Put much content before comments so that they can be shown on bottom');
+
+        $comment1 = new Comment($this->getReference('admin-user'));
+        $comment1->setContent("I'm an admin and I write a comment");
+
+        $comment1->setDom('unIDUniquePourMonDOM');
+
+        $comment2 = new Comment($this->getReference('admin-user'));
+        $comment2->setContent("I'm still an admin and I write a second comment, but different");
+        $comment2->setDom('unIDEncoreUniquePourMonDOM');
+
+        $entry7->addComment($comment1);
+
+        $entry7->addComment($comment2);
+
+        $manager->persist($comment1);
+        $manager->persist($comment2);
+
+        $manager->persist($entry7);
+
+        $this->addReference('entry7', $entry7);
 
         $manager->flush();
     }

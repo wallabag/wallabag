@@ -7,8 +7,9 @@
    3 = Filters slider
    4 = Cards
    5 = Article
-   6 = Media queries
-   7 = Others
+   6 = Comments
+   7 = Media queries
+   8 = Others
 
    ========================================================================== */
 
@@ -213,11 +214,6 @@ nav input {
     overflow-y: visible;
 }
 
-#filters div.with-checkbox {
-    height: 3rem;
-    margin-top: 0px;
-}
-
 /* ==========================================================================
    4 = Cards
    ========================================================================== */
@@ -294,6 +290,7 @@ main ul.row {
 #article {
     font-size: 20px;
     margin: 0px auto;
+    padding-bottom: 1em;
     max-width: 40em;
 }
 
@@ -350,7 +347,63 @@ main ul.row {
 }
 
 /* ==========================================================================
-   6 = Media queries
+   6 = Comments
+   ========================================================================== */
+#comments {
+    margin-bottom: 20px;
+}
+
+.comment_infos {
+    font-size: small;
+}
+
+.comment_metadata {
+    float: right;
+}
+
+#new-comment-button {
+    display: none;
+    transition: color 100ms ease 0s;
+    cursor: pointer;
+}
+
+.nav-panel-add-comment {
+    width: 280px;
+}
+
+#comment_content {
+    padding: 1rem 0px;
+}
+
+.comment {
+    background-color: #f9f6e4;
+    /*max-height: 120px;*/
+    overflow-y: auto;
+    font-size: 80%;
+    padding: 5px;
+}
+
+.comment-bottom {
+    background-color: #f9f6e4;
+}
+
+.commentdom {
+    display: none;
+}
+
+#comments_list {
+    margin-bottom: 40px;
+}
+.return-to-paragraph {
+    display: none;
+}
+
+#new-comment-bottom-link {
+    cursor: pointer;
+}
+
+/* ==========================================================================
+   7 = Media queries
    ========================================================================== */
 
   @media only screen and (max-width : 992px) {
@@ -410,7 +463,7 @@ main ul.row {
     }
 }
 /* ==========================================================================
-   7 = Others
+   8 = Others
    ========================================================================== */
 
 /* force height on non-input field in the settings page */

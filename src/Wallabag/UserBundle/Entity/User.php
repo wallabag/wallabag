@@ -12,6 +12,7 @@ use FOS\UserBundle\Model\User as BaseUser;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
+use Wallabag\CoreBundle\Entity\Comment as Comment;
 
 /**
  * User.
@@ -71,6 +72,11 @@ class User extends BaseUser
      * @ORM\OneToMany(targetEntity="Wallabag\CoreBundle\Entity\Tag", mappedBy="user", cascade={"remove"})
      */
     protected $tags;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Wallabag\CoreBundle\Entity\Comment", mappedBy="user", cascade={"remove"})
+     */
+    private $comments;
 
     public function __construct()
     {
@@ -171,6 +177,26 @@ class User extends BaseUser
     public function getTags()
     {
         return $this->tags;
+    }
+
+    /**
+     * @param Entry $entry
+     *
+     * @return User
+     */
+    public function addComment(Comment $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection<Comment>
+     */
+    public function getComment()
+    {
+        return $this->comment;
     }
 
     public function isEqualTo(UserInterface $user)

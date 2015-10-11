@@ -38,14 +38,14 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/');
 
-        $this->assertCount(4, $crawler->filter('div[class=entry]'));
+        $this->assertCount(5, $crawler->filter('div[class=entry]'));
 
         // Good URL
         $crawler = $client->request('GET', '/bookmarklet', array('url' => $this->url));
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $crawler = $client->followRedirect();
         $crawler = $client->request('GET', '/');
-        $this->assertCount(5, $crawler->filter('div[class=entry]'));
+        $this->assertCount(6, $crawler->filter('div[class=entry]'));
 
         $em = $client->getContainer()
             ->get('doctrine.orm.entity_manager');
@@ -296,7 +296,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(5, $crawler->filter('div[class=entry]'));
+        $this->assertCount(6, $crawler->filter('div[class=entry]'));
 
         $data = array(
             'entry_filter[createdAt][left_date]' => date('d/m/Y'),
@@ -305,7 +305,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(5, $crawler->filter('div[class=entry]'));
+        $this->assertCount(6, $crawler->filter('div[class=entry]'));
 
         $data = array(
             'entry_filter[createdAt][left_date]' => '01/01/1970',
