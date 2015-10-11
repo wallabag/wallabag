@@ -220,8 +220,63 @@
                             <button class="btn waves-effect waves-light" type="submit" name="action">
                                 {% trans %}Save{% endtrans %}
                             </button>
-
                         </form>
+
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <p class="help">
+                                    {% trans %}The following variables can be used to create tagging rules:{% endtrans %}
+
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Variable</th>
+                                                <th>Meaning</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr>
+                                                <td>title</td>
+                                                <td>{% trans %}Title of the entry{% endtrans %}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>url</td>
+                                                <td>{% trans %}URL of the entry{% endtrans %}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>isArchived</td>
+                                                <td>{% trans %}Whether the entry is archived or not{% endtrans %}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>isStared</td>
+                                                <td>{% trans %}Whether the entry is starred or not{% endtrans %}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>content</td>
+                                                <td>{% trans %}The entry's content{% endtrans %}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>language</td>
+                                                <td>{% trans %}The entry's language{% endtrans %}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>mimetype</td>
+                                                <td>{% trans %}The entry's mime-type{% endtrans %}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>readingTime</td>
+                                                <td>{% trans %}The estimated entry's reading time, in minutes{% endtrans %}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>domainName</td>
+                                                <td>{% trans %}The domain name of the entry{% endtrans %}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </p>
+                            </div>
+                        </div>
                     </div>
 
                     {% if is_granted('ROLE_SUPER_ADMIN') %}
