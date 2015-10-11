@@ -15,6 +15,23 @@ use Pagerfanta\Pagerfanta;
 class EntryController extends Controller
 {
     /**
+     * @param Entry $entry
+     */
+    private function updateEntry(Entry $entry)
+    {
+        try {
+            $entry = $this->get('wallabag_core.content_proxy')->updateEntry($entry, $entry->getUrl());
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($entry);
+            $em->flush();
+        } catch (\Exception $e) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * @param Request $request
      *
      * @Route("/new-entry", name="new_entry")
@@ -30,12 +47,7 @@ class EntryController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $entry = $this->get('wallabag_core.content_proxy')->updateEntry($entry, $entry->getUrl());
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entry);
-            $em->flush();
-
+            $this->updateEntry($entry);
             $this->get('session')->getFlashBag()->add(
                 'notice',
                 'Entry saved'
@@ -47,6 +59,22 @@ class EntryController extends Controller
         return $this->render('WallabagCoreBundle:Entry:new_form.html.twig', array(
             'form' => $form->createView(),
         ));
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @Route("/bookmarklet", name="bookmarklet")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function addEntryViaBookmarklet(Request $request)
+    {
+        $entry = new Entry($this->getUser());
+        $entry->setUrl($request->get('url'));
+        $this->updateEntry($entry);
+
+        return $this->redirect($this->generateUrl('homepage'));
     }
 
     /**

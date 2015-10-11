@@ -22,7 +22,7 @@
     </ul>
     <h3>{% trans %}Bookmarklet{% endtrans %}</h3>
     <p>
-    {% trans %}Drag &amp; drop this link to your bookmarks bar:{% endtrans %} {% trans %}bag it!{% endtrans %}
-    </p>
+    {% trans %}Drag &amp; drop this link to your bookmarks bar:{% endtrans %}
+    {% include 'WallabagCoreBundle::_bookmarklet.html.twig' %}
 
 {% endblock %}
