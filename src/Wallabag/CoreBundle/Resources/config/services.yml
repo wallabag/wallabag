@@ -53,6 +53,20 @@ services:
         class: Wallabag\CoreBundle\Helper\ContentProxy
         arguments:
             - @wallabag_core.graby
+            - @wallabag_core.rule_based_tagger
+
+    wallabag_core.rule_based_tagger:
+        class: Wallabag\CoreBundle\Helper\RuleBasedTagger
+        arguments:
+            - @rulerz
+            - @wallabag_core.tag_repository
+
+    wallabag_core.tag_repository:
+        class: Wallabag\CoreBundle\Repository\TagRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments:
+            - WallabagCoreBundle:Tag
 
     wallabag_core.registration_confirmed:
         class: Wallabag\CoreBundle\EventListener\RegistrationConfirmedListener

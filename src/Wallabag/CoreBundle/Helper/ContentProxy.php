@@ -13,10 +13,12 @@ use Wallabag\CoreBundle\Tools\Utils;
 class ContentProxy
 {
     protected $graby;
+    protected $tagger;
 
-    public function __construct(Graby $graby)
+    public function __construct(Graby $graby, RuleBasedTagger $tagger)
     {
-        $this->graby = $graby;
+        $this->graby  = $graby;
+        $this->tagger = $tagger;
     }
 
     /**
@@ -58,6 +60,8 @@ class ContentProxy
         if (isset($content['open_graph']['og_image'])) {
             $entry->setPreviewPicture($content['open_graph']['og_image']);
         }
+
+        $this->tagger->tag($entry);
 
         return $entry;
     }
