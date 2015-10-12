@@ -6,10 +6,20 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
+/**
+ * Transforms a comma-separated list to a proper PHP array.
+ * Example: the string "foo, bar" will become the array ["foo", "bar"]
+ */
 class StringToListTransformer implements DataTransformerInterface
 {
+    /**
+     * @var string
+     */
     private $separator;
 
+    /**
+     * @param string $separator The separator used in the list.
+     */
     public function __construct($separator = ',')
     {
         $this->separator = $separator;
@@ -40,10 +50,10 @@ class StringToListTransformer implements DataTransformerInterface
      */
     public function reverseTransform($string)
     {
-        if (!$string) {
+        if ($string === null) {
             return null;
         }
 
-        return array_filter(array_map('trim', explode($this->separator, $string)));
+        return array_values(array_filter(array_map('trim', explode($this->separator, $string))));
     }
 }
