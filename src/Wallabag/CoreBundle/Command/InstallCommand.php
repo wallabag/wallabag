@@ -61,6 +61,7 @@ class InstallCommand extends ContainerAwareCommand
         $this->defaultOutput->writeln('<info><comment>Step 1 of 4.</comment> Checking system requirements.</info>');
 
         $fulfilled = true;
+        $rows = array();
 
         // @TODO: find a better way to check requirements
         $label = '<comment>PCRE</comment>';
@@ -159,17 +160,6 @@ class InstallCommand extends ContainerAwareCommand
 
         $this->defaultOutput->writeln('Clearing the cache');
         $this->runCommand('cache:clear');
-
-        /*
-        if ($this->getHelperSet()->get('dialog')->askConfirmation($this->defaultOutput, '<question>Load fixtures (Y/N)?</question>', false)) {
-            $doctrineConfig = $this->getContainer()->get('doctrine.orm.entity_manager')->getConnection()->getConfiguration();
-            $logger = $doctrineConfig->getSQLLogger();
-            // speed up fixture load
-            $doctrineConfig->setSQLLogger(null);
-            $this->runCommand('doctrine:fixtures:load');
-            $doctrineConfig->setSQLLogger($logger);
-        }
-        */
 
         $this->defaultOutput->writeln('');
 
