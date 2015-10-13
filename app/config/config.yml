@@ -171,3 +171,16 @@ fos_oauth_server:
     auth_code_class:     Wallabag\ApiBundle\Entity\AuthCode
     service:
         user_provider: fos_user.user_manager
+
+scheb_two_factor:
+
+    trusted_computer:
+        enabled: true
+        cookie_name: wllbg_trusted_computer
+        cookie_lifetime: 5184000
+
+    email:
+        enabled: true
+        sender_email: no-reply@wallabag.org
+        digits: 6
+        template: WallabagUserBundle:Authentication:form.html.twig

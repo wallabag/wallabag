@@ -4,6 +4,8 @@ namespace Wallabag\UserBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Scheb\TwoFactorBundle\Model\Email\TwoFactorInterface;
+use Scheb\TwoFactorBundle\Model\TrustedComputerInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use JMS\Serializer\Annotation\ExclusionPolicy;
@@ -24,7 +26,7 @@ use Wallabag\CoreBundle\Entity\Tag;
  * @UniqueEntity("email")
  * @UniqueEntity("username")
  */
-class User extends BaseUser
+class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterface
 {
     /**
      * @var int
@@ -71,6 +73,22 @@ class User extends BaseUser
      * @ORM\OneToMany(targetEntity="Wallabag\CoreBundle\Entity\Tag", mappedBy="user", cascade={"remove"})
      */
     protected $tags;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $authCode;
+
+    /**
+     * @var bool Enabled yes/no
+     * @ORM\Column(type="boolean")
+     */
+    private $twoFactorAuthentication = false;
+
+    /**
+     * @ORM\Column(type="json_array", nullable=true)
+     */
+    private $trusted;
 
     public function __construct()
     {
@@ -200,5 +218,53 @@ class User extends BaseUser
     public function getConfig()
     {
         return $this->config;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isTwoFactorAuthentication()
+    {
+        return $this->twoFactorAuthentication;
+    }
+
+    /**
+     * @param bool $twoFactorAuthentication
+     */
+    public function setTwoFactorAuthentication($twoFactorAuthentication)
+    {
+        $this->twoFactorAuthentication = $twoFactorAuthentication;
+    }
+
+    public function isEmailAuthEnabled()
+    {
+        return $this->twoFactorAuthentication;
+    }
+
+    public function getEmailAuthCode()
+    {
+        return $this->authCode;
+    }
+
+    public function setEmailAuthCode($authCode)
+    {
+        $this->authCode = $authCode;
+    }
+
+    public function addTrustedComputer($token, \DateTime $validUntil)
+    {
+        $this->trusted[$token] = $validUntil->format('r');
+    }
+
+    public function isTrustedComputer($token)
+    {
+        if (isset($this->trusted[$token])) {
+            $now = new \DateTime();
+            $validUntil = new \DateTime($this->trusted[$token]);
+
+            return $now < $validUntil;
+        }
+
+        return false;
     }
 }

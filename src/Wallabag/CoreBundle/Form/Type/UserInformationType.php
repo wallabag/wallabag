@@ -13,6 +13,7 @@ class UserInformationType extends AbstractType
         $builder
             ->add('name', 'text')
             ->add('email', 'email')
+            ->add('twoFactorAuthentication', 'checkbox', array('required' => false))
             ->add('save', 'submit')
             ->remove('username')
             ->remove('plainPassword')

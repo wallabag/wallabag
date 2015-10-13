@@ -132,6 +132,14 @@
                                 </div>
                             </div>
 
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form_widget(form.user.twoFactorAuthentication) }}
+                                    {{ form_label(form.user.twoFactorAuthentication) }}
+                                    {{ form_errors(form.user.twoFactorAuthentication) }}
+                                </div>
+                            </div>
+
                             <div class="hidden">{{ form_rest(form.user) }}</div>
                             <button class="btn waves-effect waves-light" type="submit" name="action">
                                 {% trans %}Save{% endtrans %}
