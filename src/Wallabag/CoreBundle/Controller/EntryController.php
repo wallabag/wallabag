@@ -40,6 +40,7 @@ class EntryController extends Controller
      */
     public function addEntryFormAction(Request $request)
     {
+        /* @var User $this->getUser() */
         $entry = new Entry($this->getUser());
 
         $form = $this->createForm(new NewEntryType(), $entry);
@@ -70,6 +71,7 @@ class EntryController extends Controller
      */
     public function addEntryViaBookmarklet(Request $request)
     {
+        /* @var User $this->getUser() */
         $entry = new Entry($this->getUser());
         $entry->setUrl($request->get('url'));
         $this->updateEntry($entry);
@@ -78,13 +80,11 @@ class EntryController extends Controller
     }
 
     /**
-     * @param Request $request
-     *
      * @Route("/new", name="new")
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function addEntryAction(Request $request)
+    public function addEntryAction()
     {
         return $this->render('WallabagCoreBundle:Entry:new.html.twig');
     }
@@ -220,6 +220,7 @@ class EntryController extends Controller
                 throw new \InvalidArgumentException(sprintf('Type "%s" is not implemented.', $type));
         }
 
+        /* @var User $this->getUser() */
         $form = $this->get('form.factory')->create(new EntryFilterType($repository, $this->getUser()));
 
         if ($request->query->has($form->getName())) {

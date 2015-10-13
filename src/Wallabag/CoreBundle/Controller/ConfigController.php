@@ -4,6 +4,7 @@ namespace Wallabag\CoreBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Wallabag\CoreBundle\Entity\Config;
@@ -143,7 +144,7 @@ class ConfigController extends Controller
      *
      * @Route("/generate-token", name="generate_token")
      *
-     * @return JsonResponse
+     * @return JsonResponse|RedirectResponse
      */
     public function generateTokenAction(Request $request)
     {
@@ -174,6 +175,7 @@ class ConfigController extends Controller
             ->findOneByUser($this->getUser());
 
         if (!$config) {
+            /* @var User $this->getUser() */
             $config = new Config($this->getUser());
         }
 
