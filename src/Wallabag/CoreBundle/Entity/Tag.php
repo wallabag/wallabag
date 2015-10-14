@@ -7,6 +7,7 @@ use JMS\Serializer\Annotation\XmlRoot;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use Doctrine\Common\Collections\ArrayCollection;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Tag.
@@ -35,6 +36,12 @@ class Tag
      * @ORM\Column(name="label", type="text")
      */
     private $label;
+
+    /**
+     * @Gedmo\Slug(fields={"label"})
+     * @ORM\Column(length=128, unique=true)
+     */
+    private $slug;
 
     /**
      * @ORM\ManyToMany(targetEntity="Entry", mappedBy="tags", cascade={"persist"})
@@ -89,6 +96,11 @@ class Tag
     public function getLabel()
     {
         return $this->label;
+    }
+
+    public function getSlug()
+    {
+        return $this->slug;
     }
 
     public function addEntry(Entry $entry)
