@@ -4,6 +4,7 @@ namespace Wallabag\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use KPhoen\RulerZBundle\Validator\Constraints as RulerZAssert;
 
 /**
  * Config.
@@ -27,6 +28,7 @@ class TaggingRule
      * @var string
      *
      * @Assert\NotBlank()
+     * @RulerZAssert\ValidRule()
      * @ORM\Column(name="rule", type="string", nullable=false)
      */
     private $rule;
