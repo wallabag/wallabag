@@ -1,0 +1,33 @@
+{% extends "WallabagUserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+<form class="form" action="" method="post">
+    <div class="card-content">
+        <div class="row">
+
+            {% for flashMessage in app.session.flashbag.get("two_factor") %}
+            <p class="error">{{ flashMessage|trans }}</p>
+            {% endfor %}
+
+            <div class="input-field col s12">
+                <label for="_auth_code">{{ "scheb_two_factor.auth_code"|trans }}</label>
+                <input id="_auth_code" type="text" autocomplete="off" name="_auth_code" />
+            </div>
+
+            {% if useTrustedOption %}
+            <div class="input-field col s12">
+                <input id="_trusted" type="checkbox" name="_trusted" />
+                <label for="_trusted">{{ "scheb_two_factor.trusted"|trans }}</label>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="card-action center">
+        <a href="{{ path('fos_user_security_logout') }}" class="waves-effect waves-light grey btn"><i class="material-icons left"></i> {% trans %}Cancel{% endtrans %}</a>
+        <button class="btn waves-effect waves-light" type="submit" name="send">
+            {{ "scheb_two_factor.login"|trans }}
+            <i class="mdi-content-send right"></i>
+        </button>
+    </div>
+</form>
+{% endblock %}

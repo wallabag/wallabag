@@ -29,6 +29,8 @@ parameters:
 
     # wallabag misc
     app.version: 2.0.0-alpha
+    twofactor_auth: true
+    twofactor_sender: no-reply@wallabag.org
 
     # message to display at the bottom of the page
     warning_message: >

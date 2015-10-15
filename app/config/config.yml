@@ -45,6 +45,7 @@ twig:
         export_mobi: %export_mobi%
         export_pdf: %export_pdf%
         version: %app.version%
+        twofactor_auth: %twofactor_auth%
         warning_message: %warning_message%
         paypal_url: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9UBA65LG3FX9Y&lc=gb"
         flattr_url: "https://flattr.com/thing/1265480"
@@ -171,3 +172,15 @@ fos_oauth_server:
     auth_code_class:     Wallabag\ApiBundle\Entity\AuthCode
     service:
         user_provider: fos_user.user_manager
+
+scheb_two_factor:
+    trusted_computer:
+        enabled: true
+        cookie_name: wllbg_trusted_computer
+        cookie_lifetime: 2592000
+
+    email:
+        enabled: %twofactor_auth%
+        sender_email: %twofactor_sender%
+        digits: 6
+        template: WallabagUserBundle:Authentication:form.html.twig

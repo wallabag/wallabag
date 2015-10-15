@@ -100,6 +100,16 @@
             </div>
         </fieldset>
 
+        {% if twofactor_auth %}
+        <fieldset class="w500p inline">
+            <div class="row">
+                {{ form_label(form.user.twoFactorAuthentication) }}
+                {{ form_errors(form.user.twoFactorAuthentication) }}
+                {{ form_widget(form.user.twoFactorAuthentication) }}
+            </div>
+        </fieldset>
+        {% endif %}
+
         {{ form_rest(form.user) }}
     </form>
 

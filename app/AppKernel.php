@@ -28,6 +28,7 @@ class AppKernel extends Kernel
             new Lexik\Bundle\FormFilterBundle\LexikFormFilterBundle(),
             new FOS\OAuthServerBundle\FOSOAuthServerBundle(),
             new Wallabag\UserBundle\WallabagUserBundle(),
+            new Scheb\TwoFactorBundle\SchebTwoFactorBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
