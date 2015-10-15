@@ -11,6 +11,14 @@ function init_filters() {
     }
 }
 
+function init_export() {
+    // no display if export not aviable
+    if ($("div").is("#export")) {
+        $('#button_export').show();
+        $('.button-collapse-right').sideNav({ edge: 'right' });
+    }
+}
+
 $(document).ready(function(){
     // sideNav
     $('.button-collapse').sideNav();
@@ -26,6 +34,7 @@ $(document).ready(function(){
         format: 'dd/mm/yyyy',
     });
     init_filters();
+    init_export();
 
     $('#nav-btn-add-tag').on('click', function(){
        $(".nav-panel-add-tag").toggle(100);

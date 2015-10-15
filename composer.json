@@ -55,7 +55,9 @@
         "j0k3r/graby": "~1.0",
         "friendsofsymfony/user-bundle": "dev-master",
         "friendsofsymfony/oauth-server-bundle": "^1.4@dev",
-        "scheb/two-factor-bundle": "~1.4"
+        "scheb/two-factor-bundle": "~1.4",
+        "grandt/phpepub": "~4.0",
+        "wallabag/phpMobi": "~1.0.0"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "~2.2.0",
@@ -63,6 +65,12 @@
         "phpunit/phpunit": "~4.4",
         "symfony/phpunit-bridge": "~2.7.0"
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/wallabag/phpMobi"
+        }
+    ],
     "scripts": {
         "post-install-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
