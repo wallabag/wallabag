@@ -19,40 +19,46 @@ class SecurityControllerTest extends WallabagCoreTestCase
     public function testLoginWith2Factor()
     {
         $client = $this->getClient();
-        $client->followRedirects();
 
-        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
-        $user = $em
-            ->getRepository('WallabagUserBundle:User')
-            ->findOneByUsername('admin');
-        $user->setTwoFactorAuthentication(true);
-        $em->persist($user);
-        $em->flush();
+        if ($client->getContainer()->getParameter('twofactor_auth')) {
+            $client->followRedirects();
 
-        $this->logInAs('admin');
-        $client->request('GET', '/config');
-        $this->assertContains('trusted computer', $client->getResponse()->getContent());
+            $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+            $user = $em
+                ->getRepository('WallabagUserBundle:User')
+                ->findOneByUsername('admin');
+            $user->setTwoFactorAuthentication(true);
+            $em->persist($user);
+            $em->flush();
 
-        // restore user
-        $user = $em
-            ->getRepository('WallabagUserBundle:User')
-            ->findOneByUsername('admin');
-        $user->setTwoFactorAuthentication(false);
-        $em->persist($user);
-        $em->flush();
+            $this->logInAs('admin');
+            $client->request('GET', '/config');
+            $this->assertContains('trusted computer', $client->getResponse()->getContent());
+
+            // restore user
+            $user = $em
+                ->getRepository('WallabagUserBundle:User')
+                ->findOneByUsername('admin');
+            $user->setTwoFactorAuthentication(false);
+            $em->persist($user);
+            $em->flush();
+        }
     }
 
     public function testTrustedComputer()
     {
         $client = $this->getClient();
-        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
-        $user = $em
-            ->getRepository('WallabagUserBundle:User')
-            ->findOneByUsername('admin');
 
-        $date = new \DateTime();
-        $user->addTrustedComputer('ABCDEF', $date->add(new \DateInterval('P1M')));
-        $this->assertTrue($user->isTrustedComputer('ABCDEF'));
-        $this->assertFalse($user->isTrustedComputer('FEDCBA'));
+        if ($client->getContainer()->getParameter('twofactor_auth')) {
+            $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+            $user = $em
+                ->getRepository('WallabagUserBundle:User')
+                ->findOneByUsername('admin');
+
+            $date = new \DateTime();
+            $user->addTrustedComputer('ABCDEF', $date->add(new \DateInterval('P1M')));
+            $this->assertTrue($user->isTrustedComputer('ABCDEF'));
+            $this->assertFalse($user->isTrustedComputer('FEDCBA'));
+        }
     }
 }
