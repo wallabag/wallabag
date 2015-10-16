@@ -8,6 +8,8 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 /**
  * Stores the locale of the user in the session after the
  * login. This can be used by the LocaleListener afterwards.
+ *
+ * @see http://symfony.com/doc/master/cookbook/session/locale_sticky_session.html
  */
 class UserLocaleListener
 {

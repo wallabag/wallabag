@@ -6,6 +6,9 @@ use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
+/**
+ * @see http://symfony.com/doc/current/cookbook/session/locale_sticky_session.html
+ */
 class LocaleListener implements EventSubscriberInterface
 {
     private $defaultLocale;
