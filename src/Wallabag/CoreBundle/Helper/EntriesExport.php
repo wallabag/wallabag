@@ -4,27 +4,51 @@ namespace Wallabag\CoreBundle\Helper;
 
 use PHPePub\Core\EPub;
 use PHPePub\Core\Structure\OPF\DublinCore;
+use Symfony\Component\HttpFoundation\Response;
 
 class EntriesExport
 {
-    private $format;
-    private $method;
-    private $title;
-    private $entries;
+    private $wallabagUrl;
+    private $logoPath;
+    private $title = '';
+    private $entries = array();
     private $authors = array('wallabag');
-    private $language;
-    private $tags;
+    private $language = '';
+    private $tags = array();
+    private $footerTemplate = '<div style="text-align:center;">
+        <p>Produced by wallabag with %EXPORT_METHOD%</p>
+        <p>Please open <a href="https://github.com/wallabag/wallabag/issues">an issue</a> if you have trouble with the display of this E-Book on your device.</p>
+        </div';
 
-    public function __construct($entries)
+    /**
+     * @param string $wallabagUrl Wallabag instance url
+     * @param string $logoPath    Path to the logo FROM THE BUNDLE SCOPE
+     */
+    public function __construct($wallabagUrl, $logoPath)
     {
+        $this->wallabagUrl = $wallabagUrl;
+        $this->logoPath = $logoPath;
+    }
+
+    /**
+     * Define entries.
+     *
+     * @param array|Entry $entries An array of entries or one entry
+     */
+    public function setEntries($entries)
+    {
+        if (!is_array($entries)) {
+            $this->language = $entries->getLanguage();
+            $entries = array($entries);
+        }
+
         $this->entries = $entries;
 
         foreach ($entries as $entry) {
             $this->tags[] = $entry->getTags();
         }
-        if (count($entries) === 1) {
-            $this->language = $entries[0]->getLanguage();
-        }
+
+        return $this;
     }
 
     /**
@@ -32,29 +56,15 @@ class EntriesExport
      *
      * @param string $method Method to get articles
      */
-    public function setMethod($method)
+    public function updateTitle($method)
     {
-        $this->method = $method;
+        $this->title = $method.' articles';
 
-        switch ($this->method) {
-            case 'All':
-                $this->title = 'All Articles';
-                break;
-            case 'Unread':
-                $this->title = 'Unread articles';
-                break;
-            case 'Starred':
-                $this->title = 'Starred articles';
-                break;
-            case 'Archive':
-                $this->title = 'Archived articles';
-                break;
-            case 'entry':
-                $this->title = $this->entries[0]->getTitle();
-                break;
-            default:
-                break;
+        if ('entry' === $method) {
+            $this->title = $this->entries[0]->getTitle();
         }
+
+        return $this;
     }
 
     /**
@@ -64,30 +74,26 @@ class EntriesExport
      */
     public function exportAs($format)
     {
-        $this->format = $format;
-
-        switch ($this->format) {
+        switch ($format) {
             case 'epub':
-                $this->produceEpub();
-                break;
+                return $this->produceEpub();
 
             case 'mobi':
-                $this->produceMobi();
-                break;
+                return $this->produceMobi();
 
             case 'pdf':
-                $this->producePDF();
-                break;
+                return $this->producePDF();
 
             case 'csv':
-                $this->produceCSV();
-                break;
-
-            default:
-                break;
+                return $this->produceCSV();
         }
+
+        throw new \InvalidArgumentException(sprintf('The format "%s" is not yet supported.', $format));
     }
 
+    /**
+     * Use PHPePub to dump a .epub file.
+     */
     private function produceEpub()
     {
         /*
@@ -98,7 +104,7 @@ class EntriesExport
             ."<html xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:epub=\"http://www.idpf.org/2007/ops\">\n"
             .'<head>'
             ."<meta http-equiv=\"Default-Style\" content=\"text/html; charset=utf-8\" />\n"
-            .'<title>'._('wallabag articles book')."</title>\n"
+            ."<title>wallabag articles book</title>\n"
             ."</head>\n"
             ."<body>\n";
 
@@ -111,17 +117,21 @@ class EntriesExport
          */
 
         $book->setTitle($this->title);
-        $book->setIdentifier($this->title, EPub::IDENTIFIER_URI); // Could also be the ISBN number, prefered for published books, or a UUID.
-        $book->setLanguage($this->language); // Not needed, but included for the example, Language is mandatory, but EPub defaults to "en". Use RFC3066 Language codes, such as "en", "da", "fr" etc.
-        $book->setDescription(_('Some articles saved on my wallabag'));
+        // Could also be the ISBN number, prefered for published books, or a UUID.
+        $book->setIdentifier($this->title, EPub::IDENTIFIER_URI);
+        // Not needed, but included for the example, Language is mandatory, but EPub defaults to "en". Use RFC3066 Language codes, such as "en", "da", "fr" etc.
+        $book->setLanguage($this->language);
+        $book->setDescription('Some articles saved on my wallabag');
 
         foreach ($this->authors as $author) {
             $book->setAuthor($author, $author);
         }
 
-        $book->setPublisher('wallabag', 'wallabag'); // I hope this is a non existant address :)
-        $book->setDate(time()); // Strictly not needed as the book date defaults to time().
-        $book->setSourceURL("http://$_SERVER[HTTP_HOST]");
+        // I hope this is a non existant address :)
+        $book->setPublisher('wallabag', 'wallabag');
+        // Strictly not needed as the book date defaults to time().
+        $book->setDate(time());
+        $book->setSourceURL($this->wallabagUrl);
 
         $book->addDublinCoreMetadata(DublinCore::CONTRIBUTOR, 'PHP');
         $book->addDublinCoreMetadata(DublinCore::CONTRIBUTOR, 'wallabag');
@@ -129,12 +139,11 @@ class EntriesExport
         /*
          * Front page
          */
+        if (file_exists($this->logoPath)) {
+            $book->setCoverImage('Cover.png', file_get_contents($this->logoPath), 'image/png');
+        }
 
-        $book->setCoverImage('Cover.png', file_get_contents('themes/_global/img/appicon/apple-touch-icon-152.png'), 'image/png');
-
-        $cover = $content_start.'<div style="text-align:center;"><p>'._('Produced by wallabag with PHPePub').'</p><p>'._('Please open <a href="https://github.com/wallabag/wallabag/issues" >an issue</a> if you have trouble with the display of this E-Book on your device.').'</p></div>'.$bookEnd;
-
-        $book->addChapter('Notices', 'Cover2.html', $cover);
+        $book->addChapter('Notices', 'Cover2.html', $content_start.$this->getExportInformation('PHPePub').$bookEnd);
 
         $book->buildTOC();
 
@@ -142,18 +151,31 @@ class EntriesExport
          * Adding actual entries
          */
 
-        foreach ($this->entries as $entry) { //set tags as subjects
-                foreach ($this->tags as $tag) {
-                    $book->setSubject($tag['value']);
-                }
+        // set tags as subjects
+        foreach ($this->entries as $entry) {
+            foreach ($this->tags as $tag) {
+                $book->setSubject($tag['value']);
+            }
 
             $chapter = $content_start.$entry->getContent().$bookEnd;
             $book->addChapter($entry->getTitle(), htmlspecialchars($entry->getTitle()).'.html', $chapter, true, EPub::EXTERNAL_REF_ADD);
         }
-        $book->finalize();
-        $book->sendBook($this->title);
+
+        return Response::create(
+            $book->getBook(),
+            200,
+            array(
+                'Content-Description' => 'File Transfer',
+                'Content-type' => 'application/epub+zip',
+                'Content-Disposition' => 'attachment; filename="'.$this->title.'.epub"',
+                'Content-Transfer-Encoding' => 'binary',
+            )
+        )->send();
     }
 
+    /**
+     * Use PHPMobi to dump a .mobi file.
+     */
     private function produceMobi()
     {
         $mobi = new \MOBI();
@@ -162,7 +184,6 @@ class EntriesExport
         /*
          * Book metadata
          */
-
         $content->set('title', $this->title);
         $content->set('author', implode($this->authors));
         $content->set('subject', $this->title);
@@ -170,15 +191,15 @@ class EntriesExport
         /*
          * Front page
          */
-
-        $content->appendParagraph('<div style="text-align:center;" ><p>'._('Produced by wallabag with PHPMobi').'</p><p>'._('Please open <a href="https://github.com/wallabag/wallabag/issues" >an issue</a> if you have trouble with the display of this E-Book on your device.').'</p></div>');
-        $content->appendImage(imagecreatefrompng('themes/_global/img/appicon/apple-touch-icon-152.png'));
+        $content->appendParagraph($this->getExportInformation('PHPMobi'));
+        if (file_exists($this->logoPath)) {
+            $content->appendImage(imagecreatefrompng($this->logoPath));
+        }
         $content->appendPageBreak();
 
         /*
          * Adding actual entries
          */
-
         foreach ($this->entries as $entry) {
             $content->appendChapterTitle($entry->getTitle());
             $content->appendParagraph($entry->getContent());
@@ -189,10 +210,22 @@ class EntriesExport
         // the browser inside Kindle Devices doesn't likes special caracters either, we limit to A-z/0-9
         $this->title = preg_replace('/[^A-Za-z0-9\-]/', '', $this->title);
 
-        // we offer file to download
-        $mobi->download($this->title.'.mobi');
+        return Response::create(
+            $mobi->toString(),
+            200,
+            array(
+                'Accept-Ranges' => 'bytes',
+                'Content-Description' => 'File Transfer',
+                'Content-type' => 'application/x-mobipocket-ebook',
+                'Content-Disposition' => 'attachment; filename="'.$this->title.'.mobi"',
+                'Content-Transfer-Encoding' => 'binary',
+            )
+        )->send();
     }
 
+    /**
+     * Use TCPDF to dump a .pdf file.
+     */
     private function producePDF()
     {
         $pdf = new \TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
@@ -200,7 +233,6 @@ class EntriesExport
         /*
          * Book metadata
          */
-
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('wallabag');
         $pdf->SetTitle($this->title);
@@ -210,19 +242,14 @@ class EntriesExport
         /*
          * Front page
          */
-
         $pdf->AddPage();
-        $intro = '<h1>'.$this->title.'</h1><div style="text-align:center;" >
-        <p>'._('Produced by wallabag with tcpdf').'</p>
-        <p>'._('Please open <a href="https://github.com/wallabag/wallabag/issues" >an issue</a> if you have trouble with the display of this E-Book on your device.').'</p>
-        <img src="themes/_global/img/appicon/apple-touch-icon-152.png" /></div>';
+        $intro = '<h1>'.$this->title.'</h1>'.$this->getExportInformation('tcpdf');
 
         $pdf->writeHTMLCell(0, 0, '', '', $intro, 0, 1, 0, true, '', true);
 
         /*
          * Adding actual entries
          */
-
         foreach ($this->entries as $entry) {
             foreach ($this->tags as $tag) {
                 $pdf->SetKeywords($tag['value']);
@@ -231,33 +258,82 @@ class EntriesExport
             $pdf->AddPage();
             $html = '<h1>'.$entry->getTitle().'</h1>';
             $html .= $entry->getContent();
+
             $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
         }
 
         // set image scale factor
         $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 
-        $pdf->Output($this->title.'.pdf', 'D');
+        return Response::create(
+            $pdf->Output('', 'S'),
+            200,
+            array(
+                'Content-Description' => 'File Transfer',
+                'Content-type' => 'application/pdf',
+                'Content-Disposition' => 'attachment; filename="'.$this->title.'.pdf"',
+                'Content-Transfer-Encoding' => 'binary',
+            )
+        )->send();
     }
 
+    /**
+     * Inspired from CsvFileDumper.
+     */
     private function produceCSV()
     {
-        header('Content-type: application/csv');
-        header('Content-Disposition: attachment; filename="'.$this->title.'.csv"');
-        header('Content-Transfer-Encoding: UTF-8');
+        $delimiter = ';';
+        $enclosure = '"';
+        $handle = fopen('php://memory', 'rb+');
 
-        $output = fopen('php://output', 'a');
+        fputcsv($handle, array('Title', 'URL', 'Content', 'Tags', 'MIME Type', 'Language'), $delimiter, $enclosure);
 
-        fputcsv($output, array('Title', 'URL', 'Content', 'Tags', 'MIME Type', 'Language'));
         foreach ($this->entries as $entry) {
-            fputcsv($output, array($entry->getTitle(),
-                                   $entry->getURL(),
-                                   $entry->getContent(),
-                                   implode(', ', $entry->getTags()->toArray()),
-                                   $entry->getMimetype(),
-                                   $entry->getLanguage(), ));
+            fputcsv(
+                $handle,
+                array(
+                    $entry->getTitle(),
+                    $entry->getURL(),
+                    $entry->getContent(),
+                    implode(', ', $entry->getTags()->toArray()),
+                    $entry->getMimetype(),
+                    $entry->getLanguage(),
+                ),
+                $delimiter,
+                $enclosure
+            );
         }
-        fclose($output);
-        exit();
+
+        rewind($handle);
+        $output = stream_get_contents($handle);
+        fclose($handle);
+
+        return Response::create(
+            $output,
+            200,
+            array(
+                'Content-type' => 'application/csv',
+                'Content-Disposition' => 'attachment; filename="'.$this->title.'.csv"',
+                'Content-Transfer-Encoding' => 'UTF-8',
+            )
+        )->send();
+    }
+
+    /**
+     * Return a kind of footer / information for the epub.
+     *
+     * @param string $type Generator of the export, can be: tdpdf, PHPePub, PHPMobi
+     *
+     * @return string
+     */
+    private function getExportInformation($type)
+    {
+        $info = str_replace('%EXPORT_METHOD%', $type, $this->footerTemplate);
+
+        if ('tcpdf' === $type) {
+            return str_replace('%IMAGE%', '<img src="'.$this->logoPath.'" />', $info);
+        }
+
+        return str_replace('%IMAGE%', '', $info);
     }
 }

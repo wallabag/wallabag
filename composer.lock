@@ -3796,21 +3796,24 @@
             "time": "2015-11-05 12:49:06"
         },
         {
-            "name": "wallabag/phpMobi",
-            "version": "1.0.0",
+            "name": "wallabag/php-mobi",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wallabag/phpMobi.git",
-                "reference": "5137696542f08f8e6a0603c01970c6d3eca9873d"
+                "reference": "1cd7d022fe6be838535d6bba917d19cc48dcf487"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wallabag/phpMobi/zipball/5137696542f08f8e6a0603c01970c6d3eca9873d",
-                "reference": "5137696542f08f8e6a0603c01970c6d3eca9873d",
+                "url": "https://api.github.com/repos/wallabag/phpMobi/zipball/1cd7d022fe6be838535d6bba917d19cc48dcf487",
+                "reference": "1cd7d022fe6be838535d6bba917d19cc48dcf487",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
+            },
+            "replace": {
+                "wallabag/phpmobi": "*"
             },
             "type": "library",
             "autoload": {
@@ -3818,19 +3821,27 @@
                     "MOBIClass/MOBI.php"
                 ]
             },
+            "license": [
+                "Apache-2.0"
+            ],
             "authors": [
+                {
+                    "name": "Sander Kromwijk",
+                    "email": "s.kromwijk@gmail.co",
+                    "role": "Original developer"
+                },
                 {
                     "name": "Nicolas Lœuillet",
                     "email": "nicolas@loeuillet.org",
                     "homepage": "http://www.cdetc.fr"
                 }
             ],
-            "description": "An experimental Mobipocket file creator in PHP.",
+            "description": "A Mobipocket file (.mobi) creator in PHP.",
             "homepage": "https://github.com/wallabag/phpMobi",
             "support": {
-                "source": "https://github.com/wallabag/phpMobi/tree/1.0.0"
+                "source": "https://github.com/wallabag/phpMobi/tree/1.0.1"
             },
-            "time": "2015-01-19 12:43:17"
+            "time": "2015-10-16 08:42:42"
         },
         {
             "name": "willdurand/hateoas",
