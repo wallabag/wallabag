@@ -71,7 +71,7 @@ class ExportControllerTest extends WallabagCoreTestCase
 
         $headers = $client->getResponse()->headers;
         $this->assertEquals('application/x-mobipocket-ebook', $headers->get('content-type'));
-        $this->assertEquals('attachment; filename="testtitleentry1.mobi"', $headers->get('content-disposition'));
+        $this->assertEquals('attachment; filename="'.preg_replace('/[^A-Za-z0-9\-]/', '', $content->getTitle()).'.mobi"', $headers->get('content-disposition'));
         $this->assertEquals('binary', $headers->get('content-transfer-encoding'));
     }
 
