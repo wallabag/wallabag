@@ -54,6 +54,7 @@ services:
         arguments:
             - @wallabag_core.graby
             - @wallabag_core.rule_based_tagger
+            - @logger
 
     wallabag_core.rule_based_tagger:
         class: Wallabag\CoreBundle\Helper\RuleBasedTagger

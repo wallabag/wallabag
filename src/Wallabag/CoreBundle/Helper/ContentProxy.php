@@ -3,6 +3,7 @@
 namespace Wallabag\CoreBundle\Helper;
 
 use Graby\Graby;
+use Psr\Log\LoggerInterface as Logger;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Tools\Utils;
 
@@ -14,11 +15,13 @@ class ContentProxy
 {
     protected $graby;
     protected $tagger;
+    protected $logger;
 
-    public function __construct(Graby $graby, RuleBasedTagger $tagger)
+    public function __construct(Graby $graby, RuleBasedTagger $tagger, Logger $logger)
     {
         $this->graby  = $graby;
         $this->tagger = $tagger;
+        $this->logger = $logger;
     }
 
     /**
@@ -61,7 +64,14 @@ class ContentProxy
             $entry->setPreviewPicture($content['open_graph']['og_image']);
         }
 
-        $this->tagger->tag($entry);
+        try {
+            $this->tagger->tag($entry);
+        } catch (\Exception $e) {
+            $this->logger->error('Error while trying to automatically tag an entry.', array(
+                'entry_url' => $url,
+                'error_msg' => $e->getMessage(),
+            ));
+        }
 
         return $entry;
     }

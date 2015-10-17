@@ -29,7 +29,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
                 'language' => '',
             ));
 
-        $proxy = new ContentProxy($graby, $tagger);
+        $proxy = new ContentProxy($graby, $tagger, $this->getLoggerMock());
         $entry = $proxy->updateEntry(new Entry(new User()), 'http://0.0.0.0');
 
         $this->assertEquals('http://0.0.0.0', $entry->getUrl());
@@ -67,7 +67,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
                 ),
             ));
 
-        $proxy = new ContentProxy($graby, $tagger);
+        $proxy = new ContentProxy($graby, $tagger, $this->getLoggerMock());
         $entry = $proxy->updateEntry(new Entry(new User()), 'http://domain.io');
 
         $this->assertEquals('http://domain.io', $entry->getUrl());
@@ -106,7 +106,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
                 ),
             ));
 
-        $proxy = new ContentProxy($graby, $tagger);
+        $proxy = new ContentProxy($graby, $tagger, $this->getLoggerMock());
         $entry = $proxy->updateEntry(new Entry(new User()), 'http://0.0.0.0');
 
         $this->assertEquals('http://1.1.1.1', $entry->getUrl());
@@ -125,5 +125,10 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
             ->setMethods(array('tag'))
             ->disableOriginalConstructor()
             ->getMock();
+    }
+
+    private function getLoggerMock()
+    {
+        return $this->getMock('Psr\Log\LoggerInterface');
     }
 }
