@@ -113,4 +113,38 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertGreaterThan(1, $csv);
         $this->assertEquals('Title;URL;Content;Tags;"MIME Type";Language', $csv[0]);
     }
+
+    public function testJsonExport()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        ob_start();
+        $crawler = $client->request('GET', '/export/all.json');
+        ob_end_clean();
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $headers = $client->getResponse()->headers;
+        $this->assertEquals('application/json', $headers->get('content-type'));
+        $this->assertEquals('attachment; filename="All articles.json"', $headers->get('content-disposition'));
+        $this->assertEquals('UTF-8', $headers->get('content-transfer-encoding'));
+    }
+
+    public function testXmlExport()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        ob_start();
+        $crawler = $client->request('GET', '/export/unread.xml');
+        ob_end_clean();
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $headers = $client->getResponse()->headers;
+        $this->assertEquals('application/xml', $headers->get('content-type'));
+        $this->assertEquals('attachment; filename="Unread articles.xml"', $headers->get('content-disposition'));
+        $this->assertEquals('UTF-8', $headers->get('content-transfer-encoding'));
+    }
 }

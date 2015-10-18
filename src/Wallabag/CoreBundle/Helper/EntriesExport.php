@@ -5,6 +5,10 @@ namespace Wallabag\CoreBundle\Helper;
 use PHPePub\Core\EPub;
 use PHPePub\Core\Structure\OPF\DublinCore;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 class EntriesExport
 {
@@ -86,6 +90,12 @@ class EntriesExport
 
             case 'csv':
                 return $this->produceCSV();
+
+            case 'json':
+                return $this->produceJSON();
+
+            case 'xml':
+                return $this->produceXML();
         }
 
         throw new \InvalidArgumentException(sprintf('The format "%s" is not yet supported.', $format));
@@ -317,6 +327,51 @@ class EntriesExport
                 'Content-Transfer-Encoding' => 'UTF-8',
             )
         )->send();
+    }
+
+    private function produceJSON()
+    {
+        $serializer = $this->prepareSerializingContent();
+        $jsonContent = $serializer->serialize($this->entries, 'json');
+
+        return Response::create(
+            $jsonContent,
+            200,
+            array(
+                'Content-type' => 'application/json',
+                'Content-Disposition' => 'attachment; filename="'.$this->title.'.json"',
+                'Content-Transfer-Encoding' => 'UTF-8',
+            )
+        )->send();
+    }
+
+    private function produceXML()
+    {
+        $serializer = $this->prepareSerializingContent();
+        $xmlContent = $serializer->serialize($this->entries, 'xml');
+
+        return Response::create(
+            $xmlContent,
+            200,
+            array(
+                'Content-type' => 'application/xml',
+                'Content-Disposition' => 'attachment; filename="'.$this->title.'.xml"',
+                'Content-Transfer-Encoding' => 'UTF-8',
+            )
+        )->send();
+    }
+    /**
+     * Return a Serializer object for producing processes that need it (JSON & XML).
+     *
+     * @return Serializer
+     */
+    private function prepareSerializingContent()
+    {
+        $encoders = array(new XmlEncoder(), new JsonEncoder());
+        $normalizers = array(new ObjectNormalizer());
+        $normalizers[0]->setIgnoredAttributes(array('user', 'createdAt', 'updatedAt'));
+
+        return new Serializer($normalizers, $encoders);
     }
 
     /**
