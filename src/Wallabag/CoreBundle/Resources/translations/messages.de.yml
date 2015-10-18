@@ -1,0 +1,130 @@
+#Login
+Keep me logged in: 'Angemeldet bleiben'
+Forgot your password?: 'Kennwort vergessen?'
+Login: 'Anmelden'
+Back to login: 'Zurück zur Anmeldung'
+Send: 'Senden'
+"Enter your email address below and we'll send you password reset instructions.": "Gib unten deine E-Mail-Adresse ein und wir senden dir eine Anleitung für das Zurücksetzen deines Kennworts."
+
+# Menu
+unread: 'ungelesen'
+starred: 'favoriten'
+archive: 'archiv'
+all: 'alle artikel'
+tags: 'tags'
+config: 'konfiguration'
+howto: 'how-to'
+logout: 'abmelden'
+Filtered: 'Gefiltert'
+About: 'Über'
+
+# Header
+Back to unread articles: 'Zurück zu ungelesenen Artikeln'
+Add a new entry: 'Neuen Artikel hinzufügen'
+Search: 'Suche'
+Filter entries: 'Artikel filtern'
+Enter your search here: 'Suchbegriff hier eingeben'
+Save new entry: 'Neuen Artikel speichern'
+
+# Config screen
+Settings: 'Einstellungen'
+User information: 'Benutzer-Information'
+Password: 'Kennwort'
+RSS: 'RSS'
+Add a user: 'Benutzer hinzufügen'
+Theme: 'Theme'
+Items per page: 'Einträge pro Seite'
+Language: 'Sprache'
+Save: 'Speichern'
+RSS token: 'RSS-Token'
+Name: 'Name'
+Email: 'E-Mail-Adresse'
+No token: 'Kein Token'
+Reset your token: 'Token zurücksetzen'
+Create your token: 'Token erstellen'
+Rss limit: 'RSS-Limit'
+RSS links: 'RSS-Links'
+'RSS feeds provided by wallabag allow you to read your saved articles with your favourite RSS reader. You need to generate a token first.': 'Die RSS-Feeds von wallabag erlauben es dir, deine gespeicherten Artikel mit deinem bevorzugten RSS-Reader zu lesen. Vorher musst du jedoch einen Token erstellen.'
+Old password: 'Altes Kennwort'
+New password: 'Neues Kennwort'
+Repeat new password: 'Neues Kennwort wiederholen'
+Username: 'Benutzername'
+
+# Entries
+'estimated reading time': 'geschätzte Lesezeit'
+original: original
+Toggle mark as read: 'Gelesen-Status ändern'
+Toggle favorite: 'Favoriten-Status ändern'
+Delete: 'Löschen'
+
+# Filters
+Filters: 'Filter'
+Status: 'Status'
+Archived: 'Archiviert'
+Starred: 'Favorisiert'
+Preview picture: 'Vorschaubild'
+Has a preview picture: 'Vorschaubild vorhanden'
+Reading time in minutes: 'Lesezeit in Minuten'
+from: 'von'
+to: 'bis'
+website.com: 'website.com'
+Domain name: 'Domain-Name'
+Creation date: 'Erstellungsdatum'
+dd/mm/yyyy: 'dd.mm.yyyy'
+Clear: 'zurücksetzen'
+Filter: 'Filter'
+
+# About
+Who is behind wallabag: "Wer steht hinter wallabag"
+Getting help: "Hilfe bekommen"
+Helping wallabag: "wallabag unterstützen"
+Developed by: "Entwickelt von"
+website: "Webseite"
+And many others contributors ♥: "Und vielen anderen Unterstützern ♥"
+on GitHub: "auf GitHub"
+Project website: "Projektwebseite"
+License: "Lizenz"
+Version: "Version"
+Documentation: "Dokumentation"
+Bug reports: "Bugs"
+On our support website: "Auf unserer Support-Webseite"
+or: "oder"
+"wallabag is free and opensource. You can help us:": "wallabag ist kostenlos und Open-Source. Du kannst uns helfen:"
+"by contributing to the project:": "indem du zu dem Projekt beiträgst:"
+an issue lists all our needs: "ein Issue listet alle unsere Bedürfnisse:"
+via Paypal: "via PayPal"
+via Flattr: "via Flattr"
+
+# Howto
+Form: Formular
+Thanks to this form: "Danke an dieses Formular"
+Browser addons: "Browser-Addons"
+Mobile apps: "Apps"
+Bookmarklet: "Bookmarklet"
+Standard Firefox Add-On: "Firefox-Erweiterung"
+Chrome Extension: "Chrome-Erweiterung"
+download the application: "herunterladen"
+"Drag &amp; drop this link to your bookmarks bar:": "Ziehe diesen Link in deine Lesezeichenleiste:"
+
+# Flash messages
+Information updated: "Information aktualisiert"
+"Config saved. Some parameters will be considered after disconnection.": "Konfiguration gespeichert. Einige Einstellungen werden erst nach einer erneuten Anmeldung übernommen."
+RSS information updated: "RSS-Informationen aktualisiert"
+Password updated: "Kennwort aktualisiert"
+Entry starred: "Artikel favorisiert"
+Entry unstarred: "Artikel defavorisiert"
+Entry archived: "Artikel archiviert"
+Entry unarchived: "Artikel dearchiviert"
+Entry deleted: "Artikel gelöscht"
+
+# Entry
+Mark as read: 'Als gelesen markieren'
+Favorite: 'Favorisieren'
+back: 'zurück'
+original article: 'Original-Artikel'
+Add a tag: 'Tag hinzufügen'
+Share: 'Teilen'
+Download: 'Herunterladen'
+Does this article appear wrong?: "Erscheint dieser Artikel falsch?"
+Problems?: 'Probleme?'
+Edit title: "Titel ändern"
