@@ -9,16 +9,20 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ConfigType extends AbstractType
 {
     private $themes = array();
+    private $languages = array();
 
     /**
-     * @param array $themes Themes come from the LiipThemeBundle (liip_theme.themes)
+     * @param array $themes    Themes come from the LiipThemeBundle (liip_theme.themes)
+     * @param array $languages Languages come from configuration, array just code language as key and label as value
      */
-    public function __construct($themes)
+    public function __construct($themes, $languages)
     {
         $this->themes = array_combine(
             $themes,
             array_map(function ($s) { return ucwords(strtolower(str_replace('-', ' ', $s))); }, $themes)
         );
+
+        $this->languages = $languages;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -29,7 +33,9 @@ class ConfigType extends AbstractType
                 'choices_as_values' => true,
             ))
             ->add('items_per_page')
-            ->add('language')
+            ->add('language', 'choice', array(
+                'choices' => $this->languages,
+            ))
             ->add('save', 'submit')
         ;
     }

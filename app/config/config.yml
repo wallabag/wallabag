@@ -25,6 +25,11 @@ framework:
     fragments:       ~
     http_method_override: true
 
+wallabag_core:
+    languages:
+        en: 'English'
+        fr: 'Français'
+
 # Twig Configuration
 twig:
     debug:            "%kernel.debug%"
