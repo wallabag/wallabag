@@ -28,7 +28,10 @@ class TaggingRule
      * @var string
      *
      * @Assert\NotBlank()
-     * @RulerZAssert\ValidRule(allowed_variables={"title", "url", "isArchived", "isStared", "content", "language", "mimetype", "readingTime", "domainName"})
+     * @RulerZAssert\ValidRule(
+     *  allowed_variables={"title", "url", "isArchived", "isStared", "content", "language", "mimetype", "readingTime", "domainName"},
+     *  allowed_operators={">", "<", ">=", "<=", "=", "is", "!=", "and", "not", "or"}
+     * )
      * @ORM\Column(name="rule", type="string", nullable=false)
      */
     private $rule;
