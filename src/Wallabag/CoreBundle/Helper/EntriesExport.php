@@ -331,11 +331,8 @@ class EntriesExport
 
     private function produceJSON()
     {
-        $serializer = $this->prepareSerializingContent();
-        $jsonContent = $serializer->serialize($this->entries, 'json');
-
         return Response::create(
-            $jsonContent,
+            $this->prepareSerializingContent('json'),
             200,
             array(
                 'Content-type' => 'application/json',
@@ -347,11 +344,8 @@ class EntriesExport
 
     private function produceXML()
     {
-        $serializer = $this->prepareSerializingContent();
-        $xmlContent = $serializer->serialize($this->entries, 'xml');
-
         return Response::create(
-            $xmlContent,
+            $this->prepareSerializingContent('xml'),
             200,
             array(
                 'Content-type' => 'application/xml',
@@ -360,18 +354,20 @@ class EntriesExport
             )
         )->send();
     }
+
     /**
      * Return a Serializer object for producing processes that need it (JSON & XML).
      *
      * @return Serializer
      */
-    private function prepareSerializingContent()
+    private function prepareSerializingContent($format)
     {
         $encoders = array(new XmlEncoder(), new JsonEncoder());
         $normalizers = array(new ObjectNormalizer());
         $normalizers[0]->setIgnoredAttributes(array('user', 'createdAt', 'updatedAt'));
+        $serializer = new Serializer($normalizers, $encoders);
 
-        return new Serializer($normalizers, $encoders);
+        return $serializer->serialize($this->entries, $format);
     }
 
     /**
