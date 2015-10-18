@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "657caf7a678eb246a7055756dfa47d5d",
-    "content-hash": "95a1be6941e76e6a72622f183f4c0425",
+    "hash": "8719c5ec3c13338ff792ce5ed8d12926",
+    "content-hash": "3f28af906ef3d4eaac41583bfcc5bd85",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -2731,16 +2731,16 @@
         },
         {
             "name": "kphoen/rulerz-bundle",
-            "version": "dev-master",
+            "version": "0.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/K-Phoen/RulerZBundle.git",
-                "reference": "86148898a052e349f880537c20d8102f617ebc17"
+                "reference": "5d10ab2093b2192619c83333506c574d726cee07"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/K-Phoen/RulerZBundle/zipball/86148898a052e349f880537c20d8102f617ebc17",
-                "reference": "86148898a052e349f880537c20d8102f617ebc17",
+                "url": "https://api.github.com/repos/K-Phoen/RulerZBundle/zipball/5d10ab2093b2192619c83333506c574d726cee07",
+                "reference": "5d10ab2093b2192619c83333506c574d726cee07",
                 "shasum": ""
             },
             "require": {
@@ -2777,7 +2777,7 @@
                 "rulerz",
                 "specification"
             ],
-            "time": "2015-11-01 11:57:49"
+            "time": "2015-11-01 11:57:02"
         },
         {
             "name": "kriswallsmith/assetic",
@@ -5840,8 +5840,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "friendsofsymfony/user-bundle": 20,
-        "friendsofsymfony/oauth-server-bundle": 20,
-        "kphoen/rulerz-bundle": 20
+        "friendsofsymfony/oauth-server-bundle": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
