@@ -29,6 +29,7 @@ wallabag_core:
     languages:
         en: 'English'
         fr: 'Français'
+        de: 'Deutsch'
 
 # Twig Configuration
 twig:
