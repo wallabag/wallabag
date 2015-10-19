@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Hateoas\Configuration\Annotation as Hateoas;
+use Symfony\Component\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\XmlRoot;
 use Wallabag\UserBundle\Entity\User;
 
@@ -27,6 +28,8 @@ class Entry
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @Groups({"entries_for_user", "export_all"})
      */
     private $id;
 
@@ -34,6 +37,8 @@ class Entry
      * @var string
      *
      * @ORM\Column(name="title", type="text", nullable=true)
+     *
+     * @Groups({"entries_for_user", "export_all"})
      */
     private $title;
 
@@ -42,6 +47,8 @@ class Entry
      *
      * @Assert\NotBlank()
      * @ORM\Column(name="url", type="text", nullable=true)
+     *
+     * @Groups({"entries_for_user", "export_all"})
      */
     private $url;
 
@@ -49,6 +56,8 @@ class Entry
      * @var bool
      *
      * @ORM\Column(name="is_archived", type="boolean")
+     *
+     * @Groups({"entries_for_user", "export_all"})
      */
     private $isArchived = false;
 
@@ -56,6 +65,8 @@ class Entry
      * @var bool
      *
      * @ORM\Column(name="is_starred", type="boolean")
+     *
+     * @Groups({"entries_for_user", "export_all"})
      */
     private $isStarred = false;
 
@@ -63,6 +74,8 @@ class Entry
      * @var string
      *
      * @ORM\Column(name="content", type="text", nullable=true)
+     *
+     * @Groups({"entries_for_user", "export_all"})
      */
     private $content;
 
@@ -70,6 +83,8 @@ class Entry
      * @var date
      *
      * @ORM\Column(name="created_at", type="datetime")
+     *
+     * @Groups({"export_all"})
      */
     private $createdAt;
 
@@ -77,6 +92,8 @@ class Entry
      * @var date
      *
      * @ORM\Column(name="updated_at", type="datetime")
+     *
+     * @Groups({"export_all"})
      */
     private $updatedAt;
 
@@ -84,6 +101,8 @@ class Entry
      * @var string
      *
      * @ORM\Column(name="comments", type="text", nullable=true)
+     *
+     * @Groups({"export_all"})
      */
     private $comments;
 
@@ -91,6 +110,8 @@ class Entry
      * @var string
      *
      * @ORM\Column(name="mimetype", type="text", nullable=true)
+     *
+     * @Groups({"entries_for_user", "export_all"})
      */
     private $mimetype;
 
@@ -98,6 +119,8 @@ class Entry
      * @var string
      *
      * @ORM\Column(name="language", type="text", nullable=true)
+     *
+     * @Groups({"entries_for_user", "export_all"})
      */
     private $language;
 
@@ -105,6 +128,8 @@ class Entry
      * @var int
      *
      * @ORM\Column(name="reading_time", type="integer", nullable=true)
+     *
+     * @Groups({"entries_for_user", "export_all"})
      */
     private $readingTime;
 
@@ -112,6 +137,8 @@ class Entry
      * @var string
      *
      * @ORM\Column(name="domain_name", type="text", nullable=true)
+     *
+     * @Groups({"entries_for_user", "export_all"})
      */
     private $domainName;
 
@@ -119,6 +146,8 @@ class Entry
      * @var string
      *
      * @ORM\Column(name="preview_picture", type="text", nullable=true)
+     *
+     * @Groups({"entries_for_user", "export_all"})
      */
     private $previewPicture;
 
@@ -126,17 +155,23 @@ class Entry
      * @var bool
      *
      * @ORM\Column(name="is_public", type="boolean", nullable=true, options={"default" = false})
+     *
+     * @Groups({"export_all"})
      */
     private $isPublic;
 
     /**
      * @ORM\ManyToOne(targetEntity="Wallabag\UserBundle\Entity\User", inversedBy="entries")
+     *
+     * @Groups({"export_all"})
      */
     private $user;
 
     /**
      * @ORM\ManyToMany(targetEntity="Tag", inversedBy="entries", cascade={"persist"})
      * @ORM\JoinTable
+     *
+     * @Groups({"entries_for_user", "export_all"})
      */
     private $tags;
 
