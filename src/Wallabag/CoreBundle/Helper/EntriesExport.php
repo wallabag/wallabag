@@ -5,13 +5,9 @@ namespace Wallabag\CoreBundle\Helper;
 use PHPePub\Core\EPub;
 use PHPePub\Core\Structure\OPF\DublinCore;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\Serializer\Encoder\XmlEncoder;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Normalizer\PropertyNormalizer;
-use Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader;
-use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
-use Doctrine\Common\Annotations\AnnotationReader;
+use JMS\Serializer;
+use JMS\Serializer\SerializerBuilder;
+use JMS\Serializer\SerializationContext;
 
 class EntriesExport
 {
@@ -365,12 +361,9 @@ class EntriesExport
      */
     private function prepareSerializingContent($format)
     {
-        $encoders = array(new XmlEncoder(), new JsonEncoder());
-        $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
-        $normalizers = array(new PropertyNormalizer($classMetadataFactory));
-        $serializer = new Serializer($normalizers, $encoders);
+        $serializer = SerializerBuilder::create()->build();
 
-        return $serializer->serialize($this->entries, $format, array('groups' => array('entries_for_user')));
+        return $serializer->serialize($this->entries, $format, SerializationContext::create()->setGroups(array('entries_for_user')));
     }
 
     /**
