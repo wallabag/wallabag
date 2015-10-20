@@ -27,6 +27,15 @@ class Utils
     }
 
     /**
+     * @param $words
+     * @return float
+     */
+    public static function convertWordsToMinutes($words)
+    {
+        return floor($words / 200);
+    }
+
+    /**
      * For a given text, we calculate reading time for an article
      * based on 200 words per minute.
      *
@@ -36,6 +45,6 @@ class Utils
      */
     public static function getReadingTime($text)
     {
-        return floor(str_word_count(strip_tags($text)) / 200);
+        return self::convertWordsToMinutes(str_word_count(strip_tags($text)));
     }
 }

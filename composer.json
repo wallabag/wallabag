@@ -59,7 +59,8 @@
         "scheb/two-factor-bundle": "~1.4.0",
         "grandt/phpepub": "~4.0",
         "wallabag/php-mobi": "~1.0.0",
-        "kphoen/rulerz-bundle": "~0.10"
+        "kphoen/rulerz-bundle": "~0.10",
+        "guzzlehttp/guzzle": "^5.2.0"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "~2.2.0",

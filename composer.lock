@@ -117,16 +117,16 @@
         },
         {
             "name": "doctrine/cache",
-            "version": "v1.5.4",
+            "version": "v1.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/cache.git",
-                "reference": "47cdc76ceb95cc591d9c79a36dc3794975b5d136"
+                "reference": "47c7128262da274f590ae6f86eb137a7a64e82af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/cache/zipball/47cdc76ceb95cc591d9c79a36dc3794975b5d136",
-                "reference": "47cdc76ceb95cc591d9c79a36dc3794975b5d136",
+                "url": "https://api.github.com/repos/doctrine/cache/zipball/47c7128262da274f590ae6f86eb137a7a64e82af",
+                "reference": "47c7128262da274f590ae6f86eb137a7a64e82af",
                 "shasum": ""
             },
             "require": {
@@ -183,7 +183,7 @@
                 "cache",
                 "caching"
             ],
-            "time": "2015-12-19 05:03:47"
+            "time": "2015-12-03 10:50:37"
         },
         {
             "name": "doctrine/collections",
@@ -981,17 +981,17 @@
         },
         {
             "name": "friendsofsymfony/rest-bundle",
-            "version": "1.7.6",
+            "version": "1.7.4",
             "target-dir": "FOS/RestBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSRestBundle.git",
-                "reference": "f95b2f141748e9a5e2ddae833f60c38417aee8c3"
+                "reference": "64ba918b1eb47acb5aa7fef1ce95623235b53775"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSRestBundle/zipball/f95b2f141748e9a5e2ddae833f60c38417aee8c3",
-                "reference": "f95b2f141748e9a5e2ddae833f60c38417aee8c3",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSRestBundle/zipball/64ba918b1eb47acb5aa7fef1ce95623235b53775",
+                "reference": "64ba918b1eb47acb5aa7fef1ce95623235b53775",
                 "shasum": ""
             },
             "require": {
@@ -1063,7 +1063,7 @@
             "keywords": [
                 "rest"
             ],
-            "time": "2015-12-20 13:45:30"
+            "time": "2015-12-05 14:55:07"
         },
         {
             "name": "friendsofsymfony/user-bundle",
@@ -2313,16 +2313,16 @@
         },
         {
             "name": "j0k3r/graby",
-            "version": "1.0.8",
+            "version": "1.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby.git",
-                "reference": "bf152ccc6629bdd63b1e5e8b297c2912516b5f1e"
+                "reference": "c9f5543fad60dc4efd12195733f96bb4fdb0e6e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby/zipball/bf152ccc6629bdd63b1e5e8b297c2912516b5f1e",
-                "reference": "bf152ccc6629bdd63b1e5e8b297c2912516b5f1e",
+                "url": "https://api.github.com/repos/j0k3r/graby/zipball/c9f5543fad60dc4efd12195733f96bb4fdb0e6e0",
+                "reference": "c9f5543fad60dc4efd12195733f96bb4fdb0e6e0",
                 "shasum": ""
             },
             "require": {
@@ -2365,20 +2365,20 @@
                 }
             ],
             "description": "Graby helps you extract article content from web pages",
-            "time": "2015-12-24 08:28:38"
+            "time": "2015-12-02 13:22:19"
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.11",
+            "version": "1.0.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "ac198f308beabccc97bbd35ed0daeaac63fbf1e3"
+                "reference": "7666fed2a2cd211ef366f6fed9ccddd8e0b9e623"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/ac198f308beabccc97bbd35ed0daeaac63fbf1e3",
-                "reference": "ac198f308beabccc97bbd35ed0daeaac63fbf1e3",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/7666fed2a2cd211ef366f6fed9ccddd8e0b9e623",
+                "reference": "7666fed2a2cd211ef366f6fed9ccddd8e0b9e623",
                 "shasum": ""
             },
             "require": {
@@ -2401,7 +2401,7 @@
                 }
             ],
             "description": "Graby site config files",
-            "time": "2015-12-23 22:52:15"
+            "time": "2015-12-03 19:49:20"
         },
         {
             "name": "j0k3r/php-readability",
@@ -3138,7 +3138,9 @@
             "authors": [
                 {
                     "name": "S.C. Chen",
-                    "email": "me578022@gmail.com"
+                    "email": "me578022@gmail.com",
+                    "homepage": "http://simplehtmldom.sourceforge.net/",
+                    "role": "Lead Developer"
                 }
             ],
             "description": "Composer package that gives you access to and (unlike all the others at this time) autoloads S.C. Chen's PHP Simple HTML DOM Parser Library",
@@ -3765,16 +3767,16 @@
         },
         {
             "name": "scheb/two-factor-bundle",
-            "version": "v1.4.7",
+            "version": "v1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/scheb/two-factor-bundle.git",
-                "reference": "ef6830dbbf62b22efd335db8f64bf0f51d4284a2"
+                "reference": "b0da3a85b181237c3bebde88c99b18745313360b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/scheb/two-factor-bundle/zipball/ef6830dbbf62b22efd335db8f64bf0f51d4284a2",
-                "reference": "ef6830dbbf62b22efd335db8f64bf0f51d4284a2",
+                "url": "https://api.github.com/repos/scheb/two-factor-bundle/zipball/b0da3a85b181237c3bebde88c99b18745313360b",
+                "reference": "b0da3a85b181237c3bebde88c99b18745313360b",
                 "shasum": ""
             },
             "require": {
@@ -3810,7 +3812,7 @@
                 "two-factor",
                 "two-step"
             ],
-            "time": "2015-08-25 19:58:00"
+            "time": "2015-11-15 13:31:23"
         },
         {
             "name": "sensio/distribution-bundle",
@@ -5437,16 +5439,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "4.8.21",
+            "version": "4.8.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "ea76b17bced0500a28098626b84eda12dbcf119c"
+                "reference": "7438c43bc2bbb2febe1723eb595b1c49283a26ad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/ea76b17bced0500a28098626b84eda12dbcf119c",
-                "reference": "ea76b17bced0500a28098626b84eda12dbcf119c",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/7438c43bc2bbb2febe1723eb595b1c49283a26ad",
+                "reference": "7438c43bc2bbb2febe1723eb595b1c49283a26ad",
                 "shasum": ""
             },
             "require": {
@@ -5455,7 +5457,7 @@
                 "ext-pcre": "*",
                 "ext-reflection": "*",
                 "ext-spl": "*",
-                "php": ">=5.3.3",
+                "php": "~5.3.3|~5.4|~5.5|~5.6",
                 "phpspec/prophecy": "^1.3.1",
                 "phpunit/php-code-coverage": "~2.1",
                 "phpunit/php-file-iterator": "~1.4",
@@ -5505,7 +5507,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-12-12 07:45:58"
+            "time": "2015-12-10 07:48:52"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
