@@ -1,0 +1,23 @@
+{% extends "WallabagCoreBundle::layout.html.twig" %}
+
+{% block title %}{% trans %}import{% endtrans %}{% endblock %}
+
+{% block content %}
+
+    <div id="set1" class="col s12">
+        <form action="{{ path('import') }}" method="post" {{ form_enctype(form.import) }}>
+            {{ form_errors(form.import) }}
+            <div class="row">
+                <div class="input-field col s12">
+                    {{ form_errors(form.import.file) }}
+                    {{ form_widget(form.import.file) }}
+                    <label class="required">{% trans %}File{% endtrans %}</label>
+                </div>
+            </div>
+            <div class="hidden">{{ form_rest(form.import) }}</div>
+            <button class="btn waves-effect waves-light" type="submit" name="action">
+                {% trans %}Upload file{% endtrans %}
+            </button>
+        </form>
+    </div>
+{% endblock %}

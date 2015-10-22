@@ -51,7 +51,7 @@ class ImportCommand extends ContainerAwareCommand
         $batchSize = 20;
         $i = 1;
 
-        $user = $em->getRepository('WallabagCoreBundle:User')
+        $user = $em->getRepository('WallabagUserBundle:User')
             ->findOneById($input->getArgument('userId'));
 
         if (!is_object($user)) {
@@ -116,6 +116,7 @@ class ImportCommand extends ContainerAwareCommand
     protected function get(InputInterface $input, OutputInterface $output)
     {
         $filename = __DIR__.'/../../../../web/uploads/import/'.$input->getArgument('userId').'.json';
+
         $data = $this->convert($filename);
 
         return $data;
