@@ -324,7 +324,7 @@ class EntryController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function deleteEntryAction(Entry $entry)
+    public function deleteEntryAction(Request $request, Entry $entry)
     {
         $this->checkUserAction($entry);
 
@@ -337,7 +337,7 @@ class EntryController extends Controller
             'Entry deleted'
         );
 
-        return $this->redirect($this->generateUrl('homepage'));
+        return $this->redirect($request->headers->get('referer'));
     }
 
     /**
