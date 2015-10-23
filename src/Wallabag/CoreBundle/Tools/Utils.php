@@ -28,6 +28,7 @@ class Utils
 
     /**
      * @param $words
+     *
      * @return float
      */
     public static function convertWordsToMinutes($words)

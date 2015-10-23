@@ -1,0 +1,8 @@
+services:
+    wallabag_import.import.pocket_import:
+        class: Wallabag\ImportBundle\Import\PocketImport
+        arguments:
+            - @security.token_storage
+            - @session
+            - @doctrine.orm.entity_manager
+            - %pocket_consumer_key%
