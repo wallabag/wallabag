@@ -21,7 +21,7 @@ class PocketController extends Controller
      */
     public function authAction()
     {
-        $pocket = new PocketImport($this->get('security.token_storage'), $this->get('session'), $this->getDoctrine()->getManager(), $this->container->getParameter('pocket_consumer_key'));
+        $pocket = $this->get('wallabag_import.import.pocket_import');
         $authUrl = $pocket->oAuthRequest($this->generateUrl('import', array(), true), $this->generateUrl('callbackpocket', array(), true));
 
         return $this->redirect($authUrl, 301);
@@ -32,7 +32,7 @@ class PocketController extends Controller
      */
     public function callbackAction()
     {
-        $pocket = new PocketImport($this->get('security.token_storage'), $this->get('session'), $this->getDoctrine()->getManager(), $this->container->getParameter('pocket_consumer_key'));
+        $pocket = $this->get('wallabag_import.import.pocket_import');
         $accessToken = $pocket->oAuthAuthorize();
         $pocket->import($accessToken);
 
