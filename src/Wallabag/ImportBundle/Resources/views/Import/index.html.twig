@@ -1,0 +1,16 @@
+{% extends "WallabagCoreBundle::layout.html.twig" %}
+{% block title %}{% trans %}import{% endtrans %}{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col s12">
+        <div class="card-panel settings">
+            {% trans %}Welcome on wallabag importer. Please select your previous service that you want to migrate.{% endtrans %}
+            <ul>
+                <li><a href="{{ path('pocket') }}">Pocket</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

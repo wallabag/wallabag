@@ -4,20 +4,19 @@ namespace Wallabag\ImportBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Wallabag\ImportBundle\Import\PocketImport;
 
 class PocketController extends Controller
 {
     /**
-     * @Route("/import", name="import")
+     * @Route("/import/pocket", name="pocket")
      */
-    public function importAction()
+    public function indexAction()
     {
         return $this->render('WallabagImportBundle:Pocket:index.html.twig', array());
     }
 
     /**
-     * @Route("/auth-pocket", name="authpocket")
+     * @Route("/import/pocket/auth", name="authpocket")
      */
     public function authAction()
     {
@@ -28,7 +27,7 @@ class PocketController extends Controller
     }
 
     /**
-     * @Route("/callback-pocket", name="callbackpocket")
+     * @Route("/import/pocket/callback", name="callbackpocket")
      */
     public function callbackAction()
     {

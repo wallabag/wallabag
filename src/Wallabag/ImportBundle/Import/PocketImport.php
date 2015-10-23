@@ -23,6 +23,16 @@ class PocketImport implements ImportInterface
         $this->consumerKey = $consumerKey;
     }
 
+    public function getName()
+    {
+        return 'Pocket';
+    }
+
+    public function getDescription()
+    {
+        return 'This importer will import all your <a href="https://getpocket.com">Pocket</a> data.';
+    }
+
     /**
      * Create a new Client.
      *
