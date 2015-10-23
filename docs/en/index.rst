@@ -24,6 +24,7 @@ The main documentation for the site is organized into a couple sections:
    user/login
    user/configuration
    user/first_article
+   user/import
 
 user/organize
 user/filters
