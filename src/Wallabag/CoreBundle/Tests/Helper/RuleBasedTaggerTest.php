@@ -12,15 +12,17 @@ use Wallabag\CoreBundle\Helper\RuleBasedTagger;
 class RuleBasedTaggerTest extends \PHPUnit_Framework_TestCase
 {
     private $rulerz;
-    private $repository;
+    private $tagRepository;
+    private $entryRepository;
     private $tagger;
 
     public function setUp()
     {
-        $this->rulerz     = $this->getRulerZMock();
-        $this->repository = $this->getTagRepositoryMock();
+        $this->rulerz          = $this->getRulerZMock();
+        $this->tagRepository   = $this->getTagRepositoryMock();
+        $this->entryRepository = $this->getEntryRepositoryMock();
 
-        $this->tagger     = new RuleBasedTagger($this->rulerz, $this->repository);
+        $this->tagger = new RuleBasedTagger($this->rulerz, $this->tagRepository, $this->entryRepository);
     }
 
     public function testTagWithNoRule()
@@ -106,7 +108,7 @@ class RuleBasedTaggerTest extends \PHPUnit_Framework_TestCase
             ->with($entry, 'rule as string')
             ->willReturn(true);
 
-        $this->repository
+        $this->tagRepository
             ->expects($this->once())
             ->method('findOneByLabelAndUserId')
             ->willReturn($tag);
@@ -152,6 +154,13 @@ class RuleBasedTaggerTest extends \PHPUnit_Framework_TestCase
     private function getTagRepositoryMock()
     {
         return $this->getMockBuilder('Wallabag\CoreBundle\Repository\TagRepository')
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
+
+    private function getEntryRepositoryMock()
+    {
+        return $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
             ->disableOriginalConstructor()
             ->getMock();
     }

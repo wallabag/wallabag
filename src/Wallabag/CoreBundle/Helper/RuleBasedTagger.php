@@ -6,6 +6,7 @@ use RulerZ\RulerZ;
 
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
+use Wallabag\CoreBundle\Repository\EntryRepository;
 use Wallabag\CoreBundle\Repository\TagRepository;
 use Wallabag\UserBundle\Entity\User;
 
@@ -13,11 +14,13 @@ class RuleBasedTagger
 {
     private $rulerz;
     private $tagRepository;
+    private $entryRepository;
 
-    public function __construct(RulerZ $rulerz, TagRepository $tagRepository)
+    public function __construct(RulerZ $rulerz, TagRepository $tagRepository, EntryRepository $entryRepository)
     {
-        $this->rulerz        = $rulerz;
-        $this->tagRepository = $tagRepository;
+        $this->rulerz          = $rulerz;
+        $this->tagRepository   = $tagRepository;
+        $this->entryRepository = $entryRepository;
     }
 
     /**
@@ -40,6 +43,35 @@ class RuleBasedTagger
                 $entry->addTag($tag);
             }
         }
+    }
+
+    /**
+     * Apply all the tagging rules defined by a user on its entries.
+     *
+     * @param User $user
+     *
+     * @return array<Entry> A list of modified entries.
+     */
+    public function tagAllForUser(User $user)
+    {
+        $rules   = $this->getRulesForUser($user);
+        $entries = array();
+
+        foreach ($rules as $rule) {
+            $qb      = $this->entryRepository->getBuilderForAllByUser($user->getId());
+            $entries = $this->rulerz->filter($qb, $rule->getRule());
+
+            foreach ($entries as $entry) {
+                foreach ($rule->getTags() as $label) {
+                    $tag = $this->getTag($user, $label);
+
+                    $entry->addTag($tag);
+                    $entries[] = $entry;
+                }
+            }
+        }
+
+        return $entries;
     }
 
     /**

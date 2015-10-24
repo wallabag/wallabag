@@ -61,6 +61,14 @@ services:
         arguments:
             - @rulerz
             - @wallabag_core.tag_repository
+            - @wallabag_core.entry_repository
+
+    wallabag_core.entry_repository:
+        class: Wallabag\CoreBundle\Repository\EntryRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments:
+            - WallabagCoreBundle:Entry
 
     wallabag_core.tag_repository:
         class: Wallabag\CoreBundle\Repository\TagRepository
