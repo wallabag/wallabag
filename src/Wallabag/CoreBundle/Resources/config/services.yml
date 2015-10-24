@@ -42,6 +42,10 @@ services:
         class: Graby\Graby
         arguments:
             - { error_message: false }
+        calls:
+            - [ setLogger, [ @logger ] ]
+        tags:
+            - { name: monolog.logger, channel: graby }
 
     wallabag_core.content_proxy:
         class: Wallabag\CoreBundle\Helper\ContentProxy
