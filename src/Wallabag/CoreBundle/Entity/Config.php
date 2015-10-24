@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Config.
  *
  * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\ConfigRepository")
- * @ORM\Table
+ * @ORM\Table(name="`config`")
  * @ORM\Entity
  */
 class Config

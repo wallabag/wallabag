@@ -33,10 +33,12 @@ services:
         arguments:
             - @doctrine
 
-    wallabag_core.doctrine.prefixed_naming_strategy:
-        class: Wallabag\CoreBundle\Doctrine\Mapping\PrefixedNamingStrategy
+    wallabag_core.table_prefix_subscriber:
+        class: Wallabag\CoreBundle\Subscriber\TablePrefixSubscriber
         arguments:
             - %database_table_prefix%
+        tags:
+            - { name: doctrine.event_subscriber }
 
     wallabag_core.graby:
         class: Graby\Graby
