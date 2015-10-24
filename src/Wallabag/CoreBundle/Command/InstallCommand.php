@@ -283,7 +283,13 @@ class InstallCommand extends ContainerAwareCommand
         try {
             $schemaManager = $connection->getSchemaManager();
         } catch (\Exception $exception) {
+            // mysql & sqlite
             if (false !== strpos($exception->getMessage(), sprintf("Unknown database '%s'", $databaseName))) {
+                return false;
+            }
+
+            // pgsql
+            if (false !== strpos($exception->getMessage(), sprintf('database "%s" does not exist', $databaseName))) {
                 return false;
             }
 
