@@ -8,6 +8,9 @@ use Doctrine\ORM\Mapping\ClassMetadataInfo;
 
 /**
  * Puts a prefix to each table.
+ * This way were used instead of using the built-in strategy from Doctrine, using `naming_strategy`
+ * Because it conflicts with the DefaultQuoteStrategy (that espace table name, like user for Postgres)
+ * see #1498 for more detail.
  *
  * Solution from :
  *      - http://stackoverflow.com/a/23860613/569101
@@ -30,17 +33,18 @@ class TablePrefixSubscriber implements EventSubscriber
     public function loadClassMetadata(LoadClassMetadataEventArgs $args)
     {
         $classMetadata = $args->getClassMetadata();
+
         // if we are in an inheritance hierarchy, only apply this once
         if ($classMetadata->isInheritanceTypeSingleTable() && !$classMetadata->isRootEntity()) {
             return;
         }
 
-        $classMetadata->setTableName($this->prefix . $classMetadata->getTableName());
+        $classMetadata->setTableName($this->prefix.$classMetadata->getTableName());
 
         foreach ($classMetadata->getAssociationMappings() as $fieldName => $mapping) {
             if ($mapping['type'] === ClassMetadataInfo::MANY_TO_MANY && isset($classMetadata->associationMappings[$fieldName]['joinTable']['name'])) {
                 $mappedTableName = $classMetadata->associationMappings[$fieldName]['joinTable']['name'];
-                $classMetadata->associationMappings[$fieldName]['joinTable']['name'] = $this->prefix . $mappedTableName;
+                $classMetadata->associationMappings[$fieldName]['joinTable']['name'] = $this->prefix.$mappedTableName;
             }
         }
     }
