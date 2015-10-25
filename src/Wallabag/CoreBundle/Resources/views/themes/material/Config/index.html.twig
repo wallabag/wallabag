@@ -191,6 +191,9 @@
                                     {% for tagging_rule in app.user.config.taggingRules %}
                                     <li>
                                         if « {{ tagging_rule.rule }} » then tag as « {{ tagging_rule.tags|join(', ') }} »
+                                        <a href="{{ path('delete_tagging_rule', {id: tagging_rule.id}) }}" title="{% trans %}Delete{% endtrans %}">
+                                            <i class="tool grey-text delete mdi-action-delete"></i>
+                                        </a>
                                     </li>
                                     {% endfor %}
                                 </ul>

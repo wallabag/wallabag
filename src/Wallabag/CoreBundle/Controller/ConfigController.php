@@ -189,6 +189,33 @@ class ConfigController extends Controller
     }
 
     /**
+     * Deletes a tagging rule and redirect to the config homepage.
+     *
+     * @param TaggingRule $rule
+     *
+     * @Route("/tagging-rule/delete/{id}", requirements={"id" = "\d+"}, name="delete_tagging_rule")
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function deleteTaggingRule(TaggingRule $rule)
+    {
+        if ($this->getUser()->getId() != $rule->getConfig()->getUser()->getId()) {
+            throw $this->createAccessDeniedException('You can not access this tagging ryle.');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($rule);
+        $em->flush();
+
+        $this->get('session')->getFlashBag()->add(
+            'notice',
+            'Tagging rule deleted'
+        );
+
+        return $this->redirect($this->generateUrl('config'));
+    }
+
+    /**
      * Retrieve config for the current user.
      * If no config were found, create a new one.
      *
