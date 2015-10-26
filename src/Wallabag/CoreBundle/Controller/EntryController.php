@@ -41,6 +41,7 @@ class EntryController extends Controller
      */
     public function addEntryFormAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
         $entry = new Entry($this->getUser());
 
         $form = $this->createForm(new NewEntryType(), $entry);
@@ -48,6 +49,19 @@ class EntryController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            $existingEntry = $em
+                ->getRepository('WallabagCoreBundle:Entry')
+                ->findOneByUrl($entry->getUrl());
+
+            if (!is_null($existingEntry)) {
+                $this->get('session')->getFlashBag()->add(
+                    'notice',
+                    'Entry already saved on '.$existingEntry->getCreatedAt()->format('d-m-Y')
+                );
+
+                return $this->redirect($this->generateUrl('view', array('id' => $existingEntry->getId())));
+            }
+
             $this->updateEntry($entry);
             $this->get('session')->getFlashBag()->add(
                 'notice',

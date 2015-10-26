@@ -6,3 +6,4 @@ services:
             - @session
             - @doctrine.orm.entity_manager
             - %pocket_consumer_key%
+            - %wallabag_import.pocket%

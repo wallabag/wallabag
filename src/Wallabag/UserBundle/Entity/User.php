@@ -84,13 +84,6 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
      */
     private $trusted;
 
-    /**
-     * @var date
-     *
-     * @ORM\Column(name="last_pocket_import", type="datetime", nullable=true)
-     */
-    private $lastPocketImport;
-
     public function __construct()
     {
         parent::__construct();
@@ -246,21 +239,5 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
         }
 
         return false;
-    }
-
-    /**
-     * @return date
-     */
-    public function getLastPocketImport()
-    {
-        return $this->lastPocketImport;
-    }
-
-    /**
-     * @param date $lastPocketImport
-     */
-    public function setLastPocketImport($lastPocketImport)
-    {
-        $this->lastPocketImport = $lastPocketImport;
     }
 }
