@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use GuzzleHttp\Client;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Tools\Utils;
 
 class PocketImport implements ImportInterface
@@ -51,30 +52,79 @@ class PocketImport implements ImportInterface
     }
 
     /**
+     * Returns the good title for current entry.
+     *
+     * @param $pocketEntry
+     *
+     * @return string
+     */
+    private function guessTitle($pocketEntry)
+    {
+        if (isset($pocketEntry['resolved_title']) && $pocketEntry['resolved_title'] != '') {
+            return $pocketEntry['resolved_title'];
+        } elseif (isset($pocketEntry['given_title']) && $pocketEntry['given_title'] != '') {
+            return $pocketEntry['given_title'];
+        } else {
+            return 'Untitled';
+        }
+    }
+
+    private function assignTagsToEntry(Entry $entry, $tags)
+    {
+        foreach ($tags as $tag) {
+            $label = trim($tag['tag']);
+            $tagEntity = $this->em
+                ->getRepository('WallabagCoreBundle:Tag')
+                ->findOneByLabelAndUserId($label, $this->user->getId());
+
+            if (is_object($tagEntity)) {
+                $entry->addTag($tagEntity);
+            } else {
+                $newTag = new Tag($this->user);
+                $newTag->setLabel($label);
+                $entry->addTag($newTag);
+            }
+            $this->em->flush();
+        }
+    }
+
+    /**
      * @param $entries
      */
     private function parsePocketEntries($entries)
     {
-        foreach ($entries as $entry) {
-            $newEntry = new Entry($this->user);
-            $newEntry->setUrl($entry['given_url']);
-            $newEntry->setTitle(isset($entry['resolved_title']) ? $entry['resolved_title'] : (isset($entry['given_title']) ? $entry['given_title'] : 'Untitled'));
-
-            if (isset($entry['excerpt'])) {
-                $newEntry->setContent($entry['excerpt']);
+        foreach ($entries as $pocketEntry) {
+            $entry = new Entry($this->user);
+            $entry->setUrl($pocketEntry['given_url']);
+            if ($pocketEntry['status'] == 1) {
+                $entry->setArchived(true);
+            }
+            if ($pocketEntry['favorite'] == 1) {
+                $entry->setStarred(true);
             }
 
-            if (isset($entry['has_image']) && $entry['has_image'] > 0) {
-                $newEntry->setPreviewPicture($entry['image']['src']);
+            $entry->setTitle($this->guessTitle($pocketEntry));
+
+            if (isset($pocketEntry['excerpt'])) {
+                $entry->setContent($pocketEntry['excerpt']);
             }
 
-            if (isset($entry['word_count'])) {
-                $newEntry->setReadingTime(Utils::convertWordsToMinutes($entry['word_count']));
+            if (isset($pocketEntry['has_image']) && $pocketEntry['has_image'] > 0) {
+                $entry->setPreviewPicture($pocketEntry['image']['src']);
             }
 
-            $this->em->persist($newEntry);
+            if (isset($pocketEntry['word_count'])) {
+                $entry->setReadingTime(Utils::convertWordsToMinutes($pocketEntry['word_count']));
+            }
+
+            if (!empty($pocketEntry['tags'])) {
+                $this->assignTagsToEntry($entry, $pocketEntry['tags']);
+            }
+
+            $this->em->persist($entry);
         }
 
+        $this->user->setLastPocketImport(new \DateTime());
         $this->em->flush();
     }
 
@@ -120,6 +170,7 @@ class PocketImport implements ImportInterface
     public function import($accessToken)
     {
         $client = $this->createClient();
+        $since = (!is_null($this->user->getLastPocketImport()) ? $this->user->getLastPocketImport()->getTimestamp() : '');
 
         $request = $client->createRequest('POST', 'https://getpocket.com/v3/get',
             [
@@ -127,6 +178,9 @@ class PocketImport implements ImportInterface
                     'consumer_key' => $this->consumerKey,
                     'access_token' => $accessToken,
                     'detailType' => 'complete',
+                    'state' => 'all',
+                    'sort' => 'oldest',
+                    'since' => $since,
                 ]),
             ]
         );
