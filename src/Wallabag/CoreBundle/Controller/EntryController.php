@@ -51,15 +51,15 @@ class EntryController extends Controller
         if ($form->isValid()) {
             $existingEntry = $em
                 ->getRepository('WallabagCoreBundle:Entry')
-                ->findOneByUrl($entry->getUrl());
+                ->findOneByUrlAndUserId($entry->getUrl(), $this->getUser()->getId());
 
-            if (!is_null($existingEntry)) {
+            if (count($existingEntry) > 0) {
                 $this->get('session')->getFlashBag()->add(
                     'notice',
-                    'Entry already saved on '.$existingEntry->getCreatedAt()->format('d-m-Y')
+                    'Entry already saved on '.$existingEntry[0]->getCreatedAt()->format('d-m-Y')
                 );
 
-                return $this->redirect($this->generateUrl('view', array('id' => $existingEntry->getId())));
+                return $this->redirect($this->generateUrl('view', array('id' => $existingEntry[0]->getId())));
             }
 
             $this->updateEntry($entry);

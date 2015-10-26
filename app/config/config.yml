@@ -33,14 +33,6 @@ wallabag_core:
     import:
         allow_mimetypes: ['application/octet-stream', 'application/json', 'text/plain']
 
-wallabag_import:
-    importers:
-        pocket_urls:
-            oauth_request: https://getpocket.com/v3/oauth/request
-            auth_authorize: https://getpocket.com/auth/authorize
-            oauth_authorize: https://getpocket.com/v3/oauth/authorize
-            get: https://getpocket.com/v3/get
-
 # Twig Configuration
 twig:
     debug:            "%kernel.debug%"

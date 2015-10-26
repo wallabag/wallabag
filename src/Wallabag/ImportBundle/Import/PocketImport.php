@@ -15,19 +15,15 @@ class PocketImport implements ImportInterface
     private $session;
     private $em;
     private $consumerKey;
-    private $skippedEntries;
-    private $importedEntries;
-    private $pocketURL;
+    private $skippedEntries = 0;
+    private $importedEntries = 0;
 
-    public function __construct($tokenStorage, Session $session, EntityManager $em, $consumerKey, $pocketURL)
+    public function __construct($tokenStorage, Session $session, EntityManager $em, $consumerKey)
     {
         $this->user = $tokenStorage->getToken()->getUser();
         $this->session = $session;
         $this->em = $em;
         $this->consumerKey = $consumerKey;
-        $this->skippedEntries = 0;
-        $this->importedEntries = 0;
-        $this->pocketURL = $pocketURL;
     }
 
     public function getName()
@@ -121,9 +117,9 @@ class PocketImport implements ImportInterface
 
             $existingEntry = $this->em
                 ->getRepository('WallabagCoreBundle:Entry')
-                ->findOneByUrl($url);
+                ->findOneByUrlAndUserId($url, $this->user->getId());
 
-            if (!is_null($existingEntry)) {
+            if (count($existingEntry) > 0) {
                 ++$this->skippedEntries;
                 continue;
             }
@@ -153,7 +149,7 @@ class PocketImport implements ImportInterface
             }
 
             if (!empty($pocketEntry['tags'])) {
-                //   $this->assignTagsToEntry($entry, $pocketEntry['tags']);
+                $this->assignTagsToEntry($entry, $pocketEntry['tags']);
             }
 
             $this->em->persist($entry);
@@ -166,7 +162,7 @@ class PocketImport implements ImportInterface
     public function oAuthRequest($redirectUri, $callbackUri)
     {
         $client = $this->createClient();
-        $request = $client->createRequest('POST', $this->pocketURL['oauth_request'],
+        $request = $client->createRequest('POST', 'https://getpocket.com/v3/oauth/request',
             [
                 'body' => json_encode([
                     'consumer_key' => $this->consumerKey,
@@ -181,14 +177,14 @@ class PocketImport implements ImportInterface
         // store code in session for callback method
         $this->session->set('pocketCode', $values['code']);
 
-        return $this->pocketURL['auth_authorize'].'?request_token='.$values['code'].'&redirect_uri='.$callbackUri;
+        return 'https://getpocket.com/auth/authorize?request_token='.$values['code'].'&redirect_uri='.$callbackUri;
     }
 
     public function oAuthAuthorize()
     {
         $client = $this->createClient();
 
-        $request = $client->createRequest('POST', $this->pocketURL['oauth_authorize'],
+        $request = $client->createRequest('POST', 'https://getpocket.com/v3/oauth/authorize',
             [
                 'body' => json_encode([
                     'consumer_key' => $this->consumerKey,
@@ -206,7 +202,7 @@ class PocketImport implements ImportInterface
     {
         $client = $this->createClient();
 
-        $request = $client->createRequest('POST', $this->pocketURL['get'],
+        $request = $client->createRequest('POST', 'https://getpocket.com/v3/get',
             [
                 'body' => json_encode([
                     'consumer_key' => $this->consumerKey,
