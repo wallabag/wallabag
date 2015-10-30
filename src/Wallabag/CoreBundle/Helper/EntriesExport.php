@@ -9,6 +9,9 @@ use JMS\Serializer;
 use JMS\Serializer\SerializerBuilder;
 use JMS\Serializer\SerializationContext;
 
+/**
+ * This class doesn't have unit test BUT it's fully covered by a functional test with ExportControllerTest.
+ */
 class EntriesExport
 {
     private $wallabagUrl;
@@ -303,7 +306,8 @@ class EntriesExport
                 array(
                     $entry->getTitle(),
                     $entry->getURL(),
-                    $entry->getContent(),
+                    // remove new line to avoid crazy results
+                    str_replace(array("\r\n", "\r", "\n"), '', $entry->getContent()),
                     implode(', ', $entry->getTags()->toArray()),
                     $entry->getMimetype(),
                     $entry->getLanguage(),
@@ -363,7 +367,11 @@ class EntriesExport
     {
         $serializer = SerializerBuilder::create()->build();
 
-        return $serializer->serialize($this->entries, $format, SerializationContext::create()->setGroups(array('entries_for_user')));
+        return $serializer->serialize(
+            $this->entries,
+            $format,
+            SerializationContext::create()->setGroups(array('entries_for_user'))
+        );
     }
 
     /**

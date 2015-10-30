@@ -7,6 +7,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Wallabag\CoreBundle\Entity\Entry;
 
+/**
+ * The try/catch can be removed once all formats will be implemented.
+ * Still need implementation: txt.
+ */
 class ExportController extends Controller
 {
     /**
@@ -14,7 +18,10 @@ class ExportController extends Controller
      *
      * @param Entry $entry
      *
-     * @Route("/export/{id}.{format}", requirements={"id" = "\d+"}, name="export_entry")
+     * @Route("/export/{id}.{format}", name="export_entry", requirements={
+     *     "format": "epub|mobi|pdf|json|xml|txt|csv",
+     *     "id": "\d+"
+     * })
      */
     public function downloadEntryAction(Entry $entry, $format)
     {
@@ -32,7 +39,7 @@ class ExportController extends Controller
      * Export all entries for current user.
      *
      * @Route("/export/{category}.{format}", name="export_entries", requirements={
-     *     "_format": "epub|mobi|pdf|json|xml|txt|csv",
+     *     "format": "epub|mobi|pdf|json|xml|txt|csv",
      *     "category": "all|unread|starred|archive"
      * })
      */
