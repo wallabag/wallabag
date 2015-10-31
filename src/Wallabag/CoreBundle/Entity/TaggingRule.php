@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use KPhoen\RulerZBundle\Validator\Constraints as RulerZAssert;
 
 /**
- * Config.
+ * Tagging rule.
  *
  * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\TaggingRuleRepository")
  * @ORM\Table
