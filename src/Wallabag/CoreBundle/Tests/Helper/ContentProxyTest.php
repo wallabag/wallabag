@@ -2,6 +2,9 @@
 
 namespace Wallabag\CoreBundle\Tests\Helper;
 
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Psr\Log\NullLogger;
+
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\UserBundle\Entity\User;
 use Wallabag\CoreBundle\Helper\ContentProxy;
@@ -29,7 +32,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
                 'language' => '',
             ));
 
-        $proxy = new ContentProxy($graby, $tagger, $this->getLoggerMock());
+        $proxy = new ContentProxy($graby, $tagger, $this->getLogger());
         $entry = $proxy->updateEntry(new Entry(new User()), 'http://0.0.0.0');
 
         $this->assertEquals('http://0.0.0.0', $entry->getUrl());
@@ -67,7 +70,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
                 ),
             ));
 
-        $proxy = new ContentProxy($graby, $tagger, $this->getLoggerMock());
+        $proxy = new ContentProxy($graby, $tagger, $this->getLogger());
         $entry = $proxy->updateEntry(new Entry(new User()), 'http://domain.io');
 
         $this->assertEquals('http://domain.io', $entry->getUrl());
@@ -106,7 +109,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
                 ),
             ));
 
-        $proxy = new ContentProxy($graby, $tagger, $this->getLoggerMock());
+        $proxy = new ContentProxy($graby, $tagger, $this->getLogger());
         $entry = $proxy->updateEntry(new Entry(new User()), 'http://0.0.0.0');
 
         $this->assertEquals('http://1.1.1.1', $entry->getUrl());
@@ -127,8 +130,8 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
             ->getMock();
     }
 
-    private function getLoggerMock()
+    private function getLogger()
     {
-        return $this->getMock('Psr\Log\LoggerInterface');
+        return new NullLogger();
     }
 }
