@@ -479,4 +479,59 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $this->assertGreaterThan(1, $alert = $crawler->filter('body')->extract(array('_text')));
         $this->assertContains($expectedMessage, $alert[0]);
     }
+
+    public function testTaggingRuleCreation()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/config');
+
+        $this->assertTrue($client->getResponse()->isSuccessful());
+
+        $form = $crawler->filter('button[id=tagging_rule_save]')->form();
+
+        $data = array(
+            'tagging_rule[rule]' => 'readingTime <= 3',
+            'tagging_rule[tags]' => 'short reading',
+        );
+
+        $client->submit($form, $data);
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+
+        $crawler = $client->followRedirect();
+
+        $this->assertGreaterThan(1, $alert = $crawler->filter('div.messages.success')->extract(array('_text')));
+        $this->assertContains('Tagging rules updated', $alert[0]);
+
+        $deleteLink = $crawler->filter('.delete')->eq(0)->link();
+
+        $crawler = $client->click($deleteLink);
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+
+        $crawler = $client->followRedirect();
+        $this->assertGreaterThan(1, $alert = $crawler->filter('div.messages.success')->extract(array('_text')));
+        $this->assertContains('Tagging rule deleted', $alert[0]);
+    }
+
+    public function dataForTaggingRuleFailed()
+    {
+        return array(
+            array(
+                array(
+                    'rss_config[rule]' => 'unknownVar <= 3',
+                    'rss_config[tags]' => 'cool tag',
+                ),
+                'The variable « unknownVar » does not exist.',
+            ),
+            array(
+                array(
+                    'rss_config[rule]' => 'length(domainName) <= 42',
+                    'rss_config[tags]' => 'cool tag',
+                ),
+                'The operator « length » does not exist.',
+            ),
+        );
+    }
 }
