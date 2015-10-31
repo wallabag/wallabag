@@ -192,7 +192,6 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertArrayHasKey('language', $content[0]);
         $this->assertArrayHasKey('reading_time', $content[0]);
         $this->assertArrayHasKey('domain_name', $content[0]);
-        $this->assertArrayHasKey('preview_picture', $content[0]);
         $this->assertArrayHasKey('tags', $content[0]);
     }
 
