@@ -2,13 +2,12 @@
 
 namespace Wallabag\CoreBundle\Tests\Subscriber;
 
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\Common\EventManager;
 use Wallabag\CoreBundle\Subscriber\TablePrefixSubscriber;
 
-class TablePrefixSubscriberTest extends KernelTestCase
+class TablePrefixSubscriberTest extends \PHPUnit_Framework_TestCase
 {
     public function dataForPrefix()
     {

@@ -2,7 +2,6 @@
 
 namespace Wallabag\CoreBundle\Tests\EventListener;
 
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -12,7 +11,7 @@ use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Wallabag\CoreBundle\EventListener\LocaleListener;
 
-class LocaleListenerTest extends KernelTestCase
+class LocaleListenerTest extends \PHPUnit_Framework_TestCase
 {
     private function getEvent(Request $request)
     {

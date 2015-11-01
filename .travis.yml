@@ -51,7 +51,7 @@ before_script:
 
 script:
     - ant prepare-$DB
-    - SYMFONY_DEPRECATIONS_HELPER=weak bin/phpunit --exclude-group command-doctrine -v
+    - SYMFONY_DEPRECATIONS_HELPER=weak bin/phpunit -v
 
 # after_script:
     # - |

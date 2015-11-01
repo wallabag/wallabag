@@ -2,12 +2,11 @@
 
 namespace Wallabag\CoreBundle\Tests\Helper;
 
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\UserBundle\Entity\User;
 use Wallabag\CoreBundle\Helper\ContentProxy;
 
-class ContentProxyTest extends KernelTestCase
+class ContentProxyTest extends \PHPUnit_Framework_TestCase
 {
     public function testWithEmptyContent()
     {

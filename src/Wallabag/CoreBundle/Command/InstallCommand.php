@@ -96,9 +96,9 @@ class InstallCommand extends ContainerAwareCommand
 
         if (!$fulfilled) {
             throw new \RuntimeException('Some system requirements are not fulfilled. Please check output messages and fix them.');
-        } else {
-            $this->defaultOutput->writeln('<info>Success! Your system can run Wallabag properly.</info>');
         }
+
+        $this->defaultOutput->writeln('<info>Success! Your system can run Wallabag properly.</info>');
 
         $this->defaultOutput->writeln('');
 
