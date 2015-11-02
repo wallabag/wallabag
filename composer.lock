@@ -4,8 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6bd09434f83c7e6b5e1c75fddbd7608b",
-    "content-hash": "d07d54c4cc6f4f4947c652bd659af02e",
+    "hash": "a9ec461e17166dcda1563dd55f6ff861",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1632,20 +1631,20 @@
                 }
             ],
             "description": "Graby helps you extract article content from web pages",
-            "time": "2015-10-14 17:55:10"
+            "time": "2015-10-28 06:38:06"
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.5",
+            "version": "1.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "44afb3d6a90a816752426537e92e85160bdb40b9"
+                "reference": "6631451c1be563ff3bc8fa16c60ef7df38f8e65b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/44afb3d6a90a816752426537e92e85160bdb40b9",
-                "reference": "44afb3d6a90a816752426537e92e85160bdb40b9",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/6631451c1be563ff3bc8fa16c60ef7df38f8e65b",
+                "reference": "6631451c1be563ff3bc8fa16c60ef7df38f8e65b",
                 "shasum": ""
             },
             "require": {
@@ -2138,16 +2137,16 @@
         },
         {
             "name": "lexik/form-filter-bundle",
-            "version": "v4.0.1",
+            "version": "v4.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lexik/LexikFormFilterBundle.git",
-                "reference": "8e54a41376eab7890d4deea4088ad5c86df964ee"
+                "reference": "d6081d308b71e14509602722c78d28801e4ed78a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lexik/LexikFormFilterBundle/zipball/8e54a41376eab7890d4deea4088ad5c86df964ee",
-                "reference": "8e54a41376eab7890d4deea4088ad5c86df964ee",
+                "url": "https://api.github.com/repos/lexik/LexikFormFilterBundle/zipball/d6081d308b71e14509602722c78d28801e4ed78a",
+                "reference": "d6081d308b71e14509602722c78d28801e4ed78a",
                 "shasum": ""
             },
             "require": {
@@ -3800,12 +3799,12 @@
             "version": "1.0.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/wallabag/phpMobi.git",
+                "url": "https://github.com/wallabag/php-mobi.git",
                 "reference": "1cd7d022fe6be838535d6bba917d19cc48dcf487"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wallabag/phpMobi/zipball/1cd7d022fe6be838535d6bba917d19cc48dcf487",
+                "url": "https://api.github.com/repos/wallabag/php-mobi/zipball/1cd7d022fe6be838535d6bba917d19cc48dcf487",
                 "reference": "1cd7d022fe6be838535d6bba917d19cc48dcf487",
                 "shasum": ""
             },
@@ -3839,7 +3838,8 @@
             "description": "A Mobipocket file (.mobi) creator in PHP.",
             "homepage": "https://github.com/wallabag/phpMobi",
             "support": {
-                "source": "https://github.com/wallabag/phpMobi/tree/1.0.1"
+                "source": "https://github.com/wallabag/php-mobi/tree/1.0.1",
+                "issues": "https://github.com/wallabag/php-mobi/issues"
             },
             "time": "2015-10-16 08:42:42"
         },
@@ -3949,7 +3949,7 @@
             ],
             "authors": [
                 {
-                    "name": "William Durand",
+                    "name": "William DURAND",
                     "email": "william.durand1@gmail.com"
                 }
             ],
