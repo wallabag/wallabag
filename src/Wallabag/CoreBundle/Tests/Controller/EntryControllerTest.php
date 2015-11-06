@@ -75,7 +75,7 @@ class EntryControllerTest extends WallabagCoreTestCase
     }
 
     /**
-     * This test will require an internet connection
+     * This test will require an internet connection.
      */
     public function testPostNewOk()
     {
