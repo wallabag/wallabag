@@ -40,7 +40,7 @@ class WallabagRestController extends FOSRestController
 
     private function validateAuthentication()
     {
-        if (false === $this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
+        if (false === $this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw new AccessDeniedException();
         }
     }
@@ -347,7 +347,7 @@ class WallabagRestController extends FOSRestController
      */
     private function validateUserAccess($requestUserId)
     {
-        $user = $this->get('security.context')->getToken()->getUser();
+        $user = $this->get('security.token_storage')->getToken()->getUser();
         if ($requestUserId != $user->getId()) {
             throw $this->createAccessDeniedException('Access forbidden. Entry user id: '.$requestUserId.', logged user id: '.$user->getId());
         }
