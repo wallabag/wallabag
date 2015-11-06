@@ -8,6 +8,9 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Output\NullOutput;
+use Symfony\Component\Console\Question\Question;
+use Symfony\Component\Console\Question\ConfirmationQuestion;
+use Symfony\Component\Console\Helper\Table;
 use Wallabag\UserBundle\Entity\User;
 use Wallabag\CoreBundle\Entity\Config;
 
@@ -85,10 +88,11 @@ class InstallCommand extends ContainerAwareCommand
         }
         $rows[] = array($label, $status, $help);
 
-        $this->getHelper('table')
+        $table = new Table($this->defaultOutput);
+        $table
             ->setHeaders(array('Checked', 'Status', 'Recommendation'))
             ->setRows($rows)
-            ->render($this->defaultOutput);
+            ->render();
 
         if (!$fulfilled) {
             throw new \RuntimeException('Some system requirements are not fulfilled. Please check output messages and fix them.');
@@ -130,9 +134,10 @@ class InstallCommand extends ContainerAwareCommand
             return $this;
         }
 
-        $dialog = $this->getHelper('dialog');
+        $questionHelper = $this->getHelper('question');
+        $question = new ConfirmationQuestion('It appears that your database already exists. Would you like to reset it? (y/N)', false);
 
-        if ($dialog->askConfirmation($this->defaultOutput, '<question>It appears that your database already exists. Would you like to reset it? (y/N)</question> ', false)) {
+        if ($questionHelper->ask($this->defaultInput, $this->defaultOutput, $question)) {
             $this->defaultOutput->writeln('Droping database, creating database and schema');
 
             $this
@@ -141,7 +146,8 @@ class InstallCommand extends ContainerAwareCommand
                 ->runCommand('doctrine:schema:create')
             ;
         } elseif ($this->isSchemaPresent()) {
-            if ($dialog->askConfirmation($this->defaultOutput, '<question>Seems like your database contains schema. Do you want to reset it? (y/N)</question> ', false)) {
+            $question = new ConfirmationQuestion('Seems like your database contains schema. Do you want to reset it? (y/N)', false);
+            if ($questionHelper->ask($this->defaultInput, $this->defaultOutput, $question)) {
                 $this->defaultOutput->writeln('Droping schema and creating schema');
 
                 $this
@@ -160,17 +166,6 @@ class InstallCommand extends ContainerAwareCommand
         $this->defaultOutput->writeln('Clearing the cache');
         $this->runCommand('cache:clear');
 
-        /*
-        if ($this->getHelperSet()->get('dialog')->askConfirmation($this->defaultOutput, '<question>Load fixtures (Y/N)?</question>', false)) {
-            $doctrineConfig = $this->getContainer()->get('doctrine.orm.entity_manager')->getConnection()->getConfiguration();
-            $logger = $doctrineConfig->getSQLLogger();
-            // speed up fixture load
-            $doctrineConfig->setSQLLogger(null);
-            $this->runCommand('doctrine:fixtures:load');
-            $doctrineConfig->setSQLLogger($logger);
-        }
-        */
-
         $this->defaultOutput->writeln('');
 
         return $this;
@@ -180,9 +175,10 @@ class InstallCommand extends ContainerAwareCommand
     {
         $this->defaultOutput->writeln('<info><comment>Step 3 of 4.</comment> Administration setup.</info>');
 
-        $dialog = $this->getHelperSet()->get('dialog');
+        $questionHelper = $this->getHelperSet()->get('question');
+        $question = new ConfirmationQuestion('Would you like to create a new user ? (y/N)', false);
 
-        if (false === $dialog->askConfirmation($this->defaultOutput, '<question>Would you like to create a new user ? (y/N)</question>', true)) {
+        if (!$questionHelper->ask($this->defaultInput, $this->defaultOutput, $question)) {
             return $this;
         }
 
@@ -190,9 +186,16 @@ class InstallCommand extends ContainerAwareCommand
 
         $userManager = $this->getContainer()->get('fos_user.user_manager');
         $user = $userManager->createUser();
-        $user->setUsername($dialog->ask($this->defaultOutput, '<question>Username</question> <comment>(default: wallabag)</comment> :', 'wallabag'));
-        $user->setPlainPassword($dialog->ask($this->defaultOutput, '<question>Password</question> <comment>(default: wallabag)</comment> :', 'wallabag'));
-        $user->setEmail($dialog->ask($this->defaultOutput, '<question>Email:</question>', ''));
+
+        $question = new Question('Username (default: wallabag) :', 'wallabag');
+        $user->setUsername($questionHelper->ask($this->defaultInput, $this->defaultOutput, $question));
+
+        $question = new Question('Password (default: wallabag) :', 'wallabag');
+        $user->setPlainPassword($questionHelper->ask($this->defaultInput, $this->defaultOutput, $question));
+
+        $question = new Question('Email:', '');
+        $user->setEmail($questionHelper->ask($this->defaultInput, $this->defaultOutput, $question));
+
         $user->setEnabled(true);
 
         $em->persist($user);
