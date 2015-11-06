@@ -111,13 +111,16 @@ class InstallCommand extends ContainerAwareCommand
 
         // user want to reset everything? Don't care about what is already here
         if (true === $this->defaultInput->getOption('reset')) {
-            $this->defaultOutput->writeln('Droping database, creating database and schema');
+            $this->defaultOutput->writeln('Droping database, creating database and schema, clearing the cache');
 
             $this
                 ->runCommand('doctrine:database:drop', array('--force' => true))
                 ->runCommand('doctrine:database:create')
                 ->runCommand('doctrine:schema:create')
+                ->runCommand('cache:clear')
             ;
+
+            $this->defaultOutput->writeln('');
 
             return $this;
         }
@@ -130,6 +133,8 @@ class InstallCommand extends ContainerAwareCommand
                 ->runCommand('doctrine:schema:create')
                 ->runCommand('cache:clear')
             ;
+
+            $this->defaultOutput->writeln('');
 
             return $this;
         }
