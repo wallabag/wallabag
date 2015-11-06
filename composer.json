@@ -60,7 +60,8 @@
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "~2.2.0",
         "sensio/generator-bundle": "~2.5",
-        "phpunit/phpunit": "~4.4"
+        "phpunit/phpunit": "~4.4",
+        "symfony/phpunit-bridge": "~2.7.0"
     },
     "scripts": {
         "post-install-cmd": [
