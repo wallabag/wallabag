@@ -18,8 +18,8 @@ class DetectActiveTheme implements DeviceDetectionInterface
     protected $defaultTheme;
 
     /**
-     * @param TokenStorageInterface $tokenStorage       Needed to retrieve the current user
-     * @param string                   $defaultTheme    Default theme when user isn't logged in
+     * @param TokenStorageInterface $tokenStorage Needed to retrieve the current user
+     * @param string                $defaultTheme Default theme when user isn't logged in
      */
     public function __construct(TokenStorageInterface $tokenStorage, $defaultTheme)
     {
