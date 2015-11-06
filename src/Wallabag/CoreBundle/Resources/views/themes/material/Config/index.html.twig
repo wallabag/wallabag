@@ -21,9 +21,8 @@
                         </ul>
                     </div>
 
-
                     <div id="set1" class="col s12">
-                        <form action="{{ path('config') }}" method="post" {{ form_enctype(form.config) }}>
+                        {{ form_start(form.config) }}
                             {{ form_errors(form.config) }}
 
                             <div class="row">
@@ -57,9 +56,8 @@
                         </form>
                     </div>
 
-
                     <div id="set2" class="col s12">
-                        <form action="{{ path('config') }}#set2" method="post" {{ form_enctype(form.rss) }}>
+                        {{ form_start(form.rss) }}
                             {{ form_errors(form.rss) }}
 
                             <div class="row">
@@ -111,9 +109,8 @@
                         </form>
                     </div>
 
-
                     <div id="set3" class="col s12">
-                        <form action="{{ path('config') }}#set3" method="post" {{ form_enctype(form.user) }}>
+                        {{ form_start(form.user) }}
                             {{ form_errors(form.user) }}
 
                             <div class="row">
@@ -150,9 +147,8 @@
                         </form>
                     </div>
 
-
                     <div id="set4" class="col s12">
-                        <form action="{{ path('config') }}#set4" method="post" {{ form_enctype(form.pwd) }}>
+                        {{ form_start(form.pwd) }}
                             {{ form_errors(form.pwd) }}
 
                             <div class="row">
@@ -189,7 +185,7 @@
 
                     {% if is_granted('ROLE_SUPER_ADMIN') %}
                     <div id="set5" class="col s12">
-                        <form action="{{ path('config') }}#set5" method="post" {{ form_enctype(form.new_user) }}>
+                        {{ form_start(form.new_user) }}
                             {{ form_errors(form.new_user) }}
 
                             <div class="row">
