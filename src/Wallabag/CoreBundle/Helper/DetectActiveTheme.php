@@ -3,7 +3,7 @@
 namespace Wallabag\CoreBundle\Helper;
 
 use Liip\ThemeBundle\Helper\DeviceDetectionInterface;
-use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Wallabag\UserBundle\Entity\User;
 
 /**
@@ -14,16 +14,16 @@ use Wallabag\UserBundle\Entity\User;
  */
 class DetectActiveTheme implements DeviceDetectionInterface
 {
-    protected $securityContext;
+    protected $tokenStorage;
     protected $defaultTheme;
 
     /**
-     * @param SecurityContextInterface $securityContext Needed to retrieve the current user
-     * @param string                   $defaultTheme    Default theme when user isn't logged in
+     * @param TokenStorageInterface $tokenStorage Needed to retrieve the current user
+     * @param string                $defaultTheme Default theme when user isn't logged in
      */
-    public function __construct(SecurityContextInterface $securityContext, $defaultTheme)
+    public function __construct(TokenStorageInterface $tokenStorage, $defaultTheme)
     {
-        $this->securityContext = $securityContext;
+        $this->tokenStorage = $tokenStorage;
         $this->defaultTheme = $defaultTheme;
     }
 
@@ -42,7 +42,7 @@ class DetectActiveTheme implements DeviceDetectionInterface
      */
     public function getType()
     {
-        $token = $this->securityContext->getToken();
+        $token = $this->tokenStorage->getToken();
 
         if (is_null($token)) {
             return $this->defaultTheme;

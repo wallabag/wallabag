@@ -29,7 +29,7 @@ class ConfigController extends Controller
         $user = $this->getUser();
 
         // handle basic config detail (this form is defined as a service)
-        $configForm = $this->createForm('config', $config);
+        $configForm = $this->createForm('config', $config, array('action' => $this->generateUrl('config')));
         $configForm->handleRequest($request);
 
         if ($configForm->isValid()) {
@@ -49,7 +49,7 @@ class ConfigController extends Controller
         }
 
         // handle changing password
-        $pwdForm = $this->createForm(new ChangePasswordType());
+        $pwdForm = $this->createForm(new ChangePasswordType(), null, array('action' => $this->generateUrl('config').'#set4'));
         $pwdForm->handleRequest($request);
 
         if ($pwdForm->isValid()) {
@@ -65,7 +65,10 @@ class ConfigController extends Controller
         }
 
         // handle changing user information
-        $userForm = $this->createForm(new UserInformationType(), $user, array('validation_groups' => array('Profile')));
+        $userForm = $this->createForm(new UserInformationType(), $user, array(
+            'validation_groups' => array('Profile'),
+            'action' => $this->generateUrl('config').'#set3',
+        ));
         $userForm->handleRequest($request);
 
         if ($userForm->isValid()) {
@@ -80,7 +83,7 @@ class ConfigController extends Controller
         }
 
         // handle rss information
-        $rssForm = $this->createForm(new RssType(), $config);
+        $rssForm = $this->createForm(new RssType(), $config, array('action' => $this->generateUrl('config').'#set2'));
         $rssForm->handleRequest($request);
 
         if ($rssForm->isValid()) {
@@ -99,7 +102,10 @@ class ConfigController extends Controller
         $newUser = $userManager->createUser();
         // enable created user by default
         $newUser->setEnabled(true);
-        $newUserForm = $this->createForm(new NewUserType(), $newUser, array('validation_groups' => array('Profile')));
+        $newUserForm = $this->createForm(new NewUserType(), $newUser, array(
+            'validation_groups' => array('Profile'),
+            'action' => $this->generateUrl('config').'#set5',
+        ));
         $newUserForm->handleRequest($request);
 
         if ($newUserForm->isValid() && $this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')) {

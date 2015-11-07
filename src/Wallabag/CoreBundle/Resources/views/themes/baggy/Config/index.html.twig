@@ -5,7 +5,7 @@
 {% block content %}
     <h2>{% trans %}Wallabag configuration{% endtrans %}</h2>
 
-    <form action="{{ path('config') }}" method="post" {{ form_enctype(form.config) }}>
+    {{ form_start(form.config) }}
         {{ form_errors(form.config) }}
 
         <fieldset class="w500p inline">
@@ -37,7 +37,7 @@
 
     <h2>{% trans %}RSS configuration{% endtrans %}</h2>
 
-    <form action="{{ path('config') }}" method="post" {{ form_enctype(form.rss) }}>
+    {{ form_start(form.rss) }}
         {{ form_errors(form.rss) }}
 
         <fieldset class="w500p inline">
@@ -81,7 +81,7 @@
 
     <h2>{% trans %}User information{% endtrans %}</h2>
 
-    <form action="{{ path('config') }}" method="post" {{ form_enctype(form.user) }}>
+    {{ form_start(form.user) }}
         {{ form_errors(form.user) }}
 
         <fieldset class="w500p inline">
@@ -115,7 +115,7 @@
 
     <h2>{% trans %}Change your password{% endtrans %}</h2>
 
-    <form action="{{ path('config') }}" method="post" {{ form_enctype(form.pwd) }}>
+    {{ form_start(form.pwd) }}
         {{ form_errors(form.pwd) }}
 
         <fieldset class="w500p inline">
@@ -148,7 +148,7 @@
     {% if is_granted('ROLE_SUPER_ADMIN') %}
     <h2>{% trans %}Add a user{% endtrans %}</h2>
 
-    <form action="{{ path('config') }}" method="post" {{ form_enctype(form.new_user) }}>
+    {{ form_start(form.new_user) }}
         {{ form_errors(form.new_user) }}
 
         <fieldset class="w500p inline">

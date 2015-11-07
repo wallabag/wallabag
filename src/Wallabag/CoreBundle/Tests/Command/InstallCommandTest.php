@@ -35,19 +35,16 @@ class InstallCommandTest extends WallabagCoreTestCase
 
         $command = $application->find('wallabag:install');
 
-        // We mock the DialogHelper
-        $dialog = $this->getMockBuilder('Symfony\Component\Console\Helper\DialogHelper')
+        // We mock the QuestionHelper
+        $question = $this->getMockBuilder('Symfony\Component\Console\Helper\QuestionHelper')
             ->disableOriginalConstructor()
             ->getMock();
-        $dialog->expects($this->any())
+        $question->expects($this->any())
             ->method('ask')
-            ->will($this->returnValue('test_'.uniqid('', true)));
-        $dialog->expects($this->any())
-            ->method('askConfirmation')
-            ->will($this->returnValue(true));
+            ->will($this->returnValue('yes_'.uniqid('', true)));
 
         // We override the standard helper with our mock
-        $command->getHelperSet()->set($dialog, 'dialog');
+        $command->getHelperSet()->set($question, 'question');
 
         $tester = new CommandTester($command);
         $tester->execute(array(
@@ -69,19 +66,16 @@ class InstallCommandTest extends WallabagCoreTestCase
 
         $command = $application->find('wallabag:install');
 
-        // We mock the DialogHelper
-        $dialog = $this->getMockBuilder('Symfony\Component\Console\Helper\DialogHelper')
+        // We mock the QuestionHelper
+        $question = $this->getMockBuilder('Symfony\Component\Console\Helper\QuestionHelper')
             ->disableOriginalConstructor()
             ->getMock();
-        $dialog->expects($this->any())
+        $question->expects($this->any())
             ->method('ask')
-            ->will($this->returnValue('test_'.uniqid('', true)));
-        $dialog->expects($this->any())
-            ->method('askConfirmation')
-            ->will($this->returnValue(true));
+            ->will($this->returnValue('yes_'.uniqid('', true)));
 
         // We override the standard helper with our mock
-        $command->getHelperSet()->set($dialog, 'dialog');
+        $command->getHelperSet()->set($question, 'question');
 
         $tester = new CommandTester($command);
         $tester->execute(array(
@@ -119,19 +113,16 @@ class InstallCommandTest extends WallabagCoreTestCase
 
         $command = $application->find('wallabag:install');
 
-        // We mock the DialogHelper
-        $dialog = $this->getMockBuilder('Symfony\Component\Console\Helper\DialogHelper')
+        // We mock the QuestionHelper
+        $question = $this->getMockBuilder('Symfony\Component\Console\Helper\QuestionHelper')
             ->disableOriginalConstructor()
             ->getMock();
-        $dialog->expects($this->any())
+        $question->expects($this->any())
             ->method('ask')
-            ->will($this->returnValue('test_'.uniqid('', true)));
-        $dialog->expects($this->any())
-            ->method('askConfirmation')
-            ->will($this->returnValue(true));
+            ->will($this->returnValue('yes_'.uniqid('', true)));
 
         // We override the standard helper with our mock
-        $command->getHelperSet()->set($dialog, 'dialog');
+        $command->getHelperSet()->set($question, 'question');
 
         $tester = new CommandTester($command);
         $tester->execute(array(
@@ -156,13 +147,13 @@ class InstallCommandTest extends WallabagCoreTestCase
 
         $command = $application->find('wallabag:install');
 
-        // We mock the DialogHelper
-        $dialog = $this->getMockBuilder('Symfony\Component\Console\Helper\DialogHelper')
+        // We mock the QuestionHelper
+        $question = $this->getMockBuilder('Symfony\Component\Console\Helper\QuestionHelper')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $dialog->expects($this->exactly(3))
-            ->method('askConfirmation')
+        $question->expects($this->exactly(3))
+            ->method('ask')
             ->will($this->onConsecutiveCalls(
                 false, // don't want to reset the entire database
                 true, // do want to reset the schema
@@ -170,7 +161,7 @@ class InstallCommandTest extends WallabagCoreTestCase
             ));
 
         // We override the standard helper with our mock
-        $command->getHelperSet()->set($dialog, 'dialog');
+        $command->getHelperSet()->set($question, 'question');
 
         $tester = new CommandTester($command);
         $tester->execute(array(
@@ -216,20 +207,20 @@ class InstallCommandTest extends WallabagCoreTestCase
 
         $command = $application->find('wallabag:install');
 
-        // We mock the DialogHelper
-        $dialog = $this->getMockBuilder('Symfony\Component\Console\Helper\DialogHelper')
+        // We mock the QuestionHelper
+        $question = $this->getMockBuilder('Symfony\Component\Console\Helper\QuestionHelper')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $dialog->expects($this->exactly(2))
-            ->method('askConfirmation')
+        $question->expects($this->exactly(2))
+            ->method('ask')
             ->will($this->onConsecutiveCalls(
                 false, // don't want to reset the entire database
                 false // don't want to create a new user
             ));
 
         // We override the standard helper with our mock
-        $command->getHelperSet()->set($dialog, 'dialog');
+        $command->getHelperSet()->set($question, 'question');
 
         $tester = new CommandTester($command);
         $tester->execute(array(
@@ -253,19 +244,16 @@ class InstallCommandTest extends WallabagCoreTestCase
 
         $command = $application->find('wallabag:install');
 
-        // We mock the DialogHelper
-        $dialog = $this->getMockBuilder('Symfony\Component\Console\Helper\DialogHelper')
+        // We mock the QuestionHelper
+        $question = $this->getMockBuilder('Symfony\Component\Console\Helper\QuestionHelper')
             ->disableOriginalConstructor()
             ->getMock();
-        $dialog->expects($this->any())
+        $question->expects($this->any())
             ->method('ask')
-            ->will($this->returnValue('test_'.uniqid('', true)));
-        $dialog->expects($this->any())
-            ->method('askConfirmation')
-            ->will($this->returnValue(true));
+            ->will($this->returnValue('yes_'.uniqid('', true)));
 
         // We override the standard helper with our mock
-        $command->getHelperSet()->set($dialog, 'dialog');
+        $command->getHelperSet()->set($question, 'question');
 
         $tester = new CommandTester($command);
         $tester->execute(array(

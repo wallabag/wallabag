@@ -1,10 +1,10 @@
 wallabag_api:
     resource: "@WallabagApiBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix: /
 
 app:
     resource: @WallabagCoreBundle/Controller/
-    type:     annotation
+    type: annotation
 
 doc-api:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
@@ -16,10 +16,10 @@ rest :
     prefix : /api
 
 homepage:
-    pattern:   "/{page}"
-    defaults:  { _controller: WallabagCoreBundle:Entry:showUnread, page : 1 }
+    path: "/{page}"
+    defaults: { _controller: WallabagCoreBundle:Entry:showUnread, page : 1 }
     requirements:
-        page:  \d+
+        page: \d+
 
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
