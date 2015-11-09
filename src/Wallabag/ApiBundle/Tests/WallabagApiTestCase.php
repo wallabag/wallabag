@@ -5,7 +5,7 @@ namespace Wallabag\ApiBundle\Tests;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\Cookie;
 
-abstract class AbstractControllerTest extends WebTestCase
+abstract class WallabagApiTestCase extends WebTestCase
 {
     /**
      * @var Client

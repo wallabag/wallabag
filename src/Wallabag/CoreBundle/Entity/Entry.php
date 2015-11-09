@@ -14,7 +14,7 @@ use Wallabag\UserBundle\Entity\User;
  *
  * @XmlRoot("entry")
  * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\EntryRepository")
- * @ORM\Table
+ * @ORM\Table(name="`entry`")
  * @ORM\HasLifecycleCallbacks()
  * @Hateoas\Relation("self", href = "expr('/api/entries/' ~ object.getId())")
  */

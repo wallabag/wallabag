@@ -2,9 +2,9 @@
 
 namespace Wallabag\ApiBundle\Tests\Controller;
 
-use Wallabag\ApiBundle\Tests\AbstractControllerTest;
+use Wallabag\ApiBundle\Tests\WallabagApiTestCase;
 
-class WallabagRestControllerTest extends AbstractControllerTest
+class WallabagRestControllerTest extends WallabagApiTestCase
 {
     protected static $salt;
 

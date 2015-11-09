@@ -96,9 +96,9 @@ class InstallCommand extends ContainerAwareCommand
 
         if (!$fulfilled) {
             throw new \RuntimeException('Some system requirements are not fulfilled. Please check output messages and fix them.');
-        } else {
-            $this->defaultOutput->writeln('<info>Success! Your system can run Wallabag properly.</info>');
         }
+
+        $this->defaultOutput->writeln('<info>Success! Your system can run Wallabag properly.</info>');
 
         $this->defaultOutput->writeln('');
 
@@ -111,13 +111,16 @@ class InstallCommand extends ContainerAwareCommand
 
         // user want to reset everything? Don't care about what is already here
         if (true === $this->defaultInput->getOption('reset')) {
-            $this->defaultOutput->writeln('Droping database, creating database and schema');
+            $this->defaultOutput->writeln('Droping database, creating database and schema, clearing the cache');
 
             $this
                 ->runCommand('doctrine:database:drop', array('--force' => true))
                 ->runCommand('doctrine:database:create')
                 ->runCommand('doctrine:schema:create')
+                ->runCommand('cache:clear')
             ;
+
+            $this->defaultOutput->writeln('');
 
             return $this;
         }
@@ -130,6 +133,8 @@ class InstallCommand extends ContainerAwareCommand
                 ->runCommand('doctrine:schema:create')
                 ->runCommand('cache:clear')
             ;
+
+            $this->defaultOutput->writeln('');
 
             return $this;
         }
@@ -283,7 +288,13 @@ class InstallCommand extends ContainerAwareCommand
         try {
             $schemaManager = $connection->getSchemaManager();
         } catch (\Exception $exception) {
+            // mysql & sqlite
             if (false !== strpos($exception->getMessage(), sprintf("Unknown database '%s'", $databaseName))) {
+                return false;
+            }
+
+            // pgsql
+            if (false !== strpos($exception->getMessage(), sprintf('database "%s" does not exist', $databaseName))) {
                 return false;
             }
 

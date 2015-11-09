@@ -19,7 +19,7 @@ use Wallabag\CoreBundle\Entity\Tag;
  * User.
  *
  * @ORM\Entity(repositoryClass="Wallabag\UserBundle\Repository\UserRepository")
- * @ORM\Table
+ * @ORM\Table(name="`user`")
  * @ORM\HasLifecycleCallbacks()
  * @ExclusionPolicy("all")
  *

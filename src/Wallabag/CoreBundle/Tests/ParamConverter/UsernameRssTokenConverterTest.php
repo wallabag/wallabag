@@ -2,13 +2,12 @@
 
 namespace Wallabag\CoreBundle\Tests\Command;
 
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Wallabag\CoreBundle\ParamConverter\UsernameRssTokenConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Wallabag\UserBundle\Entity\User;
 
-class UsernameRssTokenConverterTest extends KernelTestCase
+class UsernameRssTokenConverterTest extends \PHPUnit_Framework_TestCase
 {
     public function testSupportsWithNoRegistry()
     {

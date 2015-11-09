@@ -74,6 +74,9 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertEquals('This value should not be blank.', $alert[0]);
     }
 
+    /**
+     * This test will require an internet connection.
+     */
     public function testPostNewOk()
     {
         $this->logInAs('admin');
@@ -119,6 +122,9 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
+    /**
+     * @depends testPostNewOk
+     */
     public function testView()
     {
         $this->logInAs('admin');
