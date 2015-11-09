@@ -102,13 +102,16 @@
         <li class="bold">
             <a class="waves-effect collapsible-header">
                 <i class="mdi-file-file-download small"></i>
-                <span><del>{% trans %}Download{% endtrans %}</del></span>
+                <span>{% trans %}Download{% endtrans %}</span>
             </a>
             <div class="collapsible-body">
                 <ul>
-                    {% if export_epub %}<li><del><a href="?epub&amp;method=id&amp;value={{ entry.id }}" title="Generate ePub file">EPUB</a></del></li>{% endif %}
-                    {% if export_mobi %}<li><del><a href="?mobi&amp;method=id&amp;value={{ entry.id }}" title="Generate Mobi file">MOBI</a></del></li>{% endif %}
-                    {% if export_pdf %}<li><del><a href="?pdf&amp;method=id&amp;value={{ entry.id }}" title="Generate PDF file">PDF</a></del> </li>{% endif %}
+                    {% if export_epub %}<li><a href="{{ path('export_entry', { 'id': entry.id, 'format': 'epub' }) }}" title="Generate ePub file">EPUB</a></li>{% endif %}
+                    {% if export_mobi %}<li><a href="{{ path('export_entry', { 'id': entry.id, 'format': 'mobi' }) }}" title="Generate Mobi file">MOBI</a></li>{% endif %}
+                    {% if export_pdf %}<li><a href="{{ path('export_entry', { 'id': entry.id, 'format': 'pdf' }) }}" title="Generate PDF file">PDF</a></li>{% endif %}
+                    <li><a href="{{ path('export_entry', { 'id': entry.id, 'format': 'csv' }) }}" title="Generate CSV file">CSV</a></li>
+                    <li><a href="{{ path('export_entry', { 'id': entry.id, 'format': 'json' }) }}" title="Generate JSON file">JSON</a></li>
+                    <li><a href="{{ path('export_entry', { 'id': entry.id, 'format': 'xml' }) }}" title="Generate XML file">XML</a></li>
                 </ul>
             </div>
         </li>

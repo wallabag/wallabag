@@ -64,3 +64,9 @@ services:
             - %language%
         tags:
             - { name: kernel.event_subscriber }
+
+    wallabag_core.helper.entries_export:
+        class: Wallabag\CoreBundle\Helper\EntriesExport
+        arguments:
+            - %wallabag_url%
+            - src/Wallabag/CoreBundle/Resources/views/themes/_global/public/img/appicon/apple-touch-icon-152.png

@@ -4,8 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6bd09434f83c7e6b5e1c75fddbd7608b",
-    "content-hash": "d07d54c4cc6f4f4947c652bd659af02e",
+    "hash": "a9ec461e17166dcda1563dd55f6ff861",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1087,6 +1086,244 @@
                 "User management"
             ],
             "time": "2015-11-03 10:24:23"
+        },
+        {
+            "name": "grandt/binstring",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Grandt/PHPBinString.git",
+                "reference": "825fe2ac8a68190f651fc2dbc07b6edde18bc431"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Grandt/PHPBinString/zipball/825fe2ac8a68190f651fc2dbc07b6edde18bc431",
+                "reference": "825fe2ac8a68190f651fc2dbc07b6edde18bc431",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "BinString.php",
+                    "BinStringStatic.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1"
+            ],
+            "authors": [
+                {
+                    "name": "A. Grandt",
+                    "email": "php@grandt.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A class for working around the use of mbstring.func_override",
+            "homepage": "https://github.com/Grandt/PHPBinString",
+            "keywords": [
+                "binary strings",
+                "mbstring"
+            ],
+            "time": "2015-08-13 06:14:41"
+        },
+        {
+            "name": "grandt/phpepub",
+            "version": "4.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Grandt/PHPePub.git",
+                "reference": "dee0c5549a8d2c6bf6a1ad5b4ee21d245b711fca"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Grandt/PHPePub/zipball/dee0c5549a8d2c6bf6a1ad5b4ee21d245b711fca",
+                "reference": "dee0c5549a8d2c6bf6a1ad5b4ee21d245b711fca",
+                "shasum": ""
+            },
+            "require": {
+                "grandt/phpresizegif": ">=1.0.3",
+                "grandt/relativepath": ">=1.0.1",
+                "php": ">=5.3.0",
+                "phpzip/phpzip": ">=2.0.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PHPePub\\": "src/PHPePub"
+                },
+                "classmap": [
+                    "src/lib.uuid.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1"
+            ],
+            "authors": [
+                {
+                    "name": "A. Grandt",
+                    "email": "php@grandt.com",
+                    "homepage": "http://grandt.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Package to create and stream e-books in the ePub 2.0 and 3.0 formats.",
+            "homepage": "https://github.com/Grandt/PHPZip",
+            "keywords": [
+                "e-book",
+                "epub"
+            ],
+            "time": "2015-09-15 08:47:09"
+        },
+        {
+            "name": "grandt/phpresizegif",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Grandt/PHPResizeGif.git",
+                "reference": "775f6810fcda2fd1d8ca881d44a80c8d310ae7fe"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Grandt/PHPResizeGif/zipball/775f6810fcda2fd1d8ca881d44a80c8d310ae7fe",
+                "reference": "775f6810fcda2fd1d8ca881d44a80c8d310ae7fe",
+                "shasum": ""
+            },
+            "require": {
+                "grandt/binstring": ">=0.2.0",
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "grandt\\ResizeGif\\": "src/ResizeGif",
+                    "grandt\\ResizeGif\\Files\\": "src/ResizeGif/Files",
+                    "grandt\\ResizeGif\\Structure\\": "src/ResizeGif/Structure",
+                    "grandt\\ResizeGif\\Debug\\": "src/ResizeGif/Debug"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1"
+            ],
+            "authors": [
+                {
+                    "name": "A. Grandt",
+                    "email": "php@grandt.com",
+                    "homepage": "http://grandt.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "GIF89a compliant Gif resizer, including transparency and optimized gifs with sub sized elements.",
+            "homepage": "https://github.com/Grandt/PHPResizeGif",
+            "keywords": [
+                "GIF89a",
+                "animated gif",
+                "gif",
+                "resize"
+            ],
+            "time": "2015-05-10 10:52:24"
+        },
+        {
+            "name": "grandt/phpzipmerge",
+            "version": "1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Grandt/PHPZipMerge.git",
+                "reference": "0b1273d3c2dbfe244904158b1dbd65a663264fb9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Grandt/PHPZipMerge/zipball/0b1273d3c2dbfe244904158b1dbd65a663264fb9",
+                "reference": "0b1273d3c2dbfe244904158b1dbd65a663264fb9",
+                "shasum": ""
+            },
+            "require": {
+                "grandt/binstring": ">=1.0.0",
+                "grandt/relativepath": ">=1.0.1",
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ZipMerge\\": "src/ZipMerge"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1"
+            ],
+            "authors": [
+                {
+                    "name": "A. Grandt",
+                    "email": "php@grandt.com",
+                    "homepage": "http://grandt.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Greg Kappatos",
+                    "homepage": "http://websiteconnect.com.au",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Merge and stream multiple Zip files on the fly.",
+            "homepage": "https://github.com/Grandt/PHPZipMerge",
+            "keywords": [
+                "archive",
+                "compressed",
+                "compression",
+                "merge",
+                "phpzip",
+                "pkzip",
+                "stream",
+                "zip"
+            ],
+            "time": "2015-08-18 13:49:33"
+        },
+        {
+            "name": "grandt/relativepath",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Grandt/PHPRelativePath.git",
+                "reference": "19541133c24143b6295688472c54dd6ed15a5462"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Grandt/PHPRelativePath/zipball/19541133c24143b6295688472c54dd6ed15a5462",
+                "reference": "19541133c24143b6295688472c54dd6ed15a5462",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "RelativePath.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1"
+            ],
+            "authors": [
+                {
+                    "name": "A. Grandt",
+                    "email": "php@grandt.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A class for cleaning up/collapsing relative paths. Like real_path, but without the need for the path to exist on the filesystem.",
+            "homepage": "https://github.com/Grandt/PHPRelativePath",
+            "keywords": [
+                "file path"
+            ],
+            "time": "2015-05-14 08:18:23"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -2524,6 +2761,67 @@
             "time": "2015-07-25 16:39:46"
         },
         {
+            "name": "phpzip/phpzip",
+            "version": "2.0.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Grandt/PHPZip.git",
+                "reference": "a43a7ce8b2f21050f8b143876c5c1661b0d65306"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Grandt/PHPZip/zipball/a43a7ce8b2f21050f8b143876c5c1661b0d65306",
+                "reference": "a43a7ce8b2f21050f8b143876c5c1661b0d65306",
+                "shasum": ""
+            },
+            "require": {
+                "grandt/binstring": ">=0.2.0",
+                "grandt/phpzipmerge": ">=1.0.3",
+                "grandt/relativepath": ">=1.0.1",
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PHPZip\\Zip\\": "src/Zip"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1"
+            ],
+            "authors": [
+                {
+                    "name": "Adam Schmalhofer",
+                    "email": "Adam.Schmalhofer@gmx.de",
+                    "role": "Developer"
+                },
+                {
+                    "name": "A. Grandt",
+                    "email": "php@grandt.com",
+                    "homepage": "http://grandt.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Greg Kappatos",
+                    "homepage": "http://websiteconnect.com.au",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Package to create and stream archives of compressed files in ZIP format with PHP 5.3+",
+            "homepage": "https://github.com/Grandt/PHPZip",
+            "keywords": [
+                "archive",
+                "compressed",
+                "compression",
+                "phpzip",
+                "pkzip",
+                "stream",
+                "zip"
+            ],
+            "time": "2015-04-30 06:45:53"
+        },
+        {
             "name": "psr/log",
             "version": "1.0.0",
             "source": {
@@ -3497,6 +3795,55 @@
             "time": "2015-11-05 12:49:06"
         },
         {
+            "name": "wallabag/php-mobi",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wallabag/php-mobi.git",
+                "reference": "1cd7d022fe6be838535d6bba917d19cc48dcf487"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wallabag/php-mobi/zipball/1cd7d022fe6be838535d6bba917d19cc48dcf487",
+                "reference": "1cd7d022fe6be838535d6bba917d19cc48dcf487",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "replace": {
+                "wallabag/phpmobi": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "MOBIClass/MOBI.php"
+                ]
+            },
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Sander Kromwijk",
+                    "email": "s.kromwijk@gmail.co",
+                    "role": "Original developer"
+                },
+                {
+                    "name": "Nicolas Lœuillet",
+                    "email": "nicolas@loeuillet.org",
+                    "homepage": "http://www.cdetc.fr"
+                }
+            ],
+            "description": "A Mobipocket file (.mobi) creator in PHP.",
+            "homepage": "https://github.com/wallabag/phpMobi",
+            "support": {
+                "source": "https://github.com/wallabag/php-mobi/tree/1.0.1",
+                "issues": "https://github.com/wallabag/php-mobi/issues"
+            },
+            "time": "2015-10-16 08:42:42"
+        },
+        {
             "name": "willdurand/hateoas",
             "version": "v2.6.0",
             "source": {
@@ -3602,7 +3949,7 @@
             ],
             "authors": [
                 {
-                    "name": "William Durand",
+                    "name": "William DURAND",
                     "email": "william.durand1@gmail.com"
                 }
             ],

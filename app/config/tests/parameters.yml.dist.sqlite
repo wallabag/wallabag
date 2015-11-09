@@ -51,6 +51,7 @@ parameters:
     export_epub: true
     export_mobi: true
     export_pdf: true
+    wallabag_url: http://v2.wallabag.org
 
     # default user config
     items_on_page: 12
