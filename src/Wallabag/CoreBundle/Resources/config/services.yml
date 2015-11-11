@@ -65,15 +65,13 @@ services:
 
     wallabag_core.entry_repository:
         class: Wallabag\CoreBundle\Repository\EntryRepository
-        factory_service: doctrine.orm.default_entity_manager
-        factory_method: getRepository
+        factory: [ @doctrine.orm.default_entity_manager, getRepository ]
         arguments:
             - WallabagCoreBundle:Entry
 
     wallabag_core.tag_repository:
         class: Wallabag\CoreBundle\Repository\TagRepository
-        factory_service: doctrine.orm.default_entity_manager
-        factory_method: getRepository
+        factory: [ @doctrine.orm.default_entity_manager, getRepository ]
         arguments:
             - WallabagCoreBundle:Tag
 
