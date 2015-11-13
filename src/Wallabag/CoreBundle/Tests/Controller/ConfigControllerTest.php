@@ -505,7 +505,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $this->assertGreaterThan(1, $alert = $crawler->filter('div.messages.success')->extract(array('_text')));
         $this->assertContains('Tagging rules updated', $alert[0]);
 
-        $deleteLink = $crawler->filter('.delete')->eq(0)->link();
+        $deleteLink = $crawler->filter('.delete')->last()->link();
 
         $crawler = $client->click($deleteLink);
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
