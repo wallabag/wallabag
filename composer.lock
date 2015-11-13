@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9372aa161ce94f8b5506d7e9cc73a884",
-    "content-hash": "e703c21d623d708ff9528c298d7ab05f",
+    "hash": "fed9468f6c830b0f81899daad7670af7",
+    "content-hash": "394f8a6ca5162f2d2756dbbee0ff5aae",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -2731,22 +2731,22 @@
         },
         {
             "name": "kphoen/rulerz-bundle",
-            "version": "0.9.1",
+            "version": "0.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/K-Phoen/RulerZBundle.git",
-                "reference": "0d8d6ca57ebf2c914c967bc13cdf13c5ebb2de62"
+                "reference": "dcaaed69d8252fa1e3a25802f8cf697947570778"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/K-Phoen/RulerZBundle/zipball/0d8d6ca57ebf2c914c967bc13cdf13c5ebb2de62",
-                "reference": "0d8d6ca57ebf2c914c967bc13cdf13c5ebb2de62",
+                "url": "https://api.github.com/repos/K-Phoen/RulerZBundle/zipball/dcaaed69d8252fa1e3a25802f8cf697947570778",
+                "reference": "dcaaed69d8252fa1e3a25802f8cf697947570778",
                 "shasum": ""
             },
             "require": {
                 "kphoen/rulerz": "~0.1, >=0.13.0",
-                "symfony/framework-bundle": "~2.3",
-                "symfony/validator": "~2.3"
+                "symfony/framework-bundle": "~2.3|~3.0",
+                "symfony/validator": "~2.3|~3.0"
             },
             "require-dev": {
                 "matthiasnoback/symfony-dependency-injection-test": "~0.7",
@@ -2777,7 +2777,7 @@
                 "rulerz",
                 "specification"
             ],
-            "time": "2015-11-11 15:37:07"
+            "time": "2015-11-13 13:00:14"
         },
         {
             "name": "kriswallsmith/assetic",

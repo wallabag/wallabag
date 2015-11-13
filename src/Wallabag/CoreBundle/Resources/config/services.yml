@@ -91,3 +91,13 @@ services:
         arguments:
             - %wallabag_url%
             - src/Wallabag/CoreBundle/Resources/views/themes/_global/public/img/appicon/apple-touch-icon-152.png
+
+    wallabag.operator.array.matches:
+        class: Wallabag\CoreBundle\Operator\PHP\Matches
+        tags:
+            - { name: rulerz.operator, executor: rulerz.executor.array, operator: matches }
+
+    wallabag.operator.doctrine.matches:
+        class: Wallabag\CoreBundle\Operator\Doctrine\Matches
+        tags:
+            - { name: rulerz.operator, executor: rulerz.executor.doctrine, operator: matches, inline: true }
