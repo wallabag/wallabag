@@ -131,7 +131,10 @@ class EntryControllerTest extends WallabagCoreTestCase
         $entry = $em
             ->getRepository('WallabagCoreBundle:Entry')
             ->findOneByUrl($url);
-        $this->assertCount(1, $entry->getTags());
+        $tags = $entry->getTags();
+
+        $this->assertCount(1, $tags);
+        $this->assertEquals('wallabag', $tags[0]->getLabel());
 
         $em->remove($entry);
         $em->flush();
