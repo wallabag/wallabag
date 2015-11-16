@@ -200,7 +200,7 @@
                             </div>
                         </div>
 
-                        <form action="{{ path('config') }}#set5" method="post" {{ form_enctype(form.new_tagging_rule) }}>
+                        {{ form_start(form.new_tagging_rule) }}
                             {{ form_errors(form.new_tagging_rule) }}
 
                             <div class="row">
@@ -332,7 +332,7 @@
                     </div>
 
                     {% if is_granted('ROLE_SUPER_ADMIN') %}
-                    <div id="set5" class="col s12">
+                    <div id="set6" class="col s12">
                         {{ form_start(form.new_user) }}
                             {{ form_errors(form.new_user) }}
 

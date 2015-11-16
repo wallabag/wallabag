@@ -102,7 +102,7 @@ class ConfigController extends Controller
 
         // handle tagging rule
         $taggingRule = new TaggingRule();
-        $newTaggingRule = $this->createForm(new TaggingRuleType(), $taggingRule);
+        $newTaggingRule = $this->createForm(new TaggingRuleType(), $taggingRule, array('action' => $this->generateUrl('config').'#set5'));
         $newTaggingRule->handleRequest($request);
 
         if ($newTaggingRule->isValid()) {
