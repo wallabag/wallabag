@@ -79,6 +79,7 @@ class Config
 
     /**
      * @ORM\OneToMany(targetEntity="Wallabag\CoreBundle\Entity\TaggingRule", mappedBy="config", cascade={"remove"})
+     * @ORM\OrderBy({"id" = "ASC"})
      */
     private $taggingRules;
 
