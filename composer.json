@@ -85,6 +85,9 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
+        ],
+        "build-parameters": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
         ]
     },
     "extra": {
@@ -92,7 +95,13 @@
         "symfony-web-dir": "web",
         "symfony-assets-install": "relative",
         "incenteev-parameters": {
-            "file": "app/config/parameters.yml"
+            "file": "app/config/parameters.yml",
+            "env-map": {
+                "mailer_host": "WALLABAG_MAILER_HOST",
+                "mailer_user": "WALLABAG_MAILER_USER",
+                "mailer_password": "WALLABAG_MAILER_PASSWORD",
+                "secret": "WALLABAG_SECRET"
+            }
         }
     },
     "autoload": {
