@@ -23,8 +23,9 @@
         <!--
           Avoid tests to fail because of deprecated stuff
           see: http://symfony.com/doc/current/cookbook/upgrade/major_version.html#deprecations-in-phpunit
+
+          <env name="SYMFONY_DEPRECATIONS_HELPER" value="weak" />
         -->
-        <env name="SYMFONY_DEPRECATIONS_HELPER" value="weak" />
     </php>
 
     <filter>
