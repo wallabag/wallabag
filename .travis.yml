@@ -49,7 +49,7 @@ before_script:
 
 script:
     - ant prepare-$DB
-    - SYMFONY_DEPRECATIONS_HELPER=weak bin/phpunit -v
+    - bin/phpunit -v
 
 # after_script:
     # - |
