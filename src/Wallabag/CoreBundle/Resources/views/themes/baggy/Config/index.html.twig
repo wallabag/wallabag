@@ -145,6 +145,39 @@
         {{ form_rest(form.pwd) }}
     </form>
 
+    <h2>{% trans %}Tagging rules{% endtrans %}</h2>
+
+    <ul>
+        {% for tagging_rule in app.user.config.taggingRules %}
+        <li>
+            if « {{ tagging_rule.rule }} » then tag as « {{ tagging_rule.tags|join(', ') }} »
+            <a href="{{ path('delete_tagging_rule', {id: tagging_rule.id}) }}" title="{% trans %}Delete{% endtrans %}" class="tool delete icon-trash icon"></a>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <form action="{{ path('config') }}" method="post" {{ form_enctype(form.new_tagging_rule) }}>
+        {{ form_errors(form.new_tagging_rule) }}
+
+        <fieldset class="w500p inline">
+            <div class="row">
+                {{ form_label(form.new_tagging_rule.rule) }}
+                {{ form_errors(form.new_tagging_rule.rule) }}
+                {{ form_widget(form.new_tagging_rule.rule) }}
+            </div>
+        </fieldset>
+
+        <fieldset class="w500p inline">
+            <div class="row">
+                {{ form_label(form.new_tagging_rule.tags) }}
+                {{ form_errors(form.new_tagging_rule.tags) }}
+                {{ form_widget(form.new_tagging_rule.tags) }}
+            </div>
+        </fieldset>
+
+        {{ form_rest(form.new_tagging_rule) }}
+    </form>
+
     {% if is_granted('ROLE_SUPER_ADMIN') %}
     <h2>{% trans %}Add a user{% endtrans %}</h2>
 

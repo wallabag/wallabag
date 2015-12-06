@@ -15,8 +15,9 @@
                         <li class="tab col s3"><a href="#set2">{% trans %}RSS{% endtrans %}</a></li>
                         <li class="tab col s3"><a href="#set3">{% trans %}User information{% endtrans %}</a></li>
                         <li class="tab col s3"><a href="#set4">{% trans %}Password{% endtrans %}</a></li>
+                        <li class="tab col s3"><a href="#set5">{% trans %}Tagging rules{% endtrans %}</a></li>
                         {% if is_granted('ROLE_SUPER_ADMIN') %}
-                        <li class="tab col s3"><a href="#set5">{% trans %}Add a user{% endtrans %}</a></li>
+                        <li class="tab col s3"><a href="#set6">{% trans %}Add a user{% endtrans %}</a></li>
                         {% endif %}
                         </ul>
                     </div>
@@ -183,8 +184,155 @@
                         </form>
                     </div>
 
-                    {% if is_granted('ROLE_SUPER_ADMIN') %}
                     <div id="set5" class="col s12">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <ul>
+                                    {% for tagging_rule in app.user.config.taggingRules %}
+                                    <li>
+                                        if « {{ tagging_rule.rule }} » then tag as « {{ tagging_rule.tags|join(', ') }} »
+                                        <a href="{{ path('delete_tagging_rule', {id: tagging_rule.id}) }}" title="{% trans %}Delete{% endtrans %}">
+                                            <i class="tool grey-text delete mdi-action-delete"></i>
+                                        </a>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+
+                        {{ form_start(form.new_tagging_rule) }}
+                            {{ form_errors(form.new_tagging_rule) }}
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form_label(form.new_tagging_rule.rule) }}
+                                    {{ form_errors(form.new_tagging_rule.rule) }}
+                                    {{ form_widget(form.new_tagging_rule.rule) }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form_label(form.new_tagging_rule.tags) }}
+                                    {{ form_errors(form.new_tagging_rule.tags) }}
+                                    {{ form_widget(form.new_tagging_rule.tags) }}
+                                </div>
+                            </div>
+
+                            <div class="hidden">{{ form_rest(form.new_tagging_rule) }}</div>
+                            <button class="btn waves-effect waves-light" type="submit" name="action">
+                                {% trans %}Save{% endtrans %}
+                            </button>
+                        </form>
+
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <h4>{% trans %}FAQ{% endtrans %}</h4>
+
+                                <h5>{% trans %}What does « tagging rules » mean?{% endtrans %}</h5>
+                                <p class="help">
+                                    {% trans %}
+                                    They are rules used by Wallabag to automatically tag new entries.<br />
+                                    Each time a new entry is added, all the tagging rules will be used to add
+                                    the tags you configured, thus saving you the trouble to manually classify
+                                    your entries.
+                                    {% endtrans %}
+                                </p>
+
+                                <h5>{% trans %}How do I use them?{% endtrans %}</h5>
+                                <p class="help">
+                                    {% trans %}
+                                    Let assume you want to tag new entries as « <i>short reading</i> » when the reading time is inferior to 3 minutes.<br />
+                                    In that case, you should put « readingTime &lt;= 3 » in the <i>Rule</i> field and « <i>short reading</i> » in the <i>Tags</i>
+                                    field.<br />
+                                    Several tags can added simultaneously by separating them by a comma: « <i>short reading, must read</i> »<br />
+                                    Complex rules can be written by using predefined operators: if « <i>readingTime &gt;= 5 AND domainName = "github.com"</i> » then tag as « <i>long reading, github </i> »
+                                    {% endtrans %}
+                                </p>
+
+                                <h5>{% trans %}Which variables and operators can I use to write rules?{% endtrans %}</h5>
+                                <p class="help">
+                                    {% trans %}The following variables and operators can be used to create tagging rules:{% endtrans %}
+
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>{% trans %}Variable{% endtrans %}</th>
+                                                <th>{% trans %}Meaning{% endtrans %}</th>
+                                                <th>{% trans %}Operator{% endtrans %}</th>
+                                                <th>{% trans %}Meaning{% endtrans %}</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr>
+                                                <td>title</td>
+                                                <td>{% trans %}Title of the entry{% endtrans %}</td>
+                                                <td>&lt;=</td>
+                                                <td>{% trans %}Less than…{% endtrans %}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>url</td>
+                                                <td>{% trans %}URL of the entry{% endtrans %}</td>
+                                                <td>&lt;</td>
+                                                <td>{% trans %}Strictly less than…{% endtrans %}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>isArchived</td>
+                                                <td>{% trans %}Whether the entry is archived or not{% endtrans %}</td>
+                                                <td>=&gt;</td>
+                                                <td>{% trans %}Greater than…{% endtrans %}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>isStared</td>
+                                                <td>{% trans %}Whether the entry is starred or not{% endtrans %}</td>
+                                                <td>&gt;</td>
+                                                <td>{% trans %}Strictly greater than…{% endtrans %}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>content</td>
+                                                <td>{% trans %}The entry's content{% endtrans %}</td>
+                                                <td>=</td>
+                                                <td>{% trans %}Equal to…{% endtrans %}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>language</td>
+                                                <td>{% trans %}The entry's language{% endtrans %}</td>
+                                                <td>!=</td>
+                                                <td>{% trans %}Not equal to…{% endtrans %}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>mimetype</td>
+                                                <td>{% trans %}The entry's mime-type{% endtrans %}</td>
+                                                <td>OR</td>
+                                                <td>{% trans %}One rule or another{% endtrans %}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>readingTime</td>
+                                                <td>{% trans %}The estimated entry's reading time, in minutes{% endtrans %}</td>
+                                                <td>AND</td>
+                                                <td>{% trans %}One rule and another{% endtrans %}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>domainName</td>
+                                                <td>{% trans %}The domain name of the entry{% endtrans %}</td>
+                                                <td>matches</td>
+                                                <td>
+                                                    {% trans %}
+                                                    Tests that a <i>subject</i> is matches a <i>search</i> (case-insensitive).<br />
+                                                    Example: <code>title matches "football"</code>
+                                                    {% endtrans %}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% if is_granted('ROLE_SUPER_ADMIN') %}
+                    <div id="set6" class="col s12">
                         {{ form_start(form.new_user) }}
                             {{ form_errors(form.new_user) }}
 

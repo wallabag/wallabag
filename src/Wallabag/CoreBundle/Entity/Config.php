@@ -2,6 +2,7 @@
 
 namespace Wallabag\CoreBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -76,12 +77,19 @@ class Config
      */
     private $user;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Wallabag\CoreBundle\Entity\TaggingRule", mappedBy="config", cascade={"remove"})
+     * @ORM\OrderBy({"id" = "ASC"})
+     */
+    private $taggingRules;
+
     /*
      * @param User     $user
      */
     public function __construct(\Wallabag\UserBundle\Entity\User $user)
     {
         $this->user = $user;
+        $this->taggingRules = new ArrayCollection();
     }
 
     /**
@@ -236,5 +244,25 @@ class Config
     public function getRssLimit()
     {
         return $this->rssLimit;
+    }
+
+    /**
+     * @param TaggingRule $rule
+     *
+     * @return Config
+     */
+    public function addTaggingRule(TaggingRule $rule)
+    {
+        $this->taggingRules[] = $rule;
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection<TaggingRule>
+     */
+    public function getTaggingRules()
+    {
+        return $this->taggingRules;
     }
 }

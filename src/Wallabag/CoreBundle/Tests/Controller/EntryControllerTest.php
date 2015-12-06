@@ -102,6 +102,44 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertContains('Google', $alert[0]);
     }
 
+    /**
+     * This test will require an internet connection.
+     */
+    public function testPostNewThatWillBeTaggued()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/new');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $form = $crawler->filter('button[type=submit]')->form();
+
+        $data = array(
+            'entry[url]' => $url = 'https://github.com/wallabag/wallabag',
+        );
+
+        $client->submit($form, $data);
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+
+        $crawler = $client->followRedirect();
+
+        $em = $client->getContainer()
+            ->get('doctrine.orm.entity_manager');
+        $entry = $em
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneByUrl($url);
+        $tags = $entry->getTags();
+
+        $this->assertCount(1, $tags);
+        $this->assertEquals('wallabag', $tags[0]->getLabel());
+
+        $em->remove($entry);
+        $em->flush();
+    }
+
     public function testArchive()
     {
         $this->logInAs('admin');

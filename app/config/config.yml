@@ -189,3 +189,7 @@ scheb_two_factor:
         sender_email: %twofactor_sender%
         digits: 6
         template: WallabagUserBundle:Authentication:form.html.twig
+
+kphoen_rulerz:
+    executors:
+        doctrine: true

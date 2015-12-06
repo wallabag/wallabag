@@ -458,6 +458,10 @@ class Entry
      */
     public function addTag(Tag $tag)
     {
+        if ($this->tags->contains($tag)) {
+            return;
+        }
+
         $this->tags[] = $tag;
         $tag->addEntry($this);
     }

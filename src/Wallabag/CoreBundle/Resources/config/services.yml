@@ -53,6 +53,27 @@ services:
         class: Wallabag\CoreBundle\Helper\ContentProxy
         arguments:
             - @wallabag_core.graby
+            - @wallabag_core.rule_based_tagger
+            - @logger
+
+    wallabag_core.rule_based_tagger:
+        class: Wallabag\CoreBundle\Helper\RuleBasedTagger
+        arguments:
+            - @rulerz
+            - @wallabag_core.tag_repository
+            - @wallabag_core.entry_repository
+
+    wallabag_core.entry_repository:
+        class: Wallabag\CoreBundle\Repository\EntryRepository
+        factory: [ @doctrine.orm.default_entity_manager, getRepository ]
+        arguments:
+            - WallabagCoreBundle:Entry
+
+    wallabag_core.tag_repository:
+        class: Wallabag\CoreBundle\Repository\TagRepository
+        factory: [ @doctrine.orm.default_entity_manager, getRepository ]
+        arguments:
+            - WallabagCoreBundle:Tag
 
     wallabag_core.registration_confirmed:
         class: Wallabag\CoreBundle\EventListener\RegistrationConfirmedListener
@@ -70,3 +91,13 @@ services:
         arguments:
             - %wallabag_url%
             - src/Wallabag/CoreBundle/Resources/views/themes/_global/public/img/appicon/apple-touch-icon-152.png
+
+    wallabag.operator.array.matches:
+        class: Wallabag\CoreBundle\Operator\PHP\Matches
+        tags:
+            - { name: rulerz.operator, executor: rulerz.executor.array, operator: matches }
+
+    wallabag.operator.doctrine.matches:
+        class: Wallabag\CoreBundle\Operator\Doctrine\Matches
+        tags:
+            - { name: rulerz.operator, executor: rulerz.executor.doctrine, operator: matches, inline: true }

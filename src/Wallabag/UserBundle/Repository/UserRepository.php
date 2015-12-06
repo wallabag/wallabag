@@ -23,4 +23,19 @@ class UserRepository extends EntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    /**
+     * Find a user by its username.
+     *
+     * @param string $username
+     *
+     * @return User
+     */
+    public function findOneByUserName($username)
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.username = :username')->setParameter('username', $username)
+            ->getQuery()
+            ->getSingleResult();
+    }
 }
