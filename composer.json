@@ -29,9 +29,9 @@
     },
     "require": {
         "php": ">=5.5.0",
-        "symfony/symfony": "~2.7.0",
+        "symfony/symfony": "~2.8",
         "doctrine/orm": "~2.3",
-        "doctrine/doctrine-bundle": "1.5.2",
+        "doctrine/doctrine-bundle": "~1.5",
         "twig/extensions": "~1.0",
         "symfony/assetic-bundle": "~2.3",
         "symfony/swiftmailer-bundle": "~2.3",
@@ -67,7 +67,7 @@
         "doctrine/doctrine-fixtures-bundle": "~2.2.0",
         "sensio/generator-bundle": "~2.5",
         "phpunit/phpunit": "~4.4",
-        "symfony/phpunit-bridge": "~2.7.0"
+        "symfony/phpunit-bridge": "~2.7"
     },
     "repositories": [
         {
