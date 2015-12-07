@@ -1,0 +1,3 @@
+single_page_link: concat(link[@rel="canonical"], "?page=full")
+
+test_url: http://www.letraslibres.com/revista/dossier/quien-manda-en-europa
