@@ -2,13 +2,11 @@
 
 namespace Wallabag\CoreBundle\Form\DataTransformer;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Form\DataTransformerInterface;
-use Symfony\Component\Form\Exception\TransformationFailedException;
 
 /**
  * Transforms a comma-separated list to a proper PHP array.
- * Example: the string "foo, bar" will become the array ["foo", "bar"]
+ * Example: the string "foo, bar" will become the array ["foo", "bar"].
  */
 class StringToListTransformer implements DataTransformerInterface
 {
@@ -44,14 +42,14 @@ class StringToListTransformer implements DataTransformerInterface
     /**
      * Transforms a string to a list.
      *
-     * @param  string $string
+     * @param string $string
      *
      * @return array|null
      */
     public function reverseTransform($string)
     {
         if ($string === null) {
-            return null;
+            return;
         }
 
         return array_values(array_filter(array_map('trim', explode($this->separator, $string))));

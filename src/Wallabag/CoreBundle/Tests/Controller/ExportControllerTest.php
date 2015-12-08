@@ -150,7 +150,7 @@ class ExportControllerTest extends WallabagCoreTestCase
 
         $this->assertGreaterThan(1, $csv);
         // +1 for title line
-        $this->assertEquals(count($contentInDB)+1, count($csv));
+        $this->assertEquals(count($contentInDB) + 1, count($csv));
         $this->assertEquals('Title;URL;Content;Tags;"MIME Type";Language', $csv[0]);
     }
 

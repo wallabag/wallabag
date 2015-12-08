@@ -3,7 +3,6 @@
 namespace Wallabag\CoreBundle\Helper;
 
 use RulerZ\RulerZ;
-
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Repository\EntryRepository;
@@ -18,8 +17,8 @@ class RuleBasedTagger
 
     public function __construct(RulerZ $rulerz, TagRepository $tagRepository, EntryRepository $entryRepository)
     {
-        $this->rulerz          = $rulerz;
-        $this->tagRepository   = $tagRepository;
+        $this->rulerz = $rulerz;
+        $this->tagRepository = $tagRepository;
         $this->entryRepository = $entryRepository;
     }
 
@@ -54,11 +53,11 @@ class RuleBasedTagger
      */
     public function tagAllForUser(User $user)
     {
-        $rules   = $this->getRulesForUser($user);
+        $rules = $this->getRulesForUser($user);
         $entries = array();
 
         foreach ($rules as $rule) {
-            $qb      = $this->entryRepository->getBuilderForAllByUser($user->getId());
+            $qb = $this->entryRepository->getBuilderForAllByUser($user->getId());
             $entries = $this->rulerz->filter($qb, $rule->getRule());
 
             foreach ($entries as $entry) {
