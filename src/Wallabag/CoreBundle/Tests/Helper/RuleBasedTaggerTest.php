@@ -18,8 +18,8 @@ class RuleBasedTaggerTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->rulerz          = $this->getRulerZMock();
-        $this->tagRepository   = $this->getTagRepositoryMock();
+        $this->rulerz = $this->getRulerZMock();
+        $this->tagRepository = $this->getTagRepositoryMock();
         $this->entryRepository = $this->getEntryRepositoryMock();
 
         $this->tagger = new RuleBasedTagger($this->rulerz, $this->tagRepository, $this->entryRepository);
@@ -37,8 +37,8 @@ class RuleBasedTaggerTest extends \PHPUnit_Framework_TestCase
     public function testTagWithNoMatchingRule()
     {
         $taggingRule = $this->getTaggingRule('rule as string', array('foo', 'bar'));
-        $user        = $this->getUser([$taggingRule]);
-        $entry       = new Entry($user);
+        $user = $this->getUser([$taggingRule]);
+        $entry = new Entry($user);
 
         $this->rulerz
             ->expects($this->once())
@@ -54,8 +54,8 @@ class RuleBasedTaggerTest extends \PHPUnit_Framework_TestCase
     public function testTagWithAMatchingRule()
     {
         $taggingRule = $this->getTaggingRule('rule as string', array('foo', 'bar'));
-        $user        = $this->getUser([$taggingRule]);
-        $entry       = new Entry($user);
+        $user = $this->getUser([$taggingRule]);
+        $entry = new Entry($user);
 
         $this->rulerz
             ->expects($this->once())
@@ -76,10 +76,10 @@ class RuleBasedTaggerTest extends \PHPUnit_Framework_TestCase
 
     public function testTagWithAMixOfMatchingRules()
     {
-        $taggingRule      = $this->getTaggingRule('bla bla', array('hey'));
+        $taggingRule = $this->getTaggingRule('bla bla', array('hey'));
         $otherTaggingRule = $this->getTaggingRule('rule as string', array('foo'));
 
-        $user  = $this->getUser([$taggingRule, $otherTaggingRule]);
+        $user = $this->getUser([$taggingRule, $otherTaggingRule]);
         $entry = new Entry($user);
 
         $this->rulerz
@@ -98,9 +98,9 @@ class RuleBasedTaggerTest extends \PHPUnit_Framework_TestCase
     public function testWhenTheTagExists()
     {
         $taggingRule = $this->getTaggingRule('rule as string', array('foo'));
-        $user        = $this->getUser([$taggingRule]);
-        $entry       = new Entry($user);
-        $tag         = new Tag($user);
+        $user = $this->getUser([$taggingRule]);
+        $entry = new Entry($user);
+        $tag = new Tag($user);
 
         $this->rulerz
             ->expects($this->once())
@@ -123,7 +123,7 @@ class RuleBasedTaggerTest extends \PHPUnit_Framework_TestCase
 
     private function getUser(array $taggingRules = [])
     {
-        $user   = new User();
+        $user = new User();
         $config = new Config($user);
 
         $user->setConfig($config);

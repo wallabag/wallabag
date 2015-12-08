@@ -19,10 +19,10 @@ class StringToListTransformerTest extends \PHPUnit_Framework_TestCase
     public function transformProvider()
     {
         return array(
-            array( null,                                 '' ),
-            array( array(),                              '' ),
-            array( array('single value'),                'single value' ),
-            array( array('first value', 'second value'), 'first value,second value' ),
+            array(null,                                 ''),
+            array(array(),                              ''),
+            array(array('single value'),                'single value'),
+            array(array('first value', 'second value'), 'first value,second value'),
         );
     }
 
@@ -39,12 +39,12 @@ class StringToListTransformerTest extends \PHPUnit_Framework_TestCase
     public function reverseTransformProvider()
     {
         return array(
-            array( null,                            null ),
-            array( '',                              array() ),
-            array( 'single value',                  array('single value') ),
-            array( 'first value,second value',      array('first value', 'second value') ),
-            array( 'first value,     second value', array('first value', 'second value') ),
-            array( 'first value,  ,  second value', array('first value', 'second value') ),
+            array(null,                            null),
+            array('',                              array()),
+            array('single value',                  array('single value')),
+            array('first value,second value',      array('first value', 'second value')),
+            array('first value,     second value', array('first value', 'second value')),
+            array('first value,  ,  second value', array('first value', 'second value')),
         );
     }
 }

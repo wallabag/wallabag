@@ -19,7 +19,7 @@ class ContentProxy
 
     public function __construct(Graby $graby, RuleBasedTagger $tagger, Logger $logger)
     {
-        $this->graby  = $graby;
+        $this->graby = $graby;
         $this->tagger = $tagger;
         $this->logger = $logger;
     }
