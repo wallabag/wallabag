@@ -10,7 +10,7 @@ use KPhoen\RulerZBundle\Validator\Constraints as RulerZAssert;
  * Tagging rule.
  *
  * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\TaggingRuleRepository")
- * @ORM\Table
+ * @ORM\Table(name="`tagging_rule`")
  * @ORM\Entity
  */
 class TaggingRule
