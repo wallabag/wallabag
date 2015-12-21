@@ -44,10 +44,26 @@ services:
         class: Graby\Graby
         arguments:
             - { error_message: false }
+            - @wallabag_core.http_client
         calls:
             - [ setLogger, [ @logger ] ]
         tags:
             - { name: monolog.logger, channel: graby }
+
+    wallabag_core.http_client:
+        class: GuzzleHttp\Client
+        arguments:
+            - {"defaults": {"cookies": @wallabag_core.authenticator.cookie_jar}}
+
+    wallabag_core.authenticator.cookie_jar:
+        class: GuzzleHttp\Cookie\CookieJar
+        factory_service: wallabag_core.authenticator.cookie_jar_factory
+        factory_method: createCookieJar
+
+    wallabag_core.authenticator.cookie_jar_factory:
+        class: Wallabag\CoreBundle\Authenticator\FileCookieJarFactory
+        arguments:
+            - "%kernel.cache_dir%/cookiejar.json"
 
     wallabag_core.content_proxy:
         class: Wallabag\CoreBundle\Helper\ContentProxy
