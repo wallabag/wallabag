@@ -30,26 +30,27 @@
     "require": {
         "php": ">=5.5.0",
         "symfony/symfony": "~2.8",
-        "doctrine/orm": "~2.3",
-        "doctrine/doctrine-bundle": "~1.5",
+        "doctrine/orm": "^2.5",
+        "doctrine/doctrine-bundle": "^1.6",
+        "doctrine/doctrine-cache-bundle": "^1.2",
         "twig/extensions": "~1.0",
         "symfony/assetic-bundle": "~2.3",
-        "symfony/swiftmailer-bundle": "~2.3",
-        "symfony/monolog-bundle": "~2.4",
-        "sensio/distribution-bundle": "~3.0.12",
-        "sensio/framework-extra-bundle": "~3.0",
-        "incenteev/composer-parameter-handler": "~2.0",
+        "symfony/swiftmailer-bundle": "^2.3",
+        "symfony/monolog-bundle": "^2.8",
+        "sensio/distribution-bundle": "^5.0",
+        "sensio/framework-extra-bundle": "^3.0.2",
+        "incenteev/composer-parameter-handler": "^2.0",
         "nelmio/cors-bundle": "~1.4.0",
         "friendsofsymfony/rest-bundle": "~1.4",
-        "jms/serializer-bundle": "~0.13",
+        "jms/serializer-bundle": "~1.0",
         "nelmio/api-doc-bundle": "~2.7",
         "ezyang/htmlpurifier": "~4.6",
         "mgargano/simplehtmldom": "~1.5",
         "tecnickcom/tcpdf": "~6.2",
         "simplepie/simplepie": "~1.3.1",
-        "willdurand/hateoas-bundle": "~0.5.0",
+        "willdurand/hateoas-bundle": "~1.0",
         "htmlawed/htmlawed": "~1.1.19",
-        "liip/theme-bundle": "~1.1.3",
+        "liip/theme-bundle": "~1.1",
         "pagerfanta/pagerfanta": "~1.0.3",
         "lexik/form-filter-bundle": "~4.0",
         "j0k3r/graby": "~1.0",
@@ -64,8 +65,8 @@
         "doctrine/doctrine-migrations-bundle": "^1.0"
     },
     "require-dev": {
-        "doctrine/doctrine-fixtures-bundle": "~2.2.0",
-        "sensio/generator-bundle": "~2.5",
+        "doctrine/doctrine-fixtures-bundle": "~2.2",
+        "sensio/generator-bundle": "~3.0",
         "phpunit/phpunit": "~4.4",
         "symfony/phpunit-bridge": "~2.7"
     },
@@ -78,7 +79,8 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
         ],
         "post-install-cmd": [
             "@post-cmd"
@@ -102,7 +104,8 @@
         }
     },
     "autoload": {
-        "psr-0": { "": "src/" }
+        "psr-0": { "": "src/" },
+        "classmap": [ "app/AppKernel.php", "app/AppCache.php" ]
     },
     "config": {
         "bin-dir": "bin"

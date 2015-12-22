@@ -6,10 +6,6 @@ _profiler:
     resource: "@WebProfilerBundle/Resources/config/routing/profiler.xml"
     prefix:   /_profiler
 
-_configurator:
-    resource: "@SensioDistributionBundle/Resources/config/routing/webconfigurator.xml"
-    prefix:   /_configurator
-
 _errors:
     resource: "@TwigBundle/Resources/config/routing/errors.xml"
     prefix:   /_error

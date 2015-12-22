@@ -4,7 +4,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Debug\Debug;
 
 // If you don't want to setup permissions the proper way, just uncomment the following PHP line
-// read http://symfony.com/doc/current/book/installation.html#configuration-and-setup for more information
+// read http://symfony.com/doc/current/book/installation.html#checking-symfony-application-configuration-and-setup
+// for more information
 //umask(0000);
 
 // This check prevents access to debug front controllers that are deployed by accident to production servers.
@@ -17,10 +18,11 @@ if (isset($_SERVER['HTTP_CLIENT_IP'])
     exit('You are not allowed to access this file. Check '.basename(__FILE__).' for more information.');
 }
 
-$loader = require_once __DIR__.'/../app/bootstrap.php.cache';
+/**
+ * @var Composer\Autoload\ClassLoader $loader
+ */
+$loader = require __DIR__.'/../app/autoload.php';
 Debug::enable();
-
-require_once __DIR__.'/../app/AppKernel.php';
 
 $kernel = new AppKernel('dev', true);
 $kernel->loadClassCache();

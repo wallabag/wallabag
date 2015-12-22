@@ -21,7 +21,7 @@ class TagController extends Controller
     public function addTagFormAction(Request $request, Entry $entry)
     {
         $tag = new Tag();
-        $form = $this->createForm(new NewTagType(), $tag);
+        $form = $this->createForm(NewTagType::class, $tag);
         $form->handleRequest($request);
 
         if ($form->isValid()) {

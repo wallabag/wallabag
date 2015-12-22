@@ -164,7 +164,7 @@
         {% endfor %}
     </ul>
 
-    <form action="{{ path('config') }}" method="post" {{ form_enctype(form.new_tagging_rule) }}>
+    {{ form_start(form.new_tagging_rule) }}
         {{ form_errors(form.new_tagging_rule) }}
 
         <fieldset class="w500p inline">

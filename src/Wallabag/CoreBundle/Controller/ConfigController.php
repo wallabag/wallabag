@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\TaggingRule;
+use Wallabag\CoreBundle\Form\Type\ConfigType;
 use Wallabag\CoreBundle\Form\Type\ChangePasswordType;
 use Wallabag\CoreBundle\Form\Type\NewUserType;
 use Wallabag\CoreBundle\Form\Type\RssType;
@@ -31,7 +32,7 @@ class ConfigController extends Controller
         $user = $this->getUser();
 
         // handle basic config detail (this form is defined as a service)
-        $configForm = $this->createForm('config', $config, array('action' => $this->generateUrl('config')));
+        $configForm = $this->createForm(ConfigType::class, $config, array('action' => $this->generateUrl('config')));
         $configForm->handleRequest($request);
 
         if ($configForm->isValid()) {
@@ -51,7 +52,7 @@ class ConfigController extends Controller
         }
 
         // handle changing password
-        $pwdForm = $this->createForm(new ChangePasswordType(), null, array('action' => $this->generateUrl('config').'#set4'));
+        $pwdForm = $this->createForm(ChangePasswordType::class, null, array('action' => $this->generateUrl('config').'#set4'));
         $pwdForm->handleRequest($request);
 
         if ($pwdForm->isValid()) {
@@ -67,7 +68,7 @@ class ConfigController extends Controller
         }
 
         // handle changing user information
-        $userForm = $this->createForm(new UserInformationType(), $user, array(
+        $userForm = $this->createForm(UserInformationType::class, $user, array(
             'validation_groups' => array('Profile'),
             'action' => $this->generateUrl('config').'#set3',
         ));
@@ -85,7 +86,7 @@ class ConfigController extends Controller
         }
 
         // handle rss information
-        $rssForm = $this->createForm(new RssType(), $config, array('action' => $this->generateUrl('config').'#set2'));
+        $rssForm = $this->createForm(RssType::class, $config, array('action' => $this->generateUrl('config').'#set2'));
         $rssForm->handleRequest($request);
 
         if ($rssForm->isValid()) {
@@ -102,7 +103,7 @@ class ConfigController extends Controller
 
         // handle tagging rule
         $taggingRule = new TaggingRule();
-        $newTaggingRule = $this->createForm(new TaggingRuleType(), $taggingRule, array('action' => $this->generateUrl('config').'#set5'));
+        $newTaggingRule = $this->createForm(TaggingRuleType::class, $taggingRule, array('action' => $this->generateUrl('config').'#set5'));
         $newTaggingRule->handleRequest($request);
 
         if ($newTaggingRule->isValid()) {
@@ -122,7 +123,7 @@ class ConfigController extends Controller
         $newUser = $userManager->createUser();
         // enable created user by default
         $newUser->setEnabled(true);
-        $newUserForm = $this->createForm(new NewUserType(), $newUser, array(
+        $newUserForm = $this->createForm(NewUserType::class, $newUser, array(
             'validation_groups' => array('Profile'),
             'action' => $this->generateUrl('config').'#set5',
         ));

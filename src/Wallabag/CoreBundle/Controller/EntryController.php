@@ -43,7 +43,7 @@ class EntryController extends Controller
     {
         $entry = new Entry($this->getUser());
 
-        $form = $this->createForm(new NewEntryType(), $entry);
+        $form = $this->createForm(NewEntryType::class, $entry);
 
         $form->handleRequest($request);
 
@@ -117,7 +117,7 @@ class EntryController extends Controller
     {
         $this->checkUserAction($entry);
 
-        $form = $this->createForm(new EditEntryType(), $entry);
+        $form = $this->createForm(EditEntryType::class, $entry);
 
         $form->handleRequest($request);
 
@@ -234,7 +234,7 @@ class EntryController extends Controller
                 throw new \InvalidArgumentException(sprintf('Type "%s" is not implemented.', $type));
         }
 
-        $form = $this->get('form.factory')->create(new EntryFilterType($repository, $this->getUser()));
+        $form = $this->createForm(new EntryFilterType($repository, $this->getUser()));
 
         if ($request->query->has($form->getName())) {
             // manually bind values from the request

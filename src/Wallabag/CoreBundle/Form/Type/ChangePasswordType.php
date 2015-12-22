@@ -19,7 +19,7 @@ class ChangePasswordType extends AbstractType
                 'constraints' => new UserPassword(array('message' => 'Wrong value for your current password')),
             ))
             ->add('new_password', RepeatedType::class, array(
-                'type' => 'password',
+                'type' => PasswordType::class,
                 'invalid_message' => 'The password fields must match.',
                 'required' => true,
                 'first_options' => array('label' => 'New password'),

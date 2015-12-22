@@ -19,7 +19,7 @@ class TaggingRuleType extends AbstractType
         ;
 
         $tagsField = $builder
-            ->create('tags', 'text')
+            ->create('tags', TextType::class)
             ->addModelTransformer(new StringToListTransformer(','));
 
         $builder->add($tagsField);

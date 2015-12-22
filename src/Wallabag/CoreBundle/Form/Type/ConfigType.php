@@ -36,7 +36,8 @@ class ConfigType extends AbstractType
             ))
             ->add('items_per_page')
             ->add('language', ChoiceType::class, array(
-                'choices' => $this->languages,
+                'choices' => array_flip($this->languages),
+                'choices_as_values' => true,
             ))
             ->add('save', SubmitType::class)
         ;

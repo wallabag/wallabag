@@ -12,19 +12,7 @@ services:
             - %liip_theme.themes%
             - %wallabag_core.languages%
         tags:
-            - { name: form.type, alias: config }
-
-    wallabag_core.form.registration:
-        class: Wallabag\CoreBundle\Form\Type\RegistrationType
-        tags:
-            - { name: form.type, alias: wallabag_user_registration }
-
-    wallabag_core.form.type.forgot_password:
-        class: Wallabag\CoreBundle\Form\Type\ForgotPasswordType
-        arguments:
-            - "@doctrine"
-        tags:
-            - { name: form.type, alias: forgot_password }
+            - { name: form.type }
 
     wallabag_core.param_converter.username_rsstoken_converter:
         class: Wallabag\CoreBundle\ParamConverter\UsernameRssTokenConverter
@@ -66,13 +54,13 @@ services:
     # repository as a service
     wallabag_core.entry_repository:
         class: Wallabag\CoreBundle\Repository\EntryRepository
-        factory: [ @doctrine.orm.default_entity_manager, getRepository ]
+        factory: [ "@doctrine.orm.default_entity_manager", getRepository ]
         arguments:
             - WallabagCoreBundle:Entry
 
     wallabag_core.tag_repository:
         class: Wallabag\CoreBundle\Repository\TagRepository
-        factory: [ @doctrine.orm.default_entity_manager, getRepository ]
+        factory: [ "@doctrine.orm.default_entity_manager", getRepository ]
         arguments:
             - WallabagCoreBundle:Tag
 

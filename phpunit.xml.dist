@@ -9,7 +9,7 @@
          processIsolation="false"
          stopOnFailure="false"
          syntaxCheck="false"
-         bootstrap="app/bootstrap.php.cache"
+         bootstrap="app/autoload.php"
         >
 
     <testsuites>
