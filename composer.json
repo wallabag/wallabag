@@ -104,7 +104,7 @@
         }
     },
     "autoload": {
-        "psr-0": { "": "src/" },
+        "psr-4": { "": "src/" },
         "classmap": [ "app/AppKernel.php", "app/AppCache.php" ]
     },
     "config": {

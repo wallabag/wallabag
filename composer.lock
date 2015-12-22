@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f9037d0e31ddc387133f603a5f1a2c8c",
-    "content-hash": "12c1a8f82eb6129b288629c4b56a448d",
+    "hash": "42bbd48a9c971aee0011808edfb08915",
+    "content-hash": "6e0d8bfeb719303796b0f13b28eadb86",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -3987,16 +3987,16 @@
         },
         {
             "name": "scheb/two-factor-bundle",
-            "version": "v1.5.0",
+            "version": "v1.4.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/scheb/two-factor-bundle.git",
-                "reference": "b0da3a85b181237c3bebde88c99b18745313360b"
+                "reference": "ef6830dbbf62b22efd335db8f64bf0f51d4284a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/scheb/two-factor-bundle/zipball/b0da3a85b181237c3bebde88c99b18745313360b",
-                "reference": "b0da3a85b181237c3bebde88c99b18745313360b",
+                "url": "https://api.github.com/repos/scheb/two-factor-bundle/zipball/ef6830dbbf62b22efd335db8f64bf0f51d4284a2",
+                "reference": "ef6830dbbf62b22efd335db8f64bf0f51d4284a2",
                 "shasum": ""
             },
             "require": {
@@ -4032,7 +4032,7 @@
                 "two-factor",
                 "two-step"
             ],
-            "time": "2015-11-15 13:31:23"
+            "time": "2015-08-25 19:58:00"
         },
         {
             "name": "sensio/distribution-bundle",
@@ -5026,7 +5026,6 @@
             "description": "Symfony Security Component - ACL (Access Control List)",
             "homepage": "https://symfony.com",
             "time": "2015-11-18 13:41:01"
->>>>>>> Update deps
         },
         {
             "name": "symfony/swiftmailer-bundle",
@@ -6677,7 +6676,7 @@
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.9"
+                "php": ">=5.3.3"
             },
             "suggest": {
                 "symfony/debug": "For tracking deprecated interfaces usages at runtime with DebugClassLoader"
@@ -6728,7 +6727,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.5"
+        "php": ">=5.5.0"
     },
     "platform-dev": []
 }
