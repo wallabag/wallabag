@@ -53,7 +53,12 @@ services:
     wallabag_core.http_client:
         class: GuzzleHttp\Client
         arguments:
-            - {"defaults": {"cookies": @wallabag_core.authenticator.cookie_jar}}
+            -
+                "defaults": {"cookies": @wallabag_core.authenticator.cookie_jar}
+                "handler": @wallabag_core.http_client.safe_curl_handler
+
+    wallabag_core.http_client.safe_curl_handler:
+        class: Graby\Ring\Client\SafeCurlHandler
 
     wallabag_core.authenticator.cookie_jar:
         class: GuzzleHttp\Cookie\CookieJar
@@ -71,6 +76,7 @@ services:
             - @wallabag_core.graby
             - @wallabag_core.rule_based_tagger
             - @logger
+            - @wallabag_core.authenticator.mediapart
 
     wallabag_core.rule_based_tagger:
         class: Wallabag\CoreBundle\Helper\RuleBasedTagger
@@ -117,3 +123,11 @@ services:
         class: Wallabag\CoreBundle\Operator\Doctrine\Matches
         tags:
             - { name: rulerz.operator, executor: rulerz.executor.doctrine, operator: matches, inline: true }
+
+    wallabag_core.authenticator.mediapart:
+        class: Wallabag\CoreBundle\Helper\ContentProxy\Authenticator\Site\MediapartAuthenticator
+        calls:
+            - [setUri, ['https://www.mediapart.fr/login_check']]
+            - [setCredentials, [%mediapart_login%, %mediapart_password%]]
+            - [setGuzzleClient, [@wallabag_core.http_client]]
+            - [setCookieJar, [@wallabag_core.authenticator.cookie_jar]]

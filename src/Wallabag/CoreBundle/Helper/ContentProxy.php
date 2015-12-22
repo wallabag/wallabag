@@ -2,6 +2,7 @@
 
 namespace Wallabag\CoreBundle\Helper;
 
+use Wallabag\CoreBundle\Helper\ContentProxy\Authenticator\WebsiteAuthenticator;
 use Graby\Graby;
 use Psr\Log\LoggerInterface as Logger;
 use Wallabag\CoreBundle\Entity\Entry;
@@ -17,11 +18,17 @@ class ContentProxy
     protected $tagger;
     protected $logger;
 
-    public function __construct(Graby $graby, RuleBasedTagger $tagger, Logger $logger)
+    /**
+     * @var \Wallabag\CoreBundle\Helper\ContentProxy\Authenticator\WebsiteAuthenticator
+     */
+    private $authenticator;
+
+    public function __construct(Graby $graby, RuleBasedTagger $tagger, Logger $logger, WebsiteAuthenticator $authenticator)
     {
         $this->graby = $graby;
         $this->tagger = $tagger;
         $this->logger = $logger;
+        $this->authenticator = $authenticator;
     }
 
     /**
@@ -35,7 +42,15 @@ class ContentProxy
      */
     public function updateEntry(Entry $entry, $url)
     {
+        if (!$this->authenticator->isLoggedIn()) {
+            $this->authenticator->login();
+        }
         $content = $this->graby->fetchContent($url);
+
+        if ($this->authenticator->requiresAuth($content['html'])) {
+            $this->authenticator->login();
+            $content = $this->graby->fetchContent($url);
+        }
 
         $title = $content['title'];
         if (!$title && isset($content['open_graph']['og_title'])) {
