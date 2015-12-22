@@ -3,6 +3,10 @@
 namespace Wallabag\CoreBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
@@ -12,8 +16,8 @@ class NewUserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', 'text', array('required' => true))
-            ->add('plainPassword', 'repeated', array(
+            ->add('username', TextType::class, array('required' => true))
+            ->add('plainPassword', RepeatedType::class, array(
                 'type' => 'password',
                 'constraints' => array(
                     new Constraints\Length(array(
@@ -23,8 +27,8 @@ class NewUserType extends AbstractType
                     new Constraints\NotBlank(),
                 ),
             ))
-            ->add('email', 'email')
-            ->add('save', 'submit')
+            ->add('email', EmailType::class)
+            ->add('save', SubmitType::class)
         ;
     }
 
@@ -35,7 +39,7 @@ class NewUserType extends AbstractType
         ));
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'new_user';
     }

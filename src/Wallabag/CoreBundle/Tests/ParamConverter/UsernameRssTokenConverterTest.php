@@ -2,9 +2,9 @@
 
 namespace Wallabag\CoreBundle\Tests\Command;
 
-use Wallabag\CoreBundle\ParamConverter\UsernameRssTokenConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
+use Wallabag\CoreBundle\ParamConverter\UsernameRssTokenConverter;
 use Wallabag\UserBundle\Entity\User;
 
 class UsernameRssTokenConverterTest extends \PHPUnit_Framework_TestCase

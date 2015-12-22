@@ -3,6 +3,8 @@
 namespace Wallabag\CoreBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -28,15 +30,15 @@ class ConfigType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('theme', 'choice', array(
+            ->add('theme', ChoiceType::class, array(
                 'choices' => array_flip($this->themes),
                 'choices_as_values' => true,
             ))
             ->add('items_per_page')
-            ->add('language', 'choice', array(
+            ->add('language', ChoiceType::class, array(
                 'choices' => $this->languages,
             ))
-            ->add('save', 'submit')
+            ->add('save', SubmitType::class)
         ;
     }
 
@@ -47,7 +49,7 @@ class ConfigType extends AbstractType
         ));
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'config';
     }

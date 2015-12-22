@@ -3,6 +3,9 @@
 namespace Wallabag\CoreBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 use Symfony\Component\Validator\Constraints;
@@ -12,10 +15,10 @@ class ChangePasswordType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('old_password', 'password', array(
+            ->add('old_password', PasswordType::class, array(
                 'constraints' => new UserPassword(array('message' => 'Wrong value for your current password')),
             ))
-            ->add('new_password', 'repeated', array(
+            ->add('new_password', RepeatedType::class, array(
                 'type' => 'password',
                 'invalid_message' => 'The password fields must match.',
                 'required' => true,
@@ -29,11 +32,11 @@ class ChangePasswordType extends AbstractType
                     new Constraints\NotBlank(),
                 ),
             ))
-            ->add('save', 'submit')
+            ->add('save', SubmitType::class)
         ;
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'change_passwd';
     }

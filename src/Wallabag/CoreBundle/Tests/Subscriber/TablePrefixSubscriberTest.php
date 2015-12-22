@@ -2,9 +2,9 @@
 
 namespace Wallabag\CoreBundle\Tests\Subscriber;
 
-use Doctrine\ORM\Mapping\ClassMetadata;
-use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\Common\EventManager;
+use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Wallabag\CoreBundle\Subscriber\TablePrefixSubscriber;
 
 class TablePrefixSubscriberTest extends \PHPUnit_Framework_TestCase

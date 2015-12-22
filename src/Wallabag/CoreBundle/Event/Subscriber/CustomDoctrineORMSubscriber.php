@@ -2,8 +2,8 @@
 
 namespace Wallabag\CoreBundle\Event\Subscriber;
 
-use Lexik\Bundle\FormFilterBundle\Event\Subscriber\DoctrineORMSubscriber;
 use Lexik\Bundle\FormFilterBundle\Event\GetFilterConditionEvent;
+use Lexik\Bundle\FormFilterBundle\Event\Subscriber\DoctrineORMSubscriber;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**

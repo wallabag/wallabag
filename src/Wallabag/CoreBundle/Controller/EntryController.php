@@ -2,16 +2,16 @@
 
 namespace Wallabag\CoreBundle\Controller;
 
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Pagerfanta;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\CoreBundle\Form\Type\NewEntryType;
-use Wallabag\CoreBundle\Form\Type\EditEntryType;
 use Wallabag\CoreBundle\Filter\EntryFilterType;
-use Pagerfanta\Adapter\DoctrineORMAdapter;
-use Pagerfanta\Pagerfanta;
+use Wallabag\CoreBundle\Form\Type\EditEntryType;
+use Wallabag\CoreBundle\Form\Type\NewEntryType;
 
 class EntryController extends Controller
 {

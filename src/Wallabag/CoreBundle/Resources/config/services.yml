@@ -2,7 +2,7 @@ services:
     wallabag_core.helper.detect_active_theme:
         class: Wallabag\CoreBundle\Helper\DetectActiveTheme
         arguments:
-            - @security.token_storage
+            - "@security.token_storage"
             - %theme% # default theme from parameters.yml
 
     # custom form type
@@ -22,7 +22,7 @@ services:
     wallabag_core.form.type.forgot_password:
         class: Wallabag\CoreBundle\Form\Type\ForgotPasswordType
         arguments:
-            - @doctrine
+            - "@doctrine"
         tags:
             - { name: form.type, alias: forgot_password }
 
@@ -31,7 +31,7 @@ services:
         tags:
             - { name: request.param_converter, converter: username_rsstoken_converter }
         arguments:
-            - @doctrine
+            - "@doctrine"
 
     wallabag_core.table_prefix_subscriber:
         class: Wallabag\CoreBundle\Subscriber\TablePrefixSubscriber
@@ -45,23 +45,23 @@ services:
         arguments:
             - { error_message: false }
         calls:
-            - [ setLogger, [ @logger ] ]
+            - [ setLogger, [ "@logger" ] ]
         tags:
             - { name: monolog.logger, channel: graby }
 
     wallabag_core.content_proxy:
         class: Wallabag\CoreBundle\Helper\ContentProxy
         arguments:
-            - @wallabag_core.graby
-            - @wallabag_core.rule_based_tagger
-            - @logger
+            - "@wallabag_core.graby"
+            - "@wallabag_core.rule_based_tagger"
+            - "@logger"
 
     wallabag_core.rule_based_tagger:
         class: Wallabag\CoreBundle\Helper\RuleBasedTagger
         arguments:
-            - @rulerz
-            - @wallabag_core.tag_repository
-            - @wallabag_core.entry_repository
+            - "@rulerz"
+            - "@wallabag_core.tag_repository"
+            - "@wallabag_core.entry_repository"
 
     # repository as a service
     wallabag_core.entry_repository:
@@ -79,7 +79,7 @@ services:
     wallabag_core.registration_confirmed:
         class: Wallabag\CoreBundle\EventListener\RegistrationConfirmedListener
         arguments:
-            - @doctrine.orm.entity_manager
+            - "@doctrine.orm.entity_manager"
             - %theme%
             - %items_on_page%
             - %rss_limit%

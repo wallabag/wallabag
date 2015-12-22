@@ -2,11 +2,11 @@
 
 namespace Wallabag\CoreBundle\Filter;
 
+use Doctrine\ORM\EntityRepository;
+use Lexik\Bundle\FormFilterBundle\Filter\Query\QueryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Lexik\Bundle\FormFilterBundle\Filter\Query\QueryInterface;
-use Doctrine\ORM\EntityRepository;
 use Wallabag\UserBundle\Entity\User;
 
 class EntryFilterType extends AbstractType
@@ -77,7 +77,7 @@ class EntryFilterType extends AbstractType
         ;
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'entry_filter';
     }

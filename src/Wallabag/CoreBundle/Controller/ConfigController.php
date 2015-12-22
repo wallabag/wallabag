@@ -4,17 +4,17 @@ namespace Wallabag\CoreBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\TaggingRule;
-use Wallabag\UserBundle\Entity\User;
 use Wallabag\CoreBundle\Form\Type\ChangePasswordType;
-use Wallabag\CoreBundle\Form\Type\UserInformationType;
-use Wallabag\CoreBundle\Form\Type\TaggingRuleType;
 use Wallabag\CoreBundle\Form\Type\NewUserType;
 use Wallabag\CoreBundle\Form\Type\RssType;
+use Wallabag\CoreBundle\Form\Type\TaggingRuleType;
+use Wallabag\CoreBundle\Form\Type\UserInformationType;
 use Wallabag\CoreBundle\Tools\Utils;
+use Wallabag\UserBundle\Entity\User;
 
 class ConfigController extends Controller
 {

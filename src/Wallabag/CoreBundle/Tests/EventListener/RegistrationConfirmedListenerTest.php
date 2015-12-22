@@ -2,13 +2,13 @@
 
 namespace Wallabag\CoreBundle\Tests\EventListener;
 
+use FOS\UserBundle\Event\FilterUserResponseEvent;
+use FOS\UserBundle\FOSUserEvents;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use FOS\UserBundle\FOSUserEvents;
-use FOS\UserBundle\Event\FilterUserResponseEvent;
-use Wallabag\CoreBundle\EventListener\RegistrationConfirmedListener;
 use Wallabag\CoreBundle\Entity\Config;
+use Wallabag\CoreBundle\EventListener\RegistrationConfirmedListener;
 use Wallabag\UserBundle\Entity\User;
 
 class RegistrationConfirmedListenerTest extends \PHPUnit_Framework_TestCase

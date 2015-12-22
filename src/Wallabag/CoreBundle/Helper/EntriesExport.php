@@ -2,12 +2,12 @@
 
 namespace Wallabag\CoreBundle\Helper;
 
+use JMS\Serializer;
+use JMS\Serializer\SerializationContext;
+use JMS\Serializer\SerializerBuilder;
 use PHPePub\Core\EPub;
 use PHPePub\Core\Structure\OPF\DublinCore;
 use Symfony\Component\HttpFoundation\Response;
-use JMS\Serializer;
-use JMS\Serializer\SerializerBuilder;
-use JMS\Serializer\SerializationContext;
 
 /**
  * This class doesn't have unit test BUT it's fully covered by a functional test with ExportControllerTest.
