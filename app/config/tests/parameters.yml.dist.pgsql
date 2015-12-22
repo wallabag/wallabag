@@ -59,3 +59,7 @@ parameters:
     language: en_US
     from_email: no-reply@wallabag.org
     rss_limit: 50
+
+    # login to external sites
+    mediapart_login: ~
+    mediapart_password: ~
