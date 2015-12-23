@@ -28,7 +28,7 @@
         "issues": "https://github.com/wallabag/wallabag/issues"
     },
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.5.0",
         "symfony/symfony": "~2.7.0",
         "doctrine/orm": "~2.3",
         "doctrine/doctrine-bundle": "1.5.2",
@@ -55,7 +55,7 @@
         "j0k3r/graby": "~1.0",
         "friendsofsymfony/user-bundle": "dev-master",
         "friendsofsymfony/oauth-server-bundle": "^1.4@dev",
-        "scheb/two-factor-bundle": "~1.4",
+        "scheb/two-factor-bundle": "~1.4.0",
         "grandt/phpepub": "~4.0",
         "wallabag/php-mobi": "~1.0.0",
         "kphoen/rulerz-bundle": "~0.10"
