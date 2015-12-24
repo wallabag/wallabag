@@ -63,7 +63,8 @@
         "kphoen/rulerz-bundle": "~0.10",
         "guzzlehttp/guzzle": "^5.2.0",
         "doctrine/doctrine-migrations-bundle": "^1.0",
-        "paragonie/random_compat": "~1.0"
+        "paragonie/random_compat": "~1.0",
+        "bdunogier/guzzle-site-authenticator": "^1.0@beta"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "~2.2",

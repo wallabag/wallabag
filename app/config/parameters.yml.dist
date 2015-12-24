@@ -77,3 +77,6 @@ parameters:
 
     # pocket import
     pocket_consumer_key: xxxxxxxx
+    
+    # sites credentials
+    sites_credentials: {}

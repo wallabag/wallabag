@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
             new Nelmio\CorsBundle\NelmioCorsBundle(),
             new Liip\ThemeBundle\LiipThemeBundle(),
+            new BD\GuzzleSiteAuthenticatorBundle\BDGuzzleSiteAuthenticatorBundle(),
             new Wallabag\CoreBundle\WallabagCoreBundle(),
             new Wallabag\ApiBundle\WallabagApiBundle(),
             new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
