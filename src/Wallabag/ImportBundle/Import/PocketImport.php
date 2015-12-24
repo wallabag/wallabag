@@ -5,6 +5,7 @@ namespace Wallabag\ImportBundle\Import;
 use Doctrine\ORM\EntityManager;
 use GuzzleHttp\Client;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Tools\Utils;
@@ -18,7 +19,7 @@ class PocketImport implements ImportInterface
     private $skippedEntries = 0;
     private $importedEntries = 0;
 
-    public function __construct($tokenStorage, Session $session, EntityManager $em, $consumerKey)
+    public function __construct(TokenStorageInterface $tokenStorage, Session $session, EntityManager $em, $consumerKey)
     {
         $this->user = $tokenStorage->getToken()->getUser();
         $this->session = $session;
@@ -26,11 +27,17 @@ class PocketImport implements ImportInterface
         $this->consumerKey = $consumerKey;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'Pocket';
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getDescription()
     {
         return 'This importer will import all your <a href="https://getpocket.com">Pocket</a> data.';
