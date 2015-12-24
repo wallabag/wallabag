@@ -44,20 +44,83 @@ class PocketImport implements ImportInterface
     }
 
     /**
-     * Create a new Client.
-     *
-     * @return Client
+     * {@inheritdoc}
      */
-    private function createClient()
+    public function oAuthRequest($redirectUri, $callbackUri)
     {
-        return new Client([
-            'defaults' => [
-                'headers' => [
-                    'content-type' => 'application/json',
-                    'X-Accept' => 'application/json',
-                ],
-            ],
-        ]);
+        $request = $this->client->createRequest('POST', 'https://getpocket.com/v3/oauth/request',
+            [
+                'body' => json_encode([
+                    'consumer_key' => $this->consumerKey,
+                    'redirect_uri' => $redirectUri,
+                ]),
+            ]
+        );
+
+        $response = $this->client->send($request);
+        $values = $response->json();
+
+        // store code in session for callback method
+        $this->session->set('pocketCode', $values['code']);
+
+        return 'https://getpocket.com/auth/authorize?request_token='.$values['code'].'&redirect_uri='.$callbackUri;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function oAuthAuthorize()
+    {
+        $request = $this->client->createRequest('POST', 'https://getpocket.com/v3/oauth/authorize',
+            [
+                'body' => json_encode([
+                    'consumer_key' => $this->consumerKey,
+                    'code' => $this->session->get('pocketCode'),
+                ]),
+            ]
+        );
+
+        $response = $this->client->send($request);
+
+        return $response->json()['access_token'];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function import($accessToken)
+    {
+        $request = $this->client->createRequest('POST', 'https://getpocket.com/v3/get',
+            [
+                'body' => json_encode([
+                    'consumer_key' => $this->consumerKey,
+                    'access_token' => $accessToken,
+                    'detailType' => 'complete',
+                    'state' => 'all',
+                    'sort' => 'oldest',
+                ]),
+            ]
+        );
+
+        $response = $this->client->send($request);
+        $entries = $response->json();
+
+        $this->parsePocketEntries($entries['list']);
+
+        $this->session->getFlashBag()->add(
+            'notice',
+            $this->importedEntries.' entries imported, '.$this->skippedEntries.' already saved.'
+        );
+    }
+
+    /**
+     * Set the Guzzle client.
+     *
+     * @param Client $client
+     */
+    public function setClient(Client $client)
+    {
+        $this->client = $client;
     }
 
     /**
@@ -164,71 +227,5 @@ class PocketImport implements ImportInterface
         }
 
         $this->em->flush();
-    }
-
-    public function oAuthRequest($redirectUri, $callbackUri)
-    {
-        $client = $this->createClient();
-        $request = $client->createRequest('POST', 'https://getpocket.com/v3/oauth/request',
-            [
-                'body' => json_encode([
-                    'consumer_key' => $this->consumerKey,
-                    'redirect_uri' => $redirectUri,
-                ]),
-            ]
-        );
-
-        $response = $client->send($request);
-        $values = $response->json();
-
-        // store code in session for callback method
-        $this->session->set('pocketCode', $values['code']);
-
-        return 'https://getpocket.com/auth/authorize?request_token='.$values['code'].'&redirect_uri='.$callbackUri;
-    }
-
-    public function oAuthAuthorize()
-    {
-        $client = $this->createClient();
-
-        $request = $client->createRequest('POST', 'https://getpocket.com/v3/oauth/authorize',
-            [
-                'body' => json_encode([
-                    'consumer_key' => $this->consumerKey,
-                    'code' => $this->session->get('pocketCode'),
-                ]),
-            ]
-        );
-
-        $response = $client->send($request);
-
-        return $response->json()['access_token'];
-    }
-
-    public function import($accessToken)
-    {
-        $client = $this->createClient();
-
-        $request = $client->createRequest('POST', 'https://getpocket.com/v3/get',
-            [
-                'body' => json_encode([
-                    'consumer_key' => $this->consumerKey,
-                    'access_token' => $accessToken,
-                    'detailType' => 'complete',
-                    'state' => 'all',
-                    'sort' => 'oldest',
-                ]),
-            ]
-        );
-
-        $response = $client->send($request);
-        $entries = $response->json();
-
-        $this->parsePocketEntries($entries['list']);
-
-        $this->session->getFlashBag()->add(
-            'notice',
-            $this->importedEntries.' entries imported, '.$this->skippedEntries.' already saved.'
-        );
     }
 }

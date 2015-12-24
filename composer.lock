@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7f1939f54201ee0e068eddde41454261",
-    "content-hash": "9b7801951c4ea69565ee8f4914071c25",
+    "hash": "fdba142656b2089b0e4cbddb45e2ad1f",
+    "content-hash": "a233f851c52683783b6a42be707c52b1",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -2044,16 +2044,16 @@
         },
         {
             "name": "hoa/stream",
-            "version": "0.15.08.28",
+            "version": "0.15.10.26",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hoaproject/Stream.git",
-                "reference": "cbd0f4749e447f4d31001e7c898f5e794c5861cb"
+                "reference": "011ab91d942f1d7096deade4c8a10fe57d51c5b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hoaproject/Stream/zipball/cbd0f4749e447f4d31001e7c898f5e794c5861cb",
-                "reference": "cbd0f4749e447f4d31001e7c898f5e794c5861cb",
+                "url": "https://api.github.com/repos/hoaproject/Stream/zipball/011ab91d942f1d7096deade4c8a10fe57d51c5b3",
+                "reference": "011ab91d942f1d7096deade4c8a10fe57d51c5b3",
                 "shasum": ""
             },
             "require": {
@@ -2098,7 +2098,7 @@
                 "stream",
                 "wrapper"
             ],
-            "time": "2015-08-28 07:31:43"
+            "time": "2015-10-22 06:30:43"
         },
         {
             "name": "hoa/ustring",

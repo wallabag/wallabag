@@ -6,3 +6,14 @@ services:
             - "@session"
             - "@doctrine.orm.entity_manager"
             - %pocket_consumer_key%
+        calls:
+            - [ setClient, [ "@wallabag_import.pocket.client" ] ]
+
+    wallabag_import.pocket.client:
+        class: GuzzleHttp\Client
+        arguments:
+            -
+                defaults:
+                    headers:
+                        content-type: "application/json"
+                        X-Accept: "application/json"
