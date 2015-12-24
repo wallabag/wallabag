@@ -1,0 +1,6 @@
+title: //div[@class='entry-title']
+author: //div[@class='entry-author']
+date: //div[@class='entry-time']
+body: //div[@class='entry-content']
+
+test_url: https://popehat.com/2015/12/16/eric-posner-the-first-amendments-nemesis/
