@@ -5,6 +5,7 @@ namespace Wallabag\CoreBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Form\Type\NewEntryType;
 use Wallabag\CoreBundle\Form\Type\EditEntryType;
@@ -316,7 +317,7 @@ class EntryController extends Controller
     }
 
     /**
-     * Deletes entry and redirect to the homepage.
+     * Deletes entry and redirect to the homepage or the last viewed page.
      *
      * @param Entry $entry
      *
@@ -328,6 +329,14 @@ class EntryController extends Controller
     {
         $this->checkUserAction($entry);
 
+        // generates the view url for this entry to check for redirection later
+        // to avoid redirecting to the deleted entry. Ugh.
+        $url = $this->generateUrl(
+            'view',
+            array('id' => $entry->getId()),
+            UrlGeneratorInterface::ABSOLUTE_URL
+        );
+
         $em = $this->getDoctrine()->getManager();
         $em->remove($entry);
         $em->flush();
@@ -337,7 +346,8 @@ class EntryController extends Controller
             'Entry deleted'
         );
 
-        return $this->redirect($request->headers->get('referer'));
+        // don't redirect user to the deleted entry
+        return $this->redirect($url !== $request->headers->get('referer') ?: $this->generateUrl('homepage'));
     }
 
     /**
