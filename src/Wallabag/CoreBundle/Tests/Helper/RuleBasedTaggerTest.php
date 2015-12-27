@@ -141,6 +141,32 @@ class RuleBasedTaggerTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(1, $tags);
     }
 
+    public function testTagAllEntriesForAUser()
+    {
+        $taggingRule = $this->getTaggingRule('bla bla', array('hey'));
+
+        $user = $this->getUser([$taggingRule]);
+
+        $this->rulerz
+            ->method('satisfies')
+            ->willReturn(true);
+
+        $this->rulerz
+            ->method('filter')
+            ->willReturn(array(new Entry($user), new Entry($user)));
+
+        $entries = $this->tagger->tagAllForUser($user);
+
+        $this->assertCount(2, $entries);
+
+        foreach ($entries as $entry) {
+            $tags = $entry->getTags();
+
+            $this->assertCount(1, $tags);
+            $this->assertEquals('hey', $tags[0]->getLabel());
+        }
+    }
+
     private function getUser(array $taggingRules = [])
     {
         $user = new User();

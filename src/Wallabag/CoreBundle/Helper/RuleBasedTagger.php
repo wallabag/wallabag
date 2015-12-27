@@ -65,7 +65,6 @@ class RuleBasedTagger
                     $tag = $this->getTag($user, $label);
 
                     $entry->addTag($tag);
-                    $entries[] = $entry;
                 }
             }
         }
