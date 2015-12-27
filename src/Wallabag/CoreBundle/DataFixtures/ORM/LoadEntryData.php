@@ -16,7 +16,7 @@ class LoadEntryData extends AbstractFixture implements OrderedFixtureInterface
     public function load(ObjectManager $manager)
     {
         $entry1 = new Entry($this->getReference('admin-user'));
-        $entry1->setUrl('http://0.0.0.0');
+        $entry1->setUrl('http://0.0.0.0/entry1');
         $entry1->setReadingTime(11);
         $entry1->setDomainName('domain.io');
         $entry1->setMimetype('text/html');
@@ -29,7 +29,7 @@ class LoadEntryData extends AbstractFixture implements OrderedFixtureInterface
         $this->addReference('entry1', $entry1);
 
         $entry2 = new Entry($this->getReference('admin-user'));
-        $entry2->setUrl('http://0.0.0.0');
+        $entry2->setUrl('http://0.0.0.0/entry2');
         $entry2->setReadingTime(1);
         $entry2->setDomainName('domain.io');
         $entry2->setMimetype('text/html');
@@ -42,7 +42,7 @@ class LoadEntryData extends AbstractFixture implements OrderedFixtureInterface
         $this->addReference('entry2', $entry2);
 
         $entry3 = new Entry($this->getReference('bob-user'));
-        $entry3->setUrl('http://0.0.0.0');
+        $entry3->setUrl('http://0.0.0.0/entry3');
         $entry3->setReadingTime(1);
         $entry3->setDomainName('domain.io');
         $entry3->setMimetype('text/html');
@@ -63,7 +63,7 @@ class LoadEntryData extends AbstractFixture implements OrderedFixtureInterface
         $this->addReference('entry3', $entry3);
 
         $entry4 = new Entry($this->getReference('admin-user'));
-        $entry4->setUrl('http://0.0.0.0');
+        $entry4->setUrl('http://0.0.0.0/entry4');
         $entry4->setReadingTime(12);
         $entry4->setDomainName('domain.io');
         $entry4->setMimetype('text/html');
@@ -84,7 +84,7 @@ class LoadEntryData extends AbstractFixture implements OrderedFixtureInterface
         $this->addReference('entry4', $entry4);
 
         $entry5 = new Entry($this->getReference('admin-user'));
-        $entry5->setUrl('http://0.0.0.0');
+        $entry5->setUrl('http://0.0.0.0/entry5');
         $entry5->setReadingTime(12);
         $entry5->setDomainName('domain.io');
         $entry5->setMimetype('text/html');
@@ -99,7 +99,7 @@ class LoadEntryData extends AbstractFixture implements OrderedFixtureInterface
         $this->addReference('entry5', $entry5);
 
         $entry6 = new Entry($this->getReference('admin-user'));
-        $entry6->setUrl('http://0.0.0.0');
+        $entry6->setUrl('http://0.0.0.0/entry6');
         $entry6->setReadingTime(12);
         $entry6->setDomainName('domain.io');
         $entry6->setMimetype('text/html');
