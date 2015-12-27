@@ -121,6 +121,26 @@ class RuleBasedTaggerTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($tag, $tags[0]);
     }
 
+    public function testSameTagWithDifferentfMatchingRules()
+    {
+        $taggingRule = $this->getTaggingRule('bla bla', array('hey'));
+        $otherTaggingRule = $this->getTaggingRule('rule as string', array('hey'));
+
+        $user = $this->getUser([$taggingRule, $otherTaggingRule]);
+        $entry = new Entry($user);
+
+        $this->rulerz
+            ->method('satisfies')
+            ->willReturn(true);
+
+        $this->tagger->tag($entry);
+
+        $this->assertFalse($entry->getTags()->isEmpty());
+
+        $tags = $entry->getTags();
+        $this->assertCount(1, $tags);
+    }
+
     private function getUser(array $taggingRules = [])
     {
         $user = new User();
