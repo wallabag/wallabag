@@ -3,6 +3,7 @@
 namespace Wallabag\CoreBundle\Tests\Controller;
 
 use Wallabag\CoreBundle\Tests\WallabagCoreTestCase;
+use Wallabag\CoreBundle\Entity\Entry;
 
 class EntryControllerTest extends WallabagCoreTestCase
 {
@@ -288,6 +289,51 @@ class EntryControllerTest extends WallabagCoreTestCase
         $client->request('GET', '/delete/'.$content->getId());
 
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
+    }
+
+    /**
+     * It will create a new entry.
+     * Browse to it.
+     * Then remove it.
+     *
+     * And it'll check that user won't be redirected to the view page of the content when it had been removed
+     */
+    public function testViewAndDelete()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        // add a new content to be removed later
+        $user = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagUserBundle:User')
+            ->findOneByUserName('admin');
+
+        $content = new Entry($user);
+        $content->setUrl('http://1.1.1.1/entry');
+        $content->setReadingTime(12);
+        $content->setDomainName('domain.io');
+        $content->setMimetype('text/html');
+        $content->setTitle('test title entry');
+        $content->setContent('This is my content /o/');
+        $content->setArchived(true);
+        $content->setLanguage('fr');
+
+        $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->persist($content);
+        $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->flush();
+
+        $client->request('GET', '/view/'.$content->getId());
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $client->request('GET', '/delete/'.$content->getId());
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+
+        $client->followRedirect();
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
     public function testViewOtherUserEntry()
