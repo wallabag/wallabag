@@ -44,7 +44,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $form = $crawler->filter('button[id=config_save]')->form();
 
         $data = array(
-            'config[theme]' => 0,
+            'config[theme]' => 'baggy',
             'config[items_per_page]' => '30',
             'config[language]' => 'en',
         );
@@ -63,7 +63,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
     {
         return array(
             array(array(
-                'config[theme]' => 0,
+                'config[theme]' => 'baggy',
                 'config[items_per_page]' => '',
                 'config[language]' => 'en',
             )),

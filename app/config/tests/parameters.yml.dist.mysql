@@ -52,6 +52,7 @@ parameters:
     export_mobi: true
     export_pdf: true
     wallabag_url: http://v2.wallabag.org
+    wallabag_support_url: 'https://www.wallabag.org/pages/support.html'
 
     # default user config
     items_on_page: 12
