@@ -69,9 +69,7 @@ class RuleBasedTaggerTest extends \PHPUnit_Framework_TestCase
 
         $tags = $entry->getTags();
         $this->assertSame('foo', $tags[0]->getLabel());
-        $this->assertSame($user, $tags[0]->getUser());
         $this->assertSame('bar', $tags[1]->getLabel());
-        $this->assertSame($user, $tags[1]->getUser());
     }
 
     public function testTagWithAMixOfMatchingRules()
@@ -92,7 +90,6 @@ class RuleBasedTaggerTest extends \PHPUnit_Framework_TestCase
 
         $tags = $entry->getTags();
         $this->assertSame('foo', $tags[0]->getLabel());
-        $this->assertSame($user, $tags[0]->getUser());
     }
 
     public function testWhenTheTagExists()
@@ -100,7 +97,8 @@ class RuleBasedTaggerTest extends \PHPUnit_Framework_TestCase
         $taggingRule = $this->getTaggingRule('rule as string', array('foo'));
         $user = $this->getUser([$taggingRule]);
         $entry = new Entry($user);
-        $tag = new Tag($user);
+        $tag = new Tag();
+        $tag->setLabel('foo');
 
         $this->rulerz
             ->expects($this->once())
@@ -110,7 +108,9 @@ class RuleBasedTaggerTest extends \PHPUnit_Framework_TestCase
 
         $this->tagRepository
             ->expects($this->once())
-            ->method('findOneByLabelAndUserId')
+            // the method `findOneByLabel` doesn't exist, EntityRepository will then call `_call` method
+            // to magically call the `findOneBy` with ['label' => 'foo']
+            ->method('__call')
             ->willReturn($tag);
 
         $this->tagger->tag($entry);
@@ -118,7 +118,7 @@ class RuleBasedTaggerTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($entry->getTags()->isEmpty());
 
         $tags = $entry->getTags();
-        $this->assertSame($tag, $tags[0]);
+        $this->assertSame($tag->getLabel(), $tags[0]->getLabel());
     }
 
     public function testSameTagWithDifferentfMatchingRules()

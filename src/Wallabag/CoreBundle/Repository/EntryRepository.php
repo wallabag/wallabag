@@ -5,6 +5,7 @@ namespace Wallabag\CoreBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
+use Wallabag\CoreBundle\Entity\Tag;
 
 class EntryRepository extends EntityRepository
 {
@@ -178,5 +179,23 @@ class EntryRepository extends EntityRepository
             ->setMaxResults(1)
             ->getQuery()
             ->getSingleResult();
+    }
+
+    /**
+     * Remove a tag from all user entries.
+     * We are using a native SQL query because Doctrine doesn't know EntryTag entity because it's a ManyToMany relation.
+     * Instead of that SQL query we should loop on every entry and remove the tag, could be really long ...
+     *
+     * @param int $userId
+     * @param Tag $tag
+     */
+    public function removeTag($userId, Tag $tag)
+    {
+        $sql = 'DELETE et FROM entry_tag et WHERE et.entry_id IN ( SELECT e.id FROM entry e WHERE e.user_id = :userId ) AND et.tag_id = :tagId';
+        $stmt = $this->getEntityManager()->getConnection()->prepare($sql);
+        $stmt->execute([
+            'userId' => $userId,
+            'tagId' => $tag->getId(),
+        ]);
     }
 }

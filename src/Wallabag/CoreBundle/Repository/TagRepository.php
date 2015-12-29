@@ -9,16 +9,29 @@ use Pagerfanta\Pagerfanta;
 class TagRepository extends EntityRepository
 {
     /**
-     * Find Tags.
+     * Return only the QueryBuilder to retrieve all tags for a given user.
      *
      * @param int $userId
      *
-     * @return array
+     * @return QueryBuilder
+     */
+    private function getQbForAllTags($userId)
+    {
+        return $this->createQueryBuilder('t')
+            ->leftJoin('t.entries', 'e')
+            ->where('e.user = :userId')->setParameter('userId', $userId);
+    }
+
+    /**
+     * Find Tags and return a Pager.
+     *
+     * @param int $userId
+     *
+     * @return Pagerfanta
      */
     public function findTags($userId)
     {
-        $qb = $this->createQueryBuilder('t')
-            ->where('t.user =:userId')->setParameter('userId', $userId);
+        $qb = $this->getQbForAllTags($userId);
 
         $pagerAdapter = new DoctrineORMAdapter($qb);
 
@@ -26,19 +39,16 @@ class TagRepository extends EntityRepository
     }
 
     /**
-     * Find a tag by its label and its owner.
+     * Find Tags.
      *
-     * @param string $label
-     * @param int    $userId
+     * @param int $userId
      *
-     * @return Tag|null
+     * @return array
      */
-    public function findOneByLabelAndUserId($label, $userId)
+    public function findAllTags($userId)
     {
-        return $this->createQueryBuilder('t')
-            ->where('t.label = :label')->setParameter('label', $label)
-            ->andWhere('t.user = :user_id')->setParameter('user_id', $userId)
+        return $this->getQbForAllTags($userId)
             ->getQuery()
-            ->getOneOrNullResult();
+            ->getResult();
     }
 }

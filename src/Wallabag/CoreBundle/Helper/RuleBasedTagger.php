@@ -37,7 +37,7 @@ class RuleBasedTagger
             }
 
             foreach ($rule->getTags() as $label) {
-                $tag = $this->getTag($entry->getUser(), $label);
+                $tag = $this->getTag($label);
 
                 $entry->addTag($tag);
             }
@@ -62,7 +62,7 @@ class RuleBasedTagger
 
             foreach ($entries as $entry) {
                 foreach ($rule->getTags() as $label) {
-                    $tag = $this->getTag($user, $label);
+                    $tag = $this->getTag($label);
 
                     $entry->addTag($tag);
                 }
@@ -73,19 +73,18 @@ class RuleBasedTagger
     }
 
     /**
-     * Fetch a tag for a user.
+     * Fetch a tag.
      *
-     * @param User   $user
      * @param string $label The tag's label.
      *
      * @return Tag
      */
-    private function getTag(User $user, $label)
+    private function getTag($label)
     {
-        $tag = $this->tagRepository->findOneByLabelAndUserId($label, $user->getId());
+        $tag = $this->tagRepository->findOneByLabel($label);
 
         if (!$tag) {
-            $tag = new Tag($user);
+            $tag = new Tag();
             $tag->setLabel($label);
         }
 

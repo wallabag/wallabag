@@ -208,7 +208,7 @@ class WallabagRestControllerTest extends WallabagApiTestCase
 
         $tags = array();
         foreach ($entry->getTags() as $tag) {
-            $tags[] = array('id' => $tag->getId(), 'label' => $tag->getLabel());
+            $tags[] = array('id' => $tag->getId(), 'label' => $tag->getLabel(), 'slug' => $tag->getSlug());
         }
 
         $this->client->request('GET', '/api/entries/'.$entry->getId().'/tags');
@@ -309,5 +309,6 @@ class WallabagRestControllerTest extends WallabagApiTestCase
 
         $this->assertArrayHasKey('label', $content);
         $this->assertEquals($tag['label'], $content['label']);
+        $this->assertEquals($tag['slug'], $content['slug']);
     }
 }

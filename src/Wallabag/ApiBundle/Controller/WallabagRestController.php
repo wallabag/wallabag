@@ -27,7 +27,7 @@ class WallabagRestController extends FOSRestController
                 ->findOneByLabel($label);
 
             if (is_null($tagEntity)) {
-                $tagEntity = new Tag($this->getUser());
+                $tagEntity = new Tag();
                 $tagEntity->setLabel($label);
             }
 
@@ -74,8 +74,7 @@ class WallabagRestController extends FOSRestController
         $perPage = (int) $request->query->get('perPage', 30);
         $tags = $request->query->get('tags', []);
 
-        $pager = $this
-            ->getDoctrine()
+        $pager = $this->getDoctrine()
             ->getRepository('WallabagCoreBundle:Entry')
             ->findEntries($this->getUser()->getId(), $isArchived, $isStarred, $sort, $order);
 
@@ -311,7 +310,12 @@ class WallabagRestController extends FOSRestController
     public function getTagsAction()
     {
         $this->validateAuthentication();
-        $json = $this->get('serializer')->serialize($this->getUser()->getTags(), 'json');
+
+        $tags = $this->getDoctrine()
+            ->getRepository('WallabagCoreBundle:Tag')
+            ->findAllTags($this->getUser()->getId());
+
+        $json = $this->get('serializer')->serialize($tags, 'json');
 
         return $this->renderJsonResponse($json);
     }
@@ -328,7 +332,10 @@ class WallabagRestController extends FOSRestController
     public function deleteTagAction(Tag $tag)
     {
         $this->validateAuthentication();
-        $this->validateUserAccess($tag->getUser()->getId());
+
+        $this->getDoctrine()
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->removeTag($this->getUser()->getId(), $tag);
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($tag);

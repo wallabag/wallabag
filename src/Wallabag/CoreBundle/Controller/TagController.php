@@ -20,25 +20,23 @@ class TagController extends Controller
      */
     public function addTagFormAction(Request $request, Entry $entry)
     {
-        $tag = new Tag($this->getUser());
+        $tag = new Tag();
         $form = $this->createForm(new NewTagType(), $tag);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $existingTag = $this->getDoctrine()
                 ->getRepository('WallabagCoreBundle:Tag')
-                ->findOneByLabelAndUserId($tag->getLabel(), $this->getUser()->getId());
+                ->findOneByLabel($tag->getLabel());
 
             $em = $this->getDoctrine()->getManager();
 
             if (is_null($existingTag)) {
                 $entry->addTag($tag);
                 $em->persist($tag);
-            } else {
-                if (!$existingTag->hasEntry($entry)) {
-                    $entry->addTag($existingTag);
-                    $em->persist($existingTag);
-                }
+            } elseif (!$existingTag->hasEntry($entry)) {
+                $entry->addTag($existingTag);
+                $em->persist($existingTag);
             }
 
             $em->flush();
