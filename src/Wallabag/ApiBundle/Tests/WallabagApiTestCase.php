@@ -12,6 +12,11 @@ abstract class WallabagApiTestCase extends WebTestCase
      */
     protected $client = null;
 
+    /**
+     * @var \FOS\UserBundle\Model\UserInterface
+     */
+    protected $user;
+
     public function setUp()
     {
         $this->client = $this->createAuthorizedClient();
@@ -31,8 +36,8 @@ abstract class WallabagApiTestCase extends WebTestCase
         $loginManager = $container->get('fos_user.security.login_manager');
         $firewallName = $container->getParameter('fos_user.firewall_name');
 
-        $user = $userManager->findUserBy(array('username' => 'admin'));
-        $loginManager->loginUser($firewallName, $user);
+        $this->user = $userManager->findUserBy(array('username' => 'admin'));
+        $loginManager->loginUser($firewallName, $this->user);
 
         // save the login token into the session and put it in a cookie
         $container->get('session')->set('_security_'.$firewallName, serialize($container->get('security.token_storage')->getToken()));

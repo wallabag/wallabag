@@ -183,19 +183,50 @@ class EntryRepository extends EntityRepository
 
     /**
      * Remove a tag from all user entries.
-     * We are using a native SQL query because Doctrine doesn't know EntryTag entity because it's a ManyToMany relation.
-     * Instead of that SQL query we should loop on every entry and remove the tag, could be really long ...
+     *
+     * We need to loop on each entry attached to the given tag to remove it, since Doctrine doesn't know EntryTag entity because it's a ManyToMany relation.
+     * It could be faster with one query but I don't know how to retrieve the table name `entry_tag` which can have a prefix.
      *
      * @param int $userId
      * @param Tag $tag
      */
     public function removeTag($userId, Tag $tag)
     {
-        $sql = 'DELETE et FROM entry_tag et WHERE et.entry_id IN ( SELECT e.id FROM entry e WHERE e.user_id = :userId ) AND et.tag_id = :tagId';
-        $stmt = $this->getEntityManager()->getConnection()->prepare($sql);
-        $stmt->execute([
-            'userId' => $userId,
-            'tagId' => $tag->getId(),
-        ]);
+        $entries = $this->getBuilderByUser($userId)
+            ->innerJoin('e.tags', 't')
+            ->andWhere('t.id = :tagId')->setParameter('tagId', $tag->getId())
+            ->getQuery()
+            ->getResult();
+
+        foreach ($entries as $entry) {
+            $entry->removeTag($tag);
+        }
+
+        $this->getEntityManager()->flush();
+
+        // An other solution can be to use raw query but I can't find a way to retrieve the `entry_tag` table name since it can be prefixed....
+        // $sql = 'DELETE et FROM entry_tag et WHERE et.entry_id IN ( SELECT e.id FROM entry e WHERE e.user_id = :userId ) AND et.tag_id = :tagId';
+        // $stmt = $this->getEntityManager()->getConnection()->prepare($sql);
+        // $stmt->execute([
+        //     'userId' => $userId,
+        //     'tagId' => $tag->getId(),
+        // ]);
+    }
+
+    /**
+     * Find all entries that are attached to a give tag id.
+     *
+     * @param int $userId
+     * @param int $tagId
+     *
+     * @return array
+     */
+    public function findAllByTagId($userId, $tagId)
+    {
+        return $this->getBuilderByUser($userId)
+            ->innerJoin('e.tags', 't')
+            ->andWhere('t.id = :tagId')->setParameter('tagId', $tagId)
+            ->getQuery()
+            ->getResult();
     }
 }

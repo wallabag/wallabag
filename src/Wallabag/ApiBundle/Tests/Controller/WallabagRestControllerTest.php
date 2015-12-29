@@ -310,5 +310,12 @@ class WallabagRestControllerTest extends WallabagApiTestCase
         $this->assertArrayHasKey('label', $content);
         $this->assertEquals($tag['label'], $content['label']);
         $this->assertEquals($tag['slug'], $content['slug']);
+
+        $entries = $entry = $this->client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findAllByTagId($this->user->getId(), $tag['id']);
+
+        $this->assertCount(0, $entries);
     }
 }
