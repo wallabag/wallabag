@@ -25,7 +25,7 @@ class LoadConfigData extends AbstractFixture implements OrderedFixtureInterface
 
         $adminConfig->setTheme('material');
         $adminConfig->setItemsPerPage(30);
-        $adminConfig->setLanguage('en_US');
+        $adminConfig->setLanguage('en');
 
         $manager->persist($adminConfig);
 
@@ -34,7 +34,7 @@ class LoadConfigData extends AbstractFixture implements OrderedFixtureInterface
         $bobConfig = new Config($this->getReference('bob-user'));
         $bobConfig->setTheme('default');
         $bobConfig->setItemsPerPage(10);
-        $bobConfig->setLanguage('fr_FR');
+        $bobConfig->setLanguage('fr');
 
         $manager->persist($bobConfig);
 

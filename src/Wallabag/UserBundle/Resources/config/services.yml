@@ -1,0 +1,9 @@
+services:
+    wallabag_user.auth_code_mailer:
+        class: Wallabag\UserBundle\Mailer\AuthCodeMailer
+        arguments:
+            - "@mailer"
+            - "@translator"
+            - "%scheb_two_factor.email.sender_email%"
+            - "%scheb_two_factor.email.sender_name%"
+            - "%wallabag_support_url%"

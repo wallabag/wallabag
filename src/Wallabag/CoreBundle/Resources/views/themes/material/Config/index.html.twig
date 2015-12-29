@@ -133,6 +133,12 @@
                             {% if twofactor_auth %}
                             <div class="row">
                                 <div class="input-field col s12">
+                                    {% trans %}Enabling two factor authentication means you'll receive an email with a code on every new untrusted connexion{% endtrans %}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s12">
                                     {{ form_widget(form.user.twoFactorAuthentication) }}
                                     {{ form_label(form.user.twoFactorAuthentication) }}
                                     {{ form_errors(form.user.twoFactorAuthentication) }}

@@ -40,6 +40,10 @@
     {{ form_start(form.rss) }}
         {{ form_errors(form.rss) }}
 
+        <div class="row">
+            {% trans %}RSS feeds provided by wallabag allow you to read your saved articles with your favourite RSS reader.{% endtrans %}
+        </div>
+
         <fieldset class="w500p inline">
             <div class="row">
                 <label>Rss token</label>
@@ -101,6 +105,10 @@
         </fieldset>
 
         {% if twofactor_auth %}
+        <div class="row">
+            {% trans %}Enabling two factor authentication means you'll receive an email with a code on every new untrusted connexion{% endtrans %}
+        </div>
+
         <fieldset class="w500p inline">
             <div class="row">
                 {{ form_label(form.user.twoFactorAuthentication) }}
