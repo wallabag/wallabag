@@ -174,8 +174,8 @@ class WallabagRestController extends FOSRestController
         $this->validateUserAccess($entry->getUser()->getId());
 
         $title = $request->request->get('title');
-        $isArchived = $request->request->get('is_archived');
-        $isStarred = $request->request->get('is_starred');
+        $isArchived = $request->request->get('archive');
+        $isStarred = $request->request->get('star');
 
         if (!is_null($title)) {
             $entry->setTitle($title);
