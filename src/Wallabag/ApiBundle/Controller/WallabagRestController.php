@@ -337,10 +337,6 @@ class WallabagRestController extends FOSRestController
             ->getRepository('WallabagCoreBundle:Entry')
             ->removeTag($this->getUser()->getId(), $tag);
 
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($tag);
-        $em->flush();
-
         $json = $this->get('serializer')->serialize($tag, 'json');
 
         return $this->renderJsonResponse($json);

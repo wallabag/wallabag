@@ -98,7 +98,6 @@ class RuleBasedTaggerTest extends \PHPUnit_Framework_TestCase
         $user = $this->getUser([$taggingRule]);
         $entry = new Entry($user);
         $tag = new Tag();
-        $tag->setLabel('foo');
 
         $this->rulerz
             ->expects($this->once())
@@ -118,7 +117,7 @@ class RuleBasedTaggerTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($entry->getTags()->isEmpty());
 
         $tags = $entry->getTags();
-        $this->assertSame($tag->getLabel(), $tags[0]->getLabel());
+        $this->assertSame($tag, $tags[0]);
     }
 
     public function testSameTagWithDifferentfMatchingRules()
