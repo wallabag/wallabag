@@ -267,6 +267,33 @@ class EntryController extends Controller
     }
 
     /**
+     * Reload an entry.
+     * Refetch content from the website and make it readable again.
+     *
+     * @param Entry $entry
+     *
+     * @Route("/reload/{id}", requirements={"id" = "\d+"}, name="reload_entry")
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function reloadAction(Entry $entry)
+    {
+        $this->checkUserAction($entry);
+
+        $message = 'Entry reloaded';
+        if (false === $this->updateEntry($entry)) {
+            $message = 'Failed to reload entry';
+        }
+
+        $this->get('session')->getFlashBag()->add(
+            'notice',
+            $message
+        );
+
+        return $this->redirect($this->generateUrl('view', array('id' => $entry->getId())));
+    }
+
+    /**
      * Changes read status for an entry.
      *
      * @param Request $request
