@@ -2,7 +2,9 @@
 
 namespace Wallabag\ImportBundle\Import;
 
-interface ImportInterface
+use Psr\Log\LoggerAwareInterface;
+
+interface ImportInterface extends LoggerAwareInterface
 {
     /**
      * Name of the import.
@@ -19,27 +21,18 @@ interface ImportInterface
     public function getDescription();
 
     /**
-     * Return the oauth url to authenticate the client.
-     *
-     * @param string $redirectUri Redirect url in case of error
-     * @param string $callbackUri Url when the authentication is complete
-     *
-     * @return string
-     */
-    public function oAuthRequest($redirectUri, $callbackUri);
-
-    /**
-     * Usually called by the previous callback to authorize the client.
-     * Then it return a token that can be used for next requests.
-     *
-     * @return string
-     */
-    public function oAuthAuthorize();
-
-    /**
      * Import content using the user token.
      *
-     * @param string $accessToken User access token
+     * @return bool
      */
-    public function import($accessToken);
+    public function import();
+
+    /**
+     * Return an array with summary info about the import, with keys:
+     *     - skipped
+     *     - imported.
+     *
+     * @return array
+     */
+    public function getSummary();
 }
