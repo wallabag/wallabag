@@ -141,7 +141,7 @@ class PocketImport implements ImportInterface
 
         $entries = $response->json();
 
-        $this->parsePocketEntries($entries['list']);
+        $this->parseEntries($entries['list']);
 
         return true;
     }
@@ -194,11 +194,9 @@ class PocketImport implements ImportInterface
      *
      * @param $entries
      */
-    private function parsePocketEntries($entries)
+    private function parseEntries($entries)
     {
         foreach ($entries as $pocketEntry) {
-            $entry = new Entry($this->user);
-
             $url = isset($pocketEntry['resolved_url']) && $pocketEntry['resolved_url'] != '' ? $pocketEntry['resolved_url'] : $pocketEntry['given_url'];
 
             $existingEntry = $this->em
@@ -210,6 +208,7 @@ class PocketImport implements ImportInterface
                 continue;
             }
 
+            $entry = new Entry($this->user);
             $entry = $this->contentProxy->updateEntry($entry, $url);
 
             // 0, 1, 2 - 1 if the item is archived - 2 if the item should be deleted

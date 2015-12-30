@@ -51,7 +51,7 @@ class PocketController extends Controller
 
         if (true === $pocket->import()) {
             $summary = $pocket->getSummary();
-            $message = $summary['imported'].' entrie(s) imported, '.$summary['skipped'].' already saved.';
+            $message = 'Import summary: '.$summary['imported'].' imported, '.$summary['skipped'].' already saved.';
         }
 
         $this->get('session')->getFlashBag()->add(

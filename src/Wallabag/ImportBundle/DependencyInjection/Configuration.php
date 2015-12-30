@@ -17,6 +17,8 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('allow_mimetypes')
                     ->prototype('scalar')->end()
                 ->end()
+                ->scalarNode('resource_dir')
+                ->end()
             ->end()
         ;
 

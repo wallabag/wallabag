@@ -18,3 +18,10 @@ services:
         calls:
             - [ setClient, [ "@wallabag_import.pocket.client" ] ]
             - [ setLogger, [ "@logger" ]]
+
+    wallabag_import.wallabag_v1.import:
+        class: Wallabag\ImportBundle\Import\WallabagV1Import
+        arguments:
+            - "@doctrine.orm.entity_manager"
+        calls:
+            - [ setLogger, [ "@logger" ]]
