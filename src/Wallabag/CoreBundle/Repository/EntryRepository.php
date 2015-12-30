@@ -242,8 +242,8 @@ class EntryRepository extends EntityRepository
             ->getQuery()
             ->getResult();
 
-        if (count($res) > 1) {
-            return next($res);
+        if (count($res)) {
+            return current($res);
         }
 
         return false;
