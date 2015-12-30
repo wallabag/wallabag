@@ -347,7 +347,7 @@ class EntryController extends Controller
         );
 
         // don't redirect user to the deleted entry
-        return $this->redirect($url !== $request->headers->get('referer') ?: $this->generateUrl('homepage'));
+        return $this->redirect($url !== $request->headers->get('referer') ? $request->headers->get('referer') : $this->generateUrl('homepage'));
     }
 
     /**
