@@ -12,6 +12,14 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('wallabag_import');
 
+        $rootNode
+            ->children()
+                ->arrayNode('allow_mimetypes')
+                    ->prototype('scalar')->end()
+                ->end()
+            ->end()
+        ;
+
         return $treeBuilder;
     }
 }

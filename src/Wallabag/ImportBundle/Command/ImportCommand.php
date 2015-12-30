@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Command;
+namespace Wallabag\ImportBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Config\Definition\Exception\Exception;

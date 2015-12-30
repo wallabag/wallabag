@@ -30,8 +30,9 @@ wallabag_core:
         en: 'English'
         fr: 'Français'
         de: 'Deutsch'
-    import:
-        allow_mimetypes: ['application/octet-stream', 'application/json', 'text/plain']
+
+wallabag_import:
+    allow_mimetypes: ['application/octet-stream', 'application/json', 'text/plain']
 
 # Twig Configuration
 twig:

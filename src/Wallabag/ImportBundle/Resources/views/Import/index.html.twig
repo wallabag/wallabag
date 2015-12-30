@@ -13,4 +13,30 @@
         </div>
     </div>
 </div>
+
+
+<div class="row">
+    <div class="col s12">
+        <div class="card-panel settings">
+            <div class="row">
+                <div class="col s12">
+                    <form action="{{ path('import') }}" method="post" {{ form_enctype(form.import) }}>
+                        {{ form_errors(form.import) }}
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <p>{% trans %}Please select your wallabag export and click on the below button to upload and import it.{% endtrans %}</p>
+                                {{ form_errors(form.import.file) }}
+                                {{ form_widget(form.import.file) }}
+                            </div>
+                        </div>
+                        <div class="hidden">{{ form_rest(form.import) }}</div>
+                        <button class="btn waves-effect waves-light" type="submit" name="action">
+                            {% trans %}Upload file{% endtrans %}
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
