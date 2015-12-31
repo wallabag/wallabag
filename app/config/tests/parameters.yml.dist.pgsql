@@ -62,4 +62,4 @@ parameters:
     rss_limit: 50
 
     # pocket import
-    pocket_consumer_key: 47025-85ed5e6cfd72abbb49d12db1
+    pocket_consumer_key: xxxxxxxx
