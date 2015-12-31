@@ -8,15 +8,17 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class PocketController extends Controller
 {
     /**
-     * @Route("/import/pocket", name="import_pocket")
+     * @Route("/pocket", name="import_pocket")
      */
     public function indexAction()
     {
-        return $this->render('WallabagImportBundle:Pocket:index.html.twig', []);
+        return $this->render('WallabagImportBundle:Pocket:index.html.twig', [
+            'import' => $this->get('wallabag_import.pocket.import'),
+        ]);
     }
 
     /**
-     * @Route("/import/pocket/auth", name="import_pocket_auth")
+     * @Route("/pocket/auth", name="import_pocket_auth")
      */
     public function authAction()
     {
@@ -32,7 +34,7 @@ class PocketController extends Controller
     }
 
     /**
-     * @Route("/import/pocket/callback", name="import_pocket_callback")
+     * @Route("/pocket/callback", name="import_pocket_callback")
      */
     public function callbackAction()
     {

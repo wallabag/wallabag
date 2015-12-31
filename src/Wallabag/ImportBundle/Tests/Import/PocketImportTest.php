@@ -74,7 +74,8 @@ class PocketImportTest extends \PHPUnit_Framework_TestCase
         $pocketImport = $this->getPocketImport();
 
         $this->assertEquals('Pocket', $pocketImport->getName());
-        $this->assertEquals('This importer will import all your <a href="https://getpocket.com">Pocket</a> data.', $pocketImport->getDescription());
+        $this->assertNotEmpty($pocketImport->getUrl());
+        $this->assertContains('This importer will import all your <a href="https://getpocket.com">Pocket</a> data.', $pocketImport->getDescription());
     }
 
     public function testOAuthRequest()

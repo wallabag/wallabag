@@ -8,10 +8,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class ImportController extends Controller
 {
     /**
-     * @Route("/import", name="import")
+     * @Route("/", name="import")
      */
     public function importAction()
     {
-        return $this->render('WallabagImportBundle:Import:index.html.twig', []);
+        return $this->render('WallabagImportBundle:Import:index.html.twig', [
+            'imports' => $this->get('wallabag_import.chain')->getAll(),
+        ]);
     }
 }

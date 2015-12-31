@@ -15,13 +15,6 @@ class UploadImportType extends AbstractType
         ;
     }
 
-    public function getDefaultOptions(array $options)
-    {
-        return array(
-            'csrf_protection' => false,
-        );
-    }
-
     public function getName()
     {
         return 'upload_import_file';

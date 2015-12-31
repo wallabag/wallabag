@@ -10,20 +10,20 @@ use Wallabag\ImportBundle\Form\Type\UploadImportType;
 class WallabagV1Controller extends Controller
 {
     /**
-     * @Route("/import/wallabag-v1", name="import_wallabag_v1")
+     * @Route("/wallabag-v1", name="import_wallabag_v1")
      */
     public function indexAction(Request $request)
     {
-        $importForm = $this->createForm(new UploadImportType());
-        $importForm->handleRequest($request);
-        $user = $this->getUser();
+        $form = $this->createForm(new UploadImportType());
+        $form->handleRequest($request);
 
-        if ($importForm->isValid()) {
-            $file = $importForm->get('file')->getData();
-            $name = $user->getId().'.json';
+        $wallabag = $this->get('wallabag_import.wallabag_v1.import');
+
+        if ($form->isValid()) {
+            $file = $form->get('file')->getData();
+            $name = $this->getUser()->getId().'.json';
 
             if (in_array($file->getClientMimeType(), $this->getParameter('wallabag_import.allow_mimetypes')) && $file->move($this->getParameter('wallabag_import.resource_dir'), $name)) {
-                $wallabag = $this->get('wallabag_import.wallabag_v1.import');
                 $res = $wallabag
                     ->setUser($this->getUser())
                     ->setFilepath($this->getParameter('wallabag_import.resource_dir').'/'.$name)
@@ -34,7 +34,7 @@ class WallabagV1Controller extends Controller
                     $summary = $wallabag->getSummary();
                     $message = 'Import summary: '.$summary['imported'].' imported, '.$summary['skipped'].' already saved.';
 
-                    @unlink($this->getParameter('wallabag_import.resource_dir').'/'.$name);
+                    unlink($this->getParameter('wallabag_import.resource_dir').'/'.$name);
                 }
 
                 $this->get('session')->getFlashBag()->add(
@@ -52,7 +52,8 @@ class WallabagV1Controller extends Controller
         }
 
         return $this->render('WallabagImportBundle:WallabagV1:index.html.twig', [
-            'form' => $importForm->createView(),
+            'form' => $form->createView(),
+            'import' => $wallabag,
         ]);
     }
 }

@@ -14,6 +14,13 @@ interface ImportInterface extends LoggerAwareInterface
     public function getName();
 
     /**
+     * Url to start the import.
+     *
+     * @return string
+     */
+    public function getUrl();
+
+    /**
      * Description of the import.
      *
      * @return string

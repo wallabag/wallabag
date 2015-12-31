@@ -1,20 +1,26 @@
 {% extends "WallabagCoreBundle::layout.html.twig" %}
-{% block title %}{% trans %}import{% endtrans %}{% endblock %}
+{% block title %}{% trans %}Import > Wallabag v1{% endtrans %}{% endblock %}
 
 {% block content %}
-
 <div class="row">
     <div class="col s12">
         <div class="card-panel settings">
             <div class="row">
+                <blockquote>{{ import.description|raw }}</blockquote>
+                <p>{% trans %}Please select your wallabag export and click on the below button to upload and import it.{% endtrans %}</p>
                 <div class="col s12">
                     {{ form_start(form, {'method': 'POST'}) }}
                         {{ form_errors(form) }}
                         <div class="row">
-                            <div class="input-field col s12">
-                                <p>{% trans %}Please select your wallabag export and click on the below button to upload and import it.{% endtrans %}</p>
+                            <div class="file-field input-field col s12">
                                 {{ form_errors(form.file) }}
-                                {{ form_widget(form.file) }}
+                                <div class="btn">
+                                    <span>File</span>
+                                    {{ form_widget(form.file) }}
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text">
+                                </div>
                             </div>
                         </div>
                         <div class="hidden">{{ form_rest(form) }}</div>

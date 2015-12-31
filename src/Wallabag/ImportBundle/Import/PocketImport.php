@@ -48,9 +48,17 @@ class PocketImport implements ImportInterface
     /**
      * {@inheritdoc}
      */
+    public function getUrl()
+    {
+        return 'import_pocket';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getDescription()
     {
-        return 'This importer will import all your <a href="https://getpocket.com">Pocket</a> data.';
+        return 'This importer will import all your <a href="https://getpocket.com">Pocket</a> data. Pocket doesn\'t allow us to retrieve content from their service, so the readable content of each article will be re-fetched by Wallabag.';
     }
 
     /**
@@ -196,6 +204,8 @@ class PocketImport implements ImportInterface
      */
     private function parseEntries($entries)
     {
+        $i = 1;
+
         foreach ($entries as $pocketEntry) {
             $url = isset($pocketEntry['resolved_url']) && $pocketEntry['resolved_url'] != '' ? $pocketEntry['resolved_url'] : $pocketEntry['given_url'];
 
@@ -241,6 +251,12 @@ class PocketImport implements ImportInterface
 
             $this->em->persist($entry);
             ++$this->importedEntries;
+
+            // flush every 20 entries
+            if (($i % 20) === 0) {
+                $em->flush();
+            }
+            ++$i;
         }
 
         $this->em->flush();

@@ -1,7 +1,7 @@
 wallabag_import:
     resource: "@WallabagImportBundle/Controller/"
     type:     annotation
-    prefix:   /
+    prefix:   /import
 
 wallabag_api:
     resource: "@WallabagApiBundle/Resources/config/routing.yml"

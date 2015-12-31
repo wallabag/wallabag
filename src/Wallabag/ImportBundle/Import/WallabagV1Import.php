@@ -53,9 +53,17 @@ class WallabagV1Import implements ImportInterface
     /**
      * {@inheritdoc}
      */
+    public function getUrl()
+    {
+        return 'import_wallabag_v1';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getDescription()
     {
-        return 'This importer will import all your wallabag v1 articles.';
+        return 'This importer will import all your wallabag v1 articles. On your config page, click on "JSON export" in the "Export your wallabag data" section. You will have a "wallabag-export-1-xxxx-xx-xx.json" file.';
     }
 
     /**
@@ -75,7 +83,13 @@ class WallabagV1Import implements ImportInterface
             return false;
         }
 
-        $this->parseEntries(json_decode(file_get_contents($this->filepath), true));
+        $data = json_decode(file_get_contents($this->filepath), true);
+
+        if (empty($data)) {
+            return false;
+        }
+
+        $this->parseEntries($data);
 
         return true;
     }
@@ -108,6 +122,8 @@ class WallabagV1Import implements ImportInterface
      */
     private function parseEntries($entries)
     {
+        $i = 1;
+
         foreach ($entries as $importedEntry) {
             $existingEntry = $this->em
                 ->getRepository('WallabagCoreBundle:Entry')
@@ -130,6 +146,12 @@ class WallabagV1Import implements ImportInterface
 
             $this->em->persist($entry);
             ++$this->importedEntries;
+
+            // flush every 20 entries
+            if (($i % 20) === 0) {
+                $em->flush();
+            }
+            ++$i;
         }
 
         $this->em->flush();
