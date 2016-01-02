@@ -180,6 +180,38 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertContains($content->getTitle(), $client->getResponse()->getContent());
     }
 
+    /**
+     * @depends testPostNewOk
+     *
+     * This test will require an internet connection.
+     */
+    public function testReload()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $content = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneByUrl($this->url);
+
+        // empty content
+        $content->setContent('');
+        $client->getContainer()->get('doctrine.orm.entity_manager')->persist($content);
+        $client->getContainer()->get('doctrine.orm.entity_manager')->flush();
+
+        $client->request('GET', '/reload/'.$content->getId());
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+
+        $content = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneByUrl($this->url);
+
+        $this->assertNotEmpty($content->getContent());
+    }
+
     public function testEdit()
     {
         $this->logInAs('admin');
