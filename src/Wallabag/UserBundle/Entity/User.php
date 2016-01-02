@@ -13,7 +13,6 @@ use JMS\Serializer\Annotation\Expose;
 use FOS\UserBundle\Model\User as BaseUser;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\CoreBundle\Entity\Tag;
 
 /**
  * User.
@@ -70,11 +69,6 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
     protected $config;
 
     /**
-     * @ORM\OneToMany(targetEntity="Wallabag\CoreBundle\Entity\Tag", mappedBy="user", cascade={"remove"})
-     */
-    protected $tags;
-
-    /**
      * @ORM\Column(type="integer", nullable=true)
      */
     private $authCode;
@@ -94,7 +88,6 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
     {
         parent::__construct();
         $this->entries = new ArrayCollection();
-        $this->tags = new ArrayCollection();
         $this->roles = array('ROLE_USER');
     }
 
@@ -169,26 +162,6 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
     public function getEntries()
     {
         return $this->entries;
-    }
-
-    /**
-     * @param Entry $entry
-     *
-     * @return User
-     */
-    public function addTag(Tag $tag)
-    {
-        $this->tags[] = $tag;
-
-        return $this;
-    }
-
-    /**
-     * @return ArrayCollection<Tag>
-     */
-    public function getTags()
-    {
-        return $this->tags;
     }
 
     public function isEqualTo(UserInterface $user)

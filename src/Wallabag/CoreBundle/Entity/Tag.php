@@ -38,6 +38,7 @@ class Tag
     private $label;
 
     /**
+     * @Expose
      * @Gedmo\Slug(fields={"label"})
      * @ORM\Column(length=128, unique=true)
      */
@@ -48,14 +49,8 @@ class Tag
      */
     private $entries;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Wallabag\UserBundle\Entity\User", inversedBy="tags")
-     */
-    private $user;
-
-    public function __construct(\Wallabag\UserBundle\Entity\User $user)
+    public function __construct()
     {
-        $this->user = $user;
         $this->entries = new ArrayCollection();
     }
 
@@ -111,13 +106,5 @@ class Tag
     public function hasEntry($entry)
     {
         return $this->entries->contains($entry);
-    }
-
-    /**
-     * @return User
-     */
-    public function getUser()
-    {
-        return $this->user;
     }
 }

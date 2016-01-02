@@ -27,7 +27,7 @@ class WallabagRestController extends FOSRestController
                 ->findOneByLabel($label);
 
             if (is_null($tagEntity)) {
-                $tagEntity = new Tag($this->getUser());
+                $tagEntity = new Tag();
                 $tagEntity->setLabel($label);
             }
 
@@ -74,8 +74,7 @@ class WallabagRestController extends FOSRestController
         $perPage = (int) $request->query->get('perPage', 30);
         $tags = $request->query->get('tags', []);
 
-        $pager = $this
-            ->getDoctrine()
+        $pager = $this->getDoctrine()
             ->getRepository('WallabagCoreBundle:Entry')
             ->findEntries($this->getUser()->getId(), $isArchived, $isStarred, $sort, $order);
 
@@ -175,8 +174,8 @@ class WallabagRestController extends FOSRestController
         $this->validateUserAccess($entry->getUser()->getId());
 
         $title = $request->request->get('title');
-        $isArchived = $request->request->get('is_archived');
-        $isStarred = $request->request->get('is_starred');
+        $isArchived = $request->request->get('archive');
+        $isStarred = $request->request->get('star');
 
         if (!is_null($title)) {
             $entry->setTitle($title);
@@ -311,7 +310,12 @@ class WallabagRestController extends FOSRestController
     public function getTagsAction()
     {
         $this->validateAuthentication();
-        $json = $this->get('serializer')->serialize($this->getUser()->getTags(), 'json');
+
+        $tags = $this->getDoctrine()
+            ->getRepository('WallabagCoreBundle:Tag')
+            ->findAllTags($this->getUser()->getId());
+
+        $json = $this->get('serializer')->serialize($tags, 'json');
 
         return $this->renderJsonResponse($json);
     }
@@ -328,11 +332,10 @@ class WallabagRestController extends FOSRestController
     public function deleteTagAction(Tag $tag)
     {
         $this->validateAuthentication();
-        $this->validateUserAccess($tag->getUser()->getId());
 
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($tag);
-        $em->flush();
+        $this->getDoctrine()
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->removeTag($this->getUser()->getId(), $tag);
 
         $json = $this->get('serializer')->serialize($tag, 'json');
 

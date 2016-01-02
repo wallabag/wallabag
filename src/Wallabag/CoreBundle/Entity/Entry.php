@@ -465,7 +465,7 @@ class Entry
         // check if tag already exist but has not yet be persisted
         // it seems that the previous condition with `contains()` doesn't check that case
         foreach ($this->tags as $existingTag) {
-            if ($existingTag->getUser() !== $tag->getUser() || $existingTag->getLabel() === $tag->getLabel()) {
+            if ($existingTag->getLabel() === $tag->getLabel()) {
                 return;
             }
         }
