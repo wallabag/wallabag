@@ -184,13 +184,14 @@ class PocketImport implements ImportInterface
             $label = trim($tag['tag']);
             $tagEntity = $this->em
                 ->getRepository('WallabagCoreBundle:Tag')
-                ->findOneByLabelAndUserId($label, $this->user->getId());
+                ->findOneByLabel($label);
 
             if (is_object($tagEntity)) {
                 $entry->addTag($tagEntity);
             } else {
-                $newTag = new Tag($this->user);
+                $newTag = new Tag();
                 $newTag->setLabel($label);
+
                 $entry->addTag($newTag);
             }
             $this->em->flush();

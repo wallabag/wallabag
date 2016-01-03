@@ -260,7 +260,9 @@ class PocketImportTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $tagRepo->expects($this->exactly(2))
-            ->method('findOneByLabelAndUserId')
+            // the method `findOneByLabel` doesn't exist, EntityRepository will then call `_call` method
+            // to magically call the `findOneBy` with ['label' => 'foo']
+            ->method('__call')
             ->will($this->onConsecutiveCalls(false, $tag));
 
         $this->em
