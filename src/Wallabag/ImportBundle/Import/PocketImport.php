@@ -18,6 +18,7 @@ class PocketImport implements ImportInterface
     private $em;
     private $contentProxy;
     private $logger;
+    private $client;
     private $consumerKey;
     private $skippedEntries = 0;
     private $importedEntries = 0;
@@ -255,7 +256,7 @@ class PocketImport implements ImportInterface
 
             // flush every 20 entries
             if (($i % 20) === 0) {
-                $em->flush();
+                $this->em->flush();
             }
             ++$i;
         }

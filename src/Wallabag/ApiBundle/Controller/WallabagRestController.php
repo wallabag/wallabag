@@ -60,7 +60,7 @@ class WallabagRestController extends FOSRestController
      *       }
      * )
      *
-     * @return Entry
+     * @return Response
      */
     public function getEntriesAction(Request $request)
     {
@@ -101,7 +101,7 @@ class WallabagRestController extends FOSRestController
      *      }
      * )
      *
-     * @return Entry
+     * @return Response
      */
     public function getEntryAction(Entry $entry)
     {
@@ -124,7 +124,7 @@ class WallabagRestController extends FOSRestController
      *       }
      * )
      *
-     * @return Entry
+     * @return Response
      */
     public function postEntriesAction(Request $request)
     {
@@ -166,7 +166,7 @@ class WallabagRestController extends FOSRestController
      *      }
      * )
      *
-     * @return Entry
+     * @return Response
      */
     public function patchEntriesAction(Entry $entry, Request $request)
     {
@@ -211,7 +211,7 @@ class WallabagRestController extends FOSRestController
      *      }
      * )
      *
-     * @return Entry
+     * @return Response
      */
     public function deleteEntriesAction(Entry $entry)
     {
@@ -235,6 +235,8 @@ class WallabagRestController extends FOSRestController
      *          {"name"="entry", "dataType"="integer", "requirement"="\w+", "description"="The entry ID"}
      *      }
      * )
+     *
+     * @return Response
      */
     public function getEntriesTagsAction(Entry $entry)
     {
@@ -257,6 +259,8 @@ class WallabagRestController extends FOSRestController
      *          {"name"="tags", "dataType"="string", "required"=false, "format"="tag1,tag2,tag3", "description"="a comma-separated list of tags."},
      *       }
      * )
+     *
+     * @return Response
      */
     public function postEntriesTagsAction(Request $request, Entry $entry)
     {
@@ -286,6 +290,8 @@ class WallabagRestController extends FOSRestController
      *          {"name"="entry", "dataType"="integer", "requirement"="\w+", "description"="The entry ID"}
      *      }
      * )
+     *
+     * @return Response
      */
     public function deleteEntriesTagsAction(Entry $entry, Tag $tag)
     {
@@ -306,6 +312,8 @@ class WallabagRestController extends FOSRestController
      * Retrieve all tags.
      *
      * @ApiDoc()
+     *
+     * @return Response
      */
     public function getTagsAction()
     {
@@ -328,6 +336,8 @@ class WallabagRestController extends FOSRestController
      *          {"name"="tag", "dataType"="integer", "requirement"="\w+", "description"="The tag"}
      *      }
      * )
+     *
+     * @return Response
      */
     public function deleteTagAction(Tag $tag)
     {

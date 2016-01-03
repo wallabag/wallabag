@@ -5,6 +5,7 @@ namespace Wallabag\CoreBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Wallabag\UserBundle\Entity\User;
 
 /**
  * Config.
@@ -86,7 +87,7 @@ class Config
     /*
      * @param User     $user
      */
-    public function __construct(\Wallabag\UserBundle\Entity\User $user)
+    public function __construct(User $user)
     {
         $this->user = $user;
         $this->taggingRules = new ArrayCollection();
@@ -181,7 +182,7 @@ class Config
      *
      * @return Config
      */
-    public function setUser(\Wallabag\UserBundle\Entity\User $user = null)
+    public function setUser(User $user = null)
     {
         $this->user = $user;
 
@@ -225,7 +226,7 @@ class Config
     /**
      * Set rssLimit.
      *
-     * @param string $rssLimit
+     * @param int $rssLimit
      *
      * @return Config
      */
@@ -239,7 +240,7 @@ class Config
     /**
      * Get rssLimit.
      *
-     * @return string
+     * @return int
      */
     public function getRssLimit()
     {

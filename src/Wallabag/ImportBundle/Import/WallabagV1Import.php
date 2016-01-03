@@ -149,7 +149,7 @@ class WallabagV1Import implements ImportInterface
 
             // flush every 20 entries
             if (($i % 20) === 0) {
-                $em->flush();
+                $this->em->flush();
             }
             ++$i;
         }
