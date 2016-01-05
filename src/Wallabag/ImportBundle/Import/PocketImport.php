@@ -11,6 +11,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Helper\ContentProxy;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class PocketImport implements ImportInterface
 {
@@ -23,14 +24,16 @@ class PocketImport implements ImportInterface
     private $skippedEntries = 0;
     private $importedEntries = 0;
     protected $accessToken;
+    private $translator;
 
-    public function __construct(TokenStorageInterface $tokenStorage, EntityManager $em, ContentProxy $contentProxy, $consumerKey)
+    public function __construct(TokenStorageInterface $tokenStorage, EntityManager $em, ContentProxy $contentProxy, $consumerKey, TranslatorInterface $translator)
     {
         $this->user = $tokenStorage->getToken()->getUser();
         $this->em = $em;
         $this->contentProxy = $contentProxy;
         $this->consumerKey = $consumerKey;
         $this->logger = new NullLogger();
+        $this->translator = $translator;
     }
 
     public function setLogger(LoggerInterface $logger)
@@ -59,7 +62,7 @@ class PocketImport implements ImportInterface
      */
     public function getDescription()
     {
-        return 'This importer will import all your <a href="https://getpocket.com">Pocket</a> data. Pocket doesn\'t allow us to retrieve content from their service, so the readable content of each article will be re-fetched by Wallabag.';
+        return $this->translator->trans("This importer will import all your <a href=\"https://getpocket.com\">Pocket</a> data. Pocket doesn't allow us to retrieve content from their service, so the readable content of each article will be re-fetched by wallabag.");
     }
 
     /**

@@ -11,7 +11,7 @@
                     <li>
                         <h5>{{ import.name }}</h5>
                         <blockquote>{{ import.description|raw }}</blockquote>
-                        <p><a class="waves-effect waves-light btn" href="{{ path(import.url) }}">Import contents</a></p>
+                        <p><a class="waves-effect waves-light btn" href="{{ path(import.url) }}">{% trans %}Import contents{% endtrans %}</a></p>
                     </li>
                 {% endfor %}
             </ul>

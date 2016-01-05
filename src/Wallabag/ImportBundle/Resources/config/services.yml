@@ -18,6 +18,7 @@ services:
             - "@doctrine.orm.entity_manager"
             - "@wallabag_core.content_proxy"
             - %pocket_consumer_key%
+            - "@translator"
         calls:
             - [ setClient, [ "@wallabag_import.pocket.client" ] ]
             - [ setLogger, [ "@logger" ]]
@@ -28,6 +29,7 @@ services:
         class: Wallabag\ImportBundle\Import\WallabagV1Import
         arguments:
             - "@doctrine.orm.entity_manager"
+            - "@translator"
         calls:
             - [ setLogger, [ "@logger" ]]
         tags:
