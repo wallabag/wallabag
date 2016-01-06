@@ -5,7 +5,6 @@ namespace Wallabag\ImportBundle\Import;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Doctrine\ORM\EntityManager;
-use Symfony\Component\Translation\TranslatorInterface;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\UserBundle\Entity\User;
 use Wallabag\CoreBundle\Tools\Utils;
@@ -18,13 +17,11 @@ class WallabagV1Import implements ImportInterface
     private $skippedEntries = 0;
     private $importedEntries = 0;
     private $filepath;
-    private $translator;
 
-    public function __construct(EntityManager $em, TranslatorInterface $translator)
+    public function __construct(EntityManager $em)
     {
         $this->em = $em;
         $this->logger = new NullLogger();
-        $this->translator = $translator;
     }
 
     public function setLogger(LoggerInterface $logger)
@@ -66,7 +63,7 @@ class WallabagV1Import implements ImportInterface
      */
     public function getDescription()
     {
-        return $this->translator->trans('This importer will import all your wallabag v1 articles. On your config page, click on "JSON export" in the "Export your wallabag data" section. You will have a "wallabag-export-1-xxxx-xx-xx.json" file.');
+        return 'This importer will import all your wallabag v1 articles. On your config page, click on "JSON export" in the "Export your wallabag data" section. You will have a "wallabag-export-1-xxxx-xx-xx.json" file.';
     }
 
     /**

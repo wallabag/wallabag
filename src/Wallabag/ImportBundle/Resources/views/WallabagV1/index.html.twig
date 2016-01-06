@@ -6,7 +6,7 @@
     <div class="col s12">
         <div class="card-panel settings">
             <div class="row">
-                <blockquote>{{ import.description|raw }}</blockquote>
+                <blockquote>{{ import.description|trans }}</blockquote>
                 <p>{% trans %}Please select your wallabag export and click on the below button to upload and import it.{% endtrans %}</p>
                 <div class="col s12">
                     {{ form_start(form, {'method': 'POST'}) }}
