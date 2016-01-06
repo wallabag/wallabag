@@ -200,6 +200,9 @@ nav input {
 #button_filters {
     display: none;
 }
+#button_export {
+    display: none;
+}
 
 /* ==========================================================================
    2 = Side-nav
