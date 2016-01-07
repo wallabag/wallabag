@@ -1,0 +1,18 @@
+{% extends "WallabagCoreBundle::layout.html.twig" %}
+{% block title %}{% trans %}Import > Pocket{% endtrans %}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col s12">
+        <div class="card-panel settings">
+            <blockquote>{{ import.description|trans }}</blockquote>
+            <p>{% trans %}You can import your data from your Pocket account. You just have to click on the below button and authorize the application to connect to getpocket.com.{% endtrans %}</p>
+            <form method="post" action="{{ path('import_pocket_auth') }}">
+                <button class="btn waves-effect waves-light" type="submit" name="action">
+                    {% trans %}Connect to Pocket and import data{% endtrans %}
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

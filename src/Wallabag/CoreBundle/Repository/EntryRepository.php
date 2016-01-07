@@ -223,4 +223,29 @@ class EntryRepository extends EntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    /**
+     * Find an entry by its url and its owner.
+     * If it exists, return the entry otherwise return false.
+     *
+     * @param $url
+     * @param $userId
+     *
+     * @return array|bool
+     */
+    public function existByUrlAndUserId($url, $userId)
+    {
+        $res = $this->createQueryBuilder('e')
+            ->select('e.id, e.createdAt')
+            ->where('e.url = :url')->setParameter('url', $url)
+            ->andWhere('e.user = :user_id')->setParameter('user_id', $userId)
+            ->getQuery()
+            ->getResult();
+
+        if (count($res)) {
+            return current($res);
+        }
+
+        return false;
+    }
 }

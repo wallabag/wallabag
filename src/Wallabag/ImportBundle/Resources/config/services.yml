@@ -1,0 +1,34 @@
+services:
+    wallabag_import.chain:
+        class: Wallabag\ImportBundle\Import\ImportChain
+
+    wallabag_import.pocket.client:
+        class: GuzzleHttp\Client
+        arguments:
+            -
+                defaults:
+                    headers:
+                        content-type: "application/json"
+                        X-Accept: "application/json"
+
+    wallabag_import.pocket.import:
+        class: Wallabag\ImportBundle\Import\PocketImport
+        arguments:
+            - "@security.token_storage"
+            - "@doctrine.orm.entity_manager"
+            - "@wallabag_core.content_proxy"
+            - %pocket_consumer_key%
+        calls:
+            - [ setClient, [ "@wallabag_import.pocket.client" ] ]
+            - [ setLogger, [ "@logger" ]]
+        tags:
+            -  { name: wallabag_import.import, alias: pocket }
+
+    wallabag_import.wallabag_v1.import:
+        class: Wallabag\ImportBundle\Import\WallabagV1Import
+        arguments:
+            - "@doctrine.orm.entity_manager"
+        calls:
+            - [ setLogger, [ "@logger" ]]
+        tags:
+            -  { name: wallabag_import.import, alias: wallabag_v1 }

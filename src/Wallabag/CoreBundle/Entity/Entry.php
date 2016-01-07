@@ -245,7 +245,7 @@ class Entry
     /**
      * Set isArchived.
      *
-     * @param string $isArchived
+     * @param bool $isArchived
      *
      * @return Entry
      */
@@ -259,7 +259,7 @@ class Entry
     /**
      * Get isArchived.
      *
-     * @return string
+     * @return bool
      */
     public function isArchived()
     {
@@ -276,7 +276,7 @@ class Entry
     /**
      * Set isStarred.
      *
-     * @param string $isStarred
+     * @param bool $isStarred
      *
      * @return Entry
      */
@@ -290,7 +290,7 @@ class Entry
     /**
      * Get isStarred.
      *
-     * @return string
+     * @return bool
      */
     public function isStarred()
     {

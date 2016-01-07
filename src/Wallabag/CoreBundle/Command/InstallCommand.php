@@ -11,7 +11,6 @@ use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Helper\Table;
-use Wallabag\UserBundle\Entity\User;
 use Wallabag\CoreBundle\Entity\Config;
 
 class InstallCommand extends ContainerAwareCommand

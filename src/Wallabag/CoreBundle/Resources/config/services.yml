@@ -63,6 +63,7 @@ services:
             - @wallabag_core.tag_repository
             - @wallabag_core.entry_repository
 
+    # repository as a service
     wallabag_core.entry_repository:
         class: Wallabag\CoreBundle\Repository\EntryRepository
         factory: [ @doctrine.orm.default_entity_manager, getRepository ]

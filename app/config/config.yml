@@ -31,6 +31,10 @@ wallabag_core:
         fr: 'Français'
         de: 'Deutsch'
 
+wallabag_import:
+    allow_mimetypes: ['application/octet-stream', 'application/json', 'text/plain']
+    resource_dir: "%kernel.root_dir%/../web/uploads/import"
+
 # Twig Configuration
 twig:
     debug:            "%kernel.debug%"
