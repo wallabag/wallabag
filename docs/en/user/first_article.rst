@@ -27,37 +27,12 @@ By using a browser add-on
 Firefox
 ~~~~~~~
 
-Firefox Classic Add-on
-^^^^^^^^^^^^^^^^^^^^^^
-
-Download the Firefox add-on at `addons.mozilla.org`_ and install it like
-any other Firefox add-on.
-
-In the add-on’s settings, fill the complete URL of your installation of
-wallabag or your Framabag account.
-
-Personalize the Firefox toolbar to add wallabag (**W** icon). When you
-find an article you want to save, click on this icon: a new window will
-open to add the article and will close itself automatically.
-
-Firefox Social API Service
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-*Available from wallabag v1.9.1 only*
-
-You will need an https connection to use this. It’s a Firefox
-`requirement`_, sorry.
-
-With Firefox 29+ versions, your browser comes with an integrated
-interface to share things to multiple social services directly from your
-browser. In the Firefox interface, it is shown a paper plane-like icon
-that you will use to share a page, which means here, save an article.
-You can add the service by going into the Config page of wallabag, then
-click on Mozilla Services Social API Extension. You must also accept to
-use Firefox Services.
+*This addon is not yet available for wallabag v2*.
 
 Chrome
 ~~~~~~
+
+*This addon is not yet available for wallabag v2*.
 
 By using your smarphone application
 -----------------------------------
@@ -65,15 +40,19 @@ By using your smarphone application
 Android
 ~~~~~~~
 
+*This application is not yet available for wallabag v2*.
+
 Firefox OS
 ~~~~~~~~~~
+
+*This application is not yet available for wallabag v2*.
 
 Windows Phone
 ~~~~~~~~~~~~~
 
+*This application is not yet available for wallabag v2*.
+
 iOS
 ~~~
 
-
-.. _addons.mozilla.org: https://addons.mozilla.org/firefox/addon/wallabag/
-.. _requirement: https://developer.mozilla.org/en-US/docs/Mozilla/Projects/Social_API/Manifest#Manifest_Contents
+*This application is not yet available for wallabag v2*.
