@@ -12,7 +12,7 @@ use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\ChoiceFilterType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Wallabag\UserBundle\Entity\User;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 class EntryFilterType extends AbstractType
 {
@@ -23,12 +23,12 @@ class EntryFilterType extends AbstractType
      * Repository & user are used to get a list of language entries for this user.
      *
      * @param EntityRepository $entryRepository
-     * @param User             $user
+     * @param TokenStorage     $token
      */
-    public function __construct(EntityRepository $entryRepository, User $user)
+    public function __construct(EntityRepository $entryRepository, TokenStorage $token)
     {
         $this->repository = $entryRepository;
-        $this->user = $user;
+        $this->user = $token->getToken()->getUser();
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -54,13 +54,13 @@ class EntryFilterType extends AbstractType
             )
             ->add('domainName', TextFilterType::class, array(
                 'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
-                        $value = $values['value'];
-                        if (strlen($value) <= 2 || empty($value)) {
-                            return;
-                        }
-                        $expression = $filterQuery->getExpr()->like($field, $filterQuery->getExpr()->literal('%'.$value.'%'));
+                    $value = $values['value'];
+                    if (strlen($value) <= 2 || empty($value)) {
+                        return;
+                    }
+                    $expression = $filterQuery->getExpr()->like($field, $filterQuery->getExpr()->literal('%'.$value.'%'));
 
-                        return $filterQuery->createCondition($expression);
+                    return $filterQuery->createCondition($expression);
                 },
             ))
             ->add('isArchived', CheckboxFilterType::class)

@@ -26,7 +26,7 @@ class UserInformationType extends AbstractType
 
     public function getParent()
     {
-        return 'fos_user_registration';
+        return 'FOS\UserBundle\Form\Type\RegistrationFormType';
     }
 
     public function configureOptions(OptionsResolver $resolver)

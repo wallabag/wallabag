@@ -14,7 +14,7 @@ class WallabagV1Controller extends Controller
      */
     public function indexAction(Request $request)
     {
-        $form = $this->createForm(new UploadImportType());
+        $form = $this->createForm(UploadImportType::class);
         $form->handleRequest($request);
 
         $wallabag = $this->get('wallabag_import.wallabag_v1.import');

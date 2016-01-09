@@ -3,6 +3,7 @@
 namespace Wallabag\ImportBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class PocketController extends Controller
@@ -23,12 +24,12 @@ class PocketController extends Controller
     public function authAction()
     {
         $requestToken = $this->get('wallabag_import.pocket.import')
-            ->getRequestToken($this->generateUrl('import', [], true));
+            ->getRequestToken($this->generateUrl('import', UrlGeneratorInterface::ABSOLUTE_URL));
 
         $this->get('session')->set('import.pocket.code', $requestToken);
 
         return $this->redirect(
-            'https://getpocket.com/auth/authorize?request_token='.$requestToken.'&redirect_uri='.$this->generateUrl('import_pocket_callback', [], true),
+            'https://getpocket.com/auth/authorize?request_token='.$requestToken.'&redirect_uri='.$this->generateUrl('import_pocket_callback', UrlGeneratorInterface::ABSOLUTE_URL),
             301
         );
     }

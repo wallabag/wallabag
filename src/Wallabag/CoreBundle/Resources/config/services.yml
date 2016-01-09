@@ -14,6 +14,14 @@ services:
         tags:
             - { name: form.type }
 
+    wallabag_core.filter.type.entry:
+        class: Wallabag\CoreBundle\Filter\EntryFilterType
+        arguments:
+            - "@wallabag_core.entry_repository"
+            - "@security.token_storage"
+        tags:
+            - { name: form.type }
+
     wallabag_core.param_converter.username_rsstoken_converter:
         class: Wallabag\CoreBundle\ParamConverter\UsernameRssTokenConverter
         tags:

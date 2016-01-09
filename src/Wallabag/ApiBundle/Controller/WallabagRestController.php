@@ -8,6 +8,7 @@ use Hateoas\Representation\Factory\PagerfantaFactory;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 
@@ -84,7 +85,7 @@ class WallabagRestController extends FOSRestController
         $pagerfantaFactory = new PagerfantaFactory('page', 'perPage');
         $paginatedCollection = $pagerfantaFactory->createRepresentation(
             $pager,
-            new Route('api_get_entries', [], $absolute = true)
+            new Route('api_get_entries', [], UrlGeneratorInterface::ABSOLUTE_URL)
         );
 
         $json = $this->get('serializer')->serialize($paginatedCollection, 'json');
