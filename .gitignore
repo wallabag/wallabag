@@ -37,5 +37,6 @@
 data/assets/*
 data/db/wallabag*.sqlite
 
-# Docker container logs
+# Docker container logs and data
 docker/logs/
+docker/data/

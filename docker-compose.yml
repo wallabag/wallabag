@@ -15,3 +15,28 @@ php:
         - "9000:9000"
     volumes:
         - .:/var/www/html
+    #links:
+        # - "postgres:rdbms"
+        # - "mariadb:rdbms"
+    env_file:
+        - ./docker/php/env
+        # Comment non-used DBMS lines
+        # If all DBMS are commented out, sqlite will be used as default
+        # - ./docker/postgres/env
+        # - ./docker/mariadb/env
+#postgres:
+#    image: postgres:9
+#    ports:
+#        - "5432:5432"
+#    volumes:
+#        - ./docker/data/pgsql:/var/lib/postgresql/data
+#    env_file:
+#        - ./docker/postgres/env
+#mariadb:
+#    image: mariadb:10
+#    ports:
+#        - "3306:3306"
+#    volumes:
+#        - ./docker/data/mariadb:/var/lib/mysql
+#    env_file:
+#        - ./docker/mariadb/env
