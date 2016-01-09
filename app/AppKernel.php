@@ -32,6 +32,7 @@ class AppKernel extends Kernel
             new Scheb\TwoFactorBundle\SchebTwoFactorBundle(),
             new KPhoen\RulerZBundle\KPhoenRulerZBundle(),
             new Wallabag\ImportBundle\WallabagImportBundle(),
+            new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
