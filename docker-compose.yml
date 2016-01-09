@@ -1,0 +1,17 @@
+nginx:
+    image: nginx
+    ports:
+        - "8080:80"
+    volumes:
+        - ./docker/nginx/nginx.conf:/nginx.conf
+        - ./docker/logs/nginx:/var/log/nginx
+        - .:/var/www/html
+    links:
+        - php:php
+    command: nginx -c /nginx.conf
+php:
+    build: docker/php
+    ports:
+        - "9000:9000"
+    volumes:
+        - .:/var/www/html
