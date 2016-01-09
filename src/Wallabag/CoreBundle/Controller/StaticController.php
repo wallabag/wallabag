@@ -28,4 +28,15 @@ class StaticController extends Controller
             array()
         );
     }
+
+    /**
+     * @Route("/quickstart", name="quickstart")
+     */
+    public function quickstartAction()
+    {
+        return $this->render(
+            'WallabagCoreBundle:Static:quickstart.html.twig',
+            array()
+        );
+    }
 }

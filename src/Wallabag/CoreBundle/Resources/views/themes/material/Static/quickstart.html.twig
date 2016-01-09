@@ -1,0 +1,50 @@
+{% extends "WallabagCoreBundle::layout.html.twig" %}
+
+{% block title %}{% trans %}Quickstart{% endtrans %}{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col s12">
+            <div class="card-panel settings">
+
+                <div class="row">
+                    <h3>{% trans %}Welcome on wallabag!{% endtrans %}</h3>
+                    <p>{% trans %}We'll accompany you to visit wallabag and show you some features which can interess you.{% endtrans %}</p>
+                    <p>{% trans %}Follow us!{% endtrans %}</p>
+                    <h4>{% trans %}Configure the application{% endtrans %}</h4>
+                    <ul>
+                        <li><a href="{{ path('config') }}">{% trans %}Change language and design{% endtrans %}</a></li>
+                        <li><a href="{{ path('config') }}#set2">{% trans %}Enable RSS feeds{% endtrans %}</a></li>
+                    </ul>
+                    <h4>{% trans %}First steps{% endtrans %}</h4>
+                    <ul>
+                        <li><a href="{{ path('new') }}">{% trans %}Save your first article{% endtrans %}</a></li>
+                        <li><a href="{{ path('unread') }}">{% trans %}And classify it!{% endtrans %}</a></li>
+                    </ul>
+                    <h4>{% trans %}Migrate from an existing service{% endtrans %}</h4>
+                    <p>{% trans %}You're using an other service? We'll help you to retrieve your data on wallabag.{% endtrans %}</p>
+                    <ul>
+                        <li><a href="{{ path('import_pocket') }}">{% trans %}Migrate from Pocket{% endtrans %}</a></li>
+                        <li><a href="{{ path('import_wallabag_v1') }}">{% trans %}Migrate from wallabag v1{% endtrans %}</a></li>
+                    </ul>
+                    <h4>{% trans %}Full documentation{% endtrans %}</h4>
+                    <ul>
+                        <li><a href="http://wallabag.readthedocs.org">{% trans %}Convert your articles into ePUB or PDF{% endtrans %}</a></li>
+                        <li><a href="http://wallabag.readthedocs.org">{% trans %}See how you can look for an article by using search engine and filters{% endtrans %}</a></li>
+                        <li><a href="http://wallabag.readthedocs.org">{% trans %}And so many other articles!{% endtrans %}</a></li>
+                    </ul>
+                    <h4>{% trans %}Support{% endtrans %}</h4>
+                    <p>{% trans %}If you need some help, we are here for you.{% endtrans %}</p>
+                    <ul>
+                        <li><a href="https://github.com/wallabag/wallabag/issues/">{% trans %}On GitHub{% endtrans %}</a></li>
+                        <li><a href="mailto:hello@wallabag.org">{% trans %}By email{% endtrans %}</a></li>
+                        <li><a href="https://gitter.im/wallabag/wallabag">{% trans %}On Gitter{% endtrans %}</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

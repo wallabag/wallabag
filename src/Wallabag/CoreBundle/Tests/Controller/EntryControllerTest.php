@@ -19,6 +19,36 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertContains('login', $client->getResponse()->headers->get('location'));
     }
 
+    public function testQuickstart()
+    {
+        $this->logInAs('empty');
+        $client = $this->getClient();
+
+        $client->request('GET', '/unread/list');
+        $client->followRedirect();
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertContains('We\'ll accompany you to visit wallabag', $client->getResponse()->getContent());
+
+        // Test if quickstart is disabled when user has 1 entry
+        $crawler = $client->request('GET', '/new');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $form = $crawler->filter('button[type=submit]')->form();
+
+        $data = array(
+            'entry[url]' => 'https://www.wallabag.org/blog/2016/01/08/wallabag-alpha1-v2',
+        );
+
+        $client->submit($form, $data);
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $client->followRedirect();
+
+        $client->request('GET', '/unread/list');
+        $this->assertContains('There is one entry.', $client->getResponse()->getContent());
+    }
+
     public function testGetNew()
     {
         $this->logInAs('admin');
@@ -42,9 +72,9 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertCount(4, $crawler->filter('div[class=entry]'));
 
         // Good URL
-        $crawler = $client->request('GET', '/bookmarklet', array('url' => $this->url));
+        $client->request('GET', '/bookmarklet', array('url' => $this->url));
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
-        $crawler = $client->followRedirect();
+        $client->followRedirect();
         $crawler = $client->request('GET', '/');
         $this->assertCount(5, $crawler->filter('div[class=entry]'));
 
@@ -125,7 +155,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
 
-        $crawler = $client->followRedirect();
+        $client->followRedirect();
 
         $em = $client->getContainer()
             ->get('doctrine.orm.entity_manager');
@@ -455,7 +485,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $parameters = '?entry_filter%5BreadingTime%5D%5Bleft_number%5D=&amp;entry_filter%5BreadingTime%5D%5Bright_number%5D=';
 
-        $crawler = $client->request('GET', 'unread/list'.$parameters);
+        $client->request('GET', 'unread/list'.$parameters);
 
         $this->assertContains($parameters, $client->getResponse()->getContent());
 

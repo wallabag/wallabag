@@ -53,7 +53,7 @@ Username: "Nom d'utilisateur"
 
 # Entries
 'estimated reading time': 'durée de lecture'
-original: original
+original: "original"
 Toggle mark as read: 'Marquer comme lu/non lu'
 Toggle favorite: 'Marquer comme favori'
 Delete: 'Supprimer'
@@ -97,7 +97,7 @@ via Paypal: "via Paypal"
 via Flattr: "via Flattr"
 
 # Howto
-Form: Formulaire
+Form: "Formulaire"
 Thanks to this form: "Grâce à ce formulaire"
 Browser addons: "Extensions de navigateur"
 Mobile apps: "Applications smartphone"
@@ -135,8 +135,32 @@ Welcome on wallabag importer. Please select your previous service that you want 
 "This importer will import all your Pocket data. Pocket doesn't allow us to retrieve content from their service, so the readable content of each article will be re-fetched by wallabag.": "Cet outil va importer toutes vos données de Pocket. Pocket ne nous autorise pas à récupérer le contenu depuis leur service, donc wallabag doit reparcourir chaque article pour récupérer son contenu."
 "This importer will import all your wallabag v1 articles. On your config page, click on \"JSON export\" in the \"Export your wallabag data\" section. You will have a \"wallabag-export-1-xxxx-xx-xx.json\" file.": "Cet outil va importer toutes vos données de wallabag v1. Sur votre page de configuration de wallabag v1, cliquez sur \"Export JSON\" dans la section \"Exporter vos données de wallabag\". Vous allez récupérer un fichier \"wallabag-export-1-xxxx-xx-xx.json\"."
 "You can import your data from your Pocket account. You just have to click on the below button and authorize the application to connect to getpocket.com.": "Vous pouvez importer vos données depuis votre compte Pocket. Vous n'avez qu'à cliquer sur le bouton ci-dessous et à autoriser wallabag à se connecter à getpocket.com."
-Connect to Pocket and import data: Se connecter à Pocket et importer les données.
-Please select your wallabag export and click on the below button to upload and import it.: Choisissez le fichier de votre export wallabag v1 et cliquez sur le bouton ci-dessous pour l'importer.
-File: Fichier
-Upload file: Importer le fichier
+Connect to Pocket and import data: "Se connecter à Pocket et importer les données."
+Please select your wallabag export and click on the below button to upload and import it.: "Choisissez le fichier de votre export wallabag v1 et cliquez sur le bouton ci-dessous pour l'importer."
+File: "Fichier"
+Upload file: "Importer le fichier"
 Import contents: "Importer les contenus"
+
+# Quickstart
+Welcome on wallabag!: "Bienvenue sur wallabag !"
+We'll accompany you to visit wallabag and show you some features which can interess you.: "Nous allons vous accompagner pour vous faire faire le tour de la maison et vous présenter quelques fonctionnalités qui pourraient vous intéresser pour vous approprier cet outil."
+Follow us!: "Suivez-nous !"
+Configure the application: "Configurez l'application"
+Change language and design: "Changez la langue et le design de l'application"
+Enable RSS feeds: "Activez les flux RSS"
+First steps: "Premiers pas"
+Save your first article: "Ajoutez votre premier article"
+And classify it!: "Et rangez-le !"
+Migrate from an existing service: "Migrer depuis un service existant"
+You're using an other service? We'll help you to retrieve your data on wallabag.: "Vous êtes un ancien utilisateur d'un service existant ? Nous allons vous aider à récupérer vos données sur wallabag."
+Migrate from Pocket: "Migrer depuis Pocket"
+Migrate from wallabag v1: "Migrer depuis wallabag v1"
+Full documentation: "Documentation complète"
+Convert your articles into ePUB or PDF: "Convertissez vos articles en ePub ou en PDF"
+See how you can look for an article by using search engine and filters: "Apprenez à utiliser le moteur de recherche et les filtres pour retrouver l'article qui vous intéresse"
+And so many other articles!: "Et encore plein d'autres choses !"
+Support: "Support"
+If you need some help, we are here for you.: "Parce que vous avez peut-être besoin de nous poser une question, nous sommes disponibles pour vous."
+On GitHub: "Sur GitHub"
+By email: "Par email"
+On Gitter: "Sur Gitter"

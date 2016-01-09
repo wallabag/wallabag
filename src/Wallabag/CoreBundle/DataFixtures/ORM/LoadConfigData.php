@@ -40,6 +40,15 @@ class LoadConfigData extends AbstractFixture implements OrderedFixtureInterface
 
         $this->addReference('bob-config', $bobConfig);
 
+        $emptyConfig = new Config($this->getReference('empty-user'));
+        $emptyConfig->setTheme('material');
+        $emptyConfig->setItemsPerPage(10);
+        $emptyConfig->setLanguage('en');
+
+        $manager->persist($emptyConfig);
+
+        $this->addReference('empty-config', $emptyConfig);
+
         $manager->flush();
     }
 
