@@ -3,7 +3,7 @@ Configuration
 
 Now you're logged in, it's time to configure your account as you want.
 
-Click on ``Config`` menu. You have four tabs: ``Settings``, ``RSS``, ``User information`` and ``Password``.
+Click on ``Config`` menu. You have five tabs: ``Settings``, ``RSS``, ``User information``, ``Password`` and ``Tagging rules``.
 
 Settings
 --------
@@ -59,3 +59,41 @@ Password
 --------
 
 You can change your password here.
+
+Tagging rules
+-------------
+
+If you want to automatically assign a tag to new articles, this part of the configuration is for you.
+
+What does « tagging rules » mean?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+They are rules used by wallabag to automatically tag new entries.
+Each time a new entry is added, all the tagging rules will be used to add the tags you configured, thus saving you the trouble to manually classify your entries.
+
+How do I use them?
+~~~~~~~~~~~~~~~~~~
+
+Let assume you want to tag new entries as *« short reading »* when the reading time is inferior to 3 minutes.
+In that case, you should put « readingTime <= 3 » in the **Rule** field and *« short reading »* in the **Tags** field.
+Several tags can added simultaneously by separating them by a comma: *« short reading, must read »*.
+Complex rules can be written by using predefined operators: if *« readingTime >= 5 AND domainName = "github.com" »* then tag as *« long reading, github »*.
+
+Which variables and operators can I use to write rules?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following variables and operators can be used to create tagging rules:
+
+===========  ==============================================  ========  ==========
+Variable     Meaning                                         Operator  Meaning
+-----------  ----------------------------------------------  --------  ----------
+title        Title of the entry                              <=        Less than…
+url          URL of the entry                                <         Strictly less than…
+isArchived   Whether the entry is archived or not            =>        Greater than…
+isStared     Whether the entry is starred or not             >         Strictly greater than…
+content      The entry's content                             =         Equal to…
+language     The entry's language                            !=        Not equal to…
+mimetype     The entry's mime-type                           OR        One rule or another
+readingTime  The estimated entry's reading time, in minutes  AND       One rule and another
+domainName   The domain name of the entry                    matches   Tests that a subject is matches a search (case-insensitive). Example: title matches "football"
+===========  ==============================================  ========  ==========

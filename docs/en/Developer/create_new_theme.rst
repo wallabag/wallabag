@@ -1,4 +1,0 @@
-Create new theme
-================
-
-TODO

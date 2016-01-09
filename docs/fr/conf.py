@@ -34,8 +34,8 @@ man_pages = [
 ]
 
 texinfo_documents = [
-  ('index', 'wallabagfr', u'wallabag Documentation',
-   u'Nicolas Lœuillet', 'wallabagfr', 'One line description of project.',
+  ('index', 'wallabag', u'wallabag Documentation',
+   u'Nicolas Lœuillet', 'wallabag', 'wallabag is an opensource read-it-later.',
    'Miscellaneous'),
 ]
 
