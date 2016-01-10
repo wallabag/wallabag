@@ -4,8 +4,6 @@ namespace Wallabag\UserBundle\Tests\Mailer;
 
 use Wallabag\UserBundle\Entity\User;
 use Wallabag\UserBundle\Mailer\AuthCodeMailer;
-use Symfony\Component\Translation\Translator;
-use Symfony\Component\Translation\Loader\ArrayLoader;
 
 /**
  * @see https://www.pmg.com/blog/integration-testing-swift-mailer/
