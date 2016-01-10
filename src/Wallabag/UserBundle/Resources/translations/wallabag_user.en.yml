@@ -1,10 +1,9 @@
 # Two factor mail
 auth_code.mailer.subject: 'Wallabag authentication Code'
-auth_code.mailer.body: |
-    Hi %user%,
-
+auth_code.mailer.body.hello: "Hi %user%,"
+auth_code.mailer.body.content: |
     Since you enable two factor authentication on your wallabag account and you just logged in from a new device (computer, phone, etc.), we send you a code to validate your connection.
     Here is the code: %code%
-
+auth_code.mailer.body.signature: |
     Please don't hesitate to contact us if you have any problems: %support%
     The wallabag team

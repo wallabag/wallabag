@@ -1,0 +1,18 @@
+{% block subject %}
+{{ "auth_code.mailer.subject"|trans({}, 'wallabag_user') }}
+{% endblock %}
+
+{% block body_html %}
+<p><b>{{ "auth_code.mailer.body.hello"|trans({'%user%': user}, 'wallabag_user') }}</b></p>
+
+<p>{{ "auth_code.mailer.body.content"|trans({'%code%': code}, 'wallabag_user') }}</p>
+
+<p>{{ "auth_code.mailer.body.signature"|trans({'%support%': support}, 'wallabag_user') }}</p>
+{% endblock %}
+
+{% block body_text %}
+{{ "auth_code.mailer.body.hello"|trans({'%user%': user}, 'wallabag_user') }}
+
+{{ "auth_code.mailer.body.content"|trans({'%code%': code}, 'wallabag_user') }}
+{{ "auth_code.mailer.body.signature"|trans({'%support%': support}, 'wallabag_user') }}
+{% endblock %}
