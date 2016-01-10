@@ -4,7 +4,6 @@ namespace Wallabag\UserBundle\Mailer;
 
 use Scheb\TwoFactorBundle\Model\Email\TwoFactorInterface;
 use Scheb\TwoFactorBundle\Mailer\AuthCodeMailerInterface;
-use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * Custom mailer for TwoFactorBundle email.
@@ -50,11 +49,11 @@ class AuthCodeMailer implements AuthCodeMailerInterface
     /**
      * Initialize the auth code mailer with the SwiftMailer object.
      *
-     * @param \Swift_Mailer           $mailer
-     * @param \Twig_Environment       $twig
-     * @param string                  $senderEmail
-     * @param string                  $senderName
-     * @param string                  $supportUrl
+     * @param \Swift_Mailer     $mailer
+     * @param \Twig_Environment $twig
+     * @param string            $senderEmail
+     * @param string            $senderName
+     * @param string            $supportUrl
      */
     public function __construct(\Swift_Mailer $mailer, \Twig_Environment $twig, $senderEmail, $senderName, $supportUrl)
     {
@@ -74,7 +73,7 @@ class AuthCodeMailer implements AuthCodeMailerInterface
     {
         $template = $this->twig->loadTemplate('@WallabagUserBundle/Resources/views/TwoFactor/email_auth_code.html.twig');
 
-        $subject  = $template->renderBlock('subject', array());
+        $subject = $template->renderBlock('subject', array());
         $bodyHtml = $template->renderBlock('body_html', [
             'user' => $user->getName(),
             'code' => $user->getEmailAuthCode(),
