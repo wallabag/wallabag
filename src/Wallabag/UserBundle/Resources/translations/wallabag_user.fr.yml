@@ -1,10 +1,9 @@
 # Two factor mail
 auth_code.mailer.subject: "Code d'authentification wallabag"
-auth_code.mailer.body: |
-    Bonjour %user%,
-
+auth_code.mailer.body.hello: "Bonjour %user%,"
+auth_code.mailer.body.content: |
     Comme vous avez activé la double authentification sur votre compte wallabag et que vous venez de vous connecter depuis un nouvel appareil (ordinateur, téléphone, etc.), nous vous envoyons un code pour valider votre connexion.
     Voici le code à renseigner: %code%
-
+auth_code.mailer.body.signature: |
     Si vous avez un problème de connexion, n'hésitez pas à contacter le support: %support%
     L'équipe wallabag

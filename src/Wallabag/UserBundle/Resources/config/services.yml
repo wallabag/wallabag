@@ -3,7 +3,7 @@ services:
         class: Wallabag\UserBundle\Mailer\AuthCodeMailer
         arguments:
             - "@mailer"
-            - "@translator"
+            - "@twig"
             - "%scheb_two_factor.email.sender_email%"
             - "%scheb_two_factor.email.sender_name%"
             - "%wallabag_support_url%"
