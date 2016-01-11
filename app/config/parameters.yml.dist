@@ -1,5 +1,15 @@
 # This file is a "template" of what your parameters.yml file should look like
 parameters:
+    # Uncomment these settings or manually update your parameters.yml
+    # to use docker-compose
+    #
+    # database_driver: %env.database_driver%
+    # database_host: %env.database_host%
+    # database_port: %env.database_port%
+    # database_name: %env.database_name%
+    # database_user: %env.database_user%
+    # database_password: %env.database_password%
+
     database_driver: pdo_sqlite
     database_host: 127.0.0.1
     database_port: ~
