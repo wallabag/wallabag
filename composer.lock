@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "eac49c76ef42a2e10cd4f228983c1d55",
-    "content-hash": "f1d311928f3a196b2d192e5e451217d1",
+    "hash": "786f108cf7727020aa2f003dccd9a58e",
+    "content-hash": "d8c2f517c9cd9d9ec767a0b396a11de7",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -983,32 +983,33 @@
         },
         {
             "name": "friendsofsymfony/oauth-server-bundle",
-            "version": "1.4.2",
-            "target-dir": "FOS/OAuthServerBundle",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSOAuthServerBundle.git",
-                "reference": "9e15c229eff547443d686445d629e9356ab0672e"
+                "reference": "2cf6dd8326fd2ca223108a1578d2c16f0544fa86"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSOAuthServerBundle/zipball/9e15c229eff547443d686445d629e9356ab0672e",
-                "reference": "9e15c229eff547443d686445d629e9356ab0672e",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSOAuthServerBundle/zipball/2cf6dd8326fd2ca223108a1578d2c16f0544fa86",
+                "reference": "2cf6dd8326fd2ca223108a1578d2c16f0544fa86",
                 "shasum": ""
             },
             "require": {
-                "friendsofsymfony/oauth2-php": "~1.1.0",
+                "friendsofsymfony/oauth2-php": "~1.1",
                 "php": ">=5.3.3",
-                "symfony/framework-bundle": "~2.1",
-                "symfony/security-bundle": "~2.1"
+                "symfony/framework-bundle": "~2.2|~3.0",
+                "symfony/security-bundle": "~2.1|~3.0"
             },
             "require-dev": {
                 "doctrine/doctrine-bundle": "~1.0",
-                "doctrine/mongodb-odm": "1.0.*@dev",
-                "doctrine/orm": ">=2.2,<2.5-dev",
-                "symfony/class-loader": "~2.1",
-                "symfony/yaml": "~2.1",
-                "willdurand/propel-typehintable-behavior": "1.0.*"
+                "doctrine/mongodb-odm": "~1.0",
+                "doctrine/orm": "~2.2",
+                "phing/phing": "~2.4",
+                "propel/propel1": "^1.6.5",
+                "symfony/class-loader": "~2.1|~3.0",
+                "symfony/yaml": "~2.1|~3.0",
+                "willdurand/propel-typehintable-behavior": "^1.0.4"
             },
             "suggest": {
                 "doctrine/doctrine-bundle": "*",
@@ -1019,12 +1020,12 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.4-dev"
+                    "dev-master": "1.5-dev"
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "FOS\\OAuthServerBundle": ""
+                "psr-4": {
+                    "FOS\\OAuthServerBundle\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1048,25 +1049,25 @@
                 "oauth2",
                 "server"
             ],
-            "time": "2014-10-31 13:44:14"
+            "time": "2016-01-13 19:46:44"
         },
         {
             "name": "friendsofsymfony/oauth2-php",
-            "version": "1.1.1",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/oauth2-php.git",
-                "reference": "23e76537c4a02e666ab4ba5abe67a69a886a0310"
+                "reference": "4ae0a2aa85566146ef6f0f7169854c49e0c9243a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/oauth2-php/zipball/23e76537c4a02e666ab4ba5abe67a69a886a0310",
-                "reference": "23e76537c4a02e666ab4ba5abe67a69a886a0310",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/oauth2-php/zipball/4ae0a2aa85566146ef6f0f7169854c49e0c9243a",
+                "reference": "4ae0a2aa85566146ef6f0f7169854c49e0c9243a",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2",
-                "symfony/http-foundation": "~2.0"
+                "symfony/http-foundation": "~2.0|~3.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "~4.0"
@@ -1102,7 +1103,7 @@
                 "oauth",
                 "oauth2"
             ],
-            "time": "2014-11-03 10:21:20"
+            "time": "2015-12-21 11:32:17"
         },
         {
             "name": "friendsofsymfony/rest-bundle",
@@ -1737,34 +1738,36 @@
         },
         {
             "name": "hoa/compiler",
-            "version": "2.15.10.29",
+            "version": "3.16.01.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hoaproject/Compiler.git",
-                "reference": "ec0849fd3c1472fbcd86c3c961981f0cfe1f8d39"
+                "reference": "1496646bfa85f88ab50b651857fbf4bbd15dbca1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hoaproject/Compiler/zipball/ec0849fd3c1472fbcd86c3c961981f0cfe1f8d39",
-                "reference": "ec0849fd3c1472fbcd86c3c961981f0cfe1f8d39",
+                "url": "https://api.github.com/repos/hoaproject/Compiler/zipball/1496646bfa85f88ab50b651857fbf4bbd15dbca1",
+                "reference": "1496646bfa85f88ab50b651857fbf4bbd15dbca1",
                 "shasum": ""
             },
             "require": {
-                "hoa/core": "~2.0",
+                "hoa/consistency": "~1.0",
+                "hoa/exception": "~1.0",
                 "hoa/file": "~0.0",
-                "hoa/iterator": "~1.0",
+                "hoa/iterator": "~2.0",
                 "hoa/math": "~0.0",
+                "hoa/protocol": "~1.0",
                 "hoa/regex": "~0.0",
-                "hoa/visitor": "~1.0"
+                "hoa/visitor": "~2.0"
             },
             "require-dev": {
-                "hoa/json": "~1.0",
-                "hoa/test": "~1.0"
+                "hoa/json": "~2.0",
+                "hoa/test": "~2.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.x-dev"
+                    "dev-master": "3.x-dev"
                 }
             },
             "autoload": {
@@ -1813,45 +1816,42 @@
                 "trace",
                 "uniform"
             ],
-            "time": "2015-10-29 21:35:12"
+            "time": "2016-01-11 08:55:03"
         },
         {
-            "name": "hoa/core",
-            "version": "2.15.11.09",
+            "name": "hoa/consistency",
+            "version": "1.16.01.11",
             "source": {
                 "type": "git",
-                "url": "https://github.com/hoaproject/Core.git",
-                "reference": "5538b1e90e2c66c90df5cc45e03fb85d047be900"
+                "url": "https://github.com/hoaproject/Consistency.git",
+                "reference": "c7919e409ca68858f8cceadb7565b9f622575249"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hoaproject/Core/zipball/5538b1e90e2c66c90df5cc45e03fb85d047be900",
-                "reference": "5538b1e90e2c66c90df5cc45e03fb85d047be900",
+                "url": "https://api.github.com/repos/hoaproject/Consistency/zipball/c7919e409ca68858f8cceadb7565b9f622575249",
+                "reference": "c7919e409ca68858f8cceadb7565b9f622575249",
                 "shasum": ""
             },
             "require": {
-                "ext-spl": "*",
-                "php": ">=5.4.0"
+                "hoa/exception": "~1.0",
+                "php": ">=5.5.0"
             },
             "require-dev": {
-                "hoa/test": "~1.0"
-            },
-            "suggest": {
-                "ext-mbstring": "ext/mbstring must be present (or a third implementation).",
-                "hoa/cli": "To use the `hoa` script."
+                "hoa/stream": "~0.0",
+                "hoa/test": "~2.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.x-dev"
+                    "dev-master": "1.x-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Hoa\\Core\\": "."
+                    "Hoa\\Consistency\\": "."
                 },
                 "files": [
-                    "Core.php"
+                    "Prelude.php"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1868,41 +1868,152 @@
                     "homepage": "http://hoa-project.net/"
                 }
             ],
-            "description": "The Hoa\\Core library.",
+            "description": "The Hoa\\Consistency library.",
             "homepage": "http://hoa-project.net/",
             "keywords": [
+                "autoloader",
+                "callable",
                 "consistency",
-                "core",
-                "data",
-                "event",
-                "library",
-                "listener",
-                "parameter",
-                "protocol"
+                "entity",
+                "flex",
+                "keyword",
+                "library"
             ],
-            "time": "2015-11-09 06:51:06"
+            "time": "2016-01-11 08:25:25"
         },
         {
-            "name": "hoa/file",
-            "version": "0.15.11.09",
+            "name": "hoa/event",
+            "version": "1.16.01.11",
             "source": {
                 "type": "git",
-                "url": "https://github.com/hoaproject/File.git",
-                "reference": "f46fe552ff79cb6c93a2ff9c25cfbc134fbd57ee"
+                "url": "https://github.com/hoaproject/Event.git",
+                "reference": "4470e090207336c01ea0cc6f9f1fa8832e4d9866"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hoaproject/File/zipball/f46fe552ff79cb6c93a2ff9c25cfbc134fbd57ee",
-                "reference": "f46fe552ff79cb6c93a2ff9c25cfbc134fbd57ee",
+                "url": "https://api.github.com/repos/hoaproject/Event/zipball/4470e090207336c01ea0cc6f9f1fa8832e4d9866",
+                "reference": "4470e090207336c01ea0cc6f9f1fa8832e4d9866",
                 "shasum": ""
             },
             "require": {
-                "hoa/core": "~2.0",
-                "hoa/iterator": "~1.0",
+                "hoa/consistency": "~1.0",
+                "hoa/exception": "~1.0"
+            },
+            "require-dev": {
+                "hoa/test": "~2.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Hoa\\Event\\": "."
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Ivan Enderlin",
+                    "email": "ivan.enderlin@hoa-project.net"
+                },
+                {
+                    "name": "Hoa community",
+                    "homepage": "http://hoa-project.net/"
+                }
+            ],
+            "description": "The Hoa\\Event library.",
+            "homepage": "http://hoa-project.net/",
+            "keywords": [
+                "event",
+                "library",
+                "listener",
+                "observer"
+            ],
+            "time": "2016-01-11 08:34:41"
+        },
+        {
+            "name": "hoa/exception",
+            "version": "1.16.01.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hoaproject/Exception.git",
+                "reference": "fa4a9648aef2c8ca8f4cd543429b24dc8feaa366"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hoaproject/Exception/zipball/fa4a9648aef2c8ca8f4cd543429b24dc8feaa366",
+                "reference": "fa4a9648aef2c8ca8f4cd543429b24dc8feaa366",
+                "shasum": ""
+            },
+            "require": {
+                "hoa/consistency": "~1.0",
+                "hoa/event": "~1.0"
+            },
+            "require-dev": {
+                "hoa/test": "~2.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Hoa\\Exception\\": "."
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Ivan Enderlin",
+                    "email": "ivan.enderlin@hoa-project.net"
+                },
+                {
+                    "name": "Hoa community",
+                    "homepage": "http://hoa-project.net/"
+                }
+            ],
+            "description": "The Hoa\\Exception library.",
+            "homepage": "http://hoa-project.net/",
+            "keywords": [
+                "exception",
+                "library"
+            ],
+            "time": "2016-01-11 08:38:17"
+        },
+        {
+            "name": "hoa/file",
+            "version": "0.16.01.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hoaproject/File.git",
+                "reference": "c96689d30c2268ee71d34b58a8d48c9ccb6f8b0e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hoaproject/File/zipball/c96689d30c2268ee71d34b58a8d48c9ccb6f8b0e",
+                "reference": "c96689d30c2268ee71d34b58a8d48c9ccb6f8b0e",
+                "shasum": ""
+            },
+            "require": {
+                "hoa/consistency": "~1.0",
+                "hoa/event": "~1.0",
+                "hoa/exception": "~1.0",
+                "hoa/iterator": "~2.0",
                 "hoa/stream": "~0.0"
             },
             "require-dev": {
-                "hoa/test": "~1.0"
+                "hoa/test": "~2.0"
             },
             "type": "library",
             "extra": {
@@ -1940,32 +2051,33 @@
                 "link",
                 "temporary"
             ],
-            "time": "2015-11-09 06:55:20"
+            "time": "2016-01-11 09:07:45"
         },
         {
             "name": "hoa/iterator",
-            "version": "1.15.10.29",
+            "version": "2.16.01.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hoaproject/Iterator.git",
-                "reference": "a64ed9fd62579a34e4450134d6d1abdf77d54435"
+                "reference": "eed36f2ec8233f494fd4450d570453b9a84736da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hoaproject/Iterator/zipball/a64ed9fd62579a34e4450134d6d1abdf77d54435",
-                "reference": "a64ed9fd62579a34e4450134d6d1abdf77d54435",
+                "url": "https://api.github.com/repos/hoaproject/Iterator/zipball/eed36f2ec8233f494fd4450d570453b9a84736da",
+                "reference": "eed36f2ec8233f494fd4450d570453b9a84736da",
                 "shasum": ""
             },
             "require": {
-                "hoa/core": "~2.0"
+                "hoa/consistency": "~1.0",
+                "hoa/exception": "~1.0"
             },
             "require-dev": {
-                "hoa/test": "~1.0"
+                "hoa/test": "~2.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.x-dev"
+                    "dev-master": "2.x-dev"
                 }
             },
             "autoload": {
@@ -1993,29 +2105,32 @@
                 "iterator",
                 "library"
             ],
-            "time": "2015-10-29 21:37:16"
+            "time": "2016-01-11 09:13:46"
         },
         {
             "name": "hoa/math",
-            "version": "0.15.10.26",
+            "version": "0.16.01.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hoaproject/Math.git",
-                "reference": "62631c65d9a4f1b8bb4c4a3d6cdff0e8971d684e"
+                "reference": "9ddfa1a4bac94af5c2151c4b96be80b3a0209749"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hoaproject/Math/zipball/62631c65d9a4f1b8bb4c4a3d6cdff0e8971d684e",
-                "reference": "62631c65d9a4f1b8bb4c4a3d6cdff0e8971d684e",
+                "url": "https://api.github.com/repos/hoaproject/Math/zipball/9ddfa1a4bac94af5c2151c4b96be80b3a0209749",
+                "reference": "9ddfa1a4bac94af5c2151c4b96be80b3a0209749",
                 "shasum": ""
             },
             "require": {
-                "hoa/compiler": "~2.0",
-                "hoa/core": "~2.0",
-                "hoa/iterator": "~1.0"
+                "hoa/compiler": "~3.0",
+                "hoa/consistency": "~1.0",
+                "hoa/exception": "~1.0",
+                "hoa/iterator": "~2.0",
+                "hoa/protocol": "~1.0",
+                "hoa/zformat": "~0.0"
             },
             "require-dev": {
-                "hoa/test": "~1.0"
+                "hoa/test": "~2.0"
             },
             "type": "library",
             "extra": {
@@ -2055,27 +2170,89 @@
                 "sampler",
                 "set"
             ],
-            "time": "2015-10-26 15:22:52"
+            "time": "2016-01-11 09:23:49"
         },
         {
-            "name": "hoa/regex",
-            "version": "0.15.08.13",
+            "name": "hoa/protocol",
+            "version": "1.16.01.11",
             "source": {
                 "type": "git",
-                "url": "https://github.com/hoaproject/Regex.git",
-                "reference": "2ef8a77ef3885ca202fcd9c31a8e54c44cd04232"
+                "url": "https://github.com/hoaproject/Protocol.git",
+                "reference": "97a33357e9f0827b75e19a78429d037fab18c1ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hoaproject/Regex/zipball/2ef8a77ef3885ca202fcd9c31a8e54c44cd04232",
-                "reference": "2ef8a77ef3885ca202fcd9c31a8e54c44cd04232",
+                "url": "https://api.github.com/repos/hoaproject/Protocol/zipball/97a33357e9f0827b75e19a78429d037fab18c1ce",
+                "reference": "97a33357e9f0827b75e19a78429d037fab18c1ce",
                 "shasum": ""
             },
             "require": {
-                "hoa/core": "~2.0",
+                "hoa/consistency": "~1.0",
+                "hoa/exception": "~1.0"
+            },
+            "require-dev": {
+                "hoa/test": "~2.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Hoa\\Protocol\\": "."
+                },
+                "files": [
+                    "Wrapper.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Ivan Enderlin",
+                    "email": "ivan.enderlin@hoa-project.net"
+                },
+                {
+                    "name": "Hoa community",
+                    "homepage": "http://hoa-project.net/"
+                }
+            ],
+            "description": "The Hoa\\Protocol library.",
+            "homepage": "http://hoa-project.net/",
+            "keywords": [
+                "library",
+                "protocol",
+                "resource",
+                "stream",
+                "wrapper"
+            ],
+            "time": "2016-01-11 08:41:20"
+        },
+        {
+            "name": "hoa/regex",
+            "version": "0.16.01.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hoaproject/Regex.git",
+                "reference": "a0e01a81fae0e7a325a5d958a269d611a5252690"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hoaproject/Regex/zipball/a0e01a81fae0e7a325a5d958a269d611a5252690",
+                "reference": "a0e01a81fae0e7a325a5d958a269d611a5252690",
+                "shasum": ""
+            },
+            "require": {
+                "hoa/consistency": "~1.0",
+                "hoa/exception": "~1.0",
                 "hoa/math": "~0.0",
-                "hoa/ustring": "~3.0",
-                "hoa/visitor": "~1.0"
+                "hoa/protocol": "~1.0",
+                "hoa/ustring": "~4.0",
+                "hoa/visitor": "~2.0"
             },
             "type": "library",
             "extra": {
@@ -2109,35 +2286,36 @@
                 "library",
                 "regex"
             ],
-            "time": "2015-08-13 06:48:47"
+            "time": "2016-01-11 09:36:00"
         },
         {
             "name": "hoa/ruler",
-            "version": "1.15.11.09",
+            "version": "2.16.01.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hoaproject/Ruler.git",
-                "reference": "9afc9ae032d40b6dc10bff85c9126cf516953925"
+                "reference": "34175a4ee1ffc28c7ee37032dded25ddd060b288"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hoaproject/Ruler/zipball/9afc9ae032d40b6dc10bff85c9126cf516953925",
-                "reference": "9afc9ae032d40b6dc10bff85c9126cf516953925",
+                "url": "https://api.github.com/repos/hoaproject/Ruler/zipball/34175a4ee1ffc28c7ee37032dded25ddd060b288",
+                "reference": "34175a4ee1ffc28c7ee37032dded25ddd060b288",
                 "shasum": ""
             },
             "require": {
-                "hoa/compiler": "~2.0",
-                "hoa/core": "~2.0",
+                "hoa/compiler": "~3.0",
+                "hoa/consistency": "~1.0",
+                "hoa/exception": "~1.0",
                 "hoa/file": "~0.0",
-                "hoa/visitor": "~1.0"
+                "hoa/visitor": "~2.0"
             },
             "require-dev": {
-                "hoa/test": "~1.0"
+                "hoa/test": "~2.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.x-dev"
+                    "dev-master": "2.x-dev"
                 }
             },
             "autoload": {
@@ -2165,24 +2343,27 @@
                 "library",
                 "ruler"
             ],
-            "time": "2015-11-09 06:58:52"
+            "time": "2016-01-11 09:39:31"
         },
         {
             "name": "hoa/stream",
-            "version": "0.15.10.26",
+            "version": "0.16.01.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hoaproject/Stream.git",
-                "reference": "011ab91d942f1d7096deade4c8a10fe57d51c5b3"
+                "reference": "06804e673281c6f1fec580345f489f4e9bf43981"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hoaproject/Stream/zipball/011ab91d942f1d7096deade4c8a10fe57d51c5b3",
-                "reference": "011ab91d942f1d7096deade4c8a10fe57d51c5b3",
+                "url": "https://api.github.com/repos/hoaproject/Stream/zipball/06804e673281c6f1fec580345f489f4e9bf43981",
+                "reference": "06804e673281c6f1fec580345f489f4e9bf43981",
                 "shasum": ""
             },
             "require": {
-                "hoa/core": "~2.0"
+                "hoa/consistency": "~1.0",
+                "hoa/event": "~1.0",
+                "hoa/exception": "~1.0",
+                "hoa/protocol": "~1.0"
             },
             "type": "library",
             "extra": {
@@ -2223,27 +2404,28 @@
                 "stream",
                 "wrapper"
             ],
-            "time": "2015-10-22 06:30:43"
+            "time": "2016-01-11 09:44:48"
         },
         {
             "name": "hoa/ustring",
-            "version": "3.15.11.09",
+            "version": "4.16.01.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hoaproject/Ustring.git",
-                "reference": "8506be4910212b1a2beb9014763a8a4fbd871001"
+                "reference": "9f76b9aae5901b4f476ef854e29ccd746d6899d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hoaproject/Ustring/zipball/8506be4910212b1a2beb9014763a8a4fbd871001",
-                "reference": "8506be4910212b1a2beb9014763a8a4fbd871001",
+                "url": "https://api.github.com/repos/hoaproject/Ustring/zipball/9f76b9aae5901b4f476ef854e29ccd746d6899d2",
+                "reference": "9f76b9aae5901b4f476ef854e29ccd746d6899d2",
                 "shasum": ""
             },
             "require": {
-                "hoa/core": "~2.0"
+                "hoa/consistency": "~1.0",
+                "hoa/exception": "~1.0"
             },
             "require-dev": {
-                "hoa/test": "~1.0"
+                "hoa/test": "~2.0"
             },
             "suggest": {
                 "ext-iconv": "ext/iconv must be present (or a third implementation) to use Hoa\\Ustring::transcode().",
@@ -2252,7 +2434,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.x-dev"
+                    "dev-master": "4.x-dev"
                 }
             },
             "autoload": {
@@ -2282,32 +2464,32 @@
                 "string",
                 "unicode"
             ],
-            "time": "2015-11-09 06:44:33"
+            "time": "2016-01-11 09:51:34"
         },
         {
             "name": "hoa/visitor",
-            "version": "1.15.08.17",
+            "version": "2.16.01.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hoaproject/Visitor.git",
-                "reference": "e30bfff741f71979f6476a41548e34afe8053c67"
+                "reference": "cb21074b7eb89c3ac9f76d25c72671d579735ca9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hoaproject/Visitor/zipball/e30bfff741f71979f6476a41548e34afe8053c67",
-                "reference": "e30bfff741f71979f6476a41548e34afe8053c67",
+                "url": "https://api.github.com/repos/hoaproject/Visitor/zipball/cb21074b7eb89c3ac9f76d25c72671d579735ca9",
+                "reference": "cb21074b7eb89c3ac9f76d25c72671d579735ca9",
                 "shasum": ""
             },
             "require": {
-                "hoa/core": "~2.0"
+                "hoa/consistency": "~1.0"
             },
             "require-dev": {
-                "hoa/test": "~1.0"
+                "hoa/test": "~2.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.x-dev"
+                    "dev-master": "2.x-dev"
                 }
             },
             "autoload": {
@@ -2337,7 +2519,59 @@
                 "visit",
                 "visitor"
             ],
-            "time": "2015-08-17 06:30:58"
+            "time": "2016-01-11 09:54:01"
+        },
+        {
+            "name": "hoa/zformat",
+            "version": "0.16.01.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hoaproject/Zformat.git",
+                "reference": "fd4d4243c3f8e99db46a531bec3ce498667dd83a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hoaproject/Zformat/zipball/fd4d4243c3f8e99db46a531bec3ce498667dd83a",
+                "reference": "fd4d4243c3f8e99db46a531bec3ce498667dd83a",
+                "shasum": ""
+            },
+            "require": {
+                "hoa/consistency": "~1.0",
+                "hoa/exception": "~1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Hoa\\Zformat\\": "."
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Ivan Enderlin",
+                    "email": "ivan.enderlin@hoa-project.net"
+                },
+                {
+                    "name": "Hoa community",
+                    "homepage": "http://hoa-project.net/"
+                }
+            ],
+            "description": "The Hoa\\Zformat library.",
+            "homepage": "http://hoa-project.net/",
+            "keywords": [
+                "library",
+                "parameter",
+                "zformat"
+            ],
+            "time": "2016-01-11 10:03:00"
         },
         {
             "name": "htmlawed/htmlawed",
@@ -2966,22 +3200,22 @@
         },
         {
             "name": "kphoen/rulerz",
-            "version": "0.16.2",
+            "version": "0.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/K-Phoen/rulerz.git",
-                "reference": "2b4fd796dadad204353e966b9f53040225ce6871"
+                "reference": "4ebd03bd801d17f108ab74f611b8ec1b430c909f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/K-Phoen/rulerz/zipball/2b4fd796dadad204353e966b9f53040225ce6871",
-                "reference": "2b4fd796dadad204353e966b9f53040225ce6871",
+                "url": "https://api.github.com/repos/K-Phoen/rulerz/zipball/4ebd03bd801d17f108ab74f611b8ec1b430c909f",
+                "reference": "4ebd03bd801d17f108ab74f611b8ec1b430c909f",
                 "shasum": ""
             },
             "require": {
-                "hoa/ruler": "~1.0",
+                "hoa/ruler": "~2.0",
                 "php": ">=5.5",
-                "symfony/property-access": "~2.3"
+                "symfony/property-access": "~2.3|~3.0"
             },
             "require-dev": {
                 "behat/behat": "~3.0",
@@ -3032,31 +3266,32 @@
                 "doctrine",
                 "specification"
             ],
-            "time": "2015-12-07 22:24:24"
+            "time": "2016-01-13 16:55:19"
         },
         {
             "name": "kphoen/rulerz-bundle",
-            "version": "0.11.0",
+            "version": "0.11.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/K-Phoen/RulerZBundle.git",
-                "reference": "dcaaed69d8252fa1e3a25802f8cf697947570778"
+                "reference": "57416b75d70d21c10c1f1c31b9fd6d2a7f82a277"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/K-Phoen/RulerZBundle/zipball/dcaaed69d8252fa1e3a25802f8cf697947570778",
-                "reference": "dcaaed69d8252fa1e3a25802f8cf697947570778",
+                "url": "https://api.github.com/repos/K-Phoen/RulerZBundle/zipball/57416b75d70d21c10c1f1c31b9fd6d2a7f82a277",
+                "reference": "57416b75d70d21c10c1f1c31b9fd6d2a7f82a277",
                 "shasum": ""
             },
             "require": {
                 "kphoen/rulerz": "~0.1, >=0.13.0",
-                "symfony/framework-bundle": "~2.3|~3.0",
-                "symfony/validator": "~2.3|~3.0"
+                "symfony/framework-bundle": "~2.5|~3.0",
+                "symfony/validator": "~2.5|~3.0"
             },
             "require-dev": {
                 "matthiasnoback/symfony-dependency-injection-test": "~0.7",
                 "mikey179/vfsstream": "~1.0",
-                "phpunit/phpunit": "~4.8"
+                "phpunit/phpunit": "~4.8",
+                "symfony/phpunit-bridge": "~2.7|~3.0"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -3082,7 +3317,7 @@
                 "rulerz",
                 "specification"
             ],
-            "time": "2015-11-13 13:00:14"
+            "time": "2016-01-11 13:54:58"
         },
         {
             "name": "kriswallsmith/assetic",
@@ -3163,31 +3398,32 @@
         },
         {
             "name": "lexik/form-filter-bundle",
-            "version": "v4.0.2",
+            "version": "v5.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lexik/LexikFormFilterBundle.git",
-                "reference": "d6081d308b71e14509602722c78d28801e4ed78a"
+                "reference": "dbc3c81600d2334a3408b37dccc3627d2019472c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lexik/LexikFormFilterBundle/zipball/d6081d308b71e14509602722c78d28801e4ed78a",
-                "reference": "d6081d308b71e14509602722c78d28801e4ed78a",
+                "url": "https://api.github.com/repos/lexik/LexikFormFilterBundle/zipball/dbc3c81600d2334a3408b37dccc3627d2019472c",
+                "reference": "dbc3c81600d2334a3408b37dccc3627d2019472c",
                 "shasum": ""
             },
             "require": {
-                "doctrine/orm": "~2.2",
-                "php": ">=5.3.2",
-                "symfony/form": "~2.7",
-                "symfony/framework-bundle": "~2.7"
+                "doctrine/orm": "^2.4.8",
+                "php": ">=5.5.9",
+                "symfony/form": "~2.8|~3.0",
+                "symfony/framework-bundle": "~2.8|~3.0"
             },
             "require-dev": {
+                "doctrine/mongodb-odm-bundle": "~3.0",
                 "phpunit/phpunit": "~3.7"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.x.x-dev"
+                    "dev-master": "5.x.x-dev"
                 }
             },
             "autoload": {
@@ -3218,7 +3454,7 @@
                 "filter",
                 "form"
             ],
-            "time": "2015-10-20 12:45:52"
+            "time": "2016-01-11 17:05:05"
         },
         {
             "name": "liip/theme-bundle",
@@ -3488,17 +3724,17 @@
         },
         {
             "name": "nelmio/api-doc-bundle",
-            "version": "2.11.1",
+            "version": "2.11.2",
             "target-dir": "Nelmio/ApiDocBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nelmio/NelmioApiDocBundle.git",
-                "reference": "19d4e37365edd5104e31662a2d3b510d92a7e78a"
+                "reference": "1ae2cfa9a50279d722d6b6e7b02322cef948d55d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nelmio/NelmioApiDocBundle/zipball/19d4e37365edd5104e31662a2d3b510d92a7e78a",
-                "reference": "19d4e37365edd5104e31662a2d3b510d92a7e78a",
+                "url": "https://api.github.com/repos/nelmio/NelmioApiDocBundle/zipball/1ae2cfa9a50279d722d6b6e7b02322cef948d55d",
+                "reference": "1ae2cfa9a50279d722d6b6e7b02322cef948d55d",
                 "shasum": ""
             },
             "require": {
@@ -3568,7 +3804,7 @@
                 "documentation",
                 "rest"
             ],
-            "time": "2015-12-08 13:19:42"
+            "time": "2015-12-16 15:17:51"
         },
         {
             "name": "nelmio/cors-bundle",
@@ -3696,16 +3932,16 @@
         },
         {
             "name": "paragonie/random_compat",
-            "version": "1.1.4",
+            "version": "1.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "d762ee5b099a29044603cd4649851e81aa66cb47"
+                "reference": "dd8998b7c846f6909f4e7a5f67fabebfc412a4f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/d762ee5b099a29044603cd4649851e81aa66cb47",
-                "reference": "d762ee5b099a29044603cd4649851e81aa66cb47",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/dd8998b7c846f6909f4e7a5f67fabebfc412a4f7",
+                "reference": "dd8998b7c846f6909f4e7a5f67fabebfc412a4f7",
                 "shasum": ""
             },
             "require": {
@@ -3740,7 +3976,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2015-12-10 14:48:13"
+            "time": "2016-01-06 13:31:20"
         },
         {
             "name": "phpcollection/phpcollection",
@@ -5340,16 +5576,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.23.1",
+            "version": "v1.23.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "d9b6333ae8dd2c8e3fd256e127548def0bc614c6"
+                "reference": "ae53fc2c312fdee63773b75cb570304f85388b08"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/d9b6333ae8dd2c8e3fd256e127548def0bc614c6",
-                "reference": "d9b6333ae8dd2c8e3fd256e127548def0bc614c6",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/ae53fc2c312fdee63773b75cb570304f85388b08",
+                "reference": "ae53fc2c312fdee63773b75cb570304f85388b08",
                 "shasum": ""
             },
             "require": {
@@ -5397,7 +5633,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2015-11-05 12:49:06"
+            "time": "2016-01-11 14:02:19"
         },
         {
             "name": "wallabag/php-mobi",
@@ -6617,16 +6853,16 @@
         },
         {
             "name": "sensio/generator-bundle",
-            "version": "v3.0.4",
+            "version": "v3.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioGeneratorBundle.git",
-                "reference": "e8d4db2fd6cd61e62208bda8f4f629e557f6acef"
+                "reference": "5274eafa251359087230bade2ff35dd6cec2e530"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioGeneratorBundle/zipball/e8d4db2fd6cd61e62208bda8f4f629e557f6acef",
-                "reference": "e8d4db2fd6cd61e62208bda8f4f629e557f6acef",
+                "url": "https://api.github.com/repos/sensiolabs/SensioGeneratorBundle/zipball/5274eafa251359087230bade2ff35dd6cec2e530",
+                "reference": "5274eafa251359087230bade2ff35dd6cec2e530",
                 "shasum": ""
             },
             "require": {
@@ -6665,7 +6901,7 @@
                 }
             ],
             "description": "This bundle generates code for you",
-            "time": "2015-12-28 16:09:21"
+            "time": "2016-01-05 16:30:36"
         },
         {
             "name": "symfony/phpunit-bridge",
