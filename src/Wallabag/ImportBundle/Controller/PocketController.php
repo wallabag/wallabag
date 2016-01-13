@@ -24,12 +24,12 @@ class PocketController extends Controller
     public function authAction()
     {
         $requestToken = $this->get('wallabag_import.pocket.import')
-            ->getRequestToken($this->generateUrl('import', UrlGeneratorInterface::ABSOLUTE_URL));
+            ->getRequestToken($this->generateUrl('import', array(), UrlGeneratorInterface::ABSOLUTE_URL));
 
         $this->get('session')->set('import.pocket.code', $requestToken);
 
         return $this->redirect(
-            'https://getpocket.com/auth/authorize?request_token='.$requestToken.'&redirect_uri='.$this->generateUrl('import_pocket_callback', UrlGeneratorInterface::ABSOLUTE_URL),
+            'https://getpocket.com/auth/authorize?request_token='.$requestToken.'&redirect_uri='.$this->generateUrl('import_pocket_callback', array(), UrlGeneratorInterface::ABSOLUTE_URL),
             301
         );
     }
