@@ -28,8 +28,8 @@
         "issues": "https://github.com/wallabag/wallabag/issues"
     },
     "require": {
-        "php": ">=5.5.0",
-        "symfony/symfony": "~2.8",
+        "php": ">=5.5.9",
+        "symfony/symfony": "3.0.*",
         "doctrine/orm": "^2.5",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/doctrine-cache-bundle": "^1.2",
@@ -66,9 +66,9 @@
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "~2.2",
-        "sensio/generator-bundle": "~3.0",
+        "sensio/generator-bundle": "^3.0",
         "phpunit/phpunit": "~4.4",
-        "symfony/phpunit-bridge": "~2.7"
+        "symfony/phpunit-bridge": "^2.7"
     },
     "scripts": {
         "build-parameters": [
@@ -91,7 +91,10 @@
     },
     "extra": {
         "symfony-app-dir": "app",
+        "symfony-bin-dir": "bin",
+        "symfony-var-dir": "var",
         "symfony-web-dir": "web",
+        "symfony-tests-dir": "tests",
         "symfony-assets-install": "relative",
         "incenteev-parameters": {
             "file": "app/config/parameters.yml",
