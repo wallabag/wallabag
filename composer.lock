@@ -983,16 +983,16 @@
         },
         {
             "name": "friendsofsymfony/oauth-server-bundle",
-            "version": "dev-master",
+            "version": "1.5.0-BETA",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSOAuthServerBundle.git",
-                "reference": "2cf6dd8326fd2ca223108a1578d2c16f0544fa86"
+                "reference": "a67c26e3a37cd6a63f75e2607418dd9247ed741b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSOAuthServerBundle/zipball/2cf6dd8326fd2ca223108a1578d2c16f0544fa86",
-                "reference": "2cf6dd8326fd2ca223108a1578d2c16f0544fa86",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSOAuthServerBundle/zipball/a67c26e3a37cd6a63f75e2607418dd9247ed741b",
+                "reference": "a67c26e3a37cd6a63f75e2607418dd9247ed741b",
                 "shasum": ""
             },
             "require": {
@@ -1049,7 +1049,7 @@
                 "oauth2",
                 "server"
             ],
-            "time": "2016-01-13 19:46:44"
+            "time": "2016-01-14 12:20:34"
         },
         {
             "name": "friendsofsymfony/oauth2-php",
@@ -1820,16 +1820,16 @@
         },
         {
             "name": "hoa/consistency",
-            "version": "1.16.01.11",
+            "version": "1.16.01.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hoaproject/Consistency.git",
-                "reference": "c7919e409ca68858f8cceadb7565b9f622575249"
+                "reference": "7656b971a8248a8d314ed0c5bb0668936438f62a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hoaproject/Consistency/zipball/c7919e409ca68858f8cceadb7565b9f622575249",
-                "reference": "c7919e409ca68858f8cceadb7565b9f622575249",
+                "url": "https://api.github.com/repos/hoaproject/Consistency/zipball/7656b971a8248a8d314ed0c5bb0668936438f62a",
+                "reference": "7656b971a8248a8d314ed0c5bb0668936438f62a",
                 "shasum": ""
             },
             "require": {
@@ -1879,7 +1879,7 @@
                 "keyword",
                 "library"
             ],
-            "time": "2016-01-11 08:25:25"
+            "time": "2016-01-14 10:26:48"
         },
         {
             "name": "hoa/event",
@@ -5328,16 +5328,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v2.8.1",
+            "version": "v2.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "8956ed50a44c5c4e02f2176c0773e24487477b09"
+                "reference": "f3e6a82bcbea4db3b56df08e491e20a1faae82b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/8956ed50a44c5c4e02f2176c0773e24487477b09",
-                "reference": "8956ed50a44c5c4e02f2176c0773e24487477b09",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/f3e6a82bcbea4db3b56df08e491e20a1faae82b5",
+                "reference": "f3e6a82bcbea4db3b56df08e491e20a1faae82b5",
                 "shasum": ""
             },
             "require": {
@@ -5457,7 +5457,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2015-12-26 15:56:52"
+            "time": "2016-01-14 12:01:11"
         },
         {
             "name": "tecnickcom/tcpdf",
@@ -6905,16 +6905,16 @@
         },
         {
             "name": "symfony/phpunit-bridge",
-            "version": "v2.8.1",
+            "version": "v2.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/phpunit-bridge.git",
-                "reference": "2deb2ccbe184948ae4e85e7b99e962738d3d2d69"
+                "reference": "855dc0e829fad123966347612b4183e307338c11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/2deb2ccbe184948ae4e85e7b99e962738d3d2d69",
-                "reference": "2deb2ccbe184948ae4e85e7b99e962738d3d2d69",
+                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/855dc0e829fad123966347612b4183e307338c11",
+                "reference": "855dc0e829fad123966347612b4183e307338c11",
                 "shasum": ""
             },
             "require": {
@@ -6956,7 +6956,7 @@
             ],
             "description": "Symfony PHPUnit Bridge",
             "homepage": "https://symfony.com",
-            "time": "2015-12-11 08:57:52"
+            "time": "2016-01-06 09:59:23"
         }
     ],
     "aliases": [],
