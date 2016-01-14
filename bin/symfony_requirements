@@ -1,6 +1,7 @@
+#!/usr/bin/env php
 <?php
 
-require_once dirname(__FILE__).'/SymfonyRequirements.php';
+require_once dirname(__FILE__).'/../var/SymfonyRequirements.php';
 
 $lineSize = 70;
 $symfonyRequirements = new SymfonyRequirements();

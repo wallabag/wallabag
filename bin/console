@@ -14,11 +14,11 @@ set_time_limit(0);
 /**
  * @var Composer\Autoload\ClassLoader $loader
  */
-$loader = require __DIR__.'/autoload.php';
+$loader = require __DIR__.'/../app/autoload.php';
 
 $input = new ArgvInput();
-$env = $input->getParameterOption(array('--env', '-e'), getenv('SYMFONY_ENV') ?: 'dev');
-$debug = getenv('SYMFONY_DEBUG') !== '0' && !$input->hasParameterOption(array('--no-debug', '')) && $env !== 'prod';
+$env = $input->getParameterOption(['--env', '-e'], getenv('SYMFONY_ENV') ?: 'dev');
+$debug = getenv('SYMFONY_DEBUG') !== '0' && !$input->hasParameterOption(['--no-debug', '']) && $env !== 'prod';
 
 if ($debug) {
     Debug::enable();
