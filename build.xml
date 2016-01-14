@@ -6,7 +6,7 @@
     <target name="prepare-pgsql" depends="clean,composer,db_pgsql,prepare"/>
 
     <target name="clean" description="Cleanup build artifacts">
-        <delete dir="${basedir}/app/cache"/>
+        <delete dir="${basedir}/var/cache"/>
     </target>
 
     <target name="composer" description="Install deps using Composer">
@@ -19,28 +19,28 @@
 
     <target name="prepare" description="Prepare for build">
         <exec executable="php">
-            <arg value="${basedir}/app/console"/>
+            <arg value="${basedir}/bin/console"/>
             <arg value="doctrine:database:drop"/>
             <arg value="--force"/>
             <arg value="--env=test"/>
         </exec>
         <exec executable="php">
-            <arg value="${basedir}/app/console"/>
+            <arg value="${basedir}/bin/console"/>
             <arg value="doctrine:database:create"/>
             <arg value="--env=test"/>
         </exec>
         <exec executable="php">
-            <arg value="${basedir}/app/console"/>
+            <arg value="${basedir}/bin/console"/>
             <arg value="doctrine:schema:create"/>
             <arg value="--env=test"/>
         </exec>
         <exec executable="php">
-            <arg value="${basedir}/app/console"/>
+            <arg value="${basedir}/bin/console"/>
             <arg value="cache:clear"/>
             <arg value="--env=test"/>
         </exec>
         <exec executable="php">
-            <arg value="${basedir}/app/console"/>
+            <arg value="${basedir}/bin/console"/>
             <arg value="doctrine:fixtures:load"/>
             <arg value="--no-interaction"/>
             <arg value="--env=test"/>
@@ -55,7 +55,7 @@
         </exec>
 
         <exec executable="php">
-            <arg value="${basedir}/app/console"/>
+            <arg value="${basedir}/bin/console"/>
             <arg value="cache:clear"/>
             <arg value="--env=test"/>
         </exec>
@@ -69,7 +69,7 @@
         </exec>
 
         <exec executable="php">
-            <arg value="${basedir}/app/console"/>
+            <arg value="${basedir}/bin/console"/>
             <arg value="cache:clear"/>
             <arg value="--env=test"/>
         </exec>
@@ -83,7 +83,7 @@
         </exec>
 
         <exec executable="php">
-            <arg value="${basedir}/app/console"/>
+            <arg value="${basedir}/bin/console"/>
             <arg value="cache:clear"/>
             <arg value="--env=test"/>
         </exec>
