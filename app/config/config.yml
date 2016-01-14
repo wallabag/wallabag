@@ -170,14 +170,8 @@ liip_theme:
     autodetect_theme: wallabag_core.helper.detect_active_theme
 
     path_patterns:
-        # app_resource:
-        #     - %%app_path%%/views/themes/%%current_theme%%/%%template%%
-        #     - %%app_path%%/views/%%template%%
         bundle_resource:
             - %%bundle_path%%/Resources/views/themes/%%current_theme%%/%%template%%
-        # bundle_resource_dir:
-        #     - %%dir%%/views/themes/%%current_theme%%/%%bundle_name%%/%%template%%
-        #     - %%dir%%/views/%%bundle_name%%/%%override_path%%
 
 fos_user:
     db_driver: orm

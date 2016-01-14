@@ -43,17 +43,8 @@ before_script:
     - if [ -n "$GH_TOKEN" ]; then composer config github-oauth.github.com ${GH_TOKEN}; fi;
     # disable xdebug since we don't use code-coverage for now
     - if [[ $TRAVIS_PHP_VERSION != '5.6' && $TRAVIS_PHP_VERSION != 'hhvm' && $TRAVIS_PHP_VERSION != '7.0' ]]; then phpenv config-rm xdebug.ini; fi
-    # build coverage only on one build, to speed up results feedbacks
-    # - if [[ "$TRAVIS_PHP_VERSION" = "5.6" ]]; then PHPUNIT_FLAGS="--coverage-clover=coverage.clover"; else PHPUNIT_FLAGS=""; fi;
     - if [[ "$DB" = "pgsql" ]]; then psql -c 'create database wallabag;' -U postgres; fi;
 
 script:
     - ant prepare-$DB
     - bin/phpunit -v
-
-# after_script:
-    # - |
-        # if [ $TRAVIS_PHP_VERSION = '5.6' ]; then
-            # wget https://scrutinizer-ci.com/ocular.phar
-            # php ocular.phar code-coverage:upload --format=php-clover coverage.clover
-        # fi
