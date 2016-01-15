@@ -122,6 +122,8 @@ class EntryRepository extends EntityRepository
     /**
      * Fetch an entry with a tag. Only used for tests.
      *
+     * @param int $userId
+     *
      * @return Entry
      */
     public function findOneWithTags($userId)
@@ -247,5 +249,22 @@ class EntryRepository extends EntityRepository
         }
 
         return false;
+    }
+
+    /**
+     * Count all entries for a user.
+     *
+     * @param int $userId
+     *
+     * @return integer
+     */
+    public function countAllEntriesByUsername($userId)
+    {
+        $qb = $this->createQueryBuilder('e')
+            ->select('count(e)')
+            ->where('e.user=:userId')->setParameter('userId', $userId)
+        ;
+
+        return $qb->getQuery()->getSingleScalarResult();
     }
 }

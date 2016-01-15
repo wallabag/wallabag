@@ -3,6 +3,10 @@ Save your first article
 
 The main purpose of wallabag is to save web articles. You have many ways to do it.
 
+.. note::
+
+    A quickstart will be displayed in the application until you save your first article.
+
 By using a bookmarklet
 ----------------------
 
