@@ -213,3 +213,28 @@ lexik_maintenance:
     response:
         code: 503
         status: "wallabag Service Temporarily Unavailable"
+
+old_sound_rabbit_mq:
+    connections:
+        default:
+            host:     %rabbitmq_host%
+            port:     %rabbitmq_port%
+            user:     %rabbitmq_user%
+            password: %rabbitmq_password%
+            vhost:    /
+            lazy:     false
+    producers:
+        wallabag:
+            connection: default
+            exchange_options:
+                name: 'wallabag_exchange'
+                type: topic
+    consumers:
+        entries:
+            connection: default
+            exchange_options:
+                name: 'wallabag_exchange'
+                type: topic
+            queue_options:
+                name: 'wallabag_queue'
+            callback: wallabag_import.consumer.entry

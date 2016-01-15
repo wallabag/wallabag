@@ -1,4 +1,11 @@
 services:
+    wallabag_import.consumer.entry:
+        class: Wallabag\ImportBundle\Component\AMPQ\EntryConsumer
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@wallabag_core.entry_repository"
+            - "@wallabag_core.content_proxy"
+
     wallabag_import.chain:
         class: Wallabag\ImportBundle\Import\ImportChain
 
@@ -18,6 +25,8 @@ services:
             - "@doctrine.orm.entity_manager"
             - "@wallabag_core.content_proxy"
             - "@craue_config"
+            - %rabbitmq%
+            - "@old_sound_rabbit_mq.wallabag_producer"
         calls:
             - [ setClient, [ "@wallabag_import.pocket.client" ] ]
             - [ setLogger, [ "@logger" ]]

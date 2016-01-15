@@ -266,4 +266,23 @@ class EntryRepository extends EntityRepository
 
         return $qb->getQuery()->getSingleScalarResult();
     }
+
+    /**
+     * Get entry by id and userId
+     *
+     * @param $userId
+     * @param $entryId
+     *
+     * @return Entry
+     */
+    public function findOneByUsernameAndId($userId, $entryId)
+    {
+        return $this->createQueryBuilder('e')
+            ->leftJoin('e.user', 'u')
+            ->where('u.userId = :userId')->setParameter('userId', $userId)
+            ->andWhere('e.id = :id')->setParameter('id', $entryId)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getSingleResult();
+    }
 }
