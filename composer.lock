@@ -2672,23 +2672,23 @@
         },
         {
             "name": "j0k3r/graby",
-            "version": "1.0.8",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby.git",
-                "reference": "bf152ccc6629bdd63b1e5e8b297c2912516b5f1e"
+                "reference": "fa5356fbbabe8288ed57a978ab05725c7063727e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby/zipball/bf152ccc6629bdd63b1e5e8b297c2912516b5f1e",
-                "reference": "bf152ccc6629bdd63b1e5e8b297c2912516b5f1e",
+                "url": "https://api.github.com/repos/j0k3r/graby/zipball/fa5356fbbabe8288ed57a978ab05725c7063727e",
+                "reference": "fa5356fbbabe8288ed57a978ab05725c7063727e",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
                 "guzzlehttp/guzzle": "^5.2.0",
                 "htmlawed/htmlawed": "^1.1.19",
-                "j0k3r/graby-site-config": "^1.0.0",
+                "j0k3r/graby-site-config": "^1.0",
                 "j0k3r/php-readability": "^1.0",
                 "j0k3r/safecurl": "~2.0",
                 "monolog/monolog": "^1.13.1",
@@ -2724,20 +2724,20 @@
                 }
             ],
             "description": "Graby helps you extract article content from web pages",
-            "time": "2015-12-24 08:28:38"
+            "time": "2016-01-15 09:52:40"
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.11",
+            "version": "1.0.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "ac198f308beabccc97bbd35ed0daeaac63fbf1e3"
+                "reference": "ddd602cab137ee40ac3f5a8dd9b749bea7d2f541"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/ac198f308beabccc97bbd35ed0daeaac63fbf1e3",
-                "reference": "ac198f308beabccc97bbd35ed0daeaac63fbf1e3",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/ddd602cab137ee40ac3f5a8dd9b749bea7d2f541",
+                "reference": "ddd602cab137ee40ac3f5a8dd9b749bea7d2f541",
                 "shasum": ""
             },
             "require": {
@@ -2760,7 +2760,7 @@
                 }
             ],
             "description": "Graby site config files",
-            "time": "2015-12-23 22:52:15"
+            "time": "2016-01-15 09:59:00"
         },
         {
             "name": "j0k3r/php-readability",
