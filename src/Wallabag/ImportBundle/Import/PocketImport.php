@@ -2,6 +2,8 @@
 
 namespace Wallabag\ImportBundle\Import;
 
+use OldSound\RabbitMqBundle\RabbitMq\Producer;
+use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Doctrine\ORM\EntityManager;
 use GuzzleHttp\Client;
@@ -20,14 +22,18 @@ class PocketImport extends AbstractImport
     private $importedEntries = 0;
     private $markAsRead;
     protected $accessToken;
+    private $producer;
+    private $rabbitMQ;
 
-    public function __construct(TokenStorageInterface $tokenStorage, EntityManager $em, ContentProxy $contentProxy, Config $craueConfig)
+    public function __construct(TokenStorageInterface $tokenStorage, EntityManager $em, ContentProxy $contentProxy, Config $craueConfig, $rabbitMQ, Producer $producer)
     {
         $this->user = $tokenStorage->getToken()->getUser();
         $this->em = $em;
         $this->contentProxy = $contentProxy;
         $this->consumerKey = $craueConfig->get('pocket_consumer_key');
         $this->logger = new NullLogger();
+        $this->rabbitMQ = $rabbitMQ;
+        $this->producer = $producer;
     }
 
     /**
@@ -197,7 +203,7 @@ class PocketImport extends AbstractImport
     {
         $i = 1;
 
-        foreach ($entries as $pocketEntry) {
+        foreach ($entries as &$pocketEntry) {
             $url = isset($pocketEntry['resolved_url']) && $pocketEntry['resolved_url'] != '' ? $pocketEntry['resolved_url'] : $pocketEntry['given_url'];
 
             $existingEntry = $this->em
@@ -210,12 +216,15 @@ class PocketImport extends AbstractImport
             }
 
             $entry = new Entry($this->user);
-            $entry = $this->fetchContent($entry, $url);
 
-            // jump to next entry in case of problem while getting content
-            if (false === $entry) {
-                ++$this->skippedEntries;
-                continue;
+            if (!$this->rabbitMQ) {
+                $entry = $this->fetchContent($entry, $url);
+
+                // jump to next entry in case of problem while getting content
+                if (false === $entry) {
+                    ++$this->skippedEntries;
+                    continue;
+                }
             }
 
             // 0, 1, 2 - 1 if the item is archived - 2 if the item should be deleted
@@ -236,6 +245,7 @@ class PocketImport extends AbstractImport
             }
 
             $entry->setTitle($title);
+            $entry->setUrl($url);
 
             // 0, 1, or 2 - 1 if the item has images in it - 2 if the item is an image
             if (isset($pocketEntry['has_image']) && $pocketEntry['has_image'] > 0 && isset($pocketEntry['images'][1])) {
@@ -249,6 +259,9 @@ class PocketImport extends AbstractImport
                 );
             }
 
+            $pocketEntry['url'] = $url;
+            $pocketEntry['userId'] = $this->user->getId();
+
             $this->em->persist($entry);
             ++$this->importedEntries;
 
@@ -256,10 +269,16 @@ class PocketImport extends AbstractImport
             if (($i % 20) === 0) {
                 $this->em->flush();
             }
+
             ++$i;
         }
 
         $this->em->flush();
-        $this->em->clear();
+
+        if ($this->rabbitMQ) {
+            foreach ($entries as $entry) {
+                $this->producer->publish(serialize($entry));
+            }
+        }
     }
 }

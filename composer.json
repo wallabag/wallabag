@@ -81,7 +81,8 @@
         "lexik/maintenance-bundle": "~2.1",
         "ocramius/proxy-manager": "1.*",
         "white-october/pagerfanta-bundle": "^1.0",
-        "mouf/nodejs-installer": "~1.0"
+        "mouf/nodejs-installer": "~1.0",
+        "php-amqplib/rabbitmq-bundle": "^1.8"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "~2.2",
