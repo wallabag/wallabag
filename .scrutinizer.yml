@@ -4,6 +4,7 @@ filter:
     excluded_paths:
         - 'vendor/*'
         - 'app/*'
+        - 'var/*'
         - 'web/*'
         - 'src/Wallabag/*Bundle/Tests/*'
         - '*Test.php'
