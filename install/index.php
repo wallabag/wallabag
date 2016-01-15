@@ -704,7 +704,7 @@ php composer.phar install</code></pre>
                                  <li><label for="mysql_password">Password</label> <input type="password" placeholder="p4ssw0rd" id="mysql_password" name="mysql_password" /></li>
                                  <li><label for="mysql_utf8_mb4">Use UTF-8 MB4</label> <input id="mysql_utf8_mb4" type="checkbox" name="mysql_utf8_mb4">
                                  <div id="utf8_mb4_infos"><em>Warning :</em> UTF-8 MB4 is used to fully support unicode characters. It is available only with MySQL starting with version 5.5.3. 
-                                    Install will failed if you check this while using an older MySQL server.</div></li>
+                                    Install will fail if you check this while using an older MySQL server.</div></li>
                               </ul>
                               <?php } else { ?>
                                  <div class="messages notice">
