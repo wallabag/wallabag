@@ -248,7 +248,7 @@ class PocketImportTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $entryRepo->expects($this->exactly(2))
-            ->method('existByUrlAndUserId')
+            ->method('findByUrlAndUserId')
             ->will($this->onConsecutiveCalls(false, true));
 
         $tag = $this->getMockBuilder('Wallabag\CoreBundle\Entity\Tag')

@@ -31,4 +31,21 @@ abstract class WallabagCoreTestCase extends WebTestCase
 
         $this->client->submit($form, $data);
     }
+
+    /**
+     * Return the user id of the logged in user.
+     * You should be sure that you called `logInAs` before.
+     *
+     * @return int
+     */
+    public function getLoggedInUserId()
+    {
+        $token = static::$kernel->getContainer()->get('security.token_storage')->getToken();
+
+        if (null !== $token) {
+            return $token->getUser()->getId();
+        }
+
+        throw new \RuntimeException('No logged in User.');
+    }
 }

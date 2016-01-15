@@ -127,7 +127,7 @@ class WallabagV1Import implements ImportInterface
         foreach ($entries as $importedEntry) {
             $existingEntry = $this->em
                 ->getRepository('WallabagCoreBundle:Entry')
-                ->existByUrlAndUserId($importedEntry['url'], $this->user->getId());
+                ->findByUrlAndUserId($importedEntry['url'], $this->user->getId());
 
             if (false !== $existingEntry) {
                 ++$this->skippedEntries;

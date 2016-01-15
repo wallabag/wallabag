@@ -38,7 +38,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $form = $crawler->filter('button[type=submit]')->form();
 
         $data = array(
-            'entry[url]' => 'https://www.wallabag.org/blog/2016/01/08/wallabag-alpha1-v2',
+            'entry[url]' => $this->url,
         );
 
         $client->submit($form, $data);
@@ -82,7 +82,7 @@ class EntryControllerTest extends WallabagCoreTestCase
             ->get('doctrine.orm.entity_manager');
         $entry = $em
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneByUrl($this->url);
+            ->findByUrlAndUserId($this->url, $this->getLoggedInUserId());
         $em->remove($entry);
         $em->flush();
     }
@@ -202,7 +202,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneByUrl($this->url);
+            ->findByUrlAndUserId($this->url, $this->getLoggedInUserId());
 
         $client->request('GET', '/view/'.$content->getId());
 
@@ -223,7 +223,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneByUrl($this->url);
+            ->findByUrlAndUserId($this->url, $this->getLoggedInUserId());
 
         // empty content
         $content->setContent('');
@@ -237,7 +237,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneByUrl($this->url);
+            ->findByUrlAndUserId($this->url, $this->getLoggedInUserId());
 
         $this->assertNotEmpty($content->getContent());
     }
@@ -250,7 +250,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneByUrl($this->url);
+            ->findByUrlAndUserId($this->url, $this->getLoggedInUserId());
 
         $crawler = $client->request('GET', '/edit/'.$content->getId());
 
@@ -268,7 +268,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneByUrl($this->url);
+            ->findByUrlAndUserId($this->url, $this->getLoggedInUserId());
 
         $crawler = $client->request('GET', '/edit/'.$content->getId());
 
@@ -298,7 +298,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneByUrl($this->url);
+            ->findByUrlAndUserId($this->url, $this->getLoggedInUserId());
 
         $client->request('GET', '/archive/'.$content->getId());
 
@@ -320,7 +320,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneByUrl($this->url);
+            ->findByUrlAndUserId($this->url, $this->getLoggedInUserId());
 
         $client->request('GET', '/star/'.$content->getId());
 
@@ -342,7 +342,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneByUrl($this->url);
+            ->findByUrlAndUserId($this->url, $this->getLoggedInUserId());
 
         $client->request('GET', '/delete/'.$content->getId());
 

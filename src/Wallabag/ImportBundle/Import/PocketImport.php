@@ -214,7 +214,7 @@ class PocketImport implements ImportInterface
 
             $existingEntry = $this->em
                 ->getRepository('WallabagCoreBundle:Entry')
-                ->existByUrlAndUserId($url, $this->user->getId());
+                ->findByUrlAndUserId($url, $this->user->getId());
 
             if (false !== $existingEntry) {
                 ++$this->skippedEntries;
