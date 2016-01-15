@@ -235,10 +235,9 @@ class EntryRepository extends EntityRepository
      *
      * @return array|bool
      */
-    public function existByUrlAndUserId($url, $userId)
+    public function findByUrlAndUserId($url, $userId)
     {
         $res = $this->createQueryBuilder('e')
-            ->select('e.id, e.createdAt')
             ->where('e.url = :url')->setParameter('url', $url)
             ->andWhere('e.user = :user_id')->setParameter('user_id', $userId)
             ->getQuery()

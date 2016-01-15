@@ -49,8 +49,7 @@ class EntryController extends Controller
 
         if ($form->isValid()) {
             // check for existing entry, if it exists, redirect to it with a message
-            $existingEntry = $this->get('wallabag_core.entry_repository')
-                ->existByUrlAndUserId($entry->getUrl(), $this->getUser()->getId());
+            $existingEntry = $this->get('wallabag_core.entry_repository')->findByUrlAndUserId($entry->getUrl(), $this->getUser()->getId());
 
             if (false !== $existingEntry) {
                 $this->get('session')->getFlashBag()->add(

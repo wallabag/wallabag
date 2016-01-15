@@ -53,7 +53,7 @@ class WallabagV1ImportTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $entryRepo->expects($this->exactly(3))
-            ->method('existByUrlAndUserId')
+            ->method('findByUrlAndUserId')
             ->will($this->onConsecutiveCalls(false, true, false));
 
         $this->em
