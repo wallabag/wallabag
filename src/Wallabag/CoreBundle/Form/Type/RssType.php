@@ -3,6 +3,7 @@
 namespace Wallabag\CoreBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -12,7 +13,7 @@ class RssType extends AbstractType
     {
         $builder
             ->add('rss_limit')
-            ->add('save', 'submit')
+            ->add('save', SubmitType::class)
         ;
     }
 
@@ -23,7 +24,7 @@ class RssType extends AbstractType
         ));
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'rss_config';
     }

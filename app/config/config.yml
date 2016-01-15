@@ -21,9 +21,11 @@ framework:
     trusted_proxies: ~
     session:
         # handler_id set to null will use default session handler from php.ini
-        handler_id:  ~
+        handler_id:  session.handler.native_file
+        save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"
     fragments:       ~
     http_method_override: true
+    assets: ~
 
 wallabag_core:
     languages:
@@ -59,9 +61,8 @@ twig:
         warning_message: %warning_message%
         paypal_url: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9UBA65LG3FX9Y&lc=gb"
         flattr_url: "https://flattr.com/thing/1265480"
-    form:
-        resources:
-            - LexikFormFilterBundle:Form:form_div_layout.html.twig
+    form_themes:
+        - "LexikFormFilterBundle:Form:form_div_layout.html.twig"
 
 # Assetic Configuration
 assetic:
@@ -171,14 +172,8 @@ liip_theme:
     autodetect_theme: wallabag_core.helper.detect_active_theme
 
     path_patterns:
-        # app_resource:
-        #     - %%app_path%%/views/themes/%%current_theme%%/%%template%%
-        #     - %%app_path%%/views/%%template%%
         bundle_resource:
             - %%bundle_path%%/Resources/views/themes/%%current_theme%%/%%template%%
-        # bundle_resource_dir:
-        #     - %%dir%%/views/themes/%%current_theme%%/%%bundle_name%%/%%template%%
-        #     - %%dir%%/views/%%bundle_name%%/%%override_path%%
 
 fos_user:
     db_driver: orm

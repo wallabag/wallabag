@@ -8,7 +8,7 @@ wallabag_api:
     prefix: /
 
 app:
-    resource: @WallabagCoreBundle/Controller/
+    resource: "@WallabagCoreBundle/Controller/"
     type: annotation
 
 doc-api:

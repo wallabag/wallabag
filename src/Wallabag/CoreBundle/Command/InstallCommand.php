@@ -3,14 +3,14 @@
 namespace Wallabag\CoreBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Helper\Table;
+use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Output\NullOutput;
-use Symfony\Component\Console\Question\Question;
+use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
-use Symfony\Component\Console\Helper\Table;
+use Symfony\Component\Console\Question\Question;
 use Wallabag\CoreBundle\Entity\Config;
 
 class InstallCommand extends ContainerAwareCommand
@@ -55,7 +55,7 @@ class InstallCommand extends ContainerAwareCommand
         ;
 
         $output->writeln('<info>Wallabag has been successfully installed.</info>');
-        $output->writeln('<comment>Just execute `php app/console server:run` for using wallabag: http://localhost:8000</comment>');
+        $output->writeln('<comment>Just execute `php bin/console server:run` for using wallabag: http://localhost:8000</comment>');
     }
 
     protected function checkRequirements()

@@ -2,8 +2,8 @@
 
 namespace Wallabag\ApiBundle\Entity;
 
-use FOS\OAuthServerBundle\Entity\Client as BaseClient;
 use Doctrine\ORM\Mapping as ORM;
+use FOS\OAuthServerBundle\Entity\Client as BaseClient;
 
 /**
  * @ORM\Table("oauth2_clients")

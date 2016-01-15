@@ -4,8 +4,8 @@ namespace Wallabag\CoreBundle\Tests\Helper;
 
 use Psr\Log\NullLogger;
 use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\UserBundle\Entity\User;
 use Wallabag\CoreBundle\Helper\ContentProxy;
+use Wallabag\UserBundle\Entity\User;
 
 class ContentProxyTest extends \PHPUnit_Framework_TestCase
 {

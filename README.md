@@ -16,12 +16,11 @@ If you don't have it yet, please [install composer](https://getcomposer.org/down
 
 ```
 composer create-project wallabag/wallabag wallabag 2.0.0-alpha.1
-cd wallabag
-php app/console wallabag:install
-php app/console server:run
+php bin/console wallabag:install
+php bin/console server:run
 ```
 
 ## License
-Copyright © 2013-2015 Nicolas Lœuillet <nicolas@loeuillet.org>
+Copyright © 2013-2016 Nicolas Lœuillet <nicolas@loeuillet.org>
 This work is free. You can redistribute it and/or modify it under the
 terms of the MIT License. See the COPYING file for more details.

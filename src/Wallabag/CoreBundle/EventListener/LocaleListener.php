@@ -2,9 +2,9 @@
 
 namespace Wallabag\CoreBundle\EventListener;
 
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * @see http://symfony.com/doc/current/cookbook/session/locale_sticky_session.html

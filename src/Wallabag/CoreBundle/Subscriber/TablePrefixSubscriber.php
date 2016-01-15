@@ -2,8 +2,8 @@
 
 namespace Wallabag\CoreBundle\Subscriber;
 
-use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\Common\EventSubscriber;
+use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 
 /**

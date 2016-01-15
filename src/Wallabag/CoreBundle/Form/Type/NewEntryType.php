@@ -3,6 +3,8 @@
 namespace Wallabag\CoreBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -11,8 +13,8 @@ class NewEntryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('url', 'url', array('required' => true))
-            ->add('save', 'submit')
+            ->add('url', UrlType::class, array('required' => true))
+            ->add('save', SubmitType::class)
         ;
     }
 
@@ -23,7 +25,7 @@ class NewEntryType extends AbstractType
         ));
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'entry';
     }

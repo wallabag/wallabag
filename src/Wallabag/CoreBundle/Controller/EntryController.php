@@ -2,16 +2,16 @@
 
 namespace Wallabag\CoreBundle\Controller;
 
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Pagerfanta;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\CoreBundle\Form\Type\NewEntryType;
-use Wallabag\CoreBundle\Form\Type\EditEntryType;
 use Wallabag\CoreBundle\Filter\EntryFilterType;
-use Pagerfanta\Adapter\DoctrineORMAdapter;
-use Pagerfanta\Pagerfanta;
+use Wallabag\CoreBundle\Form\Type\EditEntryType;
+use Wallabag\CoreBundle\Form\Type\NewEntryType;
 
 class EntryController extends Controller
 {
@@ -43,7 +43,7 @@ class EntryController extends Controller
     {
         $entry = new Entry($this->getUser());
 
-        $form = $this->createForm(new NewEntryType(), $entry);
+        $form = $this->createForm(NewEntryType::class, $entry);
 
         $form->handleRequest($request);
 
@@ -117,7 +117,7 @@ class EntryController extends Controller
     {
         $this->checkUserAction($entry);
 
-        $form = $this->createForm(new EditEntryType(), $entry);
+        $form = $this->createForm(EditEntryType::class, $entry);
 
         $form->handleRequest($request);
 
@@ -239,7 +239,7 @@ class EntryController extends Controller
                 throw new \InvalidArgumentException(sprintf('Type "%s" is not implemented.', $type));
         }
 
-        $form = $this->get('form.factory')->create(new EntryFilterType($repository, $this->getUser()));
+        $form = $this->createForm(EntryFilterType::class);
 
         if ($request->query->has($form->getName())) {
             // manually bind values from the request

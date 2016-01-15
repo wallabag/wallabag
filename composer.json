@@ -28,35 +28,36 @@
         "issues": "https://github.com/wallabag/wallabag/issues"
     },
     "require": {
-        "php": ">=5.5.0",
-        "symfony/symfony": "~2.7.0",
-        "doctrine/orm": "~2.3",
-        "doctrine/doctrine-bundle": "1.5.2",
+        "php": ">=5.5.9",
+        "symfony/symfony": "3.0.*",
+        "doctrine/orm": "^2.5",
+        "doctrine/doctrine-bundle": "^1.6",
+        "doctrine/doctrine-cache-bundle": "^1.2",
         "twig/extensions": "~1.0",
         "symfony/assetic-bundle": "~2.3",
-        "symfony/swiftmailer-bundle": "~2.3",
-        "symfony/monolog-bundle": "~2.4",
-        "sensio/distribution-bundle": "~3.0.12",
-        "sensio/framework-extra-bundle": "~3.0",
-        "incenteev/composer-parameter-handler": "~2.0",
+        "symfony/swiftmailer-bundle": "^2.3",
+        "symfony/monolog-bundle": "^2.8",
+        "sensio/distribution-bundle": "^5.0",
+        "sensio/framework-extra-bundle": "^3.0.2",
+        "incenteev/composer-parameter-handler": "^2.0",
         "nelmio/cors-bundle": "~1.4.0",
         "friendsofsymfony/rest-bundle": "~1.4",
-        "jms/serializer-bundle": "~0.13",
+        "jms/serializer-bundle": "~1.0",
         "nelmio/api-doc-bundle": "~2.7",
         "ezyang/htmlpurifier": "~4.6",
         "mgargano/simplehtmldom": "~1.5",
         "tecnickcom/tcpdf": "~6.2",
         "simplepie/simplepie": "~1.3.1",
-        "willdurand/hateoas-bundle": "~0.5.0",
+        "willdurand/hateoas-bundle": "~1.0",
         "htmlawed/htmlawed": "~1.1.19",
-        "liip/theme-bundle": "~1.1.3",
+        "liip/theme-bundle": "~1.1",
         "pagerfanta/pagerfanta": "~1.0.3",
-        "lexik/form-filter-bundle": "~4.0",
+        "lexik/form-filter-bundle": "~5.0",
         "j0k3r/graby": "~1.0",
         "friendsofsymfony/user-bundle": "dev-master",
-        "friendsofsymfony/oauth-server-bundle": "^1.4@dev",
+        "friendsofsymfony/oauth-server-bundle": "^1.5@dev",
         "stof/doctrine-extensions-bundle": "^1.2@dev",
-        "scheb/two-factor-bundle": "~1.4.0",
+        "scheb/two-factor-bundle": "~2.0",
         "grandt/phpepub": "~4.0",
         "wallabag/php-mobi": "~1.0.0",
         "kphoen/rulerz-bundle": "~0.10",
@@ -64,39 +65,36 @@
         "doctrine/doctrine-migrations-bundle": "^1.0"
     },
     "require-dev": {
-        "doctrine/doctrine-fixtures-bundle": "~2.2.0",
-        "sensio/generator-bundle": "~2.5",
+        "doctrine/doctrine-fixtures-bundle": "~2.2",
+        "sensio/generator-bundle": "^3.0",
         "phpunit/phpunit": "~4.4",
-        "symfony/phpunit-bridge": "~2.7.0"
+        "symfony/phpunit-bridge": "^2.7"
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/wallabag/phpMobi"
-        }
-    ],
     "scripts": {
-        "post-install-cmd": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
-        ],
-        "post-update-cmd": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
-        ],
         "build-parameters": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
+        ],
+        "post-cmd": [
+            "@build-parameters",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+        ],
+        "post-install-cmd": [
+            "@post-cmd"
+        ],
+        "post-update-cmd": [
+            "@post-cmd"
         ]
     },
     "extra": {
         "symfony-app-dir": "app",
+        "symfony-bin-dir": "bin",
+        "symfony-var-dir": "var",
         "symfony-web-dir": "web",
+        "symfony-tests-dir": "tests",
         "symfony-assets-install": "relative",
         "incenteev-parameters": {
             "file": "app/config/parameters.yml",
@@ -109,7 +107,8 @@
         }
     },
     "autoload": {
-        "psr-0": { "": "src/" }
+        "psr-4": { "": "src/" },
+        "classmap": [ "app/AppKernel.php", "app/AppCache.php" ]
     },
     "config": {
         "bin-dir": "bin"

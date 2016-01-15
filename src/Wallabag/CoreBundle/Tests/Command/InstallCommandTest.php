@@ -2,15 +2,15 @@
 
 namespace Wallabag\CoreBundle\Tests\Command;
 
-use Wallabag\CoreBundle\Tests\WallabagCoreTestCase;
-use Wallabag\CoreBundle\Command\InstallCommand;
-use Wallabag\CoreBundle\Tests\Mock\InstallCommandMock;
+use Doctrine\Bundle\DoctrineBundle\Command\CreateDatabaseDoctrineCommand;
+use Doctrine\Bundle\DoctrineBundle\Command\DropDatabaseDoctrineCommand;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
-use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
-use Doctrine\Bundle\DoctrineBundle\Command\DropDatabaseDoctrineCommand;
-use Doctrine\Bundle\DoctrineBundle\Command\CreateDatabaseDoctrineCommand;
+use Symfony\Component\Console\Tester\CommandTester;
+use Wallabag\CoreBundle\Command\InstallCommand;
+use Wallabag\CoreBundle\Tests\Mock\InstallCommandMock;
+use Wallabag\CoreBundle\Tests\WallabagCoreTestCase;
 
 class InstallCommandTest extends WallabagCoreTestCase
 {

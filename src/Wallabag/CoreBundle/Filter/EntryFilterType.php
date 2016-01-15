@@ -2,12 +2,17 @@
 
 namespace Wallabag\CoreBundle\Filter;
 
+use Doctrine\ORM\EntityRepository;
+use Lexik\Bundle\FormFilterBundle\Filter\Query\QueryInterface;
+use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\NumberRangeFilterType;
+use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\DateRangeFilterType;
+use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\TextFilterType;
+use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\CheckboxFilterType;
+use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\ChoiceFilterType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Lexik\Bundle\FormFilterBundle\Filter\Query\QueryInterface;
-use Doctrine\ORM\EntityRepository;
-use Wallabag\UserBundle\Entity\User;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 class EntryFilterType extends AbstractType
 {
@@ -18,19 +23,19 @@ class EntryFilterType extends AbstractType
      * Repository & user are used to get a list of language entries for this user.
      *
      * @param EntityRepository $entryRepository
-     * @param User             $user
+     * @param TokenStorage     $token
      */
-    public function __construct(EntityRepository $entryRepository, User $user)
+    public function __construct(EntityRepository $entryRepository, TokenStorage $token)
     {
         $this->repository = $entryRepository;
-        $this->user = $user;
+        $this->user = $token->getToken()->getUser();
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('readingTime', 'filter_number_range')
-            ->add('createdAt', 'filter_date_range', array(
+            ->add('readingTime', NumberRangeFilterType::class)
+            ->add('createdAt', DateRangeFilterType::class, array(
                     'left_date_options' => array(
                         'attr' => array(
                             'placeholder' => 'dd/mm/yyyy',
@@ -47,20 +52,20 @@ class EntryFilterType extends AbstractType
                     ),
                 )
             )
-            ->add('domainName', 'filter_text', array(
+            ->add('domainName', TextFilterType::class, array(
                 'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
-                        $value = $values['value'];
-                        if (strlen($value) <= 2 || empty($value)) {
-                            return;
-                        }
-                        $expression = $filterQuery->getExpr()->like($field, $filterQuery->getExpr()->literal('%'.$value.'%'));
+                    $value = $values['value'];
+                    if (strlen($value) <= 2 || empty($value)) {
+                        return;
+                    }
+                    $expression = $filterQuery->getExpr()->like($field, $filterQuery->getExpr()->literal('%'.$value.'%'));
 
-                        return $filterQuery->createCondition($expression);
+                    return $filterQuery->createCondition($expression);
                 },
             ))
-            ->add('isArchived', 'filter_checkbox')
-            ->add('isStarred', 'filter_checkbox')
-            ->add('previewPicture', 'filter_checkbox', array(
+            ->add('isArchived', CheckboxFilterType::class)
+            ->add('isStarred', CheckboxFilterType::class)
+            ->add('previewPicture', CheckboxFilterType::class, array(
                 'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
                     if (false === $values['value']) {
                         return;
@@ -71,13 +76,14 @@ class EntryFilterType extends AbstractType
                     return $filterQuery->createCondition($expression);
                 },
             ))
-            ->add('language', 'filter_choice', array(
-                'choices' => $this->repository->findDistinctLanguageByUser($this->user->getId()),
+            ->add('language', ChoiceFilterType::class, array(
+                'choices' => array_flip($this->repository->findDistinctLanguageByUser($this->user->getId())),
+                'choices_as_values' => true,
             ))
         ;
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'entry_filter';
     }

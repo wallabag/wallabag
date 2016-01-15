@@ -3,8 +3,8 @@
 namespace Wallabag\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use KPhoen\RulerZBundle\Validator\Constraints as RulerZAssert;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Tagging rule.

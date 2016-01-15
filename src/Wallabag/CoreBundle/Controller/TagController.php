@@ -5,9 +5,9 @@ namespace Wallabag\CoreBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Wallabag\CoreBundle\Form\Type\NewTagType;
-use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\CoreBundle\Entity\Tag;
+use Wallabag\CoreBundle\Form\Type\NewTagType;
 
 class TagController extends Controller
 {
@@ -21,7 +21,7 @@ class TagController extends Controller
     public function addTagFormAction(Request $request, Entry $entry)
     {
         $tag = new Tag();
-        $form = $this->createForm(new NewTagType(), $tag);
+        $form = $this->createForm(NewTagType::class, $tag);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
