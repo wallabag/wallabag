@@ -71,13 +71,8 @@ services:
             - "@wallabag_core.guzzle.cookie_jar"
 
     wallabag_core.guzzle.cookie_jar:
-        class: GuzzleHttp\Cookie\CookieJar
-        factory: ["@wallabag_core.guzzle.cookie_jar_factory", createCookieJar]
-
-    wallabag_core.guzzle.cookie_jar_factory:
-        class: Wallabag\CoreBundle\Helper\ContentProxy\FileCookieJarFactory
-        arguments:
-            - "%kernel.cache_dir%/cookiejar.json"
+        class: GuzzleHttp\Cookie\FileCookieJar
+        arguments: ["%kernel.cache_dir%/cookiejar.json"]
 
     wallabag_core.content_proxy:
         class: Wallabag\CoreBundle\Helper\ContentProxy
