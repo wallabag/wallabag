@@ -4,7 +4,7 @@ namespace Wallabag\UserBundle\Mailer;
 
 use Scheb\TwoFactorBundle\Model\Email\TwoFactorInterface;
 use Scheb\TwoFactorBundle\Mailer\AuthCodeMailerInterface;
-use Symfony\Component\Translation\DataCollectorTranslator;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * Custom mailer for TwoFactorBundle email.
@@ -22,7 +22,7 @@ class AuthCodeMailer implements AuthCodeMailerInterface
     /**
      * Translator for email content.
      *
-     * @var DataCollectorTranslator
+     * @var TranslatorInterface
      */
     private $translator;
 
@@ -50,13 +50,13 @@ class AuthCodeMailer implements AuthCodeMailerInterface
     /**
      * Initialize the auth code mailer with the SwiftMailer object.
      *
-     * @param \Swift_Mailer           $mailer
-     * @param DataCollectorTranslator $translator
-     * @param string                  $senderEmail
-     * @param string                  $senderName
-     * @param string                  $supportUrl
+     * @param \Swift_Mailer       $mailer
+     * @param TranslatorInterface $translator
+     * @param string              $senderEmail
+     * @param string              $senderName
+     * @param string              $supportUrl
      */
-    public function __construct(\Swift_Mailer $mailer, DataCollectorTranslator $translator, $senderEmail, $senderName, $supportUrl)
+    public function __construct(\Swift_Mailer $mailer, TranslatorInterface $translator, $senderEmail, $senderName, $supportUrl)
     {
         $this->mailer = $mailer;
         $this->translator = $translator;

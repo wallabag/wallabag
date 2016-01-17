@@ -255,7 +255,7 @@ class EntryRepository extends EntityRepository
      *
      * @param int $userId
      *
-     * @return integer
+     * @return int
      */
     public function countAllEntriesByUsername($userId)
     {

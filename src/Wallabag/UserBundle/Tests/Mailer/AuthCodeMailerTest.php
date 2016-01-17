@@ -6,7 +6,6 @@ use Wallabag\UserBundle\Entity\User;
 use Wallabag\UserBundle\Mailer\AuthCodeMailer;
 use Symfony\Component\Translation\Translator;
 use Symfony\Component\Translation\Loader\ArrayLoader;
-use Symfony\Component\Translation\DataCollectorTranslator;
 
 /**
  * @see https://www.pmg.com/blog/integration-testing-swift-mailer/
@@ -28,7 +27,7 @@ class AuthCodeMailerTest extends \PHPUnit_Framework_TestCase
 {
     protected $mailer;
     protected $spool;
-    protected $dataCollector;
+    protected $translator;
 
     protected function setUp()
     {
@@ -39,14 +38,12 @@ class AuthCodeMailerTest extends \PHPUnit_Framework_TestCase
         );
         $this->mailer = new \Swift_Mailer($transport);
 
-        $translator = new Translator('en');
-        $translator->addLoader('array', new ArrayLoader());
-        $translator->addResource('array', array(
+        $this->translator = new Translator('en');
+        $this->translator->addLoader('array', new ArrayLoader());
+        $this->translator->addResource('array', array(
             'auth_code.mailer.subject' => 'auth_code subject',
             'auth_code.mailer.body' => 'Hi %user%, here is the code: %code% and the support: %support%',
         ), 'en', 'wallabag_user');
-
-        $this->dataCollector = new DataCollectorTranslator($translator);
     }
 
     public function testSendEmail()
@@ -59,7 +56,7 @@ class AuthCodeMailerTest extends \PHPUnit_Framework_TestCase
 
         $authCodeMailer = new AuthCodeMailer(
             $this->mailer,
-            $this->dataCollector,
+            $this->translator,
             'nobody@test.io',
             'wallabag test',
             'http://0.0.0.0'
