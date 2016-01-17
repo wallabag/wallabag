@@ -50,12 +50,12 @@ class GrabySiteConfigBuilder implements SiteConfigBuilder
         $config = $this->grabyConfigBuilder->buildForHost($host);
         $parameters = [
             'host' => $host,
-            'requiresLogin' => $config->requires_login,
-            'loginUri' => $config->login_uri,
-            'usernameField' => $config->login_username_field,
-            'passwordField' => $config->login_password_field,
+            'requiresLogin' => $config->requires_login ?: false,
+            'loginUri' => $config->login_uri ?: null,
+            'usernameField' => $config->login_username_field ?: null,
+            'passwordField' => $config->login_password_field ?: null,
             'extraFields' => is_array($config->login_extra_fields) ? $config->login_extra_fields : [],
-            'notLoggedInXpath' => $config->not_logged_in_xpath,
+            'notLoggedInXpath' => $config->not_logged_in_xpath ?: null,
         ];
 
         if (isset($this->credentials[$host])) {
