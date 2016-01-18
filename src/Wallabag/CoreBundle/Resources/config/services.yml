@@ -49,6 +49,9 @@ services:
 
     wallabag_core.graby.config_builder:
         class: Graby\SiteConfig\ConfigBuilder
+        arguments:
+            - {}
+            - "@logger"
 
     wallabag_core.guzzle.http_client:
         class: GuzzleHttp\ClientInterface
