@@ -7,3 +7,4 @@ services:
             - "%scheb_two_factor.email.sender_email%"
             - "%scheb_two_factor.email.sender_name%"
             - "%wallabag_support_url%"
+            - "%wallabag_url%"

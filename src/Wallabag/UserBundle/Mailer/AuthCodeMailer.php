@@ -47,6 +47,13 @@ class AuthCodeMailer implements AuthCodeMailerInterface
     private $supportUrl;
 
     /**
+     * Url for the wallabag instance.
+     *
+     * @var string
+     */
+    private $wallabagUrl;
+
+    /**
      * Initialize the auth code mailer with the SwiftMailer object.
      *
      * @param \Swift_Mailer     $mailer
@@ -54,14 +61,16 @@ class AuthCodeMailer implements AuthCodeMailerInterface
      * @param string            $senderEmail
      * @param string            $senderName
      * @param string            $supportUrl
+     * @param string            $wallabagUrl
      */
-    public function __construct(\Swift_Mailer $mailer, \Twig_Environment $twig, $senderEmail, $senderName, $supportUrl)
+    public function __construct(\Swift_Mailer $mailer, \Twig_Environment $twig, $senderEmail, $senderName, $supportUrl, $wallabagUrl)
     {
         $this->mailer = $mailer;
         $this->twig = $twig;
         $this->senderEmail = $senderEmail;
         $this->senderName = $senderName;
         $this->supportUrl = $supportUrl;
+        $this->wallabagUrl = $wallabagUrl;
     }
 
     /**
@@ -77,12 +86,13 @@ class AuthCodeMailer implements AuthCodeMailerInterface
         $bodyHtml = $template->renderBlock('body_html', [
             'user' => $user->getName(),
             'code' => $user->getEmailAuthCode(),
-            'support' => $this->supportUrl,
+            'support_url' => $this->supportUrl,
+            'wallabag_url' => $this->wallabagUrl,
         ]);
         $bodyText = $template->renderBlock('body_text', [
             'user' => $user->getName(),
             'code' => $user->getEmailAuthCode(),
-            'support' => $this->supportUrl,
+            'support_url' => $this->supportUrl,
         ]);
 
         $message = new \Swift_Message();
