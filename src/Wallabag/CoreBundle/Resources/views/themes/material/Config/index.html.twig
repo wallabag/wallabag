@@ -11,14 +11,14 @@
                 <div class="row">
                     <div class="div_tabs col s12">
                         <ul class="tabs">
-                        <li class="tab col s3"><a class="active" href="#set1">{% trans %}Settings{% endtrans %}</a></li>
-                        <li class="tab col s3"><a href="#set2">{% trans %}RSS{% endtrans %}</a></li>
-                        <li class="tab col s3"><a href="#set3">{% trans %}User information{% endtrans %}</a></li>
-                        <li class="tab col s3"><a href="#set4">{% trans %}Password{% endtrans %}</a></li>
-                        <li class="tab col s3"><a href="#set5">{% trans %}Tagging rules{% endtrans %}</a></li>
-                        {% if is_granted('ROLE_SUPER_ADMIN') %}
-                        <li class="tab col s3"><a href="#set6">{% trans %}Add a user{% endtrans %}</a></li>
-                        {% endif %}
+                            <li class="tab col s3"><a class="active" href="#set1">{% trans %}Settings{% endtrans %}</a></li>
+                            <li class="tab col s3"><a href="#set2">{% trans %}RSS{% endtrans %}</a></li>
+                            <li class="tab col s3"><a href="#set3">{% trans %}User information{% endtrans %}</a></li>
+                            <li class="tab col s3"><a href="#set4">{% trans %}Password{% endtrans %}</a></li>
+                            <li class="tab col s3"><a href="#set5">{% trans %}Tagging rules{% endtrans %}</a></li>
+                            {% if is_granted('ROLE_SUPER_ADMIN') %}
+                            <li class="tab col s3"><a href="#set6">{% trans %}Add a user{% endtrans %}</a></li>
+                            {% endif %}
                         </ul>
                     </div>
 
