@@ -564,7 +564,7 @@ img.preview {
   height: 100%;
   width: 100%;
   margin: 0;
-  margin-top: -30% !important; /* TODO: get rid of !important here; overridden by .messages selector */
+  margin-top: -30% !important;
   padding: 2em;
   display: none;
   border-left: 1px #EEE solid;

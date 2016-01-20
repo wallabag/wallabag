@@ -31,11 +31,13 @@ parameters:
     mailer_host:       127.0.0.1
     mailer_user:       ~
     mailer_password:   ~
+    switftmailer_username: null
+    switftmailer_password: null
 
     locale:            en
 
     # A secret key that's used to generate certain security-related tokens
-    secret:            ThisTokenIsNotSoSecretChangeIt
+    secret:            ovmpmAWXRCabNlMgzlzFXDYmCFfzGv
 
     # wallabag misc
     app.version: 2.0.0-alpha

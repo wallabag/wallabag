@@ -9,6 +9,7 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 
@@ -73,7 +74,6 @@ class WallabagRestController extends FOSRestController
         $order = $request->query->get('order', 'desc');
         $page = (int) $request->query->get('page', 1);
         $perPage = (int) $request->query->get('perPage', 30);
-        $tags = $request->query->get('tags', []);
 
         $pager = $this->getDoctrine()
             ->getRepository('WallabagCoreBundle:Entry')

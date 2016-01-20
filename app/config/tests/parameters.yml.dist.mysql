@@ -21,6 +21,8 @@ parameters:
     mailer_host:       127.0.0.1
     mailer_user:       ~
     mailer_password:   ~
+    switftmailer_username: null
+    switftmailer_password: null
 
     locale:            en
 
