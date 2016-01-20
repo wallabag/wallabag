@@ -11,7 +11,7 @@
 
     <target name="composer" description="Install deps using Composer">
         <exec executable="composer">
-            <arg value="install"/>
+            <arg value="up"/>
             <arg value="--no-interaction"/>
             <arg value="--no-progress"/>
         </exec>
