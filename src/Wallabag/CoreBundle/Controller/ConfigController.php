@@ -133,10 +133,10 @@ class ConfigController extends Controller
             $userManager->updateUser($newUser, true);
 
             $config = new Config($newUser);
-            $config->setTheme($this->container->getParameter('theme'));
-            $config->setItemsPerPage($this->container->getParameter('items_on_page'));
-            $config->setRssLimit($this->container->getParameter('rss_limit'));
-            $config->setLanguage($this->container->getParameter('language'));
+            $config->setTheme($this->container->getParameter('wallabag_core.theme'));
+            $config->setItemsPerPage($this->container->getParameter('wallabag_core.items_on_page'));
+            $config->setRssLimit($this->container->getParameter('wallabag_core.rss_limit'));
+            $config->setLanguage($this->container->getParameter('wallabag_core.language'));
 
             $em->persist($config);
 

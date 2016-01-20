@@ -33,6 +33,10 @@ wallabag_core:
         fr: 'Français'
         de: 'Deutsch'
         tr: 'Türkçe'
+    items_on_page: 12
+    theme: material
+    language: en
+    rss_limit: 50
 
 wallabag_import:
     allow_mimetypes: ['application/octet-stream', 'application/json', 'text/plain']

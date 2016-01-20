@@ -205,10 +205,10 @@ class InstallCommand extends ContainerAwareCommand
         $em->persist($user);
 
         $config = new Config($user);
-        $config->setTheme($this->getContainer()->getParameter('theme'));
-        $config->setItemsPerPage($this->getContainer()->getParameter('items_on_page'));
-        $config->setRssLimit($this->getContainer()->getParameter('rss_limit'));
-        $config->setLanguage($this->getContainer()->getParameter('language'));
+        $config->setTheme($this->getContainer()->getParameter('wallabag_core.theme'));
+        $config->setItemsPerPage($this->getContainer()->getParameter('wallabag_core.items_on_page'));
+        $config->setRssLimit($this->getContainer()->getParameter('wallabag_core.rss_limit'));
+        $config->setLanguage($this->getContainer()->getParameter('wallabag_core.language'));
 
         $em->persist($config);
 

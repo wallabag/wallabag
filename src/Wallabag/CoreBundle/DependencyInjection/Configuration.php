@@ -17,6 +17,18 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('languages')
                     ->prototype('scalar')->end()
                 ->end()
+                ->integerNode('items_on_page')
+                    ->defaultValue(12)
+                ->end()
+                ->scalarNode('theme')
+                    ->defaultValue('material')
+                ->end()
+                ->scalarNode('language')
+                    ->defaultValue('en')
+                ->end()
+                ->integerNode('rss_limit')
+                    ->defaultValue(50)
+                ->end()
             ->end()
         ;
 

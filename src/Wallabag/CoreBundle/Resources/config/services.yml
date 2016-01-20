@@ -76,10 +76,10 @@ services:
         class: Wallabag\CoreBundle\EventListener\RegistrationConfirmedListener
         arguments:
             - "@doctrine.orm.entity_manager"
-            - %theme%
-            - %items_on_page%
-            - %rss_limit%
-            - %language%
+            - %wallabag_core.theme%
+            - %wallabag_core.items_on_page%
+            - %wallabag_core.rss_limit%
+            - %wallabag_core.language%
         tags:
             - { name: kernel.event_subscriber }
 

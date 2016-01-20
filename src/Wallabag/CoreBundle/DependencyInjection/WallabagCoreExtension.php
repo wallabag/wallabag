@@ -13,7 +13,12 @@ class WallabagCoreExtension extends Extension
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
+
         $container->setParameter('wallabag_core.languages', $config['languages']);
+        $container->setParameter('wallabag_core.items_on_page', $config['items_on_page']);
+        $container->setParameter('wallabag_core.theme', $config['theme']);
+        $container->setParameter('wallabag_core.language', $config['language']);
+        $container->setParameter('wallabag_core.rss_limit', $config['rss_limit']);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
