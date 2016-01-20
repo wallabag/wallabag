@@ -81,7 +81,7 @@ class EntryController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function addEntryViaBookmarklet(Request $request)
+    public function addEntryViaBookmarkletAction(Request $request)
     {
         $entry = new Entry($this->getUser());
         $entry->setUrl($request->get('url'));
