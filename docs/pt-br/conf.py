@@ -10,7 +10,7 @@ extensions = []
 templates_path = ['_templates']
 source_suffix = '.rst'
 master_doc = 'index'
-project = u'wallabag'
+project = u'wallabag-pt'
 copyright = u'2013-2016, Nicolas Lœuillet - MIT Licence'
 version = '2.0.0'
 release = version
@@ -18,18 +18,18 @@ exclude_patterns = ['_build']
 pygments_style = 'sphinx'
 html_theme = 'default'
 html_static_path = ['_static']
-htmlhelp_basename = 'wallabagdoc'
-latex_elements = {
+htmlhelp_basename = 'wallabagfrdoc'
 
+latex_elements = {
 }
 
 latex_documents = [
-  ('index', 'wallabag.tex', u'wallabag Documentation',
+  ('index', 'wallabag-pt.tex', u'wallabag Documentation',
    u'Nicolas Lœuillet', 'manual'),
 ]
 
 man_pages = [
-    ('index', 'wallabag', u'wallabag Documentation',
+    ('index', 'wallabagpt', u'wallabag Documentation',
      [u'Nicolas Lœuillet'], 1)
 ]
 
