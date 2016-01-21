@@ -81,6 +81,7 @@ class InstallCommandTest extends WallabagCoreTestCase
 
         $this->assertContains('Step 1 of 4. Checking system requirements.', $tester->getDisplay());
         $this->assertContains('Step 2 of 4. Setting up database.', $tester->getDisplay());
+        $this->assertContains('Droping database, creating database and schema, clearing the cache', $tester->getDisplay());
         $this->assertContains('Step 3 of 4. Administration setup.', $tester->getDisplay());
         $this->assertContains('Step 4 of 4. Installing assets.', $tester->getDisplay());
 
