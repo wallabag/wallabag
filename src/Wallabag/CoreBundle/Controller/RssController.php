@@ -84,7 +84,7 @@ class RssController extends Controller
         $pagerAdapter = new DoctrineORMAdapter($qb->getQuery());
         $entries = new Pagerfanta($pagerAdapter);
 
-        $perPage = $user->getConfig()->getRssLimit() ?: $this->container->getParameter('rss_limit');
+        $perPage = $user->getConfig()->getRssLimit() ?: $this->getParameter('wallabag_core.rss_limit');
         $entries->setMaxPerPage($perPage);
 
         return $this->render('WallabagCoreBundle:Entry:entries.xml.twig', array(
