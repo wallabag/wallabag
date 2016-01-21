@@ -39,12 +39,13 @@ branches:
         - v2
 
 before_script:
-    - composer self-update
+    - if [[ $TRAVIS_PHP_VERSION != hhvm ]]; then echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini; fi;
+    - if [[ $TRAVIS_PHP_VERSION != hhvm ]]; then phpenv config-rm xdebug.ini; fi;
+    - composer self-update --no-progress
     - if [ -n "$GH_TOKEN" ]; then composer config github-oauth.github.com ${GH_TOKEN}; fi;
-    # disable xdebug since we don't use code-coverage for now
-    - if [[ $TRAVIS_PHP_VERSION != '5.6' && $TRAVIS_PHP_VERSION != 'hhvm' && $TRAVIS_PHP_VERSION != '7.0' ]]; then phpenv config-rm xdebug.ini; fi
     - if [[ "$DB" = "pgsql" ]]; then psql -c 'create database wallabag;' -U postgres; fi;
 
 script:
+    - travis_wait composer update --no-interaction --no-progress
     - ant prepare-$DB
     - bin/phpunit -v

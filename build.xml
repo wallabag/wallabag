@@ -1,20 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="wallabag" default="build">
-    <target name="build" depends="clean,composer,prepare,phpunit"/>
-    <target name="prepare-mysql" depends="clean,composer,db_mysql,prepare"/>
-    <target name="prepare-sqlite" depends="clean,composer,db_sqlite,prepare"/>
-    <target name="prepare-pgsql" depends="clean,composer,db_pgsql,prepare"/>
+    <target name="build" depends="clean,prepare,phpunit"/>
+    <target name="prepare-mysql" depends="clean,db_mysql,prepare"/>
+    <target name="prepare-sqlite" depends="clean,db_sqlite,prepare"/>
+    <target name="prepare-pgsql" depends="clean,db_pgsql,prepare"/>
 
     <target name="clean" description="Cleanup build artifacts">
         <delete dir="${basedir}/var/cache"/>
-    </target>
-
-    <target name="composer" description="Install deps using Composer">
-        <exec executable="composer">
-            <arg value="up"/>
-            <arg value="--no-interaction"/>
-            <arg value="--no-progress"/>
-        </exec>
     </target>
 
     <target name="prepare" description="Prepare for build">
