@@ -4,8 +4,6 @@ namespace Wallabag\UserBundle\Tests\Mailer;
 
 use Wallabag\UserBundle\Entity\User;
 use Wallabag\UserBundle\Mailer\AuthCodeMailer;
-use Symfony\Component\Translation\Translator;
-use Symfony\Component\Translation\Loader\ArrayLoader;
 
 /**
  * @see https://www.pmg.com/blog/integration-testing-swift-mailer/
@@ -27,7 +25,7 @@ class AuthCodeMailerTest extends \PHPUnit_Framework_TestCase
 {
     protected $mailer;
     protected $spool;
-    protected $translator;
+    protected $twig;
 
     protected function setUp()
     {
@@ -38,12 +36,13 @@ class AuthCodeMailerTest extends \PHPUnit_Framework_TestCase
         );
         $this->mailer = new \Swift_Mailer($transport);
 
-        $this->translator = new Translator('en');
-        $this->translator->addLoader('array', new ArrayLoader());
-        $this->translator->addResource('array', array(
-            'auth_code.mailer.subject' => 'auth_code subject',
-            'auth_code.mailer.body' => 'Hi %user%, here is the code: %code% and the support: %support%',
-        ), 'en', 'wallabag_user');
+        $twigTemplate = <<<TWIG
+{% block subject %}subject{% endblock %}
+{% block body_html %}html body {{ code }}{% endblock %}
+{% block body_text %}text body {{ support_url }}{% endblock %}
+TWIG;
+
+        $this->twig = new \Twig_Environment(new \Twig_Loader_Array(array('@WallabagUserBundle/Resources/views/TwoFactor/email_auth_code.html.twig' => $twigTemplate)));
     }
 
     public function testSendEmail()
@@ -56,9 +55,10 @@ class AuthCodeMailerTest extends \PHPUnit_Framework_TestCase
 
         $authCodeMailer = new AuthCodeMailer(
             $this->mailer,
-            $this->translator,
+            $this->twig,
             'nobody@test.io',
             'wallabag test',
+            'http://0.0.0.0/support',
             'http://0.0.0.0'
         );
 
@@ -69,7 +69,8 @@ class AuthCodeMailerTest extends \PHPUnit_Framework_TestCase
         $msg = $this->spool->getMessages()[0];
         $this->assertArrayHasKey('test@wallabag.io', $msg->getTo());
         $this->assertEquals(array('nobody@test.io' => 'wallabag test'), $msg->getFrom());
-        $this->assertEquals('auth_code subject', $msg->getSubject());
-        $this->assertContains('Hi Bob, here is the code: 666666 and the support: http://0.0.0.0', $msg->toString());
+        $this->assertEquals('subject', $msg->getSubject());
+        $this->assertContains('text body http://0.0.0.0/support', $msg->toString());
+        $this->assertContains('html body 666666', $msg->toString());
     }
 }

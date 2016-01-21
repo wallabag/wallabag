@@ -1,0 +1,117 @@
+{% block subject %}
+{{ "auth_code.mailer.subject"|trans({}, 'wallabag_user') }}
+{% endblock %}
+
+{% block body_text %}
+{{ "auth_code.mailer.body.hello"|trans({'%user%': user}, 'wallabag_user') }}
+
+{{ "auth_code.mailer.body.first_para"|trans({}, 'wallabag_user') }}
+{{ "auth_code.mailer.body.second_para"|trans({}, 'wallabag_user') }} {{ code }}
+
+{{ "auth_code.mailer.body.support"|trans({}, 'wallabag_user') }} {{ support_url }}
+
+{{ "auth_code.mailer.body.signature"|trans({}, 'wallabag_user') }}
+{% endblock %}
+
+{% block body_html %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>{{ "auth_code.mailer.subject"|trans({}, 'wallabag_user') }}</title>
+    <style type="text/css">
+        #outlook a {padding:0;}
+        body{width:100% !important; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; margin:0; padding:0; font-family: Helvetica, Arial, sans-serif; background: #c6d4e0;}
+        .ExternalClass {width:100%;}
+        .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {line-height: 100%;}
+        #backgroundTable {margin:0; padding:0; width:100% !important; line-height: 100% !important; background: #c6d4e0;}
+        img {outline:none; text-decoration:none; -ms-interpolation-mode: bicubic;}
+        a img {border:none;}
+        .image_fix {display:block;}
+        p {margin: 1em 0;}
+        h1, h2, h3, h4, h5, h6 {color: black !important;}
+        h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {color: blue !important;}
+        h1 a:active, h2 a:active,  h3 a:active, h4 a:active, h5 a:active, h6 a:active {
+            color: red !important;
+        }
+        h1 a:visited, h2 a:visited,  h3 a:visited, h4 a:visited, h5 a:visited, h6 a:visited {
+            color: purple !important;
+        }
+        table td {border-collapse: collapse;}
+        table { border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; }
+        a {color: #373737;}
+
+        #card {
+            background: #ffffff;
+            border: 1px solid #c5c5c5;
+            width: 89%;
+            margin: 5%;
+        }
+        #cell_desc h1, h5 {
+            display: block;
+            margin: 0;
+        }
+        #cell_desc h1 {
+            line-height: 35px;
+            margin-bottom: 10px;
+        }
+        #bg {background: #f2f2f2}
+
+    </style>
+</head>
+<body>
+
+    <!-- hidden text for preview -->
+    <div style="display:none;font-size:1px;color:#333333;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;">
+        {{ "auth_code.mailer.body.hello"|trans({'%user%': user}, 'wallabag_user') }}
+    </div>
+
+    <table cellpadding="0" cellspacing="0" border="0" id="backgroundTable">
+        <tr>
+            <td>
+
+                <table cellpadding="0" cellspacing="0" border="0" align="center" id="card">
+                    <tr>
+                        <td style="padding: 20px;" width="96px" valign="top"><img class="image_fix" src="{{ wallabag_url }}/themes/material/img/logo-other_themes.png" alt="logo" title="{{ wallabag_url }}" style="width: 96px; height: 96px;" /></td>
+                        <td style="padding: 20px; padding-left: 0;" valign="top" id="cell_desc">
+                            <h1>wallabag</h1>
+                            <h5>{% trans %}on{% endtrans %} {{ wallabag_url }}</h5>
+                        </td>
+                    </tr>
+                    <tr><td colspan="2" style="padding: 0;"><div style="height: 0; border-top: 1px solid #c5c5c5;">&nbsp;</div></td></tr>
+                    <tr id="bg">
+                        <td style="padding: 20px;" colspan="2" valign="top">
+
+                            <p><b>{{ "auth_code.mailer.body.hello"|trans({'%user%': user}, 'wallabag_user') }}</b></p>
+
+                            <p>{{ "auth_code.mailer.body.first_para"|trans({}, 'wallabag_user') }}</p>
+                            <p>{{ "auth_code.mailer.body.second_para"|trans({}, 'wallabag_user') }} <b>{{ code }}</b></p>
+
+                            <p>{{ "auth_code.mailer.body.support"|trans({}, 'wallabag_user') }} <a href="{{ support_url }}">{{ support_url }}</a></p>
+                            <p>{{ "auth_code.mailer.body.signature"|trans({}, 'wallabag_user') }}</p>
+                        </td>
+                    </tr>
+                    <tr><td colspan="2" style="padding: 0;"><div style="height: 0; border-top: 1px solid #c5c5c5;">&nbsp;</div></td></tr>
+                    <tr>
+                        <td colspan="2">
+
+                            <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                <tr>
+                                    <td valign="top" style="padding: 20px; text-align: center"><a href="{{ wallabag_url }}">{{ wallabag_url }}</a></td>
+                                    <td valign="top" style="padding: 20px; text-align: center">Powered by <a href="https://www.wallabag.org/">wallabag</a></td>
+                                </tr>
+                            </table>
+
+                        </td>
+                    </tr>
+                </table>
+
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>
+{% endblock %}
