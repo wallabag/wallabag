@@ -8,3 +8,10 @@ services:
             - "%scheb_two_factor.email.sender_name%"
             - "%wallabag_support_url%"
             - "%wallabag_url%"
+
+    wallabag_user.password_resetting:
+        class: Wallabag\UserBundle\EventListener\PasswordResettingListener
+        arguments:
+            - "@router"
+        tags:
+            - { name: kernel.event_subscriber }
