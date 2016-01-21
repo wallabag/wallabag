@@ -72,7 +72,7 @@ class LoadSettingData extends AbstractFixture implements OrderedFixtureInterface
             ],
             [
                 'name' => 'pocket_consumer_key',
-                'value' => NULL,
+                'value' => null,
                 'section' => 'import',
             ],
             [

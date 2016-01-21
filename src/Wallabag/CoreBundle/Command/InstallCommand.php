@@ -274,7 +274,7 @@ class InstallCommand extends ContainerAwareCommand
             ],
             [
                 'name' => 'pocket_consumer_key',
-                'value' => NULL,
+                'value' => null,
                 'section' => 'import',
             ],
             [
