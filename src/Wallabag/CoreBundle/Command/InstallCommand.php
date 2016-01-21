@@ -12,6 +12,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 use Wallabag\CoreBundle\Entity\Config;
+use Craue\ConfigBundle\Entity\Setting;
 
 class InstallCommand extends ContainerAwareCommand
 {
@@ -211,6 +212,95 @@ class InstallCommand extends ContainerAwareCommand
         $config->setLanguage($this->getContainer()->getParameter('wallabag_core.language'));
 
         $em->persist($config);
+
+        // cleanup before insert new stuff
+        $em->createQuery('DELETE FROM CraueConfigBundle:Setting')->execute();
+
+        $settings = [
+            [
+                'name' => 'download_pictures',
+                'value' => '1',
+                'section' => 'entry',
+            ],
+            [
+                'name' => 'carrot',
+                'value' => '1',
+                'section' => 'entry',
+            ],
+            [
+                'name' => 'share_diaspora',
+                'value' => '1',
+                'section' => 'entry',
+            ],
+            [
+                'name' => 'diaspora_url',
+                'value' => 'http://diasporapod.com',
+                'section' => 'entry',
+            ],
+            [
+                'name' => 'share_shaarli',
+                'value' => '1',
+                'section' => 'entry',
+            ],
+            [
+                'name' => 'shaarli_url',
+                'value' => 'http://myshaarli.com',
+                'section' => 'entry',
+            ],
+            [
+                'name' => 'share_mail',
+                'value' => '1',
+                'section' => 'entry',
+            ],
+            [
+                'name' => 'share_twitter',
+                'value' => '1',
+                'section' => 'entry',
+            ],
+            [
+                'name' => 'export_epub',
+                'value' => '1',
+                'section' => 'export',
+            ],
+            [
+                'name' => 'export_mobi',
+                'value' => '1',
+                'section' => 'export',
+            ],
+            [
+                'name' => 'export_pdf',
+                'value' => '1',
+                'section' => 'export',
+            ],
+            [
+                'name' => 'pocket_consumer_key',
+                'value' => NULL,
+                'section' => 'import',
+            ],
+            [
+                'name' => 'show_printlink',
+                'value' => '1',
+                'section' => 'entry',
+            ],
+            [
+                'name' => 'wallabag_support_url',
+                'value' => 'https://www.wallabag.org/pages/support.html',
+                'section' => 'misc',
+            ],
+            [
+                'name' => 'wallabag_url',
+                'value' => 'http://v2.wallabag.org',
+                'section' => 'misc',
+            ],
+        ];
+
+        foreach ($settings as $setting) {
+            $newSetting = new Setting();
+            $newSetting->setName($setting['name']);
+            $newSetting->setValue($setting['value']);
+            $newSetting->setSection($setting['section']);
+            $em->persist($newSetting);
+        }
 
         $em->flush();
 
