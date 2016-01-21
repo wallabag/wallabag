@@ -28,7 +28,7 @@ class TagAllCommand extends ContainerAwareCommand
         try {
             $user = $this->getUser($input->getArgument('username'));
         } catch (NoResultException $e) {
-            $output->writeln(sprintf('<error>User %s not found.</error>', $input->getArgument('username')));
+            $output->writeln(sprintf('<error>User "%s" not found.</error>', $input->getArgument('username')));
 
             return 1;
         }
