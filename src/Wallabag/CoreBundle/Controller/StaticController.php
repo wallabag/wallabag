@@ -25,7 +25,10 @@ class StaticController extends Controller
     {
         return $this->render(
             'WallabagCoreBundle:Static:about.html.twig',
-            array()
+            array(
+                'version' => $this->getParameter('wallabag_core.version'),
+                'paypal_url' => $this->getParameter('wallabag_core.paypal_url'),
+            )
         );
     }
 

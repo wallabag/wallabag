@@ -51,6 +51,9 @@
             </div>
         </li>
         <li><a href="{{ path('config') }}">{% trans %}config{% endtrans %}</a></li>
+        {% if is_granted('ROLE_SUPER_ADMIN') %}
+            <li><a href="{{ path('craue_config_settings_modify') }}">{% trans %}internal settings{% endtrans %}</a></li>
+        {% endif %}
         <li><a href="{{ path('import') }}">{% trans %}import{% endtrans %}</a></li>
         <li><a href="{{ path('howto') }}">{% trans %}howto{% endtrans %}</a></li>
         <li><a href="{{ path('about') }}">{% trans %}about{% endtrans %}</a></li>

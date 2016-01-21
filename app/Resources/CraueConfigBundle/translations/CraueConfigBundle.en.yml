@@ -1,0 +1,15 @@
+download_pictures: Download pictures on your server
+carrot: Enable share to Carrot
+diaspora_url: Diaspora URL, if the service is enabled
+export_epub: Enable ePub export
+export_mobi: Enable .mobi export
+export_pdf: Enable PDF export
+pocket_consumer_key: Consumer key for Pocket to import contents (https://getpocket.com/developer/docs/authentication)
+shaarli_url: URL de Shaarli, if the service is enabled
+share_diaspora: Enable share to Diaspora
+share_mail: Enable share by email
+share_shaarli: Enable share to Shaarli
+share_twitter: Enable share to Twitter
+show_printlink: Display a link to print content
+wallabag_support_url: Support URL for wallabag
+wallabag_url: URL of *your* wallabag instance

@@ -22,7 +22,9 @@ rest :
 
 homepage:
     path: "/{page}"
-    defaults: { _controller: WallabagCoreBundle:Entry:showUnread, page : 1 }
+    defaults:
+        _controller: WallabagCoreBundle:Entry:showUnread
+        page : 1
     requirements:
         page: \d+
 
@@ -31,3 +33,8 @@ fos_user:
 
 fos_oauth_server_token:
     resource: "@FOSOAuthServerBundle/Resources/config/routing/token.xml"
+
+craue_config_settings_modify:
+    path: /settings
+    defaults:
+        _controller: CraueConfigBundle:Settings:modify

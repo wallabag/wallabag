@@ -11,6 +11,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Helper\ContentProxy;
+use Craue\ConfigBundle\Util\Config;
 
 class PocketImport implements ImportInterface
 {
@@ -25,12 +26,12 @@ class PocketImport implements ImportInterface
     protected $accessToken;
     private $translator;
 
-    public function __construct(TokenStorageInterface $tokenStorage, EntityManager $em, ContentProxy $contentProxy, $consumerKey)
+    public function __construct(TokenStorageInterface $tokenStorage, EntityManager $em, ContentProxy $contentProxy, Config $craueConfig)
     {
         $this->user = $tokenStorage->getToken()->getUser();
         $this->em = $em;
         $this->contentProxy = $contentProxy;
-        $this->consumerKey = $consumerKey;
+        $this->consumerKey = $craueConfig->get('pocket_consumer_key');
         $this->logger = new NullLogger();
     }
 

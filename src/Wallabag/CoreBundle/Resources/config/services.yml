@@ -3,7 +3,7 @@ services:
         class: Wallabag\CoreBundle\Helper\DetectActiveTheme
         arguments:
             - "@security.token_storage"
-            - %theme% # default theme from parameters.yml
+            - %wallabag_core.theme%
 
     # custom form type
     wallabag_core.form.type.config:
@@ -86,7 +86,7 @@ services:
     wallabag_core.helper.entries_export:
         class: Wallabag\CoreBundle\Helper\EntriesExport
         arguments:
-            - %wallabag_url%
+            - "@craue_config"
             - src/Wallabag/CoreBundle/Resources/public/themes/_global/img/appicon/apple-touch-icon-152.png
 
     wallabag.operator.array.matches:

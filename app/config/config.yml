@@ -28,6 +28,8 @@ framework:
     assets: ~
 
 wallabag_core:
+    version: 2.0.0-alpha.1
+    paypal_url: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9UBA65LG3FX9Y&lc=gb"
     languages:
         en: 'English'
         fr: 'Français'
@@ -46,28 +48,6 @@ wallabag_import:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
-    globals:
-        share_twitter: %share_twitter%
-        share_mail: %share_mail%
-        share_shaarli: %share_shaarli%
-        shaarli_url: %shaarli_url%
-        share_diaspora: %share_diaspora%
-        diaspora_url: %diaspora_url%
-        flattr: %flattr%
-        flattrable: 1
-        flattred: 2
-        carrot: %carrot%
-        show_printlink: %show_printlink%
-        export_epub: %export_epub%
-        export_mobi: %export_mobi%
-        export_pdf: %export_pdf%
-        export_csv: %export_csv%
-        export_json: %export_json%
-        export_txt: %export_txt%
-        export_xml: %export_xml%
-        version: %app.version%
-        twofactor_auth: %twofactor_auth%
-        paypal_url: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9UBA65LG3FX9Y&lc=gb"
     form_themes:
         - "LexikFormFilterBundle:Form:form_div_layout.html.twig"
 

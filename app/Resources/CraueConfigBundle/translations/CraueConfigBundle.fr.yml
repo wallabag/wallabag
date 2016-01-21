@@ -1,0 +1,15 @@
+download_pictures: Télécharger les images sur le serveur
+carrot: Activer le partage vers Carrot
+diaspora_url: URL de Diaspora, si le service Diaspora est activé
+export_epub: Activer l'export ePub
+export_mobi: Activer l'export .mobi
+export_pdf: Activer l'export PDF
+pocket_consumer_key: Clé d'authentification Pocket pour importer les données (https://getpocket.com/developer/docs/authentication)
+shaarli_url: URL de Shaarli, si le service Diaspora est activé
+share_diaspora: Activer le partage vers Diaspora
+share_mail: Activer le partage par email
+share_shaarli: Activer le partage vers Shaarli
+share_twitter: Activer le partage vers Twitter
+show_printlink: Afficher un lien pour imprimer
+wallabag_support_url: URL de support de wallabag
+wallabag_url: URL de *votre* instance de wallabag

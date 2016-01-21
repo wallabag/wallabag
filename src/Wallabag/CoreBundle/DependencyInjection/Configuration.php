@@ -29,6 +29,10 @@ class Configuration implements ConfigurationInterface
                 ->integerNode('rss_limit')
                     ->defaultValue(50)
                 ->end()
+                ->scalarNode('version')
+                ->end()
+                ->scalarNode('paypal_url')
+                ->end()
             ->end()
         ;
 

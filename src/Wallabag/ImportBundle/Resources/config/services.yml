@@ -17,7 +17,7 @@ services:
             - "@security.token_storage"
             - "@doctrine.orm.entity_manager"
             - "@wallabag_core.content_proxy"
-            - %pocket_consumer_key%
+            - "@craue_config"
         calls:
             - [ setClient, [ "@wallabag_import.pocket.client" ] ]
             - [ setLogger, [ "@logger" ]]

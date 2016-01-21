@@ -58,3 +58,4 @@ security:
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: /(unread|starred|archive).xml$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/, roles: ROLE_USER }
+        - { path: ^/settings, roles: ROLE_SUPER_ADMIN }

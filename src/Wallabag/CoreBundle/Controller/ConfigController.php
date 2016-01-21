@@ -163,6 +163,7 @@ class ConfigController extends Controller
                 'username' => $user->getUsername(),
                 'token' => $config->getRssToken(),
             ),
+            'twofactor_auth' => $this->getParameter('twofactor_auth'),
         ));
     }
 

@@ -55,11 +55,20 @@ class PocketImportTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
+        $config = $this->getMockBuilder('Craue\ConfigBundle\Util\Config')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $config->expects($this->any())
+            ->method('get')
+            ->with('pocket_consumer_key')
+            ->willReturn($consumerKey);
+
         $pocket = new PocketImportMock(
             $this->tokenStorage,
             $this->em,
             $this->contentProxy,
-            $consumerKey
+            $config
         );
 
         $this->logHandler = new TestHandler();

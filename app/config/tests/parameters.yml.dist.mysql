@@ -27,32 +27,6 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
 
-    # wallabag misc
-    app.version: 2.0.0-alpha
+    # two factor stuff
     twofactor_auth: true
     twofactor_sender: no-reply@wallabag.org
-
-    download_pictures: false # if true, pictures will be stored into data/assets for each article
-
-    # Entry view
-    share_twitter: true
-    share_mail: true
-    share_shaarli: true
-    shaarli_url: http://myshaarli.com
-    share_diaspora: true
-    diaspora_url: http://diasporapod.com
-    flattr: true
-    carrot: true
-    show_printlink: true
-    export_epub: true
-    export_mobi: true
-    export_pdf: true
-    export_csv: true
-    export_json: true
-    export_txt: true
-    export_xml: true
-    wallabag_url: http://v2.wallabag.org
-    wallabag_support_url: 'https://www.wallabag.org/pages/support.html'
-
-    # pocket import
-    pocket_consumer_key: xxxxxxxx
