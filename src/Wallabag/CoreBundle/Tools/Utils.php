@@ -7,7 +7,7 @@ class Utils
     /**
      * Generate a token used for RSS.
      *
-     * @param integer $length Length of the token
+     * @param int $length Length of the token
      *
      * @return string
      */
