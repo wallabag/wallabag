@@ -11,6 +11,7 @@ The last release at the time of writing is 2.0.0-alpha.2, from the v2 branch.
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 95b3c61... Add steps in RELEASE_PROCESS
 >>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
@@ -59,6 +60,8 @@ During this documentation, we assume the release is `release-2.0.0-beta.1`.
 <<<<<<< HEAD
 >>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
 =======
+=======
+>>>>>>> 56ef4e1... Added RELEASE_PROCESS document
 ### Steps
 - Update `wallabag.version` is up-to-date in `app/config/config.yml` if necessary
 - run composer update to make sure `composer.lock` is up-to-date
@@ -68,6 +71,7 @@ During this documentation, we assume the release is `release-2.0.0-beta.1`.
 - push the tag: `git push origin 2.0.0-alpha.3`
 - go to http://github.com/wallabag/wallabag/releases
 - find the tag that was created in the list, click on the tag. Edit the release name / description
+<<<<<<< 02f8f271d4132a3d47ad030156fd30e88f3b6d6b
 <<<<<<< bd561aeb66e1b67a8db188042fbe6d556564341d
 >>>>>>> Added RELEASE_PROCESS document
 =======
@@ -77,6 +81,14 @@ During this documentation, we assume the release is `release-2.0.0-beta.1`.
 =======
 >>>>>>> 95b3c61... Add steps in RELEASE_PROCESS
 >>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
+=======
+<<<<<<< HEAD
+>>>>>>> 56ef4e1... Added RELEASE_PROCESS document
+=======
+>>>>>>> 95b3c61... Add steps in RELEASE_PROCESS
+=======
+>>>>>>> 56ef4e1... Added RELEASE_PROCESS document
+>>>>>>> Added RELEASE_PROCESS document
 
 ### `composer.lock`
 A release tag must contain a `composer.lock` file. It sets which dependencies were available at the time a release was done,
