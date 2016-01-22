@@ -87,7 +87,7 @@ services:
         class: Wallabag\CoreBundle\Helper\EntriesExport
         arguments:
             - %wallabag_url%
-            - src/Wallabag/CoreBundle/Resources/views/themes/_global/public/img/appicon/apple-touch-icon-152.png
+            - src/Wallabag/CoreBundle/Resources/public/themes/_global/img/appicon/apple-touch-icon-152.png
 
     wallabag.operator.array.matches:
         class: Wallabag\CoreBundle\Operator\PHP\Matches
