@@ -7,20 +7,13 @@ class Utils
     /**
      * Generate a token used for RSS.
      *
+     * @param int $length Length of the token
+     *
      * @return string
      */
-    public static function generateToken()
+    public static function generateToken($length = 15)
     {
-        if (ini_get('open_basedir') === '') {
-            if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-                // alternative to /dev/urandom for Windows
-                $token = substr(base64_encode(uniqid(mt_rand(), true)), 0, 20);
-            } else {
-                $token = substr(base64_encode(file_get_contents('/dev/urandom', false, null, 0, 20)), 0, 15);
-            }
-        } else {
-            $token = substr(base64_encode(uniqid(mt_rand(), true)), 0, 20);
-        }
+        $token = substr(base64_encode(random_bytes($length)), 0, $length);
 
         // remove character which can broken the url
         return str_replace(array('+', '/'), '', $token);

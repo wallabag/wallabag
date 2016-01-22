@@ -520,18 +520,61 @@ class ConfigControllerTest extends WallabagCoreTestCase
         return array(
             array(
                 array(
-                    'rss_config[rule]' => 'unknownVar <= 3',
-                    'rss_config[tags]' => 'cool tag',
+                    'tagging_rule[rule]' => 'unknownVar <= 3',
+                    'tagging_rule[tags]' => 'cool tag',
                 ),
-                'The variable « unknownVar » does not exist.',
+                array(
+                    'The variable',
+                    'does not exist.',
+                ),
             ),
             array(
                 array(
-                    'rss_config[rule]' => 'length(domainName) <= 42',
-                    'rss_config[tags]' => 'cool tag',
+                    'tagging_rule[rule]' => 'length(domainName) <= 42',
+                    'tagging_rule[tags]' => 'cool tag',
                 ),
-                'The operator « length » does not exist.',
+                array(
+                    'The operator',
+                    'does not exist.',
+                ),
             ),
         );
+    }
+
+    /**
+     * @dataProvider dataForTaggingRuleFailed
+     */
+    public function testTaggingRuleCreationFail($data, $messages)
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/config');
+
+        $this->assertTrue($client->getResponse()->isSuccessful());
+
+        $form = $crawler->filter('button[id=tagging_rule_save]')->form();
+
+        $client->submit($form, $data);
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        foreach ($messages as $message) {
+            $this->assertContains($message, $client->getResponse()->getContent());
+        }
+    }
+
+    public function testDeletingTaggingRuleFromAnOtherUser()
+    {
+        $this->logInAs('bob');
+        $client = $this->getClient();
+
+        $rule = $client->getContainer()->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:TaggingRule')
+            ->findAll()[0];
+
+        $client->request('GET', '/tagging-rule/delete/'.$rule->getId());
+        $this->assertEquals(403, $client->getResponse()->getStatusCode());
+        $this->assertContains('You can not access this tagging ryle', $client->getResponse()->getContent());
     }
 }

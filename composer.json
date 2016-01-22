@@ -62,7 +62,8 @@
         "wallabag/php-mobi": "~1.0.0",
         "kphoen/rulerz-bundle": "~0.10",
         "guzzlehttp/guzzle": "^5.2.0",
-        "doctrine/doctrine-migrations-bundle": "^1.0"
+        "doctrine/doctrine-migrations-bundle": "^1.0",
+        "paragonie/random_compat": "~1.0"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "~2.2",

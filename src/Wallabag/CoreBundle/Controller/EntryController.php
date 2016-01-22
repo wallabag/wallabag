@@ -54,10 +54,10 @@ class EntryController extends Controller
             if (false !== $existingEntry) {
                 $this->get('session')->getFlashBag()->add(
                     'notice',
-                    'Entry already saved on '.$existingEntry['createdAt']->format('d-m-Y')
+                    'Entry already saved on '.$existingEntry->getCreatedAt()->format('d-m-Y')
                 );
 
-                return $this->redirect($this->generateUrl('view', array('id' => $existingEntry['id'])));
+                return $this->redirect($this->generateUrl('view', array('id' => $existingEntry->getId())));
             }
 
             $this->updateEntry($entry);

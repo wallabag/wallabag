@@ -125,7 +125,7 @@ class ConfigController extends Controller
         $newUser->setEnabled(true);
         $newUserForm = $this->createForm(NewUserType::class, $newUser, array(
             'validation_groups' => array('Profile'),
-            'action' => $this->generateUrl('config').'#set5',
+            'action' => $this->generateUrl('config').'#set6',
         ));
         $newUserForm->handleRequest($request);
 

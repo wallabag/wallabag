@@ -127,10 +127,35 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
 
-        $crawler = $client->followRedirect();
+        $content = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findByUrlAndUserId($this->url, $this->getLoggedInUserId());
 
-        $this->assertGreaterThan(1, $alert = $crawler->filter('h2 a')->extract(array('_text')));
-        $this->assertContains('Google', $alert[0]);
+        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
+        $this->assertEquals($this->url, $content->getUrl());
+        $this->assertContains('Google', $content->getTitle());
+    }
+
+    public function testPostNewOkUrlExist()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/new');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $form = $crawler->filter('button[type=submit]')->form();
+
+        $data = array(
+            'entry[url]' => $this->url,
+        );
+
+        $client->submit($form, $data);
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertContains('/view/', $client->getResponse()->getTargetUrl());
     }
 
     /**
