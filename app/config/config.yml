@@ -181,7 +181,9 @@ fos_user:
     registration:
         confirmation:
             enabled: true
-
+    from_email:
+        address:        %from_email%
+        sender_name:    wallabag
 fos_oauth_server:
     db_driver:           orm
     client_class:        Wallabag\ApiBundle\Entity\Client
