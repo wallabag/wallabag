@@ -56,6 +56,10 @@ twig:
         export_epub: %export_epub%
         export_mobi: %export_mobi%
         export_pdf: %export_pdf%
+        export_csv: %export_csv%
+        export_json: %export_json%
+        export_txt: %export_txt%
+        export_xml: %export_xml%
         version: %app.version%
         twofactor_auth: %twofactor_auth%
         warning_message: %warning_message%
