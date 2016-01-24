@@ -1,0 +1,226 @@
+# Login
+Keep me logged in: 'Oturumumu açık tut'
+Forgot your password?: 'Şifrenizi mi unuttunuz?'
+Login: 'Giriş Yap'
+Back to login: 'Giriş yapma ekranına geri dön'
+Send: 'Gönder'
+Register: 'Kayıt Ol'
+
+# Menu
+unread: 'Okunmayan'
+starred: 'Favoriler'
+archive: 'Arşiv'
+all: 'Hepsi'
+tags: 'Etiketler'
+config: 'Yapılandırma'
+import: 'İçe Aktar'
+howto: 'Yardım'
+logout: 'Çıkış Yap'
+Filtered: 'Filtreli'
+About: 'Hakkımızda'
+
+# Header
+Back to unread articles: 'Okunmayan makalelere geri dön'
+Add a new entry: 'Yeni bir makale ekle'
+Search: 'Ara'
+Filter entries: 'Filtrele'
+Enter your search here: 'Aramak istediğiniz herhangi bir şey yazın'
+Save new entry: 'Yeni makaleyi kaydet'
+
+# Config screen
+Settings: 'Ayarlar'
+User information: 'Kullanıcı bilgileri'
+Tagging rules: "Etiketleme kuralları"
+Password: 'Şifre'
+RSS: 'RSS'
+Add a user: 'Bir kullanıcı ekle'
+Theme: 'Tema'
+Items per page: "Sayfa başına makale sayısı"
+Language: 'Dil'
+Save: 'Kaydet'
+RSS token: 'RSS belirteci (token)'
+Name: 'İsim'
+Email: 'E-posta'
+No token: 'Belirteç (token) yok'
+Reset your token: 'Belirteci (token) sıfırla'
+Create your token: 'Yeni belirteç (token) oluştur'
+Rss limit: "RSS içeriğinden talep edilecek makale limiti"
+RSS links: 'RSS akış bağlantıları'
+"RSS feeds provided by wallabag allow you to read your saved articles with your favourite RSS reader. You need to generate a token first.": "wallabag RSS akışı kaydetmiş olduğunuz makalelerini favori RSS okuyucunuzda görüntülemenizi sağlar. Bunu yapabilmek için öncelikle belirteç (token) oluşturmalısınız."
+Old password: 'Eski şifre'
+New password: 'Yeni şifre'
+Repeat new password: 'Yeni şifrenin tekrarı'
+Username: "Kullanıcı adı"
+Two factor authentication: "İki adımlı doğrulama"
+"Enabling two factor authentication means you'll receive an email with a code on every new untrusted connexion": "İki adımlı doğrulamayı aktifleştirdiğinizde, her yeni güvenilmeyen bağlantılarda size e-posta ile bir kod alacaksınız."
+Baggy: "Baggy"
+Material: "Material"
+English: "İngilizce"
+Français: "Fransızca"
+Deutsch: "Almanca"
+Türkçe: "Türkçe"
+
+# Tagging rules
+Rule: "Kural"
+Tags: "Etiketler"
+FAQ: "S.S.S."
+Variable: "Değişken"
+Meaning: "Anlamı"
+Operator: "Operatör"
+"What does « tagging rules » mean?": "« etiketleme kuralları » ne anlama geliyor?"
+"How do I use them?": "Bunu nasıl kullanırım?"
+"Which variables and operators can I use to write rules?": "Kurallar içerisinde hangi değişken ve operatörleri kullanabilirim?"
+"The following variables and operators can be used to create tagging rules:": "Etiket kuralı oluşturmak istediğinizde aşağıdaki değişken ve operatörleri kullanabilirsin:"
+Title of the entry: "Makalenin başlığı"
+URL of the entry: "Makalenin bağlantısı"
+The domain name of the entry: "Makalenin bulunduğu internet sitesinin alan adı"
+"The entry's content": "Makalenin içeriği"
+"The entry's language": "Makalenin dili"
+"The entry's mime-type": "Makalenin mime türü"
+"The estimated entry's reading time, in minutes": "Makalenin dakika cinsinden tahmini okuma süresi"
+"Whether the entry is archived or not": "Makale arşivlendi mi? Arşivlenmedi mi?"
+"Whether the entry is starred or not": "Makale favorilere eklendi mi? Eklenmedi mi?"
+"Less than…": "Küçüktür ve eşittir…"
+"Strictly less than…": "Küçüktür…"
+"Greater than…": "Büyüktür ve eşittir…"
+"Strictly greater than…": "Büyüktür…"
+"Equal to…": "Eşittir…"
+"Not equal to…": "Eşit değildir…"
+"One rule or another": "Bir kural veya birbaşkası"
+"One rule and another": "Bir kural ve diğeri"
+
+# Entries
+'estimated reading time': 'tahmini okuma süresi'
+original: "orijinal"
+Toggle mark as read: 'Okundu/okunmadı olarak işaretle'
+Toggle favorite: 'Favorilere ekle/çıkar'
+Delete: 'Sil'
+
+# Filters
+Filters: 'Filtreler'
+Status: 'Durum'
+Archived: 'Arşiv'
+Starred: 'Favori'
+Preview picture: 'Resim önizlemesi'
+Has a preview picture: 'Resim önizlemesi varsa'
+Reading time in minutes: 'Dakika cinsinden okuma süresi'
+from: 'başlangıç'
+to: 'bitiş'
+website.com: 'internet-sitesi.com'
+Domain name: 'Alan adı'
+Creation date: 'Oluşturulma tarihi'
+dd/mm/yyyy: 'dd/mm/aaaa'
+Clear: 'Temizle'
+Filter: 'Filtrele'
+
+# About
+Who is behind wallabag: "wallabag'in arkasındakiler"
+Getting help: "Yardım"
+Helping wallabag: "wallabag destek olun"
+Developed by: "Geliştiriciler:"
+website: "İnternet sitesi"
+And many others contributors ♥: "Ve katkıda bulunanlar ♥"
+on GitHub: "GitHub üzerinde"
+Project website: "Proje internet sitesi"
+License: "Lisans"
+Version: "Sürüm"
+Documentation: "Dokümantasyon"
+Bug reports: "Sorun bildir"
+On our support website: "Destek internet sitesinde"
+or: "ya da"
+"wallabag is free and opensource. You can help us:": "wallabag açık kaynak kodlu ve ücretsizdir. Bize destek ol :"
+"by contributing to the project:": "projemize katkıda bulunun :"
+an issue lists all our needs: "ihtiyacımız olanların listelendiği yapılacaklar listesi"
+via Paypal: "PayPal ile"
+
+# Howto
+Form: "Form"
+Thanks to this form: "Yeni makale kaydet"
+Browser addons: "Tarayıcı eklentileri"
+Mobile apps: "Mobil uygulamalar"
+Bookmarklet: "Bookmarklet"
+Standard Firefox Add-On: "Standart Firefox Eklentisi"
+Chrome Extension: "Chrome Eklentisi"
+download the application: "uygulamayı indir"
+"Drag &amp; drop this link to your bookmarks bar:": "Bu bağlantı ile yer imlerinizi sürükleyip bırakarak wallabag'e ekleyebilirsiniz:"
+via F-Droid: "F-Droid"
+via Google Play: "Google Play"
+bag it!: "bag it!"
+
+# Flash messages
+Information updated: "Bilgiler güncellendi"
+"Config saved. Some parameters will be considered after disconnection.": "Yapılandırma ayarları kaydedildi. Bazı yapılandırmalar tekrar giriş yaptığınızda aktif olacaktır."
+RSS information updated: "RSS bilgiler güncellendi"
+Password updated: "Şifre güncellendi"
+Entry starred: "Makale favorilere eklendi"
+Entry unstarred: "Makale favorilerden çıkartıldı"
+Entry archived: "Makale arşivlendi"
+Entry unarchived: "Makale arşivden çıkartıldı"
+Entry reloaded: "Makale içeriği yenilendi"
+Entry deleted: "Makale silindi"
+Entry saved: "Makale kaydedildi"
+Tag added: "Etiket eklendi"
+
+# Entry
+Mark as read: 'Okundu olarak işaretle'
+Mark as unread: 'Okunmadı olarak işaretle'
+Favorite: 'Favorilere ekle/çıkar'
+back: 'geri dön'
+original article: 'Orijinal makale'
+Add a tag: 'Bir etiket ekle'
+Share: 'Paylaş'
+Download: 'İndir'
+Does this article appear wrong?: "Bu makalede herhangi bir yanlışlık mı var?"
+Problems?: 'Bir sorun mu var?'
+Edit title: "Başlığı düzenle"
+"{0} There is no entry.|{1} There is one entry.|]1,Inf[ There are %count% entries.": "{0} Herhangi bir makale yok.|{1} Burada bir adet makale var.|]1,Inf[ Burada %count% adet makale var."
+"{0} There is no tag.|{1} There is one tag.|]1,Inf[ There are %count% tags.": "{0} Herhangi bir etiket yok.|{1} Burada bir adet etiket var.|]1,Inf[ Burada %count% adet etiket var."
+Reload content: "İçeriği yenile"
+Edit an entry: "Makaleyi düzenle"
+Title: "Başlık"
+Is public: "Herkes tarafından erişime açık olsun mu?"
+
+# Import
+Import: "İçe Aktar"
+"Import > Pocket": "İçe Aktar > Pocket"
+"Import > Wallabag v1": "İçe Aktar > Wallabag v1"
+Welcome on wallabag importer. Please select your previous service that you want to migrate.: "wallabag içe aktarma aracına hoşgeldiniz. Lütfen içe aktarmak istediğiiz önceki servisinizi seçin."
+"This importer will import all your Pocket data. Pocket doesn't allow us to retrieve content from their service, so the readable content of each article will be re-fetched by wallabag.": "Bu araç tüm Pocket verinizi içe aktarır. Pocket içeriklerin getirilmesine izin vermez, okunabilen içerikler wallabag tarafından yeniden getirilir."
+"This importer will import all your wallabag v1 articles. On your config page, click on \"JSON export\" in the \"Export your wallabag data\" section. You will have a \"wallabag-export-1-xxxx-xx-xx.json\" file.": "Bu araç wallabag v1 üzerindeki tüm makalelerinizi içe aktarır. Yapılandırma sayfasında, \"Export your wallabag data\" sekmesinden \"JSON export\" adımını izleyin. Bu adım size \"wallabag-export-1-xxxx-xx-xx.json\" isimli bir dosya verecektir."
+"You can import your data from your Pocket account. You just have to click on the below button and authorize the application to connect to getpocket.com.": "Pocket hesabınızda verilerinizi içe aktarabilmemiz için öncelikle aşağıdaki butona tıklayın. Daha sonra, getpocket.com üzerindeki uygulamamıza gereken izinleri verin. Hepsi bu kadar!"
+Connect to Pocket and import data: "Pocket'a bağlanın ve verilerinizi içe aktarın"
+Please select your wallabag export and click on the below button to upload and import it.: "Aşağıdaki butona tıklayarak wallabag v1 tarafından dışa aktarılmış dosyanızı yükleyin."
+File: "Dosya"
+Upload file: "Dosyayı yükle"
+Import contents: "İçerikleri içe aktar"
+
+# Quickstart
+Welcome on wallabag!: "wallabag"
+Quickstart: "Hızlı başlangıç"
+We'll accompany you to visit wallabag and show you some features which can interess you.: "wallabag kurduğunuz için teşekkür ederiz. Bu sayfada biz size eşlik edecek ve ilginizi çekecek birkaç özellik göstereceğim."
+Follow us!: "Bizi takip edin!"
+Configure the application: "Uygulamayı Yapılandırma"
+Change language and design: "Dili ve tasarımı değiştirme"
+Enable RSS feeds: "RSS akışını aktifleştirme"
+First steps: "İlk adım"
+Save your first article: "İlk makalenizi kaydedin"
+And classify it!: "Ve bunu sınıflandırın!"
+Migrate from an existing service: "Varolan servislerden veri aktarma"
+You're using an other service? We'll help you to retrieve your data on wallabag.: "Kullanmakta olduğunuz farklı bir hizmet mi var? Biz size yardımcı olacak ve verilerinizi wallabag'e aktarmanıza yardımcı olacağız."
+Migrate from Pocket: "Pocket üzerindeki verilerinizi wallabag'e aktarın"
+Migrate from wallabag v1: "wallabag v1 üzerindeki verilerinizi wallabag'in yeni sürümüne aktarın"
+Full documentation: "Dokümantasyon"
+Convert your articles into ePUB or PDF: "Makalelerinizi ePUB ya da PDF formatına çevirme"
+See how you can look for an article by using search engine and filters: "Makaleleri görüntülemek için arama motorlarını ve filteri kullanma"
+And so many other articles!: "Ve daha fazlası!"
+Support: "Destek"
+Social: "Sosyal"
+If you need some help, we are here for you.: "Eğer yardıma ihtiyacınız varsa, biz her daim senin için burada olacağız."
+On GitHub: "GitHub"
+By email: "E-posta"
+On Gitter: "Gitter"
+Export: "Dışa Aktar"
+"http://website": "http://internet-sitesi"
+Take wallabag with you: "wallabag her an seninle"
+about: "hakkımızda"
+powered by: "powered by"
