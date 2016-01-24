@@ -117,9 +117,10 @@
                     {% if export_epub %}<li><a href="{{ path('export_entry', { 'id': entry.id, 'format': 'epub' }) }}" title="Generate ePub file">EPUB</a></li>{% endif %}
                     {% if export_mobi %}<li><a href="{{ path('export_entry', { 'id': entry.id, 'format': 'mobi' }) }}" title="Generate Mobi file">MOBI</a></li>{% endif %}
                     {% if export_pdf %}<li><a href="{{ path('export_entry', { 'id': entry.id, 'format': 'pdf' }) }}" title="Generate PDF file">PDF</a></li>{% endif %}
-                    <li><a href="{{ path('export_entry', { 'id': entry.id, 'format': 'csv' }) }}" title="Generate CSV file">CSV</a></li>
-                    <li><a href="{{ path('export_entry', { 'id': entry.id, 'format': 'json' }) }}" title="Generate JSON file">JSON</a></li>
-                    <li><a href="{{ path('export_entry', { 'id': entry.id, 'format': 'xml' }) }}" title="Generate XML file">XML</a></li>
+                    {% if export_csv %}<li><a href="{{ path('export_entry', { 'id': entry.id, 'format': 'csv' }) }}" title="Generate CSV file">CSV</a></li>{% endif %}
+                    {% if export_json %}<li><a href="{{ path('export_entry', { 'id': entry.id, 'format': 'json' }) }}" title="Generate JSON file">JSON</a></li>{% endif %}
+                    {% if export_txt %}<li><del><a href="{{ path('export_entry', { 'id': entry.id, 'format': 'txt' }) }}" title="Generate TXT file">TXT</a></del></li>{% endif %}
+                    {% if export_xml %}<li><a href="{{ path('export_entry', { 'id': entry.id, 'format': 'xml' }) }}" title="Generate XML file">XML</a></li>{% endif %}
                 </ul>
             </div>
         </li>

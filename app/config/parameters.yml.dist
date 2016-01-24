@@ -61,6 +61,10 @@ parameters:
     export_epub: true
     export_mobi: true
     export_pdf: true
+    export_csv: true
+    export_json: true
+    export_txt: true
+    export_xml: true
     wallabag_url: http://v2.wallabag.org
     wallabag_support_url: 'https://www.wallabag.org/pages/support.html'
 
