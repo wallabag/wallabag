@@ -32,6 +32,7 @@ wallabag_core:
         en: 'English'
         fr: 'Français'
         de: 'Deutsch'
+        tr: 'Türkçe'
 
 wallabag_import:
     allow_mimetypes: ['application/octet-stream', 'application/json', 'text/plain']
