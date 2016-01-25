@@ -118,7 +118,7 @@
                     {% if craue_setting('export_pdf') %}<li><a href="{{ path('export_entry', { 'id': entry.id, 'format': 'pdf' }) }}" title="Generate PDF file">PDF</a></li>{% endif %}
                     {% if craue_setting('export_csv') %}<li><a href="{{ path('export_entry', { 'id': entry.id, 'format': 'csv' }) }}" title="Generate CSV file">CSV</a></li>{% endif %}
                     {% if craue_setting('export_json') %}<li><a href="{{ path('export_entry', { 'id': entry.id, 'format': 'json' }) }}" title="Generate JSON file">JSON</a></li>{% endif %}
-                    {% if craue_setting('export_txt') %}<li><del><a href="{{ path('export_entry', { 'id': entry.id, 'format': 'txt' }) }}" title="Generate TXT file">TXT</a></del></li>{% endif %}
+                    {% if craue_setting('export_txt') %}<li><a href="{{ path('export_entry', { 'id': entry.id, 'format': 'txt' }) }}" title="Generate TXT file">TXT</a></li>{% endif %}
                     {% if craue_setting('export_xml') %}<li><a href="{{ path('export_entry', { 'id': entry.id, 'format': 'xml' }) }}" title="Generate XML file">XML</a></li>{% endif %}
                 </ul>
             </div>

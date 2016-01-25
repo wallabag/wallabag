@@ -6,6 +6,7 @@ use JMS\Serializer;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerBuilder;
 use PHPePub\Core\EPub;
+use Html2Text\Html2Text;
 use PHPePub\Core\Structure\OPF\DublinCore;
 use Symfony\Component\HttpFoundation\Response;
 use Craue\ConfigBundle\Util\Config;
@@ -99,6 +100,8 @@ class EntriesExport
 
             case 'xml':
                 return $this->produceXML();
+            case 'txt':
+                return $this->produceTXT();
         }
 
         throw new \InvalidArgumentException(sprintf('The format "%s" is not yet supported.', $format));
@@ -358,6 +361,25 @@ class EntriesExport
             )
         )->send();
     }
+
+    private function produceTXT()
+    {
+        $content = '';
+        foreach ($this->entries as $entry) {
+            $content .= $entry->getTitle();
+            $content .= strip_tags($entry->getContent());
+        }
+        return Response::create(
+            $content,
+            200,
+            array(
+                'Content-type' => 'text/plain',
+                'Content-Disposition' => 'attachment; filename="'.$this->title.'.txt"',
+                'Content-Transfer-Encoding' => 'UTF-8',
+            )
+        )->send();
+    }
+
 
     /**
      * Return a Serializer object for producing processes that need it (JSON & XML).

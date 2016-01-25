@@ -43,5 +43,4 @@ parameters:
 
     # fosuser stuff
     fosuser_confirmation: true
-
     from_email: no-reply@wallabag.org
