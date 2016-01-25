@@ -366,8 +366,8 @@ class EntriesExport
     {
         $content = '';
         foreach ($this->entries as $entry) {
-            $content .= $entry->getTitle();
-            $content .= strip_tags($entry->getContent());
+            $content .= "\n\n" . str_repeat("=",100) . "\n\n" . $entry->getTitle() . "\n\n" . str_repeat("=",100) . "\n\n";
+            $content .= trim(preg_replace('/\s+/S', ' ', strip_tags($entry->getContent()))) . "\n\n";
         }
         return Response::create(
             $content,

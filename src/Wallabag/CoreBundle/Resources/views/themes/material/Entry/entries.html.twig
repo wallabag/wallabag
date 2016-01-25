@@ -107,7 +107,7 @@
             {% if craue_setting('export_xml') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'xml' }) }}">{% trans %}XML{% endtrans %}</a></li>{% endif %}
             {% if craue_setting('export_csv') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'json' }) }}">{% trans %}JSON{% endtrans %}</a></li>{% endif %}
             {% if craue_setting('export_json') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'csv' }) }}">{% trans %}CSV{% endtrans %}</a></li>{% endif %}
-            {% if craue_setting('export_txt') %}<li class="bold"><del><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'txt' }) }}">{% trans %}TXT{% endtrans %}</a></del></li>{% endif %}
+            {% if craue_setting('export_txt') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'txt' }) }}">{% trans %}TXT{% endtrans %}</a></li>{% endif %}
         </ul>
     </div>
 
