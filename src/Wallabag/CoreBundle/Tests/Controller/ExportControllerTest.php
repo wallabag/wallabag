@@ -41,7 +41,7 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $client->request('GET', '/export/unread.txt');
+        $client->request('GET', '/export/unread.doc');
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
 
         $content = $client->getContainer()
@@ -49,7 +49,7 @@ class ExportControllerTest extends WallabagCoreTestCase
             ->getRepository('WallabagCoreBundle:Entry')
             ->findOneByUsernameAndNotArchived('admin');
 
-        $client->request('GET', '/export/'.$content->getId().'.txt');
+        $client->request('GET', '/export/'.$content->getId().'.doc');
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
     }
 
@@ -117,6 +117,23 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertEquals('application/pdf', $headers->get('content-type'));
         $this->assertEquals('attachment; filename="All articles.pdf"', $headers->get('content-disposition'));
         $this->assertEquals('binary', $headers->get('content-transfer-encoding'));
+    }
+
+    public function testTxtExport()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        ob_start();
+        $crawler = $client->request('GET', '/export/all.txt');
+        ob_end_clean();
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $headers = $client->getResponse()->headers;
+        $this->assertEquals('text/plain; charset=UTF-8', $headers->get('content-type'));
+        $this->assertEquals('attachment; filename="All articles.txt"', $headers->get('content-disposition'));
+        $this->assertEquals('UTF-8', $headers->get('content-transfer-encoding'));
     }
 
     public function testCsvExport()
