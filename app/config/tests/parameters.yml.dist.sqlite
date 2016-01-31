@@ -30,3 +30,5 @@ parameters:
     # two factor stuff
     twofactor_auth: true
     twofactor_sender: no-reply@wallabag.org
+
+    from_email: no-reply@wallabag.org
