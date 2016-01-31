@@ -6,7 +6,6 @@ use JMS\Serializer;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerBuilder;
 use PHPePub\Core\EPub;
-use Html2Text\Html2Text;
 use PHPePub\Core\Structure\OPF\DublinCore;
 use Symfony\Component\HttpFoundation\Response;
 use Craue\ConfigBundle\Util\Config;
