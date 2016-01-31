@@ -4,6 +4,10 @@ diaspora_url: Diaspora URL, if the service is enabled
 export_epub: Enable ePub export
 export_mobi: Enable .mobi export
 export_pdf: Enable PDF export
+export_csv: Enable CSV export
+export_json: Enable JSON export
+export_txt: Enable TXT export
+export_xml: Enable XML export
 pocket_consumer_key: Consumer key for Pocket to import contents (https://getpocket.com/developer/docs/authentication)
 shaarli_url: URL de Shaarli, if the service is enabled
 share_diaspora: Enable share to Diaspora

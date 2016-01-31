@@ -71,6 +71,26 @@ class LoadSettingData extends AbstractFixture implements OrderedFixtureInterface
                 'section' => 'export',
             ],
             [
+                'name' => 'export_csv',
+                'value' => '1',
+                'section' => 'export',
+            ],
+            [
+                'name' => 'export_json',
+                'value' => '1',
+                'section' => 'export',
+            ],
+            [
+                'name' => 'export_txt',
+                'value' => '1',
+                'section' => 'export',
+            ],
+            [
+                'name' => 'export_xml',
+                'value' => '1',
+                'section' => 'export',
+            ],
+            [
                 'name' => 'pocket_consumer_key',
                 'value' => null,
                 'section' => 'import',
