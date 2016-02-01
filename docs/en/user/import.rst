@@ -1,8 +1,8 @@
 Migrate to wallabag
 ===================
 
-From wallabag 1.x
------------------
+From wallabag
+-------------
 
 Export your data from your wallabag 1.x
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -15,6 +15,17 @@ On your config page, click on ``JSON export`` in the ``Export your wallabag data
 
 You will have a ``wallabag-export-1-1970-01-01.json`` file.
 
+Export your data from your wallabag 2.x
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+On the export sidebar, click on ``JSON``.
+
+.. image:: ../../img/user/export_wllbg_2.png
+:alt: Export from wallabag 2.x
+   :align: center
+
+You will have a ``Unread articles.json`` file.
+
 Import your data into wallabag 2.x
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -24,7 +35,7 @@ Click on  ``Import`` link in the menu, select your export file on your computer 
    :alt: Import from wallabag 1.x
    :align: center
 
-All your wallabag 1.x articles will be imported.
+All your wallabag articles will be imported.
 
 From Pocket
 -----------
@@ -46,7 +57,7 @@ Import your data into wallabag 2.x
 
 Click on  ``Import`` link in the menu, on ``Import contents`` in Pocket section and then on ``Connect to Pocket and import data``.
 
-You need to authorize wallabag to interact with your Pocket account. Your data will be imported. Data import can be a demanding process for your server (we need to work on this import to improve it). 
+You need to authorize wallabag to interact with your Pocket account. Your data will be imported. Data import can be a demanding process for your server (we need to work on this import to improve it).
 
 From Instapaper
 ---------------

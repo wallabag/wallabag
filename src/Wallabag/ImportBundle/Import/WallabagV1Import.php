@@ -11,12 +11,12 @@ use Wallabag\CoreBundle\Tools\Utils;
 
 class WallabagV1Import implements ImportInterface
 {
-    private $user;
-    private $em;
-    private $logger;
-    private $skippedEntries = 0;
-    private $importedEntries = 0;
-    private $filepath;
+    protected $user;
+    protected $em;
+    protected $logger;
+    protected $skippedEntries = 0;
+    protected $importedEntries = 0;
+    protected $filepath;
 
     public function __construct(EntityManager $em)
     {
@@ -72,13 +72,13 @@ class WallabagV1Import implements ImportInterface
     public function import()
     {
         if (!$this->user) {
-            $this->logger->error('WallabagV1Import: user is not defined');
+            $this->logger->error('WallabagImport: user is not defined');
 
             return false;
         }
 
         if (!file_exists($this->filepath) || !is_readable($this->filepath)) {
-            $this->logger->error('WallabagV1Import: unable to read file', array('filepath' => $this->filepath));
+            $this->logger->error('WallabagImport: unable to read file', array('filepath' => $this->filepath));
 
             return false;
         }
@@ -120,7 +120,7 @@ class WallabagV1Import implements ImportInterface
     /**
      * @param $entries
      */
-    private function parseEntries($entries)
+    protected function parseEntries($entries)
     {
         $i = 1;
 

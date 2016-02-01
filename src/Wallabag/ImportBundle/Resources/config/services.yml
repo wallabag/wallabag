@@ -32,3 +32,12 @@ services:
             - [ setLogger, [ "@logger" ]]
         tags:
             -  { name: wallabag_import.import, alias: wallabag_v1 }
+
+    wallabag_import.wallabag_v2.import:
+        class: Wallabag\ImportBundle\Import\WallabagV2Import
+        arguments:
+            - "@doctrine.orm.entity_manager"
+        calls:
+            - [ setLogger, [ "@logger" ]]
+        tags:
+            -  { name: wallabag_import.import, alias: wallabag_v2 }
