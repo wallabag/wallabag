@@ -35,7 +35,7 @@ parameters:
     locale:            en
 
     # A secret key that's used to generate certain security-related tokens
-    secret:            ThisTokenIsNotSoSecretChangeIt
+    secret:            ovmpmAWXRCabNlMgzlzFXDYmCFfzGv
 
     # wallabag misc
     app.version: 2.0.0-alpha

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Filter;
+namespace Wallabag\CoreBundle\Form\Type;
 
 use Doctrine\ORM\EntityRepository;
 use Lexik\Bundle\FormFilterBundle\Filter\Query\QueryInterface;

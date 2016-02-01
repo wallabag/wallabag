@@ -198,7 +198,7 @@ class ConfigController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function deleteTaggingRule(TaggingRule $rule)
+    public function deleteTaggingRuleAction(TaggingRule $rule)
     {
         if ($this->getUser()->getId() != $rule->getConfig()->getUser()->getId()) {
             throw $this->createAccessDeniedException('You can not access this tagging ryle.');

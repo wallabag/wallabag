@@ -16,11 +16,6 @@ class EditEntryType extends AbstractType
         $builder
             ->add('title', TextType::class, array('required' => true))
             ->add('is_public', CheckboxType::class, array('required' => false))
-            // @todo: add autocomplete
-            // ->add('tags', 'entity', array(
-            //     'class' => 'Wallabag\CoreBundle\Entity\Tag',
-            //     'choice_translation_domain' => true,
-            // ))
             ->add('save', SubmitType::class)
         ;
     }

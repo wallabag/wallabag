@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\CoreBundle\Filter\EntryFilterType;
+use Wallabag\CoreBundle\Form\Type\EntryFilterType;
 use Wallabag\CoreBundle\Form\Type\EditEntryType;
 use Wallabag\CoreBundle\Form\Type\NewEntryType;
 
@@ -81,7 +81,7 @@ class EntryController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function addEntryViaBookmarklet(Request $request)
+    public function addEntryViaBookmarkletAction(Request $request)
     {
         $entry = new Entry($this->getUser());
         $entry->setUrl($request->get('url'));

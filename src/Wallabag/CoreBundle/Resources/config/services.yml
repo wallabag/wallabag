@@ -15,7 +15,7 @@ services:
             - { name: form.type }
 
     wallabag_core.filter.type.entry:
-        class: Wallabag\CoreBundle\Filter\EntryFilterType
+        class: Wallabag\CoreBundle\Form\Type\EntryFilterType
         arguments:
             - "@wallabag_core.entry_repository"
             - "@security.token_storage"

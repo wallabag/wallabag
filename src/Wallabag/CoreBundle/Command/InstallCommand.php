@@ -64,7 +64,6 @@ class InstallCommand extends ContainerAwareCommand
 
         $fulfilled = true;
 
-        // @TODO: find a better way to check requirements
         $label = '<comment>PCRE</comment>';
         if (extension_loaded('pcre')) {
             $status = '<info>OK!</info>';

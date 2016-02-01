@@ -23,7 +23,6 @@ class PocketImport implements ImportInterface
     private $skippedEntries = 0;
     private $importedEntries = 0;
     protected $accessToken;
-    private $translator;
 
     public function __construct(TokenStorageInterface $tokenStorage, EntityManager $em, ContentProxy $contentProxy, $consumerKey)
     {
@@ -177,9 +176,6 @@ class PocketImport implements ImportInterface
         $this->client = $client;
     }
 
-    /**
-     * @todo move that in a more global place
-     */
     private function assignTagsToEntry(Entry $entry, $tags)
     {
         foreach ($tags as $tag) {
