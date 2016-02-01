@@ -364,11 +364,12 @@ class EntriesExport
     private function produceTXT()
     {
         $content = '';
-        $bar = str_repeat("=",100);
+        $bar = str_repeat('=', 100);
         foreach ($this->entries as $entry) {
-            $content .= "\n\n" . $bar . "\n\n" . $entry->getTitle() . "\n\n" . $bar . "\n\n";
-            $content .= trim(preg_replace('/\s+/S', ' ', strip_tags($entry->getContent()))) . "\n\n";
+            $content .= "\n\n".$bar."\n\n".$entry->getTitle()."\n\n".$bar."\n\n";
+            $content .= trim(preg_replace('/\s+/S', ' ', strip_tags($entry->getContent())))."\n\n";
         }
+
         return Response::create(
             $content,
             200,
@@ -379,7 +380,6 @@ class EntriesExport
             )
         )->send();
     }
-
 
     /**
      * Return a Serializer object for producing processes that need it (JSON & XML).
