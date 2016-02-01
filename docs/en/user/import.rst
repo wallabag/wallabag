@@ -21,7 +21,7 @@ Export your data from your wallabag 2.x
 On the export sidebar, click on ``JSON``.
 
 .. image:: ../../img/user/export_wllbg_2.png
-:alt: Export from wallabag 2.x
+   :alt: Export from wallabag 2.x
    :align: center
 
 You will have a ``Unread articles.json`` file.
