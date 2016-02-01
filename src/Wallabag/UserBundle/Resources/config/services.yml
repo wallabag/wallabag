@@ -1,4 +1,9 @@
 services:
+    # might be fixed in the symfony release
+    # https://github.com/FriendsOfSymfony/FOSUserBundle/issues/2048
+    fos_user.doctrine_registry:
+        alias: doctrine
+
     wallabag_user.auth_code_mailer:
         class: Wallabag\UserBundle\Mailer\AuthCodeMailer
         arguments:
