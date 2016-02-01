@@ -364,8 +364,9 @@ class EntriesExport
     private function produceTXT()
     {
         $content = '';
+        $bar = str_repeat("=",100);
         foreach ($this->entries as $entry) {
-            $content .= "\n\n" . str_repeat("=",100) . "\n\n" . $entry->getTitle() . "\n\n" . str_repeat("=",100) . "\n\n";
+            $content .= "\n\n" . $bar . "\n\n" . $entry->getTitle() . "\n\n" . $bar . "\n\n";
             $content .= trim(preg_replace('/\s+/S', ' ', strip_tags($entry->getContent()))) . "\n\n";
         }
         return Response::create(
