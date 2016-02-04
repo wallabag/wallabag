@@ -8,6 +8,7 @@ use JMS\Serializer\SerializerBuilder;
 use PHPePub\Core\EPub;
 use PHPePub\Core\Structure\OPF\DublinCore;
 use Symfony\Component\HttpFoundation\Response;
+use Craue\ConfigBundle\Util\Config;
 
 /**
  * This class doesn't have unit test BUT it's fully covered by a functional test with ExportControllerTest.
@@ -27,12 +28,12 @@ class EntriesExport
         </div';
 
     /**
-     * @param string $wallabagUrl Wallabag instance url
+     * @param Config $craueConfig CraueConfig instance to get wallabag instance url from database
      * @param string $logoPath    Path to the logo FROM THE BUNDLE SCOPE
      */
-    public function __construct($wallabagUrl, $logoPath)
+    public function __construct(Config $craueConfig, $logoPath)
     {
-        $this->wallabagUrl = $wallabagUrl;
+        $this->wallabagUrl = $craueConfig->get('wallabag_url');
         $this->logoPath = $logoPath;
     }
 

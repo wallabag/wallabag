@@ -33,6 +33,7 @@ class AppKernel extends Kernel
             new KPhoen\RulerZBundle\KPhoenRulerZBundle(),
             new Wallabag\ImportBundle\WallabagImportBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
+            new Craue\ConfigBundle\CraueConfigBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
