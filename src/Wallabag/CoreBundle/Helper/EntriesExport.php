@@ -99,6 +99,8 @@ class EntriesExport
 
             case 'xml':
                 return $this->produceXML();
+            case 'txt':
+                return $this->produceTXT();
         }
 
         throw new \InvalidArgumentException(sprintf('The format "%s" is not yet supported.', $format));
@@ -354,6 +356,26 @@ class EntriesExport
             array(
                 'Content-type' => 'application/xml',
                 'Content-Disposition' => 'attachment; filename="'.$this->title.'.xml"',
+                'Content-Transfer-Encoding' => 'UTF-8',
+            )
+        )->send();
+    }
+
+    private function produceTXT()
+    {
+        $content = '';
+        $bar = str_repeat('=', 100);
+        foreach ($this->entries as $entry) {
+            $content .= "\n\n".$bar."\n\n".$entry->getTitle()."\n\n".$bar."\n\n";
+            $content .= trim(preg_replace('/\s+/S', ' ', strip_tags($entry->getContent())))."\n\n";
+        }
+
+        return Response::create(
+            $content,
+            200,
+            array(
+                'Content-type' => 'text/plain',
+                'Content-Disposition' => 'attachment; filename="'.$this->title.'.txt"',
                 'Content-Transfer-Encoding' => 'UTF-8',
             )
         )->send();

@@ -101,13 +101,13 @@
     {% endif %}
         <h4 class="center">{% trans %}Export{% endtrans %}</h4>
         <ul>
-            {% if craue_setting('export_epub') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'epub' }) }}">{% trans %}EPUB{% endtrans %}</a></li>{% endif %}
-            {% if craue_setting('export_mobi') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'mobi' }) }}">{% trans %}MOBI{% endtrans %}</a></li>{% endif %}
-            {% if craue_setting('export_pdf') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'pdf' }) }}">{% trans %}PDF{% endtrans %}</a></li>{% endif %}
-            {% if craue_setting('export_xml') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'xml' }) }}">{% trans %}XML{% endtrans %}</a></li>{% endif %}
-            {% if craue_setting('export_csv') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'json' }) }}">{% trans %}JSON{% endtrans %}</a></li>{% endif %}
-            {% if craue_setting('export_json') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'csv' }) }}">{% trans %}CSV{% endtrans %}</a></li>{% endif %}
-            {% if craue_setting('export_txt') %}<li class="bold"><del><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'txt' }) }}">{% trans %}TXT{% endtrans %}</a></del></li>{% endif %}
+            {% if craue_setting('export_epub') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'epub' }) }}">EPUB</a></li>{% endif %}
+            {% if craue_setting('export_mobi') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'mobi' }) }}">MOBI</a></li>{% endif %}
+            {% if craue_setting('export_pdf') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'pdf' }) }}">PDF</a></li>{% endif %}
+            {% if craue_setting('export_csv') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'json' }) }}">JSON</a></li>{% endif %}
+            {% if craue_setting('export_json') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'csv' }) }}">CSV</a></li>{% endif %}
+            {% if craue_setting('export_txt') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'txt' }) }}">TXT</a></li>{% endif %}
+            {% if craue_setting('export_xml') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'xml' }) }}">XML</a></li>{% endif %}
         </ul>
     </div>
 
