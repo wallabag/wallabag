@@ -46,16 +46,17 @@
                                 <i class="card-title grey-text text-darken-4 activator mdi-navigation-more-vert right"></i>
                             {% endif %}
 
-                            <span class="card-title"><a href="{{ path('view', { 'id': entry.id }) }}">{{ entry.title|raw|striptags|slice(0, 42) }}</a></span>
+                            <span class="card-title"><a href="{{ path('view', { 'id': entry.id }) }}">{{ entry.title|striptags|slice(0, 42)|raw }}</a></span>
 
-                            {% if entry.readingTime > 0 %}
-                                <div class="estimatedTime grey-text"><span class="tool reading-time">{% trans %}estimated reading time{% endtrans %}: {{ entry.readingTime }} min</span></div>
-                            {% else %}
-                                <div class="estimatedTime grey-text"><span class="tool reading-time">{% trans %}estimated reading time{% endtrans %}: <small class="inferieur">&lt;</small> 1 min</span></div>
-                            {% endif %}
+                            <div class="estimatedTime grey-text">
+                                <span class="tool reading-time">
+                                    {% trans %}estimated reading time{% endtrans %}:
+                                    {% if entry.readingTime > 0 %}{{ entry.readingTime }}{% else %}<small class="inferieur">&lt;</small> 1{% endif %} min
+                                </span>
+                            </div>
 
                             {% if entry.previewPicture is null %}
-                                <p>{{ entry.content|striptags|slice(0, 300) }}&hellip;</p>
+                                <p>{{ entry.content|striptags|slice(0, 300)|raw }}&hellip;</p>
                             {% endif %}
                         </div>
                     </div>
@@ -65,13 +66,14 @@
                             <i class="card-title grey-text text-darken-4 mdi-card-close right"></i>
                             <span class="card-title"><a href="{{ path('view', { 'id': entry.id }) }}">{{ entry.title|raw }}</a></span>
 
-                            {% if entry.readingTime > 0 %}
-                                <div class="estimatedTime grey-text"><span class="tool reading-time">{% trans %}estimated reading time{% endtrans %}: {{ entry.readingTime }} min</span></div>
-                            {% else %}
-                                <div class="estimatedTime grey-text"><span class="tool reading-time">{% trans %}estimated reading time{% endtrans %}: <small class="inferieur">&lt;</small> 1 min</span></div>
-                            {% endif %}
+                            <div class="estimatedTime grey-text">
+                                <span class="tool reading-time">
+                                    {% trans %}estimated reading time{% endtrans %}:
+                                    {% if entry.readingTime > 0 %}{{ entry.readingTime }}{% else %}<small class="inferieur">&lt;</small> 1{% endif %} min
+                                </span>
+                            </div>
 
-                            <p>{{ entry.content|striptags|slice(0, 300) }}&hellip;</p>
+                            <p>{{ entry.content|striptags|slice(0, 300)|raw }}&hellip;</p>
                         </div>
                     {% endif %}
 
