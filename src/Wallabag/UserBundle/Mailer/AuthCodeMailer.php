@@ -48,7 +48,7 @@ class AuthCodeMailer implements AuthCodeMailerInterface
     private $supportUrl;
 
     /**
-     * Url for the wallabag instance (only used for image in the HTML email template)
+     * Url for the wallabag instance (only used for image in the HTML email template).
      *
      * @var string
      */
@@ -80,7 +80,7 @@ class AuthCodeMailer implements AuthCodeMailerInterface
      */
     public function sendAuthCode(TwoFactorInterface $user)
     {
-        $template = $this->twig->loadTemplate('@WallabagUserBundle/Resources/views/TwoFactor/email_auth_code.html.twig');
+        $template = $this->twig->loadTemplate('WallabagUserBundle:TwoFactor:email_auth_code.html.twig');
 
         $subject = $template->renderBlock('subject', array());
         $bodyHtml = $template->renderBlock('body_html', [
