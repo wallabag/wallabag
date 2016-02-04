@@ -43,7 +43,7 @@ class AuthCodeMailerTest extends \PHPUnit_Framework_TestCase
 {% block body_text %}text body {{ support_url }}{% endblock %}
 TWIG;
 
-        $this->twig = new \Twig_Environment(new \Twig_Loader_Array(array('@WallabagUserBundle/Resources/views/TwoFactor/email_auth_code.html.twig' => $twigTemplate)));
+        $this->twig = new \Twig_Environment(new \Twig_Loader_Array(array('WallabagUserBundle:TwoFactor:email_auth_code.html.twig' => $twigTemplate)));
 
         $this->config = $this->getMockBuilder('Craue\ConfigBundle\Util\Config')
             ->disableOriginalConstructor()

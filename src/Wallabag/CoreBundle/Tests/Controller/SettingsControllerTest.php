@@ -6,7 +6,7 @@ use Wallabag\CoreBundle\Tests\WallabagCoreTestCase;
 
 /**
  * The controller `SettingsController` does not exist.
- * This test cover security against the internal settings page managed by CraueConfigBundle
+ * This test cover security against the internal settings page managed by CraueConfigBundle.
  */
 class SettingsControllerTest extends WallabagCoreTestCase
 {
