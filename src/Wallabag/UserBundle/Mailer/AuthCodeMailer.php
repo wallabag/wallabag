@@ -48,7 +48,7 @@ class AuthCodeMailer implements AuthCodeMailerInterface
     private $supportUrl;
 
     /**
-     * Url for the wallabag instance (only used for image in the HTML email template)
+     * Url for the wallabag instance (only used for image in the HTML email template).
      *
      * @var string
      */

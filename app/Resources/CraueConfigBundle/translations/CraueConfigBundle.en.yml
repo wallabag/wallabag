@@ -9,7 +9,7 @@ export_json: Enable JSON export
 export_txt: Enable TXT export
 export_xml: Enable XML export
 pocket_consumer_key: Consumer key for Pocket to import contents (https://getpocket.com/developer/docs/authentication)
-shaarli_url: URL de Shaarli, if the service is enabled
+shaarli_url: Shaarli URL, if the service is enabled
 share_diaspora: Enable share to Diaspora
 share_mail: Enable share by email
 share_shaarli: Enable share to Shaarli
