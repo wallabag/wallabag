@@ -168,7 +168,7 @@ fos_user:
     user_class: Wallabag\UserBundle\Entity\User
     registration:
         confirmation:
-            enabled: true
+            enabled: %fosuser_confirmation%
     from_email:
         address:        %from_email%
         sender_name:    wallabag
