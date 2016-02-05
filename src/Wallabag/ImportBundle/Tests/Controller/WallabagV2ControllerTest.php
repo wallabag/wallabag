@@ -50,9 +50,21 @@ class WallabagV2ControllerTest extends WallabagCoreTestCase
                 $this->getLoggedInUserId()
             );
 
-        $this->assertEquals('', $content->getMimetype());
-        $this->assertEquals('', $content->getPreviewPicture());
-        $this->assertEquals('', $content->getLanguage());
+        $this->assertEmpty($content->getMimetype());
+        $this->assertEmpty($content->getPreviewPicture());
+        $this->assertEmpty($content->getLanguage());
+
+        $content = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findByUrlAndUserId(
+                'https://www.mediapart.fr/',
+                $this->getLoggedInUserId()
+            );
+
+        $this->assertNotEmpty($content->getMimetype());
+        $this->assertNotEmpty($content->getPreviewPicture());
+        $this->assertNotEmpty($content->getLanguage());
     }
 
     public function testImportWallabagWithEmptyFile()
