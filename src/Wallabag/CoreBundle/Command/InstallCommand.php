@@ -201,6 +201,7 @@ class InstallCommand extends ContainerAwareCommand
         $user->setEmail($questionHelper->ask($this->defaultInput, $this->defaultOutput, $question));
 
         $user->setEnabled(true);
+        $user->addRole('ROLE_SUPER_ADMIN');
 
         $em->persist($user);
 
