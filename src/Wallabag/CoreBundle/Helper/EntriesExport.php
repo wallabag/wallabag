@@ -99,6 +99,7 @@ class EntriesExport
 
             case 'xml':
                 return $this->produceXML();
+
             case 'txt':
                 return $this->produceTXT();
         }
@@ -185,7 +186,7 @@ class EntriesExport
                 'Content-Disposition' => 'attachment; filename="'.$this->title.'.epub"',
                 'Content-Transfer-Encoding' => 'binary',
             )
-        )->send();
+        );
     }
 
     /**
@@ -235,7 +236,7 @@ class EntriesExport
                 'Content-Disposition' => 'attachment; filename="'.$this->title.'.mobi"',
                 'Content-Transfer-Encoding' => 'binary',
             )
-        )->send();
+        );
     }
 
     /**
@@ -289,7 +290,7 @@ class EntriesExport
                 'Content-Disposition' => 'attachment; filename="'.$this->title.'.pdf"',
                 'Content-Transfer-Encoding' => 'binary',
             )
-        )->send();
+        );
     }
 
     /**
@@ -332,7 +333,7 @@ class EntriesExport
                 'Content-Disposition' => 'attachment; filename="'.$this->title.'.csv"',
                 'Content-Transfer-Encoding' => 'UTF-8',
             )
-        )->send();
+        );
     }
 
     private function produceJSON()
@@ -345,7 +346,7 @@ class EntriesExport
                 'Content-Disposition' => 'attachment; filename="'.$this->title.'.json"',
                 'Content-Transfer-Encoding' => 'UTF-8',
             )
-        )->send();
+        );
     }
 
     private function produceXML()
@@ -358,7 +359,7 @@ class EntriesExport
                 'Content-Disposition' => 'attachment; filename="'.$this->title.'.xml"',
                 'Content-Transfer-Encoding' => 'UTF-8',
             )
-        )->send();
+        );
     }
 
     private function produceTXT()
@@ -378,7 +379,7 @@ class EntriesExport
                 'Content-Disposition' => 'attachment; filename="'.$this->title.'.txt"',
                 'Content-Transfer-Encoding' => 'UTF-8',
             )
-        )->send();
+        );
     }
 
     /**
