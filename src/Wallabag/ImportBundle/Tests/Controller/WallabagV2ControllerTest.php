@@ -41,6 +41,30 @@ class WallabagV2ControllerTest extends WallabagCoreTestCase
 
         $this->assertGreaterThan(1, $alert = $crawler->filter('div.messages.success')->extract(array('_text')));
         $this->assertContains('Import summary', $alert[0]);
+
+        $content = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findByUrlAndUserId(
+                'http://www.liberation.fr/planete/2015/10/26/refugies-l-ue-va-creer-100-000-places-d-accueil-dans-les-balkans_1408867',
+                $this->getLoggedInUserId()
+            );
+
+        $this->assertEmpty($content->getMimetype());
+        $this->assertEmpty($content->getPreviewPicture());
+        $this->assertEmpty($content->getLanguage());
+
+        $content = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findByUrlAndUserId(
+                'https://www.mediapart.fr/',
+                $this->getLoggedInUserId()
+            );
+
+        $this->assertNotEmpty($content->getMimetype());
+        $this->assertNotEmpty($content->getPreviewPicture());
+        $this->assertNotEmpty($content->getLanguage());
     }
 
     public function testImportWallabagWithEmptyFile()

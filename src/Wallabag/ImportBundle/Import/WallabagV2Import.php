@@ -56,9 +56,15 @@ class WallabagV2Import extends WallabagV1Import implements ImportInterface
             $entry->setContent($importedEntry['content']);
             $entry->setReadingTime($importedEntry['reading_time']);
             $entry->setDomainName($importedEntry['domain_name']);
-            $entry->setMimetype($importedEntry['mimetype']);
-            $entry->setLanguage($importedEntry['language']);
-            $entry->setPreviewPicture($importedEntry['preview_picture']);
+            if (isset($importedEntry['mimetype'])) {
+                $entry->setMimetype($importedEntry['mimetype']);
+            }
+            if (isset($importedEntry['language'])) {
+                $entry->setLanguage($importedEntry['language']);
+            }
+            if (isset($importedEntry['preview_picture'])) {
+                $entry->setPreviewPicture($importedEntry['preview_picture']);
+            }
 
             $this->em->persist($entry);
             ++$this->importedEntries;
