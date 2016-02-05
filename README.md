@@ -14,7 +14,7 @@ Keep in mind it's an **unstable** branch, everything can be broken :)
 If you don't have it yet, please [install composer](https://getcomposer.org/download/). Then you can install wallabag by executing the following commands:
 
 ```
-composer create-project wallabag/wallabag wallabag 2.0.*@alpha
+composer create-project wallabag/wallabag wallabag 2.0.0-alpha.2
 php bin/console wallabag:install
 php bin/console server:run
 ```
