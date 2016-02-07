@@ -78,7 +78,6 @@ class Comment
     private $ranges;
 
     /**
-     * @var string
      *
      * @Exclude
      *
@@ -87,7 +86,6 @@ class Comment
     private $user;
 
     /**
-     * @var string
      *
      * @Exclude
      *
@@ -295,7 +293,7 @@ class Comment
     /**
      * Set entry
      *
-     * @param string $user
+     * @param string $entry
      *
      * @return Comment
      */
