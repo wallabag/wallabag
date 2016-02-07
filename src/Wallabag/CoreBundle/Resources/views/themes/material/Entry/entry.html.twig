@@ -177,6 +177,32 @@ main {
     padding: 0;
 }
 </style>
+
+<script type="text/javascript">
+
+var app = new annotator.App();
+app.include(annotator.ui.main, {
+    element: document.querySelector('article')
+});
+app.include(annotator.storage.http, {
+    prefix: '',
+    urls: {
+        create: '{{ path('annotations_post_annotation', { 'entry': entry.id }) }}',
+        update: '{{ path('annotations_put_annotation', { 'comment': 'idComment' }) }}',
+        destroy: '{{ path('annotations_delete_annotation', { 'comment': 'idComment' }) }}',
+        search: '{{ path('annotations_get_annotations', { 'entry': entry.id }) }}'
+    }
+});
+app
+.start()
+.then(function () {
+     app.annotations.load({entry: {{ entry.id }}});
+});
+
+
+
+</script>
+
 {% endblock %}
 
 {% block content %}
