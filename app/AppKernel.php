@@ -48,6 +48,7 @@ class AppKernel extends Kernel
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             new Wallabag\AnnotationBundle\WallabagAnnotationBundle(),
 =======
             new Wallabag\CommentBundle\WallabagCommentBundle(),
@@ -55,7 +56,13 @@ class AppKernel extends Kernel
 =======
             new Wallabag\AnnotationBundle\WallabagAnnotationBundle(),
 >>>>>>> 9e1ce38... Rename CommentBundle with AnnotationBundle
+<<<<<<< 89a1cc72d308247cdb2b4cdb832122cafc3f7e87
 >>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
+=======
+=======
+            new Wallabag\CommentBundle\WallabagCommentBundle(),
+>>>>>>> 0c4e4ab... Comment work with annotator v2
+>>>>>>> Comment work with annotator v2
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
