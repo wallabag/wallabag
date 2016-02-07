@@ -9,7 +9,11 @@ use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\XmlRoot;
 use Symfony\Component\Validator\Constraints as Assert;
 use Wallabag\UserBundle\Entity\User;
+<<<<<<< e9a854c48821720618d0c607260ed92a2f43fa37
 use Wallabag\AnnotationBundle\Entity\Annotation;
+=======
+use Wallabag\CommentBundle\Entity\Comment;
+>>>>>>> Comment work with annotator v2
 
 /**
  * Entry.
@@ -99,7 +103,11 @@ class Entry
     private $updatedAt;
 
     /**
+<<<<<<< e9a854c48821720618d0c607260ed92a2f43fa37
      * @ORM\OneToMany(targetEntity="Wallabag\AnnotationBundle\Entity\Annotation", mappedBy="entry", cascade={"persist", "remove"})
+=======
+     * @ORM\OneToMany(targetEntity="Wallabag\CommentBundle\Entity\Comment", mappedBy="entry", cascade={"persist", "remove"})
+>>>>>>> Comment work with annotator v2
      * @ORM\JoinTable
      *
      * @Groups({"entries_for_user", "export_all"})
@@ -366,7 +374,11 @@ class Entry
     }
 
     /**
+<<<<<<< e9a854c48821720618d0c607260ed92a2f43fa37
      * @return ArrayCollection<Annotation>
+=======
+     * @return ArrayCollection<Comment>
+>>>>>>> Comment work with annotator v2
      */
     public function getAnnotations()
     {
@@ -374,11 +386,19 @@ class Entry
     }
 
     /**
+<<<<<<< e9a854c48821720618d0c607260ed92a2f43fa37
      * @param Annotation $annotation
      */
     public function setAnnotation(Annotation $annotation)
     {
         $this->annotations[] = $annotation;
+=======
+     * @param Comment $comment
+     */
+    public function setComment(Comment $comment)
+    {
+        $this->comments[] = $comment;
+>>>>>>> Comment work with annotator v2
     }
 
     /**

@@ -1,0 +1,4 @@
+annotations:
+  type: rest
+  resource:     "WallabagCommentBundle:WallabagComment"
+  name_prefix:  annotations_

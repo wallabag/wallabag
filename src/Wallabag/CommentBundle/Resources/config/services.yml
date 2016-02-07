@@ -1,0 +1,4 @@
+services:
+#    wallabag_comment.example:
+#        class: Wallabag\CommentBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]
