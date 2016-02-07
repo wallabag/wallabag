@@ -44,7 +44,7 @@ class CommentRepository extends EntityRepository
     }
 
     /**
-     * Find comment for this id
+     * Get comment for this id
      *
      * @param int $commentId
      *
@@ -59,9 +59,9 @@ class CommentRepository extends EntityRepository
     }
 
     /**
-     * Find comment for this id
+     * Find comments for entry id
      *
-     * @param int $commentId
+     * @param int $entryId
      *
      * @return array
      */
