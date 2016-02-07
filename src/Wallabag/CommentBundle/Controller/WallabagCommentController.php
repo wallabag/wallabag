@@ -13,7 +13,6 @@ use Wallabag\CommentBundle\Entity\Comment;
 use Wallabag\CoreBundle\Entity\Entry;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-
 class WallabagCommentController extends FOSRestController
 {
 
@@ -50,16 +49,16 @@ class WallabagCommentController extends FOSRestController
      *      }
      * )
      *
-     *
      * @return Response
      */
     public function getAnnotationsAction(Request $request, Entry $entry)
     {
-        $comments = $this
+        $commentrows = $this
                 ->getDoctrine()
                 ->getRepository('WallabagCommentBundle:Comment')
                 ->findCommentsByPageId($entry->getId());
-
+        $total = count($commentrows);
+        $comments = array('total' => $total, 'rows' => $commentrows);
         // $logger = $this->get('logger');
         // $logger->error('hello');
         $this->validateAuthentication();
@@ -95,7 +94,7 @@ class WallabagCommentController extends FOSRestController
 
         $comment = new Comment($this->getUser());
 
-        $comment->setContent($data['text']);
+        $comment->setText($data['text']);
         if (array_key_exists('quote',$data)) {
             $comment->setQuote($data['quote']);
         }
