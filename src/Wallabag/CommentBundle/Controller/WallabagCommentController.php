@@ -17,41 +17,17 @@ class WallabagCommentController extends FOSRestController
 {
 
     /**
-     * Retrieve all comments for the user
-     *
-     * @ApiDoc()
-     *
-     *
-     * @return Response
-     */
-    // public function getAnnotationsAction()
-    // {
-    //     $comments = $this
-    //             ->getDoctrine()
-    //             ->getRepository('WallabagCommentBundle:Comment')
-    //             ->getBuilderForAllByUser($this->getUser())
-    //             ->getQuery()->getResult();
-
-    //     $this->validateAuthentication();
-
-    //     $json = $this->get('serializer')->serialize($comments, 'json');
-
-    //     return $this->renderJsonResponse($json);
-    // }
-
-
-    /**
      * Retrieve comments for an entry
      *
      * @ApiDoc(
      *      requirements={
-     *          {"name"="page", "dataType"="integer", "requirement"="\w+", "description"="The page ID"}
+     *          {"name"="entry", "dataType"="integer", "requirement"="\w+", "description"="The entry ID"}
      *      }
      * )
      *
      * @return Response
      */
-    public function getAnnotationsAction(Request $request, Entry $entry)
+    public function getAnnotationsAction(Entry $entry)
     {
         $commentrows = $this
                 ->getDoctrine()
@@ -59,8 +35,6 @@ class WallabagCommentController extends FOSRestController
                 ->findCommentsByPageId($entry->getId());
         $total = count($commentrows);
         $comments = array('total' => $total, 'rows' => $commentrows);
-        // $logger = $this->get('logger');
-        // $logger->error('hello');
         $this->validateAuthentication();
 
         $json = $this->get('serializer')->serialize($comments, 'json');
@@ -86,9 +60,6 @@ class WallabagCommentController extends FOSRestController
     public function postAnnotationAction(Request $request, Entry $entry)
     {
         $data = json_decode($request->getContent(), true);
-
-        // $logger = $this->get('logger');
-        // $logger->error(print_r($data));
 
         $em = $this->getDoctrine()->getManager();
 
@@ -118,17 +89,15 @@ class WallabagCommentController extends FOSRestController
      *
      * @ApiDoc(
      *      requirements={
-     *          {"name"="entry", "dataType"="string", "requirement"="\w+", "description"="The comment ID"}
+     *          {"name"="comment", "dataType"="string", "requirement"="\w+", "description"="The comment ID"}
      *      }
      * )
      *
      * @return Response
      */
-    public function patchAnnotationAction(Comment $comment, Request $request)
+    public function patchAnnotationAction($idcomment, Request $request)
     {
-        return $this->render('WallabagCommentBundle:CommentController:edit_comment.html.php', array(
-            // ...
-        ));
+        //
     }
 
     public function deleteAnnotationAction($idcomment) {
