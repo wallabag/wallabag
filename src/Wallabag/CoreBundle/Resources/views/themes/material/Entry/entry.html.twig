@@ -177,6 +177,31 @@ main {
     padding: 0;
 }
 </style>
+
+<script type="text/javascript">
+$(function(){
+
+  var annotation = $('article').annotator();
+ 
+  annotation.annotator('addPlugin', 'Store', {
+    prefix: '/annotations',
+    loadFromSearch : {
+        page : {{ entry.id }}
+    },
+    // annotationData : {
+    //     page : {{ entry.id }}
+    // },
+    urls: {
+        create:  '/{{ entry.id }}',
+        update:  ':id',
+        destroy: ':id',
+        search:  '/{{ entry.id }}'
+    }
+  });
+
+});
+</script>
+
 {% endblock %}
 
 {% block content %}
