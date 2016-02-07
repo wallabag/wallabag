@@ -45,9 +45,9 @@ class Comment
     /**
      * @var string
      *
-     * @ORM\Column(name="content", type="text")
+     * @ORM\Column(name="text", type="text")
      */
-    private $content;
+    private $text;
 
     /**
      * @var \DateTime
@@ -141,27 +141,27 @@ class Comment
 
 
     /**
-     * Set content
+     * Set text
      *
-     * @param string $content
+     * @param string $text
      *
      * @return Comment
      */
-    public function setContent($content)
+    public function setText($text)
     {
-        $this->content = $content;
+        $this->text = $text;
 
         return $this;
     }
 
     /**
-     * Get content
+     * Get text
      *
      * @return string
      */
-    public function getContent()
+    public function getText()
     {
-        return $this->content;
+        return $this->text;
     }
 
     /**

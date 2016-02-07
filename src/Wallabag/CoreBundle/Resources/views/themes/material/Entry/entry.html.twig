@@ -179,18 +179,35 @@ main {
 </style>
 
 <script type="text/javascript">
-$(function(){
+
+var pageId = function () {
+    return {
+        beforeAnnotationCreated: function (ann) {
+            ann.entry = {{ entry.id }};
+        }
+    };
+};
+
 
 var app = new annotator.App();
-app.include(annotator.ui.main);
+app.include(annotator.ui.main, {
+    element: document.querySelector('article')
+});
 app.include(annotator.storage.http, {
-    prefix: 'annotations/'
+    prefix: '/annotations',
+    urls: {
+        create: '/{{ entry.id }}',
+        update: '/{id}',
+        destroy: '/{id}',
+        search: '/{{ entry.id }}'
+    }
 });
 app
 .start()
 .then(function () {
-     app.annotations.load();
+     app.annotations.load({entry: {{ entry.id }}});
 });
+
 
 
 </script>
