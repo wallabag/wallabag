@@ -181,25 +181,18 @@ main {
 <script type="text/javascript">
 $(function(){
 
-  var annotation = $('article').annotator();
- 
-  annotation.annotator('addPlugin', 'Store', {
-    prefix: '/annotations',
-    loadFromSearch : {
-        page : {{ entry.id }}
-    },
-    // annotationData : {
-    //     page : {{ entry.id }}
-    // },
-    urls: {
-        create:  '/{{ entry.id }}',
-        update:  ':id',
-        destroy: ':id',
-        search:  '/{{ entry.id }}'
-    }
-  });
-
+var app = new annotator.App();
+app.include(annotator.ui.main);
+app.include(annotator.storage.http, {
+    prefix: 'annotations/'
 });
+app
+.start()
+.then(function () {
+     app.annotations.load();
+});
+
+
 </script>
 
 {% endblock %}
