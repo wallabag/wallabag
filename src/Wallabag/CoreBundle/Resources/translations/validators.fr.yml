@@ -1,0 +1,3 @@
+# Config screen
+The password fields must match: 'Les deux mots de passe doivent être les mêmes'
+Password should by at least 8 chars long: 'Le mot de passe doit contenir au moins 8 caractères'

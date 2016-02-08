@@ -20,6 +20,9 @@ class NewUserType extends AbstractType
             ->add('username', TextType::class, array('required' => true))
             ->add('plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
+                'invalid_message' => 'The password fields must match',
+                'first_options'  => array('label' => 'Password'),
+                'second_options' => array('label' => 'Repeat new password'),
                 'constraints' => array(
                     new Constraints\Length(array(
                         'min' => 8,

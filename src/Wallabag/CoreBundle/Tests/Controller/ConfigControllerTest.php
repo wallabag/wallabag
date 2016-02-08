@@ -293,7 +293,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
                     'new_user[plainPassword][second]' => 'mypassword2',
                     'new_user[email]' => 'wallace@wallace.me',
                 ),
-                'This value is not valid',
+                'The password fields must match',
             ),
         );
     }
