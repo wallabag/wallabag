@@ -53,7 +53,7 @@
         "liip/theme-bundle": "~1.1",
         "pagerfanta/pagerfanta": "~1.0.3",
         "lexik/form-filter-bundle": "~5.0",
-        "j0k3r/graby": "~1.0",
+        "j0k3r/graby": "~1.2",
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "friendsofsymfony/oauth-server-bundle": "^1.5",
         "stof/doctrine-extensions-bundle": "^1.2@dev",
