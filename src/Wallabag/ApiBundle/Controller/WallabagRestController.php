@@ -124,12 +124,12 @@ class WallabagRestController extends FOSRestController
             $this->get('wallabag_core.content_proxy')->assignTagsToEntry($entry, $tags);
         }
 
-        if (!empty($isStarred)) {
-            $entry->setStarred($isStarred);
+        if (true === (bool) $isStarred) {
+            $entry->setStarred(true);
         }
 
-        if (!empty($isArchived)) {
-            $entry->setArchived($isArchived);
+        if (true === (bool) $isArchived) {
+            $entry->setArchived(true);
         }
 
         if (!empty($content)) {
