@@ -57,7 +57,7 @@ class TagRepository extends EntityRepository
      *
      * @return Tag
      */
-    public function findOnebyEntryAndLabel($entry, $label)
+    public function findOneByEntryAndTagLabel($entry, $label)
     {
         return $this->createQueryBuilder('t')
             ->leftJoin('t.entries', 'e')

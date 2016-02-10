@@ -81,11 +81,13 @@ class TagControllerTest extends WallabagCoreTestCase
         $tag = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Tag')
-            ->findOnebyEntryAndLabel($entry, $this->tagName);
+            ->findOneByEntryAndTagLabel($entry, $this->tagName);
 
         $client->request('GET', '/remove-tag/'.$entry->getId().'/'.$tag->getId());
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
+
+        $this->assertNotContains($this->tagName, $entry->getTags());
 
         $client->request('GET', '/remove-tag/'.$entry->getId().'/'.$tag->getId());
 
