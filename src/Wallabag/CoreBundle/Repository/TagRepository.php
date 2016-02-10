@@ -51,4 +51,20 @@ class TagRepository extends EntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    /**
+     * Used only in test case to get a tag for our entry.
+     *
+     * @return Tag
+     */
+    public function findOnebyEntryAndLabel($entry, $label)
+    {
+        return $this->createQueryBuilder('t')
+            ->leftJoin('t.entries', 'e')
+            ->where('e.id = :entryId')->setParameter('entryId', $entry->getId())
+            ->andWhere('t.label = :label')->setParameter('label', $label)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getSingleResult();
+    }
 }

@@ -107,4 +107,14 @@ class Tag
     {
         return $this->entries->contains($entry);
     }
+
+    /**
+     * Get entries for this tag.
+     *
+     * @return ArrayCollection<Entry>
+     */
+    public function getEntries()
+    {
+        return $this->entries;
+    }
 }

@@ -6,6 +6,8 @@ use Wallabag\CoreBundle\Tests\WallabagCoreTestCase;
 
 class TagControllerTest extends WallabagCoreTestCase
 {
+    public $tagName = 'opensource';
+
     public function testList()
     {
         $this->logInAs('admin');
@@ -31,7 +33,7 @@ class TagControllerTest extends WallabagCoreTestCase
         $form = $crawler->filter('button[id=tag_save]')->form();
 
         $data = array(
-            'tag[label]' => 'opensource',
+            'tag[label]' => $this->tagName,
         );
 
         $client->submit($form, $data);
@@ -64,5 +66,29 @@ class TagControllerTest extends WallabagCoreTestCase
             ->find($entry->getId());
 
         $this->assertEquals(2, count($newEntry->getTags()));
+    }
+
+    public function testRemoveTagFromEntry()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $entry = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneByUsernameAndNotArchived('admin');
+
+        $tag = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Tag')
+            ->findOnebyEntryAndLabel($entry, $this->tagName);
+
+        $client->request('GET', '/remove-tag/'.$entry->getId().'/'.$tag->getId());
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+
+        $client->request('GET', '/remove-tag/'.$entry->getId().'/'.$tag->getId());
+
+        $this->assertEquals(404, $client->getResponse()->getStatusCode());
     }
 }

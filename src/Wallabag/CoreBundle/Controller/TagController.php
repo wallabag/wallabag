@@ -56,6 +56,26 @@ class TagController extends Controller
     }
 
     /**
+     * Removes tag from entry.
+     *
+     * @Route("/remove-tag/{entry}/{tag}", requirements={"entry" = "\d+", "tag" = "\d+"}, name="remove_tag")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function removeTagFromEntry(Request $request, Entry $entry, Tag $tag)
+    {
+        $entry->removeTag($tag);
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+        if (count($tag->getEntries()) == 0) {
+            $em->remove($tag);
+        }
+        $em->flush();
+
+        return $this->redirect($request->headers->get('referer'));
+    }
+
+    /**
      * Shows tags for current user.
      *
      * @Route("/tag/list", name="tag")
