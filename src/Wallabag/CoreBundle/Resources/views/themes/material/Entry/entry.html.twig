@@ -159,7 +159,7 @@ main {
             <div id="list">
                 {% for tag in entry.tags %}
                     <div class="chip">
-                    {{ tag.label }} <a href="{{ path('remove_tag', { 'entry': entry.id, 'tag': tag.id }) }}"><i class="chip">✘</i></a>
+                    {{ tag.label }} <a href="{{ path('remove_tag', { 'entry': entry.id, 'tag': tag.id }) }}"><i class="mdi-navigation-close"></i></a>
                     </div>
                 {% endfor %}
             </div>
