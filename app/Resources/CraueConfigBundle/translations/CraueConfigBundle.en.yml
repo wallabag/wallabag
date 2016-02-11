@@ -17,3 +17,8 @@ share_twitter: Enable share to Twitter
 show_printlink: Display a link to print content
 wallabag_support_url: Support URL for wallabag
 wallabag_url: URL of *your* wallabag instance
+entry: "article"
+export: "export"
+import: "import"
+misc: "misc"
+modify_settings: "apply"

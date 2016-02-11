@@ -238,21 +238,14 @@
                                 <h5>{% trans %}What does « tagging rules » mean?{% endtrans %}</h5>
                                 <p class="help">
                                     {% trans %}
-                                    They are rules used by Wallabag to automatically tag new entries.<br />
-                                    Each time a new entry is added, all the tagging rules will be used to add
-                                    the tags you configured, thus saving you the trouble to manually classify
-                                    your entries.
+                                    They are rules used by Wallabag to automatically tag new entries.<br />Each time a new entry is added, all the tagging rules will be used to add the tags you configured, thus saving you the trouble to manually classify your entries.
                                     {% endtrans %}
                                 </p>
 
                                 <h5>{% trans %}How do I use them?{% endtrans %}</h5>
                                 <p class="help">
                                     {% trans %}
-                                    Let assume you want to tag new entries as « <i>short reading</i> » when the reading time is inferior to 3 minutes.<br />
-                                    In that case, you should put « readingTime &lt;= 3 » in the <i>Rule</i> field and « <i>short reading</i> » in the <i>Tags</i>
-                                    field.<br />
-                                    Several tags can added simultaneously by separating them by a comma: « <i>short reading, must read</i> »<br />
-                                    Complex rules can be written by using predefined operators: if « <i>readingTime &gt;= 5 AND domainName = "github.com"</i> » then tag as « <i>long reading, github </i> »
+                                    Let assume you want to tag new entries as « <i>short reading</i> » when the reading time is inferior to 3 minutes.<br />In that case, you should put « readingTime &lt;= 3 » in the <i>Rule</i> field and « <i>short reading</i> » in the <i>Tags</i> field.<br />Several tags can added simultaneously by separating them by a comma: « <i>short reading, must read</i> »<br />Complex rules can be written by using predefined operators: if « <i>readingTime &gt;= 5 AND domainName = "github.com"</i> » then tag as « <i>long reading, github </i> »
                                     {% endtrans %}
                                 </p>
 
@@ -290,7 +283,7 @@
                                                 <td>{% trans %}Greater than…{% endtrans %}</td>
                                             </tr>
                                             <tr>
-                                                <td>isStared</td>
+                                                <td>isStarred</td>
                                                 <td>{% trans %}Whether the entry is starred or not{% endtrans %}</td>
                                                 <td>&gt;</td>
                                                 <td>{% trans %}Strictly greater than…{% endtrans %}</td>
@@ -325,8 +318,7 @@
                                                 <td>matches</td>
                                                 <td>
                                                     {% trans %}
-                                                    Tests that a <i>subject</i> is matches a <i>search</i> (case-insensitive).<br />
-                                                    Example: <code>title matches "football"</code>
+                                                    Tests that a <i>subject</i> is matches a <i>search</i> (case-insensitive).<br />Example: <code>title matches "football"</code>
                                                     {% endtrans %}
                                                 </td>
                                             </tr>
