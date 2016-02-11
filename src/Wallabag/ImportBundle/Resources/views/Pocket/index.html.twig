@@ -7,7 +7,12 @@
         <div class="card-panel settings">
             {% if not has_consumer_key %}
                 <div class="card-panel red darken-1">
-                    {% trans %}Pocket import isn't configured. You need to define pocket_consumer_key.{% endtrans %}
+                    {% trans %}Pocket import isn't configured.{% endtrans %}
+                    {% if is_granted('ROLE_SUPER_ADMIN') %}
+                        {% trans with {'%keyurls%': '<a href="' ~ path('craue_config_settings_modify') ~ '#set-import">', '%keyurle%':'</a>'} %}You need to define %keyurls% a pocket_consumer_key %keyurle%.{% endtrans %}
+                    {% else %}
+                        {% trans %}Your server admin needs to define an API Key for Pocket.{% endtrans %}
+                    {% endif %}
                 </div>
             {% endif %}
 

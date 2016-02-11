@@ -162,7 +162,7 @@
                 </div>
 
                 <div class="input-field col s12">
-                    {{ form_widget(form.domainName, {'type': 'text', 'attr' : {'placeholder': 'website.com'} }) }}
+                    {{ form_widget(form.domainName, {'type': 'text', 'attr' : {'placeholder': 'website.com' | trans} }) }}
                     <label for="entry_filter_domainName">{% trans %}Domain name{% endtrans %}</label>
                 </div>
 
