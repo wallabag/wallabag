@@ -12,6 +12,8 @@ class WallabagV1ImportTest extends \PHPUnit_Framework_TestCase
     protected $user;
     protected $em;
     protected $logHandler;
+    protected $contentProxy;
+
 
     private function getWallabagV1Import($unsetUser = false)
     {
@@ -21,7 +23,11 @@ class WallabagV1ImportTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $wallabag = new WallabagV1Import($this->em);
+        $this->contentProxy = $this->getMockBuilder('Wallabag\CoreBundle\Helper\ContentProxy')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $wallabag = new WallabagV1Import($this->em,$this->contentProxy);
 
         $this->logHandler = new TestHandler();
         $logger = new Logger('test', array($this->logHandler));

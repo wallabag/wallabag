@@ -28,6 +28,7 @@ services:
         class: Wallabag\ImportBundle\Import\WallabagV1Import
         arguments:
             - "@doctrine.orm.entity_manager"
+            - "@wallabag_core.content_proxy"
         calls:
             - [ setLogger, [ "@logger" ]]
         tags:
@@ -37,6 +38,7 @@ services:
         class: Wallabag\ImportBundle\Import\WallabagV2Import
         arguments:
             - "@doctrine.orm.entity_manager"
+            - "@wallabag_core.content_proxy"
         calls:
             - [ setLogger, [ "@logger" ]]
         tags:
