@@ -149,10 +149,6 @@ nav input {
     max-height: 64px;
 }
 
-.nav-panel-buttom {
-    float: right;
-}
-
 .nav-panels {
     transition: background 0.2s ease;
 }
@@ -420,6 +416,12 @@ main ul.row {
         opacity: 1;
     }
   }
+
+@media only screen and (min-width : 400px) {
+    .nav-panel-buttom {
+        float: right;
+    }
+}
 
 @media only screen and (min-width : 993px) and (max-width : 1180px) {
     .row .col.l1 {
