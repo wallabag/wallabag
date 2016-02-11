@@ -46,5 +46,21 @@
         "is_fav": "0",
         "content": "\n<div class=\"row\">\n<div class=\"col-lg-8 col-md-12 col-xs-12 col-sm-12\">\n<p>wallabag (formerly poche) is a <strong>self hostable application for saving web pages</strong>. Unlike other services, wallabag is free (as in freedom) and open source.</p>\n</div>\n\n</div>\n<div class=\"row\">\n<div class=\"col-lg-8 col-md-12 col-xs-12 col-sm-12\">\n<p>With this application you will not miss content anymore. <strong>Click, save, read it when you want</strong>. It saves the content you select so that you can read it when you have time.</p>\n</div>\n\n</div>\n<div class=\"row\">\n<div class=\"col-lg-6 col-md-12 col-xs-12 col-sm-12\">\n<h2>How it works</h2>\n<p>Thanks to the bookmarklet or <a title=\"Downloads\" href=\"http://www.wallabag.org/downloads/\">third-party applications</a>, you save an article in your wallabag to read it later. Then, when you open your wallabag, <strong>you can comfortably read your articles</strong>.</p>\n<h2>How to use wallabag</h2>\n<p>There are two ways to use wallabag: you can <a href=\"http://www.wallabag.org/frequently-asked-questions/#How_can_I_install_wallabag_and_what_are_the_requirements\">install it</a> on your web server or you can <a href=\"http://app.inthepoche.com\">create an account</a> at Framabag (we install and upgrade wallabag for you).</p>\n</div>\n\n</div>\n",
         "user_id": "1"
+    },
+    {
+        "0": "4",
+        "1": "Sans titre",
+        "2": "http:\/\/www.konradlischka.info\/2016\/01\/blog\/wie-ein-deutsches-start-up-mit-wagniskapital-die-marktluecke-fuer-lokalen-digitaljournalismus-schliessen-will\/",
+        "3": "0",
+        "4": "0",
+        "5": "[unable to retrieve full-text content]",
+        "6": "1",
+        "id": "4",
+        "title": "Sans titre",
+        "url": "http:\/\/www.konradlischka.info\/2016\/01\/blog\/wie-ein-deutsches-start-up-mit-wagniskapital-die-marktluecke-fuer-lokalen-digitaljournalismus-schliessen-will\/",
+        "is_read": "0",
+        "is_fav": "0",
+        "content": "[unable to retrieve full-text content]",
+        "user_id": "1"
     }
 ]

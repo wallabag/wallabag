@@ -8,20 +8,23 @@ use Doctrine\ORM\EntityManager;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\UserBundle\Entity\User;
 use Wallabag\CoreBundle\Tools\Utils;
+use Wallabag\CoreBundle\Helper\ContentProxy;
 
 class WallabagV1Import implements ImportInterface
 {
     protected $user;
     protected $em;
     protected $logger;
+    protected $contentProxy;
     protected $skippedEntries = 0;
     protected $importedEntries = 0;
     protected $filepath;
 
-    public function __construct(EntityManager $em)
+    public function __construct(EntityManager $em, ContentProxy $contentProxy)
     {
         $this->em = $em;
         $this->logger = new NullLogger();
+        $this->contentProxy = $contentProxy;
     }
 
     public function setLogger(LoggerInterface $logger)
@@ -124,6 +127,9 @@ class WallabagV1Import implements ImportInterface
     {
         $i = 1;
 
+        //Untitled in all languages from v1. This should never have been translated
+        $untitled = array('Untitled', 'Sans titre', 'podle nadpisu', 'Sin título', 'با عنوان', 'per titolo', 'Sem título', 'Без названия', 'po naslovu', 'Без назви', 'No title found', '');
+
         foreach ($entries as $importedEntry) {
             $existingEntry = $this->em
                 ->getRepository('WallabagCoreBundle:Entry')
@@ -137,12 +143,16 @@ class WallabagV1Import implements ImportInterface
             // @see ContentProxy->updateEntry
             $entry = new Entry($this->user);
             $entry->setUrl($importedEntry['url']);
-            $entry->setTitle($importedEntry['title']);
+            if (in_array($importedEntry['title'], $untitled)) {
+                $entry = $this->contentProxy->updateEntry($entry, $importedEntry['url']);
+            } else {
+                $entry->setContent($importedEntry['content']);
+                $entry->setTitle($importedEntry['title']);
+                $entry->setReadingTime(Utils::getReadingTime($importedEntry['content']));
+                $entry->setDomainName(parse_url($importedEntry['url'], PHP_URL_HOST));
+            }
             $entry->setArchived($importedEntry['is_read']);
             $entry->setStarred($importedEntry['is_fav']);
-            $entry->setContent($importedEntry['content']);
-            $entry->setReadingTime(Utils::getReadingTime($importedEntry['content']));
-            $entry->setDomainName(parse_url($importedEntry['url'], PHP_URL_HOST));
 
             $this->em->persist($entry);
             ++$this->importedEntries;
