@@ -10,7 +10,6 @@ use Wallabag\UserBundle\Entity\User;
 use Wallabag\CoreBundle\Tools\Utils;
 use Wallabag\CoreBundle\Helper\ContentProxy;
 
-
 class WallabagV1Import implements ImportInterface
 {
     protected $user;
@@ -127,10 +126,10 @@ class WallabagV1Import implements ImportInterface
     protected function parseEntries($entries)
     {
         $i = 1;
-        /**
+        /*
          * Untitled in all languages from v1. This should never have been translated
          */
-        $untitled = array('Untitled','Sans titre','podle nadpisu','Sin título','با عنوان','per titolo','Sem título','Без названия','po naslovu','Без назви');
+        $untitled = array('Untitled', 'Sans titre', 'podle nadpisu', 'Sin título', 'با عنوان', 'per titolo', 'Sem título', 'Без названия', 'po naslovu', 'Без назви');
 
         foreach ($entries as $importedEntry) {
             $existingEntry = $this->em
@@ -145,7 +144,7 @@ class WallabagV1Import implements ImportInterface
             // @see ContentProxy->updateEntry
             $entry = new Entry($this->user);
             $entry->setUrl($importedEntry['url']);
-            if (in_array($importedEntry['title'],$untitled)) {
+            if (in_array($importedEntry['title'], $untitled)) {
                 $entry = $this->contentProxy->updateEntry($entry, $entry->getUrl());
             } else {
                 $entry->setContent($importedEntry['content']);

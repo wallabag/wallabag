@@ -26,7 +26,7 @@ class WallabagV2ImportTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $wallabag = new WallabagV2Import($this->em,$this->contentProxy);
+        $wallabag = new WallabagV2Import($this->em, $this->contentProxy);
 
         $this->logHandler = new TestHandler();
         $logger = new Logger('test', array($this->logHandler));
