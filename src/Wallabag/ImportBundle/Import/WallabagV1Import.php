@@ -15,7 +15,7 @@ class WallabagV1Import implements ImportInterface
     protected $user;
     protected $em;
     protected $logger;
-    private $contentProxy;
+    protected $contentProxy;
     protected $skippedEntries = 0;
     protected $importedEntries = 0;
     protected $filepath;
@@ -126,10 +126,9 @@ class WallabagV1Import implements ImportInterface
     protected function parseEntries($entries)
     {
         $i = 1;
-        /*
-         * Untitled in all languages from v1. This should never have been translated
-         */
-        $untitled = array('Untitled', 'Sans titre', 'podle nadpisu', 'Sin título', 'با عنوان', 'per titolo', 'Sem título', 'Без названия', 'po naslovu', 'Без назви');
+
+        //Untitled in all languages from v1. This should never have been translated
+        $untitled = array('Untitled', 'Sans titre', 'podle nadpisu', 'Sin título', 'با عنوان', 'per titolo', 'Sem título', 'Без названия', 'po naslovu', 'Без назви', 'No title found', '');
 
         foreach ($entries as $importedEntry) {
             $existingEntry = $this->em
@@ -145,7 +144,7 @@ class WallabagV1Import implements ImportInterface
             $entry = new Entry($this->user);
             $entry->setUrl($importedEntry['url']);
             if (in_array($importedEntry['title'], $untitled)) {
-                $entry = $this->contentProxy->updateEntry($entry, $entry->getUrl());
+                $entry = $this->contentProxy->updateEntry($entry, $importedEntry['url']);
             } else {
                 $entry->setContent($importedEntry['content']);
                 $entry->setTitle($importedEntry['title']);

@@ -57,19 +57,28 @@ class WallabagV1ImportTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $entryRepo->expects($this->exactly(3))
+        $entryRepo->expects($this->exactly(4))
             ->method('findByUrlAndUserId')
-            ->will($this->onConsecutiveCalls(false, true, false));
+            ->will($this->onConsecutiveCalls(false, true, false, false));
 
         $this->em
             ->expects($this->any())
             ->method('getRepository')
             ->willReturn($entryRepo);
 
+        $entry = $this->getMockBuilder('Wallabag\CoreBundle\Entity\Entry')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->contentProxy
+            ->expects($this->once())
+            ->method('updateEntry')
+            ->willReturn($entry);
+
         $res = $wallabagV1Import->import();
 
         $this->assertTrue($res);
-        $this->assertEquals(['skipped' => 1, 'imported' => 2], $wallabagV1Import->getSummary());
+        $this->assertEquals(['skipped' => 1, 'imported' => 3], $wallabagV1Import->getSummary());
     }
 
     public function testImportBadFile()
