@@ -39,6 +39,21 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->followRedirect();
 
+        $content = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findByUrlAndUserId(
+                'http://www.framablog.org/index.php/post/2014/02/05/Framabag-service-libre-gratuit-interview-developpeur',
+                $this->getLoggedInUserId()
+            );
+
+        $tag = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Tag')
+            ->findOneByLabel('Framabag');
+
+        $this->assertTrue($content->getTags()->contains($tag));
+
         $this->assertGreaterThan(1, $alert = $crawler->filter('div.messages.success')->extract(array('_text')));
         $this->assertContains('Import summary', $alert[0]);
     }
