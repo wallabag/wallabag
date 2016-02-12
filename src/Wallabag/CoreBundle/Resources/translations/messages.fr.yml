@@ -27,6 +27,7 @@ Search: 'Rechercher'
 Filter entries: 'Filtrer les articles'
 Enter your search here: 'Saisissez votre terme de recherche'
 Save new entry: 'Sauvegarder un nouvel article'
+Export: Exporter
 
 # Config screen
 Settings: 'Paramètres'
@@ -52,6 +53,7 @@ Old password: 'Mot de passe actuel'
 New password: 'Nouveau mot de passe'
 Repeat new password: 'Confirmez votre nouveau mot de passe'
 Username: "Nom d'utilisateur"
+Two factor authentication: Double authentification
 
 # Tagging rules
 Tagging rules: "Règles de tag automatiques"
@@ -83,6 +85,7 @@ One rule and another: "Une règle et l'autre"
 The domain name of the entry: "Le nom de domaine de l'article"
 "Tests that a <i>subject</i> is matches a <i>search</i> (case-insensitive).<br />Example: <code>title matches \"football\"</code>": "Teste si un <i>sujet</i> correspond à une <i>recherche</i> (non sensible à la casse).<br />Exemple : <code>title matches \"football\"</code>"
 Rule: "Règle"
+FAQ: "FAQ"
 
 # Entries
 'estimated reading time': 'durée de lecture'
@@ -97,6 +100,10 @@ http://website: "http://siteweb"
 Edit an entry: "Éditer un article"
 Title: "Titre"
 Is public: "Public"
+
+# tag
+Tags: Tags
+"{0} There is no tag.|{1} There is one tag.|]1,Inf[ There are %count% tags.": "{0} Il n'y a pas de tag.|{1} IL y a un tag.|]1,Inf[ Il y a %count% tags."
 
 # Filters
 Filters: 'Filtres'
@@ -177,6 +184,8 @@ Download: 'Télécharger'
 Does this article appear wrong?: "Est-ce que cet article s'affiche mal ?"
 Problems?: 'Un problème ?'
 Edit title: "Modifier le titre"
+Reload content: Recharger le contenu
+Tag added: Tag ajouté
 
 # Import
 Welcome on wallabag importer. Please select your previous service that you want to migrate.: "Bienvenue dans l'outil de migration de wallabag. Choisissez ci-dessous le service depuis lequel vous souhaitez migrer."
@@ -193,8 +202,12 @@ Please select your wallabag export and click on the below button to upload and i
 File: "Fichier"
 Upload file: "Importer le fichier"
 Import contents: "Importer les contenus"
+Import: "Importer"
+Import > Wallabag v1: "Importer > Wallabag v1"
+Import > Wallabag v2: "Importer > Wallabag v2"
 
 # Quickstart
+Quickstart: Pour bien débuter
 Welcome on wallabag!: "Bienvenue sur wallabag !"
 We'll accompany you to visit wallabag and show you some features which can interess you.: "Nous allons vous accompagner pour vous faire faire le tour de la maison et vous présenter quelques fonctionnalités qui pourraient vous intéresser pour vous approprier cet outil."
 Follow us!: "Suivez-nous !"
