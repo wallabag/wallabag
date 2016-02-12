@@ -144,7 +144,7 @@ class ConfigController extends Controller
 
             $this->get('session')->getFlashBag()->add(
                 'notice',
-                sprintf('User "%s" added', $newUser->getUsername())
+                $this->get('translator')->trans('User "%username%" added', array('%username%' => $newUser->getUsername()))
             );
 
             return $this->redirect($this->generateUrl('config').'#set6');

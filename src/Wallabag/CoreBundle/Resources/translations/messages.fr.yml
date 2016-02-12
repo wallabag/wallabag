@@ -111,7 +111,7 @@ to: 'à'
 website.com: 'website.com'
 Domain name: 'Nom de domaine'
 Creation date: 'Date de création'
-dd/mm/yyyy: 'dd/mm/aaaa'
+dd/mm/yyyy: 'jj/mm/aaaa'
 Clear: 'Effacer'
 Filter: 'Filtrer'
 website.com: "siteweb.com"
@@ -162,6 +162,9 @@ Entry unstarred: "Article retiré des favoris"
 Entry archived: "Article marqué comme lu"
 Entry unarchived: "Article marqué comme non lu"
 Entry deleted: "Article supprimé"
+Tagging rule deleted: "Règle supprimée"
+Tagging rules updated: "Règles mis à jour"
+User "%username%" added: 'Utilisateur "%username%" ajouté'
 
 # Entry
 Mark as read: 'Marquer comme lu'
