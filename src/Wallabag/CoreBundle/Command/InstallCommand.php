@@ -56,7 +56,7 @@ class InstallCommand extends ContainerAwareCommand
         ;
 
         $output->writeln('<info>Wallabag has been successfully installed.</info>');
-        $output->writeln('<comment>Just execute `php bin/console server:run` for using wallabag: http://localhost:8000</comment>');
+        $output->writeln('<comment>Just execute `php bin/console server:run --env=prod` for using wallabag: http://localhost:8000</comment>');
     }
 
     protected function checkRequirements()
