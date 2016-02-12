@@ -64,7 +64,7 @@ class ConfigController extends Controller
                 'Password updated'
             );
 
-            return $this->redirect($this->generateUrl('config'));
+            return $this->redirect($this->generateUrl('config').'#set4');
         }
 
         // handle changing user information
@@ -82,7 +82,7 @@ class ConfigController extends Controller
                 'Information updated'
             );
 
-            return $this->redirect($this->generateUrl('config'));
+            return $this->redirect($this->generateUrl('config').'#set3');
         }
 
         // handle rss information
@@ -98,7 +98,7 @@ class ConfigController extends Controller
                 'RSS information updated'
             );
 
-            return $this->redirect($this->generateUrl('config'));
+            return $this->redirect($this->generateUrl('config').'#set2');
         }
 
         // handle tagging rule
@@ -116,7 +116,7 @@ class ConfigController extends Controller
                 'Tagging rules updated'
             );
 
-            return $this->redirect($this->generateUrl('config'));
+            return $this->redirect($this->generateUrl('config').'#set5');
         }
 
         // handle adding new user
@@ -147,7 +147,7 @@ class ConfigController extends Controller
                 sprintf('User "%s" added', $newUser->getUsername())
             );
 
-            return $this->redirect($this->generateUrl('config'));
+            return $this->redirect($this->generateUrl('config').'#set6');
         }
 
         return $this->render('WallabagCoreBundle:Config:index.html.twig', array(
@@ -187,7 +187,12 @@ class ConfigController extends Controller
             return new JsonResponse(array('token' => $config->getRssToken()));
         }
 
-        return $request->headers->get('referer') ? $this->redirect($request->headers->get('referer')) : $this->redirectToRoute('config');
+        $this->get('session')->getFlashBag()->add(
+            'notice',
+            'RSS token updated'
+        );
+
+        return $this->redirect($this->generateUrl('config').'#set2');
     }
 
     /**
@@ -214,7 +219,7 @@ class ConfigController extends Controller
             'Tagging rule deleted'
         );
 
-        return $this->redirect($this->generateUrl('config'));
+        return $this->redirect($this->generateUrl('config').'#set5');
     }
 
     /**
