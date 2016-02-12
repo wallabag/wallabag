@@ -6,6 +6,7 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Doctrine\ORM\EntityManager;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\UserBundle\Entity\User;
 use Wallabag\CoreBundle\Tools\Utils;
 use Wallabag\CoreBundle\Helper\ContentProxy;
@@ -151,6 +152,10 @@ class WallabagV1Import implements ImportInterface
                 $entry->setReadingTime(Utils::getReadingTime($importedEntry['content']));
                 $entry->setDomainName(parse_url($importedEntry['url'], PHP_URL_HOST));
             }
+            if (array_key_exists('tags', $importedEntry) && $importedEntry['tags'] != '') {
+                $tags = explode(',', $importedEntry['tags']);
+                $this->assignTagsToEntry($entry, $tags);
+            }
             $entry->setArchived($importedEntry['is_read']);
             $entry->setStarred($importedEntry['is_fav']);
 
@@ -165,5 +170,23 @@ class WallabagV1Import implements ImportInterface
         }
 
         $this->em->flush();
+    }
+
+    private function assignTagsToEntry(Entry $entry, $tags)
+    {
+        foreach ($tags as $tag) {
+            $label = trim($tag);
+            $tagEntity = $this->em
+                ->getRepository('WallabagCoreBundle:Tag')
+                ->findOneByLabel($label);
+            if (is_object($tagEntity)) {
+                $entry->addTag($tagEntity);
+            } else {
+                $newTag = new Tag();
+                $newTag->setLabel($label);
+                $entry->addTag($newTag);
+            }
+            $this->em->flush();
+        }
     }
 }
