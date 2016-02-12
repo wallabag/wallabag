@@ -21,12 +21,14 @@ class WallabagV2Controller extends Controller
 
         if ($form->isValid()) {
             $file = $form->get('file')->getData();
+            $markAsRead = $form->get('mark_as_read')->getData();
             $name = $this->getUser()->getId().'.json';
 
             if (in_array($file->getClientMimeType(), $this->getParameter('wallabag_import.allow_mimetypes')) && $file->move($this->getParameter('wallabag_import.resource_dir'), $name)) {
                 $res = $wallabag
                     ->setUser($this->getUser())
                     ->setFilepath($this->getParameter('wallabag_import.resource_dir').'/'.$name)
+                    ->setMarkAsRead($markAsRead)
                     ->import();
 
                 $message = 'Import failed, please try again.';
