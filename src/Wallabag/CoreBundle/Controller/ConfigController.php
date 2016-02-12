@@ -5,6 +5,7 @@ namespace Wallabag\CoreBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\TaggingRule;
@@ -172,7 +173,7 @@ class ConfigController extends Controller
      *
      * @Route("/generate-token", name="generate_token")
      *
-     * @return JsonResponse
+     * @return RedirectResponse|JsonResponse
      */
     public function generateTokenAction(Request $request)
     {
@@ -202,7 +203,7 @@ class ConfigController extends Controller
      *
      * @Route("/tagging-rule/delete/{id}", requirements={"id" = "\d+"}, name="delete_tagging_rule")
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function deleteTaggingRuleAction(TaggingRule $rule)
     {
