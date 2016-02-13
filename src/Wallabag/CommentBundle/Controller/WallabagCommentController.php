@@ -3,21 +3,17 @@
 namespace Wallabag\CommentBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Hateoas\Configuration\Route;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Wallabag\CommentBundle\Entity\Comment;
 use Wallabag\CoreBundle\Entity\Entry;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class WallabagCommentController extends FOSRestController
 {
-
     /**
-     * Retrieve comments for an entry
+     * Retrieve comments for an entry.
      *
      * @ApiDoc(
      *      requirements={
@@ -32,7 +28,7 @@ class WallabagCommentController extends FOSRestController
         $commentrows = $this
                 ->getDoctrine()
                 ->getRepository('WallabagCommentBundle:Comment')
-                ->findCommentsByPageId($entry->getId());
+                ->findCommentsByPageId($entry->getId(), $this->getUser()->getId());
         $total = count($commentrows);
         $comments = array('total' => $total, 'rows' => $commentrows);
         $this->validateAuthentication();
@@ -45,7 +41,7 @@ class WallabagCommentController extends FOSRestController
     /**
      * Creates a new comment.
      *
-     * @param Entry   $entry
+     * @param Entry $entry
      *
      * @ApiDoc(
      *      requirements={
@@ -61,15 +57,17 @@ class WallabagCommentController extends FOSRestController
     {
         $data = json_decode($request->getContent(), true);
 
+        $this->validateAuthentication();
+
         $em = $this->getDoctrine()->getManager();
 
         $comment = new Comment($this->getUser());
 
         $comment->setText($data['text']);
-        if (array_key_exists('quote',$data)) {
+        if (array_key_exists('quote', $data)) {
             $comment->setQuote($data['quote']);
         }
-        if (array_key_exists('ranges',$data)) {
+        if (array_key_exists('ranges', $data)) {
             $comment->setRanges($data['ranges']);
         }
         $comment->setUpdated(new \DateTime());
@@ -95,13 +93,57 @@ class WallabagCommentController extends FOSRestController
      *
      * @return Response
      */
-    public function patchAnnotationAction($idcomment, Request $request)
+    public function putAnnotationAction($idcomment, Request $request)
     {
-        //
+        $this->validateAuthentication();
+
+        $data = json_decode($request->getContent(), true);
+
+        $comment = $this
+                ->getDoctrine()
+                ->getRepository('WallabagCommentBundle:Comment')
+                ->findCommentById($idcomment);
+
+        if (!is_null($data['text'])) {
+            $comment->setText($data['text']);
+            $comment->setUpdated(new \DateTime());
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+
+        $json = $this->get('serializer')->serialize($comment, 'json');
+
+        return $this->renderJsonResponse($json);
     }
 
-    public function deleteAnnotationAction($idcomment) {
-        //
+    /**
+     * Removes a comment.
+     *
+     * @ApiDoc(
+     *      requirements={
+     *          {"name"="comment", "dataType"="string", "requirement"="\w+", "description"="The comment ID"}
+     *      }
+     * )
+     *
+     * @return Response
+     */
+    public function deleteAnnotationAction($idcomment)
+    {
+        $this->validateAuthentication();
+
+        $comment = $this
+                ->getDoctrine()
+                ->getRepository('WallabagCommentBundle:Comment')
+                ->findCommentById($idcomment);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($comment);
+        $em->flush();
+
+        $json = $this->get('serializer')->serialize($comment, 'json');
+
+        return $this->renderJsonResponse($json);
     }
 
     /**
@@ -112,7 +154,7 @@ class WallabagCommentController extends FOSRestController
      *
      * @return Response
      */
-    private function renderJsonResponse($json,$code = 200)
+    private function renderJsonResponse($json, $code = 200)
     {
         return new Response($json, $code, array('application/json'));
     }
@@ -123,5 +165,4 @@ class WallabagCommentController extends FOSRestController
             throw new AccessDeniedException();
         }
     }
-
 }
