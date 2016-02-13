@@ -2,22 +2,16 @@
 
 namespace Wallabag\CommentBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Hateoas\Configuration\Annotation as Hateoas;
-use JMS\Serializer\Annotation\Groups;
-use JMS\Serializer\Annotation\XmlRoot;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Exclude;
 use JMS\Serializer\Annotation\VirtualProperty;
 use JMS\Serializer\Annotation\SerializedName;
-use Symfony\Component\Validator\Constraints as Assert;
 use Wallabag\UserBundle\Entity\User;
 use Wallabag\CoreBundle\Entity\Entry;
 
-
 /**
- * Comment
+ * Comment.
  *
  * @ORM\Table(name="comment")
  * @ORM\Entity(repositoryClass="Wallabag\CommentBundle\Repository\CommentRepository")
@@ -34,13 +28,6 @@ class Comment
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="title", type="string", length=255, nullable=true)
-     */
-    private $title;
 
     /**
      * @var string
@@ -78,7 +65,6 @@ class Comment
     private $ranges;
 
     /**
-     *
      * @Exclude
      *
      * @ORM\ManyToOne(targetEntity="Wallabag\UserBundle\Entity\User")
@@ -86,13 +72,12 @@ class Comment
     private $user;
 
     /**
-     *
      * @Exclude
      *
-     * @ORM\ManyToOne(targetEntity="Wallabag\CoreBundle\Entity\Entry")
+     * @ORM\ManyToOne(targetEntity="Wallabag\CoreBundle\Entity\Entry", inversedBy="comments")
+     * @ORM\JoinColumn(name="entry_id", referencedColumnName="id")
      */
     private $entry;
-
 
     /*
      * @param User     $user
@@ -104,7 +89,7 @@ class Comment
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -114,32 +99,7 @@ class Comment
     }
 
     /**
-     * Set title
-     *
-     * @param string $title
-     *
-     * @return Comment
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * Get title
-     *
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-
-    /**
-     * Set text
+     * Set text.
      *
      * @param string $text
      *
@@ -153,7 +113,7 @@ class Comment
     }
 
     /**
-     * Get text
+     * Get text.
      *
      * @return string
      */
@@ -163,7 +123,7 @@ class Comment
     }
 
     /**
-     * Set created
+     * Set created.
      *
      * @param \DateTime $created
      *
@@ -177,7 +137,7 @@ class Comment
     }
 
     /**
-     * Get created
+     * Get created.
      *
      * @return \DateTime
      */
@@ -187,7 +147,7 @@ class Comment
     }
 
     /**
-     * Set updated
+     * Set updated.
      *
      * @param \DateTime $updated
      *
@@ -201,7 +161,7 @@ class Comment
     }
 
     /**
-     * Get updated
+     * Get updated.
      *
      * @return \DateTime
      */
@@ -211,9 +171,9 @@ class Comment
     }
 
     /**
-     * Get quote
+     * Get quote.
      *
-     * @return string 
+     * @return string
      */
     public function getQuote()
     {
@@ -221,11 +181,11 @@ class Comment
     }
 
     /**
-     * Set quote
+     * Set quote.
      *
      * @param string $quote
      *
-     * @return Comment 
+     * @return Comment
      */
     public function setQuote($quote)
     {
@@ -235,9 +195,9 @@ class Comment
     }
 
     /**
-     * Get ranges
+     * Get ranges.
      *
-     * @return array 
+     * @return array
      */
     public function getRanges()
     {
@@ -245,7 +205,7 @@ class Comment
     }
 
     /**
-     * Set ranges
+     * Set ranges.
      *
      * @param array $ranges
      *
@@ -259,7 +219,7 @@ class Comment
     }
 
     /**
-     * Set user
+     * Set user.
      *
      * @param string $user
      *
@@ -273,7 +233,7 @@ class Comment
     }
 
     /**
-     * Get user
+     * Get user.
      *
      * @return string
      */
@@ -286,28 +246,30 @@ class Comment
      * @VirtualProperty
      * @SerializedName("user")
      */
-    public function getUserName() {
+    public function getUserName()
+    {
         return $this->user->getName();
     }
 
     /**
-     * Set entry
+     * Set entry.
      *
-     * @param string $entry
+     * @param Entry $entry
      *
      * @return Comment
      */
     public function setEntry($entry)
     {
         $this->entry = $entry;
+        $entry->setComment($this);
 
         return $this;
     }
 
     /**
-     * Get entry
+     * Get entry.
      *
-     * @return string
+     * @return Entry
      */
     public function getEntry()
     {
@@ -318,8 +280,8 @@ class Comment
      * @VirtualProperty
      * @SerializedName("annotator_schema_version")
      */
-    public function getVersion() {
-        return "v1.0";
+    public function getVersion()
+    {
+        return 'v1.0';
     }
 }
-
