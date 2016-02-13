@@ -58,6 +58,51 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
         $this->assertContains('Import summary', $alert[0]);
     }
 
+    public function testImportWallabagWithFileAndMarkAllAsRead()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/import/wallabag-v1');
+        $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
+
+        $file = new UploadedFile(__DIR__.'/../fixtures/wallabag-v1-read.json', 'wallabag-v1-read.json');
+
+        $data = array(
+            'upload_import_file[file]' => $file,
+            'upload_import_file[mark_as_read]' => 1,
+        );
+
+        $client->submit($form, $data);
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+
+        $crawler = $client->followRedirect();
+
+        $content1 = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findByUrlAndUserId(
+                'http://gilbert.pellegrom.me/recreating-the-square-slider',
+                $this->getLoggedInUserId()
+            );
+
+        $this->assertTrue($content1->isArchived());
+
+        $content2 = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findByUrlAndUserId(
+                'https://www.wallabag.org/features/',
+                $this->getLoggedInUserId()
+            );
+
+        $this->assertTrue($content2->isArchived());
+
+        $this->assertGreaterThan(1, $alert = $crawler->filter('div.messages.success')->extract(array('_text')));
+        $this->assertContains('Import summary', $alert[0]);
+    }
+
     public function testImportWallabagWithEmptyFile()
     {
         $this->logInAs('admin');

@@ -128,7 +128,6 @@ class WallabagV1Import implements ImportInterface
      */
     public function setMarkAsRead($markAsRead)
     {
-        var_dump($markAsRead);
         $this->markAsRead = $markAsRead;
 
         return $this;

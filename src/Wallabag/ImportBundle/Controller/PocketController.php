@@ -5,10 +5,8 @@ namespace Wallabag\ImportBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Wallabag\ImportBundle\Import\PocketImport;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-
 
 class PocketController extends Controller
 {
@@ -24,7 +22,6 @@ class PocketController extends Controller
                     'required' => false,
                     ))
             ->getForm();
-            ;
 
         return $this->render('WallabagImportBundle:Pocket:index.html.twig', [
             'import' => $this->get('wallabag_import.pocket.import'),
