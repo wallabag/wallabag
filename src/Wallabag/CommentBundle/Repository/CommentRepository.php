@@ -61,6 +61,7 @@ class CommentRepository extends EntityRepository
      * Find comments for entry id.
      *
      * @param int $entryId
+     * @param int $userId
      *
      * @return array
      */
@@ -71,5 +72,23 @@ class CommentRepository extends EntityRepository
             ->andwhere('c.user = :userId')->setParameter('userId', $userId)
             ->getQuery()->getResult()
         ;
+    }
+
+    /**
+     * Find last comment for a given entry id. Used only for tests.
+     *
+     * @param int $entryId
+     *
+     * @return array
+     */
+    public function findLastCommentByPageId($entryId, $userId)
+    {
+        return $this->createQueryBuilder('c')
+            ->where('c.entry = :entryId')->setParameter('entryId', $entryId)
+            ->andwhere('c.user = :userId')->setParameter('userId', $userId)
+            ->orderBy('c.id', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 }
