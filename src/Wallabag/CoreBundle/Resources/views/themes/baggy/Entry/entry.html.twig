@@ -3,13 +3,19 @@
 {% block title %}{{ entry.title|raw }} ({{ entry.domainName|removeWww }}){% endblock %}
 
 {% block content %}
-    <div id="article_toolbar">
+    <div id="article">
+        <header class="mbm">
+            <h1>{{ entry.title|raw }} <a href="{{ path('edit', { 'id': entry.id }) }}" title="{% trans %}Edit tags{% endtrans %}">✎</a></h1>
+        </header>
+
+        <div id="article_toolbar">
         <ul class="links">
             <li class="topPosF"><a href="#top" title="{% trans %}Back to top{% endtrans %}" class="tool top icon icon-arrow-up-thick"><span>{% trans %}Back to top{% endtrans %}</span></a></li>
             <li><a href="{{ entry.url|e }}" target="_blank" title="{% trans %}original{% endtrans %} : {{ entry.title|e }}" class="tool link icon icon-link"><span>{{ entry.domainName|removeWww }}</span></a></li>
             <li><a title="{% trans %}Reload content{% endtrans %}" class="tool icon icon-reload" href="{{ path('reload_entry', { 'id': entry.id }) }}"><span>{% trans %}Reload content{% endtrans %}</span></a></li>
             <li><a title="{% if entry.isArchived == 0 %}{% trans %}Mark as read{% endtrans %}{% else %}{% trans %}Mark as unread{% endtrans %}{% endif %}" class="tool icon icon-check {% if entry.isArchived == 0 %}archive-off{% else %}archive{% endif %}" href="{{ path('archive_entry', { 'id': entry.id }) }}"><span>{% if entry.isArchived == 0 %}{% trans %}Mark as read{% endtrans %}{% else %}{% trans %}Mark as unread{% endtrans %}{% endif %}</span></a></li>
             <li><a title="{% trans %}Favorite{% endtrans %}" class="tool icon icon-star {% if entry.isStarred == 0 %}fav-off{% else %}fav{% endif %}" href="{{ path('star_entry', { 'id': entry.id }) }}"><span>{% trans %}Toggle favorite{% endtrans %}</span></a></li>
+            <li><a id="nav-btn-add-tag" title="{% trans %}Add a tag{% endtrans %}"><span>{% trans %}Tag{% endtrans %}</span></a></li>
             <li><a title="{% trans %}Delete{% endtrans %}" class="tool delete icon icon-trash" href="{{ path('delete_entry', { 'id': entry.id }) }}"><span>{% trans %}Delete{% endtrans %}</span></a></li>
             {% if craue_setting('share_twitter') %}<li><a href="https://twitter.com/home?status={{entry.title|url_encode}}%20{{ entry.url|url_encode }}%20via%20@wallabagapp" target="_blank" class="tool twitter icon icon-twitter" title="{% trans %}Tweet{% endtrans %}"><span>{% trans %}Tweet{% endtrans %}</span></a></li>{% endif %}
             {% if craue_setting('share_mail') %}<li><a href="mailto:?subject={{ entry.title|url_encode }}&amp;body={{ entry.url|url_encode }}%20via%20@wallabagapp" class="tool email icon icon-mail" title="{% trans %}Email{% endtrans %}"><span>{% trans %}Email{% endtrans %}</span></a></li>{% endif %}
@@ -23,13 +29,14 @@
             <li><a href="mailto:hello@wallabag.org?subject=Wrong%20display%20in%20wallabag&amp;body={{ entry.url|url_encode }}" title="{% trans %}Does this article appear wrong?{% endtrans %}" class="tool bad-display icon icon-delete"><span>{% trans %}Does this article appear wrong?{% endtrans %}</span></a></li>
         </ul>
     </div>
-    <div id="article">
-        <header class="mbm">
-            <h1>{{ entry.title|raw }} <a href="{{ path('edit', { 'id': entry.id }) }}" title="{% trans %}Edit tags{% endtrans %}">✎</a></h1>
-        </header>
+
         <aside class="tags">
-            {% for tag in entry.tags %}<span class="mdi-action-label-outline">{{ tag.label }}</span>{% endfor %}
-            {{ render(controller( "WallabagCoreBundle:Tag:addTagForm", { 'id': entry.id } )) }}
+            {% for tag in entry.tags %}
+                <span class="mdi-action-label-outline">{{ tag.label }}</span><a href="{{ path('remove_tag', { 'entry': entry.id, 'tag': tag.id }) }}"><i>✘</i></a>
+                {% endfor %}
+            <div class="input-field nav-panel-add-tag" style="display: none">
+                {{ render(controller( "WallabagCoreBundle:Tag:addTagForm", { 'id': entry.id } )) }}
+            </div>
         </aside>
         {% if entry.previewPicture is not null %}
             <div><img class="preview" src="{{ entry.previewPicture }}" alt="{{ entry.title|raw }}" /></div>
