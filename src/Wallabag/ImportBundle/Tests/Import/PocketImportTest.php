@@ -75,7 +75,6 @@ class PocketImportTest extends \PHPUnit_Framework_TestCase
             $this->em,
             $this->contentProxy,
             $config,
-            $rabbitMQ,
             $this->producer
         );
 

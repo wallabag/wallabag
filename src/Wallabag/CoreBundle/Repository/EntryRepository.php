@@ -268,7 +268,7 @@ class EntryRepository extends EntityRepository
     }
 
     /**
-     * Get entry by id and userId
+     * Get entry by id and userId.
      *
      * @param $userId
      * @param $entryId

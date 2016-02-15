@@ -28,14 +28,14 @@ class PocketImport implements ImportInterface
     private $producer;
     private $rabbitMQ;
 
-    public function __construct(TokenStorageInterface $tokenStorage, EntityManager $em, ContentProxy $contentProxy, Config $craueConfig, $rabbitMQ, Producer $producer)
+    public function __construct(TokenStorageInterface $tokenStorage, EntityManager $em, ContentProxy $contentProxy, Config $craueConfig, Producer $producer)
     {
         $this->user = $tokenStorage->getToken()->getUser();
         $this->em = $em;
         $this->contentProxy = $contentProxy;
         $this->consumerKey = $craueConfig->get('pocket_consumer_key');
         $this->logger = new NullLogger();
-        $this->rabbitMQ = $rabbitMQ;
+        $this->rabbitMQ = $craueConfig->get('rabbitmq');
         $this->producer = $producer;
     }
 
