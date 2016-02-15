@@ -1,5 +1,8 @@
 language: php
 
+services:
+  - rabbitmq
+
 # faster builds on docker-container setup
 sudo: false
 
