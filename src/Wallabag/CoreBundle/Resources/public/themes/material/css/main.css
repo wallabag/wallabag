@@ -339,6 +339,11 @@ main ul.row {
     max-width: 40em;
 }
 
+#article img {
+    max-width: 100%;
+    height: auto;
+}
+
 .reader-mode {
     width: 95px !important;
     transition: width 0.2s ease;
