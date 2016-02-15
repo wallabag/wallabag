@@ -103,7 +103,7 @@ Is public: "Public"
 
 # tag
 Tags: Tags
-"{0} There is no tag.|{1} There is one tag.|]1,Inf[ There are %count% tags.": "{0} Il n'y a pas de tag.|{1} IL y a un tag.|]1,Inf[ Il y a %count% tags."
+"{0} There is no tag.|{1} There is one tag.|]1,Inf[ There are %count% tags.": "{0} Il n'y a pas de tag.|{1} Il y a un tag.|]1,Inf[ Il y a %count% tags."
 
 # Filters
 Filters: 'Filtres'
@@ -170,7 +170,7 @@ Entry archived: "Article marqué comme lu"
 Entry unarchived: "Article marqué comme non lu"
 Entry deleted: "Article supprimé"
 Tagging rule deleted: "Règle supprimée"
-Tagging rules updated: "Règles mis à jour"
+Tagging rules updated: "Règles mises à jour"
 User "%username%" added: 'Utilisateur "%username%" ajouté'
 
 # Entry
@@ -184,7 +184,7 @@ Download: 'Télécharger'
 Does this article appear wrong?: "Est-ce que cet article s'affiche mal ?"
 Problems?: 'Un problème ?'
 Edit title: "Modifier le titre"
-Reload content: Recharger le contenu
+Re-fetch content: Recharger le contenu
 Tag added: Tag ajouté
 
 # Import
