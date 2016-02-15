@@ -17,9 +17,7 @@ class LoadCommentData extends AbstractFixture implements OrderedFixtureInterface
         $comment1 = new Comment($this->getReference('admin-user'));
         $comment1->setEntry($this->getReference('entry1'));
         $comment1->setText('This is my comment /o/');
-        $comment1->setUpdated(new \DateTime());
         $comment1->setQuote('content');
-        //$comment1->setRanges(json_encode([{"start":"","startOffset":24,"end":"","endOffset":31}]));
 
         $manager->persist($comment1);
 
@@ -28,9 +26,7 @@ class LoadCommentData extends AbstractFixture implements OrderedFixtureInterface
         $comment2 = new Comment($this->getReference('admin-user'));
         $comment2->setEntry($this->getReference('entry2'));
         $comment2->setText('This is my 2nd comment /o/');
-        $comment2->setUpdated(new \DateTime());
         $comment2->setQuote('content');
-        //$comment1->setRanges(json_encode([{"start":"","startOffset":24,"end":"","endOffset":31}]));
 
         $manager->persist($comment2);
 

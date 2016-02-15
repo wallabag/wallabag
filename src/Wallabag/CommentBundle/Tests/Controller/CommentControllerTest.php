@@ -29,18 +29,25 @@ class CommentControllerTest extends WallabagCommentTestCase
     {
         $this->logInAs('admin');
 
+        $entry = $this->client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneBy(array('user' => 1));
+
         $headers = array('CONTENT_TYPE' => 'application/json');
         $content = json_encode(array(
             'text' => 'my comment',
+            'quote' => 'my quote',
+            'range' => '[{"start":"","startOffset":24,"end":"","endOffset":31}]',
             ));
-        $crawler = $this->client->request('POST', 'annotations/4.json', array(), array(), $headers, $content);
+        $crawler = $this->client->request('POST', 'annotations/'.$entry->getId().'.json', array(), array(), $headers, $content);
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
         $comment = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCommentBundle:Comment')
-            ->findLastCommentByPageId(4, 1);
+            ->findLastCommentByPageId($entry->getId(), 1);
 
         $this->assertEquals('my comment', $comment->getText());
     }
