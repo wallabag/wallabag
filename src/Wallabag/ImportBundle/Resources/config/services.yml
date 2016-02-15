@@ -25,7 +25,6 @@ services:
             - "@doctrine.orm.entity_manager"
             - "@wallabag_core.content_proxy"
             - "@craue_config"
-            - %rabbitmq%
             - "@old_sound_rabbit_mq.wallabag_producer"
         calls:
             - [ setClient, [ "@wallabag_import.pocket.client" ] ]
