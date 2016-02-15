@@ -298,7 +298,7 @@ h2:after {
    ========================================================================== */
 
 #content {
-  margin-top: 5em;
+  margin-top: 2em;
   min-height: 30em;
 }
 
@@ -884,9 +884,13 @@ blockquote {
   text-decoration: none;
 }
 
-  #article_toolbar a:hover, #article_toolbar a:focus {
-    background-color: #999;
-  }
+#article_toolbar a:hover, #article_toolbar a:focus {
+  background-color: #999;
+}
+
+#nav-btn-add-tag {
+    cursor: pointer;
+}
 
 .shaarli:before {
   content: "*";

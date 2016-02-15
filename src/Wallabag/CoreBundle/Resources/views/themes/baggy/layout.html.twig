@@ -35,8 +35,8 @@
     <ul id="links" class="links">
         <li><a href="{{ path('unread') }}">{% trans %}unread{% endtrans %}</a></li>
         <li><a href="{{ path('starred') }}">{% trans %}favorites{% endtrans %}</a></li>
-        <li><a href="{{ path('archive') }}"}>{% trans %}archive{% endtrans %}</a></li>
-        <li><a href="{{ path('all') }}"}>{% trans %}all{% endtrans %}</a></li>
+        <li><a href="{{ path('archive') }}">{% trans %}archive{% endtrans %}</a></li>
+        <li><a href="{{ path('all') }}">{% trans %}all{% endtrans %}</a></li>
         <li><a href="{{ path('tag') }}">{% trans %}tags{% endtrans %}</a></li>
         <li><a href="{{ path('new') }}">{% trans %}save a link{% endtrans %}</a></li>
         <li style="position: relative;"><a href="javascript: void(null);" id="search">{% trans %}search{% endtrans %}</a>
@@ -44,9 +44,9 @@
                 <form method="get" action="index.php">
                     <h2>{% trans %}Search{% endtrans %}</h2>
                     <a href="javascript: void(null);" id="search-form-close" class="close-button--popup close-button">&times;</a>
-                    <input type="hidden" name="view" value="search"></input>
+                    <input type="hidden" name="view" value="search">
                     <input required placeholder="{% trans %}Enter your search here{% endtrans %}" type="text" name="search" id="searchfield"><br>
-                    <input id="submit-search" type="submit" value="{% trans %}Search{% endtrans %}"></input>
+                    <input id="submit-search" type="submit" value="{% trans %}Search{% endtrans %}">
                 </form>
             </div>
         </li>

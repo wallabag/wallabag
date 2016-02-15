@@ -48,4 +48,16 @@ $.fn.ready(function() {
     $listmode.addClass("tablemode");
   }
 
+  /* ==========================================================================
+     Add tag panel
+     ========================================================================== */
+
+
+  $('#nav-btn-add-tag').on('click', function(){
+       $(".nav-panel-add-tag").toggle(100);
+       $(".nav-panel-menu").addClass('hidden');
+       $("#tag_label").focus();
+       return false;
+    });
+
 });
