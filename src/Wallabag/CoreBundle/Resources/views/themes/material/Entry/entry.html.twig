@@ -180,26 +180,17 @@ main {
 
 <script type="text/javascript">
 
-var pageId = function () {
-    return {
-        beforeAnnotationCreated: function (ann) {
-            ann.entry = {{ entry.id }};
-        }
-    };
-};
-
-
 var app = new annotator.App();
 app.include(annotator.ui.main, {
     element: document.querySelector('article')
 });
 app.include(annotator.storage.http, {
-    prefix: '/annotations',
+    prefix: '',
     urls: {
-        create: '/{{ entry.id }}',
-        update: '/{id}',
-        destroy: '/{id}',
-        search: '/{{ entry.id }}'
+        create: '{{ path('annotations_post_annotation', { 'entry': entry.id }) }}',
+        update: '{{ path('annotations_put_annotation', { 'comment': 'idComment' }) }}',
+        destroy: '{{ path('annotations_delete_annotation', { 'comment': 'idComment' }) }}',
+        search: '{{ path('annotations_get_annotations', { 'entry': entry.id }) }}'
     }
 });
 app

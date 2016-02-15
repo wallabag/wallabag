@@ -15,7 +15,7 @@ use Wallabag\CoreBundle\Entity\Entry;
  *
  * @ORM\Table(name="comment")
  * @ORM\Entity(repositoryClass="Wallabag\CommentBundle\Repository\CommentRepository")
- *
+ * @ORM\HasLifecycleCallbacks()
  * @ExclusionPolicy("none")
  */
 class Comment
@@ -39,28 +39,28 @@ class Comment
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="created", type="datetime")
+     * @ORM\Column(name="created_at", type="datetime")
      */
-    private $created;
+    private $createdAt;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="updated", type="datetime", nullable=true)
+     * @ORM\Column(name="updated_at", type="datetime")
      */
-    private $updated;
+    private $updatedAt;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="quote", type="string", length=255, nullable=true)
+     * @ORM\Column(name="quote", type="string")
      */
     private $quote;
 
     /**
      * @var array
      *
-     * @ORM\Column(name="ranges", type="array", length=255, nullable=true)
+     * @ORM\Column(name="ranges", type="array")
      */
     private $ranges;
 
@@ -85,7 +85,6 @@ class Comment
     public function __construct(\Wallabag\UserBundle\Entity\User $user)
     {
         $this->user = $user;
-        $this->created = new \DateTime();
     }
 
     /**
@@ -123,17 +122,15 @@ class Comment
     }
 
     /**
-     * Set created.
-     *
-     * @param \DateTime $created
-     *
-     * @return Comment
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
      */
-    public function setCreated($created)
+    public function timestamps()
     {
-        $this->created = $created;
-
-        return $this;
+        if (is_null($this->createdAt)) {
+            $this->createdAt = new \DateTime();
+        }
+        $this->updatedAt = new \DateTime();
     }
 
     /**
@@ -141,23 +138,9 @@ class Comment
      *
      * @return \DateTime
      */
-    public function getCreated()
+    public function getCreatedAt()
     {
-        return $this->created;
-    }
-
-    /**
-     * Set updated.
-     *
-     * @param \DateTime $updated
-     *
-     * @return Comment
-     */
-    public function setUpdated($updated)
-    {
-        $this->updated = $updated;
-
-        return $this;
+        return $this->createdAt;
     }
 
     /**
@@ -165,9 +148,9 @@ class Comment
      *
      * @return \DateTime
      */
-    public function getUpdated()
+    public function getUpdatedAt()
     {
-        return $this->updated;
+        return $this->updatedAt;
     }
 
     /**

@@ -6,9 +6,9 @@ use FOS\RestBundle\Controller\FOSRestController;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Wallabag\CommentBundle\Entity\Comment;
 use Wallabag\CoreBundle\Entity\Entry;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class WallabagCommentController extends FOSRestController
 {
@@ -25,13 +25,12 @@ class WallabagCommentController extends FOSRestController
      */
     public function getAnnotationsAction(Entry $entry)
     {
-        $commentrows = $this
+        $commentRows = $this
                 ->getDoctrine()
                 ->getRepository('WallabagCommentBundle:Comment')
                 ->findCommentsByPageId($entry->getId(), $this->getUser()->getId());
-        $total = count($commentrows);
-        $comments = array('total' => $total, 'rows' => $commentrows);
-        $this->validateAuthentication();
+        $total = count($commentRows);
+        $comments = array('total' => $total, 'rows' => $commentRows);
 
         $json = $this->get('serializer')->serialize($comments, 'json');
 
@@ -57,8 +56,6 @@ class WallabagCommentController extends FOSRestController
     {
         $data = json_decode($request->getContent(), true);
 
-        $this->validateAuthentication();
-
         $em = $this->getDoctrine()->getManager();
 
         $comment = new Comment($this->getUser());
@@ -70,7 +67,6 @@ class WallabagCommentController extends FOSRestController
         if (array_key_exists('ranges', $data)) {
             $comment->setRanges($data['ranges']);
         }
-        $comment->setUpdated(new \DateTime());
 
         $comment->setEntry($entry);
 
@@ -91,22 +87,16 @@ class WallabagCommentController extends FOSRestController
      *      }
      * )
      *
+     * @ParamConverter("comment", class="WallabagCommentBundle:Comment")
+     *
      * @return Response
      */
-    public function putAnnotationAction($idcomment, Request $request)
+    public function putAnnotationAction(Comment $comment, Request $request)
     {
-        $this->validateAuthentication();
-
         $data = json_decode($request->getContent(), true);
-
-        $comment = $this
-                ->getDoctrine()
-                ->getRepository('WallabagCommentBundle:Comment')
-                ->findCommentById($idcomment);
 
         if (!is_null($data['text'])) {
             $comment->setText($data['text']);
-            $comment->setUpdated(new \DateTime());
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -126,17 +116,12 @@ class WallabagCommentController extends FOSRestController
      *      }
      * )
      *
+     * @ParamConverter("comment", class="WallabagCommentBundle:Comment")
+     *
      * @return Response
      */
-    public function deleteAnnotationAction($idcomment)
+    public function deleteAnnotationAction(Comment $comment)
     {
-        $this->validateAuthentication();
-
-        $comment = $this
-                ->getDoctrine()
-                ->getRepository('WallabagCommentBundle:Comment')
-                ->findCommentById($idcomment);
-
         $em = $this->getDoctrine()->getManager();
         $em->remove($comment);
         $em->flush();
@@ -157,12 +142,5 @@ class WallabagCommentController extends FOSRestController
     private function renderJsonResponse($json, $code = 200)
     {
         return new Response($json, $code, array('application/json'));
-    }
-
-    private function validateAuthentication()
-    {
-        if (false === $this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-            throw new AccessDeniedException();
-        }
     }
 }
