@@ -5,7 +5,7 @@
 {% block content %}
     <div id="article">
         <header class="mbm">
-            <h1>{{ entry.title|raw }} <a href="{{ path('edit', { 'id': entry.id }) }}" title="{% trans %}Edit tags{% endtrans %}">✎</a></h1>
+            <h1>{{ entry.title|raw }} <a href="{{ path('edit', { 'id': entry.id }) }}" title="{% trans %}Edit title{% endtrans %}">✎</a></h1>
         </header>
 
         <div id="article_toolbar">
@@ -32,8 +32,8 @@
 
         <aside class="tags">
             {% for tag in entry.tags %}
-                <span class="mdi-action-label-outline">{{ tag.label }}</span><a href="{{ path('remove_tag', { 'entry': entry.id, 'tag': tag.id }) }}"><i>✘</i></a>
-                {% endfor %}
+                <span class="mdi-action-label-outline">{{ tag.label }}</span> <a href="{{ path('remove_tag', { 'entry': entry.id, 'tag': tag.id }) }}"><i>✘</i></a>
+            {% endfor %}
             <div class="input-field nav-panel-add-tag" style="display: none">
                 {{ render(controller( "WallabagCoreBundle:Tag:addTagForm", { 'id': entry.id } )) }}
             </div>
