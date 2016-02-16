@@ -5,17 +5,17 @@ namespace Wallabag\CoreBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Wallabag\ApiBundle\Entity\Client;
+use Wallabag\CoreBundle\Form\Type\ClientType;
 
 class DeveloperController extends Controller
 {
     /**
-     * @param Request $request
-     *
      * @Route("/developer", name="developer")
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
         return $this->render('WallabagCoreBundle:Developer:index.html.twig');
     }
@@ -29,26 +29,38 @@ class DeveloperController extends Controller
      */
     public function createClientAction(Request $request)
     {
-        $clientManager = $this->container->get('fos_oauth_server.client_manager.default');
-        $client = $clientManager->createClient();
-        $client->setRedirectUris(array('http://www.example.com'));
-        $client->setAllowedGrantTypes(array('token', 'authorization_code'));
-        $clientManager->updateClient($client);
+        $em = $this->getDoctrine()->getManager();
+        $client = new Client();
+        $clientForm = $this->createForm(ClientType::class, $client);
+        $clientForm->handleRequest($request);
+
+        if ($clientForm->isValid()) {
+            $client->setAllowedGrantTypes(array('token', 'authorization_code'));
+            $em->persist($client);
+            $em->flush();
+
+            $this->get('session')->getFlashBag()->add(
+                'notice',
+                'New client created.'
+            );
+
+            return $this->render('WallabagCoreBundle:Developer:client_parameters.html.twig', array(
+                'client_id' => $client->getPublicId(),
+                'client_secret' => $client->getSecret(),
+            ));
+        }
 
         return $this->render('WallabagCoreBundle:Developer:client.html.twig', array(
-            'client_id' => $client->getPublicId(),
-            'client_secret' => $client->getSecret(),
+            'form' => $clientForm->createView(),
         ));
     }
 
     /**
-     * @param Request $request
-     *
      * @Route("/developer/howto/first-app", name="howto-firstapp")
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function howtoFirstAppAction(Request $request)
+    public function howtoFirstAppAction()
     {
         return $this->render('WallabagCoreBundle:Developer:howto_app.html.twig');
     }

@@ -8,18 +8,18 @@
         <div class="card-panel settings">
 
             <div class="row">
-                <h3>Welcome to the wallabag API</h3>
+                <h3>{% trans %}Welcome to the wallabag API{% endtrans %}</h3>
 
-                <h4>Documentation</h4>
+                <h4>{% trans %}Documentation{% endtrans %}</h4>
 
                 <ul>
-                    <li><a href="{{ path('howto-firstapp') }}">How to create my first application</a></li>
-                    <li><a href="{{ path('nelmio_api_doc_index') }}">View full API documentation</a></li>
+                    <li><a href="{{ path('howto-firstapp') }}">{% trans %}How to create my first application{% endtrans %}</a></li>
+                    <li><a href="{{ path('nelmio_api_doc_index') }}">{% trans %}View full API documentation{% endtrans %}</a></li>
                 </ul>
 
-                <h4>My clients</h4>
+                <h4>{% trans %}Clients{% endtrans %}</h4>
                 <ul>
-                    <li><a href="{{ path('create_client') }}">Create a new client</a></li>
+                    <li><a href="{{ path('create_client') }}">{% trans %}Create a new client{% endtrans %}</a></li>
                 </ul>
 
             </div>
