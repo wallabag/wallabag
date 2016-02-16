@@ -5,6 +5,7 @@ namespace Wallabag\CoreBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\TaggingRule;
@@ -64,7 +65,7 @@ class ConfigController extends Controller
                 'Password updated'
             );
 
-            return $this->redirect($this->generateUrl('config'));
+            return $this->redirect($this->generateUrl('config').'#set4');
         }
 
         // handle changing user information
@@ -82,7 +83,7 @@ class ConfigController extends Controller
                 'Information updated'
             );
 
-            return $this->redirect($this->generateUrl('config'));
+            return $this->redirect($this->generateUrl('config').'#set3');
         }
 
         // handle rss information
@@ -98,7 +99,7 @@ class ConfigController extends Controller
                 'RSS information updated'
             );
 
-            return $this->redirect($this->generateUrl('config'));
+            return $this->redirect($this->generateUrl('config').'#set2');
         }
 
         // handle tagging rule
@@ -116,7 +117,7 @@ class ConfigController extends Controller
                 'Tagging rules updated'
             );
 
-            return $this->redirect($this->generateUrl('config'));
+            return $this->redirect($this->generateUrl('config').'#set5');
         }
 
         // handle adding new user
@@ -144,10 +145,10 @@ class ConfigController extends Controller
 
             $this->get('session')->getFlashBag()->add(
                 'notice',
-                sprintf('User "%s" added', $newUser->getUsername())
+                $this->get('translator')->trans('User "%username%" added', array('%username%' => $newUser->getUsername()))
             );
 
-            return $this->redirect($this->generateUrl('config'));
+            return $this->redirect($this->generateUrl('config').'#set6');
         }
 
         return $this->render('WallabagCoreBundle:Config:index.html.twig', array(
@@ -172,7 +173,7 @@ class ConfigController extends Controller
      *
      * @Route("/generate-token", name="generate_token")
      *
-     * @return JsonResponse
+     * @return RedirectResponse|JsonResponse
      */
     public function generateTokenAction(Request $request)
     {
@@ -187,7 +188,12 @@ class ConfigController extends Controller
             return new JsonResponse(array('token' => $config->getRssToken()));
         }
 
-        return $request->headers->get('referer') ? $this->redirect($request->headers->get('referer')) : $this->redirectToRoute('config');
+        $this->get('session')->getFlashBag()->add(
+            'notice',
+            'RSS token updated'
+        );
+
+        return $this->redirect($this->generateUrl('config').'#set2');
     }
 
     /**
@@ -197,7 +203,7 @@ class ConfigController extends Controller
      *
      * @Route("/tagging-rule/delete/{id}", requirements={"id" = "\d+"}, name="delete_tagging_rule")
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function deleteTaggingRuleAction(TaggingRule $rule)
     {
@@ -214,7 +220,7 @@ class ConfigController extends Controller
             'Tagging rule deleted'
         );
 
-        return $this->redirect($this->generateUrl('config'));
+        return $this->redirect($this->generateUrl('config').'#set5');
     }
 
     /**

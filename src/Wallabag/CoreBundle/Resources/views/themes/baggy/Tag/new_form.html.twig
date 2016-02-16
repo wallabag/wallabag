@@ -1,15 +1,14 @@
 <form name="tag" method="post" action="{{ path('new_tag', { 'entry': entry.id })}}">
+    {% if form_errors(form) %}
+        <span class="black-text">{{ form_errors(form) }}</span>
+    {% endif %}
 
-        {% if form_errors(form) %}
-            <span class="black-text">{{ form_errors(form) }}</span>
-        {% endif %}
+    {% if form_errors(form.label) %}
+        <span class="black-text">{{ form_errors(form.label) }}</span>
+    {% endif %}
 
-        {% if form_errors(form.label) %}
-            <span class="black-text">{{ form_errors(form.label) }}</span>
-        {% endif %}
-
-        {{ form_widget(form.label, { 'attr': {'autocomplete': 'off'} }) }}
-        {{ form_widget(form.save, { 'attr': {'class': 'btn waves-effect waves-light'}, 'label': 'add tag' }) }}
+    {{ form_widget(form.label, { 'attr': {'autocomplete': 'off'} }) }}
+    {{ form_widget(form.save, { 'attr': {'class': 'btn waves-effect waves-light'}, 'label': 'add tag' }) }}
 
     <div class="hidden">{{ form_rest(form) }}</div>
 </form>
