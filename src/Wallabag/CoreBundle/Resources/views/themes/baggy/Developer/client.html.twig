@@ -1,0 +1,31 @@
+{% extends "WallabagCoreBundle::layout.html.twig" %}
+
+{% block title %}{% trans %}New client{% endtrans %}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col s12">
+        <div class="card-panel settings">
+
+            <div class="row">
+                <p>{% trans %}You will create a new client. Please fill the field below for the redirect URI of your application:{% endtrans %}</p>
+                {{ form_start(form) }}
+                {{ form_errors(form) }}
+                <div class="input-field col s12">
+                    {{ form_label(form.redirect_uris) }}
+                    {{ form_errors(form.redirect_uris) }}
+                    {{ form_widget(form.redirect_uris) }}
+                </div>
+                <div class="hidden">{{ form_rest(form) }}</div>
+
+                <a href="{{ path('developer') }}" class="waves-effect waves-light grey btn">{% trans %}Back{% endtrans %}</a>
+                <button class="btn waves-effect waves-light" type="submit" name="action">
+                    {% trans %}Create new client{% endtrans %}
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

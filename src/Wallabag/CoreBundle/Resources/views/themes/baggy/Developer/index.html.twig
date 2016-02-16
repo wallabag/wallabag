@@ -1,0 +1,32 @@
+{% extends "WallabagCoreBundle::layout.html.twig" %}
+
+{% block title %}{% trans %}Developer{% endtrans %}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col s12">
+        <div class="card-panel settings">
+
+            <div class="row">
+                <h3>{% trans %}Welcome to the wallabag API{% endtrans %}</h3>
+
+                <h4>{% trans %}Documentation{% endtrans %}</h4>
+
+                <ul>
+                    <li><a href="{{ path('howto-firstapp') }}">{% trans %}How to create my first application{% endtrans %}</a></li>
+                    <li><a href="{{ path('nelmio_api_doc_index') }}">{% trans %}View full API documentation{% endtrans %}</a></li>
+                </ul>
+
+                <h4>{% trans %}Clients{% endtrans %}</h4>
+                <ul>
+                    <li><a href="{{ path('create_client') }}">{% trans %}Create a new client{% endtrans %}</a></li>
+                </ul>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
