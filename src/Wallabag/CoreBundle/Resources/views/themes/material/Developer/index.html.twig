@@ -3,7 +3,31 @@
 {% block title %}{% trans %}Developer{% endtrans %}{% endblock %}
 
 {% block content %}
+<div class="row">
+    <div class="col s12">
+        <div class="card-panel settings">
 
-    <a href="{{ path('create_client') }}">Create a new client</a>
+            <div class="row">
+                <h3>Welcome to the wallabag API</h3>
+
+                <h4>Documentation</h4>
+
+                <ul>
+                    <li><a href="{{ path('howto-firstapp') }}">How to create my first application</a></li>
+                    <li><a href="{{ path('nelmio_api_doc_index') }}">View full API documentation</a></li>
+                </ul>
+
+                <h4>My applications</h4>
+                <ul>
+                    <li><a href="{{ path('create_client') }}">Create a new application</a></li>
+                    <li><a href="#">See my applications</a></li>
+                </ul>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
 
 {% endblock %}

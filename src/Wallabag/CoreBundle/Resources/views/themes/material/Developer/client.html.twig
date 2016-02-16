@@ -1,9 +1,24 @@
 {% extends "WallabagCoreBundle::layout.html.twig" %}
 
-{% block title %}{% trans %}New client{% endtrans %}{% endblock %}
+{% block title %}{% trans %}New application{% endtrans %}{% endblock %}
 
 {% block content %}
+<div class="row">
+    <div class="col s12">
+        <div class="card-panel settings">
 
-    Client ID: {{ client_id }}
+            <div class="row">
+                <h3>My application parameters</h3>
+                <p>Here are your application parameters.</p>
+                <ul>
+                    <li>Client ID: {{ client_id }}</li>
+                    <li>Client Secret: {{ client_secret }}</li>
+                </ul>
+                <a class="waves-effect waves-light btn" href="{{ path('developer') }}">Back to Developer main page</a>
+            </div>
+
+        </div>
+    </div>
+</div>
 
 {% endblock %}

@@ -12,6 +12,8 @@ class DeveloperController extends Controller
      * @param Request $request
      *
      * @Route("/developer", name="developer")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction(Request $request)
     {
@@ -22,6 +24,8 @@ class DeveloperController extends Controller
      * @param Request $request
      *
      * @Route("/developer/client/create", name="create_client")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function createClientAction(Request $request)
     {
@@ -33,6 +37,19 @@ class DeveloperController extends Controller
 
         return $this->render('WallabagCoreBundle:Developer:client.html.twig', array(
             'client_id' => $client->getPublicId(),
+            'client_secret' => $client->getSecret(),
         ));
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @Route("/developer/howto/first-app", name="howto-firstapp")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function howtoFirstAppAction(Request $request)
+    {
+        return $this->render('WallabagCoreBundle:Developer:howto_app.html.twig');
     }
 }

@@ -1,0 +1,68 @@
+{% extends "WallabagCoreBundle::layout.html.twig" %}
+
+{% block title %}{% trans %}How to create my first application{% endtrans %}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col s12">
+        <div class="card-panel settings">
+
+            <div class="row">
+                <p>The following commands make use of the <a href="https://github.com/jkbrzt/httpie">HTTPie library</a>. Make sure it is installed on your system before using it.</p>
+                <p>You need a token to communicate between your 3rd application and wallabag API.</p>
+                <p>To create this token, you need <a href="{{ path('create_client') }}">to create a new client</a>.</p>
+                <p>Now, create your token (replace client_id, client_secret, username and password with the good values):</p>
+                <p>
+                    <code>
+                        <pre>
+http POST http://v2.wallabag.org/oauth/v2/token \
+    grant_type=password \
+    client_id=12_5um6nz50ceg4088c0840wwc0kgg44g00kk84og044ggkscso0k \
+    client_secret=3qd12zpeaxes8cwg8c0404g888co4wo8kc4gcw0occww8cgw4k \
+    username=yourUsername \
+    password=yourPassw0rd
+                        </pre>
+                    </code>
+                </p>
+                <p>The API will return a response like this:</p>
+                <p>
+                    <code>
+                        <pre>
+HTTP/1.1 200 OK
+Cache-Control: no-store, private
+Connection: close
+Content-Type: application/json
+Date: Tue, 06 Oct 2015 18:24:03 GMT
+Host: localhost:8000
+Pragma: no-cache
+X-Debug-Token: be00a1
+X-Debug-Token-Link: /profiler/be00a1
+X-Powered-By: PHP/5.5.9-1ubuntu4.13
+{
+    "access_token": "ZWFjNjA3ZWMwYWVmYzRkYTBlMmQ3NTllYmVhOGJiZDE0ZTg1NjE4MjczOTVlNzM0ZTRlMWQ0MmRlMmYwNTk5Mw",
+    "expires_in": 3600,
+    "refresh_token": "ODBjODU1NWUwNmUzZTBkNDQ5YWVlZTVlMjQ2Y2I0OWM2NTM1ZGM2M2Y3MDhjMTViM2U2MzYxYzRkMDk5ODRlZg",
+    "scope": null,
+    "token_type": "bearer"
+}
+                        </pre>
+                    </code>
+                </p>
+                <p>The access_token is useful to do a call to the API endpoint. For example:</p>
+                <p>
+                    <code>
+                        <pre>
+http GET http://v2.wallabag.org/api/entries.json \
+    "Authorization:Bearer ZWFjNjA3ZWMwYWVmYzRkYTBlMmQ3NTllYmVhOGJiZDE0ZTg1NjE4MjczOTVlNzM0ZTRlMWQ0MmRlMmYwNTk5Mw"
+                        </pre>
+                    </code>
+                </p>
+                <p>This call will return all the entries for your user.</p>
+                <p>If you want to see all the API endpoints, you can have a look <a href="{{ path('nelmio_api_doc_index') }}">to our API documentation</a>.</p>
+                <p><a class="waves-effect waves-light btn" href="{{ path('developer') }}">Back to Developer main page</a></p>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
