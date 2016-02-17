@@ -1,0 +1,24 @@
+download_pictures: Descarcă poze pe server
+carrot: Permite share către Carrot
+diaspora_url: Diaspora URL, dacă serviciul este permis
+export_epub: Permite exportare ePub
+export_mobi: Permite exportare .mobi
+export_pdf: Permite exportare PDF
+export_csv: Permite exportare CSV
+export_json: Permite exportare JSON
+export_txt: Permite exportare TXT
+export_xml: Permite exportare XML
+pocket_consumer_key: Cheie consumator pentru importarea contentului din Pocket (https://getpocket.com/developer/docs/authentication)
+shaarli_url: Shaarli URL, dacă serviciul este permis
+share_diaspora: Permite share către Diaspora
+share_mail: Permite share prin email
+share_shaarli: Permite share către Shaarli
+share_twitter: Permite share către Twitter
+show_printlink: Afișează un link pentru a printa content-ul
+wallabag_support_url: URL-ul de suport pentru wallabag
+wallabag_url: URL-ul instanței tale wallabag
+entry: "alticol"
+export: "exportă"
+import: "importă"
+misc: "diverse"
+modify_settings: "aplică"
