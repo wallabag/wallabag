@@ -103,7 +103,7 @@
 
     <!-- Export -->
     <div id="export" class="side-nav fixed right-aligned">
-    {% set currentRoute = app.request.attributes.get('_route') %}
+    {% set currentRoute = 'all' %}
     {% if currentRoute == 'homepage' %}
         {% set currentRoute = 'unread' %}
     {% endif %}

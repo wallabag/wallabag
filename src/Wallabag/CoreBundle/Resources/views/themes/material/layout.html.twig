@@ -54,6 +54,9 @@
             <li class="bold border-bottom {% if currentRoute == 'tags' %}active{% endif %}">
                 <a class="waves-effect" href="{{ path('tag') }}">{{ 'menu.left.tags'|trans }}</a>
             </li>
+            <li class="bold border-bottom {% if currentRoute == 'search' %}active{% endif %}">
+                <a class="waves-effect" href="{{ path('search-form') }}">{% trans %}search{% endtrans %}</a>
+            </li>
             <li class="bold {% if currentRoute == 'config' %}active{% endif %}">
                 <a class="waves-effect" href="{{ path('config') }}">{{ 'menu.left.config'|trans }}</a>
             </li>
@@ -105,13 +108,11 @@
                     </li>
                 </ul>
             </div>
-            <form method="get" action="index.php">
-                <div class="input-field nav-panel-search" style="display: none">
-                    <input name="search" id="searchfield" type="search" required placeholder="{{ 'menu.search_form.input_label'|trans }}">
-                    <label for="search"><i class="mdi-action-search"></i></label>
-                    <i class="mdi-navigation-close"></i>
-                </div>
-            </form>
+            <div class="input-field nav-panel-search" style="display: none">
+                {{ render(controller( "WallabagCoreBundle:Search:searchForm" )) }}
+                <label for="search"><i class="mdi-action-search"></i></label>
+                <i class="mdi-navigation-close"></i>
+            </div>
             <div class="input-field nav-panel-add" style="display: none">
                 {{ render(controller("WallabagCoreBundle:Entry:addEntryForm")) }}
                 <label for="add" class="active"><i class="mdi-content-add"></i></label>

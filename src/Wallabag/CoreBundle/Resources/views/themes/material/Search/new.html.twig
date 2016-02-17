@@ -1,0 +1,7 @@
+{% extends "WallabagCoreBundle::layout.html.twig" %}
+
+{% block title %}{% trans %}Search{% endtrans %}{% endblock %}
+
+{% block content %}
+    {{ render(controller( "WallabagCoreBundle:Search:searchForm" )) }}
+{% endblock %}

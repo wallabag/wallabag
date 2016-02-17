@@ -214,3 +214,42 @@ lexik_maintenance:
     response:
         code: 503
         status: "wallabag Service Temporarily Unavailable"
+
+fos_elastica:
+    clients:
+        default: { host: localhost, port: 9200 }
+    serializer:
+        callback_class: FOS\ElasticaBundle\Serializer\Callback
+        serializer: serializer
+    indexes:
+        wallabag:
+            client: default
+            settings:
+                index:
+                    analysis:
+                        analyzer:
+                            custom_french_analyzer:
+                                type: custom
+                                tokenizer: letter
+                                filter: ["asciifolding", "lowercase", "french_stem", "stop_fr"]
+                        filter:
+                            stop_fr:
+                                type: "stop"
+                                stopwords: ["l", "m", "t", "qu", "n", "s", "j", "d"]
+            types:
+                Entry:
+                    mappings: { analyzer: custom_french_analyzer }
+                    persistence:
+                        driver: orm # orm, mongodb, propel are available
+                        model:  Wallabag\CoreBundle\Entity\Entry
+                        provider: ~
+                        listener: ~
+                        finder: ~
+                Tag:
+                    mappings: { analyzer: custom_french_analyzer }
+                    persistence:
+                        driver: orm
+                        model:  Wallabag\CoreBundle\Entity\Tag
+                        provider: ~
+                        listener: ~
+                        finder: ~
