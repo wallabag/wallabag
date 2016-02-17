@@ -35,3 +35,4 @@ The main documentation for this application is organized into a couple sections:
    :caption: Developer documentation
 
    developer/docker
+   developer/translate

@@ -1,4 +1,4 @@
-Run Wallabag in docker-compose
+Run wallabag in docker-compose
 ==============================
 
 In order to run your own development instance of wallabag, you may
@@ -15,8 +15,8 @@ your system and up to date.
 Switch DBMS
 -----------
 
-By default, Wallabag will start with a sqlite database.
-Since Wallabag provide support for Postgresql and MySQL, docker
+By default, wallabag will start with a sqlite database.
+Since wallabag provides support for Postgresql and MySQL, docker
 containers are also available for these ones.
 
 In ``docker-compose.yml``, for the chosen DBMS uncomment :
@@ -33,7 +33,7 @@ In order to keep running Symfony commands on your host (such as
   like ``SYMFONY__ENV__DATABASE_HOST`` will exist.
 - create a ``127.0.0.1 rdbms`` on your system ``hosts`` file
 
-Run Wallabag
+Run wallabag
 ------------
 
 #. Fork and clone the project
