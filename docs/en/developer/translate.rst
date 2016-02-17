@@ -1,10 +1,10 @@
 Translate wallabag
 ==================
 
-Translation file
-----------------
+Translation files
+-----------------
 
-You can find translations files here: https://github.com/wallabag/wallabag/tree/v2/src/Wallabag/CoreBundle/Resources/translations.
+You can find translation files here: https://github.com/wallabag/wallabag/tree/v2/src/Wallabag/CoreBundle/Resources/translations.
 
 You have to create ``messages.CODE.yml`` and ``validators.CODE.yml``, where CODE is the the ISO 639-1 code of your language (`see wikipedia <https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes>`__).
 
