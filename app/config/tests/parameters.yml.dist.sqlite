@@ -35,3 +35,6 @@ parameters:
     fosuser_confirmation: true
 
     from_email: no-reply@wallabag.org
+
+    # set to true to prevent changing password
+    demo: false

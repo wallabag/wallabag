@@ -57,13 +57,20 @@ class ConfigController extends Controller
         $pwdForm->handleRequest($request);
 
         if ($pwdForm->isValid()) {
-            $user->setPlainPassword($pwdForm->get('new_password')->getData());
-            $userManager->updateUser($user, true);
+            if ($this->getParameter('demo') === false) {
+                $user->setPlainPassword($pwdForm->get('new_password')->getData());
+                $userManager->updateUser($user, true);
 
-            $this->get('session')->getFlashBag()->add(
-                'notice',
-                'Password updated'
-            );
+                $this->get('session')->getFlashBag()->add(
+                    'notice',
+                    'Password updated'
+                );
+            } else {
+                $this->get('session')->getFlashBag()->add(
+                    'notice',
+                    'In demonstration mode, you can`t change password.'
+                );
+            }
 
             return $this->redirect($this->generateUrl('config').'#set4');
         }
