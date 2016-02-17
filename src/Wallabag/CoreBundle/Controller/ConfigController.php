@@ -68,7 +68,7 @@ class ConfigController extends Controller
             } else {
                 $this->get('session')->getFlashBag()->add(
                     'notice',
-                    'In demonstration mode, you can`t change password.'
+                    'In demonstration mode, you can\'t change password.'
                 );
             }
 
