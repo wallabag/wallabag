@@ -193,6 +193,16 @@ nav input {
     transition: .3s color;
 }
 
+.input-field.nav-panel-search .mdi-navigation-close {
+    position: absolute;
+    top: 0;
+    right: 1rem;
+    color: transparent;
+    cursor: pointer;
+    font-size: 2rem;
+    transition: .3s color;
+}
+
 #button_filters {
     display: none;
 }
