@@ -1,0 +1,24 @@
+download_pictures: Pobierz obrazy na swój serwer
+carrot: Włącz udostępnianie dla Carrot
+diaspora_url: Adres URL Diaspora, jeżeli usługa jest włączona
+export_epub: Włącz eksport do ePub
+export_mobi: Włącz eksport do .mobi
+export_pdf: Włącz eksport do PDF
+export_csv: Włącz eksport do CSV
+export_json: Włącz eksport do JSON
+export_txt: Włącz eksport do TXT
+export_xml: Włącz eksport do XML
+pocket_consumer_key: Klucz klienta Pocket do importu zawartości (https://getpocket.com/developer/docs/authentication)
+shaarli_url: Adress URL Shaarli, jeżeli usługa jest włączona
+share_diaspora: Włącz udostępnianie dla Diaspora
+share_mail: Włącz udostępnianie przez email
+share_shaarli: Włącz udostępnianie dla Shaarli
+share_twitter: Włącz udostępnianie dla Twitter
+show_printlink: Pokaż link do wydrukowania zawartości
+wallabag_support_url: Adres URL wsparcia dla wallabag
+wallabag_url: Adres *twojej* instacji wallabag
+entry: "artykuł"
+export: "eksport"
+import: "import"
+misc: "różne"
+modify_settings: "zatwierdz"

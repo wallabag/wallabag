@@ -37,6 +37,7 @@ wallabag_core:
         tr: 'Türkçe'
         fa: 'فارسی'
         ro: 'Română'
+        pl: 'Polish'
     items_on_page: 12
     theme: material
     language: en
