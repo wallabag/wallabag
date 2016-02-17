@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Wallabag\CoreBundle\Entity\ArticleSearch;
 use Wallabag\CoreBundle\Form\Type\EntryFilterType;
 use Wallabag\CoreBundle\Form\Type\EditEntryType;
-use Wallabag\CoreBundle\Form\Type\SearchType;
+use Wallabag\CoreBundle\Form\Type\NewSearchType;
 
 use Elastica\Index;
 use Elastica\Query;
@@ -29,16 +29,14 @@ class SearchController extends Controller
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function searchFormAction(Request $request, $page = 1) {
-        //$article_type = $this->get('fos_elastica.index.wallabag.entry');
 
         $articleSearch = new ArticleSearch();
 
-        $form = $this->createForm(SearchType::class,$articleSearch);
+        $form = $this->createForm(NewSearchType::class,$articleSearch);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
 
-            //$page = 1;
             $repositoryManager = $this->get('fos_elastica.manager.orm');
             $repository = $repositoryManager->getRepository('WallabagCoreBundle:Entry');
             $search = $articleSearch->getSearchTerm();
