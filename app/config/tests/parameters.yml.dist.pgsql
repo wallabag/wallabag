@@ -36,5 +36,5 @@ parameters:
 
     from_email: no-reply@wallabag.org
 
-    # set to true to prevent changing password
+    # this parameter is only used for the wallabag public demo, it means user won't be able to change the password of the default account
     demo: false
