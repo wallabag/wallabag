@@ -50,8 +50,11 @@
 
                             <div class="estimatedTime grey-text">
                                 <span class="tool reading-time">
-                                    {% trans %}estimated reading time{% endtrans %}:
-                                    {% if entry.readingTime > 0 %}{{ entry.readingTime }}{% else %}<small class="inferieur">&lt;</small> 1{% endif %} min
+                                    {% if entry.readingTime > 0 %}
+                                        {% trans with {'%readingTime%': entry.readingTime } %}estimated reading time: %readingTime% min{% endtrans %}
+                                    {% else %}
+                                        {% trans with {'%inferior%': '<small class="inferieur">&lt;</small>'} %}estimated reading time: %inferior% 1 min{% endtrans %}
+                                    {% endif %}
                                 </span>
                             </div>
 

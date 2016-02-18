@@ -88,7 +88,8 @@ Rule: "Règle"
 FAQ: "FAQ"
 
 # Entries
-'estimated reading time': 'durée de lecture'
+"estimated reading time: %readingTime% min": "durée de lecture : %readingTime% min"
+"estimated reading time: %inferior% 1 min": "durée de lecture : %inferior% 1 min"
 original: "original"
 Toggle mark as read: 'Marquer comme lu/non lu'
 Toggle favorite: 'Marquer comme favori'
