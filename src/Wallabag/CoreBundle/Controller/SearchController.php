@@ -2,21 +2,13 @@
 
 namespace Wallabag\CoreBundle\Controller;
 
-use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Wallabag\CoreBundle\Entity\ArticleSearch;
 use Wallabag\CoreBundle\Form\Type\EntryFilterType;
-use Wallabag\CoreBundle\Form\Type\EditEntryType;
 use Wallabag\CoreBundle\Form\Type\NewSearchType;
-
-use Elastica\Index;
-use Elastica\Query;
-use Elastica\Query\Term;
-use Pagerfanta\Adapter\ElasticaAdapter;
 use Pagerfanta\Adapter\ArrayAdapter;
 
 class SearchController extends Controller
@@ -28,15 +20,14 @@ class SearchController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function searchFormAction(Request $request, $page = 1) {
-
+    public function searchFormAction(Request $request, $page = 1)
+    {
         $articleSearch = new ArticleSearch();
 
-        $form = $this->createForm(NewSearchType::class,$articleSearch);
+        $form = $this->createForm(NewSearchType::class, $articleSearch);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-
             $repositoryManager = $this->get('fos_elastica.manager.orm');
             $repository = $repositoryManager->getRepository('WallabagCoreBundle:Entry');
             $search = $articleSearch->getSearchTerm();
@@ -61,6 +52,7 @@ class SearchController extends Controller
                 )
             );
         }
+
         return $this->render('WallabagCoreBundle:Search:new_form.html.twig', array(
             'form' => $form->createView(),
         ));

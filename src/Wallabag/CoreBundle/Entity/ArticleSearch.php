@@ -2,11 +2,8 @@
 
 namespace Wallabag\CoreBundle\Entity;
 
-use Symfony\Component\HttpFoundation\Request;
-
 class ArticleSearch
 {
-
     private $searchTerm;
 
     public function getSearchTerm()
@@ -17,8 +14,7 @@ class ArticleSearch
     public function setSearchTerm($searchTerm)
     {
         $this->searchTerm = $searchTerm;
+
         return $this;
     }
-
-
 }
