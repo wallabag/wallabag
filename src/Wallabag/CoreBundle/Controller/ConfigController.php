@@ -57,18 +57,18 @@ class ConfigController extends Controller
         $pwdForm->handleRequest($request);
 
         if ($pwdForm->isValid()) {
-            if ($this->getParameter('demo') === false) {
+            if ($this->getParameter('demo') === true && $this->getParameter('demo_username') === $user->getUsername()) {
+                $this->get('session')->getFlashBag()->add(
+                    'notice',
+                    'In demonstration mode, you can\'t change password for this user.'
+                );
+            } else {
                 $user->setPlainPassword($pwdForm->get('new_password')->getData());
                 $userManager->updateUser($user, true);
 
                 $this->get('session')->getFlashBag()->add(
                     'notice',
                     'Password updated'
-                );
-            } else {
-                $this->get('session')->getFlashBag()->add(
-                    'notice',
-                    'In demonstration mode, you can\'t change password.'
                 );
             }
 
