@@ -27,9 +27,17 @@
             <div id="entry-{{ entry.id|e }}" class="entry">
                 <h2><a href="{{ path('view', { 'id': entry.id }) }}">{{ entry.title|raw }}</a></h2>
                 {% if entry.readingTime > 0 %}
-                    <div class="estimatedTime"><span class="tool reading-time">{% trans %}estimated reading time :{% endtrans %} {{ entry.readingTime }} min</span></div>
+                    <div class="estimatedTime">
+                        <span class="tool reading-time">
+                            {% trans with {'%readingTime%': entry.readingTime } %}estimated reading time: %readingTime% min{% endtrans %}
+                        </span>
+                    </div>
                 {% else %}
-                    <div class="estimatedTime"><span class="tool reading-time">{% trans %}estimated reading time :{% endtrans %} <small class="inferieur">&lt;</small> 1 min</span></div>
+                    <div class="estimatedTime">
+                        <span class="tool reading-time">
+                        {% trans with {'%inferior%': '<small class="inferieur">&lt;</small>'} %}estimated reading time: %inferior% 1 min{% endtrans %}
+                        </span>
+                    </div>
                 {% endif %}
 
                 <ul class="tools links">
