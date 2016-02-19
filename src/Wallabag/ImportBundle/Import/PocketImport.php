@@ -9,7 +9,6 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Helper\ContentProxy;
 use Craue\ConfigBundle\Util\Config;
 
@@ -177,26 +176,6 @@ class PocketImport implements ImportInterface
         $this->client = $client;
     }
 
-    private function assignTagsToEntry(Entry $entry, $tags)
-    {
-        foreach ($tags as $tag) {
-            $label = trim($tag['tag']);
-            $tagEntity = $this->em
-                ->getRepository('WallabagCoreBundle:Tag')
-                ->findOneByLabel($label);
-
-            if (is_object($tagEntity)) {
-                $entry->addTag($tagEntity);
-            } else {
-                $newTag = new Tag();
-                $newTag->setLabel($label);
-
-                $entry->addTag($newTag);
-            }
-            $this->em->flush();
-        }
-    }
-
     /**
      * @see https://getpocket.com/developer/docs/v3/retrieve
      *
@@ -246,7 +225,10 @@ class PocketImport implements ImportInterface
             }
 
             if (isset($pocketEntry['tags']) && !empty($pocketEntry['tags'])) {
-                $this->assignTagsToEntry($entry, $pocketEntry['tags']);
+                $this->contentProxy->assignTagsToEntry(
+                    $entry,
+                    array_keys($pocketEntry['tags'])
+                );
             }
 
             $this->em->persist($entry);

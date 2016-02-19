@@ -50,6 +50,7 @@ services:
         arguments:
             - "@wallabag_core.graby"
             - "@wallabag_core.rule_based_tagger"
+            - "@wallabag_core.tag_repository"
             - "@logger"
 
     wallabag_core.rule_based_tagger:

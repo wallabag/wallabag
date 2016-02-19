@@ -260,24 +260,10 @@ class PocketImportTest extends \PHPUnit_Framework_TestCase
             ->method('findByUrlAndUserId')
             ->will($this->onConsecutiveCalls(false, true));
 
-        $tag = $this->getMockBuilder('Wallabag\CoreBundle\Entity\Tag')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $tagRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\TagRepository')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $tagRepo->expects($this->exactly(2))
-            // the method `findOneByLabel` doesn't exist, EntityRepository will then call `_call` method
-            // to magically call the `findOneBy` with ['label' => 'foo']
-            ->method('__call')
-            ->will($this->onConsecutiveCalls(false, $tag));
-
         $this->em
-            ->expects($this->any())
+            ->expects($this->exactly(2))
             ->method('getRepository')
-            ->will($this->onConsecutiveCalls($entryRepo, $tagRepo, $tagRepo, $entryRepo));
+            ->willReturn($entryRepo);
 
         $entry = $this->getMockBuilder('Wallabag\CoreBundle\Entity\Entry')
             ->disableOriginalConstructor()
