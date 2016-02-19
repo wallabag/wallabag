@@ -65,7 +65,8 @@
         "doctrine/doctrine-migrations-bundle": "^1.0",
         "paragonie/random_compat": "~1.0",
         "craue/config-bundle": "~1.4",
-        "mnapoli/piwik-twig-extension": "^1.0"
+        "mnapoli/piwik-twig-extension": "^1.0",
+        "lexik/maintenance-bundle": "dev-master"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "~2.2",
