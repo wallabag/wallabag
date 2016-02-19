@@ -312,6 +312,21 @@ class InstallCommand extends ContainerAwareCommand
                 'value' => 'http://v2.wallabag.org',
                 'section' => 'misc',
             ],
+            [
+                'name' => 'piwik_enabled',
+                'value' => '0',
+                'section' => 'analytics',
+            ],
+            [
+                'name' => 'piwik_host',
+                'value' => 'http://v2.wallabag.org',
+                'section' => 'analytics',
+            ],
+            [
+                'name' => 'piwik_site_id',
+                'value' => '1',
+                'section' => 'analytics',
+            ],
         ];
 
         foreach ($settings as $setting) {
