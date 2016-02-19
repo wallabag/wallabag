@@ -5,7 +5,9 @@ namespace Wallabag\CoreBundle\Helper;
 use Graby\Graby;
 use Psr\Log\LoggerInterface as Logger;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Tools\Utils;
+use Wallabag\CoreBundle\Repository\TagRepository;
 
 /**
  * This kind of proxy class take care of getting the content from an url
@@ -16,12 +18,14 @@ class ContentProxy
     protected $graby;
     protected $tagger;
     protected $logger;
+    protected $tagRepository;
 
-    public function __construct(Graby $graby, RuleBasedTagger $tagger, Logger $logger)
+    public function __construct(Graby $graby, RuleBasedTagger $tagger, TagRepository $tagRepository, Logger $logger)
     {
         $this->graby = $graby;
         $this->tagger = $tagger;
         $this->logger = $logger;
+        $this->tagRepository = $tagRepository;
     }
 
     /**
@@ -74,5 +78,39 @@ class ContentProxy
         }
 
         return $entry;
+    }
+
+    /**
+     * Assign some tags to an entry.
+     *
+     * @param Entry        $entry
+     * @param array|string $tags  An array of tag or a string coma separated of tag
+     */
+    public function assignTagsToEntry(Entry $entry, $tags)
+    {
+        if (!is_array($tags)) {
+            $tags = explode(',', $tags);
+        }
+
+        foreach ($tags as $label) {
+            $label = trim($label);
+
+            // avoid empty tag
+            if (0 === strlen($label)) {
+                continue;
+            }
+
+            $tagEntity = $this->tagRepository->findOneByLabel($label);
+
+            if (is_null($tagEntity)) {
+                $tagEntity = new Tag();
+                $tagEntity->setLabel($label);
+            }
+
+            // only add the tag on the entry if the relation doesn't exist
+            if (false === $entry->getTags()->contains($tagEntity)) {
+                $entry->addTag($tagEntity);
+            }
+        }
     }
 }

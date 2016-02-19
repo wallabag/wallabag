@@ -15,31 +15,6 @@ use Wallabag\CoreBundle\Entity\Tag;
 
 class WallabagRestController extends FOSRestController
 {
-    /**
-     * @param Entry  $entry
-     * @param string $tags
-     */
-    private function assignTagsToEntry(Entry $entry, $tags)
-    {
-        foreach (explode(',', $tags) as $label) {
-            $label = trim($label);
-            $tagEntity = $this
-                ->getDoctrine()
-                ->getRepository('WallabagCoreBundle:Tag')
-                ->findOneByLabel($label);
-
-            if (is_null($tagEntity)) {
-                $tagEntity = new Tag();
-                $tagEntity->setLabel($label);
-            }
-
-            // only add the tag on the entry if the relation doesn't exist
-            if (!$entry->getTags()->contains($tagEntity)) {
-                $entry->addTag($tagEntity);
-            }
-        }
-    }
-
     private function validateAuthentication()
     {
         if (false === $this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
@@ -140,7 +115,7 @@ class WallabagRestController extends FOSRestController
 
         $tags = $request->request->get('tags', '');
         if (!empty($tags)) {
-            $this->assignTagsToEntry($entry, $tags);
+            $this->get('wallabag_core.content_proxy')->assignTagsToEntry($entry, $tags);
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -192,7 +167,7 @@ class WallabagRestController extends FOSRestController
 
         $tags = $request->request->get('tags', '');
         if (!empty($tags)) {
-            $this->assignTagsToEntry($entry, $tags);
+            $this->get('wallabag_core.content_proxy')->assignTagsToEntry($entry, $tags);
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -270,7 +245,7 @@ class WallabagRestController extends FOSRestController
 
         $tags = $request->request->get('tags', '');
         if (!empty($tags)) {
-            $this->assignTagsToEntry($entry, $tags);
+            $this->get('wallabag_core.content_proxy')->assignTagsToEntry($entry, $tags);
         }
 
         $em = $this->getDoctrine()->getManager();

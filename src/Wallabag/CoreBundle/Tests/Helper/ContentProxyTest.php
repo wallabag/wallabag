@@ -3,8 +3,9 @@
 namespace Wallabag\CoreBundle\Tests\Helper;
 
 use Psr\Log\NullLogger;
-use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Helper\ContentProxy;
+use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\UserBundle\Entity\User;
 
 class ContentProxyTest extends \PHPUnit_Framework_TestCase
@@ -30,7 +31,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
                 'language' => '',
             ));
 
-        $proxy = new ContentProxy($graby, $tagger, $this->getLogger());
+        $proxy = new ContentProxy($graby, $tagger, $this->getTagRepositoryMock(), $this->getLogger());
         $entry = $proxy->updateEntry(new Entry(new User()), 'http://0.0.0.0');
 
         $this->assertEquals('http://0.0.0.0', $entry->getUrl());
@@ -68,7 +69,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
                 ),
             ));
 
-        $proxy = new ContentProxy($graby, $tagger, $this->getLogger());
+        $proxy = new ContentProxy($graby, $tagger, $this->getTagRepositoryMock(), $this->getLogger());
         $entry = $proxy->updateEntry(new Entry(new User()), 'http://domain.io');
 
         $this->assertEquals('http://domain.io', $entry->getUrl());
@@ -107,7 +108,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
                 ),
             ));
 
-        $proxy = new ContentProxy($graby, $tagger, $this->getLogger());
+        $proxy = new ContentProxy($graby, $tagger, $this->getTagRepositoryMock(), $this->getLogger());
         $entry = $proxy->updateEntry(new Entry(new User()), 'http://0.0.0.0');
 
         $this->assertEquals('http://1.1.1.1', $entry->getUrl());
@@ -120,10 +121,107 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('1.1.1.1', $entry->getDomainName());
     }
 
+    public function testAssignTagsWithArrayAndExtraSpaces()
+    {
+        $graby = $this->getMockBuilder('Graby\Graby')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $tagRepo = $this->getTagRepositoryMock();
+        $proxy = new ContentProxy($graby, $this->getTaggerMock(), $tagRepo, $this->getLogger());
+
+        $entry = new Entry(new User());
+
+        $proxy->assignTagsToEntry($entry, array('   tag1', 'tag2   '));
+
+        $this->assertCount(2, $entry->getTags());
+        $this->assertEquals('tag1', $entry->getTags()[0]->getLabel());
+        $this->assertEquals('tag2', $entry->getTags()[1]->getLabel());
+    }
+
+    public function testAssignTagsWithString()
+    {
+        $graby = $this->getMockBuilder('Graby\Graby')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $tagRepo = $this->getTagRepositoryMock();
+        $proxy = new ContentProxy($graby, $this->getTaggerMock(), $tagRepo, $this->getLogger());
+
+        $entry = new Entry(new User());
+
+        $proxy->assignTagsToEntry($entry, 'tag1, tag2');
+
+        $this->assertCount(2, $entry->getTags());
+        $this->assertEquals('tag1', $entry->getTags()[0]->getLabel());
+        $this->assertEquals('tag2', $entry->getTags()[1]->getLabel());
+    }
+
+    public function testAssignTagsWithEmptyArray()
+    {
+        $graby = $this->getMockBuilder('Graby\Graby')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $tagRepo = $this->getTagRepositoryMock();
+        $proxy = new ContentProxy($graby, $this->getTaggerMock(), $tagRepo, $this->getLogger());
+
+        $entry = new Entry(new User());
+
+        $proxy->assignTagsToEntry($entry, array());
+
+        $this->assertCount(0, $entry->getTags());
+    }
+
+    public function testAssignTagsWithEmptyString()
+    {
+        $graby = $this->getMockBuilder('Graby\Graby')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $tagRepo = $this->getTagRepositoryMock();
+        $proxy = new ContentProxy($graby, $this->getTaggerMock(), $tagRepo, $this->getLogger());
+
+        $entry = new Entry(new User());
+
+        $proxy->assignTagsToEntry($entry, '');
+
+        $this->assertCount(0, $entry->getTags());
+    }
+
+    public function testAssignTagsAlreadyAssigned()
+    {
+        $graby = $this->getMockBuilder('Graby\Graby')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $tagRepo = $this->getTagRepositoryMock();
+        $proxy = new ContentProxy($graby, $this->getTaggerMock(), $tagRepo, $this->getLogger());
+
+        $tagEntity = new Tag();
+        $tagEntity->setLabel('tag1');
+
+        $entry = new Entry(new User());
+        $entry->addTag($tagEntity);
+
+        $proxy->assignTagsToEntry($entry, 'tag1, tag2');
+
+        $this->assertCount(2, $entry->getTags());
+        $this->assertEquals('tag1', $entry->getTags()[0]->getLabel());
+        $this->assertEquals('tag2', $entry->getTags()[1]->getLabel());
+    }
+
     private function getTaggerMock()
     {
         return $this->getMockBuilder('Wallabag\CoreBundle\Helper\RuleBasedTagger')
             ->setMethods(array('tag'))
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
+
+    private function getTagRepositoryMock()
+    {
+        return $this->getMockBuilder('Wallabag\CoreBundle\Repository\TagRepository')
             ->disableOriginalConstructor()
             ->getMock();
     }
