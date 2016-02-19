@@ -216,6 +216,17 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
+    public function testRangeException()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $client->request('GET', '/all/list/900');
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertEquals('/all/list', $client->getResponse()->getTargetUrl());
+    }
+
     /**
      * @depends testPostNewOk
      */
