@@ -24,6 +24,7 @@ La documentation principale de cette application est découpée en plusieurs sec
    :maxdepth: 2
    :caption: Documentation utilisateur
 
+   user/create_account
    user/configuration
 
 .. _dev-docs:
