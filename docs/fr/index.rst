@@ -30,5 +30,5 @@ La documentation principale de cette application est découpée en plusieurs sec
    :maxdepth: 2
    :caption: Documentation développeur
 
-       developer/docker
-       developer/translate
+   developer/docker
+   developer/translate
