@@ -21,23 +21,14 @@ La documentation principale de cette application est découpée en plusieurs sec
 .. _user-docs:
 
 .. toctree::
-:maxdepth: 2
-       :caption: Documentation utilisateur
-
-       user/create_account
-       user/login
-       user/configuration
-       user/first_article
-       user/import
-       user/download_articles
-       user/filters
-       user/tags
+   :maxdepth: 2
+   :caption: Documentation utilisateur
 
 .. _dev-docs:
 
 .. toctree::
-:maxdepth: 2
-       :caption: Documentation développeur
+   :maxdepth: 2
+   :caption: Documentation développeur
 
        developer/docker
        developer/translate
