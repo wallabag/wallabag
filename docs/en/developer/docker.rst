@@ -15,11 +15,11 @@ your system and up to date.
 Switch DBMS
 -----------
 
-By default, wallabag will start with a sqlite database.
+By default, wallabag will start with a SQLite database.
 Since wallabag provides support for Postgresql and MySQL, docker
 containers are also available for these ones.
 
-In ``docker-compose.yml``, for the chosen DBMS uncomment :
+In ``docker-compose.yml``, for the chosen DBMS uncomment:
 
 - the container definition (``postgres`` or ``mariadb`` root level
   block)
@@ -27,7 +27,7 @@ In ``docker-compose.yml``, for the chosen DBMS uncomment :
 - the container env file in the ``php`` container
 
 In order to keep running Symfony commands on your host (such as
-``wallabag:install``), you also should :
+``wallabag:install``), you also should:
 
 - source the proper env files on your command line, so variables
   like ``SYMFONY__ENV__DATABASE_HOST`` will exist.

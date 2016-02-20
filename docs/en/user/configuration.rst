@@ -3,7 +3,8 @@ Configuration
 
 Now you're logged in, it's time to configure your account as you want.
 
-Click on ``Config`` menu. You have five tabs: ``Settings``, ``RSS``, ``User information``, ``Password`` and ``Tagging rules``.
+Click on ``Config`` menu. You have five tabs: ``Settings``, ``RSS``,
+``User information``, ``Password`` and ``Tagging rules``.
 
 Settings
 --------
@@ -11,7 +12,9 @@ Settings
 Theme
 ~~~~~
 
-wallabag is customizable. You can choose your prefered theme here. You can also create a new one, a chapter is dedicated for this. The default theme is ``Material``, it's the theme used in the documentation screenshots. 
+wallabag is customizable. You can choose your prefered theme here. You can also
+create a new one, a chapter will be dedicated for this. The default theme is
+``Material``, it's the theme used in the documentation screenshots.
 
 Items per page
 ~~~~~~~~~~~~~~
@@ -21,7 +24,8 @@ You can change the number of articles displayed on each page.
 Language
 ~~~~~~~~
 
-You can change the language of wallabag interface.
+You can change the language of wallabag interface. You need to logout for this change
+to take effect.
 
 RSS
 ---
@@ -43,41 +47,49 @@ You can change your name, your email address and enable ``Two factor authenticat
 Two factor authentication
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    Two-factor authentication (also known as 2FA) is a technology patented in 1984 that provides identification of users by means of the combination of two different components.
+    Two-factor authentication (also known as 2FA) is a technology patented in 1984
+    that provides identification of users by means of the combination of two different components.
 
 https://en.wikipedia.org/wiki/Two-factor_authentication
 
-If you enable 2FA, each time you want to login to wallabag, you'll receive a code by email. You have to put this code on the following form.
+If you enable 2FA, each time you want to login to wallabag, you'll receive
+a code by email. You have to put this code on the following form.
 
 .. image:: ../../img/user/2FA_form.png
-   :alt: Two factor authentication
-   :align: center
+    :alt: Two factor authentication
+    :align: center
 
-If you don't want to receive a code each time you want to login, you can check the ``I'm on a trusted computer`` checkbox: wallabag will remember you for 15 days.
+If you don't want to receive a code each time you want to login, you can check
+the ``I'm on a trusted computer`` checkbox: wallabag will remember you for 15 days.
 
 Password
 --------
 
-You can change your password here.
+You can change your password here (8 characters minimum).
 
 Tagging rules
 -------------
 
-If you want to automatically assign a tag to new articles, this part of the configuration is for you.
+If you want to automatically assign a tag to new articles, this part
+of the configuration is for you.
 
 What does « tagging rules » mean?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 They are rules used by wallabag to automatically tag new entries.
-Each time a new entry is added, all the tagging rules will be used to add the tags you configured, thus saving you the trouble to manually classify your entries.
+Each time a new entry is added, all the tagging rules will be used to add
+the tags you configured, thus saving you the trouble to manually classify your entries.
 
 How do I use them?
 ~~~~~~~~~~~~~~~~~~
 
-Let assume you want to tag new entries as *« short reading »* when the reading time is inferior to 3 minutes.
-In that case, you should put « readingTime <= 3 » in the **Rule** field and *« short reading »* in the **Tags** field.
+Let assume you want to tag new entries as *« short reading »* when
+the reading time is inferior to 3 minutes.
+In that case, you should put « readingTime <= 3 » in the **Rule** field
+and *« short reading »* in the **Tags** field.
 Several tags can added simultaneously by separating them by a comma: *« short reading, must read »*.
-Complex rules can be written by using predefined operators: if *« readingTime >= 5 AND domainName = "github.com" »* then tag as *« long reading, github »*.
+Complex rules can be written by using predefined operators:
+if *« readingTime >= 5 AND domainName = "github.com" »* then tag as *« long reading, github »*.
 
 Which variables and operators can I use to write rules?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
