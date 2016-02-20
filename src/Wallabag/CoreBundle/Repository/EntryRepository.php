@@ -266,4 +266,25 @@ class EntryRepository extends EntityRepository
 
         return $qb->getQuery()->getSingleScalarResult();
     }
+
+    /**
+     * Returns a list of articles that matches the search.
+     *
+     * @param string $search
+     *
+     * @return QueryBuilder
+     */
+    public function getArticlesSearched($userId, $search)
+    {
+        $search = '%'.$search.'%';
+
+        return $this->createQueryBuilder('e')
+            ->where('e.user = :userId')
+            ->andWhere('e.content LIKE :search OR e.title LIKE :search OR e.url LIKE :search')
+            ->setParameter('search', $search)
+            ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

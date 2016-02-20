@@ -28,13 +28,15 @@ class SearchController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $repositoryManager = $this->get('fos_elastica.manager.orm');
-            $repository = $repositoryManager->getRepository('WallabagCoreBundle:Entry');
-            $search = $articleSearch->getSearchTerm();
-            $logger = $this->get('logger');
-            $logger->error($search);
-
-            $articles = $repository->find($search);
+            if ($this->getParameter('elastic_search')) {
+                $repositoryManager = $this->get('fos_elastica.manager.orm');
+                $repository = $repositoryManager->getRepository('WallabagCoreBundle:Entry');
+                $search = $articleSearch->getSearchTerm();
+                $articles = $repository->find($search);
+            } else {
+                $repository = $this->get('wallabag_core.entry_repository');
+                $articles = $repository->getArticlesSearched($this->getUser(), $articleSearch->getSearchTerm());
+            }
 
             $adapter = new ArrayAdapter($articles);
             $entries = new Pagerfanta($adapter);

@@ -45,3 +45,5 @@ parameters:
     fosuser_confirmation: true
 
     from_email: no-reply@wallabag.org
+
+    elastic_search: true
