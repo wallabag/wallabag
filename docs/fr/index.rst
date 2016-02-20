@@ -26,6 +26,7 @@ La documentation principale de cette application est découpée en plusieurs sec
 
    user/create_account
    user/configuration
+   user/download_articles
 
 .. _dev-docs:
 

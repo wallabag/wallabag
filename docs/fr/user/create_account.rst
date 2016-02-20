@@ -43,4 +43,4 @@ Je n'ai pas reçu mon email d'activation
 Quand je clique sur le lien d'activation, j'ai ce message : ``The user with confirmation token "DtrOPfbQeVkWf6N" does not exist``.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Vous avez déjà activé votre compte ou l'URL d'activation n'est pas correcte. 
+Vous avez déjà activé votre compte ou l'URL d'activation n'est pas correcte.
