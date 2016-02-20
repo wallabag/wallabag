@@ -27,6 +27,8 @@ La documentation principale de cette application est découpée en plusieurs sec
    user/create_account
    user/login
    user/configuration
+   user/first_article
+   user/import
    user/download_articles
    user/filters
    user/tags

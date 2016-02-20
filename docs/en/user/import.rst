@@ -29,7 +29,8 @@ You will have a ``Unread articles.json`` file.
 Import your data into wallabag 2.x
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Click on  ``Import`` link in the menu, select your export file on your computer and import it.
+Click on  ``Import`` link in the menu, choose the right wallabag version,
+select your export file on your computer and import it.
 
 .. image:: ../../img/user/import_wllbg.png
    :alt: Import from wallabag 1.x
@@ -40,24 +41,31 @@ All your wallabag articles will be imported.
 From Pocket
 -----------
 
-Create a new applicaton on Pocket
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Create a new application on Pocket
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To import your data from Pocket, we use the Pocket API. You need to create a new application on their developer website to continue.
+To import your data from Pocket, we use the Pocket API. You need to create
+a new application on their developer website to continue.
 
 * Create a new application `on the developer website <https://getpocket.com/developer/apps/new>`_
-* Fill in the required fields: application name, application description, permissions (only **retrieve**), platform (**web**), accept the terms of service and submit your new application
+* Fill in the required fields: application name, application description,
+  permissions (only **retrieve**), platform (**web**), accept the terms of service
+  and submit your new application
 
-Pocket will give you a **Consumer Key** (for example, `49961-985e4b92fe21fe4c78d682c1`). You need to configure the ``pocket_consumer_key`` into the ``app/config/parameters.yml`` file in wallabag.
+Pocket will give you a **Consumer Key** (for example, `49961-985e4b92fe21fe4c78d682c1`).
+You need to configure the ``pocket_consumer_key`` into the ``app/config/parameters.yml`` file in wallabag.
 
 Now, all is fine to migrate from Pocket.
 
 Import your data into wallabag 2.x
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Click on  ``Import`` link in the menu, on ``Import contents`` in Pocket section and then on ``Connect to Pocket and import data``.
+Click on  ``Import`` link in the menu, on ``Import contents`` in Pocket section
+and then on ``Connect to Pocket and import data``.
 
-You need to authorize wallabag to interact with your Pocket account. Your data will be imported. Data import can be a demanding process for your server (we need to work on this import to improve it).
+You need to authorize wallabag to interact with your Pocket account.
+Your data will be imported. Data import can be a demanding process for your server
+(we need to work on this import to improve it).
 
 From Instapaper
 ---------------
