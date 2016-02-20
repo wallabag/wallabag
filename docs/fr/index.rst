@@ -25,8 +25,11 @@ La documentation principale de cette application est découpée en plusieurs sec
    :caption: Documentation utilisateur
 
    user/create_account
+   user/login
    user/configuration
    user/download_articles
+   user/filters
+   user/tags
 
 .. _dev-docs:
 
