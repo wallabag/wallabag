@@ -1,5 +1,5 @@
-Install wallabag
-================
+Installer wallabag
+==================
 
 Pré-requis
 ------------
