@@ -107,7 +107,7 @@ After reloading or restarting Apache, you should now be able to access wallabag 
 Installing on Nginx
 -------------------
 
-Assuming you install wallabag in the /var/www/wallabag folder, , here's the recipe for wallabag :
+Assuming you install wallabag in the /var/www/wallabag folder, here's the recipe for wallabag :
 
 ::
 

@@ -6,7 +6,7 @@ Pré-requis
 
 wallabag est compatible avec php >= 5.5
 
-Vous aurez besoin des extensions suivantes pour que wallabag fonctionne. Il est possible que certaines de ces extensions soient déjà activées dans votre version de php, donc vous n'avez pas forcément besoin d'installer tous les packets correspondants.
+Vous aurez besoin des extensions suivantes pour que wallabag fonctionne. Il est possible que certaines de ces extensions soient déjà activées dans votre version de php, donc vous n'avez pas forcément besoin d'installer tous les paquets correspondants.
 
 - php-session
 - php-ctype
@@ -42,7 +42,7 @@ Installation de Composer :
 
 Vous pouvez trouver des instructions spécifiques ici (en anglais) : __ https://getcomposer.org/doc/00-intro.md
 
-Pour installer wallabag, vous devez excécuter ces deux commandes :
+Pour installer wallabag, vous devez exécuter ces deux commandes :
 
 ::
 
@@ -100,7 +100,7 @@ En imaginant que vous vouliez installer wallabag dans le dossier /var/www/wallab
         CustomLog /var/log/apache2/wallabag_access.log combined
     </VirtualHost>
 
-Après que vous ayez recharché ou redémmaré Apache, vous devriez pouvoir avoir accès à wallabag à l'adresse http://domain.tld.
+Après que vous ayez rechargé/redémarré Apache, vous devriez pouvoir avoir accès à wallabag à l'adresse http://domain.tld.
 
 Installation avec Nginx
 -----------------------
@@ -140,4 +140,4 @@ En imaginant que vous vouliez installer wallabag dans le dossier /var/www/wallab
         access_log /var/log/nginx/wallabag_access.log;
     }
 
-Après que vous ayez recharché ou redémmaré Nginx, vous devriez pouvoir avoir accès à wallabag à l'adresse http://domain.tld.
+Après que vous ayez rechargé/redémarré Nginx, vous devriez pouvoir avoir accès à wallabag à l'adresse http://domain.tld.
