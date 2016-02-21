@@ -23,6 +23,7 @@ The main documentation for this application is organized into a couple sections:
    :maxdepth: 2
    :caption: User documentation
 
+   user/installation
    user/create_account
    user/login
    user/configuration
