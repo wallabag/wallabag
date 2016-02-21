@@ -37,3 +37,5 @@ parameters:
     from_email: no-reply@wallabag.org
 
     elastic_search: false
+    elastic_search_host: localhost
+    elastic_search_port: 9200

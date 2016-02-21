@@ -217,7 +217,7 @@ lexik_maintenance:
 
 fos_elastica:
     clients:
-        default: { host: localhost, port: 9200 }
+        default: { host: %elastic_search_host%, port: %elastic_search_port% }
     serializer:
         callback_class: FOS\ElasticaBundle\Serializer\Callback
         serializer: serializer
@@ -228,17 +228,23 @@ fos_elastica:
                 index:
                     analysis:
                         analyzer:
-                            custom_french_analyzer:
-                                type: custom
-                                tokenizer: letter
-                                filter: ["asciifolding", "lowercase", "french_stem", "stop_fr"]
+
                         filter:
-                            stop_fr:
-                                type: "stop"
-                                stopwords: ["l", "m", "t", "qu", "n", "s", "j", "d"]
+
             types:
                 Entry:
-                    mappings: { analyzer: custom_french_analyzer }
+                    mappings:
+                        title: {boost: 5 }
+                        url: {boost: 2 }
+                        content: ~
+                        createdAt: { type: date, format: basic_date_time }
+                        updatedAt: { type: date, format: basic_date_time }
+                        comments: {boost: 1 }
+                        domainName: {boost: 3 }
+                        tag:
+                            type: "object"
+                        user:
+                            type: "object"
                     persistence:
                         driver: orm # orm, mongodb, propel are available
                         model:  Wallabag\CoreBundle\Entity\Entry
@@ -246,7 +252,8 @@ fos_elastica:
                         listener: ~
                         finder: ~
                 Tag:
-                    mappings: { analyzer: custom_french_analyzer }
+                    mappings:
+
                     persistence:
                         driver: orm
                         model:  Wallabag\CoreBundle\Entity\Tag
