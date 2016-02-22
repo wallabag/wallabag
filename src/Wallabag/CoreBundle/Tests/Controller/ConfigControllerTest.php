@@ -577,4 +577,34 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $this->assertEquals(403, $client->getResponse()->getStatusCode());
         $this->assertContains('You can not access this tagging ryle', $client->getResponse()->getContent());
     }
+
+    public function testDemoMode()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $config = $client->getContainer()->get('craue_config');
+        $config->set('demo_mode_enabled', 1);
+        $config->set('demo_mode_username', 'admin');
+
+        $crawler = $client->request('GET', '/config');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $form = $crawler->filter('button[id=change_passwd_save]')->form();
+
+        $data = array(
+            'change_passwd[old_password]' => 'mypassword',
+            'change_passwd[new_password][first]' => 'mypassword',
+            'change_passwd[new_password][second]' => 'mypassword',
+        );
+
+        $client->submit($form, $data);
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertContains('In demonstration mode, you can\'t change password for this user.', $client->getContainer()->get('session')->getFlashBag()->get('notice')[0]);
+
+        $config->set('demo_mode_enabled', 0);
+        $config->set('demo_mode_username', 'wallabag');
+    }
 }

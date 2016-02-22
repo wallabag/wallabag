@@ -175,6 +175,7 @@ Entry deleted: "Article supprimé"
 Tagging rule deleted: "Règle supprimée"
 Tagging rules updated: "Règles mises à jour"
 User "%username%" added: 'Utilisateur "%username%" ajouté'
+In demonstration mode, you can't change password for this user.: 'En démo, vous ne pouvez pas changer le mot de passe de cet utilisateur.'
 
 # Entry
 Mark as read: 'Marquer comme lu'

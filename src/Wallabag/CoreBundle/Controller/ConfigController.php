@@ -57,13 +57,16 @@ class ConfigController extends Controller
         $pwdForm->handleRequest($request);
 
         if ($pwdForm->isValid()) {
-            $user->setPlainPassword($pwdForm->get('new_password')->getData());
-            $userManager->updateUser($user, true);
+            if ($this->get('craue_config')->get('demo_mode_enabled') && $this->get('craue_config')->get('demo_mode_username') === $user->getUsername()) {
+                $message = 'In demonstration mode, you can\'t change password for this user.';
+            } else {
+                $message = 'Password updated';
 
-            $this->get('session')->getFlashBag()->add(
-                'notice',
-                'Password updated'
-            );
+                $user->setPlainPassword($pwdForm->get('new_password')->getData());
+                $userManager->updateUser($user, true);
+            }
+
+            $this->get('session')->getFlashBag()->add('notice', $message);
 
             return $this->redirect($this->generateUrl('config').'#set4');
         }
