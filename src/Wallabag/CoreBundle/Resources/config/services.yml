@@ -39,7 +39,7 @@ services:
     wallabag_core.graby:
         class: Graby\Graby
         arguments:
-            - { error_message: false }
+            - { error_message: "wallabag can't retrieve contents for this article. Please contact us if problem persists." }
         calls:
             - [ setLogger, [ "@logger" ] ]
         tags:
