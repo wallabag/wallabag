@@ -125,6 +125,16 @@ class LoadSettingData extends AbstractFixture implements OrderedFixtureInterface
                 'value' => '1',
                 'section' => 'analytics',
             ],
+            [
+                'name' => 'demo_mode_enabled',
+                'value' => '0',
+                'section' => 'misc',
+            ],
+            [
+                'name' => 'demo_mode_username',
+                'value' => 'wallabag',
+                'section' => 'misc',
+            ],
         ];
 
         foreach ($settings as $setting) {

@@ -35,7 +35,3 @@ parameters:
     fosuser_confirmation: true
 
     from_email: no-reply@wallabag.org
-
-    # this parameter is only used for the wallabag public demo, it means user won't be able to change the password of the demo_user account
-    demo: false
-    demo_username: wallabag

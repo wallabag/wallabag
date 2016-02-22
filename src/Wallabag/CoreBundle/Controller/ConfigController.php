@@ -57,7 +57,7 @@ class ConfigController extends Controller
         $pwdForm->handleRequest($request);
 
         if ($pwdForm->isValid()) {
-            if ($this->getParameter('demo') === true && $this->getParameter('demo_username') === $user->getUsername()) {
+            if ($this->get('craue_config')->get('demo_mode_enabled') && $this->get('craue_config')->get('demo_mode_username') === $user->getUsername()) {
                 $this->get('session')->getFlashBag()->add(
                     'notice',
                     'In demonstration mode, you can\'t change password for this user.'
