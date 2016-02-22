@@ -20,10 +20,8 @@ services:
             - { name: twig.extension }
 
     wallabag.twig_piwik_extension:
-        class: Wallabag\CoreBundle\Twig\WallabagPiwikExtension
+        class: PiwikTwigExtension\PiwikTwigExtension
         public: false
-        arguments:
-            - "@craue_config"
         tags:
             - { name: twig.extension }
 
