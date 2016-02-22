@@ -200,3 +200,13 @@ scheb_two_factor:
 kphoen_rulerz:
     executors:
         doctrine: true
+
+lexik_maintenance:
+    authorized:
+        ips: ['127.0.0.1']
+    driver:
+        ttl: 3600
+        class: 'Lexik\Bundle\MaintenanceBundle\Drivers\DatabaseDriver'
+    response:
+        code: 503
+        status: "wallabag Service Temporarily Unavailable"

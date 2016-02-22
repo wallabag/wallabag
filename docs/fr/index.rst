@@ -42,3 +42,4 @@ La documentation principale de cette application est découpée en plusieurs sec
 
    developer/docker
    developer/translate
+   developer/maintenance
