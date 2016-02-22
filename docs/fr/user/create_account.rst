@@ -27,7 +27,7 @@ Votre compte est maintenant actif.
 Foire aux questions
 -------------------
 
-Je ne veux pas valider le formulaire de création de compte
+Je ne peux pas valider le formulaire de création de compte
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Soyez sur d'avoir bien renseigné tous les champs :
