@@ -64,7 +64,8 @@
         "guzzlehttp/guzzle": "^5.2.0",
         "doctrine/doctrine-migrations-bundle": "^1.0",
         "paragonie/random_compat": "~1.0",
-        "craue/config-bundle": "~1.4"
+        "craue/config-bundle": "~1.4",
+        "mnapoli/piwik-twig-extension": "^1.0"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "~2.2",

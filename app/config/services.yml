@@ -19,6 +19,12 @@ services:
         tags:
             - { name: twig.extension }
 
+    wallabag.twig_piwik_extension:
+        class: PiwikTwigExtension\PiwikTwigExtension
+        public: false
+        tags:
+            - { name: twig.extension }
+
     wallabag.locale_listener:
         class: Wallabag\CoreBundle\EventListener\LocaleListener
         arguments: ["%kernel.default_locale%"]
