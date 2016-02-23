@@ -29,9 +29,11 @@ class InstallCommand extends ContainerAwareCommand
     /**
      * @var array
      */
-    protected $requirements = [
-        'pcre',
-        'DOM',
+    protected $functionExists = [
+        'tidy_parse_string',
+        'curl_exec',
+        'curl_multi_init',
+        'gettext',
     ];
 
     protected function configure()
@@ -73,16 +75,30 @@ class InstallCommand extends ContainerAwareCommand
 
         $fulfilled = true;
 
-        foreach ($this->requirements as $requirement) {
-            $label = '<comment>'.strtoupper($requirement).'</comment>';
-            if (extension_loaded($requirement)) {
+        $label = '<comment>PDO Drivers</comment>';
+        if (extension_loaded('pdo_sqlite') || extension_loaded('pdo_mysql') || extension_loaded('pdo_pgsql')) {
+            $status = '<info>OK!</info>';
+            $help = '';
+        } else {
+            $fulfilled = false;
+            $status = '<error>ERROR!</error>';
+            $help = 'Needs one of sqlite, mysql or pgsql PDO drivers';
+        }
+
+        $rows[] = array($label, $status, $help);
+
+        foreach ($this->functionExists as $functionRequired) {
+            $label = '<comment>'.$functionRequired.'</comment>';
+
+            if (function_exists($functionRequired)) {
                 $status = '<info>OK!</info>';
                 $help = '';
             } else {
                 $fulfilled = false;
                 $status = '<error>ERROR!</error>';
-                $help = 'You should enabled '.$requirement.' extension';
+                $help = 'You need the '.$requirement.' function activated';
             }
+
             $rows[] = array($label, $status, $help);
         }
 
