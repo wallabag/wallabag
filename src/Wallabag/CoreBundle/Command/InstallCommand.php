@@ -26,6 +26,14 @@ class InstallCommand extends ContainerAwareCommand
      */
     protected $defaultOutput;
 
+    /**
+     * @var array
+     */
+    protected $requirements = [
+        'pcre',
+        'DOM',
+    ];
+
     protected function configure()
     {
         $this
@@ -65,27 +73,18 @@ class InstallCommand extends ContainerAwareCommand
 
         $fulfilled = true;
 
-        $label = '<comment>PCRE</comment>';
-        if (extension_loaded('pcre')) {
-            $status = '<info>OK!</info>';
-            $help = '';
-        } else {
-            $fulfilled = false;
-            $status = '<error>ERROR!</error>';
-            $help = 'You should enabled PCRE extension';
+        foreach ($this->requirements as $requirement) {
+            $label = '<comment>'.strtoupper($requirement).'</comment>';
+            if (extension_loaded($requirement)) {
+                $status = '<info>OK!</info>';
+                $help = '';
+            } else {
+                $fulfilled = false;
+                $status = '<error>ERROR!</error>';
+                $help = 'You should enabled '.$requirement.' extension';
+            }
+            $rows[] = array($label, $status, $help);
         }
-        $rows[] = array($label, $status, $help);
-
-        $label = '<comment>DOM</comment>';
-        if (extension_loaded('DOM')) {
-            $status = '<info>OK!</info>';
-            $help = '';
-        } else {
-            $fulfilled = false;
-            $status = '<error>ERROR!</error>';
-            $help = 'You should enabled DOM extension';
-        }
-        $rows[] = array($label, $status, $help);
 
         $table = new Table($this->defaultOutput);
         $table
