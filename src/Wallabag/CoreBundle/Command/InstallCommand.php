@@ -180,7 +180,7 @@ class InstallCommand extends ContainerAwareCommand
         $this->defaultOutput->writeln('<info><comment>Step 3 of 4.</comment> Administration setup.</info>');
 
         $questionHelper = $this->getHelperSet()->get('question');
-        $question = new ConfirmationQuestion('Would you like to create a new user ? (y/N)', false);
+        $question = new ConfirmationQuestion('Would you like to create a new admin user (recommended) ? (y/N)', true);
 
         if (!$questionHelper->ask($this->defaultInput, $this->defaultOutput, $question)) {
             return $this;
