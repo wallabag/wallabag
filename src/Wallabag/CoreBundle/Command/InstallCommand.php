@@ -34,7 +34,11 @@ class InstallCommand extends ContainerAwareCommand
 <<<<<<< aced56dd066d2bdac4c62bc9cb92635338fa913d
 =======
 <<<<<<< HEAD
+<<<<<<< 222b1778f5e394ca24fd48c1a21a9e3bf15b4900
 >>>>>>> Enhance requirements in InstallCommand
+=======
+<<<<<<< HEAD
+>>>>>>> add composer extensions check & function_exists checks
     protected $functionExists = [
         'curl_exec',
         'curl_multi_init',
@@ -55,7 +59,17 @@ class InstallCommand extends ContainerAwareCommand
 >>>>>>> remove unused functions & clean composer.json
 =======
 >>>>>>> fa7e9ab... Enhance requirements in InstallCommand
+<<<<<<< 222b1778f5e394ca24fd48c1a21a9e3bf15b4900
 >>>>>>> Enhance requirements in InstallCommand
+=======
+=======
+    protected $functionExists = [
+        'tidy_parse_string',
+        'curl_exec',
+        'curl_multi_init',
+        'gettext',
+>>>>>>> ec766c0... add composer extensions check & function_exists checks
+>>>>>>> add composer extensions check & function_exists checks
     ];
 
     protected function configure()
@@ -104,7 +118,13 @@ class InstallCommand extends ContainerAwareCommand
 >>>>>>> add composer extensions check & function_exists checks
 =======
 <<<<<<< HEAD
+<<<<<<< 222b1778f5e394ca24fd48c1a21a9e3bf15b4900
 >>>>>>> Enhance requirements in InstallCommand
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> ec766c0... add composer extensions check & function_exists checks
+>>>>>>> add composer extensions check & function_exists checks
         $label = '<comment>PDO Drivers</comment>';
         if (extension_loaded('pdo_sqlite') || extension_loaded('pdo_mysql') || extension_loaded('pdo_pgsql')) {
             $status = '<info>OK!</info>';
@@ -121,10 +141,14 @@ class InstallCommand extends ContainerAwareCommand
             $label = '<comment>'.$functionRequired.'</comment>';
 
             if (function_exists($functionRequired)) {
+<<<<<<< 222b1778f5e394ca24fd48c1a21a9e3bf15b4900
 <<<<<<< 6d68a76b451ce13b073beb360008fdbac722893d
 <<<<<<< ef9b8810151bf36f2c5f8a558c29b66ec0384461
 =======
 >>>>>>> Enhance requirements in InstallCommand
+=======
+<<<<<<< HEAD
+>>>>>>> add composer extensions check & function_exists checks
 =======
         foreach ($this->requirements as $requirement) {
             $label = '<comment>'.strtoupper($requirement).'</comment>';
@@ -135,7 +159,12 @@ class InstallCommand extends ContainerAwareCommand
 >>>>>>> add composer extensions check & function_exists checks
 =======
 >>>>>>> fa7e9ab... Enhance requirements in InstallCommand
+<<<<<<< 222b1778f5e394ca24fd48c1a21a9e3bf15b4900
 >>>>>>> Enhance requirements in InstallCommand
+=======
+=======
+>>>>>>> ec766c0... add composer extensions check & function_exists checks
+>>>>>>> add composer extensions check & function_exists checks
                 $status = '<info>OK!</info>';
                 $help = '';
             } else {
@@ -157,7 +186,11 @@ class InstallCommand extends ContainerAwareCommand
 =======
 =======
 <<<<<<< HEAD
+<<<<<<< 222b1778f5e394ca24fd48c1a21a9e3bf15b4900
 >>>>>>> Enhance requirements in InstallCommand
+=======
+<<<<<<< HEAD
+>>>>>>> add composer extensions check & function_exists checks
                 $help = 'You need the '.$functionRequired.' function activated';
 >>>>>>> Fix wrong variable name
             }
@@ -169,7 +202,15 @@ class InstallCommand extends ContainerAwareCommand
                 $help = 'You should enabled '.$requirement.' extension';
             }
 >>>>>>> fa7e9ab... Enhance requirements in InstallCommand
+<<<<<<< 222b1778f5e394ca24fd48c1a21a9e3bf15b4900
 >>>>>>> Enhance requirements in InstallCommand
+=======
+=======
+                $help = 'You need the '.$requirement.' function activated';
+            }
+
+>>>>>>> ec766c0... add composer extensions check & function_exists checks
+>>>>>>> add composer extensions check & function_exists checks
             $rows[] = array($label, $status, $help);
         }
 
