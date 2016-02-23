@@ -30,19 +30,33 @@
     "require": {
         "php": ">=5.5.9",
         "ext-pcre": "*",
+<<<<<<< b7fa7803e5c9f1c91e5239a77b4d83068959ba2c
         "ext-dom": "*",
         "ext-curl": "*",
         "ext-gd": "*",
         "ext-session": "*",
         "ext-ctype": "*",
+=======
+        "ext-DOM": "*",
+        "ext-curl": "*",
+        "ext-gd": "*",
+        "ext-session": "*",
+        "ext-Ctype": "*",
+>>>>>>> remove unused functions & clean composer.json
         "ext-hash": "*",
         "ext-simplexml": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
         "ext-xml": "*",
         "ext-iconv": "*",
+<<<<<<< b7fa7803e5c9f1c91e5239a77b4d83068959ba2c
         "ext-tokenizer": "*",
         "ext-pdo": "*",
+=======
+        "ext-gettext": "*",
+        "ext-tokenizer": "*",
+        "ext-PDO": "*",
+>>>>>>> remove unused functions & clean composer.json
         "symfony/symfony": "3.0.*",
         "doctrine/orm": "^2.5",
         "doctrine/doctrine-bundle": "^1.6",
@@ -80,23 +94,7 @@
         "paragonie/random_compat": "~1.0",
         "craue/config-bundle": "~1.4",
         "mnapoli/piwik-twig-extension": "^1.0",
-        "lexik/maintenance-bundle": "~2.1",
-        "ext-pcre": "*",
-        "ext-DOM": "*",
-        "ext-curl": "*",
-        "ext-gd": "*",
-        "ext-session": "*",
-        "ext-Ctype": "*",
-        "ext-hash": "*",
-        "ext-simplexml": "*",
-        "ext-json": "*",
-        "ext-mbstring": "*",
-        "ext-xml": "*",
-        "ext-tidy": "*",
-        "ext-iconv": "*",
-        "ext-gettext": "*",
-        "ext-tokenizer": "*",
-        "ext-PDO": "*"
+        "lexik/maintenance-bundle": "~2.1"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "~2.2",
