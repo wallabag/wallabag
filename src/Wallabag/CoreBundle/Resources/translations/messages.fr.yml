@@ -149,7 +149,12 @@ via Paypal: "via Paypal"
 Take wallabag with you: "Emportez wallabag avec vous"
 Social: "Social"
 powered by: "propulsé par"
-
+Contributors: "Contributeurs"
+Thank you to contributors on wallabag web application: "Merci aux contributeurs de l'application web de wallabag"
+Third-party libraries: Librairies tierces
+"Here are the list of third-party libraries used in wallabag (with their licenses):": "Voici la liste des dépendances utilisées dans wallabag (et leur license) :"
+Package: Dépendance
+License: Licence
 
 # Howto
 Form: "Formulaire"
