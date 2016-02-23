@@ -117,8 +117,13 @@
             prefix: '',
             urls: {
                 create: '{{ path('annotations_post_annotation', { 'entry': entry.id }) }}',
+<<<<<<< 5c8d3dcbcb0ddd39f4607bb5a37725ff12155648
                 update: '{{ path('annotations_put_annotation', { 'annotation': 'idAnnotation' }) }}',
                 destroy: '{{ path('annotations_delete_annotation', { 'annotation': 'idAnnotation' }) }}',
+=======
+                update: '{{ path('annotations_put_annotation', { 'comment': 'idComment' }) }}',
+                destroy: '{{ path('annotations_delete_annotation', { 'comment': 'idComment' }) }}',
+>>>>>>> Add annotator in baggy theme
                 search: '{{ path('annotations_get_annotations', { 'entry': entry.id }) }}'
             }
         });
