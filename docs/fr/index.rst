@@ -30,6 +30,7 @@ La documentation principale de cette application est découpée en plusieurs sec
    user/configuration
    user/first_article
    user/errors_during_fetching
+   user/annotations
    user/import
    user/download_articles
    user/filters
