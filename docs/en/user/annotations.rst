@@ -16,6 +16,7 @@ Select the part of the article that you want to annotate and click on the pencil
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 Select the part of the article that you want to annotate and click on the pencil:
 =======
 Select the part of the article that you want to comment and click on the pencil:
@@ -23,7 +24,13 @@ Select the part of the article that you want to comment and click on the pencil:
 =======
 Select the part of the article that you want to annotate and click on the pencil:
 >>>>>>> 9e1ce38... Rename CommentBundle with AnnotationBundle
+<<<<<<< e564535cfc0e3bfab5740a5997678873f8056fbd
 >>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
+=======
+=======
+Select the part of the article that you want to comment and click on the pencil:
+>>>>>>> d869043... Add annotator in baggy theme
+>>>>>>> Add annotator in baggy theme
 
 .. image:: ../../img/user/annotations_1.png
    :alt: Select your text
@@ -35,7 +42,11 @@ Select the part of the article that you want to annotate and click on the pencil
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< e564535cfc0e3bfab5740a5997678873f8056fbd
 >>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
+=======
+<<<<<<< HEAD
+>>>>>>> Add annotator in baggy theme
 Then, write your annotation:
 
 .. image:: ../../img/user/annotations_2.png
@@ -83,4 +94,22 @@ You can create as many comments as you wish.
 =======
 You can create as many annotations as you wish.
 >>>>>>> 9e1ce38... Rename CommentBundle with AnnotationBundle
+<<<<<<< e564535cfc0e3bfab5740a5997678873f8056fbd
 >>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
+=======
+=======
+Then, write your comment:
+
+.. image:: ../../img/user/annotations_2.png
+   :alt: Write your comment
+   :align: center
+
+The text is now highlighted and you can read your comment if you move the mouse cursor over it.
+
+.. image:: ../../img/user/annotations_3.png
+   :alt: Read your comment
+   :align: center
+
+You can create as many comments as you wish.
+>>>>>>> d869043... Add annotator in baggy theme
+>>>>>>> Add annotator in baggy theme

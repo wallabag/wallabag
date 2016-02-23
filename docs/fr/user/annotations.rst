@@ -4,7 +4,11 @@
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< e564535cfc0e3bfab5740a5997678873f8056fbd
 >>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
+=======
+<<<<<<< HEAD
+>>>>>>> Add annotator in baggy theme
 Annotations
 ===========
 
@@ -77,4 +81,34 @@ Vous pouvez créer autant de commentaires que vous le souhaitez.
 =======
 Vous pouvez créer autant de annotations que vous le souhaitez.
 >>>>>>> 9e1ce38... Rename CommentBundle with AnnotationBundle
+<<<<<<< e564535cfc0e3bfab5740a5997678873f8056fbd
 >>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
+=======
+=======
+Commentaires
+============
+
+Sur chaque article que vous lisez, vous pouvez écrire des commentaires. Puisqu'une image vaut mieux qu'un long discours,
+voici ce que ça donne.
+
+Sélectionnez la zone du texte que vous souhaitez commenter et cliquez sur le crayon :
+
+.. image:: ../../img/user/annotations_1.png
+   :alt: Select your text
+   :align: center
+
+Ensuite, écrivez votre commentaire :
+
+.. image:: ../../img/user/annotations_2.png
+   :alt: Write your comment
+   :align: center
+
+Le texte est maintenant surligné et vous pouvez lire le commentaire en le survolant avec votre souris.
+
+.. image:: ../../img/user/annotations_3.png
+   :alt: Read your comment
+   :align: center
+
+Vous pouvez créer autant de commentaires que vous le souhaitez.
+>>>>>>> d869043... Add annotator in baggy theme
+>>>>>>> Add annotator in baggy theme

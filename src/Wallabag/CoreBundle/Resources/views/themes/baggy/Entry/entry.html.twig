@@ -146,7 +146,11 @@
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< e564535cfc0e3bfab5740a5997678873f8056fbd
 >>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
+=======
+<<<<<<< HEAD
+>>>>>>> Add annotator in baggy theme
                 update: '{{ path('annotations_put_annotation', { 'annotation': 'idAnnotation' }) }}',
                 destroy: '{{ path('annotations_delete_annotation', { 'annotation': 'idAnnotation' }) }}',
 =======
@@ -164,7 +168,14 @@
                 update: '{{ path('annotations_put_annotation', { 'annotation': 'idAnnotation' }) }}',
                 destroy: '{{ path('annotations_delete_annotation', { 'annotation': 'idAnnotation' }) }}',
 >>>>>>> 9e1ce38... Rename CommentBundle with AnnotationBundle
+<<<<<<< e564535cfc0e3bfab5740a5997678873f8056fbd
 >>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
+=======
+=======
+                update: '{{ path('annotations_put_annotation', { 'comment': 'idComment' }) }}',
+                destroy: '{{ path('annotations_delete_annotation', { 'comment': 'idComment' }) }}',
+>>>>>>> d869043... Add annotator in baggy theme
+>>>>>>> Add annotator in baggy theme
                 search: '{{ path('annotations_get_annotations', { 'entry': entry.id }) }}'
             }
         });
