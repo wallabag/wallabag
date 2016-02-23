@@ -64,12 +64,17 @@ class InstallCommand extends ContainerAwareCommand
 =======
 =======
     protected $functionExists = [
-        'tidy_parse_string',
         'curl_exec',
         'curl_multi_init',
+<<<<<<< HEAD
         'gettext',
 >>>>>>> ec766c0... add composer extensions check & function_exists checks
+<<<<<<< adac178c2d31413205a76cef580a08c3a73259c7
 >>>>>>> add composer extensions check & function_exists checks
+=======
+=======
+>>>>>>> 14c938f... remove unused functions & clean composer.json
+>>>>>>> remove unused functions & clean composer.json
     ];
 
     protected function configure()

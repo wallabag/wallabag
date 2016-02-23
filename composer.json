@@ -30,8 +30,12 @@
     "require": {
         "php": ">=5.5.9",
         "ext-pcre": "*",
+<<<<<<< adac178c2d31413205a76cef580a08c3a73259c7
 <<<<<<< 22246a897c0b91463c7878c71fdcca7c167a15cf
 <<<<<<< b7fa7803e5c9f1c91e5239a77b4d83068959ba2c
+=======
+<<<<<<< HEAD
+>>>>>>> remove unused functions & clean composer.json
         "ext-dom": "*",
         "ext-curl": "*",
         "ext-gd": "*",
@@ -43,6 +47,7 @@
         "ext-gd": "*",
         "ext-session": "*",
         "ext-Ctype": "*",
+<<<<<<< adac178c2d31413205a76cef580a08c3a73259c7
 >>>>>>> remove unused functions & clean composer.json
 =======
         "ext-dom": "*",
@@ -51,12 +56,16 @@
         "ext-session": "*",
         "ext-ctype": "*",
 >>>>>>> Remove gettext & lowerize
+=======
+>>>>>>> 14c938f... remove unused functions & clean composer.json
+>>>>>>> remove unused functions & clean composer.json
         "ext-hash": "*",
         "ext-simplexml": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
         "ext-xml": "*",
         "ext-iconv": "*",
+<<<<<<< adac178c2d31413205a76cef580a08c3a73259c7
 <<<<<<< 22246a897c0b91463c7878c71fdcca7c167a15cf
 <<<<<<< b7fa7803e5c9f1c91e5239a77b4d83068959ba2c
         "ext-tokenizer": "*",
@@ -70,6 +79,16 @@
         "ext-tokenizer": "*",
         "ext-pdo": "*",
 >>>>>>> Remove gettext & lowerize
+=======
+<<<<<<< HEAD
+        "ext-tokenizer": "*",
+        "ext-pdo": "*",
+=======
+        "ext-gettext": "*",
+        "ext-tokenizer": "*",
+        "ext-PDO": "*",
+>>>>>>> 14c938f... remove unused functions & clean composer.json
+>>>>>>> remove unused functions & clean composer.json
         "symfony/symfony": "3.0.*",
         "doctrine/orm": "^2.5",
         "doctrine/doctrine-bundle": "^1.6",
@@ -107,23 +126,7 @@
         "paragonie/random_compat": "~1.0",
         "craue/config-bundle": "~1.4",
         "mnapoli/piwik-twig-extension": "^1.0",
-        "lexik/maintenance-bundle": "~2.1",
-        "ext-pcre": "*",
-        "ext-DOM": "*",
-        "ext-curl": "*",
-        "ext-gd": "*",
-        "ext-session": "*",
-        "ext-Ctype": "*",
-        "ext-hash": "*",
-        "ext-simplexml": "*",
-        "ext-json": "*",
-        "ext-mbstring": "*",
-        "ext-xml": "*",
-        "ext-tidy": "*",
-        "ext-iconv": "*",
-        "ext-gettext": "*",
-        "ext-tokenizer": "*",
-        "ext-PDO": "*"
+        "lexik/maintenance-bundle": "~2.1"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "~2.2",
