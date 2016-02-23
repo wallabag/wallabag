@@ -28,6 +28,7 @@ The main documentation for this application is organized into a couple sections:
    user/login
    user/configuration
    user/first_article
+   user/annotations
    user/import
    user/download_articles
    user/filters

@@ -29,6 +29,7 @@ La documentation principale de cette application est découpée en plusieurs sec
    user/login
    user/configuration
    user/first_article
+   user/annotations
    user/import
    user/download_articles
    user/filters
