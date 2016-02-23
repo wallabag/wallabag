@@ -30,10 +30,8 @@ class InstallCommand extends ContainerAwareCommand
      * @var array
      */
     protected $functionExists = [
-        'tidy_parse_string',
         'curl_exec',
         'curl_multi_init',
-        'gettext',
     ];
 
     protected function configure()
