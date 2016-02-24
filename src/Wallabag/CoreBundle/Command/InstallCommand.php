@@ -94,7 +94,7 @@ class InstallCommand extends ContainerAwareCommand
             } else {
                 $fulfilled = false;
                 $status = '<error>ERROR!</error>';
-                $help = 'You need the '.$requirement.' function activated';
+                $help = 'You need the '.$functionRequired.' function activated';
             }
 
             $rows[] = array($label, $status, $help);
