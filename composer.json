@@ -30,6 +30,7 @@
     "require": {
         "php": ">=5.5.9",
         "ext-pcre": "*",
+<<<<<<< 22246a897c0b91463c7878c71fdcca7c167a15cf
 <<<<<<< b7fa7803e5c9f1c91e5239a77b4d83068959ba2c
         "ext-dom": "*",
         "ext-curl": "*",
@@ -43,12 +44,20 @@
         "ext-session": "*",
         "ext-Ctype": "*",
 >>>>>>> remove unused functions & clean composer.json
+=======
+        "ext-dom": "*",
+        "ext-curl": "*",
+        "ext-gd": "*",
+        "ext-session": "*",
+        "ext-ctype": "*",
+>>>>>>> Remove gettext & lowerize
         "ext-hash": "*",
         "ext-simplexml": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
         "ext-xml": "*",
         "ext-iconv": "*",
+<<<<<<< 22246a897c0b91463c7878c71fdcca7c167a15cf
 <<<<<<< b7fa7803e5c9f1c91e5239a77b4d83068959ba2c
         "ext-tokenizer": "*",
         "ext-pdo": "*",
@@ -57,6 +66,10 @@
         "ext-tokenizer": "*",
         "ext-PDO": "*",
 >>>>>>> remove unused functions & clean composer.json
+=======
+        "ext-tokenizer": "*",
+        "ext-pdo": "*",
+>>>>>>> Remove gettext & lowerize
         "symfony/symfony": "3.0.*",
         "doctrine/orm": "^2.5",
         "doctrine/doctrine-bundle": "^1.6",
