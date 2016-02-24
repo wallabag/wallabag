@@ -10,6 +10,8 @@ use Wallabag\CoreBundle\Entity\ArticleSearch;
 use Wallabag\CoreBundle\Form\Type\EntryFilterType;
 use Wallabag\CoreBundle\Form\Type\NewSearchType;
 use Pagerfanta\Adapter\ArrayAdapter;
+use Elastica\Query\MultiMatch;
+use Elastica\Query;
 
 class SearchController extends Controller
 {
@@ -29,10 +31,21 @@ class SearchController extends Controller
 
         if ($form->isValid()) {
             if ($this->getParameter('elastic_search')) {
-                $repositoryManager = $this->get('fos_elastica.manager.orm');
-                $repository = $repositoryManager->getRepository('WallabagCoreBundle:Entry');
+                $finder = $this->get('fos_elastica.finder.wallabag');
+
                 $search = $articleSearch->getSearchTerm();
-                $articles = $repository->find($search);
+
+                $query = new Query();
+                $matching = new MultiMatch();
+                $matching->setType(MultiMatch::TYPE_MOST_FIELDS);
+                $matching->setQuery($search);
+                $matching->setFields(array(
+                    'title^3',
+                    'content',
+                ));
+                $query->setQuery($matching);
+
+                $articles = $finder->find($query);
             } else {
                 $repository = $this->get('wallabag_core.entry_repository');
                 $articles = $repository->getArticlesSearched($this->getUser(), $articleSearch->getSearchTerm());

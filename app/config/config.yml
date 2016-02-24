@@ -219,11 +219,11 @@ fos_elastica:
     clients:
         default: { host: %elastic_search_host%, port: %elastic_search_port% }
     serializer:
-        callback_class: FOS\ElasticaBundle\Serializer\Callback
         serializer: serializer
     indexes:
         wallabag:
             client: default
+            finder: ~
             settings:
                 index:
                     analysis:
