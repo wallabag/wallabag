@@ -126,7 +126,7 @@
         }
     },
     "autoload": {
-        "psr-4": { "": "src/" },
+        "psr-4": { "Wallabag\\": "src/Wallabag/" },
         "classmap": [ "app/AppKernel.php", "app/AppCache.php" ]
     },
     "config": {
