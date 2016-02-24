@@ -29,6 +29,20 @@
     },
     "require": {
         "php": ">=5.5.9",
+        "ext-pcre": "*",
+        "ext-dom": "*",
+        "ext-curl": "*",
+        "ext-gd": "*",
+        "ext-session": "*",
+        "ext-ctype": "*",
+        "ext-hash": "*",
+        "ext-simplexml": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "ext-xml": "*",
+        "ext-iconv": "*",
+        "ext-tokenizer": "*",
+        "ext-pdo": "*",
         "symfony/symfony": "3.0.*",
         "doctrine/orm": "^2.5",
         "doctrine/doctrine-bundle": "^1.6",
@@ -111,7 +125,7 @@
         }
     },
     "autoload": {
-        "psr-4": { "": "src/" },
+        "psr-4": { "Wallabag\\": "src/Wallabag/" },
         "classmap": [ "app/AppKernel.php", "app/AppCache.php" ]
     },
     "config": {

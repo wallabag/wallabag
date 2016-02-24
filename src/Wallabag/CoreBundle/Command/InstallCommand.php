@@ -26,6 +26,14 @@ class InstallCommand extends ContainerAwareCommand
      */
     protected $defaultOutput;
 
+    /**
+     * @var array
+     */
+    protected $functionExists = [
+        'curl_exec',
+        'curl_multi_init',
+    ];
+
     protected function configure()
     {
         $this
@@ -65,27 +73,32 @@ class InstallCommand extends ContainerAwareCommand
 
         $fulfilled = true;
 
-        $label = '<comment>PCRE</comment>';
-        if (extension_loaded('pcre')) {
+        $label = '<comment>PDO Drivers</comment>';
+        if (extension_loaded('pdo_sqlite') || extension_loaded('pdo_mysql') || extension_loaded('pdo_pgsql')) {
             $status = '<info>OK!</info>';
             $help = '';
         } else {
             $fulfilled = false;
             $status = '<error>ERROR!</error>';
-            $help = 'You should enabled PCRE extension';
+            $help = 'Needs one of sqlite, mysql or pgsql PDO drivers';
         }
+
         $rows[] = array($label, $status, $help);
 
-        $label = '<comment>DOM</comment>';
-        if (extension_loaded('DOM')) {
-            $status = '<info>OK!</info>';
-            $help = '';
-        } else {
-            $fulfilled = false;
-            $status = '<error>ERROR!</error>';
-            $help = 'You should enabled DOM extension';
+        foreach ($this->functionExists as $functionRequired) {
+            $label = '<comment>'.$functionRequired.'</comment>';
+
+            if (function_exists($functionRequired)) {
+                $status = '<info>OK!</info>';
+                $help = '';
+            } else {
+                $fulfilled = false;
+                $status = '<error>ERROR!</error>';
+                $help = 'You need the '.$requirement.' function activated';
+            }
+
+            $rows[] = array($label, $status, $help);
         }
-        $rows[] = array($label, $status, $help);
 
         $table = new Table($this->defaultOutput);
         $table
