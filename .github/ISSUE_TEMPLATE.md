@@ -1,5 +1,6 @@
 ### Issue details
 
+<<<<<<< c558ffb87c7abcb24fc304a624ccfea72073f67a
 <<<<<<< 11dc30e2007d89edb6d64cb9dff1092dd1512422
 Please provide issue details here.
 Remember, this is _not_ a place to ask questions. For that, go to http://gitter.im/wallabag/wallabag.
@@ -7,6 +8,10 @@ Remember, this is _not_ a place to ask questions. For that, go to http://gitter.
 ### Environment
 =======
 Please provide issue details here Remember, this is _not_ a place to ask questions. For that, go to http://gitter.im/wallabag/wallabag.
+=======
+Please provide issue details here.
+Remember, this is _not_ a place to ask questions. For that, go to http://gitter.im/wallabag/wallabag.
+>>>>>>> fixes
 
 ### Environment
 
@@ -15,12 +20,13 @@ Please provide issue details here Remember, this is _not_ a place to ask questio
 * php version:
 * OS:
 * type of hosting (shared or dedicated):
-* which storage system you choose at install (SQLite, MySQL/MariaDB or PostgreSQL): 
+* which storage system you choose at install (SQLite, MySQL/MariaDB or PostgreSQL):
 
 ### Steps to reproduce/test case
 
 Please provide necessary steps for reproduction of this issue, or better the
 reduced test case (without any external dependencies, if possible).
+<<<<<<< c558ffb87c7abcb24fc304a624ccfea72073f67a
 >>>>>>> Update issue template
 
 * wallabag version (or git revision) that exhibits the issue:
@@ -39,3 +45,5 @@ Please fill in affected version(s).
 
 Please provide necessary steps for reproduction of this issue, or better the
 reduced test case (without any external dependencies, if possible).
+=======
+>>>>>>> fixes
