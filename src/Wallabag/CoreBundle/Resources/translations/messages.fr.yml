@@ -116,6 +116,7 @@ http://website: "http://siteweb"
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 "{0} No annotations|{1} One annotation|]1,Inf[ %nbAnnotations% annotations": "{0} Aucune annotation|{1} Une annotation|]1,Inf[ %nbAnnotations% annotations"
 =======
 "{0} No annotations|{1} One annotation|]1,Inf[ %nbComments% annotations": "{0} Aucun commentaire|{1} Un commentaire|]1,Inf[ %nbComments% commentaires"
@@ -126,7 +127,13 @@ http://website: "http://siteweb"
 =======
 "{0} No annotations|{1} One annotation|]1,Inf[ %nbAnnotations% annotations": "{0} Aucune annotation|{1} Une annotation|]1,Inf[ %nbAnnotations% annotations"
 >>>>>>> 9e1ce38... Rename CommentBundle with AnnotationBundle
+<<<<<<< 858dc66d4fc9d70db8e60014478d921abbee8433
 >>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
+=======
+=======
+"{0} No annotations|{1} One annotation|]1,Inf[ %nbComments% annotations": "{0} Aucun commentaire|{1} Un commentaire|]1,Inf[ %nbComments% commentaires"
+>>>>>>> c7a3c57... display how much comments there are for an entry
+>>>>>>> display how much comments there are for an entry
 
 # Edit entry
 Edit an entry: "Éditer un article"

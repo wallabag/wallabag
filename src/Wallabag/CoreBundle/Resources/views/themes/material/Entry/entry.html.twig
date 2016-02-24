@@ -258,7 +258,11 @@ app
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< 858dc66d4fc9d70db8e60014478d921abbee8433
 >>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
+=======
+<<<<<<< HEAD
+>>>>>>> display how much comments there are for an entry
             {% set nbAnnotations = entry.annotations | length %}
             <span class="tool link mdi-communication-comment"> {% transchoice nbAnnotations %}{0} No annotations|{1} One annotation|]1,Inf[ %nbAnnotations% annotations{% endtranschoice %}</span>
 =======
@@ -276,7 +280,14 @@ app
             {% set nbAnnotations = entry.annotations | length %}
             <span class="tool link mdi-communication-comment"> {% transchoice nbAnnotations %}{0} No annotations|{1} One annotation|]1,Inf[ %nbAnnotations% annotations{% endtranschoice %}</span>
 >>>>>>> 9e1ce38... Rename CommentBundle with AnnotationBundle
+<<<<<<< 858dc66d4fc9d70db8e60014478d921abbee8433
 >>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
+=======
+=======
+            {% set nbComments = entry.comments | length %}
+            <span class="tool link mdi-communication-comment"> {% transchoice nbComments %}{0} No annotations|{1} One annotation|]1,Inf[ %nbComments% annotations{% endtranschoice %}</span>
+>>>>>>> c7a3c57... display how much comments there are for an entry
+>>>>>>> display how much comments there are for an entry
             <div id="list">
                 {% for tag in entry.tags %}
                     <div class="chip">
