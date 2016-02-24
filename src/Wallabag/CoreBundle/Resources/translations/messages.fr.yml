@@ -117,6 +117,7 @@ http://website: "http://siteweb"
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 "{0} No annotations|{1} One annotation|]1,Inf[ %nbAnnotations% annotations": "{0} Aucune annotation|{1} Une annotation|]1,Inf[ %nbAnnotations% annotations"
 =======
 "{0} No annotations|{1} One annotation|]1,Inf[ %nbComments% annotations": "{0} Aucun commentaire|{1} Un commentaire|]1,Inf[ %nbComments% commentaires"
@@ -133,7 +134,13 @@ http://website: "http://siteweb"
 =======
 "{0} No annotations|{1} One annotation|]1,Inf[ %nbComments% annotations": "{0} Aucun commentaire|{1} Un commentaire|]1,Inf[ %nbComments% commentaires"
 >>>>>>> c7a3c57... display how much comments there are for an entry
+<<<<<<< a1d4ee5258b8addbb5d68e8f079a2b93f6a1eb68
 >>>>>>> display how much comments there are for an entry
+=======
+=======
+"{0} No annotations|{1} One annotation|]1,Inf[ %nbComments% annotations": "{0} Aucune annotation|{1} Une annotation|]1,Inf[ %nbComments% annotations"
+>>>>>>> ed29888... changed french translation from commentaire to annotation
+>>>>>>> changed french translation from commentaire to annotation
 
 # Edit entry
 Edit an entry: "Éditer un article"
