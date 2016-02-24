@@ -228,8 +228,19 @@ fos_elastica:
                 index:
                     analysis:
                         analyzer:
+                            default:
+                                type: standard
 
+                            trigrams:
+                                type: custom,
+                                tokenizer: standard
+                                filter: ["lowercase","trigrams_filter"]
+                                char_filter: html_strip
                         filter:
+                            trigrams_filter:
+                                type: ngram
+                                min_gram: 3
+                                max_gram: 3
 
             types:
                 Entry:
@@ -246,14 +257,18 @@ fos_elastica:
                         user:
                             type: "object"
                     persistence:
-                        driver: orm # orm, mongodb, propel are available
+                        driver: orm
                         model:  Wallabag\CoreBundle\Entity\Entry
                         provider: ~
                         listener: ~
                         finder: ~
+                    properties:
+                        text:
+                            type: string
+                            analyzer: [trigrams,standard]
                 Tag:
                     mappings:
-
+                        label: {boost: 10}
                     persistence:
                         driver: orm
                         model:  Wallabag\CoreBundle\Entity\Tag

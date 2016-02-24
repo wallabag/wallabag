@@ -37,7 +37,6 @@ class AppKernel extends Kernel
             new Lexik\Bundle\MaintenanceBundle\LexikMaintenanceBundle(),
             new Wallabag\AnnotationBundle\WallabagAnnotationBundle(),
             new \FOS\ElasticaBundle\FOSElasticaBundle(),
-            new FOS\ElasticaBundle\FOSElasticaBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
