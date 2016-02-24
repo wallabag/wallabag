@@ -178,6 +178,7 @@ main {
 }
 </style>
 
+<<<<<<< fca971886413ee6907372dac716a6965ecc7334a
 <<<<<<< e9a854c48821720618d0c607260ed92a2f43fa37
 =======
 <script type="text/javascript">
@@ -203,6 +204,8 @@ app
 </script>
 
 >>>>>>> Comment work with annotator v2
+=======
+>>>>>>> Move annotatorjs to the bottom of the body
 {% endblock %}
 
 {% block content %}
@@ -246,8 +249,13 @@ app.include(annotator.storage.http, {
     prefix: '',
     urls: {
         create: '{{ path('annotations_post_annotation', { 'entry': entry.id }) }}',
+<<<<<<< fca971886413ee6907372dac716a6965ecc7334a
         update: '{{ path('annotations_put_annotation', { 'annotation': 'idAnnotation' }) }}',
         destroy: '{{ path('annotations_delete_annotation', { 'annotation': 'idAnnotation' }) }}',
+=======
+        update: '{{ path('annotations_put_annotation', { 'comment': 'idComment' }) }}',
+        destroy: '{{ path('annotations_delete_annotation', { 'comment': 'idComment' }) }}',
+>>>>>>> Move annotatorjs to the bottom of the body
         search: '{{ path('annotations_get_annotations', { 'entry': entry.id }) }}'
     }
 });
