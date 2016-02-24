@@ -188,6 +188,7 @@ main {
 >>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Comment work with annotator v2
 =======
@@ -236,7 +237,12 @@ app
 </script>
 
 >>>>>>> 0c4e4ab... Comment work with annotator v2
+<<<<<<< 3771ff12c9a1a17fd889fbcbcab44af923a98a0d
 >>>>>>> Comment work with annotator v2
+=======
+=======
+>>>>>>> 9819ab3... Move annotatorjs to the bottom of the body
+>>>>>>> Move annotatorjs to the bottom of the body
 {% endblock %}
 
 {% block content %}
@@ -309,7 +315,11 @@ app.include(annotator.storage.http, {
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< 3771ff12c9a1a17fd889fbcbcab44af923a98a0d
 >>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
+=======
+<<<<<<< HEAD
+>>>>>>> Move annotatorjs to the bottom of the body
         update: '{{ path('annotations_put_annotation', { 'annotation': 'idAnnotation' }) }}',
         destroy: '{{ path('annotations_delete_annotation', { 'annotation': 'idAnnotation' }) }}',
 =======
@@ -327,7 +337,14 @@ app.include(annotator.storage.http, {
         update: '{{ path('annotations_put_annotation', { 'annotation': 'idAnnotation' }) }}',
         destroy: '{{ path('annotations_delete_annotation', { 'annotation': 'idAnnotation' }) }}',
 >>>>>>> 9e1ce38... Rename CommentBundle with AnnotationBundle
+<<<<<<< 3771ff12c9a1a17fd889fbcbcab44af923a98a0d
 >>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
+=======
+=======
+        update: '{{ path('annotations_put_annotation', { 'comment': 'idComment' }) }}',
+        destroy: '{{ path('annotations_delete_annotation', { 'comment': 'idComment' }) }}',
+>>>>>>> 9819ab3... Move annotatorjs to the bottom of the body
+>>>>>>> Move annotatorjs to the bottom of the body
         search: '{{ path('annotations_get_annotations', { 'entry': entry.id }) }}'
     }
 });
