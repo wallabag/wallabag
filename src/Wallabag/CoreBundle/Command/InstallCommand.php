@@ -122,6 +122,7 @@ class InstallCommand extends ContainerAwareCommand
             } else {
                 $fulfilled = false;
                 $status = '<error>ERROR!</error>';
+<<<<<<< 4680ac94bbfd943c49301d1cee44c141e51307ce
 <<<<<<< ef9b8810151bf36f2c5f8a558c29b66ec0384461
 <<<<<<< aced56dd066d2bdac4c62bc9cb92635338fa913d
                 $help = 'You need the '.$functionRequired.' function activated';
@@ -133,6 +134,9 @@ class InstallCommand extends ContainerAwareCommand
 >>>>>>> Enhance requirements in InstallCommand
 =======
                 $help = 'You need the '.$requirement.' function activated';
+=======
+                $help = 'You need the '.$functionRequired.' function activated';
+>>>>>>> Fix wrong variable name
             }
 
 >>>>>>> add composer extensions check & function_exists checks
