@@ -35,7 +35,11 @@
 <<<<<<< b7fa7803e5c9f1c91e5239a77b4d83068959ba2c
 =======
 <<<<<<< HEAD
+<<<<<<< 8daa86f81b4e77122b5b462cf77255e95f48ddc5
 >>>>>>> remove unused functions & clean composer.json
+=======
+<<<<<<< HEAD
+>>>>>>> Remove gettext & lowerize
         "ext-dom": "*",
         "ext-curl": "*",
         "ext-gd": "*",
@@ -58,7 +62,17 @@
 >>>>>>> Remove gettext & lowerize
 =======
 >>>>>>> 14c938f... remove unused functions & clean composer.json
+<<<<<<< 8daa86f81b4e77122b5b462cf77255e95f48ddc5
 >>>>>>> remove unused functions & clean composer.json
+=======
+=======
+        "ext-dom": "*",
+        "ext-curl": "*",
+        "ext-gd": "*",
+        "ext-session": "*",
+        "ext-ctype": "*",
+>>>>>>> d954b11... Remove gettext & lowerize
+>>>>>>> Remove gettext & lowerize
         "ext-hash": "*",
         "ext-simplexml": "*",
         "ext-json": "*",
@@ -81,6 +95,7 @@
 >>>>>>> Remove gettext & lowerize
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
         "ext-tokenizer": "*",
         "ext-pdo": "*",
 =======
@@ -88,7 +103,14 @@
         "ext-tokenizer": "*",
         "ext-PDO": "*",
 >>>>>>> 14c938f... remove unused functions & clean composer.json
+<<<<<<< 8daa86f81b4e77122b5b462cf77255e95f48ddc5
 >>>>>>> remove unused functions & clean composer.json
+=======
+=======
+        "ext-tokenizer": "*",
+        "ext-pdo": "*",
+>>>>>>> d954b11... Remove gettext & lowerize
+>>>>>>> Remove gettext & lowerize
         "symfony/symfony": "3.0.*",
         "doctrine/orm": "^2.5",
         "doctrine/doctrine-bundle": "^1.6",
