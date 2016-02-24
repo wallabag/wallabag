@@ -98,11 +98,15 @@ Toggle favorite: 'Marquer comme favori'
 Delete: 'Supprimer'
 "{0} There is no entry.|{1} There is one entry.|]1,Inf[ There are %count% entries.": "{0} Il n'y a pas d'articles.|{1} Il y a un article.|]1,Inf[ Il y a %count% articles."
 http://website: "http://siteweb"
+<<<<<<< 9bd5c35915f4e9df1b0e2e6bae48faa29310cd75
 <<<<<<< ca0b5d5d06b24233c1fce8378918c7e061031862
 "{0} No annotations|{1} One annotation|]1,Inf[ %nbAnnotations% annotations": "{0} Aucune annotation|{1} Une annotation|]1,Inf[ %nbAnnotations% annotations"
 =======
 "{0} No annotations|{1} One annotation|]1,Inf[ %nbComments% annotations": "{0} Aucun commentaire|{1} Un commentaire|]1,Inf[ %nbComments% commentaires"
 >>>>>>> display how much comments there are for an entry
+=======
+"{0} No annotations|{1} One annotation|]1,Inf[ %nbComments% annotations": "{0} Aucune annotation|{1} Une annotation|]1,Inf[ %nbComments% annotations"
+>>>>>>> changed french translation from commentaire to annotation
 
 # Edit entry
 Edit an entry: "Éditer un article"
