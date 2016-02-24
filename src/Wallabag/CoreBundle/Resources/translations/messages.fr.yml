@@ -98,6 +98,7 @@ Toggle favorite: 'Marquer comme favori'
 Delete: 'Supprimer'
 "{0} There is no entry.|{1} There is one entry.|]1,Inf[ There are %count% entries.": "{0} Il n'y a pas d'articles.|{1} Il y a un article.|]1,Inf[ Il y a %count% articles."
 http://website: "http://siteweb"
+"{0} No annotations|{1} One annotation|]1,Inf[ %nbComments% annotations": "{0} Aucun commentaire|{1} Un commentaire|]1,Inf[ %nbComments% commentaires"
 
 # Edit entry
 Edit an entry: "Éditer un article"
