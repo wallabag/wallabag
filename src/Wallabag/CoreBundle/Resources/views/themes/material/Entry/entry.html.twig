@@ -215,8 +215,13 @@ app
         </header>
         <aside>
             <a href="{{ entry.url|e }}" target="_blank" title="{% trans %}original{% endtrans %} : {{ entry.title|e }}" class="tool link mdi-content-link"> <span>{{ entry.domainName|removeWww }}</span></a>
+<<<<<<< ca0b5d5d06b24233c1fce8378918c7e061031862
             {% set nbAnnotations = entry.annotations | length %}
             <span class="tool link mdi-communication-comment"> {% transchoice nbAnnotations %}{0} No annotations|{1} One annotation|]1,Inf[ %nbAnnotations% annotations{% endtranschoice %}</span>
+=======
+            {% set nbComments = entry.comments | length %}
+            <span class="tool link mdi-communication-comment"> {% transchoice nbComments %}{0} No annotations|{1} One annotation|]1,Inf[ %nbComments% annotations{% endtranschoice %}</span>
+>>>>>>> display how much comments there are for an entry
             <div id="list">
                 {% for tag in entry.tags %}
                     <div class="chip">
