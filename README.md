@@ -15,8 +15,9 @@ If you don't have it yet, please [install composer](https://getcomposer.org/down
 
 ```
 SYMFONY_ENV=prod composer create-project wallabag/wallabag wallabag "2.0.*@alpha" --no-dev
-php bin/console wallabag:install --env=prod
-php bin/console server:run --env=prod
+cd wallabag
+php app/console wallabag:install --env=prod
+php app/console server:run --env=prod
 ```
 
 ## License
