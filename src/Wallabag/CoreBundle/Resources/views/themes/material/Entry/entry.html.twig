@@ -187,6 +187,8 @@ main {
         </header>
         <aside>
             <a href="{{ entry.url|e }}" target="_blank" title="{% trans %}original{% endtrans %} : {{ entry.title|e }}" class="tool link mdi-content-link"> <span>{{ entry.domainName|removeWww }}</span></a>
+            {% set nbComments = entry.comments | length %}
+            <span class="tool link mdi-communication-comment"> {% transchoice nbComments %}{0} No annotations|{1} One annotation|]1,Inf[ %nbComments% annotations{% endtranschoice %}</span>
             <div id="list">
                 {% for tag in entry.tags %}
                     <div class="chip">
