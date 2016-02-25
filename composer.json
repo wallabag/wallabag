@@ -90,11 +90,8 @@
         "fabpot/php-cs-fixer": "~1.9"
     },
     "scripts": {
-        "build-parameters": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
-        ],
         "post-cmd": [
-            "@build-parameters",
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
@@ -116,13 +113,7 @@
         "symfony-tests-dir": "tests",
         "symfony-assets-install": "relative",
         "incenteev-parameters": {
-            "file": "app/config/parameters.yml",
-            "env-map": {
-                "mailer_host": "WALLABAG_MAILER_HOST",
-                "mailer_user": "WALLABAG_MAILER_USER",
-                "mailer_password": "WALLABAG_MAILER_PASSWORD",
-                "secret": "WALLABAG_SECRET"
-            }
+            "file": "app/config/parameters.yml"
         }
     },
     "autoload": {
