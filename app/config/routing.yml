@@ -1,6 +1,6 @@
-wallabag_comment:
+wallabag_annotation:
   type : rest
-  resource: "@WallabagCommentBundle/Resources/config/routing_comments.yml"
+  resource: "@WallabagAnnotationBundle/Resources/config/routing_annotations.yml"
 
 wallabag_import:
     resource: "@WallabagImportBundle/Controller/"

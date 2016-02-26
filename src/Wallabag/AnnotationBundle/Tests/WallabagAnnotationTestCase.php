@@ -1,11 +1,11 @@
 <?php
 
-namespace Wallabag\CommentBundle\Tests;
+namespace Wallabag\AnnotationBundle\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\Cookie;
 
-abstract class WallabagCommentTestCase extends WebTestCase
+abstract class WallabagAnnotationTestCase extends WebTestCase
 {
     /**
      * @var Client

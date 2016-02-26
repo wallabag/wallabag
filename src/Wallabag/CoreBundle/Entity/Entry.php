@@ -9,7 +9,7 @@ use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\XmlRoot;
 use Symfony\Component\Validator\Constraints as Assert;
 use Wallabag\UserBundle\Entity\User;
-use Wallabag\CommentBundle\Entity\Comment;
+use Wallabag\AnnotationBundle\Entity\Annotation;
 
 /**
  * Entry.
@@ -99,12 +99,12 @@ class Entry
     private $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="Wallabag\CommentBundle\Entity\Comment", mappedBy="entry", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Wallabag\AnnotationBundle\Entity\Annotation", mappedBy="entry", cascade={"persist", "remove"})
      * @ORM\JoinTable
      *
      * @Groups({"entries_for_user", "export_all"})
      */
-    private $comments;
+    private $annotations;
 
     /**
      * @var string
@@ -366,19 +366,19 @@ class Entry
     }
 
     /**
-     * @return ArrayCollection<Comment>
+     * @return ArrayCollection<Annotation>
      */
-    public function getComments()
+    public function getAnnotations()
     {
-        return $this->comments;
+        return $this->annotations;
     }
 
     /**
-     * @param Comment $comment
+     * @param Annotation $annotation
      */
-    public function setComment(Comment $comment)
+    public function setAnnotation(Annotation $annotation)
     {
-        $this->comments[] = $comment;
+        $this->annotations[] = $annotation;
     }
 
     /**

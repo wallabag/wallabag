@@ -1,19 +1,19 @@
 <?php
 
-namespace Wallabag\CommentBundle\Controller;
+namespace Wallabag\AnnotationBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Wallabag\CommentBundle\Entity\Comment;
+use Wallabag\AnnotationBundle\Entity\Annotation;
 use Wallabag\CoreBundle\Entity\Entry;
 
-class WallabagCommentController extends FOSRestController
+class WallabagAnnotationController extends FOSRestController
 {
     /**
-     * Retrieve comments for an entry.
+     * Retrieve annotations for an entry.
      *
      * @ApiDoc(
      *      requirements={
@@ -25,27 +25,27 @@ class WallabagCommentController extends FOSRestController
      */
     public function getAnnotationsAction(Entry $entry)
     {
-        $commentRows = $this
+        $annotationRows = $this
                 ->getDoctrine()
-                ->getRepository('WallabagCommentBundle:Comment')
-                ->findCommentsByPageId($entry->getId(), $this->getUser()->getId());
-        $total = count($commentRows);
-        $comments = array('total' => $total, 'rows' => $commentRows);
+                ->getRepository('WallabagAnnotationBundle:Annotation')
+                ->findAnnotationsByPageId($entry->getId(), $this->getUser()->getId());
+        $total = count($annotationRows);
+        $annotations = array('total' => $total, 'rows' => $annotationRows);
 
-        $json = $this->get('serializer')->serialize($comments, 'json');
+        $json = $this->get('serializer')->serialize($annotations, 'json');
 
         return $this->renderJsonResponse($json);
     }
 
     /**
-     * Creates a new comment.
+     * Creates a new annotation.
      *
      * @param Entry $entry
      *
      * @ApiDoc(
      *      requirements={
      *          {"name"="ranges", "dataType"="array", "requirement"="\w+", "description"="The range array for the annotation"},
-     *          {"name"="quote", "dataType"="string", "required"=false, "description"="Optional, quote for the comment"},
+     *          {"name"="quote", "dataType"="string", "required"=false, "description"="Optional, quote for the annotation"},
      *          {"name"="text", "dataType"="string", "required"=true, "description"=""},
      *      }
      * )
@@ -58,75 +58,75 @@ class WallabagCommentController extends FOSRestController
 
         $em = $this->getDoctrine()->getManager();
 
-        $comment = new Comment($this->getUser());
+        $annotation = new Annotation($this->getUser());
 
-        $comment->setText($data['text']);
+        $annotation->setText($data['text']);
         if (array_key_exists('quote', $data)) {
-            $comment->setQuote($data['quote']);
+            $annotation->setQuote($data['quote']);
         }
         if (array_key_exists('ranges', $data)) {
-            $comment->setRanges($data['ranges']);
+            $annotation->setRanges($data['ranges']);
         }
 
-        $comment->setEntry($entry);
+        $annotation->setEntry($entry);
 
-        $em->persist($comment);
+        $em->persist($annotation);
         $em->flush();
 
-        $json = $this->get('serializer')->serialize($comment, 'json');
+        $json = $this->get('serializer')->serialize($annotation, 'json');
 
         return $this->renderJsonResponse($json);
     }
 
     /**
-     * Updates a comment.
+     * Updates an annotation.
      *
      * @ApiDoc(
      *      requirements={
-     *          {"name"="comment", "dataType"="string", "requirement"="\w+", "description"="The comment ID"}
+     *          {"name"="annotation", "dataType"="string", "requirement"="\w+", "description"="The annotation ID"}
      *      }
      * )
      *
-     * @ParamConverter("comment", class="WallabagCommentBundle:Comment")
+     * @ParamConverter("annotation", class="WallabagAnnotationBundle:Annotation")
      *
      * @return Response
      */
-    public function putAnnotationAction(Comment $comment, Request $request)
+    public function putAnnotationAction(Annotation $annotation, Request $request)
     {
         $data = json_decode($request->getContent(), true);
 
         if (!is_null($data['text'])) {
-            $comment->setText($data['text']);
+            $annotation->setText($data['text']);
         }
 
         $em = $this->getDoctrine()->getManager();
         $em->flush();
 
-        $json = $this->get('serializer')->serialize($comment, 'json');
+        $json = $this->get('serializer')->serialize($annotation, 'json');
 
         return $this->renderJsonResponse($json);
     }
 
     /**
-     * Removes a comment.
+     * Removes an annotation.
      *
      * @ApiDoc(
      *      requirements={
-     *          {"name"="comment", "dataType"="string", "requirement"="\w+", "description"="The comment ID"}
+     *          {"name"="annotation", "dataType"="string", "requirement"="\w+", "description"="The annotation ID"}
      *      }
      * )
      *
-     * @ParamConverter("comment", class="WallabagCommentBundle:Comment")
+     * @ParamConverter("annotation", class="WallabagAnnotationBundle:Annotation")
      *
      * @return Response
      */
-    public function deleteAnnotationAction(Comment $comment)
+    public function deleteAnnotationAction(Annotation $annotation)
     {
         $em = $this->getDoctrine()->getManager();
-        $em->remove($comment);
+        $em->remove($annotation);
         $em->flush();
 
-        $json = $this->get('serializer')->serialize($comment, 'json');
+        $json = $this->get('serializer')->serialize($annotation, 'json');
 
         return $this->renderJsonResponse($json);
     }

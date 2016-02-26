@@ -1,11 +1,11 @@
 <?php
 
-namespace Wallabag\CommentBundle\DependencyInjection;
+namespace Wallabag\AnnotationBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
-class WallabagCommentExtension extends Extension
+class WallabagAnnotationExtension extends Extension
 {
     /**
      * {@inheritdoc}
