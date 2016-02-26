@@ -35,11 +35,15 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Craue\ConfigBundle\CraueConfigBundle(),
             new Lexik\Bundle\MaintenanceBundle\LexikMaintenanceBundle(),
+<<<<<<< 564b1b10a638ac2b981f05716f84104cd63bd099
 <<<<<<< e9a854c48821720618d0c607260ed92a2f43fa37
             new Wallabag\AnnotationBundle\WallabagAnnotationBundle(),
 =======
             new Wallabag\CommentBundle\WallabagCommentBundle(),
 >>>>>>> Comment work with annotator v2
+=======
+            new Wallabag\AnnotationBundle\WallabagAnnotationBundle(),
+>>>>>>> Rename CommentBundle with AnnotationBundle
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

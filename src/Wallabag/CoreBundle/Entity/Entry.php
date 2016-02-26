@@ -9,11 +9,15 @@ use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\XmlRoot;
 use Symfony\Component\Validator\Constraints as Assert;
 use Wallabag\UserBundle\Entity\User;
+<<<<<<< 564b1b10a638ac2b981f05716f84104cd63bd099
 <<<<<<< e9a854c48821720618d0c607260ed92a2f43fa37
 use Wallabag\AnnotationBundle\Entity\Annotation;
 =======
 use Wallabag\CommentBundle\Entity\Comment;
 >>>>>>> Comment work with annotator v2
+=======
+use Wallabag\AnnotationBundle\Entity\Annotation;
+>>>>>>> Rename CommentBundle with AnnotationBundle
 
 /**
  * Entry.
@@ -103,11 +107,15 @@ class Entry
     private $updatedAt;
 
     /**
+<<<<<<< 564b1b10a638ac2b981f05716f84104cd63bd099
 <<<<<<< e9a854c48821720618d0c607260ed92a2f43fa37
      * @ORM\OneToMany(targetEntity="Wallabag\AnnotationBundle\Entity\Annotation", mappedBy="entry", cascade={"persist", "remove"})
 =======
      * @ORM\OneToMany(targetEntity="Wallabag\CommentBundle\Entity\Comment", mappedBy="entry", cascade={"persist", "remove"})
 >>>>>>> Comment work with annotator v2
+=======
+     * @ORM\OneToMany(targetEntity="Wallabag\AnnotationBundle\Entity\Annotation", mappedBy="entry", cascade={"persist", "remove"})
+>>>>>>> Rename CommentBundle with AnnotationBundle
      * @ORM\JoinTable
      *
      * @Groups({"entries_for_user", "export_all"})
@@ -374,11 +382,15 @@ class Entry
     }
 
     /**
+<<<<<<< 564b1b10a638ac2b981f05716f84104cd63bd099
 <<<<<<< e9a854c48821720618d0c607260ed92a2f43fa37
      * @return ArrayCollection<Annotation>
 =======
      * @return ArrayCollection<Comment>
 >>>>>>> Comment work with annotator v2
+=======
+     * @return ArrayCollection<Annotation>
+>>>>>>> Rename CommentBundle with AnnotationBundle
      */
     public function getAnnotations()
     {
@@ -386,6 +398,7 @@ class Entry
     }
 
     /**
+<<<<<<< 564b1b10a638ac2b981f05716f84104cd63bd099
 <<<<<<< e9a854c48821720618d0c607260ed92a2f43fa37
      * @param Annotation $annotation
      */
@@ -394,11 +407,18 @@ class Entry
         $this->annotations[] = $annotation;
 =======
      * @param Comment $comment
+=======
+     * @param Annotation $annotation
+>>>>>>> Rename CommentBundle with AnnotationBundle
      */
-    public function setComment(Comment $comment)
+    public function setAnnotation(Annotation $annotation)
     {
+<<<<<<< 564b1b10a638ac2b981f05716f84104cd63bd099
         $this->comments[] = $comment;
 >>>>>>> Comment work with annotator v2
+=======
+        $this->annotations[] = $annotation;
+>>>>>>> Rename CommentBundle with AnnotationBundle
     }
 
     /**

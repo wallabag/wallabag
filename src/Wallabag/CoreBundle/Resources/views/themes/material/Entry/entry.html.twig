@@ -215,6 +215,7 @@ app
         </header>
         <aside>
             <a href="{{ entry.url|e }}" target="_blank" title="{% trans %}original{% endtrans %} : {{ entry.title|e }}" class="tool link mdi-content-link"> <span>{{ entry.domainName|removeWww }}</span></a>
+<<<<<<< 564b1b10a638ac2b981f05716f84104cd63bd099
 <<<<<<< ca0b5d5d06b24233c1fce8378918c7e061031862
             {% set nbAnnotations = entry.annotations | length %}
             <span class="tool link mdi-communication-comment"> {% transchoice nbAnnotations %}{0} No annotations|{1} One annotation|]1,Inf[ %nbAnnotations% annotations{% endtranschoice %}</span>
@@ -222,6 +223,10 @@ app
             {% set nbComments = entry.comments | length %}
             <span class="tool link mdi-communication-comment"> {% transchoice nbComments %}{0} No annotations|{1} One annotation|]1,Inf[ %nbComments% annotations{% endtranschoice %}</span>
 >>>>>>> display how much comments there are for an entry
+=======
+            {% set nbAnnotations = entry.annotations | length %}
+            <span class="tool link mdi-communication-comment"> {% transchoice nbAnnotations %}{0} No annotations|{1} One annotation|]1,Inf[ %nbAnnotations% annotations{% endtranschoice %}</span>
+>>>>>>> Rename CommentBundle with AnnotationBundle
             <div id="list">
                 {% for tag in entry.tags %}
                     <div class="chip">
@@ -254,6 +259,7 @@ app.include(annotator.storage.http, {
     prefix: '',
     urls: {
         create: '{{ path('annotations_post_annotation', { 'entry': entry.id }) }}',
+<<<<<<< 564b1b10a638ac2b981f05716f84104cd63bd099
 <<<<<<< fca971886413ee6907372dac716a6965ecc7334a
         update: '{{ path('annotations_put_annotation', { 'annotation': 'idAnnotation' }) }}',
         destroy: '{{ path('annotations_delete_annotation', { 'annotation': 'idAnnotation' }) }}',
@@ -261,6 +267,10 @@ app.include(annotator.storage.http, {
         update: '{{ path('annotations_put_annotation', { 'comment': 'idComment' }) }}',
         destroy: '{{ path('annotations_delete_annotation', { 'comment': 'idComment' }) }}',
 >>>>>>> Move annotatorjs to the bottom of the body
+=======
+        update: '{{ path('annotations_put_annotation', { 'annotation': 'idAnnotation' }) }}',
+        destroy: '{{ path('annotations_delete_annotation', { 'annotation': 'idAnnotation' }) }}',
+>>>>>>> Rename CommentBundle with AnnotationBundle
         search: '{{ path('annotations_get_annotations', { 'entry': entry.id }) }}'
     }
 });

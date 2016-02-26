@@ -1,3 +1,4 @@
+<<<<<<< 564b1b10a638ac2b981f05716f84104cd63bd099
 <<<<<<< e9a854c48821720618d0c607260ed92a2f43fa37
 wallabag_annotation:
   type : rest
@@ -7,6 +8,11 @@ wallabag_comment:
   type : rest
   resource: "@WallabagCommentBundle/Resources/config/routing_comments.yml"
 >>>>>>> Comment work with annotator v2
+=======
+wallabag_annotation:
+  type : rest
+  resource: "@WallabagAnnotationBundle/Resources/config/routing_annotations.yml"
+>>>>>>> Rename CommentBundle with AnnotationBundle
 
 wallabag_import:
     resource: "@WallabagImportBundle/Controller/"
