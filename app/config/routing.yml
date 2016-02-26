@@ -1,3 +1,7 @@
+wallabag_annotation:
+  type : rest
+  resource: "@WallabagAnnotationBundle/Resources/config/routing_annotations.yml"
+
 wallabag_import:
     resource: "@WallabagImportBundle/Controller/"
     type:     annotation

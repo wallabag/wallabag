@@ -177,6 +177,7 @@ main {
     padding: 0;
 }
 </style>
+
 {% endblock %}
 
 {% block content %}
@@ -186,6 +187,8 @@ main {
         </header>
         <aside>
             <a href="{{ entry.url|e }}" target="_blank" title="{% trans %}original{% endtrans %} : {{ entry.title|e }}" class="tool link mdi-content-link"> <span>{{ entry.domainName|removeWww }}</span></a>
+            {% set nbAnnotations = entry.annotations | length %}
+            <span class="tool link mdi-communication-comment"> {% transchoice nbAnnotations %}{0} No annotations|{1} One annotation|]1,Inf[ %nbAnnotations% annotations{% endtranschoice %}</span>
             <div id="list">
                 {% for tag in entry.tags %}
                     <div class="chip">
@@ -207,6 +210,29 @@ main {
             {{ entry.content | raw }}
         </article>
     </div>
+
+<script type="text/javascript">
+
+var app = new annotator.App();
+app.include(annotator.ui.main, {
+    element: document.querySelector('article')
+});
+app.include(annotator.storage.http, {
+    prefix: '',
+    urls: {
+        create: '{{ path('annotations_post_annotation', { 'entry': entry.id }) }}',
+        update: '{{ path('annotations_put_annotation', { 'annotation': 'idAnnotation' }) }}',
+        destroy: '{{ path('annotations_delete_annotation', { 'annotation': 'idAnnotation' }) }}',
+        search: '{{ path('annotations_get_annotations', { 'entry': entry.id }) }}'
+    }
+});
+app
+.start()
+.then(function () {
+     app.annotations.load({entry: {{ entry.id }}});
+});
+</script>
+
 {% endblock %}
 
 {% block footer %}
