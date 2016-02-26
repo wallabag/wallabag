@@ -8,7 +8,11 @@
 >>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
 =======
 <<<<<<< HEAD
+<<<<<<< 7f6c84ba7030da49003ff8fd6fc8043e69d0a4ca
 >>>>>>> Comment work with annotator v2
+=======
+<<<<<<< HEAD
+>>>>>>> Rename CommentBundle with AnnotationBundle
 wallabag_annotation:
   type : rest
   resource: "@WallabagAnnotationBundle/Resources/config/routing_annotations.yml"
@@ -37,7 +41,15 @@ wallabag_comment:
   type : rest
   resource: "@WallabagCommentBundle/Resources/config/routing_comments.yml"
 >>>>>>> 0c4e4ab... Comment work with annotator v2
+<<<<<<< 7f6c84ba7030da49003ff8fd6fc8043e69d0a4ca
 >>>>>>> Comment work with annotator v2
+=======
+=======
+wallabag_annotation:
+  type : rest
+  resource: "@WallabagAnnotationBundle/Resources/config/routing_annotations.yml"
+>>>>>>> 9e1ce38... Rename CommentBundle with AnnotationBundle
+>>>>>>> Rename CommentBundle with AnnotationBundle
 
 wallabag_import:
     resource: "@WallabagImportBundle/Controller/"

@@ -23,6 +23,7 @@ use Wallabag\AnnotationBundle\Entity\Annotation;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 use Wallabag\AnnotationBundle\Entity\Annotation;
 =======
 use Wallabag\CommentBundle\Entity\Comment;
@@ -36,7 +37,13 @@ use Wallabag\AnnotationBundle\Entity\Annotation;
 =======
 use Wallabag\CommentBundle\Entity\Comment;
 >>>>>>> 0c4e4ab... Comment work with annotator v2
+<<<<<<< 7f6c84ba7030da49003ff8fd6fc8043e69d0a4ca
 >>>>>>> Comment work with annotator v2
+=======
+=======
+use Wallabag\AnnotationBundle\Entity\Annotation;
+>>>>>>> 9e1ce38... Rename CommentBundle with AnnotationBundle
+>>>>>>> Rename CommentBundle with AnnotationBundle
 
 /**
  * Entry.
@@ -140,6 +147,7 @@ class Entry
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
      * @ORM\OneToMany(targetEntity="Wallabag\AnnotationBundle\Entity\Annotation", mappedBy="entry", cascade={"persist", "remove"})
 =======
      * @ORM\OneToMany(targetEntity="Wallabag\CommentBundle\Entity\Comment", mappedBy="entry", cascade={"persist", "remove"})
@@ -153,7 +161,13 @@ class Entry
 =======
      * @ORM\OneToMany(targetEntity="Wallabag\CommentBundle\Entity\Comment", mappedBy="entry", cascade={"persist", "remove"})
 >>>>>>> 0c4e4ab... Comment work with annotator v2
+<<<<<<< 7f6c84ba7030da49003ff8fd6fc8043e69d0a4ca
 >>>>>>> Comment work with annotator v2
+=======
+=======
+     * @ORM\OneToMany(targetEntity="Wallabag\AnnotationBundle\Entity\Annotation", mappedBy="entry", cascade={"persist", "remove"})
+>>>>>>> 9e1ce38... Rename CommentBundle with AnnotationBundle
+>>>>>>> Rename CommentBundle with AnnotationBundle
      * @ORM\JoinTable
      *
      * @Groups({"entries_for_user", "export_all"})
@@ -434,6 +448,7 @@ class Entry
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
      * @return ArrayCollection<Annotation>
 =======
      * @return ArrayCollection<Comment>
@@ -447,7 +462,13 @@ class Entry
 =======
      * @return ArrayCollection<Comment>
 >>>>>>> 0c4e4ab... Comment work with annotator v2
+<<<<<<< 7f6c84ba7030da49003ff8fd6fc8043e69d0a4ca
 >>>>>>> Comment work with annotator v2
+=======
+=======
+     * @return ArrayCollection<Annotation>
+>>>>>>> 9e1ce38... Rename CommentBundle with AnnotationBundle
+>>>>>>> Rename CommentBundle with AnnotationBundle
      */
     public function getAnnotations()
     {
@@ -465,7 +486,11 @@ class Entry
 >>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
 =======
 <<<<<<< HEAD
+<<<<<<< 7f6c84ba7030da49003ff8fd6fc8043e69d0a4ca
 >>>>>>> Comment work with annotator v2
+=======
+<<<<<<< HEAD
+>>>>>>> Rename CommentBundle with AnnotationBundle
      * @param Annotation $annotation
      */
     public function setAnnotation(Annotation $annotation)
@@ -502,12 +527,22 @@ class Entry
 =======
 =======
      * @param Comment $comment
+=======
+     * @param Annotation $annotation
+>>>>>>> 9e1ce38... Rename CommentBundle with AnnotationBundle
      */
-    public function setComment(Comment $comment)
+    public function setAnnotation(Annotation $annotation)
     {
+<<<<<<< HEAD
         $this->comments[] = $comment;
 >>>>>>> 0c4e4ab... Comment work with annotator v2
+<<<<<<< 7f6c84ba7030da49003ff8fd6fc8043e69d0a4ca
 >>>>>>> Comment work with annotator v2
+=======
+=======
+        $this->annotations[] = $annotation;
+>>>>>>> 9e1ce38... Rename CommentBundle with AnnotationBundle
+>>>>>>> Rename CommentBundle with AnnotationBundle
     }
 
     /**

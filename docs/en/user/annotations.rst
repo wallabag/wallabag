@@ -17,6 +17,7 @@ Select the part of the article that you want to annotate and click on the pencil
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 Select the part of the article that you want to annotate and click on the pencil:
 =======
 Select the part of the article that you want to comment and click on the pencil:
@@ -30,7 +31,13 @@ Select the part of the article that you want to annotate and click on the pencil
 =======
 Select the part of the article that you want to comment and click on the pencil:
 >>>>>>> d869043... Add annotator in baggy theme
+<<<<<<< 7f6c84ba7030da49003ff8fd6fc8043e69d0a4ca
 >>>>>>> Add annotator in baggy theme
+=======
+=======
+Select the part of the article that you want to annotate and click on the pencil:
+>>>>>>> 9e1ce38... Rename CommentBundle with AnnotationBundle
+>>>>>>> Rename CommentBundle with AnnotationBundle
 
 .. image:: ../../img/user/annotations_1.png
    :alt: Select your text
@@ -46,7 +53,11 @@ Select the part of the article that you want to comment and click on the pencil:
 >>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
 =======
 <<<<<<< HEAD
+<<<<<<< 7f6c84ba7030da49003ff8fd6fc8043e69d0a4ca
 >>>>>>> Add annotator in baggy theme
+=======
+<<<<<<< HEAD
+>>>>>>> Rename CommentBundle with AnnotationBundle
 Then, write your annotation:
 
 .. image:: ../../img/user/annotations_2.png
@@ -99,17 +110,27 @@ You can create as many annotations as you wish.
 =======
 =======
 Then, write your comment:
+=======
+Then, write your annotation:
+>>>>>>> 9e1ce38... Rename CommentBundle with AnnotationBundle
 
 .. image:: ../../img/user/annotations_2.png
-   :alt: Write your comment
+   :alt: Write your annotation
    :align: center
 
-The text is now highlighted and you can read your comment if you move the mouse cursor over it.
+The text is now highlighted and you can read your annotation if you move the mouse cursor over it.
 
 .. image:: ../../img/user/annotations_3.png
-   :alt: Read your comment
+   :alt: Read your annotation
    :align: center
 
+<<<<<<< HEAD
 You can create as many comments as you wish.
 >>>>>>> d869043... Add annotator in baggy theme
+<<<<<<< 7f6c84ba7030da49003ff8fd6fc8043e69d0a4ca
 >>>>>>> Add annotator in baggy theme
+=======
+=======
+You can create as many annotations as you wish.
+>>>>>>> 9e1ce38... Rename CommentBundle with AnnotationBundle
+>>>>>>> Rename CommentBundle with AnnotationBundle

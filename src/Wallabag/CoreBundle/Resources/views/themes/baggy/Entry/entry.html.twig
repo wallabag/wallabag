@@ -39,7 +39,11 @@
 >>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
 =======
 <<<<<<< HEAD
+<<<<<<< 7f6c84ba7030da49003ff8fd6fc8043e69d0a4ca
 >>>>>>> display how much comments there are for an entry
+=======
+<<<<<<< HEAD
+>>>>>>> Rename CommentBundle with AnnotationBundle
         {% set nbAnnotations = entry.annotations | length %}
         <span class="tool link mdi-communication-comment"> {% transchoice nbAnnotations %}{0} No annotations|{1} One annotation|]1,Inf[ %nbAnnotations% annotations{% endtranschoice %}</span>
 =======
@@ -64,7 +68,14 @@
         {% set nbComments = entry.comments | length %}
         <span class="tool link mdi-communication-comment"> {% transchoice nbComments %}{0} No annotations|{1} One annotation|]1,Inf[ %nbComments% annotations{% endtranschoice %}</span>
 >>>>>>> c7a3c57... display how much comments there are for an entry
+<<<<<<< 7f6c84ba7030da49003ff8fd6fc8043e69d0a4ca
 >>>>>>> display how much comments there are for an entry
+=======
+=======
+        {% set nbAnnotations = entry.annotations | length %}
+        <span class="tool link mdi-communication-comment"> {% transchoice nbAnnotations %}{0} No annotations|{1} One annotation|]1,Inf[ %nbAnnotations% annotations{% endtranschoice %}</span>
+>>>>>>> 9e1ce38... Rename CommentBundle with AnnotationBundle
+>>>>>>> Rename CommentBundle with AnnotationBundle
         <aside class="tags">
             {% for tag in entry.tags %}
                 <span class="mdi-action-label-outline">{{ tag.label }}</span> <a href="{{ path('remove_tag', { 'entry': entry.id, 'tag': tag.id }) }}"><i>✘</i></a>
@@ -161,7 +172,11 @@
 >>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
 =======
 <<<<<<< HEAD
+<<<<<<< 7f6c84ba7030da49003ff8fd6fc8043e69d0a4ca
 >>>>>>> Add annotator in baggy theme
+=======
+<<<<<<< HEAD
+>>>>>>> Rename CommentBundle with AnnotationBundle
                 update: '{{ path('annotations_put_annotation', { 'annotation': 'idAnnotation' }) }}',
                 destroy: '{{ path('annotations_delete_annotation', { 'annotation': 'idAnnotation' }) }}',
 =======
@@ -186,7 +201,14 @@
                 update: '{{ path('annotations_put_annotation', { 'comment': 'idComment' }) }}',
                 destroy: '{{ path('annotations_delete_annotation', { 'comment': 'idComment' }) }}',
 >>>>>>> d869043... Add annotator in baggy theme
+<<<<<<< 7f6c84ba7030da49003ff8fd6fc8043e69d0a4ca
 >>>>>>> Add annotator in baggy theme
+=======
+=======
+                update: '{{ path('annotations_put_annotation', { 'annotation': 'idAnnotation' }) }}',
+                destroy: '{{ path('annotations_delete_annotation', { 'annotation': 'idAnnotation' }) }}',
+>>>>>>> 9e1ce38... Rename CommentBundle with AnnotationBundle
+>>>>>>> Rename CommentBundle with AnnotationBundle
                 search: '{{ path('annotations_get_annotations', { 'entry': entry.id }) }}'
             }
         });

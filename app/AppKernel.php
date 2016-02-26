@@ -49,6 +49,7 @@ class AppKernel extends Kernel
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             new Wallabag\AnnotationBundle\WallabagAnnotationBundle(),
 =======
             new Wallabag\CommentBundle\WallabagCommentBundle(),
@@ -62,7 +63,13 @@ class AppKernel extends Kernel
 =======
             new Wallabag\CommentBundle\WallabagCommentBundle(),
 >>>>>>> 0c4e4ab... Comment work with annotator v2
+<<<<<<< 7f6c84ba7030da49003ff8fd6fc8043e69d0a4ca
 >>>>>>> Comment work with annotator v2
+=======
+=======
+            new Wallabag\AnnotationBundle\WallabagAnnotationBundle(),
+>>>>>>> 9e1ce38... Rename CommentBundle with AnnotationBundle
+>>>>>>> Rename CommentBundle with AnnotationBundle
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

@@ -118,6 +118,7 @@ http://website: "http://siteweb"
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 "{0} No annotations|{1} One annotation|]1,Inf[ %nbAnnotations% annotations": "{0} Aucune annotation|{1} Une annotation|]1,Inf[ %nbAnnotations% annotations"
 =======
 "{0} No annotations|{1} One annotation|]1,Inf[ %nbComments% annotations": "{0} Aucun commentaire|{1} Un commentaire|]1,Inf[ %nbComments% commentaires"
@@ -140,7 +141,13 @@ http://website: "http://siteweb"
 =======
 "{0} No annotations|{1} One annotation|]1,Inf[ %nbComments% annotations": "{0} Aucune annotation|{1} Une annotation|]1,Inf[ %nbComments% annotations"
 >>>>>>> ed29888... changed french translation from commentaire to annotation
+<<<<<<< 7f6c84ba7030da49003ff8fd6fc8043e69d0a4ca
 >>>>>>> changed french translation from commentaire to annotation
+=======
+=======
+"{0} No annotations|{1} One annotation|]1,Inf[ %nbAnnotations% annotations": "{0} Aucune annotation|{1} Une annotation|]1,Inf[ %nbAnnotations% annotations"
+>>>>>>> 9e1ce38... Rename CommentBundle with AnnotationBundle
+>>>>>>> Rename CommentBundle with AnnotationBundle
 
 # Edit entry
 Edit an entry: "Éditer un article"
