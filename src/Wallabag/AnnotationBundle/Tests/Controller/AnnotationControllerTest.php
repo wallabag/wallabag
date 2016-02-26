@@ -1,31 +1,31 @@
 <?php
 
-namespace Wallabag\CommentBundle\Tests\Controller;
+namespace Wallabag\AnnotationBundle\Tests\Controller;
 
-use Wallabag\CommentBundle\Tests\WallabagCommentTestCase;
+use Wallabag\AnnotationBundle\Tests\WallabagAnnotationTestCase;
 
-class CommentControllerTest extends WallabagCommentTestCase
+class AnnotationControllerTest extends WallabagAnnotationTestCase
 {
-    public function testGetComments()
+    public function testGetAnnotations()
     {
-        $comment = $this->client->getContainer()
+        $annotation = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCommentBundle:Comment')
+            ->getRepository('WallabagAnnotationBundle:Annotation')
             ->findOneBy(array('user' => 1));
 
-        if (!$comment) {
+        if (!$annotation) {
             $this->markTestSkipped('No content found in db.');
         }
         $this->logInAs('admin');
-        $crawler = $this->client->request('GET', 'annotations/'.$comment->getEntry()->getId().'.json');
+        $crawler = $this->client->request('GET', 'annotations/'.$annotation->getEntry()->getId().'.json');
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
         $this->assertEquals(1, $content['total']);
-        $this->assertEquals($comment->getText(), $content['rows'][0]['text']);
+        $this->assertEquals($annotation->getText(), $content['rows'][0]['text']);
     }
 
-    public function testSetcomment()
+    public function testSetAnnotation()
     {
         $this->logInAs('admin');
 
@@ -36,7 +36,7 @@ class CommentControllerTest extends WallabagCommentTestCase
 
         $headers = array('CONTENT_TYPE' => 'application/json');
         $content = json_encode(array(
-            'text' => 'my comment',
+            'text' => 'my annotation',
             'quote' => 'my quote',
             'range' => '[{"start":"","startOffset":24,"end":"","endOffset":31}]',
             ));
@@ -44,38 +44,38 @@ class CommentControllerTest extends WallabagCommentTestCase
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
-        $comment = $this->client->getContainer()
+        $annotation = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCommentBundle:Comment')
-            ->findLastCommentByPageId($entry->getId(), 1);
+            ->getRepository('WallabagAnnotationBundle:Annotation')
+            ->findLastAnnotationByPageId($entry->getId(), 1);
 
-        $this->assertEquals('my comment', $comment->getText());
+        $this->assertEquals('my annotation', $annotation->getText());
     }
 
-    public function testEditcomment()
+    public function testEditAnnotation()
     {
-        $comment = $this->client->getContainer()
+        $annotation = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCommentBundle:Comment')
+            ->getRepository('WallabagAnnotationBundle:Annotation')
             ->findOneBy(array('user' => 1));
 
         $this->logInAs('admin');
 
         $headers = array('CONTENT_TYPE' => 'application/json');
         $content = json_encode(array(
-            'text' => 'a modified comment',
+            'text' => 'a modified annotation',
             ));
-        $crawler = $this->client->request('PUT', 'annotations/'.$comment->getId().'.json', array(), array(), $headers, $content);
+        $crawler = $this->client->request('PUT', 'annotations/'.$annotation->getId().'.json', array(), array(), $headers, $content);
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
-        $this->assertEquals('a modified comment', $content['text']);
+        $this->assertEquals('a modified annotation', $content['text']);
 
-        $commentUpdated = $this->client->getContainer()
+        $annotationUpdated = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCommentBundle:Comment')
-            ->findCommentById($comment->getId());
-        $this->assertEquals('a modified comment', $commentUpdated->getText());
+            ->getRepository('WallabagAnnotationBundle:Annotation')
+            ->findAnnotationById($annotation->getId());
+        $this->assertEquals('a modified annotation', $annotationUpdated->getText());
     }
 }

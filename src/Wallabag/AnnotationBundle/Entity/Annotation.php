@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CommentBundle\Entity;
+namespace Wallabag\AnnotationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\ExclusionPolicy;
@@ -11,14 +11,14 @@ use Wallabag\UserBundle\Entity\User;
 use Wallabag\CoreBundle\Entity\Entry;
 
 /**
- * Comment.
+ * Annotation.
  *
- * @ORM\Table(name="comment")
- * @ORM\Entity(repositoryClass="Wallabag\CommentBundle\Repository\CommentRepository")
+ * @ORM\Table(name="annotation")
+ * @ORM\Entity(repositoryClass="Wallabag\AnnotationBundle\Repository\AnnotationRepository")
  * @ORM\HasLifecycleCallbacks()
  * @ExclusionPolicy("none")
  */
-class Comment
+class Annotation
 {
     /**
      * @var int
@@ -74,7 +74,7 @@ class Comment
     /**
      * @Exclude
      *
-     * @ORM\ManyToOne(targetEntity="Wallabag\CoreBundle\Entity\Entry", inversedBy="comments")
+     * @ORM\ManyToOne(targetEntity="Wallabag\CoreBundle\Entity\Entry", inversedBy="annotations")
      * @ORM\JoinColumn(name="entry_id", referencedColumnName="id")
      */
     private $entry;
@@ -102,7 +102,7 @@ class Comment
      *
      * @param string $text
      *
-     * @return Comment
+     * @return Annotation
      */
     public function setText($text)
     {
@@ -168,7 +168,7 @@ class Comment
      *
      * @param string $quote
      *
-     * @return Comment
+     * @return Annotation
      */
     public function setQuote($quote)
     {
@@ -192,7 +192,7 @@ class Comment
      *
      * @param array $ranges
      *
-     * @return Comment
+     * @return Annotation
      */
     public function setRanges($ranges)
     {
@@ -206,7 +206,7 @@ class Comment
      *
      * @param string $user
      *
-     * @return Comment
+     * @return Annotation
      */
     public function setUser($user)
     {
@@ -239,12 +239,12 @@ class Comment
      *
      * @param Entry $entry
      *
-     * @return Comment
+     * @return Annotation
      */
     public function setEntry($entry)
     {
         $this->entry = $entry;
-        $entry->setComment($this);
+        $entry->setAnnotation($this);
 
         return $this;
     }
