@@ -56,6 +56,7 @@ wallabag_core:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         da: 'Dansk'
         es: 'Español'
 <<<<<<< HEAD
@@ -73,7 +74,13 @@ wallabag_core:
 =======
 	da: 'Dansk'
 >>>>>>> 392f697... config.yml edit to include Danish
+<<<<<<< 9f45f0cf39b8f51ad9545f8c4439c3af33f0f3a7
 >>>>>>> config.yml edit to include Danish
+=======
+=======
+        da: 'Dansk'
+>>>>>>> f3f606b... Fixed indentation issue
+>>>>>>> Fixed indentation issue
     items_on_page: 12
     theme: material
     language: en
