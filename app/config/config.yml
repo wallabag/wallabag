@@ -38,8 +38,12 @@ wallabag_core:
         fa: 'فارسی'
         ro: 'Română'
         pl: 'Polish'
+<<<<<<< 8d2309569521a5484978043c33bd5b4aca319a71
         da: 'Dansk'
         es: 'Español'
+=======
+	da: 'Dansk'
+>>>>>>> config.yml edit to include Danish
     items_on_page: 12
     theme: material
     language: en
