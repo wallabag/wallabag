@@ -1,0 +1,29 @@
+download_pictures: Download billeder på din server
+carrot: Aktiver deling til Carrot
+diaspora_url: Diaspora URL, hvis tjenesten er aktiv
+export_epub: Aktiver eksport til ePub
+export_mobi: Aktiver eksport til .mobi
+export_pdf: Aktiver eksport til PDF
+export_csv: Aktiver eksport til CSV
+export_json: Aktiver eksport til JSON
+export_txt: Aktiver eksport til TXT
+export_xml: Aktiver eksport til XML
+pocket_consumer_key: Brugers nøgle til Pocket for at importere materialer (https://getpocket.com/developer/docs/authentication)
+shaarli_url: Shaarli-URL, hvis tjenesten er aktiv
+share_diaspora: Aktiver deling til Diaspora
+share_mail: Aktiver deling med email
+share_shaarli: Aktiver deling gennem Shaarli
+share_twitter: Aktiver deling gennem Twitter
+show_printlink: Vis et link til print-indhold
+wallabag_support_url: Support-URL for wallabag
+wallabag_url: URL for *sin* wallabag-installation
+entry: "artikel"
+export: "eksport"
+import: "import"
+misc: "misc"
+modify_settings: "Gem ændring"
+piwik_host: Hosting af din side hos Piwik
+piwik_site_id: ID for din side hos Piwik
+piwik_enabled: Aktiver Piwik
+demo_mode_enabled: "Aktiver demo-indstilling? (anvendes kun til wallabags offentlige demo)"
+demo_mode_username: "Demobruger"
