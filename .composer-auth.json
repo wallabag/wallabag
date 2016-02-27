@@ -15,6 +15,7 @@
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         "github.com": "73d9411c719a0a56259dbfa16673793b39973091"
 =======
         "github.com": "dc690078d5c2effdbc5ca1a6a715ad5e9c075ff1"
@@ -22,6 +23,12 @@
 =======
         "github.com": "73d9411c719a0a56259dbfa16673793b39973091"
 >>>>>>> 6cc3829... Replace token by a no scope one
+<<<<<<< e2c7f360c9d3fdcc91c45ab17dc0f504c438b71f
 >>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
+=======
+=======
+        "github.com": "dc690078d5c2effdbc5ca1a6a715ad5e9c075ff1"
+>>>>>>> b211f92... Fix authentication for PR by external contributors
+>>>>>>> Fix authentication for PR by external contributors
     }
 }
