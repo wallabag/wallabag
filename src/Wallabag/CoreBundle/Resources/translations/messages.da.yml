@@ -126,9 +126,14 @@ Share: 'Deling'
 Download: 'Download'
 Does this article appear wrong?: "Vises artiklen forkert?"
 Problems?: 'Problemer?'
+<<<<<<< d53eae374de162d4d5c82aae3804bdab2fbb0e4c
 <<<<<<< 7c19feadf67d508fadf7619ae95f3e83ab1352b4
 Edit title: "Rediger titel"
 
 =======
 Edit title: "Rediger titel"
 >>>>>>> Adding Danish translations to Wallabag v2
+=======
+Edit title: "Rediger titel"
+
+>>>>>>> added newline
