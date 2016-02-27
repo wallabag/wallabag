@@ -2,6 +2,10 @@
     "github-oauth": {
         "github.com": "PLEASE DO NOT USE THIS TOKEN IN YOUR OWN PROJECTS/FORKS",
         "github.com": "This token is reserved for testing the wallabag/wallabag repository",
+<<<<<<< 0c8f445ae99c9b233f75785bbebe18831bbdf268
         "github.com": "73d9411c719a0a56259dbfa16673793b39973091"
+=======
+        "github.com": "dc690078d5c2effdbc5ca1a6a715ad5e9c075ff1"
+>>>>>>> Fix authentication for PR by external contributors
     }
 }
