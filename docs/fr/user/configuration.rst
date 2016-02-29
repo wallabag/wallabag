@@ -27,6 +27,7 @@ disponible pour guider. Le thème par défaut est ``Material``, c'est celui
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 disponible pour guider. Le thème par défaut est ``Material``, c'est celui
 =======
 disponible pour apprendre comment. Le thème par défaut est ``Material``, c'est celui
@@ -34,7 +35,13 @@ disponible pour apprendre comment. Le thème par défaut est ``Material``, c'est
 =======
 disponible pour guider. Le thème par défaut est ``Material``, c'est celui
 >>>>>>> 81c386f... minor fix
+<<<<<<< e6ac2691661401e8a2382638fe34036a289daa3a
 >>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
+=======
+=======
+disponible pour apprendre comment. Le thème par défaut est ``Material``, c'est celui
+>>>>>>> 23ae15a... minor typofix again
+>>>>>>> minor typofix again
 qui est utilisé dans les captures d'écran de la documentation.
 
 Nombre d'articles par page
@@ -57,7 +64,11 @@ RSS
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< e6ac2691661401e8a2382638fe34036a289daa3a
 >>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
+=======
+<<<<<<< HEAD
+>>>>>>> minor typofix again
 wallabag propose un flux RSS pour chaque statut d'article : non lus, favoris et lus.
 
 Tout d'abord, vous devez vous créer un jeton personnel : cliquez sur ``Créez votre jeton``.
@@ -91,7 +102,18 @@ Vous avez maintenant trois liens, un par statut : ajoutez-les dans votre agréga
 =======
 Vous avez maintenant trois liens, un par statut : ajoutez-les dans votre agrégateur de flux RSS préféré.
 >>>>>>> 81c386f... minor fix
+<<<<<<< e6ac2691661401e8a2382638fe34036a289daa3a
 >>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
+=======
+=======
+wallabag propose un flux RSS pour chaque statut d'article : non lus, favoris et lus.
+
+Tout d'abord, vous devez vous créer un jeton personnel : cliquez sur ``Créez votre jeton``.
+Il est possible de regénérer votre jeton en cliquant sur ``Réinitialisez votre jeton``.
+
+Vous avez maintenant trois liens, un par statut : ajoutez-les dans votre agrégateur de flux RSS préféré.
+>>>>>>> 23ae15a... minor typofix again
+>>>>>>> minor typofix again
 
 Vous pouvez aussi définir combien d'articles vous souhaitez dans vos flux RSS
 (50 est la valeur par défaut).
