@@ -50,7 +50,11 @@ before_script:
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< 1d6d8bcce15cddfb06b6ce40bcffad2ae5eca636
 >>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
+=======
+<<<<<<< HEAD
+>>>>>>> Defining Github token is now useless
     - if [[ "$DB" = "pgsql" ]]; then psql -c 'create database wallabag_test;' -U postgres; fi;
 
 before_install:
@@ -72,6 +76,8 @@ before_install:
 before_install:
     - if [[ $TRAVIS_REPO_SLUG = wallabag/wallabag ]]; then cp .composer-auth.json ~/.composer/auth.json; fi;
 =======
+=======
+>>>>>>> 97c5746... Defining Github token is now useless
     - if [[ "$DB" = "pgsql" ]]; then psql -c 'create database wallabag_test;' -U postgres; fi;
 >>>>>>> 2648ce1... Fix postgres database creation
 
