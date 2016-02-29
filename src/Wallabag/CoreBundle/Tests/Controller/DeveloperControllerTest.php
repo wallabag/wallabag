@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: nicosomb
- * Date: 16/02/16
- * Time: 19:39.
- */
+
 namespace Wallabag\CoreBundle\Tests\Controller;
 
 use Wallabag\CoreBundle\Tests\WallabagCoreTestCase;
