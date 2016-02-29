@@ -1,7 +1,7 @@
 Configuration
 =============
 
-Maintenant que vous êtes connecté, il est temps de confirurer votre compte.
+Maintenant que vous êtes connecté, il est temps de configurer votre compte.
 
 Cliquez sur le menu ``Configuration``. Vous avez accès à 5 onglets:
 ``Paramètres``, ``RSS``, ``Mon compte``, ``Mot de passe`` and ``Règles de tag automatiques``.
@@ -14,7 +14,7 @@ Thème
 
 L'affichage de wallabag est personnalisable. C'est ici que vous choisissez le thème
 que vous préférez. Vous pouvez aussi en créer un nouveau, une documentation sera
-disponible pour apprendre comment. Le thème par défaut ``Material``, c'est ce thème
+disponible pour apprendre comment. Le thème par défaut est ``Material``, c'est celui
 qui est utilisé dans les captures d'écran de la documentation.
 
 Nombre d'articles par page
@@ -31,12 +31,12 @@ pour que la nouvelle langue soit prise en compte.
 RSS
 ---
 
-wallabag propose un flux RSS for chaque statut d'article : non lus, favoris and lus.
+wallabag propose un flux RSS pour chaque statut d'article : non lus, favoris et lus.
 
 Tout d'abord, vous devez vous créer un jeton personnel : cliquez sur ``Créez votre jeton``.
-C'est possible de regénérer votre jeton en cliquant sur ``Réinitialisez votre jeton``.
+Il est possible de regénérer votre jeton en cliquant sur ``Réinitialisez votre jeton``.
 
-Vous avez maintenant trois liens, un par statut : ajoutez les dans votre agrégateur de flux RSS préféré.
+Vous avez maintenant trois liens, un par statut : ajoutez-les dans votre agrégateur de flux RSS préféré.
 
 Vous pouvez aussi définir combien d'articles vous souhaitez dans vos flux RSS
 (50 est la valeur par défaut).
@@ -54,7 +54,7 @@ Double authentification (2FA)
 
 https://en.wikipedia.org/wiki/Two-factor_authentication
 
-Si vous activer 2FA, à chaque tentative de connexion à wallabag, vous recevrez
+Si vous activez 2FA, à chaque tentative de connexion à wallabag, vous recevrez
 un code par email. Vous devez renseigner ce code dans le formulaire suivant :
 
 .. image:: ../../img/user/2FA_form.png
