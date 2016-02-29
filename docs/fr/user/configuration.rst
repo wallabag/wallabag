@@ -14,7 +14,11 @@ Thème
 
 L'affichage de wallabag est personnalisable. C'est ici que vous choisissez le thème
 que vous préférez. Vous pouvez aussi en créer un nouveau, une documentation sera
+<<<<<<< 38f8d47177e477c9907a876c37022ccaea3d409e
 disponible pour guider. Le thème par défaut est ``Material``, c'est celui
+=======
+disponible pour apprendre comment. Le thème par défaut est ``Material``, c'est celui
+>>>>>>> minor typofix again
 qui est utilisé dans les captures d'écran de la documentation.
 
 Nombre d'articles par page
@@ -31,12 +35,21 @@ pour que la nouvelle langue soit prise en compte.
 RSS
 ---
 
+<<<<<<< 38f8d47177e477c9907a876c37022ccaea3d409e
 wallabag propose un flux RSS pour chaque statut d'article : non lus, favoris et lus.
 
 Tout d'abord, vous devez vous créer un jeton personnel : cliquez sur ``Créez votre jeton``.
 Il est possible de regénérer votre jeton en cliquant sur ``Réinitialisez votre jeton``.
 
 Vous avez maintenant trois liens, un par statut : ajoutez-les dans votre agrégateur de flux RSS préféré.
+=======
+wallabag propose un flux RSS pour chaque statut d'article : non lus, favoris et lus.
+
+Tout d'abord, vous devez vous créer un jeton personnel : cliquez sur ``Créez votre jeton``.
+Il est possible de regénérer votre jeton en cliquant sur ``Réinitialisez votre jeton``.
+
+Vous avez maintenant trois liens, un par statut : ajoutez-les dans votre agrégateur de flux RSS préféré.
+>>>>>>> minor typofix again
 
 Vous pouvez aussi définir combien d'articles vous souhaitez dans vos flux RSS
 (50 est la valeur par défaut).
