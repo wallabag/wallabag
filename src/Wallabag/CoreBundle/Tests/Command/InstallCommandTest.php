@@ -14,6 +14,24 @@ use Wallabag\CoreBundle\Tests\WallabagCoreTestCase;
 
 class InstallCommandTest extends WallabagCoreTestCase
 {
+    public function setUp()
+    {
+        parent::setUp();
+
+        if ($this->getClient()->getContainer()->get('doctrine')->getConnection()->getDriver() instanceof \Doctrine\DBAL\Driver\PDOPgSql\Driver) {
+            /*
+             * LOG:  statement: CREATE DATABASE "wallabag"
+             * ERROR:  source database "template1" is being accessed by other users
+             * DETAIL:  There is 1 other session using the database.
+             * STATEMENT:  CREATE DATABASE "wallabag"
+             * FATAL:  database "wallabag" does not exist
+             *
+             * http://stackoverflow.com/a/14374832/569101
+             */
+            $this->markTestSkipped('PostgreSQL spotted: can find a good way to drop current database, skipping.');
+        }
+    }
+
     public static function tearDownAfterClass()
     {
         $application = new Application(static::$kernel);
@@ -91,19 +109,6 @@ class InstallCommandTest extends WallabagCoreTestCase
 
     public function testRunInstallCommandWithDatabaseRemoved()
     {
-        if ($this->getClient()->getContainer()->get('doctrine')->getConnection()->getDriver() instanceof \Doctrine\DBAL\Driver\PDOPgSql\Driver) {
-            /*
-             * LOG:  statement: CREATE DATABASE "wallabag"
-             * ERROR:  source database "template1" is being accessed by other users
-             * DETAIL:  There is 1 other session using the database.
-             * STATEMENT:  CREATE DATABASE "wallabag"
-             * FATAL:  database "wallabag" does not exist
-             *
-             * http://stackoverflow.com/a/14374832/569101
-             */
-            $this->markTestSkipped('PostgreSQL spotted: can find a good way to drop current database, skipping.');
-        }
-
         $application = new Application($this->getClient()->getKernel());
         $application->add(new DropDatabaseDoctrineCommand());
 
@@ -184,13 +189,6 @@ class InstallCommandTest extends WallabagCoreTestCase
 
     public function testRunInstallCommandChooseNothing()
     {
-        if ($this->getClient()->getContainer()->get('doctrine')->getConnection()->getDriver() instanceof \Doctrine\DBAL\Driver\PDOPgSql\Driver) {
-            /*
-             * @see testRunInstallCommandWithDatabaseRemoved
-             */
-            $this->markTestSkipped('PostgreSQL spotted: can find a good way to drop current database, skipping.');
-        }
-
         $application = new Application($this->getClient()->getKernel());
         $application->add(new InstallCommand());
         $application->add(new DropDatabaseDoctrineCommand());
