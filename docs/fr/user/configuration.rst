@@ -14,11 +14,15 @@ Thème
 
 L'affichage de wallabag est personnalisable. C'est ici que vous choisissez le thème
 que vous préférez. Vous pouvez aussi en créer un nouveau, une documentation sera
+<<<<<<< 14d0123515c3e1575dd5bdb6b2ecce88b210cf92
 <<<<<<< 38f8d47177e477c9907a876c37022ccaea3d409e
 disponible pour guider. Le thème par défaut est ``Material``, c'est celui
 =======
 disponible pour apprendre comment. Le thème par défaut est ``Material``, c'est celui
 >>>>>>> minor typofix again
+=======
+disponible pour guider. Le thème par défaut est ``Material``, c'est celui
+>>>>>>> minor fix
 qui est utilisé dans les captures d'écran de la documentation.
 
 Nombre d'articles par page
@@ -35,6 +39,7 @@ pour que la nouvelle langue soit prise en compte.
 RSS
 ---
 
+<<<<<<< 14d0123515c3e1575dd5bdb6b2ecce88b210cf92
 <<<<<<< 38f8d47177e477c9907a876c37022ccaea3d409e
 wallabag propose un flux RSS pour chaque statut d'article : non lus, favoris et lus.
 
@@ -44,12 +49,19 @@ Il est possible de regénérer votre jeton en cliquant sur ``Réinitialisez votr
 Vous avez maintenant trois liens, un par statut : ajoutez-les dans votre agrégateur de flux RSS préféré.
 =======
 wallabag propose un flux RSS pour chaque statut d'article : non lus, favoris et lus.
+=======
+wallabag propose un flux RSS pour chaque statut d'article : non lus, favoris et lus.
+>>>>>>> minor fix
 
-Tout d'abord, vous devez vous créer un jeton personnel : cliquez sur ``Créez votre jeton``.
+Tout d'abord, vous devez vous créer un jeton personnel : cliquez sur ``Créez votre jeton``.
 Il est possible de regénérer votre jeton en cliquant sur ``Réinitialisez votre jeton``.
 
+<<<<<<< 14d0123515c3e1575dd5bdb6b2ecce88b210cf92
 Vous avez maintenant trois liens, un par statut : ajoutez-les dans votre agrégateur de flux RSS préféré.
 >>>>>>> minor typofix again
+=======
+Vous avez maintenant trois liens, un par statut : ajoutez-les dans votre agrégateur de flux RSS préféré.
+>>>>>>> minor fix
 
 Vous pouvez aussi définir combien d'articles vous souhaitez dans vos flux RSS
 (50 est la valeur par défaut).
@@ -65,7 +77,11 @@ Double authentification (2FA)
     L'authentification à deux facteurs (également appelée 2FA) est une technologie brevetée en 1984
     qui fournit l'identification des utilisateurs au moyen de la combinaison de deux composants différents .
 
+<<<<<<< 14d0123515c3e1575dd5bdb6b2ecce88b210cf92
 https://fr.wikipedia.org/wiki/Authentification_forte
+=======
+https://fr.wikipedia.org/wiki/Authentification_forte#Pourquoi_l.27authentification_forte_et_l.27authentification_.C3.A0_deux-facteurs_.3F
+>>>>>>> minor fix
 
 Si vous activez 2FA, à chaque tentative de connexion à wallabag, vous recevrez
 un code par email. Vous devez renseigner ce code dans le formulaire suivant :
