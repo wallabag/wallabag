@@ -60,6 +60,7 @@ wallabag_core:
         da: 'Dansk'
         es: 'Español'
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 	da: 'Dansk'
 >>>>>>> 392f697... config.yml edit to include Danish
@@ -80,7 +81,12 @@ wallabag_core:
 =======
         da: 'Dansk'
 >>>>>>> f3f606b... Fixed indentation issue
+<<<<<<< 2694aa86ade91dc57213b34e311cf8305e578417
 >>>>>>> Fixed indentation issue
+=======
+=======
+>>>>>>> dcbbcb0... Spanish translation
+>>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
     items_on_page: 12
     theme: material
     language: en
