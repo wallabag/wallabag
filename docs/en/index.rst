@@ -44,3 +44,4 @@ The main documentation for this application is organized into a couple sections:
    developer/docker
    developer/translate
    developer/maintenance
+   developer/releasing
