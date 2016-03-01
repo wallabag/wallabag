@@ -6,6 +6,7 @@ Remember, this is _not_ a place to ask questions. For that, go to http://gitter.
 ### Environment
 
 * wallabag version (or git revision) that exhibits the issue:
+* How did you install wallabag? Via `composer create-project` or by downloading the package?
 * Last wallabag version that did not exhibit the issue (if applicable):
 * php version:
 * OS:
