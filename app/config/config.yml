@@ -39,6 +39,7 @@ wallabag_core:
         ro: 'Română'
         pl: 'Polish'
         da: 'Dansk'
+        es: 'Español'
     items_on_page: 12
     theme: material
     language: en
