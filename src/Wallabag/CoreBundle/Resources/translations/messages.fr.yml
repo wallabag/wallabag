@@ -54,13 +54,13 @@ Old password: 'Mot de passe actuel'
 New password: 'Nouveau mot de passe'
 Repeat new password: 'Confirmez votre nouveau mot de passe'
 Username: "Nom d'utilisateur"
-Two factor authentication: Double authentification
-Enabling two factor authentication means you'll receive an email with a code on every new untrusted connexion: Activer l'authentification double-facteur veut dire que vous allez recevoir un code par email à chaque nouvelle connexion non approuvée.
+Two factor authentication: "Double authentification"
+"Enabling two factor authentication means you'll receive an email with a code on every new untrusted connexion": "Activer l'authentification double-facteur veut dire que vous allez recevoir un code par email à chaque nouvelle connexion non approuvée."
 
 # Tagging rules
 Tagging rules: "Règles de tag automatiques"
 What does « tagging rules » mean?: "Que signifient les règles de tag automatiques ?"
-"They are rules used by Wallabag to automatically tag new entries.<br />Each time a new entry is added, all the tagging rules will be used to add the tags you configured, thus saving you the trouble to manually classify your entries.": "Ce sont des règles utilisées par wallabag pour classer automatiquement vos nouveaux articles.<br />À chaque fois qu'un nouvel article est ajouté, toutes les règles de tag automatiques seront utilisées afin d'ajouter les tags que vous avez configuré, vous épargnant ainsi l'effort de classifier vos articles manuellement."
+"They are rules used by Wallabag to automatically tag new entries.<br />Each time a new entry is added, all the tagging rules will be used to add the tags you configured, thus saving you the trouble to manually classify your entries.": "Ce sont des règles utilisées par wallabag pour classer automatiquement vos nouveaux articles.<br />À chaque fois qu'un nouvel article est ajouté, toutes les règles de tag automatiques seront utilisées afin d'ajouter les tags que vous avez configurés, vous épargnant ainsi l'effort de classifier vos articles manuellement."
 How do I use them?: "Comment les utiliser ?"
 "Let assume you want to tag new entries as « <i>short reading</i> » when the reading time is inferior to 3 minutes.<br />In that case, you should put « readingTime &lt;= 3 » in the <i>Rule</i> field and « <i>short reading</i> » in the <i>Tags</i> field.<br />Several tags can added simultaneously by separating them by a comma: « <i>short reading, must read</i> »<br />Complex rules can be written by using predefined operators: if « <i>readingTime &gt;= 5 AND domainName = \"github.com\"</i> » then tag as « <i>long reading, github </i> »": "Imaginons que voulez attribuer aux nouveaux articles le tag « <i>lecture courte</i> » lorsque le temps de lecture est inférieur à 3 minutes.<br />Dans ce cas, vous devriez mettre « readingTime &lt;= 3 » dans le champ <i>Règle</i> et « <i>lecture courte</i> » dans le champ <i>Tag</i>.<br />Plusieurs tags peuvent être ajoutés simultanément en les séparant par des virgules : « <i>lecture courte, à lire</i> »<br />Des règles complexes peuvent être créées en utilisant des opérateurs prédéfinis: si « <i>readingTime &gt;= 5 AND domainName = \"github.com\"</i> » alors attribuer les tags « <i>lecteur longue, github </i> »"
 Which variables and operators can I use to write rules?: "Quelles variables et opérateurs puis-je utiliser pour écrire des règles ?"
@@ -194,14 +194,14 @@ Download: 'Télécharger'
 Does this article appear wrong?: "Est-ce que cet article s'affiche mal ?"
 Problems?: 'Un problème ?'
 Edit title: "Modifier le titre"
-Re-fetch content: Recharger le contenu
-Tag added: Tag ajouté
+Re-fetch content: "Recharger le contenu"
+Tag added: "Tag ajouté"
 
 # Import
 Welcome to wallabag importer. Please select your previous service that you want to migrate.: "Bienvenue dans l'outil de migration de wallabag. Choisissez ci-dessous le service depuis lequel vous souhaitez migrer."
 "This importer will import all your Pocket data. Pocket doesn't allow us to retrieve content from their service, so the readable content of each article will be re-fetched by wallabag.": "Cet outil va importer toutes vos données de Pocket. Pocket ne nous autorise pas à récupérer le contenu depuis leur service, donc wallabag doit reparcourir chaque article pour récupérer son contenu."
 "This importer will import all your wallabag v1 articles. On your config page, click on \"JSON export\" in the \"Export your wallabag data\" section. You will have a \"wallabag-export-1-xxxx-xx-xx.json\" file.": "Cet outil va importer toutes vos données de wallabag v1. Sur votre page de configuration de wallabag v1, cliquez sur \"Export JSON\" dans la section \"Exporter vos données de wallabag\". Vous allez récupérer un fichier \"wallabag-export-1-xxxx-xx-xx.json\"."
-"This importer will import all your wallabag v2 articles. Go to All articles, then, on the export sidebar, click on \"JSON\". You will have a \"All articles.json\" file.": "Cet outil va importer toutes vos articles d'une autre instance de wallabag v2. Allez dans tous vos articles, puis, sur la barre latérale, cliquez sur \"JSON\". Vous allez récupérer un fichier \"All articles.json\""
+"This importer will import all your wallabag v2 articles. Go to All articles, then, on the export sidebar, click on \"JSON\". You will have a \"All articles.json\" file.": "Cet outil va importer tous vos articles d'une autre instance de wallabag v2. Allez dans tous vos articles, puis, sur la barre latérale, cliquez sur \"JSON\". Vous allez récupérer un fichier \"All articles.json\""
 "You can import your data from your Pocket account. You just have to click on the below button and authorize the application to connect to getpocket.com.": "Vous pouvez importer vos données depuis votre compte Pocket. Vous n'avez qu'à cliquer sur le bouton ci-dessous et à autoriser wallabag à se connecter à getpocket.com."
 Import > Pocket: "Import > Pocket"
 Pocket import isn't configured.: "L'import à partir de Pocket n'est pas configuré."
