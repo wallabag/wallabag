@@ -42,12 +42,15 @@ wallabag_core:
 <<<<<<< 8d2309569521a5484978043c33bd5b4aca319a71
         da: 'Dansk'
         es: 'Español'
+<<<<<<< 50239a1d9be5567fef656b51d80b0042693bb8e6
 =======
 	da: 'Dansk'
 >>>>>>> config.yml edit to include Danish
 =======
         da: 'Dansk'
 >>>>>>> Fixed indentation issue
+=======
+>>>>>>> Spanish translation
     items_on_page: 12
     theme: material
     language: en
