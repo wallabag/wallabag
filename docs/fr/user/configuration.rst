@@ -77,11 +77,15 @@ Double authentification (2FA)
     L'authentification à deux facteurs (également appelée 2FA) est une technologie brevetée en 1984
     qui fournit l'identification des utilisateurs au moyen de la combinaison de deux composants différents .
 
+<<<<<<< ff9b9a313daaf3929dcc3913eddae91054316a91
 <<<<<<< 14d0123515c3e1575dd5bdb6b2ecce88b210cf92
 https://fr.wikipedia.org/wiki/Authentification_forte
 =======
 https://fr.wikipedia.org/wiki/Authentification_forte#Pourquoi_l.27authentification_forte_et_l.27authentification_.C3.A0_deux-facteurs_.3F
 >>>>>>> minor fix
+=======
+https://fr.wikipedia.org/wiki/Authentification_forte
+>>>>>>> fixing previous stuff and more
 
 Si vous activez 2FA, à chaque tentative de connexion à wallabag, vous recevrez
 un code par email. Vous devez renseigner ce code dans le formulaire suivant :
