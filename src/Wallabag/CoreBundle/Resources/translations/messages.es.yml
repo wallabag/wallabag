@@ -1,0 +1,242 @@
+#Login
+Keep me logged in: 'Mantenme conectado'
+Forgot your password?: '¿Ha olvidado su contraseña?'
+Login: 'Conectarse'
+Back to login: 'Revenir au formulaire de connexion'
+Send: 'Envíar'
+"Enter your email address below and we'll send you password reset instructions.": "Introduce tu dirección de email y le enviaremos las instrucciones para resetear la contraseña"
+Register: 'Registrarse'
+
+# Menu
+unread: 'Sin leer'
+starred: 'Favoritos'
+archive: 'Archivo'
+all: 'Todos los artículos'
+tags: 'Tags'
+config: 'Configuración'
+internal settings: 'Configuración interna'
+import: 'Importar'
+howto: 'Ayuda'
+logout: 'Desconectarse'
+Filtered: 'Articulos filtrados'
+About: 'Acerca de'
+
+# Header
+Back to unread articles: 'Volver a los artículos sin leer'
+Add a new entry: 'Añadir un nuevo artículo'
+Search: 'Buscar'
+Filter entries: 'Filtrar los artículos'
+Enter your search here: 'Introduce tu búsqueda aquí'
+Save new entry: 'Guardar un nuevo artículo'
+Export: 'Exportar'
+
+# Config screen
+Settings: 'Configuración'
+User information: 'Información de usuario'
+Password: 'Contraseña'
+RSS: 'RSS'
+Add a user: 'Añadir un usuario'
+Theme: 'Tema'
+Items per page: "Número de artículos por página"
+Language: 'Idioma'
+Save: 'Enregistrer'
+RSS token: 'RSS token'
+RSS token updated: 'RSS token actualizado '
+Name: 'Nombre'
+Email: 'Direccion e-mail'
+No token: 'Aucun jeton généré'
+Reset your token: 'Resetear token'
+Create your token: 'Crear token'
+Rss limit: "Límite de artículos en feed RSS"
+RSS links: 'URL de su feed RSS'
+"RSS feeds provided by wallabag allow you to read your saved articles with your favourite RSS reader. You need to generate a token first.": "Los feeds RSS de wallabag permiten leer los artículos guardados con su lector RSS favorito. Necesita generar un token primero"
+Old password: 'Contraseña actual'
+New password: 'Nueva contraseña'
+Repeat new password: 'Confirmar la nueva contraseña'
+Username: "Nombre de usuario"
+Two factor authentication: "Autentificación de dos factores"
+"Enabling two factor authentication means you'll receive an email with a code on every new untrusted connexion": "Con la autentificación de dos factores recibirá código mediante email en cada nueva conexión que no sea de confianza"
+
+# Tagging rules
+Tagging rules: "Reglas de etiquetado automáticas"
+What does « tagging rules » mean?: "¿Qué significa reglas de etiquetado autómaticas?"
+"They are rules used by Wallabag to automatically tag new entries.<br />Each time a new entry is added, all the tagging rules will be used to add the tags you configured, thus saving you the trouble to manually classify your entries.": "Son las reglas usadas por Wallabag para etiquetar automáticamente los nuevos artículos.<br />Cáda vez que un nuevo artículo es añadido, todas las reglas de etiquetado automáticas serán usadas para etiquetarlo, ayudandote a clasificar automáticamente los artículos."
+How do I use them?: "¿Cómo se utilizan?"
+"Let assume you want to tag new entries as « <i>short reading</i> » when the reading time is inferior to 3 minutes.<br />In that case, you should put « readingTime &lt;= 3 » in the <i>Rule</i> field and « <i>short reading</i> » in the <i>Tags</i> field.<br />Several tags can added simultaneously by separating them by a comma: « <i>short reading, must read</i> »<br />Complex rules can be written by using predefined operators: if « <i>readingTime &gt;= 5 AND domainName = \"github.com\"</i> » then tag as « <i>long reading, github </i> »": "Imaginons que voulez attribuer aux nouveaux articles le tag « <i>lecture courte</i> » lorsque le temps de lecture est inférieur à 3 minutes.<br />Dans ce cas, vous devriez mettre « readingTime &lt;= 3 » dans le champ <i>Règle</i> et « <i>lecture courte</i> » dans le champ <i>Tag</i>.<br />Plusieurs tags peuvent être ajoutés simultanément en les séparant par des virgules : « <i>lecture courte, à lire</i> »<br />Des règles complexes peuvent être créées en utilisant des opérateurs prédéfinis: si « <i>readingTime &gt;= 5 AND domainName = \"github.com\"</i> » alors attribuer les tags « <i>lecteur longue, github </i> »"
+Which variables and operators can I use to write rules?: "¿Qué variables y operadores se pueden utilizar para escribir las reglas?"
+The following variables and operators can be used to create tagging rules:: "Las siguientes variables y operadores se pueden utilizar para crear las reglas de etiquetado automáticas:"
+Variable: "Variable"
+Meaning: "Significado"
+Operator: "Operador"
+Title of the entry: "Titúlo del artículo"
+Less than…: "Menos que…"
+URL of the entry: "URL del artículo"
+Strictly less than…: "Estrictámente menos que…"
+Whether the entry is archived or not: "El artículo está guardado o no"
+Greater than…: "Más que…"
+Whether the entry is starred or not: "Si el artículo es un favorito o no"
+Strictly greater than…: "Estrictámente mas que…"
+The entry's content: "El contenido del artículo"
+Equal to…: "Egual a…"
+The entry's language: "El idoma del artículo"
+Not equal to…: "Diferente de…"
+The entry's mime-type: "Le Type MIME de l'article"
+One rule or another: "Une règle ou l'autre"
+The estimated entry's reading time, in minutes: "Le temps de lecture estimé de l'article, en minutes"
+One rule and another: "Une règle et l'autre"
+The domain name of the entry: "Le nom de domaine de l'article"
+"Tests that a <i>subject</i> is matches a <i>search</i> (case-insensitive).<br />Example: <code>title matches \"football\"</code>": "Teste si un <i>sujet</i> correspond à une <i>recherche</i> (non sensible à la casse).<br />Exemple : <code>title matches \"football\"</code>"
+Rule: "Règle"
+FAQ: "FAQ"
+
+# Entries
+"estimated reading time: %readingTime% min": "durée de lecture : %readingTime% min"
+"estimated reading time: %inferior% 1 min": "durée de lecture : %inferior% 1 min"
+original: "original"
+Toggle mark as read: 'Marquer comme lu/non lu'
+Toggle favorite: 'Marquer comme favori'
+Delete: 'Supprimer'
+"{0} There is no entry.|{1} There is one entry.|]1,Inf[ There are %count% entries.": "{0} Il n'y a pas d'articles.|{1} Il y a un article.|]1,Inf[ Il y a %count% articles."
+http://website: "http://siteweb"
+"{0} No annotations|{1} One annotation|]1,Inf[ %nbAnnotations% annotations": "{0} Aucune annotation|{1} Une annotation|]1,Inf[ %nbAnnotations% annotations"
+
+# Edit entry
+Edit an entry: "Éditer un article"
+Title: "Titre"
+Is public: "Public"
+
+# tag
+Tags: Tags
+"{0} There is no tag.|{1} There is one tag.|]1,Inf[ There are %count% tags.": "{0} Il n'y a pas de tag.|{1} Il y a un tag.|]1,Inf[ Il y a %count% tags."
+
+# Filters
+Filters: 'Filtres'
+Status: 'Statut'
+Archived: 'Lu'
+Starred: 'Favori'
+Preview picture: 'Photo'
+Has a preview picture: 'A une photo'
+Reading time in minutes: 'Durée de lecture en minutes'
+from: 'de'
+to: 'à'
+website.com: 'website.com'
+Domain name: 'Nom de domaine'
+Creation date: 'Date de création'
+dd/mm/yyyy: 'jj/mm/aaaa'
+Clear: 'Effacer'
+Filter: 'Filtrer'
+website.com: "siteweb.com"
+
+# About
+About: "À propos"
+Who is behind wallabag: "L'équipe derrière wallabag"
+Getting help: "Besoin d'aide"
+Helping wallabag: "Aider wallabag"
+Developed by: "Développé par"
+website: "Site web"
+And many others contributors ♥: "Et plein de contributeurs ♥"
+on GitHub: "sur GitHub"
+Project website: "Site web du projet"
+License: "Licence"
+Version: "Version"
+Documentation: "Documentation"
+Bug reports: "Rapport de bugs"
+On our support website: "Sur notre site de support"
+or: "ou"
+"wallabag is free and opensource. You can help us:": "wallabag est gratuit et opensource. Vous pouvez nous aider :"
+"by contributing to the project:": "en contribuant au projet :"
+an issue lists all our needs: "un ticket recense tous nos besoins"
+via Paypal: "via Paypal"
+Take wallabag with you: "Emportez wallabag avec vous"
+Social: "Social"
+powered by: "propulsé par"
+Contributors: "Contributeurs"
+Thank you to contributors on wallabag web application: "Merci aux contributeurs de l'application web de wallabag"
+Third-party libraries: Librairies tierces
+"Here are the list of third-party libraries used in wallabag (with their licenses):": "Voici la liste des dépendances utilisées dans wallabag (et leur license) :"
+Package: Dépendance
+License: Licence
+
+# Howto
+Form: "Formulaire"
+Thanks to this form: "Grâce à ce formulaire"
+Browser addons: "Extensions de navigateur"
+Mobile apps: "Applications smartphone"
+Bookmarklet: "Bookmarklet"
+Standard Firefox Add-On: "Extension Firefox"
+Chrome Extension: "Extension Chrome"
+download the application: "téléchargez l'application"
+"Drag &amp; drop this link to your bookmarks bar:": "Glissez et déposez ce lien dans votre barre de favoris :"
+
+# Flash messages
+Information updated: "Vos informations personnelles ont bien été mises à jour"
+"Config saved. Some parameters will be considered after disconnection.": "Les paramètres ont bien été mis à jour. Certains seront pris en compte après déconnexion."
+RSS information updated: "La configuration des flux RSS a bien été mise à jour"
+Password updated: "Votre mot de passe a bien été mis à jour"
+Entry starred: "Article ajouté dans les favoris"
+Entry unstarred: "Article retiré des favoris"
+Entry archived: "Article marqué comme lu"
+Entry unarchived: "Article marqué comme non lu"
+Entry deleted: "Article supprimé"
+Tagging rule deleted: "Règle supprimée"
+Tagging rules updated: "Règles mises à jour"
+User "%username%" added: 'Utilisateur "%username%" ajouté'
+In demonstration mode, you can't change password for this user.: 'En démo, vous ne pouvez pas changer le mot de passe de cet utilisateur.'
+
+# Entry
+Mark as read: 'Marquer comme lu'
+Favorite: 'Mettre en favori'
+back: 'Retour'
+original article: 'Article original'
+Add a tag: 'Ajouter un tag'
+Share: 'Partager'
+Download: 'Télécharger'
+Does this article appear wrong?: "Est-ce que cet article s'affiche mal ?"
+Problems?: 'Un problème ?'
+Edit title: "Modifier le titre"
+Re-fetch content: "Recharger le contenu"
+Tag added: "Tag ajouté"
+
+# Import
+Welcome to wallabag importer. Please select your previous service that you want to migrate.: "Bienvenue dans l'outil de migration de wallabag. Choisissez ci-dessous le service depuis lequel vous souhaitez migrer."
+"This importer will import all your Pocket data. Pocket doesn't allow us to retrieve content from their service, so the readable content of each article will be re-fetched by wallabag.": "Cet outil va importer toutes vos données de Pocket. Pocket ne nous autorise pas à récupérer le contenu depuis leur service, donc wallabag doit reparcourir chaque article pour récupérer son contenu."
+"This importer will import all your wallabag v1 articles. On your config page, click on \"JSON export\" in the \"Export your wallabag data\" section. You will have a \"wallabag-export-1-xxxx-xx-xx.json\" file.": "Cet outil va importer toutes vos données de wallabag v1. Sur votre page de configuration de wallabag v1, cliquez sur \"Export JSON\" dans la section \"Exporter vos données de wallabag\". Vous allez récupérer un fichier \"wallabag-export-1-xxxx-xx-xx.json\"."
+"This importer will import all your wallabag v2 articles. Go to All articles, then, on the export sidebar, click on \"JSON\". You will have a \"All articles.json\" file.": "Cet outil va importer tous vos articles d'une autre instance de wallabag v2. Allez dans tous vos articles, puis, sur la barre latérale, cliquez sur \"JSON\". Vous allez récupérer un fichier \"All articles.json\""
+"You can import your data from your Pocket account. You just have to click on the below button and authorize the application to connect to getpocket.com.": "Vous pouvez importer vos données depuis votre compte Pocket. Vous n'avez qu'à cliquer sur le bouton ci-dessous et à autoriser wallabag à se connecter à getpocket.com."
+Import > Pocket: "Import > Pocket"
+Pocket import isn't configured.: "L'import à partir de Pocket n'est pas configuré."
+You need to define %keyurls% a pocket_consumer_key %keyurle%.: "Vous devez définir %keyurls% une clé pour l'API Pocket %keyurle%."
+Your server admin needs to define an API Key for Pocket.: L'administrateur de votre serveur doit définir une clé pour l'API Pocket."
+Connect to Pocket and import data: "Se connecter à Pocket et importer les données"
+Please select your wallabag export and click on the below button to upload and import it.: "Choisissez le fichier de votre export wallabag v1 et cliquez sur le bouton ci-dessous pour l'importer."
+File: "Fichier"
+Upload file: "Importer le fichier"
+Import contents: "Importer les contenus"
+Import: "Importer"
+Import > Wallabag v1: "Importer > Wallabag v1"
+Import > Wallabag v2: "Importer > Wallabag v2"
+
+# Quickstart
+Quickstart: Pour bien débuter
+Welcome to wallabag!: "Bienvenue sur wallabag !"
+We'll accompany you to visit wallabag and show you some features which can interess you.: "Nous allons vous accompagner pour vous faire faire le tour de la maison et vous présenter quelques fonctionnalités qui pourraient vous intéresser pour vous approprier cet outil."
+Follow us!: "Suivez-nous !"
+Configure the application: "Configurez l'application"
+Change language and design: "Changez la langue et le design de l'application"
+Enable RSS feeds: "Activez les flux RSS"
+First steps: "Premiers pas"
+Save your first article: "Ajoutez votre premier article"
+And classify it!: "Et rangez-le !"
+Migrate from an existing service: "Migrer depuis un service existant"
+You're using an other service? We'll help you to retrieve your data on wallabag.: "Vous êtes un ancien utilisateur d'un service existant ? Nous allons vous aider à récupérer vos données sur wallabag."
+Migrate from Pocket: "Migrer depuis Pocket"
+Migrate from wallabag v1: "Migrer depuis wallabag v1"
+Full documentation: "Documentation complète"
+Convert your articles into ePUB or PDF: "Convertissez vos articles en ePub ou en PDF"
+See how you can look for an article by using search engine and filters: "Apprenez à utiliser le moteur de recherche et les filtres pour retrouver l'article qui vous intéresse"
+And so many other articles!: "Et encore plein d'autres choses !"
+Support: "Support"
+If you need some help, we are here for you.: "Parce que vous avez peut-être besoin de nous poser une question, nous sommes disponibles pour vous."
+On GitHub: "Sur GitHub"
+By email: "Par email"
+On Gitter: "Sur Gitter"
