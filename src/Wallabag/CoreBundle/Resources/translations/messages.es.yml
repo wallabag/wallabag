@@ -89,6 +89,9 @@ Not equal to…: "Diferente de…"
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 140e31a... Spanish translation
 =======
 >>>>>>> 140e31a... Spanish translation
 >>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
@@ -103,7 +106,11 @@ Rule: "Regla"
 <<<<<<< 93cdb4dca08b0f42d09c116653e026a47db7b40a
 =======
 <<<<<<< HEAD
+<<<<<<< bf16aa25e395f2f5247657823705442a569874a7
 >>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
+=======
+<<<<<<< HEAD
+>>>>>>> Spanish translation
 FAQ: "FAQ"
 
 # Entries
@@ -412,136 +419,139 @@ Import > Wallabag v2: "Importar > Wallabag v2"
 >>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
 =======
 =======
+=======
+>>>>>>> 140e31a... Spanish translation
 FAQ: "FAQ"
 
 # Entries
-"estimated reading time: %readingTime% min": "durée de lecture : %readingTime% min"
-"estimated reading time: %inferior% 1 min": "durée de lecture : %inferior% 1 min"
+"estimated reading time: %readingTime% min": "tiempo estimado de lectura: %readingTime% min"
+"estimated reading time: %inferior% 1 min": "tiempo estimado de lectura: %inferior% 1 min"
 original: "original"
-Toggle mark as read: 'Marquer comme lu/non lu'
-Toggle favorite: 'Marquer comme favori'
-Delete: 'Supprimer'
-"{0} There is no entry.|{1} There is one entry.|]1,Inf[ There are %count% entries.": "{0} Il n'y a pas d'articles.|{1} Il y a un article.|]1,Inf[ Il y a %count% articles."
-http://website: "http://siteweb"
-"{0} No annotations|{1} One annotation|]1,Inf[ %nbAnnotations% annotations": "{0} Aucune annotation|{1} Une annotation|]1,Inf[ %nbAnnotations% annotations"
+Toggle mark as read: 'Marcar cómo leído/ no leído'
+Toggle favorite: 'Marcar cómo favorito/ no favorito'
+Delete: 'Suprimir'
+"{0} There is no entry.|{1} There is one entry.|]1,Inf[ There are %count% entries.": "{0} No hay artículos.|{1} Hay un artículo.|]1,Inf[ Hay %count% artículos."
+http://website: "http://website"
+"{0} No annotations|{1} One annotation|]1,Inf[ %nbAnnotations% annotations": "{0} Sin anotaciones|{1} Una anotación|]1,Inf[ %nbAnnotations% anotaciones"
 
 # Edit entry
-Edit an entry: "Éditer un article"
-Title: "Titre"
-Is public: "Public"
+Edit an entry: "Editar una artículo"
+Title: "Título"
+Is public: "Es Público"
 
 # tag
 Tags: Tags
-"{0} There is no tag.|{1} There is one tag.|]1,Inf[ There are %count% tags.": "{0} Il n'y a pas de tag.|{1} Il y a un tag.|]1,Inf[ Il y a %count% tags."
+"{0} There is no tag.|{1} There is one tag.|]1,Inf[ There are %count% tags.": "{0} No hay ningun tag.|{1} Hay un tag.|]1,Inf[ Hay %count% tags."
 
 # Filters
-Filters: 'Filtres'
-Status: 'Statut'
-Archived: 'Lu'
-Starred: 'Favori'
-Preview picture: 'Photo'
-Has a preview picture: 'A une photo'
-Reading time in minutes: 'Durée de lecture en minutes'
+Filters: 'Filtros'
+Status: 'Estatus'
+Archived: 'Archivado'
+Starred: 'Favorito'
+Preview picture: 'Foto de preview'
+Has a preview picture: 'Hay una foto'
+Reading time in minutes: 'Duración de  lectura en minutos'
 from: 'de'
-to: 'à'
+to: 'a'
 website.com: 'website.com'
-Domain name: 'Nom de domaine'
-Creation date: 'Date de création'
-dd/mm/yyyy: 'jj/mm/aaaa'
-Clear: 'Effacer'
-Filter: 'Filtrer'
-website.com: "siteweb.com"
+Domain name: 'Nombre de dominio'
+Creation date: 'Fecha de creación'
+dd/mm/yyyy: 'dd/mm/aaaa'
+Clear: 'Limpiar'
+Filter: 'Filtrar'
+website.com: "website.com"
 
 # About
-About: "À propos"
-Who is behind wallabag: "L'équipe derrière wallabag"
-Getting help: "Besoin d'aide"
-Helping wallabag: "Aider wallabag"
-Developed by: "Développé par"
-website: "Site web"
-And many others contributors ♥: "Et plein de contributeurs ♥"
-on GitHub: "sur GitHub"
-Project website: "Site web du projet"
-License: "Licence"
-Version: "Version"
-Documentation: "Documentation"
-Bug reports: "Rapport de bugs"
-On our support website: "Sur notre site de support"
-or: "ou"
-"wallabag is free and opensource. You can help us:": "wallabag est gratuit et opensource. Vous pouvez nous aider :"
-"by contributing to the project:": "en contribuant au projet :"
-an issue lists all our needs: "un ticket recense tous nos besoins"
+About: "Acerca de"
+Who is behind wallabag: "Equipo de desarrollo de wallabag"
+Getting help: "Conseguir ayuda"
+Helping wallabag: "Ayudar a wallabag"
+Developed by: "Desarrollado por"
+website: "Sitio web"
+And many others contributors ♥: "Y muchos otros contribuidores ♥"
+on GitHub: "en GitHub"
+Project website: "Web del proyecto"
+License: "Licencia"
+Version: "Versión"
+Documentation: "Documentación"
+Bug reports: "Reporte de errores"
+On our support website: "En nuestra web de soporte"
+or: "o"
+"wallabag is free and opensource. You can help us:": "wallabag es libre y gratuito. Usted puede ayudarnos :"
+"by contributing to the project:": "contribuyendo al proyecto :"
+an issue lists all our needs: "nuestras necesidades están en un ticket"
 via Paypal: "via Paypal"
-Take wallabag with you: "Emportez wallabag avec vous"
+Take wallabag with you: "Llevate wallabag contigo"
 Social: "Social"
 powered by: "propulsé par"
-Contributors: "Contributeurs"
-Thank you to contributors on wallabag web application: "Merci aux contributeurs de l'application web de wallabag"
-Third-party libraries: Librairies tierces
-"Here are the list of third-party libraries used in wallabag (with their licenses):": "Voici la liste des dépendances utilisées dans wallabag (et leur license) :"
-Package: Dépendance
-License: Licence
+Contributors: "Contribuidores"
+Thank you to contributors on wallabag web application: "Gradias a los contribuidores de la aplicación web de wallabag"
+Third-party libraries: "Librerías de terceeros"
+"Here are the list of third-party libraries used in wallabag (with their licenses):": "Aquí está la lista de las dependencias utilizadas por wallabag (con sus licencias):"
+Package: Paquete
+License: Licencia
 
 # Howto
-Form: "Formulaire"
-Thanks to this form: "Grâce à ce formulaire"
-Browser addons: "Extensions de navigateur"
-Mobile apps: "Applications smartphone"
+Form: "Formulario"
+Thanks to this form: "Gracias a este formulario"
+Browser addons: "Extensiones de navigador"
+Mobile apps: "Applicaciones para smartphone"
 Bookmarklet: "Bookmarklet"
-Standard Firefox Add-On: "Extension Firefox"
-Chrome Extension: "Extension Chrome"
-download the application: "téléchargez l'application"
-"Drag &amp; drop this link to your bookmarks bar:": "Glissez et déposez ce lien dans votre barre de favoris :"
+Standard Firefox Add-On: "Extensión Firefox"
+Chrome Extension: "Extensión Chrome"
+download the application: "descargar la aplicación"
+"Drag &amp; drop this link to your bookmarks bar:": "Desplazar y soltar este link en la barra de marcadores :"
 
 # Flash messages
-Information updated: "Vos informations personnelles ont bien été mises à jour"
-"Config saved. Some parameters will be considered after disconnection.": "Les paramètres ont bien été mis à jour. Certains seront pris en compte après déconnexion."
-RSS information updated: "La configuration des flux RSS a bien été mise à jour"
-Password updated: "Votre mot de passe a bien été mis à jour"
-Entry starred: "Article ajouté dans les favoris"
-Entry unstarred: "Article retiré des favoris"
-Entry archived: "Article marqué comme lu"
-Entry unarchived: "Article marqué comme non lu"
-Entry deleted: "Article supprimé"
-Tagging rule deleted: "Règle supprimée"
-Tagging rules updated: "Règles mises à jour"
-User "%username%" added: 'Utilisateur "%username%" ajouté'
-In demonstration mode, you can't change password for this user.: 'En démo, vous ne pouvez pas changer le mot de passe de cet utilisateur.'
+Information updated: "Su información personal ha sido actualizada"
+"Config saved. Some parameters will be considered after disconnection.": "Configuración guardada. Algunos parámetros serán recargados cuando se vuelva a conectar."
+RSS information updated: "La configuración de los feeds RSS ha sido actualizada"
+Password updated: "Contraseña actualizada"
+Entry starred: "Artículo guardado en los favoritos"
+Entry unstarred: "Artículo retirado de los favoritos"
+Entry archived: "Artículo archivado"
+Entry unarchived: "Artículo desarchivado"
+Entry deleted: "Artículo suprimido"
+Tagging rule deleted: "Regla de etiquetado borrada"
+Tagging rules updated: "Regla de etiquetado actualizada"
+User "%username%" added: 'Usuario "%username%" añadido'
+In demonstration mode, you can't change password for this user.: 'En modo demo, no puedes cambiar la contraseña del usuario.'
 
 # Entry
-Mark as read: 'Marquer comme lu'
-Favorite: 'Mettre en favori'
-back: 'Retour'
-original article: 'Article original'
-Add a tag: 'Ajouter un tag'
-Share: 'Partager'
-Download: 'Télécharger'
-Does this article appear wrong?: "Est-ce que cet article s'affiche mal ?"
-Problems?: 'Un problème ?'
-Edit title: "Modifier le titre"
-Re-fetch content: "Recharger le contenu"
-Tag added: "Tag ajouté"
+Mark as read: 'Marcar como leído'
+Favorite: 'Marcar cómo favorito'
+back: 'Volver'
+original article: 'Artículo original'
+Add a tag: 'Añadir una etiqueta'
+Share: 'Compartir'
+Download: 'Descargar'
+Does this article appear wrong?: "¿Este artículo no se muestra bien?"
+Problems?: '¿Algún problema?'
+Edit title: "Modificar el título"
+Re-fetch content: "Redescargar el contenido"
+Tag added: "Etiqueta añadida"
 
 # Import
-Welcome to wallabag importer. Please select your previous service that you want to migrate.: "Bienvenue dans l'outil de migration de wallabag. Choisissez ci-dessous le service depuis lequel vous souhaitez migrer."
-"This importer will import all your Pocket data. Pocket doesn't allow us to retrieve content from their service, so the readable content of each article will be re-fetched by wallabag.": "Cet outil va importer toutes vos données de Pocket. Pocket ne nous autorise pas à récupérer le contenu depuis leur service, donc wallabag doit reparcourir chaque article pour récupérer son contenu."
-"This importer will import all your wallabag v1 articles. On your config page, click on \"JSON export\" in the \"Export your wallabag data\" section. You will have a \"wallabag-export-1-xxxx-xx-xx.json\" file.": "Cet outil va importer toutes vos données de wallabag v1. Sur votre page de configuration de wallabag v1, cliquez sur \"Export JSON\" dans la section \"Exporter vos données de wallabag\". Vous allez récupérer un fichier \"wallabag-export-1-xxxx-xx-xx.json\"."
-"This importer will import all your wallabag v2 articles. Go to All articles, then, on the export sidebar, click on \"JSON\". You will have a \"All articles.json\" file.": "Cet outil va importer tous vos articles d'une autre instance de wallabag v2. Allez dans tous vos articles, puis, sur la barre latérale, cliquez sur \"JSON\". Vous allez récupérer un fichier \"All articles.json\""
-"You can import your data from your Pocket account. You just have to click on the below button and authorize the application to connect to getpocket.com.": "Vous pouvez importer vos données depuis votre compte Pocket. Vous n'avez qu'à cliquer sur le bouton ci-dessous et à autoriser wallabag à se connecter à getpocket.com."
-Import > Pocket: "Import > Pocket"
-Pocket import isn't configured.: "L'import à partir de Pocket n'est pas configuré."
-You need to define %keyurls% a pocket_consumer_key %keyurle%.: "Vous devez définir %keyurls% une clé pour l'API Pocket %keyurle%."
-Your server admin needs to define an API Key for Pocket.: L'administrateur de votre serveur doit définir une clé pour l'API Pocket."
-Connect to Pocket and import data: "Se connecter à Pocket et importer les données"
-Please select your wallabag export and click on the below button to upload and import it.: "Choisissez le fichier de votre export wallabag v1 et cliquez sur le bouton ci-dessous pour l'importer."
-File: "Fichier"
-Upload file: "Importer le fichier"
-Import contents: "Importer les contenus"
-Import: "Importer"
-Import > Wallabag v1: "Importer > Wallabag v1"
-Import > Wallabag v2: "Importer > Wallabag v2"
+Welcome to wallabag importer. Please select your previous service that you want to migrate.: "Bienvenido al útil de migración de wallabag. Seleccione el servicio previo del que usted quiera migrar."
+"This importer will import all your Pocket data. Pocket doesn't allow us to retrieve content from their service, so the readable content of each article will be re-fetched by wallabag.": "Va a importar sus datos de Pocket. Pocket no nos permite descargar el contenido de su servicio, así que el contenido de cada artículo será redescargado por wallabag."
+"This importer will import all your wallabag v1 articles. On your config page, click on \"JSON export\" in the \"Export your wallabag data\" section. You will have a \"wallabag-export-1-xxxx-xx-xx.json\" file.": "Va a importar sus artículos de wallabag v1. En su configuración de wallabag v1, pulse sobre \"Exportar JSON\" dentro de la sección \"Exportar sus datos de wallabag\". Usted tendrá un fichero \"wallabag-export-1-xxxx-xx-xx.json\"."
+"This importer will import all your wallabag v2 articles. Go to All articles, then, on the export sidebar, click on \"JSON\". You will have a \"All articles.json\" file.": "Va a importar sus artículos de otra instancia de wallabag v2. Vaya a Todos los artículos, entonces, en la barra lateral, clickee en \"JSON\". Usted tendrá un fichero \"All articles.json\""
+"You can import your data from your Pocket account. You just have to click on the below button and authorize the application to connect to getpocket.com.": "Puedes importar sus datos desde su cuenta de Pocket. Sólo tienes que pulsar en el botón para autrizar que wallabag se conecte a getpocket.com."
+Import > Pocket: "Importar > Pocket"
+Pocket import isn't configured.: "La importación de Pocket no está configurada."
+You need to define %keyurls% a pocket_consumer_key %keyurle%.: "Debe definir %keyurls% una clava del API Pocket %keyurle%."
+Your server admin needs to define an API Key for Pocket.: "El administrador de vuestro servidor debe definir una clave API Pocket."
+Connect to Pocket and import data: "Conectese a Pocket para importar los datos"
+Please select your wallabag export and click on the below button to upload and import it.: "Seleccione el fichero de su exportación de wallabag v1 y puelse en el botón para subirla y importarla."
+File: "Fichero"
+Upload file: "Importar el fichero"
+Import contents: "Importar los contenidos"
+Import: "Importar"
+Import > Wallabag v1: "Importar > Wallabag v1"
+Import > Wallabag v2: "Importar > Wallabag v2"
 
 # Quickstart
+<<<<<<< HEAD
 >>>>>>> 99730d4... Start of the spanish translation
 >>>>>>> Start of the spanish translation
 Quickstart: Pour bien débuter
@@ -577,6 +587,8 @@ On Gitter: "Sur Gitter"
 >>>>>>> 99730d4... Start of the spanish translation
 >>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
 =======
+=======
+>>>>>>> 140e31a... Spanish translation
 Quickstart: Comienzo rápido
 Welcome to wallabag!: "Bienvenido a wallabag !"
 We'll accompany you to visit wallabag and show you some features which can interess you.: "Le acompañaremos a su visita de wallabag y le mostraremos algunas características que le pueden interesar."
@@ -600,13 +612,22 @@ If you need some help, we are here for you.: "Sí necesita ayuda, estamos dispon
 On GitHub: "En GitHub"
 By email: "Por email"
 On Gitter: "On Gitter"
+<<<<<<< bf16aa25e395f2f5247657823705442a569874a7
 <<<<<<< bd561aeb66e1b67a8db188042fbe6d556564341d
 >>>>>>> Spanish translation
 =======
+=======
+<<<<<<< HEAD
+>>>>>>> Spanish translation
 >>>>>>> 140e31a... Spanish translation
 <<<<<<< f8e9a0886ba5c05352817cf6204aff91efcffd14
 >>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
 =======
 =======
 >>>>>>> 99730d4... Start of the spanish translation
+<<<<<<< bf16aa25e395f2f5247657823705442a569874a7
 >>>>>>> Start of the spanish translation
+=======
+=======
+>>>>>>> 140e31a... Spanish translation
+>>>>>>> Spanish translation
