@@ -28,6 +28,7 @@ disponible pour guider. Le thème par défaut est ``Material``, c'est celui
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 disponible pour guider. Le thème par défaut est ``Material``, c'est celui
 =======
 disponible pour apprendre comment. Le thème par défaut est ``Material``, c'est celui
@@ -41,7 +42,13 @@ disponible pour guider. Le thème par défaut est ``Material``, c'est celui
 =======
 disponible pour apprendre comment. Le thème par défaut est ``Material``, c'est celui
 >>>>>>> 23ae15a... minor typofix again
+<<<<<<< 564c656945155add328bde01912bd623d3a97630
 >>>>>>> minor typofix again
+=======
+=======
+disponible pour guider. Le thème par défaut est ``Material``, c'est celui
+>>>>>>> 81c386f... minor fix
+>>>>>>> minor fix
 qui est utilisé dans les captures d'écran de la documentation.
 
 Nombre d'articles par page
@@ -68,7 +75,11 @@ RSS
 >>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
 =======
 <<<<<<< HEAD
+<<<<<<< 564c656945155add328bde01912bd623d3a97630
 >>>>>>> minor typofix again
+=======
+<<<<<<< HEAD
+>>>>>>> minor fix
 wallabag propose un flux RSS pour chaque statut d'article : non lus, favoris et lus.
 
 Tout d'abord, vous devez vous créer un jeton personnel : cliquez sur ``Créez votre jeton``.
@@ -107,13 +118,23 @@ Vous avez maintenant trois liens, un par statut : ajoutez-les dans votre agrég
 =======
 =======
 wallabag propose un flux RSS pour chaque statut d'article : non lus, favoris et lus.
+=======
+wallabag propose un flux RSS pour chaque statut d'article : non lus, favoris et lus.
+>>>>>>> 81c386f... minor fix
 
-Tout d'abord, vous devez vous créer un jeton personnel : cliquez sur ``Créez votre jeton``.
+Tout d'abord, vous devez vous créer un jeton personnel : cliquez sur ``Créez votre jeton``.
 Il est possible de regénérer votre jeton en cliquant sur ``Réinitialisez votre jeton``.
 
+<<<<<<< HEAD
 Vous avez maintenant trois liens, un par statut : ajoutez-les dans votre agrégateur de flux RSS préféré.
 >>>>>>> 23ae15a... minor typofix again
+<<<<<<< 564c656945155add328bde01912bd623d3a97630
 >>>>>>> minor typofix again
+=======
+=======
+Vous avez maintenant trois liens, un par statut : ajoutez-les dans votre agrégateur de flux RSS préféré.
+>>>>>>> 81c386f... minor fix
+>>>>>>> minor fix
 
 Vous pouvez aussi définir combien d'articles vous souhaitez dans vos flux RSS
 (50 est la valeur par défaut).
@@ -142,6 +163,7 @@ https://fr.wikipedia.org/wiki/Authentification_forte
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 https://fr.wikipedia.org/wiki/Authentification_forte
 =======
 https://fr.wikipedia.org/wiki/Authentification_forte#Pourquoi_l.27authentification_forte_et_l.27authentification_.C3.A0_deux-facteurs_.3F
@@ -149,7 +171,13 @@ https://fr.wikipedia.org/wiki/Authentification_forte#Pourquoi_l.27authentificati
 =======
 https://fr.wikipedia.org/wiki/Authentification_forte
 >>>>>>> f4f50fc... fixing previous stuff and more
+<<<<<<< 564c656945155add328bde01912bd623d3a97630
 >>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
+=======
+=======
+https://fr.wikipedia.org/wiki/Authentification_forte#Pourquoi_l.27authentification_forte_et_l.27authentification_.C3.A0_deux-facteurs_.3F
+>>>>>>> 81c386f... minor fix
+>>>>>>> minor fix
 
 Si vous activez 2FA, à chaque tentative de connexion à wallabag, vous recevrez
 un code par email. Vous devez renseigner ce code dans le formulaire suivant :
