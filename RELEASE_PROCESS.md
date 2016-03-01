@@ -12,6 +12,9 @@ The last release at the time of writing is 2.0.0-alpha.2, from the v2 branch.
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 95b3c61... Add steps in RELEASE_PROCESS
 =======
 >>>>>>> 95b3c61... Add steps in RELEASE_PROCESS
 >>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
@@ -58,7 +61,11 @@ During this documentation, we assume the release is `release-2.0.0-beta.1`.
 <<<<<<< f25ed8fe6fa7e3bbb08b8c1b65aaf5d38000c234
 =======
 <<<<<<< HEAD
+<<<<<<< 47233595d94b42a752a7d3a47783ef8d83aa4a96
 >>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
+=======
+<<<<<<< HEAD
+>>>>>>> Add steps in RELEASE_PROCESS
 =======
 =======
 >>>>>>> 56ef4e1... Added RELEASE_PROCESS document
@@ -88,7 +95,12 @@ During this documentation, we assume the release is `release-2.0.0-beta.1`.
 >>>>>>> 95b3c61... Add steps in RELEASE_PROCESS
 =======
 >>>>>>> 56ef4e1... Added RELEASE_PROCESS document
+<<<<<<< 47233595d94b42a752a7d3a47783ef8d83aa4a96
 >>>>>>> Added RELEASE_PROCESS document
+=======
+=======
+>>>>>>> 95b3c61... Add steps in RELEASE_PROCESS
+>>>>>>> Add steps in RELEASE_PROCESS
 
 ### `composer.lock`
 A release tag must contain a `composer.lock` file. It sets which dependencies were available at the time a release was done,
