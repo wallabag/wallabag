@@ -164,6 +164,7 @@ https://fr.wikipedia.org/wiki/Authentification_forte
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 https://fr.wikipedia.org/wiki/Authentification_forte
 =======
 https://fr.wikipedia.org/wiki/Authentification_forte#Pourquoi_l.27authentification_forte_et_l.27authentification_.C3.A0_deux-facteurs_.3F
@@ -177,7 +178,13 @@ https://fr.wikipedia.org/wiki/Authentification_forte
 =======
 https://fr.wikipedia.org/wiki/Authentification_forte#Pourquoi_l.27authentification_forte_et_l.27authentification_.C3.A0_deux-facteurs_.3F
 >>>>>>> 81c386f... minor fix
+<<<<<<< 597e578680f3ccf810b39c04062e424cb52bf330
 >>>>>>> minor fix
+=======
+=======
+https://fr.wikipedia.org/wiki/Authentification_forte
+>>>>>>> f4f50fc... fixing previous stuff and more
+>>>>>>> fixing previous stuff and more
 
 Si vous activez 2FA, à chaque tentative de connexion à wallabag, vous recevrez
 un code par email. Vous devez renseigner ce code dans le formulaire suivant :
