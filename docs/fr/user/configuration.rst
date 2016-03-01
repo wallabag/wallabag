@@ -3,7 +3,7 @@ Configuration
 
 Maintenant que vous êtes connecté, il est temps de configurer votre compte.
 
-Cliquez sur le menu ``Configuration``. Vous avez accès à 5 onglets:
+Cliquez sur le menu ``Configuration``. Vous avez accès à 5 onglets :
 ``Paramètres``, ``RSS``, ``Mon compte``, ``Mot de passe`` and ``Règles de tag automatiques``.
 
 Paramètres
@@ -14,7 +14,7 @@ Thème
 
 L'affichage de wallabag est personnalisable. C'est ici que vous choisissez le thème
 que vous préférez. Vous pouvez aussi en créer un nouveau, une documentation sera
-disponible pour apprendre comment. Le thème par défaut est ``Material``, c'est celui
+disponible pour guider. Le thème par défaut est ``Material``, c'est celui
 qui est utilisé dans les captures d'écran de la documentation.
 
 Nombre d'articles par page
@@ -31,12 +31,12 @@ pour que la nouvelle langue soit prise en compte.
 RSS
 ---
 
-wallabag propose un flux RSS pour chaque statut d'article : non lus, favoris et lus.
+wallabag propose un flux RSS pour chaque statut d'article : non lus, favoris et lus.
 
-Tout d'abord, vous devez vous créer un jeton personnel : cliquez sur ``Créez votre jeton``.
+Tout d'abord, vous devez vous créer un jeton personnel : cliquez sur ``Créez votre jeton``.
 Il est possible de regénérer votre jeton en cliquant sur ``Réinitialisez votre jeton``.
 
-Vous avez maintenant trois liens, un par statut : ajoutez-les dans votre agrégateur de flux RSS préféré.
+Vous avez maintenant trois liens, un par statut : ajoutez-les dans votre agrégateur de flux RSS préféré.
 
 Vous pouvez aussi définir combien d'articles vous souhaitez dans vos flux RSS
 (50 est la valeur par défaut).
@@ -49,10 +49,10 @@ Vous pouvez ici modifier votre nom, votre adresse email et activer la ``Double a
 Double authentification (2FA)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    Two-factor authentication (also known as 2FA) is a technology patented in
-    1984 that provides identification of users by means of the combination of two different components.
+    L'authentification à deux facteurs (également appelée 2FA) est une technologie brevetée en 1984
+    qui fournit l'identification des utilisateurs au moyen de la combinaison de deux composants différents .
 
-https://en.wikipedia.org/wiki/Two-factor_authentication
+https://fr.wikipedia.org/wiki/Authentification_forte#Pourquoi_l.27authentification_forte_et_l.27authentification_.C3.A0_deux-facteurs_.3F
 
 Si vous activez 2FA, à chaque tentative de connexion à wallabag, vous recevrez
 un code par email. Vous devez renseigner ce code dans le formulaire suivant :
@@ -89,15 +89,15 @@ Comment les utiliser ?
 
 Admettons que vous voulez ajouter comme tag *« lecture rapide »* quand le temps de lecture
 d'un article est inférieur à 3 minutes.
-Dans ce cas, vous devez ajouter « readingTime <= 3 » dans le champ **Règle** et *« lecture rapide »* dans le champ **Tags**.
-Plusieurs tags peuvent être ajoutés en même temps en les séparant par une virgule : *« lecture rapide, à lire »*.
+Dans ce cas, vous devez ajouter « readingTime <= 3 » dans le champ **Règle** et *« lecture rapide »* dans le champ **Tags**.
+Plusieurs tags peuvent être ajoutés en même temps en les séparant par une virgule : *« lecture rapide, à lire »*.
 Des règles complexes peuvent être écrites en utilisant les opérateurs pré-définis :
 if *« readingTime >= 5 AND domainName = "github.com" »* then tag as *« long reading, github »*.
 
 Quels variables et opérateurs puis-je utiliser pour écrire mes règles ?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Les variables et opérateurs suivants peuvent être utilisés lors de la création de vos règles :
+Les variables et opérateurs suivants peuvent être utilisés lors de la création de vos règles :
 
 ===========  ==============================================  ==========  ==========
 Variable     Sens                                            Opérateur   Sens
@@ -110,5 +110,5 @@ content      Le contenu de l'article                         =           Égal �
 language     La langue de l'article                          !=          Différent de …
 mimetype     The type MIME de l'article                      OR          Telle règle ou telle autre règle
 readingTime  Le temps de lecture de l'article, en minutes    AND         Telle règle et telle règle
-domainName   Le nom de domaine de l'article                  matches     Contient telle chaine de caractère (insensible à la casse). Exemple : title matches "football"
+domainName   Le nom de domaine de l'article                  matches     Contient telle chaîne de caractère (insensible à la casse). Exemple : title matches "football"
 ===========  ==============================================  ==========  ==========
