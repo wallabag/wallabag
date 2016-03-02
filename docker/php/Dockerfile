@@ -1,6 +1,9 @@
 FROM php:fpm
 
+<<<<<<< HEAD
 # Default timezone. To change it, use the argument in the docker-compose.yml file
+=======
+>>>>>>> 2c3759a... Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
 ARG timezone='Europe/Paris'
 
 RUN apt-get update && apt-get install -y \
