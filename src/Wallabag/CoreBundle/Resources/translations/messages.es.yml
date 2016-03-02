@@ -80,10 +80,17 @@ The entry's content: "El contenido del artículo"
 Equal to…: "Egual a…"
 The entry's language: "El idoma del artículo"
 Not equal to…: "Diferente de…"
+<<<<<<< bd561aeb66e1b67a8db188042fbe6d556564341d
 <<<<<<< 93cdb4dca08b0f42d09c116653e026a47db7b40a
 <<<<<<< dfdbdf7be89f7ed86675fac420cff914fff371ea
 =======
 >>>>>>> Spanish translation
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 140e31a... Spanish translation
+>>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
 The entry's mime-type: "Tipo MIME del artículo"
 One rule or another: "Una regla o otra"
 The estimated entry's reading time, in minutes: "El tiempo estimado de lectura del artículo, en minutos"
@@ -91,7 +98,11 @@ One rule and another: "Una regla y la otra"
 The domain name of the entry: "El dominio del artículo"
 "Tests that a <i>subject</i> is matches a <i>search</i> (case-insensitive).<br />Example: <code>title matches \"football\"</code>": "Prueba si un <i>sujeto</i> corresponde a una <i>busqueda</i> (insensible a mayusculas).<br />Ejemplo : <code>título coincide \"football\"</code>"
 Rule: "Regla"
+<<<<<<< bd561aeb66e1b67a8db188042fbe6d556564341d
 <<<<<<< 93cdb4dca08b0f42d09c116653e026a47db7b40a
+=======
+<<<<<<< HEAD
+>>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
 FAQ: "FAQ"
 
 # Entries
@@ -254,7 +265,11 @@ The domain name of the entry: "Le nom de domaine de l'article"
 "Tests that a <i>subject</i> is matches a <i>search</i> (case-insensitive).<br />Example: <code>title matches \"football\"</code>": "Teste si un <i>sujet</i> correspond à une <i>recherche</i> (non sensible à la casse).<br />Exemple : <code>title matches \"football\"</code>"
 Rule: "Règle"
 =======
+<<<<<<< bd561aeb66e1b67a8db188042fbe6d556564341d
 >>>>>>> Spanish translation
+=======
+>>>>>>> 140e31a... Spanish translation
+>>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
 FAQ: "FAQ"
 
 # Entries
@@ -385,7 +400,11 @@ Import > Wallabag v1: "Importar > Wallabag v1"
 Import > Wallabag v2: "Importar > Wallabag v2"
 
 # Quickstart
+<<<<<<< bd561aeb66e1b67a8db188042fbe6d556564341d
 <<<<<<< 93cdb4dca08b0f42d09c116653e026a47db7b40a
+=======
+<<<<<<< HEAD
+>>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
 Quickstart: Pour bien débuter
 Welcome to wallabag!: "Bienvenue sur wallabag !"
 We'll accompany you to visit wallabag and show you some features which can interess you.: "Nous allons vous accompagner pour vous faire faire le tour de la maison et vous présenter quelques fonctionnalités qui pourraient vous intéresser pour vous approprier cet outil."
@@ -409,7 +428,11 @@ If you need some help, we are here for you.: "Parce que vous avez peut-être bes
 On GitHub: "Sur GitHub"
 By email: "Par email"
 On Gitter: "Sur Gitter"
+<<<<<<< bd561aeb66e1b67a8db188042fbe6d556564341d
 >>>>>>> Start of the spanish translation
+=======
+>>>>>>> 99730d4... Start of the spanish translation
+>>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
 =======
 Quickstart: Comienzo rápido
 Welcome to wallabag!: "Bienvenido a wallabag !"
@@ -434,4 +457,8 @@ If you need some help, we are here for you.: "Sí necesita ayuda, estamos dispon
 On GitHub: "En GitHub"
 By email: "Por email"
 On Gitter: "On Gitter"
+<<<<<<< bd561aeb66e1b67a8db188042fbe6d556564341d
 >>>>>>> Spanish translation
+=======
+>>>>>>> 140e31a... Spanish translation
+>>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)

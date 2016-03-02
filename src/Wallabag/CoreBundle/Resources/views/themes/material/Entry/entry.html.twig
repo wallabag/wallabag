@@ -178,8 +178,13 @@ main {
 }
 </style>
 
+<<<<<<< bd561aeb66e1b67a8db188042fbe6d556564341d
 <<<<<<< fca971886413ee6907372dac716a6965ecc7334a
 <<<<<<< e9a854c48821720618d0c607260ed92a2f43fa37
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
 =======
 <script type="text/javascript">
 
@@ -203,9 +208,15 @@ app
 });
 </script>
 
+<<<<<<< bd561aeb66e1b67a8db188042fbe6d556564341d
 >>>>>>> Comment work with annotator v2
 =======
 >>>>>>> Move annotatorjs to the bottom of the body
+=======
+>>>>>>> 0c4e4ab... Comment work with annotator v2
+=======
+>>>>>>> 9819ab3... Move annotatorjs to the bottom of the body
+>>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
 {% endblock %}
 
 {% block content %}
@@ -215,18 +226,31 @@ app
         </header>
         <aside>
             <a href="{{ entry.url|e }}" target="_blank" title="{% trans %}original{% endtrans %} : {{ entry.title|e }}" class="tool link mdi-content-link"> <span>{{ entry.domainName|removeWww }}</span></a>
+<<<<<<< bd561aeb66e1b67a8db188042fbe6d556564341d
 <<<<<<< 564b1b10a638ac2b981f05716f84104cd63bd099
 <<<<<<< ca0b5d5d06b24233c1fce8378918c7e061031862
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
             {% set nbAnnotations = entry.annotations | length %}
             <span class="tool link mdi-communication-comment"> {% transchoice nbAnnotations %}{0} No annotations|{1} One annotation|]1,Inf[ %nbAnnotations% annotations{% endtranschoice %}</span>
 =======
             {% set nbComments = entry.comments | length %}
             <span class="tool link mdi-communication-comment"> {% transchoice nbComments %}{0} No annotations|{1} One annotation|]1,Inf[ %nbComments% annotations{% endtranschoice %}</span>
+<<<<<<< bd561aeb66e1b67a8db188042fbe6d556564341d
 >>>>>>> display how much comments there are for an entry
 =======
             {% set nbAnnotations = entry.annotations | length %}
             <span class="tool link mdi-communication-comment"> {% transchoice nbAnnotations %}{0} No annotations|{1} One annotation|]1,Inf[ %nbAnnotations% annotations{% endtranschoice %}</span>
 >>>>>>> Rename CommentBundle with AnnotationBundle
+=======
+>>>>>>> c7a3c57... display how much comments there are for an entry
+=======
+            {% set nbAnnotations = entry.annotations | length %}
+            <span class="tool link mdi-communication-comment"> {% transchoice nbAnnotations %}{0} No annotations|{1} One annotation|]1,Inf[ %nbAnnotations% annotations{% endtranschoice %}</span>
+>>>>>>> 9e1ce38... Rename CommentBundle with AnnotationBundle
+>>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
             <div id="list">
                 {% for tag in entry.tags %}
                     <div class="chip">
@@ -259,18 +283,31 @@ app.include(annotator.storage.http, {
     prefix: '',
     urls: {
         create: '{{ path('annotations_post_annotation', { 'entry': entry.id }) }}',
+<<<<<<< bd561aeb66e1b67a8db188042fbe6d556564341d
 <<<<<<< 564b1b10a638ac2b981f05716f84104cd63bd099
 <<<<<<< fca971886413ee6907372dac716a6965ecc7334a
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
         update: '{{ path('annotations_put_annotation', { 'annotation': 'idAnnotation' }) }}',
         destroy: '{{ path('annotations_delete_annotation', { 'annotation': 'idAnnotation' }) }}',
 =======
         update: '{{ path('annotations_put_annotation', { 'comment': 'idComment' }) }}',
         destroy: '{{ path('annotations_delete_annotation', { 'comment': 'idComment' }) }}',
+<<<<<<< bd561aeb66e1b67a8db188042fbe6d556564341d
 >>>>>>> Move annotatorjs to the bottom of the body
 =======
         update: '{{ path('annotations_put_annotation', { 'annotation': 'idAnnotation' }) }}',
         destroy: '{{ path('annotations_delete_annotation', { 'annotation': 'idAnnotation' }) }}',
 >>>>>>> Rename CommentBundle with AnnotationBundle
+=======
+>>>>>>> 9819ab3... Move annotatorjs to the bottom of the body
+=======
+        update: '{{ path('annotations_put_annotation', { 'annotation': 'idAnnotation' }) }}',
+        destroy: '{{ path('annotations_delete_annotation', { 'annotation': 'idAnnotation' }) }}',
+>>>>>>> 9e1ce38... Rename CommentBundle with AnnotationBundle
+>>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
         search: '{{ path('annotations_get_annotations', { 'entry': entry.id }) }}'
     }
 });

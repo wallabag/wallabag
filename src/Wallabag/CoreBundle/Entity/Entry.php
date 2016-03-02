@@ -9,6 +9,7 @@ use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\XmlRoot;
 use Symfony\Component\Validator\Constraints as Assert;
 use Wallabag\UserBundle\Entity\User;
+<<<<<<< bd561aeb66e1b67a8db188042fbe6d556564341d
 <<<<<<< 564b1b10a638ac2b981f05716f84104cd63bd099
 <<<<<<< e9a854c48821720618d0c607260ed92a2f43fa37
 use Wallabag\AnnotationBundle\Entity\Annotation;
@@ -18,6 +19,17 @@ use Wallabag\CommentBundle\Entity\Comment;
 =======
 use Wallabag\AnnotationBundle\Entity\Annotation;
 >>>>>>> Rename CommentBundle with AnnotationBundle
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+use Wallabag\AnnotationBundle\Entity\Annotation;
+=======
+use Wallabag\CommentBundle\Entity\Comment;
+>>>>>>> 0c4e4ab... Comment work with annotator v2
+=======
+use Wallabag\AnnotationBundle\Entity\Annotation;
+>>>>>>> 9e1ce38... Rename CommentBundle with AnnotationBundle
+>>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
 
 /**
  * Entry.
@@ -107,6 +119,7 @@ class Entry
     private $updatedAt;
 
     /**
+<<<<<<< bd561aeb66e1b67a8db188042fbe6d556564341d
 <<<<<<< 564b1b10a638ac2b981f05716f84104cd63bd099
 <<<<<<< e9a854c48821720618d0c607260ed92a2f43fa37
      * @ORM\OneToMany(targetEntity="Wallabag\AnnotationBundle\Entity\Annotation", mappedBy="entry", cascade={"persist", "remove"})
@@ -116,6 +129,17 @@ class Entry
 =======
      * @ORM\OneToMany(targetEntity="Wallabag\AnnotationBundle\Entity\Annotation", mappedBy="entry", cascade={"persist", "remove"})
 >>>>>>> Rename CommentBundle with AnnotationBundle
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+     * @ORM\OneToMany(targetEntity="Wallabag\AnnotationBundle\Entity\Annotation", mappedBy="entry", cascade={"persist", "remove"})
+=======
+     * @ORM\OneToMany(targetEntity="Wallabag\CommentBundle\Entity\Comment", mappedBy="entry", cascade={"persist", "remove"})
+>>>>>>> 0c4e4ab... Comment work with annotator v2
+=======
+     * @ORM\OneToMany(targetEntity="Wallabag\AnnotationBundle\Entity\Annotation", mappedBy="entry", cascade={"persist", "remove"})
+>>>>>>> 9e1ce38... Rename CommentBundle with AnnotationBundle
+>>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
      * @ORM\JoinTable
      *
      * @Groups({"entries_for_user", "export_all"})
@@ -382,6 +406,7 @@ class Entry
     }
 
     /**
+<<<<<<< bd561aeb66e1b67a8db188042fbe6d556564341d
 <<<<<<< 564b1b10a638ac2b981f05716f84104cd63bd099
 <<<<<<< e9a854c48821720618d0c607260ed92a2f43fa37
      * @return ArrayCollection<Annotation>
@@ -391,6 +416,17 @@ class Entry
 =======
      * @return ArrayCollection<Annotation>
 >>>>>>> Rename CommentBundle with AnnotationBundle
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+     * @return ArrayCollection<Annotation>
+=======
+     * @return ArrayCollection<Comment>
+>>>>>>> 0c4e4ab... Comment work with annotator v2
+=======
+     * @return ArrayCollection<Annotation>
+>>>>>>> 9e1ce38... Rename CommentBundle with AnnotationBundle
+>>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
      */
     public function getAnnotations()
     {
@@ -398,8 +434,13 @@ class Entry
     }
 
     /**
+<<<<<<< bd561aeb66e1b67a8db188042fbe6d556564341d
 <<<<<<< 564b1b10a638ac2b981f05716f84104cd63bd099
 <<<<<<< e9a854c48821720618d0c607260ed92a2f43fa37
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
      * @param Annotation $annotation
      */
     public function setAnnotation(Annotation $annotation)
@@ -409,6 +450,7 @@ class Entry
      * @param Comment $comment
 =======
      * @param Annotation $annotation
+<<<<<<< bd561aeb66e1b67a8db188042fbe6d556564341d
 >>>>>>> Rename CommentBundle with AnnotationBundle
      */
     public function setAnnotation(Annotation $annotation)
@@ -419,6 +461,18 @@ class Entry
 =======
         $this->annotations[] = $annotation;
 >>>>>>> Rename CommentBundle with AnnotationBundle
+=======
+>>>>>>> 9e1ce38... Rename CommentBundle with AnnotationBundle
+     */
+    public function setAnnotation(Annotation $annotation)
+    {
+<<<<<<< HEAD
+        $this->comments[] = $comment;
+>>>>>>> 0c4e4ab... Comment work with annotator v2
+=======
+        $this->annotations[] = $annotation;
+>>>>>>> 9e1ce38... Rename CommentBundle with AnnotationBundle
+>>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
     }
 
     /**

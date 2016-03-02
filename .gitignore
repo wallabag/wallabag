@@ -39,5 +39,8 @@ docker/data/
 # To avoid crazy stuff on some PR, we must manually FORCE ADD IT on each new release
 composer.lock
 
+<<<<<<< bd561aeb66e1b67a8db188042fbe6d556564341d
 # To avoid IDE specific files
 .idea/*
+=======
+>>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
