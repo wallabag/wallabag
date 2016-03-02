@@ -1,0 +1,3 @@
+# Config screen
+The password fields must match: 'Las contraseñas no coinciden'
+Password should by at least 8 chars long: 'La contraseña debe tener al menos 8 carácteres'
