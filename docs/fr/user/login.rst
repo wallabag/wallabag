@@ -9,7 +9,7 @@ Si vous êtes sur un ordinateur de confiance et que vous souhaitez rester connec
 vous pouvez cocher la case ``Restez connecté`` : wallabag se souviendra de vous pour un an.
 
 .. image:: ../../img/user/login_form.png
-   :alt: Login form
+   :alt: Formulaire de connexion
    :align: center
 
 Foire aux questions

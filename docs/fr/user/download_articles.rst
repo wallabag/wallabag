@@ -6,12 +6,12 @@ Vous pouvez télécharger chaque article dans plusieurs formats : ePUB, MOBI, PD
 Lorsque vous lisez un article, cliquez sur cette icône dans la barre latérale :
 
 .. image:: ../../img/user/download_article.png
-   :alt: download article
+   :alt: Télécharger l'article
    :align: center
 
 Vous pouvez aussi télécharger une catégorie (non lus, favoris, lus) dans ces formats.
 Par exemple, dans la vue **Non lus**, cliquez sur cette icône dans la barre supérieure :
 
 .. image:: ../../img/user/download_articles.png
-   :alt: download articles
+   :alt: Télécharger l'article
    :align: center
