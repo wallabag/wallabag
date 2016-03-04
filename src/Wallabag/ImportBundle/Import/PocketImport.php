@@ -222,7 +222,7 @@ class PocketImport implements ImportInterface
             $entry = $this->contentProxy->updateEntry($entry, $url);
 
             // 0, 1, 2 - 1 if the item is archived - 2 if the item should be deleted
-            if ($pocketEntry['status'] == 1 | $this->markAsRead) {
+            if ($pocketEntry['status'] == 1 || $this->markAsRead) {
                 $entry->setArchived(true);
             }
 

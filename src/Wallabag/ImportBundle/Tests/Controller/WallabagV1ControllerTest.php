@@ -99,8 +99,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
 
         $this->assertTrue($content2->isArchived());
 
-        $this->assertGreaterThan(1, $alert = $crawler->filter('div.messages.success')->extract(array('_text')));
-        $this->assertContains('Import summary', $alert[0]);
+        $this->assertContains('Import summary', $client->getResponse()->getContent());
     }
 
     public function testImportWallabagWithEmptyFile()

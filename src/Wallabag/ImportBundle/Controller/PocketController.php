@@ -18,9 +18,9 @@ class PocketController extends Controller
         $pocket = $this->get('wallabag_import.pocket.import');
         $form = $this->createFormBuilder($pocket)
             ->add('read', CheckboxType::class, array(
-                    'label' => 'Mark all as read',
-                    'required' => false,
-                    ))
+                'label' => 'Mark all as read',
+                'required' => false,
+            ))
             ->getForm();
 
         return $this->render('WallabagImportBundle:Pocket:index.html.twig', [
@@ -39,8 +39,7 @@ class PocketController extends Controller
             ->getRequestToken($this->generateUrl('import', array(), UrlGeneratorInterface::ABSOLUTE_URL));
 
         $this->get('session')->set('import.pocket.code', $requestToken);
-        $markAsRead = $request->request->get('form')['read'];
-        $this->get('session')->set('read', $markAsRead);
+        $this->get('session')->set('read', $request->request->get('form')['read']);
 
         return $this->redirect(
             'https://getpocket.com/auth/authorize?request_token='.$requestToken.'&redirect_uri='.$this->generateUrl('import_pocket_callback', array(), UrlGeneratorInterface::ABSOLUTE_URL),
@@ -56,6 +55,7 @@ class PocketController extends Controller
         $message = 'Import failed, please try again.';
         $pocket = $this->get('wallabag_import.pocket.import');
         $markAsRead = $this->get('session')->get('read');
+        $this->get('session')->remove('read');
 
         // something bad happend on pocket side
         if (false === $pocket->authorize($this->get('session')->get('import.pocket.code'))) {
@@ -71,8 +71,6 @@ class PocketController extends Controller
             $summary = $pocket->getSummary();
             $message = 'Import summary: '.$summary['imported'].' imported, '.$summary['skipped'].' already saved.';
         }
-
-        $this->get('session')->remove('read');
 
         $this->get('session')->getFlashBag()->add(
             'notice',

@@ -3,6 +3,7 @@
 namespace Wallabag\ImportBundle\Tests\Import;
 
 use Wallabag\UserBundle\Entity\User;
+use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\ImportBundle\Import\PocketImport;
 use GuzzleHttp\Client;
 use GuzzleHttp\Subscriber\Mock;
@@ -265,9 +266,7 @@ class PocketImportTest extends \PHPUnit_Framework_TestCase
             ->method('getRepository')
             ->willReturn($entryRepo);
 
-        $entry = $this->getMockBuilder('Wallabag\CoreBundle\Entity\Entry')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $entry = new Entry($this->user);
 
         $this->contentProxy
             ->expects($this->once())
@@ -281,6 +280,95 @@ class PocketImportTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($res);
         $this->assertEquals(['skipped' => 1, 'imported' => 1], $pocketImport->getSummary());
+    }
+
+    /**
+     * Will sample results from https://getpocket.com/developer/docs/v3/retrieve.
+     */
+    public function testImportAndMarkAllAsRead()
+    {
+        $client = new Client();
+
+        $mock = new Mock([
+            new Response(200, ['Content-Type' => 'application/json'], Stream::factory(json_encode(['access_token' => 'wunderbar_token']))),
+            new Response(200, ['Content-Type' => 'application/json'], Stream::factory('
+                {
+                    "status": 1,
+                    "list": {
+                        "229279689": {
+                            "item_id": "229279689",
+                            "resolved_id": "229279689",
+                            "given_url": "http://www.grantland.com/blog/the-triangle/post/_/id/38347/ryder-cup-preview",
+                            "given_title": "The Massive Ryder Cup Preview - The Triangle Blog - Grantland",
+                            "favorite": "1",
+                            "status": "1",
+                            "resolved_title": "The Massive Ryder Cup Preview",
+                            "resolved_url": "http://www.grantland.com/blog/the-triangle/post/_/id/38347/ryder-cup-preview",
+                            "excerpt": "The list of things I love about the Ryder Cup is so long that it could fill a (tedious) novel, and golf fans can probably guess most of them.",
+                            "is_article": "1",
+                            "has_video": "1",
+                            "has_image": "1",
+                            "word_count": "3197"
+                        },
+                        "229279690": {
+                            "item_id": "229279689",
+                            "resolved_id": "229279689",
+                            "given_url": "http://www.grantland.com/blog/the-triangle/post/_/id/38347/ryder-cup-preview/2",
+                            "given_title": "The Massive Ryder Cup Preview - The Triangle Blog - Grantland",
+                            "favorite": "1",
+                            "status": "0",
+                            "resolved_title": "The Massive Ryder Cup Preview",
+                            "resolved_url": "http://www.grantland.com/blog/the-triangle/post/_/id/38347/ryder-cup-preview",
+                            "excerpt": "The list of things I love about the Ryder Cup is so long that it could fill a (tedious) novel, and golf fans can probably guess most of them.",
+                            "is_article": "1",
+                            "has_video": "0",
+                            "has_image": "0",
+                            "word_count": "3197"
+                        }
+                    }
+                }
+            ')),
+        ]);
+
+        $client->getEmitter()->attach($mock);
+
+        $pocketImport = $this->getPocketImport();
+
+        $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $entryRepo->expects($this->exactly(2))
+            ->method('findByUrlAndUserId')
+            ->will($this->onConsecutiveCalls(false, false));
+
+        $this->em
+            ->expects($this->exactly(2))
+            ->method('getRepository')
+            ->willReturn($entryRepo);
+
+        // check that every entry persisted are archived
+        $this->em
+            ->expects($this->any())
+            ->method('persist')
+            ->with($this->callback(function($persistedEntry) {
+                return $persistedEntry->isArchived();
+            }));
+
+        $entry = new Entry($this->user);
+
+        $this->contentProxy
+            ->expects($this->exactly(2))
+            ->method('updateEntry')
+            ->willReturn($entry);
+
+        $pocketImport->setClient($client);
+        $pocketImport->authorize('wunderbar_code');
+
+        $res = $pocketImport->setMarkAsRead(true)->import();
+
+        $this->assertTrue($res);
+        $this->assertEquals(['skipped' => 0, 'imported' => 2], $pocketImport->getSummary());
     }
 
     public function testImportBadResponse()

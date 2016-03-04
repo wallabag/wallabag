@@ -15,9 +15,9 @@ class UploadImportType extends AbstractType
         $builder
             ->add('file', FileType::class)
             ->add('mark_as_read', CheckboxType::class, array(
-                    'label' => 'Mark all as read',
-                    'required' => false,
-                    ))
+                'label' => 'Mark all as read',
+                'required' => false,
+            ))
             ->add('save', SubmitType::class)
         ;
     }

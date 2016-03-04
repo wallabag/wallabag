@@ -90,14 +90,17 @@ class WallabagV2ImportTest extends \PHPUnit_Framework_TestCase
             ->method('getRepository')
             ->willReturn($entryRepo);
 
+        // check that every entry persisted are archived
+        $this->em
+            ->expects($this->any())
+            ->method('persist')
+            ->with($this->callback(function($persistedEntry) {
+                return $persistedEntry->isArchived();
+            }));
+
         $res = $wallabagV2Import->setMarkAsRead(true)->import();
 
         $this->assertTrue($res);
-
-        $this->em
-            ->expects($this->any())
-            ->method('getBuilderForArchiveByUser')
-            ->willReturn($entryRepo);
 
         $this->assertEquals(['skipped' => 0, 'imported' => 2], $wallabagV2Import->getSummary());
     }

@@ -32,6 +32,7 @@ class WallabagV1Controller extends Controller
                     ->import();
 
                 $message = 'Import failed, please try again.';
+
                 if (true === $res) {
                     $summary = $wallabag->getSummary();
                     $message = 'Import summary: '.$summary['imported'].' imported, '.$summary['skipped'].' already saved.';
