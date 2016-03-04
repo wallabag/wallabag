@@ -97,6 +97,8 @@ class WallabagRestController extends FOSRestController
      *          {"name"="url", "dataType"="string", "required"=true, "format"="http://www.test.com/article.html", "description"="Url for the entry."},
      *          {"name"="title", "dataType"="string", "required"=false, "description"="Optional, we'll get the title from the page."},
      *          {"name"="tags", "dataType"="string", "required"=false, "format"="tag1,tag2,tag3", "description"="a comma-separated list of tags."},
+     *          {"name"="starred", "dataType"="boolean", "required"=false, "format"="true or false", "description"="entry already starred"},
+     *          {"name"="archive", "dataType"="boolean", "required"=false, "format"="true or false", "description"="entry already archived"},
      *       }
      * )
      *
@@ -107,6 +109,8 @@ class WallabagRestController extends FOSRestController
         $this->validateAuthentication();
 
         $url = $request->request->get('url');
+        $isArchived = $request->request->get('archive');
+        $isStarred = $request->request->get('starred');
 
         $entry = $this->get('wallabag_core.content_proxy')->updateEntry(
             new Entry($this->getUser()),
@@ -118,8 +122,17 @@ class WallabagRestController extends FOSRestController
             $this->get('wallabag_core.content_proxy')->assignTagsToEntry($entry, $tags);
         }
 
+        if (true === (bool) $isStarred) {
+            $entry->setStarred(true);
+        }
+
+        if (true === (bool) $isArchived) {
+            $entry->setArchived(true);
+        }
+
         $em = $this->getDoctrine()->getManager();
         $em->persist($entry);
+
         $em->flush();
 
         $json = $this->get('serializer')->serialize($entry, 'json');
