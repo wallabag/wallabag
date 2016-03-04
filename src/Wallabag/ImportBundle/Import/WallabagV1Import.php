@@ -19,6 +19,7 @@ class WallabagV1Import implements ImportInterface
     protected $skippedEntries = 0;
     protected $importedEntries = 0;
     protected $filepath;
+    protected $markAsRead;
 
     public function __construct(EntityManager $em, ContentProxy $contentProxy)
     {
@@ -121,6 +122,18 @@ class WallabagV1Import implements ImportInterface
     }
 
     /**
+     * Set whether articles must be all marked as read.
+     *
+     * @param bool $markAsRead
+     */
+    public function setMarkAsRead($markAsRead)
+    {
+        $this->markAsRead = $markAsRead;
+
+        return $this;
+    }
+
+    /**
      * @param $entries
      */
     protected function parseEntries($entries)
@@ -160,7 +173,7 @@ class WallabagV1Import implements ImportInterface
                 );
             }
 
-            $entry->setArchived($importedEntry['is_read']);
+            $entry->setArchived($importedEntry['is_read'] || $this->markAsRead);
             $entry->setStarred($importedEntry['is_fav']);
 
             $this->em->persist($entry);

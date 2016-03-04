@@ -215,6 +215,8 @@ Import contents: "Importer les contenus"
 Import: "Importer"
 Import > Wallabag v1: "Importer > Wallabag v1"
 Import > Wallabag v2: "Importer > Wallabag v2"
+Mark all as read ?: "Marquer tout comme lu ?"
+Mark all imported entries as read: "Marquer tous les contenus importés comme lus"
 
 # Quickstart
 Quickstart: Pour bien débuter

@@ -81,6 +81,39 @@ class WallabagV1ImportTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(['skipped' => 1, 'imported' => 3], $wallabagV1Import->getSummary());
     }
 
+    public function testImportAndMarkAllAsRead()
+    {
+        $wallabagV1Import = $this->getWallabagV1Import();
+        $wallabagV1Import->setFilepath(__DIR__.'/../fixtures/wallabag-v1-read.json');
+
+        $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $entryRepo->expects($this->exactly(3))
+            ->method('findByUrlAndUserId')
+            ->will($this->onConsecutiveCalls(false, false, false));
+
+        $this->em
+            ->expects($this->any())
+            ->method('getRepository')
+            ->willReturn($entryRepo);
+
+        // check that every entry persisted are archived
+        $this->em
+            ->expects($this->any())
+            ->method('persist')
+            ->with($this->callback(function($persistedEntry) {
+                return $persistedEntry->isArchived();
+            }));
+
+        $res = $wallabagV1Import->setMarkAsRead(true)->import();
+
+        $this->assertTrue($res);
+
+        $this->assertEquals(['skipped' => 0, 'imported' => 3], $wallabagV1Import->getSummary());
+    }
+
     public function testImportBadFile()
     {
         $wallabagV1Import = $this->getWallabagV1Import();
