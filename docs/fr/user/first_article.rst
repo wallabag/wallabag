@@ -25,7 +25,7 @@ Dans la barre haut de wallabag, vous avez trois icônes. Avec la première icôn
 un signe plus, vous pouvez facilement ajouter un nouvel article.
 
 .. image:: ../../img/user/topbar.png
-   :alt: Top bar
+   :alt: Barre supérieure
    :align: center
 
 Cliquez dessus pour afficher un nouveau champ, collez-y l'URL de l'article et appuyez

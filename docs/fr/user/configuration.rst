@@ -58,7 +58,7 @@ Si vous activez 2FA, à chaque tentative de connexion à wallabag, vous recevrez
 un code par email. Vous devez renseigner ce code dans le formulaire suivant :
 
 .. image:: ../../img/user/2FA_form.png
-    :alt: Two factor authentication
+    :alt: Authentification à deux facteurs
     :align: center
 
 Si vous ne souhaitez pas recevoir un code à chaque fois que vous vous connectez,
