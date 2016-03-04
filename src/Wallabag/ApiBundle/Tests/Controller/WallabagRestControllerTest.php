@@ -180,6 +180,22 @@ class WallabagRestControllerTest extends WallabagApiTestCase
         $this->assertEquals(false, $content['is_starred']);
     }
 
+    public function testPostEntryWithContent()
+    {
+        $this->client->request('POST', '/api/entries.json', array(
+            'url' => 'http://www.lemonde.fr/idees/article/2016/02/08/preserver-la-liberte-d-expression-sur-les-reseaux-sociaux_4861503_3232.html',
+            'content' => 'This is a new content for my entry',
+        ));
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertGreaterThan(0, $content['id']);
+        $this->assertEquals('http://www.lemonde.fr/idees/article/2016/02/08/preserver-la-liberte-d-expression-sur-les-reseaux-sociaux_4861503_3232.html', $content['url']);
+        $this->assertEquals('This is a new content for my entry', $content['content']);
+    }
+
     public function testPatchEntry()
     {
         $entry = $this->client->getContainer()
