@@ -99,7 +99,6 @@ class WallabagRestController extends FOSRestController
      *          {"name"="tags", "dataType"="string", "required"=false, "format"="tag1,tag2,tag3", "description"="a comma-separated list of tags."},
      *          {"name"="starred", "dataType"="boolean", "required"=false, "format"="true or false", "description"="entry already starred"},
      *          {"name"="archive", "dataType"="boolean", "required"=false, "format"="true or false", "description"="entry already archived"},
-     *          {"name"="content", "dataType"="string", "required"=false, "format"="content", "description"="content you want to pass directly"},
      *       }
      * )
      *
@@ -110,7 +109,6 @@ class WallabagRestController extends FOSRestController
         $this->validateAuthentication();
 
         $url = $request->request->get('url');
-        $content = $request->request->get('content');
         $isArchived = $request->request->get('archive');
         $isStarred = $request->request->get('starred');
 
@@ -130,10 +128,6 @@ class WallabagRestController extends FOSRestController
 
         if (true === (bool) $isArchived) {
             $entry->setArchived(true);
-        }
-
-        if (!empty($content)) {
-            $entry->setContent($content);
         }
 
         $em = $this->getDoctrine()->getManager();
