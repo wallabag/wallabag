@@ -11,7 +11,7 @@ You'll need the following extensions for wallabag to work. Some of these may alr
 - php-session
 - php-ctype
 - php-dom
-- pĥp-hash
+- php-hash
 - php-simplexml
 - php-json
 - php-gd
