@@ -8,20 +8,20 @@
         <div class="card-panel settings">
 
             <div class="row">
-                <p>{% trans %}You will create a new client. Please fill the field below for the redirect URI of your application:{% endtrans %}</p>
+                <p>{% trans %}You are about to create a new client. Please fill the field below for the redirect URI of your application:{% endtrans %}</p>
                 {{ form_start(form) }}
                 {{ form_errors(form) }}
+
                 <div class="input-field col s12">
                     {{ form_label(form.redirect_uris) }}
                     {{ form_errors(form.redirect_uris) }}
                     {{ form_widget(form.redirect_uris) }}
                 </div>
-                <div class="hidden">{{ form_rest(form) }}</div>
 
                 <a href="{{ path('developer') }}" class="waves-effect waves-light grey btn">{% trans %}Back{% endtrans %}</a>
-                <button class="btn waves-effect waves-light" type="submit" name="action">
-                    {% trans %}Create new client{% endtrans %}
-                </button>
+                {{ form_widget(form.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
+
+                {{ form_rest(form) }}
             </div>
 
         </div>
