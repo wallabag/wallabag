@@ -9,8 +9,8 @@
             <div class="row">
                 <p>{% trans %}Here are your client parameters.{% endtrans %}</p>
                 <ul>
-                    <li>{% trans %}Client ID:{% endtrans %} <strong><pre>{{ client_id }}</pre></strong></li>
-                    <li>{% trans %}Client secret:{% endtrans %} <strong><pre>{{ client_secret }}</pre></strong></li>
+                    <li>{% trans %}Client ID{% endtrans %}: <strong><pre>{{ client_id }}</pre></strong></li>
+                    <li>{% trans %}Client secret{% endtrans %}: <strong><pre>{{ client_secret }}</pre></strong></li>
                 </ul>
 
                 <a href="{{ path('developer') }}" class="waves-effect waves-light grey btn">{% trans %}Back{% endtrans %}</a>

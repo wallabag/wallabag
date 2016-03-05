@@ -11,6 +11,8 @@ use Wallabag\CoreBundle\Form\Type\ClientType;
 class DeveloperController extends Controller
 {
     /**
+     * List all clients and link to create a new one.
+     *
      * @Route("/developer", name="developer")
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -25,6 +27,8 @@ class DeveloperController extends Controller
     }
 
     /**
+     * Create a client (an app).
+     *
      * @param Request $request
      *
      * @Route("/developer/client/create", name="developer_create_client")
@@ -62,13 +66,13 @@ class DeveloperController extends Controller
     /**
      * Remove a client.
      *
-     * @param Request $request
+     * @param Client $client
      *
      * @Route("/developer/client/delete/{id}", requirements={"id" = "\d+"}, name="developer_delete_client")
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function deleteClientAction(Request $request, Client $client)
+    public function deleteClientAction(Client $client)
     {
         $em = $this->getDoctrine()->getManager();
         $em->remove($client);
@@ -83,6 +87,8 @@ class DeveloperController extends Controller
     }
 
     /**
+     * Display developer how to use an existing app.
+     *
      * @Route("/developer/howto/first-app", name="developer_howto_firstapp")
      *
      * @return \Symfony\Component\HttpFoundation\Response

@@ -14,8 +14,8 @@ class ClientType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('redirect_uris', UrlType::class, array('required' => true))
-            ->add('save', SubmitType::class, array('label' => 'Create new client'))
+            ->add('redirect_uris', UrlType::class, array('required' => true, 'label' => 'Redirect URIs'))
+            ->add('save', SubmitType::class, array('label' => 'Create a new client'))
         ;
 
         $builder->get('redirect_uris')

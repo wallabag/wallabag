@@ -31,19 +31,19 @@
                                 <div class="collapsible-body">
                                     <table class="striped">
                                         <tr>
-                                            <td>{% trans %}Client ID:{% endtrans %}</td>
+                                            <td>{% trans %}Client ID{% endtrans %}</td>
                                             <td><strong><code>{{ client.id }}_{{ client.randomId }}</code></strong></td>
                                         </tr>
                                         <tr>
-                                            <td>{% trans %}Client secret:{% endtrans %}</td>
+                                            <td>{% trans %}Client secret{% endtrans %}</td>
                                             <td><strong><code>{{ client.secret }}</code></strong></td>
                                         </tr>
                                         <tr>
-                                            <td>{% trans %}Redirect URIs:{% endtrans %}</td>
+                                            <td>{% trans %}Redirect URIs{% endtrans %}</td>
                                             <td><strong><code>{{ client.redirectUris|json_encode() }}</code></strong></td>
                                         </tr>
                                         <tr>
-                                            <td>{% trans %}Grant type allowed:{% endtrans %}</td>
+                                            <td>{% trans %}Grant type allowed{% endtrans %}</td>
                                             <td><strong><code>{{ client.allowedGrantTypes|json_encode() }}</code></strong></td>
                                         </tr>
                                     </table>
