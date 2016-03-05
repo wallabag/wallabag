@@ -8,14 +8,13 @@
         <div class="card-panel settings">
             <div class="row">
                 <p>{% trans %}Here are your client parameters.{% endtrans %}</p>
-                <p><strong>{% trans %}Make sure to copy these parameters now. You won’t be able to see them again!{% endtrans %}</strong></p>
                 <ul>
                     <li>{% trans %}Client ID:{% endtrans %} <strong><pre>{{ client_id }}</pre></strong></li>
                     <li>{% trans %}Client secret:{% endtrans %} <strong><pre>{{ client_secret }}</pre></strong></li>
                 </ul>
 
                 <a href="{{ path('developer') }}" class="waves-effect waves-light grey btn">{% trans %}Back{% endtrans %}</a>
-                <a href="{{ path('howto-firstapp') }}" class="btn waves-effect waves-light">{% trans %}Read the howto "Create my first application"{% endtrans %}</a>
+                <a href="{{ path('developer_howto_firstapp') }}" class="btn waves-effect waves-light">{% trans %}Read the howto "Create my first application"{% endtrans %}</a>
             </div>
         </div>
     </div>

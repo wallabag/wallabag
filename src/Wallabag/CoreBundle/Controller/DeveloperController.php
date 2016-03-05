@@ -17,13 +17,17 @@ class DeveloperController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('WallabagCoreBundle:Developer:index.html.twig');
+        $clients = $this->getDoctrine()->getRepository('WallabagApiBundle:Client')->findAll();
+
+        return $this->render('WallabagCoreBundle:Developer:index.html.twig', array(
+            'clients' => $clients,
+        ));
     }
 
     /**
      * @param Request $request
      *
-     * @Route("/developer/client/create", name="create_client")
+     * @Route("/developer/client/create", name="developer_create_client")
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -56,7 +60,30 @@ class DeveloperController extends Controller
     }
 
     /**
-     * @Route("/developer/howto/first-app", name="howto-firstapp")
+     * Remove a client.
+     *
+     * @param Request $request
+     *
+     * @Route("/developer/client/delete/{id}", requirements={"id" = "\d+"}, name="developer_delete_client")
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function deleteClientAction(Request $request, Client $client)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($client);
+        $em->flush();
+
+        $this->get('session')->getFlashBag()->add(
+            'notice',
+            'Client deleted'
+        );
+
+        return $this->redirect($this->generateUrl('developer'));
+    }
+
+    /**
+     * @Route("/developer/howto/first-app", name="developer_howto_firstapp")
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */

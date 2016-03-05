@@ -15,7 +15,7 @@
             <div class="row">
                 <p>The following commands make use of the <a href="https://github.com/jkbrzt/httpie">HTTPie library</a>. Make sure it is installed on your system before using it.</p>
                 <p>You need a token to communicate between your 3rd application and wallabag API.</p>
-                <p>To create this token, you need <a href="{{ path('create_client') }}">to create a new client</a>.</p>
+                <p>To create this token, you need <a href="{{ path('developer_create_client') }}">to create a new client</a>.</p>
                 <p>Now, create your token (replace client_id, client_secret, username and password with the good values):</p>
                 <p>
                     <pre><code class="language-bash">http POST http://v2.wallabag.org/oauth/v2/token \
