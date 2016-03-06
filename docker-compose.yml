@@ -15,17 +15,7 @@ services:
         build:
             context: docker/php
             args:
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
             # Set here your timezone using one of this: http://php.net/manual/en/timezones.php
-=======
->>>>>>> 2c3759a... Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
-=======
->>>>>>> 028be7b... Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
-=======
-            # Set here your timezone using one of this: http://php.net/manual/en/timezones.php
->>>>>>> c40dd2d... Add comment
                 timezone: 'Europe/Monaco'
         ports:
             - "9000:9000"
