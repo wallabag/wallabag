@@ -50,6 +50,7 @@
             {% endif %}
             <li class="bold {% if currentRoute == 'import' %}active{% endif %}"><a class="waves-effect" href="{{ path('import') }}">{% trans %}import{% endtrans %}</a></li>
             <li class="bold {% if currentRoute == 'howto' %}active{% endif %}"><a class="waves-effect" href="{{ path('howto') }}">{% trans %}howto{% endtrans %}</a></li>
+            <li class="bold {% if currentRoute == 'developer' %}active{% endif %}"><a class="waves-effect" href="{{ path('developer') }}">{% trans %}Developer{% endtrans %}</a></li>
             <li class="bold"><a class="waves-effect" class="icon icon-power" href="{{ path('fos_user_security_logout') }}" title="{% trans %}logout{% endtrans %}">{% trans %}logout{% endtrans %}</a></li>
         </ul>
         <div class="nav-wrapper nav-panels">
@@ -116,8 +117,6 @@
             <div class="container">
                 <p>{% trans %}powered by{% endtrans %} <a target="_blank" href="https://wallabag.org" class="grey-text text-lighten-4">wallabag</a></p>
                 <a class="grey-text text-lighten-4 right" href="{{ path('about') }}">{% trans %}About{% endtrans %}</a>
-                <a class="grey-text text-lighten-4 right" href="{{ path('developer') }}">{% trans %}Developer{% endtrans %}
-                &nbsp;-&nbsp;
             </div>
         </div>
     </footer>
