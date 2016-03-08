@@ -48,8 +48,12 @@ To install wallabag itself, you must run these two commands:
 
 ::
 
-    SYMFONY_ENV=prod composer create-project wallabag/wallabag wallabag "2.0.0-beta.1" --no-dev
+    git clone git@github.com:wallabag/wallabag.git
+    cd wallabag
+    git checkout 2.0.0-beta.2
+    SYMFONY_ENV=prod composer install --no-dev
     php bin/console wallabag:install --env=prod
+    php bin/console server:run --env=prod
 
 To start php's build-in server and test if everything did install correctly, you can do:
 
