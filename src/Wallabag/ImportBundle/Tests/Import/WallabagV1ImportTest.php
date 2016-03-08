@@ -103,7 +103,7 @@ class WallabagV1ImportTest extends \PHPUnit_Framework_TestCase
         $this->em
             ->expects($this->any())
             ->method('persist')
-            ->with($this->callback(function($persistedEntry) {
+            ->with($this->callback(function ($persistedEntry) {
                 return $persistedEntry->isArchived();
             }));
 
