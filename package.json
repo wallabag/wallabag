@@ -1,0 +1,43 @@
+{
+  "name": "wallabag",
+  "version": "2.0.0",
+  "description": "wallabag is a self hostable application for saving web pages",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "dependencies": {
+    "bower": "^1.7.7",
+    "grunt": "^1.0.0-rc1",
+    "grunt-contrib-cssmin": "^1.0.0",
+    "grunt-contrib-uglify": "^1.0.0",
+    "load-grunt-tasks": "^3.4.1"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wallabag/wallabag"
+  },
+  "contributors": [
+    {
+      "name": "Nicolas Lœuillet",
+      "email": "nicolas@loeuillet.org",
+      "homepage": "http://www.cdetc.fr",
+      "role": "Developer"
+    },
+    {
+      "name": "Thomas Citharel",
+      "homepage": "http://tcit.fr",
+      "role": "Developer"
+    },
+    {
+      "name": "Jérémy Benoist",
+      "homepage": "http://www.j0k3r.net",
+      "role": "Developer"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wallabag/wallabag/issues"
+  }
+}

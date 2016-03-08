@@ -48,7 +48,6 @@
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/doctrine-cache-bundle": "^1.2",
         "twig/extensions": "~1.0",
-        "symfony/assetic-bundle": "~2.3",
         "symfony/swiftmailer-bundle": "^2.3",
         "symfony/monolog-bundle": "^2.8",
         "sensio/distribution-bundle": "^5.0",
@@ -80,7 +79,8 @@
         "paragonie/random_compat": "~1.0",
         "craue/config-bundle": "~1.4",
         "mnapoli/piwik-twig-extension": "^1.0",
-        "lexik/maintenance-bundle": "~2.1"
+        "lexik/maintenance-bundle": "~2.1",
+        "mouf/nodejs-installer": "~1.0"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "~2.2",
@@ -99,7 +99,9 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget",
+            "npm install",
+            "bower install"
         ],
         "post-install-cmd": [
             "@post-cmd"

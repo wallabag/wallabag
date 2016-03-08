@@ -38,3 +38,7 @@ docker/data/
 
 # To avoid crazy stuff on some PR, we must manually FORCE ADD IT on each new release
 composer.lock
+
+# npm stuff
+/node_modules/
+/app/Resources/lib
