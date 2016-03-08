@@ -44,6 +44,14 @@
 
                             <div class="row">
                                 <div class="input-field col s12">
+                                    {{ form_label(form.config.reading_speed) }}
+                                    {{ form_errors(form.config.reading_speed) }}
+                                    {{ form_widget(form.config.reading_speed) }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s12">
                                     {{ form_label(form.config.language) }}
                                     {{ form_errors(form.config.language) }}
                                     {{ form_widget(form.config.language) }}

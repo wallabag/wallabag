@@ -74,6 +74,13 @@ class Config
     private $rssLimit;
 
     /**
+     * @var float
+     *
+     * @ORM\Column(name="reading_speed", type="float", nullable=true)
+     */
+    private $readingSpeed;
+
+    /**
      * @ORM\OneToOne(targetEntity="Wallabag\UserBundle\Entity\User", inversedBy="config")
      */
     private $user;
@@ -245,6 +252,30 @@ class Config
     public function getRssLimit()
     {
         return $this->rssLimit;
+    }
+
+    /**
+     * Set readingSpeed.
+     *
+     * @param int $readingSpeed
+     *
+     * @return Config
+     */
+    public function setReadingSpeed($readingSpeed)
+    {
+        $this->readingSpeed = $readingSpeed;
+
+        return $this;
+    }
+
+    /**
+     * Get readingSpeed.
+     *
+     * @return int
+     */
+    public function getReadingSpeed()
+    {
+        return $this->readingSpeed;
     }
 
     /**

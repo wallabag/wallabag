@@ -4,6 +4,7 @@ namespace Wallabag\CoreBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\RangeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -35,6 +36,13 @@ class ConfigType extends AbstractType
                 'choices_as_values' => true,
             ))
             ->add('items_per_page')
+            ->add('reading_speed', RangeType::class, array(
+                'attr' => array(
+                    'min' => 0.5,
+                    'max' => 2,
+                    'step' => 0.5,
+                ),
+            ))
             ->add('language', ChoiceType::class, array(
                 'choices' => array_flip($this->languages),
                 'choices_as_values' => true,
