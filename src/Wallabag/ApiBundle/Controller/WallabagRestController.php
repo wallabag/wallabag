@@ -341,7 +341,9 @@ class WallabagRestController extends FOSRestController
         return $this->renderJsonResponse($json);
     }
     /**
-     * Retrive version.
+     * Retrieve version number.
+     *
+     * @ApiDoc()
      *
      * @return Response
      */

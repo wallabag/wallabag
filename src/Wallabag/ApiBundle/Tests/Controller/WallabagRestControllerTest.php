@@ -337,14 +337,14 @@ class WallabagRestControllerTest extends WallabagApiTestCase
         $this->assertCount(0, $entries);
     }
 
-    public function testGetVersion(){
-        
-        $this->client->request('GET','/api/version');
+    public function testGetVersion()
+    {
+        $this->client->request('GET', '/api/version');
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
-        $this->assertEquals($this->client->getContainer()->getParameter('wallabag_core.version'),$content);
+        $this->assertEquals($this->client->getContainer()->getParameter('wallabag_core.version'), $content);
     }
 }
