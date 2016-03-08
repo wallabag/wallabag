@@ -154,6 +154,7 @@ entry:
         status_label: 'Status'
         archived_label: 'Zarchiwizowane'
         starred_label: 'Oznaczone gwiazdką'
+        unread_label: 'Nieprzeczytane'
         preview_picture_label: 'Posiada podgląd obrazu'
         preview_picture_help: 'Podgląd obrazu'
         language_label: 'Język'
@@ -396,6 +397,7 @@ flashes:
         notice:
             entry_already_saved: 'Wpis już został dodany %date%'
             entry_saved: 'Wpis zapisany'
+            # entry_saved_failed: 'Failed to save entry'
             entry_updated: 'Wpis zaktualizowany'
             entry_reloaded: 'Wpis ponownie załadowany'
             entry_reload_failed: 'Błąd ponownego załadowania'

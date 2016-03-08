@@ -23,13 +23,13 @@ You'll need the following extensions for wallabag to work. Some of these may alr
 - php-gettext
 - php-tokenizer
 
-wallabag uses PDO to connect to database, so you'll need one of:
+wallabag uses PDO to connect to the database, so you'll need one of the following:
 
 - pdo_mysql
 - pdo_sqlite
 - pdo_pgsql
 
-and it's corresponding database server.
+and its corresponding database server.
 
 Installation
 ------------
@@ -37,7 +37,7 @@ Installation
 On a dedicated web server (recommended way)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-wallabag uses a big number of libraries in order to function. These libraries must be installed with a tool called Composer. You need to install it if you don't already have.
+wallabag uses a large number of libraries in order to function. These libraries must be installed with a tool called Composer. You need to install it if you have not already done so.
 
 Install Composer:
 
@@ -47,13 +47,13 @@ Install Composer:
 
 You can find specific instructions `here <https://getcomposer.org/doc/00-intro.md>`__:
 
-To install wallabag itself, you must run these two commands:
+To install wallabag itself, you must run the following commands:
 
 ::
 
     git clone https://github.com/wallabag/wallabag.git
     cd wallabag
-    git checkout 2.0.4
+    git checkout 2.0.5
     SYMFONY_ENV=prod composer install --no-dev -o --prefer-dist
     php bin/console wallabag:install --env=prod
 
@@ -67,17 +67,17 @@ And access wallabag at http://yourserverip:8000
 
 .. tip::
 
-    To define parameters with environment variables, you have to set these variables with ``SYMFONY__`` prefix. For example, ``SYMFONY__DATABASE_DRIVER``. You can have a look to the `Symfony documentation <http://symfony.com/doc/current/cookbook/configuration/external_parameters.html>`__.
+    To define parameters with environment variables, you have to set these variables with ``SYMFONY__`` prefix. For example, ``SYMFONY__DATABASE_DRIVER``. You can have a look at `Symfony documentation <http://symfony.com/doc/current/cookbook/configuration/external_parameters.html>`__.
 
 On a shared hosting
 ~~~~~~~~~~~~~~~~~~~
 
-We provide you a package with all dependancies inside.
+We provide a package with all dependencies inside.
 The default configuration uses SQLite for the database. If you want to change these settings, please edit ``app/config/parameters.yml``.
 
 We already created a user: login and password are ``wallabag``.
 
-.. caution:: With this package, wallabag don't check mandatory extensions used in the application (theses checks are made during ``composer install`` when you have a dedicated web server, see above).
+.. caution:: With this package, wallabag doesn't check for mandatory extensions used in the application (theses checks are made during ``composer install`` when you have a dedicated web server, see above).
 
 Execute this command to download and extract the latest package:
 
@@ -85,7 +85,7 @@ Execute this command to download and extract the latest package:
 
     wget http://wllbg.org/latest-v2-package && tar xvf latest-v2-package
 
-Now, read the following documentation to create your virtual host, then access to your wallabag.
+Now, read the following documentation to create your virtual host, then access your wallabag.
 If you changed the database configuration to use MySQL or PostgreSQL, you need to create a user via this command ``php bin/console wallabag:install --env=prod``.
 
 Installation with Docker
@@ -151,7 +151,7 @@ After reloading or restarting Apache, you should now be able to access wallabag 
 Configuration on Nginx
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Assuming you install wallabag in the ``/var/www/wallabag`` folder, here's the recipe for wallabag :
+Assuming you installed wallabag in the ``/var/www/wallabag`` folder, here's the recipe for wallabag :
 
 ::
 
@@ -258,7 +258,7 @@ It has to be the same for the following folders
 * /var/www/wallabag/bin/
 * /var/www/wallabag/app/config/
 * /var/www/wallabag/vendor/
-* /var/www/wallabag/data/  
+* /var/www/wallabag/data/
 
 by entering
 
@@ -269,10 +269,56 @@ by entering
    chown -R www-data:www-data /var/www/wallabag/vendor
    chown -R www-data:www-data /var/www/wallabag/data/
 
-otherwise, sooner or later you will meet this error messages
+otherwise, sooner or later you will see these error messages:
 
 .. code-block:: bash
 
     Unable to write to the "bin" directory.
     file_put_contents(app/config/parameters.yml): failed to open stream: Permission denied
     file_put_contents(/.../wallabag/vendor/autoload.php): failed to open stream: Permission denied
+
+Additional rules for SELinux
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If SELinux is enabled on your system, you will need to configure additional contexts in order for wallabag to function properly. To check if SELinux is enabled, simply enter the following:
+
+``getenforce``
+
+This will return ``Enforcing`` if SELinux is enabled. Creating a new context involves the following syntax:
+
+``semanage fcontext -a -t <context type> <full path>``
+
+For example:
+
+``semanage fcontext -a -t httpd_sys_content_t "/var/www/wallabag(/.*)?"``
+
+This will recursively apply the httpd_sys_content_t context to the wallabag directory and all underlying files and folders. The following rules are needed:
+
++-----------------------------------+----------------------------+
+| Full path                         | Context                    |
++===================================+============================+
+| /var/www/wallabag(/.*)?           | ``httpd_sys_content_t``    |
++-----------------------------------+----------------------------+
+| /var/www/wallabag/data(/.*)?      | ``httpd_sys_rw_content_t`` |
++-----------------------------------+----------------------------+
+| /var/www/wallabag/var/logs(/.*)?  | ``httpd_log_t``            |
++-----------------------------------+----------------------------+
+| /var/www/wallabag/var/cache(/.*)? | ``httpd_cache_t``          |
++-----------------------------------+----------------------------+
+
+After creating these contexts, enter the following in order to apply your rules:
+
+``restorecon -R -v /var/www/wallabag``
+
+You can check contexts in a directory by typing ``ls -lZ`` and you can see all of your current rules with ``semanage fcontext -l -C``.
+
+If you're installing the preconfigured latest-v2-package, then an additional rule is needed during the initial setup:
+
+``semanage fcontext -a -t httpd_sys_rw_content_t "/var/www/wallabag/var"``
+
+After you successfully access your wallabag and complete the initial setup, this context can be removed:
+
+::
+
+    semanage fcontext -d -t httpd_sys_rw_content_t "/var/www/wallabag/var"
+    retorecon -R -v /var/www/wallabag/var

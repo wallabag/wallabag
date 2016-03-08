@@ -2,29 +2,19 @@
 
 {% block css %}
     {{ parent() }}
-
-    <link rel="stylesheet" href="{{ asset('bundles/wallabagcore/themes/baggy/css/ratatouille.css') }}" media="all">
-    <link rel="stylesheet" href="{{ asset('bundles/wallabagcore/themes/baggy/css/font.css') }}" media="all">
-    <link rel="stylesheet" href="{{ asset('bundles/wallabagcore/themes/baggy/css/main.css') }}" media="all">
-    <link rel="stylesheet" href="{{ asset('bundles/wallabagcore/themes/baggy/css/messages.css') }}" media="all">
-    <link rel="stylesheet" href="{{ asset('bundles/wallabagcore/themes/baggy/css/print.css') }}" media="print">
+    <link rel="stylesheet" href="{{ asset('bundles/wallabagcore/themes/baggy/css/style.min.css') }}"  media="screen,projection,print"/>
 {% endblock %}
 
 {% block scripts %}
     {{ parent() }}
-
-    <script src="{{ asset('bundles/wallabagcore/themes/baggy/js/init.js') }}"></script>
-    <script src="{{ asset('bundles/wallabagcore/themes/baggy/js/closeMessage.js') }}"></script>
-    <script src="{{ asset('bundles/wallabagcore/themes/baggy/js/autoClose.js') }}"></script>
-    <script src="{{ asset('bundles/wallabagcore/themes/baggy/js/saveLink.js') }}"></script>
-    <script src="{{ asset('bundles/wallabagcore/themes/baggy/js/popupForm.js') }}"></script>
+    <script src="{{ asset('bundles/wallabagcore/themes/baggy/js/baggy.min.js') }}"></script>
 {% endblock %}
 
 {% block header %}
     <header class="w600p center mbm">
         <h1 class="logo">
             {% block logo %}
-                <img width="100" height="100" src="{{ asset('bundles/wallabagcore/themes/baggy/img/logo-w.png') }}" alt="wallabag logo" />
+                <img width="100" height="100" src="{{ asset('bundles/wallabagcore/themes/_global/img/logo-w.png') }}" alt="wallabag logo" />
             {% endblock %}
         </h1>
     </header>

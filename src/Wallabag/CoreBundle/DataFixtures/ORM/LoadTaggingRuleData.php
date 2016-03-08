@@ -28,6 +28,14 @@ class LoadTaggingRuleData extends AbstractFixture implements OrderedFixtureInter
 
         $manager->persist($tr2);
 
+        $tr3 = new TaggingRule();
+
+        $tr3->setRule('title matches "wallabag"');
+        $tr3->setTags(['wallabag']);
+        $tr3->setConfig($this->getReference('admin-config'));
+
+        $manager->persist($tr3);
+
         $manager->flush();
     }
 

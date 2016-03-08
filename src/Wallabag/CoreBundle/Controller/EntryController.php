@@ -23,10 +23,16 @@ class EntryController extends Controller
     {
         try {
             $entry = $this->get('wallabag_core.content_proxy')->updateEntry($entry, $entry->getUrl());
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($entry);
             $em->flush();
         } catch (\Exception $e) {
+            $this->get('logger')->error('Error while saving an entry', [
+                'exception' => $e,
+                'entry' => $entry,
+            ]);
+
             return false;
         }
 
@@ -60,11 +66,12 @@ class EntryController extends Controller
                 return $this->redirect($this->generateUrl('view', ['id' => $existingEntry->getId()]));
             }
 
-            $this->updateEntry($entry);
-            $this->get('session')->getFlashBag()->add(
-                'notice',
-                'flashes.entry.notice.entry_saved'
-            );
+            $message = 'flashes.entry.notice.entry_saved';
+            if (false === $this->updateEntry($entry)) {
+                $message = 'flashes.entry.notice.entry_saved_failed';
+            }
+
+            $this->get('session')->getFlashBag()->add('notice', $message);
 
             return $this->redirect($this->generateUrl('homepage'));
         }

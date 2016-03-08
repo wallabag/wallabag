@@ -154,6 +154,7 @@ entry:
         status_label: 'Status'
         archived_label: 'Archiviert'
         starred_label: 'Favorisiert'
+        unread_label: 'Ungelesene'
         preview_picture_label: 'Vorschaubild vorhanden'
         preview_picture_help: 'Vorschaubild'
         language_label: 'Sprache'
@@ -396,6 +397,7 @@ flashes:
         notice:
             entry_already_saved: 'Eintrag bereits am %date% gespeichert'
             entry_saved: 'Eintag gespeichert'
+            # entry_saved_failed: 'Failed to save entry'
             entry_updated: 'Eintrag aktualisiert'
             entry_reloaded: 'Eintrag neugeladen'
             entry_reload_failed: 'Neuladen des Eintrags fehlgeschlagen'

@@ -16,7 +16,7 @@ Then you can install wallabag by executing the following commands:
 ```
     git clone https://github.com/wallabag/wallabag.git
     cd wallabag
-    git checkout 2.0.4
+    git checkout 2.0.5
     SYMFONY_ENV=prod composer install --no-dev -o --prefer-dist
     php bin/console wallabag:install --env=prod
     php bin/console server:run --env=prod

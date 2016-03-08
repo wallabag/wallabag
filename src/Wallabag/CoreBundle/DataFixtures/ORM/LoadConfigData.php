@@ -6,7 +6,6 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Wallabag\CoreBundle\Entity\Config;
-use Wallabag\CoreBundle\Entity\TaggingRule;
 
 class LoadConfigData extends AbstractFixture implements OrderedFixtureInterface
 {
@@ -16,12 +15,6 @@ class LoadConfigData extends AbstractFixture implements OrderedFixtureInterface
     public function load(ObjectManager $manager)
     {
         $adminConfig = new Config($this->getReference('admin-user'));
-        $taggingRule = new TaggingRule();
-
-        $taggingRule->setConfig($adminConfig);
-        $taggingRule->setRule('title matches "wallabag"');
-        $taggingRule->setTags(['wallabag']);
-        $manager->persist($taggingRule);
 
         $adminConfig->setTheme('material');
         $adminConfig->setItemsPerPage(30);

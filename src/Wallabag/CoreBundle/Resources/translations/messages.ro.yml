@@ -154,6 +154,7 @@ entry:
         status_label: 'Status'
         archived_label: 'Arhivat'
         starred_label: 'Steluțe'
+        unread_label: 'Necitite'
         preview_picture_label: 'Are o imagine de previzualizare'
         preview_picture_help: 'Previzualizare imagine'
         language_label: 'Limbă'
@@ -396,6 +397,7 @@ flashes:
         notice:
             # entry_already_saved: 'Entry already saved on %date%'
             # entry_saved: 'Entry saved'
+            # entry_saved_failed: 'Failed to save entry'
             # entry_updated: 'Entry updated'
             # entry_reloaded: 'Entry reloaded'
             # entry_reload_failed: 'Failed to reload entry'

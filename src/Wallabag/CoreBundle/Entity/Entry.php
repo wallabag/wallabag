@@ -177,8 +177,16 @@ class Entry
     private $user;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="entries", cascade={"persist", "remove"})
-     * @ORM\JoinTable
+     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="entries", cascade={"persist"})
+     * @ORM\JoinTable(
+     *  name="entry_tag",
+     *  joinColumns={
+     *      @ORM\JoinColumn(name="entry_id", referencedColumnName="id")
+     *  },
+     *  inverseJoinColumns={
+     *      @ORM\JoinColumn(name="tag_id", referencedColumnName="id")
+     *  }
+     * )
      *
      * @Groups({"entries_for_user", "export_all"})
      */
@@ -526,13 +534,18 @@ class Entry
             }
         }
 
-        $this->tags[] = $tag;
+        $this->tags->add($tag);
         $tag->addEntry($this);
     }
 
     public function removeTag(Tag $tag)
     {
+        if (!$this->tags->contains($tag)) {
+            return;
+        }
+
         $this->tags->removeElement($tag);
+        $tag->removeEntry($this);
     }
 
     /**

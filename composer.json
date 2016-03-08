@@ -48,7 +48,6 @@
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/doctrine-cache-bundle": "^1.2",
         "twig/extensions": "~1.0",
-        "symfony/assetic-bundle": "~2.3",
         "symfony/swiftmailer-bundle": "^2.3",
         "symfony/monolog-bundle": "^2.8",
         "sensio/distribution-bundle": "^5.0",
@@ -81,7 +80,8 @@
         "mnapoli/piwik-twig-extension": "^1.0",
         "lexik/maintenance-bundle": "~2.1",
         "ocramius/proxy-manager": "1.*",
-        "white-october/pagerfanta-bundle": "^1.0"
+        "white-october/pagerfanta-bundle": "^1.0",
+        "mouf/nodejs-installer": "~1.0"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "~2.2",
@@ -95,7 +95,6 @@
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
         ],
@@ -112,7 +111,6 @@
         "symfony-var-dir": "var",
         "symfony-web-dir": "web",
         "symfony-tests-dir": "tests",
-        "symfony-assets-install": "relative",
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"
         }

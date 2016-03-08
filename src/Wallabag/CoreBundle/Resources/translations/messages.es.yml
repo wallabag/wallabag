@@ -154,6 +154,7 @@ entry:
         status_label: 'Estatus'
         archived_label: 'Archivado'
         starred_label: 'Favorito'
+        unread_label: 'Sin leer'
         preview_picture_label: 'Hay una foto'
         preview_picture_help: 'Foto de preview'
         language_label: 'Idioma'
@@ -396,6 +397,7 @@ flashes:
         notice:
             entry_already_saved: 'Entrada ya guardada por %fecha%'
             entry_saved: 'Entrada guardada'
+            # entry_saved_failed: 'Failed to save entry'
             entry_updated: 'Entrada actualizada'
             entry_reloaded: 'Entrada recargada'
             entry_reload_failed: 'Entrada recargada reprobada'
