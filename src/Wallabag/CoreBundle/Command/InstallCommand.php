@@ -375,7 +375,6 @@ class InstallCommand extends ContainerAwareCommand
 
         $this
             ->runCommand('assets:install')
-            ->runCommand('assetic:dump')
         ;
 
         $this->defaultOutput->writeln('');
