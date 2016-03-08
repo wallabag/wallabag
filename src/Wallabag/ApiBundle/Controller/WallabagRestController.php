@@ -340,6 +340,21 @@ class WallabagRestController extends FOSRestController
 
         return $this->renderJsonResponse($json);
     }
+    /**
+     * Retrieve version number.
+     *
+     * @ApiDoc()
+     *
+     * @return Response
+     */
+    public function getVersionAction()
+    {
+        $version = $this->container->getParameter('wallabag_core.version');
+
+        $json = $this->get('serializer')->serialize($version, 'json');
+
+        return $this->renderJsonResponse($json);
+    }
 
     /**
      * Validate that the first id is equal to the second one.

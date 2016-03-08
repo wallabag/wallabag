@@ -22,6 +22,11 @@
                                     <input class="file-path validate" type="text">
                                 </div>
                             </div>
+                            <div class="input-field col s6 with-checkbox">
+                                <h6>{% trans %}Mark all as read ?{% endtrans %}</h6>
+                                {{ form_widget(form.mark_as_read) }}
+                                <label for="upload_import_file_mark_as_read">{% trans %}Mark all imported entries as read{% endtrans %}</label>
+                            </div>
                         </div>
                         <div class="hidden">{{ form_rest(form) }}</div>
                         <button class="btn waves-effect waves-light" type="submit" name="action">

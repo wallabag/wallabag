@@ -4,14 +4,14 @@ Se créer un compte
 Sur la page de connexion, cliquez sur le bouton ``Créer un compte``.
 
 .. image:: ../../img/user/registration_form.png
-   :alt: Registration form
+   :alt: Formulaire de création de compte
    :align: center
 
 Vous devez renseigner le formulaire. Faites attention de bien renseigner une adresse
 email valide, nous allons vous envoyer un email d'activation.
 
 .. image:: ../../img/user/sent_email.png
-   :alt: Email was sent to activate account
+   :alt: Un email a été envoyé pour activer votre compte
    :align: center
 
 Vérifiez votre boite de réception, vous avez un nouvel email avec un lien comme celui-ci
@@ -21,7 +21,7 @@ Cliquez dessus pour activer votre compte.
 Votre compte est maintenant actif.
 
 .. image:: ../../img/user/activated_account.png
-   :alt: Welcome on board!
+   :alt: Bienvenue à bord !
    :align: center
 
 Foire aux questions

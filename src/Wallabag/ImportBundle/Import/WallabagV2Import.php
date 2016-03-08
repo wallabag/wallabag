@@ -51,7 +51,7 @@ class WallabagV2Import extends WallabagV1Import implements ImportInterface
             $entry = new Entry($this->user);
             $entry->setUrl($importedEntry['url']);
             $entry->setTitle($importedEntry['title']);
-            $entry->setArchived($importedEntry['is_archived']);
+            $entry->setArchived($importedEntry['is_archived'] || $this->markAsRead);
             $entry->setStarred($importedEntry['is_starred']);
             $entry->setContent($importedEntry['content']);
             $entry->setReadingTime($importedEntry['reading_time']);

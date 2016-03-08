@@ -16,7 +16,19 @@
                     <ul>
                         <li><a href="{{ path('config') }}">{% trans %}Change language and design{% endtrans %}</a></li>
                         <li><a href="{{ path('config') }}#set2">{% trans %}Enable RSS feeds{% endtrans %}</a></li>
+                        <li><a href="{{ path('config') }}#set5">{% trans %}Write rules to automatically tag your articles{% endtrans %}</a></li>
                     </ul>
+                    {% if is_granted('ROLE_SUPER_ADMIN') %}
+                    <h4>{% trans %}Administration{% endtrans %}</h4>
+                    <p>{% trans %}As a administrator, you have privileges on wallabag. You can:{% endtrans %}</p>
+                    <ul>
+                        <li><a href="{{ path('config') }}#set6">{% trans %}Create a new user{% endtrans %}</a></li>
+                        <li><a href="{{ path('craue_config_settings_modify') }}#set-analytics">{% trans %}Configure analytics{% endtrans %}</a></li>
+                        <li><a href="{{ path('craue_config_settings_modify') }}#set-entry">{% trans %}Enable some parameters about article sharing{% endtrans %}</a></li>
+                        <li><a href="{{ path('craue_config_settings_modify') }}#set-export">{% trans %}Configure export{% endtrans %}</a></li>
+                        <li><a href="{{ path('craue_config_settings_modify') }}#set-import">{% trans %}Configure import{% endtrans %}</a></li>
+                    </ul>
+                    {% endif %}
                     <h4>{% trans %}First steps{% endtrans %}</h4>
                     <ul>
                         <li><a href="{{ path('new') }}">{% trans %}Save your first article{% endtrans %}</a></li>
@@ -27,12 +39,19 @@
                     <ul>
                         <li><a href="{{ path('import_pocket') }}">{% trans %}Migrate from Pocket{% endtrans %}</a></li>
                         <li><a href="{{ path('import_wallabag_v1') }}">{% trans %}Migrate from wallabag v1{% endtrans %}</a></li>
+                        <li><a href="{{ path('import_wallabag_v2') }}">{% trans %}Migrate from wallabag v2{% endtrans %}</a></li>
+                    </ul>
+                    <h4>{% trans %}Developers{% endtrans %}</h4>
+                    <ul>
+                        <li><a href="{{ path('developer') }}">{% trans %}Create your third application{% endtrans %}</a></li>
                     </ul>
                     <h4>{% trans %}Full documentation{% endtrans %}</h4>
                     <ul>
-                        <li><a href="http://wallabag.readthedocs.org">{% trans %}Convert your articles into ePUB or PDF{% endtrans %}</a></li>
-                        <li><a href="http://wallabag.readthedocs.org">{% trans %}See how you can look for an article by using search engine and filters{% endtrans %}</a></li>
-                        <li><a href="http://wallabag.readthedocs.org">{% trans %}And so many other articles!{% endtrans %}</a></li>
+                        <li><a href="http://doc.wallabag.org/en/v2/user/annotations.html">{% trans %}Annotate your article{% endtrans %}</a></li>
+                        <li><a href="http://doc.wallabag.org/en/v2/user/download_articles.html">{% trans %}Convert your articles into ePUB or PDF{% endtrans %}</a></li>
+                        <li><a href="http://doc.wallabag.org/en/v2/user/filters.html">{% trans %}See how you can look for an article by using search engine and filters{% endtrans %}</a></li>
+                        <li><a href="http://doc.wallabag.org/en/v2/user/errors_during_fetching.html">{% trans %}What can I do if an article encounters errors during fetching?{% endtrans %}</a></li>
+                        <li><a href="http://doc.wallabag.org/">{% trans %}And so many other articles!{% endtrans %}</a></li>
                     </ul>
                     <h4>{% trans %}Support{% endtrans %}</h4>
                     <p>{% trans %}If you need some help, we are here for you.{% endtrans %}</p>

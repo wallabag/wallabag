@@ -23,5 +23,5 @@ Si wallabag échoue en récupérant l'article, vous pouvez cliquer sur le bouton
 (le troisième sur l'image ci-dessous).
 
 .. image:: ../../img/user/refetch.png
-   :alt: Refetch content
+   :alt: Réessayer de récupérer le contenu
    :align: center
