@@ -1,0 +1,68 @@
+{% extends "WallabagCoreBundle::layout.html.twig" %}
+
+{% block title %}{% trans %}Developer{% endtrans %}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col s12">
+        <div class="card-panel settings">
+
+            <div class="row">
+                <h3>{% trans %}Welcome to the wallabag API{% endtrans %}</h3>
+
+                <h4>{% trans %}Documentation{% endtrans %}</h4>
+
+                <ul>
+                    <li><a href="{{ path('developer_howto_firstapp') }}">{% trans %}How to create my first application{% endtrans %}</a></li>
+                    <li><a href="{{ path('nelmio_api_doc_index') }}">{% trans %}View full API documentation{% endtrans %}</a></li>
+                </ul>
+
+                <h4>{% trans %}Clients{% endtrans %}</h4>
+                <ul>
+                    <li><a href="{{ path('developer_create_client') }}">{% trans %}Create a new client{% endtrans %}</a></li>
+                </ul>
+
+                <h4>{% trans %}Existing clients{% endtrans %}</h4>
+                {% if clients %}
+                    <ul class="collapsible" data-collapsible="expandable">
+                        {% for client in clients %}
+                            <li>
+                                <div class="collapsible-header">#{{ client.id }}</div>
+                                <div class="collapsible-body">
+                                    <table class="striped">
+                                        <tr>
+                                            <td>{% trans %}Client ID{% endtrans %}</td>
+                                            <td><strong><code>{{ client.id }}_{{ client.randomId }}</code></strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>{% trans %}Client secret{% endtrans %}</td>
+                                            <td><strong><code>{{ client.secret }}</code></strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>{% trans %}Redirect URIs{% endtrans %}</td>
+                                            <td><strong><code>{{ client.redirectUris|json_encode() }}</code></strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>{% trans %}Grant type allowed{% endtrans %}</td>
+                                            <td><strong><code>{{ client.allowedGrantTypes|json_encode() }}</code></strong></td>
+                                        </tr>
+                                    </table>
+                                    <p>
+                                        {% trans %}You have the ability to remove this client. This action is IRREVERSIBLE !{% endtrans %}<br/>
+                                        {% trans %}If you remove it, every app configured with that client won't be able to auth on your wallabag.{% endtrans %}<br/>
+                                        <a class="waves-effect waves-light red btn" href="{{ path('developer_delete_client', {'id': client.id}) }}">{% trans %}Remove this client{% endtrans %}</a>
+                                    </p>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    {% trans %}No client yet.{% endtrans %}
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
