@@ -126,5 +126,48 @@ Share: 'Deling'
 Download: 'Download'
 Does this article appear wrong?: "Vises artiklen forkert?"
 Problems?: 'Problemer?'
+<<<<<<< bd561aeb66e1b67a8db188042fbe6d556564341d
+<<<<<<< d53eae374de162d4d5c82aae3804bdab2fbb0e4c
+<<<<<<< 7c19feadf67d508fadf7619ae95f3e83ab1352b4
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< dccad4f04ac87f78b9170fdd9026b0688e8f76ff
+>>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
+=======
+<<<<<<< HEAD
+<<<<<<< 2b667d225f706a2b04e51732146402d2f08924ce
+>>>>>>> Adding Danish translations to Wallabag v2
+=======
+<<<<<<< HEAD
+>>>>>>> added newline
 Edit title: "Rediger titel"
 
+=======
+Edit title: "Rediger titel"
+<<<<<<< bd561aeb66e1b67a8db188042fbe6d556564341d
+>>>>>>> Adding Danish translations to Wallabag v2
+=======
+Edit title: "Rediger titel"
+
+>>>>>>> added newline
+=======
+>>>>>>> 6a07680... Adding Danish translations to Wallabag v2
+=======
+Edit title: "Rediger titel"
+
+>>>>>>> 714a712... added newline
+<<<<<<< dccad4f04ac87f78b9170fdd9026b0688e8f76ff
+>>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
+=======
+=======
+Edit title: "Rediger titel"
+>>>>>>> 6a07680... Adding Danish translations to Wallabag v2
+<<<<<<< 2b667d225f706a2b04e51732146402d2f08924ce
+>>>>>>> Adding Danish translations to Wallabag v2
+=======
+=======
+Edit title: "Rediger titel"
+
+>>>>>>> 714a712... added newline
+>>>>>>> added newline

@@ -35,7 +35,41 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Craue\ConfigBundle\CraueConfigBundle(),
             new Lexik\Bundle\MaintenanceBundle\LexikMaintenanceBundle(),
+<<<<<<< bd561aeb66e1b67a8db188042fbe6d556564341d
+<<<<<<< 564b1b10a638ac2b981f05716f84104cd63bd099
+<<<<<<< e9a854c48821720618d0c607260ed92a2f43fa37
             new Wallabag\AnnotationBundle\WallabagAnnotationBundle(),
+=======
+            new Wallabag\CommentBundle\WallabagCommentBundle(),
+>>>>>>> Comment work with annotator v2
+=======
+            new Wallabag\AnnotationBundle\WallabagAnnotationBundle(),
+>>>>>>> Rename CommentBundle with AnnotationBundle
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+            new Wallabag\AnnotationBundle\WallabagAnnotationBundle(),
+=======
+            new Wallabag\CommentBundle\WallabagCommentBundle(),
+>>>>>>> 0c4e4ab... Comment work with annotator v2
+=======
+            new Wallabag\AnnotationBundle\WallabagAnnotationBundle(),
+>>>>>>> 9e1ce38... Rename CommentBundle with AnnotationBundle
+<<<<<<< 89a1cc72d308247cdb2b4cdb832122cafc3f7e87
+>>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
+=======
+=======
+            new Wallabag\CommentBundle\WallabagCommentBundle(),
+>>>>>>> 0c4e4ab... Comment work with annotator v2
+<<<<<<< 7f6c84ba7030da49003ff8fd6fc8043e69d0a4ca
+>>>>>>> Comment work with annotator v2
+=======
+=======
+            new Wallabag\AnnotationBundle\WallabagAnnotationBundle(),
+>>>>>>> 9e1ce38... Rename CommentBundle with AnnotationBundle
+>>>>>>> Rename CommentBundle with AnnotationBundle
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

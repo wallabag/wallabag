@@ -98,7 +98,56 @@ Toggle favorite: 'Marquer comme favori'
 Delete: 'Supprimer'
 "{0} There is no entry.|{1} There is one entry.|]1,Inf[ There are %count% entries.": "{0} Il n'y a pas d'articles.|{1} Il y a un article.|]1,Inf[ Il y a %count% articles."
 http://website: "http://siteweb"
+<<<<<<< bd561aeb66e1b67a8db188042fbe6d556564341d
+<<<<<<< 564b1b10a638ac2b981f05716f84104cd63bd099
+<<<<<<< 9bd5c35915f4e9df1b0e2e6bae48faa29310cd75
+<<<<<<< ca0b5d5d06b24233c1fce8378918c7e061031862
 "{0} No annotations|{1} One annotation|]1,Inf[ %nbAnnotations% annotations": "{0} Aucune annotation|{1} Une annotation|]1,Inf[ %nbAnnotations% annotations"
+=======
+"{0} No annotations|{1} One annotation|]1,Inf[ %nbComments% annotations": "{0} Aucun commentaire|{1} Un commentaire|]1,Inf[ %nbComments% commentaires"
+>>>>>>> display how much comments there are for an entry
+=======
+"{0} No annotations|{1} One annotation|]1,Inf[ %nbComments% annotations": "{0} Aucune annotation|{1} Une annotation|]1,Inf[ %nbComments% annotations"
+>>>>>>> changed french translation from commentaire to annotation
+=======
+"{0} No annotations|{1} One annotation|]1,Inf[ %nbAnnotations% annotations": "{0} Aucune annotation|{1} Une annotation|]1,Inf[ %nbAnnotations% annotations"
+>>>>>>> Rename CommentBundle with AnnotationBundle
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+"{0} No annotations|{1} One annotation|]1,Inf[ %nbAnnotations% annotations": "{0} Aucune annotation|{1} Une annotation|]1,Inf[ %nbAnnotations% annotations"
+=======
+"{0} No annotations|{1} One annotation|]1,Inf[ %nbComments% annotations": "{0} Aucun commentaire|{1} Un commentaire|]1,Inf[ %nbComments% commentaires"
+>>>>>>> c7a3c57... display how much comments there are for an entry
+=======
+"{0} No annotations|{1} One annotation|]1,Inf[ %nbComments% annotations": "{0} Aucune annotation|{1} Une annotation|]1,Inf[ %nbComments% annotations"
+>>>>>>> ed29888... changed french translation from commentaire to annotation
+=======
+"{0} No annotations|{1} One annotation|]1,Inf[ %nbAnnotations% annotations": "{0} Aucune annotation|{1} Une annotation|]1,Inf[ %nbAnnotations% annotations"
+>>>>>>> 9e1ce38... Rename CommentBundle with AnnotationBundle
+<<<<<<< 858dc66d4fc9d70db8e60014478d921abbee8433
+>>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
+=======
+=======
+"{0} No annotations|{1} One annotation|]1,Inf[ %nbComments% annotations": "{0} Aucun commentaire|{1} Un commentaire|]1,Inf[ %nbComments% commentaires"
+>>>>>>> c7a3c57... display how much comments there are for an entry
+<<<<<<< a1d4ee5258b8addbb5d68e8f079a2b93f6a1eb68
+>>>>>>> display how much comments there are for an entry
+=======
+=======
+"{0} No annotations|{1} One annotation|]1,Inf[ %nbComments% annotations": "{0} Aucune annotation|{1} Une annotation|]1,Inf[ %nbComments% annotations"
+>>>>>>> ed29888... changed french translation from commentaire to annotation
+<<<<<<< 7f6c84ba7030da49003ff8fd6fc8043e69d0a4ca
+>>>>>>> changed french translation from commentaire to annotation
+=======
+=======
+"{0} No annotations|{1} One annotation|]1,Inf[ %nbAnnotations% annotations": "{0} Aucune annotation|{1} Une annotation|]1,Inf[ %nbAnnotations% annotations"
+>>>>>>> 9e1ce38... Rename CommentBundle with AnnotationBundle
+>>>>>>> Rename CommentBundle with AnnotationBundle
 
 # Edit entry
 Edit an entry: "Éditer un article"

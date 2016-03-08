@@ -38,8 +38,55 @@ wallabag_core:
         fa: 'فارسی'
         ro: 'Română'
         pl: 'Polish'
+<<<<<<< bd561aeb66e1b67a8db188042fbe6d556564341d
+<<<<<<< 5ab4450e43fed9681264bec94b1c34e892c36373
+<<<<<<< 8d2309569521a5484978043c33bd5b4aca319a71
         da: 'Dansk'
         es: 'Español'
+<<<<<<< 50239a1d9be5567fef656b51d80b0042693bb8e6
+=======
+	da: 'Dansk'
+>>>>>>> config.yml edit to include Danish
+=======
+        da: 'Dansk'
+>>>>>>> Fixed indentation issue
+=======
+>>>>>>> Spanish translation
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+        da: 'Dansk'
+        es: 'Español'
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	da: 'Dansk'
+>>>>>>> 392f697... config.yml edit to include Danish
+=======
+        da: 'Dansk'
+>>>>>>> f3f606b... Fixed indentation issue
+=======
+>>>>>>> dcbbcb0... Spanish translation
+<<<<<<< 0410cf4163c0ddaa2299350384774a9f619a669e
+>>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
+=======
+=======
+	da: 'Dansk'
+>>>>>>> 392f697... config.yml edit to include Danish
+<<<<<<< 9f45f0cf39b8f51ad9545f8c4439c3af33f0f3a7
+>>>>>>> config.yml edit to include Danish
+=======
+=======
+        da: 'Dansk'
+>>>>>>> f3f606b... Fixed indentation issue
+<<<<<<< 2694aa86ade91dc57213b34e311cf8305e578417
+>>>>>>> Fixed indentation issue
+=======
+=======
+>>>>>>> dcbbcb0... Spanish translation
+>>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
     items_on_page: 12
     theme: material
     language: en

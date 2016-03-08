@@ -14,7 +14,41 @@ Thème
 
 L'affichage de wallabag est personnalisable. C'est ici que vous choisissez le thème
 que vous préférez. Vous pouvez aussi en créer un nouveau, une documentation sera
+<<<<<<< bd561aeb66e1b67a8db188042fbe6d556564341d
+<<<<<<< 14d0123515c3e1575dd5bdb6b2ecce88b210cf92
+<<<<<<< 38f8d47177e477c9907a876c37022ccaea3d409e
 disponible pour guider. Le thème par défaut est ``Material``, c'est celui
+=======
+disponible pour apprendre comment. Le thème par défaut est ``Material``, c'est celui
+>>>>>>> minor typofix again
+=======
+disponible pour guider. Le thème par défaut est ``Material``, c'est celui
+>>>>>>> minor fix
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+disponible pour guider. Le thème par défaut est ``Material``, c'est celui
+=======
+disponible pour apprendre comment. Le thème par défaut est ``Material``, c'est celui
+>>>>>>> 23ae15a... minor typofix again
+=======
+disponible pour guider. Le thème par défaut est ``Material``, c'est celui
+>>>>>>> 81c386f... minor fix
+<<<<<<< e6ac2691661401e8a2382638fe34036a289daa3a
+>>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
+=======
+=======
+disponible pour apprendre comment. Le thème par défaut est ``Material``, c'est celui
+>>>>>>> 23ae15a... minor typofix again
+<<<<<<< 564c656945155add328bde01912bd623d3a97630
+>>>>>>> minor typofix again
+=======
+=======
+disponible pour guider. Le thème par défaut est ``Material``, c'est celui
+>>>>>>> 81c386f... minor fix
+>>>>>>> minor fix
 qui est utilisé dans les captures d'écran de la documentation.
 
 Nombre d'articles par page
@@ -31,12 +65,76 @@ pour que la nouvelle langue soit prise en compte.
 RSS
 ---
 
+<<<<<<< bd561aeb66e1b67a8db188042fbe6d556564341d
+<<<<<<< 14d0123515c3e1575dd5bdb6b2ecce88b210cf92
+<<<<<<< 38f8d47177e477c9907a876c37022ccaea3d409e
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< e6ac2691661401e8a2382638fe34036a289daa3a
+>>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
+=======
+<<<<<<< HEAD
+<<<<<<< 564c656945155add328bde01912bd623d3a97630
+>>>>>>> minor typofix again
+=======
+<<<<<<< HEAD
+>>>>>>> minor fix
 wallabag propose un flux RSS pour chaque statut d'article : non lus, favoris et lus.
 
 Tout d'abord, vous devez vous créer un jeton personnel : cliquez sur ``Créez votre jeton``.
 Il est possible de regénérer votre jeton en cliquant sur ``Réinitialisez votre jeton``.
 
 Vous avez maintenant trois liens, un par statut : ajoutez-les dans votre agrégateur de flux RSS préféré.
+=======
+wallabag propose un flux RSS pour chaque statut d'article : non lus, favoris et lus.
+=======
+wallabag propose un flux RSS pour chaque statut d'article : non lus, favoris et lus.
+<<<<<<< bd561aeb66e1b67a8db188042fbe6d556564341d
+>>>>>>> minor fix
+=======
+>>>>>>> 81c386f... minor fix
+>>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
+
+Tout d'abord, vous devez vous créer un jeton personnel : cliquez sur ``Créez votre jeton``.
+Il est possible de regénérer votre jeton en cliquant sur ``Réinitialisez votre jeton``.
+
+<<<<<<< bd561aeb66e1b67a8db188042fbe6d556564341d
+<<<<<<< 14d0123515c3e1575dd5bdb6b2ecce88b210cf92
+Vous avez maintenant trois liens, un par statut : ajoutez-les dans votre agrégateur de flux RSS préféré.
+>>>>>>> minor typofix again
+=======
+Vous avez maintenant trois liens, un par statut : ajoutez-les dans votre agrégateur de flux RSS préféré.
+>>>>>>> minor fix
+=======
+<<<<<<< HEAD
+Vous avez maintenant trois liens, un par statut : ajoutez-les dans votre agrégateur de flux RSS préféré.
+>>>>>>> 23ae15a... minor typofix again
+=======
+Vous avez maintenant trois liens, un par statut : ajoutez-les dans votre agrégateur de flux RSS préféré.
+>>>>>>> 81c386f... minor fix
+<<<<<<< e6ac2691661401e8a2382638fe34036a289daa3a
+>>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
+=======
+=======
+wallabag propose un flux RSS pour chaque statut d'article : non lus, favoris et lus.
+=======
+wallabag propose un flux RSS pour chaque statut d'article : non lus, favoris et lus.
+>>>>>>> 81c386f... minor fix
+
+Tout d'abord, vous devez vous créer un jeton personnel : cliquez sur ``Créez votre jeton``.
+Il est possible de regénérer votre jeton en cliquant sur ``Réinitialisez votre jeton``.
+
+<<<<<<< HEAD
+Vous avez maintenant trois liens, un par statut : ajoutez-les dans votre agrégateur de flux RSS préféré.
+>>>>>>> 23ae15a... minor typofix again
+<<<<<<< 564c656945155add328bde01912bd623d3a97630
+>>>>>>> minor typofix again
+=======
+=======
+Vous avez maintenant trois liens, un par statut : ajoutez-les dans votre agrégateur de flux RSS préféré.
+>>>>>>> 81c386f... minor fix
+>>>>>>> minor fix
 
 Vous pouvez aussi définir combien d'articles vous souhaitez dans vos flux RSS
 (50 est la valeur par défaut).
@@ -52,7 +150,41 @@ Double authentification (2FA)
     L'authentification à deux facteurs (également appelée 2FA) est une technologie brevetée en 1984
     qui fournit l'identification des utilisateurs au moyen de la combinaison de deux composants différents .
 
+<<<<<<< bd561aeb66e1b67a8db188042fbe6d556564341d
+<<<<<<< ff9b9a313daaf3929dcc3913eddae91054316a91
+<<<<<<< 14d0123515c3e1575dd5bdb6b2ecce88b210cf92
 https://fr.wikipedia.org/wiki/Authentification_forte
+=======
+https://fr.wikipedia.org/wiki/Authentification_forte#Pourquoi_l.27authentification_forte_et_l.27authentification_.C3.A0_deux-facteurs_.3F
+>>>>>>> minor fix
+=======
+https://fr.wikipedia.org/wiki/Authentification_forte
+>>>>>>> fixing previous stuff and more
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+https://fr.wikipedia.org/wiki/Authentification_forte
+=======
+https://fr.wikipedia.org/wiki/Authentification_forte#Pourquoi_l.27authentification_forte_et_l.27authentification_.C3.A0_deux-facteurs_.3F
+>>>>>>> 81c386f... minor fix
+=======
+https://fr.wikipedia.org/wiki/Authentification_forte
+>>>>>>> f4f50fc... fixing previous stuff and more
+<<<<<<< 564c656945155add328bde01912bd623d3a97630
+>>>>>>> Add the timezone as an argument in the docker-compose. For that, need to use v2 of docker-compose (with version >= 1.6.0)
+=======
+=======
+https://fr.wikipedia.org/wiki/Authentification_forte#Pourquoi_l.27authentification_forte_et_l.27authentification_.C3.A0_deux-facteurs_.3F
+>>>>>>> 81c386f... minor fix
+<<<<<<< 597e578680f3ccf810b39c04062e424cb52bf330
+>>>>>>> minor fix
+=======
+=======
+https://fr.wikipedia.org/wiki/Authentification_forte
+>>>>>>> f4f50fc... fixing previous stuff and more
+>>>>>>> fixing previous stuff and more
 
 Si vous activez 2FA, à chaque tentative de connexion à wallabag, vous recevrez
 un code par email. Vous devez renseigner ce code dans le formulaire suivant :
