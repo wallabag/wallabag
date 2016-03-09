@@ -28,14 +28,14 @@ class EntryControllerTest extends WallabagCoreTestCase
         $client->followRedirect();
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertContains('We\'ll accompany you to visit wallabag', $client->getResponse()->getContent());
+        $this->assertContains('quickstart.intro.paragraph_1', $client->getResponse()->getContent());
 
         // Test if quickstart is disabled when user has 1 entry
         $crawler = $client->request('GET', '/new');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
-        $form = $crawler->filter('button[type=submit]')->form();
+        $form = $crawler->filter('form[name=entry]')->form();
 
         $data = array(
             'entry[url]' => $this->url,
@@ -46,7 +46,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $client->followRedirect();
 
         $client->request('GET', '/unread/list');
-        $this->assertContains('There is one entry.', $client->getResponse()->getContent());
+        $this->assertContains('entry.list.number_on_the_page', $client->getResponse()->getContent());
     }
 
     public function testGetNew()
@@ -59,7 +59,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
         $this->assertCount(1, $crawler->filter('input[type=url]'));
-        $this->assertCount(1, $crawler->filter('button[type=submit]'));
+        $this->assertCount(1, $crawler->filter('form[name=entry]'));
     }
 
     public function testPostNewViaBookmarklet()
@@ -96,7 +96,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
-        $form = $crawler->filter('button[type=submit]')->form();
+        $form = $crawler->filter('form[name=entry]')->form();
 
         $crawler = $client->submit($form);
 
@@ -117,7 +117,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
-        $form = $crawler->filter('button[type=submit]')->form();
+        $form = $crawler->filter('form[name=entry]')->form();
 
         $data = array(
             'entry[url]' => $this->url,
@@ -146,7 +146,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
-        $form = $crawler->filter('button[type=submit]')->form();
+        $form = $crawler->filter('form[name=entry]')->form();
 
         $data = array(
             'entry[url]' => $this->url,
@@ -170,7 +170,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
-        $form = $crawler->filter('button[type=submit]')->form();
+        $form = $crawler->filter('form[name=entry]')->form();
 
         $data = array(
             'entry[url]' => $url = 'https://github.com/wallabag/wallabag',

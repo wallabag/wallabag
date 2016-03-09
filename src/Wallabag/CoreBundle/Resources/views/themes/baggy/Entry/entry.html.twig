@@ -5,32 +5,32 @@
 {% block content %}
     <div id="article">
         <header class="mbm">
-            <h1>{{ entry.title|raw }} <a href="{{ path('edit', { 'id': entry.id }) }}" title="{% trans %}Edit title{% endtrans %}">✎</a></h1>
+            <h1>{{ entry.title|raw }} <a href="{{ path('edit', { 'id': entry.id }) }}" title="{{ 'entry.view.edit_title'|trans }}">✎</a></h1>
         </header>
 
         <div id="article_toolbar">
         <ul class="links">
-            <li class="topPosF"><a href="#top" title="{% trans %}Back to top{% endtrans %}" class="tool top icon icon-arrow-up-thick"><span>{% trans %}Back to top{% endtrans %}</span></a></li>
-            <li><a href="{{ entry.url|e }}" target="_blank" title="{% trans %}original{% endtrans %} : {{ entry.title|e }}" class="tool link icon icon-link"><span>{{ entry.domainName|removeWww }}</span></a></li>
-            <li><a title="{% trans %}Re-fetch content{% endtrans %}" class="tool icon icon-reload" href="{{ path('reload_entry', { 'id': entry.id }) }}"><span>{% trans %}Re-fetch content{% endtrans %}</span></a></li>
-            <li><a title="{% if entry.isArchived == 0 %}{% trans %}Mark as read{% endtrans %}{% else %}{% trans %}Mark as unread{% endtrans %}{% endif %}" class="tool icon icon-check {% if entry.isArchived == 0 %}archive-off{% else %}archive{% endif %}" href="{{ path('archive_entry', { 'id': entry.id }) }}"><span>{% if entry.isArchived == 0 %}{% trans %}Mark as read{% endtrans %}{% else %}{% trans %}Mark as unread{% endtrans %}{% endif %}</span></a></li>
-            <li><a title="{% trans %}Favorite{% endtrans %}" class="tool icon icon-star {% if entry.isStarred == 0 %}fav-off{% else %}fav{% endif %}" href="{{ path('star_entry', { 'id': entry.id }) }}"><span>{% trans %}Toggle favorite{% endtrans %}</span></a></li>
-            <li><a id="nav-btn-add-tag" title="{% trans %}Add a tag{% endtrans %}"><span>{% trans %}Tag{% endtrans %}</span></a></li>
-            <li><a title="{% trans %}Delete{% endtrans %}" class="tool delete icon icon-trash" href="{{ path('delete_entry', { 'id': entry.id }) }}"><span>{% trans %}Delete{% endtrans %}</span></a></li>
-            {% if craue_setting('share_twitter') %}<li><a href="https://twitter.com/home?status={{entry.title|url_encode}}%20{{ entry.url|url_encode }}%20via%20@wallabagapp" target="_blank" class="tool twitter icon icon-twitter" title="{% trans %}Tweet{% endtrans %}"><span>{% trans %}Tweet{% endtrans %}</span></a></li>{% endif %}
-            {% if craue_setting('share_mail') %}<li><a href="mailto:?subject={{ entry.title|url_encode }}&amp;body={{ entry.url|url_encode }}%20via%20@wallabagapp" class="tool email icon icon-mail" title="{% trans %}Email{% endtrans %}"><span>{% trans %}Email{% endtrans %}</span></a></li>{% endif %}
-            {% if craue_setting('share_shaarli') %}<li><a href="{{ craue_setting('shaarli_url') }}/index.php?post={{ entry.url|url_encode }}&amp;title={{ entry.title|url_encode }}" target="_blank" class="tool shaarli" title="{% trans %}shaarli{% endtrans %}"><span>{% trans %}shaarli{% endtrans %}</span></a></li>{% endif %}
-            {% if craue_setting('share_diaspora') %}<li><a href="{{ craue_setting('diaspora_url') }}/bookmarklet?url={{ entry.url|url_encode }}&title={{ entry.title|url_encode }}&notes=&v=1&noui=1&jump=doclose" target="_blank" class="tool diaspora icon-image icon-image--diaspora" title="{% trans %}diaspora{% endtrans %}"><span>{% trans %}diaspora{% endtrans %}</span></a></li>{% endif %}
-            {% if craue_setting('carrot') %}<li><a href="https://secure.carrot.org/GiveAndGetBack.do?url={{ entry.url|url_encode }}&title={{ entry.title|url_encode }}" class="tool carrot icon-image icon-image--carrot" target="_blank" title="{% trans %}carrot{% endtrans %}"><span>Carrot</span></a></li>{% endif %}
-            {% if craue_setting('show_printlink') %}<li><a title="{% trans %}Print{% endtrans %}" class="tool icon icon-print" href="javascript: window.print();"><span>{% trans %}Print{% endtrans %}</span></a></li>{% endif %}
+            <li class="topPosF"><a href="#top" title="{{ 'entry.view.left_menu.back_to_top'|trans }}" class="tool top icon icon-arrow-up-thick"><span>{{ 'entry.view.left_menu.set_as_read'|trans }}</span></a></li>
+            <li><a href="{{ entry.url|e }}" target="_blank" title="{{ 'entry.view.original_article'|trans }} : {{ entry.title|e }}" class="tool link icon icon-link"><span>{{ entry.domainName|removeWww }}</span></a></li>
+            <li><a title="{{ 'entry.view.left_menu.re_fetch_content'|trans }}" class="tool icon icon-reload" href="{{ path('reload_entry', { 'id': entry.id }) }}"><span>{{ 'entry.view.left_menu.re_fetch_content'|trans }}</span></a></li>
+            <li><a title="{% if entry.isArchived == 0 %}{{ 'entry.view.left_menu.set_as_read'|trans }}{% else %}{{ 'entry.view.left_menu.set_as_unread'|trans }}{% endif %}" class="tool icon icon-check {% if entry.isArchived == 0 %}archive-off{% else %}archive{% endif %}" href="{{ path('archive_entry', { 'id': entry.id }) }}"><span>{% if entry.isArchived == 0 %}{{ 'entry.view.left_menu.set_as_read'|trans }}{% else %}{{ 'entry.view.left_menu.set_as_unread'|trans }}{% endif %}</span></a></li>
+            <li><a title="{{ 'entry.view.left_menu.set_as_favorite'|trans }}" class="tool icon icon-star {% if entry.isStarred == 0 %}fav-off{% else %}fav{% endif %}" href="{{ path('star_entry', { 'id': entry.id }) }}"><span>{{ 'entry.view.left_menu.set_as_favorite'|trans }}</span></a></li>
+            <li><a id="nav-btn-add-tag" title="{{ 'entry.view.left_menu.add_a_tag'|trans }}"><span>{{ 'entry.view.left_menu.add_a_tag'|trans }}</span></a></li>
+            <li><a title="{{ 'entry.view.left_menu.delete'|trans }}" class="tool delete icon icon-trash" href="{{ path('delete_entry', { 'id': entry.id }) }}"><span>{{ 'entry.view.left_menu.delete'|trans }}</span></a></li>
+            {% if craue_setting('share_twitter') %}<li><a href="https://twitter.com/home?status={{entry.title|url_encode}}%20{{ entry.url|url_encode }}%20via%20@wallabagapp" target="_blank" class="tool twitter icon icon-twitter" title="Tweet"><span>Tweet</span></a></li>{% endif %}
+            {% if craue_setting('share_mail') %}<li><a href="mailto:?subject={{ entry.title|url_encode }}&amp;body={{ entry.url|url_encode }}%20via%20@wallabagapp" class="tool email icon icon-mail" title="Email"><span>Email</span></a></li>{% endif %}
+            {% if craue_setting('share_shaarli') %}<li><a href="{{ craue_setting('shaarli_url') }}/index.php?post={{ entry.url|url_encode }}&amp;title={{ entry.title|url_encode }}" target="_blank" class="tool shaarli" title="shaarli"><span>shaarli</span></a></li>{% endif %}
+            {% if craue_setting('share_diaspora') %}<li><a href="{{ craue_setting('diaspora_url') }}/bookmarklet?url={{ entry.url|url_encode }}&title={{ entry.title|url_encode }}&notes=&v=1&noui=1&jump=doclose" target="_blank" class="tool diaspora icon-image icon-image--diaspora" title="diaspora"><span>diaspora</span></a></li>{% endif %}
+            {% if craue_setting('carrot') %}<li><a href="https://secure.carrot.org/GiveAndGetBack.do?url={{ entry.url|url_encode }}&title={{ entry.title|url_encode }}" class="tool carrot icon-image icon-image--carrot" target="_blank" title="carrot"><span>Carrot</span></a></li>{% endif %}
+            {% if craue_setting('show_printlink') %}<li><a title="{{ 'entry.view.left_menu.print'|trans }}" class="tool icon icon-print" href="javascript: window.print();"><span>{{ 'entry.view.left_menu.re_fetch_content'|trans }}</span></a></li>{% endif %}
             {% if craue_setting('export_epub') %}<li><a href="?epub&amp;method=id&amp;value={{ entry.id }}" title="Generate ePub file">EPUB</a></li>{% endif %}
             {% if craue_setting('export_mobi') %}<li><a href="?mobi&amp;method=id&amp;value={{ entry.id }}" title="Generate Mobi file">MOBI</a></li>{% endif %}
             {% if craue_setting('export_pdf') %}<li><a href="?pdf&amp;method=id&amp;value={{ entry.id }}" title="Generate PDF file">PDF</a></li>{% endif %}
-            <li><a href="mailto:hello@wallabag.org?subject=Wrong%20display%20in%20wallabag&amp;body={{ entry.url|url_encode }}" title="{% trans %}Does this article appear wrong?{% endtrans %}" class="tool bad-display icon icon-delete"><span>{% trans %}Does this article appear wrong?{% endtrans %}</span></a></li>
+            <li><a href="mailto:hello@wallabag.org?subject=Wrong%20display%20in%20wallabag&amp;body={{ entry.url|url_encode }}" title="{{ 'entry.view.left_menu.problem.label'|trans }}" class="tool bad-display icon icon-delete"><span>{{ 'entry.view.left_menu.problem.label'|trans }}</span></a></li>
         </ul>
     </div>
         {% set nbAnnotations = entry.annotations | length %}
-        <span class="tool link mdi-communication-comment"> {% transchoice nbAnnotations %}{0} No annotations|{1} One annotation|]1,Inf[ %nbAnnotations% annotations{% endtranschoice %}</span>
+        <span class="tool link mdi-communication-comment"> {{ 'entry.view.annotations_on_the_entry'|transchoice(entry.annotations | length) }}</span>
         <aside class="tags">
             {% for tag in entry.tags %}
                 <span class="mdi-action-label-outline">{{ tag.label }}</span> <a href="{{ path('remove_tag', { 'entry': entry.id, 'tag': tag.id }) }}"><i>✘</i></a>

@@ -4,13 +4,13 @@
   {% set currentRoute = app.request.attributes.get('_route') %}
 
   {% if currentRoute == 'starred' %}
-    {% trans %}starred{% endtrans %}
+    {{ 'entry.page_titles.starred'|trans }}
   {% elseif currentRoute == 'archive' %}
-    {% trans %}archive{% endtrans %}
+    {{ 'entry.page_titles.archived'|trans }}
   {% elseif currentRoute == 'all' %}
-    {% trans %}Filtered{% endtrans %}
+    {{ 'entry.page_titles.filtered'|trans }}
   {% else %}
-    {% trans %}unread{% endtrans %}
+    {{ 'entry.page_titles.unread'|trans }}
   {% endif %}
 
 {% endblock %}
@@ -18,7 +18,9 @@
 {% block content %}
     {% block pager %}
     <div class="results clearfix">
-        <div class="nb-results left">{% transchoice entries.count %}{0} There is no entry.|{1} There is one entry.|]1,Inf[ There are %count% entries.{% endtranschoice %}</div>
+        <div class="nb-results left">
+            {{ 'entry.list.number_on_the_page'|transchoice(entries.count) }}
+        </div>
         <ul class="pagination right">
             {% for p in range(1, entries.nbPages) if entries.nbPages > 1 %}
                 <li class="{{ currentPage == p ? 'active':'waves-effect'}}">
@@ -52,9 +54,9 @@
                                 <span class="tool reading-time">
                                     {% set readingTime = entry.readingTime / app.user.config.readingSpeed %}
                                     {% if readingTime > 0 %}
-                                        {% trans with {'%readingTime%': readingTime } %}estimated reading time: %readingTime% min{% endtrans %}
+                                        {{ 'entry.list.reading_time_minutes'|trans({'%readingTime%': readingTime}) }}
                                     {% else %}
-                                        {% trans with {'%inferior%': '<small class="inferieur">&lt;</small>'} %}estimated reading time: %inferior% 1 min{% endtrans %}
+                                        {{ 'entry.list.reading_time_less_one_minute'|trans|raw }}
                                     {% endif %}
                                 </span>
                             </div>
@@ -72,7 +74,7 @@
 
                             <div class="estimatedTime grey-text">
                                 <span class="tool reading-time">
-                                    {% trans %}estimated reading time{% endtrans %}:
+                                    {{ 'entry.list.reading_time'|trans }}
                                     {% if entry.readingTime > 0 %}{{ entry.readingTime }}{% else %}<small class="inferieur">&lt;</small> 1{% endif %} min
                                 </span>
                             </div>
@@ -82,13 +84,15 @@
                     {% endif %}
 
                     <div class="card-action">
-                        <span class="bold"><a href="{{ entry.url|e }}" target="_blank" title="{% trans %}original{% endtrans %}: {{ entry.title|e }} - {{ entry.domainName|removeWww }}" class="tool original grey-text"><span>{{ entry.domainName|removeWww|truncate(18) }}</span></a></bold>
+                        <span class="bold">
+                            <a href="{{ entry.url|e }}" target="_blank" title="{{ 'entry.list.original_article'|trans }}: {{ entry.title|e }} - {{ entry.domainName|removeWww }}" class="tool original grey-text"><span>{{ entry.domainName|removeWww|truncate(18) }}</span></a>
+                        </bold>
 
                         <ul class="tools links right">
                             <li>
-                                <a title="{% trans %}Toggle mark as read{% endtrans %}" class="tool grey-text {% if entry.isArchived == 0 %}mdi-action-done{% else %}mdi-content-redo{% endif %}" href="{{ path('archive_entry', { 'id': entry.id }) }}"></a>
-                                <a title="{% trans %}Toggle favorite{% endtrans %}" class="tool grey-text {% if entry.isStarred == 0 %}mdi-action-favorite-outline{% else %}mdi-action-favorite{% endif %}" href="{{ path('star_entry', { 'id': entry.id }) }}"></a>
-                                <a title="{% trans %}Delete{% endtrans %}" class="tool grey-text delete mdi-action-delete " href="{{ path('delete_entry', { 'id': entry.id }) }}"></a>
+                                <a title="{{ 'entry.list.toogle_as_read'|trans }}" class="tool grey-text {% if entry.isArchived == 0 %}mdi-action-done{% else %}mdi-content-redo{% endif %}" href="{{ path('archive_entry', { 'id': entry.id }) }}"></a>
+                                <a title="{{ 'entry.list.toogle_as_star'|trans }}" class="tool grey-text {% if entry.isStarred == 0 %}mdi-action-favorite-outline{% else %}mdi-action-favorite{% endif %}" href="{{ path('star_entry', { 'id': entry.id }) }}"></a>
+                                <a title="{{ 'entry.list.delete'|trans }}" class="tool grey-text delete mdi-action-delete " href="{{ path('delete_entry', { 'id': entry.id }) }}"></a>
                             </li>
                         </ul>
                     </div>
@@ -103,7 +107,7 @@
     {% if currentRoute == 'homepage' %}
         {% set currentRoute = 'unread' %}
     {% endif %}
-        <h4 class="center">{% trans %}Export{% endtrans %}</h4>
+        <h4 class="center">{{ 'entry.list.export_title'|trans }}</h4>
         <ul>
             {% if craue_setting('export_epub') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'epub' }) }}">EPUB</a></li>{% endif %}
             {% if craue_setting('export_mobi') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'mobi' }) }}">MOBI</a></li>{% endif %}
@@ -119,34 +123,34 @@
     <div id="filters" class="side-nav fixed right-aligned">
         <form action="{{ path('all') }}">
 
-            <h4 class="center">{% trans %}Filters{% endtrans %}</h4>
+            <h4 class="center">{{ 'entry.filters.title'|trans }}</h4>
 
             <div class="row">
                 <div class="col s12">
-                    <label>{% trans %}Status{% endtrans %}</label>
+                    <label>{{ 'entry.filters.status_label'|trans }}</label>
                 </div>
 
                 <div class="input-field col s6 with-checkbox">
                     {{ form_widget(form.isArchived) }}
-                    <label for="entry_filter_isArchived">{% trans %}Archived{% endtrans %}</label>
+                    {{ form_label(form.isArchived) }}
                 </div>
 
                 <div class="input-field col s6 with-checkbox">
                     {{ form_widget(form.isStarred) }}
-                    <label for="entry_filter_isStarred">{% trans %}Starred{% endtrans %}</label>
+                    {{ form_label(form.isStarred) }}
                 </div>
 
                 <div class="col s12">
-                    <label>{% trans %}Preview picture{% endtrans %}</label>
+                    <label>{{ 'entry.filters.preview_picture_help'|trans }}</label>
                 </div>
 
                 <div class="input-field col s12 with-checkbox">
                     {{ form_widget(form.previewPicture) }}
-                    <label for="entry_filter_previewPicture">{% trans %}Has a preview picture{% endtrans %}</label>
+                    {{ form_label(form.previewPicture) }}
                 </div>
 
                 <div class="col s12">
-                    <label>{% trans %}Language{% endtrans %}</label>
+                    {{ form_label(form.language) }}
                 </div>
 
                 <div class="input-field col s12">
@@ -154,43 +158,42 @@
                 </div>
 
                 <div class="col s12">
-                    <label>{% trans %}Reading time in minutes{% endtrans %}</label>
+                    {{ form_label(form.readingTime) }}
                 </div>
                 <div class="input-field col s6">
                     {{ form_widget(form.readingTime.left_number, {'type': 'number'}) }}
-                    <label for="entry_filter_readingTime_left_number">{% trans %}from{% endtrans %}</label>
+                    <label for="entry_filter_readingTime_left_number">{{ 'entry.filters.reading_time.from'|trans }}</label>
                 </div>
                 <div class="input-field col s6">
                     {{ form_widget(form.readingTime.right_number, {'type': 'number'}) }}
-                    <label for="entry_filter_readingTime_right_number">{% trans %}to{% endtrans %}</label>
+                    <label for="entry_filter_readingTime_right_number">{{ 'entry.filters.reading_time.to'|trans }}</label>
                 </div>
 
                 <div class="input-field col s12">
-                    {{ form_widget(form.domainName, {'type': 'text', 'attr' : {'placeholder': 'website.com' | trans} }) }}
-                    <label for="entry_filter_domainName">{% trans %}Domain name{% endtrans %}</label>
+                    {{ form_widget(form.domainName, {'type': 'text', 'attr' : {'placeholder': 'website.com'} }) }}
+                    {{ form_label(form.domainName) }}
                 </div>
 
                 <div class="col s12">
-                    <label>{% trans %}Creation date{% endtrans %}</label>
+                    {{ form_label(form.createdAt) }}
                 </div>
 
                 <div class="input-field col s6">
                     {{ form_widget(form.createdAt.left_date, {'type': 'date', 'attr': {'class': 'datepicker', 'data-value': form.createdAt.left_date.vars.value} }) }}
-                    <label for="entry_filter_createdAt_left_date" class="active">{% trans %}from{% endtrans %}</label>
+                    <label for="entry_filter_createdAt_left_date" class="active">{{ 'entry.filters.created_at.from'|trans }}</label>
                 </div>
                 <div class="input-field col s6">
                     {{ form_widget(form.createdAt.right_date, {'type': 'date', 'attr': {'class': 'datepicker', 'data-value': form.createdAt.right_date.vars.value} }) }}
-                    <label for="entry_filter_createdAt_right_date" class="active">{% trans %}to{% endtrans %}</label>
+                    <label for="entry_filter_createdAt_right_date" class="active">{{ 'entry.filters.created_at.to'|trans }}</label>
                 </div>
 
                 <div class="col s6">
-                    <a href="#!" class="center waves-effect waves-green btn-flat" id="clear_form_filters">{% trans %}Clear{% endtrans %}</a>
+                    <a href="#!" class="center waves-effect waves-green btn-flat" id="clear_form_filters">{{ 'entry.filters.action.clear'|trans }}</a>
                 </div>
 
                 <div class="col s6">
-                    <button class="btn waves-effect waves-light" type="submit" id="submit-filter" value="filter">{% trans %}Filter{% endtrans %}</button>
+                    <button class="btn waves-effect waves-light" type="submit" id="submit-filter" value="filter">{{ 'entry.filters.action.filter'|trans }}</button>
                 </div>
-
             </div>
 
         </form>

@@ -1,6 +1,6 @@
 {% extends "WallabagCoreBundle::layout.html.twig" %}
 
-{% block title %}{% trans %}Edit an entry{% endtrans %}{% endblock %}
+{% block title %}{{ 'entry.edit.page_title'|trans }}{% endblock %}
 
 {% block content %}
 
@@ -10,7 +10,6 @@
 
                 <form name="entry" method="post" action="">
                     <div class="card-content">
-
                         {% if form_errors(form) %}
                             <span class="black-text">{{ form_errors(form) }}</span>
                         {% endif %}
@@ -25,16 +24,19 @@
                         </div>
 
                         <div class="input-field s12">
+                            {{ form_label(form.url) }}
+                            {{ form_widget(form.url) }}
+                        </div>
+
+                        <div class="input-field s12">
                             {{ form_widget(form.is_public) }}
                             {{ form_label(form.is_public) }}
                         </div>
                         <br>
-                        <button class="btn waves-effect waves-light" type="submit" name="entry[save]">
-                            {% trans %}Save{% endtrans %}
-                            <i class="mdi-content-send right"></i>
-                        </button>
+
+                        {{ form_widget(form.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
                     </div>
-                    <div class="hidden">{{ form_rest(form) }}</div>
+                    {{ form_rest(form) }}
                 </form>
 
             </div>

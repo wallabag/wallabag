@@ -23,7 +23,7 @@
         </div>
     </div>
     <div class="card-action center">
-        <a href="{{ path('fos_user_security_logout') }}" class="waves-effect waves-light grey btn"><i class="material-icons left"></i> {% trans %}Cancel{% endtrans %}</a>
+        <a href="{{ path('fos_user_security_logout') }}" class="waves-effect waves-light grey btn"><i class="material-icons left"></i> {{ 'security.login.cancel'|trans }}</a>
         <button class="btn waves-effect waves-light" type="submit" name="send">
             {{ "scheb_two_factor.login"|trans }}
             <i class="mdi-content-send right"></i>

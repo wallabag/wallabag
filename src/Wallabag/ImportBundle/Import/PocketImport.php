@@ -60,7 +60,7 @@ class PocketImport implements ImportInterface
      */
     public function getDescription()
     {
-        return 'This importer will import all your Pocket data. Pocket doesn\'t allow us to retrieve content from their service, so the readable content of each article will be re-fetched by wallabag.';
+        return 'import.pocket.description';
     }
 
     /**
@@ -139,7 +139,7 @@ class PocketImport implements ImportInterface
     /**
      * Get whether articles must be all marked as read.
      */
-    public function getRead()
+    public function getMarkAsRead()
     {
         return $this->markAsRead;
     }

@@ -36,7 +36,7 @@
         </div>
     </div>
     <div class="card-action center">
-        <a href="{{ path('fos_user_security_login') }}" class="waves-effect waves-light grey btn"><i class="material-icons left"></i> {% trans %}Login{% endtrans %}</a>
+        <a href="{{ path('fos_user_security_login') }}" class="waves-effect waves-light grey btn"><i class="material-icons left"></i> {{ 'security.login.submit'|trans }}</a>
         <button class="btn waves-effect waves-light" type="submit" name="send">
             {{ 'registration.submit'|trans({}, 'FOSUserBundle') }}
             <i class="mdi-content-send right"></i>

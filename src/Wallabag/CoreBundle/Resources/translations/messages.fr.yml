@@ -1,11 +1,14 @@
 #Login
-Keep me logged in: 'Rester connecté'
-Forgot your password?: 'Mot de passe oublié ?'
-Login: 'Se connecter'
-Back to login: 'Revenir au formulaire de connexion'
-Send: 'Envoyer'
-"Enter your email address below and we'll send you password reset instructions.": "Saisissez votre adresse e-mail ci-dessous, nous vous enverrons les instructions pour réinitialiser votre mot de passe."
-Register: 'Créer un compte'
+security:
+    login:
+        keep_logged_in: 'Rester connecté'
+        forgot_password: 'Mot de passe oublié ?'
+        submit: 'Se connecter'
+        register: 'Créer un compte'
+        username: "Nom d'utilisateur"
+        password: 'Mot de passe'
+    resetting:
+        description: 'Saisissez votre adresse e-mail ci-dessous, nous vous enverrons les instructions pour réinitialiser votre mot de passe.'
 
 # Menu
 unread: 'Non lus'
@@ -33,7 +36,6 @@ Export: Exporter
 # Config screen
 Settings: 'Paramètres'
 User information: 'Mon compte'
-Password: 'Mot de passe'
 RSS: 'RSS'
 Add a user: 'Créer un compte'
 Theme: 'Thème'
@@ -54,7 +56,6 @@ RSS links: 'URL de vos flux RSS'
 Old password: 'Mot de passe actuel'
 New password: 'Nouveau mot de passe'
 Repeat new password: 'Confirmez votre nouveau mot de passe'
-Username: "Nom d'utilisateur"
 Two factor authentication: "Double authentification"
 "Enabling two factor authentication means you'll receive an email with a code on every new untrusted connexion": "Activer l'authentification double-facteur veut dire que vous allez recevoir un code par email à chaque nouvelle connexion non approuvée."
 "I read ~100 words per minute": "Je lis environ 100 mots par minute"

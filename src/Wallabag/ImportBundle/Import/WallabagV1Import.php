@@ -67,7 +67,7 @@ class WallabagV1Import implements ImportInterface
      */
     public function getDescription()
     {
-        return 'This importer will import all your wallabag v1 articles. On your config page, click on "JSON export" in the "Export your wallabag data" section. You will have a "wallabag-export-1-xxxx-xx-xx.json" file.';
+        return 'import.wallabag_v1.description';
     }
 
     /**

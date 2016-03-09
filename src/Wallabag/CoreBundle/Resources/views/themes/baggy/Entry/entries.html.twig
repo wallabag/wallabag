@@ -1,13 +1,13 @@
 {% extends "WallabagCoreBundle::layout.html.twig" %}
 
-{% block title "Unread" %}
+{% block title %}{{ 'entry.page_titles.unread'|trans }}{% endblock %}
 
 {% block content %}
     {% block pager %}
         <div class="results">
-            <div class="nb-results">{{ entries.count }} {% trans %}entries{% endtrans %}</div>
+            <div class="nb-results">{{ 'entry.list.number_on_the_page'|transchoice(entries.count) }}</div>
                 <div class="pagination">
-                <a href="#" id="filter">{% trans %}Filter{% endtrans %}</a>
+                <a href="#" id="filter">{{ 'entry.filters.title'|trans }}</a>
                 {% if entries is not empty %}
                     –
                     {% for p in range(1, entries.nbPages) if entries.nbPages > 1 %}
@@ -20,68 +20,64 @@
         </div>
     {% endblock %}
 
-    {% if entries is empty %}
-        <div class="messages warning"><p>{% trans %}No articles found.{% endtrans %}</p></div>
-    {% else %}
-        {% for entry in entries %}
-            <div id="entry-{{ entry.id|e }}" class="entry">
-                <h2><a href="{{ path('view', { 'id': entry.id }) }}">{{ entry.title|raw }}</a></h2>
-                {% if entry.readingTime > 0 %}
-                    <div class="estimatedTime">
-                        <span class="tool reading-time">
-                            {% trans with {'%readingTime%': entry.readingTime } %}estimated reading time: %readingTime% min{% endtrans %}
-                        </span>
-                    </div>
-                {% else %}
-                    <div class="estimatedTime">
-                        <span class="tool reading-time">
-                        {% trans with {'%inferior%': '<small class="inferieur">&lt;</small>'} %}estimated reading time: %inferior% 1 min{% endtrans %}
-                        </span>
-                    </div>
-                {% endif %}
+    {% for entry in entries %}
+        <div id="entry-{{ entry.id|e }}" class="entry">
+            <h2><a href="{{ path('view', { 'id': entry.id }) }}">{{ entry.title|raw }}</a></h2>
+            {% if entry.readingTime > 0 %}
+                <div class="estimatedTime">
+                    <span class="tool reading-time">
+                        {{ 'entry.list.reading_time_minutes'|trans({'%readingTime%': entry.readingTime}) }}
+                    </span>
+                </div>
+            {% else %}
+                <div class="estimatedTime">
+                    <span class="tool reading-time">
+                    {{ 'entry.list.reading_time_less_one_minute'|trans|raw }}
+                    </span>
+                </div>
+            {% endif %}
 
-                <ul class="tools links">
-                    <li><a title="{% trans %}Toggle mark as read{% endtrans %}" class="tool icon-check icon {% if entry.isArchived == 0 %}archive-off{% else %}archive{% endif %}" href="{{ path('archive_entry', { 'id': entry.id }) }}"><span>{% trans %}Toggle mark as read{% endtrans %}</span></a></li>
-                    <li><a title="{% trans %}toggle favorite{% endtrans %}" class="tool icon-star icon {% if entry.isStarred == 0 %}fav-off{% else %}fav{% endif %}" href="{{ path('star_entry', { 'id': entry.id }) }}"><span>{% trans %}toggle favorite{% endtrans %}</span></a></li>
-                    <li><a title="{% trans %}delete{% endtrans %}" class="tool delete icon-trash icon" href="{{ path('delete_entry', { 'id': entry.id }) }}"><span>{% trans %}delete{% endtrans %}</span></a></li>
-                    <li><a href="{{ entry.url|e }}" target="_blank" title="{% trans %}original{% endtrans %} : {{ entry.title|e }}" class="tool link icon-link icon"><span>{{ entry.domainName|removeWww }}</span></a></li>
-                </ul>
-                {% if entry.previewPicture is null %}
-                    <p>{{ entry.content|striptags|slice(0, 300) }}&hellip;</p>
-                {% else %}
-                    <img class="preview" src="{{ entry.previewPicture }}" alt="{{ entry.title|raw }}" />
-                {% endif %}
-            </div>
-        {% endfor %}
-    {% endif %}
+            <ul class="tools links">
+                <li><a title="{{ 'entry.list.toogle_as_read'|trans }}" class="tool icon-check icon {% if entry.isArchived == 0 %}archive-off{% else %}archive{% endif %}" href="{{ path('archive_entry', { 'id': entry.id }) }}"><span>{{ 'entry.list.toogle_as_read'|trans }}</span></a></li>
+                <li><a title="{{ 'entry.list.toogle_as_star'|trans }}" class="tool icon-star icon {% if entry.isStarred == 0 %}fav-off{% else %}fav{% endif %}" href="{{ path('star_entry', { 'id': entry.id }) }}"><span>{{ 'entry.list.toogle_as_star'|trans }}</span></a></li>
+                <li><a title="{{ 'entry.list.delete'|trans }}" class="tool delete icon-trash icon" href="{{ path('delete_entry', { 'id': entry.id }) }}"><span>{{ 'entry.list.delete'|trans }}</span></a></li>
+                <li><a href="{{ entry.url|e }}" target="_blank" title="{{ 'entry.list.original_article'|trans }} : {{ entry.title|e }}" class="tool link icon-link icon"><span>{{ entry.domainName|removeWww }}</span></a></li>
+            </ul>
+            {% if entry.previewPicture is null %}
+                <p>{{ entry.content|striptags|slice(0, 300) }}&hellip;</p>
+            {% else %}
+                <img class="preview" src="{{ entry.previewPicture }}" alt="{{ entry.title|raw }}" />
+            {% endif %}
+        </div>
+    {% endfor %}
 
     <aside id="filter-form" class="">
         <form method="get" action="{{ path('all') }}">
-            <h2>{% trans %}Filters{% endtrans %}</h2>
+            <h2>{{ 'entry.filters.title'|trans }}</h2>
             <a href="javascript: void(null);" id="filter-form-close" class="close-button--popup close-button">&times;</a>
 
             <div id="filter-status" class="filter-group">
                 <div class="">
-                    <label>{% trans %}Status{% endtrans %}</label>
+                    <label>{{ 'entry.filters.status_label'|trans }}</label>
                 </div>
                 <div class="input-field">
                     {{ form_widget(form.isArchived) }}
-                    <label for="entry_filter_isArchived">{% trans %}Archived{% endtrans %}</label>
+                    {{ form_label(form.isArchived) }}
                 </div>
 
                 <div class="input-field">
                     {{ form_widget(form.isStarred) }}
-                    <label for="entry_filter_isStarred">{% trans %}Starred{% endtrans %}</label>
+                    {{ form_label(form.isStarred) }}
                 </div>
 
                 <div class="input-field">
                     {{ form_widget(form.previewPicture) }}
-                    <label for="entry_filter_previewPicture">{% trans %}Has a preview picture{% endtrans %}</label>
+                    {{ form_label(form.previewPicture) }}
                 </div>
             </div>
 
             <div id="filter-language" class="filter-group">
-                <label for="entry_filter_language">{% trans %}Language{% endtrans %}</label>
+                {{ form_label(form.language) }}
                 <div class="input-field ">
                     {{ form_widget(form.language) }}
                 </div>
@@ -89,20 +85,20 @@
 
             <div id="filter-reading-time" class="filter-group">
                 <div class="">
-                    <label>{% trans %}Reading time in minutes{% endtrans %}</label>
+                    {{ form_label(form.readingTime) }}
                 </div>
                 <div class="input-field ">
-                    <label for="entry_filter_readingTime_left_number">{% trans %}from{% endtrans %}</label>
+                    <label for="entry_filter_readingTime_left_number">{{ 'entry.filters.reading_time.from'|trans }}</label>
                     {{ form_widget(form.readingTime.left_number, {'type': 'number'}) }}
                 </div>
                 <div class="input-field ">
-                    <label for="entry_filter_readingTime_right_number">{% trans %}to{% endtrans %}</label>
+                    <label for="entry_filter_readingTime_right_number">{{ 'entry.filters.reading_time.to'|trans }}</label>
                     {{ form_widget(form.readingTime.right_number, {'type': 'number'}) }}
                 </div>
             </div>
 
             <div id="filter-domain-name" class="filter-group">
-                <label for="entry_filter_domainName">{% trans %}Domain name{% endtrans %}</label>
+                {{ form_label(form.domainName) }}
                 <div class="input-field ">
                     {{ form_widget(form.domainName, {'type': 'text', 'attr' : {'placeholder': 'website.com'} }) }}
                 </div>
@@ -110,26 +106,25 @@
 
             <div id="filter-creation-date" class="filter-group">
                 <div class="">
-                    <label>{% trans %}Creation date{% endtrans %}</label>
+                    {{ form_label(form.createdAt) }}
                 </div>
                 <div class="input-field ">
-                    <label for="entry_filter_createdAt_left_date" class="active">{% trans %}from{% endtrans %}</label>
+                    <label for="entry_filter_createdAt_left_date" class="active">{{ 'entry.filters.created_at.from'|trans }}</label>
                     {{ form_widget(form.createdAt.left_date, {'type': 'date', 'attr': {'class': 'datepicker', 'data-value': form.createdAt.left_date.vars.value} }) }}
                 </div>
                 <div class="input-field ">
-                    <label for="entry_filter_createdAt_right_date" class="active">{% trans %}to{% endtrans %}</label>
+                    <label for="entry_filter_createdAt_right_date" class="active">{{ 'entry.filters.created_at.to'|trans }}</label>
                     {{ form_widget(form.createdAt.right_date, {'type': 'date', 'attr': {'class': 'datepicker', 'data-value': form.createdAt.right_date.vars.value} }) }}
                 </div>
             </div>
+
             <div id="filter-buttons" class="filter-group">
-
                 <div class="">
-                    <a href="#!" class="center waves-effect waves-green btn-flat" id="clear_form_filters">{% trans %}Clear{% endtrans %}</a>
+                    <a href="#!" class="center waves-effect waves-green btn-flat" id="clear_form_filters">{{ 'entry.filters.action.clear'|trans }}</a>
                 </div>
 
-                <button class="btn waves-effect waves-light" type="submit" id="submit-filter" value="filter">{% trans %}Filters{% endtrans %}</button>
-
-                </div>
+                <button class="btn waves-effect waves-light" type="submit" id="submit-filter" value="filter">{{ 'entry.filters.action.filter'|trans }}</button>
+            </div>
         </form>
     </aside>
 

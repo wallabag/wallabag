@@ -1,6 +1,6 @@
 {% extends "WallabagCoreBundle::layout.html.twig" %}
 
-{% block title %}{% trans %}About{% endtrans %}{% endblock %}
+{% block title %}{{ 'about.page_title'|trans }}{% endblock %}
 
 {% block content %}
 
@@ -11,56 +11,56 @@
                 <div class="row">
                     <div class="div_tabs col s12">
                         <ul class="tabs">
-                        <li class="tab col s3"><a class="active" href="#set1">{% trans %}Who is behind wallabag{% endtrans %}</a></li>
-                        <li class="tab col s3"><a href="#set2">{% trans %}Getting help{% endtrans %}</a></li>
-                        <li class="tab col s3"><a href="#set3">{% trans %}Helping wallabag{% endtrans %}</a></li>
-                        <li class="tab col s3"><a href="#set4">{% trans %}Contributors{% endtrans %}</a></li>
-                        <li class="tab col s3"><a href="#set5">{% trans %}Third-party libraries{% endtrans %}</a></li>
+                        <li class="tab col s3"><a class="active" href="#set1">{{ 'about.top_menu.who_behind_wallabag'|trans }}</a></li>
+                        <li class="tab col s3"><a href="#set2">{{ 'about.top_menu.getting_help'|trans }}</a></li>
+                        <li class="tab col s3"><a href="#set3">{{ 'about.top_menu.helping'|trans }}</a></li>
+                        <li class="tab col s3"><a href="#set4">{{ 'about.top_menu.contributors'|trans }}</a></li>
+                        <li class="tab col s3"><a href="#set5">{{ 'about.top_menu.third_party'|trans }}</a></li>
                         </ul>
                     </div>
 
                     <div id="set1" class="col s12">
-                        <dt>{% trans %}Developed by{% endtrans %}</dt>
-                        <dd><a href="mailto:nicolas@loeuillet.org">Nicolas Lœuillet</a> — <a href="http://cdetc.fr">{% trans %}website{% endtrans %}</a></dd>
-                        <dd>Thomas Citharel — <a href="https://tcit.fr">{% trans %}website{% endtrans %}</a></dd>
-                        <dd>Jérémy Benoist — <a href="http://www.j0k3r.net">{% trans %}website{% endtrans %}</a></dd>
-                        <dt>{% trans %}And many others contributors ♥{% endtrans %} <a href="https://github.com/wallabag/wallabag/graphs/contributors">{% trans %}on GitHub{% endtrans %}</a></dt>
-                        <dt>{% trans %}Project website{% endtrans %}</dt>
+                        <dt>{{ 'about.who_behind_wallabag.developped_by'|trans }}</dt>
+                        <dd><a href="mailto:nicolas@loeuillet.org">Nicolas Lœuillet</a> — <a href="http://cdetc.fr">{{ 'about.who_behind_wallabag.website'|trans }}</a></dd>
+                        <dd>Thomas Citharel — <a href="https://tcit.fr">{{ 'about.who_behind_wallabag.website'|trans }}</a></dd>
+                        <dd>Jérémy Benoist — <a href="http://www.j0k3r.net">{{ 'about.who_behind_wallabag.website'|trans }}</a></dd>
+                        <dt>{{ 'about.who_behind_wallabag.many_contributors'|trans|raw }}</dt>
+                        <dt>{{ 'about.who_behind_wallabag.project_website'|trans }}</dt>
                         <dd><a href="https://www.wallabag.org">https://www.wallabag.org</a></dd>
-                        <dt>{% trans %}License{% endtrans %}: <a href="http://en.wikipedia.org/wiki/MIT_License">MIT</a></dt>
-                        <dt>{% trans %}Version{% endtrans %}: {{ version }}</dt>
+                        <dt>{{ 'about.who_behind_wallabag.license'|trans }}: <a href="https://en.wikipedia.org/wiki/MIT_License">MIT</a></dt>
+                        <dt>{{ 'about.who_behind_wallabag.version'|trans }}: {{ version }}</dt>
                     </div>
 
                     <div id="set2" class="col s12">
                         <dl>
-                            <dt>{% trans %}Documentation{% endtrans %}</dt>
+                            <dt>{{ 'about.getting_help.documentation'|trans }}</dt>
                             <dd><a href="https://doc.wallabag.org/en">english</a></dd>
                             <dd><a href="https://doc.wallabag.org/fr">français</a></dd>
                             <dd><a href="https://doc.wallabag.org/de">deutsch</a></dd>
 
-                            <dt>{% trans %}Bug reports{% endtrans %}</dt>
-                            <dd><a href="https://support.wallabag.org">{% trans %}On our support website{% endtrans %}</a> {% trans %}or{% endtrans %} <a href="https://github.com/wallabag/wallabag/issues">{% trans %}on GitHub{% endtrans %}</a></dd>
+                            <dt>{{ 'about.getting_help.bug_reports'|trans }}</dt>
+                            <dd>{{ 'about.getting_help.support'|trans|raw }}</dd>
                         </dl>
                     </div>
 
                     <div id="set3" class="col s12">
                         <dl>
-                            <dt>{% trans %}wallabag is free and opensource. You can help us:{% endtrans %}</dt>
-                            <dd>{% trans %}by contributing to the project:{% endtrans %} <a href="https://github.com/wallabag/wallabag/issues/1254">{% trans %}an issue lists all our needs{% endtrans %}</a></dd>
-                            <dd><a href="{{ paypal_url }}">{% trans %}via Paypal{% endtrans %}</a></dd>
+                            <dt>{{ 'about.helping.description'|trans }}</dt>
+                            <dd>{{ 'about.helping.by_contributing_2'|trans }} <a href="https://github.com/wallabag/wallabag/issues/1254">{{ 'about.helping.by_contributing'|trans }}</a></dd>
+                            <dd><a href="{{ paypal_url }}">{{ 'about.helping.by_paypal'|trans }}</a></dd>
                         </dl>
                     </div>
 
                     <div id="set4" class="col s12">
-                        <p><a href="https://github.com/wallabag/wallabag/graphs/contributors">{% trans %}Thank you to contributors on wallabag web application{% endtrans %}</a></p>
+                        <p><a href="https://github.com/wallabag/wallabag/graphs/contributors">{{ 'about.contributors.description'|trans }}</a></p>
                     </div>
 
                     <div id="set5" class="col s12">
-                        <p>{% trans %}Here are the list of third-party libraries used in wallabag (with their licenses):{% endtrans %}</p>
-                        <table>
+                        <p>{{ 'about.third_party.description'|trans }}</p>
+                        <table class="striped">
                             <tr>
-                                <th>{% trans %}Package{% endtrans %}</th>
-                                <th>{% trans %}License{% endtrans %}</th>
+                                <th>{{ 'about.third_party.package'|trans }}</th>
+                                <th>{{ 'about.third_party.license'|trans }}</th>
                             </tr>
                             <tr><td>behat/transliterator</td><td>Artistic 1.0</td></tr>
                             <tr><td>CraueConfigBundle</td><td>MIT</td></tr>

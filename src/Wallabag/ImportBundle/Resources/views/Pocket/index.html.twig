@@ -1,5 +1,6 @@
 {% extends "WallabagCoreBundle::layout.html.twig" %}
-{% block title %}{% trans %}Import > Pocket{% endtrans %}{% endblock %}
+
+{% block title %}{{ 'import.pocket.page_title'|trans }}{% endblock %}
 
 {% block content %}
 <div class="row">
@@ -7,27 +8,29 @@
         <div class="card-panel settings">
             {% if not has_consumer_key %}
                 <div class="card-panel red darken-1">
-                    {% trans %}Pocket import isn't configured.{% endtrans %}
+                    {{ 'import.pocket.config_missing.description'|trans }}
+
                     {% if is_granted('ROLE_SUPER_ADMIN') %}
-                        {% trans with {'%keyurls%': '<a href="' ~ path('craue_config_settings_modify') ~ '#set-import">', '%keyurle%':'</a>'} %}You need to define %keyurls% a pocket_consumer_key %keyurle%.{% endtrans %}
+                        {{ 'import.pocket.config_missing.admin_message'|trans({'%keyurls%': '<a href="' ~ path('craue_config_settings_modify') ~ '#set-import">', '%keyurle%':'</a>'})|raw }}
                     {% else %}
-                        {% trans %}Your server admin needs to define an API Key for Pocket.{% endtrans %}
+                        {{ 'import.pocket.config_missing.user_message'|trans }}
                     {% endif %}
                 </div>
             {% endif %}
 
             <blockquote>{{ import.description|trans }}</blockquote>
-            <p>{% trans %}You can import your data from your Pocket account. You just have to click on the below button and authorize the application to connect to getpocket.com.{% endtrans %}</p>
+            <p>{{ 'import.pocket.authorize_message'|trans }}</p>
+
             <form method="post" action="{{ path('import_pocket_auth') }}">
-            <div class="row">
-                <div class="input-field col s6 with-checkbox">
-                    <h6>{% trans %}Mark all as read ?{% endtrans %}</h6>
-                        {{ form_widget(form.read) }}
-                    <label for="form_read">{% trans %}Mark all imported entries as read{% endtrans %}</label>
+                <div class="row">
+                    <div class="input-field col s6 with-checkbox">
+                        <h6>{{ 'import.form.mark_as_read_title'|trans }}</h6>
+                        {{ form_widget(form.mark_as_read) }}
+                        {{ form_label(form.mark_as_read) }}
+                    </div>
                 </div>
-            </div>
                 <button class="btn waves-effect waves-light" type="submit" name="action">
-                    {% trans %}Connect to Pocket and import data{% endtrans %}
+                    {{ 'import.pocket.connect_to_pocket'|trans }}
                 </button>
             </form>
         </div>

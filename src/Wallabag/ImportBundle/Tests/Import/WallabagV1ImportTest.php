@@ -45,7 +45,7 @@ class WallabagV1ImportTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('wallabag v1', $wallabagV1Import->getName());
         $this->assertNotEmpty($wallabagV1Import->getUrl());
-        $this->assertContains('This importer will import all your wallabag v1 articles.', $wallabagV1Import->getDescription());
+        $this->assertEquals('import.wallabag_v1.description', $wallabagV1Import->getDescription());
     }
 
     public function testImport()

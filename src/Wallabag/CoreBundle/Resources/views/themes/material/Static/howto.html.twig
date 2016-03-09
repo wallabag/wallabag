@@ -1,44 +1,40 @@
 {% extends "WallabagCoreBundle::layout.html.twig" %}
 
-{% block title %}{% trans %}howto{% endtrans %}{% endblock %}
+{% block title %}{{ 'howto.page_title'|trans }}{% endblock %}
 
 {% block content %}
 
     <div class="row">
         <div class="col s12">
             <div class="card-panel settings">
+                <p>{{ 'howto.page_description'|trans }}</p>
 
                 <div class="row">
-                    <div class="div_tabs col s12">
-                        <ul class="tabs">
-                        <li class="tab col s3"><a class="active" href="#set1">{% trans %}Form{% endtrans %}</a></li>
-                        <li class="tab col s3"><a href="#set2">{% trans %}Browser addons{% endtrans %}</a></li>
-                        <li class="tab col s3"><a href="#set3">{% trans %}Mobile apps{% endtrans %}</a></li>
-                        <li class="tab col s3"><a href="#set4">{% trans %}Bookmarklet{% endtrans %}</a></li>
-                        </ul>
+
+                    <div class="col s12">
+                        <a href="{{ path('new') }}">{{ 'howto.form.description'|trans }}</a>
                     </div>
 
-                    <div id="set1" class="col s12">
-                        <a href="{{ path('new') }}">{% trans %}Thanks to this form{% endtrans %}</a>
-                    </div>
-
-                    <div id="set2" class="col s12">
+                    <div class="col s12">
+                        <h5>{{ 'howto.top_menu.browser_addons'|trans }}</h5>
                         <ul>
-                            <li><a href="https://addons.mozilla.org/firefox/addon/wallabag/" target="_blank">{% trans %}Standard Firefox Add-On{% endtrans %}</a></li>
-                            <li><a href="https://chrome.google.com/webstore/detail/wallabag/bepdcjnnkglfjehplaogpoonpffbdcdj" target="_blank">{% trans %}Chrome Extension{% endtrans %}</a></li>
+                            <li><a href="https://addons.mozilla.org/firefox/addon/wallabag/" target="_blank">{{ 'howto.browser_addons.firefox'|trans }}</a></li>
+                            <li><a href="https://chrome.google.com/webstore/detail/wallabag/bepdcjnnkglfjehplaogpoonpffbdcdj" target="_blank">{{ 'howto.browser_addons.chrome'|trans }}</a></li>
                         </ul>
                     </div>
 
-                    <div id="set3" class="col s12">
+                    <div class="col s12">
+                        <h5>{{ 'howto.top_menu.mobile_apps'|trans }}</h5>
                         <ul>
-                            <li>Android: <a href="https://f-droid.org/app/fr.gaulupeau.apps.InThePoche" target="_blank">via F-Droid</a> {% trans %} or {% endtrans %} <a href="https://play.google.com/store/apps/details?id=fr.gaulupeau.apps.InThePoche" target="_blank">via Google Play</a></li>
-                            <li>iOS: <a href="https://itunes.apple.com/app/wallabag/id828331015?mt=8" target="_blank">{% trans %}download the application{% endtrans %}</a></li>
-                            <li>Windows Phone: <a href="http://www.windowsphone.com/en-US/store/app/wallabag/d5226cf1-f422-4e00-996c-88e9c5233332" target="_blank">{% trans %}download the application{% endtrans %}</a></li>
+                            <li>Android: <a href="https://f-droid.org/app/fr.gaulupeau.apps.InThePoche" target="_blank">{{ 'howto.mobile_apps.android.via_f_droid'|trans }}</a> / <a href="https://play.google.com/store/apps/details?id=fr.gaulupeau.apps.InThePoche" target="_blank">{{ 'howto.mobile_apps.android.via_google_play'|trans }}</a></li>
+                            <li>iOS: <a href="https://itunes.apple.com/app/wallabag/id828331015?mt=8" target="_blank">{{ 'howto.mobile_apps.ios'|trans }}</a></li>
+                            <li>Windows Phone: <a href="http://www.windowsphone.com/en-US/store/app/wallabag/d5226cf1-f422-4e00-996c-88e9c5233332" target="_blank">{{ 'howto.mobile_apps.windows'|trans }}</a></li>
                         </ul>
                     </div>
 
-                    <div id="set4" class="col s12">
-                        {% trans %}Drag &amp; drop this link to your bookmarks bar:{% endtrans %}
+                    <div class="col s12">
+                        <h5>{{ 'howto.top_menu.bookmarklet'|trans }}</h5>
+                        {{ 'howto.bookmarklet.description'|trans }}
                         {% include 'WallabagCoreBundle::_bookmarklet.html.twig' %}
                     </div>
 

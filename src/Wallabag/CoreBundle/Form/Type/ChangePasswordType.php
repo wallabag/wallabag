@@ -16,23 +16,27 @@ class ChangePasswordType extends AbstractType
     {
         $builder
             ->add('old_password', PasswordType::class, array(
-                'constraints' => new UserPassword(array('message' => 'Wrong value for your current password')),
+                'constraints' => new UserPassword(array('message' => 'validator.password_wrong_value')),
+                'label' => 'config.form_password.old_password_label',
             ))
             ->add('new_password', RepeatedType::class, array(
                 'type' => PasswordType::class,
-                'invalid_message' => 'The password fields must match.',
+                'invalid_message' => 'validator.password_must_match',
                 'required' => true,
-                'first_options' => array('label' => 'New password'),
-                'second_options' => array('label' => 'Repeat new password'),
+                'first_options' => array('label' => 'config.form_password.new_password_label'),
+                'second_options' => array('label' => 'config.form_password.repeat_new_password_label'),
                 'constraints' => array(
                     new Constraints\Length(array(
                         'min' => 8,
-                        'minMessage' => 'Password should by at least 8 chars long',
+                        'minMessage' => 'validator.password_too_short',
                     )),
                     new Constraints\NotBlank(),
                 ),
+                'label' => 'config.form_password.new_password_label',
             ))
-            ->add('save', SubmitType::class)
+            ->add('save', SubmitType::class, array(
+                'label' => 'config.form.save',
+            ))
         ;
     }
 

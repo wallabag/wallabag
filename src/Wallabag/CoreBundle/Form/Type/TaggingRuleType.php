@@ -14,12 +14,19 @@ class TaggingRuleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('rule', TextType::class, array('required' => true))
-            ->add('save', SubmitType::class)
+            ->add('rule', TextType::class, array(
+                'required' => true,
+                'label' => 'config.form_rules.rule_label',
+            ))
+            ->add('save', SubmitType::class, array(
+                'label' => 'config.form.save',
+            ))
         ;
 
         $tagsField = $builder
-            ->create('tags', TextType::class)
+            ->create('tags', TextType::class, array(
+                'label' => 'config.form_rules.tags_label',
+            ))
             ->addModelTransformer(new StringToListTransformer(','));
 
         $builder->add($tagsField);

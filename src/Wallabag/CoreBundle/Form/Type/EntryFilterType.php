@@ -34,7 +34,9 @@ class EntryFilterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('readingTime', NumberRangeFilterType::class)
+            ->add('readingTime', NumberRangeFilterType::class, array(
+                'label' => 'entry.filters.reading_time.label',
+            ))
             ->add('createdAt', DateRangeFilterType::class, array(
                     'left_date_options' => array(
                         'attr' => array(
@@ -50,6 +52,7 @@ class EntryFilterType extends AbstractType
                         'format' => 'dd/MM/yyyy',
                         'widget' => 'single_text',
                     ),
+                    'label' => 'entry.filters.created_at.label',
                 )
             )
             ->add('domainName', TextFilterType::class, array(
@@ -62,9 +65,14 @@ class EntryFilterType extends AbstractType
 
                     return $filterQuery->createCondition($expression);
                 },
+                'label' => 'entry.filters.domain_label',
             ))
-            ->add('isArchived', CheckboxFilterType::class)
-            ->add('isStarred', CheckboxFilterType::class)
+            ->add('isArchived', CheckboxFilterType::class, array(
+                'label' => 'entry.filters.archived_label',
+            ))
+            ->add('isStarred', CheckboxFilterType::class, array(
+                'label' => 'entry.filters.starred_label',
+            ))
             ->add('previewPicture', CheckboxFilterType::class, array(
                 'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
                     if (false === $values['value']) {
@@ -75,10 +83,12 @@ class EntryFilterType extends AbstractType
 
                     return $filterQuery->createCondition($expression);
                 },
+                'label' => 'entry.filters.preview_picture_label',
             ))
             ->add('language', ChoiceFilterType::class, array(
                 'choices' => array_flip($this->repository->findDistinctLanguageByUser($this->user->getId())),
                 'choices_as_values' => true,
+                'label' => 'entry.filters.language_label',
             ))
         ;
     }

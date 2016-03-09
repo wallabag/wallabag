@@ -39,8 +39,8 @@ class WallabagV2ControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->followRedirect();
 
-        $this->assertGreaterThan(1, $alert = $crawler->filter('div.messages.success')->extract(array('_text')));
-        $this->assertContains('Import summary', $alert[0]);
+        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(array('_text')));
+        $this->assertContains('Import summary', $body[0]);
 
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
@@ -87,7 +87,7 @@ class WallabagV2ControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->followRedirect();
 
-        $this->assertGreaterThan(1, $alert = $crawler->filter('div.messages.success')->extract(array('_text')));
-        $this->assertContains('Import failed, please try again', $alert[0]);
+        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(array('_text')));
+        $this->assertContains('Import failed, please try again', $body[0]);
     }
 }

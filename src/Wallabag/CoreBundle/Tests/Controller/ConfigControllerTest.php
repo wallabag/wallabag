@@ -102,7 +102,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
                     'change_passwd[new_password][first]' => '',
                     'change_passwd[new_password][second]' => '',
                 ),
-                'Wrong value for your current password',
+                'validator.password_wrong_value',
             ),
             array(
                 array(
@@ -118,7 +118,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
                     'change_passwd[new_password][first]' => 'hop',
                     'change_passwd[new_password][second]' => '',
                 ),
-                'The password fields must match',
+                'validator.password_must_match',
             ),
             array(
                 array(
@@ -126,7 +126,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
                     'change_passwd[new_password][first]' => 'hop',
                     'change_passwd[new_password][second]' => 'hop',
                 ),
-                'Password should by at least',
+                'validator.password_too_short',
             ),
         );
     }
@@ -188,14 +188,14 @@ class ConfigControllerTest extends WallabagCoreTestCase
                     'update_user[name]' => '',
                     'update_user[email]' => '',
                 ),
-                'Please enter an email',
+                'fos_user.email.blank',
             ),
             array(
                 array(
                     'update_user[name]' => '',
                     'update_user[email]' => 'test',
                 ),
-                'The email is not valid',
+                'fos_user.email.invalid',
             ),
         );
     }
@@ -244,7 +244,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->followRedirect();
 
-        $this->assertGreaterThan(1, $alert = $crawler->filter('div.messages.success')->extract(array('_text')));
+        $this->assertGreaterThan(1, $alert = $crawler->filter('body')->extract(array('_text')));
         $this->assertContains('Information updated', $alert[0]);
     }
 
@@ -258,7 +258,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
                     'new_user[plainPassword][second]' => '',
                     'new_user[email]' => '',
                 ),
-                'Please enter a username',
+                'fos_user.username.blank',
             ),
             array(
                 array(
@@ -267,7 +267,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
                     'new_user[plainPassword][second]' => 'mypassword',
                     'new_user[email]' => '',
                 ),
-                'The username is too short',
+                'fos_user.username.short',
             ),
             array(
                 array(
@@ -276,7 +276,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
                     'new_user[plainPassword][second]' => 'mypassword',
                     'new_user[email]' => 'test',
                 ),
-                'The email is not valid',
+                'fos_user.email.invalid',
             ),
             array(
                 array(
@@ -285,7 +285,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
                     'new_user[plainPassword][second]' => 'wallacewallace',
                     'new_user[email]' => 'wallace@wallace.me',
                 ),
-                'The username is already used',
+                'fos_user.username.already_used',
             ),
             array(
                 array(
@@ -294,7 +294,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
                     'new_user[plainPassword][second]' => 'mypassword2',
                     'new_user[email]' => 'wallace@wallace.me',
                 ),
-                'The password fields must match',
+                'validator.password_must_match',
             ),
         );
     }
@@ -382,7 +382,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(array('_text')));
-        $this->assertContains('You need to generate a token first.', $body[0]);
+        $this->assertContains('config.form_rss.no_token', $body[0]);
 
         $client->request('GET', '/generate-token');
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
@@ -390,7 +390,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $crawler = $client->followRedirect();
 
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(array('_text')));
-        $this->assertNotContains('You need to generate a token first.', $body[0]);
+        $this->assertNotContains('config.form_rss.no_token', $body[0]);
     }
 
     public function testGenerateTokenAjax()
@@ -454,7 +454,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
                 array(
                     'rss_config[rss_limit]' => 1000000000000,
                 ),
-                'This will certainly kill the app',
+                'validator.rss_limit_too_hight',
             ),
         );
     }

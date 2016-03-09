@@ -14,9 +14,22 @@ class EditEntryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TextType::class, array('required' => true))
-            ->add('is_public', CheckboxType::class, array('required' => false))
-            ->add('save', SubmitType::class)
+            ->add('title', TextType::class, array(
+                'required' => true,
+                'label' => 'entry.edit.title_label',
+            ))
+            ->add('is_public', CheckboxType::class, array(
+                'required' => false,
+                'label' => 'entry.edit.is_public_label',
+            ))
+            ->add('url', TextType::class, array(
+                'disabled' => true,
+                'required' => false,
+                'label' => 'entry.edit.url_label',
+            ))
+            ->add('save', SubmitType::class, array(
+                'label' => 'entry.edit.save_label',
+            ))
         ;
     }
 

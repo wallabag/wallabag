@@ -1,0 +1,334 @@
+security:
+    login:
+        page_title: 'Welcome to wallabag!'
+        keep_logged_in: 'Keep me logged in'
+        forgot_password: 'Forgot your password?'
+        submit: 'Login'
+        register: 'Register'
+        username: 'Username'
+        password: 'Password'
+        cancel: 'Cancel'
+    resetting:
+        description: "Enter your email address below and we'll send you password reset instructions."
+    register:
+        page_title: 'Create an account'
+        go_to_account: 'Go to your account'
+
+menu:
+    left:
+        unread: 'Unread'
+        starred: 'Starred'
+        archive: 'Archive'
+        all_articles: 'All entries'
+        config: 'Config'
+        tags: 'Tags'
+        internal_settings: 'Internal Settings'
+        import: 'Import'
+        howto: 'How to'
+        developer: 'Developer'
+        logout: 'Logout'
+        about: 'About'
+        search: 'Search'
+        save_link: 'Save a link'
+        back_to_unread: 'Back to unread articles'
+    top:
+        add_new_entry: 'Add a new entry'
+        search: 'Search'
+        filter_entries: 'Filter entries'
+        export: 'Export'
+    search_form:
+        input_label: 'Enter your search here'
+
+footer:
+    wallabag:
+        elsewhere: 'Take wallabag with you'
+        social: 'Social'
+        powered_by: 'powered by'
+        about: 'About'
+
+config:
+    page_title: Config
+    tab_menu:
+        settings: 'Settings'
+        rss: 'RSS'
+        user_info: 'User information'
+        password: 'Password'
+        rules: 'Tagging rules'
+        new_user: 'Add a user'
+    form:
+        save: 'Save'
+    form_settings:
+        theme_label: 'Theme'
+        items_per_page_label: 'Items per page'
+        language_label: 'Language'
+    form_rss:
+        description: 'RSS feeds provided by wallabag allow you to read your saved articles with your favourite RSS reader. You need to generate a token first.'
+        token_label: 'RSS token'
+        no_token: 'No token'
+        token_create: 'Create your token'
+        token_reset: 'Regenerate your token'
+        rss_links: 'RSS links'
+        rss_link:
+            unread: 'unread'
+            starred: 'starred'
+            archive: 'archived'
+        rss_limit: 'Number of items in the feed'
+    form_user:
+        two_factor_description: "Enabling two factor authentication means you'll receive an email with a code on every new untrusted connexion"
+        name_label: 'Name'
+        email_label: 'Email'
+        twoFactorAuthentication_label: 'Two factor authentication'
+    form_password:
+        old_password_label: 'Current password'
+        new_password_label: 'New password'
+        repeat_new_password_label: 'Repeat new password'
+    form_rules:
+        if_label: 'if'
+        then_tag_as_label: 'then tag as'
+        delete_rule_label: 'delete'
+        rule_label: 'Rule'
+        tags_label: 'Tags'
+        faq:
+            title: 'FAQ'
+            tagging_rules_definition_title: 'What does « tagging rules » mean?'
+            tagging_rules_definition_description: 'They are rules used by Wallabag to automatically tag new entries.<br />Each time a new entry is added, all the tagging rules will be used to add the tags you configured, thus saving you the trouble to manually classify your entries.'
+            how_to_use_them_title: 'How do I use them?'
+            how_to_use_them_description: 'Let assume you want to tag new entries as « <i>short reading</i> » when the reading time is inferior to 3 minutes.<br />In that case, you should put « readingTime &lt;= 3 » in the <i>Rule</i> field and « <i>short reading</i> » in the <i>Tags</i> field.<br />Several tags can added simultaneously by separating them by a comma: « <i>short reading, must read</i> »<br />Complex rules can be written by using predefined operators: if « <i>readingTime &gt;= 5 AND domainName = "github.com"</i> » then tag as « <i>long reading, github </i> »'
+            variables_available_title: 'Which variables and operators can I use to write rules?'
+            variables_available_description: 'The following variables and operators can be used to create tagging rules:'
+            meaning: 'Meaning'
+            variable_description:
+                label: 'Variable'
+                title: 'Title of the entry'
+                url: 'URL of the entry'
+                isArchived: 'Whether the entry is archived or not'
+                isStarred: 'Whether the entry is starred or not'
+                content: "The entry's content"
+                language: "The entry's language"
+                mimetype: "The entry's mime-type"
+                readingTime: "The estimated entry's reading time, in minutes"
+                domainName: 'The domain name of the entry'
+            operator_description:
+                label: 'Operator'
+                less_than: 'Less than...'
+                strictly_less_than: 'Strictly less than...'
+                greater_than: 'Greater than...'
+                strictly_greater_than: 'Strictly greater than...'
+                equal_to: 'Equal to...'
+                not_equal_to: 'Not equal to...'
+                or: 'One rule OR another'
+                and: 'One rule AND another'
+                matches: 'Tests that a <i>subject</i> is matches a <i>search</i> (case-insensitive).<br />Example: <code>title matches "football"</code>'
+    form_new_user:
+        username_label: 'Username'
+        password_label: 'Password'
+        repeat_new_password_label: 'Repeat new password'
+        plain_password_label: '????'
+        email_label: 'Email'
+
+entry:
+    page_titles:
+        unread: 'Unread entries'
+        starred: 'Starred entries'
+        archive: 'Archived entries'
+        filtered: 'Filtered entries'
+    list:
+        number_on_the_page: '{0} There is no entry.|{1} There is one entry.|]1,Inf[ There are %count% entries.'
+        reading_time: 'estimated reading time'
+        reading_time_minutes: 'estimated reading time: %readingTime% min'
+        reading_time_less_one_minute: 'estimated reading time: <small class="inferieur">&lt;</small> 1 min'
+        original_article: 'original'
+        toogle_as_read: 'Toggle mark as read'
+        toogle_as_star: 'Toggle favorite'
+        delete: 'Delete'
+        export_title: 'Export'
+    filters:
+        title: 'Filters'
+        status_label: 'Status'
+        archived_label: 'Archived'
+        starred_label: 'Starred'
+        preview_picture_label: 'Has a preview picture'
+        preview_picture_help: 'Preview picture'
+        language_label: 'Language'
+        reading_time:
+            label: 'Reading time in minutes'
+            from: 'from'
+            to: 'to'
+        domain_label: 'Domain name'
+        created_at:
+            label: 'Creation date'
+            from: 'from'
+            to: 'to'
+        action:
+            clear: 'Clear'
+            filter: 'Filter'
+    view:
+        left_menu:
+            back_to_top: 'Back to top'
+            back_to_homepage: 'Back'
+            set_as_read: 'Mark as read'
+            set_as_unread: 'Mark as unread'
+            set_as_favorite: 'Favorite'
+            view_original_article: 'Orignal article'
+            re_fetch_content: 'Re-fetch content'
+            delete: 'Delete'
+            add_a_tag: 'Add a tag'
+            share_content: 'Share'
+            share_email_label: 'Email'
+            download: 'Download'
+            print: 'Print'
+            problem:
+                label: 'Problems?'
+                description: 'Does this article appear wrong?'
+        edit_title: 'Edit title'
+        original_article: 'original'
+        annotations_on_the_entry: '{0} No annotations|{1} One annotation|]1,Inf[ %nbAnnotations% annotations'
+    new:
+        page_title: 'Save new entry'
+        placeholder: 'http://website.com'
+        form_new:
+            url_label: Url
+    edit:
+        page_title: 'Edit an entry'
+        title_label: 'Title'
+        url_label: 'Url'
+        is_public_label: 'Public'
+        save_label: 'Save'
+
+about:
+    page_title: 'About'
+    top_menu:
+        who_behind_wallabag: 'Who is behind wallabag'
+        getting_help: 'Getting help'
+        helping: 'Helping wallabag'
+        contributors: 'Contributors'
+        third_party: 'Third-party libraries'
+    who_behind_wallabag:
+        developped_by: 'Developed by'
+        website: 'website'
+        many_contributors: 'And many others contributors ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">on Github</a>'
+        on_github: 'on GitHub'
+        project_website: 'Project website'
+        license: 'License'
+        version: 'Version'
+    getting_help:
+        documentation: 'Documentation'
+        bug_reports: 'Bug reports'
+        support: '<a href="https://support.wallabag.org">On our support website</a> or <a href="https://github.com/wallabag/wallabag/issues">on GitHub</a>'
+    helping:
+        description: 'wallabag is free and opensource. You can help us:'
+        by_contributing: 'by contributing to the project:'
+        by_contributing_2: 'an issue lists all our needs'
+        by_paypal: 'via Paypal'
+    contributors:
+        description: 'Thank you to contributors on wallabag web application'
+    third_party:
+        description: 'Here are the list of third-party libraries used in wallabag (with their licenses):'
+        package: 'Package'
+        license: 'License'
+
+howto:
+    page_title: 'How to'
+    page_description: 'There are several ways to save an article:'
+    top_menu:
+        browser_addons: 'Browser addons'
+        mobile_apps: 'Mobile apps'
+        bookmarklet: 'Bookmarklet'
+    form:
+        description: 'Thanks to this form'
+    browser_addons:
+        firefox: 'Standard Firefox Add-On'
+        chrome: 'Chrome Extension'
+    mobile_apps:
+        android:
+            via_f_droid: 'via F-Droid'
+            via_google_play: 'via Google Play'
+        ios: 'on the iTunes Store'
+        windows: 'on the Microsoft Store'
+    bookmarklet:
+        description: 'Drag & drop this link to your bookmarks bar:'
+
+quickstart:
+    page_title: 'Quickstart'
+    intro:
+        title: 'Welcome to wallabag!'
+        paragraph_1: "We'll accompany you to visit wallabag and show you some features which can interess you."
+        paragraph_2: 'Follow us!'
+    configure:
+        title: 'Configure the application'
+        language: 'Change language and design'
+        rss: 'Enable RSS feeds'
+        tagging_rules: 'Write rules to automatically tag your articles'
+    admin:
+        title: 'Administration'
+        description: 'As a administrator, you have privileges on wallabag. You can:'
+        new_user: 'Create a new user'
+        analytics: 'Configure analytics'
+        sharing: 'Enable some parameters about article sharing'
+        export: 'Configure export'
+        import: 'Configure import'
+    first_steps:
+        title: 'First steps'
+        new_article: 'Save your first article'
+        unread_articles: 'And classify it!'
+    migrate:
+        title: 'Migrate from an existing service'
+        description: "You're using an other service? We'll help you to retrieve your data on wallabag."
+        pocket: 'Migrate from Pocket'
+        wallabag_v1: 'Migrate from wallabag v1'
+        wallabag_v2: 'Migrate from wallabag v2'
+    developer:
+        title: 'Developers'
+        create_application: 'Create your third application'
+    docs:
+        title: 'Full documentation'
+        annotate: 'Annotate your article'
+        export: 'Convert your articles into ePUB or PDF'
+        search_filters: 'See how you can look for an article by using search engine and filters'
+        fetching_errors: 'What can I do if an article encounters errors during fetching?'
+        all_docs: 'And so many other articles!'
+    support:
+        title: 'Support'
+        description: 'If you need some help, we are here for you.'
+        github: 'On GitHub'
+        email: 'By email'
+        gitter: 'On Gitter'
+
+tag:
+    page_title: 'Tags'
+    list:
+        number_on_the_page: '{0} There is no tag.|{1} There is one tag.|]1,Inf[ There are %count% tags.'
+
+import:
+    page_title: 'Import'
+    page_description: 'Welcome to wallabag importer. Please select your previous service that you want to migrate.'
+    action:
+        import_contents: 'Import contents'
+    form:
+        mark_as_read_title: 'Mark all as read?'
+        mark_as_read_label: 'Mark all imported entries as read'
+        file_label: 'File'
+        save_label: 'Upload file'
+    pocket:
+        page_title: 'Import > Pocket'
+        description: "This importer will import all your Pocket data. Pocket doesn't allow us to retrieve content from their service, so the readable content of each article will be re-fetched by wallabag."
+        config_missing:
+            description: "Pocket import isn't configured."
+            admin_message: 'You need to define %keyurls%a pocket_consumer_key%keyurle%.'
+            user_message: 'Your server admin needs to define an API Key for Pocket.'
+        authorize_message: 'You can import your data from your Pocket account. You just have to click on the below button and authorize the application to connect to getpocket.com.'
+        connect_to_pocket: 'Connect to Pocket and import data'
+    wallabag_v1:
+        page_title: 'Import > Wallabag v1'
+        description: 'This importer will import all your wallabag v1 articles. On your config page, click on "JSON export" in the "Export your wallabag data" section. You will have a "wallabag-export-1-xxxx-xx-xx.json" file.'
+        how_to: 'Please select your wallabag export and click on the below button to upload and import it.'
+    wallabag_v2:
+        page_title: 'Import > Wallabag v2'
+        description: 'This importer will import all your wallabag v2 articles. Go to All articles, then, on the export sidebar, click on "JSON". You will have a "All articles.json" file.'
+
+validator:
+    password_must_match: 'The password fields must match.'
+    password_too_short: 'Password should by at least 8 chars long'
+    password_wrong_value: 'Wrong value for your current password'
+    item_per_page_too_high: 'This will certainly kill the app'
+    rss_limit_too_hight: 'This will certainly kill the app'

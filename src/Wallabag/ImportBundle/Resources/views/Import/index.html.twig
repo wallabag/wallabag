@@ -1,17 +1,18 @@
 {% extends "WallabagCoreBundle::layout.html.twig" %}
-{% block title %}{% trans %}Import{% endtrans %}{% endblock %}
+
+{% block title %}{{ 'import.page_title'|trans }}{% endblock %}
 
 {% block content %}
 <div class="row">
     <div class="col s12">
         <div class="card-panel settings">
-            {% trans %}Welcome to wallabag importer. Please select your previous service that you want to migrate.{% endtrans %}
+            {{ 'import.page_description'|trans }}
             <ul>
                 {% for import in imports %}
                     <li>
                         <h5>{{ import.name }}</h5>
                         <blockquote>{{ import.description|trans }}</blockquote>
-                        <p><a class="waves-effect waves-light btn" href="{{ path(import.url) }}">{% trans %}Import contents{% endtrans %}</a></p>
+                        <p><a class="waves-effect waves-light btn" href="{{ path(import.url) }}">{{ 'import.action.import_contents'|trans }}</a></p>
                     </li>
                 {% endfor %}
             </ul>

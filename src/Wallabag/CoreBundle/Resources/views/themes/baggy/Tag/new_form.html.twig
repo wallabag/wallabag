@@ -8,7 +8,6 @@
     {% endif %}
 
     {{ form_widget(form.label, { 'attr': {'autocomplete': 'off'} }) }}
-    {{ form_widget(form.save, { 'attr': {'class': 'btn waves-effect waves-light'}, 'label': 'add tag' }) }}
 
-    <div class="hidden">{{ form_rest(form) }}</div>
+    {{ form_rest(form) }}
 </form>
