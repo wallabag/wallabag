@@ -101,7 +101,8 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget",
             "npm install",
-            "bower install"
+            "bower install",
+            "grunt"
         ],
         "post-install-cmd": [
             "@post-cmd"

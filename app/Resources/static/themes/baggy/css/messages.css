@@ -1,0 +1,19 @@
+.messages.error.install {
+    border: 1px solid #c42608;
+    color: #c00 !important;
+    background: #fff0ef;
+    text-align: left;
+}
+
+.messages.notice.install {
+    border: 1px solid #ebcd41;
+    color: #000;
+    background: #fffcd3;
+    text-align: left;
+}
+
+.messages.success.install {
+    border: 1px solid #6dc70c;
+    background: #e0fbcc !important;
+    text-align: left;
+}

@@ -1,3 +1,5 @@
+var $ = require('jquery');
+
 jQuery(function($) {
 
   function split( val ) {

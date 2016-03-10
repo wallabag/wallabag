@@ -1,3 +1,6 @@
+var $ = require("jquery"),
+materialize = require("materialize");
+
 function init_filters() {
     // no display if filters not aviable
     if ($("div").is("#filters")) {

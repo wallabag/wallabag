@@ -7,6 +7,7 @@
   ],
   "description": "wallabag is a self hostable application for saving web pages",
   "license": "MIT",
+  "main": "bower.json",
   "ignore": [
     "**/.*",
     "node_modules",
@@ -15,11 +16,7 @@
     "tests"
   ],
   "dependencies": {
-    "annotator": "https://github.com/wallabag/annotator.git#0f076c7d371ed25eb0793346f46982d90f2c4c85",
-    "jquery": "^2.2.1",
-    "jquery.cookie": "^1.4.1",
-    "materialize": "^0.97.5",
-    "npm": "^3.8.0",
-    "Prism": "^1.4.1"
+    "material-design-icons": "^2.2.0",
+    "icomoon-bower": "icomoon#^0.1.0"
   }
 }

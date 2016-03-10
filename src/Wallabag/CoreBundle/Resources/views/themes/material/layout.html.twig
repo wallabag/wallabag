@@ -3,16 +3,12 @@
 {% block css %}
     {{ parent() }}
 
-    <link rel="stylesheet" href="{{ asset('bundles/wallabagcore/themes/material/css/materialize.min.css') }}"  media="screen,projection"/>
-    <link rel="stylesheet" href="{{ asset('bundles/wallabagcore/themes/material/css/main.css') }}" media="all">
+    <link rel="stylesheet" href="{{ asset('bundles/wallabagcore/themes/material/css/style.min.css') }}"  media="screen,projection"/>
     <link rel="stylesheet" href="{{ asset('bundles/wallabagcore/themes/material/css/print.css') }}" media="print">
 {% endblock %}
 
 {% block scripts %}
     {{ parent() }}
-
-    <script src="{{ asset('bundles/wallabagcore/themes/material/js/materialize.min.js') }}"></script>
-    <script src="{{ asset('bundles/wallabagcore/themes/material/js/init.js') }}"></script>
 {% endblock %}
 
 {% block header %}
