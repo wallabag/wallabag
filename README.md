@@ -15,9 +15,12 @@ If you don't have it yet, please [install composer](https://getcomposer.org/down
 Then you can install wallabag by executing the following commands:
 
 ```
-SYMFONY_ENV=prod composer create-project wallabag/wallabag wallabag "2.0.0-beta.2" --no-dev --keep-vcs
-php bin/console wallabag:install --env=prod
-php bin/console server:run --env=prod
+    git clone https://github.com/wallabag/wallabag.git
+    cd wallabag
+    git checkout 2.0.0-beta.2
+    SYMFONY_ENV=prod composer install --no-dev -o --prefer-dist
+    php bin/console wallabag:install --env=prod
+    php bin/console server:run --env=prod
 ```
 
 ## License
