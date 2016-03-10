@@ -22,6 +22,12 @@ Nombre d'articles par page
 
 Vous pouvez définir le nombre d'articles affichés sur chaque page.
 
+Vitesse de lecture
+~~~~~~~~~~~~~~~~~~
+
+wallabag calcule une durée de lecture pour chaque article. Vous pouvez définir ici, grâce à la jauge, si vous lisez plus
+ou moins vite. wallabag recalculera la durée de lecture de chaque article.
+
 Langue
 ~~~~~~
 

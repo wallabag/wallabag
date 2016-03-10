@@ -21,6 +21,12 @@ Items per page
 
 You can change the number of articles displayed on each page.
 
+Reading speed
+~~~~~~~~~~~~~
+
+wallabag calculates a reading time for each article. You can define here, thanks to the slider, if you are
+a fast or a slow reader. wallabag will recalculate the reading time for each article.
+
 Language
 ~~~~~~~~
 
