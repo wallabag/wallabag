@@ -26,6 +26,15 @@
 
         <fieldset class="w500p inline">
             <div class="row">
+                {{ form_label(form.config.reading_speed) }}
+                {{ form_errors(form.config.reading_speed) }}
+                {{ form_widget(form.config.reading_speed) }}
+            </div>
+        </fieldset>
+
+
+        <fieldset class="w500p inline">
+            <div class="row">
                 {{ form_label(form.config.language) }}
                 {{ form_errors(form.config.language) }}
                 {{ form_widget(form.config.language) }}

@@ -30,7 +30,7 @@ class Configuration implements ConfigurationInterface
                     ->defaultValue(50)
                 ->end()
                 ->integerNode('reading_speed')
-                    ->defaultValue(200)
+                    ->defaultValue(1)
                 ->end()
                 ->scalarNode('version')
                 ->end()
