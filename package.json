@@ -12,13 +12,15 @@
     "bower": "^1.7.7",
     "browserify": "^13.0.0",
     "browserify-shim": "^3.8.12",
-    "grunt": "^1.0.0-rc1",
+    "grunt": ">=0.4.0",
     "grunt-contrib-clean": "^1.0.0",
     "grunt-contrib-concat": "^1.0.0",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-cssmin": "^1.0.0",
     "grunt-contrib-uglify": "^1.0.0",
-    "grunt-contrib-watch": "^0.6.1",
+    "grunt-contrib-symlink": "^1.0.0",
+    "grunt-browserify": "^4.0.1",
+    "grunt-shell": "^1.2.1",
     "hammerjs": "^2.0.6",
     "jquery": "^2.2.1",
     "jquery-ui": "^1.10.5",
@@ -69,11 +71,5 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/wallabag/wallabag/issues"
-  },
-  "devDependencies": {
-    "grunt-browserify": "^4.0.1",
-    "grunt-contrib-symlink": "^1.0.0",
-    "grunt-run": "^0.5.2",
-    "grunt-shell": "^1.2.1"
   }
 }
