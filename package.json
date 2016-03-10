@@ -28,6 +28,9 @@
     "pickadate": "^3.5.6",
     "prismjs": "^1.4.1"
   },
+  "engines" : {
+    "node": ">0.12"
+  },
   "browser": {
     "jquery": "./node_modules/jquery/dist/jquery.js",
     "materialize": "./node_modules/materialize-css/bin/materialize.js"
