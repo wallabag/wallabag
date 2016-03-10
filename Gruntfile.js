@@ -2,15 +2,18 @@ module.exports = function (grunt) {
   require('load-grunt-tasks')(grunt);
 
   grunt.initConfig({
+    appDir: 'app/Resources/static',
+    buildDir: 'web/bundles/wallabagcore',
+
     cssmin: {
       combine: {
-        options:{
+        options: {
           report: 'gzip',
           keepSpecialComments: 0
         },
         files: {
-          'web/bundles/wallabagcore/themes/material/css/style.min.css': [
-            'web/built/concat.css'
+          '<%= buildDir %>/themes/material/css/style.min.css': [
+            '<%= buildDir %>/concat.css'
           ]
         }
       }
@@ -24,82 +27,92 @@ module.exports = function (grunt) {
           'node_modules/jquery/dist/jquery.js',
           'node_modules/jquery-ui/jquery-ui.js',
           'node_modules/materialize-css/bin/materialize.js',
-          'web/bundles/wallabagcore/themes/material/js/*.js'
+          '<%= appDir %>/themes/material/js/*.js'
         ],
-        dest: 'web/built/app.js'
+        dest: '<%= buildDir %>/app.js'
       },
       css: {
         src: [
           'node_modules/materialize-css/bin/materialize.css',
-          'app/Resources/static/themes/material/css/main.css',
-          'app/Resources/lib/icomoon-bower/style.css'
+          '<%= appDir %>/themes/material/css/*.css',
+          '<%= appDir %>/lib/icomoon-bower/style.css'
         ],
-        dest: 'web/built/concat.css'
+        dest: '<%= buildDir %>/concat.css'
       }
     },
     browserify: {
-      'web/built/app.browser.js': ['web/built/app.js']
+      '<%= buildDir %>/app.browser.js': ['<%= buildDir %>/app.js']
     },
     uglify: {
       options: {
         sourceMap: true,
-        sourceMapName: 'web/bundles/wallabagcore/themes/_global/js/app.map'
+        sourceMapName: '<%= buildDir %>/themes/_global/js/app.map'
       },
       dist: {
         files: {
-          'web/bundles/wallabagcore/themes/_global/js/app.min.js':
-            ['web/built/app.browser.js']
+          '<%= buildDir %>/themes/_global/js/app.min.js':
+            ['<%= buildDir %>/app.browser.js']
         }
       }
     },
     copy: {
-        baggyfonts: {
-            files: [
-            {
-                cwd: 'app/Resources/lib/icomoon-bower/font',
-                src: '**/*',
-                dest: 'web/bundles/wallabagcore/themes/baggy/font',
-                expand: true
-            }
-          ]
-        },
-        materialfonts: {
-            files: [
-            {
-                cwd: 'app/Resources/static/themes/material/font',
-                src: '**/*',
-                dest: 'web/bundles/wallabagcore/themes/material/font',
-                expand: true
-            }
-          ]
-        },
-        materialize: {
-          files: [
-            {
-              cwd: 'node_modules/pickadate/lib/',
-              src: 'picker.js',
-              dest: 'web/built',
-              expand: true
-            }
-          ]
-        },
-        annotator: {
-          files: [
-            {
-              cwd: 'node_modules/annotator/pkg',
-              src: 'annotator.min.js',
-              dest: 'web/bundles/wallabagcore/themes/_global/js',
-              expand: true
-            }
-          ]
-        }
+      pickerjs: {
+        expand: true,
+        cwd: 'node_modules/pickadate/lib',
+        src: 'picker.js',
+        dest: '<%= buildDir %>'
+      },
+      annotator: {
+        expand: true,
+        cwd: 'node_modules/annotator/pkg',
+        src: 'annotator.min.js',
+        dest: '<%= buildDir %>/themes/_global/js/'
+      }
+    },
+    symlink: {
+      baggyfonts: {
+        files: [
+          {
+            expand: true,
+            overwrite: true,
+            cwd: "<%= appDir %>/lib/icomoon-bower/",
+            src: "fonts",
+            dest: "<%= buildDir %>/themes/baggy/"
+          }
+        ]
+      },
+      materialfonts: {
+        files: [
+          {
+            expand: true,
+            overwrite: true,
+            cwd: '<%= appDir %>/themes/material/',
+            src: "font",
+            dest: '<%= buildDir %>/themes/material/'
+          }
+        ]
+      },
+      pics: {
+        files: [
+          {
+            expand: true,
+            overwrite: true,
+            cwd: '<%= appDir %>/themes/_global/',
+            src: 'img',
+            dest: '<%= buildDir %>/themes/_global/'
+          }
+        ]
+      }
     },
     clean: {
       css: {
-        src: [ 'web/built/**/*.css' ]
+        src: [ '<%= buildDir %>/**/*.css' ]
       },
       js: {
-        src: ['web/built/**/*.js', 'web/built/**/*.map']
+        src: ['<%= buildDir %>/**/*.js', '<%= buildDir %>/**/*.map']
+      },
+      all: {
+        src: ['./<%= buildDir %>']
       }
     }
   });
@@ -107,17 +120,17 @@ module.exports = function (grunt) {
   grunt.registerTask(
     'fonts',
     'Install fonts',
-    ['copy']
+    ['symlink']
     );
   grunt.registerTask(
     'js',
     'Build and install js files',
-    ['clean:js', 'concat:js', 'copy:materialize', 'browserify', 'uglify']
+    ['clean:js', 'concat:js', 'browserify', 'uglify']
     );
   grunt.registerTask(
     'default',
     'Build and install everything',
-    ['clean', 'concat', 'copy', 'browserify', 'uglify', 'cssmin']
+    ['clean', 'copy:pickerjs', 'concat', 'browserify', 'uglify', 'cssmin', 'symlink']
     );
   grunt.registerTask(
     'css',

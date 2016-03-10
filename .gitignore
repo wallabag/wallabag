@@ -41,6 +41,6 @@ composer.lock
 
 # npm stuff
 /node_modules/
-!app/Resources/lib
-app/Resources/lib/*
+!app/Resources/static/lib
+app/Resources/static/lib/*
 /bin

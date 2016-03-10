@@ -8,7 +8,7 @@
     "doc": "docs"
   },
   "dependencies": {
-    "annotator": "https://github.com/wallabag/annotator.git#0f076c7d371ed25eb0793346f46982d90f2c4c85",
+    "annotator": "git://github.com/wallabag/annotator.git#0f076c7d371ed25eb0793346f46982d90f2c4c85",
     "bower": "^1.7.7",
     "browserify": "^13.0.0",
     "browserify-shim": "^3.8.12",
@@ -19,7 +19,6 @@
     "grunt-contrib-cssmin": "^1.0.0",
     "grunt-contrib-uglify": "^1.0.0",
     "grunt-contrib-watch": "^0.6.1",
-    "grunt-symlink": "^0.4.0",
     "hammerjs": "^2.0.6",
     "jquery": "^2.2.1",
     "jquery-ui": "^1.10.5",
@@ -70,6 +69,7 @@
   },
   "devDependencies": {
     "grunt-browserify": "^4.0.1",
+    "grunt-contrib-symlink": "^1.0.0",
     "grunt-run": "^0.5.2",
     "grunt-shell": "^1.2.1"
   }

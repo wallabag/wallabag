@@ -1,5 +1,6 @@
 var $ = require("jquery"),
 materialize = require("materialize");
+var annotator = require('annotator');
 
 function init_filters() {
     // no display if filters not aviable
