@@ -16,6 +16,8 @@ cache:
         - vendor
         - $HOME/.composer/cache
         - node_modules
+        - $HOME/.cache/bower
+        - $HOME/.npm
 
 php:
     - 5.5
