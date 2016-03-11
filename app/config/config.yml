@@ -80,6 +80,8 @@ doctrine:
         password: "%database_password%"
         charset:  UTF8
         path:     "%database_path%"
+        # fix when mysql database doesn't exist, see https://github.com/wallabag/wallabag/issues/1769
+        server_version: 5.6
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
