@@ -11,12 +11,16 @@ More informations on our website: [wallabag.org](https://wallabag.org)
 # Want to test the v2?
 Keep in mind it's an **unstable** branch, everything can be broken :)
 
-If you don't have it yet, please [install composer](https://getcomposer.org/download/). Then you can install wallabag by executing the following commands:
+If you don't have it yet, please [install composer](https://getcomposer.org/download/).
+Then you can install wallabag by executing the following commands:
 
 ```
-SYMFONY_ENV=prod composer create-project wallabag/wallabag wallabag "2.0.0-beta.1" --no-dev
-php bin/console wallabag:install --env=prod
-php bin/console server:run --env=prod
+    git clone https://github.com/wallabag/wallabag.git
+    cd wallabag
+    git checkout 2.0.0-beta.2
+    SYMFONY_ENV=prod composer install --no-dev -o --prefer-dist
+    php bin/console wallabag:install --env=prod
+    php bin/console server:run --env=prod
 ```
 
 ## License
