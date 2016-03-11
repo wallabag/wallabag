@@ -55,6 +55,7 @@ before_script:
 
 before_install:
     - if [[ $TRAVIS_REPO_SLUG = wallabag/wallabag ]]; then cp .composer-auth.json ~/.composer/auth.json; fi;
+    - source ~/.nvm/nvm.sh && nvm install 5.0
     - npm install -g npm@latest
 
 script:
