@@ -22,6 +22,7 @@ class SecurityControllerTest extends WallabagCoreTestCase
 
         if (!$client->getContainer()->getParameter('twofactor_auth')) {
             $this->markTestSkipped('twofactor_auth is not enabled.');
+
             return;
         }
 
@@ -54,6 +55,7 @@ class SecurityControllerTest extends WallabagCoreTestCase
 
         if (!$client->getContainer()->getParameter('twofactor_auth')) {
             $this->markTestSkipped('twofactor_auth is not enabled.');
+
             return;
         }
 
