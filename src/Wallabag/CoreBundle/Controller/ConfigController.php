@@ -45,7 +45,7 @@ class ConfigController extends Controller
 
             $this->get('session')->getFlashBag()->add(
                 'notice',
-                'Config saved. Some parameters will be considered after disconnection.'
+                'flashes.config.notice.config_saved'
             );
 
             return $this->redirect($this->generateUrl('config'));
@@ -57,9 +57,9 @@ class ConfigController extends Controller
 
         if ($pwdForm->isValid()) {
             if ($this->get('craue_config')->get('demo_mode_enabled') && $this->get('craue_config')->get('demo_mode_username') === $user->getUsername()) {
-                $message = 'In demonstration mode, you can\'t change password for this user.';
+                $message = 'flashes.config.notice.password_not_updated_demo';
             } else {
-                $message = 'Password updated';
+                $message = 'flashes.config.notice.password_updated';
 
                 $user->setPlainPassword($pwdForm->get('new_password')->getData());
                 $userManager->updateUser($user, true);
@@ -82,7 +82,7 @@ class ConfigController extends Controller
 
             $this->get('session')->getFlashBag()->add(
                 'notice',
-                'Information updated'
+                'flashes.config.notice.user_updated'
             );
 
             return $this->redirect($this->generateUrl('config').'#set3');
@@ -98,7 +98,7 @@ class ConfigController extends Controller
 
             $this->get('session')->getFlashBag()->add(
                 'notice',
-                'RSS information updated'
+                'flashes.config.notice.rss_updated'
             );
 
             return $this->redirect($this->generateUrl('config').'#set2');
@@ -116,7 +116,7 @@ class ConfigController extends Controller
 
             $this->get('session')->getFlashBag()->add(
                 'notice',
-                'Tagging rules updated'
+                'flashes.config.notice.tagging_rules_updated'
             );
 
             return $this->redirect($this->generateUrl('config').'#set5');
@@ -147,7 +147,7 @@ class ConfigController extends Controller
 
             $this->get('session')->getFlashBag()->add(
                 'notice',
-                $this->get('translator')->trans('User "%username%" added', array('%username%' => $newUser->getUsername()))
+                $this->get('translator')->trans('flashes.config.notice.user_added', array('%username%' => $newUser->getUsername()))
             );
 
             return $this->redirect($this->generateUrl('config').'#set6');
@@ -192,7 +192,7 @@ class ConfigController extends Controller
 
         $this->get('session')->getFlashBag()->add(
             'notice',
-            'RSS token updated'
+            'flashes.config.notice.rss_token_updated'
         );
 
         return $this->redirect($this->generateUrl('config').'#set2');
@@ -219,7 +219,7 @@ class ConfigController extends Controller
 
         $this->get('session')->getFlashBag()->add(
             'notice',
-            'Tagging rule deleted'
+            'flashes.config.notice.tagging_rules_deleted'
         );
 
         return $this->redirect($this->generateUrl('config').'#set5');

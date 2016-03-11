@@ -31,11 +31,14 @@ class WallabagV1Controller extends Controller
                     ->setMarkAsRead($markAsRead)
                     ->import();
 
-                $message = 'Import failed, please try again.';
+                $message = 'flashes.import.notice.failed';
 
                 if (true === $res) {
                     $summary = $wallabag->getSummary();
-                    $message = 'Import summary: '.$summary['imported'].' imported, '.$summary['skipped'].' already saved.';
+                    $message = $this->get('translator')->trans('flashes.import.notice.summary', array(
+                        '%imported%' => $summary['imported'],
+                        '%skipped%' => $summary['skipped'],
+                    ));
 
                     unlink($this->getParameter('wallabag_import.resource_dir').'/'.$name);
                 }
@@ -49,7 +52,7 @@ class WallabagV1Controller extends Controller
             } else {
                 $this->get('session')->getFlashBag()->add(
                     'notice',
-                    'Error while processing import. Please verify your import file.'
+                    'flashes.import.notice.failed_on_file'
                 );
             }
         }

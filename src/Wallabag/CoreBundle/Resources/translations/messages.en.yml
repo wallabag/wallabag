@@ -332,3 +332,37 @@ validator:
     password_wrong_value: 'Wrong value for your current password'
     item_per_page_too_high: 'This will certainly kill the app'
     rss_limit_too_hight: 'This will certainly kill the app'
+
+flashes:
+    config:
+        notice:
+            config_saved: 'Config saved. Some parameters will be considered after disconnection.'
+            password_updated: 'Password updated'
+            password_not_updated_demo: "In demonstration mode, you can't change password for this user."
+            user_updated: 'Information updated'
+            rss_updated: 'RSS information updated'
+            tagging_rules_updated: 'Tagging rules updated'
+            tagging_rules_deleted: 'Tagging rule deleted'
+            user_added: 'User "%username%" added'
+            rss_token_updated: 'RSS token updated'
+    entry:
+        notice:
+            entry_already_saved: 'Entry already saved on %date%'
+            entry_saved: 'Entry saved'
+            entry_updated: 'Entry updated'
+            entry_reloaded: 'Entry reloaded'
+            entry_reload_failed: 'Failed to reload entry'
+            entry_archived: 'Entry archived'
+            entry_unarchived: 'Entry unarchived'
+            entry_starred: 'Entry starred'
+            entry_unstarred: 'Entry unstarred'
+            entry_deleted: 'Entry deleted'
+    tag:
+        notice:
+            tag_added: 'Tag added'
+    import:
+        notice:
+            failed: 'Import failed, please try again.'
+            failed_on_file: 'Error while processing import. Please verify your import file.'
+            summary: 'Import summary: %imported% imported, %skipped% already saved.'
+

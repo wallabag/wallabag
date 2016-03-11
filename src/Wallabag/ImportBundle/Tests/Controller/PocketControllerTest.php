@@ -37,6 +37,6 @@ class PocketControllerTest extends WallabagCoreTestCase
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $this->assertContains('import/pocket', $client->getResponse()->headers->get('location'));
-        $this->assertEquals('Import failed, please try again.', $client->getContainer()->get('session')->getFlashBag()->peek('notice')[0]);
+        $this->assertEquals('flashes.import.notice.failed', $client->getContainer()->get('session')->getFlashBag()->peek('notice')[0]);
     }
 }

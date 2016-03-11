@@ -52,8 +52,9 @@ class PocketController extends Controller
      */
     public function callbackAction()
     {
-        $message = 'Import failed, please try again.';
+        $message = 'flashes.import.notice.failed';
         $pocket = $this->get('wallabag_import.pocket.import');
+
         $markAsRead = $this->get('session')->get('mark_as_read');
         $this->get('session')->remove('mark_as_read');
 
@@ -69,7 +70,10 @@ class PocketController extends Controller
 
         if (true === $pocket->setMarkAsRead($markAsRead)->import()) {
             $summary = $pocket->getSummary();
-            $message = 'Import summary: '.$summary['imported'].' imported, '.$summary['skipped'].' already saved.';
+            $message = $this->get('translator')->trans('flashes.import.notice.summary', array(
+                '%imported%' => $summary['imported'],
+                '%skipped%' => $summary['skipped'],
+            ));
         }
 
         $this->get('session')->getFlashBag()->add(

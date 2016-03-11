@@ -55,7 +55,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
         $this->assertTrue($content->getTags()->contains($tag));
 
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(array('_text')));
-        $this->assertContains('Import summary', $body[0]);
+        $this->assertContains('flashes.import.notice.summary', $body[0]);
     }
 
     public function testImportWallabagWithFileAndMarkAllAsRead()
@@ -100,7 +100,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
         $this->assertTrue($content2->isArchived());
 
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(array('_text')));
-        $this->assertContains('Import summary', $body[0]);
+        $this->assertContains('flashes.import.notice.summary', $body[0]);
     }
 
     public function testImportWallabagWithEmptyFile()
@@ -124,6 +124,6 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
         $crawler = $client->followRedirect();
 
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(array('_text')));
-        $this->assertContains('Import failed, please try again', $body[0]);
+        $this->assertContains('flashes.import.notice.failed', $body[0]);
     }
 }
