@@ -50,6 +50,6 @@ before_install:
     - if [[ $TRAVIS_REPO_SLUG = wallabag/wallabag ]]; then cp .composer-auth.json ~/.composer/auth.json; fi;
 
 script:
-    - travis_wait composer update --no-interaction --no-progress
+    - travis_wait composer install --no-interaction --no-progress --prefer-dist -o
     - ant prepare-$DB
     - bin/phpunit -v
