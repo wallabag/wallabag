@@ -35,10 +35,12 @@
   },
   "browser": {
     "jquery": "./node_modules/jquery/dist/jquery.js",
+    "jQuery": "./node_modules/jquery/dist/jquery.js",
     "materialize": "./node_modules/materialize-css/bin/materialize.js"
   },
   "browserify-shim": {
     "jquery": "$",
+    "jQuery": "jQuery",
     "materialize": "materialize"
   },
   "browserify": {
