@@ -162,12 +162,12 @@ class WallabagRestControllerTest extends WallabagApiTestCase
         $this->assertCount(1, $content['tags']);
     }
 
-    public function testPostArchivedEntry()
+    public function testPostArchivedAndStarredEntry()
     {
         $this->client->request('POST', '/api/entries.json', array(
             'url' => 'http://www.lemonde.fr/idees/article/2016/02/08/preserver-la-liberte-d-expression-sur-les-reseaux-sociaux_4861503_3232.html',
             'archive' => true,
-            'starred' => false,
+            'starred' => true,
         ));
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
@@ -177,7 +177,7 @@ class WallabagRestControllerTest extends WallabagApiTestCase
         $this->assertGreaterThan(0, $content['id']);
         $this->assertEquals('http://www.lemonde.fr/idees/article/2016/02/08/preserver-la-liberte-d-expression-sur-les-reseaux-sociaux_4861503_3232.html', $content['url']);
         $this->assertEquals(true, $content['is_archived']);
-        $this->assertEquals(false, $content['is_starred']);
+        $this->assertEquals(true, $content['is_starred']);
     }
 
     public function testPatchEntry()
