@@ -4,7 +4,7 @@ Installer wallabag
 Pré-requis
 ------------
 
-wallabag est compatible avec php >= 5.5
+wallabag est compatible avec php >= 5.5, php 7 inclus.
 
 Vous aurez besoin des extensions suivantes pour que wallabag fonctionne. Il est possible que certaines de ces extensions soient déjà activées dans votre version de php, donc vous n'avez pas forcément besoin d'installer tous les paquets correspondants.
 
