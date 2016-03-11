@@ -1,4 +1,6 @@
-global.jquery = require('jquery');
+var $ = global.jquery = require('jquery');
+require('jquery.cookie');
+require('jquery-ui');
 
 $.fn.ready(function() {
 

@@ -100,7 +100,7 @@ form input[type="text"], form input[type="number"], select, form input[type="pas
   select{
     -webkit-appearance: none;
     border-radius: 0;
-    background: #FFF url(../img/bg-select.png) no-repeat right center;
+    background: #FFF url(../../_global/img/bg-select.png) no-repeat right center;
   }
 }
 
@@ -700,22 +700,22 @@ a.add-to-wallabag-link-after:after {
 }
 
 .icon-flattr:before {
-  content: "\e800";
+  content: "\ead4";
 }
 .icon-mail:before {
-  content: "\e80a";
+  content: "\ea86";
 }
 .icon-up-open:before {
   content: "\e80b";
 }
 .icon-star:before {
-  content: "\e805";
+  content: "\e9d9";
 }
 .icon-check:before {
-  content: "\e804";
+  content: "\ea10";
 }
 .icon-link:before {
-  content: "\e801";
+  content: "\e9cb";
 }
 .icon-reply:before {
   content: "\e806";
@@ -727,33 +727,35 @@ a.add-to-wallabag-link-after:after {
   content: "\e803";
 }
 .icon-twitter:before {
-  content: "\e807";
+  content: "\ea91";
 }
 .icon-down-open:before {
   content: "\e809";
 }
 .icon-trash:before {
-  content: "\e80c";
+  content: "\e9ac";
 }
 .icon-delete:before {
-  content: "\e600";
+  content: "\ea0d";
 }
 .icon-power:before {
-  content: "\e601";
+  content: "\ea14";
 }
 .icon-arrow-up-thick:before {
-  content: "\e602";
+  content: "\ea3a";
 }
 .icon-rss:before {
   content: "\e808";
 }
 .icon-print:before {
-  content: "\e80d";
+  content: "\e954";
 }
 .icon-reload:before {
   content: "\ea2e";
 }
-
+.icon-price-tags:before {
+    content: "\e936";
+}
 
 /* .icon-image class, for image-based icons
   ========================================================================== */

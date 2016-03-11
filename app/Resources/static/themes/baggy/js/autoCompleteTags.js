@@ -1,6 +1,3 @@
-var $ = require('jquery');
-require('jquery-ui');
-
 jQuery(function($) {
 
   function split( val ) {

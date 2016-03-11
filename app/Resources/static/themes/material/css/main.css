@@ -472,25 +472,25 @@ main ul.row {
    ========================================================================== */
 
 .icon-google-plus2:before {
-    content: "\e800";
+    content: "\ea89";
 }
 .icon-facebook2:before {
-    content: "\e801";
+    content: "\ea8d";
 }
 .icon-twitter:before {
-    content: "\e802";
+    content: "\ea91";
 }
 .icon-apple:before {
-    content: "\e803";
+    content: "\eabf";
 }
 .icon-android:before {
-    content: "\e804";
+    content: "\eac1";
 }
 .icon-chrome:before {
-    content: "\e805";
+    content: "\eae5";
 }
 .icon-firefox:before {
-    content: "\e806";
+    content: "\eae6";
 }
 
 footer [class^="icon-"], footer [class*=" icon-"] {

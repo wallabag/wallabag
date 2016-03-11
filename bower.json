@@ -17,6 +17,7 @@
   ],
   "dependencies": {
     "material-design-icons": "^2.2.0",
-    "icomoon-bower": "icomoon#^0.1.0"
+    "icomoon-bower": "icomoon#^0.1.0",
+    "bower-pt-sans": "pt-sans#*"
   }
 }

@@ -6,14 +6,25 @@ module.exports = function (grunt) {
     buildDir: 'web/bundles/wallabagcore',
 
     cssmin: {
-      combine: {
+      material: {
         options: {
           report: 'gzip',
           keepSpecialComments: 0
         },
         files: {
           '<%= buildDir %>/themes/material/css/style.min.css': [
-            '<%= buildDir %>/concat.css'
+            '<%= buildDir %>/material.css'
+          ]
+        }
+      },
+      baggy: {
+        options: {
+          report: 'gzip',
+          keepSpecialComments: 0
+        },
+        files: {
+          '<%= buildDir %>/themes/baggy/css/style.min.css': [
+            '<%= buildDir %>/baggy.css'
           ]
         }
       }
@@ -22,38 +33,70 @@ module.exports = function (grunt) {
       options: {
         separator: ';'
       },
-      js: {
+      jsMaterial: {
         src: [
           'node_modules/jquery/dist/jquery.js',
           'node_modules/jquery-ui/jquery-ui.js',
           'node_modules/materialize-css/bin/materialize.js',
-          '<%= appDir %>/themes/material/js/*.js'
+          '<%= appDir %>/themes/material/js/init.js',
+          '<%= appDir %>/themes/material/js/restoreScroll.js'
         ],
-        dest: '<%= buildDir %>/app.js'
+        dest: '<%= buildDir %>/material.js'
       },
-      css: {
+      jsBaggy: {
+        src: [
+          'node_modules/jquery/dist/jquery.js',
+          'node_modules/jquery-ui/jquery-ui.js',
+          '<%= appDir %>/themes/baggy/js/init.js',
+          '<%= appDir %>/themes/baggy/js/restoreScroll.js',
+          '<%= appDir %>/themes/baggy/js/autoClose.js',
+          '<%= appDir %>/themes/baggy/js/autoCompleteTags.js',
+          '<%= appDir %>/themes/baggy/js/closeMessage.js',
+          '<%= appDir %>/themes/baggy/js/popupForm.js',
+          '<%= appDir %>/themes/baggy/js/saveLink.js'
+        ],
+        dest: '<%= buildDir %>/baggy.js'
+      },
+      cssMaterial: {
         src: [
           'node_modules/materialize-css/bin/materialize.css',
           '<%= appDir %>/themes/material/css/*.css',
           '<%= appDir %>/lib/icomoon-bower/style.css'
         ],
-        dest: '<%= buildDir %>/concat.css'
+        dest: '<%= buildDir %>/material.css'
+      },
+      cssBaggy: {
+        src: [
+          '<%= appDir %>/themes/baggy/css/*.css'
+        ],
+        dest: '<%= buildDir %>/baggy.css'
       }
     },
     browserify: {
-      '<%= buildDir %>/app.browser.js': ['<%= buildDir %>/app.js']
+      '<%= buildDir %>/material.browser.js': ['<%= buildDir %>/material.js'],
+      '<%= buildDir %>/baggy.browser.js': ['<%= buildDir %>/baggy.js']
     },
     uglify: {
-      options: {
-        sourceMap: true,
-        sourceMapName: '<%= buildDir %>/themes/_global/js/app.map'
-      },
-      dist: {
+      material: {
         files: {
-          '<%= buildDir %>/themes/_global/js/app.min.js':
-            ['<%= buildDir %>/app.browser.js']
-        }
-      }
+          '<%= buildDir %>/themes/material/js/material.min.js':
+            ['<%= buildDir %>/material.browser.js']
+        },
+        options: {
+          sourceMap: true,
+          sourceMapName: '<%= buildDir %>/themes/material/js/material.map'
+        },
+      },
+      baggy: {
+        files: {
+          '<%= buildDir %>/themes/baggy/js/baggy.min.js':
+            ['<%= buildDir %>/baggy.browser.js']
+        },
+        options: {
+          sourceMap: true,
+          sourceMapName: '<%= buildDir %>/themes/baggy/js/baggy.map'
+        },
+      },
     },
     copy: {
       pickerjs: {
@@ -78,6 +121,13 @@ module.exports = function (grunt) {
             cwd: "<%= appDir %>/lib/icomoon-bower/",
             src: "fonts",
             dest: "<%= buildDir %>/themes/baggy/"
+          },
+          {
+            expand: true,
+            overwrite: true,
+            cwd: "<%= appDir %>/lib/bower-pt-sans/fonts",
+            src: "*",
+            dest: "<%= buildDir %>/themes/baggy/fonts"
           }
         ]
       },
@@ -142,6 +192,12 @@ module.exports = function (grunt) {
     'scripts',
     'Compiles the JavaScript files.',
     [ 'uglify', 'clean:js' ]
+  );
+
+grunt.registerTask(
+    'baggy',
+    'Do everything for baggy',
+    ['clean', 'copy:pickerjs', 'concat', 'browserify', 'uglify:baggy', 'cssmin:baggy', 'symlink']
   );
 
 }
