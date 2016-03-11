@@ -25,10 +25,11 @@ class EntryControllerTest extends WallabagCoreTestCase
         $client = $this->getClient();
 
         $client->request('GET', '/unread/list');
-        $client->followRedirect();
+        $crawler = $client->followRedirect();
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertContains('quickstart.intro.paragraph_1', $client->getResponse()->getContent());
+        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(array('_text')));
+        $this->assertContains('quickstart.intro.paragraph_1', $body[0]);
 
         // Test if quickstart is disabled when user has 1 entry
         $crawler = $client->request('GET', '/new');
@@ -45,8 +46,9 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $client->followRedirect();
 
-        $client->request('GET', '/unread/list');
-        $this->assertContains('entry.list.number_on_the_page', $client->getResponse()->getContent());
+        $crawler = $client->request('GET', '/unread/list');
+        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(array('_text')));
+        $this->assertContains('entry.list.number_on_the_page', $body[0]);
     }
 
     public function testGetNew()
@@ -240,10 +242,11 @@ class EntryControllerTest extends WallabagCoreTestCase
             ->getRepository('WallabagCoreBundle:Entry')
             ->findByUrlAndUserId($this->url, $this->getLoggedInUserId());
 
-        $client->request('GET', '/view/'.$content->getId());
+        $crawler = $client->request('GET', '/view/'.$content->getId());
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertContains($content->getTitle(), $client->getResponse()->getContent());
+        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(array('_text')));
+        $this->assertContains($content->getTitle(), $body[0]);
     }
 
     /**

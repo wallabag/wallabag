@@ -418,11 +418,6 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/config');
 
-        if (500 == $client->getResponse()->getStatusCode()) {
-            var_export($client->getResponse()->getContent());
-            die();
-        }
-
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
         $form = $crawler->filter('button[id=rss_config_save]')->form();
@@ -556,12 +551,14 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $form = $crawler->filter('button[id=tagging_rule_save]')->form();
 
-        $client->submit($form, $data);
+        $crawler = $client->submit($form, $data);
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
+        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(array('_text')));
+
         foreach ($messages as $message) {
-            $this->assertContains($message, $client->getResponse()->getContent());
+            $this->assertContains($message, $body[0]);
         }
     }
 
@@ -574,9 +571,11 @@ class ConfigControllerTest extends WallabagCoreTestCase
             ->getRepository('WallabagCoreBundle:TaggingRule')
             ->findAll()[0];
 
-        $client->request('GET', '/tagging-rule/delete/'.$rule->getId());
+        $crawler = $client->request('GET', '/tagging-rule/delete/'.$rule->getId());
+
         $this->assertEquals(403, $client->getResponse()->getStatusCode());
-        $this->assertContains('You can not access this tagging ryle', $client->getResponse()->getContent());
+        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(array('_text')));
+        $this->assertContains('You can not access this tagging rule', $body[0]);
     }
 
     public function testDemoMode()

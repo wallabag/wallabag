@@ -210,7 +210,7 @@ class ConfigController extends Controller
     public function deleteTaggingRuleAction(TaggingRule $rule)
     {
         if ($this->getUser()->getId() != $rule->getConfig()->getUser()->getId()) {
-            throw $this->createAccessDeniedException('You can not access this tagging ryle.');
+            throw $this->createAccessDeniedException('You can not access this tagging rule.');
         }
 
         $em = $this->getDoctrine()->getManager();
