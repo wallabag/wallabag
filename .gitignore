@@ -39,8 +39,10 @@ docker/data/
 # To avoid crazy stuff on some PR, we must manually FORCE ADD IT on each new release
 composer.lock
 
-# npm stuff
+# assets stuff
 /node_modules/
 !app/Resources/static/lib
 app/Resources/static/lib/*
 /bin
+!/src/Wallabag/CoreBundle/Resources/public
+/src/Wallabag/CoreBundle/Resources/public/*

@@ -100,9 +100,7 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget",
-            "npm install",
-            "bower install",
-            "grunt"
+            "./build_assets.sh"
         ],
         "post-install-cmd": [
             "@post-cmd"
