@@ -1,4 +1,4 @@
-#! /usr/bin/env sh
+#! /usr/bin/env bash
 
 if [ "$BUILD_ASSETS" == "no" ]; then
     echo "Not installing assets"
