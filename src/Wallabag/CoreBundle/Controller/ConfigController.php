@@ -16,7 +16,6 @@ use Wallabag\CoreBundle\Form\Type\RssType;
 use Wallabag\CoreBundle\Form\Type\TaggingRuleType;
 use Wallabag\CoreBundle\Form\Type\UserInformationType;
 use Wallabag\CoreBundle\Tools\Utils;
-use Wallabag\UserBundle\Entity\User;
 
 class ConfigController extends Controller
 {

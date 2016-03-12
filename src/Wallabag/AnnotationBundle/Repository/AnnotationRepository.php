@@ -88,4 +88,22 @@ class AnnotationRepository extends EntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    /**
+     * Used only in test case to get the right annotation associated to the right user.
+     *
+     * @param string $username
+     *
+     * @return Annotation
+     */
+    public function findOneByUsername($username)
+    {
+        return $this->createQueryBuilder('a')
+            ->leftJoin('a.user', 'u')
+            ->where('u.username = :username')->setParameter('username', $username)
+            ->orderBy('a.id', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getSingleResult();
+    }
 }
