@@ -101,6 +101,7 @@ class AnnotationRepository extends EntityRepository
         return $this->createQueryBuilder('a')
             ->leftJoin('a.user', 'u')
             ->where('u.username = :username')->setParameter('username', $username)
+            ->orderBy('a.id', 'DESC')
             ->setMaxResults(1)
             ->getQuery()
             ->getSingleResult();

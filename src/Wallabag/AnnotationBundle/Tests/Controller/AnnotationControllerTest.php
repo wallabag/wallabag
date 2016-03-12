@@ -81,7 +81,7 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
         $this->assertEquals('Big boss', $content['user']);
         $this->assertEquals('v1.0', $content['annotator_schema_version']);
         $this->assertEquals('a modified annotation', $content['text']);
-        $this->assertEquals('content', $content['quote']);
+        $this->assertEquals('my quote', $content['quote']);
 
         $annotationUpdated = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
