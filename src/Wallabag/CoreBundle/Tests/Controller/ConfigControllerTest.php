@@ -47,6 +47,14 @@ class ConfigControllerTest extends WallabagCoreTestCase
             'config[theme]' => 'baggy',
             'config[items_per_page]' => '30',
             'config[language]' => 'en',
+            'config[carrot]' => false,
+            'config[share_diaspora]' => true,
+            'config[diaspora_url]' => 'http://diasporapod.com',
+            'config[share_shaarli]' => true,
+            'config[shaarli_url]' => 'http://myshaarli.com',
+            'config[share_mail]' => true,
+            'config[share_twitter]' => true,
+            'config[show_printlink]' => false
         );
 
         $client->submit($form, $data);

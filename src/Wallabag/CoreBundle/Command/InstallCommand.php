@@ -223,6 +223,14 @@ class InstallCommand extends ContainerAwareCommand
         $config->setItemsPerPage($this->getContainer()->getParameter('wallabag_core.items_on_page'));
         $config->setRssLimit($this->getContainer()->getParameter('wallabag_core.rss_limit'));
         $config->setLanguage($this->getContainer()->getParameter('wallabag_core.language'));
+        $config->setCarrot(0);
+        $config->setShareDiaspora(0);
+        $config->setDiasporaUrl("http://diasporapod.com");
+        $config->setShareShaarli(0);
+        $config->setShaarliUrl("http://myshaarli.com");
+        $config->setShareMail(1);
+        $config->setShareTwitter(1);
+        $config->setShowPrintlink(1);
 
         $em->persist($config);
 

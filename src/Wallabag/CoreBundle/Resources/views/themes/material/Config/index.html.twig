@@ -28,14 +28,6 @@
 
                             <div class="row">
                                 <div class="input-field col s12">
-                                    {{ form_errors(form.config.theme) }}
-                                    {{ form_widget(form.config.theme) }}
-                                    <label class="required">{% trans %}Theme{% endtrans %}</label>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="input-field col s12">
                                     {{ form_label(form.config.items_per_page) }}
                                     {{ form_errors(form.config.items_per_page) }}
                                     {{ form_widget(form.config.items_per_page) }}
@@ -47,6 +39,58 @@
                                     {{ form_label(form.config.language) }}
                                     {{ form_errors(form.config.language) }}
                                     {{ form_widget(form.config.language) }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form_widget(form.config.carrot) }}
+                                    {{ form_label(form.config.carrot) }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form_widget(form.config.share_diaspora) }}
+                                    {{ form_label(form.config.share_diaspora) }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form_label(form.config.diaspora_url) }}
+                                    {{ form_errors(form.config.diaspora_url) }}
+                                    {{ form_widget(form.config.diaspora_url) }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form_widget(form.config.share_shaarli) }}
+                                    {{ form_label(form.config.share_shaarli) }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form_label(form.config.shaarli_url) }}
+                                    {{ form_errors(form.config.shaarli_url) }}
+                                    {{ form_widget(form.config.shaarli_url) }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s4">
+                                    {{ form_widget(form.config.share_mail) }}
+                                    {{ form_label(form.config.share_mail) }}
+                                </div>
+                                <div class="input-field col s4">
+                                    {{ form_widget(form.config.share_twitter) }}
+                                    {{ form_label(form.config.share_twitter) }}
+                                </div>
+                                <div class="input-field col s4">
+                                    {{ form_widget(form.config.show_printlink) }}
+                                    {{ form_label(form.config.show_printlink) }}
                                 </div>
                             </div>
 

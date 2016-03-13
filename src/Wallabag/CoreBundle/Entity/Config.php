@@ -74,6 +74,64 @@ class Config
     private $rssLimit;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="carrot", type="boolean", nullable=true)
+     */
+    private $carrot;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="share_diaspora", type="boolean", nullable=true)
+     */
+    private $shareDiaspora;
+
+    /**
+     * @var string
+     *
+     * @Assert\NotBlank()
+     * @ORM\Column(name="diaspora_url", type="string", nullable=true)
+     */
+    private $diasporaUrl;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="share_shaarli", type="boolean", nullable=true)
+     */
+    private $shareShaarli;
+
+    /**
+     * @var string
+     *
+     * @Assert\NotBlank()
+     * @ORM\Column(name="shaarli_url", type="string", nullable=true)
+     */
+    private $shaarliUrl;
+
+    /**
+     * @var bool
+     * 
+     * @ORM\column(name="share_mail", type="boolean", nullable=true)
+     */
+    private $shareMail;
+
+    /**
+     * @var bool
+     *
+     * @ORM\column(name="share_twitter", type="boolean", nullable=true)
+     */
+    private $shareTwitter;
+
+    /**
+     * @var bool
+     *
+     * @ORM\column(name="show_printlink", type="boolean", nullable=true)
+     */
+    private $showPrintlink;
+
+    /**
      * @ORM\OneToOne(targetEntity="Wallabag\UserBundle\Entity\User", inversedBy="config")
      */
     private $user;
@@ -265,5 +323,269 @@ class Config
     public function getTaggingRules()
     {
         return $this->taggingRules;
+    }
+
+    /**
+     * Set carrot.
+     *
+     * @param bool $carrot
+     *
+     * @return Config
+     */
+    public function setCarrot($carrot)
+    {
+        $this->carrot = $carrot;
+
+        return $this;
+    }
+
+    /**
+     * Get carrot.
+     *
+     * @return bool
+     */
+    public function getCarrot()
+    {
+        return $this->carrot;
+    }
+
+    /**
+     * toggle carrot
+     *
+     * @return Config
+     */
+    public function toggleCarrot()
+    {
+        $this->carrot = $this->getCarrot() ^ 1;
+
+        return $this;
+    }
+
+    /**
+     * Set shareDiaspora.
+     *
+     * @param bool $shareDiaspora
+     *
+     * @return Config
+     */
+    public function setShareDiaspora($shareDiaspora)
+    {
+        $this->shareDiaspora = $shareDiaspora;
+
+        return $this;
+    }
+
+    /**
+     * Get shareDiaspora.
+     *
+     * @return bool
+     */
+    public function getShareDiaspora()
+    {
+        return $this->shareDiaspora;
+    }
+
+    /**
+     * toggle shareDiaspora
+     *
+     * @return Config
+     */
+    public function toggleShareDiaspora()
+    {
+        $this->shareDiaspora = $this->getShareDiaspora() ^ 1;
+
+        return $this;
+    }
+
+    /**
+     * Set diasporaUrl.
+     *
+     * @param string $diasporaUrl
+     *
+     * @return Config
+     */
+    public function setDiasporaUrl($diasporaUrl)
+    {
+        $this->diasporaUrl = $diasporaUrl;
+
+        return $this;
+    }
+
+    /**
+     * Get diasporaUrl.
+     *
+     * @return string
+     */
+    public function getDiasporaUrl()
+    {
+        return $this->diasporaUrl;
+    }
+
+    /**
+     * Set shareShaarli.
+     *
+     * @param bool $shareShaarli
+     *
+     * @return Config
+     */
+    public function setShareShaarli($shareShaarli)
+    {
+        $this->shareShaarli = $shareShaarli;
+
+        return $this;
+    }
+
+    /**
+     * Get shareShaarli.
+     *
+     * @return bool
+     */
+    public function getShareShaarli()
+    {
+        return $this->shareShaarli;
+    }
+
+    /**
+     * toggle shareShaarli
+     *
+     * @return Config
+     */
+    public function toggleShareShaarli()
+    {
+        $this->shareShaarli = $this->getShareShaarli() ^ 1;
+
+        return $this;
+    }
+
+    /**
+     * Set shaarliUrl.
+     *
+     * @param string $shaarliUrl
+     *
+     * @return Config
+     */
+    public function setShaarliUrl($shaarliUrl)
+    {
+        $this->shaarliUrl = $shaarliUrl;
+
+        return $this;
+    }
+
+    /**
+     * Get shaarliUrl.
+     *
+     * @return string
+     */
+    public function getShaarliUrl()
+    {
+        return $this->shaarliUrl;
+    }
+
+    /**
+     * Set shareMail.
+     *
+     * @param bool $shareMail
+     *
+     * @return Config
+     */
+    public function setShareMail($shareMail)
+    {
+        $this->shareMail = $shareMail;
+
+        return $this;
+    }
+
+    /**
+     * Get shareMail.
+     *
+     * @return bool
+     */
+    public function getShareMail()
+    {
+        return $this->shareMail;
+    }
+
+    /**
+     * toggle shareMail
+     *
+     * @return Config
+     */
+    public function toggleShareMail()
+    {
+        $this->shareMail = $this->getShareMail() ^ 1;
+
+        return $this;
+    }
+
+    /**
+     * Set shareTwitter.
+     *
+     * @param bool $shareTwitter
+     *
+     * @return Config
+     */
+    public function setShareTwitter($shareTwitter)
+    {
+        $this->shareTwitter = $shareTwitter;
+
+        return $this;
+    }
+
+    /**
+     * Get shareTwitter.
+     *
+     * @return bool
+     */
+    public function getShareTwitter()
+    {
+        return $this->shareTwitter;
+    }
+
+    /**
+     * toggle shareTwitter
+     *
+     * @return Config
+     */
+    public function toggleShareTwitter()
+    {
+        $this->shareTwitter = $this->getShareTwitter() ^ 1;
+
+        return $this;
+    }
+
+    /**
+     * Set showPrintlink.
+     *
+     * @param bool $showPrintlink
+     *
+     * @return Config
+     */
+    public function setShowPrintlink($showPrintlink)
+    {
+        $this->showPrintlink = $showPrintlink;
+
+        return $this;
+    }
+
+    /**
+     * Get showPrintlink.
+     *
+     * @return bool
+     */
+    public function getShowPrintlink()
+    {
+        return $this->showPrintlink;
+    }
+
+    /**
+     * toggle showPrintlink
+     *
+     * @return Config
+     */
+    public function toggleShowPrintlink()
+    {
+        $this->shareshowPrintlink = $this->getShowPrintlink() ^ 1;
+
+        return $this;
     }
 }
