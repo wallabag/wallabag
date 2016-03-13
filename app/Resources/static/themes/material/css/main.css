@@ -20,11 +20,11 @@
 
 @font-face {
     font-family: 'icomoon';
-    src:url('../font/icomoon/icomoon.eot?yw303w');
-    src:url('../font/icomoon/icomoon.eot?yw303w#iefix') format('embedded-opentype'),
-        url('../font/icomoon/icomoon.ttf?yw303w') format('truetype'),
-        url('../font/icomoon/icomoon.woff?yw303w') format('woff'),
-        url('../font/icomoon/icomoon.svg?yw303w#icomoon') format('svg');
+    src:url('../fonts/icomoon.eot');
+    src:url('../fonts/icomoon.eot#iefix') format('embedded-opentype'),
+        url('../fonts/icomoon.ttf') format('truetype'),
+        url('../fonts/icomoon.woff') format('woff'),
+        url('../fonts/icomoon.svg#icomoon') format('svg');
     font-weight: normal;
     font-style: normal;
 }

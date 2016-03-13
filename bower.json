@@ -3,7 +3,22 @@
   "version": "2.0.0-beta.1",
   "homepage": "https://github.com/wallabag/wallabag",
   "authors": [
-    "Thomas Citharel <tcit@tcit.fr>"
+    {
+      "name": "Nicolas Lœuillet",
+      "email": "nicolas@loeuillet.org",
+      "homepage": "http://www.cdetc.fr",
+      "role": "Developer"
+    },
+    {
+      "name": "Thomas Citharel",
+      "homepage": "http://tcit.fr",
+      "role": "Developer"
+    },
+    {
+      "name": "Jérémy Benoist",
+      "homepage": "http://www.j0k3r.net",
+      "role": "Developer"
+    }
   ],
   "description": "wallabag is a self hostable application for saving web pages",
   "license": "MIT",
@@ -16,7 +31,6 @@
     "tests"
   ],
   "dependencies": {
-    "material-design-icons": "^2.2.0",
     "icomoon-bower": "icomoon#^0.1.0",
     "bower-pt-sans": "pt-sans#*"
   }

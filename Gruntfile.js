@@ -9,6 +9,7 @@ module.exports = function (grunt) {
       material: {
         options: {
           report: 'gzip',
+          sourceMap: true,
           keepSpecialComments: 0
         },
         files: {
@@ -20,6 +21,7 @@ module.exports = function (grunt) {
       baggy: {
         options: {
           report: 'gzip',
+          sourceMap: true,
           keepSpecialComments: 0
         },
         files: {
@@ -60,8 +62,7 @@ module.exports = function (grunt) {
       cssMaterial: {
         src: [
           'node_modules/materialize-css/bin/materialize.css',
-          '<%= appDir %>/themes/material/css/*.css',
-          '<%= appDir %>/lib/icomoon-bower/style.css'
+          '<%= appDir %>/themes/material/css/*.css'
         ],
         dest: '<%= buildDir %>/material.css'
       },
@@ -83,8 +84,7 @@ module.exports = function (grunt) {
             ['<%= buildDir %>/material.browser.js']
         },
         options: {
-          sourceMap: true,
-          sourceMapName: '<%= buildDir %>/themes/material/js/material.map'
+          sourceMap: true
         },
       },
       baggy: {
@@ -93,8 +93,7 @@ module.exports = function (grunt) {
             ['<%= buildDir %>/baggy.browser.js']
         },
         options: {
-          sourceMap: true,
-          sourceMapName: '<%= buildDir %>/themes/baggy/js/baggy.map'
+          sourceMap: true
         },
       },
     },
@@ -136,9 +135,16 @@ module.exports = function (grunt) {
           {
             expand: true,
             overwrite: true,
-            cwd: '<%= appDir %>/themes/material/',
+            cwd: "<%= appDir %>/lib/icomoon-bower/",
+            src: "fonts",
+            dest: "<%= buildDir %>/themes/material/"
+          },
+          {
+            expand: true,
+            overwrite: true,
+            cwd: "node_modules/materialize-css/",
             src: "font",
-            dest: '<%= buildDir %>/themes/material/'
+            dest: "<%= buildDir %>/themes/material"
           }
         ]
       },
