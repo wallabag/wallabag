@@ -54,7 +54,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
             'config[shaarli_url]' => 'http://myshaarli.com',
             'config[share_mail]' => true,
             'config[share_twitter]' => true,
-            'config[show_printlink]' => false
+            'config[show_printlink]' => false,
         );
 
         $client->submit($form, $data);

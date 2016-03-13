@@ -112,7 +112,7 @@ class Config
 
     /**
      * @var bool
-     * 
+     *
      * @ORM\column(name="share_mail", type="boolean", nullable=true)
      */
     private $shareMail;
@@ -326,7 +326,7 @@ class Config
     }
 
     /**
-     * Set carrot.
+     * Set Carrot.
      *
      * @param bool $carrot
      *
@@ -340,7 +340,7 @@ class Config
     }
 
     /**
-     * Get carrot.
+     * Get Carrot.
      *
      * @return bool
      */
@@ -350,7 +350,7 @@ class Config
     }
 
     /**
-     * toggle carrot
+     * Toggle Carrot.
      *
      * @return Config
      */
@@ -362,7 +362,7 @@ class Config
     }
 
     /**
-     * Set shareDiaspora.
+     * Set Share to Diaspora.
      *
      * @param bool $shareDiaspora
      *
@@ -376,7 +376,7 @@ class Config
     }
 
     /**
-     * Get shareDiaspora.
+     * Get Share to Diaspora.
      *
      * @return bool
      */
@@ -386,7 +386,7 @@ class Config
     }
 
     /**
-     * toggle shareDiaspora
+     * Toggle Share to Diaspora.
      *
      * @return Config
      */
@@ -398,7 +398,7 @@ class Config
     }
 
     /**
-     * Set diasporaUrl.
+     * Set Diaspora Url.
      *
      * @param string $diasporaUrl
      *
@@ -412,7 +412,7 @@ class Config
     }
 
     /**
-     * Get diasporaUrl.
+     * Get Diaspora Url.
      *
      * @return string
      */
@@ -422,7 +422,7 @@ class Config
     }
 
     /**
-     * Set shareShaarli.
+     * Set Share to Shaarli.
      *
      * @param bool $shareShaarli
      *
@@ -436,7 +436,7 @@ class Config
     }
 
     /**
-     * Get shareShaarli.
+     * Get Share to Shaarli.
      *
      * @return bool
      */
@@ -446,7 +446,7 @@ class Config
     }
 
     /**
-     * toggle shareShaarli
+     * Toggle Share to Shaarli.
      *
      * @return Config
      */
@@ -458,7 +458,7 @@ class Config
     }
 
     /**
-     * Set shaarliUrl.
+     * Set Shaarli Url.
      *
      * @param string $shaarliUrl
      *
@@ -472,7 +472,7 @@ class Config
     }
 
     /**
-     * Get shaarliUrl.
+     * Get Shaarli Url.
      *
      * @return string
      */
@@ -482,7 +482,7 @@ class Config
     }
 
     /**
-     * Set shareMail.
+     * Set Share to Mail.
      *
      * @param bool $shareMail
      *
@@ -496,7 +496,7 @@ class Config
     }
 
     /**
-     * Get shareMail.
+     * Get Share to Mail.
      *
      * @return bool
      */
@@ -506,7 +506,7 @@ class Config
     }
 
     /**
-     * toggle shareMail
+     * Toggle Share to Mail.
      *
      * @return Config
      */
@@ -518,7 +518,7 @@ class Config
     }
 
     /**
-     * Set shareTwitter.
+     * Set Share to Twitter.
      *
      * @param bool $shareTwitter
      *
@@ -532,7 +532,7 @@ class Config
     }
 
     /**
-     * Get shareTwitter.
+     * Get Share to Twitter.
      *
      * @return bool
      */
@@ -542,7 +542,7 @@ class Config
     }
 
     /**
-     * toggle shareTwitter
+     * Toggle Share to Twitter.
      *
      * @return Config
      */
@@ -554,7 +554,7 @@ class Config
     }
 
     /**
-     * Set showPrintlink.
+     * Set Show Print Link.
      *
      * @param bool $showPrintlink
      *
@@ -568,7 +568,7 @@ class Config
     }
 
     /**
-     * Get showPrintlink.
+     * Get Show Print Link.
      *
      * @return bool
      */
@@ -578,7 +578,7 @@ class Config
     }
 
     /**
-     * toggle showPrintlink
+     * Toggle Show Print Link.
      *
      * @return Config
      */
