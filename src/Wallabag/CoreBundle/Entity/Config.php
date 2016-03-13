@@ -584,7 +584,7 @@ class Config
      */
     public function toggleShowPrintlink()
     {
-        $this->shareshowPrintlink = $this->getShowPrintlink() ^ 1;
+        $this->showPrintlink = $this->getShowPrintlink() ^ 1;
 
         return $this;
     }
