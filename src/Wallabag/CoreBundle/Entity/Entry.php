@@ -7,6 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Hateoas\Configuration\Annotation as Hateoas;
 use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\XmlRoot;
+use JMS\Serializer\Annotation\Exclude;
+use JMS\Serializer\Annotation\VirtualProperty;
+use JMS\Serializer\Annotation\SerializedName;
 use Symfony\Component\Validator\Constraints as Assert;
 use Wallabag\UserBundle\Entity\User;
 use Wallabag\AnnotationBundle\Entity\Annotation;
@@ -161,6 +164,8 @@ class Entry
     private $isPublic;
 
     /**
+     * @Exclude
+     *
      * @ORM\ManyToOne(targetEntity="Wallabag\UserBundle\Entity\User", inversedBy="entries")
      *
      * @Groups({"export_all"})
@@ -334,6 +339,33 @@ class Entry
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * @VirtualProperty
+     * @SerializedName("user_name")
+     */
+    public function getUserName()
+    {
+        return $this->user->getUserName();
+    }
+
+    /**
+     * @VirtualProperty
+     * @SerializedName("user_email")
+     */
+    public function getUserEmail()
+    {
+        return $this->user->getEmail();
+    }
+
+    /**
+     * @VirtualProperty
+     * @SerializedName("user_id")
+     */
+    public function getUserId()
+    {
+        return $this->user->getId();
     }
 
     /**
