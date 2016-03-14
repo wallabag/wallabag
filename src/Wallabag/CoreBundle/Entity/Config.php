@@ -76,16 +76,16 @@ class Config
     /**
      * @var bool
      *
-     * @ORM\Column(name="carrot", type="boolean", nullable=true)
+     * @ORM\Column(name="enable_carrot", type="boolean", nullable=true)
      */
-    private $carrot;
+    private $enableCarrot;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="share_diaspora", type="boolean", nullable=true)
+     * @ORM\Column(name="enable_diaspora", type="boolean", nullable=true)
      */
-    private $shareDiaspora;
+    private $enableDiaspora;
 
     /**
      * @var string
@@ -98,9 +98,9 @@ class Config
     /**
      * @var bool
      *
-     * @ORM\Column(name="share_shaarli", type="boolean", nullable=true)
+     * @ORM\Column(name="enable_shaarli", type="boolean", nullable=true)
      */
-    private $shareShaarli;
+    private $enableShaarli;
 
     /**
      * @var string
@@ -113,16 +113,16 @@ class Config
     /**
      * @var bool
      *
-     * @ORM\column(name="share_mail", type="boolean", nullable=true)
+     * @ORM\column(name="enable_mail", type="boolean", nullable=true)
      */
-    private $shareMail;
+    private $enableMail;
 
     /**
      * @var bool
      *
-     * @ORM\column(name="share_twitter", type="boolean", nullable=true)
+     * @ORM\column(name="enable_twitter", type="boolean", nullable=true)
      */
-    private $shareTwitter;
+    private $enableTwitter;
 
     /**
      * @var bool
@@ -326,73 +326,73 @@ class Config
     }
 
     /**
-     * Set Carrot.
+     * Set Enable to Carrot.
      *
      * @param bool $carrot
      *
      * @return Config
      */
-    public function setCarrot($carrot)
+    public function setEnableCarrot($enableCarrot)
     {
-        $this->carrot = $carrot;
+        $this->enableCarrot = $enableCarrot;
 
         return $this;
     }
 
     /**
-     * Get Carrot.
+     * Get Enable to Carrot.
      *
      * @return bool
      */
-    public function getCarrot()
+    public function getEnableCarrot()
     {
-        return $this->carrot;
+        return $this->enableCarrot;
     }
 
     /**
-     * Toggle Carrot.
+     * Toggle Enable to Carrot.
      *
      * @return Config
      */
-    public function toggleCarrot()
+    public function toggleEnableCarrot()
     {
-        $this->carrot = $this->getCarrot() ^ 1;
+        $this->enableCarrot = $this->getEnableCarrot() ^ 1;
 
         return $this;
     }
 
     /**
-     * Set Share to Diaspora.
+     * Set Enable to Diaspora.
      *
-     * @param bool $shareDiaspora
+     * @param bool $enableDiaspora
      *
      * @return Config
      */
-    public function setShareDiaspora($shareDiaspora)
+    public function setEnableDiaspora($enableDiaspora)
     {
-        $this->shareDiaspora = $shareDiaspora;
+        $this->enableDiaspora = $enableDiaspora;
 
         return $this;
     }
 
     /**
-     * Get Share to Diaspora.
+     * Get Enable to Diaspora.
      *
      * @return bool
      */
-    public function getShareDiaspora()
+    public function getEnableDiaspora()
     {
-        return $this->shareDiaspora;
+        return $this->enableDiaspora;
     }
 
     /**
-     * Toggle Share to Diaspora.
+     * Toggle Enable to Diaspora.
      *
      * @return Config
      */
-    public function toggleShareDiaspora()
+    public function toggleEnableDiaspora()
     {
-        $this->shareDiaspora = $this->getShareDiaspora() ^ 1;
+        $this->enableDiaspora = $this->getEnableDiaspora() ^ 1;
 
         return $this;
     }
@@ -422,37 +422,37 @@ class Config
     }
 
     /**
-     * Set Share to Shaarli.
+     * Set Enable to Shaarli.
      *
-     * @param bool $shareShaarli
+     * @param bool $enableShaarli
      *
      * @return Config
      */
-    public function setShareShaarli($shareShaarli)
+    public function setEnableShaarli($enableShaarli)
     {
-        $this->shareShaarli = $shareShaarli;
+        $this->enableShaarli = $enableShaarli;
 
         return $this;
     }
 
     /**
-     * Get Share to Shaarli.
+     * Get Enable to Shaarli.
      *
      * @return bool
      */
-    public function getShareShaarli()
+    public function getEnableShaarli()
     {
-        return $this->shareShaarli;
+        return $this->enableShaarli;
     }
 
     /**
-     * Toggle Share to Shaarli.
+     * Toggle Enable to Shaarli.
      *
      * @return Config
      */
-    public function toggleShareShaarli()
+    public function toggleEnableShaarli()
     {
-        $this->shareShaarli = $this->getShareShaarli() ^ 1;
+        $this->enableShaarli = $this->getEnableShaarli() ^ 1;
 
         return $this;
     }
@@ -482,73 +482,73 @@ class Config
     }
 
     /**
-     * Set Share to Mail.
+     * Set Enable to Mail.
      *
-     * @param bool $shareMail
+     * @param bool $enableMail
      *
      * @return Config
      */
-    public function setShareMail($shareMail)
+    public function setEnableMail($enableMail)
     {
-        $this->shareMail = $shareMail;
+        $this->enableMail = $enableMail;
 
         return $this;
     }
 
     /**
-     * Get Share to Mail.
+     * Get Enable to Mail.
      *
      * @return bool
      */
-    public function getShareMail()
+    public function getEnableMail()
     {
-        return $this->shareMail;
+        return $this->enableMail;
     }
 
     /**
-     * Toggle Share to Mail.
+     * Toggle Enable to Mail.
      *
      * @return Config
      */
-    public function toggleShareMail()
+    public function toggleEnableMail()
     {
-        $this->shareMail = $this->getShareMail() ^ 1;
+        $this->enableMail = $this->getEnableMail() ^ 1;
 
         return $this;
     }
 
     /**
-     * Set Share to Twitter.
+     * Set Enable to Twitter.
      *
-     * @param bool $shareTwitter
+     * @param bool $enableTwitter
      *
      * @return Config
      */
-    public function setShareTwitter($shareTwitter)
+    public function setEnableTwitter($enableTwitter)
     {
-        $this->shareTwitter = $shareTwitter;
+        $this->enableTwitter = $enableTwitter;
 
         return $this;
     }
 
     /**
-     * Get Share to Twitter.
+     * Get Enable to Twitter.
      *
      * @return bool
      */
-    public function getShareTwitter()
+    public function getEnableTwitter()
     {
-        return $this->shareTwitter;
+        return $this->enableTwitter;
     }
 
     /**
-     * Toggle Share to Twitter.
+     * Toggle Enable to Twitter.
      *
      * @return Config
      */
-    public function toggleShareTwitter()
+    public function toggleEnableTwitter()
     {
-        $this->shareTwitter = $this->getShareTwitter() ^ 1;
+        $this->enableTwitter = $this->getEnableTwitter() ^ 1;
 
         return $this;
     }

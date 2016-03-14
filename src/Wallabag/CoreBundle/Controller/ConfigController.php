@@ -140,13 +140,13 @@ class ConfigController extends Controller
             $config->setItemsPerPage($this->getParameter('wallabag_core.items_on_page'));
             $config->setRssLimit($this->getParameter('wallabag_core.rss_limit'));
             $config->setLanguage($this->getParameter('wallabag_core.language'));
-            $config->setCarrot($this->get('craue_config')->get('carrot'));
-            $config->setShareDiaspora($this->get('craue_config')->get('share_diaspora'));
+            $config->setEnableCarrot($this->get('craue_config')->get('enable_carrot'));
+            $config->setEnableDiaspora($this->get('craue_config')->get('enable_diaspora'));
             $config->setDiasporaUrl($this->get('craue_config')->get('diaspora_url'));
-            $config->setShareShaarli($this->get('craue_config')->get('share_shaarli'));
+            $config->setEnableShaarli($this->get('craue_config')->get('enable_shaarli'));
             $config->setShaarliUrl($this->get('craue_config')->get('shaarli_url'));
-            $config->setShareMail($this->get('craue_config')->get('share_mail'));
-            $config->setShareTwitter($this->get('craue_config')->get('share_twitter'));
+            $config->setEnableMail($this->get('craue_config')->get('enable_mail'));
+            $config->setEnableTwitter($this->get('craue_config')->get('enable_twitter'));
             $config->setShowPrintlink($this->get('craue_config')->get('show_printlink'));
 
             $em->persist($config);
