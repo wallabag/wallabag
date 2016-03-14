@@ -23,8 +23,16 @@
                     </div>
 
                     <div id="set1" class="col s12">
-                        {{ form_start(form.config) }}
+                        {{ form_start(form.config,{'attr': {'class': 'form-horizontal'}}) }}
                             {{ form_errors(form.config) }}
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                	{{ form_label(form.config.theme) }}
+                                    {{ form_errors(form.config.theme) }}
+                                    {{ form_widget(form.config.theme) }}
+                                </div>
+                            </div>
 
                             <div class="row">
                                 <div class="input-field col s12">
@@ -39,13 +47,6 @@
                                     {{ form_label(form.config.language) }}
                                     {{ form_errors(form.config.language) }}
                                     {{ form_widget(form.config.language) }}
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    {{ form_widget(form.config.carrot) }}
-                                    {{ form_label(form.config.carrot) }}
                                 </div>
                             </div>
 
@@ -80,17 +81,24 @@
                             </div>
 
                             <div class="row">
-                                <div class="input-field col s4">
+                                <div class="input-field col s6">
                                     {{ form_widget(form.config.share_mail) }}
                                     {{ form_label(form.config.share_mail) }}
                                 </div>
-                                <div class="input-field col s4">
+                                <div class="input-field col s6">
                                     {{ form_widget(form.config.share_twitter) }}
                                     {{ form_label(form.config.share_twitter) }}
                                 </div>
-                                <div class="input-field col s4">
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s6">
                                     {{ form_widget(form.config.show_printlink) }}
                                     {{ form_label(form.config.show_printlink) }}
+                                </div>
+                                <div class="input-field col s6">
+                                    {{ form_widget(form.config.carrot) }}
+                                    {{ form_label(form.config.carrot) }}
                                 </div>
                             </div>
 
