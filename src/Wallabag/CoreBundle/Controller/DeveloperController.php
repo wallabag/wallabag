@@ -43,7 +43,7 @@ class DeveloperController extends Controller
         $clientForm->handleRequest($request);
 
         if ($clientForm->isValid()) {
-            $client->setAllowedGrantTypes(array('token', 'authorization_code', 'password','refresh_token'));
+            $client->setAllowedGrantTypes(array('token', 'authorization_code', 'password', 'refresh_token'));
             $em->persist($client);
             $em->flush();
 
