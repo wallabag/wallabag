@@ -188,8 +188,8 @@ class WallabagRestControllerTest extends WallabagApiTestCase
     {
         $this->client->request('POST', '/api/entries.json', array(
             'url' => 'http://www.lemonde.fr/idees/article/2016/02/08/preserver-la-liberte-d-expression-sur-les-reseaux-sociaux_4861503_3232.html',
-            'archive' => 'true',
-            'starred' => 'true',
+            'archive' => '1',
+            'starred' => '1',
         ));
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
@@ -220,8 +220,8 @@ class WallabagRestControllerTest extends WallabagApiTestCase
         $this->client->request('PATCH', '/api/entries/'.$entry->getId().'.json', array(
             'title' => 'New awesome title',
             'tags' => 'new tag '.uniqid(),
-            'star' => true,
-            'archive' => false,
+            'starred' => '1',
+            'archive' => '0',
         ));
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());

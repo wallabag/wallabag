@@ -59,6 +59,8 @@ class Entry
     /**
      * @var bool
      *
+     * @Exclude
+     *
      * @ORM\Column(name="is_archived", type="boolean")
      *
      * @Groups({"entries_for_user", "export_all"})
@@ -67,6 +69,8 @@ class Entry
 
     /**
      * @var bool
+     *
+     * @Exclude
      *
      * @ORM\Column(name="is_starred", type="boolean")
      *
@@ -271,6 +275,16 @@ class Entry
         return $this->isArchived;
     }
 
+    /**
+     * @VirtualProperty
+     * @SerializedName("is_archived")
+     * @Groups({"entries_for_user", "export_all"})
+     */
+    public function is_Archived()
+    {
+        return (int) $this->isArchived();
+    }
+
     public function toggleArchive()
     {
         $this->isArchived = $this->isArchived() ^ 1;
@@ -300,6 +314,16 @@ class Entry
     public function isStarred()
     {
         return $this->isStarred;
+    }
+
+    /**
+     * @VirtualProperty
+     * @SerializedName("is_starred")
+     * @Groups({"entries_for_user", "export_all"})
+     */
+    public function is_Starred()
+    {
+        return (int) $this->isStarred();
     }
 
     public function toggleStar()
