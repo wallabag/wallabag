@@ -203,6 +203,24 @@ class WallabagRestControllerTest extends WallabagApiTestCase
         $this->assertEquals(1, $content['user_id']);
     }
 
+    public function testPostArchivedAndStarredEntryWithoutQuotes()
+    {
+        $this->client->request('POST', '/api/entries.json', array(
+            'url' => 'http://www.lemonde.fr/idees/article/2016/02/08/preserver-la-liberte-d-expression-sur-les-reseaux-sociaux_4861503_3232.html',
+            'archive' => 0,
+            'starred' => 1,
+        ));
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertGreaterThan(0, $content['id']);
+        $this->assertEquals('http://www.lemonde.fr/idees/article/2016/02/08/preserver-la-liberte-d-expression-sur-les-reseaux-sociaux_4861503_3232.html', $content['url']);
+        $this->assertEquals(false, $content['is_archived']);
+        $this->assertEquals(true, $content['is_starred']);
+    }
+
     public function testPatchEntry()
     {
         $entry = $this->client->getContainer()
@@ -233,6 +251,37 @@ class WallabagRestControllerTest extends WallabagApiTestCase
         $this->assertEquals('New awesome title', $content['title']);
         $this->assertGreaterThan($nbTags, count($content['tags']));
         $this->assertEquals(1, $content['user_id']);
+    }
+
+    public function testPatchEntryWithoutQuotes()
+    {
+        $entry = $this->client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneByUser(1);
+
+        if (!$entry) {
+            $this->markTestSkipped('No content found in db.');
+        }
+
+        // hydrate the tags relations
+        $nbTags = count($entry->getTags());
+
+        $this->client->request('PATCH', '/api/entries/'.$entry->getId().'.json', array(
+            'title' => 'New awesome title',
+            'tags' => 'new tag '.uniqid(),
+            'starred' => 1,
+            'archive' => 0,
+        ));
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertEquals($entry->getId(), $content['id']);
+        $this->assertEquals($entry->getUrl(), $content['url']);
+        $this->assertEquals('New awesome title', $content['title']);
+        $this->assertGreaterThan($nbTags, count($content['tags']));
     }
 
     public function testGetTagsEntry()
