@@ -27,13 +27,13 @@ class WallabagRestController extends FOSRestController
      *
      * @ApiDoc(
      *       parameters={
-     *          {"name"="archive", "dataType"="boolean", "required"=false, "format"="true or false, all entries by default", "description"="filter by archived status."},
-     *          {"name"="star", "dataType"="boolean", "required"=false, "format"="true or false, all entries by default", "description"="filter by starred status."},
+     *          {"name"="archive", "dataType"="integer", "required"=false, "format"="1 or 0, all entries by default", "description"="filter by archived status."},
+     *          {"name"="starred", "dataType"="integer", "required"=false, "format"="1 or 0, all entries by default", "description"="filter by starred status."},
      *          {"name"="sort", "dataType"="string", "required"=false, "format"="'created' or 'updated', default 'created'", "description"="sort entries by date."},
      *          {"name"="order", "dataType"="string", "required"=false, "format"="'asc' or 'desc', default 'desc'", "description"="order of sort."},
      *          {"name"="page", "dataType"="integer", "required"=false, "format"="default '1'", "description"="what page you want."},
      *          {"name"="perPage", "dataType"="integer", "required"=false, "format"="default'30'", "description"="results per page."},
-     *          {"name"="tags", "dataType"="string", "required"=false, "format"="api%2Crest", "description"="a list of tags url encoded. Will returns entries that matches ALL tags."},
+     *          {"name"="tags", "dataType"="string", "required"=false, "format"="api,rest", "description"="a list of tags url encoded. Will returns entries that matches ALL tags."},
      *       }
      * )
      *
@@ -43,8 +43,8 @@ class WallabagRestController extends FOSRestController
     {
         $this->validateAuthentication();
 
-        $isArchived = $request->query->get('archive');
-        $isStarred = $request->query->get('star');
+        $isArchived = (int) $request->query->get('archive');
+        $isStarred = (int) $request->query->get('starred');
         $sort = $request->query->get('sort', 'created');
         $order = $request->query->get('order', 'desc');
         $page = (int) $request->query->get('page', 1);
@@ -52,7 +52,7 @@ class WallabagRestController extends FOSRestController
 
         $pager = $this->getDoctrine()
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findEntries($this->getUser()->getId(), $isArchived, $isStarred, $sort, $order);
+            ->findEntries($this->getUser()->getId(), (bool) $isArchived, (bool) $isStarred, $sort, $order);
 
         $pager->setCurrentPage($page);
         $pager->setMaxPerPage($perPage);
@@ -97,8 +97,8 @@ class WallabagRestController extends FOSRestController
      *          {"name"="url", "dataType"="string", "required"=true, "format"="http://www.test.com/article.html", "description"="Url for the entry."},
      *          {"name"="title", "dataType"="string", "required"=false, "description"="Optional, we'll get the title from the page."},
      *          {"name"="tags", "dataType"="string", "required"=false, "format"="tag1,tag2,tag3", "description"="a comma-separated list of tags."},
-     *          {"name"="starred", "dataType"="boolean", "required"=false, "format"="true or false", "description"="entry already starred"},
-     *          {"name"="archive", "dataType"="boolean", "required"=false, "format"="true or false", "description"="entry already archived"},
+     *          {"name"="starred", "dataType"="integer", "required"=false, "format"="1 or 0", "description"="entry already starred"},
+     *          {"name"="archive", "dataType"="integer", "required"=false, "format"="1 or 0", "description"="entry already archived"},
      *       }
      * )
      *
@@ -109,8 +109,8 @@ class WallabagRestController extends FOSRestController
         $this->validateAuthentication();
 
         $url = $request->request->get('url');
-        $isArchived = $request->request->get('archive');
-        $isStarred = $request->request->get('starred');
+        $isArchived = (int) $request->request->get('archive');
+        $isStarred = (int) $request->request->get('starred');
 
         $entry = $this->get('wallabag_core.entry_repository')->findByUrlAndUserId($url, $this->getUser()->getId());
 
@@ -126,12 +126,12 @@ class WallabagRestController extends FOSRestController
             $this->get('wallabag_core.content_proxy')->assignTagsToEntry($entry, $tags);
         }
 
-        if (true === (bool) $isStarred) {
-            $entry->setStarred(true);
+        if (!is_null($isStarred)) {
+            $entry->setStarred((bool) $isStarred);
         }
 
-        if (true === (bool) $isArchived) {
-            $entry->setArchived(true);
+        if (!is_null($isArchived)) {
+            $entry->setArchived((bool) $isArchived);
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -154,8 +154,8 @@ class WallabagRestController extends FOSRestController
      *      parameters={
      *          {"name"="title", "dataType"="string", "required"=false},
      *          {"name"="tags", "dataType"="string", "required"=false, "format"="tag1,tag2,tag3", "description"="a comma-separated list of tags."},
-     *          {"name"="archive", "dataType"="boolean", "required"=false, "format"="true or false", "description"="archived the entry."},
-     *          {"name"="star", "dataType"="boolean", "required"=false, "format"="true or false", "description"="starred the entry."},
+     *          {"name"="archive", "dataType"="integer", "required"=false, "format"="1 or 0", "description"="archived the entry."},
+     *          {"name"="starred", "dataType"="integer", "required"=false, "format"="1 or 0", "description"="starred the entry."},
      *      }
      * )
      *
@@ -167,19 +167,19 @@ class WallabagRestController extends FOSRestController
         $this->validateUserAccess($entry->getUser()->getId());
 
         $title = $request->request->get('title');
-        $isArchived = $request->request->get('archive');
-        $isStarred = $request->request->get('star');
+        $isArchived = (int) $request->request->get('archive');
+        $isStarred = (int) $request->request->get('starred');
 
         if (!is_null($title)) {
             $entry->setTitle($title);
         }
 
         if (!is_null($isArchived)) {
-            $entry->setArchived($isArchived);
+            $entry->setArchived((bool) $isArchived);
         }
 
         if (!is_null($isStarred)) {
-            $entry->setStarred($isStarred);
+            $entry->setStarred((bool) $isStarred);
         }
 
         $tags = $request->request->get('tags', '');
