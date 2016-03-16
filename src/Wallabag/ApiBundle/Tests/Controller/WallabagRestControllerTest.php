@@ -27,6 +27,9 @@ class WallabagRestControllerTest extends WallabagApiTestCase
         $this->assertEquals($entry->getTitle(), $content['title']);
         $this->assertEquals($entry->getUrl(), $content['url']);
         $this->assertCount(count($entry->getTags()), $content['tags']);
+        $this->assertEquals($entry->getUserName(), $content['user_name']);
+        $this->assertEquals($entry->getUserEmail(), $content['user_email']);
+        $this->assertEquals($entry->getUserId(), $content['user_id']);
 
         $this->assertTrue(
             $this->client->getResponse()->headers->contains(
@@ -159,6 +162,7 @@ class WallabagRestControllerTest extends WallabagApiTestCase
         $this->assertEquals('http://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html', $content['url']);
         $this->assertEquals(false, $content['is_archived']);
         $this->assertEquals(false, $content['is_starred']);
+        $this->assertEquals(1, $content['user_id']);
         $this->assertCount(1, $content['tags']);
     }
 
@@ -178,6 +182,7 @@ class WallabagRestControllerTest extends WallabagApiTestCase
         $this->assertEquals('http://www.lemonde.fr/idees/article/2016/02/08/preserver-la-liberte-d-expression-sur-les-reseaux-sociaux_4861503_3232.html', $content['url']);
         $this->assertEquals(true, $content['is_archived']);
         $this->assertEquals(true, $content['is_starred']);
+        $this->assertEquals(1, $content['user_id']);
     }
 
     public function testPatchEntry()
@@ -209,6 +214,7 @@ class WallabagRestControllerTest extends WallabagApiTestCase
         $this->assertEquals($entry->getUrl(), $content['url']);
         $this->assertEquals('New awesome title', $content['title']);
         $this->assertGreaterThan($nbTags, count($content['tags']));
+        $this->assertEquals(1, $content['user_id']);
     }
 
     public function testGetTagsEntry()
