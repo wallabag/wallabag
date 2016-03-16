@@ -126,9 +126,13 @@ class WallabagRestController extends FOSRestController
             $this->get('wallabag_core.content_proxy')->assignTagsToEntry($entry, $tags);
         }
 
-        $entry->setStarred((bool) $isStarred);
+        if (!is_null($isStarred)) {
+            $entry->setStarred((bool) $isStarred);
+        }
 
-        $entry->setArchived((bool) $isArchived);
+        if (!is_null($isArchived)) {
+            $entry->setArchived((bool) $isArchived);
+        }
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($entry);
