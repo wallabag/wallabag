@@ -33,6 +33,7 @@
         "ext-dom": "*",
         "ext-curl": "*",
         "ext-gd": "*",
+        "ext-exif": "*",
         "ext-session": "*",
         "ext-ctype": "*",
         "ext-hash": "*",
