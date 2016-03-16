@@ -251,7 +251,7 @@ quickstart:
     page_title: 'Quickstart'
     intro:
         title: 'Welcome to wallabag!'
-        paragraph_1: "We'll accompany you to visit wallabag and show you some features which can interess you."
+        paragraph_1: "We'll accompany you to visit wallabag and show you some features which can interest you."
         paragraph_2: 'Follow us!'
     configure:
         title: 'Configure the application'
@@ -260,7 +260,7 @@ quickstart:
         tagging_rules: 'Write rules to automatically tag your articles'
     admin:
         title: 'Administration'
-        description: 'As a administrator, you have privileges on wallabag. You can:'
+        description: 'As an administrator, you have privileges on wallabag. You can:'
         new_user: 'Create a new user'
         analytics: 'Configure analytics'
         sharing: 'Enable some parameters about article sharing'
@@ -272,7 +272,7 @@ quickstart:
         unread_articles: 'And classify it!'
     migrate:
         title: 'Migrate from an existing service'
-        description: "You're using an other service? We'll help you to retrieve your data on wallabag."
+        description: "Are you using another service? We'll help you to retrieve your data on wallabag."
         pocket: 'Migrate from Pocket'
         wallabag_v1: 'Migrate from wallabag v1'
         wallabag_v2: 'Migrate from wallabag v2'
