@@ -1,285 +1,364 @@
-#Login
 security:
     login:
+        page_title: 'Bienvenue sur wallabag !'
         keep_logged_in: 'Rester connecté'
         forgot_password: 'Mot de passe oublié ?'
         submit: 'Se connecter'
         register: 'Créer un compte'
         username: "Nom d'utilisateur"
         password: 'Mot de passe'
+        cancel: 'Annuler'
     resetting:
-        description: 'Saisissez votre adresse e-mail ci-dessous, nous vous enverrons les instructions pour réinitialiser votre mot de passe.'
+        description: "Saisissez votre adresse e-mail ci-dessous, nous vous enverrons les instructions pour réinitialiser votre mot de passe."
+    register:
+        page_title: 'Se créer un compte'
+        go_to_account: 'Aller sur votre compte'
 
-# Menu
-unread: 'Non lus'
-starred: 'Favoris'
-archive: 'Lus'
-all: 'Tous les articles'
-tags: 'Tags'
-config: 'Configuration'
-internal settings: 'Configuration interne'
-import: 'Importer'
-howto: 'Aide'
-logout: 'Déconnexion'
-Filtered: 'Articles filtrés'
-About: 'À propos'
+menu:
+    left:
+        unread: 'Non lus'
+        starred: 'Favoris'
+        archive: 'Lus'
+        all_articles: 'Tous les articles'
+        config: 'Configuration'
+        tags: 'Tags'
+        internal_settings: 'Configuration interne'
+        import: 'Importer'
+        howto: 'Aide'
+        developer: 'Développeur'
+        logout: 'Déconnexion'
+        about: 'À propos'
+        search: 'Recherche'
+        save_link: 'Sauvegarder un nouvel article'
+        back_to_unread: 'Retour aux articles non lus'
+    top:
+        add_new_entry: 'Sauvegarder un nouvel article'
+        search: 'Rechercher'
+        filter_entries: 'Filtrer les articles'
+        export: 'Exporter'
+    search_form:
+        input_label: 'Saisissez votre terme de recherche'
 
-# Header
-Back to unread articles: 'Retour aux articles non lus'
-Add a new entry: 'Sauvegarder un nouvel article'
-Search: 'Rechercher'
-Filter entries: 'Filtrer les articles'
-Enter your search here: 'Saisissez votre terme de recherche'
-Save new entry: 'Sauvegarder un nouvel article'
-Export: Exporter
+footer:
+    wallabag:
+        elsewhere: 'Emportez wallabag avec vous'
+        social: 'Social'
+        powered_by: 'propulsé par'
+        about: 'À propos'
+    page_title: 'Configuration'
+    tab_menu:
+        settings: 'Paramètres'
+        rss: 'RSS'
+        user_info: 'Mon compte'
+        password: 'Mot de passe'
+        rules: 'Règles de tag automatiques'
+        new_user: 'Créer un compte'
+    form:
+        save: 'Enregistrer'
+    form_settings:
+        theme_label: 'Thème'
+        items_per_page_label: "Nombre d'articles par page"
+        language_label: 'Langue'
+    form_rss:
+        description: "Les flux RSS fournis par wallabag vous permettent de lire vos articles sauvegardés dans votre lecteur de flux préféré. Pour pouvoir les utiliser, vous devez d'abord créer un jeton."
+        token_label: 'Jeton RSS'
+        no_token: 'Aucun jeton généré'
+        token_create: 'Créez votre jeton'
+        token_reset: 'Réinitialisez votre jeton'
+        rss_links: 'URL de vos flux RSS'
+        rss_link:
+            unread: 'non lus'
+            starred: 'favoris'
+            archive: 'lus'
+        rss_limit: "Nombre d'articles dans le flux"
+    form_user:
+        two_factor_description: "Activer l'authentification double-facteur veut dire que vous allez recevoir un code par email à chaque nouvelle connexion non approuvée."
+        name_label: 'Nom'
+        email_label: 'Adresse e-mail'
+        twoFactorAuthentication_label: 'Double authentification'
+    form_password:
+        old_password_label: 'Mot de passe actuel'
+        new_password_label: 'Nouveau mot de passe'
+        repeat_new_password_label: 'Confirmez votre nouveau mot de passe'
+    form_rules:
+        if_label: 'si'
+        then_tag_as_label: 'alors attribuer les tags'
+        delete_rule_label: 'supprimer'
+        rule_label: 'Règle'
+        tags_label: 'Tags'
+        faq:
+            title: 'FAQ'
+            tagging_rules_definition_title: 'Que signifient les règles de tag automatiques ?'
+            tagging_rules_definition_description: "Ce sont des règles utilisées par wallabag pour classer automatiquement vos nouveaux articles.<br />À chaque fois qu'un nouvel article est ajouté, toutes les règles de tag automatiques seront utilisées afin d'ajouter les tags que vous avez configurés, vous épargnant ainsi l'effort de classifier vos articles manuellement."
+            how_to_use_them_title: 'Comment les utiliser ?'
+            how_to_use_them_description: 'Imaginons que voulez attribuer aux nouveaux articles le tag « <i>lecture courte</i> » lorsque le temps de lecture est inférieur à 3 minutes.<br />Dans ce cas, vous devriez mettre « readingTime &lt;= 3 » dans le champ <i>Règle</i> et « <i>lecture courte</i> » dans le champ <i>Tag</i>.<br />Plusieurs tags peuvent être ajoutés simultanément en les séparant par des virgules : « <i>lecture courte, à lire</i> »<br />Des règles complexes peuvent être créées en utilisant des opérateurs prédéfinis: si « <i>readingTime &gt;= 5 AND domainName = \"github.com\"</i> » alors attribuer les tags « <i>lecture longue, github </i> »'
+            variables_available_title: 'Quelles variables et opérateurs puis-je utiliser pour écrire des règles ?'
+            variables_available_description: 'Les variables et opérateurs suivants peuvent être utilisés pour écrire des règles de tag automatiques :'
+            meaning: 'Signification'
+            variable_description:
+                label: 'Variable'
+                title: "Titre de l'article"
+                url: "URL de l'article"
+                isArchived: "Si l'article est archivé ou non"
+                isStarred: "Si l'article est favori ou non"
+                content: "Le contenu de l'article"
+                language: "La langue de l'article"
+                mimetype: "Le type MIME de l'article"
+                readingTime: "Le temps de lecture estimé de l'article, en minutes"
+                domainName: "Le nom de domaine de l'article"
+            operator_description:
+                label: 'Opérateur'
+                less_than: 'Moins que…...'
+                strictly_less_than: 'Strictement moins que…'
+                greater_than: 'Plus que…'
+                strictly_greater_than: 'Strictement plus que…'
+                equal_to: 'Égal à…'
+                not_equal_to: 'Différent de…'
+                or: "Une règle OU l'autre"
+                and: "Une règle ET l'autre"
+                matches: 'Teste si un <i>sujet</i> correspond à une <i>recherche</i> (non sensible à la casse).<br />Exemple : <code>title matches "football"</code>'
+    form_new_user:
+        username_label: "Nom d'utilisateur"
+        password_label: 'Mot de passe'
+        repeat_new_password_label: 'Confirmez votre nouveau mot de passe'
+        plain_password_label: 'Mot de passe en clair'
+        email_label: 'Adresse e-mail'
 
-# Config screen
-Settings: 'Paramètres'
-User information: 'Mon compte'
-RSS: 'RSS'
-Add a user: 'Créer un compte'
-Theme: 'Thème'
-Items per page: "Nombre d'articles par page"
-Reading speed: "Vitesse de lecture"
-Language: 'Langue'
-Save: 'Enregistrer'
-RSS token: 'Jeton RSS'
-RSS token updated: 'Jeton RSS mis à jour'
-Name: 'Nom'
-Email: 'Adresse e-mail'
-No token: 'Aucun jeton généré'
-Reset your token: 'Réinitialisez votre jeton'
-Create your token: 'Créez votre jeton'
-Rss limit: "Nombre d'articles dans un flux RSS"
-RSS links: 'URL de vos flux RSS'
-"RSS feeds provided by wallabag allow you to read your saved articles with your favourite RSS reader. You need to generate a token first.": "Les flux RSS fournis par wallabag vous permettent de lire vos articles sauvegardés dans votre lecteur de flux préféré. Pour pouvoir les utiliser, vous devez d'abord créer un jeton."
-Old password: 'Mot de passe actuel'
-New password: 'Nouveau mot de passe'
-Repeat new password: 'Confirmez votre nouveau mot de passe'
-Two factor authentication: "Double authentification"
-"Enabling two factor authentication means you'll receive an email with a code on every new untrusted connexion": "Activer l'authentification double-facteur veut dire que vous allez recevoir un code par email à chaque nouvelle connexion non approuvée."
-"I read ~100 words per minute": "Je lis environ 100 mots par minute"
-"I read ~200 words per minute": "Je lis environ 200 mots par minute"
-"I read ~300 words per minute": "Je lis environ 300 mots par minute"
-"I read ~400 words per minute": "Je lis environ 400 mots par minute"
-"You can use online tools to estimate your reading speed": "Vous pouvez utiliser un outil en ligne pour estimer votre vitesse de lecture"
-"like this one": "comme celui-ci"
+entry:
+    page_titles:
+        unread: 'Articles non lus'
+        starred: 'Articles favoris'
+        archive: 'Articles lus'
+        filtered: 'Articles filtrés'
+    list:
+        number_on_the_page: "{0} Il n'y a pas d'articles.|{1} Il y a un article.|]1,Inf[ Il y a %count% articles."
+        reading_time: 'durée de lecture'
+        reading_time_minutes: 'durée de lecture: %readingTime% min'
+        reading_time_less_one_minute: 'durée de lecture: <small class="inferieur">&lt;</small> 1 min'
+        original_article: 'original'
+        toogle_as_read: 'Marquer comme lu/non lu'
+        toogle_as_star: 'Marquer comme favori'
+        delete: 'Supprimer'
+        export_title: 'Exporter'
+    filters:
+        title: 'Filtres'
+        status_label: 'Status'
+        archived_label: 'Lus'
+        starred_label: 'Favoris'
+        preview_picture_label: 'A une photo'
+        preview_picture_help: 'Photo'
+        language_label: 'Langue'
+        reading_time:
+            label: 'Durée de lecture en minutes'
+            from: 'de'
+            to: 'à'
+        domain_label: 'Nom de domaine'
+        created_at:
+            label: 'Date de création'
+            from: 'de'
+            to: 'à'
+        action:
+            clear: 'Effacer'
+            filter: 'Filtrer'
+    view:
+        left_menu:
+            back_to_top: 'Revenir en haut'
+            back_to_homepage: 'Retour'
+            set_as_read: 'Marquer comme lu'
+            set_as_unread: 'Marquer comme non lu'
+            set_as_favorite: 'Mettre en favori'
+            view_original_article: 'Article original'
+            re_fetch_content: 'Recharger le contenu'
+            delete: 'Supprimer'
+            add_a_tag: 'Ajouter un tag'
+            share_content: 'Partager'
+            share_email_label: 'Email'
+            download: 'Télécharger'
+            print: 'Imprimer'
+            problem:
+                label: 'Un problème ?'
+                description: "Est-ce que cet article s'affiche mal ?"
+        edit_title: 'Modifier le titre'
+        original_article: 'original'
+        annotations_on_the_entry: '{0} Aucune annotation|{1} Une annotation|]1,Inf[ %nbAnnotations% annotations'
+    new:
+        page_title: 'Sauvegarder un nouvel article'
+        placeholder: 'http://website.com'
+        form_new:
+            url_label: Url
+    edit:
+        page_title: 'Éditer un article'
+        title_label: 'Titre'
+        url_label: 'Url'
+        is_public_label: 'Public'
+        save_label: 'Enregistrer'
 
-# Tagging rules
-Tagging rules: "Règles de tag automatiques"
-What does « tagging rules » mean?: "Que signifient les règles de tag automatiques ?"
-"They are rules used by Wallabag to automatically tag new entries.<br />Each time a new entry is added, all the tagging rules will be used to add the tags you configured, thus saving you the trouble to manually classify your entries.": "Ce sont des règles utilisées par wallabag pour classer automatiquement vos nouveaux articles.<br />À chaque fois qu'un nouvel article est ajouté, toutes les règles de tag automatiques seront utilisées afin d'ajouter les tags que vous avez configurés, vous épargnant ainsi l'effort de classifier vos articles manuellement."
-How do I use them?: "Comment les utiliser ?"
-"Let assume you want to tag new entries as « <i>short reading</i> » when the reading time is inferior to 3 minutes.<br />In that case, you should put « readingTime &lt;= 3 » in the <i>Rule</i> field and « <i>short reading</i> » in the <i>Tags</i> field.<br />Several tags can added simultaneously by separating them by a comma: « <i>short reading, must read</i> »<br />Complex rules can be written by using predefined operators: if « <i>readingTime &gt;= 5 AND domainName = \"github.com\"</i> » then tag as « <i>long reading, github </i> »": "Imaginons que voulez attribuer aux nouveaux articles le tag « <i>lecture courte</i> » lorsque le temps de lecture est inférieur à 3 minutes.<br />Dans ce cas, vous devriez mettre « readingTime &lt;= 3 » dans le champ <i>Règle</i> et « <i>lecture courte</i> » dans le champ <i>Tag</i>.<br />Plusieurs tags peuvent être ajoutés simultanément en les séparant par des virgules : « <i>lecture courte, à lire</i> »<br />Des règles complexes peuvent être créées en utilisant des opérateurs prédéfinis: si « <i>readingTime &gt;= 5 AND domainName = \"github.com\"</i> » alors attribuer les tags « <i>lecteur longue, github </i> »"
-Which variables and operators can I use to write rules?: "Quelles variables et opérateurs puis-je utiliser pour écrire des règles ?"
-The following variables and operators can be used to create tagging rules:: "Les variables et opérateurs suivants peuvent être utilisés pour écrire des règles de tag automatiques :"
-Variable: "Variable"
-Meaning: "Signification"
-Operator: "Opérateur"
-Title of the entry: "Titre de l'article"
-Less than…: "Moins que…"
-URL of the entry: "URL de l'article"
-Strictly less than…: "Strictement moins que…"
-Whether the entry is archived or not: "Si l'article est archivé ou non"
-Greater than…: "Plus que…"
-Whether the entry is starred or not: "Si l'article est favori ou non"
-Strictly greater than…: "Strictement plus que…"
-The entry's content: "Le contenu de l'article"
-Equal to…: "Égal à…"
-The entry's language: "La langue de l'article"
-Not equal to…: "Différent de…"
-The entry's mime-type: "Le Type MIME de l'article"
-One rule or another: "Une règle ou l'autre"
-The estimated entry's reading time, in minutes: "Le temps de lecture estimé de l'article, en minutes"
-One rule and another: "Une règle et l'autre"
-The domain name of the entry: "Le nom de domaine de l'article"
-"Tests that a <i>subject</i> is matches a <i>search</i> (case-insensitive).<br />Example: <code>title matches \"football\"</code>": "Teste si un <i>sujet</i> correspond à une <i>recherche</i> (non sensible à la casse).<br />Exemple : <code>title matches \"football\"</code>"
-Rule: "Règle"
-FAQ: "FAQ"
+about:
+    page_title: 'À propos'
+    top_menu:
+        who_behind_wallabag: "L'équipe derrière wallabag"
+        getting_help: "Besoin d'aide"
+        helping: 'Aider wallabag'
+        contributors: 'Contributeurs'
+        third_party: 'Librairies tierces'
+    who_behind_wallabag:
+        developped_by: 'Développé par'
+        website: 'Site web'
+        many_contributors: 'Et plein de contributeurs ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">sur Github</a>'
+        project_website: 'Site web du projet'
+        license: 'Licence'
+        version: 'Version'
+    getting_help:
+        documentation: 'Documentation'
+        bug_reports: 'Rapport de bugs'
+        support: '<a href="https://support.wallabag.org">Sur notre site de support</a> ou <a href="https://github.com/wallabag/wallabag/issues">sur GitHub</a>'
+    helping:
+        description: 'wallabag est gratuit et opensource. Vous pouvez nous aider :'
+        by_contributing: 'en contribuant au projet :'
+        by_contributing_2: 'un ticket recense tous nos besoins'
+        by_paypal: 'via Paypal'
+    contributors:
+        description: "Merci aux contributeurs de l'application web de wallabag"
+    third_party:
+        description: 'Voici la liste des dépendances utilisées dans wallabag (et leur license) :'
+        package: 'Dépendance'
+        license: 'Licence'
 
-# Entries
-"estimated reading time: %readingTime% min": "durée de lecture : %readingTime% min"
-"estimated reading time: %inferior% 1 min": "durée de lecture : %inferior% 1 min"
-original: "original"
-Toggle mark as read: 'Marquer comme lu/non lu'
-Toggle favorite: 'Marquer comme favori'
-Delete: 'Supprimer'
-"{0} There is no entry.|{1} There is one entry.|]1,Inf[ There are %count% entries.": "{0} Il n'y a pas d'articles.|{1} Il y a un article.|]1,Inf[ Il y a %count% articles."
-http://website: "http://siteweb"
-"{0} No annotations|{1} One annotation|]1,Inf[ %nbAnnotations% annotations": "{0} Aucune annotation|{1} Une annotation|]1,Inf[ %nbAnnotations% annotations"
+howto:
+    page_title: 'Aide'
+    page_description: "Il y a plusieurs façon d'enregistrer un article :"
+    top_menu:
+        browser_addons: 'Extensions de navigateur'
+        mobile_apps: 'Applications smartphone'
+        bookmarklet: 'Bookmarklet'
+    form:
+        description: 'Grâce à ce formulaire'
+    browser_addons:
+        firefox: 'Extension Firefox'
+        chrome: 'Extension Chrome'
+    mobile_apps:
+        android:
+            via_f_droid: 'via F-Droid'
+            via_google_play: 'via Google Play'
+        ios: 'sur iTunes Store'
+        windows: 'sur Microsoft Store'
+    bookmarklet:
+        description: 'Glissez et déposez ce lien dans votre barre de favoris :'
 
-# Edit entry
-Edit an entry: "Éditer un article"
-Title: "Titre"
-Is public: "Public"
+quickstart:
+    page_title: 'Pour bien débuter'
+    intro:
+        title: 'Bienvenue sur wallabag !'
+        paragraph_1: "Nous allons vous accompagner pour vous faire faire le tour de la maison et vous présenter quelques fonctionnalités qui pourraient vous intéresser pour vous approprier cet outil."
+        paragraph_2: 'Suivez-nous !'
+    configure:
+        title: "Configurez l'application"
+        language: "Changez la langue et le design de l'application"
+        rss: 'Activez les flux RSS'
+        tagging_rules: 'Écrivez des règles pour classer automatiquement vos articles'
+    admin:
+        title: 'Administration'
+        description: "En tant qu'adminitrasteur sur wallabag, vous avez des privilèges qui vous permette de :"
+        new_user: 'Créer un nouvel utilisateur'
+        analytics: 'Configurer les statistiques'
+        sharing: 'Activer des paramètres de partages'
+        export: 'Configurer les export'
+        import: 'Configurer les import'
+    first_steps:
+        title: 'Premiers pas'
+        new_article: 'Ajoutez votre premier article'
+        unread_articles: 'Et rangez-le !'
+    migrate:
+        title: 'Migrer depuis un service existant'
+        description: "Vous êtes un ancien utilisateur d'un service existant ? Nous allons vous aider à récupérer vos données sur wallabag."
+        pocket: 'Migrer depuis Pocket'
+        wallabag_v1: 'Migrer depuis wallabag v1'
+        wallabag_v2: 'Migrer depuis wallabag v2'
+    developer:
+        title: 'Pour les développeurs'
+        create_application: 'Créer votre application tierce'
+    docs:
+        title: 'Documentation complète'
+        annotate: 'Annotater votre article'
+        export: 'Convertissez vos articles en ePub ou en PDF'
+        search_filters: "Apprenez à utiliser le moteur de recherche et les filtres pour retrouver l'article qui vous intéresse"
+        fetching_errors: "Que faire si mon article n'est pas correctement récupéré ?"
+        all_docs: "Et encore plein d'autres choses !"
+    support:
+        title: 'Support'
+        description: 'Parce que vous avez peut-être besoin de nous poser une question, nous sommes disponibles pour vous.'
+        github: 'Sur GitHub'
+        email: 'Par e-mail'
+        gitter: 'Sur Gitter'
 
-# tag
-Tags: Tags
-"{0} There is no tag.|{1} There is one tag.|]1,Inf[ There are %count% tags.": "{0} Il n'y a pas de tag.|{1} Il y a un tag.|]1,Inf[ Il y a %count% tags."
+tag:
+    page_title: 'Tags'
+    list:
+        number_on_the_page: "{0} Il n'y a pas de tag.|{1} Il y a un tag.|]1,Inf[ Il y a %count% tags."
 
-# Filters
-Filters: 'Filtres'
-Status: 'Statut'
-Archived: 'Lu'
-Starred: 'Favori'
-Preview picture: 'Photo'
-Has a preview picture: 'A une photo'
-Reading time in minutes: 'Durée de lecture en minutes'
-from: 'de'
-to: 'à'
-website.com: 'website.com'
-Domain name: 'Nom de domaine'
-Creation date: 'Date de création'
-dd/mm/yyyy: 'jj/mm/aaaa'
-Clear: 'Effacer'
-Filter: 'Filtrer'
-website.com: "siteweb.com"
+import:
+    page_title: 'Importer'
+    page_description: "Bienvenue dans l'outil de migration de wallabag. Choisissez ci-dessous le service depuis lequel vous souhaitez migrer."
+    action:
+        import_contents: 'Importer les contenus'
+    form:
+        mark_as_read_title: 'Marquer tout comme lu ?'
+        mark_as_read_label: 'Marquer tous les contenus importés comme lus'
+        file_label: 'Fichier'
+        save_label: 'Importer le fichier'
+    pocket:
+        page_title: 'Importer > Pocket'
+        description: "Cet outil va importer toutes vos données de Pocket. Pocket ne nous autorise pas à récupérer le contenu depuis leur service, donc wallabag doit reparcourir chaque article pour récupérer son contenu."
+        config_missing:
+            description: "L'import à partir de Pocket n'est pas configuré."
+            admin_message: "Vous devez définir %keyurls%une clé pour l'API Pocket%keyurle%."
+            user_message: "L'administrateur de votre serveur doit définir une clé pour l'API Pocket."
+        authorize_message: "Vous pouvez importer vos données depuis votre compte Pocket. Vous n'avez qu'à cliquer sur le bouton ci-dessous et à autoriser wallabag à se connecter à getpocket.com."
+        connect_to_pocket: 'Se connecter à Pocket et importer les données'
+    wallabag_v1:
+        page_title: 'Importer > Wallabag v1'
+        description: 'Cet outil va importer toutes vos données de wallabag v1. Sur votre page de configuration de wallabag v1, cliquez sur "Export JSON" dans la section "Exporter vos données de wallabag". Vous allez récupérer un fichier "wallabag-export-1-xxxx-xx-xx.json".'
+        how_to: "Choisissez le fichier de votre export wallabag v1 et cliquez sur le bouton ci-dessous pour l'importer."
+    wallabag_v2:
+        page_title: 'Importer > Wallabag v2'
+        description: "Cet outil va importer tous vos articles d'une autre instance de wallabag v2. Allez dans tous vos articles, puis, sur la barre latérale, cliquez sur \"JSON\". Vous allez récupérer un fichier \"All articles.json\""
 
-# About
-About: "À propos"
-Who is behind wallabag: "L'équipe derrière wallabag"
-Getting help: "Besoin d'aide"
-Helping wallabag: "Aider wallabag"
-Developed by: "Développé par"
-website: "Site web"
-And many others contributors ♥: "Et plein de contributeurs ♥"
-on GitHub: "sur GitHub"
-Project website: "Site web du projet"
-License: "Licence"
-Version: "Version"
-Documentation: "Documentation"
-Bug reports: "Rapport de bugs"
-On our support website: "Sur notre site de support"
-or: "ou"
-"wallabag is free and opensource. You can help us:": "wallabag est gratuit et opensource. Vous pouvez nous aider :"
-"by contributing to the project:": "en contribuant au projet :"
-an issue lists all our needs: "un ticket recense tous nos besoins"
-via Paypal: "via Paypal"
-Take wallabag with you: "Emportez wallabag avec vous"
-Social: "Social"
-powered by: "propulsé par"
-Contributors: "Contributeurs"
-Thank you to contributors on wallabag web application: "Merci aux contributeurs de l'application web de wallabag"
-Third-party libraries: Librairies tierces
-"Here are the list of third-party libraries used in wallabag (with their licenses):": "Voici la liste des dépendances utilisées dans wallabag (et leur license) :"
-Package: Dépendance
-License: Licence
+validator:
+    password_must_match: 'Les mots de passe doivent être identique'
+    password_too_short: 'Le mot de passe doit avoir au moins 8 caractères'
+    password_wrong_value: 'Votre mot de passe actuel est faux'
+    item_per_page_too_high: "Ca ne va pas plaire à l'application"
+    rss_limit_too_hight: "Ca ne va pas plaire à l'application"
 
-# Howto
-Form: "Formulaire"
-Thanks to this form: "Grâce à ce formulaire"
-Browser addons: "Extensions de navigateur"
-Mobile apps: "Applications smartphone"
-Bookmarklet: "Bookmarklet"
-Standard Firefox Add-On: "Extension Firefox"
-Chrome Extension: "Extension Chrome"
-download the application: "téléchargez l'application"
-"Drag &amp; drop this link to your bookmarks bar:": "Glissez et déposez ce lien dans votre barre de favoris :"
-
-# Flash messages
-Information updated: "Vos informations personnelles ont bien été mises à jour"
-"Config saved. Some parameters will be considered after disconnection.": "Les paramètres ont bien été mis à jour. Certains seront pris en compte après déconnexion."
-RSS information updated: "La configuration des flux RSS a bien été mise à jour"
-Password updated: "Votre mot de passe a bien été mis à jour"
-Entry starred: "Article ajouté dans les favoris"
-Entry unstarred: "Article retiré des favoris"
-Entry archived: "Article marqué comme lu"
-Entry unarchived: "Article marqué comme non lu"
-Entry deleted: "Article supprimé"
-Tagging rule deleted: "Règle supprimée"
-Tagging rules updated: "Règles mises à jour"
-User "%username%" added: 'Utilisateur "%username%" ajouté'
-In demonstration mode, you can't change password for this user.: 'En démo, vous ne pouvez pas changer le mot de passe de cet utilisateur.'
-
-# Entry
-Mark as read: 'Marquer comme lu'
-Favorite: 'Mettre en favori'
-back: 'Retour'
-original article: 'Article original'
-Add a tag: 'Ajouter un tag'
-Share: 'Partager'
-Download: 'Télécharger'
-Does this article appear wrong?: "Est-ce que cet article s'affiche mal ?"
-Problems?: 'Un problème ?'
-Edit title: "Modifier le titre"
-Re-fetch content: "Recharger le contenu"
-Tag added: "Tag ajouté"
-
-# Import
-Welcome to wallabag importer. Please select your previous service that you want to migrate.: "Bienvenue dans l'outil de migration de wallabag. Choisissez ci-dessous le service depuis lequel vous souhaitez migrer."
-"This importer will import all your Pocket data. Pocket doesn't allow us to retrieve content from their service, so the readable content of each article will be re-fetched by wallabag.": "Cet outil va importer toutes vos données de Pocket. Pocket ne nous autorise pas à récupérer le contenu depuis leur service, donc wallabag doit reparcourir chaque article pour récupérer son contenu."
-"This importer will import all your wallabag v1 articles. On your config page, click on \"JSON export\" in the \"Export your wallabag data\" section. You will have a \"wallabag-export-1-xxxx-xx-xx.json\" file.": "Cet outil va importer toutes vos données de wallabag v1. Sur votre page de configuration de wallabag v1, cliquez sur \"Export JSON\" dans la section \"Exporter vos données de wallabag\". Vous allez récupérer un fichier \"wallabag-export-1-xxxx-xx-xx.json\"."
-"This importer will import all your wallabag v2 articles. Go to All articles, then, on the export sidebar, click on \"JSON\". You will have a \"All articles.json\" file.": "Cet outil va importer tous vos articles d'une autre instance de wallabag v2. Allez dans tous vos articles, puis, sur la barre latérale, cliquez sur \"JSON\". Vous allez récupérer un fichier \"All articles.json\""
-"You can import your data from your Pocket account. You just have to click on the below button and authorize the application to connect to getpocket.com.": "Vous pouvez importer vos données depuis votre compte Pocket. Vous n'avez qu'à cliquer sur le bouton ci-dessous et à autoriser wallabag à se connecter à getpocket.com."
-Import > Pocket: "Import > Pocket"
-Pocket import isn't configured.: "L'import à partir de Pocket n'est pas configuré."
-You need to define %keyurls% a pocket_consumer_key %keyurle%.: "Vous devez définir %keyurls% une clé pour l'API Pocket %keyurle%."
-Your server admin needs to define an API Key for Pocket.: L'administrateur de votre serveur doit définir une clé pour l'API Pocket."
-Connect to Pocket and import data: "Se connecter à Pocket et importer les données"
-Please select your wallabag export and click on the below button to upload and import it.: "Choisissez le fichier de votre export wallabag v1 et cliquez sur le bouton ci-dessous pour l'importer."
-File: "Fichier"
-Upload file: "Importer le fichier"
-Import contents: "Importer les contenus"
-Import: "Importer"
-Import > Wallabag v1: "Importer > Wallabag v1"
-Import > Wallabag v2: "Importer > Wallabag v2"
-Mark all as read ?: "Marquer tout comme lu ?"
-Mark all imported entries as read: "Marquer tous les contenus importés comme lus"
-
-# Quickstart
-Quickstart: Pour bien débuter
-Welcome to wallabag!: "Bienvenue sur wallabag !"
-We'll accompany you to visit wallabag and show you some features which can interess you.: "Nous allons vous accompagner pour vous faire faire le tour de la maison et vous présenter quelques fonctionnalités qui pourraient vous intéresser pour vous approprier cet outil."
-Follow us!: "Suivez-nous !"
-Configure the application: "Configurez l'application"
-Change language and design: "Changez la langue et le design de l'application"
-Enable RSS feeds: "Activez les flux RSS"
-First steps: "Premiers pas"
-Save your first article: "Ajoutez votre premier article"
-And classify it!: "Et rangez-le !"
-Migrate from an existing service: "Migrer depuis un service existant"
-You're using an other service? We'll help you to retrieve your data on wallabag.: "Vous êtes un ancien utilisateur d'un service existant ? Nous allons vous aider à récupérer vos données sur wallabag."
-Migrate from Pocket: "Migrer depuis Pocket"
-Migrate from wallabag v1: "Migrer depuis wallabag v1"
-Full documentation: "Documentation complète"
-Convert your articles into ePUB or PDF: "Convertissez vos articles en ePub ou en PDF"
-See how you can look for an article by using search engine and filters: "Apprenez à utiliser le moteur de recherche et les filtres pour retrouver l'article qui vous intéresse"
-And so many other articles!: "Et encore plein d'autres choses !"
-Support: "Support"
-If you need some help, we are here for you.: "Parce que vous avez peut-être besoin de nous poser une question, nous sommes disponibles pour vous."
-On GitHub: "Sur GitHub"
-By email: "Par email"
-On Gitter: "Sur Gitter"
-
-# developer
-Developer: Développeur
-Welcome to the wallabag API: "Bienvenue sur l'API de wallabag"
-How to create my first application: "Comment créer votre première application"
-View full API documentation: "Voir la documentation complète de l'API"
-Clients: "Clients"
-Create a new client: "Créer une nouveau client"
-Existing clients: "Les clients existants"
-Client ID: "ID Client"
-Client secret: "Clé secrète"
-Redirect URIs: "URLs de redirection"
-Grant type allowed: "Type de privilège accordé"
-You have the ability to remove this client. This action is IRREVERSIBLE !: "Vous avez la possibilité de supprimer un client. Cette action est IRREVERSIBLE !"
-If you remove it, every app configured with that client won't be able to auth on your wallabag.: "Si vous supprimez un client, toutes les applications qui l'utilisaient ne fonctionneront plus avec votre compte wallabag."
-Remove this client: "Supprimer ce client"
-New client: "Nouveau client"
-You are about to create a new client. Please fill the field below for the redirect URI of your application.: "Vous allez créer un nouveau client. Merci de remplir l'url de redirection vers votre application."
-Back: "Retour"
-Client parameters: "Les paramètres de votre client"
-New client created.: "Nouveau client créé."
-Here are your client parameters.: "Voilà les paramètres de votre client"
-Read the howto "Create my first application": "Lire \"comment créer ma première application\""
-Client deleted: "Client supprimé"
-No client yet.: "Aucun client pour le moment"
-"The following commands make use of the <a href=\"https://github.com/jkbrzt/httpie\">HTTPie library</a>. Make sure it is installed on your system before using it.": "Les commandes suivantes utilisent la <a href=\"https://github.com/jkbrzt/httpie\">librarie HTTPie</a>. Assurez-vous qu'elle soit installée avant de l'utiliser."
-You need a token to communicate between your 3rd application and wallabag API.: "Vous avez besoin d'un token pour échanger entre votre application et l'API de wallabag."
-"To create this token, you need <a href=\"%link%\">to create a new client</a>.": "Pour créer un token, vous devez <a href=\"%link%\">créer un nouveau client</a>."
-Now, create your token (replace client_id, client_secret, username and password with the good values):: "Maintenant créez votre token (remplacer client_id, client_secret, username et password avec les bonnes valeurs):"
-The API will return a response like this:: "L'API vous retournera une réponse comme ça:"
-The access_token is useful to do a call to the API endpoint. For example:: "L'access_token doit être utilisé pour faire un appel à l'API. Par exemple :"
-This call will return all the entries for your user.: "Cet appel va retourner tous les articles de l'utilisateur."
-"If you want to see all the API endpoints, you can have a look <a href=\"%link%\">to our API documentation</a>.": "Si vous voulez toutes les méthodes de l'API, jetez un oeil <a href=\"%link%\">à la documentation de l'API</a>."
+flashes:
+    config:
+        notice:
+            config_saved: 'Les paramètres ont bien été mis à jour. Certains seront pris en compte après déconnexion.'
+            password_updated: 'Votre mot de passe a bien été mis à jour'
+            password_not_updated_demo: "En démo, vous ne pouvez pas changer le mot de passe de cet utilisateur."
+            user_updated: 'Vos informations personnelles ont bien été mises à jour'
+            rss_updated: 'La configuration des flux RSS a bien été mise à jour'
+            tagging_rules_updated: 'Règles mises à jour'
+            tagging_rules_deleted: 'Règle supprimée'
+            user_added: 'Utilisateur "%username%" ajouté'
+            rss_token_updated: 'Jeton RSS mis à jour'
+    entry:
+        notice:
+            entry_already_saved: 'Article déjà sauvergardé le %date%'
+            entry_saved: 'Article enregistré'
+            entry_updated: 'Article mis à jour'
+            entry_reloaded: 'Article rechargé'
+            entry_reload_failed: "Le rechargement de l'article a échoué"
+            entry_archived: 'Article marqué comme lu'
+            entry_unarchived: 'Article marqué comme non lu'
+            entry_starred: 'Article ajouté dans les favoris'
+            entry_unstarred: 'Article retiré des favoris'
+            entry_deleted: 'Article supprimé'
+    tag:
+        notice:
+            tag_added: 'Tag ajouté'
+    import:
+        notice:
+            failed: "L'import a échoué, veuillez ré-essayer"
+            failed_on_file: "Erreur lors du traitement de l'import. Vérifier votre fichier."
+            summary: "Rapport d'import: %imported% importés, %skipped% déjà présent."

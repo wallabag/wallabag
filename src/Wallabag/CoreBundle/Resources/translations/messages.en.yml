@@ -47,7 +47,7 @@ footer:
         about: 'About'
 
 config:
-    page_title: Config
+    page_title: 'Config'
     tab_menu:
         settings: 'Settings'
         rss: 'RSS'
@@ -207,7 +207,6 @@ about:
         developped_by: 'Developed by'
         website: 'website'
         many_contributors: 'And many others contributors ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">on Github</a>'
-        on_github: 'on GitHub'
         project_website: 'Project website'
         license: 'License'
         version: 'Version'
@@ -365,4 +364,3 @@ flashes:
             failed: 'Import failed, please try again.'
             failed_on_file: 'Error while processing import. Please verify your import file.'
             summary: 'Import summary: %imported% imported, %skipped% already saved.'
-
