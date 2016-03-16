@@ -112,10 +112,14 @@ class WallabagRestController extends FOSRestController
         $isArchived = $request->request->get('archive');
         $isStarred = $request->request->get('starred');
 
-        $entry = $this->get('wallabag_core.content_proxy')->updateEntry(
-            new Entry($this->getUser()),
-            $url
-        );
+        $entry = $this->get('wallabag_core.entry_repository')->findByUrlAndUserId($url, $this->getUser()->getId());
+
+        if (false === $entry) {
+            $entry = $this->get('wallabag_core.content_proxy')->updateEntry(
+                new Entry($this->getUser()),
+                $url
+            );
+        }
 
         $tags = $request->request->get('tags', '');
         if (!empty($tags)) {
