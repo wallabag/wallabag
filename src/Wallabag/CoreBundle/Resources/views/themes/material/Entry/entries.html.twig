@@ -50,8 +50,9 @@
 
                             <div class="estimatedTime grey-text">
                                 <span class="tool reading-time">
-                                    {% if entry.readingTime > 0 %}
-                                        {% trans with {'%readingTime%': entry.readingTime } %}estimated reading time: %readingTime% min{% endtrans %}
+                                    {% set readingTime = entry.readingTime / app.user.config.readingSpeed %}
+                                    {% if readingTime > 0 %}
+                                        {% trans with {'%readingTime%': readingTime } %}estimated reading time: %readingTime% min{% endtrans %}
                                     {% else %}
                                         {% trans with {'%inferior%': '<small class="inferieur">&lt;</small>'} %}estimated reading time: %inferior% 1 min{% endtrans %}
                                     {% endif %}

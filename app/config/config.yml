@@ -44,6 +44,7 @@ wallabag_core:
     theme: material
     language: en
     rss_limit: 50
+    reading_speed: 1
 
 wallabag_import:
     allow_mimetypes: ['application/octet-stream', 'application/json', 'text/plain']

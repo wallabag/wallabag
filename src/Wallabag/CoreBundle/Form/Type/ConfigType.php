@@ -35,6 +35,14 @@ class ConfigType extends AbstractType
                 'choices_as_values' => true,
             ))
             ->add('items_per_page')
+            ->add('reading_speed', ChoiceType::class, array(
+                'choices' => array(
+                    'I read ~100 words per minute' => '0.5',
+                    'I read ~200 words per minute' => '1',
+                    'I read ~300 words per minute' => '1.5',
+                    'I read ~400 words per minute' => '2',
+                ),
+            ))
             ->add('language', ChoiceType::class, array(
                 'choices' => array_flip($this->languages),
                 'choices_as_values' => true,

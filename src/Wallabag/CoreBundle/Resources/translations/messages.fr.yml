@@ -38,6 +38,7 @@ RSS: 'RSS'
 Add a user: 'Créer un compte'
 Theme: 'Thème'
 Items per page: "Nombre d'articles par page"
+Reading speed: "Vitesse de lecture"
 Language: 'Langue'
 Save: 'Enregistrer'
 RSS token: 'Jeton RSS'
@@ -56,6 +57,12 @@ Repeat new password: 'Confirmez votre nouveau mot de passe'
 Username: "Nom d'utilisateur"
 Two factor authentication: "Double authentification"
 "Enabling two factor authentication means you'll receive an email with a code on every new untrusted connexion": "Activer l'authentification double-facteur veut dire que vous allez recevoir un code par email à chaque nouvelle connexion non approuvée."
+"I read ~100 words per minute": "Je lis environ 100 mots par minute"
+"I read ~200 words per minute": "Je lis environ 200 mots par minute"
+"I read ~300 words per minute": "Je lis environ 300 mots par minute"
+"I read ~400 words per minute": "Je lis environ 400 mots par minute"
+"You can use online tools to estimate your reading speed": "Vous pouvez utiliser un outil en ligne pour estimer votre vitesse de lecture"
+"like this one": "comme celui-ci"
 
 # Tagging rules
 Tagging rules: "Règles de tag automatiques"

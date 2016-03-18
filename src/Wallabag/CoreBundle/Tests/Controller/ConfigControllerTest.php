@@ -46,6 +46,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $data = array(
             'config[theme]' => 'baggy',
             'config[items_per_page]' => '30',
+            'config[reading_speed]' => '0.5',
             'config[language]' => 'en',
         );
 

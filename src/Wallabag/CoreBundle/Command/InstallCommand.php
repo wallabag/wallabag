@@ -222,6 +222,7 @@ class InstallCommand extends ContainerAwareCommand
         $config->setTheme($this->getContainer()->getParameter('wallabag_core.theme'));
         $config->setItemsPerPage($this->getContainer()->getParameter('wallabag_core.items_on_page'));
         $config->setRssLimit($this->getContainer()->getParameter('wallabag_core.rss_limit'));
+        $config->setReadingSpeed($this->getContainer()->getParameter('wallabag_core.reading_speed'));
         $config->setLanguage($this->getContainer()->getParameter('wallabag_core.language'));
 
         $em->persist($config);
