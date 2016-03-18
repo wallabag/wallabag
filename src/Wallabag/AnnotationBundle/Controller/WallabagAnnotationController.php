@@ -3,7 +3,6 @@
 namespace Wallabag\AnnotationBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
-use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
