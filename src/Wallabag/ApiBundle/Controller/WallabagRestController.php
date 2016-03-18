@@ -532,7 +532,6 @@ class WallabagRestController extends FOSRestController
      */
     public function getAnnotationsAction(Entry $entry)
     {
-
         $this->validateAuthentication();
 
         $annotationRows = $this
@@ -605,7 +604,6 @@ class WallabagRestController extends FOSRestController
      */
     public function putAnnotationAction(Annotation $annotation, Request $request)
     {
-
         $this->validateAuthentication();
 
         $data = json_decode($request->getContent(), true);
@@ -637,7 +635,6 @@ class WallabagRestController extends FOSRestController
      */
     public function deleteAnnotationAction(Annotation $annotation)
     {
-
         $this->validateAuthentication();
 
         $em = $this->getDoctrine()->getManager();
