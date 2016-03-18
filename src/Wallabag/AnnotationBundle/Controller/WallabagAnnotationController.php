@@ -15,11 +15,9 @@ class WallabagAnnotationController extends FOSRestController
     /**
      * Retrieve annotations for an entry.
      *
-     * @ApiDoc(
-     *      requirements={
-     *          {"name"="entry", "dataType"="integer", "requirement"="\w+", "description"="The entry ID"}
-     *      }
-     * )
+     * @param Entry $entry
+     *
+     * @see Wallabag\ApiBundle\Controller\WallabagRestController
      *
      * @return Response
      */
@@ -42,13 +40,7 @@ class WallabagAnnotationController extends FOSRestController
      *
      * @param Entry $entry
      *
-     * @ApiDoc(
-     *      requirements={
-     *          {"name"="ranges", "dataType"="array", "requirement"="\w+", "description"="The range array for the annotation"},
-     *          {"name"="quote", "dataType"="string", "required"=false, "description"="Optional, quote for the annotation"},
-     *          {"name"="text", "dataType"="string", "required"=true, "description"=""},
-     *      }
-     * )
+     * @see Wallabag\ApiBundle\Controller\WallabagRestController
      *
      * @return Response
      */
@@ -81,11 +73,7 @@ class WallabagAnnotationController extends FOSRestController
     /**
      * Updates an annotation.
      *
-     * @ApiDoc(
-     *      requirements={
-     *          {"name"="annotation", "dataType"="string", "requirement"="\w+", "description"="The annotation ID"}
-     *      }
-     * )
+     * @see Wallabag\ApiBundle\Controller\WallabagRestController
      *
      * @ParamConverter("annotation", class="WallabagAnnotationBundle:Annotation")
      *
@@ -110,11 +98,7 @@ class WallabagAnnotationController extends FOSRestController
     /**
      * Removes an annotation.
      *
-     * @ApiDoc(
-     *      requirements={
-     *          {"name"="annotation", "dataType"="string", "requirement"="\w+", "description"="The annotation ID"}
-     *      }
-     * )
+     * @see Wallabag\ApiBundle\Controller\WallabagRestController
      *
      * @ParamConverter("annotation", class="WallabagAnnotationBundle:Annotation")
      *
