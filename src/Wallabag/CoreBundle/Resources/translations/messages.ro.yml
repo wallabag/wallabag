@@ -1,129 +1,417 @@
-#Login
-Keep me logged in: 'Ține-mă logat'
-Forgot your password?: 'Ți-ai uitat parola?'
-Login: 'Logare'
-Back to login: 'Înapoi la logare'
-Send: 'Trimite'
-"Enter your email address below and we'll send you password reset instructions.": "Introduceți adresa de e-mail, iar noi vă vom trimite instrucțiunile pentru resetarea parolei."
+security:
+    login:
+        # page_title: 'Welcome to wallabag!'
+        keep_logged_in: 'Ține-mă logat'
+        forgot_password: 'Ți-ai uitat parola?'
+        submit: 'Logare'
+        # register: 'Register'
+        username: 'Nume de utilizator'
+        password: 'Parolă'
+        # cancel: 'Cancel'
+    resetting:
+        description: "Introduceți adresa de e-mail, iar noi vă vom trimite instrucțiunile pentru resetarea parolei."
+    register:
+        # page_title: 'Create an account'
+        # go_to_account: 'Go to your account'
 
-# Menu
-unread: 'necitite'
-starred: 'cu steluță'
-archive: 'arhivă'
-all: 'toate'
-tags: 'tag-uri'
-config: 'configurație'
-howto: 'cum să'
-logout: 'delogare'
-Filtered: 'Filtrate'
-About: 'Despre'
+menu:
+    left:
+        unread: 'Necitite'
+        starred: 'Cu steluță'
+        archive: 'Arhivă'
+        all_articles: 'Toate'
+        config: 'Configurație'
+        tags: 'Tag-uri'
+        # internal_settings: 'Internal Settings'
+        # import: 'Import'
+        howto: 'Cum să'
+        # developer: 'Developer'
+        logout: 'cum să'
+        about: 'Despre'
+        search: 'Căutare'
+        # save_link: 'Save a link'
+        back_to_unread: 'Înapoi la articolele necitite'
+    top:
+        add_new_entry: 'Introdu un nou articol'
+        search: 'Căutare'
+        filter_entries: 'Filtrează articolele'
+        # export: 'Export'
+    search_form:
+        input_label: 'Introdu căutarea ta'
 
-# Header
-Back to unread articles: 'Înapoi la articolele necitite'
-Add a new entry: 'Introdu un nou articol'
-Search: 'Căutare'
-Filter entries: 'Filtrează articolele'
-Enter your search here: 'Introdu căutarea ta'
-Save new entry: 'Salvează un nou articol'
+footer:
+    wallabag:
+        # elsewhere: 'Take wallabag with you'
+        # social: 'Social'
+        # powered_by: 'powered by'
+        about: 'Despre'
 
-# Config screen
-Settings: 'Setări'
-User information: 'Informații despre utilizator'
-Password: 'Parolă'
-RSS: 'RSS'
-Add a user: 'Crează un utilizator'
-Theme: 'Temă'
-Items per page: 'Articole pe pagină'
-Language: 'Limbă'
-Save: 'Salvează'
-RSS token: 'RSS-Token'
-Name: 'Nume'
-Email: 'E-mail'
-No token: 'Fără token'
-Reset your token: 'Resetează-ți token-ul'
-Create your token: 'Crează-ți token'
-Rss limit: 'Limită RSS'
-RSS links: 'Link-uri RSS'
-'RSS feeds provided by wallabag allow you to read your saved articles with your favourite RSS reader. You need to generate a token first.': 'Feed-urile RSS oferite de wallabag îți permit să-ți citești articolele salvate în reader-ul tău preferat RSS.'
-Old password: 'Parola veche'
-New password: 'Parola nouă'
-Repeat new password: 'Repetă parola'
-Username: 'Nume de utilizator'
+config:
+    page_title: 'Configurație'
+    tab_menu:
+        settings: 'Setări'
+        rss: 'RSS'
+        user_info: 'Informații despre utilizator'
+        password: 'Parolă'
+        # rules: 'Tagging rules'
+        new_user: 'Crează un utilizator'
+    form:
+        save: 'Salvează'
+    form_settings:
+        theme_label: 'Temă'
+        items_per_page_label: 'Articole pe pagină'
+        language_label: 'Limbă'
+    form_rss:
+        description: 'Feed-urile RSS oferite de wallabag îți permit să-ți citești articolele salvate în reader-ul tău preferat RSS.'
+        token_label: 'RSS-Token'
+        no_token: 'Fără token'
+        token_create: 'Crează-ți token'
+        token_reset: 'Resetează-ți token-ul'
+        rss_links: 'Link-uri RSS'
+        rss_link:
+            unread: 'unread'
+            starred: 'starred'
+            archive: 'archived'
+        rss_limit: 'Limită RSS'
+    form_user:
+        # two_factor_description: "Enabling two factor authentication means you'll receive an email with a code on every new untrusted connexion"
+        name_label: 'Nume'
+        email_label: 'E-mail'
+        # twoFactorAuthentication_label: 'Two factor authentication'
+    form_password:
+        old_password_label: 'Parola veche'
+        new_password_label: 'Parola nouă'
+        repeat_new_password_label: 'Repeat new password'
+    form_rules:
+        # if_label: 'if'
+        # then_tag_as_label: 'then tag as'
+        # delete_rule_label: 'delete'
+        # rule_label: 'Rule'
+        # tags_label: 'Tags'
+        # faq:
+        #     title: 'FAQ'
+        #     tagging_rules_definition_title: 'What does « tagging rules » mean?'
+        #     tagging_rules_definition_description: 'They are rules used by Wallabag to automatically tag new entries.<br />Each time a new entry is added, all the tagging rules will be used to add the tags you configured, thus saving you the trouble to manually classify your entries.'
+        #     how_to_use_them_title: 'How do I use them?'
+        #     how_to_use_them_description: 'Let assume you want to tag new entries as « <i>short reading</i> » when the reading time is inferior to 3 minutes.<br />In that case, you should put « readingTime &lt;= 3 » in the <i>Rule</i> field and « <i>short reading</i> » in the <i>Tags</i> field.<br />Several tags can added simultaneously by separating them by a comma: « <i>short reading, must read</i> »<br />Complex rules can be written by using predefined operators: if « <i>readingTime &gt;= 5 AND domainName = "github.com"</i> » then tag as « <i>long reading, github </i> »'
+        #     variables_available_title: 'Which variables and operators can I use to write rules?'
+        #     variables_available_description: 'The following variables and operators can be used to create tagging rules:'
+        #     meaning: 'Meaning'
+        #     variable_description:
+        #         label: 'Variable'
+        #         title: 'Title of the entry'
+        #         url: 'URL of the entry'
+        #         isArchived: 'Whether the entry is archived or not'
+        #         isStarred: 'Whether the entry is starred or not'
+        #         content: "The entry's content"
+        #         language: "The entry's language"
+        #         mimetype: "The entry's mime-type"
+        #         readingTime: "The estimated entry's reading time, in minutes"
+        #         domainName: 'The domain name of the entry'
+        #     operator_description:
+        #         label: 'Operator'
+        #         less_than: 'Less than...'
+        #         strictly_less_than: 'Strictly less than...'
+        #         greater_than: 'Greater than...'
+        #         strictly_greater_than: 'Strictly greater than...'
+        #         equal_to: 'Equal to...'
+        #         not_equal_to: 'Not equal to...'
+        #         or: 'One rule OR another'
+        #         and: 'One rule AND another'
+        #         matches: 'Tests that a <i>subject</i> is matches a <i>search</i> (case-insensitive).<br />Example: <code>title matches "football"</code>'
+    form_new_user:
+        username_label: 'Nume de utilizator'
+        password_label: 'Parolă'
+        repeat_new_password_label: 'Repeat new password'
+        plain_password_label: '????'
+        email_label: 'E-mail'
 
-# Entries
-'estimated reading time': 'timp estimat de citire'
-original: original
-Toggle mark as read: 'Comută marcat ca citit'
-Toggle favorite: 'Comută marcat ca favorit'
-Delete: 'Șterge'
+entry:
+    page_titles:
+        # unread: 'Unread entries'
+        # starred: 'Starred entries'
+        # archive: 'Archived entries'
+        # filtered: 'Filtered entries'
+    list:
+        # number_on_the_page: '{0} There is no entry.|{1} There is one entry.|]1,Inf[ There are %count% entries.'
+        reading_time: 'timp estimat de citire'
+        reading_time_minutes: 'timp estimat de citire: %readingTime% min'
+        reading_time_less_one_minute: 'timp estimat de citire: <small class="inferieur">&lt;</small> 1 min'
+        original_article: 'original'
+        toogle_as_read: 'Comută marcat ca citit'
+        toogle_as_star: 'Comută marcat ca favorit'
+        delete: 'Șterge'
+        # export_title: 'Export'
+    filters:
+        title: 'Filtre'
+        status_label: 'Status'
+        archived_label: 'Arhivat'
+        starred_label: 'Steluțe'
+        preview_picture_label: 'Are o imagine de previzualizare'
+        preview_picture_help: 'Previzualizare imagine'
+        language_label: 'Limbă'
+        reading_time:
+            label: 'Timp de citire în minute'
+            from: 'de la'
+            to: 'către'
+        domain_label: 'Nume domeniu'
+        created_at:
+            label: 'Data creării'
+            from: 'de la'
+            to: 'către'
+        action:
+            clear: 'Șterge'
+            filter: 'Filtru'
+    view:
+        left_menu:
+            # back_to_top: 'Back to top'
+            back_to_homepage: 'Înapoi'
+            set_as_read: 'Marchează ca citit'
+            # set_as_unread: 'Mark as unread'
+            set_as_favorite: 'Favorit'
+            view_original_article: 'Articol original'
+            # re_fetch_content: 'Re-fetch content'
+            delete: 'Șterge'
+            add_a_tag: 'Adaugă un tag'
+            share_content: 'Dă mai departe'
+            share_email_label: 'E-mail'
+            download: 'Descarcă'
+            # print: 'Print'
+            problem:
+                label: 'Probleme?'
+                description: 'Îți pare ciudat articolul?'
+        edit_title: 'Editează titlul'
+        original_article: 'original'
+        # annotations_on_the_entry: '{0} No annotations|{1} One annotation|]1,Inf[ %nbAnnotations% annotations'
+    new:
+        page_title: 'Salvează un nou articol'
+        placeholder: 'http://website.com'
+        form_new:
+            url_label: Url
+    edit:
+        # page_title: 'Edit an entry'
+        # title_label: 'Title'
+        url_label: 'Url'
+        # is_public_label: 'Public'
+        save_label: 'Salvează'
 
-# Filters
-Filters: 'Filtre'
-Status: 'Status'
-Archived: 'Arhivat'
-Starred: 'Steluțe'
-Preview picture: 'Previzualizare imagine'
-Has a preview picture: 'Are o imagine de previzualizare'
-Reading time in minutes: 'Timp de citire în minute'
-from: 'de la'
-to: 'către'
-website.com: 'website.com'
-Domain name: 'Nume domeniu'
-Creation date: 'Data creării'
-dd/mm/yyyy: 'zz/ll/aaaa'
-Clear: 'Șterge'
-Filter: 'Filtru'
+about:
+    page_title: 'Despre'
+    top_menu:
+        who_behind_wallabag: 'Cine e în spatele wallabag'
+        getting_help: 'Ajutor'
+        helping: 'Cum să ajuți wallabag'
+        # contributors: 'Contributors'
+        # third_party: 'Third-party libraries'
+    who_behind_wallabag:
+        developped_by: 'Dezvoltat de'
+        website: 'website'
+        many_contributors: 'Și mulți alți contribuitori ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">pe Github</a>'
+        project_website: 'Website-ul proiectului'
+        license: 'Licență'
+        version: 'Versiune'
+    getting_help:
+        documentation: 'Documentație'
+        bug_reports: 'Bug-uri'
+        support: '<a href="https://support.wallabag.org">Pe site-ul nostru de suport</a> sau <a href="https://github.com/wallabag/wallabag/issues">pe GitHub</a>'
+    helping:
+        description: 'wallabag este gratis și Open-Source. Cum ne poți ajuta:'
+        by_contributing: 'contribuind la proiect:'
+        by_contributing_2: 'o problemă ne listează toate nevoile:'
+        by_paypal: 'prin Paypal'
+    contributors:
+        # description: 'Thank you to contributors on wallabag web application'
+    third_party:
+        # description: 'Here are the list of third-party libraries used in wallabag (with their licenses):'
+        # package: 'Package'
+        license: 'Licență'
 
-# About
-Who is behind wallabag: "Cine e în spatele wallabag"
-Getting help: "Ajutor"
-Helping wallabag: "Cum să ajuți wallabag"
-Developed by: "Dezvoltat de"
-website: "website"
-And many others contributors ♥: "Și mulți alți contribuitori ♥"
-on GitHub: "pe GitHub"
-Project website: "Website-ul proiectului"
-License: "Licență"
-Version: "Versiune"
-Documentation: "Documentație"
-Bug reports: "Bug-uri"
-On our support website: "Pe site-ul nostru de suport"
-or: "sau"
-"wallabag is free and opensource. You can help us:": "wallabag este gratis și Open-Source. Cum ne poți ajuta:"
-"by contributing to the project:": "contribuind la proiect:"
-an issue lists all our needs: "o problemă ne listează toate nevoile:"
-via Paypal: "prin PayPal"
+howto:
+    page_title: 'Cum să'
+    # page_description: 'There are several ways to save an article:'
+    top_menu:
+        browser_addons: 'Add-On-uri de Browser'
+        mobile_apps: 'Aplicații mobile'
+        bookmarklet: 'Bookmarklet'
+    form:
+        description: 'Mulțumită acestui formular'
+    browser_addons:
+        firefox: 'Add-On standard de Firefox'
+        chrome: 'Extensie Chrome'
+    mobile_apps:
+        android:
+            via_f_droid: 'prin F-Droid'
+            via_google_play: 'prin Google Play'
+        ios: 'prin iTunes Store'
+        windows: 'prin Microsoft Store'
+    bookmarklet:
+        description: 'Drag &amp; drop acest link în bara de bookmark-uri:'
 
-# Howto
-Form: Formular
-Thanks to this form: "Mulțumită acestui formular"
-Browser addons: "Add-On-uri de Browser"
-Mobile apps: "Aplicații mobile"
-Bookmarklet: "Bookmarklet"
-Standard Firefox Add-On: "Add-On standard de Firefox"
-Chrome Extension: "Extensie Chrome"
-download the application: "descarcă aplicația"
-"Drag &amp; drop this link to your bookmarks bar:": "Drag &amp; drop acest link în bara de bookmark-uri:"
+quickstart:
+    # page_title: 'Quickstart'
+    # intro:
+    #     title: 'Welcome to wallabag!'
+    #     paragraph_1: "We'll accompany you to visit wallabag and show you some features which can interest you."
+    #     paragraph_2: 'Follow us!'
+    # configure:
+    #     title: 'Configure the application'
+    #     language: 'Change language and design'
+    #     rss: 'Enable RSS feeds'
+    #     tagging_rules: 'Write rules to automatically tag your articles'
+    # admin:
+    #     title: 'Administration'
+    #     description: 'As an administrator, you have privileges on wallabag. You can:'
+    #     new_user: 'Create a new user'
+    #     analytics: 'Configure analytics'
+    #     sharing: 'Enable some parameters about article sharing'
+    #     export: 'Configure export'
+    #     import: 'Configure import'
+    # first_steps:
+    #     title: 'First steps'
+    #     new_article: 'Save your first article'
+    #     unread_articles: 'And classify it!'
+    # migrate:
+    #     title: 'Migrate from an existing service'
+    #     description: "Are you using another service? We'll help you to retrieve your data on wallabag."
+    #     pocket: 'Migrate from Pocket'
+    #     wallabag_v1: 'Migrate from wallabag v1'
+    #     wallabag_v2: 'Migrate from wallabag v2'
+    # developer:
+    #     title: 'Developers'
+    #     create_application: 'Create your third application'
+    # docs:
+    #     title: 'Full documentation'
+    #     annotate: 'Annotate your article'
+    #     export: 'Convert your articles into ePUB or PDF'
+    #     search_filters: 'See how you can look for an article by using search engine and filters'
+    #     fetching_errors: 'What can I do if an article encounters errors during fetching?'
+    #     all_docs: 'And so many other articles!'
+    # support:
+    #     title: 'Support'
+    #     description: 'If you need some help, we are here for you.'
+    #     github: 'On GitHub'
+    #     email: 'By email'
+    #     gitter: 'On Gitter'
 
-# Flash messages
-Information updated: "Informație actualizată"
-"Config saved. Some parameters will be considered after disconnection.": "configurație salvată. Unii parametrii vor fi considerați după deconectare."
-RSS information updated: "Informație RSS actualizată"
-Password updated: "Parolă actualizată"
-Entry starred: "Articol adăugat la favorite"
-Entry unstarred: "Articol șters de la favorite"
-Entry archived: "Articol arhivat"
-Entry unarchived: "Articol dezarhivat"
-Entry deleted: "Articol șters"
+tag:
+    page_title: 'Tag-uri'
+    list:
+        # number_on_the_page: '{0} There is no tag.|{1} There is one tag.|]1,Inf[ There are %count% tags.'
 
-# Entry
-Mark as read: 'Marchează ca citit'
-Favorite: 'Favorit'
-back: 'înapoi'
-original article: 'articol original'
-Add a tag: 'Adaugă un tag'
-Share: 'Dă mai departe'
-Download: 'Descarcă'
-Does this article appear wrong?: "Îți pare ciudat articolul?"
-Problems?: 'Probleme?'
-Edit title: "Editează titlul"
+import:
+    # page_title: 'Import'
+    # page_description: 'Welcome to wallabag importer. Please select your previous service that you want to migrate.'
+    # action:
+    #     import_contents: 'Import contents'
+    # form:
+    #     mark_as_read_title: 'Mark all as read?'
+    #     mark_as_read_label: 'Mark all imported entries as read'
+    #     file_label: 'File'
+    #     save_label: 'Upload file'
+    # pocket:
+    #     page_title: 'Import > Pocket'
+    #     description: "This importer will import all your Pocket data. Pocket doesn't allow us to retrieve content from their service, so the readable content of each article will be re-fetched by wallabag."
+    #     config_missing:
+    #         description: "Pocket import isn't configured."
+    #         admin_message: 'You need to define %keyurls%a pocket_consumer_key%keyurle%.'
+    #         user_message: 'Your server admin needs to define an API Key for Pocket.'
+    #     authorize_message: 'You can import your data from your Pocket account. You just have to click on the below button and authorize the application to connect to getpocket.com.'
+    #     connect_to_pocket: 'Connect to Pocket and import data'
+    # wallabag_v1:
+    #     page_title: 'Import > Wallabag v1'
+    #     description: 'This importer will import all your wallabag v1 articles. On your config page, click on "JSON export" in the "Export your wallabag data" section. You will have a "wallabag-export-1-xxxx-xx-xx.json" file.'
+    #     how_to: 'Please select your wallabag export and click on the below button to upload and import it.'
+    # wallabag_v2:
+    #     page_title: 'Import > Wallabag v2'
+    #     description: 'This importer will import all your wallabag v2 articles. Go to All articles, then, on the export sidebar, click on "JSON". You will have a "All articles.json" file.'
+
+developer:
+    # page_title: 'Developer'
+    # welcome_message: 'Welcome to the wallabag API'
+    # documentation: 'Documentation'
+    # how_to_first_app: 'How to create my first application'
+    # full_documentation: 'View full API documentation'
+    # clients:
+    #     title: 'Clients'
+    #     create_new: 'Create a new client'
+    # existing_clients:
+    #     title: 'Existing clients'
+    #     field_id: 'Client ID'
+    #     field_secret: 'Client secret'
+    #     field_uris: 'Redirect URIs'
+    #     field_grant_types: 'Grant type allowed'
+    #     no_client: 'No client yet.'
+    # remove:
+    #     warn_message_1: 'You have the ability to remove this client. This action is IRREVERSIBLE !'
+    #     warn_message_2: "If you remove it, every app configured with that client won't be able to auth on your wallabag."
+    #     action: 'Remove this client'
+    # client:
+    #     page_title: 'Developer > New client'
+    #     page_description: 'You are about to create a new client. Please fill the field below for the redirect URI of your application.'
+    #     form:
+    #         redirect_uris_label: 'Redirect URIs'
+    #         save_label: 'Create a new client'
+    #     action_back: 'Back'
+    # client_parameter:
+    #     page_title: 'Developer > Client parameters'
+    #     page_description: 'Here are your client parameters.'
+    #     field_id: 'Client ID'
+    #     field_secret: 'Client secret'
+    #     back: 'Back'
+    #     read_howto: 'Read the howto "Create my first application"'
+    # howto:
+    #     page_title: 'Developer > How to create my first application'
+    #     description:
+    #         paragraph_1: 'The following commands make use of the <a href="https://github.com/jkbrzt/httpie">HTTPie library</a>. Make sure it is installed on your system before using it.'
+    #         paragraph_2: 'You need a token to communicate between your 3rd application and wallabag API.'
+    #         paragraph_3: 'To create this token, you need <a href="%link%">to create a new client</a>.'
+    #         paragraph_4: 'Now, create your token (replace client_id, client_secret, username and password with the good values):'
+    #         paragraph_5: 'The API will return a response like this:'
+    #         paragraph_6: 'The access_token is useful to do a call to the API endpoint. For example:'
+    #         paragraph_7: 'This call will return all the entries for your user.'
+    #         paragraph_8: 'If you want to see all the API endpoints, you can have a look <a href="%link%">to our API documentation</a>.'
+    #     back: 'Back'
+
+validator:
+    password_must_match: 'Câmpurile destinate parolelor trebuie să se potrivească'
+    password_too_short: 'Parola ar trebui să conțină cel puțin 8 caractere'
+    # password_wrong_value: 'Wrong value for your current password'
+    # item_per_page_too_high: 'This will certainly kill the app'
+    # rss_limit_too_hight: 'This will certainly kill the app'
+
+flashes:
+    config:
+        notice:
+            config_saved: 'Configurație salvată. Unii parametrii vor fi considerați după deconectare.'
+            password_updated: 'Parolă actualizată'
+            password_not_updated_demo: "In demonstration mode, you can't change password for this user."
+            user_updated: 'Informație actualizată'
+            rss_updated: 'Informație RSS actualizată'
+            # tagging_rules_updated: 'Tagging rules updated'
+            # tagging_rules_deleted: 'Tagging rule deleted'
+            # user_added: 'User "%username%" added'
+            # rss_token_updated: 'RSS token updated'
+    entry:
+        notice:
+            # entry_already_saved: 'Entry already saved on %date%'
+            # entry_saved: 'Entry saved'
+            # entry_updated: 'Entry updated'
+            # entry_reloaded: 'Entry reloaded'
+            # entry_reload_failed: 'Failed to reload entry'
+            entry_archived: 'Articol arhivat'
+            entry_unarchived: 'Articol dezarhivat'
+            entry_starred: 'Articol adăugat la favorite'
+            entry_unstarred: 'Articol șters de la favorite'
+            entry_deleted: 'Articol șters'
+    tag:
+        notice:
+            # tag_added: 'Tag added'
+    import:
+        notice:
+            # failed: 'Import failed, please try again.'
+            # failed_on_file: 'Error while processing import. Please verify your import file.'
+            # summary: 'Import summary: %imported% imported, %skipped% already saved.'
+    developer:
+        notice:
+            # client_created: 'New client created.'
+            # client_deleted: 'Client deleted'

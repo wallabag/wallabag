@@ -1,129 +1,417 @@
-#Login
-Keep me logged in: 'مرا به خاطر بسپار'
-Forgot your password?: ' رمزتان را گم کرده‌اید؟'
-Login: 'ورود'
-Back to login: 'بازگشت به صفحهٔ ورود'
-Send: 'بفرست'
-"Enter your email address below and we'll send you password reset instructions.": "نشانی ایمیل خود را بنویسید تا راهنمای تغییر رمز را برایتان بفرستیم."
+security:
+    login:
+        # page_title: 'Welcome to wallabag!'
+        keep_logged_in: 'مرا به خاطر بسپار'
+        forgot_password: ' رمزتان را گم کرده‌اید؟'
+        submit: 'ورود'
+        # register: 'Register'
+        username: 'نام کاربری'
+        password: 'رمز'
+        # cancel: 'Cancel'
+    resetting:
+        description: "نشانی ایمیل خود را بنویسید تا راهنمای تغییر رمز را برایتان بفرستیم."
+    register:
+        # page_title: 'Create an account'
+        # go_to_account: 'Go to your account'
 
-# Menu
-unread: 'خوانده‌نشده'
-starred: 'برگزیده'
-archive: 'بایگانی'
-all: 'همه'
-tags: 'برچسب‌ها'
-config: 'پیکربندی'
-howto: 'خودآموز'
-logout: 'خروج'
-Filtered: 'فیلترشده'
-About: 'درباره'
+menu:
+    left:
+        unread: 'خوانده‌نشده'
+        starred: 'برگزیده'
+        archive: 'بایگانی'
+        all_articles: 'همه'
+        config: 'پیکربندی'
+        tags: 'برچسب‌ها'
+        # internal_settings: 'Internal Settings'
+        # import: 'Import'
+        howto: 'خودآموز'
+        # developer: 'Developer'
+        logout: 'خروج'
+        about: 'درباره'
+        search: 'جستجو'
+        # save_link: 'Save a link'
+        back_to_unread: 'بازگشت به خوانده‌نشده‌ها'
+    top:
+        add_new_entry: 'افزودن مقالهٔ تازه'
+        search: 'جستجو'
+        filter_entries: 'فیلترکردن مقاله‌ها'
+        # export: 'Export'
+    search_form:
+        input_label: 'جستجوی خود را این‌جا بنویسید:'
 
-# Header
-Back to unread articles: 'بازگشت به خوانده‌نشده‌ها'
-Add a new entry: 'افزودن مقالهٔ تازه'
-Search: 'جستجو'
-Filter entries: 'فیلترکردن مقاله‌ها'
-Enter your search here: 'جستجوی خود را این‌جا بنویسید:'
-Save new entry: 'ذخیرهٔ مقالهٔ تازه'
+footer:
+    wallabag:
+        # elsewhere: 'Take wallabag with you'
+        # social: 'Social'
+        # powered_by: 'powered by'
+        about: 'درباره'
 
-# Config screen
-Settings: 'تنظیمات'
-User information: 'اطلاعات کاربر'
-Password: 'رمز'
-RSS: 'آر-اس-اس'
-Add a user: 'افزودن کاربر'
-Theme: 'پوسته'
-Items per page: 'تعداد مقاله در هر صفحه'
-Language: 'زبان'
-Save: 'ذخیره'
-RSS token: 'کد آر-اس-اس'
-Name: 'نام'
-Email: 'نشانی ایمیل'
-No token: 'بدون کد'
-Reset your token: 'بازنشانی کد'
-Create your token: 'کد خود را بسازید'
-Rss limit: 'محدودیت آر-اس-اس'
-RSS links: 'پیوند آر-اس-اس'
-'RSS feeds provided by wallabag allow you to read your saved articles with your favourite RSS reader. You need to generate a token first.': 'با خوراک آر-اس-اس که wallabag در اختیارتان می‌گذارد، می‌توانید مقاله‌های ذخیره‌شده را در نرم‌افزار آر-اس-اس دلخواه خود بخوانید. برای این کار نخست باید یک کد بسازید.'
-Old password: 'رمز قدیمی'
-New password: 'رمز تازه'
-Repeat new password: 'رمز تازه را دوباره بنویسید'
-Username: 'نام کاربری'
+config:
+    page_title: 'پیکربندی'
+    tab_menu:
+        settings: 'تنظیمات'
+        rss: 'آر-اس-اس'
+        user_info: 'اطلاعات کاربر'
+        password: 'رمز'
+        # rules: 'Tagging rules'
+        new_user: 'افزودن کاربر'
+    form:
+        save: 'ذخیره'
+    form_settings:
+        theme_label: 'پوسته'
+        items_per_page_label: 'تعداد مقاله در هر صفحه'
+        language_label: 'زبان'
+    form_rss:
+        description: 'با خوراک آر-اس-اس که wallabag در اختیارتان می‌گذارد، می‌توانید مقاله‌های ذخیره‌شده را در نرم‌افزار آر-اس-اس دلخواه خود بخوانید. برای این کار نخست باید یک کد بسازید.'
+        token_label: 'کد آر-اس-اس'
+        no_token: 'بدون کد'
+        token_create: 'کد خود را بسازید'
+        token_reset: 'بازنشانی کد'
+        rss_links: 'پیوند آر-اس-اس'
+        rss_link:
+            unread: 'خوانده‌نشده'
+            starred: 'برگزیده'
+            archive: 'بایگانی'
+        rss_limit: 'محدودیت آر-اس-اس'
+    form_user:
+        # two_factor_description: "Enabling two factor authentication means you'll receive an email with a code on every new untrusted connexion"
+        name_label: 'نام'
+        email_label: 'نشانی ایمیل'
+        # twoFactorAuthentication_label: 'Two factor authentication'
+    form_password:
+        old_password_label: 'رمز قدیمی'
+        new_password_label: 'رمز تازه'
+        repeat_new_password_label: 'رمز تازه را دوباره بنویسید'
+    form_rules:
+        # if_label: 'if'
+        # then_tag_as_label: 'then tag as'
+        # delete_rule_label: 'delete'
+        # rule_label: 'Rule'
+        # tags_label: 'Tags'
+        # faq:
+        #     title: 'FAQ'
+        #     tagging_rules_definition_title: 'What does « tagging rules » mean?'
+        #     tagging_rules_definition_description: 'They are rules used by Wallabag to automatically tag new entries.<br />Each time a new entry is added, all the tagging rules will be used to add the tags you configured, thus saving you the trouble to manually classify your entries.'
+        #     how_to_use_them_title: 'How do I use them?'
+        #     how_to_use_them_description: 'Let assume you want to tag new entries as « <i>short reading</i> » when the reading time is inferior to 3 minutes.<br />In that case, you should put « readingTime &lt;= 3 » in the <i>Rule</i> field and « <i>short reading</i> » in the <i>Tags</i> field.<br />Several tags can added simultaneously by separating them by a comma: « <i>short reading, must read</i> »<br />Complex rules can be written by using predefined operators: if « <i>readingTime &gt;= 5 AND domainName = "github.com"</i> » then tag as « <i>long reading, github </i> »'
+        #     variables_available_title: 'Which variables and operators can I use to write rules?'
+        #     variables_available_description: 'The following variables and operators can be used to create tagging rules:'
+        #     meaning: 'Meaning'
+        #     variable_description:
+        #         label: 'Variable'
+        #         title: 'Title of the entry'
+        #         url: 'URL of the entry'
+        #         isArchived: 'Whether the entry is archived or not'
+        #         isStarred: 'Whether the entry is starred or not'
+        #         content: "The entry's content"
+        #         language: "The entry's language"
+        #         mimetype: "The entry's mime-type"
+        #         readingTime: "The estimated entry's reading time, in minutes"
+        #         domainName: 'The domain name of the entry'
+        #     operator_description:
+        #         label: 'Operator'
+        #         less_than: 'Less than...'
+        #         strictly_less_than: 'Strictly less than...'
+        #         greater_than: 'Greater than...'
+        #         strictly_greater_than: 'Strictly greater than...'
+        #         equal_to: 'Equal to...'
+        #         not_equal_to: 'Not equal to...'
+        #         or: 'One rule OR another'
+        #         and: 'One rule AND another'
+        #         matches: 'Tests that a <i>subject</i> is matches a <i>search</i> (case-insensitive).<br />Example: <code>title matches "football"</code>'
+    form_new_user:
+        username_label: 'نام کاربری'
+        password_label: 'رمز'
+        repeat_new_password_label: 'رمز تازه را دوباره بنویسید'
+        plain_password_label: '????'
+        email_label: 'نشانی ایمیل'
 
-# Entries
-'estimated reading time': 'زمان تخمینی برای خواندن'
-original: اصلی
-Toggle mark as read: 'خوانده‌شده/خوانده‌نشده'
-Toggle favorite: 'برگزیده/نابرگزیده'
-Delete: 'پاک کردن'
+entry:
+    page_titles:
+        # unread: 'Unread entries'
+        # starred: 'Starred entries'
+        # archive: 'Archived entries'
+        # filtered: 'Filtered entries'
+    list:
+        # number_on_the_page: '{0} There is no entry.|{1} There is one entry.|]1,Inf[ There are %count% entries.'
+        reading_time: 'زمان تخمینی برای خواندن'
+        reading_time_minutes: 'زمان تخمینی برای خواندن: %readingTime% min'
+        reading_time_less_one_minute: 'زمان تخمینی برای خواندن: <small class="inferieur">&lt;</small> 1 min'
+        original_article: 'original'
+        toogle_as_read: 'خوانده‌شده/خوانده‌نشده'
+        toogle_as_star: 'برگزیده/نابرگزیده'
+        delete: 'پاک کردن'
+        # export_title: 'Export'
+    filters:
+        title: 'فیلتر'
+        status_label: 'وضعیت'
+        archived_label: 'بایگانی‌شده'
+        starred_label: 'برگزیده'
+        preview_picture_label: 'دارای عکس پیش‌نمایش'
+        preview_picture_help: 'پیش‌نمایش عکس'
+        language_label: 'زبان'
+        reading_time:
+            label: 'زمان خواندن به دقیقه'
+            from: 'از'
+            to: 'تا'
+        domain_label: 'نام دامنه'
+        created_at:
+            label: 'زمان ساخت'
+            from: 'از'
+            to: 'تا'
+        action:
+            clear: 'از نو'
+            filter: 'فیلتر'
+    view:
+        left_menu:
+            # back_to_top: 'Back to top'
+            back_to_homepage: 'بازگشت'
+            set_as_read: 'خوانده‌شده'
+            # set_as_unread: 'Mark as unread'
+            set_as_favorite: 'برگزیده'
+            view_original_article: 'مقالهٔ اصلی'
+            # re_fetch_content: 'Re-fetch content'
+            delete: 'پاک کردن'
+            add_a_tag: 'افزودن برچسب'
+            share_content: 'هم‌رسانی'
+            share_email_label: 'نشانی ایمیل'
+            download: 'بارگیری'
+            # print: 'Print'
+            problem:
+                label: 'مشکلات؟'
+                description: 'آیا مقاله نادرست نشان داده شده؟'
+        edit_title: 'ویرایش عنوان'
+        original_article: 'original'
+        # annotations_on_the_entry: '{0} No annotations|{1} One annotation|]1,Inf[ %nbAnnotations% annotations'
+    new:
+        page_title: 'ذخیرهٔ مقالهٔ تازه'
+        placeholder: 'http://website.com'
+        form_new:
+            # url_label: Url
+    edit:
+        # page_title: 'Edit an entry'
+        # title_label: 'Title'
+        # url_label: 'Url'
+        # is_public_label: 'Public'
+        save_label: 'ذخیره'
 
-# Filters
-Filters: 'فیلتر'
-Status: 'وضعیت'
-Archived: 'بایگانی‌شده'
-Starred: 'برگزیده'
-Preview picture: 'پیش‌نمایش عکس'
-Has a preview picture: 'دارای عکس پیش‌نمایش'
-Reading time in minutes: 'زمان خواندن به دقیقه'
-from: 'از'
-to: 'تا'
-website.com: 'website.com'
-Domain name: 'نام دامنه'
-Creation date: 'زمان ساخت'
-dd/mm/yyyy: 'dd.mm.yyyy'
-Clear: 'از نو'
-Filter: 'فیلتر'
+about:
+    page_title: 'درباره'
+    top_menu:
+        who_behind_wallabag: 'سازندگان wallabag'
+        getting_help: 'گرفتن کمک'
+        helping: 'کمک‌کردن به wallabag'
+        # contributors: 'Contributors'
+        # third_party: 'Third-party libraries'
+    who_behind_wallabag:
+        developped_by: 'ساختهٔ'
+        website: 'وب‌گاه'
+        many_contributors: 'و بسیاری دیگر از مشارکت‌کنندگان ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">روی Github</a>'
+        project_website: 'وب‌گاه پروژه'
+        license: 'پروانه'
+        version: 'نسخه'
+    getting_help:
+        documentation: 'راهنما'
+        bug_reports: 'گزارش اشکال‌ها'
+        support: '<a href="https://support.wallabag.org">در وب‌گاه پشتیبانی</a> یا <a href="https://github.com/wallabag/wallabag/issues">روی GitHub</a>'
+    helping:
+        description: 'wallabag رایگان، آزاد، و متن‌باز است. شما می‌توانید به ما کمک کنید:'
+        by_contributing: 'با مشارکت در پروژه:'
+        by_contributing_2: 'فهرست نیازمندی‌های ما در این صفحه است:'
+        by_paypal: 'از راه Paypal'
+    contributors:
+        # description: 'Thank you to contributors on wallabag web application'
+    third_party:
+        # description: 'Here are the list of third-party libraries used in wallabag (with their licenses):'
+        # package: 'Package'
+        license: 'پروانه'
 
-# About
-Who is behind wallabag: "سازندگان wallabag"
-Getting help: "گرفتن کمک"
-Helping wallabag: "کمک‌کردن به wallabag"
-Developed by: "ساختهٔ"
-website: "وب‌گاه"
-And many others contributors ♥: "و بسیاری دیگر از مشارکت‌کنندگان ♥"
-on GitHub: "روی GitHub"
-Project website: "وب‌گاه پروژه"
-License: "پروانه"
-Version: "نسخه"
-Documentation: "راهنما"
-Bug reports: "گزارش اشکال‌ها"
-On our support website: "در وب‌گاه پشتیبانی"
-or: "یا"
-"wallabag is free and opensource. You can help us:": "wallabag رایگان، آزاد، و متن‌باز است. شما می‌توانید به ما کمک کنید:"
-"by contributing to the project:": "با مشارکت در پروژه:"
-an issue lists all our needs: "فهرست نیازمندی‌های ما در این صفحه است:"
-via Paypal: "از راه PayPal"
+howto:
+    page_title: 'خودآموز'
+    # page_description: 'There are several ways to save an article:'
+    top_menu:
+        browser_addons: 'افزونه برای مرورگرها'
+        mobile_apps: 'برنامه‌های موبایل'
+        bookmarklet: 'ابزار علامت‌گذاری صفحه‌ها'
+    form:
+        description: 'به کمک این فرم'
+    browser_addons:
+        firefox: 'افزونهٔ فایرفاکس'
+        chrome: 'افزونهٔ کروم'
+    mobile_apps:
+        android:
+            via_f_droid: 'از راه F-Droid'
+            via_google_play: 'از راه Google Play'
+        ios: 'از راه iTunes Store'
+        windows: 'از راه Microsoft Store'
+    bookmarklet:
+        description: 'این پیوند را به نوار بوک‌مارک مرورگرتان بکشید:'
 
-# Howto
-Form: فرم
-Thanks to this form: "به کمک این فرم"
-Browser addons: "افزونه برای مرورگرها"
-Mobile apps: "برنامه‌های موبایل"
-Bookmarklet: "ابزار علامت‌گذاری صفحه‌ها"
-Standard Firefox Add-On: "افزونهٔ فایرفاکس"
-Chrome Extension: "افزونهٔ کروم"
-download the application: "برنامه را باربگیرید"
-"Drag &amp; drop this link to your bookmarks bar:": "این پیوند را به نوار بوک‌مارک مرورگرتان بکشید:"
+quickstart:
+    # page_title: 'Quickstart'
+    # intro:
+    #     title: 'Welcome to wallabag!'
+    #     paragraph_1: "We'll accompany you to visit wallabag and show you some features which can interest you."
+    #     paragraph_2: 'Follow us!'
+    # configure:
+    #     title: 'Configure the application'
+    #     language: 'Change language and design'
+    #     rss: 'Enable RSS feeds'
+    #     tagging_rules: 'Write rules to automatically tag your articles'
+    # admin:
+    #     title: 'Administration'
+    #     description: 'As an administrator, you have privileges on wallabag. You can:'
+    #     new_user: 'Create a new user'
+    #     analytics: 'Configure analytics'
+    #     sharing: 'Enable some parameters about article sharing'
+    #     export: 'Configure export'
+    #     import: 'Configure import'
+    # first_steps:
+    #     title: 'First steps'
+    #     new_article: 'Save your first article'
+    #     unread_articles: 'And classify it!'
+    # migrate:
+    #     title: 'Migrate from an existing service'
+    #     description: "Are you using another service? We'll help you to retrieve your data on wallabag."
+    #     pocket: 'Migrate from Pocket'
+    #     wallabag_v1: 'Migrate from wallabag v1'
+    #     wallabag_v2: 'Migrate from wallabag v2'
+    # developer:
+    #     title: 'Developers'
+    #     create_application: 'Create your third application'
+    # docs:
+    #     title: 'Full documentation'
+    #     annotate: 'Annotate your article'
+    #     export: 'Convert your articles into ePUB or PDF'
+    #     search_filters: 'See how you can look for an article by using search engine and filters'
+    #     fetching_errors: 'What can I do if an article encounters errors during fetching?'
+    #     all_docs: 'And so many other articles!'
+    # support:
+    #     title: 'Support'
+    #     description: 'If you need some help, we are here for you.'
+    #     github: 'On GitHub'
+    #     email: 'By email'
+    #     gitter: 'On Gitter'
 
-# Flash messages
-Information updated: "اطلاعات به‌روز شد"
-"Config saved. Some parameters will be considered after disconnection.": "پیکربندی ذخیره شد. برخی از تنظیمات پس از این که قطع شدید اعمال می‌شود."
-RSS information updated: "اطلاعات آر-اس-اس به‌روز شد"
-Password updated: "رمز به‌روز شد"
-Entry starred: "مقاله برگزیده شد"
-Entry unstarred: "مقاله نابرگزیده شد"
-Entry archived: "مقاله بایگانی شد"
-Entry unarchived: "مقاله از بایگانی درآمد"
-Entry deleted: "مقاله پاک شد"
+tag:
+    page_title: 'برچسب‌ها'
+    list:
+        # number_on_the_page: '{0} There is no tag.|{1} There is one tag.|]1,Inf[ There are %count% tags.'
 
-# Entry
-Mark as read: 'خوانده‌شده'
-Favorite: 'برگزیده'
-back: 'بازگشت'
-original article: 'مقالهٔ اصلی'
-Add a tag: 'افزودن برچسب'
-Share: 'هم‌رسانی'
-Download: 'بارگیری'
-Does this article appear wrong?: "آیا مقاله نادرست نشان داده شده؟"
-Problems?: 'مشکلات؟'
-Edit title: "ویرایش عنوان"
+import:
+    # page_title: 'Import'
+    # page_description: 'Welcome to wallabag importer. Please select your previous service that you want to migrate.'
+    # action:
+    #     import_contents: 'Import contents'
+    # form:
+    #     mark_as_read_title: 'Mark all as read?'
+    #     mark_as_read_label: 'Mark all imported entries as read'
+    #     file_label: 'File'
+    #     save_label: 'Upload file'
+    # pocket:
+    #     page_title: 'Import > Pocket'
+    #     description: "This importer will import all your Pocket data. Pocket doesn't allow us to retrieve content from their service, so the readable content of each article will be re-fetched by wallabag."
+    #     config_missing:
+    #         description: "Pocket import isn't configured."
+    #         admin_message: 'You need to define %keyurls%a pocket_consumer_key%keyurle%.'
+    #         user_message: 'Your server admin needs to define an API Key for Pocket.'
+    #     authorize_message: 'You can import your data from your Pocket account. You just have to click on the below button and authorize the application to connect to getpocket.com.'
+    #     connect_to_pocket: 'Connect to Pocket and import data'
+    # wallabag_v1:
+    #     page_title: 'Import > Wallabag v1'
+    #     description: 'This importer will import all your wallabag v1 articles. On your config page, click on "JSON export" in the "Export your wallabag data" section. You will have a "wallabag-export-1-xxxx-xx-xx.json" file.'
+    #     how_to: 'Please select your wallabag export and click on the below button to upload and import it.'
+    # wallabag_v2:
+    #     page_title: 'Import > Wallabag v2'
+    #     description: 'This importer will import all your wallabag v2 articles. Go to All articles, then, on the export sidebar, click on "JSON". You will have a "All articles.json" file.'
+
+developer:
+    # page_title: 'Developer'
+    # welcome_message: 'Welcome to the wallabag API'
+    # documentation: 'Documentation'
+    # how_to_first_app: 'How to create my first application'
+    # full_documentation: 'View full API documentation'
+    # clients:
+    #     title: 'Clients'
+    #     create_new: 'Create a new client'
+    # existing_clients:
+    #     title: 'Existing clients'
+    #     field_id: 'Client ID'
+    #     field_secret: 'Client secret'
+    #     field_uris: 'Redirect URIs'
+    #     field_grant_types: 'Grant type allowed'
+    #     no_client: 'No client yet.'
+    # remove:
+    #     warn_message_1: 'You have the ability to remove this client. This action is IRREVERSIBLE !'
+    #     warn_message_2: "If you remove it, every app configured with that client won't be able to auth on your wallabag."
+    #     action: 'Remove this client'
+    # client:
+    #     page_title: 'Developer > New client'
+    #     page_description: 'You are about to create a new client. Please fill the field below for the redirect URI of your application.'
+    #     form:
+    #         redirect_uris_label: 'Redirect URIs'
+    #         save_label: 'Create a new client'
+    #     action_back: 'بازگشت'
+    # client_parameter:
+    #     page_title: 'Developer > Client parameters'
+    #     page_description: 'Here are your client parameters.'
+    #     field_id: 'Client ID'
+    #     field_secret: 'Client secret'
+    #     back: 'بازگشت'
+    #     read_howto: 'Read the howto "Create my first application"'
+    # howto:
+    #     page_title: 'Developer > How to create my first application'
+    #     description:
+    #         paragraph_1: 'The following commands make use of the <a href="https://github.com/jkbrzt/httpie">HTTPie library</a>. Make sure it is installed on your system before using it.'
+    #         paragraph_2: 'You need a token to communicate between your 3rd application and wallabag API.'
+    #         paragraph_3: 'To create this token, you need <a href="%link%">to create a new client</a>.'
+    #         paragraph_4: 'Now, create your token (replace client_id, client_secret, username and password with the good values):'
+    #         paragraph_5: 'The API will return a response like this:'
+    #         paragraph_6: 'The access_token is useful to do a call to the API endpoint. For example:'
+    #         paragraph_7: 'This call will return all the entries for your user.'
+    #         paragraph_8: 'If you want to see all the API endpoints, you can have a look <a href="%link%">to our API documentation</a>.'
+    #     back: 'بازگشت'
+
+validator:
+    password_must_match: 'رمزها باید یکی باشند'
+    password_too_short: 'رمز شما باید ۸ حرف یا بیشتر باشد'
+    # password_wrong_value: 'Wrong value for your current password'
+    # item_per_page_too_high: 'This will certainly kill the app'
+    # rss_limit_too_hight: 'This will certainly kill the app'
+
+flashes:
+    config:
+        notice:
+            config_saved: 'پیکربندی ذخیره شد. برخی از تنظیمات پس از این که قطع شدید اعمال می‌شود.'
+            password_updated: 'رمز به‌روز شد'
+            # password_not_updated_demo: "In demonstration mode, you can't change password for this user."
+            user_updated: 'اطلاعات به‌روز شد'
+            rss_updated: 'اطلاعات آر-اس-اس به‌روز شد'
+            # tagging_rules_updated: 'Tagging rules updated'
+            # tagging_rules_deleted: 'Tagging rule deleted'
+            # user_added: 'User "%username%" added'
+            # rss_token_updated: 'RSS token updated'
+    entry:
+        notice:
+            # entry_already_saved: 'Entry already saved on %date%'
+            # entry_saved: 'Entry saved'
+            # entry_updated: 'Entry updated'
+            # entry_reloaded: 'Entry reloaded'
+            # entry_reload_failed: 'Failed to reload entry'
+            entry_archived: 'مقاله بایگانی شد'
+            entry_unarchived: 'مقاله از بایگانی درآمد'
+            entry_starred: 'مقاله برگزیده شد'
+            entry_unstarred: 'مقاله نابرگزیده شد'
+            entry_deleted: 'مقاله پاک شد'
+    tag:
+        notice:
+            # tag_added: 'Tag added'
+    import:
+        notice:
+            # failed: 'Import failed, please try again.'
+            # failed_on_file: 'Error while processing import. Please verify your import file.'
+            # summary: 'Import summary: %imported% imported, %skipped% already saved.'
+    developer:
+        notice:
+            # client_created: 'New client created.'
+            # client_deleted: 'Client deleted'

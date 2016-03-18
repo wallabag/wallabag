@@ -1,226 +1,417 @@
-# Login
-Keep me logged in: 'Oturumumu açık tut'
-Forgot your password?: 'Şifrenizi mi unuttunuz?'
-Login: 'Giriş Yap'
-Back to login: 'Giriş yapma ekranına geri dön'
-Send: 'Gönder'
-Register: 'Kayıt Ol'
+security:
+    login:
+        page_title: 'wallabag'
+        keep_logged_in: 'Oturumumu açık tut'
+        forgot_password: 'Şifrenizi mi unuttunuz?'
+        submit: 'Giriş Yap'
+        register: 'Kayıt Ol'
+        username: 'Kullanıcı adı'
+        password: 'Şifre'
+        # cancel: 'Cancel'
+    resetting:
+        # description: "Enter your email address below and we'll send you password reset instructions."
+    register:
+        # page_title: 'Create an account'
+        # go_to_account: 'Go to your account'
 
-# Menu
-unread: 'Okunmayan'
-starred: 'Favoriler'
-archive: 'Arşiv'
-all: 'Hepsi'
-tags: 'Etiketler'
-config: 'Yapılandırma'
-import: 'İçe Aktar'
-howto: 'Yardım'
-logout: 'Çıkış Yap'
-Filtered: 'Filtreli'
-About: 'Hakkımızda'
+menu:
+    left:
+        unread: 'Okunmayan'
+        starred: 'Favoriler'
+        archive: 'Arşiv'
+        all_articles: 'Hepsi'
+        config: 'Yapılandırma'
+        tags: 'Etiketler'
+        # internal_settings: 'Internal Settings'
+        import: 'İçe Aktar'
+        howto: 'Yardım'
+        # developer: 'Developer'
+        logout: 'Çıkış Yap'
+        about: 'Hakkımızda'
+        search: 'Ara'
+        # save_link: 'Save a link'
+        back_to_unread: 'Okunmayan makalelere geri dön'
+    top:
+        add_new_entry: 'Yeni bir makale ekle'
+        search: 'Ara'
+        filter_entries: 'Filtrele'
+        export: 'Dışa Aktar'
+    search_form:
+        input_label: 'Aramak istediğiniz herhangi bir şey yazın'
 
-# Header
-Back to unread articles: 'Okunmayan makalelere geri dön'
-Add a new entry: 'Yeni bir makale ekle'
-Search: 'Ara'
-Filter entries: 'Filtrele'
-Enter your search here: 'Aramak istediğiniz herhangi bir şey yazın'
-Save new entry: 'Yeni makaleyi kaydet'
+footer:
+    wallabag:
+        elsewhere: 'wallabag her an seninle'
+        social: 'Sosyal'
+        powered_by: 'powered by'
+        about: 'Hakkımızda'
 
-# Config screen
-Settings: 'Ayarlar'
-User information: 'Kullanıcı bilgileri'
-Tagging rules: "Etiketleme kuralları"
-Password: 'Şifre'
-RSS: 'RSS'
-Add a user: 'Bir kullanıcı ekle'
-Theme: 'Tema'
-Items per page: "Sayfa başına makale sayısı"
-Language: 'Dil'
-Save: 'Kaydet'
-RSS token: 'RSS belirteci (token)'
-Name: 'İsim'
-Email: 'E-posta'
-No token: 'Belirteç (token) yok'
-Reset your token: 'Belirteci (token) sıfırla'
-Create your token: 'Yeni belirteç (token) oluştur'
-Rss limit: "RSS içeriğinden talep edilecek makale limiti"
-RSS links: 'RSS akış bağlantıları'
-"RSS feeds provided by wallabag allow you to read your saved articles with your favourite RSS reader. You need to generate a token first.": "wallabag RSS akışı kaydetmiş olduğunuz makalelerini favori RSS okuyucunuzda görüntülemenizi sağlar. Bunu yapabilmek için öncelikle belirteç (token) oluşturmalısınız."
-Old password: 'Eski şifre'
-New password: 'Yeni şifre'
-Repeat new password: 'Yeni şifrenin tekrarı'
-Username: "Kullanıcı adı"
-Two factor authentication: "İki adımlı doğrulama"
-"Enabling two factor authentication means you'll receive an email with a code on every new untrusted connexion": "İki adımlı doğrulamayı aktifleştirdiğinizde, her yeni güvenilmeyen bağlantılarda size e-posta ile bir kod alacaksınız."
-Baggy: "Baggy"
-Material: "Material"
-English: "İngilizce"
-Français: "Fransızca"
-Deutsch: "Almanca"
-Türkçe: "Türkçe"
+config:
+    page_title: 'Yapılandırma'
+    tab_menu:
+        settings: 'Ayarlar'
+        rss: 'RSS'
+        user_info: 'Kullanıcı bilgileri'
+        password: 'Şifre'
+        rules: 'Etiketleme kuralları'
+        new_user: 'Bir kullanıcı ekle'
+    form:
+        save: 'Kaydet'
+    form_settings:
+        theme_label: 'Tema'
+        items_per_page_label: 'Sayfa başına makale sayısı'
+        language_label: 'Dil'
+    form_rss:
+        description: 'wallabag RSS akışı kaydetmiş olduğunuz makalelerini favori RSS okuyucunuzda görüntülemenizi sağlar. Bunu yapabilmek için öncelikle belirteç (token) oluşturmalısınız.'
+        token_label: 'RSS belirteci (token)'
+        no_token: 'Belirteç (token) yok'
+        token_create: 'Yeni belirteç (token) oluştur'
+        token_reset: 'Belirteci (token) sıfırla'
+        rss_links: 'RSS akış bağlantıları'
+        rss_link:
+            unread: 'okunmayan'
+            starred: 'favoriler'
+            archive: 'arşiv'
+        rss_limit: 'RSS içeriğinden talep edilecek makale limiti'
+    form_user:
+        two_factor_description: "İki adımlı doğrulamayı aktifleştirdiğinizde, her yeni güvenilmeyen bağlantılarda size e-posta ile bir kod alacaksınız."
+        name_label: 'İsim'
+        email_label: 'E-posta'
+        twoFactorAuthentication_label: 'İki adımlı doğrulama'
+    form_password:
+        old_password_label: 'Eski şifre'
+        new_password_label: 'Yeni şifre'
+        repeat_new_password_label: 'Yeni şifrenin tekrarı'
+    form_rules:
+        # if_label: 'if'
+        # then_tag_as_label: 'then tag as'
+        # delete_rule_label: 'delete'
+        rule_label: 'Kural'
+        tags_label: 'Etiketler'
+        faq:
+            title: 'S.S.S.'
+            tagging_rules_definition_title: '« etiketleme kuralları » ne anlama geliyor?'
+            # tagging_rules_definition_description: 'They are rules used by Wallabag to automatically tag new entries.<br />Each time a new entry is added, all the tagging rules will be used to add the tags you configured, thus saving you the trouble to manually classify your entries.'
+            how_to_use_them_title: 'Bunu nasıl kullanırım?'
+            # how_to_use_them_description: 'Let assume you want to tag new entries as « <i>short reading</i> » when the reading time is inferior to 3 minutes.<br />In that case, you should put « readingTime &lt;= 3 » in the <i>Rule</i> field and « <i>short reading</i> » in the <i>Tags</i> field.<br />Several tags can added simultaneously by separating them by a comma: « <i>short reading, must read</i> »<br />Complex rules can be written by using predefined operators: if « <i>readingTime &gt;= 5 AND domainName = "github.com"</i> » then tag as « <i>long reading, github </i> »'
+            variables_available_title: 'Kurallar içerisinde hangi değişken ve operatörleri kullanabilirim?'
+            variables_available_description: 'Etiket kuralı oluşturmak istediğinizde aşağıdaki değişken ve operatörleri kullanabilirsin:'
+            meaning: 'Anlamı'
+            variable_description:
+                label: 'Değişken'
+                title: 'Makalenin başlığı'
+                url: 'Makalenin bağlantısı'
+                isArchived: 'Makale arşivlendi mi? Arşivlenmedi mi?'
+                isStarred: 'Makale favorilere eklendi mi? Eklenmedi mi?'
+                content: "Makalenin içeriği"
+                language: "Makalenin dili"
+                mimetype: "Makalenin mime türü"
+                readingTime: "Makalenin dakika cinsinden tahmini okuma süresi"
+                domainName: 'Makalenin bulunduğu internet sitesinin alan adı'
+            operator_description:
+                label: 'Operatör'
+                less_than: 'Küçüktür ve eşittir…'
+                strictly_less_than: 'Küçüktür…'
+                greater_than: 'Büyüktür ve eşittir…'
+                strictly_greater_than: 'Büyüktür…'
+                equal_to: 'Eşittir…'
+                not_equal_to: 'Eşit değildir…'
+                or: 'Bir kural veya birbaşkası'
+                and: 'Bir kural ve diğeri'
+                # matches: 'Tests that a <i>subject</i> is matches a <i>search</i> (case-insensitive).<br />Example: <code>title matches "football"</code>'
+    form_new_user:
+        username_label: 'Kullanıcı adı'
+        password_label: 'Şifre'
+        repeat_new_password_label: 'Yeni şifrenin tekrarı'
+        plain_password_label: '????'
+        email_label: 'E-posta'
 
-# Tagging rules
-Rule: "Kural"
-Tags: "Etiketler"
-FAQ: "S.S.S."
-Variable: "Değişken"
-Meaning: "Anlamı"
-Operator: "Operatör"
-"What does « tagging rules » mean?": "« etiketleme kuralları » ne anlama geliyor?"
-"How do I use them?": "Bunu nasıl kullanırım?"
-"Which variables and operators can I use to write rules?": "Kurallar içerisinde hangi değişken ve operatörleri kullanabilirim?"
-"The following variables and operators can be used to create tagging rules:": "Etiket kuralı oluşturmak istediğinizde aşağıdaki değişken ve operatörleri kullanabilirsin:"
-Title of the entry: "Makalenin başlığı"
-URL of the entry: "Makalenin bağlantısı"
-The domain name of the entry: "Makalenin bulunduğu internet sitesinin alan adı"
-"The entry's content": "Makalenin içeriği"
-"The entry's language": "Makalenin dili"
-"The entry's mime-type": "Makalenin mime türü"
-"The estimated entry's reading time, in minutes": "Makalenin dakika cinsinden tahmini okuma süresi"
-"Whether the entry is archived or not": "Makale arşivlendi mi? Arşivlenmedi mi?"
-"Whether the entry is starred or not": "Makale favorilere eklendi mi? Eklenmedi mi?"
-"Less than…": "Küçüktür ve eşittir…"
-"Strictly less than…": "Küçüktür…"
-"Greater than…": "Büyüktür ve eşittir…"
-"Strictly greater than…": "Büyüktür…"
-"Equal to…": "Eşittir…"
-"Not equal to…": "Eşit değildir…"
-"One rule or another": "Bir kural veya birbaşkası"
-"One rule and another": "Bir kural ve diğeri"
+entry:
+    page_titles:
+        # unread: 'Unread entries'
+        # starred: 'Starred entries'
+        # archive: 'Archived entries'
+        # filtered: 'Filtered entries'
+    list:
+        number_on_the_page: '{0} Herhangi bir makale yok.|{1} Burada bir adet makale var.|]1,Inf[ Burada %count% adet makale var.'
+        reading_time: 'tahmini okuma süresi'
+        reading_time_minutes: 'tahmini okuma süresi: %readingTime% min'
+        reading_time_less_one_minute: 'tahmini okuma süresi: <small class="inferieur">&lt;</small> 1 min'
+        original_article: 'orijinal'
+        toogle_as_read: 'Okundu/okunmadı olarak işaretle'
+        toogle_as_star: 'Favorilere ekle/çıkar'
+        delete: 'Sil'
+        export_title: 'Dışa Aktar'
+    filters:
+        title: 'Filtreler'
+        status_label: 'Durum'
+        archived_label: 'Arşiv'
+        starred_label: 'Favori'
+        preview_picture_label: 'Resim önizlemesi varsa'
+        preview_picture_help: 'Resim önizlemesi'
+        language_label: 'Dil'
+        reading_time:
+            label: 'Dakika cinsinden okuma süresi'
+            from: 'başlangıç'
+            to: 'bitiş'
+        domain_label: 'Alan adı'
+        created_at:
+            label: 'Oluşturulma tarihi'
+            from: 'başlangıç'
+            to: 'bitiş'
+        action:
+            clear: 'Temizle'
+            filter: 'Filtrele'
+    view:
+        left_menu:
+            # back_to_top: 'Back to top'
+            back_to_homepage: 'Back'
+            set_as_read: 'Okundu olarak işaretle'
+            set_as_unread: 'Okunmadı olarak işaretle'
+            set_as_favorite: 'Favorilere ekle/çıkar'
+            view_original_article: 'Orijinal makale'
+            re_fetch_content: 'İçeriği yenile'
+            delete: 'Sil'
+            add_a_tag: 'Bir etiket ekle'
+            share_content: 'Paylaş'
+            share_email_label: 'E-posta'
+            download: 'İndir'
+            # print: 'Print'
+            problem:
+                label: 'Bir sorun mu var?'
+                description: 'Bu makalede herhangi bir yanlışlık mı var?'
+        edit_title: 'Başlığı düzenle'
+        original_article: 'orijinal'
+        # annotations_on_the_entry: '{0} No annotations|{1} One annotation|]1,Inf[ %nbAnnotations% annotations'
+    new:
+        page_title: 'Yeni makaleyi kaydet'
+        placeholder: 'http://website.com'
+        form_new:
+            url_label: Url
+    edit:
+        page_title: 'Makaleyi düzenle'
+        title_label: 'Başlık'
+        url_label: 'Url'
+        is_public_label: 'Herkes tarafından erişime açık olsun mu?'
+        save_label: 'Kaydet'
 
-# Entries
-'estimated reading time': 'tahmini okuma süresi'
-original: "orijinal"
-Toggle mark as read: 'Okundu/okunmadı olarak işaretle'
-Toggle favorite: 'Favorilere ekle/çıkar'
-Delete: 'Sil'
+about:
+    page_title: 'Hakkımızda'
+    top_menu:
+        who_behind_wallabag: "wallabag'in arkasındakiler"
+        getting_help: 'Yardım'
+        helping: 'wallabag destek olun'
+        # contributors: 'Contributors'
+        # third_party: 'Third-party libraries'
+    who_behind_wallabag:
+        developped_by: 'Geliştiriciler'
+        website: 'i̇nternet sitesi'
+        many_contributors: 'Ve katkıda bulunanlar ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">GitHub üzerinde</a>'
+        project_website: 'Proje internet sitesi'
+        license: 'Lisans'
+        version: 'Sürüm'
+    getting_help:
+        documentation: 'Dokümantasyon'
+        bug_reports: 'Sorun bildir'
+        support: '<a href="https://support.wallabag.org">Destek internet sitesinde</a> ya da <a href="https://github.com/wallabag/wallabag/issues">GitHub üzerinde</a>'
+    helping:
+        description: 'wallabag açık kaynak kodlu ve ücretsizdir. Bize destek ol :'
+        by_contributing: 'projemize katkıda bulunun :'
+        by_contributing_2: 'ihtiyacımız olanların listelendiği yapılacaklar listesi'
+        by_paypal: 'PayPal ile'
+    contributors:
+        # description: 'Thank you to contributors on wallabag web application'
+    third_party:
+        # description: 'Here are the list of third-party libraries used in wallabag (with their licenses):'
+        # package: 'Package'
+        license: 'Lisans'
 
-# Filters
-Filters: 'Filtreler'
-Status: 'Durum'
-Archived: 'Arşiv'
-Starred: 'Favori'
-Preview picture: 'Resim önizlemesi'
-Has a preview picture: 'Resim önizlemesi varsa'
-Reading time in minutes: 'Dakika cinsinden okuma süresi'
-from: 'başlangıç'
-to: 'bitiş'
-website.com: 'internet-sitesi.com'
-Domain name: 'Alan adı'
-Creation date: 'Oluşturulma tarihi'
-dd/mm/yyyy: 'dd/mm/aaaa'
-Clear: 'Temizle'
-Filter: 'Filtrele'
+howto:
+    page_title: 'Yardım'
+    # page_description: 'There are several ways to save an article:'
+    top_menu:
+        browser_addons: 'Tarayıcı eklentileri'
+        mobile_apps: 'Mobil uygulamalar'
+        bookmarklet: 'Bookmarklet'
+    form:
+        description: 'Yeni makale kaydet'
+    browser_addons:
+        firefox: 'Standart Firefox Eklentisi'
+        chrome: 'Chrome Eklentisi'
+    mobile_apps:
+        android:
+            # via_f_droid: 'via F-Droid'
+            # via_google_play: 'via Google Play'
+        # ios: 'on the iTunes Store'
+        # windows: 'on the Microsoft Store'
+    bookmarklet:
+        description: "Bu bağlantı ile yer imlerinizi sürükleyip bırakarak wallabag'e ekleyebilirsiniz:"
 
-# About
-Who is behind wallabag: "wallabag'in arkasındakiler"
-Getting help: "Yardım"
-Helping wallabag: "wallabag destek olun"
-Developed by: "Geliştiriciler:"
-website: "İnternet sitesi"
-And many others contributors ♥: "Ve katkıda bulunanlar ♥"
-on GitHub: "GitHub üzerinde"
-Project website: "Proje internet sitesi"
-License: "Lisans"
-Version: "Sürüm"
-Documentation: "Dokümantasyon"
-Bug reports: "Sorun bildir"
-On our support website: "Destek internet sitesinde"
-or: "ya da"
-"wallabag is free and opensource. You can help us:": "wallabag açık kaynak kodlu ve ücretsizdir. Bize destek ol :"
-"by contributing to the project:": "projemize katkıda bulunun :"
-an issue lists all our needs: "ihtiyacımız olanların listelendiği yapılacaklar listesi"
-via Paypal: "PayPal ile"
+quickstart:
+    page_title: 'Hızlı başlangıç'
+    intro:
+        title: 'wallabag'
+        paragraph_1: "wallabag kurduğunuz için teşekkür ederiz. Bu sayfada biz size eşlik edecek ve ilginizi çekecek birkaç özellik göstereceğim."
+        paragraph_2: 'Bizi takip edin!'
+    configure:
+        title: 'Uygulamayı Yapılandırma'
+        language: 'Dili ve tasarımı değiştirme'
+        rss: 'RSS akışını aktifleştirme'
+        # tagging_rules: 'Write rules to automatically tag your articles'
+    admin:
+        # title: 'Administration'
+        # description: 'As an administrator, you have privileges on wallabag. You can:'
+        # new_user: 'Create a new user'
+        # analytics: 'Configure analytics'
+        # sharing: 'Enable some parameters about article sharing'
+        # export: 'Configure export'
+        # import: 'Configure import'
+    first_steps:
+        title: 'İlk adım'
+        new_article: 'İlk makalenizi kaydedin'
+        unread_articles: 'Ve bunu sınıflandırın!'
+    migrate:
+        title: 'Varolan servislerden veri aktarma'
+        description: "Kullanmakta olduğunuz farklı bir hizmet mi var? Biz size yardımcı olacak ve verilerinizi wallabag'e aktarmanıza yardımcı olacağız."
+        pocket: "Pocket üzerindeki verilerinizi wallabag'e aktarın"
+        wallabag_v1: "wallabag v1 üzerindeki verilerinizi wallabag'in yeni sürümüne aktarın"
+        wallabag_v2: "wallabag v2 üzerindeki verilerinizi wallabag'in yeni sürümüne aktarın"
+    developer:
+        # title: 'Developers'
+        # create_application: 'Create your third application'
+    docs:
+        title: 'Dokümantasyon'
+        # annotate: 'Annotate your article'
+        export: 'Makalelerinizi ePUB ya da PDF formatına çevirme'
+        search_filters: 'Makaleleri görüntülemek için arama motorlarını ve filteri kullanma'
+        # fetching_errors: 'What can I do if an article encounters errors during fetching?'
+        all_docs: 'Ve daha fazlası!'
+    support:
+        title: 'Destek'
+        description: 'Eğer yardıma ihtiyacınız varsa, biz her daim senin için burada olacağız.'
+        github: 'GitHub'
+        email: 'E-posta'
+        gitter: 'Gitter'
 
-# Howto
-Form: "Form"
-Thanks to this form: "Yeni makale kaydet"
-Browser addons: "Tarayıcı eklentileri"
-Mobile apps: "Mobil uygulamalar"
-Bookmarklet: "Bookmarklet"
-Standard Firefox Add-On: "Standart Firefox Eklentisi"
-Chrome Extension: "Chrome Eklentisi"
-download the application: "uygulamayı indir"
-"Drag &amp; drop this link to your bookmarks bar:": "Bu bağlantı ile yer imlerinizi sürükleyip bırakarak wallabag'e ekleyebilirsiniz:"
-via F-Droid: "F-Droid"
-via Google Play: "Google Play"
-bag it!: "bag it!"
+tag:
+    page_title: 'Etiketler'
+    list:
+        number_on_the_page: '{0} Herhangi bir etiket yok.|{1} Burada bir adet etiket var.|]1,Inf[ Burada %count% adet etiket var.'
 
-# Flash messages
-Information updated: "Bilgiler güncellendi"
-"Config saved. Some parameters will be considered after disconnection.": "Yapılandırma ayarları kaydedildi. Bazı yapılandırmalar tekrar giriş yaptığınızda aktif olacaktır."
-RSS information updated: "RSS bilgiler güncellendi"
-Password updated: "Şifre güncellendi"
-Entry starred: "Makale favorilere eklendi"
-Entry unstarred: "Makale favorilerden çıkartıldı"
-Entry archived: "Makale arşivlendi"
-Entry unarchived: "Makale arşivden çıkartıldı"
-Entry reloaded: "Makale içeriği yenilendi"
-Entry deleted: "Makale silindi"
-Entry saved: "Makale kaydedildi"
-Tag added: "Etiket eklendi"
+import:
+    page_title: 'İçe Aktar'
+    page_description: 'wallabag içe aktarma aracına hoşgeldiniz. Lütfen içe aktarmak istediğiiz önceki servisinizi seçin.'
+    action:
+        import_contents: 'İçe Aktar contents'
+    form:
+        # mark_as_read_title: 'Mark all as read?'
+        # mark_as_read_label: 'Mark all imported entries as read'
+        file_label: 'Dosya'
+        save_label: 'Dosyayı yükle'
+    pocket:
+        page_title: 'İçe Aktar > Pocket'
+        description: "Bu araç tüm Pocket verinizi içe aktarır. Pocket içeriklerin getirilmesine izin vermez, okunabilen içerikler wallabag tarafından yeniden getirilir."
+        config_missing:
+            # description: "Pocket import isn't configured."
+            # admin_message: 'You need to define %keyurls%a pocket_consumer_key%keyurle%.'
+            # user_message: 'Your server admin needs to define an API Key for Pocket.'
+        authorize_message: 'Pocket hesabınızda verilerinizi içe aktarabilmemiz için öncelikle aşağıdaki butona tıklayın. Daha sonra, getpocket.com üzerindeki uygulamamıza gereken izinleri verin. Hepsi bu kadar!'
+        connect_to_pocket: "Pocket'a bağlanın ve verilerinizi içe aktarın"
+    wallabag_v1:
+        page_title: 'İçe Aktar > Wallabag v1'
+        description: 'Bu araç wallabag v1 üzerindeki tüm makalelerinizi içe aktarır. Yapılandırma sayfasında, "Export your wallabag data" sekmesinden "JSON export" adımını izleyin. Bu adım size "wallabag-export-1-xxxx-xx-xx.json" isimli bir dosya verecektir.'
+        how_to: 'Aşağıdaki butona tıklayarak wallabag v1 tarafından dışa aktarılmış dosyanızı yükleyin.'
+    wallabag_v2:
+        page_title: 'İçe Aktar > Wallabag v2'
+        # description: 'This importer will import all your wallabag v2 articles. Go to All articles, then, on the export sidebar, click on "JSON". You will have a "All articles.json" file.'
 
-# Entry
-Mark as read: 'Okundu olarak işaretle'
-Mark as unread: 'Okunmadı olarak işaretle'
-Favorite: 'Favorilere ekle/çıkar'
-back: 'geri dön'
-original article: 'Orijinal makale'
-Add a tag: 'Bir etiket ekle'
-Share: 'Paylaş'
-Download: 'İndir'
-Does this article appear wrong?: "Bu makalede herhangi bir yanlışlık mı var?"
-Problems?: 'Bir sorun mu var?'
-Edit title: "Başlığı düzenle"
-"{0} There is no entry.|{1} There is one entry.|]1,Inf[ There are %count% entries.": "{0} Herhangi bir makale yok.|{1} Burada bir adet makale var.|]1,Inf[ Burada %count% adet makale var."
-"{0} There is no tag.|{1} There is one tag.|]1,Inf[ There are %count% tags.": "{0} Herhangi bir etiket yok.|{1} Burada bir adet etiket var.|]1,Inf[ Burada %count% adet etiket var."
-Reload content: "İçeriği yenile"
-Edit an entry: "Makaleyi düzenle"
-Title: "Başlık"
-Is public: "Herkes tarafından erişime açık olsun mu?"
+developer:
+    # page_title: 'Developer'
+    # welcome_message: 'Welcome to the wallabag API'
+    # documentation: 'Documentation'
+    # how_to_first_app: 'How to create my first application'
+    # full_documentation: 'View full API documentation'
+    # clients:
+    #     title: 'Clients'
+    #     create_new: 'Create a new client'
+    # existing_clients:
+    #     title: 'Existing clients'
+    #     field_id: 'Client ID'
+    #     field_secret: 'Client secret'
+    #     field_uris: 'Redirect URIs'
+    #     field_grant_types: 'Grant type allowed'
+    #     no_client: 'No client yet.'
+    # remove:
+    #     warn_message_1: 'You have the ability to remove this client. This action is IRREVERSIBLE !'
+    #     warn_message_2: "If you remove it, every app configured with that client won't be able to auth on your wallabag."
+    #     action: 'Remove this client'
+    # client:
+    #     page_title: 'Developer > New client'
+    #     page_description: 'You are about to create a new client. Please fill the field below for the redirect URI of your application.'
+    #     form:
+    #         redirect_uris_label: 'Redirect URIs'
+    #         save_label: 'Create a new client'
+    #     action_back: 'Back'
+    # client_parameter:
+    #     page_title: 'Developer > Client parameters'
+    #     page_description: 'Here are your client parameters.'
+    #     field_id: 'Client ID'
+    #     field_secret: 'Client secret'
+    #     back: 'Back'
+    #     read_howto: 'Read the howto "Create my first application"'
+    # howto:
+    #     page_title: 'Developer > How to create my first application'
+    #     description:
+    #         paragraph_1: 'The following commands make use of the <a href="https://github.com/jkbrzt/httpie">HTTPie library</a>. Make sure it is installed on your system before using it.'
+    #         paragraph_2: 'You need a token to communicate between your 3rd application and wallabag API.'
+    #         paragraph_3: 'To create this token, you need <a href="%link%">to create a new client</a>.'
+    #         paragraph_4: 'Now, create your token (replace client_id, client_secret, username and password with the good values):'
+    #         paragraph_5: 'The API will return a response like this:'
+    #         paragraph_6: 'The access_token is useful to do a call to the API endpoint. For example:'
+    #         paragraph_7: 'This call will return all the entries for your user.'
+    #         paragraph_8: 'If you want to see all the API endpoints, you can have a look <a href="%link%">to our API documentation</a>.'
+    #     back: 'Back'
 
-# Import
-Import: "İçe Aktar"
-"Import > Pocket": "İçe Aktar > Pocket"
-"Import > Wallabag v1": "İçe Aktar > Wallabag v1"
-Welcome to wallabag importer. Please select your previous service that you want to migrate.: "wallabag içe aktarma aracına hoşgeldiniz. Lütfen içe aktarmak istediğiiz önceki servisinizi seçin."
-"This importer will import all your Pocket data. Pocket doesn't allow us to retrieve content from their service, so the readable content of each article will be re-fetched by wallabag.": "Bu araç tüm Pocket verinizi içe aktarır. Pocket içeriklerin getirilmesine izin vermez, okunabilen içerikler wallabag tarafından yeniden getirilir."
-"This importer will import all your wallabag v1 articles. On your config page, click on \"JSON export\" in the \"Export your wallabag data\" section. You will have a \"wallabag-export-1-xxxx-xx-xx.json\" file.": "Bu araç wallabag v1 üzerindeki tüm makalelerinizi içe aktarır. Yapılandırma sayfasında, \"Export your wallabag data\" sekmesinden \"JSON export\" adımını izleyin. Bu adım size \"wallabag-export-1-xxxx-xx-xx.json\" isimli bir dosya verecektir."
-"You can import your data from your Pocket account. You just have to click on the below button and authorize the application to connect to getpocket.com.": "Pocket hesabınızda verilerinizi içe aktarabilmemiz için öncelikle aşağıdaki butona tıklayın. Daha sonra, getpocket.com üzerindeki uygulamamıza gereken izinleri verin. Hepsi bu kadar!"
-Connect to Pocket and import data: "Pocket'a bağlanın ve verilerinizi içe aktarın"
-Please select your wallabag export and click on the below button to upload and import it.: "Aşağıdaki butona tıklayarak wallabag v1 tarafından dışa aktarılmış dosyanızı yükleyin."
-File: "Dosya"
-Upload file: "Dosyayı yükle"
-Import contents: "İçerikleri içe aktar"
+validator:
+    # password_must_match: 'The password fields must match.'
+    # password_too_short: 'Password should by at least 8 chars long'
+    # password_wrong_value: 'Wrong value for your current password'
+    # item_per_page_too_high: 'This will certainly kill the app'
+    # rss_limit_too_hight: 'This will certainly kill the app'
 
-# Quickstart
-Welcome to wallabag!: "wallabag"
-Quickstart: "Hızlı başlangıç"
-We'll accompany you to visit wallabag and show you some features which can interess you.: "wallabag kurduğunuz için teşekkür ederiz. Bu sayfada biz size eşlik edecek ve ilginizi çekecek birkaç özellik göstereceğim."
-Follow us!: "Bizi takip edin!"
-Configure the application: "Uygulamayı Yapılandırma"
-Change language and design: "Dili ve tasarımı değiştirme"
-Enable RSS feeds: "RSS akışını aktifleştirme"
-First steps: "İlk adım"
-Save your first article: "İlk makalenizi kaydedin"
-And classify it!: "Ve bunu sınıflandırın!"
-Migrate from an existing service: "Varolan servislerden veri aktarma"
-You're using an other service? We'll help you to retrieve your data on wallabag.: "Kullanmakta olduğunuz farklı bir hizmet mi var? Biz size yardımcı olacak ve verilerinizi wallabag'e aktarmanıza yardımcı olacağız."
-Migrate from Pocket: "Pocket üzerindeki verilerinizi wallabag'e aktarın"
-Migrate from wallabag v1: "wallabag v1 üzerindeki verilerinizi wallabag'in yeni sürümüne aktarın"
-Full documentation: "Dokümantasyon"
-Convert your articles into ePUB or PDF: "Makalelerinizi ePUB ya da PDF formatına çevirme"
-See how you can look for an article by using search engine and filters: "Makaleleri görüntülemek için arama motorlarını ve filteri kullanma"
-And so many other articles!: "Ve daha fazlası!"
-Support: "Destek"
-Social: "Sosyal"
-If you need some help, we are here for you.: "Eğer yardıma ihtiyacınız varsa, biz her daim senin için burada olacağız."
-On GitHub: "GitHub"
-By email: "E-posta"
-On Gitter: "Gitter"
-Export: "Dışa Aktar"
-"http://website": "http://internet-sitesi"
-Take wallabag with you: "wallabag her an seninle"
-about: "hakkımızda"
-powered by: "powered by"
+flashes:
+    config:
+        notice:
+            config_saved: 'Yapılandırma ayarları kaydedildi. Bazı yapılandırmalar tekrar giriş yaptığınızda aktif olacaktır.'
+            password_updated: 'Şifre güncellendi'
+            password_not_updated_demo: "In demonstration mode, you can't change password for this user."
+            user_updated: 'Bilgiler güncellendi'
+            rss_updated: 'RSS bilgiler güncellendi'
+            tagging_rules_updated: 'Tagging rules updated'
+            tagging_rules_deleted: 'Tagging rule deleted'
+            user_added: 'User "%username%" added'
+            rss_token_updated: 'RSS token updated'
+    entry:
+        notice:
+            entry_already_saved: 'Entry already saved on %date%'
+            entry_saved: 'Makale kaydedildi'
+            # entry_updated: 'Entry updated'
+            entry_reloaded: 'Makale içeriği yenilendi'
+            # entry_reload_failed: 'Failed to reload entry'
+            entry_archived: 'Makale arşivlendi'
+            entry_unarchived: 'Makale arşivden çıkartıldı'
+            entry_starred: 'Makale favorilere eklendi'
+            entry_unstarred: 'Makale favorilerden çıkartıldı'
+            entry_deleted: 'Makale silindi'
+    tag:
+        notice:
+            tag_added: 'Etiket eklendi'
+    import:
+        notice:
+            # failed: 'Import failed, please try again.'
+            # failed_on_file: 'Error while processing import. Please verify your import file.'
+            # summary: 'Import summary: %imported% imported, %skipped% already saved.'
+    developer:
+        notice:
+            # client_created: 'New client created.'
+            # client_deleted: 'Client deleted'
