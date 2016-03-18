@@ -6,12 +6,14 @@ use FOS\RestBundle\Controller\FOSRestController;
 use Hateoas\Configuration\Route;
 use Hateoas\Representation\Factory\PagerfantaFactory;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
+use Wallabag\AnnotationBundle\Entity\Annotation;
 
 class WallabagRestController extends FOSRestController
 {
@@ -344,6 +346,138 @@ class WallabagRestController extends FOSRestController
 
         return $this->renderJsonResponse($json);
     }
+
+    /**
+     * Retrieve annotations for an entry.
+     *
+     * @ApiDoc(
+     *      requirements={
+     *          {"name"="entry", "dataType"="integer", "requirement"="\w+", "description"="The entry ID"}
+     *      }
+     * )
+     *
+     * @return Response
+     */
+    public function getAnnotationsAction(Entry $entry)
+    {
+
+        $this->validateAuthentication();
+
+        $annotationRows = $this
+                ->getDoctrine()
+                ->getRepository('WallabagAnnotationBundle:Annotation')
+                ->findAnnotationsByPageId($entry->getId(), $this->getUser()->getId());
+        $total = count($annotationRows);
+        $annotations = array('total' => $total, 'rows' => $annotationRows);
+
+        $json = $this->get('serializer')->serialize($annotations, 'json');
+
+        return $this->renderJsonResponse($json);
+    }
+
+    /**
+     * Creates a new annotation.
+     *
+     * @param Entry $entry
+     *
+     * @ApiDoc(
+     *      requirements={
+     *          {"name"="ranges", "dataType"="array", "requirement"="\w+", "description"="The range array for the annotation"},
+     *          {"name"="quote", "dataType"="string", "required"=false, "description"="Optional, quote for the annotation"},
+     *          {"name"="text", "dataType"="string", "required"=true, "description"=""},
+     *      }
+     * )
+     *
+     * @return Response
+     */
+    public function postAnnotationAction(Request $request, Entry $entry)
+    {
+        $this->validateAuthentication();
+
+        $data = json_decode($request->getContent(), true);
+
+        $em = $this->getDoctrine()->getManager();
+
+        $annotation = new Annotation($this->getUser());
+
+        $annotation->setText($data['text']);
+        if (array_key_exists('quote', $data)) {
+            $annotation->setQuote($data['quote']);
+        }
+        if (array_key_exists('ranges', $data)) {
+            $annotation->setRanges($data['ranges']);
+        }
+
+        $annotation->setEntry($entry);
+
+        $em->persist($annotation);
+        $em->flush();
+
+        $json = $this->get('serializer')->serialize($annotation, 'json');
+
+        return $this->renderJsonResponse($json);
+    }
+
+    /**
+     * Updates an annotation.
+     *
+     * @ApiDoc(
+     *      requirements={
+     *          {"name"="annotation", "dataType"="string", "requirement"="\w+", "description"="The annotation ID"}
+     *      }
+     * )
+     *
+     * @ParamConverter("annotation", class="WallabagAnnotationBundle:Annotation")
+     *
+     * @return Response
+     */
+    public function putAnnotationAction(Annotation $annotation, Request $request)
+    {
+
+        $this->validateAuthentication();
+
+        $data = json_decode($request->getContent(), true);
+
+        if (!is_null($data['text'])) {
+            $annotation->setText($data['text']);
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+
+        $json = $this->get('serializer')->serialize($annotation, 'json');
+
+        return $this->renderJsonResponse($json);
+    }
+
+    /**
+     * Removes an annotation.
+     *
+     * @ApiDoc(
+     *      requirements={
+     *          {"name"="annotation", "dataType"="string", "requirement"="\w+", "description"="The annotation ID"}
+     *      }
+     * )
+     *
+     * @ParamConverter("annotation", class="WallabagAnnotationBundle:Annotation")
+     *
+     * @return Response
+     */
+    public function deleteAnnotationAction(Annotation $annotation)
+    {
+
+        $this->validateAuthentication();
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($annotation);
+        $em->flush();
+
+        $json = $this->get('serializer')->serialize($annotation, 'json');
+
+        return $this->renderJsonResponse($json);
+    }
+
+
     /**
      * Retrieve version number.
      *
