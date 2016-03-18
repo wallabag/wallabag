@@ -257,7 +257,7 @@ class Config
     /**
      * Set readingSpeed.
      *
-     * @param int $readingSpeed
+     * @param float $readingSpeed
      *
      * @return Config
      */
@@ -271,7 +271,7 @@ class Config
     /**
      * Get readingSpeed.
      *
-     * @return int
+     * @return float
      */
     public function getReadingSpeed()
     {
