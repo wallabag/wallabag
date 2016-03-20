@@ -61,6 +61,13 @@ config:
         theme_label: 'Theme'
         items_per_page_label: 'Items per page'
         language_label: 'Language'
+        reading_speed:
+            label: 'Reading speed'
+            help_message: 'You can use online tools to estimate your reading speed:'
+            100_word: 'I read ~100 words per minute'
+            200_word: 'I read ~200 words per minute'
+            300_word: 'I read ~300 words per minute'
+            400_word: 'I read ~400 words per minute'
     form_rss:
         description: 'RSS feeds provided by wallabag allow you to read your saved articles with your favourite RSS reader. You need to generate a token first.'
         token_label: 'RSS token'

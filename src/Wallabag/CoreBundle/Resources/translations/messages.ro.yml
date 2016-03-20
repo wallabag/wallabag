@@ -61,6 +61,13 @@ config:
         theme_label: 'Temă'
         items_per_page_label: 'Articole pe pagină'
         language_label: 'Limbă'
+        reading_speed:
+            # label: 'Reading speed'
+            # help_message: 'You can use online tools to estimate your reading speed:'
+            # 100_word: 'I read ~100 words per minute'
+            # 200_word: 'I read ~200 words per minute'
+            # 300_word: 'I read ~300 words per minute'
+            # 400_word: 'I read ~400 words per minute'
     form_rss:
         description: 'Feed-urile RSS oferite de wallabag îți permit să-ți citești articolele salvate în reader-ul tău preferat RSS.'
         token_label: 'RSS-Token'

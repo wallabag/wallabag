@@ -61,6 +61,13 @@ config:
         theme_label: 'پوسته'
         items_per_page_label: 'تعداد مقاله در هر صفحه'
         language_label: 'زبان'
+        reading_speed:
+            # label: 'Reading speed'
+            # help_message: 'You can use online tools to estimate your reading speed:'
+            # 100_word: 'I read ~100 words per minute'
+            # 200_word: 'I read ~200 words per minute'
+            # 300_word: 'I read ~300 words per minute'
+            # 400_word: 'I read ~400 words per minute'
     form_rss:
         description: 'با خوراک آر-اس-اس که wallabag در اختیارتان می‌گذارد، می‌توانید مقاله‌های ذخیره‌شده را در نرم‌افزار آر-اس-اس دلخواه خود بخوانید. برای این کار نخست باید یک کد بسازید.'
         token_label: 'کد آر-اس-اس'

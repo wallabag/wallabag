@@ -47,7 +47,10 @@
                                     {{ form_label(form.config.reading_speed) }}
                                     {{ form_errors(form.config.reading_speed) }}
                                     {{ form_widget(form.config.reading_speed) }}
-                                    <p>{% trans %}You can use online tools to estimate your reading speed{% endtrans %} (<a href="http://www.myreadspeed.com/calculate/">{% trans %}like this one{%endtrans%}</a>).</p>
+                                    <p>
+                                        {{ 'config.form_settings.reading_speed.help_message'|trans }}
+                                        <a href="http://www.myreadspeed.com/calculate/">myreadspeed</a>
+                                    </p>
                                 </div>
                             </div>
 
