@@ -15,7 +15,7 @@ Fichiers de traductions
 
 Les principaux fichiers de traduction se trouvent ici : https://github.com/wallabag/wallabag/tree/v2/src/Wallabag/CoreBundle/Resources/translations.
 
-Vous devez créer les fichiers ``messages.CODE.yml`` et ``validators.CODE.yml``,
+Vous devez créer le fichier ``messages.CODE.yml``,
 où CODE est le code ISO 639-1 de votre langue (`cf wikipedia <https://fr.wikipedia.org/wiki/Liste_des_codes_ISO_639-1>`__).
 
 Autres fichiers à traduire :
