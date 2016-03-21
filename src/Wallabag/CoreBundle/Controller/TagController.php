@@ -32,10 +32,16 @@ class TagController extends Controller
             $em = $this->getDoctrine()->getManager();
 
             if (is_null($existingTag)) {
-                $entry->addTag($tag);
+                $this->get('wallabag_core.content_proxy')->assignTagsToEntry(
+                    $entry,
+                    $tag
+                );
                 $em->persist($tag);
             } elseif (!$existingTag->hasEntry($entry)) {
-                $entry->addTag($existingTag);
+                $this->get('wallabag_core.content_proxy')->assignTagsToEntry(
+                    $entry,
+                    $existingTag
+                );
                 $em->persist($existingTag);
             }
 
