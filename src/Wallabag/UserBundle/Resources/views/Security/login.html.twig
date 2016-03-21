@@ -15,32 +15,32 @@
         <div class="row">
 
             <div class="input-field col s12">
-                <label for="username">{% trans %}Username{% endtrans %}</label>
+                <label for="username">{{ 'security.login.username'|trans }}</label>
                 <input type="text" id="username" name="_username" value="{{ last_username }}" />
             </div>
 
             <div class="input-field col s12">
-                <label for="password">{% trans %}Password{% endtrans %}</label>
+                <label for="password">{{ 'security.login.password'|trans }}</label>
                 <input type="password" id="password" name="_password" />
             </div>
 
             <div class="input-field col s12">
                 <input type="checkbox" id="remember_me" name="_remember_me" checked />
-                <label for="remember_me">{% trans %}Keep me logged in{% endtrans %}</label>
+                <label for="remember_me">{{ 'security.login.keep_logged_in'|trans }}</label>
             </div>
 
         </div>
     </div>
     <div class="card-action center">
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
-        <a href="{{ path('fos_user_registration_register') }}" class="waves-effect waves-light grey btn"><i class="material-icons left"></i> {% trans %}Register{% endtrans %}</a>
+        <a href="{{ path('fos_user_registration_register') }}" class="waves-effect waves-light grey btn"><i class="material-icons left"></i> {{ 'security.login.register'|trans }}</a>
         <button class="btn waves-effect waves-light" type="submit" name="send">
-            {% trans %}Login{% endtrans %}
+            {{ 'security.login.submit'|trans }}
             <i class="mdi-content-send right"></i>
         </button>
     </div>
     <div class="center">
-        <a href="{{ path('fos_user_resetting_request') }}">{% trans %}Forgot your password?{% endtrans %}</a>
+        <a href="{{ path('fos_user_resetting_request') }}">{{ 'security.login.forgot_password'|trans }}</a>
     </div>
 </form>
 {% endblock fos_user_content %}

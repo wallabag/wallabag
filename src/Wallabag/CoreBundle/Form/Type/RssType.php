@@ -12,8 +12,12 @@ class RssType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('rss_limit')
-            ->add('save', SubmitType::class)
+            ->add('rss_limit', null, array(
+                'label' => 'config.form_rss.rss_limit',
+            ))
+            ->add('save', SubmitType::class, array(
+                'label' => 'config.form.save',
+            ))
         ;
     }
 

@@ -1,129 +1,424 @@
-#Login
-Keep me logged in: 'Zapamiętaj mnie'
-Forgot your password?: 'Zapomniałeś hasła'
-Login: 'Loguj'
-Back to login: 'Wróć do logowania'
-Send: 'Wyślij'
-"Enter your email address below and we'll send you password reset instructions.": 'Wpisz swój adres email poniżej. Wyślemy Ci instrukcję resetowania hasła'
+security:
+    login:
+        # page_title: 'Welcome to wallabag!'
+        keep_logged_in: 'Zapamiętaj mnie'
+        forgot_password: 'Zapomniałeś hasła'
+        submit: 'Loguj'
+        # register: 'Register'
+        username: 'Nazwa użytkownika'
+        password: 'Hasło'
+        # cancel: 'Cancel'
+    resetting:
+        description: "Wpisz swój adres email poniżej. Wyślemy Ci instrukcję resetowania hasła"
+    register:
+        # page_title: 'Create an account'
+        # go_to_account: 'Go to your account'
 
-# Menu
-unread: 'nieprzeczytane'
-starred: 'oznaczone gwiazdką'
-archive: 'archiwum'
-all: 'wszystkie'
-tags: 'tagi'
-config: 'konfiguracja'
-howto: 'howto'
-logout: 'wyloguj'
-Filtered: 'Filtrowane'
-About: 'O nas'
+menu:
+    left:
+        unread: 'Nieprzeczytane'
+        starred: 'Oznaczone gwiazdką'
+        archive: 'Archiwum'
+        all_articles: 'Wszystkie'
+        config: 'Konfiguracja'
+        tags: 'Tagi'
+        # internal_settings: 'Internal Settings'
+        # import: 'Import'
+        howto: 'Howto'
+        # developer: 'Developer'
+        logout: 'Wyloguj'
+        about: 'O nas'
+        search: 'Szukaj'
+        # save_link: 'Save a link'
+        back_to_unread: 'Powrót do nieprzeczytanych artykułów'
+    top:
+        add_new_entry: 'Dodaj nowy wpis'
+        search: 'Szukaj'
+        filter_entries: 'Filtruj wpisy'
+        # export: 'Export'
+    search_form:
+        input_label: 'Wpisz swoje zapytanie tutaj'
 
-# Header
-Back to unread articles: 'Powrót do nieprzeczytanych artykułów'
-Add a new entry: 'Dodaj nowy wpis'
-Search: 'Szukaj'
-Filter entries: 'Filtruj wpisy'
-Enter your search here: 'Wpisz swoje zapytanie tutaj:'
-Save new entry: 'Zapisz nowy wpis'
+footer:
+    wallabag:
+        # elsewhere: 'Take wallabag with you'
+        # social: 'Social'
+        # powered_by: 'powered by'
+        about: 'O nas'
 
-# Config screen
-Settings: 'Ustawienia'
-User information: 'Informacje o użytkowniku'
-Password: 'Hasło'
-RSS: 'Kanał RSS'
-Add a user: 'Dodaj użytkownika'
-Theme: 'Temat'
-Items per page: 'Ilość elementóœ na stronie'
-Language: 'Język'
-Save: 'Zapisz'
-RSS token: 'Token RSS'
-Name: 'Nazwa'
-Email: 'Adres email'
-No token: 'Brak tokena'
-Reset your token: 'Zresetuj swojego tokena'
-Create your token: 'Stwórz tokena'
-Rss limit: 'Limit RSS'
-RSS links: 'Link do RSS'
-RSS feeds provided by wallabag allow you to read your saved articles with your favourite RSS reader. You need to generate a token first.': 'Kanały RSS prowadzone przez wallabag pozwalają Ci na czytanie twoich zapisanych artykułów w twoium ulubionym czytniku RSS. Musisz najpierw wynegenerować tokena.‌'
-Old password: 'Stare hasło'
-New password: 'Nowe hasło'
-Repeat new password: 'Powtórz nowe hasło'
-Username: 'Nazwa użytkownika'
+config:
+    page_title: 'Konfiguracja'
+    tab_menu:
+        # settings: 'Settings'
+        rss: 'Kanał RSS'
+        user_info: 'Informacje o użytkowniku'
+        password: 'Hasło'
+        # rules: 'Tagging rules'
+        new_user: 'Dodaj użytkownika'
+    form:
+        save: 'Zapisz'
+    form_settings:
+        theme_label: 'Temat'
+        items_per_page_label: 'Ilość elementóœ na stronie'
+        language_label: 'Język'
+        reading_speed:
+            # label: 'Reading speed'
+            # help_message: 'You can use online tools to estimate your reading speed:'
+            # 100_word: 'I read ~100 words per minute'
+            # 200_word: 'I read ~200 words per minute'
+            # 300_word: 'I read ~300 words per minute'
+            # 400_word: 'I read ~400 words per minute'
+    form_rss:
+        description: 'Kanały RSS prowadzone przez wallabag pozwalają Ci na czytanie twoich zapisanych artykułów w twoium ulubionym czytniku RSS. Musisz najpierw wynegenerować tokena.‌'
+        token_label: 'Token RSS'
+        no_token: 'Brak tokena'
+        token_create: 'Stwórz tokena'
+        token_reset: 'Zresetuj swojego tokena'
+        rss_links: 'RSS links'
+        rss_link:
+            unread: 'nieprzeczytane'
+            starred: 'oznaczone gwiazdką'
+            archive: 'archiwum'
+        rss_limit: 'Link do RSS'
+    form_user:
+        # two_factor_description: "Enabling two factor authentication means you'll receive an email with a code on every new untrusted connexion"
+        name_label: 'Nazwa'
+        email_label: 'Adres email'
+        # twoFactorAuthentication_label: 'Two factor authentication'
+    form_password:
+        old_password_label: 'Stare hasło'
+        new_password_label: 'Nowe hasło'
+        repeat_new_password_label: 'Powtórz nowe hasło'
+    form_rules:
+        # if_label: 'if'
+        # then_tag_as_label: 'then tag as'
+        delete_rule_label: 'usuń'
+        # rule_label: 'Rule'
+        # tags_label: 'Tags'
+        # faq:
+        #     title: 'FAQ'
+        #     tagging_rules_definition_title: 'What does « tagging rules » mean?'
+        #     tagging_rules_definition_description: 'They are rules used by Wallabag to automatically tag new entries.<br />Each time a new entry is added, all the tagging rules will be used to add the tags you configured, thus saving you the trouble to manually classify your entries.'
+        #     how_to_use_them_title: 'How do I use them?'
+        #     how_to_use_them_description: 'Let assume you want to tag new entries as « <i>short reading</i> » when the reading time is inferior to 3 minutes.<br />In that case, you should put « readingTime &lt;= 3 » in the <i>Rule</i> field and « <i>short reading</i> » in the <i>Tags</i> field.<br />Several tags can added simultaneously by separating them by a comma: « <i>short reading, must read</i> »<br />Complex rules can be written by using predefined operators: if « <i>readingTime &gt;= 5 AND domainName = "github.com"</i> » then tag as « <i>long reading, github </i> »'
+        #     variables_available_title: 'Which variables and operators can I use to write rules?'
+        #     variables_available_description: 'The following variables and operators can be used to create tagging rules:'
+        #     meaning: 'Meaning'
+        #     variable_description:
+        #         label: 'Variable'
+        #         title: 'Title of the entry'
+        #         url: 'URL of the entry'
+        #         isArchived: 'Whether the entry is archived or not'
+        #         isStarred: 'Whether the entry is starred or not'
+        #         content: "The entry's content"
+        #         language: "The entry's language"
+        #         mimetype: "The entry's mime-type"
+        #         readingTime: "The estimated entry's reading time, in minutes"
+        #         domainName: 'The domain name of the entry'
+        #     operator_description:
+        #         label: 'Operator'
+        #         less_than: 'Less than...'
+        #         strictly_less_than: 'Strictly less than...'
+        #         greater_than: 'Greater than...'
+        #         strictly_greater_than: 'Strictly greater than...'
+        #         equal_to: 'Equal to...'
+        #         not_equal_to: 'Not equal to...'
+        #         or: 'One rule OR another'
+        #         and: 'One rule AND another'
+        #         matches: 'Tests that a <i>subject</i> is matches a <i>search</i> (case-insensitive).<br />Example: <code>title matches "football"</code>'
+    form_new_user:
+        username_label: 'Nazwa użytkownika'
+        password_label: 'Hasło'
+        repeat_new_password_label: 'Powtórz nowe hasło'
+        plain_password_label: '????'
+        email_label: 'Adres email'
 
-# Entries
-'estimated reading time': 'Szacunkowy czas czytania'
-original: 'oryginał'
-Toggle mark as read: 'Oznacz jako przeczytane'
-Toggle favorite: 'Oznacz jako ulubione'
-Delete: 'Usuń'
+entry:
+    page_titles:
+        # unread: 'Unread entries'
+        # starred: 'Starred entries'
+        # archive: 'Archived entries'
+        # filtered: 'Filtered entries'
+    list:
+        # number_on_the_page: '{0} There is no entry.|{1} There is one entry.|]1,Inf[ There are %count% entries.'
+        reading_time: 'szacunkowy czas czytania'
+        reading_time_minutes: 'szacunkowy czas czytania: %readingTime% min'
+        reading_time_less_one_minute: 'szacunkowy czas czytania: <small class="inferieur">&lt;</small> 1 min'
+        original_article: 'oryginał'
+        toogle_as_read: 'Oznacz jako przeczytane'
+        toogle_as_star: 'Oznacz jako ulubione'
+        delete: 'Usuń'
+        # export_title: 'Export'
+    filters:
+        title: 'Filtry'
+        status_label: 'Status'
+        archived_label: 'Zarchiwizowane'
+        starred_label: 'Oznaczone gwiazdką'
+        preview_picture_label: 'Posiada podgląd obrazu'
+        preview_picture_help: 'Podgląd obrazu'
+        language_label: 'Język'
+        reading_time:
+            label: 'Czas czytania w minutach'
+            from: 'od'
+            to: 'do'
+        domain_label: 'Nazwa domeny'
+        created_at:
+            label: 'Czas stworzenia'
+            from: 'od'
+            to: 'do'
+        action:
+            clear: 'Wyczyść'
+            filter: 'Filtruj'
+    view:
+        left_menu:
+            # back_to_top: 'Back to top'
+            back_to_homepage: 'Cofnij'
+            set_as_read: 'Oznacz jako przeczytane'
+            # set_as_unread: 'Mark as unread'
+            set_as_favorite: 'Ulubione'
+            view_original_article: 'Oryginalny artykuł'
+            # re_fetch_content: 'Re-fetch content'
+            delete: 'Usuń'
+            add_a_tag: 'Dodaj tag'
+            share_content: 'Udostępnij'
+            share_email_label: 'Adres email'
+            download: 'Pobierz'
+            # print: 'Print'
+            problem:
+                label: 'Problemy'
+                description: 'Czy ten artykuł wygląda źle?'
+        edit_title: 'Edytuj tytuł'
+        original_article: 'oryginalny'
+        # annotations_on_the_entry: '{0} No annotations|{1} One annotation|]1,Inf[ %nbAnnotations% annotations'
+    new:
+        page_title: 'Zapisz nowy wpis'
+        placeholder: 'http://website.com'
+        form_new:
+            url_label: Url
+    edit:
+        # page_title: 'Edit an entry'
+        # title_label: 'Title'
+        # url_label: 'Url'
+        # is_public_label: 'Public'
+        save_label: 'Zapisz'
 
-# Filters
-Filters: 'Filtry'
-Status: 'Status'
-Archived: 'Zarchiwizowane'
-Starred: 'Oznaczone gwiazdką'
-Preview picture: 'Podgląd obrazu'
-Has a preview picture: 'Posiada podgląd obrazu'
-Reading time in minutes: 'Czas czytania w minutach'
-from: 'od'
-to: 'do'
-website.com: 'website.com'
-Domain name: 'Nazwa domeny'
-Creation date: 'Czas stworzenia'
-dd/mm/yyyy: 'dd.mm.yyyy'
-Clear: 'Wyczyść'
-Filter: 'Filtruj'
+about:
+    page_title: 'O nas'
+    top_menu:
+        who_behind_wallabag: 'Kto stoi za wallabag'
+        getting_help: 'Pomoc'
+        helping: 'Pomóż wallabag'
+        # contributors: 'Contributors'
+        # third_party: 'Third-party libraries'
+    who_behind_wallabag:
+        developped_by: 'Stworzony przez'
+        website: 'strona internetowa'
+        many_contributors: 'i wielu innych ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">na GitHubie</a>'
+        project_website: 'Stona projektu'
+        license: 'Licencja'
+        version: 'Wersja'
+    getting_help:
+        documentation: 'Dokumentacja'
+        bug_reports: 'Raportuj błędy'
+        support: '<a href="https://support.wallabag.org">Na naszeej stronie wsparcia technicznego</a> lub <a href="https://github.com/wallabag/wallabag/issues">na GitHubie</a>'
+    helping:
+        description: 'wallabag jest darmowy i otwartoźródłowy. Możesz nam pomóc:'
+        by_contributing: 'przez przyłączenie się do projektu:'
+        by_contributing_2: 'lista wszystkich naszych potrzeb'
+        by_paypal: 'przez Paypal'
+    contributors:
+        # description: 'Thank you to contributors on wallabag web application'
+    third_party:
+        # description: 'Here are the list of third-party libraries used in wallabag (with their licenses):'
+        # package: 'Package'
+        license: 'Licencja'
 
-# About
-Who is behind wallabag: 'Kto stoi za wallabag'
-Getting help: 'Pomoc'
-Helping wallabag: 'Pomóż wallabag'
-Developed by: 'Stworzony przez'
-website: 'strona internetowa'
-And many others contributors ♥: ' i wielu innych ♥'
-on GitHub: 'na GitHubie'
-Project website: 'Stona projektu'
-License: 'Licencja'
-Version: 'Wersja'
-Documentation: 'Dokumentacja'
-Bug reports: 'Raportuj błędy'
-On our support website: 'Na naszeej stronie wsparcia technicznego'
-or: 'lub'
-'wallabag is free and opensource. You can help us:': 'wallabag jest darmowy i otwartoźródłowy. Możesz nam pomóc: '
-'by contributing to the project:': 'przez przyłączenie się do projektu:'
-an issue lists all our needs: 'lista wszystkich naszych potrzeb'
-via Paypal: 'przez PayPal'
+howto:
+    page_title: 'Howto'
+    # page_description: 'There are several ways to save an article:'
+    top_menu:
+        browser_addons: 'Wtyczki dla przeglądarki'
+        mobile_apps: 'Aplikacje mobilne'
+        bookmarklet: 'Bookmarklet'
+    form:
+        description: 'Podziękuj przez ten formularz'
+    browser_addons:
+        firefox: 'Standardowe rozszerzenia dla Firefox'
+        chrome: 'Rozszerzenie dla Chrome'
+    mobile_apps:
+        android:
+            via_f_droid: 'przez F-Droid'
+            via_google_play: 'przez Google Play'
+        ios: 'przez iTunes Store'
+        windows: 'przez Microsoft Store'
+    bookmarklet:
+        description: 'Przeciągnij i upuść ten link na swój pasek zakładek'
 
-# Howto
-Form: 'Od'
-Thanks to this form: 'Podziękuj przez ten formularz'
-Browser addons: 'Wtyczki dla przeglądarki'
-Mobile apps: 'Aplikacje mobilne'
-Bookmarklet: 'Bookmarklet'
-Standard Firefox Add-On: 'Standardowe rozszerzenia dla Firefox'
-Chrome Extension: 'Rozszerzenie dla Chrome'
-download the application: 'Pobierz aplikację '
-'Drag &amp; drop this link to your bookmarks bar:': 'Przeciągnij i upuść ten link na swój pasek zakładek'
+quickstart:
+    # page_title: 'Quickstart'
+    # intro:
+    #     title: 'Welcome to wallabag!'
+    #     paragraph_1: "We'll accompany you to visit wallabag and show you some features which can interest you."
+    #     paragraph_2: 'Follow us!'
+    # configure:
+    #     title: 'Configure the application'
+    #     language: 'Change language and design'
+    #     rss: 'Enable RSS feeds'
+    #     tagging_rules: 'Write rules to automatically tag your articles'
+    # admin:
+    #     title: 'Administration'
+    #     description: 'As an administrator, you have privileges on wallabag. You can:'
+    #     new_user: 'Create a new user'
+    #     analytics: 'Configure analytics'
+    #     sharing: 'Enable some parameters about article sharing'
+    #     export: 'Configure export'
+    #     import: 'Configure import'
+    # first_steps:
+    #     title: 'First steps'
+    #     new_article: 'Save your first article'
+    #     unread_articles: 'And classify it!'
+    # migrate:
+    #     title: 'Migrate from an existing service'
+    #     description: "Are you using another service? We'll help you to retrieve your data on wallabag."
+    #     pocket: 'Migrate from Pocket'
+    #     wallabag_v1: 'Migrate from wallabag v1'
+    #     wallabag_v2: 'Migrate from wallabag v2'
+    # developer:
+    #     title: 'Developers'
+    #     create_application: 'Create your third application'
+    # docs:
+    #     title: 'Full documentation'
+    #     annotate: 'Annotate your article'
+    #     export: 'Convert your articles into ePUB or PDF'
+    #     search_filters: 'See how you can look for an article by using search engine and filters'
+    #     fetching_errors: 'What can I do if an article encounters errors during fetching?'
+    #     all_docs: 'And so many other articles!'
+    # support:
+    #     title: 'Support'
+    #     description: 'If you need some help, we are here for you.'
+    #     github: 'On GitHub'
+    #     email: 'By email'
+    #     gitter: 'On Gitter'
 
-# Flash messages
-Information updated: 'Informacje zaktualizowane'
-Config saved. Some parameters will be considered after disconnection.': 'Konfiguracja zapisana. Niektóre parametry zostaną uznane po rozłączeniu'
-RSS information updated: 'Informacje RSS zaktualizowane'
-Password updated: 'Hasło zaktualizowane'
-Entry starred: 'Wpis oznaczony gwiazdką'
-Entry unstarred: 'Wpis odznaczony gwiazdką'
-Entry archived: 'Wpis dodany do archiwum'
-Entry unarchived: 'Wpis usunięty z archiwum'
-Entry deleted: 'Wpis usunięty'
+tag:
+    page_title: 'Tagi'
+    list:
+        # number_on_the_page: '{0} There is no tag.|{1} There is one tag.|]1,Inf[ There are %count% tags.'
 
-# Entry
-Mark as read: 'Oznacz jako przeczytane'
-Favorite: 'Ulubione'
-back: 'Cofnij'
-original article: 'Oryginalny artykuł'
-Add a tag: 'Dodaj tag'
-Share: 'Udostępnij'
-Download: 'Pobierz'
-Does this article appear wrong?: 'Czy ten artykuł wygląda źle?'
-Problems?: 'Problemy'
-Edit title: 'Edytuj tytuł'
+import:
+    # page_title: 'Import'
+    # page_description: 'Welcome to wallabag importer. Please select your previous service that you want to migrate.'
+    # action:
+    #     import_contents: 'Import contents'
+    # form:
+    #     mark_as_read_title: 'Mark all as read?'
+    #     mark_as_read_label: 'Mark all imported entries as read'
+    #     file_label: 'File'
+    #     save_label: 'Upload file'
+    # pocket:
+    #     page_title: 'Import > Pocket'
+    #     description: "This importer will import all your Pocket data. Pocket doesn't allow us to retrieve content from their service, so the readable content of each article will be re-fetched by wallabag."
+    #     config_missing:
+    #         description: "Pocket import isn't configured."
+    #         admin_message: 'You need to define %keyurls%a pocket_consumer_key%keyurle%.'
+    #         user_message: 'Your server admin needs to define an API Key for Pocket.'
+    #     authorize_message: 'You can import your data from your Pocket account. You just have to click on the below button and authorize the application to connect to getpocket.com.'
+    #     connect_to_pocket: 'Connect to Pocket and import data'
+    # wallabag_v1:
+    #     page_title: 'Import > Wallabag v1'
+    #     description: 'This importer will import all your wallabag v1 articles. On your config page, click on "JSON export" in the "Export your wallabag data" section. You will have a "wallabag-export-1-xxxx-xx-xx.json" file.'
+    #     how_to: 'Please select your wallabag export and click on the below button to upload and import it.'
+    # wallabag_v2:
+    #     page_title: 'Import > Wallabag v2'
+    #     description: 'This importer will import all your wallabag v2 articles. Go to All articles, then, on the export sidebar, click on "JSON". You will have a "All articles.json" file.'
+
+developer:
+    # page_title: 'Developer'
+    # welcome_message: 'Welcome to the wallabag API'
+    # documentation: 'Documentation'
+    # how_to_first_app: 'How to create my first application'
+    # full_documentation: 'View full API documentation'
+    # clients:
+    #     title: 'Clients'
+    #     create_new: 'Create a new client'
+    # existing_clients:
+    #     title: 'Existing clients'
+    #     field_id: 'Client ID'
+    #     field_secret: 'Client secret'
+    #     field_uris: 'Redirect URIs'
+    #     field_grant_types: 'Grant type allowed'
+    #     no_client: 'No client yet.'
+    # remove:
+    #     warn_message_1: 'You have the ability to remove this client. This action is IRREVERSIBLE !'
+    #     warn_message_2: "If you remove it, every app configured with that client won't be able to auth on your wallabag."
+    #     action: 'Remove this client'
+    # client:
+    #     page_title: 'Developer > New client'
+    #     page_description: 'You are about to create a new client. Please fill the field below for the redirect URI of your application.'
+    #     form:
+    #         redirect_uris_label: 'Redirect URIs'
+    #         save_label: 'Create a new client'
+    #     action_back: 'Cofnij'
+    # client_parameter:
+    #     page_title: 'Developer > Client parameters'
+    #     page_description: 'Here are your client parameters.'
+    #     field_id: 'Client ID'
+    #     field_secret: 'Client secret'
+    #     back: 'Cofnij'
+    #     read_howto: 'Read the howto "Create my first application"'
+    # howto:
+    #     page_title: 'Developer > How to create my first application'
+    #     description:
+    #         paragraph_1: 'The following commands make use of the <a href="https://github.com/jkbrzt/httpie">HTTPie library</a>. Make sure it is installed on your system before using it.'
+    #         paragraph_2: 'You need a token to communicate between your 3rd application and wallabag API.'
+    #         paragraph_3: 'To create this token, you need <a href="%link%">to create a new client</a>.'
+    #         paragraph_4: 'Now, create your token (replace client_id, client_secret, username and password with the good values):'
+    #         paragraph_5: 'The API will return a response like this:'
+    #         paragraph_6: 'The access_token is useful to do a call to the API endpoint. For example:'
+    #         paragraph_7: 'This call will return all the entries for your user.'
+    #         paragraph_8: 'If you want to see all the API endpoints, you can have a look <a href="%link%">to our API documentation</a>.'
+    #     back: 'Cofnij'
+
+validator:
+    password_must_match: 'Hasło w polach musi być takie same'
+    password_too_short: 'Hasło powinno mieć minimum 8 znaków długości'
+    # password_wrong_value: 'Wrong value for your current password'
+    # item_per_page_too_high: 'This will certainly kill the app'
+    # rss_limit_too_hight: 'This will certainly kill the app'
+
+flashes:
+    config:
+        notice:
+            config_saved: 'Konfiguracja zapisana. Niektóre parametry zostaną uznane po rozłączeniu'
+            password_updated: 'Hasło zaktualizowane'
+            password_not_updated_demo: "In demonstration mode, you can't change password for this user."
+            user_updated: 'Informacje zaktualizowane'
+            rss_updated: 'Informacje RSS zaktualizowane'
+            # tagging_rules_updated: 'Tagging rules updated'
+            # tagging_rules_deleted: 'Tagging rule deleted'
+            # user_added: 'User "%username%" added'
+            # rss_token_updated: 'RSS token updated'
+    entry:
+        notice:
+            # entry_already_saved: 'Entry already saved on %date%'
+            # entry_saved: 'Entry saved'
+            # entry_updated: 'Entry updated'
+            # entry_reloaded: 'Entry reloaded'
+            # entry_reload_failed: 'Failed to reload entry'
+            entry_archived: 'Wpis dodany do archiwum'
+            entry_unarchived: 'Wpis usunięty z archiwum'
+            entry_starred: 'Wpis oznaczony gwiazdką'
+            entry_unstarred: 'Wpis odznaczony gwiazdką'
+            entry_deleted: 'Wpis usunięty'
+    tag:
+        notice:
+            # tag_added: 'Tag added'
+    import:
+        notice:
+            # failed: 'Import failed, please try again.'
+            # failed_on_file: 'Error while processing import. Please verify your import file.'
+            # summary: 'Import summary: %imported% imported, %skipped% already saved.'
+    developer:
+        notice:
+            # client_created: 'New client created.'
+            # client_deleted: 'Client deleted'

@@ -33,21 +33,28 @@ class ConfigType extends AbstractType
             ->add('theme', ChoiceType::class, array(
                 'choices' => array_flip($this->themes),
                 'choices_as_values' => true,
+                'label' => 'config.form_settings.theme_label',
             ))
-            ->add('items_per_page')
+            ->add('items_per_page', null, array(
+                'label' => 'config.form_settings.items_per_page_label',
+            ))
             ->add('reading_speed', ChoiceType::class, array(
+                'label' => 'config.form_settings.reading_speed.label',
                 'choices' => array(
-                    'I read ~100 words per minute' => '0.5',
-                    'I read ~200 words per minute' => '1',
-                    'I read ~300 words per minute' => '1.5',
-                    'I read ~400 words per minute' => '2',
+                    'config.form_settings.reading_speed.100_word' => '0.5',
+                    'config.form_settings.reading_speed.200_word' => '1',
+                    'config.form_settings.reading_speed.300_word' => '1.5',
+                    'config.form_settings.reading_speed.400_word' => '2',
                 ),
             ))
             ->add('language', ChoiceType::class, array(
                 'choices' => array_flip($this->languages),
                 'choices_as_values' => true,
+                'label' => 'config.form_settings.language_label',
             ))
-            ->add('save', SubmitType::class)
+            ->add('save', SubmitType::class, array(
+                'label' => 'config.form.save',
+            ))
         ;
     }
 

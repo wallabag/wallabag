@@ -1,13 +1,15 @@
 {% extends "WallabagCoreBundle::layout.html.twig" %}
 
-{% block title "Tags" %}
+{% block title %}{{ 'tag.page_title'|trans }}{% endblock %}
 
 {% block content %}
-    {% if tags is empty %}
-        <div class="messages warning"><p>{% trans %}No tags found.{% endtrans %}</p></div>
-    {% else %}
-        {% for tag in tags %}
-            {{tag.label}}
-        {% endfor %}
-    {% endif %}
+    <div class="results">
+        <div class="nb-results">{{ 'tag.list.number_on_the_page'|transchoice(tags.count) }}</div>
+    </div>
+
+    <ul>
+    {% for tag in tags %}
+        <li id="tag-{{ tag.id|e }}">{{tag.label}} ({{ tag.entries.getValues | length }})</li>
+    {% endfor %}
+    </ul>
 {% endblock %}

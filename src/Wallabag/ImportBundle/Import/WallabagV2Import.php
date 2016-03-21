@@ -27,7 +27,7 @@ class WallabagV2Import extends WallabagV1Import implements ImportInterface
      */
     public function getDescription()
     {
-        return 'This importer will import all your wallabag v2 articles. Go to All articles, then, on the export sidebar, click on "JSON". You will have a "All articles.json" file.';
+        return 'import.wallabag_v2.description';
     }
 
     /**

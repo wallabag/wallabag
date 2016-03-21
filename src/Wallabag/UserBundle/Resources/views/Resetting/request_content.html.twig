@@ -1,8 +1,10 @@
 {% trans_default_domain 'FOSUserBundle' %}
+
 <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
     <div class="card-content">
         <div class="row">
-        <p>{% trans %}Enter your email address below and we'll send you password reset instructions.{% endtrans %}</p>
+            <p>{{ 'security.resetting.description'|trans({}, "messages") }}</p>
+
             {% for flashMessage in app.session.flashbag.get('notice') %}
                 <span class="black-text"><p>{{ flashMessage }}</p></span>
             {% endfor %}
@@ -18,7 +20,9 @@
         </div>
     </div>
     <div class="card-action center">
-        <a href="{{ path('fos_user_security_login') }}" class="waves-effect waves-light grey btn"><i class="material-icons left"></i> {% trans %}Login{% endtrans %}</a>
+        <a href="{{ path('fos_user_security_login') }}" class="waves-effect waves-light grey btn">
+            <i class="material-icons left"></i> {{ 'security.login.submit'|trans({}, "messages") }}
+        </a>
         <button class="btn waves-effect waves-light" type="submit" name="send">
             {{ 'resetting.request.submit'|trans }}
         </button>

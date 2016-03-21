@@ -86,7 +86,8 @@
         "doctrine/doctrine-fixtures-bundle": "~2.2",
         "sensio/generator-bundle": "^3.0",
         "phpunit/phpunit": "~4.4",
-        "symfony/phpunit-bridge": "^2.7"
+        "symfony/phpunit-bridge": "^2.7",
+        "fabpot/php-cs-fixer": "~1.9"
     },
     "scripts": {
         "build-parameters": [

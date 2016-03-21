@@ -17,8 +17,8 @@ class PocketController extends Controller
     {
         $pocket = $this->get('wallabag_import.pocket.import');
         $form = $this->createFormBuilder($pocket)
-            ->add('read', CheckboxType::class, array(
-                'label' => 'Mark all as read',
+            ->add('mark_as_read', CheckboxType::class, array(
+                'label' => 'import.form.mark_as_read_label',
                 'required' => false,
             ))
             ->getForm();
@@ -39,7 +39,7 @@ class PocketController extends Controller
             ->getRequestToken($this->generateUrl('import', array(), UrlGeneratorInterface::ABSOLUTE_URL));
 
         $this->get('session')->set('import.pocket.code', $requestToken);
-        $this->get('session')->set('read', $request->request->get('form')['read']);
+        $this->get('session')->set('mark_as_read', $request->request->get('form')['mark_as_read']);
 
         return $this->redirect(
             'https://getpocket.com/auth/authorize?request_token='.$requestToken.'&redirect_uri='.$this->generateUrl('import_pocket_callback', array(), UrlGeneratorInterface::ABSOLUTE_URL),
@@ -52,10 +52,11 @@ class PocketController extends Controller
      */
     public function callbackAction()
     {
-        $message = 'Import failed, please try again.';
+        $message = 'flashes.import.notice.failed';
         $pocket = $this->get('wallabag_import.pocket.import');
-        $markAsRead = $this->get('session')->get('read');
-        $this->get('session')->remove('read');
+
+        $markAsRead = $this->get('session')->get('mark_as_read');
+        $this->get('session')->remove('mark_as_read');
 
         // something bad happend on pocket side
         if (false === $pocket->authorize($this->get('session')->get('import.pocket.code'))) {
@@ -69,7 +70,10 @@ class PocketController extends Controller
 
         if (true === $pocket->setMarkAsRead($markAsRead)->import()) {
             $summary = $pocket->getSummary();
-            $message = 'Import summary: '.$summary['imported'].' imported, '.$summary['skipped'].' already saved.';
+            $message = $this->get('translator')->trans('flashes.import.notice.summary', array(
+                '%imported%' => $summary['imported'],
+                '%skipped%' => $summary['skipped'],
+            ));
         }
 
         $this->get('session')->getFlashBag()->add(

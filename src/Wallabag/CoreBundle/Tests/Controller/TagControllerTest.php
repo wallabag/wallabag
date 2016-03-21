@@ -30,7 +30,7 @@ class TagControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/view/'.$entry->getId());
 
-        $form = $crawler->filter('button[id=tag_save]')->form();
+        $form = $crawler->filter('form[name=tag]')->form();
 
         $data = array(
             'tag[label]' => $this->tagName,

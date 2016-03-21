@@ -49,7 +49,7 @@ class DeveloperController extends Controller
 
             $this->get('session')->getFlashBag()->add(
                 'notice',
-                'New client created.'
+                'flashes.developer.notice.client_created'
             );
 
             return $this->render('WallabagCoreBundle:Developer:client_parameters.html.twig', array(
@@ -80,7 +80,7 @@ class DeveloperController extends Controller
 
         $this->get('session')->getFlashBag()->add(
             'notice',
-            'Client deleted'
+            'flashes.developer.notice.client_deleted'
         );
 
         return $this->redirect($this->generateUrl('developer'));

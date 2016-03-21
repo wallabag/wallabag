@@ -17,22 +17,30 @@ class NewUserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', TextType::class, array('required' => true))
+            ->add('username', TextType::class, array(
+                'required' => true,
+                'label' => 'config.form_new_user.username_label',
+            ))
             ->add('plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
-                'invalid_message' => 'The password fields must match',
-                'first_options' => array('label' => 'Password'),
-                'second_options' => array('label' => 'Repeat new password'),
+                'invalid_message' => 'validator.password_must_match',
+                'first_options' => array('label' => 'config.form_new_user.password_label'),
+                'second_options' => array('label' => 'config.form_new_user.repeat_new_password_label'),
                 'constraints' => array(
                     new Constraints\Length(array(
                         'min' => 8,
-                        'minMessage' => 'Password should by at least 8 chars long',
+                        'minMessage' => 'validator.password_too_short',
                     )),
                     new Constraints\NotBlank(),
                 ),
+                'label' => 'config.form_new_user.plain_password_label',
             ))
-            ->add('email', EmailType::class)
-            ->add('save', SubmitType::class)
+            ->add('email', EmailType::class, array(
+                'label' => 'config.form_new_user.email_label',
+            ))
+            ->add('save', SubmitType::class, array(
+                'label' => 'config.form.save',
+            ))
         ;
     }
 

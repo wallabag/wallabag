@@ -1,5 +1,6 @@
 {% extends "WallabagCoreBundle::layout.html.twig" %}
-{% block title %}{% trans %}Import > Wallabag v1{% endtrans %}{% endblock %}
+
+{% block title %}{{ 'import.wallabag_v1.page_title'|trans }}{% endblock %}
 
 {% block content %}
 <div class="row">
@@ -7,7 +8,8 @@
         <div class="card-panel settings">
             <div class="row">
                 <blockquote>{{ import.description|trans }}</blockquote>
-                <p>{% trans %}Please select your wallabag export and click on the below button to upload and import it.{% endtrans %}</p>
+                <p>{{ 'import.wallabag_v1.how_to'|trans }}</p>
+
                 <div class="col s12">
                     {{ form_start(form, {'method': 'POST'}) }}
                         {{ form_errors(form) }}
@@ -15,7 +17,7 @@
                             <div class="file-field input-field col s12">
                                 {{ form_errors(form.file) }}
                                 <div class="btn">
-                                    <span>{% trans %}File{% endtrans %}</span>
+                                    <span>{{ form.file.vars.label|trans }}</span>
                                     {{ form_widget(form.file) }}
                                 </div>
                                 <div class="file-path-wrapper">
@@ -23,15 +25,15 @@
                                 </div>
                             </div>
                             <div class="input-field col s6 with-checkbox">
-                                <h6>{% trans %}Mark all as read ?{% endtrans %}</h6>
+                                <h6>{{ 'import.form.mark_as_read_title'|trans }}</h6>
                                 {{ form_widget(form.mark_as_read) }}
-                                <label for="upload_import_file_mark_as_read">{% trans %}Mark all imported entries as read{% endtrans %}</label>
+                                {{ form_label(form.mark_as_read) }}
                             </div>
                         </div>
-                        <div class="hidden">{{ form_rest(form) }}</div>
-                        <button class="btn waves-effect waves-light" type="submit" name="action">
-                            {% trans %}Upload file{% endtrans %}
-                        </button>
+
+                        {{ form_widget(form.save, { 'attr': {'class': 'btn waves-effect waves-light'} }) }}
+
+                        {{ form_rest(form) }}
                     </form>
                 </div>
             </div>

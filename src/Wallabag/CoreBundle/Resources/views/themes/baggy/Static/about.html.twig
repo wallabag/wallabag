@@ -1,57 +1,57 @@
 {% extends "WallabagCoreBundle::layout.html.twig" %}
 
-{% block title %}{% trans %}About{% endtrans %}{% endblock %}
+{% block title %}{{ 'about.page_title'|trans }}{% endblock %}
 
 {% block content %}
-    <h2>{% trans %}Who is behind wallabag{% endtrans %}</h2>
+    <h2>{{ 'about.top_menu.who_behind_wallabag'|trans }}</h2>
 
     <dl>
-        <dt>{% trans %}Developed by{% endtrans %}</dt>
-        <dd><a href="mailto:nicolas@loeuillet.org">Nicolas Lœuillet</a> — <a href="http://cdetc.fr">{% trans %}website{% endtrans %}</a></dd>
-        <dd>Thomas Citharel — <a href="https://tcit.fr">{% trans %}website{% endtrans %}</a></dd>
-        <dd>Jérémy Benoist — <a href="http://www.j0k3r.net">{% trans %}website{% endtrans %}</a></dd>
+        <dt>{{ 'about.who_behind_wallabag.developped_by'|trans }}</dt>
+        <dd><a href="mailto:nicolas@loeuillet.org">Nicolas Lœuillet</a> — <a href="http://cdetc.fr">{{ 'about.who_behind_wallabag.website'|trans }}</a></dd>
+        <dd>Thomas Citharel — <a href="https://tcit.fr">{{ 'about.who_behind_wallabag.website'|trans }}</a></dd>
+        <dd>Jérémy Benoist — <a href="http://www.j0k3r.net">{{ 'about.who_behind_wallabag.website'|trans }}</a></dd>
 
-        <dt>{% trans %}And many others contributors ♥{% endtrans %} <a href="https://github.com/wallabag/wallabag/graphs/contributors">{% trans %}on Github{% endtrans %}</a></dt>
+        <dt>{{ 'about.who_behind_wallabag.many_contributors'|trans|raw }}</dt>
 
-        <dt>{% trans %}Project website{% endtrans %}</dt>
+        <dt>{{ 'about.who_behind_wallabag.project_website'|trans }}</dt>
         <dd><a href="https://www.wallabag.org">https://www.wallabag.org</a></dd>
 
-        <dt>{% trans %}License{% endtrans %}: <a href="http://en.wikipedia.org/wiki/MIT_License">MIT</a></dt>
+        <dt>{{ 'about.who_behind_wallabag.license'|trans }}: <a href="http://en.wikipedia.org/wiki/MIT_License">MIT</a></dt>
 
-        <dt>{% trans %}Version{% endtrans %}: {{ version }}</dt>
+        <dt>{{ 'about.who_behind_wallabag.version'|trans }}: {{ version }}</dt>
     </dl>
 
-    <h2>{% trans %}Getting help{% endtrans %}</h2>
+    <h2>{{ 'about.top_menu.getting_help'|trans }}</h2>
 
     <dl>
-        <dt>{% trans %}Documentation{% endtrans %}</dt>
+        <dt>{{ 'about.getting_help.documentation'|trans }}</dt>
         <dd><a href="https://doc.wallabag.org/en">english</a></dd>
         <dd><a href="https://doc.wallabag.org/fr">français</a></dd>
         <dd><a href="https://doc.wallabag.org/de">deutsch</a></dd>
 
-        <dt>{% trans %}Bug reports{% endtrans %}</dt>
-        <dd><a href="https://support.wallabag.org">{% trans %}On our support website{% endtrans %}</a> {% trans %}or{% endtrans %} <a href="https://github.com/wallabag/wallabag/issues">{% trans %}on Github{% endtrans %}</a></dd>
+        <dt>{{ 'about.getting_help.bug_reports'|trans }}</dt>
+        <dd>{{ 'about.getting_help.support'|trans|raw }}</dd>
     </dl>
 
-    <h2>{% trans %}Helping wallabag{% endtrans %}</h2>
+    <h2>{{ 'about.top_menu.helping'|trans }}</h2>
 
-    <p>{% trans %}wallabag is free and opensource. You can help us:{% endtrans %}</p>
+    <p>{{ 'about.helping.description'|trans }}</p>
 
     <dl>
-        <dt>{% trans %}wallabag is free and opensource. You can help us:{% endtrans %}</dt>
-        <dd>by contributing to the project: <a href="https://github.com/wallabag/wallabag/issues/1254">an issue lists all our needs</a></dd>
-        <dd><a href="{{ paypal_url }}">{% trans %}via Paypal{% endtrans %}</a></dd>
+        <dt>{{ 'about.helping.description'|trans }}</dt>
+        <dd>{{ 'about.helping.by_contributing_2'|trans }} <a href="https://github.com/wallabag/wallabag/issues/1254">{{ 'about.helping.by_contributing'|trans }}</a></dd>
+        <dd><a href="{{ paypal_url }}">{{ 'about.helping.by_paypal'|trans }}</a></dd>
     </dl>
 
-    <h2>{% trans %}Contributors{% endtrans %}</h2>
-    <p><a href="https://github.com/wallabag/wallabag/graphs/contributors">{% trans %}Thank you to contributors on wallabag web application{% endtrans %}</a></p>
+    <h2>{{ 'about.top_menu.contributors'|trans }}</h2>
+    <p><a href="https://github.com/wallabag/wallabag/graphs/contributors">{{ 'about.contributors.description'|trans }}</a></p>
 
-    <h2>{% trans %}Third-party libraries{% endtrans %}</h2>
-    <p>{% trans %}Here are the list of third-party libraries used in wallabag (with their licenses):{% endtrans %}</p>
-    <table>
+    <h2>{{ 'about.top_menu.third_party'|trans }}</h2>
+    <p>{{ 'about.third_party.description'|trans }}</p>
+    <table class="striped">
         <tr>
-            <th>{% trans %}Package{% endtrans %}</th>
-            <th>{% trans %}License{% endtrans %}</th>
+            <th>{{ 'about.third_party.package'|trans }}</th>
+            <th>{{ 'about.third_party.license'|trans }}</th>
         </tr>
         <tr><td>behat/transliterator</td><td>Artistic 1.0</td></tr>
         <tr><td>CraueConfigBundle</td><td>MIT</td></tr>

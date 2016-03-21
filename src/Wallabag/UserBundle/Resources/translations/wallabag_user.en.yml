@@ -1,7 +1,11 @@
 # Two factor mail
-auth_code.mailer.subject: 'Wallabag authentication Code'
-auth_code.mailer.body.hello: "Hi %user%,"
-auth_code.mailer.body.first_para: "Since you enable two factor authentication on your wallabag account and you just logged in from a new device (computer, phone, etc.), we send you a code to validate your connection."
-auth_code.mailer.body.second_para: "Here is the code:"
-auth_code.mailer.body.support: "Please don't hesitate to contact us if you have any problems:"
-auth_code.mailer.body.signature: "The wallabag team"
+auth_code:
+    on: 'on'
+    mailer:
+        subject: 'Wallabag authentication Code'
+        body:
+            hello: "Hi %user%,"
+            first_para: "Since you enable two factor authentication on your wallabag account and you just logged in from a new device (computer, phone, etc.), we send you a code to validate your connection."
+            second_para: "Here is the code:"
+            support: "Please don't hesitate to contact us if you have any problems:"
+            signature: "The wallabag team"

@@ -7,7 +7,7 @@
         <span class="black-text">{{ form_errors(form.url) }}</span>
     {% endif %}
 
-    {{ form_widget(form.url, { 'attr': {'autocomplete': 'off', 'placeholder': 'http://website'} }) }}
+    {{ form_widget(form.url, { 'attr': {'autocomplete': 'off', 'placeholder': 'entry.new.placeholder'} }) }}
 
-    <div class="hidden">{{ form_rest(form) }}</div>
+    {{ form_rest(form) }}
 </form>

@@ -1,20 +1,20 @@
 {% extends "WallabagCoreBundle::layout.html.twig" %}
 
-{% block title %}{% trans %}Client parameters{% endtrans %}{% endblock %}
+{% block title %}{{ 'developer.client_parameter.page_title'|trans }}{% endblock %}
 
 {% block content %}
 <div class="row">
     <div class="col s12">
         <div class="card-panel settings">
             <div class="row">
-                <p>{% trans %}Here are your client parameters.{% endtrans %}</p>
+                <p>{{ 'developer.client_parameter.page_description'|trans }}</p>
                 <ul>
-                    <li>{% trans %}Client ID{% endtrans %}: <strong><pre>{{ client_id }}</pre></strong></li>
-                    <li>{% trans %}Client secret{% endtrans %}: <strong><pre>{{ client_secret }}</pre></strong></li>
+                    <li>{{ 'developer.client_parameter.field_id'|trans }}: <strong><pre>{{ client_id }}</pre></strong></li>
+                    <li>{{ 'developer.client_parameter.field_secret'|trans }}: <strong><pre>{{ client_secret }}</pre></strong></li>
                 </ul>
 
-                <a href="{{ path('developer') }}" class="waves-effect waves-light grey btn">{% trans %}Back{% endtrans %}</a>
-                <a href="{{ path('developer_howto_firstapp') }}" class="btn waves-effect waves-light">{% trans %}Read the howto "Create my first application"{% endtrans %}</a>
+                <a href="{{ path('developer') }}" class="waves-effect waves-light grey btn">{{ 'developer.client_parameter.back'|trans }}</a>
+                <a href="{{ path('developer_howto_firstapp') }}" class="btn waves-effect waves-light">{{ 'developer.client_parameter.read_howto'|trans }}</a>
             </div>
         </div>
     </div>

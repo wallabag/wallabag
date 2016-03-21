@@ -18,9 +18,9 @@
                 <description>
                     <![CDATA[
                     {%- if entry.readingTime > 0 -%}
-                        {% trans %}estimated reading time :{% endtrans %} {{ entry.readingTime }} min
+                        {{ 'entry.list.reading_time_minutes'|trans({'%readingTime%': entry.readingTime}) }}
                     {%- else -%}
-                        {% trans %}estimated reading time :{% endtrans %} &lt; 1 min
+                        {{ 'entry.list.reading_time_less_one_minute'|trans|raw }}
                     {%- endif %}
 
                     {{ entry.content|raw -}}

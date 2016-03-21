@@ -1,6 +1,6 @@
 {% extends "WallabagCoreBundle::layout.html.twig" %}
 
-{% block title %}{% trans %}How to create my first application{% endtrans %}{% endblock %}
+{% block title %}{{ 'developer.howto.page_title'|trans }}{% endblock %}
 
 {% block css %}
     {{ parent() }}
@@ -13,10 +13,10 @@
         <div class="card-panel settings">
 
             <div class="row">
-                <p>{% trans %}The following commands make use of the <a href="https://github.com/jkbrzt/httpie">HTTPie library</a>. Make sure it is installed on your system before using it.{% endtrans %}</p>
-                <p>{% trans %}You need a token to communicate between your 3rd application and wallabag API.{% endtrans %}</p>
-                <p>{% trans with {'%link%': path('developer_create_client')} %}To create this token, you need <a href="%link%">to create a new client</a>.{% endtrans %}</p>
-                <p>{% trans %}Now, create your token (replace client_id, client_secret, username and password with the good values):{% endtrans %}</p>
+                <p>{{ 'developer.howto.description.paragraph_1'|trans|raw }}</p>
+                <p>{{ 'developer.howto.description.paragraph_2'|trans }}</p>
+                <p>{{ 'developer.howto.description.paragraph_3'|trans({'%link%': path('developer_create_client')})|raw }}</p>
+                <p>{{ 'developer.howto.description.paragraph_4'|trans }}</p>
                 <p>
                     <pre><code class="language-bash">http POST http://v2.wallabag.org/oauth/v2/token \
     grant_type=password \
@@ -25,7 +25,7 @@
     username=yourUsername \
     password=yourPassw0rd</code></pre>
                 </p>
-                <p>{% trans %}The API will return a response like this:{% endtrans %}</p>
+                <p>{{ 'developer.howto.description.paragraph_5'|trans }}</p>
                 <p>
                     <pre><code class="language-bash">HTTP/1.1 200 OK
 Cache-Control: no-store, private
@@ -45,14 +45,14 @@ X-Powered-By: PHP/5.5.9-1ubuntu4.13
     "token_type": "bearer"
 }</code></pre>
                 </p>
-                <p>{% trans %}The access_token is useful to do a call to the API endpoint. For example:{% endtrans %}</p>
+                <p>{{ 'developer.howto.description.paragraph_6'|trans }}</p>
                 <p>
                     <pre><code class="language-bash">http GET http://v2.wallabag.org/api/entries.json \
     "Authorization:Bearer ZWFjNjA3ZWMwYWVmYzRkYTBlMmQ3NTllYmVhOGJiZDE0ZTg1NjE4MjczOTVlNzM0ZTRlMWQ0MmRlMmYwNTk5Mw"</code></pre>
                 </p>
-                <p>{% trans %}This call will return all the entries for your user.{% endtrans %}</p>
-                <p>{% trans with {'%link%': path('nelmio_api_doc_index')} %}If you want to see all the API endpoints, you can have a look <a href="%link%">to our API documentation</a>.{% endtrans %}</p>
-                <p><a href="{{ path('developer') }}" class="waves-effect waves-light grey btn">{% trans %}Back{% endtrans %}</a></p>
+                <p>{{ 'developer.howto.description.paragraph_7'|trans }}</p>
+                <p>{{ 'developer.howto.description.paragraph_8'|trans({'%link%': path('nelmio_api_doc_index')})|raw }}</p>
+                <p><a href="{{ path('developer') }}" class="waves-effect waves-light grey btn">{{ 'developer.howto.back'|trans }}</a></p>
             </div>
 
         </div>

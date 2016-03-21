@@ -1,55 +1,66 @@
 {% extends "WallabagCoreBundle::layout.html.twig" %}
 
-{% block title %}{% trans %}Quickstart{% endtrans %}{% endblock %}
+{% block title %}{{ 'quickstart.page_title'|trans }}{% endblock %}
 
 {% block content %}
 
-    <h3>{% trans %}Welcome to wallabag!{% endtrans %}</h3>
-    <p>{% trans %}We'll accompany you to visit wallabag and show you some features which can interess you.{% endtrans %}</p>
-    <p>{% trans %}Follow us!{% endtrans %}</p>
-    <h4>{% trans %}Configure the application{% endtrans %}</h4>
+    <h3>{{ 'quickstart.intro.title'|trans }}</h3>
+    <p>{{ 'quickstart.intro.paragraph_1'|trans }}</p>
+    <p>{{ 'quickstart.intro.paragraph_2'|trans }}</p>
+
+    <h4>{{ 'quickstart.configure.title'|trans }}</h4>
     <ul>
-        <li><a href="{{ path('config') }}">{% trans %}Change language and design{% endtrans %}</a></li>
-        <li><a href="{{ path('config') }}#set2">{% trans %}Enable RSS feeds{% endtrans %}</a></li>
-        <li><a href="{{ path('config') }}#set5">{% trans %}Write rules to automatically tag your articles{% endtrans %}</a></li>
+        <li><a href="{{ path('config') }}">{{ 'quickstart.configure.language'|trans }}</a></li>
+        <li><a href="{{ path('config') }}#set2">{{ 'quickstart.configure.rss'|trans }}</a></li>
+        <li><a href="{{ path('config') }}#set5">{{ 'quickstart.configure.tagging_rules'|trans }}</a></li>
     </ul>
+
     {% if is_granted('ROLE_SUPER_ADMIN') %}
-        <h4>{% trans %}Administration{% endtrans %}</h4>
-        <p>{% trans %}As a administrator, you have privileges on wallabag. You can:{% endtrans %}</p>
-        <ul>
-            <li><a href="{{ path('config') }}#set6">{% trans %}Create a new user{% endtrans %}</a></li>
-            <li><a href="{{ path('craue_config_settings_modify') }}#set-analytics">{% trans %}Configure analytics{% endtrans %}</a></li>
-            <li><a href="{{ path('craue_config_settings_modify') }}#set-entry">{% trans %}Enable some parameters about article sharing{% endtrans %}</a></li>
-            <li><a href="{{ path('craue_config_settings_modify') }}#set-export">{% trans %}Configure export{% endtrans %}</a></li>
-            <li><a href="{{ path('craue_config_settings_modify') }}#set-import">{% trans %}Configure import{% endtrans %}</a></li>
-        </ul>
+    <h4>{{ 'quickstart.admin.title'|trans }}</h4>
+    <p>{{ 'quickstart.admin.description'|trans }}</p>
+    <ul>
+        <li><a href="{{ path('config') }}#set6">{{ 'quickstart.admin.new_user'|trans }}</a></li>
+        <li><a href="{{ path('craue_config_settings_modify') }}#set-analytics">{{ 'quickstart.admin.analytics'|trans }}</a></li>
+        <li><a href="{{ path('craue_config_settings_modify') }}#set-entry">{{ 'quickstart.admin.sharing'|trans }}</a></li>
+        <li><a href="{{ path('craue_config_settings_modify') }}#set-export">{{ 'quickstart.admin.export'|trans }}</a></li>
+        <li><a href="{{ path('craue_config_settings_modify') }}#set-import">{{ 'quickstart.admin.import'|trans }}</a></li>
+    </ul>
     {% endif %}
-    <h4>{% trans %}First steps{% endtrans %}</h4>
+
+    <h4>{{ 'quickstart.first_steps.title'|trans }}</h4>
     <ul>
-        <li><a href="{{ path('new') }}">{% trans %}Save your first article{% endtrans %}</a></li>
-        <li><a href="{{ path('unread') }}">{% trans %}And classify it!{% endtrans %}</a></li>
+        <li><a href="{{ path('new') }}">{{ 'quickstart.first_steps.new_article'|trans }}</a></li>
+        <li><a href="{{ path('unread') }}">{{ 'quickstart.first_steps.unread_articles'|trans }}</a></li>
     </ul>
-    <h4>{% trans %}Migrate from an existing service{% endtrans %}</h4>
-    <p>{% trans %}You're using an other service? We'll help you to retrieve your data on wallabag.{% endtrans %}</p>
+
+    <h4>{{ 'quickstart.migrate.title'|trans }}</h4>
+    <p>{{ 'quickstart.migrate.description'|trans }}</p>
     <ul>
-        <li><a href="{{ path('import_pocket') }}">{% trans %}Migrate from Pocket{% endtrans %}</a></li>
-        <li><a href="{{ path('import_wallabag_v1') }}">{% trans %}Migrate from wallabag v1{% endtrans %}</a></li>
-        <li><a href="{{ path('import_wallabag_v2') }}">{% trans %}Migrate from wallabag v2{% endtrans %}</a></li>
+        <li><a href="{{ path('import_pocket') }}">{{ 'quickstart.migrate.pocket'|trans }}</a></li>
+        <li><a href="{{ path('import_wallabag_v1') }}">{{ 'quickstart.migrate.wallabag_v1'|trans }}</a></li>
+        <li><a href="{{ path('import_wallabag_v2') }}">{{ 'quickstart.migrate.wallabag_v2'|trans }}</a></li>
     </ul>
-    <h4>{% trans %}Full documentation{% endtrans %}</h4>
+
+    <h4>{{ 'quickstart.developer.title'|trans }}</h4>
     <ul>
-        <li><a href="http://doc.wallabag.org/en/v2/user/annotations.html">{% trans %}Annotate your article{% endtrans %}</a></li>
-        <li><a href="http://doc.wallabag.org/en/v2/user/download_articles.html">{% trans %}Convert your articles into ePUB or PDF{% endtrans %}</a></li>
-        <li><a href="http://doc.wallabag.org/en/v2/user/filters.html">{% trans %}See how you can look for an article by using search engine and filters{% endtrans %}</a></li>
-        <li><a href="http://doc.wallabag.org/en/v2/user/errors_during_fetching.html">{% trans %}What can I do if an article encounters errors during fetching?{% endtrans %}</a></li>
-        <li><a href="http://doc.wallabag.org/">{% trans %}And so many other articles!{% endtrans %}</a></li>
+        <li><a href="{{ path('developer') }}">{{ 'quickstart.developer.create_application'|trans }}</a></li>
     </ul>
-    <h4>{% trans %}Support{% endtrans %}</h4>
-    <p>{% trans %}If you need some help, we are here for you.{% endtrans %}</p>
+
+    <h4>{{ 'quickstart.docs.title'|trans }}</h4>
     <ul>
-        <li><a href="https://github.com/wallabag/wallabag/issues/">{% trans %}On GitHub{% endtrans %}</a></li>
-        <li><a href="mailto:hello@wallabag.org">{% trans %}By email{% endtrans %}</a></li>
-        <li><a href="https://gitter.im/wallabag/wallabag">{% trans %}On Gitter{% endtrans %}</a></li>
+        <li><a href="http://doc.wallabag.org/en/v2/user/annotations.html">{{ 'quickstart.docs.annotate'|trans }}</a></li>
+        <li><a href="http://doc.wallabag.org/en/v2/user/download_articles.html">{{ 'quickstart.docs.export'|trans }}</a></li>
+        <li><a href="http://doc.wallabag.org/en/v2/user/filters.html">{{ 'quickstart.docs.search_filters'|trans }}</a></li>
+        <li><a href="http://doc.wallabag.org/en/v2/user/errors_during_fetching.html">{{ 'quickstart.docs.fetching_errors'|trans }}</a></li>
+        <li><a href="http://doc.wallabag.org/">{{ 'quickstart.docs.all_docs'|trans }}</a></li>
+    </ul>
+
+    <h4>{{ 'quickstart.support.title'|trans }}</h4>
+    <p>{{ 'quickstart.support.description'|trans }}</p>
+    <ul>
+        <li><a href="https://github.com/wallabag/wallabag/issues/">{{ 'quickstart.support.github'|trans }}</a></li>
+        <li><a href="mailto:hello@wallabag.org">{{ 'quickstart.support.email'|trans }}</a></li>
+        <li><a href="https://gitter.im/wallabag/wallabag">{{ 'quickstart.support.gitter'|trans }}</a></li>
     </ul>
 
 {% endblock %}

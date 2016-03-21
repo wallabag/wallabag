@@ -40,7 +40,7 @@ class Config
      * @Assert\Range(
      *      min = 1,
      *      max = 100000,
-     *      maxMessage = "This will certainly kill the app"
+     *      maxMessage = "validator.item_per_page_too_high"
      * )
      * @ORM\Column(name="items_per_page", type="integer", nullable=false)
      */
@@ -68,7 +68,7 @@ class Config
      * @Assert\Range(
      *      min = 1,
      *      max = 100000,
-     *      maxMessage = "This will certainly kill the app"
+     *      maxMessage = "validator.rss_limit_too_hight"
      * )
      */
     private $rssLimit;

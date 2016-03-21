@@ -33,32 +33,32 @@
 {% block menu %}
     <button id="menu" class="icon icon-menu desktopHide"><span>Menu</span></button>
     <ul id="links" class="links">
-        <li><a href="{{ path('unread') }}">{% trans %}unread{% endtrans %}</a></li>
-        <li><a href="{{ path('starred') }}">{% trans %}favorites{% endtrans %}</a></li>
-        <li><a href="{{ path('archive') }}">{% trans %}archive{% endtrans %}</a></li>
-        <li><a href="{{ path('all') }}">{% trans %}all{% endtrans %}</a></li>
-        <li><a href="{{ path('tag') }}">{% trans %}tags{% endtrans %}</a></li>
-        <li><a href="{{ path('new') }}">{% trans %}save a link{% endtrans %}</a></li>
-        <li style="position: relative;"><a href="javascript: void(null);" id="search">{% trans %}search{% endtrans %}</a>
+        <li><a href="{{ path('unread') }}">{{ 'menu.left.unread'|trans }}</a></li>
+        <li><a href="{{ path('starred') }}">{{ 'menu.left.starred'|trans }}</a></li>
+        <li><a href="{{ path('archive') }}">{{ 'menu.left.archive'|trans }}</a></li>
+        <li><a href="{{ path('all') }}">{{ 'menu.left.all_articles'|trans }}</a></li>
+        <li><a href="{{ path('tag') }}">{{ 'menu.left.tags'|trans }}</a></li>
+        <li><a href="{{ path('new') }}">{{ 'menu.left.save_link'|trans }}</a></li>
+        <li style="position: relative;"><a href="javascript: void(null);" id="search">{{ 'menu.left.search'|trans }}</a>
             <div id="search-form" class="messages info popup-form">
                 <form method="get" action="index.php">
-                    <h2>{% trans %}Search{% endtrans %}</h2>
+                    <h2>{{ 'menu.left.search'|trans }}</h2>
                     <a href="javascript: void(null);" id="search-form-close" class="close-button--popup close-button">&times;</a>
                     <input type="hidden" name="view" value="search">
-                    <input required placeholder="{% trans %}Enter your search here{% endtrans %}" type="text" name="search" id="searchfield"><br>
-                    <input id="submit-search" type="submit" value="{% trans %}Search{% endtrans %}">
+                    <input required placeholder="{{ 'menu.search_form.input_label'|trans }}" type="text" name="search" id="searchfield"><br>
+                    <input id="submit-search" type="submit" value="{{ 'menu.left.search'|trans }}">
                 </form>
             </div>
         </li>
-        <li><a href="{{ path('config') }}">{% trans %}config{% endtrans %}</a></li>
+        <li><a href="{{ path('config') }}">{{ 'menu.left.config'|trans }}</a></li>
         {% if is_granted('ROLE_SUPER_ADMIN') %}
-            <li><a href="{{ path('craue_config_settings_modify') }}">{% trans %}internal settings{% endtrans %}</a></li>
+            <li><a href="{{ path('craue_config_settings_modify') }}">{{ 'menu.left.internal_settings'|trans }}</a></li>
         {% endif %}
-        <li><a href="{{ path('import') }}">{% trans %}import{% endtrans %}</a></li>
-        <li><a href="{{ path('howto') }}">{% trans %}howto{% endtrans %}</a></li>
-        <li><a href="{{ path('developer') }}">{% trans %}Developer{% endtrans %}</a></li>
-        <li><a href="{{ path('about') }}">{% trans %}about{% endtrans %}</a></li>
-        <li><a class="icon icon-power" href="{{ path('fos_user_security_logout') }}" title="{% trans %}logout{% endtrans %}">{% trans %}logout{% endtrans %}</a></li>
+        <li><a href="{{ path('import') }}">{{ 'menu.left.import'|trans }}</a></li>
+        <li><a href="{{ path('howto') }}">{{ 'menu.left.howto'|trans }}</a></li>
+        <li><a href="{{ path('developer') }}">{{ 'menu.left.developer'|trans }}</a></li>
+        <li><a href="{{ path('about') }}">{{ 'footer.wallabag.about'|trans }}</a></li>
+        <li><a class="icon icon-power" href="{{ path('fos_user_security_logout') }}">{{ 'menu.left.logout'|trans }}</a></li>
     </ul>
 {% endblock %}
 
@@ -73,6 +73,6 @@
 
 {% block footer %}
     <footer class="w600p center mt3 mb3 smaller txtright">
-        <p>{% trans %}powered by{% endtrans %} <a href="http://wallabag.org">wallabag</a></p>
+        <p>{{ 'footer.wallabag.powered_by'|trans }} <a href="http://wallabag.org">wallabag</a></p>
     </footer>
 {% endblock %}

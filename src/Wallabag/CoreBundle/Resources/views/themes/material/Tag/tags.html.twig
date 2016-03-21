@@ -1,10 +1,10 @@
 {% extends "WallabagCoreBundle::layout.html.twig" %}
 
-{% block title "Tags" %}
+{% block title %}{{ 'tag.page_title'|trans }}{% endblock %}
 
 {% block content %}
     <div class="results clearfix">
-        <div class="nb-results left">{% transchoice tags.count %}{0} There is no tag.|{1} There is one tag.|]1,Inf[ There are %count% tags.{% endtranschoice %}</div>
+        <div class="nb-results left">{{ 'tag.list.number_on_the_page'|transchoice(tags.count) }}</div>
     </div>
     <br />
     <ul class="row data">

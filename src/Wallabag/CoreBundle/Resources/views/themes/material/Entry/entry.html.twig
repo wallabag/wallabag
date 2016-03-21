@@ -2,6 +2,8 @@
 
 {% block title %}{{ entry.title|raw }} ({{ entry.domainName|removeWww }}){% endblock %}
 
+{% block body_class %}entry{% endblock %}
+
 {% block menu %}
     <div class="progress">
         <div class="determinate"></div>
@@ -17,12 +19,12 @@
             </ul>
             <ul class="right">
                 <li>
-                    <a class="waves-effect" title="{% trans %}Mark as read{% endtrans %}" href="{{ path('archive_entry', { 'id': entry.id }) }}" id="markAsRead">
+                    <a class="waves-effect" title="{{ 'entry.view.left_menu.set_as_read'|trans }}" href="{{ path('archive_entry', { 'id': entry.id }) }}" id="markAsRead">
                         <i class="{% if entry.isArchived == 0 %}mdi-action-done{% else %}mdi-content-redo{% endif %} small"></i>
                     </a>
                 </li>
                 <li>
-                    <a class="waves-effect" title="{% trans %}Favorite{% endtrans %}" href="{{ path('star_entry', { 'id': entry.id }) }}" id="setFav">
+                    <a class="waves-effect" title="{{ 'entry.view.left_menu.set_as_favorite'|trans }}" href="{{ path('star_entry', { 'id': entry.id }) }}" id="setFav">
                         <i class="{% if entry.isStarred == 0 %}mdi-action-favorite-outline{% else %}mdi-action-favorite{% endif %} small"></i>
                     </a>
                 </li>
@@ -38,7 +40,7 @@
         <li class="bold border-bottom hide-on-med-and-down">
             <a class="waves-effect collapsible-header" href="{{ path('homepage') }}">
                 <i class="mdi-action-exit-to-app small"></i>
-                <span>{% trans %}back{% endtrans %}</span>
+                <span>{{ 'entry.view.left_menu.back_to_homepage'|trans }}</span>
             </a>
             <div class="collapsible-body"></div>
         </li>
@@ -46,38 +48,38 @@
         <li class="bold border-bottom hide-on-med-and-down">
             <a class="waves-effect collapsible-header" href="{{ entry.url|e }}">
                 <i class="mdi-content-link small"></i>
-                <span>{% trans %}original article{% endtrans %}</span>
+                <span>{{ 'entry.view.left_menu.view_original_article'|trans }}</span>
             </a>
             <div class="collapsible-body"></div>
         </li>
 
         <li class="bold hide-on-med-and-down">
-            <a class="waves-effect collapsible-header" title="{% trans %}Re-fetch content{% endtrans %}" href="{{ path('reload_entry', { 'id': entry.id }) }}" id="reload">
+            <a class="waves-effect collapsible-header" title="{{ 'entry.view.left_menu.re_fetch_content'|trans }}" href="{{ path('reload_entry', { 'id': entry.id }) }}" id="reload">
                 <i class="mdi-action-autorenew small"></i>
-                <span>{% trans %}Re-fetch content{% endtrans %}</span>
+                <span>{{ 'entry.view.left_menu.re_fetch_content'|trans }}</span>
             </a>
             <div class="collapsible-body"></div>
         </li>
 
         <li class="bold hide-on-med-and-down">
-            <a class="waves-effect collapsible-header" title="{% trans %}Mark as read{% endtrans %}" href="{{ path('archive_entry', { 'id': entry.id }) }}" id="markAsRead">
+            <a class="waves-effect collapsible-header" title="{{ 'entry.view.left_menu.set_as_read'|trans }}" href="{{ path('archive_entry', { 'id': entry.id }) }}" id="markAsRead">
                 <i class="{% if entry.isArchived == 0 %}mdi-action-done{% else %}mdi-content-redo{% endif %} small"></i>
-                <span>{% if entry.isArchived == 0 %}{% trans %}Mark as read{% endtrans %}{% else %}{% trans %}Mark as unread{% endtrans %}{% endif %}</span>
+                <span>{% if entry.isArchived == 0 %}{{ 'entry.view.left_menu.set_as_read'|trans }}{% else %}{{ 'entry.view.left_menu.set_as_unread'|trans }}{% endif %}</span>
             </a>
             <div class="collapsible-body"></div>
         </li>
 
         <li class="bold hide-on-med-and-down">
-            <a class="waves-effect collapsible-header" title="{% trans %}Favorite{% endtrans %}" href="{{ path('star_entry', { 'id': entry.id }) }}" id="setFav">
+            <a class="waves-effect collapsible-header" title="{{ 'entry.view.left_menu.set_as_favorite'|trans }}" href="{{ path('star_entry', { 'id': entry.id }) }}" id="setFav">
                 <i class="{% if entry.isStarred == 0 %}mdi-action-favorite-outline{% else %}mdi-action-favorite{% endif %} small"></i>
-                <span>{% trans %}Favorite{% endtrans %}</span>
+                <span>{{ 'entry.view.left_menu.set_as_favorite'|trans }}</span>
             </a>
             <div class="collapsible-body"></div>
         </li>
         <li class="bold border-bottom hide-on-med-and-down">
-            <a class="waves-effect collapsible-header" title="{% trans %}Delete{% endtrans %}" href="{{ path('delete_entry', { 'id': entry.id }) }}">
+            <a class="waves-effect collapsible-header" title="{{ 'entry.view.left_menu.delete'|trans }}" href="{{ path('delete_entry', { 'id': entry.id }) }}">
                 <i class="mdi-action-delete small"></i>
-                <span>{% trans %}Delete{% endtrans %}</span>
+                <span>{{ 'entry.view.left_menu.delete'|trans }}</span>
             </a>
             <div class="collapsible-body"></div>
         </li>
@@ -85,7 +87,7 @@
         <li class="bold border-bottom hide-on-med-and-down">
             <a class="waves-effect collapsible-header" id="nav-btn-add-tag">
                 <i class="mdi-action-label-outline small"></i>
-                <span>{% trans %}Add a tag{% endtrans %}</span>
+                <span>{{ 'entry.view.left_menu.add_a_tag'|trans }}</span>
             </a>
             <div class="collapsible-body"></div>
         </li>
@@ -93,7 +95,7 @@
         <li class="bold">
             <a class="waves-effect collapsible-header">
                 <i class="mdi-social-share small"></i>
-                <span>{% trans %}Share{% endtrans %}</span>
+                <span>{{ 'entry.view.left_menu.share_content'|trans }}</span>
             </a>
             <div class="collapsible-body">
                 <ul>
@@ -127,8 +129,8 @@
                     {% endif %}
                     {% if craue_setting('share_mail') %}
                         <li>
-                            <a href="mailto:?subject={{ entry.title|url_encode }}&amp;body={{ entry.url|url_encode }}%20via%20@wallabagapp" class="tool email icon icon-mail" title="{% trans %}Email{% endtrans %}">
-                                <span>{% trans %}Email{% endtrans %}</span>
+                            <a href="mailto:?subject={{ entry.title|url_encode }}&amp;body={{ entry.url|url_encode }}%20via%20@wallabagapp" class="tool email icon icon-mail" title="{{ 'entry.view.left_menu.share_email_label'|trans }}">
+                                <span>{{ 'entry.view.left_menu.share_email_label'|trans }}</span>
                             </a>
                         </li>
                     {% endif %}
@@ -139,7 +141,7 @@
         <li class="bold">
             <a class="waves-effect collapsible-header">
                 <i class="mdi-file-file-download small"></i>
-                <span>{% trans %}Download{% endtrans %}</span>
+                <span>{{ 'entry.view.left_menu.download'|trans }}</span>
             </a>
             <div class="collapsible-body">
                 <ul>
@@ -155,40 +157,33 @@
         </li>
 
         <li class="bold hide-on-large-only">
-            <a class="waves-effect collapsible-header" title="{% trans %}Delete{% endtrans %}" href="{{ path('delete_entry', { 'id': entry.id }) }}">
+            <a class="waves-effect collapsible-header" title="{{ 'entry.view.left_menu.delete'|trans }}" href="{{ path('delete_entry', { 'id': entry.id }) }}">
                 <i class="mdi-action-delete small"></i>
-                <span>{% trans %}Delete{% endtrans %}</span>
+                <span>{{ 'entry.view.left_menu.delete'|trans }}</span>
             </a>
             <div class="collapsible-body"></div>
         </li>
 
         <li class="bold">
-            <a class="waves-effect collapsible-header" href="mailto:hello@wallabag.org?subject=Wrong%20display%20in%20wallabag&amp;body={{ entry.url|url_encode }}" title="{% trans %}Does this article appear wrong?{% endtrans %}">
+            <a class="waves-effect collapsible-header" href="mailto:hello@wallabag.org?subject=Wrong%20display%20in%20wallabag&amp;body={{ entry.url|url_encode }}" title="{{ 'entry.view.left_menu.problem.description'|trans }}">
                 <i class="mdi-alert-error small"></i>
-                <span>{% trans %}Problems?{% endtrans %}</span>
+                <span>{{ 'entry.view.left_menu.problem.label'|trans }}</span>
             </a>
             <div class="collapsible-body"></div>
         </li>
 
     </ul>
 
-<style>
-main {
-    padding: 0;
-}
-</style>
-
 {% endblock %}
 
 {% block content %}
     <div id="article">
         <header class="mbm">
-            <h1>{{ entry.title|raw }} <a href="{{ path('edit', { 'id': entry.id }) }}" title="{% trans %}Edit title{% endtrans %}">✎</a></h1>
+            <h1>{{ entry.title|raw }} <a href="{{ path('edit', { 'id': entry.id }) }}" title="{{ 'entry.view.edit_title'|trans }}">✎</a></h1>
         </header>
         <aside>
-            <a href="{{ entry.url|e }}" target="_blank" title="{% trans %}original{% endtrans %} : {{ entry.title|e }}" class="tool link mdi-content-link"> <span>{{ entry.domainName|removeWww }}</span></a>
-            {% set nbAnnotations = entry.annotations | length %}
-            <span class="tool link mdi-communication-comment"> {% transchoice nbAnnotations %}{0} No annotations|{1} One annotation|]1,Inf[ %nbAnnotations% annotations{% endtranschoice %}</span>
+            <a href="{{ entry.url|e }}" target="_blank" title="{{ 'entry.view.original_article'|trans }} : {{ entry.title|e }}" class="tool link mdi-content-link"> <span>{{ entry.domainName|removeWww }}</span></a>
+            <span class="tool link mdi-communication-comment"> {{ 'entry.view.annotations_on_the_entry'|transchoice(entry.annotations | length) }}</span>
             <div id="list">
                 {% for tag in entry.tags %}
                     <div class="chip">

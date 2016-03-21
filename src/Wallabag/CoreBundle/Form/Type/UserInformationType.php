@@ -15,10 +15,19 @@ class UserInformationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class)
-            ->add('email', EmailType::class)
-            ->add('twoFactorAuthentication', CheckboxType::class, array('required' => false))
-            ->add('save', SubmitType::class)
+            ->add('name', TextType::class, array(
+                'label' => 'config.form_user.name_label',
+            ))
+            ->add('email', EmailType::class, array(
+                'label' => 'config.form_user.email_label',
+            ))
+            ->add('twoFactorAuthentication', CheckboxType::class, array(
+                'required' => false,
+                'label' => 'config.form_user.twoFactorAuthentication_label',
+            ))
+            ->add('save', SubmitType::class, array(
+                'label' => 'config.form.save',
+            ))
             ->remove('username')
             ->remove('plainPassword')
         ;

@@ -11,6 +11,7 @@ addons:
 
 # cache vendor dirs
 cache:
+    apt: true
     directories:
         - vendor
         - $HOME/.composer/cache
@@ -28,6 +29,9 @@ env:
 
 matrix:
     fast_finish: true
+    include:
+        - php: 7.0
+          env: CS_FIXER=run VALIDATE_TRANSLATION_FILE=run DB=sqlite
     exclude:
         - php: hhvm
           env: DB=pgsql  # driver for PostgreSQL currently unsupported by HHVM, requires 3rd party dependency
@@ -53,3 +57,5 @@ script:
     - travis_wait composer install --no-interaction --no-progress --prefer-dist -o
     - ant prepare-$DB
     - bin/phpunit -v
+    - if [ "$CS_FIXER" = "run" ]; then php bin/php-cs-fixer fix src/ --verbose --dry-run ; fi;
+    - if [ "$VALIDATE_TRANSLATION_FILE" = "run" ]; then php bin/console lint:yaml src/Wallabag/CoreBundle/Resources/translations ; fi;

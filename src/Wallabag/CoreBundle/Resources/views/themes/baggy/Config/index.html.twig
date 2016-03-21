@@ -1,9 +1,9 @@
 {% extends "WallabagCoreBundle::layout.html.twig" %}
 
-{% block title %}{% trans %}Config{% endtrans %}{% endblock %}
+{% block title %}{{ 'config.page_title'|trans }}{% endblock %}
 
 {% block content %}
-    <h2>{% trans %}Wallabag configuration{% endtrans %}</h2>
+    <h2>{{ 'config.tab_menu.settings'|trans }}</h2>
 
     {{ form_start(form.config) }}
         {{ form_errors(form.config) }}
@@ -29,7 +29,10 @@
                 {{ form_label(form.config.reading_speed) }}
                 {{ form_errors(form.config.reading_speed) }}
                 {{ form_widget(form.config.reading_speed) }}
-                <p>{% trans %}You can use online tools to estimate your reading speed{% endtrans %} (<a href="http://www.myreadspeed.com/calculate/">{% trans %}like this one{%endtrans%}</a>).</p>
+                <p>
+                    {{ 'config.form_settings.reading_speed.help_message'|trans }}
+                    <a href="http://www.myreadspeed.com/calculate/">myreadspeed</a>
+                </p>
             </div>
         </fieldset>
 
@@ -44,13 +47,13 @@
         {{ form_rest(form.config) }}
     </form>
 
-    <h2>{% trans %}RSS configuration{% endtrans %}</h2>
+    <h2>{{ 'config.tab_menu.rss'|trans }}</h2>
 
     {{ form_start(form.rss) }}
         {{ form_errors(form.rss) }}
 
         <div class="row">
-            {% trans %}RSS feeds provided by wallabag allow you to read your saved articles with your favourite RSS reader.{% endtrans %}
+            {{ 'config.form_rss.description'|trans }}
         </div>
 
         <fieldset class="w500p inline">
@@ -59,27 +62,31 @@
                 {% if rss.token %}
                     {{ rss.token }}
                 {% else %}
-                    <em>No token</em>
+                    <em>{{ 'config.form_rss.no_token'|trans }}</em>
                 {% endif %}
                 –
-                <a href="{{ path('generate_token') }}">Regenerate ?</a>
+                <a href="{{ path('generate_token') }}">
+                    {% if rss.token %}
+                        {{ 'config.form_rss.token_reset'|trans }}
+                    {% else %}
+                        {{ 'config.form_rss.token_create'|trans }}
+                    {% endif %}
+                </a>
             </div>
         </fieldset>
 
+        {% if rss.token %}
         <fieldset class="w500p inline">
             <div class="row">
-                <label>Rss links:</label>
-                {% if rss.token %}
-                    <ul>
-                        <li><a href="{{ path('unread_rss', {'username': rss.username, 'token': rss.token}) }}">unread</a></li>
-                        <li><a href="{{ path('starred_rss', {'username': rss.username, 'token': rss.token}) }}">fav</a></li>
-                        <li><a href="{{ path('archive_rss', {'username': rss.username, 'token': rss.token}) }}">archives</a></li>
-                    </ul>
-                {% else %}
-                    <strong>You need to generate a token first.</strong>
-                {% endif %}
+                <label>{{ 'config.form_rss.rss_links'|trans }}</label>
+                <ul>
+                    <li><a href="{{ path('unread_rss', {'username': rss.username, 'token': rss.token}) }}">unread</a></li>
+                    <li><a href="{{ path('starred_rss', {'username': rss.username, 'token': rss.token}) }}">fav</a></li>
+                    <li><a href="{{ path('archive_rss', {'username': rss.username, 'token': rss.token}) }}">archives</a></li>
+                </ul>
             </div>
         </fieldset>
+        {% endif %}
 
         <fieldset class="w500p inline">
             <div class="row">
@@ -92,7 +99,7 @@
         {{ form_rest(form.rss) }}
     </form>
 
-    <h2>{% trans %}User information{% endtrans %}</h2>
+    <h2>{{ 'config.tab_menu.user_info'|trans }}</h2>
 
     {{ form_start(form.user) }}
         {{ form_errors(form.user) }}
@@ -115,7 +122,7 @@
 
         {% if twofactor_auth %}
         <div class="row">
-            {% trans %}Enabling two factor authentication means you'll receive an email with a code on every new untrusted connexion{% endtrans %}
+            {{ 'config.form_user.two_factor_description'|trans }}
         </div>
 
         <fieldset class="w500p inline">
@@ -130,7 +137,7 @@
         {{ form_rest(form.user) }}
     </form>
 
-    <h2>{% trans %}Change your password{% endtrans %}</h2>
+    <h2>{{ 'config.tab_menu.password'|trans }}</h2>
 
     {{ form_start(form.pwd) }}
         {{ form_errors(form.pwd) }}
@@ -162,13 +169,16 @@
         {{ form_rest(form.pwd) }}
     </form>
 
-    <h2>{% trans %}Tagging rules{% endtrans %}</h2>
+    <h2>{{ 'config.tab_menu.rules'|trans }}}</h2>
 
     <ul>
         {% for tagging_rule in app.user.config.taggingRules %}
         <li>
-            if « {{ tagging_rule.rule }} » then tag as « {{ tagging_rule.tags|join(', ') }} »
-            <a href="{{ path('delete_tagging_rule', {id: tagging_rule.id}) }}" title="{% trans %}Delete{% endtrans %}" class="tool delete icon-trash icon"></a>
+            {{ 'config.form_rules.if_label'|trans }}
+            « {{ tagging_rule.rule }} »
+            {{ 'config.form_rules.then_tag_as_label'|trans }}
+            « {{ tagging_rule.tags|join(', ') }} »
+            <a href="{{ path('delete_tagging_rule', {id: tagging_rule.id}) }}" title="{{ 'config.form_rules.delete_rule_label'|trans }}" class="tool delete icon-trash icon"></a>
         </li>
         {% endfor %}
     </ul>
@@ -196,7 +206,7 @@
     </form>
 
     {% if is_granted('ROLE_SUPER_ADMIN') %}
-    <h2>{% trans %}Add a user{% endtrans %}</h2>
+    <h2>{{ 'config.tab_menu.new_user'|trans }}</h2>
 
     {{ form_start(form.new_user) }}
         {{ form_errors(form.new_user) }}

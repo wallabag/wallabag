@@ -43,7 +43,7 @@ class TagController extends Controller
 
             $this->get('session')->getFlashBag()->add(
                 'notice',
-                'Tag added'
+                'flashes.tag.notice.tag_added'
             );
 
             return $this->redirect($this->generateUrl('view', array('id' => $entry->getId())));

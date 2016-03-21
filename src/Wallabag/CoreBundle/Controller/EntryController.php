@@ -55,7 +55,7 @@ class EntryController extends Controller
             if (false !== $existingEntry) {
                 $this->get('session')->getFlashBag()->add(
                     'notice',
-                    'Entry already saved on '.$existingEntry->getCreatedAt()->format('d-m-Y')
+                    $this->get('translator')->trans('flashes.entry.notice.entry_already_saved', array('%date%' => $existingEntry->getCreatedAt()->format('d-m-Y')))
                 );
 
                 return $this->redirect($this->generateUrl('view', array('id' => $existingEntry->getId())));
@@ -64,7 +64,7 @@ class EntryController extends Controller
             $this->updateEntry($entry);
             $this->get('session')->getFlashBag()->add(
                 'notice',
-                'Entry saved'
+                'flashes.entry.notice.entry_saved'
             );
 
             return $this->redirect($this->generateUrl('homepage'));
@@ -128,7 +128,7 @@ class EntryController extends Controller
 
             $this->get('session')->getFlashBag()->add(
                 'notice',
-                'Entry updated'
+                'flashes.entry.notice.entry_updated'
             );
 
             return $this->redirect($this->generateUrl('view', array('id' => $entry->getId())));
@@ -304,9 +304,9 @@ class EntryController extends Controller
     {
         $this->checkUserAction($entry);
 
-        $message = 'Entry reloaded';
+        $message = 'flashes.entry.notice.entry_reloaded';
         if (false === $this->updateEntry($entry)) {
-            $message = 'Failed to reload entry';
+            $message = 'flashes.entry.notice.entry_reload_failed';
         }
 
         $this->get('session')->getFlashBag()->add(
@@ -334,9 +334,14 @@ class EntryController extends Controller
         $entry->toggleArchive();
         $this->getDoctrine()->getManager()->flush();
 
+        $message = 'flashes.entry.notice.entry_unarchived';
+        if ($entry->isArchived()) {
+            $message = 'flashes.entry.notice.entry_archived';
+        }
+
         $this->get('session')->getFlashBag()->add(
             'notice',
-            'Entry '.($entry->isArchived() ? 'archived' : 'unarchived')
+            $message
         );
 
         return $this->redirect($request->headers->get('referer'));
@@ -359,9 +364,14 @@ class EntryController extends Controller
         $entry->toggleStar();
         $this->getDoctrine()->getManager()->flush();
 
+        $message = 'flashes.entry.notice.entry_unstarred';
+        if ($entry->isStarred()) {
+            $message = 'flashes.entry.notice.entry_starred';
+        }
+
         $this->get('session')->getFlashBag()->add(
             'notice',
-            'Entry '.($entry->isStarred() ? 'starred' : 'unstarred')
+            $message
         );
 
         return $this->redirect($request->headers->get('referer'));
@@ -394,7 +404,7 @@ class EntryController extends Controller
 
         $this->get('session')->getFlashBag()->add(
             'notice',
-            'Entry deleted'
+            'flashes.entry.notice.entry_deleted'
         );
 
         // don't redirect user to the deleted entry

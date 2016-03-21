@@ -1,7 +1,11 @@
 # Two factor mail
-auth_code.mailer.subject: 'Wallabag Doğrulama Kodu'
-auth_code.mailer.body.hello: "Merhaba %user%,"
-auth_code.mailer.body.first_para: "wallabag hesabınızda iki adımlı doğrulamayı etkinleştirdiğinizde ve bu yeni cihaz olduğunda (bilgisayar, telefon, vs.), biz size bu işlemi doğrulamak için bir kod göndeririz."
-auth_code.mailer.body.second_para: "Bu işlem için doğrulama kodunuz:"
-auth_code.mailer.body.support: "Eğer herhangi bir soru/sorununuz varsa, bizimle iletişime geçmekten çekinmeyin:"
-auth_code.mailer.body.signature: "wallabag ekibi"
+auth_code:
+    on: 'on'
+    mailer:
+        subject: 'Wallabag Doğrulama Kodu'
+        body:
+            hello: "Merhaba %user%,"
+            first_para: "wallabag hesabınızda iki adımlı doğrulamayı etkinleştirdiğinizde ve bu yeni cihaz olduğunda (bilgisayar, telefon, vs.), biz size bu işlemi doğrulamak için bir kod göndeririz."
+            second_para: "Bu işlem için doğrulama kodunuz:"
+            support: "Eğer herhangi bir soru/sorununuz varsa, bizimle iletişime geçmekten çekinmeyin:"
+            signature: "wallabag ekibi"
