@@ -66,7 +66,7 @@
     {% for flashMessage in app.session.flashbag.get('notice') %}
         <div class="messages success">
             <a href="#" class="closeMessage">×</a>
-            <p>{{ flashMessage }}</p>
+            <p>{{ flashMessage|trans }}</p>
         </div>
     {% endfor %}
 {% endblock %}
