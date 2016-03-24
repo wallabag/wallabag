@@ -1,1 +1,6 @@
                 {{ messages | raw }}
+                {% if view == 'home' %}
+                <div class="messages information">
+                    <p><a href="http://doc.wallabag.org">wallabag v2 is out, please read the documentation to upgrade.</a></p>
+                </div>
+                {% endif %}
