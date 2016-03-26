@@ -40,6 +40,7 @@ wallabag_core:
         pl: 'Polish'
         da: 'Dansk'
         es: 'Español'
+        oc: 'Occitan'
     items_on_page: 12
     theme: material
     language: en
