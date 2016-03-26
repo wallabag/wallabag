@@ -1,0 +1,284 @@
+#Login
+Keep me logged in: 'Demorar connectat'
+Forgot your password?: 'Senhal doblidat ?'
+Login: 'Se connectar'
+Back to login: 'Tornar al formulari de connexion'
+Send: 'Mandar'
+"Enter your email address below and we'll send you password reset instructions.": "Picatz vòstra adreça de corrièl çai-jos, vos mandarem las instruccions per reïnicializar vòstre senhal."
+Register: 'Crear un compte'
+
+# Menu
+unread: 'Non legits'
+starred: 'Favorits'
+archive: 'Legits'
+all: 'Tots los articles'
+tags: 'Etiquetas'
+config: 'Configuracion'
+internal settings: 'Configuracion interna'
+import: 'Importar'
+howto: 'Ajuda'
+logout: 'Desconnexion'
+Filtered: 'Articles filtrats'
+About: 'A prepaus'
+
+# Header
+Back to unread articles: 'Tornar als pas legits'
+Add a new entry: 'Enregistrar un novèl article'
+Search: 'Cercar'
+Filter entries: 'Filtrar los articles'
+Enter your search here: 'Picatz vòstre mot-clau a cercar aquí'
+Save new entry: 'Enregistrar un novèl article'
+Export: 'Exportar'
+
+# Config screen
+Settings: 'Paramètres'
+User information: 'Mon compte'
+Password: 'Senhal'
+RSS: 'RSS'
+Add a user: 'Crear un compte'
+Theme: 'Tèma'
+Items per page: "Nombre d'articles per pagina"
+Reading speed: "Velocitat  de lectura"
+Language: 'Lenga'
+Save: 'Enregistrar'
+RSS token: 'Geton RSS'
+RSS token updated: 'Geton RSS mes a jorn'
+Name: 'Nom'
+Email: 'Adreça de corrièl'
+No token: 'Pas cap de geton generat'
+Reset your token: 'Reïnicializatz vòstre geton'
+Create your token: 'Creatz vòstre geton'
+Rss limit: "Nombre d'articles dins un flux RSS"
+RSS links: 'URL de vòstres fluxes RSS'
+"RSS feeds provided by wallabag allow you to read your saved articles with your favourite RSS reader. You need to generate a token first.": "Los fluxes RSS fornits per wallabag vos permeton de legir vòstres articles salvagardats dins vòstre lector de fluxes preferit. Per los poder emplegar, vos cal, d'en primièr crear un geton."
+Old password: 'Senhal actual'
+New password: 'Senhal novèl'
+Repeat new password: 'Confirmatz vòstre novèl senhal'
+Username: "Nom d'utilizaire"
+Two factor authentication: "Dobla autentificacion"
+"Enabling two factor authentication means you'll receive an email with a code on every new untrusted connexion": "Activar l'autentificacion doble-factor vòl dire que recebretz un còdi per corrièl per cada novèla connexion pas aprovada."
+"I read ~100 words per minute": "Legissi a l'entorn de 100 mots per minuta"
+"I read ~200 words per minute": "Legissi a l'entorn de 200 mots per minuta"
+"I read ~300 words per minute": "Legissi a l'entorn de 300 mots per minuta"
+"I read ~400 words per minute": "Legissi a l'entorn de 400 mots per minuta"
+"You can use online tools to estimate your reading speed": "Podètz utilizar una aisina en linha per estimar vòstre velocitat de lectura"
+"like this one": "coma aquela d'aquí"
+
+# Tagging rules
+Tagging rules: "Règlas d'etiquetas automaticas"
+What does « tagging rules » mean?: "Qué significa las règlas d'etiquetas automaticas ?"
+"They are rules used by Wallabag to automatically tag new entries.<br />Each time a new entry is added, all the tagging rules will be used to add the tags you configured, thus saving you the trouble to manually classify your entries.": "Son de règlas utilizadas per wallabad per classar automaticament vòstres novèls articles.<br />Cada còp qu'un novèl article es apondut, totas las règlas d'etiquetas automaticas seràn utilizadas per ajustar d'etiquetas qu'avètz configuradas, en vos esparnhant l'esfòrç de classificar vòstres articles manualament."
+How do I use them?: "Cossí las utilizar ?"
+"Let assume you want to tag new entries as « <i>short reading</i> » when the reading time is inferior to 3 minutes.<br />In that case, you should put « readingTime &lt;= 3 » in the <i>Rule</i> field and « <i>short reading</i> » in the <i>Tags</i> field.<br />Several tags can added simultaneously by separating them by a comma: « <i>short reading, must read</i> »<br />Complex rules can be written by using predefined operators: if « <i>readingTime &gt;= 5 AND domainName = \"github.com\"</i> » then tag as « <i>long reading, github </i> »": "Imaginem que volètz atribuir als novèls article l'etiqueta « <i>lectura corta</i> » quand lo temps per legir es inferior a 3 minutas.<br />Dins aquel cas, deuriatz metre « readingTime &lt;= 3 » dins lo camp <i>Règla</i> e « <i>lectura corta</i> » dins lo camp <i>Etiqueta</i>.<br />Mai d'una etiquetas pòdon èsser apondudas simultanèament ne las separant amb de virgulas : « <i>lectura corta, per ligir</i> »<br />De règlas complèxas pòdon èsser creadas en emplegant d'operators predefinits :  se « <i>readingTime &gt;= 5 AND domainName = \"github.com\"</i> » alara atribuir las etiquetas « <i>lectura longa, github </i> »"
+Which variables and operators can I use to write rules?: "Quinas variablas e operators pòdi utilizar per escriure de règlas ?"
+The following variables and operators can be used to create tagging rules:: "Las variablas e operators seguents pòdon èsser utilizats per escriure de règlas d'etiquetas automaticas :"
+Variable: "Variabla"
+Meaning: "Significacion"
+Operator: "Operator"
+Title of the entry: "Títol de l'article"
+Less than…: "Mens que…"
+URL of the entry: "URL de l'article"
+Strictly less than…: "Estrictament mens que…"
+Whether the entry is archived or not: "Se l'article es archivat o pas"
+Greater than…: "Mai que…"
+Whether the entry is starred or not: "Se l'article es favorit o pas"
+Strictly greater than…: "Estrictament mai que…"
+The entry's content: "Lo contengut de l'article"
+Equal to…: "Egal a…"
+The entry's language: "La lenga de l'article"
+Not equal to…: "Diferent de…"
+The entry's mime-type: "Lo Tipe MIME de l'article"
+One rule or another: "Una règla o l'autra"
+The estimated entry's reading time, in minutes: "Lo temps de lectura estimat de l'article, en minutas"
+One rule and another: "Una règla e l'autra"
+The domain name of the entry: "Lo nom de domeni de l'article"
+"Tests that a <i>subject</i> is matches a <i>search</i> (case-insensitive).<br />Example: <code>title matches \"football\"</code>": "Teste se un <i>subjècte</i> correspond a una <i>recerca</i> (non sensibla a la cassa).<br />Exemple : <code>title matches \"football\"</code>"
+Rule: "Règla"
+FAQ: "FAQ"
+
+# Entries
+"estimated reading time: %readingTime% min": "durada de lectura : %readingTime% min"
+"estimated reading time: %inferior% 1 min": "durada de lectura : %inferior% 1 min"
+original: "original"
+Toggle mark as read: 'Marcar coma legit/pas legit'
+Toggle favorite: 'Marcar coma favorit'
+Delete: 'Suprimir'
+"{0} There is no entry.|{1} There is one entry.|]1,Inf[ There are %count% entries.": "{0} I a pas cap d'article.|{1} I a un article.|]1,Inf[ I a %count% articles."
+http://website: "http://siteweb"
+"{0} No annotations|{1} One annotation|]1,Inf[ %nbAnnotations% annotations": "{0} Pas cap d'anotacion|{1} Una anotacion|]1,Inf[ %nbAnnotations% anotacions"
+
+# Edit entry
+Edit an entry: "Modificar un article"
+Title: "Títol"
+Is public: "Public"
+
+# tag
+Tags: Etiquetas
+"{0} There is no tag.|{1} There is one tag.|]1,Inf[ There are %count% tags.": "{0} I a pas cap d'etiquetas.|{1} I a una etiqueta.|]1,Inf[ I a %count% etiquetas."
+
+# Filters
+Filters: 'Filtres'
+Status: 'Estatut'
+Archived: 'Legit'
+Starred: 'Favorit'
+Preview picture: 'Fotò'
+Has a preview picture: 'A una fotò'
+Reading time in minutes: 'Durada de lectura en minutas'
+from: 'de'
+to: 'per'
+website.com: 'website.com'
+Domain name: 'Nom de domeni'
+Creation date: 'Data de creacion'
+dd/mm/yyyy: 'jj/mm/aaaa'
+Clear: 'Escafar'
+Filter: 'Filtrar'
+website.com: "siteweb.com"
+
+# About
+About: "A prepaus"
+Who is behind wallabag: "L'equipa darrièr wallabag"
+Getting help: "Besonh d'ajuda"
+Helping wallabag: "Ajudar wallabag"
+Developed by: "Desvolopat per"
+website: "Site web"
+And many others contributors ♥: "E un fum de contributors ♥"
+on GitHub: "sus GitHub"
+Project website: "Site web del projècte"
+License: "Licéncia"
+Version: "Version"
+Documentation: "Documentacion"
+Bug reports: "Rapòrt de bugs"
+On our support website: "Sus nòstre site d'assisténcia"
+or: "o"
+"wallabag is free and opensource. You can help us:": "wallabag es a gratuit e opensource. Nos podètz ajudar :"
+"by contributing to the project:": "en ajudant lo projècte :"
+an issue lists all our needs: "un bilhet recensa totes nòstres besonhs"
+via Paypal: "via Paypal"
+Take wallabag with you: "Emportatz wallabag amb vos"
+Social: "Social"
+powered by: "propulsat per"
+Contributors: "Contributors"
+Thank you to contributors on wallabag web application: "Mercés als contributors de l'aplicacion web de wallabag"
+Third-party libraries: Bibliotècas tèrças
+"Here are the list of third-party libraries used in wallabag (with their licenses):": "Aquí la lista de las dependéncias utilizadas dins wallabag (e lor licéncia) :"
+Package: Dependéncia
+License: Licéncia
+
+# Howto
+Form: "Formulari"
+Thanks to this form: "Gràcias a aqueste formulari"
+Browser addons: "Extensions de navigator"
+Mobile apps: "Aplicacions mobil"
+Bookmarklet: "Bookmarklet"
+Standard Firefox Add-On: "Extension Firefox"
+Chrome Extension: "Extension Chrome"
+download the application: "telecargatz l'aplicacion"
+"Drag &amp; drop this link to your bookmarks bar:": "Lisatz-depausatz aqueste ligam dins vòstra barra de favorits :"
+
+# Flash messages
+Information updated: "Vòstres informacions personnelas son ben estadas mesas a jorn"
+"Config saved. Some parameters will be considered after disconnection.": "Los paramètres son ben estats meses a jorn. Certans seràn aplicats aprèp desconnexion."
+RSS information updated: "La configuracion dels fluxes RSS es ben estada mesa a jorn"
+Password updated: "Vòstre senhal es ben estat mes a jorn"
+Entry starred: "Article apondut dins los favorits"
+Entry unstarred: "Article tirat dels favorits"
+Entry archived: "Article marcat coma legit"
+Entry unarchived: "Article marcat coma pas legit"
+Entry deleted: "Article suprimit"
+Tagging rule deleted: "Règla suprimida"
+Tagging rules updated: "Règlas misa a jorn"
+User "%username%" added: 'Utilizaire "%username%" apondut'
+In demonstration mode, you can't change password for this user.: "En demostration, podètz pas cambiar lo senhal d'aqueste utilizaire."
+
+# Entry
+Mark as read: 'Marcar coma legit'
+Favorite: 'Metre en favorit'
+back: 'Tornar'
+original article: 'Article original'
+Add a tag: 'Ajustar una etiqueta'
+Share: 'Partatjar'
+Download: 'Telecargar'
+Does this article appear wrong?: "Marca mal la presentacion d'aqueste article ?"
+Problems?: 'Un problèma ?'
+Edit title: "Modificar lo títol"
+Re-fetch content: "Tornar cargar lo contengut"
+Tag added: "Etiqueta aponduda"
+
+# Import
+Welcome to wallabag importer. Please select your previous service that you want to migrate.: "Benvenguda sus l'aisina de migracion de wallabag. Causissètz çai-jos lo servici dempuèi lo qual volètz migrar."
+"This importer will import all your Pocket data. Pocket doesn't allow us to retrieve content from their service, so the readable content of each article will be re-fetched by wallabag.": "Aquesta aisina importarà totas vòstras donadas de Pocket. Pocket nos permet pas de recuperar lo contengut dempuèi lor servidor, alara wallabag deu tornar fulhetar cada article per recuperar son contengut."
+"This importer will import all your wallabag v1 articles. On your config page, click on \"JSON export\" in the \"Export your wallabag data\" section. You will have a \"wallabag-export-1-xxxx-xx-xx.json\" file.": "Aquesta aisina importarà totas vòstras donadas de wallabag v1. Sus vòstre pagina de configuracion de wallabag v1, clicatz sus \"Export JSON\" dins la seccion \"Exportar vòstras donadas de wallabag\". Traparatz un fichièr \"wallabag-export-1-xxxx-xx-xx.json\"."
+"This importer will import all your wallabag v2 articles. Go to All articles, then, on the export sidebar, click on \"JSON\". You will have a \"All articles.json\" file.": "Aquesta aisina importarà totas vòstras donadas d'una instància mai de wallabag v2. Anatz dins totes vòstres articles, puèi, sus la barra laterala, clicatz sus \"JSON\". Traparatz un fichièr \"All articles.json\""
+"You can import your data from your Pocket account. You just have to click on the below button and authorize the application to connect to getpocket.com.": "Podètz importar vòstras donadas dempuèi vòstre compte Pocket. Vos cal pas que clicar sul boton çai-jos e autorizar wallabag a se connectar a getpocket.com."
+Import > Pocket: "Import > Pocket"
+Pocket import isn't configured.: "L'importacion dempuèi Pocket es pas configurada."
+You need to define %keyurls% a pocket_consumer_key %keyurle%.: "Vos cal definir %keyurls% una clau per l'API Pocket %keyurle%."
+Your server admin needs to define an API Key for Pocket.: "L'administrator de vòstre servidor deu definir una clau per l'API Pocket."
+Connect to Pocket and import data: "Se connectar a Pocket e importar las donadas"
+Please select your wallabag export and click on the below button to upload and import it.: "Causissètz lo fichièr de vòstra exportacion wallabag v1 e clicatz sul boton çai-jos per l'importar."
+File: "Fichièr"
+Upload file: "Importar lo fichièr"
+Import contents: "Importar los contenguts"
+Import: "Importar"
+Import > Wallabag v1: "Importar > Wallabag v1"
+Import > Wallabag v2: "Importar > Wallabag v2"
+Mark all as read ?: "Tot marcar cama legit ?"
+Mark all imported entries as read: "Marcar totes los contenguts importats coma legits"
+
+# Quickstart
+Quickstart: Per ben començar
+Welcome to wallabag!: "Benvenguda sus wallabag !"
+We'll accompany you to visit wallabag and show you some features which can interess you.: "Anem vos guidar per far lo torn de la proprietat e vos presentar unas fonccionalitats que vos poirián interessar per vos apropriar aquesta aisina."
+Follow us!: "Seguètz-nos !"
+Configure the application: "Configuratz l'aplicacion"
+Change language and design: "Cambiatz la lenga e l'estil de l'aplicacion"
+Enable RSS feeds: "Activatz los fluxes RSS"
+First steps: "Primièrs passes"
+Save your first article: "Ajustatz vòstre primièr article"
+And classify it!: "E racaptatz-lo !"
+Migrate from an existing service: "Migrar dempuèi un servici existent"
+You're using an other service? We'll help you to retrieve your data on wallabag.: "Sètz un ancian utilizaire d'un servici existent ? Vos ajudarem a trapar vòstras donadas sus wallabag."
+Migrate from Pocket: "Migrar dempuèi Pocket"
+Migrate from wallabag v1: "Migrar dempuèi wallabag v1"
+Full documentation: "Documentacion completa"
+Convert your articles into ePUB or PDF: "Convertissètz vòstres articles en ePub o en PDF"
+See how you can look for an article by using search engine and filters: "Aprenètz a utilizar lo motor de recèrca e los filtres per retrobar l'article que vos interèssa"
+And so many other articles!: "E encara plen de causas mai !"
+Support: "Assisténcia"
+If you need some help, we are here for you.: "Perque avètz benlèu besonh de nos pausar una question, sèm disponibles per vosautres."
+On GitHub: "Sus GitHub"
+By email: "Per corrièl"
+On Gitter: "Sus Gitter"
+
+# developer
+Developer: Desvolopador
+Welcome to the wallabag API: "Benvenguda sus l'API de wallabag"
+How to create my first application: "Cossí crear vòstra primièra aplicacion"
+View full API documentation: "Veire la documentacion completa de l'API"
+Clients: "Clients"
+Create a new client: "Crear un novèl client"
+Existing clients: "Los clients existents"
+Client ID: "ID Client"
+Client secret: "Clau secreta"
+Redirect URIs: "URLs de redireccion"
+Grant type allowed: "Tipe de privilègi acordat"
+You have the ability to remove this client. This action is IRREVERSIBLE !: "Avètz la possibilitat de supriimr un client. Aquesta accion es IRREVERSIBLA !"
+If you remove it, every app configured with that client won't be able to auth on your wallabag.: "Se suprimissètz un client, totas las aplicacions que l'emplegan foncionaràn pas mai amb vòstre compte wallabag."
+Remove this client: "Suprimir aqueste client"
+New client: "Client novèl"
+You are about to create a new client. Please fill the field below for the redirect URI of your application.: "Anatz crear un novèl client. Mercés de cumplir l'url de redireccion cap a vòstra aplicacion."
+Back: "Retorn"
+Client parameters: "Los paramètres de vòstre client"
+New client created.: "Novèl client creat."
+Here are your client parameters.: "Vaquí los paramètres de vòstre client"
+Read the howto "Create my first application": "Legir \"cossí crear ma primièra aplicacion\""
+Client deleted: "Client suprimit"
+No client yet.: "Pas cap de client pel moment"
+"The following commands make use of the <a href=\"https://github.com/jkbrzt/httpie\">HTTPie library</a>. Make sure it is installed on your system before using it.": "Las comandas seguentas utilizan la <a href=\"https://github.com/jkbrzt/httpie\">libraria HTTPie</a>. Asseguratz-vos que siasqueòu installadas abans de l'utilizar."
+You need a token to communicate between your 3rd application and wallabag API.: "Vos cal un geton per escambiar entre vòstra aplicacion e l'API de wallabar."
+"To create this token, you need <a href=\"%link%\">to create a new client</a>.": "Per crear un geton, vos cal crear <a href=\"%link%\">crear un novèl client</a>."
+Now, create your token (replace client_id, client_secret, username and password with the good values):: "Ara creatz un geton (remplaçar client_id, client_secret, username e password amb las bonas valors) :"
+The API will return a response like this:: "L'API vos tornarà una responsa coma aquò :"
+The access_token is useful to do a call to the API endpoint. For example:: "L'access_token deu èsser emplegat per far una requèsta a l'API. Per exemple :"
+This call will return all the entries for your user.: "Aquesta requèsta tornarà totes los articles de l'utilizaire."
+"If you want to see all the API endpoints, you can have a look <a href=\"%link%\">to our API documentation</a>.": "Se volètz totas las adreças d'accès de l'API, donatz un còp d’uèlh <a href=\"%link%\">a la documentacion de l'API</a>."
