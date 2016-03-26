@@ -110,22 +110,22 @@ config:
                 url: 'Adres URL wpisu'
                 isArchived: 'Czy wpis został zarchiwizowany czy nie'
                 isStarred: 'Czy wpis został oznaczony gwiazdką czy nie'
-                content: "Zawartość wpisu"
-                language: "Język wpisu"
-                mimetype: "Mime-type wpisu"
-                readingTime: "Szacunkowy czas czytania wpisu w minutach"
+                content: 'Zawartość wpisu'
+                language: 'Język wpisu'
+                mimetype: 'Mime-type wpisu'
+                readingTime: 'Szacunkowy czas czytania wpisu w minutach'
                 domainName: 'Nazwa domeny wpisu'
-             operator_description:
-                 label: 'Operator'
-                 less_than: 'Mniej niż...'
-                 strictly_less_than: 'Wyłącznie mniej niż...'
-                 greater_than: 'Więcej niż...'
-                 strictly_greater_than: 'Wyłącznie więcej niż...'
-                 equal_to: 'Równe...'
-                 not_equal_to: 'Nierówny...'
-                 or: 'Jedna reguła LUB inna'
-                 and: 'Jedna reguła I inna'
-                 matches: 'Sprawdź czy <i>temat</i> pasuje <i>szukaj</i> (duże lub małe litery).<br />Przykład: <code>tytuł zawiera "piłka nożna"</code>'
+            operator_description:
+                label: 'Operator'
+                less_than: 'Mniej niż...'
+                strictly_less_than: 'Wyłącznie mniej niż...'
+                greater_than: 'Więcej niż...'
+                strictly_greater_than: 'Wyłącznie więcej niż...'
+                equal_to: 'Równe...'
+                not_equal_to: 'Nierówny...'
+                or: 'Jedna reguła LUB inna'
+                and: 'Jedna reguła I inna'
+                matches: 'Sprawdź czy <i>temat</i> pasuje <i>szukaj</i> (duże lub małe litery).<br />Przykład: <code>tytuł zawiera "piłka nożna"</code>'
     form_new_user:
         username_label: 'Nazwa użytkownika'
         password_label: 'Hasło'
