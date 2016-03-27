@@ -2,9 +2,9 @@
 
 namespace Wallabag\ImportBundle\Tests\Import;
 
+use Wallabag\ImportBundle\Import\WallabagV1Import;
 use Wallabag\UserBundle\Entity\User;
 use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\ImportBundle\Import\WallabagV1Import;
 use Monolog\Logger;
 use Monolog\Handler\TestHandler;
 

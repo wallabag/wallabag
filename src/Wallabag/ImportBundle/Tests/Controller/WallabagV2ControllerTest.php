@@ -53,6 +53,7 @@ class WallabagV2ControllerTest extends WallabagCoreTestCase
         $this->assertEmpty($content->getMimetype());
         $this->assertEmpty($content->getPreviewPicture());
         $this->assertEmpty($content->getLanguage());
+        $this->assertEquals(0, count($content->getTags()));
 
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
@@ -65,6 +66,7 @@ class WallabagV2ControllerTest extends WallabagCoreTestCase
         $this->assertNotEmpty($content->getMimetype());
         $this->assertNotEmpty($content->getPreviewPicture());
         $this->assertNotEmpty($content->getLanguage());
+        $this->assertEquals(2, count($content->getTags()));
     }
 
     public function testImportWallabagWithEmptyFile()
