@@ -20,31 +20,17 @@ class TagController extends Controller
      */
     public function addTagFormAction(Request $request, Entry $entry)
     {
-        $tag = new Tag();
-        $form = $this->createForm(NewTagType::class, $tag);
+        $form = $this->createForm(NewTagType::class, new Tag());
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $existingTag = $this->getDoctrine()
-                ->getRepository('WallabagCoreBundle:Tag')
-                ->findOneByLabel($tag->getLabel());
+            $this->get('wallabag_core.content_proxy')->assignTagsToEntry(
+                $entry,
+                $form->get('label')->getData()
+            );
 
             $em = $this->getDoctrine()->getManager();
-
-            if (is_null($existingTag)) {
-                $this->get('wallabag_core.content_proxy')->assignTagsToEntry(
-                    $entry,
-                    $tag
-                );
-                $em->persist($tag);
-            } elseif (!$existingTag->hasEntry($entry)) {
-                $this->get('wallabag_core.content_proxy')->assignTagsToEntry(
-                    $entry,
-                    $existingTag
-                );
-                $em->persist($existingTag);
-            }
-
+            $em->persist($entry);
             $em->flush();
 
             $this->get('session')->getFlashBag()->add(
