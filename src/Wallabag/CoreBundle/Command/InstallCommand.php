@@ -83,7 +83,8 @@ class InstallCommand extends ContainerAwareCommand
             $help = 'Needs one of sqlite, mysql or pgsql PDO drivers';
         }
 
-        $rows[] = array($label, $status, $help);
+        $rows = [];
+        $rows[] = [$label, $status, $help];
 
         foreach ($this->functionExists as $functionRequired) {
             $label = '<comment>'.$functionRequired.'</comment>';
@@ -97,12 +98,12 @@ class InstallCommand extends ContainerAwareCommand
                 $help = 'You need the '.$functionRequired.' function activated';
             }
 
-            $rows[] = array($label, $status, $help);
+            $rows[] = [$label, $status, $help];
         }
 
         $table = new Table($this->defaultOutput);
         $table
-            ->setHeaders(array('Checked', 'Status', 'Recommendation'))
+            ->setHeaders(['Checked', 'Status', 'Recommendation'])
             ->setRows($rows)
             ->render();
 
@@ -126,7 +127,7 @@ class InstallCommand extends ContainerAwareCommand
             $this->defaultOutput->writeln('Droping database, creating database and schema, clearing the cache');
 
             $this
-                ->runCommand('doctrine:database:drop', array('--force' => true))
+                ->runCommand('doctrine:database:drop', ['--force' => true])
                 ->runCommand('doctrine:database:create')
                 ->runCommand('doctrine:schema:create')
                 ->runCommand('cache:clear')
@@ -158,7 +159,7 @@ class InstallCommand extends ContainerAwareCommand
             $this->defaultOutput->writeln('Droping database, creating database and schema');
 
             $this
-                ->runCommand('doctrine:database:drop', array('--force' => true))
+                ->runCommand('doctrine:database:drop', ['--force' => true])
                 ->runCommand('doctrine:database:create')
                 ->runCommand('doctrine:schema:create')
             ;
@@ -168,7 +169,7 @@ class InstallCommand extends ContainerAwareCommand
                 $this->defaultOutput->writeln('Droping schema and creating schema');
 
                 $this
-                    ->runCommand('doctrine:schema:drop', array('--force' => true))
+                    ->runCommand('doctrine:schema:drop', ['--force' => true])
                     ->runCommand('doctrine:schema:create')
                 ;
             }
@@ -388,19 +389,19 @@ class InstallCommand extends ContainerAwareCommand
      * @param string $command
      * @param array  $parameters Parameters to this command (usually 'force' => true)
      */
-    protected function runCommand($command, $parameters = array())
+    protected function runCommand($command, $parameters = [])
     {
         $parameters = array_merge(
-            array('command' => $command),
+            ['command' => $command],
             $parameters,
-            array(
+            [
                 '--no-debug' => true,
                 '--env' => $this->defaultInput->getOption('env') ?: 'dev',
-            )
+            ]
         );
 
         if ($this->defaultInput->getOption('no-interaction')) {
-            $parameters = array_merge($parameters, array('--no-interaction' => true));
+            $parameters = array_merge($parameters, ['--no-interaction' => true]);
         }
 
         $this->getApplication()->setAutoExit(false);

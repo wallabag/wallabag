@@ -38,6 +38,15 @@ class PocketController extends Controller
         $requestToken = $this->get('wallabag_import.pocket.import')
             ->getRequestToken($this->generateUrl('import', array(), UrlGeneratorInterface::ABSOLUTE_URL));
 
+        if (false === $requestToken) {
+            $this->get('session')->getFlashBag()->add(
+                'notice',
+                'flashes.import.notice.failed'
+            );
+
+            return $this->redirect($this->generateUrl('import_pocket'));
+        }
+
         $this->get('session')->set('import.pocket.code', $requestToken);
         $this->get('session')->set('mark_as_read', $request->request->get('form')['mark_as_read']);
 

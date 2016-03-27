@@ -3,6 +3,7 @@
 namespace Wallabag\ImportBundle\Tests\Import;
 
 use Wallabag\UserBundle\Entity\User;
+use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\ImportBundle\Import\WallabagV1Import;
 use Monolog\Logger;
 use Monolog\Handler\TestHandler;
@@ -71,7 +72,7 @@ class WallabagV1ImportTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $this->contentProxy
-            ->expects($this->once())
+            ->expects($this->exactly(3))
             ->method('updateEntry')
             ->willReturn($entry);
 
@@ -98,6 +99,11 @@ class WallabagV1ImportTest extends \PHPUnit_Framework_TestCase
             ->expects($this->any())
             ->method('getRepository')
             ->willReturn($entryRepo);
+
+        $this->contentProxy
+            ->expects($this->exactly(3))
+            ->method('updateEntry')
+            ->willReturn(new Entry($this->user));
 
         // check that every entry persisted are archived
         $this->em

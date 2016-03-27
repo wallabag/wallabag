@@ -68,7 +68,7 @@ class PocketImport implements ImportInterface
      *
      * @param string $redirectUri Redirect url in case of error
      *
-     * @return string request_token for callback method
+     * @return string|false request_token for callback method
      */
     public function getRequestToken($redirectUri)
     {

@@ -32,14 +32,21 @@ class ContentProxy
      * Fetch content using graby and hydrate given entry with results information.
      * In case we couldn't find content, we'll try to use Open Graph data.
      *
-     * @param Entry  $entry Entry to update
-     * @param string $url   Url to grab content for
+     * We can also force the content, in case of an import from the v1 for example, so the function won't
+     * fetch the content from the website but rather use information given with the $content parameter.
+     *
+     * @param Entry  $entry   Entry to update
+     * @param string $url     Url to grab content for
+     * @param array  $content An array with AT LEAST keys title, html, url, language & content_type to skip the fetchContent from the url
      *
      * @return Entry
      */
-    public function updateEntry(Entry $entry, $url)
+    public function updateEntry(Entry $entry, $url, array $content = [])
     {
-        $content = $this->graby->fetchContent($url);
+        // do we have to fetch the content or the provided one is ok?
+        if (empty($content) || false === $this->validateContent($content)) {
+            $content = $this->graby->fetchContent($url);
+        }
 
         $title = $content['title'];
         if (!$title && isset($content['open_graph']['og_title'])) {
@@ -62,7 +69,11 @@ class ContentProxy
         $entry->setLanguage($content['language']);
         $entry->setMimetype($content['content_type']);
         $entry->setReadingTime(Utils::getReadingTime($html));
-        $entry->setDomainName(parse_url($entry->getUrl(), PHP_URL_HOST));
+
+        $domainName = parse_url($entry->getUrl(), PHP_URL_HOST);
+        if (false !== $domainName) {
+            $entry->setDomainName($domainName);
+        }
 
         if (isset($content['open_graph']['og_image'])) {
             $entry->setPreviewPicture($content['open_graph']['og_image']);
@@ -112,5 +123,18 @@ class ContentProxy
                 $entry->addTag($tagEntity);
             }
         }
+    }
+
+    /**
+     * Validate that the given content as enough value to be used
+     * instead of fetch the content from the url.
+     *
+     * @param array $content
+     *
+     * @return bool true if valid otherwise false
+     */
+    private function validateContent(array $content)
+    {
+        return isset($content['title']) && isset($content['html']) && isset($content['url']) && isset($content['language']) && isset($content['content_type']);
     }
 }
