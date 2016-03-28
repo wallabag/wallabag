@@ -68,6 +68,38 @@ class TagControllerTest extends WallabagCoreTestCase
         $this->assertEquals(2, count($newEntry->getTags()));
     }
 
+    public function testAddMultipleTagToEntry()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $entry = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneByUsernameAndNotArchived('admin');
+
+        $crawler = $client->request('GET', '/view/'.$entry->getId());
+
+        $form = $crawler->filter('form[name=tag]')->form();
+
+        $data = array(
+            'tag[label]' => 'foo2, bar2',
+        );
+
+        $client->submit($form, $data);
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+
+        $newEntry = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->find($entry->getId());
+
+        $tags = $newEntry->getTags()->toArray();
+        $this->assertGreaterThanOrEqual(2, count($tags));
+        $this->assertNotEquals(false, array_search('foo2', $tags), 'Tag foo2 is assigned to the entry');
+        $this->assertNotEquals(false, array_search('bar2', $tags), 'Tag bar2 is assigned to the entry');
+    }
+
     public function testRemoveTagFromEntry()
     {
         $this->logInAs('admin');
