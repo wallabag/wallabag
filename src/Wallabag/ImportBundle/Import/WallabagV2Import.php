@@ -47,24 +47,28 @@ class WallabagV2Import extends WallabagV1Import implements ImportInterface
                 continue;
             }
 
-            // @see ContentProxy->updateEntry
-            $entry = new Entry($this->user);
-            $entry->setUrl($importedEntry['url']);
-            $entry->setTitle($importedEntry['title']);
-            $entry->setArchived($importedEntry['is_archived'] || $this->markAsRead);
-            $entry->setStarred($importedEntry['is_starred']);
-            $entry->setContent($importedEntry['content']);
-            $entry->setReadingTime($importedEntry['reading_time']);
-            $entry->setDomainName($importedEntry['domain_name']);
-            if (isset($importedEntry['mimetype'])) {
-                $entry->setMimetype($importedEntry['mimetype']);
+            $importedEntry['html'] = $importedEntry['content'];
+            $importedEntry['content_type'] = $importedEntry['mimetype'];
+
+            $entry = $this->contentProxy->updateEntry(
+                new Entry($this->user),
+                $importedEntry['url'],
+                $importedEntry
+            );
+
+            if (array_key_exists('tags', $importedEntry) && !empty($importedEntry['tags'])) {
+                $this->contentProxy->assignTagsToEntry(
+                    $entry,
+                    $importedEntry['tags']
+                );
             }
-            if (isset($importedEntry['language'])) {
-                $entry->setLanguage($importedEntry['language']);
-            }
+
             if (isset($importedEntry['preview_picture'])) {
                 $entry->setPreviewPicture($importedEntry['preview_picture']);
             }
+
+            $entry->setArchived($importedEntry['is_archived'] || $this->markAsRead);
+            $entry->setStarred($importedEntry['is_starred']);
 
             $this->em->persist($entry);
             ++$this->importedEntries;

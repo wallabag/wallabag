@@ -17,10 +17,33 @@ class PocketControllerTest extends WallabagCoreTestCase
         $this->assertEquals(1, $crawler->filter('button[type=submit]')->count());
     }
 
-    public function testImportPocketAuth()
+    public function testImportPocketAuthBadToken()
     {
         $this->logInAs('admin');
         $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/import/pocket/auth');
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+    }
+
+    public function testImportPocketAuth()
+    {
+        $this->markTestSkipped('PocketImport: Find a way to properly mock a service.');
+
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $pocketImport = $this->getMockBuilder('Wallabag\ImportBundle\Import\PocketImport')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $pocketImport
+            ->expects($this->once())
+            ->method('getRequestToken')
+            ->willReturn('token');
+
+        $client->getContainer()->set('wallabag_import.pocket.import', $pocketImport);
 
         $crawler = $client->request('GET', '/import/pocket/auth');
 

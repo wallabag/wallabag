@@ -4,6 +4,7 @@ namespace Wallabag\ImportBundle\Tests\Import;
 
 use Wallabag\ImportBundle\Import\WallabagV2Import;
 use Wallabag\UserBundle\Entity\User;
+use Wallabag\CoreBundle\Entity\Entry;
 use Monolog\Logger;
 use Monolog\Handler\TestHandler;
 
@@ -66,6 +67,11 @@ class WallabagV2ImportTest extends \PHPUnit_Framework_TestCase
             ->method('getRepository')
             ->willReturn($entryRepo);
 
+        $this->contentProxy
+            ->expects($this->exactly(2))
+            ->method('updateEntry')
+            ->willReturn(new Entry($this->user));
+
         $res = $wallabagV2Import->import();
 
         $this->assertTrue($res);
@@ -89,6 +95,11 @@ class WallabagV2ImportTest extends \PHPUnit_Framework_TestCase
             ->expects($this->any())
             ->method('getRepository')
             ->willReturn($entryRepo);
+
+        $this->contentProxy
+            ->expects($this->exactly(2))
+            ->method('updateEntry')
+            ->willReturn(new Entry($this->user));
 
         // check that every entry persisted are archived
         $this->em

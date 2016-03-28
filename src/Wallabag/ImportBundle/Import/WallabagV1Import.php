@@ -7,7 +7,6 @@ use Psr\Log\NullLogger;
 use Doctrine\ORM\EntityManager;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\UserBundle\Entity\User;
-use Wallabag\CoreBundle\Tools\Utils;
 use Wallabag\CoreBundle\Helper\ContentProxy;
 
 class WallabagV1Import implements ImportInterface
@@ -153,18 +152,24 @@ class WallabagV1Import implements ImportInterface
                 continue;
             }
 
-            // @see ContentProxy->updateEntry
-            $entry = new Entry($this->user);
-            $entry->setUrl($importedEntry['url']);
+            $data = [
+                'title' => $importedEntry['title'],
+                'html' => $importedEntry['content'],
+                'url' => $importedEntry['url'],
+                'content_type' => '',
+                'language' => '',
+            ];
 
+            // force content to be refreshed in case on bad fetch in the v1 installation
             if (in_array($importedEntry['title'], $untitled)) {
-                $entry = $this->contentProxy->updateEntry($entry, $importedEntry['url']);
-            } else {
-                $entry->setContent($importedEntry['content']);
-                $entry->setTitle($importedEntry['title']);
-                $entry->setReadingTime(Utils::getReadingTime($importedEntry['content']));
-                $entry->setDomainName(parse_url($importedEntry['url'], PHP_URL_HOST));
+                $data = [];
             }
+
+            $entry = $this->contentProxy->updateEntry(
+                new Entry($this->user),
+                $importedEntry['url'],
+                $data
+            );
 
             if (array_key_exists('tags', $importedEntry) && $importedEntry['tags'] != '') {
                 $this->contentProxy->assignTagsToEntry(

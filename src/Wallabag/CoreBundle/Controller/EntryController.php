@@ -92,13 +92,11 @@ class EntryController extends Controller
     }
 
     /**
-     * @param Request $request
-     *
      * @Route("/new", name="new")
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function addEntryAction(Request $request)
+    public function addEntryAction()
     {
         return $this->render('WallabagCoreBundle:Entry:new.html.twig');
     }

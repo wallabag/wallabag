@@ -23,9 +23,9 @@ php:
     - hhvm
 
 env:
-  - DB=mysql
-  - DB=pgsql
-  - DB=sqlite
+    - DB=mysql
+    - DB=pgsql
+    - DB=sqlite
 
 matrix:
     fast_finish: true

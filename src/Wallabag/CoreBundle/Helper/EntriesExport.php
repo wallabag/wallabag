@@ -81,27 +81,9 @@ class EntriesExport
      */
     public function exportAs($format)
     {
-        switch ($format) {
-            case 'epub':
-                return $this->produceEpub();
-
-            case 'mobi':
-                return $this->produceMobi();
-
-            case 'pdf':
-                return $this->producePDF();
-
-            case 'csv':
-                return $this->produceCSV();
-
-            case 'json':
-                return $this->produceJSON();
-
-            case 'xml':
-                return $this->produceXML();
-
-            case 'txt':
-                return $this->produceTXT();
+        $functionName = 'produce'.ucfirst($format);
+        if (method_exists($this, $functionName)) {
+            return $this->$functionName();
         }
 
         throw new \InvalidArgumentException(sprintf('The format "%s" is not yet supported.', $format));
@@ -242,7 +224,7 @@ class EntriesExport
     /**
      * Use TCPDF to dump a .pdf file.
      */
-    private function producePDF()
+    private function producePdf()
     {
         $pdf = new \TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
@@ -296,7 +278,7 @@ class EntriesExport
     /**
      * Inspired from CsvFileDumper.
      */
-    private function produceCSV()
+    private function produceCsv()
     {
         $delimiter = ';';
         $enclosure = '"';
@@ -336,7 +318,7 @@ class EntriesExport
         );
     }
 
-    private function produceJSON()
+    private function produceJson()
     {
         return Response::create(
             $this->prepareSerializingContent('json'),
@@ -349,7 +331,7 @@ class EntriesExport
         );
     }
 
-    private function produceXML()
+    private function produceXml()
     {
         return Response::create(
             $this->prepareSerializingContent('xml'),
@@ -362,7 +344,7 @@ class EntriesExport
         );
     }
 
-    private function produceTXT()
+    private function produceTxt()
     {
         $content = '';
         $bar = str_repeat('=', 100);

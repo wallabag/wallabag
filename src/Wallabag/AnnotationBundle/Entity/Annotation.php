@@ -82,7 +82,7 @@ class Annotation
     /*
      * @param User     $user
      */
-    public function __construct(\Wallabag\UserBundle\Entity\User $user)
+    public function __construct(User $user)
     {
         $this->user = $user;
     }
@@ -204,7 +204,7 @@ class Annotation
     /**
      * Set user.
      *
-     * @param string $user
+     * @param User $user
      *
      * @return Annotation
      */
@@ -218,7 +218,7 @@ class Annotation
     /**
      * Get user.
      *
-     * @return string
+     * @return User
      */
     public function getUser()
     {
