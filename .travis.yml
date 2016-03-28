@@ -43,13 +43,6 @@ matrix:
           env: DB=pgsql  # driver for PostgreSQL currently unsupported by HHVM, requires 3rd party dependency
     allow_failures:
         - php: hhvm
-    include:
-        - php: 5.5
-          env: BUILD_ASSETS="no"
-        - php: 5.6
-          env: BUILD_ASSETS="no"
-        - php: hhvm
-          env: BUILD_ASSETS="no"
 
 # exclude v1 branches
 branches:
@@ -65,8 +58,8 @@ before_script:
 
 before_install:
     - if [[ $TRAVIS_REPO_SLUG = wallabag/wallabag ]]; then cp .composer-auth.json ~/.composer/auth.json; fi;
-    - if [[ "$BUILD_ASSETS" != "no" ]]; then source ~/.nvm/nvm.sh && nvm install 5.0; fi;
-    - if [[ "$BUILD_ASSETS" != "no" ]]; then npm install -g npm@latest; fi;
+    - source ~/.nvm/nvm.sh && nvm install 5.0
+    - npm install -g npm@latest
 
 script:
     - travis_wait composer install --no-interaction --no-progress --prefer-dist -o
