@@ -1,18 +1,18 @@
 security:
     login:
-        page_title: 'Bienvenido a wallabag !'
-        keep_logged_in: 'Mantenme conectado'
-        forgot_password: '¿Ha olvidado su contraseña?'
+        page_title: '¡Bienvenido a wallabag !'
+        keep_logged_in: 'Manténgame conectado'
+        forgot_password: '¿Se ha olvidado de su contraseña?'
         submit: 'Conectarse'
         register: 'Registrarse'
         username: 'Nombre de usuario'
         password: 'Contraseña'
         # cancel: 'Cancel'
     resetting:
-        description: "Introduce tu dirección de email y le enviaremos las instrucciones para resetear la contraseña"
+        description: "Introduzca su dirección del correo electrónico y le enviaremos las instrucciones para reiniciar la contraseña"
     register:
-        # page_title: 'Create an account'
-        # go_to_account: 'Go to your account'
+        # page_title: 'Crear una cuenta'
+        # go_to_account: 'Acceder su cuenta'
 
 menu:
     left:
@@ -25,11 +25,11 @@ menu:
         internal_settings: 'Configuración interna'
         import: 'Importar'
         howto: 'Ayuda'
-        # developer: 'Developer'
+        # developer: 'Promotor'
         logout: 'Desconectarse'
         about: 'Acerca de'
         search: 'Buscar'
-        # save_link: 'Save a link'
+        # save_link: 'Archivar un enlace'
         back_to_unread: 'Volver a los artículos sin leer'
     top:
         add_new_entry: 'Añadir un nuevo artículo'
@@ -37,11 +37,11 @@ menu:
         filter_entries: 'Filtrar los artículos'
         export: 'Exportar'
     search_form:
-        input_label: 'Introduce tu búsqueda aquí'
+        input_label: 'Introduzca su búsqueda aquí'
 
 footer:
     wallabag:
-        elsewhere: 'Llevate wallabag contigo'
+        elsewhere: 'Lleve wallabag consigo'
         social: 'Social'
         # powered_by: 'powered by'
         about: 'Acerca de'
