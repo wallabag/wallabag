@@ -74,10 +74,9 @@ class InstallCommand extends ContainerAwareCommand
         $fulfilled = true;
 
         $label = '<comment>PDO Drivers</comment>';
-        if (extension_loaded('pdo_sqlite') || extension_loaded('pdo_mysql') || extension_loaded('pdo_pgsql')) {
-            $status = '<info>OK!</info>';
-            $help = '';
-        } else {
+        $status = '<info>OK!</info>';
+        $help = '';
+        if (!(extension_loaded('pdo_sqlite') || extension_loaded('pdo_mysql') || extension_loaded('pdo_pgsql'))) {
             $fulfilled = false;
             $status = '<error>ERROR!</error>';
             $help = 'Needs one of sqlite, mysql or pgsql PDO drivers';
@@ -88,11 +87,10 @@ class InstallCommand extends ContainerAwareCommand
 
         foreach ($this->functionExists as $functionRequired) {
             $label = '<comment>'.$functionRequired.'</comment>';
+            $status = '<info>OK!</info>';
+            $help = '';
 
-            if (function_exists($functionRequired)) {
-                $status = '<info>OK!</info>';
-                $help = '';
-            } else {
+            if (!function_exists($functionRequired)) {
                 $fulfilled = false;
                 $status = '<error>ERROR!</error>';
                 $help = 'You need the '.$functionRequired.' function activated';

@@ -367,6 +367,8 @@ class EntriesExport
     /**
      * Return a Serializer object for producing processes that need it (JSON & XML).
      *
+     * @param string $format
+     *
      * @return Serializer
      */
     private function prepareSerializingContent($format)
