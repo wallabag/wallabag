@@ -11,8 +11,8 @@ security:
     resetting:
         description: "Introduzca su dirección del correo electrónico y le enviaremos las instrucciones para reiniciar la contraseña"
     register:
-        # page_title: 'Crear una cuenta'
-        # go_to_account: 'Acceder su cuenta'
+        page_title: 'Crear una cuenta'
+        go_to_account: 'Acceder su cuenta'
 
 menu:
     left:
@@ -25,11 +25,11 @@ menu:
         internal_settings: 'Configuración interna'
         import: 'Importar'
         howto: 'Ayuda'
-        # developer: 'Promotor'
+        developer: 'Promotor'
         logout: 'Desconectarse'
         about: 'Acerca de'
         search: 'Buscar'
-        # save_link: 'Archivar un enlace'
+        save_link: 'Archivar un enlace'
         back_to_unread: 'Volver a los artículos sin leer'
     top:
         add_new_entry: 'Añadir un nuevo artículo'
