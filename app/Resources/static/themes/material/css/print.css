@@ -1,65 +1,64 @@
 @media print {
+  /* ### Layout ### */
 
-    /* ### Layout ### */
+  body {
+    font-family: Serif;
+    background-color: #fff;
+  }
 
-    body {
-        font-family: Serif;
-        background-color: #fff;
-    }
+  @page {
+    margin: 1cm;
+  }
 
-    @page {
-        margin: 1cm;
-    }
+  img {
+    max-width: 100% !important;
+  }
 
-    img {
-        max-width: 100% !important;
-    }
+  /* ### Content ### */
 
-    /* ### Content ### */
+  /* Hide useless blocks */
+  body > header,
+  #article_toolbar,
+  #links,
+  #sort,
+  body > footer,
+  .top_link,
+  div.tools,
+  header div,
+  .messages,
+  .entry + .results {
+    display: none !important;
+  }
 
-    /* Hide useless blocks */
-    body > header,
-    #article_toolbar,
-    #links,
-    #sort,
-    body > footer,
-    .top_link,
-    div.tools,
-    header div,
-    .messages,
-    .entry + .results {
-        display: none !important;
-    }
+  article {
+    border: none !important;
+  }
 
-    article {
-        border: none !important;
-    }
+  /* Add URL after links */
+  .vieworiginal a::after {
+    content: " (" attr(href) ")";
+  }
 
-    /* Add URL after links */
-    .vieworiginal a:after {
-        content: " (" attr(href) ")";
-    }
+  /* Add explanation after abbr */
+  abbr[title]::after {
+    content: " (" attr(title) ")";
+  }
 
-    /* Add explanation after abbr */
-    abbr[title]:after {
-        content: " (" attr(title) ")";
-    }
+  /* Change border on current pager item */
+  .pagination span.current {
+    border-style: dashed;
+  }
 
-    /* Change border on current pager item */
-    .pagination span.current {
-        border-style: dashed;
-    }
+  #main {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    margin-left: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+  }
 
-    #main {
-    		width: 100%;
-    		padding: 0;
-    		margin: 0;
-    		margin-left: 0;
-    	  padding-right: 0;
-      	padding-bottom: 0;
-    }
-
-    #article {
-    		width: 100%;
-    }
+  #article {
+    width: 100%;
+  }
 }

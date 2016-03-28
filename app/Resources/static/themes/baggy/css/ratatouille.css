@@ -6,8 +6,8 @@
 
 * {
   -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html {
@@ -18,7 +18,7 @@ html {
 
 body {
   font-size: 1em;
-  line-height:1.5;
+  line-height: 1.5;
   margin: 0;
 }
 
@@ -35,7 +35,7 @@ h6:first-child,
 p:first-child,
 ul:first-child,
 ol:first-child,
-dl:first-child{
+dl:first-child {
   margin-top: 0;
 }
 
@@ -43,13 +43,12 @@ code,
 kbd,
 pre,
 samp {
-    font-family: monospace, serif;
+  font-family: monospace, serif;
 }
 
 pre {
-    white-space: pre-wrap;
+  white-space: pre-wrap;
 }
-
 
 .upper {
   text-transform: uppercase;
@@ -61,12 +60,13 @@ pre {
 
 .inner {
   margin: 0 auto;
-  max-width: 61.25em;/*980px*/
+  max-width: 61.25em; /* 980px */
 }
 
-table, img {
+table,
+img {
   max-width: 100%;
-  height :auto;
+  height: auto;
 }
 
 iframe {
@@ -93,13 +93,13 @@ button,
 input,
 select,
 textarea {
-    font-family: inherit;
-    font-size: 100%;
-    margin: 0;
+  font-family: inherit;
+  font-size: 100%;
+  margin: 0;
 }
 
 input[type="search"] {
-    -webkit-appearance: textfield;
+  -webkit-appearance: textfield;
 }
 
 /* ==========================================================================
@@ -115,11 +115,17 @@ input[type="search"] {
   display: none;
 }
 
-.dtable { display:table }
+.dtable {
+  display: table;
+}
 
-  .dtable > * { display:table-row; }
+.dtable > * {
+  display: table-row;
+}
 
-    .dtable > * > * { display:table-cell; }
+.dtable > * > * {
+  display: table-cell;
+}
 
 .element-invisible {
   border: 0;
@@ -133,32 +139,60 @@ input[type="search"] {
 }
 
 .small {
-  font-size:0.8em;
+  font-size: 0.8em;
 }
 
 .big {
   font-size: 1.2em;
 }
 
-/*Width*/
+/* Width */
 
-.w100 { width:100%; }
-.w90 { width:90%; }
-.w80 { width:80%; }
-.w70 { width:70%; }
-.w60 { width:60%; }
-.w50 { width:50%; }
-.w40 { width:40%; }
-.w30 { width:30%; }
-.w20 { width:20%; }
-.w10 { width:10%; }
+.w100 {
+  width: 100%;
+}
 
+.w90 {
+  width: 90%;
+}
+
+.w80 {
+  width: 80%;
+}
+
+.w70 {
+  width: 70%;
+}
+
+.w60 {
+  width: 60%;
+}
+
+.w50 {
+  width: 50%;
+}
+
+.w40 {
+  width: 40%;
+}
+
+.w30 {
+  width: 30%;
+}
+
+.w20 {
+  width: 20%;
+}
+
+.w10 {
+  width: 10%;
+}
 
 /* ==========================================================================
    Internet Explorer
    ========================================================================== */
 
-/*IE8 and IE9*/
+/* IE8 and IE9 */
 
 article,
 aside,
@@ -172,40 +206,20 @@ main,
 nav,
 section,
 summary {
-    display: block;
+  display: block;
 }
 
-/*IE8 and IE9*/
+/* IE8 and IE9 */
 
 audio,
 canvas,
 video {
-    display: inline-block;
+  display: inline-block;
 }
 
-@media screen and (-webkit-min-device-pixel-ratio:0){
-  select{
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select {
     -webkit-appearance: none;
     border-radius: 0;
   }
 }
-
-/* ==========================================================================
-   Medias Queries
-   ========================================================================== */
-
-/*Desktop 1080px*/
-
-@media screen and (max-width: 67.50em) {
-}
-
-/*Tablet 800px*/
-
-@media screen and (max-width: 50em) {
-}
-
-/*Mobile 640px*/
-
-@media screen and (max-width: 40em) {
-}
-

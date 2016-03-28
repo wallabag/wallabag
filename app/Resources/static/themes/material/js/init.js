@@ -80,4 +80,37 @@ $(document).ready(function(){
         var scrollPercent = (s / (d-c)) * 100;
         $(".progress .determinate").css('width', scrollPercent+'%');
     });
+
+  /* ==========================================================================
+     Annotations & Remember position
+     ========================================================================== */
+
+    if ($("article").length) {
+        var app = new annotator.App();
+
+        app.include(annotator.ui.main, {
+            element: document.querySelector('article')
+        });
+
+        var x = JSON.parse($('#annotationroutes').html());
+        app.include(annotator.storage.http, x);
+
+        app.start().then(function () {
+             app.annotations.load({entry: x.entryId});
+        });
+
+        $(window).scroll(function(e){
+            var scrollTop = $(window).scrollTop();
+            var docHeight = $(document).height();
+            var scrollPercent = (scrollTop) / (docHeight);
+            var scrollPercentRounded = Math.round(scrollPercent*100)/100;
+            savePercent(x.entryId, scrollPercentRounded);
+        });
+
+        retrievePercent(x.entryId);
+
+        $(window).resize(function(){
+            retrievePercent(x.entryId);
+        });
+    }
 });

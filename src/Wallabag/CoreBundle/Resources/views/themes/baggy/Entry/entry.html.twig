@@ -46,87 +46,16 @@
             {{ entry.content | raw }}
         </article>
     </div>
-    <script src="{{ asset('bundles/wallabagcore/themes/_global/js/restoreScroll.js')}}"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-
-            // toggle read property of current article
-          /*  $('#markAsRead').click(function(){
-                $("body").css("cursor", "wait");
-                $.ajax( { url: '{{ path('archive_entry', { 'id': entry.id }) }}' }).done(
-                        function( data ) {
-                            if ( data == '1' ) {
-                                if ( $('#markAsRead').hasClass("archive-off") ) {
-                                    $('#markAsRead').removeClass("archive-off");
-                                    $('#markAsRead').addClass("archive");
-                                }
-                                else {
-                                    $('#markAsRead').removeClass("archive");
-                                    $('#markAsRead').addClass("archive-off");
-                                }
-                            }
-                            else {
-                                alert('Error! Pls check if you are logged in.');
-                            }
-                        });
-                $("body").css("cursor", "auto");
-            });*/
-
-            // toggle favorite property of current article
-          /*  $('#setFav').click(function(){
-                $("body").css("cursor", "wait");
-                $.ajax( { url: '{{ path('star_entry', { 'id': entry.id }) }}' }).done(
-                        function( data ) {
-                            if ( data == '1' ) {
-                                if ( $('#setFav').hasClass("fav-off") ) {
-                                    $('#setFav').removeClass("fav-off");
-                                    $('#setFav').addClass("fav");
-                                }
-                                else {
-                                    $('#setFav').removeClass("fav");
-                                    $('#setFav').addClass("fav-off");
-                                }
-                            }
-                            else {
-                                alert('Error! Pls check if you are logged in.');
-                            }
-                        });
-                $("body").css("cursor", "auto");
-            });*/
-
-            $(window).scroll(function(e){
-                var scrollTop = $(window).scrollTop();
-                var docHeight = $(document).height();
-                var scrollPercent = (scrollTop) / (docHeight);
-                var scrollPercentRounded = Math.round(scrollPercent*100)/100;
-                savePercent({{ entry.id }}, scrollPercentRounded);
-            });
-
-            retrievePercent({{ entry.id }});
-
-            $(window).resize(function(){
-                retrievePercent({{ entry.id }});
-            });
-        });
-
-        var app = new annotator.App();
-        app.include(annotator.ui.main, {
-            element: document.querySelector('article')
-        });
-        app.include(annotator.storage.http, {
-            prefix: '',
-            urls: {
-                create: '{{ path('annotations_post_annotation', { 'entry': entry.id }) }}',
-                update: '{{ path('annotations_put_annotation', { 'annotation': 'idAnnotation' }) }}',
-                destroy: '{{ path('annotations_delete_annotation', { 'annotation': 'idAnnotation' }) }}',
-                search: '{{ path('annotations_get_annotations', { 'entry': entry.id }) }}'
-            }
-        });
-        app
-            .start()
-            .then(function () {
-                app.annotations.load({entry: {{ entry.id }}});
-            });
+    <script id="annotationroutes" type="application/json">
+    {
+        "prefix": "",
+        "urls": {
+            "create": "{{ path('annotations_post_annotation', { 'entry': entry.id }) }}",
+            "update": "{{ path('annotations_put_annotation', { 'annotation': 'idAnnotation' }) }}",
+            "destroy": "{{ path('annotations_delete_annotation', { 'annotation': 'idAnnotation' }) }}",
+            "search": "{{ path('annotations_get_annotations', { 'entry': entry.id }) }}"
+        },
+        "entryId": "{{ entry.id }}"
+    }
     </script>
-
 {% endblock %}

@@ -13,116 +13,122 @@
 
    ========================================================================== */
 
-
 /* ==========================================================================
    0 = Common
    ========================================================================== */
 
 @font-face {
-    font-family: 'icomoon';
-    src:url('../fonts/icomoon.eot');
-    src:url('../fonts/icomoon.eot#iefix') format('embedded-opentype'),
-        url('../fonts/icomoon.ttf') format('truetype'),
-        url('../fonts/icomoon.woff') format('woff'),
-        url('../fonts/icomoon.svg#icomoon') format('svg');
-    font-weight: normal;
-    font-style: normal;
+  font-family: icomoon;
+  src: url("../fonts/icomoon.eot");
+  src:
+    url("../fonts/icomoon.eot#iefix") format("embedded-opentype"),
+    url("../fonts/icomoon.ttf") format("truetype"),
+    url("../fonts/icomoon.woff") format("woff"),
+    url("../fonts/icomoon.svg#icomoon") format("svg");
+  font-weight: normal;
+  font-style: normal;
 }
 
-[class^="icon-"], [class*=" icon-"] {
-    font-family: 'icomoon';
-    speak: none;
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
+[class^="icon-"],
+[class*=" icon-"] {
+  font-family: icomoon;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
 
-    /* Better Font Rendering =========== */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-    background: #f0f0f0;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  background: #f0f0f0;
 }
 
 body.login main {
-    padding: 0;
+  padding: 0;
 }
 
 #warning_message {
-    position: fixed;
-    background-color: #ff6347;
-    z-index: 1000;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    color: #000;
+  position: fixed;
+  background-color: #ff6347;
+  z-index: 1000;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  color: #000;
 }
 
 #warning_message a {
-    color: #555;
+  color: #555;
 }
 
 .border-bottom {
-    border-bottom: 1px solid #DDD;
+  border-bottom: 1px solid #ddd;
 }
 
-nav, main, footer {
-    padding-left: 240px;
+nav,
+main,
+footer {
+  padding-left: 240px;
 }
 
-main, #content, .valign-wrapper {
-    height: 100%;
+main,
+#content,
+.valign-wrapper {
+  height: 100%;
 }
 
 #main {
-    flex: 1 0 auto;
+  flex: 1 0 auto;
 }
 
 .results {
-    height: 1em;
-    line-height: 30px;
+  height: 1em;
+  line-height: 30px;
 }
 
-.results .nb-results, .results .pagination {
-    margin: 15px;
-    margin-bottom: 0;
+.results .nb-results,
+.results .pagination {
+  margin: 15px;
+  margin-bottom: 0;
 }
 
 .pagination li {
-    padding: 0;
+  padding: 0;
 }
 
 .pagination a {
-    padding: 0px 10px;
-    height: 30px;
-    display: block;
+  padding: 0 10px;
+  height: 30px;
+  display: block;
 }
 
 .page-footer .footer-copyright p {
-    display: inline;
+  display: inline;
 }
 
 .hidden {
-    display: none;
+  display: none;
 }
 
 .picker__date-display {
-    display: none;
+  display: none;
 }
 
 footer.page-footer {
-    margin-top: 10px;
-    padding-top: 10px;
+  margin-top: 10px;
+  padding-top: 10px;
 }
 
 footer .row {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 /* ==========================================================================
@@ -130,74 +136,75 @@ footer .row {
    ========================================================================== */
 
 nav input {
-    color: #aaa;
+  color: #aaa;
 }
 
 .nav-wrapper .button-collapse {
-    padding: 0px 15px;
+  padding: 0 15px;
 }
 
 .nav-input {
-    display: none;
+  display: none;
 }
 
 .nav-panels {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .nav-panel-buttom li {
-    max-height: 64px;
+  max-height: 64px;
 }
 
 .nav-panels {
-    transition: background 0.2s ease;
+  transition: background 0.2s ease;
 }
 
 .nav-panel-add .mdi-content-add,
 .nav-panel-search .mdi-action-search,
 .nav-panels .mdi-navigation-close {
-    color: #444 !important;
+  color: #444 !important;
 }
 
 .nav-panels .action {
-    padding-left: 0.75rem;
-    font-size: 2.1rem;
-    white-space: nowrap;
+  padding-left: 0.75rem;
+  font-size: 2.1rem;
+  white-space: nowrap;
 }
 
 .nav-panels .input-field input {
-    display: block;
-    line-height: inherit;
-    padding-left: 4rem !important;
-    width: calc(100% - 8rem);
+  display: block;
+  line-height: inherit;
+  padding-left: 4rem !important;
+  width: calc(100% - 8rem);
 }
 
 .nav-panels .input-field input:focus {
-    background-color: #fff;
-    border: 0;
-    box-shadow: none;
-    color: #444;
+  background-color: #fff;
+  border: 0;
+  box-shadow: none;
+  color: #444;
 }
 
 .input-field.nav-panel-add label {
-    left: 1rem;
+  left: 1rem;
 }
 
 .input-field.nav-panel-add .mdi-navigation-close {
-    position: absolute;
-    top: 0;
-    right: 1rem;
-    color: transparent;
-    cursor: pointer;
-    font-size: 2rem;
-    transition: .3s color;
+  position: absolute;
+  top: 0;
+  right: 1rem;
+  color: transparent;
+  cursor: pointer;
+  font-size: 2rem;
+  transition: 0.3s color;
 }
 
 #button_filters {
-    display: none;
+  display: none;
 }
+
 #button_export {
-    display: none;
+  display: none;
 }
 
 /* ==========================================================================
@@ -205,39 +212,39 @@ nav input {
    ========================================================================== */
 
 .side-nav.fixed a {
-    font-size: 13px;
-    line-height: 44px;
-    height: 44px;
+  font-size: 13px;
+  line-height: 44px;
+  height: 44px;
 }
 
 .bold > a {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .side-nav > li.logo {
-    line-height: 0;
-    text-align: center;
+  line-height: 0;
+  text-align: center;
 }
 
 #main .logo a {
-    height: 100pt;
+  height: 100pt;
 }
 
 #main .logo img {
-    height: 100pt;
-    width: 100pt;
+  height: 100pt;
+  width: 100pt;
 }
 
 #main .logo:hover {
-    background: transparent;
+  background: transparent;
 }
 
 .side-nav li {
-    padding: 0px;
+  padding: 0;
 }
 
 .side-nav a {
-    margin: 0px 1rem;
+  margin: 0 1rem;
 }
 
 /* ==========================================================================
@@ -245,19 +252,19 @@ nav input {
  * ========================================================================== */
 
 #filters button {
-    padding: 0px;
-    width: 100%;
+  padding: 0;
+  width: 100%;
 }
 
 .side-nav.fixed.right-aligned {
-    right: -250px;
-    left: auto !important;
-    overflow-y: visible;
+  right: -250px;
+  left: auto !important;
+  overflow-y: visible;
 }
 
 #filters div.with-checkbox {
-    height: 3rem;
-    margin-top: 0px;
+  height: 3rem;
+  margin-top: 0;
 }
 
 /* ==========================================================================
@@ -265,68 +272,68 @@ nav input {
    ========================================================================== */
 
 main #content {
-    padding: 0px 0.5rem;
+  padding: 0 0.5rem;
 }
 
 main ul.row {
-    padding: 0px 0.75rem;
+  padding: 0 0.75rem;
 }
 
 .data .card .card-body {
-    height: 22em;
-    overflow: hidden;
+  height: 22em;
+  overflow: hidden;
 }
 
 .card .card-content .card-title {
-    line-height: 32px;
+  line-height: 32px;
 }
 
 .card .card-content .estimatedTime {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .card .card-action .original {
-    line-height: 24px;
+  line-height: 24px;
 }
 
 .card .card-action ul.links {
-    margin: 0;
-    font-size: 24px;
-    line-height: 24px;
+  margin: 0;
+  font-size: 24px;
+  line-height: 24px;
 }
 
 .card .card-action a {
-    color: #ffffff;
-    margin: 0;
+  color: #fff;
+  margin: 0;
 }
 
 .card .card-action a:hover {
-    color: #ffffff;
+  color: #fff;
 }
 
 .settings .div_tabs {
-    padding-bottom: 15px;
+  padding-bottom: 15px;
 }
 
 .card.sw {
-    max-width: 370px;
-    margin-left: auto;
-    margin-right: auto;
+  max-width: 370px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.mdi-card-close:before {
-    content: "\e8aa";
+.mdi-card-close::before {
+  content: "\e8aa";
 }
 
 .card .card-image {
-    height: 14em;
+  height: 14em;
 }
 
 .card .card-image .preview {
-    height: 14em;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: 50%;
+  height: 14em;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50%;
 }
 
 /* ==========================================================================
@@ -334,185 +341,208 @@ main ul.row {
    ========================================================================== */
 
 #article {
-    font-size: 20px;
-    margin: 0px auto;
-    max-width: 40em;
+  font-size: 20px;
+  margin: 0 auto;
+  max-width: 40em;
 }
 
 #article img {
-    max-width: 100%;
-    height: auto;
+  max-width: 100%;
+  height: auto;
 }
 
 .reader-mode {
-    width: 95px !important;
-    transition: width 0.2s ease;
+  width: 95px !important;
+  transition: width 0.2s ease;
 }
 
 .reader-mode:hover {
-    width: 240px !important;
+  width: 240px !important;
 }
 
 .reader-mode .collapsible-body {
-    height: 0;
-    overflow: hidden;
+  height: 0;
+  overflow: hidden;
 }
 
 .reader-mode:hover .collapsible-body {
-    height: auto;
+  height: auto;
 }
 
 .reader-mode span {
-    opacity: 0;
-    transition: opacity 0.2s ease;
+  opacity: 0;
+  transition: opacity 0.2s ease;
 }
 
 .reader-mode:hover span {
-    opacity: 1;
+  opacity: 1;
 }
 
 .progress {
-    position:fixed;
-    top:0px;
-    width: 100%;
-    height: 3px;
-    margin: 0;
-    z-index: 9999;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 3px;
+  margin: 0;
+  z-index: 9999;
 }
 
 #article aside .link {
-    color: #000;
-    font-size: 0.6em;
-    text-decoration: none;
+  color: #000;
+  font-size: 0.6em;
+  text-decoration: none;
 }
 
 #article aside #list {
-    float: right;
-    margin-right: 15px;
+  float: right;
+  margin-right: 15px;
 }
 
 #article aside .chip {
-    background-color: #039be5;
-    color: #ffffff;
+  background-color: #039be5;
+  color: #fff;
 }
 
 #article aside .chip i {
-    color: #ffffff;
+  color: #fff;
 }
 
 /* ==========================================================================
    6 = Media queries
    ========================================================================== */
 
-  @media only screen and (max-width : 992px) {
-    header, main, footer {
-      padding-left: 0;
-    }
-    nav, main, footer {
-        padding-left: 0;
-    }
-    .pagination {
-        width: auto;
-    }
-    .reader-mode {
-        width: 240px !important;
-    }
-    .reader-mode span {
-        opacity: 1;
-    }
+@media only screen and (max-width: 992px) {
+  header,
+  main,
+  footer {
+    padding-left: 0;
   }
-
-@media only screen and (min-width : 400px) {
-    .nav-panel-buttom {
-        float: right;
-    }
+  nav,
+  main,
+  footer {
+    padding-left: 0;
+  }
+  .pagination {
+    width: auto;
+  }
+  .reader-mode {
+    width: 240px !important;
+  }
+  .reader-mode span {
+    opacity: 1;
+  }
 }
 
-@media only screen and (min-width : 993px) and (max-width : 1180px) {
-    .row .col.l1 {
+@media only screen and (min-width: 400px) {
+  .nav-panel-buttom {
+    float: right;
+  }
+}
+
+@media only screen and (min-width: 993px) and (max-width: 1180px) {
+  .row .col.l1 {
     width: 25%;
-    margin-left: 0; }
-    .row .col.l2 {
+    margin-left: 0;
+  }
+  .row .col.l2 {
     width: 33.33333%;
-    margin-left: 0; }
-    .row .col.l3 {
+    margin-left: 0;
+  }
+  .row .col.l3 {
     width: 41.66667%;
-    margin-left: 0; }
-    .row .col.l4 {
+    margin-left: 0;
+  }
+  .row .col.l4 {
     width: 50%;
-    margin-left: 0; }
-    .row .col.l5 {
+    margin-left: 0;
+  }
+  .row .col.l5 {
     width: 58.33333%;
-    margin-left: 0; }
-    .row .col.l6 {
+    margin-left: 0;
+  }
+  .row .col.l6 {
     width: 66.66667%;
-    margin-left: 0; }
-    .row .col.l7 {
+    margin-left: 0;
+  }
+  .row .col.l7 {
     width: 75%;
-    margin-left: 0; }
-    .row .col.l8 {
+    margin-left: 0;
+  }
+  .row .col.l8 {
     width: 83.33333%;
-    margin-left: 0; }
-    .row .col.l9 {
+    margin-left: 0;
+  }
+  .row .col.l9 {
     width: 91.66667%;
-    margin-left: 0; }
-    .row .col.l10 {
+    margin-left: 0;
+  }
+  .row .col.l10 {
     width: 100%;
-    margin-left: 0; }
+    margin-left: 0;
+  }
 }
 
-@media only screen and (max-width : 350px) {
-    .nb-results {
-        display: none;
-    }
+@media only screen and (max-width: 350px) {
+  .nb-results {
+    display: none;
+  }
 }
 
 /* ==========================================================================
    7 = Font
    ========================================================================== */
 
-.icon-google-plus2:before {
-    content: "\ea89";
-}
-.icon-facebook2:before {
-    content: "\ea8d";
-}
-.icon-twitter:before {
-    content: "\ea91";
-}
-.icon-apple:before {
-    content: "\eabf";
-}
-.icon-android:before {
-    content: "\eac1";
-}
-.icon-chrome:before {
-    content: "\eae5";
-}
-.icon-firefox:before {
-    content: "\eae6";
+.icon-google-plus2::before {
+  content: "\ea89";
 }
 
-footer [class^="icon-"], footer [class*=" icon-"] {
-    font-size: 2em;
-    transition: text-shadow 0.2s ease;
-    padding-right: 10px;
+.icon-facebook2::before {
+  content: "\ea8d";
 }
 
-footer [class^="icon-"]:hover, footer [class*=" icon-"]:hover {
-    text-shadow: 0 0 10px rgba(0,0,0,0.3);
+.icon-twitter::before {
+  content: "\ea91";
 }
 
+.icon-apple::before {
+  content: "\eabf";
+}
+
+.icon-android::before {
+  content: "\eac1";
+}
+
+.icon-chrome::before {
+  content: "\eae5";
+}
+
+.icon-firefox::before {
+  content: "\eae6";
+}
+
+footer [class^="icon-"],
+footer [class*=" icon-"] {
+  font-size: 2em;
+  transition: text-shadow 0.2s ease;
+  padding-right: 10px;
+}
+
+footer [class^="icon-"]::hover,
+footer [class*=" icon-"]::hover {
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
 
 /* ==========================================================================
    8 = Others
    ========================================================================== */
 
 /* force height on non-input field in the settings page */
-div.settings div.input-field div, div.settings div.input-field ul {
-    margin-top: 40px;
+div.settings div.input-field div,
+div.settings div.input-field ul {
+  margin-top: 40px;
 }
+
 /* but avoid to kill all file input */
 div.settings div.file-field div {
-    margin-top: inherit;
+  margin-top: inherit;
 }

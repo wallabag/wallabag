@@ -9,9 +9,11 @@
   },
   "dependencies": {
     "annotator": "git://github.com/wallabag/annotator.git#0f076c7d371ed25eb0793346f46982d90f2c4c85",
+    "autoprefixer": "^6.3.5",
     "bower": "^1.7.7",
     "browserify": "^13.0.0",
     "browserify-shim": "^3.8.12",
+    "cssnano": "^3.5.2",
     "grunt": ">=0.4.0",
     "grunt-browserify": "^4.0.1",
     "grunt-cli": "^0.1.13",
@@ -21,6 +23,7 @@
     "grunt-contrib-cssmin": "^1.0.0",
     "grunt-contrib-symlink": "^1.0.0",
     "grunt-contrib-uglify": "^1.0.0",
+    "grunt-postcss": "^0.8.0",
     "grunt-shell": "^1.2.1",
     "hammerjs": "^2.0.6",
     "jquery": "^2.2.1",
@@ -28,7 +31,9 @@
     "jquery.cookie": "^1.4.1",
     "load-grunt-tasks": "^3.4.1",
     "materialize-css": "^0.97.5",
+    "npm": "^3.8.3",
     "pickadate": "^3.5.6",
+    "postcss-cssnext": "^2.5.1",
     "prismjs": "^1.4.1"
   },
   "engines": {

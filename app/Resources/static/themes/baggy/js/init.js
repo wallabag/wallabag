@@ -1,6 +1,8 @@
 var $ = global.jquery = require('jquery');
 require('jquery.cookie');
 require('jquery-ui');
+var annotator = require('annotator');
+
 
 $.fn.ready(function() {
 
@@ -64,4 +66,36 @@ $.fn.ready(function() {
        return false;
     });
 
+  /* ==========================================================================
+     Annotations & Remember position
+     ========================================================================== */
+
+    if ($("article").length) {
+        var app = new annotator.App();
+
+        app.include(annotator.ui.main, {
+            element: document.querySelector('article')
+        });
+
+        var x = JSON.parse($('#annotationroutes').html());
+        app.include(annotator.storage.http, x);
+
+        app.start().then(function () {
+             app.annotations.load({entry: x.entryId});
+        });
+
+        $(window).scroll(function(e){
+            var scrollTop = $(window).scrollTop();
+            var docHeight = $(document).height();
+            var scrollPercent = (scrollTop) / (docHeight);
+            var scrollPercentRounded = Math.round(scrollPercent*100)/100;
+            savePercent(x.entryId, scrollPercentRounded);
+        });
+
+        retrievePercent(x.entryId);
+
+        $(window).resize(function(){
+            retrievePercent(x.entryId);
+        });
+    }
 });

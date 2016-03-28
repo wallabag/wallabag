@@ -67,10 +67,9 @@ class InstallCommandTest extends WallabagCoreTestCase
             'command' => $command->getName(),
         ));
 
-        $this->assertContains('Step 1 of 4. Checking system requirements.', $tester->getDisplay());
-        $this->assertContains('Step 2 of 4. Setting up database.', $tester->getDisplay());
-        $this->assertContains('Step 3 of 4. Administration setup.', $tester->getDisplay());
-        $this->assertContains('Step 4 of 4. Installing assets.', $tester->getDisplay());
+        $this->assertContains('Step 1 of 3. Checking system requirements.', $tester->getDisplay());
+        $this->assertContains('Step 2 of 3. Setting up database.', $tester->getDisplay());
+        $this->assertContains('Step 3 of 3. Administration setup.', $tester->getDisplay());
     }
 
     public function testRunInstallCommandWithReset()
@@ -97,11 +96,10 @@ class InstallCommandTest extends WallabagCoreTestCase
             '--reset' => true,
         ));
 
-        $this->assertContains('Step 1 of 4. Checking system requirements.', $tester->getDisplay());
-        $this->assertContains('Step 2 of 4. Setting up database.', $tester->getDisplay());
+        $this->assertContains('Step 1 of 3. Checking system requirements.', $tester->getDisplay());
+        $this->assertContains('Step 2 of 3. Setting up database.', $tester->getDisplay());
         $this->assertContains('Droping database, creating database and schema, clearing the cache', $tester->getDisplay());
-        $this->assertContains('Step 3 of 4. Administration setup.', $tester->getDisplay());
-        $this->assertContains('Step 4 of 4. Installing assets.', $tester->getDisplay());
+        $this->assertContains('Step 3 of 3. Administration setup.', $tester->getDisplay());
 
         // we force to reset everything
         $this->assertContains('Droping database, creating database and schema, clearing the cache', $tester->getDisplay());
@@ -142,10 +140,9 @@ class InstallCommandTest extends WallabagCoreTestCase
             'command' => $command->getName(),
         ));
 
-        $this->assertContains('Step 1 of 4. Checking system requirements.', $tester->getDisplay());
-        $this->assertContains('Step 2 of 4. Setting up database.', $tester->getDisplay());
-        $this->assertContains('Step 3 of 4. Administration setup.', $tester->getDisplay());
-        $this->assertContains('Step 4 of 4. Installing assets.', $tester->getDisplay());
+        $this->assertContains('Step 1 of 3. Checking system requirements.', $tester->getDisplay());
+        $this->assertContains('Step 2 of 3. Setting up database.', $tester->getDisplay());
+        $this->assertContains('Step 3 of 3. Administration setup.', $tester->getDisplay());
 
         // the current database doesn't already exist
         $this->assertContains('Creating database and schema, clearing the cache', $tester->getDisplay());
@@ -179,10 +176,9 @@ class InstallCommandTest extends WallabagCoreTestCase
             'command' => $command->getName(),
         ));
 
-        $this->assertContains('Step 1 of 4. Checking system requirements.', $tester->getDisplay());
-        $this->assertContains('Step 2 of 4. Setting up database.', $tester->getDisplay());
-        $this->assertContains('Step 3 of 4. Administration setup.', $tester->getDisplay());
-        $this->assertContains('Step 4 of 4. Installing assets.', $tester->getDisplay());
+        $this->assertContains('Step 1 of 3. Checking system requirements.', $tester->getDisplay());
+        $this->assertContains('Step 2 of 3. Setting up database.', $tester->getDisplay());
+        $this->assertContains('Step 3 of 3. Administration setup.', $tester->getDisplay());
 
         $this->assertContains('Droping schema and creating schema', $tester->getDisplay());
     }
@@ -233,10 +229,9 @@ class InstallCommandTest extends WallabagCoreTestCase
             'command' => $command->getName(),
         ));
 
-        $this->assertContains('Step 1 of 4. Checking system requirements.', $tester->getDisplay());
-        $this->assertContains('Step 2 of 4. Setting up database.', $tester->getDisplay());
-        $this->assertContains('Step 3 of 4. Administration setup.', $tester->getDisplay());
-        $this->assertContains('Step 4 of 4. Installing assets.', $tester->getDisplay());
+        $this->assertContains('Step 1 of 3. Checking system requirements.', $tester->getDisplay());
+        $this->assertContains('Step 2 of 3. Setting up database.', $tester->getDisplay());
+        $this->assertContains('Step 3 of 3. Administration setup.', $tester->getDisplay());
 
         $this->assertContains('Creating schema', $tester->getDisplay());
     }
@@ -265,9 +260,8 @@ class InstallCommandTest extends WallabagCoreTestCase
             '--no-interaction' => true,
         ));
 
-        $this->assertContains('Step 1 of 4. Checking system requirements.', $tester->getDisplay());
-        $this->assertContains('Step 2 of 4. Setting up database.', $tester->getDisplay());
-        $this->assertContains('Step 3 of 4. Administration setup.', $tester->getDisplay());
-        $this->assertContains('Step 4 of 4. Installing assets.', $tester->getDisplay());
+        $this->assertContains('Step 1 of 3. Checking system requirements.', $tester->getDisplay());
+        $this->assertContains('Step 2 of 3. Setting up database.', $tester->getDisplay());
+        $this->assertContains('Step 3 of 3. Administration setup.', $tester->getDisplay());
     }
 }

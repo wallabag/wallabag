@@ -5,30 +5,36 @@ module.exports = function (grunt) {
     appDir: 'app/Resources/static',
     buildDir: 'web/bundles/wallabagcore',
 
-    cssmin: {
+    postcss: {
       material: {
         options: {
-          report: 'gzip',
-          sourceMap: true,
-          keepSpecialComments: 0
-        },
-        files: {
-          '<%= buildDir %>/themes/material/css/style.min.css': [
-            '<%= buildDir %>/material.css'
+          map: {
+              inline: false
+          },
+
+          processors: [
+            require('pixrem')(),
+            require('autoprefixer')({browsers: 'last 2 versions'}),
+            require('cssnano')()
           ]
-        }
+        },
+        src: '<%= buildDir %>/material.css',
+        dest: '<%= buildDir %>/themes/material/css/style.min.css'
       },
       baggy: {
         options: {
-          report: 'gzip',
-          sourceMap: true,
-          keepSpecialComments: 0
-        },
-        files: {
-          '<%= buildDir %>/themes/baggy/css/style.min.css': [
-            '<%= buildDir %>/baggy.css'
+          map: {
+              inline: false
+          },
+
+          processors: [
+            require('pixrem')(),
+            require('autoprefixer')({browsers: 'last 2 versions'}),
+            require('cssnano')()
           ]
-        }
+        },
+        src: '<%= buildDir %>/baggy.css',
+        dest: '<%= buildDir %>/themes/baggy/css/style.min.css'
       }
     },
     concat: {
@@ -40,8 +46,8 @@ module.exports = function (grunt) {
           'node_modules/jquery/dist/jquery.js',
           'node_modules/jquery-ui/jquery-ui.js',
           'node_modules/materialize-css/bin/materialize.js',
-          '<%= appDir %>/themes/material/js/init.js',
-          '<%= appDir %>/themes/material/js/restoreScroll.js'
+          '<%= appDir %>/themes/_global/js/restoreScroll.js',
+          '<%= appDir %>/themes/material/js/init.js'
         ],
         dest: '<%= buildDir %>/material.js'
       },
@@ -50,7 +56,7 @@ module.exports = function (grunt) {
           'node_modules/jquery/dist/jquery.js',
           'node_modules/jquery-ui/jquery-ui.js',
           '<%= appDir %>/themes/baggy/js/init.js',
-          '<%= appDir %>/themes/baggy/js/restoreScroll.js',
+          '<%= appDir %>/themes/_global/js/restoreScroll.js',
           '<%= appDir %>/themes/baggy/js/autoClose.js',
           '<%= appDir %>/themes/baggy/js/autoCompleteTags.js',
           '<%= appDir %>/themes/baggy/js/closeMessage.js',
@@ -84,7 +90,7 @@ module.exports = function (grunt) {
             ['<%= buildDir %>/material.browser.js']
         },
         options: {
-          sourceMap: true
+          sourceMap: true,
         },
       },
       baggy: {
@@ -93,7 +99,7 @@ module.exports = function (grunt) {
             ['<%= buildDir %>/baggy.browser.js']
         },
         options: {
-          sourceMap: true
+          sourceMap: true,
         },
       },
     },
@@ -176,34 +182,24 @@ module.exports = function (grunt) {
   grunt.registerTask(
     'fonts',
     'Install fonts',
-    ['symlink']
+    ['symlink:baggyfonts', 'symlink:materialfonts']
     );
+
   grunt.registerTask(
     'js',
     'Build and install js files',
-    ['clean:js', 'concat:js', 'browserify', 'uglify']
+    ['clean:js', 'copy:pickerjs', 'concat:jsMaterial', 'concat:jsBaggy', 'browserify', 'uglify']
     );
+
   grunt.registerTask(
     'default',
     'Build and install everything',
-    ['clean', 'copy:pickerjs', 'concat', 'browserify', 'uglify', 'cssmin', 'symlink']
+    ['clean', 'copy:pickerjs', 'concat', 'browserify', 'uglify', 'postcss', 'symlink']
     );
+
   grunt.registerTask(
     'css',
     'Compiles the stylesheets.',
-    ['clean:css', 'concat:css', 'cssmin']
+    ['clean:css', 'concat:cssMaterial', 'concat:cssBaggy', 'postcss']
   );
-
-  grunt.registerTask(
-    'scripts',
-    'Compiles the JavaScript files.',
-    [ 'uglify', 'clean:js' ]
-  );
-
-grunt.registerTask(
-    'baggy',
-    'Do everything for baggy',
-    ['clean', 'copy:pickerjs', 'concat', 'browserify', 'uglify:baggy', 'cssmin:baggy', 'symlink']
-  );
-
 }

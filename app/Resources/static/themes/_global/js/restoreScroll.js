@@ -8,7 +8,7 @@ function supportsLocalStorage() {
 
 function savePercent(id, percent) {
     if (!supportsLocalStorage()) { return false; }
-    localStorage["poche.article." + id + ".percent"] = percent;
+    localStorage["wallabag.article." + id + ".percent"] = percent;
     return true;
 }
 
@@ -16,7 +16,7 @@ function retrievePercent(id) {
     if (!supportsLocalStorage()) { return false; }
 
     var bheight = $(document).height();
-    var percent = localStorage["poche.article." + id + ".percent"];
+    var percent = localStorage["wallabag.article." + id + ".percent"];
     var scroll = bheight * percent;
 
     $('html,body').animate({scrollTop: scroll}, 'fast');

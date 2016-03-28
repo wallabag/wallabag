@@ -206,27 +206,17 @@
         </article>
     </div>
 
-<script type="text/javascript">
-
-var app = new annotator.App();
-app.include(annotator.ui.main, {
-    element: document.querySelector('article')
-});
-app.include(annotator.storage.http, {
-    prefix: '',
-    urls: {
-        create: '{{ path('annotations_post_annotation', { 'entry': entry.id }) }}',
-        update: '{{ path('annotations_put_annotation', { 'annotation': 'idAnnotation' }) }}',
-        destroy: '{{ path('annotations_delete_annotation', { 'annotation': 'idAnnotation' }) }}',
-        search: '{{ path('annotations_get_annotations', { 'entry': entry.id }) }}'
-    }
-});
-app
-.start()
-.then(function () {
-     app.annotations.load({entry: {{ entry.id }}});
-});
-</script>
+<script id="annotationroutes" type="application/json">
+{
+    "prefix": "",
+    "urls": {
+        "create": "{{ path('annotations_post_annotation', { 'entry': entry.id }) }}",
+        "update": "{{ path('annotations_put_annotation', { 'annotation': 'idAnnotation' }) }}",
+        "destroy": "{{ path('annotations_delete_annotation', { 'annotation': 'idAnnotation' }) }}",
+        "search": "{{ path('annotations_get_annotations', { 'entry': entry.id }) }}"
+    },
+    "entryId": "{{ entry.id }}"
+}</script>
 
 {% endblock %}
 
