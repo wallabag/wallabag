@@ -129,13 +129,5 @@
         // Use left and right arrow to navigate on with keyboard
         navigateKeyboard('?view=view&id={{ navigate.nextid|e }}','?view=view&id={{ navigate.previousid|e }}');
 
-        // swipe to right or left on mobile to navigate
-        $('article').on("swiperight", function(){
-            goLeft('?view=view&id={{ navigate.nextid|e }}');
-        });
-        $('article').on("swipeleft", function(){
-            goRight('?view=view&id={{ navigate.previousid|e }}');
-        });
-
         </script>
 {% endblock %}
