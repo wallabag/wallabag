@@ -1,0 +1,424 @@
+security:
+    login:
+        page_title: 'Benvenguda sus wallabag !'
+        keep_logged_in: 'Demorar connectat'
+        forgot_password: 'Senhal doblidat ?'
+        submit: 'Se connectar'
+        register: 'Crear un compte'
+        username: "Nom d'utilizaire"
+        password: 'Senhal'
+        cancel: 'Anullar'
+    resetting:
+        description: "Picatz vòstra adreça de corrièl çai-jos, vos mandarem las instruccions per reïnicializar vòstre senhal."
+    register:
+        page_title: 'Se crear un compte'
+        go_to_account: 'Anar sus vòstre compte'
+
+menu:
+    left:
+        unread: 'Pas legits'
+        starred: 'Favorits'
+        archive: 'Legits'
+        all_articles: 'Tots los articles'
+        config: 'Configuracion'
+        tags: 'Etiquetas'
+        internal_settings: 'Configuracion interna'
+        import: 'Importar'
+        howto: 'Ajuda'
+        developer: 'Desvolopador'
+        logout: 'Déconnexion'
+        about: 'A prepaus'
+        search: 'Cercar'
+        save_link: 'Enregistrar un novèl article'
+        back_to_unread: 'Tornar als articles pas legits'
+    top:
+        add_new_entry: 'Enregistrar un novèl article'
+        search: 'Cercar'
+        filter_entries: 'Filtrar los articles'
+        export: 'Exportar'
+    search_form:
+        input_label: 'Picatz vòstre mot-clau a cercar aquí'
+
+footer:
+    wallabag:
+        elsewhere: 'Emportatz wallabag amb vosaultres'
+        social: 'Social'
+        powered_by: 'propulsat per'
+        about: 'A prepaus'
+    page_title: 'Configuracion'
+
+config:
+    tab_menu:
+        settings: 'Paramètres'
+        rss: 'RSS'
+        user_info: 'Mon compte'
+        password: 'Senhal'
+        rules: 'Règlas d'etiquetas automaticas'
+        new_user: 'Crear un compte'
+    form:
+        save: 'Enregistrar'
+    form_settings:
+        theme_label: 'Tèma'
+        items_per_page_label: "Nombre d'articles per pagina"
+        language_label: 'Lenga'
+        reading_speed:
+            label: 'Velocitat  de lectura'
+            help_message: 'Podètz utilizar una aisina en linha per estimar vòstra velocitat de lectura :'
+            100_word: 'Legissi a l'entorn de 100 mots per minuta'
+            200_word: 'Legissi a l'entorn de 200 mots per minuta'
+            300_word: 'Legissi a l'entorn de 300 mots per minuta'
+            400_word: 'Legissi a l'entorn de 400 mots per minuta'
+    form_rss:
+        description: "Los fluxes RSS fornits per wallabag vos permeton de legir vòstres articles salvagardats dins vòstre lector de fluxes preferit. Per los poder emplegar, vos cal, d'en primièr crear un geton."
+        token_label: 'Geton RSS'
+        no_token: 'Aucun jeton généré'
+        token_create: 'Pas cap de geton generat'
+        token_reset: 'Reïnicializatz vòstre geton'
+        rss_links: 'URL de vòstres fluxes RSS'
+        rss_link:
+            unread: 'pas legits'
+            starred: 'favorits'
+            archive: 'legits'
+        rss_limit: "Nombre d'articles dins un flux RSS"
+    form_user:
+        two_factor_description: "Activar l'autentificacion doble-factor vòl dire que recebretz un còdi per corrièl per cada novèla connexion pas aprovada."
+        name_label: 'Nom'
+        email_label: 'Adreça de corrièl'
+        twoFactorAuthentication_label: 'Dobla autentificacion'
+    form_password:
+        old_password_label: 'Senhal actual'
+        new_password_label: 'Senhal novèl'
+        repeat_new_password_label: 'Confirmatz vòstre novèl senhal'
+    form_rules:
+        if_label: 'se'
+        then_tag_as_label: 'alara atribuir las etiquetas'
+        delete_rule_label: 'suprimir'
+        rule_label: 'Règla'
+        tags_label: 'Etiquetas'
+        faq:
+            title: 'FAQ'
+            tagging_rules_definition_title: 'Qué significa las règlas d'etiquetas automaticas ?'
+            tagging_rules_definition_description: "Son de règlas utilizadas per wallabad per classar automaticament vòstres novèls articles.<br />Cada còp qu'un novèl article es apondut, totas las règlas d'etiquetas automaticas seràn utilizadas per ajustar d'etiquetas qu'avètz configuradas, en vos esparnhant l'esfòrç de classificar vòstres articles manualament."
+            how_to_use_them_title: 'Cossí las utilizar ?'
+            how_to_use_them_description: 'Imaginem que volètz atribuir als novèls article l'etiqueta « <i>lectura corta</i> » quand lo temps per legir es inferior a 3 minutas.<br />Dins aquel cas, deuriatz metre « readingTime &lt;= 3 » dins lo camp <i>Règla</i> e « <i>lectura corta</i> » dins lo camp <i>Etiqueta</i>.<br />Mai d'una etiquetas pòdon èsser apondudas simultanèament ne las separant amb de virgulas : « <i>lectura corta, per ligir</i> »<br />De règlas complèxas pòdon èsser creadas en emplegant d'operators predefinits :  se « <i>readingTime &gt;= 5 AND domainName = \"github.com\"</i> » alara atribuir las etiquetas « <i>lectura longa, github </i> »'
+            variables_available_title: 'Quinas variablas e operators pòdi utilizar per escriure de règlas ?'
+            variables_available_description: 'Las variablas e operators seguents pòdon èsser utilizats per escriure de règlas d'etiquetas automaticas :'
+            meaning: 'Significacion'
+            variable_description:
+                label: 'Variabla'
+                title: "Títol de l'article"
+                url: "URL de l'article"
+                isArchived: "Se l'article es archivat o pas"
+                isStarred: "Se l'article es favorit o pas"
+                content: "Lo contengut de l'article"
+                language: "La lenga de l'article"
+                mimetype: "Lo tipe MIME de l'article"
+                readingTime: "Lo temps de lectura estimat de l'article, en minutas"
+                domainName: "Lo nom de domeni de l'article"
+            operator_description:
+                label: 'Operator'
+                less_than: 'Mens que…...'
+                strictly_less_than: 'Estrictament mens que…'
+                greater_than: 'Mai que…'
+                strictly_greater_than: 'Estrictament mai que…'
+                equal_to: 'Egal a…'
+                not_equal_to: 'Diferent de…'
+                or: "Una règla O l'autra"
+                and: "Una règla E l'autra"
+                matches: 'Teste se un <i>subjècte</i> correspond a una <i>recerca</i> (non sensibla a la cassa).<br />Exemple : <code>title matches \"football\"</code>'
+    form_new_user:
+        username_label: "Nom d'utilizaire"
+        password_label: 'Senhal'
+        repeat_new_password_label: 'Confirmez votre nouveau mot de passe'
+        plain_password_label: 'Mot de passe en clair'
+        email_label: 'Adresse e-mail'
+
+entry:
+    page_titles:
+        unread: 'Articles non lus'
+        starred: 'Articles favoris'
+        archive: 'Articles lus'
+        filtered: 'Articles filtrés'
+    list:
+        number_on_the_page: "{0} Il n'y a pas d'articles.|{1} Il y a un article.|]1,Inf[ Il y a %count% articles."
+        reading_time: 'durée de lecture'
+        reading_time_minutes: 'durée de lecture: %readingTime% min'
+        reading_time_less_one_minute: 'durée de lecture: <small class="inferieur">&lt;</small> 1 min'
+        original_article: 'original'
+        toogle_as_read: 'Marquer comme lu/non lu'
+        toogle_as_star: 'Marquer comme favori'
+        delete: 'Supprimer'
+        export_title: 'Exporter'
+    filters:
+        title: 'Filtres'
+        status_label: 'Status'
+        archived_label: 'Lus'
+        starred_label: 'Favoris'
+        preview_picture_label: 'A une photo'
+        preview_picture_help: 'Photo'
+        language_label: 'Langue'
+        reading_time:
+            label: 'Durée de lecture en minutes'
+            from: 'de'
+            to: 'à'
+        domain_label: 'Nom de domaine'
+        created_at:
+            label: 'Date de création'
+            from: 'de'
+            to: 'à'
+        action:
+            clear: 'Effacer'
+            filter: 'Filtrer'
+    view:
+        left_menu:
+            back_to_top: 'Revenir en haut'
+            back_to_homepage: 'Retour'
+            set_as_read: 'Marquer comme lu'
+            set_as_unread: 'Marquer comme non lu'
+            set_as_favorite: 'Mettre en favori'
+            view_original_article: 'Article original'
+            re_fetch_content: 'Recharger le contenu'
+            delete: 'Supprimer'
+            add_a_tag: 'Ajouter un tag'
+            share_content: 'Partager'
+            share_email_label: 'Email'
+            download: 'Télécharger'
+            print: 'Imprimer'
+            problem:
+                label: 'Un problème ?'
+                description: "Est-ce que cet article s'affiche mal ?"
+        edit_title: 'Modifier le titre'
+        original_article: 'original'
+        annotations_on_the_entry: '{0} Aucune annotation|{1} Une annotation|]1,Inf[ %nbAnnotations% annotations'
+    new:
+        page_title: 'Sauvegarder un nouvel article'
+        placeholder: 'http://website.com'
+        form_new:
+            url_label: Url
+    edit:
+        page_title: 'Éditer un article'
+        title_label: 'Titre'
+        url_label: 'Url'
+        is_public_label: 'Public'
+        save_label: 'Enregistrer'
+
+about:
+    page_title: 'À propos'
+    top_menu:
+        who_behind_wallabag: "L'équipe derrière wallabag"
+        getting_help: "Besoin d'aide"
+        helping: 'Aider wallabag'
+        contributors: 'Contributeurs'
+        third_party: 'Librairies tierces'
+    who_behind_wallabag:
+        developped_by: 'Développé par'
+        website: 'Site web'
+        many_contributors: 'Et plein de contributeurs ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">sur Github</a>'
+        project_website: 'Site web du projet'
+        license: 'Licence'
+        version: 'Version'
+    getting_help:
+        documentation: 'Documentation'
+        bug_reports: 'Rapport de bugs'
+        support: '<a href="https://support.wallabag.org">Sur notre site de support</a> ou <a href="https://github.com/wallabag/wallabag/issues">sur GitHub</a>'
+    helping:
+        description: 'wallabag est gratuit et opensource. Vous pouvez nous aider :'
+        by_contributing: 'en contribuant au projet :'
+        by_contributing_2: 'un ticket recense tous nos besoins'
+        by_paypal: 'via Paypal'
+    contributors:
+        description: "Merci aux contributeurs de l'application web de wallabag"
+    third_party:
+        description: 'Voici la liste des dépendances utilisées dans wallabag (et leur license) :'
+        package: 'Dépendance'
+        license: 'Licence'
+
+howto:
+    page_title: 'Aide'
+    page_description: "Il y a plusieurs façon d'enregistrer un article :"
+    top_menu:
+        browser_addons: 'Extensions de navigateur'
+        mobile_apps: 'Applications smartphone'
+        bookmarklet: 'Bookmarklet'
+    form:
+        description: 'Grâce à ce formulaire'
+    browser_addons:
+        firefox: 'Extension Firefox'
+        chrome: 'Extension Chrome'
+    mobile_apps:
+        android:
+            via_f_droid: 'via F-Droid'
+            via_google_play: 'via Google Play'
+        ios: 'sur iTunes Store'
+        windows: 'sur Microsoft Store'
+    bookmarklet:
+        description: 'Glissez et déposez ce lien dans votre barre de favoris :'
+
+quickstart:
+    page_title: 'Pour bien débuter'
+    intro:
+        title: 'Bienvenue sur wallabag !'
+        paragraph_1: "Nous allons vous accompagner pour vous faire faire le tour de la maison et vous présenter quelques fonctionnalités qui pourraient vous intéresser pour vous approprier cet outil."
+        paragraph_2: 'Suivez-nous !'
+    configure:
+        title: "Configurez l'application"
+        language: "Changez la langue et le design de l'application"
+        rss: 'Activez les flux RSS'
+        tagging_rules: 'Écrivez des règles pour classer automatiquement vos articles'
+    admin:
+        title: 'Administration'
+        description: "En tant qu'adminitrasteur sur wallabag, vous avez des privilèges qui vous permette de :"
+        new_user: 'Créer un nouvel utilisateur'
+        analytics: 'Configurer les statistiques'
+        sharing: 'Activer des paramètres de partages'
+        export: 'Configurer les export'
+        import: 'Configurer les import'
+    first_steps:
+        title: 'Premiers pas'
+        new_article: 'Ajoutez votre premier article'
+        unread_articles: 'Et rangez-le !'
+    migrate:
+        title: 'Migrer depuis un service existant'
+        description: "Vous êtes un ancien utilisateur d'un service existant ? Nous allons vous aider à récupérer vos données sur wallabag."
+        pocket: 'Migrer depuis Pocket'
+        wallabag_v1: 'Migrer depuis wallabag v1'
+        wallabag_v2: 'Migrer depuis wallabag v2'
+    developer:
+        title: 'Pour les développeurs'
+        create_application: 'Créer votre application tierce'
+    docs:
+        title: 'Documentation complète'
+        annotate: 'Annotater votre article'
+        export: 'Convertissez vos articles en ePub ou en PDF'
+        search_filters: "Apprenez à utiliser le moteur de recherche et les filtres pour retrouver l'article qui vous intéresse"
+        fetching_errors: "Que faire si mon article n'est pas correctement récupéré ?"
+        all_docs: "Et encore plein d'autres choses !"
+    support:
+        title: 'Support'
+        description: 'Parce que vous avez peut-être besoin de nous poser une question, nous sommes disponibles pour vous.'
+        github: 'Sur GitHub'
+        email: 'Par e-mail'
+        gitter: 'Sur Gitter'
+
+tag:
+    page_title: 'Tags'
+    list:
+        number_on_the_page: "{0} Il n'y a pas de tag.|{1} Il y a un tag.|]1,Inf[ Il y a %count% tags."
+
+import:
+    page_title: 'Importer'
+    page_description: "Bienvenue dans l'outil de migration de wallabag. Choisissez ci-dessous le service depuis lequel vous souhaitez migrer."
+    action:
+        import_contents: 'Importer les contenus'
+    form:
+        mark_as_read_title: 'Marquer tout comme lu ?'
+        mark_as_read_label: 'Marquer tous les contenus importés comme lus'
+        file_label: 'Fichier'
+        save_label: 'Importer le fichier'
+    pocket:
+        page_title: 'Importer > Pocket'
+        description: "Cet outil va importer toutes vos données de Pocket. Pocket ne nous autorise pas à récupérer le contenu depuis leur service, donc wallabag doit reparcourir chaque article pour récupérer son contenu."
+        config_missing:
+            description: "L'import à partir de Pocket n'est pas configuré."
+            admin_message: "Vous devez définir %keyurls%une clé pour l'API Pocket%keyurle%."
+            user_message: "L'administrateur de votre serveur doit définir une clé pour l'API Pocket."
+        authorize_message: "Vous pouvez importer vos données depuis votre compte Pocket. Vous n'avez qu'à cliquer sur le bouton ci-dessous et à autoriser wallabag à se connecter à getpocket.com."
+        connect_to_pocket: 'Se connecter à Pocket et importer les données'
+    wallabag_v1:
+        page_title: 'Importer > Wallabag v1'
+        description: 'Cet outil va importer toutes vos données de wallabag v1. Sur votre page de configuration de wallabag v1, cliquez sur "Export JSON" dans la section "Exporter vos données de wallabag". Vous allez récupérer un fichier "wallabag-export-1-xxxx-xx-xx.json".'
+        how_to: "Choisissez le fichier de votre export wallabag v1 et cliquez sur le bouton ci-dessous pour l'importer."
+    wallabag_v2:
+        page_title: 'Importer > Wallabag v2'
+        description: "Cet outil va importer tous vos articles d'une autre instance de wallabag v2. Allez dans tous vos articles, puis, sur la barre latérale, cliquez sur \"JSON\". Vous allez récupérer un fichier \"All articles.json\""
+
+developer:
+    page_title: 'Développeur'
+    welcome_message: "Bienvenue sur l'API de wallabag"
+    documentation: 'Documentation'
+    how_to_first_app: 'Comment créer votre première application'
+    full_documentation: "Voir la documentation complète de l'API"
+    clients:
+        title: 'Clients'
+        create_new: 'Créer une nouveau client'
+    existing_clients:
+        title: 'Les clients existants'
+        field_id: 'ID Client'
+        field_secret: 'Clé secrète'
+        field_uris: 'URLs de redirection'
+        field_grant_types: 'Type de privilège accordé'
+        no_client: 'Aucun client pour le moment'
+    remove:
+        warn_message_1: 'Vous avez la possibilité de supprimer un client. Cette action est IRREVERSIBLE !'
+        warn_message_2: "Si vous supprimez un client, toutes les applications qui l'utilisaient ne fonctionneront plus avec votre compte wallabag."
+        action: 'Supprimer ce client'
+    client:
+        page_title: 'Développeur > Nouveau client'
+        page_description: "Vous allez créer un nouveau client. Merci de remplir l'url de redirection vers votre application."
+        form:
+            redirect_uris_label: 'URLs de redirection'
+            save_label: 'Créer un nouveau client'
+        action_back: 'Retour'
+    client_parameter:
+        page_title: 'Développeur > Les paramètres de votre client'
+        page_description: 'Voilà les paramètres de votre client'
+        field_id: 'ID Client'
+        field_secret: 'Clé secrète'
+        back: 'Retour'
+        read_howto: 'Lire "comment créer ma première application"'
+    howto:
+        page_title: 'Développeur > Comment créer votre première application'
+        description:
+            paragraph_1: "Les commandes suivantes utilisent la <a href=\"https://github.com/jkbrzt/httpie\">librarie HTTPie</a>. Assurez-vous qu'elle soit installée avant de l'utiliser."
+            paragraph_2: "Vous avez besoin d'un token pour échanger entre votre application et l'API de wallabag."
+            paragraph_3: 'Pour créer un token, vous devez <a href="%link%">créer un nouveau client</a>.'
+            paragraph_4: 'Maintenant créez votre token (remplacer client_id, client_secret, username et password avec les bonnes valeurs):'
+            paragraph_5: "L'API vous retournera une réponse comme ça :"
+            paragraph_6: "L'access_token doit être utilisé pour faire un appel à l'API. Par exemple :"
+            paragraph_7: "Cet appel va retourner tous les articles de l'utilisateur."
+            paragraph_8: "Si vous voulez toutes les méthodes de l'API, jetez un oeil <a href=\"%link%\">à la documentation de l'API</a>."
+        back: 'Retour'
+
+validator:
+    password_must_match: 'Les deux mots de passe doivent être les mêmes'
+    password_too_short: 'Le mot de passe doit contenir au moins 8 caractères'
+    password_wrong_value: 'Votre mot de passe actuel est faux'
+    item_per_page_too_high: "Ca ne va pas plaire à l'application"
+    rss_limit_too_hight: "Ca ne va pas plaire à l'application"
+
+flashes:
+    config:
+        notice:
+            config_saved: 'Les paramètres ont bien été mis à jour. Certains seront pris en compte après déconnexion.'
+            password_updated: 'Votre mot de passe a bien été mis à jour'
+            password_not_updated_demo: "En démo, vous ne pouvez pas changer le mot de passe de cet utilisateur."
+            user_updated: 'Vos informations personnelles ont bien été mises à jour'
+            rss_updated: 'La configuration des flux RSS a bien été mise à jour'
+            tagging_rules_updated: 'Règles mises à jour'
+            tagging_rules_deleted: 'Règle supprimée'
+            user_added: 'Utilisateur "%username%" ajouté'
+            rss_token_updated: 'Jeton RSS mis à jour'
+    entry:
+        notice:
+            entry_already_saved: 'Article déjà sauvergardé le %date%'
+            entry_saved: 'Article enregistré'
+            entry_updated: 'Article mis à jour'
+            entry_reloaded: 'Article rechargé'
+            entry_reload_failed: "Le rechargement de l'article a échoué"
+            entry_archived: 'Article marqué comme lu'
+            entry_unarchived: 'Article marqué comme non lu'
+            entry_starred: 'Article ajouté dans les favoris'
+            entry_unstarred: 'Article retiré des favoris'
+            entry_deleted: 'Article supprimé'
+    tag:
+        notice:
+            tag_added: 'Tag ajouté'
+    import:
+        notice:
+            failed: "L'import a échoué, veuillez ré-essayer"
+            failed_on_file: "Erreur lors du traitement de l'import. Vérifier votre fichier."
+            summary: "Rapport d'import: %imported% importés, %skipped% déjà présent."
+    developer:
+        notice:
+            client_created: 'Nouveau client créé'
+            client_deleted: 'Client supprimé'
