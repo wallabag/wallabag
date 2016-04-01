@@ -1,0 +1,29 @@
+download_pictures: Telecargar los imatges sul servidor
+carrot: Activar lo partatge cap a Carrot
+diaspora_url: URL de Diaspora, se lo servici Diaspora es activat
+export_epub: Activar l'expòrt ePub
+export_mobi: Activar l'expòrt .mobi
+export_pdf: Activar l'expòrt PDF
+export_csv: Activar l'expòrt CSV
+export_json: Activar l'expòrt JSON
+export_txt: Activar l'expòrt TXT
+export_xml: Activar l'expòrt XML
+pocket_consumer_key: Clau d'autentificacion Pocket per importar las donadas (https://getpocket.com/developer/docs/authentication)
+shaarli_url: URL de Shaarli, se lo servici Shaarli es activat
+share_diaspora: Activar lo partatge cap a Diaspora
+share_mail: Activar lo partatge per corrièl
+share_shaarli: Activar lo partatge cap a Shaarli
+share_twitter: Activar lo partatge cap a Twitter
+show_printlink: Afichar un ligam per imprimir
+wallabag_support_url: URL d'assisténcia de wallabag
+wallabag_url: URL de *vòstra* instància de wallabag
+entry: "article"
+export: "expòrt"
+import: "impòrt"
+misc: "divèrs"
+modify_settings: "aplicar"
+piwik_host: URL de vòstre site dins Piwik
+piwik_site_id: ID de vòstre site dins Piwik
+piwik_enabled: Activar Piwik
+demo_mode_enabled: "Activar lo mode demostracion ? (utilizar solament per la demostracion publica de wallabag)"
+demo_mode_username: "Utilizaire de la demostracion"

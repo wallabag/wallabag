@@ -1,0 +1,424 @@
+security:
+    login:
+        page_title: 'Benvenguda sus wallabag !'
+        keep_logged_in: 'Demorar connectat'
+        forgot_password: 'Senhal doblidat ?'
+        submit: 'Se connectar'
+        register: 'Crear un compte'
+        username: "Nom d'utilizaire"
+        password: 'Senhal'
+        cancel: 'Anullar'
+    resetting:
+        description: "Picatz vòstra adreça de corrièl çai-jos, vos mandarem las instruccions per reïnicializar vòstre senhal."
+    register:
+        page_title: 'Se crear un compte'
+        go_to_account: 'Anar sus vòstre compte'
+
+menu:
+    left:
+        unread: 'Pas legits'
+        starred: 'Favorits'
+        archive: 'Legits'
+        all_articles: 'Tots los articles'
+        config: 'Configuracion'
+        tags: 'Etiquetas'
+        internal_settings: 'Configuracion interna'
+        import: 'Importar'
+        howto: 'Ajuda'
+        developer: 'Desvolopador'
+        logout: 'Déconnexion'
+        about: 'A prepaus'
+        search: 'Cercar'
+        save_link: 'Enregistrar un novèl article'
+        back_to_unread: 'Tornar als articles pas legits'
+    top:
+        add_new_entry: 'Enregistrar un novèl article'
+        search: 'Cercar'
+        filter_entries: 'Filtrar los articles'
+        export: 'Exportar'
+    search_form:
+        input_label: 'Picatz vòstre mot-clau a cercar aquí'
+
+footer:
+    wallabag:
+        elsewhere: 'Emportatz wallabag amb vosaultres'
+        social: 'Social'
+        powered_by: 'propulsat per'
+        about: 'A prepaus'
+    page_title: 'Configuracion'
+
+config:
+    tab_menu:
+        settings: 'Paramètres'
+        rss: 'RSS'
+        user_info: 'Mon compte'
+        password: 'Senhal'
+        rules: "Règlas d'etiquetas automaticas"
+        new_user: 'Crear un compte'
+    form:
+        save: 'Enregistrar'
+    form_settings:
+        theme_label: 'Tèma'
+        items_per_page_label: "Nombre d'articles per pagina"
+        language_label: 'Lenga'
+        reading_speed:
+            label: 'Velocitat  de lectura'
+            help_message: 'Podètz utilizar una aisina en linha per estimar vòstra velocitat de lectura :'
+            100_word: "Legissi a l'entorn de 100 mots per minuta"
+            200_word: "Legissi a l'entorn de 200 mots per minuta"
+            300_word: "Legissi a l'entorn de 300 mots per minuta"
+            400_word: "Legissi a l'entorn de 400 mots per minuta"
+    form_rss:
+        description: "Los fluxes RSS fornits per wallabag vos permeton de legir vòstres articles salvagardats dins vòstre lector de fluxes preferit. Per los poder emplegar, vos cal, d'en primièr crear un geton."
+        token_label: 'Geton RSS'
+        no_token: 'Aucun jeton généré'
+        token_create: 'Pas cap de geton generat'
+        token_reset: 'Reïnicializatz vòstre geton'
+        rss_links: 'URL de vòstres fluxes RSS'
+        rss_link:
+            unread: 'pas legits'
+            starred: 'favorits'
+            archive: 'legits'
+        rss_limit: "Nombre d'articles dins un flux RSS"
+    form_user:
+        two_factor_description: "Activar l'autentificacion doble-factor vòl dire que recebretz un còdi per corrièl per cada novèla connexion pas aprovada."
+        name_label: 'Nom'
+        email_label: 'Adreça de corrièl'
+        twoFactorAuthentication_label: 'Dobla autentificacion'
+    form_password:
+        old_password_label: 'Senhal actual'
+        new_password_label: 'Senhal novèl'
+        repeat_new_password_label: 'Confirmatz vòstre novèl senhal'
+    form_rules:
+        if_label: 'se'
+        then_tag_as_label: 'alara atribuir las etiquetas'
+        delete_rule_label: 'suprimir'
+        rule_label: 'Règla'
+        tags_label: 'Etiquetas'
+        faq:
+            title: 'FAQ'
+            tagging_rules_definition_title: "Qué significa las règlas d'etiquetas automaticas ?"
+            tagging_rules_definition_description: "Son de règlas utilizadas per wallabad per classar automaticament vòstres novèls articles.<br />Cada còp qu'un novèl article es apondut, totas las règlas d'etiquetas automaticas seràn utilizadas per ajustar d'etiquetas qu'avètz configuradas, en vos esparnhant l'esfòrç de classificar vòstres articles manualament."
+            how_to_use_them_title: 'Cossí las utilizar ?'
+            how_to_use_them_description: "Imaginem que volètz atribuir als novèls article l'etiqueta « <i>lectura corta</i> » quand lo temps per legir es inferior a 3 minutas.<br />Dins aquel cas, deuriatz metre « readingTime &lt;= 3 » dins lo camp <i>Règla</i> e « <i>lectura corta</i> » dins lo camp <i>Etiqueta</i>.<br />Mai d'una etiquetas pòdon èsser apondudas simultanèament ne las separant amb de virgulas : « <i>lectura corta, per ligir</i> »<br />De règlas complèxas pòdon èsser creadas en emplegant d'operators predefinits :  se « <i>readingTime &gt;= 5 AND domainName = \"github.com\"</i> » alara atribuir las etiquetas « <i>lectura longa, github </i> »"
+            variables_available_title: 'Quinas variablas e operators pòdi utilizar per escriure de règlas ?'
+            variables_available_description: "Las variablas e operators seguents pòdon èsser utilizats per escriure de règlas d'etiquetas automaticas :"
+            meaning: 'Significacion'
+            variable_description:
+                label: 'Variabla'
+                title: "Títol de l'article"
+                url: "URL de l'article"
+                isArchived: "Se l'article es archivat o pas"
+                isStarred: "Se l'article es favorit o pas"
+                content: "Lo contengut de l'article"
+                language: "La lenga de l'article"
+                mimetype: "Lo tipe MIME de l'article"
+                readingTime: "Lo temps de lectura estimat de l'article, en minutas"
+                domainName: "Lo nom de domeni de l'article"
+            operator_description:
+                label: 'Operator'
+                less_than: 'Mens que…...'
+                strictly_less_than: 'Estrictament mens que…'
+                greater_than: 'Mai que…'
+                strictly_greater_than: 'Estrictament mai que…'
+                equal_to: 'Egal a…'
+                not_equal_to: 'Diferent de…'
+                or: "Una règla O l'autra"
+                and: "Una règla E l'autra"
+                matches: 'Teste se un <i>subjècte</i> correspond a una <i>recerca</i> (non sensibla a la cassa).<br />Exemple : <code>title matches \"football\"</code>'
+    form_new_user:
+        username_label: "Nom d'utilizaire"
+        password_label: 'Senhal'
+        repeat_new_password_label: 'Confirmatz vòstre novèl senhal'
+        plain_password_label: 'Senhal en clar'
+        email_label: 'Adreça de corrièl'
+
+entry:
+    page_titles:
+        unread: 'Articles pas legits'
+        starred: 'Articles favorits'
+        archive: 'Articles legits'
+        filtered: 'Articles filtrats'
+    list:
+        number_on_the_page: "{0} I a pas cap d'article.|{1} I a un article.|]1,Inf[ I a %count% articles."
+        reading_time: 'durada de lectura'
+        reading_time_minutes: 'durada de lectura : %readingTime% min'
+        reading_time_less_one_minute: 'durada de lectura : <small class="inferieur">&lt;</small> 1 min'
+        original_article: 'original'
+        toogle_as_read: 'Marcar coma legit/pas legit'
+        toogle_as_star: 'Marcar coma favorit'
+        delete: 'Suprimir'
+        export_title: 'Exportar'
+    filters:
+        title: 'Filtres'
+        status_label: 'Estatus'
+        archived_label: 'Legits'
+        starred_label: 'Favorits'
+        preview_picture_label: 'A una fotò'
+        preview_picture_help: 'Fotò'
+        language_label: 'Lenga'
+        reading_time:
+            label: 'Durada de lectura en minutas'
+            from: 'de'
+            to: 'per'
+        domain_label: 'Nom de domeni'
+        created_at:
+            label: 'Data de creacion'
+            from: 'de'
+            to: 'per'
+        action:
+            clear: 'Escafar'
+            filter: 'Filtrar'
+    view:
+        left_menu:
+            back_to_top: 'Tornar en naut'
+            back_to_homepage: 'Tornar'
+            set_as_read: 'Marcar coma legit'
+            set_as_unread: 'Marcar coma pas legit'
+            set_as_favorite: 'Metre en favori'
+            view_original_article: 'Article original'
+            re_fetch_content: 'Tornar cargar lo contengut'
+            delete: 'Suprimir'
+            add_a_tag: 'Ajustar una etiqueta'
+            share_content: 'Partatjar'
+            share_email_label: 'Corrièl'
+            download: 'Telecargar'
+            print: 'Imprimir'
+            problem:
+                label: 'Un problèma ?'
+                description: "Marca mal la presentacion d'aqueste article ?"
+        edit_title: 'Modificar lo títol'
+        original_article: 'original'
+        annotations_on_the_entry: "{0} Pas cap d'anotacion|{1} Una anotacion|]1,Inf[ %nbAnnotations% anotacions"
+    new:
+        page_title: 'Enregistrar un novèl article'
+        placeholder: 'http://website.com'
+        form_new:
+            url_label: Url
+    edit:
+        page_title: 'Modificar un article'
+        title_label: 'Títol'
+        url_label: 'Url'
+        is_public_label: 'Public'
+        save_label: 'Enregistrar'
+
+about:
+    page_title: 'A prepaus'
+    top_menu:
+        who_behind_wallabag: "L'equipa darrèr wallabag"
+        getting_help: "Besonh d'ajuda"
+        helping: 'Ajudar wallabag'
+        contributors: 'Contributors'
+        third_party: 'Bibliotècas tèrças'
+    who_behind_wallabag:
+        developped_by: 'Desvolopat per'
+        website: 'Site web'
+        many_contributors: 'E un fum de contributors ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">sur Github</a>'
+        project_website: 'Site web del projète'
+        license: 'Licéncia'
+        version: 'Version'
+    getting_help:
+        documentation: 'Documentacion'
+        bug_reports: 'Rapòrt de bugs'
+        support: "<a href=\"https://support.wallabag.org\">Sus nòstre site d'assisténcia</a> ou <a href=\"https://github.com/wallabag/wallabag/issues\">sur GitHub</a>"
+    helping:
+        description: 'wallabag es a gratuit e opensource. Nos podètz ajudar :'
+        by_contributing: 'en ajudant lo projècte :'
+        by_contributing_2: 'un bilhet recensa totes nòstres besonhs'
+        by_paypal: 'via Paypal'
+    contributors:
+        description: "Mercés als contributors de l'aplicacion web de wallabag"
+    third_party:
+        description: 'Aquí la lista de las dependéncias utilizadas dins wallabag (e lor licéncia) :'
+        package: 'Dependéncia'
+        license: 'Licéncia'
+
+howto:
+    page_title: 'Ajuda'
+    page_description: "I a mai d'un biai d'enregistrar un article :"
+    top_menu:
+        browser_addons: 'Extensions de navigator'
+        mobile_apps: 'Aplicacions mobil'
+        bookmarklet: 'Bookmarklet'
+    form:
+        description: 'Gràcias a aqueste formulari'
+    browser_addons:
+        firefox: 'Extension Firefox'
+        chrome: 'Extension Chrome'
+    mobile_apps:
+        android:
+            via_f_droid: 'via F-Droid'
+            via_google_play: 'via Google Play'
+        ios: 'sus iTunes Store'
+        windows: 'sus Microsoft Store'
+    bookmarklet:
+        description: 'Lisatz-depausatz aqueste ligam dins vòstra barra de favorits :'
+
+quickstart:
+    page_title: 'Per ben començar'
+    intro:
+        title: 'Benvenguda sus wallabag !'
+        paragraph_1: "Anem vos guidar per far lo torn de la proprietat e vos presentar unas fonccionalitats que vos poirián interessar per vos apropriar aquesta aisina."
+        paragraph_2: 'Seguètz-nos '
+    configure:
+        title: "Configuratz l'aplicacio"
+        language: "Cambiatz la lenga e l'estil de l'aplicacion"
+        rss: 'Activatz los fluxes RSS'
+        tagging_rules: 'Escrivètz de règlas per classar automaticament vòstres articles'
+    admin:
+        title: 'Administracion'
+        description: "En qualitat d'adminitrastor sus wallabag, avètz de privilègis que vos permeton de :"
+        new_user: 'Crear un novèl utilizaire'
+        analytics: 'Configurar las estadisticas'
+        sharing: 'Activar de paramètres de partatge'
+        export: 'Configurar los expòrt'
+        import: 'Configurar los impòrt'
+    first_steps:
+        title: 'Primièrs passes'
+        new_article: 'Ajustatz vòstre primièr article'
+        unread_articles: 'E racaptatz-lo !'
+    migrate:
+        title: 'Migrar dempuèi un servici existent'
+        description: "Sètz un ancian utilizaire d'un servici existent ? Vos ajudarem a trapar vòstras donadas sus wallabag."
+        pocket: 'Migrar dempuèi Pocket'
+        wallabag_v1: 'Migrar dempuèi wallabag v1'
+        wallabag_v2: 'Migrar dempuèi wallabag v2'
+    developer:
+        title: 'Pels desvolopadors'
+        create_application: 'Crear vòstra aplicacion tèrça'
+    docs:
+        title: 'Documentacion complèta'
+        annotate: 'Anotatar vòstre article'
+        export: 'Convertissètz vòstres articles en ePub o en PDF'
+        search_filters: "Aprenètz a utilizar lo motor de recèrca e los filtres per retrobar l'article que vos interèssa"
+        fetching_errors: "Qué far se mon article es pas recuperat coma cal ?"
+        all_docs: "E encara plen de causas mai !"
+    support:
+        title: 'Assisténcia'
+        description: 'Perque avètz benlèu besonh de nos pausar una question, sèm disponibles per vosautres.'
+        github: 'Sus GitHub'
+        email: 'Per e-mail'
+        gitter: 'Sus Gitter'
+
+tag:
+    page_title: 'Etiquetas'
+    list:
+        number_on_the_page: "{0} I a pas cap d'etiquetas.|{1} I a una etiqueta.|]1,Inf[ I a %count% etiquetas."
+
+import:
+    page_title: 'Importar'
+    page_description: "Benvenguda sus l'aisina de migracion de wallabag. Causissètz çai-jos lo servici dempuèi lo qual volètz migrar."
+    action:
+        import_contents: 'Importar los contenguts'
+    form:
+        mark_as_read_title: 'Tot marcar coma legit ?'
+        mark_as_read_label: 'Marcar tot los contenguts importats coma legits'
+        file_label: 'Fichièr'
+        save_label: 'Importar lo fichièr'
+    pocket:
+        page_title: 'Importer > Pocket'
+        description: "Aquesta aisina importarà totas vòstras donadas de Pocket. Pocket nos permet pas de recuperar lo contengut dempuèi lor servidor, alara wallabag deu tornar fulhetar cada article per recuperar son contengut."
+        config_missing:
+            description: "L'importacion dempuèi Pocket es pas configurada."
+            admin_message: "Vos cal definir %keyurls% una clau per l'API Pocket %keyurle%."
+            user_message: "L'administrator de vòstre servidor deu definir una clau per l'API Pocket."
+        authorize_message: "Podètz importar vòstras donadas dempuèi vòstre compte Pocket. Vos cal pas que clicar sul boton çai-jos e autorizar wallabag a se connectar a getpocket.com."
+        connect_to_pocket: 'Se connectar a Pocket e importar las donadas'
+    wallabag_v1:
+        page_title: 'Importer > Wallabag v1'
+        description: 'Aquesta aisina importarà totas vòstras donadas de wallabag v1. Sus vòstre pagina de configuracion de wallabag v1, clicatz sus \"Export JSON\" dins la seccion \"Exportar vòstras donadas de wallabag\". Traparatz un fichièr \"wallabag-export-1-xxxx-xx-xx.json\".'
+        how_to: "Causissètz lo fichièr de vòstra exportacion wallabag v1 e clicatz sul boton çai-jos per l'importar."
+    wallabag_v2:
+        page_title: 'Importer > Wallabag v2'
+        description: "Aquesta aisina importarà totas vòstras donadas d'una instància mai de wallabag v2. Anatz dins totes vòstres articles, puèi, sus la barra laterala, clicatz sus \"JSON\". Traparatz un fichièr \"All articles.json\""
+
+developer:
+    page_title: 'Desvolopador'
+    welcome_message: "Benvenguda sus l'API de wallabag"
+    documentation: 'Documentacion'
+    how_to_first_app: 'Cossí crear vòstra primièra aplicacion'
+    full_documentation: "Veire la documentacion completa de l'API"
+    clients:
+        title: 'Clients'
+        create_new: 'Crear un novèl client'
+    existing_clients:
+        title: 'Los clients existents'
+        field_id: 'ID Client'
+        field_secret: 'Clé secreta'
+        field_uris: 'URLs de redireccion'
+        field_grant_types: 'Tipe de privilègi acordat'
+        no_client: 'Pas cap de client pel moment'
+    remove:
+        warn_message_1: 'Avètz la possibilitat de supriimr un client. Aquesta accion es IRREVERSIBLA !'
+        warn_message_2: "Se suprimissètz un client, totas las aplicacions que l'emplegan foncionaràn pas mai amb vòstre compte wallabag."
+        action: 'Suprimir aqueste client'
+    client:
+        page_title: 'Desvlopador > Novèl client'
+        page_description: "Anatz crear un novèl client. Mercés de cumplir l'url de redireccion cap a vòstra aplicacion."
+        form:
+            redirect_uris_label: 'URLs de redireccion'
+            save_label: 'Crear un novèl client'
+        action_back: 'Retorn'
+    client_parameter:
+        page_title: 'Desvolopador > Los paramètres de vòstre client'
+        page_description: 'Vaquí los paramètres de vòstre client'
+        field_id: 'ID Client'
+        field_secret: 'Clau secreta'
+        back: 'Retour'
+        read_howto: 'Legir \"cossí crear ma primièra aplicacion\"'
+    howto:
+        page_title: 'Desvolopador > Cossí crear ma primièra aplicacion'
+        description:
+            paragraph_1: "Las comandas seguentas utilizan la <a href=\"https://github.com/jkbrzt/httpie\">libraria HTTPie</a>. Asseguratz-vos que siasqueòu installadas abans de l'utilizar."
+            paragraph_2: "Vos cal un geton per escambiar entre vòstra aplicacion e l'API de wallabar."
+            paragraph_3: 'Per crear un geton, vos cal crear <a href=\"%link%\">crear un novèl client</a>.'
+            paragraph_4: 'Ara creatz un geton (remplaçar client_id, client_secret, username e password amb las bonas valors) :'
+            paragraph_5: "L'API vos tornarà una responsa coma aquò :"
+            paragraph_6: "L'access_token deu èsser emplegat per far una requèsta a l'API. Per exemple :"
+            paragraph_7: "Aquesta requèsta tornarà totes los articles de l'utilizaire."
+            paragraph_8: "Se volètz totas las adreças d'accès de l'API, donatz un còp d’uèlh <a href=\"%link%\">a la documentacion de l'API</a>."
+        back: 'Retorn'
+
+validator:
+    password_must_match: 'Cal que los dos senhals siasquen los meteisses'
+    password_too_short: 'Lo senhal deu aver almens 8 caractèrs'
+    password_wrong_value: 'Vòstre senhal actual es pas bon'
+    item_per_page_too_high: "Aquò li agradarà pas a l'aplicacion"
+    rss_limit_too_hight: "Aquò li agradarà pas a l'aplicacion"
+
+flashes:
+    config:
+        notice:
+            config_saved: 'Los paramètres son ben estats meses a jorn. Certans seràn aplicats aprèp desconnexion.'
+            password_updated: 'Vòstre senhal es ben estat mes a jorn'
+            password_not_updated_demo: "En demostration, podètz pas cambiar lo senhal d'aqueste utilizaire."
+            user_updated: 'Vòstres informacions personnelas son ben estadas mesas a jorn'
+            rss_updated: 'La configuracion dels fluxes RSS es ben estada mesa a jorn'
+            tagging_rules_updated: 'Règlas misa a jorn'
+            tagging_rules_deleted: 'Règla suprimida'
+            user_added: 'Utilizaire "%username%" apondut'
+            rss_token_updated: 'Geton RSS mes a jorn'
+    entry:
+        notice:
+            entry_already_saved: 'Article ja salvargardat lo %date%'
+            entry_saved: 'Article enregistrat'
+            entry_updated: 'Article mes a jorn'
+            entry_reloaded: 'Article recargat'
+            entry_reload_failed: "Fracàs de l'actualizacion de l'article"
+            entry_archived: 'Article marcat coma legit'
+            entry_unarchived: 'Article marcat coma pas legit'
+            entry_starred: 'Article apondut dins los favorits'
+            entry_unstarred: 'Article quitat dels favorits'
+            entry_deleted: 'Article suprimit'
+    tag:
+        notice:
+            tag_added: 'Etiqueta aponduda'
+    import:
+        notice:
+            failed: "L'importacion a fracassat, mercés de tornar ensajar"
+            failed_on_file: "Errorr pendent du tractament de l'import. Mercés de verificar vòstre fichièr."
+            summary: "Rapòrt d'import: %imported% importats, %skipped% ja presents."
+    developer:
+        notice:
+            client_created: 'Novèl client creat'
+            client_deleted: 'Client suprimit'
