@@ -73,13 +73,14 @@ class InstallCommand extends ContainerAwareCommand
 
         $fulfilled = true;
 
-        $label = '<comment>PDO Drivers</comment>';
+        $label = '<comment>PDO Driver</comment>';
         $status = '<info>OK!</info>';
         $help = '';
-        if (!(extension_loaded('pdo_sqlite') || extension_loaded('pdo_mysql') || extension_loaded('pdo_pgsql'))) {
+
+        if (!extension_loaded($this->getContainer()->getParameter('database_driver'))) {
             $fulfilled = false;
             $status = '<error>ERROR!</error>';
-            $help = 'Needs one of sqlite, mysql or pgsql PDO drivers';
+            $help = 'Database driver "'.$this->getContainer()->getParameter('database_driver').'" is not installed.';
         }
 
         $rows = [];
