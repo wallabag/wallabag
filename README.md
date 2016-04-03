@@ -8,8 +8,7 @@ Click, save and read it when you can. It extracts content so that you can read i
 
 More informations on our website: [wallabag.org](https://wallabag.org)
 
-# Want to test the v2?
-Keep in mind it's an **unstable** branch, everything can be broken :)
+# Install wallabag
 
 If you don't have it yet, please [install composer](https://getcomposer.org/download/).
 Then you can install wallabag by executing the following commands:
@@ -17,7 +16,7 @@ Then you can install wallabag by executing the following commands:
 ```
     git clone https://github.com/wallabag/wallabag.git
     cd wallabag
-    git checkout 2.0.0-beta.2
+    git checkout 2.0.0
     SYMFONY_ENV=prod composer install --no-dev -o --prefer-dist
     php bin/console wallabag:install --env=prod
     php bin/console server:run --env=prod
