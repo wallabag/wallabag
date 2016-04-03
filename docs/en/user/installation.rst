@@ -4,9 +4,9 @@ Install wallabag
 Requirements
 ------------
 
-wallabag is compatible with php >= 5.5, including php 7.
+wallabag is compatible with PHP >= 5.5, including PHP 7.
 
-You'll need the following extensions for wallabag to work. Some of these may already activated in your version of php, so you may not have to install all corresponding packages.
+You'll need the following extensions for wallabag to work. Some of these may already activated in your version of PHP, so you may not have to install all corresponding packages.
 
 - php-session
 - php-ctype
@@ -25,9 +25,9 @@ You'll need the following extensions for wallabag to work. Some of these may alr
 
 wallabag uses PDO to connect to database, so you'll need one of:
 
-- php-pdo_mysql
-- php-pdo_sqlite
-- php-pdo_pgsql
+- pdo_mysql
+- pdo_sqlite
+- pdo_pgsql
 
 and it's corresponding database server.
 
@@ -50,7 +50,7 @@ To install wallabag itself, you must run these two commands:
 
     git clone https://github.com/wallabag/wallabag.git
     cd wallabag
-    git checkout 2.0.0-beta.2
+    git checkout 2.0.0
     SYMFONY_ENV=prod composer install --no-dev -o --prefer-dist
     php bin/console wallabag:install --env=prod
 
