@@ -76,7 +76,6 @@
         "wallabag/php-mobi": "~1.0.0",
         "kphoen/rulerz-bundle": "~0.10",
         "guzzlehttp/guzzle": "^5.2.0",
-        "doctrine/doctrine-migrations-bundle": "^1.0",
         "paragonie/random_compat": "~1.0",
         "craue/config-bundle": "~1.4",
         "mnapoli/piwik-twig-extension": "^1.0",

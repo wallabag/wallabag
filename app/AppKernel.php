@@ -32,7 +32,6 @@ class AppKernel extends Kernel
             new Scheb\TwoFactorBundle\SchebTwoFactorBundle(),
             new KPhoen\RulerZBundle\KPhoenRulerZBundle(),
             new Wallabag\ImportBundle\WallabagImportBundle(),
-            new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Craue\ConfigBundle\CraueConfigBundle(),
             new Lexik\Bundle\MaintenanceBundle\LexikMaintenanceBundle(),
             new Wallabag\AnnotationBundle\WallabagAnnotationBundle(),
