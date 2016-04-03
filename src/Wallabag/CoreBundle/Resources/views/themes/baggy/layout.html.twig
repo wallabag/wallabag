@@ -39,7 +39,7 @@
         <li><a href="{{ path('all') }}">{{ 'menu.left.all_articles'|trans }}</a></li>
         <li><a href="{{ path('tag') }}">{{ 'menu.left.tags'|trans }}</a></li>
         <li><a href="{{ path('new') }}">{{ 'menu.left.save_link'|trans }}</a></li>
-        <li style="position: relative;"><a href="javascript: void(null);" id="search">{{ 'menu.left.search'|trans }}</a>
+        <!--<li style="position: relative;"><a href="javascript: void(null);" id="search">{{ 'menu.left.search'|trans }}</a>
             <div id="search-form" class="messages info popup-form">
                 <form method="get" action="index.php">
                     <h2>{{ 'menu.left.search'|trans }}</h2>
@@ -49,7 +49,7 @@
                     <input id="submit-search" type="submit" value="{{ 'menu.left.search'|trans }}">
                 </form>
             </div>
-        </li>
+        </li>-->
         <li><a href="{{ path('config') }}">{{ 'menu.left.config'|trans }}</a></li>
         {% if is_granted('ROLE_SUPER_ADMIN') %}
             <li><a href="{{ path('craue_config_settings_modify') }}">{{ 'menu.left.internal_settings'|trans }}</a></li>
