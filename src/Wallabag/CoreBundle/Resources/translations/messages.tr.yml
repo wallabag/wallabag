@@ -137,7 +137,7 @@ entry:
     page_titles:
         # unread: 'Unread entries'
         # starred: 'Starred entries'
-        # archive: 'Archived entries'
+        # archived: 'Archived entries'
         # filtered: 'Filtered entries'
     list:
         number_on_the_page: '{0} Herhangi bir makale yok.|{1} Burada bir adet makale var.|]1,Inf[ Burada %count% adet makale var.'

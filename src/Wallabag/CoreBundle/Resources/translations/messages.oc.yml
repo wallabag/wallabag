@@ -137,7 +137,7 @@ entry:
     page_titles:
         unread: 'Articles pas legits'
         starred: 'Articles favorits'
-        archive: 'Articles legits'
+        archived: 'Articles legits'
         filtered: 'Articles filtrats'
     list:
         number_on_the_page: "{0} I a pas cap d'article.|{1} I a un article.|]1,Inf[ I a %count% articles."

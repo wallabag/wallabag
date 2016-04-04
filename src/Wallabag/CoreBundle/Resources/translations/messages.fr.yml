@@ -137,7 +137,7 @@ entry:
     page_titles:
         unread: 'Articles non lus'
         starred: 'Articles favoris'
-        archive: 'Articles lus'
+        archived: 'Articles lus'
         filtered: 'Articles filtrés'
     list:
         number_on_the_page: "{0} Il n'y a pas d'articles.|{1} Il y a un article.|]1,Inf[ Il y a %count% articles."
