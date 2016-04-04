@@ -137,7 +137,7 @@ entry:
     page_titles:
         unread: 'Nieprzeczytane wpisy'
         starred: 'Wpisy oznaczone gwiazdką'
-        archive: 'Zarchiwizowane wpisy'
+        archived: 'Zarchiwizowane wpisy'
         filtered: 'Odfiltrowane wpisy'
     list:
         number_on_the_page: '{0} Nie ma wpisów.|{1} Jest jeden wpis.|]1,Inf[ Są %count% wpisy.'

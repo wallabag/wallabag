@@ -137,7 +137,7 @@ entry:
     page_titles:
         unread: 'Ungelesene Einträge'
         starred: 'Favorisierte Einträge'
-        archive: 'Archivierte Einträge'
+        archived: 'Archivierte Einträge'
         filtered: 'Gefilterte Einträge'
     list:
         number_on_the_page: '{0} Es gibt keine Einträge.|{1} Es gibt einen Eintrag.|]1,Inf[ Es gibt %count% Einträge.'

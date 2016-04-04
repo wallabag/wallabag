@@ -137,7 +137,7 @@ entry:
     page_titles:
         # unread: 'Unread entries'
         # starred: 'Starred entries'
-        # archive: 'Archived entries'
+        # archived: 'Archived entries'
         # filtered: 'Filtered entries'
     list:
         number_on_the_page: '{0} No hay artículos.|{1} Hay un artículo.|]1,Inf[ Hay %count% artículos.'
