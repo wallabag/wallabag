@@ -908,7 +908,7 @@ class Poche
         $entries = $this->store->retrieveAllWithTags($this->user->getId());
         if ($entries) {
             echo $this->tpl->render('export.twig', array(
-            'export' => Tools::renderJson($entries),
+            'export' => Tools::renderJson(Tools::utf8ize($entries)),
             ));
             Tools::logm('export view');
         } else {
