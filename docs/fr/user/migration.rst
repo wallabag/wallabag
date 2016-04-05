@@ -31,7 +31,7 @@ Si vous avez accès à la ligne de commandes de votre serveur web, vous pouvez e
 
 ::
 
-    bin/console wallabag:import-v1 1 ~/Downloads/wallabag-export-1-2016-04-05.json
+    bin/console wallabag:import-v1 1 ~/Downloads/wallabag-export-1-2016-04-05.json --env=prod
 
 Remplacez les valeurs :
 

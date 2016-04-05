@@ -31,7 +31,7 @@ If you have a CLI access on your web server, you can execute this command to imp
 
 ::
 
-    bin/console wallabag:import-v1 1 ~/Downloads/wallabag-export-1-2016-04-05.json
+    bin/console wallabag:import-v1 1 ~/Downloads/wallabag-export-1-2016-04-05.json --env=prod
 
 Please replace values:
 
