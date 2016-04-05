@@ -24,6 +24,7 @@ The main documentation for this application is organized into a couple sections:
    :caption: User documentation
 
    user/installation
+   user/migration
    user/create_account
    user/login
    user/configuration
