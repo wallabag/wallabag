@@ -7,7 +7,7 @@ Pré-requis
 ----------
 
 * wallabag fraichement installé et disponible à http://localhost:8000
-* ``httpie`` installé sur votre ordinateur (`voir le site du projet <https://github.com/jkbrzt/httpie>`__)
+* ``httpie`` installé sur votre ordinateur (`voir le site du projet <https://github.com/jkbrzt/httpie>`__). Vous pouvez également adapter les commandes en utilisant curl ou wget. 
 * toutes les méthodes de l'API documentées ici http://localhost:8000/api/doc
 
 Créer un nouveau client d'API
@@ -120,8 +120,8 @@ retournera :
 
 Le tableau ``items`` est vide.
 
-Créer le premier article
-------------------------
+Créer votre premier article
+---------------------------
 
 Documentation pour cette méthode : http://localhost:8000/api/doc#post--api-entries.{_format}
 
@@ -232,4 +232,4 @@ Autres méthodes
 
 Nous n'écrirons pas d'exemples pour toutes les méthodes de l'API.
 
-Jetez un œil à la liste complète ici http://localhost:8000/api/doc pour connaitre chaque méthode. 
+Jetez un œil à la liste complète ici http://localhost:8000/api/doc pour connaitre chaque méthode.

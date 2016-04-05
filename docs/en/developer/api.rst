@@ -6,12 +6,12 @@ Thanks to this documentation, we'll see how to interact with the wallabag API.
 Requirements
 ------------
 
-* wallabag freshly installed on http://localhost:8000
-* ``httpie`` installed on your computer (`see project website <https://github.com/jkbrzt/httpie>`__)
+* wallabag freshly (or not) installed on http://localhost:8000
+* ``httpie`` installed on your computer (`see project website <https://github.com/jkbrzt/httpie>`__). Note that you can also adapt the commands using curl or wget.
 * all the API methods are documented here http://localhost:8000/api/doc
 
-Create new API client
----------------------
+Creating a new API client
+-------------------------
 
 In your wallabag account, you can create a new API client at this URL http://localhost:8000/developer/client/create.
 
@@ -30,8 +30,8 @@ You get information like this:
     636ocbqo978ckw0gsw4gcwwocg8044sco0w8w84cws48ggogs4
 
 
-Create refresh token
---------------------
+Obtaining a refresh token
+-------------------------
 
 For each API call, you'll need a token. Let's create it with this command (replace ``client_id``, ``client_secret``, ``username`` and ``password`` with their values):
 
@@ -69,8 +69,8 @@ You'll have this in return:
 
 We'll work with the ``access_token`` value in our next calls.
 
-Get existing entries
---------------------
+Getting existing entries
+------------------------
 
 Documentation for this method: http://localhost:8000/api/doc#get--api-entries.{_format}
 
@@ -120,8 +120,8 @@ returns:
 
 The ``items`` array is empty.
 
-Add first entry
----------------
+Adding your first entry
+-----------------------
 
 Documentation for this method: http://localhost:8000/api/doc#post--api-entries.{_format}
 
@@ -174,8 +174,8 @@ returns
 
 Now, if you execute the previous command (see **Get existing entries**), you'll have data.
 
-Delete an entry
----------------
+Deleting an entry
+-----------------
 
 Documentation for this method: http://localhost:8000/api/doc#delete--api-entries-{entry}.{_format}
 
