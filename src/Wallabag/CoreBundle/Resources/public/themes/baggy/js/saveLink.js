@@ -79,19 +79,6 @@ $.fn.ready(function() {
   });
 
   /* ==========================================================================
-   Keyboard gestion
-   ========================================================================== */
-
-  $(window).keydown(function(e){
-    if ( ( e.target.tagName.toLowerCase() !== 'input' && e.keyCode == 83 ) || (e.keyCode == 27 && $bagitForm.is(':visible') ) ) {
-      $bagit.removeClass("current");
-      $("#bagit-arrow").removeClass("arrow-down");
-      toggleSaveLinkForm();
-      return false;
-    }
-  });
-
-  /* ==========================================================================
    Process all links inside an article
    ========================================================================== */
 
