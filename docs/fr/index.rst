@@ -25,6 +25,7 @@ La documentation principale de cette application est découpée en plusieurs sec
    :caption: Documentation utilisateur
 
    user/installation
+   user/migration
    user/create_account
    user/login
    user/configuration
