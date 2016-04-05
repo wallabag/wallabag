@@ -24,6 +24,28 @@ Une fois que vous avez créé un compte utilisateur sur votre nouvelle instance 
    :alt: Import depuis wallabag v1
    :align: center
 
+Import via via la ligne de commande (CLI)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Si vous avez accès à la ligne de commandes de votre serveur web, vous pouvez exécuter cette commande pour import votre fichier wallabag v1 :
+
+::
+
+    bin/console wallabag:import-v1 1 ~/Downloads/wallabag-export-1-2016-04-05.json
+
+Remplacez les valeurs :
+
+* ``1`` est l'identifiant de votre utilisateur en base (l'ID de votre premier utilisateur créé sur wallabag est 1)
+* ``~/Downloads/wallabag-export-1-2016-04-05.json`` est le chemin de votre export wallabag v1
+
+Vous obtiendrez :
+
+::
+
+    Start : 05-04-2016 11:36:07 ---
+    403 imported
+    0 already saved
+    End : 05-04-2016 11:36:09 ---
 
 Depuis wallabag 2.x
 -------------------
