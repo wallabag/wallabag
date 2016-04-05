@@ -42,7 +42,7 @@ The main documentation for this application is organized into a couple sections:
    :maxdepth: 2
    :caption: Developer documentation
 
+   developer/api
    developer/docker
    developer/translate
    developer/maintenance
-   developer/api

@@ -338,6 +338,7 @@ developer:
     documentation: 'Dokumentacja'
     how_to_first_app: 'Jak stworzyć moją pierwszą aplikację'
     full_documentation: 'Pokaż pełne API'
+    # list_methods: 'List API methods'
     clients:
          title: 'Klienci'
          create_new: 'Utwórz nowego klienta'

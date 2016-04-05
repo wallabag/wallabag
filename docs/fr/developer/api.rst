@@ -1,23 +1,23 @@
-API documentation
-=================
+Documentation de l'API
+======================
 
-Thanks to this documentation, we'll see how to interact with the wallabag API.
+Grâce à cette documentation, nous allons voir comment interagir avec l'API de wallabag.
 
-Requirements
-------------
+Pré-requis
+----------
 
-* wallabag freshly installed on http://localhost:8000
-* ``httpie`` installed on your computer (`see project website <https://github.com/jkbrzt/httpie>`__)
-* all the API methods are documented here http://localhost:8000/api/doc
+* wallabag fraichement installé et disponible à http://localhost:8000
+* ``httpie`` installé sur votre ordinateur (`voir le site du projet <https://github.com/jkbrzt/httpie>`__)
+* toutes les méthodes de l'API documentées ici http://localhost:8000/api/doc
 
-Create new API client
----------------------
+Créer un nouveau client d'API
+-----------------------------
 
-In your wallabag account, you can create a new API client at this URL http://localhost:8000/developer/client/create.
+Depuis votre wallabag, vous pouvez créer un nouveau client d'API à cette URL http://localhost:8000/developer/client/create.
 
-Just give the redirect URL of your application and create your client. If your application is a desktop one, put whatever URL suits you the most.
+Vous devez renseigner l'URL de redirection de votre application et créer votre client. Si votre application est une application desktop, renseignez l'URL que vous souhaitez.
 
-You get information like this:
+Vous obtiendrez les informations suivantes :
 
 ::
 
@@ -30,10 +30,10 @@ You get information like this:
     636ocbqo978ckw0gsw4gcwwocg8044sco0w8w84cws48ggogs4
 
 
-Create refresh token
---------------------
+Créer un jeton
+--------------
 
-For each API call, you'll need a token. Let's create it with this command (replace ``client_id``, ``client_secret``, ``username`` and ``password`` with their values):
+Pour chaque appel d'API, vous aurez besoin d'un jeton. Créons-le avec la commande suivante (remplacez ``client_id``, ``client_secret``, ``username`` and ``password`` par leur valeur):
 
 ::
 
@@ -44,7 +44,7 @@ For each API call, you'll need a token. Let's create it with this command (repla
         username=wallabag \
         password=wallabag
 
-You'll have this in return:
+Vous obtiendrez :
 
 ::
 
@@ -67,21 +67,21 @@ You'll have this in return:
         "token_type": "bearer"
     }
 
-We'll work with the ``access_token`` value in our next calls.
+Nous allons utiliser la valeur de ``access_token`` dans nos prochains appels.
 
-Get existing entries
---------------------
+Récupérer les articles existants
+--------------------------------
 
-Documentation for this method: http://localhost:8000/api/doc#get--api-entries.{_format}
+Documentation pour cette méthode : http://localhost:8000/api/doc#get--api-entries.{_format}
 
-As we work on a fresh wallabag installation, we'll have no result with this command:
+Comme nous venons tout juste d'installer wallabag, nous n'aurons aucun résultat avec cette commande :
 
 ::
 
     http GET http://localhost:8000/api/entries.json \
     "Authorization:Bearer ZGJmNTA2MDdmYTdmNWFiZjcxOWY3MWYyYzkyZDdlNWIzOTU4NWY3NTU1MDFjOTdhMTk2MGI3YjY1ZmI2NzM5MA"
 
-returns:
+retournera :
 
 ::
 
@@ -118,12 +118,12 @@ returns:
         "total": 0
     }
 
-The ``items`` array is empty.
+Le tableau ``items`` est vide.
 
-Add first entry
----------------
+Créer le premier article
+------------------------
 
-Documentation for this method: http://localhost:8000/api/doc#post--api-entries.{_format}
+Documentation pour cette méthode : http://localhost:8000/api/doc#post--api-entries.{_format}
 
 ::
 
@@ -131,7 +131,7 @@ Documentation for this method: http://localhost:8000/api/doc#post--api-entries.{
     "Authorization:Bearer ZGJmNTA2MDdmYTdmNWFiZjcxOWY3MWYyYzkyZDdlNWIzOTU4NWY3NTU1MDFjOTdhMTk2MGI3YjY1ZmI2NzM5MA" \
     url="http://www.numerama.com/tech/160115-le-pocket-libre-wallabag-fait-le-plein-de-fonctionnalites.html"
 
-returns
+retournera :
 
 ::
 
@@ -172,19 +172,19 @@ returns
         "user_name": "wallabag"
     }
 
-Now, if you execute the previous command (see **Get existing entries**), you'll have data.
+Maintenant, si vous exécutez la précédente commande (voir **Récupérer les articles existants**), vous obtiendrez quelque chose.
 
-Delete an entry
----------------
+Supprimer un article
+--------------------
 
-Documentation for this method: http://localhost:8000/api/doc#delete--api-entries-{entry}.{_format}
+Documentation pour cette méthode : http://localhost:8000/api/doc#delete--api-entries-{entry}.{_format}
 
 ::
 
     http DELETE http://localhost:8000/api/entries/1.json \
     "Authorization:Bearer ZGJmNTA2MDdmYTdmNWFiZjcxOWY3MWYyYzkyZDdlNWIzOTU4NWY3NTU1MDFjOTdhMTk2MGI3YjY1ZmI2NzM5MA"
 
-returns
+retournera :
 
 ::
 
@@ -225,11 +225,11 @@ returns
         "user_name": "wallabag"
     }
 
-And if you want to list the existing entries (see **Get existing entries**), the array is empty.
+Et si vous voulez voir la liste des articles existants (voir **Récupérer les articles existants**), le tableau sera vide.
 
-Other methods
--------------
+Autres méthodes
+---------------
 
-We won't write samples for each API method.
+Nous n'écrirons pas d'exemples pour toutes les méthodes de l'API.
 
-Have a look on the listing here: http://localhost:8000/api/doc to know each method.
+Jetez un œil à la liste complète ici http://localhost:8000/api/doc pour connaitre chaque méthode. 
