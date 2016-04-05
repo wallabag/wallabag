@@ -15,9 +15,9 @@ Create new API client
 
 In your wallabag account, you can create a new API client at this URL ``http://localhost:8000/developer/client/create``.
 
-Just give the redirect URL of your application and create your client.
+Just give the redirect URL of your application and create your client. If your application is a desktop one, put whatever URL suits you the most.
 
-You have information like this:
+You get information like this:
 
 ::
 
@@ -33,7 +33,7 @@ You have information like this:
 Create refresh token
 --------------------
 
-For each API call, you need a token. Let's create it via this command (replace ``client_id``, ``client_secret``, ``username`` and ``password`` values):
+For each API call, you'll need a token. Let's create it with this command (replace ``client_id``, ``client_secret``, ``username`` and ``password`` with their values):
 
 ::
 
@@ -44,7 +44,7 @@ For each API call, you need a token. Let's create it via this command (replace `
         username=wallabag \
         password=wallabag
 
-You'll have this return:
+You'll have this in return:
 
 ::
 
