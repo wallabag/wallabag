@@ -23,19 +23,17 @@
     {% for entry in entries %}
         <div id="entry-{{ entry.id|e }}" class="entry">
             <h2><a href="{{ path('view', { 'id': entry.id }) }}">{{ entry.title|raw }}</a></h2>
-            {% if entry.readingTime > 0 %}
-                <div class="estimatedTime">
+
+            {% set readingTime = entry.readingTime / app.user.config.readingSpeed %}
+            <div class="estimatedTime">
                     <span class="tool reading-time">
-                        {{ 'entry.list.reading_time_minutes'|trans({'%readingTime%': entry.readingTime}) }}
-                    </span>
-                </div>
+            {% if readingTime > 0 %}
+                {{ 'entry.list.reading_time_minutes'|trans({'%readingTime%': readingTime|round}) }}
             {% else %}
-                <div class="estimatedTime">
-                    <span class="tool reading-time">
-                    {{ 'entry.list.reading_time_less_one_minute'|trans|raw }}
-                    </span>
-                </div>
+                {{ 'entry.list.reading_time_less_one_minute'|trans|raw }}
             {% endif %}
+                    </span>
+            </div>
 
             <ul class="tools links">
                 <li><a title="{{ 'entry.list.toogle_as_read'|trans }}" class="tool icon-check icon {% if entry.isArchived == 0 %}archive-off{% else %}archive{% endif %}" href="{{ path('archive_entry', { 'id': entry.id }) }}"><span>{{ 'entry.list.toogle_as_read'|trans }}</span></a></li>
