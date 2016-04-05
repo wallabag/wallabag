@@ -54,7 +54,7 @@
                                 <span class="tool reading-time">
                                     {% set readingTime = entry.readingTime / app.user.config.readingSpeed %}
                                     {% if readingTime > 0 %}
-                                        {{ 'entry.list.reading_time_minutes'|trans({'%readingTime%': readingTime}) }}
+                                        {{ 'entry.list.reading_time_minutes'|trans({'%readingTime%': readingTime|round}) }}
                                     {% else %}
                                         {{ 'entry.list.reading_time_less_one_minute'|trans|raw }}
                                     {% endif %}
