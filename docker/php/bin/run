@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Download and install Composer
+php -r "readfile('https://getcomposer.org/installer');" > composer-setup.php
+php composer-setup.php
+php -r "unlink('composer-setup.php');"
+
+# Install dependencies and deploy Wallabag
+export SYMFONY_ENV=prod
+php composer.phar install --no-dev -o --prefer-dist
+php bin/console wallabag:install --env=prod
+chown -R www-data:1000 /var/www/html
+
+php-fpm
