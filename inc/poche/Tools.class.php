@@ -239,23 +239,16 @@ final class Tools
      */
     public static function utf8ize($data)
     {
-       if (is_array($data))
+        if (is_array($data))
         {
             foreach ($data as $k => $v)
             {
                 $data[$k] = self::utf8ize($v);
             }
         }
-        else if (is_string ($data))
+        else if (is_string ($data) && '' == mb_detect_encoding($data))
         {
-            if ('' == mb_detect_encoding($data))
-            {
-                return utf8_encode($data);
-            }
-            else
-            {
-                return $data;
-            }
+            return utf8_encode($data);
         }
         return $data;
     }
