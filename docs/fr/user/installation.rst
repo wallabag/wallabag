@@ -60,6 +60,11 @@ Pour démarrer le serveur interne à php et vérifier que tout s'est installé c
 
 Et accéder wallabag à l'adresse http://lipdevotreserveur:8000
 
+.. note::
+
+    Pour définir des paramètres via des variables d'environnement, vous pouvez les spécifier avec le préfixe ``SYMFONY__``. Par exemple, ``SYMFONY__DATABASE_DRIVER``. Vous pouvez lire `documentation Symfony
+<http://symfony.com/doc/current/cookbook/configuration/external_parameters.html>`__ pour en savoir plus. 
+
 Installation avec Apache
 ------------------------
 

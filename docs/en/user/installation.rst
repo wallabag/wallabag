@@ -62,6 +62,11 @@ To start php's build-in server and test if everything did install correctly, you
 
 And access wallabag at http://yourserverip:8000
 
+.. note::
+
+    To define parameters with environment variables, you have to set these variables with ``SYMFONY__`` prefix. For example, ``SYMFONY__DATABASE_DRIVER``. You can have a look to the  `Symfony documentation
+<http://symfony.com/doc/current/cookbook/configuration/external_parameters.html>`__.
+
 Installing on Apache
 --------------------
 
