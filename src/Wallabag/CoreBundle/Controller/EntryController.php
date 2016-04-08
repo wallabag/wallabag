@@ -86,7 +86,13 @@ class EntryController extends Controller
     {
         $entry = new Entry($this->getUser());
         $entry->setUrl($request->get('url'));
-        $this->updateEntry($entry);
+
+        // check for existing entry, if it exists, redirect to it with a message
+        $existingEntry = $this->get('wallabag_core.entry_repository')->findByUrlAndUserId($entry->getUrl(), $this->getUser()->getId());
+
+        if (false === $existingEntry) {
+            $this->updateEntry($entry);
+        }
 
         return $this->redirect($this->generateUrl('homepage'));
     }
