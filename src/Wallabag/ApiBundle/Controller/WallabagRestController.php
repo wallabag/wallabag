@@ -43,8 +43,8 @@ class WallabagRestController extends FOSRestController
     {
         $this->validateAuthentication();
 
-        $isArchived = (int) $request->query->get('archive');
-        $isStarred = (int) $request->query->get('starred');
+        $isArchived = (null === $request->query->get('archive')) ? null : (bool) (int) $request->query->get('archive');
+        $isStarred = (null === $request->query->get('starred')) ? null : (bool) (int) $request->query->get('starred');
         $sort = $request->query->get('sort', 'created');
         $order = $request->query->get('order', 'desc');
         $page = (int) $request->query->get('page', 1);
@@ -52,7 +52,7 @@ class WallabagRestController extends FOSRestController
 
         $pager = $this->getDoctrine()
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findEntries($this->getUser()->getId(), (bool) $isArchived, (bool) $isStarred, $sort, $order);
+            ->findEntries($this->getUser()->getId(), $isArchived, $isStarred, $sort, $order);
 
         $pager->setCurrentPage($page);
         $pager->setMaxPerPage($perPage);
