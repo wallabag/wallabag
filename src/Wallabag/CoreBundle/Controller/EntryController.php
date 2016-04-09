@@ -49,8 +49,7 @@ class EntryController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            // check for existing entry, if it exists, redirect to it with a message
-            $existingEntry = $this->get('wallabag_core.entry_repository')->findByUrlAndUserId($entry->getUrl(), $this->getUser()->getId());
+            $existingEntry = $this->checkIfEntryAlreadyExists($entry);
 
             if (false !== $existingEntry) {
                 $this->get('session')->getFlashBag()->add(
@@ -87,10 +86,7 @@ class EntryController extends Controller
         $entry = new Entry($this->getUser());
         $entry->setUrl($request->get('url'));
 
-        // check for existing entry, if it exists, redirect to it with a message
-        $existingEntry = $this->get('wallabag_core.entry_repository')->findByUrlAndUserId($entry->getUrl(), $this->getUser()->getId());
-
-        if (false === $existingEntry) {
+        if (false === $this->checkIfEntryAlreadyExists($entry)) {
             $this->updateEntry($entry);
         }
 
@@ -425,5 +421,17 @@ class EntryController extends Controller
         if ($this->getUser()->getId() != $entry->getUser()->getId()) {
             throw $this->createAccessDeniedException('You can not access this entry.');
         }
+    }
+
+    /**
+     * Check for existing entry, if it exists, redirect to it with a message.
+     *
+     * @param $entry
+     *
+     * @return array|bool
+     */
+    public function checkIfEntryAlreadyExists($entry)
+    {
+        return $this->get('wallabag_core.entry_repository')->findByUrlAndUserId($entry->getUrl(), $this->getUser()->getId());
     }
 }
