@@ -138,6 +138,17 @@
             </div>
         </li>
 
+        {% if craue_setting('show_printlink') %}
+        <li class="bold border-bottom hide-on-med-and-down">
+            <a class="waves-effect collapsible-header" title="{{ 'entry.view.left_menu.print'|trans }}" href="javascript: window.print();">
+                <i class="mdi-action-print small"></i>
+                <span>{{ 'entry.view.left_menu.print'|trans }}</span>
+            </a>
+            <div class="collapsible-body"></div>
+        </li>
+        {% endif %}
+
+
         <li class="bold">
             <a class="waves-effect collapsible-header">
                 <i class="mdi-file-file-download small"></i>

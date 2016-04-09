@@ -232,11 +232,6 @@ class InstallCommand extends ContainerAwareCommand
 
         $settings = [
             [
-                'name' => 'download_pictures',
-                'value' => '1',
-                'section' => 'entry',
-            ],
-            [
                 'name' => 'carrot',
                 'value' => '1',
                 'section' => 'entry',

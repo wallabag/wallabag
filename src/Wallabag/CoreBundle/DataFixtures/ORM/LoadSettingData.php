@@ -16,11 +16,6 @@ class LoadSettingData extends AbstractFixture implements OrderedFixtureInterface
     {
         $settings = [
             [
-                'name' => 'download_pictures',
-                'value' => '1',
-                'section' => 'entry',
-            ],
-            [
                 'name' => 'carrot',
                 'value' => '1',
                 'section' => 'entry',
