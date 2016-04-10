@@ -101,6 +101,13 @@
                 <ul>
                     {% if craue_setting('share_twitter') %}
                         <li>
+                            <a href="{{ path('share', {'uuid': entry.uuid }) }}" target="_blank" class="tool public" title="public">
+                                <span>public</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% if craue_setting('share_twitter') %}
+                        <li>
                             <a href="https://twitter.com/home?status={{entry.title|url_encode}}%20{{ entry.url|url_encode }}%20via%20@wallabagapp" target="_blank" class="tool twitter icon icon-twitter" title="twitter">
                                 <span>twitter</span>
                             </a>
@@ -148,7 +155,6 @@
             <div class="collapsible-body"></div>
         </li>
         {% endif %}
-
 
         <li class="bold">
             <a class="waves-effect collapsible-header">

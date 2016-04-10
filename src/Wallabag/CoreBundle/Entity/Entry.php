@@ -38,6 +38,15 @@ class Entry
     private $id;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="uuid", type="text", nullable=true)
+     *
+     * @Groups({"entries_for_user", "export_all"})
+     */
+    private $uuid;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="title", type="text", nullable=true)
@@ -427,6 +436,8 @@ class Entry
         }
 
         $this->updatedAt = new \DateTime();
+
+        $this->generateUuid();
     }
 
     /**
@@ -594,5 +605,32 @@ class Entry
     public function getLanguage()
     {
         return $this->language;
+    }
+
+    /**
+     * @return int
+     */
+    public function getUuid()
+    {
+        return $this->uuid;
+    }
+
+    /**
+     * @param int $uuid
+     *
+     * @return Entry
+     */
+    public function setUuid($uuid)
+    {
+        $this->uuid = $uuid;
+
+        return $this;
+    }
+
+    public function generateUuid()
+    {
+        if (empty($this->uuid) || is_null($this->uuid)) {
+            $this->uuid = uniqid();
+        }
     }
 }

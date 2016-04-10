@@ -291,6 +291,8 @@ class EntryController extends Controller
     {
         $this->checkUserAction($entry);
 
+        $this->generateEntryUuid($entry);
+
         return $this->render(
             'WallabagCoreBundle:Entry:entry.html.twig',
             ['entry' => $entry]
@@ -449,5 +451,34 @@ class EntryController extends Controller
     private function checkIfEntryAlreadyExists(Entry $entry)
     {
         return $this->get('wallabag_core.entry_repository')->findByUrlAndUserId($entry->getUrl(), $this->getUser()->getId());
+
+    }
+
+    /*
+     * Share entry content.
+     *
+     * @param Entry $entry
+     *
+     * @Route("/share/{uuid}", requirements={"uuid" = ".+"}, name="share")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function shareEntry(Entry $entry)
+    {
+        return $this->render(
+            '@WallabagCore/themes/share.html.twig',
+            array('entry' => $entry)
+        );
+    }
+
+    /**
+     * @param Entry $entry
+     */
+    private function generateEntryUuid(Entry $entry)
+    {
+        $entry->generateUuid();
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($entry);
+        $em->flush();
     }
 }

@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <title>{{ entry.title | raw }}</title>
+        <style>
+            body {
+                margin: 10px;
+                font-family: 'Roboto',Verdana,Geneva,sans-serif;
+                font-size: 16px;
+                color: #000;
+            }
+            header {
+                text-align: center;
+            }
+
+            header h1 {
+                font-size: 1.3em;
+            }
+
+            a,
+            a:hover,
+            a:visited {
+                color: #000;
+            }
+
+            article {
+                margin: 0 auto;
+                width: 600px;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>{{ entry.title | raw }}</h1>
+        </header>
+        <article>
+            {{ entry.content | raw }}
+        </article>
+    </body>
+</html>
