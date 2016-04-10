@@ -176,7 +176,7 @@ entry:
             set_as_read: 'Mark as read'
             set_as_unread: 'Mark as unread'
             set_as_favorite: 'Favorite'
-            view_original_article: 'Orignal article'
+            view_original_article: 'Original article'
             re_fetch_content: 'Re-fetch content'
             delete: 'Delete'
             add_a_tag: 'Add a tag'
