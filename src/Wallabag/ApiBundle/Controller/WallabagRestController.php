@@ -43,8 +43,8 @@ class WallabagRestController extends FOSRestController
     {
         $this->validateAuthentication();
 
-        $isArchived = (null === $request->query->get('archive')) ? null : (bool) (int) $request->query->get('archive');
-        $isStarred = (null === $request->query->get('starred')) ? null : (bool) (int) $request->query->get('starred');
+        $isArchived = (null === $request->query->get('archive')) ? null : (bool) $request->query->get('archive');
+        $isStarred = (null === $request->query->get('starred')) ? null : (bool) $request->query->get('starred');
         $sort = $request->query->get('sort', 'created');
         $order = $request->query->get('order', 'desc');
         $page = (int) $request->query->get('page', 1);
