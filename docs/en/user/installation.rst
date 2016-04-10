@@ -151,3 +151,7 @@ Assuming you install wallabag in the /var/www/wallabag folder, here's the recipe
     }
 
 After reloading or restarting nginx, you should now be able to access wallabag at http://domain.tld.
+
+.. note::
+
+    When you want to import large file into wallabag, you need to add this line in your nginx configuration ``client_max_body_size XM; # allows file uploads up to X megabytes``.
