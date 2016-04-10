@@ -5,32 +5,37 @@ All notable changes to this project will be documented in this file. This projec
 ## [Unreleased]
 ### Added
 
-- cea846d documentation about importing large file into nginx Fix #1849: configuration to avoid 413 Request Entity Too Large. (Nicolas Lœuillet)
-- c802181 Documentation about wallabag API (Nicolas Lœuillet)
-- 4a749ca Round estimated time and add reading speed for Baggy (Nicolas Lœuillet)
-- af47742 Documentation about wallabag v1 CLI import (Nicolas Lœuillet)
-- 48bb967 Add migrate link in documentation (Nicolas Lœuillet)
+- [Documentation about importing large file](http://doc.wallabag.org/en/v2/user/installation.html#installing-on-nginx) into nginx. (Nicolas Lœuillet)
+- [Documentation about wallabag API](http://doc.wallabag.org/en/v2/developer/api.html) (Nicolas Lœuillet)
+- [#1861](https://github.com/wallabag/wallabag/pull/1861) Round estimated time and add reading speed for Baggy (Nicolas Lœuillet)
+- [Documentation about wallabag v1 CLI import](http://doc.wallabag.org/en/v2/user/migration.html#import-via-command-line-interface-cli) (Nicolas Lœuillet)
+- [Add migrate link](http://doc.wallabag.org/en/v2/user/migration.html) in documentation (Nicolas Lœuillet)
 
 ### Changed
 
-- c6cbe75 Move tag form in Material theme (Nicolas Lœuillet)
+- [#1823](https://github.com/wallabag/wallabag/pull/1823) Persian translation (Masoud Abkenar)
+- [#1901](https://github.com/wallabag/wallabag/pull/1901) Spanish translation (Jeremy Benoist)
+- [#1879](https://github.com/wallabag/wallabag/pull/1879) Move tag form in Material theme (Nicolas Lœuillet)
 
 ### Fixed
 
-- 7ead8a0 Fix estimated reading time in material view #1893 (Nicolas Lœuillet)
-- cb48a56 remove download_picture setting and manage show_printlink in material theme #1867 (Nicolas Lœuillet)
-- 808f541 Fix documentation link in developer page (Nicolas Lœuillet)
-- 7a2157b Fix typo on configuration page (Nicolas Lœuillet)
-- 0c608f1 Change the installation method in issue template (Nicolas Lœuillet)
-- 9479ae8 Lock ocramius/proxy-manager (Jeremy Benoist)
-- b5cf84b Fix Archive page title translation (Nicolas Lœuillet)
-- e71c376 Force user-agent for iansommerville.com (Jeremy Benoist)
+- [#1903](https://github.com/wallabag/wallabag/pull/1903) Force server version to avoid connection error (Jeremy Benoist)
+- [#1887](https://github.com/wallabag/wallabag/pull/1887) Fix duplicate article when added via the bookmarklet (Nicolas Lœuillet)
+- [#1895](https://github.com/wallabag/wallabag/pull/1895) API: All the entries are fetched via GET /api/entries (Nicolas Lœuillet)
+- [#1898](https://github.com/wallabag/wallabag/pull/1898) Fix estimated reading time in material view #1893 (Nicolas Lœuillet)
+- [#1896](https://github.com/wallabag/wallabag/pull/1896) remove download_picture setting and manage show_printlink in material theme #1867 (Nicolas Lœuillet)
+- [#1894](https://github.com/wallabag/wallabag/pull/1894) Fix documentation link in developer page (Nicolas Lœuillet)
+- [#1891](https://github.com/wallabag/wallabag/pull/1891) Fix typo on configuration page (Nicolas Lœuillet)
+- [#1884](https://github.com/wallabag/wallabag/pull/1884) Change the installation method in issue template (Nicolas Lœuillet)
+- [#1844](https://github.com/wallabag/wallabag/pull/1844) Lock ocramius/proxy-manager (Jeremy Benoist)
+- [#1840](https://github.com/wallabag/wallabag/pull/1840) Fix Archive page title translation (Nicolas Lœuillet)
+- [#1801](https://github.com/wallabag/wallabag/pull/1804) Force user-agent for iansommerville.com (Jeremy Benoist)
 
 ### Removed
 
-- 466c0c6 Remove empty portugese documentation (Nicolas Lœuillet)
-- 8687bcd Remove keyboard shortcut and add tagging rule panel in baggy (Nicolas Lœuillet)
-- 0bb5669 Remove SMTP configuration environment overrides (Mathieu Bruyen)
+- [#1900](https://github.com/wallabag/wallabag/pull/1900) Remove empty portugese documentation (Nicolas Lœuillet)
+- [#1868](https://github.com/wallabag/wallabag/pull/1868) Remove keyboard shortcut and add tagging rule panel in baggy (Nicolas Lœuillet)
+- [#1824](https://github.com/wallabag/wallabag/pull/1824) Remove SMTP configuration environment overrides (Mathieu Bruyen)
 
 ## [2.0.0] - 2016-04-04
 ### Added
