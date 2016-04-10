@@ -152,4 +152,4 @@ Après que vous ayez rechargé/redémarré Nginx, vous devriez pouvoir avoir acc
 
 .. note::
 
-    Si vous voulez importer un fichier important dans wallabag, vous debez ajouter cette ligne dans votre configuration nginx ``client_max_body_size XM; # allows file uploads up to X megabytes``.
+    Si vous voulez importer un fichier important dans wallabag, vous devez ajouter cette ligne dans votre configuration nginx ``client_max_body_size XM; # allows file uploads up to X megabytes``.
