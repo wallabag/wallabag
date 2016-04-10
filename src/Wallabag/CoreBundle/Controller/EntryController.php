@@ -430,7 +430,7 @@ class EntryController extends Controller
      *
      * @return array|bool
      */
-    public function checkIfEntryAlreadyExists($entry)
+    private function checkIfEntryAlreadyExists($entry)
     {
         return $this->get('wallabag_core.entry_repository')->findByUrlAndUserId($entry->getUrl(), $this->getUser()->getId());
     }
