@@ -99,7 +99,7 @@
             </a>
             <div class="collapsible-body">
                 <ul>
-                    {% if craue_setting('share_twitter') %}
+                    {% if craue_setting('share_public') %}
                         <li>
                             <a href="{{ path('share', {'uuid': entry.uuid }) }}" target="_blank" class="tool public" title="public">
                                 <span>public</span>

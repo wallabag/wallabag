@@ -242,6 +242,11 @@ class InstallCommand extends ContainerAwareCommand
 
         $settings = [
             [
+                'name' => 'share_public',
+                'value' => '1',
+                'section' => 'entry',
+            ],
+            [
                 'name' => 'carrot',
                 'value' => '1',
                 'section' => 'entry',

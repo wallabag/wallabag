@@ -451,10 +451,9 @@ class EntryController extends Controller
     private function checkIfEntryAlreadyExists(Entry $entry)
     {
         return $this->get('wallabag_core.entry_repository')->findByUrlAndUserId($entry->getUrl(), $this->getUser()->getId());
-
     }
 
-    /*
+    /**
      * Share entry content.
      *
      * @param Entry $entry
@@ -463,7 +462,7 @@ class EntryController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function shareEntry(Entry $entry)
+    public function shareEntryAction(Entry $entry)
     {
         return $this->render(
             '@WallabagCore/themes/share.html.twig',
