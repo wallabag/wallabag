@@ -74,8 +74,7 @@
 
                             <div class="estimatedTime grey-text">
                                 <span class="tool reading-time">
-                                    {{ 'entry.list.reading_time'|trans }}
-                                    {% if entry.readingTime > 0 %}{{ entry.readingTime }}{% else %}<small class="inferieur">&lt;</small> 1{% endif %} min
+                                    {% if readingTime > 0 %}{{ 'entry.list.reading_time_minutes'|trans({'%readingTime%': readingTime|round}) }}{% else %}{{ 'entry.list.reading_time_less_one_minute'|trans|raw }}{% endif %}
                                 </span>
                             </div>
 
