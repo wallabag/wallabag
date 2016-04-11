@@ -22,7 +22,7 @@
 
     {% for entry in entries %}
         <div id="entry-{{ entry.id|e }}" class="entry">
-            <h2><a href="{{ path('view', { 'id': entry.id }) }}">{{ entry.title|raw }}</a></h2>
+            <h2><a href="{{ path('view', { 'id': entry.id }) }}" title="{{ entry.title|raw }}">{{ entry.title|raw }}</a></h2>
 
             {% set readingTime = entry.readingTime / app.user.config.readingSpeed %}
             <div class="estimatedTime">
