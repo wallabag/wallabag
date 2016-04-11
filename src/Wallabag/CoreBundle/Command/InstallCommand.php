@@ -60,6 +60,7 @@ class InstallCommand extends ContainerAwareCommand
             ->checkRequirements()
             ->setupDatabase()
             ->setupAdmin()
+            ->setupConfig()
             ->setupAsset()
         ;
 
@@ -69,7 +70,7 @@ class InstallCommand extends ContainerAwareCommand
 
     protected function checkRequirements()
     {
-        $this->defaultOutput->writeln('<info><comment>Step 1 of 4.</comment> Checking system requirements.</info>');
+        $this->defaultOutput->writeln('<info><comment>Step 1 of 5.</comment> Checking system requirements.</info>');
 
         $fulfilled = true;
 
@@ -119,7 +120,7 @@ class InstallCommand extends ContainerAwareCommand
 
     protected function setupDatabase()
     {
-        $this->defaultOutput->writeln('<info><comment>Step 2 of 4.</comment> Setting up database.</info>');
+        $this->defaultOutput->writeln('<info><comment>Step 2 of 5.</comment> Setting up database.</info>');
 
         // user want to reset everything? Don't care about what is already here
         if (true === $this->defaultInput->getOption('reset')) {
@@ -190,7 +191,7 @@ class InstallCommand extends ContainerAwareCommand
 
     protected function setupAdmin()
     {
-        $this->defaultOutput->writeln('<info><comment>Step 3 of 4.</comment> Administration setup.</info>');
+        $this->defaultOutput->writeln('<info><comment>Step 3 of 5.</comment> Administration setup.</info>');
 
         $questionHelper = $this->getHelperSet()->get('question');
         $question = new ConfirmationQuestion('Would you like to create a new admin user (recommended) ? (Y/n)', true);
@@ -226,6 +227,16 @@ class InstallCommand extends ContainerAwareCommand
         $config->setLanguage($this->getContainer()->getParameter('wallabag_core.language'));
 
         $em->persist($config);
+
+        $this->defaultOutput->writeln('');
+
+        return $this;
+    }
+
+    protected function setupConfig()
+    {
+        $this->defaultOutput->writeln('<info><comment>Step 4 of 5.</comment> Config setup.</info>');
+        $em = $this->getContainer()->get('doctrine.orm.entity_manager');
 
         // cleanup before insert new stuff
         $em->createQuery('DELETE FROM CraueConfigBundle:Setting')->execute();
@@ -365,7 +376,7 @@ class InstallCommand extends ContainerAwareCommand
 
     protected function setupAsset()
     {
-        $this->defaultOutput->writeln('<info><comment>Step 4 of 4.</comment> Installing assets.</info>');
+        $this->defaultOutput->writeln('<info><comment>Step 5 of 5.</comment> Installing assets.</info>');
 
         $this
             ->runCommand('assets:install')
