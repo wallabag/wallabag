@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [2.0.1] - 2016-04-11
 ### Added
 
 - [Documentation about importing large file](http://doc.wallabag.org/en/v2/user/installation.html#installing-on-nginx) into nginx. (Nicolas Lœuillet)
@@ -37,7 +37,7 @@ All notable changes to this project will be documented in this file. This projec
 - [#1868](https://github.com/wallabag/wallabag/pull/1868) Remove keyboard shortcut and add tagging rule panel in baggy (Nicolas Lœuillet)
 - [#1824](https://github.com/wallabag/wallabag/pull/1824) Remove SMTP configuration environment overrides (Mathieu Bruyen)
 
-## [2.0.0] - 2016-04-04
+## [2.0.0] - 2016-04-03
 ### Added
 
 * save an article, read it, favorite it, archive it. (Hopefully)
