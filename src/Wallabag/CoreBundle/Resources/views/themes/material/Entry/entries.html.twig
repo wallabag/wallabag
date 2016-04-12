@@ -48,7 +48,7 @@
                                 <i class="card-title grey-text text-darken-4 activator mdi-navigation-more-vert right"></i>
                             {% endif %}
 
-                            <span class="card-title"><a href="{{ path('view', { 'id': entry.id }) }}">{{ entry.title|striptags|slice(0, 42)|raw }}</a></span>
+                            <span class="card-title"><a href="{{ path('view', { 'id': entry.id }) }}" title="{{ entry.title|raw }}">{{ entry.title|striptags|slice(0, 42)|raw }}</a></span>
 
                             <div class="estimatedTime grey-text">
                                 <span class="tool reading-time">
