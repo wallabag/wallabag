@@ -21,13 +21,7 @@
         <div class="nb-results left">
             {{ 'entry.list.number_on_the_page'|transchoice(entries.count) }}
         </div>
-        <ul class="pagination right">
-            {% for p in range(1, entries.nbPages) if entries.nbPages > 1 %}
-                <li class="{{ currentPage == p ? 'active':'waves-effect'}}">
-                    <a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'page': p})) }}">{{ p }}</a>
-                </li>
-            {% endfor %}
-        </ul>
+        {{ pagerfanta(entries, 'wallabag_view') }}
     </div>
     {% endblock %}
     <br />

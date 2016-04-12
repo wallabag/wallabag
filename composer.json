@@ -81,7 +81,8 @@
         "craue/config-bundle": "~1.4",
         "mnapoli/piwik-twig-extension": "^1.0",
         "lexik/maintenance-bundle": "~2.1",
-        "ocramius/proxy-manager": "1.*"
+        "ocramius/proxy-manager": "1.*",
+        "white-october/pagerfanta-bundle": "^1.0"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "~2.2",

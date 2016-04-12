@@ -512,7 +512,7 @@ img.preview {
   width: 50%;
 }
 
-.pagination {
+div.pagination ul {
   text-align: right;
   margin-bottom:50px;
 }
@@ -523,25 +523,25 @@ img.preview {
   color: #999;
 }
 
-.pagination > * {
+div.pagination ul > * {
   display: inline-block;
   margin-left: 0.5em;
 }
 
-.pagination a {
+div.pagination ul a {
   color: #999;
   text-decoration: none;
 }
 
-  .pagination a:hover, .pagination a:focus {
+div.pagination ul a:hover, div.pagination ul a:focus {
     text-decoration: underline;
-  }
+}
 
-.pagination .disabled {
+div.pagination ul .disabled {
   display: none;
 }
 
-.pagination .current {
+div.pagination ul .current {
   height: 25px;
   padding: 4px 8px;
   border: 1px solid #d5d5d5;

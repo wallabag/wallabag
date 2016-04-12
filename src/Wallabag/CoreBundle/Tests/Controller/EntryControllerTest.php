@@ -225,8 +225,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $client->request('GET', '/all/list/900');
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
-        $this->assertEquals('/all/list', $client->getResponse()->getTargetUrl());
+        $this->assertEquals(404, $client->getResponse()->getStatusCode());
     }
 
     /**
