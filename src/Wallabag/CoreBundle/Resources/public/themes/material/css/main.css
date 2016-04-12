@@ -105,6 +105,11 @@ main, #content, .valign-wrapper {
     color: #fff;
 }
 
+.pagination .disabled {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
 .page-footer .footer-copyright p {
     display: inline;
 }
