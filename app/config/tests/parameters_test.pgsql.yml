@@ -1,0 +1,8 @@
+parameters:
+    test_database_driver: pdo_pgsql
+    test_database_host: localhost
+    test_database_port:
+    test_database_name: wallabag_test
+    test_database_user: travis
+    test_database_password: ~
+    test_database_path: ~
