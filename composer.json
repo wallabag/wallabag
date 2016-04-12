@@ -58,7 +58,6 @@
         "friendsofsymfony/rest-bundle": "~1.4",
         "jms/serializer-bundle": "~1.0",
         "nelmio/api-doc-bundle": "~2.7",
-        "ezyang/htmlpurifier": "~4.6",
         "mgargano/simplehtmldom": "~1.5",
         "tecnickcom/tcpdf": "~6.2",
         "simplepie/simplepie": "~1.3.1",
