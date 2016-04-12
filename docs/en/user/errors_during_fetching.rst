@@ -12,9 +12,9 @@ There may be several reasons:
 How can I help to fix that?
 ---------------------------
 
-- `by sending us an email with the article's URL <mailto:hello@wallabag.org>`_
+- `by sending us an email with the article's URL <mailto:hello\@wallabag.org>`_
 - by trying to fix this article by yourself :) by creating a file for the article.
-  You can use this tool http://siteconfig.fivefilters.org/.
+  You can use `this tool <http://siteconfig.fivefilters.org/>`__.
 
 How can I try to re-fetch this article?
 ---------------------------------------
