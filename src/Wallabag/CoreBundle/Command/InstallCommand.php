@@ -468,7 +468,7 @@ class InstallCommand extends ContainerAwareCommand
 
         try {
             return in_array($databaseName, $schemaManager->listDatabases());
-        } catch (\Doctrine\DBAL\Exception\ConnectionException $e) {
+        } catch (\Doctrine\DBAL\Exception\DriverException $e) {
             // it means we weren't able to get database list, assume the database doesn't exist
 
             return false;
