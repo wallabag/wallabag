@@ -29,9 +29,9 @@ class WallabagV2ControllerTest extends WallabagCoreTestCase
 
         $file = new UploadedFile(__DIR__.'/../fixtures/wallabag-v2.json', 'wallabag-v2.json');
 
-        $data = array(
+        $data = [
             'upload_import_file[file]' => $file,
-        );
+        ];
 
         $client->submit($form, $data);
 
@@ -39,7 +39,7 @@ class WallabagV2ControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->followRedirect();
 
-        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(array('_text')));
+        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertContains('flashes.import.notice.summary', $body[0]);
 
         $content = $client->getContainer()
@@ -79,9 +79,9 @@ class WallabagV2ControllerTest extends WallabagCoreTestCase
 
         $file = new UploadedFile(__DIR__.'/../fixtures/test.txt', 'test.txt');
 
-        $data = array(
+        $data = [
             'upload_import_file[file]' => $file,
-        );
+        ];
 
         $client->submit($form, $data);
 
@@ -89,7 +89,7 @@ class WallabagV2ControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->followRedirect();
 
-        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(array('_text')));
+        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertContains('flashes.import.notice.failed', $body[0]);
     }
 }

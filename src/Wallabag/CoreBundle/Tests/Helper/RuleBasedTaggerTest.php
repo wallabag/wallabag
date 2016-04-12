@@ -36,7 +36,7 @@ class RuleBasedTaggerTest extends \PHPUnit_Framework_TestCase
 
     public function testTagWithNoMatchingRule()
     {
-        $taggingRule = $this->getTaggingRule('rule as string', array('foo', 'bar'));
+        $taggingRule = $this->getTaggingRule('rule as string', ['foo', 'bar']);
         $user = $this->getUser([$taggingRule]);
         $entry = new Entry($user);
 
@@ -53,7 +53,7 @@ class RuleBasedTaggerTest extends \PHPUnit_Framework_TestCase
 
     public function testTagWithAMatchingRule()
     {
-        $taggingRule = $this->getTaggingRule('rule as string', array('foo', 'bar'));
+        $taggingRule = $this->getTaggingRule('rule as string', ['foo', 'bar']);
         $user = $this->getUser([$taggingRule]);
         $entry = new Entry($user);
 
@@ -74,8 +74,8 @@ class RuleBasedTaggerTest extends \PHPUnit_Framework_TestCase
 
     public function testTagWithAMixOfMatchingRules()
     {
-        $taggingRule = $this->getTaggingRule('bla bla', array('hey'));
-        $otherTaggingRule = $this->getTaggingRule('rule as string', array('foo'));
+        $taggingRule = $this->getTaggingRule('bla bla', ['hey']);
+        $otherTaggingRule = $this->getTaggingRule('rule as string', ['foo']);
 
         $user = $this->getUser([$taggingRule, $otherTaggingRule]);
         $entry = new Entry($user);
@@ -94,7 +94,7 @@ class RuleBasedTaggerTest extends \PHPUnit_Framework_TestCase
 
     public function testWhenTheTagExists()
     {
-        $taggingRule = $this->getTaggingRule('rule as string', array('foo'));
+        $taggingRule = $this->getTaggingRule('rule as string', ['foo']);
         $user = $this->getUser([$taggingRule]);
         $entry = new Entry($user);
         $tag = new Tag();
@@ -122,8 +122,8 @@ class RuleBasedTaggerTest extends \PHPUnit_Framework_TestCase
 
     public function testSameTagWithDifferentfMatchingRules()
     {
-        $taggingRule = $this->getTaggingRule('bla bla', array('hey'));
-        $otherTaggingRule = $this->getTaggingRule('rule as string', array('hey'));
+        $taggingRule = $this->getTaggingRule('bla bla', ['hey']);
+        $otherTaggingRule = $this->getTaggingRule('rule as string', ['hey']);
 
         $user = $this->getUser([$taggingRule, $otherTaggingRule]);
         $entry = new Entry($user);
@@ -142,7 +142,7 @@ class RuleBasedTaggerTest extends \PHPUnit_Framework_TestCase
 
     public function testTagAllEntriesForAUser()
     {
-        $taggingRule = $this->getTaggingRule('bla bla', array('hey'));
+        $taggingRule = $this->getTaggingRule('bla bla', ['hey']);
 
         $user = $this->getUser([$taggingRule]);
 
@@ -152,7 +152,7 @@ class RuleBasedTaggerTest extends \PHPUnit_Framework_TestCase
 
         $this->rulerz
             ->method('filter')
-            ->willReturn(array(new Entry($user), new Entry($user)));
+            ->willReturn([new Entry($user), new Entry($user)]);
 
         $entries = $this->tagger->tagAllForUser($user);
 

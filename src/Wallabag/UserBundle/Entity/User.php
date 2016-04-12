@@ -88,7 +88,7 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
     {
         parent::__construct();
         $this->entries = new ArrayCollection();
-        $this->roles = array('ROLE_USER');
+        $this->roles = ['ROLE_USER'];
     }
 
     /**

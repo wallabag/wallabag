@@ -12,18 +12,18 @@ class NewEntryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('url', UrlType::class, array(
+            ->add('url', UrlType::class, [
                 'required' => true,
                 'label' => 'entry.new.form_new.url_label',
-            ))
+            ])
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => 'Wallabag\CoreBundle\Entity\Entry',
-        ));
+        ]);
     }
 
     public function getBlockPrefix()

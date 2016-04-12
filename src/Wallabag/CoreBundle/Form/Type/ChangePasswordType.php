@@ -15,28 +15,28 @@ class ChangePasswordType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('old_password', PasswordType::class, array(
-                'constraints' => new UserPassword(array('message' => 'validator.password_wrong_value')),
+            ->add('old_password', PasswordType::class, [
+                'constraints' => new UserPassword(['message' => 'validator.password_wrong_value']),
                 'label' => 'config.form_password.old_password_label',
-            ))
-            ->add('new_password', RepeatedType::class, array(
+            ])
+            ->add('new_password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'validator.password_must_match',
                 'required' => true,
-                'first_options' => array('label' => 'config.form_password.new_password_label'),
-                'second_options' => array('label' => 'config.form_password.repeat_new_password_label'),
-                'constraints' => array(
-                    new Constraints\Length(array(
+                'first_options' => ['label' => 'config.form_password.new_password_label'],
+                'second_options' => ['label' => 'config.form_password.repeat_new_password_label'],
+                'constraints' => [
+                    new Constraints\Length([
                         'min' => 8,
                         'minMessage' => 'validator.password_too_short',
-                    )),
+                    ]),
                     new Constraints\NotBlank(),
-                ),
+                ],
                 'label' => 'config.form_password.new_password_label',
-            ))
-            ->add('save', SubmitType::class, array(
+            ])
+            ->add('save', SubmitType::class, [
                 'label' => 'config.form.save',
-            ))
+            ])
         ;
     }
 

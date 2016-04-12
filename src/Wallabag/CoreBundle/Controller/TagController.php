@@ -13,6 +13,7 @@ class TagController extends Controller
 {
     /**
      * @param Request $request
+     * @param Entry   $entry
      *
      * @Route("/new-tag/{entry}", requirements={"entry" = "\d+"}, name="new_tag")
      *
@@ -38,13 +39,13 @@ class TagController extends Controller
                 'flashes.tag.notice.tag_added'
             );
 
-            return $this->redirect($this->generateUrl('view', array('id' => $entry->getId())));
+            return $this->redirect($this->generateUrl('view', ['id' => $entry->getId()]));
         }
 
-        return $this->render('WallabagCoreBundle:Tag:new_form.html.twig', array(
+        return $this->render('WallabagCoreBundle:Tag:new_form.html.twig', [
             'form' => $form->createView(),
             'entry' => $entry,
-        ));
+        ]);
     }
 
     /**
@@ -82,9 +83,9 @@ class TagController extends Controller
 
         return $this->render(
             'WallabagCoreBundle:Tag:tags.html.twig',
-            array(
+            [
                 'tags' => $tags,
-            )
+            ]
         );
     }
 }

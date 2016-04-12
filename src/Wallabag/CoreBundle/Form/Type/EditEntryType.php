@@ -14,30 +14,30 @@ class EditEntryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TextType::class, array(
+            ->add('title', TextType::class, [
                 'required' => true,
                 'label' => 'entry.edit.title_label',
-            ))
-            ->add('is_public', CheckboxType::class, array(
+            ])
+            ->add('is_public', CheckboxType::class, [
                 'required' => false,
                 'label' => 'entry.edit.is_public_label',
-            ))
-            ->add('url', TextType::class, array(
+            ])
+            ->add('url', TextType::class, [
                 'disabled' => true,
                 'required' => false,
                 'label' => 'entry.edit.url_label',
-            ))
-            ->add('save', SubmitType::class, array(
+            ])
+            ->add('save', SubmitType::class, [
                 'label' => 'entry.edit.save_label',
-            ))
+            ])
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => 'Wallabag\CoreBundle\Entity\Entry',
-        ));
+        ]);
     }
 
     public function getBlockPrefix()

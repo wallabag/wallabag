@@ -54,10 +54,10 @@ class EntryController extends Controller
             if (false !== $existingEntry) {
                 $this->get('session')->getFlashBag()->add(
                     'notice',
-                    $this->get('translator')->trans('flashes.entry.notice.entry_already_saved', array('%date%' => $existingEntry->getCreatedAt()->format('d-m-Y')))
+                    $this->get('translator')->trans('flashes.entry.notice.entry_already_saved', ['%date%' => $existingEntry->getCreatedAt()->format('d-m-Y')])
                 );
 
-                return $this->redirect($this->generateUrl('view', array('id' => $existingEntry->getId())));
+                return $this->redirect($this->generateUrl('view', ['id' => $existingEntry->getId()]));
             }
 
             $this->updateEntry($entry);
@@ -69,9 +69,9 @@ class EntryController extends Controller
             return $this->redirect($this->generateUrl('homepage'));
         }
 
-        return $this->render('WallabagCoreBundle:Entry:new_form.html.twig', array(
+        return $this->render('WallabagCoreBundle:Entry:new_form.html.twig', [
             'form' => $form->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -131,12 +131,12 @@ class EntryController extends Controller
                 'flashes.entry.notice.entry_updated'
             );
 
-            return $this->redirect($this->generateUrl('view', array('id' => $entry->getId())));
+            return $this->redirect($this->generateUrl('view', ['id' => $entry->getId()]));
         }
 
-        return $this->render('WallabagCoreBundle:Entry:edit.html.twig', array(
+        return $this->render('WallabagCoreBundle:Entry:edit.html.twig', [
             'form' => $form->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -257,17 +257,17 @@ class EntryController extends Controller
             $entries->setCurrentPage($page);
         } catch (OutOfRangeCurrentPageException $e) {
             if ($page > 1) {
-                return $this->redirect($this->generateUrl($type, array('page' => $entries->getNbPages())), 302);
+                return $this->redirect($this->generateUrl($type, ['page' => $entries->getNbPages()]), 302);
             }
         }
 
         return $this->render(
             'WallabagCoreBundle:Entry:entries.html.twig',
-            array(
+            [
                 'form' => $form->createView(),
                 'entries' => $entries,
                 'currentPage' => $page,
-            )
+            ]
         );
     }
 
@@ -286,7 +286,7 @@ class EntryController extends Controller
 
         return $this->render(
             'WallabagCoreBundle:Entry:entry.html.twig',
-            array('entry' => $entry)
+            ['entry' => $entry]
         );
     }
 
@@ -314,7 +314,7 @@ class EntryController extends Controller
             $message
         );
 
-        return $this->redirect($this->generateUrl('view', array('id' => $entry->getId())));
+        return $this->redirect($this->generateUrl('view', ['id' => $entry->getId()]));
     }
 
     /**
@@ -394,7 +394,7 @@ class EntryController extends Controller
         // to avoid redirecting to the deleted entry. Ugh.
         $url = $this->generateUrl(
             'view',
-            array('id' => $entry->getId()),
+            ['id' => $entry->getId()],
             UrlGeneratorInterface::ABSOLUTE_URL
         );
 
@@ -426,11 +426,11 @@ class EntryController extends Controller
     /**
      * Check for existing entry, if it exists, redirect to it with a message.
      *
-     * @param $entry
+     * @param Entry $entry
      *
-     * @return array|bool
+     * @return Entry|bool
      */
-    private function checkIfEntryAlreadyExists($entry)
+    private function checkIfEntryAlreadyExists(Entry $entry)
     {
         return $this->get('wallabag_core.entry_repository')->findByUrlAndUserId($entry->getUrl(), $this->getUser()->getId());
     }

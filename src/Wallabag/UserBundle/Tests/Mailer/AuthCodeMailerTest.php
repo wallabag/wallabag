@@ -43,7 +43,7 @@ class AuthCodeMailerTest extends \PHPUnit_Framework_TestCase
 {% block body_text %}text body {{ support_url }}{% endblock %}
 TWIG;
 
-        $this->twig = new \Twig_Environment(new \Twig_Loader_Array(array('WallabagUserBundle:TwoFactor:email_auth_code.html.twig' => $twigTemplate)));
+        $this->twig = new \Twig_Environment(new \Twig_Loader_Array(['WallabagUserBundle:TwoFactor:email_auth_code.html.twig' => $twigTemplate]));
 
         $this->config = $this->getMockBuilder('Craue\ConfigBundle\Util\Config')
             ->disableOriginalConstructor()
@@ -76,7 +76,7 @@ TWIG;
 
         $msg = $this->spool->getMessages()[0];
         $this->assertArrayHasKey('test@wallabag.io', $msg->getTo());
-        $this->assertEquals(array('nobody@test.io' => 'wallabag test'), $msg->getFrom());
+        $this->assertEquals(['nobody@test.io' => 'wallabag test'], $msg->getFrom());
         $this->assertEquals('subject', $msg->getSubject());
         $this->assertContains('text body http://0.0.0.0/support', $msg->toString());
         $this->assertContains('html body 666666', $msg->toString());

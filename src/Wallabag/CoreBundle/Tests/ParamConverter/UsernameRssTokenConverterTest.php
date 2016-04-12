@@ -11,7 +11,7 @@ class UsernameRssTokenConverterTest extends \PHPUnit_Framework_TestCase
 {
     public function testSupportsWithNoRegistry()
     {
-        $params = new ParamConverter(array());
+        $params = new ParamConverter([]);
         $converter = new UsernameRssTokenConverter();
 
         $this->assertFalse($converter->supports($params));
@@ -25,9 +25,9 @@ class UsernameRssTokenConverterTest extends \PHPUnit_Framework_TestCase
 
         $registry->expects($this->once())
             ->method('getManagers')
-            ->will($this->returnValue(array()));
+            ->will($this->returnValue([]));
 
-        $params = new ParamConverter(array());
+        $params = new ParamConverter([]);
         $converter = new UsernameRssTokenConverter($registry);
 
         $this->assertFalse($converter->supports($params));
@@ -41,9 +41,9 @@ class UsernameRssTokenConverterTest extends \PHPUnit_Framework_TestCase
 
         $registry->expects($this->once())
             ->method('getManagers')
-            ->will($this->returnValue(array('default' => null)));
+            ->will($this->returnValue(['default' => null]));
 
-        $params = new ParamConverter(array());
+        $params = new ParamConverter([]);
         $converter = new UsernameRssTokenConverter($registry);
 
         $this->assertFalse($converter->supports($params));
@@ -74,14 +74,14 @@ class UsernameRssTokenConverterTest extends \PHPUnit_Framework_TestCase
 
         $registry->expects($this->once())
             ->method('getManagers')
-            ->will($this->returnValue(array('default' => null)));
+            ->will($this->returnValue(['default' => null]));
 
         $registry->expects($this->once())
             ->method('getManagerForClass')
             ->with('superclass')
             ->will($this->returnValue($em));
 
-        $params = new ParamConverter(array('class' => 'superclass'));
+        $params = new ParamConverter(['class' => 'superclass']);
         $converter = new UsernameRssTokenConverter($registry);
 
         $this->assertFalse($converter->supports($params));
@@ -112,14 +112,14 @@ class UsernameRssTokenConverterTest extends \PHPUnit_Framework_TestCase
 
         $registry->expects($this->once())
             ->method('getManagers')
-            ->will($this->returnValue(array('default' => null)));
+            ->will($this->returnValue(['default' => null]));
 
         $registry->expects($this->once())
             ->method('getManagerForClass')
             ->with('WallabagUserBundle:User')
             ->will($this->returnValue($em));
 
-        $params = new ParamConverter(array('class' => 'WallabagUserBundle:User'));
+        $params = new ParamConverter(['class' => 'WallabagUserBundle:User']);
         $converter = new UsernameRssTokenConverter($registry);
 
         $this->assertTrue($converter->supports($params));
@@ -131,7 +131,7 @@ class UsernameRssTokenConverterTest extends \PHPUnit_Framework_TestCase
      */
     public function testApplyEmptyRequest()
     {
-        $params = new ParamConverter(array());
+        $params = new ParamConverter([]);
         $converter = new UsernameRssTokenConverter();
 
         $converter->apply(new Request(), $params);
@@ -170,9 +170,9 @@ class UsernameRssTokenConverterTest extends \PHPUnit_Framework_TestCase
             ->with('WallabagUserBundle:User')
             ->will($this->returnValue($em));
 
-        $params = new ParamConverter(array('class' => 'WallabagUserBundle:User'));
+        $params = new ParamConverter(['class' => 'WallabagUserBundle:User']);
         $converter = new UsernameRssTokenConverter($registry);
-        $request = new Request(array(), array(), array('username' => 'test', 'token' => 'test'));
+        $request = new Request([], [], ['username' => 'test', 'token' => 'test']);
 
         $converter->apply($request, $params);
     }
@@ -208,9 +208,9 @@ class UsernameRssTokenConverterTest extends \PHPUnit_Framework_TestCase
             ->with('WallabagUserBundle:User')
             ->will($this->returnValue($em));
 
-        $params = new ParamConverter(array('class' => 'WallabagUserBundle:User', 'name' => 'user'));
+        $params = new ParamConverter(['class' => 'WallabagUserBundle:User', 'name' => 'user']);
         $converter = new UsernameRssTokenConverter($registry);
-        $request = new Request(array(), array(), array('username' => 'test', 'token' => 'test'));
+        $request = new Request([], [], ['username' => 'test', 'token' => 'test']);
 
         $converter->apply($request, $params);
 

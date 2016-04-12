@@ -54,7 +54,7 @@ class RuleBasedTagger
     public function tagAllForUser(User $user)
     {
         $rules = $this->getRulesForUser($user);
-        $entries = array();
+        $entries = [];
 
         foreach ($rules as $rule) {
             $qb = $this->entryRepository->getBuilderForAllByUser($user->getId());

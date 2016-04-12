@@ -30,7 +30,7 @@ class WallabagAnnotationController extends FOSRestController
                 ->getRepository('WallabagAnnotationBundle:Annotation')
                 ->findAnnotationsByPageId($entry->getId(), $this->getUser()->getId());
         $total = count($annotationRows);
-        $annotations = array('total' => $total, 'rows' => $annotationRows);
+        $annotations = ['total' => $total, 'rows' => $annotationRows];
 
         $json = $this->get('serializer')->serialize($annotations, 'json');
 
@@ -141,6 +141,6 @@ class WallabagAnnotationController extends FOSRestController
      */
     private function renderJsonResponse($json, $code = 200)
     {
-        return new Response($json, $code, array('application/json'));
+        return new Response($json, $code, ['application/json']);
     }
 }

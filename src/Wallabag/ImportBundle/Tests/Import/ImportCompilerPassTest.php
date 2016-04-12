@@ -25,7 +25,7 @@ class ImportCompilerPassTest extends \PHPUnit_Framework_TestCase
 
         $container
             ->register('foo')
-            ->addTag('wallabag_import.import', array('alias' => 'pocket'))
+            ->addTag('wallabag_import.import', ['alias' => 'pocket'])
         ;
 
         $this->process($container);

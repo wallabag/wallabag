@@ -13,16 +13,16 @@ class UploadImportType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('file', FileType::class, array(
+            ->add('file', FileType::class, [
                 'label' => 'import.form.file_label',
-            ))
-            ->add('mark_as_read', CheckboxType::class, array(
+            ])
+            ->add('mark_as_read', CheckboxType::class, [
                 'label' => 'import.form.mark_as_read_label',
                 'required' => false,
-            ))
-            ->add('save', SubmitType::class, array(
+            ])
+            ->add('save', SubmitType::class, [
                 'label' => 'import.form.save_label',
-            ))
+            ])
         ;
     }
 

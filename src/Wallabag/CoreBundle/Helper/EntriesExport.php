@@ -18,10 +18,10 @@ class EntriesExport
     private $wallabagUrl;
     private $logoPath;
     private $title = '';
-    private $entries = array();
-    private $authors = array('wallabag');
+    private $entries = [];
+    private $authors = ['wallabag'];
     private $language = '';
-    private $tags = array();
+    private $tags = [];
     private $footerTemplate = '<div style="text-align:center;">
         <p>Produced by wallabag with %EXPORT_METHOD%</p>
         <p>Please open <a href="https://github.com/wallabag/wallabag/issues">an issue</a> if you have trouble with the display of this E-Book on your device.</p>
@@ -41,12 +41,14 @@ class EntriesExport
      * Define entries.
      *
      * @param array|Entry $entries An array of entries or one entry
+     *
+     * @return EntriesExport
      */
     public function setEntries($entries)
     {
         if (!is_array($entries)) {
             $this->language = $entries->getLanguage();
-            $entries = array($entries);
+            $entries = [$entries];
         }
 
         $this->entries = $entries;
@@ -62,6 +64,8 @@ class EntriesExport
      * Sets the category of which we want to get articles, or just one entry.
      *
      * @param string $method Method to get articles
+     *
+     * @return EntriesExport
      */
     public function updateTitle($method)
     {
@@ -78,6 +82,8 @@ class EntriesExport
      * Sets the output format.
      *
      * @param string $format
+     *
+     * @return Response
      */
     public function exportAs($format)
     {
@@ -91,6 +97,8 @@ class EntriesExport
 
     /**
      * Use PHPePub to dump a .epub file.
+     *
+     * @return Response
      */
     private function produceEpub()
     {
@@ -162,17 +170,19 @@ class EntriesExport
         return Response::create(
             $book->getBook(),
             200,
-            array(
+            [
                 'Content-Description' => 'File Transfer',
                 'Content-type' => 'application/epub+zip',
                 'Content-Disposition' => 'attachment; filename="'.$this->title.'.epub"',
                 'Content-Transfer-Encoding' => 'binary',
-            )
+            ]
         );
     }
 
     /**
      * Use PHPMobi to dump a .mobi file.
+     *
+     * @return Response
      */
     private function produceMobi()
     {
@@ -211,18 +221,20 @@ class EntriesExport
         return Response::create(
             $mobi->toString(),
             200,
-            array(
+            [
                 'Accept-Ranges' => 'bytes',
                 'Content-Description' => 'File Transfer',
                 'Content-type' => 'application/x-mobipocket-ebook',
                 'Content-Disposition' => 'attachment; filename="'.$this->title.'.mobi"',
                 'Content-Transfer-Encoding' => 'binary',
-            )
+            ]
         );
     }
 
     /**
      * Use TCPDF to dump a .pdf file.
+     *
+     * @return Response
      */
     private function producePdf()
     {
@@ -266,17 +278,19 @@ class EntriesExport
         return Response::create(
             $pdf->Output('', 'S'),
             200,
-            array(
+            [
                 'Content-Description' => 'File Transfer',
                 'Content-type' => 'application/pdf',
                 'Content-Disposition' => 'attachment; filename="'.$this->title.'.pdf"',
                 'Content-Transfer-Encoding' => 'binary',
-            )
+            ]
         );
     }
 
     /**
      * Inspired from CsvFileDumper.
+     *
+     * @return Response
      */
     private function produceCsv()
     {
@@ -284,20 +298,20 @@ class EntriesExport
         $enclosure = '"';
         $handle = fopen('php://memory', 'rb+');
 
-        fputcsv($handle, array('Title', 'URL', 'Content', 'Tags', 'MIME Type', 'Language'), $delimiter, $enclosure);
+        fputcsv($handle, ['Title', 'URL', 'Content', 'Tags', 'MIME Type', 'Language'], $delimiter, $enclosure);
 
         foreach ($this->entries as $entry) {
             fputcsv(
                 $handle,
-                array(
+                [
                     $entry->getTitle(),
                     $entry->getURL(),
                     // remove new line to avoid crazy results
-                    str_replace(array("\r\n", "\r", "\n"), '', $entry->getContent()),
+                    str_replace(["\r\n", "\r", "\n"], '', $entry->getContent()),
                     implode(', ', $entry->getTags()->toArray()),
                     $entry->getMimetype(),
                     $entry->getLanguage(),
-                ),
+                ],
                 $delimiter,
                 $enclosure
             );
@@ -310,40 +324,55 @@ class EntriesExport
         return Response::create(
             $output,
             200,
-            array(
+            [
                 'Content-type' => 'application/csv',
                 'Content-Disposition' => 'attachment; filename="'.$this->title.'.csv"',
                 'Content-Transfer-Encoding' => 'UTF-8',
-            )
+            ]
         );
     }
 
+    /**
+     * Dump a JSON file.
+     *
+     * @return Response
+     */
     private function produceJson()
     {
         return Response::create(
             $this->prepareSerializingContent('json'),
             200,
-            array(
+            [
                 'Content-type' => 'application/json',
                 'Content-Disposition' => 'attachment; filename="'.$this->title.'.json"',
                 'Content-Transfer-Encoding' => 'UTF-8',
-            )
+            ]
         );
     }
 
+    /**
+     * Dump a XML file.
+     *
+     * @return Response
+     */
     private function produceXml()
     {
         return Response::create(
             $this->prepareSerializingContent('xml'),
             200,
-            array(
+            [
                 'Content-type' => 'application/xml',
                 'Content-Disposition' => 'attachment; filename="'.$this->title.'.xml"',
                 'Content-Transfer-Encoding' => 'UTF-8',
-            )
+            ]
         );
     }
 
+    /**
+     * Dump a TXT file.
+     *
+     * @return Response
+     */
     private function produceTxt()
     {
         $content = '';
@@ -356,11 +385,11 @@ class EntriesExport
         return Response::create(
             $content,
             200,
-            array(
+            [
                 'Content-type' => 'text/plain',
                 'Content-Disposition' => 'attachment; filename="'.$this->title.'.txt"',
                 'Content-Transfer-Encoding' => 'UTF-8',
-            )
+            ]
         );
     }
 
@@ -378,7 +407,7 @@ class EntriesExport
         return $serializer->serialize(
             $this->entries,
             $format,
-            SerializationContext::create()->setGroups(array('entries_for_user'))
+            SerializationContext::create()->setGroups(['entries_for_user'])
         );
     }
 

@@ -14,19 +14,19 @@ class TaggingRuleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('rule', TextType::class, array(
+            ->add('rule', TextType::class, [
                 'required' => true,
                 'label' => 'config.form_rules.rule_label',
-            ))
-            ->add('save', SubmitType::class, array(
+            ])
+            ->add('save', SubmitType::class, [
                 'label' => 'config.form.save',
-            ))
+            ])
         ;
 
         $tagsField = $builder
-            ->create('tags', TextType::class, array(
+            ->create('tags', TextType::class, [
                 'label' => 'config.form_rules.tags_label',
-            ))
+            ])
             ->addModelTransformer(new StringToListTransformer(','));
 
         $builder->add($tagsField);
@@ -34,9 +34,9 @@ class TaggingRuleType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => 'Wallabag\CoreBundle\Entity\TaggingRule',
-        ));
+        ]);
     }
 
     public function getBlockPrefix()

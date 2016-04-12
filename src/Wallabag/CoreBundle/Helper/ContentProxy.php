@@ -82,10 +82,10 @@ class ContentProxy
         try {
             $this->tagger->tag($entry);
         } catch (\Exception $e) {
-            $this->logger->error('Error while trying to automatically tag an entry.', array(
+            $this->logger->error('Error while trying to automatically tag an entry.', [
                 'entry_url' => $url,
                 'error_msg' => $e->getMessage(),
-            ));
+            ]);
         }
 
         return $entry;

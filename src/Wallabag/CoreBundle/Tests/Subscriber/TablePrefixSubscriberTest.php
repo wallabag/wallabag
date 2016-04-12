@@ -11,23 +11,23 @@ class TablePrefixSubscriberTest extends \PHPUnit_Framework_TestCase
 {
     public function dataForPrefix()
     {
-        return array(
-            array('wallabag_', 'Wallabag\UserBundle\Entity\User', '`user`', 'user', 'wallabag_user', '"wallabag_user"', new \Doctrine\DBAL\Platforms\PostgreSqlPlatform()),
-            array('wallabag_', 'Wallabag\UserBundle\Entity\User', '`user`', 'user', 'wallabag_user', '`wallabag_user`', new \Doctrine\DBAL\Platforms\MySqlPlatform()),
-            array('wallabag_', 'Wallabag\UserBundle\Entity\User', '`user`', 'user', 'wallabag_user', '"wallabag_user"', new \Doctrine\DBAL\Platforms\SqlitePlatform()),
+        return [
+            ['wallabag_', 'Wallabag\UserBundle\Entity\User', '`user`', 'user', 'wallabag_user', '"wallabag_user"', new \Doctrine\DBAL\Platforms\PostgreSqlPlatform()],
+            ['wallabag_', 'Wallabag\UserBundle\Entity\User', '`user`', 'user', 'wallabag_user', '`wallabag_user`', new \Doctrine\DBAL\Platforms\MySqlPlatform()],
+            ['wallabag_', 'Wallabag\UserBundle\Entity\User', '`user`', 'user', 'wallabag_user', '"wallabag_user"', new \Doctrine\DBAL\Platforms\SqlitePlatform()],
 
-            array('wallabag_', 'Wallabag\UserBundle\Entity\User', 'user', 'user', 'wallabag_user', 'wallabag_user', new \Doctrine\DBAL\Platforms\PostgreSqlPlatform()),
-            array('wallabag_', 'Wallabag\UserBundle\Entity\User', 'user', 'user', 'wallabag_user', 'wallabag_user', new \Doctrine\DBAL\Platforms\MySqlPlatform()),
-            array('wallabag_', 'Wallabag\UserBundle\Entity\User', 'user', 'user', 'wallabag_user', 'wallabag_user', new \Doctrine\DBAL\Platforms\SqlitePlatform()),
+            ['wallabag_', 'Wallabag\UserBundle\Entity\User', 'user', 'user', 'wallabag_user', 'wallabag_user', new \Doctrine\DBAL\Platforms\PostgreSqlPlatform()],
+            ['wallabag_', 'Wallabag\UserBundle\Entity\User', 'user', 'user', 'wallabag_user', 'wallabag_user', new \Doctrine\DBAL\Platforms\MySqlPlatform()],
+            ['wallabag_', 'Wallabag\UserBundle\Entity\User', 'user', 'user', 'wallabag_user', 'wallabag_user', new \Doctrine\DBAL\Platforms\SqlitePlatform()],
 
-            array('', 'Wallabag\UserBundle\Entity\User', '`user`', 'user', 'user', '"user"', new \Doctrine\DBAL\Platforms\PostgreSqlPlatform()),
-            array('', 'Wallabag\UserBundle\Entity\User', '`user`', 'user', 'user', '`user`', new \Doctrine\DBAL\Platforms\MySqlPlatform()),
-            array('', 'Wallabag\UserBundle\Entity\User', '`user`', 'user', 'user', '"user"', new \Doctrine\DBAL\Platforms\SqlitePlatform()),
+            ['', 'Wallabag\UserBundle\Entity\User', '`user`', 'user', 'user', '"user"', new \Doctrine\DBAL\Platforms\PostgreSqlPlatform()],
+            ['', 'Wallabag\UserBundle\Entity\User', '`user`', 'user', 'user', '`user`', new \Doctrine\DBAL\Platforms\MySqlPlatform()],
+            ['', 'Wallabag\UserBundle\Entity\User', '`user`', 'user', 'user', '"user"', new \Doctrine\DBAL\Platforms\SqlitePlatform()],
 
-            array('', 'Wallabag\UserBundle\Entity\User', 'user', 'user', 'user', 'user', new \Doctrine\DBAL\Platforms\PostgreSqlPlatform()),
-            array('', 'Wallabag\UserBundle\Entity\User', 'user', 'user', 'user', 'user', new \Doctrine\DBAL\Platforms\MySqlPlatform()),
-            array('', 'Wallabag\UserBundle\Entity\User', 'user', 'user', 'user', 'user', new \Doctrine\DBAL\Platforms\SqlitePlatform()),
-        );
+            ['', 'Wallabag\UserBundle\Entity\User', 'user', 'user', 'user', 'user', new \Doctrine\DBAL\Platforms\PostgreSqlPlatform()],
+            ['', 'Wallabag\UserBundle\Entity\User', 'user', 'user', 'user', 'user', new \Doctrine\DBAL\Platforms\MySqlPlatform()],
+            ['', 'Wallabag\UserBundle\Entity\User', 'user', 'user', 'user', 'user', new \Doctrine\DBAL\Platforms\SqlitePlatform()],
+        ];
     }
 
     /**
@@ -42,7 +42,7 @@ class TablePrefixSubscriberTest extends \PHPUnit_Framework_TestCase
         $subscriber = new TablePrefixSubscriber($prefix);
 
         $metaClass = new ClassMetadata($entityName);
-        $metaClass->setPrimaryTable(array('name' => $tableName));
+        $metaClass->setPrimaryTable(['name' => $tableName]);
 
         $metaDataEvent = new LoadClassMetadataEventArgs($metaClass, $em);
 
@@ -64,7 +64,7 @@ class TablePrefixSubscriberTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $metaClass = new ClassMetadata($entityName);
-        $metaClass->setPrimaryTable(array('name' => $tableName));
+        $metaClass->setPrimaryTable(['name' => $tableName]);
 
         $metaDataEvent = new LoadClassMetadataEventArgs($metaClass, $em);
 
@@ -88,18 +88,18 @@ class TablePrefixSubscriberTest extends \PHPUnit_Framework_TestCase
         $subscriber = new TablePrefixSubscriber('yo_');
 
         $metaClass = new ClassMetadata('Wallabag\UserBundle\Entity\Entry');
-        $metaClass->setPrimaryTable(array('name' => 'entry'));
-        $metaClass->mapManyToMany(array(
+        $metaClass->setPrimaryTable(['name' => 'entry']);
+        $metaClass->mapManyToMany([
             'fieldName' => 'tags',
-            'joinTable' => array('name' => null, 'schema' => null),
+            'joinTable' => ['name' => null, 'schema' => null],
             'targetEntity' => 'Tag',
             'mappedBy' => null,
             'inversedBy' => 'entries',
-            'cascade' => array('persist'),
+            'cascade' => ['persist'],
             'indexBy' => null,
             'orphanRemoval' => false,
             'fetch' => 2,
-        ));
+        ]);
 
         $metaDataEvent = new LoadClassMetadataEventArgs($metaClass, $em);
 

@@ -21,9 +21,9 @@ class TagAllCommandTest extends WallabagCoreTestCase
         $command = $application->find('wallabag:tag:all');
 
         $tester = new CommandTester($command);
-        $tester->execute(array(
+        $tester->execute([
             'command' => $command->getName(),
-        ));
+        ]);
     }
 
     public function testRunTagAllCommandWithBadUsername()
@@ -34,10 +34,10 @@ class TagAllCommandTest extends WallabagCoreTestCase
         $command = $application->find('wallabag:tag:all');
 
         $tester = new CommandTester($command);
-        $tester->execute(array(
+        $tester->execute([
             'command' => $command->getName(),
             'username' => 'unknown',
-        ));
+        ]);
 
         $this->assertContains('User "unknown" not found', $tester->getDisplay());
     }
@@ -50,10 +50,10 @@ class TagAllCommandTest extends WallabagCoreTestCase
         $command = $application->find('wallabag:tag:all');
 
         $tester = new CommandTester($command);
-        $tester->execute(array(
+        $tester->execute([
             'command' => $command->getName(),
             'username' => 'admin',
-        ));
+        ]);
 
         $this->assertContains('Tagging entries for user « admin »... Done', $tester->getDisplay());
     }

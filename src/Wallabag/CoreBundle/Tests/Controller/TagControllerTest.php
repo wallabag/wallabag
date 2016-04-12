@@ -32,9 +32,9 @@ class TagControllerTest extends WallabagCoreTestCase
 
         $form = $crawler->filter('form[name=tag]')->form();
 
-        $data = array(
+        $data = [
             'tag[label]' => $this->tagName,
-        );
+        ];
 
         $client->submit($form, $data);
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
@@ -53,9 +53,9 @@ class TagControllerTest extends WallabagCoreTestCase
         $this->assertEquals(1, count($newEntry->getTags()));
 
         # tag already exists but still not assigned to this entry
-        $data = array(
+        $data = [
             'tag[label]' => 'foo',
-        );
+        ];
 
         $client->submit($form, $data);
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
@@ -82,9 +82,9 @@ class TagControllerTest extends WallabagCoreTestCase
 
         $form = $crawler->filter('form[name=tag]')->form();
 
-        $data = array(
+        $data = [
             'tag[label]' => 'foo2, bar2',
-        );
+        ];
 
         $client->submit($form, $data);
         $this->assertEquals(302, $client->getResponse()->getStatusCode());

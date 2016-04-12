@@ -16,14 +16,14 @@ class LoadTaggingRuleData extends AbstractFixture implements OrderedFixtureInter
     {
         $tr1 = new TaggingRule();
         $tr1->setRule('content matches "spurs"');
-        $tr1->setTags(array('sport'));
+        $tr1->setTags(['sport']);
         $tr1->setConfig($this->getReference('admin-config'));
 
         $manager->persist($tr1);
 
         $tr2 = new TaggingRule();
         $tr2->setRule('content matches "basket"');
-        $tr2->setTags(array('sport'));
+        $tr2->setTags(['sport']);
         $tr2->setConfig($this->getReference('admin-config'));
 
         $manager->persist($tr2);

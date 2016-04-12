@@ -21,9 +21,9 @@ class DeveloperController extends Controller
     {
         $clients = $this->getDoctrine()->getRepository('WallabagApiBundle:Client')->findAll();
 
-        return $this->render('WallabagCoreBundle:Developer:index.html.twig', array(
+        return $this->render('WallabagCoreBundle:Developer:index.html.twig', [
             'clients' => $clients,
-        ));
+        ]);
     }
 
     /**
@@ -43,7 +43,7 @@ class DeveloperController extends Controller
         $clientForm->handleRequest($request);
 
         if ($clientForm->isValid()) {
-            $client->setAllowedGrantTypes(array('token', 'authorization_code', 'password', 'refresh_token'));
+            $client->setAllowedGrantTypes(['token', 'authorization_code', 'password', 'refresh_token']);
             $em->persist($client);
             $em->flush();
 
@@ -52,15 +52,15 @@ class DeveloperController extends Controller
                 'flashes.developer.notice.client_created'
             );
 
-            return $this->render('WallabagCoreBundle:Developer:client_parameters.html.twig', array(
+            return $this->render('WallabagCoreBundle:Developer:client_parameters.html.twig', [
                 'client_id' => $client->getPublicId(),
                 'client_secret' => $client->getSecret(),
-            ));
+            ]);
         }
 
-        return $this->render('WallabagCoreBundle:Developer:client.html.twig', array(
+        return $this->render('WallabagCoreBundle:Developer:client.html.twig', [
             'form' => $clientForm->createView(),
-        ));
+        ]);
     }
 
     /**

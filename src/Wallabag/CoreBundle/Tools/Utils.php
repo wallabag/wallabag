@@ -16,7 +16,7 @@ class Utils
         $token = substr(base64_encode(random_bytes($length)), 0, $length);
 
         // remove character which can broken the url
-        return str_replace(array('+', '/'), '', $token);
+        return str_replace(['+', '/'], '', $token);
     }
 
     /**

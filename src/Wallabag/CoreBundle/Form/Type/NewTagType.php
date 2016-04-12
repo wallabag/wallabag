@@ -12,15 +12,15 @@ class NewTagType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('label', TextType::class, array('required' => true))
+            ->add('label', TextType::class, ['required' => true])
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => 'Wallabag\CoreBundle\Entity\Tag',
-        ));
+        ]);
     }
 
     public function getBlockPrefix()

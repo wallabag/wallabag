@@ -24,10 +24,10 @@ abstract class WallabagCoreTestCase extends WebTestCase
     {
         $crawler = $this->client->request('GET', '/login');
         $form = $crawler->filter('button[type=submit]')->form();
-        $data = array(
+        $data = [
             '_username' => $username,
             '_password' => 'mypassword',
-        );
+        ];
 
         $this->client->submit($form, $data);
     }

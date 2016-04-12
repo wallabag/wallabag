@@ -30,7 +30,7 @@ class WallabagV1ImportTest extends \PHPUnit_Framework_TestCase
         $wallabag = new WallabagV1Import($this->em, $this->contentProxy);
 
         $this->logHandler = new TestHandler();
-        $logger = new Logger('test', array($this->logHandler));
+        $logger = new Logger('test', [$this->logHandler]);
         $wallabag->setLogger($logger);
 
         if (false === $unsetUser) {
