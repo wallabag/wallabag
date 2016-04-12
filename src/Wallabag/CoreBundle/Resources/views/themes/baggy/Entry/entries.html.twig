@@ -8,7 +8,7 @@
             <div class="nb-results">{{ 'entry.list.number_on_the_page'|transchoice(entries.count) }}</div>
                 <div class="pagination">
                     <a href="#" id="filter">{{ 'entry.filters.title'|trans }}</a>
-                    {{ pagerfanta(entries, 'wallabag_view') }}
+                    {{ pagerfanta(entries, 'twitter_bootstrap_translated', {'proximity': 1}) }}
                 </div>
         </div>
     {% endblock %}

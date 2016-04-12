@@ -114,11 +114,3 @@ services:
         class: Wallabag\CoreBundle\Operator\Doctrine\Matches
         tags:
             - { name: rulerz.operator, executor: rulerz.executor.doctrine, operator: matches, inline: true }
-
-    pagerfanta.view.wallabag_view:
-        class: Pagerfanta\View\OptionableView
-        arguments:
-            - "@pagerfanta.view.twitter_bootstrap"
-            - { proximity: 1 }
-        public: false
-        tags: [{ name: pagerfanta.view, alias: wallabag_view }]
