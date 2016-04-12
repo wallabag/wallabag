@@ -42,7 +42,7 @@ Install Composer:
 
     curl -s http://getcomposer.org/installer | php
 
-You can find specific instructions here : __ https://getcomposer.org/doc/00-intro.md
+You can find specific instructions `here <https://getcomposer.org/doc/00-intro.md>`__:
 
 To install wallabag itself, you must run these two commands:
 
@@ -64,8 +64,7 @@ And access wallabag at http://yourserverip:8000
 
 .. note::
 
-    To define parameters with environment variables, you have to set these variables with ``SYMFONY__`` prefix. For example, ``SYMFONY__DATABASE_DRIVER``. You can have a look to the  `Symfony documentation
-<http://symfony.com/doc/current/cookbook/configuration/external_parameters.html>`__.
+    To define parameters with environment variables, you have to set these variables with ``SYMFONY__`` prefix. For example, ``SYMFONY__DATABASE_DRIVER``. You can have a look to the `Symfony documentation <http://symfony.com/doc/current/cookbook/configuration/external_parameters.html>`__.
 
 Installing on Apache
 --------------------

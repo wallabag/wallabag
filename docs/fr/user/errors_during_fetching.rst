@@ -12,9 +12,9 @@ Il peut y avoir plusieurs raisons :
 Comment puis-je aider pour réparer ça ?
 ---------------------------------------
 
-- `en nous envoyant un email avec l'URL de l'article <mailto:hello@wallabag.org>`_
+- `en nous envoyant un email avec l'URL de l'article <mailto:hello\@wallabag.org>`_
 - en essayant de réparer cet article par vous-même :) en créant un fichier pour l'article.
-  Vous pouvez utiliser cet outil http://siteconfig.fivefilters.org/.
+  Vous pouvez utiliser `cet outil <http://siteconfig.fivefilters.org/>`__.
 
 Comment puis-je réessayer de récupérer le contenu ?
 ---------------------------------------------------
