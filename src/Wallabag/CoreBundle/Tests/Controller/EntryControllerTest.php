@@ -522,7 +522,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $client->submit($form, $data);
 
-        $parameters = '?entry_filter%5BreadingTime%5D%5Bleft_number%5D=&amp;entry_filter%5BreadingTime%5D%5Bright_number%5D=';
+        $parameters = '?entry_filter%5BreadingTime%5D%5Bleft_number%5D=&entry_filter%5BreadingTime%5D%5Bright_number%5D=';
 
         $client->request('GET', 'unread/list'.$parameters);
 

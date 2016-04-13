@@ -3,14 +3,14 @@ services:
         class: Wallabag\CoreBundle\Helper\DetectActiveTheme
         arguments:
             - "@security.token_storage"
-            - %wallabag_core.theme%
+            - "%wallabag_core.theme%"
 
     # custom form type
     wallabag_core.form.type.config:
         class: Wallabag\CoreBundle\Form\Type\ConfigType
         arguments:
-            - %liip_theme.themes%
-            - %wallabag_core.languages%
+            - "%liip_theme.themes%"
+            - "%wallabag_core.languages%"
         tags:
             - { name: form.type }
 
@@ -32,7 +32,7 @@ services:
     wallabag_core.table_prefix_subscriber:
         class: Wallabag\CoreBundle\Subscriber\TablePrefixSubscriber
         arguments:
-            - %database_table_prefix%
+            - "%database_table_prefix%"
         tags:
             - { name: doctrine.event_subscriber }
 
@@ -92,10 +92,10 @@ services:
         class: Wallabag\CoreBundle\EventListener\RegistrationConfirmedListener
         arguments:
             - "@doctrine.orm.entity_manager"
-            - %wallabag_core.theme%
-            - %wallabag_core.items_on_page%
-            - %wallabag_core.rss_limit%
-            - %wallabag_core.language%
+            - "%wallabag_core.theme%"
+            - "%wallabag_core.items_on_page%"
+            - "%wallabag_core.rss_limit%"
+            - "%wallabag_core.language%"
         tags:
             - { name: kernel.event_subscriber }
 

@@ -22,19 +22,22 @@ class AppKernel extends Kernel
             new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
             new Nelmio\CorsBundle\NelmioCorsBundle(),
             new Liip\ThemeBundle\LiipThemeBundle(),
-            new Wallabag\CoreBundle\WallabagCoreBundle(),
-            new Wallabag\ApiBundle\WallabagApiBundle(),
             new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
             new Lexik\Bundle\FormFilterBundle\LexikFormFilterBundle(),
             new FOS\OAuthServerBundle\FOSOAuthServerBundle(),
-            new Wallabag\UserBundle\WallabagUserBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Scheb\TwoFactorBundle\SchebTwoFactorBundle(),
             new KPhoen\RulerZBundle\KPhoenRulerZBundle(),
-            new Wallabag\ImportBundle\WallabagImportBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Craue\ConfigBundle\CraueConfigBundle(),
             new Lexik\Bundle\MaintenanceBundle\LexikMaintenanceBundle(),
+            new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
+
+            // wallabag bundles
+            new Wallabag\CoreBundle\WallabagCoreBundle(),
+            new Wallabag\ApiBundle\WallabagApiBundle(),
+            new Wallabag\UserBundle\WallabagUserBundle(),
+            new Wallabag\ImportBundle\WallabagImportBundle(),
             new Wallabag\AnnotationBundle\WallabagAnnotationBundle(),
         ];
 

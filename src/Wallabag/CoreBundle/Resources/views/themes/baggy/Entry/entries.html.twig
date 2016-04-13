@@ -6,16 +6,9 @@
     {% block pager %}
         <div class="results">
             <div class="nb-results">{{ 'entry.list.number_on_the_page'|transchoice(entries.count) }}</div>
-                <div class="pagination">
+            <div class="pagination">
                 <a href="#" id="filter">{{ 'entry.filters.title'|trans }}</a>
-                {% if entries is not empty %}
-                    –
-                    {% for p in range(1, entries.nbPages) if entries.nbPages > 1 %}
-                        <li>
-                            <a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'page': p})) }}" class="{{ currentPage == p ? 'current':''}}" >{{ p }}</a>
-                        </li>
-                    {% endfor %}
-                {% endif %}
+                {{ pagerfanta(entries, 'twitter_bootstrap_translated', {'proximity': 1}) }}
             </div>
         </div>
     {% endblock %}

@@ -80,6 +80,14 @@ main, #content, .valign-wrapper {
     margin-bottom: 0;
 }
 
+.pagination {
+    float: right;
+}
+
+.pagination ul {
+    margin: 0 !important;
+}
+
 .pagination li {
     padding: 0;
 }
@@ -88,6 +96,18 @@ main, #content, .valign-wrapper {
     padding: 0px 10px;
     height: 30px;
     display: block;
+}
+
+.pagination li.active span {
+    padding: 0px 10px;
+    height: 30px;
+    display: block;
+    color: #fff;
+}
+
+.pagination .disabled {
+    margin-right: 10px;
+    margin-left: 10px;
 }
 
 .page-footer .footer-copyright p {
