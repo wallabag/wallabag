@@ -28,7 +28,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $crawler = $client->followRedirect();
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(array('_text')));
+        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertContains('quickstart.intro.paragraph_1', $body[0]);
 
         // Test if quickstart is disabled when user has 1 entry
@@ -38,16 +38,16 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $form = $crawler->filter('form[name=entry]')->form();
 
-        $data = array(
+        $data = [
             'entry[url]' => $this->url,
-        );
+        ];
 
         $client->submit($form, $data);
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $client->followRedirect();
 
         $crawler = $client->request('GET', '/unread/list');
-        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(array('_text')));
+        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertContains('entry.list.number_on_the_page', $body[0]);
     }
 
@@ -74,7 +74,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertCount(4, $crawler->filter('div[class=entry]'));
 
         // Good URL
-        $client->request('GET', '/bookmarklet', array('url' => $this->url));
+        $client->request('GET', '/bookmarklet', ['url' => $this->url]);
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $client->followRedirect();
         $crawler = $client->request('GET', '/');
@@ -103,7 +103,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $crawler = $client->submit($form);
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertCount(1, $alert = $crawler->filter('form ul li')->extract(array('_text')));
+        $this->assertCount(1, $alert = $crawler->filter('form ul li')->extract(['_text']));
         $this->assertEquals('This value should not be blank.', $alert[0]);
     }
 
@@ -121,9 +121,9 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $form = $crawler->filter('form[name=entry]')->form();
 
-        $data = array(
+        $data = [
             'entry[url]' => $this->url,
-        );
+        ];
 
         $client->submit($form, $data);
 
@@ -150,9 +150,9 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $form = $crawler->filter('form[name=entry]')->form();
 
-        $data = array(
+        $data = [
             'entry[url]' => $this->url,
-        );
+        ];
 
         $client->submit($form, $data);
 
@@ -174,9 +174,9 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $form = $crawler->filter('form[name=entry]')->form();
 
-        $data = array(
+        $data = [
             'entry[url]' => $url = 'https://github.com/wallabag/wallabag',
-        );
+        ];
 
         $client->submit($form, $data);
 
@@ -245,7 +245,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $crawler = $client->request('GET', '/view/'.$content->getId());
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(array('_text')));
+        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertContains($content->getTitle(), $body[0]);
     }
 
@@ -315,9 +315,9 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $form = $crawler->filter('button[type=submit]')->form();
 
-        $data = array(
+        $data = [
             'entry[title]' => 'My updated title hehe :)',
-        );
+        ];
 
         $client->submit($form, $data);
 
@@ -325,7 +325,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->followRedirect();
 
-        $this->assertGreaterThan(1, $alert = $crawler->filter('div[id=article] h1')->extract(array('_text')));
+        $this->assertGreaterThan(1, $alert = $crawler->filter('div[id=article] h1')->extract(['_text']));
         $this->assertContains('My updated title hehe :)', $alert[0]);
     }
 
@@ -461,10 +461,10 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $form = $crawler->filter('button[id=submit-filter]')->form();
 
-        $data = array(
+        $data = [
             'entry_filter[readingTime][right_number]' => 11,
             'entry_filter[readingTime][left_number]' => 11,
-        );
+        ];
 
         $crawler = $client->submit($form, $data);
 
@@ -480,28 +480,28 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $form = $crawler->filter('button[id=submit-filter]')->form();
 
-        $data = array(
+        $data = [
             'entry_filter[createdAt][left_date]' => date('d/m/Y'),
             'entry_filter[createdAt][right_date]' => date('d/m/Y', strtotime('+1 day')),
-        );
+        ];
 
         $crawler = $client->submit($form, $data);
 
         $this->assertCount(5, $crawler->filter('div[class=entry]'));
 
-        $data = array(
+        $data = [
             'entry_filter[createdAt][left_date]' => date('d/m/Y'),
             'entry_filter[createdAt][right_date]' => date('d/m/Y'),
-        );
+        ];
 
         $crawler = $client->submit($form, $data);
 
         $this->assertCount(5, $crawler->filter('div[class=entry]'));
 
-        $data = array(
+        $data = [
             'entry_filter[createdAt][left_date]' => '01/01/1970',
             'entry_filter[createdAt][right_date]' => '01/01/1970',
-        );
+        ];
 
         $crawler = $client->submit($form, $data);
 
@@ -516,9 +516,9 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $form = $crawler->filter('button[id=config_save]')->form();
 
-        $data = array(
+        $data = [
             'config[items_per_page]' => '1',
-        );
+        ];
 
         $client->submit($form, $data);
 
@@ -531,9 +531,9 @@ class EntryControllerTest extends WallabagCoreTestCase
         // reset pagination
         $crawler = $client->request('GET', '/config');
         $form = $crawler->filter('button[id=config_save]')->form();
-        $data = array(
+        $data = [
             'config[items_per_page]' => '12',
-        );
+        ];
         $client->submit($form, $data);
     }
 
@@ -544,17 +544,17 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/unread/list');
         $form = $crawler->filter('button[id=submit-filter]')->form();
-        $data = array(
+        $data = [
             'entry_filter[domainName]' => 'domain',
-        );
+        ];
 
         $crawler = $client->submit($form, $data);
         $this->assertCount(5, $crawler->filter('div[class=entry]'));
 
         $form = $crawler->filter('button[id=submit-filter]')->form();
-        $data = array(
+        $data = [
             'entry_filter[domainName]' => 'wallabag',
-        );
+        ];
 
         $crawler = $client->submit($form, $data);
         $this->assertCount(0, $crawler->filter('div[class=entry]'));
@@ -601,17 +601,17 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/unread/list');
         $form = $crawler->filter('button[id=submit-filter]')->form();
-        $data = array(
+        $data = [
             'entry_filter[language]' => 'fr',
-        );
+        ];
 
         $crawler = $client->submit($form, $data);
         $this->assertCount(2, $crawler->filter('div[class=entry]'));
 
         $form = $crawler->filter('button[id=submit-filter]')->form();
-        $data = array(
+        $data = [
             'entry_filter[language]' => 'en',
-        );
+        ];
 
         $crawler = $client->submit($form, $data);
         $this->assertCount(2, $crawler->filter('div[class=entry]'));

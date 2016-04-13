@@ -32,7 +32,7 @@ class ConfigController extends Controller
         $user = $this->getUser();
 
         // handle basic config detail (this form is defined as a service)
-        $configForm = $this->createForm(ConfigType::class, $config, array('action' => $this->generateUrl('config')));
+        $configForm = $this->createForm(ConfigType::class, $config, ['action' => $this->generateUrl('config')]);
         $configForm->handleRequest($request);
 
         if ($configForm->isValid()) {
@@ -52,7 +52,7 @@ class ConfigController extends Controller
         }
 
         // handle changing password
-        $pwdForm = $this->createForm(ChangePasswordType::class, null, array('action' => $this->generateUrl('config').'#set4'));
+        $pwdForm = $this->createForm(ChangePasswordType::class, null, ['action' => $this->generateUrl('config').'#set4']);
         $pwdForm->handleRequest($request);
 
         if ($pwdForm->isValid()) {
@@ -71,10 +71,10 @@ class ConfigController extends Controller
         }
 
         // handle changing user information
-        $userForm = $this->createForm(UserInformationType::class, $user, array(
-            'validation_groups' => array('Profile'),
+        $userForm = $this->createForm(UserInformationType::class, $user, [
+            'validation_groups' => ['Profile'],
             'action' => $this->generateUrl('config').'#set3',
-        ));
+        ]);
         $userForm->handleRequest($request);
 
         if ($userForm->isValid()) {
@@ -89,7 +89,7 @@ class ConfigController extends Controller
         }
 
         // handle rss information
-        $rssForm = $this->createForm(RssType::class, $config, array('action' => $this->generateUrl('config').'#set2'));
+        $rssForm = $this->createForm(RssType::class, $config, ['action' => $this->generateUrl('config').'#set2']);
         $rssForm->handleRequest($request);
 
         if ($rssForm->isValid()) {
@@ -106,7 +106,7 @@ class ConfigController extends Controller
 
         // handle tagging rule
         $taggingRule = new TaggingRule();
-        $newTaggingRule = $this->createForm(TaggingRuleType::class, $taggingRule, array('action' => $this->generateUrl('config').'#set5'));
+        $newTaggingRule = $this->createForm(TaggingRuleType::class, $taggingRule, ['action' => $this->generateUrl('config').'#set5']);
         $newTaggingRule->handleRequest($request);
 
         if ($newTaggingRule->isValid()) {
@@ -126,10 +126,10 @@ class ConfigController extends Controller
         $newUser = $userManager->createUser();
         // enable created user by default
         $newUser->setEnabled(true);
-        $newUserForm = $this->createForm(NewUserType::class, $newUser, array(
-            'validation_groups' => array('Profile'),
+        $newUserForm = $this->createForm(NewUserType::class, $newUser, [
+            'validation_groups' => ['Profile'],
             'action' => $this->generateUrl('config').'#set6',
-        ));
+        ]);
         $newUserForm->handleRequest($request);
 
         if ($newUserForm->isValid() && $this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')) {
@@ -147,27 +147,27 @@ class ConfigController extends Controller
 
             $this->get('session')->getFlashBag()->add(
                 'notice',
-                $this->get('translator')->trans('flashes.config.notice.user_added', array('%username%' => $newUser->getUsername()))
+                $this->get('translator')->trans('flashes.config.notice.user_added', ['%username%' => $newUser->getUsername()])
             );
 
             return $this->redirect($this->generateUrl('config').'#set6');
         }
 
-        return $this->render('WallabagCoreBundle:Config:index.html.twig', array(
-            'form' => array(
+        return $this->render('WallabagCoreBundle:Config:index.html.twig', [
+            'form' => [
                 'config' => $configForm->createView(),
                 'rss' => $rssForm->createView(),
                 'pwd' => $pwdForm->createView(),
                 'user' => $userForm->createView(),
                 'new_user' => $newUserForm->createView(),
                 'new_tagging_rule' => $newTaggingRule->createView(),
-            ),
-            'rss' => array(
+            ],
+            'rss' => [
                 'username' => $user->getUsername(),
                 'token' => $config->getRssToken(),
-            ),
+            ],
             'twofactor_auth' => $this->getParameter('twofactor_auth'),
-        ));
+        ]);
     }
 
     /**
@@ -187,7 +187,7 @@ class ConfigController extends Controller
         $em->flush();
 
         if ($request->isXmlHttpRequest()) {
-            return new JsonResponse(array('token' => $config->getRssToken()));
+            return new JsonResponse(['token' => $config->getRssToken()]);
         }
 
         $this->get('session')->getFlashBag()->add(
@@ -229,7 +229,7 @@ class ConfigController extends Controller
      * Retrieve config for the current user.
      * If no config were found, create a new one.
      *
-     * @return Wallabag\CoreBundle\Entity\Config
+     * @return Config
      */
     private function getConfig()
     {

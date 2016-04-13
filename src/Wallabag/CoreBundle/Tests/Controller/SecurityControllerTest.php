@@ -13,7 +13,7 @@ class SecurityControllerTest extends WallabagCoreTestCase
         $client->followRedirects();
 
         $crawler = $client->request('GET', '/config');
-        $this->assertContains('config.form_rss.description', $crawler->filter('body')->extract(array('_text'))[0]);
+        $this->assertContains('config.form_rss.description', $crawler->filter('body')->extract(['_text'])[0]);
     }
 
     public function testLoginWith2Factor()
@@ -38,7 +38,7 @@ class SecurityControllerTest extends WallabagCoreTestCase
 
         $this->logInAs('admin');
         $crawler = $client->request('GET', '/config');
-        $this->assertContains('scheb_two_factor.trusted', $crawler->filter('body')->extract(array('_text'))[0]);
+        $this->assertContains('scheb_two_factor.trusted', $crawler->filter('body')->extract(['_text'])[0]);
 
         // restore user
         $user = $em

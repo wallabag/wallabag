@@ -13,7 +13,7 @@ class WallabagRestControllerTest extends WallabagApiTestCase
         $entry = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneBy(array('user' => 1, 'isArchived' => false));
+            ->findOneBy(['user' => 1, 'isArchived' => false]);
 
         if (!$entry) {
             $this->markTestSkipped('No content found in db.');
@@ -44,7 +44,7 @@ class WallabagRestControllerTest extends WallabagApiTestCase
         $entry = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneBy(array('user' => 2, 'isArchived' => false));
+            ->findOneBy(['user' => 2, 'isArchived' => false]);
 
         if (!$entry) {
             $this->markTestSkipped('No content found in db.');
@@ -79,7 +79,7 @@ class WallabagRestControllerTest extends WallabagApiTestCase
 
     public function testGetStarredEntries()
     {
-        $this->client->request('GET', '/api/entries', array('star' => 1, 'sort' => 'updated'));
+        $this->client->request('GET', '/api/entries', ['star' => 1, 'sort' => 'updated']);
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
@@ -101,7 +101,7 @@ class WallabagRestControllerTest extends WallabagApiTestCase
 
     public function testGetArchiveEntries()
     {
-        $this->client->request('GET', '/api/entries', array('archive' => 1));
+        $this->client->request('GET', '/api/entries', ['archive' => 1]);
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
@@ -149,10 +149,10 @@ class WallabagRestControllerTest extends WallabagApiTestCase
 
     public function testPostEntry()
     {
-        $this->client->request('POST', '/api/entries.json', array(
+        $this->client->request('POST', '/api/entries.json', [
             'url' => 'http://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html',
             'tags' => 'google',
-        ));
+        ]);
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
@@ -168,11 +168,11 @@ class WallabagRestControllerTest extends WallabagApiTestCase
 
     public function testPostSameEntry()
     {
-        $this->client->request('POST', '/api/entries.json', array(
+        $this->client->request('POST', '/api/entries.json', [
             'url' => 'http://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html',
             'archive' => '1',
             'tags' => 'google, apple',
-        ));
+        ]);
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
@@ -187,11 +187,11 @@ class WallabagRestControllerTest extends WallabagApiTestCase
 
     public function testPostArchivedAndStarredEntry()
     {
-        $this->client->request('POST', '/api/entries.json', array(
+        $this->client->request('POST', '/api/entries.json', [
             'url' => 'http://www.lemonde.fr/idees/article/2016/02/08/preserver-la-liberte-d-expression-sur-les-reseaux-sociaux_4861503_3232.html',
             'archive' => '1',
             'starred' => '1',
-        ));
+        ]);
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
@@ -206,11 +206,11 @@ class WallabagRestControllerTest extends WallabagApiTestCase
 
     public function testPostArchivedAndStarredEntryWithoutQuotes()
     {
-        $this->client->request('POST', '/api/entries.json', array(
+        $this->client->request('POST', '/api/entries.json', [
             'url' => 'http://www.lemonde.fr/idees/article/2016/02/08/preserver-la-liberte-d-expression-sur-les-reseaux-sociaux_4861503_3232.html',
             'archive' => 0,
             'starred' => 1,
-        ));
+        ]);
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
@@ -236,12 +236,12 @@ class WallabagRestControllerTest extends WallabagApiTestCase
         // hydrate the tags relations
         $nbTags = count($entry->getTags());
 
-        $this->client->request('PATCH', '/api/entries/'.$entry->getId().'.json', array(
+        $this->client->request('PATCH', '/api/entries/'.$entry->getId().'.json', [
             'title' => 'New awesome title',
             'tags' => 'new tag '.uniqid(),
             'starred' => '1',
             'archive' => '0',
-        ));
+        ]);
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
@@ -268,12 +268,12 @@ class WallabagRestControllerTest extends WallabagApiTestCase
         // hydrate the tags relations
         $nbTags = count($entry->getTags());
 
-        $this->client->request('PATCH', '/api/entries/'.$entry->getId().'.json', array(
+        $this->client->request('PATCH', '/api/entries/'.$entry->getId().'.json', [
             'title' => 'New awesome title',
             'tags' => 'new tag '.uniqid(),
             'starred' => 1,
             'archive' => 0,
-        ));
+        ]);
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
@@ -298,9 +298,9 @@ class WallabagRestControllerTest extends WallabagApiTestCase
             $this->markTestSkipped('No content found in db.');
         }
 
-        $tags = array();
+        $tags = [];
         foreach ($entry->getTags() as $tag) {
-            $tags[] = array('id' => $tag->getId(), 'label' => $tag->getLabel(), 'slug' => $tag->getSlug());
+            $tags[] = ['id' => $tag->getId(), 'label' => $tag->getLabel(), 'slug' => $tag->getSlug()];
         }
 
         $this->client->request('GET', '/api/entries/'.$entry->getId().'/tags');
@@ -323,7 +323,7 @@ class WallabagRestControllerTest extends WallabagApiTestCase
 
         $newTags = 'tag1,tag2,tag3';
 
-        $this->client->request('POST', '/api/entries/'.$entry->getId().'/tags', array('tags' => $newTags));
+        $this->client->request('POST', '/api/entries/'.$entry->getId().'/tags', ['tags' => $newTags]);
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
@@ -337,7 +337,7 @@ class WallabagRestControllerTest extends WallabagApiTestCase
             ->getRepository('WallabagCoreBundle:Entry')
             ->find($entry->getId());
 
-        $tagsInDB = array();
+        $tagsInDB = [];
         foreach ($entryDB->getTags()->toArray() as $tag) {
             $tagsInDB[$tag->getId()] = $tag->getLabel();
         }

@@ -15,7 +15,7 @@ use Wallabag\CoreBundle\Command\InstallCommand;
  */
 class InstallCommandMock extends InstallCommand
 {
-    protected function runCommand($command, $parameters = array())
+    protected function runCommand($command, $parameters = [])
     {
         return $this;
     }

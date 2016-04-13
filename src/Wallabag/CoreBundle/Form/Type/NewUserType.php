@@ -17,38 +17,38 @@ class NewUserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', TextType::class, array(
+            ->add('username', TextType::class, [
                 'required' => true,
                 'label' => 'config.form_new_user.username_label',
-            ))
-            ->add('plainPassword', RepeatedType::class, array(
+            ])
+            ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'validator.password_must_match',
-                'first_options' => array('label' => 'config.form_new_user.password_label'),
-                'second_options' => array('label' => 'config.form_new_user.repeat_new_password_label'),
-                'constraints' => array(
-                    new Constraints\Length(array(
+                'first_options' => ['label' => 'config.form_new_user.password_label'],
+                'second_options' => ['label' => 'config.form_new_user.repeat_new_password_label'],
+                'constraints' => [
+                    new Constraints\Length([
                         'min' => 8,
                         'minMessage' => 'validator.password_too_short',
-                    )),
+                    ]),
                     new Constraints\NotBlank(),
-                ),
+                ],
                 'label' => 'config.form_new_user.plain_password_label',
-            ))
-            ->add('email', EmailType::class, array(
+            ])
+            ->add('email', EmailType::class, [
                 'label' => 'config.form_new_user.email_label',
-            ))
-            ->add('save', SubmitType::class, array(
+            ])
+            ->add('save', SubmitType::class, [
                 'label' => 'config.form.save',
-            ))
+            ])
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => 'Wallabag\UserBundle\Entity\User',
-        ));
+        ]);
     }
 
     public function getBlockPrefix()

@@ -19,14 +19,6 @@ parameters:
     database_path: "%kernel.root_dir%/../data/db/wallabag.sqlite"
     database_table_prefix: wallabag_
 
-    test_database_driver: pdo_sqlite
-    test_database_host: 127.0.0.1
-    test_database_port: ~
-    test_database_name: ~
-    test_database_user: ~
-    test_database_password: ~
-    test_database_path: "%kernel.root_dir%/../data/db/wallabag_test.sqlite"
-
     mailer_transport:  smtp
     mailer_host:       127.0.0.1
     mailer_user:       ~

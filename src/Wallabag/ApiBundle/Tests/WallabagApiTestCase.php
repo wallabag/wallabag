@@ -36,7 +36,7 @@ abstract class WallabagApiTestCase extends WebTestCase
         $loginManager = $container->get('fos_user.security.login_manager');
         $firewallName = $container->getParameter('fos_user.firewall_name');
 
-        $this->user = $userManager->findUserBy(array('username' => 'admin'));
+        $this->user = $userManager->findUserBy(['username' => 'admin']);
         $loginManager->loginUser($firewallName, $this->user);
 
         // save the login token into the session and put it in a cookie

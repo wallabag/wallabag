@@ -26,10 +26,10 @@ abstract class WallabagAnnotationTestCase extends WebTestCase
     {
         $crawler = $this->client->request('GET', '/login');
         $form = $crawler->filter('button[type=submit]')->form();
-        $data = array(
+        $data = [
             '_username' => $username,
             '_password' => 'mypassword',
-        );
+        ];
 
         $this->client->submit($form, $data);
     }
@@ -48,7 +48,7 @@ abstract class WallabagAnnotationTestCase extends WebTestCase
         $loginManager = $container->get('fos_user.security.login_manager');
         $firewallName = $container->getParameter('fos_user.firewall_name');
 
-        $this->user = $userManager->findUserBy(array('username' => 'admin'));
+        $this->user = $userManager->findUserBy(['username' => 'admin']);
         $loginManager->loginUser($firewallName, $this->user);
 
         // save the login token into the session and put it in a cookie

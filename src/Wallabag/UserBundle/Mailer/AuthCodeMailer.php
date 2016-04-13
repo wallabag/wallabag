@@ -82,7 +82,7 @@ class AuthCodeMailer implements AuthCodeMailerInterface
     {
         $template = $this->twig->loadTemplate('WallabagUserBundle:TwoFactor:email_auth_code.html.twig');
 
-        $subject = $template->renderBlock('subject', array());
+        $subject = $template->renderBlock('subject', []);
         $bodyHtml = $template->renderBlock('body_html', [
             'user' => $user->getName(),
             'code' => $user->getEmailAuthCode(),

@@ -43,12 +43,12 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $form = $crawler->filter('button[id=config_save]')->form();
 
-        $data = array(
+        $data = [
             'config[theme]' => 'baggy',
             'config[items_per_page]' => '30',
             'config[reading_speed]' => '0.5',
             'config[language]' => 'en',
-        );
+        ];
 
         $client->submit($form, $data);
 
@@ -56,19 +56,19 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->followRedirect();
 
-        $this->assertGreaterThan(1, $alert = $crawler->filter('div.messages.success')->extract(array('_text')));
+        $this->assertGreaterThan(1, $alert = $crawler->filter('div.messages.success')->extract(['_text']));
         $this->assertContains('flashes.config.notice.config_saved', $alert[0]);
     }
 
     public function dataForUpdateFailed()
     {
-        return array(
-            array(array(
+        return [
+            [[
                 'config[theme]' => 'baggy',
                 'config[items_per_page]' => '',
                 'config[language]' => 'en',
-            )),
-        );
+            ]],
+        ];
     }
 
     /**
@@ -89,46 +89,46 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
-        $this->assertGreaterThan(1, $alert = $crawler->filter('body')->extract(array('_text')));
+        $this->assertGreaterThan(1, $alert = $crawler->filter('body')->extract(['_text']));
         $this->assertContains('This value should not be blank', $alert[0]);
     }
 
     public function dataForChangePasswordFailed()
     {
-        return array(
-            array(
-                array(
+        return [
+            [
+                [
                     'change_passwd[old_password]' => 'material',
                     'change_passwd[new_password][first]' => '',
                     'change_passwd[new_password][second]' => '',
-                ),
+                ],
                 'validator.password_wrong_value',
-            ),
-            array(
-                array(
+            ],
+            [
+                [
                     'change_passwd[old_password]' => 'mypassword',
                     'change_passwd[new_password][first]' => '',
                     'change_passwd[new_password][second]' => '',
-                ),
+                ],
                 'This value should not be blank',
-            ),
-            array(
-                array(
+            ],
+            [
+                [
                     'change_passwd[old_password]' => 'mypassword',
                     'change_passwd[new_password][first]' => 'hop',
                     'change_passwd[new_password][second]' => '',
-                ),
+                ],
                 'validator.password_must_match',
-            ),
-            array(
-                array(
+            ],
+            [
+                [
                     'change_passwd[old_password]' => 'mypassword',
                     'change_passwd[new_password][first]' => 'hop',
                     'change_passwd[new_password][second]' => 'hop',
-                ),
+                ],
                 'validator.password_too_short',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -149,7 +149,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
-        $this->assertGreaterThan(1, $alert = $crawler->filter('body')->extract(array('_text')));
+        $this->assertGreaterThan(1, $alert = $crawler->filter('body')->extract(['_text']));
         $this->assertContains($expectedMessage, $alert[0]);
     }
 
@@ -164,11 +164,11 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $form = $crawler->filter('button[id=change_passwd_save]')->form();
 
-        $data = array(
+        $data = [
             'change_passwd[old_password]' => 'mypassword',
             'change_passwd[new_password][first]' => 'mypassword',
             'change_passwd[new_password][second]' => 'mypassword',
-        );
+        ];
 
         $client->submit($form, $data);
 
@@ -176,28 +176,28 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->followRedirect();
 
-        $this->assertGreaterThan(1, $alert = $crawler->filter('div.messages.success')->extract(array('_text')));
+        $this->assertGreaterThan(1, $alert = $crawler->filter('div.messages.success')->extract(['_text']));
         $this->assertContains('flashes.config.notice.password_updated', $alert[0]);
     }
 
     public function dataForUserFailed()
     {
-        return array(
-            array(
-                array(
+        return [
+            [
+                [
                     'update_user[name]' => '',
                     'update_user[email]' => '',
-                ),
+                ],
                 'fos_user.email.blank',
-            ),
-            array(
-                array(
+            ],
+            [
+                [
                     'update_user[name]' => '',
                     'update_user[email]' => 'test',
-                ),
+                ],
                 'fos_user.email.invalid',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -218,7 +218,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
-        $this->assertGreaterThan(1, $alert = $crawler->filter('body')->extract(array('_text')));
+        $this->assertGreaterThan(1, $alert = $crawler->filter('body')->extract(['_text']));
         $this->assertContains($expectedMessage, $alert[0]);
     }
 
@@ -233,10 +233,10 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $form = $crawler->filter('button[id=update_user_save]')->form();
 
-        $data = array(
+        $data = [
             'update_user[name]' => 'new name',
             'update_user[email]' => 'admin@wallabag.io',
-        );
+        ];
 
         $client->submit($form, $data);
 
@@ -244,59 +244,59 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->followRedirect();
 
-        $this->assertGreaterThan(1, $alert = $crawler->filter('body')->extract(array('_text')));
+        $this->assertGreaterThan(1, $alert = $crawler->filter('body')->extract(['_text']));
         $this->assertContains('flashes.config.notice.user_updated', $alert[0]);
     }
 
     public function dataForNewUserFailed()
     {
-        return array(
-            array(
-                array(
+        return [
+            [
+                [
                     'new_user[username]' => '',
                     'new_user[plainPassword][first]' => '',
                     'new_user[plainPassword][second]' => '',
                     'new_user[email]' => '',
-                ),
+                ],
                 'fos_user.username.blank',
-            ),
-            array(
-                array(
+            ],
+            [
+                [
                     'new_user[username]' => 'a',
                     'new_user[plainPassword][first]' => 'mypassword',
                     'new_user[plainPassword][second]' => 'mypassword',
                     'new_user[email]' => '',
-                ),
+                ],
                 'fos_user.username.short',
-            ),
-            array(
-                array(
+            ],
+            [
+                [
                     'new_user[username]' => 'wallace',
                     'new_user[plainPassword][first]' => 'mypassword',
                     'new_user[plainPassword][second]' => 'mypassword',
                     'new_user[email]' => 'test',
-                ),
+                ],
                 'fos_user.email.invalid',
-            ),
-            array(
-                array(
+            ],
+            [
+                [
                     'new_user[username]' => 'admin',
                     'new_user[plainPassword][first]' => 'wallacewallace',
                     'new_user[plainPassword][second]' => 'wallacewallace',
                     'new_user[email]' => 'wallace@wallace.me',
-                ),
+                ],
                 'fos_user.username.already_used',
-            ),
-            array(
-                array(
+            ],
+            [
+                [
                     'new_user[username]' => 'wallace',
                     'new_user[plainPassword][first]' => 'mypassword1',
                     'new_user[plainPassword][second]' => 'mypassword2',
                     'new_user[email]' => 'wallace@wallace.me',
-                ),
+                ],
                 'validator.password_must_match',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -317,7 +317,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
-        $this->assertGreaterThan(1, $alert = $crawler->filter('body')->extract(array('_text')));
+        $this->assertGreaterThan(1, $alert = $crawler->filter('body')->extract(['_text']));
         $this->assertContains($expectedMessage, $alert[0]);
     }
 
@@ -332,12 +332,12 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $form = $crawler->filter('button[id=new_user_save]')->form();
 
-        $data = array(
+        $data = [
             'new_user[username]' => 'wallace',
             'new_user[plainPassword][first]' => 'wallace1',
             'new_user[plainPassword][second]' => 'wallace1',
             'new_user[email]' => 'wallace@wallace.me',
-        );
+        ];
 
         $client->submit($form, $data);
 
@@ -345,7 +345,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->followRedirect();
 
-        $this->assertGreaterThan(1, $alert = $crawler->filter('div.messages.success')->extract(array('_text')));
+        $this->assertGreaterThan(1, $alert = $crawler->filter('div.messages.success')->extract(['_text']));
         $this->assertContains('flashes.config.notice.user_added', $alert[0]);
 
         $em = $client->getContainer()->get('doctrine.orm.entity_manager');
@@ -381,7 +381,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
-        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(array('_text')));
+        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertContains('config.form_rss.no_token', $body[0]);
 
         $client->request('GET', '/generate-token');
@@ -389,7 +389,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->followRedirect();
 
-        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(array('_text')));
+        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertNotContains('config.form_rss.no_token', $body[0]);
     }
 
@@ -401,9 +401,9 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $client->request(
             'GET',
             '/generate-token',
-            array(),
-            array(),
-            array('HTTP_X-Requested-With' => 'XMLHttpRequest')
+            [],
+            [],
+            ['HTTP_X-Requested-With' => 'XMLHttpRequest']
         );
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
@@ -422,9 +422,9 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $form = $crawler->filter('button[id=rss_config_save]')->form();
 
-        $data = array(
+        $data = [
             'rss_config[rss_limit]' => 12,
-        );
+        ];
 
         $client->submit($form, $data);
 
@@ -432,26 +432,26 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->followRedirect();
 
-        $this->assertGreaterThan(1, $alert = $crawler->filter('div.messages.success')->extract(array('_text')));
+        $this->assertGreaterThan(1, $alert = $crawler->filter('div.messages.success')->extract(['_text']));
         $this->assertContains('flashes.config.notice.rss_updated', $alert[0]);
     }
 
     public function dataForRssFailed()
     {
-        return array(
-            array(
-                array(
+        return [
+            [
+                [
                     'rss_config[rss_limit]' => 0,
-                ),
+                ],
                 'This value should be 1 or more.',
-            ),
-            array(
-                array(
+            ],
+            [
+                [
                     'rss_config[rss_limit]' => 1000000000000,
-                ),
+                ],
                 'validator.rss_limit_too_hight',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -472,7 +472,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
-        $this->assertGreaterThan(1, $alert = $crawler->filter('body')->extract(array('_text')));
+        $this->assertGreaterThan(1, $alert = $crawler->filter('body')->extract(['_text']));
         $this->assertContains($expectedMessage, $alert[0]);
     }
 
@@ -487,10 +487,10 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $form = $crawler->filter('button[id=tagging_rule_save]')->form();
 
-        $data = array(
+        $data = [
             'tagging_rule[rule]' => 'readingTime <= 3',
             'tagging_rule[tags]' => 'short reading',
-        );
+        ];
 
         $client->submit($form, $data);
 
@@ -498,7 +498,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->followRedirect();
 
-        $this->assertGreaterThan(1, $alert = $crawler->filter('div.messages.success')->extract(array('_text')));
+        $this->assertGreaterThan(1, $alert = $crawler->filter('div.messages.success')->extract(['_text']));
         $this->assertContains('flashes.config.notice.tagging_rules_updated', $alert[0]);
 
         $deleteLink = $crawler->filter('.delete')->last()->link();
@@ -507,34 +507,34 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
 
         $crawler = $client->followRedirect();
-        $this->assertGreaterThan(1, $alert = $crawler->filter('div.messages.success')->extract(array('_text')));
+        $this->assertGreaterThan(1, $alert = $crawler->filter('div.messages.success')->extract(['_text']));
         $this->assertContains('flashes.config.notice.tagging_rules_deleted', $alert[0]);
     }
 
     public function dataForTaggingRuleFailed()
     {
-        return array(
-            array(
-                array(
+        return [
+            [
+                [
                     'tagging_rule[rule]' => 'unknownVar <= 3',
                     'tagging_rule[tags]' => 'cool tag',
-                ),
-                array(
+                ],
+                [
                     'The variable',
                     'does not exist.',
-                ),
-            ),
-            array(
-                array(
+                ],
+            ],
+            [
+                [
                     'tagging_rule[rule]' => 'length(domainName) <= 42',
                     'tagging_rule[tags]' => 'cool tag',
-                ),
-                array(
+                ],
+                [
                     'The operator',
                     'does not exist.',
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
     }
 
     /**
@@ -555,7 +555,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
-        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(array('_text')));
+        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
 
         foreach ($messages as $message) {
             $this->assertContains($message, $body[0]);
@@ -574,7 +574,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $crawler = $client->request('GET', '/tagging-rule/delete/'.$rule->getId());
 
         $this->assertEquals(403, $client->getResponse()->getStatusCode());
-        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(array('_text')));
+        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertContains('You can not access this tagging rule', $body[0]);
     }
 
@@ -593,11 +593,11 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $form = $crawler->filter('button[id=change_passwd_save]')->form();
 
-        $data = array(
+        $data = [
             'change_passwd[old_password]' => 'mypassword',
             'change_passwd[new_password][first]' => 'mypassword',
             'change_passwd[new_password][second]' => 'mypassword',
-        );
+        ];
 
         $client->submit($form, $data);
 

@@ -17,19 +17,19 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
             ->method('tag');
 
         $graby = $this->getMockBuilder('Graby\Graby')
-            ->setMethods(array('fetchContent'))
+            ->setMethods(['fetchContent'])
             ->disableOriginalConstructor()
             ->getMock();
 
         $graby->expects($this->any())
             ->method('fetchContent')
-            ->willReturn(array(
+            ->willReturn([
                 'html' => false,
                 'title' => '',
                 'url' => '',
                 'content_type' => '',
                 'language' => '',
-            ));
+            ]);
 
         $proxy = new ContentProxy($graby, $tagger, $this->getTagRepositoryMock(), $this->getLogger());
         $entry = $proxy->updateEntry(new Entry(new User()), 'http://user@:80');
@@ -51,19 +51,19 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
             ->method('tag');
 
         $graby = $this->getMockBuilder('Graby\Graby')
-            ->setMethods(array('fetchContent'))
+            ->setMethods(['fetchContent'])
             ->disableOriginalConstructor()
             ->getMock();
 
         $graby->expects($this->any())
             ->method('fetchContent')
-            ->willReturn(array(
+            ->willReturn([
                 'html' => false,
                 'title' => '',
                 'url' => '',
                 'content_type' => '',
                 'language' => '',
-            ));
+            ]);
 
         $proxy = new ContentProxy($graby, $tagger, $this->getTagRepositoryMock(), $this->getLogger());
         $entry = $proxy->updateEntry(new Entry(new User()), 'http://0.0.0.0');
@@ -85,23 +85,23 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
             ->method('tag');
 
         $graby = $this->getMockBuilder('Graby\Graby')
-            ->setMethods(array('fetchContent'))
+            ->setMethods(['fetchContent'])
             ->disableOriginalConstructor()
             ->getMock();
 
         $graby->expects($this->any())
             ->method('fetchContent')
-            ->willReturn(array(
+            ->willReturn([
                 'html' => false,
                 'title' => '',
                 'url' => '',
                 'content_type' => '',
                 'language' => '',
-                'open_graph' => array(
+                'open_graph' => [
                     'og_title' => 'my title',
                     'og_description' => 'desc',
-                ),
-            ));
+                ],
+            ]);
 
         $proxy = new ContentProxy($graby, $tagger, $this->getTagRepositoryMock(), $this->getLogger());
         $entry = $proxy->updateEntry(new Entry(new User()), 'http://domain.io');
@@ -123,24 +123,24 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
             ->method('tag');
 
         $graby = $this->getMockBuilder('Graby\Graby')
-            ->setMethods(array('fetchContent'))
+            ->setMethods(['fetchContent'])
             ->disableOriginalConstructor()
             ->getMock();
 
         $graby->expects($this->any())
             ->method('fetchContent')
-            ->willReturn(array(
+            ->willReturn([
                 'html' => str_repeat('this is my content', 325),
                 'title' => 'this is my title',
                 'url' => 'http://1.1.1.1',
                 'content_type' => 'text/html',
                 'language' => 'fr',
-                'open_graph' => array(
+                'open_graph' => [
                     'og_title' => 'my OG title',
                     'og_description' => 'OG desc',
                     'og_image' => 'http://3.3.3.3/cover.jpg',
-                ),
-            ));
+                ],
+            ]);
 
         $proxy = new ContentProxy($graby, $tagger, $this->getTagRepositoryMock(), $this->getLogger());
         $entry = $proxy->updateEntry(new Entry(new User()), 'http://0.0.0.0');
@@ -217,7 +217,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
 
         $entry = new Entry(new User());
 
-        $proxy->assignTagsToEntry($entry, array('   tag1', 'tag2   '));
+        $proxy->assignTagsToEntry($entry, ['   tag1', 'tag2   ']);
 
         $this->assertCount(2, $entry->getTags());
         $this->assertEquals('tag1', $entry->getTags()[0]->getLabel());
@@ -253,7 +253,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
 
         $entry = new Entry(new User());
 
-        $proxy->assignTagsToEntry($entry, array());
+        $proxy->assignTagsToEntry($entry, []);
 
         $this->assertCount(0, $entry->getTags());
     }
@@ -299,7 +299,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
     private function getTaggerMock()
     {
         return $this->getMockBuilder('Wallabag\CoreBundle\Helper\RuleBasedTagger')
-            ->setMethods(array('tag'))
+            ->setMethods(['tag'])
             ->disableOriginalConstructor()
             ->getMock();
     }

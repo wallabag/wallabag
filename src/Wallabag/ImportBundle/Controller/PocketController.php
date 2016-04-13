@@ -17,10 +17,10 @@ class PocketController extends Controller
     {
         $pocket = $this->get('wallabag_import.pocket.import');
         $form = $this->createFormBuilder($pocket)
-            ->add('mark_as_read', CheckboxType::class, array(
+            ->add('mark_as_read', CheckboxType::class, [
                 'label' => 'import.form.mark_as_read_label',
                 'required' => false,
-            ))
+            ])
             ->getForm();
 
         return $this->render('WallabagImportBundle:Pocket:index.html.twig', [
@@ -36,7 +36,7 @@ class PocketController extends Controller
     public function authAction(Request $request)
     {
         $requestToken = $this->get('wallabag_import.pocket.import')
-            ->getRequestToken($this->generateUrl('import', array(), UrlGeneratorInterface::ABSOLUTE_URL));
+            ->getRequestToken($this->generateUrl('import', [], UrlGeneratorInterface::ABSOLUTE_URL));
 
         if (false === $requestToken) {
             $this->get('session')->getFlashBag()->add(
@@ -51,7 +51,7 @@ class PocketController extends Controller
         $this->get('session')->set('mark_as_read', $request->request->get('form')['mark_as_read']);
 
         return $this->redirect(
-            'https://getpocket.com/auth/authorize?request_token='.$requestToken.'&redirect_uri='.$this->generateUrl('import_pocket_callback', array(), UrlGeneratorInterface::ABSOLUTE_URL),
+            'https://getpocket.com/auth/authorize?request_token='.$requestToken.'&redirect_uri='.$this->generateUrl('import_pocket_callback', [], UrlGeneratorInterface::ABSOLUTE_URL),
             301
         );
     }
@@ -79,10 +79,10 @@ class PocketController extends Controller
 
         if (true === $pocket->setMarkAsRead($markAsRead)->import()) {
             $summary = $pocket->getSummary();
-            $message = $this->get('translator')->trans('flashes.import.notice.summary', array(
+            $message = $this->get('translator')->trans('flashes.import.notice.summary', [
                 '%imported%' => $summary['imported'],
                 '%skipped%' => $summary['skipped'],
-            ));
+            ]);
         }
 
         $this->get('session')->getFlashBag()->add(

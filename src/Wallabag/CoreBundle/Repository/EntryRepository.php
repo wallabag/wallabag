@@ -157,7 +157,7 @@ class EntryRepository extends EntityRepository
             ->getQuery()
             ->getResult();
 
-        $languages = array();
+        $languages = [];
         foreach ($results as $result) {
             $languages[$result['language']] = $result['language'];
         }
@@ -233,7 +233,7 @@ class EntryRepository extends EntityRepository
      * @param $url
      * @param $userId
      *
-     * @return array|bool
+     * @return Entry|bool
      */
     public function findByUrlAndUserId($url, $userId)
     {

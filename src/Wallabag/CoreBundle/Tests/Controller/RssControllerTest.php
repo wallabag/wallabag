@@ -34,17 +34,17 @@ class RssControllerTest extends WallabagCoreTestCase
 
     public function dataForBadUrl()
     {
-        return array(
-            array(
+        return [
+            [
                 '/admin/YZIOAUZIAO/unread.xml',
-            ),
-            array(
+            ],
+            [
                 '/wallace/YZIOAUZIAO/starred.xml',
-            ),
-            array(
+            ],
+            [
                 '/wallace/YZIOAUZIAO/archives.xml',
-            ),
-        );
+            ],
+        ];
     }
 
     /**

@@ -73,7 +73,7 @@ class PocketImportTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->logHandler = new TestHandler();
-        $logger = new Logger('test', array($this->logHandler));
+        $logger = new Logger('test', [$this->logHandler]);
         $pocket->setLogger($logger);
 
         return $pocket;

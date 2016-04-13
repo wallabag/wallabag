@@ -16,12 +16,15 @@ class ExportController extends Controller
     /**
      * Gets one entry content.
      *
-     * @param Entry $entry
+     * @param Entry  $entry
+     * @param string $format
      *
      * @Route("/export/{id}.{format}", name="export_entry", requirements={
      *     "format": "epub|mobi|pdf|json|xml|txt|csv",
      *     "id": "\d+"
      * })
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function downloadEntryAction(Entry $entry, $format)
     {
@@ -38,10 +41,15 @@ class ExportController extends Controller
     /**
      * Export all entries for current user.
      *
+     * @param string $format
+     * @param string $category
+     *
      * @Route("/export/{category}.{format}", name="export_entries", requirements={
      *     "format": "epub|mobi|pdf|json|xml|txt|csv",
      *     "category": "all|unread|starred|archive"
      * })
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function downloadEntriesAction($format, $category)
     {

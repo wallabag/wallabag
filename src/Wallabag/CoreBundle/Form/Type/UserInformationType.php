@@ -15,19 +15,19 @@ class UserInformationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class, array(
+            ->add('name', TextType::class, [
                 'label' => 'config.form_user.name_label',
-            ))
-            ->add('email', EmailType::class, array(
+            ])
+            ->add('email', EmailType::class, [
                 'label' => 'config.form_user.email_label',
-            ))
-            ->add('twoFactorAuthentication', CheckboxType::class, array(
+            ])
+            ->add('twoFactorAuthentication', CheckboxType::class, [
                 'required' => false,
                 'label' => 'config.form_user.twoFactorAuthentication_label',
-            ))
-            ->add('save', SubmitType::class, array(
+            ])
+            ->add('save', SubmitType::class, [
                 'label' => 'config.form.save',
-            ))
+            ])
             ->remove('username')
             ->remove('plainPassword')
         ;
@@ -40,9 +40,9 @@ class UserInformationType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => 'Wallabag\UserBundle\Entity\User',
-        ));
+        ]);
     }
 
     public function getBlockPrefix()

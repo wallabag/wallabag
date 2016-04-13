@@ -35,13 +35,13 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
             ->getRepository('WallabagCoreBundle:Entry')
             ->findOneByUsernameAndNotArchived('admin');
 
-        $headers = array('CONTENT_TYPE' => 'application/json');
-        $content = json_encode(array(
+        $headers = ['CONTENT_TYPE' => 'application/json'];
+        $content = json_encode([
             'text' => 'my annotation',
             'quote' => 'my quote',
-            'ranges' => array('start' => '', 'startOffset' => 24, 'end' => '', 'endOffset' => 31),
-        ));
-        $crawler = $this->client->request('POST', 'annotations/'.$entry->getId().'.json', array(), array(), $headers, $content);
+            'ranges' => ['start' => '', 'startOffset' => 24, 'end' => '', 'endOffset' => 31],
+        ]);
+        $crawler = $this->client->request('POST', 'annotations/'.$entry->getId().'.json', [], [], $headers, $content);
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
@@ -69,11 +69,11 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
 
         $this->logInAs('admin');
 
-        $headers = array('CONTENT_TYPE' => 'application/json');
-        $content = json_encode(array(
+        $headers = ['CONTENT_TYPE' => 'application/json'];
+        $content = json_encode([
             'text' => 'a modified annotation',
-        ));
-        $crawler = $this->client->request('PUT', 'annotations/'.$annotation->getId().'.json', array(), array(), $headers, $content);
+        ]);
+        $crawler = $this->client->request('PUT', 'annotations/'.$annotation->getId().'.json', [], [], $headers, $content);
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
@@ -99,11 +99,11 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
 
         $this->logInAs('admin');
 
-        $headers = array('CONTENT_TYPE' => 'application/json');
-        $content = json_encode(array(
+        $headers = ['CONTENT_TYPE' => 'application/json'];
+        $content = json_encode([
             'text' => 'a modified annotation',
-        ));
-        $crawler = $this->client->request('DELETE', 'annotations/'.$annotation->getId().'.json', array(), array(), $headers, $content);
+        ]);
+        $crawler = $this->client->request('DELETE', 'annotations/'.$annotation->getId().'.json', [], [], $headers, $content);
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
         $content = json_decode($this->client->getResponse()->getContent(), true);

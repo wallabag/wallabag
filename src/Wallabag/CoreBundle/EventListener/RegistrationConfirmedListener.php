@@ -28,9 +28,9 @@ class RegistrationConfirmedListener implements EventSubscriberInterface
 
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             FOSUserEvents::REGISTRATION_CONFIRMED => 'authenticate',
-        );
+        ];
     }
 
     public function authenticate(FilterUserResponseEvent $event, $eventName = null, EventDispatcherInterface $eventDispatcher = null)

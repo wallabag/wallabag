@@ -37,11 +37,11 @@ class InstallCommandTest extends WallabagCoreTestCase
         $application = new Application(static::$kernel);
         $application->setAutoExit(false);
 
-        $code = $application->run(new ArrayInput(array(
+        $code = $application->run(new ArrayInput([
             'command' => 'doctrine:fixtures:load',
             '--no-interaction' => true,
             '--env' => 'test',
-        )), new NullOutput());
+        ]), new NullOutput());
     }
 
     public function testRunInstallCommand()
@@ -63,9 +63,9 @@ class InstallCommandTest extends WallabagCoreTestCase
         $command->getHelperSet()->set($question, 'question');
 
         $tester = new CommandTester($command);
-        $tester->execute(array(
+        $tester->execute([
             'command' => $command->getName(),
-        ));
+        ]);
 
         $this->assertContains('Checking system requirements.', $tester->getDisplay());
         $this->assertContains('Setting up database.', $tester->getDisplay());
@@ -93,10 +93,10 @@ class InstallCommandTest extends WallabagCoreTestCase
         $command->getHelperSet()->set($question, 'question');
 
         $tester = new CommandTester($command);
-        $tester->execute(array(
+        $tester->execute([
             'command' => $command->getName(),
             '--reset' => true,
-        ));
+        ]);
 
         $this->assertContains('Checking system requirements.', $tester->getDisplay());
         $this->assertContains('Setting up database.', $tester->getDisplay());
@@ -116,10 +116,10 @@ class InstallCommandTest extends WallabagCoreTestCase
 
         // drop database first, so the install command won't ask to reset things
         $command = $application->find('doctrine:database:drop');
-        $command->run(new ArrayInput(array(
+        $command->run(new ArrayInput([
             'command' => 'doctrine:database:drop',
             '--force' => true,
-        )), new NullOutput());
+        ]), new NullOutput());
 
         // start a new application to avoid lagging connexion to pgsql
         $client = static::createClient();
@@ -140,9 +140,9 @@ class InstallCommandTest extends WallabagCoreTestCase
         $command->getHelperSet()->set($question, 'question');
 
         $tester = new CommandTester($command);
-        $tester->execute(array(
+        $tester->execute([
             'command' => $command->getName(),
-        ));
+        ]);
 
         $this->assertContains('Checking system requirements.', $tester->getDisplay());
         $this->assertContains('Setting up database.', $tester->getDisplay());
@@ -178,9 +178,9 @@ class InstallCommandTest extends WallabagCoreTestCase
         $command->getHelperSet()->set($question, 'question');
 
         $tester = new CommandTester($command);
-        $tester->execute(array(
+        $tester->execute([
             'command' => $command->getName(),
-        ));
+        ]);
 
         $this->assertContains('Checking system requirements.', $tester->getDisplay());
         $this->assertContains('Setting up database.', $tester->getDisplay());
@@ -201,19 +201,19 @@ class InstallCommandTest extends WallabagCoreTestCase
         // drop database first, so the install command won't ask to reset things
         $command = new DropDatabaseDoctrineCommand();
         $command->setApplication($application);
-        $command->run(new ArrayInput(array(
+        $command->run(new ArrayInput([
             'command' => 'doctrine:database:drop',
             '--force' => true,
-        )), new NullOutput());
+        ]), new NullOutput());
 
         $this->getClient()->getContainer()->get('doctrine')->getConnection()->close();
 
         $command = new CreateDatabaseDoctrineCommand();
         $command->setApplication($application);
-        $command->run(new ArrayInput(array(
+        $command->run(new ArrayInput([
             'command' => 'doctrine:database:create',
             '--env' => 'test',
-        )), new NullOutput());
+        ]), new NullOutput());
 
         $command = $application->find('wallabag:install');
 
@@ -233,9 +233,9 @@ class InstallCommandTest extends WallabagCoreTestCase
         $command->getHelperSet()->set($question, 'question');
 
         $tester = new CommandTester($command);
-        $tester->execute(array(
+        $tester->execute([
             'command' => $command->getName(),
-        ));
+        ]);
 
         $this->assertContains('Checking system requirements.', $tester->getDisplay());
         $this->assertContains('Setting up database.', $tester->getDisplay());
@@ -265,10 +265,10 @@ class InstallCommandTest extends WallabagCoreTestCase
         $command->getHelperSet()->set($question, 'question');
 
         $tester = new CommandTester($command);
-        $tester->execute(array(
+        $tester->execute([
             'command' => $command->getName(),
             '--no-interaction' => true,
-        ));
+        ]);
 
         $this->assertContains('Checking system requirements.', $tester->getDisplay());
         $this->assertContains('Setting up database.', $tester->getDisplay());

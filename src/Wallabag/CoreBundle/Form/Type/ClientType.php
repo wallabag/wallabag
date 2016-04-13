@@ -14,8 +14,8 @@ class ClientType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('redirect_uris', UrlType::class, array('required' => true, 'label' => 'developer.client.form.redirect_uris_label'))
-            ->add('save', SubmitType::class, array('label' => 'developer.client.form.save_label'))
+            ->add('redirect_uris', UrlType::class, ['required' => true, 'label' => 'developer.client.form.redirect_uris_label'])
+            ->add('save', SubmitType::class, ['label' => 'developer.client.form.save_label'])
         ;
 
         $builder->get('redirect_uris')
@@ -24,7 +24,7 @@ class ClientType extends AbstractType
                     return $originalUri;
                 },
                 function ($submittedUri) {
-                    return array($submittedUri);
+                    return [$submittedUri];
                 }
             ))
         ;
@@ -32,9 +32,9 @@ class ClientType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => 'Wallabag\ApiBundle\Entity\Client',
-        ));
+        ]);
     }
 
     public function getBlockPrefix()

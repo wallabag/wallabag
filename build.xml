@@ -42,8 +42,8 @@
     <target name="db_mysql" description="Run test for MySQL">
         <delete dir="${basedir}/app/config/parameters.yml"/>
         <exec executable="cp">
-            <arg value="${basedir}/app/config/tests/parameters.yml.dist.mysql"/>
-            <arg value="${basedir}/app/config/parameters.yml"/>
+            <arg value="${basedir}/app/config/tests/parameters_test.mysql.yml"/>
+            <arg value="${basedir}/app/config/parameters_test.yml"/>
         </exec>
 
         <exec executable="php">
@@ -56,8 +56,8 @@
     <target name="db_sqlite" description="Run test for SQLite">
         <delete dir="${basedir}/app/config/parameters.yml"/>
         <exec executable="cp">
-            <arg value="${basedir}/app/config/tests/parameters.yml.dist.sqlite"/>
-            <arg value="${basedir}/app/config/parameters.yml"/>
+            <arg value="${basedir}/app/config/tests/parameters_test.sqlite.yml"/>
+            <arg value="${basedir}/app/config/parameters_test.yml"/>
         </exec>
 
         <exec executable="php">
@@ -70,8 +70,8 @@
     <target name="db_pgsql" description="Run test for PostgreSQL">
         <delete dir="${basedir}/app/config/parameters.yml"/>
         <exec executable="cp">
-            <arg value="${basedir}/app/config/tests/parameters.yml.dist.pgsql"/>
-            <arg value="${basedir}/app/config/parameters.yml"/>
+            <arg value="${basedir}/app/config/tests/parameters_test.pgsql.yml"/>
+            <arg value="${basedir}/app/config/parameters_test.yml"/>
         </exec>
 
         <exec executable="php">

@@ -12,20 +12,20 @@ class RssType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('rss_limit', null, array(
+            ->add('rss_limit', null, [
                 'label' => 'config.form_rss.rss_limit',
-            ))
-            ->add('save', SubmitType::class, array(
+            ])
+            ->add('save', SubmitType::class, [
                 'label' => 'config.form.save',
-            ))
+            ])
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => 'Wallabag\CoreBundle\Entity\Config',
-        ));
+        ]);
     }
 
     public function getBlockPrefix()

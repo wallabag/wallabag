@@ -87,9 +87,9 @@ class RssController extends Controller
         $perPage = $user->getConfig()->getRssLimit() ?: $this->getParameter('wallabag_core.rss_limit');
         $entries->setMaxPerPage($perPage);
 
-        return $this->render('WallabagCoreBundle:Entry:entries.xml.twig', array(
+        return $this->render('WallabagCoreBundle:Entry:entries.xml.twig', [
             'type' => $type,
             'entries' => $entries,
-        ));
+        ]);
     }
 }

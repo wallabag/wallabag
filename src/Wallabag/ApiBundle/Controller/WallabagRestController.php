@@ -384,6 +384,6 @@ class WallabagRestController extends FOSRestController
      */
     private function renderJsonResponse($json)
     {
-        return new Response($json, 200, array('application/json'));
+        return new Response($json, 200, ['application/json']);
     }
 }

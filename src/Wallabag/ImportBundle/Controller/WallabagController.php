@@ -55,10 +55,10 @@ abstract class WallabagController extends Controller
 
                 if (true === $res) {
                     $summary = $wallabag->getSummary();
-                    $message = $this->get('translator')->trans('flashes.import.notice.summary', array(
+                    $message = $this->get('translator')->trans('flashes.import.notice.summary', [
                         '%imported%' => $summary['imported'],
                         '%skipped%' => $summary['skipped'],
-                    ));
+                    ]);
 
                     unlink($this->getParameter('wallabag_import.resource_dir').'/'.$name);
                 }

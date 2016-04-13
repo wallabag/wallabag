@@ -29,9 +29,9 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
 
         $file = new UploadedFile(__DIR__.'/../fixtures/wallabag-v1.json', 'wallabag-v1.json');
 
-        $data = array(
+        $data = [
             'upload_import_file[file]' => $file,
-        );
+        ];
 
         $client->submit($form, $data);
 
@@ -54,7 +54,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
 
         $this->assertTrue($content->getTags()->contains($tag));
 
-        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(array('_text')));
+        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertContains('flashes.import.notice.summary', $body[0]);
     }
 
@@ -68,10 +68,10 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
 
         $file = new UploadedFile(__DIR__.'/../fixtures/wallabag-v1-read.json', 'wallabag-v1-read.json');
 
-        $data = array(
+        $data = [
             'upload_import_file[file]' => $file,
             'upload_import_file[mark_as_read]' => 1,
-        );
+        ];
 
         $client->submit($form, $data);
 
@@ -99,7 +99,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
 
         $this->assertTrue($content2->isArchived());
 
-        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(array('_text')));
+        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertContains('flashes.import.notice.summary', $body[0]);
     }
 
@@ -113,9 +113,9 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
 
         $file = new UploadedFile(__DIR__.'/../fixtures/test.txt', 'test.txt');
 
-        $data = array(
+        $data = [
             'upload_import_file[file]' => $file,
-        );
+        ];
 
         $client->submit($form, $data);
 
@@ -123,7 +123,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->followRedirect();
 
-        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(array('_text')));
+        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertContains('flashes.import.notice.failed', $body[0]);
     }
 }
