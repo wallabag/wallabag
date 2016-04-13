@@ -12,6 +12,7 @@ use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Form\Type\EntryFilterType;
 use Wallabag\CoreBundle\Form\Type\EditEntryType;
 use Wallabag\CoreBundle\Form\Type\NewEntryType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 
 class EntryController extends Controller
 {
@@ -459,6 +460,7 @@ class EntryController extends Controller
      * @param Entry $entry
      *
      * @Route("/share/{uuid}", requirements={"uuid" = ".+"}, name="share")
+     * @Cache(maxage="25200", public=true)
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
