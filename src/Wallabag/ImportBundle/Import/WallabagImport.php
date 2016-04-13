@@ -185,6 +185,7 @@ abstract class WallabagImport implements ImportInterface
             // flush every 20 entries
             if (($i % 20) === 0) {
                 $this->em->flush();
+                $this->em->clear();
             }
             ++$i;
         }
