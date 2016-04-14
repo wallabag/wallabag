@@ -122,6 +122,7 @@
     </div>
 
     <!-- Filters -->
+    {% if form is not null %}
     <div id="filters" class="side-nav fixed right-aligned">
         <form action="{{ path('all') }}">
 
@@ -205,5 +206,6 @@
 
         </form>
     </div>
-    {% include "WallabagCoreBundle:Entry:pager.html.twig" with {'entries': entries} %}
+    {% endif %}
+
 {% endblock %}
