@@ -2,12 +2,15 @@
 
 namespace Wallabag\CoreBundle\Controller;
 
+use Pagerfanta\Adapter\ArrayAdapter;
+use Pagerfanta\Exception\OutOfRangeCurrentPageException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Form\Type\NewTagType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class TagController extends Controller
 {
@@ -87,6 +90,43 @@ class TagController extends Controller
             'WallabagCoreBundle:Tag:tags.html.twig',
             [
                 'tags' => $tags,
+            ]
+        );
+    }
+
+    /**
+     * @param Tag $tag
+     * @param int $page
+     *
+     * @Route("/tag/list/{slug}/{page}", name="tag_entries", defaults={"page" = "1"})
+     * @ParamConverter("tag", options={"mapping": {"slug": "slug"}})
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function showEntriesForTagAction(Tag $tag, $page, Request $request)
+    {
+        $pagerAdapter = new ArrayAdapter($tag->getEntries()->toArray());
+
+        $entries = $this->get('wallabag_core.helper.prepare_pager_for_entries')
+            ->prepare($pagerAdapter, $page);
+
+        try {
+            $entries->setCurrentPage($page);
+        } catch (OutOfRangeCurrentPageException $e) {
+            if ($page > 1) {
+                return $this->redirect($this->generateUrl($request->get('_route'), [
+                    'slug' => $tag->getSlug(),
+                    'page' => $entries->getNbPages(),
+                ]), 302);
+            }
+        }
+
+        return $this->render(
+            'WallabagCoreBundle:Entry:entries.html.twig',
+            [
+                'form' => null,
+                'entries' => $entries,
+                'currentPage' => $page,
             ]
         );
     }

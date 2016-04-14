@@ -4,7 +4,6 @@ namespace Wallabag\CoreBundle\Controller;
 
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
-use Pagerfanta\Pagerfanta;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -257,9 +256,10 @@ class EntryController extends Controller
         }
 
         $pagerAdapter = new DoctrineORMAdapter($qb->getQuery());
-        $entries = new Pagerfanta($pagerAdapter);
 
-        $entries->setMaxPerPage($this->getUser()->getConfig()->getItemsPerPage());
+        $entries = $this->get('wallabag_core.helper.prepare_pager_for_entries')
+            ->prepare($pagerAdapter, $page);
+
         try {
             $entries->setCurrentPage($page);
         } catch (OutOfRangeCurrentPageException $e) {
