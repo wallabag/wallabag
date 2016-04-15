@@ -114,3 +114,8 @@ services:
         class: Wallabag\CoreBundle\Operator\Doctrine\Matches
         tags:
             - { name: rulerz.operator, executor: rulerz.executor.doctrine, operator: matches, inline: true }
+
+    wallabag_core.helper.redirect:
+        class: Wallabag\CoreBundle\Helper\Redirect
+        arguments:
+            - "@router"

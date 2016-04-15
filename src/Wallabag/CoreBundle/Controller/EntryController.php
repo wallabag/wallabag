@@ -344,7 +344,9 @@ class EntryController extends Controller
             $message
         );
 
-        return $this->redirect($request->headers->get('referer'));
+        $redirectUrl = $this->get('wallabag_core.helper.redirect')->to($request->headers->get('referer'));
+
+        return $this->redirect($redirectUrl);
     }
 
     /**
@@ -374,7 +376,9 @@ class EntryController extends Controller
             $message
         );
 
-        return $this->redirect($request->headers->get('referer'));
+        $redirectUrl = $this->get('wallabag_core.helper.redirect')->to($request->headers->get('referer'));
+
+        return $this->redirect($redirectUrl);
     }
 
     /**
@@ -408,7 +412,11 @@ class EntryController extends Controller
         );
 
         // don't redirect user to the deleted entry
-        return $this->redirect($url !== $request->headers->get('referer') ? $request->headers->get('referer') : $this->generateUrl('homepage'));
+        $to = ($url !== $request->headers->get('referer') ? $request->headers->get('referer') : null);
+
+        $redirectUrl = $this->get('wallabag_core.helper.redirect')->to($to);
+
+        return $this->redirect($redirectUrl);
     }
 
     /**
