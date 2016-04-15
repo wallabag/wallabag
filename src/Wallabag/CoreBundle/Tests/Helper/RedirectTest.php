@@ -6,7 +6,7 @@ use Wallabag\CoreBundle\Helper\Redirect;
 
 class RedirectTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var \Symfony\Component\Routing\Router */
+    /** @var \PHPUnit_Framework_MockObject_MockObject */
     private $routerMock;
 
     /** @var Redirect */
@@ -41,9 +41,15 @@ class RedirectTest extends \PHPUnit_Framework_TestCase
 
     private function getRouterMock()
     {
-        return $this->getMockBuilder('Symfony\Component\Routing\Router')
-            ->setMethods(['generate'])
+        $mock = $this->getMockBuilder('Symfony\Component\Routing\Router')
             ->disableOriginalConstructor()
             ->getMock();
+
+        $mock->expects($this->any())
+            ->method('generate')
+            ->with('homepage')
+            ->willReturn('homepage');
+
+        return $mock;
     }
 }

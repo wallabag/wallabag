@@ -4,6 +4,9 @@ namespace Wallabag\CoreBundle\Helper;
 
 use Symfony\Component\Routing\Router;
 
+/**
+ * Manage redirections to avoid redirecting to empty routes.
+ */
 class Redirect
 {
     private $router;
@@ -21,16 +24,14 @@ class Redirect
      */
     public function to($url, $fallback = '')
     {
-        $returnUrl = $url;
-
-        if (null === $url) {
-            if ('' !== $fallback) {
-                $returnUrl = $fallback;
-            } else {
-                $returnUrl = $this->router->generate('homepage');
-            }
+        if (null !== $url) {
+            return $url;
         }
 
-        return $returnUrl;
+        if ('' === $fallback) {
+            return $this->router->generate('homepage');
+        }
+
+        return $fallback;
     }
 }
