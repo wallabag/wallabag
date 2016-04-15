@@ -12,8 +12,8 @@
             <item>
                 <title><![CDATA[{{ entry.title }}]]></title>
                 <source url="{{ url('view', { 'id': entry.id }) }}">wallabag</source>
-                <link>{{ url('view', { 'id': entry.id }) }}</link>
-                <guid>{{ url('view', { 'id': entry.id }) }}</guid>
+                <link>{{ entry.url }}</link>
+                <guid>{{ entry.url }}</guid>
                 <pubDate>{{ entry.createdAt|date('D, d M Y H:i:s') }}</pubDate>
                 <description>
                     <![CDATA[
