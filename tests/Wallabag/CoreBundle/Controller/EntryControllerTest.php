@@ -698,4 +698,22 @@ class EntryControllerTest extends WallabagCoreTestCase
         $crawler = $client->submit($form, $data);
         $this->assertCount(2, $crawler->filter('div[class=entry]'));
     }
+
+    public function testCache()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $content = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneByUser($this->getLoggedInUserId());
+
+        $client->request('GET', '/share/'.$content->getUuid());
+        $this->assertContains('max-age=25200, public', $client->getResponse()->headers->get('cache-control'));
+        $this->assertNotContains('no-cache', $client->getResponse()->headers->get('cache-control'));
+
+        $client->request('GET', '/view/'.$content->getId());
+        $this->assertContains('no-cache', $client->getResponse()->headers->get('cache-control'));
+    }
 }

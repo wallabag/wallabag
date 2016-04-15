@@ -630,7 +630,8 @@ class Entry
     public function generateUuid()
     {
         if (empty($this->uuid) || is_null($this->uuid)) {
-            $this->uuid = uniqid();
+            // @see http://blog.kevingomez.fr/til/2015/07/26/why-is-uniqid-slow/ for true parameter
+            $this->uuid = uniqid('', true);
         }
     }
 }
