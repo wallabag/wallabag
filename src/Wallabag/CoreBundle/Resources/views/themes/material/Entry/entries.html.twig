@@ -21,7 +21,9 @@
         <div class="nb-results left">
             {{ 'entry.list.number_on_the_page'|transchoice(entries.count) }}
         </div>
-        {{ pagerfanta(entries, 'twitter_bootstrap_translated', {'proximity': 1}) }}
+        {% if entries.count > 1 %}
+            {{ pagerfanta(entries, 'twitter_bootstrap_translated', {'proximity': 1}) }}
+        {% endif %}
     </div>
     {% endblock %}
     <br />
