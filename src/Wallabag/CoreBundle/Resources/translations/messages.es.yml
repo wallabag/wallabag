@@ -100,7 +100,7 @@ config:
             tagging_rules_definition_title: '¿Qué significa reglas de etiquetado autómaticas?'
             tagging_rules_definition_description: 'Son las reglas usadas por Wallabag para etiquetar automáticamente los nuevos artículos.<br />Cada vez que un nuevo artículo sea añadido, todas las reglas de etiquetado automáticas serán usadas para etiquetarlo, ayudándole a clasificar automáticamente los artículos.'
             how_to_use_them_title: '¿Cómo se utilizan?'
-            how_to_use_them_description: 'Supongamos que quiere etiquetar nuevos artículos como « <i>lectura corta</i> » cuando el tiempo de leer sea menos de 3 minutos. <br /> En este caso, debe poner Let assume you want to tag new entries as « <i>short reading</i> » when the reading time is inferior to 3 minutes.<br />In that case, you should put « readingTime &lt;= 3 » in the <i>Rule</i> field and « <i>short reading</i> » in the <i>Tags</i> field.<br />Several tags can added simultaneously by separating them by a comma: « <i>short reading, must read</i> »<br />Complex rules can be written by using predefined operators: if « <i>readingTime &gt;= 5 AND domainName = "github.com"</i> » then tag as « <i>long reading, github </i> »'
+            how_to_use_them_description: 'Supongamos que quiere etiquetar nuevos artículos como « <i>lectura corta</i> » cuando el tiempo de leer sea menos de 3 minutos. <br /> En ese caso, debe poner « tiempo de leer &lt;= 3 » en el <i>Regla</i> campo y « <i>lectura corta</i> » en el <i>Etiquetas</i> campo.<br />Algunas etiquetas se pueden ser añadidas al mismo tiempo por separarlas con una coma: « <i>lectura corta, debe leer</i> »<br />Reglas complejas se pueden ser escritas por usar operadores predefinidos: si « <i>tiempo de leer &gt;= 5 Y nombre del dominio = "github.com"</i> » entonces etiquete como « <i>lectura larga, github </i> »'
             variables_available_title: '¿Qué variables y operadores se pueden utilizar para escribir las reglas?'
             variables_available_description: 'Las siguientes variables y operadores se pueden utilizar para crear las reglas de etiquetado automáticas:'
             meaning: 'Significado'
@@ -111,7 +111,7 @@ config:
                 isArchived: 'El artículo está guardado o no'
                 isStarred: 'Si el artículo es un favorito o no'
                 content: "El contenido del artículo"
-                language: "El idoma del artículo"
+                language: "El idioma del artículo"
                 mimetype: "Tipo MIME del artículo"
                 readingTime: "El tiempo estimado de lectura del artículo, en minutos"
                 domainName: 'El dominio del artículo'
@@ -123,9 +123,9 @@ config:
                 strictly_greater_than: 'Estrictámente mas que…'
                 equal_to: 'Egual a…'
                 not_equal_to: 'Diferente de…'
-                or: 'Una regla O otra'
+                or: 'Una regla U otra'
                 and: 'Una regla Y la otra'
-                matches: 'Prueba si un <i>sujeto</i> corresponde a una <i>busqueda</i> (insensible a mayusculas).<br />Ejemplo : <code>título coincide "football"</code>'
+                matches: 'Pruebe si un <i>sujeto</i> corresponde a una <i>búsqueda</i> (insensible a mayusculas).<br />Ejemplo : <code>título coincide "football"</code>'
     form_new_user:
         username_label: 'Nombre de usuario'
         password_label: 'Contraseña'
@@ -135,18 +135,18 @@ config:
 
 entry:
     page_titles:
-        # unread: 'Unread entries'
-        # starred: 'Starred entries'
-        # archived: 'Archived entries'
-        # filtered: 'Filtered entries'
+        unread: 'Artúclos no leídos'
+        starred: 'Artículos favoritos'
+        archived: 'Artículos archivados'
+        filtered: 'Artículos filtrados'
     list:
         number_on_the_page: '{0} No hay artículos.|{1} Hay un artículo.|]1,Inf[ Hay %count% artículos.'
         reading_time: 'tiempo estimado de lectura'
         reading_time_minutes: 'tiempo estimado de lectura: %readingTime% min'
         reading_time_less_one_minute: 'tiempo estimado de lectura: <small class="inferieur">&lt;</small> 1 min'
         original_article: 'original'
-        toogle_as_read: 'Marcar cómo leído/ no leído'
-        toogle_as_star: 'Marcar cómo favorito/ no favorito'
+        toogle_as_read: 'Marcar como leído/ no leído'
+        toogle_as_star: 'Marcar como favorito/ no favorito'
         delete: 'Suprimir'
         export_title: 'Exportar'
     filters:
@@ -158,7 +158,7 @@ entry:
         preview_picture_help: 'Foto de preview'
         language_label: 'Idioma'
         reading_time:
-            label: 'Duración de  lectura en minutos'
+            label: 'Duración de lectura en minutos'
             from: 'de'
             to: 'a'
         domain_label: 'Nombre de dominio'
@@ -175,7 +175,7 @@ entry:
             back_to_homepage: 'Volver'
             set_as_read: 'Marcar como leído'
             # set_as_unread: 'Mark as unread'
-            set_as_favorite: 'Marcar cómo favorito'
+            set_as_favorite: 'Marcar como favorito'
             view_original_article: 'Artículo original'
             re_fetch_content: 'Redescargar el contenido'
             delete: 'Suprimir'
@@ -205,18 +205,18 @@ entry:
 about:
     page_title: 'Acerca de'
     top_menu:
-        who_behind_wallabag: 'Equipo de desarrollo de wallabag'
-        getting_help: 'Conseguir ayuda'
+        who_behind_wallabag: 'Equipo del desarrollo de wallabag'
+        getting_help: 'Pedir ayuda'
         helping: 'Ayudar a wallabag'
-        contributors: 'Contribuidores'
-        third_party: 'Librerías de terceeros'
+        contributors: 'Colaboradores'
+        third_party: 'Librerías de terceros'
     who_behind_wallabag:
         developped_by: 'Desarrollado por'
         website: 'Sitio web'
-        many_contributors: 'Y muchos otros contribuidores ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">en Github</a>'
-        project_website: 'Web del proyecto'
+        many_contributors: 'Y muchos otros colaboradores ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">en Github</a>'
+        project_website: 'Sitio web del proyecto'
         license: 'Licencia'
-        version: 'Version'
+        version: 'Versión'
     getting_help:
         documentation: 'Documentación'
         bug_reports: 'Reporte de errores'
@@ -227,7 +227,7 @@ about:
         by_contributing_2: 'nuestras necesidades están en un ticket'
         by_paypal: 'via Paypal'
     contributors:
-        description: 'Gradias a los contribuidores de la aplicación web de wallabag'
+        description: 'Gradias a los colaboradores de la aplicación web de wallabag'
     third_party:
         description: 'Aquí está la lista de las dependencias utilizadas por wallabag (con sus licencias) :'
         package: 'Paquete'
@@ -235,10 +235,10 @@ about:
 
 howto:
     page_title: 'Ayuda'
-    # page_description: 'There are several ways to save an article:'
+    page_description: 'Hay muchas maneras para guardar un artículo:'
     top_menu:
         browser_addons: 'Extensiones de navigador'
-        mobile_apps: 'Applicaciones para smartphone'
+        mobile_apps: 'Aplicaciones para smartphone'
         bookmarklet: 'Bookmarklet'
     form:
         description: 'Gracias a este formulario'
@@ -249,8 +249,8 @@ howto:
         android:
             via_f_droid: 'via F-Droid'
             via_google_play: 'via Google Play'
-        # ios: 'on the iTunes Store'
-        # windows: 'on the Microsoft Store'
+        ios: 'por la tienda de iTunes'
+        windows: 'por la tienda de Microsoft'
     bookmarklet:
         description: 'Desplazar y soltar este link en la barra de marcadores :'
 
