@@ -26,21 +26,18 @@ class Version20160410190541 extends AbstractMigration implements ContainerAwareI
     public function up(Schema $schema)
     {
         $this->addSql('ALTER TABLE `wallabag_entry` ADD `uuid` LONGTEXT DEFAULT NULL');
+    }
 
+    public function postUp(Schema $schema)
+    {
         $em = $this->container->get('doctrine.orm.entity_manager');
-        $queryBuilder = $this->connection->createQueryBuilder();
-        $queryBuilder
-            ->select('e.uuid')
-            ->andWhere('e.uuid IS NULL');
-        $entries = $queryBuilder->execute();
+        $repository = $em->getRepository('WallabagCoreBundle:Entry');
+        $entries = $repository->findAll();
 
         /** @var Entry $entry */
         foreach ($entries as $entry) {
-            $entry->generateUuid();
-            $em->persist($entry);
-            $em->clear();
+            $this->addSql('UPDATE `wallabag_entry` SET `uuid` = "'.uniqid('', true).'" WHERE id = '.$entry->getId());
         }
-        $em->flush();
     }
 
     /**
@@ -48,6 +45,7 @@ class Version20160410190541 extends AbstractMigration implements ContainerAwareI
      */
     public function down(Schema $schema)
     {
+        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'sqlite', 'This down migration can\'t be executed on SQLite databases, because SQLite don\'t support DROP COLUMN.');
         $this->addSql('ALTER TABLE `wallabag_entry` DROP `uuid`');
     }
 }
