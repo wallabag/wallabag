@@ -41,8 +41,7 @@ matrix:
 # exclude v1 branches
 branches:
     except:
-        - master
-        - dev
+        - legacy
 
 before_script:
     - if [[ $TRAVIS_PHP_VERSION != hhvm ]]; then echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini; fi;
