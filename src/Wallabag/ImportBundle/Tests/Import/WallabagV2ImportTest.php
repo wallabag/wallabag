@@ -58,7 +58,7 @@ class WallabagV2ImportTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $entryRepo->expects($this->exactly(3))
+        $entryRepo->expects($this->exactly(24))
             ->method('findByUrlAndUserId')
             ->will($this->onConsecutiveCalls(false, true, false));
 
@@ -75,7 +75,7 @@ class WallabagV2ImportTest extends \PHPUnit_Framework_TestCase
         $res = $wallabagV2Import->import();
 
         $this->assertTrue($res);
-        $this->assertEquals(['skipped' => 1, 'imported' => 2], $wallabagV2Import->getSummary());
+        $this->assertEquals(['skipped' => 22, 'imported' => 2], $wallabagV2Import->getSummary());
     }
 
     public function testImportAndMarkAllAsRead()
