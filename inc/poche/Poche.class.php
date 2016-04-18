@@ -190,7 +190,7 @@ class Poche
         {
             case 'add':
                 $content = Tools::getPageContent($url);
-                $title = ($content['rss']['channel']['item']['title'] != '') ? $content['rss']['channel']['item']['title'] : _('Untitled');
+                $title = ($content['rss']['channel']['item']['title'] != '') ? $content['rss']['channel']['item']['title'] : parse_url($url, PHP_URL_HOST);
                 $body = $content['rss']['channel']['item']['description'];
 
                 // clean content from prevent xss attack
@@ -908,7 +908,7 @@ class Poche
         $entries = $this->store->retrieveAllWithTags($this->user->getId());
         if ($entries) {
             echo $this->tpl->render('export.twig', array(
-            'export' => Tools::renderJson($entries),
+            'export' => Tools::renderJson(Tools::utf8ize($entries)),
             ));
             Tools::logm('export view');
         } else {

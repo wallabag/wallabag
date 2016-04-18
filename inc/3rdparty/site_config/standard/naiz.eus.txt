@@ -1,0 +1,4 @@
+body: //div[contains(@class,'widget full_article')]
+
+test_url: http://www.naiz.eus/eu/actualidad/noticia/20151002/adegi-afirma-que-los-jovenes-viven-una-vida-muy-comoda-y-no-tienen-hambre-para-emprender#
+test_url: http://www.naiz.eus/eu/actualidad/noticia/20151012/podemos-euskadi-critica-que-otegi-y-sus-companeros-quieran-pasar-por-grandes-pacifistas

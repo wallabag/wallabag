@@ -1,9 +1,10 @@
 # Instapaper gets this back to front and only gets the blog title instead of the article title.
-title: substring-before(//title, '-')
+title: //div[@class='title']
 
 author: //a[ contains(@href, '/people') ]
 
-body: //div[ @class='post' ]
+body: //div[ @class='post-content' ]
 
 # Date is impossible to retrieve since they use those stupid "fuzzy" dates, inserted through javascript, at posterous.
 test_url: http://blog.cloudflare.com/understanding-analytics-when-is-a-page-view-n
+test_url: https://blog.cloudflare.com/sha-1-deprecation-no-browser-left-behind

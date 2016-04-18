@@ -1,0 +1,5 @@
+body: //div[@class='text_art']
+strip: //div[@class='cab_datos_opinion']
+strip: //div[@class='sumario2_left']
+
+test_url: http://www.bez.es/382758623/otros-fracasos-empresas.html

@@ -1,0 +1,4 @@
+body: //div[@class='widget full_article']
+strip: //div[@class='Herramientas']
+
+test_url: http://www.deia.com/2015/10/03/politica/euskadi/el-envilecimiento-de-la-politica-y-de-los-medios-de-comunicacion

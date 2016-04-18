@@ -141,7 +141,7 @@ final class Tools
     public static function getFile($url)
     {
         $timeout = 15;
-        $useragent = "Mozilla/5.0 (Windows NT 5.1; rv:18.0) Gecko/20100101 Firefox/18.0";
+        $useragent = "Mozilla/5.0 (Windows NT 6.3; rv:36.0) Gecko/20100101 Firefox/36.0";
 
         if (in_array ('curl', get_loaded_extensions())) {
             # Fetch feed from URL
@@ -230,6 +230,27 @@ final class Tools
         header('Content-type: application/json; charset=UTF-8');
         echo json_encode($data);
         exit();
+    }
+
+    /**
+     * UTF-8 encode array of string
+     *
+     * @param $data
+     */
+    public static function utf8ize($data)
+    {
+        if (is_array($data))
+        {
+            foreach ($data as $k => $v)
+            {
+                $data[$k] = self::utf8ize($v);
+            }
+        }
+        else if (is_string ($data) && '' == mb_detect_encoding($data))
+        {
+            return utf8_encode($data);
+        }
+        return $data;
     }
 
     /**

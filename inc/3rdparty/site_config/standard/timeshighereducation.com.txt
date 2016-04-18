@@ -1,0 +1,3 @@
+body: //div[@class="col-md-12 radix-layouts-contentheader panel-panel"]
+strip: //div[@class="htmlContent subscribe_box"]
+test_url: https://www.timeshighereducation.com/blog/jeremy-corbyn-serious-about-free-higher-education
