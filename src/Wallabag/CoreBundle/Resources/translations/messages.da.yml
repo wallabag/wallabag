@@ -139,6 +139,7 @@ entry:
         # starred: 'Starred entries'
         # archived: 'Archived entries'
         # filtered: 'Filtered entries'
+        # filtered_tags: 'Filtered by tags'
     list:
         # number_on_the_page: '{0} There is no entry.|{1} There is one entry.|]1,Inf[ There are %count% entries.'
         reading_time: 'estimeret læsetid'

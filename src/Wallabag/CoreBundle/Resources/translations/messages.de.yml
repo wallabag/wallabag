@@ -139,6 +139,7 @@ entry:
         starred: 'Favorisierte Einträge'
         archived: 'Archivierte Einträge'
         filtered: 'Gefilterte Einträge'
+        # filtered_tags: 'Filtered by tags'
     list:
         number_on_the_page: '{0} Es gibt keine Einträge.|{1} Es gibt einen Eintrag.|]1,Inf[ Es gibt %count% Einträge.'
         reading_time: 'geschätzte Lesezeit'

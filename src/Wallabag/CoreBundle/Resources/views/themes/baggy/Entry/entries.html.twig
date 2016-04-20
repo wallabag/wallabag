@@ -1,9 +1,35 @@
 {% extends "WallabagCoreBundle::layout.html.twig" %}
 
-{% block title %}{{ 'entry.page_titles.unread'|trans }}{% endblock %}
+{% block title %}
+    {% set currentRoute = app.request.attributes.get('_route') %}
+
+    {% if currentRoute == 'starred' %}
+        {{ 'entry.page_titles.starred'|trans }}
+    {% elseif currentRoute == 'archive' %}
+        {{ 'entry.page_titles.archived'|trans }}
+    {% elseif currentRoute == 'all' %}
+        {{ 'entry.page_titles.filtered'|trans }}
+    {% elseif currentRoute == 'tag_entries' %}
+        {{ 'entry.page_titles.filtered_tags'|trans }}
+    {% else %}
+        {{ 'entry.page_titles.unread'|trans }}
+    {% endif %}
+{% endblock %}
 
 {% block content %}
     {% include "WallabagCoreBundle:Entry:pager.html.twig" with {'entries': entries} %}
+
+    {% block pager %}
+        <div class="results">
+            <div class="nb-results">{{ 'entry.list.number_on_the_page'|transchoice(entries.count) }}</div>
+            <div class="pagination">
+                {% if form is not null %}<a href="#" id="filter">{{ 'entry.filters.title'|trans }}</a>{% endif %}
+                {% if entries.getNbPages > 1 %}
+                    {{ pagerfanta(entries, 'twitter_bootstrap_translated', {'proximity': 1}) }}
+                {% endif %}
+            </div>
+        </div>
+    {% endblock %}
 
     {% for entry in entries %}
         <div id="entry-{{ entry.id|e }}" class="entry">
@@ -34,6 +60,7 @@
         </div>
     {% endfor %}
 
+    {% if form is not null %}
     <aside id="filter-form" class="">
         <form method="get" action="{{ path('all') }}">
             <h2>{{ 'entry.filters.title'|trans }}</h2>
@@ -115,6 +142,7 @@
             </div>
         </form>
     </aside>
+    {% endif %}
 
     {% include "WallabagCoreBundle:Entry:pager.html.twig" with {'entries': entries} %}
 {% endblock %}
