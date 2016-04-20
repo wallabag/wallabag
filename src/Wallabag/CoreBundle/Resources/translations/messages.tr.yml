@@ -139,6 +139,7 @@ entry:
         # starred: 'Starred entries'
         # archived: 'Archived entries'
         # filtered: 'Filtered entries'
+        # filtered_tags: 'Filtered by tags'
     list:
         number_on_the_page: '{0} Herhangi bir makale yok.|{1} Burada bir adet makale var.|]1,Inf[ Burada %count% adet makale var.'
         reading_time: 'tahmini okuma süresi'

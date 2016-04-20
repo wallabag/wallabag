@@ -9,10 +9,11 @@
     {{ 'entry.page_titles.archived'|trans }}
   {% elseif currentRoute == 'all' %}
     {{ 'entry.page_titles.filtered'|trans }}
+  {% elseif currentRoute == 'tag_entries' %}
+      {{ 'entry.page_titles.filtered_tags'|trans }}
   {% else %}
     {{ 'entry.page_titles.unread'|trans }}
   {% endif %}
-
 {% endblock %}
 
 {% block content %}

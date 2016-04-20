@@ -139,6 +139,7 @@ entry:
         starred: 'مقاله‌های برگزیده'
         archived: 'مقاله‌های بایگانی‌شده'
         filtered: 'مقاله‌های فیلترشده'
+        # filtered_tags: 'Filtered by tags'
     list:
         number_on_the_page: '{0} هیج مقاله‌ای نیست.|{1} یک مقاله هست.|]1,Inf[ %count% مقاله هست.'
         reading_time: 'زمان تخمینی برای خواندن'
