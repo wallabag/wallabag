@@ -69,6 +69,12 @@ You'll have this in return:
 
 We'll work with the ``access_token`` value in our next calls.
 
+Curl example:
+
+::
+
+    curl -s "https://localhost:8000/oauth/v2/token?grant_type=password&client_id=1_3o53gl30vhgk0c8ks4cocww08o84448osgo40wgw4gwkoo8skc&client_secret=636ocbqo978ckw0gsw4gcwwocg8044sco0w8w84cws48ggogs4&username=wallabag&password=wallabag"
+
 Getting existing entries
 ------------------------
 
@@ -119,6 +125,12 @@ returns:
     }
 
 The ``items`` array is empty.
+
+Curl example:
+
+::
+
+    curl --get "https://localhost:8000/api/entries.html?access_token=ZGJmNTA2MDdmYTdmNWFiZjcxOWY3MWYyYzkyZDdlNWIzOTU4NWY3NTU1MDFjOTdhMTk2MGI3YjY1ZmI2NzM5MA"
 
 Adding your first entry
 -----------------------
@@ -174,6 +186,12 @@ returns
 
 Now, if you execute the previous command (see **Get existing entries**), you'll have data.
 
+Curl example:
+
+::
+
+    curl "https://localhost:8000/api/entries.html?access_token=ZGJmNTA2MDdmYTdmNWFiZjcxOWY3MWYyYzkyZDdlNWIzOTU4NWY3NTU1MDFjOTdhMTk2MGI3YjY1ZmI2NzM5MA&url=http://www.numerama.com/tech/160115-le-pocket-libre-wallabag-fait-le-plein-de-fonctionnalites.html"
+
 Deleting an entry
 -----------------
 
@@ -226,6 +244,12 @@ returns
     }
 
 And if you want to list the existing entries (see **Get existing entries**), the array is empty.
+
+Curl example:
+
+::
+
+    curl --request DELETE "https://localhost:8000/api/entries/1.html?access_token=ZGJmNTA2MDdmYTdmNWFiZjcxOWY3MWYyYzkyZDdlNWIzOTU4NWY3NTU1MDFjOTdhMTk2MGI3YjY1ZmI2NzM5MA"
 
 Other methods
 -------------
