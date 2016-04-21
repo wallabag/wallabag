@@ -5,7 +5,7 @@ namespace Wallabag\CoreBundle\Twig;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Wallabag\CoreBundle\Repository\EntryRepository;
 
-class WallabagExtension extends \Twig_Extension
+class WallabagExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
 {
     private $tokenStorage;
     private $repository;
