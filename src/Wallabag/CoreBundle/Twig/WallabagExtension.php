@@ -2,8 +2,20 @@
 
 namespace Wallabag\CoreBundle\Twig;
 
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Wallabag\CoreBundle\Repository\EntryRepository;
+
 class WallabagExtension extends \Twig_Extension
 {
+    private $tokenStorage;
+    private $repository;
+
+    public function __construct(EntryRepository $repository = null, TokenStorageInterface $tokenStorage = null)
+    {
+        $this->repository = $repository;
+        $this->tokenStorage = $tokenStorage;
+    }
+
     public function getFilters()
     {
         return [
@@ -14,6 +26,27 @@ class WallabagExtension extends \Twig_Extension
     public function removeWww($url)
     {
         return preg_replace('/^www\./i', '', $url);
+    }
+
+    public function getGlobals()
+    {
+        $user = $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null;
+
+        if (null === $user || !is_object($user)) {
+            return array();
+        }
+
+        $unreadEntries = $this->repository->getBuilderForUnreadByUser($user->getId())->getQuery()->getResult();
+        $starredEntries = $this->repository->getBuilderForStarredByUser($user->getId())->getQuery()->getResult();
+        $archivedEntries = $this->repository->getBuilderForArchiveByUser($user->getId())->getQuery()->getResult();
+        $allEntries = $this->repository->getBuilderForAllByUser($user->getId())->getQuery()->getResult();
+
+        return array(
+            'unreadEntries' => count($unreadEntries),
+            'starredEntries' => count($starredEntries),
+            'archivedEntries' => count($archivedEntries),
+            'allEntries' => count($allEntries),
+        );
     }
 
     public function getName()
