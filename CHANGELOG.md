@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.0.2] - 2016-04-21
+
+### Added
+
+- [#1945](https://github.com/wallabag/wallabag/pull/1945) cURL examples in documentation about API (Dirk Deimeke)
+- [#1911](https://github.com/wallabag/wallabag/pull/1911) Add title hover on entry titles (Thomas Citharel)
+
+### Changed
+
+- [#1944](https://github.com/wallabag/wallabag/pull/1944), [#1953](https://github.com/wallabag/wallabag/pull/1953), [#1954](https://github.com/wallabag/wallabag/pull/1954) Due to branches renaming, update documentation and configuration (maxi62330, Nicolas Lœuillet)
+- [#1942](https://github.com/wallabag/wallabag/pull/1942) Optimize import (Nicolas Lœuillet)
+- [#1935](https://github.com/wallabag/wallabag/pull/1935) Update spanish translation (jami7)
+- [#1929](https://github.com/wallabag/wallabag/pull/1929) Change guid and link in RSS feeds to give original entry URL (Nicolas Lœuillet)
+- [#1918](https://github.com/wallabag/wallabag/pull/1918) Improve pagination when user has lot of entries (Nicolas Lœuillet)
+- [#1916](https://github.com/wallabag/wallabag/pull/1916) Change PHP arrays and move test parameters in a separated file (Jeremy Benoist)
+
+### Fixed
+
+- [#1957](https://github.com/wallabag/wallabag/pull/1957) Fix translation for `Go to your account` button (Nicolas Lœuillet)
+- [#1925](https://github.com/wallabag/wallabag/pull/1925) Redirect to homepage if refered is null (Nicolas Lœuillet)
+- [#1912](https://github.com/wallabag/wallabag/pull/1912) Fix 500 Internal Server Error -> "Setting piwik_enabled couldn't be found" (Jeremy Benoist)
+
 ## [2.0.1] - 2016-04-11
 ### Added
 
