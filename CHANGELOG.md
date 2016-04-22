@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.0.3] - 2016-04-22
+
+### Added
+
+- [#1962](https://github.com/wallabag/wallabag/pull/1962) cURL examples in documentation about API (Dirk Deimeke)
+
+### Fixed
+
+- Forgot `composer.lock` file in 2.0.2 release so some users may encounter `Fatal error: Out of memory` error during installation
+
 ## [2.0.2] - 2016-04-21
 
 ### Added
