@@ -69,7 +69,7 @@ You'll have this in return:
 
 We'll work with the ``access_token`` value in our next calls.
 
-Curl example:
+cURL example:
 
 ::
 
@@ -126,7 +126,7 @@ returns:
 
 The ``items`` array is empty.
 
-Curl example:
+cURL example:
 
 ::
 
@@ -186,7 +186,7 @@ returns
 
 Now, if you execute the previous command (see **Get existing entries**), you'll have data.
 
-Curl example:
+cURL example:
 
 ::
 
@@ -245,7 +245,7 @@ returns
 
 And if you want to list the existing entries (see **Get existing entries**), the array is empty.
 
-Curl example:
+cURL example:
 
 ::
 

@@ -7,7 +7,7 @@ Pré-requis
 ----------
 
 * wallabag fraichement installé et disponible à http://localhost:8000
-* ``httpie`` installé sur votre ordinateur (`voir le site du projet <https://github.com/jkbrzt/httpie>`__). Vous pouvez également adapter les commandes en utilisant curl ou wget. 
+* ``httpie`` installé sur votre ordinateur (`voir le site du projet <https://github.com/jkbrzt/httpie>`__). Vous pouvez également adapter les commandes en utilisant curl ou wget.
 * toutes les méthodes de l'API documentées ici http://localhost:8000/api/doc
 
 Créer un nouveau client d'API
@@ -69,6 +69,12 @@ Vous obtiendrez :
 
 Nous allons utiliser la valeur de ``access_token`` dans nos prochains appels.
 
+Exemple cURL :
+
+::
+
+    curl -s "https://localhost:8000/oauth/v2/token?grant_type=password&client_id=1_3o53gl30vhgk0c8ks4cocww08o84448osgo40wgw4gwkoo8skc&client_secret=636ocbqo978ckw0gsw4gcwwocg8044sco0w8w84cws48ggogs4&username=wallabag&password=wallabag"
+
 Récupérer les articles existants
 --------------------------------
 
@@ -119,6 +125,12 @@ retournera :
     }
 
 Le tableau ``items`` est vide.
+
+Exemple cURL :
+
+::
+
+    curl --get "https://localhost:8000/api/entries.html?access_token=ZGJmNTA2MDdmYTdmNWFiZjcxOWY3MWYyYzkyZDdlNWIzOTU4NWY3NTU1MDFjOTdhMTk2MGI3YjY1ZmI2NzM5MA"
 
 Créer votre premier article
 ---------------------------
@@ -174,6 +186,12 @@ retournera :
 
 Maintenant, si vous exécutez la précédente commande (voir **Récupérer les articles existants**), vous obtiendrez quelque chose.
 
+Exemple cURL :
+
+::
+
+    curl "https://localhost:8000/api/entries.html?access_token=ZGJmNTA2MDdmYTdmNWFiZjcxOWY3MWYyYzkyZDdlNWIzOTU4NWY3NTU1MDFjOTdhMTk2MGI3YjY1ZmI2NzM5MA&url=http://www.numerama.com/tech/160115-le-pocket-libre-wallabag-fait-le-plein-de-fonctionnalites.html"
+
 Supprimer un article
 --------------------
 
@@ -226,6 +244,12 @@ retournera :
     }
 
 Et si vous voulez voir la liste des articles existants (voir **Récupérer les articles existants**), le tableau sera vide.
+
+Exemple cURL :
+
+::
+
+    curl --request DELETE "https://localhost:8000/api/entries/1.html?access_token=ZGJmNTA2MDdmYTdmNWFiZjcxOWY3MWYyYzkyZDdlNWIzOTU4NWY3NTU1MDFjOTdhMTk2MGI3YjY1ZmI2NzM5MA"
 
 Autres méthodes
 ---------------
