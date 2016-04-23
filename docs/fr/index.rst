@@ -24,6 +24,7 @@ La documentation principale de cette application est découpée en plusieurs sec
    :maxdepth: 2
    :caption: Documentation utilisateur
 
+   user/faq
    user/installation
    user/migration
    user/create_account
