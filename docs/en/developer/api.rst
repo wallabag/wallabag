@@ -257,3 +257,12 @@ Other methods
 We won't write samples for each API method.
 
 Have a look on the listing here: http://localhost:8000/api/doc to know each method.
+
+Third resources
+---------------
+
+Some applications use our API. Here is a non-exhaustive list of them:
+
+- `Python API for wallabag
+<https://github.com/foxmask/wallabag_api>`__ by FoxMaSk, for his project `Trigger Happy
+<https://blog.trigger-happy.eu/>`__.
