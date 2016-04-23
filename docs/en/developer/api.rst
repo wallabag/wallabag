@@ -263,6 +263,4 @@ Third resources
 
 Some applications use our API. Here is a non-exhaustive list of them:
 
-- `Python API for wallabag
-<https://github.com/foxmask/wallabag_api>`__ by FoxMaSk, for his project `Trigger Happy
-<https://blog.trigger-happy.eu/>`__.
+- `Python API for wallabag <https://github.com/foxmask/wallabag_api>`_ by FoxMaSk, for his project `Trigger Happy <https://blog.trigger-happy.eu/>`_.
