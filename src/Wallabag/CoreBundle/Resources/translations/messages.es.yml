@@ -7,7 +7,7 @@ security:
         register: 'Registrarse'
         username: 'Nombre de usuario'
         password: 'Contraseña'
-        # cancel: 'Cancel'
+        cancel: 'Cancelar'
     resetting:
         description: "Introduzca su dirección del correo electrónico y le enviaremos las instrucciones para reiniciar la contraseña"
     register:
@@ -43,7 +43,7 @@ footer:
     wallabag:
         elsewhere: 'Lleve wallabag consigo'
         social: 'Social'
-        # powered_by: 'powered by'
+        powered_by: 'funciona por'
         about: 'Acerca de'
 
 config:
@@ -71,7 +71,7 @@ config:
     form_rss:
         description: 'Los feeds RSS de wallabag permiten leer los artículos guardados con su lector RSS favorito. Necesita generar un token primero'
         token_label: 'RSS token'
-        # no_token: 'No token'
+        no_token: 'No token'
         token_create: 'Crear token'
         token_reset: 'Reiniciar token'
         rss_links: 'URL de su feed RSS'
@@ -171,19 +171,19 @@ entry:
             filter: 'Filtrar'
     view:
         left_menu:
-            # back_to_top: 'Back to top'
-            back_to_homepage: 'Volver'
+            back_to_top: 'Regrese al principio'
+            back_to_homepage: 'Regrese a la página principal'
             set_as_read: 'Marcar como leído'
-            # set_as_unread: 'Mark as unread'
+            set_as_unread: 'Marcar como no leído'
             set_as_favorite: 'Marcar como favorito'
             view_original_article: 'Artículo original'
             re_fetch_content: 'Redescargar el contenido'
             delete: 'Suprimir'
             add_a_tag: 'Añadir una etiqueta'
             share_content: 'Compartir'
-            share_email_label: 'Direccion e-mail'
+            share_email_label: 'Dirección e-mail'
             download: 'Descargar'
-            # print: 'Print'
+            print: 'Imprimir'
             problem:
                 label: '¿Algún problema?'
                 description: '¿Este artículo no se muestra bien?'
@@ -196,7 +196,7 @@ entry:
         form_new:
             url_label: Url
     edit:
-        page_title: 'Editar una artículo'
+        page_title: 'Editar un artículo'
         title_label: 'Título'
         url_label: 'Url'
         is_public_label: 'Es Público'
@@ -220,14 +220,14 @@ about:
     getting_help:
         documentation: 'Documentación'
         bug_reports: 'Reporte de errores'
-        support: '<a href="https://support.wallabag.org">En nuestra web de soporte website</a> o <a href="https://github.com/wallabag/wallabag/issues">en GitHub</a>'
+        support: '<a href="https://support.wallabag.org">En nuestra web de apoyo website</a> o <a href="https://github.com/wallabag/wallabag/issues">en GitHub</a>'
     helping:
         description: 'wallabag es libre y gratuito. Usted puede ayudarnos :'
         by_contributing: 'contribuyendo al proyecto :'
         by_contributing_2: 'nuestras necesidades están en un ticket'
         by_paypal: 'via Paypal'
     contributors:
-        description: 'Gradias a los colaboradores de la aplicación web de wallabag'
+        description: 'Gracias a los colaboradores de la aplicación web de wallabag'
     third_party:
         description: 'Aquí está la lista de las dependencias utilizadas por wallabag (con sus licencias) :'
         package: 'Paquete'
@@ -259,24 +259,24 @@ quickstart:
     intro:
         title: 'Bienvenido a wallabag !'
         paragraph_1: "Le acompañaremos a su visita de wallabag y le mostraremos algunas características que le pueden interesar."
-        paragraph_2: '¡Siganos!'
+        paragraph_2: '¡Síganos!'
     configure:
         title: 'Configure la aplicación'
-        language: 'Cambie el idoma y el diseño de la aplicación'
+        language: 'Cambie el idioma y el diseño de la aplicación'
         rss: 'Activar los feeds RSS'
-        # tagging_rules: 'Write rules to automatically tag your articles'
+        tagging_rules: 'Escribir reglas para etiquetear automaticamente sus artículos'
     admin:
-        # title: 'Administration'
-        # description: 'As an administrator, you have privileges on wallabag. You can:'
-        # new_user: 'Create a new user'
-        # analytics: 'Configure analytics'
-        # sharing: 'Enable some parameters about article sharing'
-        # export: 'Configure export'
-        # import: 'Configure import'
+        title: 'Administración'
+        description: 'Como administrador, tiene privilegios por wallabag. Se puede:'
+        new_user: 'Crear un nuevo usuario'
+        analytics: 'Configure analíticas'
+        sharing: 'Active unos parámetros de compartir artículos'
+        export: 'Configure exportación'
+        import: 'Configure importación'
     first_steps:
-        title: 'Prieros pasos'
+        title: 'Primeros pasos'
         new_article: 'Guarde su primer artículo'
-        unread_articles: '¡Y clasifiquelo!'
+        unread_articles: '¡Y clasifíquelo!'
     migrate:
         title: 'Migrar de un servicio existente'
         description: "¿Está usando otro servicio? Le ayudaremos a migrar sus datos a wallabag."
@@ -284,18 +284,18 @@ quickstart:
         wallabag_v1: 'Migrar desde wallabag v1'
         wallabag_v2: 'Migrar desde wallabag v2'
     developer:
-        # title: 'Developers'
-        # create_application: 'Create your third application'
+        title: 'Promotores'
+        create_application: 'Cree su tercera aplicación'
     docs:
         title: 'Documentación completa'
-        # annotate: 'Annotate your article'
+        annotate: 'Anote su artículo'
         export: 'Convierta sus artículos a ePub o a PDF'
         search_filters: 'Aprenda a utilizar el buscador y los filtros para encontrar el artículo que le interese'
-        # fetching_errors: 'What can I do if an article encounters errors during fetching?'
+        fetching_errors: '¿Qué puedo hacer si un artículo encuentra errores por la búsqueda?'
         all_docs: '¡Y muchos más artículos!'
     support:
-        title: 'Soporte'
-        description: 'Sí necesita ayuda, estamos disponibles para usted.'
+        title: 'Apoyo'
+        description: 'Si necesita ayuda, estamos disponibles para usted.'
         github: 'En GitHub'
         email: 'Por email'
         gitter: 'En Gitter'
@@ -303,7 +303,7 @@ quickstart:
 tag:
     page_title: 'Etiquetas'
     list:
-        number_on_the_page: '{0} No hay ningun etiqueta.|{1} Hay un etiqueta.|]1,Inf[ Hay %count% etiquetas.'
+        number_on_the_page: '{0} No hay ninguna etiqueta.|{1} Hay una etiqueta.|]1,Inf[ Hay %count% etiquetas.'
 
 import:
     page_title: 'Importar'
@@ -311,8 +311,8 @@ import:
     action:
         import_contents: 'Importar los contenidos'
     form:
-        # mark_as_read_title: 'Mark all as read?'
-        # mark_as_read_label: 'Mark all imported entries as read'
+        mark_as_read_title: '¿Marcar todos como leídos?'
+        mark_as_read_label: 'Marcar todos artículos importados como leídos'
         file_label: 'Fichero'
         save_label: 'Importar el fichero'
     pocket:
@@ -321,78 +321,78 @@ import:
         config_missing:
             description: "La importación de Pocket no está configurada."
             admin_message: 'Debe definir %keyurls%una clava del API Pocket%keyurle%.'
-            user_message: 'El administrador de vuestro servidor debe definir una clave API Pocket.'
-        authorize_message: 'Puedes importar sus datos desde su cuenta de Pocket. Sólo tienes que pulsar en el botón para autrizar que wallabag se conecte a getpocket.com.'
-        connect_to_pocket: 'Conectese a Pocket para importar los datos'
+            user_message: 'El administrador de su servidor debe definir una clave API Pocket.'
+        authorize_message: 'Puede importar sus datos desde su cuenta de Pocket. Sólo tiene que oprimir el botón para autorizar que wallabag se conecte a getpocket.com.'
+        connect_to_pocket: 'Conéctese a Pocket para importar los datos'
     wallabag_v1:
         page_title: 'Importar > Wallabag v1'
-        description: 'Va a importar sus artículos de wallabag v1. En su configuración de wallabag v1, pulse sobre "Exportar JSON" dentro de la sección "Exportar sus datos de wallabag". Usted tendrá un fichero "wallabag-export-1-xxxx-xx-xx.json".'
-        how_to: 'Seleccione el fichero de su exportación de wallabag v1 y puelse en el botón para subirla y importarla.'
+        description: 'Va a importar sus artículos de wallabag v1. En su configuración de wallabag v1, oprima "Exportar JSON" dentro de la sección "Exportar sus datos de wallabag". Usted tendrá un fichero "wallabag-export-1-xxxx-xx-xx.json".'
+        how_to: 'Seleccione el fichero de su exportación de wallabag v1 y oprima el botón para subirlo y importarlo.'
     wallabag_v2:
         page_title: 'Importar > Wallabag v2'
-        description: 'Va a importar sus artículos de otra instancia de wallabag v2. Vaya a Todos los artículos, entonces, en la barra lateral, clickee en "JSON". Usted tendrá un fichero "All articles.json"'
+        description: 'Va a importar sus artículos de otra instancia de wallabag v2. Vaya a Todos los artículos, entonces, en la barra lateral, oprima en "JSON". Usted tendrá un fichero "All articles.json"'
 
 developer:
-    # page_title: 'Developer'
-    # welcome_message: 'Welcome to the wallabag API'
-    # documentation: 'Documentation'
-    # how_to_first_app: 'How to create my first application'
-    # full_documentation: 'View full API documentation'
-    # list_methods: 'List API methods'
-    # clients:
-    #     title: 'Clients'
-    #     create_new: 'Create a new client'
-    # existing_clients:
-    #     title: 'Existing clients'
-    #     field_id: 'Client ID'
-    #     field_secret: 'Client secret'
-    #     field_uris: 'Redirect URIs'
-    #     field_grant_types: 'Grant type allowed'
-    #     no_client: 'No client yet.'
-    # remove:
-    #     warn_message_1: 'You have the ability to remove this client. This action is IRREVERSIBLE !'
-    #     warn_message_2: "If you remove it, every app configured with that client won't be able to auth on your wallabag."
-    #     action: 'Remove this client'
-    # client:
-    #     page_title: 'Developer > New client'
-    #     page_description: 'You are about to create a new client. Please fill the field below for the redirect URI of your application.'
-    #     form:
-    #         redirect_uris_label: 'Redirect URIs'
-    #         save_label: 'Create a new client'
-    #     action_back: 'Back'
-    # client_parameter:
-    #     page_title: 'Developer > Client parameters'
-    #     page_description: 'Here are your client parameters.'
-    #     field_id: 'Client ID'
-    #     field_secret: 'Client secret'
-    #     back: 'Back'
-    #     read_howto: 'Read the howto "Create my first application"'
-    # howto:
-    #     page_title: 'Developer > How to create my first application'
-    #     description:
-    #         paragraph_1: 'The following commands make use of the <a href="https://github.com/jkbrzt/httpie">HTTPie library</a>. Make sure it is installed on your system before using it.'
-    #         paragraph_2: 'You need a token to communicate between your 3rd application and wallabag API.'
-    #         paragraph_3: 'To create this token, you need <a href="%link%">to create a new client</a>.'
-    #         paragraph_4: 'Now, create your token (replace client_id, client_secret, username and password with the good values):'
-    #         paragraph_5: 'The API will return a response like this:'
-    #         paragraph_6: 'The access_token is useful to do a call to the API endpoint. For example:'
-    #         paragraph_7: 'This call will return all the entries for your user.'
-    #         paragraph_8: 'If you want to see all the API endpoints, you can have a look <a href="%link%">to our API documentation</a>.'
-    #     back: 'Back'
+    page_title: 'Promotor'
+    welcome_message: 'Bienvenido a wallabag API'
+    documentation: 'Documentación'
+    how_to_first_app: 'Cómo crear mi primera aplicación'
+    full_documentation: 'Ver documentación de API entera'
+    list_methods: 'Hacer una lista de métodos API'
+    clients:
+        title: 'Clientes'
+        create_new: 'Crear un nuevo cliente'
+    existing_clients:
+         title: 'Clientes actuales'
+         field_id: 'identificación del cliente'
+         field_secret: 'Cliente secreto'
+         field_uris: 'Redirigir los URI'
+         field_grant_types: 'Conceder manera permitida'
+         no_client: 'No cliente todavía.'
+    remove:
+         warn_message_1: 'Se puede quitar este cliente. ¡Está acción no se puede ser irreversible !'
+         warn_message_2: "Si lo elimine, cada aplicación configurada con ese cliente no se puede ser autorizada por su wallbag."
+         action: 'Quite este cliente'
+    client:
+         page_title: 'Promotor > Nuevo cliente'
+         page_description: 'Va a crear un nuevo cliente. Por favor, llene el campo abajo para URI redirigido de su aplicación.'
+         form:
+             redirect_uris_label: 'los URI redirigidos'
+             save_label: 'Crear un nuevo cliente'
+         action_back: 'Atrás'
+     client_parameter:
+         page_title: 'Promotor > Parámetros del cliente'
+         page_description: 'Aquí hay sus parámetros del cliente.'
+         field_id: 'Identificación del cliente'
+         field_secret: 'Cliente secreto'
+         back: 'Atrás'
+         read_howto: 'Leer el howto "Crear mi primera aplicación"'
+     howto:
+         page_title: 'Promotor > Cómo crear mi primera aplicación'
+         description:
+             paragraph_1: 'Los siguientes comandos se usan el <a href="https://github.com/jkbrzt/httpie">HTTPie library</a>. Esté seguro de que se instalen en sus sistema antes de usarlos.'
+             paragraph_2: 'Necesita un token para comunicar entre su tercera aplicación y wallabag API.'
+             paragraph_3: 'Para crear este token, necesita <a href="%link%">to create a new client</a>.'
+             paragraph_4: 'Ahora, cree su token (reemplace cliente_id, cliente_secreto, usuario y contraseñ con las buenas entradas):'
+             paragraph_5: 'Este API devolverá una respuestas así:'
+             paragraph_6: 'El acceso_token es útil para hacer una llamada al final API. Por ejempolo:'
+             paragraph_7: 'Esta llamada devolverá todos los artículos para su usuario.'
+             paragraph_8: 'Si quiere ver todos los fines de API, se puede ver <a href="%link%">a nuestra documentación API</a>.'
+         back: 'Atrás'
 
 validator:
     password_must_match: 'Las contraseñas no coinciden'
     password_too_short: 'La contraseña debe tener al menos 8 carácteres'
-    # password_wrong_value: 'Wrong value for your current password'
-    # item_per_page_too_high: 'This will certainly kill the app'
-    # rss_limit_too_hight: 'This will certainly kill the app'
+     password_wrong_value: 'Entrada equivocada para su contraseña actual'
+     item_per_page_too_high: 'Esto matará la aplicación'
+     rss_limit_too_hight: 'Esto matará la aplicación'
 
 flashes:
     config:
         notice:
             config_saved: 'Configuración guardada. Algunos parámetros serán recargados cuando se vuelva a conectar.'
             password_updated: 'Contraseña actualizada'
-            password_not_updated_demo: "En modo demo, no puedes cambiar la contraseña del usuario."
+            password_not_updated_demo: "En modo demo, no puede cambiar la contraseña del usuario."
             user_updated: 'Su información personal ha sido actualizada'
             rss_updated: 'La configuración de los feeds RSS ha sido actualizada'
             tagging_rules_updated: 'Regla de etiquetado borrada'
@@ -401,11 +401,11 @@ flashes:
             rss_token_updated: 'RSS token actualizado'
     entry:
         notice:
-            # entry_already_saved: 'Entry already saved on %date%'
-            # entry_saved: 'Entry saved'
-            # entry_updated: 'Entry updated'
-            # entry_reloaded: 'Entry reloaded'
-            # entry_reload_failed: 'Failed to reload entry'
+            entry_already_saved: 'Entrada ya guardada por %fecha%'
+            entry_saved: 'Entrada guardada'
+            entry_updated: 'Entrada actualizada'
+            entry_reloaded: 'Entrada recargada'
+            entry_reload_failed: 'Entrada recargada reprobada'
             entry_archived: 'Artículo archivado'
             entry_unarchived: 'Artículo desarchivado'
             entry_starred: 'Artículo guardado en los favoritos'
@@ -416,10 +416,10 @@ flashes:
             tag_added: 'Etiqueta añadida'
     import:
         notice:
-            # failed: 'Import failed, please try again.'
-            # failed_on_file: 'Error while processing import. Please verify your import file.'
-            # summary: 'Import summary: %imported% imported, %skipped% already saved.'
+             failed: 'Importación reprobada, por favor inténtelo de nuevo.'
+             failed_on_file: 'Se ocurre un error por procesar importación. Por favor verifique su archivo importado.'
+             summary: 'Resúmen importado: %importado% importado, %saltados% ya guardado.'
     developer:
         notice:
-            # client_created: 'New client created.'
-            # client_deleted: 'Client deleted'
+             client_created: 'Nuevo cliente creado.'
+             client_deleted: 'Cliente suprimido'
