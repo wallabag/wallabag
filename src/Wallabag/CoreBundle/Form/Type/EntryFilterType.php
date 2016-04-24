@@ -38,6 +38,10 @@ class EntryFilterType extends AbstractType
                 'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
                     $value = $values['value'];
 
+                    if (null === $value['left_number'][0] || null === $value['right_number'][0]) {
+                        return;
+                    }
+
                     $min = (int) ($value['left_number'][0] * $this->user->getConfig()->getReadingSpeed());
                     $max = (int) ($value['right_number'][0] * $this->user->getConfig()->getReadingSpeed());
 
