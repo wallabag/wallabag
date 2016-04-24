@@ -343,49 +343,49 @@ developer:
         title: 'Clientes'
         create_new: 'Crear un nuevo cliente'
     existing_clients:
-         title: 'Clientes actuales'
-         field_id: 'identificación del cliente'
-         field_secret: 'Cliente secreto'
-         field_uris: 'Redirigir los URI'
-         field_grant_types: 'Conceder manera permitida'
-         no_client: 'No cliente todavía.'
+        title: 'Clientes actuales'
+        field_id: 'identificación del cliente'
+        field_secret: 'Cliente secreto'
+        field_uris: 'Redirigir los URI'
+        field_grant_types: 'Conceder manera permitida'
+        no_client: 'No cliente todavía.'
     remove:
-         warn_message_1: 'Se puede quitar este cliente. ¡Está acción no se puede ser irreversible !'
-         warn_message_2: "Si lo elimine, cada aplicación configurada con ese cliente no se puede ser autorizada por su wallbag."
-         action: 'Quite este cliente'
+        warn_message_1: 'Se puede quitar este cliente. ¡Está acción no se puede ser irreversible !'
+        warn_message_2: "Si lo elimine, cada aplicación configurada con ese cliente no se puede ser autorizada por su wallbag."
+        action: 'Quite este cliente'
     client:
-         page_title: 'Promotor > Nuevo cliente'
-         page_description: 'Va a crear un nuevo cliente. Por favor, llene el campo abajo para URI redirigido de su aplicación.'
-         form:
-             redirect_uris_label: 'los URI redirigidos'
-             save_label: 'Crear un nuevo cliente'
-         action_back: 'Atrás'
-     client_parameter:
-         page_title: 'Promotor > Parámetros del cliente'
-         page_description: 'Aquí hay sus parámetros del cliente.'
-         field_id: 'Identificación del cliente'
-         field_secret: 'Cliente secreto'
-         back: 'Atrás'
-         read_howto: 'Leer el howto "Crear mi primera aplicación"'
-     howto:
-         page_title: 'Promotor > Cómo crear mi primera aplicación'
-         description:
-             paragraph_1: 'Los siguientes comandos se usan el <a href="https://github.com/jkbrzt/httpie">HTTPie library</a>. Esté seguro de que se instalen en sus sistema antes de usarlos.'
-             paragraph_2: 'Necesita un token para comunicar entre su tercera aplicación y wallabag API.'
-             paragraph_3: 'Para crear este token, necesita <a href="%link%">to create a new client</a>.'
-             paragraph_4: 'Ahora, cree su token (reemplace cliente_id, cliente_secreto, usuario y contraseñ con las buenas entradas):'
-             paragraph_5: 'Este API devolverá una respuestas así:'
-             paragraph_6: 'El acceso_token es útil para hacer una llamada al final API. Por ejempolo:'
-             paragraph_7: 'Esta llamada devolverá todos los artículos para su usuario.'
-             paragraph_8: 'Si quiere ver todos los fines de API, se puede ver <a href="%link%">a nuestra documentación API</a>.'
-         back: 'Atrás'
+        page_title: 'Promotor > Nuevo cliente'
+        page_description: 'Va a crear un nuevo cliente. Por favor, llene el campo abajo para URI redirigido de su aplicación.'
+        form:
+            redirect_uris_label: 'los URI redirigidos'
+            save_label: 'Crear un nuevo cliente'
+        action_back: 'Atrás'
+    client_parameter:
+        page_title: 'Promotor > Parámetros del cliente'
+        page_description: 'Aquí hay sus parámetros del cliente.'
+        field_id: 'Identificación del cliente'
+        field_secret: 'Cliente secreto'
+        back: 'Atrás'
+        read_howto: 'Leer el howto "Crear mi primera aplicación"'
+    howto:
+        page_title: 'Promotor > Cómo crear mi primera aplicación'
+        description:
+            paragraph_1: 'Los siguientes comandos se usan el <a href="https://github.com/jkbrzt/httpie">HTTPie library</a>. Esté seguro de que se instalen en sus sistema antes de usarlos.'
+            paragraph_2: 'Necesita un token para comunicar entre su tercera aplicación y wallabag API.'
+            paragraph_3: 'Para crear este token, necesita <a href="%link%">to create a new client</a>.'
+            paragraph_4: 'Ahora, cree su token (reemplace cliente_id, cliente_secreto, usuario y contraseñ con las buenas entradas):'
+            paragraph_5: 'Este API devolverá una respuestas así:'
+            paragraph_6: 'El acceso_token es útil para hacer una llamada al final API. Por ejempolo:'
+            paragraph_7: 'Esta llamada devolverá todos los artículos para su usuario.'
+            paragraph_8: 'Si quiere ver todos los fines de API, se puede ver <a href="%link%">a nuestra documentación API</a>.'
+        back: 'Atrás'
 
 validator:
     password_must_match: 'Las contraseñas no coinciden'
     password_too_short: 'La contraseña debe tener al menos 8 carácteres'
-     password_wrong_value: 'Entrada equivocada para su contraseña actual'
-     item_per_page_too_high: 'Esto matará la aplicación'
-     rss_limit_too_hight: 'Esto matará la aplicación'
+    password_wrong_value: 'Entrada equivocada para su contraseña actual'
+    item_per_page_too_high: 'Esto matará la aplicación'
+    rss_limit_too_hight: 'Esto matará la aplicación'
 
 flashes:
     config:
@@ -421,5 +421,5 @@ flashes:
              summary: 'Resúmen importado: %importado% importado, %saltados% ya guardado.'
     developer:
         notice:
-             client_created: 'Nuevo cliente creado.'
-             client_deleted: 'Cliente suprimido'
+            client_created: 'Nuevo cliente creado.'
+            client_deleted: 'Cliente suprimido'
