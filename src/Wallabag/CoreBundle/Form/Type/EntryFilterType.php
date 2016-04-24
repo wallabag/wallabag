@@ -35,6 +35,16 @@ class EntryFilterType extends AbstractType
     {
         $builder
             ->add('readingTime', NumberRangeFilterType::class, [
+                'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
+                    $value = $values['value'];
+
+                    $min = (int) ($value['left_number'][0] * $this->user->getConfig()->getReadingSpeed());
+                    $max = (int) ($value['right_number'][0] * $this->user->getConfig()->getReadingSpeed());
+
+                    $expression = $filterQuery->getExpr()->between($field, $min, $max);
+
+                    return $filterQuery->createCondition($expression);
+                },
                 'label' => 'entry.filters.reading_time.label',
             ])
             ->add('createdAt', DateRangeFilterType::class, [
