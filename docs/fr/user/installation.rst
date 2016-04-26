@@ -161,13 +161,13 @@ Droits d'accès aux dossiers du projet
 Environnement de test
 ~~~~~~~~~~~~~~~~~~~~~
 
-Quand nous souhaitons juste tester Wallabag, nous lançons simplement la commande  ``php bin/console server:run --env=prod`` pour démarrer l'instance Wallabag et tout se passe correctement car l'utilisateur qui a démarré le projet à accès naturellement au repertoire courant, tout va bien.
+Quand nous souhaitons juste tester wallabag, nous lançons simplement la commande  ``php bin/console server:run --env=prod`` pour démarrer l'instance wallabag et tout se passe correctement car l'utilisateur qui a démarré le projet a accès naturellement au repertoire courant, tout va bien.
 
 
 Environnement de production 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Dès lors que nous utilisons Apache ou Nginx pour accéder à notre instance Wallabag, et non plus la commande ``php bin/console server:run --env=prod`` pour la démarrer, il faut prendre garde à octroyer les bons droits aux bons dossiers afin de préserver la sécurité de l'ensemble des fichiers fourni par le projet.
+Dès lors que nous utilisons Apache ou Nginx pour accéder à notre instance wallabag, et non plus la commande ``php bin/console server:run --env=prod`` pour la démarrer, il faut prendre garde à octroyer les bons droits aux bons dossiers afin de préserver la sécurité de l'ensemble des fichiers fournis par le projet.
 
 Aussi, le dossier, connu sous le nom de ``DocumentRoot`` (pour apache) ou ``root`` (pour Nginx), doit être impérativement accessible par l'utilisateur de Apache ou Nginx. Le nom de cet utilisateur est généralement ``www-data``, ``apache`` ou ``nobody`` (selon les systèmes linux utilisés).
 

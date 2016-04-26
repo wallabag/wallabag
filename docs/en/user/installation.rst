@@ -156,8 +156,6 @@ After reloading or restarting nginx, you should now be able to access wallabag a
     When you want to import large file into wallabag, you need to add this line in your nginx configuration ``client_max_body_size XM; # allows file uploads up to X megabytes``.
 
 
-
-
 Rights access to the folders of the project
 -------------------------------------------
 
@@ -165,17 +163,17 @@ Rights access to the folders of the project
 Test Environment
 ~~~~~~~~~~~~~~~~
 
-When we just want to test Wallabag, we just run the command ``php bin/console server:run --env=prod`` to start our Wallabag instance and everything will go smoothly because the user who started the project can access to the current folder naturally, without any problem.
+When we just want to test wallabag, we just run the command ``php bin/console server:run --env=prod`` to start our wallabag instance and everything will go smoothly because the user who started the project can access to the current folder naturally, without any problem.
 
 
 Production Environment
 ~~~~~~~~~~~~~~~~~~~~~~
 
-As soon as we use Apache or Nginx to access to our Wallabag instance, and not from the command  ``php bin/console server:run --env=prod`` to start it, we should take care to grant the good rights on the good folders to keep safe all the folders of the project.
+As soon as we use Apache or Nginx to access to our wallabag instance, and not from the command  ``php bin/console server:run --env=prod`` to start it, we should take care to grant the good rights on the good folders to keep safe all the folders of the project.
 
 To do so, the folder name, known as ``DocumentRoot`` (for apache) or ``root`` (for Nginx), has to be absolutely accessible by the Apache/Nginx user. Its name is generally ``www-data``, ``apache`` or ``nobody`` (depending on linux system used).
 
-So the folder ``/var/www/wallabag/web`` has to be accessible by this last one. But this could be not enough if we just care about this folder, because we could meet a blank page or get an error 500 when trying to access to the home page of the project.
+So the folder ``/var/www/wallabag/web`` has to be accessible by this last one. But this could be not enough if we just care about this folder, because we could meet a blank page or get an error 500 when trying to access to the homepage of the project.
 
 This is due to the fact that we will need to grant the same rights access on the folder ``/var/www/wallabag/var`` like those we gave on the folder ``/var/www/wallabag/web``. Thus, we fix this problem with the following command:
 
