@@ -13,10 +13,12 @@ class ImportCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('wallabag:import-v1')
+            ->setName('wallabag:import')
             ->setDescription('Import entries from a JSON export from a wallabag v1 instance')
             ->addArgument('userId', InputArgument::REQUIRED, 'User ID to populate')
             ->addArgument('filepath', InputArgument::REQUIRED, 'Path to the JSON file')
+            ->addOption('importer', null, InputArgument::OPTIONAL, 'The importer to use: v1 or v2', 'v1')
+            ->addOption('markAsRead', null, InputArgument::OPTIONAL, 'Mark all entries as read: true/false', false)
         ;
     }
 
@@ -35,6 +37,15 @@ class ImportCommand extends ContainerAwareCommand
         }
 
         $wallabag = $this->getContainer()->get('wallabag_import.wallabag_v1.import');
+
+        if ('v2' === $input->getOption('importer')) {
+            $wallabag = $this->getContainer()->get('wallabag_import.wallabag_v2.import');
+        }
+
+        if ('yes' === $input->getOption('markAsRead')) {
+            $wallabag->setMarkAsRead(true);
+        }
+
         $res = $wallabag
             ->setUser($user)
             ->setFilepath($input->getArgument('filepath'))
