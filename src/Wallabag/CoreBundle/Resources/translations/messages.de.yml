@@ -187,6 +187,7 @@ entry:
             add_a_tag: 'Tag hinzufügen'
             share_content: 'Teilen'
             share_email_label: 'E-Mail'
+            # public_link: 'public link'
             download: 'Herunterladen'
             print: 'Drucken'
             problem:

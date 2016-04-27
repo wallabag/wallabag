@@ -187,6 +187,7 @@ entry:
             add_a_tag: 'Tliføj et tag'
             share_content: 'Deling'
             # share_email_label: 'Email'
+            # public_link: 'public link'
             download: 'Download'
             # print: 'Print'
             problem:

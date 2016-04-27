@@ -187,6 +187,7 @@ entry:
             add_a_tag: 'Bir etiket ekle'
             share_content: 'Paylaş'
             share_email_label: 'E-posta'
+            # public_link: 'public link'
             download: 'İndir'
             # print: 'Print'
             problem:

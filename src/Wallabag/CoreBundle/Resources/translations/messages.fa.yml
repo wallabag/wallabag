@@ -187,6 +187,7 @@ entry:
             add_a_tag: 'افزودن برچسب'
             share_content: 'هم‌رسانی'
             share_email_label: 'نشانی ایمیل'
+            # public_link: 'public link'
             download: 'بارگیری'
             print: 'چاپ'
             problem:

@@ -187,6 +187,7 @@ entry:
             add_a_tag: 'Ajustar una etiqueta'
             share_content: 'Partatjar'
             share_email_label: 'Corrièl'
+            # public_link: 'public link'
             download: 'Telecargar'
             print: 'Imprimir'
             problem:
