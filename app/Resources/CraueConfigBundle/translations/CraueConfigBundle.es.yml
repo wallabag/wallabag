@@ -1,6 +1,6 @@
-download_pictures: Descagar imagenes
+download_pictures: Descargar imágenes
 carrot: Activar compartir con Carrot
-diaspora_url: Diaspora URL, si el servicio esta activado
+diaspora_url: Diaspora URL, si el servicio está activado
 export_epub: Activar exportación a ePub
 export_mobi: Activar exportación a .mobi
 export_pdf: Activar exportación a PDF
@@ -14,7 +14,7 @@ share_diaspora: Activar compartir con Diaspora
 share_mail: Activar compartir con email
 share_shaarli: Activar compartir con Shaarli
 share_twitter: Activar compartir con Twitter
-show_printlink: Mostrar un link para imprimir contenido
+show_printlink: Mostrar un enlace para imprimir contenido
 wallabag_support_url: URL de soporte de wallabag
 wallabag_url: URL de *tu* instancia de wallabag
 entry: "artículo"
