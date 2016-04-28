@@ -18,7 +18,7 @@ class ImportCommand extends ContainerAwareCommand
             ->addArgument('userId', InputArgument::REQUIRED, 'User ID to populate')
             ->addArgument('filepath', InputArgument::REQUIRED, 'Path to the JSON file')
             ->addOption('importer', null, InputArgument::OPTIONAL, 'The importer to use: v1 or v2', 'v1')
-            ->addOption('markAsRead', null, InputArgument::OPTIONAL, 'Mark all entries as read: true/false', false)
+            ->addOption('markAsRead', null, InputArgument::OPTIONAL, 'Mark all entries as read', false)
         ;
     }
 
@@ -42,9 +42,7 @@ class ImportCommand extends ContainerAwareCommand
             $wallabag = $this->getContainer()->get('wallabag_import.wallabag_v2.import');
         }
 
-        if ('yes' === $input->getOption('markAsRead')) {
-            $wallabag->setMarkAsRead(true);
-        }
+        $wallabag->setMarkAsRead($input->getOption('markAsRead'));
 
         $res = $wallabag
             ->setUser($user)
