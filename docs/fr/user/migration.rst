@@ -38,8 +38,8 @@ Depuis votre nouvelle instance de wallabag, créez votre compte utilisateur puis
 .. note::
     S'il vous arrive des problèmes durant l'export ou l'import, n'hésitez pas à `demander de l'aide <https://www.wallabag.org/pages/support.html>`__.
 
-Import via via la ligne de commande (CLI)
------------------------------------------
+Import via la ligne de commande (CLI)
+-------------------------------------
 
 Si vous avez accès à la ligne de commandes de votre serveur web, vous pouvez exécuter cette commande pour import votre fichier wallabag v1 :
 
@@ -52,7 +52,7 @@ Remplacez les valeurs :
 * ``1`` est l'identifiant de votre utilisateur en base (l'ID de votre premier utilisateur créé sur wallabag est 1)
 * ``~/Downloads/wallabag-export-1-2016-04-05.json`` est le chemin de votre export wallabag v1
 
-Si vous voulez marquer tous ces articles comme lus, vous pouvez ajouter l'option ``--markAsRead=yes``.
+Si vous voulez marquer tous ces articles comme lus, vous pouvez ajouter l'option ``--markAsRead``.
 
 Pour importer un fichier wallabag v2, vous devez ajouter l'option ``--importer=v2``.
 
