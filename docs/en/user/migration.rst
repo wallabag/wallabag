@@ -52,7 +52,7 @@ Please replace values:
 * ``1`` is the user identifier in database (The ID of the first user created on wallabag is 1)
 * ``~/Downloads/wallabag-export-1-2016-04-05.json`` is the path of your wallabag v1 export
 
-If you want to mark all these entries as read, you can add the ``--markAsRead=yes`` option.
+If you want to mark all these entries as read, you can add the ``--markAsRead`` option.
 
 To import a wallabag v2 file, you need to add the option ``--importer=v2``.
 
