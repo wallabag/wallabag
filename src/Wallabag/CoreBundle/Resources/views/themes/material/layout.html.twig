@@ -40,16 +40,16 @@
             {% set currentRoute = app.request.attributes.get('_route') %}
 
             <li class="bold {% if currentRoute == 'unread' or currentRoute == 'homepage' %}active{% endif %}">
-                <a class="waves-effect" href="{{ path('unread') }}">{{ 'menu.left.unread'|trans }}</a>
+                <a class="waves-effect" href="{{ path('unread') }}">{{ 'menu.left.unread'|trans }} <span class="numberItems grey-text">{{ unreadEntries }}</span></a>
             </li>
             <li class="bold {% if currentRoute == 'starred' %}active{% endif %}">
-                <a class="waves-effect" href="{{ path('starred') }}">{{ 'menu.left.starred'|trans }}</a>
+                <a class="waves-effect" href="{{ path('starred') }}">{{ 'menu.left.starred'|trans }} <span class="numberItems grey-text">{{ starredEntries }}</span></a>
             </li>
             <li class="bold {% if currentRoute == 'archive' %}active{% endif %}">
-                <a class="waves-effect" href="{{ path('archive') }}">{{ 'menu.left.archive'|trans }}</a>
+                <a class="waves-effect" href="{{ path('archive') }}">{{ 'menu.left.archive'|trans }} <span class="numberItems grey-text">{{ archivedEntries }}</span></a>
             </li>
             <li class="bold border-bottom {% if currentRoute == 'all' %}active{% endif %}">
-                <a class="waves-effect" href="{{ path('all') }}">{{ 'menu.left.all_articles'|trans }}</a>
+                <a class="waves-effect" href="{{ path('all') }}">{{ 'menu.left.all_articles'|trans }} <span class="numberItems grey-text">{{ allEntries }}</span></a>
             </li>
             <li class="bold border-bottom {% if currentRoute == 'tags' %}active{% endif %}">
                 <a class="waves-effect" href="{{ path('tag') }}">{{ 'menu.left.tags'|trans }}</a>
