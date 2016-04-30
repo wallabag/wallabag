@@ -16,7 +16,7 @@ Si vous utilisiez wallabag v1.x, vous devez exporter vos données avant de migre
 .. note::
     S'il vous arrive des problèmes durant l'export ou l'import, n'hésitez pas à `demander de l'aide <https://www.wallabag.org/pages/support.html>`__.
 
-Une fois que vous avez récupéré le fichier json contenant vos données, vous pouvez installer wallabag v2 si c'est nécessaire en suivant `la procédure standard <http://doc.wallabag.org/fr/v2/user/installation.html>`__.
+Une fois que vous avez récupéré le fichier json contenant vos données, vous pouvez installer wallabag v2 si c'est nécessaire en suivant `la procédure standard <http://doc.wallabag.org/fr/master/user/installation.html>`__.
 
 Une fois que vous avez créé un compte utilisateur sur votre nouvelle instance de wallabag v2, rendez-vous dans la section `Import`. Vous devez choisir l'import depuis wallabag v1 puis sélectionner votre fichier json récupéré précédemment.
 
