@@ -140,6 +140,7 @@ class ConfigController extends Controller
             $config->setItemsPerPage($this->getParameter('wallabag_core.items_on_page'));
             $config->setRssLimit($this->getParameter('wallabag_core.rss_limit'));
             $config->setLanguage($this->getParameter('wallabag_core.language'));
+            $config->setReadingSpeed($this->getParameter('wallabag_core.reading_speed'));
 
             $em->persist($config);
 
