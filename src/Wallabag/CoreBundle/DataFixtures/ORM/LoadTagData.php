@@ -28,6 +28,13 @@ class LoadTagData extends AbstractFixture implements OrderedFixtureInterface
 
         $this->addReference('bar-tag', $tag2);
 
+        $tag3 = new Tag();
+        $tag3->setLabel('baz');
+
+        $manager->persist($tag3);
+
+        $this->addReference('baz-tag', $tag3);
+
         $manager->flush();
     }
 

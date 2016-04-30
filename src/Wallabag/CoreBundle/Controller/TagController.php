@@ -105,7 +105,11 @@ class TagController extends Controller
      */
     public function showEntriesForTagAction(Tag $tag, $page, Request $request)
     {
-        $pagerAdapter = new ArrayAdapter($tag->getEntries()->toArray());
+        $entriesByTag = $this->getDoctrine()
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findAllByTagId($this->getUser()->getId(), $tag->getId());
+
+        $pagerAdapter = new ArrayAdapter($entriesByTag);
 
         $entries = $this->get('wallabag_core.helper.prepare_pager_for_entries')
             ->prepare($pagerAdapter, $page);
