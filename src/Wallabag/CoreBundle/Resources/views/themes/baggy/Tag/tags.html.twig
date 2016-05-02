@@ -4,7 +4,7 @@
 
 {% block content %}
     <div class="results">
-        <div class="nb-results">{{ 'tag.list.number_on_the_page'|transchoice(tags.count) }}</div>
+        <div class="nb-results">{{ 'tag.list.number_on_the_page'|transchoice(tags|length) }}</div>
     </div>
 
     <ul>

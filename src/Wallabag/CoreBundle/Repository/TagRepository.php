@@ -3,8 +3,6 @@
 namespace Wallabag\CoreBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Pagerfanta\Adapter\DoctrineORMAdapter;
-use Pagerfanta\Pagerfanta;
 
 class TagRepository extends EntityRepository
 {
@@ -20,22 +18,6 @@ class TagRepository extends EntityRepository
         return $this->createQueryBuilder('t')
             ->leftJoin('t.entries', 'e')
             ->where('e.user = :userId')->setParameter('userId', $userId);
-    }
-
-    /**
-     * Find Tags and return a Pager.
-     *
-     * @param int $userId
-     *
-     * @return Pagerfanta
-     */
-    public function findTags($userId)
-    {
-        $qb = $this->getQbForAllTags($userId);
-
-        $pagerAdapter = new DoctrineORMAdapter($qb);
-
-        return new Pagerfanta($pagerAdapter);
     }
 
     /**
