@@ -109,6 +109,7 @@ class WallabagRestController extends FOSRestController
         $this->validateAuthentication();
 
         $url = $request->request->get('url');
+        $title = $request->request->get('title');
         $isArchived = (int) $request->request->get('archive');
         $isStarred = (int) $request->request->get('starred');
 
@@ -119,6 +120,10 @@ class WallabagRestController extends FOSRestController
                 new Entry($this->getUser()),
                 $url
             );
+        }
+
+        if (!is_null($title)) {
+            $entry->setTitle($title);
         }
 
         $tags = $request->request->get('tags', '');
