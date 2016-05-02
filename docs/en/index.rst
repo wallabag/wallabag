@@ -26,6 +26,7 @@ The main documentation for this application is organized into a couple sections:
    user/faq
    user/installation
    user/migration
+   user/upgrade
    user/create_account
    user/login
    user/configuration
