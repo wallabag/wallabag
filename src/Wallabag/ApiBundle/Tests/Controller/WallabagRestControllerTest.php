@@ -152,6 +152,7 @@ class WallabagRestControllerTest extends WallabagApiTestCase
         $this->client->request('POST', '/api/entries.json', [
             'url' => 'http://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html',
             'tags' => 'google',
+            'title' => 'New title for my article',
         ]);
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
@@ -162,6 +163,7 @@ class WallabagRestControllerTest extends WallabagApiTestCase
         $this->assertEquals('http://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html', $content['url']);
         $this->assertEquals(false, $content['is_archived']);
         $this->assertEquals(false, $content['is_starred']);
+        $this->assertEquals('New title for my article', $content['title']);
         $this->assertEquals(1, $content['user_id']);
         $this->assertCount(1, $content['tags']);
     }
