@@ -355,6 +355,11 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $this->assertTrue(false !== $user);
         $this->assertTrue($user->isEnabled());
+        $this->assertEquals('material', $user->getConfig()->getTheme());
+        $this->assertEquals(12, $user->getConfig()->getItemsPerPage());
+        $this->assertEquals(50, $user->getConfig()->getRssLimit());
+        $this->assertEquals('en', $user->getConfig()->getLanguage());
+        $this->assertEquals(1, $user->getConfig()->getReadingSpeed());
     }
 
     public function testRssUpdateResetToken()
