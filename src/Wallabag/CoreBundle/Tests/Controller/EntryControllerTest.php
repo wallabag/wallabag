@@ -462,8 +462,8 @@ class EntryControllerTest extends WallabagCoreTestCase
         $form = $crawler->filter('button[id=submit-filter]')->form();
 
         $data = [
-            'entry_filter[readingTime][right_number]' => 11,
-            'entry_filter[readingTime][left_number]' => 11,
+            'entry_filter[readingTime][right_number]' => 22,
+            'entry_filter[readingTime][left_number]' => 22,
         ];
 
         $crawler = $client->submit($form, $data);

@@ -60,6 +60,43 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $this->assertContains('flashes.config.notice.config_saved', $alert[0]);
     }
 
+    public function testChangeReadingSpeed()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/unread/list');
+        $form = $crawler->filter('button[id=submit-filter]')->form();
+        $dataFilters = [
+            'entry_filter[readingTime][right_number]' => 22,
+            'entry_filter[readingTime][left_number]' => 22,
+        ];
+        $crawler = $client->submit($form, $dataFilters);
+        $this->assertCount(1, $crawler->filter('div[class=entry]'));
+
+        // Change reading speed
+        $crawler = $client->request('GET', '/config');
+        $form = $crawler->filter('button[id=config_save]')->form();
+        $data = [
+            'config[reading_speed]' => '2',
+        ];
+        $client->submit($form, $data);
+
+        // Is the entry still available via filters?
+        $crawler = $client->request('GET', '/unread/list');
+        $form = $crawler->filter('button[id=submit-filter]')->form();
+        $crawler = $client->submit($form, $dataFilters);
+        $this->assertCount(0, $crawler->filter('div[class=entry]'));
+
+        // Restore old configuration
+        $crawler = $client->request('GET', '/config');
+        $form = $crawler->filter('button[id=config_save]')->form();
+        $data = [
+            'config[reading_speed]' => '0.5',
+        ];
+        $client->submit($form, $data);
+    }
+
     public function dataForUpdateFailed()
     {
         return [
