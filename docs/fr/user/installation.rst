@@ -32,6 +32,9 @@ wallabag utilise PDO afin de se connecter à une base de données, donc vous aur
 Installation
 ------------
 
+Sur un serveur dédié (méthode conseillée)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 wallabag utilise un grand nombre de bibliothèques pour fonctionner. Ces bibliothèques doivent être installées à l'aide d'un outil nommé Composer. Vous devez l'installer si ce n'est déjà fait.
 
 Installation de Composer :
@@ -60,13 +63,47 @@ Pour démarrer le serveur interne à php et vérifier que tout s'est installé c
 
 Et accéder wallabag à l'adresse http://lipdevotreserveur:8000
 
-.. note::
+.. tip::
     Pour définir des paramètres via des variables d'environnement, vous pouvez les spécifier avec le préfixe ``SYMFONY__``. Par exemple, ``SYMFONY__DATABASE_DRIVER``. Vous pouvez lire `documentation Symfony <http://symfony.com/doc/current/cookbook/configuration/external_parameters.html>`__ pour en savoir plus.
 
-Installation avec Apache
+Sur un serveur mutualisé
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Nous mettons à votre disposition une archive avec toutes les dépendances à l'intérieur.
+La configuration par défaut utilise SQLite pour la base de données. Si vous souhaitez changer ces paramètres, vous devez modifier le fichier ``app/config/parameters.yml``.
+
+Nous avons déjà créé un utilisateur : le login et le mot de passe sont ``wallabag``.
+
+.. caution:: Avec cette archive, wallabag ne vérifie pas si les extensions obligatoires sont présentes sur votre serveur pour bien fonctionner (ces vérifications sont faites durant le ``composer install`` quand vous avez un serveur dédié, voir ci-dessus). 
+
+Exécutez cette commande pour télécharger et décompresser l'archive :
+
+.. code-block:: bash
+
+    wget http://wllbg.org/latest-v2-package && tar xvf latest-v2-package
+
+Maintenant, lisez la documentation ci-dessous pour crééer un virtual host. Accédez ensuite à votre installation de wallabag. 
+Si vous avez changé la configuration pour modifier le type de stockage (MySQL ou PostgreSQL), vous devrez vous créer un utilisateur via la commande ``php bin/console wallabag:install --env=prod``.
+
+Installation avec Docker
 ------------------------
 
-En imaginant que vous vouliez installer wallabag dans le dossier /var/www/wallabag et que vous utilisiez php comme un module Apache, voici un vhost pour wallabag :
+Nous vous proposons une image Docker pour installer wallabag facilement. Allez voir du côté de `Docker Hub <https://hub.docker.com/r/wallabag/wallabag/>`__ pour plus d'informations.
+
+Commande pour démarrer le containeur
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: bash
+
+    docker pull wallabag/wallabag
+
+Virtual hosts
+-------------
+
+Configuration avec Apache
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+En imaginant que vous vouliez installer wallabag dans le dossier ``/var/www/wallabag`` et que vous utilisiez PHP comme un module Apache, voici un vhost pour wallabag :
 
 ::
 
@@ -108,10 +145,10 @@ En imaginant que vous vouliez installer wallabag dans le dossier /var/www/wallab
 
 Après que vous ayez rechargé/redémarré Apache, vous devriez pouvoir avoir accès à wallabag à l'adresse http://domain.tld.
 
-Installation avec Nginx
------------------------
+Configuration avec Nginx
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-En imaginant que vous vouliez installer wallabag dans le dossier /var/www/wallabag, voici un fichier de configuration Nginx pour wallabag :
+En imaginant que vous vouliez installer wallabag dans le dossier ``/var/www/wallabag``, voici un fichier de configuration Nginx pour wallabag :
 
 ::
 
@@ -148,21 +185,17 @@ En imaginant que vous vouliez installer wallabag dans le dossier /var/www/wallab
 
 Après que vous ayez rechargé/redémarré Nginx, vous devriez pouvoir avoir accès à wallabag à l'adresse http://domain.tld.
 
-
-.. note::
+.. tip::
 
     Si vous voulez importer un fichier important dans wallabag, vous devez ajouter cette ligne dans votre configuration nginx ``client_max_body_size XM; # allows file uploads up to X megabytes``.
 
-
 Droits d'accès aux dossiers du projet
 -------------------------------------
-
 
 Environnement de test
 ~~~~~~~~~~~~~~~~~~~~~
 
 Quand nous souhaitons juste tester wallabag, nous lançons simplement la commande  ``php bin/console server:run --env=prod`` pour démarrer l'instance wallabag et tout se passe correctement car l'utilisateur qui a démarré le projet a accès naturellement au repertoire courant, tout va bien.
-
 
 Environnement de production 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -178,4 +211,3 @@ Cela est dû au fait qu'il faut aussi octroyer les mêmes droits d'accès au dos
 .. code-block:: bash
 
    chown -R www-data:www-data /var/www/wallabag/var
-

@@ -9,7 +9,7 @@ Documentation de wallabag
 simplement d’archiver une page web en ne conservant que le contenu. Les
 éléments superflus (menu, publicité, etc.) sont supprimés.
 
-.. note::
+.. tip::
 
     Vous vous trouvez sur la documentation de wallabag v2. Si vous voulez lire la documentation de wallabag v1, `vous pouvez jeter un œil ici <https://github.com/wallabag/documentation>`__.
 
@@ -26,6 +26,7 @@ La documentation principale de cette application est découpée en plusieurs sec
 
    user/faq
    user/installation
+   user/upgrade
    user/migration
    user/create_account
    user/login
