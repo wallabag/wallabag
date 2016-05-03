@@ -380,13 +380,6 @@ developer:
             paragraph_8: 'Wenn du alle API-Endpunkte sehen willst, werfe einen Blick auf die <a href="%link%">API-Dokumentation</a>.'
         back: 'Zurück'
 
-validator:
-    password_must_match: 'Die Kennwort-Felder müssen übereinstimmen.'
-    password_too_short: 'Kennwort-Mindestlänge von acht Zeichen nicht erfüllt'
-    password_wrong_value: 'Falscher Wert für dein aktuelles Kennwort'
-    item_per_page_too_high: 'Dies wird die Anwendung möglicherweise beenden'
-    rss_limit_too_hight: 'Dies wird die Anwendung möglicherweise beenden'
-
 flashes:
     config:
         notice:

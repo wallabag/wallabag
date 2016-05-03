@@ -380,13 +380,6 @@ developer:
             paragraph_8: "Se volètz totas las adreças d'accès de l'API, donatz un còp d’uèlh <a href=\"%link%\">a la documentacion de l'API</a>."
         back: 'Retorn'
 
-validator:
-    password_must_match: 'Cal que los dos senhals siasquen los meteisses'
-    password_too_short: 'Lo senhal deu aver almens 8 caractèrs'
-    password_wrong_value: 'Vòstre senhal actual es pas bon'
-    item_per_page_too_high: "Aquò li agradarà pas a l'aplicacion"
-    rss_limit_too_hight: "Aquò li agradarà pas a l'aplicacion"
-
 flashes:
     config:
         notice:
