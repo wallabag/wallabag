@@ -117,4 +117,16 @@ class Tag
     {
         return $this->entries;
     }
+
+    public function getEntriesByUser($userId)
+    {
+        $filteredEntries = new ArrayCollection();
+        foreach ($this->entries as $entry) {
+            if ($entry->getUser()->getId() === $userId) {
+                $filteredEntries->add($entry);
+            }
+        }
+
+        return $filteredEntries;
+    }
 }

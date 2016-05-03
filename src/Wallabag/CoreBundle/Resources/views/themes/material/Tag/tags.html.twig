@@ -9,7 +9,7 @@
     <br />
     <ul class="row data">
     {% for tag in tags %}
-        <li id="tag-{{ tag.id|e }}" class="col l4 m6 s12">{{tag.label}} ({{ tag.entries.getValues | length }})</li>
+        <li id="tag-{{ tag.id|e }}" class="col l4 m6 s12">{{tag.label}} ({{ tag.getEntriesByUser(app.user.id) | length }})</li>
     {% endfor %}
     </ul>
 {% endblock %}
