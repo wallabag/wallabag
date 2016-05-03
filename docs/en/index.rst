@@ -27,13 +27,13 @@ The main documentation for this application is organized into a couple sections:
    user/installation
    user/upgrade
    user/migration
+   user/import
    user/create_account
    user/login
    user/configuration
    user/first_article
    user/errors_during_fetching
    user/annotations
-   user/import
    user/download_articles
    user/filters
    user/tags

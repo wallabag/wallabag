@@ -1,42 +1,5 @@
-Migrer à wallabag
-=================
-
-Depuis wallabag
----------------
-
-Exportez vos données de wallabag 1.x
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Sur la page de configuration, cliquez sur ``Export JSON`` dans la section ``Exportez vos données wallabag``.
-
-.. image:: ../../img/user/export_wllbg_1.png
-   :alt: Export depuis wallabag 1.x
-   :align: center
-
-Vous obtiendrez un fichier ``wallabag-export-1-1970-01-01.json``.
-
-Exportez vos données de wallabag 2.x
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Dans la barre latérale de téléchargement, cliquez sur ``JSON``.
-
-.. image:: ../../img/user/export_wllbg_2.png
-   :alt: Export depuis wallabag 2.x
-   :align: center
-
-Vous obtiendrez un fichier ``Unread articles.json``.
-
-Importez vos données wallabag 2.x
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Cliquez sur le lien ``Importer`` dans le menu, choisissez la version de wallabag correspondante,
-sélectionnez votre fichier d'export sur votre ordinateur et importez-le.
-
-.. image:: ../../img/user/import_wllbg.png
-   :alt: Import depuis wallabag 1.x
-   :align: center
-
-Tous vos articles wallabag seront importés.
+Migrer depuis un service externe
+================================
 
 Depuis Pocket
 -------------

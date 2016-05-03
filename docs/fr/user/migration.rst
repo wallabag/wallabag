@@ -1,5 +1,5 @@
-Migrer wallabag
-===============
+Migrer depuis la v1 ou la v2
+============================
 
 Depuis wallabag 1.x
 -------------------

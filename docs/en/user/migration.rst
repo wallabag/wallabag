@@ -1,5 +1,5 @@
-Migrate wallabag
-================
+Migrate from v1 or v2
+=====================
 
 From wallabag 1.x
 -----------------
