@@ -437,6 +437,9 @@ main ul.row {
     .indicator {
         display: none;
     }
+    .pagination li.prev, .pagination li.next {
+        width: auto;
+    }
   }
 
 @media only screen and (min-width : 400px) {
