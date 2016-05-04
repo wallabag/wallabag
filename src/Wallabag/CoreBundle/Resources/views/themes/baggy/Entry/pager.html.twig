@@ -1,0 +1,11 @@
+{% block pager %}
+    <div class="results">
+        <div class="nb-results">{{ 'entry.list.number_on_the_page'|transchoice(entries.count) }}</div>
+        <div class="pagination">
+            <a href="#" id="filter">{{ 'entry.filters.title'|trans }}</a>
+            {% if entries.getNbPages > 1 %}
+                {{ pagerfanta(entries, 'twitter_bootstrap_translated', {'proximity': 1}) }}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
