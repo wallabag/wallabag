@@ -189,20 +189,20 @@ Après que vous ayez rechargé/redémarré Nginx, vous devriez pouvoir avoir acc
 
     Si vous voulez importer un fichier important dans wallabag, vous devez ajouter cette ligne dans votre configuration nginx ``client_max_body_size XM; # allows file uploads up to X megabytes``.
 
-Configuration avec LigHTTPd
+Configuration avec lighttpd
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Éditez votre fichier ``lighttpd.conf`` collez-y cette configuration :
+En imaginant que vous vouliez installer wallabag dans le dossier ``/var/www/wallabag``, voici un fichier de configuration pour wallabag (éditez votre fichier ``lighttpd.conf`` collez-y cette configuration) :
 
 ::
 
     server.modules = (
-    "mod_fastcgi",
-    "mod_access",
-    "mod_alias",
-    "mod_compress",
-    "mod_redirect",
-    "mod_rewrite",
+        "mod_fastcgi",
+        "mod_access",
+        "mod_alias",
+        "mod_compress",
+        "mod_redirect",
+        "mod_rewrite",
     )
     server.document-root = "/var/www/wallabag/web"
     server.upload-dirs = ( "/var/cache/lighttpd/uploads" )
@@ -223,9 +223,8 @@ Configuration avec LigHTTPd
     dir-listing.activate = "disable"
 
     url.rewrite-if-not-file = (
-    "^/([^?])(?:\?(.))?" => "/app.php?$1&$2",
-    "^/([^?]*)" => "/app.php?=$1",
-    "^/wiki$" => "/app.php",
+        "^/([^?])(?:\?(.))?" => "/app.php?$1&$2",
+        "^/([^?]*)" => "/app.php?=$1",
     )
 
 Droits d'accès aux dossiers du projet
