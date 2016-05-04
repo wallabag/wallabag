@@ -46,5 +46,6 @@ The main documentation for this application is organized into a couple sections:
 
    developer/api
    developer/docker
+   developer/documentation
    developer/translate
    developer/maintenance

@@ -47,5 +47,6 @@ La documentation principale de cette application est découpée en plusieurs sec
 
    developer/api
    developer/docker
+   developer/documentation
    developer/translate
    developer/maintenance
