@@ -118,7 +118,7 @@ class Tag
         return $this->entries;
     }
 
-    public function getEntriesByUser($userId)
+    public function getEntriesByUserId($userId)
     {
         $filteredEntries = new ArrayCollection();
         foreach ($this->entries as $entry) {
