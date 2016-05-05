@@ -100,7 +100,7 @@ config:
             tagging_rules_definition_title: 'Cosa significa « regole di tagging » ?'
             tagging_rules_definition_description: 'Sono regole utilizzate da wallabag per taggare automaticamente i contenuti.<br />Ogni volta che viene aggiunto un contenuto, tutte le regole di tagging rules vengono utilizzate per aggiungere i tag configurati, risparmiandoti il lavoro di classificare i contenuti manualmente.'
             how_to_use_them_title: 'Come si usano?'
-            how_to_use_them_description: 'Let assume you want to tag new entries as « <i>short reading</i> » when the reading time is inferior to 3 minutes.<br />In that case, you should put « readingTime &lt;= 3 » in the <i>Rule</i> field and « <i>short reading</i> » in the <i>Tags</i> field.<br />Several tags can added simultaneously by separating them by a comma: « <i>short reading, must read</i> »<br />Complex rules can be written by using predefined operators: if « <i>readingTime &gt;= 5 AND domainName = "github.com"</i> » then tag as « <i>long reading, github </i> »'
+            how_to_use_them_description: 'Diciamo che vuoi taggare un contenuto come « <i>lettura veloce</i> » quando il tempo di lettura è inferiore ai 3 minuti.<br />In questo case, devi mettere « readingTime &lt;= 3 » nel campo <i>Regola</i> e « <i>lettura veloce</i> » nel campo <i>Tag</i>.<br />Molti tag si possono aggiungere contemporanemente separandoli con una virgola: « <i>lettura veloce, da leggere</i> »<br />Regole complesse possono essere scritte utilizzando gli operatori predefiniti: se « <i>readingTime &gt;= 5 AND domainName = "github.com"</i> » allora tagga « <i>lettura lunga, github </i> »'
             variables_available_title: 'Quali operatori e variabili posso utilizzare per scrivere delle regole?'
             variables_available_description: 'I seguenti operatori e variabili posso essere utilizzati per scrivere regole di tagging:'
             meaning: 'Significato'
@@ -120,7 +120,7 @@ config:
                 less_than: 'Minore/uguale di...'
                 strictly_less_than: 'Minore di...'
                 greater_than: 'Maggiore/uguale di...'
-                strictly_greater_than: Maggiore di...'
+                strictly_greater_than: 'Maggiore di...'
                 equal_to: 'Uguale a...'
                 not_equal_to: 'Non uguale a...'
                 or: "Una regola O un'altra"
@@ -205,60 +205,60 @@ entry:
 about:
     page_title: 'About'
     top_menu:
-        who_behind_wallabag: 'Who is behind wallabag'
-        getting_help: 'Getting help'
-        helping: 'Helping wallabag'
-        contributors: 'Contributors'
-        third_party: 'Third-party libraries'
+        who_behind_wallabag: "Chi c'è dietro a wallabag"
+        getting_help: 'Ottieni aiuto'
+        helping: 'Aiuta wallabag'
+        contributors: 'Collaboratori'
+        third_party: 'Librerie di terze parti'
     who_behind_wallabag:
-        developped_by: 'Developed by'
-        website: 'website'
-        many_contributors: 'And many others contributors ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">on Github</a>'
-        project_website: 'Project website'
-        license: 'License'
-        version: 'Version'
+        developped_by: 'Sviluppato da'
+        website: 'sito web'
+        many_contributors: 'E molti altri collaboratori ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">su Github</a>'
+        project_website: 'Sito web del progetto'
+        license: 'Licenza'
+        version: 'Versione'
     getting_help:
-        documentation: 'Documentation'
+        documentation: 'Documentazione'
         bug_reports: 'Bug reports'
-        support: '<a href="https://support.wallabag.org">On our support website</a> or <a href="https://github.com/wallabag/wallabag/issues">on GitHub</a>'
+        support: '<a href="https://support.wallabag.org">Sul nostro sito di supporto</a> o <a href="https://github.com/wallabag/wallabag/issues">su GitHub</a>'
     helping:
-        description: 'wallabag is free and opensource. You can help us:'
-        by_contributing: 'by contributing to the project:'
-        by_contributing_2: 'an issue lists all our needs'
+        description: 'wallabag è gratuito opensource. Puoi aiutarci:'
+        by_contributing: 'per contribuire al progetto:'
+        by_contributing_2: 'un elenco delle attività richieste'
         by_paypal: 'via Paypal'
     contributors:
-        description: 'Thank you to contributors on wallabag web application'
+        description: 'Un grazie ai collaboratori di wallabag web application'
     third_party:
-        description: 'Here are the list of third-party libraries used in wallabag (with their licenses):'
+        description: 'Ecco un elenco delle librerie di terze parti utilizzate in wallabag (con le rispettive licenze):'
         package: 'Package'
-        license: 'License'
+        license: 'Licenza'
 
 howto:
     page_title: 'How to'
-    page_description: 'There are several ways to save an article:'
+    page_description: 'Ci sono diversi modi per salvare un contenuto:'
     top_menu:
-        browser_addons: 'Browser addons'
-        mobile_apps: 'Mobile apps'
-        bookmarklet: 'Bookmarklet'
+        browser_addons: 'tramite addons del Browser'
+        mobile_apps: 'tramite app Mobile'
+        bookmarklet: 'tramite Bookmarklet'
     form:
-        description: 'Thanks to this form'
+        description: 'Tramite questo modulo'
     browser_addons:
-        firefox: 'Standard Firefox Add-On'
-        chrome: 'Chrome Extension'
+        firefox: 'Add-On di Firefox'
+        chrome: 'Estensione di Chrome'
     mobile_apps:
         android:
             via_f_droid: 'via F-Droid'
             via_google_play: 'via Google Play'
-        ios: 'on the iTunes Store'
-        windows: 'on the Microsoft Store'
+        ios: 'sullo store di iTunes'
+        windows: 'sullo store di Microsoft'
     bookmarklet:
-        description: 'Drag & drop this link to your bookmarks bar:'
+        description: 'Trascinando e rilasciando questo link sulla barra dei bookmark del tuo browser:'
 
 quickstart:
     page_title: 'Introduzione'
     intro:
         title: 'Benvenuto su wallabag!'
-        paragraph_1: "We'll accompany you to visit wallabag and show you some features which can interest you."
+        paragraph_1: "Un tour in cui ti guideremo per scoprire e che ti mostrerà delle funzionalità che potrebbero interessarti."
         paragraph_2: 'Seguici!'
     configure:
         title: "Configura l'applicazione"
@@ -306,31 +306,31 @@ tag:
         number_on_the_page: "{0} Non ci sono tag.|{1} C'è un tag.|]1,Inf[ ci sono %count% tag."
 
 import:
-    page_title: 'Import'
-    page_description: 'Welcome to wallabag importer. Please select your previous service that you want to migrate.'
+    page_title: 'Importa'
+    page_description: "Benvenuto nell'importatore di wallabag. Seleziona il servizio da cui vuoi trasferire i contenuti."
     action:
-        import_contents: 'Import contents'
+        import_contents: 'Importa contenuti'
     form:
-        mark_as_read_title: 'Mark all as read?'
-        mark_as_read_label: 'Mark all imported entries as read'
+        mark_as_read_title: 'Segna tutto come già letto?'
+        mark_as_read_label: 'Segna tutti i contenuti importati come letti'
         file_label: 'File'
-        save_label: 'Upload file'
+        save_label: 'Carica file'
     pocket:
-        page_title: 'Import > Pocket'
-        description: "This importer will import all your Pocket data. Pocket doesn't allow us to retrieve content from their service, so the readable content of each article will be re-fetched by wallabag."
+        page_title: 'Importa da > Pocket'
+        description: "Questo importatore copierà tutti i tuoi dati da Pocket. Pocket non ci consente di ottenere contenuti dal loro servzio, così il contenuto leggibile di ogni articolo verrà ri-ottenuto da wallabag."
         config_missing:
-            description: "Pocket import isn't configured."
-            admin_message: 'You need to define %keyurls%a pocket_consumer_key%keyurle%.'
-            user_message: 'Your server admin needs to define an API Key for Pocket.'
-        authorize_message: 'You can import your data from your Pocket account. You just have to click on the below button and authorize the application to connect to getpocket.com.'
-        connect_to_pocket: 'Connect to Pocket and import data'
+            description: "Importazione da Pocket non configurata."
+            admin_message: 'Devi definire %keyurls% una pocket_consumer_key %keyurle%.'
+            user_message: 'Il tuo amministratore di server deve define una API Key per Pocket.'
+        authorize_message: 'Puoi importare dati dal tuo account Pocket. Devi solo cliccare sul pulsante sottostante e autorizzare la connessione a getpocket.com.'
+        connect_to_pocket: 'Connetti a Pocket and importa i dati'
     wallabag_v1:
-        page_title: 'Import > Wallabag v1'
-        description: 'This importer will import all your wallabag v1 articles. On your config page, click on "JSON export" in the "Export your wallabag data" section. You will have a "wallabag-export-1-xxxx-xx-xx.json" file.'
-        how_to: 'Please select your wallabag export and click on the below button to upload and import it.'
+        page_title: 'Importa da > Wallabag v1'
+        description: 'Questo importatore copierà tutti i tuoi dati da un wallabag v1. Nella tua pagina di configurazione, clicca su "JSON export" nella sezione "Esport i tuoi dati di wallabag". Otterrai un file "wallabag-export-1-xxxx-xx-xx.json".'
+        how_to: 'Seleziona la tua esportazione di wallabag e clicca sul pulsante sottostante caricare il file e importare i dati.'
     wallabag_v2:
-        page_title: 'Import > Wallabag v2'
-        description: 'This importer will import all your wallabag v2 articles. Go to All articles, then, on the export sidebar, click on "JSON". You will have a "All articles.json" file.'
+        page_title: 'Importa da > Wallabag v2'
+        description: 'Questo importatore copierà tutti i tuoi dati da un wallabag v2. Vai in "Tutti i contenuti", e, nella sidebar di esportazione, clicca su "JSON". Otterrai un file "Tutti i contenuti.json".'
 
 developer:
     page_title: 'Sviluppatori'
@@ -370,15 +370,15 @@ developer:
     howto:
         page_title: 'Sviluppatori > Come creare la mia prima applicazione'
         description:
-            paragraph_1: 'The following commands make use of the <a href="https://github.com/jkbrzt/httpie">HTTPie library</a>. Make sure it is installed on your system before using it.'
-            paragraph_2: 'You need a token to communicate between your 3rd application and wallabag API.'
-            paragraph_3: 'To create this token, you need <a href="%link%">to create a new client</a>.'
-            paragraph_4: 'Now, create your token (replace client_id, client_secret, username and password with the good values):'
-            paragraph_5: 'The API will return a response like this:'
-            paragraph_6: 'The access_token is useful to do a call to the API endpoint. For example:'
-            paragraph_7: 'This call will return all the entries for your user.'
-            paragraph_8: 'If you want to see all the API endpoints, you can have a look <a href="%link%">to our API documentation</a>.'
-        back: 'Back'
+            paragraph_1: 'I seguenti comandi fanno uso della <a href="https://github.com/jkbrzt/httpie">libreria HTTPie</a>. Verifica che sia installata sul tuo sistema prima di utilizzarli.'
+            paragraph_2: 'Hai bisogno di un token per far comunicare la tua applicazione di terze parti e le API di wallabag.'
+            paragraph_3: 'Per creare questo token, hai bisogno di <a href="%link%">creare un nuovo client</a>.'
+            paragraph_4: 'Ora, crea il tuo token (sostituisci client_id, client_secret, username e password con valori reali):'
+            paragraph_5: 'Le API ritorneranno una risposta di questo tipo:'
+            paragraph_6: "L'access_token è utile per chiamare un API endpoint. Per esempio:"
+            paragraph_7: 'Questa chiamata ritornerà tutti i contenuti per il tuo utente.'
+            paragraph_8: 'Se vuoi visualizzare tutti gli API endpoints, dai una occhiata alla <a href="%link%">documentazione delle API</a>.'
+        back: 'Indietro'
 
 validator:
     password_must_match: 'Le password devono corrispondere.'
@@ -416,9 +416,9 @@ flashes:
             tag_added: 'Tag aggiunto'
     import:
         notice:
-            failed: 'Import failed, please try again.'
-            failed_on_file: 'Error while processing import. Please verify your import file.'
-            summary: 'Import summary: %imported% imported, %skipped% already saved.'
+            failed: 'Importazione fallita, riprova.'
+            failed_on_file: 'Errore durante la processazione dei dati da importare. Verifica il tuo file di import.'
+            summary: 'Sommario di importazione: %imported% importati, %skipped% già salvati.'
     developer:
         notice:
             client_created: 'Nuovo client creato.'
