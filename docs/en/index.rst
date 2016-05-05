@@ -37,6 +37,7 @@ The main documentation for this application is organized into a couple sections:
    user/download_articles
    user/filters
    user/tags
+   user/android
 
 .. _dev-docs:
 
