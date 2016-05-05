@@ -5,13 +5,13 @@ Android App
 Purpose of this document
 ------------------------
 
-This document describes how you can setup your Android application to work with your Wallabag instance. There is no difference in this procedure for Wallabag v1 or v2.
+This document describes how you can setup your Android application to work with your wallabag instance. There is no difference in this procedure for wallabag v1 or v2.
 
 
 Steps to configure your app
 ---------------------------
 
-When you first start the app, you see the welcome screen, where you are adviced to configure the app for your Wallabag instance at first.
+When you first start the app, you see the welcome screen, where you are adviced to configure the app for your wallabag instance at first.
 
 .. image:: ../../img/user/android_welcome_screen.de.png
     :alt: Welcome screen
@@ -23,7 +23,7 @@ Just confirm that message and you get redirected to the settings screen.
     :alt: Settings screen
     :align: center
 
-Fill in your Wallabag data. You need to enter your Wallabag address. It is important that this URL does not end with a slash. Also add your Wallabag credentials to the user name and password field.
+Fill in your wallabag data. You need to enter your wallabag address. It is important that this URL does not end with a slash. Also add your wallabag credentials to the user name and password field.
 
 .. image:: ../../img/user/android_configuration_filled_in.de.png
     :alt: Filled in settings
@@ -32,7 +32,7 @@ Fill in your Wallabag data. You need to enter your Wallabag address. It is impor
 After you have filled in your data, push the button Connection test and wait for the test to finish. 
 
 .. image:: ../../img/user/android_configuration_connection_test.de.png
-    :alt: Connection test with your Wallabag data
+    :alt: Connection test with your wallabag data
     :align: center
 
 The connection test shall finish with success. If not, you need to fix this first until you proceed. 
@@ -41,7 +41,7 @@ The connection test shall finish with success. If not, you need to fix this firs
     :alt: Connection test successful
     :align: center
 
-After the connection test was successful, you can push the button to get your feed credentials. The app now tries to login to your Wallabag instance and get the user id and the corresponding token for the feeds.
+After the connection test was successful, you can push the button to get your feed credentials. The app now tries to login to your wallabag instance and get the user id and the corresponding token for the feeds.
 
 .. image:: ../../img/user/android_configuration_get_feed_credentials.de.png
     :alt: Getting the feed credentials
@@ -82,16 +82,16 @@ Known limitations
 Currently the does not support two-factor authentication. You should disable that to get the app working.
 
 
-Limited amount of articles with Wallabag v2
+Limited amount of articles with wallabag v2
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In your Wallabag web instance you can configure how many items are part of the RSS feed. This option did not exist in Wallabag v1, where all articles were part of the feed. So if you set the amount of articles being displayed greater than the number of items being content of your RSS feed, you will only see the number of items in your RSS feed. 
+In your wallabag web instance you can configure how many items are part of the RSS feed. This option did not exist in wallabag v1, where all articles were part of the feed. So if you set the amount of articles being displayed greater than the number of items being content of your RSS feed, you will only see the number of items in your RSS feed. 
 
 
 SSL/TLS encryption
 ~~~~~~~~~~~~~~~~~~
 
-If you can reach your Wallabag web instance via HTTPS, you should use that. Especially if your HTTP URL redirects you to the HTTPS one. Currently, the app cannot handle that redirect properly.
+If you can reach your wallabag web instance via HTTPS, you should use that. Especially if your HTTP URL redirects you to the HTTPS one. Currently, the app cannot handle that redirect properly.
 
 
 References
