@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/wallabag/wallabag.svg?branch=v2)](https://travis-ci.org/wallabag/wallabag)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/wallabag/wallabag/badges/quality-score.png?b=v2)](https://scrutinizer-ci.com/g/wallabag/wallabag/?branch=v2)
+[![Build Status](https://api.travis-ci.org/wallabag/wallabag.svg?branch=master)](https://travis-ci.org/wallabag/wallabag)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/wallabag/wallabag/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/wallabag/wallabag/?branch=v2)
 [![Gitter](https://badges.gitter.im/gitterHQ/gitter.svg)](https://gitter.im/wallabag/wallabag)
 
 # What is wallabag?
