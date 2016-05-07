@@ -34,6 +34,9 @@ and it's corresponding database server.
 Installation
 ------------
 
+On a dedicated web server (recommended way)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 wallabag uses a big number of libraries in order to function. These libraries must be installed with a tool called Composer. You need to install it if you don't already have.
 
 Install Composer:
@@ -54,7 +57,7 @@ To install wallabag itself, you must run these two commands:
     SYMFONY_ENV=prod composer install --no-dev -o --prefer-dist
     php bin/console wallabag:install --env=prod
 
-To start php's build-in server and test if everything did install correctly, you can do:
+To start PHP's build-in server and test if everything did install correctly, you can do:
 
 ::
 
@@ -62,14 +65,48 @@ To start php's build-in server and test if everything did install correctly, you
 
 And access wallabag at http://yourserverip:8000
 
-.. note::
+.. tip::
 
     To define parameters with environment variables, you have to set these variables with ``SYMFONY__`` prefix. For example, ``SYMFONY__DATABASE_DRIVER``. You can have a look to the `Symfony documentation <http://symfony.com/doc/current/cookbook/configuration/external_parameters.html>`__.
 
-Installing on Apache
---------------------
+On a shared hosting
+~~~~~~~~~~~~~~~~~~~
 
-Assuming you install wallabag in the /var/www/wallabag folder and that you want to use php as an Apache module, here's a vhost for wallabag:
+We provide you a package with all dependancies inside.
+The default configuration uses SQLite for the database. If you want to change these settings, please edit ``app/config/parameters.yml``.
+
+We already created a user: login and password are ``wallabag``.
+
+.. caution:: With this package, wallabag don't check mandatory extensions used in the application (theses checks are made during ``composer install`` when you have a dedicated web server, see above).
+
+Execute this command to download and extract the latest package:
+
+.. code-block:: bash
+
+    wget http://wllbg.org/latest-v2-package && tar xvf latest-v2-package
+
+Now, read the following documentation to create your virtual host, then access to your wallabag.
+If you changed the database configuration to use MySQL or PostgreSQL, you need to create a user via this command ``php bin/console wallabag:install --env=prod``.
+
+Installation with Docker
+------------------------
+
+We provide you a Docker image to install wallabag easily. Have a look to our repository on `Docker Hub <https://hub.docker.com/r/wallabag/wallabag/>`__ to have more information.
+
+Command to launch container
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: bash
+
+    docker pull wallabag/wallabag
+
+Virtual hosts
+-------------
+
+Configuration on Apache
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Assuming you install wallabag in the ``/var/www/wallabag`` folder and that you want to use PHP as an Apache module, here's a vhost for wallabag:
 
 ::
 
@@ -111,10 +148,10 @@ Assuming you install wallabag in the /var/www/wallabag folder and that you want 
 
 After reloading or restarting Apache, you should now be able to access wallabag at http://domain.tld.
 
-Installing on Nginx
--------------------
+Configuration on Nginx
+~~~~~~~~~~~~~~~~~~~~~~
 
-Assuming you install wallabag in the /var/www/wallabag folder, here's the recipe for wallabag :
+Assuming you install wallabag in the ``/var/www/wallabag`` folder, here's the recipe for wallabag :
 
 ::
 
@@ -151,22 +188,57 @@ Assuming you install wallabag in the /var/www/wallabag folder, here's the recipe
 
 After reloading or restarting nginx, you should now be able to access wallabag at http://domain.tld.
 
-.. note::
+.. tip::
 
     When you want to import large file into wallabag, you need to add this line in your nginx configuration ``client_max_body_size XM; # allows file uploads up to X megabytes``.
 
+Configuration on lighttpd
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Assuming you install wallabag in the /var/www/wallabag folder, here's the recipe for wallabag (edit your ``lighttpd.conf`` file and paste this configuration into it):
+
+::
+
+    server.modules = (
+        "mod_fastcgi",
+        "mod_access",
+        "mod_alias",
+        "mod_compress",
+        "mod_redirect",
+        "mod_rewrite",
+    )
+    server.document-root = "/var/www/wallabag/web"
+    server.upload-dirs = ( "/var/cache/lighttpd/uploads" )
+    server.errorlog = "/var/log/lighttpd/error.log"
+    server.pid-file = "/var/run/lighttpd.pid"
+    server.username = "www-data"
+    server.groupname = "www-data"
+    server.port = 80
+    server.follow-symlink = "enable"
+    index-file.names = ( "index.php", "index.html", "index.lighttpd.html")
+    url.access-deny = ( "~", ".inc" )
+    static-file.exclude-extensions = ( ".php", ".pl", ".fcgi" )
+    compress.cache-dir = "/var/cache/lighttpd/compress/"
+    compress.filetype = ( "application/javascript", "text/css", "text/html", "text/plain" )
+    include_shell "/usr/share/lighttpd/use-ipv6.pl " + server.port
+    include_shell "/usr/share/lighttpd/create-mime.assign.pl"
+    include_shell "/usr/share/lighttpd/include-conf-enabled.pl"
+    dir-listing.activate = "disable"
+
+    url.rewrite-if-not-file = (
+        "^/([^?])(?:\?(.))?" => "/app.php?$1&$2",
+        "^/([^?]*)" => "/app.php?=$1",
+    )
 
 Rights access to the folders of the project
 -------------------------------------------
 
-
-Test Environment
+Test environment
 ~~~~~~~~~~~~~~~~
 
 When we just want to test wallabag, we just run the command ``php bin/console server:run --env=prod`` to start our wallabag instance and everything will go smoothly because the user who started the project can access to the current folder naturally, without any problem.
 
-
-Production Environment
+Production environment
 ~~~~~~~~~~~~~~~~~~~~~~
 
 As soon as we use Apache or Nginx to access to our wallabag instance, and not from the command  ``php bin/console server:run --env=prod`` to start it, we should take care to grant the good rights on the good folders to keep safe all the folders of the project.
@@ -180,4 +252,3 @@ This is due to the fact that we will need to grant the same rights access on the
 .. code-block:: bash
 
    chown -R www-data:www-data /var/www/wallabag/var
-

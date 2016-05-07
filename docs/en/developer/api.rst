@@ -261,6 +261,8 @@ Have a look on the listing here: http://localhost:8000/api/doc to know each meth
 Third resources
 ---------------
 
-Some applications use our API. Here is a non-exhaustive list of them:
+Some applications or libraries use our API. Here is a non-exhaustive list of them:
 
+- `Java wrapper for the wallabag API <https://github.com/Strubbl/wallabag-java>`_ by Strubbl.
+- `.NET library for the wallabag v2 API <https://github.com/jlnostr/wallabag-api>`_ by Julian Oster.
 - `Python API for wallabag <https://github.com/foxmask/wallabag_api>`_ by FoxMaSk, for his project `Trigger Happy <https://blog.trigger-happy.eu/>`_.

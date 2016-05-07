@@ -23,24 +23,3 @@ Votre compte est maintenant actif.
 .. image:: ../../img/user/activated_account.png
    :alt: Bienvenue à bord !
    :align: center
-
-Foire aux questions
--------------------
-
-Je ne peux pas valider le formulaire de création de compte
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Soyez sur d'avoir bien renseigné tous les champs :
-
-* une adresse email valide
-* le même mot de passe dans les deux champs
-
-Je n'ai pas reçu mon email d'activation
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Êtes-vous sur d'avoir renseigné votre bonne adresse ? Avez-vous vérifié le dossier de spams ?
-
-Quand je clique sur le lien d'activation, j'ai ce message : ``The user with confirmation token "DtrOPfbQeVkWf6N" does not exist``.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Vous avez déjà activé votre compte ou l'URL d'activation n'est pas correcte.
