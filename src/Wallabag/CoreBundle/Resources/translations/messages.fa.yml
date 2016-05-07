@@ -380,13 +380,6 @@ developer:
     #         paragraph_8: 'If you want to see all the API endpoints, you can have a look <a href="%link%">to our API documentation</a>.'
     #     back: 'بازگشت'
 
-validator:
-    password_must_match: 'رمزها باید یکی باشند'
-    password_too_short: 'رمز شما باید ۸ حرف یا بیشتر باشد'
-    password_wrong_value: 'رمز فعلی را اشتباه وارد کرده‌اید'
-    item_per_page_too_high: 'با این تعداد برنامه به فنا می‌رود'
-    rss_limit_too_hight: 'با این تعداد برنامه به فنا می‌رود'
-
 flashes:
     config:
         notice:

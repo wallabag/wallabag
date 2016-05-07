@@ -380,13 +380,6 @@ developer:
             paragraph_8: 'Se vuoi visualizzare tutti gli API endpoints, dai una occhiata alla <a href="%link%">documentazione delle API</a>.'
         back: 'Indietro'
 
-validator:
-    password_must_match: 'Le password devono corrispondere.'
-    password_too_short: 'La password deve essere lunga almeno 8 caratteri'
-    password_wrong_value: 'Valore inserito per la password corrente errato'
-    item_per_page_too_high: 'Questo valore è troppo alto'
-    rss_limit_too_hight: 'Questo valore è troppo alto'
-
 flashes:
     config:
         notice:
