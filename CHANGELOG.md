@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.0.4] - 2016-05-07
+
+### Added
+
+- [#2016](https://github.com/wallabag/wallabag/pull/2016) Big updates in [our documentation](http://doc.wallabag.org/en/master/) (Nicolas Lœuillet)
+- [#2028](https://github.com/wallabag/wallabag/pull/2028) Documentation about android application (Strubbl)
+- [#2019](https://github.com/wallabag/wallabag/pull/2019) Italian translation (Daniele Conca)
+- [#2011](https://github.com/wallabag/wallabag/pull/2011) Documentation about wallabag upgrade (biva)
+- [#1985](https://github.com/wallabag/wallabag/pull/1985) Documentation about rights access (FoxMaSk)
+- [#1969](https://github.com/wallabag/wallabag/pull/1969) Third resources for API in documentation (Nicolas Lœuillet)
+- [#1967](https://github.com/wallabag/wallabag/pull/1967) FAQ page in documentation (Nicolas Lœuillet)
+
+### Changed
+
+- [#1977](https://github.com/wallabag/wallabag/pull/1977) Spanish documentation (jami7)
+
+### Fixed
+
+- [#2023](https://github.com/wallabag/wallabag/pull/2023) Fix translation for validators (Nicolas Lœuillet)
+- [#2020](https://github.com/wallabag/wallabag/pull/2020) Fix number of entries in tag/list (Nicolas Lœuillet)
+- [#2022](https://github.com/wallabag/wallabag/pull/2022) Fix pagination bar on small devices (Nicolas Lœuillet)
+- [#2013](https://github.com/wallabag/wallabag/pull/2013) Fix tag listing (Nicolas Lœuillet)
+- [#1976](https://github.com/wallabag/wallabag/pull/1976) Fix filter reading time (Nicolas Lœuillet)
+- [#2005](https://github.com/wallabag/wallabag/pull/2005) Fix reading speed not defined when user was created via config page (Nicolas Lœuillet)
+- [#2010](https://github.com/wallabag/wallabag/pull/2010) Set the title via POST /api/entries (Nicolas Lœuillet)
+
 ## [2.0.3] - 2016-04-22
 
 ### Added
