@@ -252,3 +252,25 @@ This is due to the fact that we will need to grant the same rights access on the
 .. code-block:: bash
 
    chown -R www-data:www-data /var/www/wallabag/var
+
+It has to be the same for the following folders
+
+* /var/www/wallabag/bin/
+* /var/www/wallabag/app/config/
+* /var/www/wallabag/vendor/
+
+by entering
+
+.. code-block:: bash
+
+   chown -R www-data:www-data /var/www/wallabag/bin
+   chown -R www-data:www-data /var/www/wallabag/app/config
+   chown -R www-data:www-data /var/www/wallabag/vendor
+
+otherwise, sooner or later you will meet this error messages
+
+.. code-block:: bash
+
+    Unable to write to the "bin" directory.
+    file_put_contents(app/config/parameters.yml): failed to open stream: Permission denied
+    file_put_contents(/.../wallabag/vendor/autoload.php): failed to open stream: Permission denied
