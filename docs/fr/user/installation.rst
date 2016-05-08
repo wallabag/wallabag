@@ -249,3 +249,26 @@ Cela est dû au fait qu'il faut aussi octroyer les mêmes droits d'accès au dos
 .. code-block:: bash
 
    chown -R www-data:www-data /var/www/wallabag/var
+
+Il en est de même pour les dossiers suivants :
+
+* /var/www/wallabag/bin/
+* /var/www/wallabag/app/config/
+* /var/www/wallabag/vendor/
+
+en tapant
+
+.. code-block:: bash
+
+   chown -R www-data:www-data /var/www/wallabag/bin
+   chown -R www-data:www-data /var/www/wallabag/app/config
+   chown -R www-data:www-data /var/www/wallabag/vendor
+
+sinon lors de la mise à jour vous finirez par rencontrer les erreurs suivantes :
+
+
+.. code-block:: bash
+
+    Unable to write to the "bin" directory.
+    file_put_contents(app/config/parameters.yml): failed to open stream: Permission denied
+    file_put_contents(/.../wallabag/vendor/autoload.php): failed to open stream: Permission denied
