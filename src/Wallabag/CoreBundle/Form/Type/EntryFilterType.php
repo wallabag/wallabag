@@ -87,6 +87,18 @@ class EntryFilterType extends AbstractType
             ->add('isStarred', CheckboxFilterType::class, [
                 'label' => 'entry.filters.starred_label',
             ])
+            ->add('isUnread', CheckboxFilterType::class, [
+                'label' => 'entry.filters.unread_label',
+                'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
+                    if(false === $values['value']) {
+                        return;
+                    }
+
+                    $expression = $filterQuery->getExpr()->eq('e.isArchived', 'false');
+
+                    return $filterQuery->createCondition($expression);
+                },
+            ])
             ->add('previewPicture', CheckboxFilterType::class, [
                 'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
                     if (false === $values['value']) {

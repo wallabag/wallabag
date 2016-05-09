@@ -154,6 +154,7 @@ entry:
         status_label: 'Estatus'
         archived_label: 'Legits'
         starred_label: 'Favorits'
+        unread_label: 'Pas legits'
         preview_picture_label: 'A una fotò'
         preview_picture_help: 'Fotò'
         language_label: 'Lenga'

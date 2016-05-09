@@ -154,6 +154,7 @@ entry:
         status_label: 'وضعیت'
         archived_label: 'بایگانی‌شده'
         starred_label: 'برگزیده'
+        unread_label: 'خوانده‌نشده'
         preview_picture_label: 'دارای عکس پیش‌نمایش'
         preview_picture_help: 'پیش‌نمایش عکس'
         language_label: 'زبان'
