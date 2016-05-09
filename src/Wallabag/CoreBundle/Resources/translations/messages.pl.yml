@@ -154,6 +154,7 @@ entry:
         status_label: 'Status'
         archived_label: 'Zarchiwizowane'
         starred_label: 'Oznaczone gwiazdką'
+        unread_label: 'Nieprzeczytane'
         preview_picture_label: 'Posiada podgląd obrazu'
         preview_picture_help: 'Podgląd obrazu'
         language_label: 'Język'
