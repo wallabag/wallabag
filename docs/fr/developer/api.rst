@@ -266,3 +266,4 @@ Certaines applications ou bibliothèques utilisent notre API. En voici une liste
 - `Java wrapper for the wallabag API <https://github.com/Strubbl/wallabag-java>`_ par Strubbl.
 - `.NET library for the wallabag v2 API <https://github.com/jlnostr/wallabag-api>`_ par Julian Oster.
 - `Python API for wallabag <https://github.com/foxmask/wallabag_api>`_ par FoxMaSk, pour son projet `Trigger Happy <https://blog.trigger-happy.eu/>`_.
+- `Un plugin <https://github.com/joshp23/ttrss-to-wallabag-v2>`_ conçu pour `Tiny Tiny RSS <https://tt-rss.org/gitlab/fox/tt-rss/wikis/home>`_  qui utilise l'API wallabag v2 . Par Josh Panter
