@@ -471,6 +471,24 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertCount(1, $crawler->filter('div[class=entry]'));
     }
 
+    public function testFilterOnUnreadStatus()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/all/list');
+
+        $form = $crawler->filter('button[id=submit-filter]')->form();
+
+        $data = [
+            'entry_filter[isUnread]' => true,
+        ];
+
+        $crawler = $client->submit($form, $data);
+
+        $this->assertCount(4, $crawler->filter('div[class=entry]'));
+    }
+
     public function testFilterOnCreationDate()
     {
         $this->logInAs('admin');
