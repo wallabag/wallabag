@@ -154,6 +154,7 @@ entry:
         status_label: 'Durum'
         archived_label: 'Arşiv'
         starred_label: 'Favori'
+        unread_label: 'Okunmayan'
         preview_picture_label: 'Resim önizlemesi varsa'
         preview_picture_help: 'Resim önizlemesi'
         language_label: 'Dil'

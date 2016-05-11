@@ -154,6 +154,7 @@ entry:
         status_label: 'Status'
         archived_label: 'Lus'
         starred_label: 'Favoris'
+        unread_label: 'Non lus'
         preview_picture_label: 'A une photo'
         preview_picture_help: 'Photo'
         language_label: 'Langue'
