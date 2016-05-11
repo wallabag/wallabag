@@ -154,6 +154,7 @@ entry:
         status_label: 'Status'
         archived_label: 'Archiviert'
         starred_label: 'Favorisiert'
+        unread_label: 'Ungelesene'
         preview_picture_label: 'Vorschaubild vorhanden'
         preview_picture_help: 'Vorschaubild'
         language_label: 'Sprache'
