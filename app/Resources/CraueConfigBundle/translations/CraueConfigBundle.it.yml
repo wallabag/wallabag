@@ -1,5 +1,5 @@
 download_pictures: Scarica le immagini sul tuo server
-carrot: Abilita la condivisione su Carrot
+carrot: Abilita la condivisione con Carrot
 diaspora_url: Diaspora URL, se il servizio è abilitato
 export_epub: Abilita esportazione ePub
 export_mobi: Abilita esportazione .mobi
@@ -9,15 +9,15 @@ export_json: Abilita esportazione JSON
 export_txt: Abilita esportazione TXT
 export_xml: Abilita esportazione XML
 pocket_consumer_key: Consumer key per Pocket per importare i contenuti (https://getpocket.com/developer/docs/authentication)
-shaarli_url: Shaarli URL, if the service is enabled
-share_diaspora: Abilita la condivisione su Diaspora
+shaarli_url: Shaarli URL, se il servizio è abilitato
+share_diaspora: Abilita la condivisione con Diaspora
 share_mail: Abilita la condivisione per email
-share_shaarli: Abilita la condivisione su Shaarli
-share_twitter: Abilita la condivisione su Twitter
+share_shaarli: Abilita la condivisione con Shaarli
+share_twitter: Abilita la condivisione con Twitter
 show_printlink: Mostra un collegamento per stampare il contenuto
 wallabag_support_url: URL di supporto per wallabag
 wallabag_url: URL della *tua* installazione di wallabag
-entry: "articolo"
+entry: "contenuto"
 export: "esporta"
 import: "importa"
 misc: "misc"
@@ -25,5 +25,5 @@ modify_settings: "applica"
 piwik_host: Host del tuo sito in Piwik
 piwik_site_id: ID del tuo sito in Piwik
 piwik_enabled: Abilita Piwik
-demo_mode_enabled: "Enable demo mode ? (only used for the wallabag public demo)"
+demo_mode_enabled: "Abilita modalità demo ? (usato solo per la demo pubblica di wallabag)"
 demo_mode_username: "Utente Demo"
