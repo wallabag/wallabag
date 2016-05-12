@@ -258,6 +258,7 @@ It has to be the same for the following folders
 * /var/www/wallabag/bin/
 * /var/www/wallabag/app/config/
 * /var/www/wallabag/vendor/
+* /var/www/wallabag/data/db/  
 
 by entering
 
@@ -266,6 +267,7 @@ by entering
    chown -R www-data:www-data /var/www/wallabag/bin
    chown -R www-data:www-data /var/www/wallabag/app/config
    chown -R www-data:www-data /var/www/wallabag/vendor
+   chown -R www-data:www-data /var/www/wallabag/data/db
 
 otherwise, sooner or later you will meet this error messages
 
