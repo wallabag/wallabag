@@ -110,8 +110,8 @@ class WallabagRestController extends FOSRestController
 
         $url = $request->request->get('url');
         $title = $request->request->get('title');
-        $isArchived = (int) $request->request->get('archive');
-        $isStarred = (int) $request->request->get('starred');
+        $isArchived = $request->request->get('archive');
+        $isStarred = $request->request->get('starred');
 
         $entry = $this->get('wallabag_core.entry_repository')->findByUrlAndUserId($url, $this->getUser()->getId());
 
