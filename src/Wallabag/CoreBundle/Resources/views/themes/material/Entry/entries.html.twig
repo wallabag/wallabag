@@ -32,7 +32,7 @@
 
                         <div class="card-content">
                             {% if not entry.previewPicture is null %}
-                                <i class="card-title grey-text text-darken-4 activator mdi-navigation-more-vert right"></i>
+                                <i class="card-title grey-text text-darken-4 activator mdi-navigation-more-horiz right"></i>
                             {% endif %}
 
                             <span class="card-title"><a href="{{ path('view', { 'id': entry.id }) }}" title="{{ entry.title|raw }}">{{ entry.title|striptags|slice(0, 42)|raw }}</a></span>
