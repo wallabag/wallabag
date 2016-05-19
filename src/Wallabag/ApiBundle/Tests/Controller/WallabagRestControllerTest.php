@@ -423,4 +423,92 @@ class WallabagRestControllerTest extends WallabagApiTestCase
 
         $this->assertEquals($this->client->getContainer()->getParameter('wallabag_core.version'), $content);
     }
+
+    public function testSaveIsArchivedAfterPost()
+    {
+        $entry = $this->client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneBy(['user' => 1, 'isArchived' => true]);
+
+        if (!$entry) {
+            $this->markTestSkipped('No content found in db.');
+        }
+
+        $this->client->request('POST', '/api/entries.json', [
+            'url' => $entry->getUrl(),
+        ]);
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+      $this->assertEquals(true, $content['is_archived']);
+    }
+
+    public function testSaveIsStarredAfterPost()
+    {
+        $entry = $this->client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneBy(['user' => 1, 'isStarred' => true]);
+
+        if (!$entry) {
+            $this->markTestSkipped('No content found in db.');
+        }
+
+        $this->client->request('POST', '/api/entries.json', [
+            'url' => $entry->getUrl(),
+        ]);
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+      $this->assertEquals(true, $content['is_starred']);
+    }
+
+    public function testSaveIsArchivedAfterPatch()
+    {
+        $entry = $this->client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneBy(['user' => 1, 'isArchived' => true]);
+
+        if (!$entry) {
+            $this->markTestSkipped('No content found in db.');
+        }
+
+        $this->client->request('PATCH', '/api/entries/'.$entry->getId().'.json', [
+            'title' => $entry->getTitle().'++',
+        ]);
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertEquals(true, $content['is_archived']);
+    }
+
+    public function testSaveIsStarredAfterPatch()
+    {
+        $entry = $this->client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneBy(['user' => 1, 'isStarred' => true]);
+
+        if (!$entry) {
+            $this->markTestSkipped('No content found in db.');
+        }
+        $this->client->request('PATCH', '/api/entries/'.$entry->getId().'.json', [
+            'title' => $entry->getTitle().'++',
+        ]);
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+      $this->assertEquals(true, $content['is_starred']);
+    }
+
 }
