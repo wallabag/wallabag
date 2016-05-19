@@ -443,7 +443,7 @@ class WallabagRestControllerTest extends WallabagApiTestCase
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
-      $this->assertEquals(true, $content['is_archived']);
+        $this->assertEquals(true, $content['is_archived']);
     }
 
     public function testSaveIsStarredAfterPost()
@@ -465,7 +465,7 @@ class WallabagRestControllerTest extends WallabagApiTestCase
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
-      $this->assertEquals(true, $content['is_starred']);
+        $this->assertEquals(true, $content['is_starred']);
     }
 
     public function testSaveIsArchivedAfterPatch()
@@ -508,7 +508,6 @@ class WallabagRestControllerTest extends WallabagApiTestCase
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
-      $this->assertEquals(true, $content['is_starred']);
+        $this->assertEquals(true, $content['is_starred']);
     }
-
 }
