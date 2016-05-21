@@ -18,12 +18,19 @@ class DeveloperControllerTest extends WallabagCoreTestCase
 
         $form = $crawler->filter('button[type=submit]')->form();
 
-        $client->submit($form);
+        $data = [
+            'client[name]' => 'My app',
+        ];
+
+        $crawler = $client->submit($form, $data);
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
         $newNbClients = $em->getRepository('WallabagApiBundle:Client')->findAll();
         $this->assertGreaterThan(count($nbClients), count($newNbClients));
+
+        $this->assertGreaterThan(1, $alert = $crawler->filter('.settings ul li strong')->extract(['_text']));
+        $this->assertContains('My app', $alert[0]);
     }
 
     public function testListingClient()
