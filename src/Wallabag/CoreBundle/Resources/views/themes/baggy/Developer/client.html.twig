@@ -13,6 +13,12 @@
                 {{ form_errors(form) }}
 
                 <div class="input-field col s12">
+                    {{ form_label(form.name) }}
+                    {{ form_errors(form.name) }}
+                    {{ form_widget(form.name) }}
+                </div>
+
+                <div class="input-field col s12">
                     {{ form_label(form.redirect_uris) }}
                     {{ form_errors(form.redirect_uris) }}
                     {{ form_widget(form.redirect_uris) }}

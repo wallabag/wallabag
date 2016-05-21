@@ -49,12 +49,13 @@ class DeveloperController extends Controller
 
             $this->get('session')->getFlashBag()->add(
                 'notice',
-                'flashes.developer.notice.client_created'
+                $this->get('translator')->trans('flashes.developer.notice.client_created', array('%name%' => $client->getName()))
             );
 
             return $this->render('WallabagCoreBundle:Developer:client_parameters.html.twig', [
                 'client_id' => $client->getPublicId(),
                 'client_secret' => $client->getSecret(),
+                'client_name' => $client->getName(),
             ]);
         }
 
@@ -80,7 +81,7 @@ class DeveloperController extends Controller
 
         $this->get('session')->getFlashBag()->add(
             'notice',
-            'flashes.developer.notice.client_deleted'
+            $this->get('translator')->trans('flashes.developer.notice.client_deleted', array('%name%' => $client->getName()))
         );
 
         return $this->redirect($this->generateUrl('developer'));
