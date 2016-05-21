@@ -18,8 +18,39 @@ class Client extends BaseClient
      */
     protected $id;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="text", nullable=true)
+     */
+    protected $name;
+
     public function __construct()
     {
         parent::__construct();
+    }
+
+    /**
+     * Get name.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set name.
+     *
+     * @param string $name
+     *
+     * @return Client
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
     }
 }

@@ -350,19 +350,21 @@ developer:
         field_grant_types: 'Grant type allowed'
         no_client: 'No client yet.'
     remove:
-        warn_message_1: 'You have the ability to remove this client. This action is IRREVERSIBLE !'
+        warn_message_1: 'You have the ability to remove the client %name%. This action is IRREVERSIBLE !'
         warn_message_2: "If you remove it, every app configured with that client won't be able to auth on your wallabag."
-        action: 'Remove this client'
+        action: 'Remove the client %name%'
     client:
         page_title: 'Developer > New client'
         page_description: 'You are about to create a new client. Please fill the field below for the redirect URI of your application.'
         form:
-            redirect_uris_label: 'Redirect URIs'
+            name_label: 'Name of the client'
+            redirect_uris_label: 'Redirect URIs (optional)'
             save_label: 'Create a new client'
         action_back: 'Back'
     client_parameter:
         page_title: 'Developer > Client parameters'
         page_description: 'Here are your client parameters.'
+        field_name: 'Client name'
         field_id: 'Client ID'
         field_secret: 'Client secret'
         back: 'Back'
@@ -414,5 +416,5 @@ flashes:
             summary: 'Import summary: %imported% imported, %skipped% already saved.'
     developer:
         notice:
-            client_created: 'New client created.'
-            client_deleted: 'Client deleted'
+            client_created: 'New client %name% created.'
+            client_deleted: 'Client %name% deleted'
