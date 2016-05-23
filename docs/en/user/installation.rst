@@ -53,7 +53,7 @@ To install wallabag itself, you must run these two commands:
 
     git clone https://github.com/wallabag/wallabag.git
     cd wallabag
-    git checkout 2.0.4
+    git checkout 2.0.5
     SYMFONY_ENV=prod composer install --no-dev -o --prefer-dist
     php bin/console wallabag:install --env=prod
 
@@ -258,7 +258,7 @@ It has to be the same for the following folders
 * /var/www/wallabag/bin/
 * /var/www/wallabag/app/config/
 * /var/www/wallabag/vendor/
-* /var/www/wallabag/data/  
+* /var/www/wallabag/data/
 
 by entering
 

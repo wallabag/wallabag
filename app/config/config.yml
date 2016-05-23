@@ -28,7 +28,7 @@ framework:
     assets: ~
 
 wallabag_core:
-    version: 2.0.4
+    version: 2.0.5
     paypal_url: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9UBA65LG3FX9Y&lc=gb"
     languages:
         en: 'English'
