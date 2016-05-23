@@ -81,7 +81,7 @@ config:
             archive: 'archived'
         rss_limit: 'Number of items in the feed'
     form_user:
-        two_factor_description: "Enabling two factor authentication means you'll receive an email with a code on every new untrusted connexion"
+        two_factor_description: "Enabling two factor authentication means you'll receive an email with a code on every new untrusted connection."
         name_label: 'Name'
         email_label: 'Email'
         twoFactorAuthentication_label: 'Two factor authentication'
@@ -98,9 +98,9 @@ config:
         faq:
             title: 'FAQ'
             tagging_rules_definition_title: 'What does « tagging rules » mean?'
-            tagging_rules_definition_description: 'They are rules used by Wallabag to automatically tag new entries.<br />Each time a new entry is added, all the tagging rules will be used to add the tags you configured, thus saving you the trouble to manually classify your entries.'
+            tagging_rules_definition_description: 'They are rules used by Wallabag to automatically tag new entries.<br />Each time a new entry is added, all the tagging rules will be used to add the tags you configured, thus saving you the trouble of manually classifying your entries.'
             how_to_use_them_title: 'How do I use them?'
-            how_to_use_them_description: 'Let assume you want to tag new entries as « <i>short reading</i> » when the reading time is inferior to 3 minutes.<br />In that case, you should put « readingTime &lt;= 3 » in the <i>Rule</i> field and « <i>short reading</i> » in the <i>Tags</i> field.<br />Several tags can added simultaneously by separating them by a comma: « <i>short reading, must read</i> »<br />Complex rules can be written by using predefined operators: if « <i>readingTime &gt;= 5 AND domainName = "github.com"</i> » then tag as « <i>long reading, github </i> »'
+            how_to_use_them_description: 'Let us assume you want to tag new entries as « <i>short reading</i> » when the reading time is under 3 minutes.<br />In that case, you should put « readingTime &lt;= 3 » in the <i>Rule</i> field and « <i>short reading</i> » in the <i>Tags</i> field.<br />Several tags can added simultaneously by separating them with a comma: « <i>short reading, must read</i> »<br />Complex rules can be written by using predefined operators: if « <i>readingTime &gt;= 5 AND domainName = "github.com"</i> » then tag as « <i>long reading, github </i> »'
             variables_available_title: 'Which variables and operators can I use to write rules?'
             variables_available_description: 'The following variables and operators can be used to create tagging rules:'
             meaning: 'Meaning'
@@ -140,7 +140,7 @@ entry:
         archived: 'Archived entries'
         filtered: 'Filtered entries'
     list:
-        number_on_the_page: '{0} There is no entry.|{1} There is one entry.|]1,Inf[ There are %count% entries.'
+        number_on_the_page: '{0} There are no entries.|{1} There is one entry.|]1,Inf[ There are %count% entries.'
         reading_time: 'estimated reading time'
         reading_time_minutes: 'estimated reading time: %readingTime% min'
         reading_time_less_one_minute: 'estimated reading time: <small class="inferieur">&lt;</small> 1 min'
@@ -222,14 +222,14 @@ about:
         bug_reports: 'Bug reports'
         support: '<a href="https://support.wallabag.org">On our support website</a> or <a href="https://github.com/wallabag/wallabag/issues">on GitHub</a>'
     helping:
-        description: 'wallabag is free and opensource. You can help us:'
+        description: 'wallabag is free and open source. You can help us:'
         by_contributing: 'by contributing to the project:'
         by_contributing_2: 'an issue lists all our needs'
         by_paypal: 'via Paypal'
     contributors:
         description: 'Thank you to contributors on wallabag web application'
     third_party:
-        description: 'Here are the list of third-party libraries used in wallabag (with their licenses):'
+        description: 'Here is the list of third-party libraries used in wallabag (with their licenses):'
         package: 'Package'
         license: 'License'
 
@@ -258,7 +258,7 @@ quickstart:
     page_title: 'Quickstart'
     intro:
         title: 'Welcome to wallabag!'
-        paragraph_1: "We'll accompany you to visit wallabag and show you some features which can interest you."
+        paragraph_1: "We'll accompany you on your visit to wallabag and show you some features that might interest you."
         paragraph_2: 'Follow us!'
     configure:
         title: 'Configure the application'
@@ -290,7 +290,7 @@ quickstart:
         title: 'Full documentation'
         annotate: 'Annotate your article'
         export: 'Convert your articles into ePUB or PDF'
-        search_filters: 'See how you can look for an article by using search engine and filters'
+        search_filters: 'See how you can look for an article by using the search engine and filters'
         fetching_errors: 'What can I do if an article encounters errors during fetching?'
         all_docs: 'And so many other articles!'
     support:
@@ -303,11 +303,11 @@ quickstart:
 tag:
     page_title: 'Tags'
     list:
-        number_on_the_page: '{0} There is no tag.|{1} There is one tag.|]1,Inf[ There are %count% tags.'
+        number_on_the_page: '{0} There are no tags.|{1} There is one tag.|]1,Inf[ There are %count% tags.'
 
 import:
     page_title: 'Import'
-    page_description: 'Welcome to wallabag importer. Please select your previous service that you want to migrate.'
+    page_description: 'Welcome to wallabag importer. Please select your previous service from which you want to migrate.'
     action:
         import_contents: 'Import contents'
     form:
@@ -317,7 +317,7 @@ import:
         save_label: 'Upload file'
     pocket:
         page_title: 'Import > Pocket'
-        description: "This importer will import all your Pocket data. Pocket doesn't allow us to retrieve content from their service, so the readable content of each article will be re-fetched by wallabag."
+        description: "This importer will import all of your Pocket data. Pocket doesn't allow us to retrieve content from their service, so the readable content of each article will be re-fetched by wallabag."
         config_missing:
             description: "Pocket import isn't configured."
             admin_message: 'You need to define %keyurls%a pocket_consumer_key%keyurle%.'
