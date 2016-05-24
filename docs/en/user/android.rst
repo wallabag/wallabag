@@ -13,61 +13,61 @@ Steps to configure your app
 
 When you first start the app, you see the welcome screen, where you are adviced to configure the app for your wallabag instance at first.
 
-.. image:: ../../img/user/android_welcome_screen.de.png
+.. image:: ../../img/user/android_welcome_screen.en.png
     :alt: Welcome screen
     :align: center
 
 Just confirm that message and you get redirected to the settings screen.
 
-.. image:: ../../img/user/android_configuration_screen.de.png
+.. image:: ../../img/user/android_configuration_screen.en.png
     :alt: Settings screen
     :align: center
 
 Fill in your wallabag data. You need to enter your wallabag address. It is important that this URL does not end with a slash. Also add your wallabag credentials to the user name and password field.
 
-.. image:: ../../img/user/android_configuration_filled_in.de.png
+.. image:: ../../img/user/android_configuration_filled_in.en.png
     :alt: Filled in settings
     :align: center
 
 After you have filled in your data, push the button Connection test and wait for the test to finish. 
 
-.. image:: ../../img/user/android_configuration_connection_test.de.png
+.. image:: ../../img/user/android_configuration_connection_test.en.png
     :alt: Connection test with your wallabag data
     :align: center
 
 The connection test shall finish with success. If not, you need to fix this first until you proceed. 
 
-.. image:: ../../img/user/android_configuration_connection_test_success.de.png
+.. image:: ../../img/user/android_configuration_connection_test_success.en.png
     :alt: Connection test successful
     :align: center
 
 After the connection test was successful, you can push the button to get your feed credentials. The app now tries to login to your wallabag instance and get the user id and the corresponding token for the feeds.
 
-.. image:: ../../img/user/android_configuration_get_feed_credentials.de.png
+.. image:: ../../img/user/android_configuration_get_feed_credentials.en.png
     :alt: Getting the feed credentials
     :align: center
 
 When the process of getting your feed credentials finishes with success you see a toast message that the user id and the token were automatically filled in to the form.
 
-.. image:: ../../img/user/android_configuration_feed_credentials_automatically_filled_in.de.png
+.. image:: ../../img/user/android_configuration_feed_credentials_automatically_filled_in.en.png
     :alt: Getting feed credentials successful
     :align: center
 
 Now you need to scroll to the bottom of the settings menu. Of course you can adjust the given settings to your needs. Finish the configuration of your app with pushing the save button.
 
-.. image:: ../../img/user/android_configuration_scroll_bottom.de.png
+.. image:: ../../img/user/android_configuration_scroll_bottom.en.png
     :alt: Bottom of the settings screen
     :align: center
 
 After hitting the save button, you get the following screen. The app proposes to initiate a syncronisation process to update your feeds of articles. It is recommended to acknowledge this action and press Yes.
 
-.. image:: ../../img/user/android_configuration_saved_feed_update.de.png
+.. image:: ../../img/user/android_configuration_saved_feed_update.en.png
     :alt: Settings saved the first time
     :align: center
 
 Finally after the syncronisation finished successfully, you are presented the list of unread articles. 
 
-.. image:: ../../img/user/android_unread_feed_synced.de.png
+.. image:: ../../img/user/android_unread_feed_synced.en.png
     :alt: Filled article list cause feeds successfully syncronized
     :align: center
 
