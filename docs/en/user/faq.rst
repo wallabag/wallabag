@@ -1,26 +1,39 @@
 Frequently Asked Questions
 ==========================
 
-During the installation, I've got this error ``Error Output: sh: 1: @post-cmd: not found``
-------------------------------------------------------------------------------------------
+During the installation, I got the error ``Error Output: sh: 1: @post-cmd: not found``
+--------------------------------------------------------------------------------------
 
 It seems you have a problem with your ``composer`` installation. Try to uninstall and reinstall it.
 
 `Read the documentation about composer to know how to install it
 <https://getcomposer.org/doc/00-intro.md>`__.
 
-I can't valid the registration form
------------------------------------
+I can't validate the registration form
+--------------------------------------
 
-Make sure that all fields are well filled:
+Ensure that all fields are properly filled:
 
 * valid email address
 * same passwords in two fields
 
-I don't receive my activation email
------------------------------------
+I'm not receiving my activation email
+-------------------------------------
 
-Are you sure your email address was correct? Did you check your spams folder?
+Are you sure your email address was correct? Did you check your spam folder?
+
+If you still don't see the activation email, please ensure that you have
+installed and properly configured a mail transfer agent. Be sure to include a
+firewall rule for SMTP. E.g., if using firewalld:
+
+::
+
+    firewall-cmd --permanent --add-service=smtp
+    firewall-cmd --reload
+
+Lastly, if you have SELinux enabled, set the following rule:
+
+``setsebool -P httpd_can_sendmail 1``
 
 When I click on the activation link, I've got this message: ``The user with confirmation token "DtrOPfbQeVkWf6N" does not exist``.
 ----------------------------------------------------------------------------------------------------------------------------------
