@@ -177,7 +177,7 @@ class Entry
     private $user;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="entries", cascade={"persist", "remove"})
+     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="entries", cascade={"persist"})
      * @ORM\JoinTable
      *
      * @Groups({"entries_for_user", "export_all"})
