@@ -6,7 +6,6 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Wallabag\CoreBundle\Entity\Config;
-use Wallabag\CoreBundle\Entity\TaggingRule;
 
 class LoadConfigData extends AbstractFixture implements OrderedFixtureInterface
 {
