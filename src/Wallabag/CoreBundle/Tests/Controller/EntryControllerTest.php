@@ -163,7 +163,7 @@ class EntryControllerTest extends WallabagCoreTestCase
     /**
      * This test will require an internet connection.
      */
-    public function testPostNewThatWillBeTaggued()
+    public function testPostNewThatWillBeTagged()
     {
         $this->logInAs('admin');
         $client = $this->getClient();
@@ -181,14 +181,42 @@ class EntryControllerTest extends WallabagCoreTestCase
         $client->submit($form, $data);
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
-
-        $client->followRedirect();
+        $this->assertContains('/', $client->getResponse()->getTargetUrl());
 
         $em = $client->getContainer()
             ->get('doctrine.orm.entity_manager');
         $entry = $em
             ->getRepository('WallabagCoreBundle:Entry')
             ->findOneByUrl($url);
+        $tags = $entry->getTags();
+
+        $this->assertCount(1, $tags);
+        $this->assertEquals('wallabag', $tags[0]->getLabel());
+
+        $em->remove($entry);
+        $em->flush();
+
+        // and now re-submit it to test the cascade persistence for tags after entry removal
+        // related https://github.com/wallabag/wallabag/issues/2121
+        $crawler = $client->request('GET', '/new');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $form = $crawler->filter('form[name=entry]')->form();
+
+        $data = [
+            'entry[url]' => $url = 'https://github.com/wallabag/wallabag/tree/master',
+        ];
+
+        $client->submit($form, $data);
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertContains('/', $client->getResponse()->getTargetUrl());
+
+        $entry = $em
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneByUrl($url);
+
         $tags = $entry->getTags();
 
         $this->assertCount(1, $tags);

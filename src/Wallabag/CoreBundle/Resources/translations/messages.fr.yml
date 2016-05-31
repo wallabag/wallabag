@@ -397,6 +397,7 @@ flashes:
         notice:
             entry_already_saved: 'Article déjà sauvergardé le %date%'
             entry_saved: 'Article enregistré'
+            entry_saved_failed: "L'enregistrement a échoué"
             entry_updated: 'Article mis à jour'
             entry_reloaded: 'Article rechargé'
             entry_reload_failed: "Le rechargement de l'article a échoué"

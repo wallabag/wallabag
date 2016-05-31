@@ -397,6 +397,7 @@ flashes:
         notice:
             entry_already_saved: 'Entry already saved on %date%'
             entry_saved: 'Entry saved'
+            entry_saved_failed: 'Failed to save entry'
             entry_updated: 'Entry updated'
             entry_reloaded: 'Entry reloaded'
             entry_reload_failed: 'Failed to reload entry'

@@ -98,9 +98,30 @@ class Tag
         return $this->slug;
     }
 
+    /**
+     * @param Entry $entry
+     */
     public function addEntry(Entry $entry)
     {
-        $this->entries[] = $entry;
+        if ($this->entries->contains($entry)) {
+            return;
+        }
+
+        $this->entries->add($entry);
+        $entry->addTag($this);
+    }
+
+    /**
+     * @param Entry $entry
+     */
+    public function removeEntry(Entry $entry)
+    {
+        if (!$this->entries->contains($entry)) {
+            return;
+        }
+
+        $this->entries->removeElement($entry);
+        $entry->removeTag($this);
     }
 
     public function hasEntry($entry)

@@ -397,6 +397,7 @@ flashes:
         notice:
             entry_already_saved: 'Article ja salvargardat lo %date%'
             entry_saved: 'Article enregistrat'
+            # entry_saved_failed: 'Failed to save entry'
             entry_updated: 'Article mes a jorn'
             entry_reloaded: 'Article recargat'
             entry_reload_failed: "Fracàs de l'actualizacion de l'article"
