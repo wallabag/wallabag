@@ -113,7 +113,6 @@ class EntryFilterType extends AbstractType
             ])
             ->add('language', ChoiceFilterType::class, [
                 'choices' => array_flip($this->repository->findDistinctLanguageByUser($this->user->getId())),
-                'choices_as_values' => true,
                 'label' => 'entry.filters.language_label',
             ])
         ;

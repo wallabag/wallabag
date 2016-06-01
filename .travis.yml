@@ -55,6 +55,6 @@ before_install:
 script:
     - travis_wait composer install --no-interaction --no-progress --prefer-dist -o
     - ant prepare-$DB
-    - bin/phpunit -v
+    - phpunit -v
     - if [ "$CS_FIXER" = "run" ]; then php bin/php-cs-fixer fix src/ --verbose --dry-run ; fi;
     - if [ "$VALIDATE_TRANSLATION_FILE" = "run" ]; then php bin/console lint:yaml src/Wallabag/CoreBundle/Resources/translations -v ; fi;
