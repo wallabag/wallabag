@@ -15,6 +15,9 @@ cache:
     directories:
         - vendor
         - $HOME/.composer/cache
+        - node_modules
+        - $HOME/.cache/bower
+        - $HOME/.npm
 
 php:
     - 5.5
@@ -22,16 +25,21 @@ php:
     - 7.0
     - hhvm
 
+node_js:
+    - "5"
+
 env:
-    - DB=mysql
-    - DB=pgsql
-    - DB=sqlite
+    - DB=mysql ASSETS=nobuild
+    - DB=pgsql ASSETS=nobuild
+    - DB=sqlite ASSETS=nobuild
 
 matrix:
     fast_finish: true
     include:
         - php: 7.0
-          env: CS_FIXER=run VALIDATE_TRANSLATION_FILE=run DB=sqlite
+          env: CS_FIXER=run VALIDATE_TRANSLATION_FILE=run DB=sqlite ASSETS=nobuild
+        - php: 7.0
+          env: DB=sqlite ASSETS=build
     exclude:
         - php: hhvm
           env: DB=pgsql  # driver for PostgreSQL currently unsupported by HHVM, requires 3rd party dependency
@@ -49,11 +57,15 @@ before_script:
     - composer self-update --no-progress
     - if [[ "$DB" = "pgsql" ]]; then psql -c 'create database wallabag_test;' -U postgres; fi;
 
+install:
+    - if [[ $ASSETS != nobuild ]]; then source ~/.nvm/nvm.sh && nvm install 5.0; fi;
+    - if [[ $ASSETS != nobuild ]]; then npm install -g npm@latest; fi;
+
 before_install:
     - if [[ $TRAVIS_REPO_SLUG = wallabag/wallabag ]]; then cp .composer-auth.json ~/.composer/auth.json; fi;
 
 script:
-    - travis_wait composer install --no-interaction --no-progress --prefer-dist -o
+    - travis_wait bash install.sh
     - ant prepare-$DB
     - bin/phpunit -v
     - if [ "$CS_FIXER" = "run" ]; then php bin/php-cs-fixer fix src/ --verbose --dry-run ; fi;

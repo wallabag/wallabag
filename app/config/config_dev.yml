@@ -34,9 +34,6 @@ monolog:
                 VERBOSITY_DEBUG: DEBUG
             channels: [doctrine]
 
-assetic:
-    use_controller: true
-
 swiftmailer:
     # see http://mailcatcher.me/
     transport: smtp

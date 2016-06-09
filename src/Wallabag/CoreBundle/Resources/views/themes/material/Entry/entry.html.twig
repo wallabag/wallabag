@@ -13,24 +13,24 @@
             <ul>
                 <li>
                     <a class="waves-effect" href="{{ path('homepage') }}">
-                        <i class="mdi-action-exit-to-app"></i>
+                        <i class="material-icons">exit_to_app</i>
                     </a>
                 </li>
             </ul>
             <ul class="right">
                 <li>
                     <a class="waves-effect" title="{{ 'entry.view.left_menu.set_as_read'|trans }}" href="{{ path('archive_entry', { 'id': entry.id }) }}" id="markAsRead">
-                        <i class="{% if entry.isArchived == 0 %}mdi-action-done{% else %}mdi-content-redo{% endif %} small"></i>
+                        <i class="material-icons small">{% if entry.isArchived == 0 %}done{% else %}redo{% endif %}"</i>
                     </a>
                 </li>
                 <li>
                     <a class="waves-effect" title="{{ 'entry.view.left_menu.set_as_favorite'|trans }}" href="{{ path('star_entry', { 'id': entry.id }) }}" id="setFav">
-                        <i class="{% if entry.isStarred == 0 %}mdi-action-favorite-outline{% else %}mdi-action-favorite{% endif %} small"></i>
+                        <i class="material-icons small">{% if entry.isStarred == 0 %}favorite_outline{% else %}favorite{% endif %}</i>
                     </a>
                 </li>
                 <li>
                     <a href="#" data-activates="slide-out" class="button-collapse right">
-                        <i class="mdi-navigation-menu"></i>
+                        <i class="material-icons">navigation_menu</i>
                     </a>
                 </li>
             </ul>
@@ -39,7 +39,7 @@
     <ul id="slide-out" class="collapsible side-nav fixed reader-mode" data-collapsible="accordion">
         <li class="bold border-bottom hide-on-med-and-down">
             <a class="waves-effect collapsible-header" href="{{ path('homepage') }}">
-                <i class="mdi-action-exit-to-app small"></i>
+                <i class="material-icons small">exit_to_app</i>
                 <span>{{ 'entry.view.left_menu.back_to_homepage'|trans }}</span>
             </a>
             <div class="collapsible-body"></div>
@@ -47,7 +47,7 @@
 
         <li class="bold border-bottom hide-on-med-and-down">
             <a class="waves-effect collapsible-header" href="{{ entry.url|e }}">
-                <i class="mdi-content-link small"></i>
+                <i class="material-icons small">link</i>
                 <span>{{ 'entry.view.left_menu.view_original_article'|trans }}</span>
             </a>
             <div class="collapsible-body"></div>
@@ -55,7 +55,7 @@
 
         <li class="bold hide-on-med-and-down">
             <a class="waves-effect collapsible-header" title="{{ 'entry.view.left_menu.re_fetch_content'|trans }}" href="{{ path('reload_entry', { 'id': entry.id }) }}" id="reload">
-                <i class="mdi-action-autorenew small"></i>
+                <i class="material-icons small">autorenew</i>
                 <span>{{ 'entry.view.left_menu.re_fetch_content'|trans }}</span>
             </a>
             <div class="collapsible-body"></div>
@@ -63,7 +63,7 @@
 
         <li class="bold hide-on-med-and-down">
             <a class="waves-effect collapsible-header" title="{{ 'entry.view.left_menu.set_as_read'|trans }}" href="{{ path('archive_entry', { 'id': entry.id }) }}" id="markAsRead">
-                <i class="{% if entry.isArchived == 0 %}mdi-action-done{% else %}mdi-content-redo{% endif %} small"></i>
+                <i class="material-icons small">{% if entry.isArchived == 0 %}done{% else %}redo{% endif %}</i>
                 <span>{% if entry.isArchived == 0 %}{{ 'entry.view.left_menu.set_as_read'|trans }}{% else %}{{ 'entry.view.left_menu.set_as_unread'|trans }}{% endif %}</span>
             </a>
             <div class="collapsible-body"></div>
@@ -71,14 +71,14 @@
 
         <li class="bold hide-on-med-and-down">
             <a class="waves-effect collapsible-header" title="{{ 'entry.view.left_menu.set_as_favorite'|trans }}" href="{{ path('star_entry', { 'id': entry.id }) }}" id="setFav">
-                <i class="{% if entry.isStarred == 0 %}mdi-action-favorite-outline{% else %}mdi-action-favorite{% endif %} small"></i>
+                <i class="material-icons spall">{% if entry.isStarred == 0 %}favorite_outline{% else %}favorite{% endif %}</i>
                 <span>{{ 'entry.view.left_menu.set_as_favorite'|trans }}</span>
             </a>
             <div class="collapsible-body"></div>
         </li>
         <li class="bold border-bottom hide-on-med-and-down">
             <a class="waves-effect collapsible-header" title="{{ 'entry.view.left_menu.delete'|trans }}" href="{{ path('delete_entry', { 'id': entry.id }) }}">
-                <i class="mdi-action-delete small"></i>
+                <i class="material-icons small">delete</i>
                 <span>{{ 'entry.view.left_menu.delete'|trans }}</span>
             </a>
             <div class="collapsible-body"></div>
@@ -86,7 +86,7 @@
 
         <li class="bold border-bottom hide-on-med-and-down">
             <a class="waves-effect collapsible-header" id="nav-btn-add-tag">
-                <i class="mdi-action-label-outline small"></i>
+                <i class="material-icons small">label_outline</i>
                 <span>{{ 'entry.view.left_menu.add_a_tag'|trans }}</span>
             </a>
             <div class="collapsible-body"></div>
@@ -94,7 +94,7 @@
 
         <li class="bold">
             <a class="waves-effect collapsible-header">
-                <i class="mdi-social-share small"></i>
+                <i class="material-icons small">share</i>
                 <span>{{ 'entry.view.left_menu.share_content'|trans }}</span>
             </a>
             <div class="collapsible-body">
@@ -129,7 +129,8 @@
                     {% endif %}
                     {% if craue_setting('share_mail') %}
                         <li>
-                            <a href="mailto:?subject={{ entry.title|url_encode }}&amp;body={{ entry.url|url_encode }}%20via%20@wallabagapp" class="tool email icon icon-mail" title="{{ 'entry.view.left_menu.share_email_label'|trans }}">
+                            <a href="mailto:?subject={{ entry.title|url_encode }}&amp;body={{ entry.url|url_encode }}%20via%20@wallabagapp" title="{{ 'entry.view.left_menu.share_email_label'|trans }}">
+                                <i class="material-icons">email</i>
                                 <span>{{ 'entry.view.left_menu.share_email_label'|trans }}</span>
                             </a>
                         </li>
@@ -141,7 +142,7 @@
         {% if craue_setting('show_printlink') %}
         <li class="bold border-bottom hide-on-med-and-down">
             <a class="waves-effect collapsible-header" title="{{ 'entry.view.left_menu.print'|trans }}" href="javascript: window.print();">
-                <i class="mdi-action-print small"></i>
+                <i class="material-icons small">print</i>
                 <span>{{ 'entry.view.left_menu.print'|trans }}</span>
             </a>
             <div class="collapsible-body"></div>
@@ -151,7 +152,7 @@
 
         <li class="bold">
             <a class="waves-effect collapsible-header">
-                <i class="mdi-file-file-download small"></i>
+                <i class="material-icons small">file_download</i>
                 <span>{{ 'entry.view.left_menu.download'|trans }}</span>
             </a>
             <div class="collapsible-body">
@@ -169,7 +170,7 @@
 
         <li class="bold hide-on-large-only">
             <a class="waves-effect collapsible-header" title="{{ 'entry.view.left_menu.delete'|trans }}" href="{{ path('delete_entry', { 'id': entry.id }) }}">
-                <i class="mdi-action-delete small"></i>
+                <i class="material-icons small">delete</i>
                 <span>{{ 'entry.view.left_menu.delete'|trans }}</span>
             </a>
             <div class="collapsible-body"></div>
@@ -177,7 +178,7 @@
 
         <li class="bold">
             <a class="waves-effect collapsible-header" href="mailto:hello@wallabag.org?subject=Wrong%20display%20in%20wallabag&amp;body={{ entry.url|url_encode }}" title="{{ 'entry.view.left_menu.problem.description'|trans }}">
-                <i class="mdi-alert-error small"></i>
+                <i class="material-icons small">error</i>
                 <span>{{ 'entry.view.left_menu.problem.label'|trans }}</span>
             </a>
             <div class="collapsible-body"></div>
@@ -193,12 +194,13 @@
             <h1>{{ entry.title|raw }} <a href="{{ path('edit', { 'id': entry.id }) }}" title="{{ 'entry.view.edit_title'|trans }}">✎</a></h1>
         </header>
         <aside>
-            <a href="{{ entry.url|e }}" target="_blank" title="{{ 'entry.view.original_article'|trans }} : {{ entry.title|e }}" class="tool link mdi-content-link"> <span>{{ entry.domainName|removeWww }}</span></a>
-            <span class="tool link mdi-communication-comment"> {{ 'entry.view.annotations_on_the_entry'|transchoice(entry.annotations | length) }}</span>
+            <a href="{{ entry.url|e }}" target="_blank" title="{{ 'entry.view.original_article'|trans }} : {{ entry.title|e }}" class="tool">
+            <span class="link"><i class="material-icons link">link</i> {{ entry.domainName|removeWww }}</span></a>
+            <span class="tool link"><i class="material-icons link">comment</i> {{ 'entry.view.annotations_on_the_entry'|transchoice(entry.annotations | length) }}</span>
             <div id="list">
                 {% for tag in entry.tags %}
                     <div class="chip">
-                    {{ tag.label }} <a href="{{ path('remove_tag', { 'entry': entry.id, 'tag': tag.id }) }}"><i class="mdi-action-delete"></i></a>
+                    {{ tag.label }} <a href="{{ path('remove_tag', { 'entry': entry.id, 'tag': tag.id }) }}"><i class="material-icons">delete</i></a>
                     </div>
                 {% endfor %}
             </div>
@@ -217,27 +219,17 @@
         </article>
     </div>
 
-<script type="text/javascript">
-
-var app = new annotator.App();
-app.include(annotator.ui.main, {
-    element: document.querySelector('article')
-});
-app.include(annotator.storage.http, {
-    prefix: '',
-    urls: {
-        create: '{{ path('annotations_post_annotation', { 'entry': entry.id }) }}',
-        update: '{{ path('annotations_put_annotation', { 'annotation': 'idAnnotation' }) }}',
-        destroy: '{{ path('annotations_delete_annotation', { 'annotation': 'idAnnotation' }) }}',
-        search: '{{ path('annotations_get_annotations', { 'entry': entry.id }) }}'
-    }
-});
-app
-.start()
-.then(function () {
-     app.annotations.load({entry: {{ entry.id }}});
-});
-</script>
+<script id="annotationroutes" type="application/json">
+{
+    "prefix": "",
+    "urls": {
+        "create": "{{ path('annotations_post_annotation', { 'entry': entry.id }) }}",
+        "update": "{{ path('annotations_put_annotation', { 'annotation': 'idAnnotation' }) }}",
+        "destroy": "{{ path('annotations_delete_annotation', { 'annotation': 'idAnnotation' }) }}",
+        "search": "{{ path('annotations_get_annotations', { 'entry': entry.id }) }}"
+    },
+    "entryId": "{{ entry.id }}"
+}</script>
 
 {% endblock %}
 

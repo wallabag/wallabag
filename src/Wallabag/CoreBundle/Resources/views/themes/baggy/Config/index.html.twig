@@ -204,6 +204,90 @@
 
         {{ form_rest(form.new_tagging_rule) }}
     </form>
+    <div class="row">
+                            <div class="input-field col s12">
+                                <h4>{{ 'config.form_rules.faq.title'|trans }}</h4>
+
+                                <h5>{{ 'config.form_rules.faq.tagging_rules_definition_title'|trans }}</h5>
+                                <p class="help">{{ 'config.form_rules.faq.tagging_rules_definition_description'|trans|raw }}</p>
+
+                                <h5>{{ 'config.form_rules.faq.how_to_use_them_title'|trans }}</h5>
+                                <p class="help">{{ 'config.form_rules.faq.how_to_use_them_description'|trans|raw }}</p>
+
+                                <h5>{{ 'config.form_rules.faq.variables_available_title'|trans }}</h5>
+                                <p class="help">
+                                    {{ 'config.form_rules.faq.variables_available_description'|trans }}
+
+                                    <table class="bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>{{ 'config.form_rules.faq.variable_description.label'|trans }}</th>
+                                                <th>{{ 'config.form_rules.faq.meaning'|trans }}</th>
+                                                <th>{{ 'config.form_rules.faq.operator_description.label'|trans }}</th>
+                                                <th>{{ 'config.form_rules.faq.meaning'|trans }}</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr>
+                                                <td>title</td>
+                                                <td>{{ 'config.form_rules.faq.variable_description.title'|trans }}</td>
+                                                <td>&lt;=</td>
+                                                <td>{{ 'config.form_rules.faq.operator_description.less_than'|trans }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>url</td>
+                                                <td>{{ 'config.form_rules.faq.variable_description.url'|trans }}</td>
+                                                <td>&lt;</td>
+                                                <td>{{ 'config.form_rules.faq.operator_description.strictly_less_than'|trans }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>isArchived</td>
+                                                <td>{{ 'config.form_rules.faq.variable_description.isArchived'|trans }}</td>
+                                                <td>=&gt;</td>
+                                                <td>{{ 'config.form_rules.faq.operator_description.greater_than'|trans }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>isStarred</td>
+                                                <td>{{ 'config.form_rules.faq.variable_description.isStarred'|trans }}</td>
+                                                <td>&gt;</td>
+                                                <td>{{ 'config.form_rules.faq.operator_description.strictly_greater_than'|trans }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>content</td>
+                                                <td>{{ 'config.form_rules.faq.variable_description.content'|trans }}</td>
+                                                <td>=</td>
+                                                <td>{{ 'config.form_rules.faq.operator_description.equal_to'|trans }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>language</td>
+                                                <td>{{ 'config.form_rules.faq.variable_description.language'|trans }}</td>
+                                                <td>!=</td>
+                                                <td>{{ 'config.form_rules.faq.operator_description.not_equal_to'|trans }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>mimetype</td>
+                                                <td>{{ 'config.form_rules.faq.variable_description.mimetype'|trans }}</td>
+                                                <td>OR</td>
+                                                <td>{{ 'config.form_rules.faq.operator_description.or'|trans }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>readingTime</td>
+                                                <td>{{ 'config.form_rules.faq.variable_description.readingTime'|trans }}</td>
+                                                <td>AND</td>
+                                                <td>{{ 'config.form_rules.faq.operator_description.and'|trans }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>domainName</td>
+                                                <td>{{ 'config.form_rules.faq.variable_description.domainName'|trans }}</td>
+                                                <td>matches</td>
+                                                <td>{{ 'config.form_rules.faq.operator_description.matches'|trans|raw }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </p>
+                            </div>
+                        </div>
 
     <div class="row">
         <div class="input-field col s12">

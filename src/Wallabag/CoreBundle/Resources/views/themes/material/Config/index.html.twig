@@ -206,7 +206,7 @@
                                         {{ 'config.form_rules.then_tag_as_label'|trans }}
                                         « {{ tagging_rule.tags|join(', ') }} »
                                         <a href="{{ path('delete_tagging_rule', {id: tagging_rule.id}) }}" title="{{ 'config.form_rules.delete_rule_label'|trans }}">
-                                            <i class="tool grey-text delete mdi-action-delete"></i>
+                                            <i class="tool grey-text delete material-icons">delete</i>
                                         </a>
                                     </li>
                                     {% endfor %}
