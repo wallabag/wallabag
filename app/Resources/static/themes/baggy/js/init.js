@@ -4,19 +4,18 @@ require('jquery-ui');
 var annotator = require('annotator');
 
 
-$.fn.ready(function() {
-
-  var $listmode = $('#listmode'),
-      $listentries = $("#list-entries");
+$.fn.ready(function () {
+  var $listmode = $('#listmode');
+  var $listentries = $('#list-entries');
 
   /* ==========================================================================
      Menu
      ========================================================================== */
 
-  $("#menu").click(function(){
-    $("#links").toggleClass('menu--open');
+  $('#menu').click(function () {
+    $('#links').toggleClass('menu--open');
     if ($('#content').hasClass('opacity03')) {
-        $('#content').removeClass('opacity03');
+      $('#content').removeClass('opacity03');
     }
   });
 
@@ -24,34 +23,32 @@ $.fn.ready(function() {
      List mode or Table Mode
      ========================================================================== */
 
-  $listmode.click(function(){
-    if ( jquery.cookie("listmode") == 1 ) {
+  $listmode.click(function () {
+    if (jquery.cookie('listmode') === 1) {
       // Cookie
-      $.removeCookie("listmode");
+      $.removeCookie('listmode');
 
-      $listentries.removeClass("listmode");
-      $listmode.removeClass("tablemode");
-      $listmode.addClass("listmode");
-    }
-    else {
+      $listentries.removeClass('listmode');
+      $listmode.removeClass('tablemode');
+      $listmode.addClass('listmode');
+    } else {
       // Cookie
-      jquery.cookie("listmode", 1, {expires: 365});
+      jquery.cookie('listmode', 1, { expires: 365 });
 
-      $listentries.addClass("listmode");
-      $listmode.removeClass("listmode");
-      $listmode.addClass("tablemode");
+      $listentries.addClass('listmode');
+      $listmode.removeClass('listmode');
+      $listmode.addClass('tablemode');
     }
-
   });
 
   /* ==========================================================================
      Cookie listmode
      ========================================================================== */
 
-  if ( jquery.cookie("listmode") == 1 ) {
-    $listentries.addClass("listmode");
-    $listmode.removeClass("listmode");
-    $listmode.addClass("tablemode");
+  if (jquery.cookie('listmode') === 1) {
+    $listentries.addClass('listmode');
+    $listmode.removeClass('listmode');
+    $listmode.addClass('tablemode');
   }
 
   /* ==========================================================================
@@ -59,43 +56,43 @@ $.fn.ready(function() {
      ========================================================================== */
 
 
-  $('#nav-btn-add-tag').on('click', function(){
-       $(".nav-panel-add-tag").toggle(100);
-       $(".nav-panel-menu").addClass('hidden');
-       $("#tag_label").focus();
-       return false;
-    });
+  $('#nav-btn-add-tag').on('click', function () {
+    $('.nav-panel-add-tag').toggle(100);
+    $('.nav-panel-menu').addClass('hidden');
+    $('#tag_label').focus();
+    return false;
+  });
 
   /* ==========================================================================
      Annotations & Remember position
      ========================================================================== */
 
-    if ($("article").length) {
-        var app = new annotator.App();
+    if ($('article').length) {
+      var app = new annotator.App();
 
-        app.include(annotator.ui.main, {
-            element: document.querySelector('article')
-        });
+      app.include(annotator.ui.main, {
+        element: document.querySelector('article'),
+      });
 
-        var x = JSON.parse($('#annotationroutes').html());
-        app.include(annotator.storage.http, x);
+      var x = JSON.parse($('#annotationroutes').html());
+      app.include(annotator.storage.http, x);
 
-        app.start().then(function () {
-             app.annotations.load({entry: x.entryId});
-        });
+      app.start().then(function () {
+        app.annotations.load({ entry: x.entryId });
+      });
 
-        $(window).scroll(function(e){
-            var scrollTop = $(window).scrollTop();
-            var docHeight = $(document).height();
-            var scrollPercent = (scrollTop) / (docHeight);
-            var scrollPercentRounded = Math.round(scrollPercent*100)/100;
-            savePercent(x.entryId, scrollPercentRounded);
-        });
+      $(window).scroll(function (e) {
+        var scrollTop = $(window).scrollTop();
+        var docHeight = $(document).height();
+        var scrollPercent = (scrollTop) / (docHeight);
+        var scrollPercentRounded = Math.round(scrollPercent * 100) / 100;
+        savePercent(x.entryId, scrollPercentRounded);
+      });
 
-        retrievePercent(x.entryId);
+      retrievePercent(x.entryId);
 
-        $(window).resize(function(){
-            retrievePercent(x.entryId);
-        });
+      $(window).resize(function () {
+          retrievePercent(x.entryId);
+      });
     }
 });

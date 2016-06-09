@@ -1,25 +1,25 @@
 function supportsLocalStorage() {
-    try {
-        return 'localStorage' in window && window['localStorage'] !== null;
-    } catch (e) {
-        return false;
-    }
+  try {
+    return 'localStorage' in window && window.localStorage !== null;
+  } catch (e) {
+    return false;
+  }
 }
 
 function savePercent(id, percent) {
-    if (!supportsLocalStorage()) { return false; }
-    localStorage["wallabag.article." + id + ".percent"] = percent;
-    return true;
+  if (!supportsLocalStorage()) { return false; }
+  localStorage['wallabag.article.' + id + '.percent'] = percent;
+  return true;
 }
 
 function retrievePercent(id) {
-    if (!supportsLocalStorage()) { return false; }
+  if (!supportsLocalStorage()) { return false; }
 
-    var bheight = $(document).height();
-    var percent = localStorage["wallabag.article." + id + ".percent"];
-    var scroll = bheight * percent;
+  var bheight = $(document).height();
+  var percent = localStorage['wallabag.article.' + id + '.percent'];
+  var scroll = bheight * percent;
 
-    $('html,body').animate({scrollTop: scroll}, 'fast');
+  $('html,body').animate({ scrollTop: scroll }, 'fast');
 
-    return true;
+  return true;
 }
