@@ -226,7 +226,7 @@ Assuming you install wallabag in the /var/www/wallabag folder, here's the recipe
     dir-listing.activate = "disable"
 
     url.rewrite-if-not-file = (
-        "^/([^?])(?:\?(.))?" => "/app.php?$1&$2",
+        "^/([^?]*)(?:\?(.*))?" => "/app.php?$1&$2",
         "^/([^?]*)" => "/app.php?=$1",
     )
 
