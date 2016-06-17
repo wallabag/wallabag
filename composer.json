@@ -88,7 +88,7 @@
         "sensio/generator-bundle": "^3.0",
         "phpunit/phpunit": "~4.4",
         "symfony/phpunit-bridge": "^2.7",
-        "fabpot/php-cs-fixer": "~1.9"
+        "friendsofphp/php-cs-fixer": "~1.9"
     },
     "scripts": {
         "post-cmd": [
