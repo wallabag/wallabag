@@ -21,7 +21,7 @@ class Client extends BaseClient
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="text", nullable=true)
+     * @ORM\Column(name="name", type="text", nullable=true)
      */
     protected $name;
 
