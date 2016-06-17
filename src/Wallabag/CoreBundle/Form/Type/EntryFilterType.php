@@ -36,16 +36,25 @@ class EntryFilterType extends AbstractType
         $builder
             ->add('readingTime', NumberRangeFilterType::class, [
                 'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
-                    $value = $values['value'];
+                    $lower = $values['value']['left_number'][0];
+                    $upper = $values['value']['right_number'][0];
 
-                    if (null === $value['left_number'][0] || null === $value['right_number'][0]) {
+                    $min = (int) ($lower * $this->user->getConfig()->getReadingSpeed());
+                    $max = (int) ($upper * $this->user->getConfig()->getReadingSpeed());
+
+                    if (null === $lower && null === $upper) {
+                        // no value? no filter
                         return;
+                    } else if (null === $lower && null !== $upper) {
+                        // only lower value is defined: query all entries with reading LOWER THAN this value
+                        $expression = $filterQuery->getExpr()->lte($field, $max);
+                    } else if (null !== $lower && null === $upper) {
+                        // only upper value is defined: query all entries with reading GREATER THAN this value
+                        $expression = $filterQuery->getExpr()->gte($field, $min);
+                    } else {
+                        // both value are defined, perform a between
+                        $expression = $filterQuery->getExpr()->between($field, $min, $max);
                     }
-
-                    $min = (int) ($value['left_number'][0] * $this->user->getConfig()->getReadingSpeed());
-                    $max = (int) ($value['right_number'][0] * $this->user->getConfig()->getReadingSpeed());
-
-                    $expression = $filterQuery->getExpr()->between($field, $min, $max);
 
                     return $filterQuery->createCondition($expression);
                 },
