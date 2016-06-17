@@ -45,10 +45,10 @@ class EntryFilterType extends AbstractType
                     if (null === $lower && null === $upper) {
                         // no value? no filter
                         return;
-                    } else if (null === $lower && null !== $upper) {
+                    } elseif (null === $lower && null !== $upper) {
                         // only lower value is defined: query all entries with reading LOWER THAN this value
                         $expression = $filterQuery->getExpr()->lte($field, $max);
-                    } else if (null !== $lower && null === $upper) {
+                    } elseif (null !== $lower && null === $upper) {
                         // only upper value is defined: query all entries with reading GREATER THAN this value
                         $expression = $filterQuery->getExpr()->gte($field, $min);
                     } else {
