@@ -406,7 +406,7 @@ class EntryController extends Controller
         $url = $this->generateUrl(
             'view',
             ['id' => $entry->getId()],
-            UrlGeneratorInterface::ABSOLUTE_URL
+            UrlGeneratorInterface::ABSOLUTE_PATH
         );
 
         $em = $this->getDoctrine()->getManager();
@@ -418,8 +418,9 @@ class EntryController extends Controller
             'flashes.entry.notice.entry_deleted'
         );
 
-        // don't redirect user to the deleted entry
-        $to = ($url !== $request->headers->get('referer') ? $request->headers->get('referer') : null);
+        // don't redirect user to the deleted entry (check that the referer doesn't end with the same url)
+        $referer = $request->headers->get('referer');
+        $to = (1 !== preg_match('#'.$url.'$#i', $referer) ? $referer : null);
 
         $redirectUrl = $this->get('wallabag_core.helper.redirect')->to($to);
 
