@@ -268,12 +268,12 @@ quickstart:
         tagging_rules: 'Écrivez des règles pour classer automatiquement vos articles'
     admin:
         title: 'Administration'
-        description: "En tant qu'adminitrasteur sur wallabag, vous avez des privilèges qui vous permette de :"
+        description: "En tant qu'administrateur sur wallabag, vous avez des privilèges qui vous permettent de :"
         new_user: 'Créer un nouvel utilisateur'
         analytics: 'Configurer les statistiques'
         sharing: 'Activer des paramètres de partages'
-        export: 'Configurer les export'
-        import: 'Configurer les import'
+        export: "Configurer les formats d'export"
+        import: "Configurer l'import"
     first_steps:
         title: 'Premiers pas'
         new_article: 'Ajoutez votre premier article'
@@ -289,7 +289,7 @@ quickstart:
         create_application: 'Créer votre application tierce'
     docs:
         title: 'Documentation complète'
-        annotate: 'Annotater votre article'
+        annotate: 'Annoter votre article'
         export: 'Convertissez vos articles en ePub ou en PDF'
         search_filters: "Apprenez à utiliser le moteur de recherche et les filtres pour retrouver l'article qui vous intéresse"
         fetching_errors: "Que faire si mon article n'est pas correctement récupéré ?"
