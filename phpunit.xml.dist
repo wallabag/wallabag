@@ -1,24 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<phpunit backupGlobals="false"
-         backupStaticAttributes="false"
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.8/phpunit.xsd"
+         backupGlobals="false"
          colors="true"
-         convertErrorsToExceptions="true"
-         convertNoticesToExceptions="true"
-         convertWarningsToExceptions="true"
-         processIsolation="false"
-         stopOnFailure="false"
-         syntaxCheck="false"
          bootstrap="app/autoload.php"
-        >
+>
 
     <testsuites>
         <testsuite name="wallabag Test Suite">
-            <directory>src/Wallabag/*Bundle/Tests</directory>
+            <directory>tests</directory>
         </testsuite>
     </testsuites>
 
     <php>
+        <ini name="error_reporting" value="-1" />
         <server name="KERNEL_DIR" value="app/" />
     </php>
 

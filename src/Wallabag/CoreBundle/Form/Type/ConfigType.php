@@ -32,7 +32,6 @@ class ConfigType extends AbstractType
         $builder
             ->add('theme', ChoiceType::class, [
                 'choices' => array_flip($this->themes),
-                'choices_as_values' => true,
                 'label' => 'config.form_settings.theme_label',
             ])
             ->add('items_per_page', null, [
@@ -49,7 +48,6 @@ class ConfigType extends AbstractType
             ])
             ->add('language', ChoiceType::class, [
                 'choices' => array_flip($this->languages),
-                'choices_as_values' => true,
                 'label' => 'config.form_settings.language_label',
             ])
             ->add('save', SubmitType::class, [
