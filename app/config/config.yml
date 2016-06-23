@@ -169,7 +169,7 @@ liip_theme:
 
     path_patterns:
         bundle_resource:
-            - %%bundle_path%%/Resources/views/themes/%%current_theme%%/%%template%%
+            - "%%bundle_path%%/Resources/views/themes/%%current_theme%%/%%template%%"
 
 fos_user:
     db_driver: orm
@@ -177,9 +177,9 @@ fos_user:
     user_class: Wallabag\UserBundle\Entity\User
     registration:
         confirmation:
-            enabled: %fosuser_confirmation%
+            enabled: "%fosuser_confirmation%"
     from_email:
-        address:        %from_email%
+        address:        "%from_email%"
         sender_name:    wallabag
 fos_oauth_server:
     db_driver:           orm
@@ -197,8 +197,8 @@ scheb_two_factor:
         cookie_lifetime: 2592000
 
     email:
-        enabled: %twofactor_auth%
-        sender_email: %twofactor_sender%
+        enabled: "%twofactor_auth%"
+        sender_email: "%twofactor_sender%"
         digits: 6
         template: WallabagUserBundle:Authentication:form.html.twig
         mailer: wallabag_user.auth_code_mailer
