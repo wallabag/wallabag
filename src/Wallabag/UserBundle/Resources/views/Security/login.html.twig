@@ -33,10 +33,10 @@
     </div>
     <div class="card-action center">
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
-        <a href="{{ path('fos_user_registration_register') }}" class="waves-effect waves-light grey btn"><i class="material-icons left"></i> {{ 'security.login.register'|trans }}</a>
+        <a href="{{ path('fos_user_registration_register') }}" class="waves-effect waves-light grey btn">{{ 'security.login.register'|trans }}</a>
         <button class="btn waves-effect waves-light" type="submit" name="send">
             {{ 'security.login.submit'|trans }}
-            <i class="mdi-content-send right"></i>
+            <i class="material-icons right">send</i>
         </button>
     </div>
     <div class="center">

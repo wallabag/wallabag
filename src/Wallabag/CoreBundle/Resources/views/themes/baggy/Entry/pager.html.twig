@@ -2,7 +2,8 @@
     <div class="results">
         <div class="nb-results">{{ 'entry.list.number_on_the_page'|transchoice(entries.count) }}</div>
         <div class="pagination">
-            <a href="#" id="filter">{{ 'entry.filters.title'|trans }}</a>
+            <i class="btn-clickable download-btn material-icons md-36">file_download</i>
+            <i class="btn-clickable filter-btn material-icons md-36">filter_list</i>
             {% if entries.getNbPages > 1 %}
                 {{ pagerfanta(entries, 'twitter_bootstrap_translated', {'proximity': 1}) }}
             {% endif %}

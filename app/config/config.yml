@@ -59,19 +59,6 @@ twig:
     form_themes:
         - "LexikFormFilterBundle:Form:form_div_layout.html.twig"
 
-# Assetic Configuration
-assetic:
-    debug:          "%kernel.debug%"
-    use_controller: false
-    bundles:        [ ]
-    #java: /usr/bin/java
-    filters:
-        cssrewrite: ~
-        #closure:
-        #    jar: "%kernel.root_dir%/Resources/java/compiler.jar"
-        #yui_css:
-        #    jar: "%kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar"
-
 # Doctrine Configuration
 doctrine:
     dbal:

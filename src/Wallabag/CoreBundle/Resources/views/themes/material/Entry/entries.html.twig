@@ -32,7 +32,7 @@
 
                         <div class="card-content">
                             {% if not entry.previewPicture is null %}
-                                <i class="card-title grey-text text-darken-4 activator mdi-navigation-more-horiz right"></i>
+                                <i class="card-title grey-text text-darken-4 activator material-icons right">more_vert</i>
                             {% endif %}
 
                             <span class="card-title"><a href="{{ path('view', { 'id': entry.id }) }}" title="{{ entry.title|raw }}">{{ entry.title|striptags|slice(0, 42)|raw }}</a></span>
@@ -56,7 +56,7 @@
 
                     {% if not entry.previewPicture is null %}
                         <div class="card-reveal">
-                            <i class="card-title grey-text text-darken-4 mdi-card-close right"></i>
+                            <i class="card-title grey-text text-darken-4 material-icons right">clear</i>
                             <span class="card-title"><a href="{{ path('view', { 'id': entry.id }) }}">{{ entry.title|raw }}</a></span>
 
                             <div class="estimatedTime grey-text">
@@ -74,11 +74,11 @@
                             <a href="{{ entry.url|e }}" target="_blank" title="{{ 'entry.list.original_article'|trans }}: {{ entry.title|e }} - {{ entry.domainName|removeWww }}" class="tool original grey-text"><span>{{ entry.domainName|removeWww|truncate(18) }}</span></a>
                         </bold>
 
-                        <ul class="tools links right">
+                        <ul class="tools right">
                             <li>
-                                <a title="{{ 'entry.list.toogle_as_read'|trans }}" class="tool grey-text {% if entry.isArchived == 0 %}mdi-action-done{% else %}mdi-content-redo{% endif %}" href="{{ path('archive_entry', { 'id': entry.id }) }}"></a>
-                                <a title="{{ 'entry.list.toogle_as_star'|trans }}" class="tool grey-text {% if entry.isStarred == 0 %}mdi-action-favorite-outline{% else %}mdi-action-favorite{% endif %}" href="{{ path('star_entry', { 'id': entry.id }) }}"></a>
-                                <a title="{{ 'entry.list.delete'|trans }}" class="tool grey-text delete mdi-action-delete " href="{{ path('delete_entry', { 'id': entry.id }) }}"></a>
+                                <a title="{{ 'entry.list.toogle_as_read'|trans }}" class="tool grey-text" href="{{ path('archive_entry', { 'id': entry.id }) }}"><i class="material-icons">{% if entry.isArchived == 0 %}done{% else %}redo{% endif %}</i></a>
+                                <a title="{{ 'entry.list.toogle_as_star'|trans }}" class="tool grey-text" href="{{ path('star_entry', { 'id': entry.id }) }}"><i class="material-icons">{% if entry.isStarred == 0 %}favorite_border{% else %}favorite{% endif %}</i></a>
+                                <a title="{{ 'entry.list.delete'|trans }}" class="tool grey-text delete" href="{{ path('delete_entry', { 'id': entry.id }) }}"><i class="material-icons">delete</i></a>
                             </li>
                         </ul>
                     </div>

@@ -2,17 +2,12 @@
 
 {% block css %}
     {{ parent() }}
-
-    <link rel="stylesheet" href="{{ asset('bundles/wallabagcore/themes/material/css/materialize.min.css') }}"  media="screen,projection"/>
-    <link rel="stylesheet" href="{{ asset('bundles/wallabagcore/themes/material/css/main.css') }}" media="all">
-    <link rel="stylesheet" href="{{ asset('bundles/wallabagcore/themes/material/css/print.css') }}" media="print">
+    <link rel="stylesheet" href="{{ asset('bundles/wallabagcore/themes/material/css/style.min.css') }}"  media="screen,projection,print"/>
 {% endblock %}
 
 {% block scripts %}
     {{ parent() }}
-
-    <script src="{{ asset('bundles/wallabagcore/themes/material/js/materialize.min.js') }}"></script>
-    <script src="{{ asset('bundles/wallabagcore/themes/material/js/init.js') }}"></script>
+    <script src="{{ asset('bundles/wallabagcore/themes/material/js/material.min.js') }}"></script>
 {% endblock %}
 
 {% block header %}
@@ -31,8 +26,8 @@
         <ul id="slide-out" class="side-nav fixed">
             {% block logo %}
                 <li class="logo border-bottom">
-                    <a title="{{ 'menu.left.back_to_unread'|trans }}" href="{{ path('unread') }}">
-                        <img src="{{ asset('bundles/wallabagcore/themes/material/img/logo-square.png') }}" alt="wallabag logo" />
+                    <a title="{% trans %}Back to unread articles{% endtrans %}" href="{{ path('unread') }}">
+                        <img src="{{ asset('bundles/wallabagcore/themes/_global/img/logo-square.png') }}" alt="wallabag logo" />
                     </a>
                 </li>
             {% endblock %}
@@ -76,7 +71,7 @@
             </li>
         </ul>
         <div class="nav-wrapper nav-panels">
-            <a href="#" data-activates="slide-out" class="nav-panel-menu button-collapse"><i class="mdi-navigation-menu"></i></a>
+            <a href="#" data-activates="slide-out" class="nav-panel-menu button-collapse"><i class="material-icons">menu</i></a>
             <div class="left action">
                 {% block title %}
                 {% endblock %}
@@ -85,22 +80,22 @@
                 <ul>
                     <li class="bold">
                         <a title="{{ 'menu.top.add_new_entry'|trans }}" class="waves-effect" href="{{ path('new') }}" id="nav-btn-add">
-                            <i class="mdi-content-add"></i>
+                            <i class="material-icons">add</i>
                         </a>
                     </li>
                     <!--<li>
                         <a title="{{ 'menu.top.search'|trans }}" class="waves-effect" href="javascript: void(null);" id="nav-btn-search">
-                            <i class="mdi-action-search"></i>
+                            <i class="material-icons">search</i>
                         </a>
                     </li>-->
                     <li id="button_filters">
                         <a title="{{ 'menu.top.filter_entries'|trans }}" href="#" data-activates="filters" class="nav-panel-menu button-collapse-right">
-                            <i class="mdi-content-filter-list"></i>
+                            <i class="material-icons">filter_list</i>
                         </a>
                     </li>
                     <li id="button_export">
-                        <a title="{{ 'menu.top.export'|trans }}" class="nav-panel-menu button-collapse-right" href="#" data-activates="export" class="nav-panel-menu button-collapse-right">
-                            <i class="mdi-file-file-download"></i>
+                        <a title="{{ 'menu.top.export'|trans }}" class="nav-panel-menu button-collapse-right" href="#" data-activates="export">
+                            <i class="material-icons">file_download</i>
                         </a>
                     </li>
                 </ul>
@@ -108,14 +103,14 @@
             <form method="get" action="index.php">
                 <div class="input-field nav-panel-search" style="display: none">
                     <input name="search" id="searchfield" type="search" required placeholder="{{ 'menu.search_form.input_label'|trans }}">
-                    <label for="search"><i class="mdi-action-search"></i></label>
-                    <i class="mdi-navigation-close"></i>
+                    <label for="search"><i class="material-icons search">search</i></label>
+                    <i class="material-icons close">clear</i>
                 </div>
             </form>
             <div class="input-field nav-panel-add" style="display: none">
                 {{ render(controller("WallabagCoreBundle:Entry:addEntryForm")) }}
-                <label for="add" class="active"><i class="mdi-content-add"></i></label>
-                <i class="mdi-navigation-close"></i>
+                <label for="add" class="active"><i class="material-icons add">add</i></label>
+                <i class="material-icons close">clear</i>
             </div>
         </div>
     </nav>
