@@ -439,6 +439,10 @@ main ul.row {
   height: auto;
 }
 
+#article > header > h1 {
+  font-size: 2em;
+}
+
 .reader-mode {
   width: 95px !important;
   transition: width 0.2s ease;
