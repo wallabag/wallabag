@@ -342,6 +342,44 @@ main ul.row {
   line-height: 32px;
 }
 
+.card .card-entry-labels {
+    position: absolute;
+    top:10px;
+    z-index: 90;
+    max-width: 50%;
+}
+
+.card .card-entry-labels li {
+    margin: 10px 10px 10px auto;
+    padding: 5px 12px 5px 16px;
+    background-color: rgba(0,151,167,0.85);
+    border-radius: 0 3px 3px 0;
+    color: #fff;
+    cursor: default;
+    max-height: 2em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.card .card-entry-labels-hidden {
+    margin-top: 5px;
+}
+
+.card .card-entry-labels-hidden li {
+    display: inline-block;
+    background-color: rgba(0,151,167,0.85);
+    margin: 0 5px;
+    padding: 5px 12px;
+    border-radius: 3px;
+    color: #fff;
+    max-height: 2em;
+    max-width: calc(100% - 15px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 .card .card-content .estimatedTime {
   margin-bottom: 10px;
 }
