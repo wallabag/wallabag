@@ -26,6 +26,11 @@
                     <div class="card-body">
                         {% if not entry.previewPicture is null %}
                             <div class="card-image waves-effect waves-block waves-light">
+                                <ul class="card-entry-labels">
+                                {% for tag in entry.tags | slice(0, 3) %}
+                                    <li>{{ tag.label }}</li>
+                                {% endfor %}
+                                </ul>
                                 <div class="preview activator" style="background-image: url({{ entry.previewPicture }})"></div>
                             </div>
                         {% endif %}
@@ -50,6 +55,11 @@
 
                             {% if entry.previewPicture is null %}
                                 <p>{{ entry.content|striptags|slice(0, 300)|raw }}&hellip;</p>
+                                <ul class="card-entry-labels-hidden">
+                                {% for tag in entry.tags | slice(0, 2) %}
+                                    <li>{{ tag.label }}</li>
+                                {% endfor %}
+                            </ul>
                             {% endif %}
                         </div>
                     </div>
@@ -66,6 +76,15 @@
                             </div>
 
                             <p>{{ entry.content|striptags|slice(0, 300)|raw }}&hellip;</p>
+
+                            <ul class="card-entry-labels-hidden">
+                                {% for tag in entry.tags | slice(0, 2) %}
+                                    <li>{{ tag.label }}</li>
+                                {% endfor %}
+                            </ul>
+                            {% if entry.tags | length > 2 %}
+                                {{ 'entry.list.number_of_tags'|transchoice(entry.tags | length - 2) }}
+                            {% endif %}
                         </div>
                     {% endif %}
 

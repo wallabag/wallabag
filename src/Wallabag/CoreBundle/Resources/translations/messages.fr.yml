@@ -144,6 +144,7 @@ entry:
         reading_time: 'durée de lecture'
         reading_time_minutes: 'durée de lecture: %readingTime% min'
         reading_time_less_one_minute: 'durée de lecture: <small class="inferieur">&lt;</small> 1 min'
+        number_of_tags: '{1}et un autre tag|]1,Inf[et %count% autres tags'
         original_article: 'original'
         toogle_as_read: 'Marquer comme lu/non lu'
         toogle_as_star: 'Marquer comme favori'
