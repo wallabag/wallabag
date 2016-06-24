@@ -158,7 +158,7 @@ module.exports = function (grunt) {
           {
             expand: true,
             overwrite: true,
-            cwd: '<%= appDir %>/lib/material-design-icons/iconfont/',
+            cwd: '<%= appDir %>/lib/material-design-icons-iconfont/dist/fonts/',
             src: '*',
             dest: '<%= buildDir %>/themes/material/fonts/',
           },

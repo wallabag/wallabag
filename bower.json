@@ -33,6 +33,7 @@
   "dependencies": {
     "icomoon-bower": "^0.1.0",
     "bower-pt-sans": "pt-sans#*",
-    "roboto-fontface": "^0.4.5"
+    "roboto-fontface": "^0.4.5",
+    "material-design-icons-iconfont": "^2.0.4"
   }
 }
