@@ -5,25 +5,27 @@ imports:
 
 framework:
     #esi:             ~
-    translator:      { fallback: "%locale%" }
-    secret:          "%secret%"
+    translator:
+        enabled: true
+        fallback: "%locale%"
+    secret: "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
         strict_requirements: ~
-    form:            ~
+    form: ~
     csrf_protection: ~
-    validation:      { enable_annotations: true }
+    validation:
+        enable_annotations: true
     templating:
         engines: ['twig']
-        #assets_version: SomeVersionScheme
-    default_locale:  "%locale%"
-    trusted_hosts:   ~
+    default_locale: "%locale%"
+    trusted_hosts: ~
     trusted_proxies: ~
     session:
         # handler_id set to null will use default session handler from php.ini
-        handler_id:  session.handler.native_file
-        save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"
-    fragments:       ~
+        handler_id: session.handler.native_file
+        save_path: "%kernel.root_dir%/../var/sessions/%kernel.environment%"
+    fragments: ~
     http_method_override: true
     assets: ~
 
@@ -54,14 +56,14 @@ wallabag_import:
 
 # Twig Configuration
 twig:
-    debug:            "%kernel.debug%"
+    debug: "%kernel.debug%"
     strict_variables: "%kernel.debug%"
     form_themes:
         - "LexikFormFilterBundle:Form:form_div_layout.html.twig"
 
 # Assetic Configuration
 assetic:
-    debug:          "%kernel.debug%"
+    debug: "%kernel.debug%"
     use_controller: false
     bundles:        [ ]
     #java: /usr/bin/java
@@ -75,14 +77,14 @@ assetic:
 # Doctrine Configuration
 doctrine:
     dbal:
-        driver:   "%database_driver%"
+        driver: "%database_driver%"
         host: "%database_host%"
         port: "%database_port%"
         dbname: "%database_name%"
         user: "%database_user%"
         password: "%database_password%"
-        charset:  UTF8
-        path:     "%database_path%"
+        charset: UTF8
+        path: "%database_path%"
         server_version: 5.6
 
     orm:
@@ -108,10 +110,11 @@ doctrine_migrations:
 # Swiftmailer Configuration
 swiftmailer:
     transport: "%mailer_transport%"
-    host:      "%mailer_host%"
-    username:  "%mailer_user%"
-    password:  "%mailer_password%"
-    spool:     { type: memory }
+    host: "%mailer_host%"
+    username: "%mailer_user%"
+    password: "%mailer_password%"
+    spool:
+        type: memory
 
 fos_rest:
     param_fetcher_listener: true

@@ -5,7 +5,8 @@ framework:
     router:
         resource: "%kernel.root_dir%/config/routing_dev.yml"
         strict_requirements: true
-    profiler: { only_exceptions: false }
+    profiler:
+        only_exceptions: false
 
 web_profiler:
     toolbar: true
@@ -14,19 +15,19 @@ web_profiler:
 monolog:
     handlers:
         main:
-            type:   stream
-            path:   "%kernel.logs_dir%/%kernel.environment%.log"
-            level:  debug
+            type: stream
+            path: "%kernel.logs_dir%/%kernel.environment%.log"
+            level: debug
             channels: ['!event']
         console:
-            type:   console
+            type: console
             bubble: false
             verbosity_levels:
                 VERBOSITY_VERBOSE: INFO
                 VERBOSITY_VERY_VERBOSE: DEBUG
             channels: ['!event', '!doctrine']
         console_very_verbose:
-            type:   console
+            type: console
             bubble: false
             verbosity_levels:
                 VERBOSITY_VERBOSE: NOTICE
