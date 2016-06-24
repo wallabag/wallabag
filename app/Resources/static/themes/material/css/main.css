@@ -487,12 +487,13 @@ main ul.row {
 
 #article aside #list {
   float: right;
-  margin-right: 15px;
+  margin: 0 15px 10px;
 }
 
 #article aside .chip {
-  background-color: #039be5;
+  background-color: rgba(0,151,167,0.85);
   color: #fff;
+  padding: 0 15px 0 10px;
 }
 
 #article aside .chip i {
