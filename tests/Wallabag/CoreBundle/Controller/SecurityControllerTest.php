@@ -36,7 +36,7 @@ class SecurityControllerTest extends WallabagCoreTestCase
         $em->persist($user);
         $em->flush();
 
-        $this->logInAs('admin');
+        $this->logInAsUsingHttp('admin');
         $crawler = $client->request('GET', '/config');
         $this->assertContains('scheb_two_factor.trusted', $crawler->filter('body')->extract(['_text'])[0]);
 

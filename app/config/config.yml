@@ -176,7 +176,7 @@ liip_theme:
 
 fos_user:
     db_driver: orm
-    firewall_name: main
+    firewall_name: secured_area
     user_class: Wallabag\UserBundle\Entity\User
     registration:
         confirmation:
