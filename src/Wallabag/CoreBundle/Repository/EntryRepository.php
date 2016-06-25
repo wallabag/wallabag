@@ -95,7 +95,7 @@ class EntryRepository extends EntityRepository
      *
      * @return array
      */
-    public function findEntries($userId, $isArchived = null, $isStarred = null, $sort = 'created', $order = 'ASC')
+    public function findEntries($userId, $isArchived = null, $isStarred = null, $sort = 'created', $order = 'ASC', $since = 0)
     {
         $qb = $this->createQueryBuilder('e')
             ->where('e.user =:userId')->setParameter('userId', $userId);
@@ -106,6 +106,10 @@ class EntryRepository extends EntityRepository
 
         if (null !== $isStarred) {
             $qb->andWhere('e.isStarred =:isStarred')->setParameter('isStarred', (bool) $isStarred);
+        }
+
+        if ($since >= 0) {
+            $qb->andWhere('e.updatedAt > :since')->setParameter('since', new \DateTime(date('Y-m-d H:i:s', $since)));
         }
 
         if ('created' === $sort) {
