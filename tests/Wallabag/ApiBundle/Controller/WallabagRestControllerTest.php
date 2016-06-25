@@ -121,6 +121,28 @@ class WallabagRestControllerTest extends WallabagApiTestCase
         );
     }
 
+    public function testGetTaggedEntries()
+    {
+        $this->client->request('GET', '/api/entries', ['tags' => 'foo,bar']);
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertGreaterThanOrEqual(1, count($content));
+        $this->assertNotEmpty($content['_embedded']['items']);
+        $this->assertGreaterThanOrEqual(1, $content['total']);
+        $this->assertEquals(1, $content['page']);
+        $this->assertGreaterThanOrEqual(1, $content['pages']);
+
+        $this->assertTrue(
+            $this->client->getResponse()->headers->contains(
+                'Content-Type',
+                'application/json'
+            )
+        );
+    }
+
     public function testGetDatedEntries()
     {
         $this->client->request('GET', '/api/entries', ['since' => 1]);
