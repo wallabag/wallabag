@@ -364,7 +364,7 @@ class WallabagRestController extends FOSRestController
     public function deleteTagLabelAction(Request $request)
     {
         $this->validateAuthentication();
-        $label = $request->query->get('tag','');
+        $label = $request->query->get('tag', '');
 
         $tag = $this->getDoctrine()->getRepository('WallabagCoreBundle:Tag')->findOneByLabel($label);
         $this->getDoctrine()
@@ -408,7 +408,6 @@ class WallabagRestController extends FOSRestController
 
         return $this->renderJsonResponse($json);
     }
-
 
     /**
      * Retrieve version number.

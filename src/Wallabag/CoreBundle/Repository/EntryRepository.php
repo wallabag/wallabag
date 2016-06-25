@@ -210,13 +210,13 @@ class EntryRepository extends EntityRepository
     }
 
     /**
-     * Remove tags from all user entries
+     * Remove tags from all user entries.
      *
-     * @param int $userId
+     * @param int        $userId
      * @param Array<Tag> $tags
      */
-
-    public function removeTags($userId, $tags) {
+    public function removeTags($userId, $tags)
+    {
         foreach ($tags as $tag) {
             $this->removeTag($userId, $tag);
         }
