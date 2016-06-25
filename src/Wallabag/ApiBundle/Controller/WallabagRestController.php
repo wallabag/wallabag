@@ -50,7 +50,7 @@ class WallabagRestController extends FOSRestController
         $order = $request->query->get('order', 'desc');
         $page = (int) $request->query->get('page', 1);
         $perPage = (int) $request->query->get('perPage', 30);
-        $since = $request->query->get('since',0);
+        $since = $request->query->get('since', 0);
 
         $pager = $this->getDoctrine()
             ->getRepository('WallabagCoreBundle:Entry')
