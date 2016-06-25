@@ -352,6 +352,67 @@ class WallabagRestController extends FOSRestController
 
         return $this->renderJsonResponse($json);
     }
+
+    /**
+     * Permanently remove one tag from **every** entry.
+     *
+     * @ApiDoc(
+     *      requirements={
+     *          {"name"="tag", "dataType"="string", "requirement"="\w+", "description"="The tag as a string"}
+     *      }
+     * )
+     *
+     * @return Response
+     */
+    public function deleteTagLabelAction(Request $request)
+    {
+        $this->validateAuthentication();
+        $label = $request->query->get('tag','');
+
+        $tag = $this->getDoctrine()->getRepository('WallabagCoreBundle:Tag')->findOneByLabel($label);
+        $this->getDoctrine()
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->removeTag($this->getUser()->getId(), $tag);
+
+        $json = $this->get('serializer')->serialize($tag, 'json');
+
+        return $this->renderJsonResponse($json);
+    }
+
+    /**
+     * Permanently remove some tags from **every** entry.
+     *
+     * @ApiDoc(
+     *      requirements={
+     *          {"name"="tags", "dataType"="string", "required"=true, "format"="tag1,tag2", "description"="The tags as strings"}
+     *      }
+     * )
+     *
+     * @return Response
+     */
+    public function deleteTagsLabelAction(Request $request)
+    {
+        $this->validateAuthentication();
+
+        $tagsLabels = $request->query->get('tags', '');
+
+        $tags = array();
+
+        foreach (explode(',', $tagsLabels) as $tagLabel) {
+            $tagEntity = $this->getDoctrine()->getRepository('WallabagCoreBundle:Tag')->findOneByLabel($tagLabel);
+            $tags[] = $tagEntity;
+        }
+
+        $this->getDoctrine()
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->removeTags($this->getUser()->getId(), $tags);
+
+        $json = $this->get('serializer')->serialize($tags, 'json');
+
+        return $this->renderJsonResponse($json);
+    }
+
+
     /**
      * Retrieve version number.
      *
