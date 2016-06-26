@@ -486,3 +486,6 @@ flashes:
         notice:
             client_created: 'Nouveau client %name% créé'
             client_deleted: 'Client %name% supprimé'
+    account:
+        notice:
+            account_deleted: 'Compte supprimé'

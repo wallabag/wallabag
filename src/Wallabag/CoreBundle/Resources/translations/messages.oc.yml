@@ -486,3 +486,6 @@ flashes:
         notice:
             client_created: 'Novèl client creat'
             client_deleted: 'Client suprimit'
+    account:
+        notice:
+            # account_deleted: 'Account deleted'

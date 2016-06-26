@@ -251,4 +251,24 @@ class ConfigController extends Controller
 
         return $config;
     }
+
+    /**
+     * Delete account for current user.
+     *
+     * @Route("/account/delete", name="delete_account")
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+     public function deleteAccountAction()
+     {
+         $em = $this->get('fos_user.user_manager');
+         $em->deleteUser($this->getUser());
+
+         $this->get('session')->getFlashBag()->add(
+             'notice',
+             'flashes.account.notice.account_deleted'
+         );
+
+         return $this->redirect($this->generateUrl('fos_user_security_logout'));
+     }
 }

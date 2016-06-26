@@ -485,6 +485,9 @@ flashes:
         notice:
             client_created: 'New client %name% created.'
             client_deleted: 'Client %name% deleted'
+    account:
+        notice:
+            account_deleted: 'Account deleted'
     user:
         notice:
             added: 'User "%username%" added'

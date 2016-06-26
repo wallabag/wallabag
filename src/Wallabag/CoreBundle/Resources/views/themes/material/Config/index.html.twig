@@ -167,6 +167,7 @@
                             {{ form_widget(form.user.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
                             {{ form_widget(form.user._token) }}
                         </form>
+                        <a class='btn red' href='{{ path('delete_account') }}'>{{ 'config.user.delete_account' | trans }}</a>
                     </div>
 
                     <div id="set4" class="col s12">

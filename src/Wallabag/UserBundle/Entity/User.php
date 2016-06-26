@@ -25,7 +25,7 @@ use Wallabag\CoreBundle\Entity\Entry;
  * @UniqueEntity("email")
  * @UniqueEntity("username")
  */
-class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterface
+class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterface, \Serializable
 {
     /**
      * @var int
@@ -240,4 +240,14 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
 
         return false;
     }
+
+    public function serialize()
+    {
+       return serialize($this->id);
+   }
+
+   public function unserialize($serialized)
+   {
+       $this->id = unserialize($serialized);
+   }
 }
