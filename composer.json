@@ -82,7 +82,8 @@
         "white-october/pagerfanta-bundle": "^1.0",
         "php-amqplib/rabbitmq-bundle": "^1.8",
         "predis/predis": "^1.0",
-        "javibravo/simpleue": "^1.0"
+        "javibravo/simpleue": "^1.0",
+        "symfony/dom-crawler": "^3.1"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "~2.2",
