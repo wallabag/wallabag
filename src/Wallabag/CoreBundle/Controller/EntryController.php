@@ -532,24 +532,27 @@ class EntryController extends Controller
         $searchTerm = (isset($request->get('search_entry')['term']) ? $request->get('search_entry')['term'] : '');
         $currentRoute = (null !== $request->query->get('currentRoute') ? $request->query->get('currentRoute') : '');
 
+        $sortBy = $request->get('sort', 'id');
+        $direction = $request->get('direction', 'DESC');
+
         switch ($type) {
             case 'search':
                 $qb = $repository->getBuilderForSearchByUser($this->getUser()->getId(), $searchTerm, $currentRoute);
                 break;
             case 'untagged':
-                $qb = $repository->getBuilderForUntaggedByUser($this->getUser()->getId());
+                $qb = $repository->getBuilderForUntaggedByUser($this->getUser()->getId(), $sortBy, $direction);
                 break;
             case 'starred':
-                $qb = $repository->getBuilderForStarredByUser($this->getUser()->getId());
+                $qb = $repository->getBuilderForStarredByUser($this->getUser()->getId(), $sortBy, $direction);
                 break;
             case 'archive':
-                $qb = $repository->getBuilderForArchiveByUser($this->getUser()->getId());
+                $qb = $repository->getBuilderForArchiveByUser($this->getUser()->getId(), $sortBy, $direction);
                 break;
             case 'unread':
-                $qb = $repository->getBuilderForUnreadByUser($this->getUser()->getId());
+                $qb = $repository->getBuilderForUnreadByUser($this->getUser()->getId(), $sortBy, $direction);
                 break;
             case 'all':
-                $qb = $repository->getBuilderForAllByUser($this->getUser()->getId());
+                $qb = $repository->getBuilderForAllByUser($this->getUser()->getId(), $sortBy, $direction);
                 break;
             default:
                 throw new \InvalidArgumentException(sprintf('Type "%s" is not implemented.', $type));
