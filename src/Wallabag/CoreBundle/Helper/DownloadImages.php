@@ -6,6 +6,9 @@ use Psr\Log\LoggerInterface as Logger;
 use Symfony\Component\DomCrawler\Crawler;
 
 define('REGENERATE_PICTURES_QUALITY', 75);
+define('HTTP_PORT', 80);
+define('SSL_PORT', 443);
+define('BASE_URL','');
 
 class DownloadImages {
     private $folder;
@@ -47,7 +50,7 @@ class DownloadImages {
             $filename = basename(parse_url($absolute_path, PHP_URL_PATH));
             $fullpath = $this->folder."/".$filename;
             self::checks($file, $fullpath, $absolute_path);
-            $this->html = str_replace($image, $fullpath, $this->html);
+            $this->html = str_replace($image, self::getPocheUrl() . '/' . $fullpath, $this->html);
         }
 
         return $this->html;
@@ -143,5 +146,44 @@ class DownloadImages {
 
         /* absolute URL is ready! */
         return $scheme.'://'.$abs;
+    }
+
+    public static function getPocheUrl()
+    {
+        $baseUrl = "";
+        $https = (!empty($_SERVER['HTTPS'])
+                    && (strtolower($_SERVER['HTTPS']) == 'on'))
+            || (isset($_SERVER["SERVER_PORT"])
+                    && $_SERVER["SERVER_PORT"] == '443') // HTTPS detection.
+            || (isset($_SERVER["SERVER_PORT"]) //Custom HTTPS port detection
+                    && $_SERVER["SERVER_PORT"] == SSL_PORT)
+             || (isset($_SERVER['HTTP_X_FORWARDED_PROTO'])
+                    && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https');
+        $serverport = (!isset($_SERVER["SERVER_PORT"])
+            || $_SERVER["SERVER_PORT"] == '80'
+            || $_SERVER["SERVER_PORT"] == HTTP_PORT
+            || ($https && $_SERVER["SERVER_PORT"] == '443')
+            || ($https && $_SERVER["SERVER_PORT"]==SSL_PORT) //Custom HTTPS port detection
+            ? '' : ':' . $_SERVER["SERVER_PORT"]);
+        
+        if (isset($_SERVER["HTTP_X_FORWARDED_PORT"])) {
+            $serverport = ':' . $_SERVER["HTTP_X_FORWARDED_PORT"];
+        }
+        // $scriptname = str_replace('/index.php', '/', $_SERVER["SCRIPT_NAME"]);
+        // if (!isset($_SERVER["HTTP_HOST"])) {
+        //     return $scriptname;
+        // }
+        $host = (isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] : (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME']));
+        if (strpos($host, ':') !== false) {
+            $serverport = '';
+        }
+        // check if BASE_URL is configured
+        if(BASE_URL) {
+            $baseUrl = BASE_URL;
+        } else {
+            $baseUrl = 'http' . ($https ? 's' : '') . '://' . $host . $serverport;
+        }
+    return $baseUrl;
+    
     }
 }
