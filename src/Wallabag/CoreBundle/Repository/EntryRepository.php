@@ -111,7 +111,8 @@ class EntryRepository extends EntityRepository
 
         if ($since >= 0) {
             $qb->andWhere('e.updatedAt > :since')->setParameter('since', new \DateTime(date('Y-m-d H:i:s', $since)));
-            
+        }
+
         if ('' !== $tags) {
             foreach (explode(',', $tags) as $tag) {
                 $qb->andWhere('t.label = :label')->setParameter('label', $tag);
