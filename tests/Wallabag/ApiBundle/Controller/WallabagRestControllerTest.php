@@ -121,6 +121,51 @@ class WallabagRestControllerTest extends WallabagApiTestCase
         );
     }
 
+    public function testGetDatedEntries()
+    {
+        $this->client->request('GET', '/api/entries', ['since' => 1]);
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertGreaterThanOrEqual(1, count($content));
+        $this->assertNotEmpty($content['_embedded']['items']);
+        $this->assertGreaterThanOrEqual(1, $content['total']);
+        $this->assertEquals(1, $content['page']);
+        $this->assertGreaterThanOrEqual(1, $content['pages']);
+
+        $this->assertTrue(
+            $this->client->getResponse()->headers->contains(
+                'Content-Type',
+                'application/json'
+            )
+        );
+    }
+
+    public function testGetDatedSupEntries()
+    {
+        $future = new \DateTime(date('Y-m-d H:i:s'));
+        $this->client->request('GET', '/api/entries', ['since' => $future->getTimestamp() + 1000]);
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertGreaterThanOrEqual(1, count($content));
+        $this->assertEmpty($content['_embedded']['items']);
+        $this->assertEquals(0, $content['total']);
+        $this->assertEquals(1, $content['page']);
+        $this->assertEquals(1, $content['pages']);
+
+        $this->assertTrue(
+            $this->client->getResponse()->headers->contains(
+                'Content-Type',
+                'application/json'
+            )
+        );
+    }
+
     public function testDeleteEntry()
     {
         $entry = $this->client->getContainer()
