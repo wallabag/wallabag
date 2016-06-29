@@ -27,7 +27,8 @@ framework:
         save_path: "%kernel.root_dir%/../var/sessions/%kernel.environment%"
     fragments: ~
     http_method_override: true
-    assets: ~
+    assets:
+        base_path: "%base_path%/"
 
 wallabag_core:
     version: 2.0.5
@@ -150,12 +151,12 @@ nelmio_cors:
         hosts: []
         #origin_regex: false
     paths:
-        '^/api/':
+        "^%base_path%/api/":
             allow_origin: ['*']
             allow_headers: ['X-Custom-Auth']
             allow_methods: ['POST', 'PUT', 'GET', 'DELETE']
             max_age: 3600
-        '^/':
+        "^%base_path%/":
             #origin_regex: true
             allow_origin: ['^http://localhost:[0-9]+']
             allow_headers: ['X-Custom-Auth']
