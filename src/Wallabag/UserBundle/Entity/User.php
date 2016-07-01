@@ -243,11 +243,11 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
 
     public function serialize()
     {
-       return serialize($this->id);
-   }
+        return serialize($this->id);
+    }
 
-   public function unserialize($serialized)
-   {
-       $this->id = unserialize($serialized);
-   }
+    public function unserialize($serialized)
+    {
+        $this->id = unserialize($serialized);
+    }
 }
