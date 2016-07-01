@@ -95,9 +95,10 @@ class EntryRepository extends EntityRepository
      *
      * @return array
      */
-    public function findEntries($userId, $isArchived = null, $isStarred = null, $sort = 'created', $order = 'ASC', $since = 0)
+    public function findEntries($userId, $isArchived = null, $isStarred = null, $sort = 'created', $order = 'ASC', $since = 0, $tags = '')
     {
         $qb = $this->createQueryBuilder('e')
+            ->leftJoin('e.tags', 't')
             ->where('e.user =:userId')->setParameter('userId', $userId);
 
         if (null !== $isArchived) {
@@ -110,6 +111,12 @@ class EntryRepository extends EntityRepository
 
         if ($since >= 0) {
             $qb->andWhere('e.updatedAt > :since')->setParameter('since', new \DateTime(date('Y-m-d H:i:s', $since)));
+        }
+
+        if ('' !== $tags) {
+            foreach (explode(',', $tags) as $tag) {
+                $qb->andWhere('t.label = :label')->setParameter('label', $tag);
+            }
         }
 
         if ('created' === $sort) {

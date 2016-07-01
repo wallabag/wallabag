@@ -51,10 +51,11 @@ class WallabagRestController extends FOSRestController
         $page = (int) $request->query->get('page', 1);
         $perPage = (int) $request->query->get('perPage', 30);
         $since = $request->query->get('since', 0);
+        $tags = $request->query->get('tags', '');
 
         $pager = $this->getDoctrine()
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findEntries($this->getUser()->getId(), $isArchived, $isStarred, $sort, $order, $since);
+            ->findEntries($this->getUser()->getId(), $isArchived, $isStarred, $sort, $order, $since, $tags);
 
         $pager->setCurrentPage($page);
         $pager->setMaxPerPage($perPage);
