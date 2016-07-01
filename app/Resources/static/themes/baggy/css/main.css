@@ -84,7 +84,7 @@ a {
 }
 
 a.nostyle {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 a:hover,
@@ -146,7 +146,6 @@ input[type="submit"] {
   cursor: pointer;
   background-color: #000;
   color: #fff;
-  border: 0;
   padding: 0.5em 1em;
   display: inline-block;
   border: 1px solid #000;
@@ -202,7 +201,7 @@ h2::after {
 }
 
 #main {
-  margin-left: 13em;
+  margin-left: 12em;
   position: relative;
   z-index: 10;
   padding-right: 5%;
@@ -287,7 +286,6 @@ h2::after {
 
 #display-mode {
   float: right;
-  vertical-align: middle;
   margin-top: 10px;
   margin-bottom: 10px;
   opacity: 0.5;
@@ -359,6 +357,46 @@ footer a {
   margin-left: 0 !important;
 }
 
+.card-entry-labels {
+  position: absolute;
+  top: 100px;
+  left: -1em;
+  z-index: 90;
+  max-width: 50%;
+  padding-left: 0;
+}
+
+.card-entry-labels li {
+  margin: 10px 10px 10px auto;
+  padding: 5px 12px 5px 25px;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 0 3px 3px 0;
+  color: #fff;
+  cursor: default;
+  max-height: 2em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card-entry-tags {
+  max-height: 2em;
+  overflow-y: hidden;
+  padding: 0;
+}
+
+.card-entry-tags li {
+  display: inline-block;
+  margin: 0 5px;
+  padding: 5px 12px;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 3px;
+  max-height: 2em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #fff;
+}
+
 .list-entries + .results {
   margin-bottom: 2em;
 }
@@ -383,10 +421,11 @@ footer a {
   width: 32%;
   margin-bottom: 1.5em;
   vertical-align: top;
-  margin-left: 1.5%;
+  margin-right: 1%;
   position: relative;
   overflow: hidden;
-  padding: 1.5em 1.5em 3em 1.5em;
+  padding: 1.5em 1.5em 3em;
+  height: 440px;
 }
 
 .entry::before {
@@ -394,7 +433,7 @@ footer a {
   width: 0;
   height: 0;
   border-style: solid;
-  border-color: transparent transparent #000 transparent;
+  border-color: transparent transparent #000;
   border-width: 10px;
   position: absolute;
   bottom: 0.3em;
@@ -442,6 +481,9 @@ footer a {
   text-transform: none;
   margin-bottom: 0;
   line-height: 1.2;
+  text-align: justify;
+  -moz-text-align-last: center;
+  text-align-last: center;
 }
 
 .entry h2::after {
@@ -461,7 +503,9 @@ footer a {
 }
 
 img.preview {
-  max-width: 100%;
+  max-width: calc(100% + 3em);
+  left: -1.5em;
+  position: relative;
 }
 
 .entry p {
@@ -653,7 +697,7 @@ div.pagination ul .current {
 .add-to-wallabag-link-after {
   background-color: #000;
   color: #fff;
-  padding: 0 3px 2px 3px;
+  padding: 0 3px 2px;
 }
 
 a.add-to-wallabag-link-after {
@@ -682,7 +726,7 @@ a.add-to-wallabag-link-after::after {
 }
 
 .btn-clickable {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 /* ==========================================================================
@@ -706,6 +750,7 @@ a.add-to-wallabag-link-after::after {
   font-style: normal;
   font-weight: 400;
   src: url(../fonts/MaterialIcons-Regular.eot);
+
   /* For IE6-8 */
   src: local("Material Icons"), local("MaterialIcons-Regular"), url(../fonts/MaterialIcons-Regular.woff2) format("woff2"), url(../fonts/MaterialIcons-Regular.woff) format("woff"), url(../fonts/MaterialIcons-Regular.ttf) format("truetype");
 }
@@ -727,6 +772,7 @@ a.add-to-wallabag-link-after::after {
 
   /* Support for all WebKit browsers. */
   -webkit-font-smoothing: antialiased;
+
   /* Support for Safari and Chrome. */
   text-rendering: optimizeLegibility;
 
@@ -1045,30 +1091,30 @@ pre code {
 }
 
 #download-form {
-    position: fixed;
-    width: 10%;
-    height: 100%;
-    top: 0;
-    right: 0;
-    background-color: #fff;
-    padding: 15px;
-    padding-right: 30px;
-    padding-top: 30px;
-    border-left: 1px #333 solid;
-    z-index: 12;
-    min-width: 200px;
+  position: fixed;
+  width: 10%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  background-color: #fff;
+  padding: 15px;
+  padding-right: 30px;
+  padding-top: 30px;
+  border-left: 1px #333 solid;
+  z-index: 12;
+  min-width: 200px;
 }
 
 #download-form li {
-    display: block;
-    padding: .5em 2em .5em 1em;
-    color: #fff;
-    position: relative;
-    text-transform: uppercase;
-    text-decoration: none;
-    font-weight: 400;
-    font-family: PT Sans,sans-serif;
-    transition: all .5s ease;
+  display: block;
+  padding: 0.5em 2em 0.5em 1em;
+  color: #fff;
+  position: relative;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: 400;
+  font-family: PT Sans, sans-serif;
+  transition: all 0.5s ease;
 }
 
 /* ==========================================================================
@@ -1148,7 +1194,6 @@ pre code {
   }
 
   .login .logo {
-    width: auto;
     height: auto;
     top: 0.5em;
     width: 75px;
@@ -1195,6 +1240,10 @@ pre code {
     padding-right: 1.5em;
     position: static;
     margin-top: 3em;
+  }
+
+  .card-entry-labels {
+    display: none;
   }
 
   #article_toolbar .topPosF {
