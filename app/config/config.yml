@@ -50,6 +50,9 @@ wallabag_core:
     rss_limit: 50
     reading_speed: 1
 
+wallabag_user:
+    registration_enabled: "%registration_enabled%"
+
 wallabag_import:
     allow_mimetypes: ['application/octet-stream', 'application/json', 'text/plain']
     resource_dir: "%kernel.root_dir%/../web/uploads/import"
