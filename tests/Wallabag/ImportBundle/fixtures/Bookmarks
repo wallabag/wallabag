@@ -1,0 +1,61 @@
+{
+   "checksum": "ef1e30cddf64cb94c63d7835640165be",
+   "roots": {
+      "bookmark_bar": {
+         "children": [ {
+            "date_added": "13112787540531997",
+            "id": "7",
+            "name": "Terrorisme: les sombres prédictions du directeur de la DGSI",
+            "type": "url",
+            "url": "http://www.lefigaro.fr/actualite-france/2016/07/12/01016-20160712ARTFIG00016-terrorisme-les-sombres-perspectives-de-patrick-calvar-directeur-de-la-dgsi.php"
+         } ],
+         "date_added": "13112787380480144",
+         "date_modified": "13112787542724942",
+         "id": "1",
+         "name": "Bookmarks bar",
+         "type": "folder"
+      },
+      "other": {
+         "children": [ {
+            "date_added": "13112787503900822",
+            "id": "6",
+            "name": "Parser for Exported Bookmarks HTML file of Google Chrome and Mozilla in Java - Stack Overflow",
+            "type": "url",
+            "url": "http://stackoverflow.com/questions/15017163/parser-for-exported-bookmarks-html-file-of-google-chrome-and-mozilla-in-java"
+         }, {
+            "children": [ {
+               "date_added": "13112787564443378",
+               "id": "9",
+               "name": "Orange offre un meilleur réseau mobile que Bouygues et SFR, Free derrière - L'Express L'Expansion",
+               "type": "url",
+               "url": "http://lexpansion.lexpress.fr/high-tech/orange-offre-un-meilleur-reseau-mobile-que-bouygues-et-sfr-free-derriere_1811554.html"
+            } ],
+            "date_added": "13112787556763735",
+            "date_modified": "13112794390493325",
+            "id": "8",
+            "name": "test",
+            "type": "folder"
+         }, {
+            "date_added": "13112794390493325",
+            "id": "12",
+            "name": "JSON Formatter & Validator",
+            "type": "url",
+            "url": "https://jsonformatter.curiousconcept.com/"
+         } ],
+         "date_added": "13112787380480151",
+         "date_modified": "13112794393509988",
+         "id": "2",
+         "name": "Other bookmarks",
+         "type": "folder"
+      },
+      "synced": {
+         "children": [  ],
+         "date_added": "13112787380480155",
+         "date_modified": "0",
+         "id": "3",
+         "name": "Mobile bookmarks",
+         "type": "folder"
+      }
+   },
+   "version": 1
+}

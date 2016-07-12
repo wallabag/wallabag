@@ -1,0 +1,43 @@
+{% extends "WallabagCoreBundle::layout.html.twig" %}
+
+{% block title %}{{ 'import.browser.page_title'|trans }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col s12">
+        <div class="card-panel settings">
+            <div class="row">
+                <blockquote>{{ import.description|trans|raw }}</blockquote>
+                <p>{{ 'import.browser.how_to'|trans }}</p>
+
+                <div class="col s12">
+                    {{ form_start(form, {'method': 'POST'}) }}
+                        {{ form_errors(form) }}
+                        <div class="row">
+                            <div class="file-field input-field col s12">
+                                {{ form_errors(form.file) }}
+                                <div class="btn">
+                                    <span>{{ form.file.vars.label|trans }}</span>
+                                    {{ form_widget(form.file) }}
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text">
+                                </div>
+                            </div>
+                            <div class="input-field col s6 with-checkbox">
+                                <h6>{{ 'import.form.mark_as_read_title'|trans }}</h6>
+                                {{ form_widget(form.mark_as_read) }}
+                                {{ form_label(form.mark_as_read) }}
+                            </div>
+                        </div>
+
+                        {{ form_widget(form.save, { 'attr': {'class': 'btn waves-effect waves-light'} }) }}
+
+                        {{ form_rest(form) }}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

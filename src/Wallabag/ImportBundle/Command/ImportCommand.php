@@ -17,7 +17,7 @@ class ImportCommand extends ContainerAwareCommand
             ->setDescription('Import entries from a JSON export from a wallabag v1 instance')
             ->addArgument('userId', InputArgument::REQUIRED, 'User ID to populate')
             ->addArgument('filepath', InputArgument::REQUIRED, 'Path to the JSON file')
-            ->addOption('importer', null, InputArgument::OPTIONAL, 'The importer to use: v1 or v2', 'v1')
+            ->addOption('importer', null, InputArgument::OPTIONAL, 'The importer to use: wallabag v1, v2 or browser', 'v1')
             ->addOption('markAsRead', null, InputArgument::OPTIONAL, 'Mark all entries as read', false)
         ;
     }
@@ -40,10 +40,19 @@ class ImportCommand extends ContainerAwareCommand
             throw new Exception(sprintf('User with id "%s" not found', $input->getArgument('userId')));
         }
 
-        $wallabag = $this->getContainer()->get('wallabag_import.wallabag_v1.import');
-
-        if ('v2' === $input->getOption('importer')) {
-            $wallabag = $this->getContainer()->get('wallabag_import.wallabag_v2.import');
+        switch ($input->getOption('importer')) {
+            case 'v2':
+                $wallabag = $this->getContainer()->get('wallabag_import.wallabag_v2.import');
+                break;
+            case 'v1':
+                $wallabag = $this->getContainer()->get('wallabag_import.wallabag_v1.import');
+                break;
+            case 'browser':
+                $wallabag = $this->getContainer()->get('wallabag_import.browser.import');
+                break;
+            default:
+                $wallabag = $this->getContainer()->get('wallabag_import.wallabag_v1.import');
+                break;
         }
 
         $wallabag->setMarkAsRead($input->getOption('markAsRead'));
