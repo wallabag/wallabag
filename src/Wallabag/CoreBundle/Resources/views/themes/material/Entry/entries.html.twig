@@ -77,7 +77,7 @@
 
                             <p>{{ entry.content|striptags|slice(0, 300)|raw }}&hellip;</p>
 
-                            <ul class="card-entry-labels-hidden">
+                            <ul class="card-entry-tags">
                                 {% for tag in entry.tags %}
                                     <li>{{ tag.label }}</li>
                                 {% endfor %}

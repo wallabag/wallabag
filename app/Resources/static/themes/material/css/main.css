@@ -34,6 +34,7 @@
   font-style: normal;
   font-weight: 400;
   src: url(../fonts/MaterialIcons-Regular.eot);
+
   /* For IE6-8 */
   src: local("Material Icons"), local("MaterialIcons-Regular"), url(../fonts/MaterialIcons-Regular.woff2) format("woff2"), url(../fonts/MaterialIcons-Regular.woff) format("woff"), url(../fonts/MaterialIcons-Regular.ttf) format("truetype");
 }
@@ -55,6 +56,7 @@
 
   /* Support for all WebKit browsers. */
   -webkit-font-smoothing: antialiased;
+
   /* Support for Safari and Chrome. */
   text-rendering: optimizeLegibility;
 
@@ -123,11 +125,11 @@ main,
 }
 
 .pagination {
-    float: right;
+  float: right;
 }
 
 .pagination ul {
-    margin: 0 !important;
+  margin: 0 !important;
 }
 
 .pagination li {
@@ -141,8 +143,8 @@ main,
 }
 
 .pagination .disabled {
-    margin-right: 10px;
-    margin-left: 10px;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 
 div.pagination ul .prev.disabled,
@@ -151,10 +153,10 @@ div.pagination ul .next.disabled {
 }
 
 .pagination li.active span {
-    padding: 0px 10px;
-    height: 30px;
-    display: block;
-    color: #fff;
+  padding: 0 10px;
+  height: 30px;
+  display: block;
+  color: #fff;
 }
 
 .page-footer .footer-copyright p {
@@ -266,9 +268,9 @@ nav input {
 
 .side-nav .collapsible-header,
 .side-nav.fixed .collapsible-header {
-    height: 45px;
-    line-height: 44px;
-    padding: 0 20px;
+  height: 45px;
+  line-height: 44px;
+  padding: 0 20px;
 }
 
 .bold > a {
@@ -343,41 +345,41 @@ main ul.row {
 }
 
 .card .card-entry-labels {
-    position: absolute;
-    top:10px;
-    z-index: 90;
-    max-width: 50%;
+  position: absolute;
+  top: 10px;
+  z-index: 90;
+  max-width: 50%;
 }
 
 .card .card-entry-labels li {
-    margin: 10px 10px 10px auto;
-    padding: 5px 12px 5px 16px;
-    background-color: rgba(0,151,167,0.85);
-    border-radius: 0 3px 3px 0;
-    color: #fff;
-    cursor: default;
-    max-height: 2em;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  margin: 10px 10px 10px auto;
+  padding: 5px 12px 5px 16px;
+  background-color: rgba(0, 151, 167, 0.85);
+  border-radius: 0 3px 3px 0;
+  color: #fff;
+  cursor: default;
+  max-height: 2em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .card .card-entry-labels-hidden {
-    margin-top: 5px;
+  margin-top: 5px;
 }
 
 .card .card-entry-labels-hidden li {
-    display: inline-block;
-    background-color: rgba(0,151,167,0.85);
-    margin: 0 5px;
-    padding: 5px 12px;
-    border-radius: 3px;
-    color: #fff;
-    max-height: 2em;
-    max-width: calc(100% - 15px);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  display: inline-block;
+  background-color: rgba(0, 151, 167, 0.85);
+  margin: 0 5px;
+  padding: 5px 12px;
+  border-radius: 3px;
+  color: #fff;
+  max-height: 2em;
+  max-width: calc(100% - 15px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .card .card-content .estimatedTime {
@@ -491,7 +493,7 @@ main ul.row {
 }
 
 #article aside .chip {
-  background-color: rgba(0,151,167,0.85);
+  background-color: rgba(0, 151, 167, 0.85);
   color: #fff;
   padding: 0 15px 0 10px;
 }
@@ -517,7 +519,7 @@ main ul.row {
   }
   .pagination {
     width: auto;
-    }
+  }
   .reader-mode {
     width: 240px !important;
   }
@@ -534,7 +536,8 @@ main ul.row {
   .indicator {
     display: none;
   }
-  .pagination li.prev, .pagination li.next {
+  .pagination li.prev,
+  .pagination li.next {
     width: auto;
   }
 }
@@ -633,8 +636,8 @@ footer [class*=" icon-"] {
   padding-right: 10px;
 }
 
-footer [class^="icon-"]::hover,
-footer [class*=" icon-"]::hover {
+footer [class^="icon-"]:hover,
+footer [class*=" icon-"]:hover {
   text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
