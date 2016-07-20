@@ -345,7 +345,8 @@ main ul.row {
     max-width: 40em;
 }
 
-#article img {
+#article img,
+#article figure {
     max-width: 100%;
     height: auto;
 }
