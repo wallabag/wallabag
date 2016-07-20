@@ -13,7 +13,7 @@ echo '> PHP is using the following php.ini file:'.PHP_EOL;
 if ($iniPath) {
     echo_style('green', '  '.$iniPath);
 } else {
-    echo_style('warning', '  WARNING: No configuration file (php.ini) used by PHP!');
+    echo_style('yellow', '  WARNING: No configuration file (php.ini) used by PHP!');
 }
 
 echo PHP_EOL.PHP_EOL;

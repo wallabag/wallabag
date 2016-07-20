@@ -39,6 +39,12 @@ class TagControllerTest extends WallabagCoreTestCase
         $client->submit($form, $data);
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
 
+        // be sure to reload the entry
+        $entry = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneByUsernameAndNotArchived('admin');
+
         $this->assertEquals(1, count($entry->getTags()));
 
         # tag already exists and already assigned

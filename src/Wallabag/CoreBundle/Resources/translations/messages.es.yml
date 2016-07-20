@@ -135,7 +135,7 @@ config:
 
 entry:
     page_titles:
-        unread: 'Artúclos no leídos'
+        unread: 'Artículos no leídos'
         starred: 'Artículos favoritos'
         archived: 'Artículos archivados'
         filtered: 'Artículos filtrados'

@@ -3,12 +3,14 @@ security:
         FOS\UserBundle\Model\UserInterface: sha512
 
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
+        ROLE_ADMIN: ROLE_USER
         ROLE_SUPER_ADMIN: [ ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH ]
 
     providers:
         administrators:
-            entity: { class: WallabagUserBundle:User, property: username }
+            entity:
+                class: WallabagUserBundle:User
+                property: username
         fos_userbundle:
             id: fos_user.user_provider.username
 
@@ -31,7 +33,7 @@ security:
             anonymous: true
 
         login_firewall:
-            pattern:    ^/login$
+            pattern: ^/login$
             anonymous:  ~
 
         secured_area:
@@ -40,12 +42,12 @@ security:
                 provider: fos_userbundle
                 csrf_token_generator: security.csrf.token_manager
 
-            anonymous:    true
+            anonymous: true
             remember_me:
-                secret:   "%secret%"
+                secret: "%secret%"
                 lifetime: 31536000
-                path:     /
-                domain:   ~
+                path: /
+                domain: ~
 
             logout:
                 path:   /logout

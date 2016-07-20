@@ -4,8 +4,8 @@ wallabag_annotation:
 
 wallabag_import:
     resource: "@WallabagImportBundle/Controller/"
-    type:     annotation
-    prefix:   /import
+    type: annotation
+    prefix: /import
 
 wallabag_api:
     resource: "@WallabagApiBundle/Resources/config/routing.yml"
