@@ -37,7 +37,7 @@ Installation
 On a dedicated web server (recommended way)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-wallabag uses a large number of libraries in order to function. These libraries must be installed with a tool called Composer. You need to install it if you have not already done so.
+wallabag uses a large number of libraries in order to function. These libraries must be installed with a tool called Composer. You need to install it if you have not already done so and be sure to use the 1.2 version (if you already have Composer, run a ``composer selfupdate``).
 
 Install Composer:
 

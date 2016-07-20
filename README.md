@@ -10,7 +10,7 @@ More informations on our website: [wallabag.org](https://wallabag.org)
 
 # Install wallabag
 
-If you don't have it yet, please [install composer](https://getcomposer.org/download/).
+If you don't have it yet, please [install composer](https://getcomposer.org/download/) or be sure to use Composer 1.2 (`composer selfupdate` can help you about that).
 Then you can install wallabag by executing the following commands:
 
 ```
