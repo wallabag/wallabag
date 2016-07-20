@@ -35,7 +35,7 @@ Installation
 Sur un serveur dédié (méthode conseillée)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-wallabag utilise un grand nombre de bibliothèques pour fonctionner. Ces bibliothèques doivent être installées à l'aide d'un outil nommé Composer. Vous devez l'installer si ce n'est déjà fait.
+wallabag utilise un grand nombre de bibliothèques pour fonctionner. Ces bibliothèques doivent être installées à l'aide d'un outil nommé Composer. Vous devez l'installer si ce n'est déjà fait et vous assurer que vous utilisez bien la version 1.2 (si vous avez déjà Composer, faite un ``composer selfupdate``).
 
 Installation de Composer :
 
