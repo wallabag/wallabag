@@ -396,7 +396,7 @@ flashes:
     entry:
         notice:
             entry_already_saved: 'Eintrag bereits am %date% gespeichert'
-            entry_saved: 'Eintag gespeichert'
+            entry_saved: 'Eintrag gespeichert'
             # entry_saved_failed: 'Failed to save entry'
             entry_updated: 'Eintrag aktualisiert'
             entry_reloaded: 'Eintrag neugeladen'
