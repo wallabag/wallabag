@@ -14,7 +14,7 @@ class SecurityController extends FOSSecurityController
         return $this->render('FOSUserBundle:Security:login.html.twig',
             array_merge(
                 $data,
-                array('registration_enabled' => $this->container->getParameter('wallabag_user.registration_enabled'))
+                ['registration_enabled' => $this->container->getParameter('wallabag_user.registration_enabled')]
             )
         );
     }

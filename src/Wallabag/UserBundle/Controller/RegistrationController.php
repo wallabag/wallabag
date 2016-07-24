@@ -13,6 +13,6 @@ class RegistrationController extends FOSRegistrationController
             return parent::registerAction($request);
         }
 
-        return $this->redirectToRoute('fos_user_security_login', array(), 301);
+        return $this->redirectToRoute('fos_user_security_login', [], 301);
     }
 }
