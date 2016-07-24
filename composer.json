@@ -87,7 +87,7 @@
         "doctrine/doctrine-fixtures-bundle": "~2.2",
         "doctrine/data-fixtures": "~1.1.1",
         "sensio/generator-bundle": "^3.0",
-        "phpunit/phpunit": "~4.4",
+        "phpunit/phpunit": "~5.0",
         "symfony/phpunit-bridge": "^3.0",
         "friendsofphp/php-cs-fixer": "~1.9"
     },
