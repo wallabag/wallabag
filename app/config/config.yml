@@ -51,7 +51,7 @@ wallabag_core:
     reading_speed: 1
 
 wallabag_user:
-    registration_enabled: "%registration_enabled%"
+    registration_enabled: "%fosuser_registration%"
 
 wallabag_import:
     allow_mimetypes: ['application/octet-stream', 'application/json', 'text/plain']
