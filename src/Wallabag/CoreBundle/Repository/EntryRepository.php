@@ -92,6 +92,8 @@ class EntryRepository extends EntityRepository
      * @param bool   $isStarred
      * @param string $sort
      * @param string $order
+     * @param int    $since
+     * @param string $tags
      *
      * @return array
      */
