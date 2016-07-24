@@ -334,6 +334,77 @@ class WallabagRestController extends FOSRestController
      *
      * @ApiDoc(
      *      requirements={
+     *          {"name"="tag", "dataType"="string", "required"=true, "requirement"="\w+", "description"="Tag as a string"}
+     *      }
+     * )
+     *
+     * @return Response
+     */
+    public function deleteTagLabelAction(Request $request)
+    {
+        $this->validateAuthentication();
+        $label = $request->request->get('tag', '');
+
+        $tag = $this->getDoctrine()->getRepository('WallabagCoreBundle:Tag')->findOneByLabel($label);
+
+        if (empty($tag)) {
+            throw $this->createNotFoundException('Tag not found');
+        }
+
+        $this->getDoctrine()
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->removeTag($this->getUser()->getId(), $tag);
+
+        $json = $this->get('serializer')->serialize($tag, 'json');
+
+        return $this->renderJsonResponse($json);
+    }
+
+    /**
+     * Permanently remove some tags from **every** entry.
+     *
+     * @ApiDoc(
+     *      requirements={
+     *          {"name"="tags", "dataType"="string", "required"=true, "format"="tag1,tag2", "description"="Tags as strings (comma splitted)"}
+     *      }
+     * )
+     *
+     * @return Response
+     */
+    public function deleteTagsLabelAction(Request $request)
+    {
+        $this->validateAuthentication();
+
+        $tagsLabels = $request->request->get('tags', '');
+
+        $tags = [];
+
+        foreach (explode(',', $tagsLabels) as $tagLabel) {
+            $tagEntity = $this->getDoctrine()->getRepository('WallabagCoreBundle:Tag')->findOneByLabel($tagLabel);
+
+            if (!empty($tagEntity)) {
+                $tags[] = $tagEntity;
+            }
+        }
+
+        if (empty($tags)) {
+            throw $this->createNotFoundException('Tags not found');
+        }
+
+        $this->getDoctrine()
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->removeTags($this->getUser()->getId(), $tags);
+
+        $json = $this->get('serializer')->serialize($tags, 'json');
+
+        return $this->renderJsonResponse($json);
+    }
+
+    /**
+     * Permanently remove one tag from **every** entry.
+     *
+     * @ApiDoc(
+     *      requirements={
      *          {"name"="tag", "dataType"="integer", "requirement"="\w+", "description"="The tag"}
      *      }
      * )
@@ -349,65 +420,6 @@ class WallabagRestController extends FOSRestController
             ->removeTag($this->getUser()->getId(), $tag);
 
         $json = $this->get('serializer')->serialize($tag, 'json');
-
-        return $this->renderJsonResponse($json);
-    }
-
-    /**
-     * Permanently remove one tag from **every** entry.
-     *
-     * @ApiDoc(
-     *      requirements={
-     *          {"name"="tag", "dataType"="string", "requirement"="\w+", "description"="The tag as a string"}
-     *      }
-     * )
-     *
-     * @return Response
-     */
-    public function deleteTagLabelAction(Request $request)
-    {
-        $this->validateAuthentication();
-        $label = $request->query->get('tag', '');
-
-        $tag = $this->getDoctrine()->getRepository('WallabagCoreBundle:Tag')->findOneByLabel($label);
-        $this->getDoctrine()
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->removeTag($this->getUser()->getId(), $tag);
-
-        $json = $this->get('serializer')->serialize($tag, 'json');
-
-        return $this->renderJsonResponse($json);
-    }
-
-    /**
-     * Permanently remove some tags from **every** entry.
-     *
-     * @ApiDoc(
-     *      requirements={
-     *          {"name"="tags", "dataType"="string", "required"=true, "format"="tag1,tag2", "description"="The tags as strings"}
-     *      }
-     * )
-     *
-     * @return Response
-     */
-    public function deleteTagsLabelAction(Request $request)
-    {
-        $this->validateAuthentication();
-
-        $tagsLabels = $request->query->get('tags', '');
-
-        $tags = array();
-
-        foreach (explode(',', $tagsLabels) as $tagLabel) {
-            $tagEntity = $this->getDoctrine()->getRepository('WallabagCoreBundle:Tag')->findOneByLabel($tagLabel);
-            $tags[] = $tagEntity;
-        }
-
-        $this->getDoctrine()
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->removeTags($this->getUser()->getId(), $tags);
-
-        $json = $this->get('serializer')->serialize($tags, 'json');
 
         return $this->renderJsonResponse($json);
     }
