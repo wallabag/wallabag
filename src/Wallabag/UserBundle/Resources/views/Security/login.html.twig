@@ -1,46 +1,286 @@
-{% extends "FOSUserBundle::layout.html.twig" %}
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Framabag - Créez-vous librement un compte wallabag</title>
 
-{% block fos_user_content %}
-<form action="{{ path('fos_user_security_check') }}" method="post" name="loginform">
-    <div class="card-content">
+        <link rel="shortcut icon" href="./favicon.png">
+        <link media="screen" rel="stylesheet" href="https://framasoft.org/nav/lib/bootstrap/css/bootstrap.min.css"/>
+        <!--<link rel="stylesheet" href="{{ asset('bundles/wallabagcore/themes/material/css/framabag.css') }}">
+        <link rel="stylesheet" href="{{ asset('bundles/wallabagcore/themes/material/css/framabag-responsive.css') }}">-->
+        <link ref="stylesheet" href="https://n6.framasoft.org/nav/css/frama.css?160503" media="all"/>
+        <link rel="stylesheet" href="{{ asset('bundles/wallabagcore/themes/material/css/materialize.min.css') }}" media="screen,projection"/>
+        <link rel="stylesheet" href="{{ asset('bundles/wallabagcore/themes/material/css/main.css') }}" media="all">
+        <link rel="stylesheet" href="{{ asset('bundles/wallabagcore/themes/material/css/print.css') }}" media="print">
 
-        {% if error %}
-            <span class="black-text">{{ error.message }}</span>
-        {% endif %}
+        <script src="https://framasoft.org/nav/lib/jquery/jquery.min.js" type="text/javascript"></script>
+        <script src="https://framasoft.org/nav/lib/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="{{ asset('bundles/wallabagcore/themes/material/js/materialize.min.js') }}"></script>
+        <style>
+            .carousel-inner img {
+                max-width: 400px;
+            }
+            .frama, .violet {
+                color: #6A5687;
+            }
+            .services, .bag, .vert {
+                color: #8E9C48;
+            }
+            .soft {
+                color: #EB7239;
+            }
+            .container.ombre {
+                padding: 20px 40px;
+                margin-bottom: 30px;
+            }
+            .ombre {
+                background-color: #FFF;
+                box-shadow: -4px 6px 9px rgba(50, 50, 50, 0.5);
+            }
+            .warnings h5 {
+                margin-top: 35px;
+            }
+            .general h1 {
+                margin-top: 45px;
+            }
+            h2 {
+                font-family: PTSansCaption, GillSans, sans-serif;
+                font-weight: bold;
+                color: #616161;
+                font-size: 30px;
+                margin-bottom: 10px;
+            }
+            .wallabag_logo {
+                max-width: 100px;
+            }
 
-        {% for flashMessage in app.session.flashbag.get('notice') %}
-            <span class="black-text"><p>{{ flashMessage }}</p></span>
-        {% endfor %}
+        </style>
+    </head>
+    <body data-spy="scroll" data-target="#framabag-nav" data-offset="46" id="gototop">
+        <script src="js/nav.js" type="text/javascript"></script>
+        <div class="container ombre" id="content">
+            <header role="banner">
+                <div class="pull-right text-right">
+                    <p>En partenariat avec
+                        <br>
+                        <a href="https://www.wallabag.org/"><img class="wallabag_logo" src="{{ asset('bundles/wallabagcore/themes/material/img/logo-wallabag.svg') }}" alt="wallabag"></a>
+                    </p>
+                </div>
+                <h1 class="big-title">
+                    <a href="/">
+                        <b class="frama">Frama</b><b class="services">bag</b>
+                    </a>
+                </h1>
+                <p class="lead">Cliquez, sauvez, lisez quand vous le voulez !</p>
+                <hr class="trait" role="presentation">
+            </header>
+            <div class="row">
+                <div class="col-md-8">
+                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                        <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                        </ol>
 
-        <div class="row">
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner" role="listbox">
+                            <div class="item">
+                                <img src="{{ asset('bundles/wallabagcore/themes/material/img/wllbg-screenshot-2.png') }}" alt="wallabag with the default material theme">
+                            </div>
+                            <div class="item active">
+                                <img src="{{ asset('bundles/wallabagcore/themes/material/img/wllbg-screenshot.jpg') }}" alt="wallabag with the baggy theme">
+                            </div>
+                        </div>
 
-            <div class="input-field col s12">
-                <label for="username">{{ 'security.login.username'|trans }}</label>
-                <input type="text" id="username" name="_username" value="{{ last_username }}" />
+                        <!-- Controls -->
+                        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    {% block fos_user_content %}
+                        <form action="{{ path('fos_user_security_check') }}" method="post" name="loginform" class="card">
+                            <div class="card-content">
+
+                                {% if error %}
+                                    <span class="black-text">{{ error.message }}</span>
+                                {% endif %}
+
+                                {% for flashMessage in app.session.flashbag.get('notice') %}
+                                    <span class="black-text">
+                                        <p>{{ flashMessage }}</p>
+                                    </span>
+                                {% endfor %}
+
+                                <div class="row">
+
+                                    <div class="input-field col s12">
+                                        <label for="username">{{ 'security.login.username'|trans }}</label>
+                                        <input type="text" id="username" name="_username" value="{{ last_username }}"/>
+                                    </div>
+
+                                    <div class="input-field col s12">
+                                        <label for="password">{{ 'security.login.password'|trans }}</label>
+                                        <input type="password" id="password" name="_password"/>
+                                    </div>
+
+                                    <div class="input-field col s12">
+                                        <input type="checkbox" id="remember_me" name="_remember_me" checked/>
+                                        <label for="remember_me">{{ 'security.login.keep_logged_in'|trans }}</label>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="card-action center">
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+                                <a href="{{ path('fos_user_registration_register') }}" class="waves-effect waves-light grey btn">
+                                    <i class="material-icons left"></i>
+                                    {{ 'security.login.register'|trans }}</a>
+                                <button class="btn waves-effect waves-light" type="submit" name="send">
+                                    {{ 'security.login.submit'|trans }}
+                                    <i class="mdi-content-send right"></i>
+                                </button>
+                            </div>
+                            <div class="center">
+                                <a href="{{ path('fos_user_resetting_request') }}">{{ 'security.login.forgot_password'|trans }}</a>
+                            </div>
+                        </form>
+                    {% endblock fos_user_content %}
+                </div>
             </div>
+            <div class="row">
+                <div class="warnings">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#warning_french" aria-controls="warning_french" role="tab" data-toggle="tab">Français</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#warning_english" aria-controls="warning_english" role="tab" data-toggle="tab">English</a>
+                        </li>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active alert alert-warning " id="warning_french">
+                                <h5>Maintenance le 24 Juillet 2016</h5>
+                                <p>Pour cause de passage à la version 2 de wallabag, Framabag sera inaccessible le 24/07 (à partir de 00h00 UTC+2)</p>
+                            </div>
+                            <div role="tabpanel" class="tab-pane alert alert-warning " id="warning_english">
+                                <h5>Maintenance on July the 24th</h5>
+                                <p>In order to upgrade to wallabag v2, Framabag will be unavailable on the 24/07 (starting from 00h00 UTC+2)</p>
+                            </div>
+                        </div>
+                    </div>
 
-            <div class="input-field col s12">
-                <label for="password">{{ 'security.login.password'|trans }}</label>
-                <input type="password" id="password" name="_password" />
+                </div>
+                <hr role="presentation"></hr>
+                <div class="row">
+                    <div class="general">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active">
+                                <a href="#desc_french" aria-controls="desc_french" role="tab" data-toggle="tab">Français</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#desc_english" aria-controls="desc_english" role="tab" data-toggle="tab">English</a>
+                            </li>
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="desc_french">
+                                    <div class="lead">
+                                        <h1>Qu'est-ce que <span class="frama">Frama</span><span class="bag">bag</span>&nbsp;?</h1>
+                                        <p>Framabag est un service libre et gratuit proposé par le réseau
+                                            <a href="http://framasoft.org">
+                                                <span class="frama">Frama</span><span class="soft">soft</span>
+                                            </a>.</p>
+                                        <p>Avec cette application, vous ne perdrez plus les contenus du Web qui vous intéressent mais que vous n'avez pas le temps de parcourir. D'un clic, vous enregistrez votre sélection et vous la lirez quand vous voudrez. L'application sauvegarde votre
+                                            sélection pour vous permettre d'en profiter quand vous en aurez le temps.</p>
+                                        <p>Framabag est une instance de
+                                            <a href="http://www.wallabag.org">wallabag</a>.</p>
+                                        <p>Pour savoir comment utiliser Framabag,
+                                            <a href="http://doc.wallabag.org/">une documentation utilisateur existe</a>.</p>
+                                    </div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane " id="desc_english">
+                                    <h1>What is <span class="frama">Frama</span><span class="bag">bag</span>?</h1>
+                                    <div class="lead" style="padding-top: 20px;">
+                                        <p>Framabag is a free service by
+                                            <a href="http://framasoft.org">
+                                                <span class="frama">Frama</span><span class="soft">soft</span>
+                                            </a>
+                                            network.</p>
+                                        <p>With this application you will not miss any content anymore. Click, save, read it when you want. It saves the content you select so that you can read it when you have time.</p>
+                                        <p>If you want to know how use Framabag,
+                                            <a href="http://doc.wallabag.org/">there is a user documentation</a>.</p>
+                                        <p>This a
+                                            <a href="http://www.wallabag.org">wallabag</a>
+                                            instance.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h2>Prise en main</h2>
+                            <p class="text-center" role="presentation">
+                                <i class="glyphicon glyphicon-question-sign"></i>
+                            </p>
+                            <p>
+                                <b class="violet">Frama</b><b class="vert">bag</b>
+                                est un service en ligne libre de <em>lecture différée</em>.</p>
+                            <p>Voici comment ça fonctionne :</p>
+                            <ol>
+                                <li>Sauvegardez une page. Elle est nettoyée de tout ce qui n'est pas du contenu.</li>
+                                <li>Organisez votre contenu : utilisez des tags, favorisez des articles, utilisez des filtres</li>
+                                <li>Accédez à vos articles de partout : navigateurs web, applications pour mobiles et tablettes</li>
+                                <li>Importez vos articles depuis d'autres services et exportez-les dans une multitude de formats</li>
+                            </ol>
+                        </div>
+                        <div class="col-md-4">
+                            <h2>Le logiciel</h2>
+                            <p class="text-center" role="presentation">
+                                <span class="glyphicon glyphicon-cloud"></span>
+                            </p>
+                            <p>
+                                <b class="frama">Frama</b><b class="vert">bag</b>
+                                repose sur le logiciel libre
+                                <a href="https://wallabag.org">wallabag</a>. Les données sont hébergées sur les serveurs de
+                                <b class="frama">Frama</b><b class="soft">soft</b>, l'équipe de wallabag en assure la maintenance.<br>
+                                Il s’agit d’une instance parmi d'autres</a>.</p>
+                        <p>wallabag est sous
+                            <a href="https://github.com/wallabag/wallabag/blob/master/COPYING.md">licence
+                                <abbr title="ou licence X11">MIT</abbr>
+                            </a>.</p>
+                        <p>Pour synchroniser vos articles sur vos ordinateurs, tablettes ou mobiles, il est nécessaire d’installer
+                            <a href="https://www.wallabag.org/pages/download-wallabag.html">les clients wallabag</a>
+                            correspondants à votre environnement.</p>
+                    </div>
+                    <div class="col-md-4" id="jardin">
+                        <h2>Cultivez votre jardin</h2>
+                        <p class="text-center" role="presentation"><span class="glyphicon glyphicon-tree-deciduous"></span></p>
+                        <p>Pour participer au développement du logiciel, proposer des améliorations
+                            ou simplement le télécharger, rendez-vous sur <a href="https://github.com/wallabag/">le site de développement</a>.</p>
+                        <br>
+                        <p>Si vous souhaitez installer ce logiciel pour votre propre usage et ainsi gagner en autonomie, nous vous aidons sur :</p>
+                        <p class="text-center"><a href="http://framacloud.org/cultiver-son-jardin/installation-de-wallabag/" class="btn btn-success"><span class="glyphicon glyphicon-tree-deciduous"></span> framacloud.org</a></p>
+                    </div>
+                </div>
             </div>
+            <!-- #content -->
+            <script src="js/smoothscrool.js"></script>
+            <script>
+                $('#myTabs a').click(function(e) {
+                    e.preventDefault()
+                    $(this).tab('show')
+                });
+                $('#myTabs a:first').tab('show');
 
-            <div class="input-field col s12">
-                <input type="checkbox" id="remember_me" name="_remember_me" checked />
-                <label for="remember_me">{{ 'security.login.keep_logged_in'|trans }}</label>
-            </div>
-
-        </div>
-    </div>
-    <div class="card-action center">
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
-        <a href="{{ path('fos_user_registration_register') }}" class="waves-effect waves-light grey btn"><i class="material-icons left"></i> {{ 'security.login.register'|trans }}</a>
-        <button class="btn waves-effect waves-light" type="submit" name="send">
-            {{ 'security.login.submit'|trans }}
-            <i class="mdi-content-send right"></i>
-        </button>
-    </div>
-    <div class="center">
-        <a href="{{ path('fos_user_resetting_request') }}">{{ 'security.login.forgot_password'|trans }}</a>
-    </div>
-</form>
-{% endblock fos_user_content %}
+                $('.carousel').carousel({interval: 2000})
+            </script>
+        </body>
+    </html>
