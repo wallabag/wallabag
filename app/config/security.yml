@@ -65,4 +65,4 @@ security:
         - { path: "%base_path%/(unread|starred|archive).xml$", roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: "^%base_path%/settings", roles: ROLE_SUPER_ADMIN }
         - { path: "^%base_path%/annotations", roles: ROLE_USER }
-        - { path: "^%base_path%/", roles: ROLE_USER }
+        - { path: "^%base_path%", roles: ROLE_USER }
