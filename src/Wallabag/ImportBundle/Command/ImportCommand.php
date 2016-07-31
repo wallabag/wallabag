@@ -7,7 +7,6 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Wallabag\CoreBundle\Entity\Config;
 
 class ImportCommand extends ContainerAwareCommand
 {
@@ -34,17 +33,6 @@ class ImportCommand extends ContainerAwareCommand
         if (!is_object($user)) {
             throw new Exception(sprintf('User with id "%s" not found', $input->getArgument('userId')));
         }
-
-        $config = new Config($user);
-        $config->setTheme('material');
-        $config->setItemsPerPage(12);
-        $config->setRssLimit(50);
-        $config->setReadingSpeed(1.0);
-        $config->setLanguage('en');
-
-        $em->persist($config);
-        $user->setConfig($config);
-        # $em->flush();
 
         $wallabag = $this->getContainer()->get('wallabag_import.wallabag_v1.import');
         $res = $wallabag
