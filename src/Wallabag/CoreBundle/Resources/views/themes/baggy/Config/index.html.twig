@@ -134,7 +134,8 @@
         </fieldset>
         {% endif %}
 
-        {{ form_rest(form.user) }}
+        {{ form_widget(form.user._token) }}
+        {{ form_widget(form.user.save) }}
     </form>
 
     <h2>{{ 'config.tab_menu.password'|trans }}</h2>
