@@ -158,7 +158,7 @@
                             {% endif %}
 
                             {{ form_widget(form.user.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
-                            {{ form_rest(form.user) }}
+                            {{ form_widget(form.user._token) }}
                         </form>
                     </div>
 
