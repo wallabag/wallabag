@@ -22,7 +22,6 @@ php:
     - 7.0
     - 7.1
     - nightly
-    - hhvm
 
 env:
     - DB=mysql
@@ -32,13 +31,29 @@ env:
 matrix:
     fast_finish: true
     include:
+        # driver for PostgreSQL currently unsupported by HHVM, requires 3rd party dependency
+        - php: hhvm-3.12
+          sudo: required
+          dist: trusty
+          group: edge
+          env: DB=mysql
+          addons:
+            apt:
+                packages:
+                    - mysql-server-5.6
+                    - mysql-client-core-5.6
+                    - mysql-client-5.6
+          services:
+            - mysql
+        - php: hhvm-3.12
+          sudo: required
+          dist: trusty
+          group: edge
+          env: DB=sqlite
         - php: 7.0
           env: CS_FIXER=run VALIDATE_TRANSLATION_FILE=run DB=sqlite
-    exclude:
-        - php: hhvm
-          env: DB=pgsql  # driver for PostgreSQL currently unsupported by HHVM, requires 3rd party dependency
     allow_failures:
-        - php: hhvm
+        - php: hhvm-3.12
         - php: nightly
 
 # exclude v1 branches
@@ -47,9 +62,10 @@ branches:
         - legacy
 
 before_script:
-    - if [[ $TRAVIS_PHP_VERSION != hhvm ]]; then echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini; fi;
+    - PHP=$TRAVIS_PHP_VERSION
+    - if [[ ! $PHP = hhvm* ]]; then echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini; fi;
     # xdebug isn't enable for PHP 7.1
-    - if [[ $TRAVIS_PHP_VERSION != '7.1' && $TRAVIS_PHP_VERSION != 'hhvm' ]]; then phpenv config-rm xdebug.ini; fi
+    - if [[ ! $PHP = hhvm* ]]; then phpenv config-rm xdebug.ini || echo "xdebug not available"; fi
     - composer self-update --no-progress
     - if [[ "$DB" = "pgsql" ]]; then psql -c 'create database wallabag_test;' -U postgres; fi;
 
