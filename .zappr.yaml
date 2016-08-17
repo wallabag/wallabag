@@ -1,4 +1,6 @@
 # see https://zappr.opensource.zalan.do/
+autobranch: false
+commit: false
 approvals:
   minimum: 1
   ignore: pr_opener
