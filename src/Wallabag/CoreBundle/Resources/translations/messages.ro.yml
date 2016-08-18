@@ -144,6 +144,8 @@ entry:
         reading_time: 'timp estimat de citire'
         reading_time_minutes: 'timp estimat de citire: %readingTime% min'
         reading_time_less_one_minute: 'timp estimat de citire: <small class="inferieur">&lt;</small> 1 min'
+        reading_time_minutes_short: '%readingTime% min'
+        reading_time_less_one_minute_short: '<small class="inferieur">&lt;</small> 1 min'
         original_article: 'original'
         toogle_as_read: 'Comută marcat ca citit'
         toogle_as_star: 'Comută marcat ca favorit'

@@ -144,6 +144,8 @@ entry:
         reading_time: 'tempo di lettura stimato'
         reading_time_minutes: 'tempo di lettura stimato: %readingTime% min'
         reading_time_less_one_minute: 'tempo di lettura stimato: <small class="inferieur">&lt;</small> 1 min'
+        reading_time_minutes_short: '%readingTime% min'
+        reading_time_less_one_minute_short: '<small class="inferieur">&lt;</small> 1 min'
         original_article: 'originale'
         toogle_as_read: 'Segna come da leggere'
         toogle_as_star: 'Segna come non preferito'
