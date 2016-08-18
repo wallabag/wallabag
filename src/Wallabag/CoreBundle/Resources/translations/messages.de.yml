@@ -176,7 +176,7 @@ entry:
             back_to_homepage: 'Zurück'
             set_as_read: 'Als gelesen markieren'
             set_as_unread: 'Als ungelesen markieren'
-            set_as_favorite: 'Favorisieren'
+            set_as_starred: 'Favorisieren'
             view_original_article: 'Original-Artikel'
             re_fetch_content: 'Inhalt neu laden'
             delete: 'Löschen'

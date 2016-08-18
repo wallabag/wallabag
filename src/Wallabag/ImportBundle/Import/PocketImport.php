@@ -226,7 +226,7 @@ class PocketImport implements ImportInterface
                 $entry->setArchived(true);
             }
 
-            // 0 or 1 - 1 If the item is favorited
+            // 0 or 1 - 1 If the item is starred
             if ($pocketEntry['favorite'] == 1) {
                 $entry->setStarred(true);
             }

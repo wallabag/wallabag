@@ -176,7 +176,7 @@ entry:
             back_to_homepage: 'Tornar'
             set_as_read: 'Marcar coma legit'
             set_as_unread: 'Marcar coma pas legit'
-            set_as_favorite: 'Metre en favori'
+            set_as_starred: 'Metre en favori'
             view_original_article: 'Article original'
             re_fetch_content: 'Tornar cargar lo contengut'
             delete: 'Suprimir'

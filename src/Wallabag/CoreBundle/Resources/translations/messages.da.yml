@@ -176,7 +176,7 @@ entry:
             back_to_homepage: 'Tilbage'
             set_as_read: 'Marker som læst'
             # set_as_unread: 'Mark as unread'
-            set_as_favorite: 'Marker som favorit'
+            set_as_starred: 'Marker som favorit'
             view_original_article: 'Originalartikel'
             # re_fetch_content: 'Re-fetch content'
             delete: 'Slet'
