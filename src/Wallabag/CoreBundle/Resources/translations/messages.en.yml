@@ -146,7 +146,7 @@ entry:
         reading_time_less_one_minute: 'estimated reading time: <small class="inferieur">&lt;</small> 1 min'
         original_article: 'original'
         toogle_as_read: 'Toggle mark as read'
-        toogle_as_star: 'Toggle star'
+        toogle_as_star: 'Toggle starred'
         delete: 'Delete'
         export_title: 'Export'
     filters:
@@ -176,7 +176,7 @@ entry:
             back_to_homepage: 'Back'
             set_as_read: 'Mark as read'
             set_as_unread: 'Mark as unread'
-            set_as_starred: 'Toggle star'
+            set_as_starred: 'Toggle starred'
             view_original_article: 'Original article'
             re_fetch_content: 'Re-fetch content'
             delete: 'Delete'
