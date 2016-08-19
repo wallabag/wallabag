@@ -143,4 +143,44 @@ class WallabagV2ImportTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('WallabagImport: user is not defined', $records[0]['message']);
         $this->assertEquals('ERROR', $records[0]['level_name']);
     }
+
+    public function testImportEmptyFile()
+    {
+        $wallabagV2Import = $this->getWallabagV2Import();
+        $wallabagV2Import->setFilepath(__DIR__.'/../fixtures/wallabag-v2-empty.json');
+
+        $res = $wallabagV2Import->import();
+
+        $this->assertFalse($res);
+        $this->assertEquals(['skipped' => 0, 'imported' => 0], $wallabagV2Import->getSummary());
+    }
+
+    public function testImportWithExceptionFromGraby()
+    {
+        $wallabagV2Import = $this->getWallabagV2Import();
+        $wallabagV2Import->setFilepath(__DIR__.'/../fixtures/wallabag-v2.json');
+
+        $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $entryRepo->expects($this->exactly(24))
+            ->method('findByUrlAndUserId')
+            ->will($this->onConsecutiveCalls(false, true, false));
+
+        $this->em
+            ->expects($this->any())
+            ->method('getRepository')
+            ->willReturn($entryRepo);
+
+        $this->contentProxy
+            ->expects($this->exactly(2))
+            ->method('updateEntry')
+            ->will($this->throwException(new \Exception()));
+
+        $res = $wallabagV2Import->import();
+
+        $this->assertTrue($res);
+        $this->assertEquals(['skipped' => 24, 'imported' => 0], $wallabagV2Import->getSummary());
+    }
 }
