@@ -2,7 +2,6 @@
 
 namespace Wallabag\ImportBundle\Import;
 
-use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Doctrine\ORM\EntityManager;
 use GuzzleHttp\Client;
@@ -12,12 +11,9 @@ use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Helper\ContentProxy;
 use Craue\ConfigBundle\Util\Config;
 
-class PocketImport implements ImportInterface
+class PocketImport extends AbstractImport
 {
     private $user;
-    private $em;
-    private $contentProxy;
-    private $logger;
     private $client;
     private $consumerKey;
     private $skippedEntries = 0;
@@ -32,11 +28,6 @@ class PocketImport implements ImportInterface
         $this->contentProxy = $contentProxy;
         $this->consumerKey = $craueConfig->get('pocket_consumer_key');
         $this->logger = new NullLogger();
-    }
-
-    public function setLogger(LoggerInterface $logger)
-    {
-        $this->logger = $logger;
     }
 
     /**
@@ -219,7 +210,13 @@ class PocketImport implements ImportInterface
             }
 
             $entry = new Entry($this->user);
-            $entry = $this->contentProxy->updateEntry($entry, $url);
+            $entry = $this->fetchContent($entry, $url);
+
+            // jump to next entry in case of problem while getting content
+            if (false === $entry) {
+                ++$this->skippedEntries;
+                continue;
+            }
 
             // 0, 1, 2 - 1 if the item is archived - 2 if the item should be deleted
             if ($pocketEntry['status'] == 1 || $this->markAsRead) {
