@@ -193,6 +193,7 @@ entry:
         edit_title: 'Titel ändern'
         original_article: 'original'
         annotations_on_the_entry: '{0} Keine Anmerkungen|{1} Eine Anmerkung|]1,Inf[ %nbAnnotations% Anmerkungen'
+        created_at: 'Erstellungsdatum'
     new:
         page_title: 'Neuen Artikel speichern'
         placeholder: 'https://website.de'

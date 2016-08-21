@@ -29,15 +29,19 @@
             <li><a href="mailto:hello@wallabag.org?subject=Wrong%20display%20in%20wallabag&amp;body={{ entry.url|url_encode }}" title="{{ 'entry.view.left_menu.problem.label'|trans }}" class="tool bad-display icon icon-delete"><span>{{ 'entry.view.left_menu.problem.label'|trans }}</span></a></li>
         </ul>
     </div>
-        <div class="link mdi-action-today"> {{ entry.createdAt|date('Y-m-d') }}</div>
-        {% set readingTime = entry.readingTime / app.user.config.readingSpeed %}
+        <div class="link mdi-action-today">
+            {{ 'entry.view.created_at'|trans }}: {{ entry.createdAt|date('Y-m-d') }}
+        </div>
+
         <div class="link mdi-action-query-builder">
+            {% set readingTime = entry.readingTime / app.user.config.readingSpeed %}
             {% if readingTime > 0 %}
-                {{ 'entry.list.reading_time_minutes_short'|trans({'%readingTime%': readingTime|round}) }}
+                {{ 'entry.list.reading_time_minutes'|trans({'%readingTime%': readingTime|round})|capitalize }}
             {% else %}
-                {{ 'entry.list.reading_time_less_one_minute_short'|trans|raw }}
+                {{ 'entry.list.reading_time_less_one_minute'|trans|raw }}
             {% endif %}
         </div>
+
         {% set nbAnnotations = entry.annotations | length %}
         <span class="tool link mdi-communication-comment"> {{ 'entry.view.annotations_on_the_entry'|transchoice(entry.annotations | length) }}</span>
         <aside class="tags">

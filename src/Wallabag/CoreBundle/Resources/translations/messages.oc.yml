@@ -193,6 +193,7 @@ entry:
         edit_title: 'Modificar lo títol'
         original_article: 'original'
         annotations_on_the_entry: "{0} Pas cap d'anotacion|{1} Una anotacion|]1,Inf[ %nbAnnotations% anotacions"
+        created_at: 'Data de creacion'
     new:
         page_title: 'Enregistrar un novèl article'
         placeholder: 'http://website.com'

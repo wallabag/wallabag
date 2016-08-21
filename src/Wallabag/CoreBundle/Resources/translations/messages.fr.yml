@@ -193,6 +193,7 @@ entry:
         edit_title: 'Modifier le titre'
         original_article: 'original'
         annotations_on_the_entry: '{0} Aucune annotation|{1} Une annotation|]1,Inf[ %nbAnnotations% annotations'
+        created_at: 'Date de création'
     new:
         page_title: 'Sauvegarder un nouvel article'
         placeholder: 'http://website.com'

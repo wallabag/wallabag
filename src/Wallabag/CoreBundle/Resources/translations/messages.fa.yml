@@ -193,6 +193,7 @@ entry:
         edit_title: 'ویرایش عنوان'
         original_article: 'اصلی'
         annotations_on_the_entry: '{0} بدون حاشیه|{1} یک حاشیه|]1,Inf[ %nbحاشیه% annotations'
+        created_at: 'زمان ساخت'
     new:
         page_title: 'ذخیرهٔ مقالهٔ تازه'
         placeholder: 'http://website.com'

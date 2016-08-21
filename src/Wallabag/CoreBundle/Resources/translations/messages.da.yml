@@ -193,6 +193,7 @@ entry:
         edit_title: 'Rediger titel'
         original_article: 'original'
         # annotations_on_the_entry: '{0} No annotations|{1} One annotation|]1,Inf[ %nbAnnotations% annotations'
+        created_at: 'Oprettelsesdato'
     new:
         page_title: 'Gem ny artikel'
         placeholder: 'http://website.com'

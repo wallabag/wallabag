@@ -193,6 +193,7 @@ entry:
         edit_title: 'Başlığı düzenle'
         original_article: 'orijinal'
         # annotations_on_the_entry: '{0} No annotations|{1} One annotation|]1,Inf[ %nbAnnotations% annotations'
+        created_at: 'Oluşturulma tarihi'
     new:
         page_title: 'Yeni makaleyi kaydet'
         placeholder: 'http://website.com'
