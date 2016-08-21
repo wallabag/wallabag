@@ -14,7 +14,7 @@
             <li><a href="{{ entry.url|e }}" target="_blank" title="{{ 'entry.view.original_article'|trans }} : {{ entry.title|e }}" class="tool link icon icon-link"><span>{{ entry.domainName|removeWww }}</span></a></li>
             <li><a title="{{ 'entry.view.left_menu.re_fetch_content'|trans }}" class="tool icon icon-reload" href="{{ path('reload_entry', { 'id': entry.id }) }}"><span>{{ 'entry.view.left_menu.re_fetch_content'|trans }}</span></a></li>
             <li><a title="{% if entry.isArchived == 0 %}{{ 'entry.view.left_menu.set_as_read'|trans }}{% else %}{{ 'entry.view.left_menu.set_as_unread'|trans }}{% endif %}" class="tool icon icon-check {% if entry.isArchived == 0 %}archive-off{% else %}archive{% endif %}" href="{{ path('archive_entry', { 'id': entry.id }) }}"><span>{% if entry.isArchived == 0 %}{{ 'entry.view.left_menu.set_as_read'|trans }}{% else %}{{ 'entry.view.left_menu.set_as_unread'|trans }}{% endif %}</span></a></li>
-            <li><a title="{{ 'entry.view.left_menu.set_as_favorite'|trans }}" class="tool icon icon-star {% if entry.isStarred == 0 %}fav-off{% else %}fav{% endif %}" href="{{ path('star_entry', { 'id': entry.id }) }}"><span>{{ 'entry.view.left_menu.set_as_favorite'|trans }}</span></a></li>
+            <li><a title="{{ 'entry.view.left_menu.set_as_starred'|trans }}" class="tool icon icon-star {% if entry.isStarred == 0 %}fav-off{% else %}fav{% endif %}" href="{{ path('star_entry', { 'id': entry.id }) }}"><span>{{ 'entry.view.left_menu.set_as_starred'|trans }}</span></a></li>
             <li><a id="nav-btn-add-tag" title="{{ 'entry.view.left_menu.add_a_tag'|trans }}"><span>{{ 'entry.view.left_menu.add_a_tag'|trans }}</span></a></li>
             <li><a title="{{ 'entry.view.left_menu.delete'|trans }}" class="tool delete icon icon-trash" href="{{ path('delete_entry', { 'id': entry.id }) }}"><span>{{ 'entry.view.left_menu.delete'|trans }}</span></a></li>
             {% if craue_setting('share_twitter') %}<li><a href="https://twitter.com/home?status={{entry.title|url_encode}}%20{{ entry.url|url_encode }}%20via%20@wallabagapp" target="_blank" class="tool twitter icon icon-twitter" title="Tweet"><span>Tweet</span></a></li>{% endif %}
@@ -72,7 +72,7 @@
                 $("body").css("cursor", "auto");
             });*/
 
-            // toggle favorite property of current article
+            // toggle starred property of current article
           /*  $('#setFav').click(function(){
                 $("body").css("cursor", "wait");
                 $.ajax( { url: '{{ path('star_entry', { 'id': entry.id }) }}' }).done(

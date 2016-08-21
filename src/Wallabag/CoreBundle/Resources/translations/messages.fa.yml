@@ -176,7 +176,7 @@ entry:
             back_to_homepage: 'بازگشت'
             set_as_read: 'خوانده‌شده'
             set_as_unread: 'به عنوان خوانده‌نشده علامت بزن'
-            set_as_favorite: 'برگزیده'
+            set_as_starred: 'برگزیده'
             view_original_article: 'مقالهٔ اصلی'
             re_fetch_content: 'مقاله‌ها را دوباره دریافت کن'
             delete: 'پاک کردن'

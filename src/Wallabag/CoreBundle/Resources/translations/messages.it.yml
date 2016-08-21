@@ -175,7 +175,7 @@ entry:
             back_to_homepage: 'Indietro'
             set_as_read: 'Segna come già letto'
             set_as_unread: 'Segna come da leggere'
-            set_as_favorite: 'Segna come preferito'
+            set_as_starred: 'Segna come preferito'
             view_original_article: 'Contenuto originale'
             re_fetch_content: 'Ri-ottieni pagina'
             delete: 'Elimina'

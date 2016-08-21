@@ -24,8 +24,8 @@
                     </a>
                 </li>
                 <li>
-                    <a class="waves-effect" title="{{ 'entry.view.left_menu.set_as_favorite'|trans }}" href="{{ path('star_entry', { 'id': entry.id }) }}" id="setFav">
-                        <i class="{% if entry.isStarred == 0 %}mdi-action-favorite-outline{% else %}mdi-action-favorite{% endif %} small"></i>
+                    <a class="waves-effect" title="{{ 'entry.view.left_menu.set_as_starred'|trans }}" href="{{ path('star_entry', { 'id': entry.id }) }}" id="setFav">
+                        <i class="{% if entry.isStarred == 0 %}mdi-toggle-star-outline{% else %}mdi-toggle-star{% endif %} small"></i>
                     </a>
                 </li>
                 <li>
@@ -70,9 +70,9 @@
         </li>
 
         <li class="bold hide-on-med-and-down">
-            <a class="waves-effect collapsible-header" title="{{ 'entry.view.left_menu.set_as_favorite'|trans }}" href="{{ path('star_entry', { 'id': entry.id }) }}" id="setFav">
-                <i class="{% if entry.isStarred == 0 %}mdi-action-favorite-outline{% else %}mdi-action-favorite{% endif %} small"></i>
-                <span>{{ 'entry.view.left_menu.set_as_favorite'|trans }}</span>
+            <a class="waves-effect collapsible-header" title="{{ 'entry.view.left_menu.set_as_starred'|trans }}" href="{{ path('star_entry', { 'id': entry.id }) }}" id="setFav">
+                <i class="{% if entry.isStarred == 0 %}mdi-toggle-star-outline{% else %}mdi-toggle-star{% endif %} small"></i>
+                <span>{{ 'entry.view.left_menu.set_as_starred'|trans }}</span>
             </a>
             <div class="collapsible-body"></div>
         </li>

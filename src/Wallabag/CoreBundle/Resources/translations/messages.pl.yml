@@ -176,7 +176,7 @@ entry:
             back_to_homepage: 'Cofnij'
             set_as_read: 'Oznacz jako przeczytane'
             set_as_unread: 'Oznacz jako nieprzeczytane'
-            set_as_favorite: 'Ulubione'
+            set_as_starred: 'Ulubione'
             view_original_article: 'Oryginalny artykuł'
             re_fetch_content: 'Pobierz ponownie treść'
             delete: 'Usuń'

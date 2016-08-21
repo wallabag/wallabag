@@ -176,7 +176,7 @@ entry:
             back_to_homepage: 'Regrese a la página principal'
             set_as_read: 'Marcar como leído'
             set_as_unread: 'Marcar como no leído'
-            set_as_favorite: 'Marcar como favorito'
+            set_as_starred: 'Marcar como favorito'
             view_original_article: 'Artículo original'
             re_fetch_content: 'Redescargar el contenido'
             delete: 'Suprimir'

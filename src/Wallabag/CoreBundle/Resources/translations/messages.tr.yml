@@ -176,7 +176,7 @@ entry:
             back_to_homepage: 'Back'
             set_as_read: 'Okundu olarak işaretle'
             set_as_unread: 'Okunmadı olarak işaretle'
-            set_as_favorite: 'Favorilere ekle/çıkar'
+            set_as_starred: 'Favorilere ekle/çıkar'
             view_original_article: 'Orijinal makale'
             re_fetch_content: 'İçeriği yenile'
             delete: 'Sil'
