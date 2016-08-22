@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.0.7] - 2016-08-22
+
+### Added
+
+- [#2222](https://github.com/wallabag/wallabag/pull/2222) Added creation date and reading time on article view (Nicolas Lœuillet)
+- [#2134](https://github.com/wallabag/wallabag/pull/2134) Run tests on an uptodate HHVM (Jeremy Benoist)
+
+### Changed
+
+- [#2221](https://github.com/wallabag/wallabag/pull/2221) Replaced favorite word/icon with star one (Nicolas Lœuillet)
+
+### Fixed
+
+- [#2224](https://github.com/wallabag/wallabag/pull/2224) Avoid breaking import when fetching fail (Jeremy Benoist)
+- [#2216](https://github.com/wallabag/wallabag/pull/2216), [#2220](https://github.com/wallabag/wallabag/pull/2220) Enable CORS headers for OAUTH part (Rurik19)
+- [#2095](https://github.com/wallabag/wallabag/pull/2095) Fix form user display when 2FA is disabled (Nicolas Lœuillet)
+
 ## [2.0.6] - 2016-08-10
 
 ### Changed
