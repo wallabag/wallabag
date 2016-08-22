@@ -144,6 +144,8 @@ entry:
         reading_time: 'زمان تخمینی برای خواندن'
         reading_time_minutes: 'زمان تخمینی برای خواندن: %readingTime% min'
         reading_time_less_one_minute: 'زمان تخمینی برای خواندن: <small class="inferieur">&lt;</small> 1 min'
+        reading_time_minutes_short: '%readingTime% min'
+        reading_time_less_one_minute_short: '<small class="inferieur">&lt;</small> 1 min'
         original_article: 'original'
         toogle_as_read: 'خوانده‌شده/خوانده‌نشده'
         toogle_as_star: 'برگزیده/نابرگزیده'
@@ -191,6 +193,7 @@ entry:
         edit_title: 'ویرایش عنوان'
         original_article: 'اصلی'
         annotations_on_the_entry: '{0} بدون حاشیه|{1} یک حاشیه|]1,Inf[ %nbحاشیه% annotations'
+        created_at: 'زمان ساخت'
     new:
         page_title: 'ذخیرهٔ مقالهٔ تازه'
         placeholder: 'http://website.com'

@@ -144,6 +144,8 @@ entry:
         reading_time: 'szacunkowy czas czytania'
         reading_time_minutes: 'szacunkowy czas czytania: %readingTime% min'
         reading_time_less_one_minute: 'szacunkowy czas czytania: <small class="inferieur">&lt;</small> 1 min'
+        reading_time_minutes_short: '%readingTime% min'
+        reading_time_less_one_minute_short: '<small class="inferieur">&lt;</small> 1 min'
         original_article: 'oryginał'
         toogle_as_read: 'Oznacz jako przeczytane'
         toogle_as_star: 'Oznacz jako ulubione'
@@ -191,6 +193,7 @@ entry:
         edit_title: 'Edytuj tytuł'
         original_article: 'oryginalny'
         annotations_on_the_entry: '{0} Nie ma adnotacji |{1} Jedna adnotacja |]1,Inf[ %nbAnnotations% adnotacji'
+        created_at: 'Czas stworzenia'
     new:
         page_title: 'Zapisz nowy wpis'
         placeholder: 'http://website.com'
