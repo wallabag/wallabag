@@ -2,6 +2,39 @@
 
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.0.7] - 2016-08-22
+
+### Added
+
+- [#2222](https://github.com/wallabag/wallabag/pull/2222) Added creation date and reading time on article view (Nicolas Lœuillet)
+- [#2134](https://github.com/wallabag/wallabag/pull/2134) Run tests on an uptodate HHVM (Jeremy Benoist)
+
+### Changed
+
+- [#2221](https://github.com/wallabag/wallabag/pull/2221) Replaced favorite word/icon with star one (Nicolas Lœuillet)
+
+### Fixed
+
+- [#2224](https://github.com/wallabag/wallabag/pull/2224) Avoid breaking import when fetching fail (Jeremy Benoist)
+- [#2216](https://github.com/wallabag/wallabag/pull/2216), [#2220](https://github.com/wallabag/wallabag/pull/2220) Enable CORS headers for OAUTH part (Rurik19)
+- [#2095](https://github.com/wallabag/wallabag/pull/2095) Fix form user display when 2FA is disabled (Nicolas Lœuillet)
+
+## [2.0.6] - 2016-08-10
+
+### Changed
+
+- [#2199](https://github.com/wallabag/wallabag/pull/2199) Handling socials links into a config file (Simon Alberny)
+- [#2172](https://github.com/wallabag/wallabag/pull/2172) Change the way to login user in tests (Jeremy Benoist)
+- [#2155](https://github.com/wallabag/wallabag/pull/2155) Use friendsofphp instead of fabpot for PHP CS Fixer (Jeremy Benoist)
+
+### Fixed
+
+- [#2200](https://github.com/wallabag/wallabag/pull/2200) Fixed typo in entry:notice:entry_saved (charno6)
+- [#2185](https://github.com/wallabag/wallabag/pull/2185) Fix 3rd-Party Apps links (Chrome & Firefox) (Thomas Citharel)
+- [#2165](https://github.com/wallabag/wallabag/pull/2165) Fix a few french translations typos (Thomas Citharel)
+- [#2157](https://github.com/wallabag/wallabag/pull/2157) Handle only upper or only lower reading filter (Jeremy Benoist)
+- [#2156](https://github.com/wallabag/wallabag/pull/2156) Try to find bad redirection after delete (Jeremy Benoist)
+
 ## [2.0.5] - 2016-05-31
 
 ### Added

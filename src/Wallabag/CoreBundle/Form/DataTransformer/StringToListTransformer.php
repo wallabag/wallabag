@@ -16,7 +16,7 @@ class StringToListTransformer implements DataTransformerInterface
     private $separator;
 
     /**
-     * @param string $separator The separator used in the list.
+     * @param string $separator The separator used in the list
      */
     public function __construct($separator = ',')
     {

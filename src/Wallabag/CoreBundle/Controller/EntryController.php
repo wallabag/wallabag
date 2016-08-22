@@ -357,7 +357,7 @@ class EntryController extends Controller
     }
 
     /**
-     * Changes favorite status for an entry.
+     * Changes starred status for an entry.
      *
      * @param Request $request
      * @param Entry   $entry

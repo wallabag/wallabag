@@ -28,16 +28,32 @@ class InstallCommandTest extends WallabagCoreTestCase
              *
              * http://stackoverflow.com/a/14374832/569101
              */
-            $this->markTestSkipped('PostgreSQL spotted: can find a good way to drop current database, skipping.');
+            $this->markTestSkipped('PostgreSQL spotted: can\'t find a good way to drop current database, skipping.');
         }
     }
 
+    /**
+     * Ensure next tests will have a clean database
+     */
     public static function tearDownAfterClass()
     {
         $application = new Application(static::$kernel);
         $application->setAutoExit(false);
 
-        $code = $application->run(new ArrayInput([
+        $application->run(new ArrayInput([
+            'command' => 'doctrine:schema:drop',
+            '--no-interaction' => true,
+            '--force' => true,
+            '--env' => 'test',
+        ]), new NullOutput());
+
+        $application->run(new ArrayInput([
+            'command' => 'doctrine:schema:create',
+            '--no-interaction' => true,
+            '--env' => 'test',
+        ]), new NullOutput());
+
+        $application->run(new ArrayInput([
             'command' => 'doctrine:fixtures:load',
             '--no-interaction' => true,
             '--env' => 'test',

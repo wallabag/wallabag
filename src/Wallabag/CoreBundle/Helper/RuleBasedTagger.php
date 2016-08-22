@@ -25,7 +25,7 @@ class RuleBasedTagger
     /**
      * Add tags from rules defined by the user.
      *
-     * @param Entry $entry Entry to tag.
+     * @param Entry $entry Entry to tag
      */
     public function tag(Entry $entry)
     {
@@ -49,7 +49,7 @@ class RuleBasedTagger
      *
      * @param User $user
      *
-     * @return array<Entry> A list of modified entries.
+     * @return array<Entry> A list of modified entries
      */
     public function tagAllForUser(User $user)
     {
@@ -75,7 +75,7 @@ class RuleBasedTagger
     /**
      * Fetch a tag.
      *
-     * @param string $label The tag's label.
+     * @param string $label The tag's label
      *
      * @return Tag
      */

@@ -21,7 +21,9 @@ class ConfigType extends AbstractType
     {
         $this->themes = array_combine(
             $themes,
-            array_map(function ($s) { return ucwords(strtolower(str_replace('-', ' ', $s))); }, $themes)
+            array_map(function ($s) {
+                return ucwords(strtolower(str_replace('-', ' ', $s)));
+            }, $themes)
         );
 
         $this->languages = $languages;

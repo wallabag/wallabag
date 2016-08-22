@@ -54,7 +54,7 @@ Um wallabag selbst zu installieren, musst du die folgenden Kommandos ausführen:
 
     git clone https://github.com/wallabag/wallabag.git
     cd wallabag
-    git checkout 2.0.5
+    git checkout 2.0.7
     SYMFONY_ENV=prod composer install --no-dev -o --prefer-dist
     php bin/console wallabag:install --env=prod
 
@@ -73,7 +73,7 @@ Und wallabag unter http://deineserverip:8000 erreichen
 Auf einem geteilten Webhosting
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Wir stellen ein Paket inkl. aller Abhängigkeiten bereit. 
+Wir stellen ein Paket inkl. aller Abhängigkeiten bereit.
 Die Standardkonfiguration nutzt SQLite für die Datenbank. Wenn du diese Einstellung ändern willst, ändere bitte ``app/config/parameters.yml``.
 
 Wir haben bereits einen Nutzer erstellt: Login und Passwort sind ``wallabag``.

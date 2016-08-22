@@ -26,7 +26,7 @@
         <ul id="slide-out" class="side-nav fixed">
             {% block logo %}
                 <li class="logo border-bottom">
-                    <a title="{% trans %}Back to unread articles{% endtrans %}" href="{{ path('unread') }}">
+                    <a title="{{ 'menu.left.back_to_unread'|trans }}" href="{{ path('unread') }}">
                         <img src="{{ asset('bundles/wallabagcore/themes/_global/img/logo-square.png') }}" alt="wallabag logo" />
                     </a>
                 </li>
@@ -117,45 +117,5 @@
 {% endblock %}
 
 {% block footer %}
-    <footer class="page-footer cyan darken-2">
-        <div class="container">
-            <div class="row">
-                <div class="col l6 s12">
-                    <h5 class="white-text">{{ 'footer.wallabag.elsewhere'|trans }}</h5>
-                    <p class="grey-text text-lighten-4">
-                        <a target="_blank" class="grey-text text-lighten-3" href="https://play.google.com/store/apps/details?id=fr.gaulupeau.apps.InThePoche" title="Android">
-                            <span class="icon-android"></span>
-                        </a>
-                        <a target="_blank" class="grey-text text-lighten-3" href="https://itunes.apple.com/app/id828331015" title="iOS">
-                            <span class="icon-apple"></span>
-                        </a>
-                        <a target="_blank" class="grey-text text-lighten-3" href="https://addons.mozilla.org/firefox/addon/wallabag-v2/" title="Firefox">
-                            <span class="icon-firefox"></span>
-                        </a>
-                        <a target="_blank" class="grey-text text-lighten-3" href="https://chrome.google.com/webstore/detail/wallabagger/gbmgphmejlcoihgedabhgjdkcahacjlj" title="Chrome">
-                            <span class="icon-chrome"></span>
-                        </a>
-                    </p>
-                </div>
-                <div class="col l4 offset-l2 s12">
-                    <h5 class="white-text">{{ 'footer.wallabag.social'|trans }}</h5>
-                    <a target="_blank" class="grey-text text-lighten-3" href="https://twitter.com/wallabagapp" title="Twitter">
-                        <span class="icon-twitter"></span>
-                    </a>
-                    <a target="_blank" class="grey-text text-lighten-3" href="https://plus.google.com/+WallabagOrg/posts" title="Google+">
-                        <span class="icon-google-plus2"></span>
-                    </a>
-                    <a target="_blank" class="grey-text text-lighten-3" href="https://facebook.com/Wallabag" title="Facebook">
-                        <span class="icon-facebook2"></span>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="footer-copyright">
-            <div class="container">
-                <p>{{ 'footer.wallabag.powered_by'|trans }} <a target="_blank" href="https://wallabag.org" class="grey-text text-lighten-4">wallabag</a></p>
-                <a class="grey-text text-lighten-4 right" href="{{ path('about') }}">{{ 'footer.wallabag.about'|trans }}</a>
-            </div>
-        </div>
-    </footer>
+    {{ render(controller("WallabagCoreBundle:Footer:index")) }}
 {% endblock %}

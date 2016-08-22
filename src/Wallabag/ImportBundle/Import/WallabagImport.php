@@ -2,19 +2,12 @@
 
 namespace Wallabag\ImportBundle\Import;
 
-use Psr\Log\LoggerInterface;
-use Psr\Log\NullLogger;
-use Doctrine\ORM\EntityManager;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\UserBundle\Entity\User;
-use Wallabag\CoreBundle\Helper\ContentProxy;
 
-abstract class WallabagImport implements ImportInterface
+abstract class WallabagImport extends AbstractImport
 {
     protected $user;
-    protected $em;
-    protected $logger;
-    protected $contentProxy;
     protected $skippedEntries = 0;
     protected $importedEntries = 0;
     protected $filepath;
@@ -34,18 +27,6 @@ abstract class WallabagImport implements ImportInterface
         'No title found',
         '',
     ];
-
-    public function __construct(EntityManager $em, ContentProxy $contentProxy)
-    {
-        $this->em = $em;
-        $this->logger = new NullLogger();
-        $this->contentProxy = $contentProxy;
-    }
-
-    public function setLogger(LoggerInterface $logger)
-    {
-        $this->logger = $logger;
-    }
 
     /**
      * We define the user in a custom call because on the import command there is no logged in user.
@@ -159,11 +140,17 @@ abstract class WallabagImport implements ImportInterface
 
             $data = $this->prepareEntry($importedEntry, $this->markAsRead);
 
-            $entry = $this->contentProxy->updateEntry(
+            $entry = $this->fetchContent(
                 new Entry($this->user),
                 $importedEntry['url'],
                 $data
             );
+
+            // jump to next entry in case of problem while getting content
+            if (false === $entry) {
+                ++$this->skippedEntries;
+                continue;
+            }
 
             if (array_key_exists('tags', $data)) {
                 $this->contentProxy->assignTagsToEntry(

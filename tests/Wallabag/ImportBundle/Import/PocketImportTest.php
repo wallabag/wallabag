@@ -390,4 +390,55 @@ class PocketImportTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('PocketImport: Failed to import', $records[0]['message']);
         $this->assertEquals('ERROR', $records[0]['level_name']);
     }
+
+    public function testImportWithExceptionFromGraby()
+    {
+        $client = new Client();
+
+        $mock = new Mock([
+            new Response(200, ['Content-Type' => 'application/json'], Stream::factory(json_encode(['access_token' => 'wunderbar_token']))),
+            new Response(200, ['Content-Type' => 'application/json'], Stream::factory('
+                {
+                    "status": 1,
+                    "list": {
+                        "229279689": {
+                            "resolved_url": "http://www.grantland.com/blog/the-triangle/post/_/id/38347/ryder-cup-preview"
+                        }
+                    }
+                }
+            ')),
+        ]);
+
+        $client->getEmitter()->attach($mock);
+
+        $pocketImport = $this->getPocketImport();
+
+        $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $entryRepo->expects($this->once())
+            ->method('findByUrlAndUserId')
+            ->will($this->onConsecutiveCalls(false, true));
+
+        $this->em
+            ->expects($this->once())
+            ->method('getRepository')
+            ->willReturn($entryRepo);
+
+        $entry = new Entry($this->user);
+
+        $this->contentProxy
+            ->expects($this->once())
+            ->method('updateEntry')
+            ->will($this->throwException(new \Exception()));
+
+        $pocketImport->setClient($client);
+        $pocketImport->authorize('wunderbar_code');
+
+        $res = $pocketImport->import();
+
+        $this->assertTrue($res);
+        $this->assertEquals(['skipped' => 1, 'imported' => 0], $pocketImport->getSummary());
+    }
 }

@@ -145,6 +145,8 @@ entry:
         reading_time_minutes: 'geschätzte Lesezeit: %readingTime% min'
         reading_time_less_one_minute: 'geschätzte Lesezeit: <small class="inferieur">&lt;</small> 1 min'
         # number_of_tags: '{1}and one other tag|]1,Inf[and %count% other tags'
+        reading_time_minutes_short: '%readingTime% min'
+        reading_time_less_one_minute_short: '<small class="inferieur">&lt;</small> 1 min'
         original_article: 'original'
         toogle_as_read: 'Gelesen-Status ändern'
         toogle_as_star: 'Favoriten-Status ändern'
@@ -177,7 +179,7 @@ entry:
             back_to_homepage: 'Zurück'
             set_as_read: 'Als gelesen markieren'
             set_as_unread: 'Als ungelesen markieren'
-            set_as_favorite: 'Favorisieren'
+            set_as_starred: 'Favorisieren'
             view_original_article: 'Original-Artikel'
             re_fetch_content: 'Inhalt neu laden'
             delete: 'Löschen'
@@ -192,6 +194,7 @@ entry:
         edit_title: 'Titel ändern'
         original_article: 'original'
         annotations_on_the_entry: '{0} Keine Anmerkungen|{1} Eine Anmerkung|]1,Inf[ %nbAnnotations% Anmerkungen'
+        created_at: 'Erstellungsdatum'
     new:
         page_title: 'Neuen Artikel speichern'
         placeholder: 'https://website.de'
@@ -397,7 +400,7 @@ flashes:
     entry:
         notice:
             entry_already_saved: 'Eintrag bereits am %date% gespeichert'
-            entry_saved: 'Eintag gespeichert'
+            entry_saved: 'Eintrag gespeichert'
             # entry_saved_failed: 'Failed to save entry'
             entry_updated: 'Eintrag aktualisiert'
             entry_reloaded: 'Eintrag neugeladen'

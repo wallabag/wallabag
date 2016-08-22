@@ -24,8 +24,8 @@
                     </a>
                 </li>
                 <li>
-                    <a class="waves-effect" title="{{ 'entry.view.left_menu.set_as_favorite'|trans }}" href="{{ path('star_entry', { 'id': entry.id }) }}" id="setFav">
-                        <i class="material-icons small">{% if entry.isStarred == 0 %}favorite_outline{% else %}favorite{% endif %}</i>
+                    <a class="waves-effect" title="{{ 'entry.view.left_menu.set_as_starred'|trans }}" href="{{ path('star_entry', { 'id': entry.id }) }}" id="setFav">
+                        <i class="material-icons small">{% if entry.isStarred == 0 %}star_outline{% else %}star{% endif %}</i>
                     </a>
                 </li>
                 <li>
@@ -70,9 +70,9 @@
         </li>
 
         <li class="bold hide-on-med-and-down">
-            <a class="waves-effect collapsible-header" title="{{ 'entry.view.left_menu.set_as_favorite'|trans }}" href="{{ path('star_entry', { 'id': entry.id }) }}" id="setFav">
-                <i class="material-icons spall">{% if entry.isStarred == 0 %}favorite_outline{% else %}favorite{% endif %}</i>
-                <span>{{ 'entry.view.left_menu.set_as_favorite'|trans }}</span>
+            <a class="waves-effect collapsible-header" title="{{ 'entry.view.left_menu.set_as_starred'|trans }}" href="{{ path('star_entry', { 'id': entry.id }) }}" id="setFav">
+                <i class="material-icons spall">{% if entry.isStarred == 0 %}star_outline{% else %}star{% endif %}</i>
+                <span>{{ 'entry.view.left_menu.set_as_starred'|trans }}</span>
             </a>
             <div class="collapsible-body"></div>
         </li>
@@ -194,6 +194,15 @@
             <h1>{{ entry.title|raw }} <a href="{{ path('edit', { 'id': entry.id }) }}" title="{{ 'entry.view.edit_title'|trans }}">✎</a></h1>
         </header>
         <aside>
+            {% set readingTime = entry.readingTime / app.user.config.readingSpeed %}
+            <span class="link mdi-action-query-builder">
+                {% if readingTime > 0 %}
+                    {{ 'entry.list.reading_time_minutes_short'|trans({'%readingTime%': readingTime|round}) }}
+                {% else %}
+                    {{ 'entry.list.reading_time_less_one_minute_short'|trans|raw }}
+                {% endif %}
+            </span>
+            <span class="link mdi-action-today" title="{{ 'entry.view.created_at'|trans }}"> {{ entry.createdAt|date('Y-m-d') }}</span>
             <a href="{{ entry.url|e }}" target="_blank" title="{{ 'entry.view.original_article'|trans }} : {{ entry.title|e }}" class="tool">
             <span class="link"><i class="material-icons link">link</i> {{ entry.domainName|removeWww }}</span></a>
             <span class="tool link"><i class="material-icons link">comment</i> {{ 'entry.view.annotations_on_the_entry'|transchoice(entry.annotations | length) }}</span>

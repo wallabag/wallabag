@@ -12,9 +12,11 @@ class StaticController extends Controller
      */
     public function howtoAction()
     {
+        $addonsUrl = $this->container->getParameter('addons_url');
+
         return $this->render(
             'WallabagCoreBundle:Static:howto.html.twig',
-            []
+            ['addonsUrl' => $addonsUrl]
         );
     }
 
