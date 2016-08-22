@@ -69,6 +69,7 @@ $(document).ready(function(){
         $(".nav-panels").css('background', 'transparent');
         return false;
     });
+    $(".card-title").dotdotdot();
     $(window).scroll(function () {
         var s = $(window).scrollTop(),
         d = $(document).height(),
