@@ -188,6 +188,7 @@ entry:
             share_content: 'Udostępnij'
             share_email_label: 'Adres email'
             # public_link: 'public link'
+            # delete_public_link: 'delete public link'
             download: 'Pobierz'
             print: 'Drukuj'
             problem:

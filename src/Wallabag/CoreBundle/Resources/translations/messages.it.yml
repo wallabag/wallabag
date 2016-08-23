@@ -185,6 +185,8 @@ entry:
             add_a_tag: 'Aggiungi un tag'
             share_content: 'Condividi'
             share_email_label: 'E-mail'
+            # public_link: 'public link'
+            # delete_public_link: 'delete public link'
             download: 'Download'
             print: 'Stampa'
             problem:

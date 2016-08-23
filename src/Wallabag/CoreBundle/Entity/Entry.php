@@ -436,8 +436,6 @@ class Entry
         }
 
         $this->updatedAt = new \DateTime();
-
-        $this->generateUuid();
     }
 
     /**
@@ -633,5 +631,10 @@ class Entry
             // @see http://blog.kevingomez.fr/til/2015/07/26/why-is-uniqid-slow/ for true parameter
             $this->uuid = uniqid('', true);
         }
+    }
+
+    public function cleanUuid()
+    {
+        $this->uuid = null;
     }
 }

@@ -188,6 +188,7 @@ entry:
             share_content: 'Partager'
             share_email_label: 'Email'
             public_link: 'Lien public'
+            delete_public_link: 'Supprimer lien public'
             download: 'Télécharger'
             print: 'Imprimer'
             problem:

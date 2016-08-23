@@ -101,8 +101,13 @@
                 <ul>
                     {% if craue_setting('share_public') %}
                         <li>
-                            <a href="{{ path('share', {'uuid': entry.uuid }) }}" target="_blank" class="tool public" title="{{ 'entry.view.left_menu.public_link'|trans }}">
+                            <a href="{{ path('share', {'id': entry.id }) }}" target="_blank" class="tool public" title="{{ 'entry.view.left_menu.public_link'|trans }}">
                                 <span>{{ 'entry.view.left_menu.public_link'|trans }}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('delete_share', {'id': entry.id }) }}" class="tool public" title="{{ 'entry.view.left_menu.delete_public_link'|trans }}">
+                                <span>{{ 'entry.view.left_menu.delete_public_link'|trans }}</span>
                             </a>
                         </li>
                     {% endif %}

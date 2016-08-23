@@ -28,18 +28,6 @@ class Version20160410190541 extends AbstractMigration implements ContainerAwareI
         $this->addSql('ALTER TABLE `wallabag_entry` ADD `uuid` LONGTEXT DEFAULT NULL');
     }
 
-    public function postUp(Schema $schema)
-    {
-        $em = $this->container->get('doctrine.orm.entity_manager');
-        $repository = $em->getRepository('WallabagCoreBundle:Entry');
-        $entries = $repository->findAll();
-
-        /** @var Entry $entry */
-        foreach ($entries as $entry) {
-            $this->addSql('UPDATE `wallabag_entry` SET `uuid` = "'.uniqid('', true).'" WHERE id = '.$entry->getId());
-        }
-    }
-
     /**
      * @param Schema $schema
      */

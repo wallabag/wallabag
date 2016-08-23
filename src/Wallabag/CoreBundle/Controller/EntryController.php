@@ -292,8 +292,6 @@ class EntryController extends Controller
     {
         $this->checkUserAction($entry);
 
-        $this->generateEntryUuid($entry);
-
         return $this->render(
             'WallabagCoreBundle:Entry:entry.html.twig',
             ['entry' => $entry]
@@ -437,7 +435,7 @@ class EntryController extends Controller
      */
     private function checkUserAction(Entry $entry)
     {
-        if ($this->getUser()->getId() != $entry->getUser()->getId()) {
+        if (null === $this->getUser() || $this->getUser()->getId() != $entry->getUser()->getId()) {
             throw $this->createAccessDeniedException('You can not access this entry.');
         }
     }
@@ -455,11 +453,56 @@ class EntryController extends Controller
     }
 
     /**
+     * Get public URL for entry (and generate it if necessary).
+     *
+     * @param Entry $entry
+     *
+     * @Route("/share/{id}", requirements={"id" = "\d+"}, name="share")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function shareAction(Entry $entry)
+    {
+        $this->checkUserAction($entry);
+
+        if ('' === $entry->getUuid() || null === $entry->getUuid()) {
+            $this->generateEntryUuid($entry);
+        }
+
+        return $this->redirect($this->generateUrl('share_entry', [
+            'uuid' => $entry->getUuid(),
+        ]));
+    }
+
+    /**
+     * Disable public sharing for an entry.
+     *
+     * @param Entry $entry
+     *
+     * @Route("/share/delete/{id}", requirements={"id" = "\d+"}, name="delete_share")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function deleteShareAction(Entry $entry)
+    {
+        $this->checkUserAction($entry);
+
+        $entry->cleanUuid();
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($entry);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('view', [
+            'id' => $entry->getId(),
+        ]));
+    }
+
+    /**
      * Share entry content.
      *
      * @param Entry $entry
      *
-     * @Route("/share/{uuid}", requirements={"uuid" = ".+"}, name="share")
+     * @Route("/share/{uuid}", requirements={"uuid" = ".+"}, name="share_entry")
      * @Cache(maxage="25200", public=true)
      *
      * @return \Symfony\Component\HttpFoundation\Response
