@@ -119,3 +119,9 @@ services:
         class: Wallabag\CoreBundle\Helper\Redirect
         arguments:
             - "@router"
+
+    wallabag_core.helper.prepare_pager_for_entries:
+        class: Wallabag\CoreBundle\Helper\PreparePagerForEntries
+        arguments:
+            - "@security.token_storage"
+            - "@router"

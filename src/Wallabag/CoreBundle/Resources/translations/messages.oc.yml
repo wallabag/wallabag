@@ -139,6 +139,7 @@ entry:
         starred: 'Articles favorits'
         archived: 'Articles legits'
         filtered: 'Articles filtrats'
+        # filtered_tags: 'Filtered by tags'
     list:
         number_on_the_page: "{0} I a pas cap d'article.|{1} I a un article.|]1,Inf[ I a %count% articles."
         reading_time: 'durada de lectura'

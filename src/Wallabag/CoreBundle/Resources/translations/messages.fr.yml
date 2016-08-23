@@ -139,6 +139,7 @@ entry:
         starred: 'Articles favoris'
         archived: 'Articles lus'
         filtered: 'Articles filtrés'
+        filtered_tags: 'Articles filtrés par tags'
     list:
         number_on_the_page: "{0} Il n'y a pas d'articles.|{1} Il y a un article.|]1,Inf[ Il y a %count% articles."
         reading_time: 'durée de lecture'

@@ -131,4 +131,35 @@ class TagControllerTest extends WallabagCoreTestCase
 
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
     }
+
+    public function testShowEntriesForTagAction()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $entry = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneByUsernameAndNotArchived('admin');
+
+        $tag = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Tag')
+            ->findOneByEntryAndTagLabel($entry, 'foo');
+
+        $crawler = $client->request('GET', '/tag/list/'.$tag->getSlug());
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertCount(2, $crawler->filter('div[class=entry]'));
+
+        $tag = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Tag')
+            ->findOneByLabel('baz');
+
+        $crawler = $client->request('GET', '/tag/list/'.$tag->getSlug());
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertCount(0, $crawler->filter('div[class=entry]'));
+    }
 }

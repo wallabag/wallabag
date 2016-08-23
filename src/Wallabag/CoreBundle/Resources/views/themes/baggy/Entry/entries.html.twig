@@ -1,6 +1,20 @@
 {% extends "WallabagCoreBundle::layout.html.twig" %}
 
-{% block title %}{{ 'entry.page_titles.unread'|trans }}{% endblock %}
+{% block title %}
+    {% set currentRoute = app.request.attributes.get('_route') %}
+
+    {% if currentRoute == 'starred' %}
+        {{ 'entry.page_titles.starred'|trans }}
+    {% elseif currentRoute == 'archive' %}
+        {{ 'entry.page_titles.archived'|trans }}
+    {% elseif currentRoute == 'all' %}
+        {{ 'entry.page_titles.filtered'|trans }}
+    {% elseif currentRoute == 'tag_entries' %}
+        {{ 'entry.page_titles.filtered_tags'|trans }}
+    {% else %}
+        {{ 'entry.page_titles.unread'|trans }}
+    {% endif %}
+{% endblock %}
 
 {% block content %}
     {% include "WallabagCoreBundle:Entry:pager.html.twig" with {'entries': entries} %}
@@ -44,7 +58,6 @@
         </div>
     {% endfor %}
 
-
     <!-- Export -->
     <aside id="download-form">
     {% set currentRoute = app.request.attributes.get('_route') %}
@@ -63,8 +76,10 @@
             {% if craue_setting('export_xml') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'xml' }) }}">XML</a></li>{% endif %}
         </ul>
     </aside>
+
     <!-- Filter -->
-    <aside id="filter-form">
+    {% if form is not null %}
+    <aside id="filter-form" class="">
         <form method="get" action="{{ path('all') }}">
             <h2>{{ 'entry.filters.title'|trans }}</h2>
             <a href="javascript: void(null);" id="filter-form-close" class="close-button--popup close-button">&times;</a>
@@ -145,6 +160,5 @@
             </div>
         </form>
     </aside>
-
-    {% include "WallabagCoreBundle:Entry:pager.html.twig" with {'entries': entries} %}
+    {% endif %}
 {% endblock %}

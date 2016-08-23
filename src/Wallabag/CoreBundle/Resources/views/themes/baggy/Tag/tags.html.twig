@@ -9,7 +9,7 @@
 
     <ul>
     {% for tag in tags %}
-        <li id="tag-{{ tag.id|e }}">{{tag.label}} ({{ tag.getEntriesByUserId(app.user.id) | length }})</li>
+        <li id="tag-{{ tag.id|e }}"><a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{tag.label}} ({{ tag.entries.getValues | length }})</a></li>
     {% endfor %}
     </ul>
 {% endblock %}
