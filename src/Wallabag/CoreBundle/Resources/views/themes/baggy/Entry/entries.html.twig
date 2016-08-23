@@ -19,18 +19,6 @@
 {% block content %}
     {% include "WallabagCoreBundle:Entry:pager.html.twig" with {'entries': entries} %}
 
-    {% block pager %}
-        <div class="results">
-            <div class="nb-results">{{ 'entry.list.number_on_the_page'|transchoice(entries.count) }}</div>
-            <div class="pagination">
-                {% if form is not null %}<a href="#" id="filter">{{ 'entry.filters.title'|trans }}</a>{% endif %}
-                {% if entries.getNbPages > 1 %}
-                    {{ pagerfanta(entries, 'twitter_bootstrap_translated', {'proximity': 1}) }}
-                {% endif %}
-            </div>
-        </div>
-    {% endblock %}
-
     {% for entry in entries %}
         <div id="entry-{{ entry.id|e }}" class="entry">
             <h2><a href="{{ path('view', { 'id': entry.id }) }}" title="{{ entry.title|raw }}">{{ entry.title|raw }}</a></h2>
@@ -173,6 +161,4 @@
         </form>
     </aside>
     {% endif %}
-
-    {% include "WallabagCoreBundle:Entry:pager.html.twig" with {'entries': entries} %}
 {% endblock %}
