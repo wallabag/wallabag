@@ -27,3 +27,4 @@ piwik_site_id: ID de votre site dans Piwik
 piwik_enabled: Activer Piwik
 demo_mode_enabled: "Activer le mode démo ? (utiliser uniquement pour la démo publique de wallabag)"
 demo_mode_username: "Utilisateur de la démo"
+share_public: Autoriser une URL publique pour les articles
