@@ -465,8 +465,12 @@ class EntryController extends Controller
     {
         $this->checkUserAction($entry);
 
-        if ('' === $entry->getUuid() || null === $entry->getUuid()) {
-            $this->generateEntryUuid($entry);
+        if (null === $entry->getUuid()) {
+            $entry->generateUuid();
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($entry);
+            $em->flush();
         }
 
         return $this->redirect($this->generateUrl('share_entry', [
@@ -488,6 +492,7 @@ class EntryController extends Controller
         $this->checkUserAction($entry);
 
         $entry->cleanUuid();
+
         $em = $this->getDoctrine()->getManager();
         $em->persist($entry);
         $em->flush();
@@ -498,31 +503,24 @@ class EntryController extends Controller
     }
 
     /**
-     * Share entry content.
+     * Ability to view a content publicly.
      *
      * @param Entry $entry
      *
      * @Route("/share/{uuid}", requirements={"uuid" = ".+"}, name="share_entry")
-     * @Cache(maxage="25200", public=true)
+     * @Cache(maxage="25200", smaxage="25200", public=true)
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function shareEntryAction(Entry $entry)
     {
+        if (!$this->get('craue_config')->get('share_public')) {
+            throw $this->createAccessDeniedException('Sharing an entry is disabled for this user.');
+        }
+
         return $this->render(
             '@WallabagCore/themes/share.html.twig',
-            array('entry' => $entry)
+            ['entry' => $entry]
         );
-    }
-
-    /**
-     * @param Entry $entry
-     */
-    private function generateEntryUuid(Entry $entry)
-    {
-        $entry->generateUuid();
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($entry);
-        $em->flush();
     }
 }
