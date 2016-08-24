@@ -209,4 +209,40 @@
     </div>
     {% endif %}
 
+    <!-- Sort -->
+    <div id="sort" class="side-nav fixed right-aligned">
+
+        <h4 class="center">{{ 'entry.sort.title'|trans }}</h4>
+
+        <div class="row">
+            <div class="col s12">
+                <label>{{ 'entry.sort_by.status_label'|trans }}</label>
+            </div>
+
+            <div class="input-field col s12 with-checkbox">
+                <select>
+                    <option value="" disabled selected>Creation date</option>
+                    <option value="1">Sort by creation date</option>
+                    <option value="2">Sort by title</option>
+                    <option value="3">Sort by last updated</option>
+                </select>
+                {{ form_label(form.isArchived) }}
+            </div>
+
+            <div class="col s12">
+                <div class="switch">
+                    <label>
+                        Ascendant
+                        <input type="checkbox">
+                        <span class="lever"></span>
+                        Descendant
+                    </label>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    {% include "WallabagCoreBundle:Entry:pager.html.twig" with {'entries': entries} %}
+
 {% endblock %}
