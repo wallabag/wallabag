@@ -33,7 +33,7 @@ class InstallCommandTest extends WallabagCoreTestCase
     }
 
     /**
-     * Ensure next tests will have a clean database
+     * Ensure next tests will have a clean database.
      */
     public static function tearDownAfterClass()
     {
