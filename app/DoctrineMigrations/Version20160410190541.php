@@ -6,7 +6,6 @@ use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Wallabag\CoreBundle\Entity\Entry;
 
 class Version20160410190541 extends AbstractMigration implements ContainerAwareInterface
 {
@@ -20,12 +19,17 @@ class Version20160410190541 extends AbstractMigration implements ContainerAwareI
         $this->container = $container;
     }
 
+    private function getTable($tableName)
+    {
+        return $this->container->getParameter('database_table_prefix') . $tableName;
+    }
+
     /**
      * @param Schema $schema
      */
     public function up(Schema $schema)
     {
-        $this->addSql('ALTER TABLE `wallabag_entry` ADD `uuid` LONGTEXT DEFAULT NULL');
+        $this->addSql('ALTER TABLE `'.$this->getTable('entry').'` ADD `uuid` LONGTEXT DEFAULT NULL');
     }
 
     /**
@@ -34,6 +38,7 @@ class Version20160410190541 extends AbstractMigration implements ContainerAwareI
     public function down(Schema $schema)
     {
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'sqlite', 'This down migration can\'t be executed on SQLite databases, because SQLite don\'t support DROP COLUMN.');
-        $this->addSql('ALTER TABLE `wallabag_entry` DROP `uuid`');
+
+        $this->addSql('ALTER TABLE `'.$this->getTable('entry').'` DROP `uuid`');
     }
 }
