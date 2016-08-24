@@ -54,6 +54,7 @@ matrix:
           env: CS_FIXER=run VALIDATE_TRANSLATION_FILE=run DB=sqlite
     allow_failures:
         - php: hhvm-3.12
+        - php: 7.1
         - php: nightly
 
 # exclude v1 branches
