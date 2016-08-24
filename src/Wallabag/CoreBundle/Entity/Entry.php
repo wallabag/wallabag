@@ -38,7 +38,7 @@ class Entry
     private $id;
 
     /**
-     * @var int
+     * @var string
      *
      * @ORM\Column(name="uuid", type="text", nullable=true)
      *
@@ -606,7 +606,7 @@ class Entry
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getUuid()
     {
@@ -614,7 +614,7 @@ class Entry
     }
 
     /**
-     * @param int $uuid
+     * @param string $uuid
      *
      * @return Entry
      */
