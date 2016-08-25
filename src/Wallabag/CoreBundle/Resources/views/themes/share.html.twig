@@ -31,6 +31,7 @@
     <body>
         <header>
             <h1>{{ entry.title | raw }}</h1>
+            <span>{{ 'entry.view.left_menu.view_original_article'|trans }}: <a href="{{ entry.url|e }}" target="_blank" title="{{ 'entry.view.original_article'|trans }} : {{ entry.title|e }}" class="tool">{{ entry.domainName|removeWww }}</a></span>
         </header>
         <article>
             {{ entry.content | raw }}
