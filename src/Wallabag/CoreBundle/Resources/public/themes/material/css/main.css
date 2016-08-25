@@ -52,6 +52,7 @@ body {
 
 body.login main {
     padding: 0;
+    min-height: 100vh;
 }
 
 .border-bottom {
