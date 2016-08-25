@@ -46,7 +46,7 @@ Composer installieren:
 
     curl -s http://getcomposer.org/installer | php
 
-Du kannst eine spezifische Anleitung `hier <https://getcomposer.org/doc/00-intro.md>`__ finden:
+Du kannst eine spezifische Anleitung `hier <https://getcomposer.org/doc/00-intro.md>`__ finden.
 
 Um wallabag selbst zu installieren, musst du die folgenden Kommandos ausführen:
 

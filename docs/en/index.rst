@@ -40,6 +40,7 @@ The documentation is available in other languages:
    user/errors_during_fetching
    user/annotations
    user/download_articles
+   user/share
    user/filters
    user/tags
    user/android

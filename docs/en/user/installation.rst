@@ -37,7 +37,7 @@ Installation
 On a dedicated web server (recommended way)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-wallabag uses a large number of libraries in order to function. These libraries must be installed with a tool called Composer. You need to install it if you have not already done so and be sure to use the 1.2 version (if you already have Composer, run a ``composer selfupdate``).
+wallabag uses a large number of PHP libraries in order to function. These libraries must be installed with a tool called Composer. You need to install it if you have not already done so and be sure to use the 1.2 version (if you already have Composer, run a ``composer selfupdate``).
 
 Install Composer:
 
@@ -45,7 +45,14 @@ Install Composer:
 
     curl -s http://getcomposer.org/installer | php
 
-You can find specific instructions `here <https://getcomposer.org/doc/00-intro.md>`__:
+You can find specific instructions `here <https://getcomposer.org/doc/00-intro.md>`__.
+
+You also need to install node.js (via `the Download page <https://nodejs.org/en/download/>`__), npm (already install with node.js), bower and grunt:
+
+::
+
+    npm install -g bower
+    npm install -g grunt-cli
 
 To install wallabag itself, you must run the following commands:
 
@@ -53,9 +60,8 @@ To install wallabag itself, you must run the following commands:
 
     git clone https://github.com/wallabag/wallabag.git
     cd wallabag
-    git checkout 2.0.8
-    SYMFONY_ENV=prod composer install --no-dev -o --prefer-dist
-    php bin/console wallabag:install --env=prod
+    git checkout 2.1
+    ./install.sh
 
 To start PHP's build-in server and test if everything did install correctly, you can do:
 
