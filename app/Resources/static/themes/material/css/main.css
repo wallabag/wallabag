@@ -630,6 +630,10 @@ main ul.row {
   content: "\eae6";
 }
 
+.icon-link::before {
+    content: "\e9cb";
+}
+
 footer [class^="icon-"],
 footer [class*=" icon-"] {
   font-size: 2em;
