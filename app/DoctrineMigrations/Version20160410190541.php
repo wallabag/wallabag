@@ -7,7 +7,7 @@ use Doctrine\DBAL\Schema\Schema;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class Version20160812120952 extends AbstractMigration implements ContainerAwareInterface
+class Version20160410190541 extends AbstractMigration implements ContainerAwareInterface
 {
     /**
      * @var ContainerInterface
@@ -29,7 +29,8 @@ class Version20160812120952 extends AbstractMigration implements ContainerAwareI
      */
     public function up(Schema $schema)
     {
-        $this->addSql('ALTER TABLE '.$this->getTable('oauth2_clients').' ADD name longtext COLLATE \'utf8_unicode_ci\' DEFAULT NULL');
+        $this->addSql('ALTER TABLE `'.$this->getTable('entry').'` ADD `uuid` LONGTEXT DEFAULT NULL');
+        $this->addSql("INSERT INTO `".$this->getTable('craue_config_setting')."` (`name`, `value`, `section`) VALUES ('share_public', '1', 'entry')");
     }
 
     /**
@@ -37,8 +38,9 @@ class Version20160812120952 extends AbstractMigration implements ContainerAwareI
      */
     public function down(Schema $schema)
     {
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() == 'sqlite', 'Migration can only be executed safely on \'mysql\' or \'postgresql\'.');
+        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'sqlite', 'This down migration can\'t be executed on SQLite databases, because SQLite don\'t support DROP COLUMN.');
 
-        $this->addSql('ALTER TABLE '.$this->getTable('oauth2_clients').' DROP COLUMN name');
+        $this->addSql('ALTER TABLE `'.$this->getTable('entry').'` DROP `uuid`');
+        $this->addSql("DELETE FROM `".$this->getTable('craue_config_setting')."` WHERE `name` = 'share_public'");
     }
 }

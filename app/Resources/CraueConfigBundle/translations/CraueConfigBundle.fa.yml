@@ -22,3 +22,9 @@ export: "برون‌سپاری"
 import: "درون‌ریزی"
 misc: "غیره"
 modify_settings: "اعمال"
+# piwik_host: Host of your website in Piwik
+# piwik_site_id: ID of your website in Piwik
+# piwik_enabled: Enable Piwik
+# demo_mode_enabled: "Enable demo mode ? (only used for the wallabag public demo)"
+# demo_mode_username: "Demo user"
+# share_public: Allow public url for entries

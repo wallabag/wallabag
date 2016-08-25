@@ -40,6 +40,15 @@ class Entry
     /**
      * @var string
      *
+     * @ORM\Column(name="uuid", type="text", nullable=true)
+     *
+     * @Groups({"entries_for_user", "export_all"})
+     */
+    private $uuid;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="title", type="text", nullable=true)
      *
      * @Groups({"entries_for_user", "export_all"})
@@ -594,5 +603,38 @@ class Entry
     public function getLanguage()
     {
         return $this->language;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUuid()
+    {
+        return $this->uuid;
+    }
+
+    /**
+     * @param string $uuid
+     *
+     * @return Entry
+     */
+    public function setUuid($uuid)
+    {
+        $this->uuid = $uuid;
+
+        return $this;
+    }
+
+    public function generateUuid()
+    {
+        if (null === $this->uuid) {
+            // @see http://blog.kevingomez.fr/til/2015/07/26/why-is-uniqid-slow/ for true parameter
+            $this->uuid = uniqid('', true);
+        }
+    }
+
+    public function cleanUuid()
+    {
+        $this->uuid = null;
     }
 }
