@@ -26,8 +26,21 @@
   div.tools,
   header div,
   .messages,
-  .entry + .results {
+  .entry + .results,
+  #slide-out,
+  .progress, .hide-on-large-only,
+  #article > aside,
+  #article .mbm a
+  {
     display: none !important;
+  }
+
+  main {
+      padding-left: 0 !important;
+  }
+
+  #article {
+      margin: inherit !important;
   }
 
   article {
