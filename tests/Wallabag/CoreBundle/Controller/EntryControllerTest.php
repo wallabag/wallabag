@@ -236,6 +236,16 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
+    public function testUntagged()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $client->request('GET', '/untagged/list');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }
+
     public function testStarred()
     {
         $this->logInAs('admin');
