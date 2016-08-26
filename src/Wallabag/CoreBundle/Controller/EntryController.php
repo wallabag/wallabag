@@ -226,6 +226,10 @@ class EntryController extends Controller
         $repository = $this->get('wallabag_core.entry_repository');
 
         switch ($type) {
+            case 'untagged':
+                $qb = $repository->getBuilderForUntaggedByUser($this->getUser()->getId());
+
+                break;
             case 'starred':
                 $qb = $repository->getBuilderForStarredByUser($this->getUser()->getId());
                 break;
@@ -522,5 +526,20 @@ class EntryController extends Controller
             '@WallabagCore/themes/share.html.twig',
             ['entry' => $entry]
         );
+    }
+
+    /**
+     * Shows untagged articles for current user.
+     *
+     * @param Request $request
+     * @param int     $page
+     *
+     * @Route("/untagged/list/{page}", name="untagged", defaults={"page" = "1"})
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function showUntaggedEntriesAction(Request $request, $page)
+    {
+        return $this->showEntries('untagged', $request, $page);
     }
 }

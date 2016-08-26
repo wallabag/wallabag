@@ -85,6 +85,22 @@ class EntryRepository extends EntityRepository
     }
 
     /**
+     * Retrieves untagged entries for a user.
+     *
+     * @param int $userId
+     *
+     * @return QueryBuilder
+     */
+    public function getBuilderForUntaggedByUser($userId)
+    {
+        return $this
+            ->getBuilderByUser($userId)
+            ->leftJoin('e.tags', 't')
+            ->groupBy('e.id')
+            ->having('count(t.id) = 0');
+    }
+
+    /**
      * Find Entries.
      *
      * @param int    $userId

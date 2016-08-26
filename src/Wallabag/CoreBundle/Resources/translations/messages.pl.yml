@@ -312,6 +312,7 @@ tag:
     page_title: 'Tagi'
     list:
         number_on_the_page: '{0} Nie ma tagów.|{1} Jest jeden tag.|]1,Inf[ Są %count% tagi.'
+        # see_untagged_entries: 'See untagged entries'
 
 import:
     page_title: 'Import'
