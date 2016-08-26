@@ -101,7 +101,7 @@
                 <ul>
                     {% if craue_setting('share_public') %}
                         <li>
-                            <a href="{{ path('share', {'id': entry.id }) }}" target="_blank" class="tool public" title="{{ 'entry.view.left_menu.public_link'|trans }}">
+                            <a href="{{ path('share', {'id': entry.id }) }}" target="_blank" class="public icon-link" title="{{ 'entry.view.left_menu.public_link'|trans }}">
                                 <span>{{ 'entry.view.left_menu.public_link'|trans }}</span>
                             </a>
                         </li>
