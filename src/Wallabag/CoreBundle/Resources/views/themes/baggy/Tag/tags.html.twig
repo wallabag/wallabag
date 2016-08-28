@@ -12,4 +12,8 @@
         <li id="tag-{{ tag.id|e }}"><a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{tag.label}} ({{ tag.entries.getValues | length }})</a></li>
     {% endfor %}
     </ul>
+
+    <div>
+        <a href="{{ path('untagged') }}">{{ 'tag.list.see_untagged_entries'|trans }}</a>
+    </div>
 {% endblock %}

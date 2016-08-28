@@ -140,6 +140,7 @@ entry:
         archived: 'Zarchiwizowane wpisy'
         filtered: 'Odfiltrowane wpisy'
         # filtered_tags: 'Filtered by tags'
+        # untagged: 'Untagged entries'
     list:
         number_on_the_page: '{0} Nie ma wpisów.|{1} Jest jeden wpis.|]1,Inf[ Są %count% wpisy.'
         reading_time: 'szacunkowy czas czytania'
@@ -312,6 +313,7 @@ tag:
     page_title: 'Tagi'
     list:
         number_on_the_page: '{0} Nie ma tagów.|{1} Jest jeden tag.|]1,Inf[ Są %count% tagi.'
+        # see_untagged_entries: 'See untagged entries'
 
 import:
     page_title: 'Import'

@@ -139,6 +139,8 @@ entry:
         starred: 'Contenuti preferiti'
         archived: 'Contenuti archiviati'
         filtered: 'Contenuti filtrati'
+        # filtered_tags: 'Filtered by tags'
+        # untagged: 'Untagged entries'
     list:
         number_on_the_page: "{0} Non ci sono contenuti.|{1} C'è un contenuto.|]1,Inf[ Ci sono %count% contenuti."
         reading_time: 'tempo di lettura stimato'
@@ -310,6 +312,7 @@ tag:
     page_title: 'Tags'
     list:
         number_on_the_page: "{0} Non ci sono tag.|{1} C'è un tag.|]1,Inf[ ci sono %count% tag."
+        # see_untagged_entries: 'See untagged entries'
 
 import:
     page_title: 'Importa'
