@@ -1,19 +1,7 @@
 {% extends "WallabagCoreBundle::layout.html.twig" %}
 
 {% block title %}
-  {% set currentRoute = app.request.attributes.get('_route') %}
-
-  {% if currentRoute == 'starred' %}
-    {{ 'entry.page_titles.starred'|trans }}
-  {% elseif currentRoute == 'archive' %}
-    {{ 'entry.page_titles.archived'|trans }}
-  {% elseif currentRoute == 'all' %}
-    {{ 'entry.page_titles.filtered'|trans }}
-  {% elseif currentRoute == 'tag_entries' %}
-      {{ 'entry.page_titles.filtered_tags'|trans }}
-  {% else %}
-    {{ 'entry.page_titles.unread'|trans }}
-  {% endif %}
+  {% include "@WallabagCore/themes/_title.html.twig" %}
 {% endblock %}
 
 {% block content %}
