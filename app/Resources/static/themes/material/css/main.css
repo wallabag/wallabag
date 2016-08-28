@@ -91,6 +91,7 @@ body {
 
 body.login main {
   padding: 0;
+  min-height: 100vh;
 }
 
 .border-bottom {
@@ -256,6 +257,10 @@ nav input {
   display: none;
 }
 
+input-field.nav-panel-add, .input-field.nav-panel-add form {
+    height: 100%;
+}
+
 /* ==========================================================================
    2 = Side-nav
    ========================================================================== */
@@ -342,6 +347,12 @@ main ul.row {
 
 .card .card-content .card-title {
   line-height: 32px;
+  max-height: 64px;
+  display: block;
+}
+
+.card .card-content i.right, .card .card-reveal i.right {
+    margin-left: 0;
 }
 
 .card .card-entry-labels {

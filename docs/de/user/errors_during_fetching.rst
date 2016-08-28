@@ -12,7 +12,7 @@ Das kann verschiedene Ursachen haben:
 Wie kann ich helfen das zu beheben?
 -----------------------------------
 
-- `indem du uns eine Mail mit der URL des Artikels sendest <mailto:hello\@wallabag.org>`_
+- `indem du uns eine Mail mit der URL des Artikels sendest <mailto:hello@wallabag.org>`_
 - indem du versuchst das Laden des Artikels durch Erstellen einer Datei für den Artikel
   selbst zu beheben
   Du kannst `dieses Tool <http://siteconfig.fivefilters.org/>`__ nutzen.
