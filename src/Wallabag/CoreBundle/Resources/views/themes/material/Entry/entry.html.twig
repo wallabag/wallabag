@@ -206,17 +206,18 @@
         </header>
         <aside>
             {% set readingTime = entry.readingTime / app.user.config.readingSpeed %}
-            <span class="link mdi-action-query-builder">
+            <span class="mdi-action-query-builder"></span>
+            <span class="link">
                 {% if readingTime > 0 %}
                     {{ 'entry.list.reading_time_minutes_short'|trans({'%readingTime%': readingTime|round}) }}
                 {% else %}
                     {{ 'entry.list.reading_time_less_one_minute_short'|trans|raw }}
                 {% endif %}
             </span>
-            <span class="link mdi-action-today" title="{{ 'entry.view.created_at'|trans }}"> {{ entry.createdAt|date('Y-m-d') }}</span>
+            <span class="mdi-action-today" title="{{ 'entry.view.created_at'|trans }}"> </span> <span class="link">{{ entry.createdAt|date('Y-m-d') }}</span>
             <a href="{{ entry.url|e }}" target="_blank" title="{{ 'entry.view.original_article'|trans }} : {{ entry.title|e }}" class="tool">
-            <span class="link"><i class="material-icons link">link</i> {{ entry.domainName|removeWww }}</span></a>
-            <span class="tool link"><i class="material-icons link">comment</i> {{ 'entry.view.annotations_on_the_entry'|transchoice(entry.annotations | length) }}</span>
+            <i class="material-icons link">link</i> <span class="link">{{ entry.domainName|removeWww }}</span></a>
+            <span class="tool"><i class="material-icons link">comment</i> <span class="link">{{ 'entry.view.annotations_on_the_entry'|transchoice(entry.annotations | length) }}</span>
             <div id="list">
                 {% for tag in entry.tags %}
                     <div class="chip">
