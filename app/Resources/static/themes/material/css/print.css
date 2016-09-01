@@ -36,11 +36,11 @@
   }
 
   main {
-      padding-left: 0 !important;
+    padding-left: 0 !important;
   }
 
   #article {
-      margin: inherit !important;
+    margin: inherit !important;
   }
 
   article {
