@@ -292,6 +292,7 @@ quickstart:
         pocket: 'Migrer depuis Pocket'
         wallabag_v1: 'Migrer depuis wallabag v1'
         wallabag_v2: 'Migrer depuis wallabag v2'
+        readability: 'Migrer depuis Readability'
     developer:
         title: 'Pour les développeurs'
         create_application: 'Créer votre application tierce'
@@ -341,6 +342,10 @@ import:
     wallabag_v2:
         page_title: 'Importer > Wallabag v2'
         description: "Cet outil va importer tous vos articles d'une autre instance de wallabag v2. Allez dans tous vos articles, puis, sur la barre latérale, cliquez sur \"JSON\". Vous allez récupérer un fichier \"All articles.json\""
+    readability:
+        page_title: 'Importer > Readability'
+        description: 'Cet outil va importer toutes vos données de Readability. Sur la page des outils (https://www.readability.com/tools/), cliquez sur "Export your data" dans la section "Data Export". Vous allez recevoir un email avec un lien pour télécharger le json.'
+        how_to: "Choisissez le fichier de votre export Readability et cliquez sur le bouton ci-dessous pour l'importer."
 
 developer:
     page_title: 'Développeur'

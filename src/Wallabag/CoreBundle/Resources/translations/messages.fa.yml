@@ -292,6 +292,7 @@ quickstart:
         pocket: 'مهاجرت از Pocket'
         wallabag_v1: 'مهاجرت از نسخهٔ یکم wallabag'
         wallabag_v2: 'مهاجرت از نسخهٔ دوم wallabag'
+        readability: 'مهاجرت از نسخهٔ دوم Readability'
     developer:
         title: 'برنامه‌نویسان'
         create_application: 'برنامهٔ wallabag خود را بسازید'
@@ -316,16 +317,16 @@ tag:
         # see_untagged_entries: 'See untagged entries'
 
 import:
-     page_title: 'درون‌ریزی'
-     page_description: 'به درون‌ریز wallabag خوش آمدید. لطفاً سرویس قبلی خود را که می‌خواهید از آن مهاجرت کنید انتخاب کنید.'
-     action:
+    page_title: 'درون‌ریزی'
+    page_description: 'به درون‌ریز wallabag خوش آمدید. لطفاً سرویس قبلی خود را که می‌خواهید از آن مهاجرت کنید انتخاب کنید.'
+    action:
         import_contents: 'درون‌ریزی مقاله‌ها'
-     form:
+    form:
         mark_as_read_title: 'علامت‌زدن همه به عنوان خوانده‌شده؟'
         mark_as_read_label: 'همهٔ مقاله‌های درون‌ریزی شده را به عنوان خوانده‌شده علامت بزن'
         file_label: 'پرونده'
         save_label: 'بارگذاری پرونده'
-     pocket:
+    pocket:
         page_title: 'درون‌ریزی > Pocket'
         description: "این برنامه همهٔ داده‌های Pocket شما را درون‌ریزی می‌کند. سرویس Pocket اجازه نمی‌دهد که متن مقاله‌ها را درون‌ریزی کنیم، بنابراین wallabag متن مقاله‌ها را دوباره از اینترنت دریافت می‌کند."
         config_missing:
@@ -334,13 +335,17 @@ import:
            user_message: 'مدیر سرور شما باید یک API Key برای Pocket تعریف کند.'
         authorize_message: 'شما می‌توانید داده‌هایتان را از حساب Pocket خود درون‌ریزی کنید. روی دکمهٔ زیر کلیک کنید و به برنامه اجازه دهید تا به getpocket.com وصل شود.'
         connect_to_pocket: 'به Pocket وصل شو و داده‌ها را دریافت کن'
-     wallabag_v1:
+    wallabag_v1:
         page_title: 'درون‌ریزی > Wallabag v1'
         description: 'این برنامه همهٔ داده‌های شما را در نسخهٔ ۱ wallabag درون‌ریزی می‌کند. در صفحهٔ تنظیمات، روی "JSON export" در بخش "Export your wallabag data" کلیک کنید. با این کار شما پرونده‌ای به شکل "wallabag-export-1-xxxx-xx-xx.json" دریافت خواهید کرد.'
         how_to: 'لطفاً پرونده را انتخاب کنید و روی دکمهٔ زیر کلیک کنید تا بارگذاری و درون‌ریزی شود.'
-     wallabag_v2:
+    wallabag_v2:
         page_title: 'درون‌ریزی > Wallabag v2'
         description: 'این برنامه همهٔ داده‌های شما را در نسخهٔ ۲ wallabag درون‌ریزی می‌کند. به بخش «همهٔ مقاله‌ها» بروید و در بخش «برون‌ریزی» روی "JSON" کلیک کنید. با این کار شما پرونده‌ای به شکل "All articles.json" دریافت خواهید کرد.'
+    readability:
+        page_title: 'درون‌ریزی > Readability'
+    #     description: 'This importer will import all your Readability articles. On the tools (https://www.readability.com/tools/) page, click on "Export your data" in the "Data Export" section. You will received an email to download a json (which does not end with .json in fact).'
+    #     how_to: 'Please select your Readability export and click on the below button to upload and import it.'
 
 developer:
     # page_title: 'Developer'
