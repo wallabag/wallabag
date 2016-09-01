@@ -340,6 +340,10 @@ import:
     wallabag_v2:
         page_title: 'Importa da > Wallabag v2'
         description: 'Questo importatore copierà tutti i tuoi dati da un wallabag v2. Vai in "Tutti i contenuti", e, nella sidebar di esportazione, clicca su "JSON". Otterrai un file "Tutti i contenuti.json".'
+    readability:
+        page_title: 'Importa da > Readability'
+    #     description: 'This importer will import all your Readability articles. On the tools (https://www.readability.com/tools/) page, click on "Export your data" in the "Data Export" section. You will received an email to download a json (which does not end with .json in fact).'
+    #     how_to: 'Please select your Readability export and click on the below button to upload and import it.'
 
 developer:
     page_title: 'Sviluppatori'
