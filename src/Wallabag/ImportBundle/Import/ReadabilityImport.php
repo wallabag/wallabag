@@ -8,7 +8,6 @@ use Wallabag\UserBundle\Entity\User;
 class ReadabilityImport extends AbstractImport
 {
     private $user;
-    private $client;
     private $skippedEntries = 0;
     private $importedEntries = 0;
     private $filepath;
@@ -143,7 +142,6 @@ class ReadabilityImport extends AbstractImport
 
             $data = [
                 'title' => $importedEntry['article__title'],
-                // 'html' => $importedEntry['article__excerpt'],
                 'url' => $importedEntry['article__url'],
                 'content_type' => '',
                 'language' => '',
