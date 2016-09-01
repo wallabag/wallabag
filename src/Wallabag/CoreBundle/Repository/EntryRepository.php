@@ -3,6 +3,7 @@
 namespace Wallabag\CoreBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 use Wallabag\CoreBundle\Entity\Tag;
@@ -278,5 +279,21 @@ class EntryRepository extends EntityRepository
         ;
 
         return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * Enable cache for a query
+     *
+     * @param Query $query
+     *
+     * @return Query
+     */
+    public function enableCache(Query $query)
+    {
+        $query->useQueryCache(true);
+        $query->useResultCache(true);
+        $query->setResultCacheLifetime(5);
+
+        return $query;
     }
 }

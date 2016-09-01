@@ -36,16 +36,27 @@ class WallabagExtension extends \Twig_Extension implements \Twig_Extension_Globa
             return array();
         }
 
-        $unreadEntries = $this->repository->getBuilderForUnreadByUser($user->getId())->getQuery()->getResult();
-        $starredEntries = $this->repository->getBuilderForStarredByUser($user->getId())->getQuery()->getResult();
-        $archivedEntries = $this->repository->getBuilderForArchiveByUser($user->getId())->getQuery()->getResult();
-        $allEntries = $this->repository->getBuilderForAllByUser($user->getId())->getQuery()->getResult();
+        $unreadEntries = $this->repository->enableCache(
+            $this->repository->getBuilderForUnreadByUser($user->getId())->getQuery()
+        );
+
+        $starredEntries = $this->repository->enableCache(
+            $this->repository->getBuilderForStarredByUser($user->getId())->getQuery()
+        );
+
+        $archivedEntries = $this->repository->enableCache(
+            $this->repository->getBuilderForArchiveByUser($user->getId())->getQuery()
+        );
+
+        $allEntries = $this->repository->enableCache(
+            $this->repository->getBuilderForAllByUser($user->getId())->getQuery()
+        );
 
         return array(
-            'unreadEntries' => count($unreadEntries),
-            'starredEntries' => count($starredEntries),
-            'archivedEntries' => count($archivedEntries),
-            'allEntries' => count($allEntries),
+            'unreadEntries' => count($unreadEntries->getResult()),
+            'starredEntries' => count($starredEntries->getResult()),
+            'archivedEntries' => count($archivedEntries->getResult()),
+            'allEntries' => count($allEntries->getResult()),
         );
     }
 
