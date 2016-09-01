@@ -139,14 +139,14 @@ entry:
         starred: 'Wpisy oznaczone gwiazdką'
         archived: 'Zarchiwizowane wpisy'
         filtered: 'Odfiltrowane wpisy'
-        # filtered_tags: 'Filtered by tags'
-        # untagged: 'Untagged entries'
+        filtered_tags: 'Filtrowane po tagach'
+        untagged: 'Odtaguj wpisy'
     list:
         number_on_the_page: '{0} Nie ma wpisów.|{1} Jest jeden wpis.|]1,Inf[ Są %count% wpisy.'
         reading_time: 'szacunkowy czas czytania'
         reading_time_minutes: 'szacunkowy czas czytania: %readingTime% min'
         reading_time_less_one_minute: 'szacunkowy czas czytania: <small class="inferieur">&lt;</small> 1 min'
-        # number_of_tags: '{1}and one other tag|]1,Inf[and %count% other tags'
+        number_of_tags: '{1} i inny tag|]1,Inf[i %count% innych tagów'
         reading_time_minutes_short: '%readingTime% min'
         reading_time_less_one_minute_short: '<small class="inferieur">&lt;</small> 1 min'
         original_article: 'oryginał'
@@ -188,8 +188,8 @@ entry:
             add_a_tag: 'Dodaj tag'
             share_content: 'Udostępnij'
             share_email_label: 'Adres email'
-            # public_link: 'public link'
-            # delete_public_link: 'delete public link'
+            public_link: 'Publiczny link'
+            delete_public_link: 'Usuń publiczny link'
             download: 'Pobierz'
             print: 'Drukuj'
             problem:
@@ -314,7 +314,7 @@ tag:
     page_title: 'Tagi'
     list:
         number_on_the_page: '{0} Nie ma tagów.|{1} Jest jeden tag.|]1,Inf[ Są %count% tagi.'
-        # see_untagged_entries: 'See untagged entries'
+        see_untagged_entries: 'Zobacz nieotagowane wpisy'
 
 import:
     page_title: 'Import'
@@ -344,8 +344,8 @@ import:
         description: 'Ten importer, zaimportuje wszystkie twoje artykułu z wallabag v2. Idź do wszystkich artykułów, a następnie na panelu exportu kliknij na "JSON". Otrzymasz plik "All articles.json".'
     readability:
         page_title: 'Import > Readability'
-    #     description: 'This importer will import all your Readability articles. On the tools (https://www.readability.com/tools/) page, click on "Export your data" in the "Data Export" section. You will received an email to download a json (which does not end with .json in fact).'
-    #     how_to: 'Please select your Readability export and click on the below button to upload and import it.'
+        description: 'Ten importer, zaimportuje wszystkie twoje artykuły z Readability. Na stronie narzędzi (https://www.readability.com/tools/), kliknij na "Export your data" w sekcji "Data Export". Otrzymach email z plikiem JSON (plik nie będzie zawierał rozszerzenia .json).'
+        how_to: 'Wybierz swój plik eksportu z Readability i kliknij poniższy przycisk, aby go załadować.'
 
 developer:
     page_title: 'Deweloper'
@@ -353,7 +353,7 @@ developer:
     documentation: 'Dokumentacja'
     how_to_first_app: 'Jak stworzyć moją pierwszą aplikację'
     full_documentation: 'Pokaż pełne API'
-    # list_methods: 'List API methods'
+    list_methods: 'Lista metod API'
     clients:
          title: 'Klienci'
          create_new: 'Utwórz nowego klienta'
@@ -411,7 +411,7 @@ flashes:
         notice:
             entry_already_saved: 'Wpis już został dodany %date%'
             entry_saved: 'Wpis zapisany'
-            # entry_saved_failed: 'Failed to save entry'
+            entry_saved_failed: 'Zapis artykułu się nie powiódł'
             entry_updated: 'Wpis zaktualizowany'
             entry_reloaded: 'Wpis ponownie załadowany'
             entry_reload_failed: 'Błąd ponownego załadowania'
