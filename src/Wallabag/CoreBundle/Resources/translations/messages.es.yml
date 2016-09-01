@@ -292,6 +292,7 @@ quickstart:
         pocket: 'Migrar desde Pocket'
         wallabag_v1: 'Migrar desde wallabag v1'
         wallabag_v2: 'Migrar desde wallabag v2'
+        readability: 'Migrar desde Readability'
     developer:
         title: 'Promotores'
         create_application: 'Cree su tercera aplicación'

@@ -292,6 +292,7 @@ quickstart:
         pocket: 'Migrar dempuèi Pocket'
         wallabag_v1: 'Migrar dempuèi wallabag v1'
         wallabag_v2: 'Migrar dempuèi wallabag v2'
+        readability: 'Migrar dempuèi Readability'
     developer:
         title: 'Pels desvolopadors'
         create_application: 'Crear vòstra aplicacion tèrça'

@@ -292,6 +292,7 @@ quickstart:
         pocket: 'مهاجرت از Pocket'
         wallabag_v1: 'مهاجرت از نسخهٔ یکم wallabag'
         wallabag_v2: 'مهاجرت از نسخهٔ دوم wallabag'
+        readability: 'مهاجرت از نسخهٔ دوم Readability'
     developer:
         title: 'برنامه‌نویسان'
         create_application: 'برنامهٔ wallabag خود را بسازید'

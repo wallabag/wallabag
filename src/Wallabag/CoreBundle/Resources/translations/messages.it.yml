@@ -291,6 +291,7 @@ quickstart:
         pocket: 'Trasferisci da Pocket'
         wallabag_v1: 'Trasferisci da wallabag v1'
         wallabag_v2: 'Trasferisci da wallabag v2'
+        readability: 'Trasferisci da Readability'
     developer:
         title: 'Sviluppatori'
         create_application: 'Crea la tua applicazione'

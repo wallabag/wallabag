@@ -292,6 +292,7 @@ quickstart:
         pocket: 'von Pocket migrieren'
         wallabag_v1: 'von wallabag v1 migrieren'
         wallabag_v2: 'von wallabag v2 migrieren'
+        readability: 'von Readability migrieren'
     developer:
         title: 'Entwickler'
         create_application: 'Erstelle eine Anwendung und nutze die wallabag API'

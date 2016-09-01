@@ -292,6 +292,7 @@ quickstart:
         pocket: 'Migruj z Pocket'
         wallabag_v1: 'Migruj z wallabag v1'
         wallabag_v2: 'Migruj z wallabag v2'
+        readability: 'Migruj z Readability'
     developer:
         title: 'Deweloperzy'
         create_application: 'Stwórz swoją aplikację'
