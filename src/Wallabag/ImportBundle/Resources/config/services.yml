@@ -43,3 +43,13 @@ services:
             - [ setLogger, [ "@logger" ]]
         tags:
             -  { name: wallabag_import.import, alias: wallabag_v2 }
+
+    wallabag_import.readability.import:
+        class: Wallabag\ImportBundle\Import\ReadabilityImport
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@wallabag_core.content_proxy"
+        calls:
+            - [ setLogger, [ "@logger" ]]
+        tags:
+            -  { name: wallabag_import.import, alias: readability }

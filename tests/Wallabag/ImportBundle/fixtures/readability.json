@@ -1,0 +1,25 @@
+{
+    "bookmarks": [
+        {
+            "article__excerpt": "When Twitter started it had so much promise to change the way we communicate. But now it has been ruined by the amount of garbage and hate we have to wade through. It&#x2019;s like that polluted&hellip;",
+            "favorite": false,
+            "date_archived": null,
+            "article__url": "https://venngage.com/blog/hashtags-are-worthless/",
+            "date_added": "2016-08-25T12:05:00",
+            "date_favorited": null,
+            "article__title": "We Looked At 167,943 Tweets & Found Out Hashtags Are Worthless",
+            "archive": false
+        },
+        {
+            "article__excerpt": "TL;DR: Re-use your DOM elements and remove the ones that are far away from the viewport. Use placeholders to account for delayed data. Here&#x2019;s a demo and the code for the infinite&hellip;",
+            "favorite": false,
+            "date_archived": "2016-08-26T12:21:54",
+            "article__url": "https://developers.google.com/web/updates/2016/07/infinite-scroller?imm_mid=0e6839&cmp=em-webops-na-na-newsltr_20160805",
+            "date_added": "2016-08-06T05:35:26",
+            "date_favorited": null,
+            "article__title": "Complexities of an infinite scroller | Web Updates",
+            "archive": true
+        }
+   ],
+    "recommendations": []
+}
