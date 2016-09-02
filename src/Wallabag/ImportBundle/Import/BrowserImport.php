@@ -175,14 +175,6 @@ class BrowserImport implements ImportInterface
                 $this->em->clear($entry);
             }
             ++$this->nbEntries;
-
-            /*
-
-            Maybe not useful. Delete at will.
-
-            */
-
-            $this->logger->info($this->nbEntries.' / '.$this->totalEntries);
         }
     }
 

@@ -44,12 +44,10 @@ class ImportCommand extends ContainerAwareCommand
             case 'v2':
                 $wallabag = $this->getContainer()->get('wallabag_import.wallabag_v2.import');
                 break;
-            case 'v1':
-                $wallabag = $this->getContainer()->get('wallabag_import.wallabag_v1.import');
-                break;
             case 'browser':
                 $wallabag = $this->getContainer()->get('wallabag_import.browser.import');
                 break;
+            case 'v1':
             default:
                 $wallabag = $this->getContainer()->get('wallabag_import.wallabag_v1.import');
                 break;
