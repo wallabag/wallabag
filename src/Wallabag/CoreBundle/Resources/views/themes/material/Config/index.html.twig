@@ -196,6 +196,7 @@
                     </div>
 
                     <div id="set5" class="col s12">
+                        {% if app.user.config.taggingRules is not empty %}
                         <div class="row">
                             <div class="input-field col s12">
                                 <ul>
@@ -213,6 +214,7 @@
                                 </ul>
                             </div>
                         </div>
+                        {% endif %}
 
                         {{ form_start(form.new_tagging_rule) }}
                             {{ form_errors(form.new_tagging_rule) }}
