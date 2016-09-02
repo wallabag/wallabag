@@ -45,6 +45,7 @@ module.exports = function (grunt) {
         src: [
           '<%= appDir %>/themes/material/js/init.js',
           '<%= appDir %>/themes/_global/js/restoreScroll.js',
+          'node_modules/jquery.tinydot/src/jquery.tinydot.js',
         ],
         dest: '<%= buildDir %>/material.js',
       },

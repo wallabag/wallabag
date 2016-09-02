@@ -28,6 +28,7 @@
     "jquery": "^2.2.1",
     "jquery-ui": "^1.10.5",
     "jquery.cookie": "^1.4.1",
+    "jquery.tinydot": "^0.2.1",
     "load-grunt-tasks": "^3.4.1",
     "materialize-css": "0.97.5",
     "npm": "^3.8.3",

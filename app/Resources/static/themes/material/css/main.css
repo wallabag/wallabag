@@ -257,7 +257,7 @@ nav input {
   display: none;
 }
 
-input-field.nav-panel-add, .input-field.nav-panel-add form {
+.input-field.nav-panel-add, .input-field.nav-panel-add form {
     height: 100%;
 }
 
