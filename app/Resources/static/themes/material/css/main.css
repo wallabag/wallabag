@@ -671,3 +671,7 @@ div.settings div.input-field ul {
 div.settings div.file-field div {
   margin-top: inherit;
 }
+
+.input-field label.active {
+    font-size: 1rem;
+}
