@@ -1,0 +1,43 @@
+# Cache, logs & sessions
+/var/*
+!/var/cache
+/var/cache/*
+!var/cache/.gitkeep
+!/var/logs
+/var/logs/*
+!var/logs/.gitkeep
+!/var/sessions
+/var/sessions/*
+!var/sessions/.gitkeep
+!var/SymfonyRequirements.php
+/bin/*
+!/bin/console
+!/bin/symfony_requirements
+
+# Parameters
+/app/config/parameters.yml
+
+# Managed by Composer
+/vendor/
+
+# Assets and user uploads
+/web/bundles/
+/web/uploads/
+
+# Build
+/app/build
+/build
+
+# Composer PHAR
+/composer.phar
+
+# Data for wallabag
+data/assets/*
+data/db/wallabag*.sqlite
+
+# Docker container logs and data
+docker/logs/
+docker/data/
+
+# To avoid crazy stuff on some PR, we must manually FORCE ADD IT on each new release
+composer.lock
