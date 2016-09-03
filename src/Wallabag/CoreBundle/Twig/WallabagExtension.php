@@ -23,12 +23,26 @@ class WallabagExtension extends \Twig_Extension implements \Twig_Extension_Globa
         ];
     }
 
+    public function getFunctions()
+    {
+        return array(
+            new \Twig_SimpleFunction('count_entries', [$this, 'countEntries']),
+        );
+    }
+
     public function removeWww($url)
     {
         return preg_replace('/^www\./i', '', $url);
     }
 
-    public function getGlobals()
+    /**
+     * Return number of entries depending of the type (unread, archive, starred or all)
+     *
+     * @param  string $type Type of entries to count
+     *
+     * @return int
+     */
+    public function countEntries($type)
     {
         $user = $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null;
 
@@ -36,28 +50,39 @@ class WallabagExtension extends \Twig_Extension implements \Twig_Extension_Globa
             return [];
         }
 
-        $unreadEntries = $this->repository->enableCache(
-            $this->repository->getBuilderForUnreadByUser($user->getId())->select('COUNT(e.id)')->getQuery()
-        );
+        switch ($type) {
+            case 'starred':
+                $qb = $this->repository->getBuilderForStarredByUser($user->getId());
+                break;
 
-        $starredEntries = $this->repository->enableCache(
-            $this->repository->getBuilderForStarredByUser($user->getId())->select('COUNT(e.id)')->getQuery()
-        );
+            case 'archive':
+                $qb = $this->repository->getBuilderForArchiveByUser($user->getId());
+                break;
 
-        $archivedEntries = $this->repository->enableCache(
-            $this->repository->getBuilderForArchiveByUser($user->getId())->select('COUNT(e.id)')->getQuery()
-        );
+            case 'unread':
+                $qb = $this->repository->getBuilderForUnreadByUser($user->getId());
+                break;
 
-        $allEntries = $this->repository->enableCache(
-            $this->repository->getBuilderForAllByUser($user->getId())->select('COUNT(e.id)')->getQuery()
-        );
+            case 'all':
+                $qb = $this->repository->getBuilderForAllByUser($user->getId());
+                break;
 
-        return [
-            'unreadEntries' => $unreadEntries->getSingleScalarResult(),
-            'starredEntries' => $starredEntries->getSingleScalarResult(),
-            'archivedEntries' => $archivedEntries->getSingleScalarResult(),
-            'allEntries' => $allEntries->getSingleScalarResult(),
-        ];
+            default:
+                throw new \InvalidArgumentException(sprintf('Type "%s" is not implemented.', $type));
+        }
+
+        // THANKS to PostgreSQL we CAN'T make a DEAD SIMPLE count(e.id)
+        // ERROR: column "e0_.id" must appear in the GROUP BY clause or be used in an aggregate function
+        $query = $qb
+            ->select('e.id')
+            ->groupBy('e.id')
+            ->getQuery();
+
+        $data =$this->repository
+            ->enableCache($query)
+            ->getArrayResult();
+
+        return count($data);
     }
 
     public function getName()
