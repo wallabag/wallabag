@@ -49,6 +49,7 @@ wallabag_core:
     language: en
     rss_limit: 50
     reading_speed: 1
+    cache_lifetime: 10
 
 wallabag_import:
     allow_mimetypes: ['application/octet-stream', 'application/json', 'text/plain']

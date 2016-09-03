@@ -10,6 +10,8 @@ use Wallabag\CoreBundle\Entity\Tag;
 
 class EntryRepository extends EntityRepository
 {
+    private $lifeTime;
+
     /**
      * Return a query builder to used by other getBuilderFor* method.
      *
@@ -281,8 +283,13 @@ class EntryRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
+    public function setLifeTime($lifeTime)
+    {
+        $this->lifeTime = $lifeTime;
+    }
+
     /**
-     * Enable cache for a query
+     * Enable cache for a query.
      *
      * @param Query $query
      *
@@ -292,7 +299,7 @@ class EntryRepository extends EntityRepository
     {
         $query->useQueryCache(true);
         $query->useResultCache(true);
-        $query->setResultCacheLifetime(5);
+        $query->setResultCacheLifetime($this->lifeTime);
 
         return $query;
     }
