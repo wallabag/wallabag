@@ -96,9 +96,11 @@ class InstallCommand extends ContainerAwareCommand
         try {
             $this->getContainer()->get('doctrine')->getManager()->getConnection()->connect();
         } catch (\Exception $e) {
-            $fulfilled = false;
-            $status = '<error>ERROR!</error>';
-            $help = 'Can\'t connect to the database: '.$e->getMessage();
+            if (false === strpos($e->getMessage(), "Unknown database")) {
+                $fulfilled = false;
+                $status = '<error>ERROR!</error>';
+                $help = 'Can\'t connect to the database: '.$e->getMessage();
+            }
         }
 
         $rows[] = [$label, $status, $help];
@@ -472,7 +474,7 @@ class InstallCommand extends ContainerAwareCommand
         }
 
         // custom verification for sqlite, since `getListDatabasesSQL` doesn't work for sqlite
-        if ('sqlite' == $schemaManager->getDatabasePlatform()->getName()) {
+        if ('sqlite' === $schemaManager->getDatabasePlatform()->getName()) {
             $params = $this->getContainer()->get('doctrine.dbal.default_connection')->getParams();
 
             if (isset($params['path']) && file_exists($params['path'])) {
