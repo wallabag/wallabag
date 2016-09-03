@@ -36,9 +36,9 @@ class WallabagExtension extends \Twig_Extension implements \Twig_Extension_Globa
     }
 
     /**
-     * Return number of entries depending of the type (unread, archive, starred or all)
+     * Return number of entries depending of the type (unread, archive, starred or all).
      *
-     * @param  string $type Type of entries to count
+     * @param string $type Type of entries to count
      *
      * @return int
      */
@@ -78,7 +78,7 @@ class WallabagExtension extends \Twig_Extension implements \Twig_Extension_Globa
             ->groupBy('e.id')
             ->getQuery();
 
-        $data =$this->repository
+        $data = $this->repository
             ->enableCache($query)
             ->getArrayResult();
 
