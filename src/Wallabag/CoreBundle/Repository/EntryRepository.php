@@ -3,12 +3,15 @@
 namespace Wallabag\CoreBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 use Wallabag\CoreBundle\Entity\Tag;
 
 class EntryRepository extends EntityRepository
 {
+    private $lifeTime;
+
     /**
      * Return a query builder to used by other getBuilderFor* method.
      *
@@ -307,5 +310,26 @@ class EntryRepository extends EntityRepository
         ;
 
         return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function setLifeTime($lifeTime)
+    {
+        $this->lifeTime = $lifeTime;
+    }
+
+    /**
+     * Enable cache for a query.
+     *
+     * @param Query $query
+     *
+     * @return Query
+     */
+    public function enableCache(Query $query)
+    {
+        $query->useQueryCache(true);
+        $query->useResultCache(true);
+        $query->setResultCacheLifetime($this->lifeTime);
+
+        return $query;
     }
 }

@@ -40,3 +40,11 @@ swiftmailer:
     transport: smtp
     host: 'localhost'
     port: 1025
+
+# If you want to use cache for queries used in WallabagExtension
+# Uncomment the following lines
+#doctrine:
+#    orm:
+#        metadata_cache_driver: apcu
+#        result_cache_driver: apcu
+#        query_cache_driver: apcu

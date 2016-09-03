@@ -81,6 +81,8 @@ services:
         factory: [ "@doctrine.orm.default_entity_manager", getRepository ]
         arguments:
             - WallabagCoreBundle:Entry
+        calls:
+            - [ setLifeTime, [ "%wallabag_core.cache_lifetime%" ] ]
 
     wallabag_core.tag_repository:
         class: Wallabag\CoreBundle\Repository\TagRepository
