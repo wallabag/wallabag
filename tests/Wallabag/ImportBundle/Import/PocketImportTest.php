@@ -27,31 +27,14 @@ class PocketImportTest extends \PHPUnit_Framework_TestCase
     protected $em;
     protected $contentProxy;
     protected $logHandler;
-    protected $producer;
 
-    private function getPocketImport($consumerKey = 'ConsumerKey', $rabbitMQ = false)
+    private function getPocketImport($consumerKey = 'ConsumerKey')
     {
         $this->user = new User();
-
-        $this->tokenStorage = $this->getMockBuilder('Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $token = $this->getMockBuilder('Symfony\Component\Security\Core\Authentication\Token\TokenInterface')
-            ->disableOriginalConstructor()
-            ->getMock();
 
         $this->contentProxy = $this->getMockBuilder('Wallabag\CoreBundle\Helper\ContentProxy')
             ->disableOriginalConstructor()
             ->getMock();
-
-        $token->expects($this->once())
-            ->method('getUser')
-            ->willReturn($this->user);
-
-        $this->tokenStorage->expects($this->once())
-            ->method('getToken')
-            ->willReturn($token);
 
         $this->em = $this->getMockBuilder('Doctrine\ORM\EntityManager')
             ->disableOriginalConstructor()
@@ -66,17 +49,12 @@ class PocketImportTest extends \PHPUnit_Framework_TestCase
             ->with('pocket_consumer_key')
             ->willReturn($consumerKey);
 
-        $this->producer = $this->getMockBuilder('OldSound\RabbitMqBundle\RabbitMq\Producer')
-            ->disableOriginalConstructor()
-            ->getMock();
-
         $pocket = new PocketImportMock(
-            $this->tokenStorage,
             $this->em,
             $this->contentProxy,
-            $config,
-            $this->producer
+            $config
         );
+        $pocket->setUser($this->user);
 
         $this->logHandler = new TestHandler();
         $logger = new Logger('test', [$this->logHandler]);

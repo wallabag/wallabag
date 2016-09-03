@@ -11,11 +11,28 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 class PocketController extends Controller
 {
     /**
+     * Return Pocket Import Service with or without RabbitMQ enabled.
+     *
+     * @return \Wallabag\ImportBundle\Import\PocketImport
+     */
+    private function getPocketImportService()
+    {
+        $pocket = $this->get('wallabag_import.pocket.import');
+        $pocket->setUser($this->getUser());
+
+        if ($this->get('craue_config')->get('rabbitmq')) {
+            $pocket->setRabbitmqProducer($this->get('old_sound_rabbit_mq.wallabag_pocket_producer'));
+        }
+
+        return $pocket;
+    }
+
+    /**
      * @Route("/pocket", name="import_pocket")
      */
     public function indexAction()
     {
-        $pocket = $this->get('wallabag_import.pocket.import');
+        $pocket = $this->getPocketImportService();
         $form = $this->createFormBuilder($pocket)
             ->add('mark_as_read', CheckboxType::class, [
                 'label' => 'import.form.mark_as_read_label',
@@ -24,7 +41,7 @@ class PocketController extends Controller
             ->getForm();
 
         return $this->render('WallabagImportBundle:Pocket:index.html.twig', [
-            'import' => $this->get('wallabag_import.pocket.import'),
+            'import' => $this->getPocketImportService(),
             'has_consumer_key' => '' == trim($this->get('craue_config')->get('pocket_consumer_key')) ? false : true,
             'form' => $form->createView(),
         ]);
@@ -35,7 +52,7 @@ class PocketController extends Controller
      */
     public function authAction(Request $request)
     {
-        $requestToken = $this->get('wallabag_import.pocket.import')
+        $requestToken = $this->getPocketImportService()
             ->getRequestToken($this->generateUrl('import', [], UrlGeneratorInterface::ABSOLUTE_URL));
 
         if (false === $requestToken) {
@@ -62,7 +79,7 @@ class PocketController extends Controller
     public function callbackAction()
     {
         $message = 'flashes.import.notice.failed';
-        $pocket = $this->get('wallabag_import.pocket.import');
+        $pocket = $this->getPocketImportService();
 
         $markAsRead = $this->get('session')->get('mark_as_read');
         $this->get('session')->remove('mark_as_read');

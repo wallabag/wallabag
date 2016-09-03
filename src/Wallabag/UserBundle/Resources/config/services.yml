@@ -14,3 +14,9 @@ services:
             - "@router"
         tags:
             - { name: kernel.event_subscriber }
+
+    wallabag_user.user_repository:
+        class: Wallabag\UserBundle\Repository\UserRepository
+        factory: [ "@doctrine.orm.default_entity_manager", getRepository ]
+        arguments:
+            - WallabagUserBundle:User

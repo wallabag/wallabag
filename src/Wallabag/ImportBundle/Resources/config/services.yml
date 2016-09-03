@@ -1,10 +1,11 @@
 services:
-    wallabag_import.consumer.entry:
-        class: Wallabag\ImportBundle\Component\AMPQ\EntryConsumer
+    wallabag_import.consumer.pocket:
+        class: Wallabag\ImportBundle\Consumer\AMPQ\PocketConsumer
         arguments:
             - "@doctrine.orm.entity_manager"
-            - "@wallabag_core.entry_repository"
-            - "@wallabag_core.content_proxy"
+            - "@wallabag_user.user_repository"
+            - "@wallabag_import.pocket.import"
+            - "@logger"
 
     wallabag_import.chain:
         class: Wallabag\ImportBundle\Import\ImportChain
@@ -21,11 +22,9 @@ services:
     wallabag_import.pocket.import:
         class: Wallabag\ImportBundle\Import\PocketImport
         arguments:
-            - "@security.token_storage"
             - "@doctrine.orm.entity_manager"
             - "@wallabag_core.content_proxy"
             - "@craue_config"
-            - "@old_sound_rabbit_mq.wallabag_producer"
         calls:
             - [ setClient, [ "@wallabag_import.pocket.client" ] ]
             - [ setLogger, [ "@logger" ]]

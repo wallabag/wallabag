@@ -219,24 +219,24 @@ lexik_maintenance:
 old_sound_rabbit_mq:
     connections:
         default:
-            host:     %rabbitmq_host%
-            port:     %rabbitmq_port%
-            user:     %rabbitmq_user%
-            password: %rabbitmq_password%
+            host:     "%rabbitmq_host%"
+            port:     "%rabbitmq_port%"
+            user:     "%rabbitmq_user%"
+            password: "%rabbitmq_password%"
             vhost:    /
-            lazy:     false
+            lazy:     true
     producers:
-        wallabag:
+        wallabag_pocket:
             connection: default
             exchange_options:
-                name: 'wallabag_exchange'
+                name: 'wallabag.import.pocket'
                 type: topic
     consumers:
-        entries:
+        wallabag_pocket:
             connection: default
             exchange_options:
-                name: 'wallabag_exchange'
+                name: 'wallabag.import.pocket'
                 type: topic
             queue_options:
-                name: 'wallabag_queue'
-            callback: wallabag_import.consumer.entry
+                name: 'wallabag.import.pocket'
+            callback: wallabag_import.consumer.pocket
