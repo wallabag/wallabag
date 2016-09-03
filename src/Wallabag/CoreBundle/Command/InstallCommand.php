@@ -72,8 +72,10 @@ class InstallCommand extends ContainerAwareCommand
     {
         $this->defaultOutput->writeln('<info><comment>Step 1 of 5.</comment> Checking system requirements.</info>');
 
-        $fulfilled = true;
+        $rows = [];
 
+        // testing if database driver exists
+        $fulfilled = true;
         $label = '<comment>PDO Driver</comment>';
         $status = '<info>OK!</info>';
         $help = '';
@@ -84,7 +86,23 @@ class InstallCommand extends ContainerAwareCommand
             $help = 'Database driver "'.$this->getContainer()->getParameter('database_driver').'" is not installed.';
         }
 
-        $rows = [];
+        $rows[] = [$label, $status, $help];
+
+        // testing if connection to the database can be etablished
+        $label = '<comment>Database connection</comment>';
+        $status = '<info>OK!</info>';
+        $help = '';
+
+        try {
+            $this->getContainer()->get('doctrine')->getManager()->getConnection()->connect();
+        } catch (\Exception $e) {
+            if (false === strpos($e->getMessage(), 'Unknown database')) {
+                $fulfilled = false;
+                $status = '<error>ERROR!</error>';
+                $help = 'Can\'t connect to the database: '.$e->getMessage();
+            }
+        }
+
         $rows[] = [$label, $status, $help];
 
         foreach ($this->functionExists as $functionRequired) {
@@ -456,7 +474,7 @@ class InstallCommand extends ContainerAwareCommand
         }
 
         // custom verification for sqlite, since `getListDatabasesSQL` doesn't work for sqlite
-        if ('sqlite' == $schemaManager->getDatabasePlatform()->getName()) {
+        if ('sqlite' === $schemaManager->getDatabasePlatform()->getName()) {
             $params = $this->getContainer()->get('doctrine.dbal.default_connection')->getParams();
 
             if (isset($params['path']) && file_exists($params['path'])) {
