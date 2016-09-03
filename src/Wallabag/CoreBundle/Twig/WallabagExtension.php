@@ -33,31 +33,31 @@ class WallabagExtension extends \Twig_Extension implements \Twig_Extension_Globa
         $user = $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null;
 
         if (null === $user || !is_object($user)) {
-            return array();
+            return [];
         }
 
         $unreadEntries = $this->repository->enableCache(
-            $this->repository->getBuilderForUnreadByUser($user->getId())->getQuery()
+            $this->repository->getBuilderForUnreadByUser($user->getId())->select('COUNT(e.id)')->getQuery()
         );
 
         $starredEntries = $this->repository->enableCache(
-            $this->repository->getBuilderForStarredByUser($user->getId())->getQuery()
+            $this->repository->getBuilderForStarredByUser($user->getId())->select('COUNT(e.id)')->getQuery()
         );
 
         $archivedEntries = $this->repository->enableCache(
-            $this->repository->getBuilderForArchiveByUser($user->getId())->getQuery()
+            $this->repository->getBuilderForArchiveByUser($user->getId())->select('COUNT(e.id)')->getQuery()
         );
 
         $allEntries = $this->repository->enableCache(
-            $this->repository->getBuilderForAllByUser($user->getId())->getQuery()
+            $this->repository->getBuilderForAllByUser($user->getId())->select('COUNT(e.id)')->getQuery()
         );
 
-        return array(
-            'unreadEntries' => count($unreadEntries->getResult()),
-            'starredEntries' => count($starredEntries->getResult()),
-            'archivedEntries' => count($archivedEntries->getResult()),
-            'allEntries' => count($allEntries->getResult()),
-        );
+        return [
+            'unreadEntries' => $unreadEntries->getSingleScalarResult(),
+            'starredEntries' => $starredEntries->getSingleScalarResult(),
+            'archivedEntries' => $archivedEntries->getSingleScalarResult(),
+            'allEntries' => $allEntries->getSingleScalarResult(),
+        ];
     }
 
     public function getName()
