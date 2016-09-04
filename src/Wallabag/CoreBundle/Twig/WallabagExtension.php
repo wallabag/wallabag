@@ -119,7 +119,7 @@ class WallabagExtension extends \Twig_Extension implements \Twig_Extension_Globa
      *
      * @return Query
      */
-    public function enableCache(Query $query)
+    private function enableCache(Query $query)
     {
         $query->useQueryCache(true);
         $query->useResultCache(true);
