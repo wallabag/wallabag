@@ -12,7 +12,13 @@ class WallabagV1Controller extends WallabagController
      */
     protected function getImportService()
     {
-        return $this->get('wallabag_import.wallabag_v1.import');
+        $service = $this->get('wallabag_import.wallabag_v1.import');
+
+        if ($this->get('craue_config')->get('rabbitmq')) {
+            $service->setRabbitmqProducer($this->get('old_sound_rabbit_mq.import_wallabag_v1_producer'));
+        }
+
+        return $service;
     }
 
     /**

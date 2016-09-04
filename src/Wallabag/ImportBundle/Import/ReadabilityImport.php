@@ -7,24 +7,9 @@ use Wallabag\UserBundle\Entity\User;
 
 class ReadabilityImport extends AbstractImport
 {
-    private $user;
     private $skippedEntries = 0;
     private $importedEntries = 0;
     private $filepath;
-    private $markAsRead;
-
-    /**
-     * We define the user in a custom call because on the import command there is no logged in user.
-     * So we can't retrieve user from the `security.token_storage` service.
-     *
-     * @param User $user
-     */
-    public function setUser(User $user)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
 
     /**
      * {@inheritdoc}
@@ -63,26 +48,6 @@ class ReadabilityImport extends AbstractImport
     }
 
     /**
-     * Set whether articles must be all marked as read.
-     *
-     * @param bool $markAsRead
-     */
-    public function setMarkAsRead($markAsRead)
-    {
-        $this->markAsRead = $markAsRead;
-
-        return $this;
-    }
-
-    /**
-     * Get whether articles must be all marked as read.
-     */
-    public function getMarkAsRead()
-    {
-        return $this->markAsRead;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getSummary()
@@ -116,54 +81,76 @@ class ReadabilityImport extends AbstractImport
             return false;
         }
 
+        if ($this->producer) {
+            $this->parseEntriesForProducer($data['bookmarks']);
+
+            return true;
+        }
+
         $this->parseEntries($data['bookmarks']);
 
         return true;
     }
 
-    /**
-     * Parse and insert all given entries.
-     *
-     * @param $entries
-     */
-    protected function parseEntries($entries)
+    public function parseEntry(array $importedEntry)
     {
-        $i = 1;
+        $existingEntry = $this->em
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findByUrlAndUserId($importedEntry['article__url'], $this->user->getId());
 
+        if (false !== $existingEntry) {
+            ++$this->skippedEntries;
+
+            return;
+        }
+
+        $data = [
+            'title' => $importedEntry['article__title'],
+            'url' => $importedEntry['article__url'],
+            'content_type' => '',
+            'language' => '',
+            'is_archived' => $importedEntry['archive'] || $this->markAsRead,
+            'is_starred' => $importedEntry['favorite'],
+        ];
+
+        $entry = $this->fetchContent(
+            new Entry($this->user),
+            $data['url'],
+            $data
+        );
+
+        // jump to next entry in case of problem while getting content
+        if (false === $entry) {
+            ++$this->skippedEntries;
+
+            return;
+        }
+
+        $entry->setArchived($data['is_archived']);
+        $entry->setStarred($data['is_starred']);
+
+        $this->em->persist($entry);
+        ++$this->importedEntries;
+
+        return $entry;
+    }
+
+    /**
+     * Faster parse entries for Producer.
+     * We don't care to make check at this time. They'll be done by the consumer.
+     *
+     * @param array $entries
+     */
+    protected function parseEntriesForProducer($entries)
+    {
         foreach ($entries as $importedEntry) {
-            $existingEntry = $this->em
-                ->getRepository('WallabagCoreBundle:Entry')
-                ->findByUrlAndUserId($importedEntry['article__url'], $this->user->getId());
+            // set userId for the producer (it won't know which user is connected)
+            $importedEntry['userId'] = $this->user->getId();
 
-            if (false !== $existingEntry) {
-                ++$this->skippedEntries;
-                continue;
+            if ($this->markAsRead) {
+                $importedEntry['archive'] = 1;
             }
 
-            $data = [
-                'title' => $importedEntry['article__title'],
-                'url' => $importedEntry['article__url'],
-                'content_type' => '',
-                'language' => '',
-                'is_archived' => $importedEntry['archive'] || $this->markAsRead,
-                'is_starred' => $importedEntry['favorite'],
-            ];
-
-            $entry = $this->fetchContent(
-                new Entry($this->user),
-                $data['url'],
-                $data
-            );
-
-            // jump to next entry in case of problem while getting content
-            if (false === $entry) {
-                ++$this->skippedEntries;
-                continue;
-            }
-            $entry->setArchived($data['is_archived']);
-            $entry->setStarred($data['is_starred']);
-
-            $this->em->persist($entry);
             ++$this->importedEntries;
 
             // flush every 20 entries

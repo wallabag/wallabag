@@ -31,7 +31,7 @@ class WallabagV1Import extends WallabagImport
     /**
      * {@inheritdoc}
      */
-    protected function prepareEntry($entry = [], $markAsRead = false)
+    protected function prepareEntry($entry = [])
     {
         $data = [
             'title' => $entry['title'],
@@ -39,7 +39,7 @@ class WallabagV1Import extends WallabagImport
             'url' => $entry['url'],
             'content_type' => '',
             'language' => '',
-            'is_archived' => $entry['is_read'] || $markAsRead,
+            'is_archived' => $entry['is_read'] || $this->markAsRead,
             'is_starred' => $entry['is_fav'],
             'tags' => '',
         ];
@@ -55,5 +55,21 @@ class WallabagV1Import extends WallabagImport
         }
 
         return $data;
+    }
+
+    protected function parseEntriesForProducer($entries)
+    {
+        foreach ($entries as $importedEntry) {
+            // set userId for the producer (it won't know which user is connected)
+            $importedEntry['userId'] = $this->user->getId();
+
+            if ($this->markAsRead) {
+                $importedEntry['is_read'] = 1;
+            }
+
+            ++$this->importedEntries;
+
+            $this->producer->publish(json_encode($importedEntry));
+        }
     }
 }

@@ -21,7 +21,7 @@ class PocketController extends Controller
         $pocket->setUser($this->getUser());
 
         if ($this->get('craue_config')->get('rabbitmq')) {
-            $pocket->setRabbitmqProducer($this->get('old_sound_rabbit_mq.wallabag_pocket_producer'));
+            $pocket->setRabbitmqProducer($this->get('old_sound_rabbit_mq.import_pocket_producer'));
         }
 
         return $pocket;

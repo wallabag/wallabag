@@ -226,13 +226,28 @@ old_sound_rabbit_mq:
             vhost:    /
             lazy:     true
     producers:
-        wallabag_pocket:
+        import_pocket:
             connection: default
             exchange_options:
                 name: 'wallabag.import.pocket'
                 type: topic
+        import_readability:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.readability'
+                type: topic
+        import_wallabag_v1:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.wallabag_v1'
+                type: topic
+        import_wallabag_v2:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.wallabag_v2'
+                type: topic
     consumers:
-        wallabag_pocket:
+        import_pocket:
             connection: default
             exchange_options:
                 name: 'wallabag.import.pocket'
@@ -240,3 +255,27 @@ old_sound_rabbit_mq:
             queue_options:
                 name: 'wallabag.import.pocket'
             callback: wallabag_import.consumer.pocket
+        import_readability:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.readability'
+                type: topic
+            queue_options:
+                name: 'wallabag.import.readability'
+            callback: wallabag_import.consumer.readability
+        import_wallabag_v1:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.wallabag_v1'
+                type: topic
+            queue_options:
+                name: 'wallabag.import.wallabag_v1'
+            callback: wallabag_import.consumer.wallabag_v1
+        import_wallabag_v2:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.wallabag_v2'
+                type: topic
+            queue_options:
+                name: 'wallabag.import.wallabag_v2'
+            callback: wallabag_import.consumer.wallabag_v2

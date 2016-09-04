@@ -38,6 +38,7 @@ abstract class WallabagController extends Controller
         $form->handleRequest($request);
 
         $wallabag = $this->getImportService();
+        $wallabag->setUser($this->getUser());
 
         if ($form->isValid()) {
             $file = $form->get('file')->getData();
@@ -46,7 +47,6 @@ abstract class WallabagController extends Controller
 
             if (in_array($file->getClientMimeType(), $this->getParameter('wallabag_import.allow_mimetypes')) && $file->move($this->getParameter('wallabag_import.resource_dir'), $name)) {
                 $res = $wallabag
-                    ->setUser($this->getUser())
                     ->setFilepath($this->getParameter('wallabag_import.resource_dir').'/'.$name)
                     ->setMarkAsRead($markAsRead)
                     ->import();

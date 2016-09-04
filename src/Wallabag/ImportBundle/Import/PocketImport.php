@@ -2,25 +2,20 @@
 
 namespace Wallabag\ImportBundle\Import;
 
-use OldSound\RabbitMqBundle\RabbitMq\Producer;
 use Psr\Log\NullLogger;
 use Doctrine\ORM\EntityManager;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Helper\ContentProxy;
 use Craue\ConfigBundle\Util\Config;
 
 class PocketImport extends AbstractImport
 {
-    private $user;
     private $client;
     private $consumerKey;
     private $skippedEntries = 0;
     private $importedEntries = 0;
-    private $markAsRead;
-    private $producer;
     protected $accessToken;
 
     public function __construct(EntityManager $em, ContentProxy $contentProxy, Config $craueConfig)
@@ -29,28 +24,6 @@ class PocketImport extends AbstractImport
         $this->contentProxy = $contentProxy;
         $this->consumerKey = $craueConfig->get('pocket_consumer_key');
         $this->logger = new NullLogger();
-    }
-
-    /**
-     * Set RabbitMQ Producer to send each entry to a queue.
-     * This method should be called when user has enabled RabbitMQ.
-     *
-     * @param Producer $producer
-     */
-    public function setRabbitmqProducer(Producer $producer)
-    {
-        $this->producer = $producer;
-    }
-
-    /**
-     * Set current user.
-     * Could the current *connected* user or one retrieve by the consumer.
-     *
-     * @param UserInterface $user
-     */
-    public function setUser(UserInterface $user)
-    {
-        $this->user = $user;
     }
 
     /**
@@ -139,26 +112,6 @@ class PocketImport extends AbstractImport
     }
 
     /**
-     * Set whether articles must be all marked as read.
-     *
-     * @param bool $markAsRead
-     */
-    public function setMarkAsRead($markAsRead)
-    {
-        $this->markAsRead = $markAsRead;
-
-        return $this;
-    }
-
-    /**
-     * Get whether articles must be all marked as read.
-     */
-    public function getMarkAsRead()
-    {
-        return $this->markAsRead;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function import()
@@ -217,37 +170,9 @@ class PocketImport extends AbstractImport
         $this->client = $client;
     }
 
-    /**
-     * @see https://getpocket.com/developer/docs/v3/retrieve
-     *
-     * @param array $entries
-     */
-    private function parseEntries(array $entries)
+    public function parseEntry(array $importedEntry)
     {
-        $i = 1;
-
-        foreach ($entries as $pocketEntry) {
-            $entry = $this->parseEntry($pocketEntry);
-
-            if (null === $entry) {
-                continue;
-            }
-
-            // flush every 20 entries
-            if (($i % 20) === 0) {
-                $this->em->flush();
-                $this->em->clear($entry);
-            }
-
-            ++$i;
-        }
-
-        $this->em->flush();
-    }
-
-    public function parseEntry(array $pocketEntry)
-    {
-        $url = isset($pocketEntry['resolved_url']) && $pocketEntry['resolved_url'] != '' ? $pocketEntry['resolved_url'] : $pocketEntry['given_url'];
+        $url = isset($importedEntry['resolved_url']) && $importedEntry['resolved_url'] != '' ? $importedEntry['resolved_url'] : $importedEntry['given_url'];
 
         $existingEntry = $this->em
             ->getRepository('WallabagCoreBundle:Entry')
@@ -270,34 +195,34 @@ class PocketImport extends AbstractImport
         }
 
         // 0, 1, 2 - 1 if the item is archived - 2 if the item should be deleted
-        if ($pocketEntry['status'] == 1 || $this->markAsRead) {
+        if ($importedEntry['status'] == 1 || $this->markAsRead) {
             $entry->setArchived(true);
         }
 
         // 0 or 1 - 1 If the item is starred
-        if ($pocketEntry['favorite'] == 1) {
+        if ($importedEntry['favorite'] == 1) {
             $entry->setStarred(true);
         }
 
         $title = 'Untitled';
-        if (isset($pocketEntry['resolved_title']) && $pocketEntry['resolved_title'] != '') {
-            $title = $pocketEntry['resolved_title'];
-        } elseif (isset($pocketEntry['given_title']) && $pocketEntry['given_title'] != '') {
-            $title = $pocketEntry['given_title'];
+        if (isset($importedEntry['resolved_title']) && $importedEntry['resolved_title'] != '') {
+            $title = $importedEntry['resolved_title'];
+        } elseif (isset($importedEntry['given_title']) && $importedEntry['given_title'] != '') {
+            $title = $importedEntry['given_title'];
         }
 
         $entry->setTitle($title);
         $entry->setUrl($url);
 
         // 0, 1, or 2 - 1 if the item has images in it - 2 if the item is an image
-        if (isset($pocketEntry['has_image']) && $pocketEntry['has_image'] > 0 && isset($pocketEntry['images'][1])) {
-            $entry->setPreviewPicture($pocketEntry['images'][1]['src']);
+        if (isset($importedEntry['has_image']) && $importedEntry['has_image'] > 0 && isset($importedEntry['images'][1])) {
+            $entry->setPreviewPicture($importedEntry['images'][1]['src']);
         }
 
-        if (isset($pocketEntry['tags']) && !empty($pocketEntry['tags'])) {
+        if (isset($importedEntry['tags']) && !empty($importedEntry['tags'])) {
             $this->contentProxy->assignTagsToEntry(
                 $entry,
-                array_keys($pocketEntry['tags'])
+                array_keys($importedEntry['tags'])
             );
         }
 
@@ -315,17 +240,17 @@ class PocketImport extends AbstractImport
      */
     public function parseEntriesForProducer($entries)
     {
-        foreach ($entries as $pocketEntry) {
+        foreach ($entries as $importedEntry) {
             // set userId for the producer (it won't know which user is connected)
-            $pocketEntry['userId'] = $this->user->getId();
+            $importedEntry['userId'] = $this->user->getId();
 
             if ($this->markAsRead) {
-                $pocketEntry['status'] = 1;
+                $importedEntry['status'] = 1;
             }
 
             ++$this->importedEntries;
 
-            $this->producer->publish(json_encode($pocketEntry));
+            $this->producer->publish(json_encode($importedEntry));
         }
     }
 }

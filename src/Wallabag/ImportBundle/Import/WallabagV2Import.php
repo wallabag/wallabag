@@ -31,12 +31,28 @@ class WallabagV2Import extends WallabagImport
     /**
      * {@inheritdoc}
      */
-    protected function prepareEntry($entry = [], $markAsRead = false)
+    protected function prepareEntry($entry = [])
     {
         return [
             'html' => $entry['content'],
             'content_type' => $entry['mimetype'],
-            'is_archived' => ($entry['is_archived'] || $markAsRead),
+            'is_archived' => ($entry['is_archived'] || $this->markAsRead),
         ] + $entry;
+    }
+
+    protected function parseEntriesForProducer($entries)
+    {
+        foreach ($entries as $importedEntry) {
+            // set userId for the producer (it won't know which user is connected)
+            $importedEntry['userId'] = $this->user->getId();
+
+            if ($this->markAsRead) {
+                $importedEntry['is_archived'] = 1;
+            }
+
+            ++$this->importedEntries;
+
+            $this->producer->publish(json_encode($importedEntry));
+        }
     }
 }

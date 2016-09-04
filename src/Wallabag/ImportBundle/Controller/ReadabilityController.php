@@ -18,6 +18,11 @@ class ReadabilityController extends Controller
         $form->handleRequest($request);
 
         $readability = $this->get('wallabag_import.readability.import');
+        $readability->setUser($this->getUser());
+
+        if ($this->get('craue_config')->get('rabbitmq')) {
+            $readability->setRabbitmqProducer($this->get('old_sound_rabbit_mq.import_readability_producer'));
+        }
 
         if ($form->isValid()) {
             $file = $form->get('file')->getData();
@@ -26,7 +31,6 @@ class ReadabilityController extends Controller
 
             if (in_array($file->getClientMimeType(), $this->getParameter('wallabag_import.allow_mimetypes')) && $file->move($this->getParameter('wallabag_import.resource_dir'), $name)) {
                 $res = $readability
-                    ->setUser($this->getUser())
                     ->setFilepath($this->getParameter('wallabag_import.resource_dir').'/'.$name)
                     ->setMarkAsRead($markAsRead)
                     ->import();
