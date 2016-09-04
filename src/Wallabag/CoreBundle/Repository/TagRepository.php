@@ -17,9 +17,7 @@ class TagRepository extends EntityRepository
     {
         return $this->createQueryBuilder('t')
             ->leftJoin('t.entries', 'e')
-            ->where('e.user = :userId')->setParameter('userId', $userId)
-            ->getQuery()
-            ->getResult();
+            ->where('e.user = :userId')->setParameter('userId', $userId);
     }
 
     /**

@@ -311,25 +311,4 @@ class EntryRepository extends EntityRepository
 
         return $qb->getQuery()->getSingleScalarResult();
     }
-
-    public function setLifeTime($lifeTime)
-    {
-        $this->lifeTime = $lifeTime;
-    }
-
-    /**
-     * Enable cache for a query.
-     *
-     * @param Query $query
-     *
-     * @return Query
-     */
-    public function enableCache(Query $query)
-    {
-        $query->useQueryCache(true);
-        $query->useResultCache(true);
-        $query->setResultCacheLifetime($this->lifeTime);
-
-        return $query;
-    }
 }

@@ -322,7 +322,9 @@ class WallabagRestController extends FOSRestController
 
         $tags = $this->getDoctrine()
             ->getRepository('WallabagCoreBundle:Tag')
-            ->findAllTags($this->getUser()->getId());
+            ->findAllTags($this->getUser()->getId())
+            ->getQuery()
+            ->getResult();
 
         $json = $this->get('serializer')->serialize($tags, 'json');
 

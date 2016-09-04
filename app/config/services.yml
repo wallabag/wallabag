@@ -18,7 +18,9 @@ services:
         public: false
         arguments:
             - "@wallabag_core.entry_repository"
+            - "@wallabag_core.tag_repository"
             - "@security.token_storage"
+            - "%wallabag_core.cache_lifetime%"
         tags:
             - { name: twig.extension }
 
