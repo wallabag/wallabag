@@ -6,8 +6,6 @@ use Wallabag\CoreBundle\Entity\Entry;
 
 abstract class WallabagImport extends AbstractImport
 {
-    protected $skippedEntries = 0;
-    protected $importedEntries = 0;
     protected $filepath;
     // untitled in all languages from v1
     protected $untitled = [

@@ -18,6 +18,8 @@ abstract class AbstractImport implements ImportInterface
     protected $producer;
     protected $user;
     protected $markAsRead;
+    protected $skippedEntries = 0;
+    protected $importedEntries = 0;
 
     public function __construct(EntityManager $em, ContentProxy $contentProxy)
     {

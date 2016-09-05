@@ -14,8 +14,6 @@ class PocketImport extends AbstractImport
 {
     private $client;
     private $consumerKey;
-    private $skippedEntries = 0;
-    private $importedEntries = 0;
     private $accessToken;
 
     const NB_ELEMENTS = 5000;

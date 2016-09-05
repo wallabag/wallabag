@@ -6,8 +6,6 @@ use Wallabag\CoreBundle\Entity\Entry;
 
 class ReadabilityImport extends AbstractImport
 {
-    private $skippedEntries = 0;
-    private $importedEntries = 0;
     private $filepath;
 
     /**
