@@ -139,14 +139,14 @@ entry:
         starred: 'Articles favorits'
         archived: 'Articles legits'
         filtered: 'Articles filtrats'
-        # filtered_tags: 'Filtered by tags'
-        # untagged: 'Untagged entries'
+        filtered_tags: 'Filtats per etiquetas'
+        untagged: 'Articles sens etiqueta'
     list:
         number_on_the_page: "{0} I a pas cap d'article.|{1} I a un article.|]1,Inf[ I a %count% articles."
         reading_time: 'durada de lectura'
         reading_time_minutes: 'durada de lectura : %readingTime% min'
         reading_time_less_one_minute: 'durada de lectura : <small class="inferieur">&lt;</small> 1 min'
-        # number_of_tags: '{1}and one other tag|]1,Inf[and %count% other tags'
+        number_of_tags: '{1}e una autra etiqueta|]1,Inf[e %count% autras etiquetas'
         reading_time_minutes_short: '%readingTime% min'
         reading_time_less_one_minute_short: '<small class="inferieur">&lt;</small> 1 min'
         original_article: 'original'
@@ -188,8 +188,8 @@ entry:
             add_a_tag: 'Ajustar una etiqueta'
             share_content: 'Partatjar'
             share_email_label: 'Corrièl'
-            # public_link: 'public link'
-            # delete_public_link: 'delete public link'
+            public_link: 'ligam public'
+            delete_public_link: 'suprimir lo ligam public'
             download: 'Telecargar'
             print: 'Imprimir'
             problem:
@@ -314,7 +314,7 @@ tag:
     page_title: 'Etiquetas'
     list:
         number_on_the_page: "{0} I a pas cap d'etiquetas.|{1} I a una etiqueta.|]1,Inf[ I a %count% etiquetas."
-        # see_untagged_entries: 'See untagged entries'
+        see_untagged_entries: "Afichar las entradas sens pas cap d'etiquetas"
 
 import:
     page_title: 'Importar'
@@ -327,7 +327,7 @@ import:
         file_label: 'Fichièr'
         save_label: 'Importar lo fichièr'
     pocket:
-        page_title: 'Importer > Pocket'
+        page_title: 'Importar > Pocket'
         description: "Aquesta aisina importarà totas vòstras donadas de Pocket. Pocket nos permet pas de recuperar lo contengut dempuèi lor servidor, alara wallabag deu tornar fulhetar cada article per recuperar son contengut."
         config_missing:
             description: "L'importacion dempuèi Pocket es pas configurada."
@@ -336,16 +336,16 @@ import:
         authorize_message: "Podètz importar vòstras donadas dempuèi vòstre compte Pocket. Vos cal pas que clicar sul boton çai-jos e autorizar wallabag a se connectar a getpocket.com."
         connect_to_pocket: 'Se connectar a Pocket e importar las donadas'
     wallabag_v1:
-        page_title: 'Importer > Wallabag v1'
+        page_title: 'Importar > Wallabag v1'
         description: 'Aquesta aisina importarà totas vòstras donadas de wallabag v1. Sus vòstre pagina de configuracion de wallabag v1, clicatz sus \"Export JSON\" dins la seccion \"Exportar vòstras donadas de wallabag\". Traparatz un fichièr \"wallabag-export-1-xxxx-xx-xx.json\".'
         how_to: "Causissètz lo fichièr de vòstra exportacion wallabag v1 e clicatz sul boton çai-jos per l'importar."
     wallabag_v2:
-        page_title: 'Importer > Wallabag v2'
+        page_title: 'Importar > Wallabag v2'
         description: "Aquesta aisina importarà totas vòstras donadas d'una instància mai de wallabag v2. Anatz dins totes vòstres articles, puèi, sus la barra laterala, clicatz sus \"JSON\". Traparatz un fichièr \"All articles.json\""
     readability:
         page_title: 'Importer > Readability'
-    #     description: 'This importer will import all your Readability articles. On the tools (https://www.readability.com/tools/) page, click on "Export your data" in the "Data Export" section. You will received an email to download a json (which does not end with .json in fact).'
-    #     how_to: 'Please select your Readability export and click on the below button to upload and import it.'
+        description: "Aquesta aisina importarà totas vòstres articles de Readability. Sus la pagina de l'aisina (https://www.readability.com/tools/), clicatz sus \"Export your data\" dins la seccion \"Data Export\". Recebretz un corrièl per telecargar un json (qu'acaba pas amb un .json de fach)."
+        how_to: "Mercés de seleccionar vòstre Readability fichièr e de clicar sul boton dejós per lo telecargar e l'importar."
 
 developer:
     page_title: 'Desvolopador'
@@ -353,7 +353,7 @@ developer:
     documentation: 'Documentacion'
     how_to_first_app: 'Cossí crear vòstra primièra aplicacion'
     full_documentation: "Veire la documentacion completa de l'API"
-    # list_methods: 'List API methods'
+    list_methods: "Lista dels metòdes de l'API"
     clients:
         title: 'Clients'
         create_new: 'Crear un novèl client'
@@ -385,7 +385,7 @@ developer:
     howto:
         page_title: 'Desvolopador > Cossí crear ma primièra aplicacion'
         description:
-            paragraph_1: "Las comandas seguentas utilizan la <a href=\"https://github.com/jkbrzt/httpie\">libraria HTTPie</a>. Asseguratz-vos que siasqueòu installadas abans de l'utilizar."
+            paragraph_1: "Las comandas seguentas utilizan la <a href=\"https://github.com/jkbrzt/httpie\">bibliotèca HTTPie</a>. Asseguratz-vos que siasqueòu installadas abans de l'utilizar."
             paragraph_2: "Vos cal un geton per escambiar entre vòstra aplicacion e l'API de wallabar."
             paragraph_3: 'Per crear un geton, vos cal crear <a href=\"%link%\">crear un novèl client</a>.'
             paragraph_4: 'Ara creatz un geton (remplaçar client_id, client_secret, username e password amb las bonas valors) :'
@@ -411,7 +411,7 @@ flashes:
         notice:
             entry_already_saved: 'Article ja salvargardat lo %date%'
             entry_saved: 'Article enregistrat'
-            # entry_saved_failed: 'Failed to save entry'
+            entry_saved_failed: "Fracàs de l'enregistrament de l'entrada"
             entry_updated: 'Article mes a jorn'
             entry_reloaded: 'Article recargat'
             entry_reload_failed: "Fracàs de l'actualizacion de l'article"
