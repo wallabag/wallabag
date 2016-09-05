@@ -10,8 +10,6 @@ use Wallabag\CoreBundle\Entity\Tag;
 
 class EntryRepository extends EntityRepository
 {
-    private $lifeTime;
-
     /**
      * Return a query builder to used by other getBuilderFor* method.
      *
