@@ -84,7 +84,9 @@ class TagController extends Controller
     {
         $tags = $this->getDoctrine()
             ->getRepository('WallabagCoreBundle:Tag')
-            ->findAllTags($this->getUser()->getId());
+            ->findAllTags($this->getUser()->getId())
+            ->getQuery()
+            ->getResult();
 
         return $this->render(
             'WallabagCoreBundle:Tag:tags.html.twig',

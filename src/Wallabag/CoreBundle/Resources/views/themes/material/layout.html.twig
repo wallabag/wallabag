@@ -47,7 +47,7 @@
                 <a class="waves-effect" href="{{ path('all') }}">{{ 'menu.left.all_articles'|trans }} <span class="numberItems grey-text">{{ count_entries('all') }}</span></a>
             </li>
             <li class="bold border-bottom {% if currentRoute == 'tags' %}active{% endif %}">
-                <a class="waves-effect" href="{{ path('tag') }}">{{ 'menu.left.tags'|trans }}</a>
+                <a class="waves-effect" href="{{ path('tag') }}">{{ 'menu.left.tags'|trans }} <span class="numberItems grey-text">{{ count_tags() }}</span></a>
             </li>
             <li class="bold {% if currentRoute == 'config' %}active{% endif %}">
                 <a class="waves-effect" href="{{ path('config') }}">{{ 'menu.left.config'|trans }}</a>

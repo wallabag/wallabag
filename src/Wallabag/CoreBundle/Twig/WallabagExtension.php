@@ -2,18 +2,24 @@
 
 namespace Wallabag\CoreBundle\Twig;
 
+use Doctrine\ORM\Query;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Wallabag\CoreBundle\Repository\EntryRepository;
+use Wallabag\CoreBundle\Repository\TagRepository;
 
 class WallabagExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
 {
     private $tokenStorage;
-    private $repository;
+    private $entryRepository;
+    private $tagRepository;
+    private $lifeTime;
 
-    public function __construct(EntryRepository $repository = null, TokenStorageInterface $tokenStorage = null)
+    public function __construct(EntryRepository $entryRepository = null, TagRepository $tagRepository = null, TokenStorageInterface $tokenStorage = null, $lifeTime = 0)
     {
-        $this->repository = $repository;
+        $this->entryRepository = $entryRepository;
+        $this->tagRepository = $tagRepository;
         $this->tokenStorage = $tokenStorage;
+        $this->lifeTime = $lifeTime;
     }
 
     public function getFilters()
@@ -27,6 +33,7 @@ class WallabagExtension extends \Twig_Extension implements \Twig_Extension_Globa
     {
         return array(
             new \Twig_SimpleFunction('count_entries', [$this, 'countEntries']),
+            new \Twig_SimpleFunction('count_tags', [$this, 'countTags']),
         );
     }
 
@@ -47,24 +54,24 @@ class WallabagExtension extends \Twig_Extension implements \Twig_Extension_Globa
         $user = $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null;
 
         if (null === $user || !is_object($user)) {
-            return [];
+            return 0;
         }
 
         switch ($type) {
             case 'starred':
-                $qb = $this->repository->getBuilderForStarredByUser($user->getId());
+                $qb = $this->entryRepository->getBuilderForStarredByUser($user->getId());
                 break;
 
             case 'archive':
-                $qb = $this->repository->getBuilderForArchiveByUser($user->getId());
+                $qb = $this->entryRepository->getBuilderForArchiveByUser($user->getId());
                 break;
 
             case 'unread':
-                $qb = $this->repository->getBuilderForUnreadByUser($user->getId());
+                $qb = $this->entryRepository->getBuilderForUnreadByUser($user->getId());
                 break;
 
             case 'all':
-                $qb = $this->repository->getBuilderForAllByUser($user->getId());
+                $qb = $this->entryRepository->getBuilderForAllByUser($user->getId());
                 break;
 
             default:
@@ -78,11 +85,47 @@ class WallabagExtension extends \Twig_Extension implements \Twig_Extension_Globa
             ->groupBy('e.id')
             ->getQuery();
 
-        $data = $this->repository
-            ->enableCache($query)
+        $data = $this->enableCache($query)
             ->getArrayResult();
 
         return count($data);
+    }
+
+    /**
+     * Return number of tags.
+     *
+     * @return int
+     */
+    public function countTags()
+    {
+        $user = $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null;
+
+        if (null === $user || !is_object($user)) {
+            return 0;
+        }
+
+        $qb = $this->tagRepository->findAllTags($user->getId());
+
+        $data = $this->enableCache($qb->getQuery())
+            ->getArrayResult();
+
+        return count($data);
+    }
+
+    /**
+     * Enable cache for a query.
+     *
+     * @param Query $query
+     *
+     * @return Query
+     */
+    private function enableCache(Query $query)
+    {
+        $query->useQueryCache(true);
+        $query->useResultCache(true);
+        $query->setResultCacheLifetime($this->lifeTime);
+
+        return $query;
     }
 
     public function getName()
