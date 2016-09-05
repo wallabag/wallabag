@@ -40,19 +40,13 @@ class WallabagV2Import extends WallabagImport
         ] + $entry;
     }
 
-    protected function parseEntriesForProducer($entries)
+    /**
+     * {@inheritdoc}
+     */
+    protected function setEntryAsRead(array $importedEntry)
     {
-        foreach ($entries as $importedEntry) {
-            // set userId for the producer (it won't know which user is connected)
-            $importedEntry['userId'] = $this->user->getId();
+        $importedEntry['is_archived'] = 1;
 
-            if ($this->markAsRead) {
-                $importedEntry['is_archived'] = 1;
-            }
-
-            ++$this->importedEntries;
-
-            $this->producer->publish(json_encode($importedEntry));
-        }
+        return $importedEntry;
     }
 }

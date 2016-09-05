@@ -7,7 +7,7 @@ use Psr\Log\NullLogger;
 use Doctrine\ORM\EntityManager;
 use Wallabag\CoreBundle\Helper\ContentProxy;
 use Wallabag\CoreBundle\Entity\Entry;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Wallabag\UserBundle\Entity\User;
 use OldSound\RabbitMqBundle\RabbitMq\Producer;
 
 abstract class AbstractImport implements ImportInterface
@@ -46,9 +46,9 @@ abstract class AbstractImport implements ImportInterface
      * Set current user.
      * Could the current *connected* user or one retrieve by the consumer.
      *
-     * @param UserInterface $user
+     * @param User $user
      */
-    public function setUser(UserInterface $user)
+    public function setUser(User $user)
     {
         $this->user = $user;
     }
@@ -120,6 +120,32 @@ abstract class AbstractImport implements ImportInterface
     }
 
     /**
+     * Parse entries and send them to the queue.
+     * It should just be a simple loop on all item, no call to the database should be done
+     * to speedup queuing.
+     *
+     * Faster parse entries for Producer.
+     * We don't care to make check at this time. They'll be done by the consumer.
+     *
+     * @param array $entries
+     */
+    protected function parseEntriesForProducer(array $entries)
+    {
+        foreach ($entries as $importedEntry) {
+            // set userId for the producer (it won't know which user is connected)
+            $importedEntry['userId'] = $this->user->getId();
+
+            if ($this->markAsRead) {
+                $importedEntry = $this->setEntryAsRead($importedEntry);
+            }
+
+            ++$this->importedEntries;
+
+            $this->producer->publish(json_encode($importedEntry));
+        }
+    }
+
+    /**
      * Parse one entry.
      *
      * @param array $importedEntry
@@ -127,4 +153,14 @@ abstract class AbstractImport implements ImportInterface
      * @return Entry
      */
     abstract public function parseEntry(array $importedEntry);
+
+    /**
+     * Set current imported entry to archived / read.
+     * Implementation is different accross all imports.
+     *
+     * @param array $importedEntry
+     *
+     * @return array
+     */
+    abstract protected function setEntryAsRead(array $importedEntry);
 }

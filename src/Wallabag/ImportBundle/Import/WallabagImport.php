@@ -3,11 +3,9 @@
 namespace Wallabag\ImportBundle\Import;
 
 use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\UserBundle\Entity\User;
 
 abstract class WallabagImport extends AbstractImport
 {
-    protected $user;
     protected $skippedEntries = 0;
     protected $importedEntries = 0;
     protected $filepath;

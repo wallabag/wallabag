@@ -3,7 +3,6 @@
 namespace Wallabag\ImportBundle\Import;
 
 use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\UserBundle\Entity\User;
 
 class ReadabilityImport extends AbstractImport
 {
@@ -136,31 +135,12 @@ class ReadabilityImport extends AbstractImport
     }
 
     /**
-     * Faster parse entries for Producer.
-     * We don't care to make check at this time. They'll be done by the consumer.
-     *
-     * @param array $entries
+     * {@inheritdoc}
      */
-    protected function parseEntriesForProducer($entries)
+    protected function setEntryAsRead(array $importedEntry)
     {
-        foreach ($entries as $importedEntry) {
-            // set userId for the producer (it won't know which user is connected)
-            $importedEntry['userId'] = $this->user->getId();
+        $importedEntry['archive'] = 1;
 
-            if ($this->markAsRead) {
-                $importedEntry['archive'] = 1;
-            }
-
-            ++$this->importedEntries;
-
-            // flush every 20 entries
-            if (($i % 20) === 0) {
-                $this->em->flush();
-            }
-            ++$i;
-        }
-
-        $this->em->flush();
-        $this->em->clear();
+        return $importedEntry;
     }
 }

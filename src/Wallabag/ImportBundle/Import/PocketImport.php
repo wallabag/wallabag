@@ -29,7 +29,7 @@ class PocketImport extends AbstractImport
     }
 
     /**
-     * Only used for test purpose
+     * Only used for test purpose.
      *
      * @return string
      */
@@ -258,24 +258,12 @@ class PocketImport extends AbstractImport
     }
 
     /**
-     * Faster parse entries for Producer.
-     * We don't care to make check at this time. They'll be done by the consumer.
-     *
-     * @param array $entries
+     * {@inheritdoc}
      */
-    public function parseEntriesForProducer($entries)
+    protected function setEntryAsRead(array $importedEntry)
     {
-        foreach ($entries as $importedEntry) {
-            // set userId for the producer (it won't know which user is connected)
-            $importedEntry['userId'] = $this->user->getId();
+        $importedEntry['status'] = 1;
 
-            if ($this->markAsRead) {
-                $importedEntry['status'] = 1;
-            }
-
-            ++$this->importedEntries;
-
-            $this->producer->publish(json_encode($importedEntry));
-        }
+        return $importedEntry;
     }
 }
