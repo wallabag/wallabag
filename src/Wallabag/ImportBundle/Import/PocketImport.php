@@ -16,7 +16,9 @@ class PocketImport extends AbstractImport
     private $consumerKey;
     private $skippedEntries = 0;
     private $importedEntries = 0;
-    protected $accessToken;
+    private $accessToken;
+
+    const NB_ELEMENTS = 5000;
 
     public function __construct(EntityManager $em, ContentProxy $contentProxy, Config $craueConfig)
     {
@@ -24,6 +26,16 @@ class PocketImport extends AbstractImport
         $this->contentProxy = $contentProxy;
         $this->consumerKey = $craueConfig->get('pocket_consumer_key');
         $this->logger = new NullLogger();
+    }
+
+    /**
+     * Only used for test purpose
+     *
+     * @return string
+     */
+    public function getAccessToken()
+    {
+        return $this->accessToken;
     }
 
     /**
@@ -114,8 +126,10 @@ class PocketImport extends AbstractImport
     /**
      * {@inheritdoc}
      */
-    public function import()
+    public function import($offset = 0)
     {
+        static $run = 0;
+
         $request = $this->client->createRequest('POST', 'https://getpocket.com/v3/get',
             [
                 'body' => json_encode([
@@ -123,7 +137,9 @@ class PocketImport extends AbstractImport
                     'access_token' => $this->accessToken,
                     'detailType' => 'complete',
                     'state' => 'all',
-                    'sort' => 'oldest',
+                    'sort' => 'newest',
+                    'count' => self::NB_ELEMENTS,
+                    'offset' => $offset,
                 ]),
             ]
         );
@@ -140,11 +156,20 @@ class PocketImport extends AbstractImport
 
         if ($this->producer) {
             $this->parseEntriesForProducer($entries['list']);
-
-            return true;
+        } else {
+            $this->parseEntries($entries['list']);
         }
 
-        $this->parseEntries($entries['list']);
+        // if we retrieve exactly the amount of items requested it means we can get more
+        // re-call import and offset item by the amount previous received:
+        //  - first call get 5k offset 0
+        //  - second call get 5k offset 5k
+        //  - and so on
+        if (count($entries['list']) === self::NB_ELEMENTS) {
+            ++$run;
+
+            return $this->import(self::NB_ELEMENTS * $run);
+        }
 
         return true;
     }

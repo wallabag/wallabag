@@ -12,14 +12,6 @@ use GuzzleHttp\Stream\Stream;
 use Monolog\Logger;
 use Monolog\Handler\TestHandler;
 
-class PocketImportMock extends PocketImport
-{
-    public function getAccessToken()
-    {
-        return $this->accessToken;
-    }
-}
-
 class PocketImportTest extends \PHPUnit_Framework_TestCase
 {
     protected $token;
@@ -49,7 +41,7 @@ class PocketImportTest extends \PHPUnit_Framework_TestCase
             ->with('pocket_consumer_key')
             ->willReturn($consumerKey);
 
-        $pocket = new PocketImportMock(
+        $pocket = new PocketImport(
             $this->em,
             $this->contentProxy,
             $config
