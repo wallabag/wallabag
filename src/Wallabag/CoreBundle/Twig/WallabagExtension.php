@@ -54,7 +54,7 @@ class WallabagExtension extends \Twig_Extension implements \Twig_Extension_Globa
         $user = $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null;
 
         if (null === $user || !is_object($user)) {
-            return [];
+            return 0;
         }
 
         switch ($type) {
@@ -101,7 +101,7 @@ class WallabagExtension extends \Twig_Extension implements \Twig_Extension_Globa
         $user = $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null;
 
         if (null === $user || !is_object($user)) {
-            return [];
+            return 0;
         }
 
         $qb = $this->tagRepository->findAllTags($user->getId());
