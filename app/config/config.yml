@@ -178,6 +178,8 @@ fos_user:
     db_driver: orm
     firewall_name: secured_area
     user_class: Wallabag\UserBundle\Entity\User
+    group:
+        group_class: Wallabag\UserBundle\Entity\Group
     registration:
         confirmation:
             enabled: "%fosuser_confirmation%"
