@@ -34,7 +34,6 @@ class TagRepository extends EntityRepository
             ->getResult();
     }
 
-
     /**
      * Used only in test case to get a tag for our entry.
      *
