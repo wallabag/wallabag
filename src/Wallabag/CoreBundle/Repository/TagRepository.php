@@ -7,17 +7,29 @@ use Doctrine\ORM\EntityRepository;
 class TagRepository extends EntityRepository
 {
     /**
-     * Find Tags.
+     * Find Tags by user.
      *
      * @param int $userId
      *
      * @return array
      */
-    public function findAllTags($userId)
+    public function findAllTagsByUser($userId)
     {
         return $this->createQueryBuilder('t')
             ->leftJoin('t.entries', 'e')
             ->where('e.user = :userId')->setParameter('userId', $userId)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * Find all Tags.
+     *
+     * @return array
+     */
+    public function findAllTags()
+    {
+        return $this->createQueryBuilder('t')
             ->getQuery()
             ->getResult();
     }
