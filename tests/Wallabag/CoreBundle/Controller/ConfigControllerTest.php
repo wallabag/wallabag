@@ -570,4 +570,89 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $config->set('demo_mode_enabled', 0);
         $config->set('demo_mode_username', 'wallabag');
     }
+
+    public function testDeleteUserButtonVisibility()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/config');
+
+        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
+        $this->assertContains('config.form_user.delete_account', $body[0]);
+
+        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+
+        $user = $em
+            ->getRepository('WallabagUserBundle:User')
+            ->findOneByUsername('wallace');
+        $user->setExpired(1);
+        $em->persist($user);
+
+        $user = $em
+            ->getRepository('WallabagUserBundle:User')
+            ->findOneByUsername('empty');
+        $user->setExpired(1);
+        $em->persist($user);
+
+        $user = $em
+            ->getRepository('WallabagUserBundle:User')
+            ->findOneByUsername('bob');
+        $user->setExpired(1);
+        $em->persist($user);
+
+        $em->flush();
+
+        $crawler = $client->request('GET', '/config');
+
+        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
+        $this->assertNotContains('config.form_user.delete_account', $body[0]);
+
+        $client->request('GET', '/account/delete');
+        $this->assertEquals(403, $client->getResponse()->getStatusCode());
+
+        $user = $em
+            ->getRepository('WallabagUserBundle:User')
+            ->findOneByUsername('wallace');
+        $user->setExpired(0);
+        $em->persist($user);
+
+        $user = $em
+            ->getRepository('WallabagUserBundle:User')
+            ->findOneByUsername('empty');
+        $user->setExpired(0);
+        $em->persist($user);
+
+        $user = $em
+            ->getRepository('WallabagUserBundle:User')
+            ->findOneByUsername('bob');
+        $user->setExpired(0);
+        $em->persist($user);
+
+        $em->flush();
+    }
+
+    public function testDeleteAccount()
+    {
+        $this->logInAs('wallace');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/config');
+
+        $deleteLink = $crawler->filter('.red')->last()->link();
+
+        $client->click($deleteLink);
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+
+        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+        $user = $em
+            ->getRepository('WallabagUserBundle:User')
+            ->createQueryBuilder('u')
+            ->where('u.username = :username')->setParameter('username', 'wallace')
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+
+        $this->assertTrue(false !== $user);
+    }
 }
