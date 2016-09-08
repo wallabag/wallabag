@@ -298,7 +298,7 @@ class EntriesExport
         $enclosure = '"';
         $handle = fopen('php://memory', 'rb+');
 
-        fputcsv($handle, ['Title', 'URL', 'Content', 'Tags', 'MIME Type', 'Language'], $delimiter, $enclosure);
+        fputcsv($handle, ['Title', 'URL', 'Content', 'Tags', 'MIME Type', 'Language', 'Creation date'], $delimiter, $enclosure);
 
         foreach ($this->entries as $entry) {
             fputcsv(
@@ -311,6 +311,7 @@ class EntriesExport
                     implode(', ', $entry->getTags()->toArray()),
                     $entry->getMimetype(),
                     $entry->getLanguage(),
+                    $entry->getCreatedAt()->format('d/m/Y h:i:s'),
                 ],
                 $delimiter,
                 $enclosure

@@ -168,7 +168,7 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertGreaterThan(1, $csv);
         // +1 for title line
         $this->assertEquals(count($contentInDB) + 1, count($csv));
-        $this->assertEquals('Title;URL;Content;Tags;"MIME Type";Language', $csv[0]);
+        $this->assertEquals('Title;URL;Content;Tags;"MIME Type";Language;"Creation date"', $csv[0]);
     }
 
     public function testJsonExport()
@@ -210,6 +210,8 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertArrayHasKey('reading_time', $content[0]);
         $this->assertArrayHasKey('domain_name', $content[0]);
         $this->assertArrayHasKey('tags', $content[0]);
+        $this->assertArrayHasKey('created_at', $content[0]);
+        $this->assertArrayHasKey('updated_at', $content[0]);
     }
 
     public function testXmlExport()
@@ -247,5 +249,7 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertNotEmpty('url', (string) $content->entry[0]->url);
         $this->assertNotEmpty('content', (string) $content->entry[0]->content);
         $this->assertNotEmpty('domain_name', (string) $content->entry[0]->domain_name);
+        $this->assertNotEmpty('created_at', (string) $content->entry[0]->created_at);
+        $this->assertNotEmpty('updated_at', (string) $content->entry[0]->updated_at);
     }
 }
