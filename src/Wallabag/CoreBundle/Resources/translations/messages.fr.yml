@@ -88,6 +88,7 @@ config:
         name_label: 'Nom'
         email_label: 'Adresse e-mail'
         twoFactorAuthentication_label: 'Double authentification'
+        delete_account: 'Supprimer mon compte'
     form_password:
         old_password_label: 'Mot de passe actuel'
         new_password_label: 'Nouveau mot de passe'

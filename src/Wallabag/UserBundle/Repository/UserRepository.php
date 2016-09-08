@@ -38,4 +38,18 @@ class UserRepository extends EntityRepository
             ->getQuery()
             ->getSingleResult();
     }
+
+    /**
+     * Count how many users are enabled.
+     *
+     * @return int
+     */
+    public function getSumEnabledUsers()
+    {
+        return $this->createQueryBuilder('u')
+            ->select('count(u)')
+            ->andWhere('u.expired = 0')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }

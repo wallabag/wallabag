@@ -88,6 +88,7 @@ config:
         name_label: 'İsim'
         email_label: 'E-posta'
         twoFactorAuthentication_label: 'İki adımlı doğrulama'
+        # delete_account: 'Delete my account'
     form_password:
         old_password_label: 'Eski şifre'
         new_password_label: 'Yeni şifre'

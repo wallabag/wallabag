@@ -88,6 +88,7 @@ config:
         name_label: 'Name'
         email_label: 'E-Mail-Adresse'
         twoFactorAuthentication_label: 'Zwei-Faktor-Authentifizierung'
+        # delete_account: 'Delete my account'
     form_password:
         old_password_label: 'Altes Kennwort'
         new_password_label: 'Neues Kennwort'

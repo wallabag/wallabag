@@ -148,6 +148,9 @@
 
         {{ form_widget(form.user._token) }}
         {{ form_widget(form.user.save) }}
+        {% if enabled_users > 1 %}
+            <a class='btn red' href='{{ path('delete_account') }}'>{{ 'config.form_user.delete_account' | trans }}</a>
+        {% endif %}
     </form>
 
     <h2>{{ 'config.tab_menu.password'|trans }}</h2>

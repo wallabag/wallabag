@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\TaggingRule;
 use Wallabag\CoreBundle\Form\Type\ConfigType;
@@ -148,6 +149,9 @@ class ConfigController extends Controller
                 'token' => $config->getRssToken(),
             ],
             'twofactor_auth' => $this->getParameter('twofactor_auth'),
+            'enabled_users' => $this->getDoctrine()
+                ->getRepository('WallabagUserBundle:User')
+                ->getSumEnabledUsers(),
         ]);
     }
 
@@ -257,10 +261,20 @@ class ConfigController extends Controller
       *
       * @Route("/account/delete", name="delete_account")
       *
+      * @throws AccessDeniedHttpException
+      *
       * @return \Symfony\Component\HttpFoundation\RedirectResponse
       */
      public function deleteAccountAction()
      {
+         $enabledUsers = $this->getDoctrine()
+             ->getRepository('WallabagUserBundle:User')
+             ->getSumEnabledUsers();
+
+         if ($enabledUsers <= 1) {
+             throw new AccessDeniedHttpException();
+         }
+
          $em = $this->get('fos_user.user_manager');
          $em->deleteUser($this->getUser());
 

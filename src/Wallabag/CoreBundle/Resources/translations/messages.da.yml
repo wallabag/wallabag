@@ -88,6 +88,7 @@ config:
         name_label: 'Navn'
         email_label: 'Emailadresse'
         # twoFactorAuthentication_label: 'Two factor authentication'
+        # delete_account: 'Delete my account'
     form_password:
         old_password_label: 'Gammel adgangskode'
         new_password_label: 'Ny adgangskode'
