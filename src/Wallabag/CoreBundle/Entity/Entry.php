@@ -101,7 +101,7 @@ class Entry
      *
      * @ORM\Column(name="created_at", type="datetime")
      *
-     * @Groups({"export_all"})
+     * @Groups({"entries_for_user", "export_all"})
      */
     private $createdAt;
 
@@ -110,7 +110,7 @@ class Entry
      *
      * @ORM\Column(name="updated_at", type="datetime")
      *
-     * @Groups({"export_all"})
+     * @Groups({"entries_for_user", "export_all"})
      */
     private $updatedAt;
 
