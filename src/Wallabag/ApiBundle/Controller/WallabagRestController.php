@@ -7,7 +7,7 @@ use Hateoas\Configuration\Route;
 use Hateoas\Representation\Factory\PagerfantaFactory;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Wallabag\CoreBundle\Entity\Entry;
@@ -38,7 +38,7 @@ class WallabagRestController extends FOSRestController
      *       }
      * )
      *
-     * @return Response
+     * @return JsonResponse
      */
     public function getEntriesAction(Request $request)
     {
@@ -68,7 +68,7 @@ class WallabagRestController extends FOSRestController
 
         $json = $this->get('serializer')->serialize($paginatedCollection, 'json');
 
-        return $this->renderJsonResponse($json);
+        return (new JsonResponse())->setJson($json);
     }
 
     /**
@@ -80,7 +80,7 @@ class WallabagRestController extends FOSRestController
      *      }
      * )
      *
-     * @return Response
+     * @return JsonResponse
      */
     public function getEntryAction(Entry $entry)
     {
@@ -89,7 +89,7 @@ class WallabagRestController extends FOSRestController
 
         $json = $this->get('serializer')->serialize($entry, 'json');
 
-        return $this->renderJsonResponse($json);
+        return (new JsonResponse())->setJson($json);
     }
 
     /**
@@ -105,7 +105,7 @@ class WallabagRestController extends FOSRestController
      *       }
      * )
      *
-     * @return Response
+     * @return JsonResponse
      */
     public function postEntriesAction(Request $request)
     {
@@ -149,7 +149,7 @@ class WallabagRestController extends FOSRestController
 
         $json = $this->get('serializer')->serialize($entry, 'json');
 
-        return $this->renderJsonResponse($json);
+        return (new JsonResponse())->setJson($json);
     }
 
     /**
@@ -167,7 +167,7 @@ class WallabagRestController extends FOSRestController
      *      }
      * )
      *
-     * @return Response
+     * @return JsonResponse
      */
     public function patchEntriesAction(Entry $entry, Request $request)
     {
@@ -200,7 +200,7 @@ class WallabagRestController extends FOSRestController
 
         $json = $this->get('serializer')->serialize($entry, 'json');
 
-        return $this->renderJsonResponse($json);
+        return (new JsonResponse())->setJson($json);
     }
 
     /**
@@ -212,7 +212,7 @@ class WallabagRestController extends FOSRestController
      *      }
      * )
      *
-     * @return Response
+     * @return JsonResponse
      */
     public function deleteEntriesAction(Entry $entry)
     {
@@ -225,7 +225,7 @@ class WallabagRestController extends FOSRestController
 
         $json = $this->get('serializer')->serialize($entry, 'json');
 
-        return $this->renderJsonResponse($json);
+        return (new JsonResponse())->setJson($json);
     }
 
     /**
@@ -237,7 +237,7 @@ class WallabagRestController extends FOSRestController
      *      }
      * )
      *
-     * @return Response
+     * @return JsonResponse
      */
     public function getEntriesTagsAction(Entry $entry)
     {
@@ -246,7 +246,7 @@ class WallabagRestController extends FOSRestController
 
         $json = $this->get('serializer')->serialize($entry->getTags(), 'json');
 
-        return $this->renderJsonResponse($json);
+        return (new JsonResponse())->setJson($json);
     }
 
     /**
@@ -261,7 +261,7 @@ class WallabagRestController extends FOSRestController
      *       }
      * )
      *
-     * @return Response
+     * @return JsonResponse
      */
     public function postEntriesTagsAction(Request $request, Entry $entry)
     {
@@ -279,7 +279,7 @@ class WallabagRestController extends FOSRestController
 
         $json = $this->get('serializer')->serialize($entry, 'json');
 
-        return $this->renderJsonResponse($json);
+        return (new JsonResponse())->setJson($json);
     }
 
     /**
@@ -292,7 +292,7 @@ class WallabagRestController extends FOSRestController
      *      }
      * )
      *
-     * @return Response
+     * @return JsonResponse
      */
     public function deleteEntriesTagsAction(Entry $entry, Tag $tag)
     {
@@ -306,7 +306,7 @@ class WallabagRestController extends FOSRestController
 
         $json = $this->get('serializer')->serialize($entry, 'json');
 
-        return $this->renderJsonResponse($json);
+        return (new JsonResponse())->setJson($json);
     }
 
     /**
@@ -314,7 +314,7 @@ class WallabagRestController extends FOSRestController
      *
      * @ApiDoc()
      *
-     * @return Response
+     * @return JsonResponse
      */
     public function getTagsAction()
     {
@@ -328,7 +328,7 @@ class WallabagRestController extends FOSRestController
 
         $json = $this->get('serializer')->serialize($tags, 'json');
 
-        return $this->renderJsonResponse($json);
+        return (new JsonResponse())->setJson($json);
     }
 
     /**
@@ -340,7 +340,7 @@ class WallabagRestController extends FOSRestController
      *      }
      * )
      *
-     * @return Response
+     * @return JsonResponse
      */
     public function deleteTagLabelAction(Request $request)
     {
@@ -359,7 +359,7 @@ class WallabagRestController extends FOSRestController
 
         $json = $this->get('serializer')->serialize($tag, 'json');
 
-        return $this->renderJsonResponse($json);
+        return (new JsonResponse())->setJson($json);
     }
 
     /**
@@ -371,7 +371,7 @@ class WallabagRestController extends FOSRestController
      *      }
      * )
      *
-     * @return Response
+     * @return JsonResponse
      */
     public function deleteTagsLabelAction(Request $request)
     {
@@ -399,7 +399,7 @@ class WallabagRestController extends FOSRestController
 
         $json = $this->get('serializer')->serialize($tags, 'json');
 
-        return $this->renderJsonResponse($json);
+        return (new JsonResponse())->setJson($json);
     }
 
     /**
@@ -411,7 +411,7 @@ class WallabagRestController extends FOSRestController
      *      }
      * )
      *
-     * @return Response
+     * @return JsonResponse
      */
     public function deleteTagAction(Tag $tag)
     {
@@ -423,7 +423,7 @@ class WallabagRestController extends FOSRestController
 
         $json = $this->get('serializer')->serialize($tag, 'json');
 
-        return $this->renderJsonResponse($json);
+        return (new JsonResponse())->setJson($json);
     }
 
     /**
@@ -431,7 +431,7 @@ class WallabagRestController extends FOSRestController
      *
      * @ApiDoc()
      *
-     * @return Response
+     * @return JsonResponse
      */
     public function getVersionAction()
     {
@@ -439,7 +439,7 @@ class WallabagRestController extends FOSRestController
 
         $json = $this->get('serializer')->serialize($version, 'json');
 
-        return $this->renderJsonResponse($json);
+        return (new JsonResponse())->setJson($json);
     }
 
     /**
@@ -454,18 +454,5 @@ class WallabagRestController extends FOSRestController
         if ($requestUserId != $user->getId()) {
             throw $this->createAccessDeniedException('Access forbidden. Entry user id: '.$requestUserId.', logged user id: '.$user->getId());
         }
-    }
-
-    /**
-     * Send a JSON Response.
-     * We don't use the Symfony JsonRespone, because it takes an array as parameter instead of a JSON string.
-     *
-     * @param string $json
-     *
-     * @return Response
-     */
-    private function renderJsonResponse($json)
-    {
-        return new Response($json, 200, ['application/json']);
     }
 }
