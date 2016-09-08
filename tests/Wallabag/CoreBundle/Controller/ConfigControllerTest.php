@@ -639,7 +639,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/config');
 
-        $deleteLink = $crawler->filter('.red')->last()->link();
+        $deleteLink = $crawler->filter('.delete-account')->last()->link();
 
         $client->click($deleteLink);
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
@@ -653,6 +653,6 @@ class ConfigControllerTest extends WallabagCoreTestCase
             ->getOneOrNullResult()
         ;
 
-        $this->assertTrue(false !== $user);
+        $this->assertNull($user);
     }
 }
