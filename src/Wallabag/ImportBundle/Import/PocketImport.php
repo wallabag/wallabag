@@ -254,6 +254,10 @@ class PocketImport extends AbstractImport
             );
         }
 
+        if (!empty($importedEntry['time_added'])) {
+            $entry->setCreatedAt((new \DateTime())->setTimestamp($importedEntry['time_added']));
+        }
+
         $this->em->persist($entry);
         ++$this->importedEntries;
 
