@@ -343,6 +343,87 @@ class PocketImportTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(['skipped' => 0, 'imported' => 2], $pocketImport->getSummary());
     }
 
+    /**
+     * Will sample results from https://getpocket.com/developer/docs/v3/retrieve.
+     */
+    public function testImportWithRabbit()
+    {
+        $client = new Client();
+
+        $body = <<<'JSON'
+{
+    "item_id": "229279689",
+    "resolved_id": "229279689",
+    "given_url": "http://www.grantland.com/blog/the-triangle/post/_/id/38347/ryder-cup-preview",
+    "given_title": "The Massive Ryder Cup Preview - The Triangle Blog - Grantland",
+    "favorite": "1",
+    "status": "1",
+    "resolved_title": "The Massive Ryder Cup Preview",
+    "resolved_url": "http://www.grantland.com/blog/the-triangle/post/_/id/38347/ryder-cup-preview",
+    "excerpt": "The list of things I love about the Ryder Cup is so long that it could fill a (tedious) novel, and golf fans can probably guess most of them.",
+    "is_article": "1",
+    "has_video": "0",
+    "has_image": "0",
+    "word_count": "3197"
+}
+JSON;
+
+        $mock = new Mock([
+            new Response(200, ['Content-Type' => 'application/json'], Stream::factory(json_encode(['access_token' => 'wunderbar_token']))),
+            new Response(200, ['Content-Type' => 'application/json'], Stream::factory('
+                {
+                    "status": 1,
+                    "list": {
+                        "229279690": '.$body.'
+                    }
+                }
+            ')),
+        ]);
+
+        $client->getEmitter()->attach($mock);
+
+        $pocketImport = $this->getPocketImport();
+
+        $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $entryRepo->expects($this->never())
+            ->method('findByUrlAndUserId');
+
+        $this->em
+            ->expects($this->never())
+            ->method('getRepository');
+
+        $entry = new Entry($this->user);
+
+        $this->contentProxy
+            ->expects($this->never())
+            ->method('updateEntry');
+
+        $producer = $this->getMockBuilder('OldSound\RabbitMqBundle\RabbitMq\Producer')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $bodyAsArray = json_decode($body, true);
+        // because with just use `new User()` so it doesn't have an id
+        $bodyAsArray['userId'] = null;
+
+        $producer
+            ->expects($this->once())
+            ->method('publish')
+            ->with(json_encode($bodyAsArray));
+
+        $pocketImport->setClient($client);
+        $pocketImport->setRabbitmqProducer($producer);
+        $pocketImport->authorize('wunderbar_code');
+
+        $res = $pocketImport->setMarkAsRead(true)->import();
+
+        $this->assertTrue($res);
+        $this->assertEquals(['skipped' => 0, 'imported' => 1], $pocketImport->getSummary());
+    }
+
     public function testImportBadResponse()
     {
         $client = new Client();

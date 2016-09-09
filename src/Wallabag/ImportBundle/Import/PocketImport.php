@@ -265,7 +265,7 @@ class PocketImport extends AbstractImport
      */
     protected function setEntryAsRead(array $importedEntry)
     {
-        $importedEntry['status'] = 1;
+        $importedEntry['status'] = '1';
 
         return $importedEntry;
     }

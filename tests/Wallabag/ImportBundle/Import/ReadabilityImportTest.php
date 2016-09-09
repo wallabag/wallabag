@@ -120,6 +120,46 @@ class ReadabilityImportTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(['skipped' => 0, 'imported' => 2], $readabilityImport->getSummary());
     }
 
+    public function testImportWithRabbit()
+    {
+        $readabilityImport = $this->getReadabilityImport();
+        $readabilityImport->setFilepath(__DIR__.'/../fixtures/readability.json');
+
+        $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $entryRepo->expects($this->never())
+            ->method('findByUrlAndUserId');
+
+        $this->em
+            ->expects($this->never())
+            ->method('getRepository');
+
+        $entry = $this->getMockBuilder('Wallabag\CoreBundle\Entity\Entry')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->contentProxy
+            ->expects($this->never())
+            ->method('updateEntry');
+
+        $producer = $this->getMockBuilder('OldSound\RabbitMqBundle\RabbitMq\Producer')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $producer
+            ->expects($this->exactly(2))
+            ->method('publish');
+
+        $readabilityImport->setRabbitmqProducer($producer);
+
+        $res = $readabilityImport->setMarkAsRead(true)->import();
+
+        $this->assertTrue($res);
+        $this->assertEquals(['skipped' => 0, 'imported' => 2], $readabilityImport->getSummary());
+    }
+
     public function testImportBadFile()
     {
         $readabilityImport = $this->getReadabilityImport();

@@ -116,6 +116,42 @@ class WallabagV2ImportTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(['skipped' => 0, 'imported' => 2], $wallabagV2Import->getSummary());
     }
 
+    public function testImportWithRabbit()
+    {
+        $wallabagV2Import = $this->getWallabagV2Import();
+        $wallabagV2Import->setFilepath(__DIR__.'/../fixtures/wallabag-v2.json');
+
+        $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $entryRepo->expects($this->never())
+            ->method('findByUrlAndUserId');
+
+        $this->em
+            ->expects($this->never())
+            ->method('getRepository');
+
+        $this->contentProxy
+            ->expects($this->never())
+            ->method('updateEntry');
+
+        $producer = $this->getMockBuilder('OldSound\RabbitMqBundle\RabbitMq\Producer')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $producer
+            ->expects($this->exactly(24))
+            ->method('publish');
+
+        $wallabagV2Import->setRabbitmqProducer($producer);
+
+        $res = $wallabagV2Import->setMarkAsRead(true)->import();
+
+        $this->assertTrue($res);
+        $this->assertEquals(['skipped' => 0, 'imported' => 24], $wallabagV2Import->getSummary());
+    }
+
     public function testImportBadFile()
     {
         $wallabagV1Import = $this->getWallabagV2Import();
