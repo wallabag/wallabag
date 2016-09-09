@@ -97,7 +97,7 @@ class Entry
     private $content;
 
     /**
-     * @var date
+     * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime")
      *
@@ -106,7 +106,7 @@ class Entry
     private $createdAt;
 
     /**
-     * @var date
+     * @var \DateTime
      *
      * @ORM\Column(name="updated_at", type="datetime")
      *
@@ -413,7 +413,7 @@ class Entry
      * Set created_at.
      * Only used when importing data from an other service.
      *
-     * @param DateTime $createdAt
+     * @param \DateTime $createdAt
      *
      * @return Entry
      */
@@ -425,7 +425,7 @@ class Entry
     }
 
     /**
-     * @return DateTime
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -433,7 +433,7 @@ class Entry
     }
 
     /**
-     * @return DateTime
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {

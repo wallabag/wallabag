@@ -7,6 +7,7 @@ use Psr\Log\NullLogger;
 use Doctrine\ORM\EntityManager;
 use Wallabag\CoreBundle\Helper\ContentProxy;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\UserBundle\Entity\User;
 use OldSound\RabbitMqBundle\RabbitMq\Producer;
 
@@ -113,7 +114,10 @@ abstract class AbstractImport implements ImportInterface
             // flush every 20 entries
             if (($i % 20) === 0) {
                 $this->em->flush();
-                $this->em->clear($entry);
+
+                // clear only affected entities
+                $this->em->clear(Entry::class);
+                $this->em->clear(Tag::class);
             }
             ++$i;
         }

@@ -7,6 +7,8 @@ use OldSound\RabbitMqBundle\RabbitMq\ConsumerInterface;
 use PhpAmqpLib\Message\AMQPMessage;
 use Wallabag\ImportBundle\Import\AbstractImport;
 use Wallabag\UserBundle\Repository\UserRepository;
+use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\CoreBundle\Entity\Tag;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 
@@ -53,7 +55,10 @@ class EntryConsumer implements ConsumerInterface
 
         try {
             $this->em->flush();
-            $this->em->clear($entry);
+
+            // clear only affected entities
+            $this->em->clear(Entry::class);
+            $this->em->clear(Tag::class);
         } catch (\Exception $e) {
             $this->logger->warning('Unable to save entry', ['entry' => $storedEntry, 'exception' => $e]);
 
