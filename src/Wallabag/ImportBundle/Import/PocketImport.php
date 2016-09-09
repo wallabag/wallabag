@@ -193,6 +193,11 @@ class PocketImport extends AbstractImport
         $this->client = $client;
     }
 
+    /**
+     * {@inheritdoc}
+     *
+     * @see https://getpocket.com/developer/docs/v3/retrieve
+     */
     public function parseEntry(array $importedEntry)
     {
         $url = isset($importedEntry['resolved_url']) && $importedEntry['resolved_url'] != '' ? $importedEntry['resolved_url'] : $importedEntry['given_url'];

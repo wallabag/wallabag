@@ -89,6 +89,9 @@ class ReadabilityImport extends AbstractImport
         return true;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function parseEntry(array $importedEntry)
     {
         $existingEntry = $this->em
@@ -108,6 +111,7 @@ class ReadabilityImport extends AbstractImport
             'language' => '',
             'is_archived' => $importedEntry['archive'] || $this->markAsRead,
             'is_starred' => $importedEntry['favorite'],
+            'created_at' => $importedEntry['date_added'],
         ];
 
         $entry = $this->fetchContent(
@@ -125,6 +129,7 @@ class ReadabilityImport extends AbstractImport
 
         $entry->setArchived($data['is_archived']);
         $entry->setStarred($data['is_starred']);
+        $entry->setCreatedAt(new \DateTime($data['created_at']));
 
         $this->em->persist($entry);
         ++$this->importedEntries;

@@ -42,6 +42,7 @@ class WallabagV1Import extends WallabagImport
             'is_archived' => $entry['is_read'] || $this->markAsRead,
             'is_starred' => $entry['is_fav'],
             'tags' => '',
+            'created_at' => '',
         ];
 
         // force content to be refreshed in case on bad fetch in the v1 installation

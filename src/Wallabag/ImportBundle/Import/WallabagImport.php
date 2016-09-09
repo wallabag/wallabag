@@ -139,6 +139,10 @@ abstract class WallabagImport extends AbstractImport
         $entry->setArchived($data['is_archived']);
         $entry->setStarred($data['is_starred']);
 
+        if (!empty($data['created_at'])) {
+            $entry->setCreatedAt(new \DateTime($data['created_at']));
+        }
+
         $this->em->persist($entry);
         ++$this->importedEntries;
 

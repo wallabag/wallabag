@@ -410,7 +410,22 @@ class Entry
     }
 
     /**
-     * @return string
+     * Set created_at.
+     * Only used when importing data from an other service.
+     *
+     * @param DateTime $createdAt
+     *
+     * @return Entry
+     */
+    public function setCreatedAt(\DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * @return DateTime
      */
     public function getCreatedAt()
     {
@@ -418,7 +433,7 @@ class Entry
     }
 
     /**
-     * @return string
+     * @return DateTime
      */
     public function getUpdatedAt()
     {

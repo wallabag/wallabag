@@ -67,6 +67,8 @@ class WallabagV2ControllerTest extends WallabagCoreTestCase
         $this->assertNotEmpty($content->getPreviewPicture());
         $this->assertNotEmpty($content->getLanguage());
         $this->assertEquals(2, count($content->getTags()));
+        $this->assertInstanceOf(\DateTime::class, $content->getCreatedAt());
+        $this->assertEquals('2016-09-08', $content->getCreatedAt()->format('Y-m-d'));
     }
 
     public function testImportWallabagWithEmptyFile()
