@@ -637,6 +637,20 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $this->logInAs('wallace');
         $client = $this->getClient();
 
+        // create entry to check after user deletion
+        // that this entry is also deleted
+        $crawler = $client->request('GET', '/new');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $form = $crawler->filter('form[name=entry]')->form();
+        $data = [
+            'entry[url]' => $url = 'https://github.com/wallabag/wallabag',
+        ];
+
+        $client->submit($form, $data);
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+
         $crawler = $client->request('GET', '/config');
 
         $deleteLink = $crawler->filter('.delete-account')->last()->link();
@@ -654,5 +668,12 @@ class ConfigControllerTest extends WallabagCoreTestCase
         ;
 
         $this->assertNull($user);
+
+        $entries = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findByUser($this->getLoggedInUserId());
+
+        $this->assertEmpty($entries);
     }
 }
