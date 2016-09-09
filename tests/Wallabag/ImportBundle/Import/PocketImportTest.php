@@ -9,8 +9,11 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Subscriber\Mock;
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Stream\Stream;
+use Wallabag\ImportBundle\Redis\Producer;
 use Monolog\Logger;
 use Monolog\Handler\TestHandler;
+use Simpleue\Queue\RedisQueue;
+use M6Web\Component\RedisMock\RedisMockFactory;
 
 class PocketImportTest extends \PHPUnit_Framework_TestCase
 {
@@ -442,13 +445,94 @@ JSON;
             ->with(json_encode($bodyAsArray));
 
         $pocketImport->setClient($client);
-        $pocketImport->setRabbitmqProducer($producer);
+        $pocketImport->setProducer($producer);
         $pocketImport->authorize('wunderbar_code');
 
         $res = $pocketImport->setMarkAsRead(true)->import();
 
         $this->assertTrue($res);
         $this->assertEquals(['skipped' => 0, 'imported' => 1], $pocketImport->getSummary());
+    }
+
+    /**
+     * Will sample results from https://getpocket.com/developer/docs/v3/retrieve.
+     */
+    public function testImportWithRedis()
+    {
+        $client = new Client();
+
+        $body = <<<'JSON'
+{
+    "item_id": "229279689",
+    "resolved_id": "229279689",
+    "given_url": "http://www.grantland.com/blog/the-triangle/post/_/id/38347/ryder-cup-preview",
+    "given_title": "The Massive Ryder Cup Preview - The Triangle Blog - Grantland",
+    "favorite": "1",
+    "status": "1",
+    "time_added": "1473020899",
+    "time_updated": "1473020899",
+    "time_read": "0",
+    "time_favorited": "0",
+    "sort_id": 0,
+    "resolved_title": "The Massive Ryder Cup Preview",
+    "resolved_url": "http://www.grantland.com/blog/the-triangle/post/_/id/38347/ryder-cup-preview",
+    "excerpt": "The list of things I love about the Ryder Cup is so long that it could fill a (tedious) novel, and golf fans can probably guess most of them.",
+    "is_article": "1",
+    "has_video": "0",
+    "has_image": "0",
+    "word_count": "3197"
+}
+JSON;
+
+        $mock = new Mock([
+            new Response(200, ['Content-Type' => 'application/json'], Stream::factory(json_encode(['access_token' => 'wunderbar_token']))),
+            new Response(200, ['Content-Type' => 'application/json'], Stream::factory('
+                {
+                    "status": 1,
+                    "list": {
+                        "229279690": '.$body.'
+                    }
+                }
+            ')),
+        ]);
+
+        $client->getEmitter()->attach($mock);
+
+        $pocketImport = $this->getPocketImport();
+
+        $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $entryRepo->expects($this->never())
+            ->method('findByUrlAndUserId');
+
+        $this->em
+            ->expects($this->never())
+            ->method('getRepository');
+
+        $entry = new Entry($this->user);
+
+        $this->contentProxy
+            ->expects($this->never())
+            ->method('updateEntry');
+
+        $factory = new RedisMockFactory();
+        $redisMock = $factory->getAdapter('Predis\Client', true);
+
+        $queue = new RedisQueue($redisMock, 'pocket');
+        $producer = new Producer($queue);
+
+        $pocketImport->setClient($client);
+        $pocketImport->setProducer($producer);
+        $pocketImport->authorize('wunderbar_code');
+
+        $res = $pocketImport->setMarkAsRead(true)->import();
+
+        $this->assertTrue($res);
+        $this->assertEquals(['skipped' => 0, 'imported' => 1], $pocketImport->getSummary());
+
+        $this->assertNotEmpty($redisMock->lpop('pocket'));
     }
 
     public function testImportBadResponse()

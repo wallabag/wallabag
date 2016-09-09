@@ -5,8 +5,11 @@ namespace Tests\Wallabag\ImportBundle\Import;
 use Wallabag\ImportBundle\Import\ReadabilityImport;
 use Wallabag\UserBundle\Entity\User;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\ImportBundle\Redis\Producer;
 use Monolog\Logger;
 use Monolog\Handler\TestHandler;
+use Simpleue\Queue\RedisQueue;
+use M6Web\Component\RedisMock\RedisMockFactory;
 
 class ReadabilityImportTest extends \PHPUnit_Framework_TestCase
 {
@@ -152,12 +155,52 @@ class ReadabilityImportTest extends \PHPUnit_Framework_TestCase
             ->expects($this->exactly(2))
             ->method('publish');
 
-        $readabilityImport->setRabbitmqProducer($producer);
+        $readabilityImport->setProducer($producer);
 
         $res = $readabilityImport->setMarkAsRead(true)->import();
 
         $this->assertTrue($res);
         $this->assertEquals(['skipped' => 0, 'imported' => 2], $readabilityImport->getSummary());
+    }
+
+    public function testImportWithRedis()
+    {
+        $readabilityImport = $this->getReadabilityImport();
+        $readabilityImport->setFilepath(__DIR__.'/../fixtures/readability.json');
+
+        $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $entryRepo->expects($this->never())
+            ->method('findByUrlAndUserId');
+
+        $this->em
+            ->expects($this->never())
+            ->method('getRepository');
+
+        $entry = $this->getMockBuilder('Wallabag\CoreBundle\Entity\Entry')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->contentProxy
+            ->expects($this->never())
+            ->method('updateEntry');
+
+        $factory = new RedisMockFactory();
+        $redisMock = $factory->getAdapter('Predis\Client', true);
+
+        $queue = new RedisQueue($redisMock, 'readability');
+        $producer = new Producer($queue);
+
+        $readabilityImport->setProducer($producer);
+
+        $res = $readabilityImport->setMarkAsRead(true)->import();
+
+        $this->assertTrue($res);
+        $this->assertEquals(['skipped' => 0, 'imported' => 2], $readabilityImport->getSummary());
+
+        $this->assertNotEmpty($redisMock->lpop('readability'));
     }
 
     public function testImportBadFile()

@@ -322,7 +322,12 @@ class InstallCommand extends ContainerAwareCommand
                 'section' => 'import',
             ],
             [
-                'name' => 'rabbitmq',
+                'name' => 'import_with_redis',
+                'value' => '0',
+                'section' => 'import',
+            ],
+            [
+                'name' => 'import_with_rabbitmq',
                 'value' => '0',
                 'section' => 'import',
             ],

@@ -9,7 +9,7 @@ use Wallabag\CoreBundle\Helper\ContentProxy;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\UserBundle\Entity\User;
-use OldSound\RabbitMqBundle\RabbitMq\Producer;
+use OldSound\RabbitMqBundle\RabbitMq\ProducerInterface;
 
 abstract class AbstractImport implements ImportInterface
 {
@@ -35,12 +35,12 @@ abstract class AbstractImport implements ImportInterface
     }
 
     /**
-     * Set RabbitMQ Producer to send each entry to a queue.
+     * Set RabbitMQ/Redis Producer to send each entry to a queue.
      * This method should be called when user has enabled RabbitMQ.
      *
-     * @param Producer $producer
+     * @param ProducerInterface $producer
      */
-    public function setRabbitmqProducer(Producer $producer)
+    public function setProducer(ProducerInterface $producer)
     {
         $this->producer = $producer;
     }

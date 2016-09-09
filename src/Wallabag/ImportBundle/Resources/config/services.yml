@@ -1,33 +1,8 @@
-services:
-    wallabag_import.consumer.pocket:
-        class: Wallabag\ImportBundle\Consumer\AMPQ\EntryConsumer
-        arguments:
-            - "@doctrine.orm.entity_manager"
-            - "@wallabag_user.user_repository"
-            - "@wallabag_import.pocket.import"
-            - "@logger"
-    wallabag_import.consumer.readability:
-        class: Wallabag\ImportBundle\Consumer\AMPQ\EntryConsumer
-        arguments:
-            - "@doctrine.orm.entity_manager"
-            - "@wallabag_user.user_repository"
-            - "@wallabag_import.readability.import"
-            - "@logger"
-    wallabag_import.consumer.wallabag_v1:
-        class: Wallabag\ImportBundle\Consumer\AMPQ\EntryConsumer
-        arguments:
-            - "@doctrine.orm.entity_manager"
-            - "@wallabag_user.user_repository"
-            - "@wallabag_import.wallabag_v1.import"
-            - "@logger"
-    wallabag_import.consumer.wallabag_v2:
-        class: Wallabag\ImportBundle\Consumer\AMPQ\EntryConsumer
-        arguments:
-            - "@doctrine.orm.entity_manager"
-            - "@wallabag_user.user_repository"
-            - "@wallabag_import.wallabag_v2.import"
-            - "@logger"
+imports:
+    - { resource: rabbit.yml }
+    - { resource: redis.yml }
 
+services:
     wallabag_import.chain:
         class: Wallabag\ImportBundle\Import\ImportChain
 

@@ -24,7 +24,7 @@ class WallabagV2ControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $client->getContainer()->get('craue_config')->set('rabbitmq', 1);
+        $client->getContainer()->get('craue_config')->set('import_with_rabbitmq', 1);
 
         $crawler = $client->request('GET', '/import/wallabag-v2');
 
@@ -32,7 +32,23 @@ class WallabagV2ControllerTest extends WallabagCoreTestCase
         $this->assertEquals(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
         $this->assertEquals(1, $crawler->filter('input[type=file]')->count());
 
-        $client->getContainer()->get('craue_config')->set('rabbitmq', 0);
+        $client->getContainer()->get('craue_config')->set('import_with_rabbitmq', 0);
+    }
+
+    public function testImportWallabagWithRedisEnabled()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $client->getContainer()->get('craue_config')->set('import_with_redis', 1);
+
+        $crawler = $client->request('GET', '/import/wallabag-v2');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertEquals(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
+        $this->assertEquals(1, $crawler->filter('input[type=file]')->count());
+
+        $client->getContainer()->get('craue_config')->set('import_with_redis', 0);
     }
 
     public function testImportWallabagWithFile()

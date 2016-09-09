@@ -1,10 +1,9 @@
 <?php
 
-namespace Wallabag\ImportBundle\Consumer\AMPQ;
+namespace Wallabag\ImportBundle\Consumer;
 
+use Simpleue\Job\Job;
 use Doctrine\ORM\EntityManager;
-use OldSound\RabbitMqBundle\RabbitMq\ConsumerInterface;
-use PhpAmqpLib\Message\AMQPMessage;
 use Wallabag\ImportBundle\Import\AbstractImport;
 use Wallabag\UserBundle\Repository\UserRepository;
 use Wallabag\CoreBundle\Entity\Entry;
@@ -12,7 +11,7 @@ use Wallabag\CoreBundle\Entity\Tag;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 
-class EntryConsumer implements ConsumerInterface
+class RedisEntryConsumer implements Job
 {
     private $em;
     private $userRepository;
@@ -28,11 +27,15 @@ class EntryConsumer implements ConsumerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Handle one message by one message.
+     *
+     * @param string $job Content of the message (directly from Redis)
+     *
+     * @return bool
      */
-    public function execute(AMQPMessage $msg)
+    public function manage($job)
     {
-        $storedEntry = json_decode($msg->body, true);
+        $storedEntry = json_decode($job, true);
 
         $user = $this->userRepository->find($storedEntry['userId']);
 
@@ -40,7 +43,7 @@ class EntryConsumer implements ConsumerInterface
         if (null === $user) {
             $this->logger->warning('Unable to retrieve user', ['entry' => $storedEntry]);
 
-            return;
+            return false;
         }
 
         $this->import->setUser($user);
@@ -50,7 +53,7 @@ class EntryConsumer implements ConsumerInterface
         if (null === $entry) {
             $this->logger->warning('Unable to parse entry', ['entry' => $storedEntry]);
 
-            return;
+            return false;
         }
 
         try {
@@ -62,7 +65,20 @@ class EntryConsumer implements ConsumerInterface
         } catch (\Exception $e) {
             $this->logger->warning('Unable to save entry', ['entry' => $storedEntry, 'exception' => $e]);
 
-            return;
+            return false;
         }
+
+        $this->logger->info('Content with url ('.$entry->getUrl().') imported !');
+
+        return true;
+    }
+
+    /**
+     * Should tell if the given job will kill the worker.
+     * We don't want to stop it :).
+     */
+    public function isStopJob($job)
+    {
+        return false;
     }
 }

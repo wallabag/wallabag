@@ -20,8 +20,10 @@ class ReadabilityController extends Controller
         $readability = $this->get('wallabag_import.readability.import');
         $readability->setUser($this->getUser());
 
-        if ($this->get('craue_config')->get('rabbitmq')) {
-            $readability->setRabbitmqProducer($this->get('old_sound_rabbit_mq.import_readability_producer'));
+        if ($this->get('craue_config')->get('import_with_rabbitmq')) {
+            $readability->setProducer($this->get('old_sound_rabbit_mq.import_readability_producer'));
+        } elseif ($this->get('craue_config')->get('import_with_redis')) {
+            $readability->setProducer($this->get('wallabag_import.producer.redis.readability'));
         }
 
         if ($form->isValid()) {

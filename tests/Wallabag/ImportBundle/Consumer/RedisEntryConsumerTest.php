@@ -2,12 +2,11 @@
 
 namespace Tests\Wallabag\ImportBundle\Consumer\AMQP;
 
-use Wallabag\ImportBundle\Consumer\AMPQ\EntryConsumer;
-use PhpAmqpLib\Message\AMQPMessage;
+use Wallabag\ImportBundle\Consumer\RedisEntryConsumer;
 use Wallabag\UserBundle\Entity\User;
 use Wallabag\CoreBundle\Entity\Entry;
 
-class EntryConsumerTest extends \PHPUnit_Framework_TestCase
+class RedisEntryConsumerTest extends \PHPUnit_Framework_TestCase
 {
     public function testMessageOk()
     {
@@ -112,15 +111,15 @@ JSON;
             ->with(json_decode($body, true))
             ->willReturn($entry);
 
-        $consumer = new EntryConsumer(
+        $consumer = new RedisEntryConsumer(
             $em,
             $userRepository,
             $import
         );
 
-        $message = new AMQPMessage($body);
+        $res = $consumer->manage($body);
 
-        $consumer->execute($message);
+        $this->assertTrue($res);
     }
 
     public function testMessageWithBadUser()
@@ -157,15 +156,15 @@ JSON;
             ->disableOriginalConstructor()
             ->getMock();
 
-        $consumer = new EntryConsumer(
+        $consumer = new RedisEntryConsumer(
             $em,
             $userRepository,
             $import
         );
 
-        $message = new AMQPMessage($body);
+        $res = $consumer->manage($body);
 
-        $consumer->execute($message);
+        $this->assertFalse($res);
     }
 
     public function testMessageWithEntryProcessed()
@@ -212,14 +211,14 @@ JSON;
             ->with(json_decode($body, true))
             ->willReturn(null);
 
-        $consumer = new EntryConsumer(
+        $consumer = new RedisEntryConsumer(
             $em,
             $userRepository,
             $import
         );
 
-        $message = new AMQPMessage($body);
+        $res = $consumer->manage($body);
 
-        $consumer->execute($message);
+        $this->assertFalse($res);
     }
 }

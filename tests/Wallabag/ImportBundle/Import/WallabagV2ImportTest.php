@@ -5,8 +5,11 @@ namespace Tests\Wallabag\ImportBundle\Import;
 use Wallabag\ImportBundle\Import\WallabagV2Import;
 use Wallabag\UserBundle\Entity\User;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\ImportBundle\Redis\Producer;
 use Monolog\Logger;
 use Monolog\Handler\TestHandler;
+use Simpleue\Queue\RedisQueue;
+use M6Web\Component\RedisMock\RedisMockFactory;
 
 class WallabagV2ImportTest extends \PHPUnit_Framework_TestCase
 {
@@ -144,12 +147,48 @@ class WallabagV2ImportTest extends \PHPUnit_Framework_TestCase
             ->expects($this->exactly(24))
             ->method('publish');
 
-        $wallabagV2Import->setRabbitmqProducer($producer);
+        $wallabagV2Import->setProducer($producer);
 
         $res = $wallabagV2Import->setMarkAsRead(true)->import();
 
         $this->assertTrue($res);
         $this->assertEquals(['skipped' => 0, 'imported' => 24], $wallabagV2Import->getSummary());
+    }
+
+    public function testImportWithRedis()
+    {
+        $wallabagV2Import = $this->getWallabagV2Import();
+        $wallabagV2Import->setFilepath(__DIR__.'/../fixtures/wallabag-v2.json');
+
+        $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $entryRepo->expects($this->never())
+            ->method('findByUrlAndUserId');
+
+        $this->em
+            ->expects($this->never())
+            ->method('getRepository');
+
+        $this->contentProxy
+            ->expects($this->never())
+            ->method('updateEntry');
+
+        $factory = new RedisMockFactory();
+        $redisMock = $factory->getAdapter('Predis\Client', true);
+
+        $queue = new RedisQueue($redisMock, 'wallabag_v2');
+        $producer = new Producer($queue);
+
+        $wallabagV2Import->setProducer($producer);
+
+        $res = $wallabagV2Import->setMarkAsRead(true)->import();
+
+        $this->assertTrue($res);
+        $this->assertEquals(['skipped' => 0, 'imported' => 24], $wallabagV2Import->getSummary());
+
+        $this->assertNotEmpty($redisMock->lpop('wallabag_v2'));
     }
 
     public function testImportBadFile()

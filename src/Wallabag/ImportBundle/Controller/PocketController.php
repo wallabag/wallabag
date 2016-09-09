@@ -20,8 +20,10 @@ class PocketController extends Controller
         $pocket = $this->get('wallabag_import.pocket.import');
         $pocket->setUser($this->getUser());
 
-        if ($this->get('craue_config')->get('rabbitmq')) {
-            $pocket->setRabbitmqProducer($this->get('old_sound_rabbit_mq.import_pocket_producer'));
+        if ($this->get('craue_config')->get('import_with_rabbitmq')) {
+            $pocket->setProducer($this->get('old_sound_rabbit_mq.import_pocket_producer'));
+        } elseif ($this->get('craue_config')->get('import_with_redis')) {
+            $pocket->setProducer($this->get('wallabag_import.producer.redis.pocket'));
         }
 
         return $pocket;

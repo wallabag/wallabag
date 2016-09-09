@@ -125,3 +125,11 @@ services:
         arguments:
             - "@security.token_storage"
             - "@router"
+
+    wallabag_core.redis.client:
+        class: Predis\Client
+        arguments:
+            -
+                host: '%redis_host%'
+                port: '%redis_port%'
+                schema: tcp

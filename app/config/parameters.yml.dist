@@ -46,3 +46,7 @@ parameters:
     rabbitmq_port: 5672
     rabbitmq_user: guest
     rabbitmq_password: guest
+
+    # Redis processing
+    redis_host: localhost
+    redis_port: 6379

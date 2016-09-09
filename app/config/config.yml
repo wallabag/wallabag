@@ -254,7 +254,7 @@ old_sound_rabbit_mq:
                 type: topic
             queue_options:
                 name: 'wallabag.import.pocket'
-            callback: wallabag_import.consumer.pocket
+            callback: wallabag_import.consumer.ampq.pocket
         import_readability:
             connection: default
             exchange_options:
@@ -262,7 +262,7 @@ old_sound_rabbit_mq:
                 type: topic
             queue_options:
                 name: 'wallabag.import.readability'
-            callback: wallabag_import.consumer.readability
+            callback: wallabag_import.consumer.ampq.readability
         import_wallabag_v1:
             connection: default
             exchange_options:
@@ -270,7 +270,7 @@ old_sound_rabbit_mq:
                 type: topic
             queue_options:
                 name: 'wallabag.import.wallabag_v1'
-            callback: wallabag_import.consumer.wallabag_v1
+            callback: wallabag_import.consumer.ampq.wallabag_v1
         import_wallabag_v2:
             connection: default
             exchange_options:
@@ -278,4 +278,4 @@ old_sound_rabbit_mq:
                 type: topic
             queue_options:
                 name: 'wallabag.import.wallabag_v2'
-            callback: wallabag_import.consumer.wallabag_v2
+            callback: wallabag_import.consumer.ampq.wallabag_v2
