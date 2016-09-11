@@ -346,6 +346,8 @@ import:
         page_title: 'Importer > Readability'
         description: 'Cet outil va importer toutes vos données de Readability. Sur la page des outils (https://www.readability.com/tools/), cliquez sur "Export your data" dans la section "Data Export". Vous allez recevoir un email avec un lien pour télécharger le json.'
         how_to: "Choisissez le fichier de votre export Readability et cliquez sur le bouton ci-dessous pour l'importer."
+    worker:
+        enabled: "Les imports sont asynchrones. Une fois l'import commencé un worker externe traitera les messages un par un. Le service activé est :"
 
 developer:
     page_title: 'Développeur'

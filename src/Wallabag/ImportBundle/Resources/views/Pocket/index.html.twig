@@ -6,8 +6,10 @@
 <div class="row">
     <div class="col s12">
         <div class="card-panel settings">
+            {% include 'WallabagImportBundle:Import:_workerEnabled.html.twig' %}
+
             {% if not has_consumer_key %}
-                <div class="card-panel red darken-1">
+                <div class="card-panel red white-text">
                     {{ 'import.pocket.config_missing.description'|trans }}
 
                     {% if is_granted('ROLE_SUPER_ADMIN') %}

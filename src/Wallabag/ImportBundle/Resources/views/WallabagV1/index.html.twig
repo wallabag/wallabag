@@ -6,6 +6,8 @@
 <div class="row">
     <div class="col s12">
         <div class="card-panel settings">
+            {% include 'WallabagImportBundle:Import:_workerEnabled.html.twig' %}
+
             <div class="row">
                 <blockquote>{{ import.description|trans }}</blockquote>
                 <p>{{ 'import.wallabag_v1.how_to'|trans }}</p>

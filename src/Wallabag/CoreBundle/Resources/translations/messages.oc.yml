@@ -346,6 +346,8 @@ import:
         page_title: 'Importer > Readability'
         description: "Aquesta aisina importarà totas vòstres articles de Readability. Sus la pagina de l'aisina (https://www.readability.com/tools/), clicatz sus \"Export your data\" dins la seccion \"Data Export\". Recebretz un corrièl per telecargar un json (qu'acaba pas amb un .json de fach)."
         how_to: "Mercés de seleccionar vòstre Readability fichièr e de clicar sul boton dejós per lo telecargar e l'importar."
+    worker:
+        # enabled: "Imports are asynchronous. Once the import is submitted an external worker will handle message one by one. The current service is:"
 
 developer:
     page_title: 'Desvolopador'
