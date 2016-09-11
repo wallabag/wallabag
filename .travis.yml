@@ -2,6 +2,7 @@ language: php
 
 services:
   - rabbitmq
+  - redis
 
 # faster builds on docker-container setup
 sudo: false
