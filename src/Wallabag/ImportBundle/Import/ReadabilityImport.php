@@ -169,7 +169,10 @@ class ReadabilityImport extends AbstractImport
             // flush every 20 entries
             if (($i % 20) === 0) {
                 $this->em->flush();
-                $this->em->clear($entry);
+
+                // clear only affected entities
+                $this->em->clear(Entry::class);
+                $this->em->clear(Tag::class);
             }
             ++$i;
         }
