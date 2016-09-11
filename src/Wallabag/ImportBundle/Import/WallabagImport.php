@@ -172,12 +172,12 @@ abstract class WallabagImport extends AbstractImport
             // flush every 20 entries
             if (($i % 20) === 0) {
                 $this->em->flush();
-                $this->em->clear($entry);
             }
             ++$i;
         }
 
         $this->em->flush();
+        $this->em->clear();
     }
 
     /**
