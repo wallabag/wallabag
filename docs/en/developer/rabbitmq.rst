@@ -1,7 +1,7 @@
 Install RabbitMQ for asynchronous tasks
 =======================================
 
-In order to launch asynchronous tasks (useful for huge imports for example), we use RabbitMQ.
+In order to launch asynchronous tasks (useful for huge imports for example), we can use RabbitMQ.
 
 Requirements
 ------------
@@ -37,13 +37,31 @@ Stop RabbitMQ
 Configure RabbitMQ in wallabag
 ------------------------------
 
-Edit your ``parameters.yml`` file to edit RabbitMQ configuration.
+Edit your ``parameters.yml`` file to edit RabbitMQ configuration. The default one should be ok:
+
+.. code:: yaml
+
+    rabbitmq_host: localhost
+    rabbitmq_port: 5672
+    rabbitmq_user: guest
+    rabbitmq_password: guest
+
 
 Launch RabbitMQ consumer
 ------------------------
 
-Put this command in a cron job:
+Depending on which service you want to import from you need to enable one (or many if you want to support many) cron job:
 
 .. code:: bash
 
-  bin/console rabbitmq:consumer entries -w
+  # for Pocket import
+  bin/console rabbitmq:consumer import_pocket -w
+
+  # for Readbility import
+  bin/console rabbitmq:consumer import_readability -w
+
+  # for wallabag v1 import
+  bin/console rabbitmq:consumer import_wallabag_v1 -w
+
+  # for wallabag v2 import
+  bin/console rabbitmq:consumer import_wallabag_v2 -w
