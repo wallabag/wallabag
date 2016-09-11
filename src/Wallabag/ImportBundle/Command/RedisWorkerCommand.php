@@ -5,6 +5,7 @@ namespace Wallabag\ImportBundle\Command;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Simpleue\Worker\QueueWorker;
@@ -17,6 +18,7 @@ class RedisWorkerCommand extends ContainerAwareCommand
             ->setName('wallabag:import:redis-worker')
             ->setDescription('Launch Redis worker')
             ->addArgument('serviceName', InputArgument::REQUIRED, 'Service to use: wallabag_v1, wallabag_v2, pocket or readability')
+            ->addOption('maxIterations', '', InputOption::VALUE_OPTIONAL, 'Number of iterations before stoping', false)
         ;
     }
 
@@ -33,7 +35,8 @@ class RedisWorkerCommand extends ContainerAwareCommand
 
         $worker = new QueueWorker(
             $this->getContainer()->get('wallabag_import.queue.redis.'.$serviceName),
-            $this->getContainer()->get('wallabag_import.consumer.redis.'.$serviceName)
+            $this->getContainer()->get('wallabag_import.consumer.redis.'.$serviceName),
+            $input->getOption('maxIterations')
         );
 
         $worker->start();

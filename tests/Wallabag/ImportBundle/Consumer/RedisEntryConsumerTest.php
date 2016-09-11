@@ -220,5 +220,6 @@ JSON;
         $res = $consumer->manage($body);
 
         $this->assertFalse($res);
+        $this->assertFalse($consumer->isStopJob($body));
     }
 }

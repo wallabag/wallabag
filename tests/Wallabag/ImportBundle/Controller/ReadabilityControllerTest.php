@@ -51,6 +51,23 @@ class ReadabilityControllerTest extends WallabagCoreTestCase
         $client->getContainer()->get('craue_config')->set('import_with_redis', 0);
     }
 
+    public function testImportReadabilityBadFile()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/import/readability');
+        $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
+
+        $data = [
+            'upload_import_file[file]' => '',
+        ];
+
+        $client->submit($form, $data);
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }
+
     public function testImportReadabilityWithFile()
     {
         $this->logInAs('admin');
