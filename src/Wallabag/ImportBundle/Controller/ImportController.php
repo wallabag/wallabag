@@ -16,4 +16,58 @@ class ImportController extends Controller
             'imports' => $this->get('wallabag_import.chain')->getAll(),
         ]);
     }
+
+    /**
+     * Display how many messages are queue (both in Redis and RabbitMQ).
+     */
+    public function checkQueueAction()
+    {
+        $nbRedisMessages = null;
+        $nbRabbitMessages = null;
+
+        if ($this->get('craue_config')->get('import_with_rabbitmq')) {
+            $nbRabbitMessages = $this->getTotalMessageInRabbitQueue('pocket')
+                + $this->getTotalMessageInRabbitQueue('readability')
+                + $this->getTotalMessageInRabbitQueue('wallabag_v1')
+                + $this->getTotalMessageInRabbitQueue('wallabag_v2')
+            ;
+        } elseif ($this->get('craue_config')->get('import_with_redis')) {
+            $redis = $this->get('wallabag_core.redis.client');
+
+            $nbRedisMessages = $redis->llen('wallabag.import.pocket')
+                + $redis->llen('wallabag.import.readability')
+                + $redis->llen('wallabag.import.wallabag_v1')
+                + $redis->llen('wallabag.import.wallabag_v2')
+            ;
+        }
+
+        return $this->render('WallabagImportBundle:Import:check_queue.html.twig', [
+            'nbRedisMessages' => $nbRedisMessages,
+            'nbRabbitMessages' => $nbRabbitMessages,
+        ]);
+    }
+
+    /**
+     * Count message in RabbitMQ queue.
+     * It get one message without acking it (so it'll stay in the queue)
+     * which will include the total of *other* messages in the queue.
+     * Adding one to that messages will result in the full total message.
+     *
+     * @param string $importService The import service related: pocket, readability, wallabag_v1 or wallabag_v2
+     *
+     * @return int
+     */
+    private function getTotalMessageInRabbitQueue($importService)
+    {
+        $message = $this
+            ->get('old_sound_rabbit_mq.import_'.$importService.'_consumer')
+            ->getChannel()
+            ->basic_get('wallabag.import.'.$importService);
+
+        if (null === $message) {
+            return 0;
+        }
+
+        return $message->delivery_info['message_count'] + 1;
+    }
 }
