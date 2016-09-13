@@ -73,17 +73,6 @@ abstract class WallabagImport extends AbstractImport
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function getSummary()
-    {
-        return [
-            'skipped' => $this->skippedEntries,
-            'imported' => $this->importedEntries,
-        ];
-    }
-
-    /**
      * Set file path to the json file.
      *
      * @param string $filepath

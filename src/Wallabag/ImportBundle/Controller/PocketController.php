@@ -102,6 +102,12 @@ class PocketController extends Controller
                 '%imported%' => $summary['imported'],
                 '%skipped%' => $summary['skipped'],
             ]);
+
+            if (0 < $summary['queued']) {
+                $message = $this->get('translator')->trans('flashes.import.notice.summary_with_queue', [
+                    '%queued%' => $summary['queued'],
+                ]);
+            }
         }
 
         $this->get('session')->getFlashBag()->add(

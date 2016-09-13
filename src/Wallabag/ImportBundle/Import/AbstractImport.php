@@ -21,6 +21,7 @@ abstract class AbstractImport implements ImportInterface
     protected $markAsRead;
     protected $skippedEntries = 0;
     protected $importedEntries = 0;
+    protected $queuedEntries = 0;
 
     public function __construct(EntityManager $em, ContentProxy $contentProxy)
     {
@@ -145,10 +146,22 @@ abstract class AbstractImport implements ImportInterface
                 $importedEntry = $this->setEntryAsRead($importedEntry);
             }
 
-            ++$this->importedEntries;
+            ++$this->queuedEntries;
 
             $this->producer->publish(json_encode($importedEntry));
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSummary()
+    {
+        return [
+            'skipped' => $this->skippedEntries,
+            'imported' => $this->importedEntries,
+            'queued' => $this->queuedEntries,
+        ];
     }
 
     /**

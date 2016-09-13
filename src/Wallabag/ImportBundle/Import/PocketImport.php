@@ -173,17 +173,6 @@ class PocketImport extends AbstractImport
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function getSummary()
-    {
-        return [
-            'skipped' => $this->skippedEntries,
-            'imported' => $this->importedEntries,
-        ];
-    }
-
-    /**
      * Set the Guzzle client.
      *
      * @param Client $client

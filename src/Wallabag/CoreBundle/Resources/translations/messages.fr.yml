@@ -432,6 +432,7 @@ flashes:
             failed: "L'import a échoué, veuillez ré-essayer"
             failed_on_file: "Erreur lors du traitement de l'import. Vérifier votre fichier."
             summary: "Rapport d'import: %imported% importés, %skipped% déjà présent."
+            summary_with_queue: "Rapport d'import: %queued% en cours de traitement."
     developer:
         notice:
             client_created: 'Nouveau client %name% créé'

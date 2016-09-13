@@ -270,7 +270,7 @@ class PocketImportTest extends \PHPUnit_Framework_TestCase
         $res = $pocketImport->import();
 
         $this->assertTrue($res);
-        $this->assertEquals(['skipped' => 1, 'imported' => 1], $pocketImport->getSummary());
+        $this->assertEquals(['skipped' => 1, 'imported' => 1, 'queued' => 0], $pocketImport->getSummary());
     }
 
     /**
@@ -365,7 +365,7 @@ class PocketImportTest extends \PHPUnit_Framework_TestCase
         $res = $pocketImport->setMarkAsRead(true)->import();
 
         $this->assertTrue($res);
-        $this->assertEquals(['skipped' => 0, 'imported' => 2], $pocketImport->getSummary());
+        $this->assertEquals(['skipped' => 0, 'imported' => 2, 'queued' => 0], $pocketImport->getSummary());
     }
 
     /**
@@ -451,7 +451,7 @@ JSON;
         $res = $pocketImport->setMarkAsRead(true)->import();
 
         $this->assertTrue($res);
-        $this->assertEquals(['skipped' => 0, 'imported' => 1], $pocketImport->getSummary());
+        $this->assertEquals(['skipped' => 0, 'imported' => 0, 'queued' => 1], $pocketImport->getSummary());
     }
 
     /**
@@ -530,7 +530,7 @@ JSON;
         $res = $pocketImport->setMarkAsRead(true)->import();
 
         $this->assertTrue($res);
-        $this->assertEquals(['skipped' => 0, 'imported' => 1], $pocketImport->getSummary());
+        $this->assertEquals(['skipped' => 0, 'imported' => 0, 'queued' => 1], $pocketImport->getSummary());
 
         $this->assertNotEmpty($redisMock->lpop('pocket'));
     }
@@ -607,6 +607,6 @@ JSON;
         $res = $pocketImport->import();
 
         $this->assertTrue($res);
-        $this->assertEquals(['skipped' => 1, 'imported' => 0], $pocketImport->getSummary());
+        $this->assertEquals(['skipped' => 1, 'imported' => 0, 'queued' => 0], $pocketImport->getSummary());
     }
 }

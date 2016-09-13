@@ -432,6 +432,7 @@ flashes:
             failed: 'Import failed, please try again.'
             failed_on_file: 'Error while processing import. Please verify your import file.'
             summary: 'Import summary: %imported% imported, %skipped% already saved.'
+            summary_with_queue: 'Import summary: %queued% queued.'
     developer:
         notice:
             client_created: 'New client %name% created.'

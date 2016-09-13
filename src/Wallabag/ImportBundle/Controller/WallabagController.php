@@ -60,6 +60,12 @@ abstract class WallabagController extends Controller
                         '%skipped%' => $summary['skipped'],
                     ]);
 
+                    if (0 < $summary['queued']) {
+                        $message = $this->get('translator')->trans('flashes.import.notice.summary_with_queue', [
+                            '%queued%' => $summary['queued'],
+                        ]);
+                    }
+
                     unlink($this->getParameter('wallabag_import.resource_dir').'/'.$name);
                 }
 

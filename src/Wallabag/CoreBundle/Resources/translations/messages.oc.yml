@@ -430,6 +430,7 @@ flashes:
             failed: "L'importacion a fracassat, mercés de tornar ensajar"
             failed_on_file: "Errorr pendent du tractament de l'import. Mercés de verificar vòstre fichièr."
             summary: "Rapòrt d'import: %imported% importats, %skipped% ja presents."
+            # summary_with_queue: 'Import summary: %queued% queued.'
     developer:
         notice:
             client_created: 'Novèl client creat'

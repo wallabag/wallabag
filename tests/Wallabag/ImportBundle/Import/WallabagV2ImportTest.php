@@ -78,7 +78,7 @@ class WallabagV2ImportTest extends \PHPUnit_Framework_TestCase
         $res = $wallabagV2Import->import();
 
         $this->assertTrue($res);
-        $this->assertEquals(['skipped' => 22, 'imported' => 2], $wallabagV2Import->getSummary());
+        $this->assertEquals(['skipped' => 22, 'imported' => 2, 'queued' => 0], $wallabagV2Import->getSummary());
     }
 
     public function testImportAndMarkAllAsRead()
@@ -116,7 +116,7 @@ class WallabagV2ImportTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($res);
 
-        $this->assertEquals(['skipped' => 0, 'imported' => 2], $wallabagV2Import->getSummary());
+        $this->assertEquals(['skipped' => 0, 'imported' => 2, 'queued' => 0], $wallabagV2Import->getSummary());
     }
 
     public function testImportWithRabbit()
@@ -152,7 +152,7 @@ class WallabagV2ImportTest extends \PHPUnit_Framework_TestCase
         $res = $wallabagV2Import->setMarkAsRead(true)->import();
 
         $this->assertTrue($res);
-        $this->assertEquals(['skipped' => 0, 'imported' => 24], $wallabagV2Import->getSummary());
+        $this->assertEquals(['skipped' => 0, 'imported' => 0, 'queued' => 24], $wallabagV2Import->getSummary());
     }
 
     public function testImportWithRedis()
@@ -186,7 +186,7 @@ class WallabagV2ImportTest extends \PHPUnit_Framework_TestCase
         $res = $wallabagV2Import->setMarkAsRead(true)->import();
 
         $this->assertTrue($res);
-        $this->assertEquals(['skipped' => 0, 'imported' => 24], $wallabagV2Import->getSummary());
+        $this->assertEquals(['skipped' => 0, 'imported' => 0, 'queued' => 24], $wallabagV2Import->getSummary());
 
         $this->assertNotEmpty($redisMock->lpop('wallabag_v2'));
     }
@@ -227,7 +227,7 @@ class WallabagV2ImportTest extends \PHPUnit_Framework_TestCase
         $res = $wallabagV2Import->import();
 
         $this->assertFalse($res);
-        $this->assertEquals(['skipped' => 0, 'imported' => 0], $wallabagV2Import->getSummary());
+        $this->assertEquals(['skipped' => 0, 'imported' => 0, 'queued' => 0], $wallabagV2Import->getSummary());
     }
 
     public function testImportWithExceptionFromGraby()
@@ -256,6 +256,6 @@ class WallabagV2ImportTest extends \PHPUnit_Framework_TestCase
         $res = $wallabagV2Import->import();
 
         $this->assertTrue($res);
-        $this->assertEquals(['skipped' => 24, 'imported' => 0], $wallabagV2Import->getSummary());
+        $this->assertEquals(['skipped' => 24, 'imported' => 0, 'queued' => 0], $wallabagV2Import->getSummary());
     }
 }

@@ -47,17 +47,6 @@ class ReadabilityImport extends AbstractImport
     /**
      * {@inheritdoc}
      */
-    public function getSummary()
-    {
-        return [
-            'skipped' => $this->skippedEntries,
-            'imported' => $this->importedEntries,
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function import()
     {
         if (!$this->user) {

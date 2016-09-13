@@ -82,7 +82,7 @@ class WallabagV1ImportTest extends \PHPUnit_Framework_TestCase
         $res = $wallabagV1Import->import();
 
         $this->assertTrue($res);
-        $this->assertEquals(['skipped' => 1, 'imported' => 3], $wallabagV1Import->getSummary());
+        $this->assertEquals(['skipped' => 1, 'imported' => 3, 'queued' => 0], $wallabagV1Import->getSummary());
     }
 
     public function testImportAndMarkAllAsRead()
@@ -120,7 +120,7 @@ class WallabagV1ImportTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($res);
 
-        $this->assertEquals(['skipped' => 0, 'imported' => 3], $wallabagV1Import->getSummary());
+        $this->assertEquals(['skipped' => 0, 'imported' => 3, 'queued' => 0], $wallabagV1Import->getSummary());
     }
 
     public function testImportWithRabbit()
@@ -160,7 +160,7 @@ class WallabagV1ImportTest extends \PHPUnit_Framework_TestCase
         $res = $wallabagV1Import->setMarkAsRead(true)->import();
 
         $this->assertTrue($res);
-        $this->assertEquals(['skipped' => 0, 'imported' => 4], $wallabagV1Import->getSummary());
+        $this->assertEquals(['skipped' => 0, 'imported' => 0, 'queued' => 4], $wallabagV1Import->getSummary());
     }
 
     public function testImportWithRedis()
@@ -198,7 +198,7 @@ class WallabagV1ImportTest extends \PHPUnit_Framework_TestCase
         $res = $wallabagV1Import->setMarkAsRead(true)->import();
 
         $this->assertTrue($res);
-        $this->assertEquals(['skipped' => 0, 'imported' => 4], $wallabagV1Import->getSummary());
+        $this->assertEquals(['skipped' => 0, 'imported' => 0, 'queued' => 4], $wallabagV1Import->getSummary());
 
         $this->assertNotEmpty($redisMock->lpop('wallabag_v1'));
     }
