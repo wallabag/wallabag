@@ -174,7 +174,7 @@ div.pagination ul .next.disabled {
 
 footer.page-footer {
   margin-top: 10px;
-  padding-top: 10px;
+  padding-top: 0px;
 }
 
 footer .row {
