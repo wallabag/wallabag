@@ -35,22 +35,6 @@ class ReadabilityControllerTest extends WallabagCoreTestCase
         $client->getContainer()->get('craue_config')->set('import_with_rabbitmq', 0);
     }
 
-    public function testImportReadabilityWithRedisEnabled()
-    {
-        $this->logInAs('admin');
-        $client = $this->getClient();
-
-        $client->getContainer()->get('craue_config')->set('import_with_redis', 1);
-
-        $crawler = $client->request('GET', '/import/readability');
-
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertEquals(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
-        $this->assertEquals(1, $crawler->filter('input[type=file]')->count());
-
-        $client->getContainer()->get('craue_config')->set('import_with_redis', 0);
-    }
-
     public function testImportReadabilityBadFile()
     {
         $this->logInAs('admin');
@@ -66,6 +50,41 @@ class ReadabilityControllerTest extends WallabagCoreTestCase
         $client->submit($form, $data);
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }
+
+    public function testImportReadabilityWithRedisEnabled()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $client->getContainer()->get('craue_config')->set('import_with_redis', 1);
+
+        $crawler = $client->request('GET', '/import/readability');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertEquals(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
+        $this->assertEquals(1, $crawler->filter('input[type=file]')->count());
+
+        $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
+
+        $file = new UploadedFile(__DIR__.'/../fixtures/readability.json', 'readability.json');
+
+        $data = [
+            'upload_import_file[file]' => $file,
+        ];
+
+        $client->submit($form, $data);
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+
+        $crawler = $client->followRedirect();
+
+        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
+        $this->assertContains('flashes.import.notice.summary', $body[0]);
+
+        $this->assertNotEmpty($client->getContainer()->get('wallabag_core.redis.client')->lpop('wallabag.import.readability'));
+
+        $client->getContainer()->get('craue_config')->set('import_with_redis', 0);
     }
 
     public function testImportReadabilityWithFile()
