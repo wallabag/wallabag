@@ -5,7 +5,7 @@ namespace Wallabag\ImportBundle\Consumer;
 use OldSound\RabbitMqBundle\RabbitMq\ConsumerInterface;
 use PhpAmqpLib\Message\AMQPMessage;
 
-class AMPQEntryConsumer extends AbstractConsumer implements ConsumerInterface
+class AMQPEntryConsumer extends AbstractConsumer implements ConsumerInterface
 {
     /**
      * {@inheritdoc}

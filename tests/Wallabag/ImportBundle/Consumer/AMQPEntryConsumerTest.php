@@ -2,12 +2,12 @@
 
 namespace Tests\Wallabag\ImportBundle\Consumer\AMQP;
 
-use Wallabag\ImportBundle\Consumer\AMPQEntryConsumer;
+use Wallabag\ImportBundle\Consumer\AMQPEntryConsumer;
 use PhpAmqpLib\Message\AMQPMessage;
 use Wallabag\UserBundle\Entity\User;
 use Wallabag\CoreBundle\Entity\Entry;
 
-class AMPQEntryConsumerTest extends \PHPUnit_Framework_TestCase
+class AMQPEntryConsumerTest extends \PHPUnit_Framework_TestCase
 {
     public function testMessageOk()
     {
@@ -112,7 +112,7 @@ JSON;
             ->with(json_decode($body, true))
             ->willReturn($entry);
 
-        $consumer = new AMPQEntryConsumer(
+        $consumer = new AMQPEntryConsumer(
             $em,
             $userRepository,
             $import
@@ -157,7 +157,7 @@ JSON;
             ->disableOriginalConstructor()
             ->getMock();
 
-        $consumer = new AMPQEntryConsumer(
+        $consumer = new AMQPEntryConsumer(
             $em,
             $userRepository,
             $import
@@ -212,7 +212,7 @@ JSON;
             ->with(json_decode($body, true))
             ->willReturn(null);
 
-        $consumer = new AMPQEntryConsumer(
+        $consumer = new AMQPEntryConsumer(
             $em,
             $userRepository,
             $import
