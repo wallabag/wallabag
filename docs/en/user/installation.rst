@@ -47,20 +47,13 @@ Install Composer:
 
 You can find specific instructions `here <https://getcomposer.org/doc/00-intro.md>`__.
 
-You also need to install node.js (via `the Download page <https://nodejs.org/en/download/>`__), npm (already install with node.js), bower and grunt:
-
-::
-
-    npm install -g bower
-    npm install -g grunt-cli
-
 To install wallabag itself, you must run the following commands:
 
 ::
 
     git clone https://github.com/wallabag/wallabag.git
     cd wallabag
-    git checkout 2.1
+    git checkout 2.1.0
     ./install.sh
 
 To start PHP's build-in server and test if everything did install correctly, you can do:
