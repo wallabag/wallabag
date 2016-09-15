@@ -18,6 +18,11 @@ La documentation principale de cette application est découpée en plusieurs sec
 * :ref:`user-docs`
 * :ref:`dev-docs`
 
+La documentation est disponible dans d'autres langues :
+
+* `Documentation in english <http://doc.wallabag.org/en/master/>`_
+* `Deutsch Dokumentation <http://doc.wallabag.org/de/master/>`_
+
 .. _user-docs:
 
 .. toctree::
