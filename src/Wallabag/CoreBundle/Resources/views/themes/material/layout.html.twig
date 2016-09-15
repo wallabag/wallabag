@@ -117,5 +117,12 @@
 {% endblock %}
 
 {% block footer %}
-    {{ render(controller("WallabagCoreBundle:Footer:index")) }}
+    <footer class="page-footer cyan darken-2">
+        <div class="footer-copyright">
+            <div class="container">
+                <p>{{ 'footer.wallabag.powered_by'|trans }} <a target="_blank" href="https://wallabag.org" class="grey-text text-lighten-4">wallabag</a></p>
+                <a class="grey-text text-lighten-4 right" href="{{ path('about') }}">{{ 'footer.wallabag.about'|trans }}</a>
+            </div>
+        </div>
+    </footer>
 {% endblock %}

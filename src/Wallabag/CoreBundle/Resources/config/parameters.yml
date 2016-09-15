@@ -6,7 +6,3 @@ parameters:
         google_play: https://play.google.com/store/apps/details?id=fr.gaulupeau.apps.InThePoche
         ios: https://itunes.apple.com/app/wallabag/id828331015?mt=8
         windows: https://www.microsoft.com/store/apps/wallabag/9nblggh11646
-    socials_url:
-        twitter: https://twitter.com/wallabagapp
-        google_plus: https://plus.google.com/+WallabagOrg/posts
-        facebook: https://facebook.com/Wallabag
