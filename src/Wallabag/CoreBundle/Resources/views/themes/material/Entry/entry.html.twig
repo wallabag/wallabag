@@ -61,10 +61,15 @@
             <div class="collapsible-body"></div>
         </li>
 
+        {% set markAsReadLabel = 'entry.view.left_menu.set_as_unread' %}
+        {% if entry.isArchived == 0 %}
+            {% set markAsReadLabel = 'entry.view.left_menu.set_as_read' %}
+        {% endif %}
+
         <li class="bold hide-on-med-and-down">
-            <a class="waves-effect collapsible-header" title="{{ 'entry.view.left_menu.set_as_read'|trans }}" href="{{ path('archive_entry', { 'id': entry.id }) }}" id="markAsRead">
+            <a class="waves-effect collapsible-header" title="{{ markAsReadLabel|trans }}" href="{{ path('archive_entry', { 'id': entry.id }) }}" id="markAsRead">
                 <i class="material-icons small">{% if entry.isArchived == 0 %}done{% else %}redo{% endif %}</i>
-                <span>{% if entry.isArchived == 0 %}{{ 'entry.view.left_menu.set_as_read'|trans }}{% else %}{{ 'entry.view.left_menu.set_as_unread'|trans }}{% endif %}</span>
+                <span>{{ markAsReadLabel|trans }}</span>
             </a>
             <div class="collapsible-body"></div>
         </li>
