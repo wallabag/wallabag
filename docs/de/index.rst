@@ -17,6 +17,11 @@ Die Hauptdokumentation für diese Applikation ist in einigen Abschnitten organis
 * :ref:`user-docs`
 * :ref:`dev-docs`
 
+Die Dokumentation ist in anderen Sprachen verfügbar :
+
+* `Documentation in english <http://doc.wallabag.org/en/master/>`_
+* `Documentation en français <http://doc.wallabag.org/fr/master/>`_
+
 .. _user-docs:
 
 .. toctree::
