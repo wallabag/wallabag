@@ -19,11 +19,19 @@ class ImportController extends Controller
 
     /**
      * Display how many messages are queue (both in Redis and RabbitMQ).
+     * Only for admins.
      */
     public function checkQueueAction()
     {
         $nbRedisMessages = null;
         $nbRabbitMessages = null;
+
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')) {
+            return $this->render('WallabagImportBundle:Import:check_queue.html.twig', [
+                'nbRedisMessages' => $nbRedisMessages,
+                'nbRabbitMessages' => $nbRabbitMessages,
+            ]);
+        }
 
         if ($this->get('craue_config')->get('import_with_rabbitmq')) {
             $nbRabbitMessages = $this->getTotalMessageInRabbitQueue('pocket')
