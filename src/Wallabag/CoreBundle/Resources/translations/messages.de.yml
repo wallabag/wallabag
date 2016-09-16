@@ -68,6 +68,7 @@ config:
             200_word: 'Ich lese ~200 Wörter pro Minute'
             300_word: 'Ich lese ~300 Wörter pro Minute'
             400_word: 'Ich lese ~400 Wörter pro Minute'
+        pocket_consumer_key_label: Consumer-Key für Pocket, um Inhalte zu importieren
     form_rss:
         description: 'Die RSS-Feeds von wallabag erlauben es dir, deine gespeicherten Artikel mit deinem bevorzugten RSS-Reader zu lesen. Vorher musst du jedoch einen Token erstellen.'
         token_label: 'RSS-token'

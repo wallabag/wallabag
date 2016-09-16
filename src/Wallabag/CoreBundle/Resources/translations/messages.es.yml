@@ -68,6 +68,7 @@ config:
             200_word: 'Leo ~200 palabras por minuto'
             300_word: 'Leo ~300 palabras por minuto'
             400_word: 'Leo ~400 palabras por minuto'
+        # pocket_consumer_key_label: Consumer key for Pocket to import contents
     form_rss:
         description: 'Los feeds RSS de wallabag permiten leer los artículos guardados con su lector RSS favorito. Necesita generar un token primero'
         token_label: 'RSS token'

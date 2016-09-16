@@ -68,6 +68,7 @@ config:
             200_word: 'Czytam ~200 słów na minutę'
             300_word: 'Czytam ~300 słów na minutę'
             400_word: 'Czytam ~400 słów na minutę'
+        pocket_consumer_key_label: Klucz klienta Pocket do importu zawartości
     form_rss:
         description: 'Kanały RSS prowadzone przez wallabag pozwalają Ci na czytanie twoich zapisanych artykułów w twoium ulubionym czytniku RSS. Musisz najpierw wynegenerować tokena.‌'
         token_label: 'Token RSS'

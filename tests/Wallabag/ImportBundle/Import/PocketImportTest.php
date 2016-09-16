@@ -4,6 +4,7 @@ namespace Tests\Wallabag\ImportBundle\Import;
 
 use Wallabag\UserBundle\Entity\User;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\ImportBundle\Import\PocketImport;
 use GuzzleHttp\Client;
 use GuzzleHttp\Subscriber\Mock;
@@ -27,6 +28,11 @@ class PocketImportTest extends \PHPUnit_Framework_TestCase
     {
         $this->user = new User();
 
+        $config = new Config($this->user);
+        $config->setPocketConsumerKey('xxx');
+
+        $this->user->setConfig($config);
+
         $this->contentProxy = $this->getMockBuilder('Wallabag\CoreBundle\Helper\ContentProxy')
             ->disableOriginalConstructor()
             ->getMock();
@@ -35,19 +41,9 @@ class PocketImportTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $config = $this->getMockBuilder('Craue\ConfigBundle\Util\Config')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $config->expects($this->any())
-            ->method('get')
-            ->with('pocket_consumer_key')
-            ->willReturn($consumerKey);
-
         $pocket = new PocketImport(
             $this->em,
-            $this->contentProxy,
-            $config
+            $this->contentProxy
         );
         $pocket->setUser($this->user);
 

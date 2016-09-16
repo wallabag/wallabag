@@ -13,16 +13,14 @@ use Craue\ConfigBundle\Util\Config;
 class PocketImport extends AbstractImport
 {
     private $client;
-    private $consumerKey;
     private $accessToken;
 
     const NB_ELEMENTS = 5000;
 
-    public function __construct(EntityManager $em, ContentProxy $contentProxy, Config $craueConfig)
+    public function __construct(EntityManager $em, ContentProxy $contentProxy)
     {
         $this->em = $em;
         $this->contentProxy = $contentProxy;
-        $this->consumerKey = $craueConfig->get('pocket_consumer_key');
         $this->logger = new NullLogger();
     }
 
@@ -72,7 +70,7 @@ class PocketImport extends AbstractImport
         $request = $this->client->createRequest('POST', 'https://getpocket.com/v3/oauth/request',
             [
                 'body' => json_encode([
-                    'consumer_key' => $this->consumerKey,
+                    'consumer_key' => $this->user->getConfig()->getPocketConsumerKey(),
                     'redirect_uri' => $redirectUri,
                 ]),
             ]
@@ -102,7 +100,7 @@ class PocketImport extends AbstractImport
         $request = $this->client->createRequest('POST', 'https://getpocket.com/v3/oauth/authorize',
             [
                 'body' => json_encode([
-                    'consumer_key' => $this->consumerKey,
+                    'consumer_key' => $this->user->getConfig()->getPocketConsumerKey(),
                     'code' => $code,
                 ]),
             ]
@@ -131,7 +129,7 @@ class PocketImport extends AbstractImport
         $request = $this->client->createRequest('POST', 'https://getpocket.com/v3/get',
             [
                 'body' => json_encode([
-                    'consumer_key' => $this->consumerKey,
+                    'consumer_key' => $this->user->getConfig()->getPocketConsumerKey(),
                     'access_token' => $this->accessToken,
                     'detailType' => 'complete',
                     'state' => 'all',

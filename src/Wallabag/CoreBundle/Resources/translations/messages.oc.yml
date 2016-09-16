@@ -68,6 +68,7 @@ config:
             200_word: "Legissi a l'entorn de 200 mots per minuta"
             300_word: "Legissi a l'entorn de 300 mots per minuta"
             400_word: "Legissi a l'entorn de 400 mots per minuta"
+        pocket_consumer_key_label: Clau d'autentificacion Pocket per importar las donadas
     form_rss:
         description: "Los fluxes RSS fornits per wallabag vos permeton de legir vòstres articles salvagardats dins vòstre lector de fluxes preferit. Per los poder emplegar, vos cal, d'en primièr crear un geton."
         token_label: 'Geton RSS'

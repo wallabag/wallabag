@@ -68,6 +68,7 @@ config:
             200_word: 'Je lis environ 200 mots par minute'
             300_word: 'Je lis environ 300 mots par minute'
             400_word: 'Je lis environ 400 mots par minute'
+        pocket_consumer_key_label: Clé d'authentification Pocket pour importer les données
     form_rss:
         description: "Les flux RSS fournis par wallabag vous permettent de lire vos articles sauvegardés dans votre lecteur de flux préféré. Pour pouvoir les utiliser, vous devez d'abord créer un jeton."
         token_label: 'Jeton RSS'

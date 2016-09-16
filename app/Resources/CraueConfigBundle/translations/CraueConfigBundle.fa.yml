@@ -8,7 +8,6 @@ export_csv:  فعال‌سازی برون‌سپاری به CSV
 export_json:  فعال‌سازی برون‌سپاری به JSON
 export_txt:  فعال‌سازی برون‌سپاری به TXT
 export_xml:  فعال‌سازی برون‌سپاری به XML
-pocket_consumer_key: کلید کاربری Pocket برای درون‌ریزی مطالب (https://getpocket.com/developer/docs/authentication)
 # import_with_rabbitmq: Enable RabbitMQ to import data asynchronously
 # import_with_redis: Enable Redis to import data asynchronously
 shaarli_url: نشانی Shaarli، اگر فعال بود

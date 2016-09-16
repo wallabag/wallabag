@@ -44,7 +44,7 @@ class PocketController extends Controller
 
         return $this->render('WallabagImportBundle:Pocket:index.html.twig', [
             'import' => $this->getPocketImportService(),
-            'has_consumer_key' => '' == trim($this->get('craue_config')->get('pocket_consumer_key')) ? false : true,
+            'has_consumer_key' => '' === trim($this->getUser()->getConfig()->getPocketConsumerKey()) ? false : true,
             'form' => $form->createView(),
         ]);
     }
