@@ -414,10 +414,10 @@ flashes:
         notice:
             entry_already_saved: 'Entrada ya guardada por %fecha%'
             entry_saved: 'Entrada guardada'
-            # entry_saved_failed: 'Failed to save entry'
+            # entry_saved_failed: 'Entry saved but fetching content failed'
             entry_updated: 'Entrada actualizada'
             entry_reloaded: 'Entrada recargada'
-            entry_reload_failed: 'Entrada recargada reprobada'
+            # entry_reload_failed: 'Entry reloaded but fetching content failed'
             entry_archived: 'Artículo archivado'
             entry_unarchived: 'Artículo desarchivado'
             entry_starred: 'Artículo guardado en los favoritos'

@@ -414,10 +414,10 @@ flashes:
         notice:
             entry_already_saved: 'Article ja salvargardat lo %date%'
             entry_saved: 'Article enregistrat'
-            entry_saved_failed: "Fracàs de l'enregistrament de l'entrada"
+            # entry_saved_failed: 'Entry saved but fetching content failed'
             entry_updated: 'Article mes a jorn'
             entry_reloaded: 'Article recargat'
-            entry_reload_failed: "Fracàs de l'actualizacion de l'article"
+            # entry_reload_failed: 'Entry reloaded but fetching content failed'
             entry_archived: 'Article marcat coma legit'
             entry_unarchived: 'Article marcat coma pas legit'
             entry_starred: 'Article apondut dins los favorits'

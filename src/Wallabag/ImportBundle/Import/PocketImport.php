@@ -199,24 +199,16 @@ class PocketImport extends AbstractImport
         }
 
         $entry = new Entry($this->user);
+        $entry->setUrl($url);
+
+        // update entry with content (in case fetching failed, the given entry will be return)
         $entry = $this->fetchContent($entry, $url);
 
-        // jump to next entry in case of problem while getting content
-        if (false === $entry) {
-            ++$this->skippedEntries;
-
-            return;
-        }
-
         // 0, 1, 2 - 1 if the item is archived - 2 if the item should be deleted
-        if ($importedEntry['status'] == 1 || $this->markAsRead) {
-            $entry->setArchived(true);
-        }
+        $entry->setArchived($importedEntry['status'] == 1 || $this->markAsRead);
 
         // 0 or 1 - 1 If the item is starred
-        if ($importedEntry['favorite'] == 1) {
-            $entry->setStarred(true);
-        }
+        $entry->setStarred($importedEntry['favorite'] == 1);
 
         $title = 'Untitled';
         if (isset($importedEntry['resolved_title']) && $importedEntry['resolved_title'] != '') {
@@ -226,7 +218,6 @@ class PocketImport extends AbstractImport
         }
 
         $entry->setTitle($title);
-        $entry->setUrl($url);
 
         // 0, 1, or 2 - 1 if the item has images in it - 2 if the item is an image
         if (isset($importedEntry['has_image']) && $importedEntry['has_image'] > 0 && isset($importedEntry['images'][1])) {

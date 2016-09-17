@@ -414,10 +414,10 @@ flashes:
         notice:
             entry_already_saved: 'این مقاله در تاریخ %date% ذخیره شده بود'
             entry_saved: 'مقاله ذخیره شد'
-            # entry_saved_failed: 'Failed to save entry'
+            # entry_saved_failed: 'Entry saved but fetching content failed'
             entry_updated: 'مقاله به‌روز شد'
             entry_reloaded: 'مقاله به‌روز شد'
-            entry_reload_failed: 'به‌روزرسانی مقاله شکست خورد'
+            # entry_reload_failed: 'Entry reloaded but fetching content failed'
             entry_archived: 'مقاله بایگانی شد'
             entry_unarchived: 'مقاله از بایگانی درآمد'
             entry_starred: 'مقاله برگزیده شد'

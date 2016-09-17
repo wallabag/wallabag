@@ -79,20 +79,20 @@ abstract class AbstractImport implements ImportInterface
 
     /**
      * Fetch content from the ContentProxy (using graby).
-     * If it fails return false instead of the updated entry.
+     * If it fails return the given entry to be saved in all case (to avoid user to loose the content).
      *
      * @param Entry  $entry   Entry to update
      * @param string $url     Url to grab content for
      * @param array  $content An array with AT LEAST keys title, html, url, language & content_type to skip the fetchContent from the url
      *
-     * @return Entry|false
+     * @return Entry
      */
     protected function fetchContent(Entry $entry, $url, array $content = [])
     {
         try {
             return $this->contentProxy->updateEntry($entry, $url, $content);
         } catch (\Exception $e) {
-            return false;
+            return $entry;
         }
     }
 

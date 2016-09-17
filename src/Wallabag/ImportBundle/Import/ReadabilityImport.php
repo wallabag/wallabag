@@ -103,18 +103,12 @@ class ReadabilityImport extends AbstractImport
             'created_at' => $importedEntry['date_added'],
         ];
 
-        $entry = $this->fetchContent(
-            new Entry($this->user),
-            $data['url'],
-            $data
-        );
+        $entry = new Entry($this->user);
+        $entry->setUrl($data['url']);
+        $entry->setTitle($data['title']);
 
-        // jump to next entry in case of problem while getting content
-        if (false === $entry) {
-            ++$this->skippedEntries;
-
-            return;
-        }
+        // update entry with content (in case fetching failed, the given entry will be return)
+        $entry = $this->fetchContent($entry, $data['url'], $data);
 
         $entry->setArchived($data['is_archived']);
         $entry->setStarred($data['is_starred']);

@@ -416,10 +416,10 @@ flashes:
         notice:
             entry_already_saved: 'Article déjà sauvergardé le %date%'
             entry_saved: 'Article enregistré'
-            entry_saved_failed: "L'enregistrement a échoué"
+            entry_saved_failed: 'Article enregistré mais impossible de récupérer le contenu'
             entry_updated: 'Article mis à jour'
             entry_reloaded: 'Article rechargé'
-            entry_reload_failed: "Le rechargement de l'article a échoué"
+            entry_reload_failed: "Article mis à jour mais impossible de récupérer le contenu"
             entry_archived: 'Article marqué comme lu'
             entry_unarchived: 'Article marqué comme non lu'
             entry_starred: 'Article ajouté dans les favoris'

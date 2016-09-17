@@ -566,6 +566,8 @@ JSON;
                     "status": 1,
                     "list": {
                         "229279689": {
+                            "status": "1",
+                            "favorite": "1",
                             "resolved_url": "http://www.grantland.com/blog/the-triangle/post/_/id/38347/ryder-cup-preview"
                         }
                     }
@@ -603,6 +605,6 @@ JSON;
         $res = $pocketImport->import();
 
         $this->assertTrue($res);
-        $this->assertEquals(['skipped' => 1, 'imported' => 0, 'queued' => 0], $pocketImport->getSummary());
+        $this->assertEquals(['skipped' => 0, 'imported' => 1, 'queued' => 0], $pocketImport->getSummary());
     }
 }

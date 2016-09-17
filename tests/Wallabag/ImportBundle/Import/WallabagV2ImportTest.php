@@ -256,6 +256,6 @@ class WallabagV2ImportTest extends \PHPUnit_Framework_TestCase
         $res = $wallabagV2Import->import();
 
         $this->assertTrue($res);
-        $this->assertEquals(['skipped' => 24, 'imported' => 0, 'queued' => 0], $wallabagV2Import->getSummary());
+        $this->assertEquals(['skipped' => 22, 'imported' => 2, 'queued' => 0], $wallabagV2Import->getSummary());
     }
 }

@@ -414,10 +414,10 @@ flashes:
         notice:
             entry_already_saved: 'Wpis już został dodany %date%'
             entry_saved: 'Wpis zapisany'
-            entry_saved_failed: 'Zapis artykułu się nie powiódł'
+            # entry_saved_failed: 'Entry saved but fetching content failed'
             entry_updated: 'Wpis zaktualizowany'
             entry_reloaded: 'Wpis ponownie załadowany'
-            entry_reload_failed: 'Błąd ponownego załadowania'
+            # entry_reload_failed: 'Entry reloaded but fetching content failed'
             entry_archived: 'Wpis dodany do archiwum'
             entry_unarchived: 'Wpis usunięty z archiwum'
             entry_starred: 'Wpis oznaczony gwiazdką'

@@ -101,18 +101,12 @@ abstract class WallabagImport extends AbstractImport
 
         $data = $this->prepareEntry($importedEntry);
 
-        $entry = $this->fetchContent(
-            new Entry($this->user),
-            $importedEntry['url'],
-            $data
-        );
+        $entry = new Entry($this->user);
+        $entry->setUrl($data['url']);
+        $entry->setTitle($data['title']);
 
-        // jump to next entry in case of problem while getting content
-        if (false === $entry) {
-            ++$this->skippedEntries;
-
-            return;
-        }
+        // update entry with content (in case fetching failed, the given entry will be return)
+        $entry = $this->fetchContent($entry, $data['url'], $data);
 
         if (array_key_exists('tags', $data)) {
             $this->contentProxy->assignTagsToEntry(

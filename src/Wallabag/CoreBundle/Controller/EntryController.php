@@ -17,26 +17,35 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 class EntryController extends Controller
 {
     /**
-     * @param Entry $entry
+     * Fetch content and update entry.
+     * In case it fails, entry will return to avod loosing the data.
+     *
+     * @param Entry  $entry
+     * @param string $prefixMessage Should be the translation key: entry_saved or entry_reloaded
+     *
+     * @return Entry
      */
-    private function updateEntry(Entry $entry)
+    private function updateEntry(Entry $entry, $prefixMessage = 'entry_saved')
     {
+        // put default title in case of fetching content failed
+        $entry->setTitle('No title found');
+
+        $message = 'flashes.entry.notice.'.$prefixMessage;
+
         try {
             $entry = $this->get('wallabag_core.content_proxy')->updateEntry($entry, $entry->getUrl());
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entry);
-            $em->flush();
         } catch (\Exception $e) {
             $this->get('logger')->error('Error while saving an entry', [
                 'exception' => $e,
                 'entry' => $entry,
             ]);
 
-            return false;
+            $message = 'flashes.entry.notice.'.$prefixMessage.'_failed';
         }
 
-        return true;
+        $this->get('session')->getFlashBag()->add('notice', $message);
+
+        return $entry;
     }
 
     /**
@@ -66,12 +75,11 @@ class EntryController extends Controller
                 return $this->redirect($this->generateUrl('view', ['id' => $existingEntry->getId()]));
             }
 
-            $message = 'flashes.entry.notice.entry_saved';
-            if (false === $this->updateEntry($entry)) {
-                $message = 'flashes.entry.notice.entry_saved_failed';
-            }
+            $this->updateEntry($entry);
 
-            $this->get('session')->getFlashBag()->add('notice', $message);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($entry);
+            $em->flush();
 
             return $this->redirect($this->generateUrl('homepage'));
         }
@@ -95,6 +103,10 @@ class EntryController extends Controller
 
         if (false === $this->checkIfEntryAlreadyExists($entry)) {
             $this->updateEntry($entry);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($entry);
+            $em->flush();
         }
 
         return $this->redirect($this->generateUrl('homepage'));
@@ -316,15 +328,11 @@ class EntryController extends Controller
     {
         $this->checkUserAction($entry);
 
-        $message = 'flashes.entry.notice.entry_reloaded';
-        if (false === $this->updateEntry($entry)) {
-            $message = 'flashes.entry.notice.entry_reload_failed';
-        }
+        $this->updateEntry($entry, 'entry_reloaded');
 
-        $this->get('session')->getFlashBag()->add(
-            'notice',
-            $message
-        );
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($entry);
+        $em->flush();
 
         return $this->redirect($this->generateUrl('view', ['id' => $entry->getId()]));
     }
