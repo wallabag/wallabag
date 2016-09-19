@@ -24,7 +24,7 @@ import: "import"
 misc: "różne"
 modify_settings: "zatwierdz"
 piwik_host: Host twojej strony Piwik
-tpiwik_site_id: ID twojej strony Piwik
+piwik_site_id: ID twojej strony Piwik
 piwik_enabled: Włacz Piwik
 demo_mode_enabled: "Włacz tryb demo? (używany wyłącznie dla publicznej demonstracji Wallabag)"
 demo_mode_username: "Użytkownik Demonstracyjny"
