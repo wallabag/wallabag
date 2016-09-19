@@ -4,13 +4,13 @@ Wallabag updaten
 Update auf einem dedizierten Webserver
 --------------------------------------
 
-Das neueste Release ist auf https://www.wallabag.org/pages/download-wallabag.html veröffentlicht. Um deine wallabag Installation auf die neueste Version upzudaten, führe die folgenden Kommandos in deinem wallabag Ordner aus (ersetze ``2.0.3`` mit der neuesten Releasenummer):
+Das neueste Release ist auf https://www.wallabag.org/pages/download-wallabag.html veröffentlicht. Um deine wallabag Installation auf die neueste Version upzudaten, führe die folgenden Kommandos in deinem wallabag Ordner aus (ersetze ``2.0.8`` mit der neuesten Releasenummer):
 
 ::
 
     git fetch origin
     git fetch --tags
-    git checkout 2.0.3
+    git checkout 2.0.8
     SYMFONY_ENV=prod composer install --no-dev -o --prefer-dist
     php bin/console cache:clear --env=prod
 
@@ -24,6 +24,8 @@ Lade das neueste Release von wallabag herunter:
 .. code-block:: bash
 
     wget http://wllbg.org/latest-v2-package && tar xvf latest-v2-package
+
+(md5 hash: ``4f84c725d1d6e3345eae0a406115e5ff``)
 
 Entpacke das Archiv in deinen wallabag Ordner und ersetze ``app/config/parameters.yml`` mit deiner Datei.
 

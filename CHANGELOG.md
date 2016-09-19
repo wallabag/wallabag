@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.0.8] - 2016-09-07
+
+### Added
+
+- [#2262](https://github.com/wallabag/wallabag/pull/2262) Added a check for the database connection during installation (Jeremy Benoist)
+- [#2235](https://github.com/wallabag/wallabag/pull/2235) Added configuration for german documentation website, [available here](http://doc.wallabag.org/de/latest/) (Nicolas Lœuillet)
+
+### Changed
+
+- [graby](https://github.com/j0k3r/graby/releases/tag/1.4.3) Update Graby version, which now handles ZIP files (Jeremy Benoist)
+- [#2230](https://github.com/wallabag/wallabag/pull/2230) Changed title display in card view (Danilow Alexandr)
+
+### Fixed 
+
+- [#2234](https://github.com/wallabag/wallabag/pull/2234) Fixed mailto link in documentation (Christian Studer)
+- [#2241](https://github.com/wallabag/wallabag/pull/2241) Fixed the height of the "Add new article" field in Chrome (Danilow Alexandr)
+- [#2238](https://github.com/wallabag/wallabag/pull/2238) Fixed login page in Qupzilla (Danilow Alexandr)
+
 ## [2.0.7] - 2016-08-22
 
 ### Added

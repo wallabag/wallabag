@@ -125,6 +125,12 @@ class InstallCommandTest extends WallabagCoreTestCase
 
     public function testRunInstallCommandWithDatabaseRemoved()
     {
+        // skipped SQLite check when database is removed because while testing for the connection,
+        // the driver will create the file (so the database) before testing if database exist
+        if ($this->getClient()->getContainer()->get('doctrine')->getConnection()->getDriver() instanceof \Doctrine\DBAL\Driver\PDOSqlite\Driver) {
+            $this->markTestSkipped('SQLite spotted: can\'t test with database removed.');
+        }
+
         $application = new Application($this->getClient()->getKernel());
         $application->add(new DropDatabaseDoctrineCommand());
 

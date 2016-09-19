@@ -163,8 +163,12 @@ class EntriesExport
                 $book->setSubject($tag['value']);
             }
 
+            // the reader in Kobo Devices doesn't likes special caracters
+            // in filenames, we limit to A-z/0-9
+            $filename = preg_replace('/[^A-Za-z0-9\-]/', '', $entry->getTitle());
+
             $chapter = $content_start.$entry->getContent().$bookEnd;
-            $book->addChapter($entry->getTitle(), htmlspecialchars($entry->getTitle()).'.html', $chapter, true, EPub::EXTERNAL_REF_ADD);
+            $book->addChapter($entry->getTitle(), htmlspecialchars($filename).'.html', $chapter, true, EPub::EXTERNAL_REF_ADD);
         }
 
         return Response::create(

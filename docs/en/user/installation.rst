@@ -53,7 +53,7 @@ To install wallabag itself, you must run the following commands:
 
     git clone https://github.com/wallabag/wallabag.git
     cd wallabag
-    git checkout 2.0.7
+    git checkout 2.0.8
     SYMFONY_ENV=prod composer install --no-dev -o --prefer-dist
     php bin/console wallabag:install --env=prod
 
@@ -84,6 +84,8 @@ Execute this command to download and extract the latest package:
 .. code-block:: bash
 
     wget http://wllbg.org/latest-v2-package && tar xvf latest-v2-package
+
+(md5 hash of the package: ``4f84c725d1d6e3345eae0a406115e5ff``)
 
 Now, read the following documentation to create your virtual host, then access your wallabag.
 If you changed the database configuration to use MySQL or PostgreSQL, you need to create a user via this command ``php bin/console wallabag:install --env=prod``.
