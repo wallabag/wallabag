@@ -8,8 +8,8 @@ export_csv: Włącz eksport do CSV
 export_json: Włącz eksport do JSON
 export_txt: Włącz eksport do TXT
 export_xml: Włącz eksport do XML
-# import_with_rabbitmq: Enable RabbitMQ to import data asynchronously
-# import_with_redis: Enable Redis to import data asynchronously
+import_with_rabbitmq: Włącz RabbitMQ dla asynchronicznego importu danych
+import_with_redis: Włącz Redis dla asynchronicznego importu danych
 shaarli_url: Adress URL Shaarli, jeżeli usługa jest włączona
 share_diaspora: Włącz udostępnianie dla Diaspora
 share_mail: Włącz udostępnianie przez email
@@ -23,9 +23,9 @@ export: "eksport"
 import: "import"
 misc: "różne"
 modify_settings: "zatwierdz"
-# piwik_host: Host of your website in Piwik
-# piwik_site_id: ID of your website in Piwik
-# piwik_enabled: Enable Piwik
-# demo_mode_enabled: "Enable demo mode ? (only used for the wallabag public demo)"
-# demo_mode_username: "Demo user"
-# share_public: Allow public url for entries
+piwik_host: Host twojej strony Piwik
+tpiwik_site_id: ID twojej strony Piwik
+piwik_enabled: Włacz Piwik
+demo_mode_enabled: "Włacz tryb demo? (używany wyłącznie dla publicznej demonstracji Wallabag)"
+demo_mode_username: "Użytkownik Demonstracyjny"
+share_public: Zezwalaj na publiczny adres url dla wpisow
