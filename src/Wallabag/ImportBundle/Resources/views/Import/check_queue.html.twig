@@ -1,0 +1,11 @@
+{% if nbRedisMessages > 0 %}
+    <script>
+        Materialize.toast('Messages in queue: {{ nbRedisMessages }}', 4000);
+    </script>
+{% endif %}
+
+{% if nbRabbitMessages > 0 %}
+    <script>
+        Materialize.toast('Messages in queue: {{ nbRabbitMessages }}', 4000);
+    </script>
+{% endif %}

@@ -12,7 +12,15 @@ class WallabagV2Controller extends WallabagController
      */
     protected function getImportService()
     {
-        return $this->get('wallabag_import.wallabag_v2.import');
+        $service = $this->get('wallabag_import.wallabag_v2.import');
+
+        if ($this->get('craue_config')->get('import_with_rabbitmq')) {
+            $service->setProducer($this->get('old_sound_rabbit_mq.import_wallabag_v2_producer'));
+        } elseif ($this->get('craue_config')->get('import_with_redis')) {
+            $service->setProducer($this->get('wallabag_import.producer.redis.wallabag_v2'));
+        }
+
+        return $service;
     }
 
     /**

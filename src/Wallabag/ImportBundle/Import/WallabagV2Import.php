@@ -31,12 +31,22 @@ class WallabagV2Import extends WallabagImport
     /**
      * {@inheritdoc}
      */
-    protected function prepareEntry($entry = [], $markAsRead = false)
+    protected function prepareEntry($entry = [])
     {
         return [
             'html' => $entry['content'],
             'content_type' => $entry['mimetype'],
-            'is_archived' => ($entry['is_archived'] || $markAsRead),
+            'is_archived' => ($entry['is_archived'] || $this->markAsRead),
         ] + $entry;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function setEntryAsRead(array $importedEntry)
+    {
+        $importedEntry['is_archived'] = 1;
+
+        return $importedEntry;
     }
 }

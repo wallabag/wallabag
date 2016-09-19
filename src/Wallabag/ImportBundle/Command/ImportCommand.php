@@ -26,6 +26,10 @@ class ImportCommand extends ContainerAwareCommand
     {
         $output->writeln('Start : '.(new \DateTime())->format('d-m-Y G:i:s').' ---');
 
+        if (!file_exists($input->getArgument('filepath'))) {
+            throw new Exception(sprintf('File "%s" not found', $input->getArgument('filepath')));
+        }
+
         $em = $this->getContainer()->get('doctrine')->getManager();
         // Turning off doctrine default logs queries for saving memory
         $em->getConnection()->getConfiguration()->setSQLLogger(null);
@@ -43,9 +47,9 @@ class ImportCommand extends ContainerAwareCommand
         }
 
         $wallabag->setMarkAsRead($input->getOption('markAsRead'));
+        $wallabag->setUser($user);
 
         $res = $wallabag
-            ->setUser($user)
             ->setFilepath($input->getArgument('filepath'))
             ->import();
 

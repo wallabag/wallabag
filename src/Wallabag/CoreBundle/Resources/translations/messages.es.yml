@@ -68,6 +68,7 @@ config:
             200_word: 'Leo ~200 palabras por minuto'
             300_word: 'Leo ~300 palabras por minuto'
             400_word: 'Leo ~400 palabras por minuto'
+        # pocket_consumer_key_label: Consumer key for Pocket to import contents
     form_rss:
         description: 'Los feeds RSS de wallabag permiten leer los artículos guardados con su lector RSS favorito. Necesita generar un token primero'
         token_label: 'RSS token'
@@ -346,6 +347,8 @@ import:
         page_title: 'Importar > Readability'
     #     description: 'This importer will import all your Readability articles. On the tools (https://www.readability.com/tools/) page, click on "Export your data" in the "Data Export" section. You will received an email to download a json (which does not end with .json in fact).'
     #     how_to: 'Please select your Readability export and click on the below button to upload and import it.'
+    worker:
+        # enabled: "Import is made asynchronously. Once the import task is started, an external worker will handle jobs one at a time. The current service is:"
 
 developer:
     page_title: 'Promotor'
@@ -411,10 +414,10 @@ flashes:
         notice:
             entry_already_saved: 'Entrada ya guardada por %fecha%'
             entry_saved: 'Entrada guardada'
-            # entry_saved_failed: 'Failed to save entry'
+            # entry_saved_failed: 'Entry saved but fetching content failed'
             entry_updated: 'Entrada actualizada'
             entry_reloaded: 'Entrada recargada'
-            entry_reload_failed: 'Entrada recargada reprobada'
+            # entry_reload_failed: 'Entry reloaded but fetching content failed'
             entry_archived: 'Artículo archivado'
             entry_unarchived: 'Artículo desarchivado'
             entry_starred: 'Artículo guardado en los favoritos'
@@ -425,9 +428,10 @@ flashes:
             tag_added: 'Etiqueta añadida'
     import:
         notice:
-             failed: 'Importación reprobada, por favor inténtelo de nuevo.'
-             failed_on_file: 'Se ocurre un error por procesar importación. Por favor verifique su archivo importado.'
-             summary: 'Resúmen importado: %importado% importado, %saltados% ya guardado.'
+            failed: 'Importación reprobada, por favor inténtelo de nuevo.'
+            failed_on_file: 'Se ocurre un error por procesar importación. Por favor verifique su archivo importado.'
+            summary: 'Resúmen importado: %importado% importado, %saltados% ya guardado.'
+            # summary_with_queue: 'Import summary: %queued% queued.'
     developer:
         notice:
             client_created: 'Nuevo cliente creado.'

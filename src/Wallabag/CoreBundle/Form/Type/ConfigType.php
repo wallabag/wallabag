@@ -52,6 +52,9 @@ class ConfigType extends AbstractType
                 'choices' => array_flip($this->languages),
                 'label' => 'config.form_settings.language_label',
             ])
+            ->add('pocket_consumer_key', null, [
+                'label' => 'config.form_settings.pocket_consumer_key_label',
+            ])
             ->add('save', SubmitType::class, [
                 'label' => 'config.form.save',
             ])

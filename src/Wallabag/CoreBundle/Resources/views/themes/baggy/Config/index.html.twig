@@ -44,6 +44,18 @@
             </div>
         </fieldset>
 
+        <fieldset class="w500p inline">
+            <div class="row">
+                {{ form_label(form.config.pocket_consumer_key) }}
+                {{ form_errors(form.config.pocket_consumer_key) }}
+                {{ form_widget(form.config.pocket_consumer_key) }}
+                <p>
+                    &raquo;
+                    <a href="https://getpocket.com/developer/docs/authentication">https://getpocket.com/developer/docs/authentication</a>
+                </p>
+            </div>
+        </fieldset>
+
         {{ form_rest(form.config) }}
     </form>
 

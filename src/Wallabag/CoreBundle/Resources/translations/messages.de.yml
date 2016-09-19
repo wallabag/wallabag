@@ -68,6 +68,7 @@ config:
             200_word: 'Ich lese ~200 Wörter pro Minute'
             300_word: 'Ich lese ~300 Wörter pro Minute'
             400_word: 'Ich lese ~400 Wörter pro Minute'
+        pocket_consumer_key_label: Consumer-Key für Pocket, um Inhalte zu importieren
     form_rss:
         description: 'Die RSS-Feeds von wallabag erlauben es dir, deine gespeicherten Artikel mit deinem bevorzugten RSS-Reader zu lesen. Vorher musst du jedoch einen Token erstellen.'
         token_label: 'RSS-token'
@@ -346,6 +347,8 @@ import:
         page_title: 'Aus Readability importieren'
     #     description: 'This importer will import all your Readability articles. On the tools (https://www.readability.com/tools/) page, click on "Export your data" in the "Data Export" section. You will received an email to download a json (which does not end with .json in fact).'
     #     how_to: 'Please select your Readability export and click on the below button to upload and import it.'
+    worker:
+        # enabled: "Import is made asynchronously. Once the import task is started, an external worker will handle jobs one at a time. The current service is:"
 
 developer:
     page_title: 'Entwickler'
@@ -411,10 +414,10 @@ flashes:
         notice:
             entry_already_saved: 'Eintrag bereits am %date% gespeichert'
             entry_saved: 'Eintrag gespeichert'
-            # entry_saved_failed: 'Failed to save entry'
+            # entry_saved_failed: 'Entry saved but fetching content failed'
             entry_updated: 'Eintrag aktualisiert'
             entry_reloaded: 'Eintrag neugeladen'
-            entry_reload_failed: 'Neuladen des Eintrags fehlgeschlagen'
+            # entry_reload_failed: 'Entry reloaded but fetching content failed'
             entry_archived: 'Artikel archiviert'
             entry_unarchived: 'Artikel dearchiviert'
             entry_starred: 'Artikel favorisiert'
@@ -428,6 +431,7 @@ flashes:
             failed: 'Import fehlgeschlagen, bitte erneut probieren.'
             failed_on_file: 'Fehler während des Imports. Bitte überprüfe deine Import-Datei.'
             summary: 'Import-Zusammenfassung: %imported% importiert, %skipped% bereits gespeichert.'
+            # summary_with_queue: 'Import summary: %queued% queued.'
     developer:
         notice:
             client_created: 'Neuer Client erstellt.'

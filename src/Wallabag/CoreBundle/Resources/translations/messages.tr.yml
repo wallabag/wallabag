@@ -68,6 +68,7 @@ config:
             # 200_word: 'I read ~200 words per minute'
             # 300_word: 'I read ~300 words per minute'
             # 400_word: 'I read ~400 words per minute'
+        # pocket_consumer_key_label: Consumer key for Pocket to import contents
     form_rss:
         description: 'wallabag RSS akışı kaydetmiş olduğunuz makalelerini favori RSS okuyucunuzda görüntülemenizi sağlar. Bunu yapabilmek için öncelikle belirteç (token) oluşturmalısınız.'
         token_label: 'RSS belirteci (token)'
@@ -344,8 +345,10 @@ import:
         # description: 'This importer will import all your wallabag v2 articles. Go to All articles, then, on the export sidebar, click on "JSON". You will have a "All articles.json" file.'
     readability:
         page_title: 'İçe Aktar > Readability'
-    #     description: 'This importer will import all your Readability articles. On the tools (https://www.readability.com/tools/) page, click on "Export your data" in the "Data Export" section. You will received an email to download a json (which does not end with .json in fact).'
-    #     how_to: 'Please select your Readability export and click on the below button to upload and import it.'
+        # description: 'This importer will import all your Readability articles. On the tools (https://www.readability.com/tools/) page, click on "Export your data" in the "Data Export" section. You will received an email to download a json (which does not end with .json in fact).'
+        # how_to: 'Please select your Readability export and click on the below button to upload and import it.'
+    worker:
+        # enabled: "Import is made asynchronously. Once the import task is started, an external worker will handle jobs one at a time. The current service is:"
 
 developer:
     # page_title: 'Developer'
@@ -411,10 +414,10 @@ flashes:
         notice:
             entry_already_saved: 'Entry already saved on %date%'
             entry_saved: 'Makale kaydedildi'
-            # entry_saved_failed: 'Failed to save entry'
+            # entry_saved_failed: 'Entry saved but fetching content failed'
             # entry_updated: 'Entry updated'
             entry_reloaded: 'Makale içeriği yenilendi'
-            # entry_reload_failed: 'Failed to reload entry'
+            # entry_reload_failed: 'Entry reloaded but fetching content failed'
             entry_archived: 'Makale arşivlendi'
             entry_unarchived: 'Makale arşivden çıkartıldı'
             entry_starred: 'Makale favorilere eklendi'
@@ -428,6 +431,7 @@ flashes:
             # failed: 'Import failed, please try again.'
             # failed_on_file: 'Error while processing import. Please verify your import file.'
             # summary: 'Import summary: %imported% imported, %skipped% already saved.'
+            # summary_with_queue: 'Import summary: %queued% queued.'
     developer:
         notice:
             # client_created: 'New client created.'

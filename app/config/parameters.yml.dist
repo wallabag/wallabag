@@ -38,3 +38,15 @@ parameters:
     fosuser_confirmation: true
 
     from_email: no-reply@wallabag.org
+
+    rss_limit: 50
+
+    # RabbitMQ processing
+    rabbitmq_host: localhost
+    rabbitmq_port: 5672
+    rabbitmq_user: guest
+    rabbitmq_password: guest
+
+    # Redis processing
+    redis_host: localhost
+    redis_port: 6379

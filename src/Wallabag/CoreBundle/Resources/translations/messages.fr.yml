@@ -68,6 +68,7 @@ config:
             200_word: 'Je lis environ 200 mots par minute'
             300_word: 'Je lis environ 300 mots par minute'
             400_word: 'Je lis environ 400 mots par minute'
+        pocket_consumer_key_label: Clé d'authentification Pocket pour importer les données
     form_rss:
         description: "Les flux RSS fournis par wallabag vous permettent de lire vos articles sauvegardés dans votre lecteur de flux préféré. Pour pouvoir les utiliser, vous devez d'abord créer un jeton."
         token_label: 'Jeton RSS'
@@ -346,6 +347,8 @@ import:
         page_title: 'Importer > Readability'
         description: 'Cet outil va importer toutes vos données de Readability. Sur la page des outils (https://www.readability.com/tools/), cliquez sur "Export your data" dans la section "Data Export". Vous allez recevoir un email avec un lien pour télécharger le json.'
         how_to: "Choisissez le fichier de votre export Readability et cliquez sur le bouton ci-dessous pour l'importer."
+    worker:
+        enabled: "Les imports sont asynchrones. Une fois l'import commencé un worker externe traitera les messages un par un. Le service activé est :"
 
 developer:
     page_title: 'Développeur'
@@ -413,10 +416,10 @@ flashes:
         notice:
             entry_already_saved: 'Article déjà sauvergardé le %date%'
             entry_saved: 'Article enregistré'
-            entry_saved_failed: "L'enregistrement a échoué"
+            entry_saved_failed: 'Article enregistré mais impossible de récupérer le contenu'
             entry_updated: 'Article mis à jour'
             entry_reloaded: 'Article rechargé'
-            entry_reload_failed: "Le rechargement de l'article a échoué"
+            entry_reload_failed: "Article mis à jour mais impossible de récupérer le contenu"
             entry_archived: 'Article marqué comme lu'
             entry_unarchived: 'Article marqué comme non lu'
             entry_starred: 'Article ajouté dans les favoris'
@@ -430,6 +433,7 @@ flashes:
             failed: "L'import a échoué, veuillez ré-essayer"
             failed_on_file: "Erreur lors du traitement de l'import. Vérifier votre fichier."
             summary: "Rapport d'import: %imported% importés, %skipped% déjà présent."
+            summary_with_queue: "Rapport d'import: %queued% en cours de traitement."
     developer:
         notice:
             client_created: 'Nouveau client %name% créé'

@@ -6,28 +6,31 @@ use Psr\Log\NullLogger;
 use Doctrine\ORM\EntityManager;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Helper\ContentProxy;
-use Craue\ConfigBundle\Util\Config;
 
 class PocketImport extends AbstractImport
 {
-    private $user;
     private $client;
-    private $consumerKey;
-    private $skippedEntries = 0;
-    private $importedEntries = 0;
-    private $markAsRead;
-    protected $accessToken;
+    private $accessToken;
 
-    public function __construct(TokenStorageInterface $tokenStorage, EntityManager $em, ContentProxy $contentProxy, Config $craueConfig)
+    const NB_ELEMENTS = 5000;
+
+    public function __construct(EntityManager $em, ContentProxy $contentProxy)
     {
-        $this->user = $tokenStorage->getToken()->getUser();
         $this->em = $em;
         $this->contentProxy = $contentProxy;
-        $this->consumerKey = $craueConfig->get('pocket_consumer_key');
         $this->logger = new NullLogger();
+    }
+
+    /**
+     * Only used for test purpose.
+     *
+     * @return string
+     */
+    public function getAccessToken()
+    {
+        return $this->accessToken;
     }
 
     /**
@@ -66,7 +69,7 @@ class PocketImport extends AbstractImport
         $request = $this->client->createRequest('POST', 'https://getpocket.com/v3/oauth/request',
             [
                 'body' => json_encode([
-                    'consumer_key' => $this->consumerKey,
+                    'consumer_key' => $this->user->getConfig()->getPocketConsumerKey(),
                     'redirect_uri' => $redirectUri,
                 ]),
             ]
@@ -96,7 +99,7 @@ class PocketImport extends AbstractImport
         $request = $this->client->createRequest('POST', 'https://getpocket.com/v3/oauth/authorize',
             [
                 'body' => json_encode([
-                    'consumer_key' => $this->consumerKey,
+                    'consumer_key' => $this->user->getConfig()->getPocketConsumerKey(),
                     'code' => $code,
                 ]),
             ]
@@ -116,38 +119,22 @@ class PocketImport extends AbstractImport
     }
 
     /**
-     * Set whether articles must be all marked as read.
-     *
-     * @param bool $markAsRead
-     */
-    public function setMarkAsRead($markAsRead)
-    {
-        $this->markAsRead = $markAsRead;
-
-        return $this;
-    }
-
-    /**
-     * Get whether articles must be all marked as read.
-     */
-    public function getMarkAsRead()
-    {
-        return $this->markAsRead;
-    }
-
-    /**
      * {@inheritdoc}
      */
-    public function import()
+    public function import($offset = 0)
     {
+        static $run = 0;
+
         $request = $this->client->createRequest('POST', 'https://getpocket.com/v3/get',
             [
                 'body' => json_encode([
-                    'consumer_key' => $this->consumerKey,
+                    'consumer_key' => $this->user->getConfig()->getPocketConsumerKey(),
                     'access_token' => $this->accessToken,
                     'detailType' => 'complete',
                     'state' => 'all',
-                    'sort' => 'oldest',
+                    'sort' => 'newest',
+                    'count' => self::NB_ELEMENTS,
+                    'offset' => $offset,
                 ]),
             ]
         );
@@ -162,20 +149,24 @@ class PocketImport extends AbstractImport
 
         $entries = $response->json();
 
-        $this->parseEntries($entries['list']);
+        if ($this->producer) {
+            $this->parseEntriesForProducer($entries['list']);
+        } else {
+            $this->parseEntries($entries['list']);
+        }
+
+        // if we retrieve exactly the amount of items requested it means we can get more
+        // re-call import and offset item by the amount previous received:
+        //  - first call get 5k offset 0
+        //  - second call get 5k offset 5k
+        //  - and so on
+        if (count($entries['list']) === self::NB_ELEMENTS) {
+            ++$run;
+
+            return $this->import(self::NB_ELEMENTS * $run);
+        }
 
         return true;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getSummary()
-    {
-        return [
-            'skipped' => $this->skippedEntries,
-            'imported' => $this->importedEntries,
-        ];
     }
 
     /**
@@ -189,77 +180,74 @@ class PocketImport extends AbstractImport
     }
 
     /**
-     * @see https://getpocket.com/developer/docs/v3/retrieve
+     * {@inheritdoc}
      *
-     * @param $entries
+     * @see https://getpocket.com/developer/docs/v3/retrieve
      */
-    private function parseEntries($entries)
+    public function parseEntry(array $importedEntry)
     {
-        $i = 1;
+        $url = isset($importedEntry['resolved_url']) && $importedEntry['resolved_url'] != '' ? $importedEntry['resolved_url'] : $importedEntry['given_url'];
 
-        foreach ($entries as $pocketEntry) {
-            $url = isset($pocketEntry['resolved_url']) && $pocketEntry['resolved_url'] != '' ? $pocketEntry['resolved_url'] : $pocketEntry['given_url'];
+        $existingEntry = $this->em
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findByUrlAndUserId($url, $this->user->getId());
 
-            $existingEntry = $this->em
-                ->getRepository('WallabagCoreBundle:Entry')
-                ->findByUrlAndUserId($url, $this->user->getId());
+        if (false !== $existingEntry) {
+            ++$this->skippedEntries;
 
-            if (false !== $existingEntry) {
-                ++$this->skippedEntries;
-                continue;
-            }
-
-            $entry = new Entry($this->user);
-            $entry = $this->fetchContent($entry, $url);
-
-            // jump to next entry in case of problem while getting content
-            if (false === $entry) {
-                ++$this->skippedEntries;
-                continue;
-            }
-
-            // 0, 1, 2 - 1 if the item is archived - 2 if the item should be deleted
-            if ($pocketEntry['status'] == 1 || $this->markAsRead) {
-                $entry->setArchived(true);
-            }
-
-            // 0 or 1 - 1 If the item is starred
-            if ($pocketEntry['favorite'] == 1) {
-                $entry->setStarred(true);
-            }
-
-            $title = 'Untitled';
-            if (isset($pocketEntry['resolved_title']) && $pocketEntry['resolved_title'] != '') {
-                $title = $pocketEntry['resolved_title'];
-            } elseif (isset($pocketEntry['given_title']) && $pocketEntry['given_title'] != '') {
-                $title = $pocketEntry['given_title'];
-            }
-
-            $entry->setTitle($title);
-
-            // 0, 1, or 2 - 1 if the item has images in it - 2 if the item is an image
-            if (isset($pocketEntry['has_image']) && $pocketEntry['has_image'] > 0 && isset($pocketEntry['images'][1])) {
-                $entry->setPreviewPicture($pocketEntry['images'][1]['src']);
-            }
-
-            if (isset($pocketEntry['tags']) && !empty($pocketEntry['tags'])) {
-                $this->contentProxy->assignTagsToEntry(
-                    $entry,
-                    array_keys($pocketEntry['tags'])
-                );
-            }
-
-            $this->em->persist($entry);
-            ++$this->importedEntries;
-
-            // flush every 20 entries
-            if (($i % 20) === 0) {
-                $this->em->flush();
-            }
-            ++$i;
+            return;
         }
 
-        $this->em->flush();
-        $this->em->clear();
+        $entry = new Entry($this->user);
+        $entry->setUrl($url);
+
+        // update entry with content (in case fetching failed, the given entry will be return)
+        $entry = $this->fetchContent($entry, $url);
+
+        // 0, 1, 2 - 1 if the item is archived - 2 if the item should be deleted
+        $entry->setArchived($importedEntry['status'] == 1 || $this->markAsRead);
+
+        // 0 or 1 - 1 If the item is starred
+        $entry->setStarred($importedEntry['favorite'] == 1);
+
+        $title = 'Untitled';
+        if (isset($importedEntry['resolved_title']) && $importedEntry['resolved_title'] != '') {
+            $title = $importedEntry['resolved_title'];
+        } elseif (isset($importedEntry['given_title']) && $importedEntry['given_title'] != '') {
+            $title = $importedEntry['given_title'];
+        }
+
+        $entry->setTitle($title);
+
+        // 0, 1, or 2 - 1 if the item has images in it - 2 if the item is an image
+        if (isset($importedEntry['has_image']) && $importedEntry['has_image'] > 0 && isset($importedEntry['images'][1])) {
+            $entry->setPreviewPicture($importedEntry['images'][1]['src']);
+        }
+
+        if (isset($importedEntry['tags']) && !empty($importedEntry['tags'])) {
+            $this->contentProxy->assignTagsToEntry(
+                $entry,
+                array_keys($importedEntry['tags'])
+            );
+        }
+
+        if (!empty($importedEntry['time_added'])) {
+            $entry->setCreatedAt((new \DateTime())->setTimestamp($importedEntry['time_added']));
+        }
+
+        $this->em->persist($entry);
+        ++$this->importedEntries;
+
+        return $entry;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function setEntryAsRead(array $importedEntry)
+    {
+        $importedEntry['status'] = '1';
+
+        return $importedEntry;
     }
 }

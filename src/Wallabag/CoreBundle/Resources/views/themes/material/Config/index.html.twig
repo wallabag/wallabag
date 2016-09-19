@@ -62,6 +62,18 @@
                                 </div>
                             </div>
 
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form_label(form.config.pocket_consumer_key) }}
+                                    {{ form_errors(form.config.pocket_consumer_key) }}
+                                    {{ form_widget(form.config.pocket_consumer_key) }}
+                                    <p>
+                                        &raquo;
+                                        <a href="https://getpocket.com/developer/docs/authentication">https://getpocket.com/developer/docs/authentication</a>
+                                    </p>
+                                </div>
+                            </div>
+
                             {{ form_widget(form.config.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
                             {{ form_rest(form.config) }}
                         </form>

@@ -20,6 +20,7 @@ class LoadConfigData extends AbstractFixture implements OrderedFixtureInterface
         $adminConfig->setItemsPerPage(30);
         $adminConfig->setReadingSpeed(1);
         $adminConfig->setLanguage('en');
+        $adminConfig->setPocketConsumerKey('xxxxx');
 
         $manager->persist($adminConfig);
 
@@ -30,6 +31,7 @@ class LoadConfigData extends AbstractFixture implements OrderedFixtureInterface
         $bobConfig->setItemsPerPage(10);
         $bobConfig->setReadingSpeed(1);
         $bobConfig->setLanguage('fr');
+        $bobConfig->setPocketConsumerKey(null);
 
         $manager->persist($bobConfig);
 
@@ -40,6 +42,7 @@ class LoadConfigData extends AbstractFixture implements OrderedFixtureInterface
         $emptyConfig->setItemsPerPage(10);
         $emptyConfig->setReadingSpeed(1);
         $emptyConfig->setLanguage('en');
+        $emptyConfig->setPocketConsumerKey(null);
 
         $manager->persist($emptyConfig);
 

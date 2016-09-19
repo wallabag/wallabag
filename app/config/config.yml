@@ -215,3 +215,67 @@ lexik_maintenance:
     response:
         code: 503
         status: "wallabag Service Temporarily Unavailable"
+
+old_sound_rabbit_mq:
+    connections:
+        default:
+            host:     "%rabbitmq_host%"
+            port:     "%rabbitmq_port%"
+            user:     "%rabbitmq_user%"
+            password: "%rabbitmq_password%"
+            vhost:    /
+            lazy:     true
+    producers:
+        import_pocket:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.pocket'
+                type: topic
+        import_readability:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.readability'
+                type: topic
+        import_wallabag_v1:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.wallabag_v1'
+                type: topic
+        import_wallabag_v2:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.wallabag_v2'
+                type: topic
+    consumers:
+        import_pocket:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.pocket'
+                type: topic
+            queue_options:
+                name: 'wallabag.import.pocket'
+            callback: wallabag_import.consumer.amqp.pocket
+        import_readability:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.readability'
+                type: topic
+            queue_options:
+                name: 'wallabag.import.readability'
+            callback: wallabag_import.consumer.amqp.readability
+        import_wallabag_v1:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.wallabag_v1'
+                type: topic
+            queue_options:
+                name: 'wallabag.import.wallabag_v1'
+            callback: wallabag_import.consumer.amqp.wallabag_v1
+        import_wallabag_v2:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.wallabag_v2'
+                type: topic
+            queue_options:
+                name: 'wallabag.import.wallabag_v2'
+            callback: wallabag_import.consumer.amqp.wallabag_v2

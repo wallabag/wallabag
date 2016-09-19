@@ -8,7 +8,8 @@ export_csv: Enable CSV export
 export_json: Enable JSON export
 export_txt: Enable TXT export
 export_xml: Enable XML export
-pocket_consumer_key: Consumer key for Pocket to import contents (https://getpocket.com/developer/docs/authentication)
+import_with_rabbitmq: Enable RabbitMQ to import data asynchronously
+import_with_redis: Enable Redis to import data asynchronously
 shaarli_url: Shaarli URL, if the service is enabled
 share_diaspora: Enable share to Diaspora
 share_mail: Enable share by email

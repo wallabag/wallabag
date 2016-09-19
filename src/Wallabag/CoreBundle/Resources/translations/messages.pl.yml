@@ -68,6 +68,7 @@ config:
             200_word: 'Czytam ~200 słów na minutę'
             300_word: 'Czytam ~300 słów na minutę'
             400_word: 'Czytam ~400 słów na minutę'
+        pocket_consumer_key_label: Klucz klienta Pocket do importu zawartości
     form_rss:
         description: 'Kanały RSS prowadzone przez wallabag pozwalają Ci na czytanie twoich zapisanych artykułów w twoium ulubionym czytniku RSS. Musisz najpierw wynegenerować tokena.‌'
         token_label: 'Token RSS'
@@ -346,6 +347,8 @@ import:
         page_title: 'Import > Readability'
         description: 'Ten importer, zaimportuje wszystkie twoje artykuły z Readability. Na stronie narzędzi (https://www.readability.com/tools/), kliknij na "Export your data" w sekcji "Data Export". Otrzymach email z plikiem JSON (plik nie będzie zawierał rozszerzenia .json).'
         how_to: 'Wybierz swój plik eksportu z Readability i kliknij poniższy przycisk, aby go załadować.'
+    worker:
+        # enabled: "Import is made asynchronously. Once the import task is started, an external worker will handle jobs one at a time. The current service is:"
 
 developer:
     page_title: 'Deweloper'
@@ -411,10 +414,10 @@ flashes:
         notice:
             entry_already_saved: 'Wpis już został dodany %date%'
             entry_saved: 'Wpis zapisany'
-            entry_saved_failed: 'Zapis artykułu się nie powiódł'
+            # entry_saved_failed: 'Entry saved but fetching content failed'
             entry_updated: 'Wpis zaktualizowany'
             entry_reloaded: 'Wpis ponownie załadowany'
-            entry_reload_failed: 'Błąd ponownego załadowania'
+            # entry_reload_failed: 'Entry reloaded but fetching content failed'
             entry_archived: 'Wpis dodany do archiwum'
             entry_unarchived: 'Wpis usunięty z archiwum'
             entry_starred: 'Wpis oznaczony gwiazdką'
@@ -428,6 +431,7 @@ flashes:
             failed: 'Nieudany import, prosimy spróbować ponownie.'
             failed_on_file: 'Błąd podczas ptrzetwarzania pliku. Sprawdż swój importowany plik.'
             summary: 'Podsumowanie importu: %imported% zaimportowane, %skipped% już zapisane.'
+            # summary_with_queue: 'Import summary: %queued% queued.'
     developer:
         notice:
             client_created: 'Nowy klient utworzony.'

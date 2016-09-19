@@ -8,7 +8,8 @@ export_csv: CSV-Export aktivieren
 export_json: JSON-Export aktivieren
 export_txt: TXT-Export aktivieren
 export_xml: XML-Export aktivieren
-pocket_consumer_key: Consumer-Key für Pocket, um Inhalte zu importieren (https://getpocket.com/developer/docs/authentication)
+# import_with_rabbitmq: Enable RabbitMQ to import data asynchronously
+# import_with_redis: Enable Redis to import data asynchronously
 shaarli_url: Shaarli-URL, sofern der Service aktiviert ist
 share_diaspora: Teilen zu Diaspora aktiveren
 share_mail: Teilen via E-Mail aktiveren

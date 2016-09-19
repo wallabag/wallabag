@@ -1,0 +1,8 @@
+{% set redis = craue_setting('import_with_redis') %}
+{% set rabbit = craue_setting('import_with_rabbitmq') %}
+
+{% if redis or rabbit %}
+    <div class="card-panel yellow darken-1 black-text">
+        {{ 'import.worker.enabled'|trans }} <strong>{% if rabbit %}RabbitMQ{% elseif redis %}Redis{% endif %}</strong>
+    </div>
+{% endif %}

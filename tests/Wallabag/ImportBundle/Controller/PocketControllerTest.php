@@ -17,6 +17,36 @@ class PocketControllerTest extends WallabagCoreTestCase
         $this->assertEquals(1, $crawler->filter('button[type=submit]')->count());
     }
 
+    public function testImportPocketWithRabbitEnabled()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $client->getContainer()->get('craue_config')->set('import_with_rabbitmq', 1);
+
+        $crawler = $client->request('GET', '/import/pocket');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertEquals(1, $crawler->filter('button[type=submit]')->count());
+
+        $client->getContainer()->get('craue_config')->set('import_with_rabbitmq', 0);
+    }
+
+    public function testImportPocketWithRedisEnabled()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $client->getContainer()->get('craue_config')->set('import_with_redis', 1);
+
+        $crawler = $client->request('GET', '/import/pocket');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertEquals(1, $crawler->filter('button[type=submit]')->count());
+
+        $client->getContainer()->get('craue_config')->set('import_with_redis', 0);
+    }
+
     public function testImportPocketAuthBadToken()
     {
         $this->logInAs('admin');

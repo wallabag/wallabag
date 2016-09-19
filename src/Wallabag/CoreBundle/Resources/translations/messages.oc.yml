@@ -68,6 +68,7 @@ config:
             200_word: "Legissi a l'entorn de 200 mots per minuta"
             300_word: "Legissi a l'entorn de 300 mots per minuta"
             400_word: "Legissi a l'entorn de 400 mots per minuta"
+        pocket_consumer_key_label: Clau d'autentificacion Pocket per importar las donadas
     form_rss:
         description: "Los fluxes RSS fornits per wallabag vos permeton de legir vòstres articles salvagardats dins vòstre lector de fluxes preferit. Per los poder emplegar, vos cal, d'en primièr crear un geton."
         token_label: 'Geton RSS'
@@ -346,6 +347,8 @@ import:
         page_title: 'Importer > Readability'
         description: "Aquesta aisina importarà totas vòstres articles de Readability. Sus la pagina de l'aisina (https://www.readability.com/tools/), clicatz sus \"Export your data\" dins la seccion \"Data Export\". Recebretz un corrièl per telecargar un json (qu'acaba pas amb un .json de fach)."
         how_to: "Mercés de seleccionar vòstre Readability fichièr e de clicar sul boton dejós per lo telecargar e l'importar."
+    worker:
+        # enabled: "Import is made asynchronously. Once the import task is started, an external worker will handle jobs one at a time. The current service is:"
 
 developer:
     page_title: 'Desvolopador'
@@ -411,10 +414,10 @@ flashes:
         notice:
             entry_already_saved: 'Article ja salvargardat lo %date%'
             entry_saved: 'Article enregistrat'
-            entry_saved_failed: "Fracàs de l'enregistrament de l'entrada"
+            # entry_saved_failed: 'Entry saved but fetching content failed'
             entry_updated: 'Article mes a jorn'
             entry_reloaded: 'Article recargat'
-            entry_reload_failed: "Fracàs de l'actualizacion de l'article"
+            # entry_reload_failed: 'Entry reloaded but fetching content failed'
             entry_archived: 'Article marcat coma legit'
             entry_unarchived: 'Article marcat coma pas legit'
             entry_starred: 'Article apondut dins los favorits'
@@ -428,6 +431,7 @@ flashes:
             failed: "L'importacion a fracassat, mercés de tornar ensajar"
             failed_on_file: "Errorr pendent du tractament de l'import. Mercés de verificar vòstre fichièr."
             summary: "Rapòrt d'import: %imported% importats, %skipped% ja presents."
+            # summary_with_queue: 'Import summary: %queued% queued.'
     developer:
         notice:
             client_created: 'Novèl client creat'

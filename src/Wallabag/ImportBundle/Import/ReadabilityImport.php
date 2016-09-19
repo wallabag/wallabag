@@ -3,28 +3,10 @@
 namespace Wallabag\ImportBundle\Import;
 
 use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\UserBundle\Entity\User;
 
 class ReadabilityImport extends AbstractImport
 {
-    private $user;
-    private $skippedEntries = 0;
-    private $importedEntries = 0;
     private $filepath;
-    private $markAsRead;
-
-    /**
-     * We define the user in a custom call because on the import command there is no logged in user.
-     * So we can't retrieve user from the `security.token_storage` service.
-     *
-     * @param User $user
-     */
-    public function setUser(User $user)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
 
     /**
      * {@inheritdoc}
@@ -63,37 +45,6 @@ class ReadabilityImport extends AbstractImport
     }
 
     /**
-     * Set whether articles must be all marked as read.
-     *
-     * @param bool $markAsRead
-     */
-    public function setMarkAsRead($markAsRead)
-    {
-        $this->markAsRead = $markAsRead;
-
-        return $this;
-    }
-
-    /**
-     * Get whether articles must be all marked as read.
-     */
-    public function getMarkAsRead()
-    {
-        return $this->markAsRead;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getSummary()
-    {
-        return [
-            'skipped' => $this->skippedEntries,
-            'imported' => $this->importedEntries,
-        ];
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function import()
@@ -116,64 +67,66 @@ class ReadabilityImport extends AbstractImport
             return false;
         }
 
+        if ($this->producer) {
+            $this->parseEntriesForProducer($data['bookmarks']);
+
+            return true;
+        }
+
         $this->parseEntries($data['bookmarks']);
 
         return true;
     }
 
     /**
-     * Parse and insert all given entries.
-     *
-     * @param $entries
+     * {@inheritdoc}
      */
-    protected function parseEntries($entries)
+    public function parseEntry(array $importedEntry)
     {
-        $i = 1;
+        $existingEntry = $this->em
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findByUrlAndUserId($importedEntry['article__url'], $this->user->getId());
 
-        foreach ($entries as $importedEntry) {
-            $existingEntry = $this->em
-                ->getRepository('WallabagCoreBundle:Entry')
-                ->findByUrlAndUserId($importedEntry['article__url'], $this->user->getId());
+        if (false !== $existingEntry) {
+            ++$this->skippedEntries;
 
-            if (false !== $existingEntry) {
-                ++$this->skippedEntries;
-                continue;
-            }
-
-            $data = [
-                'title' => $importedEntry['article__title'],
-                'url' => $importedEntry['article__url'],
-                'content_type' => '',
-                'language' => '',
-                'is_archived' => $importedEntry['archive'] || $this->markAsRead,
-                'is_starred' => $importedEntry['favorite'],
-            ];
-
-            $entry = $this->fetchContent(
-                new Entry($this->user),
-                $data['url'],
-                $data
-            );
-
-            // jump to next entry in case of problem while getting content
-            if (false === $entry) {
-                ++$this->skippedEntries;
-                continue;
-            }
-            $entry->setArchived($data['is_archived']);
-            $entry->setStarred($data['is_starred']);
-
-            $this->em->persist($entry);
-            ++$this->importedEntries;
-
-            // flush every 20 entries
-            if (($i % 20) === 0) {
-                $this->em->flush();
-            }
-            ++$i;
+            return;
         }
 
-        $this->em->flush();
-        $this->em->clear();
+        $data = [
+            'title' => $importedEntry['article__title'],
+            'url' => $importedEntry['article__url'],
+            'content_type' => '',
+            'language' => '',
+            'is_archived' => $importedEntry['archive'] || $this->markAsRead,
+            'is_starred' => $importedEntry['favorite'],
+            'created_at' => $importedEntry['date_added'],
+        ];
+
+        $entry = new Entry($this->user);
+        $entry->setUrl($data['url']);
+        $entry->setTitle($data['title']);
+
+        // update entry with content (in case fetching failed, the given entry will be return)
+        $entry = $this->fetchContent($entry, $data['url'], $data);
+
+        $entry->setArchived($data['is_archived']);
+        $entry->setStarred($data['is_starred']);
+        $entry->setCreatedAt(new \DateTime($data['created_at']));
+
+        $this->em->persist($entry);
+        ++$this->importedEntries;
+
+        return $entry;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function setEntryAsRead(array $importedEntry)
+    {
+        $importedEntry['archive'] = 1;
+
+        return $importedEntry;
     }
 }

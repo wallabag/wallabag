@@ -5,8 +5,11 @@ namespace Tests\Wallabag\ImportBundle\Import;
 use Wallabag\ImportBundle\Import\ReadabilityImport;
 use Wallabag\UserBundle\Entity\User;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\ImportBundle\Redis\Producer;
 use Monolog\Logger;
 use Monolog\Handler\TestHandler;
+use Simpleue\Queue\RedisQueue;
+use M6Web\Component\RedisMock\RedisMockFactory;
 
 class ReadabilityImportTest extends \PHPUnit_Framework_TestCase
 {
@@ -58,9 +61,9 @@ class ReadabilityImportTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $entryRepo->expects($this->exactly(2))
+        $entryRepo->expects($this->exactly(24))
             ->method('findByUrlAndUserId')
-            ->will($this->onConsecutiveCalls(false, true));
+            ->willReturn(false);
 
         $this->em
             ->expects($this->any())
@@ -72,14 +75,14 @@ class ReadabilityImportTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $this->contentProxy
-            ->expects($this->exactly(1))
+            ->expects($this->exactly(24))
             ->method('updateEntry')
             ->willReturn($entry);
 
         $res = $readabilityImport->import();
 
         $this->assertTrue($res);
-        $this->assertEquals(['skipped' => 1, 'imported' => 1], $readabilityImport->getSummary());
+        $this->assertEquals(['skipped' => 0, 'imported' => 24, 'queued' => 0], $readabilityImport->getSummary());
     }
 
     public function testImportAndMarkAllAsRead()
@@ -93,7 +96,7 @@ class ReadabilityImportTest extends \PHPUnit_Framework_TestCase
 
         $entryRepo->expects($this->exactly(2))
             ->method('findByUrlAndUserId')
-            ->will($this->onConsecutiveCalls(false, false));
+            ->will($this->onConsecutiveCalls(false, true));
 
         $this->em
             ->expects($this->any())
@@ -101,7 +104,7 @@ class ReadabilityImportTest extends \PHPUnit_Framework_TestCase
             ->willReturn($entryRepo);
 
         $this->contentProxy
-            ->expects($this->exactly(2))
+            ->expects($this->exactly(1))
             ->method('updateEntry')
             ->willReturn(new Entry($this->user));
 
@@ -117,7 +120,87 @@ class ReadabilityImportTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($res);
 
-        $this->assertEquals(['skipped' => 0, 'imported' => 2], $readabilityImport->getSummary());
+        $this->assertEquals(['skipped' => 1, 'imported' => 1, 'queued' => 0], $readabilityImport->getSummary());
+    }
+
+    public function testImportWithRabbit()
+    {
+        $readabilityImport = $this->getReadabilityImport();
+        $readabilityImport->setFilepath(__DIR__.'/../fixtures/readability.json');
+
+        $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $entryRepo->expects($this->never())
+            ->method('findByUrlAndUserId');
+
+        $this->em
+            ->expects($this->never())
+            ->method('getRepository');
+
+        $entry = $this->getMockBuilder('Wallabag\CoreBundle\Entity\Entry')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->contentProxy
+            ->expects($this->never())
+            ->method('updateEntry');
+
+        $producer = $this->getMockBuilder('OldSound\RabbitMqBundle\RabbitMq\Producer')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $producer
+            ->expects($this->exactly(24))
+            ->method('publish');
+
+        $readabilityImport->setProducer($producer);
+
+        $res = $readabilityImport->setMarkAsRead(true)->import();
+
+        $this->assertTrue($res);
+        $this->assertEquals(['skipped' => 0, 'imported' => 0, 'queued' => 24], $readabilityImport->getSummary());
+    }
+
+    public function testImportWithRedis()
+    {
+        $readabilityImport = $this->getReadabilityImport();
+        $readabilityImport->setFilepath(__DIR__.'/../fixtures/readability.json');
+
+        $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $entryRepo->expects($this->never())
+            ->method('findByUrlAndUserId');
+
+        $this->em
+            ->expects($this->never())
+            ->method('getRepository');
+
+        $entry = $this->getMockBuilder('Wallabag\CoreBundle\Entity\Entry')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->contentProxy
+            ->expects($this->never())
+            ->method('updateEntry');
+
+        $factory = new RedisMockFactory();
+        $redisMock = $factory->getAdapter('Predis\Client', true);
+
+        $queue = new RedisQueue($redisMock, 'readability');
+        $producer = new Producer($queue);
+
+        $readabilityImport->setProducer($producer);
+
+        $res = $readabilityImport->setMarkAsRead(true)->import();
+
+        $this->assertTrue($res);
+        $this->assertEquals(['skipped' => 0, 'imported' => 0, 'queued' => 24], $readabilityImport->getSummary());
+
+        $this->assertNotEmpty($redisMock->lpop('readability'));
     }
 
     public function testImportBadFile()
