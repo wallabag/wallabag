@@ -10,15 +10,14 @@ More informations on our website: [wallabag.org](https://wallabag.org)
 
 # Install wallabag
 
-If you don't have it yet, please [install composer](https://getcomposer.org/download/) or be sure to use Composer 1.2 (`composer selfupdate` can help you about that).
+If you don't have it yet, please [install composer](https://getcomposer.org/download/) or be sure to use Composer 1.2 (`composer selfupdate` can help you about that). Read [our documentation](http://doc.wallabag.org) to have more information about installation. 
 Then you can install wallabag by executing the following commands:
 
 ```
     git clone https://github.com/wallabag/wallabag.git
     cd wallabag
-    git checkout 2.0.8
-    SYMFONY_ENV=prod composer install --no-dev -o --prefer-dist
-    php bin/console wallabag:install --env=prod
+    git checkout 2.1.0
+    ./install.sh
     php bin/console server:run --env=prod
 ```
 

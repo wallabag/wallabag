@@ -41,6 +41,7 @@ La documentation est disponible dans d'autres langues :
    user/errors_during_fetching
    user/annotations
    user/download_articles
+   user/share
    user/filters
    user/tags
 

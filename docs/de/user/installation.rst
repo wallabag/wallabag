@@ -46,7 +46,7 @@ Composer installieren:
 
     curl -s http://getcomposer.org/installer | php
 
-Du kannst eine spezifische Anleitung `hier <https://getcomposer.org/doc/00-intro.md>`__ finden:
+Du kannst eine spezifische Anleitung `hier <https://getcomposer.org/doc/00-intro.md>`__ finden.
 
 Um wallabag selbst zu installieren, musst du die folgenden Kommandos ausführen:
 
@@ -54,9 +54,8 @@ Um wallabag selbst zu installieren, musst du die folgenden Kommandos ausführen:
 
     git clone https://github.com/wallabag/wallabag.git
     cd wallabag
-    git checkout 2.0.8
-    SYMFONY_ENV=prod composer install --no-dev -o --prefer-dist
-    php bin/console wallabag:install --env=prod
+    git checkout 2.1.0
+    ./install.sh
 
 Um PHPs eingebauten Server zu starten und zu testen, ob alles korrekt installiert wurde, kannst du folgendes Kommando ausführen:
 
