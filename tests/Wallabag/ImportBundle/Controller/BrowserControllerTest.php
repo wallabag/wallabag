@@ -19,7 +19,7 @@ class BrowserControllerTest extends WallabagCoreTestCase
         $this->assertEquals(1, $crawler->filter('input[type=file]')->count());
     }
 
-    public function testImportWallabagWithFile()
+    public function testImportWallabagWithFirefoxFile()
     {
         $this->logInAs('admin');
         $client = $this->getClient();
@@ -27,7 +27,7 @@ class BrowserControllerTest extends WallabagCoreTestCase
         $crawler = $client->request('GET', '/import/browser');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__.'/../fixtures/bookmarks.json', 'Bookmarks');
+        $file = new UploadedFile(__DIR__.'/../fixtures/firefox-bookmarks.json', 'Bookmarks');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -66,6 +66,43 @@ class BrowserControllerTest extends WallabagCoreTestCase
         $this->assertNotEmpty($content->getMimetype());
         $this->assertNotEmpty($content->getPreviewPicture());
         $this->assertEmpty($content->getLanguage());
+    }
+
+    public function testImportWallabagWithChromeFile()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/import/browser');
+        $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
+
+        $file = new UploadedFile(__DIR__.'/../fixtures/chrome-bookmarks', 'Bookmarks');
+
+        $data = [
+            'upload_import_file[file]' => $file,
+        ];
+
+        $client->submit($form, $data);
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+
+        $crawler = $client->followRedirect();
+
+        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
+        $this->assertContains('flashes.import.notice.summary', $body[0]);
+
+        $content = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findByUrlAndUserId(
+                'http://www.usinenouvelle.com/article/la-multiplication-des-chefs-de-projet-est-une-catastrophe-manageriale-majeure-affirme-le-sociologue-francois-dupuy.N307730',
+                $this->getLoggedInUserId()
+            );
+
+        $this->assertNotEmpty($content->getMimetype());
+        $this->assertNotEmpty($content->getPreviewPicture());
+        $this->assertNotEmpty($content->getLanguage());
+        $this->assertEquals(0, count($content->getTags()));
     }
 
     public function testImportWallabagWithEmptyFile()

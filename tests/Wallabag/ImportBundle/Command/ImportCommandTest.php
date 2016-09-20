@@ -6,7 +6,6 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use Wallabag\ImportBundle\Command\ImportCommand;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
-use M6Web\Component\RedisMock\RedisMockFactory;
 
 class ImportCommandTest extends WallabagCoreTestCase
 {
