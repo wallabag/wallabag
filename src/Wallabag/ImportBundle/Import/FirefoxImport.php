@@ -2,13 +2,6 @@
 
 namespace Wallabag\ImportBundle\Import;
 
-use Psr\Log\LoggerInterface;
-use Psr\Log\NullLogger;
-use Doctrine\ORM\EntityManager;
-use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\UserBundle\Entity\User;
-use Wallabag\CoreBundle\Helper\ContentProxy;
-
 class FirefoxImport extends BrowserImport
 {
     protected $filepath;
@@ -42,7 +35,7 @@ class FirefoxImport extends BrowserImport
      */
     protected function prepareEntry($entry = [])
     {
-      $data = [
+        $data = [
           'title' => $entry['name'],
           'html' => '',
           'url' => $entry['url'],
@@ -51,13 +44,12 @@ class FirefoxImport extends BrowserImport
           'created_at' => $entry['date_added'],
       ];
 
-      if (array_key_exists('tags', $entry) && $entry['tags'] != '') {
-          $data['tags'] = $entry['tags'];
-      }
+        if (array_key_exists('tags', $entry) && $entry['tags'] != '') {
+            $data['tags'] = $entry['tags'];
+        }
 
-      return $data;
-  }
-
+        return $data;
+    }
 
     /**
      * {@inheritdoc}

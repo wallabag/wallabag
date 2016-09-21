@@ -2,9 +2,6 @@
 
 namespace Wallabag\ImportBundle\Import;
 
-use Psr\Log\LoggerInterface;
-use Psr\Log\NullLogger;
-use Doctrine\ORM\EntityManager;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\UserBundle\Entity\User;
 use Wallabag\CoreBundle\Helper\ContentProxy;
@@ -121,7 +118,6 @@ abstract class BrowserImport extends AbstractImport
     protected function parseEntriesForProducer(array $entries)
     {
         foreach ($entries as $importedEntry) {
-
             if ((array) $importedEntry !== $importedEntry) {
                 continue;
             }
@@ -144,14 +140,15 @@ abstract class BrowserImport extends AbstractImport
      */
     public function parseEntry(array $importedEntry)
     {
-
         if ((!key_exists('guid', $importedEntry) || (!key_exists('id', $importedEntry))) && is_array(reset($importedEntry))) {
             $this->parseEntries($importedEntry);
+
             return;
         }
 
         if (key_exists('children', $importedEntry)) {
             $this->parseEntries($importedEntry['children']);
+
             return;
         }
 
@@ -191,7 +188,7 @@ abstract class BrowserImport extends AbstractImport
 
         if (!empty($data['created_at'])) {
             $dt = new \DateTime();
-            $entry->setCreatedAt($dt->setTimestamp($data['created_at']/1000));
+            $entry->setCreatedAt($dt->setTimestamp($data['created_at'] / 1000));
         }
 
         $this->em->persist($entry);

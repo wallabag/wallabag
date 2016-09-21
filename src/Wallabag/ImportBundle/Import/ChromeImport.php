@@ -2,13 +2,6 @@
 
 namespace Wallabag\ImportBundle\Import;
 
-use Psr\Log\LoggerInterface;
-use Psr\Log\NullLogger;
-use Doctrine\ORM\EntityManager;
-use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\UserBundle\Entity\User;
-use Wallabag\CoreBundle\Helper\ContentProxy;
-
 class ChromeImport extends BrowserImport
 {
     protected $filepath;
@@ -37,7 +30,7 @@ class ChromeImport extends BrowserImport
         return 'import.chrome.description';
     }
 
-    /**
+      /**
        * {@inheritdoc}
        */
       protected function prepareEntry($entry = [])
@@ -57,7 +50,6 @@ class ChromeImport extends BrowserImport
 
           return $data;
       }
-
 
     /**
      * {@inheritdoc}

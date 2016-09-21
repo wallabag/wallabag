@@ -15,9 +15,9 @@ class FirefoxController extends BrowserController
         $service = $this->get('wallabag_import.firefox.import');
 
         if ($this->get('craue_config')->get('import_with_rabbitmq')) {
-            $service->setProducer($this->get('old_sound_rabbit_mq.import_wallabag_v1_producer'));
+            $service->setProducer($this->get('old_sound_rabbit_mq.import_firefox_producer'));
         } elseif ($this->get('craue_config')->get('import_with_redis')) {
-            $service->setProducer($this->get('wallabag_import.producer.redis.wallabag_v1'));
+            $service->setProducer($this->get('wallabag_import.producer.redis.firefox'));
         }
 
         return $service;
