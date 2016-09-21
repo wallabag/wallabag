@@ -1,6 +1,6 @@
 {% extends "WallabagCoreBundle::layout.html.twig" %}
 
-{% block title %}{{ 'import.browser.page_title'|trans }}{% endblock %}
+{% block title %}{{ 'import.chrome.page_title'|trans }}{% endblock %}
 
 {% block content %}
 <div class="row">
@@ -8,7 +8,7 @@
         <div class="card-panel settings">
             <div class="row">
                 <blockquote>{{ import.description|trans|raw }}</blockquote>
-                <p>{{ 'import.browser.how_to'|trans }}</p>
+                <p>{{ 'import.chrome.how_to'|trans }}</p>
 
                 <div class="col s12">
                     {{ form_start(form, {'method': 'POST'}) }}

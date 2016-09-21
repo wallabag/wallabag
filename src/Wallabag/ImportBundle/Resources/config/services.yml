@@ -57,12 +57,21 @@ services:
         tags:
             -  { name: wallabag_import.import, alias: readability }
 
-    wallabag_import.browser.import:
-        class: Wallabag\ImportBundle\Import\BrowserImport
+    wallabag_import.firefox.import:
+        class: Wallabag\ImportBundle\Import\FirefoxImport
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@wallabag_core.content_proxy"
         calls:
             - [ setLogger, [ "@logger" ]]
         tags:
-            -  { name: wallabag_import.import, alias: browser }
+            -  { name: wallabag_import.import, alias: firefox }
+    wallabag_import.chrome.import:
+        class: Wallabag\ImportBundle\Import\ChromeImport
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@wallabag_core.content_proxy"
+        calls:
+            - [ setLogger, [ "@logger" ]]
+        tags:
+            -  { name: wallabag_import.import, alias: chrome }

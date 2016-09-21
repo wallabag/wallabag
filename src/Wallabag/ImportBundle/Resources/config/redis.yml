@@ -79,3 +79,43 @@ services:
             - "@wallabag_user.user_repository"
             - "@wallabag_import.wallabag_v2.import"
             - "@logger"
+
+    # firefox
+    wallabag_import.queue.redis.firefox:
+        class: Simpleue\Queue\RedisQueue
+        arguments:
+            - "@wallabag_core.redis.client"
+            - "wallabag.import.firefox"
+
+    wallabag_import.producer.redis.firefox:
+        class: Wallabag\ImportBundle\Redis\Producer
+        arguments:
+            - "@wallabag_import.queue.redis.firefox"
+
+    wallabag_import.consumer.redis.firefox:
+        class: Wallabag\ImportBundle\Consumer\RedisEntryConsumer
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@wallabag_user.user_repository"
+            - "@wallabag_import.firefox.import"
+            - "@logger"
+
+    # chrome
+    wallabag_import.queue.redis.chrome:
+        class: Simpleue\Queue\RedisQueue
+        arguments:
+            - "@wallabag_core.redis.client"
+            - "wallabag.import.chrome"
+
+    wallabag_import.producer.redis.firefox:
+        class: Wallabag\ImportBundle\Redis\Producer
+        arguments:
+            - "@wallabag_import.queue.redis.chrome"
+
+    wallabag_import.consumer.redis.firefox:
+        class: Wallabag\ImportBundle\Consumer\RedisEntryConsumer
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@wallabag_user.user_repository"
+            - "@wallabag_import.chrome.import"
+            - "@logger"

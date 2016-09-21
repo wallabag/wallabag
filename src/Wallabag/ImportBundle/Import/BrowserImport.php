@@ -9,69 +9,24 @@ use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\UserBundle\Entity\User;
 use Wallabag\CoreBundle\Helper\ContentProxy;
 
-class BrowserImport implements ImportInterface
+abstract class BrowserImport extends AbstractImport
 {
-    protected $user;
-    protected $em;
-    protected $logger;
-    protected $contentProxy;
-    protected $skippedEntries = 0;
-    protected $importedEntries = 0;
-    protected $totalEntries = 0;
     protected $filepath;
-    protected $markAsRead;
-    private $nbEntries;
-
-    public function __construct(EntityManager $em, ContentProxy $contentProxy)
-    {
-        $this->em = $em;
-        $this->logger = new NullLogger();
-        $this->contentProxy = $contentProxy;
-    }
-
-    public function setLogger(LoggerInterface $logger)
-    {
-        $this->logger = $logger;
-    }
-
-    /**
-     * We define the user in a custom call because on the import command there is no logged in user.
-     * So we can't retrieve user from the `security.token_storage` service.
-     *
-     * @param User $user
-     *
-     * @return $this
-     */
-    public function setUser(User $user)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
 
     /**
      * {@inheritdoc}
      */
-    public function getName()
-    {
-        return 'Firefox & Google Chrome';
-    }
+    abstract public function getName();
 
     /**
      * {@inheritdoc}
      */
-    public function getUrl()
-    {
-        return 'import_browser';
-    }
+    abstract public function getUrl();
 
     /**
      * {@inheritdoc}
      */
-    public function getDescription()
-    {
-        return 'import.browser.description';
-    }
+    abstract public function getDescription();
 
     /**
      * {@inheritdoc}
@@ -96,108 +51,21 @@ class BrowserImport implements ImportInterface
             return false;
         }
 
-        $this->nbEntries = 1;
+        if ($this->producer) {
+            $this->parseEntriesForProducer($data);
+
+            return true;
+        }
+
         $this->parseEntries($data);
-        $this->em->flush();
 
         return true;
-    }
-
-    private function parseEntries($data)
-    {
-        foreach ($data as $importedEntry) {
-            $this->parseEntry($importedEntry);
-        }
-        $this->totalEntries += count($data);
-    }
-
-    private function parseEntry($importedEntry)
-    {
-        if (!is_array($importedEntry)) {
-            return;
-        }
-
-        /* Firefox uses guid while Chrome uses id */
-
-        if ((!key_exists('guid', $importedEntry) || (!key_exists('id', $importedEntry))) && is_array(reset($importedEntry))) {
-            $this->parseEntries($importedEntry);
-
-            return;
-        }
-        if (key_exists('children', $importedEntry)) {
-            $this->parseEntries($importedEntry['children']);
-
-            return;
-        }
-        if (key_exists('uri', $importedEntry) || key_exists('url', $importedEntry)) {
-
-            /* Firefox uses uri while Chrome uses url */
-
-            $firefox = key_exists('uri', $importedEntry);
-
-            $existingEntry = $this->em
-                ->getRepository('WallabagCoreBundle:Entry')
-                ->findByUrlAndUserId(($firefox) ? $importedEntry['uri'] : $importedEntry['url'], $this->user->getId());
-
-            if (false !== $existingEntry) {
-                ++$this->skippedEntries;
-
-                return;
-            }
-
-            if (false === parse_url(($firefox) ? $importedEntry['uri'] : $importedEntry['url']) || false === filter_var(($firefox) ? $importedEntry['uri'] : $importedEntry['url'], FILTER_VALIDATE_URL)) {
-                $this->logger->warning('Imported URL '.($firefox) ? $importedEntry['uri'] : $importedEntry['url'].' is not valid');
-                ++$this->skippedEntries;
-
-                return;
-            }
-
-            try {
-                $entry = $this->contentProxy->updateEntry(
-                    new Entry($this->user),
-                    ($firefox) ? $importedEntry['uri'] : $importedEntry['url']
-                );
-            } catch (\Exception $e) {
-                $this->logger->warning('Error while saving '.($firefox) ? $importedEntry['uri'] : $importedEntry['url']);
-                ++$this->skippedEntries;
-
-                return;
-            }
-
-            $entry->setArchived($this->markAsRead);
-
-            $this->em->persist($entry);
-            ++$this->importedEntries;
-
-            // flush every 20 entries
-            if (($this->nbEntries % 20) === 0) {
-                $this->em->flush();
-                $this->em->clear($entry);
-            }
-            ++$this->nbEntries;
-        }
-    }
-
-    /**
-     * Set whether articles must be all marked as read.
-     *
-     * @param bool $markAsRead
-     *
-     * @return $this
-     */
-    public function setMarkAsRead($markAsRead)
-    {
-        $this->markAsRead = $markAsRead;
-
-        return $this;
     }
 
     /**
      * Set file path to the json file.
      *
      * @param string $filepath
-     *
-     * @return $this
      */
     public function setFilepath($filepath)
     {
@@ -207,13 +75,138 @@ class BrowserImport implements ImportInterface
     }
 
     /**
+     * Parse and insert all given entries.
+     *
+     * @param $entries
+     */
+    protected function parseEntries($entries)
+    {
+        $i = 1;
+
+        foreach ($entries as $importedEntry) {
+            if ((array) $importedEntry !== $importedEntry) {
+                continue;
+            }
+
+            $entry = $this->parseEntry($importedEntry);
+
+            if (null === $entry) {
+                continue;
+            }
+
+            // flush every 20 entries
+            if (($i % 20) === 0) {
+                $this->em->flush();
+
+                // clear only affected entities
+                $this->em->clear(Entry::class);
+                $this->em->clear(Tag::class);
+            }
+            ++$i;
+        }
+
+        $this->em->flush();
+    }
+
+    /**
+     * Parse entries and send them to the queue.
+     * It should just be a simple loop on all item, no call to the database should be done
+     * to speedup queuing.
+     *
+     * Faster parse entries for Producer.
+     * We don't care to make check at this time. They'll be done by the consumer.
+     *
+     * @param array $entries
+     */
+    protected function parseEntriesForProducer(array $entries)
+    {
+        foreach ($entries as $importedEntry) {
+
+            if ((array) $importedEntry !== $importedEntry) {
+                continue;
+            }
+
+            // set userId for the producer (it won't know which user is connected)
+            $importedEntry['userId'] = $this->user->getId();
+
+            if ($this->markAsRead) {
+                $importedEntry = $this->setEntryAsRead($importedEntry);
+            }
+
+            ++$this->queuedEntries;
+
+            $this->producer->publish(json_encode($importedEntry));
+        }
+    }
+
+    /**
      * {@inheritdoc}
      */
-    public function getSummary()
+    public function parseEntry(array $importedEntry)
     {
-        return [
-            'skipped' => $this->skippedEntries,
-            'imported' => $this->importedEntries,
-        ];
+
+        if ((!key_exists('guid', $importedEntry) || (!key_exists('id', $importedEntry))) && is_array(reset($importedEntry))) {
+            $this->parseEntries($importedEntry);
+            return;
+        }
+
+        if (key_exists('children', $importedEntry)) {
+            $this->parseEntries($importedEntry['children']);
+            return;
+        }
+
+        if (!key_exists('uri', $importedEntry) && !key_exists('url', $importedEntry)) {
+            return;
+        }
+
+        $firefox = key_exists('uri', $importedEntry);
+
+        $existingEntry = $this->em
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findByUrlAndUserId(($firefox) ? $importedEntry['uri'] : $importedEntry['url'], $this->user->getId());
+
+        if (false !== $existingEntry) {
+            ++$this->skippedEntries;
+
+            return;
+        }
+
+        $data = $this->prepareEntry($importedEntry);
+
+        $entry = new Entry($this->user);
+        $entry->setUrl($data['url']);
+        $entry->setTitle($data['title']);
+
+        // update entry with content (in case fetching failed, the given entry will be return)
+        $entry = $this->fetchContent($entry, $data['url'], $data);
+
+        if (array_key_exists('tags', $data)) {
+            $this->contentProxy->assignTagsToEntry(
+                $entry,
+                $data['tags']
+            );
+        }
+
+        $entry->setArchived($data['is_archived']);
+
+        if (!empty($data['created_at'])) {
+            $dt = new \DateTime();
+            $entry->setCreatedAt($dt->setTimestamp($data['created_at']/1000));
+        }
+
+        $this->em->persist($entry);
+        ++$this->importedEntries;
+
+        return $entry;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function setEntryAsRead(array $importedEntry)
+    {
+        $importedEntry['is_archived'] = 1;
+
+        return $importedEntry;
     }
 }

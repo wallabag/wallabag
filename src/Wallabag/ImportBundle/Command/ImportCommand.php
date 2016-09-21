@@ -17,7 +17,7 @@ class ImportCommand extends ContainerAwareCommand
             ->setDescription('Import entries from a JSON export from a wallabag v1 instance')
             ->addArgument('userId', InputArgument::REQUIRED, 'User ID to populate')
             ->addArgument('filepath', InputArgument::REQUIRED, 'Path to the JSON file')
-            ->addOption('importer', null, InputArgument::OPTIONAL, 'The importer to use: wallabag v1, v2 or browser', 'v1')
+            ->addOption('importer', null, InputArgument::OPTIONAL, 'The importer to use: wallabag v1, v2, firefox or chrome', 'v1')
             ->addOption('markAsRead', null, InputArgument::OPTIONAL, 'Mark all entries as read', false)
         ;
     }
@@ -44,8 +44,11 @@ class ImportCommand extends ContainerAwareCommand
             case 'v2':
                 $wallabag = $this->getContainer()->get('wallabag_import.wallabag_v2.import');
                 break;
-            case 'browser':
-                $wallabag = $this->getContainer()->get('wallabag_import.browser.import');
+            case 'firefox':
+                $wallabag = $this->getContainer()->get('wallabag_import.firefox.import');
+                break;
+            case 'chrome':
+                $wallabag = $this->getContainer()->get('wallabag_import.chrome.import');
                 break;
             case 'v1':
             default:
