@@ -107,12 +107,12 @@ services:
             - "@wallabag_core.redis.client"
             - "wallabag.import.chrome"
 
-    wallabag_import.producer.redis.firefox:
+    wallabag_import.producer.redis.chrome:
         class: Wallabag\ImportBundle\Redis\Producer
         arguments:
             - "@wallabag_import.queue.redis.chrome"
 
-    wallabag_import.consumer.redis.firefox:
+    wallabag_import.consumer.redis.chrome:
         class: Wallabag\ImportBundle\Consumer\RedisEntryConsumer
         arguments:
             - "@doctrine.orm.entity_manager"

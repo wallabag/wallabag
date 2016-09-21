@@ -88,13 +88,13 @@ class FirefoxImportTest extends \PHPUnit_Framework_TestCase
     public function testImportAndMarkAllAsRead()
     {
         $firefoxImport = $this->getFirefoxImport();
-        $firefoxImport->setFilepath(__DIR__.'/../fixtures/readability-read.json');
+        $firefoxImport->setFilepath(__DIR__.'/../fixtures/firefox-bookmarks.json');
 
         $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $entryRepo->expects($this->exactly(2))
+        $entryRepo->expects($this->exactly(4))
             ->method('findByUrlAndUserId')
             ->will($this->onConsecutiveCalls(false, true));
 
@@ -120,13 +120,13 @@ class FirefoxImportTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($res);
 
-        $this->assertEquals(['skipped' => 1, 'imported' => 1, 'queued' => 0], $firefoxImport->getSummary());
+        $this->assertEquals(['skipped' => 3, 'imported' => 1, 'queued' => 0], $firefoxImport->getSummary());
     }
 
     public function testImportWithRabbit()
     {
         $firefoxImport = $this->getFirefoxImport();
-        $firefoxImport->setFilepath(__DIR__.'/../fixtures/readability.json');
+        $firefoxImport->setFilepath(__DIR__.'/../fixtures/firefox-bookmarks.json');
 
         $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
             ->disableOriginalConstructor()
@@ -152,20 +152,20 @@ class FirefoxImportTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $producer
-            ->expects($this->exactly(4))
+            ->expects($this->exactly(1))
             ->method('publish');
 
         $firefoxImport->setProducer($producer);
 
-        $res = $readabilityImport->setMarkAsRead(true)->import();
+        $res = $firefoxImport->setMarkAsRead(true)->import();
 
         $this->assertTrue($res);
-        $this->assertEquals(['skipped' => 0, 'imported' => 0, 'queued' => 4], $firefoxImport->getSummary());
+        $this->assertEquals(['skipped' => 0, 'imported' => 0, 'queued' => 1], $firefoxImport->getSummary());
     }
 
     public function testImportWithRedis()
     {
-        $firefoxImport = $this->getReadabilityImport();
+        $firefoxImport = $this->getFirefoxImport();
         $firefoxImport->setFilepath(__DIR__.'/../fixtures/firefox-bookmarks.json');
 
         $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
@@ -198,7 +198,7 @@ class FirefoxImportTest extends \PHPUnit_Framework_TestCase
         $res = $firefoxImport->setMarkAsRead(true)->import();
 
         $this->assertTrue($res);
-        $this->assertEquals(['skipped' => 0, 'imported' => 0, 'queued' => 4], $firefoxImport->getSummary());
+        $this->assertEquals(['skipped' => 0, 'imported' => 0, 'queued' => 1], $firefoxImport->getSummary());
 
         $this->assertNotEmpty($redisMock->lpop('firefox'));
     }
@@ -213,21 +213,21 @@ class FirefoxImportTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($res);
 
         $records = $this->logHandler->getRecords();
-        $this->assertContains('FirefoxImport: unable to read file', $records[0]['message']);
+        $this->assertContains('Wallabag Browser Import: unable to read file', $records[0]['message']);
         $this->assertEquals('ERROR', $records[0]['level_name']);
     }
 
     public function testImportUserNotDefined()
     {
         $firefoxImport = $this->getFirefoxImport(true);
-        $firefoxImport->setFilepath(__DIR__.'/../fixtures/readability.json');
+        $firefoxImport->setFilepath(__DIR__.'/../fixtures/firefox-bookmarks.json');
 
         $res = $firefoxImport->import();
 
         $this->assertFalse($res);
 
         $records = $this->logHandler->getRecords();
-        $this->assertContains('FirefoxImport: user is not defined', $records[0]['message']);
+        $this->assertContains('Wallabag Browser Import: user is not defined', $records[0]['message']);
         $this->assertEquals('ERROR', $records[0]['level_name']);
     }
 }

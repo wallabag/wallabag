@@ -30,26 +30,26 @@ class ChromeImport extends BrowserImport
         return 'import.chrome.description';
     }
 
-      /**
-       * {@inheritdoc}
-       */
-      protected function prepareEntry($entry = [])
-      {
-          $data = [
-              'title' => $entry['name'],
-              'html' => '',
-              'url' => $entry['url'],
-              'is_archived' => $this->markAsRead,
-              'tags' => '',
-              'created_at' => $entry['date_added'],
-          ];
+    /**
+     * {@inheritdoc}
+     */
+    protected function prepareEntry($entry = [])
+    {
+        $data = [
+          'title' => $entry['name'],
+          'html' => '',
+          'url' => $entry['url'],
+          'is_archived' => $this->markAsRead,
+          'tags' => '',
+          'created_at' => $entry['date_added'],
+        ];
 
-          if (array_key_exists('tags', $entry) && $entry['tags'] != '') {
-              $data['tags'] = $entry['tags'];
-          }
+        if (array_key_exists('tags', $entry) && $entry['tags'] != '') {
+            $data['tags'] = $entry['tags'];
+        }
 
-          return $data;
-      }
+        return $data;
+    }
 
     /**
      * {@inheritdoc}

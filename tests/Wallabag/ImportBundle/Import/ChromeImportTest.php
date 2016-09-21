@@ -61,7 +61,7 @@ class ChromeImportTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $entryRepo->expects($this->exactly(4))
+        $entryRepo->expects($this->exactly(1))
             ->method('findByUrlAndUserId')
             ->willReturn(false);
 
@@ -75,26 +75,26 @@ class ChromeImportTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $this->contentProxy
-            ->expects($this->exactly(4))
+            ->expects($this->exactly(1))
             ->method('updateEntry')
             ->willReturn($entry);
 
         $res = $chromeImport->import();
 
         $this->assertTrue($res);
-        $this->assertEquals(['skipped' => 0, 'imported' => 4, 'queued' => 0], $chromeImport->getSummary());
+        $this->assertEquals(['skipped' => 0, 'imported' => 1, 'queued' => 0], $chromeImport->getSummary());
     }
 
     public function testImportAndMarkAllAsRead()
     {
         $chromeImport = $this->getChromeImport();
-        $chromeImport->setFilepath(__DIR__.'/../fixtures/readability-read.json');
+        $chromeImport->setFilepath(__DIR__.'/../fixtures/chrome-bookmarks');
 
         $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $entryRepo->expects($this->exactly(2))
+        $entryRepo->expects($this->exactly(1))
             ->method('findByUrlAndUserId')
             ->will($this->onConsecutiveCalls(false, true));
 
@@ -120,13 +120,13 @@ class ChromeImportTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($res);
 
-        $this->assertEquals(['skipped' => 1, 'imported' => 1, 'queued' => 0], $chromeImport->getSummary());
+        $this->assertEquals(['skipped' => 0, 'imported' => 1, 'queued' => 0], $chromeImport->getSummary());
     }
 
     public function testImportWithRabbit()
     {
         $chromeImport = $this->getChromeImport();
-        $chromeImport->setFilepath(__DIR__.'/../fixtures/readability.json');
+        $chromeImport->setFilepath(__DIR__.'/../fixtures/chrome-bookmarks');
 
         $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
             ->disableOriginalConstructor()
@@ -152,20 +152,20 @@ class ChromeImportTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $producer
-            ->expects($this->exactly(4))
+            ->expects($this->exactly(1))
             ->method('publish');
 
         $chromeImport->setProducer($producer);
 
-        $res = $readabilityImport->setMarkAsRead(true)->import();
+        $res = $chromeImport->setMarkAsRead(true)->import();
 
         $this->assertTrue($res);
-        $this->assertEquals(['skipped' => 0, 'imported' => 0, 'queued' => 4], $chromeImport->getSummary());
+        $this->assertEquals(['skipped' => 0, 'imported' => 0, 'queued' => 1], $chromeImport->getSummary());
     }
 
     public function testImportWithRedis()
     {
-        $chromeImport = $this->getReadabilityImport();
+        $chromeImport = $this->getChromeImport();
         $chromeImport->setFilepath(__DIR__.'/../fixtures/chrome-bookmarks');
 
         $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
@@ -198,7 +198,7 @@ class ChromeImportTest extends \PHPUnit_Framework_TestCase
         $res = $chromeImport->setMarkAsRead(true)->import();
 
         $this->assertTrue($res);
-        $this->assertEquals(['skipped' => 0, 'imported' => 0, 'queued' => 4], $chromeImport->getSummary());
+        $this->assertEquals(['skipped' => 0, 'imported' => 0, 'queued' => 1], $chromeImport->getSummary());
 
         $this->assertNotEmpty($redisMock->lpop('chrome'));
     }
@@ -213,21 +213,21 @@ class ChromeImportTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($res);
 
         $records = $this->logHandler->getRecords();
-        $this->assertContains('ChromeImport: unable to read file', $records[0]['message']);
+        $this->assertContains('Wallabag Browser Import: unable to read file', $records[0]['message']);
         $this->assertEquals('ERROR', $records[0]['level_name']);
     }
 
     public function testImportUserNotDefined()
     {
         $chromeImport = $this->getChromeImport(true);
-        $chromeImport->setFilepath(__DIR__.'/../fixtures/readability.json');
+        $chromeImport->setFilepath(__DIR__.'/../fixtures/chrome-bookmarks');
 
         $res = $chromeImport->import();
 
         $this->assertFalse($res);
 
         $records = $this->logHandler->getRecords();
-        $this->assertContains('ChromeImport: user is not defined', $records[0]['message']);
+        $this->assertContains('Wallabag Browser Import: user is not defined', $records[0]['message']);
         $this->assertEquals('ERROR', $records[0]['level_name']);
     }
 }

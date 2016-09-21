@@ -31,13 +31,13 @@ abstract class BrowserImport extends AbstractImport
     public function import()
     {
         if (!$this->user) {
-            $this->logger->error('WallabagImport: user is not defined');
+            $this->logger->error('Wallabag Browser Import: user is not defined');
 
             return false;
         }
 
         if (!file_exists($this->filepath) || !is_readable($this->filepath)) {
-            $this->logger->error('WallabagImport: unable to read file', ['filepath' => $this->filepath]);
+            $this->logger->error('Wallabag Browser Import: unable to read file', ['filepath' => $this->filepath]);
 
             return false;
         }
