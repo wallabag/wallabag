@@ -16,15 +16,7 @@
                 <guid>{{ entry.url }}</guid>
                 <pubDate>{{ entry.createdAt|date('D, d M Y H:i:s') }}</pubDate>
                 <description>
-                    <![CDATA[
-                    {%- if entry.readingTime > 0 -%}
-                        {{ 'entry.list.reading_time_minutes'|trans({'%readingTime%': entry.readingTime}) }}
-                    {%- else -%}
-                        {{ 'entry.list.reading_time_less_one_minute'|trans|raw }}
-                    {%- endif %}
-
-                    {{ entry.content|raw -}}
-                    ]]>
+                    <![CDATA[{%- if entry.readingTime > 0 -%}{{ 'entry.list.reading_time_minutes'|trans({'%readingTime%': entry.readingTime}) }}{%- else -%}{{ 'entry.list.reading_time_less_one_minute'|trans|raw }}{%- endif %}{{ entry.content|raw -}}]]>
                 </description>
             </item>
 
