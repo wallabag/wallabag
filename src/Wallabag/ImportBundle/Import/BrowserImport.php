@@ -94,10 +94,6 @@ abstract class BrowserImport extends AbstractImport
             // flush every 20 entries
             if (($i % 20) === 0) {
                 $this->em->flush();
-
-                // clear only affected entities
-                $this->em->clear(Entry::class);
-                $this->em->clear(Tag::class);
             }
             ++$i;
         }
