@@ -434,6 +434,9 @@ flashes:
             failed_on_file: 'Error while processing import. Please verify your import file.'
             summary: 'Import summary: %imported% imported, %skipped% already saved.'
             summary_with_queue: 'Import summary: %queued% queued.'
+        error:
+            redis_enabled_not_installed: Redis is enabled for handle asynchronous import but it looks like <u>we can't connect to it</u>. Please check Redis configuration.
+            rabbit_enabled_not_installed: RabbitMQ is enabled for handle asynchronous import but it looks like <u>we can't connect to it</u>. Please check RabbitMQ configuration.
     developer:
         notice:
             client_created: 'New client %name% created.'

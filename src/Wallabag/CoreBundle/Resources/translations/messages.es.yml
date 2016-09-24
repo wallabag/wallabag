@@ -432,6 +432,9 @@ flashes:
             failed_on_file: 'Se ocurre un error por procesar importación. Por favor verifique su archivo importado.'
             summary: 'Resúmen importado: %importado% importado, %saltados% ya guardado.'
             # summary_with_queue: 'Import summary: %queued% queued.'
+        error:
+            # redis_enabled_not_installed: Redis is enabled for handle asynchronous import but it looks like <u>we can't connect to it</u>. Please check Redis configuration.
+            # rabbit_enabled_not_installed: RabbitMQ is enabled for handle asynchronous import but it looks like <u>we can't connect to it</u>. Please check RabbitMQ configuration.
     developer:
         notice:
             client_created: 'Nuevo cliente creado.'

@@ -25,33 +25,41 @@ class ImportController extends Controller
     {
         $nbRedisMessages = null;
         $nbRabbitMessages = null;
+        $redisNotInstalled = false;
+        $rabbitNotInstalled = false;
 
         if (!$this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')) {
-            return $this->render('WallabagImportBundle:Import:check_queue.html.twig', [
-                'nbRedisMessages' => $nbRedisMessages,
-                'nbRabbitMessages' => $nbRabbitMessages,
-            ]);
+            return $this->render('WallabagImportBundle:Import:check_queue.html.twig');
         }
 
         if ($this->get('craue_config')->get('import_with_rabbitmq')) {
-            $nbRabbitMessages = $this->getTotalMessageInRabbitQueue('pocket')
-                + $this->getTotalMessageInRabbitQueue('readability')
-                + $this->getTotalMessageInRabbitQueue('wallabag_v1')
-                + $this->getTotalMessageInRabbitQueue('wallabag_v2')
-            ;
+            // in case rabbit is activated but not installed
+            try {
+                $nbRabbitMessages = $this->getTotalMessageInRabbitQueue('pocket')
+                    + $this->getTotalMessageInRabbitQueue('readability')
+                    + $this->getTotalMessageInRabbitQueue('wallabag_v1')
+                    + $this->getTotalMessageInRabbitQueue('wallabag_v2');
+            } catch (\Exception $e) {
+                $rabbitNotInstalled = true;
+            }
         } elseif ($this->get('craue_config')->get('import_with_redis')) {
             $redis = $this->get('wallabag_core.redis.client');
 
-            $nbRedisMessages = $redis->llen('wallabag.import.pocket')
-                + $redis->llen('wallabag.import.readability')
-                + $redis->llen('wallabag.import.wallabag_v1')
-                + $redis->llen('wallabag.import.wallabag_v2')
-            ;
+            try {
+                $nbRedisMessages = $redis->llen('wallabag.import.pocket')
+                    + $redis->llen('wallabag.import.readability')
+                    + $redis->llen('wallabag.import.wallabag_v1')
+                    + $redis->llen('wallabag.import.wallabag_v2');
+            } catch (\Exception $e) {
+                $redisNotInstalled = true;
+            }
         }
 
         return $this->render('WallabagImportBundle:Import:check_queue.html.twig', [
             'nbRedisMessages' => $nbRedisMessages,
             'nbRabbitMessages' => $nbRabbitMessages,
+            'redisNotInstalled' => $redisNotInstalled,
+            'rabbitNotInstalled' => $rabbitNotInstalled,
         ]);
     }
 
