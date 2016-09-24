@@ -54,6 +54,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
 
     public function testImportWallabagWithRedisEnabled()
     {
+        $this->checkRedis();
         $this->logInAs('admin');
         $client = $this->getClient();
 

@@ -34,6 +34,7 @@ class PocketControllerTest extends WallabagCoreTestCase
 
     public function testImportPocketWithRedisEnabled()
     {
+        $this->checkRedis();
         $this->logInAs('admin');
         $client = $this->getClient();
 
