@@ -196,6 +196,29 @@ abstract class BrowserImport extends AbstractImport
     /**
      * {@inheritdoc}
      */
+    protected function prepareEntry($entry = [])
+    {
+        $data = [
+            'title' => $entry['name'],
+            'html' => '',
+            'url' => $entry['url'],
+            'is_archived' => $this->markAsRead,
+            'tags' => '',
+            // date are in format like "13118829474385693"
+            // and it'll be devided by 1000 in AbstractImport
+            'created_at' => (int) ceil($entry['date_added'] / 10000),
+        ];
+
+        if (array_key_exists('tags', $entry) && $entry['tags'] != '') {
+            $data['tags'] = $entry['tags'];
+        }
+
+        return $data;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function setEntryAsRead(array $importedEntry)
     {
         $importedEntry['is_archived'] = 1;

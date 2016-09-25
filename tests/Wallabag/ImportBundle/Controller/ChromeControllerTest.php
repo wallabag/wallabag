@@ -120,6 +120,10 @@ class ChromeControllerTest extends WallabagCoreTestCase
         $this->assertNotEmpty($content->getPreviewPicture());
         $this->assertNotEmpty($content->getLanguage());
         $this->assertEquals(0, count($content->getTags()));
+
+        $createdAt = $content->getCreatedAt();
+        $this->assertEquals('2011', $createdAt->format('Y'));
+        $this->assertEquals('07', $createdAt->format('m'));
     }
 
     public function testImportWallabagWithEmptyFile()

@@ -133,6 +133,10 @@ class FirefoxControllerTest extends WallabagCoreTestCase
         $this->assertNotEmpty($content->getMimetype());
         $this->assertNotEmpty($content->getPreviewPicture());
         $this->assertEmpty($content->getLanguage());
+
+        $createdAt = $content->getCreatedAt();
+        $this->assertEquals('2011', $createdAt->format('Y'));
+        $this->assertEquals('07', $createdAt->format('m'));
     }
 
     public function testImportWallabagWithEmptyFile()
