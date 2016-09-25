@@ -54,6 +54,7 @@ class ReadabilityControllerTest extends WallabagCoreTestCase
 
     public function testImportReadabilityWithRedisEnabled()
     {
+        $this->checkRedis();
         $this->logInAs('admin');
         $client = $this->getClient();
 

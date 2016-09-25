@@ -434,6 +434,9 @@ flashes:
             failed_on_file: "Erreur lors du traitement de l'import. Vérifier votre fichier."
             summary: "Rapport d'import: %imported% importés, %skipped% déjà présent."
             summary_with_queue: "Rapport d'import: %queued% en cours de traitement."
+        error:
+            redis_enabled_not_installed: Redis est activé pour les imports asynchrones mais <u>impossible de s'y connecter</u>. Vérifier la configuration de Redis.
+            rabbit_enabled_not_installed: RabbitMQ est activé pour les imports asynchrones mais <u>impossible de s'y connecter</u>. Vérifier la configuration de RabbitMQ.
     developer:
         notice:
             client_created: 'Nouveau client %name% créé'
