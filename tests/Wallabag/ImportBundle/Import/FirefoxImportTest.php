@@ -61,7 +61,7 @@ class FirefoxImportTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $entryRepo->expects($this->exactly(4))
+        $entryRepo->expects($this->exactly(2))
             ->method('findByUrlAndUserId')
             ->willReturn(false);
 
@@ -75,14 +75,14 @@ class FirefoxImportTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $this->contentProxy
-            ->expects($this->exactly(4))
+            ->expects($this->exactly(2))
             ->method('updateEntry')
             ->willReturn($entry);
 
         $res = $firefoxImport->import();
 
         $this->assertTrue($res);
-        $this->assertEquals(['skipped' => 0, 'imported' => 4, 'queued' => 0], $firefoxImport->getSummary());
+        $this->assertEquals(['skipped' => 0, 'imported' => 2, 'queued' => 0], $firefoxImport->getSummary());
     }
 
     public function testImportAndMarkAllAsRead()
@@ -94,7 +94,7 @@ class FirefoxImportTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $entryRepo->expects($this->exactly(4))
+        $entryRepo->expects($this->exactly(2))
             ->method('findByUrlAndUserId')
             ->will($this->onConsecutiveCalls(false, true));
 
@@ -120,7 +120,7 @@ class FirefoxImportTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($res);
 
-        $this->assertEquals(['skipped' => 3, 'imported' => 1, 'queued' => 0], $firefoxImport->getSummary());
+        $this->assertEquals(['skipped' => 1, 'imported' => 1, 'queued' => 0], $firefoxImport->getSummary());
     }
 
     public function testImportWithRabbit()

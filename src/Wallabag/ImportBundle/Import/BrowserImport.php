@@ -136,27 +136,27 @@ abstract class BrowserImport extends AbstractImport
      */
     public function parseEntry(array $importedEntry)
     {
-        if ((!key_exists('guid', $importedEntry) || (!key_exists('id', $importedEntry))) && is_array(reset($importedEntry))) {
+        if ((!array_key_exists('guid', $importedEntry) || (!array_key_exists('id', $importedEntry))) && is_array(reset($importedEntry))) {
             $this->parseEntries($importedEntry);
 
             return;
         }
 
-        if (key_exists('children', $importedEntry)) {
+        if (array_key_exists('children', $importedEntry)) {
             $this->parseEntries($importedEntry['children']);
 
             return;
         }
 
-        if (!key_exists('uri', $importedEntry) && !key_exists('url', $importedEntry)) {
+        if (!array_key_exists('uri', $importedEntry) && !array_key_exists('url', $importedEntry)) {
             return;
         }
 
-        $firefox = key_exists('uri', $importedEntry);
+        $url = array_key_exists('uri', $importedEntry) ? $importedEntry['uri'] : $importedEntry['url'];
 
         $existingEntry = $this->em
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findByUrlAndUserId(($firefox) ? $importedEntry['uri'] : $importedEntry['url'], $this->user->getId());
+            ->findByUrlAndUserId($url, $this->user->getId());
 
         if (false !== $existingEntry) {
             ++$this->skippedEntries;
@@ -184,7 +184,7 @@ abstract class BrowserImport extends AbstractImport
 
         if (!empty($data['created_at'])) {
             $dt = new \DateTime();
-            $entry->setCreatedAt($dt->setTimestamp($data['created_at'] / 1000));
+            $entry->setCreatedAt($dt->setTimestamp($data['created_at']));
         }
 
         $this->em->persist($entry);
@@ -196,17 +196,29 @@ abstract class BrowserImport extends AbstractImport
     /**
      * {@inheritdoc}
      */
-    protected function prepareEntry($entry = [])
+    protected function prepareEntry(array $entry = [])
     {
+        $url = array_key_exists('uri', $entry) ? $entry['uri'] : $entry['url'];
+        $date = array_key_exists('date_added', $entry) ? $entry['date_added'] : $entry['dateAdded'];
+        $title = array_key_exists('name', $entry) ? $entry['name'] : $entry['title'];
+
+        if (16 === strlen($date)) {
+            // firefox ...
+            $date = (int) ceil($date / 1000000);
+        } else if (17 === strlen($date)) {
+            // chrome ...
+            $date = (int) ceil($date / 10000000);
+        } else {
+            $date = '';
+        }
+
         $data = [
-            'title' => $entry['name'],
+            'title' => $title,
             'html' => '',
-            'url' => $entry['url'],
+            'url' => $url,
             'is_archived' => $this->markAsRead,
             'tags' => '',
-            // date are in format like "13118829474385693"
-            // and it'll be devided by 1000 in AbstractImport
-            'created_at' => (int) ceil($entry['date_added'] / 10000),
+            'created_at' => $date,
         ];
 
         if (array_key_exists('tags', $entry) && $entry['tags'] != '') {

@@ -135,8 +135,8 @@ class FirefoxControllerTest extends WallabagCoreTestCase
         $this->assertEmpty($content->getLanguage());
 
         $createdAt = $content->getCreatedAt();
-        $this->assertEquals('2011', $createdAt->format('Y'));
-        $this->assertEquals('07', $createdAt->format('m'));
+        $this->assertEquals('2013', $createdAt->format('Y'));
+        $this->assertEquals('12', $createdAt->format('m'));
     }
 
     public function testImportWallabagWithEmptyFile()
