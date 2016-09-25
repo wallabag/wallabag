@@ -84,16 +84,11 @@ class TagController extends Controller
     {
         $tags = $this->getDoctrine()
             ->getRepository('WallabagCoreBundle:Tag')
-            ->findAllTags($this->getUser()->getId())
-            ->getQuery()
-            ->getResult();
+            ->findAllTagsWithEntries($this->getUser()->getId());
 
-        return $this->render(
-            'WallabagCoreBundle:Tag:tags.html.twig',
-            [
-                'tags' => $tags,
-            ]
-        );
+        return $this->render('WallabagCoreBundle:Tag:tags.html.twig', [
+            'tags' => $tags,
+        ]);
     }
 
     /**
@@ -127,13 +122,10 @@ class TagController extends Controller
             }
         }
 
-        return $this->render(
-            'WallabagCoreBundle:Entry:entries.html.twig',
-            [
-                'form' => null,
-                'entries' => $entries,
-                'currentPage' => $page,
-            ]
-        );
+        return $this->render('WallabagCoreBundle:Entry:entries.html.twig',[
+            'form' => null,
+            'entries' => $entries,
+            'currentPage' => $page,
+        ]);
     }
 }

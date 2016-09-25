@@ -85,10 +85,11 @@ class WallabagExtension extends \Twig_Extension implements \Twig_Extension_Globa
             ->groupBy('e.id')
             ->getQuery();
 
-        $data = $this->enableCache($query)
-            ->getArrayResult();
+        $query->useQueryCache(true);
+        $query->useResultCache(true);
+        $query->setResultCacheLifetime($this->lifeTime);
 
-        return count($data);
+        return count($query->getArrayResult());
     }
 
     /**
@@ -104,28 +105,9 @@ class WallabagExtension extends \Twig_Extension implements \Twig_Extension_Globa
             return 0;
         }
 
-        $qb = $this->tagRepository->findAllTags($user->getId());
-
-        $data = $this->enableCache($qb->getQuery())
-            ->getArrayResult();
+        $data = $this->tagRepository->findAllTags($user->getId());
 
         return count($data);
-    }
-
-    /**
-     * Enable cache for a query.
-     *
-     * @param Query $query
-     *
-     * @return Query
-     */
-    private function enableCache(Query $query)
-    {
-        $query->useQueryCache(true);
-        $query->useResultCache(true);
-        $query->setResultCacheLifetime($this->lifeTime);
-
-        return $query;
     }
 
     public function getName()
