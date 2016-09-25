@@ -95,10 +95,9 @@ class ContentProxy
      * Assign some tags to an entry.
      *
      * @param Entry        $entry
-     * @param array|string $tags  An array of tag or a string coma separated of tag
-     * @param array $entitiesReady Entities from the EntityManager which are persisted but not yet flushed
-     *                             It is mostly to fix duplicate tag on import
-     *                             @see http://stackoverflow.com/a/7879164/569101
+     * @param array|string $tags          An array of tag or a string coma separated of tag
+     * @param array        $entitiesReady Entities from the EntityManager which are persisted but not yet flushed
+     *                                    It is mostly to fix duplicate tag on import @see http://stackoverflow.com/a/7879164/569101
      */
     public function assignTagsToEntry(Entry $entry, $tags, array $entitiesReady = [])
     {

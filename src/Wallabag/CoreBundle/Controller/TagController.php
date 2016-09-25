@@ -122,7 +122,7 @@ class TagController extends Controller
             }
         }
 
-        return $this->render('WallabagCoreBundle:Entry:entries.html.twig',[
+        return $this->render('WallabagCoreBundle:Entry:entries.html.twig', [
             'form' => null,
             'entries' => $entries,
             'currentPage' => $page,

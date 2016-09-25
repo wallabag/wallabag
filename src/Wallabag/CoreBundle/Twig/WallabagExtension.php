@@ -2,7 +2,6 @@
 
 namespace Wallabag\CoreBundle\Twig;
 
-use Doctrine\ORM\Query;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Wallabag\CoreBundle\Repository\EntryRepository;
 use Wallabag\CoreBundle\Repository\TagRepository;
