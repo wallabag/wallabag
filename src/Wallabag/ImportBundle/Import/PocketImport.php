@@ -227,7 +227,8 @@ class PocketImport extends AbstractImport
         if (isset($importedEntry['tags']) && !empty($importedEntry['tags'])) {
             $this->contentProxy->assignTagsToEntry(
                 $entry,
-                array_keys($importedEntry['tags'])
+                array_keys($importedEntry['tags']),
+                $this->em->getUnitOfWork()->getScheduledEntityInsertions()
             );
         }
 

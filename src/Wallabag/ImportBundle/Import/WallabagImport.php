@@ -111,7 +111,8 @@ abstract class WallabagImport extends AbstractImport
         if (array_key_exists('tags', $data)) {
             $this->contentProxy->assignTagsToEntry(
                 $entry,
-                $data['tags']
+                $data['tags'],
+                $this->em->getUnitOfWork()->getScheduledEntityInsertions()
             );
         }
 
