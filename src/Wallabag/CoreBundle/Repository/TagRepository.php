@@ -7,17 +7,17 @@ use Doctrine\ORM\EntityRepository;
 class TagRepository extends EntityRepository
 {
     /**
-     * Find all tags per user.
+     * Count all tags per user.
      *
      * @param int $userId
      * @param int $cacheLifeTime Duration of the cache for this query
      *
-     * @return array
+     * @return int
      */
-    public function findAllTags($userId, $cacheLifeTime = null)
+    public function countAllTags($userId, $cacheLifeTime = null)
     {
         $query = $this->createQueryBuilder('t')
-            ->select('t')
+            ->select('t.slug')
             ->leftJoin('t.entries', 'e')
             ->where('e.user = :userId')->setParameter('userId', $userId)
             ->groupBy('t.slug')
@@ -29,7 +29,7 @@ class TagRepository extends EntityRepository
             $query->setResultCacheLifetime($cacheLifeTime);
         }
 
-        return $query->getArrayResult();
+        return count($query->getArrayResult());
     }
 
     /**

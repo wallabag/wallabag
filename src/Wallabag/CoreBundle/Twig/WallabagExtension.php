@@ -104,9 +104,7 @@ class WallabagExtension extends \Twig_Extension implements \Twig_Extension_Globa
             return 0;
         }
 
-        $data = $this->tagRepository->findAllTags($user->getId());
-
-        return count($data);
+        return $this->tagRepository->countAllTags($user->getId());
     }
 
     public function getName()
