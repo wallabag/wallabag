@@ -2,7 +2,6 @@
 
 namespace Wallabag\CoreBundle\Twig;
 
-use Doctrine\ORM\Query;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Wallabag\CoreBundle\Repository\EntryRepository;
 use Wallabag\CoreBundle\Repository\TagRepository;
@@ -85,10 +84,11 @@ class WallabagExtension extends \Twig_Extension implements \Twig_Extension_Globa
             ->groupBy('e.id')
             ->getQuery();
 
-        $data = $this->enableCache($query)
-            ->getArrayResult();
+        $query->useQueryCache(true);
+        $query->useResultCache(true);
+        $query->setResultCacheLifetime($this->lifeTime);
 
-        return count($data);
+        return count($query->getArrayResult());
     }
 
     /**
@@ -104,28 +104,7 @@ class WallabagExtension extends \Twig_Extension implements \Twig_Extension_Globa
             return 0;
         }
 
-        $qb = $this->tagRepository->findAllTags($user->getId());
-
-        $data = $this->enableCache($qb->getQuery())
-            ->getArrayResult();
-
-        return count($data);
-    }
-
-    /**
-     * Enable cache for a query.
-     *
-     * @param Query $query
-     *
-     * @return Query
-     */
-    private function enableCache(Query $query)
-    {
-        $query->useQueryCache(true);
-        $query->useResultCache(true);
-        $query->setResultCacheLifetime($this->lifeTime);
-
-        return $query;
+        return $this->tagRepository->countAllTags($user->getId());
     }
 
     public function getName()

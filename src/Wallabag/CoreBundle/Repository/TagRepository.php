@@ -7,17 +7,45 @@ use Doctrine\ORM\EntityRepository;
 class TagRepository extends EntityRepository
 {
     /**
-     * Find Tags.
+     * Count all tags per user.
+     *
+     * @param int $userId
+     * @param int $cacheLifeTime Duration of the cache for this query
+     *
+     * @return int
+     */
+    public function countAllTags($userId, $cacheLifeTime = null)
+    {
+        $query = $this->createQueryBuilder('t')
+            ->select('t.slug')
+            ->leftJoin('t.entries', 'e')
+            ->where('e.user = :userId')->setParameter('userId', $userId)
+            ->groupBy('t.slug')
+            ->getQuery();
+
+        if (null !== $cacheLifeTime) {
+            $query->useQueryCache(true);
+            $query->useResultCache(true);
+            $query->setResultCacheLifetime($cacheLifeTime);
+        }
+
+        return count($query->getArrayResult());
+    }
+
+    /**
+     * Find all tags with associated entries per user.
      *
      * @param int $userId
      *
      * @return array
      */
-    public function findAllTags($userId)
+    public function findAllTagsWithEntries($userId)
     {
         return $this->createQueryBuilder('t')
             ->leftJoin('t.entries', 'e')
-            ->where('e.user = :userId')->setParameter('userId', $userId);
+            ->where('e.user = :userId')->setParameter('userId', $userId)
+            ->getQuery()
+            ->getResult();
     }
 
     /**

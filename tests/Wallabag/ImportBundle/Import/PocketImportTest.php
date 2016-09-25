@@ -41,6 +41,20 @@ class PocketImportTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
+        $this->uow = $this->getMockBuilder('Doctrine\ORM\UnitOfWork')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->em
+            ->expects($this->any())
+            ->method('getUnitOfWork')
+            ->willReturn($this->uow);
+
+        $this->uow
+            ->expects($this->any())
+            ->method('getScheduledEntityInsertions')
+            ->willReturn([]);
+
         $pocket = new PocketImport(
             $this->em,
             $this->contentProxy
