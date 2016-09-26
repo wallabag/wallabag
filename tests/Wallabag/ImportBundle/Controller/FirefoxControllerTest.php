@@ -120,7 +120,7 @@ class FirefoxControllerTest extends WallabagCoreTestCase
         $this->assertNotEmpty($content->getMimetype());
         $this->assertNotEmpty($content->getPreviewPicture());
         $this->assertNotEmpty($content->getLanguage());
-        $this->assertEquals(0, count($content->getTags()));
+        $this->assertEquals(2, count($content->getTags()));
 
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
