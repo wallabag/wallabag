@@ -5,28 +5,28 @@ namespace Tests\Wallabag\ImportBundle\Controller;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class ReadabilityControllerTest extends WallabagCoreTestCase
+class ChromeControllerTest extends WallabagCoreTestCase
 {
-    public function testImportReadability()
+    public function testImportChrome()
     {
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $crawler = $client->request('GET', '/import/readability');
+        $crawler = $client->request('GET', '/import/chrome');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertEquals(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
         $this->assertEquals(1, $crawler->filter('input[type=file]')->count());
     }
 
-    public function testImportReadabilityWithRabbitEnabled()
+    public function testImportChromeWithRabbitEnabled()
     {
         $this->logInAs('admin');
         $client = $this->getClient();
 
         $client->getContainer()->get('craue_config')->set('import_with_rabbitmq', 1);
 
-        $crawler = $client->request('GET', '/import/readability');
+        $crawler = $client->request('GET', '/import/chrome');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertEquals(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
@@ -35,12 +35,12 @@ class ReadabilityControllerTest extends WallabagCoreTestCase
         $client->getContainer()->get('craue_config')->set('import_with_rabbitmq', 0);
     }
 
-    public function testImportReadabilityBadFile()
+    public function testImportChromeBadFile()
     {
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $crawler = $client->request('GET', '/import/readability');
+        $crawler = $client->request('GET', '/import/chrome');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
         $data = [
@@ -52,14 +52,13 @@ class ReadabilityControllerTest extends WallabagCoreTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testImportReadabilityWithRedisEnabled()
+    public function testImportChromeWithRedisEnabled()
     {
-        $this->checkRedis();
         $this->logInAs('admin');
         $client = $this->getClient();
         $client->getContainer()->get('craue_config')->set('import_with_redis', 1);
 
-        $crawler = $client->request('GET', '/import/readability');
+        $crawler = $client->request('GET', '/import/chrome');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertEquals(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
@@ -67,7 +66,7 @@ class ReadabilityControllerTest extends WallabagCoreTestCase
 
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__.'/../fixtures/readability.json', 'readability.json');
+        $file = new UploadedFile(__DIR__.'/../fixtures/chrome-bookmarks', 'Bookmarks');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -82,20 +81,20 @@ class ReadabilityControllerTest extends WallabagCoreTestCase
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertContains('flashes.import.notice.summary', $body[0]);
 
-        $this->assertNotEmpty($client->getContainer()->get('wallabag_core.redis.client')->lpop('wallabag.import.readability'));
+        $this->assertNotEmpty($client->getContainer()->get('wallabag_core.redis.client')->lpop('wallabag.import.chrome'));
 
         $client->getContainer()->get('craue_config')->set('import_with_redis', 0);
     }
 
-    public function testImportReadabilityWithFile()
+    public function testImportWallabagWithChromeFile()
     {
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $crawler = $client->request('GET', '/import/readability');
+        $crawler = $client->request('GET', '/import/chrome');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__.'/../fixtures/readability.json', 'readability.json');
+        $file = new UploadedFile(__DIR__.'/../fixtures/chrome-bookmarks', 'Bookmarks');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -106,77 +105,33 @@ class ReadabilityControllerTest extends WallabagCoreTestCase
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
 
         $crawler = $client->followRedirect();
+
+        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
+        $this->assertContains('flashes.import.notice.summary', $body[0]);
 
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
             ->findByUrlAndUserId(
-                'https://venngage.com/blog/hashtags-are-worthless/',
+                'http://www.usinenouvelle.com/article/la-multiplication-des-chefs-de-projet-est-une-catastrophe-manageriale-majeure-affirme-le-sociologue-francois-dupuy.N307730',
                 $this->getLoggedInUserId()
             );
 
-        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
-        $this->assertContains('flashes.import.notice.summary', $body[0]);
-
-        $this->assertNotEmpty($content->getMimetype());
         $this->assertNotEmpty($content->getPreviewPicture());
         $this->assertNotEmpty($content->getLanguage());
         $this->assertEquals(0, count($content->getTags()));
-        $this->assertInstanceOf(\DateTime::class, $content->getCreatedAt());
-        $this->assertEquals('2016-08-25', $content->getCreatedAt()->format('Y-m-d'));
+
+        $createdAt = $content->getCreatedAt();
+        $this->assertEquals('2011', $createdAt->format('Y'));
+        $this->assertEquals('07', $createdAt->format('m'));
     }
 
-    public function testImportReadabilityWithFileAndMarkAllAsRead()
+    public function testImportWallabagWithEmptyFile()
     {
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $crawler = $client->request('GET', '/import/readability');
-        $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
-
-        $file = new UploadedFile(__DIR__.'/../fixtures/readability-read.json', 'readability-read.json');
-
-        $data = [
-            'upload_import_file[file]' => $file,
-            'upload_import_file[mark_as_read]' => 1,
-        ];
-
-        $client->submit($form, $data);
-
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
-
-        $crawler = $client->followRedirect();
-
-        $content1 = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->findByUrlAndUserId(
-                'https://blog.travis-ci.com/2016-07-28-what-we-learned-from-analyzing-2-million-travis-builds/',
-                $this->getLoggedInUserId()
-            );
-
-        $this->assertTrue($content1->isArchived());
-
-        $content2 = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->findByUrlAndUserId(
-                'https://facebook.github.io/graphql/',
-                $this->getLoggedInUserId()
-            );
-
-        $this->assertTrue($content2->isArchived());
-
-        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
-        $this->assertContains('flashes.import.notice.summary', $body[0]);
-    }
-
-    public function testImportReadabilityWithEmptyFile()
-    {
-        $this->logInAs('admin');
-        $client = $this->getClient();
-
-        $crawler = $client->request('GET', '/import/readability');
+        $crawler = $client->request('GET', '/import/chrome');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
         $file = new UploadedFile(__DIR__.'/../fixtures/test.txt', 'test.txt');

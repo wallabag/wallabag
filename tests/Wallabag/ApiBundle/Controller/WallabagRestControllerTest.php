@@ -80,7 +80,7 @@ class WallabagRestControllerTest extends WallabagApiTestCase
 
     public function testGetStarredEntries()
     {
-        $this->client->request('GET', '/api/entries', ['star' => 1, 'sort' => 'updated']);
+        $this->client->request('GET', '/api/entries', ['starred' => 1, 'sort' => 'updated']);
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 

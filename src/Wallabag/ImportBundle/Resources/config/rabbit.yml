@@ -28,3 +28,17 @@ services:
             - "@wallabag_user.user_repository"
             - "@wallabag_import.wallabag_v2.import"
             - "@logger"
+    wallabag_import.consumer.amqp.firefox:
+        class: Wallabag\ImportBundle\Consumer\AMQPEntryConsumer
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@wallabag_user.user_repository"
+            - "@wallabag_import.firefox.import"
+            - "@logger"
+    wallabag_import.consumer.amqp.chrome:
+        class: Wallabag\ImportBundle\Consumer\AMQPEntryConsumer
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@wallabag_user.user_repository"
+            - "@wallabag_import.chrome.import"
+            - "@logger"

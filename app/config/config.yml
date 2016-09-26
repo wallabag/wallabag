@@ -246,6 +246,16 @@ old_sound_rabbit_mq:
             exchange_options:
                 name: 'wallabag.import.wallabag_v2'
                 type: topic
+        import_firefox:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.firefox'
+                type: topic
+        import_chrome:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.chrome'
+                type: topic
     consumers:
         import_pocket:
             connection: default
@@ -279,3 +289,19 @@ old_sound_rabbit_mq:
             queue_options:
                 name: 'wallabag.import.wallabag_v2'
             callback: wallabag_import.consumer.amqp.wallabag_v2
+        import_firefox:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.firefox'
+                type: topic
+            queue_options:
+                name: 'wallabag.import.firefox'
+            callback: wallabag_import.consumer.amqp.firefox
+        import_chrome:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.chrome'
+                type: topic
+            queue_options:
+                name: 'wallabag.import.chrome'
+            callback: wallabag_import.consumer.amqp.chrome
