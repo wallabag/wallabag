@@ -196,41 +196,6 @@ abstract class BrowserImport extends AbstractImport
     /**
      * {@inheritdoc}
      */
-    protected function prepareEntry(array $entry = [])
-    {
-        $url = array_key_exists('uri', $entry) ? $entry['uri'] : $entry['url'];
-        $date = array_key_exists('date_added', $entry) ? $entry['date_added'] : $entry['dateAdded'];
-        $title = array_key_exists('name', $entry) ? $entry['name'] : $entry['title'];
-
-        if (16 === strlen($date)) {
-            // firefox ...
-            $date = (int) ceil($date / 1000000);
-        } else if (17 === strlen($date)) {
-            // chrome ...
-            $date = (int) ceil($date / 10000000);
-        } else {
-            $date = '';
-        }
-
-        $data = [
-            'title' => $title,
-            'html' => '',
-            'url' => $url,
-            'is_archived' => $this->markAsRead,
-            'tags' => '',
-            'created_at' => $date,
-        ];
-
-        if (array_key_exists('tags', $entry) && $entry['tags'] != '') {
-            $data['tags'] = $entry['tags'];
-        }
-
-        return $data;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     protected function setEntryAsRead(array $importedEntry)
     {
         $importedEntry['is_archived'] = 1;

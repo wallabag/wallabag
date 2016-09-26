@@ -29,4 +29,25 @@ class ChromeImport extends BrowserImport
     {
         return 'import.chrome.description';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function prepareEntry(array $entry = [])
+    {
+        $data = [
+            'title' => $entry['name'],
+            'html' => '',
+            'url' => $entry['url'],
+            'is_archived' => $this->markAsRead,
+            'tags' => '',
+            'created_at' => substr($entry['date_added'], 0, 10),
+        ];
+
+        if (array_key_exists('tags', $entry) && $entry['tags'] != '') {
+            $data['tags'] = $entry['tags'];
+        }
+
+        return $data;
+    }
 }

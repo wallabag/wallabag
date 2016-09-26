@@ -29,4 +29,25 @@ class FirefoxImport extends BrowserImport
     {
         return 'import.firefox.description';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function prepareEntry(array $entry = [])
+    {
+        $data = [
+            'title' => $entry['title'],
+            'html' => '',
+            'url' => $entry['uri'],
+            'is_archived' => $this->markAsRead,
+            'tags' => '',
+            'created_at' => substr($entry['dateAdded'], 0, 10),
+        ];
+
+        if (array_key_exists('tags', $entry) && $entry['tags'] != '') {
+            $data['tags'] = $entry['tags'];
+        }
+
+        return $data;
+    }
 }
