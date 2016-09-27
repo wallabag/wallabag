@@ -352,7 +352,6 @@ main ul.row {
 .card .card-content .card-title {
   line-height: 32px;
   max-height: 64px;
-  display: block;
 }
 
 .card .card-content i.right, .card .card-reveal i.right {
