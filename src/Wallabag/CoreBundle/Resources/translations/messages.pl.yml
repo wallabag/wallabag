@@ -279,7 +279,7 @@ quickstart:
          title: 'Administracja'
          description: 'Jako administrator wallabag, możesz:'
          new_user: 'Tworzyć nowego użytkownika'
-         analytics: 'Configure analytics'
+         analytics: 'Konfigurować analityki'
          sharing: 'Włączyć pewne parametry dotyczące udostępniania artykułów'
          export: 'Skonfigurować eksport'
          import: 'Skonfigurować import'
@@ -349,14 +349,14 @@ import:
         how_to: 'Wybierz swój plik eksportu z Readability i kliknij poniższy przycisk, aby go załadować.'
     worker:
         enabled: "Import jest wykonywany asynchronicznie. Od momentu rozpoczęcia importu, zewnętrzna usługa może zajmować się na raz tylko jednym zadaniem. Bieżącą usługą jest:"
-    # firefox:
-    #    page_title: 'Import > Firefox'
-    #    description: "This importer will import all your Firefox bookmarks. <p>For Firefox, just go to your bookmarks (Ctrl+Maj+O), then into \"Import and backup\", choose \"Backup...\". You will obtain a .json file."
-    #    how_to: "Please choose the bookmark backup file and click on the button below to import it. Note that the process may take a long time since all articles have to be fetched."
-    # chrome:
-    #    page_title: 'Import > Chrome'
-    #    description: "This importer will import all your Chrome bookmarks. The location of the file depends on your operating system : <ul><li>On Linux, go into the <code>~/.config/chromium/Default/</code> directory</li><li>On Windows, it should be at <code>%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default</code></li><li>On OS X, it should be at <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>Once you got there, copy the Bookmarks file someplace you'll find.<em><br>Note that if you have Chromium instead of Chrome, you'll have to correct paths accordingly.</em></p>"
-    #    how_to: "Please choose the bookmark backup file and click on the button below to import it. Note that the process may take a long time since all articles have to be fetched."
+    firefox:
+       page_title: 'Import > Firefox'
+       description: "Ten importer zaimportuje wszystkie twoje zakładki z Firefoksa. <p>Dla Firefoksa, idź do twoich zakładek (Ctrl+Shift+O), następnie w \"Import i kopie zapasowe\", wybierz \"Utwórz kopię zapasową...\". Uzyskasz plik .json."
+       how_to: "Wybierz swój plik z zakładkami i naciśnij poniższy przycisk, aby je zaimportować. Może to zająć dłuższą chwilę, zanim wszystkie artykuły zostaną przeniesione."
+    chrome:
+       page_title: 'Import > Chrome'
+       description: "Ten importer zaimportuje wszystkie twoje zakładki z Chrome. Lokalizacja pliku jest zależna od twojego systemy operacyjnego : <ul><li>Pod Linuksem, idź do katalogu <code>~/.config/chromium/Default/</code></li><li>Pod Windowsem, powinien się on znajdować w <code>%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default</code></li><li>Pod OS X, powinien się on znajdować w <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>Po odnalezieniu pliku, skopiuj go w łatwo dostęne miejsce.<em><br>Jeżeli używasz Chromium zamiast Chrome, będziesz musiał odpowiednio poprawić ścieżkę dostępu.</em></p>"
+       how_to: "Wybierz swój plik z zakładkami i naciśnij poniższy przycisk, aby je zaimportować. Może to zająć dłuższą chwilę, zanim wszystkie artykuły zostaną przeniesione."
 
 developer:
     page_title: 'Deweloper'
@@ -370,7 +370,7 @@ developer:
          create_new: 'Utwórz nowego klienta'
     existing_clients:
          title: 'Istniejący klienci'
-         field_id: 'Client ID'
+         field_id: 'ID klienta'
          field_secret: 'Client secret'
          field_uris: 'Przekieruj URIs'
          field_grant_types: 'Przyznaj pozwolenie'
@@ -441,8 +441,8 @@ flashes:
             summary: 'Podsumowanie importu: %imported% zaimportowane, %skipped% już zapisane.'
             summary_with_queue: 'Podsumowanie importu: %queued% zakolejkowane.'
         error:
-            # redis_enabled_not_installed: Redis is enabled for handle asynchronous import but it looks like <u>we can't connect to it</u>. Please check Redis configuration.
-            # rabbit_enabled_not_installed: RabbitMQ is enabled for handle asynchronous import but it looks like <u>we can't connect to it</u>. Please check RabbitMQ configuration.
+            redis_enabled_not_installed: 'Redis jest włączony dla obsługi importu asynchronicznego, ale <u>nie możemy się z nim połączyć</u>. Sprawdź konfigurację Redisa.'
+            rabbit_enabled_not_installed: 'RabbitMQ jest włączony dla obsługi importu asynchronicznego, ale <u>nie możemy się z nim połączyć</u>. Sprawdź konfigurację RabbitMQ.'
     developer:
         notice:
             client_created: 'Nowy klient utworzony.'
