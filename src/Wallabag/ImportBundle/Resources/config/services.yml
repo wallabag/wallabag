@@ -57,6 +57,16 @@ services:
         tags:
             -  { name: wallabag_import.import, alias: readability }
 
+    wallabag_import.instapaper.import:
+        class: Wallabag\ImportBundle\Import\InstapaperImport
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@wallabag_core.content_proxy"
+        calls:
+            - [ setLogger, [ "@logger" ]]
+        tags:
+            -  { name: wallabag_import.import, alias: instapaper }
+
     wallabag_import.firefox.import:
         class: Wallabag\ImportBundle\Import\FirefoxImport
         arguments:
