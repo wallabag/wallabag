@@ -64,6 +64,8 @@ class ReadabilityImport extends AbstractImport
         $data = json_decode(file_get_contents($this->filepath), true);
 
         if (empty($data) || empty($data['bookmarks'])) {
+            $this->logger->error('ReadabilityImport: no entries in imported file');
+
             return false;
         }
 
