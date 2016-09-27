@@ -58,6 +58,8 @@ abstract class WallabagImport extends AbstractImport
         $data = json_decode(file_get_contents($this->filepath), true);
 
         if (empty($data)) {
+            $this->logger->error('WallabagImport: no entries in imported file');
+
             return false;
         }
 

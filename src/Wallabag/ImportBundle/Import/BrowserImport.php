@@ -45,6 +45,8 @@ abstract class BrowserImport extends AbstractImport
         $data = json_decode(file_get_contents($this->filepath), true);
 
         if (empty($data)) {
+            $this->logger->error('Wallabag Browser: no entries in imported file');
+
             return false;
         }
 

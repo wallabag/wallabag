@@ -80,6 +80,12 @@ class InstapaperImport extends AbstractImport
         }
         fclose($handle);
 
+        if (empty($entries)) {
+            $this->logger->error('InstapaperImport: no entries in imported file');
+
+            return false;
+        }
+
         if ($this->producer) {
             $this->parseEntriesForProducer($entries);
 
