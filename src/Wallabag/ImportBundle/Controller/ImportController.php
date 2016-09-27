@@ -38,7 +38,11 @@ class ImportController extends Controller
                 $nbRabbitMessages = $this->getTotalMessageInRabbitQueue('pocket')
                     + $this->getTotalMessageInRabbitQueue('readability')
                     + $this->getTotalMessageInRabbitQueue('wallabag_v1')
-                    + $this->getTotalMessageInRabbitQueue('wallabag_v2');
+                    + $this->getTotalMessageInRabbitQueue('wallabag_v2')
+                    + $this->getTotalMessageInRabbitQueue('firefox')
+                    + $this->getTotalMessageInRabbitQueue('chrome')
+                    + $this->getTotalMessageInRabbitQueue('instapaper')
+                ;
             } catch (\Exception $e) {
                 $rabbitNotInstalled = true;
             }
@@ -49,7 +53,11 @@ class ImportController extends Controller
                 $nbRedisMessages = $redis->llen('wallabag.import.pocket')
                     + $redis->llen('wallabag.import.readability')
                     + $redis->llen('wallabag.import.wallabag_v1')
-                    + $redis->llen('wallabag.import.wallabag_v2');
+                    + $redis->llen('wallabag.import.wallabag_v2')
+                    + $redis->llen('wallabag.import.firefox')
+                    + $redis->llen('wallabag.import.chrome')
+                    + $redis->llen('wallabag.import.instapaper')
+                ;
             } catch (\Exception $e) {
                 $redisNotInstalled = true;
             }

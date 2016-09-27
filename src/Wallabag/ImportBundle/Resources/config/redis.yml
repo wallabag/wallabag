@@ -20,6 +20,26 @@ services:
             - "@wallabag_import.readability.import"
             - "@logger"
 
+    # instapaper
+    wallabag_import.queue.redis.instapaper:
+        class: Simpleue\Queue\RedisQueue
+        arguments:
+            - "@wallabag_core.redis.client"
+            - "wallabag.import.instapaper"
+
+    wallabag_import.producer.redis.instapaper:
+        class: Wallabag\ImportBundle\Redis\Producer
+        arguments:
+            - "@wallabag_import.queue.redis.instapaper"
+
+    wallabag_import.consumer.redis.instapaper:
+        class: Wallabag\ImportBundle\Consumer\RedisEntryConsumer
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@wallabag_user.user_repository"
+            - "@wallabag_import.instapaper.import"
+            - "@logger"
+
     # pocket
     wallabag_import.queue.redis.pocket:
         class: Simpleue\Queue\RedisQueue

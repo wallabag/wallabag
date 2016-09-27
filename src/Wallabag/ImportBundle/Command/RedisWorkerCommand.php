@@ -17,7 +17,7 @@ class RedisWorkerCommand extends ContainerAwareCommand
         $this
             ->setName('wallabag:import:redis-worker')
             ->setDescription('Launch Redis worker')
-            ->addArgument('serviceName', InputArgument::REQUIRED, 'Service to use: wallabag_v1, wallabag_v2, pocket or readability')
+            ->addArgument('serviceName', InputArgument::REQUIRED, 'Service to use: wallabag_v1, wallabag_v2, pocket, readability, firefox, chrome or instapaper')
             ->addOption('maxIterations', '', InputOption::VALUE_OPTIONAL, 'Number of iterations before stoping', false)
         ;
     }

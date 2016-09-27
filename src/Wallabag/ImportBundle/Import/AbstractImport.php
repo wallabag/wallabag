@@ -106,6 +106,10 @@ abstract class AbstractImport implements ImportInterface
         $i = 1;
 
         foreach ($entries as $importedEntry) {
+            if ($this->markAsRead) {
+                $importedEntry = $this->setEntryAsRead($importedEntry);
+            }
+
             $entry = $this->parseEntry($importedEntry);
 
             if (null === $entry) {
