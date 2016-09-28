@@ -2,12 +2,12 @@ Wallabag updaten
 ================
 
 .. warning::
-Wenn du den Import von Pocket durch das Hinzufügen des Consumer Key in den internen Einstellungen konfiguriert hast, fertige bitte ein Backup deines Keys an bevor du auf das neue Release migrierst: Du wirst den Key nach dem Update in der Konfiguration erneut eintragen müssen.
+Wenn du den Import von Pocket durch das Hinzufügen des Consumer Key in den internen Einstellungen konfiguriert hast, fertige bitte ein Backup deines Keys an, bevor du auf das neue Release migrierst: Du wirst den Key nach dem Update in der Konfiguration erneut eintragen müssen.
 
 Update auf einem dedizierten Webserver
 --------------------------------------
 
-Das neueste Release ist auf https://www.wallabag.org/pages/download-wallabag.html veröffentlicht. Um deine wallabag Installation auf die neueste Version upzudaten, führe die folgenden Kommandos in deinem wallabag Ordner aus (ersetze ``2.1.0`` mit der neuesten Releasenummer):
+Das neueste Release ist auf https://www.wallabag.org/pages/download-wallabag.html veröffentlicht. Um deine wallabag-Installation auf die neueste Version zu aktualisieren, führe die folgenden Kommandos in deinem wallabag-Ordner aus (ersetze ``2.1.0`` mit der neuesten Releasenummer):
 
 ::
 
@@ -31,7 +31,7 @@ Lade das neueste Release von wallabag herunter:
 
 (md5 hash: ``4f84c725d1d6e3345eae0a406115e5ff``)
 
-Entpacke das Archiv in deinen wallabag Ordner und ersetze ``app/config/parameters.yml`` mit deiner Datei.
+Entpacke das Archiv in deinen wallabag-Ordner und ersetze ``app/config/parameters.yml`` mit deiner Datei.
 
 Bitte beachte, dass wir in dieser Version neue Parameter hinzugefügt haben. Du musst die Datei ``app/config/parameters.yml`` bearbeiten und die folgenden Zeilen hinzufügen (ersetze die Werte mit deiner Konfiguration):
 
@@ -51,7 +51,7 @@ Wenn du SQLite nutzt, musst auch das ``data/`` Verzeichnis in die neue Installat
 
 Leere den ``var/cache`` Ordner.
 
-Du musst einige SQL-Abfragen ausführen, um die Datenbank zu aktualisieren. Wir nehmen an, dass der Tabellenpräfix ``wallabag_`` und die Datenbank MySQL ist:
+Du musst einige SQL-Abfragen ausführen, um die Datenbank zu aktualisieren. Wir nehmen in diesem Fall an, dass das Tabellenpräfix ``wallabag_`` ist und eine MySQL-Datenbank genutzt wird:
 
 .. code-block:: sql
 
