@@ -481,9 +481,6 @@ footer a {
   text-transform: none;
   margin-bottom: 0;
   line-height: 1.2;
-  text-align: justify;
-  -moz-text-align-last: center;
-  text-align-last: center;
 }
 
 .entry h2::after {
@@ -1071,7 +1068,7 @@ pre code {
   font-family: "Courier New", Courier, monospace;
 }
 
-#filter-form {
+#filters {
   position: fixed;
   width: 20%;
   height: 100%;
@@ -1086,7 +1083,7 @@ pre code {
   min-width: 300px;
 }
 
-#filter-form form .filter-group {
+#filters form .filter-group {
   margin: 5px;
 }
 
@@ -1125,9 +1122,11 @@ pre code {
   .entry {
     width: 49%;
   }
+
   .entry:nth-child(3n+1) {
     margin-left: 1.5%;
   }
+
   .entry:nth-child(2n+1) {
     margin-left: 0;
   }
@@ -1137,6 +1136,7 @@ pre code {
   #article {
     width: 80%;
   }
+
   .topPosF {
     right: 2.5em;
   }
@@ -1147,6 +1147,7 @@ pre code {
     width: 100%;
     margin-left: 0;
   }
+
   #display-mode {
     display: none;
   }
@@ -1197,7 +1198,6 @@ pre code {
     height: auto;
     top: 0.5em;
     width: 75px;
-    height: 75px;
     margin-left: -37.5px;
   }
 
@@ -1214,6 +1214,7 @@ pre code {
     background-color: #999;
     font-size: 1.2em;
   }
+
   .desktopHide:hover,
   .desktopHide:focus {
     background-color: #fff;

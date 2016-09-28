@@ -174,7 +174,7 @@ div.pagination ul .next.disabled {
 
 footer.page-footer {
   margin-top: 10px;
-  padding-top: 0px;
+  padding-top: 0;
 }
 
 footer .row {
@@ -257,8 +257,9 @@ nav input {
   display: none;
 }
 
-.input-field.nav-panel-add, .input-field.nav-panel-add form {
-    height: 100%;
+.input-field.nav-panel-add,
+.input-field.nav-panel-add form {
+  height: 100%;
 }
 
 /* ==========================================================================
@@ -355,8 +356,9 @@ main ul.row {
   display: block;
 }
 
-.card .card-content i.right, .card .card-reveal i.right {
-    margin-left: 0;
+.card .card-content i.right,
+.card .card-reveal i.right {
+  margin-left: 0;
 }
 
 .card .card-entry-labels {
@@ -528,30 +530,38 @@ main ul.row {
   footer {
     padding-left: 0;
   }
+
   nav,
   main,
   footer {
     padding-left: 0;
   }
+
   .pagination {
     width: auto;
   }
+
   .reader-mode {
     width: 240px !important;
   }
+
   .reader-mode span {
     opacity: 1;
   }
+
   .tabs {
     display: inline-block;
     height: auto;
   }
+
   .tab {
     min-width: 100%;
   }
+
   .indicator {
     display: none;
   }
+
   .pagination li.prev,
   .pagination li.next {
     width: auto;
@@ -569,38 +579,47 @@ main ul.row {
     width: 25%;
     margin-left: 0;
   }
+
   .row .col.l2 {
     width: 33.33333%;
     margin-left: 0;
   }
+
   .row .col.l3 {
     width: 41.66667%;
     margin-left: 0;
   }
+
   .row .col.l4 {
     width: 50%;
     margin-left: 0;
   }
+
   .row .col.l5 {
     width: 58.33333%;
     margin-left: 0;
   }
+
   .row .col.l6 {
     width: 66.66667%;
     margin-left: 0;
   }
+
   .row .col.l7 {
     width: 75%;
     margin-left: 0;
   }
+
   .row .col.l8 {
     width: 83.33333%;
     margin-left: 0;
   }
+
   .row .col.l9 {
     width: 91.66667%;
     margin-left: 0;
   }
+
   .row .col.l10 {
     width: 100%;
     margin-left: 0;
@@ -646,7 +665,7 @@ main ul.row {
 }
 
 .icon-link::before {
-    content: "\e9cb";
+  content: "\e9cb";
 }
 
 footer [class^="icon-"],
@@ -677,5 +696,5 @@ div.settings div.file-field div {
 }
 
 .input-field label.active {
-    font-size: 1rem;
+  font-size: 1rem;
 }

@@ -41,27 +41,6 @@ module.exports = function (grunt) {
       options: {
         separator: ';',
       },
-      jsMaterial: {
-        src: [
-          '<%= appDir %>/themes/material/js/init.js',
-          '<%= appDir %>/themes/_global/js/restoreScroll.js',
-          'node_modules/jquery.tinydot/src/jquery.tinydot.js',
-        ],
-        dest: '<%= buildDir %>/material.js',
-      },
-      jsBaggy: {
-        src: [
-          '<%= appDir %>/themes/baggy/js/init.js',
-          '<%= appDir %>/themes/_global/js/restoreScroll.js',
-          '<%= appDir %>/themes/baggy/js/autoClose.js',
-          '<%= appDir %>/themes/baggy/js/autoCompleteTags.js',
-          '<%= appDir %>/themes/baggy/js/closeMessage.js',
-          '<%= appDir %>/themes/baggy/js/popupForm.js',
-          // Save link is no more used for now
-          // '<%= appDir %>/themes/baggy/js/saveLink.js',
-        ],
-        dest: '<%= buildDir %>/baggy.js',
-      },
       cssMaterial: {
         src: [
           'node_modules/materialize-css/bin/materialize.css',
@@ -77,8 +56,27 @@ module.exports = function (grunt) {
       },
     },
     browserify: {
-      '<%= buildDir %>/material.browser.js': ['<%= buildDir %>/material.js'],
-      '<%= buildDir %>/baggy.browser.js': ['<%= buildDir %>/baggy.js'],
+      dist: {
+        files: {
+          '<%= buildDir %>/material.browser.js': ['<%= appDir %>/themes/material/js/init.js'],
+          '<%= buildDir %>/baggy.browser.js': ['<%= appDir %>/themes/baggy/js/init.js']
+        }
+      },
+      options: {
+        sourceType: "module",
+        transform: [
+          ["babelify", {
+          presets: ["es2015"]
+        }], "browserify-shim"
+        ],
+        browserifyOptions: {
+          browser: {
+            "jQuery": "./node_modules/jquery/dist/jquery.js",
+            "jquery.tinydot": "./nodes_modules/jquery.tinydot/src/jquery.tinydot.js"
+          }
+        }
+      }
+
     },
     uglify: {
       material: {
@@ -199,7 +197,7 @@ module.exports = function (grunt) {
   grunt.registerTask(
     'js',
     'Build and install js files',
-    ['clean:js', 'copy:pickerjs', 'concat:jsMaterial', 'concat:jsBaggy', 'browserify', 'uglify']
+    ['clean:js', 'copy:pickerjs', 'browserify', 'uglify']
     );
 
   grunt.registerTask(
