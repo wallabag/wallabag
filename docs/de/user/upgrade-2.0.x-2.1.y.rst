@@ -33,6 +33,20 @@ Lade das neueste Release von wallabag herunter:
 
 Entpacke das Archiv in deinen wallabag Ordner und ersetze ``app/config/parameters.yml`` mit deiner Datei.
 
+Please note that we added new parameters in this version. You have to edit ``app/config/parameters.yml`` by adding these lines (replace with your configuration) :
+
+.. code-block:: bash
+
+    # RabbitMQ processing
+    rabbitmq_host: localhost
+    rabbitmq_port: 5672
+    rabbitmq_user: guest
+    rabbitmq_password: guest
+
+    # Redis processing
+    redis_host: localhost
+    redis_port: 6379
+
 Wenn du SQLite nutzt, musst auch das ``data/`` Verzeichnis in die neue Installation kopieren.
 
 Leere den ``var/cache`` Ordner.

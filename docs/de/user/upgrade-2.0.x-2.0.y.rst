@@ -1,5 +1,5 @@
-Wallabag updaten
-================
+Wallabag updaten 2.0.x -> 2.1.x
+===============================
 
 Update auf einem dedizierten Webserver
 --------------------------------------

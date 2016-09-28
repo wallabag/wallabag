@@ -30,7 +30,7 @@ The documentation is available in other languages:
 
    user/faq
    user/installation
-   user/upgrade-2.0.x-2.1.0
+   user/upgrade-2.0.x-2.1.y
    user/upgrade-2.0.x-2.0.y
    user/migration
    user/import

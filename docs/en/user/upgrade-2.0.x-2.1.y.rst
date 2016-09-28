@@ -1,4 +1,4 @@
-Upgrading from 2.0.x to 2.1.0
+Upgrading from 2.0.x to 2.1.y
 =============================
 
 .. warning::
@@ -32,6 +32,20 @@ Download the last release of wallabag:
 (md5 hash of the package: ``4f84c725d1d6e3345eae0a406115e5ff``)
 
 Extract the archive in your wallabag folder and replace ``app/config/parameters.yml`` with yours.
+
+Please note that we added new parameters in this version. You have to edit ``app/config/parameters.yml`` by adding these lines (replace with your configuration) :
+
+.. code-block:: bash
+
+    # RabbitMQ processing
+    rabbitmq_host: localhost
+    rabbitmq_port: 5672
+    rabbitmq_user: guest
+    rabbitmq_password: guest
+
+    # Redis processing
+    redis_host: localhost
+    redis_port: 6379
 
 If you use SQLite, you must also copy your ``data/`` folder inside the new installation.
 
