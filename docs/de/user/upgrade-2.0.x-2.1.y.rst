@@ -2,7 +2,7 @@ Wallabag updaten
 ================
 
 .. warning::
-Before this migration, if you configured the Pocket import by adding your consumer key in Internal settings, please do a backup of it: you'll have to add it into the Config page after the upgrade.
+Wenn du den Import von Pocket durch das Hinzufügen des Consumer Key in den internen Einstellungen konfiguriert hast, fertige bitte ein Backup deines Keys an bevor du auf das neue Release migrierst: Du wirst den Key nach dem Update in der Konfiguration erneut eintragen müssen.
 
 Update auf einem dedizierten Webserver
 --------------------------------------
@@ -33,7 +33,7 @@ Lade das neueste Release von wallabag herunter:
 
 Entpacke das Archiv in deinen wallabag Ordner und ersetze ``app/config/parameters.yml`` mit deiner Datei.
 
-Please note that we added new parameters in this version. You have to edit ``app/config/parameters.yml`` by adding these lines (replace with your configuration) :
+Bitte beachte, dass wir in dieser Version neue Parameter hinzugefügt haben. Du musst die Datei ``app/config/parameters.yml`` bearbeiten und die folgenden Zeilen hinzufügen (ersetze die Werte mit deiner Konfiguration):
 
 .. code-block:: bash
 
@@ -51,7 +51,7 @@ Wenn du SQLite nutzt, musst auch das ``data/`` Verzeichnis in die neue Installat
 
 Leere den ``var/cache`` Ordner.
 
-Sie müssen einige SQL-Abfragen ausführen, um Ihre Datenbank zu aktualisieren. We assume that the table prefix is ``wallabag_`` and the database server is a MySQL one:
+Du musst einige SQL-Abfragen ausführen, um die Datenbank zu aktualisieren. Wir nehmen an, dass der Tabellenpräfix ``wallabag_`` und die Datenbank MySQL ist:
 
 .. code-block:: sql
 
