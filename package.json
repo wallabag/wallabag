@@ -27,17 +27,21 @@
     "grunt-contrib-uglify": "^1.0.0",
     "grunt-postcss": "^0.8.0",
     "hammerjs": "^2.0.6",
-    "jquery": "^2.2.1",
-    "jquery-ui": "^1.10.5",
+    "icomoon-free-npm": "0.0.0",
+    "jquery": "^2.2.4",
+    "jquery-ui-browserify": "^1.11.0-pre-seelio",
     "jquery.cookie": "^1.4.1",
     "jquery.tinydot": "^0.2.1",
     "load-grunt-tasks": "^3.4.1",
+    "material-design-icons-iconfont": "^3.0.0",
     "materialize-css": "0.97.5",
     "npm": "^3.8.3",
     "pickadate": "^3.5.6",
     "pixrem": "^3.0.0",
     "postcss-cssnext": "^2.5.1",
     "prismjs": "^1.4.1",
+    "ptsans-npm-webfont": "0.0.4",
+    "roboto-fontface": "^0.6.0",
     "through": "^2.3.8"
   },
   "engines": {
@@ -49,9 +53,14 @@
     "materialize": "./node_modules/materialize-css/bin/materialize.js"
   },
   "browserify-shim": {
-    "jquery": "$",
-    "jQuery": "jQuery",
-    "materialize": "materialize"
+    "jquery": {
+      "exports": "$"
+    },
+    "materialize": "materialize",
+    "jquery-ui": {
+      "depends": "jquery",
+      "exports": null
+    }
   },
   "browserify": {
     "transform": [

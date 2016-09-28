@@ -1,6 +1,6 @@
 const $ = global.jquery = require('jquery');
 require('jquery.cookie');
-require('jquery-ui');
+require('jquery-ui-browserify');
 const annotator = require('annotator');
 import { savePercent, retrievePercent } from '../../_global/js/tools.js';
 import { split, extractLast } from './autoCompleteTags.js';
@@ -124,6 +124,10 @@ $.fn.ready(() => {
   /**
    * Tags autocomplete
    */
+  /**
+   * Not working on v2
+   *
+
   $('#value').bind('keydown', (event) => {
     if (event.keyCode === $.ui.keyCode.TAB && $(this).data('ui-autocomplete').menu.active) {
       event.preventDefault();
@@ -156,6 +160,7 @@ $.fn.ready(() => {
       return false;
     },
   });
+  */
 
   //---------------------------------------------------------------------------
   // Close the message box when the user clicks the close icon

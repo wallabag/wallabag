@@ -67,12 +67,22 @@ module.exports = function (grunt) {
         transform: [
           ["babelify", {
           presets: ["es2015"]
-        }], "browserify-shim"
+        }], ["browserify-shim", {
+            "jquery": {
+              "exports": "$"
+            },
+            "materialize": "materialize",
+            "jquery-ui": {
+              "depends": "jquery",
+              "exports": null
+            }
+          }]
         ],
         browserifyOptions: {
           browser: {
             "jQuery": "./node_modules/jquery/dist/jquery.js",
-            "jquery.tinydot": "./nodes_modules/jquery.tinydot/src/jquery.tinydot.js"
+            "jquery.tinydot": "./node_modules/jquery.tinydot/src/jquery.tinydot.js",
+            "jquery.ui": "./node_modules/jquery-ui-browserify/dist/jquery-ui.js"
           }
         }
       }
