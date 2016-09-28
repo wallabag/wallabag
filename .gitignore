@@ -49,7 +49,3 @@ app/Resources/static/lib/*
 /bin
 !/src/Wallabag/CoreBundle/Resources/public
 /src/Wallabag/CoreBundle/Resources/public/*
-
-# PHPStorm
-.idea/
-
