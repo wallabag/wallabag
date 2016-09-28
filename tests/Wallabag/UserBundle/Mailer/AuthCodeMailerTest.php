@@ -37,7 +37,7 @@ class AuthCodeMailerTest extends \PHPUnit_Framework_TestCase
         );
         $this->mailer = new \Swift_Mailer($transport);
 
-        $twigTemplate = <<<TWIG
+        $twigTemplate = <<<'TWIG'
 {% block subject %}subject{% endblock %}
 {% block body_html %}html body {{ code }}{% endblock %}
 {% block body_text %}text body {{ support_url }}{% endblock %}

@@ -11,7 +11,9 @@ La dernière version de wallabag est publiée à cette adresse : https://www.wal
     git fetch origin
     git fetch --tags
     git checkout 2.1.0
-    ./install.sh
+    ASSETS=build ./install.sh
+    php bin/console doctrine:migrations:migrate --env=prod
+    php bin/console cache:clear --env=prod
 
 Mise à jour sur un hébergement mutualisé
 ----------------------------------------

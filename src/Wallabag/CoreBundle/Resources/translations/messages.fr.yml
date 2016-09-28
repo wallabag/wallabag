@@ -48,6 +48,7 @@ footer:
     page_title: 'Configuration'
 
 config:
+    page_title: 'Configuration'
     tab_menu:
         settings: 'Paramètres'
         rss: 'RSS'

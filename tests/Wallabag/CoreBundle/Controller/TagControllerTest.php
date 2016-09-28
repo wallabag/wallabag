@@ -47,7 +47,7 @@ class TagControllerTest extends WallabagCoreTestCase
 
         $this->assertEquals(1, count($entry->getTags()));
 
-        # tag already exists and already assigned
+        // tag already exists and already assigned
         $client->submit($form, $data);
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
 
@@ -58,7 +58,7 @@ class TagControllerTest extends WallabagCoreTestCase
 
         $this->assertEquals(1, count($newEntry->getTags()));
 
-        # tag already exists but still not assigned to this entry
+        // tag already exists but still not assigned to this entry
         $data = [
             'tag[label]' => 'foo',
         ];

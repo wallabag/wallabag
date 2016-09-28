@@ -11,7 +11,9 @@ Das neueste Release ist auf https://www.wallabag.org/pages/download-wallabag.htm
     git fetch origin
     git fetch --tags
     git checkout 2.1.0
-    ./install.sh
+    ASSETS=build ./install.sh
+    php bin/console doctrine:migrations:migrate --env=prod
+    php bin/console cache:clear --env=prod
 
 Update auf einem Shared Webhosting
 ----------------------------------

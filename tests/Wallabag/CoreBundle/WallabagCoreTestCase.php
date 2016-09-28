@@ -83,7 +83,7 @@ abstract class WallabagCoreTestCase extends WebTestCase
 
     /**
      * Check if Redis is installed.
-     * If not, mark test as skip
+     * If not, mark test as skip.
      */
     protected function checkRedis()
     {
