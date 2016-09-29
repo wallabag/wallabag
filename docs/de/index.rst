@@ -56,3 +56,5 @@ Die Dokumentation ist in anderen Sprachen verfügbar :
    developer/documentation
    developer/translate
    developer/maintenance
+   developer/redis
+   developer/rabbitmq
