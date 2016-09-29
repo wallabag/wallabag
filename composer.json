@@ -83,7 +83,8 @@
         "predis/predis": "^1.0",
         "javibravo/simpleue": "^1.0",
         "symfony/dom-crawler": "^3.1",
-        "friendsofsymfony/jsrouting-bundle": "^1.6"
+        "friendsofsymfony/jsrouting-bundle": "^1.6",
+        "bdunogier/guzzle-site-authenticator": "^1.0@beta"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "~2.2",
