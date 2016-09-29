@@ -1,12 +1,12 @@
-Install RabbitMQ for asynchronous tasks
-=======================================
+Installiere RabbitMQ für asynchrone Aufgaben
+============================================
 
-In order to launch asynchronous tasks (useful for huge imports for example), we can use RabbitMQ.
+Um asynchrone Aufgaben zu starten (nützlich z.B. für große Imports), können wir RabbitMQ nutzen.
 
-Requirements
-------------
+Voraussetzungen
+---------------
 
-You need to have RabbitMQ installed on your server.
+Du musst RabbitMQ auf deinem Server installiert haben.
 
 Installation
 ~~~~~~~~~~~~
@@ -18,26 +18,26 @@ Installation
   apt-get update
   apt-get install rabbitmq-server
 
-Configuration and launch
-~~~~~~~~~~~~~~~~~~~~~~~~
+Konfiguration und Starten
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: bash
 
   rabbitmq-plugins enable rabbitmq_management # (useful to have a web interface, available at http://localhost:15672/ (guest/guest)
   rabbitmq-server -detached
 
-Stop RabbitMQ
-~~~~~~~~~~~~~
+RabbitMQ stoppen
+~~~~~~~~~~~~~~~
 
 .. code:: bash
 
   rabbitmqctl stop
 
 
-Configure RabbitMQ in wallabag
+Konfigure RabbitMQ in wallabag
 ------------------------------
 
-Edit your ``parameters.yml`` file to edit RabbitMQ configuration. The default one should be ok:
+Bearbeite die Datei ``parameters.yml``, um die RabbitMQ Konfiguration einzurichten. Die Standardkonfiguration sollte ok sein:
 
 .. code:: yaml
 
@@ -47,10 +47,10 @@ Edit your ``parameters.yml`` file to edit RabbitMQ configuration. The default on
     rabbitmq_password: guest
 
 
-Launch RabbitMQ consumer
-------------------------
+Starte den RabbitMQ Consumer
+----------------------------
 
-Depending on which service you want to import from you need to enable one (or many if you want to support many) cron job:
+Abhängig von welchem Service du importieren möchtest, solltest du einen Cron Job aktivieren (oder mehrere, wenn du viele unterstützen willst):
 
 .. code:: bash
 
@@ -74,3 +74,4 @@ Depending on which service you want to import from you need to enable one (or ma
 
   # for Chrome import
   bin/console rabbitmq:consumer import_chrome -w
+

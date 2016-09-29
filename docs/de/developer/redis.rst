@@ -1,12 +1,12 @@
-Install Redis for asynchronous tasks
-====================================
+Installiere Redis für asynchrone Aufgaben
+=========================================
 
-In order to launch asynchronous tasks (useful for huge imports for example), we can use Redis.
+Um asynchrone Aufgaben zu starten (nützlich z.B. für große Imports), können wir Redis nutzen.
 
-Requirements
-------------
+Voraussetzungen
+---------------
 
-You need to have Redis installed on your server.
+Du musst Redis auf deinem Server installiert haben.
 
 Installation
 ~~~~~~~~~~~~
@@ -15,20 +15,20 @@ Installation
 
   apt-get install redis-server
 
-Launch
+Starten
 ~~~~~~
 
-The server might be already running after installing, if not you can launch it using:
+Der Redis Service läuft eventuell schon direkt nach der Installation. Falls nicht kannst du ihn wie folgt starten:
 
 .. code:: bash
 
   redis-server
 
 
-Configure Redis in wallabag
+Konfigure Redis in wallabag
 ---------------------------
 
-Edit your ``parameters.yml`` file to edit Redis configuration. The default one should be ok:
+Bearbeite die Datei ``parameters.yml``, um die RabbitMQ Konfiguration einzurichten. Die Standardkonfiguration sollte ok sein:
 
 .. code:: yaml
 
@@ -36,10 +36,10 @@ Edit your ``parameters.yml`` file to edit Redis configuration. The default one s
     redis_port: 6379
 
 
-Launch Redis consumer
----------------------
+Starte den Redis Consumer
+-------------------------
 
-Depending on which service you want to import from you need to enable one (or many if you want to support many) cron job:
+Abhängig von welchem Service du importieren möchtest, solltest du einen Cron Job aktivieren (oder mehrere, wenn du viele unterstützen willst):
 
 .. code:: bash
 
@@ -64,7 +64,7 @@ Depending on which service you want to import from you need to enable one (or ma
   # for Chrome import
   bin/console wallabag:import:redis-worker instapaper -vv >> /path/to/wallabag/var/logs/redis-chrome.log
 
-If you want to launch the import only for some messages and not all, you can specify this number (here 12) and the worker will stop right after the 12th message :
+Wenn du den Import nur für ein paar Nachrichten und nicht für alle starten willst, kannst du die Nummer (im folgenden Beispiel 12) angeben. Der Redis Worker wird dann nach der 12. Nachricht stoppen:
 
 .. code:: bash
 

@@ -30,7 +30,8 @@ Die Dokumentation ist in anderen Sprachen verfügbar :
 
    user/faq
    user/installation
-   user/upgrade
+   user/upgrade-2.0.x-2.1.y
+   user/upgrade-2.0.x-2.0.y
    user/migration
    user/import
    user/create_account
@@ -55,3 +56,5 @@ Die Dokumentation ist in anderen Sprachen verfügbar :
    developer/documentation
    developer/translate
    developer/maintenance
+   developer/redis
+   developer/rabbitmq

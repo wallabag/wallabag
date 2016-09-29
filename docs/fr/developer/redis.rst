@@ -1,12 +1,12 @@
-Install Redis for asynchronous tasks
-====================================
+Installer Redis pour des tâches asynchrones
+===========================================
 
-In order to launch asynchronous tasks (useful for huge imports for example), we can use Redis.
+Pour lancer des tâches asynchrones (utile pour des imports importants par exemple), nous pouvons utiliser Redis.
 
-Requirements
-------------
+Pré-requis
+----------
 
-You need to have Redis installed on your server.
+Vous devez installer Redis sur votre serveur.
 
 Installation
 ~~~~~~~~~~~~
@@ -15,20 +15,20 @@ Installation
 
   apt-get install redis-server
 
-Launch
-~~~~~~
+Démarrage
+~~~~~~~~~
 
-The server might be already running after installing, if not you can launch it using:
+Le serveur devrait déjà être démarré après l'installation. Si ce n'est pas le cas, vous pouvez le démarrer ainsi :
 
 .. code:: bash
 
   redis-server
 
 
-Configure Redis in wallabag
----------------------------
+Configurer Redis dans wallabag
+-------------------------------
 
-Edit your ``parameters.yml`` file to edit Redis configuration. The default one should be ok:
+Modifiez votre fichier ``parameters.yml`` pour éditer la configuration Redis. Celle par défaut devrait convenir :
 
 .. code:: yaml
 
@@ -36,10 +36,10 @@ Edit your ``parameters.yml`` file to edit Redis configuration. The default one s
     redis_port: 6379
 
 
-Launch Redis consumer
----------------------
+Démarrer les clients Redis
+--------------------------
 
-Depending on which service you want to import from you need to enable one (or many if you want to support many) cron job:
+En fonction du service dont vous souhaitez importer vos données, vous devez activer un (ou plusieurs si vous souhaitez en supporter plusieurs) cron job :
 
 .. code:: bash
 
@@ -64,7 +64,7 @@ Depending on which service you want to import from you need to enable one (or ma
   # for Chrome import
   bin/console wallabag:import:redis-worker instapaper -vv >> /path/to/wallabag/var/logs/redis-chrome.log
 
-If you want to launch the import only for some messages and not all, you can specify this number (here 12) and the worker will stop right after the 12th message :
+Si vous souhaitez démarrer l'import pour quelques messages uniquement, vous pouvez spécifier cette valeur en paramètre (ici 12) et le client va s'arrêter après le 12ème message :
 
 .. code:: bash
 
