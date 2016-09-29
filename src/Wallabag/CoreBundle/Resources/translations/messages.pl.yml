@@ -359,8 +359,8 @@ import:
        how_to: "Wybierz swój plik z zakładkami i naciśnij poniższy przycisk, aby je zaimportować. Może to zająć dłuższą chwilę, zanim wszystkie artykuły zostaną przeniesione."
     instapaper:
         page_title: 'Import > Instapaper'
-        # description: 'This importer will import all your Instapaper articles. On the settings (https://www.instapaper.com/user) page, click on "Download .CSV file" in the "Export" section. A CSV file will be downloaded (like "instapaper-export.csv").'
-        # how_to: 'Please select your Instapaper export and click on the below button to upload and import it.'
+        description: 'Ten importer, zaimportuje wszystkie twoje artykuły z Instapaper. W ustawieniach (https://www.instapaper.com/user), kliknij na "Download .CSV file"  w sekcji "Export". Otrzymasz plik CSV.'
+        how_to: 'Wybierz swój plik eksportu z Instapaper i kliknij poniższy przycisk, aby go załadować.'
 
 developer:
     page_title: 'Deweloper'
