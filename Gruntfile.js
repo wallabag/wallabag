@@ -4,6 +4,7 @@ module.exports = function (grunt) {
   grunt.initConfig({
     appDir: 'app/Resources/static',
     buildDir: 'web/bundles/wallabagcore',
+    modulesDir: 'node_modules',
 
     postcss: {
       material: {
@@ -111,13 +112,13 @@ module.exports = function (grunt) {
     copy: {
       pickerjs: {
         expand: true,
-        cwd: 'node_modules/pickadate/lib',
+        cwd: '<%= modulesDir %>/pickadate/lib',
         src: 'picker.js',
         dest: '<%= buildDir %>',
       },
       annotator: {
         expand: true,
-        cwd: 'node_modules/annotator/pkg',
+        cwd: '<%= modulesDir %>/annotator/pkg',
         src: 'annotator.min.js',
         dest: '<%= buildDir %>/themes/_global/js/',
       },
@@ -128,14 +129,21 @@ module.exports = function (grunt) {
           {
             expand: true,
             overwrite: true,
-            cwd: '<%= appDir %>/lib/icomoon-bower/',
-            src: 'fonts',
-            dest: '<%= buildDir %>/themes/baggy/',
+            cwd: '<%= modulesDir %>/icomoon-free-npm/Font',
+            src: 'IcoMoon-Free.ttf',
+            dest: '<%= buildDir %>/themes/baggy/fonts/',
           },
           {
             expand: true,
             overwrite: true,
-            cwd: '<%= appDir %>/lib/bower-pt-sans/fonts',
+            cwd: '<%= modulesDir %>/ptsans-npm-webfont/fonts',
+            src: '*',
+            dest: '<%= buildDir %>/themes/baggy/fonts/',
+          },
+          {
+            expand: true,
+            overwrite: true,
+            cwd: '<%= modulesDir %>/material-design-icons-iconfont/dist/fonts/',
             src: '*',
             dest: '<%= buildDir %>/themes/baggy/fonts/',
           },
@@ -146,28 +154,28 @@ module.exports = function (grunt) {
           {
             expand: true,
             overwrite: true,
-            cwd: '<%= appDir %>/lib/icomoon-bower/',
-            src: 'fonts',
-            dest: '<%= buildDir %>/themes/material/',
+            cwd: '<%= modulesDir %>/icomoon-free-npm/Font',
+            src: 'IcoMoon-Free.ttf',
+            dest: '<%= buildDir %>/themes/material/fonts',
           },
           {
             expand: true,
             overwrite: true,
-            cwd: 'node_modules/materialize-css/',
+            cwd: '<%= modulesDir %>/materialize-css/',
             src: 'font',
             dest: '<%= buildDir %>/themes/material',
           },
           {
             expand: true,
             overwrite: true,
-            cwd: '<%= appDir %>/lib/roboto-fontface/fonts/',
+            cwd: '<%= modulesDir %>/roboto-fontface/fonts/Roboto',
             src: '*',
-            dest: '<%= buildDir %>/themes/material/fonts/roboto/',
+            dest: '<%= buildDir %>/themes/material/fonts/',
           },
           {
             expand: true,
             overwrite: true,
-            cwd: '<%= appDir %>/lib/material-design-icons-iconfont/dist/fonts/',
+            cwd: '<%= modulesDir %>/material-design-icons-iconfont/dist/fonts/',
             src: '*',
             dest: '<%= buildDir %>/themes/material/fonts/',
           },

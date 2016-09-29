@@ -732,12 +732,7 @@ a.add-to-wallabag-link-after::after {
 
 @font-face {
   font-family: icomoon;
-  src: url("../fonts/icomoon.eot?-s0mcsx");
-  src:
-    url("../fonts/icomoon.eot?#iefix-s0mcsx")   format("embedded-opentype"),
-    url("../fonts/icomoon.woff?-s0mcsx")        format("woff"),
-    url("../fonts/icomoon.ttf?-s0mcsx")         format("truetype"),
-    url("../fonts/icomoon.svg?-s0mcsx#icomoon") format("svg");
+  src: url("../fonts/IcoMoon-Free.ttf");
   font-weight: normal;
   font-style: normal;
 }
