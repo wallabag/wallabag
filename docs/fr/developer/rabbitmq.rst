@@ -1,12 +1,12 @@
-Install RabbitMQ for asynchronous tasks
-=======================================
+Installer RabbitMQ pour des tâches asynchrones
+==============================================
 
-In order to launch asynchronous tasks (useful for huge imports for example), we can use RabbitMQ.
+Pour lancer des tâches asynchrones (utile pour des imports importants par exemple), nous pouvons utiliser RabbitMQ.
 
-Requirements
-------------
+Pré-requis
+----------
 
-You need to have RabbitMQ installed on your server.
+Vous devez installer RabbitMQ sur votre serveur.
 
 Installation
 ~~~~~~~~~~~~
@@ -18,26 +18,26 @@ Installation
   apt-get update
   apt-get install rabbitmq-server
 
-Configuration and launch
-~~~~~~~~~~~~~~~~~~~~~~~~
+Configuration et démarrage
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: bash
 
   rabbitmq-plugins enable rabbitmq_management # (useful to have a web interface, available at http://localhost:15672/ (guest/guest)
   rabbitmq-server -detached
 
-Stop RabbitMQ
-~~~~~~~~~~~~~
+Arrêter RabbitMQ
+~~~~~~~~~~~~~~~~
 
 .. code:: bash
 
   rabbitmqctl stop
 
 
-Configure RabbitMQ in wallabag
-------------------------------
+Configurer RabbitMQ dans wallabag
+---------------------------------
 
-Edit your ``parameters.yml`` file to edit RabbitMQ configuration. The default one should be ok:
+Modifiez votre fichier ``parameters.yml`` pour éditer la configuration RabbitMQ. Celle par défaut devrait convenir :
 
 .. code:: yaml
 
@@ -47,10 +47,10 @@ Edit your ``parameters.yml`` file to edit RabbitMQ configuration. The default on
     rabbitmq_password: guest
 
 
-Launch RabbitMQ consumer
-------------------------
+Démarrer les clients RabbitMQ
+-----------------------------
 
-Depending on which service you want to import from you need to enable one (or many if you want to support many) cron job:
+En fonction du service dont vous souhaitez importer vos données, vous devez activer un (ou plusieurs si vous souhaitez en supporter plusieurs) cron job :
 
 .. code:: bash
 

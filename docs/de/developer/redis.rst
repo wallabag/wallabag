@@ -4,7 +4,7 @@ Installiere Redis für asynchrone Aufgaben
 Um asynchrone Aufgaben zu starten (nützlich z.B. für große Imports), können wir Redis nutzen.
 
 Voraussetzungen
-------------
+---------------
 
 Du musst Redis auf deinem Server installiert haben.
 
@@ -37,7 +37,7 @@ Bearbeite die Datei ``parameters.yml``, um die RabbitMQ Konfiguration einzuricht
 
 
 Starte den Redis Consumer
-------------------------
+-------------------------
 
 Abhängig von welchem Service du importieren möchtest, solltest du einen Cron Job aktivieren (oder mehrere, wenn du viele unterstützen willst):
 
@@ -46,14 +46,23 @@ Abhängig von welchem Service du importieren möchtest, solltest du einen Cron J
   # for Pocket import
   bin/console wallabag:import:redis-worker pocket -vv >> /path/to/wallabag/var/logs/redis-pocket.log
 
-  # for Readbility import
+  # for Readability import
   bin/console wallabag:import:redis-worker readability -vv >> /path/to/wallabag/var/logs/redis-readability.log
+
+  # for Instapaper import
+  bin/console wallabag:import:redis-worker instapaper -vv >> /path/to/wallabag/var/logs/redis-instapaper.log
 
   # for wallabag v1 import
   bin/console wallabag:import:redis-worker wallabag_v1 -vv >> /path/to/wallabag/var/logs/redis-wallabag_v1.log
 
   # for wallabag v2 import
   bin/console wallabag:import:redis-worker wallabag_v2 -vv >> /path/to/wallabag/var/logs/redis-wallabag_v2.log
+
+  # for Firefox import
+  bin/console wallabag:import:redis-worker firefox -vv >> /path/to/wallabag/var/logs/redis-firefox.log
+
+  # for Chrome import
+  bin/console wallabag:import:redis-worker instapaper -vv >> /path/to/wallabag/var/logs/redis-chrome.log
 
 Wenn du den Import nur für ein paar Nachrichten und nicht für alle starten willst, kannst du die Nummer (im folgenden Beispiel 12) angeben. Der Redis Worker wird dann nach der 12. Nachricht stoppen:
 

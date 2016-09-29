@@ -4,7 +4,7 @@ Installiere RabbitMQ für asynchrone Aufgaben
 Um asynchrone Aufgaben zu starten (nützlich z.B. für große Imports), können wir RabbitMQ nutzen.
 
 Voraussetzungen
---------------
+---------------
 
 Du musst RabbitMQ auf deinem Server installiert haben.
 
@@ -27,7 +27,7 @@ Konfiguration und Starten
   rabbitmq-server -detached
 
 RabbitMQ stoppen
-~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~
 
 .. code:: bash
 
@@ -48,7 +48,7 @@ Bearbeite die Datei ``parameters.yml``, um die RabbitMQ Konfiguration einzuricht
 
 
 Starte den RabbitMQ Consumer
-------------------------
+----------------------------
 
 Abhängig von welchem Service du importieren möchtest, solltest du einen Cron Job aktivieren (oder mehrere, wenn du viele unterstützen willst):
 
@@ -57,11 +57,21 @@ Abhängig von welchem Service du importieren möchtest, solltest du einen Cron J
   # for Pocket import
   bin/console rabbitmq:consumer import_pocket -w
 
-  # for Readbility import
+  # for Readability import
   bin/console rabbitmq:consumer import_readability -w
+
+  # for Instapaper import
+  bin/console rabbitmq:consumer import_instapaper -w
 
   # for wallabag v1 import
   bin/console rabbitmq:consumer import_wallabag_v1 -w
 
   # for wallabag v2 import
   bin/console rabbitmq:consumer import_wallabag_v2 -w
+
+  # for Firefox import
+  bin/console rabbitmq:consumer import_firefox -w
+
+  # for Chrome import
+  bin/console rabbitmq:consumer import_chrome -w
+
