@@ -63,4 +63,5 @@ security:
         - { path: ^/share, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/settings, roles: ROLE_SUPER_ADMIN }
         - { path: ^/annotations, roles: ROLE_USER }
+        - { path: ^/users, roles: ROLE_SUPER_ADMIN }
         - { path: ^/, roles: ROLE_USER }

@@ -31,6 +31,7 @@ menu:
         search: 'Buscar'
         save_link: 'Archivar un enlace'
         back_to_unread: 'Volver a los artículos sin leer'
+        # users_management: 'Users management'
     top:
         add_new_entry: 'Añadir un nuevo artículo'
         search: 'Buscar'
@@ -129,12 +130,6 @@ config:
                 or: 'Una regla U otra'
                 and: 'Una regla Y la otra'
                 matches: 'Pruebe si un <i>sujeto</i> corresponde a una <i>búsqueda</i> (insensible a mayusculas).<br />Ejemplo : <code>título coincide "football"</code>'
-    form_new_user:
-        username_label: 'Nombre de usuario'
-        password_label: 'Contraseña'
-        repeat_new_password_label: 'Confirmar la nueva contraseña'
-        plain_password_label: '????'
-        email_label: 'Email'
 
 entry:
     page_titles:
@@ -396,12 +391,14 @@ developer:
         page_title: 'Promotor > Nuevo cliente'
         page_description: 'Va a crear un nuevo cliente. Por favor, llene el campo abajo para URI redirigido de su aplicación.'
         form:
+            # name_label: 'Name of the client'
             redirect_uris_label: 'los URI redirigidos'
             save_label: 'Crear un nuevo cliente'
         action_back: 'Atrás'
     client_parameter:
         page_title: 'Promotor > Parámetros del cliente'
         page_description: 'Aquí hay sus parámetros del cliente.'
+        # field_name: 'Client name'
         field_id: 'Identificación del cliente'
         field_secret: 'Cliente secreto'
         back: 'Atrás'
@@ -418,6 +415,33 @@ developer:
             paragraph_7: 'Esta llamada devolverá todos los artículos para su usuario.'
             paragraph_8: 'Si quiere ver todos los fines de API, se puede ver <a href="%link%">a nuestra documentación API</a>.'
         back: 'Atrás'
+
+user:
+    # page_title: Users management
+    # new_user: Create a new user
+    # edit_user: Edit an existing user
+    # description: "Here you can manage all users (create, edit and delete)"
+    # list:
+    #     actions: Actions
+    #     edit_action: Edit
+    #     yes: Yes
+    #     no: No
+    #     create_new_one: Create a new user
+    form:
+        username_label: 'Nombre de usuario'
+        # name_label: 'Name'
+        password_label: 'Contraseña'
+        repeat_new_password_label: 'Confirmar la nueva contraseña'
+        plain_password_label: '????'
+        email_label: 'Email'
+        # enabled_label: 'Enabled'
+        # locked_label: 'Locked'
+        # last_login_label: 'Last login'
+        # twofactor_label: Two factor authentication
+        # save: Save
+        # delete: Delete
+        # delete_confirm: Are you sure?
+        # back_to_list: Back to list
 
 flashes:
     config:

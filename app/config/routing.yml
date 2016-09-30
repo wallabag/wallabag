@@ -7,6 +7,11 @@ wallabag_import:
     type: annotation
     prefix: /import
 
+wallabag_user:
+    resource: "@WallabagUserBundle/Controller/"
+    type: annotation
+    prefix: /users
+
 wallabag_api:
     resource: "@WallabagApiBundle/Resources/config/routing.yml"
     prefix: /

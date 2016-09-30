@@ -31,6 +31,7 @@ menu:
         search: 'Søg'
         # save_link: 'Save a link'
         back_to_unread: 'Tilbage til de ulæste artikler'
+        # users_management: 'Users management'
     top:
         add_new_entry: 'Tilføj ny artikel'
         search: 'Søg'
@@ -129,12 +130,6 @@ config:
         #         or: 'One rule OR another'
         #         and: 'One rule AND another'
         #         matches: 'Tests that a <i>subject</i> is matches a <i>search</i> (case-insensitive).<br />Example: <code>title matches "football"</code>'
-    form_new_user:
-        username_label: 'Brugernavn'
-        password_label: 'Adgangskode'
-        repeat_new_password_label: 'Gentag adgangskode'
-        plain_password_label: '????'
-        email_label: 'Emailadresse'
 
 entry:
     page_titles:
@@ -396,12 +391,14 @@ developer:
     #     page_title: 'Developer > New client'
     #     page_description: 'You are about to create a new client. Please fill the field below for the redirect URI of your application.'
     #     form:
+    #         name_label: 'Name of the client'
     #         redirect_uris_label: 'Redirect URIs'
     #         save_label: 'Create a new client'
     #     action_back: 'Back'
     # client_parameter:
     #     page_title: 'Developer > Client parameters'
     #     page_description: 'Here are your client parameters.'
+    #     field_name: 'Client name'
     #     field_id: 'Client ID'
     #     field_secret: 'Client secret'
     #     back: 'Back'
@@ -418,6 +415,33 @@ developer:
     #         paragraph_7: 'This call will return all the entries for your user.'
     #         paragraph_8: 'If you want to see all the API endpoints, you can have a look <a href="%link%">to our API documentation</a>.'
     #     back: 'Back'
+
+user:
+    # page_title: Users management
+    # new_user: Create a new user
+    # edit_user: Edit an existing user
+    # description: "Here you can manage all users (create, edit and delete)"
+    # list:
+    #     actions: Actions
+    #     edit_action: Edit
+    #     yes: Yes
+    #     no: No
+    #     create_new_one: Create a new user
+    form:
+        username_label: 'Brugernavn'
+        # name_label: 'Name'
+        password_label: 'Adgangskode'
+        repeat_new_password_label: 'Gentag adgangskode'
+        plain_password_label: '????'
+        email_label: 'Emailadresse'
+        # enabled_label: 'Enabled'
+        # locked_label: 'Locked'
+        # last_login_label: 'Last login'
+        # twofactor_label: Two factor authentication
+        # save: Save
+        # delete: Delete
+        # delete_confirm: Are you sure?
+        # back_to_list: Back to list
 
 flashes:
     config:

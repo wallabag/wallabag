@@ -13,7 +13,6 @@ use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\TaggingRule;
 use Wallabag\CoreBundle\Form\Type\ConfigType;
 use Wallabag\CoreBundle\Form\Type\ChangePasswordType;
-use Wallabag\CoreBundle\Form\Type\NewUserType;
 use Wallabag\CoreBundle\Form\Type\RssType;
 use Wallabag\CoreBundle\Form\Type\TaggingRuleType;
 use Wallabag\CoreBundle\Form\Type\UserInformationType;
@@ -138,38 +137,12 @@ class ConfigController extends Controller
             return $this->redirect($this->generateUrl('config').'#set5');
         }
 
-        // handle adding new user
-        $newUser = $userManager->createUser();
-        // enable created user by default
-        $newUser->setEnabled(true);
-        $newUserForm = $this->createForm(NewUserType::class, $newUser, [
-            'validation_groups' => ['Profile'],
-            'action' => $this->generateUrl('config').'#set6',
-        ]);
-        $newUserForm->handleRequest($request);
-
-        if ($newUserForm->isValid() && $this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')) {
-            $userManager->updateUser($newUser);
-
-            // dispatch a created event so the associated config will be created
-            $event = new UserEvent($newUser, $request);
-            $this->get('event_dispatcher')->dispatch(FOSUserEvents::USER_CREATED, $event);
-
-            $this->get('session')->getFlashBag()->add(
-                'notice',
-                $this->get('translator')->trans('flashes.config.notice.user_added', ['%username%' => $newUser->getUsername()])
-            );
-
-            return $this->redirect($this->generateUrl('config').'#set6');
-        }
-
         return $this->render('WallabagCoreBundle:Config:index.html.twig', [
             'form' => [
                 'config' => $configForm->createView(),
                 'rss' => $rssForm->createView(),
                 'pwd' => $pwdForm->createView(),
                 'user' => $userForm->createView(),
-                'new_user' => $newUserForm->createView(),
                 'new_tagging_rule' => $newTaggingRule->createView(),
             ],
             'rss' => [

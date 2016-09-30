@@ -16,9 +16,6 @@
                             <li class="tab col s3"><a href="#set3">{{ 'config.tab_menu.user_info'|trans }}</a></li>
                             <li class="tab col s3"><a href="#set4">{{ 'config.tab_menu.password'|trans }}</a></li>
                             <li class="tab col s3"><a href="#set5">{{ 'config.tab_menu.rules'|trans }}</a></li>
-                            {% if is_granted('ROLE_SUPER_ADMIN') %}
-                            <li class="tab col s3"><a href="#set6">{{ 'config.tab_menu.new_user'|trans }}</a></li>
-                            {% endif %}
                         </ul>
                     </div>
 
@@ -157,11 +154,9 @@
                             <div class="row">
                                 <div class="input-field col s12">
                                     {{ 'config.form_user.two_factor_description'|trans }}
-                                </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="input-field col s12">
+                                    <br />
+
                                     {{ form_widget(form.user.twoFactorAuthentication) }}
                                     {{ form_label(form.user.twoFactorAuthentication) }}
                                     {{ form_errors(form.user.twoFactorAuthentication) }}
@@ -339,49 +334,6 @@
                             </div>
                         </div>
                     </div>
-
-                    {% if is_granted('ROLE_SUPER_ADMIN') %}
-                    <div id="set6" class="col s12">
-                        {{ form_start(form.new_user) }}
-                            {{ form_errors(form.new_user) }}
-
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    {{ form_label(form.new_user.username) }}
-                                    {{ form_errors(form.new_user.username) }}
-                                    {{ form_widget(form.new_user.username) }}
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    {{ form_label(form.new_user.plainPassword.first) }}
-                                    {{ form_errors(form.new_user.plainPassword.first) }}
-                                    {{ form_widget(form.new_user.plainPassword.first) }}
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    {{ form_label(form.new_user.plainPassword.second) }}
-                                    {{ form_errors(form.new_user.plainPassword.second) }}
-                                    {{ form_widget(form.new_user.plainPassword.second) }}
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    {{ form_label(form.new_user.email) }}
-                                    {{ form_errors(form.new_user.email) }}
-                                    {{ form_widget(form.new_user.email) }}
-                                </div>
-                            </div>
-
-                            {{ form_widget(form.new_user.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
-                            {{ form_rest(form.new_user) }}
-                        </form>
-                    </div>
-                    {% endif %}
                 </div>
 
             </div>
