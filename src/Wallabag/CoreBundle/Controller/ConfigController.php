@@ -2,6 +2,8 @@
 
 namespace Wallabag\CoreBundle\Controller;
 
+use FOS\UserBundle\Event\UserEvent;
+use FOS\UserBundle\FOSUserEvents;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -133,18 +135,11 @@ class ConfigController extends Controller
         $newUserForm->handleRequest($request);
 
         if ($newUserForm->isValid() && $this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')) {
-            $userManager->updateUser($newUser, true);
+            $userManager->updateUser($newUser);
 
-            $config = new Config($newUser);
-            $config->setTheme($this->getParameter('wallabag_core.theme'));
-            $config->setItemsPerPage($this->getParameter('wallabag_core.items_on_page'));
-            $config->setRssLimit($this->getParameter('wallabag_core.rss_limit'));
-            $config->setLanguage($this->getParameter('wallabag_core.language'));
-            $config->setReadingSpeed($this->getParameter('wallabag_core.reading_speed'));
-
-            $em->persist($config);
-
-            $em->flush();
+            // dispatch a created event so the associated config will be created
+            $event = new UserEvent($newUser, $request);
+            $this->get('event_dispatcher')->dispatch(FOSUserEvents::USER_CREATED, $event);
 
             $this->get('session')->getFlashBag()->add(
                 'notice',
@@ -238,6 +233,7 @@ class ConfigController extends Controller
             ->getRepository('WallabagCoreBundle:Config')
             ->findOneByUser($this->getUser());
 
+        // should NEVER HAPPEN ...
         if (!$config) {
             $config = new Config($this->getUser());
         }

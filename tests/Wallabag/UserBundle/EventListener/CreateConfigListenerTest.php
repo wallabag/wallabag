@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\CoreBundle\EventListener;
+namespace Tests\Wallabag\UserBundle\EventListener;
 
 use FOS\UserBundle\Event\FilterUserResponseEvent;
 use FOS\UserBundle\FOSUserEvents;
@@ -8,10 +8,10 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Wallabag\CoreBundle\Entity\Config;
-use Wallabag\CoreBundle\EventListener\RegistrationConfirmedListener;
+use Wallabag\UserBundle\EventListener\CreateConfigListener;
 use Wallabag\UserBundle\Entity\User;
 
-class RegistrationConfirmedListenerTest extends \PHPUnit_Framework_TestCase
+class CreateConfigListenerTest extends \PHPUnit_Framework_TestCase
 {
     private $em;
     private $listener;
@@ -25,12 +25,13 @@ class RegistrationConfirmedListenerTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->listener = new RegistrationConfirmedListener(
+        $this->listener = new CreateConfigListener(
             $this->em,
             'baggy',
             20,
             50,
-            'fr'
+            'fr',
+            1
         );
 
         $this->dispatcher = new EventDispatcher();
@@ -55,7 +56,7 @@ class RegistrationConfirmedListenerTest extends \PHPUnit_Framework_TestCase
         $this->em->expects($this->never())->method('flush');
 
         $this->dispatcher->dispatch(
-            FOSUserEvents::REGISTRATION_CONFIRMED,
+            FOSUserEvents::REGISTRATION_COMPLETED,
             $event
         );
     }
@@ -76,6 +77,7 @@ class RegistrationConfirmedListenerTest extends \PHPUnit_Framework_TestCase
         $config->setItemsPerPage(20);
         $config->setRssLimit(50);
         $config->setLanguage('fr');
+        $config->setReadingSpeed(1);
 
         $this->em->expects($this->once())
             ->method('persist')
@@ -84,7 +86,7 @@ class RegistrationConfirmedListenerTest extends \PHPUnit_Framework_TestCase
             ->method('flush');
 
         $this->dispatcher->dispatch(
-            FOSUserEvents::REGISTRATION_CONFIRMED,
+            FOSUserEvents::REGISTRATION_COMPLETED,
             $event
         );
     }

@@ -2,6 +2,8 @@
 
 namespace Wallabag\CoreBundle\Command;
 
+use FOS\UserBundle\Event\UserEvent;
+use FOS\UserBundle\FOSUserEvents;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -236,14 +238,9 @@ class InstallCommand extends ContainerAwareCommand
 
         $em->persist($user);
 
-        $config = new Config($user);
-        $config->setTheme($this->getContainer()->getParameter('wallabag_core.theme'));
-        $config->setItemsPerPage($this->getContainer()->getParameter('wallabag_core.items_on_page'));
-        $config->setRssLimit($this->getContainer()->getParameter('wallabag_core.rss_limit'));
-        $config->setReadingSpeed($this->getContainer()->getParameter('wallabag_core.reading_speed'));
-        $config->setLanguage($this->getContainer()->getParameter('wallabag_core.language'));
-
-        $em->persist($config);
+        // dispatch a created event so the associated config will be created
+        $event = new UserEvent($user);
+        $this->getContainer()->get('event_dispatcher')->dispatch(FOSUserEvents::USER_CREATED, $event);
 
         $this->defaultOutput->writeln('');
 
