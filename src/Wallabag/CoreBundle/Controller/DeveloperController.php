@@ -21,7 +21,7 @@ class DeveloperController extends Controller
     {
         $clients = $this->getDoctrine()->getRepository('WallabagApiBundle:Client')->findAll();
 
-        return $this->render('WallabagCoreBundle:Developer:index.html.twig', [
+        return $this->render('@WallabagCore/themes/common/Developer/index.html.twig', [
             'clients' => $clients,
         ]);
     }
@@ -52,14 +52,14 @@ class DeveloperController extends Controller
                 $this->get('translator')->trans('flashes.developer.notice.client_created', ['%name%' => $client->getName()])
             );
 
-            return $this->render('WallabagCoreBundle:Developer:client_parameters.html.twig', [
+            return $this->render('@WallabagCore/themes/common/Developer/client_parameters.html.twig', [
                 'client_id' => $client->getPublicId(),
                 'client_secret' => $client->getSecret(),
                 'client_name' => $client->getName(),
             ]);
         }
 
-        return $this->render('WallabagCoreBundle:Developer:client.html.twig', [
+        return $this->render('@WallabagCore/themes/common/Developer/client.html.twig', [
             'form' => $clientForm->createView(),
         ]);
     }
@@ -96,6 +96,6 @@ class DeveloperController extends Controller
      */
     public function howtoFirstAppAction()
     {
-        return $this->render('WallabagCoreBundle:Developer:howto_app.html.twig');
+        return $this->render('@WallabagCore/themes/common/Developer/howto_app.html.twig');
     }
 }
