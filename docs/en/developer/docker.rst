@@ -40,7 +40,7 @@ Run wallabag
 #. Edit ``app/config/parameters.yml`` to replace ``database_*``
    properties with commented ones (with values prefixed by ``env.``)
 #. ``composer install`` the project dependencies
-#. ``php app/console wallabag:install`` to create the schema
+#. ``php bin/console wallabag:install`` to create the schema
 #. ``docker-compose up`` to run the containers
 #. Finally, browse to http://localhost:8080/ to find your freshly
    installed wallabag.

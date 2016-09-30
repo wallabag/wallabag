@@ -39,7 +39,7 @@ Exécuter wallabag
 #. Editer ``app/config/parameters.yml`` pour remplacer les propriétés ``database_*``
     par les lignes commentées (celles avec des valeurs préfixées par ``env.``)
 #. ``composer install`` pour installer les dépendances
-#. ``php app/console wallabag:install`` pour créer le schéma de la BDD
+#. ``php bin/console wallabag:install`` pour créer le schéma de la BDD
 #. ``docker-compose up`` pour démarrer les conteneurs
 #. Enfin, se rendre sur http://localhost:8080/ pour accéder à une installation
     tout propre de wallabag.
