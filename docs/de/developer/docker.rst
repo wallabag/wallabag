@@ -44,7 +44,7 @@ wallabag laufen lassen
    Eigenschaften mit den kommentierten zu ersetzen (mit Werten
    mit ``env.`` Präfix)
 #. ``composer install`` die Projektabhängigkeiten
-#. ``php app/console wallabag:install``, um das Schema zu erstellen
+#. ``php bin/console wallabag:install``, um das Schema zu erstellen
 #. ``docker-compose up`` um die Container laufen zu lassen
 #. Schließlich öffne http://localhost:8080/, um dein frisch
    installiertes wallabag zu finden.
