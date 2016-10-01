@@ -286,6 +286,7 @@ quickstart:
         import: 'درون‌ریزی را تنظیم کنید'
     first_steps:
         title: 'گام نخست'
+        # description: "Now wallabag is well configured, it's time to archive the web. You can click on the top right sign + to add a link."
         new_article: 'نخستین مقالهٔ خود را ذخیره کنید'
         unread_articles: 'و آن را طبقه‌بندی کنید!'
     migrate:

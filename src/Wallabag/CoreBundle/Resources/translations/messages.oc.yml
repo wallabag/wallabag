@@ -287,7 +287,7 @@ quickstart:
         import: 'Configurar los impòrt'
     first_steps:
         title: 'Primièrs passes'
-        # description: "Now wallabag is well configured, it's time to archive the web"
+        # description: "Now wallabag is well configured, it's time to archive the web. You can click on the top right sign + to add a link."
         new_article: 'Ajustatz vòstre primièr article'
         unread_articles: 'E racaptatz-lo !'
     migrate:

@@ -286,7 +286,7 @@ quickstart:
         import: "Configura l'importazione"
     first_steps:
         title: 'Pimi passi'
-        # description: "Now wallabag is well configured, it's time to archive the web"
+        # description: "Now wallabag is well configured, it's time to archive the web. You can click on the top right sign + to add a link."
         new_article: 'Salva il tuo primo contenuto'
         unread_articles: 'E classificalo!'
     migrate:

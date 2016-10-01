@@ -287,7 +287,7 @@ quickstart:
         import: "Configurer l'import"
     first_steps:
         title: 'Premiers pas'
-        description: "Maintenant que wallabag est bien configurée, il est temps d'archiver le web"
+        description: "Maintenant que wallabag est bien configurée, il est temps d'archiver le web. Vous pouvez cliquer sur le signe + dans le coin en haut à droite."
         new_article: 'Ajoutez votre premier article'
         unread_articles: 'Et rangez-le !'
     migrate:
