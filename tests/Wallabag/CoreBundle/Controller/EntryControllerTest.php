@@ -193,6 +193,15 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $this->assertContains('/view/', $client->getResponse()->getTargetUrl());
+
+        $em = $client->getContainer()
+            ->get('doctrine.orm.entity_manager');
+        $entry = $em
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneByUrl(urldecode($url));
+
+        $em->remove($entry);
+        $em->flush();
     }
 
     /**
