@@ -23,7 +23,7 @@ class WallabagRestController extends FOSRestController
     }
 
     /**
-     * Check if an entry exist by url
+     * Check if an entry exist by url.
      *
      * @ApiDoc(
      *       parameters={
