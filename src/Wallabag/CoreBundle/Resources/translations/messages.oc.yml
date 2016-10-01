@@ -19,14 +19,14 @@ menu:
         unread: 'Pas legits'
         starred: 'Favorits'
         archive: 'Legits'
-        all_articles: 'Tots los articles'
+        all_articles: 'Totes los articles'
         config: 'Configuracion'
         tags: 'Etiquetas'
         internal_settings: 'Configuracion interna'
         import: 'Importar'
         howto: 'Ajuda'
         developer: 'Desvolopador'
-        logout: 'Déconnexion'
+        logout: 'Desconnexion'
         about: 'A prepaus'
         search: 'Cercar'
         save_link: 'Enregistrar un novèl article'
@@ -72,8 +72,8 @@ config:
     form_rss:
         description: "Los fluxes RSS fornits per wallabag vos permeton de legir vòstres articles salvagardats dins vòstre lector de fluxes preferit. Per los poder emplegar, vos cal, d'en primièr crear un geton."
         token_label: 'Geton RSS'
-        no_token: 'Aucun jeton généré'
-        token_create: 'Pas cap de geton generat'
+        no_token: 'Pas cap de geton generat'
+        token_create: 'Creatz vòstre geton'
         token_reset: 'Reïnicializatz vòstre geton'
         rss_links: 'URL de vòstres fluxes RSS'
         rss_link:
@@ -187,7 +187,7 @@ entry:
             re_fetch_content: 'Tornar cargar lo contengut'
             delete: 'Suprimir'
             add_a_tag: 'Ajustar una etiqueta'
-            share_content: 'Partatjar'
+            share_content: 'Partejar'
             share_email_label: 'Corrièl'
             public_link: 'ligam public'
             delete_public_link: 'suprimir lo ligam public'
@@ -224,7 +224,7 @@ about:
         developped_by: 'Desvolopat per'
         website: 'Site web'
         many_contributors: 'E un fum de contributors ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">sur Github</a>'
-        project_website: 'Site web del projète'
+        project_website: 'Site web del projècte'
         license: 'Licéncia'
         version: 'Version'
     getting_help:
@@ -245,7 +245,7 @@ about:
 
 howto:
     page_title: 'Ajuda'
-    page_description: "I a mai d'un biai d'enregistrar un article :"
+    page_description: "I a mai d'un biais d'enregistrar un article :"
     top_menu:
         browser_addons: 'Extensions de navigator'
         mobile_apps: 'Aplicacions mobil'
@@ -344,26 +344,26 @@ import:
         page_title: 'Importar > Wallabag v2'
         description: "Aquesta aisina importarà totas vòstras donadas d'una instància mai de wallabag v2. Anatz dins totes vòstres articles, puèi, sus la barra laterala, clicatz sus \"JSON\". Traparatz un fichièr \"All articles.json\""
     readability:
-        page_title: 'Importer > Readability'
+        page_title: 'Importar > Readability'
         description: "Aquesta aisina importarà totas vòstres articles de Readability. Sus la pagina de l'aisina (https://www.readability.com/tools/), clicatz sus \"Export your data\" dins la seccion \"Data Export\". Recebretz un corrièl per telecargar un json (qu'acaba pas amb un .json de fach)."
         how_to: "Mercés de seleccionar vòstre Readability fichièr e de clicar sul boton dejós per lo telecargar e l'importar."
     worker:
-        # enabled: "Import is made asynchronously. Once the import task is started, an external worker will handle jobs one at a time. The current service is:"
+        enabled: "L'importacion se fa de manièra asincròna. Un còp l'importacion lançada, una aisina externa s'ocuparà dels messatges un per un. Lo servici actual es : "
     firefox:
-       page_title: 'Importer > Firefox'
-       # description: "This importer will import all your Firefox bookmarks. <p>For Firefox, just go to your bookmarks (Ctrl+Maj+O), then into \"Import and backup\", choose \"Backup...\". You will obtain a .json file."
-       # how_to: "Please choose the bookmark backup file and click on the button below to import it. Note that the process may take a long time since all articles have to be fetched."
+       page_title: 'Importar > Firefox'
+       # description: "Aquesta aisina importarà totas vòstres favorits de Firefox. <p>For Firefox, just go to your bookmarks (Ctrl+Maj+O), then into \"Import and backup\", choose \"Backup...\". You will obtain a .json file."
+       how_to: "Mercés de causir lo fichièr de salvagarda e de clicar sul boton dejós per l'importar. Notatz que lo tractament pòt durar un moment ja que totes los articles an d'èsser recuperats."
     chrome:
-       page_title: 'Importer > Chrome'
-       # description: "This importer will import all your Chrome bookmarks. The location of the file depends on your operating system : <ul><li>On Linux, go into the <code>~/.config/chromium/Default/</code> directory</li><li>On Windows, it should be at <code>%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default</code></li><li>On OS X, it should be at <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>Once you got there, copy the Bookmarks file someplace you'll find.<em><br>Note that if you have Chromium instead of Chrome, you'll have to correct paths accordingly.</em></p>"
-       # how_to: "Please choose the bookmark backup file and click on the button below to import it. Note that the process may take a long time since all articles have to be fetched."
+       page_title: 'Importar > Chrome'
+       description: "Aquesta aisina importarà totas vòstres favorits de Chrome. L'emplaçament del fichièr depend de vòstre sistèma operatiu : <ul><li>Sus Linux, anatz al dorsièr <code>~/.config/chromium/Default/</code></li><li>Sus Windows, deu èsser dins <code>%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default</code></li><li>sus OS X, deu èsser dins <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>Un còp enlà, copiatz lo fichièr de favorits dins un endrech que volètz.<em><br>Notatz que s'avètz Chromium al lòc de Chrome, vos cal cambiar lo camin segon aquesta situacion.</em></p>"
+       how_to: "Mercés de causir lo fichièr de salvagarda e de clicar sul boton dejós per l'importar. Notatz que lo tractament pòt durar un moment ja que totes los articles an d'èsser recuperats."
     instapaper:
-        page_title: 'Importer > Instapaper'
-        # description: 'This importer will import all your Instapaper articles. On the settings (https://www.instapaper.com/user) page, click on "Download .CSV file" in the "Export" section. A CSV file will be downloaded (like "instapaper-export.csv").'
-        # how_to: 'Please select your Instapaper export and click on the below button to upload and import it.'
+        page_title: 'Importar > Instapaper'
+        description: 'Aquesta aisina importarà totas vòstres articles d'Instapaper. Sus la pagina de paramètres (https://www.instapaper.com/user), clicatz sus "Download .CSV file" dins la seccion "Export". Un fichièr CSV serà telecargat (aital "instapaper-export.csv").'
+        how_to: 'Mercés de causir vòstre fichièr Instapaper e de clicar sul boton dejós per lo telecargar e l'importar'
 
 developer:
-    page_title: 'Desvolopador'
+    page_title: 'Desvolopaire'
     welcome_message: "Benvenguda sus l'API de wallabag"
     documentation: 'Documentacion'
     how_to_first_app: 'Cossí crear vòstra primièra aplicacion'
@@ -387,12 +387,14 @@ developer:
         page_title: 'Desvlopador > Novèl client'
         page_description: "Anatz crear un novèl client. Mercés de cumplir l'url de redireccion cap a vòstra aplicacion."
         form:
+            name_label: "Nom del client"
             redirect_uris_label: 'URLs de redireccion'
             save_label: 'Crear un novèl client'
         action_back: 'Retorn'
     client_parameter:
         page_title: 'Desvolopador > Los paramètres de vòstre client'
         page_description: 'Vaquí los paramètres de vòstre client'
+        field_name: 'Nom del client'        
         field_id: 'ID Client'
         field_secret: 'Clau secreta'
         back: 'Retour'
@@ -426,10 +428,10 @@ flashes:
         notice:
             entry_already_saved: 'Article ja salvargardat lo %date%'
             entry_saved: 'Article enregistrat'
-            # entry_saved_failed: 'Entry saved but fetching content failed'
+            entry_saved_failed: 'Article salvat mai fracàs de la recuperacion del contengut'
             entry_updated: 'Article mes a jorn'
             entry_reloaded: 'Article recargat'
-            # entry_reload_failed: 'Entry reloaded but fetching content failed'
+            entry_reload_failed: "L'article es estat cargat de nòu mai la recuperacion del contengut a fracassat"
             entry_archived: 'Article marcat coma legit'
             entry_unarchived: 'Article marcat coma pas legit'
             entry_starred: 'Article apondut dins los favorits'
@@ -443,10 +445,10 @@ flashes:
             failed: "L'importacion a fracassat, mercés de tornar ensajar"
             failed_on_file: "Errorr pendent du tractament de l'import. Mercés de verificar vòstre fichièr."
             summary: "Rapòrt d'import: %imported% importats, %skipped% ja presents."
-            # summary_with_queue: 'Import summary: %queued% queued.'
+            summary_with_queue: "Rapòrt d'import : %queued% en espèra de tractament."
         error:
-            # redis_enabled_not_installed: Redis is enabled for handle asynchronous import but it looks like <u>we can't connect to it</u>. Please check Redis configuration.
-            # rabbit_enabled_not_installed: RabbitMQ is enabled for handle asynchronous import but it looks like <u>we can't connect to it</u>. Please check RabbitMQ configuration.
+            redis_enabled_not_installed: "Redis es capable d'importar de manièra asincròna mai sembla que <u>podèm pas nos conectar amb el</u>. Mercés de verificar la configuracion de Redis."
+            rabbit_enabled_not_installed: "RabbitMQ es capable d'importar de manièra asincròna mai sembla que <u>podèm pas nos conectar amb el</u>. Mercés de verificar la configuracion de RabbitMQ."
     developer:
         notice:
             client_created: 'Novèl client creat'
