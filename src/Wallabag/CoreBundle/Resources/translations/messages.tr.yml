@@ -45,6 +45,7 @@ footer:
         social: 'Sosyal'
         powered_by: 'powered by'
         about: 'Hakkımızda'
+    # stats: Since %user_creation% you read %nb_archives% articles. That is about %per_day% a day!
 
 config:
     page_title: 'Yapılandırma'

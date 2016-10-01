@@ -45,9 +45,10 @@ footer:
         social: 'Social'
         powered_by: 'propulsat per'
         about: 'A prepaus'
-    page_title: 'Configuracion'
+    # stats: Since %user_creation% you read %nb_archives% articles. That is about %per_day% a day!
 
 config:
+    page_title: 'Configuracion'
     tab_menu:
         settings: 'Paramètres'
         rss: 'RSS'

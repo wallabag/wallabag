@@ -5,6 +5,7 @@ namespace Wallabag\CoreBundle\Twig;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Wallabag\CoreBundle\Repository\EntryRepository;
 use Wallabag\CoreBundle\Repository\TagRepository;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class WallabagExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
 {
@@ -12,13 +13,15 @@ class WallabagExtension extends \Twig_Extension implements \Twig_Extension_Globa
     private $entryRepository;
     private $tagRepository;
     private $lifeTime;
+    private $translator;
 
-    public function __construct(EntryRepository $entryRepository = null, TagRepository $tagRepository = null, TokenStorageInterface $tokenStorage = null, $lifeTime = 0)
+    public function __construct(EntryRepository $entryRepository, TagRepository $tagRepository, TokenStorageInterface $tokenStorage, $lifeTime, TranslatorInterface $translator)
     {
         $this->entryRepository = $entryRepository;
         $this->tagRepository = $tagRepository;
         $this->tokenStorage = $tokenStorage;
         $this->lifeTime = $lifeTime;
+        $this->translator = $translator;
     }
 
     public function getFilters()
@@ -33,6 +36,7 @@ class WallabagExtension extends \Twig_Extension implements \Twig_Extension_Globa
         return array(
             new \Twig_SimpleFunction('count_entries', [$this, 'countEntries']),
             new \Twig_SimpleFunction('count_tags', [$this, 'countTags']),
+            new \Twig_SimpleFunction('display_stats', [$this, 'displayStats']),
         );
     }
 
@@ -105,6 +109,40 @@ class WallabagExtension extends \Twig_Extension implements \Twig_Extension_Globa
         }
 
         return $this->tagRepository->countAllTags($user->getId());
+    }
+
+    /**
+     * Display a single line about reading stats.
+     *
+     * @return string
+     */
+    public function displayStats()
+    {
+        $user = $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null;
+
+        if (null === $user || !is_object($user)) {
+            return 0;
+        }
+
+        $query = $this->entryRepository->getBuilderForArchiveByUser($user->getId())
+            ->select('e.id')
+            ->groupBy('e.id')
+            ->getQuery();
+
+        $query->useQueryCache(true);
+        $query->useResultCache(true);
+        $query->setResultCacheLifetime($this->lifeTime);
+
+        $nbArchives = count($query->getArrayResult());
+
+        $interval = $user->getCreatedAt()->diff(new \DateTime('now'));
+        $nbDays = (int) $interval->format('%a') ?: 1;
+
+        return $this->translator->trans('footer.stats', [
+            '%user_creation%' => $user->getCreatedAt()->format('F jS, Y'),
+            '%nb_archives%' => $nbArchives,
+            '%per_day%' => round($nbArchives / $nbDays, 2),
+        ]);
     }
 
     public function getName()
