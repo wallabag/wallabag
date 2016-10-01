@@ -219,9 +219,7 @@ class ConfigController extends Controller
      */
     public function deleteTaggingRuleAction(TaggingRule $rule)
     {
-        if ($this->getUser()->getId() != $rule->getConfig()->getUser()->getId()) {
-            throw $this->createAccessDeniedException('You can not access this tagging rule.');
-        }
+        $this->validateRuleAction($rule);
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($rule);
@@ -246,11 +244,21 @@ class ConfigController extends Controller
      */
     public function editTaggingRuleAction(TaggingRule $rule)
     {
+        $this->validateRuleAction($rule);
+
+        return $this->redirect($this->generateUrl('config').'?tagging-rule='.$rule->getId().'#set5');
+    }
+
+    /**
+     * Validate that a rule can be edited/deleted by the current user
+     *
+     * @param  TaggingRule $rule
+     */
+    private function validateRuleAction(TaggingRule $rule)
+    {
         if ($this->getUser()->getId() != $rule->getConfig()->getUser()->getId()) {
             throw $this->createAccessDeniedException('You can not access this tagging rule.');
         }
-
-        return $this->redirect($this->generateUrl('config').'?tagging-rule='.$rule->getId().'#set5');
     }
 
     /**
