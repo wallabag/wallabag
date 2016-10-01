@@ -190,10 +190,10 @@ class Entry
      * @ORM\JoinTable(
      *  name="entry_tag",
      *  joinColumns={
-     *      @ORM\JoinColumn(name="entry_id", referencedColumnName="id")
+     *      @ORM\JoinColumn(name="entry_id", referencedColumnName="id", onDelete="cascade")
      *  },
      *  inverseJoinColumns={
-     *      @ORM\JoinColumn(name="tag_id", referencedColumnName="id")
+     *      @ORM\JoinColumn(name="tag_id", referencedColumnName="id", onDelete="cascade")
      *  }
      * )
      */

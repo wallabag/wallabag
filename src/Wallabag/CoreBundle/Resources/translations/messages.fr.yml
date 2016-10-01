@@ -91,8 +91,15 @@ config:
         delete:
             title: Supprimer mon compte (attention danger !)
             description: Si vous confirmez la suppression de votre compte, TOUS les articles, TOUS les tags, TOUTES les annotations et votre compte seront DÉFINITIVEMENT supprimé (c'est IRRÉVERSIBLE). Vous serez ensuite déconnecté.
-            confirm: Vous êtes vraiment sûr ? (c'est IRRÉVERSIBLE !)
+            confirm: Vous êtes vraiment sûr ? (C'EST IRREVERSIBLE)
             button: 'Supprimer mon compte'
+    reset:
+        title: Réinitialisation (attention danger !)
+        description: En cliquant sur les boutons ci-dessous vous avez la possibilité de supprimer certaines informations de votre compte. Attention, ces actions sont IRREVERSIBLES !
+        annotations: Supprimer TOUTES les annotations
+        tags: Supprimer TOUS les tags
+        entries: Supprimer TOUS les articles
+        confirm: Êtes-vous vraiment vraiment sûr ? (C'EST IRREVERSIBLE)
     form_password:
         old_password_label: 'Mot de passe actuel'
         new_password_label: 'Nouveau mot de passe'
@@ -462,6 +469,9 @@ flashes:
             tagging_rules_deleted: 'Règle supprimée'
             user_added: 'Utilisateur "%username%" ajouté'
             rss_token_updated: 'Jeton RSS mis à jour'
+            annotations_reset: Annotations supprimées
+            tags_reset: Tags supprimés
+            entries_reset: Articles supprimés
     entry:
         notice:
             entry_already_saved: 'Article déjà sauvergardé le %date%'

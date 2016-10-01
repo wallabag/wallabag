@@ -5,6 +5,9 @@ namespace Tests\Wallabag\CoreBundle\Controller;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\UserBundle\Entity\User;
+use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\CoreBundle\Entity\Tag;
+use Wallabag\AnnotationBundle\Entity\Annotation;
 
 class ConfigControllerTest extends WallabagCoreTestCase
 {
@@ -689,5 +692,147 @@ class ConfigControllerTest extends WallabagCoreTestCase
             ->findByUser($loggedInUserId);
 
         $this->assertEmpty($entries);
+    }
+
+    public function testReset()
+    {
+        $this->logInAs('empty');
+        $client = $this->getClient();
+
+        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+
+        $user = static::$kernel->getContainer()->get('security.token_storage')->getToken()->getUser();
+
+        $tag = new Tag();
+        $tag->setLabel('super');
+        $em->persist($tag);
+
+        $entry = new Entry($user);
+        $entry->setUrl('http://www.lemonde.fr/europe/article/2016/10/01/pour-le-psoe-chaque-election-s-est-transformee-en-une-agonie_5006476_3214.html');
+        $entry->setContent('Youhou');
+        $entry->setTitle('Youhou');
+        $entry->addTag($tag);
+        $em->persist($entry);
+
+        $entry2 = new Entry($user);
+        $entry2->setUrl('http://www.lemonde.de/europe/article/2016/10/01/pour-le-psoe-chaque-election-s-est-transformee-en-une-agonie_5006476_3214.html');
+        $entry2->setContent('Youhou');
+        $entry2->setTitle('Youhou');
+        $entry2->addTag($tag);
+        $em->persist($entry2);
+
+        $annotation = new Annotation($user);
+        $annotation->setText('annotated');
+        $annotation->setQuote('annotated');
+        $annotation->setRanges([]);
+        $annotation->setEntry($entry);
+        $em->persist($annotation);
+
+        $em->flush();
+
+        // reset annotations
+        $crawler = $client->request('GET', '/config#set3');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $crawler = $client->click($crawler->selectLink('config.reset.annotations')->link());
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertContains('flashes.config.notice.annotations_reset', $client->getContainer()->get('session')->getFlashBag()->get('notice')[0]);
+
+        $annotationsReset = $em
+            ->getRepository('WallabagAnnotationBundle:Annotation')
+            ->findAnnotationsByPageId($entry->getId(), $user->getId());
+
+        $this->assertEmpty($annotationsReset, 'Annotations were reset');
+
+        // reset tags
+        $crawler = $client->request('GET', '/config#set3');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $crawler = $client->click($crawler->selectLink('config.reset.tags')->link());
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertContains('flashes.config.notice.tags_reset', $client->getContainer()->get('session')->getFlashBag()->get('notice')[0]);
+
+        $tagReset = $em
+            ->getRepository('WallabagCoreBundle:Tag')
+            ->countAllTags($user->getId());
+
+        $this->assertEquals(0, $tagReset, 'Tags were reset');
+
+        // reset entries
+        $crawler = $client->request('GET', '/config#set3');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $crawler = $client->click($crawler->selectLink('config.reset.entries')->link());
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertContains('flashes.config.notice.entries_reset', $client->getContainer()->get('session')->getFlashBag()->get('notice')[0]);
+
+        $entryReset = $em
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->countAllEntriesByUsername($user->getId());
+
+        $this->assertEquals(0, $entryReset, 'Entries were reset');
+    }
+
+    public function testResetEntriesCascade()
+    {
+        $this->logInAs('empty');
+        $client = $this->getClient();
+
+        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+
+        $user = static::$kernel->getContainer()->get('security.token_storage')->getToken()->getUser();
+
+        $tag = new Tag();
+        $tag->setLabel('super');
+        $em->persist($tag);
+
+        $entry = new Entry($user);
+        $entry->setUrl('http://www.lemonde.fr/europe/article/2016/10/01/pour-le-psoe-chaque-election-s-est-transformee-en-une-agonie_5006476_3214.html');
+        $entry->setContent('Youhou');
+        $entry->setTitle('Youhou');
+        $entry->addTag($tag);
+        $em->persist($entry);
+
+        $annotation = new Annotation($user);
+        $annotation->setText('annotated');
+        $annotation->setQuote('annotated');
+        $annotation->setRanges([]);
+        $annotation->setEntry($entry);
+        $em->persist($annotation);
+
+        $em->flush();
+
+        $crawler = $client->request('GET', '/config#set3');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $crawler = $client->click($crawler->selectLink('config.reset.entries')->link());
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertContains('flashes.config.notice.entries_reset', $client->getContainer()->get('session')->getFlashBag()->get('notice')[0]);
+
+        $entryReset = $em
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->countAllEntriesByUsername($user->getId());
+
+        $this->assertEquals(0, $entryReset, 'Entries were reset');
+
+        $tagReset = $em
+            ->getRepository('WallabagCoreBundle:Tag')
+            ->countAllTags($user->getId());
+
+        $this->assertEquals(0, $tagReset, 'Tags were reset');
+
+        $annotationsReset = $em
+            ->getRepository('WallabagAnnotationBundle:Annotation')
+            ->findAnnotationsByPageId($entry->getId(), $user->getId());
+
+        $this->assertEmpty($annotationsReset, 'Annotations were reset');
     }
 }

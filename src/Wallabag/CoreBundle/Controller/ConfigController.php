@@ -225,6 +225,48 @@ class ConfigController extends Controller
     }
 
     /**
+     * Remove all annotations OR tags OR entries for the current user.
+     *
+     * @Route("/reset/{type}", requirements={"id" = "annotations|tags|entries"}, name="config_reset")
+     *
+     * @return RedirectResponse
+     */
+    public function resetAction($type)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        switch ($type) {
+            case 'annotations':
+                $em->createQuery('DELETE FROM Wallabag\AnnotationBundle\Entity\Annotation a WHERE a.user = '.$this->getUser()->getId())
+                    ->execute();
+                break;
+
+            case 'tags':
+                $tags = $this->getDoctrine()->getRepository('WallabagCoreBundle:Tag')->findAllTags($this->getUser()->getId());
+
+                if (empty($tags)) {
+                    break;
+                }
+
+                $this->getDoctrine()
+                    ->getRepository('WallabagCoreBundle:Entry')
+                    ->removeTags($this->getUser()->getId(), $tags);
+                break;
+
+            case 'entries':
+                $em->createQuery('DELETE FROM Wallabag\CoreBundle\Entity\Entry e WHERE e.user = '.$this->getUser()->getId())
+                    ->execute();
+        }
+
+        $this->get('session')->getFlashBag()->add(
+            'notice',
+            'flashes.config.notice.'.$type.'_reset'
+        );
+
+        return $this->redirect($this->generateUrl('config').'#set3');
+    }
+
+    /**
      * Validate that a rule can be edited/deleted by the current user.
      *
      * @param TaggingRule $rule

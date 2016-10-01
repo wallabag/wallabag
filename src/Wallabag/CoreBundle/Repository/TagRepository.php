@@ -53,6 +53,23 @@ class TagRepository extends EntityRepository
     }
 
     /**
+     * Find all tags.
+     *
+     * @param int $userId
+     *
+     * @return array
+     */
+    public function findAllTags($userId)
+    {
+        return $this->createQueryBuilder('t')
+            ->select('t')
+            ->leftJoin('t.entries', 'e')
+            ->where('e.user = :userId')->setParameter('userId', $userId)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
      * Used only in test case to get a tag for our entry.
      *
      * @return Tag

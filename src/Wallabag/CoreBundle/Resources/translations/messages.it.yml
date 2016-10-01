@@ -89,10 +89,17 @@ config:
         email_label: 'E-mail'
         twoFactorAuthentication_label: 'Two factor authentication'
         delete:
-            # title: Delete my account (danger zone !)
+            # title: Delete my account (a.k.a danger zone)
             # description: If you remove your account, ALL your articles, ALL your tags, ALL your annotations and your account will be PERMANENTLY removed (it can't be UNDONE). You'll then be logged out.
-            # confirm: Are you really sure? (it can't be UNDONE)
+            # confirm: Are you really sure? (THIS CAN'T BE UNDONE)
             # button: Delete my account
+    reset:
+        # title: Reset area (a.k.a danger zone)
+        # description: By hiting buttons below you'll have ability to remove some informations from your account. Be aware that these actions are IRREVERSIBLE.
+        # annotations: Remove ALL annotations
+        # tags: Remove ALL tags
+        # entries: Remove ALL entries
+        # confirm: Are you really really sure? (THIS CAN'T BE UNDONE)
     form_password:
         old_password_label: 'Password corrente'
         new_password_label: 'Nuova password'
@@ -462,6 +469,9 @@ flashes:
             tagging_rules_deleted: 'Regola di tagging aggiornate'
             user_added: 'Utente "%username%" aggiunto'
             rss_token_updated: 'RSS token aggiornato'
+            # annotations_reset: Annotations reset
+            # tags_reset: Tags reset
+            # entries_reset: Entries reset
     entry:
         notice:
             entry_already_saved: 'Contenuto già salvato in data %date%'
