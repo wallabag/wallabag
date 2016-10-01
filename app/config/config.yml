@@ -75,7 +75,7 @@ doctrine:
         dbname: "%database_name%"
         user: "%database_user%"
         password: "%database_password%"
-        charset: UTF8
+        charset: "%database_charset%"
         path: "%database_path%"
         unix_socket: "%database_socket%"
         server_version: 5.6
