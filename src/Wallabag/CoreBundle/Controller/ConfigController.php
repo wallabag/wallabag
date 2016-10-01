@@ -250,9 +250,9 @@ class ConfigController extends Controller
     }
 
     /**
-     * Validate that a rule can be edited/deleted by the current user
+     * Validate that a rule can be edited/deleted by the current user.
      *
-     * @param  TaggingRule $rule
+     * @param TaggingRule $rule
      */
     private function validateRuleAction(TaggingRule $rule)
     {
