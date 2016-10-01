@@ -49,7 +49,7 @@ class UsernameRssTokenConverter implements ParamConverterInterface
         $em = $this->registry->getManagerForClass($configuration->getClass());
 
         // Check, if class name is what we need
-        if ('Wallabag\UserBundle\Entity\User' !== $em->getClassMetadata($configuration->getClass())->getName()) {
+        if (null !== $em && 'Wallabag\UserBundle\Entity\User' !== $em->getClassMetadata($configuration->getClass())->getName()) {
             return false;
         }
 
@@ -69,9 +69,8 @@ class UsernameRssTokenConverter implements ParamConverterInterface
         $username = $request->attributes->get('username');
         $rssToken = $request->attributes->get('token');
 
-        // Check, if route attributes exists
-        if (null === $username || null === $rssToken) {
-            throw new \InvalidArgumentException('Route attribute is missing');
+        if (!$request->attributes->has('username') || !$request->attributes->has('token')) {
+            return false;
         }
 
         // Get actual entity manager for class

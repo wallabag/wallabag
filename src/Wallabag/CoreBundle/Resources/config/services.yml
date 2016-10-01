@@ -122,3 +122,9 @@ services:
                 host: '%redis_host%'
                 port: '%redis_port%'
                 schema: tcp
+
+    wallabag_core.exception_controller:
+        class: Wallabag\CoreBundle\Controller\ExceptionController
+        arguments:
+            - '@twig'
+            - '%kernel.debug%'
