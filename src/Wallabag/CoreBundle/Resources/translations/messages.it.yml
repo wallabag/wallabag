@@ -94,6 +94,7 @@ config:
         if_label: 'se'
         then_tag_as_label: 'allora tagga come'
         delete_rule_label: 'elimina'
+        # edit_rule_label: 'edit'
         rule_label: 'Regola'
         tags_label: 'Tag'
         faq:

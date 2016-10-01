@@ -191,6 +191,7 @@
             « {{ tagging_rule.rule }} »
             {{ 'config.form_rules.then_tag_as_label'|trans }}
             « {{ tagging_rule.tags|join(', ') }} »
+            <a href="{{ path('edit_tagging_rule', {id: tagging_rule.id}) }}" title="{{ 'config.form_rules.edit_rule_label'|trans }}" class="tool mode_edit">✎</a>
             <a href="{{ path('delete_tagging_rule', {id: tagging_rule.id}) }}" title="{{ 'config.form_rules.delete_rule_label'|trans }}" class="tool delete icon-trash icon"></a>
         </li>
         {% endfor %}

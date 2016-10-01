@@ -94,6 +94,7 @@ config:
         if_label: 'Wenn'
         then_tag_as_label: 'dann tagge als'
         delete_rule_label: 'löschen'
+        # edit_rule_label: 'edit'
         rule_label: 'Regel'
         tags_label: 'Tags'
         faq:

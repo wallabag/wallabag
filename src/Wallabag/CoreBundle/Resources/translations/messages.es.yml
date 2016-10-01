@@ -94,6 +94,7 @@ config:
         if_label: 'si'
         then_tag_as_label: 'Etiquete como'
         delete_rule_label: 'Borre'
+        # edit_rule_label: 'edit'
         rule_label: 'Regla'
         tags_label: 'Etiquetas'
         faq:
