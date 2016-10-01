@@ -266,12 +266,14 @@ howto:
 
 quickstart:
     page_title: 'Schnelleinstieg'
+    # more: 'More…'
     intro:
         title: 'Willkommen zu wallabag!'
         paragraph_1: "Wir werden dich bei der Benutzung von wallabag begleiten und dir einige Funktionen zeigen, die dich interessieren könnten."
         paragraph_2: 'Folge uns!'
     configure:
         title: 'Anwendung konfigurieren'
+        # description: 'In order to have an application which suits you, have a look into the configuration of wallabag.'
         language: 'Sprache und Design ändern'
         rss: 'RSS-Feeds aktivieren'
         tagging_rules: 'Schreibe Regeln, um deine Beiträge automatisch zu taggen (verschlagworten)'
@@ -285,6 +287,7 @@ quickstart:
         import: 'Import-Einstellungen ändern'
     first_steps:
         title: 'Erste Schritte'
+        # description: "Now wallabag is well configured, it's time to archive the web"
         new_article: 'Speichere deinen ersten Artikel'
         unread_articles: 'Und klassifiziere ihn!'
     migrate:
@@ -294,11 +297,15 @@ quickstart:
         wallabag_v1: 'von wallabag v1 migrieren'
         wallabag_v2: 'von wallabag v2 migrieren'
         readability: 'von Readability migrieren'
+        instapaper: 'von Instapaper migrieren'
     developer:
         title: 'Entwickler'
+        # description: 'We also thought to the developers: Docker, API, translations, etc.'
         create_application: 'Erstelle eine Anwendung und nutze die wallabag API'
+        # use_docker: 'Use Docker to install wallabag'
     docs:
         title: 'Komplette Dokumentation'
+        # description: "There are so much features in wallabag. Don't hesitate to read the manual to know them and to learn how to use them."
         annotate: 'Anmerkungen zu Artikeln hinzufügen'
         export: 'Artikel nach ePUB oder PDF konvertieren'
         search_filters: 'Schau nach, wie du nach einem Artikel über die Such- und Filterfunktion suchen kannst'
