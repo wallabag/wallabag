@@ -106,4 +106,17 @@ class AnnotationRepository extends EntityRepository
             ->getQuery()
             ->getSingleResult();
     }
+
+    /**
+     * Remove all annotations for a user id.
+     * Used when a user want to reset all informations
+     *
+     * @param  int $userId
+     */
+    public function removeAllByUserId($userId)
+    {
+        $this->getEntityManager()
+            ->createQuery('DELETE FROM Wallabag\AnnotationBundle\Entity\Annotation a WHERE a.user = '.$userId)
+            ->execute();
+    }
 }

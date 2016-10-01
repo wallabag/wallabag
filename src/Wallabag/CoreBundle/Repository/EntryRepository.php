@@ -329,4 +329,17 @@ class EntryRepository extends EntityRepository
 
         return $qb->getQuery()->getSingleScalarResult();
     }
+
+    /**
+     * Remove all entries for a user id.
+     * Used when a user want to reset all informations
+     *
+     * @param  int $userId
+     */
+    public function removeAllByUserId($userId)
+    {
+        $this->getEntityManager()
+            ->createQuery('DELETE FROM Wallabag\CoreBundle\Entity\Entry e WHERE e.user = '.$userId)
+            ->execute();
+    }
 }

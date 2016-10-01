@@ -237,25 +237,26 @@ class ConfigController extends Controller
 
         switch ($type) {
             case 'annotations':
-                $em->createQuery('DELETE FROM Wallabag\AnnotationBundle\Entity\Annotation a WHERE a.user = '.$this->getUser()->getId())
-                    ->execute();
+                $this->getDoctrine()
+                    ->getRepository('WallabagAnnotationBundle:Annotation')
+                    ->removeAllByUserId($this->getUser()->getId());
                 break;
 
             case 'tags':
-                $tags = $this->getDoctrine()->getRepository('WallabagCoreBundle:Tag')->findAllTags($this->getUser()->getId());
+                $this->removeAllTagsByUserId($this->getUser()->getId());
+                break;
 
-                if (empty($tags)) {
-                    break;
+            case 'entries':
+                // SQLite doesn't care about cascading remove, so we need to manually remove associated stuf
+                // otherwise they won't be removed ...
+                if ($this->get('doctrine')->getConnection()->getDriver() instanceof \Doctrine\DBAL\Driver\PDOSqlite\Driver) {
+                    $this->getDoctrine()->getRepository('WallabagAnnotationBundle:Annotation')->removeAllByUserId($this->getUser()->getId());
+                    $this->removeAllTagsByUserId($this->getUser()->getId());
                 }
 
                 $this->getDoctrine()
                     ->getRepository('WallabagCoreBundle:Entry')
-                    ->removeTags($this->getUser()->getId(), $tags);
-                break;
-
-            case 'entries':
-                $em->createQuery('DELETE FROM Wallabag\CoreBundle\Entity\Entry e WHERE e.user = '.$this->getUser()->getId())
-                    ->execute();
+                    ->removeAllByUserId($this->getUser()->getId());
         }
 
         $this->get('session')->getFlashBag()->add(
@@ -264,6 +265,24 @@ class ConfigController extends Controller
         );
 
         return $this->redirect($this->generateUrl('config').'#set3');
+    }
+
+    /**
+     * Remove all tags for a given user.
+     *
+     * @param  int $userId
+     */
+    private function removeAllTagsByUserId($userId)
+    {
+        $tags = $this->getDoctrine()->getRepository('WallabagCoreBundle:Tag')->findAllTags($userId);
+
+        if (empty($tags)) {
+            return;
+        }
+
+        $this->getDoctrine()
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->removeTags($userId, $tags);
     }
 
     /**
