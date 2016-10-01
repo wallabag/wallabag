@@ -42,6 +42,7 @@
         </li>-->
         <li><a href="{{ path('config') }}">{{ 'menu.left.config'|trans }}</a></li>
         {% if is_granted('ROLE_SUPER_ADMIN') %}
+            <li><a href="{{ path('user_index') }}">{{ 'menu.left.users_management'|trans }}</a></li>
             <li><a href="{{ path('craue_config_settings_modify') }}">{{ 'menu.left.internal_settings'|trans }}</a></li>
         {% endif %}
         <li><a href="{{ path('import') }}">{{ 'menu.left.import'|trans }}</a></li>
