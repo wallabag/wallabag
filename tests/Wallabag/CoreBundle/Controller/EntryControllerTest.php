@@ -160,6 +160,41 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertContains('/view/', $client->getResponse()->getTargetUrl());
     }
 
+    public function testPostNewOkUrlExistWithAccent()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $url = 'http://www.aritylabs.com/post/106091708292/des-contr%C3%B4leurs-optionnels-gr%C3%A2ce-%C3%A0-constmissing';
+
+        $crawler = $client->request('GET', '/new');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $form = $crawler->filter('form[name=entry]')->form();
+
+        $data = [
+            'entry[url]' => $url,
+        ];
+
+        $client->submit($form, $data);
+
+        $crawler = $client->request('GET', '/new');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $form = $crawler->filter('form[name=entry]')->form();
+
+        $data = [
+            'entry[url]' => $url,
+        ];
+
+        $client->submit($form, $data);
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertContains('/view/', $client->getResponse()->getTargetUrl());
+    }
+
     /**
      * This test will require an internet connection.
      */
