@@ -45,6 +45,7 @@ footer:
         social: 'Social'
         powered_by: 'powered by'
         about: 'About'
+    # stats: Since %user_creation% you read %nb_archives% articles. That is about %per_day% a day!
 
 config:
     page_title: 'Configurazione'

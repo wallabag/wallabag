@@ -8,7 +8,23 @@ class WallabagExtensionTest extends \PHPUnit_Framework_TestCase
 {
     public function testRemoveWww()
     {
-        $extension = new WallabagExtension();
+        $entryRepository = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $tagRepository = $this->getMockBuilder('Wallabag\CoreBundle\Repository\TagRepository')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $tokenStorage = $this->getMockBuilder('Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $translator = $this->getMockBuilder('Symfony\Component\Translation\TranslatorInterface')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $extension = new WallabagExtension($entryRepository, $tagRepository, $tokenStorage, 0, $translator);
 
         $this->assertEquals('lemonde.fr', $extension->removeWww('www.lemonde.fr'));
         $this->assertEquals('lemonde.fr', $extension->removeWww('lemonde.fr'));
