@@ -351,7 +351,7 @@ import:
         # enabled: "Import is made asynchronously. Once the import task is started, an external worker will handle jobs one at a time. The current service is:"
     firefox:
        page_title: 'Importar > Firefox'
-       # description: "This importer will import all your Firefox bookmarks. <p>For Firefox, just go to your bookmarks (Ctrl+Maj+O), then into \"Import and backup\", choose \"Backup...\". You will obtain a .json file."
+       # description: "This importer will import all your Firefox bookmarks. Just go to your bookmarks (Ctrl+Maj+O), then into \"Import and backup\", choose \"Backup...\". You will obtain a .json file."
        # how_to: "Please choose the bookmark backup file and click on the button below to import it. Note that the process may take a long time since all articles have to be fetched."
     chrome:
        page_title: 'Importar > Chrome'

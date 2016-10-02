@@ -350,17 +350,17 @@ import:
     worker:
         enabled: "L'importacion se fa de manièra asincròna. Un còp l'importacion lançada, una aisina externa s'ocuparà dels messatges un per un. Lo servici actual es : "
     firefox:
-       page_title: 'Importar > Firefox'
-       # description: "Aquesta aisina importarà totas vòstres favorits de Firefox. <p>For Firefox, just go to your bookmarks (Ctrl+Maj+O), then into \"Import and backup\", choose \"Backup...\". You will obtain a .json file."
-       how_to: "Mercés de causir lo fichièr de salvagarda e de clicar sul boton dejós per l'importar. Notatz que lo tractament pòt durar un moment ja que totes los articles an d'èsser recuperats."
+        page_title: 'Importar > Firefox'
+        description: "Aquesta aisina importarà totas vòstres favorits de Firefox. Just go to your bookmarks (Ctrl+Maj+O), then into \"Import and backup\", choose \"Backup...\". You will obtain a .json file."
+        how_to: "Mercés de causir lo fichièr de salvagarda e de clicar sul boton dejós per l'importar. Notatz que lo tractament pòt durar un moment ja que totes los articles an d'èsser recuperats."
     chrome:
-       page_title: 'Importar > Chrome'
-       description: "Aquesta aisina importarà totas vòstres favorits de Chrome. L'emplaçament del fichièr depend de vòstre sistèma operatiu : <ul><li>Sus Linux, anatz al dorsièr <code>~/.config/chromium/Default/</code></li><li>Sus Windows, deu èsser dins <code>%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default</code></li><li>sus OS X, deu èsser dins <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>Un còp enlà, copiatz lo fichièr de favorits dins un endrech que volètz.<em><br>Notatz que s'avètz Chromium al lòc de Chrome, vos cal cambiar lo camin segon aquesta situacion.</em></p>"
-       how_to: "Mercés de causir lo fichièr de salvagarda e de clicar sul boton dejós per l'importar. Notatz que lo tractament pòt durar un moment ja que totes los articles an d'èsser recuperats."
+        page_title: 'Importar > Chrome'
+        description: "Aquesta aisina importarà totas vòstres favorits de Chrome. L'emplaçament del fichièr depend de vòstre sistèma operatiu : <ul><li>Sus Linux, anatz al dorsièr <code>~/.config/chromium/Default/</code></li><li>Sus Windows, deu èsser dins <code>%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default</code></li><li>sus OS X, deu èsser dins <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>Un còp enlà, copiatz lo fichièr de favorits dins un endrech que volètz.<em><br>Notatz que s'avètz Chromium al lòc de Chrome, vos cal cambiar lo camin segon aquesta situacion.</em></p>"
+        how_to: "Mercés de causir lo fichièr de salvagarda e de clicar sul boton dejós per l'importar. Notatz que lo tractament pòt durar un moment ja que totes los articles an d'èsser recuperats."
     instapaper:
         page_title: 'Importar > Instapaper'
-        description: 'Aquesta aisina importarà totas vòstres articles d'Instapaper. Sus la pagina de paramètres (https://www.instapaper.com/user), clicatz sus "Download .CSV file" dins la seccion "Export". Un fichièr CSV serà telecargat (aital "instapaper-export.csv").'
-        how_to: 'Mercés de causir vòstre fichièr Instapaper e de clicar sul boton dejós per lo telecargar e l'importar'
+        description: "Aquesta aisina importarà totas vòstres articles d'Instapaper. Sus la pagina de paramètres (https://www.instapaper.com/user), clicatz sus \"Download .CSV file\" dins la seccion \"Export\". Un fichièr CSV serà telecargat (aital \"instapaper-export.csv\")."
+        how_to: "Mercés de causir vòstre fichièr Instapaper e de clicar sul boton dejós per lo telecargar e l'importar"
 
 developer:
     page_title: 'Desvolopaire'
@@ -394,11 +394,11 @@ developer:
     client_parameter:
         page_title: 'Desvolopador > Los paramètres de vòstre client'
         page_description: 'Vaquí los paramètres de vòstre client'
-        field_name: 'Nom del client'        
+        field_name: 'Nom del client'
         field_id: 'ID Client'
         field_secret: 'Clau secreta'
         back: 'Retour'
-        read_howto: 'Legir \"cossí crear ma primièra aplicacion\"'
+        read_howto: 'Legir "cossí crear ma primièra aplicacion"'
     howto:
         page_title: 'Desvolopador > Cossí crear ma primièra aplicacion'
         description:

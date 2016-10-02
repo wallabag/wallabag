@@ -351,7 +351,7 @@ import:
         enabled: "Les imports sont asynchrones. Une fois l'import commencé un worker externe traitera les messages un par un. Le service activé est :"
     firefox:
         page_title: 'Import > Firefox'
-        description: "Cet outil va vous permettre d'importer tous vos marques-pages de Firefox. <p>Pour Firefox, ouvrez le panneau des marques-pages (Ctrl+Maj+O), puis dans « Importation et sauvegarde », choisissez « Sauvegarde... ». Vous allez récupérer un fichier .json. </p>"
+        description: "Cet outil va vous permettre d'importer tous vos marques-pages de Firefox. Ouvrez le panneau des marques-pages (Ctrl+Maj+O), puis dans « Importation et sauvegarde », choisissez « Sauvegarde... ». Vous allez récupérer un fichier .json. </p>"
         how_to: "Choisissez le fichier de sauvegarde de vos marques-page et cliquez sur le bouton pour l'importer. Soyez avertis que le processus peut prendre un temps assez long car tous les articles doivent être récupérés en ligne."
     chrome:
         page_title: 'Import > Chrome'
