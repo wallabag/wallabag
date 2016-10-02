@@ -78,6 +78,53 @@ class WallabagRestControllerTest extends WallabagApiTestCase
         );
     }
 
+    public function testGetEntriesWithFullOptions()
+    {
+        $this->client->request('GET', '/api/entries', [
+            'archive' => 1,
+            'starred' => 1,
+            'sort' => 'updated',
+            'order' => 'asc',
+            'page' => 1,
+            'perPage' => 2,
+            'tags' => 'foo',
+            'since' => 1443274283,
+        ]);
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertGreaterThanOrEqual(1, count($content));
+        $this->assertArrayHasKey('items', $content['_embedded']);
+        $this->assertGreaterThanOrEqual(0, $content['total']);
+        $this->assertEquals(1, $content['page']);
+        $this->assertEquals(2, $content['limit']);
+        $this->assertGreaterThanOrEqual(1, $content['pages']);
+
+        $this->assertArrayHasKey('_links', $content);
+        $this->assertArrayHasKey('self', $content['_links']);
+        $this->assertArrayHasKey('first', $content['_links']);
+        $this->assertArrayHasKey('last', $content['_links']);
+
+        foreach (['self', 'first', 'last'] as $link) {
+            $this->assertArrayHasKey('href', $content['_links'][$link]);
+            $this->assertContains('archive=1', $content['_links'][$link]['href']);
+            $this->assertContains('starred=1', $content['_links'][$link]['href']);
+            $this->assertContains('sort=updated', $content['_links'][$link]['href']);
+            $this->assertContains('order=asc', $content['_links'][$link]['href']);
+            $this->assertContains('tags=foo', $content['_links'][$link]['href']);
+            $this->assertContains('since=1443274283', $content['_links'][$link]['href']);
+        }
+
+        $this->assertTrue(
+            $this->client->getResponse()->headers->contains(
+                'Content-Type',
+                'application/json'
+            )
+        );
+    }
+
     public function testGetStarredEntries()
     {
         $this->client->request('GET', '/api/entries', ['starred' => 1, 'sort' => 'updated']);
@@ -91,6 +138,17 @@ class WallabagRestControllerTest extends WallabagApiTestCase
         $this->assertGreaterThanOrEqual(1, $content['total']);
         $this->assertEquals(1, $content['page']);
         $this->assertGreaterThanOrEqual(1, $content['pages']);
+
+        $this->assertArrayHasKey('_links', $content);
+        $this->assertArrayHasKey('self', $content['_links']);
+        $this->assertArrayHasKey('first', $content['_links']);
+        $this->assertArrayHasKey('last', $content['_links']);
+
+        foreach (['self', 'first', 'last'] as $link) {
+            $this->assertArrayHasKey('href', $content['_links'][$link]);
+            $this->assertContains('starred=1', $content['_links'][$link]['href']);
+            $this->assertContains('sort=updated', $content['_links'][$link]['href']);
+        }
 
         $this->assertTrue(
             $this->client->getResponse()->headers->contains(
@@ -114,6 +172,16 @@ class WallabagRestControllerTest extends WallabagApiTestCase
         $this->assertEquals(1, $content['page']);
         $this->assertGreaterThanOrEqual(1, $content['pages']);
 
+        $this->assertArrayHasKey('_links', $content);
+        $this->assertArrayHasKey('self', $content['_links']);
+        $this->assertArrayHasKey('first', $content['_links']);
+        $this->assertArrayHasKey('last', $content['_links']);
+
+        foreach (['self', 'first', 'last'] as $link) {
+            $this->assertArrayHasKey('href', $content['_links'][$link]);
+            $this->assertContains('archive=1', $content['_links'][$link]['href']);
+        }
+
         $this->assertTrue(
             $this->client->getResponse()->headers->contains(
                 'Content-Type',
@@ -136,6 +204,16 @@ class WallabagRestControllerTest extends WallabagApiTestCase
         $this->assertEquals(1, $content['page']);
         $this->assertGreaterThanOrEqual(1, $content['pages']);
 
+        $this->assertArrayHasKey('_links', $content);
+        $this->assertArrayHasKey('self', $content['_links']);
+        $this->assertArrayHasKey('first', $content['_links']);
+        $this->assertArrayHasKey('last', $content['_links']);
+
+        foreach (['self', 'first', 'last'] as $link) {
+            $this->assertArrayHasKey('href', $content['_links'][$link]);
+            $this->assertContains('tags='.urlencode('foo,bar'), $content['_links'][$link]['href']);
+        }
+
         $this->assertTrue(
             $this->client->getResponse()->headers->contains(
                 'Content-Type',
@@ -146,7 +224,7 @@ class WallabagRestControllerTest extends WallabagApiTestCase
 
     public function testGetDatedEntries()
     {
-        $this->client->request('GET', '/api/entries', ['since' => 1]);
+        $this->client->request('GET', '/api/entries', ['since' => 1443274283]);
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
@@ -157,6 +235,16 @@ class WallabagRestControllerTest extends WallabagApiTestCase
         $this->assertGreaterThanOrEqual(1, $content['total']);
         $this->assertEquals(1, $content['page']);
         $this->assertGreaterThanOrEqual(1, $content['pages']);
+
+        $this->assertArrayHasKey('_links', $content);
+        $this->assertArrayHasKey('self', $content['_links']);
+        $this->assertArrayHasKey('first', $content['_links']);
+        $this->assertArrayHasKey('last', $content['_links']);
+
+        foreach (['self', 'first', 'last'] as $link) {
+            $this->assertArrayHasKey('href', $content['_links'][$link]);
+            $this->assertContains('since=1443274283', $content['_links'][$link]['href']);
+        }
 
         $this->assertTrue(
             $this->client->getResponse()->headers->contains(
@@ -180,6 +268,16 @@ class WallabagRestControllerTest extends WallabagApiTestCase
         $this->assertEquals(0, $content['total']);
         $this->assertEquals(1, $content['page']);
         $this->assertEquals(1, $content['pages']);
+
+        $this->assertArrayHasKey('_links', $content);
+        $this->assertArrayHasKey('self', $content['_links']);
+        $this->assertArrayHasKey('first', $content['_links']);
+        $this->assertArrayHasKey('last', $content['_links']);
+
+        foreach (['self', 'first', 'last'] as $link) {
+            $this->assertArrayHasKey('href', $content['_links'][$link]);
+            $this->assertContains('since='.($future->getTimestamp() + 1000), $content['_links'][$link]['href']);
+        }
 
         $this->assertTrue(
             $this->client->getResponse()->headers->contains(
