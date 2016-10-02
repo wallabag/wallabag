@@ -462,7 +462,7 @@ flashes:
             # entry_saved_failed: 'Entry saved but fetching content failed'
             entry_updated: 'Contenuto aggiornato'
             entry_reloaded: 'Contenuto ricaricato'
-            # entry_reload_failed: 'Entry reloaded but fetching content failed'
+            # entry_reloaded_failed: 'Entry reloaded but fetching content failed'
             entry_archived: 'Contenuto archiviato'
             entry_unarchived: 'Contenuto dis-archiviato'
             entry_starred: 'Contenuto segnato come preferito'

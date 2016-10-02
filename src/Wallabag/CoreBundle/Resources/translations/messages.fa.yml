@@ -461,7 +461,7 @@ flashes:
             # entry_saved_failed: 'Entry saved but fetching content failed'
             entry_updated: 'مقاله به‌روز شد'
             entry_reloaded: 'مقاله به‌روز شد'
-            # entry_reload_failed: 'Entry reloaded but fetching content failed'
+            # entry_reloaded_failed: 'Entry reloaded but fetching content failed'
             entry_archived: 'مقاله بایگانی شد'
             entry_unarchived: 'مقاله از بایگانی درآمد'
             entry_starred: 'مقاله برگزیده شد'
