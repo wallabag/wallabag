@@ -46,7 +46,7 @@ footer:
         social: 'Soziales'
         powered_by: 'angetrieben von'
         about: 'Über'
-    stats: Seit %user_creation% hast du %nb_archives% Artikel gelesen. Das ist ungefähr %per_day% pro Tag!
+    stats: Seit %user_creation% hast du %nb_archives% Artikel gelesen. Das sind ungefähr %per_day% pro Tag!
 
 config:
     page_title: 'Einstellungen'
@@ -302,7 +302,7 @@ quickstart:
         use_docker: 'Nutze Docker, um wallabag zu installieren'
     docs:
         title: 'Komplette Dokumentation'
-        description: "Es gibt viele Features in wallabag. Scheue dich nicht, die Anleitung zu lesen, um sie kennezulernen und zu lernen sie zu nutzen."
+        description: "Es gibt viele Features in wallabag. Scheue dich nicht die Anleitung zu lesen, um sie kennenzulernen und zu lernen sie zu nutzen."
         annotate: 'Anmerkungen zu Artikeln hinzufügen'
         export: 'Artikel nach ePUB oder PDF konvertieren'
         search_filters: 'Schau nach, wie du nach einem Artikel über die Such- und Filterfunktion suchen kannst'
@@ -356,15 +356,15 @@ import:
     firefox:
         page_title: 'Aus Firefox importieren'
         description: "Dieser Import wird all deine Firefox Lesezeichen importieren. Gehe zu deinen Lesezeichen (Strg+Shift+O), dann auf \"Importen und Sichern\", wähle \"Sichern…\". Du erhälst eine .json Datei."
-        how_to: "Bitte wähle deine Lesezeichensicherungsdatei aus und clicke den nachfolgenden Button zum Importieren. Beachte, dass dieser Prozess eine lange Zeit in Anspruch nehmen kann, da alle Artikel geladen werden müssen."
+        how_to: "Bitte wähle deine Lesezeichensicherungsdatei aus und klicke den nachfolgenden Button zum Importieren. Beachte, dass dieser Prozess eine lange Zeit in Anspruch nehmen kann, da alle Artikel geladen werden müssen."
     chrome:
         page_title: 'Aus Chrome importieren'
         description: "Dieser Import wird all deine Chrome Lesezeichen importieren. Der Pfad zu der Datei hängt von deinem Betriebssystem ab: <ul><li>In Linux gehst du zu dem <code>~/.config/chromium/Default/</code> Verzeichnis</li><li>In Windows sollte es unter <code>%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default</code> sein</li><li>In OS X sollte es unter <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code> sein</li></ul>Wenn du dort angekommen bist, kopiere die Lesezeichendatei zu einem Ort, den du später wiederfindest.<em><br>Beachte falls du Chromium statt Chrome hast, dass du den zuvor genannten Pfad entsprechend anpasst.</em></p>"
-        how_to: "Bitte wähle deine Lesezeichensicherungsdatei aus und clicke den nachfolgenden Button zum Importieren. Beachte, dass dieser Prozess eine lange Zeit in Anspruch nehmen kann, da alle Artikel geladen werden müssen."
+        how_to: "Bitte wähle deine Lesezeichensicherungsdatei aus und klicke den nachfolgenden Button zum Importieren. Beachte, dass dieser Prozess eine lange Zeit in Anspruch nehmen kann, da alle Artikel geladen werden müssen."
     instapaper:
         page_title: 'Aus Instapaper importieren'
         description: 'Dieser Import wird all deine Instapaper Artikel importieren. Auf der Einstellungsseite (https://www.instapaper.com/user) klickst du auf "Download .CSV Datei" in dem Abschnitt "Export". Eine CSV Datei wird heruntergeladen (z.B. "instapaper-export.csv").'
-        how_to: "Bitte wähle deine Instapaper Sicherungsdatei aus und clicke den nachfolgenden Button zum Importieren."
+        how_to: "Bitte wähle deine Instapaper Sicherungsdatei aus und klicke den nachfolgenden Button zum Importieren."
 
 developer:
     page_title: 'Entwickler'
@@ -372,7 +372,7 @@ developer:
     documentation: 'Dokumentation'
     how_to_first_app: 'Wie erstelle ich meine erste Anwendung'
     full_documentation: 'Komplette API-Dokumentation einsehen'
-    list_methods: 'Liste der API Methoden'
+    list_methods: 'Liste der API-Methoden'
     clients:
         title: 'Clients'
         create_new: 'Neuen Client erstellen'
@@ -459,10 +459,10 @@ flashes:
         notice:
             entry_already_saved: 'Eintrag bereits am %date% gespeichert'
             entry_saved: 'Eintrag gespeichert'
-            entry_saved_failed: 'Eintrag gespeichert aber das Holen des Inhalts ist fehlgeschlagen'
+            entry_saved_failed: 'Eintrag gespeichert, aber das Abrufen des Inhalts ist fehlgeschlagen'
             entry_updated: 'Eintrag aktualisiert'
             entry_reloaded: 'Eintrag neugeladen'
-            entry_reload_failed: 'Eintrag neugeladen aber das Holen des Inhalts ist fehlgeschlagen'
+            entry_reload_failed: 'Eintrag neugeladen, aber das Abrufen des Inhalts ist fehlgeschlagen'
             entry_archived: 'Artikel archiviert'
             entry_unarchived: 'Artikel dearchiviert'
             entry_starred: 'Artikel favorisiert'
@@ -478,8 +478,8 @@ flashes:
             summary: 'Import-Zusammenfassung: %imported% importiert, %skipped% bereits gespeichert.'
             summary_with_queue: 'Import-Zusammenfassung: %queued% eingereiht.'
         error:
-            redis_enabled_not_installed: 'Redis ist aktiviert, um den asynchronen Import zu bewerkstelligen, aber es sieht so aus, dass <u>keine Verbindung herstellen können</u>. Bitte prüfe deine Redis Konfiguration.'
-            rabbit_enabled_not_installed: 'RabbitMQ ist aktiviert, um den asynchronen Import zu bewerkstelligen, aber es sieht so aus, dass <u>keine Verbindung herstellen können</u>. Bitte prüfe deine RabbitMQ Konfiguration.'
+            redis_enabled_not_installed: 'Redis ist aktiviert, um den asynchronen Import zu bewerkstelligen, aber es sieht so aus, dass <u>wir keine Verbindung herstellen können</u>. Bitte prüfe deine Redis-Konfiguration.'
+            rabbit_enabled_not_installed: 'RabbitMQ ist aktiviert, um den asynchronen Import zu bewerkstelligen, aber es sieht so aus, dass <u>wir keine Verbindung herstellen können</u>. Bitte prüfe deine RabbitMQ-Konfiguration.'
     developer:
         notice:
             client_created: 'Neuer Client erstellt.'
