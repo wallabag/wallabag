@@ -351,7 +351,7 @@ import:
         enabled: "Import jest wykonywany asynchronicznie. Od momentu rozpoczęcia importu, zewnętrzna usługa może zajmować się na raz tylko jednym zadaniem. Bieżącą usługą jest:"
     firefox:
        page_title: 'Import > Firefox'
-       description: "Ten importer zaimportuje wszystkie twoje zakładki z Firefoksa. <p>Dla Firefoksa, idź do twoich zakładek (Ctrl+Shift+O), następnie w \"Import i kopie zapasowe\", wybierz \"Utwórz kopię zapasową...\". Uzyskasz plik .json."
+       description: "Ten importer zaimportuje wszystkie twoje zakładki z Firefoksa. Idź do twoich zakładek (Ctrl+Shift+O), następnie w \"Import i kopie zapasowe\", wybierz \"Utwórz kopię zapasową...\". Uzyskasz plik .json."
        how_to: "Wybierz swój plik z zakładkami i naciśnij poniższy przycisk, aby je zaimportować. Może to zająć dłuższą chwilę, zanim wszystkie artykuły zostaną przeniesione."
     chrome:
        page_title: 'Import > Chrome'
