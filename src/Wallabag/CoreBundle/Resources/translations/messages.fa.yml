@@ -95,6 +95,7 @@ config:
         if_label: 'اگر'
         then_tag_as_label: 'این برچسب را بزن'
         delete_rule_label: 'پاک کن'
+        # edit_rule_label: 'edit'
         rule_label: 'قانون'
         tags_label: 'برچسب‌ها'
         faq:

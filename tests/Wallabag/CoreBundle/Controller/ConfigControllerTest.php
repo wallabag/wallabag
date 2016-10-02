@@ -56,8 +56,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->followRedirect();
 
-        $this->assertGreaterThan(1, $alert = $crawler->filter('div.messages.success')->extract(['_text']));
-        $this->assertContains('flashes.config.notice.config_saved', $alert[0]);
+        $this->assertContains('flashes.config.notice.config_saved', $crawler->filter('body')->extract(['_text'])[0]);
     }
 
     public function testChangeReadingSpeed()
@@ -213,8 +212,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->followRedirect();
 
-        $this->assertGreaterThan(1, $alert = $crawler->filter('div.messages.success')->extract(['_text']));
-        $this->assertContains('flashes.config.notice.password_updated', $alert[0]);
+        $this->assertContains('flashes.config.notice.password_updated', $crawler->filter('body')->extract(['_text'])[0]);
     }
 
     public function dataForUserFailed()
@@ -382,8 +380,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->followRedirect();
 
-        $this->assertGreaterThan(1, $alert = $crawler->filter('div.messages.success')->extract(['_text']));
-        $this->assertContains('flashes.config.notice.user_added', $alert[0]);
+        $this->assertContains('flashes.config.notice.user_added', $crawler->filter('body')->extract(['_text'])[0]);
 
         $em = $client->getContainer()->get('doctrine.orm.entity_manager');
         $user = $em
@@ -474,8 +471,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->followRedirect();
 
-        $this->assertGreaterThan(1, $alert = $crawler->filter('div.messages.success')->extract(['_text']));
-        $this->assertContains('flashes.config.notice.rss_updated', $alert[0]);
+        $this->assertContains('flashes.config.notice.rss_updated', $crawler->filter('body')->extract(['_text'])[0]);
     }
 
     public function dataForRssFailed()
@@ -540,8 +536,32 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->followRedirect();
 
-        $this->assertGreaterThan(1, $alert = $crawler->filter('div.messages.success')->extract(['_text']));
-        $this->assertContains('flashes.config.notice.tagging_rules_updated', $alert[0]);
+        $this->assertContains('flashes.config.notice.tagging_rules_updated', $crawler->filter('body')->extract(['_text'])[0]);
+
+        $editLink = $crawler->filter('.mode_edit')->last()->link();
+
+        $crawler = $client->click($editLink);
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertContains('?tagging-rule=', $client->getResponse()->headers->get('location'));
+
+        $crawler = $client->followRedirect();
+
+        $form = $crawler->filter('button[id=tagging_rule_save]')->form();
+
+        $data = [
+            'tagging_rule[rule]' => 'readingTime <= 30',
+            'tagging_rule[tags]' => 'short reading',
+        ];
+
+        $client->submit($form, $data);
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+
+        $crawler = $client->followRedirect();
+
+        $this->assertContains('flashes.config.notice.tagging_rules_updated', $crawler->filter('body')->extract(['_text'])[0]);
+
+        $this->assertContains('readingTime <= 30', $crawler->filter('body')->extract(['_text'])[0]);
 
         $deleteLink = $crawler->filter('.delete')->last()->link();
 
@@ -549,8 +569,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
 
         $crawler = $client->followRedirect();
-        $this->assertGreaterThan(1, $alert = $crawler->filter('div.messages.success')->extract(['_text']));
-        $this->assertContains('flashes.config.notice.tagging_rules_deleted', $alert[0]);
+        $this->assertContains('flashes.config.notice.tagging_rules_deleted', $crawler->filter('body')->extract(['_text'])[0]);
     }
 
     public function dataForTaggingRuleFailed()
@@ -613,7 +632,23 @@ class ConfigControllerTest extends WallabagCoreTestCase
             ->getRepository('WallabagCoreBundle:TaggingRule')
             ->findAll()[0];
 
-        $crawler = $client->request('GET', '/tagging-rule/delete/'.$rule->getId());
+        $crawler = $client->request('GET', '/tagging-rule/edit/'.$rule->getId());
+
+        $this->assertEquals(403, $client->getResponse()->getStatusCode());
+        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
+        $this->assertContains('You can not access this tagging rule', $body[0]);
+    }
+
+    public function testEditingTaggingRuleFromAnOtherUser()
+    {
+        $this->logInAs('bob');
+        $client = $this->getClient();
+
+        $rule = $client->getContainer()->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:TaggingRule')
+            ->findAll()[0];
+
+        $crawler = $client->request('GET', '/tagging-rule/edit/'.$rule->getId());
 
         $this->assertEquals(403, $client->getResponse()->getStatusCode());
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));

@@ -95,6 +95,7 @@ config:
         if_label: 'jeżeli'
         then_tag_as_label: 'wtedy otaguj jako'
         delete_rule_label: 'usuń'
+        # edit_rule_label: 'edit'
         rule_label: 'Reguła'
         tags_label: 'Tagi'
         faq:

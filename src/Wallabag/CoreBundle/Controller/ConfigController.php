@@ -108,7 +108,21 @@ class ConfigController extends Controller
 
         // handle tagging rule
         $taggingRule = new TaggingRule();
-        $newTaggingRule = $this->createForm(TaggingRuleType::class, $taggingRule, ['action' => $this->generateUrl('config').'#set5']);
+        $action = $this->generateUrl('config').'#set5';
+
+        if ($request->query->has('tagging-rule')) {
+            $taggingRule = $this->getDoctrine()
+                ->getRepository('WallabagCoreBundle:TaggingRule')
+                ->find($request->query->get('tagging-rule'));
+
+            if ($this->getUser()->getId() !== $taggingRule->getConfig()->getUser()->getId()) {
+                return $this->redirect($action);
+            }
+
+            $action = $this->generateUrl('config').'?tagging-rule='.$taggingRule->getId().'#set5';
+        }
+
+        $newTaggingRule = $this->createForm(TaggingRuleType::class, $taggingRule, ['action' => $action]);
         $newTaggingRule->handleRequest($request);
 
         if ($newTaggingRule->isValid()) {
@@ -205,9 +219,7 @@ class ConfigController extends Controller
      */
     public function deleteTaggingRuleAction(TaggingRule $rule)
     {
-        if ($this->getUser()->getId() != $rule->getConfig()->getUser()->getId()) {
-            throw $this->createAccessDeniedException('You can not access this tagging rule.');
-        }
+        $this->validateRuleAction($rule);
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($rule);
@@ -219,6 +231,34 @@ class ConfigController extends Controller
         );
 
         return $this->redirect($this->generateUrl('config').'#set5');
+    }
+
+    /**
+     * Edit a tagging rule.
+     *
+     * @param TaggingRule $rule
+     *
+     * @Route("/tagging-rule/edit/{id}", requirements={"id" = "\d+"}, name="edit_tagging_rule")
+     *
+     * @return RedirectResponse
+     */
+    public function editTaggingRuleAction(TaggingRule $rule)
+    {
+        $this->validateRuleAction($rule);
+
+        return $this->redirect($this->generateUrl('config').'?tagging-rule='.$rule->getId().'#set5');
+    }
+
+    /**
+     * Validate that a rule can be edited/deleted by the current user.
+     *
+     * @param TaggingRule $rule
+     */
+    private function validateRuleAction(TaggingRule $rule)
+    {
+        if ($this->getUser()->getId() != $rule->getConfig()->getUser()->getId()) {
+            throw $this->createAccessDeniedException('You can not access this tagging rule.');
+        }
     }
 
     /**

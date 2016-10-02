@@ -95,6 +95,7 @@ config:
         if_label: 'si'
         then_tag_as_label: 'alors attribuer les tags'
         delete_rule_label: 'supprimer'
+        edit_rule_label: 'éditer'
         rule_label: 'Règle'
         tags_label: 'Tags'
         faq:

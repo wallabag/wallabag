@@ -95,6 +95,7 @@ config:
         if_label: 'se'
         then_tag_as_label: 'alara atribuir las etiquetas'
         delete_rule_label: 'suprimir'
+        # edit_rule_label: 'edit'
         rule_label: 'Règla'
         tags_label: 'Etiquetas'
         faq:
