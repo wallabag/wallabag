@@ -193,7 +193,7 @@ class ExportControllerTest extends WallabagCoreTestCase
         $contentInDB = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneByUsernameAndNotArchived('admin');
+            ->findByUrlAndUserId('http://0.0.0.0/entry1', $this->getLoggedInUserId());
 
         ob_start();
         $crawler = $client->request('GET', '/export/'.$contentInDB->getId().'.json');

@@ -21,7 +21,6 @@ class EntriesExport
     private $entries = [];
     private $authors = ['wallabag'];
     private $language = '';
-    private $tags = [];
     private $footerTemplate = '<div style="text-align:center;">
         <p>Produced by wallabag with %EXPORT_METHOD%</p>
         <p>Please open <a href="https://github.com/wallabag/wallabag/issues">an issue</a> if you have trouble with the display of this E-Book on your device.</p>
