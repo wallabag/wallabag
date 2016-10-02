@@ -23,6 +23,38 @@ class WallabagRestController extends FOSRestController
     }
 
     /**
+     * Check if an entry exist by url.
+     *
+     * @ApiDoc(
+     *       parameters={
+     *          {"name"="url", "dataType"="string", "required"=true, "format"="An url", "description"="Url to check if it exists"}
+     *       }
+     * )
+     *
+     * @return JsonResponse
+     */
+    public function getEntriesExistsAction(Request $request)
+    {
+        $this->validateAuthentication();
+
+        $url = $request->query->get('url', '');
+
+        if (empty($url)) {
+            throw $this->createAccessDeniedException('URL is empty?, logged user id: '.$user->getId());
+        }
+
+        $res = $this->getDoctrine()
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findByUrlAndUserId($url, $this->getUser()->getId());
+
+        $exists = false === $res ? false : true;
+
+        $json = $this->get('serializer')->serialize(['exists' => $exists], 'json');
+
+        return (new JsonResponse())->setJson($json);
+    }
+
+    /**
      * Retrieve all entries. It could be filtered by many options.
      *
      * @ApiDoc(
