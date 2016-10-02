@@ -82,8 +82,8 @@ class WallabagRestController extends FOSRestController
         $order = $request->query->get('order', 'desc');
         $page = (int) $request->query->get('page', 1);
         $perPage = (int) $request->query->get('perPage', 30);
-        $since = $request->query->get('since', 0);
         $tags = $request->query->get('tags', '');
+        $since = $request->query->get('since', 0);
 
         $pager = $this->getDoctrine()
             ->getRepository('WallabagCoreBundle:Entry')
@@ -95,7 +95,20 @@ class WallabagRestController extends FOSRestController
         $pagerfantaFactory = new PagerfantaFactory('page', 'perPage');
         $paginatedCollection = $pagerfantaFactory->createRepresentation(
             $pager,
-            new Route('api_get_entries', [], UrlGeneratorInterface::ABSOLUTE_URL)
+            new Route(
+                'api_get_entries',
+                [
+                    'archive' => $isArchived,
+                    'starred' => $isStarred,
+                    'sort' => $sort,
+                    'order' => $order,
+                    'page' => $page,
+                    'perPage' => $perPage,
+                    'tags' => $tags,
+                    'since' => $since,
+                ],
+                UrlGeneratorInterface::ABSOLUTE_URL
+            )
         );
 
         $json = $this->get('serializer')->serialize($paginatedCollection, 'json');

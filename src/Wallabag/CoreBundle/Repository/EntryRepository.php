@@ -128,7 +128,7 @@ class EntryRepository extends EntityRepository
             $qb->andWhere('e.isStarred =:isStarred')->setParameter('isStarred', (bool) $isStarred);
         }
 
-        if ($since >= 0) {
+        if ($since > 0) {
             $qb->andWhere('e.updatedAt > :since')->setParameter('since', new \DateTime(date('Y-m-d H:i:s', $since)));
         }
 
