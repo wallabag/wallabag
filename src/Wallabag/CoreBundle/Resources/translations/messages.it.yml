@@ -31,6 +31,7 @@ menu:
         search: 'Cerca'
         save_link: 'Salva collegamento'
         back_to_unread: 'Torna ai contenuti non letti'
+        # users_management: 'Users management'
     top:
         add_new_entry: 'Aggiungi un nuovo contenuto'
         search: 'Cerca'
@@ -129,12 +130,6 @@ config:
                 or: "Una regola O un'altra"
                 and: "Una regola E un'altra"
                 matches: 'Verifica che un <i>oggetto</i> risulti in una <i>ricerca</i> (case-insensitive).<br />Esempio: <code>titolo contiene "football"</code>'
-    form_new_user:
-        username_label: 'Username'
-        password_label: 'Password'
-        repeat_new_password_label: 'Ripeti password'
-        plain_password_label: '????'
-        email_label: 'E-mail'
 
 entry:
     page_titles:
@@ -162,6 +157,7 @@ entry:
         status_label: 'Stato'
         archived_label: 'Archiviati'
         starred_label: 'Preferiti'
+        # unread_label: 'Unread'
         preview_picture_label: "Ha un'immagine di anteprima"
         preview_picture_help: 'Immagine di anteprima'
         language_label: 'Lingua'
@@ -395,12 +391,14 @@ developer:
         page_title: 'Sviluppatori > Nuovo client'
         page_description: 'Stai per creare un nuovo client. Compila i campi sottostanti per il redirect URI della tua applicazione.'
         form:
+            # name_label: 'Name of the client'
             redirect_uris_label: 'Redirect URI'
             save_label: 'Crea un nuovo client'
         action_back: 'Indietro'
     client_parameter:
         page_title: 'Sviluppatori > parametri Client'
         page_description: 'Questi sono i tuoi parametri del client.'
+        # field_name: 'Client name'
         field_id: 'Client ID'
         field_secret: 'Client secret'
         back: 'Indietro'
@@ -417,6 +415,33 @@ developer:
             paragraph_7: 'Questa chiamata ritornerà tutti i contenuti per il tuo utente.'
             paragraph_8: 'Se vuoi visualizzare tutti gli API endpoints, dai una occhiata alla <a href="%link%">documentazione delle API</a>.'
         back: 'Indietro'
+
+user:
+    # page_title: Users management
+    # new_user: Create a new user
+    # edit_user: Edit an existing user
+    # description: "Here you can manage all users (create, edit and delete)"
+    # list:
+    #     actions: Actions
+    #     edit_action: Edit
+    #     yes: Yes
+    #     no: No
+    #     create_new_one: Create a new user
+    form:
+        username_label: 'Username'
+        # name_label: 'Name'
+        password_label: 'Password'
+        repeat_new_password_label: 'Ripeti password'
+        plain_password_label: '????'
+        email_label: 'E-mail'
+        # enabled_label: 'Enabled'
+        # locked_label: 'Locked'
+        # last_login_label: 'Last login'
+        # twofactor_label: Two factor authentication
+        # save: Save
+        # delete: Delete
+        # delete_confirm: Are you sure?
+        # back_to_list: Back to list
 
 flashes:
     config:

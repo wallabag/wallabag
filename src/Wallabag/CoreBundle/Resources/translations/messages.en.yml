@@ -31,6 +31,7 @@ menu:
         search: 'Search'
         save_link: 'Save a link'
         back_to_unread: 'Back to unread articles'
+        users_management: 'Users management'
     top:
         add_new_entry: 'Add a new entry'
         search: 'Search'
@@ -129,12 +130,6 @@ config:
                 or: 'One rule OR another'
                 and: 'One rule AND another'
                 matches: 'Tests that a <i>subject</i> is matches a <i>search</i> (case-insensitive).<br />Example: <code>title matches "football"</code>'
-    form_new_user:
-        username_label: 'Username'
-        password_label: 'Password'
-        repeat_new_password_label: 'Repeat new password'
-        plain_password_label: '????'
-        email_label: 'Email'
 
 entry:
     page_titles:
@@ -421,6 +416,33 @@ developer:
             paragraph_8: 'If you want to see all the API endpoints, you can have a look <a href="%link%">to our API documentation</a>.'
         back: 'Back'
 
+user:
+    page_title: Users management
+    new_user: Create a new user
+    edit_user: Edit an existing user
+    description: "Here you can manage all users (create, edit and delete)"
+    list:
+        actions: Actions
+        edit_action: Edit
+        yes: Yes
+        no: No
+        create_new_one: Create a new user
+    form:
+        username_label: 'Username'
+        name_label: 'Name'
+        password_label: 'Password'
+        repeat_new_password_label: 'Repeat new password'
+        plain_password_label: '????'
+        email_label: 'Email'
+        enabled_label: 'Enabled'
+        locked_label: 'Locked'
+        last_login_label: 'Last login'
+        twofactor_label: Two factor authentication
+        save: Save
+        delete: Delete
+        delete_confirm: Are you sure?
+        back_to_list: Back to list
+
 flashes:
     config:
         notice:
@@ -431,7 +453,6 @@ flashes:
             rss_updated: 'RSS information updated'
             tagging_rules_updated: 'Tagging rules updated'
             tagging_rules_deleted: 'Tagging rule deleted'
-            user_added: 'User "%username%" added'
             rss_token_updated: 'RSS token updated'
     entry:
         notice:
@@ -462,3 +483,8 @@ flashes:
         notice:
             client_created: 'New client %name% created.'
             client_deleted: 'Client %name% deleted'
+    user:
+        notice:
+            added: 'User "%username%" added'
+            updated: 'User "%username%" updated'
+            deleted: 'User "%username%" deleted'

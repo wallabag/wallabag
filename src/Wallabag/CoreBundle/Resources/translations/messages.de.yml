@@ -31,6 +31,7 @@ menu:
         search: 'Suche'
         save_link: 'Link speichern'
         back_to_unread: 'Zurück zu ungelesenen Artikeln'
+        # users_management: 'Users management'
     top:
         add_new_entry: 'Neuen Artikel hinzufügen'
         search: 'Suche'
@@ -129,12 +130,6 @@ config:
                 or: 'Eine Regel ODER die andere'
                 and: 'Eine Regel UND eine andere'
                 matches: 'Tests, ob eine <i>Variable</i> auf eine <i>Suche</i> zutrifft (Groß- und Kleinschreibung wird nicht berücksichtigt).<br />Beispiel: <code>title matches "Fußball"</code>'
-    form_new_user:
-        username_label: 'Benutzername'
-        password_label: 'Kennwort'
-        repeat_new_password_label: 'Neues Kennwort wiederholen'
-        plain_password_label: '????'
-        email_label: 'E-Mail-Adresse'
 
 entry:
     page_titles:
@@ -396,12 +391,14 @@ developer:
         page_title: 'Entwickler > Neuer Client'
         page_description: 'Du bist dabei, einen neuen Client zu erstellen. Fülle das nachfolgende Feld für die Weiterleitungs-URIs deiner Anwendung aus.'
         form:
+            # name_label: 'Name of the client'
             redirect_uris_label: 'Weiterleitungs-URIs'
             save_label: 'Neuen Client erstellen'
         action_back: 'Zurück'
     client_parameter:
         page_title: 'Entwickler > Client-Parameter'
         page_description: 'Dies sind deine Client-Parameter.'
+        # field_name: 'Client name'
         field_id: 'Client-ID'
         field_secret: 'Client-Secret'
         back: 'Zurück'
@@ -418,6 +415,33 @@ developer:
             paragraph_7: 'Dieser Aufruf wird alle Einträge für den Nutzer zurückgeben.'
             paragraph_8: 'Wenn du alle API-Endpunkte sehen willst, werfe einen Blick auf die <a href="%link%">API-Dokumentation</a>.'
         back: 'Zurück'
+
+user:
+    # page_title: Users management
+    # new_user: Create a new user
+    # edit_user: Edit an existing user
+    # description: "Here you can manage all users (create, edit and delete)"
+    # list:
+    #     actions: Actions
+    #     edit_action: Edit
+    #     yes: Yes
+    #     no: No
+    #     create_new_one: Create a new user
+    form:
+        username_label: 'Benutzername'
+        # name_label: 'Name'
+        password_label: 'Kennwort'
+        repeat_new_password_label: 'Neues Kennwort wiederholen'
+        plain_password_label: '????'
+        email_label: 'E-Mail-Adresse'
+        # enabled_label: 'Enabled'
+        # locked_label: 'Locked'
+        # last_login_label: 'Last login'
+        # twofactor_label: Two factor authentication
+        # save: Save
+        # delete: Delete
+        # delete_confirm: Are you sure?
+        # back_to_list: Back to list
 
 flashes:
     config:

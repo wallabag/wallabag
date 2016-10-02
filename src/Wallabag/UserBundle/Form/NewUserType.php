@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Form\Type;
+namespace Wallabag\UserBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -19,13 +19,13 @@ class NewUserType extends AbstractType
         $builder
             ->add('username', TextType::class, [
                 'required' => true,
-                'label' => 'config.form_new_user.username_label',
+                'label' => 'user.form.username_label',
             ])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'validator.password_must_match',
-                'first_options' => ['label' => 'config.form_new_user.password_label'],
-                'second_options' => ['label' => 'config.form_new_user.repeat_new_password_label'],
+                'first_options' => ['label' => 'user.form.password_label'],
+                'second_options' => ['label' => 'user.form.repeat_new_password_label'],
                 'constraints' => [
                     new Constraints\Length([
                         'min' => 8,
@@ -33,13 +33,13 @@ class NewUserType extends AbstractType
                     ]),
                     new Constraints\NotBlank(),
                 ],
-                'label' => 'config.form_new_user.plain_password_label',
+                'label' => 'user.form.plain_password_label',
             ])
             ->add('email', EmailType::class, [
-                'label' => 'config.form_new_user.email_label',
+                'label' => 'user.form.email_label',
             ])
             ->add('save', SubmitType::class, [
-                'label' => 'config.form.save',
+                'label' => 'user.form.save',
             ])
         ;
     }

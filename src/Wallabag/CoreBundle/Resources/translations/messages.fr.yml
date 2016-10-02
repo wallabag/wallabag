@@ -31,6 +31,7 @@ menu:
         search: 'Recherche'
         save_link: 'Sauvegarder un nouvel article'
         back_to_unread: 'Retour aux articles non lus'
+        users_management: 'Gestion des utilisateurs'
     top:
         add_new_entry: 'Sauvegarder un nouvel article'
         search: 'Rechercher'
@@ -129,12 +130,6 @@ config:
                 or: "Une règle OU l'autre"
                 and: "Une règle ET l'autre"
                 matches: 'Teste si un <i>sujet</i> correspond à une <i>recherche</i> (non sensible à la casse).<br />Exemple : <code>title matches "football"</code>'
-    form_new_user:
-        username_label: "Nom d'utilisateur"
-        password_label: 'Mot de passe'
-        repeat_new_password_label: 'Confirmez votre nouveau mot de passe'
-        plain_password_label: 'Mot de passe en clair'
-        email_label: 'Adresse e-mail'
 
 entry:
     page_titles:
@@ -420,6 +415,33 @@ developer:
             paragraph_7: "Cet appel va retourner tous les articles de l'utilisateur."
             paragraph_8: "Si vous voulez toutes les méthodes de l'API, jetez un oeil <a href=\"%link%\">à la documentation de l'API</a>."
         back: 'Retour'
+
+user:
+    page_title: Gestion des utilisateurs
+    new_user: Créer un nouvel utilisateur
+    edit_user: Éditer un utilisateur existant
+    description: Ici vous pouvez gérer vos utilisateurs (création, mise à jour et suppression)
+    list:
+        actions: Actions
+        edit_action: Éditer
+        yes: Oui
+        no: Non
+        create_new_one: Créer un nouvel utilisateur
+    form:
+        username_label: "Nom d'utilisateur"
+        name_label: 'Nom'
+        password_label: 'Mot de passe'
+        repeat_new_password_label: 'Confirmez votre nouveau mot de passe'
+        plain_password_label: 'Mot de passe en clair'
+        email_label: 'Adresse e-mail'
+        enabled_label: 'Activé'
+        locked_label: 'Bloqué'
+        last_login_label: 'Dernière connexion'
+        twofactor_label: Double authentification
+        save: Sauvegarder
+        delete: Supprimer
+        delete_confirm: Êtes-vous sûr?
+        back_to_list: Revenir à la liste
 
 flashes:
     config:

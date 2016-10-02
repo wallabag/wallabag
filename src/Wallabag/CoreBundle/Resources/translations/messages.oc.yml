@@ -31,6 +31,7 @@ menu:
         search: 'Cercar'
         save_link: 'Enregistrar un novèl article'
         back_to_unread: 'Tornar als articles pas legits'
+        # users_management: 'Users management'
     top:
         add_new_entry: 'Enregistrar un novèl article'
         search: 'Cercar'
@@ -129,12 +130,6 @@ config:
                 or: "Una règla O l'autra"
                 and: "Una règla E l'autra"
                 matches: 'Teste se un <i>subjècte</i> correspond a una <i>recerca</i> (non sensibla a la cassa).<br />Exemple : <code>title matches \"football\"</code>'
-    form_new_user:
-        username_label: "Nom d'utilizaire"
-        password_label: 'Senhal'
-        repeat_new_password_label: 'Confirmatz vòstre novèl senhal'
-        plain_password_label: 'Senhal en clar'
-        email_label: 'Adreça de corrièl'
 
 entry:
     page_titles:
@@ -420,6 +415,33 @@ developer:
             paragraph_7: "Aquesta requèsta tornarà totes los articles de l'utilizaire."
             paragraph_8: "Se volètz totas las adreças d'accès de l'API, donatz un còp d’uèlh <a href=\"%link%\">a la documentacion de l'API</a>."
         back: 'Retorn'
+
+user:
+    # page_title: Users management
+    # new_user: Create a new user
+    # edit_user: Edit an existing user
+    # description: "Here you can manage all users (create, edit and delete)"
+    # list:
+    #     actions: Actions
+    #     edit_action: Edit
+    #     yes: Yes
+    #     no: No
+    #     create_new_one: Create a new user
+    form:
+        username_label: "Nom d'utilizaire"
+        # name_label: 'Name'
+        password_label: 'Senhal'
+        repeat_new_password_label: 'Confirmatz vòstre novèl senhal'
+        plain_password_label: 'Senhal en clar'
+        email_label: 'Adreça de corrièl'
+        # enabled_label: 'Enabled'
+        # locked_label: 'Locked'
+        # last_login_label: 'Last login'
+        # twofactor_label: Two factor authentication
+        # save: Save
+        # delete: Delete
+        # delete_confirm: Are you sure?
+        # back_to_list: Back to list
 
 flashes:
     config:

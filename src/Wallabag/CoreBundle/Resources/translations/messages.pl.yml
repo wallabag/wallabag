@@ -31,6 +31,7 @@ menu:
         search: 'Szukaj'
         save_link: 'Zapisz link'
         back_to_unread: 'Powrót do nieprzeczytanych artykułów'
+        # users_management: 'Users management'
     top:
         add_new_entry: 'Dodaj nowy wpis'
         search: 'Szukaj'
@@ -129,12 +130,6 @@ config:
                 or: 'Jedna reguła LUB inna'
                 and: 'Jedna reguła I inna'
                 matches: 'Sprawdź czy <i>temat</i> pasuje <i>szukaj</i> (duże lub małe litery).<br />Przykład: <code>tytuł zawiera "piłka nożna"</code>'
-    form_new_user:
-        username_label: 'Nazwa użytkownika'
-        password_label: 'Hasło'
-        repeat_new_password_label: 'Powtórz nowe hasło'
-        plain_password_label: 'Jawne hasło'
-        email_label: 'Adres email'
 
 entry:
     page_titles:
@@ -379,36 +374,38 @@ developer:
     full_documentation: 'Pokaż pełne API'
     list_methods: 'Lista metod API'
     clients:
-         title: 'Klienci'
-         create_new: 'Utwórz nowego klienta'
+        title: 'Klienci'
+        create_new: 'Utwórz nowego klienta'
     existing_clients:
-         title: 'Istniejący klienci'
-         field_id: 'ID klienta'
-         field_secret: 'Client secret'
-         field_uris: 'Przekieruj URIs'
-         field_grant_types: 'Przyznaj pozwolenie'
-         no_client: 'Nie ma jeszcze klienta.'
+        title: 'Istniejący klienci'
+        field_id: 'ID klienta'
+        field_secret: 'Client secret'
+        field_uris: 'Przekieruj URIs'
+        field_grant_types: 'Przyznaj pozwolenie'
+        no_client: 'Nie ma jeszcze klienta.'
     remove:
-         warn_message_1: 'Masz możliwość usunięcia tego klienta. Ta akcja jest NIEODWRACALNA !'
-         warn_message_2: "Jeżeli go usuniesz, aplikacje skonfigurowane z tym klientem nię będa w stanie autoryzować twojego wallabag."
-         action: 'Usuń tego klienta'
+        warn_message_1: 'Masz możliwość usunięcia tego klienta. Ta akcja jest NIEODWRACALNA !'
+        warn_message_2: "Jeżeli go usuniesz, aplikacje skonfigurowane z tym klientem nię będa w stanie autoryzować twojego wallabag."
+        action: 'Usuń tego klienta'
     client:
-         page_title: 'Deweloper > Nowy klient'
-         page_description: 'Tworzysz nowego klienta. Wypełnij poniższe pole w celu przekierowania URI twojej aplikacji.'
-         form:
-             redirect_uris_label: 'Przekieruj adresy URI'
-             save_label: 'Stwórz nowego klienta'
-         action_back: 'Cofnij'
+        page_title: 'Deweloper > Nowy klient'
+        page_description: 'Tworzysz nowego klienta. Wypełnij poniższe pole w celu przekierowania URI twojej aplikacji.'
+        form:
+            # name_label: 'Name of the client'
+            redirect_uris_label: 'Przekieruj adresy URI'
+            save_label: 'Stwórz nowego klienta'
+        action_back: 'Cofnij'
     client_parameter:
-         page_title: 'Deweloper > Parametry klienta'
-         page_description: 'Tutaj znajdują się parametry klienta.'
-         field_id: 'Client ID'
-         field_secret: 'Client secret'
-         back: 'Cofnij'
-         read_howto: 'Przeczytaj jak "Stworzyć moją pierwszą aplikację"'
+        page_title: 'Deweloper > Parametry klienta'
+        page_description: 'Tutaj znajdują się parametry klienta.'
+        # field_name: 'Client name'
+        field_id: 'Client ID'
+        field_secret: 'Client secret'
+        back: 'Cofnij'
+        read_howto: 'Przeczytaj jak "Stworzyć moją pierwszą aplikację"'
     howto:
-         page_title: 'Deweloper > Jak stworzyć moją pierwszą aplikację'
-         description:
+        page_title: 'Deweloper > Jak stworzyć moją pierwszą aplikację'
+        description:
             paragraph_1: 'Następujące komendy korzystają <a href="https://github.com/jkbrzt/httpie">Biblioteka HTTPie</a>. Upewnij się, czy zainstalowałeś ją w swoim systemie zanim z niej skorzystasz'
             paragraph_2: 'Potrzebujesz tokena w celu nawiązania komunikacji między swoją aplikacją a API wallabag.'
             paragraph_3: 'W celu stworzenia tokena musisz <a href="%link%">stwórz nowego klienta</a>.'
@@ -417,7 +414,34 @@ developer:
             paragraph_6: 'access_token jest użyteczny do wywołania API endpoint. Na przykład:'
             paragraph_7: 'To wywołanie zwróci wszystkie twoje wpisy.'
             paragraph_8: 'Jeżeli chcesz wyświetlić wszystkie punkty końcowe API, zobacz <a href="%link%">Dokumentacja naszego API</a>.'
-         back: 'Cofnij'
+        back: 'Cofnij'
+
+user:
+    # page_title: Users management
+    # new_user: Create a new user
+    # edit_user: Edit an existing user
+    # description: "Here you can manage all users (create, edit and delete)"
+    # list:
+    #     actions: Actions
+    #     edit_action: Edit
+    #     yes: Yes
+    #     no: No
+    #     create_new_one: Create a new user
+    form:
+        username_label: 'Nazwa użytkownika'
+        # name_label: 'Name'
+        password_label: 'Hasło'
+        repeat_new_password_label: 'Powtórz nowe hasło'
+        plain_password_label: 'Jawne hasło'
+        email_label: 'Adres email'
+        # enabled_label: 'Enabled'
+        # locked_label: 'Locked'
+        # last_login_label: 'Last login'
+        # twofactor_label: Two factor authentication
+        # save: Save
+        # delete: Delete
+        # delete_confirm: Are you sure?
+        # back_to_list: Back to list
 
 flashes:
     config:

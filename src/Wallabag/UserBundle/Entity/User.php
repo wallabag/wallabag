@@ -64,7 +64,7 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
     protected $entries;
 
     /**
-     * @ORM\OneToOne(targetEntity="Wallabag\CoreBundle\Entity\Config", mappedBy="user")
+     * @ORM\OneToOne(targetEntity="Wallabag\CoreBundle\Entity\Config", mappedBy="user", cascade={"remove"})
      */
     protected $config;
 

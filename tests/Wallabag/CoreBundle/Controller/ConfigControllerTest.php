@@ -28,7 +28,6 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $this->assertCount(1, $crawler->filter('button[id=config_save]'));
         $this->assertCount(1, $crawler->filter('button[id=change_passwd_save]'));
         $this->assertCount(1, $crawler->filter('button[id=update_user_save]'));
-        $this->assertCount(1, $crawler->filter('button[id=new_user_save]'));
         $this->assertCount(1, $crawler->filter('button[id=rss_config_save]'));
     }
 
@@ -281,119 +280,6 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $this->assertGreaterThan(1, $alert = $crawler->filter('body')->extract(['_text']));
         $this->assertContains('flashes.config.notice.user_updated', $alert[0]);
-    }
-
-    public function dataForNewUserFailed()
-    {
-        return [
-            [
-                [
-                    'new_user[username]' => '',
-                    'new_user[plainPassword][first]' => '',
-                    'new_user[plainPassword][second]' => '',
-                    'new_user[email]' => '',
-                ],
-                'fos_user.username.blank',
-            ],
-            [
-                [
-                    'new_user[username]' => 'a',
-                    'new_user[plainPassword][first]' => 'mypassword',
-                    'new_user[plainPassword][second]' => 'mypassword',
-                    'new_user[email]' => '',
-                ],
-                'fos_user.username.short',
-            ],
-            [
-                [
-                    'new_user[username]' => 'wallace',
-                    'new_user[plainPassword][first]' => 'mypassword',
-                    'new_user[plainPassword][second]' => 'mypassword',
-                    'new_user[email]' => 'test',
-                ],
-                'fos_user.email.invalid',
-            ],
-            [
-                [
-                    'new_user[username]' => 'admin',
-                    'new_user[plainPassword][first]' => 'wallacewallace',
-                    'new_user[plainPassword][second]' => 'wallacewallace',
-                    'new_user[email]' => 'wallace@wallace.me',
-                ],
-                'fos_user.username.already_used',
-            ],
-            [
-                [
-                    'new_user[username]' => 'wallace',
-                    'new_user[plainPassword][first]' => 'mypassword1',
-                    'new_user[plainPassword][second]' => 'mypassword2',
-                    'new_user[email]' => 'wallace@wallace.me',
-                ],
-                'validator.password_must_match',
-            ],
-        ];
-    }
-
-    /**
-     * @dataProvider dataForNewUserFailed
-     */
-    public function testNewUserFailed($data, $expectedMessage)
-    {
-        $this->logInAs('admin');
-        $client = $this->getClient();
-
-        $crawler = $client->request('GET', '/config');
-
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-
-        $form = $crawler->filter('button[id=new_user_save]')->form();
-
-        $crawler = $client->submit($form, $data);
-
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-
-        $this->assertGreaterThan(1, $alert = $crawler->filter('body')->extract(['_text']));
-        $this->assertContains($expectedMessage, $alert[0]);
-    }
-
-    public function testNewUserCreated()
-    {
-        $this->logInAs('admin');
-        $client = $this->getClient();
-
-        $crawler = $client->request('GET', '/config');
-
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-
-        $form = $crawler->filter('button[id=new_user_save]')->form();
-
-        $data = [
-            'new_user[username]' => 'wallace',
-            'new_user[plainPassword][first]' => 'wallace1',
-            'new_user[plainPassword][second]' => 'wallace1',
-            'new_user[email]' => 'wallace@wallace.me',
-        ];
-
-        $client->submit($form, $data);
-
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
-
-        $crawler = $client->followRedirect();
-
-        $this->assertContains('flashes.config.notice.user_added', $crawler->filter('body')->extract(['_text'])[0]);
-
-        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
-        $user = $em
-            ->getRepository('WallabagUserBundle:User')
-            ->findOneByUsername('wallace');
-
-        $this->assertTrue(false !== $user);
-        $this->assertTrue($user->isEnabled());
-        $this->assertEquals('material', $user->getConfig()->getTheme());
-        $this->assertEquals(12, $user->getConfig()->getItemsPerPage());
-        $this->assertEquals(50, $user->getConfig()->getRssLimit());
-        $this->assertEquals('en', $user->getConfig()->getLanguage());
-        $this->assertEquals(1, $user->getConfig()->getReadingSpeed());
     }
 
     public function testRssUpdateResetToken()
