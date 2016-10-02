@@ -267,12 +267,14 @@ howto:
 
 quickstart:
     page_title: 'Hızlı başlangıç'
+    # more: 'More…'
     intro:
         title: 'wallabag'
         paragraph_1: "wallabag kurduğunuz için teşekkür ederiz. Bu sayfada biz size eşlik edecek ve ilginizi çekecek birkaç özellik göstereceğim."
         paragraph_2: 'Bizi takip edin!'
     configure:
         title: 'Uygulamayı Yapılandırma'
+        # description: 'In order to have an application which suits you, have a look into the configuration of wallabag.'
         language: 'Dili ve tasarımı değiştirme'
         rss: 'RSS akışını aktifleştirme'
         # tagging_rules: 'Write rules to automatically tag your articles'
@@ -286,6 +288,7 @@ quickstart:
         # import: 'Configure import'
     first_steps:
         title: 'İlk adım'
+        # description: "Now wallabag is well configured, it's time to archive the web. You can click on the top right sign + to add a link."
         new_article: 'İlk makalenizi kaydedin'
         unread_articles: 'Ve bunu sınıflandırın!'
     migrate:
@@ -295,11 +298,15 @@ quickstart:
         wallabag_v1: "wallabag v1 üzerindeki verilerinizi wallabag'in yeni sürümüne aktarın"
         wallabag_v2: "wallabag v2 üzerindeki verilerinizi wallabag'in yeni sürümüne aktarın"
         readability: "Readability üzerindeki verilerinizi wallabag'e aktarın'"
+        instapaper: "Instapaper üzerindeki verilerinizi wallabag'e aktarın'"
     developer:
         # title: 'Developers'
+        # description: 'We also thought to the developers: Docker, API, translations, etc.'
         # create_application: 'Create your third application'
+        # use_docker: 'Use Docker to install wallabag'
     docs:
         title: 'Dokümantasyon'
+        # description: "There are so much features in wallabag. Don't hesitate to read the manual to know them and to learn how to use them."
         # annotate: 'Annotate your article'
         export: 'Makalelerinizi ePUB ya da PDF formatına çevirme'
         search_filters: 'Makaleleri görüntülemek için arama motorlarını ve filteri kullanma'

@@ -411,12 +411,12 @@ main ul.row {
 }
 
 .card .card-action a {
-  color: #fff;
+  color: #fff !important;
   margin: 0;
 }
 
 .card .card-action a:hover {
-  color: #fff;
+  color: #fff !important;
 }
 
 .settings .div_tabs {

@@ -268,12 +268,14 @@ howto:
 
 quickstart:
     page_title: 'Pour bien débuter'
+    more: 'Et plus encore…'
     intro:
         title: 'Bienvenue sur wallabag !'
         paragraph_1: "Nous allons vous accompagner pour vous faire faire le tour de la maison et vous présenter quelques fonctionnalités qui pourraient vous intéresser pour vous approprier cet outil."
         paragraph_2: 'Suivez-nous !'
     configure:
         title: "Configurez l'application"
+        description: 'Pour voir une application qui vous correspond, allez voir du côté de la configuration de wallabag.'
         language: "Changez la langue et le design de l'application"
         rss: 'Activez les flux RSS'
         tagging_rules: 'Écrivez des règles pour classer automatiquement vos articles'
@@ -287,6 +289,7 @@ quickstart:
         import: "Configurer l'import"
     first_steps:
         title: 'Premiers pas'
+        description: "Maintenant que wallabag est bien configuré, il est temps d'archiver le web. Vous pouvez cliquer sur le signe + dans le coin en haut à droite."
         new_article: 'Ajoutez votre premier article'
         unread_articles: 'Et rangez-le !'
     migrate:
@@ -296,11 +299,15 @@ quickstart:
         wallabag_v1: 'Migrer depuis wallabag v1'
         wallabag_v2: 'Migrer depuis wallabag v2'
         readability: 'Migrer depuis Readability'
+        instapaper: 'Migrer depuis Instapaper'
     developer:
         title: 'Pour les développeurs'
+        description: 'Nous avons aussi pensé aux développeurs : Docker, API, traductions, etc.'
         create_application: 'Créer votre application tierce'
+        use_docker: 'Utiliser Docker pour installer wallabag'
     docs:
         title: 'Documentation complète'
+        description: "Il y a tellement de fonctionnalités dans wallabag. N'hésitez pas à lire le manuel pour les connaitre et apprendre comment les utiliser."
         annotate: 'Annoter votre article'
         export: 'Convertissez vos articles en ePub ou en PDF'
         search_filters: "Apprenez à utiliser le moteur de recherche et les filtres pour retrouver l'article qui vous intéresse"

@@ -268,6 +268,7 @@ howto:
 
 quickstart:
     page_title: 'Quickstart'
+    # more: 'More…'
     intro:
         title: 'به wallabag خوش آمدید!!'
         paragraph_1: "به شما کمک خواهیم کرد تا wallabag را بشناسید و با برخی از ویژگی‌های جالبش آشنا شوید"
@@ -287,6 +288,7 @@ quickstart:
         import: 'درون‌ریزی را تنظیم کنید'
     first_steps:
         title: 'گام نخست'
+        # description: "Now wallabag is well configured, it's time to archive the web. You can click on the top right sign + to add a link."
         new_article: 'نخستین مقالهٔ خود را ذخیره کنید'
         unread_articles: 'و آن را طبقه‌بندی کنید!'
     migrate:
@@ -296,11 +298,15 @@ quickstart:
         wallabag_v1: 'مهاجرت از نسخهٔ یکم wallabag'
         wallabag_v2: 'مهاجرت از نسخهٔ دوم wallabag'
         readability: 'مهاجرت از نسخهٔ دوم Readability'
+        instapaper: 'مهاجرت از نسخهٔ دوم Instapaper'
     developer:
         title: 'برنامه‌نویسان'
+        # description: 'We also thought to the developers: Docker, API, translations, etc.'
         create_application: 'برنامهٔ wallabag خود را بسازید'
+        # use_docker: 'Use Docker to install wallabag'
     docs:
         title: 'راهنمای کامل'
+        # description: "There are so much features in wallabag. Don't hesitate to read the manual to know them and to learn how to use them."
         annotate: 'روی مقاله‌هایتان یادداشت بگذارید'
         export: 'مقاله‌هایتان را به قالب ePUB یا PDF دربیاورید'
         search_filters: 'به کمک موتور جستجو و فیلترها به دنبال مقاله‌هایتان بگردید'

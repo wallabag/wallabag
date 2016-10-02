@@ -29,7 +29,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
-        $this->assertContains('quickstart.intro.paragraph_1', $body[0]);
+        $this->assertContains('quickstart.intro.title', $body[0]);
 
         // Test if quickstart is disabled when user has 1 entry
         $crawler = $client->request('GET', '/new');
