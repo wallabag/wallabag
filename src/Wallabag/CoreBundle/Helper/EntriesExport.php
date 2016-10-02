@@ -53,10 +53,6 @@ class EntriesExport
 
         $this->entries = $entries;
 
-        foreach ($entries as $entry) {
-            $this->tags[] = $entry->getTags();
-        }
-
         return $this;
     }
 
@@ -159,8 +155,8 @@ class EntriesExport
 
         // set tags as subjects
         foreach ($this->entries as $entry) {
-            foreach ($this->tags as $tag) {
-                $book->setSubject($tag['value']);
+            foreach ($entry->getTags() as $tag) {
+                $book->setSubject($tag->getLabel());
             }
 
             // the reader in Kobo Devices doesn't likes special caracters
@@ -265,8 +261,8 @@ class EntriesExport
          * Adding actual entries
          */
         foreach ($this->entries as $entry) {
-            foreach ($this->tags as $tag) {
-                $pdf->SetKeywords($tag['value']);
+            foreach ($entry->getTags() as $tag) {
+                $pdf->SetKeywords($tag->getLabel());
             }
 
             $pdf->AddPage();

@@ -196,8 +196,6 @@ class Entry
      *      @ORM\JoinColumn(name="tag_id", referencedColumnName="id")
      *  }
      * )
-     *
-     * @Groups({"entries_for_user", "export_all"})
      */
     private $tags;
 
@@ -539,6 +537,21 @@ class Entry
     public function getTags()
     {
         return $this->tags;
+    }
+
+    /**
+     * @VirtualProperty
+     * @SerializedName("tags")
+     * @Groups({"entries_for_user", "export_all"})
+     */
+    public function getSerializedTags()
+    {
+        $data = [];
+        foreach ($this->tags as $tag) {
+            $data[] = $tag->getLabel();
+        }
+
+        return $data;
     }
 
     /**
