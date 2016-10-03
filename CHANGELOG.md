@@ -2,6 +2,59 @@
 
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.1.0] - 2016-10-03
+
+### Added
+
+- [#1990](https://github.com/wallabag/wallabag/pull/1990) Added command line import for wallabag files (Nicolas Lœuillet)
+- [#2142](https://github.com/wallabag/wallabag/pull/2142) Manage assets through npm (Thomas Citharel)
+- [#2174](https://github.com/wallabag/wallabag/pull/2174) Added filter for tags on API (Thomas Citharel)
+- [#2176](https://github.com/wallabag/wallabag/pull/2176) Added `since` parameter in API (Thomas Citharel)
+- [#2170](https://github.com/wallabag/wallabag/pull/2170), [#2183](https://github.com/wallabag/wallabag/pull/2183) Added tags on entries view (Thomas Citharel)
+- [#2186](https://github.com/wallabag/wallabag/pull/2186) Added option to disable registration (Thomas Citharel)
+- [#1904](https://github.com/wallabag/wallabag/pull/1904) Share entry with a public URL (Nicolas Lœuillet)
+- [#2243](https://github.com/wallabag/wallabag/pull/2243) Added list of untagged articles (Nicolas Lœuillet)
+- [#2255](https://github.com/wallabag/wallabag/pull/2255) Added Readability import (Jeremy Benoist)
+- [#2002](https://github.com/wallabag/wallabag/pull/2002) Added articles counter in sidebar (Nicolas Lœuillet)
+- [#2275](https://github.com/wallabag/wallabag/pull/2275) Added date from entries in export (Jeremy Benoist)
+- [#2266](https://github.com/wallabag/wallabag/pull/2266) Added tags counter in sidebar (Nicolas Lœuillet)
+- [#1941](https://github.com/wallabag/wallabag/pull/1941) Added asynchronous import (Jeremy Benoist, Nicolas Lœuillet)
+- [#2192](https://github.com/wallabag/wallabag/pull/2192) Added Firefox / Chrome bookmarks import (Thomas Citharel)
+- [#2310](https://github.com/wallabag/wallabag/pull/2310) Added Instapaper import (Jeremy Benoist)
+- [#2322](https://github.com/wallabag/wallabag/pull/2322) Added customized errors templates (Jeremy Benoist)
+- [#2323](https://github.com/wallabag/wallabag/pull/2323) Added simple stats in footer (Jeremy Benoist)
+- [#2324](https://github.com/wallabag/wallabag/pull/2324) Added ability to edit a tagging rule (Jeremy Benoist)
+- [#2325](https://github.com/wallabag/wallabag/pull/2325) Added an `exists` endpoint in API (Jeremy Benoist)
+
+### Changed
+
+- [#2170](https://github.com/wallabag/wallabag/pull/2170) Entry titles are now smaller on entry view (Thomas Citharel)
+- [#2245](https://github.com/wallabag/wallabag/pull/2245) Changed where page title is displayed (Nicolas Lœuillet)
+- [#2274](https://github.com/wallabag/wallabag/pull/2274) Re use JsonResponse in API (Jeremy Benoist)
+- [#2257](https://github.com/wallabag/wallabag/pull/2257) Use created date for imported content (Jeremy Benoist)
+- [#2326](https://github.com/wallabag/wallabag/pull/2326) Quickstart layout (Nicolas Lœuillet)
+
+### Fixed 
+
+- [#2328](https://github.com/wallabag/wallabag/pull/2328) Fixed duplicate URL with accents (Jeremy Benoist)
+- [#2319](https://github.com/wallabag/wallabag/pull/2319) Fixed `gd` extension missing in Dockerfile (Pascal Martin)
+- [#2313](https://github.com/wallabag/wallabag/pull/2313) Fixed long loading on Firefox (Nicolas Lœuillet)
+- [#2320](https://github.com/wallabag/wallabag/pull/2320) Fixed user config which wasn't created in some cases (Jeremy Benoist)
+- [#2301](https://github.com/wallabag/wallabag/pull/2301) Fixed feeds not syncing on android application (Thomas Citharel)
+- [#2308](https://github.com/wallabag/wallabag/pull/2308) Fixed duplicate tags on import (Jeremy Benoist)
+- [#2297](https://github.com/wallabag/wallabag/pull/2297) Fixed epub export with special characters in title (morhelluin)
+- [#2292](https://github.com/wallabag/wallabag/pull/2292) Fixed label for mark as read link in entry view (Nicolas Lœuillet)
+- [#2260](https://github.com/wallabag/wallabag/pull/2260) Fixed different font-size for labels in config screen (Nicolas Lœuillet)
+- [#2242](https://github.com/wallabag/wallabag/pull/2242) Fixed print / article views (Nicolas Lœuillet)
+- [#2328](https://github.com/wallabag/wallabag/pull/2328) Avoid duplicate url with accents (Jeremy Benoist)
+- [#2330](https://github.com/wallabag/wallabag/pull/2330) Remove error message when creating ePub versions (Paulino Michelazzo)
+- [#2331](https://github.com/wallabag/wallabag/pull/2331) Fix parameters in API links (Jeremy Benoist)
+
+### Removed
+
+- [#2318](https://github.com/wallabag/wallabag/pull/2318) Removed duplicated templates files (Nicolas Lœuillet)
+- [#2287](https://github.com/wallabag/wallabag/pull/2287) Useless area in footer for material theme (Nicolas Lœuillet)
+
 ## [2.0.8] - 2016-09-07
 
 ### Added

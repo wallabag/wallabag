@@ -52,7 +52,7 @@ Pour installer wallabag, vous devez exécuter ces commandes :
     git clone https://github.com/wallabag/wallabag.git
     cd wallabag
     git checkout 2.1.0
-    ./install.sh
+    ASSETS=build ./install.sh
 
 Pour démarrer le serveur interne à php et vérifier que tout s'est installé correctement, vous pouvez exécuter :
 
