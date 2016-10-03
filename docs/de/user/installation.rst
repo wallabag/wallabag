@@ -56,6 +56,7 @@ Um wallabag selbst zu installieren, musst du die folgenden Kommandos ausführen:
     cd wallabag
     git checkout 2.1.0
     ASSETS=build ./install.sh
+    php bin/console wallabag:install --env=prod
 
 Um PHPs eingebauten Server zu starten und zu testen, ob alles korrekt installiert wurde, kannst du folgendes Kommando ausführen:
 

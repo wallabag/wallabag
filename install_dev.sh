@@ -1,13 +1,14 @@
 #! /usr/bin/env bash
 
-echo "Installing PHP dependencies (including dev) through Composer..."
-composer install
+echo " > Installing PHP dependencies (including dev) through Composer..."
+composer install -o  --no-interaction --no-progress --prefer-dist
 
-echo "Downloading librairies through npm..."
-npm install
+if [[ $ASSETS == 'build' || $TRAVIS_BUILD_DIR == '' ]]; then
+    echo " > Downloading librairies through npm..."
+    npm install
 
-echo "Concat, minify and installing assets..."
-grunt
+    echo " > Concat, minify and installing assets..."
+    grunt
+fi
 
-echo "Installing wallabag..."
-php bin/console wallabag:install
+echo " > Install finished"
