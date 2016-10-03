@@ -11,6 +11,7 @@ The last release is published on https://www.wallabag.org/pages/download-wallaba
 
 ::
 
+    rm -rf var/cache/*
     git fetch origin
     git fetch --tags
     git checkout 2.1.0
