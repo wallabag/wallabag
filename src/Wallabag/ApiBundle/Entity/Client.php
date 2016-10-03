@@ -25,6 +25,11 @@ class Client extends BaseClient
      */
     protected $name;
 
+    /**
+     * @ORM\OneToMany(targetEntity="RefreshToken", mappedBy="client", cascade={"remove"})
+     */
+    protected $refreshTokens;
+
     public function __construct()
     {
         parent::__construct();
