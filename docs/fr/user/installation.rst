@@ -22,6 +22,7 @@ Vous aurez besoin des extensions suivantes pour que wallabag fonctionne. Il est 
 - php-curl
 - php-gettext
 - php-tokenizer
+- php-bcmath
 
 wallabag utilise PDO afin de se connecter à une base de données, donc vous aurez besoin d'une extension et d'un système de bases de données parmi :
 
