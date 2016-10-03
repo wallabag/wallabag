@@ -17,7 +17,7 @@ Then you can install wallabag by executing the following commands:
     git clone https://github.com/wallabag/wallabag.git
     cd wallabag
     git checkout 2.1.0
-    ./install.sh
+    ASSETS=build ./install.sh
     php bin/console server:run --env=prod
 ```
 
