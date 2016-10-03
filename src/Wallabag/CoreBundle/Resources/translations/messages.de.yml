@@ -302,7 +302,7 @@ quickstart:
         use_docker: 'Nutze Docker, um wallabag zu installieren'
     docs:
         title: 'Komplette Dokumentation'
-        description: "Es gibt so viele Features in wallabag. Scheue dich nicht die Anleitung zu lesen, um die Features kennenzulernen und zu lernen, wie sie genutzt werden."
+        description: "Es gibt so viele Features in wallabag. Zögere nicht, die Features im Handbuch zu erkunden und zu lernen, wie sie funktionieren."
         annotate: 'Anmerkungen zu Artikeln hinzufügen'
         export: 'Artikel nach ePUB oder PDF konvertieren'
         search_filters: 'Schau nach, wie du nach einem Artikel über die Such- und Filterfunktion suchen kannst'
