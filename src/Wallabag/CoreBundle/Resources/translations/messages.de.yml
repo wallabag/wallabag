@@ -352,7 +352,7 @@ import:
         description: 'Dieser Import wird all deine Artikel aus Readability importieren. Auf der Tools Seite (https://www.readability.com/tools/) klickst du auf "Exportiere deine Daten" in dem Abschnitt "Datenexport". Du wirst eine E-Mail mit einem Downloadlink zu einer json Datei, die aber nicht auf .json endet, erhalten'
         how_to: 'Bitte wähle deinen Readability Export aus und klicke den unteren Button für das Hochladen und Importieren dessen.'
     worker:
-      enabled: "Der Import erfolgt asynchron. Sobald der Import gestartet ist, wird diese Aufgabe extern abgearbeitet. Der aktuelle Service dafür ist:"
+        enabled: "Der Import erfolgt asynchron. Sobald der Import gestartet ist, wird diese Aufgabe extern abgearbeitet. Der aktuelle Service dafür ist:"
     firefox:
         page_title: 'Aus Firefox importieren'
         description: "Dieser Import wird all deine Firefox Lesezeichen importieren. Gehe zu deinen Lesezeichen (Strg+Shift+O), dann auf \"Importen und Sichern\", wähle \"Sichern…\". Du erhälst eine .json Datei."
