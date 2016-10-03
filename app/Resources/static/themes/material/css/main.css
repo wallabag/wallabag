@@ -62,8 +62,8 @@
   font-feature-settings: 'liga';
 }
 
-[class^="icon-"],
-[class*=" icon-"] {
+[class^="icon-"]::before,
+[class*=" icon-"]::before {
   font-family: icomoon;
   speak: none;
   font-style: normal;
@@ -72,10 +72,58 @@
   text-transform: none;
   line-height: 1;
 
+  /* Enable Ligatures ================ */
+  letter-spacing: 0;
+  -webkit-font-feature-settings: "liga";
+  -moz-font-feature-settings: "liga=1";
+  -moz-font-feature-settings: "liga";
+  -ms-font-feature-settings: "liga" 1;
+  -o-font-feature-settings: "liga";
+  font-feature-settings: "liga";
+
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.icon-image {
+  background-size: 16px 16px;
+  background: no-repeat center;
+  padding-right: 1em !important;
+  padding-left: 1em !important;
+}
+
+.icon-eye::before {
+  content: "\e9ce";
+}
+
+.icon-no-eye::before {
+  content: "\e9d1";
+}
+
+.icon-calendar::before {
+  content: "\e953";
+}
+
+.icon-time::before {
+  content: "\e952";
+}
+
+/* Carrot (http://carrot.org) */
+.icon-image--carrot {
+  background-image: url("../../_global/img/icons/carrot-icon--black.png");
+}
+
+/* Diaspora */
+.icon-image--diaspora {
+  background-image: url("../../_global/img/icons/diaspora-icon--black.png");
+}
+
+/* Shaarli */
+.icon-image--shaarli {
+  background-image: url("../../_global/img/icons/shaarli.png");
+}
+
 
 body {
   display: flex;
@@ -643,7 +691,7 @@ main ul.row {
 }
 
 .icon-twitter::before {
-  content: "\ea91";
+  content: "\ea96";
 }
 
 .icon-apple::before {

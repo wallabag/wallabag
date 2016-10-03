@@ -3,8 +3,9 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
     appDir: 'app/Resources/static',
-    buildDir: 'web/bundles/wallabagcore',
+    buildDir: 'app/Resources/build',
     modulesDir: 'node_modules',
+    releaseDir: 'web/bundles/wallabagcore',
 
     postcss: {
       material: {
@@ -20,7 +21,7 @@ module.exports = function (grunt) {
           ],
         },
         src: '<%= buildDir %>/material.css',
-        dest: '<%= buildDir %>/themes/material/css/style.min.css',
+        dest: '<%= releaseDir %>/themes/material/css/style.min.css',
       },
       baggy: {
         options: {
@@ -35,7 +36,7 @@ module.exports = function (grunt) {
           ],
         },
         src: '<%= buildDir %>/baggy.css',
-        dest: '<%= buildDir %>/themes/baggy/css/style.min.css',
+        dest: '<%= releaseDir %>/themes/baggy/css/style.min.css',
       },
     },
     concat: {
@@ -92,7 +93,7 @@ module.exports = function (grunt) {
     uglify: {
       material: {
         files: {
-          '<%= buildDir %>/themes/material/js/material.min.js':
+          '<%= releaseDir %>/themes/material/js/material.min.js':
             ['<%= buildDir %>/material.browser.js'],
         },
         options: {
@@ -101,7 +102,7 @@ module.exports = function (grunt) {
       },
       baggy: {
         files: {
-          '<%= buildDir %>/themes/baggy/js/baggy.min.js':
+          '<%= releaseDir %>/themes/baggy/js/baggy.min.js':
             ['<%= buildDir %>/baggy.browser.js'],
         },
         options: {
@@ -131,21 +132,21 @@ module.exports = function (grunt) {
             overwrite: true,
             cwd: '<%= modulesDir %>/icomoon-free-npm/Font',
             src: 'IcoMoon-Free.ttf',
-            dest: '<%= buildDir %>/themes/baggy/fonts/',
+            dest: '<%= releaseDir %>/themes/baggy/fonts/',
           },
           {
             expand: true,
             overwrite: true,
             cwd: '<%= modulesDir %>/ptsans-npm-webfont/fonts',
-            src: '*',
-            dest: '<%= buildDir %>/themes/baggy/fonts/',
+            src: 'ptsansbold.woff',
+            dest: '<%= releaseDir %>/themes/baggy/fonts/',
           },
           {
             expand: true,
             overwrite: true,
             cwd: '<%= modulesDir %>/material-design-icons-iconfont/dist/fonts/',
-            src: '*',
-            dest: '<%= buildDir %>/themes/baggy/fonts/',
+            src: ['MaterialIcons-Regular.eot', 'MaterialIcons-Regular.woff2', 'MaterialIcons-Regular.woff', 'MaterialIcons-Regular.ttf'],
+            dest: '<%= releaseDir %>/themes/baggy/fonts/',
           },
         ],
       },
@@ -156,28 +157,21 @@ module.exports = function (grunt) {
             overwrite: true,
             cwd: '<%= modulesDir %>/icomoon-free-npm/Font',
             src: 'IcoMoon-Free.ttf',
-            dest: '<%= buildDir %>/themes/material/fonts',
-          },
-          {
-            expand: true,
-            overwrite: true,
-            cwd: '<%= modulesDir %>/materialize-css/',
-            src: 'font',
-            dest: '<%= buildDir %>/themes/material',
+            dest: '<%= releaseDir %>/themes/material/fonts',
           },
           {
             expand: true,
             overwrite: true,
             cwd: '<%= modulesDir %>/roboto-fontface/fonts/Roboto',
             src: '*',
-            dest: '<%= buildDir %>/themes/material/fonts/',
+            dest: '<%= releaseDir %>/themes/material/font/roboto',
           },
           {
             expand: true,
             overwrite: true,
             cwd: '<%= modulesDir %>/material-design-icons-iconfont/dist/fonts/',
-            src: '*',
-            dest: '<%= buildDir %>/themes/material/fonts/',
+            src: ['MaterialIcons-Regular.eot', 'MaterialIcons-Regular.woff2', 'MaterialIcons-Regular.woff', 'MaterialIcons-Regular.ttf'],
+            dest: '<%= releaseDir %>/themes/material/fonts/',
           },
         ],
       },
@@ -188,7 +182,7 @@ module.exports = function (grunt) {
             overwrite: true,
             cwd: '<%= appDir %>/themes/_global/',
             src: 'img',
-            dest: '<%= buildDir %>/themes/_global/',
+            dest: '<%= releaseDir %>/themes/_global/',
           },
         ],
       },
@@ -203,6 +197,9 @@ module.exports = function (grunt) {
       all: {
         src: ['./<%= buildDir %>'],
       },
+      release: {
+        src: ['./<%= releaseDir %>/*'],
+      }
     },
   });
 

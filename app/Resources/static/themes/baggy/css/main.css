@@ -796,6 +796,15 @@ a.add-to-wallabag-link-after::after {
   text-transform: none;
   line-height: 1;
 
+  /* Enable Ligatures ================ */
+  letter-spacing: 0;
+  -webkit-font-feature-settings: "liga";
+  -moz-font-feature-settings: "liga=1";
+  -moz-font-feature-settings: "liga";
+  -ms-font-feature-settings: "liga" 1;
+  -o-font-feature-settings: "liga";
+  font-feature-settings: "liga";
+
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -838,7 +847,7 @@ a.add-to-wallabag-link-after::after {
 }
 
 .icon-twitter::before {
-  content: "\ea91";
+  content: "\ea96";
 }
 
 .icon-down-open::before {
@@ -877,13 +886,28 @@ a.add-to-wallabag-link-after::after {
   content: "\e936";
 }
 
+.icon-eye::before {
+  content: "\e9ce";
+}
+
+.icon-no-eye::before {
+  content: "\e9d1";
+}
+
+.icon-calendar::before {
+  content: "\e953";
+}
+
+.icon-time::before {
+  content: "\e952";
+}
+
 /* .icon-image class, for image-based icons
   ========================================================================== */
 
 .icon-image {
   background-size: 16px 16px;
-  background-repeat: no-repeat;
-  background-position: center;
+  background: no-repeat center;
   padding-right: 1em !important;
   padding-left: 1em !important;
 }
@@ -896,6 +920,11 @@ a.add-to-wallabag-link-after::after {
 /* Diaspora */
 .icon-image--diaspora {
   background-image: url("../../_global/img/icons/diaspora-icon--black.png");
+}
+
+/* Diaspora */
+.icon-image--shaarli {
+  background-image: url("../../_global/img/icons/shaarli.png");
 }
 
 /* ==========================================================================
