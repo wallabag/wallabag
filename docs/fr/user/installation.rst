@@ -81,7 +81,7 @@ Exécutez cette commande pour télécharger et décompresser l'archive :
 
     wget http://wllbg.org/latest-v2-package && tar xvf latest-v2-package
 
-(hash md5 de l'archive : ``4f84c725d1d6e3345eae0a406115e5ff``)
+(hash md5 de l'archive 2.1.0 : ``6c33520e29cc754b687f9cee0398dede``)
 
 Maintenant, lisez la documentation ci-dessous pour crééer un virtual host. Accédez ensuite à votre installation de wallabag.
 Si vous avez changé la configuration pour modifier le type de stockage (MySQL ou PostgreSQL), vous devrez vous créer un utilisateur via la commande ``php bin/console wallabag:install --env=prod``.

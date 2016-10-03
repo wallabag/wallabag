@@ -29,7 +29,7 @@ Download the last release of wallabag:
 
     wget http://wllbg.org/latest-v2-package && tar xvf latest-v2-package
 
-(md5 hash of the package: ``4f84c725d1d6e3345eae0a406115e5ff``)
+(md5 hash of the 2.1.0 package: ``6c33520e29cc754b687f9cee0398dede``)
 
 Extract the archive in your wallabag folder and replace ``app/config/parameters.yml`` with yours.
 
