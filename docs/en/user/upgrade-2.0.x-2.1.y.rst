@@ -7,14 +7,14 @@ Before this migration, if you configured the Pocket import by adding your consum
 Upgrade on a dedicated web server
 ---------------------------------
 
-The last release is published on https://www.wallabag.org/pages/download-wallabag.html. In order to upgrade your wallabag installation and get the last version, run the following commands in you wallabag folder (replace ``2.1.0`` by the last release number):
+The last release is published on https://www.wallabag.org/pages/download-wallabag.html. In order to upgrade your wallabag installation and get the last version, run the following commands in you wallabag folder (replace ``2.1.1`` by the last release number):
 
 ::
 
     rm -rf var/cache/*
     git fetch origin
     git fetch --tags
-    git checkout 2.1.0
+    git checkout 2.1.1 --force
     SYMFONY_ENV=prod composer install --no-dev -o --prefer-dist
     php bin/console doctrine:migrations:migrate --env=prod
     php bin/console cache:clear --env=prod

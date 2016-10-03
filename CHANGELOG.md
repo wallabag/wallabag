@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.1.1] - 2016-10-03
+
+### Changed
+
+- [#2340](https://github.com/wallabag/wallabag/pull/2340) Updated german translation (Strubbl)
+- [#2341](https://github.com/wallabag/wallabag/pull/2341) Updated polish translation (Mateusz Rumiński)
+
+### Fixed
+
+- [#2338](https://github.com/wallabag/wallabag/pull/2338) Fixed 2.1 installation (Jeremy Benoist)
+- [#2345](https://github.com/wallabag/wallabag/issues/2345) Fixed 2.0.x update (Jeremy Benoist)
+
 ## [2.1.0] - 2016-10-03
 
 ### Added

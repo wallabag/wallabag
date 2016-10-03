@@ -7,14 +7,14 @@ Avant cette migration, si vous aviez configuré l'import depuis Pocket en ajouta
 Mise à jour sur un serveur dédié
 --------------------------------
 
-La dernière version de wallabag est publiée à cette adresse : https://www.wallabag.org/pages/download-wallabag.html. Pour mettre à jour votre installation de wallabag, exécutez les commandes suivantes dans votre répertoire d'installation (remplacez ``2.1.0`` par le numéro de la dernière version) :
+La dernière version de wallabag est publiée à cette adresse : https://www.wallabag.org/pages/download-wallabag.html. Pour mettre à jour votre installation de wallabag, exécutez les commandes suivantes dans votre répertoire d'installation (remplacez ``2.1.1`` par le numéro de la dernière version) :
 
 ::
 
     rm -rf var/cache/*
     git fetch origin
     git fetch --tags
-    git checkout 2.1.0
+    git checkout 2.1.1 --force
     SYMFONY_ENV=prod composer install --no-dev -o --prefer-dist
     php bin/console doctrine:migrations:migrate --env=prod
     php bin/console cache:clear --env=prod

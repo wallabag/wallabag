@@ -52,7 +52,7 @@ Pour installer wallabag, vous devez exécuter ces commandes :
 
     git clone https://github.com/wallabag/wallabag.git
     cd wallabag
-    git checkout 2.1.0
+    git checkout 2.1.1 --force
     SYMFONY_ENV=prod composer install --no-dev -o --prefer-dist
     php bin/console wallabag:install --env=prod
 
