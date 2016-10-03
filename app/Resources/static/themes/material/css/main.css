@@ -408,12 +408,16 @@ main ul.row {
 }
 
 .card .card-action a {
-  color: #fff !important;
+  color: #fff;
   margin: 0;
 }
 
 .card .card-action a:hover {
-  color: #fff !important;
+  color: #fff;
+}
+
+.quickstart .card .card-action a, .quickstart .card .card-action a:hover {
+    color: #fff !important;
 }
 
 .settings .div_tabs {
