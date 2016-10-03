@@ -5,11 +5,8 @@ if [[ $ASSETS == 'build' ]]; then
     composer install --no-interaction --no-progress --prefer-dist -o
 
     chmod ugo+x vendor/mouf/nodejs-installer/bin/local/npm
-    echo "Downloading javascript librairies through npm..."
+    echo "Downloading librairies through npm..."
     vendor/mouf/nodejs-installer/bin/local/npm install
-
-    echo "Downloading fonts librairies through bower..."
-    node_modules/bower/bin/bower install
 
     echo "Concat, minify and installing assets..."
     node_modules/grunt/bin/grunt

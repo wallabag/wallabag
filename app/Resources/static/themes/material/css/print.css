@@ -28,10 +28,10 @@
   .messages,
   .entry + .results,
   #slide-out,
-  .progress, .hide-on-large-only,
+  .progress,
+  .hide-on-large-only,
   #article > aside,
-  #article .mbm a
-  {
+  #article .mbm a {
     display: none !important;
   }
 

@@ -1,29 +1,10 @@
-var $ = require('jquery');
-require('materialize');
-var annotator = require('annotator');
+const $ = require('jquery');
+global.jQuery = $;
+require('materialize'); // eslint-disable-line
+const annotator = require('annotator');
+import { savePercent, retrievePercent, initFilters, initExport } from '../../_global/js/tools.js';
 
-function initFilters() {
-  // no display if filters not aviable
-  if ($('div').is('#filters')) {
-    $('#button_filters').show();
-    $('.button-collapse-right').sideNav({ edge: 'right' });
-    $('#clear_form_filters').on('click', function () {
-      $('#filters input').val('');
-      $('#filters :checked').removeAttr('checked');
-      return false;
-    });
-  }
-}
-
-function initExport() {
-  // no display if export not aviable
-  if ($('div').is('#export')) {
-    $('#button_export').show();
-    $('.button-collapse-right').sideNav({ edge: 'right' });
-  }
-}
-
-$(document).ready(function () {
+$(document).ready(() => {
   // sideNav
   $('.button-collapse').sideNav();
   $('select').material_select();
@@ -40,13 +21,13 @@ $(document).ready(function () {
   initFilters();
   initExport();
 
-  $('#nav-btn-add-tag').on('click', function () {
+  $('#nav-btn-add-tag').on('click', () => {
     $('.nav-panel-add-tag').toggle(100);
     $('.nav-panel-menu').addClass('hidden');
     $('#tag_label').focus();
     return false;
   });
-  $('#nav-btn-add').on('click', function () {
+  $('#nav-btn-add').on('click', () => {
     $('.nav-panel-buttom').hide(100);
     $('.nav-panel-add').show(100);
     $('.nav-panels .action').hide(100);
@@ -55,7 +36,7 @@ $(document).ready(function () {
     $('#entry_url').focus();
     return false;
   });
-  $('#nav-btn-search').on('click', function () {
+  $('#nav-btn-search').on('click', () => {
     $('.nav-panel-buttom').hide(100);
     $('.nav-panel-search').show(100);
     $('.nav-panels .action').hide(100);
@@ -64,7 +45,7 @@ $(document).ready(function () {
     $('#searchfield').focus();
     return false;
   });
-  $('.close').on('click', function () {
+  $('.close').on('click', () => {
     $('.nav-panel-add').hide(100);
     $('.nav-panel-search').hide(100);
     $('.nav-panel-buttom').show(100);
@@ -73,12 +54,12 @@ $(document).ready(function () {
     $('.nav-panels').css('background', 'transparent');
     return false;
   });
-  $(window).scroll(function () {
-    var s = $(window).scrollTop();
-    var d = $(document).height();
-    var c = $(window).height();
-    var scrollPercent = (s / (d - c)) * 100;
-    $('.progress .determinate').css('width', scrollPercent + '%');
+  $(window).scroll(() => {
+    const s = $(window).scrollTop();
+    const d = $(document).height();
+    const c = $(window).height();
+    const scrollPercent = (s / (d - c)) * 100;
+    $('.progress .determinate').css('width', `${scrollPercent}%`);
   });
 
 /* ==========================================================================
@@ -86,9 +67,8 @@ $(document).ready(function () {
    ========================================================================== */
 
   if ($('article').length) {
-    var app = new annotator.App();
-    var x = JSON.parse($('#annotationroutes').html());
-
+    const app = new annotator.App();
+    const x = JSON.parse($('#annotationroutes').html());
 
     app.include(annotator.ui.main, {
       element: document.querySelector('article'),
@@ -96,21 +76,21 @@ $(document).ready(function () {
 
     app.include(annotator.storage.http, x);
 
-    app.start().then(function () {
+    app.start().then(() => {
       app.annotations.load({ entry: x.entryId });
     });
 
-    $(window).scroll(function (e) {
-      var scrollTop = $(window).scrollTop();
-      var docHeight = $(document).height();
-      var scrollPercent = (scrollTop) / (docHeight);
-      var scrollPercentRounded = Math.round(scrollPercent * 100) / 100;
+    $(window).scroll(() => {
+      const scrollTop = $(window).scrollTop();
+      const docHeight = $(document).height();
+      const scrollPercent = (scrollTop) / (docHeight);
+      const scrollPercentRounded = Math.round(scrollPercent * 100) / 100;
       savePercent(x.entryId, scrollPercentRounded);
     });
 
     retrievePercent(x.entryId);
 
-    $(window).resize(function () {
+    $(window).resize(() => {
       retrievePercent(x.entryId);
     });
   }

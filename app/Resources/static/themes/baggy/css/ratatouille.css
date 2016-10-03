@@ -63,7 +63,9 @@ pre {
   max-width: 61.25em; /* 980px */
 }
 
-table, img, figure {
+table,
+img,
+figure {
   max-width: 100%;
   height: auto;
 }

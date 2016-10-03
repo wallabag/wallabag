@@ -82,22 +82,4 @@
         "entryId": "{{ entry.id }}"
     }
     </script>
-    <script src="{{ asset('bundles/wallabagcore/themes/_global/js/restoreScroll.js')}}"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $(window).scroll(function(e){
-                var scrollTop = $(window).scrollTop();
-                var docHeight = $(document).height();
-                var scrollPercent = (scrollTop) / (docHeight);
-                var scrollPercentRounded = Math.round(scrollPercent*100)/100;
-                savePercent({{ entry.id }}, scrollPercentRounded);
-            });
-
-            retrievePercent({{ entry.id }});
-
-            $(window).resize(function(){
-                retrievePercent({{ entry.id }});
-            });
-        });
-    </script>
 {% endblock %}
