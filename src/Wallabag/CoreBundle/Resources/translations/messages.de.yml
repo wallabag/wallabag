@@ -31,7 +31,7 @@ menu:
         search: 'Suche'
         save_link: 'Link speichern'
         back_to_unread: 'Zurück zu ungelesenen Artikeln'
-        # users_management: 'Users management'
+        users_management: 'Benutzerverwaltung'
     top:
         add_new_entry: 'Neuen Artikel hinzufügen'
         search: 'Suche'
@@ -46,7 +46,7 @@ footer:
         social: 'Soziales'
         powered_by: 'angetrieben von'
         about: 'Über'
-    # stats: Since %user_creation% you read %nb_archives% articles. That is about %per_day% a day!
+    stats: Seit %user_creation% hast du %nb_archives% Artikel gelesen. Das sind ungefähr %per_day% pro Tag!
 
 config:
     page_title: 'Einstellungen'
@@ -96,7 +96,7 @@ config:
         if_label: 'Wenn'
         then_tag_as_label: 'dann tagge als'
         delete_rule_label: 'löschen'
-        # edit_rule_label: 'edit'
+        edit_rule_label: 'bearbeiten'
         rule_label: 'Regel'
         tags_label: 'Tags'
         faq:
@@ -137,14 +137,14 @@ entry:
         starred: 'Favorisierte Einträge'
         archived: 'Archivierte Einträge'
         filtered: 'Gefilterte Einträge'
-        # filtered_tags: 'Filtered by tags'
-        # untagged: 'Untagged entries'
+        filtered_tags: 'Gefiltert nach Tags'
+        untagged: 'Nicht getaggte Einträge'
     list:
         number_on_the_page: '{0} Es gibt keine Einträge.|{1} Es gibt einen Eintrag.|]1,Inf[ Es gibt %count% Einträge.'
         reading_time: 'geschätzte Lesezeit'
         reading_time_minutes: 'geschätzte Lesezeit: %readingTime% min'
         reading_time_less_one_minute: 'geschätzte Lesezeit: <small class="inferieur">&lt;</small> 1 min'
-        # number_of_tags: '{1}and one other tag|]1,Inf[and %count% other tags'
+        number_of_tags: '{1}und ein anderer Tag|]1,Inf[und %count% andere Tags'
         reading_time_minutes_short: '%readingTime% min'
         reading_time_less_one_minute_short: '<small class="inferieur">&lt;</small> 1 min'
         original_article: 'original'
@@ -186,8 +186,8 @@ entry:
             add_a_tag: 'Tag hinzufügen'
             share_content: 'Teilen'
             share_email_label: 'E-Mail'
-            # public_link: 'public link'
-            # delete_public_link: 'delete public link'
+            public_link: 'Öffentlicher Link'
+            delete_public_link: 'Lösche öffentlichen Link'
             download: 'Herunterladen'
             print: 'Drucken'
             problem:
@@ -263,14 +263,14 @@ howto:
 
 quickstart:
     page_title: 'Schnelleinstieg'
-    # more: 'More…'
+    more: 'Mehr…'
     intro:
         title: 'Willkommen zu wallabag!'
         paragraph_1: "Wir werden dich bei der Benutzung von wallabag begleiten und dir einige Funktionen zeigen, die dich interessieren könnten."
         paragraph_2: 'Folge uns!'
     configure:
         title: 'Anwendung konfigurieren'
-        # description: 'In order to have an application which suits you, have a look into the configuration of wallabag.'
+        description: 'Um die Applikation für dich anzupassen, schau in die Konfiguration von wallabag.'
         language: 'Sprache und Design ändern'
         rss: 'RSS-Feeds aktivieren'
         tagging_rules: 'Schreibe Regeln, um deine Beiträge automatisch zu taggen (verschlagworten)'
@@ -284,7 +284,7 @@ quickstart:
         import: 'Import-Einstellungen ändern'
     first_steps:
         title: 'Erste Schritte'
-        # description: "Now wallabag is well configured, it's time to archive the web. You can click on the top right sign + to add a link"
+        description: "Jetzt ist wallabag gut konfiguriert, es ist Zeit das Web zu archivieren. Du kannst auf das Plussymbol + oben rechts klicken, um einen Link hinzuzufügen"
         new_article: 'Speichere deinen ersten Artikel'
         unread_articles: 'Und klassifiziere ihn!'
     migrate:
@@ -297,12 +297,12 @@ quickstart:
         instapaper: 'von Instapaper migrieren'
     developer:
         title: 'Entwickler'
-        # description: 'We also thought to the developers: Docker, API, translations, etc.'
+        description: 'Wir haben auch an die Entwickler gedacht: Docker, API, Übersetzungen, etc.'
         create_application: 'Erstelle eine Anwendung und nutze die wallabag API'
-        # use_docker: 'Use Docker to install wallabag'
+        use_docker: 'Nutze Docker, um wallabag zu installieren'
     docs:
         title: 'Komplette Dokumentation'
-        # description: "There are so much features in wallabag. Don't hesitate to read the manual to know them and to learn how to use them."
+        description: "Es gibt so viele Features in wallabag. Scheue dich nicht die Anleitung zu lesen, um die Features kennenzulernen und zu lernen, wie sie genutzt werden."
         annotate: 'Anmerkungen zu Artikeln hinzufügen'
         export: 'Artikel nach ePUB oder PDF konvertieren'
         search_filters: 'Schau nach, wie du nach einem Artikel über die Such- und Filterfunktion suchen kannst'
@@ -319,7 +319,7 @@ tag:
     page_title: 'Tags'
     list:
         number_on_the_page: '{0} Es gibt keine Tags.|{1} Es gibt einen Tag.|]1,Inf[ Es gibt %count% Tags.'
-        # see_untagged_entries: 'See untagged entries'
+        see_untagged_entries: 'Siehe nicht getaggte Einträge'
 
 import:
     page_title: 'Importieren'
@@ -349,22 +349,22 @@ import:
         description: 'Dieser Import wird all deine Artikel aus wallabag v2 importieren. Gehe auf "Alle Artikel" und dann, in der Exportieren-Seitenleiste auf "JSON". Dabei erhältst du eine "All articles.json"-Datei.'
     readability:
         page_title: 'Aus Readability importieren'
-        # description: 'This importer will import all your Readability articles. On the tools (https://www.readability.com/tools/) page, click on "Export your data" in the "Data Export" section. You will received an email to download a json (which does not end with .json in fact).'
-        # how_to: 'Please select your Readability export and click on the below button to upload and import it.'
+        description: 'Dieser Import wird all deine Artikel aus Readability importieren. Auf der Tools Seite (https://www.readability.com/tools/) klickst du auf "Exportiere deine Daten" in dem Abschnitt "Datenexport". Du wirst eine E-Mail mit einem Downloadlink zu einer json Datei, die aber nicht auf .json endet, erhalten'
+        how_to: 'Bitte wähle deinen Readability Export aus und klicke den unteren Button für das Hochladen und Importieren dessen.'
     worker:
-        # enabled: "Import is made asynchronously. Once the import task is started, an external worker will handle jobs one at a time. The current service is:"
+        enabled: "Der Import erfolgt asynchron. Sobald der Import gestartet ist, wird diese Aufgabe extern abgearbeitet. Der aktuelle Service dafür ist:"
     firefox:
         page_title: 'Aus Firefox importieren'
-        # description: "This importer will import all your Firefox bookmarks. Just go to your bookmarks (Ctrl+Maj+O), then into \"Import and backup\", choose \"Backup...\". You will obtain a .json file."
-        # how_to: "Please choose the bookmark backup file and click on the button below to import it. Note that the process may take a long time since all articles have to be fetched."
+        description: "Dieser Import wird all deine Firefox Lesezeichen importieren. Gehe zu deinen Lesezeichen (Strg+Shift+O), dann auf \"Importen und Sichern\", wähle \"Sichern…\". Du erhälst eine .json Datei."
+        how_to: "Bitte wähle deine Lesezeichensicherungsdatei aus und klicke den nachfolgenden Button zum Importieren. Beachte, dass dieser Prozess eine lange Zeit in Anspruch nehmen kann, da alle Artikel geladen werden müssen."
     chrome:
         page_title: 'Aus Chrome importieren'
-        # description: "This importer will import all your Chrome bookmarks. The location of the file depends on your operating system : <ul><li>On Linux, go into the <code>~/.config/chromium/Default/</code> directory</li><li>On Windows, it should be at <code>%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default</code></li><li>On OS X, it should be at <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>Once you got there, copy the Bookmarks file someplace you'll find.<em><br>Note that if you have Chromium instead of Chrome, you'll have to correct paths accordingly.</em></p>"
-        # how_to: "Please choose the bookmark backup file and click on the button below to import it. Note that the process may take a long time since all articles have to be fetched."
+        description: "Dieser Import wird all deine Chrome Lesezeichen importieren. Der Pfad zu der Datei hängt von deinem Betriebssystem ab: <ul><li>In Linux gehst du zu dem <code>~/.config/chromium/Default/</code> Verzeichnis</li><li>In Windows sollte es unter <code>%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default</code> sein</li><li>In OS X sollte es unter <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code> sein</li></ul>Wenn du dort angekommen bist, kopiere die Lesezeichendatei zu einem Ort, den du später wiederfindest.<em><br>Beachte falls du Chromium statt Chrome hast, dass du den zuvor genannten Pfad entsprechend anpasst.</em></p>"
+        how_to: "Bitte wähle deine Lesezeichensicherungsdatei aus und klicke den nachfolgenden Button zum Importieren. Beachte, dass dieser Prozess eine lange Zeit in Anspruch nehmen kann, da alle Artikel geladen werden müssen."
     instapaper:
         page_title: 'Aus Instapaper importieren'
-        # description: 'This importer will import all your Instapaper articles. On the settings (https://www.instapaper.com/user) page, click on "Download .CSV file" in the "Export" section. A CSV file will be downloaded (like "instapaper-export.csv").'
-        # how_to: 'Please select your Instapaper export and click on the below button to upload and import it.'
+        description: 'Dieser Import wird all deine Instapaper Artikel importieren. Auf der Einstellungsseite (https://www.instapaper.com/user) klickst du auf "Download .CSV Datei" in dem Abschnitt "Export". Eine CSV Datei wird heruntergeladen (z.B. "instapaper-export.csv").'
+        how_to: "Bitte wähle deine Instapaper Sicherungsdatei aus und klicke den nachfolgenden Button zum Importieren."
 
 developer:
     page_title: 'Entwickler'
@@ -372,7 +372,7 @@ developer:
     documentation: 'Dokumentation'
     how_to_first_app: 'Wie erstelle ich meine erste Anwendung'
     full_documentation: 'Komplette API-Dokumentation einsehen'
-    # list_methods: 'List API methods'
+    list_methods: 'Liste der API-Methoden'
     clients:
         title: 'Clients'
         create_new: 'Neuen Client erstellen'
@@ -391,14 +391,14 @@ developer:
         page_title: 'Entwickler > Neuer Client'
         page_description: 'Du bist dabei, einen neuen Client zu erstellen. Fülle das nachfolgende Feld für die Weiterleitungs-URIs deiner Anwendung aus.'
         form:
-            # name_label: 'Name of the client'
+            name_label: 'Name des Clients'
             redirect_uris_label: 'Weiterleitungs-URIs'
             save_label: 'Neuen Client erstellen'
         action_back: 'Zurück'
     client_parameter:
         page_title: 'Entwickler > Client-Parameter'
         page_description: 'Dies sind deine Client-Parameter.'
-        # field_name: 'Client name'
+        field_name: 'Client Name'
         field_id: 'Client-ID'
         field_secret: 'Client-Secret'
         back: 'Zurück'
@@ -417,31 +417,31 @@ developer:
         back: 'Zurück'
 
 user:
-    # page_title: Users management
-    # new_user: Create a new user
-    # edit_user: Edit an existing user
-    # description: "Here you can manage all users (create, edit and delete)"
-    # list:
-    #     actions: Actions
-    #     edit_action: Edit
-    #     yes: Yes
-    #     no: No
-    #     create_new_one: Create a new user
+    page_title: Benutzerverwaltung
+    new_user: Erstelle einen neuen Benutzer
+    edit_user: Bearbeite einen existierenden Benutzer
+    description: "Hier kannst du alle Benutzer verwalten (erstellen, bearbeiten und löschen)"
+    list:
+        actions: Aktionen
+        edit_action: Bearbeiten
+        yes: Ja
+        no: Nein
+        create_new_one: Erstelle einen neuen Benutzer
     form:
         username_label: 'Benutzername'
-        # name_label: 'Name'
+        name_label: 'Name'
         password_label: 'Kennwort'
         repeat_new_password_label: 'Neues Kennwort wiederholen'
         plain_password_label: '????'
         email_label: 'E-Mail-Adresse'
-        # enabled_label: 'Enabled'
-        # locked_label: 'Locked'
-        # last_login_label: 'Last login'
-        # twofactor_label: Two factor authentication
-        # save: Save
-        # delete: Delete
-        # delete_confirm: Are you sure?
-        # back_to_list: Back to list
+        enabled_label: 'Aktiviert'
+        locked_label: 'Gesperrt'
+        last_login_label: 'Letzter Login'
+        twofactor_label: Zwei-Faktor-Authentifizierung
+        save: Speichern
+        delete: Löschen
+        delete_confirm: Bist du sicher?
+        back_to_list: Zurück zur Liste
 
 flashes:
     config:
@@ -459,10 +459,10 @@ flashes:
         notice:
             entry_already_saved: 'Eintrag bereits am %date% gespeichert'
             entry_saved: 'Eintrag gespeichert'
-            # entry_saved_failed: 'Entry saved but fetching content failed'
+            entry_saved_failed: 'Eintrag gespeichert, aber das Abrufen des Inhalts ist fehlgeschlagen'
             entry_updated: 'Eintrag aktualisiert'
             entry_reloaded: 'Eintrag neugeladen'
-            # entry_reload_failed: 'Entry reloaded but fetching content failed'
+            entry_reload_failed: 'Eintrag neugeladen, aber das Abrufen des Inhalts ist fehlgeschlagen'
             entry_archived: 'Artikel archiviert'
             entry_unarchived: 'Artikel dearchiviert'
             entry_starred: 'Artikel favorisiert'
@@ -476,10 +476,10 @@ flashes:
             failed: 'Import fehlgeschlagen, bitte erneut probieren.'
             failed_on_file: 'Fehler während des Imports. Bitte überprüfe deine Import-Datei.'
             summary: 'Import-Zusammenfassung: %imported% importiert, %skipped% bereits gespeichert.'
-            # summary_with_queue: 'Import summary: %queued% queued.'
+            summary_with_queue: 'Import-Zusammenfassung: %queued% eingereiht.'
         error:
-            # redis_enabled_not_installed: Redis is enabled for handle asynchronous import but it looks like <u>we can't connect to it</u>. Please check Redis configuration.
-            # rabbit_enabled_not_installed: RabbitMQ is enabled for handle asynchronous import but it looks like <u>we can't connect to it</u>. Please check RabbitMQ configuration.
+            redis_enabled_not_installed: 'Redis ist aktiviert, um den asynchronen Import zu bewerkstelligen, aber es sieht so aus, dass <u>wir keine Verbindung herstellen können</u>. Bitte prüfe deine Redis-Konfiguration.'
+            rabbit_enabled_not_installed: 'RabbitMQ ist aktiviert, um den asynchronen Import zu bewerkstelligen, aber es sieht so aus, dass <u>wir keine Verbindung herstellen können</u>. Bitte prüfe deine RabbitMQ-Konfiguration.'
     developer:
         notice:
             client_created: 'Neuer Client erstellt.'
