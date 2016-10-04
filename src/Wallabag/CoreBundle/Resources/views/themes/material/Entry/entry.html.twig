@@ -125,21 +125,24 @@
                     {% endif %}
                     {% if craue_setting('share_shaarli') %}
                         <li>
-                            <a href="{{ craue_setting('shaarli_url') }}/index.php?post={{ entry.url|url_encode }}&amp;title={{ entry.title|url_encode }}" target="_blank" class="tool icon-image icon-image--shaarli" title="shaarli">
+                            <a href="{{ craue_setting('shaarli_url') }}/index.php?post={{ entry.url|url_encode }}&amp;title={{ entry.title|url_encode }}" target="_blank">
+                                <i class="tool icon-image icon-image--shaarli" title="shaarli"></i>
                                 <span>shaarli</span>
                             </a>
                         </li>
                     {% endif %}
                     {% if craue_setting('share_diaspora') %}
                         <li>
-                            <a href="{{ craue_setting('diaspora_url') }}/bookmarklet?url={{ entry.url|url_encode }}&title={{ entry.title|url_encode }}&notes=&v=1&noui=1&jump=doclose" target="_blank" class="tool icon-image icon-image--diaspora" title="diaspora">
+                            <a href="{{ craue_setting('diaspora_url') }}/bookmarklet?url={{ entry.url|url_encode }}&title={{ entry.title|url_encode }}&notes=&v=1&noui=1&jump=doclose" target="_blank">
+                                <i class="tool icon-image icon-image--diaspora" title="diaspora"></i>
                                 <span>diaspora*</span>
                             </a>
                         </li>
                     {% endif %}
                     {% if craue_setting('carrot') %}
                         <li>
-                            <a href="https://secure.carrot.org/GiveAndGetBack.do?url={{ entry.url|url_encode }}&title={{ entry.title|url_encode }}" target="_blank" title="carrot" class="tool icon-image icon-image--carrot">
+                            <a href="https://secure.carrot.org/GiveAndGetBack.do?url={{ entry.url|url_encode }}&title={{ entry.title|url_encode }}" target="_blank" title="carrot">
+                                <i class="tool icon-image icon-image--carrot"></i>
                                 <span>Carrot</span>
                             </a>
                         </li>
