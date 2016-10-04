@@ -86,6 +86,7 @@ before_script:
 install:
     - if [[ $ASSETS = build ]]; then source ~/.nvm/nvm.sh && nvm install 5.0; fi;
     - if [[ $ASSETS = build ]]; then npm install -g npm@latest; fi;
+    - if [[ $ASSETS = build ]]; then npm install; fi;
 
 before_install:
     - if [[ $TRAVIS_REPO_SLUG = wallabag/wallabag ]]; then cp .composer-auth.json ~/.composer/auth.json; fi;
@@ -96,4 +97,4 @@ script:
     - if [[ $VALIDATE_TRANSLATION_FILE = '' || $ASSETS = '' ]]; then phpunit -v ; fi;
     - if [[ $CS_FIXER = run ]]; then php bin/php-cs-fixer fix src/ --verbose --dry-run ; fi;
     - if [[ $VALIDATE_TRANSLATION_FILE = run ]]; then php bin/console lint:yaml src/Wallabag/CoreBundle/Resources/translations -v ; fi;
-    - if [[ $ASSETS = build ]]; then grunt; fi;
+    - if [[ $ASSETS = build ]]; then ./node_modules/grunt-cli/bin/grunt; fi;

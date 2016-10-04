@@ -123,27 +123,22 @@ module.exports = function (grunt) {
         src: 'annotator.min.js',
         dest: '<%= buildDir %>/themes/_global/js/',
       },
-    },
-    symlink: {
       baggyfonts: {
         files: [
           {
             expand: true,
-            overwrite: true,
             cwd: '<%= modulesDir %>/icomoon-free-npm/Font',
             src: 'IcoMoon-Free.ttf',
             dest: '<%= releaseDir %>/themes/baggy/fonts/',
           },
           {
             expand: true,
-            overwrite: true,
             cwd: '<%= modulesDir %>/ptsans-npm-webfont/fonts',
             src: 'ptsansbold.woff',
             dest: '<%= releaseDir %>/themes/baggy/fonts/',
           },
           {
             expand: true,
-            overwrite: true,
             cwd: '<%= modulesDir %>/material-design-icons-iconfont/dist/fonts/',
             src: ['MaterialIcons-Regular.eot', 'MaterialIcons-Regular.woff2', 'MaterialIcons-Regular.woff', 'MaterialIcons-Regular.ttf'],
             dest: '<%= releaseDir %>/themes/baggy/fonts/',
@@ -175,6 +170,8 @@ module.exports = function (grunt) {
           },
         ],
       },
+    },
+    symlink: {
       pics: {
         files: [
           {
@@ -206,7 +203,7 @@ module.exports = function (grunt) {
   grunt.registerTask(
     'fonts',
     'Install fonts',
-    ['symlink:baggyfonts', 'symlink:materialfonts']
+    ['copy:baggyfonts', 'copy:materialfonts']
     );
 
   grunt.registerTask(
@@ -218,7 +215,7 @@ module.exports = function (grunt) {
   grunt.registerTask(
     'default',
     'Build and install everything',
-    ['clean', 'copy:pickerjs', 'concat', 'browserify', 'uglify', 'postcss', 'symlink']
+    ['clean', 'copy:pickerjs', 'concat', 'browserify', 'uglify', 'postcss', 'copy', 'symlink']
     );
 
   grunt.registerTask(
