@@ -30,7 +30,7 @@ Lade das neueste Release von wallabag herunter:
 
     wget http://wllbg.org/latest-v2-package && tar xvf latest-v2-package
 
-(md5 hash: ``6c33520e29cc754b687f9cee0398dede``)
+(2.1.1 md5 hash: ``9584a3b60a2b2a4de87f536548caac93``)
 
 Entpacke das Archiv in deinen wallabag-Ordner und ersetze ``app/config/parameters.yml`` mit deiner Datei.
 
