@@ -1,4 +1,5 @@
 #! /usr/bin/env bash
+set -e
 
 echo " > Installing PHP dependencies through Composer..."
 SYMFONY_ENV=prod composer install --no-interaction --no-progress --prefer-dist -o --no-dev
