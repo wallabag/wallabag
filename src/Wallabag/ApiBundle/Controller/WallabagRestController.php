@@ -127,10 +127,17 @@ class WallabagRestController extends FOSRestController
      *
      * @return JsonResponse
      */
-    public function getEntryAction(Entry $entry)
+    public function getEntryAction(Entry $entry, $_format)
     {
         $this->validateAuthentication();
         $this->validateUserAccess($entry->getUser()->getId());
+
+        if ($_format === 'epub') {
+            return $this->get('wallabag_core.helper.entries_export')
+                ->setEntries($entry)
+                ->updateTitle('entry')
+                ->exportAs($_format);
+        }
 
         $json = $this->get('serializer')->serialize($entry, 'json');
 
