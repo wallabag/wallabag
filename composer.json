@@ -63,7 +63,6 @@
         "willdurand/hateoas-bundle": "~1.0",
         "htmlawed/htmlawed": "~1.1.19",
         "liip/theme-bundle": "~1.1",
-        "pagerfanta/pagerfanta": "~1.0.3",
         "lexik/form-filter-bundle": "~5.0",
         "j0k3r/graby": "~1.0",
         "friendsofsymfony/user-bundle": "~2.0@dev",
@@ -81,7 +80,6 @@
         "lexik/maintenance-bundle": "~2.1",
         "ocramius/proxy-manager": "1.*",
         "white-october/pagerfanta-bundle": "^1.0",
-        "mouf/nodejs-installer": "~1.0",
         "php-amqplib/rabbitmq-bundle": "^1.8",
         "predis/predis": "^1.0",
         "javibravo/simpleue": "^1.0"
@@ -100,8 +98,7 @@
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
         ],
         "post-install-cmd": [
             "@post-cmd"
