@@ -96,4 +96,4 @@ script:
     - if [[ $VALIDATE_TRANSLATION_FILE = '' || $ASSETS = '' ]]; then phpunit -v ; fi;
     - if [[ $CS_FIXER = run ]]; then php bin/php-cs-fixer fix src/ --verbose --dry-run ; fi;
     - if [[ $VALIDATE_TRANSLATION_FILE = run ]]; then php bin/console lint:yaml src/Wallabag/CoreBundle/Resources/translations -v ; fi;
-    - if [[ $ASSETS = build ]]; then node_modules/grunt/bin/grunt; fi;
+    - if [[ $ASSETS = build ]]; then grunt; fi;
