@@ -41,26 +41,6 @@ class CreateConfigListenerTest extends \PHPUnit_Framework_TestCase
         $this->response = Response::create();
     }
 
-    public function testWithInvalidUser()
-    {
-        $user = new User();
-        $user->setEnabled(false);
-
-        $event = new FilterUserResponseEvent(
-            $user,
-            $this->request,
-            $this->response
-        );
-
-        $this->em->expects($this->never())->method('persist');
-        $this->em->expects($this->never())->method('flush');
-
-        $this->dispatcher->dispatch(
-            FOSUserEvents::REGISTRATION_COMPLETED,
-            $event
-        );
-    }
-
     public function testWithValidUser()
     {
         $user = new User();

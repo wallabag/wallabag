@@ -45,10 +45,6 @@ class CreateConfigListener implements EventSubscriberInterface
 
     public function createConfig(UserEvent $event, $eventName = null, EventDispatcherInterface $eventDispatcher = null)
     {
-        if (!$event->getUser()->isEnabled()) {
-            return;
-        }
-
         $config = new Config($event->getUser());
         $config->setTheme($this->theme);
         $config->setItemsPerPage($this->itemsOnPage);
