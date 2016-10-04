@@ -47,7 +47,7 @@
 
         <li class="bold border-bottom hide-on-med-and-down">
             <a class="waves-effect collapsible-header" href="{{ entry.url|e }}">
-                <i class="material-icons small">public</i>
+                <i class="material-icons small">link</i>
                 <span>{{ 'entry.view.left_menu.view_original_article'|trans }}</span>
             </a>
             <div class="collapsible-body"></div>
@@ -106,14 +106,12 @@
                 <ul>
                     {% if craue_setting('share_public') %}
                         <li>
-                            <a href="{{ path('share', {'id': entry.id }) }}" target="_blank" title="{{ 'entry.view.left_menu.public_link'|trans }}">
-                                <i class="material-icons">link</i>
+                            <a href="{{ path('share', {'id': entry.id }) }}" target="_blank" title="{{ 'entry.view.left_menu.public_link'|trans }}" class="tool icon icon-eye">
                                 <span>{{ 'entry.view.left_menu.public_link'|trans }}</span>
                             </a>
                         </li>
                         <li>
-                            <a href="{{ path('delete_share', {'id': entry.id }) }}" class="tool" title="{{ 'entry.view.left_menu.delete_public_link'|trans }}">
-                                <i class="material-icons">remove_circle</i>
+                            <a href="{{ path('delete_share', {'id': entry.id }) }}" title="{{ 'entry.view.left_menu.delete_public_link'|trans }}" class="tool icon icon-no-eye">
                                 <span>{{ 'entry.view.left_menu.delete_public_link'|trans }}</span>
                             </a>
                         </li>
@@ -128,21 +126,21 @@
                     {% if craue_setting('share_shaarli') %}
                         <li>
                             <a href="{{ craue_setting('shaarli_url') }}/index.php?post={{ entry.url|url_encode }}&amp;title={{ entry.title|url_encode }}" target="_blank" class="tool icon-image icon-image--shaarli" title="shaarli">
-                                shaarli
+                                <span>shaarli</span>
                             </a>
                         </li>
                     {% endif %}
                     {% if craue_setting('share_diaspora') %}
                         <li>
                             <a href="{{ craue_setting('diaspora_url') }}/bookmarklet?url={{ entry.url|url_encode }}&title={{ entry.title|url_encode }}&notes=&v=1&noui=1&jump=doclose" target="_blank" class="tool diaspora icon-image icon-image--diaspora" title="diaspora">
-                                diaspora*
+                                <span>diaspora*</span>
                             </a>
                         </li>
                     {% endif %}
                     {% if craue_setting('carrot') %}
                         <li>
                             <a href="https://secure.carrot.org/GiveAndGetBack.do?url={{ entry.url|url_encode }}&title={{ entry.title|url_encode }}" target="_blank" title="carrot" class="tool carrot icon-image icon-image--carrot">
-                                Carrot
+                                <span>Carrot</span>
                             </a>
                         </li>
                     {% endif %}

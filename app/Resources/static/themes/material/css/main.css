@@ -71,6 +71,7 @@
   font-variant: normal;
   text-transform: none;
   line-height: 1;
+  background-size: 24px;
 
   /* Enable Ligatures ================ */
   letter-spacing: 0;
@@ -87,7 +88,7 @@
 }
 
 .icon-image {
-  background-size: 16px;
+  background-size: 24px;
   background-repeat: no-repeat;
   background-position: center;
   padding-right: 1em !important;
