@@ -2,3 +2,5 @@ entries:
   type: rest
   resource:     "WallabagApiBundle:WallabagRest"
   name_prefix:  api_
+  requirements:
+    _format: xml|json|html|epub
