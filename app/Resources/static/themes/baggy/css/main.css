@@ -922,7 +922,7 @@ a.add-to-wallabag-link-after::after {
   background-image: url("../../_global/img/icons/diaspora-icon--black.png");
 }
 
-/* Diaspora */
+/* shaarli */
 .icon-image--shaarli {
   background-image: url("../../_global/img/icons/shaarli.png");
 }
