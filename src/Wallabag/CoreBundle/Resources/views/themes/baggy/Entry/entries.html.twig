@@ -29,16 +29,16 @@
                 <li><a href="{{ entry.url|e }}" target="_blank" title="{{ 'entry.list.original_article'|trans }} : {{ entry.title|e }}" class="tool link icon-link icon"><span>{{ entry.domainName|removeWww }}</span></a></li>
             </ul>
             {% if entry.previewPicture is null %}
-                <p>{{ entry.content|striptags|slice(0, 300) }}&hellip;</p>
                 <ul class="card-entry-tags">
                     {% for tag in entry.tags %}
-                        <li>{{ tag.label }}</li>
+                        <li><a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a></li>
                     {% endfor %}
                 </ul>
+                <p>{{ entry.content|striptags|slice(0, 300) }}&hellip;</p>
             {% else %}
                 <ul class="card-entry-labels">
                 {% for tag in entry.tags | slice(0, 3) %}
-                    <li>{{ tag.label }}</li>
+                    <li><a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a></li>
                 {% endfor %}
                 </ul>
                 <img class="preview" src="{{ entry.previewPicture }}" alt="{{ entry.title|raw }}" />
