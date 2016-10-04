@@ -7,14 +7,14 @@ Wenn du den Import von Pocket durch das Hinzufügen des Consumer Key in den inte
 Update auf einem dedizierten Webserver
 --------------------------------------
 
-Das neueste Release ist auf https://www.wallabag.org/pages/download-wallabag.html veröffentlicht. Um deine wallabag-Installation auf die neueste Version zu aktualisieren, führe die folgenden Kommandos in deinem wallabag-Ordner aus (ersetze ``2.1.0`` mit der neuesten Releasenummer):
+Das neueste Release ist auf https://www.wallabag.org/pages/download-wallabag.html veröffentlicht. Um deine wallabag-Installation auf die neueste Version zu aktualisieren, führe die folgenden Kommandos in deinem wallabag-Ordner aus (ersetze ``2.1.1`` mit der neuesten Releasenummer):
 
 ::
 
     rm -rf var/cache/*
     git fetch origin
     git fetch --tags
-    git checkout 2.1.0
+    git checkout 2.1.1 --force
     SYMFONY_ENV=prod composer install --no-dev -o --prefer-dist
     php bin/console doctrine:migrations:migrate --env=prod
     php bin/console cache:clear --env=prod

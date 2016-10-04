@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.1.1] - 2016-10-04
+
+### Changed
+
+- [#2340](https://github.com/wallabag/wallabag/pull/2340) Updated german translation (Strubbl)
+- [#2341](https://github.com/wallabag/wallabag/pull/2341) Updated polish translation (Mateusz Rumiński)
+- [#2354](https://github.com/wallabag/wallabag/pull/2354) Add php-bcmath extension to requirements (Godinez Pablo)
+
+### Fixed
+
+- [#2338](https://github.com/wallabag/wallabag/pull/2338) Fixed 2.1 installation (Jeremy Benoist)
+- [#2345](https://github.com/wallabag/wallabag/issues/2345) Fixed 2.0.x update (Jeremy Benoist)
+- [#2353](https://github.com/wallabag/wallabag/pull/2353) Fixed assets problem (Thomas Citharel)
+- [#2359](https://github.com/wallabag/wallabag/pull/2359) Create config even if user is disabled (Jeremy Benoist)
+
 ## [2.1.0] - 2016-10-03
 
 ### Added
@@ -34,7 +49,7 @@ All notable changes to this project will be documented in this file. This projec
 - [#2257](https://github.com/wallabag/wallabag/pull/2257) Use created date for imported content (Jeremy Benoist)
 - [#2326](https://github.com/wallabag/wallabag/pull/2326) Quickstart layout (Nicolas Lœuillet)
 
-### Fixed 
+### Fixed
 
 - [#2328](https://github.com/wallabag/wallabag/pull/2328) Fixed duplicate URL with accents (Jeremy Benoist)
 - [#2319](https://github.com/wallabag/wallabag/pull/2319) Fixed `gd` extension missing in Dockerfile (Pascal Martin)
@@ -67,7 +82,7 @@ All notable changes to this project will be documented in this file. This projec
 - [graby](https://github.com/j0k3r/graby/releases/tag/1.4.3) Update Graby version, which now handles ZIP files (Jeremy Benoist)
 - [#2230](https://github.com/wallabag/wallabag/pull/2230) Changed title display in card view (Danilow Alexandr)
 
-### Fixed 
+### Fixed
 
 - [#2234](https://github.com/wallabag/wallabag/pull/2234) Fixed mailto link in documentation (Christian Studer)
 - [#2241](https://github.com/wallabag/wallabag/pull/2241) Fixed the height of the "Add new article" field in Chrome (Danilow Alexandr)
