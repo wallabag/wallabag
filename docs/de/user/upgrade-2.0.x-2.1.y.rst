@@ -15,7 +15,7 @@ Das neueste Release ist auf https://www.wallabag.org/pages/download-wallabag.htm
     git fetch origin
     git fetch --tags
     git checkout 2.1.0
-    ASSETS=build ./install.sh
+    SYMFONY_ENV=prod composer install --no-dev -o --prefer-dist
     php bin/console doctrine:migrations:migrate --env=prod
     php bin/console cache:clear --env=prod
 

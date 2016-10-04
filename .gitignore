@@ -21,8 +21,10 @@
 /vendor/
 
 # Assets and user uploads
-/web/bundles/
-/web/uploads/
+web/uploads/
+!web/bundles
+web/bundles/*
+!web/bundles/wallabagcore
 
 # Build
 /app/build
@@ -43,9 +45,8 @@ docker/data/
 composer.lock
 
 # assets stuff
-/node_modules/
-!app/Resources/static/lib
-app/Resources/static/lib/*
-/bin
+node_modules/
+bin
+app/Resources/build/
 !/src/Wallabag/CoreBundle/Resources/public
 /src/Wallabag/CoreBundle/Resources/public/*
