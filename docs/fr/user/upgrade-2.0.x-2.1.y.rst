@@ -15,7 +15,7 @@ La dernière version de wallabag est publiée à cette adresse : https://www.wal
     git fetch origin
     git fetch --tags
     git checkout 2.1.0
-    ASSETS=build ./install.sh
+    SYMFONY_ENV=prod composer install --no-dev -o --prefer-dist
     php bin/console doctrine:migrations:migrate --env=prod
     php bin/console cache:clear --env=prod
 
