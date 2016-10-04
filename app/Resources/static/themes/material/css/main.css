@@ -88,9 +88,8 @@
 }
 
 .icon-image {
-  background-size: 24px;
+  background-size: 16px;
   background-repeat: no-repeat;
-  background-position: center;
   padding-right: 1em !important;
   padding-left: 1em !important;
 }
@@ -105,6 +104,10 @@
 
 .icon-calendar::before {
   content: "\e953";
+}
+
+.icon-mail::before {
+    content: "\ea86";
 }
 
 .icon-time::before {
