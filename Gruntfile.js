@@ -234,6 +234,6 @@ module.exports = function (grunt) {
   grunt.registerTask(
       'tests',
       'Test css and js style conformity',
-      ['eslint', 'stylelint']
+      ['eslint', 'stylelint', 'default']
   )
 };

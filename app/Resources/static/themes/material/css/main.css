@@ -107,7 +107,7 @@
 }
 
 .icon-mail::before {
-    content: "\ea86";
+  content: "\ea86";
 }
 
 .icon-time::before {
