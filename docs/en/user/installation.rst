@@ -22,6 +22,7 @@ You'll need the following extensions for wallabag to work. Some of these may alr
 - php-curl
 - php-gettext
 - php-tokenizer
+- php-bcmath
 
 wallabag uses PDO to connect to the database, so you'll need one of the following:
 

@@ -23,6 +23,7 @@ nicht alle folgenden Pakete installieren.
 - php-curl
 - php-gettext
 - php-tokenizer
+- php-bcmath
 
 wallabag nutzt PDO, um sich mit der Datenbank zu verbinden, darum benötigst du eines der folgenden Komponenten:
 
