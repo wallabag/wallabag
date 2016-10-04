@@ -3,7 +3,6 @@ require('jquery.cookie');
 require('jquery-ui-browserify');
 const annotator = require('annotator');
 import { savePercent, retrievePercent } from '../../_global/js/tools.js';
-import { split, extractLast } from './autoCompleteTags.js';
 import { toggleSaveLinkForm } from './uiTools.js';
 
 

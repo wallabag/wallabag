@@ -198,6 +198,13 @@ module.exports = function (grunt) {
         src: ['./<%= releaseDir %>/*'],
       }
     },
+    eslint: {
+      target: ['<%= appDir %>/themes/material/js/init.js', '<%= appDir %>/themes/baggy/js/init.js']
+    },
+    stylelint: {
+      target: ['<%= appDir %>/themes/material/css/*.css', '<%= appDir %>/themes/baggy/css/*.css']
+    }
+
   });
 
   grunt.registerTask(
@@ -223,4 +230,10 @@ module.exports = function (grunt) {
     'Compiles the stylesheets.',
     ['clean:css', 'concat:cssMaterial', 'concat:cssBaggy', 'postcss']
   );
+
+  grunt.registerTask(
+      'tests',
+      'Test css and js style conformity',
+      ['eslint', 'stylelint']
+  )
 };

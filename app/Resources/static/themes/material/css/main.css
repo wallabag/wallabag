@@ -87,8 +87,9 @@
 }
 
 .icon-image {
-  background-size: 16px 16px;
-  background: no-repeat center;
+  background-size: 16px;
+  background-repeat: no-repeat;
+  background-position: center;
   padding-right: 1em !important;
   padding-left: 1em !important;
 }
@@ -123,7 +124,6 @@
 .icon-image--shaarli {
   background-image: url("../../_global/img/icons/shaarli.png");
 }
-
 
 body {
   display: flex;
@@ -464,8 +464,9 @@ main ul.row {
   color: #fff;
 }
 
-.quickstart .card .card-action a, .quickstart .card .card-action a:hover {
-    color: #fff !important;
+.quickstart .card .card-action a,
+.quickstart .card .card-action a:hover {
+  color: #fff !important;
 }
 
 .settings .div_tabs {
