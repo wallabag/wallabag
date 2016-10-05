@@ -804,4 +804,11 @@ class WallabagRestControllerTest extends WallabagApiTestCase
 
         $this->assertEquals(false, $content['exists']);
     }
+
+    public function testGetEntriesExistsWithNoUrl()
+    {
+        $this->client->request('GET', '/api/entries/exists?url=');
+
+        $this->assertEquals(403, $this->client->getResponse()->getStatusCode());
+    }
 }
