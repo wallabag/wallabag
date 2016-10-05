@@ -528,29 +528,26 @@ class WallabagRestController extends FOSRestController
      *      }
      * )
      *
-     * @return Response
+     * @param Entry $entry
+     * @return JsonResponse
      */
     public function getAnnotationsAction(Entry $entry)
     {
         $this->validateAuthentication();
 
-        $annotationRows = $this
-                ->getDoctrine()
-                ->getRepository('WallabagAnnotationBundle:Annotation')
-                ->findAnnotationsByPageId($entry->getId(), $this->getUser()->getId());
-        $total = count($annotationRows);
-        $annotations = array('total' => $total, 'rows' => $annotationRows);
-
-        $json = $this->get('serializer')->serialize($annotations, 'json');
-
-        return $this->renderJsonResponse($json);
+        $response = $this->forward('WallabagApiBundle:WallabagRest:getAnnotations',
+            [
+                'entry' => $entry
+            ]);
+        return $response;
     }
 
     /**
      * Creates a new annotation.
      *
+     * @param Request $request
      * @param Entry $entry
-     *
+     * @return JsonResponse
      * @ApiDoc(
      *      requirements={
      *          {"name"="ranges", "dataType"="array", "requirement"="\w+", "description"="The range array for the annotation"},
@@ -559,34 +556,17 @@ class WallabagRestController extends FOSRestController
      *      }
      * )
      *
-     * @return Response
      */
     public function postAnnotationAction(Request $request, Entry $entry)
     {
         $this->validateAuthentication();
 
-        $data = json_decode($request->getContent(), true);
-
-        $em = $this->getDoctrine()->getManager();
-
-        $annotation = new Annotation($this->getUser());
-
-        $annotation->setText($data['text']);
-        if (array_key_exists('quote', $data)) {
-            $annotation->setQuote($data['quote']);
-        }
-        if (array_key_exists('ranges', $data)) {
-            $annotation->setRanges($data['ranges']);
-        }
-
-        $annotation->setEntry($entry);
-
-        $em->persist($annotation);
-        $em->flush();
-
-        $json = $this->get('serializer')->serialize($annotation, 'json');
-
-        return $this->renderJsonResponse($json);
+        $response = $this->forward('WallabagApiBundle:WallabagRest:postAnnotation',
+            [
+                'request' => $request,
+                'entry' => $entry
+            ]);
+        return $response;
     }
 
     /**
@@ -600,24 +580,20 @@ class WallabagRestController extends FOSRestController
      *
      * @ParamConverter("annotation", class="WallabagAnnotationBundle:Annotation")
      *
-     * @return Response
+     * @param Annotation $annotation
+     * @param Request $request
+     * @return JsonResponse
      */
     public function putAnnotationAction(Annotation $annotation, Request $request)
     {
         $this->validateAuthentication();
 
-        $data = json_decode($request->getContent(), true);
-
-        if (!is_null($data['text'])) {
-            $annotation->setText($data['text']);
-        }
-
-        $em = $this->getDoctrine()->getManager();
-        $em->flush();
-
-        $json = $this->get('serializer')->serialize($annotation, 'json');
-
-        return $this->renderJsonResponse($json);
+        $response = $this->forward('WallabagApiBundle:WallabagRest:putAnnotation',
+            [
+                'annotation' => $annotation,
+                'request' => $request
+            ]);
+        return $response;
     }
 
     /**
@@ -631,19 +607,18 @@ class WallabagRestController extends FOSRestController
      *
      * @ParamConverter("annotation", class="WallabagAnnotationBundle:Annotation")
      *
-     * @return Response
+     * @param Annotation $annotation
+     * @return JsonResponse
      */
     public function deleteAnnotationAction(Annotation $annotation)
     {
         $this->validateAuthentication();
 
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($annotation);
-        $em->flush();
-
-        $json = $this->get('serializer')->serialize($annotation, 'json');
-
-        return $this->renderJsonResponse($json);
+        $response = $this->forward('WallabagApiBundle:WallabagRest:deleteAnnotation',
+            [
+                'annotation' => $annotation,
+            ]);
+        return $response;
     }
 
     /**
