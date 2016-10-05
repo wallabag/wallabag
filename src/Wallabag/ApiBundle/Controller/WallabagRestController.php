@@ -40,7 +40,7 @@ class WallabagRestController extends FOSRestController
         $url = $request->query->get('url', '');
 
         if (empty($url)) {
-            throw $this->createAccessDeniedException('URL is empty?, logged user id: '.$user->getId());
+            throw $this->createAccessDeniedException('URL is empty?, logged user id: '.$this->getUser()->getId());
         }
 
         $res = $this->getDoctrine()
