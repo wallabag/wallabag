@@ -5,7 +5,6 @@ namespace Wallabag\AnnotationBundle\Controller;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Wallabag\AnnotationBundle\Entity\Annotation;
 use Wallabag\CoreBundle\Entity\Entry;
@@ -39,10 +38,11 @@ class WallabagAnnotationController extends FOSRestController
      * Creates a new annotation.
      *
      * @param Request $request
-     * @param Entry $entry
-     * @return JsonResponse
-     * @see Wallabag\ApiBundle\Controller\WallabagRestController
+     * @param Entry   $entry
      *
+     * @return JsonResponse
+     *
+     * @see Wallabag\ApiBundle\Controller\WallabagRestController
      */
     public function postAnnotationAction(Request $request, Entry $entry)
     {
@@ -78,7 +78,8 @@ class WallabagAnnotationController extends FOSRestController
      * @ParamConverter("annotation", class="WallabagAnnotationBundle:Annotation")
      *
      * @param Annotation $annotation
-     * @param Request $request
+     * @param Request    $request
+     *
      * @return JsonResponse
      */
     public function putAnnotationAction(Annotation $annotation, Request $request)
@@ -105,6 +106,7 @@ class WallabagAnnotationController extends FOSRestController
      * @ParamConverter("annotation", class="WallabagAnnotationBundle:Annotation")
      *
      * @param Annotation $annotation
+     *
      * @return JsonResponse
      */
     public function deleteAnnotationAction(Annotation $annotation)
