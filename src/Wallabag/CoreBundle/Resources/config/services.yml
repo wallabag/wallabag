@@ -119,9 +119,10 @@ services:
         class: Predis\Client
         arguments:
             -
+                scheme: '%redis_scheme%'
                 host: '%redis_host%'
                 port: '%redis_port%'
-                schema: tcp
+                path: '%redis_path%'
 
     wallabag_core.exception_controller:
         class: Wallabag\CoreBundle\Controller\ExceptionController
