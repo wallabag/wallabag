@@ -12,6 +12,7 @@ During this documentation, we assume the release is `release-2.0.0-beta.1`.
 - `app/config/config.yml` (`wallabag_core.version`)
 - `README.md` (`composer create-project` command)
 - `docs/en/user/installation.rst` and its translations (`composer create-project` command)
+- `CHANGELOG.md` (by using this command `github_changelog_generator --no-compare-link --future-release "2.x.x"`. [github-changelog-generator is available here](https://github.com/skywinder/github-changelog-generator))
 
 #### Create release on GitHub
 
