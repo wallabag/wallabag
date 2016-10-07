@@ -561,6 +561,8 @@ class WallabagRestControllerTest extends WallabagApiTestCase
      */
     public function testDeleteUserTag($tag)
     {
+        $tagName = $tag['label'];
+
         $this->client->request('DELETE', '/api/tags/'.$tag['id'].'.json');
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
@@ -577,6 +579,13 @@ class WallabagRestControllerTest extends WallabagApiTestCase
             ->findAllByTagId($this->user->getId(), $tag['id']);
 
         $this->assertCount(0, $entries);
+
+        $tag = $this->client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Tag')
+            ->findOneByLabel($tagName);
+
+        $this->assertNull($tag, $tagName.' was removed because it begun an orphan tag');
     }
 
     public function testDeleteTagByLabel()

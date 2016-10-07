@@ -400,6 +400,8 @@ class WallabagRestController extends FOSRestController
             ->getRepository('WallabagCoreBundle:Entry')
             ->removeTag($this->getUser()->getId(), $tag);
 
+        $this->cleanOrphanTag($tag);
+
         $json = $this->get('serializer')->serialize($tag, 'json');
 
         return (new JsonResponse())->setJson($json);
@@ -440,6 +442,8 @@ class WallabagRestController extends FOSRestController
             ->getRepository('WallabagCoreBundle:Entry')
             ->removeTags($this->getUser()->getId(), $tags);
 
+        $this->cleanOrphanTag($tags);
+
         $json = $this->get('serializer')->serialize($tags, 'json');
 
         return (new JsonResponse())->setJson($json);
@@ -464,6 +468,8 @@ class WallabagRestController extends FOSRestController
             ->getRepository('WallabagCoreBundle:Entry')
             ->removeTag($this->getUser()->getId(), $tag);
 
+        $this->cleanOrphanTag($tag);
+
         $json = $this->get('serializer')->serialize($tag, 'json');
 
         return (new JsonResponse())->setJson($json);
@@ -483,6 +489,28 @@ class WallabagRestController extends FOSRestController
         $json = $this->get('serializer')->serialize($version, 'json');
 
         return (new JsonResponse())->setJson($json);
+    }
+
+    /**
+     * Remove orphan tag in case no entries are associated to it.
+     *
+     * @param Tag|array $tags
+     */
+    private function cleanOrphanTag($tags)
+    {
+        if (!is_array($tags)) {
+            $tags = [$tags];
+        }
+
+        $em = $this->getDoctrine()->getManager();
+
+        foreach ($tags as $tag) {
+            if (count($tag->getEntries()) === 0) {
+                $em->remove($tag);
+            }
+        }
+
+        $em->flush();
     }
 
     /**
