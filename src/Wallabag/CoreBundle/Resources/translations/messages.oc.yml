@@ -462,7 +462,7 @@ flashes:
             entry_saved_failed: 'Article salvat mai fracàs de la recuperacion del contengut'
             entry_updated: 'Article mes a jorn'
             entry_reloaded: 'Article recargat'
-            entry_reload_failed: "L'article es estat cargat de nòu mai la recuperacion del contengut a fracassat"
+            entry_reloaded_failed: "L'article es estat cargat de nòu mai la recuperacion del contengut a fracassat"
             entry_archived: 'Article marcat coma legit'
             entry_unarchived: 'Article marcat coma pas legit'
             entry_starred: 'Article apondut dins los favorits'

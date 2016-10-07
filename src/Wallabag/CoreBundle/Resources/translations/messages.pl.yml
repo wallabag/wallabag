@@ -462,7 +462,7 @@ flashes:
             entry_saved_failed: 'Wpis zapisany, ale wystąpił bład pobierania treści'
             entry_updated: 'Wpis zaktualizowany'
             entry_reloaded: 'Wpis ponownie załadowany'
-            entry_reload_failed: 'Wpis ponownie załadowany, ale wystąpił bład pobierania treści'
+            entry_reloaded_failed: 'Wpis ponownie załadowany, ale wystąpił bład pobierania treści'
             entry_archived: 'Wpis dodany do archiwum'
             entry_unarchived: 'Wpis usunięty z archiwum'
             entry_starred: 'Wpis oznaczony gwiazdką'

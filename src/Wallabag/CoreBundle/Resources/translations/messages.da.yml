@@ -462,7 +462,7 @@ flashes:
             # entry_saved_failed: 'Entry saved but fetching content failed'
             # entry_updated: 'Entry updated'
             # entry_reloaded: 'Entry reloaded'
-            # entry_reload_failed: 'Entry reloaded but fetching content failed'
+            # entry_reloaded_failed: 'Entry reloaded but fetching content failed'
             entry_archived: 'Artikel arkiveret'
             entry_unarchived: 'Artikel ikke længere arkiveret'
             entry_starred: 'Artikel markeret som favorit'

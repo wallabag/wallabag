@@ -146,7 +146,9 @@ class ExportControllerTest extends WallabagCoreTestCase
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
             ->createQueryBuilder('e')
+            ->select('e, t')
             ->leftJoin('e.user', 'u')
+            ->leftJoin('e.tags', 't')
             ->where('u.username = :username')->setParameter('username', 'admin')
             ->andWhere('e.isArchived = true')
             ->getQuery()
@@ -169,6 +171,18 @@ class ExportControllerTest extends WallabagCoreTestCase
         // +1 for title line
         $this->assertEquals(count($contentInDB) + 1, count($csv));
         $this->assertEquals('Title;URL;Content;Tags;"MIME Type";Language;"Creation date"', $csv[0]);
+        $this->assertContains($contentInDB[0]['title'], $csv[1]);
+        $this->assertContains($contentInDB[0]['url'], $csv[1]);
+        $this->assertContains($contentInDB[0]['content'], $csv[1]);
+        $this->assertContains($contentInDB[0]['mimetype'], $csv[1]);
+        $this->assertContains($contentInDB[0]['language'], $csv[1]);
+        $this->assertContains($contentInDB[0]['createdAt']->format('d/m/Y h:i:s'), $csv[1]);
+
+        $expectedTag = [];
+        foreach ($contentInDB[0]['tags'] as $tag) {
+            $expectedTag[] = $tag['label'];
+        }
+        $this->assertContains(implode(', ', $expectedTag), $csv[1]);
     }
 
     public function testJsonExport()
@@ -176,29 +190,23 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        // to be sure results are the same
         $contentInDB = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->createQueryBuilder('e')
-            ->leftJoin('e.user', 'u')
-            ->where('u.username = :username')->setParameter('username', 'admin')
-            ->getQuery()
-            ->getArrayResult();
+            ->findByUrlAndUserId('http://0.0.0.0/entry1', $this->getLoggedInUserId());
 
         ob_start();
-        $crawler = $client->request('GET', '/export/all.json');
+        $crawler = $client->request('GET', '/export/'.$contentInDB->getId().'.json');
         ob_end_clean();
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
         $headers = $client->getResponse()->headers;
         $this->assertEquals('application/json', $headers->get('content-type'));
-        $this->assertEquals('attachment; filename="All articles.json"', $headers->get('content-disposition'));
+        $this->assertEquals('attachment; filename="'.$contentInDB->getTitle().'.json"', $headers->get('content-disposition'));
         $this->assertEquals('UTF-8', $headers->get('content-transfer-encoding'));
 
         $content = json_decode($client->getResponse()->getContent(), true);
-        $this->assertEquals(count($contentInDB), count($content));
         $this->assertArrayHasKey('id', $content[0]);
         $this->assertArrayHasKey('title', $content[0]);
         $this->assertArrayHasKey('url', $content[0]);
@@ -212,6 +220,17 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertArrayHasKey('tags', $content[0]);
         $this->assertArrayHasKey('created_at', $content[0]);
         $this->assertArrayHasKey('updated_at', $content[0]);
+
+        $this->assertEquals($contentInDB->isArchived(), $content[0]['is_archived']);
+        $this->assertEquals($contentInDB->isStarred(), $content[0]['is_starred']);
+        $this->assertEquals($contentInDB->getTitle(), $content[0]['title']);
+        $this->assertEquals($contentInDB->getUrl(), $content[0]['url']);
+        $this->assertEquals([['text' => 'This is my annotation /o/', 'quote' => 'content']], $content[0]['annotations']);
+        $this->assertEquals($contentInDB->getMimetype(), $content[0]['mimetype']);
+        $this->assertEquals($contentInDB->getLanguage(), $content[0]['language']);
+        $this->assertEquals($contentInDB->getReadingtime(), $content[0]['reading_time']);
+        $this->assertEquals($contentInDB->getDomainname(), $content[0]['domain_name']);
+        $this->assertEquals(['foo', 'baz'], $content[0]['tags']);
     }
 
     public function testXmlExport()

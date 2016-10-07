@@ -462,7 +462,7 @@ flashes:
             entry_saved_failed: 'Eintrag gespeichert, aber das Abrufen des Inhalts ist fehlgeschlagen'
             entry_updated: 'Eintrag aktualisiert'
             entry_reloaded: 'Eintrag neugeladen'
-            entry_reload_failed: 'Eintrag neugeladen, aber das Abrufen des Inhalts ist fehlgeschlagen'
+            entry_reloaded_failed: 'Eintrag neugeladen, aber das Abrufen des Inhalts ist fehlgeschlagen'
             entry_archived: 'Artikel archiviert'
             entry_unarchived: 'Artikel dearchiviert'
             entry_starred: 'Artikel favorisiert'

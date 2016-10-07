@@ -461,7 +461,7 @@ flashes:
             # entry_saved_failed: 'Entry saved but fetching content failed'
             # entry_updated: 'Entry updated'
             entry_reloaded: 'Makale içeriği yenilendi'
-            # entry_reload_failed: 'Entry reloaded but fetching content failed'
+            # entry_reloaded_failed: 'Entry reloaded but fetching content failed'
             entry_archived: 'Makale arşivlendi'
             entry_unarchived: 'Makale arşivden çıkartıldı'
             entry_starred: 'Makale favorilere eklendi'
