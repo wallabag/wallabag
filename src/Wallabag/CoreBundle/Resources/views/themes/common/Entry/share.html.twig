@@ -38,7 +38,7 @@
         <header>
             <h1>{{ entry.title | raw }}</h1>
             <div><a href="{{ entry.url|e }}" target="_blank" title="{{ 'entry.view.original_article'|trans }} : {{ entry.title|e }}" class="tool">{{ entry.domainName|removeWww }}</a></div>
-            <div>{{ "entry.public.shared_by_wallabag"|trans|raw }}</div>
+            <div>{{ "entry.public.shared_by_wallabag"|trans({'%wallabag_instance%': url('homepage')})|raw }}</div>
         </header>
         <article>
             {{ entry.content | raw }}
