@@ -753,7 +753,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertCount(2, $crawler->filter('div[class=entry]'));
     }
 
-    public function testCache()
+    public function testShareEntryPublicly()
     {
         $this->logInAs('admin');
         $client = $this->getClient();
@@ -778,6 +778,9 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertContains('public', $client->getResponse()->headers->get('cache-control'));
         $this->assertContains('s-maxage=25200', $client->getResponse()->headers->get('cache-control'));
         $this->assertNotContains('no-cache', $client->getResponse()->headers->get('cache-control'));
+        $this->assertContains('og:title', $client->getResponse()->getContent());
+        $this->assertContains('og:type', $client->getResponse()->getContent());
+        $this->assertContains('og:url', $client->getResponse()->getContent());
 
         // sharing is now disabled
         $client->getContainer()->get('craue_config')->set('share_public', 0);
