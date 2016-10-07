@@ -27,11 +27,18 @@
                 width: 600px;
             }
         </style>
+        <meta property="og:title" content="{{ entry.title | raw }}" />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="{{ app.request.uri }}" />
+        {% if entry.previewPicture is not null %}
+        <meta property="og:image" content="{{ entry.previewPicture }}" />
+        {% endif %}
     </head>
     <body>
         <header>
             <h1>{{ entry.title | raw }}</h1>
-            <span><a href="{{ entry.url|e }}" target="_blank" title="{{ 'entry.view.original_article'|trans }} : {{ entry.title|e }}" class="tool">{{ entry.domainName|removeWww }}</a></span>
+            <div><a href="{{ entry.url|e }}" target="_blank" title="{{ 'entry.view.original_article'|trans }} : {{ entry.title|e }}" class="tool">{{ entry.domainName|removeWww }}</a></div>
+            <div>{{ "entry.public.shared_by_wallabag"|trans({'%wallabag_instance%': url('homepage')})|raw }}</div>
         </header>
         <article>
             {{ entry.content | raw }}
