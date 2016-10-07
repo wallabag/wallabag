@@ -32,6 +32,8 @@
         <meta property="og:url" content="{{ app.request.uri }}" />
         {% if entry.previewPicture is not null %}
         <meta property="og:image" content="{{ entry.previewPicture }}" />
+        {% else %}
+        <meta property="og:image" content="{{ app.request.schemeAndHttpHost }}{{ asset('bundles/wallabagcore/themes/_global/img/logo-other_themes.png') }}" />
         {% endif %}
     </head>
     <body>
