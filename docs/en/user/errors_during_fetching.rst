@@ -14,7 +14,7 @@ How can I help to fix that?
 
 You can `sending us an email with the article's URL <mailto:hello@wallabag.org>`_.
 
-Or you can also try to fix this problem by yourself.
+Or you can also try to fix this problem by yourself (so we can be focused on improving wallabag internally instead of writing siteconfig :) ).
 
 You can try to see if it works here: `http://f43.me/feed/test <http://f43.me/feed/test>`_ (it uses almost the same way as wallabag to retrieve content).
 
@@ -22,7 +22,7 @@ If it works here and not on wallabag, it means there are something internally in
 
 If it doesn't works, try to extract a site config using: `http://siteconfig.fivefilters.org/ <http://siteconfig.fivefilters.org/>`_ (select which part of the content is actually the content).
 
-You can test it **f43.me** website: click on **Want to try a custom siteconfig?** and put the generated file from siteconfig.fivefilters.org.
+You can test it on **f43.me** website: click on **Want to try a custom siteconfig?** and put the generated file from siteconfig.fivefilters.org.
 
 Repeat until you have something ok.
 
