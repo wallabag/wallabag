@@ -209,7 +209,7 @@ entry:
         is_public_label: 'Publiczny'
         save_label: 'Zapisz'
     public:
-        # shared_by_wallabag: "This article has been shared by <a href='%wallabag_instance%'>wallabag</a>"
+        shared_by_wallabag: "Ten artykuł został udostępniony przez <a href='%wallabag_instance%'>wallabag</a>"
 
 about:
     page_title: 'O nas'
