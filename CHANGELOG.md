@@ -1,261 +1,2458 @@
-# Changelog
-
-All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
-
-## [2.1.1] - 2016-10-04
-
-### Changed
-
-- [#2340](https://github.com/wallabag/wallabag/pull/2340) Updated german translation (Strubbl)
-- [#2341](https://github.com/wallabag/wallabag/pull/2341) Updated polish translation (Mateusz Rumiński)
-- [#2354](https://github.com/wallabag/wallabag/pull/2354) Add php-bcmath extension to requirements (Godinez Pablo)
-
-### Fixed
-
-- [#2338](https://github.com/wallabag/wallabag/pull/2338) Fixed 2.1 installation (Jeremy Benoist)
-- [#2345](https://github.com/wallabag/wallabag/issues/2345) Fixed 2.0.x update (Jeremy Benoist)
-- [#2353](https://github.com/wallabag/wallabag/pull/2353) Fixed assets problem (Thomas Citharel)
-- [#2359](https://github.com/wallabag/wallabag/pull/2359) Create config even if user is disabled (Jeremy Benoist)
-
-## [2.1.0] - 2016-10-03
-
-### Added
-
-- [#1990](https://github.com/wallabag/wallabag/pull/1990) Added command line import for wallabag files (Nicolas Lœuillet)
-- [#2142](https://github.com/wallabag/wallabag/pull/2142) Manage assets through npm (Thomas Citharel)
-- [#2174](https://github.com/wallabag/wallabag/pull/2174) Added filter for tags on API (Thomas Citharel)
-- [#2176](https://github.com/wallabag/wallabag/pull/2176) Added `since` parameter in API (Thomas Citharel)
-- [#2170](https://github.com/wallabag/wallabag/pull/2170), [#2183](https://github.com/wallabag/wallabag/pull/2183) Added tags on entries view (Thomas Citharel)
-- [#2186](https://github.com/wallabag/wallabag/pull/2186) Added option to disable registration (Thomas Citharel)
-- [#1904](https://github.com/wallabag/wallabag/pull/1904) Share entry with a public URL (Nicolas Lœuillet)
-- [#2243](https://github.com/wallabag/wallabag/pull/2243) Added list of untagged articles (Nicolas Lœuillet)
-- [#2255](https://github.com/wallabag/wallabag/pull/2255) Added Readability import (Jeremy Benoist)
-- [#2002](https://github.com/wallabag/wallabag/pull/2002) Added articles counter in sidebar (Nicolas Lœuillet)
-- [#2275](https://github.com/wallabag/wallabag/pull/2275) Added date from entries in export (Jeremy Benoist)
-- [#2266](https://github.com/wallabag/wallabag/pull/2266) Added tags counter in sidebar (Nicolas Lœuillet)
-- [#1941](https://github.com/wallabag/wallabag/pull/1941) Added asynchronous import (Jeremy Benoist, Nicolas Lœuillet)
-- [#2192](https://github.com/wallabag/wallabag/pull/2192) Added Firefox / Chrome bookmarks import (Thomas Citharel)
-- [#2310](https://github.com/wallabag/wallabag/pull/2310) Added Instapaper import (Jeremy Benoist)
-- [#2322](https://github.com/wallabag/wallabag/pull/2322) Added customized errors templates (Jeremy Benoist)
-- [#2323](https://github.com/wallabag/wallabag/pull/2323) Added simple stats in footer (Jeremy Benoist)
-- [#2324](https://github.com/wallabag/wallabag/pull/2324) Added ability to edit a tagging rule (Jeremy Benoist)
-- [#2325](https://github.com/wallabag/wallabag/pull/2325) Added an `exists` endpoint in API (Jeremy Benoist)
-
-### Changed
-
-- [#2170](https://github.com/wallabag/wallabag/pull/2170) Entry titles are now smaller on entry view (Thomas Citharel)
-- [#2245](https://github.com/wallabag/wallabag/pull/2245) Changed where page title is displayed (Nicolas Lœuillet)
-- [#2274](https://github.com/wallabag/wallabag/pull/2274) Re use JsonResponse in API (Jeremy Benoist)
-- [#2257](https://github.com/wallabag/wallabag/pull/2257) Use created date for imported content (Jeremy Benoist)
-- [#2326](https://github.com/wallabag/wallabag/pull/2326) Quickstart layout (Nicolas Lœuillet)
-
-### Fixed
-
-- [#2328](https://github.com/wallabag/wallabag/pull/2328) Fixed duplicate URL with accents (Jeremy Benoist)
-- [#2319](https://github.com/wallabag/wallabag/pull/2319) Fixed `gd` extension missing in Dockerfile (Pascal Martin)
-- [#2313](https://github.com/wallabag/wallabag/pull/2313) Fixed long loading on Firefox (Nicolas Lœuillet)
-- [#2320](https://github.com/wallabag/wallabag/pull/2320) Fixed user config which wasn't created in some cases (Jeremy Benoist)
-- [#2301](https://github.com/wallabag/wallabag/pull/2301) Fixed feeds not syncing on android application (Thomas Citharel)
-- [#2308](https://github.com/wallabag/wallabag/pull/2308) Fixed duplicate tags on import (Jeremy Benoist)
-- [#2297](https://github.com/wallabag/wallabag/pull/2297) Fixed epub export with special characters in title (morhelluin)
-- [#2292](https://github.com/wallabag/wallabag/pull/2292) Fixed label for mark as read link in entry view (Nicolas Lœuillet)
-- [#2260](https://github.com/wallabag/wallabag/pull/2260) Fixed different font-size for labels in config screen (Nicolas Lœuillet)
-- [#2242](https://github.com/wallabag/wallabag/pull/2242) Fixed print / article views (Nicolas Lœuillet)
-- [#2328](https://github.com/wallabag/wallabag/pull/2328) Avoid duplicate url with accents (Jeremy Benoist)
-- [#2330](https://github.com/wallabag/wallabag/pull/2330) Remove error message when creating ePub versions (Paulino Michelazzo)
-- [#2331](https://github.com/wallabag/wallabag/pull/2331) Fix parameters in API links (Jeremy Benoist)
-
-### Removed
-
-- [#2318](https://github.com/wallabag/wallabag/pull/2318) Removed duplicated templates files (Nicolas Lœuillet)
-- [#2287](https://github.com/wallabag/wallabag/pull/2287) Useless area in footer for material theme (Nicolas Lœuillet)
-
-## [2.0.8] - 2016-09-07
-
-### Added
-
-- [#2262](https://github.com/wallabag/wallabag/pull/2262) Added a check for the database connection during installation (Jeremy Benoist)
-- [#2235](https://github.com/wallabag/wallabag/pull/2235) Added configuration for german documentation website, [available here](http://doc.wallabag.org/de/latest/) (Nicolas Lœuillet)
-
-### Changed
-
-- [graby](https://github.com/j0k3r/graby/releases/tag/1.4.3) Update Graby version, which now handles ZIP files (Jeremy Benoist)
-- [#2230](https://github.com/wallabag/wallabag/pull/2230) Changed title display in card view (Danilow Alexandr)
-
-### Fixed
-
-- [#2234](https://github.com/wallabag/wallabag/pull/2234) Fixed mailto link in documentation (Christian Studer)
-- [#2241](https://github.com/wallabag/wallabag/pull/2241) Fixed the height of the "Add new article" field in Chrome (Danilow Alexandr)
-- [#2238](https://github.com/wallabag/wallabag/pull/2238) Fixed login page in Qupzilla (Danilow Alexandr)
-
-## [2.0.7] - 2016-08-22
-
-### Added
-
-- [#2222](https://github.com/wallabag/wallabag/pull/2222) Added creation date and reading time on article view (Nicolas Lœuillet)
-- [#2134](https://github.com/wallabag/wallabag/pull/2134) Run tests on an uptodate HHVM (Jeremy Benoist)
-
-### Changed
-
-- [#2221](https://github.com/wallabag/wallabag/pull/2221) Replaced favorite word/icon with star one (Nicolas Lœuillet)
-
-### Fixed
-
-- [#2224](https://github.com/wallabag/wallabag/pull/2224) Avoid breaking import when fetching fail (Jeremy Benoist)
-- [#2216](https://github.com/wallabag/wallabag/pull/2216), [#2220](https://github.com/wallabag/wallabag/pull/2220) Enable CORS headers for OAUTH part (Rurik19)
-- [#2095](https://github.com/wallabag/wallabag/pull/2095) Fix form user display when 2FA is disabled (Nicolas Lœuillet)
-
-## [2.0.6] - 2016-08-10
-
-### Changed
-
-- [#2199](https://github.com/wallabag/wallabag/pull/2199) Handling socials links into a config file (Simon Alberny)
-- [#2172](https://github.com/wallabag/wallabag/pull/2172) Change the way to login user in tests (Jeremy Benoist)
-- [#2155](https://github.com/wallabag/wallabag/pull/2155) Use friendsofphp instead of fabpot for PHP CS Fixer (Jeremy Benoist)
-
-### Fixed
-
-- [#2200](https://github.com/wallabag/wallabag/pull/2200) Fixed typo in entry:notice:entry_saved (charno6)
-- [#2185](https://github.com/wallabag/wallabag/pull/2185) Fix 3rd-Party Apps links (Chrome & Firefox) (Thomas Citharel)
-- [#2165](https://github.com/wallabag/wallabag/pull/2165) Fix a few french translations typos (Thomas Citharel)
-- [#2157](https://github.com/wallabag/wallabag/pull/2157) Handle only upper or only lower reading filter (Jeremy Benoist)
-- [#2156](https://github.com/wallabag/wallabag/pull/2156) Try to find bad redirection after delete (Jeremy Benoist)
-
-## [2.0.5] - 2016-05-31
-
-### Added
-
-- [#2052](https://github.com/wallabag/wallabag/pull/2052) Add unread filter to entries pages (Dan Bartram)
-
-### Changed
-
-- [#2093](https://github.com/wallabag/wallabag/pull/2093) Replace vertical dots in material theme with horizontal dots (Nicolas Lœuillet)
-- [#2054](https://github.com/wallabag/wallabag/pull/2054) Update italian translation (Daniele Conca)
-- [#2068](https://github.com/wallabag/wallabag/pull/2068), [#2049](https://github.com/wallabag/wallabag/pull/2049) Update documentation (Josh Panter, Mario Vormstein)
-
-### Fixed
-
-- [#2122](https://github.com/wallabag/wallabag/pull/2122) Fix the deletion of Tags/Entries relation when delete an entry (Jeremy Benoist, Nicolas Lœuillet)
-- [#2095](https://github.com/wallabag/wallabag/pull/2095) Fix form user display when 2FA is disabled (Nicolas Lœuillet)
-- [#2092](https://github.com/wallabag/wallabag/pull/2092) API: Starred and archived clears if article is already exists (Rurik19)
-- [#2097](https://github.com/wallabag/wallabag/issues/2097) Fix image path in 2-factor authentification email (Baptiste Mille-Mathias)
-- [#2069](https://github.com/wallabag/wallabag/pull/2069) Do not specify language in Firefox addon link (Merouane Atig)
-
-## [2.0.4] - 2016-05-07
-
-### Added
-
-- [#2016](https://github.com/wallabag/wallabag/pull/2016) Big updates in [our documentation](http://doc.wallabag.org/en/master/) (Nicolas Lœuillet)
-- [#2028](https://github.com/wallabag/wallabag/pull/2028) Documentation about android application (Strubbl)
-- [#2019](https://github.com/wallabag/wallabag/pull/2019) Italian translation (Daniele Conca)
-- [#2011](https://github.com/wallabag/wallabag/pull/2011) Documentation about wallabag upgrade (biva)
-- [#1985](https://github.com/wallabag/wallabag/pull/1985) Documentation about rights access (FoxMaSk)
-- [#1969](https://github.com/wallabag/wallabag/pull/1969) Third resources for API in documentation (Nicolas Lœuillet)
-- [#1967](https://github.com/wallabag/wallabag/pull/1967) FAQ page in documentation (Nicolas Lœuillet)
-
-### Changed
-
-- [#1977](https://github.com/wallabag/wallabag/pull/1977) Spanish documentation (jami7)
-
-### Fixed
-
-- [#2023](https://github.com/wallabag/wallabag/pull/2023) Fix translation for validators (Nicolas Lœuillet)
-- [#2020](https://github.com/wallabag/wallabag/pull/2020) Fix number of entries in tag/list (Nicolas Lœuillet)
-- [#2022](https://github.com/wallabag/wallabag/pull/2022) Fix pagination bar on small devices (Nicolas Lœuillet)
-- [#2013](https://github.com/wallabag/wallabag/pull/2013) Fix tag listing (Nicolas Lœuillet)
-- [#1976](https://github.com/wallabag/wallabag/pull/1976) Fix filter reading time (Nicolas Lœuillet)
-- [#2005](https://github.com/wallabag/wallabag/pull/2005) Fix reading speed not defined when user was created via config page (Nicolas Lœuillet)
-- [#2010](https://github.com/wallabag/wallabag/pull/2010) Set the title via POST /api/entries (Nicolas Lœuillet)
-
-## [2.0.3] - 2016-04-22
-
-### Added
-
-- [#1962](https://github.com/wallabag/wallabag/pull/1962) cURL examples in documentation about API (Dirk Deimeke)
-
-### Fixed
-
-- Forgot `composer.lock` file in 2.0.2 release so some users may encounter `Fatal error: Out of memory` error during installation
-
-## [2.0.2] - 2016-04-21
-
-### Added
-
-- [#1945](https://github.com/wallabag/wallabag/pull/1945) cURL examples in documentation about API (Dirk Deimeke)
-- [#1911](https://github.com/wallabag/wallabag/pull/1911) Add title hover on entry titles (Thomas Citharel)
-
-### Changed
-
-- [#1944](https://github.com/wallabag/wallabag/pull/1944), [#1953](https://github.com/wallabag/wallabag/pull/1953), [#1954](https://github.com/wallabag/wallabag/pull/1954) Due to branches renaming, update documentation and configuration (maxi62330, Nicolas Lœuillet)
-- [#1942](https://github.com/wallabag/wallabag/pull/1942) Optimize import (Nicolas Lœuillet)
-- [#1935](https://github.com/wallabag/wallabag/pull/1935) Update spanish translation (jami7)
-- [#1929](https://github.com/wallabag/wallabag/pull/1929) Change guid and link in RSS feeds to give original entry URL (Nicolas Lœuillet)
-- [#1918](https://github.com/wallabag/wallabag/pull/1918) Improve pagination when user has lot of entries (Nicolas Lœuillet)
-- [#1916](https://github.com/wallabag/wallabag/pull/1916) Change PHP arrays and move test parameters in a separated file (Jeremy Benoist)
-
-### Fixed
-
-- [#1957](https://github.com/wallabag/wallabag/pull/1957) Fix translation for `Go to your account` button (Nicolas Lœuillet)
-- [#1925](https://github.com/wallabag/wallabag/pull/1925) Redirect to homepage if refered is null (Nicolas Lœuillet)
-- [#1912](https://github.com/wallabag/wallabag/pull/1912) Fix 500 Internal Server Error -> "Setting piwik_enabled couldn't be found" (Jeremy Benoist)
-
-## [2.0.1] - 2016-04-11
-### Added
-
-- [Documentation about importing large file](http://doc.wallabag.org/en/v2/user/installation.html#installing-on-nginx) into nginx. (Nicolas Lœuillet)
-- [Documentation about wallabag API](http://doc.wallabag.org/en/v2/developer/api.html) (Nicolas Lœuillet)
-- [#1861](https://github.com/wallabag/wallabag/pull/1861) Round estimated time and add reading speed for Baggy (Nicolas Lœuillet)
-- [Documentation about wallabag v1 CLI import](http://doc.wallabag.org/en/v2/user/migration.html#import-via-command-line-interface-cli) (Nicolas Lœuillet)
-- [Add migrate link](http://doc.wallabag.org/en/v2/user/migration.html) in documentation (Nicolas Lœuillet)
-
-### Changed
-
-- [#1823](https://github.com/wallabag/wallabag/pull/1823) Persian translation (Masoud Abkenar)
-- [#1901](https://github.com/wallabag/wallabag/pull/1901) Spanish translation (Jeremy Benoist)
-- [#1879](https://github.com/wallabag/wallabag/pull/1879) Move tag form in Material theme (Nicolas Lœuillet)
-
-### Fixed
-
-- [#1903](https://github.com/wallabag/wallabag/pull/1903) Force server version to avoid connection error (Jeremy Benoist)
-- [#1887](https://github.com/wallabag/wallabag/pull/1887) Fix duplicate article when added via the bookmarklet (Nicolas Lœuillet)
-- [#1895](https://github.com/wallabag/wallabag/pull/1895) API: All the entries are fetched via GET /api/entries (Nicolas Lœuillet)
-- [#1898](https://github.com/wallabag/wallabag/pull/1898) Fix estimated reading time in material view #1893 (Nicolas Lœuillet)
-- [#1896](https://github.com/wallabag/wallabag/pull/1896) remove download_picture setting and manage show_printlink in material theme #1867 (Nicolas Lœuillet)
-- [#1894](https://github.com/wallabag/wallabag/pull/1894) Fix documentation link in developer page (Nicolas Lœuillet)
-- [#1891](https://github.com/wallabag/wallabag/pull/1891) Fix typo on configuration page (Nicolas Lœuillet)
-- [#1884](https://github.com/wallabag/wallabag/pull/1884) Change the installation method in issue template (Nicolas Lœuillet)
-- [#1844](https://github.com/wallabag/wallabag/pull/1844) Lock ocramius/proxy-manager (Jeremy Benoist)
-- [#1840](https://github.com/wallabag/wallabag/pull/1840) Fix Archive page title translation (Nicolas Lœuillet)
-- [#1801](https://github.com/wallabag/wallabag/pull/1804) Force user-agent for iansommerville.com (Jeremy Benoist)
-
-### Removed
-
-- [#1900](https://github.com/wallabag/wallabag/pull/1900) Remove empty portugese documentation (Nicolas Lœuillet)
-- [#1868](https://github.com/wallabag/wallabag/pull/1868) Remove keyboard shortcut and add tagging rule panel in baggy (Nicolas Lœuillet)
-- [#1824](https://github.com/wallabag/wallabag/pull/1824) Remove SMTP configuration environment overrides (Mathieu Bruyen)
-
-## [2.0.0] - 2016-04-03
-### Added
-
-* save an article, read it, favorite it, archive it. (Hopefully)
-* annotations: In each article you read, you can write annotations. ([read the doc](http://doc.wallabag.org/en/v2/user/annotations.html))
-* filter entries by reading time, domain name, creation date, status, etc.
-* assign tags to entries
-* edit article titles
-* a REST API ([you can have a look to the documentation](http://v2.wallabag.org/api/doc))
-* authorization via oAuth2
-* a new default theme, called `material`
-* RSS feeds (with ability to limit number of articles)
-* create a new account from the config page (for super admin only)
-* recover passwords from login page (you have to fill your email on config page)
-* picture preview, if available, is displayed for each entry
-* Public registration
-* migration from wallabag v1/v2 (based on JSON export) ([read the doc](http://doc.wallabag.org/en/v2/user/import.html))
-* migration from Pocket (it works, but we need to implement asynchronous import: if you have too many articles, it can fail) ([read the doc](http://doc.wallabag.org/en/v2/user/import.html))
-* exports in many formats (PDF, JSON, EPUB, MOBI, XML, CSV and TXT).
-* 2-Factor authentication via email ([read the doc](http://doc.wallabag.org/en/v2/user/configuration.html#two-factor-authentication))
-* Tagging rule: create a rule to automatically assign tags to entries! ([read the doc](http://doc.wallabag.org/en/v2/user/configuration.html#tagging-rules))
-* Occitan, German, French, Turkish, Persian, Romanian, Polish, Danish, Spanish and English translations
-* Quickstart for beginners (when you don't have any entries)
-* Internal settings for administrator (the account created during installation)
-* For 3rd apps developers, a developer page is available to create API token
+# Change Log
+
+## [2.1.2](https://github.com/wallabag/wallabag/tree/2.1.2) (2016-10-07)
+**Fixed bugs:**
+
+- Tags are empty and not exported in json export [\#2256](https://github.com/wallabag/wallabag/issues/2256)
+- Fix exists API call [\#2377](https://github.com/wallabag/wallabag/pull/2377) ([tcitworld](https://github.com/tcitworld))
+
+**Closed issues:**
+
+- Bug: Error when I delete API's client [\#2369](https://github.com/wallabag/wallabag/issues/2369)
+- Error with simplexml\_load\_file\(\) [\#2368](https://github.com/wallabag/wallabag/issues/2368)
+- Write permission on data/db [\#2064](https://github.com/wallabag/wallabag/issues/2064)
+- New third-party resource [\#2039](https://github.com/wallabag/wallabag/issues/2039)
+- add speed reading option [\#2000](https://github.com/wallabag/wallabag/issues/2000)
+
+**Merged pull requests:**
+
+- try to reduce assets build npm connection failing by updating nodejs [\#2375](https://github.com/wallabag/wallabag/pull/2375) ([tcitworld](https://github.com/tcitworld))
+- Clickable tags [\#2374](https://github.com/wallabag/wallabag/pull/2374) ([tcitworld](https://github.com/tcitworld))
+- Remove mouf/nodejs-installer from composer [\#2363](https://github.com/wallabag/wallabag/pull/2363) ([j0k3r](https://github.com/j0k3r))
+- Fix relations export for Entry [\#2332](https://github.com/wallabag/wallabag/pull/2332) ([j0k3r](https://github.com/j0k3r))
+
+## [2.1.1](https://github.com/wallabag/wallabag/tree/2.1.1) (2016-10-04)
+**Fixed bugs:**
+
+- Does not remember scroll position in theme "material" [\#2360](https://github.com/wallabag/wallabag/issues/2360)
+- Bug authentification sur utilisateur supplémentaire [\#2357](https://github.com/wallabag/wallabag/issues/2357)
+- Issue with grunt during the upgrade to 2.1.0 [\#2346](https://github.com/wallabag/wallabag/issues/2346)
+- Unable to update to 2.1.0 [\#2345](https://github.com/wallabag/wallabag/issues/2345)
+- Update to 2.1.0 from 2.0.8 fails [\#2343](https://github.com/wallabag/wallabag/issues/2343)
+- Basically, fix everything [\#2353](https://github.com/wallabag/wallabag/pull/2353) ([tcitworld](https://github.com/tcitworld))
+
+**Closed issues:**
+
+-  2.1.0 PHP Fatal error [\#2355](https://github.com/wallabag/wallabag/issues/2355)
+- Blank page new installation 2.0.8 with MySQL v5.5.52, PHP 5.5.9-1ubuntu4.19 and Apache v2.4 [\#2352](https://github.com/wallabag/wallabag/issues/2352)
+- Issue with doctrine migraion on 2.0.8 -\> 2.1.0 upgrage [\#2347](https://github.com/wallabag/wallabag/issues/2347)
+- install.sh is missing [\#2344](https://github.com/wallabag/wallabag/issues/2344)
+- Upgrading from 2.0 to 2.1 broken [\#2337](https://github.com/wallabag/wallabag/issues/2337)
+- Saving images with v2? [\#2139](https://github.com/wallabag/wallabag/issues/2139)
+- shared hosting Update -\> 2.1.0 no graphics  [\#2356](https://github.com/wallabag/wallabag/issues/2356)
+- php-bcmath extension is missing [\#2342](https://github.com/wallabag/wallabag/issues/2342)
+- Update js & css assets [\#2249](https://github.com/wallabag/wallabag/issues/2249)
+
+**Merged pull requests:**
+
+- Create config even if user is disabled [\#2359](https://github.com/wallabag/wallabag/pull/2359) ([j0k3r](https://github.com/j0k3r))
+- Add php-bcmath extension to requirements [\#2354](https://github.com/wallabag/wallabag/pull/2354) ([Zayon](https://github.com/Zayon))
+- Prepare wallabag 2.1.1 [\#2349](https://github.com/wallabag/wallabag/pull/2349) ([nicosomb](https://github.com/nicosomb))
+- Update messages.pl.yml [\#2341](https://github.com/wallabag/wallabag/pull/2341) ([mruminski](https://github.com/mruminski))
+-  small improvement for german translation [\#2340](https://github.com/wallabag/wallabag/pull/2340) ([Strubbl](https://github.com/Strubbl))
+- Fix for 2.1 installation [\#2338](https://github.com/wallabag/wallabag/pull/2338) ([j0k3r](https://github.com/j0k3r))
+
+## [2.1.0](https://github.com/wallabag/wallabag/tree/2.1.0) (2016-10-03)
+**Fixed bugs:**
+
+- Invalid EPub export for Kobo devices when title contains '+' [\#2296](https://github.com/wallabag/wallabag/issues/2296)
+- Import deconding error [\#2090](https://github.com/wallabag/wallabag/issues/2090)
+- The CSRF token is invalid. Please try to resubmit the form. [\#1988](https://github.com/wallabag/wallabag/issues/1988)
+- Division by zero warnings in nginx error log [\#1880](https://github.com/wallabag/wallabag/issues/1880)
+- Importing from Pocket in v2 gives Internal Server Error 500 [\#1855](https://github.com/wallabag/wallabag/issues/1855)
+- The font used in the "Material" theme renders a bit weirdly in Firefox on Windows [\#1833](https://github.com/wallabag/wallabag/issues/1833)
+- cannot import very long article \(v2\) [\#1724](https://github.com/wallabag/wallabag/issues/1724)
+- Freshly registered user doesn't have Config associated [\#2312](https://github.com/wallabag/wallabag/issues/2312)
+- "next" links in /api/entries responses lack search parameters [\#2305](https://github.com/wallabag/wallabag/issues/2305)
+- 2.0.8 hangs when loading articles page [\#2302](https://github.com/wallabag/wallabag/issues/2302)
+- Number of tags in sidebar is wrong [\#2298](https://github.com/wallabag/wallabag/issues/2298)
+- When an article is marked as read the description in the menu is wrong [\#2286](https://github.com/wallabag/wallabag/issues/2286)
+- jquery too long in firefox [\#2281](https://github.com/wallabag/wallabag/issues/2281)
+- Use created date for imported content [\#2257](https://github.com/wallabag/wallabag/issues/2257)
+- Make tests work with the latest version of phpunit [\#2187](https://github.com/wallabag/wallabag/issues/2187)
+- Articles duplicates when URI contains non-ascii characters [\#2126](https://github.com/wallabag/wallabag/issues/2126)
+- Duplicate tags on import [\#1981](https://github.com/wallabag/wallabag/issues/1981)
+- Different font-size for form labels with Material theme [\#1788](https://github.com/wallabag/wallabag/issues/1788)
+- Unable to do a fresh install [\#1608](https://github.com/wallabag/wallabag/issues/1608)
+- Remove error message when creating ePub versions [\#2330](https://github.com/wallabag/wallabag/pull/2330) ([pmichelazzo](https://github.com/pmichelazzo))
+- Remove CSS class who caused long loading on Firefox [\#2313](https://github.com/wallabag/wallabag/pull/2313) ([nicosomb](https://github.com/nicosomb))
+- fix feeds not syncing on android app [\#2301](https://github.com/wallabag/wallabag/pull/2301) ([tcitworld](https://github.com/tcitworld))
+- Add filter for tags on API [\#2174](https://github.com/wallabag/wallabag/pull/2174) ([tcitworld](https://github.com/tcitworld))
+- fix font paths [\#2169](https://github.com/wallabag/wallabag/pull/2169) ([tcitworld](https://github.com/tcitworld))
+- Add modules when NodeJS versions are too low. [\#2168](https://github.com/wallabag/wallabag/pull/2168) ([tcitworld](https://github.com/tcitworld))
+
+**Closed issues:**
+
+- /api/entries endpoint ignores tags parameter [\#2304](https://github.com/wallabag/wallabag/issues/2304)
+- Tags created multiple times on repeated imports [\#2303](https://github.com/wallabag/wallabag/issues/2303)
+- Importing tags in Browser import [\#2300](https://github.com/wallabag/wallabag/issues/2300)
+- \# [\#2283](https://github.com/wallabag/wallabag/issues/2283)
+- Unable to retrieve article [\#2211](https://github.com/wallabag/wallabag/issues/2211)
+- Delete Framabag account [\#2207](https://github.com/wallabag/wallabag/issues/2207)
+- Error during login\_check [\#2163](https://github.com/wallabag/wallabag/issues/2163)
+- White screen after installation [\#2146](https://github.com/wallabag/wallabag/issues/2146)
+- wallabag can't retrieve contents for this article [\#2144](https://github.com/wallabag/wallabag/issues/2144)
+- 2 bugs after upgrade to 2.0.5 [\#2140](https://github.com/wallabag/wallabag/issues/2140)
+- Wallabag can't retrieve contents of a page [\#2135](https://github.com/wallabag/wallabag/issues/2135)
+- Export to html [\#2133](https://github.com/wallabag/wallabag/issues/2133)
+- wallabag can't retrieve contents for this article.  [\#2102](https://github.com/wallabag/wallabag/issues/2102)
+- delete user missing in admin view [\#1934](https://github.com/wallabag/wallabag/issues/1934)
+- Can't import article from carnetdevol.shost.ca [\#1865](https://github.com/wallabag/wallabag/issues/1865)
+- Crawl multipage articles [\#1758](https://github.com/wallabag/wallabag/issues/1758)
+- Ability to redownload previously failed content [\#1704](https://github.com/wallabag/wallabag/issues/1704)
+- \[v2\] Asynchronous jobs [\#1554](https://github.com/wallabag/wallabag/issues/1554)
+- What's in my bag this week? [\#1300](https://github.com/wallabag/wallabag/issues/1300)
+- How can I help wallabag [\#1254](https://github.com/wallabag/wallabag/issues/1254)
+- have users choosing their css for articles [\#1233](https://github.com/wallabag/wallabag/issues/1233)
+- Siteconfig issue \(will be edited to keep up status\) [\#1229](https://github.com/wallabag/wallabag/issues/1229)
+- OpenClassroom courses don't get fetch properly [\#987](https://github.com/wallabag/wallabag/issues/987)
+- Sphinx search support [\#985](https://github.com/wallabag/wallabag/issues/985)
+- Migration from MySQL to PostgreSQL with import [\#884](https://github.com/wallabag/wallabag/issues/884)
+- Import a list of urls to put into wallabag [\#599](https://github.com/wallabag/wallabag/issues/599)
+- Create an import for Readability [\#2253](https://github.com/wallabag/wallabag/issues/2253)
+- Instapaper import missing from Wallabag 2? [\#2248](https://github.com/wallabag/wallabag/issues/2248)
+- Clean entries.html.twig for page title [\#2244](https://github.com/wallabag/wallabag/issues/2244)
+- Some UIs issues using baggy [\#2231](https://github.com/wallabag/wallabag/issues/2231)
+- Feature request: User management [\#2116](https://github.com/wallabag/wallabag/issues/2116)
+- Display tags on entries view [\#1995](https://github.com/wallabag/wallabag/issues/1995)
+- Tags not handled in /api/entries [\#1984](https://github.com/wallabag/wallabag/issues/1984)
+- API improvements [\#1982](https://github.com/wallabag/wallabag/issues/1982)
+- Disable public user registration [\#1873](https://github.com/wallabag/wallabag/issues/1873)
+- Open entries from tags page [\#1798](https://github.com/wallabag/wallabag/issues/1798)
+- \[Feature request\] API endpoint for checking if a URL is already bookmarked [\#1796](https://github.com/wallabag/wallabag/issues/1796)
+- Editing tagging rules [\#1794](https://github.com/wallabag/wallabag/issues/1794)
+- Idea to simplify UI for results numbers [\#1789](https://github.com/wallabag/wallabag/issues/1789)
+- Use NPM to handle external \(JS & CSS\) assets [\#1759](https://github.com/wallabag/wallabag/issues/1759)
+- Displaying how much comments there are for an entry on top of it [\#1713](https://github.com/wallabag/wallabag/issues/1713)
+- List all untagged articles [\#1631](https://github.com/wallabag/wallabag/issues/1631)
+- Import from wallabag asynchronously  [\#1611](https://github.com/wallabag/wallabag/issues/1611)
+- \[v2\] 404 page [\#1570](https://github.com/wallabag/wallabag/issues/1570)
+- Full compatibility of wallabag with firefox bookmarks preserving tags! [\#1448](https://github.com/wallabag/wallabag/issues/1448)
+- Pagination more intuitive [\#1329](https://github.com/wallabag/wallabag/issues/1329)
+- \[v2\] API wishes [\#1182](https://github.com/wallabag/wallabag/issues/1182)
+- Modify a tag name from the all tags panel [\#1128](https://github.com/wallabag/wallabag/issues/1128)
+- Adding automatic articles tags support [\#1111](https://github.com/wallabag/wallabag/issues/1111)
+- Add untagged support. [\#1083](https://github.com/wallabag/wallabag/issues/1083)
+- Integrate some new icons [\#977](https://github.com/wallabag/wallabag/issues/977)
+- Ability to login in password protected websites  [\#886](https://github.com/wallabag/wallabag/issues/886)
+- Make joomla sites show full articles [\#838](https://github.com/wallabag/wallabag/issues/838)
+- Re-save button [\#726](https://github.com/wallabag/wallabag/issues/726)
+- Add .mobi export [\#701](https://github.com/wallabag/wallabag/issues/701)
+- Future plans for wallabag [\#687](https://github.com/wallabag/wallabag/issues/687)
+- Make all standard site\_config files downloadable [\#627](https://github.com/wallabag/wallabag/issues/627)
+- Change database structure [\#620](https://github.com/wallabag/wallabag/issues/620)
+- Tutorial for beginners [\#560](https://github.com/wallabag/wallabag/issues/560)
+- Set number of articles provided in RSS files [\#553](https://github.com/wallabag/wallabag/issues/553)
+- v2: API routes definition [\#414](https://github.com/wallabag/wallabag/issues/414)
+- public mode [\#95](https://github.com/wallabag/wallabag/issues/95)
+
+**Merged pull requests:**
+
+- Docker : install PHP 'gd' extension [\#2319](https://github.com/wallabag/wallabag/pull/2319) ([pmartin](https://github.com/pmartin))
+- Update messages.pl.yml [\#2309](https://github.com/wallabag/wallabag/pull/2309) ([mruminski](https://github.com/mruminski))
+- Fix issue \#2296: epub export with special chars in the title. [\#2297](https://github.com/wallabag/wallabag/pull/2297) ([egilli](https://github.com/egilli))
+- Update messages.oc.yml [\#2290](https://github.com/wallabag/wallabag/pull/2290) ([Quent-in](https://github.com/Quent-in))
+- Fixed CSS for quickstart links [\#2335](https://github.com/wallabag/wallabag/pull/2335) ([nicosomb](https://github.com/nicosomb))
+- Prepare wallabag 2.1.0 :rocket: [\#2334](https://github.com/wallabag/wallabag/pull/2334) ([nicosomb](https://github.com/nicosomb))
+- for 2.1, translate all strings to German, which haven't been translated yet [\#2333](https://github.com/wallabag/wallabag/pull/2333) ([Strubbl](https://github.com/Strubbl))
+- Fix parameters in API \_links [\#2331](https://github.com/wallabag/wallabag/pull/2331) ([j0k3r](https://github.com/j0k3r))
+- Occitan version update [\#2329](https://github.com/wallabag/wallabag/pull/2329) ([Quent-in](https://github.com/Quent-in))
+- Avoid duplicate url with accents [\#2328](https://github.com/wallabag/wallabag/pull/2328) ([j0k3r](https://github.com/j0k3r))
+- Add users management UI [\#2327](https://github.com/wallabag/wallabag/pull/2327) ([j0k3r](https://github.com/j0k3r))
+- Changed quickstart layout [\#2326](https://github.com/wallabag/wallabag/pull/2326) ([nicosomb](https://github.com/nicosomb))
+- Add an exists endpoint in API [\#2325](https://github.com/wallabag/wallabag/pull/2325) ([j0k3r](https://github.com/j0k3r))
+- Add ability to edit a tagging rule [\#2324](https://github.com/wallabag/wallabag/pull/2324) ([j0k3r](https://github.com/j0k3r))
+- Add simple stats in footer [\#2323](https://github.com/wallabag/wallabag/pull/2323) ([j0k3r](https://github.com/j0k3r))
+- Customize errors templates [\#2322](https://github.com/wallabag/wallabag/pull/2322) ([j0k3r](https://github.com/j0k3r))
+- Create user config in one place. [\#2320](https://github.com/wallabag/wallabag/pull/2320) ([j0k3r](https://github.com/j0k3r))
+- Removed duplicated templates files [\#2318](https://github.com/wallabag/wallabag/pull/2318) ([nicosomb](https://github.com/nicosomb))
+- Update messages.pl.yml [\#2316](https://github.com/wallabag/wallabag/pull/2316) ([mruminski](https://github.com/mruminski))
+- Fixes about upgrade [\#2315](https://github.com/wallabag/wallabag/pull/2315) ([nicosomb](https://github.com/nicosomb))
+- Assets work [\#2314](https://github.com/wallabag/wallabag/pull/2314) ([tcitworld](https://github.com/tcitworld))
+- Add Instapaper import [\#2310](https://github.com/wallabag/wallabag/pull/2310) ([j0k3r](https://github.com/j0k3r))
+- Fix duplicate tags on import [\#2308](https://github.com/wallabag/wallabag/pull/2308) ([j0k3r](https://github.com/j0k3r))
+- Some checks about Redis & RabbitMQ [\#2306](https://github.com/wallabag/wallabag/pull/2306) ([j0k3r](https://github.com/j0k3r))
+- polish version [\#2299](https://github.com/wallabag/wallabag/pull/2299) ([mruminski](https://github.com/mruminski))
+- Fixed label for mark as read link in entry view [\#2292](https://github.com/wallabag/wallabag/pull/2292) ([nicosomb](https://github.com/nicosomb))
+- Add links to translations in documentation homepage [\#2291](https://github.com/wallabag/wallabag/pull/2291) ([nicosomb](https://github.com/nicosomb))
+- Remove footer part [\#2287](https://github.com/wallabag/wallabag/pull/2287) ([nicosomb](https://github.com/nicosomb))
+- Check if asset is enable instead of opposite [\#2279](https://github.com/wallabag/wallabag/pull/2279) ([j0k3r](https://github.com/j0k3r))
+- Export dates from entries [\#2275](https://github.com/wallabag/wallabag/pull/2275) ([j0k3r](https://github.com/j0k3r))
+- Re-use JsonResponse [\#2274](https://github.com/wallabag/wallabag/pull/2274) ([j0k3r](https://github.com/j0k3r))
+- Added tags counter in sidebar \(material theme\) [\#2266](https://github.com/wallabag/wallabag/pull/2266) ([nicosomb](https://github.com/nicosomb))
+- Instead of selecting the whole data, just count it [\#2263](https://github.com/wallabag/wallabag/pull/2263) ([j0k3r](https://github.com/j0k3r))
+- Fixed different font-size for labels in config screen [\#2260](https://github.com/wallabag/wallabag/pull/2260) ([nicosomb](https://github.com/nicosomb))
+- Update messages.pl.yml [\#2258](https://github.com/wallabag/wallabag/pull/2258) ([mruminski](https://github.com/mruminski))
+- Add Readability import [\#2255](https://github.com/wallabag/wallabag/pull/2255) ([j0k3r](https://github.com/j0k3r))
+- Fixed last merge who caused CSS/JS bugs [\#2252](https://github.com/wallabag/wallabag/pull/2252) ([nicosomb](https://github.com/nicosomb))
+- Changed where page title is displayed [\#2245](https://github.com/wallabag/wallabag/pull/2245) ([nicosomb](https://github.com/nicosomb))
+- Add untagged entries [\#2243](https://github.com/wallabag/wallabag/pull/2243) ([nicosomb](https://github.com/nicosomb))
+- Fix print / article views [\#2242](https://github.com/wallabag/wallabag/pull/2242) ([nicosomb](https://github.com/nicosomb))
+- Add icon for public share link [\#2240](https://github.com/wallabag/wallabag/pull/2240) ([nicosomb](https://github.com/nicosomb))
+- Update documentation with new features for 2.1 [\#2239](https://github.com/wallabag/wallabag/pull/2239) ([nicosomb](https://github.com/nicosomb))
+- Add original link in public view of the article [\#2237](https://github.com/wallabag/wallabag/pull/2237) ([nicosomb](https://github.com/nicosomb))
+- Delete tag or tags by label [\#2218](https://github.com/wallabag/wallabag/pull/2218) ([nicosomb](https://github.com/nicosomb))
+- Fix PHPunit 5 warnings [\#2201](https://github.com/wallabag/wallabag/pull/2201) ([j0k3r](https://github.com/j0k3r))
+- Import Firefox & Chrome bookmarks into wallabag [\#2192](https://github.com/wallabag/wallabag/pull/2192) ([tcitworld](https://github.com/tcitworld))
+- Add option to disable registration [\#2186](https://github.com/wallabag/wallabag/pull/2186) ([tcitworld](https://github.com/tcitworld))
+- Bring tags on entries view to baggy [\#2183](https://github.com/wallabag/wallabag/pull/2183) ([tcitworld](https://github.com/tcitworld))
+- Add since parameter [\#2176](https://github.com/wallabag/wallabag/pull/2176) ([tcitworld](https://github.com/tcitworld))
+- Name api clients [\#2171](https://github.com/wallabag/wallabag/pull/2171) ([tcitworld](https://github.com/tcitworld))
+- Add tags on entries view and minor ui fixes [\#2170](https://github.com/wallabag/wallabag/pull/2170) ([tcitworld](https://github.com/tcitworld))
+- Manage assets through npm [\#2142](https://github.com/wallabag/wallabag/pull/2142) ([tcitworld](https://github.com/tcitworld))
+- Feature display items number [\#2002](https://github.com/wallabag/wallabag/pull/2002) ([nicosomb](https://github.com/nicosomb))
+- wallabag 2.1 [\#1999](https://github.com/wallabag/wallabag/pull/1999) ([nicosomb](https://github.com/nicosomb))
+- Add CLI import for wallabag v2 files [\#1990](https://github.com/wallabag/wallabag/pull/1990) ([nicosomb](https://github.com/nicosomb))
+- Links on each tag in Tags view [\#1943](https://github.com/wallabag/wallabag/pull/1943) ([nicosomb](https://github.com/nicosomb))
+- Use asynchronous jobs for imports [\#1941](https://github.com/wallabag/wallabag/pull/1941) ([nicosomb](https://github.com/nicosomb))
+- Share entry with a public URL [\#1904](https://github.com/wallabag/wallabag/pull/1904) ([nicosomb](https://github.com/nicosomb))
+
+## [2.0.8](https://github.com/wallabag/wallabag/tree/2.0.8) (2016-09-07)
+**Fixed bugs:**
+
+- wallabag:install, clear:cache error [\#2265](https://github.com/wallabag/wallabag/issues/2265)
+- API: Not used tag exists in the db, but is not returned in API  GET /api/tags result. [\#2259](https://github.com/wallabag/wallabag/issues/2259)
+- Error 500 when saving a PDF [\#2204](https://github.com/wallabag/wallabag/issues/2204)
+- Form to save a new article is broken with Google Chrome [\#1991](https://github.com/wallabag/wallabag/issues/1991)
+- login page cut in Qupzilla [\#1877](https://github.com/wallabag/wallabag/issues/1877)
+- Fix issue \#1991: correction of the height field to add articles [\#2241](https://github.com/wallabag/wallabag/pull/2241) ([modos189](https://github.com/modos189))
+
+**Closed issues:**
+
+- Retrieves article without error, but empty [\#2269](https://github.com/wallabag/wallabag/issues/2269)
+- Unable to retrieve contents for article: thepointmag.com [\#2264](https://github.com/wallabag/wallabag/issues/2264)
+- Send content to wallabag, instead of URL [\#2228](https://github.com/wallabag/wallabag/issues/2228)
+- wallabag retrieves only parts of multi-part feature article [\#2153](https://github.com/wallabag/wallabag/issues/2153)
+- Titles are too short in the tiles \(material\) [\#2128](https://github.com/wallabag/wallabag/issues/2128)
+- Titles are ellipsized too aggressively [\#2055](https://github.com/wallabag/wallabag/issues/2055)
+- reflets.info articles : unable to retrieve full-text content [\#1649](https://github.com/wallabag/wallabag/issues/1649)
+- Adding Tags when saving URL from Chrome extension [\#835](https://github.com/wallabag/wallabag/issues/835)
+- Add a requirement in InstallCommand to check database connection \(after driver checking\) [\#2251](https://github.com/wallabag/wallabag/issues/2251)
+
+**Merged pull requests:**
+
+- Occitan  updated [\#2267](https://github.com/wallabag/wallabag/pull/2267) ([Quent-in](https://github.com/Quent-in))
+- Allow failure for PHP 7.1 [\#2236](https://github.com/wallabag/wallabag/pull/2236) ([j0k3r](https://github.com/j0k3r))
+- Prepare wallabag 2.0.8 [\#2271](https://github.com/wallabag/wallabag/pull/2271) ([nicosomb](https://github.com/nicosomb))
+- Add a check for the database connection [\#2262](https://github.com/wallabag/wallabag/pull/2262) ([j0k3r](https://github.com/j0k3r))
+- V2 improve view [\#2238](https://github.com/wallabag/wallabag/pull/2238) ([modos189](https://github.com/modos189))
+- Add configuration for german documentation [\#2235](https://github.com/wallabag/wallabag/pull/2235) ([nicosomb](https://github.com/nicosomb))
+- Fixes mailto link in documentation [\#2234](https://github.com/wallabag/wallabag/pull/2234) ([cstuder](https://github.com/cstuder))
+- Cut entries title in card view: continued [\#2230](https://github.com/wallabag/wallabag/pull/2230) ([modos189](https://github.com/modos189))
+
+## [2.0.7](https://github.com/wallabag/wallabag/tree/2.0.7) (2016-08-22)
+**Fixed bugs:**
+
+- Uncaught Exception: Secured pdf file are currently not supported \(Smalot/PdfParser\) [\#2223](https://github.com/wallabag/wallabag/issues/2223)
+- Enable PATCH method for CORS in API part [\#2220](https://github.com/wallabag/wallabag/pull/2220) ([Rurik19](https://github.com/Rurik19))
+
+**Closed issues:**
+
+- iOS App and bag it! doesn't work  [\#2217](https://github.com/wallabag/wallabag/issues/2217)
+- CORS: Different "Access-Control-Allow-Origin" header behaviour [\#2215](https://github.com/wallabag/wallabag/issues/2215)
+- Update the arch aur package [\#2138](https://github.com/wallabag/wallabag/issues/2138)
+- link of the addons if the footer [\#2037](https://github.com/wallabag/wallabag/issues/2037)
+- Translate pictures in android documentation [\#2032](https://github.com/wallabag/wallabag/issues/2032)
+- filtering option only for unread articles [\#2031](https://github.com/wallabag/wallabag/issues/2031)
+- Set name for a client for the API [\#1765](https://github.com/wallabag/wallabag/issues/1765)
+- consistency between favorite / star\(red\) terms [\#2041](https://github.com/wallabag/wallabag/issues/2041)
+- date of the creation. of a post [\#2034](https://github.com/wallabag/wallabag/issues/2034)
+
+**Merged pull requests:**
+
+- Prepare wallabag 2.0.7 [\#2226](https://github.com/wallabag/wallabag/pull/2226) ([nicosomb](https://github.com/nicosomb))
+- Avoid breaking import when fetching fail [\#2224](https://github.com/wallabag/wallabag/pull/2224) ([j0k3r](https://github.com/j0k3r))
+- Added creation date and reading time on article view [\#2222](https://github.com/wallabag/wallabag/pull/2222) ([nicosomb](https://github.com/nicosomb))
+- Replaced favorite word/icon with star one [\#2221](https://github.com/wallabag/wallabag/pull/2221) ([nicosomb](https://github.com/nicosomb))
+- Enable CORS headers for OAUTH part [\#2216](https://github.com/wallabag/wallabag/pull/2216) ([Rurik19](https://github.com/Rurik19))
+- Run tests on an uptodate HHVM [\#2134](https://github.com/wallabag/wallabag/pull/2134) ([j0k3r](https://github.com/j0k3r))
+- Fix form user display when 2FA is disabled [\#2095](https://github.com/wallabag/wallabag/pull/2095) ([nicosomb](https://github.com/nicosomb))
+
+## [2.0.6](https://github.com/wallabag/wallabag/tree/2.0.6) (2016-08-10)
+**Fixed bugs:**
+
+- Filtering by reading time does not work if only one limit is set [\#2077](https://github.com/wallabag/wallabag/issues/2077)
+- Delete in article tries to redirect to deleted article [\#1964](https://github.com/wallabag/wallabag/issues/1964)
+- PDF said to be saved by wallabag when it isn't. [\#2188](https://github.com/wallabag/wallabag/issues/2188)
+- Fix 3rd-Party Apps links \(Chrome & Firefox\) [\#2185](https://github.com/wallabag/wallabag/pull/2185) ([tcitworld](https://github.com/tcitworld))
+
+**Closed issues:**
+
+- Social Features [\#2206](https://github.com/wallabag/wallabag/issues/2206)
+- Backslash issue at /var/cache/appProdProjectContainer.php [\#2205](https://github.com/wallabag/wallabag/issues/2205)
+- httpoxy vulnerability [\#2197](https://github.com/wallabag/wallabag/issues/2197)
+- wallabag can't retrieve contents for this article: linksunten.indymedia.org [\#2196](https://github.com/wallabag/wallabag/issues/2196)
+- The iOS application doesn't work with the latest wallabag version [\#2191](https://github.com/wallabag/wallabag/issues/2191)
+- wallabag fetches too much content on: www.drgoulu.com [\#2184](https://github.com/wallabag/wallabag/issues/2184)
+- Try to use Google AMP pages for fetching and/or redirect to original page [\#2173](https://github.com/wallabag/wallabag/issues/2173)
+- wallabag only retrieves first page of multi-page articles on arstechnica.co.uk [\#2154](https://github.com/wallabag/wallabag/issues/2154)
+- wallabag can't retrieve contents of fairly simple HTML article [\#2152](https://github.com/wallabag/wallabag/issues/2152)
+- wallabag retrieves the wrong contents for this page: theatlantic.com [\#2151](https://github.com/wallabag/wallabag/issues/2151)
+- wallabag can't retrieve contents for this article: o6asan.com [\#2099](https://github.com/wallabag/wallabag/issues/2099)
+- wallabag can't retrieve contents for this article: lifehacker.com [\#2082](https://github.com/wallabag/wallabag/issues/2082)
+- wallabag can't retrieve contents for this article: gizmodo.com [\#2079](https://github.com/wallabag/wallabag/issues/2079)
+- wallabag can't retrieve title for this article: blog.uberspace.de [\#2078](https://github.com/wallabag/wallabag/issues/2078)
+- wallabag can't retrieve contents for this article: community.redhat.com/blog [\#2076](https://github.com/wallabag/wallabag/issues/2076)
+- wallabag can't retrieve contents for this article: theatlantic.com [\#2075](https://github.com/wallabag/wallabag/issues/2075)
+- wallabag can't retrieve contents for this article: washingtonpost.com [\#2072](https://github.com/wallabag/wallabag/issues/2072)
+- wallabag can't retrieve contents for this article: vanseodesign.com [\#2071](https://github.com/wallabag/wallabag/issues/2071)
+- wallabag can't retrieve contents for this article: blog.martin-graesslin.com [\#2070](https://github.com/wallabag/wallabag/issues/2070)
+- Migrate PHP-CS-Fixer [\#2141](https://github.com/wallabag/wallabag/issues/2141)
+
+**Merged pull requests:**
+
+- add some missing phpdoc parameters [\#2202](https://github.com/wallabag/wallabag/pull/2202) ([tcitworld](https://github.com/tcitworld))
+- Run PHP 7.1 on Travis [\#2048](https://github.com/wallabag/wallabag/pull/2048) ([j0k3r](https://github.com/j0k3r))
+- Prepare release 2.0.6 [\#2212](https://github.com/wallabag/wallabag/pull/2212) ([nicosomb](https://github.com/nicosomb))
+- Fixed typo in entry:notice:entry\_saved [\#2200](https://github.com/wallabag/wallabag/pull/2200) ([charno6](https://github.com/charno6))
+- Handling socials links into a config file [\#2199](https://github.com/wallabag/wallabag/pull/2199) ([Simounet](https://github.com/Simounet))
+- FIX image inside a figure element max-width [\#2198](https://github.com/wallabag/wallabag/pull/2198) ([Simounet](https://github.com/Simounet))
+- Remove binary from repo [\#2195](https://github.com/wallabag/wallabag/pull/2195) ([j0k3r](https://github.com/j0k3r))
+- Fixed spelling Artúclos --\> Artículos [\#2194](https://github.com/wallabag/wallabag/pull/2194) ([benages](https://github.com/benages))
+- Change the way to login user in tests [\#2172](https://github.com/wallabag/wallabag/pull/2172) ([j0k3r](https://github.com/j0k3r))
+- Fix a few french translations typos [\#2165](https://github.com/wallabag/wallabag/pull/2165) ([tcitworld](https://github.com/tcitworld))
+- Update symlink to php-cs-fixer [\#2160](https://github.com/wallabag/wallabag/pull/2160) ([j0k3r](https://github.com/j0k3r))
+- Handle only upper or only lower reading filter [\#2157](https://github.com/wallabag/wallabag/pull/2157) ([j0k3r](https://github.com/j0k3r))
+- Try to find bad redirection after delete [\#2156](https://github.com/wallabag/wallabag/pull/2156) ([j0k3r](https://github.com/j0k3r))
+- Use friendsofphp instead of fabpot [\#2155](https://github.com/wallabag/wallabag/pull/2155) ([j0k3r](https://github.com/j0k3r))
+- translate documentation to German [\#2148](https://github.com/wallabag/wallabag/pull/2148) ([Strubbl](https://github.com/Strubbl))
+- Corrected Regex for lighttpd rewrite [\#2145](https://github.com/wallabag/wallabag/pull/2145) ([even-allmighty](https://github.com/even-allmighty))
+- Jump to Symfony 3.1 [\#2132](https://github.com/wallabag/wallabag/pull/2132) ([j0k3r](https://github.com/j0k3r))
+
+## [2.0.5](https://github.com/wallabag/wallabag/tree/2.0.5) (2016-05-31)
+**Fixed bugs:**
+
+- Non-ASCII characters from locale files are shown as "?" [\#1215](https://github.com/wallabag/wallabag/issues/1215)
+- SERIOUS BUG - Tags clears on all articles after deleting article contains tags [\#2121](https://github.com/wallabag/wallabag/issues/2121)
+- API: POST on existing entry clears starred and archived flags [\#2089](https://github.com/wallabag/wallabag/issues/2089)
+
+**Closed issues:**
+
+- At last: Chrome plugin [\#2120](https://github.com/wallabag/wallabag/issues/2120)
+- 404 when trying to complete account activation [\#2108](https://github.com/wallabag/wallabag/issues/2108)
+- wallabag can't retrieve contents for this article: https://lwn.net/Articles/607652/ [\#2100](https://github.com/wallabag/wallabag/issues/2100)
+- Tag menu disappear while on mobile screen size [\#2091](https://github.com/wallabag/wallabag/issues/2091)
+- API: is\_starred and is\_archived return wrond values \(alwais 0\) [\#2088](https://github.com/wallabag/wallabag/issues/2088)
+- wallabag can't retrieve contents for this article: http://hn.premii.com/\#/comments/11661313 [\#2087](https://github.com/wallabag/wallabag/issues/2087)
+- wallabag can't retrieve contents for this article: wired.de [\#2086](https://github.com/wallabag/wallabag/issues/2086)
+- wallabag can't retrieve contents for this article: developer-blog.net [\#2085](https://github.com/wallabag/wallabag/issues/2085)
+- wallabag can't retrieve contents for this article: linuxnix.com [\#2084](https://github.com/wallabag/wallabag/issues/2084)
+- wallabag can't retrieve title for this article: jgnatch.com [\#2083](https://github.com/wallabag/wallabag/issues/2083)
+- wallabag can't retrieve contents for this article: blog.christian-stankowic.de [\#2081](https://github.com/wallabag/wallabag/issues/2081)
+- wallabag can't retrieve contents for this article: eff.org [\#2080](https://github.com/wallabag/wallabag/issues/2080)
+- wallabag can't retrieve contents for this article: lwn.net [\#2073](https://github.com/wallabag/wallabag/issues/2073)
+- HTTP 500 error and no logs in nginx error.log [\#2043](https://github.com/wallabag/wallabag/issues/2043)
+- Can't fetch articles from Forbes.com [\#1978](https://github.com/wallabag/wallabag/issues/1978)
+- the 3 points story ;\) [\#2065](https://github.com/wallabag/wallabag/issues/2065)
+- Update .github/CONTRIBUTING.md [\#2059](https://github.com/wallabag/wallabag/issues/2059)
+- missing image in two factor authentication email [\#2045](https://github.com/wallabag/wallabag/issues/2045)
+- wallabag can't retrieve contents for this article. Please report this issue to us. [\#2040](https://github.com/wallabag/wallabag/issues/2040)
+
+**Merged pull requests:**
+
+- Improve English translation [\#2109](https://github.com/wallabag/wallabag/pull/2109) ([Poorchop](https://github.com/Poorchop))
+- Update api.rst [\#2044](https://github.com/wallabag/wallabag/pull/2044) ([joshp23](https://github.com/joshp23))
+- new details in the doc about the rights access again;\) [\#2038](https://github.com/wallabag/wallabag/pull/2038) ([foxmask](https://github.com/foxmask))
+- Fix the deletion of Tags/Entries relation when delete an entry [\#2122](https://github.com/wallabag/wallabag/pull/2122) ([nicosomb](https://github.com/nicosomb))
+- Prepare wallabag 2.0.5 [\#2118](https://github.com/wallabag/wallabag/pull/2118) ([nicosomb](https://github.com/nicosomb))
+- Docs proposal [\#2112](https://github.com/wallabag/wallabag/pull/2112) ([Poorchop](https://github.com/Poorchop))
+- add screenshots of android docu in English [\#2111](https://github.com/wallabag/wallabag/pull/2111) ([Strubbl](https://github.com/Strubbl))
+- CS [\#2098](https://github.com/wallabag/wallabag/pull/2098) ([j0k3r](https://github.com/j0k3r))
+- Fix image path in 2-factor authentification email [\#2097](https://github.com/wallabag/wallabag/pull/2097) ([bmillemathias](https://github.com/bmillemathias))
+- Update CONTRIBUTING file [\#2094](https://github.com/wallabag/wallabag/pull/2094) ([nicosomb](https://github.com/nicosomb))
+- Replace vertical dots in material theme with horizontal dots [\#2093](https://github.com/wallabag/wallabag/pull/2093) ([nicosomb](https://github.com/nicosomb))
+- Starred and Archived clears if article is already exists [\#2092](https://github.com/wallabag/wallabag/pull/2092) ([Rurik19](https://github.com/Rurik19))
+- Do not specify language in Firefox addon link [\#2069](https://github.com/wallabag/wallabag/pull/2069) ([merwan](https://github.com/merwan))
+- Added information about permissions on data/ [\#2068](https://github.com/wallabag/wallabag/pull/2068) ([mariovor](https://github.com/mariovor))
+- Update CraueConfigBundle.it.yml [\#2054](https://github.com/wallabag/wallabag/pull/2054) ([jamiroconca](https://github.com/jamiroconca))
+- Add unread filter to entries pages [\#2052](https://github.com/wallabag/wallabag/pull/2052) ([danbartram](https://github.com/danbartram))
+- Update api.rst [\#2049](https://github.com/wallabag/wallabag/pull/2049) ([joshp23](https://github.com/joshp23))
+
+## [2.0.4](https://github.com/wallabag/wallabag/tree/2.0.4) (2016-05-07)
+**Fixed bugs:**
+
+- Tag-list not properly rebuilt  after import 1.9 \> 2.0b [\#1760](https://github.com/wallabag/wallabag/issues/1760)
+- cant set the title of the post from the API when "post"\(ing\) [\#2009](https://github.com/wallabag/wallabag/issues/2009)
+- Renderer of the main page not align/overlaps [\#2008](https://github.com/wallabag/wallabag/issues/2008)
+- Number of entries per tag is not correct in tag/list [\#2006](https://github.com/wallabag/wallabag/issues/2006)
+- Reading speed not defined when creating user via config page [\#2004](https://github.com/wallabag/wallabag/issues/2004)
+- not all tags are listed properly [\#1994](https://github.com/wallabag/wallabag/issues/1994)
+- Wrong reading time in filter entries [\#1975](https://github.com/wallabag/wallabag/issues/1975)
+
+**Closed issues:**
+
+- 504 while importing from Pocket [\#2027](https://github.com/wallabag/wallabag/issues/2027)
+-  wallabag can't retrieve contents for this article. Please report this issue to us.  [\#2026](https://github.com/wallabag/wallabag/issues/2026)
+- Bug in bootstrap.php.cache / Wallabag v2.0.3 / 1st lauch [\#2015](https://github.com/wallabag/wallabag/issues/2015)
+- Updating 2x? [\#2007](https://github.com/wallabag/wallabag/issues/2007)
+- filter list by tag [\#1996](https://github.com/wallabag/wallabag/issues/1996)
+- Problem reading DZone entry [\#1980](https://github.com/wallabag/wallabag/issues/1980)
+- Can't fetch indiegogo project [\#1972](https://github.com/wallabag/wallabag/issues/1972)
+- Table not found error in wallabag fresh install with pdo\_mysql  [\#1971](https://github.com/wallabag/wallabag/issues/1971)
+- Wrong display in wallabag v2 - site http://wiki.korben.info [\#1892](https://github.com/wallabag/wallabag/issues/1892)
+- Unable to retrieve full-text content \(http://www.yellow-bricks.com\) [\#1533](https://github.com/wallabag/wallabag/issues/1533)
+- What can we do with "wrong display" emails? [\#1340](https://github.com/wallabag/wallabag/issues/1340)
+- Keeping support.wallabag.org alive? [\#1270](https://github.com/wallabag/wallabag/issues/1270)
+- Create email address for support [\#1260](https://github.com/wallabag/wallabag/issues/1260)
+- website with special caracters in URL not saved [\#1235](https://github.com/wallabag/wallabag/issues/1235)
+- github blobs: "unable to retrieve full-text content" [\#1198](https://github.com/wallabag/wallabag/issues/1198)
+- Add pagination on bottom of page [\#2021](https://github.com/wallabag/wallabag/issues/2021)
+- Translation missing when creating new user via config [\#2003](https://github.com/wallabag/wallabag/issues/2003)
+- Doc improvement about installation and rights permission [\#1983](https://github.com/wallabag/wallabag/issues/1983)
+- \[Installation V2\] Impossible to install: post-install-cmd error [\#1961](https://github.com/wallabag/wallabag/issues/1961)
+- Apache reload error  [\#1950](https://github.com/wallabag/wallabag/issues/1950)
+- HowTo use wallabag v2 with LigHTTPd [\#1931](https://github.com/wallabag/wallabag/issues/1931)
+
+**Merged pull requests:**
+
+- Prepare wallabag 2.0.4 [\#2035](https://github.com/wallabag/wallabag/pull/2035) ([nicosomb](https://github.com/nicosomb))
+- Change Travis/Scrutinizer pictures in README [\#2029](https://github.com/wallabag/wallabag/pull/2029) ([nicosomb](https://github.com/nicosomb))
+- Docu for android app [\#2028](https://github.com/wallabag/wallabag/pull/2028) ([Strubbl](https://github.com/Strubbl))
+- Update messages.it.yml [\#2024](https://github.com/wallabag/wallabag/pull/2024) ([jamiroconca](https://github.com/jamiroconca))
+- Fix translation for validators [\#2023](https://github.com/wallabag/wallabag/pull/2023) ([nicosomb](https://github.com/nicosomb))
+- Fix pagination bar on small devices [\#2022](https://github.com/wallabag/wallabag/pull/2022) ([nicosomb](https://github.com/nicosomb))
+- Fix number of entries in tag/list [\#2020](https://github.com/wallabag/wallabag/pull/2020) ([nicosomb](https://github.com/nicosomb))
+- Create CraueConfigBundle.it.yml [\#2019](https://github.com/wallabag/wallabag/pull/2019) ([jamiroconca](https://github.com/jamiroconca))
+- Update config.yml, add italian as available language [\#2018](https://github.com/wallabag/wallabag/pull/2018) ([jamiroconca](https://github.com/jamiroconca))
+- Create messages.it.yml [\#2017](https://github.com/wallabag/wallabag/pull/2017) ([jamiroconca](https://github.com/jamiroconca))
+- Update documentation [\#2016](https://github.com/wallabag/wallabag/pull/2016) ([nicosomb](https://github.com/nicosomb))
+- Fix tags listing [\#2013](https://github.com/wallabag/wallabag/pull/2013) ([nicosomb](https://github.com/nicosomb))
+- integrate upgrade.rst [\#2012](https://github.com/wallabag/wallabag/pull/2012) ([biva](https://github.com/biva))
+- upgrade.rst \(Creation of an upgrade page in the documentation\) [\#2011](https://github.com/wallabag/wallabag/pull/2011) ([biva](https://github.com/biva))
+- Set the title via POST /api/entries [\#2010](https://github.com/wallabag/wallabag/pull/2010) ([nicosomb](https://github.com/nicosomb))
+- Fix reading speed not defined when user was created via config page [\#2005](https://github.com/wallabag/wallabag/pull/2005) ([nicosomb](https://github.com/nicosomb))
+- Fix old branch name urls [\#2001](https://github.com/wallabag/wallabag/pull/2001) ([tcitworld](https://github.com/tcitworld))
+- Update CraueConfigBundle.es.yml [\#1992](https://github.com/wallabag/wallabag/pull/1992) ([jami7](https://github.com/jami7))
+- Rights access to the folders of the project [\#1985](https://github.com/wallabag/wallabag/pull/1985) ([foxmask](https://github.com/foxmask))
+- Es translation [\#1977](https://github.com/wallabag/wallabag/pull/1977) ([j0k3r](https://github.com/j0k3r))
+- Fix filter reading time [\#1976](https://github.com/wallabag/wallabag/pull/1976) ([nicosomb](https://github.com/nicosomb))
+- Fix typos in API documentation [\#1970](https://github.com/wallabag/wallabag/pull/1970) ([nicosomb](https://github.com/nicosomb))
+- Create 3rd Resources chapter in API documentation [\#1969](https://github.com/wallabag/wallabag/pull/1969) ([nicosomb](https://github.com/nicosomb))
+- Add FAQ page in documentation [\#1967](https://github.com/wallabag/wallabag/pull/1967) ([nicosomb](https://github.com/nicosomb))
+
+## [2.0.3](https://github.com/wallabag/wallabag/tree/2.0.3) (2016-04-22)
+**Merged pull requests:**
+
+- Prepare release 2.0.3 [\#1965](https://github.com/wallabag/wallabag/pull/1965) ([nicosomb](https://github.com/nicosomb))
+- Update API documentation with cURL examples [\#1962](https://github.com/wallabag/wallabag/pull/1962) ([nicosomb](https://github.com/nicosomb))
+
+## [2.0.2](https://github.com/wallabag/wallabag/tree/2.0.2) (2016-04-21)
+**Fixed bugs:**
+
+- Button not translated after registration [\#1956](https://github.com/wallabag/wallabag/issues/1956)
+- Give original URL through RSS feeds [\#1926](https://github.com/wallabag/wallabag/issues/1926)
+- Calling directly /archive/123 gives 500 Internal Server Error [\#1924](https://github.com/wallabag/wallabag/issues/1924)
+
+**Closed issues:**
+
+- API v2 is it possible to use curl to add,remove items like in pocket? [\#1955](https://github.com/wallabag/wallabag/issues/1955)
+- Changing reading view? [\#1949](https://github.com/wallabag/wallabag/issues/1949)
+- Property "link" links back to the wallabag item in starred feed [\#1947](https://github.com/wallabag/wallabag/issues/1947)
+- Error 500 when starring or archiving an article with the wallabag app for Android [\#1946](https://github.com/wallabag/wallabag/issues/1946)
+- \[Documentation request\] Please add a curl example to the API documentation of v2 [\#1939](https://github.com/wallabag/wallabag/issues/1939)
+- .htaccess instead of vhost [\#1930](https://github.com/wallabag/wallabag/issues/1930)
+- Hide pagination if not needed [\#1932](https://github.com/wallabag/wallabag/issues/1932)
+- Show full title in a tooltip [\#1906](https://github.com/wallabag/wallabag/issues/1906)
+- Hide pagination when there's too many entries [\#1905](https://github.com/wallabag/wallabag/issues/1905)
+- Update translations [\#1809](https://github.com/wallabag/wallabag/issues/1809)
+- Blogger Articles show up as untitled [\#803](https://github.com/wallabag/wallabag/issues/803)
+
+**Merged pull requests:**
+
+- Fix translation for Go to your account button after subscription [\#1957](https://github.com/wallabag/wallabag/pull/1957) ([nicosomb](https://github.com/nicosomb))
+- Update links in documentation [\#1954](https://github.com/wallabag/wallabag/pull/1954) ([nicosomb](https://github.com/nicosomb))
+- Actualisation des liens morts \(Documentation de traduction\) [\#1953](https://github.com/wallabag/wallabag/pull/1953) ([maxi62330](https://github.com/maxi62330))
+- Prepare release 2.0.2 [\#1948](https://github.com/wallabag/wallabag/pull/1948) ([nicosomb](https://github.com/nicosomb))
+- Added some curl examples [\#1945](https://github.com/wallabag/wallabag/pull/1945) ([ddeimeke](https://github.com/ddeimeke))
+- Update Travis configuration with branches renaming [\#1944](https://github.com/wallabag/wallabag/pull/1944) ([nicosomb](https://github.com/nicosomb))
+- Optimize import [\#1942](https://github.com/wallabag/wallabag/pull/1942) ([nicosomb](https://github.com/nicosomb))
+- Display pagination only if we have more than one page [\#1938](https://github.com/wallabag/wallabag/pull/1938) ([nicosomb](https://github.com/nicosomb))
+- Hide pagination if we only have one entry to display [\#1933](https://github.com/wallabag/wallabag/pull/1933) ([nicosomb](https://github.com/nicosomb))
+- Change guid and link in RSS feeds to give original entry URL [\#1929](https://github.com/wallabag/wallabag/pull/1929) ([nicosomb](https://github.com/nicosomb))
+- Redirect to homepage if referer is null [\#1925](https://github.com/wallabag/wallabag/pull/1925) ([nicosomb](https://github.com/nicosomb))
+- Remove useless dependancy [\#1919](https://github.com/wallabag/wallabag/pull/1919) ([nicosomb](https://github.com/nicosomb))
+- Improve pagination when user has lot of entries [\#1918](https://github.com/wallabag/wallabag/pull/1918) ([nicosomb](https://github.com/nicosomb))
+- Convert array + phpDoc [\#1916](https://github.com/wallabag/wallabag/pull/1916) ([j0k3r](https://github.com/j0k3r))
+- Fix doc links [\#1915](https://github.com/wallabag/wallabag/pull/1915) ([j0k3r](https://github.com/j0k3r))
+- add title hover on entry titles [\#1911](https://github.com/wallabag/wallabag/pull/1911) ([tcitworld](https://github.com/tcitworld))
+
+## [1.9.2](https://github.com/wallabag/wallabag/tree/1.9.2) (2016-04-18)
+**Fixed bugs:**
+
+- No branch or tag called 2.0.1 [\#1920](https://github.com/wallabag/wallabag/issues/1920)
+- Cannot update from v2.0  git a119acd [\#1917](https://github.com/wallabag/wallabag/issues/1917)
+- unable to add link, when user needs to login first [\#961](https://github.com/wallabag/wallabag/issues/961)
+- export pdf/epub : 504 Gateway Time-out  [\#1808](https://github.com/wallabag/wallabag/issues/1808)
+- Do not capture mouse gestures [\#1674](https://github.com/wallabag/wallabag/issues/1674)
+- "Stay signed in" don't do what it promise [\#1550](https://github.com/wallabag/wallabag/issues/1550)
+- json export doesn't work [\#1534](https://github.com/wallabag/wallabag/issues/1534)
+- large bookmark imports fails [\#1458](https://github.com/wallabag/wallabag/issues/1458)
+- Import fails with white screen [\#1405](https://github.com/wallabag/wallabag/issues/1405)
+- Add URL -\> URL not saved and logged out [\#1361](https://github.com/wallabag/wallabag/issues/1361)
+- Lost session too often [\#1339](https://github.com/wallabag/wallabag/issues/1339)
+- Marking article text advances to the next article [\#1309](https://github.com/wallabag/wallabag/issues/1309)
+- Sessions do not last when switching networks [\#1277](https://github.com/wallabag/wallabag/issues/1277)
+- Send articles by mail is sometimes broken [\#1273](https://github.com/wallabag/wallabag/issues/1273)
+- still using the “fr\_FR.utf8 [\#1271](https://github.com/wallabag/wallabag/issues/1271)
+- pb recherche dans les tags avec caractère spéciaux. [\#1258](https://github.com/wallabag/wallabag/issues/1258)
+- Deleting user fails with PHP Fatal error [\#1242](https://github.com/wallabag/wallabag/issues/1242)
+- Show button for adding firefox social service only on secured connections [\#1237](https://github.com/wallabag/wallabag/issues/1237)
+- database port not managed [\#1218](https://github.com/wallabag/wallabag/issues/1218)
+- Epub generation is slow [\#1199](https://github.com/wallabag/wallabag/issues/1199)
+- Long chapter names produce malformed epub [\#1196](https://github.com/wallabag/wallabag/issues/1196)
+- Installation error solution [\#1192](https://github.com/wallabag/wallabag/issues/1192)
+- Erreur à l'installation [\#1114](https://github.com/wallabag/wallabag/issues/1114)
+- Change tag icon [\#1079](https://github.com/wallabag/wallabag/issues/1079)
+- PDF export fails if pictures are not accessible [\#1011](https://github.com/wallabag/wallabag/issues/1011)
+- Deleting article in archive return to "unread" [\#1005](https://github.com/wallabag/wallabag/issues/1005)
+- Click on "Save link"/"Search" doesn't closes popup [\#962](https://github.com/wallabag/wallabag/issues/962)
+- Absolute urls in pochePictures.php tend to break [\#950](https://github.com/wallabag/wallabag/issues/950)
+- Download pictures: some pictures are not downloaded [\#949](https://github.com/wallabag/wallabag/issues/949)
+- 1.8.0: Only the RSS for favs works, unread and archive RSS doesn't  [\#914](https://github.com/wallabag/wallabag/issues/914)
+- The pagination's variable has no effect [\#875](https://github.com/wallabag/wallabag/issues/875)
+- Fatal error on Importing from Pocket [\#833](https://github.com/wallabag/wallabag/issues/833)
+- Articles content never fetched after import if no article is present [\#793](https://github.com/wallabag/wallabag/issues/793)
+- Login session is not remembered. [\#769](https://github.com/wallabag/wallabag/issues/769)
+- Some themes display a citation box wrong [\#759](https://github.com/wallabag/wallabag/issues/759)
+- Out of memory size limit with big article [\#682](https://github.com/wallabag/wallabag/issues/682)
+- Repeating notifications [\#648](https://github.com/wallabag/wallabag/issues/648)
+- Unable to get the content of shaarli posts [\#639](https://github.com/wallabag/wallabag/issues/639)
+- https redirect with htaccess  [\#534](https://github.com/wallabag/wallabag/issues/534)
+- can't add link if referers are blocked [\#82](https://github.com/wallabag/wallabag/issues/82)
+- Fix UTF-8 encoding before JSON export [\#1866](https://github.com/wallabag/wallabag/pull/1866) ([ymage](https://github.com/ymage))
+
+**Closed issues:**
+
+- Save articles sending them by email [\#1928](https://github.com/wallabag/wallabag/issues/1928)
+- Login fails after upgrading to 2.0.1 [\#1914](https://github.com/wallabag/wallabag/issues/1914)
+- Docker image [\#1858](https://github.com/wallabag/wallabag/issues/1858)
+- Vendor Package Alpha v2 [\#1623](https://github.com/wallabag/wallabag/issues/1623)
+- Unable to retrieve full-text content http://www.ulyces.co/ [\#1539](https://github.com/wallabag/wallabag/issues/1539)
+- \[v2\] Remove tags from an entry [\#1377](https://github.com/wallabag/wallabag/issues/1377)
+- \[v2\] Assign multiple tags at once [\#1376](https://github.com/wallabag/wallabag/issues/1376)
+- No article from Catholic.com get save to wallabag [\#1076](https://github.com/wallabag/wallabag/issues/1076)
+- Automatic site config [\#1029](https://github.com/wallabag/wallabag/issues/1029)
+- Bylines not being grabbed [\#850](https://github.com/wallabag/wallabag/issues/850)
+- Bad support of instructables.com [\#792](https://github.com/wallabag/wallabag/issues/792)
+- Share articles between users of the same wallabag instance [\#779](https://github.com/wallabag/wallabag/issues/779)
+- \[List\] unable to retrieve full-text content [\#598](https://github.com/wallabag/wallabag/issues/598)
+- "stay signed in" do not work [\#1515](https://github.com/wallabag/wallabag/issues/1515)
+- Add title on "random article" link [\#1315](https://github.com/wallabag/wallabag/issues/1315)
+- unable to retrieve full-text content [\#1264](https://github.com/wallabag/wallabag/issues/1264)
+- No warning at login when session can't be created [\#1188](https://github.com/wallabag/wallabag/issues/1188)
+- Does this web site work for you? [\#1146](https://github.com/wallabag/wallabag/issues/1146)
+- Wallabag doesn't retrieve any text on one site [\#1140](https://github.com/wallabag/wallabag/issues/1140)
+- \[UX\] The cross button in the upper right toolset should be to close current article  [\#1125](https://github.com/wallabag/wallabag/issues/1125)
+- Are all of the dependecies including those installed by composer under the MIT license as well? [\#1118](https://github.com/wallabag/wallabag/issues/1118)
+- add site\_config [\#1117](https://github.com/wallabag/wallabag/issues/1117)
+- Make the dice bigger [\#1101](https://github.com/wallabag/wallabag/issues/1101)
+- Wrong display in wallabag: graswurzel.net - umlauts are missing [\#1074](https://github.com/wallabag/wallabag/issues/1074)
+- Empty Articles from www.businessinsider.com [\#1073](https://github.com/wallabag/wallabag/issues/1073)
+- unable to retrieve full-text content [\#885](https://github.com/wallabag/wallabag/issues/885)
+- Create an "About" section - Get a way to check server configuration again [\#864](https://github.com/wallabag/wallabag/issues/864)
+- Make the cache time for Flattr checking a setting [\#765](https://github.com/wallabag/wallabag/issues/765)
+- Locally hosted Wallabag behind proxy [\#698](https://github.com/wallabag/wallabag/issues/698)
+- Only show the wallabag this link when on an article when the mouse is over the link. [\#685](https://github.com/wallabag/wallabag/issues/685)
+- Footnotes lost in article [\#670](https://github.com/wallabag/wallabag/issues/670)
+- Please add GPG signature to verify before installing Poche [\#257](https://github.com/wallabag/wallabag/issues/257)
+
+**Merged pull requests:**
+
+- Update messages.es.yml [\#1935](https://github.com/wallabag/wallabag/pull/1935) ([jami7](https://github.com/jami7))
+- remove buggy swipe actions [\#1825](https://github.com/wallabag/wallabag/pull/1825) ([tcitworld](https://github.com/tcitworld))
+- Add message on unread page about v2 [\#1815](https://github.com/wallabag/wallabag/pull/1815) ([nicosomb](https://github.com/nicosomb))
+- \[Do Not Merge\] Wallabag 1.9.2 [\#1814](https://github.com/wallabag/wallabag/pull/1814) ([tcitworld](https://github.com/tcitworld))
+
+## [2.0.1](https://github.com/wallabag/wallabag/tree/2.0.1) (2016-04-11)
+**Fixed bugs:**
+
+- Package installer is broken in 2.0.0 [\#1843](https://github.com/wallabag/wallabag/issues/1843)
+- recusive redirection with X-Forwarded-For set [\#1222](https://github.com/wallabag/wallabag/issues/1222)
+- Different reading time for one article [\#1893](https://github.com/wallabag/wallabag/issues/1893)
+- Duplicate entry via bookmarklet [\#1886](https://github.com/wallabag/wallabag/issues/1886)
+- 500 Internal Server Error -\> "Setting \"piwik\_enabled\" couldn't be found [\#1881](https://github.com/wallabag/wallabag/issues/1881)
+- PHP Warnings - bootstrap.php.cache missing [\#1872](https://github.com/wallabag/wallabag/issues/1872)
+- 2 options in internal settings are ineffective  [\#1867](https://github.com/wallabag/wallabag/issues/1867)
+- Only getting unread items from API [\#1863](https://github.com/wallabag/wallabag/issues/1863)
+- Round the estimated reading time [\#1859](https://github.com/wallabag/wallabag/issues/1859)
+- Can't install wallabag via composer install if my mysql database doesn't exist [\#1769](https://github.com/wallabag/wallabag/issues/1769)
+- Import from wallabag v1 data fails with csrf error and 'too large file' error [\#1764](https://github.com/wallabag/wallabag/issues/1764)
+- \[v2\] Post-installation error with postgresql [\#1752](https://github.com/wallabag/wallabag/issues/1752)
+
+**Closed issues:**
+
+- No search in v2? [\#1908](https://github.com/wallabag/wallabag/issues/1908)
+- have alexa read your blogs with some integration [\#1907](https://github.com/wallabag/wallabag/issues/1907)
+- Wrong display in wallabag v2 - site https://blog.journalduhacker.net [\#1897](https://github.com/wallabag/wallabag/issues/1897)
+- Wrong display in wallabag v2 - site http://blog.niqnutn.com [\#1888](https://github.com/wallabag/wallabag/issues/1888)
+- Composer hangs on "updating dependencies" [\#1885](https://github.com/wallabag/wallabag/issues/1885)
+- Composer is killed during Wallabag 2 installation [\#1883](https://github.com/wallabag/wallabag/issues/1883)
+- Loading path /import/wallabag-v2 gives 500 Internal Server Error [\#1878](https://github.com/wallabag/wallabag/issues/1878)
+- Error 500 with importing from Wallabag v1 [\#1860](https://github.com/wallabag/wallabag/issues/1860)
+- Adding SQL Schema for easier initialisation in containers [\#1857](https://github.com/wallabag/wallabag/issues/1857)
+- Syntax Error on installing v2 package with all dependencies [\#1852](https://github.com/wallabag/wallabag/issues/1852)
+- Missing parameters during install [\#1848](https://github.com/wallabag/wallabag/issues/1848)
+- Php server takes way too much CPU on Raspberry Pi [\#1846](https://github.com/wallabag/wallabag/issues/1846)
+- General error: 14 unable to open database file [\#1845](https://github.com/wallabag/wallabag/issues/1845)
+- \[error\] v2 nginx  hosting error [\#1828](https://github.com/wallabag/wallabag/issues/1828)
+-  wallabag can't retrieve contents from overblog [\#1826](https://github.com/wallabag/wallabag/issues/1826)
+- Fix articles [\#1578](https://github.com/wallabag/wallabag/issues/1578)
+- Not capturing [\#1573](https://github.com/wallabag/wallabag/issues/1573)
+- Unable to retrieve readable content http://distributistreview.com [\#1568](https://github.com/wallabag/wallabag/issues/1568)
+- Wrong display in wallabag [\#1549](https://github.com/wallabag/wallabag/issues/1549)
+- Unable to retrieve full-text content http://www.histoire.presse.fr/ [\#1538](https://github.com/wallabag/wallabag/issues/1538)
+- atteres.org's articles not displayed [\#1532](https://github.com/wallabag/wallabag/issues/1532)
+- Indiegogo - Pardon Our Interruption / blocked by www.distilnetworks.com [\#1520](https://github.com/wallabag/wallabag/issues/1520)
+- Installation on shared webhosting [\#1479](https://github.com/wallabag/wallabag/issues/1479)
+- www.forbes.com/sites [\#1452](https://github.com/wallabag/wallabag/issues/1452)
+- www.newstatesman.com [\#1428](https://github.com/wallabag/wallabag/issues/1428)
+- http://www.nationaljournal.com articles [\#1427](https://github.com/wallabag/wallabag/issues/1427)
+- Documentation for v2 [\#1359](https://github.com/wallabag/wallabag/issues/1359)
+- Wrong display in wallabag [\#1347](https://github.com/wallabag/wallabag/issues/1347)
+- Wrong display in wallabag [\#1345](https://github.com/wallabag/wallabag/issues/1345)
+- Unable to retrieve full-text content \(dailylinuxnews.com\) [\#1265](https://github.com/wallabag/wallabag/issues/1265)
+- file config: zataz.com [\#1249](https://github.com/wallabag/wallabag/issues/1249)
+- Incomplete article with self-hosted wallabag [\#1189](https://github.com/wallabag/wallabag/issues/1189)
+- Wrong display in wallabag: lowerclassmag.com [\#1077](https://github.com/wallabag/wallabag/issues/1077)
+- Cannot add some articles from FreshRSS [\#1041](https://github.com/wallabag/wallabag/issues/1041)
+- Untitled articles [\#989](https://github.com/wallabag/wallabag/issues/989)
+- Pluxml [\#976](https://github.com/wallabag/wallabag/issues/976)
+- Wrong displayed Website [\#924](https://github.com/wallabag/wallabag/issues/924)
+- Lifehacker article cut after image [\#918](https://github.com/wallabag/wallabag/issues/918)
+- Problem getting article from BBC site [\#825](https://github.com/wallabag/wallabag/issues/825)
+- Page capture failing for articles on this blog [\#818](https://github.com/wallabag/wallabag/issues/818)
+- wallabag reddit comment pages [\#692](https://github.com/wallabag/wallabag/issues/692)
+- Limit size of article [\#640](https://github.com/wallabag/wallabag/issues/640)
+- Save Recepies from rezeptwelt.de [\#562](https://github.com/wallabag/wallabag/issues/562)
+- adding links asynchronously [\#156](https://github.com/wallabag/wallabag/issues/156)
+- Saving a PDF document [\#116](https://github.com/wallabag/wallabag/issues/116)
+- Wrong operator definition in the Tagging Rules page [\#1889](https://github.com/wallabag/wallabag/issues/1889)
+- Wrong page title for the list archived articles [\#1882](https://github.com/wallabag/wallabag/issues/1882)
+- position of tag edit field [\#1870](https://github.com/wallabag/wallabag/issues/1870)
+- client\_max\_body\_size for Nginx [\#1849](https://github.com/wallabag/wallabag/issues/1849)
+- Installation not possible on cheap webhosting services [\#1827](https://github.com/wallabag/wallabag/issues/1827)
+- Update baggy theme with all changes [\#1673](https://github.com/wallabag/wallabag/issues/1673)
+
+**Merged pull requests:**
+
+- Fix estimated reading time in material view [\#1898](https://github.com/wallabag/wallabag/pull/1898) ([nicosomb](https://github.com/nicosomb))
+- Move setup config outside setupAdmin [\#1912](https://github.com/wallabag/wallabag/pull/1912) ([j0k3r](https://github.com/j0k3r))
+- Prepare release 2.0.1 [\#1909](https://github.com/wallabag/wallabag/pull/1909) ([nicosomb](https://github.com/nicosomb))
+- Force server version to avoid connexion error [\#1903](https://github.com/wallabag/wallabag/pull/1903) ([j0k3r](https://github.com/j0k3r))
+- Add changelog [\#1902](https://github.com/wallabag/wallabag/pull/1902) ([nicosomb](https://github.com/nicosomb))
+- Update Spanish translation [\#1901](https://github.com/wallabag/wallabag/pull/1901) ([j0k3r](https://github.com/j0k3r))
+- Remove empty portugese documentation [\#1900](https://github.com/wallabag/wallabag/pull/1900) ([nicosomb](https://github.com/nicosomb))
+- Add documentation about importing large file into nginx [\#1899](https://github.com/wallabag/wallabag/pull/1899) ([nicosomb](https://github.com/nicosomb))
+- Fix internal settings [\#1896](https://github.com/wallabag/wallabag/pull/1896) ([nicosomb](https://github.com/nicosomb))
+- All the entries are fetched via GET /api/entries [\#1895](https://github.com/wallabag/wallabag/pull/1895) ([nicosomb](https://github.com/nicosomb))
+- Fix documentation link in developer page [\#1894](https://github.com/wallabag/wallabag/pull/1894) ([nicosomb](https://github.com/nicosomb))
+- Fix typo on configuration page [\#1891](https://github.com/wallabag/wallabag/pull/1891) ([nicosomb](https://github.com/nicosomb))
+- Fix duplicate article when added via the bookmarklet [\#1887](https://github.com/wallabag/wallabag/pull/1887) ([nicosomb](https://github.com/nicosomb))
+- Change the installation method in issue template [\#1884](https://github.com/wallabag/wallabag/pull/1884) ([nicosomb](https://github.com/nicosomb))
+- Move tag form in Material theme [\#1879](https://github.com/wallabag/wallabag/pull/1879) ([nicosomb](https://github.com/nicosomb))
+- Remove keyboard shortcut and add tagging rule panel in baggy [\#1868](https://github.com/wallabag/wallabag/pull/1868) ([nicosomb](https://github.com/nicosomb))
+- Add production environment for CLI import [\#1862](https://github.com/wallabag/wallabag/pull/1862) ([nicosomb](https://github.com/nicosomb))
+- Round estimated time and add reading speed for Baggy [\#1861](https://github.com/wallabag/wallabag/pull/1861) ([nicosomb](https://github.com/nicosomb))
+- Documentation about wallabag v1 CLI import [\#1856](https://github.com/wallabag/wallabag/pull/1856) ([nicosomb](https://github.com/nicosomb))
+- English documentation about wallabag API [\#1854](https://github.com/wallabag/wallabag/pull/1854) ([nicosomb](https://github.com/nicosomb))
+- Lock ocramius/proxy-manager [\#1844](https://github.com/wallabag/wallabag/pull/1844) ([j0k3r](https://github.com/j0k3r))
+- Fix Archive page title translation [\#1840](https://github.com/wallabag/wallabag/pull/1840) ([nicosomb](https://github.com/nicosomb))
+- Remove SMTP configuration environment overrides [\#1824](https://github.com/wallabag/wallabag/pull/1824) ([nicosomb](https://github.com/nicosomb))
+- Translation fa [\#1823](https://github.com/wallabag/wallabag/pull/1823) ([mabkenar](https://github.com/mabkenar))
+- Force user-agent for iansommerville.com [\#1804](https://github.com/wallabag/wallabag/pull/1804) ([j0k3r](https://github.com/j0k3r))
+
+## [2.0.0](https://github.com/wallabag/wallabag/tree/2.0.0) (2016-04-03)
+**Fixed bugs:**
+
+- v2 beta 2 - Typos in quickstart page [\#1793](https://github.com/wallabag/wallabag/issues/1793)
+- v2 beta 2 - Typo in import forms [\#1790](https://github.com/wallabag/wallabag/issues/1790)
+- v2 beta 2 - Tabs display in about page with Material theme [\#1787](https://github.com/wallabag/wallabag/issues/1787)
+- Split tags with commas [\#1768](https://github.com/wallabag/wallabag/issues/1768)
+- timezone error with docker-compose [\#1726](https://github.com/wallabag/wallabag/issues/1726)
+- Comments created with one theme aren't displayed with another [\#1718](https://github.com/wallabag/wallabag/issues/1718)
+- Pocket import 500 internal error [\#1661](https://github.com/wallabag/wallabag/issues/1661)
+- no title in epub [\#1552](https://github.com/wallabag/wallabag/issues/1552)
+- \[v2\] Issue with PostgreSQL, table prefixes and `user` table [\#1498](https://github.com/wallabag/wallabag/issues/1498)
+- Hide search buttons [\#1838](https://github.com/wallabag/wallabag/pull/1838) ([nicosomb](https://github.com/nicosomb))
+- Check selected PDO driver on install [\#1832](https://github.com/wallabag/wallabag/pull/1832) ([j0k3r](https://github.com/j0k3r))
+- fix tabs display on mobile view [\#1799](https://github.com/wallabag/wallabag/pull/1799) ([tcitworld](https://github.com/tcitworld))
+- Don't add entry through API if it already exists [\#1797](https://github.com/wallabag/wallabag/pull/1797) ([tcitworld](https://github.com/tcitworld))
+- fix api properties and typo [\#1791](https://github.com/wallabag/wallabag/pull/1791) ([tcitworld](https://github.com/tcitworld))
+- Fix quote strategy for reserved keyword in Postgres [\#1500](https://github.com/wallabag/wallabag/pull/1500) ([j0k3r](https://github.com/j0k3r))
+
+**Closed issues:**
+
+- Search returns 404 page [\#1836](https://github.com/wallabag/wallabag/issues/1836)
+- Wallabag only works on localhost [\#1834](https://github.com/wallabag/wallabag/issues/1834)
+- \[v2-beta2\] Fatal error: Class 'Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle' not found [\#1830](https://github.com/wallabag/wallabag/issues/1830)
+- Wallabag Client 2.0 - Does not work, is vanishing and does not store articles [\#1811](https://github.com/wallabag/wallabag/issues/1811)
+- wallabag can't retrieve contents for this article [\#1801](https://github.com/wallabag/wallabag/issues/1801)
+- Support for OAuth RefreshToken [\#1783](https://github.com/wallabag/wallabag/issues/1783)
+- \[v2. beta 1\] Error 404 on search. [\#1781](https://github.com/wallabag/wallabag/issues/1781)
+- Adding entry through the api returns "500 Internal Server Error" [\#1780](https://github.com/wallabag/wallabag/issues/1780)
+- page title confusing [\#1756](https://github.com/wallabag/wallabag/issues/1756)
+- "Take wallabag with you" disappears [\#1751](https://github.com/wallabag/wallabag/issues/1751)
+- Only small portion of the website gets saved [\#1744](https://github.com/wallabag/wallabag/issues/1744)
+- Implement Version Endpoint [\#1737](https://github.com/wallabag/wallabag/issues/1737)
+- API : Do not display all informations about user [\#1698](https://github.com/wallabag/wallabag/issues/1698)
+- Replace sentences by keys in translations file [\#1697](https://github.com/wallabag/wallabag/issues/1697)
+- Reorder static pages in v2 [\#1694](https://github.com/wallabag/wallabag/issues/1694)
+- Add contributors in CREDITS.md [\#1684](https://github.com/wallabag/wallabag/issues/1684)
+- Error installing on windows 7 [\#1669](https://github.com/wallabag/wallabag/issues/1669)
+- Move assignTagsToEntry in a more global place [\#1667](https://github.com/wallabag/wallabag/issues/1667)
+- Document upgrade from v1 to v2 [\#1624](https://github.com/wallabag/wallabag/issues/1624)
+- \[v2\] Fix SensioLabsInsight issues [\#1604](https://github.com/wallabag/wallabag/issues/1604)
+- \[v2\] Source code should not contain TODO comments - in src/Wallabag/…/Command/InstallCommand.php, line 67 [\#1603](https://github.com/wallabag/wallabag/issues/1603)
+- \[v2\] Source code should not contain TODO comments - in src/Wallabag/…/Import/PocketImport.php, line 181 [\#1602](https://github.com/wallabag/wallabag/issues/1602)
+- \[v2\] Client ID/secret [\#1597](https://github.com/wallabag/wallabag/issues/1597)
+- Can we please get some proper migration guides for v2? [\#1595](https://github.com/wallabag/wallabag/issues/1595)
+- \[v2\] Import from wallabag v2 [\#1590](https://github.com/wallabag/wallabag/issues/1590)
+- \[v2\] Web interface for developers [\#1589](https://github.com/wallabag/wallabag/issues/1589)
+- \[v2\] Documentation for tagging rule  [\#1556](https://github.com/wallabag/wallabag/issues/1556)
+- \[v2\] Documentation for pocket import [\#1555](https://github.com/wallabag/wallabag/issues/1555)
+- \[v2\] Is the username useful? [\#1462](https://github.com/wallabag/wallabag/issues/1462)
+- Create Wallabag\UserBundle [\#1442](https://github.com/wallabag/wallabag/issues/1442)
+- Fix Scrutinizer issues [\#1360](https://github.com/wallabag/wallabag/issues/1360)
+- Maintenance mode [\#1351](https://github.com/wallabag/wallabag/issues/1351)
+- \[v2\] Architecture for framabag [\#1330](https://github.com/wallabag/wallabag/issues/1330)
+- Implement Piwik [\#1137](https://github.com/wallabag/wallabag/issues/1137)
+- Change URL of article [\#1124](https://github.com/wallabag/wallabag/issues/1124)
+- Add tag field. [\#1108](https://github.com/wallabag/wallabag/issues/1108)
+- Search into tags [\#980](https://github.com/wallabag/wallabag/issues/980)
+- Preview picture for each article [\#972](https://github.com/wallabag/wallabag/issues/972)
+- Pocket Import Issue [\#956](https://github.com/wallabag/wallabag/issues/956)
+- Mark all imported articles as read [\#870](https://github.com/wallabag/wallabag/issues/870)
+- Update to last version of full-text-rss [\#694](https://github.com/wallabag/wallabag/issues/694)
+- Add comment about wallabaged page [\#592](https://github.com/wallabag/wallabag/issues/592)
+- importing from wallabag v1 [\#210](https://github.com/wallabag/wallabag/issues/210)
+
+**Merged pull requests:**
+
+- Occitan version [\#1829](https://github.com/wallabag/wallabag/pull/1829) ([Quent-in](https://github.com/Quent-in))
+- Update messages.es.yml [\#1822](https://github.com/wallabag/wallabag/pull/1822) ([jami7](https://github.com/jami7))
+- Update messages.es.yml [\#1821](https://github.com/wallabag/wallabag/pull/1821) ([jami7](https://github.com/jami7))
+- Correct translation [\#1817](https://github.com/wallabag/wallabag/pull/1817) ([mruminski](https://github.com/mruminski))
+- \[v2\] German translation [\#1813](https://github.com/wallabag/wallabag/pull/1813) ([jlnostr](https://github.com/jlnostr))
+- fix typo diaspora\* share [\#1807](https://github.com/wallabag/wallabag/pull/1807) ([nikaro](https://github.com/nikaro))
+- :rocket: Prepare v2.0.0 :birthday: [\#1835](https://github.com/wallabag/wallabag/pull/1835) ([nicosomb](https://github.com/nicosomb))
+- Refacto wallabag import [\#1820](https://github.com/wallabag/wallabag/pull/1820) ([j0k3r](https://github.com/j0k3r))
+- Some cleanup [\#1819](https://github.com/wallabag/wallabag/pull/1819) ([j0k3r](https://github.com/j0k3r))
+- add migration docs [\#1818](https://github.com/wallabag/wallabag/pull/1818) ([tcitworld](https://github.com/tcitworld))
+- Translate flash message in baggy theme [\#1806](https://github.com/wallabag/wallabag/pull/1806) ([nicosomb](https://github.com/nicosomb))
+- Fix \#1768 Split tags with commas from UI [\#1805](https://github.com/wallabag/wallabag/pull/1805) ([nicosomb](https://github.com/nicosomb))
+- add tests on user in API responses [\#1792](https://github.com/wallabag/wallabag/pull/1792) ([tcitworld](https://github.com/tcitworld))
+- API shows just what needed for user [\#1786](https://github.com/wallabag/wallabag/pull/1786) ([tcitworld](https://github.com/tcitworld))
+- add refresh-token grant-type [\#1784](https://github.com/wallabag/wallabag/pull/1784) ([tcitworld](https://github.com/tcitworld))
+- Switch to keys in translated files [\#1774](https://github.com/wallabag/wallabag/pull/1774) ([j0k3r](https://github.com/j0k3r))
+- Setting for reading time [\#1767](https://github.com/wallabag/wallabag/pull/1767) ([nicosomb](https://github.com/nicosomb))
+- reimport v1 entries if they were not fetched [\#1666](https://github.com/wallabag/wallabag/pull/1666) ([tcitworld](https://github.com/tcitworld))
+- lots of diverse translation stuff & some typos [\#1665](https://github.com/wallabag/wallabag/pull/1665) ([tcitworld](https://github.com/tcitworld))
+- remove tag from entry \#1377 [\#1663](https://github.com/wallabag/wallabag/pull/1663) ([tcitworld](https://github.com/tcitworld))
+- v2 – Fix some deprecated for Symfony3 [\#1510](https://github.com/wallabag/wallabag/pull/1510) ([j0k3r](https://github.com/j0k3r))
+- Rule based tags [\#1478](https://github.com/wallabag/wallabag/pull/1478) ([K-Phoen](https://github.com/K-Phoen))
+- \[WIP\] language selection on config screen [\#1446](https://github.com/wallabag/wallabag/pull/1446) ([nicosomb](https://github.com/nicosomb))
+- Add multiple database tests on Travis [\#1434](https://github.com/wallabag/wallabag/pull/1434) ([j0k3r](https://github.com/j0k3r))
+
+## [2.0.0-beta.2](https://github.com/wallabag/wallabag/tree/2.0.0-beta.2) (2016-03-12)
+**Closed issues:**
+
+- Failed to setup via composer [\#1772](https://github.com/wallabag/wallabag/issues/1772)
+- lowtechmagazine.com siteconfig [\#1748](https://github.com/wallabag/wallabag/issues/1748)
+- From Wallabag 1.9 to 2 [\#1746](https://github.com/wallabag/wallabag/issues/1746)
+
+**Merged pull requests:**
+
+- clarify that wllbg is compatible php 7 [\#1776](https://github.com/wallabag/wallabag/pull/1776) ([tcitworld](https://github.com/tcitworld))
+- Some fixes [\#1775](https://github.com/wallabag/wallabag/pull/1775) ([j0k3r](https://github.com/j0k3r))
+- Docker timezone [\#1771](https://github.com/wallabag/wallabag/pull/1771) ([j0k3r](https://github.com/j0k3r))
+- Fix \#1756: Added 'wallabag' in page title [\#1766](https://github.com/wallabag/wallabag/pull/1766) ([nicosomb](https://github.com/nicosomb))
+- Prepare files for 2.0.0-beta.2 [\#1763](https://github.com/wallabag/wallabag/pull/1763) ([nicosomb](https://github.com/nicosomb))
+- Change documentation links in quickstart [\#1762](https://github.com/wallabag/wallabag/pull/1762) ([nicosomb](https://github.com/nicosomb))
+- V2 api version [\#1761](https://github.com/wallabag/wallabag/pull/1761) ([tcitworld](https://github.com/tcitworld))
+- Add starred & archive properties to API [\#1754](https://github.com/wallabag/wallabag/pull/1754) ([j0k3r](https://github.com/j0k3r))
+- Doc: fix typo in php-hash ext name [\#1753](https://github.com/wallabag/wallabag/pull/1753) ([Horgix](https://github.com/Horgix))
+- Documentation about filters / Quickstart changes [\#1750](https://github.com/wallabag/wallabag/pull/1750) ([nicosomb](https://github.com/nicosomb))
+- V2 spanish translation [\#1745](https://github.com/wallabag/wallabag/pull/1745) ([benages](https://github.com/benages))
+- Releasing documentation [\#1743](https://github.com/wallabag/wallabag/pull/1743) ([nicosomb](https://github.com/nicosomb))
+- Add the way to install \(package or composer\) [\#1742](https://github.com/wallabag/wallabag/pull/1742) ([nicosomb](https://github.com/nicosomb))
+- minor typofix again [\#1740](https://github.com/wallabag/wallabag/pull/1740) ([goofy-bz](https://github.com/goofy-bz))
+- Ability to create new client for the API [\#1675](https://github.com/wallabag/wallabag/pull/1675) ([nicosomb](https://github.com/nicosomb))
+- Mark all imported articles as read [\#1670](https://github.com/wallabag/wallabag/pull/1670) ([tcitworld](https://github.com/tcitworld))
+- Added RELEASE\_PROCESS document [\#1615](https://github.com/wallabag/wallabag/pull/1615) ([bdunogier](https://github.com/bdunogier))
+
+## [2.0.0-beta.1](https://github.com/wallabag/wallabag/tree/2.0.0-beta.1) (2016-03-01)
+**Fixed bugs:**
+
+- Failed to load css and js files under "web" folder [\#1613](https://github.com/wallabag/wallabag/issues/1613)
+- Adding via API does not succeed if logged out [\#1241](https://github.com/wallabag/wallabag/issues/1241)
+- wallabag "crashes" with YunoHost when changing skin [\#1220](https://github.com/wallabag/wallabag/issues/1220)
+- New install, can't log in - just get the login page  [\#1145](https://github.com/wallabag/wallabag/issues/1145)
+- Delete cached images [\#1087](https://github.com/wallabag/wallabag/issues/1087)
+- instapaper import fails [\#1071](https://github.com/wallabag/wallabag/issues/1071)
+- 404 Links on Install Page [\#1039](https://github.com/wallabag/wallabag/issues/1039)
+- Wallabag goes to 100% CPU and does not respond when adding Google Drive spreadsheet [\#1027](https://github.com/wallabag/wallabag/issues/1027)
+- Error: I cannot access to Wallabag after installation got this error "An error occured: "db" directory must be writeable for your web server user!" [\#1023](https://github.com/wallabag/wallabag/issues/1023)
+- Kobo Touch DRM-related error when trying to open ePub documented exported from Wallabag 1.8.1 \(Framabag\) [\#992](https://github.com/wallabag/wallabag/issues/992)
+- www.theverge.com consistent "unable to retrieve full-text content" [\#969](https://github.com/wallabag/wallabag/issues/969)
+- how to import big files from pocket, pre-processing to avoid import of read links without a tag [\#857](https://github.com/wallabag/wallabag/issues/857)
+- youtube filter not working on https Sites [\#824](https://github.com/wallabag/wallabag/issues/824)
+- Search does not work properly after first page [\#809](https://github.com/wallabag/wallabag/issues/809)
+- Can't delete tag [\#1717](https://github.com/wallabag/wallabag/issues/1717)
+- Travis and "Could not authenticate against github.com" [\#1703](https://github.com/wallabag/wallabag/issues/1703)
+- Translation string for 'min' in the 'estimated reading time: 10 min' [\#1682](https://github.com/wallabag/wallabag/issues/1682)
+- \[v2\] Wallabag v1 import ignores tags [\#1657](https://github.com/wallabag/wallabag/issues/1657)
+- Authentication via 2factor failed [\#1643](https://github.com/wallabag/wallabag/issues/1643)
+- \[v2\] Enable users without email confirmation [\#1622](https://github.com/wallabag/wallabag/issues/1622)
+- \[v2\] Default configuration for FosUserBundle [\#1621](https://github.com/wallabag/wallabag/issues/1621)
+- Wallabag V2 : PHP Fatal error:  Uncaught exception 'Symfony\\Component\\Debug\\Exception [\#1609](https://github.com/wallabag/wallabag/issues/1609)
+- \[v2\] syntax problem with v2 export [\#1600](https://github.com/wallabag/wallabag/issues/1600)
+- \[v2\] fsockopen connection refused [\#1593](https://github.com/wallabag/wallabag/issues/1593)
+- \[v2\] Nginx official support? [\#1585](https://github.com/wallabag/wallabag/issues/1585)
+- \[v2\] bug in EntryControllerTest::testDelete [\#1566](https://github.com/wallabag/wallabag/issues/1566)
+- delete item in page n, go back to page 1 [\#1551](https://github.com/wallabag/wallabag/issues/1551)
+- \[v2\] tags are not deleted when you delete an entry [\#1453](https://github.com/wallabag/wallabag/issues/1453)
+- Caracter encoding problem on material preview cards [\#1426](https://github.com/wallabag/wallabag/issues/1426)
+- Fix \#1551 - Redirect to the last page when current page is out of range [\#1700](https://github.com/wallabag/wallabag/pull/1700) ([delyriand](https://github.com/delyriand))
+- Test if some keys are missing in v2 import [\#1651](https://github.com/wallabag/wallabag/pull/1651) ([nicosomb](https://github.com/nicosomb))
+- Exported entries were added twice in export file [\#1650](https://github.com/wallabag/wallabag/pull/1650) ([nicosomb](https://github.com/nicosomb))
+- Fix \#1635: change database name for test environments \(mysql/pgsql\) [\#1639](https://github.com/wallabag/wallabag/pull/1639) ([nicosomb](https://github.com/nicosomb))
+- Use translator interface instead of final class [\#1587](https://github.com/wallabag/wallabag/pull/1587) ([j0k3r](https://github.com/j0k3r))
+
+**Closed issues:**
+
+- Feed saved automatically [\#1677](https://github.com/wallabag/wallabag/issues/1677)
+- \[Fx 44 Ext 2.0.0\] Cannot save login&password anymore [\#1637](https://github.com/wallabag/wallabag/issues/1637)
+- Wallabag demo website gives Bad credentials [\#1626](https://github.com/wallabag/wallabag/issues/1626)
+- Delete ALL articles in one click [\#1506](https://github.com/wallabag/wallabag/issues/1506)
+- API addition to allow 3rd party \(tt-rss\) integration in 1.9.1 [\#1425](https://github.com/wallabag/wallabag/issues/1425)
+- wallabag will use Pootle for translating [\#1291](https://github.com/wallabag/wallabag/issues/1291)
+- Tag article related to its estimated reading time [\#1239](https://github.com/wallabag/wallabag/issues/1239)
+- full webpage screenshot [\#1098](https://github.com/wallabag/wallabag/issues/1098)
+- Unclear config settings [\#832](https://github.com/wallabag/wallabag/issues/832)
+- public list of articles/links with tags [\#812](https://github.com/wallabag/wallabag/issues/812)
+- unable to retrieve full-text content [\#811](https://github.com/wallabag/wallabag/issues/811)
+- readability renders huge share buttons [\#1729](https://github.com/wallabag/wallabag/issues/1729)
+- Update CONTRIBUTING with v2 [\#1711](https://github.com/wallabag/wallabag/issues/1711)
+- typo in french documentation [\#1708](https://github.com/wallabag/wallabag/issues/1708)
+- Documentation about translation: which language file is the reference? [\#1692](https://github.com/wallabag/wallabag/issues/1692)
+- Create ISSUE\_TEMPLATE and PULL\_REQUEST\_TEMPLATE [\#1691](https://github.com/wallabag/wallabag/issues/1691)
+- \[v2\] can't add link on mobile view with material design [\#1636](https://github.com/wallabag/wallabag/issues/1636)
+- Change databases name for mysql/pgsql in test environment [\#1635](https://github.com/wallabag/wallabag/issues/1635)
+- \[v2\] Use internal settings to enable \(or not\) export in export sidebar \(material theme\) [\#1620](https://github.com/wallabag/wallabag/issues/1620)
+- Ability to install wallabag without dev deps [\#1617](https://github.com/wallabag/wallabag/issues/1617)
+- \[v2\] Import of v1 JSON export to v2.wallabag.org fails [\#1598](https://github.com/wallabag/wallabag/issues/1598)
+- Composer? [\#1576](https://github.com/wallabag/wallabag/issues/1576)
+- \[v2\] Ease installation at maximum [\#1575](https://github.com/wallabag/wallabag/issues/1575)
+- \[v2\] Welcome page when article list is empty [\#1501](https://github.com/wallabag/wallabag/issues/1501)
+- \[v2\] Add content in 2FA emails [\#1490](https://github.com/wallabag/wallabag/issues/1490)
+- Backport site config changes from wallabag v1 to fivefilters repo [\#1414](https://github.com/wallabag/wallabag/issues/1414)
+- \[v2\] "Mark as read" & "Mark as unread"? [\#1394](https://github.com/wallabag/wallabag/issues/1394)
+- Highlight text [\#994](https://github.com/wallabag/wallabag/issues/994)
+
+**Merged pull requests:**
+
+- minor typofix + missing quotes [\#1739](https://github.com/wallabag/wallabag/pull/1739) ([goofy-bz](https://github.com/goofy-bz))
+- Remove extra definition [\#1734](https://github.com/wallabag/wallabag/pull/1734) ([j0k3r](https://github.com/j0k3r))
+- Adding Danish translations to Wallabag v2 [\#1732](https://github.com/wallabag/wallabag/pull/1732) ([mjjzf](https://github.com/mjjzf))
+- Make English welcome message more natural [\#1723](https://github.com/wallabag/wallabag/pull/1723) ([shtrom](https://github.com/shtrom))
+- display how much comments there are for an entry [\#1722](https://github.com/wallabag/wallabag/pull/1722) ([tcitworld](https://github.com/tcitworld))
+- Change wording for create a new user [\#1714](https://github.com/wallabag/wallabag/pull/1714) ([j0k3r](https://github.com/j0k3r))
+- Create validators.pl.yml [\#1689](https://github.com/wallabag/wallabag/pull/1689) ([mruminski](https://github.com/mruminski))
+- Create messages.pl.yml [\#1688](https://github.com/wallabag/wallabag/pull/1688) ([mruminski](https://github.com/mruminski))
+- Translated another two files into romanian. [\#1687](https://github.com/wallabag/wallabag/pull/1687) ([0wnrepo](https://github.com/0wnrepo))
+- Polish translation [\#1686](https://github.com/wallabag/wallabag/pull/1686) ([mruminski](https://github.com/mruminski))
+- two more Persian translated files [\#1681](https://github.com/wallabag/wallabag/pull/1681) ([mabkenar](https://github.com/mabkenar))
+- Translation file for the 'Romanian' language. Also recognised by ro\_RO. Known in romanian as "Română". [\#1678](https://github.com/wallabag/wallabag/pull/1678) ([0wnrepo](https://github.com/0wnrepo))
+- Translation for Persian [\#1676](https://github.com/wallabag/wallabag/pull/1676) ([mabkenar](https://github.com/mabkenar))
+- improve baggy theme \(add new tag panel\) [\#1672](https://github.com/wallabag/wallabag/pull/1672) ([tcitworld](https://github.com/tcitworld))
+- display pictures properly [\#1671](https://github.com/wallabag/wallabag/pull/1671) ([tcitworld](https://github.com/tcitworld))
+- Add @GitterHQ badge on README [\#1630](https://github.com/wallabag/wallabag/pull/1630) ([nicosomb](https://github.com/nicosomb))
+- Add Turkish translation [\#1628](https://github.com/wallabag/wallabag/pull/1628) ([ogunkarakus](https://github.com/ogunkarakus))
+- Prepare wallabag for first beta :rocket: [\#1738](https://github.com/wallabag/wallabag/pull/1738) ([nicosomb](https://github.com/nicosomb))
+- Update Capistrano libraries with last versions [\#1736](https://github.com/wallabag/wallabag/pull/1736) ([nicosomb](https://github.com/nicosomb))
+- Fix: \#1703: authentication for PR by external contributors [\#1731](https://github.com/wallabag/wallabag/pull/1731) ([nicosomb](https://github.com/nicosomb))
+- Fix \#1717: Change remove tag icon in entry view with material theme [\#1728](https://github.com/wallabag/wallabag/pull/1728) ([nicosomb](https://github.com/nicosomb))
+- move annotatorjs to the bottom of the body so that the "article" tag is loaded before [\#1721](https://github.com/wallabag/wallabag/pull/1721) ([tcitworld](https://github.com/tcitworld))
+- Fix \#1603: Enhance requirements in InstallCommand [\#1716](https://github.com/wallabag/wallabag/pull/1716) ([nicosomb](https://github.com/nicosomb))
+- Fix \#1694 \#1669 \#1684: Add contributors and 3rd party libraries [\#1715](https://github.com/wallabag/wallabag/pull/1715) ([nicosomb](https://github.com/nicosomb))
+- Fix \#1711: Update CONTRIBUTING file [\#1712](https://github.com/wallabag/wallabag/pull/1712) ([nicosomb](https://github.com/nicosomb))
+- Fix \#811: Display a human message when graby fails to fetch articles [\#1710](https://github.com/wallabag/wallabag/pull/1710) ([nicosomb](https://github.com/nicosomb))
+-  Fix \#1708: typos in french documentation [\#1709](https://github.com/wallabag/wallabag/pull/1709) ([nicosomb](https://github.com/nicosomb))
+- typo in french documentation [\#1707](https://github.com/wallabag/wallabag/pull/1707) ([nicosomb](https://github.com/nicosomb))
+- Documentation for wallabag installation [\#1706](https://github.com/wallabag/wallabag/pull/1706) ([nicosomb](https://github.com/nicosomb))
+- French translation for documentation [\#1705](https://github.com/wallabag/wallabag/pull/1705) ([nicosomb](https://github.com/nicosomb))
+- Added Piwik implementation [\#1702](https://github.com/wallabag/wallabag/pull/1702) ([nicosomb](https://github.com/nicosomb))
+- Fix \#1351: add maintenance mode [\#1701](https://github.com/wallabag/wallabag/pull/1701) ([nicosomb](https://github.com/nicosomb))
+- Move assignTagsToEntry in ContentProxy helper [\#1699](https://github.com/wallabag/wallabag/pull/1699) ([j0k3r](https://github.com/j0k3r))
+- Add some missing french translations [\#1696](https://github.com/wallabag/wallabag/pull/1696) ([nicosomb](https://github.com/nicosomb))
+- Fix \#1691 create ISSUE\_TEMPLATE and PULL\_REQUEST\_TEMPLATE [\#1693](https://github.com/wallabag/wallabag/pull/1693) ([nicosomb](https://github.com/nicosomb))
+- translate estimated time minutes [\#1690](https://github.com/wallabag/wallabag/pull/1690) ([tcitworld](https://github.com/tcitworld))
+- Demonstration mode to prevent password changes [\#1683](https://github.com/wallabag/wallabag/pull/1683) ([nicosomb](https://github.com/nicosomb))
+- Update Capistrano configuration for symfony3 [\#1680](https://github.com/wallabag/wallabag/pull/1680) ([nicosomb](https://github.com/nicosomb))
+- Documentation about translation [\#1679](https://github.com/wallabag/wallabag/pull/1679) ([nicosomb](https://github.com/nicosomb))
+- Few updates [\#1668](https://github.com/wallabag/wallabag/pull/1668) ([j0k3r](https://github.com/j0k3r))
+- Update README.md with the environment parameters [\#1659](https://github.com/wallabag/wallabag/pull/1659) ([0wnrepo](https://github.com/0wnrepo))
+- import tags from v1 \(\#1657\) [\#1658](https://github.com/wallabag/wallabag/pull/1658) ([tcitworld](https://github.com/tcitworld))
+- fix labels on new user prompt [\#1656](https://github.com/wallabag/wallabag/pull/1656) ([tcitworld](https://github.com/tcitworld))
+- fix \#1636 [\#1654](https://github.com/wallabag/wallabag/pull/1654) ([tcitworld](https://github.com/tcitworld))
+- V2 annotator comments [\#1653](https://github.com/wallabag/wallabag/pull/1653) ([tcitworld](https://github.com/tcitworld))
+- User created via wallabag:install is now a SUPER\_ADMIN :crown: [\#1652](https://github.com/wallabag/wallabag/pull/1652) ([nicosomb](https://github.com/nicosomb))
+- Fix project version in installation command [\#1648](https://github.com/wallabag/wallabag/pull/1648) ([lologhi](https://github.com/lologhi))
+- Force prod env on project creation [\#1647](https://github.com/wallabag/wallabag/pull/1647) ([j0k3r](https://github.com/j0k3r))
+- Fix \#1643: fix the way to load the HTML template in 2factor auth [\#1645](https://github.com/wallabag/wallabag/pull/1645) ([nicosomb](https://github.com/nicosomb))
+- Fix \#1622: parameter for FosUser confirmation [\#1644](https://github.com/wallabag/wallabag/pull/1644) ([nicosomb](https://github.com/nicosomb))
+- Unescape content for Material card [\#1642](https://github.com/wallabag/wallabag/pull/1642) ([j0k3r](https://github.com/j0k3r))
+- Update import.rst to fix a doc typo [\#1641](https://github.com/wallabag/wallabag/pull/1641) ([nicosomb](https://github.com/nicosomb))
+- Exporttxt [\#1633](https://github.com/wallabag/wallabag/pull/1633) ([tcitworld](https://github.com/tcitworld))
+- fix \#1620 and introduce new parameters to export [\#1629](https://github.com/wallabag/wallabag/pull/1629) ([tcitworld](https://github.com/tcitworld))
+- \[\#1621\] Add default address for FosUser [\#1625](https://github.com/wallabag/wallabag/pull/1625) ([nicosomb](https://github.com/nicosomb))
+- Move public assets for themes [\#1619](https://github.com/wallabag/wallabag/pull/1619) ([j0k3r](https://github.com/j0k3r))
+- Updated version in README [\#1618](https://github.com/wallabag/wallabag/pull/1618) ([nicosomb](https://github.com/nicosomb))
+- Few fixes [\#1614](https://github.com/wallabag/wallabag/pull/1614) ([j0k3r](https://github.com/j0k3r))
+- Settings page [\#1612](https://github.com/wallabag/wallabag/pull/1612) ([j0k3r](https://github.com/j0k3r))
+- Disable xdebug all the time [\#1610](https://github.com/wallabag/wallabag/pull/1610) ([j0k3r](https://github.com/j0k3r))
+- Remove tag relation when removing an entry [\#1606](https://github.com/wallabag/wallabag/pull/1606) ([j0k3r](https://github.com/j0k3r))
+- \[\#1604\] First draft to fix SensioLabsInsight report [\#1605](https://github.com/wallabag/wallabag/pull/1605) ([nicosomb](https://github.com/nicosomb))
+- \[\#1590\] Add JSON import from wallabag v2 [\#1601](https://github.com/wallabag/wallabag/pull/1601) ([nicosomb](https://github.com/nicosomb))
+- some cleanup [\#1584](https://github.com/wallabag/wallabag/pull/1584) ([nicosomb](https://github.com/nicosomb))
+- Fix `findOneByUrl` side effect in tests [\#1583](https://github.com/wallabag/wallabag/pull/1583) ([j0k3r](https://github.com/j0k3r))
+- Fix typo and set version in the README [\#1574](https://github.com/wallabag/wallabag/pull/1574) ([jjanvier](https://github.com/jjanvier))
+- Use HTML email for 2FA [\#1565](https://github.com/wallabag/wallabag/pull/1565) ([j0k3r](https://github.com/j0k3r))
+- Remove Flattr references [\#1564](https://github.com/wallabag/wallabag/pull/1564) ([nicosomb](https://github.com/nicosomb))
+- \#1394 Fixed 'mark as read' and 'mark as unread' links [\#1563](https://github.com/wallabag/wallabag/pull/1563) ([nicosomb](https://github.com/nicosomb))
+- Fix \#1501 Quickstart for beginners [\#1560](https://github.com/wallabag/wallabag/pull/1560) ([nicosomb](https://github.com/nicosomb))
+- Installation & configuration of Doctrine Migrations [\#1559](https://github.com/wallabag/wallabag/pull/1559) ([nicosomb](https://github.com/nicosomb))
+- Upgrade to Symfony 3.0 [\#1524](https://github.com/wallabag/wallabag/pull/1524) ([j0k3r](https://github.com/j0k3r))
+
+## [2.0.0-alpha.2](https://github.com/wallabag/wallabag/tree/2.0.0-alpha.2) (2016-01-22)
+**Closed issues:**
+
+- Trouble because of proxy. [\#1596](https://github.com/wallabag/wallabag/issues/1596)
+- V2 installation errors [\#1591](https://github.com/wallabag/wallabag/issues/1591)
+- Unable to retrieve readable content http://www.firstthings.com [\#1579](https://github.com/wallabag/wallabag/issues/1579)
+- MarkDown Texts [\#1569](https://github.com/wallabag/wallabag/issues/1569)
+- epub export doesn't work on v2 [\#1567](https://github.com/wallabag/wallabag/issues/1567)
+- Unable to retrieve readable content http://habrahabr.ru/ [\#1541](https://github.com/wallabag/wallabag/issues/1541)
+- Display the base URL for syncing on the config page [\#1514](https://github.com/wallabag/wallabag/issues/1514)
+- \[v2\] Account activation link returns 404 [\#1508](https://github.com/wallabag/wallabag/issues/1508)
+- Support of U2F for authentication [\#1499](https://github.com/wallabag/wallabag/issues/1499)
+- Back to article list when "mark as read"  [\#1407](https://github.com/wallabag/wallabag/issues/1407)
+- Update documentation website [\#1268](https://github.com/wallabag/wallabag/issues/1268)
+- import from pocket with our username [\#236](https://github.com/wallabag/wallabag/issues/236)
+
+**Merged pull requests:**
+
+- Ignore composer.lock [\#1607](https://github.com/wallabag/wallabag/pull/1607) ([j0k3r](https://github.com/j0k3r))
+- Add configuration for portuguese documentation [\#1599](https://github.com/wallabag/wallabag/pull/1599) ([nicosomb](https://github.com/nicosomb))
+- Create index.rst [\#1594](https://github.com/wallabag/wallabag/pull/1594) ([araujo0205](https://github.com/araujo0205))
+- \#1490 HTML in E-Mails [\#1592](https://github.com/wallabag/wallabag/pull/1592) ([modos189](https://github.com/modos189))
+- Add caffereggio.net [\#1588](https://github.com/wallabag/wallabag/pull/1588) ([benages](https://github.com/benages))
+- Fix grammatical typo [\#1582](https://github.com/wallabag/wallabag/pull/1582) ([simark](https://github.com/simark))
+- add import link on baggy theme [\#1562](https://github.com/wallabag/wallabag/pull/1562) ([nicosomb](https://github.com/nicosomb))
+- Add basic docker-compose configuration [\#1561](https://github.com/wallabag/wallabag/pull/1561) ([FabienM](https://github.com/FabienM))
+- \[v2\] documentation cleaning [\#1558](https://github.com/wallabag/wallabag/pull/1558) ([nicosomb](https://github.com/nicosomb))
+
+## [2.0.0-alpha.1](https://github.com/wallabag/wallabag/tree/2.0.0-alpha.1) (2016-01-07)
+**Fixed bugs:**
+
+- Fatal error: Call to undefined function session\_get\_cookie\_params\(\) in wallabag-1.9.1-b/inc/3rdparty/Session.class.php on line 59 [\#1519](https://github.com/wallabag/wallabag/issues/1519)
+- Attempted to call function "curl\_init" from namespace "Graby\Ring\Client". [\#1511](https://github.com/wallabag/wallabag/issues/1511)
+- \[v2\] API response doesn't match the request [\#1494](https://github.com/wallabag/wallabag/issues/1494)
+- iframes not correctly handled [\#1438](https://github.com/wallabag/wallabag/issues/1438)
+- Unable to bag http://stormsabrewin.org/pizzacigarette.html [\#1430](https://github.com/wallabag/wallabag/issues/1430)
+- Wallabag does not follow redirects [\#1240](https://github.com/wallabag/wallabag/issues/1240)
+- Untitled - Import - Click to finish import [\#1213](https://github.com/wallabag/wallabag/issues/1213)
+- Email sharing not functional with gmail [\#1173](https://github.com/wallabag/wallabag/issues/1173)
+- \[v2\] Duplicate tags when 2 rules match article [\#1528](https://github.com/wallabag/wallabag/issues/1528)
+- Wallabag\CoreBundle\Entity\Entry object not found.  [\#1512](https://github.com/wallabag/wallabag/issues/1512)
+- \[v2\] Avoid duplicate entry [\#1502](https://github.com/wallabag/wallabag/issues/1502)
+- \[v2\] Articles from wallabag.org website are not fetched [\#1454](https://github.com/wallabag/wallabag/issues/1454)
+- Only french language is stored [\#1431](https://github.com/wallabag/wallabag/issues/1431)
+- v2 – Fix wrong if when deleting an entry [\#1547](https://github.com/wallabag/wallabag/pull/1547) ([j0k3r](https://github.com/j0k3r))
+- v2 – 	Avoid multiple tag creation [\#1542](https://github.com/wallabag/wallabag/pull/1542) ([j0k3r](https://github.com/j0k3r))
+- v2 – 	Don't redirect to the content page after deletion [\#1540](https://github.com/wallabag/wallabag/pull/1540) ([j0k3r](https://github.com/j0k3r))
+- fix \#1005 V2 redirect after deletion [\#1496](https://github.com/wallabag/wallabag/pull/1496) ([nicosomb](https://github.com/nicosomb))
+- fix type hint for User [\#1464](https://github.com/wallabag/wallabag/pull/1464) ([nicosomb](https://github.com/nicosomb))
+
+**Closed issues:**
+
+- Wrong display in wallabag [\#1548](https://github.com/wallabag/wallabag/issues/1548)
+- \[V2\] - Error on deleting an item alpha in 2.0.0-alpha [\#1531](https://github.com/wallabag/wallabag/issues/1531)
+- Problems with my migration from Instapaper [\#1527](https://github.com/wallabag/wallabag/issues/1527)
+- Article half downloaded  [\#1522](https://github.com/wallabag/wallabag/issues/1522)
+- Unable to retrieve full-text content \(putaindecode.io\) [\#1517](https://github.com/wallabag/wallabag/issues/1517)
+- Unable to retrieve full-text content \(http://blog.xebia.fr/\) [\#1516](https://github.com/wallabag/wallabag/issues/1516)
+- Bad credentials response when trying logging into v2 [\#1513](https://github.com/wallabag/wallabag/issues/1513)
+- Wallabag problem - cannot generate MOBI and PDF [\#1509](https://github.com/wallabag/wallabag/issues/1509)
+- Wrong Content-Disposition header when download epub \(rfc1806\) [\#1481](https://github.com/wallabag/wallabag/issues/1481)
+- Unable to retrieve text from baylon-industries.com [\#1480](https://github.com/wallabag/wallabag/issues/1480)
+- Howto use oauth2 with wallabag [\#1476](https://github.com/wallabag/wallabag/issues/1476)
+- v2 doesn’t install with RHEL-6 \(i.e., php 5.3.3\) [\#1474](https://github.com/wallabag/wallabag/issues/1474)
+- 500 Internal Server Error when posting an article via API [\#1465](https://github.com/wallabag/wallabag/issues/1465)
+- Simple bookmarks list, not downloading content [\#1456](https://github.com/wallabag/wallabag/issues/1456)
+- Reset password [\#1444](https://github.com/wallabag/wallabag/issues/1444)
+- Tempo Storm articles \[unable to retrieve full-text content\] [\#1413](https://github.com/wallabag/wallabag/issues/1413)
+- Adding possibility to delete article with 404 result [\#1410](https://github.com/wallabag/wallabag/issues/1410)
+- Can't get article on shuhaowu [\#1409](https://github.com/wallabag/wallabag/issues/1409)
+- update demo website / framabag [\#1269](https://github.com/wallabag/wallabag/issues/1269)
+- Contributing to wallabag and/or site\_config [\#849](https://github.com/wallabag/wallabag/issues/849)
+- \[Feature\] Possibility to use www.readability.com [\#837](https://github.com/wallabag/wallabag/issues/837)
+- lifehacker, io9 and gawker media articles not parsed [\#821](https://github.com/wallabag/wallabag/issues/821)
+- New install [\#820](https://github.com/wallabag/wallabag/issues/820)
+- Wallabag fails to grab this particular page  [\#815](https://github.com/wallabag/wallabag/issues/815)
+- RSS [\#93](https://github.com/wallabag/wallabag/issues/93)
+- export epub [\#79](https://github.com/wallabag/wallabag/issues/79)
+- v2 – Remove user reference in Tag entry ? [\#1543](https://github.com/wallabag/wallabag/issues/1543)
+- \[v2\] reload article content [\#1503](https://github.com/wallabag/wallabag/issues/1503)
+- \[v2\] Rule-based tags [\#1477](https://github.com/wallabag/wallabag/issues/1477)
+- Clean CoreBundle\Resources\views [\#1470](https://github.com/wallabag/wallabag/issues/1470)
+- Use Chips for tags in material theme [\#1457](https://github.com/wallabag/wallabag/issues/1457)
+- Move the footer in the sidebar [\#1445](https://github.com/wallabag/wallabag/issues/1445)
+- When displaying domain on themes, skip the www part [\#1433](https://github.com/wallabag/wallabag/issues/1433)
+- List view for material theme [\#1424](https://github.com/wallabag/wallabag/issues/1424)
+- Warn that registration is disabled when adding an user [\#1423](https://github.com/wallabag/wallabag/issues/1423)
+- \[v2\] Store entry language [\#1333](https://github.com/wallabag/wallabag/issues/1333)
+- oAuth implementation [\#795](https://github.com/wallabag/wallabag/issues/795)
+- Text colour from article might conflict with theme [\#741](https://github.com/wallabag/wallabag/issues/741)
+- Browse or group articles by domain [\#729](https://github.com/wallabag/wallabag/issues/729)
+- Add to the feed the date when the article was added [\#589](https://github.com/wallabag/wallabag/issues/589)
+- wallabag can't handle plain text [\#444](https://github.com/wallabag/wallabag/issues/444)
+- multi users GUI [\#46](https://github.com/wallabag/wallabag/issues/46)
+
+**Merged pull requests:**
+
+- Updated composer.lock [\#1537](https://github.com/wallabag/wallabag/pull/1537) ([bdunogier](https://github.com/bdunogier))
+- Add popehat.com [\#1535](https://github.com/wallabag/wallabag/pull/1535) ([benages](https://github.com/benages))
+- Modified blog.cloudflare.com [\#1530](https://github.com/wallabag/wallabag/pull/1530) ([benages](https://github.com/benages))
+- Add letraslibres and lawfareblog [\#1526](https://github.com/wallabag/wallabag/pull/1526) ([benages](https://github.com/benages))
+- SMTP from environment variables [\#1518](https://github.com/wallabag/wallabag/pull/1518) ([mathbruyen](https://github.com/mathbruyen))
+- add docs [\#1495](https://github.com/wallabag/wallabag/pull/1495) ([nicosomb](https://github.com/nicosomb))
+- v2 – 1st draft for Pocket import via API & Wallabag v1 import [\#1493](https://github.com/wallabag/wallabag/pull/1493) ([nicosomb](https://github.com/nicosomb))
+- Correction to naiz.eus [\#1489](https://github.com/wallabag/wallabag/pull/1489) ([benages](https://github.com/benages))
+- Corrections to chronicle.com [\#1486](https://github.com/wallabag/wallabag/pull/1486) ([benages](https://github.com/benages))
+- fix Content-Disposition header \#1481 [\#1483](https://github.com/wallabag/wallabag/pull/1483) ([alkahan](https://github.com/alkahan))
+- V2 material [\#1475](https://github.com/wallabag/wallabag/pull/1475) ([modos189](https://github.com/modos189))
+- Add three new sites [\#1466](https://github.com/wallabag/wallabag/pull/1466) ([benages](https://github.com/benages))
+- Add aclu.org [\#1460](https://github.com/wallabag/wallabag/pull/1460) ([benages](https://github.com/benages))
+- fix \#1457 & update materialize [\#1459](https://github.com/wallabag/wallabag/pull/1459) ([tcitworld](https://github.com/tcitworld))
+- Add diagonalperiodico.net [\#1455](https://github.com/wallabag/wallabag/pull/1455) ([benages](https://github.com/benages))
+- Add wired.de site config [\#1451](https://github.com/wallabag/wallabag/pull/1451) ([benages](https://github.com/benages))
+- Add support to timeshighereducation.com [\#1450](https://github.com/wallabag/wallabag/pull/1450) ([benages](https://github.com/benages))
+- typo [\#1447](https://github.com/wallabag/wallabag/pull/1447) ([tcitworld](https://github.com/tcitworld))
+- Hide export button if we are not on entries list [\#1553](https://github.com/wallabag/wallabag/pull/1553) ([nicosomb](https://github.com/nicosomb))
+- v2 – Ability to reload an entry [\#1546](https://github.com/wallabag/wallabag/pull/1546) ([j0k3r](https://github.com/j0k3r))
+- v2 – Remove user reference in tag [\#1545](https://github.com/wallabag/wallabag/pull/1545) ([j0k3r](https://github.com/j0k3r))
+- v2 – Add custom email for 2FA [\#1544](https://github.com/wallabag/wallabag/pull/1544) ([j0k3r](https://github.com/j0k3r))
+- changed table name for tagging rule [\#1529](https://github.com/wallabag/wallabag/pull/1529) ([nicosomb](https://github.com/nicosomb))
+- Typo [\#1523](https://github.com/wallabag/wallabag/pull/1523) ([tcitworld](https://github.com/tcitworld))
+- Add graby log [\#1505](https://github.com/wallabag/wallabag/pull/1505) ([j0k3r](https://github.com/j0k3r))
+- Add german translation. [\#1491](https://github.com/wallabag/wallabag/pull/1491) ([jlnostr](https://github.com/jlnostr))
+- Slug for tags [\#1488](https://github.com/wallabag/wallabag/pull/1488) ([nicosomb](https://github.com/nicosomb))
+- 2factor authentication via email [\#1484](https://github.com/wallabag/wallabag/pull/1484) ([nicosomb](https://github.com/nicosomb))
+- fix \#1470: clean material theme [\#1472](https://github.com/wallabag/wallabag/pull/1472) ([nicosomb](https://github.com/nicosomb))
+- implement bookmarklet [\#1471](https://github.com/wallabag/wallabag/pull/1471) ([nicosomb](https://github.com/nicosomb))
+- fix bug on detect active theme [\#1468](https://github.com/wallabag/wallabag/pull/1468) ([nicosomb](https://github.com/nicosomb))
+- fix \#1433: add test for removeWww Twig Extension [\#1461](https://github.com/wallabag/wallabag/pull/1461) ([nicosomb](https://github.com/nicosomb))
+- Add french translation [\#1441](https://github.com/wallabag/wallabag/pull/1441) ([nicosomb](https://github.com/nicosomb))
+- fix \#1433: remove www. on entries view [\#1440](https://github.com/wallabag/wallabag/pull/1440) ([nicosomb](https://github.com/nicosomb))
+- fix Capistrano configuration [\#1439](https://github.com/wallabag/wallabag/pull/1439) ([nicosomb](https://github.com/nicosomb))
+- some cleanup on material theme [\#1437](https://github.com/wallabag/wallabag/pull/1437) ([nicosomb](https://github.com/nicosomb))
+- Public registration & oAuth2 \o/ [\#1436](https://github.com/wallabag/wallabag/pull/1436) ([nicosomb](https://github.com/nicosomb))
+- Enabled created user from Config [\#1435](https://github.com/wallabag/wallabag/pull/1435) ([j0k3r](https://github.com/j0k3r))
+- V2 – Handle language in entry [\#1429](https://github.com/wallabag/wallabag/pull/1429) ([j0k3r](https://github.com/j0k3r))
+- V2 – Export entries [\#1422](https://github.com/wallabag/wallabag/pull/1422) ([tcitworld](https://github.com/tcitworld))
+
+## [2.0.0-alpha.0](https://github.com/wallabag/wallabag/tree/2.0.0-alpha.0) (2015-09-14)
+**Fixed bugs:**
+
+- 500 Internal Server Error on filtering articles [\#1416](https://github.com/wallabag/wallabag/issues/1416)
+- Server Side Request Forgery \(SSRF\) using Wallabag [\#1364](https://github.com/wallabag/wallabag/issues/1364)
+- \[v2\] Redirection expected after deleting an entry currently displayed [\#1391](https://github.com/wallabag/wallabag/issues/1391)
+- Filter date: no results for today [\#1379](https://github.com/wallabag/wallabag/issues/1379)
+- Conflict pagination and filters [\#1350](https://github.com/wallabag/wallabag/issues/1350)
+- \[v2\] When the title of an article is edited, the article is marked as read [\#1306](https://github.com/wallabag/wallabag/issues/1306)
+- Display current category name [\#1283](https://github.com/wallabag/wallabag/issues/1283)
+- The menu icon is displayed after clicked on search icon [\#1280](https://github.com/wallabag/wallabag/issues/1280)
+- \[v2\] When you change your username, you can't login [\#1149](https://github.com/wallabag/wallabag/issues/1149)
+- How to send an article from an external software? api? [\#1147](https://github.com/wallabag/wallabag/issues/1147)
+- need to enter username/password at login screen after browser restart [\#890](https://github.com/wallabag/wallabag/issues/890)
+- url greater than 255 chars are not saved \(was: urls with redirection\(s\) silently fail to be downloaded\) [\#681](https://github.com/wallabag/wallabag/issues/681)
+- duplicate check [\#400](https://github.com/wallabag/wallabag/issues/400)
+- \[v2\] Tags and articles  [\#324](https://github.com/wallabag/wallabag/issues/324)
+- \[v2\] can't login with mozilla account [\#321](https://github.com/wallabag/wallabag/issues/321)
+- \[v2\] utf-8 symbols are not displayed in article view [\#316](https://github.com/wallabag/wallabag/issues/316)
+- \[v2\] Not all articles are imported from v1 [\#302](https://github.com/wallabag/wallabag/issues/302)
+- Lien unique par utilisateur [\#121](https://github.com/wallabag/wallabag/issues/121)
+
+**Closed issues:**
+
+- ??? [\#1406](https://github.com/wallabag/wallabag/issues/1406)
+- Wrong display site http://f9r.ru/ [\#1388](https://github.com/wallabag/wallabag/issues/1388)
+- Filter: Reading time [\#1381](https://github.com/wallabag/wallabag/issues/1381)
+- store the user IP? [\#1344](https://github.com/wallabag/wallabag/issues/1344)
+- Get only content [\#1290](https://github.com/wallabag/wallabag/issues/1290)
+- Read GET parameters in the themes [\#1289](https://github.com/wallabag/wallabag/issues/1289)
+- Engine does not accept changes to the template [\#1288](https://github.com/wallabag/wallabag/issues/1288)
+- \[v2\] Filter on status entry \(unread/archive/starred\) [\#1382](https://github.com/wallabag/wallabag/issues/1382)
+- \[v2\] Enhance tags form on entry view [\#1378](https://github.com/wallabag/wallabag/issues/1378)
+- Display issues in config screen [\#1371](https://github.com/wallabag/wallabag/issues/1371)
+- \[v2\] back to good section while updating configuration [\#1368](https://github.com/wallabag/wallabag/issues/1368)
+- Display problem if domain name is too big [\#1357](https://github.com/wallabag/wallabag/issues/1357)
+- Cleanup in composer.json [\#1356](https://github.com/wallabag/wallabag/issues/1356)
+- Add a bar on each page with alpha message [\#1332](https://github.com/wallabag/wallabag/issues/1332)
+- do not display pagination when only 1 page [\#1324](https://github.com/wallabag/wallabag/issues/1324)
+- \[v2\] Fix display for "new entry" form [\#1321](https://github.com/wallabag/wallabag/issues/1321)
+- \[v2\] Design for filters [\#1320](https://github.com/wallabag/wallabag/issues/1320)
+- \[v2\] \[material theme\] Increase max-width for comfort [\#1314](https://github.com/wallabag/wallabag/issues/1314)
+- \[v2\] Redirect to the good URL after login [\#1311](https://github.com/wallabag/wallabag/issues/1311)
+- \[v2\] \[material theme\] Autofocus when clicking on search button [\#1310](https://github.com/wallabag/wallabag/issues/1310)
+- Display progress bar at the top of the page? [\#1308](https://github.com/wallabag/wallabag/issues/1308)
+- \[v2\] Maintain baggy for wallabag v2? [\#1305](https://github.com/wallabag/wallabag/issues/1305)
+- \[v2\] On "forgot-password" page, add a link to return to login form [\#1303](https://github.com/wallabag/wallabag/issues/1303)
+- \[v2\] "stay connected" checkbox [\#1302](https://github.com/wallabag/wallabag/issues/1302)
+- Change "send" button on config page [\#1299](https://github.com/wallabag/wallabag/issues/1299)
+- Some bugs with new Materiel theme [\#1282](https://github.com/wallabag/wallabag/issues/1282)
+- Notes about material theme [\#1281](https://github.com/wallabag/wallabag/issues/1281)
+- Implement graby into wallabag v2 [\#1262](https://github.com/wallabag/wallabag/issues/1262)
+- Display hostname in full article view [\#1177](https://github.com/wallabag/wallabag/issues/1177)
+- \[v2\] API: Remove the user property from the entries [\#1176](https://github.com/wallabag/wallabag/issues/1176)
+- \[v2\] API: Bad request [\#1168](https://github.com/wallabag/wallabag/issues/1168)
+- Project ideas [\#1088](https://github.com/wallabag/wallabag/issues/1088)
+- v2: bug when adding link [\#1057](https://github.com/wallabag/wallabag/issues/1057)
+- Add note to articles [\#1038](https://github.com/wallabag/wallabag/issues/1038)
+- RSS Enhancements [\#1000](https://github.com/wallabag/wallabag/issues/1000)
+- Search by same domain name [\#981](https://github.com/wallabag/wallabag/issues/981)
+- Client desktop ? [\#978](https://github.com/wallabag/wallabag/issues/978)
+- Preview Thumbnail in Article for Web and Apps [\#840](https://github.com/wallabag/wallabag/issues/840)
+- Edit user profile [\#800](https://github.com/wallabag/wallabag/issues/800)
+- Prefix for database [\#799](https://github.com/wallabag/wallabag/issues/799)
+- Tag links and edit name when added to wallabag via bookmarklet [\#749](https://github.com/wallabag/wallabag/issues/749)
+- New config screen [\#673](https://github.com/wallabag/wallabag/issues/673)
+- wallabag's coding style [\#661](https://github.com/wallabag/wallabag/issues/661)
+- Display better title than "Untitled" [\#564](https://github.com/wallabag/wallabag/issues/564)
+- SendToReader plugin [\#558](https://github.com/wallabag/wallabag/issues/558)
+- justification [\#554](https://github.com/wallabag/wallabag/issues/554)
+- \[Feature request\] Support login via mozilla persona [\#431](https://github.com/wallabag/wallabag/issues/431)
+- Android app: support for self-signed certificate [\#418](https://github.com/wallabag/wallabag/issues/418)
+- Android app: make share intent add site to app, not launch web app [\#412](https://github.com/wallabag/wallabag/issues/412)
+- Chrome extension: Easier setup [\#409](https://github.com/wallabag/wallabag/issues/409)
+- Chrome extension: More easily installable / findable [\#407](https://github.com/wallabag/wallabag/issues/407)
+- Chrome extension: »Access my data on googleapis.com«? [\#406](https://github.com/wallabag/wallabag/issues/406)
+- Android app: no means to copy [\#405](https://github.com/wallabag/wallabag/issues/405)
+- Android app: automatic sync [\#404](https://github.com/wallabag/wallabag/issues/404)
+- Android app: outdated interface [\#403](https://github.com/wallabag/wallabag/issues/403)
+- \[v2\] make each entry as public [\#398](https://github.com/wallabag/wallabag/issues/398)
+- Find articles with reading time = X [\#393](https://github.com/wallabag/wallabag/issues/393)
+- Barre de recherche. [\#369](https://github.com/wallabag/wallabag/issues/369)
+- Great App!! But three features missing. [\#342](https://github.com/wallabag/wallabag/issues/342)
+- \[v2\] Autocomplete tags [\#339](https://github.com/wallabag/wallabag/issues/339)
+- \[v2\] Separate tags by commas and not by spaces [\#338](https://github.com/wallabag/wallabag/issues/338)
+- \[Feature\] Multiple Lists [\#334](https://github.com/wallabag/wallabag/issues/334)
+- \[Feature\] IOS application [\#333](https://github.com/wallabag/wallabag/issues/333)
+- Add link by shell script [\#323](https://github.com/wallabag/wallabag/issues/323)
+- twitter integration [\#322](https://github.com/wallabag/wallabag/issues/322)
+- order posts - classer les post [\#320](https://github.com/wallabag/wallabag/issues/320)
+- \[v2\] Visited links are not visible in top menu, midnight theme [\#312](https://github.com/wallabag/wallabag/issues/312)
+- Increase max-width [\#301](https://github.com/wallabag/wallabag/issues/301)
+- \[v2\] RSS Feeds show 'Access Forbidden' error [\#300](https://github.com/wallabag/wallabag/issues/300)
+- Avoir la possibilité de mettre la barre d'action en haut ou en bas [\#296](https://github.com/wallabag/wallabag/issues/296)
+- change email from config screen [\#267](https://github.com/wallabag/wallabag/issues/267)
+- Text to Speech \(android\) [\#263](https://github.com/wallabag/wallabag/issues/263)
+- Multi-user with LDAP backend or at least REMOTE header [\#235](https://github.com/wallabag/wallabag/issues/235)
+- Edit title [\#218](https://github.com/wallabag/wallabag/issues/218)
+- send title & content to poche directly [\#211](https://github.com/wallabag/wallabag/issues/211)
+- \[v2\] Multipage Article aren't rendered right [\#143](https://github.com/wallabag/wallabag/issues/143)
+- fichiers l10n [\#134](https://github.com/wallabag/wallabag/issues/134)
+- stocker date de "pochage" [\#129](https://github.com/wallabag/wallabag/issues/129)
+- script de migration entre mysql \<-\> pgsql \<-\> sqlite [\#126](https://github.com/wallabag/wallabag/issues/126)
+- préfixer les tables en base [\#124](https://github.com/wallabag/wallabag/issues/124)
+- pouvoir annuler la suppression [\#118](https://github.com/wallabag/wallabag/issues/118)
+- stockage offline [\#117](https://github.com/wallabag/wallabag/issues/117)
+- lost password [\#108](https://github.com/wallabag/wallabag/issues/108)
+- Have more categories than Archive [\#99](https://github.com/wallabag/wallabag/issues/99)
+- minify js / css [\#96](https://github.com/wallabag/wallabag/issues/96)
+- API [\#31](https://github.com/wallabag/wallabag/issues/31)
+
+**Merged pull requests:**
+
+- improved display pictures [\#1420](https://github.com/wallabag/wallabag/pull/1420) ([modos189](https://github.com/modos189))
+- Update CONTRIBUTING.md [\#1415](https://github.com/wallabag/wallabag/pull/1415) ([sridharrajs](https://github.com/sridharrajs))
+- Use full size of the panel for domain-filtering [\#1403](https://github.com/wallabag/wallabag/pull/1403) ([tcitworld](https://github.com/tcitworld))
+- Enable code rating on Scrutinizer [\#1390](https://github.com/wallabag/wallabag/pull/1390) ([j0k3r](https://github.com/j0k3r))
+- change timeout because scrutinizer failed [\#1358](https://github.com/wallabag/wallabag/pull/1358) ([nicosomb](https://github.com/nicosomb))
+- fixes material [\#1337](https://github.com/wallabag/wallabag/pull/1337) ([modos189](https://github.com/modos189))
+- Update Useragent to Win8.1 and FF36 [\#1318](https://github.com/wallabag/wallabag/pull/1318) ([ticoombs](https://github.com/ticoombs))
+- Fix ff social [\#1301](https://github.com/wallabag/wallabag/pull/1301) ([tcitworld](https://github.com/tcitworld))
+- fix material [\#1298](https://github.com/wallabag/wallabag/pull/1298) ([modos189](https://github.com/modos189))
+- filter for entries with previewPicture [\#1418](https://github.com/wallabag/wallabag/pull/1418) ([nicosomb](https://github.com/nicosomb))
+- fix \#972: add preview pictures [\#1417](https://github.com/wallabag/wallabag/pull/1417) ([nicosomb](https://github.com/nicosomb))
+- filters view on side for baggy [\#1404](https://github.com/wallabag/wallabag/pull/1404) ([tcitworld](https://github.com/tcitworld))
+- Cleanup baggy [\#1401](https://github.com/wallabag/wallabag/pull/1401) ([j0k3r](https://github.com/j0k3r))
+- fix \#1357, truncate domain name if it's too loooong [\#1400](https://github.com/wallabag/wallabag/pull/1400) ([nicosomb](https://github.com/nicosomb))
+- Integrate graby [\#1397](https://github.com/wallabag/wallabag/pull/1397) ([j0k3r](https://github.com/j0k3r))
+- Apply margin only on settings page [\#1396](https://github.com/wallabag/wallabag/pull/1396) ([j0k3r](https://github.com/j0k3r))
+- fix \#1378: nice display for tags list [\#1395](https://github.com/wallabag/wallabag/pull/1395) ([nicosomb](https://github.com/nicosomb))
+- Fix date filter on same day [\#1393](https://github.com/wallabag/wallabag/pull/1393) ([j0k3r](https://github.com/j0k3r))
+- Fix redirect after deletion [\#1392](https://github.com/wallabag/wallabag/pull/1392) ([j0k3r](https://github.com/j0k3r))
+- remove dead code [\#1389](https://github.com/wallabag/wallabag/pull/1389) ([nicosomb](https://github.com/nicosomb))
+- WIP – Fixing things around :dash: [\#1386](https://github.com/wallabag/wallabag/pull/1386) ([j0k3r](https://github.com/j0k3r))
+- filters: implement status filter and a new view \(to display all entries\) [\#1385](https://github.com/wallabag/wallabag/pull/1385) ([nicosomb](https://github.com/nicosomb))
+- fix \#1371 config screen: display bug in RSS tab [\#1384](https://github.com/wallabag/wallabag/pull/1384) ([nicosomb](https://github.com/nicosomb))
+- CS [\#1383](https://github.com/wallabag/wallabag/pull/1383) ([j0k3r](https://github.com/j0k3r))
+- fix \#1368 config: redirect on correct tab in material theme [\#1375](https://github.com/wallabag/wallabag/pull/1375) ([nicosomb](https://github.com/nicosomb))
+- filters: enhance view for domain name [\#1374](https://github.com/wallabag/wallabag/pull/1374) ([nicosomb](https://github.com/nicosomb))
+- assign tags to an entry [\#1372](https://github.com/wallabag/wallabag/pull/1372) ([nicosomb](https://github.com/nicosomb))
+- fix 1356: diet for composer [\#1370](https://github.com/wallabag/wallabag/pull/1370) ([nicosomb](https://github.com/nicosomb))
+- fix \#1332: bottom bar to display message [\#1369](https://github.com/wallabag/wallabag/pull/1369) ([nicosomb](https://github.com/nicosomb))
+- action labels depend on status [\#1367](https://github.com/wallabag/wallabag/pull/1367) ([nicosomb](https://github.com/nicosomb))
+- fix tag view in material theme [\#1366](https://github.com/wallabag/wallabag/pull/1366) ([nicosomb](https://github.com/nicosomb))
+- change \</div\> into \</ul\> [\#1365](https://github.com/wallabag/wallabag/pull/1365) ([nicosomb](https://github.com/nicosomb))
+- add creation date filter view [\#1363](https://github.com/wallabag/wallabag/pull/1363) ([nicosomb](https://github.com/nicosomb))
+- implement FosUser [\#1362](https://github.com/wallabag/wallabag/pull/1362) ([nicosomb](https://github.com/nicosomb))
+- clean -\> clear [\#1355](https://github.com/wallabag/wallabag/pull/1355) ([nicosomb](https://github.com/nicosomb))
+- some cleanup [\#1354](https://github.com/wallabag/wallabag/pull/1354) ([nicosomb](https://github.com/nicosomb))
+- check if one entry or not [\#1353](https://github.com/wallabag/wallabag/pull/1353) ([nicosomb](https://github.com/nicosomb))
+- fix \#1350: fix pagination with filters [\#1352](https://github.com/wallabag/wallabag/pull/1352) ([nicosomb](https://github.com/nicosomb))
+- add link to original article in material theme [\#1349](https://github.com/wallabag/wallabag/pull/1349) ([nicosomb](https://github.com/nicosomb))
+- \[WIP\] filter by creation date [\#1343](https://github.com/wallabag/wallabag/pull/1343) ([nicosomb](https://github.com/nicosomb))
+- fix \#981: add filter on domain name [\#1342](https://github.com/wallabag/wallabag/pull/1342) ([nicosomb](https://github.com/nicosomb))
+- capistrano config [\#1341](https://github.com/wallabag/wallabag/pull/1341) ([nicosomb](https://github.com/nicosomb))
+- change title for material pages / about page [\#1338](https://github.com/wallabag/wallabag/pull/1338) ([nicosomb](https://github.com/nicosomb))
+- store domainName in database [\#1334](https://github.com/wallabag/wallabag/pull/1334) ([nicosomb](https://github.com/nicosomb))
+- disable download links on entry view [\#1331](https://github.com/wallabag/wallabag/pull/1331) ([nicosomb](https://github.com/nicosomb))
+- fix \#1324: do not display pagination when only 1 page [\#1328](https://github.com/wallabag/wallabag/pull/1328) ([nicosomb](https://github.com/nicosomb))
+- fix \#1299: change send buttons on config page [\#1326](https://github.com/wallabag/wallabag/pull/1326) ([nicosomb](https://github.com/nicosomb))
+- fix \#1314: change max-width in material theme [\#1325](https://github.com/wallabag/wallabag/pull/1325) ([nicosomb](https://github.com/nicosomb))
+- fix \#1302: add 'stay connected' checkbox [\#1323](https://github.com/wallabag/wallabag/pull/1323) ([nicosomb](https://github.com/nicosomb))
+- fix \#1303, add link to homepage on forgot password page [\#1322](https://github.com/wallabag/wallabag/pull/1322) ([nicosomb](https://github.com/nicosomb))
+- add new post form in material header [\#1319](https://github.com/wallabag/wallabag/pull/1319) ([nicosomb](https://github.com/nicosomb))
+- fix link in howto page [\#1317](https://github.com/wallabag/wallabag/pull/1317) ([nicosomb](https://github.com/nicosomb))
+- fix \#1310 add focus to search form [\#1316](https://github.com/wallabag/wallabag/pull/1316) ([nicosomb](https://github.com/nicosomb))
+- fix \#1311, redirect after login [\#1312](https://github.com/wallabag/wallabag/pull/1312) ([nicosomb](https://github.com/nicosomb))
+- rename favorite in starred [\#1304](https://github.com/wallabag/wallabag/pull/1304) ([nicosomb](https://github.com/nicosomb))
+- store estimated reading time in database \(\#393\) [\#1297](https://github.com/wallabag/wallabag/pull/1297) ([nicosomb](https://github.com/nicosomb))
+- fix \#564: replace Untitled by the domain name [\#1296](https://github.com/wallabag/wallabag/pull/1296) ([nicosomb](https://github.com/nicosomb))
+- add howto page [\#1295](https://github.com/wallabag/wallabag/pull/1295) ([nicosomb](https://github.com/nicosomb))
+- fix \#1282: add title on wallabag logo [\#1294](https://github.com/wallabag/wallabag/pull/1294) ([nicosomb](https://github.com/nicosomb))
+- get itemsPerPage for unread/fav/archive views [\#1293](https://github.com/wallabag/wallabag/pull/1293) ([nicosomb](https://github.com/nicosomb))
+- Add tags list display [\#1292](https://github.com/wallabag/wallabag/pull/1292) ([nicosomb](https://github.com/nicosomb))
+- fix \#1283: display the good title for each category [\#1286](https://github.com/wallabag/wallabag/pull/1286) ([nicosomb](https://github.com/nicosomb))
+- set material to default theme \o/ [\#1279](https://github.com/wallabag/wallabag/pull/1279) ([nicosomb](https://github.com/nicosomb))
+- Added Material theme [\#1276](https://github.com/wallabag/wallabag/pull/1276) ([modos189](https://github.com/modos189))
+- Adds pagerfanta paginator everywhere, modifies article routing. [\#1250](https://github.com/wallabag/wallabag/pull/1250) ([frankoa](https://github.com/frankoa))
+- V2 Edit title [\#1208](https://github.com/wallabag/wallabag/pull/1208) ([j0k3r](https://github.com/j0k3r))
+- Upgrade to Symfony 2.7 [\#1206](https://github.com/wallabag/wallabag/pull/1206) ([j0k3r](https://github.com/j0k3r))
+- changed email fields with the email type and added required parameter on... [\#1180](https://github.com/wallabag/wallabag/pull/1180) ([tcitworld](https://github.com/tcitworld))
+- Move API stuff in ApiBundle [\#1167](https://github.com/wallabag/wallabag/pull/1167) ([j0k3r](https://github.com/j0k3r))
+- Add RSS feeds [\#1166](https://github.com/wallabag/wallabag/pull/1166) ([j0k3r](https://github.com/j0k3r))
+- Prefix table [\#1165](https://github.com/wallabag/wallabag/pull/1165) ([j0k3r](https://github.com/j0k3r))
+- Remove ability to change username [\#1164](https://github.com/wallabag/wallabag/pull/1164) ([j0k3r](https://github.com/j0k3r))
+- Speed up tests [\#1163](https://github.com/wallabag/wallabag/pull/1163) ([j0k3r](https://github.com/j0k3r))
+- Handle forgot password [\#1152](https://github.com/wallabag/wallabag/pull/1152) ([j0k3r](https://github.com/j0k3r))
+- Simplify build system [\#1144](https://github.com/wallabag/wallabag/pull/1144) ([j0k3r](https://github.com/j0k3r))
+- V2 theme [\#1132](https://github.com/wallabag/wallabag/pull/1132) ([j0k3r](https://github.com/j0k3r))
+- \[WIP\] API : hypermedia & tags [\#1110](https://github.com/wallabag/wallabag/pull/1110) ([nicosomb](https://github.com/nicosomb))
+- V2 config [\#1095](https://github.com/wallabag/wallabag/pull/1095) ([j0k3r](https://github.com/j0k3r))
+- Add more tests to Entry controller + security [\#1072](https://github.com/wallabag/wallabag/pull/1072) ([j0k3r](https://github.com/j0k3r))
+- 1st draft for testing API [\#1070](https://github.com/wallabag/wallabag/pull/1070) ([nicosomb](https://github.com/nicosomb))
+- GET /api/entries returns object, no more array [\#1069](https://github.com/wallabag/wallabag/pull/1069) ([nicosomb](https://github.com/nicosomb))
+- V2 api authentication [\#1068](https://github.com/wallabag/wallabag/pull/1068) ([nicosomb](https://github.com/nicosomb))
+- rename Tags entity [\#1063](https://github.com/wallabag/wallabag/pull/1063) ([nicosomb](https://github.com/nicosomb))
+- sort entries in repository [\#1048](https://github.com/wallabag/wallabag/pull/1048) ([nicosomb](https://github.com/nicosomb))
+
+## [1.9.1-b](https://github.com/wallabag/wallabag/tree/1.9.1-b) (2015-08-04)
+**Merged pull requests:**
+
+- 1.9.1-b [\#1274](https://github.com/wallabag/wallabag/pull/1274) ([nicosomb](https://github.com/nicosomb))
+- remove new syntax for array [\#1272](https://github.com/wallabag/wallabag/pull/1272) ([nicosomb](https://github.com/nicosomb))
+
+## [1.9.1](https://github.com/wallabag/wallabag/tree/1.9.1) (2015-08-03)
+**Fixed bugs:**
+
+- error loading feed when synchronizing [\#1212](https://github.com/wallabag/wallabag/issues/1212)
+- tags & tags\_entry not properly deleted after article deletion [\#1209](https://github.com/wallabag/wallabag/issues/1209)
+- Tags not being exported in Wallabag 1.9.0 [\#1203](https://github.com/wallabag/wallabag/issues/1203)
+- Clear cache function deleted .htaccess, .gitignore files under cache/ [\#1154](https://github.com/wallabag/wallabag/issues/1154)
+- Update jQuery [\#1139](https://github.com/wallabag/wallabag/issues/1139)
+- translation issue [\#1133](https://github.com/wallabag/wallabag/issues/1133)
+- Baggy theme: no Icon for shaarli [\#1131](https://github.com/wallabag/wallabag/issues/1131)
+- Archive an unread article [\#1126](https://github.com/wallabag/wallabag/issues/1126)
+- Error in first log in [\#1121](https://github.com/wallabag/wallabag/issues/1121)
+- "About" not translated into french in the menu ? [\#1116](https://github.com/wallabag/wallabag/issues/1116)
+- I'm getting duplicate articles. [\#1102](https://github.com/wallabag/wallabag/issues/1102)
+- The "back to top" button is missing in responsive design \(Baggy theme\) [\#1010](https://github.com/wallabag/wallabag/issues/1010)
+- Security issue [\#997](https://github.com/wallabag/wallabag/issues/997)
+- fix security bug with PHP\_AUTH\_USER [\#1252](https://github.com/wallabag/wallabag/pull/1252) ([tcitworld](https://github.com/tcitworld))
+
+**Closed issues:**
+
+- Wrong documentation URL [\#1263](https://github.com/wallabag/wallabag/issues/1263)
+- Integrate freddyb/wallabag-fxos in wallabag organization [\#1259](https://github.com/wallabag/wallabag/issues/1259)
+- \[v2\] Wallabag stay in English even when configured with other language [\#1256](https://github.com/wallabag/wallabag/issues/1256)
+- \[v2\] Not able to export in epub/pdf/mobi [\#1255](https://github.com/wallabag/wallabag/issues/1255)
+- Installation : wrong path to themes [\#1243](https://github.com/wallabag/wallabag/issues/1243)
+- Add Iceblog [\#1238](https://github.com/wallabag/wallabag/issues/1238)
+- Unable to retrieve content from CloudFlare Blog [\#1224](https://github.com/wallabag/wallabag/issues/1224)
+- Unable to retrieve full-text content from bastamag.net [\#1223](https://github.com/wallabag/wallabag/issues/1223)
+- Broken link [\#1221](https://github.com/wallabag/wallabag/issues/1221)
+- http://jsforcats.com/ [\#1219](https://github.com/wallabag/wallabag/issues/1219)
+- 413 Request Entity Too Large [\#1204](https://github.com/wallabag/wallabag/issues/1204)
+- Revues.org [\#1201](https://github.com/wallabag/wallabag/issues/1201)
+- Import fails unexpectedly [\#1193](https://github.com/wallabag/wallabag/issues/1193)
+- unable to retrieve full-text content from bastamag.net [\#1186](https://github.com/wallabag/wallabag/issues/1186)
+- Unable to retrieve content for github. [\#1185](https://github.com/wallabag/wallabag/issues/1185)
+- unable to retrieve full-text content from frontburner.dmagazine.com [\#1184](https://github.com/wallabag/wallabag/issues/1184)
+- unable to retrieve full-text content from www.it-connect.fr [\#1181](https://github.com/wallabag/wallabag/issues/1181)
+- Could not get body text for this URL [\#1155](https://github.com/wallabag/wallabag/issues/1155)
+- Almost empty articles from computerworld.com [\#1090](https://github.com/wallabag/wallabag/issues/1090)
+- Empty Articles from www.theatlantic.com [\#1089](https://github.com/wallabag/wallabag/issues/1089)
+- Installation instructions in wrong order [\#1024](https://github.com/wallabag/wallabag/issues/1024)
+- \(Semantic-\)Scuttle import? [\#1006](https://github.com/wallabag/wallabag/issues/1006)
+- Articles on quechoisir.org are empty [\#982](https://github.com/wallabag/wallabag/issues/982)
+- Firefox OS app [\#521](https://github.com/wallabag/wallabag/issues/521)
+- Random feature must fetch an article in current status [\#1153](https://github.com/wallabag/wallabag/issues/1153)
+- Update documentation inside wallabag [\#1141](https://github.com/wallabag/wallabag/issues/1141)
+- \[UX\] Next, previous article [\#1123](https://github.com/wallabag/wallabag/issues/1123)
+- See all tags while tagging [\#1122](https://github.com/wallabag/wallabag/issues/1122)
+- Update documentation with the 1.9 changes [\#1119](https://github.com/wallabag/wallabag/issues/1119)
+- Check for existing accounts at install [\#952](https://github.com/wallabag/wallabag/issues/952)
+- import chromium / mozilla / firefox bookmarks.html files \(\<dd\>/\<dt\> based\) [\#892](https://github.com/wallabag/wallabag/issues/892)
+- sticky article toolbar [\#511](https://github.com/wallabag/wallabag/issues/511)
+
+**Merged pull requests:**
+
+- Fix site config [\#1266](https://github.com/wallabag/wallabag/pull/1266) ([nicosomb](https://github.com/nicosomb))
+- Dev autoclose [\#1257](https://github.com/wallabag/wallabag/pull/1257) ([freddyb](https://github.com/freddyb))
+- fix link to documentation [\#1251](https://github.com/wallabag/wallabag/pull/1251) ([axelsimon](https://github.com/axelsimon))
+- Revert "fix link to save your first article" [\#1248](https://github.com/wallabag/wallabag/pull/1248) ([tcitworld](https://github.com/tcitworld))
+- fix link to save your first article [\#1247](https://github.com/wallabag/wallabag/pull/1247) ([axelsimon](https://github.com/axelsimon))
+- add site config for des-livres-pour-changer-de-vie.fr [\#1234](https://github.com/wallabag/wallabag/pull/1234) ([jmlrt](https://github.com/jmlrt))
+- add site\_config for cloudacademy.com and cyrille-borne.com [\#1228](https://github.com/wallabag/wallabag/pull/1228) ([jmlrt](https://github.com/jmlrt))
+- Enable base\_url for proxies [\#1226](https://github.com/wallabag/wallabag/pull/1226) ([tcitworld](https://github.com/tcitworld))
+- 1.9.1 [\#1267](https://github.com/wallabag/wallabag/pull/1267) ([nicosomb](https://github.com/nicosomb))
+- Fix \#1215 [\#1217](https://github.com/wallabag/wallabag/pull/1217) ([tcitworld](https://github.com/tcitworld))
+
+## [1.9.1beta3](https://github.com/wallabag/wallabag/tree/1.9.1beta3) (2015-06-06)
+**Closed issues:**
+
+- cannot synchronize on ubuntu [\#1195](https://github.com/wallabag/wallabag/issues/1195)
+- API Feature request, modify posts to performe additional processing [\#1191](https://github.com/wallabag/wallabag/issues/1191)
+
+**Merged pull requests:**
+
+- Update fr\_FR.utf8.po [\#1211](https://github.com/wallabag/wallabag/pull/1211) ([goofy-bz](https://github.com/goofy-bz))
+- issue \#1203: fixing tag export [\#1207](https://github.com/wallabag/wallabag/pull/1207) ([vpmalley](https://github.com/vpmalley))
+- fix restart of import [\#1200](https://github.com/wallabag/wallabag/pull/1200) ([nicosomb](https://github.com/nicosomb))
+
+## [1.9.1beta2](https://github.com/wallabag/wallabag/tree/1.9.1beta2) (2015-05-09)
+**Fixed bugs:**
+
+- I don't see any icons. [\#1183](https://github.com/wallabag/wallabag/issues/1183)
+- Error in install process. [\#1175](https://github.com/wallabag/wallabag/issues/1175)
+
+**Closed issues:**
+
+- Saving to pdf doesn't work because it can't download a picture. [\#1190](https://github.com/wallabag/wallabag/issues/1190)
+- Error after installation in IIS - "login failed: user doesn't exist" [\#1187](https://github.com/wallabag/wallabag/issues/1187)
+- Connection time out during import [\#1171](https://github.com/wallabag/wallabag/issues/1171)
+
+## [1.9.1beta1](https://github.com/wallabag/wallabag/tree/1.9.1beta1) (2015-04-08)
+## [1.9.1alpha2](https://github.com/wallabag/wallabag/tree/1.9.1alpha2) (2015-04-07)
+**Fixed bugs:**
+
+- Firefox Addon give an error on saving a link [\#1104](https://github.com/wallabag/wallabag/issues/1104)
+
+**Closed issues:**
+
+- Trying to access wallabag for the first time on a fresh install. [\#1172](https://github.com/wallabag/wallabag/issues/1172)
+- If I install wallabag over my current wallabag like I am upgrading will it keep my data? [\#1170](https://github.com/wallabag/wallabag/issues/1170)
+- Saving URL from FeedaFever [\#1169](https://github.com/wallabag/wallabag/issues/1169)
+- Solarized Dark theme issue [\#1159](https://github.com/wallabag/wallabag/issues/1159)
+- false parentheses [\#1157](https://github.com/wallabag/wallabag/issues/1157)
+- Password is cached only for a very short time [\#1156](https://github.com/wallabag/wallabag/issues/1156)
+
+**Merged pull requests:**
+
+- double closing parentheses [\#1158](https://github.com/wallabag/wallabag/pull/1158) ([bohni](https://github.com/bohni))
+
+## [1.9.1alpha1](https://github.com/wallabag/wallabag/tree/1.9.1alpha1) (2015-03-08)
+**Closed issues:**
+
+- Error when trying to save and now I can't even view articles. [\#1138](https://github.com/wallabag/wallabag/issues/1138)
+- Add the ability to edit URLs [\#1136](https://github.com/wallabag/wallabag/issues/1136)
+- How to backup wallabag. [\#1135](https://github.com/wallabag/wallabag/issues/1135)
+- \[feature\] RSS feeds to choose from [\#1134](https://github.com/wallabag/wallabag/issues/1134)
+- Error while exporting to pdf. [\#1113](https://github.com/wallabag/wallabag/issues/1113)
+- Wallabag using WordPress [\#1112](https://github.com/wallabag/wallabag/issues/1112)
+- Courgette theme still present [\#1103](https://github.com/wallabag/wallabag/issues/1103)
+- Login screen not centered [\#1099](https://github.com/wallabag/wallabag/issues/1099)
+- 'X-Frame-Options' - 'DENY' [\#1097](https://github.com/wallabag/wallabag/issues/1097)
+- Did you forget to select a file?  Import finished. When trying to import. [\#1096](https://github.com/wallabag/wallabag/issues/1096)
+- Wrong display in wallabag: jungle-world.com [\#1034](https://github.com/wallabag/wallabag/issues/1034)
+
+**Merged pull requests:**
+
+- composer: min PHP 5.3 added [\#1151](https://github.com/wallabag/wallabag/pull/1151) ([TomasVotruba](https://github.com/TomasVotruba))
+- Wallabag v2 api hypermedia pager [\#1148](https://github.com/wallabag/wallabag/pull/1148) ([willdurand](https://github.com/willdurand))
+- locale es\_ES.utf8 files fully translated → Translation to Spanish updated [\#1106](https://github.com/wallabag/wallabag/pull/1106) ([icaroperseo](https://github.com/icaroperseo))
+
+## [1.9](https://github.com/wallabag/wallabag/tree/1.9) (2015-02-18)
+**Fixed bugs:**
+
+- Register email at installation [\#1093](https://github.com/wallabag/wallabag/issues/1093)
+
+**Closed issues:**
+
+- 413 Request entity too large error when importing [\#1094](https://github.com/wallabag/wallabag/issues/1094)
+- How do I add new user without the interface after installation. [\#1092](https://github.com/wallabag/wallabag/issues/1092)
+- How long should I expect wallabag to be down after importing? [\#1091](https://github.com/wallabag/wallabag/issues/1091)
+- v1.9 beta: random does not work [\#1082](https://github.com/wallabag/wallabag/issues/1082)
+
+**Merged pull requests:**
+
+- Version 1.9.0 [\#1081](https://github.com/wallabag/wallabag/pull/1081) ([tcitworld](https://github.com/tcitworld))
+
+## [1.9RC1](https://github.com/wallabag/wallabag/tree/1.9RC1) (2015-02-16)
+**Fixed bugs:**
+
+- Saying I don't have permission to access to /inc/poche/config.inc.php during install. [\#1086](https://github.com/wallabag/wallabag/issues/1086)
+
+**Closed issues:**
+
+- add capability to download pictures for android app [\#1085](https://github.com/wallabag/wallabag/issues/1085)
+
+## [1.9beta2](https://github.com/wallabag/wallabag/tree/1.9beta2) (2015-02-15)
+## [1.9beta](https://github.com/wallabag/wallabag/tree/1.9beta) (2015-02-14)
+**Fixed bugs:**
+
+- allow\_url\_fopen disabled try to use php-curl [\#1078](https://github.com/wallabag/wallabag/issues/1078)
+- "Fetch content for articles with no content" doesn't work  [\#1058](https://github.com/wallabag/wallabag/issues/1058)
+- New Install - Can't Log In [\#1040](https://github.com/wallabag/wallabag/issues/1040)
+- \[Installation\] Throw an exception if PDO isn't found at installation. [\#996](https://github.com/wallabag/wallabag/issues/996)
+- \[Installation\] Wrong login on MySQL/PostgreSQL databases fail silently [\#995](https://github.com/wallabag/wallabag/issues/995)
+- An error occured: "db" directory must be writeable for your web server user! [\#990](https://github.com/wallabag/wallabag/issues/990)
+- logic bug in autoclose code? [\#984](https://github.com/wallabag/wallabag/issues/984)
+- Can't mark an article as favorite [\#983](https://github.com/wallabag/wallabag/issues/983)
+- Export does not work \(JSON & ePub\) [\#970](https://github.com/wallabag/wallabag/issues/970)
+- Problem with Readability.php when save link [\#963](https://github.com/wallabag/wallabag/issues/963)
+- White Screen after Install [\#955](https://github.com/wallabag/wallabag/issues/955)
+- wallabag install enable to save links on openbsd [\#948](https://github.com/wallabag/wallabag/issues/948)
+- Courgette theme really broken  [\#941](https://github.com/wallabag/wallabag/issues/941)
+- White Screen when mysql user has no privileges. [\#940](https://github.com/wallabag/wallabag/issues/940)
+- crashing because unknown character set 'utf8mb4' [\#935](https://github.com/wallabag/wallabag/issues/935)
+- Article not saved if not logged in [\#877](https://github.com/wallabag/wallabag/issues/877)
+- New self-hosted install: Android app and FF Extension do not work [\#829](https://github.com/wallabag/wallabag/issues/829)
+- Empty page after upgrade [\#796](https://github.com/wallabag/wallabag/issues/796)
+- Delete Courgette theme [\#781](https://github.com/wallabag/wallabag/issues/781)
+- icons blocked/not loading when font is blocked [\#465](https://github.com/wallabag/wallabag/issues/465)
+- New installation process [\#1026](https://github.com/wallabag/wallabag/pull/1026) ([tcitworld](https://github.com/tcitworld))
+
+**Closed issues:**
+
+- 1.7.x to 1.8 gives blank page [\#1064](https://github.com/wallabag/wallabag/issues/1064)
+- wallabag.org : 504 Gateway Time-Out : cloudflare-nginx [\#1046](https://github.com/wallabag/wallabag/issues/1046)
+- Install instruction is a mess!  [\#1045](https://github.com/wallabag/wallabag/issues/1045)
+- Feature Request: Evernote [\#1043](https://github.com/wallabag/wallabag/issues/1043)
+- Rethink installation process [\#1025](https://github.com/wallabag/wallabag/issues/1025)
+- Authentication to websites needed to fetch the text [\#1009](https://github.com/wallabag/wallabag/issues/1009)
+- "Stay signed in" not working [\#1007](https://github.com/wallabag/wallabag/issues/1007)
+- social api [\#1002](https://github.com/wallabag/wallabag/issues/1002)
+- Wrong  url in the iOS application [\#1001](https://github.com/wallabag/wallabag/issues/1001)
+- Register with Packagist? [\#993](https://github.com/wallabag/wallabag/issues/993)
+- Allow tagging when saving to wallabag [\#991](https://github.com/wallabag/wallabag/issues/991)
+- Can not add a GitHub Gist [\#979](https://github.com/wallabag/wallabag/issues/979)
+- add link to documentation on about page [\#954](https://github.com/wallabag/wallabag/issues/954)
+- "update article" button [\#951](https://github.com/wallabag/wallabag/issues/951)
+- http://wllbg.org/latest points to an old 1.8.0 instead of 1.8.1 [\#947](https://github.com/wallabag/wallabag/issues/947)
+- Images are not cached/downloaded [\#946](https://github.com/wallabag/wallabag/issues/946)
+- Parse 9gag posts. [\#934](https://github.com/wallabag/wallabag/issues/934)
+- Wallabag and fail2ban \[Feature\] [\#931](https://github.com/wallabag/wallabag/issues/931)
+- refresh untitled articles [\#930](https://github.com/wallabag/wallabag/issues/930)
+- Multiple size favicons [\#929](https://github.com/wallabag/wallabag/issues/929)
+- Read a random article [\#927](https://github.com/wallabag/wallabag/issues/927)
+- Change opacity when displaying search popup [\#916](https://github.com/wallabag/wallabag/issues/916)
+- Diaspora sharing button [\#872](https://github.com/wallabag/wallabag/issues/872)
+- Clean up code to respect guidelines [\#852](https://github.com/wallabag/wallabag/issues/852)
+- Wallabag seems to download doubleclick ad images [\#827](https://github.com/wallabag/wallabag/issues/827)
+- Tags not imported [\#823](https://github.com/wallabag/wallabag/issues/823)
+- Make a class for e-books produced [\#772](https://github.com/wallabag/wallabag/issues/772)
+- Migrate some settings from config file to database [\#686](https://github.com/wallabag/wallabag/issues/686)
+- Gestion d'export PDF pour lecture hors ligne [\#77](https://github.com/wallabag/wallabag/issues/77)
+
+**Merged pull requests:**
+
+- added site config for github gists, jungle-world.com and toolinux.com [\#1067](https://github.com/wallabag/wallabag/pull/1067) ([vpmalley](https://github.com/vpmalley))
+- V2 api tests entry [\#1066](https://github.com/wallabag/wallabag/pull/1066) ([j0k3r](https://github.com/j0k3r))
+- Cleanup default assets symlinks [\#1065](https://github.com/wallabag/wallabag/pull/1065) ([FabienM](https://github.com/FabienM))
+- add a real relation between user and entry [\#1062](https://github.com/wallabag/wallabag/pull/1062) ([nicosomb](https://github.com/nicosomb))
+- Remove temporary entities [\#1061](https://github.com/wallabag/wallabag/pull/1061) ([j0k3r](https://github.com/j0k3r))
+- rename User entity [\#1060](https://github.com/wallabag/wallabag/pull/1060) ([nicosomb](https://github.com/nicosomb))
+- Rename entry [\#1059](https://github.com/wallabag/wallabag/pull/1059) ([nicosomb](https://github.com/nicosomb))
+- PATCH method, boolean for some parameters and change entity methods name [\#1055](https://github.com/wallabag/wallabag/pull/1055) ([nicosomb](https://github.com/nicosomb))
+- we can now set a title to the article when we use POST /api/entries [\#1054](https://github.com/wallabag/wallabag/pull/1054) ([nicosomb](https://github.com/nicosomb))
+- Fix fetched entries when localized [\#1053](https://github.com/wallabag/wallabag/pull/1053) ([erixtekila](https://github.com/erixtekila))
+- Added en-GB  [\#1042](https://github.com/wallabag/wallabag/pull/1042) ([edent](https://github.com/edent))
+- CS [\#1037](https://github.com/wallabag/wallabag/pull/1037) ([j0k3r](https://github.com/j0k3r))
+- Update composer [\#1036](https://github.com/wallabag/wallabag/pull/1036) ([j0k3r](https://github.com/j0k3r))
+- Tests are working again [\#1035](https://github.com/wallabag/wallabag/pull/1035) ([j0k3r](https://github.com/j0k3r))
+- Update german localisation. [\#1031](https://github.com/wallabag/wallabag/pull/1031) ([jlnostr](https://github.com/jlnostr))
+- Revert "Update german localisation." [\#1030](https://github.com/wallabag/wallabag/pull/1030) ([tcitworld](https://github.com/tcitworld))
+- Update german localisation. [\#1028](https://github.com/wallabag/wallabag/pull/1028) ([jlnostr](https://github.com/jlnostr))
+- Send email at registration [\#1022](https://github.com/wallabag/wallabag/pull/1022) ([tcitworld](https://github.com/tcitworld))
+- working on registration support [\#1021](https://github.com/wallabag/wallabag/pull/1021) ([tcitworld](https://github.com/tcitworld))
+- Revert "URL encode 'via @wallabagapp' email body" [\#1019](https://github.com/wallabag/wallabag/pull/1019) ([nicosomb](https://github.com/nicosomb))
+- URL encode 'via @wallabagapp' email body [\#1018](https://github.com/wallabag/wallabag/pull/1018) ([shtrom](https://github.com/shtrom))
+- Savewithtags [\#1015](https://github.com/wallabag/wallabag/pull/1015) ([tcitworld](https://github.com/tcitworld))
+- Importtags [\#1013](https://github.com/wallabag/wallabag/pull/1013) ([tcitworld](https://github.com/tcitworld))
+- Fixed \#993: add wallabag to packagist [\#1004](https://github.com/wallabag/wallabag/pull/1004) ([nicosomb](https://github.com/nicosomb))
+- \[RSS\] introducing query param 'limit' for max items in RSS feed [\#1003](https://github.com/wallabag/wallabag/pull/1003) ([vpmalley](https://github.com/vpmalley))
+- Miscellaneous additions [\#999](https://github.com/wallabag/wallabag/pull/999) ([moparisthebest](https://github.com/moparisthebest))
+- Update fr\_FR.utf8.po [\#986](https://github.com/wallabag/wallabag/pull/986) ([goofy-bz](https://github.com/goofy-bz))
+- don't call flattr if flattr is disabled [\#975](https://github.com/wallabag/wallabag/pull/975) ([tcitworld](https://github.com/tcitworld))
+- Make call to FTRSS silent to avoid warnings which can break import [\#974](https://github.com/wallabag/wallabag/pull/974) ([jbfavre](https://github.com/jbfavre))
+- Fix jquery installation [\#971](https://github.com/wallabag/wallabag/pull/971) ([nicosomb](https://github.com/nicosomb))
+- added reload function [\#968](https://github.com/wallabag/wallabag/pull/968) ([tcitworld](https://github.com/tcitworld))
+- implemented random button [\#964](https://github.com/wallabag/wallabag/pull/964) ([tcitworld](https://github.com/tcitworld))
+- Update wallabag\_compatibility\_test.php [\#958](https://github.com/wallabag/wallabag/pull/958) ([etiess](https://github.com/etiess))
+- remove courgette theme [\#953](https://github.com/wallabag/wallabag/pull/953) ([nicosomb](https://github.com/nicosomb))
+- Fixing icon text on unread page [\#945](https://github.com/wallabag/wallabag/pull/945) ([jsit](https://github.com/jsit))
+- Globalizing and creating two variants of Carrot.org icon [\#944](https://github.com/wallabag/wallabag/pull/944) ([jsit](https://github.com/jsit))
+- fix Flattrs [\#943](https://github.com/wallabag/wallabag/pull/943) ([tcitworld](https://github.com/tcitworld))
+- implementing carrot into wallabag [\#942](https://github.com/wallabag/wallabag/pull/942) ([tcitworld](https://github.com/tcitworld))
+- \_global-izing some more js & css [\#939](https://github.com/wallabag/wallabag/pull/939) ([jsit](https://github.com/jsit))
+- Fix for favicons in Firefox [\#938](https://github.com/wallabag/wallabag/pull/938) ([jsit](https://github.com/jsit))
+- Moving favicons to new \_global theme dir and adjusting \<link\> tags [\#937](https://github.com/wallabag/wallabag/pull/937) ([jsit](https://github.com/jsit))
+- add HTML documentation [\#923](https://github.com/wallabag/wallabag/pull/923) ([nicosomb](https://github.com/nicosomb))
+- Add message in web server log in case of authentication failure [\#690](https://github.com/wallabag/wallabag/pull/690) ([doc75](https://github.com/doc75))
+
+## [1.8.1bis](https://github.com/wallabag/wallabag/tree/1.8.1bis) (2014-11-16)
+## [1.8.1b](https://github.com/wallabag/wallabag/tree/1.8.1b) (2014-11-16)
+## [1.8.1old](https://github.com/wallabag/wallabag/tree/1.8.1old) (2014-11-16)
+**Merged pull requests:**
+
+- 1.8.1b [\#933](https://github.com/wallabag/wallabag/pull/933) ([tcitworld](https://github.com/tcitworld))
+
+## [1.8.1](https://github.com/wallabag/wallabag/tree/1.8.1) (2014-11-15)
+**Fixed bugs:**
+
+- Mobile view and popups [\#912](https://github.com/wallabag/wallabag/issues/912)
+- Installation of Wallabag with SQLite3 database fails [\#788](https://github.com/wallabag/wallabag/issues/788)
+- autoclose with baggy theme and firefox addon [\#527](https://github.com/wallabag/wallabag/issues/527)
+- Texts not translated when adding tag [\#887](https://github.com/wallabag/wallabag/issues/887)
+- epub Export does not work [\#882](https://github.com/wallabag/wallabag/issues/882)
+- In baggy : no preview text in linear visualisation [\#874](https://github.com/wallabag/wallabag/issues/874)
+- In baggy mark as read button stays gray [\#873](https://github.com/wallabag/wallabag/issues/873)
+- Fix "Mark as read" translations [\#871](https://github.com/wallabag/wallabag/issues/871)
+- CSS Bug on article list when browsing on Small size device [\#834](https://github.com/wallabag/wallabag/issues/834)
+- Search and SaveALink windows overlap [\#830](https://github.com/wallabag/wallabag/issues/830)
+- wired.com comes out totally messed up  [\#756](https://github.com/wallabag/wallabag/issues/756)
+
+**Closed issues:**
+
+- epub generation doesn't work [\#925](https://github.com/wallabag/wallabag/issues/925)
+- Export epubs via cli [\#915](https://github.com/wallabag/wallabag/issues/915)
+- English translation doesn't work when en\_US is the only locale available [\#901](https://github.com/wallabag/wallabag/issues/901)
+- UI text should be title case, and made lowercase with CSS [\#899](https://github.com/wallabag/wallabag/issues/899)
+- When starting in list mode, switching to table mode doesn't change width of entries \(Baggy theme\) [\#896](https://github.com/wallabag/wallabag/issues/896)
+- Add "by estimated reading time" sort [\#876](https://github.com/wallabag/wallabag/issues/876)
+- Not Parse site [\#866](https://github.com/wallabag/wallabag/issues/866)
+- hide database password [\#891](https://github.com/wallabag/wallabag/issues/891)
+- Re-focusing the text input for "search" [\#831](https://github.com/wallabag/wallabag/issues/831)
+- This page is not retrieved fully [\#828](https://github.com/wallabag/wallabag/issues/828)
+- Problem retrieving articles from www.wordyard.com [\#826](https://github.com/wallabag/wallabag/issues/826)
+- This page is fetched partially [\#797](https://github.com/wallabag/wallabag/issues/797)
+
+**Merged pull requests:**
+
+- 1.8.1 [\#932](https://github.com/wallabag/wallabag/pull/932) ([nicosomb](https://github.com/nicosomb))
+- Fixing URL typo on about page [\#926](https://github.com/wallabag/wallabag/pull/926) ([jsit](https://github.com/jsit))
+- Fixing menu hiding behavior when switching from mobile width to desktop width [\#922](https://github.com/wallabag/wallabag/pull/922) ([jsit](https://github.com/jsit))
+- add about page [\#921](https://github.com/wallabag/wallabag/pull/921) ([nicosomb](https://github.com/nicosomb))
+- Many small UI changes/fixes to Baggy theme and English translation files [\#920](https://github.com/wallabag/wallabag/pull/920) ([jsit](https://github.com/jsit))
+- Improving JavaScript for popup forms [\#919](https://github.com/wallabag/wallabag/pull/919) ([jsit](https://github.com/jsit))
+- Fixing opacity issue when using mobile menu \(\#912\) [\#917](https://github.com/wallabag/wallabag/pull/917) ([jsit](https://github.com/jsit))
+- Fixing regression in popup close button styling [\#913](https://github.com/wallabag/wallabag/pull/913) ([jsit](https://github.com/jsit))
+- Standardizing style and code for menu popup forms [\#911](https://github.com/wallabag/wallabag/pull/911) ([jsit](https://github.com/jsit))
+- Moving search-form style out of messages css and into style.css [\#910](https://github.com/wallabag/wallabag/pull/910) ([jsit](https://github.com/jsit))
+- Standardizing class names and styles for close buttons [\#909](https://github.com/wallabag/wallabag/pull/909) ([jsit](https://github.com/jsit))
+- Changing close message button to use &times; instead of X [\#908](https://github.com/wallabag/wallabag/pull/908) ([jsit](https://github.com/jsit))
+- Some small design tweaks to the login page: Moving 'Stay signed in'... [\#907](https://github.com/wallabag/wallabag/pull/907) ([jsit](https://github.com/jsit))
+- Uppercasing 'tags' page title [\#906](https://github.com/wallabag/wallabag/pull/906) ([jsit](https://github.com/jsit))
+- Making the close button more visually consistent on the menu popup forms [\#905](https://github.com/wallabag/wallabag/pull/905) ([jsit](https://github.com/jsit))
+- Vagrantfile [\#904](https://github.com/wallabag/wallabag/pull/904) ([nicosomb](https://github.com/nicosomb))
+- Fixing some more text case issues [\#903](https://github.com/wallabag/wallabag/pull/903) ([jsit](https://github.com/jsit))
+- Adding 'en\_US' locale \(issue \#901\) [\#902](https://github.com/wallabag/wallabag/pull/902) ([jsit](https://github.com/jsit))
+- Fixing a bunch of English translation letter casing and syntax \(issue \#899\) [\#900](https://github.com/wallabag/wallabag/pull/900) ([jsit](https://github.com/jsit))
+- Fixing issue \#874, displaying preview text when in list mode [\#898](https://github.com/wallabag/wallabag/pull/898) ([jsit](https://github.com/jsit))
+- Fixing display mode switching in Baggy theme \(issue \#896\) [\#897](https://github.com/wallabag/wallabag/pull/897) ([jsit](https://github.com/jsit))
+- Fix \#891: change type for password field in installation [\#894](https://github.com/wallabag/wallabag/pull/894) ([nicosomb](https://github.com/nicosomb))
+- fix \#882 [\#883](https://github.com/wallabag/wallabag/pull/883) ([tcitworld](https://github.com/tcitworld))
+- update zeit.de.txt for removal of inline ads [\#879](https://github.com/wallabag/wallabag/pull/879) ([Marmo](https://github.com/Marmo))
+- fix \#873 [\#878](https://github.com/wallabag/wallabag/pull/878) ([tcitworld](https://github.com/tcitworld))
+- fix z-index-menu mobile view bug \#834 [\#867](https://github.com/wallabag/wallabag/pull/867) ([tcitworld](https://github.com/tcitworld))
+- update heise.de.txt [\#865](https://github.com/wallabag/wallabag/pull/865) ([Marmo](https://github.com/Marmo))
+- Fix\#871 [\#889](https://github.com/wallabag/wallabag/pull/889) ([tcitworld](https://github.com/tcitworld))
+- updated site\_config [\#888](https://github.com/wallabag/wallabag/pull/888) ([nicosomb](https://github.com/nicosomb))
+- fix for \#830 [\#868](https://github.com/wallabag/wallabag/pull/868) ([tcitworld](https://github.com/tcitworld))
+- Add support for custom http port [\#848](https://github.com/wallabag/wallabag/pull/848) ([11mariom](https://github.com/11mariom))
+- Convert the MySQL charset to utf8mb4 to support the full range of unicode [\#843](https://github.com/wallabag/wallabag/pull/843) ([rros](https://github.com/rros))
+
+## [1.8.0](https://github.com/wallabag/wallabag/tree/1.8.0) (2014-10-10)
+**Fixed bugs:**
+
+- Download pictures doesn't work [\#822](https://github.com/wallabag/wallabag/issues/822)
+- \[EPUB\] Images not included when cached on the server. [\#804](https://github.com/wallabag/wallabag/issues/804)
+- The link to check the server compatibility is broken [\#858](https://github.com/wallabag/wallabag/issues/858)
+- Trouble installing with Postgres as DB [\#844](https://github.com/wallabag/wallabag/issues/844)
+- \[dev branch\] Installation doesn't work [\#813](https://github.com/wallabag/wallabag/issues/813)
+- Import empty file [\#776](https://github.com/wallabag/wallabag/issues/776)
+- Add check php5-gd to wallabag: Compatibility Test [\#766](https://github.com/wallabag/wallabag/issues/766)
+- « welcome to your wallabag » is not translated [\#763](https://github.com/wallabag/wallabag/issues/763)
+- Add support for multipage articles [\#750](https://github.com/wallabag/wallabag/issues/750)
+- Ereader complains about DRM with epubs [\#748](https://github.com/wallabag/wallabag/issues/748)
+- Arrays not being displayed the same depending on theme \(previously was : new site\_config file\) [\#740](https://github.com/wallabag/wallabag/issues/740)
+- Check file permissions at install [\#584](https://github.com/wallabag/wallabag/issues/584)
+- Data is not retrieved properly [\#561](https://github.com/wallabag/wallabag/issues/561)
+- Fix the PostgreSQL install errors [\#845](https://github.com/wallabag/wallabag/pull/845) ([rros](https://github.com/rros))
+- fix display of 'Done' message when we add a link from 'save a link' item [\#784](https://github.com/wallabag/wallabag/pull/784) ([nicosomb](https://github.com/nicosomb))
+- \#763 fix to display the login successful message with the translation [\#783](https://github.com/wallabag/wallabag/pull/783) ([nicosomb](https://github.com/nicosomb))
+- Fix \#776 [\#782](https://github.com/wallabag/wallabag/pull/782) ([nicosomb](https://github.com/nicosomb))
+- fixed bug for epub export \#755 ; also better metadata title [\#771](https://github.com/wallabag/wallabag/pull/771) ([tcitworld](https://github.com/tcitworld))
+
+**Closed issues:**
+
+- Adding Articles via URL [\#862](https://github.com/wallabag/wallabag/issues/862)
+- Not syncing anything [\#817](https://github.com/wallabag/wallabag/issues/817)
+- This page does not work [\#810](https://github.com/wallabag/wallabag/issues/810)
+- Post pop-up too small [\#798](https://github.com/wallabag/wallabag/issues/798)
+- Easy setup for Apps [\#538](https://github.com/wallabag/wallabag/issues/538)
+- Baggy theme: Show 12 articles per page to save space [\#760](https://github.com/wallabag/wallabag/issues/760)
+- Problem sending pages to wallabag [\#758](https://github.com/wallabag/wallabag/issues/758)
+- Big refactoring [\#755](https://github.com/wallabag/wallabag/issues/755)
+- Remove useless code [\#753](https://github.com/wallabag/wallabag/issues/753)
+- retour a la page [\#734](https://github.com/wallabag/wallabag/issues/734)
+- Stay in Archive after deleting an article in the archive [\#704](https://github.com/wallabag/wallabag/issues/704)
+- Rename « home »  into « unread » [\#683](https://github.com/wallabag/wallabag/issues/683)
+- Solarized dark theme is monochrome [\#645](https://github.com/wallabag/wallabag/issues/645)
+- Tags tab empty on new install, explanation would be helpful [\#624](https://github.com/wallabag/wallabag/issues/624)
+
+**Merged pull requests:**
+
+- 1.8.0 [\#863](https://github.com/wallabag/wallabag/pull/863) ([nicosomb](https://github.com/nicosomb))
+- Fix \#826 [\#856](https://github.com/wallabag/wallabag/pull/856) ([tcitworld](https://github.com/tcitworld))
+- Fix \#828 [\#855](https://github.com/wallabag/wallabag/pull/855) ([tcitworld](https://github.com/tcitworld))
+- Saveclick2search \(fix for \#831\) [\#854](https://github.com/wallabag/wallabag/pull/854) ([tcitworld](https://github.com/tcitworld))
+- Fix for \#797 [\#853](https://github.com/wallabag/wallabag/pull/853) ([tcitworld](https://github.com/tcitworld))
+- Refactor [\#851](https://github.com/wallabag/wallabag/pull/851) ([tcitworld](https://github.com/tcitworld))
+- Fix \#766 - GD detection [\#841](https://github.com/wallabag/wallabag/pull/841) ([tcitworld](https://github.com/tcitworld))
+- fix pictures display when DOWNLOAD\_PICTURES is enabled [\#839](https://github.com/wallabag/wallabag/pull/839) ([tcitworld](https://github.com/tcitworld))
+- Implemented additional check for using the 'X-Forwarded-Port' header. [\#836](https://github.com/wallabag/wallabag/pull/836) ([akoenig](https://github.com/akoenig))
+- Complete rework of faz.net-template  [\#816](https://github.com/wallabag/wallabag/pull/816) ([zinnober](https://github.com/zinnober))
+- vendor dir is not accessible before install, sqlite db dir write check moved into db class [\#814](https://github.com/wallabag/wallabag/pull/814) ([mariroz](https://github.com/mariroz))
+- Adduseremail [\#808](https://github.com/wallabag/wallabag/pull/808) ([tcitworld](https://github.com/tcitworld))
+- Ebook [\#801](https://github.com/wallabag/wallabag/pull/801) ([tcitworld](https://github.com/tcitworld))
+- query for populate mysql/postgres was called when we choosed sqlite [\#861](https://github.com/wallabag/wallabag/pull/861) ([nicosomb](https://github.com/nicosomb))
+- Move compatibility file \(fixes \#858\) [\#860](https://github.com/wallabag/wallabag/pull/860) ([nicosomb](https://github.com/nicosomb))
+- Fix downloading SQLite database from all users [\#819](https://github.com/wallabag/wallabag/pull/819) ([tcitworld](https://github.com/tcitworld))
+- Traductionfix [\#802](https://github.com/wallabag/wallabag/pull/802) ([tcitworld](https://github.com/tcitworld))
+- Add data for mysql installation, see \#624 [\#787](https://github.com/wallabag/wallabag/pull/787) ([nicosomb](https://github.com/nicosomb))
+- change default pagination, set it to 12, to have a nice baggy display [\#785](https://github.com/wallabag/wallabag/pull/785) ([nicosomb](https://github.com/nicosomb))
+
+## [1.7.2](https://github.com/wallabag/wallabag/tree/1.7.2) (2014-07-24)
+**Closed issues:**
+
+- Upgrade to 1.7.1 failed [\#774](https://github.com/wallabag/wallabag/issues/774)
+- Permissions on "db" should not be checked if SQLite isn't used [\#773](https://github.com/wallabag/wallabag/issues/773)
+- \[Android\] Pas d'accès aux Settings sur Galaxy Tab Pro [\#746](https://github.com/wallabag/wallabag/issues/746)
+
+**Merged pull requests:**
+
+- security fix [\#791](https://github.com/wallabag/wallabag/pull/791) ([mariroz](https://github.com/mariroz))
+- security issue [\#790](https://github.com/wallabag/wallabag/pull/790) ([mariroz](https://github.com/mariroz))
+- config for habrahabr.ru to grab articles with comments [\#789](https://github.com/wallabag/wallabag/pull/789) ([mariroz](https://github.com/mariroz))
+- highlight.js library added to highlight programming code examples in article view [\#786](https://github.com/wallabag/wallabag/pull/786) ([mariroz](https://github.com/mariroz))
+- Proposed fix for \#773 [\#780](https://github.com/wallabag/wallabag/pull/780) ([anno1337](https://github.com/anno1337))
+- Updated polish translation [\#777](https://github.com/wallabag/wallabag/pull/777) ([skibbipl](https://github.com/skibbipl))
+- issue \#750 - config for dn.pt site added [\#775](https://github.com/wallabag/wallabag/pull/775) ([mariroz](https://github.com/mariroz))
+- Refactor [\#768](https://github.com/wallabag/wallabag/pull/768) ([nicosomb](https://github.com/nicosomb))
+- Refactor [\#764](https://github.com/wallabag/wallabag/pull/764) ([tcitworld](https://github.com/tcitworld))
+
+## [1.7.1](https://github.com/wallabag/wallabag/tree/1.7.1) (2014-07-15)
+**Fixed bugs:**
+
+- Warning: putenv\(\) \[function.putenv\]: Safe Mode warning [\#646](https://github.com/wallabag/wallabag/issues/646)
+- Soucis traduction bouton envoyer [\#743](https://github.com/wallabag/wallabag/issues/743)
+- Sort RSS Tag Feed [\#738](https://github.com/wallabag/wallabag/issues/738)
+- Error parsing file imported from Pocket [\#718](https://github.com/wallabag/wallabag/issues/718)
+- EPUB-Download for more than one article create a corrupt file [\#717](https://github.com/wallabag/wallabag/issues/717)
+- When downloading images, wallabag doesnt respect html "base" tag [\#677](https://github.com/wallabag/wallabag/issues/677)
+- page not saved [\#675](https://github.com/wallabag/wallabag/issues/675)
+- Errors importing from Pocket [\#650](https://github.com/wallabag/wallabag/issues/650)
+- Multi-User problem [\#630](https://github.com/wallabag/wallabag/issues/630)
+- \[Windows\] Many problems with WAMP [\#579](https://github.com/wallabag/wallabag/issues/579)
+- missing rss.png files [\#568](https://github.com/wallabag/wallabag/issues/568)
+- Cron.php deadlocks import process on many "Untitled" elements [\#565](https://github.com/wallabag/wallabag/issues/565)
+- Parser Fail: Text overwrites other text and images [\#537](https://github.com/wallabag/wallabag/issues/537)
+- Instapaper Import Failed [\#536](https://github.com/wallabag/wallabag/issues/536)
+- Wallabag this link doesn't work [\#440](https://github.com/wallabag/wallabag/issues/440)
+
+**Closed issues:**
+
+- Caching images? [\#757](https://github.com/wallabag/wallabag/issues/757)
+- FR: Editing Titles [\#747](https://github.com/wallabag/wallabag/issues/747)
+- Rules for automatic tagging [\#745](https://github.com/wallabag/wallabag/issues/745)
+- wallabag breaks raw text formatting [\#744](https://github.com/wallabag/wallabag/issues/744)
+- Send article to wallabag via email [\#735](https://github.com/wallabag/wallabag/issues/735)
+- Chrome extension link is broken [\#732](https://github.com/wallabag/wallabag/issues/732)
+- RSS feed XML error [\#731](https://github.com/wallabag/wallabag/issues/731)
+- Wallabag silently fails on pocket import [\#723](https://github.com/wallabag/wallabag/issues/723)
+- Problems with feeds [\#721](https://github.com/wallabag/wallabag/issues/721)
+- Save a link fails - Untitled [\#714](https://github.com/wallabag/wallabag/issues/714)
+- Support TED videos [\#676](https://github.com/wallabag/wallabag/issues/676)
+- \[ideas\] how to submit a bug [\#662](https://github.com/wallabag/wallabag/issues/662)
+- JavaScript login solution for wallabag v1 [\#656](https://github.com/wallabag/wallabag/issues/656)
+- Use new branches [\#514](https://github.com/wallabag/wallabag/issues/514)
+- change poche folder into wallabag folder [\#449](https://github.com/wallabag/wallabag/issues/449)
+- Help for plugin [\#378](https://github.com/wallabag/wallabag/issues/378)
+- Make a Docker image for easy install  [\#220](https://github.com/wallabag/wallabag/issues/220)
+- about license [\#179](https://github.com/wallabag/wallabag/issues/179)
+- wallabag uses an old version of TLS [\#702](https://github.com/wallabag/wallabag/issues/702)
+- Please add a way to disable google fonts [\#674](https://github.com/wallabag/wallabag/issues/674)
+- "Stay signed in" doesn't work [\#654](https://github.com/wallabag/wallabag/issues/654)
+- \[Suggestion\] On main page, choose X articles / page [\#573](https://github.com/wallabag/wallabag/issues/573)
+
+**Merged pull requests:**
+
+- 1.7.1 [\#761](https://github.com/wallabag/wallabag/pull/761) ([nicosomb](https://github.com/nicosomb))
+- Add support for \*.about.com [\#754](https://github.com/wallabag/wallabag/pull/754) ([sinisterstuf](https://github.com/sinisterstuf))
+- fix of issue \#650, \#619 and other similar, error in JSLikeHTMLElement: node no longer exists. [\#752](https://github.com/wallabag/wallabag/pull/752) ([mariroz](https://github.com/mariroz))
+- quick fix of issue \#750: mulipage content for politico.com/magazine articles [\#751](https://github.com/wallabag/wallabag/pull/751) ([mariroz](https://github.com/mariroz))
+- fix of issue \#677: When downloading images, wallabag doesnt respect html "base" tag, tnx to @fivefilters [\#737](https://github.com/wallabag/wallabag/pull/737) ([mariroz](https://github.com/mariroz))
+- fix of issue \#718: Error parsing file imported from Pocket \#718 [\#736](https://github.com/wallabag/wallabag/pull/736) ([mariroz](https://github.com/mariroz))
+- typo FR après vérif. [\#728](https://github.com/wallabag/wallabag/pull/728) ([Draky50110](https://github.com/Draky50110))
+- typo FR [\#724](https://github.com/wallabag/wallabag/pull/724) ([Draky50110](https://github.com/Draky50110))
+- do not output debug while generating epub [\#722](https://github.com/wallabag/wallabag/pull/722) ([tcitworld](https://github.com/tcitworld))
+- error reporting level set in E\_ALL & ~E\_NOTICE by default, can be overriden in config [\#716](https://github.com/wallabag/wallabag/pull/716) ([mariroz](https://github.com/mariroz))
+- fix of undefined ATOM constant warning in full-text-rss, will fix ios-app issue \#14 [\#715](https://github.com/wallabag/wallabag/pull/715) ([mariroz](https://github.com/mariroz))
+- small xss vulnerability and translation ability fix [\#713](https://github.com/wallabag/wallabag/pull/713) ([mariroz](https://github.com/mariroz))
+- \[V2\] changed everything from Poche to Wallabag [\#705](https://github.com/wallabag/wallabag/pull/705) ([tcitworld](https://github.com/tcitworld))
+
+## [1.7.0](https://github.com/wallabag/wallabag/tree/1.7.0) (2014-05-29)
+**Fixed bugs:**
+
+- Can't save new article [\#710](https://github.com/wallabag/wallabag/issues/710)
+- Dailymotion support [\#708](https://github.com/wallabag/wallabag/issues/708)
+- Deleting install dir isn't automatic in dev branch [\#700](https://github.com/wallabag/wallabag/issues/700)
+- Installation fails with "parse\_ini\_file" disabled [\#678](https://github.com/wallabag/wallabag/issues/678)
+- RSS Problems [\#664](https://github.com/wallabag/wallabag/issues/664)
+- 1.6.1 storage name mismatch for postgres in installer [\#657](https://github.com/wallabag/wallabag/issues/657)
+- Error 500 - PHP fatal error [\#647](https://github.com/wallabag/wallabag/issues/647)
+- rss feed content type [\#636](https://github.com/wallabag/wallabag/issues/636)
+- Import doesn't finish [\#619](https://github.com/wallabag/wallabag/issues/619)
+- Walla bag fails to grab pages from tutplus.com [\#615](https://github.com/wallabag/wallabag/issues/615)
+- display problem with smartphone and Baggy [\#610](https://github.com/wallabag/wallabag/issues/610)
+- Embed videos in an iframe don't show [\#590](https://github.com/wallabag/wallabag/issues/590)
+- \[Bug ?\] Export wallabag data : not saving but opening in browser [\#570](https://github.com/wallabag/wallabag/issues/570)
+- In RSS feed, the link leads to my wallabag page [\#556](https://github.com/wallabag/wallabag/issues/556)
+- youtube videos are not saved [\#508](https://github.com/wallabag/wallabag/issues/508)
+- Import from Pocket not working in 1.5.2 [\#486](https://github.com/wallabag/wallabag/issues/486)
+
+**Closed issues:**
+
+- Show number of articles in categories, and on tag pages [\#684](https://github.com/wallabag/wallabag/issues/684)
+- Feature request : Editing article titles [\#672](https://github.com/wallabag/wallabag/issues/672)
+- Add URL from e-mail - Feature Request [\#669](https://github.com/wallabag/wallabag/issues/669)
+- PHP - Warning - 3rdparty HTMLpurifier [\#666](https://github.com/wallabag/wallabag/issues/666)
+- Create a new user [\#649](https://github.com/wallabag/wallabag/issues/649)
+- Improve error management [\#644](https://github.com/wallabag/wallabag/issues/644)
+- Paypal? [\#616](https://github.com/wallabag/wallabag/issues/616)
+- Wallabag on postgresql fails silently [\#651](https://github.com/wallabag/wallabag/issues/651)
+- Save search as new tag [\#638](https://github.com/wallabag/wallabag/issues/638)
+- Print friendly formatting? [\#617](https://github.com/wallabag/wallabag/issues/617)
+- Update links to 3rd party applications on courgette theme [\#600](https://github.com/wallabag/wallabag/issues/600)
+- FeedWriter.php & ATOM [\#550](https://github.com/wallabag/wallabag/issues/550)
+- Search engine [\#520](https://github.com/wallabag/wallabag/issues/520)
+- wallabag a link in wallabag [\#505](https://github.com/wallabag/wallabag/issues/505)
+- FQDN with non-standard ports broken \(testet with PHP's built-in web server\) [\#344](https://github.com/wallabag/wallabag/issues/344)
+
+**Merged pull requests:**
+
+- 1.7, call me "Premium version" [\#712](https://github.com/wallabag/wallabag/pull/712) ([nicosomb](https://github.com/nicosomb))
+- fix of uninitialized object warning, issue \#710 [\#711](https://github.com/wallabag/wallabag/pull/711) ([mariroz](https://github.com/mariroz))
+- update to 3.2 version of full-text-rss, issue \#694 [\#707](https://github.com/wallabag/wallabag/pull/707) ([mariroz](https://github.com/mariroz))
+- Fixed Baggy theme CSS for Chrome Extension \(and \< 500px width layout\) [\#706](https://github.com/wallabag/wallabag/pull/706) ([gboudreau](https://github.com/gboudreau))
+- Security fixes for downloaded images \(thanks @leblanc-simon\) [\#703](https://github.com/wallabag/wallabag/pull/703) ([tcitworld](https://github.com/tcitworld))
+- Up-to-date with me [\#697](https://github.com/wallabag/wallabag/pull/697) ([tcitworld](https://github.com/tcitworld))
+- better wallabag in wallabag button \(see \#685\) [\#693](https://github.com/wallabag/wallabag/pull/693) ([tcitworld](https://github.com/tcitworld))
+- Epub is here ! [\#691](https://github.com/wallabag/wallabag/pull/691) ([tcitworld](https://github.com/tcitworld))
+- Tag-related features [\#689](https://github.com/wallabag/wallabag/pull/689) ([tcitworld](https://github.com/tcitworld))
+- French translation update [\#680](https://github.com/wallabag/wallabag/pull/680) ([m-r-r](https://github.com/m-r-r))
+- fix of putenv warning under safe mode, issue \#646 [\#667](https://github.com/wallabag/wallabag/pull/667) ([mariroz](https://github.com/mariroz))
+- fix of rss headers problem [\#665](https://github.com/wallabag/wallabag/pull/665) ([mariroz](https://github.com/mariroz))
+- Multi-user system \(end\) [\#663](https://github.com/wallabag/wallabag/pull/663) ([tcitworld](https://github.com/tcitworld))
+- last error: config.inc.default.php missed [\#659](https://github.com/wallabag/wallabag/pull/659) ([mariroz](https://github.com/mariroz))
+- inc/poche/config.inc.php.new removed [\#658](https://github.com/wallabag/wallabag/pull/658) ([mariroz](https://github.com/mariroz))
+- parse mobile.lemondeinformatique.fr [\#655](https://github.com/wallabag/wallabag/pull/655) ([ghost](https://github.com/ghost))
+- print view fixed in baggy; print link added; read percent added in default theme; archive and favorite re-factored to be ajax action in article view [\#653](https://github.com/wallabag/wallabag/pull/653) ([mariroz](https://github.com/mariroz))
+- \[fix\] rss feed content type set to text/xml \#636 [\#643](https://github.com/wallabag/wallabag/pull/643) ([nicosomb](https://github.com/nicosomb))
+- Added IF NOT EXISTS [\#642](https://github.com/wallabag/wallabag/pull/642) ([jplock](https://github.com/jplock))
+- Improvements on french translation [\#637](https://github.com/wallabag/wallabag/pull/637) ([AmauryCarrade](https://github.com/AmauryCarrade))
+- added missing image to dmagenta theme [\#635](https://github.com/wallabag/wallabag/pull/635) ([DmitrySandalov](https://github.com/DmitrySandalov))
+
+## [1.6.1b](https://github.com/wallabag/wallabag/tree/1.6.1b) (2014-04-11)
+**Fixed bugs:**
+
+- PosgreSQL error on sequence users\_id\_seq with version 1.6 [\#628](https://github.com/wallabag/wallabag/issues/628)
+
+**Closed issues:**
+
+- RSS feeds don't work [\#631](https://github.com/wallabag/wallabag/issues/631)
+- Can't sync articles with the android app [\#608](https://github.com/wallabag/wallabag/issues/608)
+- \[Feature Request\] Mobile offline sync support [\#607](https://github.com/wallabag/wallabag/issues/607)
+- The rss feed isn't working on version 1.6.0 [\#604](https://github.com/wallabag/wallabag/issues/604)
+- Link to the "Update"-documentation in annocements [\#597](https://github.com/wallabag/wallabag/issues/597)
+- Export / Import : suggestions & problems [\#571](https://github.com/wallabag/wallabag/issues/571)
+
+**Merged pull requests:**
+
+- 1.6.1 [\#634](https://github.com/wallabag/wallabag/pull/634) ([nicosomb](https://github.com/nicosomb))
+- error with empty content by import fixed. Also youtube and vimeo videos are allowd in content now. [\#633](https://github.com/wallabag/wallabag/pull/633) ([mariroz](https://github.com/mariroz))
+- logging by import added; error by creation table if exists in postgresql... [\#632](https://github.com/wallabag/wallabag/pull/632) ([mariroz](https://github.com/mariroz))
+- Fix display problem with smartphone and Baggy \#610 [\#623](https://github.com/wallabag/wallabag/pull/623) ([nicosomb](https://github.com/nicosomb))
+- \[fix\] Escap key displays save a link form \#612 [\#622](https://github.com/wallabag/wallabag/pull/622) ([nicosomb](https://github.com/nicosomb))
+- can't close search popup with the cross picture \#613 [\#621](https://github.com/wallabag/wallabag/pull/621) ([nicosomb](https://github.com/nicosomb))
+- remove duplicates by import; code formatting changes: tabs replaced with spaces [\#618](https://github.com/wallabag/wallabag/pull/618) ([mariroz](https://github.com/mariroz))
+- \[fix\] with some config, http host is different [\#614](https://github.com/wallabag/wallabag/pull/614) ([nicosomb](https://github.com/nicosomb))
+- update french locale, thx to @goofy-bz and @Draky50110 \#596 [\#611](https://github.com/wallabag/wallabag/pull/611) ([nicosomb](https://github.com/nicosomb))
+- remove unnecessary variable declaration [\#609](https://github.com/wallabag/wallabag/pull/609) ([nicosomb](https://github.com/nicosomb))
+- in RSS feed, add link to wallabag URL \#556 [\#606](https://github.com/wallabag/wallabag/pull/606) ([nicosomb](https://github.com/nicosomb))
+- \[fix\] Use of undefined constant ATOM \#604 [\#605](https://github.com/wallabag/wallabag/pull/605) ([nicosomb](https://github.com/nicosomb))
+- postgres sequence error fix, issue \#602 [\#603](https://github.com/wallabag/wallabag/pull/603) ([mariroz](https://github.com/mariroz))
+
+## [1.6.1](https://github.com/wallabag/wallabag/tree/1.6.1) (2014-04-03)
+**Fixed bugs:**
+
+- I can't close "search" popup with the cross picture [\#613](https://github.com/wallabag/wallabag/issues/613)
+- Escap key displays "save a link" form [\#612](https://github.com/wallabag/wallabag/issues/612)
+- Post 1.6 upgrade - bagging anything lead to PDOException [\#602](https://github.com/wallabag/wallabag/issues/602)
+- Fail to sync articles with poche app. [\#593](https://github.com/wallabag/wallabag/issues/593)
+- Import fail from Poche [\#530](https://github.com/wallabag/wallabag/issues/530)
+- Can't import from Pocket [\#294](https://github.com/wallabag/wallabag/issues/294)
+
+**Closed issues:**
+
+- Migration from third services - Framabag [\#426](https://github.com/wallabag/wallabag/issues/426)
+
+## [1.6.0](https://github.com/wallabag/wallabag/tree/1.6.0) (2014-04-03)
+**Fixed bugs:**
+
+- The RSS Feed doesn't seem valid [\#583](https://github.com/wallabag/wallabag/issues/583)
+- on Framabag re-login needed after "bag it!" [\#509](https://github.com/wallabag/wallabag/issues/509)
+- Bug: makefulltextfeed.php crashing on article [\#494](https://github.com/wallabag/wallabag/issues/494)
+- This page contains a script from unauthenticated sources [\#482](https://github.com/wallabag/wallabag/issues/482)
+- Running Wallabag on Windows Host [\#580](https://github.com/wallabag/wallabag/issues/580)
+- Invalid url message for this page [\#578](https://github.com/wallabag/wallabag/issues/578)
+- baggy theme - "powered by" overlapps pagination  [\#577](https://github.com/wallabag/wallabag/issues/577)
+- Failing to add a link [\#555](https://github.com/wallabag/wallabag/issues/555)
+- CTRL S open "save this page" in firefox [\#552](https://github.com/wallabag/wallabag/issues/552)
+- deactivate keyboard shortcuts when entering tags [\#546](https://github.com/wallabag/wallabag/issues/546)
+- Failure in makefulltextfeed.php [\#529](https://github.com/wallabag/wallabag/issues/529)
+- Firefox: download the extension - Link Broken [\#528](https://github.com/wallabag/wallabag/issues/528)
+- minor glitch in baggy theme [\#526](https://github.com/wallabag/wallabag/issues/526)
+- baggy theme removed "remember scroll position" feature [\#519](https://github.com/wallabag/wallabag/issues/519)
+- Heise article crashes online demo  [\#498](https://github.com/wallabag/wallabag/issues/498)
+- Erreur PHP Fatal error: Call to undefined method [\#493](https://github.com/wallabag/wallabag/issues/493)
+- Impossible de changer de langue [\#492](https://github.com/wallabag/wallabag/issues/492)
+- \[Baggy\] Prob. "hover" sur lien de déco [\#489](https://github.com/wallabag/wallabag/issues/489)
+- Config en FR mais langue EN affichée ? [\#488](https://github.com/wallabag/wallabag/issues/488)
+- Update to 1.5.2 : PHP extension required: pdo\_sqlite [\#483](https://github.com/wallabag/wallabag/issues/483)
+- pages are not imported [\#463](https://github.com/wallabag/wallabag/issues/463)
+- Permission error if no cache dir exist [\#451](https://github.com/wallabag/wallabag/issues/451)
+- wallabag a tumblr will only save the first post [\#441](https://github.com/wallabag/wallabag/issues/441)
+- RSS Feeds don't validate / W3C [\#384](https://github.com/wallabag/wallabag/issues/384)
+- No content after fresh install \(v1.3.0\) [\#366](https://github.com/wallabag/wallabag/issues/366)
+- Local import does not work [\#332](https://github.com/wallabag/wallabag/issues/332)
+- stay connected checkbox - Add cookie [\#115](https://github.com/wallabag/wallabag/issues/115)
+- image non récupérée [\#52](https://github.com/wallabag/wallabag/issues/52)
+- bagit link + overlay save link + listmode [\#540](https://github.com/wallabag/wallabag/pull/540) ([courgette](https://github.com/courgette))
+- fix of global $http visibility, issues \#493, \#494 [\#495](https://github.com/wallabag/wallabag/pull/495) ([mariroz](https://github.com/mariroz))
+
+**Closed issues:**
+
+- "Cannot redeclare autoload\(\)" error when importing from Readability [\#575](https://github.com/wallabag/wallabag/issues/575)
+- Link to F-Droidpoints to old app [\#574](https://github.com/wallabag/wallabag/issues/574)
+- \[Bug\] MySQL tables have NO prefix ! [\#569](https://github.com/wallabag/wallabag/issues/569)
+- \[Bug\] Only Baggy theme have cron import instructions [\#559](https://github.com/wallabag/wallabag/issues/559)
+- When tagging, recommend already used tags [\#542](https://github.com/wallabag/wallabag/issues/542)
+- \[Suggestion\] bookmarklet : retour à la page d'origine [\#539](https://github.com/wallabag/wallabag/issues/539)
+- \[Bug\] Saving link menu item : javascript problem [\#516](https://github.com/wallabag/wallabag/issues/516)
+- Pagination sur le theme baggy [\#507](https://github.com/wallabag/wallabag/issues/507)
+- Update Firefox extension [\#506](https://github.com/wallabag/wallabag/issues/506)
+- \[Feature request\] Use QR codes to set the mobile applications up [\#432](https://github.com/wallabag/wallabag/issues/432)
+- \[Cron ?\] Import [\#545](https://github.com/wallabag/wallabag/issues/545)
+- Close "save a link" popup without using "esc" key [\#541](https://github.com/wallabag/wallabag/issues/541)
+- Hide content in list view \(with baggy theme\) [\#525](https://github.com/wallabag/wallabag/issues/525)
+- Empty cache after changing theme [\#503](https://github.com/wallabag/wallabag/issues/503)
+- After token generation, don't redirect to home screen [\#491](https://github.com/wallabag/wallabag/issues/491)
+- \[theme\] \[baggy\] Get an actual flattr icon [\#490](https://github.com/wallabag/wallabag/issues/490)
+- \[Trad/Transl\] FR [\#487](https://github.com/wallabag/wallabag/issues/487)
+- Baggy theme navigation bug [\#485](https://github.com/wallabag/wallabag/issues/485)
+- Update logo [\#484](https://github.com/wallabag/wallabag/issues/484)
+- \[Feature\] View as list [\#479](https://github.com/wallabag/wallabag/issues/479)
+- List of existing Tags [\#477](https://github.com/wallabag/wallabag/issues/477)
+- Pocket import does not support tag ? [\#457](https://github.com/wallabag/wallabag/issues/457)
+- \[Suggestion\] Forcer la vérif. de version [\#455](https://github.com/wallabag/wallabag/issues/455)
+- \[Suggestion\] Bouton pour vider le cache [\#454](https://github.com/wallabag/wallabag/issues/454)
+- \[v1\] improve import system [\#365](https://github.com/wallabag/wallabag/issues/365)
+
+**Merged pull requests:**
+
+- wallabag 1.6.0 [\#595](https://github.com/wallabag/wallabag/pull/595) ([nicosomb](https://github.com/nicosomb))
+- import into wallabag without cron and file type [\#594](https://github.com/wallabag/wallabag/pull/594) ([mariroz](https://github.com/mariroz))
+- fix of bug with default theme constant [\#588](https://github.com/wallabag/wallabag/pull/588) ([mariroz](https://github.com/mariroz))
+- problem with resources and localhost url fix [\#587](https://github.com/wallabag/wallabag/pull/587) ([mariroz](https://github.com/mariroz))
+- wallabag a link in wallabag now in default theme, issue \#505 [\#586](https://github.com/wallabag/wallabag/pull/586) ([mariroz](https://github.com/mariroz))
+- updated german localisation [\#585](https://github.com/wallabag/wallabag/pull/585) ([kevmeyer](https://github.com/kevmeyer))
+- fix of localhost cookie related to nginx binding to 0.0.0.0 [\#582](https://github.com/wallabag/wallabag/pull/582) ([mariroz](https://github.com/mariroz))
+- fix of issue under nginx and php-fpm [\#581](https://github.com/wallabag/wallabag/pull/581) ([mariroz](https://github.com/mariroz))
+- fix of  \_SESSION - indefined variable [\#576](https://github.com/wallabag/wallabag/pull/576) ([mariroz](https://github.com/mariroz))
+- fix of \#115, server relater config value added [\#572](https://github.com/wallabag/wallabag/pull/572) ([mariroz](https://github.com/mariroz))
+- fix of \#115 - stay connected and session livetime [\#567](https://github.com/wallabag/wallabag/pull/567) ([mariroz](https://github.com/mariroz))
+- Update brazilian traslation title to "Português \(Brasil\)" [\#566](https://github.com/wallabag/wallabag/pull/566) ([brunelli](https://github.com/brunelli))
+- Update brazilian translation [\#563](https://github.com/wallabag/wallabag/pull/563) ([brunelli](https://github.com/brunelli))
+- saving link form now sends ajax request, article view is now justified \(issue \#554\) [\#557](https://github.com/wallabag/wallabag/pull/557) ([mariroz](https://github.com/mariroz))
+- feature \#505 - it is now possible to add link from bagged article \(TODO: redev it to ajax action\). Some enhancements to "save a link" popup div [\#551](https://github.com/wallabag/wallabag/pull/551) ([mariroz](https://github.com/mariroz))
+- fix of conflict of s shortcat and entering s in input fields [\#549](https://github.com/wallabag/wallabag/pull/549) ([mariroz](https://github.com/mariroz))
+- a lot of enhancements related to tags: tags list is now sorted, shows number of articles, autocomplete added according to \#477, \#542 [\#544](https://github.com/wallabag/wallabag/pull/544) ([mariroz](https://github.com/mariroz))
+- Changed config section to clarify import process. [\#535](https://github.com/wallabag/wallabag/pull/535) ([bobmaerten](https://github.com/bobmaerten))
+- fix of \#530 - import fail from Poche [\#533](https://github.com/wallabag/wallabag/pull/533) ([mariroz](https://github.com/mariroz))
+- New import system [\#532](https://github.com/wallabag/wallabag/pull/532) ([nicosomb](https://github.com/nicosomb))
+- getPageContent moved to Tools, fix of \#426 [\#531](https://github.com/wallabag/wallabag/pull/531) ([mariroz](https://github.com/mariroz))
+- updated german localization [\#524](https://github.com/wallabag/wallabag/pull/524) ([kevmeyer](https://github.com/kevmeyer))
+- effect of block rebuilding on next page removed, issue \#479 [\#517](https://github.com/wallabag/wallabag/pull/517) ([mariroz](https://github.com/mariroz))
+- fix of \#509, related to php 5.3 [\#515](https://github.com/wallabag/wallabag/pull/515) ([mariroz](https://github.com/mariroz))
+- Brazilian portuguese translation [\#513](https://github.com/wallabag/wallabag/pull/513) ([brunelli](https://github.com/brunelli))
+- some baggy theme fixes and enhancement: issue \#479 [\#510](https://github.com/wallabag/wallabag/pull/510) ([mariroz](https://github.com/mariroz))
+- translation related: how-to md file added, script to generate php from all twig templates, polish mo file compiled [\#504](https://github.com/wallabag/wallabag/pull/504) ([mariroz](https://github.com/mariroz))
+- Update pl\_PL.utf8.po [\#502](https://github.com/wallabag/wallabag/pull/502) ([skibbipl](https://github.com/skibbipl))
+- fix of \#498, \#493, \#494 - because disappeared in last commit [\#501](https://github.com/wallabag/wallabag/pull/501) ([mariroz](https://github.com/mariroz))
+- French translation added by @Draky50110, issue \#488 [\#499](https://github.com/wallabag/wallabag/pull/499) ([mariroz](https://github.com/mariroz))
+
+## [1.5.2](https://github.com/wallabag/wallabag/tree/1.5.2) (2014-02-21)
+**Fixed bugs:**
+
+- \[Bug\] Liste des thèmes par ordre alpha ? [\#470](https://github.com/wallabag/wallabag/issues/470)
+- \[Bug\] Label du bouton sur l'écran d'identification [\#456](https://github.com/wallabag/wallabag/issues/456)
+- \[Bug\] Thème Baggy : le lien vers Wallabag en footer ne marche pas [\#453](https://github.com/wallabag/wallabag/issues/453)
+
+**Closed issues:**
+
+- One tag displayed multiple times on tags page [\#474](https://github.com/wallabag/wallabag/issues/474)
+- display language name in config page [\#480](https://github.com/wallabag/wallabag/issues/480)
+- Missing pagination on tag page [\#476](https://github.com/wallabag/wallabag/issues/476)
+- \[Changement de nom\] Anciens thèmes [\#471](https://github.com/wallabag/wallabag/issues/471)
+- Make the installation more user-friendly [\#466](https://github.com/wallabag/wallabag/issues/466)
+- add Slovenian language [\#462](https://github.com/wallabag/wallabag/issues/462)
+- move the "save a link" field on homepage [\#461](https://github.com/wallabag/wallabag/issues/461)
+
+**Merged pull requests:**
+
+- 1.5.2 [\#481](https://github.com/wallabag/wallabag/pull/481) ([nicosomb](https://github.com/nicosomb))
+- a lot of refactoring: tag action is now handled by home view and uses sorting and pagination. Some small view enhacenments. Fix of \#476, \#461 for baggy and other themes [\#478](https://github.com/wallabag/wallabag/pull/478) ([mariroz](https://github.com/mariroz))
+- Baggy Theme - PtSans font is now local [\#473](https://github.com/wallabag/wallabag/pull/473) ([nsteinmetz](https://github.com/nsteinmetz))
+- Full-Text RSS included as a script instead of file\_get\_contents call. Tnx to @Faless. Fix issues \#366 and \#463 [\#472](https://github.com/wallabag/wallabag/pull/472) ([mariroz](https://github.com/mariroz))
+- version number 1.5.1 [\#469](https://github.com/wallabag/wallabag/pull/469) ([nicosomb](https://github.com/nicosomb))
+- "save a link" added to top menu \(default theme\) to toggle "save link" form,  issue \#461 [\#467](https://github.com/wallabag/wallabag/pull/467) ([mariroz](https://github.com/mariroz))
+
+## [1.5.1.1](https://github.com/wallabag/wallabag/tree/1.5.1.1) (2014-02-19)
+## [1.5.1](https://github.com/wallabag/wallabag/tree/1.5.1) (2014-02-19)
+**Fixed bugs:**
+
+- \[Bug\] Bas de page index : problème avec le fichier de langue ? [\#452](https://github.com/wallabag/wallabag/issues/452)
+- duplicate check added. fix of issue \#400 [\#460](https://github.com/wallabag/wallabag/pull/460) ([mariroz](https://github.com/mariroz))
+
+**Merged pull requests:**
+
+- 1.5.1 [\#468](https://github.com/wallabag/wallabag/pull/468) ([nicosomb](https://github.com/nicosomb))
+- Feature \#457 : import from pocket now import tags too [\#459](https://github.com/wallabag/wallabag/pull/459) ([arnaudmm](https://github.com/arnaudmm))
+
+## [1.5.0](https://github.com/wallabag/wallabag/tree/1.5.0) (2014-02-13)
+**Fixed bugs:**
+
+- Bug with theme name case [\#447](https://github.com/wallabag/wallabag/issues/447)
+- notification cross doesn't work [\#446](https://github.com/wallabag/wallabag/issues/446)
+- Login time [\#442](https://github.com/wallabag/wallabag/issues/442)
+- An error report:Parse error: syntax error, unexpected T\_FUNCTION [\#436](https://github.com/wallabag/wallabag/issues/436)
+- Incorrect url when adding from Android [\#424](https://github.com/wallabag/wallabag/issues/424)
+- Some language problems in the french Config Page [\#416](https://github.com/wallabag/wallabag/issues/416)
+- RSS Feed URL problem [\#364](https://github.com/wallabag/wallabag/issues/364)
+
+**Closed issues:**
+
+- new default content  [\#445](https://github.com/wallabag/wallabag/issues/445)
+- Update the demo [\#430](https://github.com/wallabag/wallabag/issues/430)
+- Move all Unread articles to Archive [\#385](https://github.com/wallabag/wallabag/issues/385)
+
+**Merged pull requests:**
+
+- 1.5.0 [\#450](https://github.com/wallabag/wallabag/pull/450) ([nicosomb](https://github.com/nicosomb))
+- Adding .htaccess files to prohibit access to critical directories, e.g., db/ [\#439](https://github.com/wallabag/wallabag/pull/439) ([flolauck](https://github.com/flolauck))
+- Polish and Ukrainian translations added. Russian - updated. Plust 2 smal... [\#435](https://github.com/wallabag/wallabag/pull/435) ([mariroz](https://github.com/mariroz))
+- Theme courgette [\#434](https://github.com/wallabag/wallabag/pull/434) ([courgette](https://github.com/courgette))
+- all locale files re-compiled: fix of \#416 Some language problems in the ... [\#428](https://github.com/wallabag/wallabag/pull/428) ([mariroz](https://github.com/mariroz))
+
+## [1.4.0](https://github.com/wallabag/wallabag/tree/1.4.0) (2014-02-03)
+**Fixed bugs:**
+
+- remember user [\#401](https://github.com/wallabag/wallabag/issues/401)
+- Poche on Apache, behind Ngnix [\#395](https://github.com/wallabag/wallabag/issues/395)
+- remove all poche references in code [\#415](https://github.com/wallabag/wallabag/issues/415)
+- Add support for X-Forwarded-Proto header field [\#413](https://github.com/wallabag/wallabag/issues/413)
+- \[unable to retrieve full-text content\]... [\#396](https://github.com/wallabag/wallabag/issues/396)
+- Empty article title and content \(blank title tag and content\) [\#390](https://github.com/wallabag/wallabag/issues/390)
+- Import from readability doesn't work \(0 links imported\) [\#375](https://github.com/wallabag/wallabag/issues/375)
+- Endless redirects or user doesn't exist with basic authentication [\#368](https://github.com/wallabag/wallabag/issues/368)
+- table tags\_entries already exists  [\#367](https://github.com/wallabag/wallabag/issues/367)
+- fix of bug \#368 Endless redirects or user doesn't exist with basic authe... [\#419](https://github.com/wallabag/wallabag/pull/419) ([mariroz](https://github.com/mariroz))
+- Page data extraction with basic auth [\#394](https://github.com/wallabag/wallabag/pull/394) ([aaa2000](https://github.com/aaa2000))
+
+**Closed issues:**
+
+- Error when installing: Fatal error: Call to a member function render\(\) on a non-object in [\#423](https://github.com/wallabag/wallabag/issues/423)
+- Add undelete [\#422](https://github.com/wallabag/wallabag/issues/422)
+- \[1.3.1\] Poche Call to a member function render\(\) on a non-object [\#399](https://github.com/wallabag/wallabag/issues/399)
+- Rationnaliser la doc [\#297](https://github.com/wallabag/wallabag/issues/297)
+- Tables content in solarized dark theme unreadable [\#421](https://github.com/wallabag/wallabag/issues/421)
+- 1.3.0: Pulished feeds by tt-rss will be empty in wallabag [\#420](https://github.com/wallabag/wallabag/issues/420)
+- Display link to poche\_compatibility\_test at installation [\#392](https://github.com/wallabag/wallabag/issues/392)
+- Empty article title \(blank title tag\) [\#389](https://github.com/wallabag/wallabag/issues/389)
+- \[v1\] update translation files  [\#340](https://github.com/wallabag/wallabag/issues/340)
+- Sharing on self hosted social networks [\#327](https://github.com/wallabag/wallabag/issues/327)
+
+**Merged pull requests:**
+
+- changelog 1.4 [\#427](https://github.com/wallabag/wallabag/pull/427) ([nicosomb](https://github.com/nicosomb))
+- Courgette theme revision [\#425](https://github.com/wallabag/wallabag/pull/425) ([Lonnytunes](https://github.com/Lonnytunes))
+- Fix: stops multiplication, in database, of a same user config item [\#410](https://github.com/wallabag/wallabag/pull/410) ([Lonnytunes](https://github.com/Lonnytunes))
+- Correction de bugs dans le schema mysql [\#391](https://github.com/wallabag/wallabag/pull/391) ([Newinx](https://github.com/Newinx))
+
+## [1.3.1](https://github.com/wallabag/wallabag/tree/1.3.1) (2014-01-07)
+**Fixed bugs:**
+
+- Some links crash RSS feeds [\#386](https://github.com/wallabag/wallabag/issues/386)
+- Encoding trouble in \<title\> of RSS [\#376](https://github.com/wallabag/wallabag/issues/376)
+- Some articles break the RSS [\#374](https://github.com/wallabag/wallabag/issues/374)
+- Notice: Trying to get property of non-object in poche/inc/3rdparty/FlattrItem.class.php on line 22 [\#359](https://github.com/wallabag/wallabag/issues/359)
+
+**Closed issues:**
+
+- Problem with fresh install [\#383](https://github.com/wallabag/wallabag/issues/383)
+- Vector version of logo? [\#372](https://github.com/wallabag/wallabag/issues/372)
+
+**Merged pull requests:**
+
+- poche 1.3.1 [\#387](https://github.com/wallabag/wallabag/pull/387) ([nicosomb](https://github.com/nicosomb))
+- Create sqlite table tags\_entries only if not already exists [\#382](https://github.com/wallabag/wallabag/pull/382) ([aaa2000](https://github.com/aaa2000))
+- Flattr Class : Bug 359 [\#381](https://github.com/wallabag/wallabag/pull/381) ([tcitworld](https://github.com/tcitworld))
+- Change Permissions in pochePictures.php [\#380](https://github.com/wallabag/wallabag/pull/380) ([F1reF0x](https://github.com/F1reF0x))
+- Minor changes to tag edit and config pages [\#379](https://github.com/wallabag/wallabag/pull/379) ([williamtheaker](https://github.com/williamtheaker))
+- docs link, typos [\#370](https://github.com/wallabag/wallabag/pull/370) ([DmitrySandalov](https://github.com/DmitrySandalov))
+
+## [1.3.0](https://github.com/wallabag/wallabag/tree/1.3.0) (2013-12-23)
+**Fixed bugs:**
+
+- can't parse youtube [\#253](https://github.com/wallabag/wallabag/issues/253)
+
+**Closed issues:**
+
+- offline access to list possible?  [\#361](https://github.com/wallabag/wallabag/issues/361)
+- Template tpl inachevé empêche le retour au thème par défaut [\#355](https://github.com/wallabag/wallabag/issues/355)
+- Actions icons not displayed with default theme [\#346](https://github.com/wallabag/wallabag/issues/346)
+- \[Feature\] Article length [\#345](https://github.com/wallabag/wallabag/issues/345)
+- \[Feature\] Custom Parse Scripts [\#335](https://github.com/wallabag/wallabag/issues/335)
+- Wrong current version [\#330](https://github.com/wallabag/wallabag/issues/330)
+
+**Merged pull requests:**
+
+- poche 1.3.0 [\#363](https://github.com/wallabag/wallabag/pull/363) ([nicosomb](https://github.com/nicosomb))
+- fix for long lasting session [\#362](https://github.com/wallabag/wallabag/pull/362) ([DmitrySandalov](https://github.com/DmitrySandalov))
+- tags: mysql create tables if not exists [\#360](https://github.com/wallabag/wallabag/pull/360) ([DmitrySandalov](https://github.com/DmitrySandalov))
+- Edited English text [\#358](https://github.com/wallabag/wallabag/pull/358) ([williamtheaker](https://github.com/williamtheaker))
+- Tags feature [\#356](https://github.com/wallabag/wallabag/pull/356) ([nicosomb](https://github.com/nicosomb))
+- \[change\] we now use Full-Text RSS 3.1, thank you so much @fivefilters [\#353](https://github.com/wallabag/wallabag/pull/353) ([nicosomb](https://github.com/nicosomb))
+- updating the "es\_ES" locale [\#352](https://github.com/wallabag/wallabag/pull/352) ([versvs](https://github.com/versvs))
+- add atom feeds for unread / favs [\#350](https://github.com/wallabag/wallabag/pull/350) ([nicosomb](https://github.com/nicosomb))
+- Stackoverflow parsing and subdomain failover fix. [\#349](https://github.com/wallabag/wallabag/pull/349) ([JasonGhent](https://github.com/JasonGhent))
+- Fix links [\#347](https://github.com/wallabag/wallabag/pull/347) ([evgeni](https://github.com/evgeni))
+- \[add\] preparing to poche a new link [\#337](https://github.com/wallabag/wallabag/pull/337) ([nicosomb](https://github.com/nicosomb))
+- \[fix\] paths of assets fixed [\#336](https://github.com/wallabag/wallabag/pull/336) ([nicosomb](https://github.com/nicosomb))
+- \[add\] layout [\#331](https://github.com/wallabag/wallabag/pull/331) ([nicosomb](https://github.com/nicosomb))
+- Create fa\_IR.utf8.po [\#329](https://github.com/wallabag/wallabag/pull/329) ([mabkenar](https://github.com/mabkenar))
+- 1.2.0 [\#326](https://github.com/wallabag/wallabag/pull/326) ([nicosomb](https://github.com/nicosomb))
+
+## [1.2.0](https://github.com/wallabag/wallabag/tree/1.2.0) (2013-11-25)
+**Fixed bugs:**
+
+- poche not accessible anymore via https [\#283](https://github.com/wallabag/wallabag/issues/283)
+- content not well displayed with bulletins-electroniques.com [\#177](https://github.com/wallabag/wallabag/issues/177)
+- problem with CURLOPT\_FOLLOWLOCATION [\#287](https://github.com/wallabag/wallabag/issues/287)
+- html output of poche is linking to localhost [\#270](https://github.com/wallabag/wallabag/issues/270)
+- Deleting article doesn't redirect [\#259](https://github.com/wallabag/wallabag/issues/259)
+- error 500 with the .htaccess [\#254](https://github.com/wallabag/wallabag/issues/254)
+
+**Closed issues:**
+
+- "Stay signed in" doesn't work on Poche Hosting / Chrome [\#325](https://github.com/wallabag/wallabag/issues/325)
+- pouvoir taguer ses posts - Tag posts [\#319](https://github.com/wallabag/wallabag/issues/319)
+- RSS/atom feed of unread items [\#318](https://github.com/wallabag/wallabag/issues/318)
+- \[v2\] enhancement add Russian locale [\#314](https://github.com/wallabag/wallabag/issues/314)
+- ru\_RU.utf8.po locale proposal [\#308](https://github.com/wallabag/wallabag/issues/308)
+- No icons visible in dark theme - new set proposed. [\#306](https://github.com/wallabag/wallabag/issues/306)
+- \[v2\] Mark an arcticle as 'read' on the actual arcticle page [\#305](https://github.com/wallabag/wallabag/issues/305)
+- Always wants me to login [\#303](https://github.com/wallabag/wallabag/issues/303)
+- Créer son utilisateur, howto?  [\#298](https://github.com/wallabag/wallabag/issues/298)
+- Can't import from Pocket [\#295](https://github.com/wallabag/wallabag/issues/295)
+- Utilisation de librairies locales [\#293](https://github.com/wallabag/wallabag/issues/293)
+- API doesn't feech content - L'API ne récupère pas le contenu [\#292](https://github.com/wallabag/wallabag/issues/292)
+- mysql collation not UTF8 [\#279](https://github.com/wallabag/wallabag/issues/279)
+- Mobile view of a rue89 website doesnt work [\#276](https://github.com/wallabag/wallabag/issues/276)
+- Être au niveau d'Evernote Web Clipper [\#252](https://github.com/wallabag/wallabag/issues/252)
+- parse a SPIP website [\#241](https://github.com/wallabag/wallabag/issues/241)
+- use Font Awesome [\#133](https://github.com/wallabag/wallabag/issues/133)
+- vider le cache depuis la config [\#122](https://github.com/wallabag/wallabag/issues/122)
+- gestion des erreurs sqlite [\#14](https://github.com/wallabag/wallabag/issues/14)
+- \#article\_toolbar in hardcopy printouts must die [\#311](https://github.com/wallabag/wallabag/issues/311)
+- Use ajax to perform actions on an article [\#197](https://github.com/wallabag/wallabag/issues/197)
+
+**Merged pull requests:**
+
+- \[v2\] ru\_RU locale file [\#315](https://github.com/wallabag/wallabag/pull/315) ([DmitrySandalov](https://github.com/DmitrySandalov))
+- \[v2\] fix \#270 access from remote machine [\#313](https://github.com/wallabag/wallabag/pull/313) ([DmitrySandalov](https://github.com/DmitrySandalov))
+- dark theme images replaced to visible set, no executable bits for pictures [\#310](https://github.com/wallabag/wallabag/pull/310) ([jn0](https://github.com/jn0))
+- Added possibility to mark items as read/unread on the item page itself. [\#307](https://github.com/wallabag/wallabag/pull/307) ([baurmatt](https://github.com/baurmatt))
+- Autoclose [\#291](https://github.com/wallabag/wallabag/pull/291) ([banux](https://github.com/banux))
+- 1.1.0 [\#289](https://github.com/wallabag/wallabag/pull/289) ([nicosomb](https://github.com/nicosomb))
+
+## [1.1.0](https://github.com/wallabag/wallabag/tree/1.1.0) (2013-10-25)
+**Fixed bugs:**
+
+- New menu bar bad display on Windows Phone Browser [\#258](https://github.com/wallabag/wallabag/issues/258)
+- new menu bar in beta 5 not usable on android firefox in portrait orientation [\#255](https://github.com/wallabag/wallabag/issues/255)
+
+**Closed issues:**
+
+- on hosting platform : login and headers already sent warning [\#288](https://github.com/wallabag/wallabag/issues/288)
+- Fix German Translation [\#286](https://github.com/wallabag/wallabag/issues/286)
+- Increase or decrease font size [\#282](https://github.com/wallabag/wallabag/issues/282)
+- longer lasting "Stay signed in" [\#277](https://github.com/wallabag/wallabag/issues/277)
+- move POCHE\_VERSION in index.php [\#268](https://github.com/wallabag/wallabag/issues/268)
+- Searching? [\#265](https://github.com/wallabag/wallabag/issues/265)
+- Themes link is broken [\#260](https://github.com/wallabag/wallabag/issues/260)
+- Install and login failure using MAMP [\#251](https://github.com/wallabag/wallabag/issues/251)
+- tests with behat [\#217](https://github.com/wallabag/wallabag/issues/217)
+- about links which are bad displayed [\#176](https://github.com/wallabag/wallabag/issues/176)
+- czech translation [\#271](https://github.com/wallabag/wallabag/issues/271)
+- make installation steps easier [\#266](https://github.com/wallabag/wallabag/issues/266)
+- Change language [\#215](https://github.com/wallabag/wallabag/issues/215)
+
+**Merged pull requests:**
+
+- Adding support for http\_auth [\#285](https://github.com/wallabag/wallabag/pull/285) ([dsacchet](https://github.com/dsacchet))
+- Updated Screenshots URLs [\#278](https://github.com/wallabag/wallabag/pull/278) ([tcitworld](https://github.com/tcitworld))
+- Update select theme filter and sort names \(dev branch PR\) [\#274](https://github.com/wallabag/wallabag/pull/274) ([NumEricR](https://github.com/NumEricR))
+- Emdeded Roboto webfont [\#273](https://github.com/wallabag/wallabag/pull/273) ([jcsaaddupuy](https://github.com/jcsaaddupuy))
+- Custom ssl port [\#272](https://github.com/wallabag/wallabag/pull/272) ([jcsaaddupuy](https://github.com/jcsaaddupuy))
+- Embeding jquery [\#264](https://github.com/wallabag/wallabag/pull/264) ([jcsaaddupuy](https://github.com/jcsaaddupuy))
+- Fix \#255 : increase article toolbar height if necessary [\#261](https://github.com/wallabag/wallabag/pull/261) ([NumEricR](https://github.com/NumEricR))
+- merge 1.0.0 [\#256](https://github.com/wallabag/wallabag/pull/256) ([nicosomb](https://github.com/nicosomb))
+
+## [1.0.0](https://github.com/wallabag/wallabag/tree/1.0.0) (2013-10-03)
+**Fixed bugs:**
+
+- alert message aat field in config is in french [\#246](https://github.com/wallabag/wallabag/issues/246)
+- when archive last poched links from a page, redirect to an other page [\#219](https://github.com/wallabag/wallabag/issues/219)
+- Coherent install instructions? [\#248](https://github.com/wallabag/wallabag/issues/248)
+- Flattr Cache : File names too long [\#243](https://github.com/wallabag/wallabag/issues/243)
+- problem with estimated reading time on smartphone / tablet [\#242](https://github.com/wallabag/wallabag/issues/242)
+- inc/3rdparty/site\_config missing [\#240](https://github.com/wallabag/wallabag/issues/240)
+- full paths of import files displayed [\#234](https://github.com/wallabag/wallabag/issues/234)
+- Can't poche a github page with bookmarklet [\#233](https://github.com/wallabag/wallabag/issues/233)
+- save position not enabled [\#230](https://github.com/wallabag/wallabag/issues/230)
+- theme not stored [\#229](https://github.com/wallabag/wallabag/issues/229)
+- Deleting element in archive redirect to home [\#227](https://github.com/wallabag/wallabag/issues/227)
+- Problème avec la page d'un élément poché et la date [\#225](https://github.com/wallabag/wallabag/issues/225)
+- Export Twitter : Caractères spéciaux qui ne passent pas  [\#135](https://github.com/wallabag/wallabag/issues/135)
+- verif csrf pour l'ajout d'un lien [\#40](https://github.com/wallabag/wallabag/issues/40)
+
+**Closed issues:**
+
+- Firefox addon not compatible with version 24 [\#249](https://github.com/wallabag/wallabag/issues/249)
+- just created my account but can't login [\#247](https://github.com/wallabag/wallabag/issues/247)
+- Login page URL link on homepage [\#237](https://github.com/wallabag/wallabag/issues/237)
+- Strange login problem on development environment [\#232](https://github.com/wallabag/wallabag/issues/232)
+- 1.0-beta5: Missing themes into themes folder [\#228](https://github.com/wallabag/wallabag/issues/228)
+- back button on bottom right of the article view [\#231](https://github.com/wallabag/wallabag/issues/231)
+- Try to keep flattr links [\#194](https://github.com/wallabag/wallabag/issues/194)
+- Language declaration is missing [\#183](https://github.com/wallabag/wallabag/issues/183)
+- choose a theme from config screen [\#161](https://github.com/wallabag/wallabag/issues/161)
+- Add a print stylesheet [\#157](https://github.com/wallabag/wallabag/issues/157)
+- changer la classe de Session [\#127](https://github.com/wallabag/wallabag/issues/127)
+- génération du salt à l'installation [\#119](https://github.com/wallabag/wallabag/issues/119)
+- relier poche à shaarli [\#112](https://github.com/wallabag/wallabag/issues/112)
+
+**Merged pull requests:**
+
+- Force download on poche export [\#250](https://github.com/wallabag/wallabag/pull/250) ([NumEricR](https://github.com/NumEricR))
+- Avoid ".git" option in themes list of config page [\#245](https://github.com/wallabag/wallabag/pull/245) ([NumEricR](https://github.com/NumEricR))
+- Changed Flattr Caching System [\#244](https://github.com/wallabag/wallabag/pull/244) ([tcitworld](https://github.com/tcitworld))
+
+## [1.0-beta5.2](https://github.com/wallabag/wallabag/tree/1.0-beta5.2) (2013-09-20)
+## [1.0-beta5.1](https://github.com/wallabag/wallabag/tree/1.0-beta5.1) (2013-09-20)
+## [1.0-beta5](https://github.com/wallabag/wallabag/tree/1.0-beta5) (2013-09-20)
+**Fixed bugs:**
+
+- Poche can't parse LWN.net articles where subscription is needed despite login [\#201](https://github.com/wallabag/wallabag/issues/201)
+- Wrong title on favorites and archives pages [\#182](https://github.com/wallabag/wallabag/issues/182)
+- \<h2\> Title not displaying [\#153](https://github.com/wallabag/wallabag/issues/153)
+- titles with colon bad parsed [\#209](https://github.com/wallabag/wallabag/issues/209)
+- update doc links in poche [\#208](https://github.com/wallabag/wallabag/issues/208)
+- bbc and guardian [\#200](https://github.com/wallabag/wallabag/issues/200)
+- DOWNLOAD\_PICTURES function [\#186](https://github.com/wallabag/wallabag/issues/186)
+
+**Closed issues:**
+
+- Paging is not filtered [\#223](https://github.com/wallabag/wallabag/issues/223)
+- Unable to add urls to view.twig [\#213](https://github.com/wallabag/wallabag/issues/213)
+- Enhancement : Share on android through API [\#207](https://github.com/wallabag/wallabag/issues/207)
+- no content displayed [\#206](https://github.com/wallabag/wallabag/issues/206)
+- Redirection login ? [\#204](https://github.com/wallabag/wallabag/issues/204)
+- Impossible de parser une documentation Sphinx [\#203](https://github.com/wallabag/wallabag/issues/203)
+- Don'ty working when download pictures is enabled [\#202](https://github.com/wallabag/wallabag/issues/202)
+- Export articles as PDF \(or plain text\) [\#198](https://github.com/wallabag/wallabag/issues/198)
+- Add a link to add an URL directly from Poche [\#196](https://github.com/wallabag/wallabag/issues/196)
+- Error : SQLite [\#195](https://github.com/wallabag/wallabag/issues/195)
+- PHP Fatal error:  Uncaught exception 'PDOException'  [\#193](https://github.com/wallabag/wallabag/issues/193)
+- update app.inthepoche.com [\#192](https://github.com/wallabag/wallabag/issues/192)
+- déplacer la config des sites dans un autre projet et faire un submodule [\#190](https://github.com/wallabag/wallabag/issues/190)
+- BFMTV.com article appears wrong in poche [\#189](https://github.com/wallabag/wallabag/issues/189)
+- User documentation [\#187](https://github.com/wallabag/wallabag/issues/187)
+- Image downloader feature [\#185](https://github.com/wallabag/wallabag/issues/185)
+- website: link to github [\#184](https://github.com/wallabag/wallabag/issues/184)
+- Scroll position save / sync [\#105](https://github.com/wallabag/wallabag/issues/105)
+
+**Merged pull requests:**
+
+- beta5 [\#226](https://github.com/wallabag/wallabag/pull/226) ([nicosomb](https://github.com/nicosomb))
+- Fix \#183: language declaration [\#221](https://github.com/wallabag/wallabag/pull/221) ([NumEricR](https://github.com/NumEricR))
+- Move icon's no-repeat to common code and clean CSS [\#216](https://github.com/wallabag/wallabag/pull/216) ([NumEricR](https://github.com/NumEricR))
+- Flattr [\#214](https://github.com/wallabag/wallabag/pull/214) ([tcitworld](https://github.com/tcitworld))
+- Add url directly [\#212](https://github.com/wallabag/wallabag/pull/212) ([tcitworld](https://github.com/tcitworld))
+- Less is more :-\) [\#205](https://github.com/wallabag/wallabag/pull/205) ([NumEricR](https://github.com/NumEricR))
+- Add the number of results next to pager [\#199](https://github.com/wallabag/wallabag/pull/199) ([NumEricR](https://github.com/NumEricR))
+- Display a message when there is no link [\#191](https://github.com/wallabag/wallabag/pull/191) ([NumEricR](https://github.com/NumEricR))
+- beta4 [\#181](https://github.com/wallabag/wallabag/pull/181) ([nicosomb](https://github.com/nicosomb))
+
+## [1.0-beta4](https://github.com/wallabag/wallabag/tree/1.0-beta4) (2013-08-25)
+**Fixed bugs:**
+
+- IP addresses do not appear in "view original" [\#175](https://github.com/wallabag/wallabag/issues/175)
+- can't parse http://12factor.net/ [\#166](https://github.com/wallabag/wallabag/issues/166)
+- if cURL is not installed, content is not well displayed [\#164](https://github.com/wallabag/wallabag/issues/164)
+- URL with special char could not be imported [\#155](https://github.com/wallabag/wallabag/issues/155)
+- HTML entities in titles are encoded twice [\#151](https://github.com/wallabag/wallabag/issues/151)
+- Poche won't import the content [\#149](https://github.com/wallabag/wallabag/issues/149)
+- Use of undefined constant POCHE\_VERSION [\#148](https://github.com/wallabag/wallabag/issues/148)
+- répertoire DB inexistant [\#147](https://github.com/wallabag/wallabag/issues/147)
+- getPocheVersion doesn't work ?  [\#142](https://github.com/wallabag/wallabag/issues/142)
+- Error importing readability json [\#136](https://github.com/wallabag/wallabag/issues/136)
+- Images coded with relative paths are not imported [\#123](https://github.com/wallabag/wallabag/issues/123)
+
+**Closed issues:**
+
+- Désactiver authentification [\#178](https://github.com/wallabag/wallabag/issues/178)
+- Désactiver les errerurs PHP sur app.inthepoche.com [\#172](https://github.com/wallabag/wallabag/issues/172)
+- Je ne peux pas ajouter certaines URL [\#152](https://github.com/wallabag/wallabag/issues/152)
+- myconfig.inc.php missing in beta3 release [\#145](https://github.com/wallabag/wallabag/issues/145)
+- Poche should not reimport article if already saved [\#144](https://github.com/wallabag/wallabag/issues/144)
+- Wrong article preview [\#139](https://github.com/wallabag/wallabag/issues/139)
+- links to android / chrome / firefox apps [\#162](https://github.com/wallabag/wallabag/issues/162)
+- Fix markup in poche pages [\#158](https://github.com/wallabag/wallabag/issues/158)
+- Add support of text files by setting a default title. [\#150](https://github.com/wallabag/wallabag/issues/150)
+
+**Merged pull requests:**
+
+- Externalize some CSS code [\#180](https://github.com/wallabag/wallabag/pull/180) ([NumEricR](https://github.com/NumEricR))
+- Add support for URLS with digits [\#174](https://github.com/wallabag/wallabag/pull/174) ([nicofrand](https://github.com/nicofrand))
+- Graceful error-handling with imports and defining where import files are stored [\#173](https://github.com/wallabag/wallabag/pull/173) ([EliasZ](https://github.com/EliasZ))
+- Login button [\#170](https://github.com/wallabag/wallabag/pull/170) ([NumEricR](https://github.com/NumEricR))
+- Entries height with short description [\#169](https://github.com/wallabag/wallabag/pull/169) ([NumEricR](https://github.com/NumEricR))
+- Clean up the templates markup [\#168](https://github.com/wallabag/wallabag/pull/168) ([nicofrand](https://github.com/nicofrand))
+- Improve tools list code [\#163](https://github.com/wallabag/wallabag/pull/163) ([NumEricR](https://github.com/NumEricR))
+- Add a print stylesheet [\#160](https://github.com/wallabag/wallabag/pull/160) ([nicofrand](https://github.com/nicofrand))
+- CSS clean up on style.css file [\#159](https://github.com/wallabag/wallabag/pull/159) ([NumEricR](https://github.com/NumEricR))
+- Dev [\#154](https://github.com/wallabag/wallabag/pull/154) ([nicofrand](https://github.com/nicofrand))
+
+## [1.0-beta3](https://github.com/wallabag/wallabag/tree/1.0-beta3) (2013-08-17)
+**Fixed bugs:**
+
+- Lien qui ne s'ajoute pas [\#138](https://github.com/wallabag/wallabag/issues/138)
+- Un nouveau type d'URL qui ne fonctionne pas [\#125](https://github.com/wallabag/wallabag/issues/125)
+
+**Closed issues:**
+
+- config/update poche: wrong last version? [\#131](https://github.com/wallabag/wallabag/issues/131)
+- Mixed content alert in HTTPS [\#137](https://github.com/wallabag/wallabag/issues/137)
+- ne pas indexer poche dans les moteurs de recherche [\#130](https://github.com/wallabag/wallabag/issues/130)
+
+**Merged pull requests:**
+
+- beta3 [\#141](https://github.com/wallabag/wallabag/pull/141) ([nicosomb](https://github.com/nicosomb))
+- beta3 [\#140](https://github.com/wallabag/wallabag/pull/140) ([nicosomb](https://github.com/nicosomb))
+- merge with beta2 [\#132](https://github.com/wallabag/wallabag/pull/132) ([nicosomb](https://github.com/nicosomb))
+
+## [1.0-beta2](https://github.com/wallabag/wallabag/tree/1.0-beta2) (2013-08-11)
+**Fixed bugs:**
+
+- Impossible d'installer poche [\#111](https://github.com/wallabag/wallabag/issues/111)
+- URL refusée [\#110](https://github.com/wallabag/wallabag/issues/110)
+- Can't add some urls [\#91](https://github.com/wallabag/wallabag/issues/91)
+- Can't Poch url with special caracter [\#73](https://github.com/wallabag/wallabag/issues/73)
+- impossible d'ajouter un lien en https [\#38](https://github.com/wallabag/wallabag/issues/38)
+- Taille police et icones [\#114](https://github.com/wallabag/wallabag/issues/114)
+
+**Closed issues:**
+
+- Toggle Mark as read prevents Go home [\#128](https://github.com/wallabag/wallabag/issues/128)
+- lien \#top qui suit tout l'article [\#120](https://github.com/wallabag/wallabag/issues/120)
+- Please tag release 0.1-beta-1 [\#106](https://github.com/wallabag/wallabag/issues/106)
+- Icône pour le bookmarklet [\#94](https://github.com/wallabag/wallabag/issues/94)
+- extension firefox [\#43](https://github.com/wallabag/wallabag/issues/43)
+- ajouter un lien depuis poche sans le bookmarklet [\#37](https://github.com/wallabag/wallabag/issues/37)
+- appli android [\#26](https://github.com/wallabag/wallabag/issues/26)
+- temps de lecture [\#113](https://github.com/wallabag/wallabag/issues/113)
+
+**Merged pull requests:**
+
+- merge dev into master [\#109](https://github.com/wallabag/wallabag/pull/109) ([nicosomb](https://github.com/nicosomb))
+
+## [1.0-beta1](https://github.com/wallabag/wallabag/tree/1.0-beta1) (2013-08-07)
+**Fixed bugs:**
+
+- suppression d'un lien depuis la page view [\#103](https://github.com/wallabag/wallabag/issues/103)
+- Erreur date.timezone [\#98](https://github.com/wallabag/wallabag/issues/98)
+- Texte lors de la suppression d'un item incorrect [\#97](https://github.com/wallabag/wallabag/issues/97)
+- afficher les messages "flash" lorsqu'on met en favori et quand on archive [\#66](https://github.com/wallabag/wallabag/issues/66)
+
+**Closed issues:**
+
+- Demo URL not working [\#102](https://github.com/wallabag/wallabag/issues/102)
+- Partager vers twitter [\#101](https://github.com/wallabag/wallabag/issues/101)
+- instapaper import [\#100](https://github.com/wallabag/wallabag/issues/100)
+- Add a button to go back to the beginning of the article [\#92](https://github.com/wallabag/wallabag/issues/92)
+- pouvoir signaler qu'un lien a été mal parsé [\#80](https://github.com/wallabag/wallabag/issues/80)
+- login/password pour la démo ? [\#70](https://github.com/wallabag/wallabag/issues/70)
+- indiquer que poche a été mis à jour [\#69](https://github.com/wallabag/wallabag/issues/69)
+- stockage par fichier [\#68](https://github.com/wallabag/wallabag/issues/68)
+- site web : fr / gb [\#57](https://github.com/wallabag/wallabag/issues/57)
+- site web : détailler fonctionnalités poche [\#56](https://github.com/wallabag/wallabag/issues/56)
+- import depuis readability [\#48](https://github.com/wallabag/wallabag/issues/48)
+- avoir une liste au format "list" et non pas au format "square icone" [\#42](https://github.com/wallabag/wallabag/issues/42)
+- bug css affichage liens sur la page view [\#39](https://github.com/wallabag/wallabag/issues/39)
+- vérification du traitement ajax [\#35](https://github.com/wallabag/wallabag/issues/35)
+- site web [\#27](https://github.com/wallabag/wallabag/issues/27)
+
+**Merged pull requests:**
+
+- Twig [\#104](https://github.com/wallabag/wallabag/pull/104) ([nicosomb](https://github.com/nicosomb))
+
+## [0.3](https://github.com/wallabag/wallabag/tree/0.3) (2013-07-31)
+**Fixed bugs:**
+
+- impossible to start poche on my Apache! [\#85](https://github.com/wallabag/wallabag/issues/85)
+- Articles mal parsés [\#47](https://github.com/wallabag/wallabag/issues/47)
+
+**Closed issues:**
+
+- ajouter système de connexion  [\#4](https://github.com/wallabag/wallabag/issues/4)
+
+**Merged pull requests:**
+
+- v0.2.1 [\#74](https://github.com/wallabag/wallabag/pull/74) ([nicosomb](https://github.com/nicosomb))
+
+## [0.2.1](https://github.com/wallabag/wallabag/tree/0.2.1) (2013-04-23)
+**Closed issues:**
+
+- Multi user enhancement for the future [\#71](https://github.com/wallabag/wallabag/issues/71)
+
+**Merged pull requests:**
+
+- Style de l'écran de connexion [\#72](https://github.com/wallabag/wallabag/pull/72) ([Silvus](https://github.com/Silvus))
+- tag 0.2 [\#67](https://github.com/wallabag/wallabag/pull/67) ([nicosomb](https://github.com/nicosomb))
+
+## [0.2](https://github.com/wallabag/wallabag/tree/0.2) (2013-04-21)
+**Fixed bugs:**
+
+- impossible d'ajouter un lien si pas connecté [\#63](https://github.com/wallabag/wallabag/issues/63)
+
+**Closed issues:**
+
+- focus au champ login [\#65](https://github.com/wallabag/wallabag/issues/65)
+- nettoyage inc/mytool [\#64](https://github.com/wallabag/wallabag/issues/64)
+- Login System - security [\#60](https://github.com/wallabag/wallabag/issues/60)
+- supprimer process.php [\#58](https://github.com/wallabag/wallabag/issues/58)
+- export [\#55](https://github.com/wallabag/wallabag/issues/55)
+- dark version / light version [\#36](https://github.com/wallabag/wallabag/issues/36)
+
+**Merged pull requests:**
+
+- Thème dark [\#61](https://github.com/wallabag/wallabag/pull/61) ([Silvus](https://github.com/Silvus))
+
+## [0.11](https://github.com/wallabag/wallabag/tree/0.11) (2013-04-19)
+## [0.1](https://github.com/wallabag/wallabag/tree/0.1) (2013-04-19)
+**Fixed bugs:**
+
+- erreur lors de l'import pocket [\#53](https://github.com/wallabag/wallabag/issues/53)
+- supprimer un lien depuis view.php [\#51](https://github.com/wallabag/wallabag/issues/51)
+- disparition des icônes lors d'un tri [\#45](https://github.com/wallabag/wallabag/issues/45)
+- problème session si on est sur la page depuis longtemps [\#41](https://github.com/wallabag/wallabag/issues/41)
+- bug chrome : affichage d'un seul élément dans la grille [\#32](https://github.com/wallabag/wallabag/issues/32)
+- vérification des liens pochés [\#16](https://github.com/wallabag/wallabag/issues/16)
+- url vide [\#9](https://github.com/wallabag/wallabag/issues/9)
+
+**Closed issues:**
+
+- corriger la récupération de l'id  [\#54](https://github.com/wallabag/wallabag/issues/54)
+- L'URL du bookmarklet contient "https" alors que ma poche est en http [\#49](https://github.com/wallabag/wallabag/issues/49)
+- les éléments s'affichent d'abord verticalement puis horizontalement, donc quand on supprime, l'affichage ne se fait pas comme il faudrait [\#34](https://github.com/wallabag/wallabag/issues/34)
+- suppression et ajout d'un lien : ne plus passer en get comme actuellement [\#33](https://github.com/wallabag/wallabag/issues/33)
+- Pouvoir situer sur quelle page on se trouve [\#30](https://github.com/wallabag/wallabag/issues/30)
+- embarquer jquery [\#29](https://github.com/wallabag/wallabag/issues/29)
+- pouvoir mettre un lien en fav ou considéré comme lu depuis le lien ouvert [\#28](https://github.com/wallabag/wallabag/issues/28)
+- modifier les liens d'outils en formulaire [\#25](https://github.com/wallabag/wallabag/issues/25)
+- revoir système de cache [\#24](https://github.com/wallabag/wallabag/issues/24)
+- compression css [\#23](https://github.com/wallabag/wallabag/issues/23)
+- ajouter un lien "retour à l'accueil" en pied de page d'un article [\#22](https://github.com/wallabag/wallabag/issues/22)
+- adapter hauteur des div sur la même ligne [\#21](https://github.com/wallabag/wallabag/issues/21)
+- Titres trop longs [\#20](https://github.com/wallabag/wallabag/issues/20)
+- stockage du contenu des pages lors de l'ajout [\#17](https://github.com/wallabag/wallabag/issues/17)
+- traiter les variables [\#15](https://github.com/wallabag/wallabag/issues/15)
+- tri des liens [\#13](https://github.com/wallabag/wallabag/issues/13)
+- aligner verticalement les icones d'action [\#12](https://github.com/wallabag/wallabag/issues/12)
+- améliorer présentation d'un article [\#11](https://github.com/wallabag/wallabag/issues/11)
+- améliorer affichage liens [\#10](https://github.com/wallabag/wallabag/issues/10)
+- confirmation lors d'une suppression [\#8](https://github.com/wallabag/wallabag/issues/8)
+- édition d'un lien poché [\#7](https://github.com/wallabag/wallabag/issues/7)
+- utm\_source, utm\_medium & utm\_campaign [\#6](https://github.com/wallabag/wallabag/issues/6)
+- import depuis pocket [\#3](https://github.com/wallabag/wallabag/issues/3)
+- icones [\#2](https://github.com/wallabag/wallabag/issues/2)
+- Empêcher le téléchargement du fichier poche.sqlite [\#1](https://github.com/wallabag/wallabag/issues/1)
+
+**Merged pull requests:**
+
+- Ajout conf nginx pour la protection de la bdd [\#50](https://github.com/wallabag/wallabag/pull/50) ([Gregoire-M](https://github.com/Gregoire-M))
+- Modifications css [\#19](https://github.com/wallabag/wallabag/pull/19) ([tmos](https://github.com/tmos))
+- Some fixes and improvements [\#5](https://github.com/wallabag/wallabag/pull/5) ([fatihorhan](https://github.com/fatihorhan))
+
+
+
+\* *This Change Log was automatically generated by [github_changelog_generator](https://github.com/skywinder/Github-Changelog-Generator)*
