@@ -781,6 +781,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertContains('og:title', $client->getResponse()->getContent());
         $this->assertContains('og:type', $client->getResponse()->getContent());
         $this->assertContains('og:url', $client->getResponse()->getContent());
+        $this->assertContains('og:image', $client->getResponse()->getContent());
 
         // sharing is now disabled
         $client->getContainer()->get('craue_config')->set('share_public', 0);
