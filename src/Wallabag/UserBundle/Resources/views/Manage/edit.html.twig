@@ -68,7 +68,7 @@
                                 <br/>
 
                                 {{ form_widget(edit_form.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
-                                {{ form_rest(edit_form) }}
+                                {{ form_widget(edit_form._token) }}
                             </form>
                             <p>
                                 {{ form_start(delete_form) }}
