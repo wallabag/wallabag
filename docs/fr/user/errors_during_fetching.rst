@@ -18,9 +18,9 @@ Ou vous pouvez aussi essayer de résoudre ce problème vous même (comme ça, no
 
 Vous pouvez essayer de voir si ça fonctionne ici : `http://f43.me/feed/test <http://f43.me/feed/test>`_ (ce site utilise principalement la même manière de fonctionner que wallabag pour récupérer les articles).
 
-Si ça fonctionne ici et pas sur wallabag, c'est qu'il y a un souci avec wallabag qui casse le parser (difficile à résoudre).
+Si ça fonctionne ici et pas sur wallabag, c'est qu'il y a un souci avec wallabag qui casse le parser (difficile à résoudre : merci d'ouvrir un nouveau ticket à ce sujet).
 
-Si ça ne fonctionne pas, vous pouvez essayer de créer un fichier de configuration en utilisant : `http://siteconfig.fivefilters.org/ <http://siteconfig.fivefilters.org/>`_ (sélectionnez les parties du contenu qui correspondent à ce que vous souhaitez garder).
+Si ça ne fonctionne pas, vous pouvez essayer de créer un fichier de configuration en utilisant : `http://siteconfig.fivefilters.org/ <http://siteconfig.fivefilters.org/>`_ (sélectionnez les parties du contenu qui correspondent à ce que vous souhaitez garder).  Vous pouvez `lire cette documentation avant <http://help.fivefilters.org/customer/en/portal/articles/223153-site-patterns>`_.
 
 Vous pouvez tester ce fichier sur le site **f43.me** : cliquez sur **Want to try a custom siteconfig?** et insérez le fichier généré depuis siteconfig.fivefilters.org.
 
