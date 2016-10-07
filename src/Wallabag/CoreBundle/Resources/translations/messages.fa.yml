@@ -208,6 +208,8 @@ entry:
         url_label: 'نشانی'
         is_public_label: 'عمومی'
         save_label: 'ذخیره'
+    # public:
+        # shared_by_wallabag: "This article has been shared by <a href='https://www.wallabag.org'>wallabag</a>"
 
 about:
     page_title: 'درباره'
