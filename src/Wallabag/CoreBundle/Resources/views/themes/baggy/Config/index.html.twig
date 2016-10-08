@@ -146,6 +146,28 @@
         </fieldset>
         {% endif %}
 
+        <h2>{{ 'config.reset.title'|trans }}</h2>
+        <fieldset class="w500p inline">
+            <p>{{ 'config.reset.description'|trans }}</p>
+            <ul>
+                <li>
+                    <a href="{{ path('config_reset', { type: 'annotations'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
+                        {{ 'config.reset.annotations'|trans }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('config_reset', { type: 'tags'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
+                        {{ 'config.reset.tags'|trans }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('config_reset', { type: 'entries'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
+                        {{ 'config.reset.entries'|trans }}
+                    </a>
+                </li>
+            </ul>
+        </fieldset>
+
         {{ form_widget(form.user._token) }}
         {{ form_widget(form.user.save) }}
     </form>
