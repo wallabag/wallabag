@@ -46,7 +46,7 @@ wallabag_core:
         it: 'Italiano'
     items_on_page: 12
     theme: material
-    language: en
+    language: '%locale%'
     rss_limit: 50
     reading_speed: 1
     cache_lifetime: 10
