@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\CoreBundle\Controller;
+namespace Tests\Wallabag\ApiBundle\Controller;
 
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 
@@ -31,6 +31,32 @@ class DeveloperControllerTest extends WallabagCoreTestCase
 
         $this->assertGreaterThan(1, $alert = $crawler->filter('.settings ul li strong')->extract(['_text']));
         $this->assertContains('My app', $alert[0]);
+    }
+
+    /**
+     * @depends testCreateClient
+     */
+    public function testCreateToken()
+    {
+        $client = $this->getClient();
+        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+        $apiClient = $em->getRepository('WallabagApiBundle:Client')->findOneByName('My app');
+
+        $client->request('POST', '/oauth/v2/token', [
+            'grant_type' => 'password',
+            'client_id' => $apiClient->getPublicId(),
+            'client_secret' => $apiClient->getSecret(),
+            'username' => 'admin',
+            'password' => 'mypassword',
+        ]);
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $data = json_decode($client->getResponse()->getContent(), true);
+        $this->assertArrayHasKey('access_token', $data);
+        $this->assertArrayHasKey('expires_in', $data);
+        $this->assertArrayHasKey('token_type', $data);
+        $this->assertArrayHasKey('refresh_token', $data);
     }
 
     public function testListingClient()
