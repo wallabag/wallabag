@@ -256,17 +256,17 @@ class ConfigController extends Controller
         return $config;
     }
 
-     /**
-      * Delete account for current user.
-      *
-      * @Route("/account/delete", name="delete_account")
-      *
-      * @param Request $request
-      *
-      * @throws AccessDeniedHttpException
-      *
-      * @return \Symfony\Component\HttpFoundation\RedirectResponse
-      */
+    /**
+     * Delete account for current user.
+     *
+     * @Route("/account/delete", name="delete_account")
+     *
+     * @param Request $request
+     *
+     * @throws AccessDeniedHttpException
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function deleteAccountAction(Request $request)
     {
         $enabledUsers = $this->getDoctrine()
