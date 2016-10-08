@@ -3,6 +3,8 @@
 namespace Tests\Wallabag\CoreBundle\Controller;
 
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
+use Wallabag\CoreBundle\Entity\Config;
+use Wallabag\UserBundle\Entity\User;
 
 class ConfigControllerTest extends WallabagCoreTestCase
 {
@@ -585,12 +587,6 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $user = $em
             ->getRepository('WallabagUserBundle:User')
-            ->findOneByUsername('wallace');
-        $user->setExpired(1);
-        $em->persist($user);
-
-        $user = $em
-            ->getRepository('WallabagUserBundle:User')
             ->findOneByUsername('empty');
         $user->setExpired(1);
         $em->persist($user);
@@ -613,12 +609,6 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $user = $em
             ->getRepository('WallabagUserBundle:User')
-            ->findOneByUsername('wallace');
-        $user->setExpired(0);
-        $em->persist($user);
-
-        $user = $em
-            ->getRepository('WallabagUserBundle:User')
             ->findOneByUsername('empty');
         $user->setExpired(0);
         $em->persist($user);
@@ -634,8 +624,31 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
     public function testDeleteAccount()
     {
-        $this->logInAs('wallace');
         $client = $this->getClient();
+        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+
+        $user = new User();
+        $user->setName('Wallace');
+        $user->setEmail('wallace@wallabag.org');
+        $user->setUsername('wallace');
+        $user->setPlainPassword('wallace');
+        $user->setEnabled(true);
+        $user->addRole('ROLE_SUPER_ADMIN');
+
+        $em->persist($user);
+
+        $config = new Config($user);
+
+        $config->setTheme('material');
+        $config->setItemsPerPage(30);
+        $config->setReadingSpeed(1);
+        $config->setLanguage('en');
+        $config->setPocketConsumerKey('xxxxx');
+
+        $em->persist($config);
+        $em->flush();
+
+        $this->logInAs('wallace');
 
         // create entry to check after user deletion
         // that this entry is also deleted
