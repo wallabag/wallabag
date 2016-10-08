@@ -803,6 +803,22 @@ class WallabagRestControllerTest extends WallabagApiTestCase
         $this->assertEquals(true, $content['exists']);
     }
 
+    public function testGetEntriesExistsWithManyUrls()
+    {
+        $url1 = 'http://0.0.0.0/entry2';
+        $url2 = 'http://0.0.0.0/entry10';
+        $this->client->request('GET', '/api/entries/exists?urls[]='.$url1.'&urls[]='.$url2);
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertArrayHasKey($url1, $content);
+        $this->assertArrayHasKey($url2, $content);
+        $this->assertEquals(true, $content[$url1]);
+        $this->assertEquals(false, $content[$url2]);
+    }
+
     public function testGetEntriesExistsWhichDoesNotExists()
     {
         $this->client->request('GET', '/api/entries/exists?url=http://google.com/entry2');
