@@ -32,12 +32,55 @@ class WallabagRestControllerTest extends WallabagApiTestCase
         $this->assertEquals($entry->getUserEmail(), $content['user_email']);
         $this->assertEquals($entry->getUserId(), $content['user_id']);
 
-        $this->assertTrue(
-            $this->client->getResponse()->headers->contains(
-                'Content-Type',
-                'application/json'
-            )
-        );
+        $this->assertEquals('application/json', $this->client->getResponse()->headers->get('Content-Type'));
+    }
+
+    public function testExportEntry()
+    {
+        $entry = $this->client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneBy(['user' => 1, 'isArchived' => false]);
+
+        if (!$entry) {
+            $this->markTestSkipped('No content found in db.');
+        }
+
+        $this->client->request('GET', '/api/entries/'.$entry->getId().'/export.epub');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        // epub format got the content type in the content
+        $this->assertContains('application/epub', $this->client->getResponse()->getContent());
+        $this->assertEquals('application/epub+zip', $this->client->getResponse()->headers->get('Content-Type'));
+
+        // re-auth client for mobi
+        $client = $this->createAuthorizedClient();
+        $client->request('GET', '/api/entries/'.$entry->getId().'/export.mobi');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $this->assertEquals('application/x-mobipocket-ebook', $client->getResponse()->headers->get('Content-Type'));
+
+        // re-auth client for pdf
+        $client = $this->createAuthorizedClient();
+        $client->request('GET', '/api/entries/'.$entry->getId().'/export.pdf');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $this->assertContains('PDF-', $client->getResponse()->getContent());
+        $this->assertEquals('application/pdf', $client->getResponse()->headers->get('Content-Type'));
+
+        // re-auth client for pdf
+        $client = $this->createAuthorizedClient();
+        $client->request('GET', '/api/entries/'.$entry->getId().'/export.txt');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $this->assertContains('text/plain', $client->getResponse()->headers->get('Content-Type'));
+
+        // re-auth client for pdf
+        $client = $this->createAuthorizedClient();
+        $client->request('GET', '/api/entries/'.$entry->getId().'/export.csv');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $this->assertContains('application/csv', $client->getResponse()->headers->get('Content-Type'));
     }
 
     public function testGetOneEntryWrongUser()
@@ -70,12 +113,7 @@ class WallabagRestControllerTest extends WallabagApiTestCase
         $this->assertEquals(1, $content['page']);
         $this->assertGreaterThanOrEqual(1, $content['pages']);
 
-        $this->assertTrue(
-            $this->client->getResponse()->headers->contains(
-                'Content-Type',
-                'application/json'
-            )
-        );
+        $this->assertEquals('application/json', $this->client->getResponse()->headers->get('Content-Type'));
     }
 
     public function testGetEntriesWithFullOptions()
@@ -117,12 +155,7 @@ class WallabagRestControllerTest extends WallabagApiTestCase
             $this->assertContains('since=1443274283', $content['_links'][$link]['href']);
         }
 
-        $this->assertTrue(
-            $this->client->getResponse()->headers->contains(
-                'Content-Type',
-                'application/json'
-            )
-        );
+        $this->assertEquals('application/json', $this->client->getResponse()->headers->get('Content-Type'));
     }
 
     public function testGetStarredEntries()
@@ -150,12 +183,7 @@ class WallabagRestControllerTest extends WallabagApiTestCase
             $this->assertContains('sort=updated', $content['_links'][$link]['href']);
         }
 
-        $this->assertTrue(
-            $this->client->getResponse()->headers->contains(
-                'Content-Type',
-                'application/json'
-            )
-        );
+        $this->assertEquals('application/json', $this->client->getResponse()->headers->get('Content-Type'));
     }
 
     public function testGetArchiveEntries()
@@ -182,12 +210,7 @@ class WallabagRestControllerTest extends WallabagApiTestCase
             $this->assertContains('archive=1', $content['_links'][$link]['href']);
         }
 
-        $this->assertTrue(
-            $this->client->getResponse()->headers->contains(
-                'Content-Type',
-                'application/json'
-            )
-        );
+        $this->assertEquals('application/json', $this->client->getResponse()->headers->get('Content-Type'));
     }
 
     public function testGetTaggedEntries()
@@ -214,12 +237,7 @@ class WallabagRestControllerTest extends WallabagApiTestCase
             $this->assertContains('tags='.urlencode('foo,bar'), $content['_links'][$link]['href']);
         }
 
-        $this->assertTrue(
-            $this->client->getResponse()->headers->contains(
-                'Content-Type',
-                'application/json'
-            )
-        );
+        $this->assertEquals('application/json', $this->client->getResponse()->headers->get('Content-Type'));
     }
 
     public function testGetDatedEntries()
@@ -246,12 +264,7 @@ class WallabagRestControllerTest extends WallabagApiTestCase
             $this->assertContains('since=1443274283', $content['_links'][$link]['href']);
         }
 
-        $this->assertTrue(
-            $this->client->getResponse()->headers->contains(
-                'Content-Type',
-                'application/json'
-            )
-        );
+        $this->assertEquals('application/json', $this->client->getResponse()->headers->get('Content-Type'));
     }
 
     public function testGetDatedSupEntries()
@@ -279,12 +292,7 @@ class WallabagRestControllerTest extends WallabagApiTestCase
             $this->assertContains('since='.($future->getTimestamp() + 1000), $content['_links'][$link]['href']);
         }
 
-        $this->assertTrue(
-            $this->client->getResponse()->headers->contains(
-                'Content-Type',
-                'application/json'
-            )
-        );
+        $this->assertEquals('application/json', $this->client->getResponse()->headers->get('Content-Type'));
     }
 
     public function testDeleteEntry()

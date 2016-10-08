@@ -3,7 +3,7 @@
 namespace Wallabag\ApiBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
-use Hateoas\Configuration\Route;
+use Hateoas\Configuration\Route as HateoasRoute;
 use Hateoas\Representation\Factory\PagerfantaFactory;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,6 +12,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
+use FOS\RestBundle\Controller\Annotations\Route;
 
 class WallabagRestController extends FOSRestController
 {
@@ -95,7 +96,7 @@ class WallabagRestController extends FOSRestController
         $pagerfantaFactory = new PagerfantaFactory('page', 'perPage');
         $paginatedCollection = $pagerfantaFactory->createRepresentation(
             $pager,
-            new Route(
+            new HateoasRoute(
                 'api_get_entries',
                 [
                     'archive' => $isArchived,
@@ -127,21 +128,38 @@ class WallabagRestController extends FOSRestController
      *
      * @return JsonResponse
      */
-    public function getEntryAction(Entry $entry, $_format)
+    public function getEntryAction(Entry $entry)
     {
         $this->validateAuthentication();
         $this->validateUserAccess($entry->getUser()->getId());
 
-        if ($_format === 'epub') {
-            return $this->get('wallabag_core.helper.entries_export')
-                ->setEntries($entry)
-                ->updateTitle('entry')
-                ->exportAs($_format);
-        }
-
         $json = $this->get('serializer')->serialize($entry, 'json');
 
         return (new JsonResponse())->setJson($json);
+    }
+
+    /**
+     * Retrieve a single entry as a predefined format.
+     *
+     * @ApiDoc(
+     *      requirements={
+     *          {"name"="entry", "dataType"="integer", "requirement"="\w+", "description"="The entry ID"}
+     *      }
+     * )
+     *
+     * @Route(requirements={"_format"="epub|mobi|pdf|txt|csv"})
+     *
+     * @return Response
+     */
+    public function getEntryExportAction(Entry $entry, Request $request)
+    {
+        $this->validateAuthentication();
+        $this->validateUserAccess($entry->getUser()->getId());
+
+        return $this->get('wallabag_core.helper.entries_export')
+            ->setEntries($entry)
+            ->updateTitle('entry')
+            ->exportAs($request->attributes->get('_format'));
     }
 
     /**
