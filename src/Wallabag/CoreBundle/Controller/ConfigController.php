@@ -261,28 +261,31 @@ class ConfigController extends Controller
       *
       * @Route("/account/delete", name="delete_account")
       *
+      * @param Request $request
+      *
       * @throws AccessDeniedHttpException
       *
       * @return \Symfony\Component\HttpFoundation\RedirectResponse
       */
-     public function deleteAccountAction()
-     {
-         $enabledUsers = $this->getDoctrine()
-             ->getRepository('WallabagUserBundle:User')
-             ->getSumEnabledUsers();
+    public function deleteAccountAction(Request $request)
+    {
+        $enabledUsers = $this->getDoctrine()
+            ->getRepository('WallabagUserBundle:User')
+            ->getSumEnabledUsers();
 
-         if ($enabledUsers <= 1) {
-             throw new AccessDeniedHttpException();
-         }
+        if ($enabledUsers <= 1) {
+            throw new AccessDeniedHttpException();
+        }
 
-         $em = $this->get('fos_user.user_manager');
-         $em->deleteUser($this->getUser());
+        $user = $this->getUser();
 
-         $this->get('session')->getFlashBag()->add(
-             'notice',
-             'flashes.account.notice.account_deleted'
-         );
+        // logout current user
+        $this->get('security.token_storage')->setToken(null);
+        $request->getSession()->invalidate();
 
-         return $this->redirect($this->generateUrl('fos_user_security_logout'));
-     }
+        $em = $this->get('fos_user.user_manager');
+        $em->deleteUser($user);
+
+        return $this->redirect($this->generateUrl('fos_user_security_login'));
+    }
 }

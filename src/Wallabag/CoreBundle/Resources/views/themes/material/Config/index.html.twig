@@ -169,7 +169,15 @@
                         </form>
 
                         {% if enabled_users > 1 %}
-                        <a class='btn red delete-account' href='{{ path('delete_account') }}'>{{ 'config.form_user.delete_account' | trans }}</a>
+                            <br /><hr /><br />
+
+                            <div class="row">
+                                <h5>{{ 'config.delete.title'|trans }}</h5>
+                                <p>{{ 'config.delete.description'|trans }}</p>
+                                <a href="{{ path('delete_account') }}" onclick="return confirm('{{ 'config.delete.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red delete-account">
+                                    {{ 'config.form_user.delete_account' | trans }}
+                                </a>
+                            </div>
                         {% endif %}
                     </div>
 
