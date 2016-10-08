@@ -3,6 +3,7 @@
 namespace Tests\Wallabag\CoreBundle\Controller;
 
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
+use Wallabag\CoreBundle\Entity\Tag;
 
 class TagControllerTest extends WallabagCoreTestCase
 {
@@ -134,36 +135,48 @@ class TagControllerTest extends WallabagCoreTestCase
         $client->request('GET', '/remove-tag/'.$entry->getId().'/'.$tag->getId());
 
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
+
+        $tag = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Tag')
+            ->findOneByLabel($this->tagName);
+
+        $this->assertNull($tag, $this->tagName.' was removed because it begun an orphan tag');
     }
 
     public function testShowEntriesForTagAction()
     {
         $this->logInAs('admin');
         $client = $this->getClient();
+        $em = $client->getContainer()
+            ->get('doctrine.orm.entity_manager');
+
+        $tag = new Tag();
+        $tag->setLabel($this->tagName);
 
         $entry = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
             ->findByUrlAndUserId('http://0.0.0.0/entry4', $this->getLoggedInUserId());
 
-        $tag = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Tag')
-            ->findOneByEntryAndTagLabel($entry, 'foo');
+        $tag->addEntry($entry);
 
-        $crawler = $client->request('GET', '/tag/list/'.$tag->getSlug());
-
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertCount(2, $crawler->filter('div[class=entry]'));
+        $em->persist($entry);
+        $em->persist($tag);
+        $em->flush();
 
         $tag = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Tag')
-            ->findOneByLabel('baz');
+            ->findOneByEntryAndTagLabel($entry, $this->tagName);
 
         $crawler = $client->request('GET', '/tag/list/'.$tag->getSlug());
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertCount(1, $crawler->filter('div[class=entry]'));
+        $this->assertCount(1, $crawler->filter('[id*="entry-"]'));
+
+        $entry->removeTag($tag);
+        $em->remove($tag);
+        $em->flush();
     }
 }

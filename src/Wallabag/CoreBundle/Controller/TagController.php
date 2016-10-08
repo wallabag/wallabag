@@ -63,10 +63,12 @@ class TagController extends Controller
         $entry->removeTag($tag);
         $em = $this->getDoctrine()->getManager();
         $em->flush();
-        if (count($tag->getEntries()) == 0) {
+
+        // remove orphan tag in case no entries are associated to it
+        if (count($tag->getEntries()) === 0) {
             $em->remove($tag);
+            $em->flush();
         }
-        $em->flush();
 
         $redirectUrl = $this->get('wallabag_core.helper.redirect')->to($request->headers->get('referer'));
 
