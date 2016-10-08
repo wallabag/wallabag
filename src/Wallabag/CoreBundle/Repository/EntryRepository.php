@@ -332,9 +332,9 @@ class EntryRepository extends EntityRepository
 
     /**
      * Remove all entries for a user id.
-     * Used when a user want to reset all informations
+     * Used when a user want to reset all informations.
      *
-     * @param  int $userId
+     * @param int $userId
      */
     public function removeAllByUserId($userId)
     {

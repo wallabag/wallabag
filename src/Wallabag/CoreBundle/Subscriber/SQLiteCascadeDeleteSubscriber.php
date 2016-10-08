@@ -1,8 +1,8 @@
 <?php
+
 namespace Wallabag\CoreBundle\Subscriber;
 
 use Doctrine\Common\EventSubscriber;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Wallabag\CoreBundle\Entity\Entry;
 use Doctrine\Bundle\DoctrineBundle\Registry;
@@ -38,7 +38,7 @@ class SQLiteCascadeDeleteSubscriber implements EventSubscriber
 
     /**
      * We removed everything related to the upcoming removed entry because SQLite can't handle it on it own.
-     * We do it in the preRemove, because we can't retrieve tags in the postRemove (because the entry id is gone)
+     * We do it in the preRemove, because we can't retrieve tags in the postRemove (because the entry id is gone).
      *
      * @param LifecycleEventArgs $args
      */
