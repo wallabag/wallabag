@@ -6,6 +6,16 @@ Voraussetzungen
 
 wallabag ist kompatibel mit PHP >= 5.5, inkl. PHP 7.
 
+wallabag nutzt eine große Anzahl an Bibliotheken, um zu funktionieren. Diese Bibliotheken müssen mit einem Tool namens Composer installiert werden. Du musst es installieren sofern du es bisher noch nicht gemacht hast.
+
+Composer installieren:
+
+::
+
+    curl -s http://getcomposer.org/installer | php
+
+Du kannst eine spezifische Anleitung `hier <https://getcomposer.org/doc/00-intro.md>`__ finden.
+
 Du benötigst die folgenden Extensions damit wallabag funktioniert. Einige von diesen sind vielleicht schon in deiner Version von PHP aktiviert, somit musst du eventuell
 nicht alle folgenden Pakete installieren.
 
@@ -39,25 +49,13 @@ Installation
 Auf einem dedizierten Webserver (empfohlener Weg)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-wallabag nutzt eine große Anzahl an Bibliotheken, um zu funktionieren. Diese Bibliotheken müssen mit einem Tool namens Composer installiert werden. Du musst es installieren sofern du es bisher noch nicht gemacht hast.
-
-Composer installieren:
-
-::
-
-    curl -s http://getcomposer.org/installer | php
-
-Du kannst eine spezifische Anleitung `hier <https://getcomposer.org/doc/00-intro.md>`__ finden.
-
 Um wallabag selbst zu installieren, musst du die folgenden Kommandos ausführen:
 
 ::
 
     git clone https://github.com/wallabag/wallabag.git
     cd wallabag
-    git checkout 2.1.1 --force
-    SYMFONY_ENV=prod composer install --no-dev -o --prefer-dist
-    php bin/console wallabag:install --env=prod
+    ./install.sh
 
 Um PHPs eingebauten Server zu starten und zu testen, ob alles korrekt installiert wurde, kannst du folgendes Kommando ausführen:
 
@@ -87,18 +85,18 @@ Führe dieses Kommando aus, um das neueste Paket herunterzuladen und zu entpacke
 
     wget http://wllbg.org/latest-v2-package && tar xvf latest-v2-package
 
-(md5 hash: ``6c33520e29cc754b687f9cee0398dede``)
+You will find the `md5 hash of the latest package on our website <https://www.wallabag.org/pages/download-wallabag.html>`_.
 
 Jetzt lese die Dokumentation, um einen Virtualhost zu erstellen, dann greife auf dein wallabag zu.
 Wenn du die Datenbankkonfiguration eingestellt hast, MySQL oder PostgreSQL zu nutzen, musst du einen Nutzer über das folgende Kommando erstellen ``php bin/console wallabag:install --env=prod``.
 
 Installation mit Docker
-------------------------
+~~~~~~~~~~~~~~~~~~~~~~
 
 Wir stellen ein Docker Image zu Verfügung, um wallabag einfach zu installieren. Schaue in unser Repository in unserem `Docker Hub <https://hub.docker.com/r/wallabag/wallabag/>`__, um mehr Informationen zu erhalten.
 
 Kommando, um den Container zu starten
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: bash
 
@@ -108,7 +106,7 @@ Virtualhosts
 ------------
 
 Konfiguration von Apache
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 Angenommen du willst wallabag in das Verzeichnis ``/var/www/wallabag`` installieren und du willst PHP als Apache Modul nutzen, dann ist hier ein vhost für wallabag:
 
@@ -198,7 +196,7 @@ Nach dem neuladen oder neustarten von nginx, solltest du nun wallabag unter http
     Wenn du eine große Datei in wallabag importieren willst, solltest du diese Zeile zu deiner nginx Konfiguration hinzufügen ``client_max_body_size XM; # allows file uploads up to X megabytes``.
 
 Konfiguration von lighttpd
-~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Angenommen du willst wallabag in das Verzeichnis ``/var/www/wallabag`` installieren, dann ist hier ein Rezept für wallabag (bearbeite deine ``lighttpd.conf`` und füge die Konfiguration dort ein):
 
