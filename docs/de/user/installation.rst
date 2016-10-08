@@ -63,7 +63,7 @@ Um PHPs eingebauten Server zu starten und zu testen, ob alles korrekt installier
 
     php bin/console server:run --env=prod
 
-Und wallabag unter http://deineserverip:8000 erreichen
+und wallabag unter http://deineserverip:8000 erreichen.
 
 .. tip::
 
@@ -91,7 +91,7 @@ Jetzt lese die Dokumentation, um einen Virtualhost zu erstellen, dann greife auf
 Wenn du die Datenbankkonfiguration eingestellt hast, MySQL oder PostgreSQL zu nutzen, musst du einen Nutzer über das folgende Kommando erstellen ``php bin/console wallabag:install --env=prod``.
 
 Installation mit Docker
-~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
 
 Wir stellen ein Docker Image zu Verfügung, um wallabag einfach zu installieren. Schaue in unser Repository in unserem `Docker Hub <https://hub.docker.com/r/wallabag/wallabag/>`__, um mehr Informationen zu erhalten.
 
@@ -188,11 +188,10 @@ Angenommen du willst wallabag in das Verzeichnis ``/var/www/wallabag`` installie
         access_log /var/log/nginx/wallabag_access.log;
     }
 
-Nach dem neuladen oder neustarten von nginx, solltest du nun wallabag unter http://domain.tld erreichen.
+Nach dem Neuladen oder Neustarten von nginx solltest du nun wallabag unter http://domain.tld erreichen.
 
 .. tip::
 
-    When you want to import large file into wallabag, you need to add this line in your nginx configuration ``client_max_body_size XM; # allows file uploads up to X megabytes``.
     Wenn du eine große Datei in wallabag importieren willst, solltest du diese Zeile zu deiner nginx Konfiguration hinzufügen ``client_max_body_size XM; # allows file uploads up to X megabytes``.
 
 Konfiguration von lighttpd
