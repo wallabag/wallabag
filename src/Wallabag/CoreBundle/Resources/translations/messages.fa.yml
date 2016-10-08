@@ -88,7 +88,11 @@ config:
         name_label: 'نام'
         email_label: 'نشانی ایمیل'
         twoFactorAuthentication_label: 'تأیید ۲مرحله‌ای'
-        # delete_account: 'Delete my account'
+        delete:
+            # title: Delete my account (danger zone !)
+            # description: If you remove your account, ALL your articles, ALL your tags, ALL your annotations and your account will be PERMANENTLY removed (it can't be UNDONE). You'll then be logged out.
+            # confirm: Are you really sure? (it can't be UNDONE)
+            # button: Delete my account
     form_password:
         old_password_label: 'رمز قدیمی'
         new_password_label: 'رمز تازه'
@@ -486,6 +490,3 @@ flashes:
         notice:
             # client_created: 'New client created.'
             # client_deleted: 'Client deleted'
-    account:
-        notice:
-            # account_deleted: 'Account deleted'

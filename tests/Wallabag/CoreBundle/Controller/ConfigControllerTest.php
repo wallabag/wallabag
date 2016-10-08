@@ -581,7 +581,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $crawler = $client->request('GET', '/config');
 
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
-        $this->assertContains('config.form_user.delete_account', $body[0]);
+        $this->assertContains('config.form_user.delete.button', $body[0]);
 
         $em = $client->getContainer()->get('doctrine.orm.entity_manager');
 
@@ -602,7 +602,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $crawler = $client->request('GET', '/config');
 
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
-        $this->assertNotContains('config.form_user.delete_account', $body[0]);
+        $this->assertNotContains('config.form_user.delete.button', $body[0]);
 
         $client->request('GET', '/account/delete');
         $this->assertEquals(403, $client->getResponse()->getStatusCode());
@@ -649,6 +649,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $em->flush();
 
         $this->logInAs('wallace');
+        $loggedInUserId = $this->getLoggedInUserId();
 
         // create entry to check after user deletion
         // that this entry is also deleted
@@ -685,7 +686,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $entries = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findByUser($this->getLoggedInUserId());
+            ->findByUser($loggedInUserId);
 
         $this->assertEmpty($entries);
     }

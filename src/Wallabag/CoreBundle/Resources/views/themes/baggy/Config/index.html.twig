@@ -148,10 +148,16 @@
 
         {{ form_widget(form.user._token) }}
         {{ form_widget(form.user.save) }}
-        {% if enabled_users > 1 %}
-            <a class='btn red delete-account' href='{{ path('delete_account') }}'>{{ 'config.form_user.delete_account' | trans }}</a>
-        {% endif %}
     </form>
+
+    {% if enabled_users > 1 %}
+        <h2>{{ 'config.form_user.delete.title'|trans }}</h2>
+
+        <p>{{ 'config.form_user.delete.description'|trans }}</p>
+        <a href="{{ path('delete_account') }}" onclick="return confirm('{{ 'config.form_user.delete.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red delete-account">
+            {{ 'config.form_user.delete.button'|trans }}
+        </a>
+    {% endif %}
 
     <h2>{{ 'config.tab_menu.password'|trans }}</h2>
 

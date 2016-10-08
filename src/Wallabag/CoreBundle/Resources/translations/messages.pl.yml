@@ -88,7 +88,11 @@ config:
         name_label: 'Nazwa'
         email_label: 'Adres email'
         twoFactorAuthentication_label: 'Autoryzacja dwuetapowa'
-        # delete_account: 'Delete my account'
+        delete:
+            # title: Delete my account (danger zone !)
+            # description: If you remove your account, ALL your articles, ALL your tags, ALL your annotations and your account will be PERMANENTLY removed (it can't be UNDONE). You'll then be logged out.
+            # confirm: Are you really sure? (it can't be UNDONE)
+            # button: Delete my account
     form_password:
         old_password_label: 'Stare hasło'
         new_password_label: 'Nowe hasło'
@@ -487,6 +491,3 @@ flashes:
         notice:
             client_created: 'Nowy klient utworzony.'
             client_deleted: 'Klient usunięty'
-    account:
-        notice:
-            # account_deleted: 'Account deleted'
