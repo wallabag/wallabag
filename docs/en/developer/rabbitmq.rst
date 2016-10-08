@@ -55,22 +55,22 @@ Depending on which service you want to import from you need to enable one (or ma
 .. code:: bash
 
   # for Pocket import
-  bin/console rabbitmq:consumer import_pocket -w
+  bin/console rabbitmq:consumer -e=prod import_pocket -w
 
   # for Readability import
-  bin/console rabbitmq:consumer import_readability -w
+  bin/console rabbitmq:consumer -e=prod import_readability -w
 
   # for Instapaper import
-  bin/console rabbitmq:consumer import_instapaper -w
+  bin/console rabbitmq:consumer -e=prod import_instapaper -w
 
   # for wallabag v1 import
-  bin/console rabbitmq:consumer import_wallabag_v1 -w
+  bin/console rabbitmq:consumer -e=prod import_wallabag_v1 -w
 
   # for wallabag v2 import
-  bin/console rabbitmq:consumer import_wallabag_v2 -w
+  bin/console rabbitmq:consumer -e=prod import_wallabag_v2 -w
 
   # for Firefox import
-  bin/console rabbitmq:consumer import_firefox -w
+  bin/console rabbitmq:consumer -e=prod import_firefox -w
 
   # for Chrome import
-  bin/console rabbitmq:consumer import_chrome -w
+  bin/console rabbitmq:consumer -e=prod import_chrome -w

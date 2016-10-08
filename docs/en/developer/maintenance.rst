@@ -11,7 +11,7 @@ To enable maintenance mode, execute this command:
 
 ::
 
-    bin/console lexik:maintenance:lock --no-interaction
+    bin/console lexik:maintenance:lock --no-interaction -e=prod
 
 You can set your IP address in ``app/config/config.yml`` if you want to access to wallabag even if maintenance mode is enabled. For example:
 
@@ -29,4 +29,4 @@ To disable maintenance mode, execute this command:
 
 ::
 
-    bin/console lexik:maintenance:unlock
+    bin/console lexik:maintenance:unlock -e=prod
