@@ -536,12 +536,9 @@ class WallabagRestController extends FOSRestController
     {
         $this->validateAuthentication();
 
-        $response = $this->forward('WallabagApiBundle:WallabagRest:getAnnotations',
-            [
-                'entry' => $entry,
-            ]);
-
-        return $response;
+        return $this->forward('WallabagApiBundle:WallabagRest:getAnnotations', [
+            'entry' => $entry,
+        ]);
     }
 
     /**
@@ -563,13 +560,10 @@ class WallabagRestController extends FOSRestController
     {
         $this->validateAuthentication();
 
-        $response = $this->forward('WallabagApiBundle:WallabagRest:postAnnotation',
-            [
+        return $this->forward('WallabagApiBundle:WallabagRest:postAnnotation', [
                 'request' => $request,
                 'entry' => $entry,
             ]);
-
-        return $response;
     }
 
     /**
@@ -592,13 +586,10 @@ class WallabagRestController extends FOSRestController
     {
         $this->validateAuthentication();
 
-        $response = $this->forward('WallabagApiBundle:WallabagRest:putAnnotation',
-            [
+        return $this->forward('WallabagApiBundle:WallabagRest:putAnnotation', [
                 'annotation' => $annotation,
                 'request' => $request,
             ]);
-
-        return $response;
     }
 
     /**
@@ -620,12 +611,9 @@ class WallabagRestController extends FOSRestController
     {
         $this->validateAuthentication();
 
-        $response = $this->forward('WallabagApiBundle:WallabagRest:deleteAnnotation',
-            [
+        return $this->forward('WallabagApiBundle:WallabagRest:deleteAnnotation', [
                 'annotation' => $annotation,
             ]);
-
-        return $response;
     }
 
     /**
