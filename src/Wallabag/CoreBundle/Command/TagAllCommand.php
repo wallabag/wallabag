@@ -34,9 +34,12 @@ class TagAllCommand extends ContainerAwareCommand
         }
         $tagger = $this->getContainer()->get('wallabag_core.rule_based_tagger');
 
-        $output->write(sprintf('Tagging entries for user « <info>%s</info> »... ', $user->getUserName()));
+        $output->write(sprintf('Tagging entries for user « <comment>%s</comment> »... ', $user->getUserName()));
 
         $entries = $tagger->tagAllForUser($user);
+
+        $output->writeln('<info>Done.</info>');
+        $output->write(sprintf('Persist entries ... ', $user->getUserName()));
 
         $em = $this->getDoctrine()->getManager();
         foreach ($entries as $entry) {
