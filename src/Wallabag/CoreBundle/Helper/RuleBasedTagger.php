@@ -55,6 +55,7 @@ class RuleBasedTagger
     {
         $rules = $this->getRulesForUser($user);
         $entries = [];
+        $tagsCache = [];
 
         foreach ($rules as $rule) {
             $qb = $this->entryRepository->getBuilderForAllByUser($user->getId());
@@ -62,7 +63,12 @@ class RuleBasedTagger
 
             foreach ($entries as $entry) {
                 foreach ($rule->getTags() as $label) {
-                    $tag = $this->getTag($label);
+                    // avoid new tag duplicate by manually caching them
+                    if (!isset($tagsCache[$label])) {
+                        $tagsCache[$label] = $this->getTag($label);
+                    }
+
+                    $tag = $tagsCache[$label];
 
                     $entry->addTag($tag);
                 }
