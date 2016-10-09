@@ -195,7 +195,7 @@ entry:
                 description: 'Îți pare ciudat articolul?'
         edit_title: 'Editează titlul'
         original_article: 'original'
-        # annotations_on_the_entry: '{0} No annotations|{1} One annotation|]1,Inf[ %nbAnnotations% annotations'
+        # annotations_on_the_entry: '{0} No annotations|{1} One annotation|]1,Inf[ %count% annotations'
         created_at: 'Data creării'
     new:
         page_title: 'Salvează un nou articol'
