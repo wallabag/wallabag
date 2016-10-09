@@ -88,6 +88,11 @@ config:
         name_label: 'Nom'
         email_label: 'Adresse e-mail'
         twoFactorAuthentication_label: 'Double authentification'
+        delete:
+            title: Supprimer mon compte (attention danger !)
+            description: Si vous confirmez la suppression de votre compte, TOUS les articles, TOUS les tags, TOUTES les annotations et votre compte seront DÉFINITIVEMENT supprimé (c'est IRRÉVERSIBLE). Vous serez ensuite déconnecté.
+            confirm: Vous êtes vraiment sûr ? (c'est IRRÉVERSIBLE !)
+            button: 'Supprimer mon compte'
     form_password:
         old_password_label: 'Mot de passe actuel'
         new_password_label: 'Nouveau mot de passe'

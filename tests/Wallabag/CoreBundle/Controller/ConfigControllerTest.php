@@ -3,6 +3,8 @@
 namespace Tests\Wallabag\CoreBundle\Controller;
 
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
+use Wallabag\CoreBundle\Entity\Config;
+use Wallabag\UserBundle\Entity\User;
 
 class ConfigControllerTest extends WallabagCoreTestCase
 {
@@ -569,5 +571,123 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $config->set('demo_mode_enabled', 0);
         $config->set('demo_mode_username', 'wallabag');
+    }
+
+    public function testDeleteUserButtonVisibility()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/config');
+
+        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
+        $this->assertContains('config.form_user.delete.button', $body[0]);
+
+        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+
+        $user = $em
+            ->getRepository('WallabagUserBundle:User')
+            ->findOneByUsername('empty');
+        $user->setExpired(1);
+        $em->persist($user);
+
+        $user = $em
+            ->getRepository('WallabagUserBundle:User')
+            ->findOneByUsername('bob');
+        $user->setExpired(1);
+        $em->persist($user);
+
+        $em->flush();
+
+        $crawler = $client->request('GET', '/config');
+
+        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
+        $this->assertNotContains('config.form_user.delete.button', $body[0]);
+
+        $client->request('GET', '/account/delete');
+        $this->assertEquals(403, $client->getResponse()->getStatusCode());
+
+        $user = $em
+            ->getRepository('WallabagUserBundle:User')
+            ->findOneByUsername('empty');
+        $user->setExpired(0);
+        $em->persist($user);
+
+        $user = $em
+            ->getRepository('WallabagUserBundle:User')
+            ->findOneByUsername('bob');
+        $user->setExpired(0);
+        $em->persist($user);
+
+        $em->flush();
+    }
+
+    public function testDeleteAccount()
+    {
+        $client = $this->getClient();
+        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+
+        $user = new User();
+        $user->setName('Wallace');
+        $user->setEmail('wallace@wallabag.org');
+        $user->setUsername('wallace');
+        $user->setPlainPassword('wallace');
+        $user->setEnabled(true);
+        $user->addRole('ROLE_SUPER_ADMIN');
+
+        $em->persist($user);
+
+        $config = new Config($user);
+
+        $config->setTheme('material');
+        $config->setItemsPerPage(30);
+        $config->setReadingSpeed(1);
+        $config->setLanguage('en');
+        $config->setPocketConsumerKey('xxxxx');
+
+        $em->persist($config);
+        $em->flush();
+
+        $this->logInAs('wallace');
+        $loggedInUserId = $this->getLoggedInUserId();
+
+        // create entry to check after user deletion
+        // that this entry is also deleted
+        $crawler = $client->request('GET', '/new');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $form = $crawler->filter('form[name=entry]')->form();
+        $data = [
+            'entry[url]' => $url = 'https://github.com/wallabag/wallabag',
+        ];
+
+        $client->submit($form, $data);
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+
+        $crawler = $client->request('GET', '/config');
+
+        $deleteLink = $crawler->filter('.delete-account')->last()->link();
+
+        $client->click($deleteLink);
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+
+        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+        $user = $em
+            ->getRepository('WallabagUserBundle:User')
+            ->createQueryBuilder('u')
+            ->where('u.username = :username')->setParameter('username', 'wallace')
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+
+        $this->assertNull($user);
+
+        $entries = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findByUser($loggedInUserId);
+
+        $this->assertEmpty($entries);
     }
 }

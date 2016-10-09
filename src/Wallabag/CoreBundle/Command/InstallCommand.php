@@ -77,7 +77,7 @@ class InstallCommand extends ContainerAwareCommand
 
         // testing if database driver exists
         $fulfilled = true;
-        $label = '<comment>PDO Driver</comment>';
+        $label = '<comment>PDO Driver (%s)</comment>';
         $status = '<info>OK!</info>';
         $help = '';
 
@@ -87,7 +87,7 @@ class InstallCommand extends ContainerAwareCommand
             $help = 'Database driver "'.$this->getContainer()->getParameter('database_driver').'" is not installed.';
         }
 
-        $rows[] = [$label, $status, $help];
+        $rows[] = [sprintf($label, $this->getContainer()->getParameter('database_driver')), $status, $help];
 
         // testing if connection to the database can be etablished
         $label = '<comment>Database connection</comment>';

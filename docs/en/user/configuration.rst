@@ -50,6 +50,8 @@ User information
 
 You can change your name, your email address and enable ``Two factor authentication``.
 
+If the wallabag instance has more than one enabled user, you can delete your account here. **Take care, we delete all your data**.
+
 Two factor authentication
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 

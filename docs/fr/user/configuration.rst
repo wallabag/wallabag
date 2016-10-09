@@ -51,6 +51,8 @@ Mon compte
 
 Vous pouvez ici modifier votre nom, votre adresse email et activer la ``Double authentification``.
 
+Si l'instance de wallabag compte plus d'un utilisateur actif, vous pouvez supprimer ici votre compte. **Attention, nous supprimons toutes vos données**.
+
 Double authentification (2FA)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

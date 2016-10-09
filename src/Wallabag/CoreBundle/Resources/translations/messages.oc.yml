@@ -88,6 +88,11 @@ config:
         name_label: 'Nom'
         email_label: 'Adreça de corrièl'
         twoFactorAuthentication_label: 'Dobla autentificacion'
+        delete:
+            # title: Delete my account (danger zone !)
+            # description: If you remove your account, ALL your articles, ALL your tags, ALL your annotations and your account will be PERMANENTLY removed (it can't be UNDONE). You'll then be logged out.
+            # confirm: Are you really sure? (it can't be UNDONE)
+            # button: Delete my account
     form_password:
         old_password_label: 'Senhal actual'
         new_password_label: 'Senhal novèl'
