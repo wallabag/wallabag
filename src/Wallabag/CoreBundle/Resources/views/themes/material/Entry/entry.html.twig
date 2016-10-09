@@ -225,7 +225,7 @@
             <a href="{{ entry.url|e }}" target="_blank" title="{{ 'entry.view.original_article'|trans }} : {{ entry.title|e }}" class="tool">
                 <i class="material-icons link">link</i> <span class="link">{{ entry.domainName|removeWww }}</span>
             </a>
-            <span class="tool"><i class="material-icons link">comment</i> <span class="link">{{ 'entry.view.annotations_on_the_entry'|transchoice(entry.annotations | length) }}</span>
+            <span class="tool"><i class="material-icons link">comment</i></span> <span class="link">{{ 'entry.view.annotations_on_the_entry'|transchoice(entry.annotations | length) }}</span>
             <div id="list">
                 {% for tag in entry.tags %}
                     <div class="chip">
