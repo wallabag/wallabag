@@ -195,7 +195,7 @@ entry:
                 description: 'Vises artiklen forkert?'
         edit_title: 'Rediger titel'
         original_article: 'original'
-        # annotations_on_the_entry: '{0} No annotations|{1} One annotation|]1,Inf[ %nbAnnotations% annotations'
+        # annotations_on_the_entry: '{0} No annotations|{1} One annotation|]1,Inf[ %count% annotations'
         created_at: 'Oprettelsesdato'
     new:
         page_title: 'Gem ny artikel'

@@ -54,7 +54,6 @@
                 {% endif %}
             </i>
 
-            {% set nbAnnotations = entry.annotations | length %}
             <span class="tool link"><i class="material-icons link">comment</i> {{ 'entry.view.annotations_on_the_entry'|transchoice(entry.annotations | length) }}</span>
             <aside class="tags">
                 <div class="card-entry-tags">
