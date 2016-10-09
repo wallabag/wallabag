@@ -33,19 +33,23 @@ class TagRepository extends EntityRepository
     }
 
     /**
-     * Find all tags with associated entries per user.
+     * Find all tags per user.
      *
      * @param int $userId
      *
      * @return array
      */
-    public function findAllTagsWithEntries($userId)
+    public function findAllTags($userId)
     {
         return $this->createQueryBuilder('t')
+            ->select('t.slug', 't.label', 't.id')
             ->leftJoin('t.entries', 'e')
             ->where('e.user = :userId')->setParameter('userId', $userId)
+            ->groupBy('t.slug')
+            ->addGroupBy('t.label')
+            ->addGroupBy('t.id')
             ->getQuery()
-            ->getResult();
+            ->getArrayResult();
     }
 
     /**

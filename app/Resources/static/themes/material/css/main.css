@@ -414,9 +414,9 @@ main ul.row {
   max-width: 50%;
 }
 
-.card .card-entry-labels li {
+.card .card-entry-labels li, .card-tag-labels li {
   margin: 10px 10px 10px auto;
-  padding: 5px 12px 5px 16px;
+  padding: 5px 12px 5px 16px !important;
   background-color: rgba(0, 151, 167, 0.85);
   border-radius: 0 3px 3px 0;
   color: #fff;
@@ -447,6 +447,7 @@ main ul.row {
 
 .card-entry-tags a,
 .card-entry-labels a,
+.card-tag-labels a,
 .card-entry-labels-hidden a,
 #list .chip a {
   text-decoration: none;
