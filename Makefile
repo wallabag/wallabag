@@ -1,10 +1,6 @@
 TMP_FOLDER=/tmp
 RELEASE_FOLDER=wllbg-release
 
-SSH_USER=framasoft_bag
-SSH_HOST=78.46.248.87
-SSH_PATH=/var/www/framabag.org/web
-
 ENV=prod
 
 help: ## Display this help menu
@@ -14,19 +10,10 @@ clean: ## Clear the application cache
 	@rm -rf var/cache/*
 
 install: ## Install wallabag with the latest version
-	TAG=$(git describe --tags $(git rev-list --tags --max-count=1))
-	@git checkout $(TAG)
-	@SYMFONY_ENV=$(ENV) composer install --no-dev -o --prefer-dist
-	@php bin/console wallabag:install --env=$(ENV)
+	@sh scripts/install.sh $(ENV)
 
 update: ## Update the wallabag installation to the latest version
-	@rm -rf var/cache/*
-	@git fetch origin
-	@git fetch --tags
-	TAG=$(git describe --tags $(git rev-list --tags --max-count=1))
-	@git checkout $(TAG)
-	@SYMFONY_ENV=prod composer install --no-dev -o --prefer-dist
-	@php bin/console cache:clear --env=prod
+	@sh scripts/update.sh $(ENV)
 
 run: ## Run the wallabag server
 	php bin/console server:run --env=$(ENV)
@@ -41,17 +28,7 @@ release: ## Create a package. Need a VERSION parameter (eg: `make release VERSIO
 ifndef VERSION
 	$(error VERSION is not set)
 endif
-	version=$(VERSION)
-	@rm -rf $(TMP_FOLDER)/$(RELEASE_FOLDER)
-	@mkdir $(TMP_FOLDER)/$(RELEASE_FOLDER)
-	@git clone git@github.com:wallabag/wallabag.git -b $(VERSION) $(TMP_FOLDER)/$(RELEASE_FOLDER)/$(VERSION)
-	@cd $(TMP_FOLDER)/$(RELEASE_FOLDER)/$(VERSION) && SYMFONY_ENV=$(ENV) composer up -n --no-dev
-	@cd $(TMP_FOLDER)/$(RELEASE_FOLDER)/$(VERSION) && php bin/console wallabag:install --env=$(ENV)
-	@cd $(TMP_FOLDER)/$(RELEASE_FOLDER) && tar czf wallabag-$(VERSION).tar.gz --exclude="var/cache/*" --exclude="var/logs/*" --exclude="var/sessions/*" --exclude=".git" $(VERSION)
-	@echo "MD5 checksum of the package for wallabag $(VERSION)"
-	@md5 $(TMP_FOLDER)/$(RELEASE_FOLDER)/wallabag-$(VERSION).tar.gz
-	@scp $(TMP_FOLDER)/$(RELEASE_FOLDER)/wallabag-$(VERSION).tar.gz $(SSH_USER)@$(SSH_HOST):$(SSH_PATH)
-	@rm -rf $(TMP_FOLDER)/$(RELEASE_FOLDER)
+	@sh scripts/release.sh $(VERSION) $(TMP_FOLDER) $(RELEASE_FOLDER) $(ENV)
 
 travis: ## Make some stuff for Travis-CI
 
