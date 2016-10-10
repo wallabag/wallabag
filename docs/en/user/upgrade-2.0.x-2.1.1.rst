@@ -14,6 +14,7 @@ Upgrade on a dedicated web server
     git fetch --tags
     git checkout 2.1.1 --force
     SYMFONY_ENV=prod composer install --no-dev -o --prefer-dist
+    php bin/console doctrine:migrations:migrate --env=prod
     php bin/console cache:clear --env=prod
 
 Upgrade on a shared hosting
@@ -25,7 +26,7 @@ Download the last release of wallabag:
 
 .. code-block:: bash
 
-    wget http://framabag.org/wallabag-release-2.1.1.tar.gz && tar xvf wallabag-release-2.0.8.tar.gz
+    wget http://framabag.org/wallabag-release-2.1.1.tar.gz && tar xvf wallabag-release-2.1.1.tar.gz
 
 (md5 hash of the 2.1.1 package: ``9584a3b60a2b2a4de87f536548caac93``)
 
@@ -35,8 +36,33 @@ Please check that your ``app/config/parameters.yml`` contains all the required p
 
 .. code-block:: yml
 
-
-
+    parameters:
+        database_driver: pdo_sqlite
+        database_host: 127.0.0.1
+        database_port: null
+        database_name: symfony
+        database_user: root
+        database_password: null
+        database_path: '%kernel.root_dir%/../data/db/wallabag.sqlite'
+        database_table_prefix: wallabag_
+        mailer_transport: smtp
+        mailer_host: 127.0.0.1
+        mailer_user: null
+        mailer_password: null
+        locale: en
+        secret: ovmpmAWXRCabNlMgzlzFXDYmCFfzGv
+        twofactor_auth: true
+        twofactor_sender: no-reply@wallabag.org
+        fosuser_registration: true
+        fosuser_confirmation: true
+        from_email: no-reply@wallabag.org
+        rss_limit: 50
+        rabbitmq_host: localhost
+        rabbitmq_port: 5672
+        rabbitmq_user: guest
+        rabbitmq_password: guest
+        redis_host: localhost
+        redis_port: 6379
 
 If you use SQLite, you must also copy your ``data/`` folder inside the new installation.
 
