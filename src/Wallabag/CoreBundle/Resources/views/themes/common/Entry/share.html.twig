@@ -30,11 +30,15 @@
         <meta property="og:title" content="{{ entry.title | raw }}" />
         <meta property="og:type" content="article" />
         <meta property="og:url" content="{{ app.request.uri }}" />
+        {% set picturePath = app.request.schemeAndHttpHost ~ asset('bundles/wallabagcore/themes/_global/img/logo-other_themes.png') %}
         {% if entry.previewPicture is not null %}
-        <meta property="og:image" content="{{ entry.previewPicture }}" />
-        {% else %}
-        <meta property="og:image" content="{{ app.request.schemeAndHttpHost }}{{ asset('bundles/wallabagcore/themes/_global/img/logo-other_themes.png') }}" />
+            {% set picturePath = entry.previewPicture %}
         {% endif %}
+        <meta property="og:image" content="{{ picturePath }}" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:image" content="{{ picturePath }}" />
+        <meta name="twitter:site" content="@wallabagapp" />
+        <meta name="twitter:title" content="{{ entry.title | raw }}" />
     </head>
     <body>
         <header>
