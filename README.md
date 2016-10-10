@@ -16,10 +16,10 @@ Please read [the documentation to see the wallabag requirements](http://doc.wall
 Then you can install wallabag by executing the following commands:
 
 ```
-    git clone https://github.com/wallabag/wallabag.git
-    cd wallabag
-    ./install.sh
-    php bin/console server:run --env=prod
+git clone https://github.com/wallabag/wallabag.git
+cd wallabag
+./install.sh
+php bin/console server:run --env=prod
 ```
 
 # License
