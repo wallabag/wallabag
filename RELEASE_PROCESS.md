@@ -38,6 +38,7 @@ make releas emaster /tmp wllbg-release prod
 - Update [the downloads page](https://github.com/wallabag/wallabag.org/blob/master/content/pages/download.md) on the website (MD5 sum, release date)
 - Update Dockerfile https://github.com/wallabag/docker (and create a new tag)
 - Update wallabag.org website (downloads, releases and new blog post)
+- Put the next patch version suffixed with `-dev` in `app/config/config.yml` (`wallabag_core.version`)
 - Drink a :beer:!
 
 ### `composer.lock`
