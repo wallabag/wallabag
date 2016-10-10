@@ -301,7 +301,7 @@ quickstart:
         title: 'Pels desvolopaires'
         description: 'Avèm tanben pensat als desvolopaires : Docker, API, traduccions, etc.'
         create_application: 'Crear vòstra aplicacion tèrça'
-        # use_docker: 'Use Docker to install wallabag'
+        use_docker: 'Utilizar Docker per installar wallabag'
     docs:
         title: 'Documentacion complèta'
         description: "I a un fum de fonccionalitats dins wallabag. Esitetz pas a legir lo manual per las conéisser e aprendre a las utilizar."
