@@ -6,6 +6,9 @@ Pré-requis
 
 wallabag est compatible avec PHP >= 5.5, PHP 7 inclus.
 
+.. note::
+Pour installer wallabag facilement, nous avons créé un ``Makefile``, vous avez donc besoin d'avoir installé l'outil ``make``.
+
 wallabag utilise un grand nombre de bibliothèques PHP pour fonctionner. Ces bibliothèques doivent être installées à l'aide d'un outil nommé Composer. Vous devez l'installer si ce n'est déjà fait et vous assurer que vous utilisez bien la version 1.2 (si vous avez déjà Composer, faite un ``composer selfupdate``).
 
 Installation de Composer :

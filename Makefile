@@ -1,7 +1,9 @@
 TMP_FOLDER=/tmp
 RELEASE_FOLDER=wllbg-release
 
-ENV=prod
+ifndef ENV
+	ENV=prod
+endif
 
 help: ## Display this help menu
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
@@ -15,14 +17,14 @@ install: ## Install wallabag with the latest version
 update: ## Update the wallabag installation to the latest version
 	@sh scripts/update.sh $(ENV)
 
-run: ## Run the wallabag server
-	php bin/console server:run --env=$(ENV)
+run: ## Run the wallabag built-in server
+	@php bin/console server:run --env=$(ENV)
 
 build: ## Run grunt
 	@grunt
 
 test: ## Launch wallabag testsuite
-	@ant prepare && phpunit -v
+	@ant prepare && vendor/phpunit/phpunit/phpunit -v
 
 release: ## Create a package. Need a VERSION parameter (eg: `make release VERSION=master`).
 ifndef VERSION
