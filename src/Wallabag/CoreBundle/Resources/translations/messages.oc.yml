@@ -46,7 +46,7 @@ footer:
         social: 'Social'
         powered_by: 'propulsat per'
         about: 'A prepaus'
-        stats: "Dempuèi %user_creation% avètz legit %nb_archives% articles. Es a l'entorn de %per_day% per jorn !"
+    stats: "Dempuèi %user_creation% avètz legit %nb_archives% articles. Es a l'entorn de %per_day% per jorn !"
 
 config:
     page_title: 'Configuracion'
@@ -301,6 +301,7 @@ quickstart:
         title: 'Pels desvolopaires'
         description: 'Avèm tanben pensat als desvolopaires : Docker, API, traduccions, etc.'
         create_application: 'Crear vòstra aplicacion tèrça'
+        # use_docker: 'Use Docker to install wallabag'
     docs:
         title: 'Documentacion complèta'
         description: "I a un fum de fonccionalitats dins wallabag. Esitetz pas a legir lo manual per las conéisser e aprendre a las utilizar."
