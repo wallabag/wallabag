@@ -29,7 +29,7 @@ git push origin release-$LAST_WALLABAG_RELEASE
 - Run these command to create the package:
 
 ```
-make releas emaster /tmp wllbg-release prod
+make release master /tmp wllbg-release prod
 ```
 
 - [Create the new release on GitHub](https://github.com/wallabag/wallabag/releases/new). You have to upload on this page the package.

@@ -35,7 +35,7 @@ After you have filled in your data, push the button Connection test and wait for
     :alt: Connection test with your wallabag data
     :align: center
 
-The connection test shall finish with success. If not, you need to fix this first until you proceed.
+The connection test should finish with success. If not, you need to fix this first until you proceed.
 
 .. image:: ../../img/user/android_configuration_connection_test_success.en.png
     :alt: Connection test successful
@@ -65,10 +65,10 @@ After hitting the save button, you get the following screen. The app proposes to
     :alt: Settings saved the first time
     :align: center
 
-Finally after the syncronisation finished successfully, you are presented the list of unread articles.
+Finally after the synchronisation finished successfully, you are presented to the list of unread articles.
 
 .. image:: ../../img/user/android_unread_feed_synced.en.png
-    :alt: Filled article list cause feeds successfully syncronized
+    :alt: Filled article list cause feeds successfully synchronized
     :align: center
 
 
