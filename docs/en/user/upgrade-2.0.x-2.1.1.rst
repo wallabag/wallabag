@@ -1,13 +1,11 @@
-Upgrading from 2.0.x to 2.1.y
-=============================
+Upgrade from 2.0.x to 2.1.1
+===========================
 
 .. warning::
 Before this migration, if you configured the Pocket import by adding your consumer key in Internal settings, please do a backup of it: you'll have to add it into the Config page after the upgrade.
 
 Upgrade on a dedicated web server
 ---------------------------------
-
-The last release is published on https://www.wallabag.org/pages/download-wallabag.html. In order to upgrade your wallabag installation and get the last version, run the following commands in you wallabag folder (replace ``2.1.1`` by the last release number):
 
 ::
 
@@ -28,25 +26,43 @@ Download the last release of wallabag:
 
 .. code-block:: bash
 
-    wget http://wllbg.org/latest-v2-package && tar xvf latest-v2-package
+    wget http://framabag.org/wallabag-release-2.1.1.tar.gz && tar xvf wallabag-release-2.1.1.tar.gz
 
 (md5 hash of the 2.1.1 package: ``9584a3b60a2b2a4de87f536548caac93``)
 
 Extract the archive in your wallabag folder and replace ``app/config/parameters.yml`` with yours.
 
-Please note that we added new parameters in this version. You have to edit ``app/config/parameters.yml`` by adding these lines (replace with your configuration) :
+Please check that your ``app/config/parameters.yml`` contains all the required parameters. Here is a default ``parameters.yml`` file. If you don't know which parameter you need to set, please leave the default one.
 
-.. code-block:: bash
+.. code-block:: yml
 
-    # RabbitMQ processing
-    rabbitmq_host: localhost
-    rabbitmq_port: 5672
-    rabbitmq_user: guest
-    rabbitmq_password: guest
-
-    # Redis processing
-    redis_host: localhost
-    redis_port: 6379
+    parameters:
+        database_driver: pdo_sqlite
+        database_host: 127.0.0.1
+        database_port: null
+        database_name: symfony
+        database_user: root
+        database_password: null
+        database_path: '%kernel.root_dir%/../data/db/wallabag.sqlite'
+        database_table_prefix: wallabag_
+        mailer_transport: smtp
+        mailer_host: 127.0.0.1
+        mailer_user: null
+        mailer_password: null
+        locale: en
+        secret: ovmpmAWXRCabNlMgzlzFXDYmCFfzGv
+        twofactor_auth: true
+        twofactor_sender: no-reply@wallabag.org
+        fosuser_registration: true
+        fosuser_confirmation: true
+        from_email: no-reply@wallabag.org
+        rss_limit: 50
+        rabbitmq_host: localhost
+        rabbitmq_port: 5672
+        rabbitmq_user: guest
+        rabbitmq_password: guest
+        redis_host: localhost
+        redis_port: 6379
 
 If you use SQLite, you must also copy your ``data/`` folder inside the new installation.
 

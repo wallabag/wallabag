@@ -36,7 +36,7 @@ Depuis Readability
 Exportez vos données de Readability
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Sur la page des outils (`https://www.readability.com/tools/<https://www.readability.com/tools/>`_), cliquez sur "Export your data" dans la section "Data Export". Vous allez recevoir un email avec un lien pour télécharger le json.
+Sur la page des outils (`https://www.readability.com/tools/ <https://www.readability.com/tools/>`_), cliquez sur "Export your data" dans la section "Data Export". Vous allez recevoir un email avec un lien pour télécharger le json.
 
 Importez vos données dans wallabag 2.x
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -52,7 +52,7 @@ Depuis Instapaper
 Exportez vos données de Instapaper
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Sur la page des paramètres (`https://www.instapaper.com/user<https://www.instapaper.com/user>`_), cliquez sur "Download .CSV file" dans la section "Export". Un fichier CSV se téléchargera (``instapaper-export.csv``).
+Sur la page des paramètres (`https://www.instapaper.com/user <https://www.instapaper.com/user>`_), cliquez sur "Download .CSV file" dans la section "Export". Un fichier CSV se téléchargera (``instapaper-export.csv``).
 
 Importez vos données dans wallabag 2.x
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

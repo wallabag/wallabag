@@ -6,7 +6,20 @@ Requirements
 
 wallabag is compatible with PHP >= 5.5, including PHP 7.
 
-You'll need the following extensions for wallabag to work. Some of these may already activated in your version of PHP, so you may not have to install all corresponding packages.
+.. note::
+To install wallabag easily, we create a ``Makefile``, so you need to have the ``make`` tool.
+
+wallabag uses a large number of PHP libraries in order to function. These libraries must be installed with a tool called Composer. You need to install it if you have not already done so and be sure to use the 1.2 version (if you already have Composer, run a ``composer selfupdate``).
+
+Install Composer:
+
+::
+
+    curl -s http://getcomposer.org/installer | php
+
+You can find specific instructions `here <https://getcomposer.org/doc/00-intro.md>`__.
+
+You'll also need the following extensions for wallabag to work. Some of these may already activated in your version of PHP, so you may not have to install all corresponding packages.
 
 - php-session
 - php-ctype
@@ -38,31 +51,18 @@ Installation
 On a dedicated web server (recommended way)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-wallabag uses a large number of PHP libraries in order to function. These libraries must be installed with a tool called Composer. You need to install it if you have not already done so and be sure to use the 1.2 version (if you already have Composer, run a ``composer selfupdate``).
-
-Install Composer:
-
-::
-
-    curl -s http://getcomposer.org/installer | php
-
-You can find specific instructions `here <https://getcomposer.org/doc/00-intro.md>`__.
-
 To install wallabag itself, you must run the following commands:
 
 ::
 
     git clone https://github.com/wallabag/wallabag.git
-    cd wallabag
-    git checkout 2.1.1 --force
-    SYMFONY_ENV=prod composer install --no-dev -o --prefer-dist
-    php bin/console wallabag:install --env=prod
+    cd wallabag && make install
 
 To start PHP's build-in server and test if everything did install correctly, you can do:
 
 ::
 
-    php bin/console server:run --env=prod
+    make run
 
 And access wallabag at http://yourserverip:8000
 
@@ -86,18 +86,18 @@ Execute this command to download and extract the latest package:
 
     wget http://wllbg.org/latest-v2-package && tar xvf latest-v2-package
 
-(md5 hash of the 2.1.1 package: ``9584a3b60a2b2a4de87f536548caac93``)
+You will find the `md5 hash of the latest package on our website <https://www.wallabag.org/pages/download-wallabag.html>`_.
 
 Now, read the following documentation to create your virtual host, then access your wallabag.
 If you changed the database configuration to use MySQL or PostgreSQL, you need to create a user via this command ``php bin/console wallabag:install --env=prod``.
 
 Installation with Docker
-------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 We provide you a Docker image to install wallabag easily. Have a look to our repository on `Docker Hub <https://hub.docker.com/r/wallabag/wallabag/>`__ to have more information.
 
 Command to launch container
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: bash
 
@@ -239,12 +239,12 @@ Rights access to the folders of the project
 Test environment
 ~~~~~~~~~~~~~~~~
 
-When we just want to test wallabag, we just run the command ``php bin/console server:run --env=prod`` to start our wallabag instance and everything will go smoothly because the user who started the project can access to the current folder naturally, without any problem.
+When we just want to test wallabag, we just run the command ``make run`` to start our wallabag instance and everything will go smoothly because the user who started the project can access to the current folder naturally, without any problem.
 
 Production environment
 ~~~~~~~~~~~~~~~~~~~~~~
 
-As soon as we use Apache or Nginx to access to our wallabag instance, and not from the command  ``php bin/console server:run --env=prod`` to start it, we should take care to grant the good rights on the good folders to keep safe all the folders of the project.
+As soon as we use Apache or Nginx to access to our wallabag instance, and not from the command  ``make run`` to start it, we should take care to grant the good rights on the good folders to keep safe all the folders of the project.
 
 To do so, the folder name, known as ``DocumentRoot`` (for apache) or ``root`` (for Nginx), has to be absolutely accessible by the Apache/Nginx user. Its name is generally ``www-data``, ``apache`` or ``nobody`` (depending on linux system used).
 
