@@ -17,9 +17,8 @@ Then you can install wallabag by executing the following commands:
 
 ```
 git clone https://github.com/wallabag/wallabag.git
-cd wallabag
-./install.sh
-php bin/console server:run --env=prod
+cd wallabag && make install
+make run
 ```
 
 # License

@@ -56,14 +56,13 @@ To install wallabag itself, you must run the following commands:
 ::
 
     git clone https://github.com/wallabag/wallabag.git
-    cd wallabag
-    ./install.sh
+    cd wallabag && make install
 
 To start PHP's build-in server and test if everything did install correctly, you can do:
 
 ::
 
-    php bin/console server:run --env=prod
+    make run
 
 And access wallabag at http://yourserverip:8000
 
@@ -240,12 +239,12 @@ Rights access to the folders of the project
 Test environment
 ~~~~~~~~~~~~~~~~
 
-When we just want to test wallabag, we just run the command ``php bin/console server:run --env=prod`` to start our wallabag instance and everything will go smoothly because the user who started the project can access to the current folder naturally, without any problem.
+When we just want to test wallabag, we just run the command ``make run`` to start our wallabag instance and everything will go smoothly because the user who started the project can access to the current folder naturally, without any problem.
 
 Production environment
 ~~~~~~~~~~~~~~~~~~~~~~
 
-As soon as we use Apache or Nginx to access to our wallabag instance, and not from the command  ``php bin/console server:run --env=prod`` to start it, we should take care to grant the good rights on the good folders to keep safe all the folders of the project.
+As soon as we use Apache or Nginx to access to our wallabag instance, and not from the command  ``make run`` to start it, we should take care to grant the good rights on the good folders to keep safe all the folders of the project.
 
 To do so, the folder name, known as ``DocumentRoot`` (for apache) or ``root`` (for Nginx), has to be absolutely accessible by the Apache/Nginx user. Its name is generally ``www-data``, ``apache`` or ``nobody`` (depending on linux system used).
 

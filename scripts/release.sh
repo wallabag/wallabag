@@ -1,4 +1,6 @@
 #! /usr/bin/env bash
+# You can execute this file to create a new package for wallabag
+# eg: `sh release.sh master /tmp wllbg-release prod`
 
 VERSION=$1
 TMP_FOLDER=$2

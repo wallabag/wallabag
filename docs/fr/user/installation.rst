@@ -54,14 +54,13 @@ Pour installer wallabag, vous devez exécuter ces commandes :
 ::
 
     git clone https://github.com/wallabag/wallabag.git
-    cd wallabag
-    ./install.sh
+    cd wallabag && make install
 
 Pour démarrer le serveur interne à php et vérifier que tout s'est installé correctement, vous pouvez exécuter :
 
 ::
 
-    php bin/console server:run --env=prod
+    make run
 
 Et accéder wallabag à l'adresse http://lipdevotreserveur:8000
 

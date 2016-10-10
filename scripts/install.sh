@@ -1,4 +1,6 @@
 #! /usr/bin/env bash
+# You can execute this file to install wallabag
+# eg: `sh install.sh prod`
 
 ENV=$1
 TAG=$(git describe --tags $(git rev-list --tags --max-count=1))

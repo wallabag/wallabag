@@ -15,23 +15,22 @@ During this documentation, we assume the release is `$LAST_WALLABAG_RELEASE`.
 
 - Run these commands to create the tag:
 
- ```
- git checkout master
- git pull origin master
- git checkout -b release-$LAST_WALLABAG_RELEASE
- SYMFONY_ENV=prod composer up --no-dev
- git add --force composer.lock
- git commit -m "Release wallabag $LAST_WALLABAG_RELEASE"
- git push origin release-$LAST_WALLABAG_RELEASE
- ```
+```
+git checkout master
+git pull origin master
+git checkout -b release-$LAST_WALLABAG_RELEASE
+SYMFONY_ENV=prod composer up --no-dev
+git add --force composer.lock
+git commit -m "Release wallabag $LAST_WALLABAG_RELEASE"
+git push origin release-$LAST_WALLABAG_RELEASE
+```
 
 - Create a new pull request with this title `DON'T MERGE Release wallabag $LAST_WALLABAG_RELEASE`. This pull request is used to launch builds on Travis-CI.
-- Run these commands to create the package (you need to clone `https://github.com/wallabag/releaser`) :
+- Run these command to create the package:
 
- ```
- cd releaser/
- ./releaser.sh $LAST_WALLABAG_RELEASE
- ```
+```
+make releas emaster /tmp wllbg-release prod
+```
 
 - [Create the new release on GitHub](https://github.com/wallabag/wallabag/releases/new). You have to upload on this page the package.
 - Delete the `release-$LAST_WALLABAG_RELEASE` branch and close the pull request (**DO NOT MERGE IT**).

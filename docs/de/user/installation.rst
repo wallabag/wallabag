@@ -57,14 +57,13 @@ Um wallabag selbst zu installieren, musst du die folgenden Kommandos ausführen:
 ::
 
     git clone https://github.com/wallabag/wallabag.git
-    cd wallabag
-    ./install.sh
+    cd wallabag && make install
 
 Um PHPs eingebauten Server zu starten und zu testen, ob alles korrekt installiert wurde, kannst du folgendes Kommando ausführen:
 
 ::
 
-    php bin/console server:run --env=prod
+    make run
 
 und wallabag unter http://deineserverip:8000 erreichen.
 
