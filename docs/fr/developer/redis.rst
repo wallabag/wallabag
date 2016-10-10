@@ -35,6 +35,10 @@ Modifiez votre fichier ``parameters.yml`` pour éditer la configuration Redis. C
     redis_host: localhost
     redis_port: 6379
 
+Activer Redis dans wallabag
+---------------------------
+
+Dans les paramètres internes, section **Import**, activez Redis (avec la valeur 1).
 
 Démarrer les clients Redis
 --------------------------

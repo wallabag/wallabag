@@ -46,6 +46,10 @@ Modifiez votre fichier ``parameters.yml`` pour éditer la configuration RabbitMQ
     rabbitmq_user: guest
     rabbitmq_password: guest
 
+Activer RabbitMQ dans wallabag
+------------------------------
+
+Dans les paramètres internes, section **Import**, activez RabbitMQ (avec la valeur 1).
 
 Démarrer les clients RabbitMQ
 -----------------------------

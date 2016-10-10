@@ -35,6 +35,10 @@ Edit your ``parameters.yml`` file to edit Redis configuration. The default one s
     redis_host: localhost
     redis_port: 6379
 
+Enable Redos in wallabag
+------------------------
+
+In internal settings, in the **Import** section, enable Redis (with the value 1).
 
 Launch Redis consumer
 ---------------------

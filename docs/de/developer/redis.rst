@@ -35,6 +35,10 @@ Bearbeite die Datei ``parameters.yml``, um die RabbitMQ Konfiguration einzuricht
     redis_host: localhost
     redis_port: 6379
 
+Enable Redis in wallabag
+------------------------
+
+In internal settings, in the **Import** section, enable Redis (with the value 1).
 
 Starte den Redis Consumer
 -------------------------
