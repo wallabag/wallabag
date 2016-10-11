@@ -200,7 +200,7 @@ entry:
                 description: 'Does this article appear wrong?'
         edit_title: 'Edit title'
         original_article: 'original'
-        annotations_on_the_entry: '{0} No annotations|{1} One annotation|]1,Inf[ %nbAnnotations% annotations'
+        annotations_on_the_entry: '{0} No annotations|{1} One annotation|]1,Inf[ %count% annotations'
         created_at: 'Creation date'
     new:
         page_title: 'Save new entry'

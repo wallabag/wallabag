@@ -54,6 +54,7 @@ class ChromeControllerTest extends WallabagCoreTestCase
 
     public function testImportChromeWithRedisEnabled()
     {
+        $this->checkRedis();
         $this->logInAs('admin');
         $client = $this->getClient();
         $client->getContainer()->get('craue_config')->set('import_with_redis', 1);

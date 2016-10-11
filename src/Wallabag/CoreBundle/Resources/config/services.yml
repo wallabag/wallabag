@@ -29,7 +29,7 @@ services:
         arguments:
             - "@doctrine"
 
-    wallabag_core.table_prefix_subscriber:
+    wallabag_core.subscriber.table_prefix:
         class: Wallabag\CoreBundle\Subscriber\TablePrefixSubscriber
         arguments:
             - "%database_table_prefix%"

@@ -200,7 +200,7 @@ entry:
                 description: '¿Este artículo no se muestra bien?'
         edit_title: 'Modificar el título'
         original_article: 'original'
-        annotations_on_the_entry: '{0} Sin anotaciones|{1} Una anotación|]1,Inf[ %nbAnnotations% anotaciones'
+        annotations_on_the_entry: '{0} Sin anotaciones|{1} Una anotación|]1,Inf[ %count% anotaciones'
         created_at: 'Fecha de creación'
     new:
         page_title: 'Guardar un nuevo artículo'

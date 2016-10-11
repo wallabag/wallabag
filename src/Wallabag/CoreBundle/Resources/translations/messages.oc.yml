@@ -200,7 +200,7 @@ entry:
                 description: "Marca mal la presentacion d'aqueste article ?"
         edit_title: 'Modificar lo títol'
         original_article: 'original'
-        annotations_on_the_entry: "{0} Pas cap d'anotacion|{1} Una anotacion|]1,Inf[ %nbAnnotations% anotacions"
+        annotations_on_the_entry: "{0} Pas cap d'anotacion|{1} Una anotacion|]1,Inf[ %count% anotacions"
         created_at: 'Data de creacion'
     new:
         page_title: 'Enregistrar un novèl article'

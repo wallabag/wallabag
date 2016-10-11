@@ -27,7 +27,8 @@ class WallabagRestController extends FOSRestController
      *
      * @ApiDoc(
      *       parameters={
-     *          {"name"="url", "dataType"="string", "required"=true, "format"="An url", "description"="Url to check if it exists"}
+     *          {"name"="url", "dataType"="string", "required"=true, "format"="An url", "description"="Url to check if it exists"},
+     *          {"name"="urls", "dataType"="string", "required"=false, "format"="An array of urls (?urls[]=http...&urls[]=http...)", "description"="Urls (as an array) to check if it exists"}
      *       }
      * )
      *
@@ -37,6 +38,25 @@ class WallabagRestController extends FOSRestController
     {
         $this->validateAuthentication();
 
+        $urls = $request->query->get('urls', []);
+
+        // handle multiple urls first
+        if (!empty($urls)) {
+            $results = [];
+            foreach ($urls as $url) {
+                $res = $this->getDoctrine()
+                    ->getRepository('WallabagCoreBundle:Entry')
+                    ->findByUrlAndUserId($url, $this->getUser()->getId());
+
+                $results[$url] = false === $res ? false : true;
+            }
+
+            $json = $this->get('serializer')->serialize($results, 'json');
+
+            return (new JsonResponse())->setJson($json);
+        }
+
+        // let's see if it is a simple url?
         $url = $request->query->get('url', '');
 
         if (empty($url)) {
@@ -367,7 +387,7 @@ class WallabagRestController extends FOSRestController
 
         $tags = $this->getDoctrine()
             ->getRepository('WallabagCoreBundle:Tag')
-            ->findAllTagsWithEntries($this->getUser()->getId());
+            ->findAllTags($this->getUser()->getId());
 
         $json = $this->get('serializer')->serialize($tags, 'json');
 
@@ -399,6 +419,8 @@ class WallabagRestController extends FOSRestController
         $this->getDoctrine()
             ->getRepository('WallabagCoreBundle:Entry')
             ->removeTag($this->getUser()->getId(), $tag);
+
+        $this->cleanOrphanTag($tag);
 
         $json = $this->get('serializer')->serialize($tag, 'json');
 
@@ -440,6 +462,8 @@ class WallabagRestController extends FOSRestController
             ->getRepository('WallabagCoreBundle:Entry')
             ->removeTags($this->getUser()->getId(), $tags);
 
+        $this->cleanOrphanTag($tags);
+
         $json = $this->get('serializer')->serialize($tags, 'json');
 
         return (new JsonResponse())->setJson($json);
@@ -464,6 +488,8 @@ class WallabagRestController extends FOSRestController
             ->getRepository('WallabagCoreBundle:Entry')
             ->removeTag($this->getUser()->getId(), $tag);
 
+        $this->cleanOrphanTag($tag);
+
         $json = $this->get('serializer')->serialize($tag, 'json');
 
         return (new JsonResponse())->setJson($json);
@@ -483,6 +509,28 @@ class WallabagRestController extends FOSRestController
         $json = $this->get('serializer')->serialize($version, 'json');
 
         return (new JsonResponse())->setJson($json);
+    }
+
+    /**
+     * Remove orphan tag in case no entries are associated to it.
+     *
+     * @param Tag|array $tags
+     */
+    private function cleanOrphanTag($tags)
+    {
+        if (!is_array($tags)) {
+            $tags = [$tags];
+        }
+
+        $em = $this->getDoctrine()->getManager();
+
+        foreach ($tags as $tag) {
+            if (count($tag->getEntries()) === 0) {
+                $em->remove($tag);
+            }
+        }
+
+        $em->flush();
     }
 
     /**

@@ -63,10 +63,12 @@ class TagController extends Controller
         $entry->removeTag($tag);
         $em = $this->getDoctrine()->getManager();
         $em->flush();
-        if (count($tag->getEntries()) == 0) {
+
+        // remove orphan tag in case no entries are associated to it
+        if (count($tag->getEntries()) === 0) {
             $em->remove($tag);
+            $em->flush();
         }
-        $em->flush();
 
         $redirectUrl = $this->get('wallabag_core.helper.redirect')->to($request->headers->get('referer'));
 
@@ -84,10 +86,25 @@ class TagController extends Controller
     {
         $tags = $this->getDoctrine()
             ->getRepository('WallabagCoreBundle:Tag')
-            ->findAllTagsWithEntries($this->getUser()->getId());
+            ->findAllTags($this->getUser()->getId());
+
+        $flatTags = [];
+
+        foreach ($tags as $key => $tag) {
+            $nbEntries = $this->getDoctrine()
+                ->getRepository('WallabagCoreBundle:Entry')
+                ->countAllEntriesByUserIdAndTagId($this->getUser()->getId(), $tag['id']);
+
+            $flatTags[] = [
+                'id' => $tag['id'],
+                'label' => $tag['label'],
+                'slug' => $tag['slug'],
+                'nbEntries' => $nbEntries,
+            ];
+        }
 
         return $this->render('WallabagCoreBundle:Tag:tags.html.twig', [
-            'tags' => $tags,
+            'tags' => $flatTags,
         ]);
     }
 
