@@ -339,7 +339,8 @@ class EntryRepository extends EntityRepository
     public function removeAllByUserId($userId)
     {
         $this->getEntityManager()
-            ->createQuery('DELETE FROM Wallabag\CoreBundle\Entity\Entry e WHERE e.user = '.$userId)
+            ->createQuery('DELETE FROM Wallabag\CoreBundle\Entity\Entry e WHERE e.user = :userId')
+            ->setParameter('userId', $userId)
             ->execute();
     }
 }

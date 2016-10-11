@@ -91,15 +91,15 @@ config:
         delete:
             title: Supprimer mon compte (attention danger !)
             description: Si vous confirmez la suppression de votre compte, TOUS les articles, TOUS les tags, TOUTES les annotations et votre compte seront DÉFINITIVEMENT supprimé (c'est IRRÉVERSIBLE). Vous serez ensuite déconnecté.
-            confirm: Vous êtes vraiment sûr ? (C'EST IRREVERSIBLE)
+            confirm: Vous êtes vraiment sûr ? (C'EST IRRÉVERSIBLE)
             button: 'Supprimer mon compte'
     reset:
         title: Réinitialisation (attention danger !)
-        description: En cliquant sur les boutons ci-dessous vous avez la possibilité de supprimer certaines informations de votre compte. Attention, ces actions sont IRREVERSIBLES !
+        description: En cliquant sur les boutons ci-dessous vous avez la possibilité de supprimer certaines informations de votre compte. Attention, ces actions sont IRRÉVERSIBLES !
         annotations: Supprimer TOUTES les annotations
         tags: Supprimer TOUS les tags
         entries: Supprimer TOUS les articles
-        confirm: Êtes-vous vraiment vraiment sûr ? (C'EST IRREVERSIBLE)
+        confirm: Êtes-vous vraiment vraiment sûr ? (C'EST IRRÉVERSIBLE)
     form_password:
         old_password_label: 'Mot de passe actuel'
         new_password_label: 'Nouveau mot de passe'
@@ -398,7 +398,7 @@ developer:
         field_grant_types: 'Type de privilège accordé'
         no_client: 'Aucun client pour le moment'
     remove:
-        warn_message_1: 'Vous avez la possibilité de supprimer le client %name%. Cette action est IRREVERSIBLE !'
+        warn_message_1: 'Vous avez la possibilité de supprimer le client %name%. Cette action est IRRÉVERSIBLE !'
         warn_message_2: "Si vous supprimez le client %name%, toutes les applications qui l'utilisaient ne fonctionneront plus avec votre compte wallabag."
         action: 'Supprimer le client %name%'
     client:
@@ -474,7 +474,7 @@ flashes:
             entries_reset: Articles supprimés
     entry:
         notice:
-            entry_already_saved: 'Article déjà sauvergardé le %date%'
+            entry_already_saved: 'Article déjà sauvegardé le %date%'
             entry_saved: 'Article enregistré'
             entry_saved_failed: 'Article enregistré mais impossible de récupérer le contenu'
             entry_updated: 'Article mis à jour'

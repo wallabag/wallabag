@@ -20,7 +20,7 @@ parameters:
     database_table_prefix: wallabag_
     database_socket: null
     # with MySQL, use "utf8mb4" if got problem with content with emojis
-    database_charset: utf8
+    database_charset: utf8mb4
 
     mailer_transport: smtp
     mailer_host: 127.0.0.1

@@ -34,6 +34,9 @@ class TagRepository extends EntityRepository
 
     /**
      * Find all tags per user.
+     * Instead of just left joined on the Entry table, we select only id and group by id to avoid tag multiplication in results.
+     * Once we have all tags id, we can safely request them one by one.
+     * This'll still be fastest than the previous query.
      *
      * @param int $userId
      *
@@ -41,32 +44,20 @@ class TagRepository extends EntityRepository
      */
     public function findAllTags($userId)
     {
-        return $this->createQueryBuilder('t')
-            ->select('t.slug', 't.label', 't.id')
+        $ids = $this->createQueryBuilder('t')
+            ->select('t.id')
             ->leftJoin('t.entries', 'e')
             ->where('e.user = :userId')->setParameter('userId', $userId)
-            ->groupBy('t.slug')
-            ->addGroupBy('t.label')
-            ->addGroupBy('t.id')
+            ->groupBy('t.id')
             ->getQuery()
             ->getArrayResult();
-    }
 
-    /**
-     * Find all tags.
-     *
-     * @param int $userId
-     *
-     * @return array
-     */
-    public function findAllTags($userId)
-    {
-        return $this->createQueryBuilder('t')
-            ->select('t')
-            ->leftJoin('t.entries', 'e')
-            ->where('e.user = :userId')->setParameter('userId', $userId)
-            ->getQuery()
-            ->getResult();
+        $tags = [];
+        foreach ($ids as $id) {
+            $tags[] = $this->find($id);
+        }
+
+        return $tags;
     }
 
     /**

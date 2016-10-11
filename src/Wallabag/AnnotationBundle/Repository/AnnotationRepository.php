@@ -116,7 +116,8 @@ class AnnotationRepository extends EntityRepository
     public function removeAllByUserId($userId)
     {
         $this->getEntityManager()
-            ->createQuery('DELETE FROM Wallabag\AnnotationBundle\Entity\Annotation a WHERE a.user = '.$userId)
+            ->createQuery('DELETE FROM Wallabag\AnnotationBundle\Entity\Annotation a WHERE a.user = :userId')
+            ->setParameter('userId', $userId)
             ->execute();
     }
 }
