@@ -130,6 +130,8 @@ fos_rest:
 nelmio_api_doc:
     sandbox:
         enabled: false
+    cache:
+        enabled: true
     name: wallabag API documentation
 
 nelmio_cors:
