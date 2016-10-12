@@ -89,10 +89,10 @@ config:
         email_label: 'Adres email'
         twoFactorAuthentication_label: 'Autoryzacja dwuetapowa'
         delete:
-            # title: Delete my account (danger zone !)
-            # description: If you remove your account, ALL your articles, ALL your tags, ALL your annotations and your account will be PERMANENTLY removed (it can't be UNDONE). You'll then be logged out.
-            # confirm: Are you really sure? (it can't be UNDONE)
-            # button: Delete my account
+            title: Usuń moje konto (niebezpieczna strefa !)
+            description: Jeżeli usuniesz swoje konto, wszystkie twoje artykuły, tagi, adnotacje, oraz konto zostaną trwale usunięte (operacja jest NIEODWRACALNA). Następnie zostaniesz wylogowany.
+            confirm: Jesteś pewien? (tej operacji NIE MOŻNA cofnąć)
+            button: Usuń moje konto
     form_password:
         old_password_label: 'Stare hasło'
         new_password_label: 'Nowe hasło'
