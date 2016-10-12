@@ -2,7 +2,8 @@ Upgrade from 2.0.x to 2.1.1
 ===========================
 
 .. warning::
-Before this migration, if you configured the Pocket import by adding your consumer key in Internal settings, please do a backup of it: you'll have to add it into the Config page after the upgrade.
+
+    Before this migration, if you configured the Pocket import by adding your consumer key in Internal settings, please do a backup of it: you'll have to add it into the Config page after the upgrade.
 
 Upgrade on a dedicated web server
 ---------------------------------
