@@ -9,9 +9,9 @@ What is the meaning of the parameters?
    "database_name", "symfony", "name of your database"
    "database_user", "root", "user that can write to this database"
    "database_password", "~", "password of that user"
-   "database_path", "``""%kernel.root_dir%/../data/db/wallabag.sqlite""``", "only for SQLite, define where to put the database file. Leave it for other database"
+   "database_path", "``""%kernel.root_dir%/../data/db/wallabag.sqlite""``", "only for SQLite, define where to put the database file. Leave it empty for other database"
    "database_table_prefix", "wallabag_", "all wallabag's tables will be prefixed with that string. You can include a ``_`` for clarity"
-   "database_socket", "null", "If your database is using a socket instead of tcp, put the path of the socket (other connection parameters will then be ignored"
+   "database_socket", "null", "If your database is using a socket instead of tcp, put the path of the socket (other connection parameters will then be ignored)"
 
 .. csv-table:: Configuration to send emails from wallabag
    :header: "name", "default", "description"
@@ -38,7 +38,7 @@ What is the meaning of the parameters?
 
    "rabbitmq_host", "localhost", "Host of your RabbitMQ"
    "rabbitmq_port", "5672", "Port of your RabbitMQ"
-   "rabbitmq_user", "guest", "Usee that can read queues"
+   "rabbitmq_user", "guest", "User that can read queues"
    "rabbitmq_password", "guest", "Password of that user"
 
 .. csv-table:: Redis configuration
