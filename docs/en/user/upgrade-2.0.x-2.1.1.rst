@@ -65,6 +65,8 @@ Please check that your ``app/config/parameters.yml`` contains all the required p
         redis_host: localhost
         redis_port: 6379
 
+You can find `here a documentation about parameters <http://doc.wallabag.org/en/master/user/parameters.html>`_.
+
 If you use SQLite, you must also copy your ``data/`` folder inside the new installation.
 
 Empty ``var/cache`` folder.
