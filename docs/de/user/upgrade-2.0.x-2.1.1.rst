@@ -66,7 +66,7 @@ Bitte beachte, dass wir in dieser Version neue Parameter hinzugefügt haben. Du 
         redis_host: localhost
         redis_port: 6379
 
-Du kannst `hier eine Dokumentation über die Parameter finden<http://doc.wallabag.org/en/master/user/parameters.html>`_.
+Du kannst `hier eine Dokumentation über die Parameter finden <http://doc.wallabag.org/en/master/user/parameters.html>`_.
 
 Wenn du SQLite nutzt, musst auch das ``data/`` Verzeichnis in die neue Installation kopieren.
 
