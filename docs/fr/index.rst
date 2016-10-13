@@ -45,6 +45,7 @@ La documentation est disponible dans d'autres langues :
    user/share
    user/filters
    user/tags
+   user/parameters
 
 .. _dev-docs:
 

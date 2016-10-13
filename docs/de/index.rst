@@ -44,6 +44,7 @@ Die Dokumentation ist in anderen Sprachen verfügbar :
    user/filters
    user/tags
    user/android
+   user/parameters
 
 .. _dev-docs:
 
