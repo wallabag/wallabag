@@ -14,6 +14,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\AnnotationBundle\Entity\Annotation;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class WallabagRestController extends FOSRestController
 {
