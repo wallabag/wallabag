@@ -102,7 +102,7 @@ Wenn *readingTime >= 5 AND domainName = "github.com"*, dann tagge als *lange zu 
 Welche Variablen und Operatoren kann ich zum Regeln schreiben nutzen?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Die folgenden Variabel und Operatoren können genutzt werden, um Tagging-Regeln zu erstellen:
+Die folgenden Variabel und Operatoren können genutzt werden, um Tagging-Regeln zu erstellen (be careful, for some values, you need to add quotes, for example ``language = "en"``):
 
 ===========  ==============================================  ========  ==========
 Variable     Bedeutung                                       Operator  Bedeutung
