@@ -9,7 +9,7 @@ use Wallabag\CoreBundle\Entity\Entry;
 class AnnotationControllerTest extends WallabagAnnotationTestCase
 {
     /**
-     * Test fetching annotations for an entry
+     * Test fetching annotations for an entry.
      */
     public function testGetAnnotations()
     {
@@ -33,7 +33,7 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
     }
 
     /**
-     * Test creating an annotation for an entry
+     * Test creating an annotation for an entry.
      */
     public function testSetAnnotation()
     {
@@ -72,7 +72,7 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
     }
 
     /**
-     * Test editing an existing annotation
+     * Test editing an existing annotation.
      */
     public function testEditAnnotation()
     {
@@ -107,7 +107,7 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
     }
 
     /**
-     * Test deleting an annotation
+     * Test deleting an annotation.
      */
     public function testDeleteAnnotation()
     {
