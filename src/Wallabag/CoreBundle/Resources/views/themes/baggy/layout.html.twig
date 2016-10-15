@@ -23,12 +23,12 @@
 {% block menu %}
     <button id="menu" class="icon icon-menu desktopHide"><span>Menu</span></button>
     <ul id="links" class="links">
-        <li><a href="{{ path('unread') }}">{{ 'menu.left.unread'|trans }}</a></li>
-        <li><a href="{{ path('starred') }}">{{ 'menu.left.starred'|trans }}</a></li>
-        <li><a href="{{ path('archive') }}">{{ 'menu.left.archive'|trans }}</a></li>
-        <li><a href="{{ path('all') }}">{{ 'menu.left.all_articles'|trans }}</a></li>
-        <li><a href="{{ path('tag') }}">{{ 'menu.left.tags'|trans }}</a></li>
-        <li><a href="{{ path('new') }}">{{ 'menu.left.save_link'|trans }}</a></li>
+        <li class="menu unread"><a href="{{ path('unread') }}">{{ 'menu.left.unread'|trans }}</a></li>
+        <li class="menu starred"><a href="{{ path('starred') }}">{{ 'menu.left.starred'|trans }}</a></li>
+        <li class="menu archive"><a href="{{ path('archive') }}">{{ 'menu.left.archive'|trans }}</a></li>
+        <li class="menu all"><a href="{{ path('all') }}">{{ 'menu.left.all_articles'|trans }}</a></li>
+        <li class="menu tag"><a href="{{ path('tag') }}">{{ 'menu.left.tags'|trans }}</a></li>
+        <li class="menu new"><a href="{{ path('new') }}">{{ 'menu.left.save_link'|trans }}</a></li>
         <!--<li style="position: relative;"><a href="javascript: void(null);" id="search">{{ 'menu.left.search'|trans }}</a>
             <div id="search-form" class="messages info popup-form">
                 <form method="get" action="index.php">
@@ -40,16 +40,16 @@
                 </form>
             </div>
         </li>-->
-        <li><a href="{{ path('config') }}">{{ 'menu.left.config'|trans }}</a></li>
+        <li class="menu config"><a href="{{ path('config') }}">{{ 'menu.left.config'|trans }}</a></li>
         {% if is_granted('ROLE_SUPER_ADMIN') %}
-            <li><a href="{{ path('user_index') }}">{{ 'menu.left.users_management'|trans }}</a></li>
-            <li><a href="{{ path('craue_config_settings_modify') }}">{{ 'menu.left.internal_settings'|trans }}</a></li>
+            <li class="menu users"><a href="{{ path('user_index') }}">{{ 'menu.left.users_management'|trans }}</a></li>
+            <li class="menu internal"><a href="{{ path('craue_config_settings_modify') }}">{{ 'menu.left.internal_settings'|trans }}</a></li>
         {% endif %}
-        <li><a href="{{ path('import') }}">{{ 'menu.left.import'|trans }}</a></li>
-        <li><a href="{{ path('howto') }}">{{ 'menu.left.howto'|trans }}</a></li>
-        <li><a href="{{ path('developer') }}">{{ 'menu.left.developer'|trans }}</a></li>
-        <li><a href="{{ path('about') }}">{{ 'footer.wallabag.about'|trans }}</a></li>
-        <li><a class="icon icon-power" href="{{ path('fos_user_security_logout') }}">{{ 'menu.left.logout'|trans }}</a></li>
+        <li class="menu import"><a href="{{ path('import') }}">{{ 'menu.left.import'|trans }}</a></li>
+        <li class="menu howto"><a href="{{ path('howto') }}">{{ 'menu.left.howto'|trans }}</a></li>
+        <li class="menu developer"><a href="{{ path('developer') }}">{{ 'menu.left.developer'|trans }}</a></li>
+        <li class="menu about"><a href="{{ path('about') }}">{{ 'footer.wallabag.about'|trans }}</a></li>
+        <li class="menu logout"><a class="icon icon-power" href="{{ path('fos_user_security_logout') }}">{{ 'menu.left.logout'|trans }}</a></li>
     </ul>
 {% endblock %}
 
