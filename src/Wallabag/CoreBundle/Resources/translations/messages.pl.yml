@@ -195,7 +195,7 @@ entry:
                 description: 'Czy ten artykuł wygląda źle?'
         edit_title: 'Edytuj tytuł'
         original_article: 'oryginalny'
-        annotations_on_the_entry: '{0} Nie ma adnotacji |{1} Jedna adnotacja |]1,Inf[ %nbAnnotations% adnotacji'
+        annotations_on_the_entry: '{0} Nie ma adnotacji |{1} Jedna adnotacja |]1,Inf[ %count% adnotacji'
         created_at: 'Czas stworzenia'
     new:
         page_title: 'Zapisz nowy wpis'
@@ -208,6 +208,8 @@ entry:
         url_label: 'Adres URL'
         is_public_label: 'Publiczny'
         save_label: 'Zapisz'
+    public:
+        shared_by_wallabag: "Ten artykuł został udostępniony przez <a href='%wallabag_instance%'>wallabag</a>"
 
 about:
     page_title: 'O nas'
@@ -284,7 +286,7 @@ quickstart:
          import: 'Skonfigurować import'
     first_steps:
         title: 'Pierwsze kroki'
-        description: "Teraz wallabag jest poprawnie skonfigurowany, więc czas zarchiwizować Internet. Klinknij w prawym górnym rogu na znak +, aby dodać link" 
+        description: "Teraz wallabag jest poprawnie skonfigurowany, więc czas zarchiwizować Internet. Klinknij w prawym górnym rogu na znak +, aby dodać link"
         new_article: 'Zapisz swój pierwszy artukuł'
         unread_articles: 'I sklasyfikuj go!'
     migrate:
@@ -462,7 +464,7 @@ flashes:
             entry_saved_failed: 'Wpis zapisany, ale wystąpił bład pobierania treści'
             entry_updated: 'Wpis zaktualizowany'
             entry_reloaded: 'Wpis ponownie załadowany'
-            entry_reload_failed: 'Wpis ponownie załadowany, ale wystąpił bład pobierania treści'
+            entry_reloaded_failed: 'Wpis ponownie załadowany, ale wystąpił bład pobierania treści'
             entry_archived: 'Wpis dodany do archiwum'
             entry_unarchived: 'Wpis usunięty z archiwum'
             entry_starred: 'Wpis oznaczony gwiazdką'

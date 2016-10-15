@@ -35,6 +35,10 @@ Modifiez votre fichier ``parameters.yml`` pour éditer la configuration Redis. C
     redis_host: localhost
     redis_port: 6379
 
+Activer Redis dans wallabag
+---------------------------
+
+Dans les paramètres internes, section **Import**, activez Redis (avec la valeur 1).
 
 Démarrer les clients Redis
 --------------------------
@@ -44,28 +48,28 @@ En fonction du service dont vous souhaitez importer vos données, vous devez act
 .. code:: bash
 
   # for Pocket import
-  bin/console wallabag:import:redis-worker pocket -vv >> /path/to/wallabag/var/logs/redis-pocket.log
+  bin/console wallabag:import:redis-worker -e=prod pocket -vv >> /path/to/wallabag/var/logs/redis-pocket.log
 
   # for Readability import
-  bin/console wallabag:import:redis-worker readability -vv >> /path/to/wallabag/var/logs/redis-readability.log
+  bin/console wallabag:import:redis-worker -e=prod readability -vv >> /path/to/wallabag/var/logs/redis-readability.log
 
   # for Instapaper import
-  bin/console wallabag:import:redis-worker instapaper -vv >> /path/to/wallabag/var/logs/redis-instapaper.log
+  bin/console wallabag:import:redis-worker -e=prod instapaper -vv >> /path/to/wallabag/var/logs/redis-instapaper.log
 
   # for wallabag v1 import
-  bin/console wallabag:import:redis-worker wallabag_v1 -vv >> /path/to/wallabag/var/logs/redis-wallabag_v1.log
+  bin/console wallabag:import:redis-worker -e=prod wallabag_v1 -vv >> /path/to/wallabag/var/logs/redis-wallabag_v1.log
 
   # for wallabag v2 import
-  bin/console wallabag:import:redis-worker wallabag_v2 -vv >> /path/to/wallabag/var/logs/redis-wallabag_v2.log
+  bin/console wallabag:import:redis-worker -e=prod wallabag_v2 -vv >> /path/to/wallabag/var/logs/redis-wallabag_v2.log
 
   # for Firefox import
-  bin/console wallabag:import:redis-worker firefox -vv >> /path/to/wallabag/var/logs/redis-firefox.log
+  bin/console wallabag:import:redis-worker -e=prod firefox -vv >> /path/to/wallabag/var/logs/redis-firefox.log
 
   # for Chrome import
-  bin/console wallabag:import:redis-worker instapaper -vv >> /path/to/wallabag/var/logs/redis-chrome.log
+  bin/console wallabag:import:redis-worker -e=prod instapaper -vv >> /path/to/wallabag/var/logs/redis-chrome.log
 
 Si vous souhaitez démarrer l'import pour quelques messages uniquement, vous pouvez spécifier cette valeur en paramètre (ici 12) et le client va s'arrêter après le 12ème message :
 
 .. code:: bash
 
-  bin/console wallabag:import:redis-worker pocket -vv --maxIterations=12
+  bin/console wallabag:import:redis-worker -e=prod pocket -vv --maxIterations=12

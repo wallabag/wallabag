@@ -195,7 +195,7 @@ entry:
                 description: 'Does this article appear wrong?'
         edit_title: 'Edit title'
         original_article: 'original'
-        annotations_on_the_entry: '{0} No annotations|{1} One annotation|]1,Inf[ %nbAnnotations% annotations'
+        annotations_on_the_entry: '{0} No annotations|{1} One annotation|]1,Inf[ %count% annotations'
         created_at: 'Creation date'
     new:
         page_title: 'Save new entry'
@@ -208,6 +208,8 @@ entry:
         url_label: 'Url'
         is_public_label: 'Public'
         save_label: 'Save'
+    public:
+        shared_by_wallabag: "This article has been shared by <a href='%wallabag_instance%'>wallabag</a>"
 
 about:
     page_title: 'About'
@@ -461,7 +463,7 @@ flashes:
             entry_saved_failed: 'Entry saved but fetching content failed'
             entry_updated: 'Entry updated'
             entry_reloaded: 'Entry reloaded'
-            entry_reload_failed: 'Entry reloaded but fetching content failed'
+            entry_reloaded_failed: 'Entry reloaded but fetching content failed'
             entry_archived: 'Entry archived'
             entry_unarchived: 'Entry unarchived'
             entry_starred: 'Entry starred'

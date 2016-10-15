@@ -90,9 +90,7 @@ abstract class WallabagCoreTestCase extends WebTestCase
         try {
             $this->client->getContainer()->get('wallabag_core.redis.client')->connect();
         } catch (\Exception $e) {
-            $this->markTestSkipped(
-              'Redis is not installed/activated'
-            );
+            $this->markTestSkipped('Redis is not installed/activated');
         }
     }
 }

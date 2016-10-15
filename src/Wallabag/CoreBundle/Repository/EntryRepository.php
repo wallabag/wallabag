@@ -309,4 +309,24 @@ class EntryRepository extends EntityRepository
 
         return $qb->getQuery()->getSingleScalarResult();
     }
+
+    /**
+     * Count all entries for a tag and a user.
+     *
+     * @param int $userId
+     * @param int $tagId
+     *
+     * @return int
+     */
+    public function countAllEntriesByUserIdAndTagId($userId, $tagId)
+    {
+        $qb = $this->createQueryBuilder('e')
+            ->select('count(e.id)')
+            ->leftJoin('e.tags', 't')
+            ->where('e.user=:userId')->setParameter('userId', $userId)
+            ->andWhere('t.id=:tagId')->setParameter('tagId', $tagId)
+        ;
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
 }

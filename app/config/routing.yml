@@ -13,6 +13,11 @@ wallabag_user:
     prefix: /users
 
 wallabag_api:
+    resource: "@WallabagApiBundle/Controller/"
+    type: annotation
+    prefix: /
+
+wallabag_api:
     resource: "@WallabagApiBundle/Resources/config/routing.yml"
     prefix: /
 

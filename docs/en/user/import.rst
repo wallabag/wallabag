@@ -35,7 +35,7 @@ From Readability
 Export your Readability data
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-On the tools (`https://www.readability.com/tools/<https://www.readability.com/tools/>`_) page, click on "Export your data" in the "Data Export" section. You will received an email to download a json (which does not end with .json in fact).
+On the tools (`https://www.readability.com/tools/ <https://www.readability.com/tools/>`_) page, click on "Export your data" in the "Data Export" section. You will received an email to download a json (which does not end with .json in fact).
 
 Import your data into wallabag 2.x
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -51,7 +51,7 @@ From Instapaper
 Export your Instapaper data
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-On the settings (`https://www.instapaper.com/user<https://www.instapaper.com/user>`_) page, click on "Download .CSV file" in the "Export" section. A CSV file will be downloaded (like ``instapaper-export.csv``).
+On the settings (`https://www.instapaper.com/user <https://www.instapaper.com/user>`_) page, click on "Download .CSV file" in the "Export" section. A CSV file will be downloaded (like ``instapaper-export.csv``).
 
 Import your data into wallabag 2.x
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

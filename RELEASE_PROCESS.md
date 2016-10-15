@@ -1,47 +1,45 @@
 ## Definition
 
 A release is mostly a git tag of http://github.com/wallabag/wallabag, following [semantic versioning](http://semver.org).
-The last release at the time of writing is 2.0.0-alpha.2, from the v2 branch.
 
 ### Steps to release
 
-During this documentation, we assume the release is `release-2.0.0-beta.1`.
+During this documentation, we assume the release is `$LAST_WALLABAG_RELEASE`.
 
 #### Files to edit
 
 - `app/config/config.yml` (`wallabag_core.version`)
-- `README.md` (`composer create-project` command)
-- `docs/en/user/installation.rst` and its translations (`composer create-project` command)
+- `CHANGELOG.md` (by using this command `github_changelog_generator --no-compare-link`. [github-changelog-generator is available here](https://github.com/skywinder/github-changelog-generator))
 
 #### Create release on GitHub
 
 - Run these commands to create the tag:
 
 ```
-    git checkout v2
-    git pull origin v2
-    git checkout -b release-2.0.0-beta.1
-    SYMFONY_ENV=prod composer up --no-dev
-    git add --force composer.lock
-    git add README.md
-    git commit -m "Release wallabag 2.0.0-beta.1"
-    git push origin release-2.0.0-beta.1
+git checkout master
+git pull origin master
+git checkout -b release-$LAST_WALLABAG_RELEASE
+SYMFONY_ENV=prod composer up --no-dev
+git add --force composer.lock
+git commit -m "Release wallabag $LAST_WALLABAG_RELEASE"
+git push origin release-$LAST_WALLABAG_RELEASE
 ```
 
-- Create a new pull request with this title `DON'T MERGE Release wallabag 2.0.0-beta.1`. This pull request is used to launch builds on Travis-CI.
-- Run these commands to create the package:
+- Create a new pull request with this title `DON'T MERGE Release wallabag $LAST_WALLABAG_RELEASE`. This pull request is used to launch builds on Travis-CI.
+- Run these command to create the package:
 
 ```
-    git clone git@github.com:wallabag/wallabag.git -b release-2.0.0-beta.1 release-2.0.0-beta.1
-    SYMFONY_ENV=prod composer up -d=release-2.0.0-beta.1 --no-dev
-    tar czf wallabag-release-2.0.0-beta.1.tar.gz --exclude="var/*" --exclude=".git" release-2.0.0-beta.1
+make release master /tmp wllbg-release prod
 ```
 
 - [Create the new release on GitHub](https://github.com/wallabag/wallabag/releases/new). You have to upload on this page the package.
-- Delete the `release-2.0.0-beta.1` branch and close the pull request (**DO NOT MERGE IT**).
+- Delete the `release-$LAST_WALLABAG_RELEASE` branch and close the pull request (**DO NOT MERGE IT**).
 - Update the URL shortener (used on `wllbg.org` to generate links like `http://wllbg.org/latest-v2-package` or `http://wllbg.org/latest-v2`)
 - Update [the downloads page](https://github.com/wallabag/wallabag.org/blob/master/content/pages/download.md) on the website (MD5 sum, release date)
-- Drink a beer!
+- Update Dockerfile https://github.com/wallabag/docker (and create a new tag)
+- Update wallabag.org website (downloads, releases and new blog post)
+- Put the next patch version suffixed with `-dev` in `app/config/config.yml` (`wallabag_core.version`)
+- Drink a :beer:!
 
 ### `composer.lock`
 A release tag must contain a `composer.lock` file. It sets which dependencies were available at the time a release was done,

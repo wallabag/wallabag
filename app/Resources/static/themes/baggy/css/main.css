@@ -383,9 +383,11 @@ footer a {
   max-height: 2em;
   overflow-y: hidden;
   padding: 0;
+  margin: 0;
 }
 
-.card-entry-tags li {
+.card-entry-tags li,
+.card-entry-tags span {
   display: inline-block;
   margin: 0 5px;
   padding: 5px 12px;
@@ -394,7 +396,17 @@ footer a {
   max-height: 2em;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.card-entry-tags a,
+.card-entry-labels a {
+  text-decoration: none;
+  font-weight: normal;
   color: #fff;
+}
+
+.nav-panel-add-tag {
+  margin-top: 10px;
 }
 
 .list-entries + .results {
@@ -509,6 +521,7 @@ img.preview {
   color: #666;
   font-size: 0.9em;
   line-height: 1.7;
+  margin-top: 5px;
 }
 
 .entry h2 a::first-letter {
@@ -1021,6 +1034,7 @@ blockquote {
 
 #article_toolbar li {
   display: inline-block;
+  margin: 3px auto;
 }
 
 #article_toolbar a {

@@ -17,7 +17,7 @@
                             <div class="card-image waves-effect waves-block waves-light">
                                 <ul class="card-entry-labels">
                                 {% for tag in entry.tags | slice(0, 3) %}
-                                    <li>{{ tag.label }}</li>
+                                    <li><a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a></li>
                                 {% endfor %}
                                 </ul>
                                 <div class="preview activator" style="background-image: url({{ entry.previewPicture }})"></div>
@@ -46,7 +46,7 @@
                                 <p>{{ entry.content|striptags|slice(0, 300)|raw }}&hellip;</p>
                                 <ul class="card-entry-labels-hidden">
                                 {% for tag in entry.tags | slice(0, 2) %}
-                                    <li>{{ tag.label }}</li>
+                                    <li><a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a></li>
                                 {% endfor %}
                             </ul>
                             {% endif %}
@@ -68,7 +68,7 @@
 
                             <ul class="card-entry-labels-hidden">
                                 {% for tag in entry.tags %}
-                                    <li>{{ tag.label }}</li>
+                                    <li><a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a></li>
                                 {% endfor %}
                             </ul>
                         </div>
@@ -77,7 +77,7 @@
                     <div class="card-action">
                         <span class="bold">
                             <a href="{{ entry.url|e }}" target="_blank" title="{{ 'entry.list.original_article'|trans }}: {{ entry.title|e }} - {{ entry.domainName|removeWww }}" class="tool original grey-text"><span>{{ entry.domainName|removeWww|truncate(18) }}</span></a>
-                        </bold>
+                        </span>
 
                         <ul class="tools right">
                             <li>

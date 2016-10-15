@@ -23,7 +23,7 @@ class ManageControllerTest extends WallabagCoreTestCase
 
         // Create a new user in the database
         $crawler = $client->request('GET', '/users/');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /users/");
+        $this->assertEquals(200, $client->getResponse()->getStatusCode(), 'Unexpected HTTP status code for GET /users/');
         $crawler = $client->click($crawler->selectLink('user.list.create_new_one')->link());
 
         // Fill in the form and submit it

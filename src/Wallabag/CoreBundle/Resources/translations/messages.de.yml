@@ -195,7 +195,7 @@ entry:
                 description: 'Erscheint dieser Artikel falsch?'
         edit_title: 'Titel ändern'
         original_article: 'original'
-        annotations_on_the_entry: '{0} Keine Anmerkungen|{1} Eine Anmerkung|]1,Inf[ %nbAnnotations% Anmerkungen'
+        annotations_on_the_entry: '{0} Keine Anmerkungen|{1} Eine Anmerkung|]1,Inf[ %count% Anmerkungen'
         created_at: 'Erstellungsdatum'
     new:
         page_title: 'Neuen Artikel speichern'
@@ -208,6 +208,8 @@ entry:
         url_label: 'URL'
         is_public_label: 'Öffentlich'
         save_label: 'Speichern'
+    public:
+        # shared_by_wallabag: "This article has been shared by <a href='%wallabag_instance%'>wallabag</a>"
 
 about:
     page_title: 'Über'
@@ -462,7 +464,7 @@ flashes:
             entry_saved_failed: 'Eintrag gespeichert, aber das Abrufen des Inhalts ist fehlgeschlagen'
             entry_updated: 'Eintrag aktualisiert'
             entry_reloaded: 'Eintrag neugeladen'
-            entry_reload_failed: 'Eintrag neugeladen, aber das Abrufen des Inhalts ist fehlgeschlagen'
+            entry_reloaded_failed: 'Eintrag neugeladen, aber das Abrufen des Inhalts ist fehlgeschlagen'
             entry_archived: 'Artikel archiviert'
             entry_unarchived: 'Artikel dearchiviert'
             entry_starred: 'Artikel favorisiert'

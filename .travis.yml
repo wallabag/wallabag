@@ -62,7 +62,7 @@ before_script:
     - if [[ $DB = pgsql ]]; then psql -c 'create database wallabag_test;' -U postgres; fi;
 
 install:
-    - if [[ $ASSETS = build ]]; then source ~/.nvm/nvm.sh && nvm install 5.0; fi;
+    - if [[ $ASSETS = build ]]; then source ~/.nvm/nvm.sh && nvm install 6.7; fi;
     - if [[ $ASSETS = build ]]; then npm install -g npm@latest; fi;
     - if [[ $ASSETS = build ]]; then npm install; fi;
 

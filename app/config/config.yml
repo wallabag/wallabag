@@ -30,7 +30,7 @@ framework:
     assets: ~
 
 wallabag_core:
-    version: 2.1.1
+    version: 2.1.2-dev
     paypal_url: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9UBA65LG3FX9Y&lc=gb"
     languages:
         en: 'English'
@@ -46,7 +46,7 @@ wallabag_core:
         it: 'Italiano'
     items_on_page: 12
     theme: material
-    language: en
+    language: '%locale%'
     rss_limit: 50
     reading_speed: 1
     cache_lifetime: 10
@@ -77,6 +77,7 @@ doctrine:
         password: "%database_password%"
         charset: UTF8
         path: "%database_path%"
+        unix_socket: "%database_socket%"
         server_version: 5.6
 
     orm:

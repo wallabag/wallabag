@@ -341,22 +341,23 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $content = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+        $em = $client->getContainer()
+            ->get('doctrine.orm.entity_manager');
+
+        $content = $em
             ->getRepository('WallabagCoreBundle:Entry')
             ->findByUrlAndUserId($this->url, $this->getLoggedInUserId());
 
         // empty content
         $content->setContent('');
-        $client->getContainer()->get('doctrine.orm.entity_manager')->persist($content);
-        $client->getContainer()->get('doctrine.orm.entity_manager')->flush();
+        $em->persist($content);
+        $em->flush();
 
         $client->request('GET', '/reload/'.$content->getId());
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
 
-        $content = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+        $content = $em
             ->getRepository('WallabagCoreBundle:Entry')
             ->findByUrlAndUserId($this->url, $this->getLoggedInUserId());
 
@@ -486,9 +487,11 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
+        $em = $client->getContainer()
+            ->get('doctrine.orm.entity_manager');
+
         // add a new content to be removed later
-        $user = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+        $user = $em
             ->getRepository('WallabagUserBundle:User')
             ->findOneByUserName('admin');
 
@@ -502,12 +505,8 @@ class EntryControllerTest extends WallabagCoreTestCase
         $content->setArchived(true);
         $content->setLanguage('fr');
 
-        $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->persist($content);
-        $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->flush();
+        $em->persist($content);
+        $em->flush();
 
         $client->request('GET', '/view/'.$content->getId());
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
@@ -753,7 +752,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertCount(2, $crawler->filter('div[class=entry]'));
     }
 
-    public function testCache()
+    public function testShareEntryPublicly()
     {
         $this->logInAs('admin');
         $client = $this->getClient();
@@ -778,6 +777,10 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertContains('public', $client->getResponse()->headers->get('cache-control'));
         $this->assertContains('s-maxage=25200', $client->getResponse()->headers->get('cache-control'));
         $this->assertNotContains('no-cache', $client->getResponse()->headers->get('cache-control'));
+        $this->assertContains('og:title', $client->getResponse()->getContent());
+        $this->assertContains('og:type', $client->getResponse()->getContent());
+        $this->assertContains('og:url', $client->getResponse()->getContent());
+        $this->assertContains('og:image', $client->getResponse()->getContent());
 
         // sharing is now disabled
         $client->getContainer()->get('craue_config')->set('share_public', 0);

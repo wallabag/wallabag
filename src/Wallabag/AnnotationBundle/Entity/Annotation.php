@@ -7,6 +7,7 @@ use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Exclude;
 use JMS\Serializer\Annotation\VirtualProperty;
 use JMS\Serializer\Annotation\SerializedName;
+use JMS\Serializer\Annotation\Groups;
 use Wallabag\UserBundle\Entity\User;
 use Wallabag\CoreBundle\Entity\Entry;
 
@@ -33,6 +34,8 @@ class Annotation
      * @var string
      *
      * @ORM\Column(name="text", type="text")
+     *
+     * @Groups({"entries_for_user", "export_all"})
      */
     private $text;
 
@@ -54,6 +57,8 @@ class Annotation
      * @var string
      *
      * @ORM\Column(name="quote", type="string")
+     *
+     * @Groups({"entries_for_user", "export_all"})
      */
     private $quote;
 
@@ -61,6 +66,8 @@ class Annotation
      * @var array
      *
      * @ORM\Column(name="ranges", type="array")
+     *
+     * @Groups({"entries_for_user", "export_all"})
      */
     private $ranges;
 

@@ -30,8 +30,8 @@ The documentation is available in other languages:
 
    user/faq
    user/installation
-   user/upgrade-2.0.x-2.1.y
-   user/upgrade-2.0.x-2.0.y
+   user/upgrade-2.0.x-2.1.1
+   user/upgrade-2.1.x-2.1.y
    user/migration
    user/import
    user/create_account
@@ -45,6 +45,7 @@ The documentation is available in other languages:
    user/filters
    user/tags
    user/android
+   user/parameters
 
 .. _dev-docs:
 

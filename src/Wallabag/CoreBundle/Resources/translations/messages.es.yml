@@ -195,7 +195,7 @@ entry:
                 description: '¿Este artículo no se muestra bien?'
         edit_title: 'Modificar el título'
         original_article: 'original'
-        annotations_on_the_entry: '{0} Sin anotaciones|{1} Una anotación|]1,Inf[ %nbAnnotations% anotaciones'
+        annotations_on_the_entry: '{0} Sin anotaciones|{1} Una anotación|]1,Inf[ %count% anotaciones'
         created_at: 'Fecha de creación'
     new:
         page_title: 'Guardar un nuevo artículo'
@@ -208,6 +208,8 @@ entry:
         url_label: 'Url'
         is_public_label: 'Es Público'
         save_label: 'Guardar'
+    public:
+        # shared_by_wallabag: "This article has been shared by <a href='%wallabag_instance%'>wallabag</a>"
 
 about:
     page_title: 'Acerca de'
@@ -462,7 +464,7 @@ flashes:
             # entry_saved_failed: 'Entry saved but fetching content failed'
             entry_updated: 'Entrada actualizada'
             entry_reloaded: 'Entrada recargada'
-            # entry_reload_failed: 'Entry reloaded but fetching content failed'
+            # entry_reloaded_failed: 'Entry reloaded but fetching content failed'
             entry_archived: 'Artículo archivado'
             entry_unarchived: 'Artículo desarchivado'
             entry_starred: 'Artículo guardado en los favoritos'

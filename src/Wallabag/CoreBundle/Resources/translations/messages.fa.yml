@@ -208,6 +208,8 @@ entry:
         url_label: 'نشانی'
         is_public_label: 'عمومی'
         save_label: 'ذخیره'
+    public:
+        # shared_by_wallabag: "This article has been shared by <a href='%wallabag_instance%'>wallabag</a>"
 
 about:
     page_title: 'درباره'
@@ -461,7 +463,7 @@ flashes:
             # entry_saved_failed: 'Entry saved but fetching content failed'
             entry_updated: 'مقاله به‌روز شد'
             entry_reloaded: 'مقاله به‌روز شد'
-            # entry_reload_failed: 'Entry reloaded but fetching content failed'
+            # entry_reloaded_failed: 'Entry reloaded but fetching content failed'
             entry_archived: 'مقاله بایگانی شد'
             entry_unarchived: 'مقاله از بایگانی درآمد'
             entry_starred: 'مقاله برگزیده شد'

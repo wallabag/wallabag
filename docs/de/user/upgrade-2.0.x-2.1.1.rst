@@ -1,5 +1,5 @@
-Wallabag updaten
-================
+Wallabag von 2.0.x auf 2.1.1 updaten
+====================================
 
 .. warning::
 Wenn du den Import von Pocket durch das Hinzufügen des Consumer Key in den internen Einstellungen konfiguriert hast, fertige bitte ein Backup deines Keys an, bevor du auf das neue Release migrierst: Du wirst den Key nach dem Update in der Konfiguration erneut eintragen müssen.
@@ -30,23 +30,43 @@ Lade das neueste Release von wallabag herunter:
 
     wget http://wllbg.org/latest-v2-package && tar xvf latest-v2-package
 
-(md5 hash: ``6c33520e29cc754b687f9cee0398dede``)
+(2.1.1 md5 Hashsumme: ``9584a3b60a2b2a4de87f536548caac93``)
 
 Entpacke das Archiv in deinen wallabag-Ordner und ersetze ``app/config/parameters.yml`` mit deiner Datei.
 
 Bitte beachte, dass wir in dieser Version neue Parameter hinzugefügt haben. Du musst die Datei ``app/config/parameters.yml`` bearbeiten und die folgenden Zeilen hinzufügen (ersetze die Werte mit deiner Konfiguration):
 
-.. code-block:: bash
+.. code-block:: yml
 
-    # RabbitMQ processing
-    rabbitmq_host: localhost
-    rabbitmq_port: 5672
-    rabbitmq_user: guest
-    rabbitmq_password: guest
+    parameters:
+        database_driver: pdo_sqlite
+        database_host: 127.0.0.1
+        database_port: null
+        database_name: symfony
+        database_user: root
+        database_password: null
+        database_path: '%kernel.root_dir%/../data/db/wallabag.sqlite'
+        database_table_prefix: wallabag_
+        mailer_transport: smtp
+        mailer_host: 127.0.0.1
+        mailer_user: null
+        mailer_password: null
+        locale: en
+        secret: ovmpmAWXRCabNlMgzlzFXDYmCFfzGv
+        twofactor_auth: true
+        twofactor_sender: no-reply@wallabag.org
+        fosuser_registration: true
+        fosuser_confirmation: true
+        from_email: no-reply@wallabag.org
+        rss_limit: 50
+        rabbitmq_host: localhost
+        rabbitmq_port: 5672
+        rabbitmq_user: guest
+        rabbitmq_password: guest
+        redis_host: localhost
+        redis_port: 6379
 
-    # Redis processing
-    redis_host: localhost
-    redis_port: 6379
+Du kannst `hier eine Dokumentation über die Parameter finden <http://doc.wallabag.org/en/master/user/parameters.html>`_.
 
 Wenn du SQLite nutzt, musst auch das ``data/`` Verzeichnis in die neue Installation kopieren.
 

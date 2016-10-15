@@ -1,12 +1,12 @@
 <?php
 
-namespace Wallabag\CoreBundle\Controller;
+namespace Wallabag\ApiBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Wallabag\ApiBundle\Entity\Client;
-use Wallabag\CoreBundle\Form\Type\ClientType;
+use Wallabag\ApiBundle\Form\Type\ClientType;
 
 class DeveloperController extends Controller
 {

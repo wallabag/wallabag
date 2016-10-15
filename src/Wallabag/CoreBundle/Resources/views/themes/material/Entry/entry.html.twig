@@ -223,12 +223,13 @@
             </span>
             <i class="material-icons" title="{{ 'entry.view.created_at'|trans }}">today</i><span class="link">{{ entry.createdAt|date('Y-m-d') }}</span>
             <a href="{{ entry.url|e }}" target="_blank" title="{{ 'entry.view.original_article'|trans }} : {{ entry.title|e }}" class="tool">
-            <i class="material-icons link">link</i> <span class="link">{{ entry.domainName|removeWww }}</span></a>
-            <span class="tool"><i class="material-icons link">comment</i> <span class="link">{{ 'entry.view.annotations_on_the_entry'|transchoice(entry.annotations | length) }}</span>
+                <i class="material-icons link">link</i> <span class="link">{{ entry.domainName|removeWww }}</span>
+            </a>
+            <span class="tool"><i class="material-icons link">comment</i></span> <span class="link">{{ 'entry.view.annotations_on_the_entry'|transchoice(entry.annotations | length) }}</span>
             <div id="list">
                 {% for tag in entry.tags %}
                     <div class="chip">
-                    {{ tag.label }} <a href="{{ path('remove_tag', { 'entry': entry.id, 'tag': tag.id }) }}"><i class="material-icons">delete</i></a>
+                    <a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a> <a href="{{ path('remove_tag', { 'entry': entry.id, 'tag': tag.id }) }}"><i class="material-icons">delete</i></a>
                     </div>
                 {% endfor %}
             </div>

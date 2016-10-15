@@ -195,7 +195,7 @@ entry:
                 description: 'Îți pare ciudat articolul?'
         edit_title: 'Editează titlul'
         original_article: 'original'
-        # annotations_on_the_entry: '{0} No annotations|{1} One annotation|]1,Inf[ %nbAnnotations% annotations'
+        # annotations_on_the_entry: '{0} No annotations|{1} One annotation|]1,Inf[ %count% annotations'
         created_at: 'Data creării'
     new:
         page_title: 'Salvează un nou articol'
@@ -208,6 +208,8 @@ entry:
         url_label: 'Url'
         # is_public_label: 'Public'
         save_label: 'Salvează'
+    public:
+        # shared_by_wallabag: "This article has been shared by <a href='%wallabag_instance%'>wallabag</a>"
 
 about:
     page_title: 'Despre'
@@ -462,7 +464,7 @@ flashes:
             # entry_saved_failed: 'Entry saved but fetching content failed'
             # entry_updated: 'Entry updated'
             # entry_reloaded: 'Entry reloaded'
-            # entry_reload_failed: 'Entry reloaded but fetching content failed'
+            # entry_reloaded_failed: 'Entry reloaded but fetching content failed'
             entry_archived: 'Articol arhivat'
             entry_unarchived: 'Articol dezarhivat'
             entry_starred: 'Articol adăugat la favorite'

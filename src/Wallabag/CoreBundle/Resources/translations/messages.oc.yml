@@ -195,7 +195,7 @@ entry:
                 description: "Marca mal la presentacion d'aqueste article ?"
         edit_title: 'Modificar lo títol'
         original_article: 'original'
-        annotations_on_the_entry: "{0} Pas cap d'anotacion|{1} Una anotacion|]1,Inf[ %nbAnnotations% anotacions"
+        annotations_on_the_entry: "{0} Pas cap d'anotacion|{1} Una anotacion|]1,Inf[ %count% anotacions"
         created_at: 'Data de creacion'
     new:
         page_title: 'Enregistrar un novèl article'
@@ -208,6 +208,8 @@ entry:
         url_label: 'Url'
         is_public_label: 'Public'
         save_label: 'Enregistrar'
+    public:
+        # shared_by_wallabag: "This article has been shared by <a href='%wallabag_instance%'>wallabag</a>"
 
 about:
     page_title: 'A prepaus'
@@ -462,7 +464,7 @@ flashes:
             entry_saved_failed: 'Article salvat mai fracàs de la recuperacion del contengut'
             entry_updated: 'Article mes a jorn'
             entry_reloaded: 'Article recargat'
-            entry_reload_failed: "L'article es estat cargat de nòu mai la recuperacion del contengut a fracassat"
+            entry_reloaded_failed: "L'article es estat cargat de nòu mai la recuperacion del contengut a fracassat"
             entry_archived: 'Article marcat coma legit'
             entry_unarchived: 'Article marcat coma pas legit'
             entry_starred: 'Article apondut dins los favorits'

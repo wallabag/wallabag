@@ -9,7 +9,7 @@ use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Output\NullOutput;
+use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
@@ -97,7 +97,8 @@ class InstallCommand extends ContainerAwareCommand
         try {
             $this->getContainer()->get('doctrine')->getManager()->getConnection()->connect();
         } catch (\Exception $e) {
-            if (false === strpos($e->getMessage(), 'Unknown database')) {
+            if (false === strpos($e->getMessage(), 'Unknown database')
+                && false === strpos($e->getMessage(), 'database "'.$this->getContainer()->getParameter('database_name').'" does not exist')) {
                 $fulfilled = false;
                 $status = '<error>ERROR!</error>';
                 $help = 'Can\'t connect to the database: '.$e->getMessage();
@@ -420,16 +421,18 @@ class InstallCommand extends ContainerAwareCommand
         }
 
         $this->getApplication()->setAutoExit(false);
-        $exitCode = $this->getApplication()->run(new ArrayInput($parameters), new NullOutput());
+
+        $output = new BufferedOutput();
+        $exitCode = $this->getApplication()->run(new ArrayInput($parameters), $output);
 
         if (0 !== $exitCode) {
             $this->getApplication()->setAutoExit(true);
 
-            $errorMessage = sprintf('The command "%s" terminated with an error code: %u.', $command, $exitCode);
-            $this->defaultOutput->writeln("<error>$errorMessage</error>");
-            $exception = new \Exception($errorMessage, $exitCode);
+            $this->defaultOutput->writeln('');
+            $this->defaultOutput->writeln('<error>The command "'.$command.'" generates some errors: </error>');
+            $this->defaultOutput->writeln($output->fetch());
 
-            throw $exception;
+            die();
         }
 
         // PDO does not always close the connection after Doctrine commands.

@@ -195,7 +195,7 @@ entry:
                 description: 'Questo contenuto viene visualizzato male?'
         edit_title: 'Modifica titolo'
         original_article: 'originale'
-        annotations_on_the_entry: '{0} Nessuna annotazione|{1} Una annotazione|]1,Inf[ %nbAnnotations% annotazioni'
+        annotations_on_the_entry: '{0} Nessuna annotazione|{1} Una annotazione|]1,Inf[ %count% annotazioni'
         created_at: 'Data di creazione'
     new:
         page_title: 'Salva un nuovo contenuto'
@@ -208,6 +208,8 @@ entry:
         url_label: 'Url'
         is_public_label: 'Pubblico'
         save_label: 'Salva'
+    public:
+        # shared_by_wallabag: "This article has been shared by <a href='%wallabag_instance%'>wallabag</a>"
 
 about:
     page_title: 'About'
@@ -462,7 +464,7 @@ flashes:
             # entry_saved_failed: 'Entry saved but fetching content failed'
             entry_updated: 'Contenuto aggiornato'
             entry_reloaded: 'Contenuto ricaricato'
-            # entry_reload_failed: 'Entry reloaded but fetching content failed'
+            # entry_reloaded_failed: 'Entry reloaded but fetching content failed'
             entry_archived: 'Contenuto archiviato'
             entry_unarchived: 'Contenuto dis-archiviato'
             entry_starred: 'Contenuto segnato come preferito'

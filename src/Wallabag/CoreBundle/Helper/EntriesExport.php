@@ -21,7 +21,6 @@ class EntriesExport
     private $entries = [];
     private $authors = ['wallabag'];
     private $language = '';
-    private $tags = [];
     private $footerTemplate = '<div style="text-align:center;">
         <p>Produced by wallabag with %EXPORT_METHOD%</p>
         <p>Please open <a href="https://github.com/wallabag/wallabag/issues">an issue</a> if you have trouble with the display of this E-Book on your device.</p>
@@ -52,10 +51,6 @@ class EntriesExport
         }
 
         $this->entries = $entries;
-
-        foreach ($entries as $entry) {
-            $this->tags[] = $entry->getTags();
-        }
 
         return $this;
     }
@@ -159,8 +154,8 @@ class EntriesExport
 
         // set tags as subjects
         foreach ($this->entries as $entry) {
-            foreach ($this->tags as $tag) {
-                $book->setSubject($tag['value']);
+            foreach ($entry->getTags() as $tag) {
+                $book->setSubject($tag->getLabel());
             }
 
             // the reader in Kobo Devices doesn't likes special caracters
@@ -265,8 +260,8 @@ class EntriesExport
          * Adding actual entries
          */
         foreach ($this->entries as $entry) {
-            foreach ($this->tags as $tag) {
-                $pdf->SetKeywords($tag['value']);
+            foreach ($entry->getTags() as $tag) {
+                $pdf->SetKeywords($tag->getLabel());
             }
 
             $pdf->AddPage();
