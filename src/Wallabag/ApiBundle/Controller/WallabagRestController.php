@@ -167,8 +167,6 @@ class WallabagRestController extends FOSRestController
      *      }
      * )
      *
-     * @Route(requirements={"_format"="epub|mobi|pdf|txt|csv"})
-     *
      * @return Response
      */
     public function getEntryExportAction(Entry $entry, Request $request)

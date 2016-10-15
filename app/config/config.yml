@@ -112,12 +112,26 @@ swiftmailer:
 fos_rest:
     param_fetcher_listener: true
     body_listener: true
-    format_listener: true
     view:
+        mime_types:
+            csv:
+                - 'text/csv'
+                - 'text/plain'
+            pdf:
+                - 'application/pdf'
+            epub:
+                - 'application/epub+zip'
+            mobi:
+                - 'application/x-mobipocket-ebook'
         view_response_listener: 'force'
         formats:
             xml: true
-            json : true
+            json: true
+            txt: true
+            csv: true
+            pdf: true
+            epub: true
+            mobi: true
         templating_formats:
             html: true
         force_redirects:
@@ -126,6 +140,15 @@ fos_rest:
         default_engine: twig
     routing_loader:
         default_format: json
+    format_listener:
+        enabled: true
+        rules:
+            - { path: "^/api/entries/([0-9]+)/export.(.*)", priorities: ['epub', 'mobi', 'pdf', 'txt', 'csv'], fallback_format: false, prefer_extension: false }
+            - { path: "^/api", priorities: ['json', 'xml'], fallback_format: false, prefer_extension: false }
+            - { path: "^/annotations", priorities: ['json', 'xml'], fallback_format: false, prefer_extension: false }
+            # for an unknown reason, EACH REQUEST goes to FOS\RestBundle\EventListener\FormatListener
+            # so we need to add custom rule for custom api export but also for all other routes of the application...
+            - { path: '^/', priorities: ['text/html', '*/*'], fallback_format: html, prefer_extension: false }
 
 nelmio_api_doc:
     sandbox:
