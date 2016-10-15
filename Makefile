@@ -17,6 +17,9 @@ install: ## Install wallabag with the latest version
 update: ## Update the wallabag installation to the latest version
 	@sh scripts/update.sh $(ENV)
 
+dev: ## Install the latest dev version
+	@sh scripts/dev.sh
+
 run: ## Run the wallabag built-in server
 	@php bin/console server:run --env=$(ENV)
 
