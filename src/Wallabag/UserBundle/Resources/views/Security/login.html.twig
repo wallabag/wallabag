@@ -5,11 +5,11 @@
     <div class="card-content">
 
         {% if error %}
-            <span class="black-text">{{ error.message }}</span>
+            <script>Materialize.toast('{{ error.message }}', 4000)</script>
         {% endif %}
 
         {% for flashMessage in app.session.flashbag.get('notice') %}
-            <span class="black-text"><p>{{ flashMessage }}</p></span>
+            <script>Materialize.toast('{{ flashMessage }}')</script>
         {% endfor %}
 
         <div class="row">
@@ -41,7 +41,7 @@
             <i class="material-icons right">send</i>
         </button>
     </div>
-    <div class="row center">
+    <div class="card-action center">
         <a href="{{ path('fos_user_resetting_request') }}">{{ 'security.login.forgot_password'|trans }}</a>
     </div>
 </form>
