@@ -12,7 +12,6 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
-use FOS\RestBundle\Controller\Annotations\Route;
 
 class WallabagRestController extends FOSRestController
 {
