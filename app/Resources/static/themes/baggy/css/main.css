@@ -1192,6 +1192,14 @@ pre code {
   }
 }
 
+@media screen and (max-height: 770px) {
+  .menu.users,
+  .menu.internal,
+  .menu.developer {
+    display: none;
+  }
+}
+
 @media screen and (max-width: 500px) {
   .entry {
     width: 100%;

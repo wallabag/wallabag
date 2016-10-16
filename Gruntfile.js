@@ -10,10 +10,6 @@ module.exports = function (grunt) {
     postcss: {
       material: {
         options: {
-          map: {
-            inline: false,
-          },
-
           processors: [
             require('pixrem')(),
             require('autoprefixer')({ browsers: 'last 2 versions' }),
@@ -25,10 +21,6 @@ module.exports = function (grunt) {
       },
       baggy: {
         options: {
-          map: {
-            inline: false,
-          },
-
           processors: [
             require('pixrem')(),
             require('autoprefixer')({ browsers: 'last 2 versions' }),
@@ -95,19 +87,13 @@ module.exports = function (grunt) {
         files: {
           '<%= releaseDir %>/themes/material/js/material.min.js':
             ['<%= buildDir %>/material.browser.js'],
-        },
-        options: {
-          sourceMap: true,
-        },
+        }
       },
       baggy: {
         files: {
           '<%= releaseDir %>/themes/baggy/js/baggy.min.js':
             ['<%= buildDir %>/baggy.browser.js'],
-        },
-        options: {
-          sourceMap: true,
-        },
+        }
       },
     },
     copy: {
