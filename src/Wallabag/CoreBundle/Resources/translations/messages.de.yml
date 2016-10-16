@@ -11,8 +11,8 @@ security:
     resetting:
         description: "Gib unten deine E-Mail-Adresse ein und wir senden dir eine Anleitung für das Zurücksetzen deines Kennworts."
     register:
-        page_title: 'Account erstellen'
-        go_to_account: 'Gehe zu deinem Account'
+        page_title: 'Konto erstellen'
+        go_to_account: 'Gehe zu deinem Konto'
 
 menu:
     left:
@@ -53,7 +53,7 @@ config:
     tab_menu:
         settings: 'Einstellungen'
         rss: 'RSS'
-        user_info: 'Benutzer-Information'
+        user_info: 'Benutzerinformation'
         password: 'Kennwort'
         rules: 'Tagging-Regeln'
         new_user: 'Benutzer hinzufügen'
@@ -73,18 +73,18 @@ config:
         pocket_consumer_key_label: Consumer-Key für Pocket, um Inhalte zu importieren
     form_rss:
         description: 'Die RSS-Feeds von wallabag erlauben es dir, deine gespeicherten Artikel mit deinem bevorzugten RSS-Reader zu lesen. Vorher musst du jedoch einen Token erstellen.'
-        token_label: 'RSS-token'
+        token_label: 'RSS-Token'
         no_token: 'Kein Token'
         token_create: 'Token erstellen'
         token_reset: 'Token zurücksetzen'
         rss_links: 'RSS-Links'
         rss_link:
-            unread: 'ungelesen'
-            starred: 'favoriten'
-            archive: 'archiv'
-        rss_limit: 'Anzahl der Einträge im Feed'
+            unread: 'Ungelesene'
+            starred: 'Favoriten'
+            archive: 'Archivierte'
+        rss_limit: 'Anzahl der Einträge pro Feed'
     form_user:
-        two_factor_description: "Wenn du die Zwei-Faktor-Authentifizierung aktivierst, erhältst du eine E-Mail mit einem Code bei jeder nicht vertraulichen Verbindung"
+        two_factor_description: "Wenn du die Zwei-Faktor-Authentifizierung aktivierst, erhältst du eine E-Mail mit einem Code bei jeder nicht vertrauenswürdigen Verbindung"
         name_label: 'Name'
         email_label: 'E-Mail-Adresse'
         twoFactorAuthentication_label: 'Zwei-Faktor-Authentifizierung'
@@ -102,10 +102,10 @@ config:
         faq:
             title: 'FAQ'
             tagging_rules_definition_title: 'Was bedeuten die "Tagging-Regeln"?'
-            tagging_rules_definition_description: 'Dies sind Regeln von wallabag, um neu hinzugefügte Einträge autmatisch zu taggen.<br />Jedes Mal, wenn ein neuer Eintrag hinzufügt wird, werden die Tagging-Regeln angewandt. Dies erleichtert dir die Arbeit, deine Einträge manuell zu klassifizieren.'
+            tagging_rules_definition_description: 'Dies sind Regeln von wallabag, um neu hinzugefügte Einträge automatisch zu taggen.<br />Jedes Mal, wenn ein neuer Eintrag hinzugefügt wird, werden die Tagging-Regeln angewandt. Dies erleichtert dir die Arbeit, deine Einträge manuell zu kategorisieren.'
             how_to_use_them_title: 'Wie nutze ich sie?'
-            how_to_use_them_description: 'Nehmen wir an, du möchtest deine Einträge als "<i>schnell lesbar</i>" taggen, wenn die Lesezeit kürzer als drei Minuten ist.<br />In diesem Falle solltest du "readingTime &lt;= 3" in das <i>Regel</i>-Feld und "<i>schnell lesbar</i>" in das <i>Tags</i>-Feld schreiben.<br />Mehrere Tags können gleichzeitig hinzugefügt werden, indem sie durch ein Kommata getrennt werden: "<i>schnell lesbar, interessant</i>"<br />Komplexe Regeln können durch vordefinierte Operatoren geschrieben werden: if "<i>readingTime &gt;= 5 AND domainName = "github.com"</i>" then tag as "<i>long reading, github </i>"'
-            variables_available_title: 'Welche Variablen und Operatoren kann ich nutzen, um Regeln zu schreiben?'
+            how_to_use_them_description: 'Nehmen wir an, du möchtest deine Einträge als "<i>schnell lesbar</i>" taggen, wenn die Lesezeit kürzer als drei Minuten ist.<br />In diesem Fall solltest du "readingTime &lt;= 3" in das Feld <i>Regel</i> und "<i>schnell lesbar</i>" in das Feld <i>Tags</i> schreiben.<br />Mehrere Tags können gleichzeitig hinzugefügt werden, indem sie durch ein Komma getrennt werden: "<i>schnell lesbar, interessant</i>".<br />Komplexe Regeln können durch vordefinierte Operatoren geschrieben werden: if "<i>readingTime &gt;= 5 AND domainName = "github.com"</i>" dann tagge als "<i>länger lesen, github</i>".'
+            variables_available_title: 'Welche Variablen und Operatoren kann ich benutzen, um Regeln zu schreiben?'
             variables_available_description: 'Die folgenden Variablen und Operatoren können genutzt werden, um Tagging-Regeln zu erstellen:'
             meaning: 'Bedeutung'
             variable_description:
@@ -118,7 +118,7 @@ config:
                 language: "Sprache des Eintrags"
                 mimetype: "MIME-Typ des Eintrags"
                 readingTime: "Die geschätzte Lesezeit in Minuten"
-                domainName: 'Der Domain-Name des Eintrags'
+                domainName: 'Der Domainname des Eintrags'
             operator_description:
                 label: 'Operator'
                 less_than: 'Weniger oder gleich als…'
@@ -129,7 +129,7 @@ config:
                 not_equal_to: 'ungleich'
                 or: 'Eine Regel ODER die andere'
                 and: 'Eine Regel UND eine andere'
-                matches: 'Tests, ob eine <i>Variable</i> auf eine <i>Suche</i> zutrifft (Groß- und Kleinschreibung wird nicht berücksichtigt).<br />Beispiel: <code>title matches "Fußball"</code>'
+                matches: 'Testet, ob eine <i>Variable</i> auf eine <i>Suche</i> zutrifft (Groß- und Kleinschreibung wird nicht berücksichtigt).<br />Beispiel: <code>title matches "Fußball"</code>'
 
 entry:
     page_titles:
@@ -147,13 +147,13 @@ entry:
         number_of_tags: '{1}und ein anderer Tag|]1,Inf[und %count% andere Tags'
         reading_time_minutes_short: '%readingTime% min'
         reading_time_less_one_minute_short: '<small class="inferieur">&lt;</small> 1 min'
-        original_article: 'original'
+        original_article: 'Original'
         toogle_as_read: 'Gelesen-Status ändern'
         toogle_as_star: 'Favoriten-Status ändern'
         delete: 'Löschen'
         export_title: 'Exportieren'
     filters:
-        title: 'Filters'
+        title: 'Filter'
         status_label: 'Status'
         archived_label: 'Archiviert'
         starred_label: 'Favorisiert'
@@ -165,14 +165,14 @@ entry:
             label: 'Lesezeit in Minuten'
             from: 'von'
             to: 'bis'
-        domain_label: 'Domain-Name'
+        domain_label: 'Domainname'
         created_at:
             label: 'Erstellungsdatum'
             from: 'von'
             to: 'bis'
         action:
             clear: 'Zurücksetzen'
-            filter: 'Filter'
+            filter: 'Filtern'
     view:
         left_menu:
             back_to_top: 'Nach oben'
@@ -180,7 +180,7 @@ entry:
             set_as_read: 'Als gelesen markieren'
             set_as_unread: 'Als ungelesen markieren'
             set_as_starred: 'Favorisieren'
-            view_original_article: 'Original-Artikel'
+            view_original_article: 'Originalartikel'
             re_fetch_content: 'Inhalt neu laden'
             delete: 'Löschen'
             add_a_tag: 'Tag hinzufügen'
@@ -209,7 +209,7 @@ entry:
         is_public_label: 'Öffentlich'
         save_label: 'Speichern'
     public:
-        # shared_by_wallabag: "This article has been shared by <a href='%wallabag_instance%'>wallabag</a>"
+        shared_by_wallabag: "Dieser Artikel wurde mittels <a href='%wallabag_instance%'>wallabag</a> geteilt"
 
 about:
     page_title: 'Über'
@@ -218,7 +218,7 @@ about:
         getting_help: 'Hilfe bekommen'
         helping: 'wallabag unterstützen'
         contributors: 'Unterstützer'
-        third_party: 'Third-party libraries'
+        third_party: 'Bibliotheken von Drittanbietern'
     who_behind_wallabag:
         developped_by: 'Entwickelt von'
         website: 'Webseite'
@@ -228,12 +228,12 @@ about:
         version: 'Version'
     getting_help:
         documentation: 'Dokumentation'
-        bug_reports: 'Bugs'
+        bug_reports: 'Fehlerberichte'
         support: '<a href="https://support.wallabag.org">Auf unserer Support-Webseite</a> oder <a href="https://github.com/wallabag/wallabag/issues">auf GitHub</a>'
     helping:
-        description: 'wallabag ist kostenlos und Open-Source. Du kannst uns helfen:'
+        description: 'wallabag ist frei und Open Source. Du kannst uns helfen:'
         by_contributing: 'indem du zu dem Projekt beiträgst:'
-        by_contributing_2: 'ein Issue listet alle unsere Bedürfnisse:'
+        by_contributing_2: 'ein Ticket listet alle unsere Bedürfnisse:'
         by_paypal: 'via PayPal'
     contributors:
         description: 'Ein Dankeschön an die Unterstützer von wallabag'
@@ -246,11 +246,11 @@ howto:
     page_title: 'How-To'
     page_description: 'Es gibt mehrere Möglichkeiten, einen Artikel zu speichern:'
     top_menu:
-        browser_addons: 'Browser-Addons'
+        browser_addons: 'Browser-Erweiterungen'
         mobile_apps: 'Apps'
-        bookmarklet: 'Bookmarklet'
+        bookmarklet: 'Lesezeichen'
     form:
-        description: 'Danke an dieses Formular'
+        description: 'Dank dieses Formulars'
     browser_addons:
         firefox: 'Firefox-Erweiterung'
         chrome: 'Chrome-Erweiterung'
@@ -279,16 +279,16 @@ quickstart:
     admin:
         title: 'Administration'
         description: 'Als Adminstrator hast du einige Privilegien. Du kannst:'
-        new_user: 'Einen neuen Nutzer anlegen'
+        new_user: 'Einen neuen Benutzer anlegen'
         analytics: 'das Tracking konfigurieren'
         sharing: 'Einige Parameter für das Teilen von Artikel setzen'
         export: 'Export-Einstellungen ändern'
         import: 'Import-Einstellungen ändern'
     first_steps:
         title: 'Erste Schritte'
-        description: "Jetzt ist wallabag gut konfiguriert, es ist Zeit das Web zu archivieren. Du kannst auf das Plussymbol + oben rechts klicken, um einen Link hinzuzufügen"
+        description: "Jetzt ist wallabag gut konfiguriert, es ist Zeit, das Web zu archivieren. Du kannst auf das Plussymbol + oben rechts klicken, um einen Link hinzuzufügen"
         new_article: 'Speichere deinen ersten Artikel'
-        unread_articles: 'Und klassifiziere ihn!'
+        unread_articles: 'Und kategorisiere ihn!'
     migrate:
         title: 'Von einem anderen Dienst migrieren'
         description: "Du nutzt einen anderen Dienst? Wir helfen dir, um deine Daten zu wallabag zu transportieren."
@@ -321,7 +321,7 @@ tag:
     page_title: 'Tags'
     list:
         number_on_the_page: '{0} Es gibt keine Tags.|{1} Es gibt einen Tag.|]1,Inf[ Es gibt %count% Tags.'
-        see_untagged_entries: 'Siehe nicht getaggte Einträge'
+        see_untagged_entries: 'Zeige nicht getaggte Einträge'
 
 import:
     page_title: 'Importieren'
@@ -338,14 +338,14 @@ import:
         description: "Dieser Importer wird all deine Pocket-Daten importieren. Pocket erlaubt es uns nicht, den Inhalt zu migrieren, daher wird der lesbare Inhalt erneut von wallabag heruntergeladen."
         config_missing:
             description: "Pocket-Import ist nicht konfiguriert."
-            admin_message: 'Du musst noch den %keyurls%a pocket_consumer_key%keyurle% definieren.'
-            user_message: 'Der Server-Administrator muss noch einen API-Key für Pocket konfigurieren.'
-        authorize_message: 'Du kannst deine Daten von deinem Pocket-Account importieren. Dazu musst du nur den nachfolgenden Button klicken und die Anwendung authentifizieren, sich mit getpocket.com zu verbinden.'
+            admin_message: 'Du musst noch den %keyurls%pocket_consumer_key%keyurle% eintragen.'
+            user_message: 'Der Administrator des Servers muss noch einen API-Schlüssel für Pocket konfigurieren.'
+        authorize_message: 'Du kannst deine Daten von deinem Pocket-Konto importieren. Dazu musst du nur den nachfolgenden Button klicken und die Anwendung authentifizieren, sich mit getpocket.com zu verbinden zu dürfen.'
         connect_to_pocket: 'Mit Pocket verbinden und Daten importieren'
     wallabag_v1:
         page_title: 'Aus wallabag v1 importieren'
-        description: 'Dieser Import wird all deine Artikel aus wallabag v1 importieren. Klicke auf der Konfigurations-Seite auf "JSON-Export" im "wallabag-Daten exportieren"-Abschnitt. Du erhältst eine "wallabag-export-1-xxxx-xx-xx.json"-Datei.'
-        how_to: 'Wähle die Export-Datei aus und klicke den nachfolgenden Button, um diese hochzuladen und zu importieren.'
+        description: 'Dieser Import wird all deine Artikel aus wallabag v1 importieren. Klicke in der Konfigurationsseite auf "JSON-Export" im "wallabag-Daten exportieren"-Abschnitt. Du erhältst eine "wallabag-export-1-xxxx-xx-xx.json"-Datei.'
+        how_to: 'Wähle die exportierte Datei aus und klicke den nachfolgenden Button, um diese hochzuladen und zu importieren.'
     wallabag_v2:
         page_title: 'Aus wallabag v2 importieren'
         description: 'Dieser Import wird all deine Artikel aus wallabag v2 importieren. Gehe auf "Alle Artikel" und dann, in der Exportieren-Seitenleiste auf "JSON". Dabei erhältst du eine "All articles.json"-Datei.'
@@ -357,11 +357,11 @@ import:
         enabled: "Der Import erfolgt asynchron. Sobald der Import gestartet ist, wird diese Aufgabe extern abgearbeitet. Der aktuelle Service dafür ist:"
     firefox:
         page_title: 'Aus Firefox importieren'
-        description: "Dieser Import wird all deine Firefox Lesezeichen importieren. Gehe zu deinen Lesezeichen (Strg+Shift+O), dann auf \"Importen und Sichern\", wähle \"Sichern…\". Du erhälst eine .json Datei."
+        description: "Dieser Import wird all deine Lesezeichen aus Firefox importieren. Gehe zu deinen Lesezeichen (Strg+Shift+O), dann auf \"Importen und Sichern\", wähle \"Sichern…\". Du erhälst eine .json Datei."
         how_to: "Bitte wähle deine Lesezeichensicherungsdatei aus und klicke den nachfolgenden Button zum Importieren. Beachte, dass dieser Prozess eine lange Zeit in Anspruch nehmen kann, da alle Artikel geladen werden müssen."
     chrome:
         page_title: 'Aus Chrome importieren'
-        description: "Dieser Import wird all deine Chrome Lesezeichen importieren. Der Pfad zu der Datei hängt von deinem Betriebssystem ab: <ul><li>In Linux gehst du zu dem <code>~/.config/chromium/Default/</code> Verzeichnis</li><li>In Windows sollte es unter <code>%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default</code> sein</li><li>In OS X sollte es unter <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code> sein</li></ul>Wenn du dort angekommen bist, kopiere die Lesezeichendatei zu einem Ort, den du später wiederfindest.<em><br>Beachte falls du Chromium statt Chrome hast, dass du den zuvor genannten Pfad entsprechend anpasst.</em></p>"
+        description: "Dieser Import wird all deine Lesezeichen aus Chrome importieren. Der Pfad zu der Datei hängt von deinem Betriebssystem ab: <ul><li>In Linux gehst du zu dem <code>~/.config/chromium/Default/</code> Verzeichnis</li><li>In Windows sollte es unter <code>%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default</code> sein</li><li>In OS X sollte es unter <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code> sein</li></ul>Wenn du dort angekommen bist, kopiere die Lesezeichendatei <code>Bookmarks</code> zu einem Ort, den du später wiederfindest.<em><br>Beachte falls du Chromium statt Chrome hast, dass du den zuvor genannten Pfad entsprechend anpasst.</em></p>"
         how_to: "Bitte wähle deine Lesezeichensicherungsdatei aus und klicke den nachfolgenden Button zum Importieren. Beachte, dass dieser Prozess eine lange Zeit in Anspruch nehmen kann, da alle Artikel geladen werden müssen."
     instapaper:
         page_title: 'Aus Instapaper importieren'
@@ -370,7 +370,7 @@ import:
 
 developer:
     page_title: 'Entwickler'
-    welcome_message: 'Willkomen zur wallabag-API'
+    welcome_message: 'Willkomen zur wallabag API'
     documentation: 'Dokumentation'
     how_to_first_app: 'Wie erstelle ich meine erste Anwendung'
     full_documentation: 'Komplette API-Dokumentation einsehen'
@@ -387,7 +387,7 @@ developer:
         no_client: 'Bisher kein Client.'
     remove:
         warn_message_1: 'Du hast die Möglichkeit, diesen Client zu entfernen. DIESE AKTION IST NICHT WIDERRUFBAR!'
-        warn_message_2: "Wenn du ihn entfernst, hat keine der damit konfigurierten Anwendungen mehr die Möglichkeit, sich in deinen wallabag-Account anzumelden."
+        warn_message_2: "Wenn du ihn entfernst, hat keine der damit konfigurierten Anwendungen mehr die Möglichkeit, sich in deinen wallabag-Konto anzumelden."
         action: 'Client entfernen'
     client:
         page_title: 'Entwickler > Neuer Client'
@@ -450,7 +450,7 @@ flashes:
         notice:
             config_saved: 'Konfiguration gespeichert. Einige Einstellungen werden erst nach einer erneuten Anmeldung übernommen.'
             password_updated: 'Kennwort aktualisiert'
-            password_not_updated_demo: "Im Test-Modus kannst du das Kennwort nicht ändern."
+            password_not_updated_demo: "Im Testmodus kannst du das Kennwort nicht ändern."
             user_updated: 'Information aktualisiert'
             rss_updated: 'RSS-Informationen aktualisiert'
             tagging_rules_updated: 'Tagging-Regeln aktualisiert'
@@ -465,11 +465,11 @@ flashes:
             entry_updated: 'Eintrag aktualisiert'
             entry_reloaded: 'Eintrag neugeladen'
             entry_reloaded_failed: 'Eintrag neugeladen, aber das Abrufen des Inhalts ist fehlgeschlagen'
-            entry_archived: 'Artikel archiviert'
-            entry_unarchived: 'Artikel dearchiviert'
-            entry_starred: 'Artikel favorisiert'
-            entry_unstarred: 'Artikel defavorisiert'
-            entry_deleted: 'Artikel gelöscht'
+            entry_archived: 'Eintrag archiviert'
+            entry_unarchived: 'Eintrag dearchiviert'
+            entry_starred: 'Eintrag favorisiert'
+            entry_unstarred: 'Eintrag defavorisiert'
+            entry_deleted: 'Eintrag gelöscht'
     tag:
         notice:
             tag_added: 'Tag hinzugefügt'
@@ -477,8 +477,8 @@ flashes:
         notice:
             failed: 'Import fehlgeschlagen, bitte erneut probieren.'
             failed_on_file: 'Fehler während des Imports. Bitte überprüfe deine Import-Datei.'
-            summary: 'Import-Zusammenfassung: %imported% importiert, %skipped% bereits gespeichert.'
-            summary_with_queue: 'Import-Zusammenfassung: %queued% eingereiht.'
+            summary: 'Importzusammenfassung: %imported% importiert, %skipped% bereits gespeichert.'
+            summary_with_queue: 'Importzusammenfassung: %queued% eingereiht.'
         error:
             redis_enabled_not_installed: 'Redis ist aktiviert, um den asynchronen Import zu bewerkstelligen, aber es sieht so aus, dass <u>wir keine Verbindung herstellen können</u>. Bitte prüfe deine Redis-Konfiguration.'
             rabbit_enabled_not_installed: 'RabbitMQ ist aktiviert, um den asynchronen Import zu bewerkstelligen, aber es sieht so aus, dass <u>wir keine Verbindung herstellen können</u>. Bitte prüfe deine RabbitMQ-Konfiguration.'
