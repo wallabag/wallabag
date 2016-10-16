@@ -17,12 +17,11 @@
    0 = Common
    ========================================================================== */
 
-@font-face {
-  font-family: icomoon;
-  src: url("../fonts/IcoMoon-Free.ttf");
-  font-weight: normal;
-  font-style: normal;
-}
+/**
+ *
+ * Material icons
+ *
+ */
 
 @font-face {
   font-family: 'Material Icons';
@@ -60,6 +59,33 @@
 
   /* Support for IE. */
   font-feature-settings: 'liga';
+}
+
+/* Rules for sizing the icon. */
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+
+/* Rules for using icons as black on a light background. */
+.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
+.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+
+/* Rules for using icons as white on a dark background. */
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }
+.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
+
+/**
+ *
+ * Icomoon icons
+ *
+ */
+
+@font-face {
+  font-family: icomoon;
+  src: url("../fonts/IcoMoon-Free.ttf");
+  font-weight: normal;
+  font-style: normal;
 }
 
 [class^="icon-"]::before,
@@ -397,18 +423,33 @@ main ul.row {
 }
 
 .data .card .card-body {
-  height: 22em;
+  height: 19em;
   overflow: hidden;
 }
 
-.card .card-content .card-title {
-  line-height: 32px;
+.card .card-content .card-title,
+.card .card-reveal .card-title {
+  line-height: 22.8px;
   max-height: 64px;
+  font-size: 19px;
+  font-family: roberto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #313131;
+}
+
+.card .card-content .activator,
+.card .card-reveal .activator {
+  cursor: pointer;
+  font-family: "Material Icons";
 }
 
 .card .card-content i.right,
 .card .card-reveal i.right {
   margin-left: 0;
+}
+
+.card .card-content .original {
+  line-height: 24px;
+  font-size: 15px;
 }
 
 .card .card-entry-labels {
@@ -433,7 +474,7 @@ main ul.row {
 }
 
 .card .card-entry-labels-hidden {
-  margin-top: 5px;
+  margin: 2.5px auto;
 }
 
 .card .card-entry-labels-hidden li {
@@ -464,8 +505,8 @@ main ul.row {
   margin-bottom: 10px;
 }
 
-.card .card-action .original {
-  line-height: 24px;
+.card .card-action {
+  padding: 10px 5px 10px 15px;
 }
 
 .card .card-action ul.links {
@@ -481,6 +522,11 @@ main ul.row {
 
 .card .card-action a:hover {
   color: #fff;
+}
+
+.card .card-action .reading-time {
+  display: inline-flex;
+  vertical-align: middle;
 }
 
 .quickstart .card .card-action a,
@@ -499,7 +545,7 @@ main ul.row {
 }
 
 .card .card-image {
-  height: 14em;
+  height: 10em;
 }
 
 .card .card-image .preview {
@@ -526,7 +572,8 @@ main ul.row {
 }
 
 #article > header > h1 {
-  font-size: 1.6em;
+  font-size: 2em;
+  margin: 2.1rem 0 0.68rem;
 }
 
 .reader-mode {
@@ -565,9 +612,21 @@ main ul.row {
   z-index: 9999;
 }
 
-#article aside .link {
-  color: #000;
+#article aside .tools {
   font-size: 0.8em;
+  display: flex;
+  flex-flow: row wrap;
+  margin: 0 auto;
+}
+
+#article aside .tools li {
+  display: inline-flex;
+  vertical-align: middle;
+  margin: auto 10px;
+}
+
+#article aside .tools a {
+  color: #000;
   text-decoration: none;
 }
 
@@ -578,10 +637,11 @@ main ul.row {
 
 #article aside .chip {
   background-color: rgba(0, 151, 167, 0.85);
-  color: #fff;
   padding: 0 15px 0 10px;
+  margin: auto 2px;
 }
 
+#article aside .chip a,
 #article aside .chip i {
   color: #fff;
 }
@@ -707,6 +767,14 @@ main ul.row {
 @media only screen and (max-width: 350px) {
   .nb-results {
     display: none;
+  }
+
+  main ul.row {
+    padding: 0;
+  }
+
+  .row .col {
+    padding: 0;
   }
 }
 

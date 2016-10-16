@@ -9,7 +9,7 @@
     <br />
     <ul class="row data">
         {% for entry in entries %}
-            <li id="entry-{{ entry.id|e }}" class="col l4 m6 s12">
+            <li id="entry-{{ entry.id|e }}" class="col l3 m6 s12">
                 <div class="card">
 
                     <div class="card-body">
@@ -26,20 +26,15 @@
 
                         <div class="card-content">
                             {% if not entry.previewPicture is null %}
-                                <i class="card-title grey-text text-darken-4 activator material-icons right">more_vert</i>
+                                <i class="grey-text text-darken-4 activator material-icons right">more_vert</i>
                             {% endif %}
 
                             <span class="card-title dot-ellipsis dot-resize-update"><a href="{{ path('view', { 'id': entry.id }) }}" title="{{ entry.title|raw }}">{{ entry.title|striptags|raw }}</a></span>
 
-                            <div class="estimatedTime grey-text">
-                                <span class="tool reading-time">
-                                    {% set readingTime = entry.readingTime / app.user.config.readingSpeed %}
-                                    {% if readingTime > 0 %}
-                                        {{ 'entry.list.reading_time_minutes'|trans({'%readingTime%': readingTime|round}) }}
-                                    {% else %}
-                                        {{ 'entry.list.reading_time_less_one_minute'|trans|raw }}
-                                    {% endif %}
-                                </span>
+                            <div class="original grey-text">
+                                <a href="{{ entry.url|e }}" target="_blank" title="{{ 'entry.list.original_article'|trans }}: {{ entry.title|e }} - {{ entry.domainName|removeWww }}" class="tool original grey-text">
+                                    <span>{{ entry.domainName|removeWww|truncate(18) }}</span>
+                                </a>
                             </div>
 
                             {% if entry.previewPicture is null %}
@@ -55,14 +50,8 @@
 
                     {% if not entry.previewPicture is null %}
                         <div class="card-reveal">
-                            <i class="card-title grey-text text-darken-4 material-icons right">clear</i>
+                            <i class="card-title activator grey-text text-darken-4 material-icons right">clear</i>
                             <span class="card-title"><a href="{{ path('view', { 'id': entry.id }) }}">{{ entry.title|raw }}</a></span>
-
-                            <div class="estimatedTime grey-text">
-                                <span class="tool reading-time">
-                                    {% if readingTime > 0 %}{{ 'entry.list.reading_time_minutes'|trans({'%readingTime%': readingTime|round}) }}{% else %}{{ 'entry.list.reading_time_less_one_minute'|trans|raw }}{% endif %}
-                                </span>
-                            </div>
 
                             <p>{{ entry.content|striptags|slice(0, 300)|raw }}&hellip;</p>
 
@@ -75,8 +64,9 @@
                     {% endif %}
 
                     <div class="card-action">
-                        <span class="bold">
-                            <a href="{{ entry.url|e }}" target="_blank" title="{{ 'entry.list.original_article'|trans }}: {{ entry.title|e }} - {{ entry.domainName|removeWww }}" class="tool original grey-text"><span>{{ entry.domainName|removeWww|truncate(18) }}</span></a>
+                        <span class="reading-time grey-text">
+                            <i class="material-icons" title="{{ 'entry.list.reading_time'|trans }}">timer</i>
+                            {{ entry.readingTime / app.user.config.readingSpeed }} min
                         </span>
 
                         <ul class="tools right">
