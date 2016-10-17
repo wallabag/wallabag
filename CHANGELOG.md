@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased](https://github.com/wallabag/wallabag/tree/HEAD)
+## [2.1.2](https://github.com/wallabag/wallabag/tree/2.1.2) (2016-10-17)
 
 **Merged pull requests:**
 
