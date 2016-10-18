@@ -18,8 +18,49 @@ class Client extends BaseClient
      */
     protected $id;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="text", nullable=true)
+     */
+    protected $name;
+
+    /**
+     * @ORM\OneToMany(targetEntity="RefreshToken", mappedBy="client", cascade={"remove"})
+     */
+    protected $refreshTokens;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AccessToken", mappedBy="client", cascade={"remove"})
+     */
+    protected $accessTokens;
+
     public function __construct()
     {
         parent::__construct();
+    }
+
+    /**
+     * Get name.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set name.
+     *
+     * @param string $name
+     *
+     * @return Client
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
     }
 }

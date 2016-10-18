@@ -19,18 +19,19 @@ menu:
         unread: 'Pas legits'
         starred: 'Favorits'
         archive: 'Legits'
-        all_articles: 'Tots los articles'
+        all_articles: 'Totes los articles'
         config: 'Configuracion'
         tags: 'Etiquetas'
         internal_settings: 'Configuracion interna'
         import: 'Importar'
         howto: 'Ajuda'
         developer: 'Desvolopador'
-        logout: 'Déconnexion'
+        logout: 'Desconnexion'
         about: 'A prepaus'
         search: 'Cercar'
         save_link: 'Enregistrar un novèl article'
         back_to_unread: 'Tornar als articles pas legits'
+        # users_management: 'Users management'
     top:
         add_new_entry: 'Enregistrar un novèl article'
         search: 'Cercar'
@@ -41,13 +42,14 @@ menu:
 
 footer:
     wallabag:
-        elsewhere: 'Emportatz wallabag amb vosaultres'
+        elsewhere: 'Emportatz wallabag amb vosautres'
         social: 'Social'
         powered_by: 'propulsat per'
         about: 'A prepaus'
-    page_title: 'Configuracion'
+    # stats: Since %user_creation% you read %nb_archives% articles. That is about %per_day% a day!
 
 config:
+    page_title: 'Configuracion'
     tab_menu:
         settings: 'Paramètres'
         rss: 'RSS'
@@ -68,11 +70,12 @@ config:
             200_word: "Legissi a l'entorn de 200 mots per minuta"
             300_word: "Legissi a l'entorn de 300 mots per minuta"
             400_word: "Legissi a l'entorn de 400 mots per minuta"
+        pocket_consumer_key_label: Clau d'autentificacion Pocket per importar las donadas
     form_rss:
         description: "Los fluxes RSS fornits per wallabag vos permeton de legir vòstres articles salvagardats dins vòstre lector de fluxes preferit. Per los poder emplegar, vos cal, d'en primièr crear un geton."
         token_label: 'Geton RSS'
-        no_token: 'Aucun jeton généré'
-        token_create: 'Pas cap de geton generat'
+        no_token: 'Pas cap de geton generat'
+        token_create: 'Creatz vòstre geton'
         token_reset: 'Reïnicializatz vòstre geton'
         rss_links: 'URL de vòstres fluxes RSS'
         rss_link:
@@ -93,6 +96,7 @@ config:
         if_label: 'se'
         then_tag_as_label: 'alara atribuir las etiquetas'
         delete_rule_label: 'suprimir'
+        # edit_rule_label: 'edit'
         rule_label: 'Règla'
         tags_label: 'Etiquetas'
         faq:
@@ -126,12 +130,6 @@ config:
                 or: "Una règla O l'autra"
                 and: "Una règla E l'autra"
                 matches: 'Teste se un <i>subjècte</i> correspond a una <i>recerca</i> (non sensibla a la cassa).<br />Exemple : <code>title matches \"football\"</code>'
-    form_new_user:
-        username_label: "Nom d'utilizaire"
-        password_label: 'Senhal'
-        repeat_new_password_label: 'Confirmatz vòstre novèl senhal'
-        plain_password_label: 'Senhal en clar'
-        email_label: 'Adreça de corrièl'
 
 entry:
     page_titles:
@@ -139,11 +137,14 @@ entry:
         starred: 'Articles favorits'
         archived: 'Articles legits'
         filtered: 'Articles filtrats'
+        filtered_tags: 'Filtats per etiquetas'
+        untagged: 'Articles sens etiqueta'
     list:
         number_on_the_page: "{0} I a pas cap d'article.|{1} I a un article.|]1,Inf[ I a %count% articles."
         reading_time: 'durada de lectura'
         reading_time_minutes: 'durada de lectura : %readingTime% min'
         reading_time_less_one_minute: 'durada de lectura : <small class="inferieur">&lt;</small> 1 min'
+        number_of_tags: '{1}e una autra etiqueta|]1,Inf[e %count% autras etiquetas'
         reading_time_minutes_short: '%readingTime% min'
         reading_time_less_one_minute_short: '<small class="inferieur">&lt;</small> 1 min'
         original_article: 'original'
@@ -183,8 +184,10 @@ entry:
             re_fetch_content: 'Tornar cargar lo contengut'
             delete: 'Suprimir'
             add_a_tag: 'Ajustar una etiqueta'
-            share_content: 'Partatjar'
+            share_content: 'Partejar'
             share_email_label: 'Corrièl'
+            public_link: 'ligam public'
+            delete_public_link: 'suprimir lo ligam public'
             download: 'Telecargar'
             print: 'Imprimir'
             problem:
@@ -192,7 +195,7 @@ entry:
                 description: "Marca mal la presentacion d'aqueste article ?"
         edit_title: 'Modificar lo títol'
         original_article: 'original'
-        annotations_on_the_entry: "{0} Pas cap d'anotacion|{1} Una anotacion|]1,Inf[ %nbAnnotations% anotacions"
+        annotations_on_the_entry: "{0} Pas cap d'anotacion|{1} Una anotacion|]1,Inf[ %count% anotacions"
         created_at: 'Data de creacion'
     new:
         page_title: 'Enregistrar un novèl article'
@@ -205,6 +208,8 @@ entry:
         url_label: 'Url'
         is_public_label: 'Public'
         save_label: 'Enregistrar'
+    public:
+        # shared_by_wallabag: "This article has been shared by <a href='%wallabag_instance%'>wallabag</a>"
 
 about:
     page_title: 'A prepaus'
@@ -218,7 +223,7 @@ about:
         developped_by: 'Desvolopat per'
         website: 'Site web'
         many_contributors: 'E un fum de contributors ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">sur Github</a>'
-        project_website: 'Site web del projète'
+        project_website: 'Site web del projècte'
         license: 'Licéncia'
         version: 'Version'
     getting_help:
@@ -239,7 +244,7 @@ about:
 
 howto:
     page_title: 'Ajuda'
-    page_description: "I a mai d'un biai d'enregistrar un article :"
+    page_description: "I a mai d'un biais d'enregistrar un article :"
     top_menu:
         browser_addons: 'Extensions de navigator'
         mobile_apps: 'Aplicacions mobil'
@@ -260,12 +265,14 @@ howto:
 
 quickstart:
     page_title: 'Per ben començar'
+    # more: 'More…'
     intro:
         title: 'Benvenguda sus wallabag !'
         paragraph_1: "Anem vos guidar per far lo torn de la proprietat e vos presentar unas fonccionalitats que vos poirián interessar per vos apropriar aquesta aisina."
         paragraph_2: 'Seguètz-nos '
     configure:
         title: "Configuratz l'aplicacio"
+        # description: 'In order to have an application which suits you, have a look into the configuration of wallabag.'
         language: "Cambiatz la lenga e l'estil de l'aplicacion"
         rss: 'Activatz los fluxes RSS'
         tagging_rules: 'Escrivètz de règlas per classar automaticament vòstres articles'
@@ -279,6 +286,7 @@ quickstart:
         import: 'Configurar los impòrt'
     first_steps:
         title: 'Primièrs passes'
+        # description: "Now wallabag is well configured, it's time to archive the web. You can click on the top right sign + to add a link."
         new_article: 'Ajustatz vòstre primièr article'
         unread_articles: 'E racaptatz-lo !'
     migrate:
@@ -287,11 +295,16 @@ quickstart:
         pocket: 'Migrar dempuèi Pocket'
         wallabag_v1: 'Migrar dempuèi wallabag v1'
         wallabag_v2: 'Migrar dempuèi wallabag v2'
+        readability: 'Migrar dempuèi Readability'
+        instapaper: 'Migrar dempuèi Instapaper'
     developer:
         title: 'Pels desvolopadors'
+        # description: 'We also thought to the developers: Docker, API, translations, etc.'
         create_application: 'Crear vòstra aplicacion tèrça'
+        # use_docker: 'Use Docker to install wallabag'
     docs:
         title: 'Documentacion complèta'
+        # description: "There are so much features in wallabag. Don't hesitate to read the manual to know them and to learn how to use them."
         annotate: 'Anotatar vòstre article'
         export: 'Convertissètz vòstres articles en ePub o en PDF'
         search_filters: "Aprenètz a utilizar lo motor de recèrca e los filtres per retrobar l'article que vos interèssa"
@@ -308,6 +321,7 @@ tag:
     page_title: 'Etiquetas'
     list:
         number_on_the_page: "{0} I a pas cap d'etiquetas.|{1} I a una etiqueta.|]1,Inf[ I a %count% etiquetas."
+        see_untagged_entries: "Afichar las entradas sens pas cap d'etiquetas"
 
 import:
     page_title: 'Importar'
@@ -320,7 +334,7 @@ import:
         file_label: 'Fichièr'
         save_label: 'Importar lo fichièr'
     pocket:
-        page_title: 'Importer > Pocket'
+        page_title: 'Importar > Pocket'
         description: "Aquesta aisina importarà totas vòstras donadas de Pocket. Pocket nos permet pas de recuperar lo contengut dempuèi lor servidor, alara wallabag deu tornar fulhetar cada article per recuperar son contengut."
         config_missing:
             description: "L'importacion dempuèi Pocket es pas configurada."
@@ -329,20 +343,38 @@ import:
         authorize_message: "Podètz importar vòstras donadas dempuèi vòstre compte Pocket. Vos cal pas que clicar sul boton çai-jos e autorizar wallabag a se connectar a getpocket.com."
         connect_to_pocket: 'Se connectar a Pocket e importar las donadas'
     wallabag_v1:
-        page_title: 'Importer > Wallabag v1'
+        page_title: 'Importar > Wallabag v1'
         description: 'Aquesta aisina importarà totas vòstras donadas de wallabag v1. Sus vòstre pagina de configuracion de wallabag v1, clicatz sus \"Export JSON\" dins la seccion \"Exportar vòstras donadas de wallabag\". Traparatz un fichièr \"wallabag-export-1-xxxx-xx-xx.json\".'
         how_to: "Causissètz lo fichièr de vòstra exportacion wallabag v1 e clicatz sul boton çai-jos per l'importar."
     wallabag_v2:
-        page_title: 'Importer > Wallabag v2'
+        page_title: 'Importar > Wallabag v2'
         description: "Aquesta aisina importarà totas vòstras donadas d'una instància mai de wallabag v2. Anatz dins totes vòstres articles, puèi, sus la barra laterala, clicatz sus \"JSON\". Traparatz un fichièr \"All articles.json\""
+    readability:
+        page_title: 'Importar > Readability'
+        description: "Aquesta aisina importarà totas vòstres articles de Readability. Sus la pagina de l'aisina (https://www.readability.com/tools/), clicatz sus \"Export your data\" dins la seccion \"Data Export\". Recebretz un corrièl per telecargar un json (qu'acaba pas amb un .json de fach)."
+        how_to: "Mercés de seleccionar vòstre Readability fichièr e de clicar sul boton dejós per lo telecargar e l'importar."
+    worker:
+        enabled: "L'importacion se fa de manièra asincròna. Un còp l'importacion lançada, una aisina externa s'ocuparà dels messatges un per un. Lo servici actual es : "
+    firefox:
+        page_title: 'Importar > Firefox'
+        description: "Aquesta aisina importarà totas vòstres favorits de Firefox. Just go to your bookmarks (Ctrl+Maj+O), then into \"Import and backup\", choose \"Backup...\". You will obtain a .json file."
+        how_to: "Mercés de causir lo fichièr de salvagarda e de clicar sul boton dejós per l'importar. Notatz que lo tractament pòt durar un moment ja que totes los articles an d'èsser recuperats."
+    chrome:
+        page_title: 'Importar > Chrome'
+        description: "Aquesta aisina importarà totas vòstres favorits de Chrome. L'emplaçament del fichièr depend de vòstre sistèma operatiu : <ul><li>Sus Linux, anatz al dorsièr <code>~/.config/chromium/Default/</code></li><li>Sus Windows, deu èsser dins <code>%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default</code></li><li>sus OS X, deu èsser dins <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>Un còp enlà, copiatz lo fichièr de favorits dins un endrech que volètz.<em><br>Notatz que s'avètz Chromium al lòc de Chrome, vos cal cambiar lo camin segon aquesta situacion.</em></p>"
+        how_to: "Mercés de causir lo fichièr de salvagarda e de clicar sul boton dejós per l'importar. Notatz que lo tractament pòt durar un moment ja que totes los articles an d'èsser recuperats."
+    instapaper:
+        page_title: 'Importar > Instapaper'
+        description: "Aquesta aisina importarà totas vòstres articles d'Instapaper. Sus la pagina de paramètres (https://www.instapaper.com/user), clicatz sus \"Download .CSV file\" dins la seccion \"Export\". Un fichièr CSV serà telecargat (aital \"instapaper-export.csv\")."
+        how_to: "Mercés de causir vòstre fichièr Instapaper e de clicar sul boton dejós per lo telecargar e l'importar"
 
 developer:
-    page_title: 'Desvolopador'
+    page_title: 'Desvolopaire'
     welcome_message: "Benvenguda sus l'API de wallabag"
     documentation: 'Documentacion'
     how_to_first_app: 'Cossí crear vòstra primièra aplicacion'
     full_documentation: "Veire la documentacion completa de l'API"
-    # list_methods: 'List API methods'
+    list_methods: "Lista dels metòdes de l'API"
     clients:
         title: 'Clients'
         create_new: 'Crear un novèl client'
@@ -361,20 +393,22 @@ developer:
         page_title: 'Desvlopador > Novèl client'
         page_description: "Anatz crear un novèl client. Mercés de cumplir l'url de redireccion cap a vòstra aplicacion."
         form:
+            name_label: "Nom del client"
             redirect_uris_label: 'URLs de redireccion'
             save_label: 'Crear un novèl client'
         action_back: 'Retorn'
     client_parameter:
         page_title: 'Desvolopador > Los paramètres de vòstre client'
         page_description: 'Vaquí los paramètres de vòstre client'
+        field_name: 'Nom del client'
         field_id: 'ID Client'
         field_secret: 'Clau secreta'
         back: 'Retour'
-        read_howto: 'Legir \"cossí crear ma primièra aplicacion\"'
+        read_howto: 'Legir "cossí crear ma primièra aplicacion"'
     howto:
         page_title: 'Desvolopador > Cossí crear ma primièra aplicacion'
         description:
-            paragraph_1: "Las comandas seguentas utilizan la <a href=\"https://github.com/jkbrzt/httpie\">libraria HTTPie</a>. Asseguratz-vos que siasqueòu installadas abans de l'utilizar."
+            paragraph_1: "Las comandas seguentas utilizan la <a href=\"https://github.com/jkbrzt/httpie\">bibliotèca HTTPie</a>. Asseguratz-vos que siasqueòu installadas abans de l'utilizar."
             paragraph_2: "Vos cal un geton per escambiar entre vòstra aplicacion e l'API de wallabar."
             paragraph_3: 'Per crear un geton, vos cal crear <a href=\"%link%\">crear un novèl client</a>.'
             paragraph_4: 'Ara creatz un geton (remplaçar client_id, client_secret, username e password amb las bonas valors) :'
@@ -383,6 +417,33 @@ developer:
             paragraph_7: "Aquesta requèsta tornarà totes los articles de l'utilizaire."
             paragraph_8: "Se volètz totas las adreças d'accès de l'API, donatz un còp d’uèlh <a href=\"%link%\">a la documentacion de l'API</a>."
         back: 'Retorn'
+
+user:
+    # page_title: Users management
+    # new_user: Create a new user
+    # edit_user: Edit an existing user
+    # description: "Here you can manage all users (create, edit and delete)"
+    # list:
+    #     actions: Actions
+    #     edit_action: Edit
+    #     yes: Yes
+    #     no: No
+    #     create_new_one: Create a new user
+    form:
+        username_label: "Nom d'utilizaire"
+        # name_label: 'Name'
+        password_label: 'Senhal'
+        repeat_new_password_label: 'Confirmatz vòstre novèl senhal'
+        plain_password_label: 'Senhal en clar'
+        email_label: 'Adreça de corrièl'
+        # enabled_label: 'Enabled'
+        # locked_label: 'Locked'
+        # last_login_label: 'Last login'
+        # twofactor_label: Two factor authentication
+        # save: Save
+        # delete: Delete
+        # delete_confirm: Are you sure?
+        # back_to_list: Back to list
 
 flashes:
     config:
@@ -400,10 +461,10 @@ flashes:
         notice:
             entry_already_saved: 'Article ja salvargardat lo %date%'
             entry_saved: 'Article enregistrat'
-            # entry_saved_failed: 'Failed to save entry'
+            entry_saved_failed: 'Article salvat mai fracàs de la recuperacion del contengut'
             entry_updated: 'Article mes a jorn'
             entry_reloaded: 'Article recargat'
-            entry_reload_failed: "Fracàs de l'actualizacion de l'article"
+            entry_reloaded_failed: "L'article es estat cargat de nòu mai la recuperacion del contengut a fracassat"
             entry_archived: 'Article marcat coma legit'
             entry_unarchived: 'Article marcat coma pas legit'
             entry_starred: 'Article apondut dins los favorits'
@@ -417,6 +478,10 @@ flashes:
             failed: "L'importacion a fracassat, mercés de tornar ensajar"
             failed_on_file: "Errorr pendent du tractament de l'import. Mercés de verificar vòstre fichièr."
             summary: "Rapòrt d'import: %imported% importats, %skipped% ja presents."
+            summary_with_queue: "Rapòrt d'import : %queued% en espèra de tractament."
+        error:
+            redis_enabled_not_installed: "Redis es capable d'importar de manièra asincròna mai sembla que <u>podèm pas nos conectar amb el</u>. Mercés de verificar la configuracion de Redis."
+            rabbit_enabled_not_installed: "RabbitMQ es capable d'importar de manièra asincròna mai sembla que <u>podèm pas nos conectar amb el</u>. Mercés de verificar la configuracion de RabbitMQ."
     developer:
         notice:
             client_created: 'Novèl client creat'

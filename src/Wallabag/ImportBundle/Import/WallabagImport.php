@@ -3,15 +3,10 @@
 namespace Wallabag\ImportBundle\Import;
 
 use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\UserBundle\Entity\User;
 
 abstract class WallabagImport extends AbstractImport
 {
-    protected $user;
-    protected $skippedEntries = 0;
-    protected $importedEntries = 0;
     protected $filepath;
-    protected $markAsRead;
     // untitled in all languages from v1
     protected $untitled = [
         'Untitled',
@@ -27,19 +22,6 @@ abstract class WallabagImport extends AbstractImport
         'No title found',
         '',
     ];
-
-    /**
-     * We define the user in a custom call because on the import command there is no logged in user.
-     * So we can't retrieve user from the `security.token_storage` service.
-     *
-     * @param User $user
-     */
-    public function setUser(User $user)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
 
     /**
      * {@inheritdoc}
@@ -76,23 +58,20 @@ abstract class WallabagImport extends AbstractImport
         $data = json_decode(file_get_contents($this->filepath), true);
 
         if (empty($data)) {
+            $this->logger->error('WallabagImport: no entries in imported file');
+
             return false;
+        }
+
+        if ($this->producer) {
+            $this->parseEntriesForProducer($data);
+
+            return true;
         }
 
         $this->parseEntries($data);
 
         return true;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getSummary()
-    {
-        return [
-            'skipped' => $this->skippedEntries,
-            'imported' => $this->importedEntries,
-        ];
     }
 
     /**
@@ -108,85 +87,60 @@ abstract class WallabagImport extends AbstractImport
     }
 
     /**
-     * Set whether articles must be all marked as read.
-     *
-     * @param bool $markAsRead
+     * {@inheritdoc}
      */
-    public function setMarkAsRead($markAsRead)
+    public function parseEntry(array $importedEntry)
     {
-        $this->markAsRead = $markAsRead;
+        $existingEntry = $this->em
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findByUrlAndUserId($importedEntry['url'], $this->user->getId());
 
-        return $this;
-    }
+        if (false !== $existingEntry) {
+            ++$this->skippedEntries;
 
-    /**
-     * Parse and insert all given entries.
-     *
-     * @param $entries
-     */
-    protected function parseEntries($entries)
-    {
-        $i = 1;
-
-        foreach ($entries as $importedEntry) {
-            $existingEntry = $this->em
-                ->getRepository('WallabagCoreBundle:Entry')
-                ->findByUrlAndUserId($importedEntry['url'], $this->user->getId());
-
-            if (false !== $existingEntry) {
-                ++$this->skippedEntries;
-                continue;
-            }
-
-            $data = $this->prepareEntry($importedEntry, $this->markAsRead);
-
-            $entry = $this->fetchContent(
-                new Entry($this->user),
-                $importedEntry['url'],
-                $data
-            );
-
-            // jump to next entry in case of problem while getting content
-            if (false === $entry) {
-                ++$this->skippedEntries;
-                continue;
-            }
-
-            if (array_key_exists('tags', $data)) {
-                $this->contentProxy->assignTagsToEntry(
-                    $entry,
-                    $data['tags']
-                );
-            }
-
-            if (isset($importedEntry['preview_picture'])) {
-                $entry->setPreviewPicture($importedEntry['preview_picture']);
-            }
-
-            $entry->setArchived($data['is_archived']);
-            $entry->setStarred($data['is_starred']);
-
-            $this->em->persist($entry);
-            ++$this->importedEntries;
-
-            // flush every 20 entries
-            if (($i % 20) === 0) {
-                $this->em->flush();
-                $this->em->clear($entry);
-            }
-            ++$i;
+            return;
         }
 
-        $this->em->flush();
+        $data = $this->prepareEntry($importedEntry);
+
+        $entry = new Entry($this->user);
+        $entry->setUrl($data['url']);
+        $entry->setTitle($data['title']);
+
+        // update entry with content (in case fetching failed, the given entry will be return)
+        $entry = $this->fetchContent($entry, $data['url'], $data);
+
+        if (array_key_exists('tags', $data)) {
+            $this->contentProxy->assignTagsToEntry(
+                $entry,
+                $data['tags'],
+                $this->em->getUnitOfWork()->getScheduledEntityInsertions()
+            );
+        }
+
+        if (isset($importedEntry['preview_picture'])) {
+            $entry->setPreviewPicture($importedEntry['preview_picture']);
+        }
+
+        $entry->setArchived($data['is_archived']);
+        $entry->setStarred($data['is_starred']);
+
+        if (!empty($data['created_at'])) {
+            $entry->setCreatedAt(new \DateTime($data['created_at']));
+        }
+
+        $this->em->persist($entry);
+        ++$this->importedEntries;
+
+        return $entry;
     }
 
     /**
      * This should return a cleaned array for a given entry to be given to `updateEntry`.
      *
-     * @param array $entry      Data from the imported file
-     * @param bool  $markAsRead Should we mark as read content?
+     * @param array $entry Data from the imported file
      *
      * @return array
      */
-    abstract protected function prepareEntry($entry = [], $markAsRead = false);
+    abstract protected function prepareEntry($entry = []);
 }

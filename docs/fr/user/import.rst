@@ -28,17 +28,40 @@ la section Pocket puis sur ``Se connecter à Pocket et importer les données``.
 
 Vous devez autoriser wallabag à se connecter à votre compte Pocket.
 Vos données vont être importées. L'import de données est une action qui peut être couteuse
-pour votre serveur (nous devons encore travailler pour améliorer cet import).
-
-Depuis Instapaper
------------------
-
-*Fonctionnalité pas encore implémentée dans wallabag v2.*
+pour votre serveur.
 
 Depuis Readability
 ------------------
 
-*Fonctionnalité pas encore implémentée dans wallabag v2.*
+Exportez vos données de Readability
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Sur la page des outils (`https://www.readability.com/tools/ <https://www.readability.com/tools/>`_), cliquez sur "Export your data" dans la section "Data Export". Vous allez recevoir un email avec un lien pour télécharger le json.
+
+Importez vos données dans wallabag 2.x
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Cliquez sur le lien ``Importer`` dans le menu, sur  ``Importer les contenus`` dans
+la section Readability et ensuite sélectionnez votre fichier json pour l'uploader.
+
+Vos données vont être importées. L'import de données est une action qui peut être couteuse pour votre serveur.
+
+Depuis Instapaper
+-----------------
+
+Exportez vos données de Instapaper
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Sur la page des paramètres (`https://www.instapaper.com/user <https://www.instapaper.com/user>`_), cliquez sur "Download .CSV file" dans la section "Export". Un fichier CSV se téléchargera (``instapaper-export.csv``).
+
+Importez vos données dans wallabag 2.x
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Cliquez sur le lien ``Importer`` dans le menu, sur  ``Importer les contenus`` dans
+la section Instapaper et ensuite sélectionnez votre fichier CSV pour l'uploader.
+
+Vos données vont être importées. L'import de données est une action qui peut être couteuse pour votre serveur.
+
 
 Depuis un fichier HTML ou JSON
 ------------------------------

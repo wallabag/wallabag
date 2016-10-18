@@ -40,6 +40,15 @@ class Entry
     /**
      * @var string
      *
+     * @ORM\Column(name="uuid", type="text", nullable=true)
+     *
+     * @Groups({"entries_for_user", "export_all"})
+     */
+    private $uuid;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="title", type="text", nullable=true)
      *
      * @Groups({"entries_for_user", "export_all"})
@@ -88,20 +97,20 @@ class Entry
     private $content;
 
     /**
-     * @var date
+     * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime")
      *
-     * @Groups({"export_all"})
+     * @Groups({"entries_for_user", "export_all"})
      */
     private $createdAt;
 
     /**
-     * @var date
+     * @var \DateTime
      *
      * @ORM\Column(name="updated_at", type="datetime")
      *
-     * @Groups({"export_all"})
+     * @Groups({"entries_for_user", "export_all"})
      */
     private $updatedAt;
 
@@ -187,8 +196,6 @@ class Entry
      *      @ORM\JoinColumn(name="tag_id", referencedColumnName="id")
      *  }
      * )
-     *
-     * @Groups({"entries_for_user", "export_all"})
      */
     private $tags;
 
@@ -401,7 +408,22 @@ class Entry
     }
 
     /**
-     * @return string
+     * Set created_at.
+     * Only used when importing data from an other service.
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return Entry
+     */
+    public function setCreatedAt(\DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -409,7 +431,7 @@ class Entry
     }
 
     /**
-     * @return string
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
@@ -518,6 +540,21 @@ class Entry
     }
 
     /**
+     * @VirtualProperty
+     * @SerializedName("tags")
+     * @Groups({"entries_for_user", "export_all"})
+     */
+    public function getSerializedTags()
+    {
+        $data = [];
+        foreach ($this->tags as $tag) {
+            $data[] = $tag->getLabel();
+        }
+
+        return $data;
+    }
+
+    /**
      * @param Tag $tag
      */
     public function addTag(Tag $tag)
@@ -594,5 +631,38 @@ class Entry
     public function getLanguage()
     {
         return $this->language;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUuid()
+    {
+        return $this->uuid;
+    }
+
+    /**
+     * @param string $uuid
+     *
+     * @return Entry
+     */
+    public function setUuid($uuid)
+    {
+        $this->uuid = $uuid;
+
+        return $this;
+    }
+
+    public function generateUuid()
+    {
+        if (null === $this->uuid) {
+            // @see http://blog.kevingomez.fr/til/2015/07/26/why-is-uniqid-slow/ for true parameter
+            $this->uuid = uniqid('', true);
+        }
+    }
+
+    public function cleanUuid()
+    {
+        $this->uuid = null;
     }
 }

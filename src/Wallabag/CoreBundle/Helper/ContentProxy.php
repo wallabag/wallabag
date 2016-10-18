@@ -95,12 +95,22 @@ class ContentProxy
      * Assign some tags to an entry.
      *
      * @param Entry        $entry
-     * @param array|string $tags  An array of tag or a string coma separated of tag
+     * @param array|string $tags          An array of tag or a string coma separated of tag
+     * @param array        $entitiesReady Entities from the EntityManager which are persisted but not yet flushed
+     *                                    It is mostly to fix duplicate tag on import @see http://stackoverflow.com/a/7879164/569101
      */
-    public function assignTagsToEntry(Entry $entry, $tags)
+    public function assignTagsToEntry(Entry $entry, $tags, array $entitiesReady = [])
     {
         if (!is_array($tags)) {
             $tags = explode(',', $tags);
+        }
+
+        // keeps only Tag entity from the "not yet flushed entities"
+        $tagsNotYetFlushed = [];
+        foreach ($entitiesReady as $entity) {
+            if ($entity instanceof Tag) {
+                $tagsNotYetFlushed[$entity->getLabel()] = $entity;
+            }
         }
 
         foreach ($tags as $label) {
@@ -111,11 +121,15 @@ class ContentProxy
                 continue;
             }
 
-            $tagEntity = $this->tagRepository->findOneByLabel($label);
+            if (isset($tagsNotYetFlushed[$label])) {
+                $tagEntity = $tagsNotYetFlushed[$label];
+            } else {
+                $tagEntity = $this->tagRepository->findOneByLabel($label);
 
-            if (is_null($tagEntity)) {
-                $tagEntity = new Tag();
-                $tagEntity->setLabel($label);
+                if (is_null($tagEntity)) {
+                    $tagEntity = new Tag();
+                    $tagEntity->setLabel($label);
+                }
             }
 
             // only add the tag on the entry if the relation doesn't exist

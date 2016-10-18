@@ -11,6 +11,7 @@ services:
         links:
             - php:php
         command: nginx -c /nginx.conf
+
     php:
         build:
             context: docker/php
@@ -30,6 +31,7 @@ services:
             # If all DBMS are commented out, sqlite will be used as default
             # - ./docker/postgres/env
             # - ./docker/mariadb/env
+
     #postgres:
     #    image: postgres:9
     #    ports:
@@ -38,6 +40,7 @@ services:
     #        - ./docker/data/pgsql:/var/lib/postgresql/data
     #    env_file:
     #        - ./docker/postgres/env
+
     #mariadb:
     #    image: mariadb:10
     #    ports:
@@ -46,3 +49,13 @@ services:
     #        - ./docker/data/mariadb:/var/lib/mysql
     #    env_file:
     #        - ./docker/mariadb/env
+
+    rabbitmq:
+        image: rabbitmq:3-management
+        ports:
+            - "15672:15672"
+
+    redis:
+        image: redis
+        ports:
+            - "6379:6379"

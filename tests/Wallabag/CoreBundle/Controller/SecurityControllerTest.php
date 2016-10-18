@@ -69,4 +69,19 @@ class SecurityControllerTest extends WallabagCoreTestCase
         $this->assertTrue($user->isTrustedComputer('ABCDEF'));
         $this->assertFalse($user->isTrustedComputer('FEDCBA'));
     }
+
+    public function testEnabledRegistration()
+    {
+        $client = $this->getClient();
+
+        if (!$client->getContainer()->getParameter('fosuser_registration')) {
+            $this->markTestSkipped('fosuser_registration is not enabled.');
+
+            return;
+        }
+
+        $client->followRedirects();
+        $crawler = $client->request('GET', '/register');
+        $this->assertContains('registration.submit', $crawler->filter('body')->extract(['_text'])[0]);
+    }
 }

@@ -80,4 +80,17 @@ abstract class WallabagCoreTestCase extends WebTestCase
 
         throw new \RuntimeException('No logged in User.');
     }
+
+    /**
+     * Check if Redis is installed.
+     * If not, mark test as skip.
+     */
+    protected function checkRedis()
+    {
+        try {
+            $this->client->getContainer()->get('wallabag_core.redis.client')->connect();
+        } catch (\Exception $e) {
+            $this->markTestSkipped('Redis is not installed/activated');
+        }
+    }
 }

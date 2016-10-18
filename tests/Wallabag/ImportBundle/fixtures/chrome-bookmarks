@@ -1,0 +1,36 @@
+{
+   "checksum": "f3aa0e9c0edad632a246f7e98ec64918",
+   "roots": {
+      "bookmark_bar": {
+         "children": [ {
+            "date_added": "13118850929335823",
+            "id": "6",
+            "name": "\"La multiplication des chefs de projet est une catastrophe managériale majeure\", affirme le sociologue François Dupuy - Ressources humaines",
+            "type": "url",
+            "url": "http://www.usinenouvelle.com/article/la-multiplication-des-chefs-de-projet-est-une-catastrophe-manageriale-majeure-affirme-le-sociologue-francois-dupuy.N307730"
+         } ],
+         "date_added": "13118829474385693",
+         "date_modified": "13118850929335823",
+         "id": "1",
+         "name": "Barre de favoris",
+         "type": "folder"
+      },
+      "other": {
+         "children": [  ],
+         "date_added": "13118829474385701",
+         "date_modified": "0",
+         "id": "2",
+         "name": "Autres favoris",
+         "type": "folder"
+      },
+      "synced": {
+         "children": [  ],
+         "date_added": "13118829474385702",
+         "date_modified": "0",
+         "id": "3",
+         "name": "Favoris sur mobile",
+         "type": "folder"
+      }
+   },
+   "version": 1
+}

@@ -48,7 +48,6 @@
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/doctrine-cache-bundle": "^1.2",
         "twig/extensions": "~1.0",
-        "symfony/assetic-bundle": "~2.3",
         "symfony/swiftmailer-bundle": "^2.3",
         "symfony/monolog-bundle": "^2.8",
         "sensio/distribution-bundle": "^5.0",
@@ -64,12 +63,11 @@
         "willdurand/hateoas-bundle": "~1.0",
         "htmlawed/htmlawed": "~1.1.19",
         "liip/theme-bundle": "~1.1",
-        "pagerfanta/pagerfanta": "~1.0.3",
         "lexik/form-filter-bundle": "~5.0",
         "j0k3r/graby": "~1.0",
-        "friendsofsymfony/user-bundle": "~2.0@dev",
+        "friendsofsymfony/user-bundle": "dev-master#e168ed64629d034cb9cbbffb9d4350f62ef04fab as 2.0.x-dev",
         "friendsofsymfony/oauth-server-bundle": "^1.5",
-        "stof/doctrine-extensions-bundle": "^1.2@dev",
+        "stof/doctrine-extensions-bundle": "^1.2",
         "scheb/two-factor-bundle": "~2.0",
         "grandt/phpepub": "~4.0",
         "wallabag/php-mobi": "~1.0.0",
@@ -81,24 +79,26 @@
         "mnapoli/piwik-twig-extension": "^1.0",
         "lexik/maintenance-bundle": "~2.1",
         "ocramius/proxy-manager": "1.*",
-        "white-october/pagerfanta-bundle": "^1.0"
+        "white-october/pagerfanta-bundle": "^1.0",
+        "php-amqplib/rabbitmq-bundle": "^1.8",
+        "predis/predis": "^1.0",
+        "javibravo/simpleue": "^1.0"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "~2.2",
         "doctrine/data-fixtures": "~1.1.1",
         "sensio/generator-bundle": "^3.0",
-        "phpunit/phpunit": "~4.4",
+        "phpunit/phpunit": "~5.0",
         "symfony/phpunit-bridge": "^3.0",
-        "friendsofphp/php-cs-fixer": "~1.9"
+        "friendsofphp/php-cs-fixer": "~1.9",
+        "m6web/redis-mock": "^2.0"
     },
     "scripts": {
         "post-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
         ],
         "post-install-cmd": [
             "@post-cmd"
@@ -113,7 +113,6 @@
         "symfony-var-dir": "var",
         "symfony-web-dir": "web",
         "symfony-tests-dir": "tests",
-        "symfony-assets-install": "relative",
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"
         }

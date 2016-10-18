@@ -30,7 +30,7 @@ framework:
     assets: ~
 
 wallabag_core:
-    version: 2.0.8
+    version: 2.1.3-dev
     paypal_url: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9UBA65LG3FX9Y&lc=gb"
     languages:
         en: 'English'
@@ -46,12 +46,16 @@ wallabag_core:
         it: 'Italiano'
     items_on_page: 12
     theme: material
-    language: en
+    language: '%locale%'
     rss_limit: 50
     reading_speed: 1
+    cache_lifetime: 10
+
+wallabag_user:
+    registration_enabled: "%fosuser_registration%"
 
 wallabag_import:
-    allow_mimetypes: ['application/octet-stream', 'application/json', 'text/plain']
+    allow_mimetypes: ['application/octet-stream', 'application/json', 'text/plain', 'text/csv']
     resource_dir: "%kernel.root_dir%/../web/uploads/import"
 
 # Twig Configuration
@@ -60,19 +64,7 @@ twig:
     strict_variables: "%kernel.debug%"
     form_themes:
         - "LexikFormFilterBundle:Form:form_div_layout.html.twig"
-
-# Assetic Configuration
-assetic:
-    debug: "%kernel.debug%"
-    use_controller: false
-    bundles:        [ ]
-    #java: /usr/bin/java
-    filters:
-        cssrewrite: ~
-        #closure:
-        #    jar: "%kernel.root_dir%/Resources/java/compiler.jar"
-        #yui_css:
-        #    jar: "%kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar"
+    exception_controller: wallabag_core.exception_controller:showAction
 
 # Doctrine Configuration
 doctrine:
@@ -85,6 +77,7 @@ doctrine:
         password: "%database_password%"
         charset: UTF8
         path: "%database_path%"
+        unix_socket: "%database_socket%"
         server_version: 5.6
 
     orm:
@@ -224,3 +217,106 @@ lexik_maintenance:
     response:
         code: 503
         status: "wallabag Service Temporarily Unavailable"
+
+old_sound_rabbit_mq:
+    connections:
+        default:
+            host:     "%rabbitmq_host%"
+            port:     "%rabbitmq_port%"
+            user:     "%rabbitmq_user%"
+            password: "%rabbitmq_password%"
+            vhost:    /
+            lazy:     true
+    producers:
+        import_pocket:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.pocket'
+                type: topic
+        import_readability:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.readability'
+                type: topic
+        import_instapaper:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.instapaper'
+                type: topic
+        import_wallabag_v1:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.wallabag_v1'
+                type: topic
+        import_wallabag_v2:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.wallabag_v2'
+                type: topic
+        import_firefox:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.firefox'
+                type: topic
+        import_chrome:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.chrome'
+                type: topic
+    consumers:
+        import_pocket:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.pocket'
+                type: topic
+            queue_options:
+                name: 'wallabag.import.pocket'
+            callback: wallabag_import.consumer.amqp.pocket
+        import_readability:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.readability'
+                type: topic
+            queue_options:
+                name: 'wallabag.import.readability'
+            callback: wallabag_import.consumer.amqp.readability
+        import_instapaper:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.instapaper'
+                type: topic
+            queue_options:
+                name: 'wallabag.import.instapaper'
+            callback: wallabag_import.consumer.amqp.instapaper
+        import_wallabag_v1:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.wallabag_v1'
+                type: topic
+            queue_options:
+                name: 'wallabag.import.wallabag_v1'
+            callback: wallabag_import.consumer.amqp.wallabag_v1
+        import_wallabag_v2:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.wallabag_v2'
+                type: topic
+            queue_options:
+                name: 'wallabag.import.wallabag_v2'
+            callback: wallabag_import.consumer.amqp.wallabag_v2
+        import_firefox:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.firefox'
+                type: topic
+            queue_options:
+                name: 'wallabag.import.firefox'
+            callback: wallabag_import.consumer.amqp.firefox
+        import_chrome:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.chrome'
+                type: topic
+            queue_options:
+                name: 'wallabag.import.chrome'
+            callback: wallabag_import.consumer.amqp.chrome

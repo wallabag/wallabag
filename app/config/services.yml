@@ -16,6 +16,12 @@ services:
     wallabag.twig_extension:
         class: Wallabag\CoreBundle\Twig\WallabagExtension
         public: false
+        arguments:
+            - "@wallabag_core.entry_repository"
+            - "@wallabag_core.tag_repository"
+            - "@security.token_storage"
+            - "%wallabag_core.cache_lifetime%"
+            - "@translator"
         tags:
             - { name: twig.extension }
 

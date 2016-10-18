@@ -125,16 +125,14 @@ class UsernameRssTokenConverterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($converter->supports($params));
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     * @expectedExceptionMessage Route attribute is missing
-     */
     public function testApplyEmptyRequest()
     {
         $params = new ParamConverter([]);
         $converter = new UsernameRssTokenConverter();
 
-        $converter->apply(new Request(), $params);
+        $res = $converter->apply(new Request(), $params);
+
+        $this->assertFalse($res);
     }
 
     /**

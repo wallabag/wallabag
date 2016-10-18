@@ -1,6 +1,6 @@
 {% extends "WallabagCoreBundle::layout.html.twig" %}
 
-{% block title %}{% trans %}internal settings{% endtrans %}{% endblock %}
+{% block title %}{{ 'menu.left.internal_settings'|trans }}{% endblock %}
 
 {% block content %}
     <div class="row">
@@ -13,7 +13,7 @@
                         <div class="div_tabs col s12">
                             <ul class="tabs">
                                 {% for section in sections | craue_sortSections %}
-                                    <li class="tab col s3"><a href="#set-{{ section }}">{{ section | trans({}, 'CraueConfigBundle') }}</a></li>
+                                    <li class="tab col s12 m6 l3"><a href="#set-{{ section }}">{{ section | trans({}, 'CraueConfigBundle') }}</a></li>
                                 {% endfor %}
                             </ul>
                         </div>

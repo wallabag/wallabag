@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/">
+    <channel>
+        <title>wallabag — {{type}} feed</title>
+        <link>{{ url('unread') }}</link>
+        <pubDate>{{ "now"|date('D, d M Y H:i:s') }}</pubDate>
+        <generator>wallabag</generator>
+        <description>wallabag {{type}} elements</description>
+
+        {% for entry in entries %}
+
+            <item>
+                <title><![CDATA[{{ entry.title }}]]></title>
+                <source url="{{ url('view', { 'id': entry.id }) }}">wallabag</source>
+                <link>{{ entry.url }}</link>
+                <guid>{{ entry.url }}</guid>
+                <pubDate>{{ entry.createdAt|date('D, d M Y H:i:s') }}</pubDate>
+                <description>
+                    <![CDATA[{%- if entry.readingTime > 0 -%}{{ 'entry.list.reading_time_minutes'|trans({'%readingTime%': entry.readingTime}) }}{%- else -%}{{ 'entry.list.reading_time_less_one_minute'|trans|raw }}{%- endif %}{{ entry.content|raw -}}]]>
+                </description>
+            </item>
+
+        {% endfor %}
+
+    </channel>
+</rss>

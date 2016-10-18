@@ -8,7 +8,8 @@ export_csv: Permite exportare CSV
 export_json: Permite exportare JSON
 export_txt: Permite exportare TXT
 export_xml: Permite exportare XML
-pocket_consumer_key: Cheie consumator pentru importarea contentului din Pocket (https://getpocket.com/developer/docs/authentication)
+# import_with_rabbitmq: Enable RabbitMQ to import data asynchronously
+# import_with_redis: Enable Redis to import data asynchronously
 shaarli_url: Shaarli URL, dacă serviciul este permis
 share_diaspora: Permite share către Diaspora
 share_mail: Permite share prin email
@@ -22,3 +23,9 @@ export: "exportă"
 import: "importă"
 misc: "diverse"
 modify_settings: "aplică"
+# piwik_host: Host of your website in Piwik
+# piwik_site_id: ID of your website in Piwik
+# piwik_enabled: Enable Piwik
+# demo_mode_enabled: "Enable demo mode ? (only used for the wallabag public demo)"
+# demo_mode_username: "Demo user"
+# share_public: Allow public url for entries

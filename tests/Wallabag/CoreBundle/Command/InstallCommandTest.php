@@ -33,7 +33,7 @@ class InstallCommandTest extends WallabagCoreTestCase
     }
 
     /**
-     * Ensure next tests will have a clean database
+     * Ensure next tests will have a clean database.
      */
     public static function tearDownAfterClass()
     {
@@ -87,7 +87,6 @@ class InstallCommandTest extends WallabagCoreTestCase
         $this->assertContains('Setting up database.', $tester->getDisplay());
         $this->assertContains('Administration setup.', $tester->getDisplay());
         $this->assertContains('Config setup.', $tester->getDisplay());
-        $this->assertContains('Installing assets.', $tester->getDisplay());
     }
 
     public function testRunInstallCommandWithReset()
@@ -119,7 +118,6 @@ class InstallCommandTest extends WallabagCoreTestCase
         $this->assertContains('Droping database, creating database and schema, clearing the cache', $tester->getDisplay());
         $this->assertContains('Administration setup.', $tester->getDisplay());
         $this->assertContains('Config setup.', $tester->getDisplay());
-        $this->assertContains('Installing assets.', $tester->getDisplay());
 
         // we force to reset everything
         $this->assertContains('Droping database, creating database and schema, clearing the cache', $tester->getDisplay());
@@ -170,7 +168,6 @@ class InstallCommandTest extends WallabagCoreTestCase
         $this->assertContains('Setting up database.', $tester->getDisplay());
         $this->assertContains('Administration setup.', $tester->getDisplay());
         $this->assertContains('Config setup.', $tester->getDisplay());
-        $this->assertContains('Installing assets.', $tester->getDisplay());
 
         // the current database doesn't already exist
         $this->assertContains('Creating database and schema, clearing the cache', $tester->getDisplay());
@@ -208,7 +205,6 @@ class InstallCommandTest extends WallabagCoreTestCase
         $this->assertContains('Setting up database.', $tester->getDisplay());
         $this->assertContains('Administration setup.', $tester->getDisplay());
         $this->assertContains('Config setup.', $tester->getDisplay());
-        $this->assertContains('Installing assets.', $tester->getDisplay());
 
         $this->assertContains('Droping schema and creating schema', $tester->getDisplay());
     }
@@ -263,7 +259,6 @@ class InstallCommandTest extends WallabagCoreTestCase
         $this->assertContains('Setting up database.', $tester->getDisplay());
         $this->assertContains('Administration setup.', $tester->getDisplay());
         $this->assertContains('Config setup.', $tester->getDisplay());
-        $this->assertContains('Installing assets.', $tester->getDisplay());
 
         $this->assertContains('Creating schema', $tester->getDisplay());
     }
@@ -296,6 +291,5 @@ class InstallCommandTest extends WallabagCoreTestCase
         $this->assertContains('Setting up database.', $tester->getDisplay());
         $this->assertContains('Administration setup.', $tester->getDisplay());
         $this->assertContains('Config setup.', $tester->getDisplay());
-        $this->assertContains('Installing assets.', $tester->getDisplay());
     }
 }

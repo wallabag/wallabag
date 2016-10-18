@@ -1,0 +1,23 @@
+{% extends "WallabagCoreBundle::layout.html.twig" %}
+
+{% block title %}{{ 'developer.client_parameter.page_title'|trans }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col s12">
+        <div class="card-panel settings">
+            <div class="row">
+                <p>{{ 'developer.client_parameter.page_description'|trans }}</p>
+                <ul>
+                    <li>{{ 'developer.client_parameter.field_name'|trans }}: <strong><pre>{{ client_name }}</pre></strong></li>
+                    <li>{{ 'developer.client_parameter.field_id'|trans }}: <strong><pre>{{ client_id }}</pre></strong></li>
+                    <li>{{ 'developer.client_parameter.field_secret'|trans }}: <strong><pre>{{ client_secret }}</pre></strong></li>
+                </ul>
+
+                <a href="{{ path('developer') }}" class="waves-effect waves-light grey btn">{{ 'developer.client_parameter.back'|trans }}</a>
+                <a href="{{ path('developer_howto_firstapp') }}" class="btn waves-effect waves-light">{{ 'developer.client_parameter.read_howto'|trans }}</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

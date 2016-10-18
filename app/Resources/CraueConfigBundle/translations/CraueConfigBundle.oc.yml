@@ -8,7 +8,8 @@ export_csv: Activar l'expòrt CSV
 export_json: Activar l'expòrt JSON
 export_txt: Activar l'expòrt TXT
 export_xml: Activar l'expòrt XML
-pocket_consumer_key: Clau d'autentificacion Pocket per importar las donadas (https://getpocket.com/developer/docs/authentication)
+# import_with_rabbitmq: Enable RabbitMQ to import data asynchronously
+# import_with_redis: Enable Redis to import data asynchronously
 shaarli_url: URL de Shaarli, se lo servici Shaarli es activat
 share_diaspora: Activar lo partatge cap a Diaspora
 share_mail: Activar lo partatge per corrièl
@@ -27,3 +28,4 @@ piwik_site_id: ID de vòstre site dins Piwik
 piwik_enabled: Activar Piwik
 demo_mode_enabled: "Activar lo mode demostracion ? (utilizar solament per la demostracion publica de wallabag)"
 demo_mode_username: "Utilizaire de la demostracion"
+# share_public: Allow public url for entries

@@ -11,7 +11,6 @@ use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\TaggingRule;
 use Wallabag\CoreBundle\Form\Type\ConfigType;
 use Wallabag\CoreBundle\Form\Type\ChangePasswordType;
-use Wallabag\CoreBundle\Form\Type\NewUserType;
 use Wallabag\CoreBundle\Form\Type\RssType;
 use Wallabag\CoreBundle\Form\Type\TaggingRuleType;
 use Wallabag\CoreBundle\Form\Type\UserInformationType;
@@ -106,7 +105,21 @@ class ConfigController extends Controller
 
         // handle tagging rule
         $taggingRule = new TaggingRule();
-        $newTaggingRule = $this->createForm(TaggingRuleType::class, $taggingRule, ['action' => $this->generateUrl('config').'#set5']);
+        $action = $this->generateUrl('config').'#set5';
+
+        if ($request->query->has('tagging-rule')) {
+            $taggingRule = $this->getDoctrine()
+                ->getRepository('WallabagCoreBundle:TaggingRule')
+                ->find($request->query->get('tagging-rule'));
+
+            if ($this->getUser()->getId() !== $taggingRule->getConfig()->getUser()->getId()) {
+                return $this->redirect($action);
+            }
+
+            $action = $this->generateUrl('config').'?tagging-rule='.$taggingRule->getId().'#set5';
+        }
+
+        $newTaggingRule = $this->createForm(TaggingRuleType::class, $taggingRule, ['action' => $action]);
         $newTaggingRule->handleRequest($request);
 
         if ($newTaggingRule->isValid()) {
@@ -122,45 +135,12 @@ class ConfigController extends Controller
             return $this->redirect($this->generateUrl('config').'#set5');
         }
 
-        // handle adding new user
-        $newUser = $userManager->createUser();
-        // enable created user by default
-        $newUser->setEnabled(true);
-        $newUserForm = $this->createForm(NewUserType::class, $newUser, [
-            'validation_groups' => ['Profile'],
-            'action' => $this->generateUrl('config').'#set6',
-        ]);
-        $newUserForm->handleRequest($request);
-
-        if ($newUserForm->isValid() && $this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')) {
-            $userManager->updateUser($newUser, true);
-
-            $config = new Config($newUser);
-            $config->setTheme($this->getParameter('wallabag_core.theme'));
-            $config->setItemsPerPage($this->getParameter('wallabag_core.items_on_page'));
-            $config->setRssLimit($this->getParameter('wallabag_core.rss_limit'));
-            $config->setLanguage($this->getParameter('wallabag_core.language'));
-            $config->setReadingSpeed($this->getParameter('wallabag_core.reading_speed'));
-
-            $em->persist($config);
-
-            $em->flush();
-
-            $this->get('session')->getFlashBag()->add(
-                'notice',
-                $this->get('translator')->trans('flashes.config.notice.user_added', ['%username%' => $newUser->getUsername()])
-            );
-
-            return $this->redirect($this->generateUrl('config').'#set6');
-        }
-
         return $this->render('WallabagCoreBundle:Config:index.html.twig', [
             'form' => [
                 'config' => $configForm->createView(),
                 'rss' => $rssForm->createView(),
                 'pwd' => $pwdForm->createView(),
                 'user' => $userForm->createView(),
-                'new_user' => $newUserForm->createView(),
                 'new_tagging_rule' => $newTaggingRule->createView(),
             ],
             'rss' => [
@@ -210,9 +190,7 @@ class ConfigController extends Controller
      */
     public function deleteTaggingRuleAction(TaggingRule $rule)
     {
-        if ($this->getUser()->getId() != $rule->getConfig()->getUser()->getId()) {
-            throw $this->createAccessDeniedException('You can not access this tagging rule.');
-        }
+        $this->validateRuleAction($rule);
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($rule);
@@ -227,6 +205,34 @@ class ConfigController extends Controller
     }
 
     /**
+     * Edit a tagging rule.
+     *
+     * @param TaggingRule $rule
+     *
+     * @Route("/tagging-rule/edit/{id}", requirements={"id" = "\d+"}, name="edit_tagging_rule")
+     *
+     * @return RedirectResponse
+     */
+    public function editTaggingRuleAction(TaggingRule $rule)
+    {
+        $this->validateRuleAction($rule);
+
+        return $this->redirect($this->generateUrl('config').'?tagging-rule='.$rule->getId().'#set5');
+    }
+
+    /**
+     * Validate that a rule can be edited/deleted by the current user.
+     *
+     * @param TaggingRule $rule
+     */
+    private function validateRuleAction(TaggingRule $rule)
+    {
+        if ($this->getUser()->getId() != $rule->getConfig()->getUser()->getId()) {
+            throw $this->createAccessDeniedException('You can not access this tagging rule.');
+        }
+    }
+
+    /**
      * Retrieve config for the current user.
      * If no config were found, create a new one.
      *
@@ -238,6 +244,7 @@ class ConfigController extends Controller
             ->getRepository('WallabagCoreBundle:Config')
             ->findOneByUser($this->getUser());
 
+        // should NEVER HAPPEN ...
         if (!$config) {
             $config = new Config($this->getUser());
         }

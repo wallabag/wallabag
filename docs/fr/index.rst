@@ -18,6 +18,11 @@ La documentation principale de cette application est découpée en plusieurs sec
 * :ref:`user-docs`
 * :ref:`dev-docs`
 
+La documentation est disponible dans d'autres langues :
+
+* `Documentation in english <http://doc.wallabag.org/en/master/>`_
+* `Deutsch Dokumentation <http://doc.wallabag.org/de/master/>`_
+
 .. _user-docs:
 
 .. toctree::
@@ -26,7 +31,8 @@ La documentation principale de cette application est découpée en plusieurs sec
 
    user/faq
    user/installation
-   user/upgrade
+   user/upgrade-2.0.x-2.1.1
+   user/upgrade-2.0.x-2.1.1
    user/migration
    user/import
    user/create_account
@@ -36,8 +42,10 @@ La documentation principale de cette application est découpée en plusieurs sec
    user/errors_during_fetching
    user/annotations
    user/download_articles
+   user/share
    user/filters
    user/tags
+   user/parameters
 
 .. _dev-docs:
 
@@ -50,3 +58,5 @@ La documentation principale de cette application est découpée en plusieurs sec
    developer/documentation
    developer/translate
    developer/maintenance
+   developer/redis
+   developer/rabbitmq

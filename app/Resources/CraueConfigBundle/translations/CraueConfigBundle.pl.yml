@@ -8,7 +8,8 @@ export_csv: Włącz eksport do CSV
 export_json: Włącz eksport do JSON
 export_txt: Włącz eksport do TXT
 export_xml: Włącz eksport do XML
-pocket_consumer_key: Klucz klienta Pocket do importu zawartości (https://getpocket.com/developer/docs/authentication)
+import_with_rabbitmq: Włącz RabbitMQ dla asynchronicznego importu danych
+import_with_redis: Włącz Redis dla asynchronicznego importu danych
 shaarli_url: Adress URL Shaarli, jeżeli usługa jest włączona
 share_diaspora: Włącz udostępnianie dla Diaspora
 share_mail: Włącz udostępnianie przez email
@@ -22,3 +23,9 @@ export: "eksport"
 import: "import"
 misc: "różne"
 modify_settings: "zatwierdz"
+piwik_host: Host twojej strony Piwik
+piwik_site_id: ID twojej strony Piwik
+piwik_enabled: Włacz Piwik
+demo_mode_enabled: "Włacz tryb demo? (używany wyłącznie dla publicznej demonstracji Wallabag)"
+demo_mode_username: "Użytkownik Demonstracyjny"
+share_public: Zezwalaj na publiczny adres url dla wpisow

@@ -6,23 +6,22 @@
 wallabag is a self hostable application allowing you to not miss any content anymore.
 Click, save and read it when you can. It extracts content so that you can read it when you have time.
 
-More informations on our website: [wallabag.org](https://wallabag.org)
+More information on our website: [wallabag.org](https://wallabag.org).
+
+![wallabag logo](https://raw.githubusercontent.com/wallabag/logo/master/_default/typo-horizontal/png/sm/logo-typo-horizontal-black-no-bg-no-border-sm.png)
 
 # Install wallabag
+Please read [the documentation to see the wallabag requirements](http://doc.wallabag.org/en/master/user/installation.html#requirements).
 
-If you don't have it yet, please [install composer](https://getcomposer.org/download/) or be sure to use Composer 1.2 (`composer selfupdate` can help you about that).
 Then you can install wallabag by executing the following commands:
 
 ```
-    git clone https://github.com/wallabag/wallabag.git
-    cd wallabag
-    git checkout 2.0.8
-    SYMFONY_ENV=prod composer install --no-dev -o --prefer-dist
-    php bin/console wallabag:install --env=prod
-    php bin/console server:run --env=prod
+git clone https://github.com/wallabag/wallabag.git
+cd wallabag && make install
+make run
 ```
 
-## License
+# License
 Copyright © 2013-2016 Nicolas Lœuillet <nicolas@loeuillet.org>
 This work is free. You can redistribute it and/or modify it under the
 terms of the MIT License. See the COPYING file for more details.

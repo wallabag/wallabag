@@ -31,6 +31,7 @@ menu:
         search: 'Căutare'
         # save_link: 'Save a link'
         back_to_unread: 'Înapoi la articolele necitite'
+        # users_management: 'Users management'
     top:
         add_new_entry: 'Introdu un nou articol'
         search: 'Căutare'
@@ -45,6 +46,7 @@ footer:
         # social: 'Social'
         # powered_by: 'powered by'
         about: 'Despre'
+    # stats: Since %user_creation% you read %nb_archives% articles. That is about %per_day% a day!
 
 config:
     page_title: 'Configurație'
@@ -68,6 +70,7 @@ config:
             # 200_word: 'I read ~200 words per minute'
             # 300_word: 'I read ~300 words per minute'
             # 400_word: 'I read ~400 words per minute'
+        pocket_consumer_key_label: Cheie consumator pentru importarea contentului din Pocket
     form_rss:
         description: 'Feed-urile RSS oferite de wallabag îți permit să-ți citești articolele salvate în reader-ul tău preferat RSS.'
         token_label: 'RSS-Token'
@@ -93,6 +96,7 @@ config:
         # if_label: 'if'
         # then_tag_as_label: 'then tag as'
         # delete_rule_label: 'delete'
+        # edit_rule_label: 'edit'
         # rule_label: 'Rule'
         # tags_label: 'Tags'
         # faq:
@@ -126,12 +130,6 @@ config:
         #         or: 'One rule OR another'
         #         and: 'One rule AND another'
         #         matches: 'Tests that a <i>subject</i> is matches a <i>search</i> (case-insensitive).<br />Example: <code>title matches "football"</code>'
-    form_new_user:
-        username_label: 'Nume de utilizator'
-        password_label: 'Parolă'
-        repeat_new_password_label: 'Repeat new password'
-        plain_password_label: '????'
-        email_label: 'E-mail'
 
 entry:
     page_titles:
@@ -139,11 +137,14 @@ entry:
         # starred: 'Starred entries'
         # archived: 'Archived entries'
         # filtered: 'Filtered entries'
+        # filtered_tags: 'Filtered by tags'
+        # untagged: 'Untagged entries'
     list:
         # number_on_the_page: '{0} There is no entry.|{1} There is one entry.|]1,Inf[ There are %count% entries.'
         reading_time: 'timp estimat de citire'
         reading_time_minutes: 'timp estimat de citire: %readingTime% min'
         reading_time_less_one_minute: 'timp estimat de citire: <small class="inferieur">&lt;</small> 1 min'
+        # number_of_tags: '{1}and one other tag|]1,Inf[and %count% other tags'
         reading_time_minutes_short: '%readingTime% min'
         reading_time_less_one_minute_short: '<small class="inferieur">&lt;</small> 1 min'
         original_article: 'original'
@@ -185,6 +186,8 @@ entry:
             add_a_tag: 'Adaugă un tag'
             share_content: 'Dă mai departe'
             share_email_label: 'E-mail'
+            # public_link: 'public link'
+            # delete_public_link: 'delete public link'
             download: 'Descarcă'
             # print: 'Print'
             problem:
@@ -192,7 +195,7 @@ entry:
                 description: 'Îți pare ciudat articolul?'
         edit_title: 'Editează titlul'
         original_article: 'original'
-        # annotations_on_the_entry: '{0} No annotations|{1} One annotation|]1,Inf[ %nbAnnotations% annotations'
+        # annotations_on_the_entry: '{0} No annotations|{1} One annotation|]1,Inf[ %count% annotations'
         created_at: 'Data creării'
     new:
         page_title: 'Salvează un nou articol'
@@ -205,6 +208,8 @@ entry:
         url_label: 'Url'
         # is_public_label: 'Public'
         save_label: 'Salvează'
+    public:
+        # shared_by_wallabag: "This article has been shared by <a href='%wallabag_instance%'>wallabag</a>"
 
 about:
     page_title: 'Despre'
@@ -260,12 +265,14 @@ howto:
 
 quickstart:
     # page_title: 'Quickstart'
+    # more: 'More…'
     # intro:
     #     title: 'Welcome to wallabag!'
     #     paragraph_1: "We'll accompany you to visit wallabag and show you some features which can interest you."
     #     paragraph_2: 'Follow us!'
     # configure:
     #     title: 'Configure the application'
+    #     description: 'In order to have an application which suits you, have a look into the configuration of wallabag.'
     #     language: 'Change language and design'
     #     rss: 'Enable RSS feeds'
     #     tagging_rules: 'Write rules to automatically tag your articles'
@@ -279,6 +286,7 @@ quickstart:
     #     import: 'Configure import'
     # first_steps:
     #     title: 'First steps'
+    #     description: "Now wallabag is well configured, it's time to archive the web. You can click on the top right sign + to add a link."
     #     new_article: 'Save your first article'
     #     unread_articles: 'And classify it!'
     # migrate:
@@ -287,11 +295,16 @@ quickstart:
     #     pocket: 'Migrate from Pocket'
     #     wallabag_v1: 'Migrate from wallabag v1'
     #     wallabag_v2: 'Migrate from wallabag v2'
+    #     readability: 'Migrate from Readability'
+    #     instapaper: 'Migrate from Instapaper'
     # developer:
     #     title: 'Developers'
+    #     description: 'We also thought to the developers: Docker, API, translations, etc.'
     #     create_application: 'Create your third application'
+    #     use_docker: 'Use Docker to install wallabag'
     # docs:
     #     title: 'Full documentation'
+    #     description: "There are so much features in wallabag. Don't hesitate to read the manual to know them and to learn how to use them."
     #     annotate: 'Annotate your article'
     #     export: 'Convert your articles into ePUB or PDF'
     #     search_filters: 'See how you can look for an article by using search engine and filters'
@@ -308,6 +321,7 @@ tag:
     page_title: 'Tag-uri'
     list:
         # number_on_the_page: '{0} There is no tag.|{1} There is one tag.|]1,Inf[ There are %count% tags.'
+        # see_untagged_entries: 'See untagged entries'
 
 import:
     # page_title: 'Import'
@@ -335,6 +349,24 @@ import:
     # wallabag_v2:
     #     page_title: 'Import > Wallabag v2'
     #     description: 'This importer will import all your wallabag v2 articles. Go to All articles, then, on the export sidebar, click on "JSON". You will have a "All articles.json" file.'
+    # readability:
+    #     page_title: 'Import > Readability'
+    #     description: 'This importer will import all your Readability articles. On the tools (https://www.readability.com/tools/) page, click on "Export your data" in the "Data Export" section. You will received an email to download a json (which does not end with .json in fact).'
+    #     how_to: 'Please select your Readability export and click on the below button to upload and import it.'
+    worker:
+        # enabled: "Import is made asynchronously. Once the import task is started, an external worker will handle jobs one at a time. The current service is:"
+    # firefox:
+    #    page_title: 'Import > Firefox'
+    #    description: "This importer will import all your Firefox bookmarks. Just go to your bookmarks (Ctrl+Maj+O), then into \"Import and backup\", choose \"Backup...\". You will obtain a .json file."
+    #    how_to: "Please choose the bookmark backup file and click on the button below to import it. Note that the process may take a long time since all articles have to be fetched."
+    # chrome:
+    #    page_title: 'Import > Chrome'
+    #    description: "This importer will import all your Chrome bookmarks. The location of the file depends on your operating system : <ul><li>On Linux, go into the <code>~/.config/chromium/Default/</code> directory</li><li>On Windows, it should be at <code>%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default</code></li><li>On OS X, it should be at <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>Once you got there, copy the Bookmarks file someplace you'll find.<em><br>Note that if you have Chromium instead of Chrome, you'll have to correct paths accordingly.</em></p>"
+    #    how_to: "Please choose the bookmark backup file and click on the button below to import it. Note that the process may take a long time since all articles have to be fetched."
+    # instapaper:
+    #     page_title: 'Import > Instapaper'
+    #     description: 'This importer will import all your Instapaper articles. On the settings (https://www.instapaper.com/user) page, click on "Download .CSV file" in the "Export" section. A CSV file will be downloaded (like "instapaper-export.csv").'
+    #     how_to: 'Please select your Instapaper export and click on the below button to upload and import it.'
 
 developer:
     # page_title: 'Developer'
@@ -361,12 +393,14 @@ developer:
     #     page_title: 'Developer > New client'
     #     page_description: 'You are about to create a new client. Please fill the field below for the redirect URI of your application.'
     #     form:
+    #         name_label: 'Name of the client'
     #         redirect_uris_label: 'Redirect URIs'
     #         save_label: 'Create a new client'
     #     action_back: 'Back'
     # client_parameter:
     #     page_title: 'Developer > Client parameters'
     #     page_description: 'Here are your client parameters.'
+    #     field_name: 'Client name'
     #     field_id: 'Client ID'
     #     field_secret: 'Client secret'
     #     back: 'Back'
@@ -384,6 +418,33 @@ developer:
     #         paragraph_8: 'If you want to see all the API endpoints, you can have a look <a href="%link%">to our API documentation</a>.'
     #     back: 'Back'
 
+user:
+    # page_title: Users management
+    # new_user: Create a new user
+    # edit_user: Edit an existing user
+    # description: "Here you can manage all users (create, edit and delete)"
+    # list:
+    #     actions: Actions
+    #     edit_action: Edit
+    #     yes: Yes
+    #     no: No
+    #     create_new_one: Create a new user
+    form:
+        username_label: 'Nume de utilizator'
+        # name_label: 'Name'
+        password_label: 'Parolă'
+        repeat_new_password_label: 'Repeat new password'
+        plain_password_label: '????'
+        email_label: 'E-mail'
+        # enabled_label: 'Enabled'
+        # locked_label: 'Locked'
+        # last_login_label: 'Last login'
+        # twofactor_label: Two factor authentication
+        # save: Save
+        # delete: Delete
+        # delete_confirm: Are you sure?
+        # back_to_list: Back to list
+
 flashes:
     config:
         notice:
@@ -400,10 +461,10 @@ flashes:
         notice:
             # entry_already_saved: 'Entry already saved on %date%'
             # entry_saved: 'Entry saved'
-            # entry_saved_failed: 'Failed to save entry'
+            # entry_saved_failed: 'Entry saved but fetching content failed'
             # entry_updated: 'Entry updated'
             # entry_reloaded: 'Entry reloaded'
-            # entry_reload_failed: 'Failed to reload entry'
+            # entry_reloaded_failed: 'Entry reloaded but fetching content failed'
             entry_archived: 'Articol arhivat'
             entry_unarchived: 'Articol dezarhivat'
             entry_starred: 'Articol adăugat la favorite'
@@ -417,6 +478,10 @@ flashes:
             # failed: 'Import failed, please try again.'
             # failed_on_file: 'Error while processing import. Please verify your import file.'
             # summary: 'Import summary: %imported% imported, %skipped% already saved.'
+            # summary_with_queue: 'Import summary: %queued% queued.'
+        error:
+            # redis_enabled_not_installed: Redis is enabled for handle asynchronous import but it looks like <u>we can't connect to it</u>. Please check Redis configuration.
+            # rabbit_enabled_not_installed: RabbitMQ is enabled for handle asynchronous import but it looks like <u>we can't connect to it</u>. Please check RabbitMQ configuration.
     developer:
         notice:
             # client_created: 'New client created.'

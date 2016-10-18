@@ -168,6 +168,9 @@ class PhpIniRequirement extends Requirement
  */
 class RequirementCollection implements IteratorAggregate
 {
+    /**
+     * @var Requirement[]
+     */
     private $requirements = array();
 
     /**
@@ -265,7 +268,7 @@ class RequirementCollection implements IteratorAggregate
     /**
      * Returns both requirements and recommendations.
      *
-     * @return array Array of Requirement instances
+     * @return Requirement[]
      */
     public function all()
     {
@@ -275,7 +278,7 @@ class RequirementCollection implements IteratorAggregate
     /**
      * Returns all mandatory requirements.
      *
-     * @return array Array of Requirement instances
+     * @return Requirement[]
      */
     public function getRequirements()
     {
@@ -292,7 +295,7 @@ class RequirementCollection implements IteratorAggregate
     /**
      * Returns the mandatory requirements that were not met.
      *
-     * @return array Array of Requirement instances
+     * @return Requirement[]
      */
     public function getFailedRequirements()
     {
@@ -309,7 +312,7 @@ class RequirementCollection implements IteratorAggregate
     /**
      * Returns all optional recommendations.
      *
-     * @return array Array of Requirement instances
+     * @return Requirement[]
      */
     public function getRecommendations()
     {
@@ -326,7 +329,7 @@ class RequirementCollection implements IteratorAggregate
     /**
      * Returns the recommendations that were not met.
      *
-     * @return array Array of Requirement instances
+     * @return Requirement[]
      */
     public function getFailedRecommendations()
     {
@@ -376,7 +379,8 @@ class RequirementCollection implements IteratorAggregate
  */
 class SymfonyRequirements extends RequirementCollection
 {
-    const REQUIRED_PHP_VERSION = '5.3.3';
+    const LEGACY_REQUIRED_PHP_VERSION = '5.3.3';
+    const REQUIRED_PHP_VERSION = '5.5.9';
 
     /**
      * Constructor that initializes the requirements.
@@ -386,15 +390,25 @@ class SymfonyRequirements extends RequirementCollection
         /* mandatory requirements follow */
 
         $installedPhpVersion = phpversion();
+        $requiredPhpVersion = $this->getPhpRequiredVersion();
 
-        $this->addRequirement(
-            version_compare($installedPhpVersion, self::REQUIRED_PHP_VERSION, '>='),
-            sprintf('PHP version must be at least %s (%s installed)', self::REQUIRED_PHP_VERSION, $installedPhpVersion),
-            sprintf('You are running PHP version "<strong>%s</strong>", but Symfony needs at least PHP "<strong>%s</strong>" to run.
-                Before using Symfony, upgrade your PHP installation, preferably to the latest version.',
-                $installedPhpVersion, self::REQUIRED_PHP_VERSION),
-            sprintf('Install PHP %s or newer (installed version is %s)', self::REQUIRED_PHP_VERSION, $installedPhpVersion)
+        $this->addRecommendation(
+            $requiredPhpVersion,
+            'Vendors should be installed in order to check all requirements.',
+            'Run the <code>composer install</code> command.',
+            'Run the "composer install" command.'
         );
+
+        if (false !== $requiredPhpVersion) {
+            $this->addRequirement(
+                version_compare($installedPhpVersion, $requiredPhpVersion, '>='),
+                sprintf('PHP version must be at least %s (%s installed)', $requiredPhpVersion, $installedPhpVersion),
+                sprintf('You are running PHP version "<strong>%s</strong>", but Symfony needs at least PHP "<strong>%s</strong>" to run.
+                Before using Symfony, upgrade your PHP installation, preferably to the latest version.',
+                    $installedPhpVersion, $requiredPhpVersion),
+                sprintf('Install PHP %s or newer (installed version is %s)', $requiredPhpVersion, $installedPhpVersion)
+            );
+        }
 
         $this->addRequirement(
             version_compare($installedPhpVersion, '5.3.16', '!='),
@@ -433,7 +447,7 @@ class SymfonyRequirements extends RequirementCollection
             );
         }
 
-        if (version_compare($installedPhpVersion, self::REQUIRED_PHP_VERSION, '>=')) {
+        if (false !== $requiredPhpVersion && version_compare($installedPhpVersion, $requiredPhpVersion, '>=')) {
             $timezones = array();
             foreach (DateTimeZone::listAbbreviations() as $abbreviations) {
                 foreach ($abbreviations as $abbreviation) {
@@ -689,7 +703,7 @@ class SymfonyRequirements extends RequirementCollection
                     $this->addRecommendation(
                         \Symfony\Component\Intl\Intl::getIcuDataVersion() === \Symfony\Component\Intl\Intl::getIcuVersion(),
                         sprintf('intl ICU version installed on your system (%s) does not match the ICU data bundled with Symfony (%s)', \Symfony\Component\Intl\Intl::getIcuVersion(), \Symfony\Component\Intl\Intl::getIcuDataVersion()),
-                        'To avoid internationalization data incosistencies upgrade the symfony/intl component.'
+                        'To avoid internationalization data inconsistencies upgrade the symfony/intl component.'
                     );
                 }
             }
@@ -725,9 +739,9 @@ class SymfonyRequirements extends RequirementCollection
 
         if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
             $this->addRecommendation(
-                $this->getRealpathCacheSize() > 1000,
-                'realpath_cache_size should be above 1024 in php.ini',
-                'Set "<strong>realpath_cache_size</strong>" to e.g. "<strong>1024</strong>" in php.ini<a href="#phpini">*</a> to improve performance on windows.'
+                $this->getRealpathCacheSize() >= 5 * 1024 * 1024,
+                'realpath_cache_size should be at least 5M in php.ini',
+                'Setting "<strong>realpath_cache_size</strong>" to e.g. "<strong>5242880</strong>" or "<strong>5M</strong>" in php.ini<a href="#phpini">*</a> may improve performance on Windows significantly in some cases.'
             );
         }
 
@@ -777,5 +791,29 @@ class SymfonyRequirements extends RequirementCollection
             default:
                 return (int) $size;
         }
+    }
+
+    /**
+     * Defines PHP required version from Symfony version.
+     *
+     * @return string|false The PHP required version or false if it could not be guessed
+     */
+    protected function getPhpRequiredVersion()
+    {
+        if (!file_exists($path = __DIR__.'/../composer.lock')) {
+            return false;
+        }
+
+        $composerLock = json_decode(file_get_contents($path), true);
+        foreach ($composerLock['packages'] as $package) {
+            $name = $package['name'];
+            if ('symfony/symfony' !== $name && 'symfony/http-kernel' !== $name) {
+                continue;
+            }
+
+            return (int) $package['version'][1] > 2 ? self::REQUIRED_PHP_VERSION : self::LEGACY_REQUIRED_PHP_VERSION;
+        }
+
+        return false;
     }
 }

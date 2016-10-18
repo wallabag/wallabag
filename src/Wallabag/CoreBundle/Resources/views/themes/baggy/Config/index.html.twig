@@ -44,6 +44,18 @@
             </div>
         </fieldset>
 
+        <fieldset class="w500p inline">
+            <div class="row">
+                {{ form_label(form.config.pocket_consumer_key) }}
+                {{ form_errors(form.config.pocket_consumer_key) }}
+                {{ form_widget(form.config.pocket_consumer_key) }}
+                <p>
+                    &raquo;
+                    <a href="https://getpocket.com/developer/docs/authentication">https://getpocket.com/developer/docs/authentication</a>
+                </p>
+            </div>
+        </fieldset>
+
         {{ form_rest(form.config) }}
     </form>
 
@@ -179,6 +191,7 @@
             « {{ tagging_rule.rule }} »
             {{ 'config.form_rules.then_tag_as_label'|trans }}
             « {{ tagging_rule.tags|join(', ') }} »
+            <a href="{{ path('edit_tagging_rule', {id: tagging_rule.id}) }}" title="{{ 'config.form_rules.edit_rule_label'|trans }}" class="tool mode_edit">✎</a>
             <a href="{{ path('delete_tagging_rule', {id: tagging_rule.id}) }}" title="{{ 'config.form_rules.delete_rule_label'|trans }}" class="tool delete icon-trash icon"></a>
         </li>
         {% endfor %}
@@ -205,7 +218,6 @@
 
         {{ form_rest(form.new_tagging_rule) }}
     </form>
-
     <div class="row">
         <div class="input-field col s12">
             <h3>{{ 'config.form_rules.faq.title'|trans }}</h3>
@@ -290,46 +302,4 @@
             </table>
         </div>
     </div>
-
-    {% if is_granted('ROLE_SUPER_ADMIN') %}
-    <h2>{{ 'config.tab_menu.new_user'|trans }}</h2>
-
-    {{ form_start(form.new_user) }}
-        {{ form_errors(form.new_user) }}
-
-        <fieldset class="w500p inline">
-            <div class="row">
-                {{ form_label(form.new_user.username) }}
-                {{ form_errors(form.new_user.username) }}
-                {{ form_widget(form.new_user.username) }}
-            </div>
-        </fieldset>
-
-        <fieldset class="w500p inline">
-            <div class="row">
-                {{ form_label(form.new_user.plainPassword.first) }}
-                {{ form_errors(form.new_user.plainPassword.first) }}
-                {{ form_widget(form.new_user.plainPassword.first) }}
-            </div>
-        </fieldset>
-
-        <fieldset class="w500p inline">
-            <div class="row">
-                {{ form_label(form.new_user.plainPassword.second) }}
-                {{ form_errors(form.new_user.plainPassword.second) }}
-                {{ form_widget(form.new_user.plainPassword.second) }}
-            </div>
-        </fieldset>
-
-        <fieldset class="w500p inline">
-            <div class="row">
-                {{ form_label(form.new_user.email) }}
-                {{ form_errors(form.new_user.email) }}
-                {{ form_widget(form.new_user.email) }}
-            </div>
-        </fieldset>
-
-        {{ form_rest(form.new_user) }}
-        {% endif %}
-    </form>
 {% endblock %}

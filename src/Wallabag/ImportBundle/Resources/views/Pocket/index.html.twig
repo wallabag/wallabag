@@ -6,15 +6,13 @@
 <div class="row">
     <div class="col s12">
         <div class="card-panel settings">
+            {% include 'WallabagImportBundle:Import:_workerEnabled.html.twig' %}
+
             {% if not has_consumer_key %}
-                <div class="card-panel red darken-1">
+                <div class="card-panel red white-text">
                     {{ 'import.pocket.config_missing.description'|trans }}
 
-                    {% if is_granted('ROLE_SUPER_ADMIN') %}
-                        {{ 'import.pocket.config_missing.admin_message'|trans({'%keyurls%': '<a href="' ~ path('craue_config_settings_modify') ~ '#set-import">', '%keyurle%':'</a>'})|raw }}
-                    {% else %}
-                        {{ 'import.pocket.config_missing.user_message'|trans }}
-                    {% endif %}
+                    {{ 'import.pocket.config_missing.admin_message'|trans({'%keyurls%': '<a href="' ~ path('config') ~ '">', '%keyurle%':'</a>'})|raw }}
                 </div>
             {% endif %}
 
@@ -29,7 +27,7 @@
                         {{ form_label(form.mark_as_read) }}
                     </div>
                 </div>
-                <button class="btn waves-effect waves-light" type="submit" name="action">
+                <button class="btn waves-effect waves-light" type="submit" name="action" {% if not has_consumer_key %}disabled="disabled"{% endif %}>
                     {{ 'import.pocket.connect_to_pocket'|trans }}
                 </button>
             </form>

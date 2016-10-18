@@ -23,22 +23,43 @@ Now, all is fine to migrate from Pocket.
 Import your data into wallabag 2.x
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Click on  ``Import`` link in the menu, on ``Import contents`` in Pocket section
+Click on ``Import`` link in the menu, on ``Import contents`` in Pocket section
 and then on ``Connect to Pocket and import data``.
 
 You need to authorize wallabag to interact with your Pocket account.
-Your data will be imported. Data import can be a demanding process for your server
-(we need to work on this import to improve it).
-
-From Instapaper
----------------
-
-*Feature not yet implemented in wallabag v2.*
+Your data will be imported. Data import can be a demanding process for your server.
 
 From Readability
 ----------------
 
-*Feature not yet implemented in wallabag v2.*
+Export your Readability data
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+On the tools (`https://www.readability.com/tools/ <https://www.readability.com/tools/>`_) page, click on "Export your data" in the "Data Export" section. You will received an email to download a json (which does not end with .json in fact).
+
+Import your data into wallabag 2.x
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Click on ``Import`` link in the menu, on ``Import contents`` in Readability section
+and then select your json file and upload it.
+
+Your data will be imported. Data import can be a demanding process for your server.
+
+From Instapaper
+---------------
+
+Export your Instapaper data
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+On the settings (`https://www.instapaper.com/user <https://www.instapaper.com/user>`_) page, click on "Download .CSV file" in the "Export" section. A CSV file will be downloaded (like ``instapaper-export.csv``).
+
+Import your data into wallabag 2.x
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Click on ``Import`` link in the menu, on ``Import contents`` in Instapaper section
+and then select your CSV file and upload it.
+
+Your data will be imported. Data import can be a demanding process for your server.
 
 From HTML or JSON file
 ----------------------

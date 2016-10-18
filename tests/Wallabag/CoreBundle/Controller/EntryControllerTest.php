@@ -29,7 +29,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
-        $this->assertContains('quickstart.intro.paragraph_1', $body[0]);
+        $this->assertContains('quickstart.intro.title', $body[0]);
 
         // Test if quickstart is disabled when user has 1 entry
         $crawler = $client->request('GET', '/new');
@@ -160,6 +160,50 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertContains('/view/', $client->getResponse()->getTargetUrl());
     }
 
+    public function testPostNewOkUrlExistWithAccent()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $url = 'http://www.aritylabs.com/post/106091708292/des-contr%C3%B4leurs-optionnels-gr%C3%A2ce-%C3%A0-constmissing';
+
+        $crawler = $client->request('GET', '/new');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $form = $crawler->filter('form[name=entry]')->form();
+
+        $data = [
+            'entry[url]' => $url,
+        ];
+
+        $client->submit($form, $data);
+
+        $crawler = $client->request('GET', '/new');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $form = $crawler->filter('form[name=entry]')->form();
+
+        $data = [
+            'entry[url]' => $url,
+        ];
+
+        $client->submit($form, $data);
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertContains('/view/', $client->getResponse()->getTargetUrl());
+
+        $em = $client->getContainer()
+            ->get('doctrine.orm.entity_manager');
+        $entry = $em
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneByUrl(urldecode($url));
+
+        $em->remove($entry);
+        $em->flush();
+    }
+
     /**
      * This test will require an internet connection.
      */
@@ -236,6 +280,16 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
+    public function testUntagged()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $client->request('GET', '/untagged/list');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }
+
     public function testStarred()
     {
         $this->logInAs('admin');
@@ -287,22 +341,23 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $content = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+        $em = $client->getContainer()
+            ->get('doctrine.orm.entity_manager');
+
+        $content = $em
             ->getRepository('WallabagCoreBundle:Entry')
             ->findByUrlAndUserId($this->url, $this->getLoggedInUserId());
 
         // empty content
         $content->setContent('');
-        $client->getContainer()->get('doctrine.orm.entity_manager')->persist($content);
-        $client->getContainer()->get('doctrine.orm.entity_manager')->flush();
+        $em->persist($content);
+        $em->flush();
 
         $client->request('GET', '/reload/'.$content->getId());
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
 
-        $content = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+        $content = $em
             ->getRepository('WallabagCoreBundle:Entry')
             ->findByUrlAndUserId($this->url, $this->getLoggedInUserId());
 
@@ -432,9 +487,11 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
+        $em = $client->getContainer()
+            ->get('doctrine.orm.entity_manager');
+
         // add a new content to be removed later
-        $user = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+        $user = $em
             ->getRepository('WallabagUserBundle:User')
             ->findOneByUserName('admin');
 
@@ -448,12 +505,8 @@ class EntryControllerTest extends WallabagCoreTestCase
         $content->setArchived(true);
         $content->setLanguage('fr');
 
-        $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->persist($content);
-        $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->flush();
+        $em->persist($content);
+        $em->flush();
 
         $client->request('GET', '/view/'.$content->getId());
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
@@ -697,5 +750,52 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form, $data);
         $this->assertCount(2, $crawler->filter('div[class=entry]'));
+    }
+
+    public function testShareEntryPublicly()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $content = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneByUser($this->getLoggedInUserId());
+
+        // no uuid
+        $client->request('GET', '/share/'.$content->getUuid());
+        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+
+        // generating the uuid
+        $client->request('GET', '/share/'.$content->getId());
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+
+        // follow link with uuid
+        $crawler = $client->followRedirect();
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertContains('max-age=25200', $client->getResponse()->headers->get('cache-control'));
+        $this->assertContains('public', $client->getResponse()->headers->get('cache-control'));
+        $this->assertContains('s-maxage=25200', $client->getResponse()->headers->get('cache-control'));
+        $this->assertNotContains('no-cache', $client->getResponse()->headers->get('cache-control'));
+        $this->assertContains('og:title', $client->getResponse()->getContent());
+        $this->assertContains('og:type', $client->getResponse()->getContent());
+        $this->assertContains('og:url', $client->getResponse()->getContent());
+        $this->assertContains('og:image', $client->getResponse()->getContent());
+
+        // sharing is now disabled
+        $client->getContainer()->get('craue_config')->set('share_public', 0);
+        $client->request('GET', '/share/'.$content->getUuid());
+        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+
+        $client->request('GET', '/view/'.$content->getId());
+        $this->assertContains('no-cache', $client->getResponse()->headers->get('cache-control'));
+
+        // removing the share
+        $client->request('GET', '/share/delete/'.$content->getId());
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+
+        // share is now disable
+        $client->request('GET', '/share/'.$content->getUuid());
+        $this->assertEquals(404, $client->getResponse()->getStatusCode());
     }
 }

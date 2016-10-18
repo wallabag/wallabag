@@ -14,3 +14,21 @@ services:
             - "@router"
         tags:
             - { name: kernel.event_subscriber }
+
+    wallabag_user.user_repository:
+        class: Wallabag\UserBundle\Repository\UserRepository
+        factory: [ "@doctrine.orm.default_entity_manager", getRepository ]
+        arguments:
+            - WallabagUserBundle:User
+
+    wallabag_user.create_config:
+        class: Wallabag\UserBundle\EventListener\CreateConfigListener
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "%wallabag_core.theme%"
+            - "%wallabag_core.items_on_page%"
+            - "%wallabag_core.rss_limit%"
+            - "%wallabag_core.language%"
+            - "%wallabag_core.reading_speed%"
+        tags:
+            - { name: kernel.event_subscriber }

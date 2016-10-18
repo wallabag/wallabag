@@ -1,0 +1,15 @@
+{% set currentRoute = app.request.attributes.get('_route') %}
+
+{% if currentRoute == 'starred' %}
+    {{ 'entry.page_titles.starred'|trans }}
+{% elseif currentRoute == 'archive' %}
+    {{ 'entry.page_titles.archived'|trans }}
+{% elseif currentRoute == 'all' %}
+    {{ 'entry.page_titles.filtered'|trans }}
+{% elseif currentRoute == 'tag_entries' %}
+    {{ 'entry.page_titles.filtered_tags'|trans }}
+{% elseif currentRoute == 'untagged' %}
+    {{ 'entry.page_titles.untagged'|trans }}
+{% else %}
+    {{ 'entry.page_titles.unread'|trans }}
+{% endif %}

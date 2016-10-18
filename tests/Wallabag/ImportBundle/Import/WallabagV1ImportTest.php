@@ -5,8 +5,11 @@ namespace Tests\Wallabag\ImportBundle\Import;
 use Wallabag\ImportBundle\Import\WallabagV1Import;
 use Wallabag\UserBundle\Entity\User;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\ImportBundle\Redis\Producer;
 use Monolog\Logger;
 use Monolog\Handler\TestHandler;
+use Simpleue\Queue\RedisQueue;
+use M6Web\Component\RedisMock\RedisMockFactory;
 
 class WallabagV1ImportTest extends \PHPUnit_Framework_TestCase
 {
@@ -22,6 +25,20 @@ class WallabagV1ImportTest extends \PHPUnit_Framework_TestCase
         $this->em = $this->getMockBuilder('Doctrine\ORM\EntityManager')
             ->disableOriginalConstructor()
             ->getMock();
+
+        $this->uow = $this->getMockBuilder('Doctrine\ORM\UnitOfWork')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->em
+            ->expects($this->any())
+            ->method('getUnitOfWork')
+            ->willReturn($this->uow);
+
+        $this->uow
+            ->expects($this->any())
+            ->method('getScheduledEntityInsertions')
+            ->willReturn([]);
 
         $this->contentProxy = $this->getMockBuilder('Wallabag\CoreBundle\Helper\ContentProxy')
             ->disableOriginalConstructor()
@@ -79,7 +96,7 @@ class WallabagV1ImportTest extends \PHPUnit_Framework_TestCase
         $res = $wallabagV1Import->import();
 
         $this->assertTrue($res);
-        $this->assertEquals(['skipped' => 1, 'imported' => 3], $wallabagV1Import->getSummary());
+        $this->assertEquals(['skipped' => 1, 'imported' => 3, 'queued' => 0], $wallabagV1Import->getSummary());
     }
 
     public function testImportAndMarkAllAsRead()
@@ -117,7 +134,87 @@ class WallabagV1ImportTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($res);
 
-        $this->assertEquals(['skipped' => 0, 'imported' => 3], $wallabagV1Import->getSummary());
+        $this->assertEquals(['skipped' => 0, 'imported' => 3, 'queued' => 0], $wallabagV1Import->getSummary());
+    }
+
+    public function testImportWithRabbit()
+    {
+        $wallabagV1Import = $this->getWallabagV1Import();
+        $wallabagV1Import->setFilepath(__DIR__.'/../fixtures/wallabag-v1.json');
+
+        $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $entryRepo->expects($this->never())
+            ->method('findByUrlAndUserId');
+
+        $this->em
+            ->expects($this->never())
+            ->method('getRepository');
+
+        $entry = $this->getMockBuilder('Wallabag\CoreBundle\Entity\Entry')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->contentProxy
+            ->expects($this->never())
+            ->method('updateEntry');
+
+        $producer = $this->getMockBuilder('OldSound\RabbitMqBundle\RabbitMq\Producer')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $producer
+            ->expects($this->exactly(4))
+            ->method('publish');
+
+        $wallabagV1Import->setProducer($producer);
+
+        $res = $wallabagV1Import->setMarkAsRead(true)->import();
+
+        $this->assertTrue($res);
+        $this->assertEquals(['skipped' => 0, 'imported' => 0, 'queued' => 4], $wallabagV1Import->getSummary());
+    }
+
+    public function testImportWithRedis()
+    {
+        $wallabagV1Import = $this->getWallabagV1Import();
+        $wallabagV1Import->setFilepath(__DIR__.'/../fixtures/wallabag-v1.json');
+
+        $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $entryRepo->expects($this->never())
+            ->method('findByUrlAndUserId');
+
+        $this->em
+            ->expects($this->never())
+            ->method('getRepository');
+
+        $entry = $this->getMockBuilder('Wallabag\CoreBundle\Entity\Entry')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->contentProxy
+            ->expects($this->never())
+            ->method('updateEntry');
+
+        $factory = new RedisMockFactory();
+        $redisMock = $factory->getAdapter('Predis\Client', true);
+
+        $queue = new RedisQueue($redisMock, 'wallabag_v1');
+        $producer = new Producer($queue);
+
+        $wallabagV1Import->setProducer($producer);
+
+        $res = $wallabagV1Import->setMarkAsRead(true)->import();
+
+        $this->assertTrue($res);
+        $this->assertEquals(['skipped' => 0, 'imported' => 0, 'queued' => 4], $wallabagV1Import->getSummary());
+
+        $this->assertNotEmpty($redisMock->lpop('wallabag_v1'));
     }
 
     public function testImportBadFile()

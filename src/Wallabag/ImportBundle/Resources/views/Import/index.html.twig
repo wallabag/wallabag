@@ -11,7 +11,7 @@
                 {% for import in imports %}
                     <li>
                         <h5>{{ import.name }}</h5>
-                        <blockquote>{{ import.description|trans }}</blockquote>
+                        <blockquote>{{ import.description|trans|raw }}</blockquote>
                         <p><a class="waves-effect waves-light btn" href="{{ path(import.url) }}">{{ 'import.action.import_contents'|trans }}</a></p>
                     </li>
                 {% endfor %}

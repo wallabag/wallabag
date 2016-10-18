@@ -31,7 +31,7 @@ class WallabagV1Import extends WallabagImport
     /**
      * {@inheritdoc}
      */
-    protected function prepareEntry($entry = [], $markAsRead = false)
+    protected function prepareEntry($entry = [])
     {
         $data = [
             'title' => $entry['title'],
@@ -39,9 +39,10 @@ class WallabagV1Import extends WallabagImport
             'url' => $entry['url'],
             'content_type' => '',
             'language' => '',
-            'is_archived' => $entry['is_read'] || $markAsRead,
+            'is_archived' => $entry['is_read'] || $this->markAsRead,
             'is_starred' => $entry['is_fav'],
             'tags' => '',
+            'created_at' => '',
         ];
 
         // force content to be refreshed in case on bad fetch in the v1 installation
@@ -55,5 +56,15 @@ class WallabagV1Import extends WallabagImport
         }
 
         return $data;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function setEntryAsRead(array $importedEntry)
+    {
+        $importedEntry['is_read'] = 1;
+
+        return $importedEntry;
     }
 }

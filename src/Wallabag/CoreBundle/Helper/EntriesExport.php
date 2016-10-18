@@ -21,7 +21,6 @@ class EntriesExport
     private $entries = [];
     private $authors = ['wallabag'];
     private $language = '';
-    private $tags = [];
     private $footerTemplate = '<div style="text-align:center;">
         <p>Produced by wallabag with %EXPORT_METHOD%</p>
         <p>Please open <a href="https://github.com/wallabag/wallabag/issues">an issue</a> if you have trouble with the display of this E-Book on your device.</p>
@@ -52,10 +51,6 @@ class EntriesExport
         }
 
         $this->entries = $entries;
-
-        foreach ($entries as $entry) {
-            $this->tags[] = $entry->getTags();
-        }
 
         return $this;
     }
@@ -159,8 +154,8 @@ class EntriesExport
 
         // set tags as subjects
         foreach ($this->entries as $entry) {
-            foreach ($this->tags as $tag) {
-                $book->setSubject($tag['value']);
+            foreach ($entry->getTags() as $tag) {
+                $book->setSubject($tag->getLabel());
             }
 
             // the reader in Kobo Devices doesn't likes special caracters
@@ -265,8 +260,8 @@ class EntriesExport
          * Adding actual entries
          */
         foreach ($this->entries as $entry) {
-            foreach ($this->tags as $tag) {
-                $pdf->SetKeywords($tag['value']);
+            foreach ($entry->getTags() as $tag) {
+                $pdf->SetKeywords($tag->getLabel());
             }
 
             $pdf->AddPage();
@@ -302,7 +297,7 @@ class EntriesExport
         $enclosure = '"';
         $handle = fopen('php://memory', 'rb+');
 
-        fputcsv($handle, ['Title', 'URL', 'Content', 'Tags', 'MIME Type', 'Language'], $delimiter, $enclosure);
+        fputcsv($handle, ['Title', 'URL', 'Content', 'Tags', 'MIME Type', 'Language', 'Creation date'], $delimiter, $enclosure);
 
         foreach ($this->entries as $entry) {
             fputcsv(
@@ -315,6 +310,7 @@ class EntriesExport
                     implode(', ', $entry->getTags()->toArray()),
                     $entry->getMimetype(),
                     $entry->getLanguage(),
+                    $entry->getCreatedAt()->format('d/m/Y h:i:s'),
                 ],
                 $delimiter,
                 $enclosure

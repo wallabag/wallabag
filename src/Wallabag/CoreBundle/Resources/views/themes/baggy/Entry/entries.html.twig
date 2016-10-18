@@ -1,6 +1,8 @@
 {% extends "WallabagCoreBundle::layout.html.twig" %}
 
-{% block title %}{{ 'entry.page_titles.unread'|trans }}{% endblock %}
+{% block title %}
+    {% include "@WallabagCore/themes/common/Entry/_title.html.twig" %}
+{% endblock %}
 
 {% block content %}
     {% include "WallabagCoreBundle:Entry:pager.html.twig" with {'entries': entries} %}
@@ -27,14 +29,45 @@
                 <li><a href="{{ entry.url|e }}" target="_blank" title="{{ 'entry.list.original_article'|trans }} : {{ entry.title|e }}" class="tool link icon-link icon"><span>{{ entry.domainName|removeWww }}</span></a></li>
             </ul>
             {% if entry.previewPicture is null %}
+                <ul class="card-entry-tags">
+                    {% for tag in entry.tags %}
+                        <li><a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a></li>
+                    {% endfor %}
+                </ul>
                 <p>{{ entry.content|striptags|slice(0, 300) }}&hellip;</p>
             {% else %}
+                <ul class="card-entry-labels">
+                {% for tag in entry.tags | slice(0, 3) %}
+                    <li><a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a></li>
+                {% endfor %}
+                </ul>
                 <img class="preview" src="{{ entry.previewPicture }}" alt="{{ entry.title|raw }}" />
             {% endif %}
         </div>
     {% endfor %}
 
-    <aside id="filter-form" class="">
+    <!-- Export -->
+    <aside id="download-form">
+    {% set currentRoute = app.request.attributes.get('_route') %}
+    {% if currentRoute == 'homepage' %}
+        {% set currentRoute = 'unread' %}
+    {% endif %}
+        <h2>{{ 'entry.list.export_title'|trans }}</h2>
+        <a href="javascript: void(null);" id="download-form-close" class="close-button--popup close-button">&times;</a>
+        <ul>
+            {% if craue_setting('export_epub') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'epub' }) }}">EPUB</a></li>{% endif %}
+            {% if craue_setting('export_mobi') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'mobi' }) }}">MOBI</a></li>{% endif %}
+            {% if craue_setting('export_pdf') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'pdf' }) }}">PDF</a></li>{% endif %}
+            {% if craue_setting('export_csv') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'json' }) }}">JSON</a></li>{% endif %}
+            {% if craue_setting('export_json') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'csv' }) }}">CSV</a></li>{% endif %}
+            {% if craue_setting('export_txt') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'txt' }) }}">TXT</a></li>{% endif %}
+            {% if craue_setting('export_xml') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'xml' }) }}">XML</a></li>{% endif %}
+        </ul>
+    </aside>
+
+    <!-- Filter -->
+    {% if form is not null %}
+    <div id="filters" class="">
         <form method="get" action="{{ path('all') }}">
             <h2>{{ 'entry.filters.title'|trans }}</h2>
             <a href="javascript: void(null);" id="filter-form-close" class="close-button--popup close-button">&times;</a>
@@ -114,7 +147,6 @@
                 <button class="btn waves-effect waves-light" type="submit" id="submit-filter" value="filter">{{ 'entry.filters.action.filter'|trans }}</button>
             </div>
         </form>
-    </aside>
-
-    {% include "WallabagCoreBundle:Entry:pager.html.twig" with {'entries': entries} %}
+    </div>
+    {% endif %}
 {% endblock %}

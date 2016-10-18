@@ -4,7 +4,6 @@ namespace Wallabag\CoreBundle\Controller;
 
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
-use Pagerfanta\Pagerfanta;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,30 +12,40 @@ use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Form\Type\EntryFilterType;
 use Wallabag\CoreBundle\Form\Type\EditEntryType;
 use Wallabag\CoreBundle\Form\Type\NewEntryType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 
 class EntryController extends Controller
 {
     /**
-     * @param Entry $entry
+     * Fetch content and update entry.
+     * In case it fails, entry will return to avod loosing the data.
+     *
+     * @param Entry  $entry
+     * @param string $prefixMessage Should be the translation key: entry_saved or entry_reloaded
+     *
+     * @return Entry
      */
-    private function updateEntry(Entry $entry)
+    private function updateEntry(Entry $entry, $prefixMessage = 'entry_saved')
     {
+        // put default title in case of fetching content failed
+        $entry->setTitle('No title found');
+
+        $message = 'flashes.entry.notice.'.$prefixMessage;
+
         try {
             $entry = $this->get('wallabag_core.content_proxy')->updateEntry($entry, $entry->getUrl());
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entry);
-            $em->flush();
         } catch (\Exception $e) {
             $this->get('logger')->error('Error while saving an entry', [
                 'exception' => $e,
                 'entry' => $entry,
             ]);
 
-            return false;
+            $message = 'flashes.entry.notice.'.$prefixMessage.'_failed';
         }
 
-        return true;
+        $this->get('session')->getFlashBag()->add('notice', $message);
+
+        return $entry;
     }
 
     /**
@@ -66,12 +75,11 @@ class EntryController extends Controller
                 return $this->redirect($this->generateUrl('view', ['id' => $existingEntry->getId()]));
             }
 
-            $message = 'flashes.entry.notice.entry_saved';
-            if (false === $this->updateEntry($entry)) {
-                $message = 'flashes.entry.notice.entry_saved_failed';
-            }
+            $this->updateEntry($entry);
 
-            $this->get('session')->getFlashBag()->add('notice', $message);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($entry);
+            $em->flush();
 
             return $this->redirect($this->generateUrl('homepage'));
         }
@@ -95,6 +103,10 @@ class EntryController extends Controller
 
         if (false === $this->checkIfEntryAlreadyExists($entry)) {
             $this->updateEntry($entry);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($entry);
+            $em->flush();
         }
 
         return $this->redirect($this->generateUrl('homepage'));
@@ -226,6 +238,10 @@ class EntryController extends Controller
         $repository = $this->get('wallabag_core.entry_repository');
 
         switch ($type) {
+            case 'untagged':
+                $qb = $repository->getBuilderForUntaggedByUser($this->getUser()->getId());
+
+                break;
             case 'starred':
                 $qb = $repository->getBuilderForStarredByUser($this->getUser()->getId());
                 break;
@@ -257,9 +273,10 @@ class EntryController extends Controller
         }
 
         $pagerAdapter = new DoctrineORMAdapter($qb->getQuery());
-        $entries = new Pagerfanta($pagerAdapter);
 
-        $entries->setMaxPerPage($this->getUser()->getConfig()->getItemsPerPage());
+        $entries = $this->get('wallabag_core.helper.prepare_pager_for_entries')
+            ->prepare($pagerAdapter, $page);
+
         try {
             $entries->setCurrentPage($page);
         } catch (OutOfRangeCurrentPageException $e) {
@@ -311,15 +328,11 @@ class EntryController extends Controller
     {
         $this->checkUserAction($entry);
 
-        $message = 'flashes.entry.notice.entry_reloaded';
-        if (false === $this->updateEntry($entry)) {
-            $message = 'flashes.entry.notice.entry_reload_failed';
-        }
+        $this->updateEntry($entry, 'entry_reloaded');
 
-        $this->get('session')->getFlashBag()->add(
-            'notice',
-            $message
-        );
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($entry);
+        $em->flush();
 
         return $this->redirect($this->generateUrl('view', ['id' => $entry->getId()]));
     }
@@ -434,7 +447,7 @@ class EntryController extends Controller
      */
     private function checkUserAction(Entry $entry)
     {
-        if ($this->getUser()->getId() != $entry->getUser()->getId()) {
+        if (null === $this->getUser() || $this->getUser()->getId() != $entry->getUser()->getId()) {
             throw $this->createAccessDeniedException('You can not access this entry.');
         }
     }
@@ -449,5 +462,92 @@ class EntryController extends Controller
     private function checkIfEntryAlreadyExists(Entry $entry)
     {
         return $this->get('wallabag_core.entry_repository')->findByUrlAndUserId($entry->getUrl(), $this->getUser()->getId());
+    }
+
+    /**
+     * Get public URL for entry (and generate it if necessary).
+     *
+     * @param Entry $entry
+     *
+     * @Route("/share/{id}", requirements={"id" = "\d+"}, name="share")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function shareAction(Entry $entry)
+    {
+        $this->checkUserAction($entry);
+
+        if (null === $entry->getUuid()) {
+            $entry->generateUuid();
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($entry);
+            $em->flush();
+        }
+
+        return $this->redirect($this->generateUrl('share_entry', [
+            'uuid' => $entry->getUuid(),
+        ]));
+    }
+
+    /**
+     * Disable public sharing for an entry.
+     *
+     * @param Entry $entry
+     *
+     * @Route("/share/delete/{id}", requirements={"id" = "\d+"}, name="delete_share")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function deleteShareAction(Entry $entry)
+    {
+        $this->checkUserAction($entry);
+
+        $entry->cleanUuid();
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($entry);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('view', [
+            'id' => $entry->getId(),
+        ]));
+    }
+
+    /**
+     * Ability to view a content publicly.
+     *
+     * @param Entry $entry
+     *
+     * @Route("/share/{uuid}", requirements={"uuid" = ".+"}, name="share_entry")
+     * @Cache(maxage="25200", smaxage="25200", public=true)
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function shareEntryAction(Entry $entry)
+    {
+        if (!$this->get('craue_config')->get('share_public')) {
+            throw $this->createAccessDeniedException('Sharing an entry is disabled for this user.');
+        }
+
+        return $this->render(
+            '@WallabagCore/themes/common/Entry/share.html.twig',
+            ['entry' => $entry]
+        );
+    }
+
+    /**
+     * Shows untagged articles for current user.
+     *
+     * @param Request $request
+     * @param int     $page
+     *
+     * @Route("/untagged/list/{page}", name="untagged", defaults={"page" = "1"})
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function showUntaggedEntriesAction(Request $request, $page)
+    {
+        return $this->showEntries('untagged', $request, $page);
     }
 }

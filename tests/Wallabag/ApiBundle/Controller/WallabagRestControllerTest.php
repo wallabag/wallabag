@@ -3,6 +3,7 @@
 namespace Tests\Wallabag\ApiBundle\Controller;
 
 use Tests\Wallabag\ApiBundle\WallabagApiTestCase;
+use Wallabag\CoreBundle\Entity\Tag;
 
 class WallabagRestControllerTest extends WallabagApiTestCase
 {
@@ -77,9 +78,56 @@ class WallabagRestControllerTest extends WallabagApiTestCase
         );
     }
 
+    public function testGetEntriesWithFullOptions()
+    {
+        $this->client->request('GET', '/api/entries', [
+            'archive' => 1,
+            'starred' => 1,
+            'sort' => 'updated',
+            'order' => 'asc',
+            'page' => 1,
+            'perPage' => 2,
+            'tags' => 'foo',
+            'since' => 1443274283,
+        ]);
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertGreaterThanOrEqual(1, count($content));
+        $this->assertArrayHasKey('items', $content['_embedded']);
+        $this->assertGreaterThanOrEqual(0, $content['total']);
+        $this->assertEquals(1, $content['page']);
+        $this->assertEquals(2, $content['limit']);
+        $this->assertGreaterThanOrEqual(1, $content['pages']);
+
+        $this->assertArrayHasKey('_links', $content);
+        $this->assertArrayHasKey('self', $content['_links']);
+        $this->assertArrayHasKey('first', $content['_links']);
+        $this->assertArrayHasKey('last', $content['_links']);
+
+        foreach (['self', 'first', 'last'] as $link) {
+            $this->assertArrayHasKey('href', $content['_links'][$link]);
+            $this->assertContains('archive=1', $content['_links'][$link]['href']);
+            $this->assertContains('starred=1', $content['_links'][$link]['href']);
+            $this->assertContains('sort=updated', $content['_links'][$link]['href']);
+            $this->assertContains('order=asc', $content['_links'][$link]['href']);
+            $this->assertContains('tags=foo', $content['_links'][$link]['href']);
+            $this->assertContains('since=1443274283', $content['_links'][$link]['href']);
+        }
+
+        $this->assertTrue(
+            $this->client->getResponse()->headers->contains(
+                'Content-Type',
+                'application/json'
+            )
+        );
+    }
+
     public function testGetStarredEntries()
     {
-        $this->client->request('GET', '/api/entries', ['star' => 1, 'sort' => 'updated']);
+        $this->client->request('GET', '/api/entries', ['starred' => 1, 'sort' => 'updated']);
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
@@ -90,6 +138,17 @@ class WallabagRestControllerTest extends WallabagApiTestCase
         $this->assertGreaterThanOrEqual(1, $content['total']);
         $this->assertEquals(1, $content['page']);
         $this->assertGreaterThanOrEqual(1, $content['pages']);
+
+        $this->assertArrayHasKey('_links', $content);
+        $this->assertArrayHasKey('self', $content['_links']);
+        $this->assertArrayHasKey('first', $content['_links']);
+        $this->assertArrayHasKey('last', $content['_links']);
+
+        foreach (['self', 'first', 'last'] as $link) {
+            $this->assertArrayHasKey('href', $content['_links'][$link]);
+            $this->assertContains('starred=1', $content['_links'][$link]['href']);
+            $this->assertContains('sort=updated', $content['_links'][$link]['href']);
+        }
 
         $this->assertTrue(
             $this->client->getResponse()->headers->contains(
@@ -112,6 +171,113 @@ class WallabagRestControllerTest extends WallabagApiTestCase
         $this->assertGreaterThanOrEqual(1, $content['total']);
         $this->assertEquals(1, $content['page']);
         $this->assertGreaterThanOrEqual(1, $content['pages']);
+
+        $this->assertArrayHasKey('_links', $content);
+        $this->assertArrayHasKey('self', $content['_links']);
+        $this->assertArrayHasKey('first', $content['_links']);
+        $this->assertArrayHasKey('last', $content['_links']);
+
+        foreach (['self', 'first', 'last'] as $link) {
+            $this->assertArrayHasKey('href', $content['_links'][$link]);
+            $this->assertContains('archive=1', $content['_links'][$link]['href']);
+        }
+
+        $this->assertTrue(
+            $this->client->getResponse()->headers->contains(
+                'Content-Type',
+                'application/json'
+            )
+        );
+    }
+
+    public function testGetTaggedEntries()
+    {
+        $this->client->request('GET', '/api/entries', ['tags' => 'foo,bar']);
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertGreaterThanOrEqual(1, count($content));
+        $this->assertNotEmpty($content['_embedded']['items']);
+        $this->assertGreaterThanOrEqual(1, $content['total']);
+        $this->assertEquals(1, $content['page']);
+        $this->assertGreaterThanOrEqual(1, $content['pages']);
+
+        $this->assertArrayHasKey('_links', $content);
+        $this->assertArrayHasKey('self', $content['_links']);
+        $this->assertArrayHasKey('first', $content['_links']);
+        $this->assertArrayHasKey('last', $content['_links']);
+
+        foreach (['self', 'first', 'last'] as $link) {
+            $this->assertArrayHasKey('href', $content['_links'][$link]);
+            $this->assertContains('tags='.urlencode('foo,bar'), $content['_links'][$link]['href']);
+        }
+
+        $this->assertTrue(
+            $this->client->getResponse()->headers->contains(
+                'Content-Type',
+                'application/json'
+            )
+        );
+    }
+
+    public function testGetDatedEntries()
+    {
+        $this->client->request('GET', '/api/entries', ['since' => 1443274283]);
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertGreaterThanOrEqual(1, count($content));
+        $this->assertNotEmpty($content['_embedded']['items']);
+        $this->assertGreaterThanOrEqual(1, $content['total']);
+        $this->assertEquals(1, $content['page']);
+        $this->assertGreaterThanOrEqual(1, $content['pages']);
+
+        $this->assertArrayHasKey('_links', $content);
+        $this->assertArrayHasKey('self', $content['_links']);
+        $this->assertArrayHasKey('first', $content['_links']);
+        $this->assertArrayHasKey('last', $content['_links']);
+
+        foreach (['self', 'first', 'last'] as $link) {
+            $this->assertArrayHasKey('href', $content['_links'][$link]);
+            $this->assertContains('since=1443274283', $content['_links'][$link]['href']);
+        }
+
+        $this->assertTrue(
+            $this->client->getResponse()->headers->contains(
+                'Content-Type',
+                'application/json'
+            )
+        );
+    }
+
+    public function testGetDatedSupEntries()
+    {
+        $future = new \DateTime(date('Y-m-d H:i:s'));
+        $this->client->request('GET', '/api/entries', ['since' => $future->getTimestamp() + 1000]);
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertGreaterThanOrEqual(1, count($content));
+        $this->assertEmpty($content['_embedded']['items']);
+        $this->assertEquals(0, $content['total']);
+        $this->assertEquals(1, $content['page']);
+        $this->assertEquals(1, $content['pages']);
+
+        $this->assertArrayHasKey('_links', $content);
+        $this->assertArrayHasKey('self', $content['_links']);
+        $this->assertArrayHasKey('first', $content['_links']);
+        $this->assertArrayHasKey('last', $content['_links']);
+
+        foreach (['self', 'first', 'last'] as $link) {
+            $this->assertArrayHasKey('href', $content['_links'][$link]);
+            $this->assertContains('since='.($future->getTimestamp() + 1000), $content['_links'][$link]['href']);
+        }
 
         $this->assertTrue(
             $this->client->getResponse()->headers->contains(
@@ -292,7 +458,7 @@ class WallabagRestControllerTest extends WallabagApiTestCase
         $entry = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneWithTags(1);
+            ->findOneWithTags($this->user->getId());
 
         $entry = $entry[0];
 
@@ -354,7 +520,7 @@ class WallabagRestControllerTest extends WallabagApiTestCase
         $entry = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneWithTags(1);
+            ->findOneWithTags($this->user->getId());
         $entry = $entry[0];
 
         if (!$entry) {
@@ -395,6 +561,8 @@ class WallabagRestControllerTest extends WallabagApiTestCase
      */
     public function testDeleteUserTag($tag)
     {
+        $tagName = $tag['label'];
+
         $this->client->request('DELETE', '/api/tags/'.$tag['id'].'.json');
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
@@ -405,12 +573,125 @@ class WallabagRestControllerTest extends WallabagApiTestCase
         $this->assertEquals($tag['label'], $content['label']);
         $this->assertEquals($tag['slug'], $content['slug']);
 
-        $entries = $entry = $this->client->getContainer()
+        $entries = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
             ->findAllByTagId($this->user->getId(), $tag['id']);
 
         $this->assertCount(0, $entries);
+
+        $tag = $this->client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Tag')
+            ->findOneByLabel($tagName);
+
+        $this->assertNull($tag, $tagName.' was removed because it begun an orphan tag');
+    }
+
+    public function testDeleteTagByLabel()
+    {
+        $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+        $entry = $this->client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneWithTags($this->user->getId());
+
+        $entry = $entry[0];
+
+        $tag = new Tag();
+        $tag->setLabel('Awesome tag for test');
+        $em->persist($tag);
+
+        $entry->addTag($tag);
+
+        $em->persist($entry);
+        $em->flush();
+
+        $this->client->request('DELETE', '/api/tag/label.json', ['tag' => $tag->getLabel()]);
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertArrayHasKey('label', $content);
+        $this->assertEquals($tag->getLabel(), $content['label']);
+        $this->assertEquals($tag->getSlug(), $content['slug']);
+
+        $entries = $this->client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findAllByTagId($this->user->getId(), $tag->getId());
+
+        $this->assertCount(0, $entries);
+    }
+
+    public function testDeleteTagByLabelNotFound()
+    {
+        $this->client->request('DELETE', '/api/tag/label.json', ['tag' => 'does not exist']);
+
+        $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
+    }
+
+    public function testDeleteTagsByLabel()
+    {
+        $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+        $entry = $this->client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneWithTags($this->user->getId());
+
+        $entry = $entry[0];
+
+        $tag = new Tag();
+        $tag->setLabel('Awesome tag for tagsLabel');
+        $em->persist($tag);
+
+        $tag2 = new Tag();
+        $tag2->setLabel('Awesome tag for tagsLabel 2');
+        $em->persist($tag2);
+
+        $entry->addTag($tag);
+        $entry->addTag($tag2);
+
+        $em->persist($entry);
+        $em->flush();
+
+        $this->client->request('DELETE', '/api/tags/label.json', ['tags' => $tag->getLabel().','.$tag2->getLabel()]);
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertCount(2, $content);
+
+        $this->assertArrayHasKey('label', $content[0]);
+        $this->assertEquals($tag->getLabel(), $content[0]['label']);
+        $this->assertEquals($tag->getSlug(), $content[0]['slug']);
+
+        $this->assertArrayHasKey('label', $content[1]);
+        $this->assertEquals($tag2->getLabel(), $content[1]['label']);
+        $this->assertEquals($tag2->getSlug(), $content[1]['slug']);
+
+        $entries = $this->client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findAllByTagId($this->user->getId(), $tag->getId());
+
+        $this->assertCount(0, $entries);
+
+        $entries = $this->client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findAllByTagId($this->user->getId(), $tag2->getId());
+
+        $this->assertCount(0, $entries);
+    }
+
+    public function testDeleteTagsByLabelNotFound()
+    {
+        $this->client->request('DELETE', '/api/tags/label.json', ['tags' => 'does not exist']);
+
+        $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
     }
 
     public function testGetVersion()
@@ -509,5 +790,50 @@ class WallabagRestControllerTest extends WallabagApiTestCase
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->assertEquals(true, $content['is_starred']);
+    }
+
+    public function testGetEntriesExists()
+    {
+        $this->client->request('GET', '/api/entries/exists?url=http://0.0.0.0/entry2');
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertEquals(true, $content['exists']);
+    }
+
+    public function testGetEntriesExistsWithManyUrls()
+    {
+        $url1 = 'http://0.0.0.0/entry2';
+        $url2 = 'http://0.0.0.0/entry10';
+        $this->client->request('GET', '/api/entries/exists?urls[]='.$url1.'&urls[]='.$url2);
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertArrayHasKey($url1, $content);
+        $this->assertArrayHasKey($url2, $content);
+        $this->assertEquals(true, $content[$url1]);
+        $this->assertEquals(false, $content[$url2]);
+    }
+
+    public function testGetEntriesExistsWhichDoesNotExists()
+    {
+        $this->client->request('GET', '/api/entries/exists?url=http://google.com/entry2');
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertEquals(false, $content['exists']);
+    }
+
+    public function testGetEntriesExistsWithNoUrl()
+    {
+        $this->client->request('GET', '/api/entries/exists?url=');
+
+        $this->assertEquals(403, $this->client->getResponse()->getStatusCode());
     }
 }

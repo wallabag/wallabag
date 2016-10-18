@@ -31,6 +31,7 @@ menu:
         search: 'Buscar'
         save_link: 'Archivar un enlace'
         back_to_unread: 'Volver a los artículos sin leer'
+        # users_management: 'Users management'
     top:
         add_new_entry: 'Añadir un nuevo artículo'
         search: 'Buscar'
@@ -45,6 +46,7 @@ footer:
         social: 'Social'
         powered_by: 'funciona por'
         about: 'Acerca de'
+    # stats: Since %user_creation% you read %nb_archives% articles. That is about %per_day% a day!
 
 config:
     page_title: 'Configuración'
@@ -68,6 +70,7 @@ config:
             200_word: 'Leo ~200 palabras por minuto'
             300_word: 'Leo ~300 palabras por minuto'
             400_word: 'Leo ~400 palabras por minuto'
+        # pocket_consumer_key_label: Consumer key for Pocket to import contents
     form_rss:
         description: 'Los feeds RSS de wallabag permiten leer los artículos guardados con su lector RSS favorito. Necesita generar un token primero'
         token_label: 'RSS token'
@@ -93,6 +96,7 @@ config:
         if_label: 'si'
         then_tag_as_label: 'Etiquete como'
         delete_rule_label: 'Borre'
+        # edit_rule_label: 'edit'
         rule_label: 'Regla'
         tags_label: 'Etiquetas'
         faq:
@@ -126,12 +130,6 @@ config:
                 or: 'Una regla U otra'
                 and: 'Una regla Y la otra'
                 matches: 'Pruebe si un <i>sujeto</i> corresponde a una <i>búsqueda</i> (insensible a mayusculas).<br />Ejemplo : <code>título coincide "football"</code>'
-    form_new_user:
-        username_label: 'Nombre de usuario'
-        password_label: 'Contraseña'
-        repeat_new_password_label: 'Confirmar la nueva contraseña'
-        plain_password_label: '????'
-        email_label: 'Email'
 
 entry:
     page_titles:
@@ -139,11 +137,14 @@ entry:
         starred: 'Artículos favoritos'
         archived: 'Artículos archivados'
         filtered: 'Artículos filtrados'
+        # filtered_tags: 'Filtered by tags'
+        # untagged: 'Untagged entries'
     list:
         number_on_the_page: '{0} No hay artículos.|{1} Hay un artículo.|]1,Inf[ Hay %count% artículos.'
         reading_time: 'tiempo estimado de lectura'
         reading_time_minutes: 'tiempo estimado de lectura: %readingTime% min'
         reading_time_less_one_minute: 'tiempo estimado de lectura: <small class="inferieur">&lt;</small> 1 min'
+        # number_of_tags: '{1}and one other tag|]1,Inf[and %count% other tags'
         reading_time_minutes_short: '%readingTime% min'
         reading_time_less_one_minute_short: '<small class="inferieur">&lt;</small> 1 min'
         original_article: 'original'
@@ -185,6 +186,8 @@ entry:
             add_a_tag: 'Añadir una etiqueta'
             share_content: 'Compartir'
             share_email_label: 'Dirección e-mail'
+            # public_link: 'public link'
+            # delete_public_link: 'delete public link'
             download: 'Descargar'
             print: 'Imprimir'
             problem:
@@ -192,7 +195,7 @@ entry:
                 description: '¿Este artículo no se muestra bien?'
         edit_title: 'Modificar el título'
         original_article: 'original'
-        annotations_on_the_entry: '{0} Sin anotaciones|{1} Una anotación|]1,Inf[ %nbAnnotations% anotaciones'
+        annotations_on_the_entry: '{0} Sin anotaciones|{1} Una anotación|]1,Inf[ %count% anotaciones'
         created_at: 'Fecha de creación'
     new:
         page_title: 'Guardar un nuevo artículo'
@@ -205,6 +208,8 @@ entry:
         url_label: 'Url'
         is_public_label: 'Es Público'
         save_label: 'Guardar'
+    public:
+        # shared_by_wallabag: "This article has been shared by <a href='%wallabag_instance%'>wallabag</a>"
 
 about:
     page_title: 'Acerca de'
@@ -260,12 +265,14 @@ howto:
 
 quickstart:
     page_title: 'Comienzo rápido'
+    # more: 'More…'
     intro:
         title: 'Bienvenido a wallabag !'
         paragraph_1: "Le acompañaremos a su visita de wallabag y le mostraremos algunas características que le pueden interesar."
         paragraph_2: '¡Síganos!'
     configure:
         title: 'Configure la aplicación'
+        # description: 'In order to have an application which suits you, have a look into the configuration of wallabag.'
         language: 'Cambie el idioma y el diseño de la aplicación'
         rss: 'Activar los feeds RSS'
         tagging_rules: 'Escribir reglas para etiquetear automaticamente sus artículos'
@@ -279,6 +286,7 @@ quickstart:
         import: 'Configure importación'
     first_steps:
         title: 'Primeros pasos'
+        # description: "Now wallabag is well configured, it's time to archive the web. You can click on the top right sign + to add a link."
         new_article: 'Guarde su primer artículo'
         unread_articles: '¡Y clasifíquelo!'
     migrate:
@@ -287,11 +295,16 @@ quickstart:
         pocket: 'Migrar desde Pocket'
         wallabag_v1: 'Migrar desde wallabag v1'
         wallabag_v2: 'Migrar desde wallabag v2'
+        readability: 'Migrar desde Readability'
+        instapaper: 'Migrar desde Instapaper'
     developer:
         title: 'Promotores'
+        # description: 'We also thought to the developers: Docker, API, translations, etc.'
         create_application: 'Cree su tercera aplicación'
+        # use_docker: 'Use Docker to install wallabag'
     docs:
         title: 'Documentación completa'
+        # description: "There are so much features in wallabag. Don't hesitate to read the manual to know them and to learn how to use them."
         annotate: 'Anote su artículo'
         export: 'Convierta sus artículos a ePub o a PDF'
         search_filters: 'Aprenda a utilizar el buscador y los filtros para encontrar el artículo que le interese'
@@ -308,6 +321,7 @@ tag:
     page_title: 'Etiquetas'
     list:
         number_on_the_page: '{0} No hay ninguna etiqueta.|{1} Hay una etiqueta.|]1,Inf[ Hay %count% etiquetas.'
+        # see_untagged_entries: 'See untagged entries'
 
 import:
     page_title: 'Importar'
@@ -335,6 +349,24 @@ import:
     wallabag_v2:
         page_title: 'Importar > Wallabag v2'
         description: 'Va a importar sus artículos de otra instancia de wallabag v2. Vaya a Todos los artículos, entonces, en la barra lateral, oprima en "JSON". Usted tendrá un fichero "All articles.json"'
+    readability:
+        page_title: 'Importar > Readability'
+        # description: 'This importer will import all your Readability articles. On the tools (https://www.readability.com/tools/) page, click on "Export your data" in the "Data Export" section. You will received an email to download a json (which does not end with .json in fact).'
+        # how_to: 'Please select your Readability export and click on the below button to upload and import it.'
+    worker:
+        # enabled: "Import is made asynchronously. Once the import task is started, an external worker will handle jobs one at a time. The current service is:"
+    firefox:
+       page_title: 'Importar > Firefox'
+       # description: "This importer will import all your Firefox bookmarks. Just go to your bookmarks (Ctrl+Maj+O), then into \"Import and backup\", choose \"Backup...\". You will obtain a .json file."
+       # how_to: "Please choose the bookmark backup file and click on the button below to import it. Note that the process may take a long time since all articles have to be fetched."
+    chrome:
+       page_title: 'Importar > Chrome'
+       # description: "This importer will import all your Chrome bookmarks. The location of the file depends on your operating system : <ul><li>On Linux, go into the <code>~/.config/chromium/Default/</code> directory</li><li>On Windows, it should be at <code>%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default</code></li><li>On OS X, it should be at <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>Once you got there, copy the Bookmarks file someplace you'll find.<em><br>Note that if you have Chromium instead of Chrome, you'll have to correct paths accordingly.</em></p>"
+       # how_to: "Please choose the bookmark backup file and click on the button below to import it. Note that the process may take a long time since all articles have to be fetched."
+    instapaper:
+        page_title: 'Importar > Instapaper'
+        # description: 'This importer will import all your Instapaper articles. On the settings (https://www.instapaper.com/user) page, click on "Download .CSV file" in the "Export" section. A CSV file will be downloaded (like "instapaper-export.csv").'
+        # how_to: 'Please select your Instapaper export and click on the below button to upload and import it.'
 
 developer:
     page_title: 'Promotor'
@@ -361,12 +393,14 @@ developer:
         page_title: 'Promotor > Nuevo cliente'
         page_description: 'Va a crear un nuevo cliente. Por favor, llene el campo abajo para URI redirigido de su aplicación.'
         form:
+            # name_label: 'Name of the client'
             redirect_uris_label: 'los URI redirigidos'
             save_label: 'Crear un nuevo cliente'
         action_back: 'Atrás'
     client_parameter:
         page_title: 'Promotor > Parámetros del cliente'
         page_description: 'Aquí hay sus parámetros del cliente.'
+        # field_name: 'Client name'
         field_id: 'Identificación del cliente'
         field_secret: 'Cliente secreto'
         back: 'Atrás'
@@ -384,6 +418,33 @@ developer:
             paragraph_8: 'Si quiere ver todos los fines de API, se puede ver <a href="%link%">a nuestra documentación API</a>.'
         back: 'Atrás'
 
+user:
+    # page_title: Users management
+    # new_user: Create a new user
+    # edit_user: Edit an existing user
+    # description: "Here you can manage all users (create, edit and delete)"
+    # list:
+    #     actions: Actions
+    #     edit_action: Edit
+    #     yes: Yes
+    #     no: No
+    #     create_new_one: Create a new user
+    form:
+        username_label: 'Nombre de usuario'
+        # name_label: 'Name'
+        password_label: 'Contraseña'
+        repeat_new_password_label: 'Confirmar la nueva contraseña'
+        plain_password_label: '????'
+        email_label: 'Email'
+        # enabled_label: 'Enabled'
+        # locked_label: 'Locked'
+        # last_login_label: 'Last login'
+        # twofactor_label: Two factor authentication
+        # save: Save
+        # delete: Delete
+        # delete_confirm: Are you sure?
+        # back_to_list: Back to list
+
 flashes:
     config:
         notice:
@@ -400,10 +461,10 @@ flashes:
         notice:
             entry_already_saved: 'Entrada ya guardada por %fecha%'
             entry_saved: 'Entrada guardada'
-            # entry_saved_failed: 'Failed to save entry'
+            # entry_saved_failed: 'Entry saved but fetching content failed'
             entry_updated: 'Entrada actualizada'
             entry_reloaded: 'Entrada recargada'
-            entry_reload_failed: 'Entrada recargada reprobada'
+            # entry_reloaded_failed: 'Entry reloaded but fetching content failed'
             entry_archived: 'Artículo archivado'
             entry_unarchived: 'Artículo desarchivado'
             entry_starred: 'Artículo guardado en los favoritos'
@@ -414,9 +475,13 @@ flashes:
             tag_added: 'Etiqueta añadida'
     import:
         notice:
-             failed: 'Importación reprobada, por favor inténtelo de nuevo.'
-             failed_on_file: 'Se ocurre un error por procesar importación. Por favor verifique su archivo importado.'
-             summary: 'Resúmen importado: %importado% importado, %saltados% ya guardado.'
+            failed: 'Importación reprobada, por favor inténtelo de nuevo.'
+            failed_on_file: 'Se ocurre un error por procesar importación. Por favor verifique su archivo importado.'
+            summary: 'Resúmen importado: %importado% importado, %saltados% ya guardado.'
+            # summary_with_queue: 'Import summary: %queued% queued.'
+        error:
+            # redis_enabled_not_installed: Redis is enabled for handle asynchronous import but it looks like <u>we can't connect to it</u>. Please check Redis configuration.
+            # rabbit_enabled_not_installed: RabbitMQ is enabled for handle asynchronous import but it looks like <u>we can't connect to it</u>. Please check RabbitMQ configuration.
     developer:
         notice:
             client_created: 'Nuevo cliente creado.'

@@ -17,6 +17,11 @@ Die Hauptdokumentation für diese Applikation ist in einigen Abschnitten organis
 * :ref:`user-docs`
 * :ref:`dev-docs`
 
+Die Dokumentation ist in anderen Sprachen verfügbar :
+
+* `Documentation in english <http://doc.wallabag.org/en/master/>`_
+* `Documentation en français <http://doc.wallabag.org/fr/master/>`_
+
 .. _user-docs:
 
 .. toctree::
@@ -25,7 +30,8 @@ Die Hauptdokumentation für diese Applikation ist in einigen Abschnitten organis
 
    user/faq
    user/installation
-   user/upgrade
+   user/upgrade-2.0.x-2.1.1
+   user/upgrade-2.0.x-2.1.1
    user/migration
    user/import
    user/create_account
@@ -38,6 +44,7 @@ Die Hauptdokumentation für diese Applikation ist in einigen Abschnitten organis
    user/filters
    user/tags
    user/android
+   user/parameters
 
 .. _dev-docs:
 
@@ -50,3 +57,5 @@ Die Hauptdokumentation für diese Applikation ist in einigen Abschnitten organis
    developer/documentation
    developer/translate
    developer/maintenance
+   developer/redis
+   developer/rabbitmq

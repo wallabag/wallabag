@@ -2,12 +2,14 @@
 
 namespace Wallabag\CoreBundle\Command;
 
+use FOS\UserBundle\Event\UserEvent;
+use FOS\UserBundle\FOSUserEvents;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Output\NullOutput;
+use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
@@ -61,7 +63,6 @@ class InstallCommand extends ContainerAwareCommand
             ->setupDatabase()
             ->setupAdmin()
             ->setupConfig()
-            ->setupAsset()
         ;
 
         $output->writeln('<info>Wallabag has been successfully installed.</info>');
@@ -70,7 +71,7 @@ class InstallCommand extends ContainerAwareCommand
 
     protected function checkRequirements()
     {
-        $this->defaultOutput->writeln('<info><comment>Step 1 of 5.</comment> Checking system requirements.</info>');
+        $this->defaultOutput->writeln('<info><comment>Step 1 of 4.</comment> Checking system requirements.</info>');
 
         $rows = [];
 
@@ -96,7 +97,8 @@ class InstallCommand extends ContainerAwareCommand
         try {
             $this->getContainer()->get('doctrine')->getManager()->getConnection()->connect();
         } catch (\Exception $e) {
-            if (false === strpos($e->getMessage(), 'Unknown database')) {
+            if (false === strpos($e->getMessage(), 'Unknown database')
+                && false === strpos($e->getMessage(), 'database "'.$this->getContainer()->getParameter('database_name').'" does not exist')) {
                 $fulfilled = false;
                 $status = '<error>ERROR!</error>';
                 $help = 'Can\'t connect to the database: '.$e->getMessage();
@@ -138,7 +140,7 @@ class InstallCommand extends ContainerAwareCommand
 
     protected function setupDatabase()
     {
-        $this->defaultOutput->writeln('<info><comment>Step 2 of 5.</comment> Setting up database.</info>');
+        $this->defaultOutput->writeln('<info><comment>Step 2 of 4.</comment> Setting up database.</info>');
 
         // user want to reset everything? Don't care about what is already here
         if (true === $this->defaultInput->getOption('reset')) {
@@ -209,7 +211,7 @@ class InstallCommand extends ContainerAwareCommand
 
     protected function setupAdmin()
     {
-        $this->defaultOutput->writeln('<info><comment>Step 3 of 5.</comment> Administration setup.</info>');
+        $this->defaultOutput->writeln('<info><comment>Step 3 of 4.</comment> Administration setup.</info>');
 
         $questionHelper = $this->getHelperSet()->get('question');
         $question = new ConfirmationQuestion('Would you like to create a new admin user (recommended) ? (Y/n)', true);
@@ -237,14 +239,9 @@ class InstallCommand extends ContainerAwareCommand
 
         $em->persist($user);
 
-        $config = new Config($user);
-        $config->setTheme($this->getContainer()->getParameter('wallabag_core.theme'));
-        $config->setItemsPerPage($this->getContainer()->getParameter('wallabag_core.items_on_page'));
-        $config->setRssLimit($this->getContainer()->getParameter('wallabag_core.rss_limit'));
-        $config->setReadingSpeed($this->getContainer()->getParameter('wallabag_core.reading_speed'));
-        $config->setLanguage($this->getContainer()->getParameter('wallabag_core.language'));
-
-        $em->persist($config);
+        // dispatch a created event so the associated config will be created
+        $event = new UserEvent($user);
+        $this->getContainer()->get('event_dispatcher')->dispatch(FOSUserEvents::USER_CREATED, $event);
 
         $this->defaultOutput->writeln('');
 
@@ -253,13 +250,18 @@ class InstallCommand extends ContainerAwareCommand
 
     protected function setupConfig()
     {
-        $this->defaultOutput->writeln('<info><comment>Step 4 of 5.</comment> Config setup.</info>');
+        $this->defaultOutput->writeln('<info><comment>Step 4 of 4.</comment> Config setup.</info>');
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
 
         // cleanup before insert new stuff
         $em->createQuery('DELETE FROM CraueConfigBundle:Setting')->execute();
 
         $settings = [
+            [
+                'name' => 'share_public',
+                'value' => '1',
+                'section' => 'entry',
+            ],
             [
                 'name' => 'carrot',
                 'value' => '1',
@@ -331,8 +333,13 @@ class InstallCommand extends ContainerAwareCommand
                 'section' => 'export',
             ],
             [
-                'name' => 'pocket_consumer_key',
-                'value' => null,
+                'name' => 'import_with_redis',
+                'value' => '0',
+                'section' => 'import',
+            ],
+            [
+                'name' => 'import_with_rabbitmq',
+                'value' => '0',
                 'section' => 'import',
             ],
             [
@@ -392,20 +399,6 @@ class InstallCommand extends ContainerAwareCommand
         return $this;
     }
 
-    protected function setupAsset()
-    {
-        $this->defaultOutput->writeln('<info><comment>Step 5 of 5.</comment> Installing assets.</info>');
-
-        $this
-            ->runCommand('assets:install')
-            ->runCommand('assetic:dump')
-        ;
-
-        $this->defaultOutput->writeln('');
-
-        return $this;
-    }
-
     /**
      * Run a command.
      *
@@ -428,16 +421,18 @@ class InstallCommand extends ContainerAwareCommand
         }
 
         $this->getApplication()->setAutoExit(false);
-        $exitCode = $this->getApplication()->run(new ArrayInput($parameters), new NullOutput());
+
+        $output = new BufferedOutput();
+        $exitCode = $this->getApplication()->run(new ArrayInput($parameters), $output);
 
         if (0 !== $exitCode) {
             $this->getApplication()->setAutoExit(true);
 
-            $errorMessage = sprintf('The command "%s" terminated with an error code: %u.', $command, $exitCode);
-            $this->defaultOutput->writeln("<error>$errorMessage</error>");
-            $exception = new \Exception($errorMessage, $exitCode);
+            $this->defaultOutput->writeln('');
+            $this->defaultOutput->writeln('<error>The command "'.$command.'" generates some errors: </error>');
+            $this->defaultOutput->writeln($output->fetch());
 
-            throw $exception;
+            die();
         }
 
         // PDO does not always close the connection after Doctrine commands.

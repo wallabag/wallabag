@@ -23,6 +23,9 @@ class LoadEntryData extends AbstractFixture implements OrderedFixtureInterface
         $entry1->setContent('This is my content /o/');
         $entry1->setLanguage('en');
 
+        $entry1->addTag($this->getReference('foo-tag'));
+        $entry1->addTag($this->getReference('baz-tag'));
+
         $manager->persist($entry1);
 
         $this->addReference('entry1', $entry1);
@@ -96,6 +99,7 @@ class LoadEntryData extends AbstractFixture implements OrderedFixtureInterface
         $entry6->setContent('This is my content /o/');
         $entry6->setArchived(true);
         $entry6->setLanguage('de');
+        $entry6->addTag($this->getReference('bar-tag'));
 
         $manager->persist($entry6);
 

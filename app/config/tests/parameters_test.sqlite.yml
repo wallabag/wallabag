@@ -5,4 +5,4 @@ parameters:
     test_database_name: ~
     test_database_user: ~
     test_database_password: ~
-    test_database_path: "%kernel.root_dir%/../data/db/wallabag_testHU.sqlite"
+    test_database_path: "%kernel.root_dir%/../data/db/wallabag_test.sqlite"

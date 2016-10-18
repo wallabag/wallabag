@@ -1,0 +1,46 @@
+{% extends "WallabagCoreBundle::layout.html.twig" %}
+
+{% block title %}{{ 'howto.page_title'|trans }}{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col s12">
+            <div class="card-panel settings">
+                <p>{{ 'howto.page_description'|trans }}</p>
+
+                <div class="row">
+
+                    <div class="col s12">
+                        <a href="{{ path('new') }}">{{ 'howto.form.description'|trans }}</a>
+                    </div>
+
+                    <div class="col s12">
+                        <h5>{{ 'howto.top_menu.browser_addons'|trans }}</h5>
+                        <ul>
+                            <li><a href="{{ addonsUrl.firefox }}" target="_blank">{{ 'howto.browser_addons.firefox'|trans }}</a></li>
+                            <li><a href="{{ addonsUrl.chrome }}" target="_blank">{{ 'howto.browser_addons.chrome'|trans }}</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col s12">
+                        <h5>{{ 'howto.top_menu.mobile_apps'|trans }}</h5>
+                        <ul>
+                            <li>Android: <a href="{{ addonsUrl.f_droid }}" target="_blank">{{ 'howto.mobile_apps.android.via_f_droid'|trans }}</a> / <a href="{{ addonsUrl.google_play }}" target="_blank">{{ 'howto.mobile_apps.android.via_google_play'|trans }}</a></li>
+                            <li>iOS: <a href="{{ addonsUrl.ios }}" target="_blank">{{ 'howto.mobile_apps.ios'|trans }}</a></li>
+                            <li>Windows Phone: <a href="{{ addonsUrl.windows }}" target="_blank">{{ 'howto.mobile_apps.windows'|trans }}</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col s12">
+                        <h5>{{ 'howto.top_menu.bookmarklet'|trans }}</h5>
+                        {{ 'howto.bookmarklet.description'|trans }}
+                        {% include '@WallabagCore/themes/common/Static/_bookmarklet.html.twig' %}
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

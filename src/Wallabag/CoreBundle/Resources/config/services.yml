@@ -29,7 +29,7 @@ services:
         arguments:
             - "@doctrine"
 
-    wallabag_core.table_prefix_subscriber:
+    wallabag_core.subscriber.table_prefix:
         class: Wallabag\CoreBundle\Subscriber\TablePrefixSubscriber
         arguments:
             - "%database_table_prefix%"
@@ -88,17 +88,6 @@ services:
         arguments:
             - WallabagCoreBundle:Tag
 
-    wallabag_core.registration_confirmed:
-        class: Wallabag\CoreBundle\EventListener\RegistrationConfirmedListener
-        arguments:
-            - "@doctrine.orm.entity_manager"
-            - "%wallabag_core.theme%"
-            - "%wallabag_core.items_on_page%"
-            - "%wallabag_core.rss_limit%"
-            - "%wallabag_core.language%"
-        tags:
-            - { name: kernel.event_subscriber }
-
     wallabag_core.helper.entries_export:
         class: Wallabag\CoreBundle\Helper\EntriesExport
         arguments:
@@ -119,3 +108,24 @@ services:
         class: Wallabag\CoreBundle\Helper\Redirect
         arguments:
             - "@router"
+
+    wallabag_core.helper.prepare_pager_for_entries:
+        class: Wallabag\CoreBundle\Helper\PreparePagerForEntries
+        arguments:
+            - "@security.token_storage"
+            - "@router"
+
+    wallabag_core.redis.client:
+        class: Predis\Client
+        arguments:
+            -
+                scheme: '%redis_scheme%'
+                host: '%redis_host%'
+                port: '%redis_port%'
+                path: '%redis_path%'
+
+    wallabag_core.exception_controller:
+        class: Wallabag\CoreBundle\Controller\ExceptionController
+        arguments:
+            - '@twig'
+            - '%kernel.debug%'

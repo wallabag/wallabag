@@ -81,6 +81,13 @@ class Config
     private $readingSpeed;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="pocket_consumer_key", type="string", nullable=true)
+     */
+    private $pocketConsumerKey;
+
+    /**
      * @ORM\OneToOne(targetEntity="Wallabag\UserBundle\Entity\User", inversedBy="config")
      */
     private $user;
@@ -276,6 +283,30 @@ class Config
     public function getReadingSpeed()
     {
         return $this->readingSpeed;
+    }
+
+    /**
+     * Set pocketConsumerKey.
+     *
+     * @param string $pocketConsumerKey
+     *
+     * @return Config
+     */
+    public function setPocketConsumerKey($pocketConsumerKey)
+    {
+        $this->pocketConsumerKey = $pocketConsumerKey;
+
+        return $this;
+    }
+
+    /**
+     * Get pocketConsumerKey.
+     *
+     * @return string
+     */
+    public function getPocketConsumerKey()
+    {
+        return $this->pocketConsumerKey;
     }
 
     /**

@@ -296,6 +296,29 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('tag2', $entry->getTags()[1]->getLabel());
     }
 
+    public function testAssignTagsNotFlushed()
+    {
+        $graby = $this->getMockBuilder('Graby\Graby')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $tagRepo = $this->getTagRepositoryMock();
+        $tagRepo->expects($this->never())
+            ->method('__call');
+
+        $proxy = new ContentProxy($graby, $this->getTaggerMock(), $tagRepo, $this->getLogger());
+
+        $tagEntity = new Tag();
+        $tagEntity->setLabel('tag1');
+
+        $entry = new Entry(new User());
+
+        $proxy->assignTagsToEntry($entry, 'tag1', [$tagEntity]);
+
+        $this->assertCount(1, $entry->getTags());
+        $this->assertEquals('tag1', $entry->getTags()[0]->getLabel());
+    }
+
     private function getTaggerMock()
     {
         return $this->getMockBuilder('Wallabag\CoreBundle\Helper\RuleBasedTagger')

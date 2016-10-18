@@ -11,14 +11,11 @@
                 <div class="row">
                     <div class="div_tabs col s12">
                         <ul class="tabs">
-                            <li class="tab col s3"><a class="active" href="#set1">{{ 'config.tab_menu.settings'|trans }}</a></li>
-                            <li class="tab col s3"><a href="#set2">{{ 'config.tab_menu.rss'|trans }}</a></li>
-                            <li class="tab col s3"><a href="#set3">{{ 'config.tab_menu.user_info'|trans }}</a></li>
-                            <li class="tab col s3"><a href="#set4">{{ 'config.tab_menu.password'|trans }}</a></li>
-                            <li class="tab col s3"><a href="#set5">{{ 'config.tab_menu.rules'|trans }}</a></li>
-                            {% if is_granted('ROLE_SUPER_ADMIN') %}
-                            <li class="tab col s3"><a href="#set6">{{ 'config.tab_menu.new_user'|trans }}</a></li>
-                            {% endif %}
+                            <li class="tab col s12 m6 l3"><a class="active" href="#set1">{{ 'config.tab_menu.settings'|trans }}</a></li>
+                            <li class="tab col s12 m6 l3"><a href="#set2">{{ 'config.tab_menu.rss'|trans }}</a></li>
+                            <li class="tab col s12 m6 l3"><a href="#set3">{{ 'config.tab_menu.user_info'|trans }}</a></li>
+                            <li class="tab col s12 m6 l3"><a href="#set4">{{ 'config.tab_menu.password'|trans }}</a></li>
+                            <li class="tab col s12 m6 l3"><a href="#set5">{{ 'config.tab_menu.rules'|trans }}</a></li>
                         </ul>
                     </div>
 
@@ -59,6 +56,18 @@
                                     {{ form_label(form.config.language) }}
                                     {{ form_errors(form.config.language) }}
                                     {{ form_widget(form.config.language) }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form_label(form.config.pocket_consumer_key) }}
+                                    {{ form_errors(form.config.pocket_consumer_key) }}
+                                    {{ form_widget(form.config.pocket_consumer_key) }}
+                                    <p>
+                                        &raquo;
+                                        <a href="https://getpocket.com/developer/docs/authentication">https://getpocket.com/developer/docs/authentication</a>
+                                    </p>
                                 </div>
                             </div>
 
@@ -145,11 +154,9 @@
                             <div class="row">
                                 <div class="input-field col s12">
                                     {{ 'config.form_user.two_factor_description'|trans }}
-                                </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="input-field col s12">
+                                    <br />
+
                                     {{ form_widget(form.user.twoFactorAuthentication) }}
                                     {{ form_label(form.user.twoFactorAuthentication) }}
                                     {{ form_errors(form.user.twoFactorAuthentication) }}
@@ -196,6 +203,7 @@
                     </div>
 
                     <div id="set5" class="col s12">
+                        {% if app.user.config.taggingRules is not empty %}
                         <div class="row">
                             <div class="input-field col s12">
                                 <ul>
@@ -205,14 +213,18 @@
                                         « {{ tagging_rule.rule }} »
                                         {{ 'config.form_rules.then_tag_as_label'|trans }}
                                         « {{ tagging_rule.tags|join(', ') }} »
+                                        <a href="{{ path('edit_tagging_rule', {id: tagging_rule.id}) }}" title="{{ 'config.form_rules.edit_rule_label'|trans }}">
+                                            <i class="tool grey-text mode_edit material-icons">mode_edit</i>
+                                        </a>
                                         <a href="{{ path('delete_tagging_rule', {id: tagging_rule.id}) }}" title="{{ 'config.form_rules.delete_rule_label'|trans }}">
-                                            <i class="tool grey-text delete mdi-action-delete"></i>
+                                            <i class="tool grey-text delete material-icons">delete</i>
                                         </a>
                                     </li>
                                     {% endfor %}
                                 </ul>
                             </div>
                         </div>
+                        {% endif %}
 
                         {{ form_start(form.new_tagging_rule) }}
                             {{ form_errors(form.new_tagging_rule) }}
@@ -322,49 +334,6 @@
                             </div>
                         </div>
                     </div>
-
-                    {% if is_granted('ROLE_SUPER_ADMIN') %}
-                    <div id="set6" class="col s12">
-                        {{ form_start(form.new_user) }}
-                            {{ form_errors(form.new_user) }}
-
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    {{ form_label(form.new_user.username) }}
-                                    {{ form_errors(form.new_user.username) }}
-                                    {{ form_widget(form.new_user.username) }}
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    {{ form_label(form.new_user.plainPassword.first) }}
-                                    {{ form_errors(form.new_user.plainPassword.first) }}
-                                    {{ form_widget(form.new_user.plainPassword.first) }}
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    {{ form_label(form.new_user.plainPassword.second) }}
-                                    {{ form_errors(form.new_user.plainPassword.second) }}
-                                    {{ form_widget(form.new_user.plainPassword.second) }}
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    {{ form_label(form.new_user.email) }}
-                                    {{ form_errors(form.new_user.email) }}
-                                    {{ form_widget(form.new_user.email) }}
-                                </div>
-                            </div>
-
-                            {{ form_widget(form.new_user.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
-                            {{ form_rest(form.new_user) }}
-                        </form>
-                    </div>
-                    {% endif %}
                 </div>
 
             </div>

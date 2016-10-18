@@ -3,6 +3,7 @@
 namespace Wallabag\CoreBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 use Wallabag\CoreBundle\Entity\Tag;
@@ -85,6 +86,22 @@ class EntryRepository extends EntityRepository
     }
 
     /**
+     * Retrieves untagged entries for a user.
+     *
+     * @param int $userId
+     *
+     * @return QueryBuilder
+     */
+    public function getBuilderForUntaggedByUser($userId)
+    {
+        return $this
+            ->getBuilderByUser($userId)
+            ->leftJoin('e.tags', 't')
+            ->groupBy('e.id')
+            ->having('count(t.id) = 0');
+    }
+
+    /**
      * Find Entries.
      *
      * @param int    $userId
@@ -92,12 +109,15 @@ class EntryRepository extends EntityRepository
      * @param bool   $isStarred
      * @param string $sort
      * @param string $order
+     * @param int    $since
+     * @param string $tags
      *
      * @return array
      */
-    public function findEntries($userId, $isArchived = null, $isStarred = null, $sort = 'created', $order = 'ASC')
+    public function findEntries($userId, $isArchived = null, $isStarred = null, $sort = 'created', $order = 'ASC', $since = 0, $tags = '')
     {
         $qb = $this->createQueryBuilder('e')
+            ->leftJoin('e.tags', 't')
             ->where('e.user =:userId')->setParameter('userId', $userId);
 
         if (null !== $isArchived) {
@@ -106,6 +126,16 @@ class EntryRepository extends EntityRepository
 
         if (null !== $isStarred) {
             $qb->andWhere('e.isStarred =:isStarred')->setParameter('isStarred', (bool) $isStarred);
+        }
+
+        if ($since > 0) {
+            $qb->andWhere('e.updatedAt > :since')->setParameter('since', new \DateTime(date('Y-m-d H:i:s', $since)));
+        }
+
+        if ('' !== $tags) {
+            foreach (explode(',', $tags) as $tag) {
+                $qb->andWhere('t.label = :label')->setParameter('label', $tag);
+            }
         }
 
         if ('created' === $sort) {
@@ -210,6 +240,19 @@ class EntryRepository extends EntityRepository
     }
 
     /**
+     * Remove tags from all user entries.
+     *
+     * @param int        $userId
+     * @param Array<Tag> $tags
+     */
+    public function removeTags($userId, $tags)
+    {
+        foreach ($tags as $tag) {
+            $this->removeTag($userId, $tag);
+        }
+    }
+
+    /**
      * Find all entries that are attached to a give tag id.
      *
      * @param int $userId
@@ -238,7 +281,7 @@ class EntryRepository extends EntityRepository
     public function findByUrlAndUserId($url, $userId)
     {
         $res = $this->createQueryBuilder('e')
-            ->where('e.url = :url')->setParameter('url', $url)
+            ->where('e.url = :url')->setParameter('url', urldecode($url))
             ->andWhere('e.user = :user_id')->setParameter('user_id', $userId)
             ->getQuery()
             ->getResult();
@@ -262,6 +305,26 @@ class EntryRepository extends EntityRepository
         $qb = $this->createQueryBuilder('e')
             ->select('count(e)')
             ->where('e.user=:userId')->setParameter('userId', $userId)
+        ;
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * Count all entries for a tag and a user.
+     *
+     * @param int $userId
+     * @param int $tagId
+     *
+     * @return int
+     */
+    public function countAllEntriesByUserIdAndTagId($userId, $tagId)
+    {
+        $qb = $this->createQueryBuilder('e')
+            ->select('count(e.id)')
+            ->leftJoin('e.tags', 't')
+            ->where('e.user=:userId')->setParameter('userId', $userId)
+            ->andWhere('t.id=:tagId')->setParameter('tagId', $tagId)
         ;
 
         return $qb->getQuery()->getSingleScalarResult();

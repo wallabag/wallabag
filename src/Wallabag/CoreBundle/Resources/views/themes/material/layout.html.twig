@@ -2,18 +2,12 @@
 
 {% block css %}
     {{ parent() }}
-
-    <link rel="stylesheet" href="{{ asset('bundles/wallabagcore/themes/material/css/materialize.min.css') }}"  media="screen,projection"/>
-    <link rel="stylesheet" href="{{ asset('bundles/wallabagcore/themes/material/css/main.css') }}" media="all">
-    <link rel="stylesheet" href="{{ asset('bundles/wallabagcore/themes/material/css/print.css') }}" media="print">
+    <link rel="stylesheet" href="{{ asset('bundles/wallabagcore/themes/material/css/style.min.css') }}"  media="screen,projection,print"/>
 {% endblock %}
 
 {% block scripts %}
     {{ parent() }}
-
-    <script src="{{ asset('bundles/wallabagcore/themes/material/js/jquery.tinydot.min.js') }}"></script>
-    <script src="{{ asset('bundles/wallabagcore/themes/material/js/materialize.min.js') }}"></script>
-    <script src="{{ asset('bundles/wallabagcore/themes/material/js/init.js') }}"></script>
+    <script src="{{ asset('bundles/wallabagcore/themes/material/js/material.min.js') }}"></script>
 {% endblock %}
 
 {% block header %}
@@ -25,6 +19,8 @@
             Materialize.toast('{{ flashMessage|trans }}', 4000);
         </script>
     {% endfor %}
+
+    {{ render(controller("WallabagImportBundle:Import:checkQueue")) }}
 {% endblock %}
 
 {% block menu %}
@@ -33,7 +29,7 @@
             {% block logo %}
                 <li class="logo border-bottom">
                     <a title="{{ 'menu.left.back_to_unread'|trans }}" href="{{ path('unread') }}">
-                        <img src="{{ asset('bundles/wallabagcore/themes/material/img/logo-square.png') }}" alt="wallabag logo" />
+                        <img src="{{ asset('bundles/wallabagcore/themes/_global/img/logo-square.png') }}" alt="wallabag logo" />
                     </a>
                 </li>
             {% endblock %}
@@ -41,24 +37,28 @@
             {% set currentRoute = app.request.attributes.get('_route') %}
 
             <li class="bold {% if currentRoute == 'unread' or currentRoute == 'homepage' %}active{% endif %}">
-                <a class="waves-effect" href="{{ path('unread') }}">{{ 'menu.left.unread'|trans }}</a>
+                <a class="waves-effect" href="{{ path('unread') }}">{{ 'menu.left.unread'|trans }} <span class="numberItems grey-text">{{ count_entries('unread') }}</span></a>
             </li>
             <li class="bold {% if currentRoute == 'starred' %}active{% endif %}">
-                <a class="waves-effect" href="{{ path('starred') }}">{{ 'menu.left.starred'|trans }}</a>
+                <a class="waves-effect" href="{{ path('starred') }}">{{ 'menu.left.starred'|trans }} <span class="numberItems grey-text">{{ count_entries('starred') }}</span></a>
             </li>
             <li class="bold {% if currentRoute == 'archive' %}active{% endif %}">
-                <a class="waves-effect" href="{{ path('archive') }}">{{ 'menu.left.archive'|trans }}</a>
+                <a class="waves-effect" href="{{ path('archive') }}">{{ 'menu.left.archive'|trans }} <span class="numberItems grey-text">{{ count_entries('archive') }}</span></a>
             </li>
-            <li class="bold border-bottom {% if currentRoute == 'all' %}active{% endif %}">
-                <a class="waves-effect" href="{{ path('all') }}">{{ 'menu.left.all_articles'|trans }}</a>
+            <li class="bold {% if currentRoute == 'all' %}active{% endif %}">
+                <a class="waves-effect" href="{{ path('all') }}">{{ 'menu.left.all_articles'|trans }} <span class="numberItems grey-text">{{ count_entries('all') }}</span></a>
             </li>
             <li class="bold border-bottom {% if currentRoute == 'tags' %}active{% endif %}">
-                <a class="waves-effect" href="{{ path('tag') }}">{{ 'menu.left.tags'|trans }}</a>
+                <a class="waves-effect" href="{{ path('tag') }}">{{ 'menu.left.tags'|trans }} <span class="numberItems grey-text">{{ count_tags() }}</span></a>
             </li>
             <li class="bold {% if currentRoute == 'config' %}active{% endif %}">
                 <a class="waves-effect" href="{{ path('config') }}">{{ 'menu.left.config'|trans }}</a>
             </li>
             {% if is_granted('ROLE_SUPER_ADMIN') %}
+                <li class="bold {% if currentRoute starts with 'user_' %}active{% endif %}">
+                    <a class="waves-effect" href="{{ path('user_index') }}">{{ 'menu.left.users_management'|trans }}</a>
+                </li>
+
                 <li class="bold border-bottom {% if currentRoute == 'craue_config_settings_modify' %}active{% endif %}">
                     <a class="waves-effect" href="{{ path('craue_config_settings_modify') }}">{{ 'menu.left.internal_settings'|trans }}</a>
                 </li>
@@ -73,11 +73,11 @@
                 <a class="waves-effect" href="{{ path('howto') }}">{{ 'menu.left.howto'|trans }}</a>
             </li>
             <li class="bold">
-                <a class="waves-effect" class="icon icon-power" href="{{ path('fos_user_security_logout') }}">{{ 'menu.left.logout'|trans }}</a>
+                <a class="waves-effect icon icon-power" href="{{ path('fos_user_security_logout') }}">{{ 'menu.left.logout'|trans }}</a>
             </li>
         </ul>
         <div class="nav-wrapper nav-panels">
-            <a href="#" data-activates="slide-out" class="nav-panel-menu button-collapse"><i class="mdi-navigation-menu"></i></a>
+            <a href="#" data-activates="slide-out" class="nav-panel-menu button-collapse"><i class="material-icons">menu</i></a>
             <div class="left action">
                 {% block title %}
                 {% endblock %}
@@ -86,22 +86,22 @@
                 <ul>
                     <li class="bold">
                         <a title="{{ 'menu.top.add_new_entry'|trans }}" class="waves-effect" href="{{ path('new') }}" id="nav-btn-add">
-                            <i class="mdi-content-add"></i>
+                            <i class="material-icons">add</i>
                         </a>
                     </li>
                     <!--<li>
                         <a title="{{ 'menu.top.search'|trans }}" class="waves-effect" href="javascript: void(null);" id="nav-btn-search">
-                            <i class="mdi-action-search"></i>
+                            <i class="material-icons">search</i>
                         </a>
                     </li>-->
                     <li id="button_filters">
                         <a title="{{ 'menu.top.filter_entries'|trans }}" href="#" data-activates="filters" class="nav-panel-menu button-collapse-right">
-                            <i class="mdi-content-filter-list"></i>
+                            <i class="material-icons">filter_list</i>
                         </a>
                     </li>
                     <li id="button_export">
-                        <a title="{{ 'menu.top.export'|trans }}" class="nav-panel-menu button-collapse-right" href="#" data-activates="export" class="nav-panel-menu button-collapse-right">
-                            <i class="mdi-file-file-download"></i>
+                        <a title="{{ 'menu.top.export'|trans }}" class="nav-panel-menu button-collapse-right" href="#" data-activates="export">
+                            <i class="material-icons">file_download</i>
                         </a>
                     </li>
                 </ul>
@@ -109,19 +109,37 @@
             <form method="get" action="index.php">
                 <div class="input-field nav-panel-search" style="display: none">
                     <input name="search" id="searchfield" type="search" required placeholder="{{ 'menu.search_form.input_label'|trans }}">
-                    <label for="search"><i class="mdi-action-search"></i></label>
-                    <i class="mdi-navigation-close"></i>
+                    <label for="search"><i class="material-icons search">search</i></label>
+                    <i class="material-icons close">clear</i>
                 </div>
             </form>
             <div class="input-field nav-panel-add" style="display: none">
                 {{ render(controller("WallabagCoreBundle:Entry:addEntryForm")) }}
-                <label for="add" class="active"><i class="mdi-content-add"></i></label>
-                <i class="mdi-navigation-close"></i>
+                <label for="add" class="active"><i class="material-icons add">add</i></label>
+                <i class="material-icons close">clear</i>
             </div>
         </div>
     </nav>
 {% endblock %}
 
 {% block footer %}
-    {{ render(controller("WallabagCoreBundle:Footer:index")) }}
+    <footer class="page-footer cyan darken-2">
+        <div class="footer-copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col s8">
+                        <p>
+                            {{ display_stats() }}
+                        </p>
+                    </div>
+                    <div class="col s4">
+                        <p>
+                            {{ 'footer.wallabag.powered_by'|trans }} <a target="_blank" href="https://wallabag.org" class="grey-text text-lighten-4">wallabag</a> –
+                            <a class="grey-text text-lighten-4" href="{{ path('about') }}">{{ 'footer.wallabag.about'|trans|lower }}</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 {% endblock %}

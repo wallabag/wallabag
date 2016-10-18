@@ -8,7 +8,8 @@ export_csv: Abilita esportazione CSV
 export_json: Abilita esportazione JSON
 export_txt: Abilita esportazione TXT
 export_xml: Abilita esportazione XML
-pocket_consumer_key: Consumer key per Pocket per importare i contenuti (https://getpocket.com/developer/docs/authentication)
+# import_with_rabbitmq: Enable RabbitMQ to import data asynchronously
+# import_with_redis: Enable Redis to import data asynchronously
 shaarli_url: Shaarli URL, se il servizio è abilitato
 share_diaspora: Abilita la condivisione con Diaspora
 share_mail: Abilita la condivisione per email
@@ -27,3 +28,4 @@ piwik_site_id: ID del tuo sito in Piwik
 piwik_enabled: Abilita Piwik
 demo_mode_enabled: "Abilita modalità demo ? (usato solo per la demo pubblica di wallabag)"
 demo_mode_username: "Utente Demo"
+# share_public: Allow public url for entries

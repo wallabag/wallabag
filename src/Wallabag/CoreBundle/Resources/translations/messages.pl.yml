@@ -31,6 +31,7 @@ menu:
         search: 'Szukaj'
         save_link: 'Zapisz link'
         back_to_unread: 'Powrót do nieprzeczytanych artykułów'
+        users_management: 'Zarządzanie użytkownikami'
     top:
         add_new_entry: 'Dodaj nowy wpis'
         search: 'Szukaj'
@@ -45,6 +46,7 @@ footer:
         social: 'Społeczność'
         powered_by: 'Kontrolowany przez'
         about: 'O nas'
+    stats: Od %user_creation% przeczytałeś %nb_archives% artykułów. To jest %per_day% dziennie!
 
 config:
     page_title: 'Konfiguracja'
@@ -68,6 +70,7 @@ config:
             200_word: 'Czytam ~200 słów na minutę'
             300_word: 'Czytam ~300 słów na minutę'
             400_word: 'Czytam ~400 słów na minutę'
+        pocket_consumer_key_label: 'Klucz klienta Pocket do importu zawartości'
     form_rss:
         description: 'Kanały RSS prowadzone przez wallabag pozwalają Ci na czytanie twoich zapisanych artykułów w twoium ulubionym czytniku RSS. Musisz najpierw wynegenerować tokena.‌'
         token_label: 'Token RSS'
@@ -93,6 +96,7 @@ config:
         if_label: 'jeżeli'
         then_tag_as_label: 'wtedy otaguj jako'
         delete_rule_label: 'usuń'
+        edit_rule_label: 'edytuj'
         rule_label: 'Reguła'
         tags_label: 'Tagi'
         faq:
@@ -126,12 +130,6 @@ config:
                 or: 'Jedna reguła LUB inna'
                 and: 'Jedna reguła I inna'
                 matches: 'Sprawdź czy <i>temat</i> pasuje <i>szukaj</i> (duże lub małe litery).<br />Przykład: <code>tytuł zawiera "piłka nożna"</code>'
-    form_new_user:
-        username_label: 'Nazwa użytkownika'
-        password_label: 'Hasło'
-        repeat_new_password_label: 'Powtórz nowe hasło'
-        plain_password_label: 'Jawne hasło'
-        email_label: 'Adres email'
 
 entry:
     page_titles:
@@ -139,11 +137,14 @@ entry:
         starred: 'Wpisy oznaczone gwiazdką'
         archived: 'Zarchiwizowane wpisy'
         filtered: 'Odfiltrowane wpisy'
+        filtered_tags: 'Filtrowane po tagach'
+        untagged: 'Odtaguj wpisy'
     list:
         number_on_the_page: '{0} Nie ma wpisów.|{1} Jest jeden wpis.|]1,Inf[ Są %count% wpisy.'
         reading_time: 'szacunkowy czas czytania'
         reading_time_minutes: 'szacunkowy czas czytania: %readingTime% min'
         reading_time_less_one_minute: 'szacunkowy czas czytania: <small class="inferieur">&lt;</small> 1 min'
+        number_of_tags: '{1} i inny tag|]1,Inf[i %count% innych tagów'
         reading_time_minutes_short: '%readingTime% min'
         reading_time_less_one_minute_short: '<small class="inferieur">&lt;</small> 1 min'
         original_article: 'oryginał'
@@ -185,6 +186,8 @@ entry:
             add_a_tag: 'Dodaj tag'
             share_content: 'Udostępnij'
             share_email_label: 'Adres email'
+            public_link: 'Publiczny link'
+            delete_public_link: 'Usuń publiczny link'
             download: 'Pobierz'
             print: 'Drukuj'
             problem:
@@ -192,7 +195,7 @@ entry:
                 description: 'Czy ten artykuł wygląda źle?'
         edit_title: 'Edytuj tytuł'
         original_article: 'oryginalny'
-        annotations_on_the_entry: '{0} Nie ma adnotacji |{1} Jedna adnotacja |]1,Inf[ %nbAnnotations% adnotacji'
+        annotations_on_the_entry: '{0} Nie ma adnotacji |{1} Jedna adnotacja |]1,Inf[ %count% adnotacji'
         created_at: 'Czas stworzenia'
     new:
         page_title: 'Zapisz nowy wpis'
@@ -205,13 +208,15 @@ entry:
         url_label: 'Adres URL'
         is_public_label: 'Publiczny'
         save_label: 'Zapisz'
+    public:
+        shared_by_wallabag: "Ten artykuł został udostępniony przez <a href='%wallabag_instance%'>wallabag</a>"
 
 about:
     page_title: 'O nas'
     top_menu:
         who_behind_wallabag: 'Kto stoi za wallabag'
         getting_help: 'Pomoc'
-        helping: 'Pomóż wallabag'
+        helping: 'Pomóż wallabagowi'
         contributors: 'Osoby, które pomogły przy projekcie'
         third_party: 'Biblioteki Third-party'
     who_behind_wallabag:
@@ -260,12 +265,14 @@ howto:
 
 quickstart:
     page_title: 'Szybki start'
+    more: 'Więcej…'
     intro:
          title: 'Witaj w wallabag!'
          paragraph_1: "Będziemy ci towarzyszyli w Twojej poznaniu wallabag i pokażemy możliwości, które mogą cię zainteresować."
          paragraph_2: 'Śledź nas!'
     configure:
          title: 'Konfiguruj aplikację'
+         description: 'W celu dopasowania aplikacji do swoich upodobań, zobacz konfigurację aplikacji'
          language: 'Zmień język i wygląd'
          rss: 'Włącz kanały RSS'
          tagging_rules: 'Napisz reguły pozwalające na automatyczne otagowanie twoich artykułów'
@@ -273,12 +280,13 @@ quickstart:
          title: 'Administracja'
          description: 'Jako administrator wallabag, możesz:'
          new_user: 'Tworzyć nowego użytkownika'
-         analytics: 'Configure analytics'
+         analytics: 'Konfigurować analityki'
          sharing: 'Włączyć pewne parametry dotyczące udostępniania artykułów'
          export: 'Skonfigurować eksport'
          import: 'Skonfigurować import'
     first_steps:
         title: 'Pierwsze kroki'
+        description: "Teraz wallabag jest poprawnie skonfigurowany, więc czas zarchiwizować Internet. Klinknij w prawym górnym rogu na znak +, aby dodać link"
         new_article: 'Zapisz swój pierwszy artukuł'
         unread_articles: 'I sklasyfikuj go!'
     migrate:
@@ -287,11 +295,16 @@ quickstart:
         pocket: 'Migruj z Pocket'
         wallabag_v1: 'Migruj z wallabag v1'
         wallabag_v2: 'Migruj z wallabag v2'
+        readability: 'Migruj z Readability'
+        instapaper: 'Migruj z Instapaper'
     developer:
         title: 'Deweloperzy'
+        description: 'Myślimy również o deweloperach: Docker, API, tłumaczeniach, etc.'
         create_application: 'Stwórz swoją aplikację'
+        use_docker: 'Użyj Dockera aby zainstalować wallabag'
     docs:
         title: 'Pełna Dokumentacja'
+        description: "Wallabag powiada wiele funkcji. Nie wahaj się przeczytać instrukcji, aby je poznać i nauczyć się jak ich używać."
         annotate: 'Dadaj adnotację do swojego artykułu'
         export: 'Konwertuj swoje artykuły do ePUB lub PDF'
         search_filters: 'Zabacz jak możesz znaleźć artykuł dzięku użyciu silnika wyszukiwarki i filtrów'
@@ -308,6 +321,7 @@ tag:
     page_title: 'Tagi'
     list:
         number_on_the_page: '{0} Nie ma tagów.|{1} Jest jeden tag.|]1,Inf[ Są %count% tagi.'
+        see_untagged_entries: 'Zobacz nieotagowane wpisy'
 
 import:
     page_title: 'Import'
@@ -335,6 +349,24 @@ import:
     wallabag_v2:
         page_title: 'Import > Wallabag v2'
         description: 'Ten importer, zaimportuje wszystkie twoje artykułu z wallabag v2. Idź do wszystkich artykułów, a następnie na panelu exportu kliknij na "JSON". Otrzymasz plik "All articles.json".'
+    readability:
+        page_title: 'Import > Readability'
+        description: 'Ten importer, zaimportuje wszystkie twoje artykuły z Readability. Na stronie narzędzi (https://www.readability.com/tools/), kliknij na "Export your data" w sekcji "Data Export". Otrzymach email z plikiem JSON (plik nie będzie zawierał rozszerzenia .json).'
+        how_to: 'Wybierz swój plik eksportu z Readability i kliknij poniższy przycisk, aby go załadować.'
+    worker:
+        enabled: "Import jest wykonywany asynchronicznie. Od momentu rozpoczęcia importu, zewnętrzna usługa może zajmować się na raz tylko jednym zadaniem. Bieżącą usługą jest:"
+    firefox:
+       page_title: 'Import > Firefox'
+       description: "Ten importer zaimportuje wszystkie twoje zakładki z Firefoksa. Idź do twoich zakładek (Ctrl+Shift+O), następnie w \"Import i kopie zapasowe\", wybierz \"Utwórz kopię zapasową...\". Uzyskasz plik .json."
+       how_to: "Wybierz swój plik z zakładkami i naciśnij poniższy przycisk, aby je zaimportować. Może to zająć dłuższą chwilę, zanim wszystkie artykuły zostaną przeniesione."
+    chrome:
+       page_title: 'Import > Chrome'
+       description: "Ten importer zaimportuje wszystkie twoje zakładki z Chrome. Lokalizacja pliku jest zależna od twojego systemy operacyjnego : <ul><li>Pod Linuksem, idź do katalogu <code>~/.config/chromium/Default/</code></li><li>Pod Windowsem, powinien się on znajdować w <code>%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default</code></li><li>Pod OS X, powinien się on znajdować w <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>Po odnalezieniu pliku, skopiuj go w łatwo dostęne miejsce.<em><br>Jeżeli używasz Chromium zamiast Chrome, będziesz musiał odpowiednio poprawić ścieżkę dostępu.</em></p>"
+       how_to: "Wybierz swój plik z zakładkami i naciśnij poniższy przycisk, aby je zaimportować. Może to zająć dłuższą chwilę, zanim wszystkie artykuły zostaną przeniesione."
+    instapaper:
+        page_title: 'Import > Instapaper'
+        description: 'Ten importer, zaimportuje wszystkie twoje artykuły z Instapaper. W ustawieniach (https://www.instapaper.com/user), kliknij na "Download .CSV file"  w sekcji "Export". Otrzymasz plik CSV.'
+        how_to: 'Wybierz swój plik eksportu z Instapaper i kliknij poniższy przycisk, aby go załadować.'
 
 developer:
     page_title: 'Deweloper'
@@ -342,38 +374,40 @@ developer:
     documentation: 'Dokumentacja'
     how_to_first_app: 'Jak stworzyć moją pierwszą aplikację'
     full_documentation: 'Pokaż pełne API'
-    # list_methods: 'List API methods'
+    list_methods: 'Lista metod API'
     clients:
-         title: 'Klienci'
-         create_new: 'Utwórz nowego klienta'
+        title: 'Klienci'
+        create_new: 'Utwórz nowego klienta'
     existing_clients:
-         title: 'Istniejący klienci'
-         field_id: 'Client ID'
-         field_secret: 'Client secret'
-         field_uris: 'Przekieruj URIs'
-         field_grant_types: 'Przyznaj pozwolenie'
-         no_client: 'Nie ma jeszcze klienta.'
+        title: 'Istniejący klienci'
+        field_id: 'ID klienta'
+        field_secret: 'Client secret'
+        field_uris: 'Przekieruj URIs'
+        field_grant_types: 'Przyznaj pozwolenie'
+        no_client: 'Nie ma jeszcze klienta.'
     remove:
-         warn_message_1: 'Masz możliwość usunięcia tego klienta. Ta akcja jest NIEODWRACALNA !'
-         warn_message_2: "Jeżeli go usuniesz, aplikacje skonfigurowane z tym klientem nię będa w stanie autoryzować twojego wallabag."
-         action: 'Usuń tego klienta'
+        warn_message_1: 'Masz możliwość usunięcia tego klienta. Ta akcja jest NIEODWRACALNA !'
+        warn_message_2: "Jeżeli go usuniesz, aplikacje skonfigurowane z tym klientem nię będa w stanie autoryzować twojego wallabag."
+        action: 'Usuń tego klienta'
     client:
-         page_title: 'Deweloper > Nowy klient'
-         page_description: 'Tworzysz nowego klienta. Wypełnij poniższe pole w celu przekierowania URI twojej aplikacji.'
-         form:
-             redirect_uris_label: 'Przekieruj adresy URI'
-             save_label: 'Stwórz nowego klienta'
-         action_back: 'Cofnij'
+        page_title: 'Deweloper > Nowy klient'
+        page_description: 'Tworzysz nowego klienta. Wypełnij poniższe pole w celu przekierowania URI twojej aplikacji.'
+        form:
+            name_label: 'Nazwa klienta'
+            redirect_uris_label: 'Przekieruj adresy URI'
+            save_label: 'Stwórz nowego klienta'
+        action_back: 'Cofnij'
     client_parameter:
-         page_title: 'Deweloper > Parametry klienta'
-         page_description: 'Tutaj znajdują się parametry klienta.'
-         field_id: 'Client ID'
-         field_secret: 'Client secret'
-         back: 'Cofnij'
-         read_howto: 'Przeczytaj jak "Stworzyć moją pierwszą aplikację"'
+        page_title: 'Deweloper > Parametry klienta'
+        page_description: 'Tutaj znajdują się parametry klienta.'
+        field_name: 'Nazwa klienta'
+        field_id: 'Client ID'
+        field_secret: 'Client secret'
+        back: 'Cofnij'
+        read_howto: 'Przeczytaj jak "Stworzyć moją pierwszą aplikację"'
     howto:
-         page_title: 'Deweloper > Jak stworzyć moją pierwszą aplikację'
-         description:
+        page_title: 'Deweloper > Jak stworzyć moją pierwszą aplikację'
+        description:
             paragraph_1: 'Następujące komendy korzystają <a href="https://github.com/jkbrzt/httpie">Biblioteka HTTPie</a>. Upewnij się, czy zainstalowałeś ją w swoim systemie zanim z niej skorzystasz'
             paragraph_2: 'Potrzebujesz tokena w celu nawiązania komunikacji między swoją aplikacją a API wallabag.'
             paragraph_3: 'W celu stworzenia tokena musisz <a href="%link%">stwórz nowego klienta</a>.'
@@ -382,7 +416,34 @@ developer:
             paragraph_6: 'access_token jest użyteczny do wywołania API endpoint. Na przykład:'
             paragraph_7: 'To wywołanie zwróci wszystkie twoje wpisy.'
             paragraph_8: 'Jeżeli chcesz wyświetlić wszystkie punkty końcowe API, zobacz <a href="%link%">Dokumentacja naszego API</a>.'
-         back: 'Cofnij'
+        back: 'Cofnij'
+
+user:
+    page_title: Zarządzanie użytkownikami
+    new_user: Stwórz nowego użytkownika
+    edit_user: Edytuj istniejącego użytkownika
+    description: "Tutaj możesz zarządzać wszystkimi użytkownikami (tworzyć, edytować i usuwać)"
+    list:
+        actions: Akcje
+        edit_action: Edytuj
+        yes: Tak
+        no: Nie
+        create_new_one: Stwórz nowego użytkownika
+    form:
+        username_label: 'Nazwa użytkownika'
+        name_label: 'Nazwa'
+        password_label: 'Hasło'
+        repeat_new_password_label: 'Powtórz nowe hasło'
+        plain_password_label: 'Jawne hasło'
+        email_label: 'Adres email'
+        enabled_label: 'Włączony'
+        locked_label: 'Zablokowany'
+        last_login_label: 'Ostatnie logowanie'
+        twofactor_label: Autoryzacja dwuetapowa
+        save: Zapisz
+        delete: Usuń
+        delete_confirm: Jesteś pewien?
+        back_to_list: Powrót do listy
 
 flashes:
     config:
@@ -400,10 +461,10 @@ flashes:
         notice:
             entry_already_saved: 'Wpis już został dodany %date%'
             entry_saved: 'Wpis zapisany'
-            # entry_saved_failed: 'Failed to save entry'
+            entry_saved_failed: 'Wpis zapisany, ale wystąpił bład pobierania treści'
             entry_updated: 'Wpis zaktualizowany'
             entry_reloaded: 'Wpis ponownie załadowany'
-            entry_reload_failed: 'Błąd ponownego załadowania'
+            entry_reloaded_failed: 'Wpis ponownie załadowany, ale wystąpił bład pobierania treści'
             entry_archived: 'Wpis dodany do archiwum'
             entry_unarchived: 'Wpis usunięty z archiwum'
             entry_starred: 'Wpis oznaczony gwiazdką'
@@ -417,6 +478,10 @@ flashes:
             failed: 'Nieudany import, prosimy spróbować ponownie.'
             failed_on_file: 'Błąd podczas ptrzetwarzania pliku. Sprawdż swój importowany plik.'
             summary: 'Podsumowanie importu: %imported% zaimportowane, %skipped% już zapisane.'
+            summary_with_queue: 'Podsumowanie importu: %queued% zakolejkowane.'
+        error:
+            redis_enabled_not_installed: 'Redis jest włączony dla obsługi importu asynchronicznego, ale <u>nie możemy się z nim połączyć</u>. Sprawdź konfigurację Redisa.'
+            rabbit_enabled_not_installed: 'RabbitMQ jest włączony dla obsługi importu asynchronicznego, ale <u>nie możemy się z nim połączyć</u>. Sprawdź konfigurację RabbitMQ.'
     developer:
         notice:
             client_created: 'Nowy klient utworzony.'

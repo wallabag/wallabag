@@ -1,0 +1,141 @@
+# Redis stuff
+services:
+    # readability
+    wallabag_import.queue.redis.readability:
+        class: Simpleue\Queue\RedisQueue
+        arguments:
+            - "@wallabag_core.redis.client"
+            - "wallabag.import.readability"
+
+    wallabag_import.producer.redis.readability:
+        class: Wallabag\ImportBundle\Redis\Producer
+        arguments:
+            - "@wallabag_import.queue.redis.readability"
+
+    wallabag_import.consumer.redis.readability:
+        class: Wallabag\ImportBundle\Consumer\RedisEntryConsumer
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@wallabag_user.user_repository"
+            - "@wallabag_import.readability.import"
+            - "@logger"
+
+    # instapaper
+    wallabag_import.queue.redis.instapaper:
+        class: Simpleue\Queue\RedisQueue
+        arguments:
+            - "@wallabag_core.redis.client"
+            - "wallabag.import.instapaper"
+
+    wallabag_import.producer.redis.instapaper:
+        class: Wallabag\ImportBundle\Redis\Producer
+        arguments:
+            - "@wallabag_import.queue.redis.instapaper"
+
+    wallabag_import.consumer.redis.instapaper:
+        class: Wallabag\ImportBundle\Consumer\RedisEntryConsumer
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@wallabag_user.user_repository"
+            - "@wallabag_import.instapaper.import"
+            - "@logger"
+
+    # pocket
+    wallabag_import.queue.redis.pocket:
+        class: Simpleue\Queue\RedisQueue
+        arguments:
+            - "@wallabag_core.redis.client"
+            - "wallabag.import.pocket"
+
+    wallabag_import.producer.redis.pocket:
+        class: Wallabag\ImportBundle\Redis\Producer
+        arguments:
+            - "@wallabag_import.queue.redis.pocket"
+
+    wallabag_import.consumer.redis.pocket:
+        class: Wallabag\ImportBundle\Consumer\RedisEntryConsumer
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@wallabag_user.user_repository"
+            - "@wallabag_import.pocket.import"
+            - "@logger"
+
+    # wallabag v1
+    wallabag_import.queue.redis.wallabag_v1:
+        class: Simpleue\Queue\RedisQueue
+        arguments:
+            - "@wallabag_core.redis.client"
+            - "wallabag.import.wallabag_v1"
+
+    wallabag_import.producer.redis.wallabag_v1:
+        class: Wallabag\ImportBundle\Redis\Producer
+        arguments:
+            - "@wallabag_import.queue.redis.wallabag_v1"
+
+    wallabag_import.consumer.redis.wallabag_v1:
+        class: Wallabag\ImportBundle\Consumer\RedisEntryConsumer
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@wallabag_user.user_repository"
+            - "@wallabag_import.wallabag_v1.import"
+            - "@logger"
+
+    # wallabag v2
+    wallabag_import.queue.redis.wallabag_v2:
+        class: Simpleue\Queue\RedisQueue
+        arguments:
+            - "@wallabag_core.redis.client"
+            - "wallabag.import.wallabag_v2"
+
+    wallabag_import.producer.redis.wallabag_v2:
+        class: Wallabag\ImportBundle\Redis\Producer
+        arguments:
+            - "@wallabag_import.queue.redis.wallabag_v2"
+
+    wallabag_import.consumer.redis.wallabag_v2:
+        class: Wallabag\ImportBundle\Consumer\RedisEntryConsumer
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@wallabag_user.user_repository"
+            - "@wallabag_import.wallabag_v2.import"
+            - "@logger"
+
+    # firefox
+    wallabag_import.queue.redis.firefox:
+        class: Simpleue\Queue\RedisQueue
+        arguments:
+            - "@wallabag_core.redis.client"
+            - "wallabag.import.firefox"
+
+    wallabag_import.producer.redis.firefox:
+        class: Wallabag\ImportBundle\Redis\Producer
+        arguments:
+            - "@wallabag_import.queue.redis.firefox"
+
+    wallabag_import.consumer.redis.firefox:
+        class: Wallabag\ImportBundle\Consumer\RedisEntryConsumer
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@wallabag_user.user_repository"
+            - "@wallabag_import.firefox.import"
+            - "@logger"
+
+    # chrome
+    wallabag_import.queue.redis.chrome:
+        class: Simpleue\Queue\RedisQueue
+        arguments:
+            - "@wallabag_core.redis.client"
+            - "wallabag.import.chrome"
+
+    wallabag_import.producer.redis.chrome:
+        class: Wallabag\ImportBundle\Redis\Producer
+        arguments:
+            - "@wallabag_import.queue.redis.chrome"
+
+    wallabag_import.consumer.redis.chrome:
+        class: Wallabag\ImportBundle\Consumer\RedisEntryConsumer
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@wallabag_user.user_repository"
+            - "@wallabag_import.chrome.import"
+            - "@logger"

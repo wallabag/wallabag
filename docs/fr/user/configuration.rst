@@ -102,7 +102,7 @@ if *« readingTime >= 5 AND domainName = "github.com" »* then tag as *« long r
 Quels variables et opérateurs puis-je utiliser pour écrire mes règles ?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Les variables et opérateurs suivants peuvent être utilisés lors de la création de vos règles :
+Les variables et opérateurs suivants peuvent être utilisés lors de la création de vos règles (attention, pour certaines valeurs, vous devez ajouter des guillemets, par exemple ``language = "en"``) :
 
 ===========  ==============================================  ==========  ==========
 Variable     Sens                                            Opérateur   Sens

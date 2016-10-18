@@ -36,6 +36,9 @@ class Configuration implements ConfigurationInterface
                 ->end()
                 ->scalarNode('paypal_url')
                 ->end()
+                ->integerNode('cache_lifetime')
+                    ->defaultValue(10)
+                ->end()
             ->end()
         ;
 
