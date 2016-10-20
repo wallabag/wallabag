@@ -365,7 +365,7 @@ import:
         how_to: "Choisissez le fichier de sauvegarde de vos marques-page et cliquez sur le bouton pour l'importer. Soyez avertis que le processus peut prendre un temps assez long car tous les articles doivent être récupérés en ligne."
     instapaper:
         page_title: 'Import > Instapaper'
-        description: 'Sur la page des paramètres (`https://www.instapaper.com/user<https://www.instapaper.com/user>`_), cliquez sur "Download .CSV file" dans la section "Export". Un fichier CSV se téléchargera ("instapaper-export.csv").'
+        description: 'Sur la page des paramètres (https://www.instapaper.com/user), cliquez sur "Download .CSV file" dans la section "Export". Un fichier CSV se téléchargera ("instapaper-export.csv").'
         how_to: "Choisissez le fichier de votre export Instapaper et cliquez sur le bouton ci-dessous pour l'importer."
 
 developer:
