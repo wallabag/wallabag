@@ -23,6 +23,7 @@ class WallabagCoreExtension extends Extension
         $container->setParameter('wallabag_core.version', $config['version']);
         $container->setParameter('wallabag_core.paypal_url', $config['paypal_url']);
         $container->setParameter('wallabag_core.cache_lifetime', $config['cache_lifetime']);
+        $container->setParameter('wallabag_core.fetching_error_message', $config['fetching_error_message']);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');

@@ -50,6 +50,7 @@ wallabag_core:
     rss_limit: 50
     reading_speed: 1
     cache_lifetime: 10
+    fetching_error_message: "wallabag can't retrieve contents for this article. Please report this issue to us."
 
 wallabag_user:
     registration_enabled: "%fosuser_registration%"
