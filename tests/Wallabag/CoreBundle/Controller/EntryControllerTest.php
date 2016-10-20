@@ -366,8 +366,6 @@ class EntryControllerTest extends WallabagCoreTestCase
 
     /**
      * @depends testPostNewOk
-     *
-     * This test will require an internet connection.
      */
     public function testReloadWithFetchingFailed()
     {
