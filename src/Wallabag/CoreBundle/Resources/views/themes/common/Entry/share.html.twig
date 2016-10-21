@@ -39,7 +39,7 @@
         <meta name="twitter:image" content="{{ picturePath }}" />
         <meta name="twitter:site" content="@wallabagapp" />
         <meta name="twitter:title" content="{{ entry.title | raw }}" />
-        <meta name="twitter:description" content="{{ entry.title | raw }}" />
+        <meta name="twitter:description" content="{{ entry.content|striptags|slice(0, 300)|raw }}&hellip;" />
     </head>
     <body>
         <header>

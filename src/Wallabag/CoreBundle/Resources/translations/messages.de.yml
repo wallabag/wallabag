@@ -445,6 +445,9 @@ user:
         delete_confirm: Bist du sicher?
         back_to_list: Zurück zur Liste
 
+error:
+    # page_title: An error occurred
+
 flashes:
     config:
         notice:

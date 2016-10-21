@@ -364,7 +364,7 @@ class InstallCommand extends ContainerAwareCommand
             ],
             [
                 'name' => 'piwik_host',
-                'value' => 'http://v2.wallabag.org',
+                'value' => 'v2.wallabag.org',
                 'section' => 'analytics',
             ],
             [

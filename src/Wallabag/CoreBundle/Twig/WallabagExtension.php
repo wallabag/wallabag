@@ -138,8 +138,11 @@ class WallabagExtension extends \Twig_Extension implements \Twig_Extension_Globa
         $interval = $user->getCreatedAt()->diff(new \DateTime('now'));
         $nbDays = (int) $interval->format('%a') ?: 1;
 
+        // force setlocale for date translation
+        setlocale(LC_TIME, strtolower($user->getConfig()->getLanguage()).'_'.strtoupper(strtolower($user->getConfig()->getLanguage())));
+
         return $this->translator->trans('footer.stats', [
-            '%user_creation%' => $user->getCreatedAt()->format('F jS, Y'),
+            '%user_creation%' => strftime('%e %B %Y', $user->getCreatedAt()->getTimestamp()),
             '%nb_archives%' => $nbArchives,
             '%per_day%' => round($nbArchives / $nbDays, 2),
         ]);
