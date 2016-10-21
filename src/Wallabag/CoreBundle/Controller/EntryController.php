@@ -330,6 +330,15 @@ class EntryController extends Controller
 
         $this->updateEntry($entry, 'entry_reloaded');
 
+        // if refreshing entry failed, don't save it
+        if ($this->getParameter('wallabag_core.fetching_error_message') === $entry->getContent()) {
+            $bag = $this->get('session')->getFlashBag();
+            $bag->clear();
+            $bag->add('notice', 'flashes.entry.notice.entry_reloaded_failed');
+
+            return $this->redirect($this->generateUrl('view', ['id' => $entry->getId()]));
+        }
+
         $em = $this->getDoctrine()->getManager();
         $em->persist($entry);
         $em->flush();

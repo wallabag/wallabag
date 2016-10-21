@@ -39,6 +39,8 @@ class Configuration implements ConfigurationInterface
                 ->integerNode('cache_lifetime')
                     ->defaultValue(10)
                 ->end()
+                ->scalarNode('fetching_error_message')
+                ->end()
             ->end()
         ;
 
