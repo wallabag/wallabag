@@ -46,7 +46,7 @@ footer:
         social: 'Social'
         powered_by: 'provido por'
         about: 'Sobre'
-        stats: 'Desde %user_creation% você leu %nb_archives% artigos. Isso é %per_day% por dia!'
+    stats: 'Desde %user_creation% você leu %nb_archives% artigos. Isso é %per_day% por dia!'
 
 config:
     page_title: 'Config'
@@ -70,7 +70,7 @@ config:
             200_word: 'Posso ler ~200 palavras por minuto'
             300_word: 'Posso ler ~300 palavras por minuto'
             400_word: 'Posso ler ~400 palavras por minuto'
-            pocket_consumer_key_label: 'Chave do consumidor do Pocket para importar conteúdo'
+        pocket_consumer_key_label: 'Chave do consumidor do Pocket para importar conteúdo'
     form_rss:
         description: 'Feeds RSS providos pelo wallabag permitem que você leia seus artigos salvos em seu leitor de RSS favorito. Você precisa gerar um token primeiro.'
         token_label: 'Token RSS'
