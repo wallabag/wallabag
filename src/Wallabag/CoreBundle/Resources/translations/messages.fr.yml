@@ -445,6 +445,9 @@ user:
         delete_confirm: Êtes-vous sûr?
         back_to_list: Revenir à la liste
 
+error:
+    page_title: Une erreur est survenue
+
 flashes:
     config:
         notice:
