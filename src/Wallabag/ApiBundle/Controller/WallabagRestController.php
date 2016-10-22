@@ -536,7 +536,7 @@ class WallabagRestController extends FOSRestController
     {
         $this->validateAuthentication();
 
-        return $this->forward('WallabagApiBundle:WallabagRest:getAnnotations', [
+        return $this->forward('WallabagAnnotationBundle:WallabagAnnotation:getAnnotations', [
             'entry' => $entry,
         ]);
     }
@@ -544,10 +544,6 @@ class WallabagRestController extends FOSRestController
     /**
      * Creates a new annotation.
      *
-     * @param Request $request
-     * @param Entry   $entry
-     *
-     * @return JsonResponse
      * @ApiDoc(
      *      requirements={
      *          {"name"="ranges", "dataType"="array", "requirement"="\w+", "description"="The range array for the annotation"},
@@ -555,15 +551,20 @@ class WallabagRestController extends FOSRestController
      *          {"name"="text", "dataType"="string", "required"=true, "description"=""},
      *      }
      * )
+     *
+     * @param Request $request
+     * @param Entry   $entry
+     *
+     * @return JsonResponse
      */
     public function postAnnotationAction(Request $request, Entry $entry)
     {
         $this->validateAuthentication();
 
-        return $this->forward('WallabagApiBundle:WallabagRest:postAnnotation', [
-                'request' => $request,
-                'entry' => $entry,
-            ]);
+        return $this->forward('WallabagAnnotationBundle:WallabagAnnotation:postAnnotation', [
+            'request' => $request,
+            'entry' => $entry,
+        ]);
     }
 
     /**
@@ -586,10 +587,10 @@ class WallabagRestController extends FOSRestController
     {
         $this->validateAuthentication();
 
-        return $this->forward('WallabagApiBundle:WallabagRest:putAnnotation', [
-                'annotation' => $annotation,
-                'request' => $request,
-            ]);
+        return $this->forward('WallabagAnnotationBundle:WallabagAnnotation:putAnnotation', [
+            'annotation' => $annotation,
+            'request' => $request,
+        ]);
     }
 
     /**
@@ -611,9 +612,9 @@ class WallabagRestController extends FOSRestController
     {
         $this->validateAuthentication();
 
-        return $this->forward('WallabagApiBundle:WallabagRest:deleteAnnotation', [
-                'annotation' => $annotation,
-            ]);
+        return $this->forward('WallabagAnnotationBundle:WallabagAnnotation:deleteAnnotation', [
+            'annotation' => $annotation,
+        ]);
     }
 
     /**
