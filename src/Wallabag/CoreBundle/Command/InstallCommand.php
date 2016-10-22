@@ -40,7 +40,7 @@ class InstallCommand extends ContainerAwareCommand
     {
         $this
             ->setName('wallabag:install')
-            ->setDescription('Wallabag installer.')
+            ->setDescription('wallabag installer.')
             ->addOption(
                'reset',
                null,
@@ -55,7 +55,7 @@ class InstallCommand extends ContainerAwareCommand
         $this->defaultInput = $input;
         $this->defaultOutput = $output;
 
-        $output->writeln('<info>Installing Wallabag...</info>');
+        $output->writeln('<info>Installing wallabag...</info>');
         $output->writeln('');
 
         $this
@@ -65,7 +65,7 @@ class InstallCommand extends ContainerAwareCommand
             ->setupConfig()
         ;
 
-        $output->writeln('<info>Wallabag has been successfully installed.</info>');
+        $output->writeln('<info>wallabag has been successfully installed.</info>');
         $output->writeln('<comment>Just execute `php bin/console server:run --env=prod` for using wallabag: http://localhost:8000</comment>');
     }
 
@@ -147,7 +147,7 @@ class InstallCommand extends ContainerAwareCommand
             throw new \RuntimeException('Some system requirements are not fulfilled. Please check output messages and fix them.');
         }
 
-        $this->defaultOutput->writeln('<info>Success! Your system can run Wallabag properly.</info>');
+        $this->defaultOutput->writeln('<info>Success! Your system can run wallabag properly.</info>');
 
         $this->defaultOutput->writeln('');
 
