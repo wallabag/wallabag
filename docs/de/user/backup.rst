@@ -1,25 +1,25 @@
-Backup wallabag
-===============
-Because sometimes you may do a mistake with your wallabag and lose data or in case you need to move your wallabag to another server you want to backup your data.
-This articles describes what you need to backup.
+wallabag sichern
+================
+Da es manchmal vorkommen kann, dass dir ein Fehler mit deiner wallabag unterläuft und du Daten verlierst oder deine wallabag auf einen anderen Server verschieben willst, ist eine Sicherung der Daten sicher ratsam.
+Dieser Artikel beschreibt, was du für die Sicherung benötigst.
 
-Basic settings
---------------
-wallabag stores some basic parameters (like SMTP server or database backend) in the file `app/config/parameters.yml`.
+Grundlegende Einstellungen
+--------------------------
+wallabag speichert grundlegende Parameter (etwa der SMTP-Server oder das Datenbank-Backend) in der Datei `app/config/parameters.yml`.
 
-Database
---------
-As wallabag supports different kinds of database, the way to perform the backup depends on the database you use, so you need to refer to the vendor documentation.
+Datenbank
+---------
+Da wallabag verschiedene Datenbank-Typen unterstützt, hängt der Weg der Sicherung von dem verwendeten Typ ab. Daher verweisen wir an dieser Stelle auf die entsprechenden Dokumentationen:
 
-Here's some examples:
+Hier sind einige Beispiele:
 
 - MySQL: http://dev.mysql.com/doc/refman/5.7/en/backup-methods.html
 - PostgreSQL: https://www.postgresql.org/docs/current/static/backup.html
 
 SQLite
 ~~~~~~
-To backup the SQLite database, you just need to copy the directory `data/db` from the wallabag application directory.
+Um die SQLite-Datenbank zu sichern, ist es lediglich notwendig, das Verzeichnis `data/db` aus dem wallabag-Installations-Ordner zu kopieren.
 
-Images
+Bilder
 ------
-The images retrieved by wallabag are stored under `data/assets/images` (the images storage will be implemented in wallabag 2.2).
+Die Bilder, die von wallabag empfangen worden, sind unter `data/assets/images` gespeichert (der Bilder-Speicher wird in wallabag 2.2 implementiert).
