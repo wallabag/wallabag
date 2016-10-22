@@ -46,6 +46,7 @@ La documentation est disponible dans d'autres langues :
    user/filters
    user/tags
    user/parameters
+   user/backup
 
 .. _dev-docs:
 

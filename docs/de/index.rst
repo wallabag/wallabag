@@ -45,6 +45,7 @@ Die Dokumentation ist in anderen Sprachen verfügbar :
    user/tags
    user/android
    user/parameters
+   user/backup
 
 .. _dev-docs:
 
