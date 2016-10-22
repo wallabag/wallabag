@@ -19,8 +19,8 @@ parameters:
     database_path: "%kernel.root_dir%/../data/db/wallabag.sqlite"
     database_table_prefix: wallabag_
     database_socket: null
-    # with MySQL, use "utf8mb4" if got problem with content with emojis
-    database_charset: utf8mb4
+    # with MySQL, use "utf8mb4" if you got problem with content with emojis
+    database_charset: utf8
 
     mailer_transport: smtp
     mailer_host: 127.0.0.1

@@ -95,7 +95,8 @@ class InstallCommand extends ContainerAwareCommand
         $help = '';
 
         try {
-            $this->getContainer()->get('doctrine')->getManager()->getConnection()->connect();
+            $conn = $this->getContainer()->get('doctrine')->getManager()->getConnection();
+            $conn->connect();
         } catch (\Exception $e) {
             if (false === strpos($e->getMessage(), 'Unknown database')
                 && false === strpos($e->getMessage(), 'database "'.$this->getContainer()->getParameter('database_name').'" does not exist')) {
@@ -106,6 +107,21 @@ class InstallCommand extends ContainerAwareCommand
         }
 
         $rows[] = [$label, $status, $help];
+
+        // now check if MySQL isn't too old to handle utf8mb4
+        if ($conn->isConnected() && $conn->getDatabasePlatform() instanceof \Doctrine\DBAL\Platforms\MySqlPlatform) {
+            $version = $conn->query('select version()')->fetchColumn();
+            $minimalVersion = '5.5.4';
+
+            if (false === version_compare($version, $minimalVersion, '>')) {
+                $fulfilled = false;
+                $rows[] = [
+                    '<comment>Database version</comment>',
+                    '<error>ERROR!</error>',
+                    'Your MySQL version ('.$version.') is too old, consider upgrading ('.$minimalVersion.'+).'
+                ];
+            }
+        }
 
         foreach ($this->functionExists as $functionRequired) {
             $label = '<comment>'.$functionRequired.'</comment>';
