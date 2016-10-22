@@ -8,31 +8,35 @@ use Symfony\Component\DomCrawler\Crawler;
 define('REGENERATE_PICTURES_QUALITY', 75);
 define('HTTP_PORT', 80);
 define('SSL_PORT', 443);
-define('BASE_URL','');
+define('BASE_URL', '');
 
-class DownloadImages {
+class DownloadImages
+{
     private $folder;
     private $url;
     private $html;
     private $fileName;
     private $logger;
 
-    public function __construct($html, $url, Logger $logger) {
+    public function __construct($html, $url, Logger $logger)
+    {
         $this->html = $html;
         $this->url = $url;
         $this->setFolder();
         $this->logger = $logger;
     }
 
-    public function setFolder($folder = "assets/images") {
+    public function setFolder($folder = 'assets/images')
+    {
         // if folder doesn't exist, attempt to create one and store the folder name in property $folder
-        if(!file_exists($folder)) {
+        if (!file_exists($folder)) {
             mkdir($folder);
         }
         $this->folder = $folder;
     }
 
-    public function process() {
+    public function process()
+    {
         //instantiate the symfony DomCrawler Component
         $crawler = new Crawler($this->html);
         // create an array of all scrapped image links
@@ -48,15 +52,16 @@ class DownloadImages {
             // Checks
             $absolute_path = self::getAbsoluteLink($image, $this->url);
             $filename = basename(parse_url($absolute_path, PHP_URL_PATH));
-            $fullpath = $this->folder."/".$filename;
+            $fullpath = $this->folder.'/'.$filename;
             self::checks($file, $fullpath, $absolute_path);
-            $this->html = str_replace($image, self::getPocheUrl() . '/' . $fullpath, $this->html);
+            $this->html = str_replace($image, self::getPocheUrl().'/'.$fullpath, $this->html);
         }
 
         return $this->html;
     }
 
-    private function checks($rawdata, $fullpath, $absolute_path) {
+    private function checks($rawdata, $fullpath, $absolute_path)
+    {
         $fullpath = urldecode($fullpath);
 
         if (file_exists($fullpath)) {
@@ -64,30 +69,30 @@ class DownloadImages {
         }
 
         // check extension
-        $this->logger->log('debug','Checking extension');
+        $this->logger->log('debug', 'Checking extension');
 
         $file_ext = strrchr($fullpath, '.');
         $whitelist = array('.jpg', '.jpeg', '.gif', '.png');
         if (!(in_array($file_ext, $whitelist))) {
-            $this->logger->log('debug','processed image with not allowed extension. Skipping '.$fullpath);
+            $this->logger->log('debug', 'processed image with not allowed extension. Skipping '.$fullpath);
 
             return false;
         }
 
         // check headers
-        $this->logger->log('debug','Checking headers');
+        $this->logger->log('debug', 'Checking headers');
         $imageinfo = getimagesize($absolute_path);
         if ($imageinfo['mime'] != 'image/gif' && $imageinfo['mime'] != 'image/jpeg' && $imageinfo['mime'] != 'image/jpg' && $imageinfo['mime'] != 'image/png') {
-            $this->logger->log('debug','processed image with bad header. Skipping '.$fullpath);
+            $this->logger->log('debug', 'processed image with bad header. Skipping '.$fullpath);
 
             return false;
         }
 
         // regenerate image
-        $this->logger->log('debug','regenerating image');
+        $this->logger->log('debug', 'regenerating image');
         $im = imagecreatefromstring($rawdata);
         if ($im === false) {
-            $this->logger->log('error','error while regenerating image '.$fullpath);
+            $this->logger->log('error', 'error while regenerating image '.$fullpath);
 
             return false;
         }
@@ -95,15 +100,15 @@ class DownloadImages {
         switch ($imageinfo['mime']) {
             case 'image/gif':
                 $result = imagegif($im, $fullpath);
-                $this->logger->log('debug','Re-creating gif');
+                $this->logger->log('debug', 'Re-creating gif');
                 break;
             case 'image/jpeg':
             case 'image/jpg':
                 $result = imagejpeg($im, $fullpath, REGENERATE_PICTURES_QUALITY);
-                $this->logger->log('debug','Re-creating jpg');
+                $this->logger->log('debug', 'Re-creating jpg');
                 break;
             case 'image/png':
-                $this->logger->log('debug','Re-creating png');
+                $this->logger->log('debug', 'Re-creating png');
                 $result = imagepng($im, $fullpath, ceil(REGENERATE_PICTURES_QUALITY / 100 * 9));
                 break;
         }
@@ -150,24 +155,24 @@ class DownloadImages {
 
     public static function getPocheUrl()
     {
-        $baseUrl = "";
+        $baseUrl = '';
         $https = (!empty($_SERVER['HTTPS'])
                     && (strtolower($_SERVER['HTTPS']) == 'on'))
-            || (isset($_SERVER["SERVER_PORT"])
-                    && $_SERVER["SERVER_PORT"] == '443') // HTTPS detection.
-            || (isset($_SERVER["SERVER_PORT"]) //Custom HTTPS port detection
-                    && $_SERVER["SERVER_PORT"] == SSL_PORT)
+            || (isset($_SERVER['SERVER_PORT'])
+                    && $_SERVER['SERVER_PORT'] == '443') // HTTPS detection.
+            || (isset($_SERVER['SERVER_PORT']) //Custom HTTPS port detection
+                    && $_SERVER['SERVER_PORT'] == SSL_PORT)
              || (isset($_SERVER['HTTP_X_FORWARDED_PROTO'])
                     && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https');
-        $serverport = (!isset($_SERVER["SERVER_PORT"])
-            || $_SERVER["SERVER_PORT"] == '80'
-            || $_SERVER["SERVER_PORT"] == HTTP_PORT
-            || ($https && $_SERVER["SERVER_PORT"] == '443')
-            || ($https && $_SERVER["SERVER_PORT"]==SSL_PORT) //Custom HTTPS port detection
-            ? '' : ':' . $_SERVER["SERVER_PORT"]);
-        
-        if (isset($_SERVER["HTTP_X_FORWARDED_PORT"])) {
-            $serverport = ':' . $_SERVER["HTTP_X_FORWARDED_PORT"];
+        $serverport = (!isset($_SERVER['SERVER_PORT'])
+            || $_SERVER['SERVER_PORT'] == '80'
+            || $_SERVER['SERVER_PORT'] == HTTP_PORT
+            || ($https && $_SERVER['SERVER_PORT'] == '443')
+            || ($https && $_SERVER['SERVER_PORT'] == SSL_PORT) //Custom HTTPS port detection
+            ? '' : ':'.$_SERVER['SERVER_PORT']);
+
+        if (isset($_SERVER['HTTP_X_FORWARDED_PORT'])) {
+            $serverport = ':'.$_SERVER['HTTP_X_FORWARDED_PORT'];
         }
         // $scriptname = str_replace('/index.php', '/', $_SERVER["SCRIPT_NAME"]);
         // if (!isset($_SERVER["HTTP_HOST"])) {
@@ -178,12 +183,12 @@ class DownloadImages {
             $serverport = '';
         }
         // check if BASE_URL is configured
-        if(BASE_URL) {
+        if (BASE_URL) {
             $baseUrl = BASE_URL;
         } else {
-            $baseUrl = 'http' . ($https ? 's' : '') . '://' . $host . $serverport;
+            $baseUrl = 'http'.($https ? 's' : '').'://'.$host.$serverport;
         }
-    return $baseUrl;
-    
+
+        return $baseUrl;
     }
 }

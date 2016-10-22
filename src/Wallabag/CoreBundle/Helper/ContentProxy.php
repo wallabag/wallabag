@@ -76,7 +76,7 @@ class ContentProxy
         }
 
         if (true) {
-            $this->logger->log('debug','Starting to download images');
+            $this->logger->log('debug', 'Starting to download images');
             $downloadImages = new DownloadImages($html, $url, $this->logger);
             $html = $downloadImages->process();
         }
