@@ -118,7 +118,7 @@ class InstallCommand extends ContainerAwareCommand
                 $rows[] = [
                     '<comment>Database version</comment>',
                     '<error>ERROR!</error>',
-                    'Your MySQL version ('.$version.') is too old, consider upgrading ('.$minimalVersion.'+).'
+                    'Your MySQL version ('.$version.') is too old, consider upgrading ('.$minimalVersion.'+).',
                 ];
             }
         }

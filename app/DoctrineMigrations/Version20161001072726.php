@@ -29,12 +29,28 @@ class Version20161001072726 extends AbstractMigration implements ContainerAwareI
      */
     public function up(Schema $schema)
     {
-        $this->addSql('ALTER TABLE '.$this->getTable('entry_tag').' DROP FOREIGN KEY FK_F035C9E5BA364942');
-        $this->addSql('ALTER TABLE '.$this->getTable('entry_tag').' DROP FOREIGN KEY FK_F035C9E5BAD26311');
-        $this->addSql('ALTER TABLE '.$this->getTable('entry_tag').' ADD CONSTRAINT FK_F035C9E5BA364942 FOREIGN KEY (entry_id) REFERENCES `entry` (id) ON DELETE CASCADE');
-        $this->addSql('ALTER TABLE '.$this->getTable('entry_tag').' ADD CONSTRAINT FK_F035C9E5BAD26311 FOREIGN KEY (tag_id) REFERENCES `tag` (id) ON DELETE CASCADE');
-        $this->addSql('ALTER TABLE '.$this->getTable('annotation').' DROP FOREIGN KEY FK_2E443EF2BA364942');
-        $this->addSql('ALTER TABLE '.$this->getTable('annotation').' ADD CONSTRAINT FK_2E443EF2BA364942 FOREIGN KEY (entry_id) REFERENCES `entry` (id) ON DELETE CASCADE');
+        $this->skipIf($this->connection->getDatabasePlatform()->getName() == 'sqlite', 'Migration can only be executed safely on \'mysql\' or \'postgresql\'.');
+
+        // remove all FK from entry_tag
+        $query = $this->connection->query("SELECT CONSTRAINT_NAME FROM information_schema.key_column_usage WHERE TABLE_NAME = '".$this->getTable('entry_tag')."' AND CONSTRAINT_NAME LIKE 'FK_%' AND TABLE_SCHEMA = '".$this->connection->getDatabase()."'");
+        $query->execute();
+
+        foreach ($query->fetchAll() as $fk) {
+            $this->addSql('ALTER TABLE '.$this->getTable('entry_tag').' DROP FOREIGN KEY '.$fk['CONSTRAINT_NAME']);
+        }
+
+        $this->addSql('ALTER TABLE '.$this->getTable('entry_tag').' ADD CONSTRAINT FK_entry_tag_entry FOREIGN KEY (entry_id) REFERENCES '.$this->getTable('entry').' (id) ON DELETE CASCADE');
+        $this->addSql('ALTER TABLE '.$this->getTable('entry_tag').' ADD CONSTRAINT FK_entry_tag_tag FOREIGN KEY (tag_id) REFERENCES '.$this->getTable('tag').' (id) ON DELETE CASCADE');
+
+        // remove entry FK from annotation
+        $query = $this->connection->query("SELECT CONSTRAINT_NAME FROM information_schema.key_column_usage WHERE TABLE_NAME = '".$this->getTable('annotation')."' AND CONSTRAINT_NAME LIKE 'FK_%' and COLUMN_NAME = 'entry_id' AND TABLE_SCHEMA = '".$this->connection->getDatabase()."'");
+        $query->execute();
+
+        foreach ($query->fetchAll() as $fk) {
+            $this->addSql('ALTER TABLE '.$this->getTable('annotation').' DROP FOREIGN KEY '.$fk['CONSTRAINT_NAME']);
+        }
+
+        $this->addSql('ALTER TABLE '.$this->getTable('annotation').' ADD CONSTRAINT FK_annotation_entry FOREIGN KEY (entry_id) REFERENCES '.$this->getTable('entry').' (id) ON DELETE CASCADE');
     }
 
     /**
@@ -42,13 +58,6 @@ class Version20161001072726 extends AbstractMigration implements ContainerAwareI
      */
     public function down(Schema $schema)
     {
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() == 'sqlite', 'Migration can only be executed safely on \'mysql\' or \'postgresql\'.');
-
-        $this->addSql('ALTER TABLE '.$this->getTable('annotation').' DROP FOREIGN KEY FK_2E443EF2BA364942');
-        $this->addSql('ALTER TABLE '.$this->getTable('annotation').' ADD CONSTRAINT FK_2E443EF2BA364942 FOREIGN KEY (entry_id) REFERENCES entry (id)');
-        $this->addSql('ALTER TABLE '.$this->getTable('entry_tag').' DROP FOREIGN KEY FK_F035C9E5BA364942');
-        $this->addSql('ALTER TABLE '.$this->getTable('entry_tag').' DROP FOREIGN KEY FK_F035C9E5BAD26311');
-        $this->addSql('ALTER TABLE '.$this->getTable('entry_tag').' ADD CONSTRAINT FK_F035C9E5BA364942 FOREIGN KEY (entry_id) REFERENCES entry (id)');
-        $this->addSql('ALTER TABLE '.$this->getTable('entry_tag').' ADD CONSTRAINT FK_F035C9E5BAD26311 FOREIGN KEY (tag_id) REFERENCES tag (id)');
+        throw new SkipMigrationException('Too complex ...');
     }
 }

@@ -29,10 +29,17 @@ class Version20160812120952 extends AbstractMigration implements ContainerAwareI
      */
     public function up(Schema $schema)
     {
-        if ($this->connection->getDatabasePlatform()->getName() == 'sqlite') {
-            $this->addSql('ALTER TABLE '.$this->getTable('oauth2_clients').' ADD name longtext DEFAULT NULL');
-        } else {
-            $this->addSql('ALTER TABLE '.$this->getTable('oauth2_clients').' ADD name longtext COLLATE \'utf8_unicode_ci\' DEFAULT NULL');
+        switch ($this->connection->getDatabasePlatform()->getName()) {
+            case 'sqlite':
+                $this->addSql('ALTER TABLE '.$this->getTable('oauth2_clients').' ADD name longtext DEFAULT NULL');
+                break;
+
+            case 'mysql':
+                $this->addSql('ALTER TABLE '.$this->getTable('oauth2_clients').' ADD name longtext COLLATE \'utf8_unicode_ci\' DEFAULT NULL');
+                break;
+
+            case 'postgresql':
+                $this->addSql('ALTER TABLE '.$this->getTable('oauth2_clients').' ADD name text DEFAULT NULL');
         }
     }
 
