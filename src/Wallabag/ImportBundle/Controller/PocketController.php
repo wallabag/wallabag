@@ -3,6 +3,7 @@
 namespace Wallabag\ImportBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -51,6 +52,8 @@ class PocketController extends Controller
 
     /**
      * @Route("/pocket/auth", name="import_pocket_auth")
+     * @param Request $request
+     * @return RedirectResponse
      */
     public function authAction(Request $request)
     {

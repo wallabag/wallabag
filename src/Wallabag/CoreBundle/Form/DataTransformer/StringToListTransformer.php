@@ -44,12 +44,12 @@ class StringToListTransformer implements DataTransformerInterface
      *
      * @param string $string
      *
-     * @return array|null
+     * @return null|array
      */
     public function reverseTransform($string)
     {
         if ($string === null) {
-            return;
+            return null;
         }
 
         return array_values(array_filter(array_map('trim', explode($this->separator, $string))));

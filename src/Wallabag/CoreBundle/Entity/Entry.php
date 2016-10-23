@@ -386,7 +386,7 @@ class Entry
      */
     public function getUserName()
     {
-        return $this->user->getUserName();
+        return $this->user->getUsername();
     }
 
     /**

@@ -13,12 +13,24 @@ use OldSound\RabbitMqBundle\RabbitMq\ProducerInterface;
 
 abstract class AbstractImport implements ImportInterface
 {
+    /** @var EntityManager $em */
     protected $em;
+
+    /** @var NullLogger $logger */
     protected $logger;
+
+    /** @var ContentProxy $contentProxy */
     protected $contentProxy;
+
+    /** @var ProducerInterface $producer */
     protected $producer;
+
+    /** @var User $user */
     protected $user;
+
+    /** @var boolean $markAsRead */
     protected $markAsRead;
+
     protected $skippedEntries = 0;
     protected $importedEntries = 0;
     protected $queuedEntries = 0;
@@ -61,6 +73,7 @@ abstract class AbstractImport implements ImportInterface
      * Set whether articles must be all marked as read.
      *
      * @param bool $markAsRead
+     * @return $this
      */
     public function setMarkAsRead($markAsRead)
     {
@@ -71,6 +84,8 @@ abstract class AbstractImport implements ImportInterface
 
     /**
      * Get whether articles must be all marked as read.
+     *
+     * @return boolean
      */
     public function getMarkAsRead()
     {

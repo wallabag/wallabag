@@ -4,13 +4,17 @@ namespace Wallabag\ImportBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Wallabag\ImportBundle\Form\Type\UploadImportType;
 
 class InstapaperController extends Controller
 {
     /**
      * @Route("/instapaper", name="import_instapaper")
+     * @param Request $request
+     * @return RedirectResponse|Response
      */
     public function indexAction(Request $request)
     {

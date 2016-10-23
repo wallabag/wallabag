@@ -3,6 +3,8 @@
 namespace Wallabag\CoreBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\CoreBundle\Entity\Tag;
 
 class TagRepository extends EntityRepository
 {
@@ -55,9 +57,11 @@ class TagRepository extends EntityRepository
     /**
      * Used only in test case to get a tag for our entry.
      *
+     * @param Entry $entry
+     * @param $label
      * @return Tag
      */
-    public function findOneByEntryAndTagLabel($entry, $label)
+    public function findOneByEntryAndTagLabel(Entry $entry, $label)
     {
         return $this->createQueryBuilder('t')
             ->leftJoin('t.entries', 'e')

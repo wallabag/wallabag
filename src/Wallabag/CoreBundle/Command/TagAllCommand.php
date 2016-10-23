@@ -2,11 +2,13 @@
 
 namespace Wallabag\CoreBundle\Command;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\NoResultException;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Wallabag\UserBundle\Entity\User;
 
 class TagAllCommand extends ContainerAwareCommand
 {
@@ -34,13 +36,14 @@ class TagAllCommand extends ContainerAwareCommand
         }
         $tagger = $this->getContainer()->get('wallabag_core.rule_based_tagger');
 
-        $output->write(sprintf('Tagging entries for user « <comment>%s</comment> »... ', $user->getUserName()));
+        $output->write(sprintf('Tagging entries for user « <comment>%s</comment> »... ', $user->getUsername()));
 
         $entries = $tagger->tagAllForUser($user);
 
         $output->writeln('<info>Done.</info>');
-        $output->write(sprintf('Persist entries ... ', $user->getUserName()));
+        $output->write(sprintf('Persist entries ... ', $user->getUsername()));
 
+        /** @var ObjectManager $em */
         $em = $this->getDoctrine()->getManager();
         foreach ($entries as $entry) {
             $em->persist($entry);
@@ -55,7 +58,7 @@ class TagAllCommand extends ContainerAwareCommand
      *
      * @param string $username
      *
-     * @return \Wallabag\UserBundle\Entity\User
+     * @return User
      */
     private function getUser($username)
     {

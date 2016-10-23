@@ -36,6 +36,7 @@ class InstapaperImport extends AbstractImport
      * Set file path to the json file.
      *
      * @param string $filepath
+     * @return $this
      */
     public function setFilepath($filepath)
     {

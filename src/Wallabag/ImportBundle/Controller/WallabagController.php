@@ -3,8 +3,11 @@
 namespace Wallabag\ImportBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Wallabag\ImportBundle\Form\Type\UploadImportType;
+use Wallabag\ImportBundle\Import\WallabagImport;
 
 /**
  * Define Wallabag import for v1 and v2, since there are very similar.
@@ -37,6 +40,7 @@ abstract class WallabagController extends Controller
         $form = $this->createForm(UploadImportType::class);
         $form->handleRequest($request);
 
+        /** @var WallabagImport $wallabag */
         $wallabag = $this->getImportService();
         $wallabag->setUser($this->getUser());
 

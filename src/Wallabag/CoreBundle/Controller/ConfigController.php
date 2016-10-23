@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\TaggingRule;
 use Wallabag\CoreBundle\Form\Type\ConfigType;
@@ -22,6 +23,7 @@ class ConfigController extends Controller
      * @param Request $request
      *
      * @Route("/config", name="config")
+     * @return RedirectResponse|Response
      */
     public function indexAction(Request $request)
     {

@@ -45,14 +45,14 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
     protected $name;
 
     /**
-     * @var date
+     * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime")
      */
     protected $createdAt;
 
     /**
-     * @var date
+     * @var \DateTime
      *
      * @ORM\Column(name="updated_at", type="datetime")
      */
@@ -129,7 +129,7 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
     }
 
     /**
-     * @return string
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -137,7 +137,7 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
     }
 
     /**
-     * @return string
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {

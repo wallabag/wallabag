@@ -7,13 +7,15 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Wallabag\ImportBundle\Form\Type\UploadImportType;
+use Wallabag\ImportBundle\Import\BrowserImport;
+use Wallabag\ImportBundle\Import\ImportInterface;
 
 abstract class BrowserController extends Controller
 {
     /**
      * Return the service to handle the import.
      *
-     * @return \Wallabag\ImportBundle\Import\ImportInterface
+     * @return ImportInterface
      */
     abstract protected function getImportService();
 
@@ -36,6 +38,7 @@ abstract class BrowserController extends Controller
         $form = $this->createForm(UploadImportType::class);
         $form->handleRequest($request);
 
+        /** @var BrowserImport $wallabag */
         $wallabag = $this->getImportService();
         $wallabag->setUser($this->getUser());
 

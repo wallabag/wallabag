@@ -6,6 +6,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Wallabag\CoreBundle\Repository\EntryRepository;
 use Wallabag\CoreBundle\Repository\TagRepository;
 use Symfony\Component\Translation\TranslatorInterface;
+use Wallabag\UserBundle\Entity\User;
 
 class WallabagExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
 {
@@ -118,6 +119,7 @@ class WallabagExtension extends \Twig_Extension implements \Twig_Extension_Globa
      */
     public function displayStats()
     {
+        /** @var User $user */
         $user = $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null;
 
         if (null === $user || !is_object($user)) {

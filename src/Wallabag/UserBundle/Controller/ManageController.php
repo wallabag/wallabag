@@ -4,12 +4,14 @@ namespace Wallabag\UserBundle\Controller;
 
 use FOS\UserBundle\Event\UserEvent;
 use FOS\UserBundle\FOSUserEvents;
+use Symfony\Component\Form\Form;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Response;
 use Wallabag\UserBundle\Entity\User;
-use Wallabag\CoreBundle\Entity\Config;
 
 /**
  * User controller.
@@ -38,11 +40,14 @@ class ManageController extends Controller
      *
      * @Route("/new", name="user_new")
      * @Method({"GET", "POST"})
+     * @param Request $request
+     * @return RedirectResponse|Response
      */
     public function newAction(Request $request)
     {
         $userManager = $this->container->get('fos_user.user_manager');
 
+        /** @var User $user */
         $user = $userManager->createUser();
         // enable created user by default
         $user->setEnabled(true);
@@ -78,6 +83,9 @@ class ManageController extends Controller
      *
      * @Route("/{id}/edit", name="user_edit")
      * @Method({"GET", "POST"})
+     * @param Request $request
+     * @param User $user
+     * @return RedirectResponse|Response
      */
     public function editAction(Request $request, User $user)
     {
@@ -111,6 +119,9 @@ class ManageController extends Controller
      *
      * @Route("/{id}", name="user_delete")
      * @Method("DELETE")
+     * @param Request $request
+     * @param User $user
+     * @return RedirectResponse
      */
     public function deleteAction(Request $request, User $user)
     {
@@ -136,7 +147,7 @@ class ManageController extends Controller
      *
      * @param User $user The User entity
      *
-     * @return \Symfony\Component\Form\Form The form
+     * @return Form The form
      */
     private function createDeleteForm(User $user)
     {

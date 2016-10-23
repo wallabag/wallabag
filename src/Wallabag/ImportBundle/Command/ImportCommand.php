@@ -2,6 +2,7 @@
 
 namespace Wallabag\ImportBundle\Command;
 
+use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Console\Input\InputArgument;
@@ -30,6 +31,7 @@ class ImportCommand extends ContainerAwareCommand
             throw new Exception(sprintf('File "%s" not found', $input->getArgument('filepath')));
         }
 
+        /** @var EntityManager $em */
         $em = $this->getContainer()->get('doctrine')->getManager();
         // Turning off doctrine default logs queries for saving memory
         $em->getConnection()->getConfiguration()->setSQLLogger(null);

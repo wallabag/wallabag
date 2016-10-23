@@ -2,6 +2,9 @@
 
 namespace Wallabag\CoreBundle\Command;
 
+use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Exception\DriverException;
+use Doctrine\DBAL\Schema\AbstractSchemaManager;
 use FOS\UserBundle\Event\UserEvent;
 use FOS\UserBundle\FOSUserEvents;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -13,8 +16,8 @@ use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
-use Wallabag\CoreBundle\Entity\Config;
 use Craue\ConfigBundle\Entity\Setting;
+use Wallabag\UserBundle\Entity\User;
 
 class InstallCommand extends ContainerAwareCommand
 {
@@ -223,6 +226,7 @@ class InstallCommand extends ContainerAwareCommand
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
 
         $userManager = $this->getContainer()->get('fos_user.user_manager');
+        /** @var User $user */
         $user = $userManager->createUser();
 
         $question = new Question('Username (default: wallabag) :', 'wallabag');
@@ -403,7 +407,8 @@ class InstallCommand extends ContainerAwareCommand
      * Run a command.
      *
      * @param string $command
-     * @param array  $parameters Parameters to this command (usually 'force' => true)
+     * @param array $parameters Parameters to this command (usually 'force' => true)
+     * @return $this
      */
     protected function runCommand($command, $parameters = [])
     {
@@ -444,11 +449,12 @@ class InstallCommand extends ContainerAwareCommand
 
     /**
      * Check if the database already exists.
-     *
      * @return bool
+     * @throws \Exception
      */
     private function isDatabasePresent()
     {
+        /** @var Connection $connection */
         $connection = $this->getContainer()->get('doctrine')->getManager()->getConnection();
         $databaseName = $connection->getDatabase();
 
@@ -481,7 +487,7 @@ class InstallCommand extends ContainerAwareCommand
 
         try {
             return in_array($databaseName, $schemaManager->listDatabases());
-        } catch (\Doctrine\DBAL\Exception\DriverException $e) {
+        } catch (DriverException $e) {
             // it means we weren't able to get database list, assume the database doesn't exist
 
             return false;
@@ -496,6 +502,7 @@ class InstallCommand extends ContainerAwareCommand
      */
     private function isSchemaPresent()
     {
+        /** @var AbstractSchemaManager $schemaManager */
         $schemaManager = $this->getContainer()->get('doctrine')->getManager()->getConnection()->getSchemaManager();
 
         return count($schemaManager->listTableNames()) > 0 ? true : false;

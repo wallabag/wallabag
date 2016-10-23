@@ -3,6 +3,8 @@
 namespace Wallabag\AnnotationBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
+use Wallabag\AnnotationBundle\Entity\Annotation;
 
 /**
  * AnnotationRepository.
@@ -66,7 +68,7 @@ class AnnotationRepository extends EntityRepository
     {
         return $this->createQueryBuilder('a')
             ->where('a.entry = :entryId')->setParameter('entryId', $entryId)
-            ->andwhere('a.user = :userId')->setParameter('userId', $userId)
+            ->andWhere('a.user = :userId')->setParameter('userId', $userId)
             ->getQuery()->getResult()
         ;
     }
@@ -75,14 +77,14 @@ class AnnotationRepository extends EntityRepository
      * Find last annotation for a given entry id. Used only for tests.
      *
      * @param int $entryId
-     *
+     * @param $userId
      * @return array
      */
     public function findLastAnnotationByPageId($entryId, $userId)
     {
         return $this->createQueryBuilder('a')
             ->where('a.entry = :entryId')->setParameter('entryId', $entryId)
-            ->andwhere('a.user = :userId')->setParameter('userId', $userId)
+            ->andWhere('a.user = :userId')->setParameter('userId', $userId)
             ->orderBy('a.id', 'DESC')
             ->setMaxResults(1)
             ->getQuery()

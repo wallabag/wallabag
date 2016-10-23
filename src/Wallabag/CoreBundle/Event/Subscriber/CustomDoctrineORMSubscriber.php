@@ -4,6 +4,7 @@ namespace Wallabag\CoreBundle\Event\Subscriber;
 
 use Lexik\Bundle\FormFilterBundle\Event\GetFilterConditionEvent;
 use Lexik\Bundle\FormFilterBundle\Event\Subscriber\DoctrineORMSubscriber;
+use Lexik\Bundle\FormFilterBundle\Filter\Doctrine\Expression\ExpressionBuilder;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -12,13 +13,12 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  */
 class CustomDoctrineORMSubscriber extends DoctrineORMSubscriber implements EventSubscriberInterface
 {
-    /**
-     * @param GetFilterConditionEvent $event
-     */
     public function filterDateRange(GetFilterConditionEvent $event)
     {
+        /** @var ExpressionBuilder $expr */
         $expr = $event->getFilterQuery()->getExpressionBuilder();
         $values = $event->getValues();
+        /** @var  $value */
         $value = $values['value'];
 
         // left date should start at midnight

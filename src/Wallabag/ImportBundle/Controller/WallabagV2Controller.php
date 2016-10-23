@@ -3,7 +3,9 @@
 namespace Wallabag\ImportBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class WallabagV2Controller extends WallabagController
 {
@@ -33,6 +35,8 @@ class WallabagV2Controller extends WallabagController
 
     /**
      * @Route("/wallabag-v2", name="import_wallabag_v2")
+     * @param Request $request
+     * @return RedirectResponse|Response
      */
     public function indexAction(Request $request)
     {

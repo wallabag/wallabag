@@ -21,6 +21,7 @@ class WallabagAnnotationController extends FOSRestController
      *      }
      * )
      *
+     * @param Entry $entry
      * @return Response
      */
     public function getAnnotationsAction(Entry $entry)
@@ -40,8 +41,6 @@ class WallabagAnnotationController extends FOSRestController
     /**
      * Creates a new annotation.
      *
-     * @param Entry $entry
-     *
      * @ApiDoc(
      *      requirements={
      *          {"name"="ranges", "dataType"="array", "requirement"="\w+", "description"="The range array for the annotation"},
@@ -50,6 +49,8 @@ class WallabagAnnotationController extends FOSRestController
      *      }
      * )
      *
+     * @param Request $request
+     * @param Entry $entry
      * @return Response
      */
     public function postAnnotationAction(Request $request, Entry $entry)
@@ -89,6 +90,8 @@ class WallabagAnnotationController extends FOSRestController
      *
      * @ParamConverter("annotation", class="WallabagAnnotationBundle:Annotation")
      *
+     * @param Annotation $annotation
+     * @param Request $request
      * @return Response
      */
     public function putAnnotationAction(Annotation $annotation, Request $request)
@@ -118,6 +121,7 @@ class WallabagAnnotationController extends FOSRestController
      *
      * @ParamConverter("annotation", class="WallabagAnnotationBundle:Annotation")
      *
+     * @param Annotation $annotation
      * @return Response
      */
     public function deleteAnnotationAction(Annotation $annotation)
@@ -137,6 +141,7 @@ class WallabagAnnotationController extends FOSRestController
      *
      * @param string $json
      *
+     * @param int $code
      * @return Response
      */
     private function renderJsonResponse($json, $code = 200)
