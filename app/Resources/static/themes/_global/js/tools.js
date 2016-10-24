@@ -1,4 +1,5 @@
 const $ = require('jquery');
+require('mousetrap');
 
 /* Allows inline call qr-code call */
 import jrQrcode from 'jr-qrcode'; // eslint-disable-line
@@ -51,3 +52,14 @@ function initExport() {
 }
 
 export { savePercent, retrievePercent, initFilters, initExport };
+
+/** Shortcuts **/
+
+/* Go to */
+Mousetrap.bind('g u', function() { window.location.href = Routing.generate('homepage') });
+Mousetrap.bind('g s', function() { window.location.href = Routing.generate('starred') });
+
+/* Actions */
+Mousetrap.bind('g a', function() {
+    $("#nav-btn-add").trigger("click");
+});

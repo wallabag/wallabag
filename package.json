@@ -101,6 +101,7 @@
     "through": "^2.3.8"
   },
   "dependencies": {
-    "jr-qrcode": "^1.0.5"
+    "jr-qrcode": "^1.0.5",
+    "mousetrap": "^1.6.0"
   }
 }

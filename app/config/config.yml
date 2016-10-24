@@ -351,3 +351,6 @@ old_sound_rabbit_mq:
             queue_options:
                 name: 'wallabag.import.chrome'
             callback: wallabag_import.consumer.amqp.chrome
+
+fos_js_routing:
+    routes_to_expose: [ homepage, starred, archive, all, tag, config, import, developer, howto, about, logout ]
