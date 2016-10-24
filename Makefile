@@ -41,6 +41,6 @@ travis: ## Make some stuff for Travis-CI
 deploy: ## Deploy wallabag
 	@bundle exec cap staging deploy
 
-.PHONY: help clean install update build test release travis deploy
+.PHONY: help clean install update build test release travis deploy run dev
 
 .DEFAULT_GOAL := install
