@@ -8,7 +8,7 @@ use Symfony\Component\BrowserKit\Cookie;
 abstract class WallabagAnnotationTestCase extends WebTestCase
 {
     /**
-     * @var Client
+     * @var \Symfony\Bundle\FrameworkBundle\Client
      */
     protected $client = null;
 
@@ -35,7 +35,7 @@ abstract class WallabagAnnotationTestCase extends WebTestCase
     }
 
     /**
-     * @return Client
+     * @return \Symfony\Bundle\FrameworkBundle\Client
      */
     protected function createAuthorizedClient()
     {
@@ -49,7 +49,7 @@ abstract class WallabagAnnotationTestCase extends WebTestCase
         $firewallName = $container->getParameter('fos_user.firewall_name');
 
         $this->user = $userManager->findUserBy(['username' => 'admin']);
-        $loginManager->loginUser($firewallName, $this->user);
+        $loginManager->logInUser($firewallName, $this->user);
 
         // save the login token into the session and put it in a cookie
         $container->get('session')->set('_security_'.$firewallName, serialize($container->get('security.token_storage')->getToken()));

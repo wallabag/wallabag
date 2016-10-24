@@ -50,7 +50,8 @@ class AnnotationRepository extends EntityRepository
     {
         return $this->createQueryBuilder('a')
             ->andWhere('a.id = :annotationId')->setParameter('annotationId', $annotationId)
-            ->getQuery()->getSingleResult()
+            ->getQuery()
+            ->getSingleResult()
         ;
     }
 
@@ -67,7 +68,8 @@ class AnnotationRepository extends EntityRepository
         return $this->createQueryBuilder('a')
             ->where('a.entry = :entryId')->setParameter('entryId', $entryId)
             ->andwhere('a.user = :userId')->setParameter('userId', $userId)
-            ->getQuery()->getResult()
+            ->getQuery()
+            ->getResult()
         ;
     }
 

@@ -3,9 +3,8 @@
 namespace Wallabag\AnnotationBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
-use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Wallabag\AnnotationBundle\Entity\Annotation;
 use Wallabag\CoreBundle\Entity\Entry;
@@ -15,42 +14,35 @@ class WallabagAnnotationController extends FOSRestController
     /**
      * Retrieve annotations for an entry.
      *
-     * @ApiDoc(
-     *      requirements={
-     *          {"name"="entry", "dataType"="integer", "requirement"="\w+", "description"="The entry ID"}
-     *      }
-     * )
+     * @param Entry $entry
      *
-     * @return Response
+     * @see Wallabag\ApiBundle\Controller\WallabagRestController
+     *
+     * @return JsonResponse
      */
     public function getAnnotationsAction(Entry $entry)
     {
         $annotationRows = $this
-                ->getDoctrine()
-                ->getRepository('WallabagAnnotationBundle:Annotation')
-                ->findAnnotationsByPageId($entry->getId(), $this->getUser()->getId());
+            ->getDoctrine()
+            ->getRepository('WallabagAnnotationBundle:Annotation')
+            ->findAnnotationsByPageId($entry->getId(), $this->getUser()->getId());
         $total = count($annotationRows);
         $annotations = ['total' => $total, 'rows' => $annotationRows];
 
         $json = $this->get('serializer')->serialize($annotations, 'json');
 
-        return $this->renderJsonResponse($json);
+        return (new JsonResponse())->setJson($json);
     }
 
     /**
      * Creates a new annotation.
      *
-     * @param Entry $entry
+     * @param Request $request
+     * @param Entry   $entry
      *
-     * @ApiDoc(
-     *      requirements={
-     *          {"name"="ranges", "dataType"="array", "requirement"="\w+", "description"="The range array for the annotation"},
-     *          {"name"="quote", "dataType"="string", "required"=false, "description"="Optional, quote for the annotation"},
-     *          {"name"="text", "dataType"="string", "required"=true, "description"=""},
-     *      }
-     * )
+     * @return JsonResponse
      *
-     * @return Response
+     * @see Wallabag\ApiBundle\Controller\WallabagRestController
      */
     public function postAnnotationAction(Request $request, Entry $entry)
     {
@@ -75,21 +67,20 @@ class WallabagAnnotationController extends FOSRestController
 
         $json = $this->get('serializer')->serialize($annotation, 'json');
 
-        return $this->renderJsonResponse($json);
+        return (new JsonResponse())->setJson($json);
     }
 
     /**
      * Updates an annotation.
      *
-     * @ApiDoc(
-     *      requirements={
-     *          {"name"="annotation", "dataType"="string", "requirement"="\w+", "description"="The annotation ID"}
-     *      }
-     * )
+     * @see Wallabag\ApiBundle\Controller\WallabagRestController
      *
      * @ParamConverter("annotation", class="WallabagAnnotationBundle:Annotation")
      *
-     * @return Response
+     * @param Annotation $annotation
+     * @param Request    $request
+     *
+     * @return JsonResponse
      */
     public function putAnnotationAction(Annotation $annotation, Request $request)
     {
@@ -104,21 +95,19 @@ class WallabagAnnotationController extends FOSRestController
 
         $json = $this->get('serializer')->serialize($annotation, 'json');
 
-        return $this->renderJsonResponse($json);
+        return (new JsonResponse())->setJson($json);
     }
 
     /**
      * Removes an annotation.
      *
-     * @ApiDoc(
-     *      requirements={
-     *          {"name"="annotation", "dataType"="string", "requirement"="\w+", "description"="The annotation ID"}
-     *      }
-     * )
+     * @see Wallabag\ApiBundle\Controller\WallabagRestController
      *
      * @ParamConverter("annotation", class="WallabagAnnotationBundle:Annotation")
      *
-     * @return Response
+     * @param Annotation $annotation
+     *
+     * @return JsonResponse
      */
     public function deleteAnnotationAction(Annotation $annotation)
     {
@@ -128,19 +117,6 @@ class WallabagAnnotationController extends FOSRestController
 
         $json = $this->get('serializer')->serialize($annotation, 'json');
 
-        return $this->renderJsonResponse($json);
-    }
-
-    /**
-     * Send a JSON Response.
-     * We don't use the Symfony JsonRespone, because it takes an array as parameter instead of a JSON string.
-     *
-     * @param string $json
-     *
-     * @return Response
-     */
-    private function renderJsonResponse($json, $code = 200)
-    {
-        return new Response($json, $code, ['application/json']);
+        return (new JsonResponse())->setJson($json);
     }
 }
