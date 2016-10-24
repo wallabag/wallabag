@@ -94,12 +94,12 @@ config:
             confirm: Jesteś pewien? (tej operacji NIE MOŻNA cofnąć)
             button: Usuń moje konto
     reset:
-        # title: Reset area (a.k.a danger zone)
-        # description: By hiting buttons below you'll have ability to remove some informations from your account. Be aware that these actions are IRREVERSIBLE.
-        # annotations: Remove ALL annotations
-        # tags: Remove ALL tags
-        # entries: Remove ALL entries
-        # confirm: Are you really really sure? (THIS CAN'T BE UNDONE)
+        title: Reset (niebezpieczna strefa)
+        description: Poniższe przyciski pozwalają usunąć pewne informacje z twojego konta. Uważaj te operacje są NIEODWRACALNE.
+        annotations: Usuń WSZYSTKIE adnotacje
+        tags: Usuń WSZYSTKIE tagi
+        entries: usuń WSZYTSTKIE wpisy
+        confirm: Jesteś pewien? (tej operacji NIE MOŻNA cofnąć)
     form_password:
         old_password_label: 'Stare hasło'
         new_password_label: 'Nowe hasło'
@@ -458,7 +458,7 @@ user:
         back_to_list: Powrót do listy
 
 error:
-    # page_title: An error occurred
+    page_title: Wystąpił błąd
 
 flashes:
     config:
@@ -472,9 +472,9 @@ flashes:
             tagging_rules_deleted: 'Reguła tagowania usunięta'
             user_added: 'Użytkownik "%username%" dodany'
             rss_token_updated: 'Token kanału RSS zaktualizowany'
-            # annotations_reset: Annotations reset
-            # tags_reset: Tags reset
-            # entries_reset: Entries reset
+            annotations_reset: Zresetuj adnotacje
+            tags_reset: Zresetuj tagi
+            entries_reset: Zresetuj wpisy
     entry:
         notice:
             entry_already_saved: 'Wpis już został dodany %date%'
