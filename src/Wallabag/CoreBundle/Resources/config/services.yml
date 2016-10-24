@@ -129,3 +129,10 @@ services:
         arguments:
             - '@twig'
             - '%kernel.debug%'
+
+    wallabag_core.subscriber.sqlite_cascade_delete:
+        class:  Wallabag\CoreBundle\Subscriber\SQLiteCascadeDeleteSubscriber
+        arguments:
+            - "@doctrine"
+        tags:
+            - { name: doctrine.event_subscriber }

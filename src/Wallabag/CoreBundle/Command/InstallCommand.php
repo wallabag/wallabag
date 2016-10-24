@@ -40,7 +40,7 @@ class InstallCommand extends ContainerAwareCommand
     {
         $this
             ->setName('wallabag:install')
-            ->setDescription('Wallabag installer.')
+            ->setDescription('wallabag installer.')
             ->addOption(
                'reset',
                null,
@@ -55,7 +55,7 @@ class InstallCommand extends ContainerAwareCommand
         $this->defaultInput = $input;
         $this->defaultOutput = $output;
 
-        $output->writeln('<info>Installing Wallabag...</info>');
+        $output->writeln('<info>Installing wallabag...</info>');
         $output->writeln('');
 
         $this
@@ -65,7 +65,7 @@ class InstallCommand extends ContainerAwareCommand
             ->setupConfig()
         ;
 
-        $output->writeln('<info>Wallabag has been successfully installed.</info>');
+        $output->writeln('<info>wallabag has been successfully installed.</info>');
         $output->writeln('<comment>Just execute `php bin/console server:run --env=prod` for using wallabag: http://localhost:8000</comment>');
     }
 
@@ -95,7 +95,8 @@ class InstallCommand extends ContainerAwareCommand
         $help = '';
 
         try {
-            $this->getContainer()->get('doctrine')->getManager()->getConnection()->connect();
+            $conn = $this->getContainer()->get('doctrine')->getManager()->getConnection();
+            $conn->connect();
         } catch (\Exception $e) {
             if (false === strpos($e->getMessage(), 'Unknown database')
                 && false === strpos($e->getMessage(), 'database "'.$this->getContainer()->getParameter('database_name').'" does not exist')) {
@@ -106,6 +107,21 @@ class InstallCommand extends ContainerAwareCommand
         }
 
         $rows[] = [$label, $status, $help];
+
+        // now check if MySQL isn't too old to handle utf8mb4
+        if ($conn->isConnected() && $conn->getDatabasePlatform() instanceof \Doctrine\DBAL\Platforms\MySqlPlatform) {
+            $version = $conn->query('select version()')->fetchColumn();
+            $minimalVersion = '5.5.4';
+
+            if (false === version_compare($version, $minimalVersion, '>')) {
+                $fulfilled = false;
+                $rows[] = [
+                    '<comment>Database version</comment>',
+                    '<error>ERROR!</error>',
+                    'Your MySQL version ('.$version.') is too old, consider upgrading ('.$minimalVersion.'+).',
+                ];
+            }
+        }
 
         foreach ($this->functionExists as $functionRequired) {
             $label = '<comment>'.$functionRequired.'</comment>';
@@ -131,7 +147,7 @@ class InstallCommand extends ContainerAwareCommand
             throw new \RuntimeException('Some system requirements are not fulfilled. Please check output messages and fix them.');
         }
 
-        $this->defaultOutput->writeln('<info>Success! Your system can run Wallabag properly.</info>');
+        $this->defaultOutput->writeln('<info>Success! Your system can run wallabag properly.</info>');
 
         $this->defaultOutput->writeln('');
 

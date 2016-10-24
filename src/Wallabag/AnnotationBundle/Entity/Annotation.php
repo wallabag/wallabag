@@ -82,7 +82,7 @@ class Annotation
      * @Exclude
      *
      * @ORM\ManyToOne(targetEntity="Wallabag\CoreBundle\Entity\Entry", inversedBy="annotations")
-     * @ORM\JoinColumn(name="entry_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="entry_id", referencedColumnName="id", onDelete="cascade")
      */
     private $entry;
 

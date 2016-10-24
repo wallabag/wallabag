@@ -225,6 +225,80 @@ class ConfigController extends Controller
     }
 
     /**
+     * Remove all annotations OR tags OR entries for the current user.
+     *
+     * @Route("/reset/{type}", requirements={"id" = "annotations|tags|entries"}, name="config_reset")
+     *
+     * @return RedirectResponse
+     */
+    public function resetAction($type)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        switch ($type) {
+            case 'annotations':
+                $this->getDoctrine()
+                    ->getRepository('WallabagAnnotationBundle:Annotation')
+                    ->removeAllByUserId($this->getUser()->getId());
+                break;
+
+            case 'tags':
+                $this->removeAllTagsByUserId($this->getUser()->getId());
+                break;
+
+            case 'entries':
+                // SQLite doesn't care about cascading remove, so we need to manually remove associated stuf
+                // otherwise they won't be removed ...
+                if ($this->get('doctrine')->getConnection()->getDriver() instanceof \Doctrine\DBAL\Driver\PDOSqlite\Driver) {
+                    $this->getDoctrine()->getRepository('WallabagAnnotationBundle:Annotation')->removeAllByUserId($this->getUser()->getId());
+                }
+
+                // manually remove tags to avoid orphan tag
+                $this->removeAllTagsByUserId($this->getUser()->getId());
+
+                $this->getDoctrine()
+                    ->getRepository('WallabagCoreBundle:Entry')
+                    ->removeAllByUserId($this->getUser()->getId());
+        }
+
+        $this->get('session')->getFlashBag()->add(
+            'notice',
+            'flashes.config.notice.'.$type.'_reset'
+        );
+
+        return $this->redirect($this->generateUrl('config').'#set3');
+    }
+
+    /**
+     * Remove all tags for a given user and cleanup orphan tags.
+     *
+     * @param int $userId
+     */
+    private function removeAllTagsByUserId($userId)
+    {
+        $tags = $this->getDoctrine()->getRepository('WallabagCoreBundle:Tag')->findAllTags($userId);
+
+        if (empty($tags)) {
+            return;
+        }
+
+        $this->getDoctrine()
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->removeTags($userId, $tags);
+
+        // cleanup orphan tags
+        $em = $this->getDoctrine()->getManager();
+
+        foreach ($tags as $tag) {
+            if (count($tag->getEntries()) === 0) {
+                $em->remove($tag);
+            }
+        }
+
+        $em->flush();
+    }
+
+    /**
      * Validate that a rule can be edited/deleted by the current user.
      *
      * @param TaggingRule $rule

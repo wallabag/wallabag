@@ -28,7 +28,7 @@ doctrine:
         dbname: "%test_database_name%"
         user: "%test_database_user%"
         password: "%test_database_password%"
-        charset: UTF8
+        charset: "%test_database_charset%"
         path: "%test_database_path%"
     orm:
         metadata_cache_driver:

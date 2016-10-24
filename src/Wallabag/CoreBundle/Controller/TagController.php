@@ -90,15 +90,15 @@ class TagController extends Controller
 
         $flatTags = [];
 
-        foreach ($tags as $key => $tag) {
+        foreach ($tags as $tag) {
             $nbEntries = $this->getDoctrine()
                 ->getRepository('WallabagCoreBundle:Entry')
-                ->countAllEntriesByUserIdAndTagId($this->getUser()->getId(), $tag['id']);
+                ->countAllEntriesByUserIdAndTagId($this->getUser()->getId(), $tag->getId());
 
             $flatTags[] = [
-                'id' => $tag['id'],
-                'label' => $tag['label'],
-                'slug' => $tag['slug'],
+                'id' => $tag->getId(),
+                'label' => $tag->getLabel(),
+                'slug' => $tag->getSlug(),
                 'nbEntries' => $nbEntries,
             ];
         }

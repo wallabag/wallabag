@@ -21,7 +21,7 @@ services:
         arguments:
             - WallabagUserBundle:User
 
-    wallabag_user.create_config:
+    wallabag_user.listener.create_config:
         class: Wallabag\UserBundle\EventListener\CreateConfigListener
         arguments:
             - "@doctrine.orm.entity_manager"
