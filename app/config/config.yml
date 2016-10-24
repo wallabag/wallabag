@@ -30,7 +30,7 @@ framework:
     assets: ~
 
 wallabag_core:
-    version: 2.1.2-dev
+    version: 2.1.3-dev
     paypal_url: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9UBA65LG3FX9Y&lc=gb"
     languages:
         en: 'English'
@@ -50,6 +50,7 @@ wallabag_core:
     rss_limit: 50
     reading_speed: 1
     cache_lifetime: 10
+    fetching_error_message: "wallabag can't retrieve contents for this article. Please report this issue to us."
 
 wallabag_user:
     registration_enabled: "%fosuser_registration%"

@@ -360,6 +360,10 @@ span.numberItems {
   float: right;
 }
 
+nav ul a:hover {
+  background-color: initial;
+}
+
 /* ==========================================================================
  * 3 = Filters slider
  * ========================================================================== */
@@ -522,7 +526,7 @@ main ul.row {
 }
 
 #article > header > h1 {
-  font-size: 2em;
+  font-size: 1.6em;
 }
 
 .reader-mode {
@@ -601,6 +605,18 @@ main ul.row {
 
   .pagination {
     width: auto;
+  }
+
+  #article {
+    padding: 15px;
+    max-width: 35em;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 18px;
+  }
+
+  #article > header > h1 {
+    font-size: 1.33em;
   }
 
   .reader-mode {
@@ -759,4 +775,8 @@ div.settings div.file-field div {
 
 .input-field label.active {
   font-size: 1rem;
+}
+
+nav .input-field input {
+  margin: 0;
 }

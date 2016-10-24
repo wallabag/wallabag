@@ -23,7 +23,7 @@ export: "export"
 import: "import"
 misc: "divers"
 modify_settings: "appliquer"
-piwik_host: URL de votre site dans Piwik
+piwik_host: URL de votre site dans Piwik (sans http:// ou https://)
 piwik_site_id: ID de votre site dans Piwik
 piwik_enabled: Activer Piwik
 demo_mode_enabled: "Activer le mode démo ? (utiliser uniquement pour la démo publique de wallabag)"

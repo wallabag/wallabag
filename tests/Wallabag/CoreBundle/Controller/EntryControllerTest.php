@@ -359,9 +359,47 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $content = $em
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findByUrlAndUserId($this->url, $this->getLoggedInUserId());
+            ->find($content->getId());
 
         $this->assertNotEmpty($content->getContent());
+    }
+
+    /**
+     * @depends testPostNewOk
+     */
+    public function testReloadWithFetchingFailed()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $em = $client->getContainer()
+            ->get('doctrine.orm.entity_manager');
+
+        $content = $em
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findByUrlAndUserId($this->url, $this->getLoggedInUserId());
+
+        // put a known failed url
+        $content->setUrl('http://0.0.0.0/failed.html');
+        $em->persist($content);
+        $em->flush();
+
+        $client->request('GET', '/reload/'.$content->getId());
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+
+        // force EntityManager to clear previous entity
+        // otherwise, retrieve the same entity will retrieve change from the previous request :0
+        $em->clear();
+        $newContent = $em
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->find($content->getId());
+
+        $newContent->setUrl($this->url);
+        $em->persist($newContent);
+        $em->flush();
+
+        $this->assertNotEquals($client->getContainer()->getParameter('wallabag_core.fetching_error_message'), $newContent->getContent());
     }
 
     public function testEdit()

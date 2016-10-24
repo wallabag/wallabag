@@ -50,9 +50,10 @@ abstract class AbstractConsumer
         $entry = $this->import->parseEntry($storedEntry);
 
         if (null === $entry) {
-            $this->logger->warning('Unable to parse entry', ['entry' => $storedEntry]);
+            $this->logger->warning('Entry already exists', ['entry' => $storedEntry]);
 
-            return false;
+            // return true to skip message
+            return true;
         }
 
         try {

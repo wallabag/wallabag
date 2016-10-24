@@ -79,7 +79,7 @@ Known limitations
 2FA
 ~~~
 
-Currently the does not support two-factor authentication. You should disable that to get the app working.
+Currently the Android application does not support two-factor authentication. You should disable that to get the application working.
 
 
 Limited amount of articles with wallabag v2

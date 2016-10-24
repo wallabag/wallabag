@@ -456,6 +456,9 @@ user:
         # delete_confirm: Are you sure?
         # back_to_list: Back to list
 
+error:
+    # page_title: An error occurred
+
 flashes:
     config:
         notice:

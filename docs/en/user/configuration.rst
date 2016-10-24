@@ -102,7 +102,7 @@ if *« readingTime >= 5 AND domainName = "github.com" »* then tag as *« long r
 Which variables and operators can I use to write rules?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following variables and operators can be used to create tagging rules:
+The following variables and operators can be used to create tagging rules (be careful, for some values, you need to add quotes, for example ``language = "en"``):
 
 ===========  ==============================================  ========  ==========
 Variable     Meaning                                         Operator  Meaning

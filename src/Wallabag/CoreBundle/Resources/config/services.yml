@@ -40,7 +40,7 @@ services:
         class: Graby\Graby
         arguments:
             -
-                error_message: "wallabag can't retrieve contents for this article. Please report this issue to us."
+                error_message: '%wallabag_core.fetching_error_message%'
                 http_client:
                     user_agents:
                         'lifehacker.com': 'PHP/5.2'
