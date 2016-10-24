@@ -11,8 +11,8 @@ What is the meaning of the parameters?
    "database_password", "~", "password of that user"
    "database_path", "``""%kernel.root_dir%/../data/db/wallabag.sqlite""``", "only for SQLite, define where to put the database file. Leave it for other database"
    "database_table_prefix", "wallabag_", "all wallabag's tables will be prefixed with that string. You can include a ``_`` for clarity"
-   "database_socket", "null", "If your database is using a socket instead of tcp, put the path of the socket (other connection parameters will then be ignored"
-   "database_charset", "utf8mb4", "For PostgreSQL you should use utf8, for other use utf8mb4 which handle emoji"
+   "database_socket", "null", "If your database is using a socket instead of tcp, put the path of the socket (other connection parameters will then be ignored)"
+   "database_charset", "utf8mb4", "For PostgreSQL & SQLite you should use utf8, for MySQL use utf8mb4 which handle emoji"
 
 .. csv-table:: Configuration to send emails from wallabag
    :header: "name", "default", "description"
