@@ -363,5 +363,4 @@ fos_js_routing:
         - import
         - developer
         - howto
-        - about
         - logout

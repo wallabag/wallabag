@@ -58,8 +58,43 @@ export { savePercent, retrievePercent, initFilters, initExport };
 /* Go to */
 Mousetrap.bind('g u', function() { window.location.href = Routing.generate('homepage') });
 Mousetrap.bind('g s', function() { window.location.href = Routing.generate('starred') });
+Mousetrap.bind('g r', function() { window.location.href = Routing.generate('archive') });
+Mousetrap.bind('g a', function() { window.location.href = Routing.generate('all') });
+Mousetrap.bind('g t', function() { window.location.href = Routing.generate('tag') });
+Mousetrap.bind('g c', function() { window.location.href = Routing.generate('config') });
+Mousetrap.bind('g i', function() { window.location.href = Routing.generate('import') });
+Mousetrap.bind('g d', function() { window.location.href = Routing.generate('developer') });
+Mousetrap.bind('g h', function() { window.location.href = Routing.generate('howto') });
+Mousetrap.bind('g l', function() { window.location.href = Routing.generate('logout') });
+
 
 /* Actions */
-Mousetrap.bind('g a', function() {
+Mousetrap.bind('g n', function() {
     $("#nav-btn-add").trigger("click");
+});
+
+Mousetrap.bind('esc', function() {
+    $(".close").trigger("click");
+});
+
+// Display the first element of the current view
+Mousetrap.bind('right', function() {
+    $("ul.data li:first-child span.dot-ellipsis a")[0].click();
+});
+
+/* Article view */
+Mousetrap.bind('o', function() {
+    $("ul.side-nav li:nth-child(2) a i")[0].click();
+});
+
+Mousetrap.bind('s', function() {
+    $("ul.side-nav li:nth-child(5) a i")[0].click();
+});
+
+Mousetrap.bind('a', function() {
+    $("ul.side-nav li:nth-child(4) a i")[0].click();
+});
+
+Mousetrap.bind('del', function() {
+    $("ul.side-nav li:nth-child(6) a i")[0].click();
 });
