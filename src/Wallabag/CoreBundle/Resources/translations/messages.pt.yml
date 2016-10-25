@@ -144,7 +144,7 @@ entry:
         reading_time: 'tempo estimado de leitura'
         reading_time_minutes: 'tempo estimado de leitura: %readingTime% min'
         reading_time_less_one_minute: 'tempo estimado de leitura: <small class="inferieur">&lt;</small> 1 min'
-        number_of_tags: '{1}and one other tag|]1,Inf[and %count% other tags'
+        number_of_tags: '{1}e uma outra tag|]1,Inf[e %count% outras tags'
         reading_time_minutes_short: '%readingTime% min'
         reading_time_less_one_minute_short: '<small class="inferieur">&lt;</small> 1 min'
         original_article: 'original'
