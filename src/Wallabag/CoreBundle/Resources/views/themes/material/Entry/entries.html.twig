@@ -1,7 +1,11 @@
 {% extends "WallabagCoreBundle::layout.html.twig" %}
 
 {% block title %}
-  {% include "@WallabagCore/themes/common/Entry/_title.html.twig" %}
+  {% set params = {} %}
+  {% if tag is defined %}
+    {% set params = {'label': tag} %}
+  {% endif %}
+  {% include "@WallabagCore/themes/common/Entry/_title.html.twig" with {'params': params} %}
 {% endblock %}
 
 {% block content %}

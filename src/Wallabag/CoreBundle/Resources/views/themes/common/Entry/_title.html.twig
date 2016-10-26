@@ -7,7 +7,7 @@
 {% elseif currentRoute == 'all' %}
     {{ 'entry.page_titles.filtered'|trans }}
 {% elseif currentRoute == 'tag_entries' %}
-    {{ 'entry.page_titles.filtered_tags'|trans }}
+    {{ 'entry.page_titles.filtered_tags'|trans }} {{ params['label'] }}
 {% elseif currentRoute == 'untagged' %}
     {{ 'entry.page_titles.untagged'|trans }}
 {% else %}
