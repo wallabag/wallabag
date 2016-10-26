@@ -137,7 +137,7 @@ entry:
         starred: 'Wpisy oznaczone gwiazdką'
         archived: 'Zarchiwizowane wpisy'
         filtered: 'Odfiltrowane wpisy'
-        filtered_tags: 'Filtrowane po tagach'
+        filtered_tags: 'Filtrowane po tagach:'
         untagged: 'Odtaguj wpisy'
     list:
         number_on_the_page: '{0} Nie ma wpisów.|{1} Jest jeden wpis.|]1,Inf[ Są %count% wpisy.'

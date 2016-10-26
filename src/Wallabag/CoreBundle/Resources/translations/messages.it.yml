@@ -137,7 +137,7 @@ entry:
         starred: 'Contenuti preferiti'
         archived: 'Contenuti archiviati'
         filtered: 'Contenuti filtrati'
-        # filtered_tags: 'Filtered by tags'
+        # filtered_tags: 'Filtered by tags:'
         # untagged: 'Untagged entries'
     list:
         number_on_the_page: "{0} Non ci sono contenuti.|{1} C'è un contenuto.|]1,Inf[ Ci sono %count% contenuti."

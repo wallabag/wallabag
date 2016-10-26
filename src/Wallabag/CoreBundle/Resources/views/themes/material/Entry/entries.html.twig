@@ -1,7 +1,11 @@
 {% extends "WallabagCoreBundle::layout.html.twig" %}
 
 {% block title %}
-  {% include "@WallabagCore/themes/common/Entry/_title.html.twig" %}
+    {% set currentTag = '' %}
+    {% if tag is defined %}
+        {% set currentTag = tag %}
+    {% endif %}
+    {% include "@WallabagCore/themes/common/Entry/_title.html.twig" with {'currentTag': currentTag} %}
 {% endblock %}
 
 {% block content %}
