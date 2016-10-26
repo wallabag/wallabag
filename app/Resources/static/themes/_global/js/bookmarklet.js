@@ -1,4 +1,3 @@
-
 top['bookmarklet-url@wallabag.org'] =
     '<!DOCTYPE html><html><head><title>bag it!</title>' +
     '<link rel="icon" href="tpl/img/favicon.ico" />' +

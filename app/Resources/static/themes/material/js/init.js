@@ -1,10 +1,10 @@
+import $ from 'jquery';
+import annotator from 'annotator';
 import { savePercent, retrievePercent, initFilters, initExport } from '../../_global/js/tools';
 
-const $ = require('jquery');
+require('materialize'); // eslint-disable-line
 
 global.jQuery = $;
-require('materialize'); // eslint-disable-line
-const annotator = require('annotator');
 
 $(document).ready(() => {
   // sideNav

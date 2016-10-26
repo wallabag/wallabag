@@ -1,4 +1,4 @@
-const $ = require('jquery');
+import $ from 'jquery';
 
 function toggleSaveLinkForm(url, event) {
   $('#add-link-result').empty();
@@ -32,4 +32,4 @@ function toggleSaveLinkForm(url, event) {
   plainUrl.focus();
 }
 
-export { toggleSaveLinkForm };
+export default toggleSaveLinkForm;

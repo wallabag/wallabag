@@ -2,7 +2,11 @@
     "extends": "airbnb-base",
     "parser": "babel-eslint",
     "env": {
-        "browser": true
+        "browser": true,
+        "es6": true
+    },
+    "globals": {
+        "Routing": true
     },
     "rules": {
         "import/no-extraneous-dependencies": ["error", {"devDependencies": true, "optionalDependencies": true, "peerDependencies": true}]
