@@ -28,7 +28,7 @@ The server might be already running after installing, if not you can launch it u
 Configure Redis in wallabag
 ---------------------------
 
-Edit your ``parameters.yml`` file to edit Redis configuration. The default one should be ok:
+Edit your ``app/config/parameters.yml`` file to edit Redis configuration. The default one should be ok:
 
 .. code:: yaml
 

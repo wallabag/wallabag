@@ -28,7 +28,7 @@ Der Redis Service läuft eventuell schon direkt nach der Installation. Falls nic
 Konfigure Redis in wallabag
 ---------------------------
 
-Bearbeite die Datei ``parameters.yml``, um die RabbitMQ Konfiguration einzurichten. Die Standardkonfiguration sollte ok sein:
+Bearbeite die Datei ``app/config/parameters.yml``, um die RabbitMQ Konfiguration einzurichten. Die Standardkonfiguration sollte ok sein:
 
 .. code:: yaml
 
