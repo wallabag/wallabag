@@ -2,6 +2,10 @@
 # You can execute this file to update wallabag
 # eg: `sh update.sh prod`
 
+DIR="${BASH_SOURCE%/*}"
+if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
+. "$DIR/require.sh"
+
 ENV=$1
 TAG=$(git describe --tags $(git rev-list --tags --max-count=1))
 
