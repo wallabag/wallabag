@@ -28,7 +28,7 @@ Le serveur devrait déjà être démarré après l'installation. Si ce n'est pas
 Configurer Redis dans wallabag
 -------------------------------
 
-Modifiez votre fichier ``parameters.yml`` pour éditer la configuration Redis. Celle par défaut devrait convenir :
+Modifiez votre fichier ``app/config/parameters.yml`` pour éditer la configuration Redis. Celle par défaut devrait convenir :
 
 .. code:: yaml
 
