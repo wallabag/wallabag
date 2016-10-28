@@ -3,6 +3,7 @@
 namespace Wallabag\UserBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Wallabag\UserBundle\Entity\User;
 
 class UserRepository extends EntityRepository
 {

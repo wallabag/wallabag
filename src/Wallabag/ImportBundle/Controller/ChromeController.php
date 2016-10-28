@@ -4,6 +4,7 @@ namespace Wallabag\ImportBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class ChromeController extends BrowserController
 {
@@ -33,6 +34,8 @@ class ChromeController extends BrowserController
 
     /**
      * @Route("/chrome", name="import_chrome")
+     * @param Request $request
+     * @return Response
      */
     public function indexAction(Request $request)
     {

@@ -20,11 +20,11 @@ class PreparePagerForEntries
 
     /**
      * @param AdapterInterface $adapter
-     * @param int              $page
-     *
      * @return null|Pagerfanta
+     * @internal param int $page
+     *
      */
-    public function prepare(AdapterInterface $adapter, $page = 1)
+    public function prepare(AdapterInterface $adapter)
     {
         $entries = new Pagerfanta($adapter);
         $entries->setMaxPerPage($this->user->getConfig()->getItemsPerPage());

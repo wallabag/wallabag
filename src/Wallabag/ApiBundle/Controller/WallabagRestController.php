@@ -6,12 +6,14 @@ use FOS\RestBundle\Controller\FOSRestController;
 use Hateoas\Configuration\Route;
 use Hateoas\Representation\Factory\PagerfantaFactory;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
+use Wallabag\UserBundle\Entity\User;
 
 class WallabagRestController extends FOSRestController
 {
@@ -32,6 +34,7 @@ class WallabagRestController extends FOSRestController
      *       }
      * )
      *
+     * @param Request $request
      * @return JsonResponse
      */
     public function getEntriesExistsAction(Request $request)
@@ -90,6 +93,7 @@ class WallabagRestController extends FOSRestController
      *       }
      * )
      *
+     * @param Request $request
      * @return JsonResponse
      */
     public function getEntriesAction(Request $request)
@@ -105,6 +109,7 @@ class WallabagRestController extends FOSRestController
         $tags = $request->query->get('tags', '');
         $since = $request->query->get('since', 0);
 
+        /** @var Pagerfanta $pager */
         $pager = $this->getDoctrine()
             ->getRepository('WallabagCoreBundle:Entry')
             ->findEntries($this->getUser()->getId(), $isArchived, $isStarred, $sort, $order, $since, $tags);
@@ -145,6 +150,7 @@ class WallabagRestController extends FOSRestController
      *      }
      * )
      *
+     * @param Entry $entry
      * @return JsonResponse
      */
     public function getEntryAction(Entry $entry)
@@ -170,6 +176,7 @@ class WallabagRestController extends FOSRestController
      *       }
      * )
      *
+     * @param Request $request
      * @return JsonResponse
      */
     public function postEntriesAction(Request $request)
@@ -181,6 +188,7 @@ class WallabagRestController extends FOSRestController
         $isArchived = $request->request->get('archive');
         $isStarred = $request->request->get('starred');
 
+        /** @var Entry $entry */
         $entry = $this->get('wallabag_core.entry_repository')->findByUrlAndUserId($url, $this->getUser()->getId());
 
         if (false === $entry) {
@@ -232,6 +240,8 @@ class WallabagRestController extends FOSRestController
      *      }
      * )
      *
+     * @param Entry $entry
+     * @param Request $request
      * @return JsonResponse
      */
     public function patchEntriesAction(Entry $entry, Request $request)
@@ -277,6 +287,7 @@ class WallabagRestController extends FOSRestController
      *      }
      * )
      *
+     * @param Entry $entry
      * @return JsonResponse
      */
     public function deleteEntriesAction(Entry $entry)
@@ -302,6 +313,7 @@ class WallabagRestController extends FOSRestController
      *      }
      * )
      *
+     * @param Entry $entry
      * @return JsonResponse
      */
     public function getEntriesTagsAction(Entry $entry)
@@ -326,6 +338,8 @@ class WallabagRestController extends FOSRestController
      *       }
      * )
      *
+     * @param Request $request
+     * @param Entry $entry
      * @return JsonResponse
      */
     public function postEntriesTagsAction(Request $request, Entry $entry)
@@ -357,6 +371,8 @@ class WallabagRestController extends FOSRestController
      *      }
      * )
      *
+     * @param Entry $entry
+     * @param Tag $tag
      * @return JsonResponse
      */
     public function deleteEntriesTagsAction(Entry $entry, Tag $tag)
@@ -403,6 +419,7 @@ class WallabagRestController extends FOSRestController
      *      }
      * )
      *
+     * @param Request $request
      * @return JsonResponse
      */
     public function deleteTagLabelAction(Request $request)
@@ -436,6 +453,7 @@ class WallabagRestController extends FOSRestController
      *      }
      * )
      *
+     * @param Request $request
      * @return JsonResponse
      */
     public function deleteTagsLabelAction(Request $request)
@@ -478,6 +496,7 @@ class WallabagRestController extends FOSRestController
      *      }
      * )
      *
+     * @param Tag $tag
      * @return JsonResponse
      */
     public function deleteTagAction(Tag $tag)
@@ -541,6 +560,7 @@ class WallabagRestController extends FOSRestController
      */
     private function validateUserAccess($requestUserId)
     {
+        /** @var User $user */
         $user = $this->get('security.token_storage')->getToken()->getUser();
         if ($requestUserId != $user->getId()) {
             throw $this->createAccessDeniedException('Access forbidden. Entry user id: '.$requestUserId.', logged user id: '.$user->getId());

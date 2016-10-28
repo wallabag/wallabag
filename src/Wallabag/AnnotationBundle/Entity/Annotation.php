@@ -86,7 +86,7 @@ class Annotation
      */
     private $entry;
 
-    /*
+    /**
      * @param User     $user
      */
     public function __construct(User $user)

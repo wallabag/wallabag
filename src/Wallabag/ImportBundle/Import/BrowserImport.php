@@ -3,8 +3,6 @@
 namespace Wallabag\ImportBundle\Import;
 
 use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\UserBundle\Entity\User;
-use Wallabag\CoreBundle\Helper\ContentProxy;
 
 abstract class BrowserImport extends AbstractImport
 {
@@ -65,6 +63,7 @@ abstract class BrowserImport extends AbstractImport
      * Set file path to the json file.
      *
      * @param string $filepath
+     * @return $this
      */
     public function setFilepath($filepath)
     {

@@ -2,8 +2,11 @@
 
 namespace Wallabag\CoreBundle\Controller;
 
+use Doctrine\ORM\QueryBuilder;
+use Pagerfanta\Adapter\AdapterInterface;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
+use Pagerfanta\Pagerfanta;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,6 +16,7 @@ use Wallabag\CoreBundle\Form\Type\EntryFilterType;
 use Wallabag\CoreBundle\Form\Type\EditEntryType;
 use Wallabag\CoreBundle\Form\Type\NewEntryType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
+use Wallabag\CoreBundle\Helper\PreparePagerForEntries;
 
 class EntryController extends Controller
 {
@@ -272,8 +276,10 @@ class EntryController extends Controller
             $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($form, $qb);
         }
 
+        /** @var QueryBuilder $qb */
         $pagerAdapter = new DoctrineORMAdapter($qb->getQuery());
 
+        /** @var Pagerfanta $entries */
         $entries = $this->get('wallabag_core.helper.prepare_pager_for_entries')
             ->prepare($pagerAdapter, $page);
 

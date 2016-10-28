@@ -4,6 +4,7 @@ namespace Wallabag\CoreBundle\Controller;
 
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
+use Pagerfanta\Pagerfanta;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -56,6 +57,9 @@ class TagController extends Controller
      *
      * @Route("/remove-tag/{entry}/{tag}", requirements={"entry" = "\d+", "tag" = "\d+"}, name="remove_tag")
      *
+     * @param Request $request
+     * @param Entry $entry
+     * @param Tag $tag
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function removeTagFromEntry(Request $request, Entry $entry, Tag $tag)
@@ -111,11 +115,12 @@ class TagController extends Controller
     /**
      * @param Tag $tag
      * @param int $page
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
      *
      * @Route("/tag/list/{slug}/{page}", name="tag_entries", defaults={"page" = "1"})
      * @ParamConverter("tag", options={"mapping": {"slug": "slug"}})
      *
-     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showEntriesForTagAction(Tag $tag, $page, Request $request)
     {
@@ -125,6 +130,7 @@ class TagController extends Controller
 
         $pagerAdapter = new ArrayAdapter($entriesByTag);
 
+        /** @var Pagerfanta $entries */
         $entries = $this->get('wallabag_core.helper.prepare_pager_for_entries')
             ->prepare($pagerAdapter, $page);
 

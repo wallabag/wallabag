@@ -4,6 +4,7 @@ namespace Wallabag\ImportBundle\Consumer;
 
 use Doctrine\ORM\EntityManager;
 use Wallabag\ImportBundle\Import\AbstractImport;
+use Wallabag\UserBundle\Entity\User;
 use Wallabag\UserBundle\Repository\UserRepository;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
@@ -36,6 +37,7 @@ abstract class AbstractConsumer
     {
         $storedEntry = json_decode($body, true);
 
+        /** @var User $user */
         $user = $this->userRepository->find($storedEntry['userId']);
 
         // no user? Drop message

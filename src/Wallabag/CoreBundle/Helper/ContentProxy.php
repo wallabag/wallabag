@@ -15,11 +15,25 @@ use Wallabag\CoreBundle\Repository\TagRepository;
  */
 class ContentProxy
 {
+    /** @var Graby $graby */
     protected $graby;
+
+    /** @var RuleBasedTagger $tagger */
     protected $tagger;
+
+    /** @var Logger $logger */
     protected $logger;
+
+    /** @var TagRepository $tagRepository */
     protected $tagRepository;
 
+    /**
+     * ContentProxy constructor.
+     * @param Graby $graby
+     * @param RuleBasedTagger $tagger
+     * @param TagRepository $tagRepository
+     * @param Logger $logger
+     */
     public function __construct(Graby $graby, RuleBasedTagger $tagger, TagRepository $tagRepository, Logger $logger)
     {
         $this->graby = $graby;

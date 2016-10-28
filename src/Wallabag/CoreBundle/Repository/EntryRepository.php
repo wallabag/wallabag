@@ -3,9 +3,10 @@
 namespace Wallabag\CoreBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Query;
+use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
+use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 
 class EntryRepository extends EntityRepository
@@ -112,7 +113,7 @@ class EntryRepository extends EntityRepository
      * @param int    $since
      * @param string $tags
      *
-     * @return array
+     * @return Pagerfanta
      */
     public function findEntries($userId, $isArchived = null, $isStarred = null, $sort = 'created', $order = 'ASC', $since = 0, $tags = '')
     {
@@ -233,6 +234,7 @@ class EntryRepository extends EntityRepository
             ->getResult();
 
         foreach ($entries as $entry) {
+            /** @var Entry $entry */
             $entry->removeTag($tag);
         }
 

@@ -13,6 +13,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Wallabag\UserBundle\Entity\User;
 
 class EntryFilterType extends AbstractType
 {
@@ -27,7 +28,9 @@ class EntryFilterType extends AbstractType
      */
     public function __construct(EntityRepository $entryRepository, TokenStorage $token)
     {
+        /** @var EntityRepository repository */
         $this->repository = $entryRepository;
+        /** @var User user */
         $this->user = $token->getToken()->getUser();
     }
 
@@ -44,7 +47,7 @@ class EntryFilterType extends AbstractType
 
                     if (null === $lower && null === $upper) {
                         // no value? no filter
-                        return;
+                        return null;
                     } elseif (null === $lower && null !== $upper) {
                         // only lower value is defined: query all entries with reading LOWER THAN this value
                         $expression = $filterQuery->getExpr()->lte($field, $max);
@@ -82,7 +85,7 @@ class EntryFilterType extends AbstractType
                 'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
                     $value = $values['value'];
                     if (strlen($value) <= 2 || empty($value)) {
-                        return;
+                        return null;
                     }
                     $expression = $filterQuery->getExpr()->like($field, $filterQuery->getExpr()->literal('%'.$value.'%'));
 
@@ -100,7 +103,7 @@ class EntryFilterType extends AbstractType
                 'label' => 'entry.filters.unread_label',
                 'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
                     if (false === $values['value']) {
-                        return;
+                        return null;
                     }
 
                     $expression = $filterQuery->getExpr()->eq('e.isArchived', 'false');
@@ -111,7 +114,7 @@ class EntryFilterType extends AbstractType
             ->add('previewPicture', CheckboxFilterType::class, [
                 'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
                     if (false === $values['value']) {
-                        return;
+                        return null;
                     }
 
                     $expression = $filterQuery->getExpr()->isNotNull($field);
