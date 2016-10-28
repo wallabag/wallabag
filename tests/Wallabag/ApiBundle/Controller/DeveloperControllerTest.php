@@ -82,11 +82,24 @@ class DeveloperControllerTest extends WallabagCoreTestCase
 
     public function testRemoveClient()
     {
-        $this->logInAs('admin');
         $client = $this->getClient();
         $em = $client->getContainer()->get('doctrine.orm.entity_manager');
-        $nbClients = $em->getRepository('WallabagApiBundle:Client')->findAll();
 
+        // Try to remove an admin's client with a wrong user
+        $this->logInAs('bob');
+        $client->request('GET', '/developer');
+        $this->assertContains('no_client', $client->getResponse()->getContent());
+
+        // get an ID of a admin's client
+        $this->logInAs('admin');
+        $nbClients = $em->getRepository('WallabagApiBundle:Client')->findByUser($this->getLoggedInUserId());
+
+        $this->logInAs('bob');
+        $client->request('GET', '/developer/client/delete/'.$nbClients[0]->getId());
+        $this->assertEquals(403, $client->getResponse()->getStatusCode());
+
+        // Try to remove the admin's client with the good user
+        $this->logInAs('admin');
         $crawler = $client->request('GET', '/developer');
 
         $link = $crawler
@@ -98,7 +111,7 @@ class DeveloperControllerTest extends WallabagCoreTestCase
         $client->click($link);
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
 
-        $newNbClients = $em->getRepository('WallabagApiBundle:Client')->findAll();
+        $newNbClients = $em->getRepository('WallabagApiBundle:Client')->findByUser($this->getLoggedInUserId());
         $this->assertGreaterThan(count($newNbClients), count($nbClients));
     }
 }
