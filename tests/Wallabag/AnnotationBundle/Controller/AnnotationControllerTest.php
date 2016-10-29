@@ -11,7 +11,7 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
     /**
      * This data provider allow to tests annotation from the :
      *     - API POV (when user use the api to manage annotations)
-     *     - and User POV (when user use the web interface - using javascript - to manage annotations)
+     *     - and User POV (when user use the web interface - using javascript - to manage annotations).
      */
     public function dataForEachAnnotations()
     {

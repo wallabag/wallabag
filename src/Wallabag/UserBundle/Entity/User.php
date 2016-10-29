@@ -11,6 +11,7 @@ use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Wallabag\ApiBundle\Entity\Client;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\Entry;
 
@@ -83,6 +84,11 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
      * @ORM\Column(type="json_array", nullable=true)
      */
     private $trusted;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Wallabag\ApiBundle\Entity\Client", mappedBy="user", cascade={"remove"})
+     */
+    protected $clients;
 
     public function __construct()
     {
@@ -239,5 +245,25 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
         }
 
         return false;
+    }
+
+    /**
+     * @param Client $client
+     *
+     * @return User
+     */
+    public function addClient(Client $client)
+    {
+        $this->clients[] = $client;
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection<Entry>
+     */
+    public function getClients()
+    {
+        return $this->clients;
     }
 }
