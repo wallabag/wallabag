@@ -29,8 +29,9 @@ PLATFORMS
 
 DEPENDENCIES
   capistrano (~> 3.4)
-  capistrano-composer (~> 0.0.3)
+  capistrano-composer
+  capistrano-file-permissions
   capistrano-symfony (~> 1.0.0.rc1)
 
 BUNDLED WITH
-   1.11.2
+   1.13.5
