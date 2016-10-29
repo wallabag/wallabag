@@ -1,17 +1,10 @@
 # config valid only for current version of Capistrano
-lock '3.4.0'
-
-set :log_path, "var/logs"
-set :cache_path, "var/cache"
-set :symfony_console_path, 'bin/console'
 
 set :application, 'wallabag'
 set :repo_url, 'git@github.com:wallabag/wallabag.git'
 
 set :ssh_user, 'framasoft_bag'
 server '78.46.248.87', user: fetch(:ssh_user), roles: %w{web app db}
-
-set :scm, :git
 
 set :format, :pretty
 set :log_level, :info
@@ -23,4 +16,4 @@ set :linked_files, %w{app/config/parameters.yml}
 set :linked_dirs, [fetch(:log_path), "var/sessions", "web/uploads", "data"]
 set :keep_releases, 3
 
-after 'deploy:finishing', 'deploy:cleanup'
+after 'deploy:updated', 'symfony:cache:clear'
