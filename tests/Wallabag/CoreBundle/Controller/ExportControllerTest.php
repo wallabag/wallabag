@@ -117,6 +117,17 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertEquals('application/pdf', $headers->get('content-type'));
         $this->assertEquals('attachment; filename="All articles.pdf"', $headers->get('content-disposition'));
         $this->assertEquals('binary', $headers->get('content-transfer-encoding'));
+
+        ob_start();
+        $crawler = $client->request('GET', '/export/tag_entries.pdf?tag=foo');
+        ob_end_clean();
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $headers = $client->getResponse()->headers;
+        $this->assertEquals('application/pdf', $headers->get('content-type'));
+        $this->assertEquals('attachment; filename="Tag_entries articles.pdf"', $headers->get('content-disposition'));
+        $this->assertEquals('binary', $headers->get('content-transfer-encoding'));
     }
 
     public function testTxtExport()
