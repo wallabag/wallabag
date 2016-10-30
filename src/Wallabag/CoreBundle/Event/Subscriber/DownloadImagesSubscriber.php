@@ -52,6 +52,10 @@ class DownloadImagesSubscriber implements EventSubscriber
         $config = new $this->configClass();
         $config->setEntityManager($args->getEntityManager());
 
+        if (!$config->get('download_images_enabled')) {
+            return;
+        }
+
         // field content has been updated
         if ($args->hasChangedField('content')) {
             $html = $this->downloadImages($config, $entity);
@@ -86,6 +90,10 @@ class DownloadImagesSubscriber implements EventSubscriber
 
         $config = new $this->configClass();
         $config->setEntityManager($args->getEntityManager());
+
+        if (!$config->get('download_images_enabled')) {
+            return;
+        }
 
         // update all images inside the html
         $html = $this->downloadImages($config, $entity);

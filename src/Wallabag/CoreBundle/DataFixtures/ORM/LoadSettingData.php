@@ -140,6 +140,21 @@ class LoadSettingData extends AbstractFixture implements OrderedFixtureInterface
                 'value' => 'wallabag',
                 'section' => 'misc',
             ],
+            [
+                'name' => 'download_images_enabled',
+                'value' => '0',
+                'section' => 'image',
+            ],
+            [
+                'name' => 'download_images_with_rabbitmq',
+                'value' => '0',
+                'section' => 'image',
+            ],
+            [
+                'name' => 'download_images_with_redis',
+                'value' => '0',
+                'section' => 'image',
+            ],
         ];
 
         foreach ($settings as $setting) {
