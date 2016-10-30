@@ -5,7 +5,7 @@
 COMPOSER_COMMAND='composer'
 
 DIR="${BASH_SOURCE}"
-if [[ ! -d "$DIR" ]]; then DIR="$PWD/scripts"; fi
+if [ ! -d "$DIR" ]; then DIR="$PWD/scripts"; fi
 . "$DIR/require.sh"
 
 ENV=$1
