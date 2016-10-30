@@ -110,6 +110,8 @@ class DownloadImagesSubscriber implements EventSubscriber
      */
     public function downloadImages(Config $config, Entry $entry)
     {
+        $this->downloadImages->setWallabagUrl($config->get('wallabag_url'));
+
         // if ($config->get('download_images_with_rabbitmq')) {
 
         // } else if ($config->get('download_images_with_redis')) {
@@ -132,6 +134,8 @@ class DownloadImagesSubscriber implements EventSubscriber
      */
     public function downloadPreviewImage(Config $config, Entry $entry)
     {
+        $this->downloadImages->setWallabagUrl($config->get('wallabag_url'));
+
         // if ($config->get('download_images_with_rabbitmq')) {
 
         // } else if ($config->get('download_images_with_redis')) {

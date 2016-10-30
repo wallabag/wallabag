@@ -27,9 +27,11 @@ class DownloadImagesTest extends \PHPUnit_Framework_TestCase
         $logger = new Logger('test', array($logHandler));
 
         $download = new DownloadImages($client, sys_get_temp_dir().'/wallabag_test', $logger);
+        $download->setWallabagUrl('http://wallabag.io/');
+
         $res = $download->processHtml('<div><img src="http://i.imgur.com/T9qgcHc.jpg" /></div>', 'http://imgur.com/gallery/WxtWY');
 
-        $this->assertContains('/assets/images/4/2/4258f71e/c638b4c2.png', $res);
+        $this->assertContains('http://wallabag.io/assets/images/4/2/4258f71e/c638b4c2.png', $res);
     }
 
     public function testProcessHtmlWithBadImage()

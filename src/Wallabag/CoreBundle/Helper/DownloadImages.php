@@ -15,6 +15,7 @@ class DownloadImages
     private $baseFolder;
     private $logger;
     private $mimeGuesser;
+    private $wallabagUrl;
 
     public function __construct(Client $client, $baseFolder, LoggerInterface $logger)
     {
@@ -24,6 +25,17 @@ class DownloadImages
         $this->mimeGuesser = new MimeTypeExtensionGuesser();
 
         $this->setFolder();
+    }
+
+    /**
+     * Since we can't inject CraueConfig service because it'll generate a circular reference when injected in the subscriber
+     * we use a different way to inject the current wallabag url.
+     *
+     * @param string $url Usually from `$config->get('wallabag_url')`
+     */
+    public function setWallabagUrl($url)
+    {
+        $this->wallabagUrl = rtrim($url, '/');
     }
 
     /**
@@ -143,7 +155,7 @@ class DownloadImages
 
         imagedestroy($im);
 
-        return '/assets/images/'.$relativePath.'/'.$hashImage.'.'.$ext;
+        return $this->wallabagUrl.'/assets/images/'.$relativePath.'/'.$hashImage.'.'.$ext;
     }
 
     /**
