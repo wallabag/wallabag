@@ -267,4 +267,4 @@ Some applications or libraries use our API. Here is a non-exhaustive list of the
 - `.NET library for the wallabag v2 API <https://github.com/jlnostr/wallabag-api>`_ by Julian Oster.
 - `Python API for wallabag <https://github.com/foxmask/wallabag_api>`_ by FoxMaSk, for his project `Trigger Happy <https://blog.trigger-happy.eu/>`_.
 - `A plugin <https://github.com/joshp23/ttrss-to-wallabag-v2>`_ designed for `Tiny Tiny RSS <https://tt-rss.org/gitlab/fox/tt-rss/wikis/home>`_ that makes use of the wallabag v2 API. By Josh Panter.
-- `Golang wrapper for the wallabag API <https://github.com/Strubbl/wallabago>`_ by Strubbl, for his project `wallabag-stats graph<https://github.com/Strubbl/wallabag-stats>`_.
+- `Golang wrapper for the wallabag API <https://github.com/Strubbl/wallabago>`_ by Strubbl, for his project `wallabag-stats graph <https://github.com/Strubbl/wallabag-stats>`_.
