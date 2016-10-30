@@ -2,193 +2,197 @@
 
 namespace Wallabag\CoreBundle\Helper;
 
-use Psr\Log\LoggerInterface as Logger;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\DomCrawler\Crawler;
-
-define('REGENERATE_PICTURES_QUALITY', 75);
-define('HTTP_PORT', 80);
-define('SSL_PORT', 443);
-define('BASE_URL', '');
+use GuzzleHttp\Client;
+use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeExtensionGuesser;
 
 class DownloadImages
 {
-    private $folder;
-    private $url;
-    private $html;
-    private $fileName;
-    private $logger;
+    const REGENERATE_PICTURES_QUALITY = 80;
 
-    public function __construct($html, $url, Logger $logger)
+    private $client;
+    private $baseFolder;
+    private $logger;
+    private $mimeGuesser;
+
+    public function __construct(Client $client, $baseFolder, LoggerInterface $logger)
     {
-        $this->html = $html;
-        $this->url = $url;
-        $this->setFolder();
+        $this->client = $client;
+        $this->baseFolder = $baseFolder;
         $this->logger = $logger;
+        $this->mimeGuesser = new MimeTypeExtensionGuesser();
+
+        $this->setFolder();
     }
 
-    public function setFolder($folder = 'assets/images')
+    /**
+     * Setup base folder where all images are going to be saved.
+     */
+    private function setFolder()
     {
         // if folder doesn't exist, attempt to create one and store the folder name in property $folder
-        if (!file_exists($folder)) {
-            mkdir($folder);
+        if (!file_exists($this->baseFolder)) {
+            mkdir($this->baseFolder, 0777, true);
         }
-        $this->folder = $folder;
     }
 
-    public function process()
+    /**
+     * Process the html and extract image from it, save them to local and return the updated html.
+     *
+     * @param string $html
+     * @param string $url  Used as a base path for relative image and folder
+     *
+     * @return string
+     */
+    public function processHtml($html, $url)
     {
-        //instantiate the symfony DomCrawler Component
-        $crawler = new Crawler($this->html);
-        // create an array of all scrapped image links
-        $this->logger->log('debug', 'Finding images inside document');
+        $crawler = new Crawler($html);
         $result = $crawler
             ->filterXpath('//img')
             ->extract(array('src'));
 
+        $relativePath = $this->getRelativePath($url);
+
         // download and save the image to the folder
         foreach ($result as $image) {
-            $file = file_get_contents($image);
+            $imagePath = $this->processSingleImage($image, $url, $relativePath);
 
-            // Checks
-            $absolute_path = self::getAbsoluteLink($image, $this->url);
-            $filename = basename(parse_url($absolute_path, PHP_URL_PATH));
-            $fullpath = $this->folder.'/'.$filename;
-            self::checks($file, $fullpath, $absolute_path);
-            $this->html = str_replace($image, self::getPocheUrl().'/'.$fullpath, $this->html);
+            if (false === $imagePath) {
+                continue;
+            }
+
+            $html = str_replace($image, $imagePath, $html);
         }
 
-        return $this->html;
+        return $html;
     }
 
-    private function checks($rawdata, $fullpath, $absolute_path)
+    /**
+     * Process a single image:
+     *     - retrieve it
+     *     - re-saved it (for security reason)
+     *     - return the new local path.
+     *
+     * @param string $imagePath    Path to the image to retrieve
+     * @param string $url          Url from where the image were found
+     * @param string $relativePath Relative local path to saved the image
+     *
+     * @return string Relative url to access the image from the web
+     */
+    public function processSingleImage($imagePath, $url, $relativePath = null)
     {
-        $fullpath = urldecode($fullpath);
-
-        if (file_exists($fullpath)) {
-            unlink($fullpath);
+        if (null == $relativePath) {
+            $relativePath = $this->getRelativePath($url);
         }
 
-        // check extension
-        $this->logger->log('debug', 'Checking extension');
+        $folderPath = $this->baseFolder.'/'.$relativePath;
 
-        $file_ext = strrchr($fullpath, '.');
-        $whitelist = array('.jpg', '.jpeg', '.gif', '.png');
-        if (!(in_array($file_ext, $whitelist))) {
-            $this->logger->log('debug', 'processed image with not allowed extension. Skipping '.$fullpath);
+        // build image path
+        $absolutePath = $this->getAbsoluteLink($url, $imagePath);
+        if (false === $absolutePath) {
+            $this->logger->log('debug', 'Can not determine the absolute path for that image, skipping.');
 
             return false;
         }
 
-        // check headers
-        $this->logger->log('debug', 'Checking headers');
-        $imageinfo = getimagesize($absolute_path);
-        if ($imageinfo['mime'] != 'image/gif' && $imageinfo['mime'] != 'image/jpeg' && $imageinfo['mime'] != 'image/jpg' && $imageinfo['mime'] != 'image/png') {
-            $this->logger->log('debug', 'processed image with bad header. Skipping '.$fullpath);
+        $res = $this->client->get(
+            $absolutePath,
+            ['exceptions' => false]
+        );
+
+        $ext = $this->mimeGuesser->guess($res->getHeader('content-type'));
+        $this->logger->log('debug', 'Checking extension', ['ext' => $ext, 'header' => $res->getHeader('content-type')]);
+        if (!in_array($ext, ['jpeg', 'jpg', 'gif', 'png'])) {
+            $this->logger->log('debug', 'Processed image with not allowed extension. Skipping '.$imagePath);
 
             return false;
         }
+        $hashImage = hash('crc32', $absolutePath);
+        $localPath = $folderPath.'/'.$hashImage.'.'.$ext;
 
-        // regenerate image
-        $this->logger->log('debug', 'regenerating image');
-        $im = imagecreatefromstring($rawdata);
+        try {
+            $im = imagecreatefromstring($res->getBody());
+        } catch (\Exception $e) {
+            $im = false;
+        }
+
         if ($im === false) {
-            $this->logger->log('error', 'error while regenerating image '.$fullpath);
+            $this->logger->log('error', 'Error while regenerating image', ['path' => $localPath]);
 
             return false;
         }
 
-        switch ($imageinfo['mime']) {
-            case 'image/gif':
-                $result = imagegif($im, $fullpath);
+        switch ($ext) {
+            case 'gif':
+                $result = imagegif($im, $localPath);
                 $this->logger->log('debug', 'Re-creating gif');
                 break;
-            case 'image/jpeg':
-            case 'image/jpg':
-                $result = imagejpeg($im, $fullpath, REGENERATE_PICTURES_QUALITY);
+            case 'jpeg':
+            case 'jpg':
+                $result = imagejpeg($im, $localPath, self::REGENERATE_PICTURES_QUALITY);
                 $this->logger->log('debug', 'Re-creating jpg');
                 break;
-            case 'image/png':
+            case 'png':
+                $result = imagepng($im, $localPath, ceil(self::REGENERATE_PICTURES_QUALITY / 100 * 9));
                 $this->logger->log('debug', 'Re-creating png');
-                $result = imagepng($im, $fullpath, ceil(REGENERATE_PICTURES_QUALITY / 100 * 9));
-                break;
         }
+
         imagedestroy($im);
 
-        return $result;
+        return '/assets/images/'.$relativePath.'/'.$hashImage.'.'.$ext;
     }
 
-    private static function getAbsoluteLink($relativeLink, $url)
+    /**
+     * Generate the folder where we are going to save images based on the entry url.
+     *
+     * @param string $url
+     *
+     * @return string
+     */
+    private function getRelativePath($url)
     {
-        /* return if already absolute URL */
-        if (parse_url($relativeLink, PHP_URL_SCHEME) != '') {
-            return $relativeLink;
+        $hashUrl = hash('crc32', $url);
+        $relativePath = $hashUrl[0].'/'.$hashUrl[1].'/'.$hashUrl;
+        $folderPath = $this->baseFolder.'/'.$relativePath;
+
+        if (!file_exists($folderPath)) {
+            mkdir($folderPath, 0777, true);
         }
 
-        /* queries and anchors */
-        if ($relativeLink[0] == '#' || $relativeLink[0] == '?') {
-            return $url.$relativeLink;
-        }
+        $this->logger->log('debug', 'Folder used for that url', ['folder' => $folderPath, 'url' => $url]);
 
-        /* parse base URL and convert to local variables:
-           $scheme, $host, $path */
-        extract(parse_url($url));
-
-        /* remove non-directory element from path */
-        $path = preg_replace('#/[^/]*$#', '', $path);
-
-        /* destroy path if relative url points to root */
-        if ($relativeLink[0] == '/') {
-            $path = '';
-        }
-
-        /* dirty absolute URL */
-        $abs = $host.$path.'/'.$relativeLink;
-
-        /* replace '//' or '/./' or '/foo/../' with '/' */
-        $re = array('#(/\.?/)#', '#/(?!\.\.)[^/]+/\.\./#');
-        for ($n = 1; $n > 0; $abs = preg_replace($re, '/', $abs, -1, $n)) {
-        }
-
-        /* absolute URL is ready! */
-        return $scheme.'://'.$abs;
+        return $relativePath;
     }
 
-    public static function getPocheUrl()
+    /**
+     * Make an $url absolute based on the $base.
+     *
+     * @see Graby->makeAbsoluteStr
+     *
+     * @param string $base Base url
+     * @param string $url  Url to make it absolute
+     *
+     * @return false|string
+     */
+    private function getAbsoluteLink($base, $url)
     {
-        $baseUrl = '';
-        $https = (!empty($_SERVER['HTTPS'])
-                    && (strtolower($_SERVER['HTTPS']) == 'on'))
-            || (isset($_SERVER['SERVER_PORT'])
-                    && $_SERVER['SERVER_PORT'] == '443') // HTTPS detection.
-            || (isset($_SERVER['SERVER_PORT']) //Custom HTTPS port detection
-                    && $_SERVER['SERVER_PORT'] == SSL_PORT)
-             || (isset($_SERVER['HTTP_X_FORWARDED_PROTO'])
-                    && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https');
-        $serverport = (!isset($_SERVER['SERVER_PORT'])
-            || $_SERVER['SERVER_PORT'] == '80'
-            || $_SERVER['SERVER_PORT'] == HTTP_PORT
-            || ($https && $_SERVER['SERVER_PORT'] == '443')
-            || ($https && $_SERVER['SERVER_PORT'] == SSL_PORT) //Custom HTTPS port detection
-            ? '' : ':'.$_SERVER['SERVER_PORT']);
-
-        if (isset($_SERVER['HTTP_X_FORWARDED_PORT'])) {
-            $serverport = ':'.$_SERVER['HTTP_X_FORWARDED_PORT'];
-        }
-        // $scriptname = str_replace('/index.php', '/', $_SERVER["SCRIPT_NAME"]);
-        // if (!isset($_SERVER["HTTP_HOST"])) {
-        //     return $scriptname;
-        // }
-        $host = (isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] : (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME']));
-        if (strpos($host, ':') !== false) {
-            $serverport = '';
-        }
-        // check if BASE_URL is configured
-        if (BASE_URL) {
-            $baseUrl = BASE_URL;
-        } else {
-            $baseUrl = 'http'.($https ? 's' : '').'://'.$host.$serverport;
+        if (preg_match('!^https?://!i', $url)) {
+            // already absolute
+            return $url;
         }
 
-        return $baseUrl;
+        $base = new \SimplePie_IRI($base);
+
+        // remove '//' in URL path (causes URLs not to resolve properly)
+        if (isset($base->ipath)) {
+            $base->ipath = preg_replace('!//+!', '/', $base->ipath);
+        }
+
+        if ($absolute = \SimplePie_IRI::absolutize($base, $url)) {
+            return $absolute->get_uri();
+        }
+
+        return false;
     }
 }

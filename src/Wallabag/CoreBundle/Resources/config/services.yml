@@ -136,3 +136,22 @@ services:
             - "@doctrine"
         tags:
             - { name: doctrine.event_subscriber }
+
+    wallabag_core.subscriber.download_images:
+        class: Wallabag\CoreBundle\Event\Subscriber\DownloadImagesSubscriber
+        arguments:
+            - "@wallabag_core.entry.download_images"
+            - "%craue_config.config.class%"
+            - "@logger"
+        tags:
+            - { name: doctrine.event_subscriber }
+
+    wallabag_core.entry.download_images:
+        class: Wallabag\CoreBundle\Helper\DownloadImages
+        arguments:
+            - "@wallabag_core.entry.download_images.client"
+            - "%kernel.root_dir%/../web/assets/images"
+            - "@logger"
+
+    wallabag_core.entry.download_images.client:
+        class: GuzzleHttp\Client
