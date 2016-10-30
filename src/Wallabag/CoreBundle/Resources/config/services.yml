@@ -30,7 +30,7 @@ services:
             - "@doctrine"
 
     wallabag_core.subscriber.table_prefix:
-        class: Wallabag\CoreBundle\Subscriber\TablePrefixSubscriber
+        class: Wallabag\CoreBundle\Event\Subscriber\TablePrefixSubscriber
         arguments:
             - "%database_table_prefix%"
         tags:
@@ -131,7 +131,7 @@ services:
             - '%kernel.debug%'
 
     wallabag_core.subscriber.sqlite_cascade_delete:
-        class:  Wallabag\CoreBundle\Subscriber\SQLiteCascadeDeleteSubscriber
+        class: Wallabag\CoreBundle\Event\Subscriber\SQLiteCascadeDeleteSubscriber
         arguments:
             - "@doctrine"
         tags:

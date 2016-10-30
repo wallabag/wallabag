@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Subscriber;
+namespace Wallabag\CoreBundle\Event\Subscriber;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
