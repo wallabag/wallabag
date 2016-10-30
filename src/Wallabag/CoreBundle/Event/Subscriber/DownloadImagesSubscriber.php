@@ -49,22 +49,23 @@ class DownloadImagesSubscriber implements EventSubscriber
             return;
         }
 
-        $em = $args->getEntityManager();
+        $config = new $this->configClass();
+        $config->setEntityManager($args->getEntityManager());
 
         // field content has been updated
         if ($args->hasChangedField('content')) {
-            $html = $this->downloadImages($em, $entity);
+            $html = $this->downloadImages($config, $entity);
 
-            if (null !== $html) {
+            if (false !== $html) {
                 $args->setNewValue('content', $html);
             }
         }
 
         // field preview picture has been updated
         if ($args->hasChangedField('previewPicture')) {
-            $previewPicture = $this->downloadPreviewImage($em, $entity);
+            $previewPicture = $this->downloadPreviewImage($config, $entity);
 
-            if (null !== $previewPicture) {
+            if (false !== $previewPicture) {
                 $entity->setPreviewPicture($previewPicture);
             }
         }
@@ -88,17 +89,25 @@ class DownloadImagesSubscriber implements EventSubscriber
 
         // update all images inside the html
         $html = $this->downloadImages($config, $entity);
-        if (null !== $html) {
+        if (false !== $html) {
             $entity->setContent($html);
         }
 
         // update preview picture
         $previewPicture = $this->downloadPreviewImage($config, $entity);
-        if (null !== $previewPicture) {
+        if (false !== $previewPicture) {
             $entity->setPreviewPicture($previewPicture);
         }
     }
 
+    /**
+     * Download all images from the html.
+     *
+     * @param Config $config
+     * @param Entry  $entry
+     *
+     * @return string|false False in case of async
+     */
     public function downloadImages(Config $config, Entry $entry)
     {
         // if ($config->get('download_images_with_rabbitmq')) {
@@ -113,6 +122,14 @@ class DownloadImagesSubscriber implements EventSubscriber
         );
     }
 
+    /**
+     * Download the preview picture.
+     *
+     * @param Config $config
+     * @param Entry  $entry
+     *
+     * @return string|false False in case of async
+     */
     public function downloadPreviewImage(Config $config, Entry $entry)
     {
         // if ($config->get('download_images_with_rabbitmq')) {

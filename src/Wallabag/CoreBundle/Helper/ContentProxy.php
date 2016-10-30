@@ -65,6 +65,7 @@ class ContentProxy
 
         $entry->setUrl($content['url'] ?: $url);
         $entry->setTitle($title);
+        $entry->setContent($html);
 
         $entry->setLanguage($content['language']);
         $entry->setMimetype($content['content_type']);
@@ -74,8 +75,6 @@ class ContentProxy
         if (false !== $domainName) {
             $entry->setDomainName($domainName);
         }
-
-        $entry->setContent($html);
 
         if (isset($content['open_graph']['og_image'])) {
             $entry->setPreviewPicture($content['open_graph']['og_image']);

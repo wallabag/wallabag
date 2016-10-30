@@ -83,6 +83,25 @@ class DownloadImagesTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('/assets/images/4/2/4258f71e/ebe60399.'.$extension, $res);
     }
 
+    public function testProcessSingleImageWithBadUrl()
+    {
+        $client = new Client();
+
+        $mock = new Mock([
+            new Response(404, []),
+        ]);
+
+        $client->getEmitter()->attach($mock);
+
+        $logHandler = new TestHandler();
+        $logger = new Logger('test', array($logHandler));
+
+        $download = new DownloadImages($client, sys_get_temp_dir().'/wallabag_test', $logger);
+        $res = $download->processSingleImage('T9qgcHc.jpg', 'http://imgur.com/gallery/WxtWY');
+
+        $this->assertFalse($res, 'Image can not be found, so it will not be replaced');
+    }
+
     public function testProcessSingleImageWithBadImage()
     {
         $client = new Client();

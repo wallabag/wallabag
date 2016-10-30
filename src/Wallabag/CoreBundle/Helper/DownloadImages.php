@@ -91,20 +91,23 @@ class DownloadImages
         // build image path
         $absolutePath = $this->getAbsoluteLink($url, $imagePath);
         if (false === $absolutePath) {
-            $this->logger->log('debug', 'Can not determine the absolute path for that image, skipping.');
+            $this->logger->log('error', 'Can not determine the absolute path for that image, skipping.');
 
             return false;
         }
 
-        $res = $this->client->get(
-            $absolutePath,
-            ['exceptions' => false]
-        );
+        try {
+            $res = $this->client->get($absolutePath);
+        } catch (\Exception $e) {
+            $this->logger->log('error', 'Can not retrieve image, skipping.', ['exception' => $e]);
+
+            return false;
+        }
 
         $ext = $this->mimeGuesser->guess($res->getHeader('content-type'));
         $this->logger->log('debug', 'Checking extension', ['ext' => $ext, 'header' => $res->getHeader('content-type')]);
-        if (!in_array($ext, ['jpeg', 'jpg', 'gif', 'png'])) {
-            $this->logger->log('debug', 'Processed image with not allowed extension. Skipping '.$imagePath);
+        if (!in_array($ext, ['jpeg', 'jpg', 'gif', 'png'], true)) {
+            $this->logger->log('error', 'Processed image with not allowed extension. Skipping '.$imagePath);
 
             return false;
         }
@@ -117,7 +120,7 @@ class DownloadImages
             $im = false;
         }
 
-        if ($im === false) {
+        if (false === $im) {
             $this->logger->log('error', 'Error while regenerating image', ['path' => $localPath]);
 
             return false;
@@ -192,6 +195,8 @@ class DownloadImages
         if ($absolute = \SimplePie_IRI::absolutize($base, $url)) {
             return $absolute->get_uri();
         }
+
+        $this->logger->log('error', 'Can not make an absolute link', ['base' => $base, 'url' => $url]);
 
         return false;
     }
