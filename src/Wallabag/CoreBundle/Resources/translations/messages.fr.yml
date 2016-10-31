@@ -104,7 +104,7 @@ config:
             tagging_rules_definition_title: "Que signifient les règles de tag automatiques ?"
             tagging_rules_definition_description: "Ce sont des règles utilisées par wallabag pour classer automatiquement vos nouveaux articles.<br />À chaque fois qu’un nouvel article est ajouté, toutes les règles de tag automatiques seront utilisées afin d’ajouter les tags que vous avez configurés, vous épargnant ainsi l’effort de classifier vos articles manuellement."
             how_to_use_them_title: "Comment les utiliser ?"
-            how_to_use_them_description: "Imaginons que voulez attribuer aux nouveaux articles le tag « <i>lecture courte</i> » lorsque le temps de lecture est inférieur à 3 minutes.<br />Dans ce cas, vous devriez mettre « readingTime &lt;= 3 » dans le champ <i>Règle</i> et « <i>lecture courte</i> » dans le champ <i>Tag</i>.<br />Plusieurs tags peuvent être ajoutés simultanément en les séparant par des virgules : « <i>lecture courte, à lire</i> »<br />Des règles complexes peuvent être créées en utilisant des opérateurs prédéfinis: si « <i>readingTime &gt;= 5 AND domainName = \"github.com\"</i> » alors attribuer les tags « <i>lecture longue, github </i> »"
+            how_to_use_them_description: "Imaginons que voulez attribuer aux nouveaux articles le tag « <i>lecture courte</i> » lorsque le temps de lecture est inférieur à 3 minutes.<br />Dans ce cas, vous devriez mettre « readingTime &lt;= 3 » dans le champ <i>Règle</i> et « <i>lecture courte</i> » dans le champ <i>Tag</i>.<br />Plusieurs tags peuvent être ajoutés simultanément en les séparant par des virgules : « <i>lecture courte, à lire</i> »<br />Des règles complexes peuvent être créées en utilisant des opérateurs prédéfinis: si « <i>readingTime &gt;= 5 AND domainName = \"github.com\"</i> » alors attribuer les tags « <i>lecture longue, github</i> »"
             variables_available_title: "Quelles variables et opérateurs puis-je utiliser pour écrire des règles ?"
             variables_available_description: "Les variables et opérateurs suivants peuvent être utilisés pour écrire des règles de tag automatiques :"
             meaning: "Signification"
@@ -129,7 +129,7 @@ config:
                 not_equal_to: "Différent de…"
                 or: "Une règle OU l’autre"
                 and: "Une règle ET l’autre"
-                matches: "Teste si un <i>sujet</i> correspond à une <i>recherche</i> (non sensible à la casse).<br />Exemple : <code>title matches "football"</code>"
+                matches: "Teste si un <i>sujet</i> correspond à une <i>recherche</i> (non sensible à la casse).<br />Exemple : <code>title matches \"football\"</code>"
 
 entry:
     page_titles:
@@ -143,10 +143,10 @@ entry:
         number_on_the_page: "{0} Il n’y a pas d’articles.|{1} Il y a un article.|]1,Inf[ Il y a %count% articles."
         reading_time: "durée de lecture"
         reading_time_minutes: "durée de lecture: %readingTime% min"
-        reading_time_less_one_minute: "durée de lecture: <small class="inferieur">&lt;</small> 1 min"
+        reading_time_less_one_minute: "durée de lecture: <small class=\"inferieur\">&lt;</small> 1 min"
         number_of_tags: "{1}et un autre tag|]1,Inf[et %count% autres tags"
         reading_time_minutes_short: "%readingTime% min"
-        reading_time_less_one_minute_short: "<small class="inferieur">&lt;</small> 1 min"
+        reading_time_less_one_minute_short: "<small class=\"inferieur\">&lt;</small> 1 min"
         original_article: "original"
         toogle_as_read: "Marquer comme lu/non lu"
         toogle_as_star: "Marquer comme favori"
@@ -187,7 +187,7 @@ entry:
             share_content: "Partager"
             share_email_label: "Courriel"
             public_link: "Lien public"
-            delete_public_link: "Supprimer lien public"
+            delete_public_link: "Supprimer le lien public"
             download: "Télécharger"
             print: "Imprimer"
             problem:
@@ -214,24 +214,24 @@ entry:
 about:
     page_title: "À propos"
     top_menu:
-        who_behind_wallabag: "L’équipe derrière wallabag"
+        who_behind_wallabag: "L’équipe derrière Wallabag"
         getting_help: "Besoin d’aide"
-        helping: "Aider wallabag"
+        helping: "Aider Wallabag"
         contributors: "Contributeurs"
         third_party: "Librairies tierces"
     who_behind_wallabag:
         developped_by: "Développé par"
         website: "Site web"
-        many_contributors: "Et plein de contributeurs ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">sur Github</a>"
+        many_contributors: "Et plein de contributeurs ♥ <a href=\"https://github.com/wallabag/wallabag/graphs/contributors\">sur Github</a>"
         project_website: "Site web du projet"
         license: "Licence"
         version: "Version"
     getting_help:
         documentation: "Documentation"
         bug_reports: "Rapport de bogue"
-        support: "<a href="https://support.wallabag.org">Sur notre site de support</a> ou <a href="https://github.com/wallabag/wallabag/issues">sur GitHub</a>"
+        support: "<a href=\"https://support.wallabag.org\">Sur notre site de support</a> ou <a href=\"https://github.com/wallabag/wallabag/issues\">sur GitHub</a>"
     helping:
-        description: "wallabag est gratuit et opensource. Vous pouvez nous aider :"
+        description: "Wallabag est gratuit et opensource. Vous pouvez nous aider :"
         by_contributing: "en contribuant au projet :"
         by_contributing_2: "un ticket recense tous nos besoins"
         by_paypal: "via Paypal"
@@ -325,7 +325,7 @@ tag:
 
 import:
     page_title: "Importer"
-    page_description: "Bienvenue dans l’outil de migration de wallabag. Choisissez ci-dessous le service depuis lequel vous souhaitez migrer."
+    page_description: "Bienvenue dans l’outil de migration de Wallabag. Choisissez ci-dessous le service depuis lequel vous souhaitez migrer."
     action:
         import_contents: "Importer les contenus"
     form:
@@ -344,14 +344,14 @@ import:
         connect_to_pocket: "Se connecter à Pocket et importer les données"
     wallabag_v1:
         page_title: "Importer > Wallabag v1"
-        description: "Cet outil va importer toutes vos données de wallabag v1. Sur votre page de configuration de wallabag v1, cliquez sur "Export JSON" dans la section "Exporter vos données de wallabag". Vous allez récupérer un fichier "wallabag-export-1-xxxx-xx-xx.json"."
+        description: "Cet outil va importer toutes vos données de wallabag v1. Sur votre page de configuration de wallabag v1, cliquez sur « Export JSON » dans la section « Exporter vos données de wallabag ». Vous allez récupérer un fichier « wallabag-export-1-xxxx-xx-xx.json »."
         how_to: "Choisissez le fichier de votre export wallabag v1 et cliquez sur le bouton ci-dessous pour l’importer."
     wallabag_v2:
         page_title: "Importer > Wallabag v2"
-        description: "Cet outil va importer tous vos articles d’une autre instance de wallabag v2. Allez dans tous vos articles, puis, sur la barre latérale, cliquez sur \"JSON\". Vous allez récupérer un fichier \"All articles.json\""
+        description: "Cet outil va importer tous vos articles d’une autre instance de wallabag v2. Allez dans tous vos articles, puis, sur la barre latérale, cliquez sur « JSON ». Vous allez récupérer un fichier « All articles.json »"
     readability:
         page_title: "Importer > Readability"
-        description: "Cet outil va importer toutes vos données de Readability. Sur la page des outils (https://www.readability.com/tools/), cliquez sur "Export your data" dans la section "Data Export". Vous allez recevoir un courriel avec un lien pour télécharger le json."
+        description: "Cet outil va importer toutes vos données de Readability. Sur la page des outils (https://www.readability.com/tools/), cliquez sur « Export your data » dans la section « Data Export ». Vous allez recevoir un courriel avec un lien pour télécharger le json."
         how_to: "Choisissez le fichier de votre export Readability et cliquez sur le bouton ci-dessous pour l’importer."
     worker:
         enabled: "Les imports sont asynchrones. Une fois l’import commencé un worker externe traitera les messages un par un. Le service activé est :"
@@ -365,7 +365,7 @@ import:
         how_to: "Choisissez le fichier de sauvegarde de vos marques-page et cliquez sur le bouton pour l’importer. Soyez avertis que le processus peut prendre un temps assez long car tous les articles doivent être récupérés en ligne."
     instapaper:
         page_title: "Import > Instapaper"
-        description: "Sur la page des paramètres (https://www.instapaper.com/user), cliquez sur "Download .CSV file" dans la section "Export". Un fichier CSV se téléchargera ("instapaper-export.csv")."
+        description: "Sur la page des paramètres (https://www.instapaper.com/user), cliquez sur « Download .CSV file » dans la section « Export ». Un fichier CSV sera téléchargé (« instapaper-export.csv »)."
         how_to: "Choisissez le fichier de votre export Instapaper et cliquez sur le bouton ci-dessous pour l’importer."
 
 developer:
@@ -401,16 +401,16 @@ developer:
         page_title: "Développeur > Les paramètres de votre client"
         page_description: "Voilà les paramètres de votre client"
         field_name: "Nom du client"
-        field_id: "ID Client"
+        field_id: "ID client"
         field_secret: "Clé secrète"
         back: "Retour"
-        read_howto: "Lire "comment créer ma première application""
+        read_howto: "Lire « comment créer ma première application »"
     howto:
         page_title: "Développeur > Comment créer votre première application"
         description:
             paragraph_1: "Les commandes suivantes utilisent la <a href=\"https://github.com/jkbrzt/httpie\">librarie HTTPie</a>. Assurez-vous qu’elle soit installée avant de l’utiliser."
             paragraph_2: "Vous avez besoin d’un token pour échanger entre votre application et l’API de wallabag."
-            paragraph_3: "Pour créer un token, vous devez <a href="%link%">créer un nouveau client</a>."
+            paragraph_3: "Pour créer un token, vous devez <a href=\"%link%\">créer un nouveau client</a>."
             paragraph_4: "Maintenant créez votre token (remplacer client_id, client_secret, username et password avec les bonnes valeurs):"
             paragraph_5: "L’API vous retournera une réponse comme ça :"
             paragraph_6: "L’access_token doit être utilisé pour faire un appel à l’API. Par exemple :"
@@ -439,10 +439,10 @@ user:
         enabled_label: "Activé"
         locked_label: "Bloqué"
         last_login_label: "Dernière connexion"
-        twofactor_label: Double authentification
+        twofactor_label: "Double authentification"
         save: "Sauvegarder"
         delete: "Supprimer"
-        delete_confirm: "Êtes-vous sûr?"
+        delete_confirm: "Voulez-vous vraiment ?"
         back_to_list: "Revenir à la liste"
 
 error:
@@ -458,7 +458,7 @@ flashes:
             rss_updated: "La configuration des flux RSS a bien été mise à jour"
             tagging_rules_updated: "Règles mises à jour"
             tagging_rules_deleted: "Règle supprimée"
-            user_added: "Utilisateur "%username%" ajouté"
+            user_added: "Utilisateur \"%username%\" ajouté"
             rss_token_updated: "Jeton RSS mis à jour"
     entry:
         notice:
@@ -479,9 +479,9 @@ flashes:
     import:
         notice:
             failed: "L’import a échoué, veuillez ré-essayer"
-            failed_on_file: "Erreur lors du traitement de l’import. Vérifier votre fichier."
-            summary: "Rapport d’import: %imported% importés, %skipped% déjà présents."
-            summary_with_queue: "Rapport d’import: %queued% en cours de traitement."
+            failed_on_file: "Erreur lors du traitement de l’import. Vérifiez votre fichier."
+            summary: "Rapport d’import : %imported% importés, %skipped% déjà présents."
+            summary_with_queue: "Rapport d’import:  %queued% en cours de traitement."
         error:
             redis_enabled_not_installed: "Redis est activé pour les imports asynchrones mais <u>impossible de s’y connecter</u>. Vérifier la configuration de Redis."
             rabbit_enabled_not_installed: "RabbitMQ est activé pour les imports asynchrones mais <u>impossible de s’y connecter</u>. Vérifier la configuration de RabbitMQ."
