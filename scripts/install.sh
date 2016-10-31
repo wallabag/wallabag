@@ -1,11 +1,11 @@
-#! /usr/bin/env bash
+#!/usr/bin/env bash
 # You can execute this file to install wallabag
 # eg: `sh install.sh prod`
 
 COMPOSER_COMMAND='composer'
 
-DIR="${BASH_SOURCE%/*}"
-if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
+DIR="${BASH_SOURCE}"
+if [ ! -d "$DIR" ]; then DIR="$PWD/scripts"; fi
 . "$DIR/require.sh"
 
 ENV=$1
