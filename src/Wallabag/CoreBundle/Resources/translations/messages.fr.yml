@@ -394,7 +394,7 @@ developer:
         page_description: "Vous allez créer un nouveau client. Merci de remplir l’adresse de redirection vers votre application."
         form:
             name_label: "Nom du client"
-            redirect_uris_label: "Adresse de redirection (optionnel)"
+            redirect_uris_label: "Adresses de redirection (optionnel)"
             save_label: "Créer un nouveau client"
         action_back: "Retour"
     client_parameter:
