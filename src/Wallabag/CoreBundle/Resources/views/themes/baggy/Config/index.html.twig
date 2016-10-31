@@ -56,13 +56,13 @@
             </div>
 
             <div class="row">
-                    <h3>{{ 'config.form_settings.android_configuration'|trans }}</h3>
-                    <a href="wallabag://{{ app.user.username }}@{{ wallabag_url }}" >Touch here to prefill your Android application</a>
-                    <img id="androidQrcode" />
-                    <script>
-                        const imgBase64 = jrQrcode.getQrBase64('wallabag://{{ app.user.username }}@{{ wallabag_url }}');
-                        document.getElementById('androidQrcode').src=imgBase64;
-                    </script>
+                <h3>{{ 'config.form_settings.android_configuration'|trans }}</h3>
+                <a href="wallabag://{{ app.user.username }}@{{ wallabag_url }}" >Touch here to prefill your Android application</a>
+                <img id="androidQrcode" />
+                <script>
+                    const imgBase64 = jrQrcode.getQrBase64('wallabag://{{ app.user.username }}@{{ wallabag_url }}');
+                    document.getElementById('androidQrcode').src = imgBase64;
+                </script>
             </div>
         </fieldset>
 
