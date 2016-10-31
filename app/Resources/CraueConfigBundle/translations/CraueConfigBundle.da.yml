@@ -29,3 +29,4 @@ piwik_enabled: Aktiver Piwik
 demo_mode_enabled: "Aktiver demo-indstilling? (anvendes kun til wallabags offentlige demo)"
 demo_mode_username: "Demobruger"
 # share_public: Allow public url for entries
+# download_images_enabled: Download images locally

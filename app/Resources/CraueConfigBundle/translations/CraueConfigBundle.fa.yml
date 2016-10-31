@@ -29,3 +29,4 @@ modify_settings: "اعمال"
 # demo_mode_enabled: "Enable demo mode ? (only used for the wallabag public demo)"
 # demo_mode_username: "Demo user"
 # share_public: Allow public url for entries
+# download_images_enabled: Download images locally

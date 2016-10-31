@@ -111,6 +111,8 @@ class DownloadImagesSubscriber implements EventSubscriber
     /**
      * Download all images from the html.
      *
+     * @todo If we want to add async download, it should be done in that method
+     *
      * @param Config $config
      * @param Entry  $entry
      *
@@ -119,12 +121,6 @@ class DownloadImagesSubscriber implements EventSubscriber
     public function downloadImages(Config $config, Entry $entry)
     {
         $this->downloadImages->setWallabagUrl($config->get('wallabag_url'));
-
-        // if ($config->get('download_images_with_rabbitmq')) {
-
-        // } else if ($config->get('download_images_with_redis')) {
-
-        // }
 
         return $this->downloadImages->processHtml(
             $entry->getContent(),
@@ -135,6 +131,8 @@ class DownloadImagesSubscriber implements EventSubscriber
     /**
      * Download the preview picture.
      *
+     * @todo If we want to add async download, it should be done in that method
+     *
      * @param Config $config
      * @param Entry  $entry
      *
@@ -143,12 +141,6 @@ class DownloadImagesSubscriber implements EventSubscriber
     public function downloadPreviewImage(Config $config, Entry $entry)
     {
         $this->downloadImages->setWallabagUrl($config->get('wallabag_url'));
-
-        // if ($config->get('download_images_with_rabbitmq')) {
-
-        // } else if ($config->get('download_images_with_redis')) {
-
-        // }
 
         return $this->downloadImages->processSingleImage(
             $entry->getPreviewPicture(),

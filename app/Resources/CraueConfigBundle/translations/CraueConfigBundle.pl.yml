@@ -29,3 +29,4 @@ piwik_enabled: Włacz Piwik
 demo_mode_enabled: "Włacz tryb demo? (używany wyłącznie dla publicznej demonstracji Wallabag)"
 demo_mode_username: "Użytkownik Demonstracyjny"
 share_public: Zezwalaj na publiczny adres url dla wpisow
+# download_images_enabled: Download images locally
