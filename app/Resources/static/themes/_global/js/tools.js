@@ -1,6 +1,6 @@
 const $ = require('jquery');
 
-var jrQrcode = require('jr-qrcode');
+import jrQrcode from 'jr-qrcode';
 
 function supportsLocalStorage() {
   try {

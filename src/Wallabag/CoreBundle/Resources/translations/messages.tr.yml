@@ -71,6 +71,7 @@ config:
             # 300_word: 'I read ~300 words per minute'
             # 400_word: 'I read ~400 words per minute'
         # pocket_consumer_key_label: Consumer key for Pocket to import contents
+        # android_configuration: Configure your Android application
     form_rss:
         description: 'wallabag RSS akışı kaydetmiş olduğunuz makalelerini favori RSS okuyucunuzda görüntülemenizi sağlar. Bunu yapabilmek için öncelikle belirteç (token) oluşturmalısınız.'
         token_label: 'RSS belirteci (token)'

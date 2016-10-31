@@ -71,6 +71,7 @@ config:
             300_word: 'من تقریباً ۳۰۰ واژه را در دقیقه می‌خوانم'
             400_word: 'من تقریباً ۴۰۰ واژه را در دقیقه می‌خوانم'
         pocket_consumer_key_label: کلید کاربری Pocket برای درون‌ریزی مطالب
+        # android_configuration: Configure your Android application
     form_rss:
         description: 'با خوراک آر-اس-اس که wallabag در اختیارتان می‌گذارد، می‌توانید مقاله‌های ذخیره‌شده را در نرم‌افزار آر-اس-اس دلخواه خود بخوانید. برای این کار نخست باید یک کد بسازید.'
         token_label: 'کد آر-اس-اس'
