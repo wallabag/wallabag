@@ -149,6 +149,7 @@ class ConfigController extends Controller
                 'token' => $config->getRssToken(),
             ],
             'twofactor_auth' => $this->getParameter('twofactor_auth'),
+            'wallabag_url' => $this->get('craue_config')->get('wallabag_url'),
             'enabled_users' => $this->getDoctrine()
                 ->getRepository('WallabagUserBundle:User')
                 ->getSumEnabledUsers(),

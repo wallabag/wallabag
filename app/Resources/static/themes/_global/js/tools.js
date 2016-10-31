@@ -1,5 +1,7 @@
 const $ = require('jquery');
 
+var jrQrcode = require('jr-qrcode');
+
 function supportsLocalStorage() {
   try {
     return 'localStorage' in window && window.localStorage !== null;
