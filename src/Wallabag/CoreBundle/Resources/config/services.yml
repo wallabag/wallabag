@@ -140,17 +140,19 @@ services:
     wallabag_core.subscriber.download_images:
         class: Wallabag\CoreBundle\Event\Subscriber\DownloadImagesSubscriber
         arguments:
+            - "@doctrine.orm.default_entity_manager"
             - "@wallabag_core.entry.download_images"
-            - "%craue_config.config.class%"
+            - '@=service(''craue_config'').get(''download_images_enabled'')'
             - "@logger"
         tags:
-            - { name: doctrine.event_subscriber }
+            - { name: kernel.event_subscriber }
 
     wallabag_core.entry.download_images:
         class: Wallabag\CoreBundle\Helper\DownloadImages
         arguments:
             - "@wallabag_core.entry.download_images.client"
             - "%kernel.root_dir%/../web/assets/images"
+            - '@=service(''craue_config'').get(''wallabag_url'')'
             - "@logger"
 
     wallabag_core.entry.download_images.client:

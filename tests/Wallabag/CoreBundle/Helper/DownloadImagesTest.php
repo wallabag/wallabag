@@ -26,12 +26,11 @@ class DownloadImagesTest extends \PHPUnit_Framework_TestCase
         $logHandler = new TestHandler();
         $logger = new Logger('test', array($logHandler));
 
-        $download = new DownloadImages($client, sys_get_temp_dir().'/wallabag_test', $logger);
-        $download->setWallabagUrl('http://wallabag.io/');
+        $download = new DownloadImages($client, sys_get_temp_dir().'/wallabag_test', 'http://wallabag.io/', $logger);
 
-        $res = $download->processHtml('<div><img src="http://i.imgur.com/T9qgcHc.jpg" /></div>', 'http://imgur.com/gallery/WxtWY');
+        $res = $download->processHtml(123, '<div><img src="http://i.imgur.com/T9qgcHc.jpg" /></div>', 'http://imgur.com/gallery/WxtWY');
 
-        $this->assertContains('http://wallabag.io/assets/images/4/2/4258f71e/c638b4c2.png', $res);
+        $this->assertContains('http://wallabag.io/assets/images/9/b/9b0ead26/c638b4c2.png', $res);
     }
 
     public function testProcessHtmlWithBadImage()
@@ -47,8 +46,8 @@ class DownloadImagesTest extends \PHPUnit_Framework_TestCase
         $logHandler = new TestHandler();
         $logger = new Logger('test', array($logHandler));
 
-        $download = new DownloadImages($client, sys_get_temp_dir().'/wallabag_test', $logger);
-        $res = $download->processHtml('<div><img src="http://i.imgur.com/T9qgcHc.jpg" /></div>', 'http://imgur.com/gallery/WxtWY');
+        $download = new DownloadImages($client, sys_get_temp_dir().'/wallabag_test', 'http://wallabag.io/', $logger);
+        $res = $download->processHtml(123, '<div><img src="http://i.imgur.com/T9qgcHc.jpg" /></div>', 'http://imgur.com/gallery/WxtWY');
 
         $this->assertContains('http://i.imgur.com/T9qgcHc.jpg', $res, 'Image were not replace because of content-type');
     }
@@ -79,10 +78,10 @@ class DownloadImagesTest extends \PHPUnit_Framework_TestCase
         $logHandler = new TestHandler();
         $logger = new Logger('test', array($logHandler));
 
-        $download = new DownloadImages($client, sys_get_temp_dir().'/wallabag_test', $logger);
-        $res = $download->processSingleImage('T9qgcHc.jpg', 'http://imgur.com/gallery/WxtWY');
+        $download = new DownloadImages($client, sys_get_temp_dir().'/wallabag_test', 'http://wallabag.io/', $logger);
+        $res = $download->processSingleImage(123, 'T9qgcHc.jpg', 'http://imgur.com/gallery/WxtWY');
 
-        $this->assertContains('/assets/images/4/2/4258f71e/ebe60399.'.$extension, $res);
+        $this->assertContains('/assets/images/9/b/9b0ead26/ebe60399.'.$extension, $res);
     }
 
     public function testProcessSingleImageWithBadUrl()
@@ -98,8 +97,8 @@ class DownloadImagesTest extends \PHPUnit_Framework_TestCase
         $logHandler = new TestHandler();
         $logger = new Logger('test', array($logHandler));
 
-        $download = new DownloadImages($client, sys_get_temp_dir().'/wallabag_test', $logger);
-        $res = $download->processSingleImage('T9qgcHc.jpg', 'http://imgur.com/gallery/WxtWY');
+        $download = new DownloadImages($client, sys_get_temp_dir().'/wallabag_test', 'http://wallabag.io/', $logger);
+        $res = $download->processSingleImage(123, 'T9qgcHc.jpg', 'http://imgur.com/gallery/WxtWY');
 
         $this->assertFalse($res, 'Image can not be found, so it will not be replaced');
     }
@@ -117,8 +116,8 @@ class DownloadImagesTest extends \PHPUnit_Framework_TestCase
         $logHandler = new TestHandler();
         $logger = new Logger('test', array($logHandler));
 
-        $download = new DownloadImages($client, sys_get_temp_dir().'/wallabag_test', $logger);
-        $res = $download->processSingleImage('http://i.imgur.com/T9qgcHc.jpg', 'http://imgur.com/gallery/WxtWY');
+        $download = new DownloadImages($client, sys_get_temp_dir().'/wallabag_test', 'http://wallabag.io/', $logger);
+        $res = $download->processSingleImage(123, 'http://i.imgur.com/T9qgcHc.jpg', 'http://imgur.com/gallery/WxtWY');
 
         $this->assertFalse($res, 'Image can not be loaded, so it will not be replaced');
     }
@@ -136,8 +135,8 @@ class DownloadImagesTest extends \PHPUnit_Framework_TestCase
         $logHandler = new TestHandler();
         $logger = new Logger('test', array($logHandler));
 
-        $download = new DownloadImages($client, sys_get_temp_dir().'/wallabag_test', $logger);
-        $res = $download->processSingleImage('/i.imgur.com/T9qgcHc.jpg', 'imgur.com/gallery/WxtWY');
+        $download = new DownloadImages($client, sys_get_temp_dir().'/wallabag_test', 'http://wallabag.io/', $logger);
+        $res = $download->processSingleImage(123, '/i.imgur.com/T9qgcHc.jpg', 'imgur.com/gallery/WxtWY');
 
         $this->assertFalse($res, 'Absolute image can not be determined, so it will not be replaced');
     }

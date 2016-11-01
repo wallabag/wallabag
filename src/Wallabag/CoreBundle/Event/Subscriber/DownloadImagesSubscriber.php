@@ -2,110 +2,85 @@
 
 namespace Wallabag\CoreBundle\Event\Subscriber;
 
-use Doctrine\Common\EventSubscriber;
-use Doctrine\ORM\Event\LifecycleEventArgs;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Psr\Log\LoggerInterface;
 use Wallabag\CoreBundle\Helper\DownloadImages;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\CoreBundle\Event\EntrySavedEvent;
+use Wallabag\CoreBundle\Event\EntryDeletedEvent;
 use Doctrine\ORM\EntityManager;
-use Craue\ConfigBundle\Util\Config;
 
-class DownloadImagesSubscriber implements EventSubscriber
+class DownloadImagesSubscriber implements EventSubscriberInterface
 {
-    private $configClass;
+    private $em;
     private $downloadImages;
+    private $enabled;
     private $logger;
 
-    /**
-     * We inject the class instead of the service otherwise it generates a circular reference with the EntityManager.
-     * So we build the service ourself when we got the EntityManager (in downloadImages).
-     */
-    public function __construct(DownloadImages $downloadImages, $configClass, LoggerInterface $logger)
+    public function __construct(EntityManager $em, DownloadImages $downloadImages, $enabled, LoggerInterface $logger)
     {
+        $this->em = $em;
         $this->downloadImages = $downloadImages;
-        $this->configClass = $configClass;
+        $this->enabled = $enabled;
         $this->logger = $logger;
     }
 
-    public function getSubscribedEvents()
+    public static function getSubscribedEvents()
     {
-        return array(
-            'prePersist',
-            'preUpdate',
-        );
+        return [
+            EntrySavedEvent::NAME => 'onEntrySaved',
+            EntryDeletedEvent::NAME => 'onEntryDeleted',
+        ];
     }
 
     /**
-     * In case of an entry has been updated.
-     * We won't update the content field if it wasn't updated.
+     * Download images and updated the data into the entry.
      *
-     * @param LifecycleEventArgs $args
+     * @param EntrySavedEvent $event
      */
-    public function preUpdate(LifecycleEventArgs $args)
+    public function onEntrySaved(EntrySavedEvent $event)
     {
-        $entity = $args->getEntity();
+        if (!$this->enabled) {
+            $this->logger->debug('DownloadImagesSubscriber: disabled.');
 
-        if (!$entity instanceof Entry) {
             return;
         }
 
-        $config = new $this->configClass();
-        $config->setEntityManager($args->getEntityManager());
+        $entry = $event->getEntry();
 
-        if (!$config->get('download_images_enabled')) {
-            return;
-        }
-
-        // field content has been updated
-        if ($args->hasChangedField('content')) {
-            $html = $this->downloadImages($config, $entity);
-
-            if (false !== $html) {
-                $args->setNewValue('content', $html);
-            }
-        }
-
-        // field preview picture has been updated
-        if ($args->hasChangedField('previewPicture')) {
-            $previewPicture = $this->downloadPreviewImage($config, $entity);
-
-            if (false !== $previewPicture) {
-                $entity->setPreviewPicture($previewPicture);
-            }
-        }
-    }
-
-    /**
-     * When a new entry is saved.
-     *
-     * @param LifecycleEventArgs $args
-     */
-    public function prePersist(LifecycleEventArgs $args)
-    {
-        $entity = $args->getEntity();
-
-        if (!$entity instanceof Entry) {
-            return;
-        }
-
-        $config = new $this->configClass();
-        $config->setEntityManager($args->getEntityManager());
-
-        if (!$config->get('download_images_enabled')) {
-            return;
-        }
-
-        // update all images inside the html
-        $html = $this->downloadImages($config, $entity);
+        $html = $this->downloadImages($entry);
         if (false !== $html) {
-            $entity->setContent($html);
+            $this->logger->debug('DownloadImagesSubscriber: updated html.');
+
+            $entry->setContent($html);
         }
 
         // update preview picture
-        $previewPicture = $this->downloadPreviewImage($config, $entity);
+        $previewPicture = $this->downloadPreviewImage($entry);
         if (false !== $previewPicture) {
-            $entity->setPreviewPicture($previewPicture);
+            $this->logger->debug('DownloadImagesSubscriber: update preview picture.');
+
+            $entry->setPreviewPicture($previewPicture);
         }
+
+        $this->em->persist($entry);
+        $this->em->flush();
+    }
+
+    /**
+     * Remove images related to the entry.
+     *
+     * @param EntryDeletedEvent $event
+     */
+    public function onEntryDeleted(EntryDeletedEvent $event)
+    {
+        if (!$this->enabled) {
+            $this->logger->debug('DownloadImagesSubscriber: disabled.');
+
+            return;
+        }
+
+        $this->downloadImages->removeImages($event->getEntry()->getId());
     }
 
     /**
@@ -113,16 +88,14 @@ class DownloadImagesSubscriber implements EventSubscriber
      *
      * @todo If we want to add async download, it should be done in that method
      *
-     * @param Config $config
-     * @param Entry  $entry
+     * @param Entry $entry
      *
      * @return string|false False in case of async
      */
-    public function downloadImages(Config $config, Entry $entry)
+    private function downloadImages(Entry $entry)
     {
-        $this->downloadImages->setWallabagUrl($config->get('wallabag_url'));
-
         return $this->downloadImages->processHtml(
+            $entry->getId(),
             $entry->getContent(),
             $entry->getUrl()
         );
@@ -133,16 +106,14 @@ class DownloadImagesSubscriber implements EventSubscriber
      *
      * @todo If we want to add async download, it should be done in that method
      *
-     * @param Config $config
-     * @param Entry  $entry
+     * @param Entry $entry
      *
      * @return string|false False in case of async
      */
-    public function downloadPreviewImage(Config $config, Entry $entry)
+    private function downloadPreviewImage(Entry $entry)
     {
-        $this->downloadImages->setWallabagUrl($config->get('wallabag_url'));
-
         return $this->downloadImages->processSingleImage(
+            $entry->getId(),
             $entry->getPreviewPicture(),
             $entry->getUrl()
         );

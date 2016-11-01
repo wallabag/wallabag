@@ -869,10 +869,30 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $entry);
         $this->assertEquals($url, $entry->getUrl());
         $this->assertContains('Perpignan', $entry->getTitle());
-        $this->assertContains('assets/images/8/e/8ec9229a/d9bc0fcd.jpeg', $entry->getContent());
+        $this->assertContains('/d9bc0fcd.jpeg', $entry->getContent());
 
-        $em->remove($entry);
-        $em->flush();
+        $client->getContainer()->get('craue_config')->set('download_images_enabled', 0);
+    }
+
+    /**
+     * @depends testNewEntryWithDownloadImagesEnabled
+     */
+    public function testRemoveEntryWithDownloadImagesEnabled()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $url = 'http://www.20minutes.fr/montpellier/1952003-20161030-video-car-tombe-panne-rugbymen-perpignan-improvisent-melee-route';
+        $client->getContainer()->get('craue_config')->set('download_images_enabled', 1);
+
+        $content = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findByUrlAndUserId($url, $this->getLoggedInUserId());
+
+        $client->request('GET', '/delete/'.$content->getId());
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
 
         $client->getContainer()->get('craue_config')->set('download_images_enabled', 0);
     }
