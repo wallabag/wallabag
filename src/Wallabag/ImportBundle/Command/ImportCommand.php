@@ -50,6 +50,9 @@ class ImportCommand extends ContainerAwareCommand
             case 'chrome':
                 $wallabag = $this->getContainer()->get('wallabag_import.chrome.import');
                 break;
+            case 'instapaper':
+                $wallabag = $this->getContainer()->get('wallabag_import.instapaper.import');
+                break;
             case 'v1':
             default:
                 $wallabag = $this->getContainer()->get('wallabag_import.wallabag_v1.import');
