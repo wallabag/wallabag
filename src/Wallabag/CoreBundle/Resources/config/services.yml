@@ -55,6 +55,7 @@ services:
                         '.fok.nl': 'Googlebot/2.1'
                         'getpocket.com': 'PHP/5.2'
                         'iansommerville.com': 'PHP/5.2'
+                        '.slashdot.org': 'PHP/5.2'
         calls:
             - [ setLogger, [ "@logger" ] ]
         tags:
