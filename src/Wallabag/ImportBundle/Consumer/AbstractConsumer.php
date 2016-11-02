@@ -9,6 +9,8 @@ use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Wallabag\CoreBundle\Event\EntrySavedEvent;
 
 abstract class AbstractConsumer
 {
@@ -17,11 +19,12 @@ abstract class AbstractConsumer
     protected $import;
     protected $logger;
 
-    public function __construct(EntityManager $em, UserRepository $userRepository, AbstractImport $import, LoggerInterface $logger = null)
+    public function __construct(EntityManager $em, UserRepository $userRepository, AbstractImport $import, EventDispatcherInterface $eventDispatcher, LoggerInterface $logger = null)
     {
         $this->em = $em;
         $this->userRepository = $userRepository;
         $this->import = $import;
+        $this->eventDispatcher = $eventDispatcher;
         $this->logger = $logger ?: new NullLogger();
     }
 
@@ -58,6 +61,9 @@ abstract class AbstractConsumer
 
         try {
             $this->em->flush();
+
+            // entry saved, dispatch event about it!
+            $this->eventDispatcher->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
 
             // clear only affected entities
             $this->em->clear(Entry::class);

@@ -16,13 +16,6 @@ class PocketImport extends AbstractImport
 
     const NB_ELEMENTS = 5000;
 
-    public function __construct(EntityManager $em, ContentProxy $contentProxy)
-    {
-        $this->em = $em;
-        $this->contentProxy = $contentProxy;
-        $this->logger = new NullLogger();
-    }
-
     /**
      * Only used for test purpose.
      *

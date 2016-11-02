@@ -18,7 +18,7 @@ class FirefoxImportTest extends \PHPUnit_Framework_TestCase
     protected $logHandler;
     protected $contentProxy;
 
-    private function getFirefoxImport($unsetUser = false)
+    private function getFirefoxImport($unsetUser = false, $dispatched = 0)
     {
         $this->user = new User();
 
@@ -30,7 +30,15 @@ class FirefoxImportTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $wallabag = new FirefoxImport($this->em, $this->contentProxy);
+        $dispatcher = $this->getMockBuilder('Symfony\Component\EventDispatcher\EventDispatcher')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $dispatcher
+            ->expects($this->exactly($dispatched))
+            ->method('dispatch');
+
+        $wallabag = new FirefoxImport($this->em, $this->contentProxy, $dispatcher);
 
         $this->logHandler = new TestHandler();
         $logger = new Logger('test', [$this->logHandler]);
@@ -54,7 +62,7 @@ class FirefoxImportTest extends \PHPUnit_Framework_TestCase
 
     public function testImport()
     {
-        $firefoxImport = $this->getFirefoxImport();
+        $firefoxImport = $this->getFirefoxImport(false, 2);
         $firefoxImport->setFilepath(__DIR__.'/../fixtures/firefox-bookmarks.json');
 
         $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
@@ -87,7 +95,7 @@ class FirefoxImportTest extends \PHPUnit_Framework_TestCase
 
     public function testImportAndMarkAllAsRead()
     {
-        $firefoxImport = $this->getFirefoxImport();
+        $firefoxImport = $this->getFirefoxImport(false, 1);
         $firefoxImport->setFilepath(__DIR__.'/../fixtures/firefox-bookmarks.json');
 
         $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')

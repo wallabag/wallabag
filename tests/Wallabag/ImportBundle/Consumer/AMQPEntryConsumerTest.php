@@ -112,10 +112,19 @@ JSON;
             ->with(json_decode($body, true))
             ->willReturn($entry);
 
+        $dispatcher = $this->getMockBuilder('Symfony\Component\EventDispatcher\EventDispatcher')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $dispatcher
+            ->expects($this->once())
+            ->method('dispatch');
+
         $consumer = new AMQPEntryConsumer(
             $em,
             $userRepository,
-            $import
+            $import,
+            $dispatcher
         );
 
         $message = new AMQPMessage($body);
@@ -157,10 +166,19 @@ JSON;
             ->disableOriginalConstructor()
             ->getMock();
 
+        $dispatcher = $this->getMockBuilder('Symfony\Component\EventDispatcher\EventDispatcher')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $dispatcher
+            ->expects($this->never())
+            ->method('dispatch');
+
         $consumer = new AMQPEntryConsumer(
             $em,
             $userRepository,
-            $import
+            $import,
+            $dispatcher
         );
 
         $message = new AMQPMessage($body);
@@ -212,10 +230,19 @@ JSON;
             ->with(json_decode($body, true))
             ->willReturn(null);
 
+        $dispatcher = $this->getMockBuilder('Symfony\Component\EventDispatcher\EventDispatcher')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $dispatcher
+            ->expects($this->never())
+            ->method('dispatch');
+
         $consumer = new AMQPEntryConsumer(
             $em,
             $userRepository,
-            $import
+            $import,
+            $dispatcher
         );
 
         $message = new AMQPMessage($body);

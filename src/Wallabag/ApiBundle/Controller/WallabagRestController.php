@@ -14,6 +14,8 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\AnnotationBundle\Entity\Annotation;
+use Wallabag\CoreBundle\Event\EntrySavedEvent;
+use Wallabag\CoreBundle\Event\EntryDeletedEvent;
 
 class WallabagRestController extends FOSRestController
 {
@@ -233,8 +235,10 @@ class WallabagRestController extends FOSRestController
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($entry);
-
         $em->flush();
+
+        // entry saved, dispatch event about it!
+        $this->get('event_dispatcher')->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
 
         $json = $this->get('serializer')->serialize($entry, 'json');
 
@@ -307,6 +311,9 @@ class WallabagRestController extends FOSRestController
     {
         $this->validateAuthentication();
         $this->validateUserAccess($entry->getUser()->getId());
+
+        // entry deleted, dispatch event about it!
+        $this->get('event_dispatcher')->dispatch(EntryDeletedEvent::NAME, new EntryDeletedEvent($entry));
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($entry);

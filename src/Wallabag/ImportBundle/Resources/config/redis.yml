@@ -18,6 +18,7 @@ services:
             - "@doctrine.orm.entity_manager"
             - "@wallabag_user.user_repository"
             - "@wallabag_import.readability.import"
+            - "@event_dispatcher"
             - "@logger"
 
     # instapaper
@@ -38,6 +39,7 @@ services:
             - "@doctrine.orm.entity_manager"
             - "@wallabag_user.user_repository"
             - "@wallabag_import.instapaper.import"
+            - "@event_dispatcher"
             - "@logger"
 
     # pocket
@@ -58,6 +60,7 @@ services:
             - "@doctrine.orm.entity_manager"
             - "@wallabag_user.user_repository"
             - "@wallabag_import.pocket.import"
+            - "@event_dispatcher"
             - "@logger"
 
     # wallabag v1
@@ -78,6 +81,7 @@ services:
             - "@doctrine.orm.entity_manager"
             - "@wallabag_user.user_repository"
             - "@wallabag_import.wallabag_v1.import"
+            - "@event_dispatcher"
             - "@logger"
 
     # wallabag v2
@@ -98,6 +102,7 @@ services:
             - "@doctrine.orm.entity_manager"
             - "@wallabag_user.user_repository"
             - "@wallabag_import.wallabag_v2.import"
+            - "@event_dispatcher"
             - "@logger"
 
     # firefox
@@ -118,6 +123,7 @@ services:
             - "@doctrine.orm.entity_manager"
             - "@wallabag_user.user_repository"
             - "@wallabag_import.firefox.import"
+            - "@event_dispatcher"
             - "@logger"
 
     # chrome
@@ -138,4 +144,5 @@ services:
             - "@doctrine.orm.entity_manager"
             - "@wallabag_user.user_repository"
             - "@wallabag_import.chrome.import"
+            - "@event_dispatcher"
             - "@logger"

@@ -18,7 +18,7 @@ class WallabagV2ImportTest extends \PHPUnit_Framework_TestCase
     protected $logHandler;
     protected $contentProxy;
 
-    private function getWallabagV2Import($unsetUser = false)
+    private function getWallabagV2Import($unsetUser = false, $dispatched = 0)
     {
         $this->user = new User();
 
@@ -44,7 +44,15 @@ class WallabagV2ImportTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $wallabag = new WallabagV2Import($this->em, $this->contentProxy);
+        $dispatcher = $this->getMockBuilder('Symfony\Component\EventDispatcher\EventDispatcher')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $dispatcher
+            ->expects($this->exactly($dispatched))
+            ->method('dispatch');
+
+        $wallabag = new WallabagV2Import($this->em, $this->contentProxy, $dispatcher);
 
         $this->logHandler = new TestHandler();
         $logger = new Logger('test', [$this->logHandler]);
@@ -68,7 +76,7 @@ class WallabagV2ImportTest extends \PHPUnit_Framework_TestCase
 
     public function testImport()
     {
-        $wallabagV2Import = $this->getWallabagV2Import();
+        $wallabagV2Import = $this->getWallabagV2Import(false, 2);
         $wallabagV2Import->setFilepath(__DIR__.'/../fixtures/wallabag-v2.json');
 
         $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
@@ -97,7 +105,7 @@ class WallabagV2ImportTest extends \PHPUnit_Framework_TestCase
 
     public function testImportAndMarkAllAsRead()
     {
-        $wallabagV2Import = $this->getWallabagV2Import();
+        $wallabagV2Import = $this->getWallabagV2Import(false, 2);
         $wallabagV2Import->setFilepath(__DIR__.'/../fixtures/wallabag-v2-read.json');
 
         $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
@@ -246,7 +254,7 @@ class WallabagV2ImportTest extends \PHPUnit_Framework_TestCase
 
     public function testImportWithExceptionFromGraby()
     {
-        $wallabagV2Import = $this->getWallabagV2Import();
+        $wallabagV2Import = $this->getWallabagV2Import(false, 2);
         $wallabagV2Import->setFilepath(__DIR__.'/../fixtures/wallabag-v2.json');
 
         $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
