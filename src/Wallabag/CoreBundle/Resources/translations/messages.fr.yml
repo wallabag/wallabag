@@ -214,9 +214,9 @@ entry:
 about:
     page_title: "À propos"
     top_menu:
-        who_behind_wallabag: "L’équipe derrière Wallabag"
+        who_behind_wallabag: "L’équipe derrière wallabag"
         getting_help: "Besoin d’aide"
-        helping: "Aider Wallabag"
+        helping: "Aider wallabag"
         contributors: "Contributeurs"
         third_party: "Librairies tierces"
     who_behind_wallabag:
@@ -231,7 +231,7 @@ about:
         bug_reports: "Rapport de bogue"
         support: "<a href=\"https://support.wallabag.org\">Sur notre site de support</a> ou <a href=\"https://github.com/wallabag/wallabag/issues\">sur GitHub</a>"
     helping:
-        description: "Wallabag est gratuit et opensource. Vous pouvez nous aider :"
+        description: "wallabag est gratuit et opensource. Vous pouvez nous aider :"
         by_contributing: "en contribuant au projet :"
         by_contributing_2: "un ticket recense tous nos besoins"
         by_paypal: "via Paypal"
@@ -325,7 +325,7 @@ tag:
 
 import:
     page_title: "Importer"
-    page_description: "Bienvenue dans l’outil de migration de Wallabag. Choisissez ci-dessous le service depuis lequel vous souhaitez migrer."
+    page_description: "Bienvenue dans l’outil de migration de wallabag. Choisissez ci-dessous le service depuis lequel vous souhaitez migrer."
     action:
         import_contents: "Importer les contenus"
     form:
@@ -343,11 +343,11 @@ import:
         authorize_message: "Vous pouvez importer vos données depuis votre compte Pocket. Vous n’avez qu’à cliquer sur le bouton ci-dessous et à autoriser wallabag à se connecter à getpocket.com."
         connect_to_pocket: "Se connecter à Pocket et importer les données"
     wallabag_v1:
-        page_title: "Importer > Wallabag v1"
+        page_title: "Importer > wallabag v1"
         description: "Cet outil va importer toutes vos données de wallabag v1. Sur votre page de configuration de wallabag v1, cliquez sur « Export JSON » dans la section « Exporter vos données de wallabag ». Vous allez récupérer un fichier « wallabag-export-1-xxxx-xx-xx.json »."
         how_to: "Choisissez le fichier de votre export wallabag v1 et cliquez sur le bouton ci-dessous pour l’importer."
     wallabag_v2:
-        page_title: "Importer > Wallabag v2"
+        page_title: "Importer > wallabag v2"
         description: "Cet outil va importer tous vos articles d’une autre instance de wallabag v2. Allez dans tous vos articles, puis, sur la barre latérale, cliquez sur « JSON ». Vous allez récupérer un fichier « All articles.json »"
     readability:
         page_title: "Importer > Readability"
@@ -488,4 +488,4 @@ flashes:
     developer:
         notice:
             client_created: "Nouveau client %name% créé"
-            client_deleted: "Client %name% supprimé’
+            client_deleted: "Client %name% supprimé"
