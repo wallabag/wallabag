@@ -2,8 +2,6 @@
 
 namespace Wallabag\ImportBundle\Import;
 
-use Psr\Log\NullLogger;
-use Doctrine\ORM\EntityManager;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Wallabag\CoreBundle\Entity\Entry;
