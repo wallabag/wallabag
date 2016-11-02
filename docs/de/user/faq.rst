@@ -48,3 +48,5 @@ I've got the ``failed to load external entity`` error when I try to install wall
 ------------------------------------------------------------------------------------
 
 As described `here <https://github.com/wallabag/wallabag/issues/2529>`_, please edit your ``web/app.php`` file and add this line: ``libxml_disable_entity_loader(false);`` on line 5.
+
+This is a Doctrine / PHP bug, nothing we can do about it.
