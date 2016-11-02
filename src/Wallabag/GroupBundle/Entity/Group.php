@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\UserBundle\Entity;
+namespace Wallabag\GroupBundle\Entity;
 
 use FOS\UserBundle\Model\Group as BaseGroup;
 use Doctrine\ORM\Mapping as ORM;

@@ -514,6 +514,7 @@ user:
         repeat_new_password_label: 'Neues Kennwort wiederholen'
         plain_password_label: '????'
         email_label: 'E-Mail-Adresse'
+        # group: 'Group'
         enabled_label: 'Aktiviert'
         last_login_label: 'Letzter Login'
         twofactor_label: Zwei-Faktor-Authentifizierung
