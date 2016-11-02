@@ -1,5 +1,7 @@
 import $ from 'jquery';
 import Mousetrap from 'mousetrap';
+import './shortcuts/main.js';
+import './shortcuts/entry.js';
 
 /* Allows inline call qr-code call */
 import jrQrcode from 'jr-qrcode'; // eslint-disable-line
@@ -52,49 +54,3 @@ function initExport() {
 }
 
 export { savePercent, retrievePercent, initFilters, initExport };
-
-/** Shortcuts **/
-
-/* Go to */
-Mousetrap.bind('g u', () => { window.location.href = Routing.generate('homepage'); });
-Mousetrap.bind('g s', () => { window.location.href = Routing.generate('starred'); });
-Mousetrap.bind('g r', () => { window.location.href = Routing.generate('archive'); });
-Mousetrap.bind('g a', () => { window.location.href = Routing.generate('all'); });
-Mousetrap.bind('g t', () => { window.location.href = Routing.generate('tag'); });
-Mousetrap.bind('g c', () => { window.location.href = Routing.generate('config'); });
-Mousetrap.bind('g i', () => { window.location.href = Routing.generate('import'); });
-Mousetrap.bind('g d', () => { window.location.href = Routing.generate('developer'); });
-Mousetrap.bind('g h', () => { window.location.href = Routing.generate('howto'); });
-Mousetrap.bind('g l', () => { window.location.href = Routing.generate('logout'); });
-
-
-/* Actions */
-Mousetrap.bind('g n', () => {
-  $('#nav-btn-add').trigger('click');
-});
-
-Mousetrap.bind('esc', () => {
-  $('.close').trigger('click');
-});
-
-// Display the first element of the current view
-Mousetrap.bind('right', () => {
-  $('ul.data li:first-child span.dot-ellipsis a')[0].click();
-});
-
-/* Article view */
-Mousetrap.bind('o', () => {
-  $('ul.side-nav li:nth-child(2) a i')[0].click();
-});
-
-Mousetrap.bind('s', () => {
-  $('ul.side-nav li:nth-child(5) a i')[0].click();
-});
-
-Mousetrap.bind('a', () => {
-  $('ul.side-nav li:nth-child(4) a i')[0].click();
-});
-
-Mousetrap.bind('del', () => {
-  $('ul.side-nav li:nth-child(6) a i')[0].click();
-});

@@ -1,6 +1,8 @@
 import $ from 'jquery';
 import annotator from 'annotator';
 import { savePercent, retrievePercent, initFilters, initExport } from '../../_global/js/tools';
+import './shortcuts/main.js';
+import './shortcuts/entry.js';
 
 require('materialize'); // eslint-disable-line
 

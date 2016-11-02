@@ -1,4 +1,7 @@
 import $ from 'jquery';
+import { initFilters, initExport } from '../../_global/js/tools';
+import './shortcuts/main.js';
+import './shortcuts/entry.js';
 
 /* eslint-disable no-unused-vars */
 /* jquery has default scope */
