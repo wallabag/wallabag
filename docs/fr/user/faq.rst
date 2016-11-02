@@ -33,3 +33,8 @@ J'ai oublié mon mot de passe
 Vous pouvez réinitialiser votre mot de passe en cliquant sur ``Mot de passe oublié ?``,
 sur la page de connexion. Ensuite, renseignez votre adresse email ou votre nom d'utilisateur,
 un email vous sera envoyé.
+
+J'ai l'erreur ``failed to load external entity`` quand j'essaie d'installer wallabag
+------------------------------------------------------------------------------------
+
+Comme décrit `ici <https://github.com/wallabag/wallabag/issues/2529>`_, modifiez le fichier ``web/app.php`` et ajoutez la ligne ``libxml_disable_entity_loader(false);`` à la ligne 5.

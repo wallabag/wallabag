@@ -46,3 +46,8 @@ I forgot my password
 You can reset your password by clicking on ``Forgot your password?`` link,
 on the login page. Then, fill the form with your email address or your username,
 you'll receive an email to reset your password.
+
+I've got the ``failed to load external entity`` error when I try to install wallabag
+------------------------------------------------------------------------------------
+
+As described `here <https://github.com/wallabag/wallabag/issues/2529>`_, please edit your ``web/app.php`` file and add this line: ``libxml_disable_entity_loader(false);`` on line 5.
