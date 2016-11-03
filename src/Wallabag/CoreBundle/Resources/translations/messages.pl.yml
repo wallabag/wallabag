@@ -367,6 +367,7 @@ import:
         how_to: 'Wybierz swój plik eksportu z Readability i kliknij poniższy przycisk, aby go załadować.'
     worker:
         enabled: "Import jest wykonywany asynchronicznie. Od momentu rozpoczęcia importu, zewnętrzna usługa może zajmować się na raz tylko jednym zadaniem. Bieżącą usługą jest:"
+        # download_images_warning: "You enabled downloading images for your articles. Combined with classic import it can take ages to proceed (or maybe failed). We <strong>strongly recommend</strong> to enable asynchronous import to avoid errors."
     firefox:
        page_title: 'Import > Firefox'
        description: "Ten importer zaimportuje wszystkie twoje zakładki z Firefoksa. Idź do twoich zakładek (Ctrl+Shift+O), następnie w \"Import i kopie zapasowe\", wybierz \"Utwórz kopię zapasową...\". Uzyskasz plik .json."
@@ -504,3 +505,8 @@ flashes:
         notice:
             client_created: 'Nowy klient utworzony.'
             client_deleted: 'Klient usunięty'
+    user:
+        notice:
+            # added: 'User "%username%" added'
+            # updated: 'User "%username%" updated'
+            # deleted: 'User "%username%" deleted'

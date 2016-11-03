@@ -367,6 +367,7 @@ import:
         how_to: 'Please select your Readability export and click on the below button to upload and import it.'
     worker:
         enabled: "Import is made asynchronously. Once the import task is started, an external worker will handle jobs one at a time. The current service is:"
+        download_images_warning: "You enabled downloading images for your articles. Combined with classic import it can take ages to proceed (or maybe failed). We <strong>strongly recommend</strong> to enable asynchronous import to avoid errors."
     firefox:
         page_title: 'Import > Firefox'
         description: "This importer will import all your Firefox bookmarks. Just go to your bookmarks (Ctrl+Maj+O), then into \"Import and backup\", choose \"Backup...\". You will obtain a .json file."
@@ -470,6 +471,7 @@ flashes:
             rss_updated: 'RSS information updated'
             tagging_rules_updated: 'Tagging rules updated'
             tagging_rules_deleted: 'Tagging rule deleted'
+            # user_added: 'User "%username%" added'
             rss_token_updated: 'RSS token updated'
             annotations_reset: Annotations reset
             tags_reset: Tags reset

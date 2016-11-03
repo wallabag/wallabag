@@ -284,6 +284,7 @@ quickstart:
         paragraph_2: 'ادامه دهید!'
     configure:
         title: 'برنامه را تنظیم کنید'
+        # description: 'In order to have an application which suits you, have a look into the configuration of wallabag.'
         language: 'زبان و نمای برنامه را تغییر دهید'
         rss: 'خوراک آر-اس-اس را فعال کنید'
         tagging_rules: 'قانون‌های برچسب‌گذاری خودکار مقاله‌هایتان را تعریف کنید'
@@ -366,6 +367,7 @@ import:
         # how_to: 'Please select your Readability export and click on the below button to upload and import it.'
     worker:
         # enabled: "Import is made asynchronously. Once the import task is started, an external worker will handle jobs one at a time. The current service is:"
+        # download_images_warning: "You enabled downloading images for your articles. Combined with classic import it can take ages to proceed (or maybe failed). We <strong>strongly recommend</strong> to enable asynchronous import to avoid errors."
     firefox:
        page_title: 'درون‌ریزی > Firefox'
        # description: "This importer will import all your Firefox bookmarks. Just go to your bookmarks (Ctrl+Maj+O), then into \"Import and backup\", choose \"Backup...\". You will obtain a .json file."
@@ -503,3 +505,8 @@ flashes:
         notice:
             # client_created: 'New client created.'
             # client_deleted: 'Client deleted'
+    user:
+        notice:
+            # added: 'User "%username%" added'
+            # updated: 'User "%username%" updated'
+            # deleted: 'User "%username%" deleted'

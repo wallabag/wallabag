@@ -367,6 +367,7 @@ import:
         how_to: "Mercés de seleccionar vòstre Readability fichièr e de clicar sul boton dejós per lo telecargar e l'importar."
     worker:
         enabled: "L'importacion se fa de manièra asincròna. Un còp l'importacion lançada, una aisina externa s'ocuparà dels messatges un per un. Lo servici actual es : "
+        # download_images_warning: "You enabled downloading images for your articles. Combined with classic import it can take ages to proceed (or maybe failed). We <strong>strongly recommend</strong> to enable asynchronous import to avoid errors."
     firefox:
         page_title: 'Importar > Firefox'
         description: "Aquesta aisina importarà totas vòstres favorits de Firefox. Just go to your bookmarks (Ctrl+Maj+O), then into \"Import and backup\", choose \"Backup...\". You will obtain a .json file."
@@ -504,3 +505,8 @@ flashes:
         notice:
             client_created: 'Novèl client creat'
             client_deleted: 'Client suprimit'
+    user:
+        notice:
+            # added: 'User "%username%" added'
+            # updated: 'User "%username%" updated'
+            # deleted: 'User "%username%" deleted'

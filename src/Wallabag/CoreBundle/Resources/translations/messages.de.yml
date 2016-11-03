@@ -367,6 +367,7 @@ import:
         how_to: 'Bitte wähle deinen Readability Export aus und klicke den unteren Button für das Hochladen und Importieren dessen.'
     worker:
         enabled: "Der Import erfolgt asynchron. Sobald der Import gestartet ist, wird diese Aufgabe extern abgearbeitet. Der aktuelle Service dafür ist:"
+        # download_images_warning: "You enabled downloading images for your articles. Combined with classic import it can take ages to proceed (or maybe failed). We <strong>strongly recommend</strong> to enable asynchronous import to avoid errors."
     firefox:
         page_title: 'Aus Firefox importieren'
         description: "Dieser Import wird all deine Lesezeichen aus Firefox importieren. Gehe zu deinen Lesezeichen (Strg+Shift+O), dann auf \"Importen und Sichern\", wähle \"Sichern…\". Du erhälst eine .json Datei."
@@ -504,3 +505,8 @@ flashes:
         notice:
             client_created: 'Neuer Client erstellt.'
             client_deleted: 'Client gelöscht'
+    user:
+        notice:
+            # added: 'User "%username%" added'
+            # updated: 'User "%username%" updated'
+            # deleted: 'User "%username%" deleted'
