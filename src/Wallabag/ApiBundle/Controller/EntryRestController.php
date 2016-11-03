@@ -151,6 +151,28 @@ class EntryRestController extends WallabagRestController
     }
 
     /**
+     * Retrieve a single entry as a predefined format.
+     *
+     * @ApiDoc(
+     *      requirements={
+     *          {"name"="entry", "dataType"="integer", "requirement"="\w+", "description"="The entry ID"}
+     *      }
+     * )
+     *
+     * @return Response
+     */
+    public function getEntryExportAction(Entry $entry, Request $request)
+    {
+        $this->validateAuthentication();
+        $this->validateUserAccess($entry->getUser()->getId());
+
+        return $this->get('wallabag_core.helper.entries_export')
+            ->setEntries($entry)
+            ->updateTitle('entry')
+            ->exportAs($request->attributes->get('_format'));
+    }
+
+    /**
      * Create an entry.
      *
      * @ApiDoc(

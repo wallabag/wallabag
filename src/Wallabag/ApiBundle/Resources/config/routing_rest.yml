@@ -8,6 +8,11 @@ tag:
   resource: "WallabagApiBundle:TagRest"
   name_prefix:  api_
 
+annotation:
+  type: rest
+  resource: "WallabagApiBundle:AnnotationRest"
+  name_prefix:  api_
+
 misc:
   type: rest
   resource: "WallabagApiBundle:WallabagRest"

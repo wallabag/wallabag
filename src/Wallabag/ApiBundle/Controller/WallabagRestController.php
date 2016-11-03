@@ -5,6 +5,8 @@ namespace Wallabag\ApiBundle\Controller;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Wallabag\CoreBundle\Entity\Entry;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class WallabagRestController extends FOSRestController
 {
@@ -19,6 +21,7 @@ class WallabagRestController extends FOSRestController
     {
         $version = $this->container->getParameter('wallabag_core.version');
         $json = $this->get('serializer')->serialize($version, 'json');
+
         return (new JsonResponse())->setJson($json);
     }
 
