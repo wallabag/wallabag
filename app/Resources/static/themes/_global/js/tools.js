@@ -1,6 +1,7 @@
 const $ = require('jquery');
 
-import jrQrcode from 'jr-qrcode';
+/* Allows inline call qr-code call */
+import jrQrcode from 'jr-qrcode'; // eslint-disable-line
 
 function supportsLocalStorage() {
   try {
