@@ -17,6 +17,7 @@ abstract class AbstractConsumer
     protected $em;
     protected $userRepository;
     protected $import;
+    protected $eventDispatcher;
     protected $logger;
 
     public function __construct(EntityManager $em, UserRepository $userRepository, AbstractImport $import, EventDispatcherInterface $eventDispatcher, LoggerInterface $logger = null)

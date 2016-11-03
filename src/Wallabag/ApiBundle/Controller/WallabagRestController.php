@@ -3,10 +3,9 @@
 namespace Wallabag\ApiBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Wallabag\CoreBundle\Entity\Entry;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class WallabagRestController extends FOSRestController
 {

@@ -135,16 +135,16 @@ class DownloadImages
 
         switch ($ext) {
             case 'gif':
-                $result = imagegif($im, $localPath);
+                imagegif($im, $localPath);
                 $this->logger->debug('DownloadImages: Re-creating gif');
                 break;
             case 'jpeg':
             case 'jpg':
-                $result = imagejpeg($im, $localPath, self::REGENERATE_PICTURES_QUALITY);
+                imagejpeg($im, $localPath, self::REGENERATE_PICTURES_QUALITY);
                 $this->logger->debug('DownloadImages: Re-creating jpg');
                 break;
             case 'png':
-                $result = imagepng($im, $localPath, ceil(self::REGENERATE_PICTURES_QUALITY / 100 * 9));
+                imagepng($im, $localPath, ceil(self::REGENERATE_PICTURES_QUALITY / 100 * 9));
                 $this->logger->debug('DownloadImages: Re-creating png');
         }
 

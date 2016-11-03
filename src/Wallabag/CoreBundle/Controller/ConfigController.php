@@ -234,8 +234,6 @@ class ConfigController extends Controller
      */
     public function resetAction($type)
     {
-        $em = $this->getDoctrine()->getManager();
-
         switch ($type) {
             case 'annotations':
                 $this->getDoctrine()
