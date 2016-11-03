@@ -29,3 +29,4 @@ piwik_enabled: Piwik aktivieren
 demo_mode_enabled: "Test-Modus aktivieren? (nur für die öffentliche wallabag-Demo genutzt)"
 demo_mode_username: "Test-Benutzer"
 share_public: Erlaube eine öffentliche URL für Einträge
+# download_images_enabled: Download images locally

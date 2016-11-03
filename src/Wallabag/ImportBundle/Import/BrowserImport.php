@@ -5,6 +5,7 @@ namespace Wallabag\ImportBundle\Import;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\UserBundle\Entity\User;
 use Wallabag\CoreBundle\Helper\ContentProxy;
+use Wallabag\CoreBundle\Event\EntrySavedEvent;
 
 abstract class BrowserImport extends AbstractImport
 {
@@ -81,6 +82,7 @@ abstract class BrowserImport extends AbstractImport
     protected function parseEntries($entries)
     {
         $i = 1;
+        $entryToBeFlushed = [];
 
         foreach ($entries as $importedEntry) {
             if ((array) $importedEntry !== $importedEntry) {
@@ -93,14 +95,29 @@ abstract class BrowserImport extends AbstractImport
                 continue;
             }
 
+            // @see AbstractImport
+            $entryToBeFlushed[] = $entry;
+
             // flush every 20 entries
             if (($i % 20) === 0) {
                 $this->em->flush();
+
+                foreach ($entryToBeFlushed as $entry) {
+                    $this->eventDispatcher->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
+                }
+
+                $entryToBeFlushed = [];
             }
             ++$i;
         }
 
         $this->em->flush();
+
+        if (!empty($entryToBeFlushed)) {
+            foreach ($entryToBeFlushed as $entry) {
+                $this->eventDispatcher->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
+            }
+        }
     }
 
     /**

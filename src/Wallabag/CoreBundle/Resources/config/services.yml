@@ -30,7 +30,7 @@ services:
             - "@doctrine"
 
     wallabag_core.subscriber.table_prefix:
-        class: Wallabag\CoreBundle\Subscriber\TablePrefixSubscriber
+        class: Wallabag\CoreBundle\Event\Subscriber\TablePrefixSubscriber
         arguments:
             - "%database_table_prefix%"
         tags:
@@ -131,8 +131,29 @@ services:
             - '%kernel.debug%'
 
     wallabag_core.subscriber.sqlite_cascade_delete:
-        class:  Wallabag\CoreBundle\Subscriber\SQLiteCascadeDeleteSubscriber
+        class: Wallabag\CoreBundle\Event\Subscriber\SQLiteCascadeDeleteSubscriber
         arguments:
             - "@doctrine"
         tags:
             - { name: doctrine.event_subscriber }
+
+    wallabag_core.subscriber.download_images:
+        class: Wallabag\CoreBundle\Event\Subscriber\DownloadImagesSubscriber
+        arguments:
+            - "@doctrine.orm.default_entity_manager"
+            - "@wallabag_core.entry.download_images"
+            - '@=service(''craue_config'').get(''download_images_enabled'')'
+            - "@logger"
+        tags:
+            - { name: kernel.event_subscriber }
+
+    wallabag_core.entry.download_images:
+        class: Wallabag\CoreBundle\Helper\DownloadImages
+        arguments:
+            - "@wallabag_core.entry.download_images.client"
+            - "%kernel.root_dir%/../web/assets/images"
+            - '@=service(''craue_config'').get(''wallabag_url'')'
+            - "@logger"
+
+    wallabag_core.entry.download_images.client:
+        class: GuzzleHttp\Client

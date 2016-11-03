@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\CoreBundle\EventListener;
+namespace Tests\Wallabag\CoreBundle\Event\Listener;
 
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Request;
@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Wallabag\CoreBundle\EventListener\LocaleListener;
+use Wallabag\CoreBundle\Event\Listener\LocaleListener;
 
 class LocaleListenerTest extends \PHPUnit_Framework_TestCase
 {

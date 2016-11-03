@@ -10,12 +10,15 @@ use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\UserBundle\Entity\User;
 use OldSound\RabbitMqBundle\RabbitMq\ProducerInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Wallabag\CoreBundle\Event\EntrySavedEvent;
 
 abstract class AbstractImport implements ImportInterface
 {
     protected $em;
     protected $logger;
     protected $contentProxy;
+    protected $eventDispatcher;
     protected $producer;
     protected $user;
     protected $markAsRead;
@@ -23,11 +26,12 @@ abstract class AbstractImport implements ImportInterface
     protected $importedEntries = 0;
     protected $queuedEntries = 0;
 
-    public function __construct(EntityManager $em, ContentProxy $contentProxy)
+    public function __construct(EntityManager $em, ContentProxy $contentProxy, EventDispatcherInterface $eventDispatcher)
     {
         $this->em = $em;
         $this->logger = new NullLogger();
         $this->contentProxy = $contentProxy;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     public function setLogger(LoggerInterface $logger)
@@ -104,6 +108,7 @@ abstract class AbstractImport implements ImportInterface
     protected function parseEntries($entries)
     {
         $i = 1;
+        $entryToBeFlushed = [];
 
         foreach ($entries as $importedEntry) {
             if ($this->markAsRead) {
@@ -116,9 +121,20 @@ abstract class AbstractImport implements ImportInterface
                 continue;
             }
 
+            // store each entry to be flushed so we can trigger the entry.saved event for each of them
+            // entry.saved needs the entry to be persisted in db because it needs it id to generate
+            // images (at least)
+            $entryToBeFlushed[] = $entry;
+
             // flush every 20 entries
             if (($i % 20) === 0) {
                 $this->em->flush();
+
+                foreach ($entryToBeFlushed as $entry) {
+                    $this->eventDispatcher->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
+                }
+
+                $entryToBeFlushed = [];
 
                 // clear only affected entities
                 $this->em->clear(Entry::class);
@@ -128,6 +144,12 @@ abstract class AbstractImport implements ImportInterface
         }
 
         $this->em->flush();
+
+        if (!empty($entryToBeFlushed)) {
+            foreach ($entryToBeFlushed as $entry) {
+                $this->eventDispatcher->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
+            }
+        }
     }
 
     /**

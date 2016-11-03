@@ -13,6 +13,8 @@ use Wallabag\CoreBundle\Form\Type\EntryFilterType;
 use Wallabag\CoreBundle\Form\Type\EditEntryType;
 use Wallabag\CoreBundle\Form\Type\NewEntryType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
+use Wallabag\CoreBundle\Event\EntrySavedEvent;
+use Wallabag\CoreBundle\Event\EntryDeletedEvent;
 
 class EntryController extends Controller
 {
@@ -81,6 +83,9 @@ class EntryController extends Controller
             $em->persist($entry);
             $em->flush();
 
+            // entry saved, dispatch event about it!
+            $this->get('event_dispatcher')->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
+
             return $this->redirect($this->generateUrl('homepage'));
         }
 
@@ -107,6 +112,9 @@ class EntryController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entry);
             $em->flush();
+
+            // entry saved, dispatch event about it!
+            $this->get('event_dispatcher')->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
         }
 
         return $this->redirect($this->generateUrl('homepage'));
@@ -343,6 +351,9 @@ class EntryController extends Controller
         $em->persist($entry);
         $em->flush();
 
+        // entry saved, dispatch event about it!
+        $this->get('event_dispatcher')->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
+
         return $this->redirect($this->generateUrl('view', ['id' => $entry->getId()]));
     }
 
@@ -430,6 +441,9 @@ class EntryController extends Controller
             ['id' => $entry->getId()],
             UrlGeneratorInterface::ABSOLUTE_PATH
         );
+
+        // entry deleted, dispatch event about it!
+        $this->get('event_dispatcher')->dispatch(EntryDeletedEvent::NAME, new EntryDeletedEvent($entry));
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($entry);

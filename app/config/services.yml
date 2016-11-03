@@ -32,13 +32,13 @@ services:
             - { name: twig.extension }
 
     wallabag.locale_listener:
-        class: Wallabag\CoreBundle\EventListener\LocaleListener
+        class: Wallabag\CoreBundle\Event\Listener\LocaleListener
         arguments: ["%kernel.default_locale%"]
         tags:
             - { name: kernel.event_subscriber }
 
     wallabag.user_locale_listener:
-        class: Wallabag\CoreBundle\EventListener\UserLocaleListener
+        class: Wallabag\CoreBundle\Event\Listener\UserLocaleListener
         arguments: ["@session"]
         tags:
             - { name: kernel.event_listener, event: security.interactive_login, method: onInteractiveLogin }

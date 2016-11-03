@@ -368,6 +368,7 @@ import:
         how_to: "Choisissez le fichier de votre export Readability et cliquez sur le bouton ci-dessous pour l'importer."
     worker:
         enabled: "Les imports sont asynchrones. Une fois l'import commencé un worker externe traitera les messages un par un. Le service activé est :"
+        download_images_warning: "Vous avez configuré le téléchagement des images pour vos articles. Combiné à l'import classique, cette opération peut être très très longue (voire échouer). Nous vous conseillons <strong>vivement</strong> d'activer les imports asynchrones."
     firefox:
         page_title: 'Import > Firefox'
         description: "Cet outil va vous permettre d'importer tous vos marques-pages de Firefox. Ouvrez le panneau des marques-pages (Ctrl+Maj+O), puis dans « Importation et sauvegarde », choisissez « Sauvegarde... ». Vous allez récupérer un fichier .json. </p>"
@@ -505,3 +506,8 @@ flashes:
         notice:
             client_created: 'Nouveau client %name% créé'
             client_deleted: 'Client %name% supprimé'
+    user:
+        notice:
+            added: 'Utilisateur "%username%" ajouté'
+            updated: 'Utilisateur "%username%" mis à jour'
+            deleted: 'Utilisateur "%username%" supprimé'

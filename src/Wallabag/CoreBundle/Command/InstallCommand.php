@@ -370,7 +370,7 @@ class InstallCommand extends ContainerAwareCommand
             ],
             [
                 'name' => 'wallabag_url',
-                'value' => 'http://v2.wallabag.org',
+                'value' => '',
                 'section' => 'misc',
             ],
             [
@@ -396,6 +396,11 @@ class InstallCommand extends ContainerAwareCommand
             [
                 'name' => 'demo_mode_username',
                 'value' => 'wallabag',
+                'section' => 'misc',
+            ],
+            [
+                'name' => 'download_images_enabled',
+                'value' => '0',
                 'section' => 'misc',
             ],
         ];

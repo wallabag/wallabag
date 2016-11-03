@@ -140,6 +140,11 @@ class LoadSettingData extends AbstractFixture implements OrderedFixtureInterface
                 'value' => 'wallabag',
                 'section' => 'misc',
             ],
+            [
+                'name' => 'download_images_enabled',
+                'value' => '0',
+                'section' => 'misc',
+            ],
         ];
 
         foreach ($settings as $setting) {
@@ -158,6 +163,6 @@ class LoadSettingData extends AbstractFixture implements OrderedFixtureInterface
      */
     public function getOrder()
     {
-        return 50;
+        return 29;
     }
 }

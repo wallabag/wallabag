@@ -3,7 +3,7 @@
 namespace Wallabag\CoreBundle\Helper;
 
 use Graby\Graby;
-use Psr\Log\LoggerInterface as Logger;
+use Psr\Log\LoggerInterface;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Tools\Utils;
@@ -20,7 +20,7 @@ class ContentProxy
     protected $logger;
     protected $tagRepository;
 
-    public function __construct(Graby $graby, RuleBasedTagger $tagger, TagRepository $tagRepository, Logger $logger)
+    public function __construct(Graby $graby, RuleBasedTagger $tagger, TagRepository $tagRepository, LoggerInterface $logger)
     {
         $this->graby = $graby;
         $this->tagger = $tagger;
@@ -66,6 +66,7 @@ class ContentProxy
         $entry->setUrl($content['url'] ?: $url);
         $entry->setTitle($title);
         $entry->setContent($html);
+
         $entry->setLanguage($content['language']);
         $entry->setMimetype($content['content_type']);
         $entry->setReadingTime(Utils::getReadingTime($html));

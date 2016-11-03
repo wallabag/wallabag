@@ -836,4 +836,64 @@ class EntryControllerTest extends WallabagCoreTestCase
         $client->request('GET', '/share/'.$content->getUuid());
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
     }
+
+    public function testNewEntryWithDownloadImagesEnabled()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $url = 'http://www.20minutes.fr/montpellier/1952003-20161030-video-car-tombe-panne-rugbymen-perpignan-improvisent-melee-route';
+        $client->getContainer()->get('craue_config')->set('download_images_enabled', 1);
+
+        $crawler = $client->request('GET', '/new');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $form = $crawler->filter('form[name=entry]')->form();
+
+        $data = [
+            'entry[url]' => $url,
+        ];
+
+        $client->submit($form, $data);
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+
+        $em = $client->getContainer()
+            ->get('doctrine.orm.entity_manager');
+
+        $entry = $em
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findByUrlAndUserId($url, $this->getLoggedInUserId());
+
+        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $entry);
+        $this->assertEquals($url, $entry->getUrl());
+        $this->assertContains('Perpignan', $entry->getTitle());
+        $this->assertContains('/d9bc0fcd.jpeg', $entry->getContent());
+
+        $client->getContainer()->get('craue_config')->set('download_images_enabled', 0);
+    }
+
+    /**
+     * @depends testNewEntryWithDownloadImagesEnabled
+     */
+    public function testRemoveEntryWithDownloadImagesEnabled()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $url = 'http://www.20minutes.fr/montpellier/1952003-20161030-video-car-tombe-panne-rugbymen-perpignan-improvisent-melee-route';
+        $client->getContainer()->get('craue_config')->set('download_images_enabled', 1);
+
+        $content = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findByUrlAndUserId($url, $this->getLoggedInUserId());
+
+        $client->request('GET', '/delete/'.$content->getId());
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+
+        $client->getContainer()->get('craue_config')->set('download_images_enabled', 0);
+    }
 }

@@ -18,7 +18,7 @@ class WallabagV1ImportTest extends \PHPUnit_Framework_TestCase
     protected $logHandler;
     protected $contentProxy;
 
-    private function getWallabagV1Import($unsetUser = false)
+    private function getWallabagV1Import($unsetUser = false, $dispatched = 0)
     {
         $this->user = new User();
 
@@ -44,7 +44,15 @@ class WallabagV1ImportTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $wallabag = new WallabagV1Import($this->em, $this->contentProxy);
+        $dispatcher = $this->getMockBuilder('Symfony\Component\EventDispatcher\EventDispatcher')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $dispatcher
+            ->expects($this->exactly($dispatched))
+            ->method('dispatch');
+
+        $wallabag = new WallabagV1Import($this->em, $this->contentProxy, $dispatcher);
 
         $this->logHandler = new TestHandler();
         $logger = new Logger('test', [$this->logHandler]);
@@ -68,7 +76,7 @@ class WallabagV1ImportTest extends \PHPUnit_Framework_TestCase
 
     public function testImport()
     {
-        $wallabagV1Import = $this->getWallabagV1Import();
+        $wallabagV1Import = $this->getWallabagV1Import(false, 3);
         $wallabagV1Import->setFilepath(__DIR__.'/../fixtures/wallabag-v1.json');
 
         $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
@@ -101,7 +109,7 @@ class WallabagV1ImportTest extends \PHPUnit_Framework_TestCase
 
     public function testImportAndMarkAllAsRead()
     {
-        $wallabagV1Import = $this->getWallabagV1Import();
+        $wallabagV1Import = $this->getWallabagV1Import(false, 3);
         $wallabagV1Import->setFilepath(__DIR__.'/../fixtures/wallabag-v1-read.json');
 
         $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')

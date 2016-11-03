@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\EventListener;
+namespace Wallabag\CoreBundle\Event\Listener;
 
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;

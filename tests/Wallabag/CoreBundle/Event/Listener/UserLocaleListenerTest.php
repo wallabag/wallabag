@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\CoreBundle\EventListener;
+namespace Tests\Wallabag\CoreBundle\Event\Listener;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Wallabag\CoreBundle\Entity\Config;
-use Wallabag\CoreBundle\EventListener\UserLocaleListener;
+use Wallabag\CoreBundle\Event\Listener\UserLocaleListener;
 use Wallabag\UserBundle\Entity\User;
 
 class UserLocaleListenerTest extends \PHPUnit_Framework_TestCase
