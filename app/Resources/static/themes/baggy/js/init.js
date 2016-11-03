@@ -1,7 +1,5 @@
+/* jQuery */
 import $ from 'jquery';
-import { initFilters, initExport } from '../../_global/js/tools';
-import './shortcuts/main.js';
-import './shortcuts/entry.js';
 
 /* eslint-disable no-unused-vars */
 /* jquery has default scope */
@@ -9,8 +7,16 @@ import cookie from 'jquery.cookie';
 import ui from 'jquery-ui-browserify';
 /* eslint-enable no-unused-vars */
 
+/* Annotations */
 import annotator from 'annotator';
 
+/* Shortcuts */
+import './shortcuts/main';
+import './shortcuts/entry';
+import '../../_global/js/shortcuts/main';
+import '../../_global/js/shortcuts/entry';
+
+/* Tools */
 import { savePercent, retrievePercent } from '../../_global/js/tools';
 import toggleSaveLinkForm from './uiTools';
 
