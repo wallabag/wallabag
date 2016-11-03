@@ -37,16 +37,16 @@
                                 <i class="grey-text text-darken-4 activator material-icons right">more_vert</i>
                             {% endif %}
 
-                            <span class="card-title dot-ellipsis dot-resize-update"><a href="{{ path('view', { 'id': entry.id }) }}" title="{{ entry.title|raw }}">{{ entry.title|striptags|raw }}</a></span>
+                            <span class="card-title dot-ellipsis dot-resize-update"><a href="{{ path('view', { 'id': entry.id }) }}" title="{{ entry.title | raw | striptags }}">{{ entry.title| striptags | truncate(80, true, '…') | raw }}</a></span>
 
                             <div class="original grey-text">
-                                <a href="{{ entry.url|e }}" target="_blank" title="{{ 'entry.list.original_article'|trans }}: {{ entry.title|e }} - {{ entry.domainName|removeWww }}" class="tool original grey-text">
-                                    <span>{{ entry.domainName|removeWww|truncate(18) }}</span>
+                                <a href="{{ entry.url|e }}" target="_blank" title="{{ entry.domainName|removeWww }}" class="tool original grey-text">
+                                    <span>{{ entry.domainName|removeWww|truncate(30, false, '…') }}</span>
                                 </a>
                             </div>
 
                             {% if entry.previewPicture is null %}
-                                <p>{{ entry.content|striptags|slice(0, 300)|raw }}&hellip;</p>
+                                <p>{{ entry.content|striptags|slice(0, 250)|raw }}&hellip;</p>
                                 <ul class="card-entry-labels-hidden">
                                 {% for tag in entry.tags | slice(0, 2) %}
                                     <li><a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a></li>
@@ -59,9 +59,9 @@
                     {% if not entry.previewPicture is null %}
                         <div class="card-reveal">
                             <i class="card-title activator grey-text text-darken-4 material-icons right">clear</i>
-                            <span class="card-title"><a href="{{ path('view', { 'id': entry.id }) }}">{{ entry.title|raw }}</a></span>
+                            <span class="card-title" title="{{ entry.title | raw | striptags }}"><a href="{{ path('view', { 'id': entry.id }) }}">{{ entry.title | raw | striptags | truncate(90, true, '…') }}</a></span>
 
-                            <p>{{ entry.content|striptags|slice(0, 300)|raw }}&hellip;</p>
+                            <p>{{ entry.content|striptags|slice(0, 250)|raw }}&hellip;</p>
 
                             <ul class="card-entry-labels-hidden">
                                 {% for tag in entry.tags %}

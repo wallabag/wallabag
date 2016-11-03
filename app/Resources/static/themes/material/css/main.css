@@ -430,7 +430,7 @@ main ul.row {
 .card .card-content .card-title,
 .card .card-reveal .card-title {
   line-height: 22.8px;
-  max-height: 64px;
+  max-height: 80px;
   font-size: 19px;
   font-family: roberto, "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #313131;
@@ -711,7 +711,14 @@ main ul.row {
   }
 }
 
-@media only screen and (min-width: 993px) and (max-width: 1180px) {
+@media only screen and (min-width: 1200px) and (max-width: 1650px) {
+  .row .col.l3 {
+    width: 33.33333%;
+    margin-left: 0;
+  }
+}
+
+@media only screen and (min-width: 993px) and (max-width: 1200px) {
   .row .col.l1 {
     width: 25%;
     margin-left: 0;
