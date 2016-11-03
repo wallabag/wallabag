@@ -1,0 +1,37 @@
+{% extends "WallabagCoreBundle::layout.html.twig" %}
+
+{% block title %}{{ 'group.page_title'|trans }}{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col s12">
+            <div class="card-panel">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <h4>{{ 'group.new_group'|trans }}</h4>
+
+                        <div id="set6" class="col s12">
+                            {{ form_start(form) }}
+                                {{ form_errors(form) }}
+
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        {{ form_label(form.name) }}
+                                        {{ form_errors(form.name) }}
+                                        {{ form_widget(form.name) }}
+                                    </div>
+                                </div>
+
+                                {{ form_widget(form.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
+                                {{ form_rest(form) }}
+                            </form>
+                            <p><a class="waves-effect waves-light btn blue-grey" href="{{ path('group_index') }}">{{ 'group.form.back_to_list'|trans }}</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

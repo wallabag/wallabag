@@ -7,6 +7,11 @@ wallabag_import:
     type: annotation
     prefix: /import
 
+wallabag_group:
+    resource: "@WallabagGroupBundle/Controller/"
+    type: annotation
+    prefix: /groups
+
 wallabag_user:
     resource: "@WallabagUserBundle/Controller/"
     type: annotation
@@ -40,10 +45,6 @@ homepage:
 
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
-
-fos_user_group:
-    resource: "@FOSUserBundle/Resources/config/routing/group.xml"
-    prefix: /group
 
 fos_oauth_server_token:
     resource: "@FOSOAuthServerBundle/Resources/config/routing/token.xml"

@@ -33,6 +33,7 @@ menu:
         back_to_unread: 'Voltar para os artigos não lidos'
         users_management: 'Gestão de Usuários'
         # site_credentials: 'Site credentials'
+        # groups_management: 'Groups management'
     top:
         add_new_entry: 'Adicionar uma nova entrada'
         search: 'Pesquisa'
@@ -601,3 +602,8 @@ flashes:
             # added: 'Site credential for "%host%" added'
             # updated: 'Site credential for "%host%" updated'
             # deleted: 'Site credential for "%host%" deleted'
+    group:
+        notice:
+            # added: 'Group "%name%" added'
+            # updated: 'Group "%name%" updated'
+            # deleted: 'Group "%name%" deleted'

@@ -1,0 +1,44 @@
+{% extends "WallabagCoreBundle::layout.html.twig" %}
+
+{% block title %}{{ 'group.page_title'|trans }}{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col s12">
+            <div class="card-panel">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <p class="help">{{ 'group.description'|trans|raw }}</p>
+
+                        <table class="bordered">
+                            <thead>
+                                <tr>
+                                    <th>{{ 'group.form.name_label'|trans }}</th>
+                                    <th>{{ 'group.form.roles_label'|trans }}</th>
+                                    <th>{{ 'group.list.actions'|trans }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for group in groups %}
+                                <tr>
+                                    <td>{{ group.name }}</td>
+                                    <td></td>
+                                    <td>
+                                        <a href="{{ path('group_edit', { 'id': group.id }) }}">{{ 'group.list.edit_action'|trans }}</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        <br />
+                        <p>
+                            <a href="{{ path('group_new') }}" class="waves-effect waves-light btn">{{ 'group.list.create_new_one'|trans }}</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
