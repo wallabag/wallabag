@@ -99,5 +99,8 @@
     "stylelint": "^7.3.1",
     "stylelint-config-standard": "^13.0.2",
     "through": "^2.3.8"
+  },
+  "dependencies": {
+    "jr-qrcode": "^1.0.5"
   }
 }

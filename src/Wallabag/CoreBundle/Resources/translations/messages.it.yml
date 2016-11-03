@@ -71,6 +71,7 @@ config:
             300_word: 'Leggo ~300 parole al minuto'
             400_word: 'Leggo ~400 parole al minuto'
         pocket_consumer_key_label: Consumer key per Pocket per importare i contenuti
+        # android_configuration: Configure your Android application
     form_rss:
         description: 'I feed RSS generati da wallabag ti permettono di leggere i tuoi contenuti salvati con il tuo lettore di RSS preferito. Prima, devi generare un token.'
         token_label: 'RSS token'

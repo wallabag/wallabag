@@ -71,6 +71,7 @@ config:
             # 300_word: 'I read ~300 words per minute'
             # 400_word: 'I read ~400 words per minute'
         pocket_consumer_key_label: Brugers nøgle til Pocket for at importere materialer
+        # android_configuration: Configure your Android application
     form_rss:
         description: 'RSS-feeds fra wallabag gør det muligt at læse de artikler, der gemmes i wallabag, med din RSS-læser. Det kræver, at du genererer et token først.'
         token_label: 'RSS-Token'

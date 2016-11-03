@@ -71,6 +71,18 @@
                                 </div>
                             </div>
 
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <h5>{{ 'config.form_settings.android_configuration'|trans }}</h5>
+                                    <a href="wallabag://{{ app.user.username }}@{{ wallabag_url }}" class="waves-effect waves-light btn hide-on-large-only">Touch here to prefill your Android application</a>
+                                    <img id="androidQrcode" class="hide-on-med-and-down" />
+                                </div>
+                                <script>
+                                    const imgBase64 = jrQrcode.getQrBase64('wallabag://{{ app.user.username }}@{{ wallabag_url }}');
+                                    document.getElementById('androidQrcode').src = imgBase64;
+                                </script>
+                            </div>
+
                             {{ form_widget(form.config.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
                             {{ form_rest(form.config) }}
                         </form>
