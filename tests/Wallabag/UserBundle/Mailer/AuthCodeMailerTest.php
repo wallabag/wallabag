@@ -26,7 +26,6 @@ class AuthCodeMailerTest extends \PHPUnit_Framework_TestCase
     protected $mailer;
     protected $spool;
     protected $twig;
-    protected $config;
 
     protected function setUp()
     {
@@ -44,14 +43,6 @@ class AuthCodeMailerTest extends \PHPUnit_Framework_TestCase
 TWIG;
 
         $this->twig = new \Twig_Environment(new \Twig_Loader_Array(['WallabagUserBundle:TwoFactor:email_auth_code.html.twig' => $twigTemplate]));
-
-        $this->config = $this->getMockBuilder('Craue\ConfigBundle\Util\Config')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $this->config->expects($this->any())
-            ->method('get')
-            ->willReturn('http://0.0.0.0/support');
     }
 
     public function testSendEmail()
@@ -67,7 +58,8 @@ TWIG;
             $this->twig,
             'nobody@test.io',
             'wallabag test',
-            $this->config
+            'http://0.0.0.0/support',
+            'http://0.0.0.0/'
         );
 
         $authCodeMailer->sendAuthCode($user);

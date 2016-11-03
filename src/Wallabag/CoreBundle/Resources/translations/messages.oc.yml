@@ -150,7 +150,7 @@ entry:
         starred: 'Articles favorits'
         archived: 'Articles legits'
         filtered: 'Articles filtrats'
-        filtered_tags: 'Filtats per etiquetas'
+        filtered_tags: 'Filtats per etiquetas:'
         untagged: 'Articles sens etiqueta'
     list:
         number_on_the_page: "{0} I a pas cap d'article.|{1} I a un article.|]1,Inf[ I a %count% articles."
@@ -472,7 +472,6 @@ flashes:
             rss_updated: 'La configuracion dels fluxes RSS es ben estada mesa a jorn'
             tagging_rules_updated: 'Règlas misa a jorn'
             tagging_rules_deleted: 'Règla suprimida'
-            user_added: 'Utilizaire "%username%" ajustat'
             rss_token_updated: 'Geton RSS mes a jorn'
             # annotations_reset: Annotations reset
             # tags_reset: Tags reset

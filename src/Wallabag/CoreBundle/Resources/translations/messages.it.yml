@@ -150,7 +150,7 @@ entry:
         starred: 'Contenuti preferiti'
         archived: 'Contenuti archiviati'
         filtered: 'Contenuti filtrati'
-        # filtered_tags: 'Filtered by tags'
+        # filtered_tags: 'Filtered by tags:'
         # untagged: 'Untagged entries'
     list:
         number_on_the_page: "{0} Non ci sono contenuti.|{1} C'è un contenuto.|]1,Inf[ Ci sono %count% contenuti."
@@ -472,7 +472,6 @@ flashes:
             rss_updated: 'Informazioni RSS aggiornate'
             tagging_rules_updated: 'Regole di tagging aggiornate'
             tagging_rules_deleted: 'Regola di tagging aggiornate'
-            user_added: 'Utente "%username%" aggiunto'
             rss_token_updated: 'RSS token aggiornato'
             # annotations_reset: Annotations reset
             # tags_reset: Tags reset

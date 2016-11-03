@@ -7,6 +7,8 @@ require 'capistrano/setup'
 # Include default deployment tasks
 require 'capistrano/deploy'
 
+require 'capistrano/composer'
+require 'capistrano/file-permissions'
 require 'capistrano/symfony'
 
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined

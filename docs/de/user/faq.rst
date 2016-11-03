@@ -43,3 +43,10 @@ Ich habe mein Passwort vergessen
 
 Du kannst dein Passwort zurücksetzen, indem du auf den Link ``Kennwort vergessen?`` auf der Loginseite klickst. Fülle dann das Formular mit deiner E-Mail-Adresse oder deinem Nutzernamen aus
 und du wirst eine E-Mail zum Passwort zurücksetzen erhalten.
+
+Ich erhalte den Fehler ``failed to load external entity``, wenn ich wallabag installiere
+----------------------------------------------------------------------------------------
+
+Wie `hier <https://github.com/wallabag/wallabag/issues/2529>`_ beschrieben, bearbeite bitte deine Datei ``web/app.php`` und füge ihr diese Zeile ``libxml_disable_entity_loader(false);`` in Zeile 5 hinzu.
+
+Dies ist ein Doctrine / PHP Fehler - nichts, woran wir etwas ändern können.

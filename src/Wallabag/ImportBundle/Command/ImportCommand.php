@@ -56,6 +56,9 @@ class ImportCommand extends ContainerAwareCommand
             case 'instapaper':
                 $import = $this->getContainer()->get('wallabag_import.instapaper.import');
                 break;
+            case 'instapaper':
+                $wallabag = $this->getContainer()->get('wallabag_import.instapaper.import');
+                break;
             case 'v1':
             default:
                 $import = $this->getContainer()->get('wallabag_import.wallabag_v1.import');

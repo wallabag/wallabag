@@ -150,7 +150,7 @@ entry:
         starred: 'Wpisy oznaczone gwiazdką'
         archived: 'Zarchiwizowane wpisy'
         filtered: 'Odfiltrowane wpisy'
-        filtered_tags: 'Filtrowane po tagach'
+        filtered_tags: 'Filtrowane po tagach:'
         untagged: 'Odtaguj wpisy'
     list:
         number_on_the_page: '{0} Nie ma wpisów.|{1} Jest jeden wpis.|]1,Inf[ Są %count% wpisy.'
@@ -472,7 +472,6 @@ flashes:
             rss_updated: 'Informacje RSS zaktualizowane'
             tagging_rules_updated: 'Reguły tagowania zaktualizowane'
             tagging_rules_deleted: 'Reguła tagowania usunięta'
-            user_added: 'Użytkownik "%username%" dodany'
             rss_token_updated: 'Token kanału RSS zaktualizowany'
             annotations_reset: Zresetuj adnotacje
             tags_reset: Zresetuj tagi

@@ -150,7 +150,7 @@ entry:
         starred: 'Favorisierte Einträge'
         archived: 'Archivierte Einträge'
         filtered: 'Gefilterte Einträge'
-        filtered_tags: 'Gefiltert nach Tags'
+        filtered_tags: 'Gefiltert nach Tags:'
         untagged: 'Nicht getaggte Einträge'
     list:
         number_on_the_page: '{0} Es gibt keine Einträge.|{1} Es gibt einen Eintrag.|]1,Inf[ Es gibt %count% Einträge.'
@@ -472,7 +472,6 @@ flashes:
             rss_updated: 'RSS-Informationen aktualisiert'
             tagging_rules_updated: 'Tagging-Regeln aktualisiert'
             tagging_rules_deleted: 'Tagging-Regel gelöscht'
-            user_added: 'Benutzer "%username%" erstellt'
             rss_token_updated: 'RSS-Token aktualisiert'
             # annotations_reset: Annotations reset
             # tags_reset: Tags reset

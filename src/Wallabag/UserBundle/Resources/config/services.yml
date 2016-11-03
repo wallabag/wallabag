@@ -6,7 +6,8 @@ services:
             - "@twig"
             - "%scheb_two_factor.email.sender_email%"
             - "%scheb_two_factor.email.sender_name%"
-            - "@craue_config"
+            - '@=service(''craue_config'').get(''wallabag_support_url'')'
+            - '@=service(''craue_config'').get(''wallabag_url'')'
 
     wallabag_user.password_resetting:
         class: Wallabag\UserBundle\EventListener\PasswordResettingListener

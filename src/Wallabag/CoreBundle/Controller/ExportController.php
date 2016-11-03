@@ -4,8 +4,10 @@ namespace Wallabag\CoreBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\CoreBundle\Entity\Tag;
 
 /**
  * The try/catch can be removed once all formats will be implemented.
@@ -51,15 +53,24 @@ class ExportController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function downloadEntriesAction($format, $category)
+    public function downloadEntriesAction(Request $request, $format, $category)
     {
         $method = ucfirst($category);
         $methodBuilder = 'getBuilderFor'.$method.'ByUser';
-        $entries = $this->getDoctrine()
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->$methodBuilder($this->getUser()->getId())
-            ->getQuery()
-            ->getResult();
+
+        if ($category == 'tag_entries') {
+            $tag = $this->getDoctrine()->getRepository('WallabagCoreBundle:Tag')->findOneBySlug($request->query->get('tag'));
+
+            $entries = $this->getDoctrine()
+                ->getRepository('WallabagCoreBundle:Entry')
+                ->findAllByTagId($this->getUser()->getId(), $tag->getId());
+        } else {
+            $entries = $this->getDoctrine()
+                ->getRepository('WallabagCoreBundle:Entry')
+                ->$methodBuilder($this->getUser()->getId())
+                ->getQuery()
+                ->getResult();
+        }
 
         try {
             return $this->get('wallabag_core.helper.entries_export')

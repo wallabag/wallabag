@@ -37,7 +37,7 @@ Arrêter RabbitMQ
 Configurer RabbitMQ dans wallabag
 ---------------------------------
 
-Modifiez votre fichier ``parameters.yml`` pour éditer la configuration RabbitMQ. Celle par défaut devrait convenir :
+Modifiez votre fichier ``app/config/parameters.yml`` pour éditer la configuration RabbitMQ. Celle par défaut devrait convenir :
 
 .. code:: yaml
 

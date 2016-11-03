@@ -4,7 +4,6 @@ namespace Wallabag\UserBundle\Mailer;
 
 use Scheb\TwoFactorBundle\Model\Email\TwoFactorInterface;
 use Scheb\TwoFactorBundle\Mailer\AuthCodeMailerInterface;
-use Craue\ConfigBundle\Util\Config;
 
 /**
  * Custom mailer for TwoFactorBundle email.
@@ -61,16 +60,17 @@ class AuthCodeMailer implements AuthCodeMailerInterface
      * @param \Twig_Environment $twig
      * @param string            $senderEmail
      * @param string            $senderName
-     * @param Config            $craueConfig Craue\Config instance to get wallabag support url from database
+     * @param string            $supportUrl  wallabag support url
+     * @param string            $wallabagUrl wallabag instance url
      */
-    public function __construct(\Swift_Mailer $mailer, \Twig_Environment $twig, $senderEmail, $senderName, Config $craueConfig)
+    public function __construct(\Swift_Mailer $mailer, \Twig_Environment $twig, $senderEmail, $senderName, $supportUrl, $wallabagUrl)
     {
         $this->mailer = $mailer;
         $this->twig = $twig;
         $this->senderEmail = $senderEmail;
         $this->senderName = $senderName;
-        $this->supportUrl = $craueConfig->get('wallabag_support_url');
-        $this->wallabagUrl = $craueConfig->get('wallabag_url');
+        $this->supportUrl = $supportUrl;
+        $this->wallabagUrl = $wallabagUrl;
     }
 
     /**

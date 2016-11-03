@@ -150,7 +150,7 @@ entry:
         starred: 'Artículos favoritos'
         archived: 'Artículos archivados'
         filtered: 'Artículos filtrados'
-        # filtered_tags: 'Filtered by tags'
+        # filtered_tags: 'Filtered by tags:'
         # untagged: 'Untagged entries'
     list:
         number_on_the_page: '{0} No hay artículos.|{1} Hay un artículo.|]1,Inf[ Hay %count% artículos.'
@@ -472,7 +472,6 @@ flashes:
             rss_updated: 'La configuración de los feeds RSS ha sido actualizada'
             tagging_rules_updated: 'Regla de etiquetado borrada'
             tagging_rules_deleted: 'Regla de etiquetado actualizada'
-            user_added: 'Usuario "%username%" añadido'
             rss_token_updated: 'RSS token actualizado'
             # annotations_reset: Annotations reset
             # tags_reset: Tags reset

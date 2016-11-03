@@ -55,6 +55,7 @@ services:
                         '.fok.nl': 'Googlebot/2.1'
                         'getpocket.com': 'PHP/5.2'
                         'iansommerville.com': 'PHP/5.2'
+                        '.slashdot.org': 'PHP/5.2'
         calls:
             - [ setLogger, [ "@logger" ] ]
         tags:
@@ -91,7 +92,7 @@ services:
     wallabag_core.helper.entries_export:
         class: Wallabag\CoreBundle\Helper\EntriesExport
         arguments:
-            - "@craue_config"
+            - '@=service(''craue_config'').get(''wallabag_url'')'
             - src/Wallabag/CoreBundle/Resources/public/themes/_global/img/appicon/apple-touch-icon-152.png
 
     wallabag.operator.array.matches:
