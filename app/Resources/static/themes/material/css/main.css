@@ -233,8 +233,17 @@ div.pagination ul .next.disabled {
   color: #fff;
 }
 
+.page-footer .footer-copyright {
+  min-width: 50px;
+  height: auto !important;
+  line-height: 1em !important;
+}
+
 .page-footer .footer-copyright p {
-  display: inline;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  display: block;
 }
 
 .hidden {
@@ -450,6 +459,13 @@ main ul.row {
 .card .card-content .original {
   line-height: 24px;
   font-size: 15px;
+}
+
+a.original {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  display: block;
 }
 
 .card .card-entry-labels {
