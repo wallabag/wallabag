@@ -4,14 +4,14 @@ Wallabag von 2.1.x auf 2.1.y updaten
 Update auf einem dedizierten Webserver
 --------------------------------------
 
-Das neueste Release ist auf https://www.wallabag.org/pages/download-wallabag.html veröffentlicht. Um deine wallabag Installation auf die neueste Version upzudaten, führe die folgenden Kommandos in deinem wallabag Ordner aus (ersetze ``2.1.2`` mit der neuesten Releasenummer):
+Das neueste Release ist auf https://www.wallabag.org/pages/download-wallabag.html veröffentlicht. Um deine wallabag Installation auf die neueste Version upzudaten, führe die folgenden Kommandos in deinem wallabag Ordner aus (ersetze ``2.1.3`` mit der neuesten Releasenummer):
 
 ::
 
     rm -rf var/cache/*
     git fetch origin
     git fetch --tags
-    git checkout 2.1.2 --force
+    git checkout 2.1.3 --force
     SYMFONY_ENV=prod composer install --no-dev -o --prefer-dist
     php bin/console cache:clear --env=prod
 

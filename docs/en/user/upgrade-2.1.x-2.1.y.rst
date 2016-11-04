@@ -4,14 +4,14 @@ Upgrading from 2.1.x to 2.1.y
 Upgrade on a dedicated web server
 ---------------------------------
 
-The last release is published on https://www.wallabag.org/pages/download-wallabag.html. In order to upgrade your wallabag installation and get the last version, run the following commands in you wallabag folder (replace ``2.1.2`` by the last release number):
+The last release is published on https://www.wallabag.org/pages/download-wallabag.html. In order to upgrade your wallabag installation and get the last version, run the following commands in you wallabag folder (replace ``2.1.3`` by the last release number):
 
 ::
 
     rm -rf var/cache/*
     git fetch origin
     git fetch --tags
-    git checkout 2.1.2 --force
+    git checkout 2.1.3 --force
     SYMFONY_ENV=prod composer install --no-dev -o --prefer-dist
     php bin/console cache:clear --env=prod
 
