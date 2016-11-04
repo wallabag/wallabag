@@ -9,7 +9,7 @@ During this documentation, we assume the release is `$LAST_WALLABAG_RELEASE`.
 #### Files to edit
 
 - `app/config/config.yml` (`wallabag_core.version`)
-- `CHANGELOG.md` (by using this command `github_changelog_generator --no-compare-link --header-label="# Changelog" --no-issues --no-pr-wo-labels --since-tag="1.9.2" --future-release="2.1.3"`. [github-changelog-generator is available here](https://github.com/skywinder/github-changelog-generator))
+- `CHANGELOG.md` (by using this command `github-changes -o wallabag -r wallabag -k YOURGITHUBTOKEN --only-pulls --use-commit-body --title Changelog --date-format YYYY/MM/DD --between-tags 2.0.0-alpha.0...master -n 2.1.3`. [github-changes is available here](https://github.com/lalitkapoor/github-changes))
 
 #### Create release on GitHub
 
