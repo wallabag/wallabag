@@ -71,7 +71,7 @@ config:
             300_word: "Legissi a l'entorn de 300 mots per minuta"
             400_word: "Legissi a l'entorn de 400 mots per minuta"
         pocket_consumer_key_label: Clau d'autentificacion Pocket per importar las donadas
-        # android_configuration: Configure your Android application
+        android_configuration: Configuratz vòstra aplicacion Android
     form_rss:
         description: "Los fluxes RSS fornits per wallabag vos permeton de legir vòstres articles salvagardats dins vòstre lector de fluxes preferit. Per los poder emplegar, vos cal, d'en primièr crear un geton."
         token_label: 'Geton RSS'
@@ -90,17 +90,17 @@ config:
         email_label: 'Adreça de corrièl'
         twoFactorAuthentication_label: 'Dobla autentificacion'
         delete:
-            # title: Delete my account (a.k.a danger zone)
-            # description: If you remove your account, ALL your articles, ALL your tags, ALL your annotations and your account will be PERMANENTLY removed (it can't be UNDONE). You'll then be logged out.
-            # confirm: Are you really sure? (THIS CAN'T BE UNDONE)
-            # button: Delete my account
+            title: Suprimir mon compte (Mèfi zòna perilhosa)
+            description: Se confirmatz la supression de vòstre compte, TOTES vòstres articles, TOTAS vòstras etiquetas, TOTAS vòstras anotacions e vòstre compte seràn suprimits per totjorn. E aquò es IRREVERSIBLE. Puèi seretz desconnectat.
+            confirm: Sètz vertadièrament segur ? (ES IRREVERSIBLE)
+            button: Suprimir mon compte
     reset:
-        # title: Reset area (a.k.a danger zone)
-        # description: By hiting buttons below you'll have ability to remove some informations from your account. Be aware that these actions are IRREVERSIBLE.
-        # annotations: Remove ALL annotations
-        # tags: Remove ALL tags
-        # entries: Remove ALL entries
-        # confirm: Are you really really sure? (THIS CAN'T BE UNDONE)
+        title: Zòna de reïnicializacion (Mèfi zòna perilhosa)
+        description: En clicant sul boton çai-jos auretz la possibilitat de levar qualques informacions de vòstre compte. Mèfi que totas aquelas accions son IRREVERSIBLAS.
+        annotations: Levar TOTAS las anotacions
+        tags: Levar TOTAS las etiquetas
+        entries: Levar TOTES los articles
+        confirm: Sètz vertadièrament segur ? (ES IRREVERSIBLE)
     form_password:
         old_password_label: 'Senhal actual'
         new_password_label: 'Senhal novèl'
@@ -368,7 +368,7 @@ import:
         how_to: "Mercés de seleccionar vòstre Readability fichièr e de clicar sul boton dejós per lo telecargar e l'importar."
     worker:
         enabled: "L'importacion se fa de manièra asincròna. Un còp l'importacion lançada, una aisina externa s'ocuparà dels messatges un per un. Lo servici actual es : "
-        # download_images_warning: "You enabled downloading images for your articles. Combined with classic import it can take ages to proceed (or maybe failed). We <strong>strongly recommend</strong> to enable asynchronous import to avoid errors."
+        download_images_warning: "Avètz activat lo telecargament de los imatges de vòstres articles. Combinat amb l'importacion classica, aquò pòt tardar un long moment (o benlèu fracassar). <strong>Recomandem fòrtament</strong> l'activacion de l'importacion asincròna per evitar las errors."
     firefox:
         page_title: 'Importar > Firefox'
         description: "Aquesta aisina importarà totas vòstres favorits de Firefox. Just go to your bookmarks (Ctrl+Maj+O), then into \"Import and backup\", choose \"Backup...\". You will obtain a .json file."
@@ -460,7 +460,7 @@ user:
         back_to_list: 'Tornar a la lista'
 
 error:
-    # page_title: An error occurred
+    page_title: Una error s'es produsida
 
 flashes:
     config:
@@ -473,9 +473,9 @@ flashes:
             tagging_rules_updated: 'Règlas misa a jorn'
             tagging_rules_deleted: 'Règla suprimida'
             rss_token_updated: 'Geton RSS mes a jorn'
-            # annotations_reset: Annotations reset
-            # tags_reset: Tags reset
-            # entries_reset: Entries reset
+            annotations_reset: Anotacions levadas
+            tags_reset: Etiquetas levadas
+            entries_reset: Articles levats
     entry:
         notice:
             entry_already_saved: 'Article ja salvargardat lo %date%'
@@ -507,6 +507,6 @@ flashes:
             client_deleted: 'Client suprimit'
     user:
         notice:
-            # added: 'User "%username%" added'
-            # updated: 'User "%username%" updated'
-            # deleted: 'User "%username%" deleted'
+            added: 'Utilizaire "%username%" ajustat'
+            updated: 'Utilizaire "%username%" mes a jorn'
+            deleted: 'Utilizaire "%username%" suprimit'
