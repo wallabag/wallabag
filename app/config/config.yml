@@ -266,6 +266,11 @@ old_sound_rabbit_mq:
             exchange_options:
                 name: 'wallabag.import.readability'
                 type: topic
+        import_pinboard:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.pinboard'
+                type: topic
         import_instapaper:
             connection: default
             exchange_options:
@@ -316,6 +321,14 @@ old_sound_rabbit_mq:
             queue_options:
                 name: 'wallabag.import.instapaper'
             callback: wallabag_import.consumer.amqp.instapaper
+        import_pinboard:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.pinboard'
+                type: topic
+            queue_options:
+                name: 'wallabag.import.pinboard'
+            callback: wallabag_import.consumer.amqp.pinboard
         import_wallabag_v1:
             connection: default
             exchange_options:

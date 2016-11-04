@@ -381,6 +381,10 @@ import:
         page_title: 'İçe Aktar > Instapaper'
         # description: 'This importer will import all your Instapaper articles. On the settings (https://www.instapaper.com/user) page, click on "Download .CSV file" in the "Export" section. A CSV file will be downloaded (like "instapaper-export.csv").'
         # how_to: 'Please select your Instapaper export and click on the below button to upload and import it.'
+    pinboard:
+        # page_title: "Import > Pinboard"
+        # description: 'This importer will import all your Instapaper articles. On the backup (https://pinboard.in/settings/backup) page, click on "JSON" in the "Bookmarks" section. A JSON file will be downloaded (like "pinboard_export").'
+        # how_to: 'Please select your Pinboard export and click on the below button to upload and import it.'
 
 developer:
     # page_title: 'Developer'

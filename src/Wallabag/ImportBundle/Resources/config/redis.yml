@@ -42,6 +42,27 @@ services:
             - "@event_dispatcher"
             - "@logger"
 
+    # pinboard
+    wallabag_import.queue.redis.pinboard:
+        class: Simpleue\Queue\RedisQueue
+        arguments:
+            - "@wallabag_core.redis.client"
+            - "wallabag.import.pinboard"
+
+    wallabag_import.producer.redis.pinboard:
+        class: Wallabag\ImportBundle\Redis\Producer
+        arguments:
+            - "@wallabag_import.queue.redis.pinboard"
+
+    wallabag_import.consumer.redis.pinboard:
+        class: Wallabag\ImportBundle\Consumer\RedisEntryConsumer
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@wallabag_user.user_repository"
+            - "@wallabag_import.pinboard.import"
+            - "@event_dispatcher"
+            - "@logger"
+
     # pocket
     wallabag_import.queue.redis.pocket:
         class: Simpleue\Queue\RedisQueue

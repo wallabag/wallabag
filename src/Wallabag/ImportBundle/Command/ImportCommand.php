@@ -17,7 +17,7 @@ class ImportCommand extends ContainerAwareCommand
             ->setDescription('Import entries from a JSON export')
             ->addArgument('userId', InputArgument::REQUIRED, 'User ID to populate')
             ->addArgument('filepath', InputArgument::REQUIRED, 'Path to the JSON file')
-            ->addOption('importer', null, InputArgument::OPTIONAL, 'The importer to use: v1, v2, instapaper, readability, firefox or chrome', 'v1')
+            ->addOption('importer', null, InputArgument::OPTIONAL, 'The importer to use: v1, v2, instapaper, pinboard, readability, firefox or chrome', 'v1')
             ->addOption('markAsRead', null, InputArgument::OPTIONAL, 'Mark all entries as read', false)
         ;
     }
@@ -55,6 +55,9 @@ class ImportCommand extends ContainerAwareCommand
                 break;
             case 'instapaper':
                 $import = $this->getContainer()->get('wallabag_import.instapaper.import');
+                break;
+            case 'pinboard':
+                $import = $this->getContainer()->get('wallabag_import.pinboard.import');
                 break;
             default:
                 $import = $this->getContainer()->get('wallabag_import.wallabag_v1.import');

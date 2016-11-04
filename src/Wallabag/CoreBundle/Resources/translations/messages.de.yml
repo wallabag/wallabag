@@ -381,6 +381,10 @@ import:
         page_title: 'Aus Instapaper importieren'
         description: 'Dieser Import wird all deine Instapaper Artikel importieren. Auf der Einstellungsseite (https://www.instapaper.com/user) klickst du auf "Download .CSV Datei" in dem Abschnitt "Export". Eine CSV Datei wird heruntergeladen (z.B. "instapaper-export.csv").'
         how_to: "Bitte wähle deine Instapaper Sicherungsdatei aus und klicke den nachfolgenden Button zum Importieren."
+    pinboard:
+        # page_title: "Import > Pinboard"
+        # description: 'This importer will import all your Instapaper articles. On the backup (https://pinboard.in/settings/backup) page, click on "JSON" in the "Bookmarks" section. A JSON file will be downloaded (like "pinboard_export").'
+        # how_to: 'Please select your Pinboard export and click on the below button to upload and import it.'
 
 developer:
     page_title: 'Entwickler'
