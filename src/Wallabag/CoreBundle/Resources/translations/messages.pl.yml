@@ -71,7 +71,7 @@ config:
             300_word: 'Czytam ~300 słów na minutę'
             400_word: 'Czytam ~400 słów na minutę'
         pocket_consumer_key_label: 'Klucz klienta Pocket do importu zawartości'
-        # android_configuration: Configure your Android application
+        android_configuration: Skonfiguruj swoją androidową aplikację
     form_rss:
         description: 'Kanały RSS prowadzone przez wallabag pozwalają Ci na czytanie twoich zapisanych artykułów w twoium ulubionym czytniku RSS. Musisz najpierw wynegenerować tokena.‌'
         token_label: 'Token RSS'
@@ -368,7 +368,7 @@ import:
         how_to: 'Wybierz swój plik eksportu z Readability i kliknij poniższy przycisk, aby go załadować.'
     worker:
         enabled: "Import jest wykonywany asynchronicznie. Od momentu rozpoczęcia importu, zewnętrzna usługa może zajmować się na raz tylko jednym zadaniem. Bieżącą usługą jest:"
-        # download_images_warning: "You enabled downloading images for your articles. Combined with classic import it can take ages to proceed (or maybe failed). We <strong>strongly recommend</strong> to enable asynchronous import to avoid errors."
+        download_images_warning: "Włączyłeś pobieranie obrazów dla swoich artykułów. W połączeniu z klasycznym importem, może to zająć dużo czasu (lub zakończyć się niepowodzeniem).<strong>Zdecydowanie zalecamy</strong> włączenie asynchronicznego importu, w celu uniknięcia błędów."
     firefox:
        page_title: 'Import > Firefox'
        description: "Ten importer zaimportuje wszystkie twoje zakładki z Firefoksa. Idź do twoich zakładek (Ctrl+Shift+O), następnie w \"Import i kopie zapasowe\", wybierz \"Utwórz kopię zapasową...\". Uzyskasz plik .json."
@@ -507,6 +507,6 @@ flashes:
             client_deleted: 'Klient usunięty'
     user:
         notice:
-            # added: 'User "%username%" added'
-            # updated: 'User "%username%" updated'
-            # deleted: 'User "%username%" deleted'
+            added: 'Użytkownik "%username%" dodany'
+            updated: 'Użytkownik "%username%" zaktualizowany'
+            deleted: 'Użytkownik "%username%" usunięty'
