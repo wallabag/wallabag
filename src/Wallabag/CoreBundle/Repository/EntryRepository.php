@@ -22,7 +22,7 @@ class EntryRepository extends EntityRepository
         return $this->createQueryBuilder('e')
             ->leftJoin('e.user', 'u')
             ->andWhere('u.id = :userId')->setParameter('userId', $userId)
-            ->orderBy('e.id', 'desc')
+            ->orderBy('e.createdAt', 'desc')
         ;
     }
 
