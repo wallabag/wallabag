@@ -212,27 +212,38 @@
             <h1>{{ entry.title|raw }} <a href="{{ path('edit', { 'id': entry.id }) }}" title="{{ 'entry.view.edit_title'|trans }}">✎</a></h1>
         </header>
         <aside>
-            {% set readingTime = entry.readingTime / app.user.config.readingSpeed %}
-            <i class="material-icons">timer</i>
-            <span class="link">
-                {% if readingTime > 0 %}
-                    {{ 'entry.list.reading_time_minutes_short'|trans({'%readingTime%': readingTime|round}) }}
-                {% else %}
-                    {{ 'entry.list.reading_time_less_one_minute_short'|trans|raw }}
-                {% endif %}
-            </span>
-            <i class="material-icons" title="{{ 'entry.view.created_at'|trans }}">today</i><span class="link">{{ entry.createdAt|date('Y-m-d') }}</span>
-            <a href="{{ entry.url|e }}" target="_blank" title="{{ 'entry.view.original_article'|trans }} : {{ entry.title|e }}" class="tool">
-                <i class="material-icons link">link</i> <span class="link">{{ entry.domainName|removeWww }}</span>
-            </a>
-            <span class="tool"><i class="material-icons link">comment</i></span> <span class="link">{{ 'entry.view.annotations_on_the_entry'|transchoice(entry.annotations | length) }}</span>
-            <div id="list">
-                {% for tag in entry.tags %}
-                    <div class="chip">
-                    <a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a> <a href="{{ path('remove_tag', { 'entry': entry.id, 'tag': tag.id }) }}"><i class="material-icons">delete</i></a>
-                    </div>
-                {% endfor %}
-            </div>
+            <ul class="tools">
+                <li>
+                    {% set readingTime = entry.readingTime / app.user.config.readingSpeed %}
+                    <i class="material-icons">timer</i>
+                    {% if readingTime > 0 %}
+                        {{ 'entry.list.reading_time_minutes_short'|trans({'%readingTime%': readingTime|round}) }}
+                    {% else %}
+                        {{ 'entry.list.reading_time_less_one_minute_short'|trans|raw }}
+                    {% endif %}
+                </li>
+                <li>
+                    <i class="material-icons" title="{{ 'entry.view.created_at'|trans }}">today</i>
+                    {{ entry.createdAt|date('Y-m-d') }}
+                </li>
+                <li>
+                    <i class="material-icons link">link</i>
+                    <a href="{{ entry.url|e }}" target="_blank" title="{{ 'entry.view.original_article'|trans }} : {{ entry.title|e }}" class="tool">
+                        {{ entry.domainName|removeWww }}
+                    </a>
+                </li>
+                <li>
+                    <i class="material-icons link">comment</i>
+                    {{ 'entry.view.annotations_on_the_entry'|transchoice(entry.annotations | length) }}
+                </li>
+                <li id="list">
+                    {% for tag in entry.tags %}
+                        <div class="chip">
+                        <a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a> <a href="{{ path('remove_tag', { 'entry': entry.id, 'tag': tag.id }) }}"><i class="material-icons">delete</i></a>
+                        </div>
+                    {% endfor %}
+                </li>
+            </ul>
 
             <div class="input-field nav-panel-add-tag" style="display: none">
                 {{ render(controller( "WallabagCoreBundle:Tag:addTagForm", { 'id': entry.id } )) }}

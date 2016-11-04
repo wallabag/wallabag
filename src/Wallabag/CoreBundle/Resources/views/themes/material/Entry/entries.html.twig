@@ -9,11 +9,19 @@
 {% endblock %}
 
 {% block content %}
-    {% include "WallabagCoreBundle:Entry:pager.html.twig" with {'entries': entries} %}
+    <div class="results clearfix">
+        <div class="nb-results left">
+            {{ 'entry.list.number_on_the_page'|transchoice(entries.count) }}
+        </div>
+        {% if entries.getNbPages > 1 %}
+            {{ pagerfanta(entries, 'twitter_bootstrap_translated', {'proximity': 1}) }}
+        {% endif %}
+    </div>
+
     <br />
     <ul class="row data">
         {% for entry in entries %}
-            <li id="entry-{{ entry.id|e }}" class="col l4 m6 s12">
+            <li id="entry-{{ entry.id|e }}" class="col l3 m6 s12">
                 <div class="card">
 
                     <div class="card-body">
@@ -30,24 +38,19 @@
 
                         <div class="card-content">
                             {% if not entry.previewPicture is null %}
-                                <i class="card-title grey-text text-darken-4 activator material-icons right">more_vert</i>
+                                <i class="grey-text text-darken-4 activator material-icons right">more_vert</i>
                             {% endif %}
 
-                            <span class="card-title dot-ellipsis dot-resize-update"><a href="{{ path('view', { 'id': entry.id }) }}" title="{{ entry.title|raw }}">{{ entry.title|striptags|raw }}</a></span>
+                            <span class="card-title dot-ellipsis dot-resize-update"><a href="{{ path('view', { 'id': entry.id }) }}" title="{{ entry.title | raw | striptags }}">{{ entry.title| striptags | truncate(80, true, '…') | raw }}</a></span>
 
-                            <div class="estimatedTime grey-text">
-                                <span class="tool reading-time">
-                                    {% set readingTime = entry.readingTime / app.user.config.readingSpeed %}
-                                    {% if readingTime > 0 %}
-                                        {{ 'entry.list.reading_time_minutes'|trans({'%readingTime%': readingTime|round}) }}
-                                    {% else %}
-                                        {{ 'entry.list.reading_time_less_one_minute'|trans|raw }}
-                                    {% endif %}
-                                </span>
+                            <div class="original grey-text">
+                                <a href="{{ entry.url|e }}" target="_blank" title="{{ entry.domainName|removeWww }}" class="tool original grey-text">
+                                    <span>{{ entry.domainName|removeWww }}</span>
+                                </a>
                             </div>
 
                             {% if entry.previewPicture is null %}
-                                <p>{{ entry.content|striptags|slice(0, 300)|raw }}&hellip;</p>
+                                <p>{{ entry.content|striptags|slice(0, 250)|raw }}&hellip;</p>
                                 <ul class="card-entry-labels-hidden">
                                 {% for tag in entry.tags | slice(0, 2) %}
                                     <li><a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a></li>
@@ -59,16 +62,10 @@
 
                     {% if not entry.previewPicture is null %}
                         <div class="card-reveal">
-                            <i class="card-title grey-text text-darken-4 material-icons right">clear</i>
-                            <span class="card-title"><a href="{{ path('view', { 'id': entry.id }) }}">{{ entry.title|raw }}</a></span>
+                            <i class="card-title activator grey-text text-darken-4 material-icons right">clear</i>
+                            <span class="card-title" title="{{ entry.title | raw | striptags }}"><a href="{{ path('view', { 'id': entry.id }) }}">{{ entry.title | raw | striptags | truncate(90, true, '…') }}</a></span>
 
-                            <div class="estimatedTime grey-text">
-                                <span class="tool reading-time">
-                                    {% if readingTime > 0 %}{{ 'entry.list.reading_time_minutes'|trans({'%readingTime%': readingTime|round}) }}{% else %}{{ 'entry.list.reading_time_less_one_minute'|trans|raw }}{% endif %}
-                                </span>
-                            </div>
-
-                            <p>{{ entry.content|striptags|slice(0, 300)|raw }}&hellip;</p>
+                            <p>{{ entry.content|striptags|slice(0, 250)|raw }}&hellip;</p>
 
                             <ul class="card-entry-labels-hidden">
                                 {% for tag in entry.tags %}
@@ -79,8 +76,9 @@
                     {% endif %}
 
                     <div class="card-action">
-                        <span class="bold">
-                            <a href="{{ entry.url|e }}" target="_blank" title="{{ 'entry.list.original_article'|trans }}: {{ entry.title|e }} - {{ entry.domainName|removeWww }}" class="tool original grey-text"><span>{{ entry.domainName|removeWww|truncate(18) }}</span></a>
+                        <span class="reading-time grey-text">
+                            <i class="material-icons" title="{{ 'entry.list.reading_time'|trans }}">timer</i>
+                            {{ entry.readingTime / app.user.config.readingSpeed }} min
                         </span>
 
                         <ul class="tools right">
@@ -95,6 +93,10 @@
             </li>
         {% endfor %}
     </ul>
+
+    {% if entries.getNbPages > 1 %}
+        {{ pagerfanta(entries, 'twitter_bootstrap_translated', {'proximity': 1}) }}
+    {% endif %}
 
     <!-- Export -->
     <div id="export" class="side-nav fixed right-aligned">
