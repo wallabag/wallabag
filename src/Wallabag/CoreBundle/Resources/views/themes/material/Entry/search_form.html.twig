@@ -1,0 +1,14 @@
+<form name="search
+" method="GET" action="{{ path('search')}}">
+    {% if form_errors(form) %}
+        <span class="black-text">{{ form_errors(form) }}</span>
+    {% endif %}
+
+    {% if form_errors(form.term) %}
+        <span class="black-text">{{ form_errors(form.term) }}</span>
+    {% endif %}
+
+    {{ form_widget(form.term, { 'attr': {'autocomplete': 'off', 'placeholder': 'entry.search.placeholder'} }) }}
+
+    {{ form_rest(form) }}
+</form>

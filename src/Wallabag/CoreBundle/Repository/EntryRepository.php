@@ -86,6 +86,25 @@ class EntryRepository extends EntityRepository
     }
 
     /**
+     * Retrieves entries filtered with a search term for a user.
+     *
+     * @param int    $userId
+     * @param string $term
+     *
+     * @return QueryBuilder
+     */
+    public function getBuilderForSearchByUser($userId, $term)
+    {
+        return $this
+            ->getBuilderByUser($userId)
+            ->andWhere('e.content LIKE :term')->setParameter('term', '%'.$term.'%')
+            ->orWhere('e.title LIKE :term')->setParameter('term', '%'.$term.'%')
+            ->leftJoin('e.tags', 't')
+            ->groupBy('e.id')
+            ->having('count(t.id) = 0');
+    }
+
+    /**
      * Retrieves untagged entries for a user.
      *
      * @param int $userId

@@ -1,11 +1,14 @@
 {% extends "WallabagCoreBundle::layout.html.twig" %}
 
 {% block title %}
-    {% set currentTag = '' %}
+    {% set filter = '' %}
     {% if tag is defined %}
-        {% set currentTag = tag %}
+        {% set filter = tag %}
     {% endif %}
-    {% include "@WallabagCore/themes/common/Entry/_title.html.twig" with {'currentTag': currentTag} %}
+    {% if searchTerm is not empty %}
+        {% set filter = searchTerm %}
+    {% endif %}
+    {% include "@WallabagCore/themes/common/Entry/_title.html.twig" with {'filter': filter} %}
 {% endblock %}
 
 {% block content %}

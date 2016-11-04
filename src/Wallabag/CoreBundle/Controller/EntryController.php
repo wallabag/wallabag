@@ -15,9 +15,33 @@ use Wallabag\CoreBundle\Form\Type\NewEntryType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Wallabag\CoreBundle\Event\EntrySavedEvent;
 use Wallabag\CoreBundle\Event\EntryDeletedEvent;
+use Wallabag\CoreBundle\Form\Type\SearchEntryType;
 
 class EntryController extends Controller
 {
+    /**
+     * @param Request $request
+     * @param int     $page
+     *
+     * @Route("/search/{page}", name="search", defaults={"page" = "1"})
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function searchFormAction(Request $request, $page)
+    {
+        $form = $this->createForm(SearchEntryType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            return $this->showEntries('search', $request, $page);
+        }
+
+        return $this->render('WallabagCoreBundle:Entry:search_form.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
     /**
      * Fetch content and update entry.
      * In case it fails, entry will return to avod loosing the data.
@@ -244,8 +268,13 @@ class EntryController extends Controller
     private function showEntries($type, Request $request, $page)
     {
         $repository = $this->get('wallabag_core.entry_repository');
+        $searchTerm = (isset($request->get('search_entry')['term']) ? $request->get('search_entry')['term'] : '');
 
         switch ($type) {
+            case 'search':
+                $qb = $repository->getBuilderForSearchByUser($this->getUser()->getId(), $searchTerm);
+
+                break;
             case 'untagged':
                 $qb = $repository->getBuilderForUntaggedByUser($this->getUser()->getId());
 
@@ -294,11 +323,11 @@ class EntryController extends Controller
         }
 
         return $this->render(
-            'WallabagCoreBundle:Entry:entries.html.twig',
-            [
+            'WallabagCoreBundle:Entry:entries.html.twig', [
                 'form' => $form->createView(),
                 'entries' => $entries,
                 'currentPage' => $page,
+                'searchTerm' => $searchTerm,
             ]
         );
     }
