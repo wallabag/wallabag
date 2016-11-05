@@ -23,6 +23,14 @@
                                     </div>
                                 </div>
 
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        {{ form_label(edit_form.users) }}
+                                        {{ form_errors(edit_form.users) }}
+                                        {{ form_widget(edit_form.users) }}
+                                    </div>
+                                </div>
+
                                 <br/>
 
                                 {{ form_widget(edit_form.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
