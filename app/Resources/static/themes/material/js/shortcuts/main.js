@@ -6,16 +6,12 @@ function toggleFocus(cardToToogleFocus) {
     $(cardToToogleFocus).toggleClass('z-depth-4');
   }
 }
-let card;
-let cardIndex;
-let cardNumber;
-let pagination;
 
 $(document).ready(() => {
-  cardIndex = 0;
-  cardNumber = $('#content ul.data > li').length;
-  card = $('#content ul.data > li')[cardIndex];
-  pagination = $('.pagination');
+  let cardIndex = 0;
+  const cardNumber = $('#content ul.data > li').length;
+  let card = $('#content ul.data > li')[cardIndex];
+  const pagination = $('.pagination');
 
   /* If we come from next page */
   if (window.location.hash === '#prev') {
@@ -44,9 +40,8 @@ $(document).ready(() => {
       toggleFocus(card);
       return;
     }
-    if (pagination != null && pagination.find('li.next') && cardIndex === cardNumber - 1) {
+    if (pagination.length > 0 && pagination.find('li.next:not(.disabled)').length > 0 && cardIndex === cardNumber - 1) {
       window.location.href = window.location.origin + $(pagination).find('li.next a').attr('href');
-      return;
     }
   });
 
@@ -59,9 +54,8 @@ $(document).ready(() => {
       toggleFocus(card);
       return;
     }
-    if (pagination !== null && $(pagination).find('li.prev') && cardIndex === 0) {
+    if (pagination.length > 0 && $(pagination).find('li.prev:not(.disabled)').length > 0 && cardIndex === 0) {
       window.location.href = `${window.location.origin + $(pagination).find('li.prev a').attr('href')}#prev`;
-      return;
     }
   });
 

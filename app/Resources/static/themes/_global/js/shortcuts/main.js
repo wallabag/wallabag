@@ -1,6 +1,5 @@
 import Mousetrap from 'mousetrap';
 
-
 /** Shortcuts **/
 
 /* Go to */
