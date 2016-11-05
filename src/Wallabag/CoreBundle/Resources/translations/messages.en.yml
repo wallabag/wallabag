@@ -42,6 +42,7 @@ menu:
         random_entry: Jump to a random entry from that list
         export: 'Export'
         account: 'My account'
+        sort_entries: 'Sort entries'
     search_form:
         input_label: 'Enter your search here'
 
@@ -256,6 +257,15 @@ entry:
         action:
             clear: 'Clear'
             filter: 'Filter'
+    sort:
+        title: 'Sort options'
+        status_label: 'Sort by'
+        by:
+            creation_date: 'Creation date'
+            title: 'Title'
+            last_updated: 'Last updated'
+        ascending: 'Asencending'
+        descending: 'Descending'
     view:
         left_menu:
             back_to_top: 'Back to top'

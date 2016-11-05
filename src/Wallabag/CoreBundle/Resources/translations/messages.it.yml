@@ -42,6 +42,7 @@ menu:
         # random_entry: Jump to a random entry from that list
         export: 'Esporta'
         # account: 'My account'
+        # sort_entries: 'Sort entries'
     search_form:
         input_label: 'Inserisci qui la tua ricerca'
 
@@ -256,6 +257,15 @@ entry:
         action:
             clear: 'Pulisci'
             filter: 'Filtra'
+    sort:
+        # title: 'Sort options'
+        # status_label: 'Sort by'
+        # by:
+        #    creation_date: 'Creation date'
+        #    title: 'Title'
+        #    last_updated: 'Last updated'
+        #ascending: 'Asencending'
+        # descending: 'Descending'
     view:
         left_menu:
             back_to_top: "Torna all'inizio"

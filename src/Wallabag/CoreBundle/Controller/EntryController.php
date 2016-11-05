@@ -532,9 +532,9 @@ class EntryController extends Controller
         $searchTerm = (isset($request->get('search_entry')['term']) ? $request->get('search_entry')['term'] : '');
         $currentRoute = (null !== $request->query->get('currentRoute') ? $request->query->get('currentRoute') : '');
 
-        $sortBy = 'id';
-        if (in_array($request->get('sort', 'id'), ['id', 'created_at', 'title', 'updated_at'], true)) {
-            $sortBy = $request->get('sort', 'id');
+        $sortBy = 'createdAt';
+        if (in_array($request->get('sort', 'createdAt'), ['id', 'createdAt', 'title', 'updatedAt'], true)) {
+            $sortBy = $request->get('sort', 'createdAt');
         }
 
         $direction = 'DESC' === $request->get('direction') ? 'DESC' : 'ASC';

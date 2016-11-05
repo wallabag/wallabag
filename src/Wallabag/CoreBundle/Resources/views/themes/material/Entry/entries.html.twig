@@ -216,17 +216,16 @@
 
         <div class="row">
             <div class="col s12">
-                <label>{{ 'entry.sort_by.status_label'|trans }}</label>
+                <label>{{ 'entry.sort.status_label'|trans }}</label>
             </div>
 
             <div class="input-field col s12 with-checkbox">
                 <select>
                     <option value="" disabled selected>Creation date</option>
-                    <option value="1">Sort by creation date</option>
-                    <option value="2">Sort by title</option>
-                    <option value="3">Sort by last updated</option>
+                    <option value="createdAt">{{ 'entry.sort.by.creation_date' | trans }}</option>
+                    <option value="title">{{ 'entry.sort.by.title' | trans }}</option>
+                    <option value="updatedAt">{{ 'entry.sort.by.last_updated' | trans }}</option>
                 </select>
-                {{ form_label(form.isArchived) }}
             </div>
 
             <div class="col s12">
