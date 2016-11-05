@@ -5,7 +5,7 @@
     {% if tag is defined %}
         {% set filter = tag %}
     {% endif %}
-    {% if searchTerm is not empty %}
+    {% if searchTerm is defined and searchTerm is not empty %}
         {% set filter = searchTerm %}
     {% endif %}
     {% include "@WallabagCore/themes/common/Entry/_title.html.twig" with {'filter': filter} %}
