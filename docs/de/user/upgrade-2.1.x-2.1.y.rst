@@ -8,12 +8,7 @@ Das neueste Release ist auf https://www.wallabag.org/pages/download-wallabag.htm
 
 ::
 
-    rm -rf var/cache/*
-    git fetch origin
-    git fetch --tags
-    git checkout 2.1.3 --force
-    SYMFONY_ENV=prod composer install --no-dev -o --prefer-dist
-    php bin/console cache:clear --env=prod
+    make update
 
 Update auf einem Shared Webhosting
 ----------------------------------
