@@ -29,7 +29,6 @@ class AppKernel extends Kernel
             new KPhoen\RulerZBundle\KPhoenRulerZBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Craue\ConfigBundle\CraueConfigBundle(),
-            new Lexik\Bundle\MaintenanceBundle\LexikMaintenanceBundle(),
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
 
             // wallabag bundles

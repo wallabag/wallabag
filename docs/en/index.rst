@@ -58,6 +58,5 @@ The documentation is available in other languages:
    developer/docker
    developer/documentation
    developer/translate
-   developer/maintenance
    developer/redis
    developer/rabbitmq
