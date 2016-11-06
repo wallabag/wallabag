@@ -47,6 +47,7 @@ Bitte beachte, dass wir in dieser Version neue Parameter hinzugefügt haben. Du 
         database_password: null
         database_path: '%kernel.root_dir%/../data/db/wallabag.sqlite'
         database_table_prefix: wallabag_
+        database_socket: null
         mailer_transport: smtp
         mailer_host: 127.0.0.1
         mailer_user: null
@@ -63,8 +64,10 @@ Bitte beachte, dass wir in dieser Version neue Parameter hinzugefügt haben. Du 
         rabbitmq_port: 5672
         rabbitmq_user: guest
         rabbitmq_password: guest
+        redis_scheme: tcp
         redis_host: localhost
         redis_port: 6379
+        redis_path: null
 
 Du kannst `hier eine Dokumentation über die Parameter finden <http://doc.wallabag.org/en/master/user/parameters.html>`_.
 
