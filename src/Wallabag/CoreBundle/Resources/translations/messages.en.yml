@@ -100,11 +100,11 @@ config:
             button: Delete my account
     reset:
         title: Reset area (a.k.a danger zone)
-        description: By hiting buttons below you'll have ability to remove some informations from your account. Be aware that these actions are IRREVERSIBLE.
+        description: By hitting buttons below you'll have ability to remove some information from your account. Be aware that these actions are IRREVERSIBLE.
         annotations: Remove ALL annotations
         tags: Remove ALL tags
         entries: Remove ALL entries
-        confirm: Are you really really sure? (THIS CAN'T BE UNDONE)
+        confirm: Are you really sure? (THIS CAN'T BE UNDONE)
     form_password:
         old_password_label: 'Current password'
         new_password_label: 'New password'
