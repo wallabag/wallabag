@@ -48,6 +48,13 @@ class ConfigType extends AbstractType
                     'config.form_settings.reading_speed.400_word' => '2',
                 ],
             ])
+            ->add('action_mark_as_read', ChoiceType::class, [
+                'label' => 'config.form_settings.action_mark_as_read.label',
+                'choices' => [
+                    'config.form_settings.action_mark_as_read.redirect_homepage' => '0',
+                    'config.form_settings.action_mark_as_read.redirect_current_page' => '1',
+                ],
+            ])
             ->add('language', ChoiceType::class, [
                 'choices' => array_flip($this->languages),
                 'label' => 'config.form_settings.language_label',

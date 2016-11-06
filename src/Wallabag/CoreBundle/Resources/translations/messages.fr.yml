@@ -70,6 +70,10 @@ config:
             200_word: "Je lis environ 200 mots par minute"
             300_word: "Je lis environ 300 mots par minute"
             400_word: "Je lis environ 400 mots par minute"
+        action_mark_as_read:
+            label: 'Où souhaitez-vous être redirigé après avoir marqué un article comme lu ?'
+            redirect_homepage: "À la page d'accueil"
+            redirect_current_page: 'À la page courante'
         pocket_consumer_key_label: Clé d’authentification Pocket pour importer les données
         android_configuration: Configurez votre application Android
     form_rss:

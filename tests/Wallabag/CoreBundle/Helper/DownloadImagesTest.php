@@ -3,7 +3,6 @@
 namespace Tests\Wallabag\CoreBundle\Helper;
 
 use Wallabag\CoreBundle\Helper\DownloadImages;
-use Psr\Log\NullLogger;
 use Monolog\Logger;
 use Monolog\Handler\TestHandler;
 use GuzzleHttp\Client;

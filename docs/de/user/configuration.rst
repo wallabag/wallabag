@@ -28,6 +28,15 @@ Lesegeschwindigkeit
 wallabag berechnet die Lesezeit für jeden Artikel. Du kannst hier definieren, dank dieser Liste, ob du
 ein schneller oder langsamer Leser bist. wallabag wird die Lesezeit für jeden Artikel neu berechnen.
 
+Where do you want to be redirected after mark an article as read?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Each time you'll do some actions (after marking an article as read/favorite,
+after deleting an article, after removing a tag from an entry), you can be redirected:
+
+- To the homepage
+- To the current page
+
 Sprache
 ~~~~~~~
 

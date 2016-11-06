@@ -88,6 +88,13 @@ class Config
     private $pocketConsumerKey;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="action_mark_as_read", type="integer", nullable=true)
+     */
+    private $actionMarkAsRead;
+
+    /**
      * @ORM\OneToOne(targetEntity="Wallabag\UserBundle\Entity\User", inversedBy="config")
      */
     private $user;
@@ -307,6 +314,26 @@ class Config
     public function getPocketConsumerKey()
     {
         return $this->pocketConsumerKey;
+    }
+
+    /**
+     * @return int
+     */
+    public function getActionMarkAsRead()
+    {
+        return $this->actionMarkAsRead;
+    }
+
+    /**
+     * @param int $actionMarkAsRead
+     *
+     * @return Config
+     */
+    public function setActionMarkAsRead($actionMarkAsRead)
+    {
+        $this->actionMarkAsRead = $actionMarkAsRead;
+
+        return $this;
     }
 
     /**

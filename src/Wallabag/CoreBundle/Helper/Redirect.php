@@ -3,6 +3,7 @@
 namespace Wallabag\CoreBundle\Helper;
 
 use Symfony\Component\Routing\Router;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 /**
  * Manage redirections to avoid redirecting to empty routes.
@@ -10,10 +11,12 @@ use Symfony\Component\Routing\Router;
 class Redirect
 {
     private $router;
+    private $actionMarkAsRead;
 
-    public function __construct(Router $router)
+    public function __construct(Router $router, TokenStorage $token)
     {
         $this->router = $router;
+        $this->actionMarkAsRead = $token->getToken()->getUser()->getConfig()->getActionMarkAsRead();
     }
 
     /**
@@ -24,6 +27,10 @@ class Redirect
      */
     public function to($url, $fallback = '')
     {
+        if ($this->actionMarkAsRead == 0) {
+            return $this->router->generate('homepage');
+        }
+
         if (null !== $url) {
             return $url;
         }

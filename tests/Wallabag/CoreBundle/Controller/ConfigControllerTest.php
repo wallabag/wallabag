@@ -51,6 +51,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
             'config[theme]' => 'baggy',
             'config[items_per_page]' => '30',
             'config[reading_speed]' => '0.5',
+            'config[action_mark_as_read]' => '0',
             'config[language]' => 'en',
         ];
 

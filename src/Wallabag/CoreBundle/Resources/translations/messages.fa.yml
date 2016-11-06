@@ -70,6 +70,10 @@ config:
             200_word: 'من تقریباً ۲۰۰ واژه را در دقیقه می‌خوانم'
             300_word: 'من تقریباً ۳۰۰ واژه را در دقیقه می‌خوانم'
             400_word: 'من تقریباً ۴۰۰ واژه را در دقیقه می‌خوانم'
+        action_mark_as_read:
+            # label: 'Where do you to be redirected after mark an article as read?'
+            # redirect_homepage: 'To the homepage'
+            # redirect_current_page: 'To the current page'
         pocket_consumer_key_label: کلید کاربری Pocket برای درون‌ریزی مطالب
         # android_configuration: Configure your Android application
     form_rss:

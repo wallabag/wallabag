@@ -70,6 +70,10 @@ config:
             200_word: 'Ich lese ~200 Wörter pro Minute'
             300_word: 'Ich lese ~300 Wörter pro Minute'
             400_word: 'Ich lese ~400 Wörter pro Minute'
+        action_mark_as_read:
+            # label: 'Where do you to be redirected after mark an article as read?'
+            # redirect_homepage: 'To the homepage'
+            # redirect_current_page: 'To the current page'
         pocket_consumer_key_label: Consumer-Key für Pocket, um Inhalte zu importieren
         # android_configuration: Configure your Android application
     form_rss:

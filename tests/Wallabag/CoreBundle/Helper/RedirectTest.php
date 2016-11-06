@@ -15,7 +15,10 @@ class RedirectTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->routerMock = $this->getRouterMock();
-        $this->redirect = new Redirect($this->routerMock);
+        $tokenStorage = $this->getMockBuilder('Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface')
+            ->disableOriginalConstructor()
+            ->getMock();
+        $this->redirect = new Redirect($this->routerMock, $tokenStorage);
     }
 
     public function testRedirectToNullWithFallback()

@@ -70,6 +70,10 @@ config:
             200_word: 'I read ~200 words per minute'
             300_word: 'I read ~300 words per minute'
             400_word: 'I read ~400 words per minute'
+        action_mark_as_read:
+            label: 'Where do you want to be redirected after mark an article as read?'
+            redirect_homepage: 'To the homepage'
+            redirect_current_page: 'To the current page'
         pocket_consumer_key_label: Consumer key for Pocket to import contents
         android_configuration: Configure your Android application
     form_rss:
