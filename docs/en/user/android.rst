@@ -1,12 +1,10 @@
-Android App
-===========
-
+Android application
+===================
 
 Purpose of this document
 ------------------------
 
 This document describes how you can setup your Android application to work with your wallabag instance. There is no difference in this procedure for wallabag v1 or v2.
-
 
 Steps to configure your app
 ---------------------------
@@ -71,8 +69,6 @@ Finally after the synchronisation finished successfully, you are presented to th
     :alt: Filled article list cause feeds successfully synchronized
     :align: center
 
-
-
 Known limitations
 -----------------
 
@@ -81,18 +77,15 @@ Known limitations
 
 Currently the Android application does not support two-factor authentication. You should disable that to get the application working.
 
-
 Limited amount of articles with wallabag v2
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In your wallabag web instance you can configure how many items are part of the RSS feed. This option did not exist in wallabag v1, where all articles were part of the feed. So if you set the amount of articles being displayed greater than the number of items being content of your RSS feed, you will only see the number of items in your RSS feed.
 
-
 SSL/TLS encryption
 ~~~~~~~~~~~~~~~~~~
 
 If you can reach your wallabag web instance via HTTPS, you should use that. Especially if your HTTP URL redirects you to the HTTPS one. Currently, the app cannot handle that redirect properly.
-
 
 References
 ----------
