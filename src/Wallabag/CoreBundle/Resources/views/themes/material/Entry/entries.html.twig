@@ -78,7 +78,7 @@
                     <div class="card-action">
                         <span class="reading-time grey-text">
                             <i class="material-icons" title="{{ 'entry.list.reading_time'|trans }}">timer</i>
-                            {{ entry.readingTime / app.user.config.readingSpeed }} min
+                            {{ entry.readingTime / app.user.config.readingSpeed|round }} min
                         </span>
 
                         <ul class="tools right">
