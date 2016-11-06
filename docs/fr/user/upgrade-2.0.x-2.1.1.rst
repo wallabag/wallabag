@@ -45,6 +45,7 @@ Vérifiez que votre fichier ``app/config/parameters.yml`` contient tous les para
         database_password: null
         database_path: '%kernel.root_dir%/../data/db/wallabag.sqlite'
         database_table_prefix: wallabag_
+        database_socket: null
         mailer_transport: smtp
         mailer_host: 127.0.0.1
         mailer_user: null
@@ -61,8 +62,10 @@ Vérifiez que votre fichier ``app/config/parameters.yml`` contient tous les para
         rabbitmq_port: 5672
         rabbitmq_user: guest
         rabbitmq_password: guest
+        redis_scheme: tcp
         redis_host: localhost
         redis_port: 6379
+        redis_path: null
 
 Vous trouverez `ici une documentation détaillée concernant les paramètres <http://doc.wallabag.org/fr/master/user/parameters.html>`_.
 
