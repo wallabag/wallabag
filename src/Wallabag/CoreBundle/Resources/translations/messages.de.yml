@@ -71,11 +71,11 @@ config:
             300_word: 'Ich lese ~300 Wörter pro Minute'
             400_word: 'Ich lese ~400 Wörter pro Minute'
         action_mark_as_read:
-            # label: 'Where do you to be redirected after mark an article as read?'
-            # redirect_homepage: 'To the homepage'
-            # redirect_current_page: 'To the current page'
+            label: 'Wohin soll nach dem Gelesenmarkieren eines Artikels weitergeleitet werden?'
+            redirect_homepage: 'Zur Homepage'
+            redirect_current_page: 'Zur aktuellen Seite'
         pocket_consumer_key_label: Consumer-Key für Pocket, um Inhalte zu importieren
-        # android_configuration: Configure your Android application
+        android_configuration: Konfiguriere deine Android Application
     form_rss:
         description: 'Die RSS-Feeds von wallabag erlauben es dir, deine gespeicherten Artikel mit deinem bevorzugten RSS-Reader zu lesen. Vorher musst du jedoch einen Token erstellen.'
         token_label: 'RSS-Token'
@@ -94,17 +94,17 @@ config:
         email_label: 'E-Mail-Adresse'
         twoFactorAuthentication_label: 'Zwei-Faktor-Authentifizierung'
         delete:
-            # title: Delete my account (a.k.a danger zone)
-            # description: If you remove your account, ALL your articles, ALL your tags, ALL your annotations and your account will be PERMANENTLY removed (it can't be UNDONE). You'll then be logged out.
-            # confirm: Are you really sure? (THIS CAN'T BE UNDONE)
-            # button: Delete my account
+            title: Lösche mein Konto (a.k.a Gefahrenzone)
+            description: Wenn du dein Konto löschst, werden ALL deine Artikel, ALL deine Tags, ALL deine Anmerkungen und dein Konto dauerhaft gelöscht (kann NICHT RÜCKGÄNGIG gemacht werden). Du wirst anschließend ausgeloggt.
+            confirm: Bist du wirklich sicher? (DIES KANN NICHT RÜCKGÄNGIG GEMACHT WERDEN)
+            button: Lösche mein Konto
     reset:
-        # title: Reset area (a.k.a danger zone)
-        # description: By hiting buttons below you'll have ability to remove some informations from your account. Be aware that these actions are IRREVERSIBLE.
-        # annotations: Remove ALL annotations
-        # tags: Remove ALL tags
-        # entries: Remove ALL entries
-        # confirm: Are you really really sure? (THIS CAN'T BE UNDONE)
+        title: Zurücksetzen (a.k.a Gefahrenzone)
+        description: Beim Nutzen der folgenden Schaltflächenhast du die Möglichkeit, einige Informationen von deinem Konto zu entfernen. Sei dir bewusst, dass dies NICHT RÜCKGÄNGIG zu machen ist.
+        annotations: Entferne ALLE Annotationen
+        tags: Entferne ALLE Tags
+        entries: Entferne ALLE Einträge
+        confirm: Bist du wirklich sicher? (DIES KANN NICHT RÜCKGÄNGIG GEMACHT WERDEN)
     form_password:
         old_password_label: 'Altes Kennwort'
         new_password_label: 'Neues Kennwort'
@@ -375,7 +375,7 @@ import:
         how_to: 'Bitte wähle deinen Readability Export aus und klicke den unteren Button für das Hochladen und Importieren dessen.'
     worker:
         enabled: "Der Import erfolgt asynchron. Sobald der Import gestartet ist, wird diese Aufgabe extern abgearbeitet. Der aktuelle Service dafür ist:"
-        # download_images_warning: "You enabled downloading images for your articles. Combined with classic import it can take ages to proceed (or maybe failed). We <strong>strongly recommend</strong> to enable asynchronous import to avoid errors."
+        download_images_warning: "Du hast das Herunterladen von Bildern für deine Artikel aktiviert. Verbunden mit dem klassischen Import kann es ewig dauern fortzufahren (oder sogar fehlschlagen). Wir <strong>empfehlen</strong> den asynchronen Import zu aktivieren, um Fehler zu vermeiden."
     firefox:
         page_title: 'Aus Firefox importieren'
         description: "Dieser Import wird all deine Lesezeichen aus Firefox importieren. Gehe zu deinen Lesezeichen (Strg+Shift+O), dann auf \"Importen und Sichern\", wähle \"Sichern…\". Du erhälst eine .json Datei."
@@ -471,7 +471,7 @@ user:
         back_to_list: Zurück zur Liste
 
 error:
-    # page_title: An error occurred
+    page_title: Ein Fehler ist aufgetreten
 
 flashes:
     config:
@@ -484,9 +484,9 @@ flashes:
             tagging_rules_updated: 'Tagging-Regeln aktualisiert'
             tagging_rules_deleted: 'Tagging-Regel gelöscht'
             rss_token_updated: 'RSS-Token aktualisiert'
-            # annotations_reset: Annotations reset
-            # tags_reset: Tags reset
-            # entries_reset: Entries reset
+            annotations_reset: Anmerkungen zurücksetzen
+            tags_reset: Tags zurücksetzen
+            entries_reset: Einträge zurücksetzen
     entry:
         notice:
             entry_already_saved: 'Eintrag bereits am %date% gespeichert'
@@ -518,6 +518,6 @@ flashes:
             client_deleted: 'Client gelöscht'
     user:
         notice:
-            # added: 'User "%username%" added'
-            # updated: 'User "%username%" updated'
-            # deleted: 'User "%username%" deleted'
+            added: 'Benutzer "%username%" hinzugefügt'
+            updated: 'Benutzer "%username%" aktualisiert'
+            deleted: 'Benutzer "%username%" gelöscht'
