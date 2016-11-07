@@ -12,7 +12,7 @@ use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\ChoiceFilterType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class EntryFilterType extends AbstractType
 {
@@ -22,13 +22,18 @@ class EntryFilterType extends AbstractType
     /**
      * Repository & user are used to get a list of language entries for this user.
      *
-     * @param EntityRepository $entryRepository
-     * @param TokenStorage     $token
+     * @param EntityRepository      $entryRepository
+     * @param TokenStorageInterface $tokenStorage
      */
-    public function __construct(EntityRepository $entryRepository, TokenStorage $token)
+    public function __construct(EntityRepository $entryRepository, TokenStorageInterface $tokenStorage)
     {
         $this->repository = $entryRepository;
-        $this->user = $token->getToken()->getUser();
+
+        $this->user = $tokenStorage->getToken() ? $tokenStorage->getToken()->getUser() : null;
+
+        if (null === $this->user || !is_object($this->user)) {
+            return null;
+        }
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
