@@ -3,6 +3,7 @@
 namespace Tests\Wallabag\CoreBundle\Controller;
 
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
+use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\Entry;
 
 class EntryControllerTest extends WallabagCoreTestCase
@@ -895,5 +896,69 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
 
         $client->getContainer()->get('craue_config')->set('download_images_enabled', 0);
+    }
+
+    public function testRedirectToHomepage()
+    {
+        $this->logInAs('empty');
+        $client = $this->getClient();
+
+        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+        $user = $em
+            ->getRepository('WallabagUserBundle:User')
+            ->find($this->getLoggedInUserId());
+
+        if (!$user) {
+            $this->markTestSkipped('No user found in db.');
+        }
+
+        // Redirect to homepage
+        $config = $user->getConfig();
+        $config->setActionMarkAsRead(Config::REDIRECT_TO_HOMEPAGE);
+        $em->persist($config);
+        $em->flush();
+
+        $content = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findByUrlAndUserId($this->url, $this->getLoggedInUserId());
+
+        $client->request('GET', '/view/'.$content->getId());
+        $client->request('GET', '/archive/'.$content->getId());
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertEquals('/', $client->getResponse()->headers->get('location'));
+    }
+
+    public function testRedirectToCurrentPage()
+    {
+        $this->logInAs('empty');
+        $client = $this->getClient();
+
+        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+        $user = $em
+            ->getRepository('WallabagUserBundle:User')
+            ->find($this->getLoggedInUserId());
+
+        if (!$user) {
+            $this->markTestSkipped('No user found in db.');
+        }
+
+        // Redirect to current page
+        $config = $user->getConfig();
+        $config->setActionMarkAsRead(Config::REDIRECT_TO_CURRENT_PAGE);
+        $em->persist($config);
+        $em->flush();
+
+        $content = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findByUrlAndUserId($this->url, $this->getLoggedInUserId());
+
+        $client->request('GET', '/view/'.$content->getId());
+        $client->request('GET', '/archive/'.$content->getId());
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertContains('/view/'.$content->getId(), $client->getResponse()->headers->get('location'));
     }
 }

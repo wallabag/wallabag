@@ -25,14 +25,14 @@ class RedirectTest extends \PHPUnit_Framework_TestCase
     {
         $redirectUrl = $this->redirect->to(null, 'fallback');
 
-        $this->assertEquals('fallback', $redirectUrl);
+        $this->assertEquals(null, $redirectUrl);
     }
 
     public function testRedirectToNullWithoutFallback()
     {
         $redirectUrl = $this->redirect->to(null);
 
-        $this->assertEquals($this->routerMock->generate('homepage'), $redirectUrl);
+        $this->assertEquals(null, $redirectUrl);
     }
 
     public function testRedirectToValidUrl()
