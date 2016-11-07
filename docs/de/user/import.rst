@@ -30,53 +30,50 @@ Du musst wallabag erlauben, mit deinem Pocketaccount zu interagieren.
 Deine Daten werden importiert. Datenimport kann ein sehr anspruchsvoller Prozess für deinen Server
 sein (wir müssen daran arbeiten, um diesen Import zu verbessern).
 
-From Readability
+Von Readability
 ----------------
 
-Export your Readability data
+Exportiere deine Readability Daten
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-On the tools (`https://www.readability.com/tools/ <https://www.readability.com/tools/>`_) page, click on "Export your data" in the "Data Export" section. You will received an email to download a json (which does not end with .json in fact).
+Auf der Seite Tools (`https://www.readability.com/tools/ <https://www.readability.com/tools/>`_), klicke auf "Exportiere deine Daten" in dem Abschnitt "Daten Export". Du wirst eine E-Mail empfangen, um eine JSON Datei herunterladen zu können (Datei endet aber nicht auf .json).
 
-Import your data into wallabag 2.x
+Importiere deine Daten in wallabag 2.x
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Click on ``Import`` link in the menu, on ``Import contents`` in Readability section
-and then select your json file and upload it.
+Klicke auf den ``Importieren`` Link im Menü, auf ``Importiere Inhalte`` in dem Readability Abschnitt und wähle dann deine JSON Datei aus und lade sie hoch.
 
-Your data will be imported. Data import can be a demanding process for your server.
+Deine Daten werden importiert. Der Datenimport can ein beanspruchender Prozess für deinen Server sein.
 
-From Pinboard
+Von Pinboard
 -------------
 
-Export your Pinboard data
+Exportiere deine Pinboard Daten
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-On the backup (`https://pinboard.in/settings/backup <https://pinboard.in/settings/backup>`_) page, click on "JSON" in the "Bookmarks" section. A JSON file will be downloaded (like ``pinboard_export``).
+Auf der Seite Backup (`https://pinboard.in/settings/backup <https://pinboard.in/settings/backup>`_), klicke auf "JSON" in dem Abschnitt "Lesezeichen". Eine JSON Datei wird heruntergeladen (z.B. ``pinboard_export``).
 
-Import your data into wallabag 2.x
+Importiere deine Daten in wallabag 2.x
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Click on ``Import`` link in the menu, on ``Import contents`` in Pinboard section
-and then select your json file and upload it.
+Klicke auf den ``Importieren`` Link im Menü, auf ``Importiere Inhalte`` in dem Pinboard Abschnitt und wähle dann deine JSON Datei aus und lade sie hoch.
 
-Your data will be imported. Data import can be a demanding process for your server.
+Deine Daten werden importiert. Der Datenimport can ein beanspruchender Prozess für deinen Server sein.
 
-From Instapaper
+Von Instapaper
 ---------------
 
-Export your Instapaper data
+Exportiere deine Instapaper Daten
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-On the settings (`https://www.instapaper.com/user <https://www.instapaper.com/user>`_) page, click on "Download .CSV file" in the "Export" section. A CSV file will be downloaded (like ``instapaper-export.csv``).
+Auf der Seite Einstellungen (`https://www.instapaper.com/user <https://www.instapaper.com/user>`_), klicke auf "Download .CSV Datei" in dem Abschnitt "Export". Eine CSV Datei wird heruntergeladen (z.B. ``instapaper-export.csv``).
 
-Import your data into wallabag 2.x
+Importiere deine Daten in wallabag 2.x
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Click on ``Import`` link in the menu, on ``Import contents`` in Instapaper section
-and then select your CSV file and upload it.
+Klicke auf den ``Importieren`` Link im Menü, auf ``Importiere Inhalte`` in dem Instapaper Abschnitt und wähle dann deine JSON Datei aus und lade sie hoch.
 
-Your data will be imported. Data import can be a demanding process for your server.
+Deine Daten werden importiert. Der Datenimport can ein beanspruchender Prozess für deinen Server sein.
 
 
 Von einer HTML oder JSON Datei
