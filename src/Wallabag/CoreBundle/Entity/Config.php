@@ -16,6 +16,9 @@ use Wallabag\UserBundle\Entity\User;
  */
 class Config
 {
+    const REDIRECT_TO_HOMEPAGE = 0;
+    const REDIRECT_TO_CURRENT_PAGE = 1;
+
     /**
      * @var int
      *

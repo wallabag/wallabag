@@ -4,6 +4,7 @@ namespace Wallabag\CoreBundle\Helper;
 
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Wallabag\CoreBundle\Entity\Config;
 
 /**
  * Manage redirections to avoid redirecting to empty routes.
@@ -27,7 +28,7 @@ class Redirect
      */
     public function to($url, $fallback = '')
     {
-        if ($this->actionMarkAsRead == 0) {
+        if (Config::REDIRECT_TO_HOMEPAGE === $this->actionMarkAsRead) {
             return $this->router->generate('homepage');
         }
 

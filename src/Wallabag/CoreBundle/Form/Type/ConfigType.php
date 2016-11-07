@@ -7,6 +7,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Wallabag\CoreBundle\Entity\Config;
 
 class ConfigType extends AbstractType
 {
@@ -51,8 +52,8 @@ class ConfigType extends AbstractType
             ->add('action_mark_as_read', ChoiceType::class, [
                 'label' => 'config.form_settings.action_mark_as_read.label',
                 'choices' => [
-                    'config.form_settings.action_mark_as_read.redirect_homepage' => '0',
-                    'config.form_settings.action_mark_as_read.redirect_current_page' => '1',
+                    'config.form_settings.action_mark_as_read.redirect_homepage' => Config::REDIRECT_TO_HOMEPAGE,
+                    'config.form_settings.action_mark_as_read.redirect_current_page' => Config::REDIRECT_TO_CURRENT_PAGE,
                 ],
             ])
             ->add('language', ChoiceType::class, [
