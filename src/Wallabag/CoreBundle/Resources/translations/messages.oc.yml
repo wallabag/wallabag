@@ -335,6 +335,9 @@ tag:
     list:
         number_on_the_page: "{0} I a pas cap d'etiquetas.|{1} I a una etiqueta.|]1,Inf[ I a %count% etiquetas."
         see_untagged_entries: "Afichar las entradas sens pas cap d'etiquetas"
+    new:
+        # add: 'Add'
+        # placeholder: 'You can add several tags, separated by a comma.'
 
 import:
     page_title: 'Importar'
