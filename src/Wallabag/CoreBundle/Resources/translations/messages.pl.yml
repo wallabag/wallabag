@@ -336,8 +336,8 @@ tag:
         number_on_the_page: '{0} Nie ma tagów.|{1} Jest jeden tag.|]1,Inf[ Są %count% tagi.'
         see_untagged_entries: 'Zobacz nieotagowane wpisy'
     new:
-        # add: 'Add'
-        # placeholder: 'You can add several tags, separated by a comma.'
+        add: 'Dodaj'
+        placeholder: 'Możesz dodać kilka tagów, oddzielając je przecinkami.'
 
 import:
     page_title: 'Import'
@@ -385,9 +385,9 @@ import:
         description: 'Ten importer, zaimportuje wszystkie twoje artykuły z Instapaper. W ustawieniach (https://www.instapaper.com/user), kliknij na "Download .CSV file"  w sekcji "Export". Otrzymasz plik CSV.'
         how_to: 'Wybierz swój plik eksportu z Instapaper i kliknij poniższy przycisk, aby go załadować.'
     pinboard:
-        # page_title: "Import > Pinboard"
-        # description: 'This importer will import all your Instapaper articles. On the backup (https://pinboard.in/settings/backup) page, click on "JSON" in the "Bookmarks" section. A JSON file will be downloaded (like "pinboard_export").'
-        # how_to: 'Please select your Pinboard export and click on the below button to upload and import it.'
+        page_title: "Import > Pinboard"
+        description: 'Ten importer, zaimportuje wszystkie twoje artykuły z Pinboard. W ustawieniach kopii zapasowej (https://pinboard.in/settings/backup), kliknij na "JSON" w sekcji "Bookmarks". Otrzymasz plik "pinboard_export".'
+        how_to: 'Wybierz swój plik eksportu z Pinboard i kliknij poniższy przycisk, aby go załadować.'
 
 developer:
     page_title: 'Deweloper'
