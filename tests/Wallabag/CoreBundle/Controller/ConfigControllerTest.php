@@ -412,7 +412,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/config');
 
-        $this->assertTrue($client->getResponse()->isSuccessful());
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
         $form = $crawler->filter('button[id=tagging_rule_save]')->form();
 
@@ -499,7 +499,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/config');
 
-        $this->assertTrue($client->getResponse()->isSuccessful());
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
         $form = $crawler->filter('button[id=tagging_rule_save]')->form();
 

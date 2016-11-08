@@ -71,6 +71,7 @@ config:
             300_word: 'Posso ler ~300 palavras por minuto'
             400_word: 'Posso ler ~400 palavras por minuto'
         pocket_consumer_key_label: 'Chave do consumidor do Pocket para importar conteúdo'
+        # android_configuration: Configure your Android application
     form_rss:
         description: 'Feeds RSS providos pelo wallabag permitem que você leia seus artigos salvos em seu leitor de RSS favorito. Você precisa gerar um token primeiro.'
         token_label: 'Token RSS'
@@ -88,6 +89,18 @@ config:
         name_label: 'Nome'
         email_label: 'E-mail'
         twoFactorAuthentication_label: 'Autenticação de dois passos'
+        delete:
+            # title: Delete my account (a.k.a danger zone)
+            # description: If you remove your account, ALL your articles, ALL your tags, ALL your annotations and your account will be PERMANENTLY removed (it can't be UNDONE). You'll then be logged out.
+            # confirm: Are you really sure? (THIS CAN'T BE UNDONE)
+            # button: Delete my account
+    reset:
+        # title: Reset area (a.k.a danger zone)
+        # description: By hiting buttons below you'll have ability to remove some informations from your account. Be aware that these actions are IRREVERSIBLE.
+        # annotations: Remove ALL annotations
+        # tags: Remove ALL tags
+        # entries: Remove ALL entries
+        # confirm: Are you really really sure? (THIS CAN'T BE UNDONE)
     form_password:
         old_password_label: 'Senha atual'
         new_password_label: 'Nova senha'
@@ -355,6 +368,7 @@ import:
         how_to: 'Por favor, selecione sua exportação do Readability e clique no botão abaixo para importá-la.'
     worker:
         enabled: "A importação é feita assíncronamente. Uma vez que a tarefa de importação é iniciada, um trabalho externo pode executar tarefas uma por vez. O serviço atual é:"
+        # download_images_warning: "You enabled downloading images for your articles. Combined with classic import it can take ages to proceed (or maybe failed). We <strong>strongly recommend</strong> to enable asynchronous import to avoid errors."
     firefox:
         page_title: 'Importar > Firefox'
         description: "Com este importador você importa todos os favoritos de seu Firefox. Somente vá até seus favoritos (Ctrl+Maj+O), e em \"Importar e Backup\" e escolha \"Backup...\". Você terá então um arquivo .json."
@@ -367,6 +381,10 @@ import:
         page_title: 'Importar > Instapaper'
         description: 'Este importador pode importar todos os artigos do seu Instapaper. Nas página de configurações (https://www.instapaper.com/user), clique em "Download .CSV file" na seção "Export". Um arquivo CSV será baixado (algo como "instapaper-export.csv").'
         how_to: 'Por favor, selecione sua exportação do seu Instapaper e clique no botão abaixo para importá-la.'
+    pinboard:
+        # page_title: "Import > Pinboard"
+        # description: 'This importer will import all your Instapaper articles. On the backup (https://pinboard.in/settings/backup) page, click on "JSON" in the "Bookmarks" section. A JSON file will be downloaded (like "pinboard_export").'
+        # how_to: 'Please select your Pinboard export and click on the below button to upload and import it.'
 
 developer:
     page_title: 'Desenvolvedor'
@@ -445,16 +463,23 @@ user:
         delete_confirm: 'Tem certeza?'
         back_to_list: 'Voltar para a lista'
 
+error:
+    # page_title: An error occurred
+
 flashes:
     config:
         notice:
             config_saved: 'Configiração salva. Alguns parâmetros podem ser considerados depois da desconexão.'
             password_updated: 'Senha atualizada'
             password_not_updated_demo: 'Em modo de demonstração, você não pode alterar a senha deste usuário.'
+            # user_updated: 'Information updated'
             rss_updated: 'Informação de RSS atualizada'
             tagging_rules_updated: 'Regras de tags atualizadas'
             tagging_rules_deleted: 'Regra de tag apagada'
             rss_token_updated: 'Token RSS atualizado'
+            # annotations_reset: Annotations reset
+            # tags_reset: Tags reset
+            # entries_reset: Entries reset
     entry:
         notice:
             entry_already_saved: 'Entrada já foi salva em %date%'
