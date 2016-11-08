@@ -53,7 +53,7 @@
             <div class="collapsible-body"></div>
         </li>
 
-        <li class="bold hide-on-med-and-down">
+        <li class="bold">
             <a class="waves-effect collapsible-header" title="{{ 'entry.view.left_menu.re_fetch_content'|trans }}" href="{{ path('reload_entry', { 'id': entry.id }) }}" id="reload">
                 <i class="material-icons small">autorenew</i>
                 <span>{{ 'entry.view.left_menu.re_fetch_content'|trans }}</span>
@@ -81,7 +81,7 @@
             </a>
             <div class="collapsible-body"></div>
         </li>
-        <li class="bold border-bottom hide-on-med-and-down">
+        <li class="bold border-bottom">
             <a class="waves-effect collapsible-header" title="{{ 'entry.view.left_menu.delete'|trans }}" href="{{ path('delete_entry', { 'id': entry.id }) }}">
                 <i class="material-icons small">delete</i>
                 <span>{{ 'entry.view.left_menu.delete'|trans }}</span>
@@ -89,7 +89,7 @@
             <div class="collapsible-body"></div>
         </li>
 
-        <li class="bold border-bottom hide-on-med-and-down">
+        <li class="bold border-bottom">
             <a class="waves-effect collapsible-header" id="nav-btn-add-tag">
                 <i class="material-icons small">label_outline</i>
                 <span>{{ 'entry.view.left_menu.add_a_tag'|trans }}</span>
@@ -184,14 +184,6 @@
                     {% if craue_setting('export_xml') %}<li><a href="{{ path('export_entry', { 'id': entry.id, 'format': 'xml' }) }}" title="Generate XML file">XML</a></li>{% endif %}
                 </ul>
             </div>
-        </li>
-
-        <li class="bold hide-on-large-only">
-            <a class="waves-effect collapsible-header" title="{{ 'entry.view.left_menu.delete'|trans }}" href="{{ path('delete_entry', { 'id': entry.id }) }}">
-                <i class="material-icons small">delete</i>
-                <span>{{ 'entry.view.left_menu.delete'|trans }}</span>
-            </a>
-            <div class="collapsible-body"></div>
         </li>
 
         <li class="bold">

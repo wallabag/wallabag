@@ -335,6 +335,9 @@ tag:
     list:
         number_on_the_page: "{0} Il n’y a pas de tag.|{1} Il y a un tag.|]1,Inf[ Il y a %count% tags."
         see_untagged_entries: "Voir les articles sans tag"
+    new:
+        add: 'Ajouter'
+        placeholder: 'Vous pouvez ajouter plusieurs tags, séparés par une virgule.'
 
 import:
     page_title: "Importer"

@@ -335,6 +335,9 @@ tag:
     list:
         number_on_the_page: '{0} Herhangi bir etiket yok.|{1} Burada bir adet etiket var.|]1,Inf[ Burada %count% adet etiket var.'
         # see_untagged_entries: 'See untagged entries'
+    new:
+        # add: 'Add'
+        # placeholder: 'You can add several tags, separated by a comma.'
 
 import:
     page_title: 'İçe Aktar'

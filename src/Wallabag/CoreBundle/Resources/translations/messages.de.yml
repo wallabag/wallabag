@@ -335,6 +335,9 @@ tag:
     list:
         number_on_the_page: '{0} Es gibt keine Tags.|{1} Es gibt einen Tag.|]1,Inf[ Es gibt %count% Tags.'
         see_untagged_entries: 'Zeige nicht getaggte Einträge'
+    new:
+        # add: 'Add'
+        # placeholder: 'You can add several tags, separated by a comma.'
 
 import:
     page_title: 'Importieren'
