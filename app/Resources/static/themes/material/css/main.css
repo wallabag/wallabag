@@ -507,6 +507,10 @@ a.original {
   white-space: nowrap;
 }
 
+.card .card-entry-labels-hidden li:first-child {
+  margin-left: 0;
+}
+
 .card-entry-tags a,
 .card-entry-labels a,
 .card-tag-labels a,
