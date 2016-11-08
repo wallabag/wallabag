@@ -568,7 +568,12 @@ a.original {
   height: 10em;
 }
 
-.card .card-image .preview {
+.card .card-fullimage {
+  height: 13.5em;
+}
+
+.card .card-image .preview,
+.card .card-fullimage .preview {
   height: 14em;
   background-size: cover;
   background-repeat: no-repeat;
