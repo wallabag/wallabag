@@ -229,7 +229,7 @@ about:
     getting_help:
         documentation: 'Documentație'
         bug_reports: 'Bug-uri'
-        support: '<a href="https://support.wallabag.org">Pe site-ul nostru de suport</a> sau <a href="https://github.com/wallabag/wallabag/issues">pe GitHub</a>'
+        support: '<a href="https://github.com/wallabag/wallabag/issues">pe GitHub</a>'
     helping:
         description: 'wallabag este gratis și Open-Source. Cum ne poți ajuta:'
         by_contributing: 'contribuind la proiect:'

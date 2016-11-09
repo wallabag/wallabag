@@ -229,7 +229,7 @@ about:
     getting_help:
         documentation: 'Dokumentation'
         bug_reports: 'Fehlerberichte'
-        support: '<a href="https://support.wallabag.org">Auf unserer Support-Webseite</a> oder <a href="https://github.com/wallabag/wallabag/issues">auf GitHub</a>'
+        support: '<a href="https://github.com/wallabag/wallabag/issues">auf GitHub</a>'
     helping:
         description: 'wallabag ist frei und Open Source. Du kannst uns helfen:'
         by_contributing: 'indem du zu dem Projekt beiträgst:'
