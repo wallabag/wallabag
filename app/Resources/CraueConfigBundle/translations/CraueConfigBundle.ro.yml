@@ -15,6 +15,7 @@ share_diaspora: Permite share către Diaspora
 share_mail: Permite share prin email
 share_shaarli: Permite share către Shaarli
 share_twitter: Permite share către Twitter
+share_unmark: Permite share către Unmark.it
 show_printlink: Afișează un link pentru a printa content-ul
 wallabag_support_url: URL-ul de suport pentru wallabag
 wallabag_url: URL-ul instanței tale wallabag

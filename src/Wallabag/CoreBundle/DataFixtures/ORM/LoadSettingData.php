@@ -36,6 +36,16 @@ class LoadSettingData extends AbstractFixture implements OrderedFixtureInterface
                 'section' => 'entry',
             ],
             [
+                'name' => 'share_unmark',
+                'value' => '1',
+                'section' => 'entry',
+            ],
+            [
+                'name' => 'unmark_url',
+                'value' => 'https://unmark.it',
+                'section' => 'entry',
+            ],
+            [
                 'name' => 'share_shaarli',
                 'value' => '1',
                 'section' => 'entry',
