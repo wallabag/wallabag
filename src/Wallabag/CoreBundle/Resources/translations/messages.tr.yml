@@ -228,7 +228,7 @@ about:
     getting_help:
         documentation: 'Dokümantasyon'
         bug_reports: 'Sorun bildir'
-        support: '<a href="https://support.wallabag.org">Destek internet sitesinde</a> ya da <a href="https://github.com/wallabag/wallabag/issues">GitHub üzerinde</a>'
+        support: '<a href="https://github.com/wallabag/wallabag/issues">GitHub üzerinde</a>'
     helping:
         description: 'wallabag açık kaynak kodlu ve ücretsizdir. Bize destek ol :'
         by_contributing: 'projemize katkıda bulunun :'

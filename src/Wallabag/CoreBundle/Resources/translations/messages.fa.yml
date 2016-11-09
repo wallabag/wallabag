@@ -229,7 +229,7 @@ about:
     getting_help:
         documentation: 'راهنما'
         bug_reports: 'گزارش اشکال‌ها'
-        support: '<a href="https://support.wallabag.org">در وب‌گاه پشتیبانی</a> یا <a href="https://github.com/wallabag/wallabag/issues">روی GitHub</a>'
+        support: '<a href="https://github.com/wallabag/wallabag/issues">روی GitHub</a>'
     helping:
         description: 'wallabag رایگان، آزاد، و متن‌باز است. شما می‌توانید به ما کمک کنید:'
         by_contributing: 'با مشارکت در پروژه:'
