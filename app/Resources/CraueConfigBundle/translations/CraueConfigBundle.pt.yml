@@ -14,6 +14,7 @@ share_diaspora: Habilitar compartilhamento para o Diaspora
 share_mail: Habilitar compartilhamento por e-mail
 share_shaarli: Habilitar compartilhamento para o Shaarli
 share_twitter: Habilitar compartilhamento para o Twitter
+share_unmark: Habilitar compartilhamento para o Unmark.it
 show_printlink: Mostrar um link para imprimir o conteúdo
 wallabag_support_url: URL de Suporte do wallabag
 wallabag_url: URL de *sua* instância do wallabag

@@ -139,6 +139,14 @@
                             </a>
                         </li>
                     {% endif %}
+                    {% if craue_setting('share_unmark') %}
+                        <li>
+                            <a href="{{ craue_setting('unmark_url') }}/mark/add?url={{ entry.url|url_encode }}&amp;title={{entry.title|url_encode}}&amp;v=6" target="_blank">
+                                <i class="tool icon-image icon-image--unmark" title="unmark"></i>
+                                <span>unmark.it</span>
+                            </a>
+                        </li>
+                    {% endif %}
                     {% if craue_setting('carrot') %}
                         <li>
                             <a href="https://secure.carrot.org/GiveAndGetBack.do?url={{ entry.url|url_encode }}&title={{ entry.title|url_encode }}" target="_blank" title="carrot">
