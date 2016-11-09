@@ -2,6 +2,7 @@
 
 namespace Wallabag\UserBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -38,6 +39,12 @@ class NewUserType extends AbstractType
             ->add('email', EmailType::class, [
                 'label' => 'user.form.email_label',
             ])
+            ->add('groups', EntityType::class, array(
+                'class' => 'WallabagGroupBundle:Group',
+                'choice_label' => 'name',
+                'multiple' => true,
+                'expanded' => true,
+            ))
             ->add('save', SubmitType::class, [
                 'label' => 'user.form.save',
             ])

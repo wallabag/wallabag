@@ -534,7 +534,6 @@ user:
         repeat_new_password_label: 'Powtórz nowe hasło'
         plain_password_label: 'Jawne hasło'
         email_label: 'Adres email'
-        # group: 'Group'
         enabled_label: 'Włączony'
         last_login_label: 'Ostatnie logowanie'
         twofactor_label: Autoryzacja dwuetapowa

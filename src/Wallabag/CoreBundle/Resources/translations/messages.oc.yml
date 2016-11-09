@@ -535,7 +535,6 @@ user:
         repeat_new_password_label: 'Confirmatz vòstre novèl senhal'
         plain_password_label: 'Senhal en clar'
         email_label: 'Adreça de corrièl'
-        # group: 'Group'
         enabled_label: 'Actiu'
         last_login_label: 'Darrièra connexion'
         twofactor_label: 'Autentificacion doble-factor'

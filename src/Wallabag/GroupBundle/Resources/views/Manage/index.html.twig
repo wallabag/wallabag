@@ -11,26 +11,28 @@
                     <div class="input-field col s12">
                         <p class="help">{{ 'group.description'|trans|raw }}</p>
 
-                        <table class="bordered">
-                            <thead>
-                                <tr>
-                                    <th>{{ 'group.form.name_label'|trans }}</th>
-                                    <th>{{ 'group.form.roles_label'|trans }}</th>
-                                    <th>{{ 'group.list.actions'|trans }}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            {% for group in groups %}
-                                <tr>
-                                    <td>{{ group.name }}</td>
-                                    <td></td>
-                                    <td>
-                                        <a href="{{ path('group_edit', { 'id': group.id }) }}">{{ 'group.list.edit_action'|trans }}</a>
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
+                        {% if groups is not empty %}
+                            <table class="bordered">
+                                <thead>
+                                    <tr>
+                                        <th>{{ 'group.form.name_label'|trans }}</th>
+                                        <th>{{ 'group.form.roles_label'|trans }}</th>
+                                        <th>{{ 'group.list.actions'|trans }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for group in groups %}
+                                    <tr>
+                                        <td>{{ group.name }}</td>
+                                        <td></td>
+                                        <td>
+                                            <a href="{{ path('group_edit', { 'id': group.id }) }}">{{ 'group.list.edit_action'|trans }}</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        {% endif %}
                         <br />
                         <p>
                             <a href="{{ path('group_new') }}" class="waves-effect waves-light btn">{{ 'group.list.create_new_one'|trans }}</a>

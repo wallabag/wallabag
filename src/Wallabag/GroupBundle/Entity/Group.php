@@ -2,6 +2,7 @@
 
 namespace Wallabag\GroupBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\Group as BaseGroup;
 use Doctrine\ORM\Mapping as ORM;
 use Wallabag\UserBundle\Entity\User;

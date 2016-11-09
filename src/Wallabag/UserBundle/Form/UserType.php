@@ -2,6 +2,7 @@
 
 namespace Wallabag\UserBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -27,6 +28,12 @@ class UserType extends AbstractType
                 'required' => true,
                 'label' => 'user.form.username_label',
             ])
+            ->add('groups', EntityType::class, array(
+                'class' => 'WallabagGroupBundle:Group',
+                'choice_label' => 'name',
+                'multiple' => true,
+                'expanded' => true,
+            ))
             ->add('email', EmailType::class, [
                 'required' => true,
                 'label' => 'user.form.email_label',

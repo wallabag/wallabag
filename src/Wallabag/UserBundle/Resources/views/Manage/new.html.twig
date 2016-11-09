@@ -47,6 +47,13 @@
                                     </div>
                                 </div>
 
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        {{ form_errors(form.groups) }}
+                                        {{ form_widget(form.groups) }}
+                                    </div>
+                                </div>
+
                                 {{ form_widget(form.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
                                 {{ form_rest(form) }}
                             </form>

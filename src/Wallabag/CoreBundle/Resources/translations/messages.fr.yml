@@ -16,7 +16,6 @@ security:
 
 menu:
     left:
-<<<<<<< 5da541f5bdeec8ad968ba75a30ca2d19ea64d1f2
         unread: "Non lus"
         starred: "Favoris"
         archive: "Lus"

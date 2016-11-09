@@ -534,7 +534,6 @@ user:
         repeat_new_password_label: 'Gentag adgangskode'
         plain_password_label: '????'
         email_label: 'Emailadresse'
-        # group: 'Group'
         # enabled_label: 'Enabled'
         # last_login_label: 'Last login'
         # twofactor_label: Two factor authentication
