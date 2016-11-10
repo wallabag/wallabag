@@ -413,7 +413,8 @@ footer a {
   margin-bottom: 2em;
 }
 
-.estimatedTime .reading-time {
+.reading-time,
+.created-at {
   color: #999;
   font-style: italic;
   font-weight: normal;

@@ -644,7 +644,7 @@ a.original {
   margin: 0 auto;
 }
 
-#article aside .tools li {
+.tools li {
   display: inline-flex;
   vertical-align: middle;
   margin: auto 10px;
