@@ -7,6 +7,8 @@
         <span class="black-text">{{ form_errors(form.term) }}</span>
     {% endif %}
 
+    <input type="hidden" name="currentRoute" value="{{ currentRoute }}" />
+
     {{ form_widget(form.term, { 'attr': {'autocomplete': 'off', 'placeholder': 'entry.search.placeholder'} }) }}
 
     {{ form_rest(form) }}

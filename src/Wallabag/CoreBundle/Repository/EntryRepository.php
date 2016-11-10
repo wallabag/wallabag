@@ -90,18 +90,30 @@ class EntryRepository extends EntityRepository
      *
      * @param int    $userId
      * @param string $term
+     * @param strint $currentRoute
      *
      * @return QueryBuilder
      */
-    public function getBuilderForSearchByUser($userId, $term)
+    public function getBuilderForSearchByUser($userId, $term, $currentRoute)
     {
-        return $this
-            ->getBuilderByUser($userId)
-            ->andWhere('e.content LIKE :term')->setParameter('term', '%'.$term.'%')
-            ->orWhere('e.title LIKE :term')->setParameter('term', '%'.$term.'%')
+        $qb = $this
+            ->getBuilderByUser($userId);
+
+        if ('starred' === $currentRoute) {
+            $qb->andWhere('e.isStarred = true');
+        } elseif ('unread' === $currentRoute) {
+            $qb->andWhere('e.isArchived = false');
+        } elseif ('archive' === $currentRoute) {
+            $qb->andWhere('e.isArchived = true');
+        }
+
+        $qb
+            ->andWhere('e.content LIKE :term OR e.title LIKE :term')->setParameter('term', '%'.$term.'%')
             ->leftJoin('e.tags', 't')
             ->groupBy('e.id')
             ->having('count(t.id) = 0');
+
+        return $qb;
     }
 
     /**

@@ -27,7 +27,7 @@ class EntryController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function searchFormAction(Request $request, $page)
+    public function searchFormAction(Request $request, $page, $currentRoute)
     {
         $form = $this->createForm(SearchEntryType::class);
 
@@ -39,6 +39,7 @@ class EntryController extends Controller
 
         return $this->render('WallabagCoreBundle:Entry:search_form.html.twig', [
             'form' => $form->createView(),
+            'currentRoute' => $currentRoute,
         ]);
     }
 
@@ -269,10 +270,11 @@ class EntryController extends Controller
     {
         $repository = $this->get('wallabag_core.entry_repository');
         $searchTerm = (isset($request->get('search_entry')['term']) ? $request->get('search_entry')['term'] : '');
+        $currentRoute = (!is_null($request->get('currentRoute')) ? $request->get('currentRoute') : '');
 
         switch ($type) {
             case 'search':
-                $qb = $repository->getBuilderForSearchByUser($this->getUser()->getId(), $searchTerm);
+                $qb = $repository->getBuilderForSearchByUser($this->getUser()->getId(), $searchTerm, $currentRoute);
 
                 break;
             case 'untagged':

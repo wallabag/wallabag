@@ -162,6 +162,7 @@ entry:
         archived: 'Zarchiwizowane wpisy'
         filtered: 'Odfiltrowane wpisy'
         filtered_tags: 'Filtrowane po tagach:'
+        # filtered_search: 'Filtered by search:'
         untagged: 'Odtaguj wpisy'
     list:
         number_on_the_page: '{0} Nie ma wpisów.|{1} Jest jeden wpis.|]1,Inf[ Są %count% wpisy.'
@@ -227,6 +228,8 @@ entry:
         placeholder: 'http://website.com'
         form_new:
             url_label: Url
+    search:
+        # placeholder: 'What are you looking for?'
     edit:
         page_title: 'Edytuj wpis'
         title_label: 'Tytuł'

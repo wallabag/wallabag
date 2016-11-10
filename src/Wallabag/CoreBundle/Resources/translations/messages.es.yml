@@ -162,6 +162,7 @@ entry:
         archived: 'Artículos archivados'
         filtered: 'Artículos filtrados'
         # filtered_tags: 'Filtered by tags:'
+        # filtered_search: 'Filtered by search:'
         # untagged: 'Untagged entries'
     list:
         number_on_the_page: '{0} No hay artículos.|{1} Hay un artículo.|]1,Inf[ Hay %count% artículos.'
@@ -227,6 +228,8 @@ entry:
         placeholder: 'http://website.com'
         form_new:
             url_label: Url
+    search:
+        # placeholder: 'What are you looking for?'
     edit:
         page_title: 'Editar un artículo'
         title_label: 'Título'
