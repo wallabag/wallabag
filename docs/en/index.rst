@@ -26,9 +26,9 @@ The documentation is available in other languages:
 
    user/installation
    user/upgrade
+   user/configuration
    user/import
    user/create_account
-   user/configuration
    user/articles
    user/errors_during_fetching
    user/filters

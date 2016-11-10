@@ -5,11 +5,13 @@ In wallabag 2.x, you can import data from:
 
 - `Pocket <#id1>`_ 
 - `Readability <#id2>`_ 
-- `Instapaper <#instapaper>`_ 
-- `wallabag 1.x <#wallabag-1-x>`_ 
-- `wallabag 2.x <#wallabag-2-x>`_ 
+- `Instapaper <#id4>`_ 
+- `wallabag 1.x <#id6>`_ 
+- `wallabag 2.x <#id7>`_ 
 
 We also developed `a script to execute migrations via command-line interface <#import-via-command-line-interface-cli>`_.
+
+Because imports can take ages, we developed an asynchronous tasks system. `You can read the documentation here <http://doc.wallabag.org/fr/master/developer/asynchronous.html>`_ (for experts).
 
 Pocket
 ------

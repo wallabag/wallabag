@@ -8,10 +8,6 @@ wallabag Dokumentation
 **wallabag** ist eine Read-it-later Applikation: es speichert Websites,
 indem es nur den Inhalt behält. Elemente wie Navigation oder Werbung werden gelöscht.
 
-.. tip::
-
-    Diese Dokumentation ist über wallabag v2. Wenn du die Dokumentation für wallabag v1 lesen willst, `siehe dir bitte das hier an <https://github.com/wallabag/documentation>`__.
-
 Die Hauptdokumentation für diese Applikation ist in einigen Abschnitten organisiert:
 
 * :ref:`user-docs`
@@ -28,24 +24,19 @@ Die Dokumentation ist in anderen Sprachen verfügbar :
    :maxdepth: 2
    :caption: Nutzerdokumentation
 
-   user/faq
    user/installation
-   user/upgrade-2.0.x-2.1.1
-   user/upgrade-2.0.x-2.1.1
-   user/migration
+   user/upgrade
+   user/configuration
    user/import
    user/create_account
-   user/login
-   user/configuration
-   user/first_article
+   user/articles
    user/errors_during_fetching
-   user/annotations
-   user/download_articles
    user/filters
    user/tags
    user/android
    user/parameters
    user/backup
+   user/faq
 
 .. _dev-docs:
 
@@ -58,5 +49,4 @@ Die Dokumentation ist in anderen Sprachen verfügbar :
    developer/documentation
    developer/translate
    developer/maintenance
-   developer/redis
-   developer/rabbitmq
+   developer/asynchronous

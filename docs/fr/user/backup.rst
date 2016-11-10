@@ -23,4 +23,4 @@ Pour sauvegarder une base SQLite, vous devez juste copier le répertoire `data/d
 
 Images
 ------
-Les images sauvegardées par wallabag sont stockées dans `data/assets/images` (le stockage des images sera implémenté dans wallabag 2.2).
+Les images sauvegardées par wallabag sont stockées dans `web/assets/images` (le stockage des images sera implémenté dans wallabag 2.2).

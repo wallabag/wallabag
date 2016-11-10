@@ -5,7 +5,7 @@ Default `parameters.yml` file
 -----------------------------
 
 Here is the last version of the default `app/config/parameters.yml` file. Be sure that yours respects this one.
-If you don't know which parameter you need to set, please leave the default one.
+If you don't know which value you need to set, please leave the default one.
 
 .. code-block:: yml
 

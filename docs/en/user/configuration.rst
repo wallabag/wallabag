@@ -48,8 +48,8 @@ User information
 
 You can change your name, your email address and enable ``Two factor authentication``.
 
-Two factor authentication
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Two factor authentication (2FA)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     Two-factor authentication (also known as 2FA) is a technology patented in 1984
     that provides identification of users by means of the combination of two different components.
