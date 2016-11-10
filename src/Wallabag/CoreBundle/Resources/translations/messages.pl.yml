@@ -451,7 +451,7 @@ error:
 flashes:
     config:
         notice:
-            config_saved: 'Konfiguracja zapisana. Niektóre parametry zostaną uznane po rozłączeniu'
+            config_saved: 'Konfiguracja zapisana.'
             password_updated: 'Hasło zaktualizowane'
             password_not_updated_demo: "In demonstration mode, you can't change password for this user."
             user_updated: 'Informacje zaktualizowane'

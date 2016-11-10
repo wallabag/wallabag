@@ -451,7 +451,7 @@ error:
 flashes:
     config:
         notice:
-            config_saved: "Les paramètres ont bien été mis à jour. Certains seront pris en compte après déconnexion."
+            config_saved: "Les paramètres ont bien été mis à jour."
             password_updated: "Votre mot de passe a bien été mis à jour"
             password_not_updated_demo: "En démo, vous ne pouvez pas changer le mot de passe de cet utilisateur."
             user_updated: "Vos informations personnelles ont bien été mises à jour"

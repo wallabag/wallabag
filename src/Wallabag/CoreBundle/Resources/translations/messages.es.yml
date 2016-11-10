@@ -451,7 +451,7 @@ error:
 flashes:
     config:
         notice:
-            config_saved: 'Configuración guardada. Algunos parámetros serán recargados cuando se vuelva a conectar.'
+            config_saved: 'Configuración guardada.'
             password_updated: 'Contraseña actualizada'
             password_not_updated_demo: "En modo demo, no puede cambiar la contraseña del usuario."
             user_updated: 'Su información personal ha sido actualizada'

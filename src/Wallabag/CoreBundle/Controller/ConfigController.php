@@ -38,6 +38,8 @@ class ConfigController extends Controller
             $em->persist($config);
             $em->flush();
 
+            $request->getSession()->set('_locale', $config->getLanguage());
+
             // switch active theme
             $activeTheme = $this->get('liip_theme.active_theme');
             $activeTheme->setName($config->getTheme());

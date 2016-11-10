@@ -451,7 +451,7 @@ error:
 flashes:
     config:
         notice:
-            config_saved: 'Configurazione salvata. Alcuni parametri verranno utilizzati dopo il logout/login.'
+            config_saved: 'Configurazione salvata.'
             password_updated: 'Password aggiornata'
             password_not_updated_demo: "In modalità demo, non puoi cambiare la password dell'utente."
             user_updated: 'Informazioni aggiornate'

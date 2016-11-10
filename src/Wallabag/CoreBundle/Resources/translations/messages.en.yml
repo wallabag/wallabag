@@ -451,7 +451,7 @@ error:
 flashes:
     config:
         notice:
-            config_saved: 'Config saved. Some parameters will be considered after disconnection.'
+            config_saved: 'Config saved.'
             password_updated: 'Password updated'
             password_not_updated_demo: "In demonstration mode, you can't change password for this user."
             user_updated: 'Information updated'

@@ -451,7 +451,7 @@ error:
 flashes:
     config:
         notice:
-            config_saved: 'Opsætning gemt. Visse ændringer vil først fremgå ved næste login.'
+            config_saved: 'Opsætning gemt.'
             password_updated: 'Adgangskode opdateret'
             # password_not_updated_demo: "In demonstration mode, you can't change password for this user."
             user_updated: 'Oplysninger opdateret'

@@ -451,7 +451,7 @@ error:
 flashes:
     config:
         notice:
-            config_saved: 'Konfiguration gespeichert. Einige Einstellungen werden erst nach einer erneuten Anmeldung übernommen.'
+            config_saved: 'Konfiguration gespeichert.'
             password_updated: 'Kennwort aktualisiert'
             password_not_updated_demo: "Im Testmodus kannst du das Kennwort nicht ändern."
             user_updated: 'Information aktualisiert'
