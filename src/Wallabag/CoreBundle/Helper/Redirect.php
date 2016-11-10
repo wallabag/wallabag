@@ -13,7 +13,6 @@ class Redirect
 {
     private $router;
     private $tokenStorage;
-    private $actionMarkAsRead;
 
     public function __construct(Router $router, TokenStorageInterface $tokenStorage)
     {

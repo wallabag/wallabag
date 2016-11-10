@@ -12,12 +12,14 @@ class RedirectTest extends \PHPUnit_Framework_TestCase
     /** @var Redirect */
     private $redirect;
 
+    const PASSWORD = 's3Cr3t';
+    const SALT = '^S4lt$';
+
     public function setUp()
     {
         $this->routerMock = $this->getRouterMock();
-        $tokenStorage = $this->getMockBuilder('Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $user = $this->createUser();
+        $tokenStorage = $this->createTokenStorage($user);
         $this->redirect = new Redirect($this->routerMock, $tokenStorage);
     }
 
@@ -25,14 +27,14 @@ class RedirectTest extends \PHPUnit_Framework_TestCase
     {
         $redirectUrl = $this->redirect->to(null, 'fallback');
 
-        $this->assertEquals(null, $redirectUrl);
+        $this->assertEquals('fallback', $redirectUrl);
     }
 
     public function testRedirectToNullWithoutFallback()
     {
         $redirectUrl = $this->redirect->to(null);
 
-        $this->assertEquals(null, $redirectUrl);
+        $this->assertEquals($this->routerMock->generate('homepage'), $redirectUrl);
     }
 
     public function testRedirectToValidUrl()
@@ -52,6 +54,59 @@ class RedirectTest extends \PHPUnit_Framework_TestCase
             ->method('generate')
             ->with('homepage')
             ->willReturn('homepage');
+
+        return $mock;
+    }
+
+    protected function createTokenStorage($user = null)
+    {
+        $token = $this->createAuthenticationToken($user);
+
+        $mock = $this->getMockBuilder('Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $mock
+            ->expects($this->any())
+            ->method('getToken')
+            ->will($this->returnValue($token))
+        ;
+
+        return $mock;
+    }
+
+    protected function createUser()
+    {
+        $mock = $this->getMockBuilder('Symfony\Component\Security\Core\User\UserInterface')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $mock
+            ->expects($this->any())
+            ->method('getPassword')
+            ->will($this->returnValue(static::PASSWORD))
+        ;
+
+        $mock
+            ->expects($this->any())
+            ->method('getSalt')
+            ->will($this->returnValue(static::SALT))
+        ;
+
+        return $mock;
+    }
+
+    protected function createAuthenticationToken($user = null)
+    {
+        $mock = $this->getMockBuilder('Symfony\Component\Security\Core\Authentication\Token\TokenInterface')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $mock
+            ->expects($this->any())
+            ->method('getUser')
+            ->will($this->returnValue($user))
+        ;
 
         return $mock;
     }
