@@ -462,7 +462,7 @@ flashes:
             rss_token_updated: "Jeton RSS mis à jour"
     entry:
         notice:
-            entry_already_saved: "Article déjà sauvergardé le %date%"
+            entry_already_saved: "Article déjà sauvegardé le %date%"
             entry_saved: "Article enregistré"
             entry_saved_failed: "Article enregistré mais impossible de récupérer le contenu"
             entry_updated: "Article mis à jour"
