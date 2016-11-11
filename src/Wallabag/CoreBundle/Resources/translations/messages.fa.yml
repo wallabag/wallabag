@@ -450,7 +450,7 @@ error:
 flashes:
     config:
         notice:
-            config_saved: 'پیکربندی ذخیره شد. برخی از تنظیمات پس از این که قطع شدید اعمال می‌شود.'
+            config_saved: 'پیکربندی ذخیره شد.'
             password_updated: 'رمز به‌روز شد'
             password_not_updated_demo: "در حالت نمایشی نمی‌توانید رمز کاربر را عوض کنید."
             user_updated: 'اطلاعات به‌روز شد'

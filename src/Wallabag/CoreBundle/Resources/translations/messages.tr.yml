@@ -450,7 +450,7 @@ error:
 flashes:
     config:
         notice:
-            config_saved: 'Yapılandırma ayarları kaydedildi. Bazı yapılandırmalar tekrar giriş yaptığınızda aktif olacaktır.'
+            config_saved: 'Yapılandırma ayarları kaydedildi.'
             password_updated: 'Şifre güncellendi'
             password_not_updated_demo: "In demonstration mode, you can't change password for this user."
             user_updated: 'Bilgiler güncellendi'

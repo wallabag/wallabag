@@ -451,7 +451,7 @@ error:
 flashes:
     config:
         notice:
-            config_saved: 'Configurație salvată. Unii parametrii vor fi considerați după deconectare.'
+            config_saved: 'Configurație salvată.'
             password_updated: 'Parolă actualizată'
             password_not_updated_demo: "In demonstration mode, you can't change password for this user."
             user_updated: 'Informație actualizată'

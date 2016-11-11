@@ -448,7 +448,7 @@ user:
 flashes:
     config:
         notice:
-            config_saved: 'Configiração salva. Alguns parâmetros podem ser considerados depois da desconexão.'
+            config_saved: 'Configiração salva.'
             password_updated: 'Senha atualizada'
             password_not_updated_demo: 'Em modo de demonstração, você não pode alterar a senha deste usuário.'
             user_updated: 'Informação atualizada'
