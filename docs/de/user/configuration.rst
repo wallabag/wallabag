@@ -13,8 +13,7 @@ Einstellungen
 Theme
 ~~~~~
 
-wallabag ist anpassbar. Du kannst dein bevorzugtes Theme hier auswählen. Du kannst
-auch ein neues erstellen, ein extra Kapitel wird dem gewidmet sein. Das Standardtheme
+wallabag ist anpassbar. Du kannst dein bevorzugtes Theme hier auswählen. Das Standardtheme
 ist ``Material``, es ist das Theme, dass in den Dokumentationsbildschirmfotos genutzt wird.
 
 Artikel pro Seite
@@ -31,8 +30,7 @@ ein schneller oder langsamer Leser bist. wallabag wird die Lesezeit für jeden A
 Sprache
 ~~~~~~~
 
-Du kannst die Sprache von der wallabag Benutzeroberfläche ändern. Du musst die ausloggen, damit diese
-Änderung Wirkung zeigt.
+Du kannst die Sprache von der wallabag Benutzeroberfläche ändern.
 
 RSS
 ---

@@ -155,6 +155,10 @@
     {{ form_start(form.pwd) }}
         {{ form_errors(form.pwd) }}
 
+        <div class="row">
+            {{ 'config.form_password.description'|trans }}
+        </div>
+
         <fieldset class="w500p inline">
             <div class="row">
                 {{ form_label(form.pwd.old_password) }}

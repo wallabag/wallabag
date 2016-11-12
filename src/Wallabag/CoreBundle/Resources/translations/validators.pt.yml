@@ -3,4 +3,4 @@ validator:
     password_too_short: 'A senha deve ter pelo menos 8 caracteres'
     password_wrong_value: 'A senha atual informada está errada'
     item_per_page_too_high: 'Certamente isso pode matar a aplicação'
-    rss_limit_too_hight: 'Certamente isso pode matar a aplicação'
+    rss_limit_too_high: 'Certamente isso pode matar a aplicação'

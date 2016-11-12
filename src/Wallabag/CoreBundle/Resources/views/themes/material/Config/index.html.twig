@@ -24,23 +24,33 @@
                             {{ form_errors(form.config) }}
 
                             <div class="row">
-                                <div class="input-field col s12">
+                                <div class="input-field col s11">
                                     {{ form_label(form.config.theme) }}
                                     {{ form_errors(form.config.theme) }}
                                     {{ form_widget(form.config.theme) }}
                                 </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    {{ form_label(form.config.items_per_page) }}
-                                    {{ form_errors(form.config.items_per_page) }}
-                                    {{ form_widget(form.config.items_per_page) }}
+                                <div class="input-field col s1">
+                                    <a href="#" class="tooltipped" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_theme'|trans }}">
+                                        <i class="material-icons">live_help</i>
+                                    </a>
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="input-field col s12">
+                                <div class="input-field col s11">
+                                    {{ form_label(form.config.items_per_page) }}
+                                    {{ form_errors(form.config.items_per_page) }}
+                                    {{ form_widget(form.config.items_per_page) }}
+                                </div>
+                                <div class="input-field col s1">
+                                    <a href="#" class="tooltipped" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_items_per_page'|trans }}">
+                                        <i class="material-icons">live_help</i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s11">
                                     {{ form_label(form.config.reading_speed) }}
                                     {{ form_errors(form.config.reading_speed) }}
                                     {{ form_widget(form.config.reading_speed) }}
@@ -49,18 +59,28 @@
                                         <a href="http://www.myreadspeed.com/calculate/">myreadspeed</a>
                                     </p>
                                 </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    {{ form_label(form.config.language) }}
-                                    {{ form_errors(form.config.language) }}
-                                    {{ form_widget(form.config.language) }}
+                                <div class="input-field col s1">
+                                    <a href="#" class="tooltipped" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_reading_speed'|trans }}">
+                                        <i class="material-icons">live_help</i>
+                                    </a>
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="input-field col s12">
+                                <div class="input-field col s11">
+                                    {{ form_label(form.config.language) }}
+                                    {{ form_errors(form.config.language) }}
+                                    {{ form_widget(form.config.language) }}
+                                </div>
+                                <div class="input-field col s1">
+                                    <a href="#" class="tooltipped" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_language'|trans }}">
+                                        <i class="material-icons">live_help</i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s11">
                                     {{ form_label(form.config.pocket_consumer_key) }}
                                     {{ form_errors(form.config.pocket_consumer_key) }}
                                     {{ form_widget(form.config.pocket_consumer_key) }}
@@ -68,6 +88,11 @@
                                         &raquo;
                                         <a href="https://getpocket.com/developer/docs/authentication">https://getpocket.com/developer/docs/authentication</a>
                                     </p>
+                                </div>
+                                <div class="input-field col s1">
+                                    <a href="#" class="tooltipped" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_pocket_consumer_key'|trans }}">
+                                        <i class="material-icons">live_help</i>
+                                    </a>
                                 </div>
                             </div>
 
@@ -152,7 +177,7 @@
 
                             {% if twofactor_auth %}
                             <div class="row">
-                                <div class="input-field col s12">
+                                <div class="input-field col s11">
                                     {{ 'config.form_user.two_factor_description'|trans }}
 
                                     <br />
@@ -160,6 +185,11 @@
                                     {{ form_widget(form.user.twoFactorAuthentication) }}
                                     {{ form_label(form.user.twoFactorAuthentication) }}
                                     {{ form_errors(form.user.twoFactorAuthentication) }}
+                                </div>
+                                <div class="input-field col s1">
+                                    <a href="#" class="tooltipped" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_user.help_twoFactorAuthentication'|trans }}">
+                                        <i class="material-icons">live_help</i>
+                                    </a>
                                 </div>
                             </div>
                             {% endif %}
@@ -172,6 +202,12 @@
                     <div id="set4" class="col s12">
                         {{ form_start(form.pwd) }}
                             {{ form_errors(form.pwd) }}
+
+                        <div class="row">
+                            <div class="input-field col s12">
+                                {{ 'config.form_password.description'|trans }}
+                            </div>
+                        </div>
 
                             <div class="row">
                                 <div class="input-field col s12">
