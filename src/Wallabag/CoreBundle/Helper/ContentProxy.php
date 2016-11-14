@@ -8,6 +8,7 @@ use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Tools\Utils;
 use Wallabag\CoreBundle\Repository\TagRepository;
+use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeExtensionGuesser;
 
 /**
  * This kind of proxy class take care of getting the content from an url
@@ -19,6 +20,7 @@ class ContentProxy
     protected $tagger;
     protected $logger;
     protected $tagRepository;
+    protected $mimeGuesser;
 
     public function __construct(Graby $graby, RuleBasedTagger $tagger, TagRepository $tagRepository, Logger $logger)
     {
@@ -26,6 +28,7 @@ class ContentProxy
         $this->tagger = $tagger;
         $this->logger = $logger;
         $this->tagRepository = $tagRepository;
+        $this->mimeGuesser = new MimeTypeExtensionGuesser();
     }
 
     /**
@@ -77,6 +80,11 @@ class ContentProxy
 
         if (isset($content['open_graph']['og_image'])) {
             $entry->setPreviewPicture($content['open_graph']['og_image']);
+        }
+
+        // if content is an image define as a preview too
+        if (in_array($this->mimeGuesser->guess($content['content_type']), ['jpeg', 'jpg', 'gif', 'png'], true)) {
+            $entry->setPreviewPicture($content['url']);
         }
 
         try {

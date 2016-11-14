@@ -1,0 +1,26 @@
+<div class="card">
+    <div class="card-body">
+        <div class="card-content">
+            <span class="card-title dot-ellipsis dot-resize-update">
+                <a href="{{ path('view', { 'id': entry.id }) }}" title="{{ entry.title | raw | striptags }}">
+                    {{ entry.title | raw | striptags | truncate(80, true, '…') }}
+                </a>
+            </span>
+
+            <div class="original grey-text">
+                <a href="{{ entry.url|e }}" target="_blank" title="{{ entry.domainName|removeWww }}" class="tool original grey-text">
+                    <span>{{ entry.domainName|removeWww }}</span>
+                </a>
+            </div>
+
+            <p>{{ entry.content|striptags|slice(0, 250)|raw }}&hellip;</p>
+            <ul class="card-entry-labels-hidden">
+            {% for tag in entry.tags | slice(0, 2) %}
+                <li><a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a></li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    {% include "@WallabagCore/themes/material/Entry/_card_actions.html.twig" with {'entry': entry} only %}
+</div>

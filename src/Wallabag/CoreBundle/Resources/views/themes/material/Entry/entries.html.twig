@@ -22,74 +22,13 @@
     <ul class="row data">
         {% for entry in entries %}
             <li id="entry-{{ entry.id|e }}" class="col l3 m6 s12">
-                <div class="card">
-
-                    <div class="card-body">
-                        {% if not entry.previewPicture is null %}
-                            <div class="card-image waves-effect waves-block waves-light">
-                                <ul class="card-entry-labels">
-                                {% for tag in entry.tags | slice(0, 3) %}
-                                    <li><a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a></li>
-                                {% endfor %}
-                                </ul>
-                                <div class="preview activator" style="background-image: url({{ entry.previewPicture }})"></div>
-                            </div>
-                        {% endif %}
-
-                        <div class="card-content">
-                            {% if not entry.previewPicture is null %}
-                                <i class="grey-text text-darken-4 activator material-icons right">more_vert</i>
-                            {% endif %}
-
-                            <span class="card-title dot-ellipsis dot-resize-update"><a href="{{ path('view', { 'id': entry.id }) }}" title="{{ entry.title | raw | striptags }}">{{ entry.title| striptags | truncate(80, true, '…') | raw }}</a></span>
-
-                            <div class="original grey-text">
-                                <a href="{{ entry.url|e }}" target="_blank" title="{{ entry.domainName|removeWww }}" class="tool original grey-text">
-                                    <span>{{ entry.domainName|removeWww }}</span>
-                                </a>
-                            </div>
-
-                            {% if entry.previewPicture is null %}
-                                <p>{{ entry.content|striptags|slice(0, 250)|raw }}&hellip;</p>
-                                <ul class="card-entry-labels-hidden">
-                                {% for tag in entry.tags | slice(0, 2) %}
-                                    <li><a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a></li>
-                                {% endfor %}
-                            </ul>
-                            {% endif %}
-                        </div>
-                    </div>
-
-                    {% if not entry.previewPicture is null %}
-                        <div class="card-reveal">
-                            <i class="card-title activator grey-text text-darken-4 material-icons right">clear</i>
-                            <span class="card-title" title="{{ entry.title | raw | striptags }}"><a href="{{ path('view', { 'id': entry.id }) }}">{{ entry.title | raw | striptags | truncate(90, true, '…') }}</a></span>
-
-                            <p>{{ entry.content|striptags|slice(0, 250)|raw }}&hellip;</p>
-
-                            <ul class="card-entry-labels-hidden">
-                                {% for tag in entry.tags %}
-                                    <li><a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a></li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    {% endif %}
-
-                    <div class="card-action">
-                        <span class="reading-time grey-text">
-                            <i class="material-icons" title="{{ 'entry.list.reading_time'|trans }}">timer</i>
-                            {{ entry.readingTime / app.user.config.readingSpeed|round }} min
-                        </span>
-
-                        <ul class="tools right">
-                            <li>
-                                <a title="{{ 'entry.list.toogle_as_read'|trans }}" class="tool grey-text" href="{{ path('archive_entry', { 'id': entry.id }) }}"><i class="material-icons">{% if entry.isArchived == 0 %}done{% else %}redo{% endif %}</i></a>
-                                <a title="{{ 'entry.list.toogle_as_star'|trans }}" class="tool grey-text" href="{{ path('star_entry', { 'id': entry.id }) }}"><i class="material-icons">{% if entry.isStarred == 0 %}star_border{% else %}star{% endif %}</i></a>
-                                <a title="{{ 'entry.list.delete'|trans }}" class="tool grey-text delete" href="{{ path('delete_entry', { 'id': entry.id }) }}"><i class="material-icons">delete</i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                {% if entry.previewPicture is null %}
+                    {% include "@WallabagCore/themes/material/Entry/_card_no_preview.html.twig" with {'entry': entry} only %}
+                {% elseif not entry.previewPicture is null and entry.mimetype starts with 'image/' %}
+                    {% include "@WallabagCore/themes/material/Entry/_card_full_image.html.twig" with {'entry': entry} only %}
+                {% elseif not entry.previewPicture is null %}
+                    {% include "@WallabagCore/themes/material/Entry/_card_preview.html.twig" with {'entry': entry} only %}
+                {% endif %}
             </li>
         {% endfor %}
     </ul>

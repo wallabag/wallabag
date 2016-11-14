@@ -189,8 +189,11 @@ module.exports = function (grunt) {
     },
     stylelint: {
       target: ['<%= appDir %>/themes/material/css/*.css', '<%= appDir %>/themes/baggy/css/*.css']
+    },
+    watch: {
+      files: ['<%= appDir %>/**/*.css', '<%= appDir %>/**/*.js'],
+      tasks: ['css', 'js']
     }
-
   });
 
   grunt.registerTask(
@@ -221,5 +224,7 @@ module.exports = function (grunt) {
       'tests',
       'Test css and js style conformity',
       ['eslint', 'stylelint', 'default']
-  )
+  ),
+
+  grunt.loadNpmTasks('grunt-contrib-watch');
 };
