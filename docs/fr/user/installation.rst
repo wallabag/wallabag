@@ -183,6 +183,12 @@ En imaginant que vous vouliez installer wallabag dans le dossier ``/var/www/wall
             internal;
         }
 
+        # return 404 for all other php files not matching the front controller
+        # this prevents access to other php files you don't want to be accessible.
+        location ~ \.php$ {
+            return 404;
+        }
+
         error_log /var/log/nginx/wallabag_error.log;
         access_log /var/log/nginx/wallabag_access.log;
     }
