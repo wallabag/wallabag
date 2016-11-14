@@ -41,21 +41,6 @@ services:
         arguments:
             -
                 error_message: '%wallabag_core.fetching_error_message%'
-                http_client:
-                    user_agents:
-                        'lifehacker.com': 'PHP/5.2'
-                        'gawker.com': 'PHP/5.2'
-                        'deadspin.com': 'PHP/5.2'
-                        'kotaku.com': 'PHP/5.2'
-                        'jezebel.com': 'PHP/5.2'
-                        'io9.com': 'PHP/5.2'
-                        'jalopnik.com': 'PHP/5.2'
-                        'gizmodo.com': 'PHP/5.2'
-                        '.wikipedia.org': 'Mozilla/5.2'
-                        '.fok.nl': 'Googlebot/2.1'
-                        'getpocket.com': 'PHP/5.2'
-                        'iansommerville.com': 'PHP/5.2'
-                        '.slashdot.org': 'PHP/5.2'
         calls:
             - [ setLogger, [ "@logger" ] ]
         tags:
