@@ -13,6 +13,11 @@ $(document).ready(() => {
   let card = $('#content ul.data > li')[cardIndex];
   const pagination = $('.pagination');
 
+  /* Show nothing on quickstart */
+  if ($('#content > div.quickstart').length > 0) {
+    return;
+  }
+
   /* If we come from next page */
   if (window.location.hash === '#prev') {
     cardIndex = cardNumber - 1;
