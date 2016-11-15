@@ -34,6 +34,11 @@
                 {{ 'entry.list.reading_time_less_one_minute'|trans|raw }}
             {% endif %}
                     </span>
+                    <span class="tool created-at">
+                        <i class="tool icon icon-calendar" title="{{ 'entry.view.created_at'|trans }}">
+                            {{ entry.createdAt|date('Y-m-d') }}
+                        </i>
+                    </span>
             </div>
 
             <ul class="tools links">

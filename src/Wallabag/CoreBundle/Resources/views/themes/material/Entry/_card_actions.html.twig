@@ -1,7 +1,10 @@
 <div class="card-action">
     <span class="reading-time grey-text">
         <i class="material-icons" title="{{ 'entry.list.reading_time'|trans }}">timer</i>
-        {{ entry.readingTime / app.user.config.readingSpeed|round }} min
+        {{ entry.readingTime / app.user.config.readingSpeed|round }} min&nbsp;
+
+        <i class="material-icons hide-on-med-and-down" title="{{ 'entry.view.created_at'|trans }}">today</i>
+        <span class="hide-on-med-and-down">&nbsp;{{ entry.createdAt|date('Y-m-d') }}</span>
     </span>
 
     <ul class="tools right">

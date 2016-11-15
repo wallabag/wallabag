@@ -644,10 +644,9 @@ a.original {
   margin: 0 auto;
 }
 
-#article aside .tools li {
+article aside .tools li {
   display: inline-flex;
   vertical-align: middle;
-  margin: auto 10px;
 }
 
 #article aside .tools a {
