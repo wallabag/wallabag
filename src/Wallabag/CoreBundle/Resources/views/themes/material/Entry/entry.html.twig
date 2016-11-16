@@ -46,7 +46,7 @@
         </li>
 
         <li class="bold border-bottom hide-on-med-and-down">
-            <a class="waves-effect collapsible-header" href="{{ entry.url|e }}">
+            <a class="waves-effect collapsible-header original" href="{{ entry.url|e }}" target="_blank">
                 <i class="material-icons small">link</i>
                 <span>{{ 'entry.view.left_menu.view_original_article'|trans }}</span>
             </a>
@@ -67,7 +67,7 @@
         {% endif %}
 
         <li class="bold hide-on-med-and-down">
-            <a class="waves-effect collapsible-header" title="{{ markAsReadLabel|trans }}" href="{{ path('archive_entry', { 'id': entry.id }) }}" id="markAsRead">
+            <a class="waves-effect collapsible-header markasread" title="{{ markAsReadLabel|trans }}" href="{{ path('archive_entry', { 'id': entry.id }) }}" id="markAsRead">
                 <i class="material-icons small">{% if entry.isArchived == 0 %}done{% else %}redo{% endif %}</i>
                 <span>{{ markAsReadLabel|trans }}</span>
             </a>
@@ -75,14 +75,14 @@
         </li>
 
         <li class="bold hide-on-med-and-down">
-            <a class="waves-effect collapsible-header" title="{{ 'entry.view.left_menu.set_as_starred'|trans }}" href="{{ path('star_entry', { 'id': entry.id }) }}" id="setFav">
+            <a class="waves-effect collapsible-header favorite" title="{{ 'entry.view.left_menu.set_as_starred'|trans }}" href="{{ path('star_entry', { 'id': entry.id }) }}" id="setFav">
                 <i class="material-icons spall">{% if entry.isStarred == 0 %}star_outline{% else %}star{% endif %}</i>
                 <span>{{ 'entry.view.left_menu.set_as_starred'|trans }}</span>
             </a>
             <div class="collapsible-body"></div>
         </li>
         <li class="bold border-bottom">
-            <a class="waves-effect collapsible-header" title="{{ 'entry.view.left_menu.delete'|trans }}" href="{{ path('delete_entry', { 'id': entry.id }) }}">
+            <a class="waves-effect collapsible-header delete" title="{{ 'entry.view.left_menu.delete'|trans }}" href="{{ path('delete_entry', { 'id': entry.id }) }}">
                 <i class="material-icons small">delete</i>
                 <span>{{ 'entry.view.left_menu.delete'|trans }}</span>
             </a>

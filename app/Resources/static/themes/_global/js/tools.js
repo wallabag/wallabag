@@ -1,4 +1,6 @@
-const $ = require('jquery');
+import $ from 'jquery';
+import './shortcuts/main';
+import './shortcuts/entry';
 
 /* Allows inline call qr-code call */
 import jrQrcode from 'jr-qrcode'; // eslint-disable-line

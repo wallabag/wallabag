@@ -1,11 +1,26 @@
+/* jQuery */
+import $ from 'jquery';
+
+/* eslint-disable no-unused-vars */
+/* jquery has default scope */
+import cookie from 'jquery.cookie';
+import ui from 'jquery-ui-browserify';
+/* eslint-enable no-unused-vars */
+
+/* Annotations */
+import annotator from 'annotator';
+
+/* Shortcuts */
+import './shortcuts/main';
+import './shortcuts/entry';
+import '../../_global/js/shortcuts/main';
+import '../../_global/js/shortcuts/entry';
+
+/* Tools */
 import { savePercent, retrievePercent } from '../../_global/js/tools';
-import { toggleSaveLinkForm } from './uiTools';
+import toggleSaveLinkForm from './uiTools';
 
-const $ = global.jquery = require('jquery');
-require('jquery.cookie');
-require('jquery-ui-browserify');
-const annotator = require('annotator');
-
+global.jquery = $;
 
 $.fn.ready(() => {
   const $listmode = $('#listmode');
