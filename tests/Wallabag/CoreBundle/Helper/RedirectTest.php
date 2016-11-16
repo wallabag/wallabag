@@ -16,9 +16,6 @@ class RedirectTest extends \PHPUnit_Framework_TestCase
     /** @var Redirect */
     private $redirect;
 
-    const PASSWORD = 's3Cr3t';
-    const SALT = '^S4lt$';
-
     public function setUp()
     {
         $this->routerMock = $this->getMockBuilder('Symfony\Component\Routing\Router')
