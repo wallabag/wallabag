@@ -38,6 +38,14 @@
 
         <fieldset class="w500p inline">
             <div class="row">
+                {{ form_label(form.config.action_mark_as_read) }}
+                {{ form_errors(form.config.action_mark_as_read) }}
+                {{ form_widget(form.config.action_mark_as_read) }}
+            </div>
+        </fieldset>
+
+        <fieldset class="w500p inline">
+            <div class="row">
                 {{ form_label(form.config.language) }}
                 {{ form_errors(form.config.language) }}
                 {{ form_widget(form.config.language) }}

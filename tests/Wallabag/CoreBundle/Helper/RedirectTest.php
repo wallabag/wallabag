@@ -2,7 +2,11 @@
 
 namespace Tests\Wallabag\CoreBundle\Helper;
 
+use Wallabag\CoreBundle\Entity\Config;
+use Wallabag\UserBundle\Entity\User;
 use Wallabag\CoreBundle\Helper\Redirect;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 class RedirectTest extends \PHPUnit_Framework_TestCase
 {
@@ -14,8 +18,38 @@ class RedirectTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->routerMock = $this->getRouterMock();
-        $this->redirect = new Redirect($this->routerMock);
+        $this->routerMock = $this->getMockBuilder('Symfony\Component\Routing\Router')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->routerMock->expects($this->any())
+            ->method('generate')
+            ->with('homepage')
+            ->willReturn('homepage');
+
+        $user = new User();
+        $user->setName('youpi');
+        $user->setEmail('youpi@youpi.org');
+        $user->setUsername('youpi');
+        $user->setPlainPassword('youpi');
+        $user->setEnabled(true);
+        $user->addRole('ROLE_SUPER_ADMIN');
+
+        $config = new Config($user);
+        $config->setTheme('material');
+        $config->setItemsPerPage(30);
+        $config->setReadingSpeed(1);
+        $config->setLanguage('en');
+        $config->setPocketConsumerKey('xxxxx');
+        $config->setActionMarkAsRead(Config::REDIRECT_TO_CURRENT_PAGE);
+
+        $user->setConfig($config);
+
+        $this->token = new UsernamePasswordToken($user, 'password', 'key');
+        $tokenStorage = new TokenStorage();
+        $tokenStorage->setToken($this->token);
+
+        $this->redirect = new Redirect($this->routerMock, $tokenStorage);
     }
 
     public function testRedirectToNullWithFallback()
@@ -39,17 +73,20 @@ class RedirectTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('/unread/list', $redirectUrl);
     }
 
-    private function getRouterMock()
+    public function testWithNotLoggedUser()
     {
-        $mock = $this->getMockBuilder('Symfony\Component\Routing\Router')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $redirect = new Redirect($this->routerMock, new TokenStorage());
+        $redirectUrl = $redirect->to('/unread/list');
 
-        $mock->expects($this->any())
-            ->method('generate')
-            ->with('homepage')
-            ->willReturn('homepage');
+        $this->assertEquals('/unread/list', $redirectUrl);
+    }
 
-        return $mock;
+    public function testUserForRedirectToHomepage()
+    {
+        $this->token->getUser()->getConfig()->setActionMarkAsRead(Config::REDIRECT_TO_HOMEPAGE);
+
+        $redirectUrl = $this->redirect->to('/unread/list');
+
+        $this->assertEquals($this->routerMock->generate('homepage'), $redirectUrl);
     }
 }

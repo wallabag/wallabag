@@ -16,6 +16,9 @@ use Wallabag\UserBundle\Entity\User;
  */
 class Config
 {
+    const REDIRECT_TO_HOMEPAGE = 0;
+    const REDIRECT_TO_CURRENT_PAGE = 1;
+
     /**
      * @var int
      *
@@ -86,6 +89,13 @@ class Config
      * @ORM\Column(name="pocket_consumer_key", type="string", nullable=true)
      */
     private $pocketConsumerKey;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="action_mark_as_read", type="integer", nullable=true)
+     */
+    private $actionMarkAsRead;
 
     /**
      * @ORM\OneToOne(targetEntity="Wallabag\UserBundle\Entity\User", inversedBy="config")
@@ -307,6 +317,26 @@ class Config
     public function getPocketConsumerKey()
     {
         return $this->pocketConsumerKey;
+    }
+
+    /**
+     * @return int
+     */
+    public function getActionMarkAsRead()
+    {
+        return $this->actionMarkAsRead;
+    }
+
+    /**
+     * @param int $actionMarkAsRead
+     *
+     * @return Config
+     */
+    public function setActionMarkAsRead($actionMarkAsRead)
+    {
+        $this->actionMarkAsRead = $actionMarkAsRead;
+
+        return $this;
     }
 
     /**
