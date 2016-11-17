@@ -16,7 +16,7 @@ The main documentation for this application is organized into a couple sections:
 The documentation is available in other languages:
 
 * `Documentation en français <http://doc.wallabag.org/fr/master/>`_
-* `Deutsch Dokumentation <http://doc.wallabag.org/de/master/>`_
+* `Dokumentation in Deutsch <http://doc.wallabag.org/de/master/>`_
 
 .. _user-docs:
 
