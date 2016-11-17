@@ -1,4 +1,4 @@
-API DoKumentation
+API Dokumentation
 =================
 
 Dank dieser Dokumentation werden wir sehen, wie wir mit der wallabag API interagieren.

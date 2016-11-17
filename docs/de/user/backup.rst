@@ -22,4 +22,4 @@ Um die SQLite-Datenbank zu sichern, ist es lediglich notwendig, das Verzeichnis 
 
 Bilder
 ------
-Die Bilder, die von wallabag empfangen worden, sind unter `data/assets/images` gespeichert (der Bilder-Speicher wird in wallabag 2.2 implementiert).
+Die Bilder, die von wallabag empfangen worden, sind unter `web/assets/images` gespeichert (der Bilder-Speicher wird in wallabag 2.2 implementiert).

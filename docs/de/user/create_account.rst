@@ -1,6 +1,9 @@
 Account erstellen
 =================
 
+Registrierungsformular
+----------------------
+
 Klicke auf der Loginseite auf den ``Registrieren`` Button-
 
 .. image:: ../../img/user/registration_form.png
@@ -22,4 +25,17 @@ Dein Account ist nun aktiviert.
 
 .. image:: ../../img/user/activated_account.png
    :alt: Willkommen!
+   :align: center
+
+Anmeldung
+---------
+
+Glückwunsch, dein Account ist nun aktiviert!
+Um dich auf wallabag anzumelden, fülle das Formular auf der Login-Seite aus.
+
+Wenn du auf einem persönlichen Computer bist und angemeldet bleiben möchtest,
+kannst du ein Häkchen nach ``angemeldet bleiben`` setzen, wallabag wird sich ein Jahr an dich erinnern.
+
+.. image:: ../../img/user/login_form.png
+   :alt: Login form
    :align: center

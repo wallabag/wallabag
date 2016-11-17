@@ -23,7 +23,7 @@ Bestätige nur diese Nachricht und du wirst zum Einstellungsbildschirm weitergel
     :alt: Einstellungsbildschirm
     :align: center
 
-Trage deine Wallabagdaten ein. Du musst deine Wallabagadresse eintragen. Es ist wichtig, dass die URL nicht mit einem Schrägstrich endet. Füge auch deine Wallabagzugangsdaten in das Nutzer- und Passwortfeld ein.
+Trage deine Wallabagdaten ein. Du musst deine Wallabagadresse eintragen. **Es ist wichtig, dass die URL nicht mit einem Schrägstrich endet.** Füge auch deine Wallabagzugangsdaten in das Nutzer- und Passwortfeld ein.
 
 .. image:: ../../img/user/android_configuration_filled_in.de.png
     :alt: Eingetragene Einstellungen
@@ -76,8 +76,8 @@ Schließlich nach der ersten erfolgreichen Synchronisation, wird dir die Liste d
 Bekannte Limitierungen
 ---------------------
 
-2FA
-~~~
+Zwei-Faktor-Authentifizierung (2FA)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Zur Zeit unterstützt die App keine Zwei-Faktor Authentifizierung. Du solltest sie deaktivieren damit die App funktioniert.
 
@@ -97,11 +97,6 @@ Wenn du deine Wallabaginstanz per HTTPS erreichen kannst, solltest du das so kon
 Referenzen
 ----------
 
-`Quellcode der Android Applikation <https://github.com/wallabag/android-app>`_
-
-`Android Applikation auf F-Droid <https://f-droid.org/repository/browse/?fdfilter=wallabag&fdid=fr.gaulupeau.apps.InThePoche>`_
-
-`Android Applikation auf Google Play <https://play.google.com/store/apps/details?id=fr.gaulupeau.apps.InThePoche>`_
-
-`Support Chat auf English <https://gitter.im/wallabag/wallabag>`_
-
+- `Quellcode der Android-App <https://github.com/wallabag/android-app>`_
+- `Android-App auf F-Droid <https://f-droid.org/repository/browse/?fdfilter=wallabag&fdid=fr.gaulupeau.apps.InThePoche>`_
+- `Android-App auf Google Play <https://play.google.com/store/apps/details?id=fr.gaulupeau.apps.InThePoche>`_
