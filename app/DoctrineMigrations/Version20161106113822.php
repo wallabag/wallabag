@@ -4,8 +4,10 @@ namespace Application\Migrations;
 
 use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class Version20161106113822 extends AbstractMigration
+class Version20161106113822 extends AbstractMigration implements ContainerAwareInterface
 {
     /**
      * @var ContainerInterface
@@ -27,7 +29,7 @@ class Version20161106113822 extends AbstractMigration
      */
     public function up(Schema $schema)
     {
-        $this->addSql('ALTER TABLE "'.$this->getTable('config').'" ADD action_mark_as_read INT DEFAULT 0');
+        $this->addSql('ALTER TABLE '.$this->getTable('config').' ADD action_mark_as_read INT DEFAULT 0');
     }
 
     /**
@@ -37,6 +39,6 @@ class Version20161106113822 extends AbstractMigration
     {
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'sqlite', 'This down migration can\'t be executed on SQLite databases, because SQLite don\'t support DROP COLUMN.');
 
-        $this->addSql('ALTER TABLE "'.$this->getTable('config').'" DROP action_mark_as_read');
+        $this->addSql('ALTER TABLE '.$this->getTable('config').' DROP action_mark_as_read');
     }
 }
