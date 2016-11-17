@@ -118,9 +118,9 @@ class ReadabilityControllerTest extends WallabagCoreTestCase
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertContains('flashes.import.notice.summary', $body[0]);
 
-        $this->assertNotEmpty($content->getMimetype());
-        $this->assertNotEmpty($content->getPreviewPicture());
-        $this->assertNotEmpty($content->getLanguage());
+        $this->assertNotEmpty($content->getMimetype(), 'Mimetype for https://venngage.com/blog/hashtags-are-worthless/ is ok');
+        $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for https://venngage.com/blog/hashtags-are-worthless/ is ok');
+        $this->assertNotEmpty($content->getLanguage(), 'Language for https://venngage.com/blog/hashtags-are-worthless/ is ok');
         $this->assertEquals(0, count($content->getTags()));
         $this->assertInstanceOf(\DateTime::class, $content->getCreatedAt());
         $this->assertEquals('2016-08-25', $content->getCreatedAt()->format('Y-m-d'));

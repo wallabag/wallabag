@@ -118,8 +118,8 @@ class ChromeControllerTest extends WallabagCoreTestCase
                 $this->getLoggedInUserId()
             );
 
-        $this->assertNotEmpty($content->getPreviewPicture());
-        $this->assertNotEmpty($content->getLanguage());
+        $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for http://www.usinenouvelle.com is ok');
+        $this->assertNotEmpty($content->getLanguage(), 'Language for http://www.usinenouvelle.com is ok');
         $this->assertEquals(0, count($content->getTags()));
 
         $createdAt = $content->getCreatedAt();
