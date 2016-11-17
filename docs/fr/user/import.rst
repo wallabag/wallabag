@@ -16,7 +16,7 @@ Vous devez créer une nouvelle application sur leur site dédié aux développeu
   termes d'utilisation du service et soumettez votre application
 
 Pocket vous fournira une **Consumer Key** (par exemple, `49961-985e4b92fe21fe4c78d682c1`).
-Vous devez configurer la ``pocket_consumer_key`` dans la section ``Import`` du menu ``Configuration interne``.
+Vous devez configurer la ``pocket_consumer_key`` dans le menu ``Configuration``.
 
 Maintenant, tout est bien configuré pour migrer depuis Pocket.
 

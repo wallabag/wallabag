@@ -71,6 +71,11 @@ config:
             300_word: "Je lis environ 300 mots par minute"
             400_word: "Je lis environ 400 mots par minute"
         pocket_consumer_key_label: Clé d’authentification Pocket pour importer les données
+        help_theme: "L'affichage de wallabag est personnalisable. C'est ici que vous choisissez le thème que vous préférez."
+        help_items_per_page: "Vous pouvez définir le nombre d'articles affichés sur chaque page."
+        help_reading_speed: "wallabag calcule une durée de lecture pour chaque article. Vous pouvez définir ici, grâce à cette liste déroulante, si vous lisez plus ou moins vite. wallabag recalculera la durée de lecture de chaque article."
+        help_language: "Vous pouvez définir la langue de l'interface de wallabag."
+        help_pocket_consumer_key: "Nécessaire pour l'import depuis Pocket. Vous pouvez le créer depuis votre compte Pocket."
     form_rss:
         description: "Les flux RSS fournis par wallabag vous permettent de lire vos articles sauvegardés dans votre lecteur de flux préféré. Pour pouvoir les utiliser, vous devez d’abord créer un jeton."
         token_label: "Jeton RSS"
@@ -88,7 +93,9 @@ config:
         name_label: "Nom"
         email_label: "Adresse courriel"
         twoFactorAuthentication_label: "Double authentification"
+        help_twoFactorAuthentication: "Si vous activez 2FA, à chaque tentative de connexion à wallabag, vous recevrez un code par email."
     form_password:
+        description: "Vous pouvez changer ici votre mot de passe. Le mot de passe doit contenir au moins 8 caractères."
         old_password_label: "Mot de passe actuel"
         new_password_label: "Nouveau mot de passe"
         repeat_new_password_label: "Confirmez votre nouveau mot de passe"

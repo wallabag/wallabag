@@ -12,8 +12,7 @@ Settings
 Theme
 ~~~~~
 
-wallabag is customizable. You can choose your prefered theme here. You can also
-create a new one, a chapter will be dedicated for this. The default theme is
+wallabag is customizable. You can choose your prefered theme here. The default theme is
 ``Material``, it's the theme used in the documentation screenshots.
 
 Items per page
@@ -30,8 +29,7 @@ a fast or a slow reader. wallabag will recalculate the reading time for each art
 Language
 ~~~~~~~~
 
-You can change the language of wallabag interface. You need to logout for this change
-to take effect.
+You can change the language of wallabag interface.
 
 RSS
 ---

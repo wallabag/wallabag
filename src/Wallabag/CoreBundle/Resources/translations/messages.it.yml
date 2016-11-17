@@ -71,6 +71,11 @@ config:
             300_word: 'Leggo ~300 parole al minuto'
             400_word: 'Leggo ~400 parole al minuto'
         pocket_consumer_key_label: Consumer key per Pocket per importare i contenuti
+        # help_theme: "wallabag is customizable. You can choose your prefered theme here."
+        # help_items_per_page: "You can change the number of articles displayed on each page."
+        # help_reading_speed: "wallabag calculates a reading time for each article. You can define here, thanks to this list, if you are a fast or a slow reader. wallabag will recalculate the reading time for each article."
+        # help_language: "You can change the language of wallabag interface."
+        # help_pocket_consumer_key: "Required for Pocket import. You can create it in your Pocket account."
     form_rss:
         description: 'I feed RSS generati da wallabag ti permettono di leggere i tuoi contenuti salvati con il tuo lettore di RSS preferito. Prima, devi generare un token.'
         token_label: 'RSS token'
@@ -88,7 +93,9 @@ config:
         name_label: 'Nome'
         email_label: 'E-mail'
         twoFactorAuthentication_label: 'Two factor authentication'
+        # help_twoFactorAuthentication: "If you enable 2FA, each time you want to login to wallabag, you'll receive a code by email."
     form_password:
+        # description: "You can change your password here. Your new password should by at least 8 characters long."
         old_password_label: 'Password corrente'
         new_password_label: 'Nuova password'
         repeat_new_password_label: 'Ripeti la nuova password'

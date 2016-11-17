@@ -16,7 +16,7 @@ a new application on their developer website to continue.
   and submit your new application
 
 Pocket will give you a **Consumer Key** (for example, `49961-985e4b92fe21fe4c78d682c1`).
-You need to configure the ``pocket_consumer_key`` into the ``Import`` section in the ``Internal settings`` menu.
+You need to configure the ``pocket_consumer_key`` in the ``Config`` menu.
 
 Now, all is fine to migrate from Pocket.
 
