@@ -30,6 +30,11 @@ Language
 wallabag (via graby) can detect article language. It's easy to you to retrieve articles
 written in a specific language.
 
+HTTP status
+-----------
+
+You can retrieve the articles by filtering by their HTTP status code: 200, 404, 500, etc.
+
 Reading time
 ------------
 

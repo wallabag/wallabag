@@ -178,6 +178,7 @@ entry:
         preview_picture_label: 'دارای عکس پیش‌نمایش'
         preview_picture_help: 'پیش‌نمایش عکس'
         language_label: 'زبان'
+        # http_status_label: 'HTTP status'
         reading_time:
             label: 'زمان خواندن به دقیقه'
             from: 'از'

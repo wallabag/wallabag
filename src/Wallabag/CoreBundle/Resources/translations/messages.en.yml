@@ -178,6 +178,7 @@ entry:
         preview_picture_label: 'Has a preview picture'
         preview_picture_help: 'Preview picture'
         language_label: 'Language'
+        http_status_label: 'HTTP status'
         reading_time:
             label: 'Reading time in minutes'
             from: 'from'

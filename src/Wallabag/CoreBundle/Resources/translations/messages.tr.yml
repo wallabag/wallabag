@@ -178,6 +178,7 @@ entry:
         preview_picture_label: 'Resim önizlemesi varsa'
         preview_picture_help: 'Resim önizlemesi'
         language_label: 'Dil'
+        # http_status_label: 'HTTP status'
         reading_time:
             label: 'Dakika cinsinden okuma süresi'
             from: 'başlangıç'

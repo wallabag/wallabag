@@ -30,6 +30,11 @@ Sprache
 wallabag (via graby) kann die Artikelsprache erkennen. Es ist einfach für dich, Artikel
 in einer bestimmten Sprache zu filtern.
 
+HTTP status
+-----------
+
+You can retrieve the articles by filtering by their HTTP status code: 200, 404, 500, etc.
+
 Lesezeit
 --------
 

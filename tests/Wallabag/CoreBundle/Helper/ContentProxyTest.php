@@ -97,6 +97,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
                 'url' => '',
                 'content_type' => '',
                 'language' => '',
+                'status' => '',
                 'open_graph' => [
                     'og_title' => 'my title',
                     'og_description' => 'desc',
@@ -111,6 +112,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('<p>Unable to retrieve readable content.</p><p><i>But we found a short description: </i></p>desc', $entry->getContent());
         $this->assertEmpty($entry->getPreviewPicture());
         $this->assertEmpty($entry->getLanguage());
+        $this->assertEmpty($entry->getHttpStatus());
         $this->assertEmpty($entry->getMimetype());
         $this->assertEquals(0.0, $entry->getReadingTime());
         $this->assertEquals('domain.io', $entry->getDomainName());
@@ -135,6 +137,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
                 'url' => 'http://1.1.1.1',
                 'content_type' => 'text/html',
                 'language' => 'fr',
+                'status' => '200',
                 'open_graph' => [
                     'og_title' => 'my OG title',
                     'og_description' => 'OG desc',
@@ -151,6 +154,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('http://3.3.3.3/cover.jpg', $entry->getPreviewPicture());
         $this->assertEquals('text/html', $entry->getMimetype());
         $this->assertEquals('fr', $entry->getLanguage());
+        $this->assertEquals('200', $entry->getHttpStatus());
         $this->assertEquals(4.0, $entry->getReadingTime());
         $this->assertEquals('1.1.1.1', $entry->getDomainName());
     }

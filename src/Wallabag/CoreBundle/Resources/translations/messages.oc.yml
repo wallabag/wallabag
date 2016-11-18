@@ -178,6 +178,7 @@ entry:
         preview_picture_label: 'A una fotò'
         preview_picture_help: 'Fotò'
         language_label: 'Lenga'
+        # http_status_label: 'HTTP status'
         reading_time:
             label: 'Durada de lectura en minutas'
             from: 'de'

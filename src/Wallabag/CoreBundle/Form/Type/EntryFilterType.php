@@ -90,6 +90,9 @@ class EntryFilterType extends AbstractType
                 },
                 'label' => 'entry.filters.domain_label',
             ])
+            ->add('httpStatus', TextFilterType::class, [
+                'label' => 'entry.filters.http_status_label',
+            ])
             ->add('isArchived', CheckboxFilterType::class, [
                 'label' => 'entry.filters.archived_label',
             ])

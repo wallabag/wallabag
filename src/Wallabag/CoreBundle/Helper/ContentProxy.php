@@ -66,6 +66,7 @@ class ContentProxy
         $entry->setUrl($content['url'] ?: $url);
         $entry->setTitle($title);
         $entry->setContent($html);
+        $entry->setHttpStatus(isset($content['status']) ? $content['status'] : '');
 
         $entry->setLanguage($content['language']);
         $entry->setMimetype($content['content_type']);
