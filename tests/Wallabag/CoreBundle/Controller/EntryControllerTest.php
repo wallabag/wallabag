@@ -1034,7 +1034,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(4, $crawler->filter('div[class=entry]'));
+        $this->assertCount(5, $crawler->filter('div[class=entry]'));
 
         // Search on starred list
         $crawler = $client->request('GET', '/starred/list');
@@ -1078,7 +1078,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $form = $crawler->filter('form[name=search]')->form();
         $data = [
-            'search_entry[term]' => 'pocket',
+            'search_entry[term]' => 'wxcvbnqsdf', // a string not available in the database
         ];
 
         $crawler = $client->submit($form, $data);
