@@ -110,8 +110,7 @@ class EntryRepository extends EntityRepository
         $qb
             ->andWhere('e.content LIKE :term OR e.title LIKE :term')->setParameter('term', '%'.$term.'%')
             ->leftJoin('e.tags', 't')
-            ->groupBy('e.id')
-            ->having('count(t.id) = 0');
+            ->groupBy('e.id');
 
         return $qb;
     }

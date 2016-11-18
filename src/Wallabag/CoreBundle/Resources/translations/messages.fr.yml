@@ -162,7 +162,7 @@ entry:
         archived: "Articles lus"
         filtered: "Articles filtrés"
         filtered_tags: "Articles filtrés par tags :"
-        filtered_search: 'Articles filtrés par une recherche :'
+        filtered_search: 'Articles filtrés par recherche :'
         untagged: "Article sans tag"
     list:
         number_on_the_page: "{0} Il n’y a pas d’articles.|{1} Il y a un article.|]1,Inf[ Il y a %count% articles."
