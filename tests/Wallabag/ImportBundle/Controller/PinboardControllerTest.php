@@ -118,9 +118,9 @@ class PinboardControllerTest extends WallabagCoreTestCase
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertContains('flashes.import.notice.summary', $body[0]);
 
-        $this->assertNotEmpty($content->getMimetype());
-        $this->assertNotEmpty($content->getPreviewPicture());
-        $this->assertNotEmpty($content->getLanguage());
+        $this->assertNotEmpty($content->getMimetype(), 'Mimetype for https://ma.ttias.be is ok');
+        $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for https://ma.ttias.be is ok');
+        $this->assertNotEmpty($content->getLanguage(), 'Language for https://ma.ttias.be is ok');
         $this->assertEquals(2, count($content->getTags()));
         $this->assertInstanceOf(\DateTime::class, $content->getCreatedAt());
         $this->assertEquals('2016-10-26', $content->getCreatedAt()->format('Y-m-d'));

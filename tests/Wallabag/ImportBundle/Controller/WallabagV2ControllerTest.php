@@ -119,9 +119,9 @@ class WallabagV2ControllerTest extends WallabagCoreTestCase
                 $this->getLoggedInUserId()
             );
 
-        $this->assertNotEmpty($content->getMimetype());
-        $this->assertNotEmpty($content->getPreviewPicture());
-        $this->assertNotEmpty($content->getLanguage());
+        $this->assertNotEmpty($content->getMimetype(), 'Mimetype for http://www.liberation.fr is ok');
+        $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for http://www.liberation.fr is ok');
+        $this->assertNotEmpty($content->getLanguage(), 'Language for http://www.liberation.fr is ok');
         $this->assertEquals(0, count($content->getTags()));
 
         $content = $client->getContainer()
@@ -132,9 +132,9 @@ class WallabagV2ControllerTest extends WallabagCoreTestCase
                 $this->getLoggedInUserId()
             );
 
-        $this->assertNotEmpty($content->getMimetype());
-        $this->assertNotEmpty($content->getPreviewPicture());
-        $this->assertNotEmpty($content->getLanguage());
+        $this->assertNotEmpty($content->getMimetype(), 'Mimetype for https://www.mediapart.fr is ok');
+        $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for https://www.mediapart.fr is ok');
+        $this->assertNotEmpty($content->getLanguage(), 'Language for https://www.mediapart.fr is ok');
         $this->assertEquals(2, count($content->getTags()));
         $this->assertInstanceOf(\DateTime::class, $content->getCreatedAt());
         $this->assertEquals('2016-09-08', $content->getCreatedAt()->format('Y-m-d'));
