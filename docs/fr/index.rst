@@ -9,10 +9,6 @@ Documentation de wallabag
 simplement d’archiver une page web en ne conservant que le contenu. Les
 éléments superflus (menu, publicité, etc.) sont supprimés.
 
-.. tip::
-
-    Vous vous trouvez sur la documentation de wallabag v2. Si vous voulez lire la documentation de wallabag v1, `vous pouvez jeter un œil ici <https://github.com/wallabag/documentation>`__.
-
 La documentation principale de cette application est découpée en plusieurs sections :
 
 * :ref:`user-docs`
@@ -29,24 +25,19 @@ La documentation est disponible dans d'autres langues :
    :maxdepth: 2
    :caption: Documentation utilisateur
 
-   user/faq
    user/installation
-   user/upgrade-2.0.x-2.1.1
-   user/upgrade-2.0.x-2.1.1
-   user/migration
+   user/upgrade
+   user/configuration
    user/import
    user/create_account
-   user/login
-   user/configuration
-   user/first_article
+   user/articles
    user/errors_during_fetching
-   user/annotations
-   user/download_articles
-   user/share
    user/filters
    user/tags
+   user/android
    user/parameters
    user/backup
+   user/faq
 
 .. _dev-docs:
 
@@ -59,5 +50,4 @@ La documentation est disponible dans d'autres langues :
    developer/documentation
    developer/translate
    developer/maintenance
-   developer/redis
-   developer/rabbitmq
+   developer/asynchronous

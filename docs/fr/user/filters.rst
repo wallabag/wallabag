@@ -1,5 +1,5 @@
-Filtres
-=======
+Retrouver des articles grâce aux filtres
+========================================
 
 Pour retrouver plus facilement vos articles, vous pouvez utiliser les filtres.
 Cliquez sur la troisième icône de la barre supérieure.

@@ -12,9 +12,7 @@ There may be several reasons:
 How can I help to fix that?
 ---------------------------
 
-You can `sending us an email with the article's URL <mailto:hello@wallabag.org>`_.
-
-Or you can also try to fix this problem by yourself (so we can be focused on improving wallabag internally instead of writing siteconfig :) ).
+You can try to fix this problem by yourself (so we can be focused on improving wallabag internally instead of writing siteconfig :) ).
 
 You can try to see if it works here: `http://f43.me/feed/test <http://f43.me/feed/test>`_ (it uses almost the same system as wallabag to retrieve content).
 

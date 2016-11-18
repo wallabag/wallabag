@@ -49,8 +49,8 @@ Benutzer-Informationen
 
 Du kannst deinen Namen ändern, deine E-Mail-Adresse und die Zwei-Faktor-Authentifizierung aktivieren.
 
-Zwei-Faktor-Authentifizierung
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Zwei-Faktor-Authentifizierung (2FA)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     Die Zwei-Faktor-Authentifizierung (2FA) dient dem Identitätsnachweis eines Nutzers mittels der
     Kombination zweier verschiedener und insbesondere unabhängiger Komponenten (Faktoren).

@@ -12,9 +12,7 @@ Il peut y avoir plusieurs raisons :
 Comment puis-je aider pour réparer ça ?
 ---------------------------------------
 
-Vous pouvez `nous envoyer un email avec l'URL de l'article <mailto:hello@wallabag.org>`_.
-
-Ou vous pouvez aussi essayer de résoudre ce problème vous même (comme ça, nous restons concentrés pour améliorer wallabag au lieu d'écrire ces fichiers de configuration :) ).
+Vous pouvez essayer de résoudre ce problème vous même (comme ça, nous restons concentrés pour améliorer wallabag au lieu d'écrire ces fichiers de configuration :) ).
 
 Vous pouvez essayer de voir si ça fonctionne ici : `http://f43.me/feed/test <http://f43.me/feed/test>`_ (ce site utilise principalement la même manière de fonctionner que wallabag pour récupérer les articles).
 
