@@ -181,9 +181,9 @@ class Entry
     private $isPublic;
 
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="http_status", type="integer", nullable=true)
+     * @ORM\Column(name="http_status", type="text", nullable=true)
      *
      * @Groups({"entries_for_user", "export_all"})
      */

@@ -32,7 +32,7 @@ class Version20161118134328 extends AbstractMigration implements ContainerAwareI
      */
     public function up(Schema $schema)
     {
-        $this->addSql('ALTER TABLE '.$this->getTable('entry').' ADD http_status INT DEFAULT 0');
+        $this->addSql('ALTER TABLE '.$this->getTable('entry').' ADD http_status VARCHAR(3) DEFAULT NULL');
     }
 
     /**
