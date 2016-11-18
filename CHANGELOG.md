@@ -1,6 +1,25 @@
 ## Changelog
 
+### 2.1.4 2016/11/18
+- [#2550](https://github.com/wallabag/wallabag/pull/2550) Reordered documentation (@jlnostr, @nicosomb)
+- [#2578](https://github.com/wallabag/wallabag/pull/2578) Added help on config screen (@nicosomb)
+- [#2570](https://github.com/wallabag/wallabag/pull/2570) Added creation date on entries view (@nicosomb)
+- [#2587](https://github.com/wallabag/wallabag/pull/2587) User-agents have moved to site-config (@j0k3r)
+- [#2584](https://github.com/wallabag/wallabag/pull/2584) fix #2582 - Documentation, Nginx config: disable all other PHP file from symphony (@blankoworld)
+- [#2577](https://github.com/wallabag/wallabag/pull/2577) Added tooltips in header bar (@nicosomb)
+- [#2562](https://github.com/wallabag/wallabag/pull/2562) Bigger image preview in case of only image content (@j0k3r)
+- [#2571](https://github.com/wallabag/wallabag/pull/2571) Changed behavior when we change language (@nicosomb)
+- [#2565](https://github.com/wallabag/wallabag/pull/2565) Removed support website on about page (@nicosomb)
+- [#2563](https://github.com/wallabag/wallabag/pull/2563) Improve PR template (@j0k3r)
+- [#2561](https://github.com/wallabag/wallabag/pull/2561) fix #2559 (@Rurik19)
+- [#2555](https://github.com/wallabag/wallabag/pull/2555) Reorder variable assignation in update.sh script, fix #2554 (@dkrmr)
+- [#2556](https://github.com/wallabag/wallabag/pull/2556) Replaced TokenStorage with TokenStorageInterface (@nicosomb)
+- [#2552](https://github.com/wallabag/wallabag/pull/2552) Round readingtime to avoid crazy number (@j0k3r)
+- [#2546](https://github.com/wallabag/wallabag/pull/2546) Updated default parameters.yml file in documentation (@nicosomb)
+- [#2545](https://github.com/wallabag/wallabag/pull/2545) Update the upgrade documentation (@nicosomb)
+
 ### 2.1.3 2016/11/04
+- [#2536](https://github.com/wallabag/wallabag/pull/2536) Prepare wallabag 2.1.3 :rocket: (@nicosomb)
 - [#2460](https://github.com/wallabag/wallabag/pull/2460) UI Changes (@tcitworld, @j0k3r)
 - [#2534](https://github.com/wallabag/wallabag/pull/2534) Use created_at as default sort (@j0k3r)
 - [#2530](https://github.com/wallabag/wallabag/pull/2530) Added documentation about failed to load external entity error (@j0k3r, @Strubbl, @nicosomb)
