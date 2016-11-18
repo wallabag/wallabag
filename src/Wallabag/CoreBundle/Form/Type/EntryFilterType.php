@@ -11,6 +11,7 @@ use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\CheckboxFilterType;
 use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\ChoiceFilterType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
@@ -91,6 +92,18 @@ class EntryFilterType extends AbstractType
                 'label' => 'entry.filters.domain_label',
             ])
             ->add('httpStatus', TextFilterType::class, [
+                'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
+                    $value = $values['value'];
+                    if (false === array_key_exists($value, Response::$statusTexts)) {
+                        return;
+                    }
+
+                    $paramName = sprintf('%s', str_replace('.', '_', $field));
+                    $expression = $filterQuery->getExpr()->eq($field, ':'.$paramName);
+                    $parameters = array($paramName => $value);
+
+                    return $filterQuery->createCondition($expression, $parameters);
+                },
                 'label' => 'entry.filters.http_status_label',
             ])
             ->add('isArchived', CheckboxFilterType::class, [
