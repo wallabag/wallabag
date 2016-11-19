@@ -86,6 +86,36 @@ class EntryRepository extends EntityRepository
     }
 
     /**
+     * Retrieves entries filtered with a search term for a user.
+     *
+     * @param int    $userId
+     * @param string $term
+     * @param strint $currentRoute
+     *
+     * @return QueryBuilder
+     */
+    public function getBuilderForSearchByUser($userId, $term, $currentRoute)
+    {
+        $qb = $this
+            ->getBuilderByUser($userId);
+
+        if ('starred' === $currentRoute) {
+            $qb->andWhere('e.isStarred = true');
+        } elseif ('unread' === $currentRoute) {
+            $qb->andWhere('e.isArchived = false');
+        } elseif ('archive' === $currentRoute) {
+            $qb->andWhere('e.isArchived = true');
+        }
+
+        $qb
+            ->andWhere('e.content LIKE :term OR e.title LIKE :term')->setParameter('term', '%'.$term.'%')
+            ->leftJoin('e.tags', 't')
+            ->groupBy('e.id');
+
+        return $qb;
+    }
+
+    /**
      * Retrieves untagged entries for a user.
      *
      * @param int $userId

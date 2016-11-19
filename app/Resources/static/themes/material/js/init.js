@@ -55,7 +55,7 @@ $(document).ready(() => {
     $('.nav-panels .action').hide(100);
     $('.nav-panel-menu').addClass('hidden');
     $('.nav-panels').css('background', 'white');
-    $('#searchfield').focus();
+    $('#search_entry_term').focus();
     return false;
   });
   $('.close').on('click', () => {

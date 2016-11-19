@@ -31,17 +31,11 @@
         <li class="menu all"><a href="{{ path('all') }}">{{ 'menu.left.all_articles'|trans }}</a></li>
         <li class="menu tag"><a href="{{ path('tag') }}">{{ 'menu.left.tags'|trans }}</a></li>
         <li class="menu new"><a href="{{ path('new') }}">{{ 'menu.left.save_link'|trans }}</a></li>
-        <!--<li style="position: relative;"><a href="javascript: void(null);" id="search">{{ 'menu.left.search'|trans }}</a>
+        <li style="position: relative;"><a href="javascript: void(null);" id="search">{{ 'menu.left.search'|trans }}</a>
             <div id="search-form" class="messages info popup-form">
-                <form method="get" action="index.php">
-                    <h2>{{ 'menu.left.search'|trans }}</h2>
-                    <a href="javascript: void(null);" id="search-form-close" class="close-button--popup close-button">&times;</a>
-                    <input type="hidden" name="view" value="search">
-                    <input required placeholder="{{ 'menu.search_form.input_label'|trans }}" type="text" name="search" id="searchfield"><br>
-                    <input id="submit-search" type="submit" value="{{ 'menu.left.search'|trans }}">
-                </form>
+                {{ render(controller("WallabagCoreBundle:Entry:searchForm", {'currentRoute': app.request.attributes.get('_route')})) }}
             </div>
-        </li>-->
+        </li>
         <li class="menu config"><a href="{{ path('config') }}">{{ 'menu.left.config'|trans }}</a></li>
         {% if is_granted('ROLE_SUPER_ADMIN') %}
             <li class="menu users"><a href="{{ path('user_index') }}">{{ 'menu.left.users_management'|trans }}</a></li>

@@ -322,11 +322,13 @@ nav input {
   color: #444;
 }
 
-.input-field.nav-panel-add label {
+.input-field.nav-panel-add label,
+.input-field.nav-panel-search label {
   left: 1rem;
 }
 
-.input-field.nav-panel-add .close {
+.input-field.nav-panel-add .close,
+.input-field.nav-panel-search .close {
   position: absolute;
   top: 0;
   right: 1rem;
@@ -345,7 +347,9 @@ nav input {
 }
 
 .input-field.nav-panel-add,
-.input-field.nav-panel-add form {
+.input-field.nav-panel-add form,
+.input-field.nav-panel-search,
+.input-field.nav-panel-search form {
   height: 100%;
 }
 

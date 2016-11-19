@@ -1018,4 +1018,71 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $this->assertCount(7, $crawler->filter('div[class=entry]'));
     }
+
+    public function testSearch()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        // Search on unread list
+        $crawler = $client->request('GET', '/unread/list');
+
+        $form = $crawler->filter('form[name=search]')->form();
+        $data = [
+            'search_entry[term]' => 'title',
+        ];
+
+        $crawler = $client->submit($form, $data);
+
+        $this->assertCount(5, $crawler->filter('div[class=entry]'));
+
+        // Search on starred list
+        $crawler = $client->request('GET', '/starred/list');
+
+        $form = $crawler->filter('form[name=search]')->form();
+        $data = [
+            'search_entry[term]' => 'title',
+        ];
+
+        $crawler = $client->submit($form, $data);
+
+        $this->assertCount(1, $crawler->filter('div[class=entry]'));
+
+        // Added new article to test on archive list
+        $crawler = $client->request('GET', '/new');
+        $form = $crawler->filter('form[name=entry]')->form();
+        $data = [
+            'entry[url]' => $this->url,
+        ];
+        $client->submit($form, $data);
+        $content = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findByUrlAndUserId($this->url, $this->getLoggedInUserId());
+        $client->request('GET', '/archive/'.$content->getId());
+
+        $crawler = $client->request('GET', '/archive/list');
+
+        $form = $crawler->filter('form[name=search]')->form();
+        $data = [
+            'search_entry[term]' => 'manège',
+        ];
+
+        $crawler = $client->submit($form, $data);
+
+        $this->assertCount(1, $crawler->filter('div[class=entry]'));
+        $client->request('GET', '/delete/'.$content->getId());
+
+        // test on list of all articles
+        $crawler = $client->request('GET', '/all/list');
+
+        $form = $crawler->filter('form[name=search]')->form();
+        $data = [
+            'search_entry[term]' => 'wxcvbnqsdf', // a string not available in the database
+        ];
+
+        $crawler = $client->submit($form, $data);
+
+        $this->assertCount(0, $crawler->filter('div[class=entry]'));
+    }
 }

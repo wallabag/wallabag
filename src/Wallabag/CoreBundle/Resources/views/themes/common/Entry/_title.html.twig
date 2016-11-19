@@ -6,8 +6,10 @@
     {{ 'entry.page_titles.archived'|trans }}
 {% elseif currentRoute == 'all' %}
     {{ 'entry.page_titles.filtered'|trans }}
+{% elseif currentRoute == 'search' %}
+    {{ 'entry.page_titles.filtered_search'|trans }} {{ filter }}
 {% elseif currentRoute == 'tag_entries' %}
-    {{ 'entry.page_titles.filtered_tags'|trans }} {{ currentTag }}
+    {{ 'entry.page_titles.filtered_tags'|trans }} {{ filter }}
 {% elseif currentRoute == 'untagged' %}
     {{ 'entry.page_titles.untagged'|trans }}
 {% else %}

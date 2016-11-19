@@ -162,6 +162,7 @@ entry:
         archived: 'مقاله‌های بایگانی‌شده'
         filtered: 'مقاله‌های فیلترشده'
         # filtered_tags: 'Filtered by tags:'
+        # filtered_search: 'Filtered by search:'
         # untagged: 'Untagged entries'
     list:
         number_on_the_page: '{0} هیج مقاله‌ای نیست.|{1} یک مقاله هست.|]1,Inf[ %count% مقاله هست.'
@@ -227,6 +228,8 @@ entry:
         placeholder: 'http://website.com'
         form_new:
             url_label: نشانی
+    search:
+        # placeholder: 'What are you looking for?'
     edit:
         page_title: 'ویرایش مقاله'
         title_label: 'عنوان'

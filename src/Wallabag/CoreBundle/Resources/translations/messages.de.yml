@@ -162,6 +162,7 @@ entry:
         archived: 'Archivierte Einträge'
         filtered: 'Gefilterte Einträge'
         filtered_tags: 'Gefiltert nach Tags:'
+        # filtered_search: 'Filtered by search:'
         untagged: 'Nicht getaggte Einträge'
     list:
         number_on_the_page: '{0} Es gibt keine Einträge.|{1} Es gibt einen Eintrag.|]1,Inf[ Es gibt %count% Einträge.'
@@ -227,6 +228,8 @@ entry:
         placeholder: 'https://website.de'
         form_new:
             url_label: URL
+    search:
+        # placeholder: 'What are you looking for?'
     edit:
         page_title: 'Eintrag bearbeiten'
         title_label: 'Titel'

@@ -30,6 +30,12 @@ $(document).ready(() => {
   /* Actions */
   Mousetrap.bind('g n', () => {
     $('#nav-btn-add').trigger('click');
+    return false;
+  });
+
+  Mousetrap.bind('s', () => {
+    $('#nav-btn-search').trigger('click');
+    return false;
   });
 
   Mousetrap.bind('esc', () => {

@@ -89,11 +89,11 @@
                             <i class="material-icons">add</i>
                         </a>
                     </li>
-                    <!--<li>
+                    <li>
                         <a title="{{ 'menu.top.search'|trans }}" class="waves-effect" href="javascript: void(null);" id="nav-btn-search">
                             <i class="material-icons">search</i>
                         </a>
-                    </li>-->
+                    </li>
                     <li id="button_filters">
                         <a class="nav-panel-menu button-collapse-right tooltipped" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.filter_entries'|trans }}" href="#" data-activates="filters">
                             <i class="material-icons">filter_list</i>
@@ -106,13 +106,11 @@
                     </li>
                 </ul>
             </div>
-            <form method="get" action="index.php">
-                <div class="input-field nav-panel-search" style="display: none">
-                    <input name="search" id="searchfield" type="search" required placeholder="{{ 'menu.search_form.input_label'|trans }}">
-                    <label for="search"><i class="material-icons search">search</i></label>
-                    <i class="material-icons close">clear</i>
-                </div>
-            </form>
+            <div class="input-field nav-panel-search" style="display: none">
+                {{ render(controller("WallabagCoreBundle:Entry:searchForm", {'currentRoute': app.request.attributes.get('_route')})) }}
+                <label for="search" class="active"><i class="material-icons search">search</i></label>
+                <i class="material-icons close">clear</i>
+            </div>
             <div class="input-field nav-panel-add" style="display: none">
                 {{ render(controller("WallabagCoreBundle:Entry:addEntryForm")) }}
                 <label for="add" class="active"><i class="material-icons add">add</i></label>

@@ -162,6 +162,7 @@ entry:
         # archived: 'Archived entries'
         # filtered: 'Filtered entries'
         # filtered_tags: 'Filtered by tags:'
+        # filtered_search: 'Filtered by search:'
         # untagged: 'Untagged entries'
     list:
         # number_on_the_page: '{0} There is no entry.|{1} There is one entry.|]1,Inf[ There are %count% entries.'
@@ -227,6 +228,8 @@ entry:
         placeholder: 'http://website.com'
         form_new:
             url_label: Url
+    search:
+        # placeholder: 'What are you looking for?'
     edit:
         # page_title: 'Edit an entry'
         # title_label: 'Title'
