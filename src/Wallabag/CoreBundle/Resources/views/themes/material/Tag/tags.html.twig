@@ -12,7 +12,7 @@
     <div class="row">
         <ul class="card-tag-labels">
             {% for tag in tags %}
-                <li title="{{tag.label}} ({{ tag.nbEntries }})" id="tag-{{ tag.id }}" class="col l2 m2 s2">
+                <li title="{{tag.label}} ({{ tag.nbEntries }})" id="tag-{{ tag.id }}" class="col l2 m2 s5">
                     <a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{tag.label}} ({{ tag.nbEntries }})</a>
                 </li>
             {% endfor %}

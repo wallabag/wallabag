@@ -72,6 +72,7 @@ class InstallCommand extends ContainerAwareCommand
     protected function checkRequirements()
     {
         $this->defaultOutput->writeln('<info><comment>Step 1 of 4.</comment> Checking system requirements.</info>');
+        $doctrineManager = $this->getContainer()->get('doctrine')->getManager();
 
         $rows = [];
 
@@ -108,20 +109,38 @@ class InstallCommand extends ContainerAwareCommand
 
         $rows[] = [$label, $status, $help];
 
+        // check MySQL & PostgreSQL version
+        $label = '<comment>Database version</comment>';
+        $status = '<info>OK!</info>';
+        $help = '';
+
         // now check if MySQL isn't too old to handle utf8mb4
-        if ($conn->isConnected() && $conn->getDatabasePlatform() instanceof \Doctrine\DBAL\Platforms\MySqlPlatform) {
+        if ($conn->isConnected() && 'mysql' === $conn->getDatabasePlatform()->getName()) {
             $version = $conn->query('select version()')->fetchColumn();
             $minimalVersion = '5.5.4';
 
             if (false === version_compare($version, $minimalVersion, '>')) {
                 $fulfilled = false;
-                $rows[] = [
-                    '<comment>Database version</comment>',
-                    '<error>ERROR!</error>',
-                    'Your MySQL version ('.$version.') is too old, consider upgrading ('.$minimalVersion.'+).',
-                ];
+                $status = '<error>ERROR!</error>';
+                $help = 'Your MySQL version ('.$version.') is too old, consider upgrading ('.$minimalVersion.'+).';
             }
         }
+
+        // testing if PostgreSQL > 9.1
+        if ($conn->isConnected() && 'postgresql' === $conn->getDatabasePlatform()->getName()) {
+            // return version should be like "PostgreSQL 9.5.4 on x86_64-apple-darwin15.6.0, compiled by Apple LLVM version 8.0.0 (clang-800.0.38), 64-bit"
+            $version = $doctrineManager->getConnection()->query('SELECT version();')->fetchColumn();
+
+            preg_match('/PostgreSQL ([0-9\.]+)/i', $version, $matches);
+
+            if (isset($matches[1]) & version_compare($matches[1], '9.2.0', '<')) {
+                $fulfilled = false;
+                $status = '<error>ERROR!</error>';
+                $help = 'PostgreSQL should be greater than 9.1 (actual version: '.$matches[1].')';
+            }
+        }
+
+        $rows[] = [$label, $status, $help];
 
         foreach ($this->functionExists as $functionRequired) {
             $label = '<comment>'.$functionRequired.'</comment>';

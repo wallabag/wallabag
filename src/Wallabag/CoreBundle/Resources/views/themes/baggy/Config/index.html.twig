@@ -14,6 +14,9 @@
                 {{ form_errors(form.config.theme) }}
                 {{ form_widget(form.config.theme) }}
             </div>
+            <a href="#" title="{{ 'config.form_settings.help_theme'|trans }}">
+                <i class="material-icons">live_help</i>
+            </a>
         </fieldset>
 
         <fieldset class="w500p inline">
@@ -22,6 +25,9 @@
                 {{ form_errors(form.config.items_per_page) }}
                 {{ form_widget(form.config.items_per_page) }}
             </div>
+            <a href="#" title="{{ 'config.form_settings.help_items_per_page'|trans }}">
+                <i class="material-icons">live_help</i>
+            </a>
         </fieldset>
 
         <fieldset class="w500p inline">
@@ -34,6 +40,9 @@
                     <a href="http://www.myreadspeed.com/calculate/">myreadspeed</a>
                 </p>
             </div>
+            <a href="#" title="{{ 'config.form_settings.help_reading_speed'|trans }}">
+                <i class="material-icons">live_help</i>
+            </a>
         </fieldset>
 
         <fieldset class="w500p inline">
@@ -50,6 +59,9 @@
                 {{ form_errors(form.config.language) }}
                 {{ form_widget(form.config.language) }}
             </div>
+            <a href="#" title="{{ 'config.form_settings.help_language'|trans }}">
+                <i class="material-icons">live_help</i>
+            </a>
         </fieldset>
 
         <fieldset class="w500p inline">
@@ -62,10 +74,16 @@
                     <a href="https://getpocket.com/developer/docs/authentication">https://getpocket.com/developer/docs/authentication</a>
                 </p>
             </div>
+            <a href="#" title="{{ 'config.form_settings.help_pocket_consumer_key'|trans }}">
+                <i class="material-icons">live_help</i>
+            </a>
+        </fieldset>
 
+        <fieldset class="w500p inline">
             <div class="row">
                 <h3>{{ 'config.form_settings.android_configuration'|trans }}</h3>
                 <a href="wallabag://{{ app.user.username }}@{{ wallabag_url }}" >Touch here to prefill your Android application</a>
+                <br/>
                 <img id="androidQrcode" />
                 <script>
                     const imgBase64 = jrQrcode.getQrBase64('wallabag://{{ app.user.username }}@{{ wallabag_url }}');
@@ -161,6 +179,9 @@
                 {{ form_errors(form.user.twoFactorAuthentication) }}
                 {{ form_widget(form.user.twoFactorAuthentication) }}
             </div>
+            <a href="#" title="{{ 'config.form_user.help_twoFactorAuthentication'|trans }}">
+                <i class="material-icons">live_help</i>
+            </a>
         </fieldset>
         {% endif %}
 
@@ -203,6 +224,10 @@
 
     {{ form_start(form.pwd) }}
         {{ form_errors(form.pwd) }}
+
+        <div class="row">
+            {{ 'config.form_password.description'|trans }}
+        </div>
 
         <fieldset class="w500p inline">
             <div class="row">

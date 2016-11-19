@@ -13,8 +13,7 @@ Einstellungen
 Theme
 ~~~~~
 
-wallabag ist anpassbar. Du kannst dein bevorzugtes Theme hier auswählen. Du kannst
-auch ein neues erstellen, ein extra Kapitel wird dem gewidmet sein. Das Standardtheme
+wallabag ist anpassbar. Du kannst dein bevorzugtes Theme hier auswählen. Das Standardtheme
 ist ``Material``, es ist das Theme, dass in den Dokumentationsbildschirmfotos genutzt wird.
 
 Artikel pro Seite
@@ -39,8 +38,7 @@ Jedes Mal, wenn du eine Aktion ausführst (nach dem Markieren eines Artikels als
 Sprache
 ~~~~~~~
 
-Du kannst die Sprache von der wallabag Benutzeroberfläche ändern. Du musst die ausloggen, damit diese
-Änderung Wirkung zeigt.
+Du kannst die Sprache von der wallabag Benutzeroberfläche ändern.
 
 RSS
 ---
@@ -59,8 +57,8 @@ Benutzer-Informationen
 
 Du kannst deinen Namen ändern, deine E-Mail-Adresse und die Zwei-Faktor-Authentifizierung aktivieren.
 
-Zwei-Faktor-Authentifizierung
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Zwei-Faktor-Authentifizierung (2FA)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     Die Zwei-Faktor-Authentifizierung (2FA) dient dem Identitätsnachweis eines Nutzers mittels der
     Kombination zweier verschiedener und insbesondere unabhängiger Komponenten (Faktoren).

@@ -71,7 +71,7 @@ class Config
      * @Assert\Range(
      *      min = 1,
      *      max = 100000,
-     *      maxMessage = "validator.rss_limit_too_hight"
+     *      maxMessage = "validator.rss_limit_too_high"
      * )
      */
     private $rssLimit;

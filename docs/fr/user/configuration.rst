@@ -13,8 +13,7 @@ Thème
 ~~~~~
 
 L'affichage de wallabag est personnalisable. C'est ici que vous choisissez le thème
-que vous préférez. Vous pouvez aussi en créer un nouveau, une documentation sera
-disponible pour guider. Le thème par défaut est ``Material``, c'est celui
+que vous préférez. Le thème par défaut est ``Material``, c'est celui
 qui est utilisé dans les captures d'écran de la documentation.
 
 Nombre d'articles par page
@@ -39,8 +38,7 @@ après avoir supprimé un article, après avoir retiré un tag d'un article), vo
 Langue
 ~~~~~~
 
-Vous pouvez définir la langue de l'interface de wallabag. Vous devrez vous déconnecter
-pour que la nouvelle langue soit prise en compte.
+Vous pouvez définir la langue de l'interface de wallabag.
 
 RSS
 ---

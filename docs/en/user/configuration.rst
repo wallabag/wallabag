@@ -12,8 +12,7 @@ Settings
 Theme
 ~~~~~
 
-wallabag is customizable. You can choose your prefered theme here. You can also
-create a new one, a chapter will be dedicated for this. The default theme is
+wallabag is customizable. You can choose your prefered theme here. The default theme is
 ``Material``, it's the theme used in the documentation screenshots.
 
 Items per page
@@ -39,8 +38,7 @@ after deleting an article, after removing a tag from an entry), you can be redir
 Language
 ~~~~~~~~
 
-You can change the language of wallabag interface. You need to logout for this change
-to take effect.
+You can change the language of wallabag interface.
 
 RSS
 ---
@@ -61,8 +59,8 @@ You can change your name, your email address and enable ``Two factor authenticat
 
 If the wallabag instance has more than one enabled user, you can delete your account here. **Take care, we delete all your data**.
 
-Two factor authentication
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Two factor authentication (2FA)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     Two-factor authentication (also known as 2FA) is a technology patented in 1984
     that provides identification of users by means of the combination of two different components.

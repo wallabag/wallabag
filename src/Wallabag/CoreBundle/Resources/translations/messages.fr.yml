@@ -76,6 +76,11 @@ config:
             redirect_current_page: 'À la page courante'
         pocket_consumer_key_label: Clé d’authentification Pocket pour importer les données
         android_configuration: Configurez votre application Android
+        help_theme: "L'affichage de wallabag est personnalisable. C'est ici que vous choisissez le thème que vous préférez."
+        help_items_per_page: "Vous pouvez définir le nombre d'articles affichés sur chaque page."
+        help_reading_speed: "wallabag calcule une durée de lecture pour chaque article. Vous pouvez définir ici, grâce à cette liste déroulante, si vous lisez plus ou moins vite. wallabag recalculera la durée de lecture de chaque article."
+        help_language: "Vous pouvez définir la langue de l'interface de wallabag."
+        help_pocket_consumer_key: "Nécessaire pour l'import depuis Pocket. Vous pouvez le créer depuis votre compte Pocket."
     form_rss:
         description: "Les flux RSS fournis par wallabag vous permettent de lire vos articles sauvegardés dans votre lecteur de flux préféré. Pour pouvoir les utiliser, vous devez d’abord créer un jeton."
         token_label: "Jeton RSS"
@@ -93,6 +98,7 @@ config:
         name_label: "Nom"
         email_label: "Adresse courriel"
         twoFactorAuthentication_label: "Double authentification"
+        help_twoFactorAuthentication: "Si vous activez 2FA, à chaque tentative de connexion à wallabag, vous recevrez un code par email."
         delete:
             title: Supprimer mon compte (attention danger !)
             description: Si vous confirmez la suppression de votre compte, TOUS les articles, TOUS les tags, TOUTES les annotations et votre compte seront DÉFINITIVEMENT supprimé (c'est IRRÉVERSIBLE). Vous serez ensuite déconnecté.
@@ -106,6 +112,7 @@ config:
         entries: Supprimer TOUS les articles
         confirm: Êtes-vous vraiment vraiment sûr ? (C'EST IRRÉVERSIBLE)
     form_password:
+        description: "Vous pouvez changer ici votre mot de passe. Le mot de passe doit contenir au moins 8 caractères."
         old_password_label: "Mot de passe actuel"
         new_password_label: "Nouveau mot de passe"
         repeat_new_password_label: "Confirmez votre nouveau mot de passe"
@@ -247,7 +254,7 @@ about:
     getting_help:
         documentation: "Documentation"
         bug_reports: "Rapport de bogue"
-        support: "<a href=\"https://support.wallabag.org\">Sur notre site de support</a> ou <a href=\"https://github.com/wallabag/wallabag/issues\">sur GitHub</a>"
+        support: "<a href=\"https://github.com/wallabag/wallabag/issues\">sur GitHub</a>"
     helping:
         description: "wallabag est gratuit et opensource. Vous pouvez nous aider :"
         by_contributing: "en contribuant au projet :"
@@ -477,7 +484,7 @@ error:
 flashes:
     config:
         notice:
-            config_saved: "Les paramètres ont bien été mis à jour. Certains seront pris en compte après déconnexion."
+            config_saved: "Les paramètres ont bien été mis à jour."
             password_updated: "Votre mot de passe a bien été mis à jour"
             password_not_updated_demo: "En démo, vous ne pouvez pas changer le mot de passe de cet utilisateur."
             user_updated: "Vos informations personnelles ont bien été mises à jour"
@@ -490,7 +497,7 @@ flashes:
             entries_reset: Articles supprimés
     entry:
         notice:
-            entry_already_saved: "Article déjà sauvergardé le %date%"
+            entry_already_saved: "Article déjà sauvegardé le %date%"
             entry_saved: "Article enregistré"
             entry_saved_failed: "Article enregistré mais impossible de récupérer le contenu"
             entry_updated: "Article mis à jour"

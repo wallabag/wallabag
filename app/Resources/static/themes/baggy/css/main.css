@@ -413,7 +413,8 @@ footer a {
   margin-bottom: 2em;
 }
 
-.estimatedTime .reading-time {
+.reading-time,
+.created-at {
   color: #999;
   font-style: italic;
   font-weight: normal;
@@ -581,7 +582,6 @@ img.preview {
 
 div.pagination ul {
   text-align: right;
-  margin-bottom: 50px;
 }
 
 .nb-results {

@@ -1,7 +1,7 @@
-Filters
-=======
+Retrieve your articles thanks to filters
+========================================
 
-To retrieve articles easier, you can use filters.
+To retrieve articles easily, you can use filters.
 Click on the third icon in the top bar.
 
 .. image:: ../../img/user/topbar.png

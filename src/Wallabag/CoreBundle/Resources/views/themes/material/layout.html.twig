@@ -85,7 +85,7 @@
             <div class="input-field nav-panel-buttom">
                 <ul>
                     <li class="bold">
-                        <a title="{{ 'menu.top.add_new_entry'|trans }}" class="waves-effect" href="{{ path('new') }}" id="nav-btn-add">
+                        <a class="waves-effect tooltipped" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.add_new_entry'|trans }}" href="{{ path('new') }}" id="nav-btn-add">
                             <i class="material-icons">add</i>
                         </a>
                     </li>
@@ -95,12 +95,12 @@
                         </a>
                     </li>-->
                     <li id="button_filters">
-                        <a title="{{ 'menu.top.filter_entries'|trans }}" href="#" data-activates="filters" class="nav-panel-menu button-collapse-right">
+                        <a class="nav-panel-menu button-collapse-right tooltipped" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.filter_entries'|trans }}" href="#" data-activates="filters">
                             <i class="material-icons">filter_list</i>
                         </a>
                     </li>
                     <li id="button_export">
-                        <a title="{{ 'menu.top.export'|trans }}" class="nav-panel-menu button-collapse-right" href="#" data-activates="export">
+                        <a class="nav-panel-menu button-collapse-right tooltipped" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.export'|trans }}" href="#" data-activates="export">
                             <i class="material-icons">file_download</i>
                         </a>
                     </li>
@@ -127,12 +127,12 @@
         <div class="footer-copyright">
             <div class="container">
                 <div class="row">
-                    <div class="col s8">
-                        <p>
+                    <div class="col m12 l8 hide-on-small-only">
+                        <p title="{{ display_stats() | raw | striptags }}">
                             {{ display_stats() }}
                         </p>
                     </div>
-                    <div class="col s4">
+                    <div class="col s12 l4">
                         <p>
                             {{ 'footer.wallabag.powered_by'|trans }} <a target="_blank" href="https://wallabag.org" class="grey-text text-lighten-4">wallabag</a> –
                             <a class="grey-text text-lighten-4" href="{{ path('about') }}">{{ 'footer.wallabag.about'|trans|lower }}</a>

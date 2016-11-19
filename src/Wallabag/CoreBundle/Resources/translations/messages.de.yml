@@ -76,6 +76,11 @@ config:
             redirect_current_page: 'Zur aktuellen Seite'
         pocket_consumer_key_label: Consumer-Key für Pocket, um Inhalte zu importieren
         android_configuration: Konfiguriere deine Android Application
+        # help_theme: "wallabag is customizable. You can choose your prefered theme here."
+        # help_items_per_page: "You can change the number of articles displayed on each page."
+        # help_reading_speed: "wallabag calculates a reading time for each article. You can define here, thanks to this list, if you are a fast or a slow reader. wallabag will recalculate the reading time for each article."
+        # help_language: "You can change the language of wallabag interface."
+        # help_pocket_consumer_key: "Required for Pocket import. You can create it in your Pocket account."
     form_rss:
         description: 'Die RSS-Feeds von wallabag erlauben es dir, deine gespeicherten Artikel mit deinem bevorzugten RSS-Reader zu lesen. Vorher musst du jedoch einen Token erstellen.'
         token_label: 'RSS-Token'
@@ -93,6 +98,7 @@ config:
         name_label: 'Name'
         email_label: 'E-Mail-Adresse'
         twoFactorAuthentication_label: 'Zwei-Faktor-Authentifizierung'
+        # help_twoFactorAuthentication: "If you enable 2FA, each time you want to login to wallabag, you'll receive a code by email."
         delete:
             title: Lösche mein Konto (a.k.a Gefahrenzone)
             description: Wenn du dein Konto löschst, werden ALL deine Artikel, ALL deine Tags, ALL deine Anmerkungen und dein Konto dauerhaft gelöscht (kann NICHT RÜCKGÄNGIG gemacht werden). Du wirst anschließend ausgeloggt.
@@ -106,6 +112,7 @@ config:
         entries: Entferne ALLE Einträge
         confirm: Bist du wirklich sicher? (DIES KANN NICHT RÜCKGÄNGIG GEMACHT WERDEN)
     form_password:
+        # description: "You can change your password here. Your new password should by at least 8 characters long."
         old_password_label: 'Altes Kennwort'
         new_password_label: 'Neues Kennwort'
         repeat_new_password_label: 'Neues Kennwort wiederholen'
@@ -247,7 +254,7 @@ about:
     getting_help:
         documentation: 'Dokumentation'
         bug_reports: 'Fehlerberichte'
-        support: '<a href="https://support.wallabag.org">Auf unserer Support-Webseite</a> oder <a href="https://github.com/wallabag/wallabag/issues">auf GitHub</a>'
+        support: '<a href="https://github.com/wallabag/wallabag/issues">auf GitHub</a>'
     helping:
         description: 'wallabag ist frei und Open Source. Du kannst uns helfen:'
         by_contributing: 'indem du zu dem Projekt beiträgst:'
@@ -477,7 +484,7 @@ error:
 flashes:
     config:
         notice:
-            config_saved: 'Konfiguration gespeichert. Einige Einstellungen werden erst nach einer erneuten Anmeldung übernommen.'
+            config_saved: 'Konfiguration gespeichert.'
             password_updated: 'Kennwort aktualisiert'
             password_not_updated_demo: "Im Testmodus kannst du das Kennwort nicht ändern."
             user_updated: 'Information aktualisiert'

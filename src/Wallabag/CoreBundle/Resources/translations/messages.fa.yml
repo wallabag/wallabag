@@ -76,6 +76,11 @@ config:
             # redirect_current_page: 'To the current page'
         pocket_consumer_key_label: کلید کاربری Pocket برای درون‌ریزی مطالب
         # android_configuration: Configure your Android application
+        # help_theme: "wallabag is customizable. You can choose your prefered theme here."
+        # help_items_per_page: "You can change the number of articles displayed on each page."
+        # help_reading_speed: "wallabag calculates a reading time for each article. You can define here, thanks to this list, if you are a fast or a slow reader. wallabag will recalculate the reading time for each article."
+        # help_language: "You can change the language of wallabag interface."
+        # help_pocket_consumer_key: "Required for Pocket import. You can create it in your Pocket account."
     form_rss:
         description: 'با خوراک آر-اس-اس که wallabag در اختیارتان می‌گذارد، می‌توانید مقاله‌های ذخیره‌شده را در نرم‌افزار آر-اس-اس دلخواه خود بخوانید. برای این کار نخست باید یک کد بسازید.'
         token_label: 'کد آر-اس-اس'
@@ -93,6 +98,7 @@ config:
         name_label: 'نام'
         email_label: 'نشانی ایمیل'
         twoFactorAuthentication_label: 'تأیید ۲مرحله‌ای'
+        # help_twoFactorAuthentication: "If you enable 2FA, each time you want to login to wallabag, you'll receive a code by email."
         delete:
             # title: Delete my account (a.k.a danger zone)
             # description: If you remove your account, ALL your articles, ALL your tags, ALL your annotations and your account will be PERMANENTLY removed (it can't be UNDONE). You'll then be logged out.
@@ -106,6 +112,7 @@ config:
         # entries: Remove ALL entries
         # confirm: Are you really really sure? (THIS CAN'T BE UNDONE)
     form_password:
+        # description: "You can change your password here. Your new password should by at least 8 characters long."
         old_password_label: 'رمز قدیمی'
         new_password_label: 'رمز تازه'
         repeat_new_password_label: 'رمز تازه را دوباره بنویسید'
@@ -247,7 +254,7 @@ about:
     getting_help:
         documentation: 'راهنما'
         bug_reports: 'گزارش اشکال‌ها'
-        support: '<a href="https://support.wallabag.org">در وب‌گاه پشتیبانی</a> یا <a href="https://github.com/wallabag/wallabag/issues">روی GitHub</a>'
+        support: '<a href="https://github.com/wallabag/wallabag/issues">روی GitHub</a>'
     helping:
         description: 'wallabag رایگان، آزاد، و متن‌باز است. شما می‌توانید به ما کمک کنید:'
         by_contributing: 'با مشارکت در پروژه:'
@@ -477,7 +484,7 @@ error:
 flashes:
     config:
         notice:
-            config_saved: 'پیکربندی ذخیره شد. برخی از تنظیمات پس از این که قطع شدید اعمال می‌شود.'
+            config_saved: 'پیکربندی ذخیره شد.'
             password_updated: 'رمز به‌روز شد'
             password_not_updated_demo: "در حالت نمایشی نمی‌توانید رمز کاربر را عوض کنید."
             user_updated: 'اطلاعات به‌روز شد'

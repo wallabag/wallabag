@@ -9,7 +9,7 @@ During this documentation, we assume the release is `$LAST_WALLABAG_RELEASE`.
 #### Files to edit
 
 - `app/config/config.yml` (`wallabag_core.version`)
-- `CHANGELOG.md` (by using this command `github_changelog_generator --no-compare-link --header-label="# Changelog" --no-issues --no-pr-wo-labels --since-tag="1.9.2"`. [github-changelog-generator is available here](https://github.com/skywinder/github-changelog-generator))
+- `CHANGELOG.md` (by using this command `github-changes -o wallabag -r wallabag -k YOURGITHUBTOKEN --only-pulls --use-commit-body --title Changelog --date-format YYYY/MM/DD --between-tags 2.0.0-alpha.0...master -n 2.1.3`. [github-changes is available here](https://github.com/lalitkapoor/github-changes))
 
 #### Create release on GitHub
 
@@ -20,7 +20,20 @@ git checkout master
 git pull origin master
 git checkout -b release-$LAST_WALLABAG_RELEASE
 SYMFONY_ENV=prod composer up --no-dev
-git add --force composer.lock
+```
+
+- Update `.travis.yml` file and replace the composer line with this one:
+
+```diff
+script:
+-    - travis_wait bash composer install -o  --no-interaction --no-progress --prefer-dist
++    - travis_wait composer update --no-interaction --no-progress
+```
+
+- Then continue with these commands:
+
+```
+git add --force composer.lock .travis.yml
 git commit -m "Release wallabag $LAST_WALLABAG_RELEASE"
 git push origin release-$LAST_WALLABAG_RELEASE
 ```

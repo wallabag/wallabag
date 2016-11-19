@@ -379,7 +379,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
                 [
                     'rss_config[rss_limit]' => 1000000000000,
                 ],
-                'validator.rss_limit_too_hight',
+                'validator.rss_limit_too_high',
             ],
         ];
     }

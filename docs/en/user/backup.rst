@@ -1,5 +1,6 @@
 Backup wallabag
 ===============
+
 Because sometimes you may do a mistake with your wallabag and lose data or in case you need to move your wallabag to another server you want to backup your data.
 This articles describes what you need to backup.
 
@@ -22,4 +23,4 @@ To backup the SQLite database, you just need to copy the directory `data/db` fro
 
 Images
 ------
-The images retrieved by wallabag are stored under `data/assets/images` (the images storage will be implemented in wallabag 2.2).
+The images retrieved by wallabag are stored under `web/assets/images` (the images storage will be implemented in wallabag 2.2).
