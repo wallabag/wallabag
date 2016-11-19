@@ -20,7 +20,20 @@ git checkout master
 git pull origin master
 git checkout -b release-$LAST_WALLABAG_RELEASE
 SYMFONY_ENV=prod composer up --no-dev
-git add --force composer.lock
+```
+
+- Update `.travis.yml` file and replace the composer line with this one:
+
+```diff
+script:
+-    - travis_wait bash composer install -o  --no-interaction --no-progress --prefer-dist
++    - travis_wait composer update --no-interaction --no-progress
+```
+
+- Then continue with these commands:
+
+```
+git add --force composer.lock .travis.yml
 git commit -m "Release wallabag $LAST_WALLABAG_RELEASE"
 git push origin release-$LAST_WALLABAG_RELEASE
 ```
