@@ -42,7 +42,6 @@ Du musst wallabag erlauben, mit deinem Pocketaccount zu interagieren.
 Deine Daten werden importiert. Datenimport kann ein sehr anspruchsvoller Prozess für deinen Server
 sein (wir müssen daran arbeiten, um diesen Import zu verbessern).
 
-<<<<<<< HEAD
 Von Readability
 ----------------
 
@@ -87,37 +86,6 @@ Importiere deine Daten in wallabag 2.x
 Klicke auf den ``Importieren`` Link im Menü, auf ``Importiere Inhalte`` in dem Instapaper Abschnitt und wähle dann deine JSON Datei aus und lade sie hoch.
 
 Deine Daten werden importiert. Der Datenimport can ein beanspruchender Prozess für deinen Server sein.
-
-=======
-Readability
------------
-
-Exportiere deine Readability-Daten
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Auf der Tools-Seite (`https://www.readability.com/tools/ <https://www.readability.com/tools/>`_), klicke auf "Daten exportieren" im "Daten-Export"-Abschnitt. Du wirst eine E-Mail mit einem Downloadlink zu einer JSON-Datei erhalten, welche zugegebenermaßen nicht mit .json endet.
-
-Importiere deine Daten in wallabag 2.x
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Klicke auf den ``Importieren``-Link im Menü, auf ``Inhalte importieren`` im Readability-Abschnitt und wähle dann deine JSON-Datei aus und lade sie hoch. 
-
-Deine Daten werden dann importiert. Dies kann eine starke Belastung für den Server sein.
-
-Instapaper
-----------
-
-Exportiere deine Instapaper-Daten
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Klicke in den Einstellungen (`https://www.instapaper.com/user <https://www.instapaper.com/user>`_) auf "CSV-Datei herunterladen" im Export-Abschnitt. Eine CSV-Datei mit dem Namen ``instapaper-export.csv`` wird heruntergeladen.
-
-Importiere deine Daten in wallabag 2.x
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Klicke auf den ``Importieren``-Link im Menü, auf ``Inhalte importieren`` im Instapaper-Abschnitt und wähle dann deine CSV-Datei aus und lade sie hoch. 
-
-Deine Daten werden dann importiert. Dies kann eine starke Belastung für den Server sein.
 
 wallabag 1.x
 ------------
@@ -175,7 +143,6 @@ Wenn du alle Artikel als gelesen markieren möchtest, kannst du die ``--markAsRe
 Um eine wallabag 2.x-Datei zu importieren, musst du die Option ``--importer=v2`` hinzufügen.
 
 Als Ergebnis wirst du so etwas erhalten:
->>>>>>> origin/master
 
 ::
 
