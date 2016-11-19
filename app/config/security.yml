@@ -27,7 +27,7 @@ security:
             security: false
 
         api:
-            pattern: /api/.*
+            pattern: "%base_path%/api/.*"
             fos_oauth: true
             stateless: true
             anonymous: true
@@ -37,7 +37,7 @@ security:
             anonymous:  ~
 
         secured_area:
-            pattern: ^/
+            pattern: "^%base_path%/"
             form_login:
                 provider: fos_userbundle
                 csrf_token_generator: security.csrf.token_manager
