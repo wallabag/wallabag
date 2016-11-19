@@ -112,6 +112,13 @@
                 </div>
             </div>
 
+            <div id="filter-http-status" class="filter-group">
+                {{ form_label(form.httpStatus) }}
+                <div class="input-field ">
+                    {{ form_widget(form.httpStatus) }}
+                </div>
+            </div>
+
             <div id="filter-reading-time" class="filter-group">
                 <div class="">
                     {{ form_label(form.readingTime) }}

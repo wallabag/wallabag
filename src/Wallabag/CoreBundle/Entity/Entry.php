@@ -181,6 +181,15 @@ class Entry
     private $isPublic;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="http_status", type="text", nullable=true)
+     *
+     * @Groups({"entries_for_user", "export_all"})
+     */
+    private $httpStatus;
+
+    /**
      * @Exclude
      *
      * @ORM\ManyToOne(targetEntity="Wallabag\UserBundle\Entity\User", inversedBy="entries")
@@ -668,5 +677,25 @@ class Entry
     public function cleanUuid()
     {
         $this->uuid = null;
+    }
+
+    /**
+     * @return int
+     */
+    public function getHttpStatus()
+    {
+        return $this->httpStatus;
+    }
+
+    /**
+     * @param int $httpStatus
+     *
+     * @return Entry
+     */
+    public function setHttpStatus($httpStatus)
+    {
+        $this->httpStatus = $httpStatus;
+
+        return $this;
     }
 }

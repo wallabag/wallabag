@@ -961,4 +961,61 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $this->assertContains('/view/'.$content->getId(), $client->getResponse()->headers->get('location'));
     }
+
+    public function testFilterOnHttpStatus()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/new');
+        $form = $crawler->filter('form[name=entry]')->form();
+
+        $data = [
+            'entry[url]' => 'http://www.lemonde.fr/incorrect-url/',
+        ];
+
+        $client->submit($form, $data);
+
+        $crawler = $client->request('GET', '/all/list');
+        $form = $crawler->filter('button[id=submit-filter]')->form();
+
+        $data = [
+            'entry_filter[httpStatus]' => 404,
+        ];
+
+        $crawler = $client->submit($form, $data);
+
+        $this->assertCount(1, $crawler->filter('div[class=entry]'));
+
+        $crawler = $client->request('GET', '/new');
+        $form = $crawler->filter('form[name=entry]')->form();
+
+        $data = [
+            'entry[url]' => 'http://www.nextinpact.com/news/101235-wallabag-alternative-libre-a-pocket-creuse-petit-a-petit-son-nid.htm',
+        ];
+
+        $client->submit($form, $data);
+
+        $crawler = $client->request('GET', '/all/list');
+        $form = $crawler->filter('button[id=submit-filter]')->form();
+
+        $data = [
+            'entry_filter[httpStatus]' => 200,
+        ];
+
+        $crawler = $client->submit($form, $data);
+
+        $this->assertCount(1, $crawler->filter('div[class=entry]'));
+
+        $crawler = $client->request('GET', '/all/list');
+        $form = $crawler->filter('button[id=submit-filter]')->form();
+
+        $data = [
+            'entry_filter[httpStatus]' => 1024,
+        ];
+
+        $crawler = $client->submit($form, $data);
+
+        $this->assertCount(7, $crawler->filter('div[class=entry]'));
+    }
 }
