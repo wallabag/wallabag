@@ -1,6 +1,10 @@
 ## Changelog
 
-### 2.1.4 2016/11/18
+### 2.1.4 2016/11/19
+- [#2604](https://github.com/wallabag/wallabag/pull/2604) wallabag can’t work on PostgreSQL <= 9.1 (@j0k3r)
+- [#2605](https://github.com/wallabag/wallabag/pull/2605) Add .travis.yml change to RELEASE_PROCESS (@j0k3r)
+- [#2603](https://github.com/wallabag/wallabag/pull/2603) Fix clear-cache problem using —no-dev (@j0k3r)
+- [#2596](https://github.com/wallabag/wallabag/pull/2596) Prepare wallabag 2.1.4 :rocket: (@nicosomb)
 - [#2550](https://github.com/wallabag/wallabag/pull/2550) Reordered documentation (@jlnostr, @nicosomb)
 - [#2578](https://github.com/wallabag/wallabag/pull/2578) Added help on config screen (@nicosomb)
 - [#2570](https://github.com/wallabag/wallabag/pull/2570) Added creation date on entries view (@nicosomb)
