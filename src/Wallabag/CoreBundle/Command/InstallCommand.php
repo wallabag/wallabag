@@ -72,6 +72,7 @@ class InstallCommand extends ContainerAwareCommand
     protected function checkRequirements()
     {
         $this->defaultOutput->writeln('<info><comment>Step 1 of 4.</comment> Checking system requirements.</info>');
+        $doctrineManager = $this->getContainer()->get('doctrine')->getManager();
 
         $rows = [];
 
@@ -95,13 +96,33 @@ class InstallCommand extends ContainerAwareCommand
         $help = '';
 
         try {
-            $this->getContainer()->get('doctrine')->getManager()->getConnection()->connect();
+            $doctrineManager->getConnection()->connect();
         } catch (\Exception $e) {
             if (false === strpos($e->getMessage(), 'Unknown database')
                 && false === strpos($e->getMessage(), 'database "'.$this->getContainer()->getParameter('database_name').'" does not exist')) {
                 $fulfilled = false;
                 $status = '<error>ERROR!</error>';
                 $help = 'Can\'t connect to the database: '.$e->getMessage();
+            }
+        }
+
+        $rows[] = [$label, $status, $help];
+
+        // testing if PostgreSQL > 9.1
+        $label = '<comment>SGBD version</comment>';
+        $status = '<info>OK!</info>';
+        $help = '';
+
+        if ('postgresql' === $doctrineManager->getConnection()->getSchemaManager()->getDatabasePlatform()->getName()) {
+            // return version should be like "PostgreSQL 9.5.4 on x86_64-apple-darwin15.6.0, compiled by Apple LLVM version 8.0.0 (clang-800.0.38), 64-bit"
+            $version = $doctrineManager->getConnection()->query('SELECT version();')->fetchColumn();
+
+            preg_match('/PostgreSQL ([0-9\.]+)/i', $version, $matches);
+
+            if (isset($matches[1]) & version_compare($matches[1], '9.2.0', '<')) {
+                $fulfilled = false;
+                $status = '<error>ERROR!</error>';
+                $help = 'PostgreSQL should be greater than 9.1 (actual version: '.$matches[1].')';
             }
         }
 
