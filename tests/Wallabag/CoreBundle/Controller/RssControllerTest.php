@@ -157,19 +157,15 @@ class RssControllerTest extends WallabagCoreTestCase
 
         $client = $this->getClient();
 
-        $client->request('GET', '/admin/SUPERTOKEN/archive.xml');
+        $client->request('GET', '/admin/SUPERTOKEN/unread.xml');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->validateDom($client->getResponse()->getContent(), 'archive');
+        $this->validateDom($client->getResponse()->getContent(), 'unread');
 
-        $client->request('GET', '/admin/SUPERTOKEN/archive.xml?page=2');
+        $client->request('GET', '/admin/SUPERTOKEN/unread.xml?page=2');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->validateDom($client->getResponse()->getContent(), 'archive');
+        $this->validateDom($client->getResponse()->getContent(), 'unread');
 
-        $client->request('GET', '/admin/SUPERTOKEN/archive.xml?page=3');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->validateDom($client->getResponse()->getContent(), 'archive');
-
-        $client->request('GET', '/admin/SUPERTOKEN/archive.xml?page=3000');
+        $client->request('GET', '/admin/SUPERTOKEN/unread.xml?page=3000');
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }
 }
