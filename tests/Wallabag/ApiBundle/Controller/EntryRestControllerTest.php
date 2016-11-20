@@ -690,7 +690,11 @@ class EntryRestControllerTest extends WallabagApiTestCase
         }
 
         $this->client->request('PATCH', '/api/entries/'.$entry->getId().'/reload.json');
-        $this->assertEquals(304, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
+
+        $this->assertContains('Error while trying to extract content', $this->client->getResponse()->getContent());
+
+        $this->assertEquals('application/json', $this->client->getResponse()->headers->get('Content-Type'));
     }
 
     public function testReloadEntry()
