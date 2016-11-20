@@ -655,6 +655,15 @@ a.original {
   height: auto;
 }
 
+#article article a {
+  border-bottom: 1px dotted #03a9f4;
+  text-decoration: none;
+}
+
+#article article a:hover {
+  border-bottom-style: solid;
+}
+
 #article > header > h1 {
   font-size: 2em;
   margin: 2.1rem 0 0.68rem;
