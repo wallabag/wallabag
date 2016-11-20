@@ -164,7 +164,7 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-  background: #f0f0f0;
+  background: #fafafa;
 }
 
 body.login main {
@@ -601,6 +601,19 @@ a.original {
   font-size: 20px;
   margin: 0 auto;
   max-width: 40em;
+}
+
+#article article {
+  color: #424242;
+}
+
+#article article h1,
+#article article h2,
+#article article h3,
+#article article h4,
+#article article h5,
+#article article h6 {
+  color: #212121;
 }
 
 #article img,
