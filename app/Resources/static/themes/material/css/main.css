@@ -673,6 +673,20 @@ a.original {
   list-style-type: disc;
 }
 
+#article article pre {
+  box-sizing: border-box;
+  margin: 0 0 1.75em;
+  border: #e3f2fd 1px solid;
+  width: 100%;
+  padding: 10px;
+  font-family: monospace;
+  font-size: 0.8em;
+  white-space: pre;
+  overflow: auto;
+  background: #f5f5f5;
+  border-radius: 3px;
+}
+
 #article > header > h1 {
   font-size: 2em;
   margin: 2.1rem 0 0.68rem;
