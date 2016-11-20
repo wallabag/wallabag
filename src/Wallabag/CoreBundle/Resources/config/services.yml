@@ -110,6 +110,7 @@ services:
                 host: '%redis_host%'
                 port: '%redis_port%'
                 path: '%redis_path%'
+                password: '%redis_password%'
 
     wallabag_core.exception_controller:
         class: Wallabag\CoreBundle\Controller\ExceptionController

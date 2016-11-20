@@ -39,6 +39,7 @@ Wenn du nicht weißt, welchen Wert du setzen sollst, belasse es bei dem Standard
         redis_host: localhost
         redis_port: 6379
         redis_path: null
+        redis_password: null
 
 Bedeutung von jedem Parameter
 -----------------------------
@@ -91,3 +92,4 @@ Bedeutung von jedem Parameter
    "redis_host", "localhost", "IP oder Hostname des Zielservers (ignoriert bei Unix Schema)"
    "redis_port", "6379", "TCP/IP Port des Zielservers (ignoriert bei Unix Schema)"
    "redis_path", "null", "Pfad zur Unix Domain Socket Datei, wenn Redis Unix Domain Sockets nutzt"
+   "redis_password", "null", "Password defined in the Redis server configuration (parameter `requirepass` in `redis.conf`)"
