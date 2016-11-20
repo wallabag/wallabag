@@ -616,6 +616,39 @@ a.original {
   color: #212121;
 }
 
+#article article h1 strong,
+#article article h2 strong,
+#article article h3 strong,
+#article article h4 strong,
+#article article h5 strong,
+#article article h6 strong {
+  font-weight: 500;
+}
+
+#article article h6 {
+  font-size: 1.2rem;
+}
+
+#article article h5 {
+  font-size: 1.6rem;
+}
+
+#article article h4 {
+  font-size: 1.9rem;
+}
+
+#article article h3 {
+  font-size: 2.2rem;
+}
+
+#article article h2 {
+  font-size: 2.5rem;
+}
+
+#article article h1 {
+  font-size: 2.7rem;
+}
+
 #article img,
 #article figure {
   max-width: 100%;
