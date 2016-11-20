@@ -36,7 +36,7 @@ Lade das 2.1.1-Release von wallabag herunter:
 
 .. code-block:: bash
 
-    wget http://framabag.org/wallabag-release-2.1.1.tar.gz && tar xvf wallabag-release-2.1.1.tar.gz
+    wget https://framabag.org/wallabag-release-2.1.1.tar.gz && tar xvf wallabag-release-2.1.1.tar.gz
 
 (md5 hash of the 2.1.1 package: ``9584a3b60a2b2a4de87f536548caac93``)
 
@@ -81,7 +81,7 @@ Lade das letzte Release von wallabag herunter:
 
 .. code-block:: bash
 
-    wget http://wllbg.org/latest-v2-package && tar xvf latest-v2-package
+    wget https://wllbg.org/latest-v2-package && tar xvf latest-v2-package
 
 Du findest den `aktuellen MD5-Hash auf unserer Webseite <https://www.wallabag.org/pages/download-wallabag.html>`_.
 

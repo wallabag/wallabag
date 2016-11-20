@@ -16,7 +16,7 @@ Install Composer:
 
 ::
 
-    curl -s http://getcomposer.org/installer | php
+    curl -s https://getcomposer.org/installer | php
 
 You can find specific instructions `here <https://getcomposer.org/doc/00-intro.md>`__.
 
@@ -85,7 +85,7 @@ Execute this command to download and extract the latest package:
 
 .. code-block:: bash
 
-    wget http://wllbg.org/latest-v2-package && tar xvf latest-v2-package
+    wget https://wllbg.org/latest-v2-package && tar xvf latest-v2-package
 
 You will find the `md5 hash of the latest package on our website <https://www.wallabag.org/pages/download-wallabag.html>`_.
 

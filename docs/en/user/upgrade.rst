@@ -36,7 +36,7 @@ Download the 2.1.1 release of wallabag:
 
 .. code-block:: bash
 
-    wget http://framabag.org/wallabag-release-2.1.1.tar.gz && tar xvf wallabag-release-2.1.1.tar.gz
+    wget https://framabag.org/wallabag-release-2.1.1.tar.gz && tar xvf wallabag-release-2.1.1.tar.gz
 
 (md5 hash of the 2.1.1 package: ``9584a3b60a2b2a4de87f536548caac93``)
 
@@ -81,7 +81,7 @@ Download the last release of wallabag:
 
 .. code-block:: bash
 
-    wget http://wllbg.org/latest-v2-package && tar xvf latest-v2-package
+    wget https://wllbg.org/latest-v2-package && tar xvf latest-v2-package
 
 You will find the `md5 hash of the latest package on our website <https://www.wallabag.org/pages/download-wallabag.html>`_.
 
