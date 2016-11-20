@@ -125,7 +125,10 @@
         "psr-4": { "Tests\\": "tests/" }
     },
     "config": {
-        "bin-dir": "bin"
+        "bin-dir": "bin",
+        "platform": {
+            "php": "5.5.9"
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true
