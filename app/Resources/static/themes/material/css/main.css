@@ -673,6 +673,14 @@ a.original {
   list-style-type: disc;
 }
 
+#article article blockquote {
+  font-style: italic;
+}
+
+#article article strong {
+  font-weight: bold;
+}
+
 #article article pre {
   box-sizing: border-box;
   margin: 0 0 1.75em;
