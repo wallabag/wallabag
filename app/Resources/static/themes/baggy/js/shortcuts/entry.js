@@ -7,7 +7,7 @@ Mousetrap.bind('o', () => {
 });
 
 /* mark as favorite */
-Mousetrap.bind('s', () => {
+Mousetrap.bind('f', () => {
   $('div#article_toolbar ul.links a.favorite')[0].click();
 });
 
