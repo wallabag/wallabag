@@ -20,7 +20,7 @@ is the ISO 639-1 code of your language (`see wikipedia <https://en.wikipedia.org
 Other files to translate:
 
 - https://github.com/wallabag/wallabag/tree/master/app/Resources/CraueConfigBundle/translations.
-- https://github.com/wallabag/wallabag/tree/master/app/Resources/FOSUserBundle/translations.
+- https://github.com/wallabag/wallabag/tree/master/src/Wallabag/UserBundle/Resources/translations.
 
 You have to create ``THE_TRANSLATION_FILE.CODE.yml`` files.
 

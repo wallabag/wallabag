@@ -20,7 +20,7 @@ der ISO 639-1 Code deiner Sprache ist (`siehe Wikipedia <https://en.wikipedia.or
 Andere Dateien zum Übersetzen:
 
 - https://github.com/wallabag/wallabag/tree/master/app/Resources/CraueConfigBundle/translations.
-- https://github.com/wallabag/wallabag/tree/master/app/Resources/FOSUserBundle/translations.
+- https://github.com/wallabag/wallabag/tree/master/src/Wallabag/UserBundle/Resources/translations.
 
 Du musst die ``THE_TRANSLATION_FILE.CODE.yml`` Dateien erstellen.
 
