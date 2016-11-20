@@ -1,3 +1,4 @@
+# settings_changed: Configuration updated
 download_pictures: Download imagens no seu servidor
 carrot: Habilitar compartilhamento para o Carrot
 diaspora_url: URL Diaspora, se o serviço está habilitado
@@ -8,7 +9,8 @@ export_csv: Habilita exportação para CSV
 export_json: Habilita exportação para JSON
 export_txt: Habilita exportação para TXT
 export_xml: Habilita exportação para XML
-pocket_consumer_key: Chave de consumidor do Pocket para importar conteúdo (https://getpocket.com/developer/docs/authentication)
+# import_with_rabbitmq: Enable RabbitMQ to import data asynchronously
+# import_with_redis: Enable Redis to import data asynchronously
 shaarli_url: URL Shaarli, se o serviço está habilitado
 share_diaspora: Habilitar compartilhamento para o Diaspora
 share_mail: Habilitar compartilhamento por e-mail
@@ -28,3 +30,5 @@ piwik_site_id: ID de seu website Piwik
 piwik_enabled: Habilitar Piwik
 demo_mode_enabled: "Habilitar modo demo? (somente usado para o demo público do wallabag)"
 demo_mode_username: "Usuário demo"
+# share_public: Allow public url for entries
+# download_images_enabled: Download images locally
