@@ -287,7 +287,7 @@ class EntryRestController extends WallabagRestController
 
     /**
      * Reload an entry.
-     * An empty response with HTTP Status 304 will be send if we weren't able to update the content (because it hasn't changed or we got an error)
+     * An empty response with HTTP Status 304 will be send if we weren't able to update the content (because it hasn't changed or we got an error).
      *
      * @ApiDoc(
      *      requirements={

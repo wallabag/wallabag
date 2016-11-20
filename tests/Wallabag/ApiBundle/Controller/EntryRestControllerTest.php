@@ -681,10 +681,9 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
     public function testReloadEntryErrorWhileFetching()
     {
-        $entry = $this->client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+        $entry = $this->client->getContainer()->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneBy(['user' => 1, 'isArchived' => false]);
+            ->findByUrlAndUserId('http://0.0.0.0/entry4', 1);
 
         if (!$entry) {
             $this->markTestSkipped('No content found in db.');
