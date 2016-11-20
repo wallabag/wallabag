@@ -92,4 +92,4 @@ Bedeutung von jedem Parameter
    "redis_host", "localhost", "IP oder Hostname des Zielservers (ignoriert bei Unix Schema)"
    "redis_port", "6379", "TCP/IP Port des Zielservers (ignoriert bei Unix Schema)"
    "redis_path", "null", "Pfad zur Unix Domain Socket Datei, wenn Redis Unix Domain Sockets nutzt"
-   "redis_password", "null", "Password defined in the Redis server configuration (parameter `requirepass` in `redis.conf`)"
+   "redis_password", "null", "Kennwort, welches in der Redis-Server-Konfiguration definiert ist (Parameter `requirepass` in `redis.conf`)"
