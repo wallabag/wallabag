@@ -678,4 +678,41 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         $this->assertEquals(403, $this->client->getResponse()->getStatusCode());
     }
+
+    public function testReloadEntryErrorWhileFetching()
+    {
+        $entry = $this->client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneBy(['user' => 1, 'isArchived' => false]);
+
+        if (!$entry) {
+            $this->markTestSkipped('No content found in db.');
+        }
+
+        $this->client->request('PATCH', '/api/entries/'.$entry->getId().'/reload.json');
+        $this->assertEquals(304, $this->client->getResponse()->getStatusCode());
+    }
+
+    public function testReloadEntry()
+    {
+        $this->client->request('POST', '/api/entries.json', [
+            'url' => 'http://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html',
+            'archive' => '1',
+            'tags' => 'google, apple',
+        ]);
+
+        $json = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->setUp();
+
+        $this->client->request('PATCH', '/api/entries/'.$json['id'].'/reload.json');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertNotEmpty($content['title']);
+
+        $this->assertEquals('application/json', $this->client->getResponse()->headers->get('Content-Type'));
+    }
 }
