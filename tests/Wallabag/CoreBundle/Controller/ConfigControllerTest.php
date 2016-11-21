@@ -592,13 +592,13 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $user = $em
             ->getRepository('WallabagUserBundle:User')
             ->findOneByUsername('empty');
-        $user->setExpired(1);
+        $user->setEnabled(false);
         $em->persist($user);
 
         $user = $em
             ->getRepository('WallabagUserBundle:User')
             ->findOneByUsername('bob');
-        $user->setExpired(1);
+        $user->setEnabled(false);
         $em->persist($user);
 
         $em->flush();
@@ -614,13 +614,13 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $user = $em
             ->getRepository('WallabagUserBundle:User')
             ->findOneByUsername('empty');
-        $user->setExpired(0);
+        $user->setEnabled(true);
         $em->persist($user);
 
         $user = $em
             ->getRepository('WallabagUserBundle:User')
             ->findOneByUsername('bob');
-        $user->setExpired(0);
+        $user->setEnabled(true);
         $em->persist($user);
 
         $em->flush();
