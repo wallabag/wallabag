@@ -1,5 +1,10 @@
 ## Changelog
 
+### 2.1.5 2016/11/21
+- [#2623](https://github.com/wallabag/wallabag/pull/2623) Force composer to run as PHP 5.5.9 (@j0k3r)
+- [#2608](https://github.com/wallabag/wallabag/pull/2608) Change version to 2.2.0-dev (@nicosomb)
+- [#2607](https://github.com/wallabag/wallabag/pull/2607) Updated changelog for 2.1.4 (@nicosomb)
+
 ### 2.1.4 2016/11/19
 - [#2604](https://github.com/wallabag/wallabag/pull/2604) wallabag can’t work on PostgreSQL <= 9.1 (@j0k3r)
 - [#2605](https://github.com/wallabag/wallabag/pull/2605) Add .travis.yml change to RELEASE_PROCESS (@j0k3r)
