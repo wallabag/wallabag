@@ -193,8 +193,8 @@ fos_oauth_server:
     auth_code_class:     Wallabag\ApiBundle\Entity\AuthCode
     service:
         user_provider: fos_user.user_manager
-            options:
-                refresh_token_lifetime: 1209600
+        options:
+            refresh_token_lifetime: 1209600
                 
 scheb_two_factor:
     trusted_computer:
