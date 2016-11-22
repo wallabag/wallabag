@@ -544,6 +544,10 @@ a.original {
   line-height: 24px;
 }
 
+.card .card-action ul.tools li a.tool {
+  margin-right: 5px !important;
+}
+
 .card .card-action a {
   color: #fff;
   margin: 0;
