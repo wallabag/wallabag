@@ -287,7 +287,7 @@ class EntryRestController extends WallabagRestController
 
     /**
      * Reload an entry.
-     * A response with HTTP Status 400 will be return if we weren't able to update the content (because it hasn't changed or we got an error).
+     * An empty response with HTTP Status 304 will be send if we weren't able to update the content (because it hasn't changed or we got an error).
      *
      * @ApiDoc(
      *      requirements={
@@ -310,12 +310,12 @@ class EntryRestController extends WallabagRestController
                 'entry' => $entry,
             ]);
 
-            return new JsonResponse(['error' => 'Error while trying to fetch content'], 400);
+            return new JsonResponse([], 304);
         }
 
         // if refreshing entry failed, don't save it
         if ($this->getParameter('wallabag_core.fetching_error_message') === $entry->getContent()) {
-            return new JsonResponse(['error' => 'Error while trying to extract content'], 400);
+            return new JsonResponse([], 304);
         }
 
         $em = $this->getDoctrine()->getManager();
