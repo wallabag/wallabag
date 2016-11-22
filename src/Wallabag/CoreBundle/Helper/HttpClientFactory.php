@@ -35,6 +35,8 @@ class HttpClientFactory
      */
     public function buildHttpClient()
     {
+        // we clear the cookie to avoid websites who use cookies for analytics
+        $this->cookieJar->clear();
         // need to set the (shared) cookie jar
         $client = new Client(['handler' => new SafeCurlHandler(), 'defaults' => ['cookies' => $this->cookieJar]]);
         $client->getEmitter()->attach($this->authenticatorSubscriber);
