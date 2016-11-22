@@ -286,6 +286,51 @@ class EntryRestController extends WallabagRestController
     }
 
     /**
+     * Reload an entry.
+     * A response with HTTP Status 400 will be return if we weren't able to update the content (because it hasn't changed or we got an error).
+     *
+     * @ApiDoc(
+     *      requirements={
+     *          {"name"="entry", "dataType"="integer", "requirement"="\w+", "description"="The entry ID"}
+     *      }
+     * )
+     *
+     * @return JsonResponse
+     */
+    public function patchEntriesReloadAction(Entry $entry)
+    {
+        $this->validateAuthentication();
+        $this->validateUserAccess($entry->getUser()->getId());
+
+        try {
+            $entry = $this->get('wallabag_core.content_proxy')->updateEntry($entry, $entry->getUrl());
+        } catch (\Exception $e) {
+            $this->get('logger')->error('Error while saving an entry', [
+                'exception' => $e,
+                'entry' => $entry,
+            ]);
+
+            return new JsonResponse(['error' => 'Error while trying to fetch content'], 400);
+        }
+
+        // if refreshing entry failed, don't save it
+        if ($this->getParameter('wallabag_core.fetching_error_message') === $entry->getContent()) {
+            return new JsonResponse(['error' => 'Error while trying to extract content'], 400);
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($entry);
+        $em->flush();
+
+        // entry saved, dispatch event about it!
+        $this->get('event_dispatcher')->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
+
+        $json = $this->get('serializer')->serialize($entry, 'json');
+
+        return (new JsonResponse())->setJson($json);
+    }
+
+    /**
      * Delete **permanently** an entry.
      *
      * @ApiDoc(
