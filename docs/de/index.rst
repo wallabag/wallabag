@@ -46,6 +46,7 @@ Die Dokumentation ist in anderen Sprachen verfügbar :
 
    developer/api
    developer/docker
+   developer/paywall
    developer/documentation
    developer/translate
    developer/asynchronous

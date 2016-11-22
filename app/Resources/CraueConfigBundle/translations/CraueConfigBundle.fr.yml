@@ -32,3 +32,4 @@ demo_mode_enabled: "Activer le mode démo ? (utiliser uniquement pour la démo p
 demo_mode_username: "Utilisateur de la démo"
 share_public: Autoriser une URL publique pour les articles
 download_images_enabled: Télécharger les images en local
+restricted_access: Activer l'authentification pour les articles derrière un paywall

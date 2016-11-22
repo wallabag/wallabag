@@ -25,7 +25,7 @@ class HttpClientFactory
      *
      * @param \GuzzleHttp\Event\SubscriberInterface $authenticatorSubscriber
      * @param \GuzzleHttp\Cookie\CookieJar          $cookieJar
-     * @param string                                $restrictedAccess
+     * @param string                                $restrictedAccess        this param is a kind of boolean. Values: 0 or 1
      */
     public function __construct(SubscriberInterface $authenticatorSubscriber, CookieJar $cookieJar, $restrictedAccess)
     {
