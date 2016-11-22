@@ -273,6 +273,9 @@ about:
 howto:
     page_title: 'Ayuda'
     page_description: 'Hay muchas maneras para guardar un artículo:'
+    tab_menu:
+        # add_link: "Add a link"
+        # shortcuts: "Use shortcuts"
     top_menu:
         browser_addons: 'Extensiones de navigador'
         mobile_apps: 'Aplicaciones para smartphone'
@@ -290,6 +293,33 @@ howto:
         windows: 'por la tienda de Microsoft'
     bookmarklet:
         description: 'Desplazar y soltar este link en la barra de marcadores :'
+    shortcuts:
+        # page_description: Here are the shortcuts available in wallabag.
+        # shortcut: Shortcut
+        # action: Action
+        # all_pages_title: Shortcuts available in all pages
+        # go_unread: Go to unread
+        # go_starred: Go to starred
+        # go_archive: Go to archive
+        # go_all: Go to all entries
+        # go_tags: Go to tags
+        # go_config: Go to config
+        # go_import: Go to import
+        # go_developers: Go to developers
+        # go_howto: Go to howto (this page!)
+        # go_logout: Logout
+        # list_title: Shortcuts available in listing pages
+        # search: Display the search form
+        # article_title: Shortcuts available in entry view
+        # open_original: Open original URL of the entry
+        # toggle_favorite: Toggle star status for the entry
+        # toggle_archive: Toggle read status for the entry
+        # delete: Delete the entry
+        # material_title: Shortcuts available with Material theme only
+        # add_link: Add a new link
+        # hide_form: Hide the current form (search or new link)
+        # arrows_navigation: Navigate through articles
+        # open_article: Display the selected entry
 
 quickstart:
     page_title: 'Comienzo rápido'
