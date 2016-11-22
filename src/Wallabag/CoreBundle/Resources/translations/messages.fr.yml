@@ -272,6 +272,9 @@ about:
 
 howto:
     page_title: "Aide"
+    tab_menu:
+        add_link: "Ajouter un lien"
+        shortcuts: "Utiliser les raccourcis"
     page_description: "Il y a plusieurs façon d’enregistrer un article :"
     top_menu:
         browser_addons: "Extensions de navigateur"
@@ -290,6 +293,33 @@ howto:
         windows: "sur Microsoft Store"
     bookmarklet:
         description: "Glissez et déposez ce lien dans votre barre de favoris :"
+    shortcuts:
+        page_description: Voici les raccourcis disponibles dans wallabag.
+        shortcut: Raccourci
+        action: Action
+        all_pages_title: Raccourcis disponibles dans toutes les pages
+        go_unread: Afficher les articles non lus
+        go_starred: Afficher les articles favoris
+        go_archive:  Afficher les articles lus
+        go_all: Afficher tous les articles
+        go_tags: Afficher les tags
+        go_config: Aller à la configuration
+        go_import: Aller aux imports
+        go_developers: Aller à la section Développeurs
+        go_howto: Afficher l'aide (cette page !)
+        go_logout: Se déconnecter
+        list_title: Raccourcis disponibles dans les pages de liste
+        search: Afficher le formulaire de recherche
+        article_title: Raccourcis disponibles quand on affiche un article
+        open_original: Ouvrir l'URL originale de l'article
+        toggle_favorite: Changer le statut Favori de l'article
+        toggle_archive: Changer le status Lu de l'article
+        delete: Supprimer l'article
+        material_title: Raccourcis disponibles avec le thème Material uniquement
+        add_link: Ajouter un nouvel article
+        hide_form: Masquer le formulaire courant (recherche ou nouvel article)
+        arrows_navigation: Naviguer à travers les articles
+        open_article: Afficher l'article sélectionné
 
 quickstart:
     page_title: "Pour bien débuter"

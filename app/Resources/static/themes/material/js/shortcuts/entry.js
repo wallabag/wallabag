@@ -7,7 +7,7 @@ Mousetrap.bind('o', () => {
 });
 
 /* mark as favorite */
-Mousetrap.bind('s', () => {
+Mousetrap.bind('f', () => {
   $('ul.side-nav a.favorite i')[0].click();
 });
 
