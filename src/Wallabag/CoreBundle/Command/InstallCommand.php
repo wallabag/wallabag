@@ -432,6 +432,11 @@ class InstallCommand extends ContainerAwareCommand
                 'value' => '0',
                 'section' => 'misc',
             ],
+            [
+                'name' => 'restricted_access',
+                'value' => '0',
+                'section' => 'entry',
+            ],
         ];
 
         foreach ($settings as $setting) {

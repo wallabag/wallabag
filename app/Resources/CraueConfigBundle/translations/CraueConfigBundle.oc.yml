@@ -32,3 +32,4 @@ demo_mode_enabled: "Activar lo mode demostracion ? (utilizar solament per la dem
 demo_mode_username: "Utilizaire de la demostracion"
 # share_public: Allow public url for entries
 # download_images_enabled: Download images locally
+# restricted_access: Enable authentication for websites with paywall

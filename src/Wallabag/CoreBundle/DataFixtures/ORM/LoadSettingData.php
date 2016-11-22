@@ -155,6 +155,11 @@ class LoadSettingData extends AbstractFixture implements OrderedFixtureInterface
                 'value' => '0',
                 'section' => 'misc',
             ],
+            [
+                'name' => 'restricted_access',
+                'value' => '0',
+                'section' => 'entry',
+            ],
         ];
 
         foreach ($settings as $setting) {

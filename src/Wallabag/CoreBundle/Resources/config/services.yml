@@ -41,10 +41,43 @@ services:
         arguments:
             -
                 error_message: '%wallabag_core.fetching_error_message%'
+            - "@wallabag_core.guzzle.http_client"
+            - "@wallabag_core.graby.config_builder"
         calls:
             - [ setLogger, [ "@logger" ] ]
         tags:
             - { name: monolog.logger, channel: graby }
+
+    wallabag_core.graby.config_builder:
+        class: Graby\SiteConfig\ConfigBuilder
+        arguments:
+            - {}
+            - "@logger"
+
+    wallabag_core.guzzle.http_client:
+        class: GuzzleHttp\ClientInterface
+        factory: ["@wallabag_core.guzzle.http_client_factory", buildHttpClient]
+
+    wallabag_core.guzzle_authenticator.config_builder:
+        class: Wallabag\CoreBundle\GuzzleSiteAuthenticator\GrabySiteConfigBuilder
+        arguments:
+            - "@wallabag_core.graby.config_builder"
+            - "%sites_credentials%"
+
+    # service alias override
+    bd_guzzle_site_authenticator.site_config_builder:
+        alias: wallabag_core.guzzle_authenticator.config_builder
+
+    wallabag_core.guzzle.http_client_factory:
+        class: Wallabag\CoreBundle\Helper\HttpClientFactory
+        arguments:
+            - "@bd_guzzle_site_authenticator.authenticator_subscriber"
+            - "@wallabag_core.guzzle.cookie_jar"
+            - '@=service(''craue_config'').get(''restricted_access'')'
+
+    wallabag_core.guzzle.cookie_jar:
+        class: GuzzleHttp\Cookie\FileCookieJar
+        arguments: ["%kernel.cache_dir%/cookiejar.json"]
 
     wallabag_core.content_proxy:
         class: Wallabag\CoreBundle\Helper\ContentProxy
