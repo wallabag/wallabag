@@ -23,7 +23,6 @@ Autres fichiers à traduire :
 - https://github.com/wallabag/wallabag/tree/master/app/Resources/CraueConfigBundle/translations.
 - https://github.com/wallabag/wallabag/tree/master/src/Wallabag/UserBundle/Resources/translations.
 
-
 Vous devez créer les fichiers ``LE_FICHIER_DE_TRADUCTION.CODE.yml``.
 
 Fichier de configuration
