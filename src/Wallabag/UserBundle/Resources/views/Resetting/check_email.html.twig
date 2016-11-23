@@ -5,7 +5,7 @@
 {% block fos_user_content %}
 <div class="card-content">
     <div class="row">
-        {{ 'resetting.check_email'|trans({'%email%': email}) }}
+        <p>{{ 'resetting.check_email'|trans({'%tokenLifetime%': tokenLifetime}) }}</p>
     </div>
 </div>
 {% endblock fos_user_content %}

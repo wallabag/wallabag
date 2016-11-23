@@ -210,6 +210,7 @@ fos_user:
     from_email:
         address:        "%from_email%"
         sender_name:    wallabag
+
 fos_oauth_server:
     db_driver:           orm
     client_class:        Wallabag\ApiBundle\Entity\Client
@@ -217,10 +218,10 @@ fos_oauth_server:
     refresh_token_class: Wallabag\ApiBundle\Entity\RefreshToken
     auth_code_class:     Wallabag\ApiBundle\Entity\AuthCode
     service:
-        user_provider: fos_user.user_manager
+        user_provider: fos_user.user_provider.username_email
         options:
             refresh_token_lifetime: 1209600
-                
+
 scheb_two_factor:
     trusted_computer:
         enabled: true

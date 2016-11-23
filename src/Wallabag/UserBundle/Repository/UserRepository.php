@@ -48,7 +48,7 @@ class UserRepository extends EntityRepository
     {
         return $this->createQueryBuilder('u')
             ->select('count(u)')
-            ->andWhere('u.expired = false')
+            ->andWhere('u.enabled = true')
             ->getQuery()
             ->getSingleScalarResult();
     }
