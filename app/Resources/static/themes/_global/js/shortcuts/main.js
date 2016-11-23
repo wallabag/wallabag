@@ -12,4 +12,4 @@ Mousetrap.bind('g c', () => { window.location.href = Routing.generate('config');
 Mousetrap.bind('g i', () => { window.location.href = Routing.generate('import'); });
 Mousetrap.bind('g d', () => { window.location.href = Routing.generate('developer'); });
 Mousetrap.bind('?', () => { window.location.href = Routing.generate('howto'); });
-Mousetrap.bind('g l', () => { window.location.href = Routing.generate('logout'); });
+Mousetrap.bind('g l', () => { window.location.href = Routing.generate('fos_user_security_logout'); });

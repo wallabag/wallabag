@@ -366,5 +366,5 @@ fos_js_routing:
         - import
         - developer
         - howto
-        - logout
+        - fos_user_security_logout
         - new
