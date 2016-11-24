@@ -344,6 +344,7 @@ class EntryRestController extends WallabagRestController
      *          {"name"="published_at", "dataType"="datetime|integer", "format"="YYYY-MM-DDTHH:II:SS+TZ or a timestamp", "required"=false, "description"="Published date of the entry"},
      *          {"name"="authors", "dataType"="string", "format"="Name Firstname,author2,author3", "required"=false, "description"="Authors of the entry"},
      *          {"name"="public", "dataType"="integer", "required"=false, "format"="1 or 0", "description"="will generate a public link for the entry"},
+     *          {"name"="progress", "dataType"="integer", "required"=false, "format"="A percentage between 0 and 100", "description"="changed progress."},
      *      }
      * )
      *
@@ -641,6 +642,7 @@ class EntryRestController extends WallabagRestController
         $picture = $request->request->get('preview_picture');
         $publishedAt = $request->request->get('published_at');
         $authors = $request->request->get('authors', '');
+        $progress = $request->request->get('progress');
 
         try {
             $this->get('wallabag_core.content_proxy')->updateEntry(
@@ -667,23 +669,30 @@ class EntryRestController extends WallabagRestController
             ]);
         }
 
-        if (!is_null($isArchived)) {
-            $entry->setArchived((bool) $isArchived);
+        if (null !== $isArchived) {
+            $entry->setArchived((bool)$isArchived);
         }
 
-        if (!is_null($isStarred)) {
-            $entry->setStarred((bool) $isStarred);
+        if (null !== $isStarred) {
+            $entry->setStarred((bool)$isStarred);
         }
 
         if (!empty($tags)) {
             $this->get('wallabag_core.tags_assigner')->assignTagsToEntry($entry, $tags);
         }
 
-        if (!is_null($isPublic)) {
-            if (true === (bool) $isPublic && null === $entry->getUid()) {
+        if (null !== $isPublic) {
+            if (true === (bool)$isPublic && null === $entry->getUid()) {
                 $entry->generateUid();
-            } elseif (false === (bool) $isPublic) {
+            } elseif (false === (bool)$isPublic) {
                 $entry->cleanUid();
+            }
+        }
+
+        if (null !== $progress) {
+            $progress = (int) $progress;
+            if ($progress >= 0 && $progress <= 100) {
+                $entry->setProgress($progress);
             }
         }
 
@@ -693,5 +702,28 @@ class EntryRestController extends WallabagRestController
 
         // entry saved, dispatch event about it!
         $this->get('event_dispatcher')->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
+    }
+
+    /**
+     * Get the progress of an entry.
+     *
+     * @ApiDoc(
+     *     requirements={
+     *          {"name"="entry", "dataType"="integer", "requirement"="\w+", "description"="The entry ID"}
+     *     }
+     * )
+     *
+     * @param Entry $entry
+     *
+     * @return JsonResponse
+     */
+    public function getEntriesProgressAction(Entry $entry)
+    {
+        $this->validateAuthentication();
+        $this->validateUserAccess($entry->getUser()->getId());
+
+        $json = $this->get('serializer')->serialize($entry->getProgress(), 'json');
+
+        return (new JsonResponse())->setJson($json);
     }
 }

@@ -211,6 +211,15 @@ class Entry
     private $headers;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="progress", type="integer", nullable=true)
+     *
+     * @Groups({"entries_for_user", "export_all"})
+     */
+    private $progress = 0;
+
+    /**
      * @Exclude
      *
      * @ORM\ManyToOne(targetEntity="Wallabag\UserBundle\Entity\User", inversedBy="entries")
@@ -760,6 +769,20 @@ class Entry
     }
 
     /**
+     * Set progress.
+     *
+     * @param int $progress
+     *
+     * @return Entry
+     */
+    public function setProgress($progress)
+    {
+        $this->progress = $progress;
+
+        return $this;
+    }
+
+    /**
      * @return array
      */
     public function getHeaders()
@@ -777,5 +800,15 @@ class Entry
         $this->headers = $headers;
 
         return $this;
+    }
+
+    /**
+     * Get progress.
+     *
+     * @return int
+     */
+    public function getProgress()
+    {
+        return $this->progress;
     }
 }
