@@ -20,13 +20,14 @@ Upgrade on a dedicated web server
 Explanations about database migrations
 """"""""""""""""""""""""""""""""""""""
 
+During the update, we execute database migrations.
+
 All the database migrations are stored in ``app/DoctrineMigrations``. You can execute each migration individually:
 ``bin/console doctrine:migrations:migrate 20161001072726 --env=prod``.
 
+Here is the migrations list for 2.1.x to 2.2.0 release:
 
-Here are the migrations for 2.1.x to 2.2.0 release:
-
-* ``20161001072726``: added foreign keys for for account resetting
+* ``20161001072726``: added foreign keys for account resetting
 * ``20161022134138``: converted database to ``utf8mb4`` encoding (for MySQL only)
 * ``20161024212538``: added ``user_id`` column on ``oauth2_clients`` to prevent users to delete API clients from other users
 * ``20161031132655``: added the internal setting to enable/disable downloading pictures
@@ -62,13 +63,6 @@ You must run some SQL queries to upgrade your database. We assume that the table
 
 .. code-block:: sql
 
-    ALTER TABLE `wallabag_entry` ADD `uuid` LONGTEXT DEFAULT NULL;
-    INSERT INTO `wallabag_craue_config_setting` (`name`, `value`, `section`) VALUES ('share_public', '1', 'entry');
-    ALTER TABLE `wallabag_oauth2_clients` ADD name longtext COLLATE 'utf8_unicode_ci' DEFAULT NULL;
-    INSERT INTO `wallabag_craue_config_setting` (`name`, `value`, `section`) VALUES ('import_with_redis', '0', 'import');
-    INSERT INTO `wallabag_craue_config_setting` (`name`, `value`, `section`) VALUES ('import_with_rabbitmq', '0', 'import');
-    ALTER TABLE `wallabag_config` ADD `pocket_consumer_key` VARCHAR(255) DEFAULT NULL;
-    DELETE FROM `wallabag_craue_config_setting` WHERE `name` = 'pocket_consumer_key';
 
 Upgrade from 2.0.x to 2.1.1
 ---------------------------
