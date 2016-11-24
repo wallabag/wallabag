@@ -17,26 +17,26 @@ Upgrade auf einem dedizierten Webserver
 
     make update
 
-Explanations about database migrations
-""""""""""""""""""""""""""""""""""""""
+Erklärungen über die Datenbankmigration
+"""""""""""""""""""""""""""""""""""""""
 
-During the update, we execute database migrations.
+Während des Updates migrieren wir die Datenbank.
 
-All the database migrations are stored in ``app/DoctrineMigrations``. You can execute each migration individually:
+Alle Datenbankmigrationen sind im Verzeichnis ``app/DoctrineMigrations`` gespeichert. Jede von ihnen kann einzeln ausgeführt werden:
 ``bin/console doctrine:migrations:migrate 20161001072726 --env=prod``.
 
-Here is the migrations list for 2.1.x to 2.2.0 release:
+Dies ist die Migrationsliste von 2.1.x auf 2.2.0:
 
-* ``20161001072726``: added foreign keys for account resetting
-* ``20161022134138``: converted database to ``utf8mb4`` encoding (for MySQL only)
-* ``20161024212538``: added ``user_id`` column on ``oauth2_clients`` to prevent users to delete API clients from other users
-* ``20161031132655``: added the internal setting to enable/disable downloading pictures
-* ``20161104073720``: added ``created_at`` index on ``entry`` table
-* ``20161106113822``: added ``action_mark_as_read`` field on ``config`` table
-* ``20161117071626``: added the internal setting to share articles to unmark.it
-* ``20161118134328``: added ``http_status`` field on ``entry`` table
-* ``20161122144743``: added the internal setting to enable/disable fetching articles with paywall
-* ``20161122203647``: dropped ``expired`` and ``credentials_expired`` fields on ``user`` table
+* ``20161001072726``: Fremdschlüssel für das Zurücksetzen des Kontos hinzugefügt
+* ``20161022134138``: Datenbank zum ``utf8mb4``-Encoding ändern (nur für MySQL)
+* ``20161024212538``: ``user_id``-Spalte zu ``oauth2_clients`` hinzugefügt, um Benutzer davon abzuhalten, API-Clients anderer Nutzer zu löschen
+* ``20161031132655``: Interne Einstellung für das (de-)aktivieren vom Bilder-Download hinzugefügt
+* ``20161104073720``: ``created_at``-Index zur ``entry``-Tabelle hinzugefügt
+* ``20161106113822``: ``action_mark_as_read``-Feld zur ``config``-Tabelle hinzugefügt
+* ``20161117071626``: Interne Einstellung zum Teilen mit unmark.it hinzugefügt
+* ``20161118134328``: ``http_status``-Feld zur ``entry``-Tabelle hinzugefügt
+* ``20161122144743``: Interne Einstellung für das (de-)aktivieren zum Holen von Artikeln mit einer Paywall hinzugefügt
+* ``20161122203647``: ``expired``- und ``credentials_expired``-Feld aus der ``user``-Tabelle entfernt
 
 Upgrade auf einem Shared Hosting
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
