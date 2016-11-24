@@ -16,4 +16,5 @@ git fetch --tags
 TAG=$(git describe --tags $(git rev-list --tags --max-count=1))
 git checkout $TAG --force
 SYMFONY_ENV=$ENV $COMPOSER_COMMAND install --no-dev -o --prefer-dist
+php bin/console doctrine:migrations:migrate --env=$ENV
 php bin/console cache:clear --env=$ENV
