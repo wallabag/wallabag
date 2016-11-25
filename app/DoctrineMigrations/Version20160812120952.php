@@ -21,7 +21,7 @@ class Version20160812120952 extends AbstractMigration implements ContainerAwareI
 
     private function getTable($tableName)
     {
-        return $this->container->getParameter('database_table_prefix') . $tableName;
+        return $this->container->getParameter('database_table_prefix').$tableName;
     }
 
     /**
@@ -29,6 +29,8 @@ class Version20160812120952 extends AbstractMigration implements ContainerAwareI
      */
     public function up(Schema $schema)
     {
+        $this->skipIf($schema->getTable($this->getTable('oauth2_clients'))->hasColumn('name'), 'It seems that you already played this migration.');
+
         switch ($this->connection->getDatabasePlatform()->getName()) {
             case 'sqlite':
                 $this->addSql('ALTER TABLE '.$this->getTable('oauth2_clients').' ADD name longtext DEFAULT NULL');

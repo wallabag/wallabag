@@ -21,7 +21,7 @@ class Version20160916201049 extends AbstractMigration implements ContainerAwareI
 
     private function getTable($tableName)
     {
-        return $this->container->getParameter('database_table_prefix') . $tableName;
+        return $this->container->getParameter('database_table_prefix').$tableName;
     }
 
     /**
@@ -29,8 +29,10 @@ class Version20160916201049 extends AbstractMigration implements ContainerAwareI
      */
     public function up(Schema $schema)
     {
+        $this->skipIf($schema->getTable($this->getTable('config'))->hasColumn('pocket_consumer_key'), 'It seems that you already played this migration.');
+
         $this->addSql('ALTER TABLE "'.$this->getTable('config').'" ADD pocket_consumer_key VARCHAR(255) DEFAULT NULL');
-        $this->addSql("DELETE FROM \"".$this->getTable('craue_config_setting')."\" WHERE name = 'pocket_consumer_key';");
+        $this->addSql('DELETE FROM "'.$this->getTable('craue_config_setting')."\" WHERE name = 'pocket_consumer_key';");
     }
 
     /**
@@ -41,6 +43,6 @@ class Version20160916201049 extends AbstractMigration implements ContainerAwareI
         $this->abortIf($this->connection->getDatabasePlatform()->getName() == 'sqlite', 'Migration can only be executed safely on \'mysql\' or \'postgresql\'.');
 
         $this->addSql('ALTER TABLE "'.$this->getTable('config').'" DROP pocket_consumer_key');
-        $this->addSql("INSERT INTO \"".$this->getTable('craue_config_setting')."\" (name, value, section) VALUES ('pocket_consumer_key', NULL, 'import')");
+        $this->addSql('INSERT INTO "'.$this->getTable('craue_config_setting')."\" (name, value, section) VALUES ('pocket_consumer_key', NULL, 'import')");
     }
 }

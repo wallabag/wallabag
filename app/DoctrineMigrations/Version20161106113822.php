@@ -21,7 +21,7 @@ class Version20161106113822 extends AbstractMigration implements ContainerAwareI
 
     private function getTable($tableName)
     {
-        return $this->container->getParameter('database_table_prefix') . $tableName;
+        return $this->container->getParameter('database_table_prefix').$tableName;
     }
 
     /**
@@ -29,6 +29,8 @@ class Version20161106113822 extends AbstractMigration implements ContainerAwareI
      */
     public function up(Schema $schema)
     {
+        $this->skipIf($schema->getTable($this->getTable('config'))->hasColumn('action_mark_as_read'), 'It seems that you already played this migration.');
+
         $this->addSql('ALTER TABLE '.$this->getTable('config').' ADD action_mark_as_read INT DEFAULT 0');
     }
 

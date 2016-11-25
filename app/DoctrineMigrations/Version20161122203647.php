@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Methods and properties removed from `FOS\UserBundle\Model\User`
+ * Methods and properties removed from `FOS\UserBundle\Model\User`.
  *
  * - `$expired`
  * - `$credentialsExpired`
@@ -32,7 +32,7 @@ class Version20161122203647 extends AbstractMigration implements ContainerAwareI
 
     private function getTable($tableName)
     {
-        return $this->container->getParameter('database_table_prefix') . $tableName;
+        return $this->container->getParameter('database_table_prefix').$tableName;
     }
 
     /**
@@ -42,7 +42,12 @@ class Version20161122203647 extends AbstractMigration implements ContainerAwareI
     {
         $this->abortIf($this->connection->getDatabasePlatform()->getName() === 'sqlite', 'This up migration can\'t be executed on SQLite databases, because SQLite don\'t support DROP COLUMN.');
 
+        $this->skipIf(false === $schema->getTable($this->getTable('user'))->hasColumn('expired'), 'It seems that you already played this migration.');
+
         $this->addSql('ALTER TABLE '.$this->getTable('user').' DROP expired');
+
+        $this->skipIf(false === $schema->getTable($this->getTable('user'))->hasColumn('credentials_expired'), 'It seems that you already played this migration.');
+
         $this->addSql('ALTER TABLE '.$this->getTable('user').' DROP credentials_expired');
     }
 
