@@ -164,7 +164,7 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-  background: #f0f0f0;
+  background: #fafafa;
 }
 
 body.login main {
@@ -600,13 +600,101 @@ a.original {
 #article {
   font-size: 20px;
   margin: 0 auto;
-  max-width: 40em;
+  max-width: 45em;
+}
+
+#article article {
+  color: #424242;
+  font-size: 18px;
+  line-height: 1.7em;
+}
+
+#article article h1,
+#article article h2,
+#article article h3,
+#article article h4,
+#article article h5,
+#article article h6 {
+  color: #212121;
+}
+
+#article article h1 strong,
+#article article h2 strong,
+#article article h3 strong,
+#article article h4 strong,
+#article article h5 strong,
+#article article h6 strong {
+  font-weight: 500;
+}
+
+#article article h6 {
+  font-size: 1.2rem;
+}
+
+#article article h5 {
+  font-size: 1.6rem;
+}
+
+#article article h4 {
+  font-size: 1.9rem;
+}
+
+#article article h3 {
+  font-size: 2.2rem;
+}
+
+#article article h2 {
+  font-size: 2.5rem;
+}
+
+#article article h1 {
+  font-size: 2.7rem;
 }
 
 #article img,
 #article figure {
   max-width: 100%;
   height: auto;
+}
+
+#article article a {
+  border-bottom: 1px dotted #03a9f4;
+  text-decoration: none;
+}
+
+#article article a:hover {
+  border-bottom-style: solid;
+}
+
+#article article ul {
+  padding-left: 30px;
+}
+
+#article article ul,
+#article article ul li {
+  list-style-type: disc;
+}
+
+#article article blockquote {
+  font-style: italic;
+}
+
+#article article strong {
+  font-weight: bold;
+}
+
+#article article pre {
+  box-sizing: border-box;
+  margin: 0 0 1.75em;
+  border: #e3f2fd 1px solid;
+  width: 100%;
+  padding: 10px;
+  font-family: monospace;
+  font-size: 0.8em;
+  white-space: pre;
+  overflow: auto;
+  background: #f5f5f5;
+  border-radius: 3px;
 }
 
 #article > header > h1 {
