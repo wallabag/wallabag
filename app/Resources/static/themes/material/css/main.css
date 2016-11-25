@@ -605,6 +605,8 @@ a.original {
 
 #article article {
   color: #424242;
+  font-size: 18px;
+  line-height: 1.7em;
 }
 
 #article article h1,
