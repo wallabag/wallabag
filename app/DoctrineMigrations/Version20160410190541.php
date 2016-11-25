@@ -24,46 +24,12 @@ class Version20160410190541 extends AbstractMigration implements ContainerAwareI
         return $this->container->getParameter('database_table_prefix').$tableName;
     }
 
-    private function hasColumn($tableName, $columnName)
-    {
-        switch ($this->connection->getDatabasePlatform()->getName()) {
-            case 'sqlite':
-                $rows = $this->connection->executeQuery('pragma table_info('.$tableName.')')->fetchAll();
-                foreach ($rows as $column) {
-                    if (strcasecmp($column['name'], $columnName) === 0) {
-                        return true;
-                    }
-                }
-
-                return false;
-            case 'mysql':
-                $rows = $this->connection->executeQuery('SHOW COLUMNS FROM '.$tableName)->fetchAll();
-                foreach ($rows as $column) {
-                    if (strcasecmp($column['Field'], $columnName) === 0) {
-                        return true;
-                    }
-                }
-
-                return false;
-            case 'postgresql':
-                $sql = sprintf("SELECT count(*)
-                    FROM information_schema.columns
-                    WHERE table_schema = 'public' AND table_name = '%s' AND column_name = '%s'",
-                    $tableName,
-                    $columnName
-                );
-                $result = $this->connection->executeQuery($sql)->fetch();
-
-                return  $result['count'] > 0;
-        }
-    }
-
     /**
      * @param Schema $schema
      */
     public function up(Schema $schema)
     {
-        $this->skipIf($this->hasColumn($this->getTable('entry'), 'uuid'), 'It seems that you already played this migration.');
+        $this->skipIf($schema->getTable($this->getTable('entry'))->hasColumn('uuid'), 'It seems that you already played this migration.');
 
         if ($this->connection->getDatabasePlatform()->getName() == 'postgresql') {
             $this->addSql('ALTER TABLE "'.$this->getTable('entry').'" ADD uuid UUID DEFAULT NULL');
