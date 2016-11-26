@@ -29,15 +29,14 @@ class Version20160410190541 extends AbstractMigration implements ContainerAwareI
      */
     public function up(Schema $schema)
     {
-        $this->skipIf($schema->getTable($this->getTable('entry'))->hasColumn('uuid'), 'It seems that you already played this migration.');
+        $entryTable = $schema->getTable($this->getTable('entry'));
 
-        if ($this->connection->getDatabasePlatform()->getName() == 'postgresql') {
-            $this->addSql('ALTER TABLE "'.$this->getTable('entry').'" ADD uuid UUID DEFAULT NULL');
-        } else {
-            $this->addSql('ALTER TABLE "'.$this->getTable('entry').'" ADD uuid LONGTEXT DEFAULT NULL');
-        }
+        $this->skipIf($entryTable->hasColumn('uuid'), 'It seems that you already played this migration.');
 
-        $this->addSql('INSERT INTO "'.$this->getTable('craue_config_setting')."\" (name, value, section) VALUES ('share_public', '1', 'entry')");
+        $entryTable->addColumn('uuid', 'guid', [
+            'notnull' => false,
+        ]);
+        $this->addSql('INSERT INTO '.$this->getTable('craue_config_setting')." (name, value, section) VALUES ('share_public', '1', 'entry')");
     }
 
     /**
@@ -45,9 +44,9 @@ class Version20160410190541 extends AbstractMigration implements ContainerAwareI
      */
     public function down(Schema $schema)
     {
-        $this->skipIf($this->connection->getDatabasePlatform()->getName() != 'sqlite', 'This down migration can\'t be executed on SQLite databases, because SQLite don\'t support DROP COLUMN.');
+        $entryTable = $schema->getTable($this->getTable('entry'));
+        $entryTable->dropColumn('uuid');
 
-        $this->addSql('ALTER TABLE "'.$this->getTable('entry').'" DROP uuid');
-        $this->addSql('DELETE FROM "'.$this->getTable('craue_config_setting')."\" WHERE name = 'share_public'");
+        $this->addSql('DELETE FROM '.$this->getTable('craue_config_setting')." WHERE name = 'share_public'");
     }
 }
