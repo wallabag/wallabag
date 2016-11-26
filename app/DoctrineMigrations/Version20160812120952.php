@@ -50,7 +50,7 @@ class Version20160812120952 extends AbstractMigration implements ContainerAwareI
      */
     public function down(Schema $schema)
     {
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() == 'sqlite', 'Migration can only be executed safely on \'mysql\' or \'postgresql\'.');
+        $this->skipIf($this->connection->getDatabasePlatform()->getName() == 'sqlite', 'Migration can only be executed safely on \'mysql\' or \'postgresql\'.');
 
         $this->addSql('ALTER TABLE '.$this->getTable('oauth2_clients').' DROP COLUMN name');
     }

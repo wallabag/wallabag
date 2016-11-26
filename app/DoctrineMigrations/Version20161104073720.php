@@ -21,7 +21,7 @@ class Version20161104073720 extends AbstractMigration implements ContainerAwareI
 
     private function getTable($tableName)
     {
-        return $this->container->getParameter('database_table_prefix') . $tableName;
+        return $this->container->getParameter('database_table_prefix').$tableName;
     }
 
     /**
@@ -48,6 +48,5 @@ class Version20161104073720 extends AbstractMigration implements ContainerAwareI
      */
     public function down(Schema $schema)
     {
-
     }
 }

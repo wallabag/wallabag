@@ -40,7 +40,7 @@ class Version20161122203647 extends AbstractMigration implements ContainerAwareI
      */
     public function up(Schema $schema)
     {
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() === 'sqlite', 'This up migration can\'t be executed on SQLite databases, because SQLite don\'t support DROP COLUMN.');
+        $this->skipIf($this->connection->getDatabasePlatform()->getName() === 'sqlite', 'This up migration can\'t be executed on SQLite databases, because SQLite don\'t support DROP COLUMN.');
 
         $this->skipIf(false === $schema->getTable($this->getTable('user'))->hasColumn('expired'), 'It seems that you already played this migration.');
 
