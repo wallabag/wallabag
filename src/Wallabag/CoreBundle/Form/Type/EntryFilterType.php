@@ -90,7 +90,7 @@ class EntryFilterType extends AbstractType
                     if (strlen($value) <= 2 || empty($value)) {
                         return;
                     }
-                    $expression = $filterQuery->getExpr()->like($field, $filterQuery->getExpr()->literal('%'.$value.'%'));
+                    $expression = $filterQuery->getExpr()->like($field, $filterQuery->getExpr()->lower($filterQuery->getExpr()->literal('%'.$value.'%')));
 
                     return $filterQuery->createCondition($expression);
                 },
