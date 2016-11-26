@@ -29,18 +29,8 @@ class Version20161104073720 extends AbstractMigration implements ContainerAwareI
      */
     public function up(Schema $schema)
     {
-        switch ($this->connection->getDatabasePlatform()->getName()) {
-            case 'sqlite':
-                $this->addSql('CREATE INDEX `created_at` ON `'.$this->getTable('entry').'` (`created_at` DESC)');
-                break;
-
-            case 'mysql':
-                $this->addSql('ALTER TABLE '.$this->getTable('entry').' ADD INDEX created_at (created_at);');
-                break;
-
-            case 'postgresql':
-                $this->addSql('CREATE INDEX created_at ON '.$this->getTable('entry').' (created_at DESC)');
-        }
+        $entryTable = $schema->getTable($this->getTable('entry'));
+        $entryTable->addIndex(['created_at']);
     }
 
     /**

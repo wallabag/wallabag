@@ -37,8 +37,6 @@ class Version20161031132655 extends AbstractMigration implements ContainerAwareI
      */
     public function down(Schema $schema)
     {
-        $this->skipIf($this->connection->getDatabasePlatform()->getName() == 'sqlite', 'Migration can only be executed safely on \'mysql\' or \'postgresql\'.');
-
         $this->addSql('DELETE FROM "'.$this->getTable('craue_config_setting')."\" WHERE name = 'download_images_enabled';");
     }
 }

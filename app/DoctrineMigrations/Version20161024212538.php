@@ -29,12 +29,18 @@ class Version20161024212538 extends AbstractMigration implements ContainerAwareI
      */
     public function up(Schema $schema)
     {
-        $this->skipIf($this->connection->getDatabasePlatform()->getName() == 'sqlite', 'Migration can only be executed safely on \'mysql\' or \'postgresql\'.');
+        $clientsTable = $schema->getTable($this->getTable('oauth2_clients'));
 
-        $this->skipIf($schema->getTable($this->getTable('oauth2_clients'))->hasColumn('user_id'), 'It seems that you already played this migration.');
+        $this->skipIf($clientsTable->hasColumn('user_id'), 'It seems that you already played this migration.');
 
-        $this->addSql('ALTER TABLE '.$this->getTable('oauth2_clients').' ADD user_id INT(11) DEFAULT NULL');
-        $this->addSql('ALTER TABLE '.$this->getTable('oauth2_clients').' ADD CONSTRAINT FK_clients_user_clients FOREIGN KEY (user_id) REFERENCES '.$this->getTable('user').' (id) ON DELETE CASCADE');
+        $clientsTable->addColumn('user_id', 'integer');
+
+        $clientsTable->addForeignKeyConstraint(
+            $this->getTable('user'),
+            array('user_id'),
+            array('id'),
+            array('onDelete' => 'CASCADE')
+        );
     }
 
     /**

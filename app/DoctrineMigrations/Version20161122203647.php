@@ -40,15 +40,15 @@ class Version20161122203647 extends AbstractMigration implements ContainerAwareI
      */
     public function up(Schema $schema)
     {
-        $this->skipIf($this->connection->getDatabasePlatform()->getName() === 'sqlite', 'This up migration can\'t be executed on SQLite databases, because SQLite don\'t support DROP COLUMN.');
+        $userTable = $schema->getTable($this->getTable('user'));
 
-        $this->skipIf(false === $schema->getTable($this->getTable('user'))->hasColumn('expired'), 'It seems that you already played this migration.');
+        $this->skipIf(false === $userTable->hasColumn('expired'), 'It seems that you already played this migration.');
 
-        $this->addSql('ALTER TABLE '.$this->getTable('user').' DROP expired');
+        $userTable->dropColumn('expired');
 
-        $this->skipIf(false === $schema->getTable($this->getTable('user'))->hasColumn('credentials_expired'), 'It seems that you already played this migration.');
+        $this->skipIf(false === $userTable->hasColumn('credentials_expired'), 'It seems that you already played this migration.');
 
-        $this->addSql('ALTER TABLE '.$this->getTable('user').' DROP credentials_expired');
+        $userTable->dropColumn('credentials_expired');
     }
 
     /**
@@ -56,7 +56,8 @@ class Version20161122203647 extends AbstractMigration implements ContainerAwareI
      */
     public function down(Schema $schema)
     {
-        $this->addSql('ALTER TABLE '.$this->getTable('user').' ADD expired tinyint(1) NULL DEFAULT 0');
-        $this->addSql('ALTER TABLE '.$this->getTable('user').' ADD credentials_expired tinyint(1) NULL DEFAULT 0');
+        $userTable = $schema->getTable($this->getTable('user'));
+        $userTable->addColumn('expired', 'smallint');
+        $userTable->addColumn('credentials_expired', 'smallint');
     }
 }
