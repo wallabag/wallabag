@@ -13,9 +13,11 @@
 
 {% block content %}
 
+    {% set listMode = app.user.config.listMode %}
     <div class="results">
         <div class="nb-results">{{ 'entry.list.number_on_the_page'|transchoice(entries.count) }}</div>
         <div class="pagination">
+            <a href="{{ path('switch_view_mode') }}"><i class="listMode-btn material-icons md-36">{% if listMode == 0 %}list{% else %}view_module{% endif %}</i></a>
             <i class="btn-clickable download-btn material-icons md-36">file_download</i>
             <i class="btn-clickable filter-btn material-icons md-36">filter_list</i>
             {% if entries.getNbPages > 1 %}
@@ -25,7 +27,7 @@
     </div>
 
     {% for entry in entries %}
-        <div id="entry-{{ entry.id|e }}" class="entry">
+        <div id="entry-{{ entry.id|e }}" class="{% if listMode == 0 %}entry{% else %}listmode entry{% endif %}">
             <h2><a href="{{ path('view', { 'id': entry.id }) }}" title="{{ entry.title|raw }}">{{ entry.title|raw }}</a></h2>
 
             {% set readingTime = entry.readingTime / app.user.config.readingSpeed %}
@@ -50,13 +52,13 @@
                 <li><a title="{{ 'entry.list.delete'|trans }}" class="tool delete icon-trash icon" href="{{ path('delete_entry', { 'id': entry.id }) }}"><span>{{ 'entry.list.delete'|trans }}</span></a></li>
                 <li><a href="{{ entry.url|e }}" target="_blank" title="{{ 'entry.list.original_article'|trans }} : {{ entry.title|e }}" class="tool link icon-link icon"><span>{{ entry.domainName|removeWww }}</span></a></li>
             </ul>
-            {% if entry.previewPicture is null %}
+            {% if (entry.previewPicture is null or listMode == 1) %}
                 <ul class="card-entry-tags">
                     {% for tag in entry.tags %}
                         <li><a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a></li>
                     {% endfor %}
                 </ul>
-                <p>{{ entry.content|striptags|slice(0, 300) }}&hellip;</p>
+                <p {% if listMode == 1 %}class="hide"{% endif %}>{{ entry.content|striptags|slice(0, 300) }}&hellip;</p>
             {% else %}
                 <ul class="card-entry-labels">
                 {% for tag in entry.tags | slice(0, 3) %}

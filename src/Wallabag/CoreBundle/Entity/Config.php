@@ -98,6 +98,13 @@ class Config
     private $actionMarkAsRead;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="list_mode", type="integer", nullable=true)
+     */
+    private $listMode;
+
+    /**
      * @ORM\OneToOne(targetEntity="Wallabag\UserBundle\Entity\User", inversedBy="config")
      */
     private $user;
@@ -335,6 +342,26 @@ class Config
     public function setActionMarkAsRead($actionMarkAsRead)
     {
         $this->actionMarkAsRead = $actionMarkAsRead;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getListMode()
+    {
+        return $this->listMode;
+    }
+
+    /**
+     * @param int $listMode
+     *
+     * @return Config
+     */
+    public function setListMode($listMode)
+    {
+        $this->listMode = $listMode;
 
         return $this;
     }

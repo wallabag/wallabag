@@ -363,4 +363,25 @@ class ConfigController extends Controller
 
         return $this->redirect($this->generateUrl('fos_user_security_login'));
     }
+
+    /**
+     * Switch view mode for current user.
+     *
+     * @Route("/config/view-mode", name="switch_view_mode")
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function changeViewModeAction(Request $request)
+    {
+        $user = $this->getUser();
+        $user->getConfig()->setListMode(!$user->getConfig()->getListMode());
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($user);
+        $em->flush();
+
+        return $this->redirect($request->headers->get('referer'));
+    }
 }
