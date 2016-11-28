@@ -16,6 +16,7 @@ abstract class AbstractImport implements ImportInterface
     protected $em;
     protected $logger;
     protected $contentProxy;
+    protected $fetching_error_message;
     protected $producer;
     protected $user;
     protected $markAsRead;
@@ -23,11 +24,12 @@ abstract class AbstractImport implements ImportInterface
     protected $importedEntries = 0;
     protected $queuedEntries = 0;
 
-    public function __construct(EntityManager $em, ContentProxy $contentProxy)
+    public function __construct(EntityManager $em, ContentProxy $contentProxy, $fetching_error_message)
     {
         $this->em = $em;
         $this->logger = new NullLogger();
         $this->contentProxy = $contentProxy;
+        $this->fetching_error_message = $fetching_error_message;
     }
 
     public function setLogger(LoggerInterface $logger)
@@ -89,10 +91,12 @@ abstract class AbstractImport implements ImportInterface
      */
     protected function fetchContent(Entry $entry, $url, array $content = [])
     {
-        try {
-            return $this->contentProxy->updateEntry($entry, $url, $content);
-        } catch (\Exception $e) {
+        $updatedEntry = clone $entry;
+        $this->contentProxy->updateEntry($updatedEntry, $url, $content);
+        if ($updatedEntry->getContent() == $this->fetching_error_message) {
             return $entry;
+        } else {
+            return $updatedEntry;
         }
     }
 

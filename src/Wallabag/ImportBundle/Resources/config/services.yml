@@ -20,6 +20,7 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@wallabag_core.content_proxy"
+            - "%wallabag_core.fetching_error_message%"
         calls:
             - [ setClient, [ "@wallabag_import.pocket.client" ] ]
             - [ setLogger, [ "@logger" ]]
@@ -31,6 +32,7 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@wallabag_core.content_proxy"
+            - "%wallabag_core.fetching_error_message%"
         calls:
             - [ setLogger, [ "@logger" ]]
         tags:
@@ -41,6 +43,7 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@wallabag_core.content_proxy"
+            - "%wallabag_core.fetching_error_message%"
         calls:
             - [ setLogger, [ "@logger" ]]
         tags:
@@ -51,6 +54,7 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@wallabag_core.content_proxy"
+            - "%wallabag_core.fetching_error_message%"
         calls:
             - [ setLogger, [ "@logger" ]]
         tags:
@@ -61,6 +65,7 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@wallabag_core.content_proxy"
+            - "%wallabag_core.fetching_error_message%"
         calls:
             - [ setLogger, [ "@logger" ]]
         tags:
@@ -71,6 +76,7 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@wallabag_core.content_proxy"
+            - "%wallabag_core.fetching_error_message%"
         calls:
             - [ setLogger, [ "@logger" ]]
         tags:
@@ -80,6 +86,7 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@wallabag_core.content_proxy"
+            - "%wallabag_core.fetching_error_message%"
         calls:
             - [ setLogger, [ "@logger" ]]
         tags:
