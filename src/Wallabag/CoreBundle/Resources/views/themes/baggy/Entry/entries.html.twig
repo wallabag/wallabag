@@ -58,7 +58,7 @@
                         <li><a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a></li>
                     {% endfor %}
                 </ul>
-                <p>{{ entry.content|striptags|slice(0, 300) }}&hellip;</p>
+                <p {% if viewMode == 1 %}class="hide"{% endif %}>{{ entry.content|striptags|slice(0, 300) }}&hellip;</p>
             {% else %}
                 <ul class="card-entry-labels">
                 {% for tag in entry.tags | slice(0, 3) %}

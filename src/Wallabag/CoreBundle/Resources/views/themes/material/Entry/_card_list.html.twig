@@ -6,7 +6,7 @@
                         {{ entry.title| striptags | truncate(120, true, '…') | raw }}
                 </a>
             </span>
-          <p>{{ entry.content|striptags|slice(0, 500)|raw }}&hellip;</p>
+          <p class="hide-on-med-and-down">{{ entry.content|striptags|slice(0, 500)|raw }}&hellip;</p>
         </div>
 
         {% include "@WallabagCore/themes/material/Entry/_card_actions.html.twig" with {'entry': entry} only %}

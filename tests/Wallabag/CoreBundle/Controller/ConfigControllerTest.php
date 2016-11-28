@@ -852,5 +852,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $client->request('GET', '/unread/list');
 
         $this->assertContains('listmode', $client->getResponse()->getContent());
+
+        $client->request('GET', '/config/view-mode');
     }
 }

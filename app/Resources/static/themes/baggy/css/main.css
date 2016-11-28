@@ -1203,6 +1203,10 @@ pre code {
 }
 
 @media screen and (max-width: 500px) {
+  .hide {
+    display: none;
+  }
+
   .entry {
     width: 100%;
     margin-left: 0;
