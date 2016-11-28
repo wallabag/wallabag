@@ -35,10 +35,6 @@ class UserType extends AbstractType
                 'required' => false,
                 'label' => 'user.form.enabled_label',
             ])
-            ->add('locked', CheckboxType::class, [
-                'required' => false,
-                'label' => 'user.form.locked_label',
-            ])
             ->add('twoFactorAuthentication', CheckboxType::class, [
                 'required' => false,
                 'label' => 'user.form.twofactor_label',

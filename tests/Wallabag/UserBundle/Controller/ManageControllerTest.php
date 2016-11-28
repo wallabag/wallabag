@@ -49,7 +49,6 @@ class ManageControllerTest extends WallabagCoreTestCase
             'user[username]' => 'test_user',
             'user[email]' => 'test@test.io',
             'user[enabled]' => true,
-            'user[locked]' => false,
         ));
 
         $client->submit($form);

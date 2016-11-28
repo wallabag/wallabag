@@ -503,7 +503,6 @@ user:
         plain_password_label: "Mot de passe en clair"
         email_label: "Adresse courriel"
         enabled_label: "Activé"
-        locked_label: "Bloqué"
         last_login_label: "Dernière connexion"
         twofactor_label: "Double authentification"
         save: "Sauvegarder"

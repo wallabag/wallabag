@@ -503,7 +503,6 @@ user:
         plain_password_label: '????'
         email_label: 'Emailadresse'
         # enabled_label: 'Enabled'
-        # locked_label: 'Locked'
         # last_login_label: 'Last login'
         # twofactor_label: Two factor authentication
         # save: Save

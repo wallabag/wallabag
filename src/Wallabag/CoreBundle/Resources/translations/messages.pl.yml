@@ -315,7 +315,7 @@ howto:
         toggle_favorite: Oznacz wpis gwiazdką
         toggle_archive: Oznacz wpis jako przeczytany
         delete: Usuń wpis
-        material_title: Skróty dostępne wyłącznie w motywie Material 
+        material_title: Skróty dostępne wyłącznie w motywie Material
         add_link: Dodaj nowy link
         hide_form: Ukryj obecny formularz (wyszukiwania lub nowego linku)
         arrows_navigation: Nawiguj pomiędzy artykułami
@@ -503,7 +503,6 @@ user:
         plain_password_label: 'Jawne hasło'
         email_label: 'Adres email'
         enabled_label: 'Włączony'
-        locked_label: 'Zablokowany'
         last_login_label: 'Ostatnie logowanie'
         twofactor_label: Autoryzacja dwuetapowa
         save: Zapisz
