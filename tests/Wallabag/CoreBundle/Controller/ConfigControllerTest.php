@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\CoreBundle\Controller;
+namespace tests\Wallabag\CoreBundle\Controller;
 
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 use Wallabag\CoreBundle\Entity\Config;
@@ -835,5 +835,22 @@ class ConfigControllerTest extends WallabagCoreTestCase
             ->findAnnotationsByPageId($entry->getId(), $user->getId());
 
         $this->assertEmpty($annotationsReset, 'Annotations were reset');
+    }
+
+    public function testSwitchViewMode()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $client->request('GET', '/unread/list');
+
+        $this->assertNotContains('listmode', $client->getResponse()->getContent());
+
+        $client->request('GET', '/config/view-mode');
+        $crawler = $client->followRedirect();
+
+        $client->request('GET', '/unread/list');
+
+        $this->assertContains('listmode', $client->getResponse()->getContent());
     }
 }
