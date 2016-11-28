@@ -94,6 +94,7 @@ abstract class AbstractImport implements ImportInterface
         $updatedEntry = clone $entry;
         $this->contentProxy->updateEntry($updatedEntry, $url, $content);
         if ($updatedEntry->getContent() == $this->fetching_error_message) {
+            $this->logger->warn('Unable to update imported entry ('.$entry->getUrl().')');
             return $entry;
         } else {
             return $updatedEntry;
