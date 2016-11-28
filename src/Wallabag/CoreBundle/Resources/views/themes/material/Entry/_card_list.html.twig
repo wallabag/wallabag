@@ -3,12 +3,16 @@
         <div class="card-content">
             <span class="card-title dot-ellipsis dot-resize-update">
                 <a href="{{ path('view', { 'id': entry.id }) }}" title="{{ entry.title | raw | striptags }}">
-                        {{ entry.title| striptags | truncate(120, true, '…') | raw }}
+                    {{ entry.title| striptags | truncate(120, true, '…') | raw }}
                 </a>
             </span>
-          <p class="hide-on-med-and-down">{{ entry.content|striptags|slice(0, 500)|raw }}&hellip;</p>
+            <ul class="tools-list right">
+                <li>
+                    <a title="{{ 'entry.list.toogle_as_read'|trans }}" class="tool grey-text" href="{{ path('archive_entry', { 'id': entry.id }) }}"><i class="material-icons">{% if entry.isArchived == 0 %}done{% else %}redo{% endif %}</i></a>
+                    <a title="{{ 'entry.list.toogle_as_star'|trans }}" class="tool grey-text" href="{{ path('star_entry', { 'id': entry.id }) }}"><i class="material-icons">{% if entry.isStarred == 0 %}star_border{% else %}star{% endif %}</i></a>
+                    <a title="{{ 'entry.list.delete'|trans }}" class="tool grey-text delete" href="{{ path('delete_entry', { 'id': entry.id }) }}"><i class="material-icons">delete</i></a>
+                </li>
+            </ul>
         </div>
-
-        {% include "@WallabagCore/themes/material/Entry/_card_actions.html.twig" with {'entry': entry} only %}
     </div>
 </div>

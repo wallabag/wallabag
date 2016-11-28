@@ -617,6 +617,10 @@ div.pagination ul .current {
   background-color: #ccc;
 }
 
+.hide {
+  display: none;
+}
+
 /* ==========================================================================
   2.1 = "save a link" related styles
   ========================================================================== */
@@ -1203,10 +1207,6 @@ pre code {
 }
 
 @media screen and (max-width: 500px) {
-  .hide {
-    display: none;
-  }
-
   .entry {
     width: 100%;
     margin-left: 0;

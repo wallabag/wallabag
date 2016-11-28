@@ -555,6 +555,14 @@ a.original {
   margin-right: 5px !important;
 }
 
+.card-stacked:hover ul.tools-list {
+  display: block;
+}
+
+.card-stacked ul.tools-list {
+  display: none;
+}
+
 .card .card-action a {
   color: #fff;
   margin: 0;
@@ -599,7 +607,6 @@ a.original {
   background-repeat: no-repeat;
   background-position: 50%;
 }
-
 
 /* ==========================================================================
    5 = Article

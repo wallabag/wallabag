@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Added view_mode in user config.
+ * Added list_mode in user config.
  */
 class Version20161128084725 extends AbstractMigration implements ContainerAwareInterface
 {
@@ -33,9 +33,9 @@ class Version20161128084725 extends AbstractMigration implements ContainerAwareI
     public function up(Schema $schema)
     {
         $configTable = $schema->getTable($this->getTable('config'));
-        $this->skipIf($configTable->hasColumn('view_mode'), 'It seems that you already played this migration.');
+        $this->skipIf($configTable->hasColumn('list_mode'), 'It seems that you already played this migration.');
 
-        $configTable->addColumn('view_mode', 'integer');
+        $configTable->addColumn('list_mode', 'integer');
     }
 
     /**
@@ -44,6 +44,6 @@ class Version20161128084725 extends AbstractMigration implements ContainerAwareI
     public function down(Schema $schema)
     {
         $configTable = $schema->getTable($this->getTable('config'));
-        $configTable->dropColumn('view_mode');
+        $configTable->dropColumn('list_mode');
     }
 }

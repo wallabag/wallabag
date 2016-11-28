@@ -376,7 +376,7 @@ class ConfigController extends Controller
     public function changeViewModeAction(Request $request)
     {
         $user = $this->getUser();
-        $user->getConfig()->setViewMode(!$user->getConfig()->getViewMode());
+        $user->getConfig()->setListMode(!$user->getConfig()->getListMode());
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($user);

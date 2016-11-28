@@ -100,9 +100,9 @@ class Config
     /**
      * @var int
      *
-     * @ORM\Column(name="view_mode", type="integer", nullable=true)
+     * @ORM\Column(name="list_mode", type="integer", nullable=true)
      */
-    private $viewMode;
+    private $listMode;
 
     /**
      * @ORM\OneToOne(targetEntity="Wallabag\UserBundle\Entity\User", inversedBy="config")
@@ -349,19 +349,19 @@ class Config
     /**
      * @return int
      */
-    public function getViewMode()
+    public function getListMode()
     {
-        return $this->viewMode;
+        return $this->listMode;
     }
 
     /**
-     * @param int $viewMode
+     * @param int $listMode
      *
      * @return Config
      */
-    public function setViewMode($viewMode)
+    public function setListMode($listMode)
     {
-        $this->viewMode = $viewMode;
+        $this->listMode = $listMode;
 
         return $this;
     }
