@@ -503,7 +503,6 @@ user:
         plain_password_label: 'Senhal en clar'
         email_label: 'Adreça de corrièl'
         enabled_label: 'Actiu'
-        locked_label: 'Varrolhat'
         last_login_label: 'Darrièra connexion'
         twofactor_label: 'Autentificacion doble-factor'
         save: 'Enregistrar'
