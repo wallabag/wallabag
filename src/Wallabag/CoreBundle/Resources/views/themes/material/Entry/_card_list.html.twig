@@ -1,0 +1,14 @@
+<div class="card">
+    <div class="card-stacked">
+        <div class="card-content">
+            <span class="card-title dot-ellipsis dot-resize-update">
+                <a href="{{ path('view', { 'id': entry.id }) }}" title="{{ entry.title | raw | striptags }}">
+                        {{ entry.title| striptags | truncate(120, true, '…') | raw }}
+                </a>
+            </span>
+          <p>{{ entry.content|striptags|slice(0, 500)|raw }}&hellip;</p>
+        </div>
+
+        {% include "@WallabagCore/themes/material/Entry/_card_actions.html.twig" with {'entry': entry} only %}
+    </div>
+</div>

@@ -194,13 +194,20 @@ main,
 
 .results {
   height: 1em;
-  line-height: 30px;
 }
 
 .results .nb-results,
 .results .pagination {
   margin: 15px;
   margin-bottom: 0;
+}
+
+.results .nb-results {
+  display: inline-flex;
+}
+
+.results a {
+  color: #444;
 }
 
 .pagination {
@@ -592,6 +599,7 @@ a.original {
   background-repeat: no-repeat;
   background-position: 50%;
 }
+
 
 /* ==========================================================================
    5 = Article

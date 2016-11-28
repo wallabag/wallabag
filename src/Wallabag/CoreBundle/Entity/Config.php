@@ -98,6 +98,13 @@ class Config
     private $actionMarkAsRead;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="view_mode", type="integer", nullable=true)
+     */
+    private $viewMode;
+
+    /**
      * @ORM\OneToOne(targetEntity="Wallabag\UserBundle\Entity\User", inversedBy="config")
      */
     private $user;
@@ -335,6 +342,26 @@ class Config
     public function setActionMarkAsRead($actionMarkAsRead)
     {
         $this->actionMarkAsRead = $actionMarkAsRead;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getViewMode()
+    {
+        return $this->viewMode;
+    }
+
+    /**
+     * @param int $viewMode
+     *
+     * @return Config
+     */
+    public function setViewMode($viewMode)
+    {
+        $this->viewMode = $viewMode;
 
         return $this;
     }
