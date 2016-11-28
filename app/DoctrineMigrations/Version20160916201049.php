@@ -33,7 +33,7 @@ class Version20160916201049 extends AbstractMigration implements ContainerAwareI
 
         $this->skipIf($configTable->hasColumn('pocket_consumer_key'), 'It seems that you already played this migration.');
 
-        $userTable->addColumn('pocket_consumer_key', 'string');
+        $configTable->addColumn('pocket_consumer_key', 'string');
         $this->addSql('DELETE FROM '.$this->getTable('craue_config_setting')." WHERE name = 'pocket_consumer_key';");
     }
 
@@ -43,7 +43,7 @@ class Version20160916201049 extends AbstractMigration implements ContainerAwareI
     public function down(Schema $schema)
     {
         $configTable = $schema->getTable($this->getTable('config'));
-        $clientsTable->dropColumn('pocket_consumer_key');
+        $configTable->dropColumn('pocket_consumer_key');
         $this->addSql('INSERT INTO '.$this->getTable('craue_config_setting')." (name, value, section) VALUES ('pocket_consumer_key', NULL, 'import')");
     }
 }
