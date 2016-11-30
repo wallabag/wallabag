@@ -150,7 +150,7 @@ En fonction du service dont vous souhaitez importer vos données, vous devez act
   bin/console wallabag:import:redis-worker -e=prod firefox -vv >> /path/to/wallabag/var/logs/redis-firefox.log
 
   # for Chrome import
-  bin/console wallabag:import:redis-worker -e=prod instapaper -vv >> /path/to/wallabag/var/logs/redis-chrome.log
+  bin/console wallabag:import:redis-worker -e=prod chrome -vv >> /path/to/wallabag/var/logs/redis-chrome.log
 
 Si vous souhaitez démarrer l'import pour quelques messages uniquement, vous pouvez spécifier cette valeur en paramètre (ici 12) et le client va s'arrêter après le 12ème message :
 

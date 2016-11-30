@@ -149,7 +149,7 @@ Abhängig davon, über welchen Service du importieren möchtest, musst du den en
   bin/console wallabag:import:redis-worker -e=prod firefox -vv >> /path/to/wallabag/var/logs/redis-firefox.log
 
   # für den Chrome-Import
-  bin/console wallabag:import:redis-worker -e=prod instapaper -vv >> /path/to/wallabag/var/logs/redis-chrome.log
+  bin/console wallabag:import:redis-worker -e=prod chrome -vv >> /path/to/wallabag/var/logs/redis-chrome.log
 
 Wenn du den Import nur für einige Artikel nutzen willst, kannst du die Nummer festlegen (hier: 12) und der Consumer wird nach dem zwölften Artikel aufhören:
 
