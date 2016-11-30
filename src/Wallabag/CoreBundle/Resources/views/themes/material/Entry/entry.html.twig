@@ -257,6 +257,17 @@
         <article>
             {{ entry.content | raw }}
         </article>
+
+        <div class="fixed-action-btn horizontal click-to-toggle hide-on-large-only">
+            <a class="btn-floating btn-large">
+              <i class="material-icons">menu</i>
+            </a>
+            <ul>
+              <li><a class="btn-floating" href="{{ path('archive_entry', { 'id': entry.id }) }}"><i class="material-icons">done</i></a></li>
+              <li><a class="btn-floating" href="{{ path('star_entry', { 'id': entry.id }) }}"><i class="material-icons">star_outline</i></a></li>
+              <li><a class="btn-floating" href="{{ path('delete_entry', { 'id': entry.id }) }}"><i class="material-icons">delete</i></a></li>
+            </ul>
+        </div>
     </div>
 
 <script id="annotationroutes" type="application/json">
