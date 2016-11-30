@@ -21,7 +21,7 @@ class Version20161022134138 extends AbstractMigration implements ContainerAwareI
 
     private function getTable($tableName)
     {
-        return $this->container->getParameter('database_table_prefix') . $tableName;
+        return $this->container->getParameter('database_table_prefix').$tableName;
     }
 
     /**
@@ -72,6 +72,5 @@ class Version20161022134138 extends AbstractMigration implements ContainerAwareI
         $this->addSql('ALTER TABLE '.$this->getTable('tag').' CHANGE `label` `label` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci;');
 
         $this->addSql('ALTER TABLE '.$this->getTable('user').' CHANGE `name` `name` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci;');
-
     }
 }

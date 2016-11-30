@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Add http_status in `entry_table`
+ * Add http_status in `entry_table`.
  */
 class Version20161118134328 extends AbstractMigration implements ContainerAwareInterface
 {
@@ -24,7 +24,7 @@ class Version20161118134328 extends AbstractMigration implements ContainerAwareI
 
     private function getTable($tableName)
     {
-        return $this->container->getParameter('database_table_prefix') . $tableName;
+        return $this->container->getParameter('database_table_prefix').$tableName;
     }
 
     /**
@@ -32,7 +32,14 @@ class Version20161118134328 extends AbstractMigration implements ContainerAwareI
      */
     public function up(Schema $schema)
     {
-        $this->addSql('ALTER TABLE '.$this->getTable('entry').' ADD http_status VARCHAR(3) DEFAULT NULL');
+        $entryTable = $schema->getTable($this->getTable('entry'));
+
+        $this->skipIf($entryTable->hasColumn('http_status'), 'It seems that you already played this migration.');
+
+        $entryTable->addColumn('http_status', 'string', [
+            'length' => 3,
+            'notnull' => false,
+        ]);
     }
 
     /**
@@ -40,8 +47,7 @@ class Version20161118134328 extends AbstractMigration implements ContainerAwareI
      */
     public function down(Schema $schema)
     {
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'sqlite', 'This down migration can\'t be executed on SQLite databases, because SQLite don\'t support DROP COLUMN.');
-
-        $this->addSql('ALTER TABLE '.$this->getTable('entry').' DROP http_status');
+        $userTable = $schema->getTable($this->getTable('entry'));
+        $userTable->dropColumn('http_status');
     }
 }

@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Add the restricted_access internal setting for articles with paywall
+ * Add the restricted_access internal setting for articles with paywall.
  */
 class Version20161122144743 extends AbstractMigration implements ContainerAwareInterface
 {
@@ -24,7 +24,7 @@ class Version20161122144743 extends AbstractMigration implements ContainerAwareI
 
     private function getTable($tableName)
     {
-        return $this->container->getParameter('database_table_prefix') . $tableName;
+        return $this->container->getParameter('database_table_prefix').$tableName;
     }
 
     /**
@@ -32,7 +32,7 @@ class Version20161122144743 extends AbstractMigration implements ContainerAwareI
      */
     public function up(Schema $schema)
     {
-        $this->addSql("INSERT INTO ".$this->getTable('craue_config_setting')." (name, value, section) VALUES ('restricted_access', 0, 'entry')");
+        $this->addSql('INSERT INTO '.$this->getTable('craue_config_setting')." (name, value, section) VALUES ('restricted_access', 0, 'entry')");
     }
 
     /**
@@ -40,6 +40,6 @@ class Version20161122144743 extends AbstractMigration implements ContainerAwareI
      */
     public function down(Schema $schema)
     {
-        $this->addSql("DELETE FROM ".$this->getTable('craue_config_setting')." WHERE name = 'restricted_access';");
+        $this->addSql('DELETE FROM '.$this->getTable('craue_config_setting')." WHERE name = 'restricted_access';");
     }
 }

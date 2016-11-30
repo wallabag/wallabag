@@ -21,7 +21,7 @@ class Version20161106113822 extends AbstractMigration implements ContainerAwareI
 
     private function getTable($tableName)
     {
-        return $this->container->getParameter('database_table_prefix') . $tableName;
+        return $this->container->getParameter('database_table_prefix').$tableName;
     }
 
     /**
@@ -29,7 +29,13 @@ class Version20161106113822 extends AbstractMigration implements ContainerAwareI
      */
     public function up(Schema $schema)
     {
-        $this->addSql('ALTER TABLE '.$this->getTable('config').' ADD action_mark_as_read INT DEFAULT 0');
+        $configTable = $schema->getTable($this->getTable('config'));
+
+        $this->skipIf($configTable->hasColumn('action_mark_as_read'), 'It seems that you already played this migration.');
+
+        $configTable->addColumn('action_mark_as_read', 'integer', [
+            'default' => 0,
+        ]);
     }
 
     /**
@@ -37,8 +43,7 @@ class Version20161106113822 extends AbstractMigration implements ContainerAwareI
      */
     public function down(Schema $schema)
     {
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'sqlite', 'This down migration can\'t be executed on SQLite databases, because SQLite don\'t support DROP COLUMN.');
-
-        $this->addSql('ALTER TABLE '.$this->getTable('config').' DROP action_mark_as_read');
+        $configTable = $schema->getTable($this->getTable('config'));
+        $userTable->dropColumn('action_mark_as_read');
     }
 }

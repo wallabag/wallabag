@@ -14,6 +14,8 @@ class Version20161104073720 extends AbstractMigration implements ContainerAwareI
      */
     private $container;
 
+    private $indexName = 'IDX_entry_created_at';
+
     public function setContainer(ContainerInterface $container = null)
     {
         $this->container = $container;
@@ -21,7 +23,7 @@ class Version20161104073720 extends AbstractMigration implements ContainerAwareI
 
     private function getTable($tableName)
     {
-        return $this->container->getParameter('database_table_prefix') . $tableName;
+        return $this->container->getParameter('database_table_prefix').$tableName;
     }
 
     /**
@@ -29,18 +31,10 @@ class Version20161104073720 extends AbstractMigration implements ContainerAwareI
      */
     public function up(Schema $schema)
     {
-        switch ($this->connection->getDatabasePlatform()->getName()) {
-            case 'sqlite':
-                $this->addSql('CREATE INDEX `created_at` ON `'.$this->getTable('entry').'` (`created_at` DESC)');
-                break;
+        $entryTable = $schema->getTable($this->getTable('entry'));
+        $this->skipIf($entryTable->hasIndex($this->indexName), 'It seems that you already played this migration.');
 
-            case 'mysql':
-                $this->addSql('ALTER TABLE '.$this->getTable('entry').' ADD INDEX created_at (created_at);');
-                break;
-
-            case 'postgresql':
-                $this->addSql('CREATE INDEX created_at ON '.$this->getTable('entry').' (created_at DESC)');
-        }
+        $entryTable->addIndex(['created_at'], $this->indexName);
     }
 
     /**
@@ -48,6 +42,9 @@ class Version20161104073720 extends AbstractMigration implements ContainerAwareI
      */
     public function down(Schema $schema)
     {
+        $entryTable = $schema->getTable($this->getTable('entry'));
+        $this->skipIf(false === $entryTable->hasIndex($this->indexName), 'It seems that you already played this migration.');
 
+        $entryTable->dropIndex($this->indexName);
     }
 }
