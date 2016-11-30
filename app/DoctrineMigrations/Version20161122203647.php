@@ -42,12 +42,9 @@ class Version20161122203647 extends AbstractMigration implements ContainerAwareI
     {
         $userTable = $schema->getTable($this->getTable('user'));
 
-        $this->skipIf(false === $userTable->hasColumn('expired'), 'It seems that you already played this migration.');
+        $this->skipIf(false === $userTable->hasColumn('expired') || false === $userTable->hasColumn('credentials_expired'), 'It seems that you already played this migration.');
 
         $userTable->dropColumn('expired');
-
-        $this->skipIf(false === $userTable->hasColumn('credentials_expired'), 'It seems that you already played this migration.');
-
         $userTable->dropColumn('credentials_expired');
     }
 

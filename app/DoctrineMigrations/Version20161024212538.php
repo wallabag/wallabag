@@ -37,9 +37,9 @@ class Version20161024212538 extends AbstractMigration implements ContainerAwareI
 
         $clientsTable->addForeignKeyConstraint(
             $this->getTable('user'),
-            array('user_id'),
-            array('id'),
-            array('onDelete' => 'CASCADE')
+            ['user_id'],
+            ['id'],
+            ['onDelete' => 'CASCADE']
         );
     }
 
