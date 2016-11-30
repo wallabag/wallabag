@@ -43,7 +43,7 @@
         "ext-iconv": "*",
         "ext-tokenizer": "*",
         "ext-pdo": "*",
-        "symfony/symfony": "3.1.*",
+        "symfony/symfony": "3.2.*",
         "doctrine/orm": "^2.5",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/doctrine-cache-bundle": "^1.2",
