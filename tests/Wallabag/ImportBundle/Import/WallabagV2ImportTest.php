@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\ImportBundle\Import;
+namespace tests\Wallabag\ImportBundle\Import;
 
 use Wallabag\ImportBundle\Import\WallabagV2Import;
 use Wallabag\UserBundle\Entity\User;
@@ -10,8 +10,9 @@ use Monolog\Logger;
 use Monolog\Handler\TestHandler;
 use Simpleue\Queue\RedisQueue;
 use M6Web\Component\RedisMock\RedisMockFactory;
+use Tests\Wallabag\ImportBundle\ImportKernelTestCase;
 
-class WallabagV2ImportTest extends \PHPUnit_Framework_TestCase
+class WallabagV2ImportTest extends ImportKernelTestCase
 {
     protected $user;
     protected $em;
@@ -44,7 +45,7 @@ class WallabagV2ImportTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $wallabag = new WallabagV2Import($this->em, $this->contentProxy);
+        $wallabag = new WallabagV2Import($this->em, $this->contentProxy, $this->fetchingErrorMessage);
 
         $this->logHandler = new TestHandler();
         $logger = new Logger('test', [$this->logHandler]);
@@ -265,7 +266,7 @@ class WallabagV2ImportTest extends \PHPUnit_Framework_TestCase
         $this->contentProxy
             ->expects($this->exactly(2))
             ->method('updateEntry')
-            ->will($this->throwException(new \Exception()));
+            ->willReturn($entryRepo);
 
         $res = $wallabagV2Import->import();
 

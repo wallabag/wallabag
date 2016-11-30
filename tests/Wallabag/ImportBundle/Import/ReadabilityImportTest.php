@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\ImportBundle\Import;
+namespace tests\Wallabag\ImportBundle\Import;
 
 use Wallabag\ImportBundle\Import\ReadabilityImport;
 use Wallabag\UserBundle\Entity\User;
@@ -10,8 +10,9 @@ use Monolog\Logger;
 use Monolog\Handler\TestHandler;
 use Simpleue\Queue\RedisQueue;
 use M6Web\Component\RedisMock\RedisMockFactory;
+use Tests\Wallabag\ImportBundle\ImportKernelTestCase;
 
-class ReadabilityImportTest extends \PHPUnit_Framework_TestCase
+class ReadabilityImportTest extends ImportKernelTestCase
 {
     protected $user;
     protected $em;
@@ -30,7 +31,7 @@ class ReadabilityImportTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $wallabag = new ReadabilityImport($this->em, $this->contentProxy);
+        $wallabag = new ReadabilityImport($this->em, $this->contentProxy, $this->fetchingErrorMessage);
 
         $this->logHandler = new TestHandler();
         $logger = new Logger('test', [$this->logHandler]);
