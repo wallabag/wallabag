@@ -184,6 +184,11 @@ abstract class BrowserImport extends AbstractImport
         $entry->setUrl($data['url']);
         $entry->setTitle($data['title']);
 
+        $domainName = parse_url($entry->getUrl(), PHP_URL_HOST);
+        if (false !== $domainName) {
+            $entry->setDomainName($domainName);
+        }
+
         // update entry with content (in case fetching failed, the given entry will be return)
         $entry = $this->fetchContent($entry, $data['url'], $data);
 
