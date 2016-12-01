@@ -285,6 +285,7 @@ howto:
     browser_addons:
         firefox: 'افزونهٔ فایرفاکس'
         chrome: 'افزونهٔ کروم'
+        # opera: 'Opera addon'
     mobile_apps:
         android:
             via_f_droid: 'از راه F-Droid'
