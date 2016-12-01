@@ -283,8 +283,9 @@ howto:
     form:
         description: 'Thanks to this form'
     browser_addons:
-        firefox: 'Standard Firefox Add-On'
-        chrome: 'Chrome Extension'
+        firefox: 'Firefox addon'
+        chrome: 'Chrome addon'
+        opera: 'Opera addon'
     mobile_apps:
         android:
             via_f_droid: 'via F-Droid'

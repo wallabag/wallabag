@@ -285,6 +285,7 @@ howto:
     browser_addons:
         firefox: 'Standardudvidelse til Firefox'
         chrome: 'Chrome-udvidelse'
+        opera: 'Opera-udvidelse'
     mobile_apps:
         android:
             via_f_droid: 'via F-Droid'

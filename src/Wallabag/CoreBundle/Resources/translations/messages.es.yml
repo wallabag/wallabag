@@ -285,6 +285,7 @@ howto:
     browser_addons:
         firefox: 'Extensión Firefox'
         chrome: 'Extensión Chrome'
+        opera: 'Extensión Opera'
     mobile_apps:
         android:
             via_f_droid: 'via F-Droid'
