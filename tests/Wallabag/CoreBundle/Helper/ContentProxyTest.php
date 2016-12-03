@@ -1,16 +1,17 @@
 <?php
 
-namespace tests\Wallabag\CoreBundle\Helper;
+namespace Tests\Wallabag\CoreBundle\Helper;
 
 use Psr\Log\NullLogger;
 use Wallabag\CoreBundle\Helper\ContentProxy;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\UserBundle\Entity\User;
-use Tests\Wallabag\CoreBundle\CoreKernelTestCase;
 
-class ContentProxyTest extends CoreKernelTestCase
+class ContentProxyTest extends \PHPUnit_Framework_TestCase
 {
+    private $fetchingErrorMessage = 'wallabag can\'t retrieve contents for this article. Please <a href="http://doc.wallabag.org/en/master/user/errors_during_fetching.html#how-can-i-help-to-fix-that">troubleshoot this issue</a>.';
+
     public function testWithBadUrl()
     {
         $tagger = $this->getTaggerMock();
