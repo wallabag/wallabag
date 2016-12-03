@@ -98,8 +98,6 @@ class ReadabilityImport extends AbstractImport
         $data = [
             'title' => $importedEntry['article__title'],
             'url' => $importedEntry['article__url'],
-            'content_type' => '',
-            'language' => '',
             'is_archived' => $importedEntry['archive'] || $this->markAsRead,
             'is_starred' => $importedEntry['favorite'],
             'created_at' => $importedEntry['date_added'],

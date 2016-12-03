@@ -74,8 +74,6 @@ class InstapaperImport extends AbstractImport
                 'status' => $data[3],
                 'is_archived' => $data[3] === 'Archive' || $data[3] === 'Starred',
                 'is_starred' => $data[3] === 'Starred',
-                'content_type' => '',
-                'language' => '',
                 'html' => false,
             ];
         }

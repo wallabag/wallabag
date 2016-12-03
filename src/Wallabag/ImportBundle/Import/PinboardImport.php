@@ -98,8 +98,6 @@ class PinboardImport extends AbstractImport
         $data = [
             'title' => $importedEntry['description'],
             'url' => $importedEntry['href'],
-            'content_type' => '',
-            'language' => '',
             'is_archived' => ('no' === $importedEntry['toread']) || $this->markAsRead,
             'is_starred' => false,
             'created_at' => $importedEntry['time'],
