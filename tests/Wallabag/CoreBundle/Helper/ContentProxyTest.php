@@ -1,14 +1,15 @@
 <?php
 
-namespace Tests\Wallabag\CoreBundle\Helper;
+namespace tests\Wallabag\CoreBundle\Helper;
 
 use Psr\Log\NullLogger;
 use Wallabag\CoreBundle\Helper\ContentProxy;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\UserBundle\Entity\User;
+use Tests\Wallabag\CoreBundle\CoreKernelTestCase;
 
-class ContentProxyTest extends \PHPUnit_Framework_TestCase
+class ContentProxyTest extends CoreKernelTestCase
 {
     public function testWithBadUrl()
     {
@@ -31,12 +32,12 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
                 'language' => '',
             ]);
 
-        $proxy = new ContentProxy($graby, $tagger, $this->getTagRepositoryMock(), $this->getLogger());
+        $proxy = new ContentProxy($graby, $tagger, $this->getTagRepositoryMock(), $this->getLogger(), $this->fetchingErrorMessage);
         $entry = $proxy->updateEntry(new Entry(new User()), 'http://user@:80');
 
         $this->assertEquals('http://user@:80', $entry->getUrl());
         $this->assertEmpty($entry->getTitle());
-        $this->assertEquals('<p>Unable to retrieve readable content.</p>', $entry->getContent());
+        $this->assertEquals($this->fetchingErrorMessage, $entry->getContent());
         $this->assertEmpty($entry->getPreviewPicture());
         $this->assertEmpty($entry->getMimetype());
         $this->assertEmpty($entry->getLanguage());
@@ -65,12 +66,12 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
                 'language' => '',
             ]);
 
-        $proxy = new ContentProxy($graby, $tagger, $this->getTagRepositoryMock(), $this->getLogger());
+        $proxy = new ContentProxy($graby, $tagger, $this->getTagRepositoryMock(), $this->getLogger(), $this->fetchingErrorMessage);
         $entry = $proxy->updateEntry(new Entry(new User()), 'http://0.0.0.0');
 
         $this->assertEquals('http://0.0.0.0', $entry->getUrl());
         $this->assertEmpty($entry->getTitle());
-        $this->assertEquals('<p>Unable to retrieve readable content.</p>', $entry->getContent());
+        $this->assertEquals($this->fetchingErrorMessage, $entry->getContent());
         $this->assertEmpty($entry->getPreviewPicture());
         $this->assertEmpty($entry->getMimetype());
         $this->assertEmpty($entry->getLanguage());
@@ -104,12 +105,12 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
                 ],
             ]);
 
-        $proxy = new ContentProxy($graby, $tagger, $this->getTagRepositoryMock(), $this->getLogger());
+        $proxy = new ContentProxy($graby, $tagger, $this->getTagRepositoryMock(), $this->getLogger(), $this->fetchingErrorMessage);
         $entry = $proxy->updateEntry(new Entry(new User()), 'http://domain.io');
 
         $this->assertEquals('http://domain.io', $entry->getUrl());
         $this->assertEquals('my title', $entry->getTitle());
-        $this->assertEquals('<p>Unable to retrieve readable content.</p><p><i>But we found a short description: </i></p>desc', $entry->getContent());
+        $this->assertEquals($this->fetchingErrorMessage . '<p><i>But we found a short description: </i></p>desc', $entry->getContent());
         $this->assertEmpty($entry->getPreviewPicture());
         $this->assertEmpty($entry->getLanguage());
         $this->assertEmpty($entry->getHttpStatus());
@@ -145,7 +146,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
                 ],
             ]);
 
-        $proxy = new ContentProxy($graby, $tagger, $this->getTagRepositoryMock(), $this->getLogger());
+        $proxy = new ContentProxy($graby, $tagger, $this->getTagRepositoryMock(), $this->getLogger(), $this->fetchingErrorMessage);
         $entry = $proxy->updateEntry(new Entry(new User()), 'http://0.0.0.0');
 
         $this->assertEquals('http://1.1.1.1', $entry->getUrl());
@@ -167,7 +168,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
 
         $graby = $this->getMockBuilder('Graby\Graby')->getMock();
 
-        $proxy = new ContentProxy($graby, $tagger, $this->getTagRepositoryMock(), $this->getLogger());
+        $proxy = new ContentProxy($graby, $tagger, $this->getTagRepositoryMock(), $this->getLogger(), $this->fetchingErrorMessage);
         $entry = $proxy->updateEntry(new Entry(new User()), 'http://0.0.0.0', [
             'html' => str_repeat('this is my content', 325),
             'title' => 'this is my title',
@@ -197,7 +198,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
             ->will($this->throwException(new \Exception()));
 
         $tagRepo = $this->getTagRepositoryMock();
-        $proxy = new ContentProxy($graby, $tagger, $tagRepo, $this->getLogger());
+        $proxy = new ContentProxy($graby, $tagger, $tagRepo, $this->getLogger(), $this->fetchingErrorMessage);
 
         $entry = $proxy->updateEntry(new Entry(new User()), 'http://0.0.0.0', [
             'html' => str_repeat('this is my content', 325),
@@ -217,7 +218,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $tagRepo = $this->getTagRepositoryMock();
-        $proxy = new ContentProxy($graby, $this->getTaggerMock(), $tagRepo, $this->getLogger());
+        $proxy = new ContentProxy($graby, $this->getTaggerMock(), $tagRepo, $this->getLogger(), $this->fetchingErrorMessage);
 
         $entry = new Entry(new User());
 
@@ -235,7 +236,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $tagRepo = $this->getTagRepositoryMock();
-        $proxy = new ContentProxy($graby, $this->getTaggerMock(), $tagRepo, $this->getLogger());
+        $proxy = new ContentProxy($graby, $this->getTaggerMock(), $tagRepo, $this->getLogger(), $this->fetchingErrorMessage);
 
         $entry = new Entry(new User());
 
@@ -253,7 +254,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $tagRepo = $this->getTagRepositoryMock();
-        $proxy = new ContentProxy($graby, $this->getTaggerMock(), $tagRepo, $this->getLogger());
+        $proxy = new ContentProxy($graby, $this->getTaggerMock(), $tagRepo, $this->getLogger(), $this->fetchingErrorMessage);
 
         $entry = new Entry(new User());
 
@@ -269,7 +270,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $tagRepo = $this->getTagRepositoryMock();
-        $proxy = new ContentProxy($graby, $this->getTaggerMock(), $tagRepo, $this->getLogger());
+        $proxy = new ContentProxy($graby, $this->getTaggerMock(), $tagRepo, $this->getLogger(), $this->fetchingErrorMessage);
 
         $entry = new Entry(new User());
 
@@ -285,7 +286,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $tagRepo = $this->getTagRepositoryMock();
-        $proxy = new ContentProxy($graby, $this->getTaggerMock(), $tagRepo, $this->getLogger());
+        $proxy = new ContentProxy($graby, $this->getTaggerMock(), $tagRepo, $this->getLogger(), $this->fetchingErrorMessage);
 
         $tagEntity = new Tag();
         $tagEntity->setLabel('tag1');
@@ -310,7 +311,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
         $tagRepo->expects($this->never())
             ->method('__call');
 
-        $proxy = new ContentProxy($graby, $this->getTaggerMock(), $tagRepo, $this->getLogger());
+        $proxy = new ContentProxy($graby, $this->getTaggerMock(), $tagRepo, $this->getLogger(), $this->fetchingErrorMessage);
 
         $tagEntity = new Tag();
         $tagEntity->setLabel('tag1');
