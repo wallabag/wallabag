@@ -86,6 +86,7 @@ services:
             - "@wallabag_core.rule_based_tagger"
             - "@wallabag_core.tag_repository"
             - "@logger"
+            - '%wallabag_core.fetching_error_message%'
 
     wallabag_core.rule_based_tagger:
         class: Wallabag\CoreBundle\Helper\RuleBasedTagger

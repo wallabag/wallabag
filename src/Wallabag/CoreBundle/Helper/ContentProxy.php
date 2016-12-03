@@ -21,14 +21,16 @@ class ContentProxy
     protected $logger;
     protected $tagRepository;
     protected $mimeGuesser;
+    protected $fetchingErrorMessage;
 
-    public function __construct(Graby $graby, RuleBasedTagger $tagger, TagRepository $tagRepository, LoggerInterface $logger)
+    public function __construct(Graby $graby, RuleBasedTagger $tagger, TagRepository $tagRepository, LoggerInterface $logger, $fetchingErrorMessage)
     {
         $this->graby = $graby;
         $this->tagger = $tagger;
         $this->logger = $logger;
         $this->tagRepository = $tagRepository;
         $this->mimeGuesser = new MimeTypeExtensionGuesser();
+        $this->fetchingErrorMessage = $fetchingErrorMessage;
     }
 
     /**
@@ -48,7 +50,10 @@ class ContentProxy
     {
         // do we have to fetch the content or the provided one is ok?
         if (empty($content) || false === $this->validateContent($content)) {
-            $content = $this->graby->fetchContent($url);
+            $fetchedContent = $this->graby->fetchContent($url);
+            if (empty($content) || $fetchedContent['html'] !== $this->fetchingErrorMessage) {
+                $content = $fetchedContent;
+            }
         }
 
         $title = $content['title'];
