@@ -63,7 +63,7 @@ class ContentProxy
 
         $html = $content['html'];
         if (false === $html) {
-            $html = '<p>Unable to retrieve readable content.</p>';
+            $html = $this->fetchingErrorMessage;
 
             if (isset($content['open_graph']['og_description'])) {
                 $html .= '<p><i>But we found a short description: </i></p>';

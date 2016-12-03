@@ -76,6 +76,7 @@ class InstapaperImport extends AbstractImport
                 'is_starred' => $data[3] === 'Starred',
                 'content_type' => '',
                 'language' => '',
+                'html' => false,
             ];
         }
         fclose($handle);

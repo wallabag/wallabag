@@ -103,6 +103,7 @@ class ReadabilityImport extends AbstractImport
             'is_archived' => $importedEntry['archive'] || $this->markAsRead,
             'is_starred' => $importedEntry['favorite'],
             'created_at' => $importedEntry['date_added'],
+            'html' => false,
         ];
 
         $entry = new Entry($this->user);

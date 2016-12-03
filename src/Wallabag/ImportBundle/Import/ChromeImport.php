@@ -37,7 +37,7 @@ class ChromeImport extends BrowserImport
     {
         $data = [
             'title' => $entry['name'],
-            'html' => '',
+            'html' => false,
             'url' => $entry['url'],
             'is_archived' => $this->markAsRead,
             'tags' => '',
