@@ -76,8 +76,8 @@ class ContentProxy
         $entry->setContent($html);
         $entry->setHttpStatus(isset($content['status']) ? $content['status'] : '');
 
-        $entry->setLanguage($content['language']);
-        $entry->setMimetype($content['content_type']);
+        $entry->setLanguage(isset($content['language']) ? $content['language'] : '');
+        $entry->setMimetype(isset($content['content_type']) ? $content['content_type'] : '');
         $entry->setReadingTime(Utils::getReadingTime($html));
 
         $domainName = parse_url($entry->getUrl(), PHP_URL_HOST);
@@ -90,7 +90,7 @@ class ContentProxy
         }
 
         // if content is an image define as a preview too
-        if (in_array($this->mimeGuesser->guess($content['content_type']), ['jpeg', 'jpg', 'gif', 'png'], true)) {
+        if (isset($content['content_type']) && in_array($this->mimeGuesser->guess($content['content_type']), ['jpeg', 'jpg', 'gif', 'png'], true)) {
             $entry->setPreviewPicture($content['url']);
         }
 
