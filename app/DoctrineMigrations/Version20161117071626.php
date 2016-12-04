@@ -29,8 +29,25 @@ class Version20161117071626 extends AbstractMigration implements ContainerAwareI
      */
     public function up(Schema $schema)
     {
-        $this->addSql('INSERT INTO '.$this->getTable('craue_config_setting')." (name, value, section) VALUES ('share_unmark', 0, 'entry')");
-        $this->addSql('INSERT INTO '.$this->getTable('craue_config_setting')." (name, value, section) VALUES ('unmark_url', 'https://unmark.it', 'entry')");
+        $share = $this->container
+            ->get('doctrine.orm.default_entity_manager')
+            ->getConnection()
+            ->fetchArray('SELECT * FROM '.$this->getTable('craue_config_setting').' WHERE name = "share_unmark"');
+
+        if (false === $share) {
+            $this->addSql('INSERT INTO '.$this->getTable('craue_config_setting')." (name, value, section) VALUES ('share_unmark', 0, 'entry')");
+        }
+
+        $unmark = $this->container
+            ->get('doctrine.orm.default_entity_manager')
+            ->getConnection()
+            ->fetchArray('SELECT * FROM '.$this->getTable('craue_config_setting').' WHERE name = "unmark_url"');
+
+        if (false === $unmark) {
+            $this->addSql('INSERT INTO '.$this->getTable('craue_config_setting')." (name, value, section) VALUES ('unmark_url', 'https://unmark.it', 'entry')");
+        }
+
+        $this->skipIf(false !== $share && false !== $unmark, 'It seems that you already played this migration.');
     }
 
     /**
