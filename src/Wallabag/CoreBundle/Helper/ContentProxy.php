@@ -51,6 +51,9 @@ class ContentProxy
         // do we have to fetch the content or the provided one is ok?
         if (empty($content) || false === $this->validateContent($content)) {
             $fetchedContent = $this->graby->fetchContent($url);
+
+            // when content is imported, we have information in $content
+            // in case fetching content goes bad, we'll keep the imported information instead of overriding them
             if (empty($content) || $fetchedContent['html'] !== $this->fetchingErrorMessage) {
                 $content = $fetchedContent;
             }
