@@ -519,6 +519,26 @@ user:
     search:
         placeholder: Filtere nach Benutzer oder E-Mail-Adresse
 
+site_credential:
+    # page_title: Site credentials management
+    # new_site_credential: Create a credential
+    # edit_site_credential: Edit an existing credential
+    # description: "Here you can manage all credentials for sites which required them (create, edit and delete), like a paywall, an authentication, etc."
+    list:
+        actions: Aktionen
+        edit_action: Bearbeiten
+        yes: Ja
+        no: Nein
+        # create_new_one: Create a new credential
+    form:
+        # username_label: 'Username'
+        # host_label: 'Host'
+        # password_label: 'Password'
+        save: Speichern
+        delete: Löschen
+        delete_confirm: Bist du sicher?
+        back_to_list: Zurück zur Liste
+
 error:
     page_title: Ein Fehler ist aufgetreten
 
@@ -571,3 +591,8 @@ flashes:
             added: 'Benutzer "%username%" hinzugefügt'
             updated: 'Benutzer "%username%" aktualisiert'
             deleted: 'Benutzer "%username%" gelöscht'
+    site_credential:
+        notice:
+            # added: 'Site credential for "%host%" added'
+            # updated: 'Site credential for "%host%" updated'
+            # deleted: 'Site credential for "%host%" deleted'

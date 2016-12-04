@@ -571,3 +571,8 @@ flashes:
             # added: 'User "%username%" added'
             # updated: 'User "%username%" updated'
             # deleted: 'User "%username%" deleted'
+    site_credential:
+        notice:
+            # added: 'Site credential for "%host%" added'
+            # updated: 'Site credential for "%host%" updated'
+            # deleted: 'Site credential for "%host%" deleted'

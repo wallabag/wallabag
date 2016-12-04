@@ -519,6 +519,26 @@ user:
     search:
         placeholder: "Filtrar per nom d'utilizaire o corrièl"
 
+site_credential:
+    # page_title: Site credentials management
+    # new_site_credential: Create a credential
+    # edit_site_credential: Edit an existing credential
+    # description: "Here you can manage all credentials for sites which required them (create, edit and delete), like a paywall, an authentication, etc."
+    list:
+         actions: 'Accions'
+         edit_action: 'Modificar'
+         yes: 'Òc'
+         no: 'Non'
+        # create_new_one: Create a new credential
+    form:
+        # username_label: 'Username'
+        # host_label: 'Host'
+        # password_label: 'Password'
+        save: 'Enregistrar'
+        delete: 'Suprimir'
+        delete_confirm: 'Sètz segur ?'
+        back_to_list: 'Tornar a la lista'
+
 error:
     page_title: Una error s'es produsida
 
@@ -571,3 +591,8 @@ flashes:
             added: 'Utilizaire "%username%" ajustat'
             updated: 'Utilizaire "%username%" mes a jorn'
             deleted: 'Utilizaire "%username%" suprimit'
+    site_credential:
+        notice:
+            # added: 'Site credential for "%host%" added'
+            # updated: 'Site credential for "%host%" updated'
+            # deleted: 'Site credential for "%host%" deleted'
