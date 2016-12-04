@@ -21,14 +21,16 @@ class ContentProxy
     protected $logger;
     protected $tagRepository;
     protected $mimeGuesser;
+    protected $fetchingErrorMessage;
 
-    public function __construct(Graby $graby, RuleBasedTagger $tagger, TagRepository $tagRepository, LoggerInterface $logger)
+    public function __construct(Graby $graby, RuleBasedTagger $tagger, TagRepository $tagRepository, LoggerInterface $logger, $fetchingErrorMessage)
     {
         $this->graby = $graby;
         $this->tagger = $tagger;
         $this->logger = $logger;
         $this->tagRepository = $tagRepository;
         $this->mimeGuesser = new MimeTypeExtensionGuesser();
+        $this->fetchingErrorMessage = $fetchingErrorMessage;
     }
 
     /**
@@ -48,7 +50,13 @@ class ContentProxy
     {
         // do we have to fetch the content or the provided one is ok?
         if (empty($content) || false === $this->validateContent($content)) {
-            $content = $this->graby->fetchContent($url);
+            $fetchedContent = $this->graby->fetchContent($url);
+
+            // when content is imported, we have information in $content
+            // in case fetching content goes bad, we'll keep the imported information instead of overriding them
+            if (empty($content) || $fetchedContent['html'] !== $this->fetchingErrorMessage) {
+                $content = $fetchedContent;
+            }
         }
 
         $title = $content['title'];
@@ -58,7 +66,7 @@ class ContentProxy
 
         $html = $content['html'];
         if (false === $html) {
-            $html = '<p>Unable to retrieve readable content.</p>';
+            $html = $this->fetchingErrorMessage;
 
             if (isset($content['open_graph']['og_description'])) {
                 $html .= '<p><i>But we found a short description: </i></p>';
@@ -71,8 +79,8 @@ class ContentProxy
         $entry->setContent($html);
         $entry->setHttpStatus(isset($content['status']) ? $content['status'] : '');
 
-        $entry->setLanguage($content['language']);
-        $entry->setMimetype($content['content_type']);
+        $entry->setLanguage(isset($content['language']) ? $content['language'] : '');
+        $entry->setMimetype(isset($content['content_type']) ? $content['content_type'] : '');
         $entry->setReadingTime(Utils::getReadingTime($html));
 
         $domainName = parse_url($entry->getUrl(), PHP_URL_HOST);
@@ -85,7 +93,7 @@ class ContentProxy
         }
 
         // if content is an image define as a preview too
-        if (in_array($this->mimeGuesser->guess($content['content_type']), ['jpeg', 'jpg', 'gif', 'png'], true)) {
+        if (isset($content['content_type']) && in_array($this->mimeGuesser->guess($content['content_type']), ['jpeg', 'jpg', 'gif', 'png'], true)) {
             $entry->setPreviewPicture($content['url']);
         }
 

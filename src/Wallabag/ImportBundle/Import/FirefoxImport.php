@@ -37,7 +37,7 @@ class FirefoxImport extends BrowserImport
     {
         $data = [
             'title' => $entry['title'],
-            'html' => '',
+            'html' => false,
             'url' => $entry['uri'],
             'is_archived' => $this->markAsRead,
             'tags' => '',
