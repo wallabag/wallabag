@@ -515,6 +515,29 @@ class ConfigControllerTest extends WallabagCoreTestCase
         }
     }
 
+    public function testTaggingRuleTooLong()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/config');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $form = $crawler->filter('button[id=tagging_rule_save]')->form();
+
+        $crawler = $client->submit($form, [
+            'tagging_rule[rule]' => str_repeat('title', 60),
+            'tagging_rule[tags]' => 'cool tag',
+        ]);
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
+
+        $this->assertContains('255 characters', $body[0]);
+    }
+
     public function testDeletingTaggingRuleFromAnOtherUser()
     {
         $this->logInAs('bob');
