@@ -41,6 +41,7 @@ services:
         arguments:
             -
                 error_message: '%wallabag_core.fetching_error_message%'
+                error_message_title: '%wallabag_core.fetching_error_message_title%'
             - "@wallabag_core.guzzle.http_client"
             - "@wallabag_core.graby.config_builder"
         calls:

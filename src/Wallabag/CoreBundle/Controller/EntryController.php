@@ -60,9 +60,6 @@ class EntryController extends Controller
      */
     private function updateEntry(Entry $entry, $prefixMessage = 'entry_saved')
     {
-        // put default title in case of fetching content failed
-        $entry->setTitle('No title found');
-
         $message = 'flashes.entry.notice.'.$prefixMessage;
 
         try {
