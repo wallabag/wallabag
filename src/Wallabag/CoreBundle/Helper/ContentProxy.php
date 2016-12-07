@@ -40,8 +40,6 @@ class ContentProxy
      * @param Entry  $entry   Entry to update
      * @param string $url     Url to grab content for
      * @param array  $content An array with AT LEAST keys title, html, url to skip the fetchContent from the url
-     *
-     * @return Entry
      */
     public function updateEntry(Entry $entry, $url, array $content = [])
     {
@@ -130,8 +128,6 @@ class ContentProxy
                 'error_msg' => $e->getMessage(),
             ]);
         }
-
-        return $entry;
     }
 
     /**

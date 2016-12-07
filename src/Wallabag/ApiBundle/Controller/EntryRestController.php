@@ -315,7 +315,7 @@ class EntryRestController extends WallabagRestController
         }
 
         try {
-            $entry = $this->get('wallabag_core.content_proxy')->updateEntry(
+            $this->get('wallabag_core.content_proxy')->updateEntry(
                 $entry,
                 $url,
                 [
@@ -428,7 +428,7 @@ class EntryRestController extends WallabagRestController
         $this->validateUserAccess($entry->getUser()->getId());
 
         try {
-            $entry = $this->get('wallabag_core.content_proxy')->updateEntry($entry, $entry->getUrl());
+            $this->get('wallabag_core.content_proxy')->updateEntry($entry, $entry->getUrl());
         } catch (\Exception $e) {
             $this->get('logger')->error('Error while saving an entry', [
                 'exception' => $e,

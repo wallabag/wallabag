@@ -91,13 +91,11 @@ abstract class AbstractImport implements ImportInterface
      * @param Entry  $entry   Entry to update
      * @param string $url     Url to grab content for
      * @param array  $content An array with AT LEAST keys title, html, url, language & content_type to skip the fetchContent from the url
-     *
-     * @return Entry
      */
     protected function fetchContent(Entry $entry, $url, array $content = [])
     {
         try {
-            return $this->contentProxy->updateEntry($entry, $url, $content);
+            $this->contentProxy->updateEntry($entry, $url, $content);
         } catch (\Exception $e) {
             return $entry;
         }
