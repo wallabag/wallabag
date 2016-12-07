@@ -100,7 +100,7 @@ class WallabagV2ImportTest extends \PHPUnit_Framework_TestCase
 
         $this->contentProxy
             ->expects($this->exactly(2))
-            ->method('updateEntry')
+            ->method('importEntry')
             ->willReturn(new Entry($this->user));
 
         $res = $wallabagV2Import->import();
@@ -129,7 +129,7 @@ class WallabagV2ImportTest extends \PHPUnit_Framework_TestCase
 
         $this->contentProxy
             ->expects($this->exactly(2))
-            ->method('updateEntry')
+            ->method('importEntry')
             ->willReturn(new Entry($this->user));
 
         // check that every entry persisted are archived
@@ -165,7 +165,7 @@ class WallabagV2ImportTest extends \PHPUnit_Framework_TestCase
 
         $this->contentProxy
             ->expects($this->never())
-            ->method('updateEntry');
+            ->method('importEntry');
 
         $producer = $this->getMockBuilder('OldSound\RabbitMqBundle\RabbitMq\Producer')
             ->disableOriginalConstructor()
@@ -201,7 +201,7 @@ class WallabagV2ImportTest extends \PHPUnit_Framework_TestCase
 
         $this->contentProxy
             ->expects($this->never())
-            ->method('updateEntry');
+            ->method('importEntry');
 
         $factory = new RedisMockFactory();
         $redisMock = $factory->getAdapter('Predis\Client', true);
@@ -278,7 +278,7 @@ class WallabagV2ImportTest extends \PHPUnit_Framework_TestCase
 
         $this->contentProxy
             ->expects($this->exactly(2))
-            ->method('updateEntry')
+            ->method('importEntry')
             ->will($this->throwException(new \Exception()));
 
         $res = $wallabagV2Import->import();

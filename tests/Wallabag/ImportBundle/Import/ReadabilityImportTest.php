@@ -89,7 +89,7 @@ class ReadabilityImportTest extends \PHPUnit_Framework_TestCase
 
         $this->contentProxy
             ->expects($this->exactly(3))
-            ->method('updateEntry')
+            ->method('importEntry')
             ->willReturn($entry);
 
         $res = $readabilityImport->import();
@@ -118,7 +118,7 @@ class ReadabilityImportTest extends \PHPUnit_Framework_TestCase
 
         $this->contentProxy
             ->expects($this->exactly(1))
-            ->method('updateEntry')
+            ->method('importEntry')
             ->willReturn(new Entry($this->user));
 
         // check that every entry persisted are archived
@@ -158,7 +158,7 @@ class ReadabilityImportTest extends \PHPUnit_Framework_TestCase
 
         $this->contentProxy
             ->expects($this->never())
-            ->method('updateEntry');
+            ->method('importEntry');
 
         $producer = $this->getMockBuilder('OldSound\RabbitMqBundle\RabbitMq\Producer')
             ->disableOriginalConstructor()
@@ -198,7 +198,7 @@ class ReadabilityImportTest extends \PHPUnit_Framework_TestCase
 
         $this->contentProxy
             ->expects($this->never())
-            ->method('updateEntry');
+            ->method('importEntry');
 
         $factory = new RedisMockFactory();
         $redisMock = $factory->getAdapter('Predis\Client', true);

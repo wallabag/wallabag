@@ -7,6 +7,7 @@ use Psr\Log\LoggerInterface;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Tools\Utils;
 use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeExtensionGuesser;
+use Symfony\Component\Config\Definition\Exception\Exception;
 
 /**
  * This kind of proxy class take care of getting the content from an url
@@ -31,34 +32,58 @@ class ContentProxy
     }
 
     /**
-     * Fetch content using graby and hydrate given $entry with results information.
-     * In case we couldn't find content, we'll try to use Open Graph data.
-     *
-     * We can also force the content, in case of an import from the v1 for example, so the function won't
-     * fetch the content from the website but rather use information given with the $content parameter.
+     * Update existing entry by fetching from URL using Graby.
      *
      * @param Entry  $entry   Entry to update
      * @param string $url     Url to grab content for
-     * @param array  $content An array with AT LEAST keys title, html, url to skip the fetchContent from the url
      */
-    public function updateEntry(Entry $entry, $url, array $content = [])
+    public function updateEntry(Entry $entry, $url)
     {
-        // ensure content is a bit cleaned up
-        if (!empty($content['html'])) {
-            $content['html'] = $this->graby->cleanupHtml($content['html'], $url);
-        }
+        $content = $this->graby->fetchContent($url);
 
-        // do we have to fetch the content or the provided one is ok?
-        if (empty($content) || false === $this->validateContent($content)) {
-            $fetchedContent = $this->graby->fetchContent($url);
+        $this->stockEntry($entry, $content);
+    }
+
+    /**
+     * Import entry using either fetched or provided content.
+     *
+     * @param Entry  $entry                Entry to update
+     * @param array  $content              Array with content provided for import with AT LEAST keys title, html, url to skip the fetchContent from the url
+     * @param bool   $disableContentUpdate Whether to skip trying to fetch content using Graby
+     */
+    public function importEntry(Entry $entry, array $content, $disableContentUpdate = false)
+    {
+        $this->validateContent($content);
+
+        if (false === $disableContentUpdate) {
+            try {
+                $fetchedContent = $this->graby->fetchContent($content['url']);
+            } catch (\Exception $e) {
+                $this->logger->error('Error while trying to fetch content from URL.', [
+                    'entry_url' => $content['url'],
+                    'error_msg' => $e->getMessage(),
+                ]);
+            }
 
             // when content is imported, we have information in $content
             // in case fetching content goes bad, we'll keep the imported information instead of overriding them
-            if (empty($content) || $fetchedContent['html'] !== $this->fetchingErrorMessage) {
+            if ($fetchedContent['html'] !== $this->fetchingErrorMessage) {
                 $content = $fetchedContent;
             }
         }
 
+        $this->stockEntry($entry, $content);
+    }
+
+    /**
+     * Stock entry with fetched or imported content.
+     * Will fall back to OpenGraph data if available.
+     *
+     * @param Entry  $entry   Entry to stock
+     * @param array  $content Array with at least title and URL
+     */
+    private function stockEntry(Entry $entry, array $content)
+    {
         $title = $content['title'];
         if (!$title && !empty($content['open_graph']['og_title'])) {
             $title = $content['open_graph']['og_title'];
@@ -74,7 +99,7 @@ class ContentProxy
             }
         }
 
-        $entry->setUrl($content['url'] ?: $url);
+        $entry->setUrl($content['url']);
         $entry->setTitle($title);
         $entry->setContent($html);
         $entry->setHttpStatus(isset($content['status']) ? $content['status'] : '');
@@ -124,22 +149,29 @@ class ContentProxy
             $this->tagger->tag($entry);
         } catch (\Exception $e) {
             $this->logger->error('Error while trying to automatically tag an entry.', [
-                'entry_url' => $url,
+                'entry_url' => $content['url'],
                 'error_msg' => $e->getMessage(),
             ]);
         }
     }
 
     /**
-     * Validate that the given content as enough value to be used
-     * instead of fetch the content from the url.
+     * Validate that the given content has at least a title, an html and a url.
      *
      * @param array $content
-     *
-     * @return bool true if valid otherwise false
      */
     private function validateContent(array $content)
     {
-        return !empty($content['title']) && !empty($content['html']) && !empty($content['url']);
+        if (!empty($content['title']))) {
+            throw new Exception('Missing title from imported entry!');
+        }
+
+        if (!empty($content['url']))) {
+            throw new Exception('Missing URL from imported entry!');
+        }
+
+        if (!empty($content['html']))) {
+            throw new Exception('Missing html from imported entry!');
+        }
     }
 }

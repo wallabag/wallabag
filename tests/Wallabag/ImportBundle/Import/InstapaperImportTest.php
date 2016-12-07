@@ -104,7 +104,7 @@ class InstapaperImportTest extends \PHPUnit_Framework_TestCase
 
         $this->contentProxy
             ->expects($this->exactly(4))
-            ->method('updateEntry')
+            ->method('importEntry')
             ->willReturn($entry);
 
         $res = $instapaperImport->import();
@@ -133,7 +133,7 @@ class InstapaperImportTest extends \PHPUnit_Framework_TestCase
 
         $this->contentProxy
             ->expects($this->once())
-            ->method('updateEntry')
+            ->method('importEntry')
             ->willReturn(new Entry($this->user));
 
         // check that every entry persisted are archived
@@ -173,7 +173,7 @@ class InstapaperImportTest extends \PHPUnit_Framework_TestCase
 
         $this->contentProxy
             ->expects($this->never())
-            ->method('updateEntry');
+            ->method('importEntry');
 
         $producer = $this->getMockBuilder('OldSound\RabbitMqBundle\RabbitMq\Producer')
             ->disableOriginalConstructor()
@@ -213,7 +213,7 @@ class InstapaperImportTest extends \PHPUnit_Framework_TestCase
 
         $this->contentProxy
             ->expects($this->never())
-            ->method('updateEntry');
+            ->method('importEntry');
 
         $factory = new RedisMockFactory();
         $redisMock = $factory->getAdapter('Predis\Client', true);

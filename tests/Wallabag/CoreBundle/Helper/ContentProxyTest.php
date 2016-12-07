@@ -257,9 +257,8 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
 
         $proxy = new ContentProxy((new Graby()), $tagger, $this->getLogger(), $this->fetchingErrorMessage);
         $entry = new Entry(new User());
-        $proxy->updateEntry(
+        $proxy->importEntry(
             $entry,
-            'http://0.0.0.0',
             [
                 'html' => str_repeat('this is my content', 325),
                 'title' => 'this is my title',
@@ -294,7 +293,6 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
         $entry = new Entry(new User());
         $proxy->updateEntry(
             $entry,
-            'http://0.0.0.0',
             [
                 'html' => str_repeat('this is my content', 325),
                 'title' => 'this is my title',
@@ -334,13 +332,14 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
         $proxy = new ContentProxy($graby, $tagger, $this->getLogger(), $this->fetchingErrorMessage);
 
         $entry = new Entry(new User());
-        $proxy->updateEntry($entry, 'http://0.0.0.0', [
+        $content = array(
             'html' => str_repeat('this is my content', 325),
             'title' => 'this is my title',
             'url' => 'http://1.1.1.1',
             'content_type' => 'text/html',
             'language' => 'fr',
-        ]);
+        );
+        $proxy->importEntry($entry, $content, true);
 
         $this->assertCount(0, $entry->getTags());
     }

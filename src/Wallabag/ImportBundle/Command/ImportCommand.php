@@ -5,6 +5,7 @@ namespace Wallabag\ImportBundle\Command;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -19,7 +20,7 @@ class ImportCommand extends ContainerAwareCommand
             ->addArgument('filepath', InputArgument::REQUIRED, 'Path to the JSON file')
             ->addOption('importer', null, InputArgument::OPTIONAL, 'The importer to use: v1, v2, instapaper, pinboard, readability, firefox or chrome', 'v1')
             ->addOption('markAsRead', null, InputArgument::OPTIONAL, 'Mark all entries as read', false)
-            ->addOption('useUserId', null, InputArgument::OPTIONAL, 'Use user id instead of username to find account', false)
+            ->addOption('disableContentUpdate', null, InputOption::VALUE_NONE, 'Disable fetching updated content from URL')
         ;
     }
 
@@ -69,6 +70,7 @@ class ImportCommand extends ContainerAwareCommand
         }
 
         $import->setMarkAsRead($input->getOption('markAsRead'));
+        $import->setDisableContentUpdate($input->getOption('disableContentUpdate'));
         $import->setUser($user);
 
         $res = $import
