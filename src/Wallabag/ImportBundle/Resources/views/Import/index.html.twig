@@ -2,6 +2,12 @@
 
 {% block title %}{{ 'import.page_title'|trans }}{% endblock %}
 
+{% block messages %}
+    {{ render(controller("WallabagImportBundle:Import:checkQueue")) }}
+
+    {{ parent() }}
+{% endblock %}
+
 {% block content %}
 <div class="row">
     <div class="col s12">

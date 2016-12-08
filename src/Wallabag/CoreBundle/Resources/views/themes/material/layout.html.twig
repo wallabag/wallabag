@@ -19,8 +19,6 @@
             Materialize.toast('{{ flashMessage|trans }}', 4000);
         </script>
     {% endfor %}
-
-    {{ render(controller("WallabagImportBundle:Import:checkQueue")) }}
 {% endblock %}
 
 {% block menu %}
