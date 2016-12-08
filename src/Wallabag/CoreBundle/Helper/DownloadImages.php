@@ -36,7 +36,7 @@ class DownloadImages
     {
         // if folder doesn't exist, attempt to create one and store the folder name in property $folder
         if (!file_exists($this->baseFolder)) {
-            mkdir($this->baseFolder, 0777, true);
+            mkdir($this->baseFolder, 0755, true);
         }
     }
 
