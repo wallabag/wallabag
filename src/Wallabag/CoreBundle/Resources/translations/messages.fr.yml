@@ -514,7 +514,7 @@ user:
         twofactor_label: "Double authentification"
         save: "Sauvegarder"
         delete: "Supprimer"
-        delete_confirm: "Voulez-vous vraiment ?"
+        delete_confirm: "Êtes-vous sur ?"
         back_to_list: "Revenir à la liste"
     search:
         placeholder: "Filtrer par nom d’utilisateur ou email"
@@ -523,7 +523,7 @@ site_credential:
     page_title: Gestion des accès aux sites
     new_site_credential: Créer un accès à un site
     edit_site_credential: Éditer l'accès d'un site
-    description: "Ici vous pouvez gérer les accès aux différents sites. Ces accès permettent de récupérer des contenus sur des sites qui requiert une authentification ou un paywall"
+    description: "Ici vous pouvez gérer les accès aux différents sites. Ces accès permettent de récupérer des contenus sur des sites qui requièrent une authentification ou un paywall"
     list:
         actions: Actions
         edit_action: Éditer
@@ -536,7 +536,7 @@ site_credential:
         password_label: 'Mot de passe'
         save: "Sauvegarder"
         delete: "Supprimer"
-        delete_confirm: "Voulez-vous vraiment ?"
+        delete_confirm: "Êtes-vous sur ?"
         back_to_list: "Revenir à la liste"
 
 error:

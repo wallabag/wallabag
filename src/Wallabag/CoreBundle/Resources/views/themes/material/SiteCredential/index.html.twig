@@ -25,7 +25,7 @@
                                     <td>{{ credential.host }}</td>
                                     <td>{{ credential.username }}</td>
                                     <td>
-                                        <a href="{{ path('site_credential_edit', { 'id': credential.id }) }}">{{ 'site_credential.list.edit_action'|trans }}</a>
+                                        <a href="{{ path('site_credentials_edit', { 'id': credential.id }) }}">{{ 'site_credential.list.edit_action'|trans }}</a>
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -33,7 +33,7 @@
                         </table>
                         <br />
                         <p>
-                            <a href="{{ path('site_credential_new') }}" class="waves-effect waves-light btn">{{ 'site_credential.list.create_new_one'|trans }}</a>
+                            <a href="{{ path('site_credentials_new') }}" class="waves-effect waves-light btn">{{ 'site_credential.list.create_new_one'|trans }}</a>
                         </p>
                     </div>
                 </div>
