@@ -21,8 +21,10 @@ class CreateConfigListener implements EventSubscriberInterface
     private $rssLimit;
     private $language;
     private $readingSpeed;
+    private $actionMarkAsRead;
+    private $listMode;
 
-    public function __construct(EntityManager $em, $theme, $itemsOnPage, $rssLimit, $language, $readingSpeed)
+    public function __construct(EntityManager $em, $theme, $itemsOnPage, $rssLimit, $language, $readingSpeed, $actionMarkAsRead, $listMode)
     {
         $this->em = $em;
         $this->theme = $theme;
@@ -30,6 +32,8 @@ class CreateConfigListener implements EventSubscriberInterface
         $this->rssLimit = $rssLimit;
         $this->language = $language;
         $this->readingSpeed = $readingSpeed;
+        $this->actionMarkAsRead = $actionMarkAsRead;
+        $this->listMode = $listMode;
     }
 
     public static function getSubscribedEvents()
@@ -51,6 +55,8 @@ class CreateConfigListener implements EventSubscriberInterface
         $config->setRssLimit($this->rssLimit);
         $config->setLanguage($this->language);
         $config->setReadingSpeed($this->readingSpeed);
+        $config->setActionMarkAsRead($this->actionMarkAsRead);
+        $config->setListMode($this->listMode);
 
         $this->em->persist($config);
         $this->em->flush();
