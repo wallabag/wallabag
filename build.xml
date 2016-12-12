@@ -34,7 +34,7 @@
         </exec>
     </target>
 
-    <target name="db_mysql" description="Run test for MySQL">
+    <target name="prepare_mysql" description="Run test for MySQL">
         <delete dir="${basedir}/app/config/parameters.yml"/>
         <exec executable="cp">
             <arg value="${basedir}/app/config/tests/parameters_test.mysql.yml"/>
@@ -76,7 +76,7 @@
         </exec>
     </target>
 
-    <target name="db_sqlite" description="Run test for SQLite">
+    <target name="prepare_sqlite" description="Run test for SQLite">
         <delete dir="${basedir}/app/config/parameters.yml"/>
         <exec executable="cp">
             <arg value="${basedir}/app/config/tests/parameters_test.sqlite.yml"/>
@@ -118,7 +118,7 @@
         </exec>
     </target>
 
-    <target name="db_pgsql" description="Run test for PostgreSQL">
+    <target name="prepare_pgsql" description="Run test for PostgreSQL">
         <delete dir="${basedir}/app/config/parameters.yml"/>
         <exec executable="cp">
             <arg value="${basedir}/app/config/tests/parameters_test.pgsql.yml"/>
@@ -146,11 +146,16 @@
             <arg value="data/sql/pgsql_base.sql"/>
             <arg value="--env=test"/>
         </exec>
-        <exec executable="php">
-            <arg value="${basedir}/bin/console"/>
-            <arg value="doctrine:migrations:migrate"/>
-            <arg value="--no-interaction"/>
-            <arg value="--env=test"/>
+        <exec executable="psql">
+            <!-- psql -h host -d database -U username -f data/sql/pgsql_base.sql -->
+            <arg value="-h"/>
+            <arg value="localhost"/>
+            <arg value="-d"/>
+            <arg value="wallabag_test"/>
+            <arg value="-U"/>
+            <arg value="travis"/>
+            <arg value="-f"/>
+            <arg value="data/sql/pgsql_base.sql"/>
         </exec>
         <exec executable="php">
             <arg value="${basedir}/bin/console"/>
