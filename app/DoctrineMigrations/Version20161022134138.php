@@ -33,6 +33,12 @@ class Version20161022134138 extends AbstractMigration implements ContainerAwareI
 
         $this->addSql('ALTER DATABASE '.$this->container->getParameter('database_name').' CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;');
 
+        // convert field length for utf8mb4
+        // http://stackoverflow.com/a/31474509/569101
+        $this->addSql('ALTER TABLE '.$this->getTable('user').' CHANGE confirmation_token confirmation_token VARCHAR(180) NOT NULL;');
+        $this->addSql('ALTER TABLE '.$this->getTable('user').' CHANGE salt salt VARCHAR(180) NOT NULL;');
+        $this->addSql('ALTER TABLE '.$this->getTable('user').' CHANGE password password VARCHAR(180) NOT NULL;');
+
         $this->addSql('ALTER TABLE '.$this->getTable('annotation').' CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;');
         $this->addSql('ALTER TABLE '.$this->getTable('entry').' CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;');
         $this->addSql('ALTER TABLE '.$this->getTable('tag').' CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;');

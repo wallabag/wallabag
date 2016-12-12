@@ -36,7 +36,7 @@ class Version20161031132655 extends AbstractMigration implements ContainerAwareI
 
         $this->skipIf(false !== $images, 'It seems that you already played this migration.');
 
-        $this->addSql('INSERT INTO "'.$this->getTable('craue_config_setting')."\" (name, value, section) VALUES ('download_images_enabled', 0, 'misc')");
+        $this->addSql('INSERT INTO '.$this->getTable('craue_config_setting')." (name, value, section) VALUES ('download_images_enabled', 0, 'misc')");
     }
 
     /**
@@ -44,6 +44,6 @@ class Version20161031132655 extends AbstractMigration implements ContainerAwareI
      */
     public function down(Schema $schema)
     {
-        $this->addSql('DELETE FROM "'.$this->getTable('craue_config_setting')."\" WHERE name = 'download_images_enabled';");
+        $this->addSql('DELETE FROM '.$this->getTable('craue_config_setting')." WHERE name = 'download_images_enabled';");
     }
 }
