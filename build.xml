@@ -98,16 +98,6 @@
             <arg value="doctrine:database:create"/>
             <arg value="--env=test"/>
         </exec>
-        <!--
-            Looks like it doesn't work and generate an error:
-            There is no table with name '/home/jeremy/github/wallabag/app/..wallabag_entry' in the schema.
-
-        <exec executable="php">
-            <arg value="${basedir}/bin/console"/>
-            <arg value="doctrine:database:import"/>
-            <arg value="data/sql/sqlite_base.sql"/>
-            <arg value="--env=test"/>
-        </exec> -->
         <exec executable="php">
             <arg value="${basedir}/bin/console"/>
             <arg value="doctrine:schema:create"/>
@@ -156,7 +146,6 @@
             <arg value="--env=test"/>
         </exec>
         <exec executable="psql">
-            <!-- psql -h host -d database -U username -f data/sql/pgsql_base.sql -->
             <arg value="-h"/>
             <arg value="localhost"/>
             <arg value="-d"/>
