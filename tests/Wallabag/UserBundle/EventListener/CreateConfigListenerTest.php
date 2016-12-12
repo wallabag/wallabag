@@ -31,6 +31,8 @@ class CreateConfigListenerTest extends \PHPUnit_Framework_TestCase
             20,
             50,
             'fr',
+            1,
+            1,
             1
         );
 

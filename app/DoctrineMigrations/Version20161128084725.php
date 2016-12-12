@@ -35,7 +35,7 @@ class Version20161128084725 extends AbstractMigration implements ContainerAwareI
         $configTable = $schema->getTable($this->getTable('config'));
         $this->skipIf($configTable->hasColumn('list_mode'), 'It seems that you already played this migration.');
 
-        $configTable->addColumn('list_mode', 'integer');
+        $configTable->addColumn('list_mode', 'integer', ['notnull' => false]);
     }
 
     /**

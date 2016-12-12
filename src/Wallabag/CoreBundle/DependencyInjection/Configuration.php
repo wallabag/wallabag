@@ -41,6 +41,12 @@ class Configuration implements ConfigurationInterface
                 ->end()
                 ->scalarNode('fetching_error_message')
                 ->end()
+                ->scalarNode('action_mark_as_read')
+                    ->defaultValue(1)
+                ->end()
+                ->scalarNode('list_mode')
+                    ->defaultValue(1)
+                ->end()
             ->end()
         ;
 

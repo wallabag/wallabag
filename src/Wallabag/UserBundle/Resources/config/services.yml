@@ -31,5 +31,7 @@ services:
             - "%wallabag_core.rss_limit%"
             - "%wallabag_core.language%"
             - "%wallabag_core.reading_speed%"
+            - "%wallabag_core.action_mark_as_read%"
+            - "%wallabag_core.list_mode%"
         tags:
             - { name: kernel.event_subscriber }

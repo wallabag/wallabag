@@ -22,6 +22,7 @@ class LoadConfigData extends AbstractFixture implements OrderedFixtureInterface
         $adminConfig->setLanguage('en');
         $adminConfig->setPocketConsumerKey('xxxxx');
         $adminConfig->setActionMarkAsRead(0);
+        $adminConfig->setListMode(0);
 
         $manager->persist($adminConfig);
 
@@ -34,6 +35,7 @@ class LoadConfigData extends AbstractFixture implements OrderedFixtureInterface
         $bobConfig->setLanguage('fr');
         $bobConfig->setPocketConsumerKey(null);
         $bobConfig->setActionMarkAsRead(1);
+        $bobConfig->setListMode(1);
 
         $manager->persist($bobConfig);
 
@@ -46,6 +48,7 @@ class LoadConfigData extends AbstractFixture implements OrderedFixtureInterface
         $emptyConfig->setLanguage('en');
         $emptyConfig->setPocketConsumerKey(null);
         $emptyConfig->setActionMarkAsRead(0);
+        $emptyConfig->setListMode(0);
 
         $manager->persist($emptyConfig);
 
