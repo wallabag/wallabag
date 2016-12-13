@@ -125,9 +125,7 @@ class EntryRepository extends EntityRepository
     {
         return $this
             ->getBuilderByUser($userId)
-            ->leftJoin('e.tags', 't')
-            ->groupBy('e.id')
-            ->having('count(t.id) = 0');
+            ->andWhere('size(e.tags) = 0');
     }
 
     /**
