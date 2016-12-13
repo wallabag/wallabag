@@ -20,8 +20,7 @@ class EntryRepository extends EntityRepository
     private function getBuilderByUser($userId)
     {
         return $this->createQueryBuilder('e')
-            ->leftJoin('e.user', 'u')
-            ->andWhere('u.id = :userId')->setParameter('userId', $userId)
+            ->andWhere('e.user = :userId')->setParameter('userId', $userId)
             ->orderBy('e.createdAt', 'desc')
         ;
     }
