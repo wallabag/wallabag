@@ -35,7 +35,7 @@ class Version20161022134138 extends AbstractMigration implements ContainerAwareI
 
         // convert field length for utf8mb4
         // http://stackoverflow.com/a/31474509/569101
-        $this->addSql('ALTER TABLE '.$this->getTable('user').' CHANGE confirmation_token confirmation_token VARCHAR(180) NOT NULL;');
+        $this->addSql('ALTER TABLE '.$this->getTable('user').' CHANGE confirmation_token confirmation_token VARCHAR(180) DEFAULT NULL;');
         $this->addSql('ALTER TABLE '.$this->getTable('user').' CHANGE salt salt VARCHAR(180) NOT NULL;');
         $this->addSql('ALTER TABLE '.$this->getTable('user').' CHANGE password password VARCHAR(180) NOT NULL;');
 
