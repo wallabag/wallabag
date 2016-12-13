@@ -31,7 +31,7 @@ class Version20161022134138 extends AbstractMigration implements ContainerAwareI
     {
         $this->skipIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'This migration only apply to MySQL');
 
-        $this->addSql('ALTER DATABASE '.$this->container->getParameter('database_name').' CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;');
+        $this->addSql('ALTER DATABASE '.$this->connection->getParams()['dbname'].' CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;');
 
         // convert field length for utf8mb4
         // http://stackoverflow.com/a/31474509/569101
@@ -62,7 +62,7 @@ class Version20161022134138 extends AbstractMigration implements ContainerAwareI
     {
         $this->skipIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'This migration only apply to MySQL');
 
-        $this->addSql('ALTER DATABASE '.$this->container->getParameter('database_name').' CHARACTER SET = utf8 COLLATE = utf8_unicode_ci;');
+        $this->addSql('ALTER DATABASE '.$this->connection->getParams()['dbname'].' CHARACTER SET = utf8 COLLATE = utf8_unicode_ci;');
 
         $this->addSql('ALTER TABLE '.$this->getTable('annotation').' CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;');
         $this->addSql('ALTER TABLE '.$this->getTable('entry').' CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;');
