@@ -26,7 +26,7 @@ class InstapaperController extends Controller
             $instapaper->setProducer($this->get('wallabag_import.producer.redis.instapaper'));
         }
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $file = $form->get('file')->getData();
             $markAsRead = $form->get('mark_as_read')->getData();
             $name = 'instapaper_'.$this->getUser()->getId().'.csv';

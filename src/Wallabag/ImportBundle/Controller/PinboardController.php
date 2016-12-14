@@ -26,7 +26,7 @@ class PinboardController extends Controller
             $pinboard->setProducer($this->get('wallabag_import.producer.redis.pinboard'));
         }
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $file = $form->get('file')->getData();
             $markAsRead = $form->get('mark_as_read')->getData();
             $name = 'pinboard_'.$this->getUser()->getId().'.json';

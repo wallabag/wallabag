@@ -17,10 +17,6 @@ wallabag_api:
     type: annotation
     prefix: /
 
-wallabag_api:
-    resource: "@WallabagApiBundle/Resources/config/routing.yml"
-    prefix: /
-
 app:
     resource: "@WallabagCoreBundle/Controller/"
     type: annotation
