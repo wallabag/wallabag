@@ -171,7 +171,7 @@ class EntryRepository extends EntityRepository
             $qb->orderBy('e.updatedAt', $order);
         }
 
-        $pagerAdapter = new DoctrineORMAdapter($qb);
+        $pagerAdapter = new DoctrineORMAdapter($qb, true, false);
 
         return new Pagerfanta($pagerAdapter);
     }
