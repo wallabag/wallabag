@@ -300,7 +300,7 @@ old_sound_rabbit_mq:
             queue_options:
                 name: 'wallabag.import.pocket'
             callback: wallabag_import.consumer.amqp.pocket
-            qos_options: {prefetch_count: 10}
+            qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
         import_readability:
             connection: default
             exchange_options:
@@ -309,7 +309,7 @@ old_sound_rabbit_mq:
             queue_options:
                 name: 'wallabag.import.readability'
             callback: wallabag_import.consumer.amqp.readability
-            qos_options: {prefetch_count: 10}
+            qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
         import_instapaper:
             connection: default
             exchange_options:
@@ -318,7 +318,7 @@ old_sound_rabbit_mq:
             queue_options:
                 name: 'wallabag.import.instapaper'
             callback: wallabag_import.consumer.amqp.instapaper
-            qos_options: {prefetch_count: 10}
+            qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
         import_pinboard:
             connection: default
             exchange_options:
@@ -327,7 +327,7 @@ old_sound_rabbit_mq:
             queue_options:
                 name: 'wallabag.import.pinboard'
             callback: wallabag_import.consumer.amqp.pinboard
-            qos_options: {prefetch_count: 10}
+            qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
         import_wallabag_v1:
             connection: default
             exchange_options:
@@ -336,7 +336,7 @@ old_sound_rabbit_mq:
             queue_options:
                 name: 'wallabag.import.wallabag_v1'
             callback: wallabag_import.consumer.amqp.wallabag_v1
-            qos_options: {prefetch_count: 10}
+            qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
         import_wallabag_v2:
             connection: default
             exchange_options:
@@ -345,7 +345,7 @@ old_sound_rabbit_mq:
             queue_options:
                 name: 'wallabag.import.wallabag_v2'
             callback: wallabag_import.consumer.amqp.wallabag_v2
-            qos_options: {prefetch_count: 10}
+            qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
         import_firefox:
             connection: default
             exchange_options:
@@ -354,7 +354,7 @@ old_sound_rabbit_mq:
             queue_options:
                 name: 'wallabag.import.firefox'
             callback: wallabag_import.consumer.amqp.firefox
-            qos_options: {prefetch_count: 10}
+            qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
         import_chrome:
             connection: default
             exchange_options:
@@ -363,7 +363,7 @@ old_sound_rabbit_mq:
             queue_options:
                 name: 'wallabag.import.chrome'
             callback: wallabag_import.consumer.amqp.chrome
-            qos_options: {prefetch_count: 10}
+            qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
 
 fos_js_routing:
     routes_to_expose:
