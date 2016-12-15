@@ -27,7 +27,7 @@ class TagController extends Controller
         $form = $this->createForm(NewTagType::class, new Tag());
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->get('wallabag_core.content_proxy')->assignTagsToEntry(
                 $entry,
                 $form->get('label')->getData()

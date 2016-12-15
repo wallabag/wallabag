@@ -43,7 +43,7 @@
         "ext-iconv": "*",
         "ext-tokenizer": "*",
         "ext-pdo": "*",
-        "symfony/symfony": "3.1.*",
+        "symfony/symfony": "3.2.*",
         "doctrine/orm": "^2.5",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/doctrine-cache-bundle": "^1.2",
@@ -90,7 +90,6 @@
         "doctrine/doctrine-fixtures-bundle": "~2.2",
         "doctrine/data-fixtures": "~1.1.1",
         "sensio/generator-bundle": "^3.0",
-        "phpunit/phpunit": "~4.0",
         "symfony/phpunit-bridge": "^3.0",
         "friendsofphp/php-cs-fixer": "~1.9",
         "m6web/redis-mock": "^2.0"

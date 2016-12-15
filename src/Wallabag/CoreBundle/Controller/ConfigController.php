@@ -35,7 +35,7 @@ class ConfigController extends Controller
         $configForm = $this->createForm(ConfigType::class, $config, ['action' => $this->generateUrl('config')]);
         $configForm->handleRequest($request);
 
-        if ($configForm->isValid()) {
+        if ($configForm->isSubmitted() && $configForm->isValid()) {
             $em->persist($config);
             $em->flush();
 
@@ -57,7 +57,7 @@ class ConfigController extends Controller
         $pwdForm = $this->createForm(ChangePasswordType::class, null, ['action' => $this->generateUrl('config').'#set4']);
         $pwdForm->handleRequest($request);
 
-        if ($pwdForm->isValid()) {
+        if ($pwdForm->isSubmitted() && $pwdForm->isValid()) {
             if ($this->get('craue_config')->get('demo_mode_enabled') && $this->get('craue_config')->get('demo_mode_username') === $user->getUsername()) {
                 $message = 'flashes.config.notice.password_not_updated_demo';
             } else {
@@ -79,7 +79,7 @@ class ConfigController extends Controller
         ]);
         $userForm->handleRequest($request);
 
-        if ($userForm->isValid()) {
+        if ($userForm->isSubmitted() && $userForm->isValid()) {
             $userManager->updateUser($user, true);
 
             $this->get('session')->getFlashBag()->add(
@@ -94,7 +94,7 @@ class ConfigController extends Controller
         $rssForm = $this->createForm(RssType::class, $config, ['action' => $this->generateUrl('config').'#set2']);
         $rssForm->handleRequest($request);
 
-        if ($rssForm->isValid()) {
+        if ($rssForm->isSubmitted() && $rssForm->isValid()) {
             $em->persist($config);
             $em->flush();
 
@@ -125,7 +125,7 @@ class ConfigController extends Controller
         $newTaggingRule = $this->createForm(TaggingRuleType::class, $taggingRule, ['action' => $action]);
         $newTaggingRule->handleRequest($request);
 
-        if ($newTaggingRule->isValid()) {
+        if ($newTaggingRule->isSubmitted() && $newTaggingRule->isValid()) {
             $taggingRule->setConfig($config);
             $em->persist($taggingRule);
             $em->flush();

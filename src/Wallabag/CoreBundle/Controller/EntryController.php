@@ -23,17 +23,25 @@ class EntryController extends Controller
      * @param Request $request
      * @param int     $page
      *
-     * @Route("/search/{page}", name="search", defaults={"page" = "1"})
+     * @Route("/search/{page}", name="search", defaults={"page" = 1})
+     *
+     * Default parameter for page is hardcoded (in duplication of the defaults from the Route)
+     * because this controller is also called inside the layout template without any page as argument
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function searchFormAction(Request $request, $page, $currentRoute)
+    public function searchFormAction(Request $request, $page = 1, $currentRoute = null)
     {
+        // fallback to retrieve currentRoute from query parameter instead of injected one (when using inside a template)
+        if (null === $currentRoute && $request->query->has('currentRoute')) {
+            $currentRoute = $request->query->get('currentRoute');
+        }
+
         $form = $this->createForm(SearchEntryType::class);
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             return $this->showEntries('search', $request, $page);
         }
 
@@ -90,7 +98,7 @@ class EntryController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $existingEntry = $this->checkIfEntryAlreadyExists($entry);
 
             if (false !== $existingEntry) {
@@ -173,7 +181,7 @@ class EntryController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entry);
             $em->flush();
@@ -270,7 +278,7 @@ class EntryController extends Controller
     {
         $repository = $this->get('wallabag_core.entry_repository');
         $searchTerm = (isset($request->get('search_entry')['term']) ? $request->get('search_entry')['term'] : '');
-        $currentRoute = (!is_null($request->get('currentRoute')) ? $request->get('currentRoute') : '');
+        $currentRoute = (!is_null($request->query->get('currentRoute')) ? $request->query->get('currentRoute') : '');
 
         switch ($type) {
             case 'search':

@@ -39,7 +39,7 @@ abstract class BrowserController extends Controller
         $wallabag = $this->getImportService();
         $wallabag->setUser($this->getUser());
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $file = $form->get('file')->getData();
             $markAsRead = $form->get('mark_as_read')->getData();
             $name = $this->getUser()->getId().'.json';
