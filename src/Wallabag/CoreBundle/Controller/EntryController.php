@@ -278,7 +278,7 @@ class EntryController extends Controller
     {
         $repository = $this->get('wallabag_core.entry_repository');
         $searchTerm = (isset($request->get('search_entry')['term']) ? $request->get('search_entry')['term'] : '');
-        $currentRoute = (!is_null($request->get('currentRoute')) ? $request->get('currentRoute') : '');
+        $currentRoute = (!is_null($request->query->get('currentRoute')) ? $request->query->get('currentRoute') : '');
 
         switch ($type) {
             case 'search':
