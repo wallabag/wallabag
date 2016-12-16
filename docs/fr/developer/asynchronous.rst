@@ -49,6 +49,7 @@ Modifiez votre fichier ``app/config/parameters.yml`` pour éditer la configurati
     rabbitmq_port: 5672
     rabbitmq_user: guest
     rabbitmq_password: guest
+    rabbitmq_prefetch_count: 10 # lire http://www.rabbitmq.com/consumer-prefetch.html
 
 Activer RabbitMQ dans wallabag
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
