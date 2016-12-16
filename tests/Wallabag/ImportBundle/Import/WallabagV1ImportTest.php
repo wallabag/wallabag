@@ -19,6 +19,8 @@ class WallabagV1ImportTest extends \PHPUnit_Framework_TestCase
     protected $contentProxy;
     protected $tagsAssigner;
     protected $uow;
+    protected $fetchingErrorMessageTitle = 'No title found';
+    protected $fetchingErrorMessage = 'wallabag can\'t retrieve contents for this article. Please <a href="http://doc.wallabag.org/en/master/user/errors_during_fetching.html#how-can-i-help-to-fix-that">troubleshoot this issue</a>.';
 
     private function getWallabagV1Import($unsetUser = false, $dispatched = 0)
     {
@@ -58,7 +60,14 @@ class WallabagV1ImportTest extends \PHPUnit_Framework_TestCase
             ->expects($this->exactly($dispatched))
             ->method('dispatch');
 
-        $wallabag = new WallabagV1Import($this->em, $this->contentProxy, $this->tagsAssigner, $dispatcher);
+        $wallabag = new WallabagV1Import(
+            $this->em,
+            $this->contentProxy,
+            $this->tagsAssigner,
+            $dispatcher,
+            $this->fetchingErrorMessageTitle,
+            $this->fetchingErrorMessage
+        );
 
         $this->logHandler = new TestHandler();
         $logger = new Logger('test', [$this->logHandler]);
