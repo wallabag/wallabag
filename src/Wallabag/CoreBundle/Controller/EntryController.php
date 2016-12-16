@@ -319,7 +319,7 @@ class EntryController extends Controller
             $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($form, $qb);
         }
 
-        $pagerAdapter = new DoctrineORMAdapter($qb->getQuery());
+        $pagerAdapter = new DoctrineORMAdapter($qb->getQuery(), true, false);
 
         $entries = $this->get('wallabag_core.helper.prepare_pager_for_entries')
             ->prepare($pagerAdapter, $page);

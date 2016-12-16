@@ -125,9 +125,7 @@ class EntryRepository extends EntityRepository
     {
         return $this
             ->getBuilderByUser($userId)
-            ->leftJoin('e.tags', 't')
-            ->groupBy('e.id')
-            ->having('count(t.id) = 0');
+            ->andWhere('size(e.tags) = 0');
     }
 
     /**
@@ -173,7 +171,7 @@ class EntryRepository extends EntityRepository
             $qb->orderBy('e.updatedAt', $order);
         }
 
-        $pagerAdapter = new DoctrineORMAdapter($qb);
+        $pagerAdapter = new DoctrineORMAdapter($qb, true, false);
 
         return new Pagerfanta($pagerAdapter);
     }

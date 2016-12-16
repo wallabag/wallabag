@@ -85,7 +85,7 @@ class RssController extends Controller
                 throw new \InvalidArgumentException(sprintf('Type "%s" is not implemented.', $type));
         }
 
-        $pagerAdapter = new DoctrineORMAdapter($qb->getQuery());
+        $pagerAdapter = new DoctrineORMAdapter($qb->getQuery(), true, false);
         $entries = new Pagerfanta($pagerAdapter);
 
         $perPage = $user->getConfig()->getRssLimit() ?: $this->getParameter('wallabag_core.rss_limit');
