@@ -5,13 +5,14 @@ services:
   - redis
 
 # faster builds on docker-container setup
-sudo: false
+sudo: required
 
 # used for HHVM
 addons:
   apt:
     packages:
       - tidy
+  postgresql: 9.5
 
 # cache vendor dirs
 cache:
@@ -59,6 +60,7 @@ before_script:
     - if [[ ! $PHP = hhvm* ]]; then phpenv config-rm xdebug.ini || echo "xdebug not available"; fi
     - composer self-update --no-progress
     - if [[ $DB = pgsql ]]; then psql -c 'create database wallabag_test;' -U postgres; fi;
+    - if [[ $DB = pgsql ]]; then psql -U postgres wallabag_test -c 'create extension "uuid-ossp";'; fi;
 
 install:
     - if [[ $ASSETS = build ]]; then source ~/.nvm/nvm.sh && nvm install 6.7; fi;

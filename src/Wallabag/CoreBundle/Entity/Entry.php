@@ -22,8 +22,10 @@ use Wallabag\AnnotationBundle\Entity\Annotation;
  * @ORM\Table(
  *     name="`entry`",
  *     options={"collate"="utf8mb4_unicode_ci", "charset"="utf8mb4"},
- *     indexes={@ORM\Index(name="created_at", columns={"created_at"})},
- *     indexes={@ORM\Index(name="uuid", columns={"uuid"})}
+ *     indexes={
+ *         @ORM\Index(name="created_at", columns={"created_at"}),
+ *         @ORM\Index(name="uuid", columns={"uuid"})
+ *     }
  * )
  * @ORM\HasLifecycleCallbacks()
  * @Hateoas\Relation("self", href = "expr('/api/entries/' ~ object.getId())")
@@ -45,7 +47,7 @@ class Entry
     /**
      * @var string
      *
-     * @ORM\Column(name="uuid", type="text", nullable=true)
+     * @ORM\Column(name="uuid", type="guid", nullable=true)
      *
      * @Groups({"entries_for_user", "export_all"})
      */

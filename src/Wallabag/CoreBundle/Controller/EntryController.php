@@ -355,6 +355,9 @@ class EntryController extends Controller
     {
         $this->checkUserAction($entry);
 
+        $version = $this->getDoctrine()->getManager()->getConnection()->query('SELECT version();')->fetchColumn();
+        var_dump($version);
+
         return $this->render(
             'WallabagCoreBundle:Entry:entry.html.twig',
             ['entry' => $entry]
