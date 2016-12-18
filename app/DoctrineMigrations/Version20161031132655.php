@@ -32,7 +32,7 @@ class Version20161031132655 extends AbstractMigration implements ContainerAwareI
         $images = $this->container
             ->get('doctrine.orm.default_entity_manager')
             ->getConnection()
-            ->fetchArray('SELECT * FROM '.$this->getTable('craue_config_setting').' WHERE name = "download_images_enabled"');
+            ->fetchArray('SELECT * FROM '.$this->getTable('craue_config_setting')." WHERE name = 'download_images_enabled'");
 
         $this->skipIf(false !== $images, 'It seems that you already played this migration.');
 
