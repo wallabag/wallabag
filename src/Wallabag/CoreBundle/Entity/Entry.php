@@ -183,7 +183,7 @@ class Entry
     /**
      * @var string
      *
-     * @ORM\Column(name="http_status", type="text", nullable=true)
+     * @ORM\Column(name="http_status", type="string", length=3, nullable=true)
      *
      * @Groups({"entries_for_user", "export_all"})
      */

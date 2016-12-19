@@ -35,6 +35,7 @@ class Version20161106113822 extends AbstractMigration implements ContainerAwareI
 
         $configTable->addColumn('action_mark_as_read', 'integer', [
             'default' => 0,
+            'notnull' => false,
         ]);
     }
 
