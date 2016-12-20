@@ -8,20 +8,19 @@ function toggleFocus(cardToToogleFocus) {
 }
 
 $(document).ready(() => {
+  const cards = $('#content').find('.card');
+  const cardNumber = cards.length;
   let cardIndex = 0;
-  const cardNumber = $('#content ul.data > li').length;
-  let card = $('#content ul.data > li')[cardIndex];
+  /* If we come from next page */
+  if (window.location.hash === '#prev') {
+    cardIndex = cardNumber - 1;
+  }
+  let card = cards[cardIndex];
   const pagination = $('.pagination');
 
   /* Show nothing on quickstart */
   if ($('#content > div.quickstart').length > 0) {
     return;
-  }
-
-  /* If we come from next page */
-  if (window.location.hash === '#prev') {
-    cardIndex = cardNumber - 1;
-    card = $('ul.data > li')[cardIndex];
   }
 
   /* Focus current card */
@@ -47,7 +46,7 @@ $(document).ready(() => {
     if (cardIndex >= 0 && cardIndex < cardNumber - 1) {
       toggleFocus(card);
       cardIndex += 1;
-      card = $('ul.data > li')[cardIndex];
+      card = cards[cardIndex];
       toggleFocus(card);
       return;
     }
@@ -61,7 +60,7 @@ $(document).ready(() => {
     if (cardIndex > 0 && cardIndex < cardNumber) {
       toggleFocus(card);
       cardIndex -= 1;
-      card = $('ul.data > li')[cardIndex];
+      card = cards[cardIndex];
       toggleFocus(card);
       return;
     }
