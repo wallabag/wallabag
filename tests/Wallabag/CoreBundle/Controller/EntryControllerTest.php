@@ -816,7 +816,6 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         // generating the uuid
         $client->request('GET', '/share/'.$content->getId());
-        var_dump($client->getResponse()->getContent());
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
 
         // follow link with uuid

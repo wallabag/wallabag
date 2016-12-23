@@ -33,8 +33,9 @@ class Version20160410190541 extends AbstractMigration implements ContainerAwareI
 
         $this->skipIf($entryTable->hasColumn('uuid'), 'It seems that you already played this migration.');
 
-        $entryTable->addColumn('uuid', 'guid', [
+        $entryTable->addColumn('uuid', 'string', [
             'notnull' => false,
+            'length' => 23,
         ]);
         $this->addSql('INSERT INTO '.$this->getTable('craue_config_setting')." (name, value, section) VALUES ('share_public', '1', 'entry')");
     }

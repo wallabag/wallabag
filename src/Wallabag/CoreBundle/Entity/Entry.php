@@ -47,7 +47,7 @@ class Entry
     /**
      * @var string
      *
-     * @ORM\Column(name="uuid", type="guid", nullable=true)
+     * @ORM\Column(name="uuid", type="string", length=23, nullable=true)
      *
      * @Groups({"entries_for_user", "export_all"})
      */
