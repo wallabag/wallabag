@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="wallabag" default="build">
     <target name="build" depends="clean,prepare,phpunit"/>
-    <target name="prepare-mysql" depends="clean,db_mysql,prepare"/>
-    <target name="prepare-sqlite" depends="clean,db_sqlite,prepare"/>
-    <target name="prepare-pgsql" depends="clean,db_pgsql,prepare"/>
+    <target name="prepare-mysql" depends="clean,prepare_mysql"/>
+    <target name="prepare-sqlite" depends="clean,prepare_sqlite"/>
+    <target name="prepare-pgsql" depends="clean,prepare_pgsql"/>
 
     <target name="clean" description="Cleanup build artifacts">
         <delete dir="${basedir}/var/cache"/>
@@ -28,7 +28,44 @@
         </exec>
         <exec executable="php">
             <arg value="${basedir}/bin/console"/>
+            <arg value="doctrine:fixtures:load"/>
+            <arg value="--no-interaction"/>
+            <arg value="--env=test"/>
+        </exec>
+    </target>
+
+    <target name="prepare_mysql" description="Run test for MySQL">
+        <delete dir="${basedir}/app/config/parameters.yml"/>
+        <exec executable="cp">
+            <arg value="${basedir}/app/config/tests/parameters_test.mysql.yml"/>
+            <arg value="${basedir}/app/config/parameters_test.yml"/>
+        </exec>
+        <exec executable="php">
+            <arg value="${basedir}/bin/console"/>
             <arg value="cache:clear"/>
+            <arg value="--env=test"/>
+        </exec>
+        <exec executable="php">
+            <arg value="${basedir}/bin/console"/>
+            <arg value="doctrine:database:drop"/>
+            <arg value="--force"/>
+            <arg value="--env=test"/>
+        </exec>
+        <exec executable="php">
+            <arg value="${basedir}/bin/console"/>
+            <arg value="doctrine:database:create"/>
+            <arg value="--env=test"/>
+        </exec>
+        <exec executable="php">
+            <arg value="${basedir}/bin/console"/>
+            <arg value="doctrine:database:import"/>
+            <arg value="data/sql/mysql_base.sql"/>
+            <arg value="--env=test"/>
+        </exec>
+        <exec executable="php">
+            <arg value="${basedir}/bin/console"/>
+            <arg value="doctrine:migrations:migrate"/>
+            <arg value="--no-interaction"/>
             <arg value="--env=test"/>
         </exec>
         <exec executable="php">
@@ -39,44 +76,89 @@
         </exec>
     </target>
 
-    <target name="db_mysql" description="Run test for MySQL">
-        <delete dir="${basedir}/app/config/parameters.yml"/>
-        <exec executable="cp">
-            <arg value="${basedir}/app/config/tests/parameters_test.mysql.yml"/>
-            <arg value="${basedir}/app/config/parameters_test.yml"/>
-        </exec>
-
-        <exec executable="php">
-            <arg value="${basedir}/bin/console"/>
-            <arg value="cache:clear"/>
-            <arg value="--env=test"/>
-        </exec>
-    </target>
-
-    <target name="db_sqlite" description="Run test for SQLite">
+    <target name="prepare_sqlite" description="Run test for SQLite">
         <delete dir="${basedir}/app/config/parameters.yml"/>
         <exec executable="cp">
             <arg value="${basedir}/app/config/tests/parameters_test.sqlite.yml"/>
             <arg value="${basedir}/app/config/parameters_test.yml"/>
         </exec>
-
         <exec executable="php">
             <arg value="${basedir}/bin/console"/>
             <arg value="cache:clear"/>
             <arg value="--env=test"/>
         </exec>
+        <exec executable="php">
+            <arg value="${basedir}/bin/console"/>
+            <arg value="doctrine:database:drop"/>
+            <arg value="--force"/>
+            <arg value="--env=test"/>
+        </exec>
+        <exec executable="php">
+            <arg value="${basedir}/bin/console"/>
+            <arg value="doctrine:database:create"/>
+            <arg value="--env=test"/>
+        </exec>
+        <exec executable="php">
+            <arg value="${basedir}/bin/console"/>
+            <arg value="doctrine:schema:create"/>
+            <arg value="--env=test"/>
+        </exec>
+        <exec executable="php">
+            <arg value="${basedir}/bin/console"/>
+            <arg value="doctrine:migrations:migrate"/>
+            <arg value="--no-interaction"/>
+            <arg value="--env=test"/>
+        </exec>
+        <exec executable="php">
+            <arg value="${basedir}/bin/console"/>
+            <arg value="doctrine:fixtures:load"/>
+            <arg value="--no-interaction"/>
+            <arg value="--env=test"/>
+        </exec>
     </target>
 
-    <target name="db_pgsql" description="Run test for PostgreSQL">
+    <target name="prepare_pgsql" description="Run test for PostgreSQL">
         <delete dir="${basedir}/app/config/parameters.yml"/>
         <exec executable="cp">
             <arg value="${basedir}/app/config/tests/parameters_test.pgsql.yml"/>
             <arg value="${basedir}/app/config/parameters_test.yml"/>
         </exec>
-
         <exec executable="php">
             <arg value="${basedir}/bin/console"/>
             <arg value="cache:clear"/>
+            <arg value="--env=test"/>
+        </exec>
+        <exec executable="php">
+            <arg value="${basedir}/bin/console"/>
+            <arg value="doctrine:database:drop"/>
+            <arg value="--force"/>
+            <arg value="--env=test"/>
+        </exec>
+        <exec executable="php">
+            <arg value="${basedir}/bin/console"/>
+            <arg value="doctrine:database:create"/>
+            <arg value="--env=test"/>
+        </exec>
+        <exec executable="psql">
+            <arg value="-h"/>
+            <arg value="localhost"/>
+            <arg value="-d"/>
+            <arg value="wallabag_test"/>
+            <arg value="-U"/>
+            <arg value="travis"/>
+            <arg value="-f"/>
+            <arg value="data/sql/pgsql_base.sql"/>
+        </exec>
+        <exec executable="php">
+            <arg value="${basedir}/bin/console"/>
+            <arg value="doctrine:migrations:migrate"/>
+            <arg value="--no-interaction"/>
+            <arg value="--env=test"/>
+        </exec>
+        <exec executable="php">
+            <arg value="${basedir}/bin/console"/>
+            <arg value="doctrine:fixtures:load"/>
+            <arg value="--no-interaction"/>
             <arg value="--env=test"/>
         </exec>
     </target>

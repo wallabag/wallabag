@@ -93,7 +93,7 @@ class Config
     /**
      * @var int
      *
-     * @ORM\Column(name="action_mark_as_read", type="integer", nullable=true)
+     * @ORM\Column(name="action_mark_as_read", type="integer", nullable=true, options={"default" = 0})
      */
     private $actionMarkAsRead;
 

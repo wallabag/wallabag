@@ -33,7 +33,7 @@ class Version20160916201049 extends AbstractMigration implements ContainerAwareI
 
         $this->skipIf($configTable->hasColumn('pocket_consumer_key'), 'It seems that you already played this migration.');
 
-        $configTable->addColumn('pocket_consumer_key', 'string');
+        $configTable->addColumn('pocket_consumer_key', 'string', ['notnull' => false]);
         $this->addSql('DELETE FROM '.$this->getTable('craue_config_setting')." WHERE name = 'pocket_consumer_key';");
     }
 
