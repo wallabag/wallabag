@@ -61,7 +61,7 @@ class TagControllerTest extends WallabagCoreTestCase
 
         // tag already exists but still not assigned to this entry
         $data = [
-            'tag[label]' => 'foo',
+            'tag[label]' => 'foo bar',
         ];
 
         $client->submit($form, $data);

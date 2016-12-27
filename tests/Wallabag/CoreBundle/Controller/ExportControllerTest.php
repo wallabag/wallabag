@@ -119,7 +119,7 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertEquals('binary', $headers->get('content-transfer-encoding'));
 
         ob_start();
-        $crawler = $client->request('GET', '/export/tag_entries.pdf?tag=foo');
+        $crawler = $client->request('GET', '/export/tag_entries.pdf?tag=foo-bar');
         ob_end_clean();
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
@@ -241,7 +241,7 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertEquals($contentInDB->getLanguage(), $content[0]['language']);
         $this->assertEquals($contentInDB->getReadingtime(), $content[0]['reading_time']);
         $this->assertEquals($contentInDB->getDomainname(), $content[0]['domain_name']);
-        $this->assertEquals(['foo', 'baz'], $content[0]['tags']);
+        $this->assertEquals(['foo bar', 'baz'], $content[0]['tags']);
     }
 
     public function testXmlExport()
