@@ -15,7 +15,7 @@ class LoadTagData extends AbstractFixture implements OrderedFixtureInterface
     public function load(ObjectManager $manager)
     {
         $tag1 = new Tag();
-        $tag1->setLabel('foo');
+        $tag1->setLabel('foo bar');
 
         $manager->persist($tag1);
 
