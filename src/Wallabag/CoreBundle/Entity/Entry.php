@@ -22,7 +22,10 @@ use Wallabag\AnnotationBundle\Entity\Annotation;
  * @ORM\Table(
  *     name="`entry`",
  *     options={"collate"="utf8mb4_unicode_ci", "charset"="utf8mb4"},
- *     indexes={@ORM\Index(name="created_at", columns={"created_at"})}
+ *     indexes={
+ *         @ORM\Index(name="created_at", columns={"created_at"}),
+ *         @ORM\Index(name="uid", columns={"uid"})
+ *     }
  * )
  * @ORM\HasLifecycleCallbacks()
  * @Hateoas\Relation("self", href = "expr('/api/entries/' ~ object.getId())")
@@ -44,11 +47,11 @@ class Entry
     /**
      * @var string
      *
-     * @ORM\Column(name="uuid", type="text", nullable=true)
+     * @ORM\Column(name="uid", type="string", length=23, nullable=true)
      *
      * @Groups({"entries_for_user", "export_all"})
      */
-    private $uuid;
+    private $uid;
 
     /**
      * @var string
@@ -649,34 +652,34 @@ class Entry
     /**
      * @return string
      */
-    public function getUuid()
+    public function getUid()
     {
-        return $this->uuid;
+        return $this->uid;
     }
 
     /**
-     * @param string $uuid
+     * @param string $uid
      *
      * @return Entry
      */
-    public function setUuid($uuid)
+    public function setUid($uid)
     {
-        $this->uuid = $uuid;
+        $this->uid = $uid;
 
         return $this;
     }
 
-    public function generateUuid()
+    public function generateUid()
     {
-        if (null === $this->uuid) {
+        if (null === $this->uid) {
             // @see http://blog.kevingomez.fr/til/2015/07/26/why-is-uniqid-slow/ for true parameter
-            $this->uuid = uniqid('', true);
+            $this->uid = uniqid('', true);
         }
     }
 
-    public function cleanUuid()
+    public function cleanUid()
     {
-        $this->uuid = null;
+        $this->uid = null;
     }
 
     /**

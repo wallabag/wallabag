@@ -7,12 +7,17 @@ use Doctrine\DBAL\Schema\Schema;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class Version20160410190541 extends AbstractMigration implements ContainerAwareInterface
+/**
+ * Added index on wallabag_entry.uid
+ */
+class Version20161214094403 extends AbstractMigration implements ContainerAwareInterface
 {
     /**
      * @var ContainerInterface
      */
     private $container;
+
+    private $indexName = 'IDX_entry_uid';
 
     public function setContainer(ContainerInterface $container = null)
     {
@@ -30,14 +35,9 @@ class Version20160410190541 extends AbstractMigration implements ContainerAwareI
     public function up(Schema $schema)
     {
         $entryTable = $schema->getTable($this->getTable('entry'));
+        $this->skipIf($entryTable->hasIndex($this->indexName), 'It seems that you already played this migration.');
 
-        $this->skipIf($entryTable->hasColumn('uid'), 'It seems that you already played this migration.');
-
-        $entryTable->addColumn('uid', 'string', [
-            'notnull' => false,
-            'length' => 23,
-        ]);
-        $this->addSql('INSERT INTO '.$this->getTable('craue_config_setting')." (name, value, section) VALUES ('share_public', '1', 'entry')");
+        $entryTable->addIndex(['uid'], $this->indexName);
     }
 
     /**
@@ -46,8 +46,8 @@ class Version20160410190541 extends AbstractMigration implements ContainerAwareI
     public function down(Schema $schema)
     {
         $entryTable = $schema->getTable($this->getTable('entry'));
-        $entryTable->dropColumn('uid');
+        $this->skipIf(false === $entryTable->hasIndex($this->indexName), 'It seems that you already played this migration.');
 
-        $this->addSql('DELETE FROM '.$this->getTable('craue_config_setting')." WHERE name = 'share_public'");
+        $entryTable->dropIndex($this->indexName);
     }
 }

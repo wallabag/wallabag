@@ -810,15 +810,15 @@ class EntryControllerTest extends WallabagCoreTestCase
             ->getRepository('WallabagCoreBundle:Entry')
             ->findOneByUser($this->getLoggedInUserId());
 
-        // no uuid
-        $client->request('GET', '/share/'.$content->getUuid());
+        // no uid
+        $client->request('GET', '/share/'.$content->getUid());
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
 
-        // generating the uuid
+        // generating the uid
         $client->request('GET', '/share/'.$content->getId());
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
 
-        // follow link with uuid
+        // follow link with uid
         $crawler = $client->followRedirect();
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertContains('max-age=25200', $client->getResponse()->headers->get('cache-control'));
@@ -832,7 +832,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         // sharing is now disabled
         $client->getContainer()->get('craue_config')->set('share_public', 0);
-        $client->request('GET', '/share/'.$content->getUuid());
+        $client->request('GET', '/share/'.$content->getUid());
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
 
         $client->request('GET', '/view/'.$content->getId());
@@ -843,7 +843,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
 
         // share is now disable
-        $client->request('GET', '/share/'.$content->getUuid());
+        $client->request('GET', '/share/'.$content->getUid());
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
     }
 
