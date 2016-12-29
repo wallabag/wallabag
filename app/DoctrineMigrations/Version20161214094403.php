@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Added index on wallabag_entry.uuid
+ * Added index on wallabag_entry.uid
  */
 class Version20161214094403 extends AbstractMigration implements ContainerAwareInterface
 {
@@ -17,7 +17,7 @@ class Version20161214094403 extends AbstractMigration implements ContainerAwareI
      */
     private $container;
 
-    private $indexName = 'IDX_entry_uiid';
+    private $indexName = 'IDX_entry_uid';
 
     public function setContainer(ContainerInterface $container = null)
     {
@@ -37,7 +37,7 @@ class Version20161214094403 extends AbstractMigration implements ContainerAwareI
         $entryTable = $schema->getTable($this->getTable('entry'));
         $this->skipIf($entryTable->hasIndex($this->indexName), 'It seems that you already played this migration.');
 
-        $entryTable->addIndex(['uuid'], $this->indexName);
+        $entryTable->addIndex(['uid'], $this->indexName);
     }
 
     /**

@@ -539,8 +539,8 @@ class EntryController extends Controller
     {
         $this->checkUserAction($entry);
 
-        if (null === $entry->getUuid()) {
-            $entry->generateUuid();
+        if (null === $entry->getUid()) {
+            $entry->generateUid();
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($entry);
@@ -548,7 +548,7 @@ class EntryController extends Controller
         }
 
         return $this->redirect($this->generateUrl('share_entry', [
-            'uuid' => $entry->getUuid(),
+            'uid' => $entry->getUid(),
         ]));
     }
 
@@ -565,7 +565,7 @@ class EntryController extends Controller
     {
         $this->checkUserAction($entry);
 
-        $entry->cleanUuid();
+        $entry->cleanUid();
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($entry);
@@ -581,7 +581,7 @@ class EntryController extends Controller
      *
      * @param Entry $entry
      *
-     * @Route("/share/{uuid}", requirements={"uuid" = ".+"}, name="share_entry")
+     * @Route("/share/{uid}", requirements={"uid" = ".+"}, name="share_entry")
      * @Cache(maxage="25200", smaxage="25200", public=true)
      *
      * @return \Symfony\Component\HttpFoundation\Response

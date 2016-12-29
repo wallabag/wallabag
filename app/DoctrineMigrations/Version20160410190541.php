@@ -31,9 +31,9 @@ class Version20160410190541 extends AbstractMigration implements ContainerAwareI
     {
         $entryTable = $schema->getTable($this->getTable('entry'));
 
-        $this->skipIf($entryTable->hasColumn('uuid'), 'It seems that you already played this migration.');
+        $this->skipIf($entryTable->hasColumn('uid'), 'It seems that you already played this migration.');
 
-        $entryTable->addColumn('uuid', 'string', [
+        $entryTable->addColumn('uid', 'string', [
             'notnull' => false,
             'length' => 23,
         ]);
@@ -46,7 +46,7 @@ class Version20160410190541 extends AbstractMigration implements ContainerAwareI
     public function down(Schema $schema)
     {
         $entryTable = $schema->getTable($this->getTable('entry'));
-        $entryTable->dropColumn('uuid');
+        $entryTable->dropColumn('uid');
 
         $this->addSql('DELETE FROM '.$this->getTable('craue_config_setting')." WHERE name = 'share_public'");
     }
