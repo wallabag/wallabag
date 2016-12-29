@@ -439,7 +439,6 @@ nav ul a:hover {
 .side-nav.fixed.right-aligned {
   right: -250px;
   left: auto !important;
-  overflow-y: visible;
 }
 
 #filters div.with-checkbox {
