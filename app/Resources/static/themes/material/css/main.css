@@ -283,6 +283,16 @@ nav input {
   color: #aaa;
 }
 
+nav {
+  height: auto;
+}
+
+.nav-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
 .nav-wrapper .button-collapse {
   padding: 0 15px;
 }
@@ -291,8 +301,10 @@ nav input {
   display: none;
 }
 
-.nav-panels {
-  overflow: hidden;
+.nav-panel-buttom {
+  display: flex;
+  flex-grow: 1;
+  justify-content: right;
 }
 
 .nav-panel-buttom li {
@@ -357,7 +369,7 @@ nav input {
 .input-field.nav-panel-add form,
 .input-field.nav-panel-search,
 .input-field.nav-panel-search form {
-  height: 100%;
+  flex-grow: 1;
 }
 
 /* ==========================================================================
@@ -807,6 +819,14 @@ article aside .tools li {
     width: auto;
   }
 
+  .nav-panels .action {
+    padding-right: 0.75rem;
+  }
+
+  .nav-panel-buttom {
+    justify-content: space-around;
+  }
+
   #article {
     max-width: 35em;
     margin-left: auto;
@@ -843,11 +863,13 @@ article aside .tools li {
   .pagination li.next {
     width: auto;
   }
-}
 
-@media only screen and (min-width: 400px) {
-  .nav-panel-buttom {
-    float: right;
+  .drag-target + .drag-target {
+    height: 50%;
+  }
+
+  .drag-target + .drag-target + .drag-target {
+    top: 50%;
   }
 }
 
