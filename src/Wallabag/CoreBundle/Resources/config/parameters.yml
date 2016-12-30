@@ -1,6 +1,6 @@
 parameters:
     addons_url:
-        firefox: https://addons.mozilla.org/firefox/addon/wallabag-v2/
+        firefox: https://addons.mozilla.org/firefox/addon/wallabagger/
         chrome: https://chrome.google.com/webstore/detail/wallabagger/gbmgphmejlcoihgedabhgjdkcahacjlj
         opera: https://addons.opera.com/en/extensions/details/wallabagger/?display=en
         f_droid: https://f-droid.org/app/fr.gaulupeau.apps.InThePoche
