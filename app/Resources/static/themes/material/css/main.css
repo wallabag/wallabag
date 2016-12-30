@@ -304,7 +304,7 @@ nav {
 .nav-panel-buttom {
   display: flex;
   flex-grow: 1;
-  justify-content: right;
+  justify-content: flex-end;
 }
 
 .nav-panel-buttom li {
