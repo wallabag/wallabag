@@ -46,7 +46,7 @@ footer:
         social: "Social"
         powered_by: "propulsé par"
         about: "À propos"
-    stats: Depuis le %user_creation% vous avez lu %nb_archives% articles. Ce qui fait %per_day% par jour !
+    stats: Depuis le %user_creation%, vous avez lu %nb_archives% articles. Ce qui fait %per_day% par jour !
 
 config:
     page_title: "Configuration"
@@ -128,7 +128,7 @@ config:
                 domainName: "Le nom de domaine de l’article"
             operator_description:
                 label: "Opérateur"
-                less_than: "Moins que…..."
+                less_than: "Moins que…"
                 strictly_less_than: "Strictement moins que…"
                 greater_than: "Plus que…"
                 strictly_greater_than: "Strictement plus que…"
@@ -147,7 +147,7 @@ entry:
         filtered_tags: "Articles filtrés par tags :"
         untagged: "Article sans tag"
     list:
-        number_on_the_page: "{0} Il n’y a pas d’articles.|{1} Il y a un article.|]1,Inf[ Il y a %count% articles."
+        number_on_the_page: "{0} Il n’y a pas d’article.|{1} Il y a un article.|]1,Inf[ Il y a %count% articles."
         reading_time: "durée de lecture"
         reading_time_minutes: "durée de lecture: %readingTime% min"
         reading_time_less_one_minute: "durée de lecture: <small class=\"inferieur\">&lt;</small> 1 min"
@@ -364,7 +364,7 @@ import:
         enabled: "Les imports sont asynchrones. Une fois l’import commencé un worker externe traitera les messages un par un. Le service activé est :"
     firefox:
         page_title: "Import > Firefox"
-        description: "Cet outil va vous permettre d’importer tous vos marques-pages de Firefox. Ouvrez le panneau des marques-pages (Ctrl+Maj+O), puis dans « Importation et sauvegarde », choisissez « Sauvegarde... ». Vous allez récupérer un fichier .json. </p>"
+        description: "Cet outil va vous permettre d’importer tous vos marques-pages de Firefox. Ouvrez le panneau des marques-pages (Ctrl+Maj+O), puis dans « Importation et sauvegarde », choisissez « Sauvegarde… ». Vous allez récupérer un fichier .json. </p>"
         how_to: "Choisissez le fichier de sauvegarde de vos marques-page et cliquez sur le bouton pour l’importer. Soyez avertis que le processus peut prendre un temps assez long car tous les articles doivent être récupérés en ligne."
     chrome:
         page_title: "Import > Chrome"
