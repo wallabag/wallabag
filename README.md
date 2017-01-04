@@ -22,6 +22,6 @@ make run
 ```
 
 # License
-Copyright © 2013-2016 Nicolas Lœuillet <nicolas@loeuillet.org>
+Copyright © 2013-2017 Nicolas Lœuillet <nicolas@loeuillet.org>
 This work is free. You can redistribute it and/or modify it under the
 terms of the MIT License. See the COPYING file for more details.
