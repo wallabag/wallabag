@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\ImportBundle\Import;
+namespace tests\Wallabag\ImportBundle\Import;
 
 use Wallabag\ImportBundle\Import\InstapaperImport;
 use Wallabag\UserBundle\Entity\User;
@@ -10,8 +10,9 @@ use Monolog\Logger;
 use Monolog\Handler\TestHandler;
 use Simpleue\Queue\RedisQueue;
 use M6Web\Component\RedisMock\RedisMockFactory;
+use Tests\Wallabag\ImportBundle\ImportKernelTestCase;
 
-class InstapaperImportTest extends \PHPUnit_Framework_TestCase
+class InstapaperImportTest extends ImportKernelTestCase
 {
     protected $user;
     protected $em;
@@ -30,7 +31,7 @@ class InstapaperImportTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $import = new InstapaperImport($this->em, $this->contentProxy);
+        $import = new InstapaperImport($this->em, $this->contentProxy, $this->fetchingErrorMessage);
 
         $this->logHandler = new TestHandler();
         $logger = new Logger('test', [$this->logHandler]);

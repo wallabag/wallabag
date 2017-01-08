@@ -3,6 +3,7 @@
 namespace Wallabag\ImportBundle\Import;
 
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\CoreBundle\Tools\Utils;
 
 abstract class WallabagImport extends AbstractImport
 {
@@ -106,6 +107,20 @@ abstract class WallabagImport extends AbstractImport
         $entry = new Entry($this->user);
         $entry->setUrl($data['url']);
         $entry->setTitle($data['title']);
+
+        if (isset($data['content']) && !empty($data['content'])) {
+            $entry->setContent($data['content']);
+            $entry->setReadingTime(Utils::getReadingTime($data['content']));
+        }
+
+        if (isset($data['content_type']) && !empty($data['content_type'])) {
+            $entry->setMimetype($data['content_type']);
+        }
+
+        $domainName = parse_url($entry->getUrl(), PHP_URL_HOST);
+        if (false !== $domainName) {
+            $entry->setDomainName($domainName);
+        }
 
         // update entry with content (in case fetching failed, the given entry will be return)
         $entry = $this->fetchContent($entry, $data['url'], $data);

@@ -116,6 +116,11 @@ class InstapaperImport extends AbstractImport
         $entry->setUrl($importedEntry['url']);
         $entry->setTitle($importedEntry['title']);
 
+        $domainName = parse_url($entry->getUrl(), PHP_URL_HOST);
+        if (false !== $domainName) {
+            $entry->setDomainName($domainName);
+        }
+
         // update entry with content (in case fetching failed, the given entry will be return)
         $entry = $this->fetchContent($entry, $importedEntry['url'], $importedEntry);
 

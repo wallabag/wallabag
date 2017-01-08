@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\ImportBundle\Import;
+namespace tests\Wallabag\ImportBundle\Import;
 
 use Wallabag\UserBundle\Entity\User;
 use Wallabag\CoreBundle\Entity\Entry;
@@ -15,8 +15,9 @@ use Monolog\Logger;
 use Monolog\Handler\TestHandler;
 use Simpleue\Queue\RedisQueue;
 use M6Web\Component\RedisMock\RedisMockFactory;
+use Tests\Wallabag\ImportBundle\ImportKernelTestCase;
 
-class PocketImportTest extends \PHPUnit_Framework_TestCase
+class PocketImportTest extends ImportKernelTestCase
 {
     protected $token;
     protected $user;
@@ -57,7 +58,8 @@ class PocketImportTest extends \PHPUnit_Framework_TestCase
 
         $pocket = new PocketImport(
             $this->em,
-            $this->contentProxy
+            $this->contentProxy,
+            $this->fetchingErrorMessage
         );
         $pocket->setUser($this->user);
 
@@ -611,7 +613,7 @@ JSON;
         $this->contentProxy
             ->expects($this->once())
             ->method('updateEntry')
-            ->will($this->throwException(new \Exception()));
+            ->willReturn($entryRepo);
 
         $pocketImport->setClient($client);
         $pocketImport->authorize('wunderbar_code');

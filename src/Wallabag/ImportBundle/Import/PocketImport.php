@@ -8,6 +8,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Helper\ContentProxy;
+use Wallabag\CoreBundle\Tools\Utils;
 
 class PocketImport extends AbstractImport
 {
@@ -187,6 +188,8 @@ class PocketImport extends AbstractImport
     public function parseEntry(array $importedEntry)
     {
         $url = isset($importedEntry['resolved_url']) && $importedEntry['resolved_url'] != '' ? $importedEntry['resolved_url'] : $importedEntry['given_url'];
+        $title = isset($importedEntry['given_title']) && $importedEntry['given_title'] != '' ? $importedEntry['given_title'] : 'No title found';
+        $content = isset($importedEntry['excerpt']) ? $importedEntry['excerpt'] : '';
 
         $existingEntry = $this->em
             ->getRepository('WallabagCoreBundle:Entry')
@@ -200,6 +203,14 @@ class PocketImport extends AbstractImport
 
         $entry = new Entry($this->user);
         $entry->setUrl($url);
+        $entry->setTitle($title);
+        $entry->setContent($content);
+        $entry->setReadingTime(Utils::getReadingTime($content));
+
+        $domainName = parse_url($entry->getUrl(), PHP_URL_HOST);
+        if (false !== $domainName) {
+            $entry->setDomainName($domainName);
+        }
 
         // update entry with content (in case fetching failed, the given entry will be return)
         $entry = $this->fetchContent($entry, $url);
