@@ -82,6 +82,6 @@ class SecurityControllerTest extends WallabagCoreTestCase
 
         $client->followRedirects();
         $crawler = $client->request('GET', '/register');
-        $this->assertContains('registration.submit', $crawler->filter('body')->extract(['_text'])[0]);
+        $this->assertContains('registration.submit', $client->getResponse()->getContent());
     }
 }
