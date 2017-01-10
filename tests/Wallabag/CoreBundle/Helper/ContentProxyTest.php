@@ -161,6 +161,47 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('1.1.1.1', $entry->getDomainName());
     }
 
+    public function testWithContentAndNoOgImage()
+    {
+        $tagger = $this->getTaggerMock();
+        $tagger->expects($this->once())
+            ->method('tag');
+
+        $graby = $this->getMockBuilder('Graby\Graby')
+            ->setMethods(['fetchContent'])
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $graby->expects($this->any())
+            ->method('fetchContent')
+            ->willReturn([
+                'html' => str_repeat('this is my content', 325),
+                'title' => 'this is my title',
+                'url' => 'http://1.1.1.1',
+                'content_type' => 'text/html',
+                'language' => 'fr',
+                'status' => '200',
+                'open_graph' => [
+                    'og_title' => 'my OG title',
+                    'og_description' => 'OG desc',
+                    'og_image' => false,
+                ],
+            ]);
+
+        $proxy = new ContentProxy($graby, $tagger, $this->getTagRepositoryMock(), $this->getLogger(), $this->fetchingErrorMessage);
+        $entry = $proxy->updateEntry(new Entry(new User()), 'http://0.0.0.0');
+
+        $this->assertEquals('http://1.1.1.1', $entry->getUrl());
+        $this->assertEquals('this is my title', $entry->getTitle());
+        $this->assertContains('this is my content', $entry->getContent());
+        $this->assertNull($entry->getPreviewPicture());
+        $this->assertEquals('text/html', $entry->getMimetype());
+        $this->assertEquals('fr', $entry->getLanguage());
+        $this->assertEquals('200', $entry->getHttpStatus());
+        $this->assertEquals(4.0, $entry->getReadingTime());
+        $this->assertEquals('1.1.1.1', $entry->getDomainName());
+    }
+
     public function testWithForcedContent()
     {
         $tagger = $this->getTaggerMock();

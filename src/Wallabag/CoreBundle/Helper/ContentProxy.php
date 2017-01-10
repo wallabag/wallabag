@@ -88,7 +88,7 @@ class ContentProxy
             $entry->setDomainName($domainName);
         }
 
-        if (isset($content['open_graph']['og_image'])) {
+        if (isset($content['open_graph']['og_image']) && $content['open_graph']['og_image']) {
             $entry->setPreviewPicture($content['open_graph']['og_image']);
         }
 
