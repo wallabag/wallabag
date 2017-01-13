@@ -23,7 +23,7 @@ Erklärungen über die Datenbankmigration
 Während des Updates migrieren wir die Datenbank.
 
 Alle Datenbankmigrationen sind im Verzeichnis ``app/DoctrineMigrations`` gespeichert. Jede von ihnen kann einzeln ausgeführt werden:
-``bin/console doctrine:migrations:migrate 20161001072726 --env=prod``.
+``bin/console doctrine:migrations:execute 20161001072726 --env=prod``.
 
 Dies ist die Migrationsliste von 2.1.x auf 2.2.0:
 

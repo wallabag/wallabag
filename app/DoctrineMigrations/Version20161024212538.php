@@ -7,6 +7,9 @@ use Doctrine\DBAL\Schema\Schema;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
+/**
+ * Added user_id column on oauth2_clients to prevent users to delete API clients from other users
+ */
 class Version20161024212538 extends AbstractMigration implements ContainerAwareInterface
 {
     /**

@@ -7,6 +7,9 @@ use Doctrine\DBAL\Schema\Schema;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
+/**
+ * Converted database to utf8mb4 encoding (for MySQL only)
+ */
 class Version20161022134138 extends AbstractMigration implements ContainerAwareInterface
 {
     /**

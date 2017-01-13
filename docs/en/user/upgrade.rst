@@ -23,7 +23,9 @@ Explanations about database migrations
 During the update, we execute database migrations.
 
 All the database migrations are stored in ``app/DoctrineMigrations``. You can execute each migration individually:
-``bin/console doctrine:migrations:migrate 20161001072726 --env=prod``.
+``bin/console doctrine:migrations:execute 20161001072726 --env=prod``.
+
+You can also cancel each migration individually: ``bin/console doctrine:migrations:execute 20161001072726 --down --env=prod``.
 
 Here is the migrations list for 2.1.x to 2.2.0 release:
 
@@ -37,6 +39,9 @@ Here is the migrations list for 2.1.x to 2.2.0 release:
 * ``20161118134328``: added ``http_status`` field on ``entry`` table
 * ``20161122144743``: added the internal setting to enable/disable fetching articles with paywall
 * ``20161122203647``: dropped ``expired`` and ``credentials_expired`` fields on ``user`` table
+* ``20161128084725``: added ``list_mode`` field on ``config`` table
+* ``20161128131503``: dropped ``locked``, ``credentials_expire_at`` and ``expires_at`` fields on ``user`` table
+* ``20161214094403``: added ``uid`` index on ``entry`` table
 
 Upgrade on a shared hosting
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^

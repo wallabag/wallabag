@@ -7,6 +7,9 @@ use Doctrine\DBAL\Schema\Schema;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
+/**
+ * Added action_mark_as_read field on config table
+ */
 class Version20161106113822 extends AbstractMigration implements ContainerAwareInterface
 {
     /**

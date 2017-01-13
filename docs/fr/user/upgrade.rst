@@ -23,7 +23,7 @@ Explications à propos des migrations de base de données
 Durant la mise à jour, nous exécutons des migrations de base de données.
 
 Toutes les migrations de base de données sont stockées dans le dossier ``app/DoctrineMigrations``. Vous pouvez exécuter chaque migration individuellement :
-``bin/console doctrine:migrations:migrate 20161001072726 --env=prod``.
+``bin/console doctrine:migrations:execute 20161001072726 --env=prod``.
 
 Voici la liste des migrations de la 2.1.x à la 2.2.0 :
 
