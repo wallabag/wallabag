@@ -71,10 +71,11 @@ services:
     wallabag_core.guzzle.http_client_factory:
         class: Wallabag\CoreBundle\Helper\HttpClientFactory
         arguments:
-            - "@bd_guzzle_site_authenticator.authenticator_subscriber"
             - "@wallabag_core.guzzle.cookie_jar"
             - '@=service(''craue_config'').get(''restricted_access'')'
             - '@logger'
+        calls:
+            - ["addSubscriber", ["@bd_guzzle_site_authenticator.authenticator_subscriber"]]
 
     wallabag_core.guzzle.cookie_jar:
         class: GuzzleHttp\Cookie\FileCookieJar
