@@ -1,6 +1,12 @@
 ## Changelog
 
+### 2.1.6 2017/01/17
+- [#2758](https://github.com/wallabag/wallabag/pull/2758) Fixed possible JS injection via the title edition (@nicosomb)
+- [#2736](https://github.com/wallabag/wallabag/pull/2736) Update copyright year (@lex111)
+- [#2624](https://github.com/wallabag/wallabag/pull/2624) Fix #2056 update config.yml (@Rurik19)
+
 ### 2.1.5 2016/11/21
+- [#2625](https://github.com/wallabag/wallabag/pull/2625) Prepare wallabag 2.1.5 (@nicosomb)
 - [#2623](https://github.com/wallabag/wallabag/pull/2623) Force composer to run as PHP 5.5.9 (@j0k3r)
 - [#2608](https://github.com/wallabag/wallabag/pull/2608) Change version to 2.2.0-dev (@nicosomb)
 - [#2607](https://github.com/wallabag/wallabag/pull/2607) Updated changelog for 2.1.4 (@nicosomb)
@@ -94,7 +100,7 @@
 - [#2397](https://github.com/wallabag/wallabag/pull/2397) Ensure orphan tag are remove in API (@j0k3r)
 - [#2399](https://github.com/wallabag/wallabag/pull/2399) Use default locale for user config (@j0k3r)
 - [#2400](https://github.com/wallabag/wallabag/pull/2400) Set env to prod in documentation (@j0k3r)
-- [#2396](https://github.com/wallabag/wallabag/pull/2396) Update messages.pl.yml (@mruminski)
+- [#2396](https://github.com/wallabag/wallabag/pull/2396) Update messages.pl.yml (@wallabag)
 - [#2395](https://github.com/wallabag/wallabag/pull/2395) Add ability to use socket (@j0k3r)
 - [#2386](https://github.com/wallabag/wallabag/pull/2386) Changed Changelog by using github-changelog-generator from @skywinder (@nicosomb)
 - [#2389](https://github.com/wallabag/wallabag/pull/2389) Added default picture if preview picture is null (@nicosomb)

@@ -30,7 +30,7 @@ framework:
     assets: ~
 
 wallabag_core:
-    version: 2.1.5
+    version: 2.1.6
     paypal_url: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9UBA65LG3FX9Y&lc=gb"
     languages:
         en: 'English'
@@ -195,7 +195,7 @@ fos_oauth_server:
         user_provider: fos_user.user_manager
         options:
             refresh_token_lifetime: 1209600
-                
+
 scheb_two_factor:
     trusted_computer:
         enabled: true
