@@ -49,6 +49,7 @@ class TagRepository extends EntityRepository
             ->leftJoin('t.entries', 'e')
             ->where('e.user = :userId')->setParameter('userId', $userId)
             ->groupBy('t.id')
+            ->orderBy('t.slug')
             ->getQuery()
             ->getArrayResult();
 
