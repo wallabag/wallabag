@@ -2,8 +2,8 @@
     <div class="card-body">
         <div class="card-content">
             <span class="card-title dot-ellipsis dot-resize-update">
-                <a href="{{ path('view', { 'id': entry.id }) }}" title="{{ entry.title | raw | striptags }}">
-                    {{ entry.title | raw | striptags | truncate(80, true, '…') }}
+                <a href="{{ path('view', { 'id': entry.id }) }}" title="{{ entry.title | e | raw | striptags }}">
+                    {{ entry.title | e | raw | striptags | truncate(80, true, '…') }}
                 </a>
             </span>
 
