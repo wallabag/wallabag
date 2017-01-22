@@ -23,7 +23,7 @@ class ExportCommand extends ContainerAwareCommand
                 'User from which to export entries'
             )
             ->addArgument(
-                'filename',
+                'filepath',
                 InputArgument::OPTIONAL,
                 'Path of the exported file'
             )
@@ -46,7 +46,7 @@ class ExportCommand extends ContainerAwareCommand
 
         $output->write(sprintf('Exporting %d entrie(s) for user « <comment>%s</comment> »... ', count($entries), $user->getUserName()));
 
-        $filePath = $input->getArgument('filename');
+        $filePath = $input->getArgument('filepath');
         if (!$filePath) {
             $filePath = $this->getContainer()->getParameter('kernel.root_dir') . '/../' . sprintf('%s-export', $user->getUsername());
         }

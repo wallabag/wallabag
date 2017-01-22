@@ -57,4 +57,21 @@ class ExportCommandTest extends WallabagCoreTestCase
 
         $this->assertContains('Exporting 6 entrie(s) for user « admin »... Done', $tester->getDisplay());
     }
+
+    public function testExportCommandWithSpecialPath()
+    {
+        $application = new Application($this->getClient()->getKernel());
+        $application->add(new ExportCommand());
+
+        $command = $application->find('wallabag:export');
+
+        $tester = new CommandTester($command);
+        $tester->execute([
+            'command' => $command->getName(),
+            'username' => 'admin',
+            'filepath' => 'specialexport.json'
+        ]);
+
+        $this->assertFileExists('specialexport.json');
+    }
 }
