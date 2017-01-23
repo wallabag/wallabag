@@ -55,7 +55,7 @@ class Version20161128131503 extends AbstractMigration implements ContainerAwareI
 
         foreach ($this->fields as $field => $type) {
             $this->skipIf($userTable->hasColumn($field), 'It seems that you already played this migration.');
-            $userTable->addColumn($field, $type);
+            $userTable->addColumn($field, $type, ['notnull' => false]);
         }
     }
 }

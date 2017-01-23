@@ -6,6 +6,7 @@ use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Doctrine\DBAL\Migrations\SkipMigrationException;
 
 /**
  * Added pocket_consumer_key field on wallabag_config

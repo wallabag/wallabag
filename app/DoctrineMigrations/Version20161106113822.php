@@ -48,6 +48,9 @@ class Version20161106113822 extends AbstractMigration implements ContainerAwareI
     public function down(Schema $schema)
     {
         $configTable = $schema->getTable($this->getTable('config'));
-        $userTable->dropColumn('action_mark_as_read');
+
+        $this->skipIf(!$configTable->hasColumn('action_mark_as_read'), 'It seems that you already played this migration.');
+
+        $configTable->dropColumn('action_mark_as_read');
     }
 }
