@@ -292,7 +292,7 @@ quickstart:
         export: "Configura l'esportazione"
         import: "Configura l'importazione"
     first_steps:
-        title: 'Pimi passi'
+        title: 'Primi passi'
         # description: "Now wallabag is well configured, it's time to archive the web. You can click on the top right sign + to add a link."
         new_article: 'Salva il tuo primo contenuto'
         unread_articles: 'E classificalo!'
