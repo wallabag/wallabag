@@ -59,9 +59,9 @@ Si vous utilisez SQLite, vous devez également conserver le contenu du répertoi
 
 Videz le répertoire ``var/cache``.
 
-Vous allez devoir également exécuter des requêtes SQL pour mettre à jour votre base de données. Nous partons du principe que le préfixe de vos tables est ``wallabag_`` et que le serveur SQL est un serveur MySQL :
+Vous allez devoir également exécuter des requêtes SQL pour mettre à jour votre base de données. Nous partons du principe que le préfixe de vos tables est ``wallabag_``.
 
-.. code-block:: sql
+`Vous trouverez toutes les requêtes à exécuter ici <http://doc.wallabag.org/fr/master/user/query-upgrade-21-22.html>`_.
 
 
 Mettre à jour de la 2.0.x à la 2.1.1

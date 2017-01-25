@@ -59,10 +59,9 @@ Falls du SQLite nutzt, musst du außerdem deinen ``data/``-Ordner in die neue In
 
 Leere den ``var/cache``-Ordner.
 
-Du musst einige SQL-Abfragen durchführen, um deine Datenbank zu aktualisieren. Wir gehen in diesem Fall davon aus, dass das Tabellenpräfix ``wallabag_`` ist und eine MySQL-Datenbank verwendet wird:
+Du musst einige SQL-Abfragen durchführen, um deine Datenbank zu aktualisieren. Wir gehen in diesem Fall davon aus, dass das Tabellenpräfix ``wallabag_`` ist.
 
-.. code-block:: sql
-
+`You can find all the queries here <http://doc.wallabag.org/en/master/user/query-upgrade-21-22.html>`_.
 
 Upgrade von 2.0.x zu 2.1.1
 ---------------------------
