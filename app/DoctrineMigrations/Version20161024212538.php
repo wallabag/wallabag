@@ -7,12 +7,17 @@ use Doctrine\DBAL\Schema\Schema;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
+/**
+ * Added user_id column on oauth2_clients to prevent users to delete API clients from other users
+ */
 class Version20161024212538 extends AbstractMigration implements ContainerAwareInterface
 {
     /**
      * @var ContainerInterface
      */
     private $container;
+
+    private $constraintName = 'IDX_user_oauth_client';
 
     public function setContainer(ContainerInterface $container = null)
     {
@@ -33,13 +38,14 @@ class Version20161024212538 extends AbstractMigration implements ContainerAwareI
 
         $this->skipIf($clientsTable->hasColumn('user_id'), 'It seems that you already played this migration.');
 
-        $clientsTable->addColumn('user_id', 'integer');
+        $clientsTable->addColumn('user_id', 'integer', ['notnull' => false]);
 
         $clientsTable->addForeignKeyConstraint(
             $this->getTable('user'),
             ['user_id'],
             ['id'],
-            ['onDelete' => 'CASCADE']
+            ['onDelete' => 'CASCADE'],
+            $this->constraintName
         );
     }
 
@@ -48,5 +54,14 @@ class Version20161024212538 extends AbstractMigration implements ContainerAwareI
      */
     public function down(Schema $schema)
     {
+        $clientsTable = $schema->getTable($this->getTable('oauth2_clients'));
+
+        $this->skipIf(!$clientsTable->hasColumn('user_id'), 'It seems that you already played this migration.');
+
+        $clientsTable->dropColumn('user_id', 'integer');
+
+        if ($this->connection->getDatabasePlatform()->getName() != 'sqlite') {
+            $clientsTable->removeForeignKey($this->constraintName);
+        }
     }
 }

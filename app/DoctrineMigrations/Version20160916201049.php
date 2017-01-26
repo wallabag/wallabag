@@ -7,6 +7,9 @@ use Doctrine\DBAL\Schema\Schema;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
+/**
+ * Added pocket_consumer_key field on wallabag_config
+ */
 class Version20160916201049 extends AbstractMigration implements ContainerAwareInterface
 {
     /**

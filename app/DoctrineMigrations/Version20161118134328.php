@@ -47,7 +47,10 @@ class Version20161118134328 extends AbstractMigration implements ContainerAwareI
      */
     public function down(Schema $schema)
     {
-        $userTable = $schema->getTable($this->getTable('entry'));
-        $userTable->dropColumn('http_status');
+        $entryTable = $schema->getTable($this->getTable('entry'));
+
+        $this->skipIf(!$entryTable->hasColumn('http_status'), 'It seems that you already played this migration.');
+
+        $entryTable->dropColumn('http_status');
     }
 }

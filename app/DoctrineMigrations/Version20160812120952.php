@@ -7,6 +7,9 @@ use Doctrine\DBAL\Schema\Schema;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
+/**
+ * Added name field on wallabag_oauth2_clients
+ */
 class Version20160812120952 extends AbstractMigration implements ContainerAwareInterface
 {
     /**

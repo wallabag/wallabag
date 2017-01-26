@@ -54,7 +54,10 @@ class Version20161122203647 extends AbstractMigration implements ContainerAwareI
     public function down(Schema $schema)
     {
         $userTable = $schema->getTable($this->getTable('user'));
-        $userTable->addColumn('expired', 'smallint');
-        $userTable->addColumn('credentials_expired', 'smallint');
+
+        $this->skipIf(true === $userTable->hasColumn('expired') || true === $userTable->hasColumn('credentials_expired'), 'It seems that you already played this migration.');
+
+        $userTable->addColumn('expired', 'smallint', ['notnull' => false]);
+        $userTable->addColumn('credentials_expired', 'smallint', ['notnull' => false]);
     }
 }
