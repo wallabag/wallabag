@@ -28,7 +28,7 @@
 
     {% for entry in entries %}
         <div id="entry-{{ entry.id|e }}" class="{% if listMode == 0 %}entry{% else %}listmode entry{% endif %}">
-            <h2><a href="{{ path('view', { 'id': entry.id }) }}" title="{{ entry.title|raw }}">{{ entry.title|raw }}</a></h2>
+            <h2><a href="{{ path('view', { 'id': entry.id }) }}" title="{{ entry.title|e|raw }}">{{ entry.title|e|raw }}</a></h2>
 
             {% set readingTime = entry.readingTime / app.user.config.readingSpeed %}
             <div class="estimatedTime">
@@ -65,7 +65,7 @@
                     <li><a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a></li>
                 {% endfor %}
                 </ul>
-                <img class="preview" src="{{ entry.previewPicture }}" alt="{{ entry.title|raw }}" />
+                <img class="preview" src="{{ entry.previewPicture }}" alt="{{ entry.title|e|raw }}" />
             {% endif %}
         </div>
     {% endfor %}

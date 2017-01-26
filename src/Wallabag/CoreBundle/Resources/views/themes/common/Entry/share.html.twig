@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>{{ entry.title | raw }}</title>
+        <title>{{ entry.title|e|raw }}</title>
         <style>
             body {
                 margin: 10px;
@@ -27,7 +27,7 @@
                 width: 600px;
             }
         </style>
-        <meta property="og:title" content="{{ entry.title | raw }}" />
+        <meta property="og:title" content="{{ entry.title|e|raw }}" />
         <meta property="og:type" content="article" />
         <meta property="og:url" content="{{ app.request.uri }}" />
         {% set picturePath = app.request.schemeAndHttpHost ~ asset('bundles/wallabagcore/themes/_global/img/logo-other_themes.png') %}
@@ -38,13 +38,13 @@
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:image" content="{{ picturePath }}" />
         <meta name="twitter:site" content="@wallabagapp" />
-        <meta name="twitter:title" content="{{ entry.title | raw }}" />
+        <meta name="twitter:title" content="{{ entry.title|e|raw }}" />
         <meta name="twitter:description" content="{{ entry.content|striptags|slice(0, 300)|raw }}&hellip;" />
     </head>
     <body>
         <header>
-            <h1>{{ entry.title | raw }}</h1>
-            <div><a href="{{ entry.url|e }}" target="_blank" title="{{ 'entry.view.original_article'|trans }} : {{ entry.title|e }}" class="tool">{{ entry.domainName|removeWww }}</a></div>
+            <h1>{{ entry.title|e|raw }}</h1>
+            <div><a href="{{ entry.url|e }}" target="_blank" title="{{ 'entry.view.original_article'|trans }} : {{ entry.title|e|raw }}" class="tool">{{ entry.domainName|removeWww }}</a></div>
             <div>{{ "entry.public.shared_by_wallabag"|trans({'%wallabag_instance%': url('homepage')})|raw }}</div>
         </header>
         <article>

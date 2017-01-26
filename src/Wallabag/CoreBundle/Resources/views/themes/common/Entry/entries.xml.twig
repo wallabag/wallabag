@@ -18,7 +18,7 @@
         {% for entry in entries %}
 
             <item>
-                <title><![CDATA[{{ entry.title }}]]></title>
+                <title><![CDATA[{{ entry.title|e }}]]></title>
                 <source url="{{ url('view', { 'id': entry.id }) }}">wallabag</source>
                 <link>{{ entry.url }}</link>
                 <guid>{{ entry.url }}</guid>
