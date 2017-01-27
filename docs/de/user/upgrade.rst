@@ -37,6 +37,11 @@ Dies ist die Migrationsliste von 2.1.x auf 2.2.0:
 * ``20161118134328``: ``http_status``-Feld zur ``entry``-Tabelle hinzugefügt
 * ``20161122144743``: Interne Einstellung für das (de-)aktivieren zum Holen von Artikeln mit einer Paywall hinzugefügt
 * ``20161122203647``: ``expired``- und ``credentials_expired``-Feld aus der ``user``-Tabelle entfernt
+* ``20161128084725``: added ``list_mode`` field on ``config`` table
+* ``20161128131503``: dropped ``locked``, ``credentials_expire_at`` and ``expires_at`` fields on ``user`` table
+* ``20161214094402``: renamed ``uuid`` to ``uid`` on ``entry`` table
+* ``20161214094403``: added ``uid`` index on ``entry`` table
+* ``20170127093841``: added ``is_starred`` and ``is_archived`` indexes on ``entry`` table
 
 Upgrade auf einem Shared Hosting
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

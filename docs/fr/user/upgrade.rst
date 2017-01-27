@@ -37,6 +37,11 @@ Voici la liste des migrations de la 2.1.x à la 2.2.0 :
 * ``20161118134328``: ajout du champ ``http_status`` sur la table ``entry``
 * ``20161122144743``: ajout du paramètre interne pour activer/désactiver la récupération d'articles derrière un paywall
 * ``20161122203647``: suppression des champs ``expired`` et ``credentials_expired`` sur la table ``user``
+* ``20161128084725``: ajout du champ ``list_mode`` sur la table ``config``
+* ``20161128131503``: suppression des champs ``locked``, ``credentials_expire_at`` et ``expires_at`` sur la table ``user``
+* ``20161214094402``: renommage du champ ``uuid`` en ``uid`` sur la table ``entry``
+* ``20161214094403``: ajout de l'index ``uid`` sur la table ``entry``
+* ``20170127093841``: ajout des index ``is_starred`` et ``is_archived`` sur la table ``entry``
 
 Mise à jour sur un hébergement mutualisé
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
