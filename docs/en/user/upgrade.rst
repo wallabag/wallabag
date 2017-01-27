@@ -43,7 +43,9 @@ Here is the migrations list for 2.1.x to 2.2.0 release:
 * ``20161122203647``: dropped ``expired`` and ``credentials_expired`` fields on ``user`` table
 * ``20161128084725``: added ``list_mode`` field on ``config`` table
 * ``20161128131503``: dropped ``locked``, ``credentials_expire_at`` and ``expires_at`` fields on ``user`` table
+* ``20161214094402``: renamed ``uuid`` to ``uid`` on ``entry`` table
 * ``20161214094403``: added ``uid`` index on ``entry`` table
+* ``20170127093841``: added ``is_starred`` and ``is_archived`` indexes on ``entry`` table
 
 Upgrade on a shared hosting
 ===========================

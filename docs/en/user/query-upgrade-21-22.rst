@@ -795,3 +795,85 @@ Migration down
     DROP TABLE __temp__wallabag_entry
     CREATE INDEX created_at_idx ON wallabag_entry (created_at)
     CREATE INDEX IDX_F4D18282A76ED395 ON wallabag_entry (user_id)
+
+Migration 20170127093841
+------------------------
+
+MySQL
+^^^^^
+
+Migration up
+""""""""""""
+
+.. code-block:: sql
+
+    CREATE INDEX IDX_entry_starred ON wallabag_entry (is_starred)
+    CREATE INDEX IDX_entry_archived ON wallabag_entry (is_archived)
+
+Migration down
+""""""""""""""
+
+.. code-block:: sql
+
+    DROP INDEX IDX_entry_starred ON wallabag_entry
+    DROP INDEX IDX_entry_archived ON wallabag_entry
+
+PostgreSQL
+^^^^^^^^^^
+
+Migration up
+""""""""""""
+
+.. code-block:: sql
+
+    CREATE INDEX IDX_entry_starred ON wallabag_entry (is_starred)
+    CREATE INDEX IDX_entry_archived ON wallabag_entry (is_archived)
+
+Migration down
+""""""""""""""
+
+.. code-block:: sql
+
+    DROP INDEX IDX_entry_starred
+    DROP INDEX IDX_entry_archived
+
+SQLite
+^^^^^^
+
+Migration up
+""""""""""""
+
+.. code-block:: sql
+
+    DROP INDEX uid
+    DROP INDEX created_at
+    DROP INDEX IDX_F4D18282A76ED395
+    CREATE TEMPORARY TABLE __temp__wallabag_entry AS SELECT id, user_id, uid, title, url, is_archived, is_starred, content, created_at, updated_at, mimetype, language, reading_time, domain_name, preview_picture, is_public, http_status FROM wallabag_entry
+    DROP TABLE wallabag_entry
+    CREATE TABLE wallabag_entry (id INTEGER NOT NULL, user_id INTEGER DEFAULT NULL, uid VARCHAR(23) DEFAULT NULL COLLATE BINARY, title CLOB DEFAULT NULL COLLATE BINARY, url CLOB DEFAULT NULL COLLATE BINARY, is_archived BOOLEAN NOT NULL, is_starred BOOLEAN NOT NULL, content CLOB DEFAULT NULL COLLATE BINARY, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, mimetype CLOB DEFAULT NULL COLLATE BINARY, language CLOB DEFAULT NULL COLLATE BINARY, reading_time INTEGER DEFAULT NULL, domain_name CLOB DEFAULT NULL COLLATE BINARY, preview_picture CLOB DEFAULT NULL COLLATE BINARY, is_public BOOLEAN DEFAULT '0', http_status VARCHAR(3) DEFAULT NULL COLLATE BINARY, PRIMARY KEY(id))
+    INSERT INTO wallabag_entry (id, user_id, uid, title, url, is_archived, is_starred, content, created_at, updated_at, mimetype, language, reading_time, domain_name, preview_picture, is_public, http_status) SELECT id, user_id, uid, title, url, is_archived, is_starred, content, created_at, updated_at, mimetype, language, reading_time, domain_name, preview_picture, is_public, http_status FROM __temp__wallabag_entry
+    DROP TABLE __temp__wallabag_entry
+    CREATE INDEX uid ON wallabag_entry (uid)
+    CREATE INDEX created_at ON wallabag_entry (created_at)
+    CREATE INDEX IDX_F4D18282A76ED395 ON wallabag_entry (user_id)
+    CREATE INDEX IDX_entry_starred ON wallabag_entry (is_starred)
+    CREATE INDEX IDX_entry_archived ON wallabag_entry (is_archived)
+
+Migration down
+""""""""""""""
+
+.. code-block:: sql
+
+    DROP INDEX IDX_entry_archived
+    DROP INDEX IDX_entry_starred
+    DROP INDEX IDX_F4D18282A76ED395
+    DROP INDEX created_at
+    DROP INDEX uid
+    CREATE TEMPORARY TABLE __temp__wallabag_entry AS SELECT id, user_id, uid, title, url, is_archived, is_starred, content, created_at, updated_at, mimetype, language, reading_time, domain_name, preview_picture, is_public, http_status FROM wallabag_entry
+    DROP TABLE wallabag_entry
+    CREATE TABLE wallabag_entry (id INTEGER NOT NULL, user_id INTEGER DEFAULT NULL, uid VARCHAR(23) DEFAULT NULL COLLATE BINARY, title CLOB DEFAULT NULL COLLATE BINARY, url CLOB DEFAULT NULL COLLATE BINARY, is_archived BOOLEAN NOT NULL, is_starred BOOLEAN NOT NULL, content CLOB DEFAULT NULL COLLATE BINARY, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, mimetype CLOB DEFAULT NULL COLLATE BINARY, language CLOB DEFAULT NULL COLLATE BINARY, reading_time INTEGER DEFAULT NULL, domain_name CLOB DEFAULT NULL COLLATE BINARY, preview_picture CLOB DEFAULT NULL COLLATE BINARY, is_public BOOLEAN DEFAULT '0', http_status VARCHAR(3) DEFAULT NULL COLLATE BINARY, PRIMARY KEY(id))
+    INSERT INTO wallabag_entry (id, user_id, uid, title, url, is_archived, is_starred, content, created_at, updated_at, mimetype, language, reading_time, domain_name, preview_picture, is_public, http_status) SELECT id, user_id, uid, title, url, is_archived, is_starred, content, created_at, updated_at, mimetype, language, reading_time, domain_name, preview_picture, is_public, http_status FROM __temp__wallabag_entry
+    DROP TABLE __temp__wallabag_entry
+    CREATE INDEX IDX_F4D18282A76ED395 ON wallabag_entry (user_id)
+    CREATE INDEX created_at ON wallabag_entry (created_at)
+    CREATE INDEX uid ON wallabag_entry (uid)
