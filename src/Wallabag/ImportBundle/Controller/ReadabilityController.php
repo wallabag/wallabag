@@ -26,7 +26,7 @@ class ReadabilityController extends Controller
             $readability->setProducer($this->get('wallabag_import.producer.redis.readability'));
         }
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $file = $form->get('file')->getData();
             $markAsRead = $form->get('mark_as_read')->getData();
             $name = 'readability_'.$this->getUser()->getId().'.json';

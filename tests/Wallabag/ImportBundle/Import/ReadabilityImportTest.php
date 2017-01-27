@@ -18,7 +18,7 @@ class ReadabilityImportTest extends \PHPUnit_Framework_TestCase
     protected $logHandler;
     protected $contentProxy;
 
-    private function getReadabilityImport($unsetUser = false)
+    private function getReadabilityImport($unsetUser = false, $dispatched = 0)
     {
         $this->user = new User();
 
@@ -30,7 +30,15 @@ class ReadabilityImportTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $wallabag = new ReadabilityImport($this->em, $this->contentProxy);
+        $dispatcher = $this->getMockBuilder('Symfony\Component\EventDispatcher\EventDispatcher')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $dispatcher
+            ->expects($this->exactly($dispatched))
+            ->method('dispatch');
+
+        $wallabag = new ReadabilityImport($this->em, $this->contentProxy, $dispatcher);
 
         $this->logHandler = new TestHandler();
         $logger = new Logger('test', [$this->logHandler]);
@@ -54,7 +62,7 @@ class ReadabilityImportTest extends \PHPUnit_Framework_TestCase
 
     public function testImport()
     {
-        $readabilityImport = $this->getReadabilityImport();
+        $readabilityImport = $this->getReadabilityImport(false, 24);
         $readabilityImport->setFilepath(__DIR__.'/../fixtures/readability.json');
 
         $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
@@ -87,7 +95,7 @@ class ReadabilityImportTest extends \PHPUnit_Framework_TestCase
 
     public function testImportAndMarkAllAsRead()
     {
-        $readabilityImport = $this->getReadabilityImport();
+        $readabilityImport = $this->getReadabilityImport(false, 1);
         $readabilityImport->setFilepath(__DIR__.'/../fixtures/readability-read.json');
 
         $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')

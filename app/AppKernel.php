@@ -29,8 +29,9 @@ class AppKernel extends Kernel
             new KPhoen\RulerZBundle\KPhoenRulerZBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Craue\ConfigBundle\CraueConfigBundle(),
-            new Lexik\Bundle\MaintenanceBundle\LexikMaintenanceBundle(),
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+            new BD\GuzzleSiteAuthenticatorBundle\BDGuzzleSiteAuthenticatorBundle(),
 
             // wallabag bundles
             new Wallabag\CoreBundle\WallabagCoreBundle(),

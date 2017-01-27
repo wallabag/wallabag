@@ -1,3 +1,4 @@
+# settings_changed: Configuration updated
 download_pictures: تصاویر را در کارگزار خودتان باربگیرید
 carrot: فعال‌سازی هم‌رسانی به Carrot
 diaspora_url: نشانی Diaspora، اگر فعال بود
@@ -15,6 +16,7 @@ share_diaspora: فعال‌سازی هم‌رسانی به Diaspora
 share_mail:  فعال‌سازی هم‌رسانی با ایمیل
 share_shaarli:  فعال‌سازی هم‌رسانی به Shaarli
 share_twitter:  فعال‌سازی هم‌رسانی به Twitter
+share_unmark:  فعال‌سازی هم‌رسانی به Unmark.it
 show_printlink: نمایش پیوندی برای چاپ مطلب
 wallabag_support_url: نشانی صفحهٔ پشتیبانی wallabag
 wallabag_url: نشانی صفحهٔ wallabag *شما*
@@ -29,3 +31,5 @@ modify_settings: "اعمال"
 # demo_mode_enabled: "Enable demo mode ? (only used for the wallabag public demo)"
 # demo_mode_username: "Demo user"
 # share_public: Allow public url for entries
+# download_images_enabled: Download images locally
+# restricted_access: Enable authentication for websites with paywall

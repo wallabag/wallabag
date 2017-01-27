@@ -2,8 +2,6 @@
 
 namespace Wallabag\ImportBundle\Import;
 
-use Psr\Log\NullLogger;
-use Doctrine\ORM\EntityManager;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Wallabag\CoreBundle\Entity\Entry;
@@ -15,13 +13,6 @@ class PocketImport extends AbstractImport
     private $accessToken;
 
     const NB_ELEMENTS = 5000;
-
-    public function __construct(EntityManager $em, ContentProxy $contentProxy)
-    {
-        $this->em = $em;
-        $this->contentProxy = $contentProxy;
-        $this->logger = new NullLogger();
-    }
 
     /**
      * Only used for test purpose.

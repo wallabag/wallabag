@@ -20,8 +20,7 @@ class EntryRepository extends EntityRepository
     private function getBuilderByUser($userId)
     {
         return $this->createQueryBuilder('e')
-            ->leftJoin('e.user', 'u')
-            ->andWhere('u.id = :userId')->setParameter('userId', $userId)
+            ->andWhere('e.user = :userId')->setParameter('userId', $userId)
             ->orderBy('e.createdAt', 'desc')
         ;
     }
@@ -86,6 +85,36 @@ class EntryRepository extends EntityRepository
     }
 
     /**
+     * Retrieves entries filtered with a search term for a user.
+     *
+     * @param int    $userId
+     * @param string $term
+     * @param strint $currentRoute
+     *
+     * @return QueryBuilder
+     */
+    public function getBuilderForSearchByUser($userId, $term, $currentRoute)
+    {
+        $qb = $this
+            ->getBuilderByUser($userId);
+
+        if ('starred' === $currentRoute) {
+            $qb->andWhere('e.isStarred = true');
+        } elseif ('unread' === $currentRoute) {
+            $qb->andWhere('e.isArchived = false');
+        } elseif ('archive' === $currentRoute) {
+            $qb->andWhere('e.isArchived = true');
+        }
+
+        $qb
+            ->andWhere('e.content LIKE :term OR e.title LIKE :term')->setParameter('term', '%'.$term.'%')
+            ->leftJoin('e.tags', 't')
+            ->groupBy('e.id');
+
+        return $qb;
+    }
+
+    /**
      * Retrieves untagged entries for a user.
      *
      * @param int $userId
@@ -96,9 +125,7 @@ class EntryRepository extends EntityRepository
     {
         return $this
             ->getBuilderByUser($userId)
-            ->leftJoin('e.tags', 't')
-            ->groupBy('e.id')
-            ->having('count(t.id) = 0');
+            ->andWhere('size(e.tags) = 0');
     }
 
     /**
@@ -144,7 +171,7 @@ class EntryRepository extends EntityRepository
             $qb->orderBy('e.updatedAt', $order);
         }
 
-        $pagerAdapter = new DoctrineORMAdapter($qb);
+        $pagerAdapter = new DoctrineORMAdapter($qb, true, false);
 
         return new Pagerfanta($pagerAdapter);
     }
@@ -328,5 +355,19 @@ class EntryRepository extends EntityRepository
         ;
 
         return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * Remove all entries for a user id.
+     * Used when a user want to reset all informations.
+     *
+     * @param int $userId
+     */
+    public function removeAllByUserId($userId)
+    {
+        $this->getEntityManager()
+            ->createQuery('DELETE FROM Wallabag\CoreBundle\Entity\Entry e WHERE e.user = :userId')
+            ->setParameter('userId', $userId)
+            ->execute();
     }
 }

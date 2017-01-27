@@ -25,6 +25,8 @@ web/uploads/
 !web/bundles
 web/bundles/*
 !web/bundles/wallabagcore
+/web/assets/images/*
+!web/assets/images/.gitkeep
 
 # Build
 /app/build
@@ -34,7 +36,6 @@ web/bundles/*
 /composer.phar
 
 # Data for wallabag
-data/assets/*
 data/db/wallabag*.sqlite
 
 # Docker container logs and data

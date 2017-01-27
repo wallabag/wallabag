@@ -112,7 +112,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
             ->findByUrlAndUserId(
-                'http://www.framablog.org/index.php/post/2014/02/05/Framabag-service-libre-gratuit-interview-developpeur',
+                'https://framablog.org/2014/02/05/framabag-service-libre-gratuit-interview-developpeur/',
                 $this->getLoggedInUserId()
             );
 
@@ -126,9 +126,9 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertContains('flashes.import.notice.summary', $body[0]);
 
-        $this->assertEmpty($content->getMimetype());
-        $this->assertEmpty($content->getPreviewPicture());
-        $this->assertEmpty($content->getLanguage());
+        $this->assertNotEmpty($content->getMimetype(), 'Mimetype for http://www.framablog.org is ok');
+        $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for http://www.framablog.org is ok');
+        $this->assertNotEmpty($content->getLanguage(), 'Language for http://www.framablog.org is ok');
         $this->assertEquals(1, count($content->getTags()));
         $this->assertInstanceOf(\DateTime::class, $content->getCreatedAt());
     }

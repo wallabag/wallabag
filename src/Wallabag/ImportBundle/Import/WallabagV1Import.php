@@ -37,8 +37,6 @@ class WallabagV1Import extends WallabagImport
             'title' => $entry['title'],
             'html' => $entry['content'],
             'url' => $entry['url'],
-            'content_type' => '',
-            'language' => '',
             'is_archived' => $entry['is_read'] || $this->markAsRead,
             'is_starred' => $entry['is_fav'],
             'tags' => '',

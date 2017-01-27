@@ -111,19 +111,19 @@ class ReadabilityControllerTest extends WallabagCoreTestCase
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
             ->findByUrlAndUserId(
-                'https://venngage.com/blog/hashtags-are-worthless/',
+                'http://www.zataz.com/90-des-dossiers-medicaux-des-coreens-du-sud-vendus-a-des-entreprises-privees/',
                 $this->getLoggedInUserId()
             );
 
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertContains('flashes.import.notice.summary', $body[0]);
 
-        $this->assertNotEmpty($content->getMimetype());
-        $this->assertNotEmpty($content->getPreviewPicture());
-        $this->assertNotEmpty($content->getLanguage());
+        $this->assertNotEmpty($content->getMimetype(), 'Mimetype for http://www.zataz.com is ok');
+        $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for http://www.zataz.com is ok');
+        $this->assertNotEmpty($content->getLanguage(), 'Language for http://www.zataz.com is ok');
         $this->assertEquals(0, count($content->getTags()));
         $this->assertInstanceOf(\DateTime::class, $content->getCreatedAt());
-        $this->assertEquals('2016-08-25', $content->getCreatedAt()->format('Y-m-d'));
+        $this->assertEquals('2016-09-08', $content->getCreatedAt()->format('Y-m-d'));
     }
 
     public function testImportReadabilityWithFileAndMarkAllAsRead()

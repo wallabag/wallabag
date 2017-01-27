@@ -49,6 +49,7 @@ Modifiez votre fichier ``app/config/parameters.yml`` pour éditer la configurati
     rabbitmq_port: 5672
     rabbitmq_user: guest
     rabbitmq_password: guest
+    rabbitmq_prefetch_count: 10 # lire http://www.rabbitmq.com/consumer-prefetch.html
 
 Activer RabbitMQ dans wallabag
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -150,7 +151,7 @@ En fonction du service dont vous souhaitez importer vos données, vous devez act
   bin/console wallabag:import:redis-worker -e=prod firefox -vv >> /path/to/wallabag/var/logs/redis-firefox.log
 
   # for Chrome import
-  bin/console wallabag:import:redis-worker -e=prod instapaper -vv >> /path/to/wallabag/var/logs/redis-chrome.log
+  bin/console wallabag:import:redis-worker -e=prod chrome -vv >> /path/to/wallabag/var/logs/redis-chrome.log
 
 Si vous souhaitez démarrer l'import pour quelques messages uniquement, vous pouvez spécifier cette valeur en paramètre (ici 12) et le client va s'arrêter après le 12ème message :
 

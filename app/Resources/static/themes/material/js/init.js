@@ -1,10 +1,21 @@
+/* jQuery */
+import $ from 'jquery';
+
+/* Annotations */
+import annotator from 'annotator';
+
+/* Tools */
 import { savePercent, retrievePercent, initFilters, initExport } from '../../_global/js/tools';
 
-const $ = require('jquery');
+/* Import shortcuts */
+import './shortcuts/main';
+import './shortcuts/entry';
+import '../../_global/js/shortcuts/main';
+import '../../_global/js/shortcuts/entry';
+
+require('materialize'); // eslint-disable-line
 
 global.jQuery = $;
-require('materialize'); // eslint-disable-line
-const annotator = require('annotator');
 
 $(document).ready(() => {
   // sideNav
@@ -44,7 +55,7 @@ $(document).ready(() => {
     $('.nav-panels .action').hide(100);
     $('.nav-panel-menu').addClass('hidden');
     $('.nav-panels').css('background', 'white');
-    $('#searchfield').focus();
+    $('#search_entry_term').focus();
     return false;
   });
   $('.close').on('click', () => {

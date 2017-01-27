@@ -9,5 +9,6 @@
 
     {{ form_widget(form.label, { 'attr': {'autocomplete': 'off'} }) }}
 
-    {{ form_rest(form) }}
+    {{ form_widget(form.add, {'attr': {'class': 'btn waves-effect waves-light hide-on-large-only'}}) }}
+    {{ form_widget(form._token) }}
 </form>

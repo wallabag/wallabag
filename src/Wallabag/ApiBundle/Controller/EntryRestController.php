@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
+use Wallabag\CoreBundle\Event\EntrySavedEvent;
+use Wallabag\CoreBundle\Event\EntryDeletedEvent;
 
 class EntryRestController extends WallabagRestController
 {
@@ -149,6 +151,28 @@ class EntryRestController extends WallabagRestController
     }
 
     /**
+     * Retrieve a single entry as a predefined format.
+     *
+     * @ApiDoc(
+     *      requirements={
+     *          {"name"="entry", "dataType"="integer", "requirement"="\w+", "description"="The entry ID"}
+     *      }
+     * )
+     *
+     * @return Response
+     */
+    public function getEntryExportAction(Entry $entry, Request $request)
+    {
+        $this->validateAuthentication();
+        $this->validateUserAccess($entry->getUser()->getId());
+
+        return $this->get('wallabag_core.helper.entries_export')
+            ->setEntries($entry)
+            ->updateTitle('entry')
+            ->exportAs($request->attributes->get('_format'));
+    }
+
+    /**
      * Create an entry.
      *
      * @ApiDoc(
@@ -200,8 +224,10 @@ class EntryRestController extends WallabagRestController
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($entry);
-
         $em->flush();
+
+        // entry saved, dispatch event about it!
+        $this->get('event_dispatcher')->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
 
         $json = $this->get('serializer')->serialize($entry, 'json');
 
@@ -260,6 +286,51 @@ class EntryRestController extends WallabagRestController
     }
 
     /**
+     * Reload an entry.
+     * An empty response with HTTP Status 304 will be send if we weren't able to update the content (because it hasn't changed or we got an error).
+     *
+     * @ApiDoc(
+     *      requirements={
+     *          {"name"="entry", "dataType"="integer", "requirement"="\w+", "description"="The entry ID"}
+     *      }
+     * )
+     *
+     * @return JsonResponse
+     */
+    public function patchEntriesReloadAction(Entry $entry)
+    {
+        $this->validateAuthentication();
+        $this->validateUserAccess($entry->getUser()->getId());
+
+        try {
+            $entry = $this->get('wallabag_core.content_proxy')->updateEntry($entry, $entry->getUrl());
+        } catch (\Exception $e) {
+            $this->get('logger')->error('Error while saving an entry', [
+                'exception' => $e,
+                'entry' => $entry,
+            ]);
+
+            return new JsonResponse([], 304);
+        }
+
+        // if refreshing entry failed, don't save it
+        if ($this->getParameter('wallabag_core.fetching_error_message') === $entry->getContent()) {
+            return new JsonResponse([], 304);
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($entry);
+        $em->flush();
+
+        // entry saved, dispatch event about it!
+        $this->get('event_dispatcher')->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
+
+        $json = $this->get('serializer')->serialize($entry, 'json');
+
+        return (new JsonResponse())->setJson($json);
+    }
+
+    /**
      * Delete **permanently** an entry.
      *
      * @ApiDoc(
@@ -278,6 +349,9 @@ class EntryRestController extends WallabagRestController
         $em = $this->getDoctrine()->getManager();
         $em->remove($entry);
         $em->flush();
+
+        // entry deleted, dispatch event about it!
+        $this->get('event_dispatcher')->dispatch(EntryDeletedEvent::NAME, new EntryDeletedEvent($entry));
 
         $json = $this->get('serializer')->serialize($entry, 'json');
 

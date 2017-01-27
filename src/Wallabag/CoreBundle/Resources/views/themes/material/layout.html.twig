@@ -19,8 +19,6 @@
             Materialize.toast('{{ flashMessage|trans }}', 4000);
         </script>
     {% endfor %}
-
-    {{ render(controller("WallabagImportBundle:Import:checkQueue")) }}
 {% endblock %}
 
 {% block menu %}
@@ -82,37 +80,33 @@
                 {% block title %}
                 {% endblock %}
             </div>
-            <div class="input-field nav-panel-buttom">
-                <ul>
-                    <li class="bold">
-                        <a class="waves-effect tooltipped" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.add_new_entry'|trans }}" href="{{ path('new') }}" id="nav-btn-add">
-                            <i class="material-icons">add</i>
-                        </a>
-                    </li>
-                    <!--<li>
-                        <a title="{{ 'menu.top.search'|trans }}" class="waves-effect" href="javascript: void(null);" id="nav-btn-search">
-                            <i class="material-icons">search</i>
-                        </a>
-                    </li>-->
-                    <li id="button_filters">
-                        <a class="nav-panel-menu button-collapse-right tooltipped" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.filter_entries'|trans }}" href="#" data-activates="filters">
-                            <i class="material-icons">filter_list</i>
-                        </a>
-                    </li>
-                    <li id="button_export">
-                        <a class="nav-panel-menu button-collapse-right tooltipped" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.export'|trans }}" href="#" data-activates="export">
-                            <i class="material-icons">file_download</i>
-                        </a>
-                    </li>
-                </ul>
+            <ul class="input-field nav-panel-buttom">
+                <li class="bold">
+                    <a class="waves-effect tooltipped" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.add_new_entry'|trans }}" href="{{ path('new') }}" id="nav-btn-add">
+                        <i class="material-icons">add</i>
+                    </a>
+                </li>
+                <li>
+                    <a class="waves-effect tooltipped" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.search'|trans }}" href="javascript: void(null);" id="nav-btn-search">
+                        <i class="material-icons">search</i>
+                    </a>
+                </li>
+                <li id="button_filters">
+                    <a class="nav-panel-menu button-collapse-right tooltipped js-filters-action" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.filter_entries'|trans }}" href="#" data-activates="filters">
+                        <i class="material-icons">filter_list</i>
+                    </a>
+                </li>
+                <li id="button_export">
+                    <a class="nav-panel-menu button-collapse-right tooltipped js-export-action" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.export'|trans }}" href="#" data-activates="export">
+                        <i class="material-icons">file_download</i>
+                    </a>
+                </li>
+            </ul>
+            <div class="input-field nav-panel-search" style="display: none">
+                {{ render(controller("WallabagCoreBundle:Entry:searchForm", {'currentRoute': app.request.attributes.get('_route')})) }}
+                <label for="search" class="active"><i class="material-icons search">search</i></label>
+                <i class="material-icons close">clear</i>
             </div>
-            <form method="get" action="index.php">
-                <div class="input-field nav-panel-search" style="display: none">
-                    <input name="search" id="searchfield" type="search" required placeholder="{{ 'menu.search_form.input_label'|trans }}">
-                    <label for="search"><i class="material-icons search">search</i></label>
-                    <i class="material-icons close">clear</i>
-                </div>
-            </form>
             <div class="input-field nav-panel-add" style="display: none">
                 {{ render(controller("WallabagCoreBundle:Entry:addEntryForm")) }}
                 <label for="add" class="active"><i class="material-icons add">add</i></label>

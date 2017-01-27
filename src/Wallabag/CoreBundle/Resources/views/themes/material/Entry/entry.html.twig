@@ -46,14 +46,14 @@
         </li>
 
         <li class="bold border-bottom hide-on-med-and-down">
-            <a class="waves-effect collapsible-header" href="{{ entry.url|e }}">
+            <a class="waves-effect collapsible-header original" href="{{ entry.url|e }}" target="_blank">
                 <i class="material-icons small">link</i>
                 <span>{{ 'entry.view.left_menu.view_original_article'|trans }}</span>
             </a>
             <div class="collapsible-body"></div>
         </li>
 
-        <li class="bold hide-on-med-and-down">
+        <li class="bold">
             <a class="waves-effect collapsible-header" title="{{ 'entry.view.left_menu.re_fetch_content'|trans }}" href="{{ path('reload_entry', { 'id': entry.id }) }}" id="reload">
                 <i class="material-icons small">autorenew</i>
                 <span>{{ 'entry.view.left_menu.re_fetch_content'|trans }}</span>
@@ -67,7 +67,7 @@
         {% endif %}
 
         <li class="bold hide-on-med-and-down">
-            <a class="waves-effect collapsible-header" title="{{ markAsReadLabel|trans }}" href="{{ path('archive_entry', { 'id': entry.id }) }}" id="markAsRead">
+            <a class="waves-effect collapsible-header markasread" title="{{ markAsReadLabel|trans }}" href="{{ path('archive_entry', { 'id': entry.id }) }}" id="markAsRead">
                 <i class="material-icons small">{% if entry.isArchived == 0 %}done{% else %}redo{% endif %}</i>
                 <span>{{ markAsReadLabel|trans }}</span>
             </a>
@@ -75,21 +75,21 @@
         </li>
 
         <li class="bold hide-on-med-and-down">
-            <a class="waves-effect collapsible-header" title="{{ 'entry.view.left_menu.set_as_starred'|trans }}" href="{{ path('star_entry', { 'id': entry.id }) }}" id="setFav">
+            <a class="waves-effect collapsible-header favorite" title="{{ 'entry.view.left_menu.set_as_starred'|trans }}" href="{{ path('star_entry', { 'id': entry.id }) }}" id="setFav">
                 <i class="material-icons spall">{% if entry.isStarred == 0 %}star_outline{% else %}star{% endif %}</i>
                 <span>{{ 'entry.view.left_menu.set_as_starred'|trans }}</span>
             </a>
             <div class="collapsible-body"></div>
         </li>
-        <li class="bold border-bottom hide-on-med-and-down">
-            <a class="waves-effect collapsible-header" title="{{ 'entry.view.left_menu.delete'|trans }}" href="{{ path('delete_entry', { 'id': entry.id }) }}">
+        <li class="bold border-bottom">
+            <a class="waves-effect collapsible-header delete" title="{{ 'entry.view.left_menu.delete'|trans }}" href="{{ path('delete_entry', { 'id': entry.id }) }}">
                 <i class="material-icons small">delete</i>
                 <span>{{ 'entry.view.left_menu.delete'|trans }}</span>
             </a>
             <div class="collapsible-body"></div>
         </li>
 
-        <li class="bold border-bottom hide-on-med-and-down">
+        <li class="bold border-bottom">
             <a class="waves-effect collapsible-header" id="nav-btn-add-tag">
                 <i class="material-icons small">label_outline</i>
                 <span>{{ 'entry.view.left_menu.add_a_tag'|trans }}</span>
@@ -125,7 +125,7 @@
                     {% endif %}
                     {% if craue_setting('share_shaarli') %}
                         <li>
-                            <a href="{{ craue_setting('shaarli_url') }}/index.php?post={{ entry.url|url_encode }}&amp;title={{ entry.title|url_encode }}" target="_blank">
+                        <a href="{{ craue_setting('shaarli_url') }}/index.php?post={{ entry.url|url_encode }}&amp;title={{ entry.title|url_encode }}&amp;tags={{ entry.tags|join(',')|url_encode }}" target="_blank">
                                 <i class="tool icon-image icon-image--shaarli" title="shaarli"></i>
                                 <span>shaarli</span>
                             </a>
@@ -136,6 +136,14 @@
                             <a href="{{ craue_setting('diaspora_url') }}/bookmarklet?url={{ entry.url|url_encode }}&title={{ entry.title|url_encode }}&notes=&v=1&noui=1&jump=doclose" target="_blank">
                                 <i class="tool icon-image icon-image--diaspora" title="diaspora"></i>
                                 <span>diaspora*</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% if craue_setting('share_unmark') %}
+                        <li>
+                            <a href="{{ craue_setting('unmark_url') }}/mark/add?url={{ entry.url|url_encode }}&amp;title={{entry.title|url_encode}}&amp;v=6" target="_blank">
+                                <i class="tool icon-image icon-image--unmark" title="unmark"></i>
+                                <span>unmark.it</span>
                             </a>
                         </li>
                     {% endif %}
@@ -186,14 +194,6 @@
             </div>
         </li>
 
-        <li class="bold hide-on-large-only">
-            <a class="waves-effect collapsible-header" title="{{ 'entry.view.left_menu.delete'|trans }}" href="{{ path('delete_entry', { 'id': entry.id }) }}">
-                <i class="material-icons small">delete</i>
-                <span>{{ 'entry.view.left_menu.delete'|trans }}</span>
-            </a>
-            <div class="collapsible-body"></div>
-        </li>
-
         <li class="bold">
             <a class="waves-effect collapsible-header" href="mailto:hello@wallabag.org?subject=Wrong%20display%20in%20wallabag&amp;body={{ entry.url|url_encode }}" title="{{ 'entry.view.left_menu.problem.description'|trans }}">
                 <i class="material-icons small">error</i>
@@ -214,13 +214,7 @@
         <aside>
             <ul class="tools">
                 <li>
-                    {% set readingTime = entry.readingTime / app.user.config.readingSpeed %}
-                    <i class="material-icons">timer</i>
-                    {% if readingTime > 0 %}
-                        {{ 'entry.list.reading_time_minutes_short'|trans({'%readingTime%': readingTime|round}) }}
-                    {% else %}
-                        {{ 'entry.list.reading_time_less_one_minute_short'|trans|raw }}
-                    {% endif %}
+                    {% include "@WallabagCore/themes/material/Entry/_reading_time.html.twig" with {'entry': entry} only %}
                 </li>
                 <li>
                     <i class="material-icons" title="{{ 'entry.view.created_at'|trans }}">today</i>
@@ -257,6 +251,17 @@
         <article>
             {{ entry.content | raw }}
         </article>
+
+        <div class="fixed-action-btn horizontal click-to-toggle hide-on-large-only">
+            <a class="btn-floating btn-large">
+              <i class="material-icons">menu</i>
+            </a>
+            <ul>
+              <li><a class="btn-floating" href="{{ path('archive_entry', { 'id': entry.id }) }}"><i class="material-icons">done</i></a></li>
+              <li><a class="btn-floating" href="{{ path('star_entry', { 'id': entry.id }) }}"><i class="material-icons">star_outline</i></a></li>
+              <li><a class="btn-floating" href="{{ path('delete_entry', { 'id': entry.id }) }}"><i class="material-icons">delete</i></a></li>
+            </ul>
+        </div>
     </div>
 
 <script id="annotationroutes" type="application/json">

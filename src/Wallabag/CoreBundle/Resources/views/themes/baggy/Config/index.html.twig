@@ -47,6 +47,14 @@
 
         <fieldset class="w500p inline">
             <div class="row">
+                {{ form_label(form.config.action_mark_as_read) }}
+                {{ form_errors(form.config.action_mark_as_read) }}
+                {{ form_widget(form.config.action_mark_as_read) }}
+            </div>
+        </fieldset>
+
+        <fieldset class="w500p inline">
+            <div class="row">
                 {{ form_label(form.config.language) }}
                 {{ form_errors(form.config.language) }}
                 {{ form_widget(form.config.language) }}
@@ -69,6 +77,19 @@
             <a href="#" title="{{ 'config.form_settings.help_pocket_consumer_key'|trans }}">
                 <i class="material-icons">live_help</i>
             </a>
+        </fieldset>
+
+        <fieldset class="w500p inline">
+            <div class="row">
+                <h3>{{ 'config.form_settings.android_configuration'|trans }}</h3>
+                <a href="wallabag://{{ app.user.username }}@{{ wallabag_url }}" >Touch here to prefill your Android application</a>
+                <br/>
+                <img id="androidQrcode" />
+                <script>
+                    const imgBase64 = jrQrcode.getQrBase64('wallabag://{{ app.user.username }}@{{ wallabag_url }}');
+                    document.getElementById('androidQrcode').src = imgBase64;
+                </script>
+            </div>
         </fieldset>
 
         {{ form_rest(form.config) }}
@@ -164,9 +185,40 @@
         </fieldset>
         {% endif %}
 
+        <h2>{{ 'config.reset.title'|trans }}</h2>
+        <fieldset class="w500p inline">
+            <p>{{ 'config.reset.description'|trans }}</p>
+            <ul>
+                <li>
+                    <a href="{{ path('config_reset', { type: 'annotations'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
+                        {{ 'config.reset.annotations'|trans }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('config_reset', { type: 'tags'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
+                        {{ 'config.reset.tags'|trans }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('config_reset', { type: 'entries'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
+                        {{ 'config.reset.entries'|trans }}
+                    </a>
+                </li>
+            </ul>
+        </fieldset>
+
         {{ form_widget(form.user._token) }}
         {{ form_widget(form.user.save) }}
     </form>
+
+    {% if enabled_users > 1 %}
+        <h2>{{ 'config.form_user.delete.title'|trans }}</h2>
+
+        <p>{{ 'config.form_user.delete.description'|trans }}</p>
+        <a href="{{ path('delete_account') }}" onclick="return confirm('{{ 'config.form_user.delete.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red delete-account">
+            {{ 'config.form_user.delete.button'|trans }}
+        </a>
+    {% endif %}
 
     <h2>{{ 'config.tab_menu.password'|trans }}</h2>
 

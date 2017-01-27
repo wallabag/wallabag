@@ -30,7 +30,7 @@ services:
             - "@doctrine"
 
     wallabag_core.subscriber.table_prefix:
-        class: Wallabag\CoreBundle\Subscriber\TablePrefixSubscriber
+        class: Wallabag\CoreBundle\Event\Subscriber\TablePrefixSubscriber
         arguments:
             - "%database_table_prefix%"
         tags:
@@ -41,10 +41,43 @@ services:
         arguments:
             -
                 error_message: '%wallabag_core.fetching_error_message%'
+            - "@wallabag_core.guzzle.http_client"
+            - "@wallabag_core.graby.config_builder"
         calls:
             - [ setLogger, [ "@logger" ] ]
         tags:
             - { name: monolog.logger, channel: graby }
+
+    wallabag_core.graby.config_builder:
+        class: Graby\SiteConfig\ConfigBuilder
+        arguments:
+            - {}
+            - "@logger"
+
+    wallabag_core.guzzle.http_client:
+        class: GuzzleHttp\ClientInterface
+        factory: ["@wallabag_core.guzzle.http_client_factory", buildHttpClient]
+
+    wallabag_core.guzzle_authenticator.config_builder:
+        class: Wallabag\CoreBundle\GuzzleSiteAuthenticator\GrabySiteConfigBuilder
+        arguments:
+            - "@wallabag_core.graby.config_builder"
+            - "%sites_credentials%"
+
+    # service alias override
+    bd_guzzle_site_authenticator.site_config_builder:
+        alias: wallabag_core.guzzle_authenticator.config_builder
+
+    wallabag_core.guzzle.http_client_factory:
+        class: Wallabag\CoreBundle\Helper\HttpClientFactory
+        arguments:
+            - "@bd_guzzle_site_authenticator.authenticator_subscriber"
+            - "@wallabag_core.guzzle.cookie_jar"
+            - '@=service(''craue_config'').get(''restricted_access'')'
+
+    wallabag_core.guzzle.cookie_jar:
+        class: GuzzleHttp\Cookie\FileCookieJar
+        arguments: ["%kernel.cache_dir%/cookiejar.json"]
 
     wallabag_core.content_proxy:
         class: Wallabag\CoreBundle\Helper\ContentProxy
@@ -53,6 +86,7 @@ services:
             - "@wallabag_core.rule_based_tagger"
             - "@wallabag_core.tag_repository"
             - "@logger"
+            - '%wallabag_core.fetching_error_message%'
 
     wallabag_core.rule_based_tagger:
         class: Wallabag\CoreBundle\Helper\RuleBasedTagger
@@ -94,6 +128,7 @@ services:
         class: Wallabag\CoreBundle\Helper\Redirect
         arguments:
             - "@router"
+            - "@security.token_storage"
 
     wallabag_core.helper.prepare_pager_for_entries:
         class: Wallabag\CoreBundle\Helper\PreparePagerForEntries
@@ -109,9 +144,38 @@ services:
                 host: '%redis_host%'
                 port: '%redis_port%'
                 path: '%redis_path%'
+                password: '%redis_password%'
 
     wallabag_core.exception_controller:
         class: Wallabag\CoreBundle\Controller\ExceptionController
         arguments:
             - '@twig'
             - '%kernel.debug%'
+
+    wallabag_core.subscriber.sqlite_cascade_delete:
+        class: Wallabag\CoreBundle\Event\Subscriber\SQLiteCascadeDeleteSubscriber
+        arguments:
+            - "@doctrine"
+        tags:
+            - { name: doctrine.event_subscriber }
+
+    wallabag_core.subscriber.download_images:
+        class: Wallabag\CoreBundle\Event\Subscriber\DownloadImagesSubscriber
+        arguments:
+            - "@doctrine.orm.default_entity_manager"
+            - "@wallabag_core.entry.download_images"
+            - '@=service(''craue_config'').get(''download_images_enabled'')'
+            - "@logger"
+        tags:
+            - { name: kernel.event_subscriber }
+
+    wallabag_core.entry.download_images:
+        class: Wallabag\CoreBundle\Helper\DownloadImages
+        arguments:
+            - "@wallabag_core.entry.download_images.client"
+            - "%kernel.root_dir%/../web/assets/images"
+            - '@=service(''craue_config'').get(''wallabag_url'')'
+            - "@logger"
+
+    wallabag_core.entry.download_images.client:
+        class: GuzzleHttp\Client

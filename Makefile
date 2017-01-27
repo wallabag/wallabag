@@ -27,8 +27,7 @@ build: ## Run grunt
 	@grunt
 
 test: ## Launch wallabag testsuite
-	@if [ ! -d "vendor/phpunit" ]; then composer install; fi
-	@ant prepare && vendor/phpunit/phpunit/phpunit -v
+	@ant prepare && bin/simple-phpunit -v
 
 release: ## Create a package. Need a VERSION parameter (eg: `make release VERSION=master`).
 ifndef VERSION

@@ -50,7 +50,8 @@ class AnnotationRepository extends EntityRepository
     {
         return $this->createQueryBuilder('a')
             ->andWhere('a.id = :annotationId')->setParameter('annotationId', $annotationId)
-            ->getQuery()->getSingleResult()
+            ->getQuery()
+            ->getSingleResult()
         ;
     }
 
@@ -67,7 +68,8 @@ class AnnotationRepository extends EntityRepository
         return $this->createQueryBuilder('a')
             ->where('a.entry = :entryId')->setParameter('entryId', $entryId)
             ->andwhere('a.user = :userId')->setParameter('userId', $userId)
-            ->getQuery()->getResult()
+            ->getQuery()
+            ->getResult()
         ;
     }
 
@@ -105,5 +107,19 @@ class AnnotationRepository extends EntityRepository
             ->setMaxResults(1)
             ->getQuery()
             ->getSingleResult();
+    }
+
+    /**
+     * Remove all annotations for a user id.
+     * Used when a user want to reset all informations.
+     *
+     * @param int $userId
+     */
+    public function removeAllByUserId($userId)
+    {
+        $this->getEntityManager()
+            ->createQuery('DELETE FROM Wallabag\AnnotationBundle\Entity\Annotation a WHERE a.user = :userId')
+            ->setParameter('userId', $userId)
+            ->execute();
     }
 }

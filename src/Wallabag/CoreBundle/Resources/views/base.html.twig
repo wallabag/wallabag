@@ -41,6 +41,8 @@
             {% block css %}
             {% endblock %}
             {% block scripts %}
+            <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+            <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
             {% endblock %}
 
             <title>{% block title %}{% endblock %} – wallabag</title>

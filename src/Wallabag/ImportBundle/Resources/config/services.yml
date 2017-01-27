@@ -20,6 +20,7 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@wallabag_core.content_proxy"
+            - "@event_dispatcher"
         calls:
             - [ setClient, [ "@wallabag_import.pocket.client" ] ]
             - [ setLogger, [ "@logger" ]]
@@ -31,6 +32,7 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@wallabag_core.content_proxy"
+            - "@event_dispatcher"
         calls:
             - [ setLogger, [ "@logger" ]]
         tags:
@@ -41,6 +43,7 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@wallabag_core.content_proxy"
+            - "@event_dispatcher"
         calls:
             - [ setLogger, [ "@logger" ]]
         tags:
@@ -51,6 +54,7 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@wallabag_core.content_proxy"
+            - "@event_dispatcher"
         calls:
             - [ setLogger, [ "@logger" ]]
         tags:
@@ -61,16 +65,29 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@wallabag_core.content_proxy"
+            - "@event_dispatcher"
         calls:
             - [ setLogger, [ "@logger" ]]
         tags:
             -  { name: wallabag_import.import, alias: instapaper }
+
+    wallabag_import.pinboard.import:
+        class: Wallabag\ImportBundle\Import\PinboardImport
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@wallabag_core.content_proxy"
+            - "@event_dispatcher"
+        calls:
+            - [ setLogger, [ "@logger" ]]
+        tags:
+            -  { name: wallabag_import.import, alias: pinboard }
 
     wallabag_import.firefox.import:
         class: Wallabag\ImportBundle\Import\FirefoxImport
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@wallabag_core.content_proxy"
+            - "@event_dispatcher"
         calls:
             - [ setLogger, [ "@logger" ]]
         tags:
@@ -80,6 +97,7 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@wallabag_core.content_proxy"
+            - "@event_dispatcher"
         calls:
             - [ setLogger, [ "@logger" ]]
         tags:

@@ -30,6 +30,11 @@ Langage
 wallabag (via graby) peut détecter la langue dans laquelle l'article est écrit.
 C'est ainsi facile pour vous de retrouver des articles écrits dans une langue spécifique.
 
+Statut HTTP
+-----------
+
+Vous pouvez retrouver des articles en filtrant par leur code HTTP : 200, 404, 500, etc.
+
 Temps de lecture
 ----------------
 

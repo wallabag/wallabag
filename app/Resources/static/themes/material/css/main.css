@@ -150,6 +150,11 @@
   background-image: url("../../_global/img/icons/diaspora-icon--black.png");
 }
 
+/* Unmark.it */
+.icon-image--unmark {
+  background-image: url("../../_global/img/icons/unmark-icon--black.png");
+}
+
 /* Shaarli */
 .icon-image--shaarli {
   background-image: url("../../_global/img/icons/shaarli.png");
@@ -159,7 +164,7 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-  background: #f0f0f0;
+  background: #fafafa;
 }
 
 body.login main {
@@ -189,13 +194,20 @@ main,
 
 .results {
   height: 1em;
-  line-height: 30px;
 }
 
 .results .nb-results,
 .results .pagination {
   margin: 15px;
   margin-bottom: 0;
+}
+
+.results .nb-results {
+  display: inline-flex;
+}
+
+.results a {
+  color: #444;
 }
 
 .pagination {
@@ -271,6 +283,16 @@ nav input {
   color: #aaa;
 }
 
+nav {
+  height: auto;
+}
+
+.nav-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
 .nav-wrapper .button-collapse {
   padding: 0 15px;
 }
@@ -279,8 +301,10 @@ nav input {
   display: none;
 }
 
-.nav-panels {
-  overflow: hidden;
+.nav-panel-buttom {
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-end;
 }
 
 .nav-panel-buttom li {
@@ -317,11 +341,13 @@ nav input {
   color: #444;
 }
 
-.input-field.nav-panel-add label {
+.input-field.nav-panel-add label,
+.input-field.nav-panel-search label {
   left: 1rem;
 }
 
-.input-field.nav-panel-add .close {
+.input-field.nav-panel-add .close,
+.input-field.nav-panel-search .close {
   position: absolute;
   top: 0;
   right: 1rem;
@@ -340,8 +366,10 @@ nav input {
 }
 
 .input-field.nav-panel-add,
-.input-field.nav-panel-add form {
-  height: 100%;
+.input-field.nav-panel-add form,
+.input-field.nav-panel-search,
+.input-field.nav-panel-search form {
+  flex-grow: 1;
 }
 
 /* ==========================================================================
@@ -411,7 +439,6 @@ nav ul a:hover {
 .side-nav.fixed.right-aligned {
   right: -250px;
   left: auto !important;
-  overflow-y: visible;
 }
 
 #filters div.with-checkbox {
@@ -535,6 +562,18 @@ a.original {
   line-height: 24px;
 }
 
+.card .card-action ul.tools li a.tool {
+  margin-right: 5px !important;
+}
+
+.card-stacked:hover ul.tools-list {
+  display: block;
+}
+
+.card-stacked ul.tools-list {
+  display: none;
+}
+
 .card .card-action a {
   color: #fff;
   margin: 0;
@@ -587,13 +626,101 @@ a.original {
 #article {
   font-size: 20px;
   margin: 0 auto;
-  max-width: 40em;
+  max-width: 45em;
+}
+
+#article article {
+  color: #424242;
+  font-size: 18px;
+  line-height: 1.7em;
+}
+
+#article article h1,
+#article article h2,
+#article article h3,
+#article article h4,
+#article article h5,
+#article article h6 {
+  color: #212121;
+}
+
+#article article h1 strong,
+#article article h2 strong,
+#article article h3 strong,
+#article article h4 strong,
+#article article h5 strong,
+#article article h6 strong {
+  font-weight: 500;
+}
+
+#article article h6 {
+  font-size: 1.2rem;
+}
+
+#article article h5 {
+  font-size: 1.6rem;
+}
+
+#article article h4 {
+  font-size: 1.9rem;
+}
+
+#article article h3 {
+  font-size: 2.2rem;
+}
+
+#article article h2 {
+  font-size: 2.5rem;
+}
+
+#article article h1 {
+  font-size: 2.7rem;
 }
 
 #article img,
 #article figure {
   max-width: 100%;
   height: auto;
+}
+
+#article article a {
+  border-bottom: 1px dotted #03a9f4;
+  text-decoration: none;
+}
+
+#article article a:hover {
+  border-bottom-style: solid;
+}
+
+#article article ul {
+  padding-left: 30px;
+}
+
+#article article ul,
+#article article ul li {
+  list-style-type: disc;
+}
+
+#article article blockquote {
+  font-style: italic;
+}
+
+#article article strong {
+  font-weight: bold;
+}
+
+#article article pre {
+  box-sizing: border-box;
+  margin: 0 0 1.75em;
+  border: #e3f2fd 1px solid;
+  width: 100%;
+  padding: 10px;
+  font-family: monospace;
+  font-size: 0.8em;
+  white-space: pre;
+  overflow: auto;
+  background: #f5f5f5;
+  border-radius: 3px;
 }
 
 #article > header > h1 {
@@ -691,6 +818,14 @@ article aside .tools li {
     width: auto;
   }
 
+  .nav-panels .action {
+    padding-right: 0.75rem;
+  }
+
+  .nav-panel-buttom {
+    justify-content: space-around;
+  }
+
   #article {
     max-width: 35em;
     margin-left: auto;
@@ -727,11 +862,13 @@ article aside .tools li {
   .pagination li.next {
     width: auto;
   }
-}
 
-@media only screen and (min-width: 400px) {
-  .nav-panel-buttom {
-    float: right;
+  .drag-target + .drag-target {
+    height: 50%;
+  }
+
+  .drag-target + .drag-target + .drag-target {
+    top: 50%;
   }
 }
 

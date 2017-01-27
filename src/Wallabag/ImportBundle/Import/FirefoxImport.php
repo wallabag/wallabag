@@ -37,9 +37,10 @@ class FirefoxImport extends BrowserImport
     {
         $data = [
             'title' => $entry['title'],
-            'html' => '',
+            'html' => false,
             'url' => $entry['uri'],
-            'is_archived' => $this->markAsRead,
+            'is_archived' => (int) $this->markAsRead,
+            'is_starred' => false,
             'tags' => '',
             'created_at' => substr($entry['dateAdded'], 0, 10),
         ];

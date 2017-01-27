@@ -26,6 +26,15 @@ Vitesse de lecture
 
 wallabag calcule une durée de lecture pour chaque article. Vous pouvez définir ici, grâce à cette liste déroulante, si vous lisez plus ou moins vite. wallabag recalculera la durée de lecture de chaque article.
 
+Où souhaitez-vous être redirigé après avoir marqué un article comme lu ?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Chaque fois que vous ferez certaines actions (après avoir marqué un article comme lu / comme favori,
+après avoir supprimé un article, après avoir retiré un tag d'un article), vous pouvez être redirigé :
+
+- sur la page d'accueil
+- sur la page courante
+
 Langue
 ~~~~~~
 
@@ -44,10 +53,15 @@ Vous avez maintenant trois liens, un par statut : ajoutez-les dans votre agrég
 Vous pouvez aussi définir combien d'articles vous souhaitez dans vos flux RSS
 (50 est la valeur par défaut).
 
+Une pagination est aussi disponible pour ces flux. Il suffit de rajouter ``?page=2`` pour aller à la seconde page, par exemple.
+Cette pagination suit `la RFC <https://tools.ietf.org/html/rfc5005#page-4>`_, ce qui signifie que vous trouverez la page suivante (``next``), précédente (``previous``) et la dernière (``last``) dans la balise `<channel>` de chaque flux RSS.
+
 Mon compte
 ----------
 
 Vous pouvez ici modifier votre nom, votre adresse email et activer la ``Double authentification``.
+
+Si l'instance de wallabag compte plus d'un utilisateur actif, vous pouvez supprimer ici votre compte. **Attention, nous supprimons toutes vos données**.
 
 Double authentification (2FA)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -1,13 +1,13 @@
 Migrate from ...
 ================
 
-In wallabag 2.x, you can import data from: 
+In wallabag 2.x, you can import data from:
 
-- `Pocket <#id1>`_ 
-- `Readability <#id2>`_ 
-- `Instapaper <#id4>`_ 
-- `wallabag 1.x <#id6>`_ 
-- `wallabag 2.x <#id7>`_ 
+- `Pocket <#id1>`_
+- `Readability <#id2>`_
+- `Instapaper <#id4>`_
+- `wallabag 1.x <#id6>`_
+- `wallabag 2.x <#id7>`_
 
 We also developed `a script to execute migrations via command-line interface <#import-via-command-line-interface-cli>`_.
 
@@ -57,8 +57,24 @@ and then select your json file and upload it.
 
 Your data will be imported. Data import can be a demanding process for your server.
 
-Instapaper
-----------
+From Pinboard
+-------------
+
+Export your Pinboard data
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+On the backup (`https://pinboard.in/settings/backup <https://pinboard.in/settings/backup>`_) page, click on "JSON" in the "Bookmarks" section. A JSON file will be downloaded (like ``pinboard_export``).
+
+Import your data into wallabag 2.x
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Click on ``Import`` link in the menu, on ``Import contents`` in Pinboard section
+and then select your json file and upload it.
+
+Your data will be imported. Data import can be a demanding process for your server.
+
+From Instapaper
+---------------
 
 Export your Instapaper data
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~

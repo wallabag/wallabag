@@ -3,11 +3,27 @@
 namespace Wallabag\ApiBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Wallabag\CoreBundle\Entity\Entry;
 
 class WallabagRestController extends FOSRestController
 {
+    /**
+     * Retrieve version number.
+     *
+     * @ApiDoc()
+     *
+     * @return JsonResponse
+     */
+    public function getVersionAction()
+    {
+        $version = $this->container->getParameter('wallabag_core.version');
+        $json = $this->get('serializer')->serialize($version, 'json');
+
+        return (new JsonResponse())->setJson($json);
+    }
+
     protected function validateAuthentication()
     {
         if (false === $this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {

@@ -18,7 +18,7 @@ class ChromeImportTest extends \PHPUnit_Framework_TestCase
     protected $logHandler;
     protected $contentProxy;
 
-    private function getChromeImport($unsetUser = false)
+    private function getChromeImport($unsetUser = false, $dispatched = 0)
     {
         $this->user = new User();
 
@@ -30,7 +30,15 @@ class ChromeImportTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $wallabag = new ChromeImport($this->em, $this->contentProxy);
+        $dispatcher = $this->getMockBuilder('Symfony\Component\EventDispatcher\EventDispatcher')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $dispatcher
+            ->expects($this->exactly($dispatched))
+            ->method('dispatch');
+
+        $wallabag = new ChromeImport($this->em, $this->contentProxy, $dispatcher);
 
         $this->logHandler = new TestHandler();
         $logger = new Logger('test', [$this->logHandler]);
@@ -54,7 +62,7 @@ class ChromeImportTest extends \PHPUnit_Framework_TestCase
 
     public function testImport()
     {
-        $chromeImport = $this->getChromeImport();
+        $chromeImport = $this->getChromeImport(false, 1);
         $chromeImport->setFilepath(__DIR__.'/../fixtures/chrome-bookmarks');
 
         $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
@@ -87,7 +95,7 @@ class ChromeImportTest extends \PHPUnit_Framework_TestCase
 
     public function testImportAndMarkAllAsRead()
     {
-        $chromeImport = $this->getChromeImport();
+        $chromeImport = $this->getChromeImport(false, 1);
         $chromeImport->setFilepath(__DIR__.'/../fixtures/chrome-bookmarks');
 
         $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')

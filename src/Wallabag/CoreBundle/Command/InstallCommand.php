@@ -40,7 +40,7 @@ class InstallCommand extends ContainerAwareCommand
     {
         $this
             ->setName('wallabag:install')
-            ->setDescription('Wallabag installer.')
+            ->setDescription('wallabag installer.')
             ->addOption(
                'reset',
                null,
@@ -55,7 +55,7 @@ class InstallCommand extends ContainerAwareCommand
         $this->defaultInput = $input;
         $this->defaultOutput = $output;
 
-        $output->writeln('<info>Installing Wallabag...</info>');
+        $output->writeln('<info>Installing wallabag...</info>');
         $output->writeln('');
 
         $this
@@ -65,7 +65,7 @@ class InstallCommand extends ContainerAwareCommand
             ->setupConfig()
         ;
 
-        $output->writeln('<info>Wallabag has been successfully installed.</info>');
+        $output->writeln('<info>wallabag has been successfully installed.</info>');
         $output->writeln('<comment>Just execute `php bin/console server:run --env=prod` for using wallabag: http://localhost:8000</comment>');
     }
 
@@ -78,7 +78,7 @@ class InstallCommand extends ContainerAwareCommand
 
         // testing if database driver exists
         $fulfilled = true;
-        $label = '<comment>PDO Driver</comment>';
+        $label = '<comment>PDO Driver (%s)</comment>';
         $status = '<info>OK!</info>';
         $help = '';
 
@@ -88,7 +88,7 @@ class InstallCommand extends ContainerAwareCommand
             $help = 'Database driver "'.$this->getContainer()->getParameter('database_driver').'" is not installed.';
         }
 
-        $rows[] = [$label, $status, $help];
+        $rows[] = [sprintf($label, $this->getContainer()->getParameter('database_driver')), $status, $help];
 
         // testing if connection to the database can be etablished
         $label = '<comment>Database connection</comment>';
@@ -96,7 +96,8 @@ class InstallCommand extends ContainerAwareCommand
         $help = '';
 
         try {
-            $doctrineManager->getConnection()->connect();
+            $conn = $this->getContainer()->get('doctrine')->getManager()->getConnection();
+            $conn->connect();
         } catch (\Exception $e) {
             if (false === strpos($e->getMessage(), 'Unknown database')
                 && false === strpos($e->getMessage(), 'database "'.$this->getContainer()->getParameter('database_name').'" does not exist')) {
@@ -108,12 +109,25 @@ class InstallCommand extends ContainerAwareCommand
 
         $rows[] = [$label, $status, $help];
 
-        // testing if PostgreSQL > 9.1
-        $label = '<comment>SGBD version</comment>';
+        // check MySQL & PostgreSQL version
+        $label = '<comment>Database version</comment>';
         $status = '<info>OK!</info>';
         $help = '';
 
-        if ('postgresql' === $doctrineManager->getConnection()->getSchemaManager()->getDatabasePlatform()->getName()) {
+        // now check if MySQL isn't too old to handle utf8mb4
+        if ($conn->isConnected() && 'mysql' === $conn->getDatabasePlatform()->getName()) {
+            $version = $conn->query('select version()')->fetchColumn();
+            $minimalVersion = '5.5.4';
+
+            if (false === version_compare($version, $minimalVersion, '>')) {
+                $fulfilled = false;
+                $status = '<error>ERROR!</error>';
+                $help = 'Your MySQL version ('.$version.') is too old, consider upgrading ('.$minimalVersion.'+).';
+            }
+        }
+
+        // testing if PostgreSQL > 9.1
+        if ($conn->isConnected() && 'postgresql' === $conn->getDatabasePlatform()->getName()) {
             // return version should be like "PostgreSQL 9.5.4 on x86_64-apple-darwin15.6.0, compiled by Apple LLVM version 8.0.0 (clang-800.0.38), 64-bit"
             $version = $doctrineManager->getConnection()->query('SELECT version();')->fetchColumn();
 
@@ -152,7 +166,7 @@ class InstallCommand extends ContainerAwareCommand
             throw new \RuntimeException('Some system requirements are not fulfilled. Please check output messages and fix them.');
         }
 
-        $this->defaultOutput->writeln('<info>Success! Your system can run Wallabag properly.</info>');
+        $this->defaultOutput->writeln('<info>Success! Your system can run wallabag properly.</info>');
 
         $this->defaultOutput->writeln('');
 
@@ -299,6 +313,16 @@ class InstallCommand extends ContainerAwareCommand
                 'section' => 'entry',
             ],
             [
+                'name' => 'share_unmark',
+                'value' => '1',
+                'section' => 'entry',
+            ],
+            [
+                'name' => 'unmark_url',
+                'value' => 'https://unmark.it',
+                'section' => 'entry',
+            ],
+            [
                 'name' => 'share_shaarli',
                 'value' => '1',
                 'section' => 'entry',
@@ -375,7 +399,7 @@ class InstallCommand extends ContainerAwareCommand
             ],
             [
                 'name' => 'wallabag_url',
-                'value' => 'http://v2.wallabag.org',
+                'value' => '',
                 'section' => 'misc',
             ],
             [
@@ -402,6 +426,16 @@ class InstallCommand extends ContainerAwareCommand
                 'name' => 'demo_mode_username',
                 'value' => 'wallabag',
                 'section' => 'misc',
+            ],
+            [
+                'name' => 'download_images_enabled',
+                'value' => '0',
+                'section' => 'misc',
+            ],
+            [
+                'name' => 'restricted_access',
+                'value' => '0',
+                'section' => 'entry',
             ],
         ];
 

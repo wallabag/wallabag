@@ -27,7 +27,7 @@ class TagController extends Controller
         $form = $this->createForm(NewTagType::class, new Tag());
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->get('wallabag_core.content_proxy')->assignTagsToEntry(
                 $entry,
                 $form->get('label')->getData()
@@ -90,15 +90,15 @@ class TagController extends Controller
 
         $flatTags = [];
 
-        foreach ($tags as $key => $tag) {
+        foreach ($tags as $tag) {
             $nbEntries = $this->getDoctrine()
                 ->getRepository('WallabagCoreBundle:Entry')
-                ->countAllEntriesByUserIdAndTagId($this->getUser()->getId(), $tag['id']);
+                ->countAllEntriesByUserIdAndTagId($this->getUser()->getId(), $tag->getId());
 
             $flatTags[] = [
-                'id' => $tag['id'],
-                'label' => $tag['label'],
-                'slug' => $tag['slug'],
+                'id' => $tag->getId(),
+                'label' => $tag->getLabel(),
+                'slug' => $tag->getSlug(),
                 'nbEntries' => $nbEntries,
             ];
         }
@@ -143,7 +143,7 @@ class TagController extends Controller
             'form' => null,
             'entries' => $entries,
             'currentPage' => $page,
-            'tag' => $tag->getLabel(),
+            'tag' => $tag->getSlug(),
         ]);
     }
 }

@@ -132,22 +132,6 @@ class TagRestController extends WallabagRestController
     }
 
     /**
-     * Retrieve version number.
-     *
-     * @ApiDoc()
-     *
-     * @return JsonResponse
-     */
-    public function getVersionAction()
-    {
-        $version = $this->container->getParameter('wallabag_core.version');
-
-        $json = $this->get('serializer')->serialize($version, 'json');
-
-        return (new JsonResponse())->setJson($json);
-    }
-
-    /**
      * Remove orphan tag in case no entries are associated to it.
      *
      * @param Tag|array $tags

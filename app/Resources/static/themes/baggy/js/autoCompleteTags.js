@@ -5,4 +5,4 @@ function extractLast(term) {
   return split(term).pop();
 }
 
-export { split, extractLast };
+export default { split, extractLast };

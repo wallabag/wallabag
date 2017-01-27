@@ -25,13 +25,13 @@ menu:
         internal_settings: 'Configuracion interna'
         import: 'Importar'
         howto: 'Ajuda'
-        developer: 'Desvolopador'
+        developer: 'Desvolopaire'
         logout: 'Desconnexion'
         about: 'A prepaus'
         search: 'Cercar'
         save_link: 'Enregistrar un novèl article'
         back_to_unread: 'Tornar als articles pas legits'
-        # users_management: 'Users management'
+        users_management: 'Gestion dels utilizaires'
     top:
         add_new_entry: 'Enregistrar un novèl article'
         search: 'Cercar'
@@ -46,7 +46,7 @@ footer:
         social: 'Social'
         powered_by: 'propulsat per'
         about: 'A prepaus'
-    # stats: Since %user_creation% you read %nb_archives% articles. That is about %per_day% a day!
+    stats: "Dempuèi %user_creation% avètz legit %nb_archives% articles. Es a l'entorn de %per_day% per jorn !"
 
 config:
     page_title: 'Configuracion'
@@ -70,7 +70,12 @@ config:
             200_word: "Legissi a l'entorn de 200 mots per minuta"
             300_word: "Legissi a l'entorn de 300 mots per minuta"
             400_word: "Legissi a l'entorn de 400 mots per minuta"
+        action_mark_as_read:
+            # label: 'Where do you to be redirected after mark an article as read?'
+            # redirect_homepage: 'To the homepage'
+            # redirect_current_page: 'To the current page'
         pocket_consumer_key_label: Clau d'autentificacion Pocket per importar las donadas
+        android_configuration: Configuratz vòstra aplicacion Android
         # help_theme: "wallabag is customizable. You can choose your prefered theme here."
         # help_items_per_page: "You can change the number of articles displayed on each page."
         # help_reading_speed: "wallabag calculates a reading time for each article. You can define here, thanks to this list, if you are a fast or a slow reader. wallabag will recalculate the reading time for each article."
@@ -94,6 +99,18 @@ config:
         email_label: 'Adreça de corrièl'
         twoFactorAuthentication_label: 'Dobla autentificacion'
         # help_twoFactorAuthentication: "If you enable 2FA, each time you want to login to wallabag, you'll receive a code by email."
+        delete:
+            title: Suprimir mon compte (Mèfi zòna perilhosa)
+            description: Se confirmatz la supression de vòstre compte, TOTES vòstres articles, TOTAS vòstras etiquetas, TOTAS vòstras anotacions e vòstre compte seràn suprimits per totjorn. E aquò es IRREVERSIBLE. Puèi seretz desconnectat.
+            confirm: Sètz vertadièrament segur ? (ES IRREVERSIBLE)
+            button: Suprimir mon compte
+    reset:
+        title: Zòna de reïnicializacion (Mèfi zòna perilhosa)
+        description: En clicant sul boton çai-jos auretz la possibilitat de levar qualques informacions de vòstre compte. Mèfi que totas aquelas accions son IRREVERSIBLAS.
+        annotations: Levar TOTAS las anotacions
+        tags: Levar TOTAS las etiquetas
+        entries: Levar TOTES los articles
+        confirm: Sètz vertadièrament segur ? (ES IRREVERSIBLE)
     form_password:
         # description: "You can change your password here. Your new password should by at least 8 characters long."
         old_password_label: 'Senhal actual'
@@ -103,7 +120,7 @@ config:
         if_label: 'se'
         then_tag_as_label: 'alara atribuir las etiquetas'
         delete_rule_label: 'suprimir'
-        # edit_rule_label: 'edit'
+        edit_rule_label: 'modificar'
         rule_label: 'Règla'
         tags_label: 'Etiquetas'
         faq:
@@ -145,15 +162,16 @@ entry:
         archived: 'Articles legits'
         filtered: 'Articles filtrats'
         filtered_tags: 'Filtats per etiquetas:'
+        # filtered_search: 'Filtered by search:'
         untagged: 'Articles sens etiqueta'
     list:
         number_on_the_page: "{0} I a pas cap d'article.|{1} I a un article.|]1,Inf[ I a %count% articles."
         reading_time: 'durada de lectura'
         reading_time_minutes: 'durada de lectura : %readingTime% min'
-        reading_time_less_one_minute: 'durada de lectura : <small class="inferieur">&lt;</small> 1 min'
+        reading_time_less_one_minute: 'durada de lectura : &lt; 1 min'
         number_of_tags: '{1}e una autra etiqueta|]1,Inf[e %count% autras etiquetas'
         reading_time_minutes_short: '%readingTime% min'
-        reading_time_less_one_minute_short: '<small class="inferieur">&lt;</small> 1 min'
+        reading_time_less_one_minute_short: '&lt; 1 min'
         original_article: 'original'
         toogle_as_read: 'Marcar coma legit/pas legit'
         toogle_as_star: 'Marcar coma favorit'
@@ -168,6 +186,7 @@ entry:
         preview_picture_label: 'A una fotò'
         preview_picture_help: 'Fotò'
         language_label: 'Lenga'
+        # http_status_label: 'HTTP status'
         reading_time:
             label: 'Durada de lectura en minutas'
             from: 'de'
@@ -209,6 +228,8 @@ entry:
         placeholder: 'http://website.com'
         form_new:
             url_label: Url
+    search:
+        # placeholder: 'What are you looking for?'
     edit:
         page_title: 'Modificar un article'
         title_label: 'Títol'
@@ -216,7 +237,7 @@ entry:
         is_public_label: 'Public'
         save_label: 'Enregistrar'
     public:
-        # shared_by_wallabag: "This article has been shared by <a href='%wallabag_instance%'>wallabag</a>"
+        shared_by_wallabag: "Aqueste article es estat partejat per <a href='%wallabag_instance%'>wallabag</a>"
 
 about:
     page_title: 'A prepaus'
@@ -252,6 +273,9 @@ about:
 howto:
     page_title: 'Ajuda'
     page_description: "I a mai d'un biais d'enregistrar un article :"
+    tab_menu:
+        # add_link: "Add a link"
+        # shortcuts: "Use shortcuts"
     top_menu:
         browser_addons: 'Extensions de navigator'
         mobile_apps: 'Aplicacions mobil'
@@ -261,6 +285,7 @@ howto:
     browser_addons:
         firefox: 'Extension Firefox'
         chrome: 'Extension Chrome'
+        opera: 'Extension Opera'
     mobile_apps:
         android:
             via_f_droid: 'via F-Droid'
@@ -269,17 +294,44 @@ howto:
         windows: 'sus Microsoft Store'
     bookmarklet:
         description: 'Lisatz-depausatz aqueste ligam dins vòstra barra de favorits :'
+    shortcuts:
+        # page_description: Here are the shortcuts available in wallabag.
+        # shortcut: Shortcut
+        # action: Action
+        # all_pages_title: Shortcuts available in all pages
+        # go_unread: Go to unread
+        # go_starred: Go to starred
+        # go_archive: Go to archive
+        # go_all: Go to all entries
+        # go_tags: Go to tags
+        # go_config: Go to config
+        # go_import: Go to import
+        # go_developers: Go to developers
+        # go_howto: Go to howto (this page!)
+        # go_logout: Logout
+        # list_title: Shortcuts available in listing pages
+        # search: Display the search form
+        # article_title: Shortcuts available in entry view
+        # open_original: Open original URL of the entry
+        # toggle_favorite: Toggle star status for the entry
+        # toggle_archive: Toggle read status for the entry
+        # delete: Delete the entry
+        # material_title: Shortcuts available with Material theme only
+        # add_link: Add a new link
+        # hide_form: Hide the current form (search or new link)
+        # arrows_navigation: Navigate through articles
+        # open_article: Display the selected entry
 
 quickstart:
     page_title: 'Per ben començar'
-    # more: 'More…'
+    more: 'Mai…'
     intro:
         title: 'Benvenguda sus wallabag !'
         paragraph_1: "Anem vos guidar per far lo torn de la proprietat e vos presentar unas fonccionalitats que vos poirián interessar per vos apropriar aquesta aisina."
         paragraph_2: 'Seguètz-nos '
     configure:
-        title: "Configuratz l'aplicacio"
-        # description: 'In order to have an application which suits you, have a look into the configuration of wallabag.'
+        title: "Configuratz l'aplicacion"
+        description: "Per fin d'aver una aplicacion que vos va ben, anatz veire la configuracion de wallabag."
         language: "Cambiatz la lenga e l'estil de l'aplicacion"
         rss: 'Activatz los fluxes RSS'
         tagging_rules: 'Escrivètz de règlas per classar automaticament vòstres articles'
@@ -293,7 +345,7 @@ quickstart:
         import: 'Configurar los impòrt'
     first_steps:
         title: 'Primièrs passes'
-        # description: "Now wallabag is well configured, it's time to archive the web. You can click on the top right sign + to add a link."
+        description: "Ara wallabag es ben configurat, es lo moment d'archivar lo web. Podètz clicar sul signe + a man drecha amont per ajustar un ligam."
         new_article: 'Ajustatz vòstre primièr article'
         unread_articles: 'E racaptatz-lo !'
     migrate:
@@ -305,14 +357,14 @@ quickstart:
         readability: 'Migrar dempuèi Readability'
         instapaper: 'Migrar dempuèi Instapaper'
     developer:
-        title: 'Pels desvolopadors'
-        # description: 'We also thought to the developers: Docker, API, translations, etc.'
+        title: 'Pels desvolopaires'
+        description: 'Avèm tanben pensat als desvolopaires : Docker, API, traduccions, etc.'
         create_application: 'Crear vòstra aplicacion tèrça'
-        # use_docker: 'Use Docker to install wallabag'
+        use_docker: 'Utilizar Docker per installar wallabag'
     docs:
         title: 'Documentacion complèta'
-        # description: "There are so much features in wallabag. Don't hesitate to read the manual to know them and to learn how to use them."
-        annotate: 'Anotatar vòstre article'
+        description: "I a un fum de fonccionalitats dins wallabag. Esitetz pas a legir lo manual per las conéisser e aprendre a las utilizar."
+        annotate: 'Anotar vòstre article'
         export: 'Convertissètz vòstres articles en ePub o en PDF'
         search_filters: "Aprenètz a utilizar lo motor de recèrca e los filtres per retrobar l'article que vos interèssa"
         fetching_errors: "Qué far se mon article es pas recuperat coma cal ?"
@@ -329,6 +381,9 @@ tag:
     list:
         number_on_the_page: "{0} I a pas cap d'etiquetas.|{1} I a una etiqueta.|]1,Inf[ I a %count% etiquetas."
         see_untagged_entries: "Afichar las entradas sens pas cap d'etiquetas"
+    new:
+        # add: 'Add'
+        # placeholder: 'You can add several tags, separated by a comma.'
 
 import:
     page_title: 'Importar'
@@ -362,6 +417,7 @@ import:
         how_to: "Mercés de seleccionar vòstre Readability fichièr e de clicar sul boton dejós per lo telecargar e l'importar."
     worker:
         enabled: "L'importacion se fa de manièra asincròna. Un còp l'importacion lançada, una aisina externa s'ocuparà dels messatges un per un. Lo servici actual es : "
+        download_images_warning: "Avètz activat lo telecargament de los imatges de vòstres articles. Combinat amb l'importacion classica, aquò pòt tardar un long moment (o benlèu fracassar). <strong>Recomandem fòrtament</strong> l'activacion de l'importacion asincròna per evitar las errors."
     firefox:
         page_title: 'Importar > Firefox'
         description: "Aquesta aisina importarà totas vòstres favorits de Firefox. Just go to your bookmarks (Ctrl+Maj+O), then into \"Import and backup\", choose \"Backup...\". You will obtain a .json file."
@@ -374,6 +430,10 @@ import:
         page_title: 'Importar > Instapaper'
         description: "Aquesta aisina importarà totas vòstres articles d'Instapaper. Sus la pagina de paramètres (https://www.instapaper.com/user), clicatz sus \"Download .CSV file\" dins la seccion \"Export\". Un fichièr CSV serà telecargat (aital \"instapaper-export.csv\")."
         how_to: "Mercés de causir vòstre fichièr Instapaper e de clicar sul boton dejós per lo telecargar e l'importar"
+    pinboard:
+        # page_title: "Import > Pinboard"
+        # description: 'This importer will import all your Instapaper articles. On the backup (https://pinboard.in/settings/backup) page, click on "JSON" in the "Bookmarks" section. A JSON file will be downloaded (like "pinboard_export").'
+        # how_to: 'Please select your Pinboard export and click on the below button to upload and import it.'
 
 developer:
     page_title: 'Desvolopaire'
@@ -397,7 +457,7 @@ developer:
         warn_message_2: "Se suprimissètz un client, totas las aplicacions que l'emplegan foncionaràn pas mai amb vòstre compte wallabag."
         action: 'Suprimir aqueste client'
     client:
-        page_title: 'Desvlopador > Novèl client'
+        page_title: 'Desvolopaire > Novèl client'
         page_description: "Anatz crear un novèl client. Mercés de cumplir l'url de redireccion cap a vòstra aplicacion."
         form:
             name_label: "Nom del client"
@@ -405,7 +465,7 @@ developer:
             save_label: 'Crear un novèl client'
         action_back: 'Retorn'
     client_parameter:
-        page_title: 'Desvolopador > Los paramètres de vòstre client'
+        page_title: 'Desvolopaire > Los paramètres de vòstre client'
         page_description: 'Vaquí los paramètres de vòstre client'
         field_name: 'Nom del client'
         field_id: 'ID Client'
@@ -413,7 +473,7 @@ developer:
         back: 'Retour'
         read_howto: 'Legir "cossí crear ma primièra aplicacion"'
     howto:
-        page_title: 'Desvolopador > Cossí crear ma primièra aplicacion'
+        page_title: 'Desvolopaire > Cossí crear ma primièra aplicacion'
         description:
             paragraph_1: "Las comandas seguentas utilizan la <a href=\"https://github.com/jkbrzt/httpie\">bibliotèca HTTPie</a>. Asseguratz-vos que siasqueòu installadas abans de l'utilizar."
             paragraph_2: "Vos cal un geton per escambiar entre vòstra aplicacion e l'API de wallabar."
@@ -426,34 +486,33 @@ developer:
         back: 'Retorn'
 
 user:
-    # page_title: Users management
-    # new_user: Create a new user
-    # edit_user: Edit an existing user
-    # description: "Here you can manage all users (create, edit and delete)"
-    # list:
-    #     actions: Actions
-    #     edit_action: Edit
-    #     yes: Yes
-    #     no: No
-    #     create_new_one: Create a new user
+    page_title: 'Gestion dels utilizaires'
+    new_user: 'Crear un novèl utilizaire'
+    edit_user: 'Modificar un utilizaire existent'
+    description: "Aquí podètz gerir totes los utilizaires (crear, modificar e suprimir)"
+    list:
+         actions: 'Accions'
+         edit_action: 'Modificar'
+         yes: 'Òc'
+         no: 'Non'
+         create_new_one: 'Crear un novèl utilizaire'
     form:
         username_label: "Nom d'utilizaire"
-        # name_label: 'Name'
+        name_label: 'Nom'
         password_label: 'Senhal'
         repeat_new_password_label: 'Confirmatz vòstre novèl senhal'
         plain_password_label: 'Senhal en clar'
         email_label: 'Adreça de corrièl'
-        # enabled_label: 'Enabled'
-        # locked_label: 'Locked'
-        # last_login_label: 'Last login'
-        # twofactor_label: Two factor authentication
-        # save: Save
-        # delete: Delete
-        # delete_confirm: Are you sure?
-        # back_to_list: Back to list
+        enabled_label: 'Actiu'
+        last_login_label: 'Darrièra connexion'
+        twofactor_label: 'Autentificacion doble-factor'
+        save: 'Enregistrar'
+        delete: 'Suprimir'
+        delete_confirm: 'Sètz segur ?'
+        back_to_list: 'Tornar a la lista'
 
 error:
-    # page_title: An error occurred
+    page_title: Una error s'es produsida
 
 flashes:
     config:
@@ -465,8 +524,10 @@ flashes:
             rss_updated: 'La configuracion dels fluxes RSS es ben estada mesa a jorn'
             tagging_rules_updated: 'Règlas misa a jorn'
             tagging_rules_deleted: 'Règla suprimida'
-            user_added: 'Utilizaire "%username%" apondut'
             rss_token_updated: 'Geton RSS mes a jorn'
+            annotations_reset: Anotacions levadas
+            tags_reset: Etiquetas levadas
+            entries_reset: Articles levats
     entry:
         notice:
             entry_already_saved: 'Article ja salvargardat lo %date%'
@@ -477,12 +538,12 @@ flashes:
             entry_reloaded_failed: "L'article es estat cargat de nòu mai la recuperacion del contengut a fracassat"
             entry_archived: 'Article marcat coma legit'
             entry_unarchived: 'Article marcat coma pas legit'
-            entry_starred: 'Article apondut dins los favorits'
+            entry_starred: 'Article ajustat dins los favorits'
             entry_unstarred: 'Article quitat dels favorits'
             entry_deleted: 'Article suprimit'
     tag:
         notice:
-            tag_added: 'Etiqueta aponduda'
+            tag_added: 'Etiqueta ajustada'
     import:
         notice:
             failed: "L'importacion a fracassat, mercés de tornar ensajar"
@@ -496,3 +557,8 @@ flashes:
         notice:
             client_created: 'Novèl client creat'
             client_deleted: 'Client suprimit'
+    user:
+        notice:
+            added: 'Utilizaire "%username%" ajustat'
+            updated: 'Utilizaire "%username%" mes a jorn'
+            deleted: 'Utilizaire "%username%" suprimit'

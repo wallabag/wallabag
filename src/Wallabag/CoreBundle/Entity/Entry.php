@@ -19,7 +19,14 @@ use Wallabag\AnnotationBundle\Entity\Annotation;
  *
  * @XmlRoot("entry")
  * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\EntryRepository")
- * @ORM\Table(name="`entry`")
+ * @ORM\Table(
+ *     name="`entry`",
+ *     options={"collate"="utf8mb4_unicode_ci", "charset"="utf8mb4"},
+ *     indexes={
+ *         @ORM\Index(name="created_at", columns={"created_at"}),
+ *         @ORM\Index(name="uid", columns={"uid"})
+ *     }
+ * )
  * @ORM\HasLifecycleCallbacks()
  * @Hateoas\Relation("self", href = "expr('/api/entries/' ~ object.getId())")
  */
@@ -40,11 +47,11 @@ class Entry
     /**
      * @var string
      *
-     * @ORM\Column(name="uuid", type="text", nullable=true)
+     * @ORM\Column(name="uid", type="string", length=23, nullable=true)
      *
      * @Groups({"entries_for_user", "export_all"})
      */
-    private $uuid;
+    private $uid;
 
     /**
      * @var string
@@ -177,6 +184,15 @@ class Entry
     private $isPublic;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="http_status", type="string", length=3, nullable=true)
+     *
+     * @Groups({"entries_for_user", "export_all"})
+     */
+    private $httpStatus;
+
+    /**
      * @Exclude
      *
      * @ORM\ManyToOne(targetEntity="Wallabag\UserBundle\Entity\User", inversedBy="entries")
@@ -190,10 +206,10 @@ class Entry
      * @ORM\JoinTable(
      *  name="entry_tag",
      *  joinColumns={
-     *      @ORM\JoinColumn(name="entry_id", referencedColumnName="id")
+     *      @ORM\JoinColumn(name="entry_id", referencedColumnName="id", onDelete="cascade")
      *  },
      *  inverseJoinColumns={
-     *      @ORM\JoinColumn(name="tag_id", referencedColumnName="id")
+     *      @ORM\JoinColumn(name="tag_id", referencedColumnName="id", onDelete="cascade")
      *  }
      * )
      */
@@ -636,33 +652,53 @@ class Entry
     /**
      * @return string
      */
-    public function getUuid()
+    public function getUid()
     {
-        return $this->uuid;
+        return $this->uid;
     }
 
     /**
-     * @param string $uuid
+     * @param string $uid
      *
      * @return Entry
      */
-    public function setUuid($uuid)
+    public function setUid($uid)
     {
-        $this->uuid = $uuid;
+        $this->uid = $uid;
 
         return $this;
     }
 
-    public function generateUuid()
+    public function generateUid()
     {
-        if (null === $this->uuid) {
+        if (null === $this->uid) {
             // @see http://blog.kevingomez.fr/til/2015/07/26/why-is-uniqid-slow/ for true parameter
-            $this->uuid = uniqid('', true);
+            $this->uid = uniqid('', true);
         }
     }
 
-    public function cleanUuid()
+    public function cleanUid()
     {
-        $this->uuid = null;
+        $this->uid = null;
+    }
+
+    /**
+     * @return int
+     */
+    public function getHttpStatus()
+    {
+        return $this->httpStatus;
+    }
+
+    /**
+     * @param int $httpStatus
+     *
+     * @return Entry
+     */
+    public function setHttpStatus($httpStatus)
+    {
+        $this->httpStatus = $httpStatus;
+
+        return $this;
     }
 }

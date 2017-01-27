@@ -17,7 +17,6 @@
                                     <th>{{ 'user.form.username_label'|trans }}</th>
                                     <th>{{ 'user.form.email_label'|trans }}</th>
                                     <th>{{ 'user.form.last_login_label'|trans }}</th>
-                                    <th>{{ 'user.form.locked_label'|trans }}</th>
                                     <th>{{ 'user.list.actions'|trans }}</th>
                                 </tr>
                             </thead>
@@ -27,7 +26,6 @@
                                     <td>{{ user.username }}</td>
                                     <td>{{ user.email }}</td>
                                     <td>{% if user.lastLogin %}{{ user.lastLogin|date('Y-m-d H:i:s') }}{% endif %}</td>
-                                    <td>{% if user.locked %}{{ 'user.list.yes'|trans }}{% else %}{{ 'user.list.no'|trans }}{% endif %}</td>
                                     <td>
                                         <a href="{{ path('user_edit', { 'id': user.id }) }}">{{ 'user.list.edit_action'|trans }}</a>
                                     </td>

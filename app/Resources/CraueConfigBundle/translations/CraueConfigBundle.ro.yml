@@ -1,3 +1,4 @@
+# settings_changed: Configuration updated
 download_pictures: Descarcă poze pe server
 carrot: Permite share către Carrot
 diaspora_url: Diaspora URL, dacă serviciul este permis
@@ -15,6 +16,7 @@ share_diaspora: Permite share către Diaspora
 share_mail: Permite share prin email
 share_shaarli: Permite share către Shaarli
 share_twitter: Permite share către Twitter
+share_unmark: Permite share către Unmark.it
 show_printlink: Afișează un link pentru a printa content-ul
 wallabag_support_url: URL-ul de suport pentru wallabag
 wallabag_url: URL-ul instanței tale wallabag
@@ -29,3 +31,5 @@ modify_settings: "aplică"
 # demo_mode_enabled: "Enable demo mode ? (only used for the wallabag public demo)"
 # demo_mode_username: "Demo user"
 # share_public: Allow public url for entries
+# download_images_enabled: Download images locally
+# restricted_access: Enable authentication for websites with paywall

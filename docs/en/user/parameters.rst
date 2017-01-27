@@ -39,6 +39,7 @@ If you don't know which value you need to set, please leave the default one.
         redis_host: localhost
         redis_port: 6379
         redis_path: null
+        redis_password: null
 
 Meaning of each parameter
 -------------------------
@@ -55,6 +56,7 @@ Meaning of each parameter
    "database_path", "``""%kernel.root_dir%/../data/db/wallabag.sqlite""``", "only for SQLite, define where to put the database file. Leave it empty for other database"
    "database_table_prefix", "wallabag_", "all wallabag's tables will be prefixed with that string. You can include a ``_`` for clarity"
    "database_socket", "null", "If your database is using a socket instead of tcp, put the path of the socket (other connection parameters will then be ignored)"
+   "database_charset", "utf8mb4", "For PostgreSQL & SQLite you should use utf8, for MySQL use utf8mb4 which handle emoji"
 
 .. csv-table:: Configuration to send emails from wallabag
    :header: "name", "default", "description"
@@ -91,3 +93,4 @@ Meaning of each parameter
    "redis_host", "localhost", "IP or hostname of the target server (ignored for unix scheme)"
    "redis_port", "6379", "TCP/IP port of the target server (ignored for unix scheme)"
    "redis_path", "null", "Path of the UNIX domain socket file used when connecting to Redis using UNIX domain sockets"
+   "redis_password", "null", "Password defined in the Redis server configuration (parameter `requirepass` in `redis.conf`)"

@@ -24,7 +24,7 @@ class PocketImportTest extends \PHPUnit_Framework_TestCase
     protected $contentProxy;
     protected $logHandler;
 
-    private function getPocketImport($consumerKey = 'ConsumerKey')
+    private function getPocketImport($consumerKey = 'ConsumerKey', $dispatched = 0)
     {
         $this->user = new User();
 
@@ -55,10 +55,15 @@ class PocketImportTest extends \PHPUnit_Framework_TestCase
             ->method('getScheduledEntityInsertions')
             ->willReturn([]);
 
-        $pocket = new PocketImport(
-            $this->em,
-            $this->contentProxy
-        );
+        $dispatcher = $this->getMockBuilder('Symfony\Component\EventDispatcher\EventDispatcher')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $dispatcher
+            ->expects($this->exactly($dispatched))
+            ->method('dispatch');
+
+        $pocket = new PocketImport($this->em, $this->contentProxy, $dispatcher);
         $pocket->setUser($this->user);
 
         $this->logHandler = new TestHandler();
@@ -252,7 +257,7 @@ class PocketImportTest extends \PHPUnit_Framework_TestCase
 
         $client->getEmitter()->attach($mock);
 
-        $pocketImport = $this->getPocketImport();
+        $pocketImport = $this->getPocketImport('ConsumerKey', 1);
 
         $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
             ->disableOriginalConstructor()
@@ -339,7 +344,7 @@ class PocketImportTest extends \PHPUnit_Framework_TestCase
 
         $client->getEmitter()->attach($mock);
 
-        $pocketImport = $this->getPocketImport();
+        $pocketImport = $this->getPocketImport('ConsumerKey', 2);
 
         $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
             ->disableOriginalConstructor()
@@ -591,7 +596,7 @@ JSON;
 
         $client->getEmitter()->attach($mock);
 
-        $pocketImport = $this->getPocketImport();
+        $pocketImport = $this->getPocketImport('ConsumerKey', 1);
 
         $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
             ->disableOriginalConstructor()

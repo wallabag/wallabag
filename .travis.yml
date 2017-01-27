@@ -57,7 +57,6 @@ before_script:
     - if [[ ! $PHP = hhvm* ]]; then echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini; fi;
     # xdebug isn't enable for PHP 7.1
     - if [[ ! $PHP = hhvm* ]]; then phpenv config-rm xdebug.ini || echo "xdebug not available"; fi
-    - if [[ $PHP = 5.5 ]]; then composer require "phpunit/phpunit:4.*" --no-update; fi;
     - composer self-update --no-progress
     - if [[ $DB = pgsql ]]; then psql -c 'create database wallabag_test;' -U postgres; fi;
 
@@ -72,9 +71,9 @@ before_install:
 script:
     - travis_wait bash composer install -o  --no-interaction --no-progress --prefer-dist
     - ant prepare-$DB
-    - if [[ $VALIDATE_TRANSLATION_FILE = '' ]]; then phpunit -v ; fi;
+    - if [[ $VALIDATE_TRANSLATION_FILE = '' ]]; then ./bin/simple-phpunit -v ; fi;
     - if [[ $CS_FIXER = run ]]; then php bin/php-cs-fixer fix src/ --verbose --dry-run ; fi;
     - if [[ $VALIDATE_TRANSLATION_FILE = run ]]; then php bin/console lint:yaml src/Wallabag/CoreBundle/Resources/translations -v ; fi;
     - if [[ $VALIDATE_TRANSLATION_FILE = run ]]; then php bin/console lint:yaml app/Resources/CraueConfigBundle/translations -v ; fi;
-    - if [[ $VALIDATE_TRANSLATION_FILE = run ]]; then php bin/console lint:yaml app/Resources/FOSUserBundle/translations -v ; fi;
+    - if [[ $VALIDATE_TRANSLATION_FILE = run ]]; then php bin/console lint:yaml src/Wallabag/UserBundle/Resources/translations -v ; fi;
     - if [[ $ASSETS = build ]]; then ./node_modules/grunt-cli/bin/grunt tests; fi;

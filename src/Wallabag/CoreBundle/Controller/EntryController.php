@@ -13,9 +13,44 @@ use Wallabag\CoreBundle\Form\Type\EntryFilterType;
 use Wallabag\CoreBundle\Form\Type\EditEntryType;
 use Wallabag\CoreBundle\Form\Type\NewEntryType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
+use Wallabag\CoreBundle\Event\EntrySavedEvent;
+use Wallabag\CoreBundle\Event\EntryDeletedEvent;
+use Wallabag\CoreBundle\Form\Type\SearchEntryType;
 
 class EntryController extends Controller
 {
+    /**
+     * @param Request $request
+     * @param int     $page
+     *
+     * @Route("/search/{page}", name="search", defaults={"page" = 1})
+     *
+     * Default parameter for page is hardcoded (in duplication of the defaults from the Route)
+     * because this controller is also called inside the layout template without any page as argument
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function searchFormAction(Request $request, $page = 1, $currentRoute = null)
+    {
+        // fallback to retrieve currentRoute from query parameter instead of injected one (when using inside a template)
+        if (null === $currentRoute && $request->query->has('currentRoute')) {
+            $currentRoute = $request->query->get('currentRoute');
+        }
+
+        $form = $this->createForm(SearchEntryType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            return $this->showEntries('search', $request, $page);
+        }
+
+        return $this->render('WallabagCoreBundle:Entry:search_form.html.twig', [
+            'form' => $form->createView(),
+            'currentRoute' => $currentRoute,
+        ]);
+    }
+
     /**
      * Fetch content and update entry.
      * In case it fails, entry will return to avod loosing the data.
@@ -63,7 +98,7 @@ class EntryController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $existingEntry = $this->checkIfEntryAlreadyExists($entry);
 
             if (false !== $existingEntry) {
@@ -80,6 +115,9 @@ class EntryController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entry);
             $em->flush();
+
+            // entry saved, dispatch event about it!
+            $this->get('event_dispatcher')->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
 
             return $this->redirect($this->generateUrl('homepage'));
         }
@@ -107,6 +145,9 @@ class EntryController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entry);
             $em->flush();
+
+            // entry saved, dispatch event about it!
+            $this->get('event_dispatcher')->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
         }
 
         return $this->redirect($this->generateUrl('homepage'));
@@ -140,7 +181,7 @@ class EntryController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entry);
             $em->flush();
@@ -236,8 +277,14 @@ class EntryController extends Controller
     private function showEntries($type, Request $request, $page)
     {
         $repository = $this->get('wallabag_core.entry_repository');
+        $searchTerm = (isset($request->get('search_entry')['term']) ? $request->get('search_entry')['term'] : '');
+        $currentRoute = (!is_null($request->query->get('currentRoute')) ? $request->query->get('currentRoute') : '');
 
         switch ($type) {
+            case 'search':
+                $qb = $repository->getBuilderForSearchByUser($this->getUser()->getId(), $searchTerm, $currentRoute);
+
+                break;
             case 'untagged':
                 $qb = $repository->getBuilderForUntaggedByUser($this->getUser()->getId());
 
@@ -272,7 +319,7 @@ class EntryController extends Controller
             $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($form, $qb);
         }
 
-        $pagerAdapter = new DoctrineORMAdapter($qb->getQuery());
+        $pagerAdapter = new DoctrineORMAdapter($qb->getQuery(), true, false);
 
         $entries = $this->get('wallabag_core.helper.prepare_pager_for_entries')
             ->prepare($pagerAdapter, $page);
@@ -286,11 +333,11 @@ class EntryController extends Controller
         }
 
         return $this->render(
-            'WallabagCoreBundle:Entry:entries.html.twig',
-            [
+            'WallabagCoreBundle:Entry:entries.html.twig', [
                 'form' => $form->createView(),
                 'entries' => $entries,
                 'currentPage' => $page,
+                'searchTerm' => $searchTerm,
             ]
         );
     }
@@ -342,6 +389,9 @@ class EntryController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->persist($entry);
         $em->flush();
+
+        // entry saved, dispatch event about it!
+        $this->get('event_dispatcher')->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
 
         return $this->redirect($this->generateUrl('view', ['id' => $entry->getId()]));
     }
@@ -431,6 +481,9 @@ class EntryController extends Controller
             UrlGeneratorInterface::ABSOLUTE_PATH
         );
 
+        // entry deleted, dispatch event about it!
+        $this->get('event_dispatcher')->dispatch(EntryDeletedEvent::NAME, new EntryDeletedEvent($entry));
+
         $em = $this->getDoctrine()->getManager();
         $em->remove($entry);
         $em->flush();
@@ -486,8 +539,8 @@ class EntryController extends Controller
     {
         $this->checkUserAction($entry);
 
-        if (null === $entry->getUuid()) {
-            $entry->generateUuid();
+        if (null === $entry->getUid()) {
+            $entry->generateUid();
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($entry);
@@ -495,7 +548,7 @@ class EntryController extends Controller
         }
 
         return $this->redirect($this->generateUrl('share_entry', [
-            'uuid' => $entry->getUuid(),
+            'uid' => $entry->getUid(),
         ]));
     }
 
@@ -512,7 +565,7 @@ class EntryController extends Controller
     {
         $this->checkUserAction($entry);
 
-        $entry->cleanUuid();
+        $entry->cleanUid();
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($entry);
@@ -528,7 +581,7 @@ class EntryController extends Controller
      *
      * @param Entry $entry
      *
-     * @Route("/share/{uuid}", requirements={"uuid" = ".+"}, name="share_entry")
+     * @Route("/share/{uid}", requirements={"uid" = ".+"}, name="share_entry")
      * @Cache(maxage="25200", smaxage="25200", public=true)
      *
      * @return \Symfony\Component\HttpFoundation\Response

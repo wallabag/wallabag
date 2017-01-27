@@ -36,6 +36,16 @@ class LoadSettingData extends AbstractFixture implements OrderedFixtureInterface
                 'section' => 'entry',
             ],
             [
+                'name' => 'share_unmark',
+                'value' => '1',
+                'section' => 'entry',
+            ],
+            [
+                'name' => 'unmark_url',
+                'value' => 'https://unmark.it',
+                'section' => 'entry',
+            ],
+            [
                 'name' => 'share_shaarli',
                 'value' => '1',
                 'section' => 'entry',
@@ -140,6 +150,16 @@ class LoadSettingData extends AbstractFixture implements OrderedFixtureInterface
                 'value' => 'wallabag',
                 'section' => 'misc',
             ],
+            [
+                'name' => 'download_images_enabled',
+                'value' => '0',
+                'section' => 'misc',
+            ],
+            [
+                'name' => 'restricted_access',
+                'value' => '0',
+                'section' => 'entry',
+            ],
         ];
 
         foreach ($settings as $setting) {
@@ -158,6 +178,6 @@ class LoadSettingData extends AbstractFixture implements OrderedFixtureInterface
      */
     public function getOrder()
     {
-        return 50;
+        return 29;
     }
 }

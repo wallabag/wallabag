@@ -2,7 +2,7 @@
 auth_code:
     on: 'on'
     mailer:
-        subject: 'Wallabag authentication Code'
+        subject: 'wallabag authentication code'
         body:
             hello: "Hi %user%,"
             first_para: "Since you enable two factor authentication on your wallabag account and you just logged in from a new device (computer, phone, etc.), we send you a code to validate your connection."

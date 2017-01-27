@@ -89,6 +89,11 @@ class EntriesExport
         throw new \InvalidArgumentException(sprintf('The format "%s" is not yet supported.', $format));
     }
 
+    public function exportJsonData()
+    {
+        return $this->prepareSerializingContent('json');
+    }
+
     /**
      * Use PHPePub to dump a .epub file.
      *

@@ -14,10 +14,10 @@ class ImportCommand extends ContainerAwareCommand
     {
         $this
             ->setName('wallabag:import')
-            ->setDescription('Import entries from a JSON export from a wallabag v1 instance')
+            ->setDescription('Import entries from a JSON export')
             ->addArgument('userId', InputArgument::REQUIRED, 'User ID to populate')
             ->addArgument('filepath', InputArgument::REQUIRED, 'Path to the JSON file')
-            ->addOption('importer', null, InputArgument::OPTIONAL, 'The importer to use: wallabag v1, v2, firefox or chrome', 'v1')
+            ->addOption('importer', null, InputArgument::OPTIONAL, 'The importer to use: v1, v2, instapaper, pinboard, readability, firefox or chrome', 'v1')
             ->addOption('markAsRead', null, InputArgument::OPTIONAL, 'Mark all entries as read', false)
         ;
     }
@@ -42,32 +42,36 @@ class ImportCommand extends ContainerAwareCommand
 
         switch ($input->getOption('importer')) {
             case 'v2':
-                $wallabag = $this->getContainer()->get('wallabag_import.wallabag_v2.import');
+                $import = $this->getContainer()->get('wallabag_import.wallabag_v2.import');
                 break;
             case 'firefox':
-                $wallabag = $this->getContainer()->get('wallabag_import.firefox.import');
+                $import = $this->getContainer()->get('wallabag_import.firefox.import');
                 break;
             case 'chrome':
-                $wallabag = $this->getContainer()->get('wallabag_import.chrome.import');
+                $import = $this->getContainer()->get('wallabag_import.chrome.import');
+                break;
+            case 'readability':
+                $import = $this->getContainer()->get('wallabag_import.readability.import');
                 break;
             case 'instapaper':
-                $wallabag = $this->getContainer()->get('wallabag_import.instapaper.import');
+                $import = $this->getContainer()->get('wallabag_import.instapaper.import');
                 break;
-            case 'v1':
+            case 'pinboard':
+                $import = $this->getContainer()->get('wallabag_import.pinboard.import');
+                break;
             default:
-                $wallabag = $this->getContainer()->get('wallabag_import.wallabag_v1.import');
-                break;
+                $import = $this->getContainer()->get('wallabag_import.wallabag_v1.import');
         }
 
-        $wallabag->setMarkAsRead($input->getOption('markAsRead'));
-        $wallabag->setUser($user);
+        $import->setMarkAsRead($input->getOption('markAsRead'));
+        $import->setUser($user);
 
-        $res = $wallabag
+        $res = $import
             ->setFilepath($input->getArgument('filepath'))
             ->import();
 
         if (true === $res) {
-            $summary = $wallabag->getSummary();
+            $summary = $import->getSummary();
             $output->writeln('<info>'.$summary['imported'].' imported</info>');
             $output->writeln('<comment>'.$summary['skipped'].' already saved</comment>');
         }

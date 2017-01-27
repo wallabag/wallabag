@@ -17,10 +17,6 @@ wallabag_api:
     type: annotation
     prefix: /
 
-wallabag_api:
-    resource: "@WallabagApiBundle/Resources/config/routing.yml"
-    prefix: /
-
 app:
     resource: "@WallabagCoreBundle/Controller/"
     type: annotation
@@ -52,3 +48,6 @@ craue_config_settings_modify:
     path: /settings
     defaults:
         _controller: CraueConfigBundle:Settings:modify
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"

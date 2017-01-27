@@ -48,7 +48,7 @@ class ExportController extends Controller
      *
      * @Route("/export/{category}.{format}", name="export_entries", requirements={
      *     "format": "epub|mobi|pdf|json|xml|txt|csv",
-     *     "category": "all|unread|starred|archive|tag_entries|untagged"
+     *     "category": "all|unread|starred|archive|tag_entries|untagged|search"
      * })
      *
      * @return \Symfony\Component\HttpFoundation\Response

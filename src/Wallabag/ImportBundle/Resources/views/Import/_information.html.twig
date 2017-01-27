@@ -1,0 +1,15 @@
+{% set redis = craue_setting('import_with_redis') %}
+{% set rabbit = craue_setting('import_with_rabbitmq') %}
+{% set downloadImages = craue_setting('download_images_enabled') %}
+
+{% if redis or rabbit %}
+    <div class="card-panel yellow darken-1 black-text">
+        {{ 'import.worker.enabled'|trans }} <strong>{% if rabbit %}RabbitMQ{% elseif redis %}Redis{% endif %}</strong>
+    </div>
+{% endif %}
+
+{% if not redis and not rabbit and downloadImages %}
+    <div class="card-panel orange darken-1 black-text">
+        {{ 'import.worker.download_images_warning'|trans|raw }}
+    </div>
+{% endif %}

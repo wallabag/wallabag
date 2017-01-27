@@ -1,3 +1,4 @@
+# settings_changed: Configuration updated
 download_pictures: Pobierz obrazy na swój serwer
 carrot: Włącz udostępnianie dla Carrot
 diaspora_url: Adres URL Diaspora, jeżeli usługa jest włączona
@@ -15,6 +16,7 @@ share_diaspora: Włącz udostępnianie dla Diaspora
 share_mail: Włącz udostępnianie przez email
 share_shaarli: Włącz udostępnianie dla Shaarli
 share_twitter: Włącz udostępnianie dla Twitter
+share_unmark: Włącz udostępnianie dla Unmark.it
 show_printlink: Pokaż link do wydrukowania zawartości
 wallabag_support_url: Adres URL wsparcia dla wallabag
 wallabag_url: Adres *twojej* instacji wallabag
@@ -29,3 +31,5 @@ piwik_enabled: Włacz Piwik
 demo_mode_enabled: "Włacz tryb demo? (używany wyłącznie dla publicznej demonstracji Wallabag)"
 demo_mode_username: "Użytkownik Demonstracyjny"
 share_public: Zezwalaj na publiczny adres url dla wpisow
+# download_images_enabled: Download images locally
+# restricted_access: Enable authentication for websites with paywall

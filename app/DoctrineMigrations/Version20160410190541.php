@@ -7,6 +7,9 @@ use Doctrine\DBAL\Schema\Schema;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
+/**
+ * Added foreign keys for account resetting
+ */
 class Version20160410190541 extends AbstractMigration implements ContainerAwareInterface
 {
     /**
@@ -21,7 +24,7 @@ class Version20160410190541 extends AbstractMigration implements ContainerAwareI
 
     private function getTable($tableName)
     {
-        return $this->container->getParameter('database_table_prefix') . $tableName;
+        return $this->container->getParameter('database_table_prefix').$tableName;
     }
 
     /**
@@ -29,13 +32,15 @@ class Version20160410190541 extends AbstractMigration implements ContainerAwareI
      */
     public function up(Schema $schema)
     {
-        if ($this->connection->getDatabasePlatform()->getName() == 'postgresql') {
-            $this->addSql('ALTER TABLE "'.$this->getTable('entry').'" ADD uuid UUID DEFAULT NULL');
-        } else {
-            $this->addSql('ALTER TABLE "'.$this->getTable('entry').'" ADD uuid LONGTEXT DEFAULT NULL');
-        }
+        $entryTable = $schema->getTable($this->getTable('entry'));
 
-        $this->addSql("INSERT INTO \"".$this->getTable('craue_config_setting')."\" (name, value, section) VALUES ('share_public', '1', 'entry')");
+        $this->skipIf($entryTable->hasColumn('uid'), 'It seems that you already played this migration.');
+
+        $entryTable->addColumn('uid', 'string', [
+            'notnull' => false,
+            'length' => 23,
+        ]);
+        $this->addSql('INSERT INTO '.$this->getTable('craue_config_setting')." (name, value, section) VALUES ('share_public', '1', 'entry')");
     }
 
     /**
@@ -43,9 +48,9 @@ class Version20160410190541 extends AbstractMigration implements ContainerAwareI
      */
     public function down(Schema $schema)
     {
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'sqlite', 'This down migration can\'t be executed on SQLite databases, because SQLite don\'t support DROP COLUMN.');
+        $entryTable = $schema->getTable($this->getTable('entry'));
+        $entryTable->dropColumn('uid');
 
-        $this->addSql('ALTER TABLE "'.$this->getTable('entry').'" DROP uuid');
-        $this->addSql("DELETE FROM \"".$this->getTable('craue_config_setting')."\" WHERE name = 'share_public'");
+        $this->addSql('DELETE FROM '.$this->getTable('craue_config_setting')." WHERE name = 'share_public'");
     }
 }

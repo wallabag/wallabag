@@ -27,6 +27,14 @@ Lesegeschwindigkeit
 wallabag berechnet die Lesezeit für jeden Artikel. Du kannst hier definieren, dank dieser Liste, ob du
 ein schneller oder langsamer Leser bist. wallabag wird die Lesezeit für jeden Artikel neu berechnen.
 
+Wohin möchtest du weitergeleitet werden, nach dem ein Artikel als gelesen markiert wurde?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Jedes Mal, wenn du eine Aktion ausführst (nach dem Markieren eines Artikels als gelesen oder Favorit, nach dem Löschen eines Artikels oder dem Entfernen eines Tag von einem Eintrag), kannst du weitergeleitet werden:
+
+- zur Homepage
+- zur aktuellen Seite
+
 Sprache
 ~~~~~~~
 
@@ -43,6 +51,9 @@ Es ist möglich deinen Token zu ändern, indem du auf ``Token zurücksetzen`` kl
 Jetzt hast du drei Links, einen für jeden Status: Füge sie in deinem liebsten Feedreader hinzu.
 
 Du kannst auch definieren wie viele Artikel du in deinem RSS Feed (Standardwert: 50) haben willst.
+
+There is also a pagination available for these feeds. You can add ``?page=2`` to jump to the second page.
+The pagination follow `the RFC <https://tools.ietf.org/html/rfc5005#page-4>`_ about that, which means you'll find the ``next``, ``previous`` & ``last`` page link inside the `<channel>` tag of each RSS feed.
 
 Benutzer-Informationen
 ----------------------

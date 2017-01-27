@@ -3,6 +3,7 @@
 namespace Tests\Wallabag\CoreBundle\Controller;
 
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
+use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\Entry;
 
 class EntryControllerTest extends WallabagCoreTestCase
@@ -724,6 +725,15 @@ class EntryControllerTest extends WallabagCoreTestCase
         $crawler = $client->submit($form, $data);
         $this->assertCount(5, $crawler->filter('div[class=entry]'));
 
+        $crawler = $client->request('GET', '/unread/list');
+        $form = $crawler->filter('button[id=submit-filter]')->form();
+        $data = [
+            'entry_filter[domainName]' => 'dOmain',
+        ];
+
+        $crawler = $client->submit($form, $data);
+        $this->assertCount(5, $crawler->filter('div[class=entry]'));
+
         $form = $crawler->filter('button[id=submit-filter]')->form();
         $data = [
             'entry_filter[domainName]' => 'wallabag',
@@ -800,15 +810,15 @@ class EntryControllerTest extends WallabagCoreTestCase
             ->getRepository('WallabagCoreBundle:Entry')
             ->findOneByUser($this->getLoggedInUserId());
 
-        // no uuid
-        $client->request('GET', '/share/'.$content->getUuid());
+        // no uid
+        $client->request('GET', '/share/'.$content->getUid());
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
 
-        // generating the uuid
+        // generating the uid
         $client->request('GET', '/share/'.$content->getId());
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
 
-        // follow link with uuid
+        // follow link with uid
         $crawler = $client->followRedirect();
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertContains('max-age=25200', $client->getResponse()->headers->get('cache-control'));
@@ -822,7 +832,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         // sharing is now disabled
         $client->getContainer()->get('craue_config')->set('share_public', 0);
-        $client->request('GET', '/share/'.$content->getUuid());
+        $client->request('GET', '/share/'.$content->getUid());
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
 
         $client->request('GET', '/view/'.$content->getId());
@@ -833,7 +843,255 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
 
         // share is now disable
-        $client->request('GET', '/share/'.$content->getUuid());
+        $client->request('GET', '/share/'.$content->getUid());
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
+    }
+
+    public function testNewEntryWithDownloadImagesEnabled()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $url = 'http://www.20minutes.fr/montpellier/1952003-20161030-video-car-tombe-panne-rugbymen-perpignan-improvisent-melee-route';
+        $client->getContainer()->get('craue_config')->set('download_images_enabled', 1);
+
+        $crawler = $client->request('GET', '/new');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $form = $crawler->filter('form[name=entry]')->form();
+
+        $data = [
+            'entry[url]' => $url,
+        ];
+
+        $client->submit($form, $data);
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+
+        $em = $client->getContainer()
+            ->get('doctrine.orm.entity_manager');
+
+        $entry = $em
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findByUrlAndUserId($url, $this->getLoggedInUserId());
+
+        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $entry);
+        $this->assertEquals($url, $entry->getUrl());
+        $this->assertContains('Perpignan', $entry->getTitle());
+        $this->assertContains('/d9bc0fcd.jpeg', $entry->getContent());
+
+        $client->getContainer()->get('craue_config')->set('download_images_enabled', 0);
+    }
+
+    /**
+     * @depends testNewEntryWithDownloadImagesEnabled
+     */
+    public function testRemoveEntryWithDownloadImagesEnabled()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $url = 'http://www.20minutes.fr/montpellier/1952003-20161030-video-car-tombe-panne-rugbymen-perpignan-improvisent-melee-route';
+        $client->getContainer()->get('craue_config')->set('download_images_enabled', 1);
+
+        $content = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findByUrlAndUserId($url, $this->getLoggedInUserId());
+
+        $client->request('GET', '/delete/'.$content->getId());
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+
+        $client->getContainer()->get('craue_config')->set('download_images_enabled', 0);
+    }
+
+    public function testRedirectToHomepage()
+    {
+        $this->logInAs('empty');
+        $client = $this->getClient();
+
+        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+        $user = $em
+            ->getRepository('WallabagUserBundle:User')
+            ->find($this->getLoggedInUserId());
+
+        if (!$user) {
+            $this->markTestSkipped('No user found in db.');
+        }
+
+        // Redirect to homepage
+        $config = $user->getConfig();
+        $config->setActionMarkAsRead(Config::REDIRECT_TO_HOMEPAGE);
+        $em->persist($config);
+        $em->flush();
+
+        $content = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findByUrlAndUserId($this->url, $this->getLoggedInUserId());
+
+        $client->request('GET', '/view/'.$content->getId());
+        $client->request('GET', '/archive/'.$content->getId());
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertEquals('/', $client->getResponse()->headers->get('location'));
+    }
+
+    public function testRedirectToCurrentPage()
+    {
+        $this->logInAs('empty');
+        $client = $this->getClient();
+
+        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+        $user = $em
+            ->getRepository('WallabagUserBundle:User')
+            ->find($this->getLoggedInUserId());
+
+        if (!$user) {
+            $this->markTestSkipped('No user found in db.');
+        }
+
+        // Redirect to current page
+        $config = $user->getConfig();
+        $config->setActionMarkAsRead(Config::REDIRECT_TO_CURRENT_PAGE);
+        $em->persist($config);
+        $em->flush();
+
+        $content = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findByUrlAndUserId($this->url, $this->getLoggedInUserId());
+
+        $client->request('GET', '/view/'.$content->getId());
+        $client->request('GET', '/archive/'.$content->getId());
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertContains('/view/'.$content->getId(), $client->getResponse()->headers->get('location'));
+    }
+
+    public function testFilterOnHttpStatus()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/new');
+        $form = $crawler->filter('form[name=entry]')->form();
+
+        $data = [
+            'entry[url]' => 'http://www.lemonde.fr/incorrect-url/',
+        ];
+
+        $client->submit($form, $data);
+
+        $crawler = $client->request('GET', '/all/list');
+        $form = $crawler->filter('button[id=submit-filter]')->form();
+
+        $data = [
+            'entry_filter[httpStatus]' => 404,
+        ];
+
+        $crawler = $client->submit($form, $data);
+
+        $this->assertCount(1, $crawler->filter('div[class=entry]'));
+
+        $crawler = $client->request('GET', '/new');
+        $form = $crawler->filter('form[name=entry]')->form();
+
+        $data = [
+            'entry[url]' => 'http://www.nextinpact.com/news/101235-wallabag-alternative-libre-a-pocket-creuse-petit-a-petit-son-nid.htm',
+        ];
+
+        $client->submit($form, $data);
+
+        $crawler = $client->request('GET', '/all/list');
+        $form = $crawler->filter('button[id=submit-filter]')->form();
+
+        $data = [
+            'entry_filter[httpStatus]' => 200,
+        ];
+
+        $crawler = $client->submit($form, $data);
+
+        $this->assertCount(1, $crawler->filter('div[class=entry]'));
+
+        $crawler = $client->request('GET', '/all/list');
+        $form = $crawler->filter('button[id=submit-filter]')->form();
+
+        $data = [
+            'entry_filter[httpStatus]' => 1024,
+        ];
+
+        $crawler = $client->submit($form, $data);
+
+        $this->assertCount(7, $crawler->filter('div[class=entry]'));
+    }
+
+    public function testSearch()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        // Search on unread list
+        $crawler = $client->request('GET', '/unread/list');
+
+        $form = $crawler->filter('form[name=search]')->form();
+        $data = [
+            'search_entry[term]' => 'title',
+        ];
+
+        $crawler = $client->submit($form, $data);
+
+        $this->assertCount(5, $crawler->filter('div[class=entry]'));
+
+        // Search on starred list
+        $crawler = $client->request('GET', '/starred/list');
+
+        $form = $crawler->filter('form[name=search]')->form();
+        $data = [
+            'search_entry[term]' => 'title',
+        ];
+
+        $crawler = $client->submit($form, $data);
+
+        $this->assertCount(1, $crawler->filter('div[class=entry]'));
+
+        // Added new article to test on archive list
+        $crawler = $client->request('GET', '/new');
+        $form = $crawler->filter('form[name=entry]')->form();
+        $data = [
+            'entry[url]' => $this->url,
+        ];
+        $client->submit($form, $data);
+        $content = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findByUrlAndUserId($this->url, $this->getLoggedInUserId());
+        $client->request('GET', '/archive/'.$content->getId());
+
+        $crawler = $client->request('GET', '/archive/list');
+
+        $form = $crawler->filter('form[name=search]')->form();
+        $data = [
+            'search_entry[term]' => 'manège',
+        ];
+
+        $crawler = $client->submit($form, $data);
+
+        $this->assertCount(1, $crawler->filter('div[class=entry]'));
+        $client->request('GET', '/delete/'.$content->getId());
+
+        // test on list of all articles
+        $crawler = $client->request('GET', '/all/list');
+
+        $form = $crawler->filter('form[name=search]')->form();
+        $data = [
+            'search_entry[term]' => 'wxcvbnqsdf', // a string not available in the database
+        ];
+
+        $crawler = $client->submit($form, $data);
+
+        $this->assertCount(0, $crawler->filter('div[class=entry]'));
     }
 }

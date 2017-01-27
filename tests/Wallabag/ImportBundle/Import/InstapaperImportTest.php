@@ -18,7 +18,7 @@ class InstapaperImportTest extends \PHPUnit_Framework_TestCase
     protected $logHandler;
     protected $contentProxy;
 
-    private function getInstapaperImport($unsetUser = false)
+    private function getInstapaperImport($unsetUser = false, $dispatched = 0)
     {
         $this->user = new User();
 
@@ -30,7 +30,15 @@ class InstapaperImportTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $import = new InstapaperImport($this->em, $this->contentProxy);
+        $dispatcher = $this->getMockBuilder('Symfony\Component\EventDispatcher\EventDispatcher')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $dispatcher
+            ->expects($this->exactly($dispatched))
+            ->method('dispatch');
+
+        $import = new InstapaperImport($this->em, $this->contentProxy, $dispatcher);
 
         $this->logHandler = new TestHandler();
         $logger = new Logger('test', [$this->logHandler]);
@@ -54,7 +62,7 @@ class InstapaperImportTest extends \PHPUnit_Framework_TestCase
 
     public function testImport()
     {
-        $instapaperImport = $this->getInstapaperImport();
+        $instapaperImport = $this->getInstapaperImport(false, 3);
         $instapaperImport->setFilepath(__DIR__.'/../fixtures/instapaper-export.csv');
 
         $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
@@ -87,7 +95,7 @@ class InstapaperImportTest extends \PHPUnit_Framework_TestCase
 
     public function testImportAndMarkAllAsRead()
     {
-        $instapaperImport = $this->getInstapaperImport();
+        $instapaperImport = $this->getInstapaperImport(false, 1);
         $instapaperImport->setFilepath(__DIR__.'/../fixtures/instapaper-export.csv');
 
         $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')

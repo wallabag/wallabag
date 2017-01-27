@@ -1,3 +1,4 @@
+# settings_changed: Configuration updated
 # download_pictures: Download pictures on your server
 # carrot: Enable share to Carrot
 # diaspora_url: Diaspora URL, if the service is enabled
@@ -15,6 +16,7 @@
 # share_mail: Enable share by email
 # share_shaarli: Enable share to Shaarli
 # share_twitter: Enable share to Twitter
+# share_unmark: Enable share to Unmark.it
 # show_printlink: Display a link to print content
 # wallabag_support_url: Support URL for wallabag
 # wallabag_url: URL of *your* wallabag instance
@@ -29,3 +31,5 @@
 # demo_mode_enabled: "Enable demo mode ? (only used for the wallabag public demo)"
 # demo_mode_username: "Demo user"
 # share_public: Allow public url for entries
+# download_images_enabled: Download images locally
+# restricted_access: Enable authentication for websites with paywall

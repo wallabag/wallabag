@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\TaggingRule;
 use Wallabag\CoreBundle\Form\Type\ConfigType;
@@ -34,7 +35,7 @@ class ConfigController extends Controller
         $configForm = $this->createForm(ConfigType::class, $config, ['action' => $this->generateUrl('config')]);
         $configForm->handleRequest($request);
 
-        if ($configForm->isValid()) {
+        if ($configForm->isSubmitted() && $configForm->isValid()) {
             $em->persist($config);
             $em->flush();
 
@@ -56,7 +57,7 @@ class ConfigController extends Controller
         $pwdForm = $this->createForm(ChangePasswordType::class, null, ['action' => $this->generateUrl('config').'#set4']);
         $pwdForm->handleRequest($request);
 
-        if ($pwdForm->isValid()) {
+        if ($pwdForm->isSubmitted() && $pwdForm->isValid()) {
             if ($this->get('craue_config')->get('demo_mode_enabled') && $this->get('craue_config')->get('demo_mode_username') === $user->getUsername()) {
                 $message = 'flashes.config.notice.password_not_updated_demo';
             } else {
@@ -78,7 +79,7 @@ class ConfigController extends Controller
         ]);
         $userForm->handleRequest($request);
 
-        if ($userForm->isValid()) {
+        if ($userForm->isSubmitted() && $userForm->isValid()) {
             $userManager->updateUser($user, true);
 
             $this->get('session')->getFlashBag()->add(
@@ -93,7 +94,7 @@ class ConfigController extends Controller
         $rssForm = $this->createForm(RssType::class, $config, ['action' => $this->generateUrl('config').'#set2']);
         $rssForm->handleRequest($request);
 
-        if ($rssForm->isValid()) {
+        if ($rssForm->isSubmitted() && $rssForm->isValid()) {
             $em->persist($config);
             $em->flush();
 
@@ -124,7 +125,7 @@ class ConfigController extends Controller
         $newTaggingRule = $this->createForm(TaggingRuleType::class, $taggingRule, ['action' => $action]);
         $newTaggingRule->handleRequest($request);
 
-        if ($newTaggingRule->isValid()) {
+        if ($newTaggingRule->isSubmitted() && $newTaggingRule->isValid()) {
             $taggingRule->setConfig($config);
             $em->persist($taggingRule);
             $em->flush();
@@ -150,6 +151,10 @@ class ConfigController extends Controller
                 'token' => $config->getRssToken(),
             ],
             'twofactor_auth' => $this->getParameter('twofactor_auth'),
+            'wallabag_url' => $this->get('craue_config')->get('wallabag_url'),
+            'enabled_users' => $this->getDoctrine()
+                ->getRepository('WallabagUserBundle:User')
+                ->getSumEnabledUsers(),
         ]);
     }
 
@@ -223,6 +228,78 @@ class ConfigController extends Controller
     }
 
     /**
+     * Remove all annotations OR tags OR entries for the current user.
+     *
+     * @Route("/reset/{type}", requirements={"id" = "annotations|tags|entries"}, name="config_reset")
+     *
+     * @return RedirectResponse
+     */
+    public function resetAction($type)
+    {
+        switch ($type) {
+            case 'annotations':
+                $this->getDoctrine()
+                    ->getRepository('WallabagAnnotationBundle:Annotation')
+                    ->removeAllByUserId($this->getUser()->getId());
+                break;
+
+            case 'tags':
+                $this->removeAllTagsByUserId($this->getUser()->getId());
+                break;
+
+            case 'entries':
+                // SQLite doesn't care about cascading remove, so we need to manually remove associated stuf
+                // otherwise they won't be removed ...
+                if ($this->get('doctrine')->getConnection()->getDriver() instanceof \Doctrine\DBAL\Driver\PDOSqlite\Driver) {
+                    $this->getDoctrine()->getRepository('WallabagAnnotationBundle:Annotation')->removeAllByUserId($this->getUser()->getId());
+                }
+
+                // manually remove tags to avoid orphan tag
+                $this->removeAllTagsByUserId($this->getUser()->getId());
+
+                $this->getDoctrine()
+                    ->getRepository('WallabagCoreBundle:Entry')
+                    ->removeAllByUserId($this->getUser()->getId());
+        }
+
+        $this->get('session')->getFlashBag()->add(
+            'notice',
+            'flashes.config.notice.'.$type.'_reset'
+        );
+
+        return $this->redirect($this->generateUrl('config').'#set3');
+    }
+
+    /**
+     * Remove all tags for a given user and cleanup orphan tags.
+     *
+     * @param int $userId
+     */
+    private function removeAllTagsByUserId($userId)
+    {
+        $tags = $this->getDoctrine()->getRepository('WallabagCoreBundle:Tag')->findAllTags($userId);
+
+        if (empty($tags)) {
+            return;
+        }
+
+        $this->getDoctrine()
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->removeTags($userId, $tags);
+
+        // cleanup orphan tags
+        $em = $this->getDoctrine()->getManager();
+
+        foreach ($tags as $tag) {
+            if (count($tag->getEntries()) === 0) {
+                $em->remove($tag);
+            }
+        }
+
+        $em->flush();
+    }
+
+    /**
      * Validate that a rule can be edited/deleted by the current user.
      *
      * @param TaggingRule $rule
@@ -252,5 +329,59 @@ class ConfigController extends Controller
         }
 
         return $config;
+    }
+
+    /**
+     * Delete account for current user.
+     *
+     * @Route("/account/delete", name="delete_account")
+     *
+     * @param Request $request
+     *
+     * @throws AccessDeniedHttpException
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function deleteAccountAction(Request $request)
+    {
+        $enabledUsers = $this->getDoctrine()
+            ->getRepository('WallabagUserBundle:User')
+            ->getSumEnabledUsers();
+
+        if ($enabledUsers <= 1) {
+            throw new AccessDeniedHttpException();
+        }
+
+        $user = $this->getUser();
+
+        // logout current user
+        $this->get('security.token_storage')->setToken(null);
+        $request->getSession()->invalidate();
+
+        $em = $this->get('fos_user.user_manager');
+        $em->deleteUser($user);
+
+        return $this->redirect($this->generateUrl('fos_user_security_login'));
+    }
+
+    /**
+     * Switch view mode for current user.
+     *
+     * @Route("/config/view-mode", name="switch_view_mode")
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function changeViewModeAction(Request $request)
+    {
+        $user = $this->getUser();
+        $user->getConfig()->setListMode(!$user->getConfig()->getListMode());
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($user);
+        $em->flush();
+
+        return $this->redirect($request->headers->get('referer'));
     }
 }

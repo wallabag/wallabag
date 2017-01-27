@@ -70,7 +70,12 @@ config:
             # 200_word: 'I read ~200 words per minute'
             # 300_word: 'I read ~300 words per minute'
             # 400_word: 'I read ~400 words per minute'
+        action_mark_as_read:
+            # label: 'Where do you to be redirected after mark an article as read?'
+            # redirect_homepage: 'To the homepage'
+            # redirect_current_page: 'To the current page'
         pocket_consumer_key_label: Brugers nøgle til Pocket for at importere materialer
+        # android_configuration: Configure your Android application
         # help_theme: "wallabag is customizable. You can choose your prefered theme here."
         # help_items_per_page: "You can change the number of articles displayed on each page."
         # help_reading_speed: "wallabag calculates a reading time for each article. You can define here, thanks to this list, if you are a fast or a slow reader. wallabag will recalculate the reading time for each article."
@@ -94,6 +99,18 @@ config:
         email_label: 'Emailadresse'
         # twoFactorAuthentication_label: 'Two factor authentication'
         # help_twoFactorAuthentication: "If you enable 2FA, each time you want to login to wallabag, you'll receive a code by email."
+        delete:
+            # title: Delete my account (a.k.a danger zone)
+            # description: If you remove your account, ALL your articles, ALL your tags, ALL your annotations and your account will be PERMANENTLY removed (it can't be UNDONE). You'll then be logged out.
+            # confirm: Are you really sure? (THIS CAN'T BE UNDONE)
+            # button: Delete my account
+    reset:
+        # title: Reset area (a.k.a danger zone)
+        # description: By hiting buttons below you'll have ability to remove some informations from your account. Be aware that these actions are IRREVERSIBLE.
+        # annotations: Remove ALL annotations
+        # tags: Remove ALL tags
+        # entries: Remove ALL entries
+        # confirm: Are you really really sure? (THIS CAN'T BE UNDONE)
     form_password:
         # description: "You can change your password here. Your new password should by at least 8 characters long."
         old_password_label: 'Gammel adgangskode'
@@ -145,15 +162,16 @@ entry:
         # archived: 'Archived entries'
         # filtered: 'Filtered entries'
         # filtered_tags: 'Filtered by tags:'
+        # filtered_search: 'Filtered by search:'
         # untagged: 'Untagged entries'
     list:
         # number_on_the_page: '{0} There is no entry.|{1} There is one entry.|]1,Inf[ There are %count% entries.'
         reading_time: 'estimeret læsetid'
         reading_time_minutes: 'estimeret læsetid: %readingTime% min'
-        reading_time_less_one_minute: 'estimeret læsetid: <small class="inferieur">&lt;</small> 1 min'
+        reading_time_less_one_minute: 'estimeret læsetid: &lt; 1 min'
         # number_of_tags: '{1}and one other tag|]1,Inf[and %count% other tags'
         reading_time_minutes_short: '%readingTime% min'
-        reading_time_less_one_minute_short: '<small class="inferieur">&lt;</small> 1 min'
+        reading_time_less_one_minute_short: '&lt; 1 min'
         original_article: 'original'
         toogle_as_read: 'Marker som læst'
         toogle_as_star: 'Skift favoritstatus'
@@ -168,6 +186,7 @@ entry:
         preview_picture_label: 'Har et vist billede'
         preview_picture_help: 'Forhåndsvis billede'
         language_label: 'Sprog'
+        # http_status_label: 'HTTP status'
         reading_time:
             label: 'Læsetid i minutter'
             from: 'fra'
@@ -209,6 +228,8 @@ entry:
         placeholder: 'http://website.com'
         form_new:
             url_label: Url
+    search:
+        # placeholder: 'What are you looking for?'
     edit:
         # page_title: 'Edit an entry'
         # title_label: 'Title'
@@ -252,6 +273,9 @@ about:
 howto:
     page_title: 'How-to'
     # page_description: 'There are several ways to save an article:'
+    tab_menu:
+        # add_link: "Add a link"
+        # shortcuts: "Use shortcuts"
     top_menu:
         browser_addons: 'Browserudvidelser'
         mobile_apps: 'Apps'
@@ -261,6 +285,7 @@ howto:
     browser_addons:
         firefox: 'Standardudvidelse til Firefox'
         chrome: 'Chrome-udvidelse'
+        opera: 'Opera-udvidelse'
     mobile_apps:
         android:
             via_f_droid: 'via F-Droid'
@@ -269,6 +294,33 @@ howto:
         # windows: 'on the Microsoft Store'
     bookmarklet:
         description: 'Træk dette link til din bogmærkeliste:'
+    shortcuts:
+        # page_description: Here are the shortcuts available in wallabag.
+        # shortcut: Shortcut
+        # action: Action
+        # all_pages_title: Shortcuts available in all pages
+        # go_unread: Go to unread
+        # go_starred: Go to starred
+        # go_archive: Go to archive
+        # go_all: Go to all entries
+        # go_tags: Go to tags
+        # go_config: Go to config
+        # go_import: Go to import
+        # go_developers: Go to developers
+        # go_howto: Go to howto (this page!)
+        # go_logout: Logout
+        # list_title: Shortcuts available in listing pages
+        # search: Display the search form
+        # article_title: Shortcuts available in entry view
+        # open_original: Open original URL of the entry
+        # toggle_favorite: Toggle star status for the entry
+        # toggle_archive: Toggle read status for the entry
+        # delete: Delete the entry
+        # material_title: Shortcuts available with Material theme only
+        # add_link: Add a new link
+        # hide_form: Hide the current form (search or new link)
+        # arrows_navigation: Navigate through articles
+        # open_article: Display the selected entry
 
 quickstart:
     # page_title: 'Quickstart'
@@ -329,6 +381,9 @@ tag:
     list:
         # number_on_the_page: '{0} There is no tag.|{1} There is one tag.|]1,Inf[ There are %count% tags.'
         # see_untagged_entries: 'See untagged entries'
+    new:
+        # add: 'Add'
+        # placeholder: 'You can add several tags, separated by a comma.'
 
 import:
     # page_title: 'Import'
@@ -362,6 +417,7 @@ import:
     #     how_to: 'Please select your Readability export and click on the below button to upload and import it.'
     worker:
         # enabled: "Import is made asynchronously. Once the import task is started, an external worker will handle jobs one at a time. The current service is:"
+        # download_images_warning: "You enabled downloading images for your articles. Combined with classic import it can take ages to proceed (or maybe failed). We <strong>strongly recommend</strong> to enable asynchronous import to avoid errors."
     # firefox:
     #    page_title: 'Import > Firefox'
     #    description: "This importer will import all your Firefox bookmarks. Just go to your bookmarks (Ctrl+Maj+O), then into \"Import and backup\", choose \"Backup...\". You will obtain a .json file."
@@ -374,6 +430,10 @@ import:
     #     page_title: 'Import > Instapaper'
     #     description: 'This importer will import all your Instapaper articles. On the settings (https://www.instapaper.com/user) page, click on "Download .CSV file" in the "Export" section. A CSV file will be downloaded (like "instapaper-export.csv").'
     #     how_to: 'Please select your Instapaper export and click on the below button to upload and import it.'
+    pinboard:
+        # page_title: "Import > Pinboard"
+        # description: 'This importer will import all your Instapaper articles. On the backup (https://pinboard.in/settings/backup) page, click on "JSON" in the "Bookmarks" section. A JSON file will be downloaded (like "pinboard_export").'
+        # how_to: 'Please select your Pinboard export and click on the below button to upload and import it.'
 
 developer:
     # page_title: 'Developer'
@@ -444,7 +504,6 @@ user:
         plain_password_label: '????'
         email_label: 'Emailadresse'
         # enabled_label: 'Enabled'
-        # locked_label: 'Locked'
         # last_login_label: 'Last login'
         # twofactor_label: Two factor authentication
         # save: Save
@@ -465,8 +524,10 @@ flashes:
             rss_updated: 'RSS-oplysninger opdateret'
             # tagging_rules_updated: 'Tagging rules updated'
             # tagging_rules_deleted: 'Tagging rule deleted'
-            # user_added: 'User "%username%" added'
             # rss_token_updated: 'RSS token updated'
+            # annotations_reset: Annotations reset
+            # tags_reset: Tags reset
+            # entries_reset: Entries reset
     entry:
         notice:
             # entry_already_saved: 'Entry already saved on %date%'
@@ -496,3 +557,8 @@ flashes:
         notice:
             # client_created: 'New client created.'
             # client_deleted: 'Client deleted'
+    user:
+        notice:
+            # added: 'User "%username%" added'
+            # updated: 'User "%username%" updated'
+            # deleted: 'User "%username%" deleted'

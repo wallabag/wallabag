@@ -51,6 +51,8 @@ wallabag_core:
     rss_limit: 50
     reading_speed: 1
     cache_lifetime: 10
+    action_mark_as_read: 1
+    list_mode: 1
     fetching_error_message: |
         wallabag can't retrieve contents for this article. Please <a href="http://doc.wallabag.org/en/master/user/errors_during_fetching.html#how-can-i-help-to-fix-that">troubleshoot this issue</a>.
 
@@ -78,7 +80,7 @@ doctrine:
         dbname: "%database_name%"
         user: "%database_user%"
         password: "%database_password%"
-        charset: UTF8
+        charset: "%database_charset%"
         path: "%database_path%"
         unix_socket: "%database_socket%"
         server_version: 5.6
@@ -115,12 +117,26 @@ swiftmailer:
 fos_rest:
     param_fetcher_listener: true
     body_listener: true
-    format_listener: true
     view:
+        mime_types:
+            csv:
+                - 'text/csv'
+                - 'text/plain'
+            pdf:
+                - 'application/pdf'
+            epub:
+                - 'application/epub+zip'
+            mobi:
+                - 'application/x-mobipocket-ebook'
         view_response_listener: 'force'
         formats:
             xml: true
-            json : true
+            json: true
+            txt: true
+            csv: true
+            pdf: true
+            epub: true
+            mobi: true
         templating_formats:
             html: true
         force_redirects:
@@ -129,10 +145,21 @@ fos_rest:
         default_engine: twig
     routing_loader:
         default_format: json
+    format_listener:
+        enabled: true
+        rules:
+            - { path: "^/api/entries/([0-9]+)/export.(.*)", priorities: ['epub', 'mobi', 'pdf', 'txt', 'csv'], fallback_format: json, prefer_extension: false }
+            - { path: "^/api", priorities: ['json', 'xml'], fallback_format: json, prefer_extension: false }
+            - { path: "^/annotations", priorities: ['json', 'xml'], fallback_format: json, prefer_extension: false }
+            # for an unknown reason, EACH REQUEST goes to FOS\RestBundle\EventListener\FormatListener
+            # so we need to add custom rule for custom api export but also for all other routes of the application...
+            - { path: '^/', priorities: ['text/html', '*/*'], fallback_format: html, prefer_extension: false }
 
 nelmio_api_doc:
     sandbox:
         enabled: false
+    cache:
+        enabled: true
     name: wallabag API documentation
 
 nelmio_cors:
@@ -185,6 +212,7 @@ fos_user:
     from_email:
         address:        "%from_email%"
         sender_name:    wallabag
+
 fos_oauth_server:
     db_driver:           orm
     client_class:        Wallabag\ApiBundle\Entity\Client
@@ -192,7 +220,7 @@ fos_oauth_server:
     refresh_token_class: Wallabag\ApiBundle\Entity\RefreshToken
     auth_code_class:     Wallabag\ApiBundle\Entity\AuthCode
     service:
-        user_provider: fos_user.user_manager
+        user_provider: fos_user.user_provider.username_email
         options:
             refresh_token_lifetime: 1209600
 
@@ -213,16 +241,6 @@ kphoen_rulerz:
     executors:
         doctrine: true
 
-lexik_maintenance:
-    authorized:
-        ips: ['127.0.0.1']
-    driver:
-        ttl: 3600
-        class: 'Lexik\Bundle\MaintenanceBundle\Drivers\DatabaseDriver'
-    response:
-        code: 503
-        status: "wallabag Service Temporarily Unavailable"
-
 old_sound_rabbit_mq:
     connections:
         default:
@@ -242,6 +260,11 @@ old_sound_rabbit_mq:
             connection: default
             exchange_options:
                 name: 'wallabag.import.readability'
+                type: topic
+        import_pinboard:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.pinboard'
                 type: topic
         import_instapaper:
             connection: default
@@ -277,6 +300,7 @@ old_sound_rabbit_mq:
             queue_options:
                 name: 'wallabag.import.pocket'
             callback: wallabag_import.consumer.amqp.pocket
+            qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
         import_readability:
             connection: default
             exchange_options:
@@ -285,6 +309,7 @@ old_sound_rabbit_mq:
             queue_options:
                 name: 'wallabag.import.readability'
             callback: wallabag_import.consumer.amqp.readability
+            qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
         import_instapaper:
             connection: default
             exchange_options:
@@ -293,6 +318,16 @@ old_sound_rabbit_mq:
             queue_options:
                 name: 'wallabag.import.instapaper'
             callback: wallabag_import.consumer.amqp.instapaper
+            qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
+        import_pinboard:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.pinboard'
+                type: topic
+            queue_options:
+                name: 'wallabag.import.pinboard'
+            callback: wallabag_import.consumer.amqp.pinboard
+            qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
         import_wallabag_v1:
             connection: default
             exchange_options:
@@ -301,6 +336,7 @@ old_sound_rabbit_mq:
             queue_options:
                 name: 'wallabag.import.wallabag_v1'
             callback: wallabag_import.consumer.amqp.wallabag_v1
+            qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
         import_wallabag_v2:
             connection: default
             exchange_options:
@@ -309,6 +345,7 @@ old_sound_rabbit_mq:
             queue_options:
                 name: 'wallabag.import.wallabag_v2'
             callback: wallabag_import.consumer.amqp.wallabag_v2
+            qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
         import_firefox:
             connection: default
             exchange_options:
@@ -317,6 +354,7 @@ old_sound_rabbit_mq:
             queue_options:
                 name: 'wallabag.import.firefox'
             callback: wallabag_import.consumer.amqp.firefox
+            qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
         import_chrome:
             connection: default
             exchange_options:
@@ -325,3 +363,18 @@ old_sound_rabbit_mq:
             queue_options:
                 name: 'wallabag.import.chrome'
             callback: wallabag_import.consumer.amqp.chrome
+            qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
+
+fos_js_routing:
+    routes_to_expose:
+        - homepage
+        - starred
+        - archive
+        - all
+        - tag
+        - config
+        - import
+        - developer
+        - howto
+        - fos_user_security_logout
+        - new

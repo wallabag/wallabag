@@ -1,17 +1,22 @@
 {% extends "WallabagCoreBundle::layout.html.twig" %}
 
 {% block title %}
-    {% set currentTag = '' %}
+    {% set filter = '' %}
     {% if tag is defined %}
-        {% set currentTag = tag %}
+        {% set filter = tag %}
     {% endif %}
-    {% include "@WallabagCore/themes/common/Entry/_title.html.twig" with {'currentTag': currentTag} %}
+    {% if searchTerm is defined and searchTerm is not empty %}
+        {% set filter = searchTerm %}
+    {% endif %}
+    {% include "@WallabagCore/themes/common/Entry/_title.html.twig" with {'filter': filter} %}
 {% endblock %}
 
 {% block content %}
+    {% set listMode = app.user.config.listMode %}
     <div class="results clearfix">
         <div class="nb-results left">
             {{ 'entry.list.number_on_the_page'|transchoice(entries.count) }}
+            <a href="{{ path('switch_view_mode') }}"><i class="material-icons">{% if listMode == 0 %}view_list{% else %}view_module{% endif %}</i></a>
         </div>
         {% if entries.getNbPages > 1 %}
             {{ pagerfanta(entries, 'twitter_bootstrap_translated', {'proximity': 1}) }}
@@ -21,8 +26,10 @@
     <br />
     <ul class="row data">
         {% for entry in entries %}
-            <li id="entry-{{ entry.id|e }}" class="col l3 m6 s12">
-                {% if entry.previewPicture is null %}
+            <li id="entry-{{ entry.id|e }}" class="col {% if listMode == 0 %}l3 m6{% endif %} s12">
+                {% if listMode == 1 %}
+                    {% include "@WallabagCore/themes/material/Entry/_card_list.html.twig" with {'entry': entry} only %}
+                {% elseif entry.previewPicture is null %}
                     {% include "@WallabagCore/themes/material/Entry/_card_no_preview.html.twig" with {'entry': entry} only %}
                 {% elseif not entry.previewPicture is null and entry.mimetype starts with 'image/' %}
                     {% include "@WallabagCore/themes/material/Entry/_card_full_image.html.twig" with {'entry': entry} only %}
@@ -101,6 +108,14 @@
 
                 <div class="input-field col s12">
                     {{ form_widget(form.language) }}
+                </div>
+
+                <div class="col s12">
+                    {{ form_label(form.httpStatus) }}
+                </div>
+
+                <div class="input-field col s12">
+                    {{ form_widget(form.httpStatus) }}
                 </div>
 
                 <div class="col s12">

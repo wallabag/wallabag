@@ -26,6 +26,15 @@ Reading speed
 wallabag calculates a reading time for each article. You can define here, thanks to this list, if you are
 a fast or a slow reader. wallabag will recalculate the reading time for each article.
 
+Where do you want to be redirected after mark an article as read?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Each time you'll do some actions (after marking an article as read/favorite,
+after deleting an article, after removing a tag from an entry), you can be redirected:
+
+- To the homepage
+- To the current page
+
 Language
 ~~~~~~~~
 
@@ -43,10 +52,15 @@ Now you have three links, one for each status: add them into your favourite RSS 
 
 You can also define how many articles you want in each RSS feed (default value: 50).
 
+There is also a pagination available for these feeds. You can add ``?page=2`` to jump to the second page.
+The pagination follow `the RFC <https://tools.ietf.org/html/rfc5005#page-4>`_ about that, which means you'll find the ``next``, ``previous`` & ``last`` page link inside the `<channel>` tag of each RSS feed.
+
 User information
 ----------------
 
 You can change your name, your email address and enable ``Two factor authentication``.
+
+If the wallabag instance has more than one enabled user, you can delete your account here. **Take care, we delete all your data**.
 
 Two factor authentication (2FA)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

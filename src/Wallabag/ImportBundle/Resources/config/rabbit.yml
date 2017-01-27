@@ -6,6 +6,7 @@ services:
             - "@doctrine.orm.entity_manager"
             - "@wallabag_user.user_repository"
             - "@wallabag_import.pocket.import"
+            - "@event_dispatcher"
             - "@logger"
     wallabag_import.consumer.amqp.readability:
         class: Wallabag\ImportBundle\Consumer\AMQPEntryConsumer
@@ -13,6 +14,7 @@ services:
             - "@doctrine.orm.entity_manager"
             - "@wallabag_user.user_repository"
             - "@wallabag_import.readability.import"
+            - "@event_dispatcher"
             - "@logger"
     wallabag_import.consumer.amqp.instapaper:
         class: Wallabag\ImportBundle\Consumer\AMQPEntryConsumer
@@ -20,6 +22,15 @@ services:
             - "@doctrine.orm.entity_manager"
             - "@wallabag_user.user_repository"
             - "@wallabag_import.instapaper.import"
+            - "@event_dispatcher"
+            - "@logger"
+    wallabag_import.consumer.amqp.pinboard:
+        class: Wallabag\ImportBundle\Consumer\AMQPEntryConsumer
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@wallabag_user.user_repository"
+            - "@wallabag_import.pinboard.import"
+            - "@event_dispatcher"
             - "@logger"
     wallabag_import.consumer.amqp.wallabag_v1:
         class: Wallabag\ImportBundle\Consumer\AMQPEntryConsumer
@@ -27,6 +38,7 @@ services:
             - "@doctrine.orm.entity_manager"
             - "@wallabag_user.user_repository"
             - "@wallabag_import.wallabag_v1.import"
+            - "@event_dispatcher"
             - "@logger"
     wallabag_import.consumer.amqp.wallabag_v2:
         class: Wallabag\ImportBundle\Consumer\AMQPEntryConsumer
@@ -34,6 +46,7 @@ services:
             - "@doctrine.orm.entity_manager"
             - "@wallabag_user.user_repository"
             - "@wallabag_import.wallabag_v2.import"
+            - "@event_dispatcher"
             - "@logger"
     wallabag_import.consumer.amqp.firefox:
         class: Wallabag\ImportBundle\Consumer\AMQPEntryConsumer
@@ -41,6 +54,7 @@ services:
             - "@doctrine.orm.entity_manager"
             - "@wallabag_user.user_repository"
             - "@wallabag_import.firefox.import"
+            - "@event_dispatcher"
             - "@logger"
     wallabag_import.consumer.amqp.chrome:
         class: Wallabag\ImportBundle\Consumer\AMQPEntryConsumer
@@ -48,4 +62,5 @@ services:
             - "@doctrine.orm.entity_manager"
             - "@wallabag_user.user_repository"
             - "@wallabag_import.chrome.import"
+            - "@event_dispatcher"
             - "@logger"

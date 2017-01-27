@@ -37,9 +37,10 @@ class ChromeImport extends BrowserImport
     {
         $data = [
             'title' => $entry['name'],
-            'html' => '',
+            'html' => false,
             'url' => $entry['url'],
-            'is_archived' => $this->markAsRead,
+            'is_archived' => (int) $this->markAsRead,
+            'is_starred' => false,
             'tags' => '',
             'created_at' => substr($entry['date_added'], 0, 10),
         ];

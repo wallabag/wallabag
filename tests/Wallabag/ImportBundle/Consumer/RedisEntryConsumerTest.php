@@ -111,10 +111,19 @@ JSON;
             ->with(json_decode($body, true))
             ->willReturn($entry);
 
+        $dispatcher = $this->getMockBuilder('Symfony\Component\EventDispatcher\EventDispatcher')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $dispatcher
+            ->expects($this->once())
+            ->method('dispatch');
+
         $consumer = new RedisEntryConsumer(
             $em,
             $userRepository,
-            $import
+            $import,
+            $dispatcher
         );
 
         $res = $consumer->manage($body);
@@ -156,10 +165,19 @@ JSON;
             ->disableOriginalConstructor()
             ->getMock();
 
+        $dispatcher = $this->getMockBuilder('Symfony\Component\EventDispatcher\EventDispatcher')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $dispatcher
+            ->expects($this->never())
+            ->method('dispatch');
+
         $consumer = new RedisEntryConsumer(
             $em,
             $userRepository,
-            $import
+            $import,
+            $dispatcher
         );
 
         $res = $consumer->manage($body);
@@ -211,10 +229,19 @@ JSON;
             ->with(json_decode($body, true))
             ->willReturn(null);
 
+        $dispatcher = $this->getMockBuilder('Symfony\Component\EventDispatcher\EventDispatcher')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $dispatcher
+            ->expects($this->never())
+            ->method('dispatch');
+
         $consumer = new RedisEntryConsumer(
             $em,
             $userRepository,
-            $import
+            $import,
+            $dispatcher
         );
 
         $res = $consumer->manage($body);

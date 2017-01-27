@@ -3,12 +3,15 @@
 namespace Wallabag\CoreBundle\Controller;
 
 use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Exception\OutOfRangeCurrentPageException;
 use Pagerfanta\Pagerfanta;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\UserBundle\Entity\User;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class RssController extends Controller
 {
@@ -20,9 +23,9 @@ class RssController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showUnreadAction(User $user)
+    public function showUnreadAction(Request $request, User $user)
     {
-        return $this->showEntries('unread', $user);
+        return $this->showEntries('unread', $user, $request->query->get('page', 1));
     }
 
     /**
@@ -33,9 +36,9 @@ class RssController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showArchiveAction(User $user)
+    public function showArchiveAction(Request $request, User $user)
     {
-        return $this->showEntries('archive', $user);
+        return $this->showEntries('archive', $user, $request->query->get('page', 1));
     }
 
     /**
@@ -46,9 +49,9 @@ class RssController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showStarredAction(User $user)
+    public function showStarredAction(Request $request, User $user)
     {
-        return $this->showEntries('starred', $user);
+        return $this->showEntries('starred', $user, $request->query->get('page', 1));
     }
 
     /**
@@ -57,10 +60,11 @@ class RssController extends Controller
      *
      * @param string $type Entries type: unread, starred or archive
      * @param User   $user
+     * @param int    $page
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    private function showEntries($type, User $user)
+    private function showEntries($type, User $user, $page = 1)
     {
         $repository = $this->getDoctrine()->getRepository('WallabagCoreBundle:Entry');
 
@@ -81,14 +85,32 @@ class RssController extends Controller
                 throw new \InvalidArgumentException(sprintf('Type "%s" is not implemented.', $type));
         }
 
-        $pagerAdapter = new DoctrineORMAdapter($qb->getQuery());
+        $pagerAdapter = new DoctrineORMAdapter($qb->getQuery(), true, false);
         $entries = new Pagerfanta($pagerAdapter);
 
         $perPage = $user->getConfig()->getRssLimit() ?: $this->getParameter('wallabag_core.rss_limit');
         $entries->setMaxPerPage($perPage);
 
+        $url = $this->generateUrl(
+            $type.'_rss',
+            [
+                'username' => $user->getUsername(),
+                'token' => $user->getConfig()->getRssToken(),
+            ],
+            UrlGeneratorInterface::ABSOLUTE_URL
+        );
+
+        try {
+            $entries->setCurrentPage((int) $page);
+        } catch (OutOfRangeCurrentPageException $e) {
+            if ($page > 1) {
+                return $this->redirect($url.'?page='.$entries->getNbPages(), 302);
+            }
+        }
+
         return $this->render('@WallabagCore/themes/common/Entry/entries.xml.twig', [
             'type' => $type,
+            'url' => $url,
             'entries' => $entries,
         ]);
     }
