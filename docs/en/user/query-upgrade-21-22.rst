@@ -724,6 +724,111 @@ Migration down
     CREATE UNIQUE INDEX UNIQ_1D63E7E5A0D96FBF ON wallabag_user (email_canonical)
     CREATE UNIQUE INDEX UNIQ_1D63E7E5C05FB297 ON wallabag_user (confirmation_token)
 
+Migration 20161214094402
+------------------------
+
+MySQL
+^^^^^
+
+Migration up
+""""""""""""
+
+.. code-block:: sql
+
+    ALTER TABLE wallabag_entry CHANGE uuid uid VARCHAR(23)
+
+Migration down
+""""""""""""""
+
+.. code-block:: sql
+
+    ALTER TABLE wallabag_entry CHANGE uid uuid VARCHAR(23)
+
+PostgreSQL
+^^^^^^^^^^
+
+Migration up
+""""""""""""
+
+.. code-block:: sql
+
+    ALTER TABLE wallabag_entry RENAME uuid TO uid
+
+Migration down
+""""""""""""""
+
+.. code-block:: sql
+
+    ALTER TABLE wallabag_entry RENAME uid TO uuid
+
+SQLite
+^^^^^^
+
+Migration up
+""""""""""""
+
+.. code-block:: sql
+
+    CREATE TABLE __temp__wallabag_entry (
+        id    INTEGER NOT NULL,
+        user_id   INTEGER DEFAULT NULL,
+        uid  VARCHAR(23) DEFAULT NULL,
+        title CLOB DEFAULT NULL,
+        url   CLOB DEFAULT NULL,
+        is_archived   BOOLEAN NOT NULL,
+        is_starred    BOOLEAN NOT NULL,
+        content   CLOB DEFAULT NULL,
+        created_at    DATETIME NOT NULL,
+        updated_at    DATETIME NOT NULL,
+        mimetype  CLOB DEFAULT NULL,
+        language  CLOB DEFAULT NULL,
+        reading_time  INTEGER DEFAULT NULL,
+        domain_name   CLOB DEFAULT NULL,
+        preview_picture   CLOB DEFAULT NULL,
+        is_public BOOLEAN DEFAULT '0',
+        http_status   VARCHAR(3) DEFAULT NULL,
+        PRIMARY KEY(id)
+    );
+    INSERT INTO __temp__wallabag_entry SELECT id,user_id,uuid,title,url,is_archived,is_starred,content,created_at,updated_at,mimetype,language,reading_time,domain_name,preview_picture,is_public,http_status FROM wallabag_entry;
+    DROP TABLE wallabag_entry;
+    ALTER TABLE __temp__wallabag_entry RENAME TO wallabag_entry
+    CREATE INDEX uid ON wallabag_entry (uid)
+    CREATE INDEX created_at ON wallabag_entry (created_at)
+    CREATE INDEX IDX_F4D18282A76ED395 ON wallabag_entry (user_id)
+
+
+Migration down
+""""""""""""""
+
+.. code-block:: sql
+
+    CREATE TABLE __temp__wallabag_entry (
+        id    INTEGER NOT NULL,
+        user_id   INTEGER DEFAULT NULL,
+        uuid  VARCHAR(23) DEFAULT NULL,
+        title CLOB DEFAULT NULL,
+        url   CLOB DEFAULT NULL,
+        is_archived   BOOLEAN NOT NULL,
+        is_starred    BOOLEAN NOT NULL,
+        content   CLOB DEFAULT NULL,
+        created_at    DATETIME NOT NULL,
+        updated_at    DATETIME NOT NULL,
+        mimetype  CLOB DEFAULT NULL,
+        language  CLOB DEFAULT NULL,
+        reading_time  INTEGER DEFAULT NULL,
+        domain_name   CLOB DEFAULT NULL,
+        preview_picture   CLOB DEFAULT NULL,
+        is_public BOOLEAN DEFAULT '0',
+        http_status   VARCHAR(3) DEFAULT NULL,
+        PRIMARY KEY(id)
+    );
+    INSERT INTO __temp__wallabag_entry SELECT id,user_id,uid,title,url,is_archived,is_starred,content,created_at,updated_at,mimetype,language,reading_time,domain_name,preview_picture,is_public,http_status FROM wallabag_entry;
+    DROP TABLE wallabag_entry;
+    ALTER TABLE __temp__wallabag_entry RENAME TO wallabag_entry
+    CREATE INDEX uid ON wallabag_entry (uid)
+    CREATE INDEX created_at ON wallabag_entry (created_at)
+    CREATE INDEX IDX_F4D18282A76ED395 ON wallabag_entry (user_id)
+
 Migration 20161214094403
 ------------------------
 

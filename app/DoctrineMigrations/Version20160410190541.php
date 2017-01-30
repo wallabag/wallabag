@@ -40,7 +40,15 @@ class Version20160410190541 extends AbstractMigration implements ContainerAwareI
             'notnull' => false,
             'length' => 23,
         ]);
-        $this->addSql('INSERT INTO '.$this->getTable('craue_config_setting')." (name, value, section) VALUES ('share_public', '1', 'entry')");
+
+        $sharePublic = $this->container
+            ->get('doctrine.orm.default_entity_manager')
+            ->getConnection()
+            ->fetchArray('SELECT * FROM '.$this->getTable('craue_config_setting')." WHERE name = 'share_public'");
+
+        if (false === $sharePublic) {
+            $this->addSql('INSERT INTO '.$this->getTable('craue_config_setting')." (name, value, section) VALUES ('share_public', '1', 'entry')");
+        }
     }
 
     /**
