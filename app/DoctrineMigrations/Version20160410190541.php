@@ -34,7 +34,7 @@ class Version20160410190541 extends AbstractMigration implements ContainerAwareI
     {
         $entryTable = $schema->getTable($this->getTable('entry'));
 
-        $this->skipIf($entryTable->hasColumn('uid'), 'It seems that you already played this migration.');
+        $this->skipIf($entryTable->hasColumn('uid') || $entryTable->hasColumn('uuid'), 'It seems that you already played this migration.');
 
         $entryTable->addColumn('uid', 'string', [
             'notnull' => false,
