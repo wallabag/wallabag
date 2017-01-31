@@ -291,6 +291,7 @@ nav {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  min-height: 64px;
 }
 
 .nav-wrapper .button-collapse {
@@ -369,7 +370,8 @@ nav {
 .input-field.nav-panel-add form,
 .input-field.nav-panel-search,
 .input-field.nav-panel-search form {
-  flex-grow: 1;
+  display: flex;
+  flex: 1;
 }
 
 /* ==========================================================================
