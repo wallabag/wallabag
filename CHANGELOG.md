@@ -1,5 +1,9 @@
 ## Changelog
 
+### 2.2.1 2017/01/31
+
+- [#2809](https://github.com/wallabag/wallabag/pull/2809) Fixed duplicate entry for share_public in craue_setting_table and added documentation about migration (@nicosomb)
+
 ### 2.2.0 2017/01/27
 - [#2789](https://github.com/wallabag/wallabag/pull/2789) Added indexes on is_archived and is_starred (@nicosomb)
 - [#2763](https://github.com/wallabag/wallabag/pull/2763) Sort list of available tags (@janLo)
