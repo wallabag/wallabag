@@ -37,6 +37,9 @@
                         <p>
                             <a href="{{ path('group_new') }}" class="waves-effect waves-light btn">{{ 'group.list.create_new_one'|trans }}</a>
                         </p>
+                        {% if groups.getNbPages > 1 %}
+                            {{ pagerfanta(groups, 'twitter_bootstrap_translated', {'proximity': 1}) }}
+                        {% endif %}
                     </div>
                 </div>
             </div>

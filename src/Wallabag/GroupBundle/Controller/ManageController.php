@@ -2,11 +2,20 @@
 
 namespace Wallabag\GroupBundle\Controller;
 
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Exception\OutOfRangeCurrentPageException;
+use Pagerfanta\Pagerfanta;
+use Strut\StrutBundle\Service\Sha256Salted;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Response;
 use Wallabag\GroupBundle\Entity\Group;
+use Wallabag\GroupBundle\Entity\UserGroup;
+use Wallabag\GroupBundle\Form\GroupType;
+use Wallabag\GroupBundle\Form\NewGroupType;
+use Wallabag\UserBundle\Entity\User;
 
 /**
  * Group controller.
@@ -14,19 +23,32 @@ use Wallabag\GroupBundle\Entity\Group;
 class ManageController extends Controller
 {
     /**
-     * Lists all Group entities.
+     * Lists all public Group entities.
      *
-     * @Route("/", name="group_index")
+     * @Route("/{page}", name="group_index", defaults={"page" = "1"})
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction($page = 1)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $groups = $em->getRepository('WallabagGroupBundle:Group')->findAll();
+        $groups = $em->getRepository('WallabagGroupBundle:Group')->findPublicGroups();
+
+        $pagerAdapter = new DoctrineORMAdapter($groups->getQuery(), true, false);
+        $pagerFanta = new Pagerfanta($pagerAdapter);
+        $pagerFanta->setMaxPerPage(1);
+
+        try {
+            $pagerFanta->setCurrentPage($page);
+        } catch (OutOfRangeCurrentPageException $e) {
+            if ($page > 1) {
+                return $this->redirect($this->generateUrl('group_index', ['page' => $pagerFanta->getNbPages()]), 302);
+            }
+        }
 
         return $this->render('WallabagGroupBundle:Manage:index.html.twig', array(
-            'groups' => $groups,
+            'groups' => $pagerFanta,
+            'currentPage' => $page,
         ));
     }
 
@@ -38,14 +60,26 @@ class ManageController extends Controller
      */
     public function newAction(Request $request)
     {
-        $group = new Group('');
+        $group = new Group();
 
-        $form = $this->createForm('Wallabag\GroupBundle\Form\NewGroupType', $group);
+        $form = $this->createForm(NewGroupType::class, $group);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            if ($group->getAcceptSystem() == Group::ACCESS_PASSWORD) {
+                /** @var Sha256Salted $encoder */
+                $encoder = $this->get('sha256salted_encoder');
+                $password = $encoder->encodePassword($group->getPassword(), $this->getParameter('secret'));
+                $group->setPassword($password);
+            }
+
             $em->persist($group);
+
+            $groupUser = new UserGroup($this->getUser(), $group, Group::ROLE_ADMIN);
+            $groupUser->setAccepted(true);
+            $em->persist($groupUser);
             $em->flush();
 
             $this->get('session')->getFlashBag()->add(
@@ -70,12 +104,23 @@ class ManageController extends Controller
      */
     public function editAction(Request $request, Group $group)
     {
+        if ($this->getUser()->getGroupRoleForUser($group) < Group::ROLE_ADMIN) {
+            $this->createAccessDeniedException();
+        }
+
         $deleteForm = $this->createDeleteForm($group);
-        $editForm = $this->createForm('Wallabag\GroupBundle\Form\GroupType', $group);
+        $editForm = $this->createForm(GroupType::class, $group);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            if ($group->getAcceptSystem() === Group::ACCESS_PASSWORD) {
+                $encoder = $this->get('sha256salted_encoder');
+                $password = $encoder->encodePassword($group->getPlainPassword(), $this->getParameter('secret'));
+                $group->setPassword($password);
+            }
+
             $em->persist($group);
             $em->flush();
 
@@ -133,5 +178,34 @@ class ManageController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+    /**
+     * @Route("/group-user-exclude/{group}/{user}", name="group-user-exclude")
+     * @param Group $group
+     * @param User $user
+     * @return Response
+     */
+    public function excludeMemberAction(Group $group, User $user)
+    {
+        $logger = $this->get('logger');
+        $logger->info('User ' . $this->getUser()->getUsername() . ' wants to exclude user ' . $user->getUsername() . ' from group ' . $group->getName());
+
+        if (!$this->getUser()->inGroup($group) || $this->getUser()->getGroupRoleForUser($group) < Group::ROLE_MANAGE_USERS) {
+            $logger->info('User ' . $this->getUser()->getUsername() . ' has not enough rights on group ' . $group->getName() . ' to exclude user ' . $user->getUsername());
+            throw $this->createAccessDeniedException();
+        }
+
+        if ($user->inGroup($group) && $user->getGroupRoleForUser($group) < Group::ROLE_ADMIN) {
+            $em = $this->getDoctrine()->getManager();
+
+            $logger->info('Removing user ' . $this->getUser()->getUsername() . ' from group ' . $group->getName());
+            $em->remove($this->getUser()->getUserGroupFromGroup($group));
+
+            $em->flush();
+
+            return $this->redirectToRoute('group-manage', ['group' => $group->getId()]);
+        }
+        throw $this->createAccessDeniedException();
     }
 }

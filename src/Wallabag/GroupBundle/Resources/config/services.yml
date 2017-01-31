@@ -1,0 +1,3 @@
+services:
+    sha256salted_encoder:
+          class: Strut\StrutBundle\Service\Sha256Salted

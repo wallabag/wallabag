@@ -515,8 +515,8 @@ developer:
 
 group:
     page_title: Gestion des groupes
-    new_group: Créer un nouveau group
-    edit_group: Éditer un nouveau groupe
+    new_group: Créer un nouveau groupe
+    edit_group: Éditer le groupe « %group% »
     description: Ici vous pouvez gérer vos groupes (création, mise à jour et suppression)
     list:
         actions: Actions
@@ -531,6 +531,24 @@ group:
         delete: Supprimer
         delete_confirm: Êtes-vous sur ?
         back_to_list: Revenir à la liste
+        role_label: Rôles par défaut
+        access_label: Accès
+        password_label: Mot de passe (si nécessaire)
+    roles:
+        readonly: Lecture seule
+        write: Écriture
+        manage_entries: Gestion des articles
+        manage_users: Gestion des utilisateurs
+        admin: Administrateur
+    access:
+        open: Ouvert
+        request: Sur demande
+        password: Par mot de passe
+        invitation: Sur invitation
+        hidden: Sur invitation et privée
+    tab_menu:
+        public: Groupes publics
+        own: Mes groupes
 
 user:
     page_title: "Gestion des utilisateurs"

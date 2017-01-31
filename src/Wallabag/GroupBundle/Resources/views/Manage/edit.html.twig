@@ -1,6 +1,6 @@
 {% extends "WallabagCoreBundle::layout.html.twig" %}
 
-{% block title %}{{ 'group.page_title'|trans }}{% endblock %}
+{% block title %}{{ 'group.page_title' | trans }}{% endblock %}
 
 {% block content %}
 
@@ -9,7 +9,7 @@
             <div class="card-panel">
                 <div class="row">
                     <div class="input-field col s12">
-                        <h4>{{ 'group.edit_group'|trans }}</h4>
+                        <h4>{{ 'group.edit_group'|trans({'%group%': group.name }) }}</h4>
 
                         <div id="set6" class="col s12">
                             {{ form_start(edit_form) }}
@@ -20,6 +20,30 @@
                                         {{ form_label(edit_form.name) }}
                                         {{ form_errors(edit_form.name) }}
                                         {{ form_widget(edit_form.name) }}
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        {{ form_label(edit_form.defaultRole) }}
+                                        {{ form_errors(edit_form.defaultRole) }}
+                                        {{ form_widget(edit_form.defaultRole) }}
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        {{ form_label(edit_form.acceptSystem) }}
+                                        {{ form_errors(edit_form.acceptSystem) }}
+                                        {{ form_widget(edit_form.acceptSystem) }}
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        {{ form_label(edit_form.plainPassword) }}
+                                        {{ form_errors(edit_form.plainPassword) }}
+                                        {{ form_widget(edit_form.plainPassword) }}
                                     </div>
                                 </div>
 
