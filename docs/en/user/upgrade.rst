@@ -15,6 +15,15 @@ Upgrading from 2.1.x to 2.2.x
 Upgrade on a dedicated web server
 =================================
 
+**From 2.1.x:**
+
+::
+
+    make update
+    php bin/console doctrine:migrations:migrate --no-interaction -e=prod
+
+**From 2.2.0:**
+
 ::
 
     make update
