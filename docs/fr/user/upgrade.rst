@@ -13,6 +13,15 @@ Mettre à jour de la 2.1.x à la 2.2.x
 Mise à jour sur un serveur dédié
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+**Depuis 2.1.x:**
+
+::
+
+    make update
+    php bin/console doctrine:migrations:migrate --no-interaction -e=prod
+
+**Depuis 2.2.0:**
+
 ::
 
     make update
