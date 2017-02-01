@@ -25,7 +25,7 @@ menu:
         internal_settings: 'Wewnętrzne ustawienia'
         import: 'Importuj'
         howto: 'Howto'
-        # developer: 'API clients management'
+        developer: 'Zarządzanie klientami API'
         logout: 'Wyloguj'
         about: 'O nas'
         search: 'Szukaj'
@@ -436,7 +436,7 @@ import:
         how_to: 'Wybierz swój plik eksportu z Pinboard i kliknij poniższy przycisk, aby go załadować.'
 
 developer:
-    # page_title: 'API clients management'
+    page_title: 'Zarządzanie klientami API'
     welcome_message: 'Witaj w API wallabag'
     documentation: 'Dokumentacja'
     how_to_first_app: 'Jak stworzyć moją pierwszą aplikację'
@@ -457,7 +457,7 @@ developer:
         warn_message_2: "Jeżeli go usuniesz, aplikacje skonfigurowane z tym klientem nię będa w stanie autoryzować twojego wallabag."
         action: 'Usuń tego klienta'
     client:
-        # page_title: 'API clients management > Nowy klient'
+        page_title: 'Zarządzanie klientami API > Nowy klient'
         page_description: 'Tworzysz nowego klienta. Wypełnij poniższe pole w celu przekierowania URI twojej aplikacji.'
         form:
             name_label: 'Nazwa klienta'
@@ -465,7 +465,7 @@ developer:
             save_label: 'Stwórz nowego klienta'
         action_back: 'Cofnij'
     client_parameter:
-        # page_title: 'API clients management > Parametry klienta'
+        page_title: 'Zarządzanie klientami API > Parametry klienta'
         page_description: 'Tutaj znajdują się parametry klienta.'
         field_name: 'Nazwa klienta'
         field_id: 'Client ID'
@@ -473,7 +473,7 @@ developer:
         back: 'Cofnij'
         read_howto: 'Przeczytaj jak "Stworzyć moją pierwszą aplikację"'
     howto:
-        # page_title: 'API clients management > Jak stworzyć moją pierwszą aplikację'
+        page_title: 'Zarządzanie klientami API > Jak stworzyć moją pierwszą aplikację'
         description:
             paragraph_1: 'Następujące komendy korzystają <a href="https://github.com/jkbrzt/httpie">Biblioteka HTTPie</a>. Upewnij się, czy zainstalowałeś ją w swoim systemie zanim z niej skorzystasz'
             paragraph_2: 'Potrzebujesz tokena w celu nawiązania komunikacji między swoją aplikacją a API wallabag.'
