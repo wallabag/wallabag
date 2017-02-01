@@ -25,7 +25,7 @@ menu:
         internal_settings: 'Interne Einstellungen'
         import: 'Importieren'
         howto: 'How-To'
-        # developer: 'API clients management'
+        developer: 'API-Client-Verwaltung'
         logout: 'Abmelden'
         about: 'Über'
         search: 'Suche'
@@ -436,7 +436,7 @@ import:
         how_to: 'Bitte wähle deinen Pinboard Export aus und klicke den nachfolgenden Button zum Importieren.'
 
 developer:
-    # page_title: 'API clients management'
+    page_title: 'API-Client-Verwaltung'
     welcome_message: 'Willkomen zur wallabag API'
     documentation: 'Dokumentation'
     how_to_first_app: 'Wie erstelle ich meine erste Anwendung'
@@ -457,7 +457,7 @@ developer:
         warn_message_2: "Wenn du ihn entfernst, hat keine der damit konfigurierten Anwendungen mehr die Möglichkeit, sich in deinen wallabag-Konto anzumelden."
         action: 'Client entfernen'
     client:
-        # page_title: 'API clients management > Neuer Client'
+        page_title: 'API-Client-Verwaltung > Neuer Client'
         page_description: 'Du bist dabei, einen neuen Client zu erstellen. Fülle das nachfolgende Feld für die Weiterleitungs-URIs deiner Anwendung aus.'
         form:
             name_label: 'Name des Clients'
@@ -465,7 +465,7 @@ developer:
             save_label: 'Neuen Client erstellen'
         action_back: 'Zurück'
     client_parameter:
-        # page_title: 'API clients management > Client-Parameter'
+        page_title: 'API-Client-Verwaltung > Client-Parameter'
         page_description: 'Dies sind deine Client-Parameter.'
         field_name: 'Client Name'
         field_id: 'Client-ID'
@@ -473,7 +473,7 @@ developer:
         back: 'Zurück'
         read_howto: 'Lese des How-To zu "Wie erstelle ich meine erste Anwendung"'
     howto:
-        # page_title: 'API clients management > Wie erstelle ich meine erste Anwendung'
+        page_title: 'API-Client-Verwaltung > Wie erstelle ich meine erste Anwendung'
         description:
             paragraph_1: 'Die folgenden Befehle machen Gebrauch von der <a href="https://github.com/jkbrzt/httpie">HTTPie-Bibliothek</a>. Stelle sicher, dass sie auf deinem System installiert ist, bevor du fortfährst.'
             paragraph_2: 'Du benötigst einen Token, damit deine Anwendung mit der wallabag-API kommunizieren kann.'
