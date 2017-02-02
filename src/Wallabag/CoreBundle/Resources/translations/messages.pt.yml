@@ -25,7 +25,7 @@ menu:
         internal_settings: 'Configurações Internas'
         import: 'Importar'
         howto: 'How to'
-        developer: 'Desenvolvedor'
+        # developer: 'API clients management'
         logout: 'Sair'
         about: 'Sobre'
         search: 'Pesquisa'
@@ -436,7 +436,7 @@ import:
         # how_to: 'Please select your Pinboard export and click on the below button to upload and import it.'
 
 developer:
-    page_title: 'Desenvolvedor'
+    # page_title: 'API clients management'
     welcome_message: 'Bem-vindo a API do wallabag'
     documentation: 'Documentação'
     how_to_first_app: 'Como criar minha primeira aplicação'
@@ -457,7 +457,7 @@ developer:
         warn_message_2: 'Se você remover isso, todo o aplicativo configurado com este cliente não poderá se autenticar no seu wallabag.'
         action: 'Remover este cliente'
     client:
-        page_title: 'Desenvolvedor > Novo cliente'
+        # page_title: 'API clients management > Novo cliente'
         page_description: 'Você está prestes a criar um novo cliente. Por favor preencha o campo abaixo para a URI de redirecionamento de sua aplicação.'
         form:
             name_label: 'Nome do cliente'
@@ -465,7 +465,7 @@ developer:
             save_label: 'Criar um novo cliente'
         action_back: 'Voltar'
     client_parameter:
-        page_title: 'Desenvolvedor > Parâmetros de clientes'
+        # page_title: 'API clients management > Parâmetros de clientes'
         page_description: 'Aqui estão os parâmetros de seus clientes.'
         field_name: 'Nome do cliente'
         field_id: 'ID do cliente'
@@ -473,7 +473,7 @@ developer:
         back: 'Voltar'
         read_howto: 'Leia o how-to "Criar minha primeira aplicação"'
     howto:
-        page_title: 'Desenvolvedor > Criar minha primeira aplicação'
+        # page_title: 'API clients management > Criar minha primeira aplicação'
         description:
             paragraph_1: 'Os seguintes comandos fazem uso da <a href="https://github.com/jkbrzt/httpie">biblioteca HTTPie</a>. Tenha certeza que ela está instalada em seu servidor antes de usá-la.'
             paragraph_2: 'Você precisa de um token para a comunicação entre sua aplicação terceira e a API do wallabag.'

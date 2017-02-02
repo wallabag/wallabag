@@ -25,7 +25,7 @@ menu:
         internal_settings: 'Configuracion interna'
         import: 'Importar'
         howto: 'Ajuda'
-        developer: 'Desvolopaire'
+        # developer: 'API clients management'
         logout: 'Desconnexion'
         about: 'A prepaus'
         search: 'Cercar'
@@ -436,7 +436,7 @@ import:
         # how_to: 'Please select your Pinboard export and click on the below button to upload and import it.'
 
 developer:
-    page_title: 'Desvolopaire'
+    # page_title: 'API clients management'
     welcome_message: "Benvenguda sus l'API de wallabag"
     documentation: 'Documentacion'
     how_to_first_app: 'Cossí crear vòstra primièra aplicacion'
@@ -457,7 +457,7 @@ developer:
         warn_message_2: "Se suprimissètz un client, totas las aplicacions que l'emplegan foncionaràn pas mai amb vòstre compte wallabag."
         action: 'Suprimir aqueste client'
     client:
-        page_title: 'Desvolopaire > Novèl client'
+        # page_title: 'API clients management > Novèl client'
         page_description: "Anatz crear un novèl client. Mercés de cumplir l'url de redireccion cap a vòstra aplicacion."
         form:
             name_label: "Nom del client"
@@ -465,7 +465,7 @@ developer:
             save_label: 'Crear un novèl client'
         action_back: 'Retorn'
     client_parameter:
-        page_title: 'Desvolopaire > Los paramètres de vòstre client'
+        # page_title: 'API clients management > Los paramètres de vòstre client'
         page_description: 'Vaquí los paramètres de vòstre client'
         field_name: 'Nom del client'
         field_id: 'ID Client'
@@ -473,7 +473,7 @@ developer:
         back: 'Retour'
         read_howto: 'Legir "cossí crear ma primièra aplicacion"'
     howto:
-        page_title: 'Desvolopaire > Cossí crear ma primièra aplicacion'
+        # page_title: 'API clients management > Cossí crear ma primièra aplicacion'
         description:
             paragraph_1: "Las comandas seguentas utilizan la <a href=\"https://github.com/jkbrzt/httpie\">bibliotèca HTTPie</a>. Asseguratz-vos que siasqueòu installadas abans de l'utilizar."
             paragraph_2: "Vos cal un geton per escambiar entre vòstra aplicacion e l'API de wallabar."

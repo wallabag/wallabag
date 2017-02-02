@@ -51,7 +51,7 @@
         "symfony/swiftmailer-bundle": "^2.3",
         "symfony/monolog-bundle": "^3.0",
         "sensio/distribution-bundle": "^5.0",
-        "sensio/framework-extra-bundle": "^3.0.2",
+        "sensio/framework-extra-bundle": "3.0.19",
         "incenteev/composer-parameter-handler": "^2.0",
         "nelmio/cors-bundle": "~1.4.0",
         "friendsofsymfony/rest-bundle": "~2.1",

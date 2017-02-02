@@ -25,7 +25,7 @@ menu:
         internal_settings: 'Configuración interna'
         import: 'Importar'
         howto: 'Ayuda'
-        developer: 'Promotor'
+        # developer: 'API clients management'
         logout: 'Desconectarse'
         about: 'Acerca de'
         search: 'Buscar'
@@ -436,7 +436,7 @@ import:
         # how_to: 'Please select your Pinboard export and click on the below button to upload and import it.'
 
 developer:
-    page_title: 'Promotor'
+    # page_title: 'API clients management'
     welcome_message: 'Bienvenido a wallabag API'
     documentation: 'Documentación'
     how_to_first_app: 'Cómo crear mi primera aplicación'
@@ -457,7 +457,7 @@ developer:
         warn_message_2: "Si lo elimine, cada aplicación configurada con ese cliente no se puede ser autorizada por su wallbag."
         action: 'Quite este cliente'
     client:
-        page_title: 'Promotor > Nuevo cliente'
+        # page_title: 'API clients management > Nuevo cliente'
         page_description: 'Va a crear un nuevo cliente. Por favor, llene el campo abajo para URI redirigido de su aplicación.'
         form:
             # name_label: 'Name of the client'
@@ -465,7 +465,7 @@ developer:
             save_label: 'Crear un nuevo cliente'
         action_back: 'Atrás'
     client_parameter:
-        page_title: 'Promotor > Parámetros del cliente'
+        # page_title: 'API clients management > Parámetros del cliente'
         page_description: 'Aquí hay sus parámetros del cliente.'
         # field_name: 'Client name'
         field_id: 'Identificación del cliente'
@@ -473,7 +473,7 @@ developer:
         back: 'Atrás'
         read_howto: 'Leer el howto "Crear mi primera aplicación"'
     howto:
-        page_title: 'Promotor > Cómo crear mi primera aplicación'
+        # page_title: 'API clients management > Cómo crear mi primera aplicación'
         description:
             paragraph_1: 'Los siguientes comandos se usan el <a href="https://github.com/jkbrzt/httpie">HTTPie library</a>. Esté seguro de que se instalen en sus sistema antes de usarlos.'
             paragraph_2: 'Necesita un token para comunicar entre su tercera aplicación y wallabag API.'

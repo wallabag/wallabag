@@ -25,7 +25,7 @@ menu:
         internal_settings: 'Strumenti'
         import: 'Importa'
         howto: 'How to'
-        developer: 'Sviluppatori'
+        # developer: 'API clients management'
         logout: 'Logout'
         about: 'About'
         search: 'Cerca'
@@ -436,7 +436,7 @@ import:
         # how_to: 'Please select your Pinboard export and click on the below button to upload and import it.'
 
 developer:
-    page_title: 'Sviluppatori'
+    # page_title: 'API clients management'
     welcome_message: 'Benvenuto nelle API di wallabag'
     documentation: 'Documentazione'
     how_to_first_app: 'Come creare la mia prima applicazione'
@@ -457,7 +457,7 @@ developer:
         warn_message_2: "Se lo rimuovi, ogni app configurata con questo client non sarà più in grado di autenticarsi."
         action: 'Rimuovi questo client'
     client:
-        page_title: 'Sviluppatori > Nuovo client'
+        # page_title: 'API clients management > Nuovo client'
         page_description: 'Stai per creare un nuovo client. Compila i campi sottostanti per il redirect URI della tua applicazione.'
         form:
             # name_label: 'Name of the client'
@@ -465,7 +465,7 @@ developer:
             save_label: 'Crea un nuovo client'
         action_back: 'Indietro'
     client_parameter:
-        page_title: 'Sviluppatori > parametri Client'
+        # page_title: 'API clients management > parametri Client'
         page_description: 'Questi sono i tuoi parametri del client.'
         # field_name: 'Client name'
         field_id: 'Client ID'
@@ -473,7 +473,7 @@ developer:
         back: 'Indietro'
         read_howto: 'Leggi howto "Come creare la mia prima applicazione"'
     howto:
-        page_title: 'Sviluppatori > Come creare la mia prima applicazione'
+        # page_title: 'API clients management > Come creare la mia prima applicazione'
         description:
             paragraph_1: 'I seguenti comandi fanno uso della <a href="https://github.com/jkbrzt/httpie">libreria HTTPie</a>. Verifica che sia installata sul tuo sistema prima di utilizzarli.'
             paragraph_2: 'Hai bisogno di un token per far comunicare la tua applicazione di terze parti e le API di wallabag.'

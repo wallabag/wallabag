@@ -25,7 +25,7 @@ menu:
         internal_settings: 'تنظیمات درونی'
         import: 'درون‌ریزی'
         howto: 'خودآموز'
-        developer: 'سازندگان'
+        # developer: 'API clients management'
         logout: 'خروج'
         about: 'درباره'
         search: 'جستجو'
@@ -436,7 +436,7 @@ import:
         # how_to: 'Please select your Pinboard export and click on the below button to upload and import it.'
 
 developer:
-    # page_title: 'Developer'
+    # page_title: 'API clients management'
     # welcome_message: 'Welcome to the wallabag API'
     # documentation: 'Documentation'
     # how_to_first_app: 'How to create my first application'
@@ -457,7 +457,7 @@ developer:
     #     warn_message_2: "If you remove it, every app configured with that client won't be able to auth on your wallabag."
     #     action: 'Remove this client'
     # client:
-    #     page_title: 'Developer > New client'
+    #     page_title: 'API clients management > New client'
     #     page_description: 'You are about to create a new client. Please fill the field below for the redirect URI of your application.'
     #     form:
     #         name_label: 'Name of the client'
@@ -465,7 +465,7 @@ developer:
     #         save_label: 'Create a new client'
     #     action_back: 'بازگشت'
     # client_parameter:
-    #     page_title: 'Developer > Client parameters'
+    #     page_title: 'API clients management > Client parameters'
     #     page_description: 'Here are your client parameters.'
     #     field_name: 'Client name'
     #     field_id: 'Client ID'
@@ -473,7 +473,7 @@ developer:
     #     back: 'بازگشت'
     #     read_howto: 'Read the howto "Create my first application"'
     # howto:
-    #     page_title: 'Developer > How to create my first application'
+    #     page_title: 'API clients management > How to create my first application'
     #     description:
     #         paragraph_1: 'The following commands make use of the <a href="https://github.com/jkbrzt/httpie">HTTPie library</a>. Make sure it is installed on your system before using it.'
     #         paragraph_2: 'You need a token to communicate between your 3rd application and wallabag API.'

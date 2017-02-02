@@ -25,7 +25,7 @@ menu:
         internal_settings: "Configuration interne"
         import: "Importer"
         howto: "Aide"
-        developer: "Développeur"
+        developer: "Gestion des clients API"
         logout: "Déconnexion"
         about: "À propos"
         search: "Recherche"
@@ -338,9 +338,9 @@ quickstart:
     admin:
         title: "Administration"
         description: "En tant qu’administrateur sur wallabag, vous avez des privilèges qui vous permettent de :"
-        new_user: "Créer un nouvel utilisateur"
-        analytics: "Configurer les statistiques"
-        sharing: "Activer des paramètres de partages"
+        new_user: "Créez un nouvel utilisateur"
+        analytics: "Configurez les statistiques"
+        sharing: "Activez des paramètres de partage"
         export: "Configurer les formats d’export"
         import: "Configurer l’import"
     first_steps:
@@ -349,22 +349,22 @@ quickstart:
         new_article: "Ajoutez votre premier article"
         unread_articles: "Et rangez-le !"
     migrate:
-        title: "Migrer depuis un service existant"
+        title: "Migrez depuis un service existant"
         description: "Vous êtes un ancien utilisateur d’un service existant ? Nous allons vous aider à récupérer vos données sur wallabag."
-        pocket: "Migrer depuis Pocket"
-        wallabag_v1: "Migrer depuis wallabag v1"
-        wallabag_v2: "Migrer depuis wallabag v2"
-        readability: "Migrer depuis Readability"
-        instapaper: "Migrer depuis Instapaper"
+        pocket: "Migrez depuis Pocket"
+        wallabag_v1: "Migrez depuis wallabag v1"
+        wallabag_v2: "Migrez depuis wallabag v2"
+        readability: "Migrez depuis Readability"
+        instapaper: "Migrez depuis Instapaper"
     developer:
         title: "Pour les développeurs"
         description: "Nous avons aussi pensé aux développeurs : Docker, API, traductions, etc."
-        create_application: "Créer votre application tierce"
-        use_docker: "Utiliser Docker pour installer wallabag"
+        create_application: "Créez votre application tierce"
+        use_docker: "Utilisez Docker pour installer wallabag"
     docs:
         title: "Documentation complète"
         description: "Il y a tellement de fonctionnalités dans wallabag. N’hésitez pas à lire le manuel pour les connaitre et apprendre comment les utiliser."
-        annotate: "Annoter votre article"
+        annotate: "Annotez votre article"
         export: "Convertissez vos articles en ePub ou en PDF"
         search_filters: "Apprenez à utiliser le moteur de recherche et les filtres pour retrouver l’article qui vous intéresse"
         fetching_errors: "Que faire si mon article n’est pas correctement récupéré ?"
@@ -436,7 +436,7 @@ import:
         how_to: "Choisissez le fichier de votre export Pinboard et cliquez sur le bouton ci-dessous pour l’importer."
 
 developer:
-    page_title: "Développeur"
+    page_title: "Gestion des clients API"
     welcome_message: "Bienvenue sur l’API de wallabag"
     documentation: "Documentation"
     how_to_first_app: "Comment créer votre première application"
@@ -457,7 +457,7 @@ developer:
         warn_message_2: "Si vous supprimez le client %name%, toutes les applications qui l’utilisaient ne fonctionneront plus avec votre compte wallabag."
         action: "Supprimer le client %name%"
     client:
-        page_title: "Développeur > Nouveau client"
+        page_title: "Gestion des clients API > Nouveau client"
         page_description: "Vous allez créer un nouveau client. Merci de remplir l’adresse de redirection vers votre application."
         form:
             name_label: "Nom du client"
@@ -465,7 +465,7 @@ developer:
             save_label: "Créer un nouveau client"
         action_back: "Retour"
     client_parameter:
-        page_title: "Développeur > Les paramètres de votre client"
+        page_title: "Gestion des clients API > Les paramètres de votre client"
         page_description: "Voilà les paramètres de votre client"
         field_name: "Nom du client"
         field_id: "ID client"
@@ -473,7 +473,7 @@ developer:
         back: "Retour"
         read_howto: "Lire « comment créer ma première application »"
     howto:
-        page_title: "Développeur > Comment créer votre première application"
+        page_title: "Gestion des clients API > Comment créer votre première application"
         description:
             paragraph_1: "Les commandes suivantes utilisent la <a href=\"https://github.com/jkbrzt/httpie\">librarie HTTPie</a>. Assurez-vous qu’elle soit installée avant de l’utiliser."
             paragraph_2: "Vous avez besoin d’un token pour échanger entre votre application et l’API de wallabag."
