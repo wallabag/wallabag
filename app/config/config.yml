@@ -238,7 +238,7 @@ scheb_two_factor:
         mailer: wallabag_user.auth_code_mailer
 
 kphoen_rulerz:
-    executors:
+    targets:
         doctrine: true
 
 old_sound_rabbit_mq:

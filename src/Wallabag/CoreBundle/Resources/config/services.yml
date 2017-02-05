@@ -117,12 +117,12 @@ services:
     wallabag.operator.array.matches:
         class: Wallabag\CoreBundle\Operator\PHP\Matches
         tags:
-            - { name: rulerz.operator, executor: rulerz.executor.array, operator: matches }
+            - { name: rulerz.operator, target: native, operator: matches }
 
     wallabag.operator.doctrine.matches:
         class: Wallabag\CoreBundle\Operator\Doctrine\Matches
         tags:
-            - { name: rulerz.operator, executor: rulerz.executor.doctrine, operator: matches, inline: true }
+            - { name: rulerz.operator, target: doctrine, operator: matches, inline: true }
 
     wallabag_core.helper.redirect:
         class: Wallabag\CoreBundle\Helper\Redirect
