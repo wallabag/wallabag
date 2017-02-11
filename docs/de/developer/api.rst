@@ -254,7 +254,7 @@ cURL Beispiel:
 Andere Methoden
 ---------------
 
-Wir werden nicht für jede API Methode Beispiele schreiben. 
+Wir werden nicht für jede API Methode Beispiele schreiben.
 
 Wirf einen Blick in die Liste http://localhost:8000/api/doc, um alle Methode kennenzulernen.
 
@@ -269,3 +269,4 @@ Einige Applikationen oder Bibliotheken nutzen unsere API. Hier ist eine nicht ab
 - `Python API for wallabag <https://github.com/foxmask/wallabag_api>`_ von FoxMaSk, für sein Projekt `Trigger Happy <https://blog.trigger-happy.eu/>`_.
 - `A plugin <https://github.com/joshp23/ttrss-to-wallabag-v2>`_ entworfen für `Tiny Tiny RSS <https://tt-rss.org/gitlab/fox/tt-rss/wikis/home>`_, das die wallabag v2 API nutzt. Von Josh Panter.
 - `Golang wrapper for the wallabag API <https://github.com/Strubbl/wallabago>`_ von Strubbl, für seine Projekte `wallabag-stats Graph <https://github.com/Strubbl/wallabag-stats>`_ und das Kommandozeilentool `wallabag-add-article <https://github.com/Strubbl/wallabag-add-article>`_.
+- Tool, um automatisiert wallabag Artikel auf den lokalen PC oder ebook reader zu laden `wallabako <https://gitlab.com/anarcat/wallabako>`_ von anarcat.

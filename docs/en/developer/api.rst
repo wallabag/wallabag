@@ -8,7 +8,7 @@ Requirements
 
 * wallabag freshly (or not) installed on http://localhost:8000
 * ``httpie`` installed on your computer (`see project website <https://github.com/jkbrzt/httpie>`__). Note that you can also adapt the commands using curl or wget.
-* all the API methods are documented here http://localhost:8000/api/doc (on your instance) and `on our example instance <http://v2.wallabag.org/api/doc>`_ 
+* all the API methods are documented here http://localhost:8000/api/doc (on your instance) and `on our example instance <http://v2.wallabag.org/api/doc>`_
 
 Creating a new API client
 -------------------------
@@ -268,3 +268,4 @@ Some applications or libraries use our API. Here is a non-exhaustive list of the
 - `Python API for wallabag <https://github.com/foxmask/wallabag_api>`_ by FoxMaSk, for his project `Trigger Happy <https://blog.trigger-happy.eu/>`_.
 - `A plugin <https://github.com/joshp23/ttrss-to-wallabag-v2>`_ designed for `Tiny Tiny RSS <https://tt-rss.org/gitlab/fox/tt-rss/wikis/home>`_ that makes use of the wallabag v2 API. By Josh Panter.
 - `Golang wrapper for the wallabag API <https://github.com/Strubbl/wallabago>`_ by Strubbl, for his projects `wallabag-stats graph <https://github.com/Strubbl/wallabag-stats>`_ and the command line tool `wallabag-add-article <https://github.com/Strubbl/wallabag-add-article>`_.
+- Tool to automatically download Wallabag articles into your local computer or Kobo ebook reader `wallabako <https://gitlab.com/anarcat/wallabako>`_ by anarcat.

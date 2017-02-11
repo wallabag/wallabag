@@ -268,3 +268,4 @@ Certaines applications ou bibliothèques utilisent notre API. En voici une liste
 - `Python API for wallabag <https://github.com/foxmask/wallabag_api>`_ par FoxMaSk, pour son projet `Trigger Happy <https://blog.trigger-happy.eu/>`_.
 - `Un plugin <https://github.com/joshp23/ttrss-to-wallabag-v2>`_ conçu pour `Tiny Tiny RSS <https://tt-rss.org/gitlab/fox/tt-rss/wikis/home>`_  qui utilise l'API wallabag v2. Par Josh Panter.
 - `Golang wrapper for the wallabag API <https://github.com/Strubbl/wallabago>`_ par Strubbl, pour son projets `wallabag-stats graphe <https://github.com/Strubbl/wallabag-stats>`_ et l'outil de ligne de commande `wallabag-add-article <https://github.com/Strubbl/wallabag-add-article>`_.
+- Tool to automatically download Wallabag articles into your local computer or Kobo ebook reader `wallabako <https://gitlab.com/anarcat/wallabako>`_ par anarcat.
