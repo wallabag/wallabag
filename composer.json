@@ -28,7 +28,7 @@
         "issues": "https://github.com/wallabag/wallabag/issues"
     },
     "require": {
-        "php": ">=5.5.9",
+        "php": ">=5.6.0",
         "ext-pcre": "*",
         "ext-dom": "*",
         "ext-curl": "*",
@@ -130,7 +130,7 @@
     "config": {
         "bin-dir": "bin",
         "platform": {
-            "php": "5.5.9"
+            "php": "5.6.0"
         }
     },
     "minimum-stability": "dev",
