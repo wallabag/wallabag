@@ -33,6 +33,7 @@ Die Dokumentation ist in anderen Sprachen verfügbar :
    user/errors_during_fetching
    user/filters
    user/tags
+   user/configuring_mobile
    user/android
    user/parameters
    user/backup
