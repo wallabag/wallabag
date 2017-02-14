@@ -147,6 +147,24 @@ En imaginant que vous vouliez installer wallabag dans le dossier ``/var/www/wall
         CustomLog /var/log/apache2/wallabag_access.log combined
     </VirtualHost>
 
+.. tip:: Pour Apache 2.4, dans la section `<Directory /var/www/wallabag/web>` vous devez remplacer les directives suivantes :
+
+::
+
+    AllowOverride None
+    Order Allow,Deny
+    Allow from All
+
+
+par 
+
+::
+    
+    Require All granted
+    
+
+
+
 Après que vous ayez rechargé/redémarré Apache, vous devriez pouvoir avoir accès à wallabag à l'adresse http://domain.tld.
 
 Configuration avec Nginx
