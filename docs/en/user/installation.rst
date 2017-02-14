@@ -149,6 +149,23 @@ Assuming you install wallabag in the ``/var/www/wallabag`` folder and that you w
         ErrorLog /var/log/apache2/wallabag_error.log
         CustomLog /var/log/apache2/wallabag_access.log combined
     </VirtualHost>
+    
+    
+.. tip:: Note for Apache 2.4, in the section `<Directory /var/www/wallabag/web>` you have to replace the directives : 
+
+::
+
+    AllowOverride None
+    Order Allow,Deny
+    Allow from All
+
+
+by 
+
+::
+    
+    Require All granted
+    
 
 After reloading or restarting Apache, you should now be able to access wallabag at http://domain.tld.
 
