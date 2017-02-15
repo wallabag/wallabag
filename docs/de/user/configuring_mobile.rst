@@ -1,13 +1,13 @@
-Configuring mobile apps to work with wallabag
-=============================================
+Konfiguration mobiler Apps für wallabag
+=======================================
 
-Steps to configure the app
---------------------------
+Schritte zum Konfigurieren der App
+----------------------------------
 
-- First *create a new client* in the ``API clients management`` section. The name of your app doesn't matter as much as the ``Client ID`` and the ``Client secret``. Write these two values down.
-- When you download a mobile app, it's going to ask for the server address of the hosted wallabag instance. For example, with wallabag.it that is: ``https://app.wallabag.it``.
-- It's also going to ask for the aforementioned ``Client ID`` and ``secret``. Please insert those in the text fields, when asked.
-- Lastly you need to provide your ``username`` and ``password``. These are the same credentials you use to login in to wallabag.
+- als erstes *neuen Client erstellen* in dem Abschnitt ``API Client Management`` wählen. Der Name deiner App ist nicht so wichtig wie die ``Client-ID`` und das ``Client-Secret``. Schreib diese zwei Werte auf.
+- Wenn du eine mobile App herunterlädst, wird sie dich nach der Server-Adresse deiner wallabag Instanz fragen. Zum Beispiel ist es ``https://app.wallabag.it`` bei wallabag.it.
+- Sie wird dich auch nach den zuvor genannten ``Client-ID`` und ``Client-Secret`` fragen. Bitte trage die in die Textfelder ein, wenn du danach gefragt wirst.
+- Zuletzt musst du deinen ``Benutzernamen`` und ``Passwort`` bereitstellen. Diese Zugangsdaten sind die gleichen, die du zum Login bei wallabag nutzt.
 
-Please also have a look at `Android <android.html>`_ page. Especially the section on *known limitations*.
+Bitte schaue auch auf die `Android <android.html>`_ Seite. Insbesondere den Abschnitt *Bekannte Limitierungen*.
 
