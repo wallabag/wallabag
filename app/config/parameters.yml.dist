@@ -1,5 +1,10 @@
 # This file is a "template" of what your parameters.yml file should look like
 parameters:
+    # The base path you install Wallabag on. Enables support for installations
+    # under http://myhost.com/<basepath>.  Do not ever add a trailing slash.
+    # Leave empty if you install Wallabag in the web server's document root.
+    base_path: ""
+
     # Uncomment these settings or manually update your parameters.yml
     # to use docker-compose
     #

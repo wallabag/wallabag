@@ -27,7 +27,8 @@ framework:
         save_path: "%kernel.root_dir%/../var/sessions/%kernel.environment%"
     fragments: ~
     http_method_override: true
-    assets: ~
+    assets:
+        base_path: "%base_path%"
 
 wallabag_core:
     version: 2.2.1
@@ -148,12 +149,12 @@ fos_rest:
     format_listener:
         enabled: true
         rules:
-            - { path: "^/api/entries/([0-9]+)/export.(.*)", priorities: ['epub', 'mobi', 'pdf', 'txt', 'csv'], fallback_format: json, prefer_extension: false }
-            - { path: "^/api", priorities: ['json', 'xml'], fallback_format: json, prefer_extension: false }
-            - { path: "^/annotations", priorities: ['json', 'xml'], fallback_format: json, prefer_extension: false }
+            - { path: "^%base_path%/api/entries/([0-9]+)/export.(.*)", priorities: ['epub', 'mobi', 'pdf', 'txt', 'csv'], fallback_format: json, prefer_extension: false }
+            - { path: "^%base_path%/api", priorities: ['json', 'xml'], fallback_format: json, prefer_extension: false }
+            - { path: "^%base_path%/annotations", priorities: ['json', 'xml'], fallback_format: json, prefer_extension: false }
             # for an unknown reason, EACH REQUEST goes to FOS\RestBundle\EventListener\FormatListener
             # so we need to add custom rule for custom api export but also for all other routes of the application...
-            - { path: '^/', priorities: ['text/html', '*/*'], fallback_format: html, prefer_extension: false }
+            - { path: '^%base_path%/', priorities: ['text/html', '*/*'], fallback_format: html, prefer_extension: false }
 
 nelmio_api_doc:
     sandbox:
@@ -173,17 +174,17 @@ nelmio_cors:
         hosts: []
         #origin_regex: false
     paths:
-        '^/api/':
+        '^%base_path%/api/':
             allow_origin: ['*']
             allow_headers: ['X-Custom-Auth']
             allow_methods: ['POST', 'PUT', 'PATCH','GET', 'DELETE']
             max_age: 3600
-        '^/oauth/':
+        '^%base_path%/oauth/':
             allow_origin: ['*']
             allow_headers: ['X-Custom-Auth']
             allow_methods: ['POST', 'PUT', 'GET', 'DELETE']
             max_age: 3600
-        '^/':
+        '^%base_path%/':
             #origin_regex: true
             allow_origin: ['^http://localhost:[0-9]+']
             allow_headers: ['X-Custom-Auth']

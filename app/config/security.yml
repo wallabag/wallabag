@@ -19,49 +19,52 @@ security:
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            pattern: "^%base_path%/(_(profiler|wdt)|css|images|js)/"
             security: false
 
         oauth_token:
-            pattern: ^/oauth/v2/token
+            pattern: "^%base_path%/oauth/v2/token"
             security: false
 
         api:
-            pattern: /api/.*
+            pattern: "%base_path%/api/.*"
             fos_oauth: true
             stateless: true
             anonymous: true
 
         login_firewall:
-            pattern: ^/login$
+            pattern: "^%base_path%/login$"
             anonymous:  ~
 
         secured_area:
-            pattern: ^/
+            pattern: "^%base_path%/"
             form_login:
                 provider: fos_userbundle
                 csrf_token_generator: security.csrf.token_manager
+                login_path: "%base_path%/login"
+                check_path: "%base_path%/login_check"
+                default_target_path: "%base_path%/"
 
             anonymous: true
             remember_me:
                 secret: "%secret%"
                 lifetime: 31536000
-                path: /
+                path: "%base_path%/"
                 domain: ~
 
             logout:
-                path:   /logout
-                target: /
+                path:   "%base_path%/logout"
+                target: "%base_path%/"
 
     access_control:
-        - { path: ^/api/doc, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/api/version, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: /(unread|starred|archive).xml$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/share, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/settings, roles: ROLE_SUPER_ADMIN }
-        - { path: ^/annotations, roles: ROLE_USER }
-        - { path: ^/users, roles: ROLE_SUPER_ADMIN }
-        - { path: ^/, roles: ROLE_USER }
+        - { path: "^%base_path%/api/doc", roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "^%base_path%/api/version", roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "^%base_path%/login", roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "^%base_path%/register", role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "^%base_path%/resetting", role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "^%base_path%/.*/(unread|starred|archive).xml$", roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "^%base_path%/share", roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "^%base_path%/settings", roles: ROLE_SUPER_ADMIN }
+        - { path: "^%base_path%/annotations", roles: ROLE_USER }
+        - { path: "^%base_path%/users", roles: ROLE_SUPER_ADMIN }
+        - { path: "^%base_path%/", roles: ROLE_USER }

@@ -1,37 +1,45 @@
 wallabag_annotation:
-  type : rest
-  resource: "@WallabagAnnotationBundle/Resources/config/routing_annotations.yml"
+    type: rest
+    resource: "@WallabagAnnotationBundle/Resources/config/routing_annotations.yml"
+    prefix: "%base_path%/"
 
 wallabag_import:
     resource: "@WallabagImportBundle/Controller/"
     type: annotation
-    prefix: /import
+    prefix: "%base_path%/import"
 
 wallabag_user:
     resource: "@WallabagUserBundle/Controller/"
     type: annotation
-    prefix: /users
+    prefix: "%base_path%/users"
 
 wallabag_api:
     resource: "@WallabagApiBundle/Controller/"
     type: annotation
-    prefix: /
+    prefix: "%base_path%/"
 
 app:
     resource: "@WallabagCoreBundle/Controller/"
     type: annotation
+    prefix: "%base_path%/"
 
 doc-api:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
-    prefix: /api/doc
+    prefix: "%base_path%/api/doc"
 
-rest :
-    type : rest
-    resource : "routing_rest.yml"
-    prefix : /api
+rest:
+    type: rest
+    resource: "routing_rest.yml"
+    prefix: "%base_path%/api"
 
 homepage:
-    path: "/{page}"
+    path: "%base_path%/"
+    defaults:
+        _controller: WallabagCoreBundle:Entry:showUnread
+        page : 1
+
+homepage_paging:
+    path: "%base_path%/{page}"
     defaults:
         _controller: WallabagCoreBundle:Entry:showUnread
         page : 1
@@ -40,14 +48,17 @@ homepage:
 
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+    prefix: "%base_path%"
 
 fos_oauth_server_token:
     resource: "@FOSOAuthServerBundle/Resources/config/routing/token.xml"
+    prefix: "%base_path%"
 
 craue_config_settings_modify:
-    path: /settings
+    path: "%base_path%/settings"
     defaults:
         _controller: CraueConfigBundle:Settings:modify
 
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+    prefix: "%base_path%"
