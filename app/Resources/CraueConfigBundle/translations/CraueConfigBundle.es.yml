@@ -1,7 +1,7 @@
-# settings_changed: Configuration updated
-download_pictures: Descargar imágenes
+settings_changed: Configuración actualizada
+download_pictures: Descargar imágenes en el servidor
 carrot: Activar compartir con Carrot
-diaspora_url: Diaspora URL, si el servicio está activado
+diaspora_url: URL de Diaspora, si el servicio está activado
 export_epub: Activar exportación a ePub
 export_mobi: Activar exportación a .mobi
 export_pdf: Activar exportación a PDF
@@ -9,11 +9,11 @@ export_csv: Activar exportación a CSV
 export_json: Activar exportación a JSON
 export_txt: Activar exportación a TXT
 export_xml: Activar exportación a XML
-# import_with_rabbitmq: Enable RabbitMQ to import data asynchronously
-# import_with_redis: Enable Redis to import data asynchronously
-shaarli_url: Shaarli URL, si el servicio está activado
+import_with_rabbitmq: Activar RabbitMQ para importar datos de forma asíncrona
+import_with_redis: Activar Redis para importar datos de forma asíncrona
+shaarli_url: URL de Shaarli, si el servicio está activado
 share_diaspora: Activar compartir con Diaspora
-share_mail: Activar compartir con email
+share_mail: Activar compartir con Email
 share_shaarli: Activar compartir con Shaarli
 share_twitter: Activar compartir con Twitter
 share_unmark: Activar compartir con Unmark.it
@@ -24,12 +24,12 @@ entry: "artículo"
 export: "exportar"
 import: "importar"
 misc: "misc"
-modify_settings: "modificar configuración"
-piwik_host: Host de tu website de Piwik (sin http:// o https://)
-piwik_site_id: ID de tu website de Piwik
+modify_settings: "guardar"
+piwik_host: Host de tu website en Piwik (sin http:// o https://)
+piwik_site_id: ID de tu website en Piwik
 piwik_enabled: Activar Piwik
-demo_mode_enabled: "Activar modo demo (sólo usado para la demo de wallabag)"
+demo_mode_enabled: "Activar modo demo (sólo usado en la demo pública de wallabag)"
 demo_mode_username: "Nombre de usuario demo"
-# share_public: Allow public url for entries
-# download_images_enabled: Download images locally
-# restricted_access: Enable authentication for websites with paywall
+share_public: Permitir URL pública para los artículos
+download_images_enabled: Descargar imágenes localmente
+restricted_access: Activar autenticación para websites con paywall
