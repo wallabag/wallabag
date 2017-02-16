@@ -9,7 +9,7 @@ security:
         password: 'Contraseña'
         cancel: 'Cancelar'
     resetting:
-        description: "Introduzca su dirección del correo electrónico y le enviaremos las instrucciones para reiniciar la contraseña"
+        description: "Introduzca su dirección de correo electrónico y le enviaremos las instrucciones para reiniciar la contraseña."
     register:
         page_title: 'Crear una cuenta'
         go_to_account: 'Acceder su cuenta'
@@ -19,19 +19,19 @@ menu:
         unread: 'Sin leer'
         starred: 'Favoritos'
         archive: 'Archivo'
-        all_articles: 'Todos artículos'
+        all_articles: 'Todos los artículos'
         config: 'Configuración'
         tags: 'Etiquetas'
         internal_settings: 'Configuración interna'
         import: 'Importar'
         howto: 'Ayuda'
-        # developer: 'API clients management'
+        developer: 'Configuración de clientes API'
         logout: 'Desconectarse'
         about: 'Acerca de'
         search: 'Buscar'
-        save_link: 'Archivar un enlace'
+        save_link: 'Guardar un enlace'
         back_to_unread: 'Volver a los artículos sin leer'
-        # users_management: 'Users management'
+        users_management: 'Configuración de usuarios'
     top:
         add_new_entry: 'Añadir un nuevo artículo'
         search: 'Buscar'
@@ -42,11 +42,11 @@ menu:
 
 footer:
     wallabag:
-        elsewhere: 'Lleve wallabag consigo'
+        elsewhere: 'Lleva wallabag contigo'
         social: 'Social'
-        powered_by: 'funciona por'
+        powered_by: 'funciona con'
         about: 'Acerca de'
-    # stats: Since %user_creation% you read %nb_archives% articles. That is about %per_day% a day!
+    stats: Desde el %user_creation% has leído %nb_archives% artículos. ¡Eso hace unos %per_day% por día!
 
 config:
     page_title: 'Configuración'
@@ -64,96 +64,96 @@ config:
         items_per_page_label: 'Número de artículos por página'
         language_label: 'Idioma'
         reading_speed:
-            label: 'Velocidad de leer'
-            help_message: 'Se puede usar las técnicas para calcular su velocidad de leer:'
+            label: 'Velocidad de lectura'
+            help_message: 'Puede utilizar herramientas en línea para calcular su velocidad de lectura:'
             100_word: 'Leo ~100 palabras por minuto'
             200_word: 'Leo ~200 palabras por minuto'
             300_word: 'Leo ~300 palabras por minuto'
             400_word: 'Leo ~400 palabras por minuto'
         action_mark_as_read:
-            # label: 'Where do you to be redirected after mark an article as read?'
-            # redirect_homepage: 'To the homepage'
-            # redirect_current_page: 'To the current page'
-        # pocket_consumer_key_label: Consumer key for Pocket to import contents
-        # android_configuration: Configure your Android application
-        # help_theme: "wallabag is customizable. You can choose your prefered theme here."
-        # help_items_per_page: "You can change the number of articles displayed on each page."
-        # help_reading_speed: "wallabag calculates a reading time for each article. You can define here, thanks to this list, if you are a fast or a slow reader. wallabag will recalculate the reading time for each article."
-        # help_language: "You can change the language of wallabag interface."
-        # help_pocket_consumer_key: "Required for Pocket import. You can create it in your Pocket account."
+            label: '¿Dónde quieres ser redirigido después de marcar un artículo como leido?'
+            redirect_homepage: 'A la página de inicio'
+            redirect_current_page: 'A la página actual'
+        pocket_consumer_key_label: Clave de consumidor para importar contenidos de Pocket
+        android_configuration: Configura tu aplicación Android
+        help_theme: "wallabag es personalizable. Puedes elegir tu tema preferido aquí."
+        help_items_per_page: "Puedes cambiar el número de artículos mostrados en cada página."
+        help_reading_speed: "wallabag calcula un tiempo de lectura para cada artículo. Puedes definir aquí, gracias a esta lista, si eres un lector rápido o lento. wallabag recalculará el tiempo de lectura para cada artículo."
+        help_language: "Puedes cambiar el idioma de la interfaz de wallabag."
+        help_pocket_consumer_key: "Requerido para la importación desde Pocket. Puedes crearla en tu cuenta de Pocket."
     form_rss:
-        description: 'Los feeds RSS de wallabag permiten leer los artículos guardados con su lector RSS favorito. Necesita generar un token primero'
-        token_label: 'RSS token'
-        no_token: 'No token'
+        description: 'Los feeds RSS de wallabag permiten leer los artículos guardados con su lector RSS favorito. Primero necesitas generar un token.'
+        token_label: 'Token RSS'
+        no_token: 'Sin token'
         token_create: 'Crear token'
         token_reset: 'Reiniciar token'
-        rss_links: 'URL de su feed RSS'
+        rss_links: 'URLs de feeds RSS'
         rss_link:
             unread: 'sin leer'
             starred: 'favoritos'
-            archive: 'archivo'
+            archive: 'archivados'
         rss_limit: 'Límite de artículos en feed RSS'
     form_user:
-        two_factor_description: "Con la autentificación de dos factores recibirá código mediante email en cada nueva conexión que no sea de confianza"
+        two_factor_description: "Con la autentificación en dos pasos recibirá código por email en cada nueva conexión que no sea de confianza."
         name_label: 'Nombre'
         email_label: 'Direccion e-mail'
-        twoFactorAuthentication_label: 'Autentificación de dos factores'
-        # help_twoFactorAuthentication: "If you enable 2FA, each time you want to login to wallabag, you'll receive a code by email."
+        twoFactorAuthentication_label: 'Autenticación en dos pasos'
+        help_twoFactorAuthentication: "Si activas la autenticación en dos pasos, cada vez que quieras inciar sesión en wallabag recibirás un código por email."
         delete:
-            # title: Delete my account (a.k.a danger zone)
-            # description: If you remove your account, ALL your articles, ALL your tags, ALL your annotations and your account will be PERMANENTLY removed (it can't be UNDONE). You'll then be logged out.
-            # confirm: Are you really sure? (THIS CAN'T BE UNDONE)
-            # button: Delete my account
+            title: Eliminar mi cuenta (Zona peligrosa)
+            description: Si eliminas tu cuenta, TODOS tus artículos, TODAS tus etiquetas, TODAS tus anotaciones y tu cuenta serán eliminadas de forma PERMANENTE (no se puede deshacer). Después serás desconectado.
+            confirm: ¿Estás completamente seguro? (NO SE PUEDE DESHACER)
+            button: Eliminar mi cuenta
     reset:
-        # title: Reset area (a.k.a danger zone)
-        # description: By hiting buttons below you'll have ability to remove some informations from your account. Be aware that these actions are IRREVERSIBLE.
-        # annotations: Remove ALL annotations
-        # tags: Remove ALL tags
-        # entries: Remove ALL entries
-        # confirm: Are you really really sure? (THIS CAN'T BE UNDONE)
+        title: Reiniciar mi cuenta (Zona peligrosa)
+        description: Pulsando los botones de abajo puedes eliminar información de tu cuenta. Ten en cuenta que estas acciones son IRREVERSIBLES.
+        annotations: Eliminar TODAS las anotaciones
+        tags: Eliminar TODAS las etiquetas
+        entries: Eliminar TODOS los artículos
+        confirm: ¿Estás completamente seguro? (NO SE PUEDE DESHACER)
     form_password:
-        # description: "You can change your password here. Your new password should by at least 8 characters long."
+        description: "Puedes cambiar la contraseña aquí. Tu nueva contraseña debe tener al menos 8 caracteres."
         old_password_label: 'Contraseña actual'
         new_password_label: 'Nueva contraseña'
-        repeat_new_password_label: 'Confirmar la nueva contraseña'
+        repeat_new_password_label: 'Confirmar nueva contraseña'
     form_rules:
         if_label: 'si'
-        then_tag_as_label: 'Etiquete como'
-        delete_rule_label: 'Borre'
-        # edit_rule_label: 'edit'
+        then_tag_as_label: 'etiquetar como'
+        delete_rule_label: 'borrar'
+        edit_rule_label: 'editar'
         rule_label: 'Regla'
         tags_label: 'Etiquetas'
         faq:
-            title: 'FAQ'
-            tagging_rules_definition_title: '¿Qué significa reglas de etiquetado autómaticas?'
-            tagging_rules_definition_description: 'Son las reglas usadas por Wallabag para etiquetar automáticamente los nuevos artículos.<br />Cada vez que un nuevo artículo sea añadido, todas las reglas de etiquetado automáticas serán usadas para etiquetarlo, ayudándole a clasificar automáticamente los artículos.'
+            title: 'Preguntas frecuentes'
+            tagging_rules_definition_title: '¿Qué significa « reglas de etiquetado autómatico »?'
+            tagging_rules_definition_description: 'Son las reglas usadas por wallabag para etiquetar automáticamente los nuevos artículos.<br />Cada vez que un artículo sea añadido, todas las reglas de etiquetado automático serán usadas para etiquetarlo, ayudándote a clasificar automáticamente tus artículos.'
             how_to_use_them_title: '¿Cómo se utilizan?'
-            how_to_use_them_description: 'Supongamos que quiere etiquetar nuevos artículos como « <i>lectura corta</i> » cuando el tiempo de leer sea menos de 3 minutos. <br /> En ese caso, debe poner « tiempo de leer &lt;= 3 » en el <i>Regla</i> campo y « <i>lectura corta</i> » en el <i>Etiquetas</i> campo.<br />Algunas etiquetas se pueden ser añadidas al mismo tiempo por separarlas con una coma: « <i>lectura corta, debe leer</i> »<br />Reglas complejas se pueden ser escritas por usar operadores predefinidos: si « <i>tiempo de leer &gt;= 5 Y nombre del dominio = "github.com"</i> » entonces etiquete como « <i>lectura larga, github </i> »'
+            how_to_use_them_description: 'Supongamos que quiere etiquetar los artículos nuevos como « <i>lectura corta</i> » cuando el tiempo de lectura sea menos de 3 minutos.<br /> En ese caso, debe poner « readingTime &lt;= 3 » en el campo <i>Regla</i> y « <i>lectura corta</i> » en el campo <i>Etiquetas</i>.<br />Se pueden añadir varias etiquetas al mismo tiempo separadas por comas: « <i>lectura corta, lectura obligada</i> »<br />Se pueden escribir reglas complejas utilizando los operadores predefinidos: si « <i>readingTime &gt;= 5 AND domainName = "github.com"</i> » entonces etiqueta como « <i>lectura larga, github </i> »'
             variables_available_title: '¿Qué variables y operadores se pueden utilizar para escribir las reglas?'
-            variables_available_description: 'Las siguientes variables y operadores se pueden utilizar para crear las reglas de etiquetado automáticas:'
+            variables_available_description: 'Las siguientes variables y operadores se pueden utilizar para crear reglas de etiquetado automático:'
             meaning: 'Significado'
             variable_description:
                 label: 'Variable'
-                title: 'Titúlo del artículo'
+                title: 'Título del artículo'
                 url: 'URL del artículo'
-                isArchived: 'El artículo está guardado o no'
-                isStarred: 'Si el artículo es un favorito o no'
+                isArchived: 'Si artículo está archivado o no'
+                isStarred: 'Si el artículo está en favoritos o no'
                 content: "El contenido del artículo"
                 language: "El idioma del artículo"
-                mimetype: "Tipo MIME del artículo"
+                mimetype: "El tipo MIME del artículo"
                 readingTime: "El tiempo estimado de lectura del artículo, en minutos"
-                domainName: 'El dominio del artículo'
+                domainName: 'El nombre de dominio del artículo'
             operator_description:
                 label: 'Operador'
-                less_than: 'Menos que…'
-                strictly_less_than: 'Estrictámente menos que…'
-                greater_than: 'Más que…'
-                strictly_greater_than: 'Estrictámente mas que…'
-                equal_to: 'Egual a…'
+                less_than: 'Menor que…'
+                strictly_less_than: 'Estrictámente menor que…'
+                greater_than: 'Mayor que…'
+                strictly_greater_than: 'Estrictámente mayor que…'
+                equal_to: 'Igual a…'
                 not_equal_to: 'Diferente de…'
                 or: 'Una regla U otra'
                 and: 'Una regla Y la otra'
-                matches: 'Pruebe si un <i>sujeto</i> corresponde a una <i>búsqueda</i> (insensible a mayusculas).<br />Ejemplo : <code>título coincide "football"</code>'
+                matches: 'Prueba si un <i>sujeto</i> corresponde a una <i>búsqueda</i> (insensible a mayusculas).<br />Ejemplo : <code>title matches "fútbol"</code>'
 
 entry:
     page_titles:
@@ -161,32 +161,32 @@ entry:
         starred: 'Artículos favoritos'
         archived: 'Artículos archivados'
         filtered: 'Artículos filtrados'
-        # filtered_tags: 'Filtered by tags:'
-        # filtered_search: 'Filtered by search:'
-        # untagged: 'Untagged entries'
+        filtered_tags: 'Filtrado por etiquetas:'
+        filtered_search: 'Filtrado por búsqueda:'
+        untagged: 'Artículos sin etiquetas'
     list:
         number_on_the_page: '{0} No hay artículos.|{1} Hay un artículo.|]1,Inf[ Hay %count% artículos.'
         reading_time: 'tiempo estimado de lectura'
         reading_time_minutes: 'tiempo estimado de lectura: %readingTime% min'
         reading_time_less_one_minute: 'tiempo estimado de lectura: &lt; 1 min'
-        # number_of_tags: '{1}and one other tag|]1,Inf[and %count% other tags'
+        number_of_tags: '{1}y una etiqueta más|]1,Inf[y %count% etiquetas más'
         reading_time_minutes_short: '%readingTime% min'
         reading_time_less_one_minute_short: '&lt; 1 min'
         original_article: 'original'
-        toogle_as_read: 'Marcar como leído/ no leído'
-        toogle_as_star: 'Marcar como favorito/ no favorito'
-        delete: 'Suprimir'
+        toogle_as_read: 'Marcar como leído / no leído'
+        toogle_as_star: 'Marcar como favorito / no favorito'
+        delete: 'Eliminar'
         export_title: 'Exportar'
     filters:
         title: 'Filtros'
-        status_label: 'Estatus'
+        status_label: 'Estado'
         archived_label: 'Archivado'
         starred_label: 'Favorito'
         unread_label: 'Sin leer'
-        preview_picture_label: 'Hay una foto'
-        preview_picture_help: 'Foto de preview'
+        preview_picture_label: 'Tiene imagen de previsualización'
+        preview_picture_help: 'Imagen de previsualización'
         language_label: 'Idioma'
-        # http_status_label: 'HTTP status'
+        http_status_label: 'Código de estado HTTP'
         reading_time:
             label: 'Duración de lectura en minutos'
             from: 'de'
@@ -208,12 +208,12 @@ entry:
             set_as_starred: 'Marcar como favorito'
             view_original_article: 'Artículo original'
             re_fetch_content: 'Redescargar el contenido'
-            delete: 'Suprimir'
+            delete: 'Eliminar'
             add_a_tag: 'Añadir una etiqueta'
             share_content: 'Compartir'
-            share_email_label: 'Dirección e-mail'
-            # public_link: 'public link'
-            # delete_public_link: 'delete public link'
+            share_email_label: 'e-mail'
+            public_link: 'enlace público'
+            delete_public_link: 'eliminar enlace público'
             download: 'Descargar'
             print: 'Imprimir'
             problem:
@@ -225,32 +225,32 @@ entry:
         created_at: 'Fecha de creación'
     new:
         page_title: 'Guardar un nuevo artículo'
-        placeholder: 'http://website.com'
+        placeholder: 'http://sitioweb.com'
         form_new:
             url_label: Url
     search:
-        # placeholder: 'What are you looking for?'
+        placeholder: '¿Qué estás buscando?'
     edit:
         page_title: 'Editar un artículo'
         title_label: 'Título'
         url_label: 'Url'
-        is_public_label: 'Es Público'
+        is_public_label: 'Es público'
         save_label: 'Guardar'
     public:
-        # shared_by_wallabag: "This article has been shared by <a href='%wallabag_instance%'>wallabag</a>"
+        shared_by_wallabag: "Este artículo se ha compartido con <a href='%wallabag_instance%'>wallabag</a>"
 
 about:
     page_title: 'Acerca de'
     top_menu:
-        who_behind_wallabag: 'Equipo del desarrollo de wallabag'
+        who_behind_wallabag: 'Quién está detrás de wallabag'
         getting_help: 'Pedir ayuda'
         helping: 'Ayudar a wallabag'
         contributors: 'Colaboradores'
-        third_party: 'Librerías de terceros'
+        third_party: 'Bibliotecas de terceros'
     who_behind_wallabag:
         developped_by: 'Desarrollado por'
         website: 'Sitio web'
-        many_contributors: 'Y muchos otros colaboradores ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">en Github</a>'
+        many_contributors: 'Y otros muchos colaboradores ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">en Github</a>'
         project_website: 'Sitio web del proyecto'
         license: 'Licencia'
         version: 'Versión'
@@ -259,56 +259,56 @@ about:
         bug_reports: 'Reporte de errores'
         support: '<a href="https://github.com/wallabag/wallabag/issues">en GitHub</a>'
     helping:
-        description: 'wallabag es libre y gratuito. Usted puede ayudarnos :'
+        description: 'wallabag es software libre y gratuito. Usted puede ayudarnos :'
         by_contributing: 'contribuyendo al proyecto :'
         by_contributing_2: 'nuestras necesidades están en un ticket'
-        by_paypal: 'via Paypal'
+        by_paypal: 'vía Paypal'
     contributors:
         description: 'Gracias a los colaboradores de la aplicación web de wallabag'
     third_party:
-        description: 'Aquí está la lista de las dependencias utilizadas por wallabag (con sus licencias) :'
+        description: 'Aquí está la lista de bibliotecas de terceros utilizadas por wallabag (con sus licencias) :'
         package: 'Paquete'
         license: 'Licencia'
 
 howto:
     page_title: 'Ayuda'
-    page_description: 'Hay muchas maneras para guardar un artículo:'
     tab_menu:
-        # add_link: "Add a link"
-        # shortcuts: "Use shortcuts"
+        add_link: "Añadir un artículo"
+        shortcuts: "Utilizar atajos de teclado"
+    page_description: 'Hay muchas maneras de guardar un artículo:'
     top_menu:
-        browser_addons: 'Extensiones de navigador'
+        browser_addons: 'Extensiones de navegador'
         mobile_apps: 'Aplicaciones para smartphone'
         bookmarklet: 'Bookmarklet'
     form:
         description: 'Gracias a este formulario'
     browser_addons:
-        firefox: 'Extensión Firefox'
-        chrome: 'Extensión Chrome'
-        opera: 'Extensión Opera'
+        firefox: 'Extensión para Firefox'
+        chrome: 'Extensión para Chrome'
+        opera: 'Extensión para Opera'
     mobile_apps:
         android:
-            via_f_droid: 'via F-Droid'
-            via_google_play: 'via Google Play'
-        ios: 'por la tienda de iTunes'
-        windows: 'por la tienda de Microsoft'
+            via_f_droid: 'en F-Droid'
+            via_google_play: 'en Google Play'
+        ios: 'en la tienda de iTunes'
+        windows: 'en la tienda de Microsoft'
     bookmarklet:
-        description: 'Desplazar y soltar este link en la barra de marcadores :'
+        description: 'Arrastra y suelta este enlace en la barra de marcadores:'
     shortcuts:
-        # page_description: Here are the shortcuts available in wallabag.
-        # shortcut: Shortcut
-        # action: Action
-        # all_pages_title: Shortcuts available in all pages
-        # go_unread: Go to unread
-        # go_starred: Go to starred
-        # go_archive: Go to archive
-        # go_all: Go to all entries
-        # go_tags: Go to tags
-        # go_config: Go to config
-        # go_import: Go to import
-        # go_developers: Go to developers
-        # go_howto: Go to howto (this page!)
-        # go_logout: Logout
+        page_description: Estos son los atajos de teclado disponibles en wallabag.
+        shortcut: Atajo de teclado
+        action: Acción
+        all_pages_title: Atajos de teclado disponibles en todas las páginas
+        go_unread: Ir a sin leer
+        go_starred: Ir a favoritos
+        go_archive: Ir a archivados
+        go_all: Ir a todos los artículos
+        go_tags: Ir a etiquetas
+        go_config: Ir a configuración
+        go_import: Ir a importar
+        go_developers: Ir a desarrolladores
+        go_howto: Ir a ayuda (esta página!)
+        go_logout: Desconectar
         # list_title: Shortcuts available in listing pages
         # search: Display the search form
         # article_title: Shortcuts available in entry view
@@ -324,9 +324,9 @@ howto:
 
 quickstart:
     page_title: 'Comienzo rápido'
-    # more: 'More…'
+    more: 'Más…'
     intro:
-        title: 'Bienvenido a wallabag !'
+        title: '¡Bienvenido a wallabag !'
         paragraph_1: "Le acompañaremos a su visita de wallabag y le mostraremos algunas características que le pueden interesar."
         paragraph_2: '¡Síganos!'
     configure:
@@ -357,7 +357,7 @@ quickstart:
         readability: 'Migrar desde Readability'
         instapaper: 'Migrar desde Instapaper'
     developer:
-        title: 'Promotores'
+        title: 'Desarrolladores'
         # description: 'We also thought to the developers: Docker, API, translations, etc.'
         create_application: 'Cree su tercera aplicación'
         # use_docker: 'Use Docker to install wallabag'
