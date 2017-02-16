@@ -112,6 +112,10 @@ class InstapaperImport extends AbstractImport
             return;
         }
 
+        $entry = new Entry($this->user);
+        $entry->setUrl($importedEntry['url']);
+        $entry->setTitle($importedEntry['title']);
+
         foreach(explode(',', $importedEntry['tags']) as $tag) {
 
             $existingTag = $this->em
@@ -125,10 +129,6 @@ class InstapaperImport extends AbstractImport
 
             $entry->addTag($existingTag);
         }
-
-        $entry = new Entry($this->user);
-        $entry->setUrl($importedEntry['url']);
-        $entry->setTitle($importedEntry['title']);
 
         // update entry with content (in case fetching failed, the given entry will be return)
         $entry = $this->fetchContent($entry, $importedEntry['url'], $importedEntry);
