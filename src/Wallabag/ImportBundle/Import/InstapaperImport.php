@@ -75,6 +75,7 @@ class InstapaperImport extends AbstractImport
                 'is_archived' => $data[3] === 'Archive' || $data[3] === 'Starred',
                 'is_starred' => $data[3] === 'Starred',
                 'html' => false,
+                'tags' => $data[4]
             ];
         }
         fclose($handle);
@@ -109,6 +110,21 @@ class InstapaperImport extends AbstractImport
             ++$this->skippedEntries;
 
             return;
+        }
+
+        foreach(explode(",", $importedEntry['tags']) as $tag) {
+
+            $existingTag = $this->em
+                ->getRepository('WallabagCoreBundle:Tag')
+                ->findOneByLabel($tag);
+
+            if ($existingTag === null) {
+                $existingTag = new Tag();
+                $existingTag->setLabel($tag);
+            }
+
+            $entry->addTag($existingTag);
+
         }
 
         $entry = new Entry($this->user);
