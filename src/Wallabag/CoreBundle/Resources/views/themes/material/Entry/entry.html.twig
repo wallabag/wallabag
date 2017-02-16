@@ -133,7 +133,7 @@
                     {% endif %}
                     {% if craue_setting('share_diaspora') %}
                         <li>
-                            <a href="{{ craue_setting('diaspora_url') }}/bookmarklet?url={{ entry.url|url_encode }}&title={{ entry.title|striptags|url_encode }}&notes=&v=1&noui=1&jump=doclose" target="_blank">
+                            <a href="{{ craue_setting('diaspora_url') }}/bookmarklet?url={{ entry.url|url_encode }}&amp;title={{ entry.title|striptags|url_encode }}&amp;notes=&amp;v=1&amp;noui=1&amp;jump=doclose" target="_blank">
                                 <i class="tool icon-image icon-image--diaspora" title="diaspora"></i>
                                 <span>diaspora*</span>
                             </a>
@@ -149,7 +149,7 @@
                     {% endif %}
                     {% if craue_setting('carrot') %}
                         <li>
-                            <a href="https://secure.carrot.org/GiveAndGetBack.do?url={{ entry.url|url_encode }}&title={{ entry.title|striptags|url_encode }}" target="_blank" title="carrot">
+                            <a href="https://secure.carrot.org/GiveAndGetBack.do?url={{ entry.url|url_encode }}&amp;title={{ entry.title|striptags|url_encode }}" target="_blank" title="carrot">
                                 <i class="tool icon-image icon-image--carrot"></i>
                                 <span>Carrot</span>
                             </a>
