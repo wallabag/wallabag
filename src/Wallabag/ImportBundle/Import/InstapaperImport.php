@@ -3,6 +3,7 @@
 namespace Wallabag\ImportBundle\Import;
 
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\CoreBundle\Entity\Tag;
 
 class InstapaperImport extends AbstractImport
 {
@@ -116,18 +117,20 @@ class InstapaperImport extends AbstractImport
         $entry->setUrl($importedEntry['url']);
         $entry->setTitle($importedEntry['title']);
 
-        foreach(explode(',', $importedEntry['tags']) as $tag) {
+        if($importedEntry['tags']) {
+            foreach(explode(',', $importedEntry['tags']) as $tag) {
+                if(strlen($tag) === 0)continue;
+                $existingTag = $this->em
+                    ->getRepository('WallabagCoreBundle:Tag')
+                    ->findOneByLabel($tag);
 
-            $existingTag = $this->em
-                ->getRepository('WallabagCoreBundle:Tag')
-                ->findOneByLabel($tag);
+                if ($existingTag === null) {
+                    $existingTag = new Tag();
+                    $existingTag->setLabel($tag);
+                }
 
-            if ($existingTag === null) {
-                $existingTag = new Tag();
-                $existingTag->setLabel($tag);
+                $entry->addTag($existingTag);
             }
-
-            $entry->addTag($existingTag);
         }
 
         // update entry with content (in case fetching failed, the given entry will be return)
