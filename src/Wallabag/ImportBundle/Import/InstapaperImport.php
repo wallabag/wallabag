@@ -112,7 +112,7 @@ class InstapaperImport extends AbstractImport
             return;
         }
 
-        foreach(explode(",", $importedEntry['tags']) as $tag) {
+        foreach(explode(',', $importedEntry['tags']) as $tag) {
 
             $existingTag = $this->em
                 ->getRepository('WallabagCoreBundle:Tag')
@@ -124,7 +124,6 @@ class InstapaperImport extends AbstractImport
             }
 
             $entry->addTag($existingTag);
-
         }
 
         $entry = new Entry($this->user);
