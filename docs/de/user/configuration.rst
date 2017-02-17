@@ -66,7 +66,9 @@ Zwei-Faktor-Authentifizierung (2FA)
     Die Zwei-Faktor-Authentifizierung (2FA) dient dem Identitätsnachweis eines Nutzers mittels der
     Kombination zweier verschiedener und insbesondere unabhängiger Komponenten (Faktoren).
 
-https://de.wikipedia.org/wiki/Zwei-Faktor-Authentifizierung
+    https://de.wikipedia.org/wiki/Zwei-Faktor-Authentifizierung
+
+**Warnung:** Das Aktivieren von 2FA über das Konfigurations-Interface ist nur möglich, wenn vorher in der `app/config/parameters.yml` die `twofactor_auth`-Eigenschaft auf `true` gesetzt wurde (nach der Konfiguration das Leeren des Cache mit `php bin/console cache:clear -e=prod` nicht vergessen).
 
 Wenn du 2FA aktivierst, erhälst du jedes Mal, wenn du dich bei wallabag einloggen willst, einen Code per
 Mail. Du musst den Code in das folgende Formular eingeben.

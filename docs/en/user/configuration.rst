@@ -68,7 +68,9 @@ Two factor authentication (2FA)
     Two-factor authentication (also known as 2FA) is a technology patented in 1984
     that provides identification of users by means of the combination of two different components.
 
-https://en.wikipedia.org/wiki/Two-factor_authentication
+    https://en.wikipedia.org/wiki/Two-factor_authentication
+
+**Warning**: enabling 2FA from the configuration interface is only possible if it has been authorized before in `app/config/parameters.yml` by setting the *twofactor_auth* property to `true` (do not forget to run `php bin/console cache:clear -e=prod` after modification).
 
 If you enable 2FA, each time you want to login to wallabag, you'll receive
 a code by email. You have to put this code on the following form.
