@@ -51,13 +51,14 @@ L'autenticazione a due fattori (conosciuta anche come 2FA) é una tecnologia bre
 
 https://it.wikipedia.org/wiki/Autenticazione_a_due_fattori
 
+**Attenzione**: abilitare la 2FA dall'interfaccia di configurazione è possibile solamente se ciò è stato abilitato precedentemente in `app/config/parameters.yml` impostando la proprietà *twofactor_auth* su `true` (non dimenticate di svuotare `/var/cache` dopo la modifica).
+
 Se abilitate la 2FA, ogni volta che vogliate accedere a wallabag, riceverete un codice via email. Dovrete inserire il codice nel seguente modulo.
 
 .. image:: ../../img/user/2FA_form.png
     :alt: Two factor authentication
     :align: center
 
-**Attenzione**: abilitare la 2FA dall'interfaccia di configurazione è possibile solamente se ciò è stato abilitato precedentemente in `app/config/parameters.yml` impostando la proprietà *twofactor_auth* su `true` (non dimenticate di svuotare `/var/cache` dopo la modifica).
 Se non volete ricevere il codice ogni volta che vogliate accedere, potete spuntare la casella ``I'm on a trusted computer``: wallabag vi ricorderá per 15 giorni.
 
 Password
