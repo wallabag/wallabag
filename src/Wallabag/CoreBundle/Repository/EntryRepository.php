@@ -106,8 +106,9 @@ class EntryRepository extends EntityRepository
             $qb->andWhere('e.isArchived = true');
         }
 
+        // We lower() all parts here because PostgreSQL 'LIKE' verb is case-sensitive
         $qb
-            ->andWhere('e.content LIKE :term OR e.title LIKE :term')->setParameter('term', '%'.$term.'%')
+            ->andWhere('lower(e.content) LIKE lower(:term) OR lower(e.title) LIKE lower(:term) OR lower(e.url) LIKE lower(:term)')->setParameter('term', '%'.$term.'%')
             ->leftJoin('e.tags', 't')
             ->groupBy('e.id');
 
