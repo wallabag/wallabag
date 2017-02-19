@@ -47,7 +47,7 @@ Potete cambiare il vostro nome, il vostro indirizzo email e abilitare l'``Autent
 Autenticazione a due fattori (2FA)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    L'autenticazione a due fattori (conosciuta anche come 2FA) é una tecnologia brevettata nel 1984 che offre l'identificazione degli    utenti tramite una combinazione di due componenti differenti.
+L'autenticazione a due fattori (conosciuta anche come 2FA) é una tecnologia brevettata nel 1984 che offre l'identificazione degli utenti tramite una combinazione di due componenti differenti.
 
     https://it.wikipedia.org/wiki/Autenticazione_a_due_fattori
 
