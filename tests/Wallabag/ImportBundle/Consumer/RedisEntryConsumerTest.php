@@ -182,7 +182,7 @@ JSON;
 
         $res = $consumer->manage($body);
 
-        $this->assertFalse($res);
+        $this->assertTrue($res);
     }
 
     public function testMessageWithEntryProcessed()

@@ -46,7 +46,8 @@ abstract class AbstractConsumer
         if (null === $user) {
             $this->logger->warning('Unable to retrieve user', ['entry' => $storedEntry]);
 
-            return false;
+            // return true to skip message
+            return true;
         }
 
         $this->import->setUser($user);
