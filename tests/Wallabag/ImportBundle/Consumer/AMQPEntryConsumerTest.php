@@ -183,7 +183,9 @@ JSON;
 
         $message = new AMQPMessage($body);
 
-        $consumer->execute($message);
+        $res = $consumer->execute($message);
+
+        $this->assertTrue($res);
     }
 
     public function testMessageWithEntryProcessed()
