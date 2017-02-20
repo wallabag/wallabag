@@ -49,7 +49,9 @@ Autenticazione a due fattori (2FA)
 
 L'autenticazione a due fattori (conosciuta anche come 2FA) é una tecnologia brevettata nel 1984 che offre l'identificazione degli utenti tramite una combinazione di due componenti differenti.
 
-https://it.wikipedia.org/wiki/Autenticazione_a_due_fattori
+    https://it.wikipedia.org/wiki/Autenticazione_a_due_fattori
+
+**Attenzione**: abilitare la 2FA dall'interfaccia di configurazione è possibile solamente se ciò è stato abilitato precedentemente in `app/config/parameters.yml` impostando la proprietà *twofactor_auth* su `true` (non dimenticate di svuotare `/var/cache` dopo la modifica).
 
 Se abilitate la 2FA, ogni volta che vogliate accedere a wallabag, riceverete un codice via email. Dovrete inserire il codice nel seguente modulo.
 
