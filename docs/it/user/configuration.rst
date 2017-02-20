@@ -47,9 +47,11 @@ Potete cambiare il vostro nome, il vostro indirizzo email e abilitare l'``Autent
 Autenticazione a due fattori (2FA)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-L'autenticazione a due fattori (conosciuta anche come 2FA) é una tecnologia brevettata nel 1984 che offre l'identificazione degli utenti tramite una combinazione di due componenti differenti.
+    L'autenticazione a due fattori (conosciuta anche come 2FA) é una tecnologia brevettata nel 1984 che offre l'identificazione degli utenti tramite una combinazione di due componenti differenti.
 
-https://it.wikipedia.org/wiki/Autenticazione_a_due_fattori
+    https://it.wikipedia.org/wiki/Autenticazione_a_due_fattori
+
+**Attenzione**: abilitare la 2FA dall'interfaccia di configurazione è possibile solamente se ciò è stato abilitato precedentemente in app/config/parameters.yml impostando la proprietà twofactor_auth su true (non dimenticate di eseguire il comando `php bin/console cache:clear -e=prod` dopo la modifica).
 
 Se abilitate la 2FA, ogni volta che vogliate accedere a wallabag, riceverete un codice via email. Dovrete inserire il codice nel seguente modulo.
 
@@ -78,7 +80,7 @@ Come le uso?
 ~~~~~~~~~~~~
 
 Immaginiamo che vogliate taggare un contenuto come *« lettura corta »* quando il tempo di lettura è inferiore ai 3 minuti. In questo caso, dovreste mettere « readingTime <= 3 » nel campo **Regola**
-e *« lettura corta »* nel campo **Tag**. Molte etichette possono essere aggiunte simultaneamente separandole con una virgola: *« lettura corta, da leggere »*. 
+e *« lettura corta »* nel campo **Tag**. Molte etichette possono essere aggiunte simultaneamente separandole con una virgola: *« lettura corta, da leggere »*.
 Si possono scrivere regole complesse usando gli operatori predefiniti:
 se *« readingTime >= 5 AND domainName = "github.com" »* allora etichetta come *« lettura lunga, github »*.
 
@@ -99,6 +101,3 @@ mimetype     The entry's mime-type                           OR        Una regol
 readingTime  Il tempo di lettura dell'articolo stimato       AND       Una regola e l'altra
 domainName   Il nome del dominio dell'articolo               matches   Vede se un soggetto corrisponde alla ricerca (indipendentemente dal maiuscolo o minuscolo). Esempio: titolo corrisponde a "football"
 ===========  ==============================================  ========  ==========
-
-
-
