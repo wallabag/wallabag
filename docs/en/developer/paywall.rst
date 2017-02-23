@@ -6,12 +6,16 @@ wallabag can fetch articles from websites which use a paywall system.
 Enable paywall authentication
 -----------------------------
 
-In internal settings, in the **Article** section, enable authentication for websites with paywall (with the value 1).
+In internal settings, as a wallabag administrator, in the **Article** section, enable authentication for websites with paywall (with the value 1).
 
 Configure credentials in wallabag
 ---------------------------------
 
-Edit your ``app/config/parameters.yml`` file to edit credentials for each website with paywall. Here is an example for some french websites:
+Edit your ``app/config/parameters.yml`` file to edit credentials for each website with paywall. For example, under Ubuntu:
+
+``sudo -u www-data nano /var/www/html/wallabag/app/config/parameters.yml``
+
+Here is an example for some french websites (be careful: don't use the "tab" key, only spaces):
 
 .. code:: yaml
 
@@ -28,7 +32,7 @@ Parsing configuration files
 
 .. note::
 
-    Read `this part of the documentation <http://doc.wallabag.org/en/master/user/errors_during_fetching.html>`_ to understand the configuration files.
+    Read `this part of the documentation <http://doc.wallabag.org/en/master/user/errors_during_fetching.html>`_ to understand the configuration files, which are located under ``vendor/j0k3r/graby-site-config/``. For most of the websites, this file is already configured: the following instructions are only for the websites that are not configured yet.
 
 Each parsing configuration file needs to be improved by adding ``requires_login``, ``login_uri``,
 ``login_username_field``, ``login_password_field`` and ``not_logged_in_xpath``.
@@ -54,3 +58,8 @@ For example:
     login_password_field: password
 
     not_logged_in_xpath: //body[@class="not-logged-in"]
+    
+Last step: clear the cache
+--------------------------
+    
+It's necessary to clear the wallabag cache with the following command (here under Ubuntu): ``sudo -u www-data php /var/www/html/wallabag/bin/console cache:clear -e=prod``
