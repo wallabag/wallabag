@@ -1,4 +1,4 @@
-# settings_changed: Configuration updated
+settings_changed: Konfiguracja zaktualizowana
 download_pictures: Pobierz obrazy na swój serwer
 carrot: Włącz udostępnianie dla Carrot
 diaspora_url: Adres URL Diaspora, jeżeli usługa jest włączona
@@ -24,12 +24,12 @@ entry: "artykuł"
 export: "eksport"
 import: "import"
 misc: "różne"
-modify_settings: "zatwierdz"
+modify_settings: "zatwierdź"
 piwik_host: Host twojej strony Piwik (bez http:// lub https://)
 piwik_site_id: ID twojej strony Piwik
 piwik_enabled: Włacz Piwik
 demo_mode_enabled: "Włacz tryb demo? (używany wyłącznie dla publicznej demonstracji Wallabag)"
 demo_mode_username: "Użytkownik Demonstracyjny"
 share_public: Zezwalaj na publiczny adres url dla wpisow
-# download_images_enabled: Download images locally
-# restricted_access: Enable authentication for websites with paywall
+download_images_enabled: Pobierz obrazy lokalnie
+restricted_access: Włącz autoryzację dla stron z paywallem
