@@ -379,4 +379,17 @@ class EntryRepository extends EntityRepository
             ->setParameter('userId', $userId)
             ->execute();
     }
+
+    /**
+     * Get id and url from all entries
+     * Used for the clean-duplicates command.
+     */
+    public function getAllEntriesIdAndUrl($userId)
+    {
+        $qb = $this->createQueryBuilder('e')
+            ->select('e.id, e.url')
+            ->where('e.user = :userid')->setParameter(':userid', $userId);
+
+        return $qb->getQuery()->getArrayResult();
+    }
 }
