@@ -233,6 +233,11 @@ class Entry
      */
     private $tags;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Wallabag\CoreBundle\Entity\Change", mappedBy="entry", cascade={"remove"})
+     */
+    private $changes;
+
     /*
      * @param User     $user
      */
@@ -240,6 +245,7 @@ class Entry
     {
         $this->user = $user;
         $this->tags = new ArrayCollection();
+        $this->changes = new ArrayCollection();
     }
 
     /**

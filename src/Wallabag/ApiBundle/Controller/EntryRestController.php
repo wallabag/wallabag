@@ -12,7 +12,8 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Event\EntrySavedEvent;
-use Wallabag\CoreBundle\Event\EntryDeletedEvent;
+use Wallabag\CoreBundle\Event\EntryTaggedEvent;
+use Wallabag\CoreBundle\Event\EntryUpdatedEvent;
 
 class EntryRestController extends WallabagRestController
 {
@@ -385,6 +386,8 @@ class EntryRestController extends WallabagRestController
         $em = $this->getDoctrine()->getManager();
         $em->flush();
 
+        $this->get('event_dispatcher')->dispatch(EntryUpdatedEvent::NAME, new EntryUpdatedEvent($entry));
+
         return $this->sendResponse($entry);
     }
 
@@ -426,6 +429,7 @@ class EntryRestController extends WallabagRestController
         $em->flush();
 
         // entry saved, dispatch event about it!
+        $this->get('event_dispatcher')->dispatch(EntryUpdatedEvent::NAME, new EntryUpdatedEvent($entry));
         $this->get('event_dispatcher')->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
 
         return $this->sendResponse($entry);
@@ -496,13 +500,16 @@ class EntryRestController extends WallabagRestController
         $this->validateUserAccess($entry->getUser()->getId());
 
         $tags = $request->request->get('tags', '');
+        $tagsEntries = [];
         if (!empty($tags)) {
-            $this->get('wallabag_core.tags_assigner')->assignTagsToEntry($entry, $tags);
+            $tagsEntries = $this->get('wallabag_core.tags_assigner')->assignTagsToEntry($entry, $tags);
         }
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($entry);
         $em->flush();
+
+        $this->get('event_dispatcher')->dispatch(EntryTaggedEvent::NAME, new EntryTaggedEvent($entry, $tagsEntries));
 
         return $this->sendResponse($entry);
     }
@@ -647,6 +654,30 @@ class EntryRestController extends WallabagRestController
     private function sendResponse($data)
     {
         $json = $this->get('serializer')->serialize($data, 'json');
+
+        return (new JsonResponse())->setJson($json);
+    }
+
+    /**
+     * Gets history since a date.
+     *
+     * @ApiDoc(
+     *       parameters={
+     *          {"name"="since", "dataType"="integer", "required"=true, "format"="A timestamp", "description"="Timestamp of the history's start"},
+     *       }
+     * )
+     *
+     * @return JsonResponse
+     */
+    public function getEntriesHistoryAction(Request $request)
+    {
+        $this->validateAuthentication();
+
+        $res = $this->getDoctrine()
+            ->getRepository('WallabagCoreBundle:Change')
+            ->findChangesSinceDate($request->query->get('since'));
+
+        $json = $this->get('serializer')->serialize($res, 'json');
 
         return (new JsonResponse())->setJson($json);
     }
