@@ -41,7 +41,7 @@ class EntryRestController extends WallabagRestController
                     ->getRepository('WallabagCoreBundle:Entry')
                     ->findByUrlAndUserId($url, $this->getUser()->getId());
 
-                $results[$url] = false === $res ? false : true;
+                $results[$url] = $res instanceof Entry ? $res->getId() : false;
             }
 
             $json = $this->get('serializer')->serialize($results, 'json');
@@ -60,7 +60,7 @@ class EntryRestController extends WallabagRestController
             ->getRepository('WallabagCoreBundle:Entry')
             ->findByUrlAndUserId($url, $this->getUser()->getId());
 
-        $exists = false === $res ? false : true;
+        $exists = $res instanceof Entry ? $res->getId() : false;
 
         $json = $this->get('serializer')->serialize(['exists' => $exists], 'json');
 
