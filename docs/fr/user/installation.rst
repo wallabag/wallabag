@@ -107,6 +107,12 @@ Virtual hosts
 Configuration avec Apache
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
+N'oubliez pas d'activer le mod *rewrite* de Apache
+
+.. code-block:: bash
+
+    a2enmod rewrite && systemctl reload apache2
+
 En imaginant que vous vouliez installer wallabag dans le dossier ``/var/www/wallabag`` et que vous utilisiez PHP comme un module Apache, voici un vhost pour wallabag :
 
 ::
