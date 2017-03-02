@@ -12,6 +12,7 @@ mkdir $TMP_FOLDER/$RELEASE_FOLDER
 git clone git@github.com:wallabag/wallabag.git -b $VERSION $TMP_FOLDER/$RELEASE_FOLDER/$VERSION
 cd $TMP_FOLDER/$RELEASE_FOLDER/$VERSION && SYMFONY_ENV=$ENV composer up -n --no-dev
 cd $TMP_FOLDER/$RELEASE_FOLDER/$VERSION && php bin/console wallabag:install --env=$ENV
+cd $TMP_FOLDER/$RELEASE_FOLDER/$VERSION && php bin/console assets:install --env=$ENV --symlink --relative
 cd $TMP_FOLDER/$RELEASE_FOLDER && tar czf wallabag-$VERSION.tar.gz --exclude="var/cache/*" --exclude="var/logs/*" --exclude="var/sessions/*" --exclude=".git" $VERSION
 echo "MD5 checksum of the package for wallabag $VERSION"
 md5 $TMP_FOLDER/$RELEASE_FOLDER/wallabag-$VERSION.tar.gz
