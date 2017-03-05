@@ -32,7 +32,7 @@ Um mit Symfony Kommandos auf deinem Host auszuführen (wie z.B.
 ``wallabag:install``), sollst du außerdem:
 
 - die richtige Umgebungsdatei auf deiner Kommandozeile einlesen,
-  sodass Variablen wie ``SYMFONY__ENV__DATABASE_HOST`` existieren
+  sodass Variablen wie ``WALLABAG_DATABASE_HOST`` existieren
 - eine Zeile ``127.0.0.1 rdbms`` in deiner ``hosts`` Datei auf dem
   System erstellen
 
@@ -40,9 +40,6 @@ wallabag laufen lassen
 ----------------------
 
 #. Forke und klone das Projekt
-#. Bearbeite ``app/config/parameters.yml`` um ``database_*``
-   Eigenschaften mit den kommentierten zu ersetzen (mit Werten
-   mit ``env.`` Präfix)
 #. ``composer install`` die Projektabhängigkeiten
 #. ``php bin/console wallabag:install``, um das Schema zu erstellen
 #. ``docker-compose up`` um die Container laufen zu lassen

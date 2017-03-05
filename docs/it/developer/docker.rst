@@ -24,14 +24,13 @@ In ``docker-compose.yml``, per il DBMS scelto, togliete i commenti:
 
 Per far continuare ad eseguire i comandi Symfony sul vostro host (come ``wallabag:install``), dovreste anche:
 
-- caricare i file env appropriati sulla vostra riga di comando, in modo che possano esistere variabili come ``SYMFONY__ENV__DATABASE_HOST``.
+- caricare i file env appropriati sulla vostra riga di comando, in modo che possano esistere variabili come ``WALLABAG_DATABASE_HOST``.
 - creare un ``127.0.0.1 rdbms`` sul vostro file di sistema ``hosts``
 
 Eseguite wallabag
 -----------------
 
 #. Fate un fork o clonate il progetto
-#. Modificate ``app/config/parameters.yml`` per rimpiazzare le proprietá di ``database_*`` con quelle commentate (con valori con prefisso ``env.``)
 #. ``composer install`` per installare le dipendenze del progetto
 #. ``php bin/console wallabag:install`` per creare lo schema
 #. ``docker-compose up`` per eseguire i containers

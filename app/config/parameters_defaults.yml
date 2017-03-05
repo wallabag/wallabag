@@ -1,0 +1,17 @@
+parameters:
+    env(WALLABAG_DATABASE_DRIVER): "pdo_sqlite"
+    env(WALLABAG_DATABASE_HOST): "127.0.0.1"
+    env(WALLABAG_DATABASE_PORT): ~
+    env(WALLABAG_DATABASE_NAME): "symfony"
+    env(WALLABAG_DATABASE_USER): "root"
+    env(WALLABAG_DATABASE_PASSWORD): ~
+    env(WALLABAG_DATABASE_PATH): "%kernel.root_dir%/../data/db/wallabag.sqlite"
+    env(WALLABAG_RABBITMQ_HOST): localhost
+    env(WALLABAG_RABBITMQ_PORT): 5672
+    env(WALLABAG_RABBITMQ_USER): guest
+    env(WALLABAG_RABBITMQ_PASSWORD): guest
+    env(WALLABAG_REDIS_SCHEME): tcp
+    env(WALLABAG_REDIS_HOST): localhost
+    env(WALLABAG_REDIS_PORT): 6379
+    env(WALLABAG_REDIS_PATH): null
+    env(WALLABAG_REDIS_PASSWORD): null

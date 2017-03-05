@@ -1,22 +1,13 @@
 # This file is a "template" of what your parameters.yml file should look like
 parameters:
-    # Uncomment these settings or manually update your parameters.yml
-    # to use docker-compose
-    #
-    # database_driver: %env.database_driver%
-    # database_host: %env.database_host%
-    # database_port: %env.database_port%
-    # database_name: %env.database_name%
-    # database_user: %env.database_user%
-    # database_password: %env.database_password%
+    database_driver: "%env(WALLABAG_DATABASE_DRIVER)%"
+    database_host: "%env(WALLABAG_DATABASE_HOST)%"
+    database_port: "%env(WALLABAG_DATABASE_PORT)%"
+    database_name: "%env(WALLABAG_DATABASE_NAME)%"
+    database_user: "%env(WALLABAG_DATABASE_USER)%"
+    database_password: "%env(WALLABAG_DATABASE_PASSWORD)%"
+    database_path: "%env(WALLABAG_DATABASE_PATH)%"
 
-    database_driver: pdo_sqlite
-    database_host: 127.0.0.1
-    database_port: ~
-    database_name: symfony
-    database_user: root
-    database_password: ~
-    database_path: "%kernel.root_dir%/../data/db/wallabag.sqlite"
     database_table_prefix: wallabag_
     database_socket: null
     # with MySQL, use "utf8mb4" if you got problem with content with emojis
@@ -45,18 +36,18 @@ parameters:
     rss_limit: 50
 
     # RabbitMQ processing
-    rabbitmq_host: localhost
-    rabbitmq_port: 5672
-    rabbitmq_user: guest
-    rabbitmq_password: guest
+    rabbitmq_host: "%env(WALLABAG_RABBITMQ_HOST)%"
+    rabbitmq_port: "%env(WALLABAG_RABBITMQ_PORT)%"
+    rabbitmq_user: "%env(WALLABAG_RABBITMQ_USER)%"
+    rabbitmq_password: "%env(WALLABAG_RABBITMQ_PASSWORD)%"
     rabbitmq_prefetch_count: 10
 
     # Redis processing
-    redis_scheme: tcp
-    redis_host: localhost
-    redis_port: 6379
-    redis_path: null
-    redis_password: null
+    redis_scheme: "%env(WALLABAG_REDIS_SCHEME)%"
+    redis_host: "%env(WALLABAG_REDIS_HOST)%"
+    redis_port: "%env(WALLABAG_REDIS_PORT)%"
+    redis_path: "%env(WALLABAG_REDIS_PATH)%"
+    redis_password: "%env(WALLABAG_REDIS_PASSWORD)%"
 
     # sites credentials
     sites_credentials: {}

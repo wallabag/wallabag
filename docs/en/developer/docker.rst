@@ -30,15 +30,13 @@ In order to keep running Symfony commands on your host (such as
 ``wallabag:install``), you also should:
 
 - source the proper env files on your command line, so variables
-  like ``SYMFONY__ENV__DATABASE_HOST`` will exist.
+  like ``WALLABAG_DATABASE_HOST`` will exist.
 - create a ``127.0.0.1 rdbms`` on your system ``hosts`` file
 
 Run wallabag
 ------------
 
 #. Fork and clone the project
-#. Edit ``app/config/parameters.yml`` to replace ``database_*``
-   properties with commented ones (with values prefixed by ``env.``)
 #. ``composer install`` the project dependencies
 #. ``php bin/console wallabag:install`` to create the schema
 #. ``docker-compose up`` to run the containers

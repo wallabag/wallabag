@@ -22,9 +22,11 @@ services:
             - "9000:9000"
         volumes:
             - .:/var/www/html
-        #links:
+        links:
             # - "postgres:rdbms"
             # - "mariadb:rdbms"
+            - rabbitmq
+            - reddis
         env_file:
             - ./docker/php/env
             # Comment non-used DBMS lines

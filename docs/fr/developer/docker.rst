@@ -29,15 +29,13 @@ Pour que les commandes Symfony (par exemple ``wallabag:install``) continuent de
 fonctionner sur votre système, vous devez aussi :
 
 - charger le bon fichier d'environnement dans votre ligne de commandes (``source``),
-pour que les variables comme ``SYMFONY__ENV__DATABASE_HOST`` existent.
+pour que les variables comme ``WALLABAG_DATABASE_HOST`` existent.
 - ajouter une ligne ``127.0.0.1 rdbms`` dans votre fichier ``hosts``
 
 Exécuter wallabag
 -----------------
 
 #. Forker et cloner le projet
-#. Editer ``app/config/parameters.yml`` pour remplacer les propriétés ``database_*``
-    par les lignes commentées (celles avec des valeurs préfixées par ``env.``)
 #. ``composer install`` pour installer les dépendances
 #. ``php bin/console wallabag:install`` pour créer le schéma de la BDD
 #. ``docker-compose up`` pour démarrer les conteneurs
