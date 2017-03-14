@@ -23,6 +23,7 @@ class LoadConfigData extends AbstractFixture implements OrderedFixtureInterface
         $adminConfig->setPocketConsumerKey('xxxxx');
         $adminConfig->setActionMarkAsRead(0);
         $adminConfig->setListMode(0);
+        $adminConfig->setNewArticleHook('');
 
         $manager->persist($adminConfig);
 

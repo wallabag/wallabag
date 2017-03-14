@@ -63,6 +63,9 @@ class ConfigType extends AbstractType
             ->add('pocket_consumer_key', null, [
                 'label' => 'config.form_settings.pocket_consumer_key_label',
             ])
+            ->add('new_article_hook', null, [
+                'label' => 'config.form_settings.new_article_hook_label',
+            ])
             ->add('save', SubmitType::class, [
                 'label' => 'config.form.save',
             ])

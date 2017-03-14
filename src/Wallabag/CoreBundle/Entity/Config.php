@@ -91,6 +91,13 @@ class Config
     private $pocketConsumerKey;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="new_article_hook", type="string", nullable=true)
+     */
+    private $newArticleHook;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="action_mark_as_read", type="integer", nullable=true, options={"default" = 0})
@@ -324,6 +331,30 @@ class Config
     public function getPocketConsumerKey()
     {
         return $this->pocketConsumerKey;
+    }
+
+    /**
+     * Set newArticleHook.
+     *
+     * @param string $newArticleHook
+     *
+     * @return Config
+     */
+    public function setNewArticleHook($newArticleHook)
+    {
+        $this->newArticleHook = $newArticleHook;
+
+        return $this;
+    }
+
+    /**
+     * Get newArticleHook.
+     *
+     * @return string
+     */
+    public function getNewArticleHook()
+    {
+        return $this->newArticleHook;
     }
 
     /**

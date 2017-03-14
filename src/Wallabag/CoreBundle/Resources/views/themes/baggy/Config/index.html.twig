@@ -81,6 +81,17 @@
 
         <fieldset class="w500p inline">
             <div class="row">
+                {{ form_label(form.config.new_article_hook) }}
+                {{ form_errors(form.config.new_article_hook) }}
+                {{ form_widget(form.config.new_article_hook) }}
+            </div>
+            <a href="#" title="{{ 'config.form_settings.help_new_article_hook'|trans }}">
+                <i class="material-icons">live_help</i>
+            </a>
+        </fieldset>
+
+        <fieldset class="w500p inline">
+            <div class="row">
                 <h3>{{ 'config.form_settings.android_configuration'|trans }}</h3>
                 <a href="wallabag://{{ app.user.username }}@{{ wallabag_url }}" >Touch here to prefill your Android application</a>
                 <br/>
