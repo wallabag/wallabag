@@ -41,7 +41,7 @@ class NewArticleHookSubscriber implements EventSubscriberInterface
             // We don't care about the result of the request, so we
             // execute the call asynchronously in another process:
             $pid = pcntl_fork();
-            if (!$pid) {
+            if ($pid > 0) {
                 $ch = curl_init();
                 $hook_replaced = str_replace(["%i", "%t", "%u"],
                                              [(string) $entry->getId(),
@@ -52,6 +52,7 @@ class NewArticleHookSubscriber implements EventSubscriberInterface
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_exec($ch);
                 curl_close($ch);
+                exit(0);
             }
         }
     }
