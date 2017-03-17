@@ -13,10 +13,12 @@ use Doctrine\ORM\EntityManager;
 
 class NewArticleHookSubscriber implements EventSubscriberInterface
 {
+    private $client;
     private $logger;
 
     public function __construct(LoggerInterface $logger)
     {
+        $this->client = new \GuzzleHttp\Client;
         $this->logger = $logger;
     }
 
@@ -38,23 +40,19 @@ class NewArticleHookSubscriber implements EventSubscriberInterface
         $user = $entry->getUser();
         $hook = $entry->getUser()->getConfig()->getNewArticleHook();
         if ('' !== trim($hook)) {
+            $url = str_replace(["%i", "%t", "%u"],
+                               [(string) $entry->getId(),
+                                urlencode($entry->getTitle()),
+                                urlencode($entry->getUrl())],
+                               $hook);
             // We don't care about the result of the request, so we
-            // execute the call asynchronously in another process:
-            $pid = pcntl_fork();
-            if ($pid > 0) {
-                $ch = curl_init();
-                $hook_replaced = str_replace(["%i", "%t", "%u"],
-                                             [(string) $entry->getId(),
-                                              urlencode($entry->getTitle()),
-                                              urlencode($entry->getUrl())],
-                                             $hook);
-                curl_setopt($ch, CURLOPT_URL, $hook_replaced);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                curl_exec($ch);
-                curl_close($ch);
-                exit(0);
+            // execute the call asynchronously.
+            // We abuse the timeout parameter here since asynchronous
+            // requests still caused this to block for some reason.
+            try {
+                $this->client->get($url, ['timeout' => 0.01]);
+            } catch (\GuzzleHttp\Exception\ConnectException $e) {
             }
         }
     }
-
 }
