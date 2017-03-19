@@ -86,6 +86,7 @@ Now, you can share the article:
 - with a public URL (you'll have a light view of the article)
 - with a tweet
 - into your Shaarli
+- into your Scuttle
 - with a post in Diaspora*
 - to Carrot
 - with an email

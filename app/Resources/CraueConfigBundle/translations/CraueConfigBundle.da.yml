@@ -15,6 +15,7 @@ shaarli_url: Shaarli-URL, hvis tjenesten er aktiv
 share_diaspora: Aktiver deling til Diaspora
 share_mail: Aktiver deling med email
 share_shaarli: Aktiver deling gennem Shaarli
+share_scuttle: Aktiver deling gennem Scuttle
 share_twitter: Aktiver deling gennem Twitter
 share_unmark: Aktiver deling gennem Unmark.it
 show_printlink: Vis et link til print-indhold

@@ -333,6 +333,16 @@ class InstallCommand extends ContainerAwareCommand
                 'section' => 'entry',
             ],
             [
+                'name' => 'share_scuttle',
+                'value' => '1',
+                'section' => 'entry',
+            ],
+            [
+                'name' => 'scuttle_url',
+                'value' => 'http://scuttle.org',
+                'section' => 'entry',
+            ],            
+            [
                 'name' => 'share_mail',
                 'value' => '1',
                 'section' => 'entry',

@@ -15,6 +15,7 @@ shaarli_url: نشانی Shaarli، اگر فعال بود
 share_diaspora: فعال‌سازی هم‌رسانی به Diaspora
 share_mail:  فعال‌سازی هم‌رسانی با ایمیل
 share_shaarli:  فعال‌سازی هم‌رسانی به Shaarli
+share_scuttle:  فعال‌سازی هم‌رسانی به Scuttle
 share_twitter:  فعال‌سازی هم‌رسانی به Twitter
 share_unmark:  فعال‌سازی هم‌رسانی به Unmark.it
 show_printlink: نمایش پیوندی برای چاپ مطلب

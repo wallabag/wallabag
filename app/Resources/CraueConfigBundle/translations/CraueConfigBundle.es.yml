@@ -15,6 +15,7 @@ shaarli_url: URL de Shaarli, si el servicio está activado
 share_diaspora: Activar compartir con Diaspora
 share_mail: Activar compartir con Email
 share_shaarli: Activar compartir con Shaarli
+share_scuttle: Activar compartir con Scuttle
 share_twitter: Activar compartir con Twitter
 share_unmark: Activar compartir con Unmark.it
 show_printlink: Mostrar un enlace para imprimir contenido

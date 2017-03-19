@@ -947,6 +947,11 @@ a.add-to-wallabag-link-after::after {
   background-image: url("../../_global/img/icons/shaarli.png");
 }
 
+/* scuttle */
+.icon-image--scuttle {
+  background-image: url("../../_global/img/icons/scuttle.png");
+}
+
 /* ==========================================================================
    Icon selected
    ========================================================================== */
@@ -1060,6 +1065,10 @@ blockquote {
 }
 
 .shaarli::before {
+  content: "*";
+}
+
+.scuttle::before {
   content: "*";
 }
 

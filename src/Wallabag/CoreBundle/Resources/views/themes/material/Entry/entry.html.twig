@@ -131,6 +131,14 @@
                             </a>
                         </li>
                     {% endif %}
+                    {% if craue_setting('share_scuttle') %}
+                        <li>
+                        <a href="{{ craue_setting('scuttle_url') }}/bookmarks.php?action=add&amp;address={{ entry.url|url_encode }}&amp;title={{ entry.title|striptags|url_encode }}&amp;tags={{ entry.tags|join(',')|striptags|url_encode }}" target="_blank">
+                                <i class="tool icon-image icon-image--scuttle" title="scuttle"></i>
+                                <span>scuttle</span>
+                            </a>
+                        </li>
+                    {% endif %}                    
                     {% if craue_setting('share_diaspora') %}
                         <li>
                             <a href="{{ craue_setting('diaspora_url') }}/bookmarklet?url={{ entry.url|url_encode }}&amp;title={{ entry.title|striptags|url_encode }}&amp;notes=&amp;v=1&amp;noui=1&amp;jump=doclose" target="_blank">

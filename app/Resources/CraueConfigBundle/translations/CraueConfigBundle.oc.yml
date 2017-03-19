@@ -15,6 +15,7 @@ shaarli_url: URL de Shaarli, se lo servici Shaarli es activat
 share_diaspora: Activar lo partatge cap a Diaspora
 share_mail: Activar lo partatge per corrièl
 share_shaarli: Activar lo partatge cap a Shaarli
+share_scuttle: Activar lo partatge cap a Scuttle
 share_twitter: Activar lo partatge cap a Twitter
 share_unmark: Activar lo partatge cap a Unmark.it
 show_printlink: Afichar un ligam per imprimir

@@ -15,6 +15,7 @@ shaarli_url: Adress URL Shaarli, jeżeli usługa jest włączona
 share_diaspora: Włącz udostępnianie dla Diaspora
 share_mail: Włącz udostępnianie przez email
 share_shaarli: Włącz udostępnianie dla Shaarli
+share_scuttle: Włącz udostępnianie dla Scuttle
 share_twitter: Włącz udostępnianie dla Twitter
 share_unmark: Włącz udostępnianie dla Unmark.it
 show_printlink: Pokaż link do wydrukowania zawartości
