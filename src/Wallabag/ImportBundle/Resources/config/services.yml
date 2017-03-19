@@ -18,7 +18,7 @@ services:
     wallabag_import.pocket.import:
         class: Wallabag\ImportBundle\Import\PocketImport
         arguments:
-            - "@doctrine.orm.entity_manager"
+            - "@doctrine"
             - "@wallabag_core.content_proxy"
             - "@event_dispatcher"
         calls:
@@ -30,7 +30,7 @@ services:
     wallabag_import.wallabag_v1.import:
         class: Wallabag\ImportBundle\Import\WallabagV1Import
         arguments:
-            - "@doctrine.orm.entity_manager"
+            - "@doctrine"
             - "@wallabag_core.content_proxy"
             - "@event_dispatcher"
         calls:
@@ -41,7 +41,7 @@ services:
     wallabag_import.wallabag_v2.import:
         class: Wallabag\ImportBundle\Import\WallabagV2Import
         arguments:
-            - "@doctrine.orm.entity_manager"
+            - "@doctrine"
             - "@wallabag_core.content_proxy"
             - "@event_dispatcher"
         calls:
@@ -52,7 +52,7 @@ services:
     wallabag_import.readability.import:
         class: Wallabag\ImportBundle\Import\ReadabilityImport
         arguments:
-            - "@doctrine.orm.entity_manager"
+            - "@doctrine"
             - "@wallabag_core.content_proxy"
             - "@event_dispatcher"
         calls:
@@ -63,7 +63,7 @@ services:
     wallabag_import.instapaper.import:
         class: Wallabag\ImportBundle\Import\InstapaperImport
         arguments:
-            - "@doctrine.orm.entity_manager"
+            - "@doctrine"
             - "@wallabag_core.content_proxy"
             - "@event_dispatcher"
         calls:
@@ -74,7 +74,7 @@ services:
     wallabag_import.pinboard.import:
         class: Wallabag\ImportBundle\Import\PinboardImport
         arguments:
-            - "@doctrine.orm.entity_manager"
+            - "@doctrine"
             - "@wallabag_core.content_proxy"
             - "@event_dispatcher"
         calls:
@@ -85,7 +85,7 @@ services:
     wallabag_import.firefox.import:
         class: Wallabag\ImportBundle\Import\FirefoxImport
         arguments:
-            - "@doctrine.orm.entity_manager"
+            - "@doctrine"
             - "@wallabag_core.content_proxy"
             - "@event_dispatcher"
         calls:
@@ -95,7 +95,7 @@ services:
     wallabag_import.chrome.import:
         class: Wallabag\ImportBundle\Import\ChromeImport
         arguments:
-            - "@doctrine.orm.entity_manager"
+            - "@doctrine"
             - "@wallabag_core.content_proxy"
             - "@event_dispatcher"
         calls:

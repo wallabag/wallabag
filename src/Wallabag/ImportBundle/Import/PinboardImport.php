@@ -85,7 +85,9 @@ class PinboardImport extends AbstractImport
      */
     public function parseEntry(array $importedEntry)
     {
-        $existingEntry = $this->em
+        $em = $this->registry->getManager();
+
+        $existingEntry = $em
             ->getRepository('WallabagCoreBundle:Entry')
             ->findByUrlAndUserId($importedEntry['href'], $this->user->getId());
 
@@ -115,7 +117,7 @@ class PinboardImport extends AbstractImport
             $this->contentProxy->assignTagsToEntry(
                 $entry,
                 $data['tags'],
-                $this->em->getUnitOfWork()->getScheduledEntityInsertions()
+                $em->getUnitOfWork()->getScheduledEntityInsertions()
             );
         }
 
@@ -123,7 +125,7 @@ class PinboardImport extends AbstractImport
         $entry->setStarred($data['is_starred']);
         $entry->setCreatedAt(new \DateTime($data['created_at']));
 
-        $this->em->persist($entry);
+        $em->persist($entry);
         ++$this->importedEntries;
 
         return $entry;

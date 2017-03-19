@@ -2,7 +2,7 @@
 
 namespace Wallabag\ImportBundle\Consumer;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Wallabag\ImportBundle\Import\AbstractImport;
 use Wallabag\UserBundle\Repository\UserRepository;
 use Wallabag\CoreBundle\Entity\Entry;
@@ -14,15 +14,15 @@ use Wallabag\CoreBundle\Event\EntrySavedEvent;
 
 abstract class AbstractConsumer
 {
-    protected $em;
+    protected $registry;
     protected $userRepository;
     protected $import;
     protected $eventDispatcher;
     protected $logger;
 
-    public function __construct(EntityManager $em, UserRepository $userRepository, AbstractImport $import, EventDispatcherInterface $eventDispatcher, LoggerInterface $logger = null)
+    public function __construct(ManagerRegistry $registry = null, UserRepository $userRepository, AbstractImport $import, EventDispatcherInterface $eventDispatcher, LoggerInterface $logger = null)
     {
-        $this->em = $em;
+        $this->registry = $registry;
         $this->userRepository = $userRepository;
         $this->import = $import;
         $this->eventDispatcher = $eventDispatcher;
@@ -38,6 +38,12 @@ abstract class AbstractConsumer
      */
     protected function handleMessage($body)
     {
+        // If there is no manager, this means that only Doctrine DBAL is configured
+        // In this case we can do nothing and just return
+        if (null === $this->registry || !count($this->registry->getManagers())) {
+            return false;
+        }
+
         $storedEntry = json_decode($body, true);
 
         $user = $this->userRepository->find($storedEntry['userId']);
@@ -62,14 +68,15 @@ abstract class AbstractConsumer
         }
 
         try {
-            $this->em->flush();
+            $em = $this->registry->getManager();
+            $em->flush();
 
             // entry saved, dispatch event about it!
             $this->eventDispatcher->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
 
             // clear only affected entities
-            $this->em->clear(Entry::class);
-            $this->em->clear(Tag::class);
+            $em->clear(Entry::class);
+            $em->clear(Tag::class);
         } catch (\Exception $e) {
             $this->logger->warning('Unable to save entry', ['entry' => $storedEntry, 'exception' => $e]);
 

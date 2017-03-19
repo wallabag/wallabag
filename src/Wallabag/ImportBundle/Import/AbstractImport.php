@@ -4,7 +4,6 @@ namespace Wallabag\ImportBundle\Import;
 
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
-use Doctrine\ORM\EntityManager;
 use Wallabag\CoreBundle\Helper\ContentProxy;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
@@ -12,10 +11,11 @@ use Wallabag\UserBundle\Entity\User;
 use OldSound\RabbitMqBundle\RabbitMq\ProducerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Wallabag\CoreBundle\Event\EntrySavedEvent;
+use Doctrine\Common\Persistence\ManagerRegistry;
 
 abstract class AbstractImport implements ImportInterface
 {
-    protected $em;
+    protected $registry;
     protected $logger;
     protected $contentProxy;
     protected $eventDispatcher;
@@ -26,9 +26,9 @@ abstract class AbstractImport implements ImportInterface
     protected $importedEntries = 0;
     protected $queuedEntries = 0;
 
-    public function __construct(EntityManager $em, ContentProxy $contentProxy, EventDispatcherInterface $eventDispatcher)
+    public function __construct(ManagerRegistry $registry, ContentProxy $contentProxy, EventDispatcherInterface $eventDispatcher)
     {
-        $this->em = $em;
+        $this->registry = $registry;
         $this->logger = new NullLogger();
         $this->contentProxy = $contentProxy;
         $this->eventDispatcher = $eventDispatcher;
@@ -107,6 +107,14 @@ abstract class AbstractImport implements ImportInterface
      */
     protected function parseEntries($entries)
     {
+        // If there is no manager, this means that only Doctrine DBAL is configured
+        // In this case we can do nothing and just return
+        if (null === $this->registry || !count($this->registry->getManagers())) {
+            return false;
+        }
+
+        $em = $this->registry->getManager();
+
         $i = 1;
         $entryToBeFlushed = [];
 
@@ -128,7 +136,7 @@ abstract class AbstractImport implements ImportInterface
 
             // flush every 20 entries
             if (($i % 20) === 0) {
-                $this->em->flush();
+                $em->flush();
 
                 foreach ($entryToBeFlushed as $entry) {
                     $this->eventDispatcher->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
@@ -137,13 +145,13 @@ abstract class AbstractImport implements ImportInterface
                 $entryToBeFlushed = [];
 
                 // clear only affected entities
-                $this->em->clear(Entry::class);
-                $this->em->clear(Tag::class);
+                $em->clear(Entry::class);
+                $em->clear(Tag::class);
             }
             ++$i;
         }
 
-        $this->em->flush();
+        $em->flush();
 
         if (!empty($entryToBeFlushed)) {
             foreach ($entryToBeFlushed as $entry) {

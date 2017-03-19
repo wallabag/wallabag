@@ -683,7 +683,7 @@ class Entry
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getHttpStatus()
     {
@@ -691,7 +691,7 @@ class Entry
     }
 
     /**
-     * @param int $httpStatus
+     * @param string $httpStatus
      *
      * @return Entry
      */

@@ -101,7 +101,9 @@ class InstapaperImport extends AbstractImport
      */
     public function parseEntry(array $importedEntry)
     {
-        $existingEntry = $this->em
+        $em = $this->registry->getManager();
+
+        $existingEntry = $em
             ->getRepository('WallabagCoreBundle:Entry')
             ->findByUrlAndUserId($importedEntry['url'], $this->user->getId());
 
@@ -121,7 +123,7 @@ class InstapaperImport extends AbstractImport
         $entry->setArchived($importedEntry['is_archived']);
         $entry->setStarred($importedEntry['is_starred']);
 
-        $this->em->persist($entry);
+        $em->persist($entry);
         ++$this->importedEntries;
 
         return $entry;

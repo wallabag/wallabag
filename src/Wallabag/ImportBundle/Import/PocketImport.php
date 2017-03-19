@@ -177,9 +177,11 @@ class PocketImport extends AbstractImport
      */
     public function parseEntry(array $importedEntry)
     {
+        $em = $this->registry->getManager();
+
         $url = isset($importedEntry['resolved_url']) && $importedEntry['resolved_url'] != '' ? $importedEntry['resolved_url'] : $importedEntry['given_url'];
 
-        $existingEntry = $this->em
+        $existingEntry = $em
             ->getRepository('WallabagCoreBundle:Entry')
             ->findByUrlAndUserId($url, $this->user->getId());
 
@@ -219,7 +221,7 @@ class PocketImport extends AbstractImport
             $this->contentProxy->assignTagsToEntry(
                 $entry,
                 array_keys($importedEntry['tags']),
-                $this->em->getUnitOfWork()->getScheduledEntityInsertions()
+                $em->getUnitOfWork()->getScheduledEntityInsertions()
             );
         }
 
@@ -227,7 +229,7 @@ class PocketImport extends AbstractImport
             $entry->setCreatedAt((new \DateTime())->setTimestamp($importedEntry['time_added']));
         }
 
-        $this->em->persist($entry);
+        $em->persist($entry);
         ++$this->importedEntries;
 
         return $entry;

@@ -8,18 +8,18 @@ use Wallabag\CoreBundle\Helper\DownloadImages;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Event\EntrySavedEvent;
 use Wallabag\CoreBundle\Event\EntryDeletedEvent;
-use Doctrine\ORM\EntityManager;
+use Doctrine\Common\Persistence\ManagerRegistry;
 
 class DownloadImagesSubscriber implements EventSubscriberInterface
 {
-    private $em;
+    private $registry;
     private $downloadImages;
     private $enabled;
     private $logger;
 
-    public function __construct(EntityManager $em, DownloadImages $downloadImages, $enabled, LoggerInterface $logger)
+    public function __construct(ManagerRegistry $registry = null, DownloadImages $downloadImages, $enabled, LoggerInterface $logger)
     {
-        $this->em = $em;
+        $this->registry = $registry;
         $this->downloadImages = $downloadImages;
         $this->enabled = $enabled;
         $this->logger = $logger;
@@ -40,6 +40,12 @@ class DownloadImagesSubscriber implements EventSubscriberInterface
      */
     public function onEntrySaved(EntrySavedEvent $event)
     {
+        // If there is no manager, this means that only Doctrine DBAL is configured
+        // In this case we can do nothing and just return
+        if (null === $this->registry || !count($this->registry->getManagers())) {
+            return false;
+        }
+
         if (!$this->enabled) {
             $this->logger->debug('DownloadImagesSubscriber: disabled.');
 
@@ -63,8 +69,9 @@ class DownloadImagesSubscriber implements EventSubscriberInterface
             $entry->setPreviewPicture($previewPicture);
         }
 
-        $this->em->persist($entry);
-        $this->em->flush();
+        $em = $this->registry->getManager();
+        $em->persist($entry);
+        $em->flush();
     }
 
     /**
@@ -74,6 +81,12 @@ class DownloadImagesSubscriber implements EventSubscriberInterface
      */
     public function onEntryDeleted(EntryDeletedEvent $event)
     {
+        // If there is no manager, this means that only Doctrine DBAL is configured
+        // In this case we can do nothing and just return
+        if (null === $this->registry || !count($this->registry->getManagers())) {
+            return false;
+        }
+
         if (!$this->enabled) {
             $this->logger->debug('DownloadImagesSubscriber: disabled.');
 

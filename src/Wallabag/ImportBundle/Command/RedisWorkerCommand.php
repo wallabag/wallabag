@@ -36,7 +36,7 @@ class RedisWorkerCommand extends ContainerAwareCommand
         $worker = new QueueWorker(
             $this->getContainer()->get('wallabag_import.queue.redis.'.$serviceName),
             $this->getContainer()->get('wallabag_import.consumer.redis.'.$serviceName),
-            (int) $input->getOption('maxIterations')
+            $input->getOption('maxIterations')
         );
 
         $worker->start();

@@ -2,10 +2,9 @@
 
 namespace Wallabag\UserBundle\EventListener;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use FOS\UserBundle\Event\UserEvent;
 use FOS\UserBundle\FOSUserEvents;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Wallabag\CoreBundle\Entity\Config;
 
@@ -15,7 +14,7 @@ use Wallabag\CoreBundle\Entity\Config;
  */
 class CreateConfigListener implements EventSubscriberInterface
 {
-    private $em;
+    private $registry;
     private $theme;
     private $itemsOnPage;
     private $rssLimit;
@@ -24,9 +23,9 @@ class CreateConfigListener implements EventSubscriberInterface
     private $actionMarkAsRead;
     private $listMode;
 
-    public function __construct(EntityManager $em, $theme, $itemsOnPage, $rssLimit, $language, $readingSpeed, $actionMarkAsRead, $listMode)
+    public function __construct(ManagerRegistry $registry = null, $theme, $itemsOnPage, $rssLimit, $language, $readingSpeed, $actionMarkAsRead, $listMode)
     {
-        $this->em = $em;
+        $this->registry = $registry;
         $this->theme = $theme;
         $this->itemsOnPage = $itemsOnPage;
         $this->rssLimit = $rssLimit;
@@ -47,8 +46,16 @@ class CreateConfigListener implements EventSubscriberInterface
         ];
     }
 
-    public function createConfig(UserEvent $event, $eventName = null, EventDispatcherInterface $eventDispatcher = null)
+    public function createConfig(UserEvent $event)
     {
+        // If there is no manager, this means that only Doctrine DBAL is configured
+        // In this case we can do nothing and just return
+        if (null === $this->registry || !count($this->registry->getManagers())) {
+            return false;
+        }
+
+        $em = $this->registry->getManager();
+
         $config = new Config($event->getUser());
         $config->setTheme($this->theme);
         $config->setItemsPerPage($this->itemsOnPage);
@@ -58,7 +65,7 @@ class CreateConfigListener implements EventSubscriberInterface
         $config->setActionMarkAsRead($this->actionMarkAsRead);
         $config->setListMode($this->listMode);
 
-        $this->em->persist($config);
-        $this->em->flush();
+        $em->persist($config);
+        $em->flush();
     }
 }
