@@ -6,12 +6,16 @@ wallabag peut récupérer le contenu des articles des sites qui utilisent un sys
 Activer l'authentification pour les paywall
 -------------------------------------------
 
-Dans les paramètres internes, section **Article**, activez l'authentification pour les articles derrière un paywall (avec la valeur 1).
+Dans les paramètres internes, en tant qu'administrateur de wallabag, section **Article**, activez l'authentification pour les articles derrière un paywall (avec la valeur 1).
 
 Configurer les accès dans wallabag
 ----------------------------------
 
-Éditez le fichier ``app/config/parameters.yml`` pour modifier les accès aux sites avec paywall. Voici un exemple pour certains sites :
+Éditez le fichier ``app/config/parameters.yml`` pour modifier les accès aux sites avec paywall. Par exemple, sous Ubuntu :
+
+``sudo -u www-data nano /var/www/html/wallabag/app/config/parameters.yml``
+
+Voici un exemple pour certains sites (attention, ne pas utiliser la touche "tab", seulement des espaces) :
 
 .. code:: yaml
 
@@ -28,7 +32,7 @@ Fichiers de configuration pour parser les articles
 
 .. note::
 
-    Lisez `cette documentation <http://doc.wallabag.org/fr/master/user/errors_during_fetching.html>`_ pour en savoir plus sur ces fichiers de configuration.
+    Lisez `cette documentation <http://doc.wallabag.org/fr/master/user/errors_during_fetching.html>`_ pour en savoir plus sur ces fichiers de configuration, qui se trouvent dans le répertoire ``vendor/j0k3r/graby-site-config/``. Pour la majorité des sites, ce fichier est déjà configuré : les instructions qui suivent concernent seulement les sites non encore configurés.
 
 Chaque fichier de configuration doit être enrichi en ajoutant ``requires_login``, ``login_uri``,
 ``login_username_field``, ``login_password_field`` et ``not_logged_in_xpath``.
@@ -54,3 +58,8 @@ Par exemple :
     login_password_field: password
 
     not_logged_in_xpath: //body[@class="not-logged-in"]
+
+Dernière étape : nettoyer le cache
+----------------------------------
+
+Il est nécessaire de nettoyer le cache de wallabag avec la commande suivante (ici sous Ubuntu) : ``sudo -u www-data php /var/www/html/wallabag/bin/console cache:clear -e=prod``
