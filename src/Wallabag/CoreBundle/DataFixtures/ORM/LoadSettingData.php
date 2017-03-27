@@ -54,7 +54,7 @@ class LoadSettingData extends AbstractFixture implements OrderedFixtureInterface
                 'name' => 'share_scuttle',
                 'value' => '1',
                 'section' => 'entry',
-            ],            
+            ],
             [
                 'name' => 'shaarli_url',
                 'value' => 'http://myshaarli.com',
@@ -64,7 +64,7 @@ class LoadSettingData extends AbstractFixture implements OrderedFixtureInterface
                 'name' => 'scuttle_url',
                 'value' => 'http://scuttle.org',
                 'section' => 'entry',
-            ],            
+            ],
             [
                 'name' => 'share_mail',
                 'value' => '1',
