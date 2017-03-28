@@ -4,7 +4,7 @@ Installation von wallabag
 Voraussetzungen
 ---------------
 
-wallabag ist kompatibel mit PHP >= 5.5, inkl. PHP 7.
+wallabag ist kompatibel mit **PHP >= 5.6**, inkl. PHP 7.
 
 .. note::
 
