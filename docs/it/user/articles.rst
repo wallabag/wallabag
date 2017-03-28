@@ -83,6 +83,7 @@ Ora potete condividere l'articolo:
 - attraverso una URL pubblica (avrete una vista semplificata dell'articolo)
 - attraverso un tweet
 - nel vostro Shaarli
+- nel vostro Scuttle
 - attraverso un post su Diaspora*
 - su Carrot
 - attraverso un'email

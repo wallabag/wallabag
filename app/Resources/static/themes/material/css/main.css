@@ -160,6 +160,11 @@
   background-image: url("../../_global/img/icons/shaarli.png");
 }
 
+/* Scuttle */
+.icon-image--scuttle {
+  background-image: url("../../_global/img/icons/scuttle.png");
+}
+
 body {
   display: flex;
   min-height: 100vh;
