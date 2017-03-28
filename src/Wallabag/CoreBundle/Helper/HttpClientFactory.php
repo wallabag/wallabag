@@ -6,6 +6,7 @@ use Graby\Ring\Client\SafeCurlHandler;
 use GuzzleHttp\Client;
 use GuzzleHttp\Cookie\CookieJar;
 use GuzzleHttp\Event\SubscriberInterface;
+use Psr\Log\LoggerInterface;
 
 /**
  * Builds and configures the Guzzle HTTP client.
@@ -19,6 +20,7 @@ class HttpClientFactory
     private $cookieJar;
 
     private $restrictedAccess;
+    private $logger;
 
     /**
      * HttpClientFactory constructor.
@@ -26,12 +28,14 @@ class HttpClientFactory
      * @param \GuzzleHttp\Event\SubscriberInterface $authenticatorSubscriber
      * @param \GuzzleHttp\Cookie\CookieJar          $cookieJar
      * @param string                                $restrictedAccess        this param is a kind of boolean. Values: 0 or 1
+     * @param LoggerInterface                       $logger
      */
-    public function __construct(SubscriberInterface $authenticatorSubscriber, CookieJar $cookieJar, $restrictedAccess)
+    public function __construct(SubscriberInterface $authenticatorSubscriber, CookieJar $cookieJar, $restrictedAccess, LoggerInterface $logger)
     {
         $this->authenticatorSubscriber = $authenticatorSubscriber;
         $this->cookieJar = $cookieJar;
         $this->restrictedAccess = $restrictedAccess;
+        $this->logger = $logger;
     }
 
     /**
@@ -39,8 +43,10 @@ class HttpClientFactory
      */
     public function buildHttpClient()
     {
+        $this->logger->log('debug', 'Restricted access config enabled?', array('enabled' => (int) $this->restrictedAccess));
+
         if (0 === (int) $this->restrictedAccess) {
-            return null;
+            return;
         }
 
         // we clear the cookie to avoid websites who use cookies for analytics

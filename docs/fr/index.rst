@@ -34,6 +34,7 @@ La documentation est disponible dans d'autres langues :
    user/errors_during_fetching
    user/filters
    user/tags
+   user/configuring_mobile
    user/android
    user/parameters
    user/backup

@@ -4,7 +4,7 @@ Installer wallabag
 Pré-requis
 ------------
 
-wallabag est compatible avec PHP >= 5.5, PHP 7 inclus.
+wallabag est compatible avec **PHP >= 5.6**, PHP 7 inclus.
 
 .. note::
 
@@ -107,6 +107,12 @@ Virtual hosts
 Configuration avec Apache
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
+N'oubliez pas d'activer le mod *rewrite* de Apache
+
+.. code-block:: bash
+
+    a2enmod rewrite && systemctl reload apache2
+
 En imaginant que vous vouliez installer wallabag dans le dossier ``/var/www/wallabag`` et que vous utilisiez PHP comme un module Apache, voici un vhost pour wallabag :
 
 ::
@@ -146,6 +152,24 @@ En imaginant que vous vouliez installer wallabag dans le dossier ``/var/www/wall
         ErrorLog /var/log/apache2/wallabag_error.log
         CustomLog /var/log/apache2/wallabag_access.log combined
     </VirtualHost>
+
+.. tip:: Pour Apache 2.4, dans la section `<Directory /var/www/wallabag/web>` vous devez remplacer les directives suivantes :
+
+::
+
+    AllowOverride None
+    Order Allow,Deny
+    Allow from All
+
+
+par 
+
+::
+    
+    Require All granted
+    
+
+
 
 Après que vous ayez rechargé/redémarré Apache, vous devriez pouvoir avoir accès à wallabag à l'adresse http://domain.tld.
 

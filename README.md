@@ -8,6 +8,8 @@ Click, save and read it when you can. It extracts content so that you can read i
 
 More information on our website: [wallabag.org](https://wallabag.org).
 
+If you do not have your own server, consider [the wallabag.it hosting solution](https://wallabag.it).
+
 ![wallabag logo](https://raw.githubusercontent.com/wallabag/logo/master/_default/typo-horizontal/png/sm/logo-typo-horizontal-black-no-bg-no-border-sm.png)
 
 # Install wallabag

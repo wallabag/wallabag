@@ -74,6 +74,7 @@ services:
             - "@bd_guzzle_site_authenticator.authenticator_subscriber"
             - "@wallabag_core.guzzle.cookie_jar"
             - '@=service(''craue_config'').get(''restricted_access'')'
+            - '@logger'
 
     wallabag_core.guzzle.cookie_jar:
         class: GuzzleHttp\Cookie\FileCookieJar
