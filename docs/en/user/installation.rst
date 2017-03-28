@@ -4,7 +4,7 @@ Install wallabag
 Requirements
 ------------
 
-wallabag is compatible with PHP >= 5.5, including PHP 7.
+wallabag is compatible with **PHP >= 5.6**, including PHP 7.
 
 .. note::
 
