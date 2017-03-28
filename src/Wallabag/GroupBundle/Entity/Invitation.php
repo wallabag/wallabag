@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
+ * @ORM\Table(name="invitation")
  */
 class Invitation
 {
@@ -42,7 +43,7 @@ class Invitation
     /**
      * @return \DateTime
      */
-    public function getDate(): \DateTime
+    public function getDate()
     {
         return $this->date;
     }
@@ -58,7 +59,7 @@ class Invitation
     /**
      * @return mixed
      */
-    public function getUserGroup(): UserGroup
+    public function getUserGroup()
     {
         return $this->userGroup;
     }

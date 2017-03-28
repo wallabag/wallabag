@@ -325,6 +325,7 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
 
     /**
      * @param Group $group
+     *
      * @return UserGroup
      */
     public function getUserGroupFromGroup(Group $group)
@@ -334,6 +335,7 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
                 return $userGroup;
             }
         }
+
         return null;
     }
 
@@ -351,6 +353,7 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
 
     /**
      * @param Group $group
+     *
      * @return int
      */
     public function getGroupRoleForUser(Group $group)
@@ -358,19 +361,23 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
         if ($userGroup = $this->getUserGroupFromGroup($group)) {
             return $userGroup->getRole();
         }
+
         return 0;
     }
 
     /**
      * @param Group $group
+     *
      * @return bool
      */
     public function inGroup(Group $group)
     {
         if ($group::ACCESS_REQUEST === $group->getAcceptSystem()) {
             $userGroup = $this->getUserGroupFromGroup($group);
+
             return $userGroup->isAccepted();
         }
+
         return null !== $this->getUserGroupFromGroup($group);
     }
 
@@ -383,6 +390,7 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
         foreach ($this->userGroups as $userGroup) {
             $groups->add($userGroup->getGroup());
         }
+
         return $groups;
     }
 }

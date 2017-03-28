@@ -13,9 +13,8 @@ use Wallabag\UserBundle\Entity\User;
  */
 class Group extends BaseGroup
 {
-
     /**
-     * User Roles
+     * User Roles.
      */
 
     /** User can only preview presentations */
@@ -34,7 +33,7 @@ class Group extends BaseGroup
     const ROLE_ADMIN = 10;
 
     /**
-     * Group join access
+     * Group join access.
      */
 
     /** Any user can join the group */
@@ -99,9 +98,10 @@ class Group extends BaseGroup
     {
         $userObj = new ArrayCollection();
         foreach ($this->users as $userGroup) {
-            /** @var UserGroup $userGroup */
+            /* @var UserGroup $userGroup */
             $userObj->add($userGroup->getUser());
         }
+
         return $userObj;
     }
 
@@ -177,24 +177,26 @@ class Group extends BaseGroup
     public function getRequests()
     {
         $requests = new ArrayCollection();
-        foreach ($this->users as $user) /** @var UserGroup $user */
+        foreach ($this->users as $user) /* @var UserGroup $user */
         {
             if (!$user->isAccepted()) {
                 $requests->add($user->getUser());
             }
         }
+
         return $requests;
     }
 
     public function getInvited()
     {
         $invited = new ArrayCollection();
-        foreach ($this->users as $userGroup) /** @var UserGroup $userGroup */
+        foreach ($this->users as $userGroup) /* @var UserGroup $userGroup */
         {
             if ($userGroup->getInvitation()) {
                 $invited->add($userGroup);
             }
         }
+
         return $invited;
     }
 }

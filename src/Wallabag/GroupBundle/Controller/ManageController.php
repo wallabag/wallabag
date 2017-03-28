@@ -25,7 +25,7 @@ class ManageController extends Controller
     /**
      * Lists all public Group entities.
      *
-     * @Route("/{page}", name="group_index", defaults={"page" = "1"})
+     * @Route("/{page}", requirements={"page" = "\d+"}, name="group_index", defaults={"page" = "1"})
      * @Method("GET")
      */
     public function indexAction($page = 1)
@@ -182,24 +182,26 @@ class ManageController extends Controller
 
     /**
      * @Route("/group-user-exclude/{group}/{user}", name="group-user-exclude")
+     *
      * @param Group $group
-     * @param User $user
+     * @param User  $user
+     *
      * @return Response
      */
     public function excludeMemberAction(Group $group, User $user)
     {
         $logger = $this->get('logger');
-        $logger->info('User ' . $this->getUser()->getUsername() . ' wants to exclude user ' . $user->getUsername() . ' from group ' . $group->getName());
+        $logger->info('User '.$this->getUser()->getUsername().' wants to exclude user '.$user->getUsername().' from group '.$group->getName());
 
         if (!$this->getUser()->inGroup($group) || $this->getUser()->getGroupRoleForUser($group) < Group::ROLE_MANAGE_USERS) {
-            $logger->info('User ' . $this->getUser()->getUsername() . ' has not enough rights on group ' . $group->getName() . ' to exclude user ' . $user->getUsername());
+            $logger->info('User '.$this->getUser()->getUsername().' has not enough rights on group '.$group->getName().' to exclude user '.$user->getUsername());
             throw $this->createAccessDeniedException();
         }
 
         if ($user->inGroup($group) && $user->getGroupRoleForUser($group) < Group::ROLE_ADMIN) {
             $em = $this->getDoctrine()->getManager();
 
-            $logger->info('Removing user ' . $this->getUser()->getUsername() . ' from group ' . $group->getName());
+            $logger->info('Removing user '.$this->getUser()->getUsername().' from group '.$group->getName());
             $em->remove($this->getUser()->getUserGroupFromGroup($group));
 
             $em->flush();

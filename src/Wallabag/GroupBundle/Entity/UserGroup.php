@@ -3,15 +3,13 @@
 namespace Wallabag\GroupBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use FOS\UserBundle\Model\GroupInterface;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Wallabag\UserBundle\Entity\User;
 
 /**
  * @ORM\Entity(repositoryClass="Wallabag\GroupBundle\Repository\UserGroupRepository")
  * @UniqueEntity({"user_id", "group_id"})
- * @ORM\Table(name="fos_user_group")
+ * @ORM\Table(name="user_group")
  */
 class UserGroup
 {
@@ -52,7 +50,8 @@ class UserGroup
 
     /**
      * UserGroup constructor.
-     * @param User $user
+     *
+     * @param User  $user
      * @param Group $group
      * @param $role
      */
@@ -90,11 +89,13 @@ class UserGroup
 
     /**
      * @param int $role
+     *
      * @return UserGroup
      */
     public function setRole($role)
     {
         $this->role = $role;
+
         return $this;
     }
 
