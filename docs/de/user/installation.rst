@@ -105,6 +105,14 @@ Kommando, um den Container zu starten
 
     docker pull wallabag/wallabag
 
+Cloudron Installation
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Cloudron bietet einfache Webapp Installation auf deinem Server, mit Fokus auf System Administrator Automatisierung und Updates.
+Ein Wallabag Paket ist direkt zur Installation durch den Cloudron Store verfügbar.
+
+`Installiere wallabag auf deinem Cloudron <https://cloudron.io/store/org.wallabag.cloudronapp.html>`__
+
 Virtualhosts
 ------------
 
