@@ -52,7 +52,7 @@ wallabag_core:
     reading_speed: 1
     cache_lifetime: 10
     action_mark_as_read: 1
-    list_mode: 1
+    list_mode: 0
     fetching_error_message: |
         wallabag can't retrieve contents for this article. Please <a href="http://doc.wallabag.org/en/master/user/errors_during_fetching.html#how-can-i-help-to-fix-that">troubleshoot this issue</a>.
 
