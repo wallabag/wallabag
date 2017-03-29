@@ -144,6 +144,8 @@ class DownloadImages
                 $this->logger->debug('DownloadImages: Re-creating jpg');
                 break;
             case 'png':
+                imagealphablending($im, false);
+                imagesavealpha($im, true);
                 imagepng($im, $localPath, ceil(self::REGENERATE_PICTURES_QUALITY / 100 * 9));
                 $this->logger->debug('DownloadImages: Re-creating png');
         }
