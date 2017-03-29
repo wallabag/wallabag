@@ -108,9 +108,9 @@ Installation on Cloudron
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 Cloudron provides an easy way to install webapps on your server with a focus on sysadmin automation and keeping apps updated.
-Wallabag is packaged as a Cloudron app and available to install directly from the store.
+wallabag is packaged as a Cloudron app and available to install directly from the store.
 
-`Install Wallabag on your Cloudron <https://cloudron.io/store/org.wallabag.cloudronapp.html>`__
+`Install wallabag on your Cloudron <https://cloudron.io/store/org.wallabag.cloudronapp.html>`__
 
 Virtual hosts
 -------------
@@ -163,9 +163,9 @@ Assuming you install wallabag in the ``/var/www/wallabag`` folder and that you w
         ErrorLog /var/log/apache2/wallabag_error.log
         CustomLog /var/log/apache2/wallabag_access.log combined
     </VirtualHost>
-    
-    
-.. tip:: Note for Apache 2.4, in the section `<Directory /var/www/wallabag/web>` you have to replace the directives : 
+
+
+.. tip:: Note for Apache 2.4, in the section `<Directory /var/www/wallabag/web>` you have to replace the directives :
 
 ::
 
@@ -174,12 +174,12 @@ Assuming you install wallabag in the ``/var/www/wallabag`` folder and that you w
     Allow from All
 
 
-by 
+by
 
 ::
-    
+
     Require All granted
-    
+
 
 After reloading or restarting Apache, you should now be able to access wallabag at http://domain.tld.
 

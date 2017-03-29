@@ -101,6 +101,14 @@ Commande pour démarrer le containeur
 
     docker pull wallabag/wallabag
 
+Installation sur Cloudron
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Cloudron permet d'installer des applications web sur votre serveur
+wallabag est proposé en tant qu'application Cloudron et est disponible directement depuis le store.
+
+`Installer wallabag sur Cloudron <https://cloudron.io/store/org.wallabag.cloudronapp.html>`__
+
 Virtual hosts
 -------------
 
@@ -162,12 +170,12 @@ En imaginant que vous vouliez installer wallabag dans le dossier ``/var/www/wall
     Allow from All
 
 
-par 
+par
 
 ::
-    
+
     Require All granted
-    
+
 
 
 
