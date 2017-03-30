@@ -248,7 +248,7 @@ class ConfigController extends Controller
                 break;
 
             case 'entries':
-                // SQLite doesn't care about cascading remove, so we need to manually remove associated stuf
+                // SQLite doesn't care about cascading remove, so we need to manually remove associated stuff
                 // otherwise they won't be removed ...
                 if ($this->get('doctrine')->getConnection()->getDriver() instanceof \Doctrine\DBAL\Driver\PDOSqlite\Driver) {
                     $this->getDoctrine()->getRepository('WallabagAnnotationBundle:Annotation')->removeAllByUserId($this->getUser()->getId());
@@ -260,6 +260,19 @@ class ConfigController extends Controller
                 $this->getDoctrine()
                     ->getRepository('WallabagCoreBundle:Entry')
                     ->removeAllByUserId($this->getUser()->getId());
+                break;
+            case 'archived':
+                if ($this->get('doctrine')->getConnection()->getDriver() instanceof \Doctrine\DBAL\Driver\PDOSqlite\Driver) {
+                    $this->removeAnnotationsForArchivedByUserId($this->getUser()->getId());
+                }
+
+                // manually remove tags to avoid orphan tag
+                $this->removeTagsForArchivedByUserId($this->getUser()->getId());
+
+                $this->getDoctrine()
+                    ->getRepository('WallabagCoreBundle:Entry')
+                    ->removeArchivedByUserId($this->getUser()->getId());
+                break;
         }
 
         $this->get('session')->getFlashBag()->add(
@@ -294,6 +307,50 @@ class ConfigController extends Controller
             if (count($tag->getEntries()) === 0) {
                 $em->remove($tag);
             }
+        }
+
+        $em->flush();
+    }
+
+    /**
+     * Remove all tags for a given user and cleanup orphan tags.
+     *
+     * @param int $userId
+     */
+    private function removeTagsForArchivedByUserId($userId)
+    {
+        $tags = $this->getDoctrine()->getRepository('WallabagCoreBundle:Tag')->findTagsForArchivedArticles($userId);
+
+        if (empty($tags)) {
+            return;
+        }
+
+        $this->getDoctrine()
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->removeTags($userId, $tags);
+
+        // cleanup orphan tags
+        $em = $this->getDoctrine()->getManager();
+
+        foreach ($tags as $tag) {
+            if (count($tag->getEntries()) === 0) {
+                $em->remove($tag);
+            }
+        }
+
+        $em->flush();
+    }
+
+    private function removeAnnotationsForArchivedByUserId($userId)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $archivedEntriesAnnotations = $this->getDoctrine()
+            ->getRepository('WallabagAnnotationBundle:Annotation')
+            ->findAllByArchivedEntriesAndUserId($userId);
+
+        foreach ($archivedEntriesAnnotations as $archivedEntriesAnnotation) {
+            $em->remove($archivedEntriesAnnotation);
         }
 
         $em->flush();

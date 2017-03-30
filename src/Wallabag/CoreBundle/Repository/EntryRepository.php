@@ -371,4 +371,12 @@ class EntryRepository extends EntityRepository
             ->setParameter('userId', $userId)
             ->execute();
     }
+
+    public function removeArchivedByUserId($userId)
+    {
+        $this->getEntityManager()
+            ->createQuery('DELETE FROM Wallabag\CoreBundle\Entity\Entry e WHERE e.user = :userId AND e.isArchived = TRUE')
+            ->setParameter('userId', $userId)
+            ->execute();
+    }
 }

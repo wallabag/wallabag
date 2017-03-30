@@ -122,4 +122,20 @@ class AnnotationRepository extends EntityRepository
             ->setParameter('userId', $userId)
             ->execute();
     }
+
+    /**
+     * Find all annotations related to archived entries
+     *
+     * @param $userId
+     * @return mixed
+     */
+    public function findAllByArchivedEntriesAndUserId($userId)
+    {
+        return $this->createQueryBuilder('a')
+            ->leftJoin('a.entry', 'e')
+            ->where('a.user = :userid')->setParameter(':userid', $userId)
+            ->andWhere('e.isArchived = true')
+            ->getQuery()
+            ->getResult();
+    }
 }

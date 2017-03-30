@@ -110,6 +110,7 @@ config:
         annotations: Eliminar TODAS las anotaciones
         tags: Eliminar TODAS las etiquetas
         entries: Eliminar TODOS los artículos
+        # archived: Remove ALL archived entries
         confirm: ¿Estás completamente seguro? (NO SE PUEDE DESHACER)
     form_password:
         description: "Puedes cambiar la contraseña aquí. Tu nueva contraseña debe tener al menos 8 caracteres."
@@ -528,6 +529,7 @@ flashes:
             annotations_reset: Anotaciones reiniciadas
             tags_reset: Etiquetas reiniciadas
             entries_reset: Artículos reiniciados
+            # archived_reset: Archived entries deleted
     entry:
         notice:
             entry_already_saved: 'Artículo ya guardado el %fecha%'

@@ -110,6 +110,7 @@ config:
         # annotations: Remove ALL annotations
         # tags: Remove ALL tags
         # entries: Remove ALL entries
+        # archived: Remove ALL archived entries
         # confirm: Are you really really sure? (THIS CAN'T BE UNDONE)
     form_password:
         # description: "You can change your password here. Your new password should by at least 8 characters long."
@@ -528,6 +529,7 @@ flashes:
             # annotations_reset: Annotations reset
             # tags_reset: Tags reset
             # entries_reset: Entries reset
+            # archived_reset: Archived entries deleted
     entry:
         notice:
             # entry_already_saved: 'Entry already saved on %date%'

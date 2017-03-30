@@ -76,4 +76,24 @@ class TagRepository extends EntityRepository
             ->getQuery()
             ->getSingleResult();
     }
+
+    public function findTagsForArchivedArticles($userId)
+    {
+        $ids = $this->createQueryBuilder('t')
+            ->select('t.id')
+            ->leftJoin('t.entries', 'e')
+            ->where('e.user = :userId')->setParameter('userId', $userId)
+            ->andWhere('e.isArchived = true')
+            ->groupBy('t.id')
+            ->orderBy('t.slug')
+            ->getQuery()
+            ->getArrayResult();
+
+        $tags = [];
+        foreach ($ids as $id) {
+            $tags[] = $this->find($id);
+        }
+
+        return $tags;
+    }
 }

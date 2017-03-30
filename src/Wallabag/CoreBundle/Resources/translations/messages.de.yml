@@ -110,6 +110,7 @@ config:
         annotations: Entferne ALLE Annotationen
         tags: Entferne ALLE Tags
         entries: Entferne ALLE Einträge
+        # archived: Remove ALL archived entries
         confirm: Bist du wirklich sicher? (DIES KANN NICHT RÜCKGÄNGIG GEMACHT WERDEN)
     form_password:
         description: "Hier kannst du dein Kennwort ändern. Dieses sollte mindestens acht Zeichen enthalten."
@@ -528,6 +529,7 @@ flashes:
             annotations_reset: Anmerkungen zurücksetzen
             tags_reset: Tags zurücksetzen
             entries_reset: Einträge zurücksetzen
+            # archived_reset: Archived entries deleted
     entry:
         notice:
             entry_already_saved: 'Eintrag bereits am %date% gespeichert'
