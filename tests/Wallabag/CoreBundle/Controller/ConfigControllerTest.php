@@ -798,7 +798,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $entryReset = $em
             ->getRepository('WallabagCoreBundle:Entry')
-            ->countAllEntriesByUsername($user->getId());
+            ->countAllEntriesByUser($user->getId());
 
         $this->assertEquals(0, $entryReset, 'Entries were reset');
     }
@@ -843,7 +843,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $entryReset = $em
             ->getRepository('WallabagCoreBundle:Entry')
-            ->countAllEntriesByUsername($user->getId());
+            ->countAllEntriesByUser($user->getId());
 
         $this->assertEquals(0, $entryReset, 'Entries were reset');
 

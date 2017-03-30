@@ -328,7 +328,7 @@ class EntryRepository extends EntityRepository
      *
      * @return int
      */
-    public function countAllEntriesByUsername($userId)
+    public function countAllEntriesByUser($userId)
     {
         $qb = $this->createQueryBuilder('e')
             ->select('count(e)')
