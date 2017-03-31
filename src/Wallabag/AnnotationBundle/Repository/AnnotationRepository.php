@@ -124,9 +124,10 @@ class AnnotationRepository extends EntityRepository
     }
 
     /**
-     * Find all annotations related to archived entries
+     * Find all annotations related to archived entries.
      *
      * @param $userId
+     *
      * @return mixed
      */
     public function findAllByArchivedEntriesAndUserId($userId)
