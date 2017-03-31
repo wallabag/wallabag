@@ -1,0 +1,26 @@
+.login {
+  background-color: #333;
+
+  #main {
+    padding: 0;
+    margin: 0;
+  }
+
+  form {
+    background-color: #fff;
+    padding: 1.5em;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.9);
+    width: 20em;
+    position: absolute;
+    top: 8em;
+    left: 50%;
+    margin-left: -10em;
+  }
+
+  .logo {
+    position: absolute;
+    top: 2em;
+    left: 50%;
+    margin-left: -55px;
+  }
+}

@@ -1,0 +1,41 @@
+/* ==========================================================================
+   Side-nav
+   ========================================================================== */
+
+.side-nav {
+  width: 240px;
+
+  li {
+    padding: 0;
+  }
+
+  a {
+    margin: 0 1rem;
+  }
+
+  &.fixed a {
+    font-size: 13px;
+    line-height: 44px;
+    height: 44px;
+  }
+
+  .collapsible-header,
+  &.fixed .collapsible-header {
+    height: 45px;
+    line-height: 44px;
+    padding: 0 20px;
+  }
+
+  > li.logo {
+    line-height: 0;
+    text-align: center;
+  }
+}
+
+.bold > a {
+  font-weight: bold;
+}
+
+span.numberItems {
+  float: right;
+}

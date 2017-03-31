@@ -27,6 +27,7 @@ web/bundles/*
 !web/bundles/wallabagcore
 /web/assets/images/*
 !web/assets/images/.gitkeep
+web/bundles/wallabagcore/*.dev.js
 
 # Build
 /app/build

@@ -3,6 +3,9 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
 
+parameters:
+    use_webpack_dev_server: true
+
 framework:
     #esi:             ~
     translator:

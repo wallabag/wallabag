@@ -1,0 +1,186 @@
+/* ==========================================================================
+   Cards
+   ========================================================================== */
+
+main {
+  #content {
+    padding: 0 0.5rem;
+  }
+
+  ul.row {
+    padding: 0 0.75rem;
+  }
+}
+
+.data .card .card-body {
+  height: 19em;
+  overflow: hidden;
+}
+
+.card {
+  .card-content .card-title,
+  .card-reveal .card-title {
+    line-height: 22.8px;
+    max-height: 80px;
+    font-size: 19px;
+    font-family: roberto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #313131;
+  }
+
+  .card-content .activator,
+  .card-reveal .activator {
+    cursor: pointer;
+    font-family: "Material Icons";
+  }
+
+  .card-content i.right,
+  .card-reveal i.right {
+    margin-left: 0;
+  }
+
+  .card-content .original {
+    line-height: 24px;
+    font-size: 15px;
+  }
+
+  .card-entry-labels {
+    position: absolute;
+    top: 10px;
+    z-index: 90;
+    max-width: 50%;
+  }
+
+  .card-entry-labels-hidden {
+    margin: 2.5px auto;
+  }
+
+  .card-entry-labels-hidden li {
+    display: inline-block;
+    background-color: $blueAccentColor;
+    margin: 0 5px;
+    padding: 5px 12px;
+    border-radius: 3px;
+    color: #fff;
+    max-height: 2em;
+    max-width: calc(100% - 15px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .card-entry-labels-hidden li {
+    display: inline-block;
+    background-color: $blueAccentColor;
+    margin: 0 5px;
+    padding: 5px 12px;
+    border-radius: 3px;
+    color: #fff;
+    max-height: 2em;
+    max-width: calc(100% - 15px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .card-content .estimatedTime {
+    margin-bottom: 10px;
+  }
+
+  .card-action {
+    padding: 10px 5px 10px 15px;
+
+    ul.links {
+      margin: 0;
+      font-size: 24px;
+      line-height: 24px;
+    }
+
+    a {
+      color: #fff;
+      margin: 0;
+    }
+
+    a:hover {
+      color: #fff;
+    }
+
+    ul.tools li a.tool {
+      margin-right: 5px !important;
+    }
+
+    .reading-time {
+      display: inline-flex;
+      vertical-align: middle;
+    }
+  }
+
+  .card-entry-labels li,
+  .card-tag-labels li {
+    margin: 10px 10px 10px auto;
+    padding: 5px 12px 5px 16px !important;
+    background-color: $blueAccentColor;
+    border-radius: 0 3px 3px 0;
+    color: #fff;
+    cursor: default;
+    max-height: 2em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .card-image {
+    height: 10em;
+  }
+
+  .card-fullimage {
+    height: 13.5em;
+  }
+
+  .card-image .preview,
+  .card-fullimage .preview {
+    height: 14em;
+    background: no-repeat 50%/cover;
+  }
+
+  &.sw {
+    max-width: 370px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+a.original {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  display: block;
+}
+
+.card-entry-tags a,
+.card-entry-labels a,
+.card-tag-labels a,
+.card-entry-labels-hidden a,
+#list .chip a {
+  text-decoration: none;
+  font-weight: normal;
+  color: #fff;
+}
+
+.card-stacked {
+  &:hover ul.tools-list {
+    display: block;
+  }
+
+  ul.tools-list {
+    display: none;
+  }
+}
+
+.quickstart .card .card-action a,
+.quickstart .card .card-action a:hover {
+  color: #fff !important;
+}
+
+.settings .div_tabs {
+  padding-bottom: 15px;
+}

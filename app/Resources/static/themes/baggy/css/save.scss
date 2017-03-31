@@ -1,0 +1,115 @@
+/* ==========================================================================
+  "save a link" related styles
+  ========================================================================== */
+
+.popup-form {
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  left: 10em;
+  z-index: 20;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  margin-top: -30% !important;
+  padding: 2em;
+  display: none;
+  border-left: 1px #eee solid;
+
+  form {
+    background-color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 20;
+    border: 10px solid #000;
+    width: 400px;
+    height: 200px;
+    padding: 2em;
+  }
+}
+
+#bagit-form-form .addurl {
+  margin-left: 0;
+}
+
+.closeMessage,
+.close-button {
+  background-color: #000;
+  color: #fff;
+  font-size: 1.2em;
+  line-height: 1.6;
+  width: 1.6em;
+  height: 1.6em;
+  text-align: center;
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    background-color: #999;
+    color: #000;
+  }
+}
+
+.close-button--popup {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 1.4em;
+}
+
+.active-current {
+  background-color: #999;
+
+  &::after {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    border: 10px solid transparent;
+    border-right-color: #eee;
+    right: 0;
+    top: 50%;
+    margin-top: -10px;
+  }
+}
+
+.opacity03 {
+  opacity: 0.3;
+}
+
+.add-to-wallabag-link-after {
+  background-color: #000;
+  color: #fff;
+  padding: 0 3px 2px;
+}
+
+a.add-to-wallabag-link-after {
+  visibility: hidden;
+  position: absolute;
+  opacity: 0;
+  transition-duration: 2s;
+  transition-timing-function: ease-out;
+}
+
+#article article a:hover + a.add-to-wallabag-link-after,
+a.add-to-wallabag-link-after:hover {
+  opacity: 1;
+  visibility: visible;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in;
+}
+
+a.add-to-wallabag-link-after::after {
+  content: "w";
+}
+
+#add-link-result {
+  font-weight: bold;
+  font-size: 0.9em;
+}
+
+.btn-clickable {
+  cursor: pointer;
+}

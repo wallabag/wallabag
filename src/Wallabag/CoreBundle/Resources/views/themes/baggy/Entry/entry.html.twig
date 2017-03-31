@@ -77,7 +77,7 @@
                     <span class="label-outline"><i class="material-icons">label_outline</i> <a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a> <a href="{{ path('remove_tag', { 'entry': entry.id, 'tag': tag.id }) }}" class="nostyle"><i>✘</i></a></span>
                 {% endfor %}
                 </div>
-                <div class="input-field nav-panel-add-tag" style="display: none">
+                <div class="input-field baggy-add-tag" style="display: none">
                     {{ render(controller( "WallabagCoreBundle:Tag:addTagForm", { 'id': entry.id } )) }}
                 </div>
             </aside>

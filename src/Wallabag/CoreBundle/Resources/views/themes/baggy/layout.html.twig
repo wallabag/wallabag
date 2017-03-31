@@ -2,12 +2,14 @@
 
 {% block css %}
     {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('bundles/wallabagcore/themes/baggy/css/style.min.css') }}"  media="screen,projection,print"/>
+    {% if not app.debug %}
+        <link rel="stylesheet" href="{{ asset('bundles/wallabagcore/baggy.css') }}">
+    {% endif %}
 {% endblock %}
 
 {% block scripts %}
     {{ parent() }}
-    <script src="{{ asset('bundles/wallabagcore/themes/baggy/js/baggy.min.js') }}"></script>
+    <script src="{{ asset('bundles/wallabagcore/baggy' ~ (app.debug ? '.dev' : '') ~ '.js') }}"></script>
 {% endblock %}
 
 {% block header %}
