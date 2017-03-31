@@ -608,46 +608,32 @@ class EntryController extends Controller
     }
 
     /**
-     * Get the progress of an entry.
-     *
-     * @param Entry $entry
-     *
-     * @Route("/progress/{entry}", name="get_progress")
-     *
-     * @return JsonResponse
-     */
-    public function getEntriesProgressAction(Entry $entry)
-    {
-        $this->checkUserAction($entry);
-
-        $json = $this->get('serializer')->serialize($entry->getProgress(), 'json');
-
-        return (new JsonResponse())->setJson($json);
-    }
-
-    /**
      * Set the progress of an entry.
      *
      * @param Entry $entry
      * @param int   $progress
      *
-     * @Route("/set-progress/{entry}", name="set_progress")
+     * @Route("/progress/{entry}/{progress}", name="set_progress")
      *
      * @return JsonResponse
      */
-    public function setEntriesProgressAction(Entry $entry, $progress)
+    public function setEntriesProgressAction(Entry $entry, $progress = 0)
     {
         $this->checkUserAction($entry);
         $response = new JsonResponse();
 
-        if (is_null($progress)) {
-            $response->setStatusCode(Response::HTTP_BAD_REQUEST);
-        } else {
-            $progress = (int) $progress;
-            if ($progress >= 0 && $progress <= 100) {
-                $entry->setProgress($progress);
-                $response->setStatusCode(Response::HTTP_OK);
-            }
+        $progress = (int) $progress;
+        if ($progress >= 0 && $progress <= 100) {
+            $em = $this->getDoctrine()->getManager();
+
+            $entry->setProgress($progress);
+
+            $this->get('logger')->info('Set progress to ' . $progress);
+
+            $em->persist($entry);
+            $em->flush();
+
+            $response->setStatusCode(Response::HTTP_OK);
         }
 
         return $response;

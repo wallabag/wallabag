@@ -9,6 +9,9 @@ import './js/shortcuts/entry';
 
 /* Tools */
 import toggleSaveLinkForm from './js/uiTools';
+import {savePercent, retrievePercent, throttle} from '../_global/js/tools';
+
+global.jquery = $;
 
 /* Theme style */
 import './css/index.scss';
@@ -47,6 +50,39 @@ $(document).ready(() => {
       $('#filters input').val('');
       $('#filters :checked').removeAttr('checked');
       return false;
+    });
+  }
+
+  /* ==========================================================================
+     Annotations & Remember position
+     ========================================================================== */
+
+  if ($('article').length) {
+    const app = new annotator.App();
+
+    app.include(annotator.ui.main, {
+      element: document.querySelector('article'),
+    });
+
+    const x = JSON.parse($('#annotationroutes').html());
+    app.include(annotator.storage.http, x);
+
+    app.start().then(() => {
+      app.annotations.load({ entry: x.entryId });
+    });
+
+    window.addEventListener('unload', () => {
+      const scrollTop = $(window).scrollTop();
+      const docHeight = $(document).height();
+      const scrollPercent = (scrollTop) / (docHeight);
+      const scrollPercentRounded = Math.round(scrollPercent * 100) / 100;
+      savePercent(x.entryId, scrollPercentRounded);
+    });
+
+    retrievePercent(x.entryId);
+
+    $(window).resize(() => {
+      retrievePercent(x.entryId);
     });
   }
 

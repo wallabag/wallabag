@@ -211,7 +211,7 @@
 {% endblock %}
 
 {% block content %}
-    <div id="article">
+    <div id="article" data-progress="{{ entry.progress }}">
         <header class="mbm">
             <h1>{{ entry.title|striptags|raw }} <a href="{{ path('edit', { 'id': entry.id }) }}" title="{{ 'entry.view.edit_title'|trans }}">✎</a></h1>
         </header>
