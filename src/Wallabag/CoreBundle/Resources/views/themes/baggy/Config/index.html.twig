@@ -200,6 +200,11 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ path('config_reset', { type: 'archived'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
+                        {{ 'config.reset.archived'|trans }}
+                    </a>
+                </li>
+                <li>
                     <a href="{{ path('config_reset', { type: 'entries'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
                         {{ 'config.reset.entries'|trans }}
                     </a>

@@ -110,6 +110,7 @@ config:
         annotations: Supprimer TOUTES les annotations
         tags: Supprimer TOUS les tags
         entries: Supprimer TOUS les articles
+        archived: Supprimer TOUS les articles archivés
         confirm: Êtes-vous vraiment vraiment sûr ? (C'EST IRRÉVERSIBLE)
     form_password:
         description: "Vous pouvez changer ici votre mot de passe. Le mot de passe doit contenir au moins 8 caractères."
@@ -528,6 +529,7 @@ flashes:
             annotations_reset: Annotations supprimées
             tags_reset: Tags supprimés
             entries_reset: Articles supprimés
+            archived_reset: Articles archivés supprimés
     entry:
         notice:
             entry_already_saved: "Article déjà sauvegardé le %date%"

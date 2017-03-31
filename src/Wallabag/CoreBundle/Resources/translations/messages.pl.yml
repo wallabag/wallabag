@@ -110,6 +110,7 @@ config:
         annotations: Usuń WSZYSTKIE adnotacje
         tags: Usuń WSZYSTKIE tagi
         entries: usuń WSZYTSTKIE wpisy
+        # archived: Remove ALL archived entries
         confirm: Jesteś pewien? (tej operacji NIE MOŻNA cofnąć)
     form_password:
         description: "Tutaj możesz zmienić swoje hasło. Twoje nowe hasło powinno mieć conajmniej 8 znaków."
@@ -528,6 +529,7 @@ flashes:
             annotations_reset: Zresetuj adnotacje
             tags_reset: Zresetuj tagi
             entries_reset: Zresetuj wpisy
+            # archived_reset: Archived entries deleted
     entry:
         notice:
             entry_already_saved: 'Wpis już został dodany %date%'

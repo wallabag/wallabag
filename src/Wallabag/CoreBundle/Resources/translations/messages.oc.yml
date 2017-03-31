@@ -110,6 +110,7 @@ config:
         annotations: Levar TOTAS las anotacions
         tags: Levar TOTAS las etiquetas
         entries: Levar TOTES los articles
+        # archived: Remove ALL archived entries
         confirm: Sètz vertadièrament segur ? (ES IRREVERSIBLE)
     form_password:
         description: "Podètz cambiar vòstre senhal aquí. Vòstre senhal deu èsser long d'almens 8 caractèrs."
@@ -528,6 +529,7 @@ flashes:
             annotations_reset: Anotacions levadas
             tags_reset: Etiquetas levadas
             entries_reset: Articles levats
+            # archived_reset: Archived entries deleted
     entry:
         notice:
             entry_already_saved: 'Article ja salvargardat lo %date%'
