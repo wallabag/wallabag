@@ -104,6 +104,14 @@ config:
             description: If you remove your account, ALL your articles, ALL your tags, ALL your annotations and your account will be PERMANENTLY removed (it can't be UNDONE). You'll then be logged out.
             confirm: Are you really sure? (THIS CAN'T BE UNDONE)
             button: Delete my account
+    twofactor:
+        title: Two factor authentication
+        disable: Disable this feature
+        email: By email
+        application:
+            title: By an application
+            description: "In your authentication application, scan the below QR code or type the following code:"
+            regenerate: Regenerate the code
     reset:
         title: Reset area (a.k.a danger zone)
         description: By hitting buttons below you'll have ability to remove some information from your account. Be aware that these actions are IRREVERSIBLE.

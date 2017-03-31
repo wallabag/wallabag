@@ -1,17 +1,24 @@
 /* ==========================================================================
  * Various
  * ========================================================================== */
-
-div.settings div.file-field {
-  /* force height on non-input field in the settings page */
-  div,
-  ul {
-    margin-top: 40px;
+div.settings {
+  input[type="radio"] {
+    position: relative;
+    left: auto;
+    opacity: 1;
   }
 
-  /* but avoid to kill all file input */
-  div {
-    margin-top: inherit;
+  div.file-field {
+    /* force height on non-input field in the settings page */
+    div,
+    ul {
+      margin-top: 40px;
+    }
+
+    /* but avoid to kill all file input */
+    div {
+      margin-top: inherit;
+    }
   }
 }
 

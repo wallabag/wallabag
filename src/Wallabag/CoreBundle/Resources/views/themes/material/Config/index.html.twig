@@ -7,7 +7,6 @@
     <div class="row">
         <div class="col s12">
             <div class="card-panel settings">
-
                 <div class="row">
                     <div class="div_tabs col s12">
                         <ul class="tabs">
@@ -196,21 +195,53 @@
                             </div>
 
                             {% if twofactor_auth %}
+
                             <div class="row">
-                                <div class="input-field col s11">
-                                    {{ 'config.form_user.two_factor_description'|trans }}
+                                <h5>{{ 'config.twofactor.title'|trans }}</h5>
 
-                                    <br />
+                                <h6><label><input type="radio" name="2auth_method" value="disabled" {% if twoAuthMethod is null %}checked="checked"{% endif %} /> {{ 'config.twofactor.disable'|trans }}</label></h6>
 
-                                    {{ form_widget(form.user.twoFactorAuthentication) }}
-                                    {{ form_label(form.user.twoFactorAuthentication) }}
-                                    {{ form_errors(form.user.twoFactorAuthentication) }}
-                                </div>
-                                <div class="input-field col s1">
-                                    <a href="#" class="tooltipped" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_user.help_twoFactorAuthentication'|trans }}">
-                                        <i class="material-icons">live_help</i>
-                                    </a>
-                                </div>
+                                <h6><label><input type="radio" name="2auth_method" value="email" {% if twoAuthMethod == 'email' %}checked="checked"{% endif %} /> {{ 'config.twofactor.email'|trans }}</label></h6>
+
+                                    <div class="row">
+                                        <div class="input-field col s11">
+                                            {{ 'config.form_user.two_factor_description'|trans }}
+
+                                            <br />
+
+                                            {{ form_widget(form.user.twoFactorAuthentication) }}
+                                            {{ form_label(form.user.twoFactorAuthentication) }}
+                                            {{ form_errors(form.user.twoFactorAuthentication) }}
+                                        </div>
+                                        <div class="input-field col s1">
+                                            <a href="#" class="tooltipped" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_user.help_twoFactorAuthentication'|trans }}">
+                                                <i class="material-icons">live_help</i>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                <h6><label><input type="radio" name="2auth_method" value="application" {% if twoAuthMethod == 'application' %}checked="checked"{% endif %} /> {{ 'config.twofactor.application.title'|trans }}</label></h6>
+
+                                    <div class="row">
+                                        <div class="input-field col s11">
+                                            {{ 'config.twofactor.application.description'|trans }} {{ app.user.googleAuthenticatorSecret }}
+                                            <br />
+                                            {% if app.user.googleAuthenticatorSecret is  not null %}
+                                                <img id="googleAuthQrCode" class="hide-on-med-and-down" />
+                                                <script>
+                                                    const imgGoogleAuthBase64 = jrQrcode.getQrBase64('{{ google_auth_url }}');
+                                                    document.getElementById('googleAuthQrCode').src = imgGoogleAuthBase64;
+                                                </script>
+                                            {% endif %}
+                                            <br />
+                                            <a href="{{ path('google_auth') }}">{{ 'config.twofactor.application.regenerate'|trans }}</a>
+                                        </div>
+                                        <div class="input-field col s1">
+                                            <a href="#" class="tooltipped" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_user.help_twoFactorAuthentication'|trans }}">
+                                                <i class="material-icons">live_help</i>
+                                            </a>
+                                        </div>
+                                    </div>
                             </div>
                             {% endif %}
 

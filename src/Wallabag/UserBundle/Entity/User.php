@@ -8,6 +8,8 @@ use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\XmlRoot;
 use Scheb\TwoFactorBundle\Model\Email\TwoFactorInterface;
 use Scheb\TwoFactorBundle\Model\TrustedComputerInterface;
+use Scheb\TwoFactorBundle\Model\Google\TwoFactorInterface as GoogleTwoFactorInterface;
+use Scheb\TwoFactorBundle\Model\BackupCodeInterface;
 use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -26,7 +28,7 @@ use Wallabag\CoreBundle\Entity\Entry;
  * @UniqueEntity("email")
  * @UniqueEntity("username")
  */
-class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterface
+class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterface, GoogleTwoFactorInterface, BackupCodeInterface
 {
     /** @Serializer\XmlAttribute */
     /**
@@ -101,6 +103,16 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
      * @ORM\Column(type="boolean")
      */
     private $twoFactorAuthentication = false;
+
+    /**
+     * @ORM\Column(name="googleAuthenticatorSecret", type="string", nullable=true)
+     */
+    private $googleAuthenticatorSecret;
+
+    /**
+     * @ORM\Column(type="json_array", nullable=true)
+     */
+    private $backupCodes;
 
     /**
      * @ORM\Column(type="json_array", nullable=true)
@@ -287,5 +299,40 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
     public function getClients()
     {
         return $this->clients;
+    }
+
+    public function getGoogleAuthenticatorSecret()
+    {
+        return $this->googleAuthenticatorSecret;
+    }
+
+    public function setGoogleAuthenticatorSecret($googleAuthenticatorSecret)
+    {
+        $this->googleAuthenticatorSecret = $googleAuthenticatorSecret;
+    }
+
+    /**
+     * Check if it is a valid backup code.
+     *
+     * @param string $code
+     *
+     * @return bool
+     */
+    public function isBackupCode($code)
+    {
+        return in_array($code, $this->backupCodes);
+    }
+
+    /**
+     * Invalidate a backup code.
+     *
+     * @param string $code
+     */
+    public function invalidateBackupCode($code)
+    {
+        $key = array_search($code, $this->backupCodes);
+        if ($key !== false) {
+            unset($this->backupCodes[$key]);
+        }
     }
 }
