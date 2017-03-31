@@ -284,14 +284,13 @@ class ConfigController extends Controller
     }
 
     /**
-     * Remove all tags for a given user and cleanup orphan tags.
+     * Remove all tags for given tags and a given user and cleanup orphan tags.
      *
-     * @param int $userId
+     * @param array $tags
+     * @param int   $userId
      */
-    private function removeAllTagsByUserId($userId)
+    private function removeAllTagsByStatusAndUserId($tags, $userId)
     {
-        $tags = $this->getDoctrine()->getRepository('WallabagCoreBundle:Tag')->findAllTags($userId);
-
         if (empty($tags)) {
             return;
         }
@@ -317,28 +316,21 @@ class ConfigController extends Controller
      *
      * @param int $userId
      */
+    private function removeAllTagsByUserId($userId)
+    {
+        $tags = $this->getDoctrine()->getRepository('WallabagCoreBundle:Tag')->findAllTags($userId);
+        $this->removeAllTagsByStatusAndUserId($tags, $userId);
+    }
+
+    /**
+     * Remove all tags for a given user and cleanup orphan tags.
+     *
+     * @param int $userId
+     */
     private function removeTagsForArchivedByUserId($userId)
     {
         $tags = $this->getDoctrine()->getRepository('WallabagCoreBundle:Tag')->findTagsForArchivedArticles($userId);
-
-        if (empty($tags)) {
-            return;
-        }
-
-        $this->getDoctrine()
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->removeTags($userId, $tags);
-
-        // cleanup orphan tags
-        $em = $this->getDoctrine()->getManager();
-
-        foreach ($tags as $tag) {
-            if (count($tag->getEntries()) === 0) {
-                $em->remove($tag);
-            }
-        }
-
-        $em->flush();
+        $this->removeAllTagsByStatusAndUserId($tags, $userId);
     }
 
     private function removeAnnotationsForArchivedByUserId($userId)
