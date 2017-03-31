@@ -329,7 +329,7 @@ class ConfigController extends Controller
      */
     private function removeTagsForArchivedByUserId($userId)
     {
-        $tags = $this->getDoctrine()->getRepository('WallabagCoreBundle:Tag')->findTagsForArchivedArticles($userId);
+        $tags = $this->getDoctrine()->getRepository('WallabagCoreBundle:Tag')->findForArchivedArticlesByUser($userId);
         $this->removeAllTagsByStatusAndUserId($tags, $userId);
     }
 
@@ -339,7 +339,7 @@ class ConfigController extends Controller
 
         $archivedEntriesAnnotations = $this->getDoctrine()
             ->getRepository('WallabagAnnotationBundle:Annotation')
-            ->findAllByArchivedEntriesAndUserId($userId);
+            ->findAllArchivedEntriesByUser($userId);
 
         foreach ($archivedEntriesAnnotations as $archivedEntriesAnnotation) {
             $em->remove($archivedEntriesAnnotation);

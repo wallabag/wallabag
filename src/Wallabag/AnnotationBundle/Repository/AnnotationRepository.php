@@ -130,7 +130,7 @@ class AnnotationRepository extends EntityRepository
      *
      * @return mixed
      */
-    public function findAllByArchivedEntriesAndUserId($userId)
+    public function findAllArchivedEntriesByUser($userId)
     {
         return $this->createQueryBuilder('a')
             ->leftJoin('a.entry', 'e')

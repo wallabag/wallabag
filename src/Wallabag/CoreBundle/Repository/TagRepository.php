@@ -77,7 +77,7 @@ class TagRepository extends EntityRepository
             ->getSingleResult();
     }
 
-    public function findTagsForArchivedArticles($userId)
+    public function findForArchivedArticlesByUser($userId)
     {
         $ids = $this->createQueryBuilder('t')
             ->select('t.id')
