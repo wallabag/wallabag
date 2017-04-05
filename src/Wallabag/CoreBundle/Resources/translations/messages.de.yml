@@ -224,6 +224,7 @@ entry:
         original_article: 'original'
         annotations_on_the_entry: '{0} Keine Anmerkungen|{1} Eine Anmerkung|]1,Inf[ %count% Anmerkungen'
         created_at: 'Erstellungsdatum'
+        # published_at: 'Publication date'
     new:
         page_title: 'Neuen Artikel speichern'
         placeholder: 'https://website.de'

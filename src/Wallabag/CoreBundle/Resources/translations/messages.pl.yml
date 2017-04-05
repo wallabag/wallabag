@@ -224,6 +224,7 @@ entry:
         original_article: 'oryginalny'
         annotations_on_the_entry: '{0} Nie ma adnotacji |{1} Jedna adnotacja |]1,Inf[ %count% adnotacji'
         created_at: 'Czas stworzenia'
+        # published_at: 'Publication date'
     new:
         page_title: 'Zapisz nowy wpis'
         placeholder: 'http://website.com'

@@ -138,6 +138,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
         $this->assertEquals($this->url, $content->getUrl());
         $this->assertContains('Google', $content->getTitle());
+        $this->assertEquals('2015-03-28 15:37:39', $content->getPublishedAt());
     }
 
     public function testPostNewOkUrlExist()

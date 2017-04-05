@@ -224,6 +224,7 @@ entry:
         original_article: 'orijinal'
         # annotations_on_the_entry: '{0} No annotations|{1} One annotation|]1,Inf[ %count% annotations'
         created_at: 'Oluşturulma tarihi'
+        # published_at: 'Publication date'
     new:
         page_title: 'Yeni makaleyi kaydet'
         placeholder: 'http://website.com'

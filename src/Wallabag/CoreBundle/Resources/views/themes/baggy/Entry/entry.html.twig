@@ -44,8 +44,14 @@
 
         <div id="article-informations">
             <i class="tool icon icon-calendar" title="{{ 'entry.view.created_at'|trans }}">
-                {{ entry.createdAt|date('Y-m-d') }}
+                {{ entry.createdAt|date('Y-m-d H:i') }}
             </i>
+
+            {%  if entry.publishedAt is not null %}
+                <i class="tool icon icon-pencil2" title="{{ 'entry.view.published_at'|trans }}">
+                    {{ entry.publishedAt|date('Y-m-d H:i') }}
+                </i>
+            {% endif %}
 
             <i class="tool icon icon-time">
                 {% set readingTime = entry.readingTime / app.user.config.readingSpeed %}
