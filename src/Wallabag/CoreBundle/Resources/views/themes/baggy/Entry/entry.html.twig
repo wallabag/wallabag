@@ -47,9 +47,17 @@
                 {{ entry.createdAt|date('Y-m-d H:i') }}
             </i>
 
-            {%  if entry.publishedAt is not null %}
+            {% if entry.publishedAt is not null %}
                 <i class="tool icon icon-pencil2" title="{{ 'entry.view.published_at'|trans }}">
                     {{ entry.publishedAt|date('Y-m-d H:i') }}
+                </i>
+            {% endif %}
+
+            {% if entry.publishedBy is not empty %}
+                <i class="tool icon icon-users" title="{{ 'entry.view.published_by'|trans }}">
+                    {% for author in entry.publishedBy %}
+                        {{ author }}{% if not loop.last %}, {% endif %}
+                    {% endfor %}
                 </i>
             {% endif %}
 

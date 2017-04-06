@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Add published_at in `entry` table.
+ * Add published_at and published_by in `entry` table.
  */
 class Version20170405182620 extends AbstractMigration implements ContainerAwareInterface
 {
@@ -39,6 +39,10 @@ class Version20170405182620 extends AbstractMigration implements ContainerAwareI
         $entryTable->addColumn('published_at', 'datetime', [
             'notnull' => false,
         ]);
+
+        $entryTable->addColumn('published_by', 'text', [
+            'notnull' => false,
+        ]);
     }
 
     /**
@@ -51,5 +55,6 @@ class Version20170405182620 extends AbstractMigration implements ContainerAwareI
         $this->skipIf(!$entryTable->hasColumn('published_at'), 'It seems that you already played this migration.');
 
         $entryTable->dropColumn('published_at');
+        $entryTable->dropColumn('published_by');
     }
 }

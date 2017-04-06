@@ -225,6 +225,7 @@ entry:
         annotations_on_the_entry: '{0} No annotations|{1} One annotation|]1,Inf[ %count% annotations'
         created_at: 'Creation date'
         published_at: 'Publication date'
+        published_by: 'Published by'
     new:
         page_title: 'Save new entry'
         placeholder: 'http://website.com'

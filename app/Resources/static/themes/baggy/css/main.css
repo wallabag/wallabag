@@ -916,6 +916,10 @@ a.add-to-wallabag-link-after::after {
   content: "\e906";
 }
 
+.icon-users::before {
+  content: "\e972";
+}
+
 .icon-time::before {
   content: "\e952";
 }

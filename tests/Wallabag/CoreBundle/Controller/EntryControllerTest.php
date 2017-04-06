@@ -135,10 +135,13 @@ class EntryControllerTest extends WallabagCoreTestCase
             ->getRepository('WallabagCoreBundle:Entry')
             ->findByUrlAndUserId($this->url, $this->getLoggedInUserId());
 
+        $author = $content->getPublishedBy();
+
         $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
         $this->assertEquals($this->url, $content->getUrl());
         $this->assertContains('Google', $content->getTitle());
-        $this->assertEquals('2015-03-28 15:37:39', $content->getPublishedAt());
+        $this->assertEquals('2015-03-28 15:37:39', $content->getPublishedAt()->format('Y-m-d H:i:s'));
+        $this->assertEquals('Morgane Tual', $author[0]);
     }
 
     public function testPostNewOkUrlExist()

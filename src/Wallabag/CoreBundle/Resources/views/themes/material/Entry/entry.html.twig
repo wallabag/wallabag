@@ -228,11 +228,19 @@
                     <i class="material-icons" title="{{ 'entry.view.created_at'|trans }}">today</i>
                     {{ entry.createdAt|date('Y-m-d H:i') }}
                 </li>
-                {%  if entry.publishedAt is not null %}
+                {% if entry.publishedAt is not null %}
                 <li>
                     <i class="material-icons" title="{{ 'entry.view.published_at'|trans }}">create</i>
                     {{ entry.publishedAt|date('Y-m-d H:i') }}
                 </li>
+                {% endif %}
+                {% if entry.publishedBy is not empty %}
+                    <li>
+                        <i class="material-icons" title="{{ 'entry.view.published_by'|trans }}">person</i>
+                        {% for author in entry.publishedBy %}
+                            {{ author }}{% if not loop.last %}, {% endif %}
+                        {% endfor %}
+                    </li>
                 {% endif %}
                 <li>
                     <i class="material-icons link">link</i>

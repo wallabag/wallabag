@@ -79,8 +79,12 @@ class ContentProxy
         $entry->setContent($html);
         $entry->setHttpStatus(isset($content['status']) ? $content['status'] : '');
 
-        if (isset($content['date']) && null !== $content['date']) {
+        if (isset($content['date']) && null !== $content['date'] && '' !== $content['date']) {
             $entry->setPublishedAt(new \DateTime($content['date']));
+        }
+
+        if (!empty($content['authors'])) {
+            $entry->setPublishedBy($content['authors']);
         }
 
         $entry->setLanguage(isset($content['language']) ? $content['language'] : '');
