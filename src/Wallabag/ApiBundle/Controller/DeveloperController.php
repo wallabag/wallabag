@@ -23,6 +23,7 @@ class DeveloperController extends Controller
 
         return $this->render('@WallabagCore/themes/common/Developer/index.html.twig', [
             'clients' => $clients,
+            'wallabag_url' => $this->get('craue_config')->get('wallabag_url'),
         ]);
     }
 
