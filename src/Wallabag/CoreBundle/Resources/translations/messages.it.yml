@@ -452,6 +452,7 @@ developer:
         field_uris: 'Redirect URI'
         field_grant_types: 'Tipi di grant permessi'
         no_client: 'Ancora nessun client.'
+#        show_qrcode_iphone: 'Show QRCode iPhone'
     remove:
         warn_message_1: "Hai la possibilitò di rimuovere questo client.L'operazione è IRREVERSIBILE!"
         warn_message_2: "Se lo rimuovi, ogni app configurata con questo client non sarà più in grado di autenticarsi."
