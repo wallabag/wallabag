@@ -40,6 +40,8 @@ class Version20170405182620 extends AbstractMigration implements ContainerAwareI
             'notnull' => false,
         ]);
 
+        $this->skipIf($entryTable->hasColumn('published_by'), 'It seems that you already played this migration.');
+
         $entryTable->addColumn('published_by', 'text', [
             'notnull' => false,
         ]);
@@ -55,6 +57,9 @@ class Version20170405182620 extends AbstractMigration implements ContainerAwareI
         $this->skipIf(!$entryTable->hasColumn('published_at'), 'It seems that you already played this migration.');
 
         $entryTable->dropColumn('published_at');
+
+        $this->skipIf(!$entryTable->hasColumn('published_by'), 'It seems that you already played this migration.');
+
         $entryTable->dropColumn('published_by');
     }
 }
