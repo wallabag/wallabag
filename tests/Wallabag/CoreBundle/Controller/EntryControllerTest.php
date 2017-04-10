@@ -144,6 +144,37 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertEquals('Morgane Tual', $author[0]);
     }
 
+    public function testPostWithMultipleAuthors()
+    {
+        $url = 'http://www.liberation.fr/planete/2017/04/05/donald-trump-et-xi-jinping-tentative-de-flirt-en-floride_1560768';
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/new');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $form = $crawler->filter('form[name=entry]')->form();
+
+        $data = [
+            'entry[url]' => $url,
+        ];
+
+        $client->submit($form, $data);
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+
+        $content = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findByUrlAndUserId($url, $this->getLoggedInUserId());
+
+        $authors = $content->getPublishedBy();
+        $this->assertEquals('2017-04-05 19:26:13', $content->getPublishedAt()->format('Y-m-d H:i:s'));
+        $this->assertEquals('Raphaël Balenieri, correspondant à Pékin', $authors[0]);
+        $this->assertEquals('Frédéric Autran, correspondant à New York', $authors[1]);
+    }
+
     public function testPostNewOkUrlExist()
     {
         $this->logInAs('admin');
@@ -610,7 +641,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(2, $crawler->filter('div[class=entry]'));
+        $this->assertCount(3, $crawler->filter('div[class=entry]'));
     }
 
     public function testFilterOnReadingTimeOnlyLower()
@@ -646,7 +677,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(4, $crawler->filter('div[class=entry]'));
+        $this->assertCount(5, $crawler->filter('div[class=entry]'));
     }
 
     public function testFilterOnCreationDate()
@@ -665,7 +696,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(5, $crawler->filter('div[class=entry]'));
+        $this->assertCount(6, $crawler->filter('div[class=entry]'));
 
         $data = [
             'entry_filter[createdAt][left_date]' => date('d/m/Y'),
@@ -674,7 +705,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(5, $crawler->filter('div[class=entry]'));
+        $this->assertCount(6, $crawler->filter('div[class=entry]'));
 
         $data = [
             'entry_filter[createdAt][left_date]' => '01/01/1970',
@@ -778,7 +809,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $form['entry_filter[previewPicture]']->tick();
 
         $crawler = $client->submit($form);
-        $this->assertCount(1, $crawler->filter('div[class=entry]'));
+        $this->assertCount(2, $crawler->filter('div[class=entry]'));
     }
 
     public function testFilterOnLanguage()
@@ -793,7 +824,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         ];
 
         $crawler = $client->submit($form, $data);
-        $this->assertCount(2, $crawler->filter('div[class=entry]'));
+        $this->assertCount(3, $crawler->filter('div[class=entry]'));
 
         $form = $crawler->filter('button[id=submit-filter]')->form();
         $data = [
@@ -1018,7 +1049,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(1, $crawler->filter('div[class=entry]'));
+        $this->assertCount(2, $crawler->filter('div[class=entry]'));
 
         $crawler = $client->request('GET', '/all/list');
         $form = $crawler->filter('button[id=submit-filter]')->form();
@@ -1029,7 +1060,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(7, $crawler->filter('div[class=entry]'));
+        $this->assertCount(8, $crawler->filter('div[class=entry]'));
     }
 
     public function testSearch()
