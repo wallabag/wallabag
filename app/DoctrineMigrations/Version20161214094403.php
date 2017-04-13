@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Added index on wallabag_entry.uid
+ * Added index on wallabag_entry.uid.
  */
 class Version20161214094403 extends AbstractMigration implements ContainerAwareInterface
 {

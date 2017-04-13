@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Added created_at index on entry table
+ * Added created_at index on entry table.
  */
 class Version20161104073720 extends AbstractMigration implements ContainerAwareInterface
 {

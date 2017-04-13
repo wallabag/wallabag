@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Added the internal setting to enable/disable downloading pictures
+ * Added the internal setting to enable/disable downloading pictures.
  */
 class Version20161031132655 extends AbstractMigration implements ContainerAwareInterface
 {

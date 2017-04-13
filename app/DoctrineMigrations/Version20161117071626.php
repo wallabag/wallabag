@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Added the internal setting to share articles to unmark.it
+ * Added the internal setting to share articles to unmark.it.
  */
 class Version20161117071626 extends AbstractMigration implements ContainerAwareInterface
 {

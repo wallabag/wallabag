@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Remove isPublic in Entry Table
+ * Remove isPublic in Entry Table.
  */
 class Version20170407200919 extends AbstractMigration implements ContainerAwareInterface
 {

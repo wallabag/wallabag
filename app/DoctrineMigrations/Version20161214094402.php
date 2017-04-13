@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Renamed uuid to uid in entry table
+ * Renamed uuid to uid in entry table.
  */
 class Version20161214094402 extends AbstractMigration implements ContainerAwareInterface
 {
