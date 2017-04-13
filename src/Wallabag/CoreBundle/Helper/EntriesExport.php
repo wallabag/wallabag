@@ -148,8 +148,6 @@ class EntriesExport
             $book->setCoverImage('Cover.png', file_get_contents($this->logoPath), 'image/png');
         }
 
-        $book->addChapter('Notices', 'Cover2.html', $content_start.$this->getExportInformation('PHPePub').$bookEnd);
-
         $book->buildTOC();
 
         /*
@@ -169,6 +167,8 @@ class EntriesExport
             $chapter = $content_start.$entry->getContent().$bookEnd;
             $book->addChapter($entry->getTitle(), htmlspecialchars($filename).'.html', $chapter, true, EPub::EXTERNAL_REF_ADD);
         }
+
+        $book->addChapter('Notices', 'Cover2.html', $content_start.$this->getExportInformation('PHPePub').$bookEnd);
 
         return Response::create(
             $book->getBook(),
