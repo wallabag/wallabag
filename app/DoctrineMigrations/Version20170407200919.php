@@ -8,16 +8,14 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Added created_at index on entry table.
+ * Remove isPublic in Entry Table.
  */
-class Version20161104073720 extends AbstractMigration implements ContainerAwareInterface
+class Version20170407200919 extends AbstractMigration implements ContainerAwareInterface
 {
     /**
      * @var ContainerInterface
      */
     private $container;
-
-    private $indexName = 'IDX_entry_created_at';
 
     public function setContainer(ContainerInterface $container = null)
     {
@@ -35,9 +33,9 @@ class Version20161104073720 extends AbstractMigration implements ContainerAwareI
     public function up(Schema $schema)
     {
         $entryTable = $schema->getTable($this->getTable('entry'));
-        $this->skipIf($entryTable->hasIndex($this->indexName), 'It seems that you already played this migration.');
+        $this->skipIf(!$entryTable->hasColumn('is_public'), 'It seems that you already played this migration.');
 
-        $entryTable->addIndex(['created_at'], $this->indexName);
+        $entryTable->dropColumn('is_public');
     }
 
     /**
@@ -46,8 +44,8 @@ class Version20161104073720 extends AbstractMigration implements ContainerAwareI
     public function down(Schema $schema)
     {
         $entryTable = $schema->getTable($this->getTable('entry'));
-        $this->skipIf(false === $entryTable->hasIndex($this->indexName), 'It seems that you already played this migration.');
+        $this->skipIf($entryTable->hasColumn('is_public'), 'It seems that you already played this migration.');
 
-        $entryTable->dropIndex($this->indexName);
+        $entryTable->addColumn('is_public', 'boolean', ['notnull' => false, 'default' => 0]);
     }
 }

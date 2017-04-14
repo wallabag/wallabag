@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Added settings for RabbitMQ and Redis imports
+ * Added settings for RabbitMQ and Redis imports.
  */
 class Version20160911214952 extends AbstractMigration implements ContainerAwareInterface
 {

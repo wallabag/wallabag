@@ -175,15 +175,6 @@ class Entry
     private $previewPicture;
 
     /**
-     * @var bool
-     *
-     * @ORM\Column(name="is_public", type="boolean", nullable=true, options={"default" = false})
-     *
-     * @Groups({"export_all"})
-     */
-    private $isPublic;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="http_status", type="string", length=3, nullable=true)
@@ -529,22 +520,6 @@ class Entry
     public function setDomainName($domainName)
     {
         $this->domainName = $domainName;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isPublic()
-    {
-        return $this->isPublic;
-    }
-
-    /**
-     * @param bool $isPublic
-     */
-    public function setIsPublic($isPublic)
-    {
-        $this->isPublic = $isPublic;
     }
 
     /**

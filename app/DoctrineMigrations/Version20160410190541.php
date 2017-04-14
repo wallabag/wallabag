@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Added foreign keys for account resetting
+ * Added foreign keys for account resetting.
  */
 class Version20160410190541 extends AbstractMigration implements ContainerAwareInterface
 {

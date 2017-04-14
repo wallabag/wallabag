@@ -235,7 +235,6 @@ entry:
         page_title: 'Edytuj wpis'
         title_label: 'Tytuł'
         url_label: 'Adres URL'
-        is_public_label: 'Publiczny'
         save_label: 'Zapisz'
     public:
         shared_by_wallabag: "Ten artykuł został udostępniony przez <a href='%wallabag_instance%'>wallabag</a>"
