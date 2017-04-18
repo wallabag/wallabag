@@ -224,6 +224,8 @@ entry:
         original_article: 'original'
         annotations_on_the_entry: '{0} Sin anotaciones|{1} Una anotación|]1,Inf[ %count% anotaciones'
         created_at: 'Fecha de creación'
+        # published_at: 'Publication date'
+        # published_by: 'Published by'
     new:
         page_title: 'Guardar un nuevo artículo'
         placeholder: 'http://sitioweb.com'

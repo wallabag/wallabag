@@ -138,7 +138,7 @@
                                 <span>scuttle</span>
                             </a>
                         </li>
-                    {% endif %}                    
+                    {% endif %}
                     {% if craue_setting('share_diaspora') %}
                         <li>
                             <a href="{{ craue_setting('diaspora_url') }}/bookmarklet?url={{ entry.url|url_encode }}&amp;title={{ entry.title|striptags|url_encode }}&amp;notes=&amp;v=1&amp;noui=1&amp;jump=doclose" target="_blank">
@@ -226,8 +226,22 @@
                 </li>
                 <li>
                     <i class="material-icons" title="{{ 'entry.view.created_at'|trans }}">today</i>
-                    {{ entry.createdAt|date('Y-m-d') }}
+                    {{ entry.createdAt|date('Y-m-d H:i') }}
                 </li>
+                {% if entry.publishedAt is not null %}
+                <li>
+                    <i class="material-icons" title="{{ 'entry.view.published_at'|trans }}">create</i>
+                    {{ entry.publishedAt|date('Y-m-d H:i') }}
+                </li>
+                {% endif %}
+                {% if entry.publishedBy is not empty %}
+                    <li>
+                        <i class="material-icons" title="{{ 'entry.view.published_by'|trans }}">person</i>
+                        {% for author in entry.publishedBy %}
+                            {{ author }}{% if not loop.last %}, {% endif %}
+                        {% endfor %}
+                    </li>
+                {% endif %}
                 <li>
                     <i class="material-icons link">link</i>
                     <a href="{{ entry.url|e }}" target="_blank" title="{{ 'entry.view.original_article'|trans }} : {{ entry.title|striptags }}" class="tool">

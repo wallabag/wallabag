@@ -122,6 +122,24 @@ class Entry
     private $updatedAt;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="published_at", type="datetime", nullable=true)
+     *
+     * @Groups({"entries_for_user", "export_all"})
+     */
+    private $publishedAt;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="published_by", type="json_array", nullable=true)
+     *
+     * @Groups({"entries_for_user", "export_all"})
+     */
+    private $publishedBy;
+
+    /**
      * @ORM\OneToMany(targetEntity="Wallabag\AnnotationBundle\Entity\Annotation", mappedBy="entry", cascade={"persist", "remove"})
      * @ORM\JoinTable
      *
@@ -673,6 +691,46 @@ class Entry
     public function setHttpStatus($httpStatus)
     {
         $this->httpStatus = $httpStatus;
+
+        return $this;
+    }
+
+    /**
+     * @return \Datetime
+     */
+    public function getPublishedAt()
+    {
+        return $this->publishedAt;
+    }
+
+    /**
+     * @param \Datetime $publishedAt
+     *
+     * @return Entry
+     */
+    public function setPublishedAt(\Datetime $publishedAt)
+    {
+        $this->publishedAt = $publishedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPublishedBy()
+    {
+        return $this->publishedBy;
+    }
+
+    /**
+     * @param string $publishedBy
+     *
+     * @return Entry
+     */
+    public function setPublishedBy($publishedBy)
+    {
+        $this->publishedBy = $publishedBy;
 
         return $this;
     }

@@ -224,6 +224,8 @@ entry:
         original_article: "original"
         annotations_on_the_entry: "{0} Aucune annotation|{1} Une annotation|]1,Inf[ %count% annotations"
         created_at: "Date de création"
+        published_at: "Date de publication"
+        published_by: "Publié par"
     new:
         page_title: "Sauvegarder un nouvel article"
         placeholder: "http://website.com"
