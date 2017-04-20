@@ -155,6 +155,7 @@ config:
                 or: "Una règla O l'autra"
                 and: "Una règla E l'autra"
                 matches: 'Teste se un <i>subjècte</i> correspond a una <i>recerca</i> (non sensibla a la cassa).<br />Exemple : <code>title matches \"football\"</code>'
+                # notmatches: 'Tests that a <i>subject</i> is not matches a <i>search</i> (case-insensitive).<br />Example: <code>title notmatches "football"</code>'
 
 entry:
     page_titles:

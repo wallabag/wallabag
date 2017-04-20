@@ -120,7 +120,7 @@ class ChromeControllerTest extends WallabagCoreTestCase
 
         $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for http://www.usinenouvelle.com is ok');
         $this->assertNotEmpty($content->getLanguage(), 'Language for http://www.usinenouvelle.com is ok');
-        $this->assertEquals(0, count($content->getTags()));
+        $this->assertEquals(1, count($content->getTags()));
 
         $createdAt = $content->getCreatedAt();
         $this->assertEquals('2011', $createdAt->format('Y'));

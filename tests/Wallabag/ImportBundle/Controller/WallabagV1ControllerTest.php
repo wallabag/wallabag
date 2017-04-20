@@ -129,7 +129,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
         $this->assertNotEmpty($content->getMimetype(), 'Mimetype for http://www.framablog.org is ok');
         $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for http://www.framablog.org is ok');
         $this->assertNotEmpty($content->getLanguage(), 'Language for http://www.framablog.org is ok');
-        $this->assertEquals(1, count($content->getTags()));
+        $this->assertEquals(2, count($content->getTags()));
         $this->assertInstanceOf(\DateTime::class, $content->getCreatedAt());
     }
 

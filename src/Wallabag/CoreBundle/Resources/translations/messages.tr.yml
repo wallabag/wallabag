@@ -155,6 +155,7 @@ config:
                 or: 'Bir kural veya birbaşkası'
                 and: 'Bir kural ve diğeri'
                 # matches: 'Tests that a <i>subject</i> is matches a <i>search</i> (case-insensitive).<br />Example: <code>title matches "football"</code>'
+                # notmatches: 'Tests that a <i>subject</i> is not matches a <i>search</i> (case-insensitive).<br />Example: <code>title notmatches "football"</code>'
 
 entry:
     page_titles:
