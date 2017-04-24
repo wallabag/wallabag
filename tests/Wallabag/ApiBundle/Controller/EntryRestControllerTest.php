@@ -714,4 +714,35 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         $this->assertEquals('application/json', $this->client->getResponse()->headers->get('Content-Type'));
     }
+
+    public function testPostEntriesTagsListAction()
+    {
+        $list = [
+            [
+                'url' => 'http://0.0.0.0/entry1',
+                'tags' => 'foo bar, baz',
+                'action' => 'delete',
+            ],
+            [
+                'url' => 'http://0.0.0.0/entry2',
+                'tags' => 'new tag 1, new tag 2',
+                'action' => 'add',
+            ],
+        ];
+
+        $this->client->request('POST', '/api/entries/tags/lists?list='.json_encode($list));
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+
+        $this->assertFalse($content[0]['entry']);
+        $this->assertEquals('http://0.0.0.0/entry1', $content[0]['url']);
+        $this->assertEquals('delete', $content[0]['action']);
+
+        $this->assertInternalType('int', $content[1]['entry']);
+        $this->assertEquals('http://0.0.0.0/entry2', $content[1]['url']);
+        $this->assertEquals('add', $content[1]['action']);
+    }
 }
