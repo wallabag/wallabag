@@ -31,7 +31,7 @@ class TagRestController extends WallabagRestController
     }
 
     /**
-     * Permanently remove one tag from **every** entry.
+     * Permanently remove one tag from **every** entry by passing the Tag label.
      *
      * @ApiDoc(
      *      requirements={
@@ -106,7 +106,7 @@ class TagRestController extends WallabagRestController
     }
 
     /**
-     * Permanently remove one tag from **every** entry.
+     * Permanently remove one tag from **every** entry by passing the Tag ID.
      *
      * @ApiDoc(
      *      requirements={
