@@ -173,11 +173,58 @@ class EntryRestController extends WallabagRestController
     }
 
     /**
-     * Handles an entries list and create or remove URL.
+     * Handles an entries list and delete URL.
      *
      * @ApiDoc(
      *       parameters={
-     *          {"name"="list", "dataType"="string", "required"=true, "format"="A JSON array of urls [{'url': 'http://...', 'action': 'delete'}, {'url': 'http://...', 'action': 'add'}]", "description"="Urls (as an array) to handle."}
+     *          {"name"="urls", "dataType"="string", "required"=true, "format"="A JSON array of urls [{'url': 'http://...'}, {'url': 'http://...'}]", "description"="Urls (as an array) to delete."}
+     *       }
+     * )
+     *
+     * @return JsonResponse
+     */
+    public function deleteEntriesListAction(Request $request)
+    {
+        $this->validateAuthentication();
+
+        $urls = json_decode($request->query->get('urls', []));
+        $results = [];
+
+        // handle multiple urls
+        if (!empty($urls)) {
+            $results = [];
+            foreach ($urls as $key => $url) {
+                $entry = $this->get('wallabag_core.entry_repository')->findByUrlAndUserId(
+                    $url,
+                    $this->getUser()->getId()
+                );
+
+                $results[$key]['url'] = $url;
+
+                if (false !== $entry) {
+                    $em = $this->getDoctrine()->getManager();
+                    $em->remove($entry);
+                    $em->flush();
+
+                    // entry deleted, dispatch event about it!
+                    $this->get('event_dispatcher')->dispatch(EntryDeletedEvent::NAME, new EntryDeletedEvent($entry));
+                }
+
+                $results[$key]['entry'] = $entry instanceof Entry ? true : false;
+            }
+        }
+
+        $json = $this->get('serializer')->serialize($results, 'json');
+
+        return (new JsonResponse())->setJson($json);
+    }
+
+    /**
+     * Handles an entries list and create URL.
+     *
+     * @ApiDoc(
+     *       parameters={
+     *          {"name"="urls", "dataType"="string", "required"=true, "format"="A JSON array of urls [{'url': 'http://...'}, {'url': 'http://...'}]", "description"="Urls (as an array) to create."}
      *       }
      * )
      *
@@ -187,54 +234,35 @@ class EntryRestController extends WallabagRestController
     {
         $this->validateAuthentication();
 
-        $list = json_decode($request->query->get('list', []));
+        $urls = json_decode($request->query->get('urls', []));
         $results = [];
 
         // handle multiple urls
-        if (!empty($list)) {
+        if (!empty($urls)) {
             $results = [];
-            foreach ($list as $key => $element) {
+            foreach ($urls as $key => $url) {
                 $entry = $this->get('wallabag_core.entry_repository')->findByUrlAndUserId(
-                    $element->url,
+                    $url,
                     $this->getUser()->getId()
                 );
 
-                $results[$key]['url'] = $element->url;
-                $results[$key]['action'] = $element->action;
+                $results[$key]['url'] = $url;
 
-                switch ($element->action) {
-                    case 'delete':
-                        if (false !== $entry) {
-                            $em = $this->getDoctrine()->getManager();
-                            $em->remove($entry);
-                            $em->flush();
-
-                            // entry deleted, dispatch event about it!
-                            $this->get('event_dispatcher')->dispatch(EntryDeletedEvent::NAME, new EntryDeletedEvent($entry));
-                        }
-
-                        $results[$key]['entry'] = $entry instanceof Entry ? true : false;
-
-                        break;
-                    case 'add':
-                        if (false === $entry) {
-                            $entry = $this->get('wallabag_core.content_proxy')->updateEntry(
-                                new Entry($this->getUser()),
-                                $element->url
-                            );
-                        }
-
-                        $em = $this->getDoctrine()->getManager();
-                        $em->persist($entry);
-                        $em->flush();
-
-                        $results[$key]['entry'] = $entry instanceof Entry ? $entry->getId() : false;
-
-                        // entry saved, dispatch event about it!
-                        $this->get('event_dispatcher')->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
-
-                        break;
+                if (false === $entry) {
+                    $entry = $this->get('wallabag_core.content_proxy')->updateEntry(
+                        new Entry($this->getUser()),
+                        $url
+                    );
                 }
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($entry);
+                $em->flush();
+
+                $results[$key]['entry'] = $entry instanceof Entry ? $entry->getId() : false;
+
+                // entry saved, dispatch event about it!
+                $this->get('event_dispatcher')->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
             }
         }
 

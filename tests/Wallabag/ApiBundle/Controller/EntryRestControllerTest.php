@@ -769,28 +769,35 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->client->request('DELETE', '/api/entries/tags/list?list=' . json_encode($list));
     }
 
-    public function testPostMassEntriesAction()
+
+    public function testPostEntriesListAction()
     {
         $list = [
-            [
-                'url' => 'http://0.0.0.0/entry2',
-                'action' => 'delete',
-            ],
-            [
-                'url' => 'http://www.lemonde.fr/musiques/article/2017/04/23/loin-de-la-politique-le-printemps-de-bourges-retombe-en-enfance_5115862_1654986.html',
-                'action' => 'add',
-            ],
-            [
-                'url' => 'http://0.0.0.0/entry3',
-                'action' => 'delete',
-            ],
-            [
-                'url' => 'http://0.0.0.0/entry6',
-                'action' => 'add',
-            ],
+            'http://www.lemonde.fr/musiques/article/2017/04/23/loin-de-la-politique-le-printemps-de-bourges-retombe-en-enfance_5115862_1654986.html',
+            'http://0.0.0.0/entry6',
         ];
 
-        $this->client->request('POST', '/api/entries/lists?list='.json_encode($list));
+        $this->client->request('POST', '/api/entries/lists?urls='.json_encode($list));
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertInternalType('int', $content[0]['entry']);
+        $this->assertEquals('http://www.lemonde.fr/musiques/article/2017/04/23/loin-de-la-politique-le-printemps-de-bourges-retombe-en-enfance_5115862_1654986.html', $content[0]['url']);
+
+        $this->assertInternalType('int', $content[1]['entry']);
+        $this->assertEquals('http://0.0.0.0/entry6', $content[1]['url']);
+    }
+
+    public function testDeleteEntriesListAction()
+    {
+        $list = [
+            'http://0.0.0.0/entry2',
+            'http://0.0.0.0/entry3',
+        ];
+
+        $this->client->request('DELETE', '/api/entries/list?urls='.json_encode($list));
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
@@ -798,18 +805,8 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         $this->assertTrue($content[0]['entry']);
         $this->assertEquals('http://0.0.0.0/entry2', $content[0]['url']);
-        $this->assertEquals('delete', $content[0]['action']);
 
-        $this->assertInternalType('int', $content[1]['entry']);
-        $this->assertEquals('http://www.lemonde.fr/musiques/article/2017/04/23/loin-de-la-politique-le-printemps-de-bourges-retombe-en-enfance_5115862_1654986.html', $content[1]['url']);
-        $this->assertEquals('add', $content[1]['action']);
-
-        $this->assertFalse($content[2]['entry']);
-        $this->assertEquals('http://0.0.0.0/entry3', $content[2]['url']);
-        $this->assertEquals('delete', $content[2]['action']);
-
-        $this->assertInternalType('int', $content[3]['entry']);
-        $this->assertEquals('http://0.0.0.0/entry6', $content[3]['url']);
-        $this->assertEquals('add', $content[3]['action']);
+        $this->assertFalse($content[1]['entry']);
+        $this->assertEquals('http://0.0.0.0/entry3', $content[1]['url']);
     }
 }
