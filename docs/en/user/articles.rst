@@ -34,7 +34,7 @@ By using a browser add-on
 Firefox
 """""""
 
-You can download the `Firefox addon here <https://addons.mozilla.org/fr/firefox/addon/wallabagger/>`_.
+You can download the `Firefox addon here <https://addons.mozilla.org/firefox/addon/wallabagger/>`_.
 
 Chrome
 """"""
