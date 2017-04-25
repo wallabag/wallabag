@@ -30,7 +30,7 @@ Klicke darauf, um ein neues Feld anzuzeigen, füge die Artikel-URL ein und drüc
 Firefox
 """""""
 
-Du kannst das `Firefox-Addon hier <https://addons.mozilla.org/firefox/addon/wallabag-v2/> herunterladen`_.
+Du kannst das `Firefox-Addon hier <https://addons.mozilla.org/firefox/addon/wallabagger/> herunterladen`_.
 
 Chrome
 """"""
@@ -43,7 +43,7 @@ Du kannst das `Chrome-Addon hier <https://chrome.google.com/webstore/detail/wall
 Android
 """""""
 
-Du kannst die `Android-App hier <https://play.google.com/store/apps/details?id=fr.gaulupeau.apps.InThePoche> herunterladen`_.
+Du kannst die `Android-App hier <https://play.google.com/store/apps/details?id=fr.gaulupeau.apps.InThePoche> herunterladen`_ oder auf `F-Droid <https://f-droid.org/repository/browse/?fdid=fr.gaulupeau.apps.InThePoche>`_.
 
 Windows 10 in general
 """""""""""""""""""""

@@ -40,7 +40,7 @@ En utilisant l'extension de votre navigateur
 Firefox
 """""""
 
-Vous pouvez télécharger `l'extension Firefox ici <https://addons.mozilla.org/firefox/addon/wallabag-v2/>`_.
+Vous pouvez télécharger `l'extension Firefox ici <https://addons.mozilla.org/firefox/addon/wallabagger/>`_.
 
 Chrome
 """"""
@@ -53,7 +53,7 @@ En utilisant l'application de votre smartphone
 Android
 """""""
 
-Vous pouvez télécharger `l'application Android ici <https://play.google.com/store/apps/details?id=fr.gaulupeau.apps.InThePoche>`_.
+Vous pouvez télécharger `l'application Android ici <https://play.google.com/store/apps/details?id=fr.gaulupeau.apps.InThePoche>`_ ou sur `F-Droid <https://f-droid.org/repository/browse/?fdid=fr.gaulupeau.apps.InThePoche>`_.
 
 Windows Phone
 ~~~~~~~~~~~~~

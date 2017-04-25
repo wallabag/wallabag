@@ -32,7 +32,7 @@ Usando un add-on del browser
 Firefox
 """""""
 
-Potete scaricare `qui l'addon per Firefox <https://addons.mozilla.org/firefox/addon/wallabag-v2/>`_.
+Potete scaricare `qui l'addon per Firefox <https://addons.mozilla.org/firefox/addon/wallabagger/>`_.
 
 Chrome
 """"""
@@ -45,7 +45,7 @@ Usando la vostra applicazione per smartphone
 Android
 """""""
 
-Potete scaricare `qui l'applicazione per Android <https://play.google.com/store/apps/details?id=fr.gaulupeau.apps.InThePoche>`_.
+Potete scaricare `qui l'applicazione per Android <https://play.google.com/store/apps/details?id=fr.gaulupeau.apps.InThePoche>`_ o via `F-Droid <https://f-droid.org/repository/browse/?fdid=fr.gaulupeau.apps.InThePoche>`_.
 
 Windows Phone
 """""""""""""
