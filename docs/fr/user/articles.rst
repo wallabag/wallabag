@@ -18,7 +18,7 @@ En utilisant le bookmarklet
 Sur la page ``Aide``, vous avez un onglet ``Bookmarklet``. Glissez/déposez le lien ``bag it!``
 dans votre barre de favoris de votre navigateur.
 
-Maintennat, à chaque fois que vous lisez un article et que vous souhaitez le sauvegarder,
+Maintenant, à chaque fois que vous lisez un article et que vous souhaitez le sauvegarder,
 cliquez sur le lien ``bag it!`` dans votre barre de favoris. L'article est enregistré.
 
 En utilisant le formulaire classique

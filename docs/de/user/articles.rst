@@ -43,7 +43,7 @@ Du kannst das `Chrome-Addon hier <https://chrome.google.com/webstore/detail/wall
 Android
 """""""
 
-Du kannst die `Android-App hier <https://play.google.com/store/apps/details?id=fr.gaulupeau.apps.InThePoche> herunterladen`_ oder auf `F-Droid <https://f-droid.org/repository/browse/?fdid=fr.gaulupeau.apps.InThePoche>`_.
+Du kannst die `Android-App hier <https://play.google.com/store/apps/details?id=fr.gaulupeau.apps.InThePoche>`_ oder auf `F-Droid <https://f-droid.org/repository/browse/?fdid=fr.gaulupeau.apps.InThePoche>`_ herunterladen.
 
 Windows 10 in general
 """""""""""""""""""""
