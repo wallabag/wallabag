@@ -18,7 +18,7 @@ En utilisant le bookmarklet
 Sur la page ``Aide``, vous avez un onglet ``Bookmarklet``. Glissez/déposez le lien ``bag it!``
 dans votre barre de favoris de votre navigateur.
 
-Maintennat, à chaque fois que vous lisez un article et que vous souhaitez le sauvegarder,
+Maintenant, à chaque fois que vous lisez un article et que vous souhaitez le sauvegarder,
 cliquez sur le lien ``bag it!`` dans votre barre de favoris. L'article est enregistré.
 
 En utilisant le formulaire classique
@@ -40,7 +40,7 @@ En utilisant l'extension de votre navigateur
 Firefox
 """""""
 
-Vous pouvez télécharger `l'extension Firefox ici <https://addons.mozilla.org/firefox/addon/wallabag-v2/>`_.
+Vous pouvez télécharger `l'extension Firefox ici <https://addons.mozilla.org/firefox/addon/wallabagger/>`_.
 
 Chrome
 """"""
@@ -53,7 +53,7 @@ En utilisant l'application de votre smartphone
 Android
 """""""
 
-Vous pouvez télécharger `l'application Android ici <https://play.google.com/store/apps/details?id=fr.gaulupeau.apps.InThePoche>`_.
+Vous pouvez télécharger `l'application Android ici <https://play.google.com/store/apps/details?id=fr.gaulupeau.apps.InThePoche>`_ ou sur `F-Droid <https://f-droid.org/repository/browse/?fdid=fr.gaulupeau.apps.InThePoche>`_.
 
 Windows Phone
 ~~~~~~~~~~~~~

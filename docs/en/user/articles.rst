@@ -34,20 +34,20 @@ By using a browser add-on
 Firefox
 """""""
 
-You can download the `Firefox addon here <https://addons.mozilla.org/firefox/addon/wallabag-v2/>`_.
+You can download the `Firefox addon here <https://addons.mozilla.org/firefox/addon/wallabagger/>`_.
 
 Chrome
 """"""
 
 You can download the `Chrome addon here <https://chrome.google.com/webstore/detail/wallabagger/gbmgphmejlcoihgedabhgjdkcahacjlj?hl=fr>`_.
 
-By using your smarphone application
+By using your smartphone application
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Android
 """""""
 
-You can download the `Android application here <https://play.google.com/store/apps/details?id=fr.gaulupeau.apps.InThePoche>`_.
+You can download the `Android application here <https://play.google.com/store/apps/details?id=fr.gaulupeau.apps.InThePoche>`_ or on `F-Droid <https://f-droid.org/repository/browse/?fdid=fr.gaulupeau.apps.InThePoche>`_.
 
 Windows Phone
 """""""""""""
