@@ -7,6 +7,9 @@
     <div class="row">
         <div class="col s12">
             <div class="card-panel">
+                {% if users.getNbPages > 1 %}
+                    {{ pagerfanta(users, 'twitter_bootstrap_translated', {'proximity': 1}) }}
+                {% endif %}
                 <div class="row">
                     <div class="col s6">
                         <p class="help">{{ 'user.description'|trans|raw }}</p>
@@ -22,7 +25,7 @@
                             <tr>
                                 <th>{{ 'user.form.username_label'|trans }}</th>
                                 <th>{{ 'user.form.email_label'|trans }}</th>
-                                <th>{{ 'user.form2017-03-10 16:51:07.last_login_label'|trans }}</th>
+                                <th>{{ 'user.form.last_login_label'|trans }}</th>
                                 <th>{{ 'user.list.actions'|trans }}</th>
                             </tr>
                         </thead>
@@ -43,6 +46,9 @@
                     <p>
                         <a href="{{ path('user_new') }}" class="waves-effect waves-light btn">{{ 'user.list.create_new_one'|trans }}</a>
                     </p>
+                    {% if users.getNbPages > 1 %}
+                        {{ pagerfanta(users, 'twitter_bootstrap_translated', {'proximity': 1}) }}
+                    {% endif %}
                 </div>
             </div>
         </div>
