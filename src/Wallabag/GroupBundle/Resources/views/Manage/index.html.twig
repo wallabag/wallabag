@@ -12,7 +12,7 @@
                         <p class="help">{{ 'group.description'|trans|raw }}</p>
 
                         {% if groups is not empty %}
-                            <table class="bordered">
+                            <table class="bordered responsive-table">
                                 <thead>
                                     <tr>
                                         <th>{{ 'group.form.name_label'|trans }}</th>
@@ -24,9 +24,32 @@
                                 {% for group in groups %}
                                     <tr>
                                         <td>{{ group.name }}</td>
-                                        <td></td>
                                         <td>
-                                            <a href="{{ path('group_edit', { 'id': group.id }) }}">{{ 'group.list.edit_action'|trans }}</a>
+                                            {% if app.user in group.users and app.user.inGroup(group) %}
+                                                {{ 'group.user.inGroup' | transchoice(group.users | length) }}
+                                            {% else %}
+                                                {{ 'group.user.notInGroup' | transchoice(group.users | length) }}
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if app.user in group.users and app.user.inGroup(group) %}
+                                                {% if app.user.getGroupRoleForUser(group) >= 5 %}
+                                                    <a href="{{ path('group_edit', { 'id': group.id }) }}" class="waves-effect waves-light btn tooltipped" data-delay="50" data-position="bottom" data-tooltip="{{ 'group.list.edit_action'|trans }}"><i class="material-icons">edit</i></a>
+                                                    <a href="{{ path('group-manage', { 'group': group.id }) }}" class="waves-effect waves-light btn tooltipped" data-delay="50" data-position="bottom" data-tooltip="{{ 'group.manage.label'|trans }}"><i class="material-icons">settings_applications</i></a>
+                                                {% endif %}
+                                                <a href="{{ path('group-presentations', { 'group': group.id }) }}" class="waves-effect waves-light btn tooltipped" data-delay="50" data-position="bottom" data-tooltip="{{ 'group.entries.label'|trans }}"><i class="material-icons">view_list</i></a>
+                                                <a href="{{ path('group_leave', { 'group': group.id }) }}" class="waves-effect waves-light btn red tooltipped" data-delay="50" data-position="bottom" data-tooltip="{{ 'group.leave.label'|trans }}"><i class="material-icons">clear</i></a>
+                                            {% elseif app.user in group.users and not app.user.inGroup(group) %}
+                                                {{ 'group.requests.sent' | trans }}
+                                            {% else %}
+                                                <a href="{{ path('group_join', { 'group': group.id }) }}" class="waves-effect waves-light btn tooltipped" data-tooltip="{{ 'group.join.label'|trans }}" data-delay="50" data-position="bottom">
+                                                    {% if group.acceptSystem == 3 %}
+                                                        <i class="material-icons md-18 vertical-align-middle" data-toggle="tooltip" data-placement="bottom" title="{{ 'group.join'|trans }}">lock</i>
+                                                    {% else %}
+                                                        <i class="material-icons" data-toggle="tooltip" data-placement="bottom" title="{{ 'group.join'|trans }}">input</i>
+                                                    {% endif %}
+                                                </a>
+                                            {% endif %}
                                         </td>
                                     </tr>
                                 {% endfor %}

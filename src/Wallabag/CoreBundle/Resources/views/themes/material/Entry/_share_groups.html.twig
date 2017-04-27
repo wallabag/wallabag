@@ -1,0 +1,24 @@
+<!-- Groups Modal -->
+<div id="groups-modal" class="modal bottom-sheet">
+    <div class="modal-content">
+        <div class="row">
+            <h4>Groups</h4>
+            <p>Select the groups you want to share this article with</p>
+            <form name="search" method="POST" action="{{ path('group-shares-entry', {'entry': entry.id})}}">
+                {% if form_errors(form) %}
+                    <span class="black-text">{{ form_errors(form) }}</span>
+                {% endif %}
+
+                {% if form_errors(form.groupshares) %}
+                    <span class="black-text">{{ form_errors(form.groupshares) }}</span>
+                {% endif %}
+
+                {{ form_widget(form.groupshares) }}
+                {{ form_widget(form.save, {'attr': {'class': 'modal-action modal-close waves-effect waves-light btn'}}) }}
+
+                {{ form_rest(form) }}
+            </form>
+
+        </div>
+    </div>
+</div>

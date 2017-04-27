@@ -1,0 +1,31 @@
+{% extends "WallabagCoreBundle::layout.html.twig" %}
+
+{% block title %}{{ 'group.requests.list'|trans }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col s12">
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>{{ 'group.requests.username'|trans }}</th>
+                <th>{{ 'group.requests.action'|trans }}</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for request in requests %}
+                <tr>
+                    <td>{{ request.username }}</td>
+                    <td>
+                        <a class="btn waves-effect" href="{{ path('group-activate', {'group': group.id, 'user': request.id, 'accept': 1}) }}"><i class="material-icons">check</i></a>
+                        <a class="btn waves-effect red" href="{{ path('group-activate', {'group': group.id, 'user': request.id, 'accept': 2}) }}"><i class="material-icons">close</i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

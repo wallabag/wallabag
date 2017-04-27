@@ -414,4 +414,17 @@ class EntryRepository extends EntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    /**
+     * Find all entries for a group
+     *
+     * @param $groupId
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function findByGroup($groupId)
+	{
+		return $this->createQueryBuilder('p')
+			->innerJoin('p.groupShares', 'g', 'WITH', 'g.id = :group')
+			->setParameter(':group', $groupId);
+	}
 }

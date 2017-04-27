@@ -240,6 +240,7 @@ entry:
             delete_public_link: "Supprimer le lien public"
             export: "Exporter"
             print: "Imprimer"
+            groups: Groupes
             problem:
                 label: "Un problème ?"
                 description: "Est-ce que cet article s’affiche mal ?"
@@ -549,6 +550,32 @@ group:
     tab_menu:
         public: Groupes publics
         own: Mes groupes
+    requests:
+        list: Liste des requêtes
+        sent: Requête envoyée
+        username: Utilisateur
+        action: Action
+    manage:
+        label: Gérer le groupe
+        title: Gérer le groupe
+    entries:
+        label: Liste des articles partagés avec ce groupe
+    leave:
+        label: Sortir de ce groupe
+    user:
+        inGroup: "{0}Il n'y a personne dans ce groupe|{1}Vous êtes tout seul dans ce groupe|]1,Inf[Vous êtes %count% utilisateurs dans ce groupe"
+        notInGroup: "{0}Il n'y a personne dans ce groupe|{1}Il y a un seul utilisateur dans ce groupe|]1,Inf[%count% utilisateurs dans ce groupe"
+    members:
+        empty: Le groupe est vide
+        name: Nom d'utilisateur
+        role: Rôle
+        action: Action
+        edit: Modifier les droits de l'utilisateur
+        exclude: Exclure l'utilisateur
+    edit_user:
+        title: Édition des droits de l'utilisateur
+        role: Rôle
+        cancel: Annuler
 
 user:
     page_title: "Gestion des utilisateurs"

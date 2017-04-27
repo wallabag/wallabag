@@ -75,14 +75,14 @@
                 <li class="bold {% if currentRoute starts with 'user_' %}active{% endif %}">
                     <a class="waves-effect" href="{{ path('user_index') }}">{{ 'menu.left.users_management'|trans }}</a>
                 </li>
-                <li class="bold {% if currentRoute starts with 'group_' %}active{% endif %}">
-                    <a class="waves-effect" href="{{ path('group_index') }}">{{ 'menu.left.groups_management'|trans }}</a>
-                </li>
 
                 <li class="bold border-bottom {% if currentRoute == 'craue_config_settings_modify' %}active{% endif %}">
                     <a class="waves-effect" href="{{ path('craue_config_settings_modify') }}">{{ 'menu.left.internal_settings'|trans }}</a>
                 </li>
             {% endif %}
+            <li class="bold {% if currentRoute starts with 'group_' %}active{% endif %}">
+                <a class="waves-effect" href="{{ path('group_index') }}">{{ 'menu.left.groups_management'|trans }}</a>
+            </li>
             <li class="bold {% if currentRoute == 'import' %}active{% endif %}">
                 <a class="waves-effect" href="{{ path('import') }}">{{ 'menu.left.import'|trans }}</a>
             </li>

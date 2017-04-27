@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\GroupBundle\Form\Type;
+namespace Wallabag\GroupBundle\Form;
 
 use Wallabag\GroupBundle\Entity\Group;
 use Symfony\Component\Form\AbstractType;
@@ -23,7 +23,7 @@ class UserGroupType extends AbstractType
                 'choices' => [
                     'group.roles.readonly' => Group::ROLE_READ_ONLY,
                     'group.roles.write' => Group::ROLE_WRITE,
-                    'group.roles.manage_prez' => Group::ROLE_MANAGE_PREZ,
+                    'group.roles.manage_entries' => Group::ROLE_MANAGE_ENTRIES,
                     'group.roles.manage_users' => Group::ROLE_MANAGE_USERS,
                     'group.roles.admin' => Group::ROLE_ADMIN,
                 ],
@@ -40,7 +40,7 @@ class UserGroupType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Strut\StrutBundle\Entity\UserGroup',
+            'data_class' => 'Wallabag\GroupBundle\Entity\UserGroup',
         ));
     }
 }

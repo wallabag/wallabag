@@ -224,6 +224,7 @@ entry:
             delete_public_link: 'delete public link'
             export: 'Export'
             print: 'Print'
+            groups: Groups
             problem:
                 label: 'Problems?'
                 description: 'Does this article appear wrong?'
@@ -515,6 +516,31 @@ group:
         delete: Delete
         delete_confirm: Are you sure?
         back_to_list: Back to list
+        role_label: Default roles
+        access_label: Access
+        password_label: Password (if applicable)
+
+    roles:
+        readonly: Read only
+        write: Write access
+        manage_entries: Managing articles
+        manage_users: Managing members
+        admin: Administrator
+    access:
+        open: Open
+        request: On request
+        password: With password
+        invitation: Upon invitation
+        hidden: Upon invitation and private
+    tab_menu:
+        public: Public groups
+        own: My groups
+    manage:
+        label: Manage this group
+    entries:
+        label: Entries shared with this group
+    leave:
+        label: Leave
 
 user:
     page_title: Users management

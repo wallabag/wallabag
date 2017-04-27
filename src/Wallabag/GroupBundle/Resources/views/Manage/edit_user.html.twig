@@ -1,0 +1,26 @@
+{% extends "WallabagCoreBundle::layout.html.twig" %}
+
+{% block title %}{{ 'group.edit_user.title'|trans }}{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-6">
+
+        {{ form_start(edit_form) }}
+        {{ form_errors(edit_form) }}
+
+        <div class="form-group">
+            {{ form_label(edit_form.role) }}
+            {{ form_errors(edit_form.role) }}
+            {{ form_widget(edit_form.role) }}
+        </div>
+
+        {{ form_widget(edit_form.save, {'attr': {'class': 'btn waves-effect'}}) }}
+        <a class="btn btn-default" href="{{ path('group-manage', {'group': group.id}) }}">{{ 'group.edit_user.cancel' | trans }}</a>
+        {{ form_widget(edit_form._token) }}
+        {{ form_end(edit_form) }}
+    </div>
+</div>
+
+{% endblock %}

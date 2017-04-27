@@ -170,6 +170,15 @@
             </div>
         </li>
 
+        {#{% if craue_setting('groups') %}#}
+            <li class="bold border-bottom hide-on-med-and-down">
+                <a class="waves-effect groups-button" onclick="$('#groups-modal').openModal();" title="{{ 'entry.view.left_menu.group'|trans }}">
+                    <i class="material-icons small">group</i>
+                    <span>{{ 'entry.view.left_menu.groups'|trans }}</span>
+                </a>
+            </li>
+        {#{% endif %}#}
+
         {% if craue_setting('show_printlink') %}
         <li class="bold border-bottom hide-on-med-and-down">
             <a class="waves-effect collapsible-header" title="{{ 'entry.view.left_menu.print'|trans }}" href="javascript: window.print();">
@@ -286,6 +295,8 @@
             </ul>
         </div>
     </div>
+
+    {{ render(controller( "WallabagCoreBundle:Entry:GroupShare", { 'entry': entry.id } )) }}
 
 <script id="annotationroutes" type="application/json">
 {

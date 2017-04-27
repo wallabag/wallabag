@@ -1,3 +1,8 @@
 services:
     sha256salted_encoder:
-          class: Strut\StrutBundle\Service\Sha256Salted
+          class: Wallabag\GroupBundle\Service\Sha256Salted
+
+    wallabag_core.filter.type.entry:
+            class: Wallabag\GroupBundle\Form\UserGroupType
+            tags:
+                - { name: form.type }

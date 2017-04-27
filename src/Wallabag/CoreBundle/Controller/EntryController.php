@@ -4,11 +4,15 @@ namespace Wallabag\CoreBundle\Controller;
 
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
+use Pagerfanta\Pagerfanta;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\CoreBundle\Form\Type\EditGroupSharesType;
 use Wallabag\CoreBundle\Form\Type\EntryFilterType;
 use Wallabag\CoreBundle\Form\Type\EditEntryType;
 use Wallabag\CoreBundle\Form\Type\NewEntryType;
@@ -16,6 +20,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Wallabag\CoreBundle\Event\EntrySavedEvent;
 use Wallabag\CoreBundle\Event\EntryDeletedEvent;
 use Wallabag\CoreBundle\Form\Type\SearchEntryType;
+use Wallabag\GroupBundle\Entity\Group;
 
 class EntryController extends Controller
 {
@@ -603,5 +608,89 @@ class EntryController extends Controller
     public function showUntaggedEntriesAction(Request $request, $page)
     {
         return $this->showEntries('untagged', $request, $page);
+    }
+
+	/**
+	 * @Route("/group-articles/{group}/{page}", name="group-presentations", defaults={"page" = "1"}, requirements={"page": "\d+", "group": "\d+"})
+	 *
+	 * @param Request $request
+	 * @param Group $group
+	 * @param int $page
+	 * @return Response
+	 */
+	public function showGroupSharedTemplatesAction(Request $request, Group $group, int $page)
+	{
+		if (!$this->getUser()->inGroup($group)) {
+			throw $this->createAccessDeniedException();
+		}
+
+		$repository = $this->get('wallabag_core.entry_repository');
+
+		/** @var QueryBuilder $entries */
+		$entries = $repository->findByGroup($group->getId());
+
+		$pagerAdapter = new DoctrineORMAdapter($entries->getQuery(), true, false);
+		$pagerFanta = new Pagerfanta($pagerAdapter);
+		$pagerFanta->setMaxPerPage(9);
+
+		$form = $this->createForm(EntryFilterType::class);
+
+		if ($request->query->has($form->getName())) {
+			// manually bind values from the request
+			$form->submit($request->query->get($form->getName()));
+
+			// build the query from the given form object
+			$this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($form, $qb);
+		}
+
+		$searchTerm = (isset($request->get('search_entry')['term']) ? $request->get('search_entry')['term'] : '');
+
+		try {
+			$pagerFanta->setCurrentPage($page);
+		} catch (OutOfRangeCurrentPageException $e) {
+			if ($page > 1) {
+				return $this->redirect($this->generateUrl('group-presentations', [
+					'page' => $pagerFanta->getNbPages(),
+					'group' => $group->getId()
+				]), 302);
+			}
+		}
+
+		return $this->render('WallabagCoreBundle:Entry:entries.html.twig', [
+			'form' => $form->createView(),
+			'entries' => $pagerFanta,
+			'currentPage' => $page,
+			'searchTerm' => $searchTerm,
+		]);
+	}
+
+    /**
+     *
+     * @Route("/entry/group-shares/{entry}", name="group-shares-entry")
+     *
+     * @param Request $request
+     * @param Entry $entry
+     * @return Response
+     */
+	public function groupShareAction(Request $request, Entry $entry)
+    {
+        $this->checkUserAction($entry);
+
+        $form = $this->createForm(EditGroupSharesType::class, $entry, ['groups' => $this->getUser()->getGroups()]);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($entry);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('view', ['id' => $entry->getId()]));
+        }
+
+        return $this->render('WallabagCoreBundle:Entry:_share_groups.html.twig', [
+            'form' => $form->createView(),
+            'entry' => $entry,
+        ]);
     }
 }

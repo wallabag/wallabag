@@ -1,0 +1,102 @@
+{% extends "WallabagCoreBundle::layout.html.twig" %}
+
+{% block title %}{{ 'group.manage.title' |trans({ '%group%': group.name }) }}{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="input-field col s12">
+        <p>
+            {{ 'group.form.role_label' |trans }}:
+            <em>
+                {% if group.defaultRole == 1 %}
+                    {{ 'group.roles.readonly' | trans }}
+                {% elseif group.defaultRole == 2 %}
+                    {{ 'group.roles.write' | trans }}
+                {% elseif group.defaultRole == 3 %}
+                    {{ 'group.roles.manage_prez' | trans }}
+                {% elseif group.defaultRole == 5 %}
+                    {{ 'group.roles.manage_users' | trans }}
+                {% elseif group.defaultRole == 10 %}
+                    {{ 'group.roles.admin' | trans }}
+                {% else %}
+                    {{ 'group.roles.unknown' | trans }}
+                {% endif %}
+            </em>
+        </p>
+        <p>
+            {{ 'group.form.access_label' | trans }}:
+            <em>
+                {% if group.acceptSystem == 1 %}
+                    {{ 'group.access.open' | trans }}
+                {% elseif group.acceptSystem == 2 %}
+                    {{ 'group.access.request' | trans }}
+                {% elseif group.acceptSystem == 3 %}
+                    {{ 'group.access.password' | trans }}
+                {% elseif group.acceptSystem == 4 %}
+                    {{ 'group.access.invitation' | trans }}
+                {% elseif group.acceptSystem == 10 %}
+                    {{ 'group.access.hidden' | trans }}
+                {% else %}
+                    {{ 'group.access.unknown' | trans }}
+                {% endif %}
+            </em>
+        </p>
+        <a href="{{ path('group_edit', {'id' : group.id}) }}" class="btn waves-effect">{{ 'group.edit_group' | trans }}</a>
+        {% if group.acceptSystem == 2 %}
+            <a href="{{ path('group-requests', {'group' : group.id}) }}" class="btn waves-effect">{{ 'group.requests.list' | trans }} <span class="badge">{{ group.getRequests() | length }}</span></a>
+        {% elseif group.acceptSystem >= 4 %}
+            <a href="{{ path('group-invitations', {'group' : group.id}) }}" class="btn waves-effect">{{ 'group.edit.invitations' | trans }} <span class="badge">{{ group.getInvited() | length }}</span></a>
+        {% endif %}
+        <a href="{{ path('group_delete', { 'id': group.id }) }}" class="btn waves-effect red"><i class="material-icons md-18" data-toggle="tooltip" data-placement="bottom" title="{{ 'group.form.delete'|trans }}">delete</i></a>
+
+        {% if members | length > 1 %}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>{{ 'group.members.name'|trans }}</th>
+                    <th>{{ 'group.members.role' | trans }}</th>
+                    <th>{{ 'group.members.action'|trans }}</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {% for user in members %}
+                    {% if user != app.user %}
+                        <tr>
+                            <td>{{ user.username }}</td>
+                            <td>
+                                {% if user.getGroupRoleForUser(group) == 1 %}
+                                    {{ 'group.roles.readonly' | trans }}
+                                {% elseif user.getGroupRoleForUser(group) == 2 %}
+                                    {{ 'group.roles.write' | trans }}
+                                {% elseif user.getGroupRoleForUser(group) == 3 %}
+                                    {{ 'group.roles.manage_prez' | trans }}
+                                {% elseif user.getGroupRoleForUser(group) == 5 %}
+                                    {{ 'group.roles.manage_users' | trans }}
+                                {% elseif user.getGroupRoleForUser(group) == 10 %}
+                                    {{ 'group.roles.admin' | trans }}
+                                {% else %}
+                                    {{ 'group.roles.unknown' | trans }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="{{ path('group-user-edit', { 'group': group.id, 'user': user.id }) }}" class="btn waves-effect"><i class="material-icons md-18" data-toggle="tooltip" data-placement="bottom" title="{{ 'group.members.edit'|trans }}">edit</i></a>
+                                <a class="btn waves-effect red" href="{{ path('group-user-exclude', { 'group': group.id, 'user': user.id }) }}"><i class="material-icons md-18" data-toggle="tooltip" data-placement="bottom" title="{{ 'group.members.exclude'|trans }}">clear</i></a>
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+                <p>{{ 'group.members.empty' | trans }}</p>
+        {% endif %}
+        <div class="pull-right">
+            {% if members.getNbPages > 1 %}
+                {{ pagerfanta(members, 'twitter_bootstrap3', {'proximity': 1}) }}
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

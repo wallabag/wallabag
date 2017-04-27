@@ -58,11 +58,19 @@ class UserRepository extends EntityRepository
      *
      * @param string $term
      *
-     * @return QueryBuilder
+     * @return \Doctrine\ORM\QueryBuilder
      */
     public function getQueryBuilderForSearch($term)
     {
         return $this->createQueryBuilder('u')
             ->andWhere('lower(u.username) LIKE lower(:term) OR lower(u.email) LIKE lower(:term) OR lower(u.name) LIKE lower(:term)')->setParameter('term', '%'.$term.'%');
+    }
+
+    public function findGroupMembers($groupid)
+    {
+        return $this->createQueryBuilder('u')
+            ->leftJoin('u.userGroups', 'usergroup')
+            ->where('usergroup.group = :group')->setParameter(':group', $groupid)
+            ->andWhere('usergroup.accepted = true');
     }
 }

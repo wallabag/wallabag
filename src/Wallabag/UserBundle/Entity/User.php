@@ -393,4 +393,13 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
 
         return $groups;
     }
+
+	/**
+	 * @param Group $group
+	 * @param $role
+	 */
+	public function addAGroup(Group $group, $role)
+	{
+		$this->userGroups->add(new UserGroup($this, $group, $role));
+	}
 }
