@@ -4,7 +4,7 @@ imports:
     - { resource: services.yml }
 
 parameters:
-    use_webpack_dev_server: true
+    use_webpack_dev_server: false
 
 framework:
     #esi:             ~
