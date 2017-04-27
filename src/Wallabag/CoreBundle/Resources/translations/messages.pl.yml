@@ -512,6 +512,9 @@ user:
         delete: Usuń
         delete_confirm: Jesteś pewien?
         back_to_list: Powrót do listy
+    search:
+        # label: Filter
+        # placeholder: Filter by username or email
 
 error:
     page_title: Wystąpił błąd

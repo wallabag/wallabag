@@ -512,6 +512,9 @@ user:
         delete: 'Suprimir'
         delete_confirm: 'Sètz segur ?'
         back_to_list: 'Tornar a la lista'
+    search:
+        # label: Filter
+        # placeholder: Filter by username or email
 
 error:
     page_title: Una error s'es produsida

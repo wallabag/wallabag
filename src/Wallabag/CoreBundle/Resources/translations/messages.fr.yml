@@ -512,6 +512,9 @@ user:
         delete: "Supprimer"
         delete_confirm: "Voulez-vous vraiment ?"
         back_to_list: "Revenir à la liste"
+    search:
+        label: Filtrer
+        placeholder: Filtrer par nom d'utilisateur ou email
 
 error:
     page_title: Une erreur est survenue
