@@ -17,3 +17,8 @@ misc:
   type: rest
   resource: "WallabagApiBundle:WallabagRest"
   name_prefix:  api_
+
+user:
+  type: rest
+  resource: "WallabagApiBundle:UserRest"
+  name_prefix:  api_

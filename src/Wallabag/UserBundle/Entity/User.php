@@ -4,6 +4,7 @@ namespace Wallabag\UserBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Groups;
 use Scheb\TwoFactorBundle\Model\Email\TwoFactorInterface;
 use Scheb\TwoFactorBundle\Model\TrustedComputerInterface;
 use FOS\UserBundle\Model\User as BaseUser;
@@ -35,6 +36,7 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Groups({"user_api"})
      */
     protected $id;
 
@@ -42,6 +44,7 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
      * @var string
      *
      * @ORM\Column(name="name", type="text", nullable=true)
+     * @Groups({"user_api"})
      */
     protected $name;
 
@@ -49,6 +52,7 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
      * @var date
      *
      * @ORM\Column(name="created_at", type="datetime")
+     * @Groups({"user_api"})
      */
     protected $createdAt;
 
@@ -56,6 +60,7 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
      * @var date
      *
      * @ORM\Column(name="updated_at", type="datetime")
+     * @Groups({"user_api"})
      */
     protected $updatedAt;
 
