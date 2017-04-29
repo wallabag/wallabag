@@ -22,7 +22,7 @@ class ManageController extends Controller
     /**
      * Lists all User entities.
      *
-     * @Route("/index/{page}", name="user_index")
+     * @Route("/list/{page}", name="user_index")
      * @Method("GET")
      *
      * @param int $page

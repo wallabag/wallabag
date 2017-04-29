@@ -10,7 +10,7 @@ class ManageControllerTest extends WallabagCoreTestCase
     {
         $client = $this->getClient();
 
-        $client->request('GET', '/users/index');
+        $client->request('GET', '/users/list');
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $this->assertContains('login', $client->getResponse()->headers->get('location'));
@@ -22,7 +22,7 @@ class ManageControllerTest extends WallabagCoreTestCase
         $client = $this->getClient();
 
         // Create a new user in the database
-        $crawler = $client->request('GET', '/users/index');
+        $crawler = $client->request('GET', '/users/list');
         $this->assertEquals(200, $client->getResponse()->getStatusCode(), 'Unexpected HTTP status code for GET /users/');
         $crawler = $client->click($crawler->selectLink('user.list.create_new_one')->link());
 
@@ -36,7 +36,7 @@ class ManageControllerTest extends WallabagCoreTestCase
 
         $client->submit($form);
         $client->followRedirect();
-        $crawler = $client->request('GET', '/users/index');
+        $crawler = $client->request('GET', '/users/list');
 
         // Check data in the show view
         $this->assertGreaterThan(0, $crawler->filter('td:contains("test_user")')->count(), 'Missing element td:contains("test_user")');
@@ -57,7 +57,7 @@ class ManageControllerTest extends WallabagCoreTestCase
         // Check the element contains an attribute with value equals "Foo User"
         $this->assertGreaterThan(0, $crawler->filter('[value="Foo User"]')->count(), 'Missing element [value="Foo User"]');
 
-        $crawler = $client->request('GET', '/users/index');
+        $crawler = $client->request('GET', '/users/list');
         $crawler = $client->click($crawler->selectLink('user.list.edit_action')->last()->link());
 
         // Delete the user
@@ -85,7 +85,7 @@ class ManageControllerTest extends WallabagCoreTestCase
         $client = $this->getClient();
 
         // Search on unread list
-        $crawler = $client->request('GET', '/users/index');
+        $crawler = $client->request('GET', '/users/list');
 
         $form = $crawler->filter('form[name=search_users]')->form();
         $data = [
