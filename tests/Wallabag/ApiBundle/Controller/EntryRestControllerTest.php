@@ -298,7 +298,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $entry = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneByUser(1);
+            ->findOneByUser(1, ['id' => 'asc']);
 
         if (!$entry) {
             $this->markTestSkipped('No content found in db.');
@@ -719,15 +719,15 @@ class EntryRestControllerTest extends WallabagApiTestCase
     {
         $entry = $this->client->getContainer()->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findByUrlAndUserId('http://0.0.0.0/entry2', 1);
+            ->findByUrlAndUserId('http://0.0.0.0/entry4', 1);
 
         $tags = $entry->getTags();
 
-        $this->assertCount(4, $tags);
+        $this->assertCount(2, $tags);
 
         $list = [
             [
-                'url' => 'http://0.0.0.0/entry2',
+                'url' => 'http://0.0.0.0/entry4',
                 'tags' => 'new tag 1, new tag 2',
             ],
         ];
@@ -739,29 +739,29 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->assertInternalType('int', $content[0]['entry']);
-        $this->assertEquals('http://0.0.0.0/entry2', $content[0]['url']);
+        $this->assertEquals('http://0.0.0.0/entry4', $content[0]['url']);
 
         $entry = $this->client->getContainer()->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findByUrlAndUserId('http://0.0.0.0/entry2', 1);
+            ->findByUrlAndUserId('http://0.0.0.0/entry4', 1);
 
         $tags = $entry->getTags();
-        $this->assertCount(6, $tags);
+        $this->assertCount(4, $tags);
     }
 
     public function testDeleteEntriesTagsListAction()
     {
         $entry = $this->client->getContainer()->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findByUrlAndUserId('http://0.0.0.0/entry2', 1);
+            ->findByUrlAndUserId('http://0.0.0.0/entry4', 1);
 
         $tags = $entry->getTags();
 
-        $this->assertCount(6, $tags);
+        $this->assertCount(4, $tags);
 
         $list = [
             [
-                'url' => 'http://0.0.0.0/entry2',
+                'url' => 'http://0.0.0.0/entry4',
                 'tags' => 'new tag 1, new tag 2',
             ],
         ];
@@ -773,13 +773,13 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->assertInternalType('int', $content[0]['entry']);
-        $this->assertEquals('http://0.0.0.0/entry2', $content[0]['url']);
+        $this->assertEquals('http://0.0.0.0/entry4', $content[0]['url']);
 
         $entry = $this->client->getContainer()->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findByUrlAndUserId('http://0.0.0.0/entry2', 1);
+            ->findByUrlAndUserId('http://0.0.0.0/entry4', 1);
 
         $tags = $entry->getTags();
-        $this->assertCount(4, $tags);
+        $this->assertCount(2, $tags);
     }
 }
