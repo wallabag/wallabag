@@ -774,7 +774,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
     {
         $list = [
             'http://www.lemonde.fr/musiques/article/2017/04/23/loin-de-la-politique-le-printemps-de-bourges-retombe-en-enfance_5115862_1654986.html',
-            'http://0.0.0.0/entry1',
+            'http://0.0.0.0/entry2',
         ];
 
         $this->client->request('POST', '/api/entries/lists?urls='.json_encode($list));
@@ -787,7 +787,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertEquals('http://www.lemonde.fr/musiques/article/2017/04/23/loin-de-la-politique-le-printemps-de-bourges-retombe-en-enfance_5115862_1654986.html', $content[0]['url']);
 
         $this->assertInternalType('int', $content[1]['entry']);
-        $this->assertEquals('http://0.0.0.0/entry1', $content[1]['url']);
+        $this->assertEquals('http://0.0.0.0/entry2', $content[1]['url']);
     }
 
     public function testDeleteEntriesListAction()
