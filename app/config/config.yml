@@ -4,6 +4,7 @@ imports:
     - { resource: services.yml }
 
 parameters:
+    # Allows to use the live reload feature for changes in assets
     use_webpack_dev_server: false
 
 framework:
