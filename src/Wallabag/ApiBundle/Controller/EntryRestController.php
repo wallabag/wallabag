@@ -239,7 +239,6 @@ class EntryRestController extends WallabagRestController
 
         // handle multiple urls
         if (!empty($urls)) {
-            $results = [];
             foreach ($urls as $key => $url) {
                 $entry = $this->get('wallabag_core.entry_repository')->findByUrlAndUserId(
                     $url,
