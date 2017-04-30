@@ -5,6 +5,8 @@ namespace Wallabag\ImportBundle\Import;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 
+ini_set("memory_limit", "-1");//Let's home god will forgive
+
 class InstapaperImport extends AbstractImport
 {
     private $filepath;
