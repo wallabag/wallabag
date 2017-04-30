@@ -1,0 +1,7 @@
+{% extends "WallabagCoreBundle::layout.html.twig" %}
+
+{% block title %}{{ 'developer.client.page_title'|trans }}{% endblock %}
+
+{% block content %}
+{% include "FOSOAuthServerBundle:Authorize:authorize_content.html.twig" %}
+{% endblock content %}

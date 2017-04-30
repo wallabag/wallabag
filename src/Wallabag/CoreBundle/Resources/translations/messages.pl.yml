@@ -443,55 +443,55 @@ import:
         description: 'Ten importer, zaimportuje wszystkie twoje artykuły z Pinboard. W ustawieniach kopii zapasowej (https://pinboard.in/settings/backup), kliknij na "JSON" w sekcji "Bookmarks". Otrzymasz plik "pinboard_export".'
         how_to: 'Wybierz swój plik eksportu z Pinboard i kliknij poniższy przycisk, aby go załadować.'
 
-developer:
+apps:
     page_title: 'Zarządzanie klientami API'
-    welcome_message: 'Witaj w API wallabag'
-    documentation: 'Dokumentacja'
-    how_to_first_app: 'Jak stworzyć moją pierwszą aplikację'
-    full_documentation: 'Pokaż pełne API'
-    list_methods: 'Lista metod API'
-    clients:
-        title: 'Klienci'
+    # allow:
+    #    title: 'A new application would like to connect to your account'
+    #    permissions:
+    #        read:
+    #            label: 'Read your data'
+    #            desc: '%name% will be able to access the list and contents of your entries, tags and annotations.'
+    #        write:
+    #            label: 'Edit your data'
+    #            desc: '%name% will be able to edit and manage (including deleting) your entries, tags and annotations.'
+    #        user:
+    #            label: 'Edit your user settings'
+    #            desc: '%name% will be able to manage your user account.'
+    #featured:
+    #    title: 'Featured apps'
+    #list:
+    #    title: 'Authorized apps'
+    old_clients:
         create_new: 'Utwórz nowego klienta'
-    existing_clients:
         title: 'Istniejący klienci'
+        list: 'Klienci'
         field_id: 'ID klienta'
         field_secret: 'Client secret'
-        field_uris: 'Przekieruj URIs'
-        field_grant_types: 'Przyznaj pozwolenie'
         no_client: 'Nie ma jeszcze klienta.'
     remove:
         warn_message_1: 'Masz możliwość usunięcia tego klienta. Ta akcja jest NIEODWRACALNA !'
         warn_message_2: "Jeżeli go usuniesz, aplikacje skonfigurowane z tym klientem nię będa w stanie autoryzować twojego wallabag."
         action: 'Usuń tego klienta'
-    client:
+    old_client:
         page_title: 'Zarządzanie klientami API > Nowy klient'
         page_description: 'Tworzysz nowego klienta. Wypełnij poniższe pole w celu przekierowania URI twojej aplikacji.'
         form:
             name_label: 'Nazwa klienta'
-            redirect_uris_label: 'Przekieruj adresy URI'
             save_label: 'Stwórz nowego klienta'
         action_back: 'Cofnij'
-    client_parameter:
-        page_title: 'Zarządzanie klientami API > Parametry klienta'
-        page_description: 'Tutaj znajdują się parametry klienta.'
-        field_name: 'Nazwa klienta'
-        field_id: 'Client ID'
-        field_secret: 'Client secret'
-        back: 'Cofnij'
-        read_howto: 'Przeczytaj jak "Stworzyć moją pierwszą aplikację"'
-    howto:
-        page_title: 'Zarządzanie klientami API > Jak stworzyć moją pierwszą aplikację'
-        description:
-            paragraph_1: 'Następujące komendy korzystają <a href="https://github.com/jkbrzt/httpie">Biblioteka HTTPie</a>. Upewnij się, czy zainstalowałeś ją w swoim systemie zanim z niej skorzystasz'
-            paragraph_2: 'Potrzebujesz tokena w celu nawiązania komunikacji między swoją aplikacją a API wallabag.'
-            paragraph_3: 'W celu stworzenia tokena musisz <a href="%link%">stwórz nowego klienta</a>.'
-            paragraph_4: 'Teraz, utwórz tokena (zmień client_id, client_secret, username i password z poprawnymi wartościami):'
-            paragraph_5: 'API powinno zwrócić taką informację:'
-            paragraph_6: 'access_token jest użyteczny do wywołania API endpoint. Na przykład:'
-            paragraph_7: 'To wywołanie zwróci wszystkie twoje wpisy.'
-            paragraph_8: 'Jeżeli chcesz wyświetlić wszystkie punkty końcowe API, zobacz <a href="%link%">Dokumentacja naszego API</a>.'
-        back: 'Cofnij'
+        parameters:
+            page_title: 'Zarządzanie klientami API > Parametry klienta'
+            page_description: 'Tutaj znajdują się parametry klienta.'
+            field_name: 'Nazwa klienta'
+            field_id: 'Client ID'
+            field_secret: 'Client secret'
+            back: 'Cofnij'
+    # app:
+    #    created_at: 'Created at: %date%'
+    documentation:
+        title: 'Dokumentacja'
+        full_documentation: 'Pokaż pełne API'
+        list_methods: 'Lista metod API'
 
 user:
     page_title: Zarządzanie użytkownikami

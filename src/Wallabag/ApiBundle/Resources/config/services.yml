@@ -1,0 +1,6 @@
+services:
+    wallabag_api.accesstoken_repository:
+        class: Wallabag\ApiBundle\Repository\AccessTokenRepository
+        factory: [ "@doctrine.orm.default_entity_manager", getRepository ]
+        arguments:
+            - WallabagApiBundle:AccessToken

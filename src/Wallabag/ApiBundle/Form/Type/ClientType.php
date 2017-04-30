@@ -15,24 +15,8 @@ class ClientType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class, ['label' => 'developer.client.form.name_label'])
-            ->add('redirect_uris', UrlType::class, [
-                'required' => false,
-                'label' => 'developer.client.form.redirect_uris_label',
-                'property_path' => 'redirectUris',
-            ])
-            ->add('save', SubmitType::class, ['label' => 'developer.client.form.save_label'])
-        ;
-
-        $builder->get('redirect_uris')
-            ->addModelTransformer(new CallbackTransformer(
-                function ($originalUri) {
-                    return $originalUri;
-                },
-                function ($submittedUri) {
-                    return [$submittedUri];
-                }
-            ))
+            ->add('name', TextType::class, ['label' => 'apps.old_client.form.name_label'])
+            ->add('save', SubmitType::class, ['label' => 'apps.old_client.form.save_label'])
         ;
     }
 

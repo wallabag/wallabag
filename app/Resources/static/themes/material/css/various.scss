@@ -30,3 +30,30 @@ nav .input-field input {
 .tab {
   flex: 1;
 }
+
+.slider .slides {
+  background: #00acc1;
+
+  li {
+    img {
+      background: no-repeat;
+      background-size: contain;
+      background-position: unset;
+    }
+
+    .icon {
+      width: auto;
+      height: 180px;
+    }
+
+    .icon.browser {
+      width: auto;
+      height: 100px;
+    }
+
+    .caption {
+      width: 85%;
+      left: 10%;
+    }
+  }
+}

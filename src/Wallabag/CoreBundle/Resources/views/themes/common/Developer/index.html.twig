@@ -1,67 +1,153 @@
 {% extends "WallabagCoreBundle::layout.html.twig" %}
 
-{% block title %}{{ 'developer.page_title'|trans }}{% endblock %}
+{% block title %}{{ 'apps.page_title'|trans }}{% endblock %}
 
 {% block content %}
 <div class="row">
     <div class="col s12">
         <div class="card-panel settings">
-
             <div class="row">
-                <h3>{{ 'developer.welcome_message'|trans }}</h3>
+                <h4>{{ 'apps.featured.title'|trans }}</h4>
 
-                <h4>{{ 'developer.documentation'|trans }}</h4>
+                <div class="slider">
+                    <ul class="slides">
+                        <li>
+                            <img src="{{ asset('assets/appicons/android_full.png') }}">
+                            <div class="caption right-align">
+                                <h3>Android</h3>
+                                <h5 class="light grey-text text-lighten-3">For all Android 4.4+ devices</h5>
+                                <p>
+                                    <a href="https://play.google.com/store/apps/details?id=fr.gaulupeau.apps.InThePoche">
+                                        <img class="icon" alt="Get it on Google Play"
+                                             height="80"
+                                             src="{{ asset('assets/appicons/google_play.png') }}" />
+                                    </a>
+                                    <a href="https://f-droid.org/app/fr.gaulupeau.apps.InThePoche">
+                                        <img class="icon" alt="Get it on F-Droid"
+                                             height="80"
+                                             src="{{ asset('assets/appicons/fdroid.png') }}" />
+                                    </a>
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <img style="background-position: right" src="{{ asset('assets/appicons/iOS_full.png') }}">
+                            <div class="caption left-align">
+                                <h3>iOS</h3>
+                                <h5 class="light grey-text text-lighten-3">For your iPhones and iPads</h5>
+                                <p>
+                                    <a href="https://itunes.apple.com/app/wallabag-2/id1170800946?mt=8">
+                                        <img class="icon" alt="Get it on the AppStore"
+                                             height="80"
+                                             src="{{ asset('assets/appicons/appstore.svg') }}" />
+                                    </a>
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="{{ asset('assets/appicons/windows.jpeg') }}">
+                            <div class="caption right-align">
+                                <h3>Windows</h3>
+                                <h5 class="light grey-text text-lighten-3">Available on Windows Phones and Windows 10</h5>
+                                <p>
+                                    <a href="https://www.microsoft.com/en-us/store/p/wallabag/9nblggh5x3p6">
+                                        <img class="icon" alt="Get it on the Windows Store"
+                                             height="80"
+                                             src="{{ asset('assets/appicons/windowsstore.png') }}" />
+                                    </a>
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <img style="background-position: right" src="{{ asset('assets/appicons/browser.png') }}">
+                            <div class="caption left-align">
+                                <h3>Browser Extension</h3>
+                                <h5 class="light grey-text text-lighten-3">Available on Firefox, Chrome and Opera</h5>
+                                <p>
+                                    <a href="https://addons.mozilla.org/en/firefox/addon/wallabagger/">
+                                        <img class="icon browser" alt="Get it on the Firefox Addons Website"
+                                             height="80"
+                                             src="{{ asset('assets/appicons/Firefox-logo.svg') }}" />
+                                    </a>
+                                    <a href="https://chrome.google.com/webstore/detail/wallabagger/gbmgphmejlcoihgedabhgjdkcahacjlj">
+                                        <img class="icon browser" alt="Get it on the Firefox Addons Website"
+                                             height="80"
+                                             src="{{ asset('assets/appicons/Logo_Google_Chrome.svg') }}" />
+                                    </a>
+                                    <a href="https://addons.opera.com/fr/extensions/details/wallabagger/">
+                                        <img class="icon browser" alt="Get it on the Firefox Addons Website"
+                                             height="80"
+                                             src="{{ asset('assets/appicons/opera-for-computers_icon_128x128.png') }}" />
+                                    </a>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
 
-                <ul>
-                    <li><a href="{{ path('developer_howto_firstapp') }}">{{ 'developer.how_to_first_app'|trans }}</a></li>
-                    <li><a href="https://doc.wallabag.org/en/developer/api/readme.html">{{ 'developer.full_documentation'|trans }}</a></li>
-                    <li><a href="{{ path('nelmio_api_doc_index') }}">{{ 'developer.list_methods'|trans }}</a></li>
+                <h4>{{ 'apps.list.title'|trans }}</h4>
+
+                <ul class="collection">
+                    {% for app in apps %}
+                        <li class="collection-item avatar">
+                            {% if app.client.image %}
+                                <img src="{{ app.client.image }}" alt="" class="circle">
+                            {% endif %}
+                            <span class="title"><a href="{{ app.client.appUrl }}">{{ app.client.name }}</a></span>
+                            <p>{{ app.client.description }}</p>
+                            <div class="scopes">
+                                {% for scope in app.scope | split(' ') %}
+                                    <div class="chip">{{ scope }}</div>
+                                {% endfor %}
+                            </div>
+                            <p>{{ 'apps.app.created_at' | trans({'%date%': app.client.createdAt}) }}</p>
+                            <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                        </li>
+                    {% endfor %}
                 </ul>
 
-                <h4>{{ 'developer.clients.title'|trans }}</h4>
+                <h4>{{ 'apps.old_clients.title'|trans }}</h4>
                 <ul>
-                    <li><a href="{{ path('developer_create_client') }}">{{ 'developer.clients.create_new'|trans }}</a></li>
+                    <li><a href="{{ path('apps_create_client') }}">{{ 'apps.old_clients.create_new'|trans }}</a></li>
                 </ul>
 
-                <h4>{{ 'developer.existing_clients.title'|trans }}</h4>
+                <h5>{{ 'apps.old_clients.list'|trans }}</h5>
                 {% if clients %}
                     <ul class="collapsible" data-collapsible="expandable">
                         {% for client in clients %}
                             <li>
-                                <div class="collapsible-header">{{ client.name }} - #{{ client.id }}</div>
+                                <div class="collapsible-header">{{ client.name }}</div>
                                 <div class="collapsible-body">
                                     <table class="striped">
                                         <tr>
-                                            <td>{{ 'developer.existing_clients.field_id'|trans }}</td>
-                                            <td><strong><code>{{ client.clientId }}</code></strong></td>
+                                            <td>{{ 'apps.old_clients.field_id'|trans }}</td>
+                                            <td><strong><code>{{ client.id }}_{{ client.randomId }}</code></strong></td>
                                         </tr>
                                         <tr>
-                                            <td>{{ 'developer.existing_clients.field_secret'|trans }}</td>
+                                            <td>{{ 'apps.old_clients.field_secret'|trans }}</td>
                                             <td><strong><code>{{ client.secret }}</code></strong></td>
-                                        </tr>
-                                        <tr>
-                                            <td>{{ 'developer.existing_clients.field_uris'|trans }}</td>
-                                            <td><strong><code>{{ client.redirectUris|json_encode() }}</code></strong></td>
-                                        </tr>
-                                        <tr>
-                                            <td>{{ 'developer.existing_clients.field_grant_types'|trans }}</td>
-                                            <td><strong><code>{{ client.allowedGrantTypes|json_encode() }}</code></strong></td>
                                         </tr>
                                     </table>
                                     <p>
-                                        {{ 'developer.remove.warn_message_1'|trans({'%name%': client.name }) }}<br/>
-                                        {{ 'developer.remove.warn_message_2'|trans({'%name%': client.name }) }}<br/>
-                                        <a class="waves-effect waves-light red btn" href="{{ path('developer_delete_client', {'id': client.id}) }}">{{ 'developer.remove.action'|trans({'%name%': client.name }) }}</a>
+                                        {{ 'apps.remove.warn_message_1'|trans({'%name%': client.name }) }}<br/>
+                                        {{ 'apps.remove.warn_message_2'|trans({'%name%': client.name }) }}<br/>
+                                        <a class="waves-effect waves-light red btn" href="{{ path('apps_delete_client', {'id': client.id}) }}">{{ 'apps.remove.action'|trans({'%name%': client.name }) }}</a>
                                     </p>
+
                                 </div>
                             </li>
                         {% endfor %}
                     </ul>
                 {% else %}
-                    {{ 'developer.existing_clients.no_client'|trans }}
+                    {{ 'apps.old_clients.no_client'|trans }}
                 {% endif %}
-            </div>
+                <h4>{{ 'apps.documentation.title'|trans }}</h4>
 
+                <ul>
+                    <li><a href="http://doc.wallabag.org/en/master/developer/api.html">{{ 'apps.documentation.full_documentation'|trans }}</a></li>
+                    <li><a href="{{ path('nelmio_api_doc_index') }}">{{ 'apps.documentation.list_methods'|trans }}</a></li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>

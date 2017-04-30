@@ -1,0 +1,53 @@
+<div class="row">
+    <div class="col s12">
+        <h4>A new application would like to connect to your account</h4>
+
+        <div class="center-align col l6 offset-l3">
+            <div class="row">
+                <ul class="collection">
+                    <li class="collection-item avatar">
+                        {% if client.image %}
+                        <img src="{{ client.image }}" alt="Client icon" class="circle">
+                        {% endif %}
+                        <span class="title">{{ client.name }}</span>
+                        <p>{{ client.description }}</p>
+                    </li>
+                </ul>
+            {% set scopes = form.scope.vars.value | split(' ') %}
+            {# TODO : Fix me when https://github.com/FriendsOfSymfony/FOSOAuthServerBundle/issues/309 is ok #}
+            <ul class="collapsible col s12 m12 l6 offset-l3" data-collapsible="accordion">
+                {% for scope in scopes %}
+                    {% if scope == 'read' %}
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">visibility</i>Read Permission</div>
+                            <div class="collapsible-body"><span>{{ client.name }} will be able to access the list and contents of your entries, tags and annotations.</span></div>
+                        </li>
+                    {% endif %}
+                    {% if scope == 'write' %}
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">edit</i>Edit Permission</div>
+                            <div class="collapsible-body"><span>{{ client.name }} will be able to edit and manage (including deleting) your entries, tags and annotations.</span></div>
+                        </li>
+                    {% endif %}
+                    {% if scope == 'user' %}
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">person</i>User Permission</div>
+                            <div class="collapsible-body"><span>{{ client.name }} will be able to manage your user account.</span></div>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            </div>
+            {{ form_start(form, {'method': 'POST', 'action': path('fos_oauth_server_authorize'), 'label_attr': {'class': 'fos_oauth_server_authorize'} }) }}
+                <input class="waves-effect waves-light btn red" type="submit" name="rejected" value="{{ 'authorize.reject'|trans({}, 'FOSOAuthServerBundle') }}" />
+                <input class="waves-effect waves-light btn" type="submit" name="accepted" value="{{ 'authorize.accept'|trans({}, 'FOSOAuthServerBundle') }}" />
+                {{ form_row(form.client_id) }}
+                {{ form_row(form.response_type) }}
+                {{ form_row(form.redirect_uri) }}
+                {{ form_row(form.state) }}
+                {{ form_row(form.scope) }}
+                {{ form_rest(form) }}
+            </form>
+        </div>
+    </div>
+</div>

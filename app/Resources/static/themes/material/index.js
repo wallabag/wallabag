@@ -75,4 +75,10 @@ $(document).ready(() => {
     const scrollPercent = (s / (d - c)) * 100;
     $('.progress .determinate').css('width', `${scrollPercent}%`);
   });
+
+  if ($('.slider')) {
+    $('.slider').slider({
+      height: 500,
+    });
+  }
 });

@@ -4,6 +4,7 @@ namespace Wallabag\ApiBundle\Controller;
 
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Wallabag\CoreBundle\Entity\Entry;
@@ -21,7 +22,7 @@ class AnnotationRestController extends WallabagRestController
      * )
      *
      * @param Entry $entry
-     *
+     * @Security("has_role('ROLE_READ')")
      * @return JsonResponse
      */
     public function getAnnotationsAction(Entry $entry)
@@ -46,7 +47,7 @@ class AnnotationRestController extends WallabagRestController
      *
      * @param Request $request
      * @param Entry   $entry
-     *
+     * @Security("has_role('ROLE_WRITE')")
      * @return JsonResponse
      */
     public function postAnnotationAction(Request $request, Entry $entry)
@@ -72,7 +73,7 @@ class AnnotationRestController extends WallabagRestController
      *
      * @param Annotation $annotation
      * @param Request    $request
-     *
+     * @Security("has_role('ROLE_WRITE')")
      * @return JsonResponse
      */
     public function putAnnotationAction(Annotation $annotation, Request $request)
@@ -97,7 +98,7 @@ class AnnotationRestController extends WallabagRestController
      * @ParamConverter("annotation", class="WallabagAnnotationBundle:Annotation")
      *
      * @param Annotation $annotation
-     *
+     * @Security("has_role('ROLE_WRITE')")
      * @return JsonResponse
      */
     public function deleteAnnotationAction(Annotation $annotation)

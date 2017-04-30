@@ -5,6 +5,7 @@ namespace Wallabag\ApiBundle\Controller;
 use Hateoas\Configuration\Route;
 use Hateoas\Representation\Factory\PagerfantaFactory;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -25,7 +26,7 @@ class EntryRestController extends WallabagRestController
      *          {"name"="urls", "dataType"="string", "required"=false, "format"="An array of urls (?urls[]=http...&urls[]=http...)", "description"="Urls (as an array) to check if it exists"}
      *       }
      * )
-     *
+     * @Security("has_role('ROLE_READ')")
      * @return JsonResponse
      */
     public function getEntriesExistsAction(Request $request)
@@ -80,7 +81,7 @@ class EntryRestController extends WallabagRestController
      *          {"name"="public", "dataType"="integer", "required"=false, "format"="1 or 0, all entries by default", "description"="filter by entries with a public link"},
      *       }
      * )
-     *
+     * @Security("has_role('ROLE_READ')")
      * @return JsonResponse
      */
     public function getEntriesAction(Request $request)
@@ -143,7 +144,7 @@ class EntryRestController extends WallabagRestController
      *          {"name"="entry", "dataType"="integer", "requirement"="\w+", "description"="The entry ID"}
      *      }
      * )
-     *
+     * @Security("has_role('ROLE_READ')")
      * @return JsonResponse
      */
     public function getEntryAction(Entry $entry)
@@ -162,7 +163,7 @@ class EntryRestController extends WallabagRestController
      *          {"name"="entry", "dataType"="integer", "requirement"="\w+", "description"="The entry ID"}
      *      }
      * )
-     *
+     * @Security("has_role('ROLE_READ')")
      * @return Response
      */
     public function getEntryExportAction(Entry $entry, Request $request)
@@ -302,7 +303,7 @@ class EntryRestController extends WallabagRestController
      *          {"name"="public", "dataType"="integer", "required"=false, "format"="1 or 0", "description"="will generate a public link for the entry"},
      *       }
      * )
-     *
+     * @Security("has_role('ROLE_WRITE')")
      * @return JsonResponse
      */
     public function postEntriesAction(Request $request)
@@ -346,7 +347,7 @@ class EntryRestController extends WallabagRestController
      *          {"name"="public", "dataType"="integer", "required"=false, "format"="1 or 0", "description"="will generate a public link for the entry"},
      *      }
      * )
-     *
+     * @Security("has_role('ROLE_WRITE')")
      * @return JsonResponse
      */
     public function patchEntriesAction(Entry $entry, Request $request)
@@ -368,7 +369,7 @@ class EntryRestController extends WallabagRestController
      *          {"name"="entry", "dataType"="integer", "requirement"="\w+", "description"="The entry ID"}
      *      }
      * )
-     *
+     * @Security("has_role('ROLE_WRITE')")
      * @return JsonResponse
      */
     public function patchEntriesReloadAction(Entry $entry)
@@ -410,7 +411,7 @@ class EntryRestController extends WallabagRestController
      *          {"name"="entry", "dataType"="integer", "requirement"="\w+", "description"="The entry ID"}
      *      }
      * )
-     *
+     * @Security("has_role('ROLE_WRITE')")
      * @return JsonResponse
      */
     public function deleteEntriesAction(Entry $entry)
@@ -436,7 +437,7 @@ class EntryRestController extends WallabagRestController
      *          {"name"="entry", "dataType"="integer", "requirement"="\w+", "description"="The entry ID"}
      *      }
      * )
-     *
+     * @Security("has_role('ROLE_READ')")
      * @return JsonResponse
      */
     public function getEntriesTagsAction(Entry $entry)
@@ -458,7 +459,7 @@ class EntryRestController extends WallabagRestController
      *          {"name"="tags", "dataType"="string", "required"=false, "format"="tag1,tag2,tag3", "description"="a comma-separated list of tags."},
      *       }
      * )
-     *
+     * @Security("has_role('ROLE_WRITE')")
      * @return JsonResponse
      */
     public function postEntriesTagsAction(Request $request, Entry $entry)
@@ -487,7 +488,7 @@ class EntryRestController extends WallabagRestController
      *          {"name"="entry", "dataType"="integer", "requirement"="\w+", "description"="The entry ID"}
      *      }
      * )
-     *
+     * @Security("has_role('ROLE_WRITE')")
      * @return JsonResponse
      */
     public function deleteEntriesTagsAction(Entry $entry, Tag $tag)

@@ -443,55 +443,55 @@ import:
         # description: 'This importer will import all your Instapaper articles. On the backup (https://pinboard.in/settings/backup) page, click on "JSON" in the "Bookmarks" section. A JSON file will be downloaded (like "pinboard_export").'
         # how_to: 'Please select your Pinboard export and click on the below button to upload and import it.'
 
-developer:
-    # page_title: 'API clients management'
-    # welcome_message: 'Welcome to the wallabag API'
-    # documentation: 'Documentation'
-    # how_to_first_app: 'How to create my first application'
-    # full_documentation: 'View full API documentation'
-    # list_methods: 'List API methods'
-    # clients:
-    #     title: 'Clients'
-    #     create_new: 'Create a new client'
-    # existing_clients:
-    #     title: 'Existing clients'
-    #     field_id: 'Client ID'
-    #     field_secret: 'Client secret'
-    #     field_uris: 'Redirect URIs'
-    #     field_grant_types: 'Grant type allowed'
-    #     no_client: 'No client yet.'
-    # remove:
-    #     warn_message_1: 'You have the ability to remove this client. This action is IRREVERSIBLE !'
-    #     warn_message_2: "If you remove it, every app configured with that client won't be able to auth on your wallabag."
-    #     action: 'Remove this client'
-    # client:
-    #     page_title: 'API clients management > New client'
-    #     page_description: 'You are about to create a new client. Please fill the field below for the redirect URI of your application.'
-    #     form:
-    #         name_label: 'Name of the client'
-    #         redirect_uris_label: 'Redirect URIs'
-    #         save_label: 'Create a new client'
-    #     action_back: 'بازگشت'
-    # client_parameter:
-    #     page_title: 'API clients management > Client parameters'
-    #     page_description: 'Here are your client parameters.'
-    #     field_name: 'Client name'
-    #     field_id: 'Client ID'
-    #     field_secret: 'Client secret'
-    #     back: 'بازگشت'
-    #     read_howto: 'Read the howto "Create my first application"'
-    # howto:
-    #     page_title: 'API clients management > How to create my first application'
-    #     description:
-    #         paragraph_1: 'The following commands make use of the <a href="https://github.com/jkbrzt/httpie">HTTPie library</a>. Make sure it is installed on your system before using it.'
-    #         paragraph_2: 'You need a token to communicate between your 3rd application and wallabag API.'
-    #         paragraph_3: 'To create this token, you need <a href="%link%">to create a new client</a>.'
-    #         paragraph_4: 'Now, create your token (replace client_id, client_secret, username and password with the good values):'
-    #         paragraph_5: 'The API will return a response like this:'
-    #         paragraph_6: 'The access_token is useful to do a call to the API endpoint. For example:'
-    #         paragraph_7: 'This call will return all the entries for your user.'
-    #         paragraph_8: 'If you want to see all the API endpoints, you can have a look <a href="%link%">to our API documentation</a>.'
-    #     back: 'بازگشت'
+apps:
+    # page_title: 'Apps'
+    # allow:
+    #    title: 'A new application would like to connect to your account'
+    #    permissions:
+    #        read:
+    #            label: 'Read your data'
+    #            desc: '%name% will be able to access the list and contents of your entries, tags and annotations.'
+    #        write:
+    #            label: 'Edit your data'
+    #            desc: '%name% will be able to edit and manage (including deleting) your entries, tags and annotations.'
+    #        user:
+    #            label: 'Edit your user settings'
+    #            desc: '%name% will be able to manage your user account.'
+    #featured:
+    #    title: 'Featured apps'
+    #list:
+    #    title: 'Authorized apps'
+    #old_clients:
+    #    create_new: 'Create a new client'
+    #    title: 'Old clients (depreciated)'
+    #    list: 'Old clients list'
+    #    field_id: 'Client ID'
+    #    field_secret: 'Client secret'
+    #    no_client: 'No client yet.'
+    #remove:
+    #    warn_message_1: 'You have the ability to remove the client %name%. This action is IRREVERSIBLE !'
+    #    warn_message_2: "If you remove it, every app configured with that client won't be able to auth on your wallabag."
+    #    action: 'Remove the client %name%'
+    #old_client:
+    #    page_title: 'Apps > New client'
+    #    page_description: 'You are about to create a new client. Please fill the field below for the redirect URI of your application.'
+    #    form:
+    #        name_label: 'Name of the client'
+    #        save_label: 'Create a new client'
+    #    action_back: 'Back'
+    #    parameters:
+    #        page_title: 'Apps > Client parameters'
+    #        page_description: 'Here are your client parameters.'
+    #        field_name: 'Client name'
+    #        field_id: 'Client ID'
+    #        field_secret: 'Client secret'
+    #        back: 'Back'
+    # app:
+    #    created_at: 'Created at: %date%'
+    # documentation:
+    #    title: 'Documentation'
+    #    full_documentation: 'Full documentation'
+    #    list_methods: 'List API methods'
 
 user:
     # page_title: Users management

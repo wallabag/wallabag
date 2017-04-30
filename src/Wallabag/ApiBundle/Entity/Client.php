@@ -8,6 +8,7 @@ use Wallabag\UserBundle\Entity\User;
 use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\VirtualProperty;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table("oauth2_clients")
@@ -51,13 +52,39 @@ class Client extends BaseClient
 
     /**
      * @ORM\ManyToOne(targetEntity="Wallabag\UserBundle\Entity\User", inversedBy="clients")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
      */
     private $user;
 
-    public function __construct(User $user)
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $image;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $description;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $appUrl;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $createdAt;
+
+    /**
+     * Client constructor.
+     * @param User|null $user
+     */
+    public function __construct(User $user = null)
     {
         parent::__construct();
         $this->user = $user;
+        $this->createdAt = new \DateTime();
     }
 
     /**
@@ -99,6 +126,62 @@ class Client extends BaseClient
      */
     public function getClientId()
     {
-        return $this->getId().'_'.$this->getRandomId();
+        return $this->getId() . '_' . $this->getRandomId();
+    }
+
+    /**
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param string $image
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAppUrl()
+    {
+        return $this->appUrl;
+    }
+
+    /**
+     * @param string $appUrl
+     */
+    public function setAppUrl($appUrl)
+    {
+        $this->appUrl = $appUrl;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
     }
 }

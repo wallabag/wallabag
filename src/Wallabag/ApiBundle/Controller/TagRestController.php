@@ -3,6 +3,7 @@
 namespace Wallabag\ApiBundle\Controller;
 
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Wallabag\CoreBundle\Entity\Entry;
@@ -14,7 +15,7 @@ class TagRestController extends WallabagRestController
      * Retrieve all tags.
      *
      * @ApiDoc()
-     *
+     * @Security("has_role('ROLE_READ')")
      * @return JsonResponse
      */
     public function getTagsAction()
@@ -38,7 +39,7 @@ class TagRestController extends WallabagRestController
      *          {"name"="tag", "dataType"="string", "required"=true, "requirement"="\w+", "description"="Tag as a string"}
      *      }
      * )
-     *
+     * @Security("has_role('ROLE_WRITE')")
      * @return JsonResponse
      */
     public function deleteTagLabelAction(Request $request)
@@ -71,7 +72,7 @@ class TagRestController extends WallabagRestController
      *          {"name"="tags", "dataType"="string", "required"=true, "format"="tag1,tag2", "description"="Tags as strings (comma splitted)"}
      *      }
      * )
-     *
+     * @Security("has_role('ROLE_WRITE')")
      * @return JsonResponse
      */
     public function deleteTagsLabelAction(Request $request)
@@ -113,7 +114,7 @@ class TagRestController extends WallabagRestController
      *          {"name"="tag", "dataType"="integer", "requirement"="\w+", "description"="The tag"}
      *      }
      * )
-     *
+     * @Security("has_role('ROLE_WRITE')")
      * @return JsonResponse
      */
     public function deleteTagAction(Tag $tag)
@@ -133,7 +134,7 @@ class TagRestController extends WallabagRestController
 
     /**
      * Remove orphan tag in case no entries are associated to it.
-     *
+     * @Security("has_role('ROLE_WRITE')")
      * @param Tag|array $tags
      */
     private function cleanOrphanTag($tags)

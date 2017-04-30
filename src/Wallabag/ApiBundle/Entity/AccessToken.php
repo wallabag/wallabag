@@ -7,7 +7,7 @@ use FOS\OAuthServerBundle\Entity\AccessToken as BaseAccessToken;
 
 /**
  * @ORM\Table("oauth2_access_tokens")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Wallabag\ApiBundle\Repository\AccessTokenRepository")
  */
 class AccessToken extends BaseAccessToken
 {
