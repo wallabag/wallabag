@@ -5,6 +5,7 @@ namespace Wallabag\ApiBundle\Controller;
 use Hateoas\Configuration\Route;
 use Hateoas\Representation\Factory\PagerfantaFactory;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -229,6 +230,8 @@ class EntryRestController extends WallabagRestController
      * )
      *
      * @return JsonResponse
+     *
+     * @throws Symfony\Component\Config\Definition\Exception\Exception When limit is reached
      */
     public function postEntriesListAction(Request $request)
     {
@@ -236,6 +239,12 @@ class EntryRestController extends WallabagRestController
 
         $urls = json_decode($request->query->get('urls', []));
         $results = [];
+
+        $limit = $this->container->getParameter('wallabag_core.api_limit_mass_actions');
+
+        if (count($urls) > $limit) {
+            throw new Exception('API limit reached');
+        }
 
         // handle multiple urls
         if (!empty($urls)) {

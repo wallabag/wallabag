@@ -809,4 +809,27 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertFalse($content[1]['entry']);
         $this->assertEquals('http://0.0.0.0/entry3', $content[1]['url']);
     }
+
+    /**
+     * @expectedException Symfony\Component\Config\Definition\Exception\Exception
+     * @expectedExceptionMessage API limit reached
+     */
+    public function testLimitBulkAction()
+    {
+        $list = [
+            'http://0.0.0.0/entry1',
+            'http://0.0.0.0/entry1',
+            'http://0.0.0.0/entry1',
+            'http://0.0.0.0/entry1',
+            'http://0.0.0.0/entry1',
+            'http://0.0.0.0/entry1',
+            'http://0.0.0.0/entry1',
+            'http://0.0.0.0/entry1',
+            'http://0.0.0.0/entry1',
+            'http://0.0.0.0/entry1',
+            'http://0.0.0.0/entry1',
+        ];
+
+        $this->client->request('POST', '/api/entries/lists?urls='.json_encode($list));
+    }
 }

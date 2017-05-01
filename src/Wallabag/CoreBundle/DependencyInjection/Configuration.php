@@ -47,6 +47,9 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('list_mode')
                     ->defaultValue(1)
                 ->end()
+                ->scalarNode('api_limit_mass_actions')
+                    ->defaultValue(10)
+                ->end()
             ->end()
         ;
 
