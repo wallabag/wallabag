@@ -361,7 +361,7 @@ quickstart:
     developer:
         title: 'Developers'
         description: 'We also thought to the developers: Docker, API, translations, etc.'
-        create_application: 'Create your third application'
+        create_application: 'Create your third-party application'
         use_docker: 'Use Docker to install wallabag'
     docs:
         title: 'Full documentation'
