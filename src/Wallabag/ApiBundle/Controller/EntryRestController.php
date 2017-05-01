@@ -438,4 +438,107 @@ class EntryRestController extends WallabagRestController
 
         return (new JsonResponse())->setJson($json);
     }
+
+    /**
+     * Handles an entries list delete tags from them.
+     *
+     * @ApiDoc(
+     *       parameters={
+     *          {"name"="list", "dataType"="string", "required"=true, "format"="A JSON array of urls [{'url': 'http://...','tags': 'tag1, tag2'}, {'url': 'http://...','tags': 'tag1, tag2'}]", "description"="Urls (as an array) to handle."}
+     *       }
+     * )
+     *
+     * @return JsonResponse
+     */
+    public function deleteEntriesTagsListAction(Request $request)
+    {
+        $this->validateAuthentication();
+
+        $list = json_decode($request->query->get('list', []));
+        $results = [];
+
+        // handle multiple urls
+        if (!empty($list)) {
+            foreach ($list as $key => $element) {
+                $entry = $this->get('wallabag_core.entry_repository')->findByUrlAndUserId(
+                    $element->url,
+                    $this->getUser()->getId()
+                );
+
+                $results[$key]['url'] = $element->url;
+                $results[$key]['entry'] = $entry instanceof Entry ? $entry->getId() : false;
+
+                $tags = $element->tags;
+
+                if (false !== $entry && !(empty($tags))) {
+                    $tags = explode(',', $tags);
+                    foreach ($tags as $label) {
+                        $label = trim($label);
+
+                        $tag = $this->getDoctrine()
+                            ->getRepository('WallabagCoreBundle:Tag')
+                            ->findOneByLabel($label);
+
+                        if (false !== $tag) {
+                            $entry->removeTag($tag);
+                        }
+                    }
+
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($entry);
+                    $em->flush();
+                }
+            }
+        }
+
+        $json = $this->get('serializer')->serialize($results, 'json');
+
+        return (new JsonResponse())->setJson($json);
+    }
+
+    /**
+     * Handles an entries list and add tags to them.
+     *
+     * @ApiDoc(
+     *       parameters={
+     *          {"name"="list", "dataType"="string", "required"=true, "format"="A JSON array of urls [{'url': 'http://...','tags': 'tag1, tag2'}, {'url': 'http://...','tags': 'tag1, tag2'}]", "description"="Urls (as an array) to handle."}
+     *       }
+     * )
+     *
+     * @return JsonResponse
+     */
+    public function postEntriesTagsListAction(Request $request)
+    {
+        $this->validateAuthentication();
+
+        $list = json_decode($request->query->get('list', []));
+        $results = [];
+
+        // handle multiple urls
+        if (!empty($list)) {
+            foreach ($list as $key => $element) {
+                $entry = $this->get('wallabag_core.entry_repository')->findByUrlAndUserId(
+                    $element->url,
+                    $this->getUser()->getId()
+                );
+
+                $results[$key]['url'] = $element->url;
+                $results[$key]['entry'] = $entry instanceof Entry ? $entry->getId() : false;
+
+                $tags = $element->tags;
+
+                if (false !== $entry && !(empty($tags))) {
+                    $this->get('wallabag_core.content_proxy')->assignTagsToEntry($entry, $tags);
+
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($entry);
+                    $em->flush();
+                }
+            }
+        }
+
+        $json = $this->get('serializer')->serialize($results, 'json');
+
+        return (new JsonResponse())->setJson($json);
+    }
 }
