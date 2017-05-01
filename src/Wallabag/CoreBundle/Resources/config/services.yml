@@ -63,7 +63,8 @@ services:
         class: Wallabag\CoreBundle\GuzzleSiteAuthenticator\GrabySiteConfigBuilder
         arguments:
             - "@wallabag_core.graby.config_builder"
-            - "%sites_credentials%"
+            - "@=service('security.token_storage').getToken().getUser()"
+            - "@wallabag_core.site_credential_repository"
             - '@logger'
         tags:
             - { name: monolog.logger, channel: graby }
@@ -119,6 +120,12 @@ services:
         factory: [ "@doctrine.orm.default_entity_manager", getRepository ]
         arguments:
             - WallabagCoreBundle:Tag
+
+    wallabag_core.site_credential_repository:
+        class: Wallabag\CoreBundle\Repository\SiteCredentialRepository
+        factory: [ "@doctrine.orm.default_entity_manager", getRepository ]
+        arguments:
+            - WallabagCoreBundle:SiteCredential
 
     wallabag_core.helper.entries_export:
         class: Wallabag\CoreBundle\Helper\EntriesExport
