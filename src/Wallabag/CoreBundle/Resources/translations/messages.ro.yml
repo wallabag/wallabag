@@ -32,6 +32,7 @@ menu:
         # save_link: 'Save a link'
         back_to_unread: 'Înapoi la articolele necitite'
         # users_management: 'Users management'
+        # site_credentials: 'Site credentials'
     top:
         add_new_entry: 'Introdu un nou articol'
         search: 'Căutare'

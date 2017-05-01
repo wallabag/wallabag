@@ -63,7 +63,7 @@ services:
         class: Wallabag\CoreBundle\GuzzleSiteAuthenticator\GrabySiteConfigBuilder
         arguments:
             - "@wallabag_core.graby.config_builder"
-            - "@=service('security.token_storage').getToken().getUser()"
+            - "@security.token_storage"
             - "@wallabag_core.site_credential_repository"
             - '@logger'
         tags:

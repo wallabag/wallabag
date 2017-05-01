@@ -66,6 +66,11 @@
             <li class="bold {% if currentRoute == 'config' %}active{% endif %}">
                 <a class="waves-effect" href="{{ path('config') }}">{{ 'menu.left.config'|trans }}</a>
             </li>
+            {% if craue_setting('restricted_access') %}
+            <li class="bold {% if currentRoute starts with 'site_credentials_' %}active{% endif %}">
+                <a class="waves-effect" href="{{ path('site_credentials_index') }}">{{ 'menu.left.site_credentials'|trans }}</a>
+            </li>
+            {% endif %}
             {% if is_granted('ROLE_SUPER_ADMIN') %}
                 <li class="bold {% if currentRoute starts with 'user_' %}active{% endif %}">
                     <a class="waves-effect" href="{{ path('user_index') }}">{{ 'menu.left.users_management'|trans }}</a>

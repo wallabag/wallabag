@@ -32,6 +32,7 @@ menu:
         save_link: 'Guardar un enlace'
         back_to_unread: 'Volver a los artículos sin leer'
         users_management: 'Configuración de usuarios'
+        # site_credentials: 'Site credentials'
     top:
         add_new_entry: 'Añadir un nuevo artículo'
         search: 'Buscar'

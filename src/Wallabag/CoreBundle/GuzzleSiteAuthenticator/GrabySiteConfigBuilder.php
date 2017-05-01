@@ -7,7 +7,7 @@ use BD\GuzzleSiteAuthenticator\SiteConfig\SiteConfigBuilder;
 use Graby\SiteConfig\ConfigBuilder;
 use Psr\Log\LoggerInterface;
 use Wallabag\CoreBundle\Repository\SiteCredentialRepository;
-use Wallabag\UserBundle\Entity\User;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 class GrabySiteConfigBuilder implements SiteConfigBuilder
 {
@@ -27,7 +27,7 @@ class GrabySiteConfigBuilder implements SiteConfigBuilder
     private $logger;
 
     /**
-     * @var User
+     * @var Wallabag\UserBundle\Entity\User|null
      */
     private $currentUser;
 
@@ -36,16 +36,19 @@ class GrabySiteConfigBuilder implements SiteConfigBuilder
      * GrabySiteConfigBuilder constructor.
      *
      * @param ConfigBuilder            $grabyConfigBuilder
-     * @param User                     $currentUser
+     * @param TokenStorage                     $token
      * @param SiteCredentialRepository $credentialRepository
      * @param LoggerInterface $logger
      */
-    public function __construct(ConfigBuilder $grabyConfigBuilder, User $currentUser, SiteCredentialRepository $credentialRepository, LoggerInterface $logger)
+    public function __construct(ConfigBuilder $grabyConfigBuilder, TokenStorage $token, SiteCredentialRepository $credentialRepository, LoggerInterface $logger)
     {
         $this->grabyConfigBuilder = $grabyConfigBuilder;
         $this->credentialRepository = $credentialRepository;
-        $this->currentUser = $currentUser;
         $this->logger = $logger;
+
+        if ($token->getToken()) {
+            $this->currentUser = $token->getToken()->getUser();
+        }
     }
 
     /**
@@ -59,7 +62,10 @@ class GrabySiteConfigBuilder implements SiteConfigBuilder
             $host = substr($host, 4);
         }
 
-        $credentials = $this->credentialRepository->findOneByHostAndUser($host, $this->currentUser->getId());
+        $credentials = null;
+        if ($this->currentUser) {
+            $credentials = $this->credentialRepository->findOneByHostAndUser($host, $this->currentUser->getId());
+        }
 
         if (null === $credentials) {
             $this->logger->debug('Auth: no credentials available for host.', ['host' => $host]);

@@ -32,6 +32,7 @@ menu:
         save_link: 'ذخیرهٔ یک پیوند'
         back_to_unread: 'بازگشت به خوانده‌نشده‌ها'
         # users_management: 'Users management'
+        # site_credentials: 'Site credentials'
     top:
         add_new_entry: 'افزودن مقالهٔ تازه'
         search: 'جستجو'

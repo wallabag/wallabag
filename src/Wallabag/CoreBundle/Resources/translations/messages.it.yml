@@ -32,6 +32,7 @@ menu:
         save_link: 'Salva collegamento'
         back_to_unread: 'Torna ai contenuti non letti'
         # users_management: 'Users management'
+        # site_credentials: 'Site credentials'
     top:
         add_new_entry: 'Aggiungi un nuovo contenuto'
         search: 'Cerca'

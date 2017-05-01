@@ -32,6 +32,7 @@ menu:
         save_link: 'Enregistrar un novèl article'
         back_to_unread: 'Tornar als articles pas legits'
         users_management: 'Gestion dels utilizaires'
+        # site_credentials: 'Site credentials'
     top:
         add_new_entry: 'Enregistrar un novèl article'
         search: 'Cercar'

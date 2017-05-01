@@ -32,6 +32,7 @@ menu:
         # save_link: 'Save a link'
         back_to_unread: 'Okunmayan makalelere geri dön'
         # users_management: 'Users management'
+        # site_credentials: 'Site credentials'
     top:
         add_new_entry: 'Yeni bir makale ekle'
         search: 'Ara'

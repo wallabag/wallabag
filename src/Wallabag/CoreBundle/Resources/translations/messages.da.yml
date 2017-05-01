@@ -32,6 +32,7 @@ menu:
         # save_link: 'Save a link'
         back_to_unread: 'Tilbage til de ulæste artikler'
         # users_management: 'Users management'
+        # site_credentials: 'Site credentials'
     top:
         add_new_entry: 'Tilføj ny artikel'
         search: 'Søg'

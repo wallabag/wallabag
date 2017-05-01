@@ -32,6 +32,7 @@ menu:
         save_link: "Sauvegarder un nouvel article"
         back_to_unread: "Retour aux articles non lus"
         users_management: "Gestion des utilisateurs"
+        site_credentials: 'Accès aux sites'
     top:
         add_new_entry: "Sauvegarder un nouvel article"
         search: "Rechercher"
