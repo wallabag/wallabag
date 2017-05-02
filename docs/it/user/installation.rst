@@ -86,7 +86,7 @@ Eseguite questo comando per scaricare ed estrarre il pacchetto piú aggiornato:
 
 .. code-block:: bash
 
-   wget http://wllbg.org/latest-v2-package && tar xvf latest-v2-package
+   wget https://wllbg.org/latest-v2-package && tar xvf latest-v2-package
 
 Troverete il `hash md5 del pacchetto piú aggiornato sul nostro sito <https://www.wallabag.org/pages/download-wallabag.html>`_.
 

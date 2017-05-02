@@ -78,7 +78,7 @@ Scaricate l'ultima versione di wallabag:
 
 . code-block:: bash
 
-    wget http://wllbg.org/latest-v2-package && tar xvf latest-v2-package
+    wget https://wllbg.org/latest-v2-package && tar xvf latest-v2-package
 
 Troverete il `hash md5 dell'ultima versione del pacchetto sul nostro sito <https://www.wallabag.org/pages/download-wallabag.html>`_.
 
