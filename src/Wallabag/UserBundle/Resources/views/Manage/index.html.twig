@@ -16,7 +16,19 @@
                     </div>
                     <div class="col s6">
                         <div class="input-field">
-                            {{ render(controller("WallabagUserBundle:Manage:searchForm", {'currentRoute': app.request.attributes.get('_route')})) }}
+                            <form name="search_users" method="GET" action="{{ path('user_index')}}">
+                                {% if form_errors(searchForm) %}
+                                    <span class="black-text">{{ form_errors(searchForm) }}</span>
+                                {% endif %}
+
+                                {% if form_errors(searchForm.term) %}
+                                    <span class="black-text">{{ form_errors(searchForm.term) }}</span>
+                                {% endif %}
+
+                                {{ form_widget(searchForm.term, { 'attr': {'autocomplete': 'off', 'placeholder': 'user.search.placeholder'} }) }}
+
+                                {{ form_rest(searchForm) }}
+                            </form>
                         </div>
                     </div>
 

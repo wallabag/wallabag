@@ -513,7 +513,6 @@ user:
         delete_confirm: 'Tem certeza?'
         back_to_list: 'Voltar para a lista'
     search:
-        # label: Filter
         # placeholder: Filter by username or email
 
 error:

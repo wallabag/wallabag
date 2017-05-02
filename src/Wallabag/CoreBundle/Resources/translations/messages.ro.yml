@@ -513,7 +513,6 @@ user:
         # delete_confirm: Are you sure?
         # back_to_list: Back to list
     search:
-        # label: Filter
         # placeholder: Filter by username or email
 
 error:

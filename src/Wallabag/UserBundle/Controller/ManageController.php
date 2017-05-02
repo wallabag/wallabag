@@ -20,38 +20,6 @@ use Wallabag\UserBundle\Form\SearchUserType;
 class ManageController extends Controller
 {
     /**
-     * Lists all User entities.
-     *
-     * @Route("/list/{page}", name="user_index")
-     * @Method("GET")
-     *
-     * @param int $page
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     */
-    public function indexAction($page = 1)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $qb = $em->getRepository('WallabagUserBundle:User')->createQueryBuilder('u');
-        $pagerAdapter = new DoctrineORMAdapter($qb->getQuery(), true, false);
-        $pagerFanta = new Pagerfanta($pagerAdapter);
-        $pagerFanta->setMaxPerPage(50);
-
-        try {
-            $pagerFanta->setCurrentPage($page);
-        } catch (OutOfRangeCurrentPageException $e) {
-            if ($page > 1) {
-                return $this->redirect($this->generateUrl('user_index', ['page' => $pagerFanta->getNbPages()]), 302);
-            }
-        }
-
-        return $this->render('WallabagUserBundle:Manage:index.html.twig', array(
-            'users' => $pagerFanta,
-        ));
-    }
-
-    /**
      * Creates a new User entity.
      *
      * @Route("/new", name="user_new")
@@ -169,52 +137,44 @@ class ManageController extends Controller
      * @param Request $request
      * @param int     $page
      *
-     * @Route("/search/{page}", name="user-search", defaults={"page" = 1})
+     * @Route("/list/{page}", name="user_index", defaults={"page" = 1})
      *
      * Default parameter for page is hardcoded (in duplication of the defaults from the Route)
      * because this controller is also called inside the layout template without any page as argument
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function searchFormAction(Request $request, $page = 1, $currentRoute = null)
+    public function searchFormAction(Request $request, $page = 1)
     {
-        // fallback to retrieve currentRoute from query parameter instead of injected one (when using inside a template)
-        if (null === $currentRoute && $request->query->has('currentRoute')) {
-            $currentRoute = $request->query->get('currentRoute');
-        }
+        $em = $this->getDoctrine()->getManager();
+        $qb = $em->getRepository('WallabagUserBundle:User')->createQueryBuilder('u');
 
         $form = $this->createForm(SearchUserType::class);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->get('logger')->info('searching users');
-            $em = $this->getDoctrine()->getManager();
 
             $searchTerm = (isset($request->get('search_user')['term']) ? $request->get('search_user')['term'] : '');
 
             $qb = $em->getRepository('WallabagUserBundle:User')->getQueryBuilderForSearch($searchTerm);
-
-            $pagerAdapter = new DoctrineORMAdapter($qb->getQuery(), true, false);
-            $pagerFanta = new Pagerfanta($pagerAdapter);
-            $pagerFanta->setMaxPerPage(50);
-
-            try {
-                $pagerFanta->setCurrentPage($page);
-            } catch (OutOfRangeCurrentPageException $e) {
-                if ($page > 1) {
-                    return $this->redirect($this->generateUrl('user_index', ['page' => $pagerFanta->getNbPages()]), 302);
-                }
-            }
-
-            return $this->render('WallabagUserBundle:Manage:index.html.twig', array(
-                'users' => $pagerFanta,
-            ));
         }
 
-        return $this->render('WallabagUserBundle:Manage:search_form.html.twig', [
-            'form' => $form->createView(),
-            'currentRoute' => $currentRoute,
+        $pagerAdapter = new DoctrineORMAdapter($qb->getQuery(), true, false);
+        $pagerFanta = new Pagerfanta($pagerAdapter);
+        $pagerFanta->setMaxPerPage(50);
+
+        try {
+            $pagerFanta->setCurrentPage($page);
+        } catch (OutOfRangeCurrentPageException $e) {
+            if ($page > 1) {
+                return $this->redirect($this->generateUrl('user_index', ['page' => $pagerFanta->getNbPages()]), 302);
+            }
+        }
+
+        return $this->render('WallabagUserBundle:Manage:index.html.twig', [
+            'searchForm' => $form->createView(),
+            'users' => $pagerFanta,
         ]);
     }
 }
