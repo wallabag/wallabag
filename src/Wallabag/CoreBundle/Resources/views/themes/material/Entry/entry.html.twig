@@ -12,6 +12,11 @@
         <div class="nav-wrapper cyan darken-1">
             <ul>
                 <li>
+                    <a href="#" data-activates="slide-out" class="button-collapse">
+                        <i class="material-icons">menu</i>
+                    </a>
+                </li>
+                <li>
                     <a class="waves-effect" href="{{ path('homepage') }}">
                         <i class="material-icons">exit_to_app</i>
                     </a>
@@ -26,11 +31,6 @@
                 <li>
                     <a class="waves-effect" title="{{ 'entry.view.left_menu.set_as_starred'|trans }}" href="{{ path('star_entry', { 'id': entry.id }) }}" id="setFav">
                         <i class="material-icons small">{% if entry.isStarred == 0 %}star_outline{% else %}star{% endif %}</i>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" data-activates="slide-out" class="button-collapse right">
-                        <i class="material-icons">menu</i>
                     </a>
                 </li>
             </ul>
