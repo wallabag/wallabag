@@ -10,7 +10,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Add site credential table to store username & password for some website (behind authentication or paywall)
  */
-class Version20161204115751 extends AbstractMigration implements ContainerAwareInterface
+class Version20170501115751 extends AbstractMigration implements ContainerAwareInterface
 {
     /**
      * @var ContainerInterface
@@ -44,6 +44,11 @@ class Version20161204115751 extends AbstractMigration implements ContainerAwareI
         $table->addIndex(['user_id'], 'idx_user');
         $table->setPrimaryKey(['id']);
         $table->addForeignKeyConstraint($this->getTable('user'), ['user_id'], ['id'], [], 'fk_user');
+
+        if ('postgresql' === $this->connection->getDatabasePlatform()->getName()) {
+            $schema->dropSequence('site_credential_id_seq');
+            $schema->createSequence('site_credential_id_seq');
+        }
     }
 
     /**
