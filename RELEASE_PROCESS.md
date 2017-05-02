@@ -47,7 +47,7 @@ make release master /tmp wllbg-release prod
 
 - [Create the new release on GitHub](https://github.com/wallabag/wallabag/releases/new). You have to upload on this page the package.
 - Delete the `release-$LAST_WALLABAG_RELEASE` branch and close the pull request (**DO NOT MERGE IT**).
-- Update the URL shortener (used on `wllbg.org` to generate links like `http://wllbg.org/latest-v2-package` or `http://wllbg.org/latest-v2`)
+- Update the URL shortener (used on `wllbg.org` to generate links like `https://wllbg.org/latest-v2-package` or `http://wllbg.org/latest-v2`)
 - Update [the downloads page](https://github.com/wallabag/wallabag.org/blob/master/content/pages/download.md) on the website (MD5 sum, release date)
 - Update Dockerfile https://github.com/wallabag/docker (and create a new tag)
 - Update wallabag.org website (downloads, releases and new blog post)
