@@ -189,11 +189,9 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertContains($contentInDB[0]['language'], $csv[1]);
         $this->assertContains($contentInDB[0]['createdAt']->format('d/m/Y h:i:s'), $csv[1]);
 
-        $expectedTag = [];
         foreach ($contentInDB[0]['tags'] as $tag) {
-            $expectedTag[] = $tag['label'];
+            $this->assertContains($tag['label'], $csv[1]);
         }
-        $this->assertContains(implode(', ', $expectedTag), $csv[1]);
     }
 
     public function testJsonExport()
