@@ -25,7 +25,7 @@ class GrabySiteConfigBuilderTest extends PHPUnit_Framework_TestCase
 
         $grabySiteConfig = new GrabySiteConfig();
         $grabySiteConfig->requires_login = true;
-        $grabySiteConfig->login_uri = 'http://example.com/login';
+        $grabySiteConfig->login_uri = 'http://www.example.com/login';
         $grabySiteConfig->login_username_field = 'login';
         $grabySiteConfig->login_password_field = 'password';
         $grabySiteConfig->login_extra_fields = ['field=value'];
@@ -67,13 +67,13 @@ class GrabySiteConfigBuilderTest extends PHPUnit_Framework_TestCase
             $logger
         );
 
-        $config = $this->builder->buildForHost('example.com');
+        $config = $this->builder->buildForHost('www.example.com');
 
         $this->assertEquals(
             new SiteConfig([
                 'host' => 'example.com',
                 'requiresLogin' => true,
-                'loginUri' => 'http://example.com/login',
+                'loginUri' => 'http://www.example.com/login',
                 'usernameField' => 'login',
                 'passwordField' => 'password',
                 'extraFields' => ['field' => 'value'],

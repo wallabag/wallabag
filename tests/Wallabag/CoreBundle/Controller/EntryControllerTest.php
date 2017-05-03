@@ -5,6 +5,7 @@ namespace Tests\Wallabag\CoreBundle\Controller;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\CoreBundle\Entity\SiteCredential;
 
 class EntryControllerTest extends WallabagCoreTestCase
 {
@@ -1320,5 +1321,57 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
         $this->assertEquals($url, $content->getUrl());
         $this->assertEquals($expectedLanguage, $content->getLanguage());
+    }
+
+    /**
+     * This test will require an internet connection.
+     */
+    public function testRestrictedArticle()
+    {
+        $url = 'http://www.monde-diplomatique.fr/2017/05/BONNET/57475';
+        $this->logInAs('admin');
+        $client = $this->getClient();
+        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+
+        // enable restricted access
+        $client->getContainer()->get('craue_config')->set('restricted_access', 1);
+
+        // create a new site_credential
+        $user = $client->getContainer()->get('security.token_storage')->getToken()->getUser();
+        $credential = new SiteCredential($user);
+        $credential->setHost('monde-diplomatique.fr');
+        $credential->setUsername('foo');
+        $credential->setPassword('bar');
+
+        $em->persist($credential);
+        $em->flush();
+
+        $crawler = $client->request('GET', '/new');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $form = $crawler->filter('form[name=entry]')->form();
+
+        $data = [
+            'entry[url]' => $url,
+        ];
+
+        $client->submit($form, $data);
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+
+        $crawler = $client->followRedirect();
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertContains('flashes.entry.notice.entry_saved', $crawler->filter('body')->extract(['_text'])[0]);
+
+        $content = $em
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findByUrlAndUserId($url, $this->getLoggedInUserId());
+
+        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
+        $this->assertSame('Crimes et réformes aux Philippines', $content->getTitle());
+
+        $client->getContainer()->get('craue_config')->set('restricted_access', 0);
     }
 }

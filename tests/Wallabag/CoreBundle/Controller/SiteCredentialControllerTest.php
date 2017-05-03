@@ -2,7 +2,9 @@
 
 namespace Tests\Wallabag\CoreBundle\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Client;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
+use Wallabag\CoreBundle\Entity\SiteCredential;
 
 class SiteCredentialControllerTest extends WallabagCoreTestCase
 {
@@ -52,18 +54,12 @@ class SiteCredentialControllerTest extends WallabagCoreTestCase
         $this->assertContains('flashes.site_credential.notice.added', $crawler->filter('body')->extract(['_text'])[0]);
     }
 
-    /**
-     * @depends testNewSiteCredential
-     */
     public function testEditSiteCredential()
     {
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $credential = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:SiteCredential')
-            ->findOneByHost('google.io');
+        $credential = $this->createSiteCredential($client);
 
         $crawler = $client->request('GET', '/site-credentials/'.$credential->getId().'/edit');
 
@@ -92,36 +88,26 @@ class SiteCredentialControllerTest extends WallabagCoreTestCase
         $this->assertContains('larry', $crawler->filter('input[id=site_credential_username]')->attr('value'));
     }
 
-    /**
-     * @depends testNewSiteCredential
-     */
     public function testEditFromADifferentUserSiteCredential()
     {
-        $this->logInAs('bob');
+        $this->logInAs('admin');
         $client = $this->getClient();
 
-        $credential = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:SiteCredential')
-            ->findOneByHost('google.io');
+        $credential = $this->createSiteCredential($client);
+
+        $this->logInAs('bob');
 
         $client->request('GET', '/site-credentials/'.$credential->getId().'/edit');
 
         $this->assertEquals(403, $client->getResponse()->getStatusCode());
     }
 
-    /**
-     * @depends testNewSiteCredential
-     */
     public function testDeleteSiteCredential()
     {
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $credential = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:SiteCredential')
-            ->findOneByHost('google.io');
+        $credential = $this->createSiteCredential($client);
 
         $crawler = $client->request('GET', '/site-credentials/'.$credential->getId().'/edit');
 
@@ -136,5 +122,19 @@ class SiteCredentialControllerTest extends WallabagCoreTestCase
         $crawler = $client->followRedirect();
 
         $this->assertContains('flashes.site_credential.notice.deleted', $crawler->filter('body')->extract(['_text'])[0]);
+    }
+
+    private function createSiteCredential(Client $client)
+    {
+        $credential = new SiteCredential($this->getLoggedInUser());
+        $credential->setHost('google.io');
+        $credential->setUsername('sergei');
+        $credential->setPassword('microsoft');
+
+        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+        $em->persist($credential);
+        $em->flush();
+
+        return $credential;
     }
 }

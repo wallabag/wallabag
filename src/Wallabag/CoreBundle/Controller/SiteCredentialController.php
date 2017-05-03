@@ -24,9 +24,7 @@ class SiteCredentialController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $credentials = $em->getRepository('WallabagCoreBundle:SiteCredential')->findByUser($this->getUser());
+        $credentials = $this->get('wallabag_core.site_credential_repository')->findByUser($this->getUser());
 
         return $this->render('WallabagCoreBundle:SiteCredential:index.html.twig', array(
             'credentials' => $credentials,
