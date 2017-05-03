@@ -100,7 +100,7 @@ Wenn du in der Vergangenheit wallabag 1.x genutzt hast, musst du deine Daten exp
     Wenn du mehrere Accounts auf der gleichen wallabag-Instanz hast, muss jeder Nutzer seine Daten aus 1.x exportieren und in 2.x importieren.
 
 .. note::
-    Falls während des Exports oder des Imports Probleme auftreten sollten, scheue dich nicht, den `Support zu kontaktieren <https://www.wallabag.org/pages/support.html>`__.
+    Falls während des Exports oder des Imports Probleme auftreten sollten, scheue dich nicht, den `Support zu kontaktieren <http://gitter.im/wallabag/wallabag>`__.
 
 Wenn du dann die JSON-Datei mit deinen Einträgen heruntergeladen hast, kannst du `wallabag 2 über die Standard-Prozedur installieren <http://doc.wallabag.org/en/master/user/installation.html>`__.
 
@@ -122,7 +122,7 @@ Gehe auf der alten wallabag-Instanz, die du vorher genutzt hast, auf `Alle Artik
 Nach dem Erstellen des Benutzeraccounts auf deiner neuen "wallabag 2.x"-Instanz, navigiere auf den Import-Bereich und wähle `Aus wallabag v2 importieren`. Wähle deine JSON-Datei und lade sie hoch.
 
 .. note::
-    Falls während des Exports oder des Imports Probleme auftreten sollten, scheue dich nicht, den `Support zu kontaktieren <https://www.wallabag.org/pages/support.html>`__.
+    Falls während des Exports oder des Imports Probleme auftreten sollten, scheue dich nicht, den `Support zu kontaktieren <http://gitter.im/wallabag/wallabag>`__.
 
 Import über die Kommandozeile (CLI)
 -----------------------------------

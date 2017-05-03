@@ -63,7 +63,7 @@ Téléchargez la dernière version de wallabag :
 
     wget http://wllbg.org/latest-v2-package && tar xvf latest-v2-package
 
-Vous trouverez `le hash md5 du dernier package sur notre site <https://www.wallabag.org/pages/download-wallabag.html>`_.
+Vous trouverez `le hash md5 du dernier package sur notre site <https://static.wallabag.org/releases/>`_.
 
 Décompressez l'archive dans votre répertoire d'installation et remplacez le fichier ``app/config/parameters.yml`` avec le votre.
 

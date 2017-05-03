@@ -88,7 +88,7 @@ Eseguite questo comando per scaricare ed estrarre il pacchetto piú aggiornato:
 
    wget http://wllbg.org/latest-v2-package && tar xvf latest-v2-package
 
-Troverete il `hash md5 del pacchetto piú aggiornato sul nostro sito <https://www.wallabag.org/pages/download-wallabag.html>`_.
+Troverete il `hash md5 del pacchetto piú aggiornato sul nostro sito <https://static.wallabag.org/releases/>`_.
 
 Ora leggete la seguente documentazione per creare il vostro host virtuale poi accedete al vostro wallabag. Se avete cambiato la configurazione del database per usare MySQL o PostrgreSQL, dovrete creare un utente con il comando php bin/console wallabag:install --env=prod .
 

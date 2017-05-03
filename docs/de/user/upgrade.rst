@@ -63,7 +63,7 @@ Lade das letzte Release von wallabag herunter:
 
     wget http://wllbg.org/latest-v2-package && tar xvf latest-v2-package
 
-Du findest den `aktuellen MD5-Hash auf unserer Webseite <https://www.wallabag.org/pages/download-wallabag.html>`_.
+Du findest den `aktuellen MD5-Hash auf unserer Webseite <https://static.wallabag.org/releases/>`_.
 
 Extrahiere das Archiv in deinen wallabag-Ordner und ersetze die ``app/config/parameters.yml`` mit deiner.
 

@@ -103,7 +103,7 @@ Si vous utilisiez wallabag v1.x, vous devez exporter vos données avant de migre
     Si vous avez plusieurs comptes sur la même instance de wallabag, chaque utilisateur doit exporter ses données depuis wallabag v1 et les importer dans la v2.
 
 .. note::
-    S'il vous arrive des problèmes durant l'export ou l'import, n'hésitez pas à `demander de l'aide <https://www.wallabag.org/pages/support.html>`_.
+    S'il vous arrive des problèmes durant l'export ou l'import, n'hésitez pas à `demander de l'aide <http://gitter.im/wallabag/wallabag>`_.
 
 Une fois que vous avez récupéré le fichier json contenant vos données, vous pouvez installer wallabag v2 si c'est nécessaire en suivant `la procédure standard <http://doc.wallabag.org/fr/master/user/installation.html>`_.
 
@@ -125,7 +125,7 @@ Depuis l'instance sur laquelle vous étiez, rendez-vous dans la section `Tous le
 Depuis votre nouvelle instance de wallabag, créez votre compte utilisateur puis cliquez sur le lien dans le menu pour accéder à l'import. Choisissez l'import depuis wallabag v2 puis sélectionnez votre fichier json pour l'uploader.
 
 .. note::
-    S'il vous arrive des problèmes durant l'export ou l'import, n'hésitez pas à `demander de l'aide <https://www.wallabag.org/pages/support.html>`_.
+    S'il vous arrive des problèmes durant l'export ou l'import, n'hésitez pas à `demander de l'aide <http://gitter.im/wallabag/wallabag>`_.
 
 Import via la ligne de commande (CLI)
 -------------------------------------<http://doc.wallabag.org/en/master/user/parameters.html
