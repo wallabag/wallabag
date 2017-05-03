@@ -121,7 +121,7 @@ class PinboardControllerTest extends WallabagCoreTestCase
         $this->assertNotEmpty($content->getMimetype(), 'Mimetype for https://ma.ttias.be is ok');
         $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for https://ma.ttias.be is ok');
         $this->assertNotEmpty($content->getLanguage(), 'Language for https://ma.ttias.be is ok');
-        $this->assertEquals(2, count($content->getTags()));
+        $this->assertEquals(3, count($content->getTags()));
         $this->assertInstanceOf(\DateTime::class, $content->getCreatedAt());
         $this->assertEquals('2016-10-26', $content->getCreatedAt()->format('Y-m-d'));
     }

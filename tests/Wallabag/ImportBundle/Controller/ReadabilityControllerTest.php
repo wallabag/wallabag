@@ -121,7 +121,7 @@ class ReadabilityControllerTest extends WallabagCoreTestCase
         $this->assertNotEmpty($content->getMimetype(), 'Mimetype for http://www.zataz.com is ok');
         $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for http://www.zataz.com is ok');
         $this->assertNotEmpty($content->getLanguage(), 'Language for http://www.zataz.com is ok');
-        $this->assertEquals(0, count($content->getTags()));
+        $this->assertEquals(1, count($content->getTags()));
         $this->assertInstanceOf(\DateTime::class, $content->getCreatedAt());
         $this->assertEquals('2016-09-08', $content->getCreatedAt()->format('Y-m-d'));
     }

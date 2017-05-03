@@ -125,6 +125,16 @@ services:
         tags:
             - { name: rulerz.operator, target: doctrine, operator: matches, inline: true }
 
+    wallabag.operator.array.notmatches:
+        class: Wallabag\CoreBundle\Operator\PHP\NotMatches
+        tags:
+            - { name: rulerz.operator, target: native, operator: notmatches }
+
+    wallabag.operator.doctrine.notmatches:
+        class: Wallabag\CoreBundle\Operator\Doctrine\NotMatches
+        tags:
+            - { name: rulerz.operator, target: doctrine, operator: notmatches, inline: true }
+
     wallabag_core.helper.redirect:
         class: Wallabag\CoreBundle\Helper\Redirect
         arguments:

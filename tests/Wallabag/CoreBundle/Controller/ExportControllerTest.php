@@ -189,11 +189,9 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertContains($contentInDB[0]['language'], $csv[1]);
         $this->assertContains($contentInDB[0]['createdAt']->format('d/m/Y h:i:s'), $csv[1]);
 
-        $expectedTag = [];
         foreach ($contentInDB[0]['tags'] as $tag) {
-            $expectedTag[] = $tag['label'];
+            $this->assertContains($tag['label'], $csv[1]);
         }
-        $this->assertContains(implode(', ', $expectedTag), $csv[1]);
     }
 
     public function testJsonExport()
@@ -241,7 +239,7 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertEquals($contentInDB->getLanguage(), $content[0]['language']);
         $this->assertEquals($contentInDB->getReadingtime(), $content[0]['reading_time']);
         $this->assertEquals($contentInDB->getDomainname(), $content[0]['domain_name']);
-        $this->assertEquals(['foo bar', 'baz'], $content[0]['tags']);
+        $this->assertEquals(['foo bar', 'baz', 'foot'], $content[0]['tags']);
     }
 
     public function testXmlExport()

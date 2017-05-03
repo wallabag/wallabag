@@ -155,6 +155,7 @@ config:
                 or: 'Eine Regel ODER die andere'
                 and: 'Eine Regel UND eine andere'
                 matches: 'Testet, ob eine <i>Variable</i> auf eine <i>Suche</i> zutrifft (Groß- und Kleinschreibung wird nicht berücksichtigt).<br />Beispiel: <code>title matches "Fußball"</code>'
+                # notmatches: 'Tests that a <i>subject</i> is not matches a <i>search</i> (case-insensitive).<br />Example: <code>title notmatches "football"</code>'
 
 entry:
     page_titles:

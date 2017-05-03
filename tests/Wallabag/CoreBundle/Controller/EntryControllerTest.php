@@ -270,7 +270,7 @@ class EntryControllerTest extends WallabagCoreTestCase
             ->findOneByUrl($url);
         $tags = $entry->getTags();
 
-        $this->assertCount(1, $tags);
+        $this->assertCount(2, $tags);
         $this->assertEquals('wallabag', $tags[0]->getLabel());
 
         $em->remove($entry);
@@ -299,8 +299,8 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $tags = $entry->getTags();
 
-        $this->assertCount(1, $tags);
-        $this->assertEquals('wallabag', $tags[0]->getLabel());
+        $this->assertCount(2, $tags);
+        $this->assertEquals('wallabag', $tags[1]->getLabel());
 
         $em->remove($entry);
         $em->flush();

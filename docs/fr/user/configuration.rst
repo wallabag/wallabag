@@ -130,4 +130,5 @@ language     La langue de l'article                          !=          Différ
 mimetype     The type MIME de l'article                      OR          Telle règle ou telle autre règle
 readingTime  Le temps de lecture de l'article, en minutes    AND         Telle règle et telle règle
 domainName   Le nom de domaine de l'article                  matches     Contient telle chaîne de caractère (insensible à la casse). Exemple : title matches "football"
+                                                             notmaches   Ne contient pas telle chaîne de caractère (insensible à la casse). Exemple : title notmatches "football"
 ===========  ==============================================  ==========  ==========

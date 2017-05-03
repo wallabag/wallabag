@@ -121,7 +121,7 @@ class InstapaperControllerTest extends WallabagCoreTestCase
         $this->assertNotEmpty($content->getMimetype(), 'Mimetype for http://www.liberation.fr is ok');
         $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for http://www.liberation.fr is ok');
         $this->assertNotEmpty($content->getLanguage(), 'Language for http://www.liberation.fr is ok');
-        $this->assertEquals(0, count($content->getTags()));
+        $this->assertEquals(1, count($content->getTags()));
         $this->assertInstanceOf(\DateTime::class, $content->getCreatedAt());
     }
 

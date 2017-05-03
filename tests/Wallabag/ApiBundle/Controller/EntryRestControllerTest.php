@@ -337,7 +337,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertEquals(false, $content['is_starred']);
         $this->assertEquals('New title for my article', $content['title']);
         $this->assertEquals(1, $content['user_id']);
-        $this->assertCount(1, $content['tags']);
+        $this->assertCount(2, $content['tags']);
     }
 
     public function testPostSameEntry()
@@ -356,7 +356,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertEquals('http://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html', $content['url']);
         $this->assertEquals(true, $content['is_archived']);
         $this->assertEquals(false, $content['is_starred']);
-        $this->assertCount(2, $content['tags']);
+        $this->assertCount(3, $content['tags']);
     }
 
     public function testPostArchivedAndStarredEntry()

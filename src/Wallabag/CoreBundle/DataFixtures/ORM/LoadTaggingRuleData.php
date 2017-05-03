@@ -36,6 +36,13 @@ class LoadTaggingRuleData extends AbstractFixture implements OrderedFixtureInter
 
         $manager->persist($tr3);
 
+        $tr4 = new TaggingRule();
+        $tr4->setRule('content notmatches "basket"');
+        $tr4->setTags(['foot']);
+        $tr4->setConfig($this->getReference('admin-config'));
+
+        $manager->persist($tr4);
+
         $manager->flush();
     }
 
