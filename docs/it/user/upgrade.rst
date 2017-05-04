@@ -80,7 +80,7 @@ Scaricate l'ultima versione di wallabag:
 
     wget http://wllbg.org/latest-v2-package && tar xvf latest-v2-package
 
-Troverete il `hash md5 dell'ultima versione del pacchetto sul nostro sito <https://www.wallabag.org/pages/download-wallabag.html>`_.
+Troverete il `hash md5 dell'ultima versione del pacchetto sul nostro sito <https://static.wallabag.org/releases/>`_.
 
 Estraete l'archivio nella vostra cartella di wallabag e rimpiazzate ``app/config/parameters.yml`` con il vostro.
 
@@ -98,5 +98,5 @@ Da wallabag 1.x
 Non esiste uno script automatico per aggiornare da wallabag 1.x a wallabag 2.x. Dovete:
 
 - esportare i vostri dati
-- installare wallabag 2.x (leggete la documentazione a proposito dell'installazione *link mancante*) 
+- installare wallabag 2.x (leggete la documentazione a proposito dell'installazione *link mancante*)
 - importate i dati in questa nuova installazione (leggete la documentazione a proposito dell'importazione)

@@ -64,9 +64,9 @@ Se state usando wallabag 1.x, dovete esportare i dati prima di migrare a wallaba
     Se avete account multipli nella stessa istanza di wallabag, ogni utente dovrá esportare da v1 ed importare su v2.
 
 .. nota::
-    Se riscontrate problemi durante l'importazione o l'esportazione, non esitate a `chiedere supporto <https://www.wallabag.org/pages/support.html>`__.
+    Se riscontrate problemi durante l'importazione o l'esportazione, non esitate a `chiedere supporto <http://gitter.im/wallabag/wallabag>`__.
 
-Quando avrete ottenuto il file json contenente i vostri articoli, potrete installare wallabag v2 seguendo, se necessario, `la procedura standard *link mancante*.
+Quando avrete ottenuto il file json contenente i vostri articoli, potrete installare wallabag v2 seguendo, se necessario, `la procedura standard *link mancante*`.
 
 Dopo aver creato un account utente sulla vostra nuova istanza di wallabag v2, dovete andare alla sezione `Importa` e selezionare `Importa da wallabag v1`. Selezionate il vostro file json e caricatelo.
 
@@ -86,7 +86,7 @@ Dalla istanza di wallabag precedente sulla quale eravate prima, andate su `Tutti
 Dalla vostra nuova istanza di wallabag, create un account utente e cliccate sul link nel menu per procedere all'importazione. Scegliete di importare da wallabag v2 e selezionate il vostro file json per caricarlo.
 
 .. nota::
-    Se riscontrate problemi durante l'importazione o l'esportazione, non esitate a `chiedere supporto <https://www.wallabag.org/pages/support.html>`__.
+    Se riscontrate problemi durante l'importazione o l'esportazione, non esitate a `chiedere supporto <http://gitter.im/wallabag/wallabag>`__.
 
 Importate dall'interfaccia a riga di comando (CLI)
 --------------------------------------------------
