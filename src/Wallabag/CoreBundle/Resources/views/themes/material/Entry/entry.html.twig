@@ -252,7 +252,7 @@
                 <li id="list">
                     {% for tag in entry.tags %}
                         <div class="chip">
-                        <a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a> <a href="{{ path('remove_tag', { 'entry': entry.id, 'tag': tag.id }) }}"><i class="material-icons">delete</i></a>
+                        <a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a> <a href="{{ path('remove_tag', { 'entry': entry.id, 'tag': tag.id }) }}"><i class="material-icons vertical-align-middle">delete</i></a>
                         </div>
                     {% endfor %}
                 </li>

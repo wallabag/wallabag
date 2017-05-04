@@ -106,11 +106,11 @@
       font-size: 0.8em;
       display: flex;
       flex-flow: row wrap;
-      margin: 0 auto;
 
       li {
         display: inline-flex;
         vertical-align: middle;
+        margin: 0 5px;
       }
 
       a {
@@ -121,7 +121,7 @@
 
     #list {
       float: right;
-      margin: 0 15px 10px;
+      margin: -5px 15px auto;
     }
 
     .chip {
@@ -133,12 +133,19 @@
       i {
         color: #fff;
       }
+
+      i.material-icons {
+        float: right;
+        font-size: 20px;
+        line-height: 32px;
+        padding-left: 8px;
+      }
     }
   }
 }
 
 .reader-mode {
-  width: 95px !important;
+  width: 70px !important;
   transition: width 0.2s ease;
 
   .collapsible-body {
@@ -150,17 +157,21 @@
     opacity: 0;
     transition: opacity 0.2s ease;
   }
-}
 
-.reader-mode:hover {
-  width: 240px !important;
+  &:hover {
+    width: 260px !important;
 
-  .collapsible-body {
-    height: auto;
-  }
+    .collapsible-body {
+      height: auto;
 
-  span {
-    opacity: 1;
+      li a i.material-icons {
+        margin: auto 5px auto 0;
+      }
+    }
+
+    span {
+      opacity: 1;
+    }
   }
 }
 

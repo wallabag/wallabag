@@ -111,7 +111,7 @@
 a.icon-image {
   background-repeat: no-repeat;
   padding-right: 0.4em !important;
-  padding-left: 1em !important;
+  padding-left: 0 !important;
   margin-left: 25px;
 
   &::before {
@@ -120,7 +120,7 @@ a.icon-image {
     width: 24px;
     height: 24px;
     float: left;
-    margin: 0 6px 0 0;
+    margin: 7px 1.5px 0 0;
   }
 
   &.carrot::before {

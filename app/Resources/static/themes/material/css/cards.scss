@@ -114,20 +114,6 @@ main {
     }
   }
 
-  .card-entry-labels li,
-  .card-tag-labels li {
-    margin: 10px 10px 10px auto;
-    padding: 5px 12px 5px 16px !important;
-    background-color: $blueAccentColor;
-    border-radius: 0 3px 3px 0;
-    color: #fff;
-    cursor: default;
-    max-height: 2em;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
   .card-image {
     height: 10em;
   }
@@ -154,6 +140,20 @@ a.original {
   white-space: nowrap;
   overflow: hidden;
   display: block;
+}
+
+.card-entry-labels li,
+.card-tag-labels li {
+  margin: 10px 10px 10px auto;
+  padding: 5px 12px 5px 16px !important;
+  background-color: $blueAccentColor;
+  border-radius: 0 3px 3px 0;
+  color: #fff;
+  cursor: default;
+  max-height: 2em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .card-entry-tags a,
