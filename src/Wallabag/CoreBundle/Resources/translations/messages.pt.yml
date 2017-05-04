@@ -513,6 +513,8 @@ user:
         delete: 'Apagar'
         delete_confirm: 'Tem certeza?'
         back_to_list: 'Voltar para a lista'
+    search:
+        # placeholder: Filter by username or email
 
 error:
     # page_title: An error occurred

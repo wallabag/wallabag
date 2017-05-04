@@ -513,6 +513,8 @@ user:
         delete: Löschen
         delete_confirm: Bist du sicher?
         back_to_list: Zurück zur Liste
+    search:
+        # placeholder: Filter by username or email
 
 error:
     page_title: Ein Fehler ist aufgetreten

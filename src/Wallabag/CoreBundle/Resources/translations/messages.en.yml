@@ -513,6 +513,8 @@ user:
         delete: Delete
         delete_confirm: Are you sure?
         back_to_list: Back to list
+    search:
+        placeholder: Filter by username or email
 
 error:
     page_title: An error occurred

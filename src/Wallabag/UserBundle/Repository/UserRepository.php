@@ -52,4 +52,17 @@ class UserRepository extends EntityRepository
             ->getQuery()
             ->getSingleScalarResult();
     }
+
+    /**
+     * Retrieves users filtered with a search term.
+     *
+     * @param string $term
+     *
+     * @return QueryBuilder
+     */
+    public function getQueryBuilderForSearch($term)
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('lower(u.username) LIKE lower(:term) OR lower(u.email) LIKE lower(:term) OR lower(u.name) LIKE lower(:term)')->setParameter('term', '%'.$term.'%');
+    }
 }
