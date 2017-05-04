@@ -77,7 +77,7 @@ From Instapaper
 ---------------
 
 Export your Instapaper data
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 On the settings (`https://www.instapaper.com/user <https://www.instapaper.com/user>`_) page, click on "Download .CSV file" in the "Export" section. A CSV file will be downloaded (like ``instapaper-export.csv``).
 
@@ -133,16 +133,21 @@ If you have a CLI access on your web server, you can execute this command to imp
 
 ::
 
-    bin/console wallabag:import 1 ~/Downloads/wallabag-export-1-2016-04-05.json --env=prod
+    bin/console wallabag:import username ~/Downloads/wallabag-export-1-2016-04-05.json --env=prod
 
 Please replace values:
 
-* ``1`` is the user identifier in database (The ID of the first user created on wallabag is 1)
+* ``username`` is the user's username
 * ``~/Downloads/wallabag-export-1-2016-04-05.json`` is the path of your wallabag v1 export
 
-If you want to mark all these entries as read, you can add the ``--markAsRead`` option.
+.. note::
+    If you want to mark all these entries as read, you can add the ``--markAsRead`` option.
 
-To import a wallabag v2 file, you need to add the option ``--importer=v2``.
+.. note::
+    To import a wallabag v2 file, you need to add the option ``--importer=v2``.
+
+.. note::
+    If you want to pass the user id of the user instead of it's username, add the option ``--useUserId=true``.
 
 You'll have this in return:
 

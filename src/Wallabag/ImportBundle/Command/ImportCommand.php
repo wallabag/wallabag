@@ -15,10 +15,11 @@ class ImportCommand extends ContainerAwareCommand
         $this
             ->setName('wallabag:import')
             ->setDescription('Import entries from a JSON export')
-            ->addArgument('userId', InputArgument::REQUIRED, 'User ID to populate')
+            ->addArgument('username', InputArgument::REQUIRED, 'User to populate')
             ->addArgument('filepath', InputArgument::REQUIRED, 'Path to the JSON file')
             ->addOption('importer', null, InputArgument::OPTIONAL, 'The importer to use: v1, v2, instapaper, pinboard, readability, firefox or chrome', 'v1')
             ->addOption('markAsRead', null, InputArgument::OPTIONAL, 'Mark all entries as read', false)
+            ->addOption('useUserId', null, InputArgument::OPTIONAL, 'Use user id instead of username to find account', false)
         ;
     }
 
@@ -34,10 +35,14 @@ class ImportCommand extends ContainerAwareCommand
         // Turning off doctrine default logs queries for saving memory
         $em->getConnection()->getConfiguration()->setSQLLogger(null);
 
-        $user = $em->getRepository('WallabagUserBundle:User')->findOneById($input->getArgument('userId'));
+        if ($input->getOption('useUserId')) {
+            $user = $em->getRepository('WallabagUserBundle:User')->findOneById($input->getArgument('username'));
+        } else {
+            $user = $em->getRepository('WallabagUserBundle:User')->findOneByUsername($input->getArgument('username'));
+        }
 
         if (!is_object($user)) {
-            throw new Exception(sprintf('User with id "%s" not found', $input->getArgument('userId')));
+            throw new Exception(sprintf('User "%s" not found', $input->getArgument('username')));
         }
 
         switch ($input->getOption('importer')) {
