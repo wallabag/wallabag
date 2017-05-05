@@ -70,7 +70,7 @@ class ExportCommandTest extends WallabagCoreTestCase
         $tester->execute([
             'command' => $command->getName(),
             'username' => 'admin',
-            'filepath' => 'specialexport.json'
+            'filepath' => 'specialexport.json',
         ]);
 
         $this->assertFileExists('specialexport.json');
