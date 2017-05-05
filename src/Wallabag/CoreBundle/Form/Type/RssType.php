@@ -14,6 +14,7 @@ class RssType extends AbstractType
         $builder
             ->add('rss_limit', null, [
                 'label' => 'config.form_rss.rss_limit',
+                'property_path' => 'rssLimit',
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'config.form.save',

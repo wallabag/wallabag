@@ -21,6 +21,7 @@ class EditEntryType extends AbstractType
             ->add('is_public', CheckboxType::class, [
                 'required' => false,
                 'label' => 'entry.edit.is_public_label',
+                'property_path' => 'isPublic',
             ])
             ->add('url', TextType::class, [
                 'disabled' => true,

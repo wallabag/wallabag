@@ -39,9 +39,11 @@ class ConfigType extends AbstractType
             ])
             ->add('items_per_page', null, [
                 'label' => 'config.form_settings.items_per_page_label',
+                'property_path' => 'itemsPerPage',
             ])
             ->add('reading_speed', ChoiceType::class, [
                 'label' => 'config.form_settings.reading_speed.label',
+                'property_path' => 'readingSpeed',
                 'choices' => [
                     'config.form_settings.reading_speed.100_word' => '0.5',
                     'config.form_settings.reading_speed.200_word' => '1',
@@ -51,6 +53,7 @@ class ConfigType extends AbstractType
             ])
             ->add('action_mark_as_read', ChoiceType::class, [
                 'label' => 'config.form_settings.action_mark_as_read.label',
+                'property_path' => 'actionMarkAsRead',
                 'choices' => [
                     'config.form_settings.action_mark_as_read.redirect_homepage' => Config::REDIRECT_TO_HOMEPAGE,
                     'config.form_settings.action_mark_as_read.redirect_current_page' => Config::REDIRECT_TO_CURRENT_PAGE,
@@ -61,6 +64,7 @@ class ConfigType extends AbstractType
                 'label' => 'config.form_settings.language_label',
             ])
             ->add('pocket_consumer_key', null, [
+                'property_path' => 'pocketConsumerKey',
                 'label' => 'config.form_settings.pocket_consumer_key_label',
             ])
             ->add('save', SubmitType::class, [
