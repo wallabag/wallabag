@@ -10,7 +10,7 @@ use Wallabag\CoreBundle\Entity\Entry;
 
 class CleanDuplicatesCommandTest extends WallabagCoreTestCase
 {
-    public function testTagAll()
+    public function testRunCleanDuplicates()
     {
         $application = new Application($this->getClient()->getKernel());
         $application->add(new CleanDuplicatesCommand());
@@ -26,7 +26,7 @@ class CleanDuplicatesCommandTest extends WallabagCoreTestCase
         $this->assertContains('Finished cleaning. 0 duplicates found in total', $tester->getDisplay());
     }
 
-    public function testRunTagAllCommandWithBadUsername()
+    public function testRunCleanDuplicatesCommandWithBadUsername()
     {
         $application = new Application($this->getClient()->getKernel());
         $application->add(new CleanDuplicatesCommand());
@@ -42,7 +42,7 @@ class CleanDuplicatesCommandTest extends WallabagCoreTestCase
         $this->assertContains('User "unknown" not found', $tester->getDisplay());
     }
 
-    public function testRunTagAllCommandForUser()
+    public function testRunCleanDuplicatesCommandForUser()
     {
         $application = new Application($this->getClient()->getKernel());
         $application->add(new CleanDuplicatesCommand());
