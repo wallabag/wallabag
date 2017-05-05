@@ -111,7 +111,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('http://domain.io', $entry->getUrl());
         $this->assertEquals('my title', $entry->getTitle());
-        $this->assertEquals($this->fetchingErrorMessage . '<p><i>But we found a short description: </i></p>desc', $entry->getContent());
+        $this->assertEquals($this->fetchingErrorMessage.'<p><i>But we found a short description: </i></p>desc', $entry->getContent());
         $this->assertEmpty($entry->getPreviewPicture());
         $this->assertEmpty($entry->getLanguage());
         $this->assertEmpty($entry->getHttpStatus());
