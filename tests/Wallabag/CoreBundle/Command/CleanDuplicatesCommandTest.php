@@ -100,5 +100,9 @@ class CleanDuplicatesCommandTest extends WallabagCoreTestCase
 
         $nbEntries = $em->getRepository('WallabagCoreBundle:Entry')->findAllByUrlAndUserId($url, $this->getLoggedInUserId());
         $this->assertCount(1, $nbEntries);
+
+        $query = $em->createQuery('DELETE FROM Wallabag\CoreBundle\Entity\Entry e WHERE e.url = :url');
+        $query->setParameter('url', $url);
+        $query->execute();
     }
 }
