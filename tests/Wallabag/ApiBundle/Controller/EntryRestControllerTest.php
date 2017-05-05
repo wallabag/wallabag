@@ -810,10 +810,6 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertEquals('http://0.0.0.0/entry3', $content[1]['url']);
     }
 
-    /**
-     * @expectedException Symfony\Component\Config\Definition\Exception\Exception
-     * @expectedExceptionMessage API limit reached
-     */
     public function testLimitBulkAction()
     {
         $list = [
@@ -831,5 +827,8 @@ class EntryRestControllerTest extends WallabagApiTestCase
         ];
 
         $this->client->request('POST', '/api/entries/lists?urls='.json_encode($list));
+
+        $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
+        $this->assertContains('API limit reached', $this->client->getResponse()->getContent());
     }
 }
