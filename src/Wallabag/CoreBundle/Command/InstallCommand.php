@@ -63,6 +63,7 @@ class InstallCommand extends ContainerAwareCommand
             ->setupDatabase()
             ->setupAdmin()
             ->setupConfig()
+            ->runMigrations()
         ;
 
         $output->writeln('<info>wallabag has been successfully installed.</info>');
@@ -71,7 +72,7 @@ class InstallCommand extends ContainerAwareCommand
 
     protected function checkRequirements()
     {
-        $this->defaultOutput->writeln('<info><comment>Step 1 of 4.</comment> Checking system requirements.</info>');
+        $this->defaultOutput->writeln('<info><comment>Step 1 of 5.</comment> Checking system requirements.</info>');
         $doctrineManager = $this->getContainer()->get('doctrine')->getManager();
 
         $rows = [];
@@ -175,11 +176,11 @@ class InstallCommand extends ContainerAwareCommand
 
     protected function setupDatabase()
     {
-        $this->defaultOutput->writeln('<info><comment>Step 2 of 4.</comment> Setting up database.</info>');
+        $this->defaultOutput->writeln('<info><comment>Step 2 of 5.</comment> Setting up database.</info>');
 
         // user want to reset everything? Don't care about what is already here
         if (true === $this->defaultInput->getOption('reset')) {
-            $this->defaultOutput->writeln('Droping database, creating database and schema, clearing the cache');
+            $this->defaultOutput->writeln('Dropping database, creating database and schema, clearing the cache');
 
             $this
                 ->runCommand('doctrine:database:drop', ['--force' => true])
@@ -211,7 +212,7 @@ class InstallCommand extends ContainerAwareCommand
         $question = new ConfirmationQuestion('It appears that your database already exists. Would you like to reset it? (y/N)', false);
 
         if ($questionHelper->ask($this->defaultInput, $this->defaultOutput, $question)) {
-            $this->defaultOutput->writeln('Droping database, creating database and schema');
+            $this->defaultOutput->writeln('Dropping database, creating database and schema');
 
             $this
                 ->runCommand('doctrine:database:drop', ['--force' => true])
@@ -221,7 +222,7 @@ class InstallCommand extends ContainerAwareCommand
         } elseif ($this->isSchemaPresent()) {
             $question = new ConfirmationQuestion('Seems like your database contains schema. Do you want to reset it? (y/N)', false);
             if ($questionHelper->ask($this->defaultInput, $this->defaultOutput, $question)) {
-                $this->defaultOutput->writeln('Droping schema and creating schema');
+                $this->defaultOutput->writeln('Dropping schema and creating schema');
 
                 $this
                     ->runCommand('doctrine:schema:drop', ['--force' => true])
@@ -246,7 +247,7 @@ class InstallCommand extends ContainerAwareCommand
 
     protected function setupAdmin()
     {
-        $this->defaultOutput->writeln('<info><comment>Step 3 of 4.</comment> Administration setup.</info>');
+        $this->defaultOutput->writeln('<info><comment>Step 3 of 5.</comment> Administration setup.</info>');
 
         $questionHelper = $this->getHelperSet()->get('question');
         $question = new ConfirmationQuestion('Would you like to create a new admin user (recommended) ? (Y/n)', true);
@@ -285,7 +286,7 @@ class InstallCommand extends ContainerAwareCommand
 
     protected function setupConfig()
     {
-        $this->defaultOutput->writeln('<info><comment>Step 4 of 4.</comment> Config setup.</info>');
+        $this->defaultOutput->writeln('<info><comment>Step 4 of 5.</comment> Config setup.</info>');
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
 
         // cleanup before insert new stuff
@@ -462,6 +463,14 @@ class InstallCommand extends ContainerAwareCommand
         $this->defaultOutput->writeln('');
 
         return $this;
+    }
+
+    protected function runMigrations()
+    {
+        $this->defaultOutput->writeln('<info><comment>Step 5 of 5.</comment> Run migrations.</info>');
+
+        $this
+            ->runCommand('doctrine:migrations:migrate', ['--no-interaction' => true]);
     }
 
     /**
