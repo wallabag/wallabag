@@ -26,6 +26,7 @@ class WallabagCoreExtension extends Extension
         $container->setParameter('wallabag_core.action_mark_as_read', $config['action_mark_as_read']);
         $container->setParameter('wallabag_core.list_mode', $config['list_mode']);
         $container->setParameter('wallabag_core.fetching_error_message', $config['fetching_error_message']);
+        $container->setParameter('wallabag_core.api_limit_mass_actions', $config['api_limit_mass_actions']);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');

@@ -5,6 +5,7 @@ namespace Wallabag\ApiBundle\Controller;
 use Hateoas\Configuration\Route;
 use Hateoas\Representation\Factory\PagerfantaFactory;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -44,9 +45,7 @@ class EntryRestController extends WallabagRestController
                 $results[$url] = $res instanceof Entry ? $res->getId() : false;
             }
 
-            $json = $this->get('serializer')->serialize($results, 'json');
-
-            return (new JsonResponse())->setJson($json);
+            return $this->sendResponse($results);
         }
 
         // let's see if it is a simple url?
@@ -62,9 +61,7 @@ class EntryRestController extends WallabagRestController
 
         $exists = $res instanceof Entry ? $res->getId() : false;
 
-        $json = $this->get('serializer')->serialize(['exists' => $exists], 'json');
-
-        return (new JsonResponse())->setJson($json);
+        return $this->sendResponse(['exists' => $exists]);
     }
 
     /**
@@ -124,9 +121,7 @@ class EntryRestController extends WallabagRestController
             )
         );
 
-        $json = $this->get('serializer')->serialize($paginatedCollection, 'json');
-
-        return (new JsonResponse())->setJson($json);
+        return $this->sendResponse($paginatedCollection);
     }
 
     /**
@@ -145,9 +140,7 @@ class EntryRestController extends WallabagRestController
         $this->validateAuthentication();
         $this->validateUserAccess($entry->getUser()->getId());
 
-        $json = $this->get('serializer')->serialize($entry, 'json');
-
-        return (new JsonResponse())->setJson($json);
+        return $this->sendResponse($entry);
     }
 
     /**
@@ -170,6 +163,110 @@ class EntryRestController extends WallabagRestController
             ->setEntries($entry)
             ->updateTitle('entry')
             ->exportAs($request->attributes->get('_format'));
+    }
+
+    /**
+     * Handles an entries list and delete URL.
+     *
+     * @ApiDoc(
+     *       parameters={
+     *          {"name"="urls", "dataType"="string", "required"=true, "format"="A JSON array of urls [{'url': 'http://...'}, {'url': 'http://...'}]", "description"="Urls (as an array) to delete."}
+     *       }
+     * )
+     *
+     * @return JsonResponse
+     */
+    public function deleteEntriesListAction(Request $request)
+    {
+        $this->validateAuthentication();
+
+        $urls = json_decode($request->query->get('urls', []));
+
+        if (empty($urls)) {
+            return $this->sendResponse([]);
+        }
+
+        $results = [];
+
+        // handle multiple urls
+        foreach ($urls as $key => $url) {
+            $entry = $this->get('wallabag_core.entry_repository')->findByUrlAndUserId(
+                $url,
+                $this->getUser()->getId()
+            );
+
+            $results[$key]['url'] = $url;
+
+            if (false !== $entry) {
+                $em = $this->getDoctrine()->getManager();
+                $em->remove($entry);
+                $em->flush();
+
+                // entry deleted, dispatch event about it!
+                $this->get('event_dispatcher')->dispatch(EntryDeletedEvent::NAME, new EntryDeletedEvent($entry));
+            }
+
+            $results[$key]['entry'] = $entry instanceof Entry ? true : false;
+        }
+
+        return $this->sendResponse($results);
+    }
+
+    /**
+     * Handles an entries list and create URL.
+     *
+     * @ApiDoc(
+     *       parameters={
+     *          {"name"="urls", "dataType"="string", "required"=true, "format"="A JSON array of urls [{'url': 'http://...'}, {'url': 'http://...'}]", "description"="Urls (as an array) to create."}
+     *       }
+     * )
+     *
+     * @return JsonResponse
+     *
+     * @throws HttpException When limit is reached
+     */
+    public function postEntriesListAction(Request $request)
+    {
+        $this->validateAuthentication();
+
+        $urls = json_decode($request->query->get('urls', []));
+        $results = [];
+
+        $limit = $this->container->getParameter('wallabag_core.api_limit_mass_actions');
+
+        if (count($urls) > $limit) {
+            throw new HttpException(400, 'API limit reached');
+        }
+
+        // handle multiple urls
+        if (!empty($urls)) {
+            foreach ($urls as $key => $url) {
+                $entry = $this->get('wallabag_core.entry_repository')->findByUrlAndUserId(
+                    $url,
+                    $this->getUser()->getId()
+                );
+
+                $results[$key]['url'] = $url;
+
+                if (false === $entry) {
+                    $entry = $this->get('wallabag_core.content_proxy')->updateEntry(
+                        new Entry($this->getUser()),
+                        $url
+                    );
+                }
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($entry);
+                $em->flush();
+
+                $results[$key]['entry'] = $entry instanceof Entry ? $entry->getId() : false;
+
+                // entry saved, dispatch event about it!
+                $this->get('event_dispatcher')->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
+            }
+        }
+
+        return $this->sendResponse($results);
     }
 
     /**
@@ -229,9 +326,7 @@ class EntryRestController extends WallabagRestController
         // entry saved, dispatch event about it!
         $this->get('event_dispatcher')->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
 
-        $json = $this->get('serializer')->serialize($entry, 'json');
-
-        return (new JsonResponse())->setJson($json);
+        return $this->sendResponse($entry);
     }
 
     /**
@@ -280,9 +375,7 @@ class EntryRestController extends WallabagRestController
         $em = $this->getDoctrine()->getManager();
         $em->flush();
 
-        $json = $this->get('serializer')->serialize($entry, 'json');
-
-        return (new JsonResponse())->setJson($json);
+        return $this->sendResponse($entry);
     }
 
     /**
@@ -325,9 +418,7 @@ class EntryRestController extends WallabagRestController
         // entry saved, dispatch event about it!
         $this->get('event_dispatcher')->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
 
-        $json = $this->get('serializer')->serialize($entry, 'json');
-
-        return (new JsonResponse())->setJson($json);
+        return $this->sendResponse($entry);
     }
 
     /**
@@ -353,9 +444,7 @@ class EntryRestController extends WallabagRestController
         // entry deleted, dispatch event about it!
         $this->get('event_dispatcher')->dispatch(EntryDeletedEvent::NAME, new EntryDeletedEvent($entry));
 
-        $json = $this->get('serializer')->serialize($entry, 'json');
-
-        return (new JsonResponse())->setJson($json);
+        return $this->sendResponse($entry);
     }
 
     /**
@@ -374,9 +463,7 @@ class EntryRestController extends WallabagRestController
         $this->validateAuthentication();
         $this->validateUserAccess($entry->getUser()->getId());
 
-        $json = $this->get('serializer')->serialize($entry->getTags(), 'json');
-
-        return (new JsonResponse())->setJson($json);
+        return $this->sendResponse($entry->getTags());
     }
 
     /**
@@ -407,9 +494,7 @@ class EntryRestController extends WallabagRestController
         $em->persist($entry);
         $em->flush();
 
-        $json = $this->get('serializer')->serialize($entry, 'json');
-
-        return (new JsonResponse())->setJson($json);
+        return $this->sendResponse($entry);
     }
 
     /**
@@ -434,9 +519,7 @@ class EntryRestController extends WallabagRestController
         $em->persist($entry);
         $em->flush();
 
-        $json = $this->get('serializer')->serialize($entry, 'json');
-
-        return (new JsonResponse())->setJson($json);
+        return $this->sendResponse($entry);
     }
 
     /**
@@ -455,45 +538,46 @@ class EntryRestController extends WallabagRestController
         $this->validateAuthentication();
 
         $list = json_decode($request->query->get('list', []));
-        $results = [];
+
+        if (empty($list)) {
+            return $this->sendResponse([]);
+        }
 
         // handle multiple urls
-        if (!empty($list)) {
-            foreach ($list as $key => $element) {
-                $entry = $this->get('wallabag_core.entry_repository')->findByUrlAndUserId(
-                    $element->url,
-                    $this->getUser()->getId()
-                );
+        $results = [];
 
-                $results[$key]['url'] = $element->url;
-                $results[$key]['entry'] = $entry instanceof Entry ? $entry->getId() : false;
+        foreach ($list as $key => $element) {
+            $entry = $this->get('wallabag_core.entry_repository')->findByUrlAndUserId(
+                $element->url,
+                $this->getUser()->getId()
+            );
 
-                $tags = $element->tags;
+            $results[$key]['url'] = $element->url;
+            $results[$key]['entry'] = $entry instanceof Entry ? $entry->getId() : false;
 
-                if (false !== $entry && !(empty($tags))) {
-                    $tags = explode(',', $tags);
-                    foreach ($tags as $label) {
-                        $label = trim($label);
+            $tags = $element->tags;
 
-                        $tag = $this->getDoctrine()
-                            ->getRepository('WallabagCoreBundle:Tag')
-                            ->findOneByLabel($label);
+            if (false !== $entry && !(empty($tags))) {
+                $tags = explode(',', $tags);
+                foreach ($tags as $label) {
+                    $label = trim($label);
 
-                        if (false !== $tag) {
-                            $entry->removeTag($tag);
-                        }
+                    $tag = $this->getDoctrine()
+                        ->getRepository('WallabagCoreBundle:Tag')
+                        ->findOneByLabel($label);
+
+                    if (false !== $tag) {
+                        $entry->removeTag($tag);
                     }
-
-                    $em = $this->getDoctrine()->getManager();
-                    $em->persist($entry);
-                    $em->flush();
                 }
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($entry);
+                $em->flush();
             }
         }
 
-        $json = $this->get('serializer')->serialize($results, 'json');
-
-        return (new JsonResponse())->setJson($json);
+        return $this->sendResponse($results);
     }
 
     /**
@@ -512,32 +596,47 @@ class EntryRestController extends WallabagRestController
         $this->validateAuthentication();
 
         $list = json_decode($request->query->get('list', []));
+
+        if (empty($list)) {
+            return $this->sendResponse([]);
+        }
+
         $results = [];
 
         // handle multiple urls
-        if (!empty($list)) {
-            foreach ($list as $key => $element) {
-                $entry = $this->get('wallabag_core.entry_repository')->findByUrlAndUserId(
-                    $element->url,
-                    $this->getUser()->getId()
-                );
+        foreach ($list as $key => $element) {
+            $entry = $this->get('wallabag_core.entry_repository')->findByUrlAndUserId(
+                $element->url,
+                $this->getUser()->getId()
+            );
 
-                $results[$key]['url'] = $element->url;
-                $results[$key]['entry'] = $entry instanceof Entry ? $entry->getId() : false;
+            $results[$key]['url'] = $element->url;
+            $results[$key]['entry'] = $entry instanceof Entry ? $entry->getId() : false;
 
-                $tags = $element->tags;
+            $tags = $element->tags;
 
-                if (false !== $entry && !(empty($tags))) {
-                    $this->get('wallabag_core.content_proxy')->assignTagsToEntry($entry, $tags);
+            if (false !== $entry && !(empty($tags))) {
+                $this->get('wallabag_core.content_proxy')->assignTagsToEntry($entry, $tags);
 
-                    $em = $this->getDoctrine()->getManager();
-                    $em->persist($entry);
-                    $em->flush();
-                }
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($entry);
+                $em->flush();
             }
         }
 
-        $json = $this->get('serializer')->serialize($results, 'json');
+        return $this->sendResponse($results);
+    }
+
+    /**
+     * Shortcut to send data serialized in json.
+     *
+     * @param mixed $data
+     *
+     * @return JsonResponse
+     */
+    private function sendResponse($data)
+    {
+        $json = $this->get('serializer')->serialize($data, 'json');
 
         return (new JsonResponse())->setJson($json);
     }

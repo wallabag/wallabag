@@ -766,20 +766,69 @@ class EntryRestControllerTest extends WallabagApiTestCase
             ],
         ];
 
-        $this->client->request('DELETE', '/api/entries/tags/list?list='.json_encode($list));
+        $this->client->request('DELETE', '/api/entries/tags/list?list=' . json_encode($list));
+    }
+
+
+    public function testPostEntriesListAction()
+    {
+        $list = [
+            'http://www.lemonde.fr/musiques/article/2017/04/23/loin-de-la-politique-le-printemps-de-bourges-retombe-en-enfance_5115862_1654986.html',
+            'http://0.0.0.0/entry2',
+        ];
+
+        $this->client->request('POST', '/api/entries/lists?urls='.json_encode($list));
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->assertInternalType('int', $content[0]['entry']);
-        $this->assertEquals('http://0.0.0.0/entry4', $content[0]['url']);
+        $this->assertEquals('http://www.lemonde.fr/musiques/article/2017/04/23/loin-de-la-politique-le-printemps-de-bourges-retombe-en-enfance_5115862_1654986.html', $content[0]['url']);
 
-        $entry = $this->client->getContainer()->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->findByUrlAndUserId('http://0.0.0.0/entry4', 1);
+        $this->assertInternalType('int', $content[1]['entry']);
+        $this->assertEquals('http://0.0.0.0/entry2', $content[1]['url']);
+    }
 
-        $tags = $entry->getTags();
-        $this->assertCount(2, $tags);
+    public function testDeleteEntriesListAction()
+    {
+        $list = [
+            'http://www.lemonde.fr/musiques/article/2017/04/23/loin-de-la-politique-le-printemps-de-bourges-retombe-en-enfance_5115862_1654986.html',
+            'http://0.0.0.0/entry3',
+        ];
+
+        $this->client->request('DELETE', '/api/entries/list?urls='.json_encode($list));
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertTrue($content[0]['entry']);
+        $this->assertEquals('http://www.lemonde.fr/musiques/article/2017/04/23/loin-de-la-politique-le-printemps-de-bourges-retombe-en-enfance_5115862_1654986.html', $content[0]['url']);
+
+        $this->assertFalse($content[1]['entry']);
+        $this->assertEquals('http://0.0.0.0/entry3', $content[1]['url']);
+    }
+
+    public function testLimitBulkAction()
+    {
+        $list = [
+            'http://0.0.0.0/entry1',
+            'http://0.0.0.0/entry1',
+            'http://0.0.0.0/entry1',
+            'http://0.0.0.0/entry1',
+            'http://0.0.0.0/entry1',
+            'http://0.0.0.0/entry1',
+            'http://0.0.0.0/entry1',
+            'http://0.0.0.0/entry1',
+            'http://0.0.0.0/entry1',
+            'http://0.0.0.0/entry1',
+            'http://0.0.0.0/entry1',
+        ];
+
+        $this->client->request('POST', '/api/entries/lists?urls='.json_encode($list));
+
+        $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
+        $this->assertContains('API limit reached', $this->client->getResponse()->getContent());
     }
 }
