@@ -16,9 +16,9 @@ security:
 
 menu:
     left:
-        unread: "Non lus"
+        unread: "Non archivés"
         starred: "Favoris"
-        archive: "Lus"
+        archive: "Archivés"
         all_articles: "Tous les articles"
         config: "Configuration"
         tags: "Tags"
@@ -30,7 +30,7 @@ menu:
         about: "À propos"
         search: "Recherche"
         save_link: "Sauvegarder un nouvel article"
-        back_to_unread: "Retour aux articles non lus"
+        back_to_unread: "Retour aux articles non archivés"
         users_management: "Gestion des utilisateurs"
     top:
         add_new_entry: "Sauvegarder un nouvel article"
@@ -71,7 +71,7 @@ config:
             300_word: "Je lis environ 300 mots par minute"
             400_word: "Je lis environ 400 mots par minute"
         action_mark_as_read:
-            label: "Où souhaitez-vous être redirigé après avoir marqué un article comme lu ?"
+            label: "Où souhaitez-vous être redirigé après avoir marqué un article comme archivé ?"
             redirect_homepage: "À la page d’accueil"
             redirect_current_page: "À la page courante"
         pocket_consumer_key_label: "Clé d’authentification Pocket pour importer les données"
@@ -89,9 +89,9 @@ config:
         token_reset: "Réinitialisez votre jeton"
         rss_links: "Adresse de vos flux RSS"
         rss_link:
-            unread: "non lus"
+            unread: "non archivés"
             starred: "favoris"
-            archive: "lus"
+            archive: "archivés"
         rss_limit: "Nombre d’articles dans le flux"
     form_user:
         two_factor_description: "Activer l’authentification double-facteur veut dire que vous allez recevoir un code par courriel à chaque nouvelle connexion non approuvée."
@@ -159,9 +159,9 @@ config:
 
 entry:
     page_titles:
-        unread: "Articles non lus"
+        unread: "Articles non archivés"
         starred: "Articles favoris"
-        archived: "Articles lus"
+        archived: "Articles archivés"
         filtered: "Articles filtrés"
         filtered_tags: "Articles filtrés par tags :"
         filtered_search: "Articles filtrés par recherche :"
@@ -175,16 +175,16 @@ entry:
         reading_time_minutes_short: "%readingTime% min"
         reading_time_less_one_minute_short: "&lt; 1 min"
         original_article: "original"
-        toogle_as_read: "Marquer comme lu/non lu"
+        toogle_as_read: "Marquer comme archivés/désarchivé"
         toogle_as_star: "Marquer comme favori"
         delete: "Supprimer"
         export_title: "Exporter"
     filters:
         title: "Filtres"
         status_label: "Status"
-        archived_label: "Lus"
+        archived_label: "Archivés"
         starred_label: "Favoris"
-        unread_label: "Non lus"
+        unread_label: "Non archivés"
         preview_picture_label: "A une photo"
         preview_picture_help: "Photo"
         language_label: "Langue"
@@ -205,8 +205,8 @@ entry:
         left_menu:
             back_to_top: "Revenir en haut"
             back_to_homepage: "Retour"
-            set_as_read: "Marquer comme lu"
-            set_as_unread: "Marquer comme non lu"
+            set_as_read: "Archivé"
+            set_as_unread: "Désarchivé"
             set_as_starred: "Mettre en favori"
             view_original_article: "Article original"
             re_fetch_content: "Recharger le contenu"
@@ -302,9 +302,9 @@ howto:
         shortcut: "Raccourci"
         action: "Action"
         all_pages_title: "Raccourcis disponibles dans toutes les pages"
-        go_unread: "Afficher les articles non lus"
+        go_unread: "Afficher les articles non archivés"
         go_starred: "Afficher les articles favoris"
-        go_archive:  "Afficher les articles lus"
+        go_archive:  "Afficher les articles archivés"
         go_all: "Afficher tous les articles"
         go_tags: "Afficher les tags"
         go_config: "Aller à la configuration"
@@ -317,7 +317,7 @@ howto:
         article_title: "Raccourcis disponibles quand on affiche un article"
         open_original: "Ouvrir l’URL originale de l’article"
         toggle_favorite: "Changer le statut Favori de l’article"
-        toggle_archive: "Changer le status Lu de l’article"
+        toggle_archive: "Changer le status Archiver de l’article"
         delete: "Supprimer l’article"
         material_title: "Raccourcis disponibles avec le thème Material uniquement"
         add_link: "Ajouter un nouvel article"
@@ -394,8 +394,8 @@ import:
     action:
         import_contents: "Importer les contenus"
     form:
-        mark_as_read_title: "Marquer tout comme lu ?"
-        mark_as_read_label: "Marquer tous les contenus importés comme lus"
+        mark_as_read_title: "Marquer tout archivé ?"
+        mark_as_read_label: "Marquer tous les contenus importés comme archivés"
         file_label: "Fichier"
         save_label: "Importer le fichier"
     pocket:
@@ -542,8 +542,8 @@ flashes:
             entry_updated: "Article mis à jour"
             entry_reloaded: "Article rechargé"
             entry_reloaded_failed: "Article mis à jour mais impossible de récupérer le contenu"
-            entry_archived: "Article marqué comme lu"
-            entry_unarchived: "Article marqué comme non lu"
+            entry_archived: "Article archivé"
+            entry_unarchived: "Article désarchivé"
             entry_starred: "Article ajouté dans les favoris"
             entry_unstarred: "Article retiré des favoris"
             entry_deleted: "Article supprimé"
