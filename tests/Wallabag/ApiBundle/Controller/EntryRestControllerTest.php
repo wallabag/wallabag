@@ -766,9 +766,8 @@ class EntryRestControllerTest extends WallabagApiTestCase
             ],
         ];
 
-        $this->client->request('DELETE', '/api/entries/tags/list?list=' . json_encode($list));
+        $this->client->request('DELETE', '/api/entries/tags/list?list='.json_encode($list));
     }
-
 
     public function testPostEntriesListAction()
     {
