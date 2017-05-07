@@ -8,6 +8,7 @@ use JMS\Serializer\Annotation\Exclude;
 use JMS\Serializer\Annotation\VirtualProperty;
 use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 use Wallabag\UserBundle\Entity\User;
 use Wallabag\CoreBundle\Entity\Entry;
 
@@ -56,7 +57,11 @@ class Annotation
     /**
      * @var string
      *
-     * @ORM\Column(name="quote", type="string")
+     * @Assert\Length(
+     *     max = 10000,
+     *     maxMessage = "validator.quote_length_too_high"
+     * )
+     * @ORM\Column(name="quote", type="text")
      *
      * @Groups({"entries_for_user", "export_all"})
      */

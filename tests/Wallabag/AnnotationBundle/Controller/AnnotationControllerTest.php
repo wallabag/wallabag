@@ -84,7 +84,9 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
         $content = json_encode([
             'text' => 'my annotation',
             'quote' => 'my quote',
-            'ranges' => ['start' => '', 'startOffset' => 24, 'end' => '', 'endOffset' => 31],
+            'ranges' => [
+                ['start' => '', 'startOffset' => 24, 'end' => '', 'endOffset' => 31]
+            ],
         ]);
         $this->client->request('POST', $prefixUrl.'/'.$entry->getId().'.json', [], [], $headers, $content);
 
@@ -104,6 +106,36 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
             ->findLastAnnotationByPageId($entry->getId(), 1);
 
         $this->assertEquals('my annotation', $annotation->getText());
+    }
+
+    /**
+     * @dataProvider dataForEachAnnotations
+     */
+    public function testSetAnnotationWithQuoteTooLong($prefixUrl)
+    {
+        $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+
+        if ('annotations' === $prefixUrl) {
+            $this->logInAs('admin');
+        }
+
+        /** @var Entry $entry */
+        $entry = $em
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneByUsernameAndNotArchived('admin');
+
+        $longQuote = str_repeat('a', 10001);
+        $headers = ['CONTENT_TYPE' => 'application/json'];
+        $content = json_encode([
+            'text' => 'my annotation',
+            'quote' => $longQuote,
+            'ranges' => [
+                ['start' => '', 'startOffset' => 24, 'end' => '', 'endOffset' => 31]
+            ],
+        ]);
+        $this->client->request('POST', $prefixUrl.'/'.$entry->getId().'.json', [], [], $headers, $content);
+
+        $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
     }
 
     /**

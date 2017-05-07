@@ -4,3 +4,4 @@ validator:
     password_wrong_value: 'Vòstre senhal actual es pas bon'
     item_per_page_too_high: "Aquò li agradarà pas a l'aplicacion"
     rss_limit_too_high: "Aquò li agradarà pas a l'aplicacion"
+    # quote_length_too_high: 'The quote is too long. It should have {{ limit }} characters or less.'
