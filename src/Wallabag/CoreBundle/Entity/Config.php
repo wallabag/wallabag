@@ -379,7 +379,7 @@ class Config
     }
 
     /**
-     * @return ArrayCollection<TaggingRule>
+     * @return ArrayCollection
      */
     public function getTaggingRules()
     {

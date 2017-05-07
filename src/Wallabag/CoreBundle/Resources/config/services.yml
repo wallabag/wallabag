@@ -173,7 +173,7 @@ services:
     wallabag_core.subscriber.download_images:
         class: Wallabag\CoreBundle\Event\Subscriber\DownloadImagesSubscriber
         arguments:
-            - "@doctrine.orm.default_entity_manager"
+            - "@doctrine"
             - "@wallabag_core.entry.download_images"
             - '@=service(''craue_config'').get(''download_images_enabled'')'
             - "@logger"

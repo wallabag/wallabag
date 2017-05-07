@@ -85,7 +85,9 @@ class ReadabilityImport extends AbstractImport
      */
     public function parseEntry(array $importedEntry)
     {
-        $existingEntry = $this->em
+        $em = $this->registry->getManager();
+
+        $existingEntry = $em
             ->getRepository('WallabagCoreBundle:Entry')
             ->findByUrlAndUserId($importedEntry['article__url'], $this->user->getId());
 
@@ -115,7 +117,7 @@ class ReadabilityImport extends AbstractImport
         $entry->setStarred($data['is_starred']);
         $entry->setCreatedAt(new \DateTime($data['created_at']));
 
-        $this->em->persist($entry);
+        $em->persist($entry);
         ++$this->importedEntries;
 
         return $entry;

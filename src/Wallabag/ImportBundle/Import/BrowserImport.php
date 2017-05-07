@@ -81,6 +81,13 @@ abstract class BrowserImport extends AbstractImport
      */
     protected function parseEntries($entries)
     {
+        // If there is no manager, this means that only Doctrine DBAL is configured
+        // In this case we can do nothing and just return
+        if (null === $this->registry || !count($this->registry->getManagers())) {
+            return false;
+        }
+
+        $em = $this->registry->getManager();
         $i = 1;
         $entryToBeFlushed = [];
 
@@ -100,7 +107,7 @@ abstract class BrowserImport extends AbstractImport
 
             // flush every 20 entries
             if (($i % 20) === 0) {
-                $this->em->flush();
+                $em->flush();
 
                 foreach ($entryToBeFlushed as $entry) {
                     $this->eventDispatcher->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
@@ -111,7 +118,7 @@ abstract class BrowserImport extends AbstractImport
             ++$i;
         }
 
-        $this->em->flush();
+        $em->flush();
 
         if (!empty($entryToBeFlushed)) {
             foreach ($entryToBeFlushed as $entry) {
@@ -155,6 +162,7 @@ abstract class BrowserImport extends AbstractImport
      */
     public function parseEntry(array $importedEntry)
     {
+        $em = $this->registry->getManager();
         if ((!array_key_exists('guid', $importedEntry) || (!array_key_exists('id', $importedEntry))) && is_array(reset($importedEntry))) {
             if ($this->producer) {
                 $this->parseEntriesForProducer($importedEntry);
@@ -185,7 +193,7 @@ abstract class BrowserImport extends AbstractImport
 
         $url = array_key_exists('uri', $importedEntry) ? $importedEntry['uri'] : $importedEntry['url'];
 
-        $existingEntry = $this->em
+        $existingEntry = $em
             ->getRepository('WallabagCoreBundle:Entry')
             ->findByUrlAndUserId($url, $this->user->getId());
 
@@ -218,7 +226,7 @@ abstract class BrowserImport extends AbstractImport
             $entry->setCreatedAt($dt->setTimestamp($data['created_at']));
         }
 
-        $this->em->persist($entry);
+        $em->persist($entry);
         ++$this->importedEntries;
 
         return $entry;

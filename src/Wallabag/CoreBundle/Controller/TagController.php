@@ -126,7 +126,7 @@ class TagController extends Controller
         $pagerAdapter = new ArrayAdapter($entriesByTag);
 
         $entries = $this->get('wallabag_core.helper.prepare_pager_for_entries')
-            ->prepare($pagerAdapter, $page);
+            ->prepare($pagerAdapter);
 
         try {
             $entries->setCurrentPage($page);

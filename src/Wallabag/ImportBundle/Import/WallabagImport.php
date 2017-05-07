@@ -91,7 +91,8 @@ abstract class WallabagImport extends AbstractImport
      */
     public function parseEntry(array $importedEntry)
     {
-        $existingEntry = $this->em
+        $em = $this->registry->getManager();
+        $existingEntry = $em
             ->getRepository('WallabagCoreBundle:Entry')
             ->findByUrlAndUserId($importedEntry['url'], $this->user->getId());
 
@@ -114,7 +115,7 @@ abstract class WallabagImport extends AbstractImport
             $this->contentProxy->assignTagsToEntry(
                 $entry,
                 $data['tags'],
-                $this->em->getUnitOfWork()->getScheduledEntityInsertions()
+                $em->getUnitOfWork()->getScheduledEntityInsertions()
             );
         }
 
@@ -129,7 +130,7 @@ abstract class WallabagImport extends AbstractImport
             $entry->setCreatedAt(new \DateTime($data['created_at']));
         }
 
-        $this->em->persist($entry);
+        $em->persist($entry);
         ++$this->importedEntries;
 
         return $entry;

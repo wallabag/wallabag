@@ -11,17 +11,9 @@ class AMQPEntryConsumerTest extends \PHPUnit_Framework_TestCase
 {
     public function testMessageOk()
     {
-        $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')
+        $registry = $this->getMockBuilder('Doctrine\Common\Persistence\ManagerRegistry')
             ->disableOriginalConstructor()
             ->getMock();
-
-        $em
-            ->expects($this->once())
-            ->method('flush');
-
-        $em
-            ->expects($this->exactly(2))
-            ->method('clear');
 
         $body = <<<'JSON'
 {
@@ -121,7 +113,7 @@ JSON;
             ->method('dispatch');
 
         $consumer = new AMQPEntryConsumer(
-            $em,
+            $registry,
             $userRepository,
             $import,
             $dispatcher
@@ -134,17 +126,9 @@ JSON;
 
     public function testMessageWithBadUser()
     {
-        $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')
+        $registry = $this->getMockBuilder('Doctrine\Common\Persistence\ManagerRegistry')
             ->disableOriginalConstructor()
             ->getMock();
-
-        $em
-            ->expects($this->never())
-            ->method('flush');
-
-        $em
-            ->expects($this->never())
-            ->method('clear');
 
         $body = '{ "userId": 123 }';
 
@@ -175,7 +159,7 @@ JSON;
             ->method('dispatch');
 
         $consumer = new AMQPEntryConsumer(
-            $em,
+            $registry,
             $userRepository,
             $import,
             $dispatcher
@@ -190,17 +174,9 @@ JSON;
 
     public function testMessageWithEntryProcessed()
     {
-        $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')
+        $registry = $this->getMockBuilder('Doctrine\Common\Persistence\ManagerRegistry')
             ->disableOriginalConstructor()
             ->getMock();
-
-        $em
-            ->expects($this->never())
-            ->method('flush');
-
-        $em
-            ->expects($this->never())
-            ->method('clear');
 
         $body = '{ "userId": 123 }';
 
@@ -241,7 +217,7 @@ JSON;
             ->method('dispatch');
 
         $consumer = new AMQPEntryConsumer(
-            $em,
+            $registry,
             $userRepository,
             $import,
             $dispatcher

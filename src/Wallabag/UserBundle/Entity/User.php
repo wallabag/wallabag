@@ -163,7 +163,7 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
     }
 
     /**
-     * @return ArrayCollection<Entry>
+     * @return ArrayCollection
      */
     public function getEntries()
     {
@@ -260,7 +260,7 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
     }
 
     /**
-     * @return ArrayCollection<Entry>
+     * @return ArrayCollection
      */
     public function getClients()
     {

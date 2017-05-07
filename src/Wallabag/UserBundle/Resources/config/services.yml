@@ -25,7 +25,7 @@ services:
     wallabag_user.listener.create_config:
         class: Wallabag\UserBundle\EventListener\CreateConfigListener
         arguments:
-            - "@doctrine.orm.entity_manager"
+            - "@doctrine"
             - "%wallabag_core.theme%"
             - "%wallabag_core.items_on_page%"
             - "%wallabag_core.rss_limit%"

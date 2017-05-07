@@ -172,10 +172,14 @@ class DownloadImages
             ->in($folderPath);
 
         foreach ($finder as $file) {
-            @unlink($file->getRealPath());
+            if (false === @unlink($file->getRealPath())) {
+                throw new \RuntimeException('The file '.$file->getRealPath().' could not be deleted.');
+            }
         }
 
-        @rmdir($folderPath);
+        if (false === @rmdir($folderPath)) {
+            throw new \RuntimeException('The folder '.$folderPath.' could not be deleted.');
+        }
     }
 
     /**

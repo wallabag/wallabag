@@ -132,7 +132,7 @@ class Tag
     /**
      * Get entries for this tag.
      *
-     * @return ArrayCollection<Entry>
+     * @return ArrayCollection
      */
     public function getEntries()
     {
