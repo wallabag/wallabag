@@ -103,25 +103,29 @@
 
   aside {
     .tools {
-      font-size: 0.8em;
       display: flex;
       flex-flow: row wrap;
 
-      li {
-        display: inline-flex;
-        vertical-align: middle;
-        margin: 0 5px;
+      .stats {
+        font-size: 0.8em;
+        margin: 8px 15px 5px;
+
+        li {
+          display: inline-flex;
+          vertical-align: middle;
+          margin: 0 5px;
+        }
+
+        a {
+          color: #000;
+          text-decoration: none;
+        }
       }
 
-      a {
-        color: #000;
-        text-decoration: none;
+      .tags {
+        float: right;
+        margin: 5px 15px 10px;
       }
-    }
-
-    #list {
-      float: right;
-      margin: -5px 15px auto;
     }
 
     .chip {
