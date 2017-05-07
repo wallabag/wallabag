@@ -27,6 +27,10 @@ main {
     color: #313131;
   }
 
+  .card-content .card-title {
+    display: inline-block;
+  }
+
   .card-content .activator,
   .card-reveal .activator {
     cursor: pointer;
@@ -111,6 +115,10 @@ main {
     .reading-time {
       display: inline-flex;
       vertical-align: middle;
+
+      span {
+        margin-right: 5px;
+      }
     }
   }
 

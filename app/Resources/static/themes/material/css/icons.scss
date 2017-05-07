@@ -138,6 +138,10 @@ a.icon-image {
   &.shaarli::before {
     background: url("../../_global/img/icons/shaarli.png") no-repeat center/80%;
   }
+
+  &.scuttle::before {
+    background: url("../../_global/img/icons/scuttle.png") no-repeat center/80%;
+  }
 }
 
 .icon-google-plus2::before {

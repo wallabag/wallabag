@@ -132,8 +132,8 @@
                             </div>
 
                             <div class="row">
-                                <div class="input-field col s12">
-                                    <label>{{ 'config.form_rss.token_label'|trans }}</label>
+                                <div class="col s12">
+                                    <h6 class="grey-text">{{ 'config.form_rss.token_label'|trans }}</h6>
                                     <div>
                                         {% if rss.token %}
                                             {{ rss.token }}
@@ -151,8 +151,8 @@
                             </div>
                             {% if rss.token %}
                             <div class="row">
-                                <div class="input-field col s12">
-                                    <label>{{ 'config.form_rss.rss_links'|trans }}</label>
+                                <div class="col s12">
+                                    <h6 class="grey-text">{{ 'config.form_rss.rss_links'|trans }}</h6>
                                     <ul>
                                         <li><a href="{{ path('unread_rss', {'username': rss.username, 'token': rss.token}) }}">{{ 'config.form_rss.rss_link.unread'|trans }}</a></li>
                                         <li><a href="{{ path('starred_rss', {'username': rss.username, 'token': rss.token}) }}">{{ 'config.form_rss.rss_link.starred'|trans }}</a></li>

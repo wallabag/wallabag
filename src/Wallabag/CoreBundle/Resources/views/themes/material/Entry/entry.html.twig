@@ -132,8 +132,7 @@
                     {% endif %}
                     {% if craue_setting('share_scuttle') %}
                         <li>
-                        <a href="{{ craue_setting('scuttle_url') }}/bookmarks.php?action=add&amp;address={{ entry.url|url_encode }}&amp;title={{ entry.title|striptags|url_encode }}&amp;tags={{ entry.tags|join(',')|striptags|url_encode }}" target="_blank">
-                                <i class="tool icon-image icon-image--scuttle" title="scuttle"></i>
+                        <a href="{{ craue_setting('scuttle_url') }}/bookmarks.php?action=add&amp;address={{ entry.url|url_encode }}&amp;title={{ entry.title|striptags|url_encode }}&amp;tags={{ entry.tags|join(',')|striptags|url_encode }}" target="_blank" title="scuttle" class="tool icon-image scuttle">
                                 <span>scuttle</span>
                             </a>
                         </li>
