@@ -156,6 +156,22 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertEquals('application/json', $this->client->getResponse()->headers->get('Content-Type'));
     }
 
+    public function testGetEntriesOnPageTwo()
+    {
+        $this->client->request('GET', '/api/entries', [
+            'page' => 2,
+            'perPage' => 2,
+        ]);
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertGreaterThanOrEqual(0, $content['total']);
+        $this->assertEquals(2, $content['page']);
+        $this->assertEquals(2, $content['limit']);
+    }
+
     public function testGetStarredEntries()
     {
         $this->client->request('GET', '/api/entries', ['starred' => 1, 'sort' => 'updated']);
