@@ -24,7 +24,7 @@ class GrabySiteConfigBuilderTest extends PHPUnit_Framework_TestCase
         $grabySiteConfig->login_uri = 'http://example.com/login';
         $grabySiteConfig->login_username_field = 'login';
         $grabySiteConfig->login_password_field = 'password';
-        $grabySiteConfig->login_extra_fields = ['field' => 'value'];
+        $grabySiteConfig->login_extra_fields = ['field=value'];
         $grabySiteConfig->not_logged_in_xpath = '//div[@class="need-login"]';
 
         $grabyConfigBuilderMock

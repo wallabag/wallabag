@@ -54,7 +54,7 @@ class GrabySiteConfigBuilder implements SiteConfigBuilder
             'loginUri' => $config->login_uri ?: null,
             'usernameField' => $config->login_username_field ?: null,
             'passwordField' => $config->login_password_field ?: null,
-            'extraFields' => is_array($config->login_extra_fields) ? $config->login_extra_fields : [],
+            'extraFields' => $this->processExtraFields($config->login_extra_fields),
             'notLoggedInXpath' => $config->not_logged_in_xpath ?: null,
         ];
 
@@ -64,5 +64,31 @@ class GrabySiteConfigBuilder implements SiteConfigBuilder
         }
 
         return new SiteConfig($parameters);
+    }
+
+    /**
+     * Processes login_extra_fields config, transforming an '=' separated array of strings
+     * into a key/value array.
+     *
+     * @param array|mixed $extraFieldsStrings
+     *
+     * @return array
+     */
+    protected function processExtraFields($extraFieldsStrings)
+    {
+        if (!is_array($extraFieldsStrings)) {
+            return [];
+        }
+
+        $extraFields = [];
+        foreach ($extraFieldsStrings as $extraField) {
+            if (strpos($extraField, '=') === false) {
+                continue;
+            }
+            list($fieldName, $fieldValue) = explode('=', $extraField, 2);
+            $extraFields[$fieldName] = $fieldValue;
+        }
+
+        return $extraFields;
     }
 }
