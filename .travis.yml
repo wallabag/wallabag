@@ -21,6 +21,7 @@ cache:
         - $HOME/.composer/cache
         - node_modules
         - $HOME/.npm
+        - $HOME/.yarn-cache
 
 php:
     - 5.6
