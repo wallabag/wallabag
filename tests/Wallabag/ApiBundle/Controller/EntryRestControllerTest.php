@@ -373,14 +373,24 @@ class EntryRestControllerTest extends WallabagApiTestCase
             ->willThrowException(new \Exception('Test Fetch content fails'));
         $container->set('wallabag_core.content_proxy', $contentProxy);
 
-        $this->client->request('POST', '/api/entries.json', [
-            'url' => 'http://www.example.com/',
-        ]);
+        try {
+            $this->client->request('POST', '/api/entries.json', [
+                'url' => 'http://www.example.com/',
+            ]);
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
-        $content = json_decode($this->client->getResponse()->getContent(), true);
-        $this->assertGreaterThan(0, $content['id']);
-        $this->assertEquals('http://www.example.com/', $content['url']);
+            $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+            $content = json_decode($this->client->getResponse()->getContent(), true);
+            $this->assertGreaterThan(0, $content['id']);
+            $this->assertEquals('http://www.example.com/', $content['url']);
+        } finally {
+            // Remove the created entry to avoid side effects on other tests
+            if (isset($content['id'])) {
+                $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+                $entry = $em->getReference('WallabagCoreBundle:Entry', $content['id']);
+                $em->remove($entry);
+                $em->flush();
+            }
+        }
     }
 
     public function testPostArchivedAndStarredEntry()
