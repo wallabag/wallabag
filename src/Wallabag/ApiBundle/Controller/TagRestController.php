@@ -44,7 +44,7 @@ class TagRestController extends WallabagRestController
     public function deleteTagLabelAction(Request $request)
     {
         $this->validateAuthentication();
-        $label = $request->request->get('tag', '');
+        $label = $request->get('tag', '');
 
         $tag = $this->getDoctrine()->getRepository('WallabagCoreBundle:Tag')->findOneByLabel($label);
 
@@ -78,7 +78,7 @@ class TagRestController extends WallabagRestController
     {
         $this->validateAuthentication();
 
-        $tagsLabels = $request->request->get('tags', '');
+        $tagsLabels = $request->get('tags', '');
 
         $tags = [];
 
