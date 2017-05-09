@@ -591,6 +591,26 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertCount(1, $crawler->filter('div[class=entry]'));
     }
 
+    public function testFilterOnReadingTimeWithNegativeValue()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/unread/list');
+
+        $form = $crawler->filter('button[id=submit-filter]')->form();
+
+        $data = [
+            'entry_filter[readingTime][right_number]' => -22,
+            'entry_filter[readingTime][left_number]' => -22,
+        ];
+
+        $crawler = $client->submit($form, $data);
+
+        // forcing negative value results in no entry displayed
+        $this->assertCount(0, $crawler->filter('div[class=entry]'));
+    }
+
     public function testFilterOnReadingTimeOnlyUpper()
     {
         $this->logInAs('admin');
