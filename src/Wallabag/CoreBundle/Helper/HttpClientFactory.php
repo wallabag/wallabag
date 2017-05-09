@@ -27,7 +27,7 @@ class HttpClientFactory
      *
      * @param \GuzzleHttp\Cookie\CookieJar $cookieJar
      * @param string                       $restrictedAccess This param is a kind of boolean. Values: 0 or 1
-     * @param LoggerInterface                       $logger
+     * @param LoggerInterface              $logger
      */
     public function __construct(CookieJar $cookieJar, $restrictedAccess, LoggerInterface $logger)
     {
