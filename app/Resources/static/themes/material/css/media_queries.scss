@@ -1,0 +1,149 @@
+/* ==========================================================================
+   Media queries
+   ========================================================================== */
+
+@media only screen and (max-width: 992px) {
+  header,
+  main,
+  footer {
+    padding-left: 0;
+  }
+
+  nav,
+  main,
+  footer {
+    padding-left: 0;
+  }
+
+  .pagination {
+    width: auto;
+  }
+
+  .nav-panels .action {
+    padding-right: 0.75rem;
+  }
+
+  .nav-panel-buttom {
+    justify-content: space-around;
+  }
+
+  #article {
+    max-width: 35em;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 18px;
+
+    > header > h1 {
+      font-size: 1.33em;
+    }
+  }
+
+  .reader-mode {
+    width: 240px !important;
+
+    span {
+      opacity: 1;
+    }
+  }
+
+  .tabs {
+    display: inline-block;
+    height: auto;
+  }
+
+  .tab {
+    min-width: 100%;
+  }
+
+  .indicator {
+    display: none;
+  }
+
+  .pagination li.prev,
+  .pagination li.next {
+    width: auto;
+  }
+
+  .drag-target + .drag-target {
+    height: 50%;
+  }
+
+  .drag-target + .drag-target + .drag-target {
+    top: 50%;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1650px) {
+  .row .col.l3 {
+    width: 33.33333%;
+    margin-left: 0;
+  }
+}
+
+@media only screen and (min-width: 993px) and (max-width: 1200px) {
+  .row {
+    .col.l1 {
+      width: 25%;
+      margin-left: 0;
+    }
+
+    .col.l2 {
+      width: 33.33333%;
+      margin-left: 0;
+    }
+
+    .col.l3 {
+      width: 41.66667%;
+      margin-left: 0;
+    }
+
+    .col.l4 {
+      width: 50%;
+      margin-left: 0;
+    }
+
+    .col.l5 {
+      width: 58.33333%;
+      margin-left: 0;
+    }
+
+    .col.l6 {
+      width: 66.66667%;
+      margin-left: 0;
+    }
+
+    .col.l7 {
+      width: 75%;
+      margin-left: 0;
+    }
+
+    .col.l8 {
+      width: 83.33333%;
+      margin-left: 0;
+    }
+
+    .col.l9 {
+      width: 91.66667%;
+      margin-left: 0;
+    }
+
+    .col.l10 {
+      width: 100%;
+      margin-left: 0;
+    }
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  .nb-results {
+    display: none;
+  }
+
+  main ul.row {
+    padding: 0;
+  }
+
+  .row .col {
+    padding: 0;
+  }
+}

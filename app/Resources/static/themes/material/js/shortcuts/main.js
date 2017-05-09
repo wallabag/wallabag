@@ -28,6 +28,11 @@ $(document).ready(() => {
     return;
   }
 
+  /* Show nothing on login/register page */
+  if ($('#username').length > 0 || $('#fos_user_registration_form_username').length > 0) {
+    return;
+  }
+
   /* Focus current card */
   toggleFocus(card);
 

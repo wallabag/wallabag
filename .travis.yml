@@ -20,7 +20,6 @@ cache:
         - vendor
         - $HOME/.composer/cache
         - node_modules
-        - $HOME/.cache/bower
         - $HOME/.npm
 
 php:
@@ -59,9 +58,9 @@ before_script:
     - if [[ $DB = pgsql ]]; then psql -c 'create database wallabag_test;' -U postgres; fi;
 
 install:
-    - if [[ $ASSETS = build ]]; then source ~/.nvm/nvm.sh && nvm install 6.7; fi;
-    - if [[ $ASSETS = build ]]; then npm install -g npm@latest; fi;
-    - if [[ $ASSETS = build ]]; then npm install; fi;
+    - if [[ $ASSETS = build ]]; then source ~/.nvm/nvm.sh && nvm install 6.10; fi;
+    - if [[ $ASSETS = build ]]; then npm install -g yarn@latest; fi;
+    - if [[ $ASSETS = build ]]; then yarn install; fi;
 
 before_install:
     - if [[ $TRAVIS_REPO_SLUG = wallabag/wallabag ]]; then cp .composer-auth.json ~/.composer/auth.json; fi;
@@ -74,4 +73,4 @@ script:
     - if [[ $VALIDATE_TRANSLATION_FILE = run ]]; then php bin/console lint:yaml src/Wallabag/CoreBundle/Resources/translations -v ; fi;
     - if [[ $VALIDATE_TRANSLATION_FILE = run ]]; then php bin/console lint:yaml app/Resources/CraueConfigBundle/translations -v ; fi;
     - if [[ $VALIDATE_TRANSLATION_FILE = run ]]; then php bin/console lint:yaml src/Wallabag/UserBundle/Resources/translations -v ; fi;
-    - if [[ $ASSETS = build ]]; then ./node_modules/grunt-cli/bin/grunt tests; fi;
+    - if [[ $ASSETS = build ]]; then yarn run build:prod; fi;

@@ -1,0 +1,87 @@
+/* ==========================================================================
+ * Entries
+ * ========================================================================== */
+
+.results {
+  height: 1em;
+
+  .nb-results,
+  .pagination {
+    margin: 15px 15px 0;
+  }
+
+  .nb-results {
+    display: inline-flex;
+  }
+
+  a {
+    color: #444;
+  }
+}
+
+.pagination {
+  float: right;
+
+  ul {
+    margin: 0 !important;
+
+    .prev.disabled,
+    .next.disabled {
+      display: none;
+    }
+  }
+
+  li {
+    padding: 0;
+  }
+
+  a {
+    padding: 0 10px;
+    height: 30px;
+    display: block;
+  }
+
+  .disabled {
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+
+  li.active span {
+    padding: 0 10px;
+    height: 30px;
+    display: block;
+    color: #fff;
+  }
+}
+
+.page-footer .footer-copyright {
+  min-width: 50px;
+  height: auto !important;
+  line-height: 1em !important;
+
+  p {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    display: block;
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+.picker__date-display {
+  display: none;
+}
+
+footer {
+  &.page-footer {
+    margin-top: 10px;
+    padding-top: 0;
+  }
+
+  .row {
+    margin-bottom: 10px;
+  }
+}

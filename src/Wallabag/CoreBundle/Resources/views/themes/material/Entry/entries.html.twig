@@ -45,7 +45,7 @@
     {% endif %}
 
     <!-- Export -->
-    <div id="export" class="side-nav fixed right-aligned">
+    <div id="export" class="side-nav right-aligned">
     {% set currentRoute = app.request.attributes.get('_route') %}
     {% set currentTag = '' %}
     {% if tag is defined %}
@@ -68,7 +68,7 @@
 
     <!-- Filters -->
     {% if form is not null %}
-    <div id="filters" class="side-nav fixed right-aligned">
+    <div id="filters" class="side-nav right-aligned">
         <form action="{{ path('all') }}">
 
             <h4 class="center">{{ 'entry.filters.title'|trans }}</h4>
