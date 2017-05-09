@@ -95,12 +95,13 @@ class EntryRestController extends WallabagRestController
         $tags = $request->query->get('tags', '');
         $since = $request->query->get('since', 0);
 
+        /** @var \Pagerfanta\Pagerfanta $pager */
         $pager = $this->getDoctrine()
             ->getRepository('WallabagCoreBundle:Entry')
             ->findEntries($this->getUser()->getId(), $isArchived, $isStarred, $sort, $order, $since, $tags);
 
-        $pager->setCurrentPage($page);
         $pager->setMaxPerPage($perPage);
+        $pager->setCurrentPage($page);
 
         $pagerfantaFactory = new PagerfantaFactory('page', 'perPage');
         $paginatedCollection = $pagerfantaFactory->createRepresentation(

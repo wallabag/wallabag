@@ -61,7 +61,7 @@ Lade das letzte Release von wallabag herunter:
 
 .. code-block:: bash
 
-    wget http://wllbg.org/latest-v2-package && tar xvf latest-v2-package
+    wget https://wllbg.org/latest-v2-package && tar xvf latest-v2-package
 
 Du findest den `aktuellen MD5-Hash auf unserer Webseite <https://static.wallabag.org/releases/>`_.
 

@@ -5,7 +5,7 @@
     <div class="card-content">
 
         {% if error %}
-            <script>Materialize.toast('{{ error.message }}', 4000)</script>
+            <script>Materialize.toast('{{ error.messageKey|trans(error.messageData, 'security') }}', 4000)</script>
         {% endif %}
 
         {% for flashMessage in app.session.flashbag.get('notice') %}
