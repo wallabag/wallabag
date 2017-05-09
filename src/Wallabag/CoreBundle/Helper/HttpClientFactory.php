@@ -51,6 +51,7 @@ class HttpClientFactory
         $this->cookieJar->clear();
         // need to set the (shared) cookie jar
         $client = new Client(['handler' => new SafeCurlHandler(), 'defaults' => ['cookies' => $this->cookieJar]]);
+
         foreach ($this->subscribers as $subscriber) {
             $client->getEmitter()->attach($subscriber);
         }

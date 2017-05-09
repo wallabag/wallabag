@@ -2,6 +2,8 @@
 
 namespace Tests\Wallabag\CoreBundle\GuzzleSiteAuthenticator;
 
+use Monolog\Handler\TestHandler;
+use Monolog\Logger;
 use BD\GuzzleSiteAuthenticator\SiteConfig\SiteConfig;
 use Graby\SiteConfig\SiteConfig as GrabySiteConfig;
 use PHPUnit_Framework_TestCase;
@@ -32,14 +34,19 @@ class GrabySiteConfigBuilderTest extends PHPUnit_Framework_TestCase
             ->with('example.com')
             ->will($this->returnValue($grabySiteConfig));
 
+        $logger = new Logger('foo');
+        $handler = new TestHandler();
+        $logger->pushHandler($handler);
+
         $this->builder = new GrabySiteConfigBuilder(
             $grabyConfigBuilderMock,
-            ['example.com' => ['username' => 'foo', 'password' => 'bar']]
+            ['example.com' => ['username' => 'foo', 'password' => 'bar']],
+            $logger
         );
 
         $config = $this->builder->buildForHost('example.com');
 
-        self::assertEquals(
+        $this->assertEquals(
             new SiteConfig([
                 'host' => 'example.com',
                 'requiresLogin' => true,
@@ -53,6 +60,10 @@ class GrabySiteConfigBuilderTest extends PHPUnit_Framework_TestCase
             ]),
             $config
         );
+
+        $records = $handler->getRecords();
+
+        $this->assertCount(1, $records, 'One log was recorded');
     }
 
     public function testBuildConfigDoesntExist()
@@ -67,19 +78,22 @@ class GrabySiteConfigBuilderTest extends PHPUnit_Framework_TestCase
             ->with('unknown.com')
             ->will($this->returnValue(new GrabySiteConfig()));
 
-        $this->builder = new GrabySiteConfigBuilder($grabyConfigBuilderMock, []);
+        $logger = new Logger('foo');
+        $handler = new TestHandler();
+        $logger->pushHandler($handler);
+
+        $this->builder = new GrabySiteConfigBuilder(
+            $grabyConfigBuilderMock,
+            [],
+            $logger
+        );
 
         $config = $this->builder->buildForHost('unknown.com');
 
-        self::assertEquals(
-            new SiteConfig([
-                'host' => 'unknown.com',
-                'requiresLogin' => false,
-                'username' => null,
-                'password' => null,
-                'extraFields' => [],
-            ]),
-            $config
-        );
+        $this->assertFalse($config);
+
+        $records = $handler->getRecords();
+
+        $this->assertCount(1, $records, 'One log was recorded');
     }
 }

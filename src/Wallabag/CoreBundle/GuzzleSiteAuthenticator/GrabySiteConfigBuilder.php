@@ -6,28 +6,35 @@ use BD\GuzzleSiteAuthenticator\SiteConfig\SiteConfig;
 use BD\GuzzleSiteAuthenticator\SiteConfig\SiteConfigBuilder;
 use Graby\SiteConfig\ConfigBuilder;
 use OutOfRangeException;
+use Psr\Log\LoggerInterface;
 
 class GrabySiteConfigBuilder implements SiteConfigBuilder
 {
     /**
-     * @var \Graby\SiteConfig\ConfigBuilder
+     * @var ConfigBuilder
      */
     private $grabyConfigBuilder;
     /**
      * @var array
      */
     private $credentials;
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
 
     /**
      * GrabySiteConfigBuilder constructor.
      *
-     * @param \Graby\SiteConfig\ConfigBuilder $grabyConfigBuilder
-     * @param array                           $credentials
+     * @param ConfigBuilder   $grabyConfigBuilder
+     * @param array           $credentials
+     * @param LoggerInterface $logger
      */
-    public function __construct(ConfigBuilder $grabyConfigBuilder, array $credentials = [])
+    public function __construct(ConfigBuilder $grabyConfigBuilder, array $credentials, LoggerInterface $logger)
     {
         $this->grabyConfigBuilder = $grabyConfigBuilder;
         $this->credentials = $credentials;
+        $this->logger = $logger;
     }
 
     /**
@@ -47,6 +54,12 @@ class GrabySiteConfigBuilder implements SiteConfigBuilder
             $host = substr($host, 4);
         }
 
+        if (!isset($this->credentials[$host])) {
+            $this->logger->debug('Auth: no credentials available for host.', ['host' => $host]);
+
+            return false;
+        }
+
         $config = $this->grabyConfigBuilder->buildForHost($host);
         $parameters = [
             'host' => $host,
@@ -56,14 +69,18 @@ class GrabySiteConfigBuilder implements SiteConfigBuilder
             'passwordField' => $config->login_password_field ?: null,
             'extraFields' => $this->processExtraFields($config->login_extra_fields),
             'notLoggedInXpath' => $config->not_logged_in_xpath ?: null,
+            'username' => $this->credentials[$host]['username'],
+            'password' => $this->credentials[$host]['password'],
         ];
 
-        if (isset($this->credentials[$host])) {
-            $parameters['username'] = $this->credentials[$host]['username'];
-            $parameters['password'] = $this->credentials[$host]['password'];
-        }
+        $config = new SiteConfig($parameters);
 
-        return new SiteConfig($parameters);
+        // do not leak password in log
+        $parameters['password'] = '**masked**';
+
+        $this->logger->debug('Auth: add parameters.', ['host' => $host, 'parameters' => $parameters]);
+
+        return $config;
     }
 
     /**
@@ -85,6 +102,7 @@ class GrabySiteConfigBuilder implements SiteConfigBuilder
             if (strpos($extraField, '=') === false) {
                 continue;
             }
+
             list($fieldName, $fieldValue) = explode('=', $extraField, 2);
             $extraFields[$fieldName] = $fieldValue;
         }
