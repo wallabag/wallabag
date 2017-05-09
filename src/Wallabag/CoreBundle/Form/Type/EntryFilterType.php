@@ -3,6 +3,7 @@
 namespace Wallabag\CoreBundle\Form\Type;
 
 use Doctrine\ORM\EntityRepository;
+use Lexik\Bundle\FormFilterBundle\Filter\FilterOperands;
 use Lexik\Bundle\FormFilterBundle\Filter\Query\QueryInterface;
 use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\NumberRangeFilterType;
 use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\DateRangeFilterType;
@@ -33,7 +34,7 @@ class EntryFilterType extends AbstractType
         $this->user = $tokenStorage->getToken() ? $tokenStorage->getToken()->getUser() : null;
 
         if (null === $this->user || !is_object($this->user)) {
-            return null;
+            return;
         }
     }
 
@@ -41,6 +42,14 @@ class EntryFilterType extends AbstractType
     {
         $builder
             ->add('readingTime', NumberRangeFilterType::class, [
+                'left_number_options' => [
+                    'condition_operator' => FilterOperands::OPERATOR_GREATER_THAN_EQUAL,
+                    'attr' => ['min' => 0],
+                ],
+                'right_number_options' => [
+                    'condition_operator' => FilterOperands::OPERATOR_LOWER_THAN_EQUAL,
+                    'attr' => ['min' => 0],
+                ],
                 'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
                     $lower = $values['value']['left_number'][0];
                     $upper = $values['value']['right_number'][0];
