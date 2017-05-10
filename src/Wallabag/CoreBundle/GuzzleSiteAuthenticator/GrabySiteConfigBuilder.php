@@ -54,7 +54,7 @@ class GrabySiteConfigBuilder implements SiteConfigBuilder
             $host = substr($host, 4);
         }
 
-        if (!isset($this->credentials[$host])) {
+        if (empty($this->credentials[$host])) {
             $this->logger->debug('Auth: no credentials available for host.', ['host' => $host]);
 
             return false;
