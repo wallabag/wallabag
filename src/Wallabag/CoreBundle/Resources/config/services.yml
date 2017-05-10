@@ -63,6 +63,9 @@ services:
         arguments:
             - "@wallabag_core.graby.config_builder"
             - "%sites_credentials%"
+            - '@logger'
+        tags:
+            - { name: monolog.logger, channel: graby }
 
     # service alias override
     bd_guzzle_site_authenticator.site_config_builder:
