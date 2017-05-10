@@ -13,7 +13,7 @@ You need to have RabbitMQ installed on your server.
 
 ### Installation
 
-``` {.sourceCode .bash}
+```
 wget https://www.rabbitmq.com/rabbitmq-signing-key-public.asc
 apt-key add rabbitmq-signing-key-public.asc
 apt-get update
@@ -22,14 +22,14 @@ apt-get install rabbitmq-server
 
 ### Configuration and launch
 
-``` {.sourceCode .bash}
+```
 rabbitmq-plugins enable rabbitmq_management # (useful to have a web interface, available at http://localhost:15672/ (guest/guest)
 rabbitmq-server -detached
 ```
 
 ### Stop RabbitMQ
 
-``` {.sourceCode .bash}
+```
 rabbitmqctl stop
 ```
 
@@ -38,7 +38,7 @@ rabbitmqctl stop
 Edit your `app/config/parameters.yml` file to edit RabbitMQ
 configuration. The default one should be ok:
 
-``` {.sourceCode .yaml}
+```
 rabbitmq_host: localhost
 rabbitmq_port: 5672
 rabbitmq_user: guest
@@ -56,7 +56,7 @@ the value 1).
 Depending on which service you want to import from you need to enable
 one (or many if you want to support many) cron job:
 
-``` {.sourceCode .bash}
+```
 # for Pocket import
 bin/console rabbitmq:consumer -e=prod import_pocket -w
 
@@ -91,7 +91,7 @@ You need to have Redis installed on your server.
 
 ### Installation
 
-``` {.sourceCode .bash}
+```
 apt-get install redis-server
 ```
 
@@ -100,7 +100,7 @@ apt-get install redis-server
 The server might be already running after installing, if not you can
 launch it using:
 
-``` {.sourceCode .bash}
+```
 redis-server
 ```
 
@@ -109,7 +109,7 @@ redis-server
 Edit your `app/config/parameters.yml` file to edit Redis configuration.
 The default one should be ok:
 
-``` {.sourceCode .yaml}
+```
 redis_host: localhost
 redis_port: 6379
 ```
@@ -124,7 +124,7 @@ value 1).
 Depending on which service you want to import from you need to enable
 one (or many if you want to support many) cron job:
 
-``` {.sourceCode .bash}
+```
 # for Pocket import
 bin/console wallabag:import:redis-worker -e=prod pocket -vv >> /path/to/wallabag/var/logs/redis-pocket.log
 
@@ -151,6 +151,6 @@ If you want to launch the import only for some messages and not all, you
 can specify this number (here 12) and the worker will stop right after
 the 12th message :
 
-``` {.sourceCode .bash}
+```
 bin/console wallabag:import:redis-worker -e=prod pocket -vv --maxIterations=12
 ```

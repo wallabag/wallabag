@@ -1,8 +1,6 @@
-Articles
-========
+# Articles
 
-Save your first article
------------------------
+## Save your first article
 
 The main purpose of wallabag is to save web articles. You have many ways
 to do it. If you think that the article is wrong displayed, [you can
@@ -41,7 +39,7 @@ You can download the [Chrome addon
 here](https://chrome.google.com/webstore/detail/wallabagger/gbmgphmejlcoihgedabhgjdkcahacjlj?hl=fr).
 
 By using your smartphone application
-\^\^\^\^\^\^\^\^\^\^\^\^\^\^\^\^\^\^\^\^\^\^\^\^\^\^\^\^\^\^\^\^\^\^\^
+
 
 #### Android
 
@@ -55,8 +53,7 @@ or on
 You can downlaod the [Windows Phone application
 here](https://www.microsoft.com/store/apps/9nblggh5x3p6).
 
-Download your articles
-----------------------
+## Download your articles
 
 You can download each article in several formats: ePUB, MOBI, PDF, XML,
 JSON, CSV.
@@ -89,8 +86,7 @@ Now, you can share the article:
 -   to Carrot
 -   with an email
 
-Annotate your articles
-----------------------
+## Annotate your articles
 
 In each article you read, you can write annotations. It's easier to
 understand with some pictures.

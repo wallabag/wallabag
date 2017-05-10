@@ -2,7 +2,7 @@ Contribute to this documentation
 ================================
 
 Sources of our documentation are here
-<https://github.com/wallabag/wallabag/tree/master/docs>
+https://github.com/wallabag/wallabag/tree/master/docs
 
 We use [ReadTheDocs](https://readthedocs.org) to generate it.
 

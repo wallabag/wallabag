@@ -1,3 +1,5 @@
+### TODO : REMOVE ME !
+
 Configuring mobile apps to work with wallabag
 =============================================
 
