@@ -1,0 +1,16 @@
+{
+    "plugins": [
+      "edit-link",
+      "toggle-chapters",
+      "page-toc"
+    ],
+    "pluginsConfig": {
+        "edit-link": {
+            "base": "https://github.com/wallabag/doc/tree/master/",
+            "label": {
+                "en": "Edit This Page",
+                "fr": "Modifier cette page"
+            }
+        }
+    }
+}
