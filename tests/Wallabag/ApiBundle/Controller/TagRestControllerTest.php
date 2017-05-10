@@ -54,7 +54,18 @@ class TagRestControllerTest extends WallabagApiTestCase
         $this->assertNull($tag, $tagName.' was removed because it begun an orphan tag');
     }
 
-    public function testDeleteTagByLabel()
+    public function dataForDeletingTagByLabel()
+    {
+        return [
+            'by_query' => [true],
+            'by_body' => [false],
+        ];
+    }
+
+    /**
+     * @dataProvider dataForDeletingTagByLabel
+     */
+    public function testDeleteTagByLabel($useQueryString)
     {
         $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
         $entry = $this->client->getContainer()
@@ -73,7 +84,11 @@ class TagRestControllerTest extends WallabagApiTestCase
         $em->persist($entry);
         $em->flush();
 
-        $this->client->request('DELETE', '/api/tag/label.json', ['tag' => $tag->getLabel()]);
+        if ($useQueryString) {
+            $this->client->request('DELETE', '/api/tag/label.json?tag='.$tag->getLabel());
+        } else {
+            $this->client->request('DELETE', '/api/tag/label.json', ['tag' => $tag->getLabel()]);
+        }
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
@@ -98,7 +113,10 @@ class TagRestControllerTest extends WallabagApiTestCase
         $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
     }
 
-    public function testDeleteTagsByLabel()
+    /**
+     * @dataProvider dataForDeletingTagByLabel
+     */
+    public function testDeleteTagsByLabel($useQueryString)
     {
         $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
         $entry = $this->client->getContainer()
@@ -122,7 +140,11 @@ class TagRestControllerTest extends WallabagApiTestCase
         $em->persist($entry);
         $em->flush();
 
-        $this->client->request('DELETE', '/api/tags/label.json', ['tags' => $tag->getLabel().','.$tag2->getLabel()]);
+        if ($useQueryString) {
+            $this->client->request('DELETE', '/api/tags/label.json?tags='.$tag->getLabel().','.$tag2->getLabel());
+        } else {
+            $this->client->request('DELETE', '/api/tags/label.json', ['tags' => $tag->getLabel().','.$tag2->getLabel()]);
+        }
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
