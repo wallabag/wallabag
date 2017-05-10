@@ -1,5 +1,4 @@
-Migrate from ...
-================
+# Migrate from ...
 
 In wallabag 2.x, you can import data from:
 
@@ -17,8 +16,7 @@ system. [You can read the documentation
 here](http://doc.wallabag.org/fr/master/developer/asynchronous.html)
 (for experts).
 
-Pocket
-------
+## Pocket
 
 ### Create a new application on Pocket
 
@@ -46,8 +44,7 @@ You need to authorize wallabag to interact with your Pocket account.
 Your data will be imported. Data import can be a demanding process for
 your server.
 
-Readability
------------
+## Readability
 
 ### Export your Readability data
 
@@ -65,8 +62,7 @@ section and then select your json file and upload it.
 Your data will be imported. Data import can be a demanding process for
 your server.
 
-From Pinboard
--------------
+## From Pinboard
 
 ### Export your Pinboard data
 
@@ -83,8 +79,7 @@ section and then select your json file and upload it.
 Your data will be imported. Data import can be a demanding process for
 your server.
 
-From Instapaper
----------------
+## From Instapaper
 
 ### Export your Instapaper data
 
@@ -101,8 +96,7 @@ section and then select your CSV file and upload it.
 Your data will be imported. Data import can be a demanding process for
 your server.
 
-wallabag 1.x
-------------
+## wallabag 1.x
 
 If you were using wallabag v1.x, you need to export your data before
 migrating to wallabag v2.x, because the application and its database
@@ -112,19 +106,11 @@ installation.
 
 ![Exporting from wallabag v1](../../img/user/export_v1.png)
 
-<div class="admonition note">
-
 If you have multiple accounts on the same instance of wallabag, each
 user must export from v1 and import into v2 its data.
 
-</div>
-
-<div class="admonition note">
-
 If you encounter issues during the export or the import, don't hesitate
 to [ask for support](https://gitter.im/wallabag/wallabag).
-
-</div>
 
 When you have retrieved the json file containing your entries, you can
 install wallabag v2 if needed by following [the standard
@@ -136,8 +122,7 @@ Select your json file and upload it.
 
 ![Import from wallabag v1](../../img/user/import_wallabagv1.png)
 
-wallabag 2.x
-------------
+## wallabag 2.x
 
 From the previous wallabag instance on which you were before, go to
 All articles, then export these articles as json.
@@ -148,20 +133,18 @@ From your new wallabag instance, create your user account and click on
 the link in the menu to proceed to import. Choose import from wallabag
 v2 and select your json file to upload it.
 
-<div class="admonition note">
-
 If you encounter issues during the export or the import, don't hesitate
 to [ask for support](https://gitter.im/wallabag/wallabag).
 
-</div>
-
-Import via command-line interface (CLI)
+# Import via command-line interface (CLI)
 ---------------------------------------
 
 If you have a CLI access on your web server, you can execute this
 command to import your wallabag v1 export:
 
-    bin/console wallabag:import username ~/Downloads/wallabag-export-1-2016-04-05.json --env=prod
+```bash
+bin/console wallabag:import username ~/Downloads/wallabag-export-1-2016-04-05.json --env=prod
+```
 
 Please replace values:
 
@@ -169,30 +152,20 @@ Please replace values:
 -   `~/Downloads/wallabag-export-1-2016-04-05.json` is the path of your
     wallabag v1 export
 
-<div class="admonition note">
-
 If you want to mark all these entries as read, you can add the
 `--markAsRead` option.
-
-</div>
-
-<div class="admonition note">
 
 To import a wallabag v2 file, you need to add the option
 `--importer=v2`.
 
-</div>
-
-<div class="admonition note">
-
 If you want to pass the user id of the user instead of it's username,
 add the option `--useUserId=true`.
 
-</div>
-
 You'll have this in return:
 
-    Start : 05-04-2016 11:36:07 ---
-    403 imported
-    0 already saved
-    End : 05-04-2016 11:36:09 ---
+```
+Start : 05-04-2016 11:36:07 ---
+403 imported
+0 already saved
+End : 05-04-2016 11:36:09 ---
+```

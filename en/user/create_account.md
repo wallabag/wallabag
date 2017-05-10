@@ -1,8 +1,6 @@
-Create an account and authentication
-====================================
+# Create an account and authentication
 
-Register
---------
+## Register
 
 On the login page, click on `Register` button.
 
@@ -21,8 +19,7 @@ Your account is now activated.
 
 ![Welcome on board!](../../img/user/activated_account.png)
 
-Login
------
+## Login
 
 Your account is now enabled, congratulations!
 

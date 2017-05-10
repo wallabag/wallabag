@@ -1,16 +1,13 @@
-Errors during fetching articles
-===============================
+# Errors while fetching articles
 
-Why does the fetch of an article fail?
---------------------------------------
+## Why does the fetch of an article fail?
 
 There may be several reasons:
 
 -   network problem
 -   wallabag can't fetch content due to the website structure
 
-How can I help to fix that?
----------------------------
+## How can I help to fix that?
 
 You can try to fix this problem by yourself (so we can be focused on
 improving wallabag internally instead of writing siteconfig :) ).
@@ -39,8 +36,7 @@ Then you can submit a pull request to
 [<https://github.com/fivefilters/ftr-site-config>](https://github.com/fivefilters/ftr-site-config)
 which is the global repo for siteconfig files.
 
-How can I try to re-fetch this article?
----------------------------------------
+## How can I try to re-fetch this article?
 
 If wallabag failed when fetching an article, you can click on the reload
 button (the third on the below picture).

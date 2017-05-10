@@ -7,7 +7,7 @@ To ensure wallabag development quality, we wrote tests with
 If you contribute to the project (by translating the application, by
 fixing bugs or by adding a new feature), please write your own tests.
 
-To launch wallabag testsuite, you need to install
-[ant](http://ant.apache.org).
+To launch wallabag testsuite, you need to have
+[ant](http://ant.apache.org) installed.
 
-Then, execute this command `make test`.
+Then, execute the `make test` command, which will first populate the test database with fixtures and then run the tests.
