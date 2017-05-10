@@ -1,5 +1,4 @@
-Upgrade your wallabag installation
-==================================
+# Upgrade your wallabag installation
 
 You will find here different ways to upgrade your wallabag:
 
@@ -7,19 +6,22 @@ You will find here different ways to upgrade your wallabag:
 -   [from 2.0.x to 2.1.1](#upgrade-from-2-0-x-to-2-1-1)
 -   [from 1.x to 2.x](#from-wallabag-1-x)
 
-Upgrading from 2.1.x to 2.2.x
------------------------------
+## Upgrading from 2.1.x to 2.2.x
 
 ### Upgrade on a dedicated web server
 
 **From 2.1.x:**
 
-    make update
-    php bin/console doctrine:migrations:migrate --no-interaction -e=prod
+```bash
+make update
+php bin/console doctrine:migrations:migrate --no-interaction -e=prod
+```
 
 **From 2.2.0:**
 
-    make update
+```bash
+make update
+```
 
 #### Explanations about database migrations
 
@@ -65,7 +67,7 @@ Backup your `app/config/parameters.yml` file.
 
 Download the last release of wallabag:
 
-``` {.sourceCode .bash}
+```bash
 wget https://wllbg.org/latest-v2-package && tar xvf latest-v2-package
 ```
 
@@ -84,36 +86,27 @@ installation.
 
 Empty `var/cache` folder.
 
-You must run some SQL queries to upgrade your database. We assume that
-the table prefix is `wallabag_`. Don't forgete to backup your database
-before migrating.
+You must run some SQL queries to upgrade your database. We assume that the table prefix is `wallabag_`. Don't forgete to backup your database before migrating.
 
-You may encounter issues with indexes names: if so, please change
-queries with the correct index name.
+You may encounter issues with indexes names: if so, please change queries with the correct index name.
 
-[You can find all the queries
-here](http://doc.wallabag.org/en/master/user/query-upgrade-21-22.html).
+[You can find all the queries here](query-upgrade-21-22.md).
 
-Upgrade from 2.0.x to 2.1.1
----------------------------
+## Upgrade from 2.0.x to 2.1.1
 
-<div class="admonition warning">
-
-Before this migration, if you configured the Pocket import by adding
-your consumer key in Internal settings, please do a backup of it: you'll
-have to add it into the Config page after the upgrade.
-
-</div>
+Before this migration, if you configured the Pocket import by adding your consumer key in Internal settings, please do a backup of it: you'll have to add it into the Config page after the upgrade.
 
 ### Upgrade on a dedicated web server
 
-    rm -rf var/cache/*
-    git fetch origin
-    git fetch --tags
-    git checkout 2.1.1 --force
-    SYMFONY_ENV=prod composer install --no-dev -o --prefer-dist
-    php bin/console doctrine:migrations:migrate --env=prod
-    php bin/console cache:clear --env=prod
+```bash
+rm -rf var/cache/*
+git fetch origin
+git fetch --tags
+git checkout 2.1.1 --force
+SYMFONY_ENV=prod composer install --no-dev -o --prefer-dist
+php bin/console doctrine:migrations:migrate --env=prod
+php bin/console cache:clear --env=prod
+```
 
 ### Upgrade on a shared hosting
 
@@ -121,7 +114,7 @@ Backup your `app/config/parameters.yml` file.
 
 Download the 2.1.1 release of wallabag:
 
-``` {.sourceCode .bash}
+```bash
 wget http://framabag.org/wallabag-release-2.1.1.tar.gz && tar xvf wallabag-release-2.1.1.tar.gz
 ```
 
@@ -142,7 +135,7 @@ Empty `var/cache` folder.
 You must run some SQL queries to upgrade your database. We assume that
 the table prefix is `wallabag_` and the database server is a MySQL one:
 
-``` {.sourceCode .sql}
+```sql
 ALTER TABLE `wallabag_entry` ADD `uuid` LONGTEXT DEFAULT NULL;
 INSERT INTO `wallabag_craue_config_setting` (`name`, `value`, `section`) VALUES ('share_public', '1', 'entry');
 ALTER TABLE `wallabag_oauth2_clients` ADD name longtext COLLATE 'utf8_unicode_ci' DEFAULT NULL;
@@ -164,4 +157,3 @@ There is no automatic script to update from wallabag 1.x to wallabag
     )
 -   import data in this fresh installation ([read the import
     documentation](http://doc.wallabag.org/en/master/user/import.html) )
-

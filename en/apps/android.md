@@ -1,15 +1,12 @@
-Android application
-===================
+# Android application
 
-Purpose of this document
-------------------------
+## Purpose of this document
 
 This document describes how you can setup your Android application to
 work with your wallabag instance. There is no difference in this
 procedure for wallabag v1 or v2.
 
-Steps to configure your app
----------------------------
+## Steps to configure your app
 
 When you first start the app, you see the welcome screen, where you are
 adviced to configure the app for your wallabag instance at first.
@@ -65,8 +62,8 @@ presented to the list of unread articles.
 
 ![Filled article list cause feeds successfully synchronized](../../img/user/android_unread_feed_synced.en.png)
 
-Known limitations
------------------
+## Known limitations
+
 
 ### Two factor authentication (2FA)
 
@@ -87,8 +84,8 @@ If you can reach your wallabag web instance via HTTPS, you should use
 that. Especially if your HTTP URL redirects you to the HTTPS one.
 Currently, the app cannot handle that redirect properly.
 
-References
-----------
+## References
+
 
 -   [Source code of the Android
     application](https://github.com/wallabag/android-app)
@@ -96,4 +93,3 @@ References
     F-Droid](https://f-droid.org/repository/browse/?fdfilter=wallabag&fdid=fr.gaulupeau.apps.InThePoche)
 -   [Android Application on Google
     Play](https://play.google.com/store/apps/details?id=fr.gaulupeau.apps.InThePoche)
-
