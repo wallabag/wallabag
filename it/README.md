@@ -17,6 +17,6 @@ paio di sezioni:
 
 La documentazione è disponibile anche in altre lingue:
 
--   [Documentation en français](../fr)
--   [Dokumentation in Deutsch](../de)
--   [Documentation in English](../en)
+-   [Documentation en français](../fr/)
+-   [Dokumentation in Deutsch](../de/)
+-   [Documentation in English](../en/)

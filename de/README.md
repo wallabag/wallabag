@@ -17,6 +17,6 @@ organisiert:
 
 Die Dokumentation ist in anderen Sprachen verfügbar :
 
--   [Documentation in english](../en)
--   [Documentation en français](../fr)
--   [Documentation in italian](../it)
+-   [Documentation in english](../en/)
+-   [Documentation en français](../fr/)
+-   [Documentation in italian](../it/)

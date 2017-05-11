@@ -14,6 +14,6 @@ The main documentation for this application is organized into multiple sections:
 
 The documentation is available in other languages:
 
--   [Documentation en français](../fr)
--   [Dokumentation in Deutsch](../de)
--   [Dokumentation in italian](../it)
+-   [Documentation en français](../fr/)
+-   [Dokumentation in Deutsch](../de/)
+-   [Dokumentation in italian](../it/)
