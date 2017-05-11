@@ -2,7 +2,10 @@
     "plugins": [
       "edit-link",
       "toggle-chapters",
-      "page-toc"
+      "page-toc",
+      "-sharing",
+      "hints",
+      "versions"
     ],
     "pluginsConfig": {
         "edit-link": {
@@ -13,6 +16,9 @@
                 "de": "Edit This Page",
                 "it": "Edit This Page"
             }
+        },
+        "versions": {
+            "type": "branches"
         }
     }
 }
