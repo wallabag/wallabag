@@ -1,16 +1,31 @@
 # Summary
 
-* [Accueil](README.md)
+* [Home](README.md)
 
 ## User
 
 * [Create account](user/create_account.md)
-* [Articles](user/articles.md)
-* [Configuration](user/configuration.md)
+* [Articles](user/articles/README.md)
+    * [Save](user/articles/save.md)
+    * [Share](user/articles/share.md)
+    * [Download](user/articles/download.md)
+    * [Annotations](user/articles/annotations.md)
+* [Configuration](user/configuration/README.md)
+    * [Settings](user/configuration/settings.md)
+    * [RSS](user/configuration/rss.md)
+    * [User Information](user/configuration/user_information.md)
+    * [Password](user/configuration/password.md)
+    * [Tagging Rules](user/configuration/tagging_rules.md)
 * [Fetch errors](user/errors_during_fetching.md)
 * [FAQ](user/faq.md)
 * [Filters](user/filters.md)
-* [Import](user/import.md)
+* [Import](user/import/README.md)
+    * [Pocket](user/import/Pocket.md)
+    * [Instapaper](user/import/Instapaper.md)
+    * [Readability](user/import/Readability.md)
+    * [Pinboard](user/import/Pinboard.md)
+    * [wallabag v1](user/import/wallabagv1.md)
+    * [wallabag v2](user/import/wallabagv2.md)
 * [Tags](user/tags.md)
 
 ## Apps
