@@ -142,6 +142,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertContains('Google', $content->getTitle());
         $this->assertEquals('2015-03-28 15:37:39', $content->getPublishedAt()->format('Y-m-d H:i:s'));
         $this->assertEquals('Morgane Tual', $author[0]);
+        $this->assertArrayHasKey('x-varnish1', $content->getHeaders());
     }
 
     public function testPostWithMultipleAuthors()
@@ -914,7 +915,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $entry);
         $this->assertEquals($url, $entry->getUrl());
         $this->assertContains('Perpignan', $entry->getTitle());
-        $this->assertContains('/d9bc0fcd.jpeg', $entry->getContent());
+        $this->assertContains('/c4789a7f.jpeg', $entry->getContent());
 
         $client->getContainer()->get('craue_config')->set('download_images_enabled', 0);
     }

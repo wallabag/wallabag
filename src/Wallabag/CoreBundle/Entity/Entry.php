@@ -133,7 +133,7 @@ class Entry
     /**
      * @var array
      *
-     * @ORM\Column(name="published_by", type="json_array", nullable=true)
+     * @ORM\Column(name="published_by", type="array", nullable=true)
      *
      * @Groups({"entries_for_user", "export_all"})
      */
@@ -200,6 +200,15 @@ class Entry
      * @Groups({"entries_for_user", "export_all"})
      */
     private $httpStatus;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="headers", type="array", nullable=true)
+     *
+     * @Groups({"entries_for_user", "export_all"})
+     */
+    private $headers;
 
     /**
      * @Exclude
@@ -716,7 +725,7 @@ class Entry
     }
 
     /**
-     * @return string
+     * @return array
      */
     public function getPublishedBy()
     {
@@ -724,13 +733,33 @@ class Entry
     }
 
     /**
-     * @param string $publishedBy
+     * @param array $publishedBy
      *
      * @return Entry
      */
     public function setPublishedBy($publishedBy)
     {
         $this->publishedBy = $publishedBy;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getHeaders()
+    {
+        return $this->headers;
+    }
+
+    /**
+     * @param array $headers
+     *
+     * @return Entry
+     */
+    public function setHeaders($headers)
+    {
+        $this->headers = $headers;
 
         return $this;
     }
