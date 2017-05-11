@@ -6,13 +6,9 @@ wallabag web app
 
 ### File per la traduzione
 
-<div class="admonition note">
-
 Visto che wallabag é principalmente sviluppato da un team francese, si
 prega di considerare che la traduzione francese é la più aggiornata, e
 si prega di copiarla e di creare la vostra propria traduzione.
-
-</div>
 
 Potete trovare qui i file per la traduzione:
 <https://github.com/wallabag/wallabag/tree/master/src/Wallabag/CoreBundle/Resources/translations>.
@@ -39,11 +35,13 @@ traduzione).
 Nella sezione `wallabag_core.languages`, dovete aggiungere una nuova
 linea con la vostra traduzione. Per esempio:
 
-    wallabag_core:
-        ...
-        languages:
-            en: 'English'
-            fr: 'Français'
+```yaml
+wallabag_core:
+    ...
+    languages:
+        en: 'English'
+        fr: 'Français'
+```
 
 Nella prima colonna (`en`, `fr`, etc.), dovete aggiungere il codice ISO
 639-1 della vostra lingua (vedete sopra).
@@ -53,12 +51,8 @@ Nella seconda colonna, aggiungete solamente il nome della vostra lingua.
 documentazione di wallabag
 --------------------------
 
-<div class="admonition note">
-
 Contrariamente alla web app, il linguaggio principale per la
 documentazione é l'inglese.
-
-</div>
 
 I file della documentazione sono memorizzati qui:
 <https://github.com/wallabag/wallabag/tree/master/docs>

@@ -38,16 +38,10 @@ Eseguite wallabag
 -----------------
 
 1.  Fate un fork o clonate il progetto
-2.  Modificate `app/config/parameters.yml` per rimpiazzare le proprietá
-    di `database_*` con quelle commentate (con valori con prefisso
-    `env.`)
+2.  Modificate `app/config/parameters.yml` per rimpiazzare le proprietá di `database_*` con quelle commentate (con valori con prefisso `env.`)
 3.  `composer install` per installare le dipendenze del progetto
 4.  `php bin/console wallabag:install` per creare lo schema
 5.  `docker-compose up` per eseguire i containers
-6.  Infine, andate su <http://localhost:8080/> per trovare il vostro
-    wallabag appena installato.
+6.  Infine, andate su <http://localhost:8080/> per trovare il vostro wallabag appena installato.
 
-Durante i vari passi potreste incontrare problemi di permessi UNIX,
-percorsi sbagliati nella cache generata, etc... Operazioni come cambiare
-i file della cache o cambiare i proprietari dei file potrebbero essere
-richiesto frequentemente, per cui non abbiate paura!
+Durante i vari passi potreste incontrare problemi di permessi UNIX, percorsi sbagliati nella cache generata, etc... Operazioni come cambiare i file della cache o cambiare i proprietari dei file potrebbero essere richiesto frequentemente, per cui non abbiate paura!

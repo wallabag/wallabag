@@ -39,11 +39,13 @@ permettre aux utilisateurs de choisir cette nouvelle traduction).
 Dans la section `wallabag_core.languages`, vous devez ajouter une
 nouvelle ligne avec votre traduction. Par exemple :
 
-    wallabag_core:
-        ...
-        languages:
-            en: 'English'
-            fr: 'Français'
+```yaml
+wallabag_core:
+    ...
+    languages:
+        en: 'English'
+        fr: 'Français'
+```
 
 Pour la première colonne (`en`, `fr`, etc.), vous devez ajouter le code
 ISO 639-1 de votre langue (voir ci-dessus).

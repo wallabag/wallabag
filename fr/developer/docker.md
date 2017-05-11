@@ -37,21 +37,11 @@ Exécuter wallabag
 -----------------
 
 1.  Forker et cloner le projet
-2.  
-
-    Editer `app/config/parameters.yml` pour remplacer les propriétés `database_*`
-
-    :   par les lignes commentées (celles avec des valeurs préfixées par
-        `env.`)
-
+2.  Editer `app/config/parameters.yml` pour remplacer les propriétés `database_*` par les lignes commentées (celles avec des valeurs préfixées par `env.`)
 3.  `composer install` pour installer les dépendances
 4.  `php bin/console wallabag:install` pour créer le schéma de la BDD
 5.  `docker-compose up` pour démarrer les conteneurs
-6.  
-
-    Enfin, se rendre sur <http://localhost:8080/> pour accéder à une installation
-
-    :   tout propre de wallabag.
+6.  Enfin, se rendre sur <http://localhost:8080/> pour accéder à une installation toute propre de wallabag.
 
 Il est possible de rencontrer des problèmes de droits UNIX, de mauvais
 chemins dans les fichiers de cache, etc… Les opérations comme vider le

@@ -16,18 +16,14 @@ Modificate il vostro file `app/config/parameters.yml` per modificare le
 credenziali per ogni sito con paywall. Ecco un esempio di alcuni siti
 francesi:
 
-``` {.sourceCode .yaml}
+```yaml
 sites_credentials:
     mediapart.fr: {username: "myMediapartLogin", password: "mypassword"}
     arretsurimages.net: {username: "myASILogin", password: "mypassword"}
 ```
 
-<div class="admonition note">
-
 These credentials will be shared between each user of your wallabag
 instance.
-
-</div>
 
 Fate il parsing dei file di configurazione
 ------------------------------------------
@@ -50,7 +46,7 @@ modulo). `login_username_field` é l'attributo `name` nel campo di login.
 
 Per esempio:
 
-``` {.sourceCode .}
+```
 title://div[@id="titrage-contenu"]/h1[@class="title"]
 body: //div[@class="contenu-html"]/div[@class="page-pane"]
 

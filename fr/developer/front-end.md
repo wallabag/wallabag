@@ -1,10 +1,8 @@
-Conseils pour développeurs front-end
-====================================
+# Conseils pour développeurs front-end
 
 Depuis la version 2.3, wallabag utilise webpack pour générer ses assets.
 
-Mode développeur
-----------------
+## Mode développeur
 
 Si le serveur fonctionne en mode dev, vous devez lancer la commande
 `yarn run build:dev` pour générer les fichiers de sortie javascript pour
@@ -13,8 +11,7 @@ Vous devez relancer la commande `yarn run build:dev` pour chaque
 changement que vous effectuez dans les fichiers assets (js, css, images,
 polices,...).
 
-Live reload
------------
+## Live reload
 
 Webpack apporte le support pour la fonctionnalité de live reload, ce qui
 signifie que vous n'avez pas besoin de regénérer manuellement le fichier
@@ -24,15 +21,10 @@ mettre le paramètre `use_webpack_dev_server` à `true` dans
 `app/config/config.yml` et de lancer `yarn run watch` pour que cela soit
 actif.
 
-<div class="admonition note">
-
 N'oubliez pas de remettre `use_webpack_dev_server` à `false` lorsque
 vous n'utilisez pas la fonctionnalité de live reload.
 
-</div>
-
-Production builds
------------------
+## Builds en production
 
 Lorsque vous committez vos changements, vous devez les compiler dans un
 environnement de production en exécutant `yarn run build:prod`. Cela
@@ -40,15 +32,10 @@ compilera tous les assets nécessaires pour wallabag. Pour tester que
 cela fonctionne proprement, vous devrez avoir un serveur en mode de
 production, par exemple avec `bin/console server:run -e=prod`.
 
-<div class="admonition note">
-
 N'oubliez pas de générer des fichiers en mode production avant de
 committer !
 
-</div>
-
-Code style
-----------
+## Code style
 
 Le style de code est vérifié par deux outils : stylelint pour le (S)CSS
 et eslint pour le JS. La configuration ESlint config est basée sur le

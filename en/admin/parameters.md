@@ -75,7 +75,7 @@ parameters:
 | twofactor_auth | true to enable the possibility of Two factor authentication | true |
 | twofactor_sender | email of the email sender to receive the two factor code | no-reply@wallabag.org |
 | fosuser_registration | true to enable public registration | true |
-| fosuser_confirmation | true to send a confirmation by email for each registration" | true |
+| fosuser_confirmation | true to send a confirmation by email for each registration | true |
 | from_email | email address used in From: field in each email | no-reply@wallabag.org |
 | rss_limit | item limit for RSS feeds | 50 |
 

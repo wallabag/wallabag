@@ -9,7 +9,9 @@
             "base": "https://github.com/wallabag/doc/tree/master/",
             "label": {
                 "en": "Edit This Page",
-                "fr": "Modifier cette page"
+                "fr": "Modifier cette page",
+                "de": "Edit This Page",
+                "it": "Edit This Page"
             }
         }
     }
