@@ -284,6 +284,7 @@ class EntryRestController extends WallabagRestController
      *          {"name"="language", "dataType"="string", "required"=false, "description"="Language of the entry"},
      *          {"name"="preview_picture", "dataType"="string", "required"=false, "description"="Preview picture of the entry"},
      *          {"name"="published_at", "dataType"="datetime", "format"="YYYY-MM-DDTHH:II:SS+TZ", "required"=false, "description"="Published date of the entry"},
+     *          {"name"="authors", "dataType"="string", "format"="Name Firstname,author2,author3", "required"=false, "description"="Authors of the entry"},
      *       }
      * )
      *
@@ -295,12 +296,14 @@ class EntryRestController extends WallabagRestController
 
         $url = $request->request->get('url');
         $title = $request->request->get('title');
+        $tags = $request->request->get('tags', []);
         $isArchived = $request->request->get('archive');
         $isStarred = $request->request->get('starred');
         $content = $request->request->get('content');
         $language = $request->request->get('language');
         $picture = $request->request->get('preview_picture');
         $publishedAt = $request->request->get('published_at');
+        $authors = $request->request->get('authors', '');
 
         $entry = $this->get('wallabag_core.entry_repository')->findByUrlAndUserId($url, $this->getUser()->getId());
 
@@ -322,6 +325,7 @@ class EntryRestController extends WallabagRestController
                     'open_graph' => [
                         'og_image' => $picture,
                     ],
+                    'authors' => explode(',', $authors),
                 ]
             );
         } catch (\Exception $e) {
@@ -332,7 +336,7 @@ class EntryRestController extends WallabagRestController
             $entry->setUrl($url);
         }
 
-        $tags = $request->request->get('tags', []);
+
         if (!empty($tags)) {
             $this->get('wallabag_core.tags_assigner')->assignTagsToEntry($entry, $tags);
         }

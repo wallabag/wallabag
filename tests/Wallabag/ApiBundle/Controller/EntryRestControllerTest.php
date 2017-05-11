@@ -345,6 +345,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
             'content' => 'my content',
             'language' => 'de_DE',
             'published_at' => '2016-09-08T11:55:58+0200',
+            'authors' => 'bob,helen',
         ]);
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
@@ -361,6 +362,9 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertSame('my content', $content['content']);
         $this->assertSame('de_DE', $content['language']);
         $this->assertSame('2016-09-08T11:55:58+0200', $content['published_at']);
+        $this->assertCount(2, $content['published_by']);
+        $this->assertContains('bob', $content['published_by']);
+        $this->assertContains('helen', $content['published_by']);
     }
 
     public function testPostSameEntry()
