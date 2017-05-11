@@ -202,6 +202,15 @@ class Entry
     private $httpStatus;
 
     /**
+     * @var array
+     *
+     * @ORM\Column(name="headers", type="json_array", nullable=true)
+     *
+     * @Groups({"entries_for_user", "export_all"})
+     */
+    private $headers;
+
+    /**
      * @Exclude
      *
      * @ORM\ManyToOne(targetEntity="Wallabag\UserBundle\Entity\User", inversedBy="entries")
@@ -716,7 +725,7 @@ class Entry
     }
 
     /**
-     * @return string
+     * @return array
      */
     public function getPublishedBy()
     {
@@ -731,6 +740,26 @@ class Entry
     public function setPublishedBy($publishedBy)
     {
         $this->publishedBy = $publishedBy;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getHeaders()
+    {
+        return $this->headers;
+    }
+
+    /**
+     * @param string $headers
+     *
+     * @return Entry
+     */
+    public function setHeaders($headers)
+    {
+        $this->headers = $headers;
 
         return $this;
     }

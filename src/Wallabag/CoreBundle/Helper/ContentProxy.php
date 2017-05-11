@@ -87,6 +87,10 @@ class ContentProxy
             $entry->setPublishedBy($content['authors']);
         }
 
+        if (!empty($content['all_headers'])) {
+            $entry->setHeaders($content['all_headers']);
+        }
+
         $entry->setLanguage(isset($content['language']) ? $content['language'] : '');
         $entry->setMimetype(isset($content['content_type']) ? $content['content_type'] : '');
         $entry->setReadingTime(Utils::getReadingTime($html));

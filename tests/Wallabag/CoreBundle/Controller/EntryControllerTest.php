@@ -142,6 +142,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertContains('Google', $content->getTitle());
         $this->assertEquals('2015-03-28 15:37:39', $content->getPublishedAt()->format('Y-m-d H:i:s'));
         $this->assertEquals('Morgane Tual', $author[0]);
+        $this->assertArrayHasKey('x-varnish1', $content->getHeaders());
     }
 
     public function testPostWithMultipleAuthors()
