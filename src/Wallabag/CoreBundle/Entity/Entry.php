@@ -133,7 +133,7 @@ class Entry
     /**
      * @var array
      *
-     * @ORM\Column(name="published_by", type="json_array", nullable=true)
+     * @ORM\Column(name="published_by", type="array", nullable=true)
      *
      * @Groups({"entries_for_user", "export_all"})
      */
@@ -204,7 +204,7 @@ class Entry
     /**
      * @var array
      *
-     * @ORM\Column(name="headers", type="json_array", nullable=true)
+     * @ORM\Column(name="headers", type="array", nullable=true)
      *
      * @Groups({"entries_for_user", "export_all"})
      */
@@ -733,7 +733,7 @@ class Entry
     }
 
     /**
-     * @param string $publishedBy
+     * @param array $publishedBy
      *
      * @return Entry
      */
@@ -753,7 +753,7 @@ class Entry
     }
 
     /**
-     * @param string $headers
+     * @param array $headers
      *
      * @return Entry
      */

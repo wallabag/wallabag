@@ -915,7 +915,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $entry);
         $this->assertEquals($url, $entry->getUrl());
         $this->assertContains('Perpignan', $entry->getTitle());
-        $this->assertContains('/d9bc0fcd.jpeg', $entry->getContent());
+        $this->assertContains('/c4789a7f.jpeg', $entry->getContent());
 
         $client->getContainer()->get('craue_config')->set('download_images_enabled', 0);
     }
