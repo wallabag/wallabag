@@ -45,6 +45,18 @@ class ContentProxy
      */
     public function updateEntry(Entry $entry, $url, array $content = [])
     {
+        // ensure content is a bit cleaned up
+        if (!empty($content['html'])) {
+            $content['html'] = htmLawed($content['html'], [
+                'safe' => 1,
+                // which means: do not remove iframe elements
+                'elements' => '*+iframe',
+                'deny_attribute' => 'style',
+                'comment' => 1,
+                'cdata' => 1,
+            ]);
+        }
+
         // do we have to fetch the content or the provided one is ok?
         if (empty($content) || false === $this->validateContent($content)) {
             $fetchedContent = $this->graby->fetchContent($url);
@@ -57,7 +69,7 @@ class ContentProxy
         }
 
         $title = $content['title'];
-        if (!$title && isset($content['open_graph']['og_title'])) {
+        if (!$title && !empty($content['open_graph']['og_title'])) {
             $title = $content['open_graph']['og_title'];
         }
 
@@ -65,7 +77,7 @@ class ContentProxy
         if (false === $html) {
             $html = $this->fetchingErrorMessage;
 
-            if (isset($content['open_graph']['og_description'])) {
+            if (!empty($content['open_graph']['og_description'])) {
                 $html .= '<p><i>But we found a short description: </i></p>';
                 $html .= $content['open_graph']['og_description'];
             }
@@ -76,8 +88,12 @@ class ContentProxy
         $entry->setContent($html);
         $entry->setHttpStatus(isset($content['status']) ? $content['status'] : '');
 
-        if (isset($content['date']) && null !== $content['date'] && '' !== $content['date']) {
-            $entry->setPublishedAt(new \DateTime($content['date']));
+        if (!empty($content['date'])) {
+            try {
+                $entry->setPublishedAt(new \DateTime($content['date']));
+            } catch (\Exception $e) {
+                $this->logger->warn('Error while defining date', ['e' => $e, 'url' => $url, 'date' => $content['date']]);
+            }
         }
 
         if (!empty($content['authors'])) {
@@ -97,12 +113,12 @@ class ContentProxy
             $entry->setDomainName($domainName);
         }
 
-        if (isset($content['open_graph']['og_image']) && $content['open_graph']['og_image']) {
+        if (!empty($content['open_graph']['og_image'])) {
             $entry->setPreviewPicture($content['open_graph']['og_image']);
         }
 
         // if content is an image define as a preview too
-        if (isset($content['content_type']) && in_array($this->mimeGuesser->guess($content['content_type']), ['jpeg', 'jpg', 'gif', 'png'], true)) {
+        if (!empty($content['content_type']) && in_array($this->mimeGuesser->guess($content['content_type']), ['jpeg', 'jpg', 'gif', 'png'], true)) {
             $entry->setPreviewPicture($content['url']);
         }
 
@@ -128,6 +144,6 @@ class ContentProxy
      */
     private function validateContent(array $content)
     {
-        return isset($content['title']) && isset($content['html']) && isset($content['url']) && isset($content['language']) && isset($content['content_type']);
+        return !empty($content['title']) && !empty($content['html']) && !empty($content['url']);
     }
 }

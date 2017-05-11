@@ -112,16 +112,16 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
             ->findByUrlAndUserId(
-                'https://framablog.org/2014/02/05/framabag-service-libre-gratuit-interview-developpeur/',
+                'http://www.framablog.org/index.php/post/2014/02/05/Framabag-service-libre-gratuit-interview-developpeur',
                 $this->getLoggedInUserId()
             );
 
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertContains('flashes.import.notice.summary', $body[0]);
 
-        $this->assertNotEmpty($content->getMimetype(), 'Mimetype for http://www.framablog.org is ok');
-        $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for http://www.framablog.org is ok');
-        $this->assertNotEmpty($content->getLanguage(), 'Language for http://www.framablog.org is ok');
+        $this->assertEmpty($content->getMimetype(), 'Mimetype for http://www.framablog.org is empty');
+        $this->assertEmpty($content->getPreviewPicture(), 'Preview picture for http://www.framablog.org is empty');
+        $this->assertEmpty($content->getLanguage(), 'Language for http://www.framablog.org is empty');
 
         $tags = $content->getTags();
         $this->assertContains('foot', $tags, 'It includes the "foot" tag');
