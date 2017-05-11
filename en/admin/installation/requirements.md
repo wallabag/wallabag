@@ -2,8 +2,10 @@
 
 wallabag is compatible with **PHP >= 5.6**, including PHP 7.
 
+{% hint style='info' %}
 To install wallabag easily, we provide a `Makefile`, so you need to have
 the `make` tool.
+{% endhint %}
 
 wallabag uses a large number of PHP libraries in order to function.
 These libraries must be installed with a tool called Composer. You need
