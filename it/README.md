@@ -17,6 +17,6 @@ paio di sezioni:
 
 La documentazione è disponibile anche in altre lingue:
 
--   [Documentation en français](../fr/)
--   [Dokumentation in Deutsch](../de/)
--   [Documentation in English](../en/)
+-   [Documentation en français](https://doc.wallabag.org/fr/)
+-   [Dokumentation in Deutsch](https://doc.wallabag.org/de/)
+-   [Documentation in English](https://doc.wallabag.org/en/)

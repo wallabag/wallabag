@@ -14,6 +14,6 @@ La documentation principale de cette application est découpée en plusieurs sec
 
 La documentation est disponible dans d'autres langues :
 
--   [Documentation in english](../en/)
--   [Deutsch Dokumentation](../de/)
--   [Italian Documentation](../it/)
+-   [Documentation in english](https://doc.wallabag.org/en/)
+-   [Deutsch Dokumentation](https://doc.wallabag.org/de/)
+-   [Italian Documentation](https://doc.wallabag.org/it/)
