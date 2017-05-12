@@ -64,7 +64,7 @@
         "htmlawed/htmlawed": "~1.1.19",
         "liip/theme-bundle": "~1.1",
         "lexik/form-filter-bundle": "~5.0",
-        "j0k3r/graby": "~1.0",
+        "j0k3r/graby": "dev-extractor",
         "friendsofsymfony/user-bundle": "^2.0",
         "friendsofsymfony/oauth-server-bundle": "^1.5",
         "stof/doctrine-extensions-bundle": "^1.2",

@@ -336,7 +336,6 @@ class EntryRestController extends WallabagRestController
             $entry->setUrl($url);
         }
 
-
         if (!empty($tags)) {
             $this->get('wallabag_core.tags_assigner')->assignTagsToEntry($entry, $tags);
         }
