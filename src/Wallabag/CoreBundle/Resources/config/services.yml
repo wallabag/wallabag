@@ -99,6 +99,7 @@ services:
             - "@rulerz"
             - "@wallabag_core.tag_repository"
             - "@wallabag_core.entry_repository"
+            - "@logger"
 
     # repository as a service
     wallabag_core.entry_repository:
