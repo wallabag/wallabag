@@ -2,6 +2,7 @@
 
 namespace Tests\Wallabag\CoreBundle\Helper;
 
+use Psr\Log\NullLogger;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
@@ -22,7 +23,7 @@ class RuleBasedTaggerTest extends \PHPUnit_Framework_TestCase
         $this->tagRepository = $this->getTagRepositoryMock();
         $this->entryRepository = $this->getEntryRepositoryMock();
 
-        $this->tagger = new RuleBasedTagger($this->rulerz, $this->tagRepository, $this->entryRepository);
+        $this->tagger = new RuleBasedTagger($this->rulerz, $this->tagRepository, $this->entryRepository, $this->getLogger());
     }
 
     public function testTagWithNoRule()
@@ -208,5 +209,10 @@ class RuleBasedTaggerTest extends \PHPUnit_Framework_TestCase
         return $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
             ->disableOriginalConstructor()
             ->getMock();
+    }
+
+    private function getLogger()
+    {
+        return new NullLogger();
     }
 }
