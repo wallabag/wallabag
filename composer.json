@@ -75,7 +75,7 @@
         "guzzlehttp/guzzle": "^5.3.1",
         "doctrine/doctrine-migrations-bundle": "^1.0",
         "paragonie/random_compat": "~1.0",
-        "craue/config-bundle": "~1.4",
+        "craue/config-bundle": "~2.0",
         "mnapoli/piwik-twig-extension": "^1.0",
         "ocramius/proxy-manager": "1.*",
         "white-october/pagerfanta-bundle": "^1.0",

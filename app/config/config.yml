@@ -6,6 +6,7 @@ imports:
 parameters:
     # Allows to use the live reload feature for changes in assets
     use_webpack_dev_server: false
+    craue_config.cache_adapter.class: Craue\ConfigBundle\CacheAdapter\SymfonyCacheComponentAdapter
 
 framework:
     #esi:             ~

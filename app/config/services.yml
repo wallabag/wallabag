@@ -42,3 +42,11 @@ services:
         arguments: ["@session"]
         tags:
             - { name: kernel.event_listener, event: security.interactive_login, method: onInteractiveLogin }
+
+    craue_config_cache_provider:
+        class: Symfony\Component\Cache\Adapter\FilesystemAdapter
+        public: false
+        arguments:
+            - 'craue_config'
+            - 0
+            - '%kernel.cache_dir%'
