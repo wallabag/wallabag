@@ -37,12 +37,12 @@ interface NotificationInterface extends LoggerAwareInterface
     /**
      * If the notification has been viewed / dismissed or not.
      *
-     * @return bool
+     * @return boolean
      */
     public function isRead();
 
     /**
-     * @param bool $read
+     * @param boolean $read
      *
      * @return NotificationInterface
      */

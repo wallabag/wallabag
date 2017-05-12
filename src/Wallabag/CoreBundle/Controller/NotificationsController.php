@@ -40,6 +40,7 @@ class NotificationsController extends Controller
             'notifications' => $notifications,
             'currentPage' => $page,
         ]);
+
     }
 
     /**

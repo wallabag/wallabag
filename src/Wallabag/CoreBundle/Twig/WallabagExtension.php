@@ -2,6 +2,7 @@
 
 namespace Wallabag\CoreBundle\Twig;
 
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Wallabag\CoreBundle\Notifications\NotificationInterface;
 use Wallabag\CoreBundle\Repository\EntryRepository;

@@ -76,4 +76,13 @@ $(document).ready(() => {
     const scrollPercent = (s / (d - c)) * 100;
     $('.progress .determinate').css('width', `${scrollPercent}%`);
   });
+
+  $('.notification').on('click', () => {
+    $.ajax({
+      url: Routing.generate('notification-archive-all'),
+      method: 'GET',
+    }).done(() => {
+      $('#notifications').sideNav('hide');
+    });
+  });
 });

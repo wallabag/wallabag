@@ -12,6 +12,7 @@ use Wallabag\UserBundle\Entity\User;
 
 /**
  * Class Notification.
+ * Class Notification
  *
  * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\NotificationRepository")
  * @ORM\Table(name="`notification`")
@@ -24,32 +25,32 @@ class Notification implements NotificationInterface
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
      */
     protected $id;
 
     /**
-     * @var int
+     * @var int $type
      *
      * @ORM\Column(name="type", type="integer")
      */
     protected $type;
 
     /**
-     * @var User
+     * @var User $user
      *
      * @ORM\ManyToOne(targetEntity="Wallabag\UserBundle\Entity\User", inversedBy="notifications")
      */
     protected $user;
 
     /**
-     * @var \DateTime
      *
      * @ORM\Column(name="timestamp", type="datetime")
      */
     protected $timestamp;
 
     /**
-     * @var string
+     * @var string $title
      *
      * @ORM\Column(name="title", type="string")
      */
@@ -63,7 +64,7 @@ class Notification implements NotificationInterface
     protected $description;
 
     /**
-     * @var bool
+     * @var boolean $read
      *
      * @ORM\Column(name="read", type="boolean")
      */
@@ -225,7 +226,6 @@ class Notification implements NotificationInterface
      * @param ActionInterface $action
      *
      * @return NotificationInterface
-     *
      * @throws \InvalidArgumentException
      */
     public function addAction(ActionInterface $action)
@@ -235,7 +235,6 @@ class Notification implements NotificationInterface
         }
         $this->actionTypes[$action->getType()] = true;
         $this->actions->add($action);
-
         return $this;
     }
 

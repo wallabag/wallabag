@@ -261,6 +261,7 @@ notifications:
     release:
         title: "wallabag has been updated to version %version%"
         details: "View update's details"
+
 about:
     page_title: 'About'
     top_menu:

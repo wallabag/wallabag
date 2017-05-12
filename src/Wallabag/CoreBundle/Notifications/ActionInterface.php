@@ -4,6 +4,7 @@ namespace Wallabag\CoreBundle\Notifications;
 
 interface ActionInterface
 {
+
     /**
      * @return string
      */

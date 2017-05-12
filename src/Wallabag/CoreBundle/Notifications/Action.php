@@ -56,7 +56,6 @@ class Action implements ActionInterface
      * @param int $type
      *
      * @return ActionInterface
-     *
      * @throws \InvalidArgumentException
      */
     public function setType($type)

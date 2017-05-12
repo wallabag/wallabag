@@ -262,6 +262,13 @@ notifications:
         title: "wallabag a été mis à jour vers la version %version%"
         details: "Voir les détails de la mise à jour"
 
+notifications:
+    sidebar:
+        view_more: 'Voir plus'
+    list:
+        page_title: 'Notifications'
+        mark_all_as_read: 'Marquer tout comme lu'
+
 about:
     page_title: "À propos"
     top_menu:
