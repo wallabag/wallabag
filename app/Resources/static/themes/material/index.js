@@ -8,7 +8,7 @@ import 'materialize-css/dist/js/materialize';
 import '../_global/index';
 
 /* Tools */
-import { initExport, initFilters } from './js/tools';
+import { initExport, initFilters, initNotifications } from './js/tools';
 
 /* Import shortcuts */
 import './js/shortcuts/main';
@@ -34,6 +34,7 @@ $(document).ready(() => {
   });
   initFilters();
   initExport();
+  initNotifications();
 
   $('#nav-btn-add-tag').on('click', () => {
     $('.nav-panel-add-tag').toggle(100);
@@ -74,5 +75,14 @@ $(document).ready(() => {
     const c = $(window).height();
     const scrollPercent = (s / (d - c)) * 100;
     $('.progress .determinate').css('width', `${scrollPercent}%`);
+  });
+
+  $('.notification').on('click', () => {
+    $.ajax({
+      url: Routing.generate('notification-archive-all'),
+      method: 'GET',
+    }).done(() => {
+      $('#notifications').sideNav('hide');
+    });
   });
 });

@@ -37,6 +37,7 @@ menu:
         search: 'Szukaj'
         filter_entries: 'Filtruj wpisy'
         export: 'Eksportuj'
+        # notifications: 'Notifications'
     search_form:
         input_label: 'Wpisz swoje zapytanie tutaj'
 
@@ -241,6 +242,13 @@ entry:
         save_label: 'Zapisz'
     public:
         shared_by_wallabag: "Ten artykuł został udostępniony przez <a href='%wallabag_instance%'>wallabag</a>"
+
+# notifications:
+#     sidebar:
+#         view_more: 'View more'
+#     list:
+#         page_title: 'Notifications'
+#         mark_all_as_read: 'Mark all as read'
 
 about:
     page_title: 'O nas'

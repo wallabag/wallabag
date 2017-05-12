@@ -12,6 +12,7 @@
 {% endblock %}
 
 {% block content %}
+    {{ parent() }}
     {% set listMode = app.user.config.listMode %}
     <div class="results clearfix">
         <div class="nb-results left">

@@ -2,7 +2,9 @@
 
 namespace Wallabag\CoreBundle\Twig;
 
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Wallabag\CoreBundle\Notifications\NotificationInterface;
 use Wallabag\CoreBundle\Repository\EntryRepository;
 use Wallabag\CoreBundle\Repository\TagRepository;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -28,6 +30,7 @@ class WallabagExtension extends \Twig_Extension implements \Twig_Extension_Globa
     {
         return [
             new \Twig_SimpleFilter('removeWww', [$this, 'removeWww']),
+            new \Twig_SimpleFilter('unread_notif', [$this, 'unreadNotif']),
         ];
     }
 
@@ -43,6 +46,13 @@ class WallabagExtension extends \Twig_Extension implements \Twig_Extension_Globa
     public function removeWww($url)
     {
         return preg_replace('/^www\./i', '', $url);
+    }
+
+    public function unreadNotif(Collection $notifs)
+    {
+        return $notifs->filter(function(NotificationInterface $notif) {
+           return !$notif->isRead();
+        });
     }
 
     /**

@@ -21,4 +21,11 @@ function initExport() {
   }
 }
 
-export { initExport, initFilters };
+function initNotifications() {
+  if ($('div').is('#notifications')) {
+    $('#button_notifications').show();
+    $('.js-notifications-action').sideNav({ edge: 'right' });
+  }
+}
+
+export { initExport, initFilters, initNotifications };
