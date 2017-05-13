@@ -10,6 +10,7 @@
     * [Share](user/articles/share.md)
     * [Download](user/articles/download.md)
     * [Annotations](user/articles/annotations.md)
+    * [Restricted access](user/articles/restricted.md)
 * [Configuration](user/configuration/README.md)
     * [Settings](user/configuration/settings.md)
     * [RSS](user/configuration/rss.md)
