@@ -28,6 +28,11 @@ $(document).ready(() => {
       element: document.querySelector('article'),
     });
 
+    const authorization = {
+      permits() { return true; },
+    };
+    app.registry.registerUtility(authorization, 'authorizationPolicy');
+
     const x = JSON.parse($('#annotationroutes').html());
     app.include(annotator.storage.http, x);
 
