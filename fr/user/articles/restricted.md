@@ -16,4 +16,4 @@ En version 2.2, seul l'administrateur pouvait mettre ses identifiants dans un fi
 | Le Monde | 2.3 |
 | Le Monde Diplomatique | 2.3 |
 | Mediapart | 2.2 |
-| NextImpact | 2.2 |
+| Next INpact | 2.2 |
