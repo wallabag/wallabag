@@ -10,7 +10,7 @@ En version 2.2, seul l'administrateur pouvait mettre ses identifiants dans un fi
 
 | Nom | Disponible à partir de la version |
 | ------|-------- |
-| Arrets sur Images | 2.2 |
+| Arrêt sur Images | 2.2 |
 | Courrier International | 2.3 |
 | Le Figaro | 2.3 |
 | Le Monde | 2.3 |
