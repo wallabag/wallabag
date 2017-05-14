@@ -10,7 +10,7 @@ In version 2.2, only the administrator could put his credentials in a config fil
 
 | Name | Available from version |
 | ------|-------- |
-| Arrets sur Images | 2.2 |
+| Arrêt sur Images | 2.2 |
 | Courrier International | 2.3 |
 | Le Figaro | 2.3 |
 | Le Monde | 2.3 |
