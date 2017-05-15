@@ -30,4 +30,8 @@
             </exclude>
         </whitelist>
     </filter>
+
+    <listeners>
+        <listener class="\DAMA\DoctrineTestBundle\PHPUnit\PHPUnitStaticDbConnectionListener" />
+    </listeners>
 </phpunit>

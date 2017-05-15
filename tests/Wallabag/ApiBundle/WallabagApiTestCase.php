@@ -8,7 +8,7 @@ use Symfony\Component\BrowserKit\Cookie;
 abstract class WallabagApiTestCase extends WebTestCase
 {
     /**
-     * @var Client
+     * @var \Symfony\Bundle\FrameworkBundle\Client
      */
     protected $client = null;
 
@@ -23,7 +23,7 @@ abstract class WallabagApiTestCase extends WebTestCase
     }
 
     /**
-     * @return Client
+     * @return \Symfony\Bundle\FrameworkBundle\Client
      */
     protected function createAuthorizedClient()
     {

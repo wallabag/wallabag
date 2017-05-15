@@ -71,6 +71,7 @@ class EntryControllerTest extends WallabagCoreTestCase
     public function testGetNew()
     {
         $this->logInAs('admin');
+        $this->useTheme('baggy');
         $client = $this->getClient();
 
         $crawler = $client->request('GET', '/new');
@@ -84,6 +85,7 @@ class EntryControllerTest extends WallabagCoreTestCase
     public function testPostNewViaBookmarklet()
     {
         $this->logInAs('admin');
+        $this->useTheme('baggy');
         $client = $this->getClient();
 
         $crawler = $client->request('GET', '/');
@@ -195,6 +197,12 @@ class EntryControllerTest extends WallabagCoreTestCase
     public function testPostNewOkUrlExist()
     {
         $this->logInAs('admin');
+
+        $entry = new Entry($this->getLoggedInUser());
+        $entry->setUrl($this->url);
+        $this->getEntityManager()->persist($entry);
+        $this->getEntityManager()->flush();
+
         $client = $this->getClient();
 
         $crawler = $client->request('GET', '/new');
@@ -288,7 +296,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $tags = $entry->getTags();
 
         $this->assertCount(2, $tags);
-        $this->assertEquals('wallabag', $tags[0]->getLabel());
+        $this->assertContains('wallabag', $tags);
 
         $em->remove($entry);
         $em->flush();
@@ -317,7 +325,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $tags = $entry->getTags();
 
         $this->assertCount(2, $tags);
-        $this->assertEquals('wallabag', $tags[1]->getLabel());
+        $this->assertContains('wallabag', $tags);
 
         $em->remove($entry);
         $em->flush();
@@ -364,24 +372,23 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertEquals('/all/list', $client->getResponse()->getTargetUrl());
     }
 
-    /**
-     * @depends testPostNewOk
-     */
     public function testView()
     {
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $content = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->findByUrlAndUserId($this->url, $this->getLoggedInUserId());
+        $entry = new Entry($this->getLoggedInUser());
+        $entry->setUrl('http://example.com/foo');
+        $entry->setTitle('title foo');
+        $entry->setContent('foo bar baz');
+        $this->getEntityManager()->persist($entry);
+        $this->getEntityManager()->flush();
 
-        $crawler = $client->request('GET', '/view/'.$content->getId());
+        $crawler = $client->request('GET', '/view/'.$entry->getId());
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
-        $this->assertContains($content->getTitle(), $body[0]);
+        $this->assertContains($entry->getTitle(), $body[0]);
     }
 
     /**
@@ -394,27 +401,23 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $em = $client->getContainer()
-            ->get('doctrine.orm.entity_manager');
+        $entry = new Entry($this->getLoggedInUser());
+        $entry->setUrl($this->url);
+        $entry->setTitle('title foo');
+        $entry->setContent('');
+        $this->getEntityManager()->persist($entry);
+        $this->getEntityManager()->flush();
+        $this->getEntityManager()->clear();
 
-        $content = $em
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->findByUrlAndUserId($this->url, $this->getLoggedInUserId());
-
-        // empty content
-        $content->setContent('');
-        $em->persist($content);
-        $em->flush();
-
-        $client->request('GET', '/reload/'.$content->getId());
+        $client->request('GET', '/reload/'.$entry->getId());
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
 
-        $content = $em
+        $entry = $this->getEntityManager()
             ->getRepository('WallabagCoreBundle:Entry')
-            ->find($content->getId());
+            ->find($entry->getId());
 
-        $this->assertNotEmpty($content->getContent());
+        $this->assertNotEmpty($entry->getContent());
     }
 
     /**
@@ -425,32 +428,21 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $em = $client->getContainer()
-            ->get('doctrine.orm.entity_manager');
+        $entry = new Entry($this->getLoggedInUser());
+        $entry->setUrl('http://0.0.0.0/failed.html');
+        $this->getEntityManager()->persist($entry);
+        $this->getEntityManager()->flush();
 
-        $content = $em
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->findByUrlAndUserId($this->url, $this->getLoggedInUserId());
-
-        // put a known failed url
-        $content->setUrl('http://0.0.0.0/failed.html');
-        $em->persist($content);
-        $em->flush();
-
-        $client->request('GET', '/reload/'.$content->getId());
+        $client->request('GET', '/reload/'.$entry->getId());
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
 
         // force EntityManager to clear previous entity
         // otherwise, retrieve the same entity will retrieve change from the previous request :0
-        $em->clear();
-        $newContent = $em
+        $this->getEntityManager()->clear();
+        $newContent = $this->getEntityManager()
             ->getRepository('WallabagCoreBundle:Entry')
-            ->find($content->getId());
-
-        $newContent->setUrl($this->url);
-        $em->persist($newContent);
-        $em->flush();
+            ->find($entry->getId());
 
         $this->assertNotEquals($client->getContainer()->getParameter('wallabag_core.fetching_error_message'), $newContent->getContent());
     }
@@ -460,12 +452,12 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $content = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->findByUrlAndUserId($this->url, $this->getLoggedInUserId());
+        $entry = new Entry($this->getLoggedInUser());
+        $entry->setUrl($this->url);
+        $this->getEntityManager()->persist($entry);
+        $this->getEntityManager()->flush();
 
-        $crawler = $client->request('GET', '/edit/'.$content->getId());
+        $crawler = $client->request('GET', '/edit/'.$entry->getId());
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
@@ -478,12 +470,12 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $content = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->findByUrlAndUserId($this->url, $this->getLoggedInUserId());
+        $entry = new Entry($this->getLoggedInUser());
+        $entry->setUrl($this->url);
+        $this->getEntityManager()->persist($entry);
+        $this->getEntityManager()->flush();
 
-        $crawler = $client->request('GET', '/edit/'.$content->getId());
+        $crawler = $client->request('GET', '/edit/'.$entry->getId());
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
@@ -508,19 +500,20 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $content = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->findByUrlAndUserId($this->url, $this->getLoggedInUserId());
+        $entry = new Entry($this->getLoggedInUser());
+        $entry->setUrl($this->url);
+        $this->getEntityManager()->persist($entry);
+        $this->getEntityManager()->flush();
+        $this->getEntityManager()->clear();
 
-        $client->request('GET', '/archive/'.$content->getId());
+        $client->request('GET', '/archive/'.$entry->getId());
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
 
         $res = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->find($content->getId());
+            ->find($entry->getId());
 
         $this->assertEquals($res->isArchived(), true);
     }
@@ -530,19 +523,20 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $content = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->findByUrlAndUserId($this->url, $this->getLoggedInUserId());
+        $entry = new Entry($this->getLoggedInUser());
+        $entry->setUrl($this->url);
+        $this->getEntityManager()->persist($entry);
+        $this->getEntityManager()->flush();
+        $this->getEntityManager()->clear();
 
-        $client->request('GET', '/star/'.$content->getId());
+        $client->request('GET', '/star/'.$entry->getId());
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
 
         $res = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneById($content->getId());
+            ->findOneById($entry->getId());
 
         $this->assertEquals($res->isStarred(), true);
     }
@@ -552,16 +546,16 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $content = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->findByUrlAndUserId($this->url, $this->getLoggedInUserId());
+        $entry = new Entry($this->getLoggedInUser());
+        $entry->setUrl($this->url);
+        $this->getEntityManager()->persist($entry);
+        $this->getEntityManager()->flush();
 
-        $client->request('GET', '/delete/'.$content->getId());
+        $client->request('GET', '/delete/'.$entry->getId());
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
 
-        $client->request('GET', '/delete/'.$content->getId());
+        $client->request('GET', '/delete/'.$entry->getId());
 
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
     }
@@ -627,7 +621,13 @@ class EntryControllerTest extends WallabagCoreTestCase
     public function testFilterOnReadingTime()
     {
         $this->logInAs('admin');
+        $this->useTheme('baggy');
         $client = $this->getClient();
+        $entry = new Entry($this->getLoggedInUser());
+        $entry->setUrl($this->url);
+        $entry->setReadingTime(22);
+        $this->getEntityManager()->persist($entry);
+        $this->getEntityManager()->flush();
 
         $crawler = $client->request('GET', '/unread/list');
 
@@ -666,9 +666,20 @@ class EntryControllerTest extends WallabagCoreTestCase
     public function testFilterOnReadingTimeOnlyUpper()
     {
         $this->logInAs('admin');
+        $this->useTheme('baggy');
         $client = $this->getClient();
 
-        $crawler = $client->request('GET', '/unread/list');
+        $crawler = $client->request('GET', '/all/list');
+        $this->assertCount(5, $crawler->filter('div[class=entry]'));
+
+        $entry = new Entry($this->getLoggedInUser());
+        $entry->setUrl($this->url);
+        $entry->setReadingTime(23);
+        $this->getEntityManager()->persist($entry);
+        $this->getEntityManager()->flush();
+
+        $crawler = $client->request('GET', '/all/list');
+        $this->assertCount(6, $crawler->filter('div[class=entry]'));
 
         $form = $crawler->filter('button[id=submit-filter]')->form();
 
@@ -678,12 +689,13 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(3, $crawler->filter('div[class=entry]'));
+        $this->assertCount(5, $crawler->filter('div[class=entry]'));
     }
 
     public function testFilterOnReadingTimeOnlyLower()
     {
         $this->logInAs('admin');
+        $this->useTheme('baggy');
         $client = $this->getClient();
 
         $crawler = $client->request('GET', '/unread/list');
@@ -696,12 +708,22 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(4, $crawler->filter('div[class=entry]'));
+        $this->assertCount(0, $crawler->filter('div[class=entry]'));
+
+        $entry = new Entry($this->getLoggedInUser());
+        $entry->setUrl($this->url);
+        $entry->setReadingTime(23);
+        $this->getEntityManager()->persist($entry);
+        $this->getEntityManager()->flush();
+
+        $crawler = $client->submit($form, $data);
+        $this->assertCount(1, $crawler->filter('div[class=entry]'));
     }
 
     public function testFilterOnUnreadStatus()
     {
         $this->logInAs('admin');
+        $this->useTheme('baggy');
         $client = $this->getClient();
 
         $crawler = $client->request('GET', '/all/list');
@@ -714,12 +736,23 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form, $data);
 
+        $this->assertCount(4, $crawler->filter('div[class=entry]'));
+
+        $entry = new Entry($this->getLoggedInUser());
+        $entry->setUrl($this->url);
+        $entry->setArchived(false);
+        $this->getEntityManager()->persist($entry);
+        $this->getEntityManager()->flush();
+
+        $crawler = $client->submit($form, $data);
+
         $this->assertCount(5, $crawler->filter('div[class=entry]'));
     }
 
     public function testFilterOnCreationDate()
     {
         $this->logInAs('admin');
+        $this->useTheme('baggy');
         $client = $this->getClient();
 
         $crawler = $client->request('GET', '/unread/list');
@@ -733,7 +766,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(6, $crawler->filter('div[class=entry]'));
+        $this->assertCount(5, $crawler->filter('div[class=entry]'));
 
         $data = [
             'entry_filter[createdAt][left_date]' => date('d/m/Y'),
@@ -742,7 +775,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(6, $crawler->filter('div[class=entry]'));
+        $this->assertCount(5, $crawler->filter('div[class=entry]'));
 
         $data = [
             'entry_filter[createdAt][left_date]' => '01/01/1970',
@@ -786,6 +819,7 @@ class EntryControllerTest extends WallabagCoreTestCase
     public function testFilterOnDomainName()
     {
         $this->logInAs('admin');
+        $this->useTheme('baggy');
         $client = $this->getClient();
 
         $crawler = $client->request('GET', '/unread/list');
@@ -818,6 +852,7 @@ class EntryControllerTest extends WallabagCoreTestCase
     public function testFilterOnStatus()
     {
         $this->logInAs('admin');
+        $this->useTheme('baggy');
         $client = $this->getClient();
 
         $crawler = $client->request('GET', '/unread/list');
@@ -839,6 +874,7 @@ class EntryControllerTest extends WallabagCoreTestCase
     public function testPreviewPictureFilter()
     {
         $this->logInAs('admin');
+        $this->useTheme('baggy');
         $client = $this->getClient();
 
         $crawler = $client->request('GET', '/unread/list');
@@ -846,13 +882,20 @@ class EntryControllerTest extends WallabagCoreTestCase
         $form['entry_filter[previewPicture]']->tick();
 
         $crawler = $client->submit($form);
-        $this->assertCount(2, $crawler->filter('div[class=entry]'));
+        $this->assertCount(1, $crawler->filter('div[class=entry]'));
     }
 
     public function testFilterOnLanguage()
     {
         $this->logInAs('admin');
+        $this->useTheme('baggy');
         $client = $this->getClient();
+
+        $entry = new Entry($this->getLoggedInUser());
+        $entry->setUrl($this->url);
+        $entry->setLanguage('fr');
+        $this->getEntityManager()->persist($entry);
+        $this->getEntityManager()->flush();
 
         $crawler = $client->request('GET', '/unread/list');
         $form = $crawler->filter('button[id=submit-filter]')->form();
@@ -877,10 +920,14 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $content = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneByUser($this->getLoggedInUserId());
+        // sharing is enabled
+        $client->getContainer()->get('craue_config')->set('share_public', 1);
+
+        $content = new Entry($this->getLoggedInUser());
+        $content->setUrl($this->url);
+        $this->getEntityManager()->persist($content);
+        $this->getEntityManager()->flush();
+        $this->getEntityManager()->clear();
 
         // no uid
         $client->request('GET', '/share/'.$content->getUid());
@@ -970,6 +1017,20 @@ class EntryControllerTest extends WallabagCoreTestCase
         $url = 'http://www.20minutes.fr/montpellier/1952003-20161030-video-car-tombe-panne-rugbymen-perpignan-improvisent-melee-route';
         $client->getContainer()->get('craue_config')->set('download_images_enabled', 1);
 
+        $crawler = $client->request('GET', '/new');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $form = $crawler->filter('form[name=entry]')->form();
+
+        $data = [
+            'entry[url]' => $url,
+        ];
+
+        $client->submit($form, $data);
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
@@ -987,28 +1048,19 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->logInAs('empty');
         $client = $this->getClient();
 
-        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
-        $user = $em
-            ->getRepository('WallabagUserBundle:User')
-            ->find($this->getLoggedInUserId());
-
-        if (!$user) {
-            $this->markTestSkipped('No user found in db.');
-        }
-
         // Redirect to homepage
-        $config = $user->getConfig();
+        $config = $this->getLoggedInUser()->getConfig();
         $config->setActionMarkAsRead(Config::REDIRECT_TO_HOMEPAGE);
-        $em->persist($config);
-        $em->flush();
+        $this->getEntityManager()->persist($config);
 
-        $content = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->findByUrlAndUserId($this->url, $this->getLoggedInUserId());
+        $entry = new Entry($this->getLoggedInUser());
+        $entry->setUrl($this->url);
+        $this->getEntityManager()->persist($entry);
 
-        $client->request('GET', '/view/'.$content->getId());
-        $client->request('GET', '/archive/'.$content->getId());
+        $this->getEntityManager()->flush();
+
+        $client->request('GET', '/view/'.$entry->getId());
+        $client->request('GET', '/archive/'.$entry->getId());
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $this->assertEquals('/', $client->getResponse()->headers->get('location'));
@@ -1019,46 +1071,36 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->logInAs('empty');
         $client = $this->getClient();
 
-        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
-        $user = $em
-            ->getRepository('WallabagUserBundle:User')
-            ->find($this->getLoggedInUserId());
-
-        if (!$user) {
-            $this->markTestSkipped('No user found in db.');
-        }
-
         // Redirect to current page
-        $config = $user->getConfig();
+        $config = $this->getLoggedInUser()->getConfig();
         $config->setActionMarkAsRead(Config::REDIRECT_TO_CURRENT_PAGE);
-        $em->persist($config);
-        $em->flush();
+        $this->getEntityManager()->persist($config);
 
-        $content = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->findByUrlAndUserId($this->url, $this->getLoggedInUserId());
+        $entry = new Entry($this->getLoggedInUser());
+        $entry->setUrl($this->url);
+        $this->getEntityManager()->persist($entry);
 
-        $client->request('GET', '/view/'.$content->getId());
-        $client->request('GET', '/archive/'.$content->getId());
+        $this->getEntityManager()->flush();
+
+        $client->request('GET', '/view/'.$entry->getId());
+        $client->request('GET', '/archive/'.$entry->getId());
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
-        $this->assertContains('/view/'.$content->getId(), $client->getResponse()->headers->get('location'));
+        $this->assertContains('/view/'.$entry->getId(), $client->getResponse()->headers->get('location'));
     }
 
     public function testFilterOnHttpStatus()
     {
         $this->logInAs('admin');
+        $this->useTheme('baggy');
         $client = $this->getClient();
 
-        $crawler = $client->request('GET', '/new');
-        $form = $crawler->filter('form[name=entry]')->form();
+        $entry = new Entry($this->getLoggedInUser());
+        $entry->setUrl('http://www.lemonde.fr/incorrect-url/');
+        $entry->setHttpStatus(404);
+        $this->getEntityManager()->persist($entry);
 
-        $data = [
-            'entry[url]' => 'http://www.lemonde.fr/incorrect-url/',
-        ];
-
-        $client->submit($form, $data);
+        $this->getEntityManager()->flush();
 
         $crawler = $client->request('GET', '/all/list');
         $form = $crawler->filter('button[id=submit-filter]')->form();
@@ -1071,14 +1113,17 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $this->assertCount(1, $crawler->filter('div[class=entry]'));
 
-        $crawler = $client->request('GET', '/new');
-        $form = $crawler->filter('form[name=entry]')->form();
+        $entry = new Entry($this->getLoggedInUser());
+        $entry->setUrl($this->url);
+        $entry->setHttpStatus(200);
+        $this->getEntityManager()->persist($entry);
 
-        $data = [
-            'entry[url]' => 'http://www.nextinpact.com/news/101235-wallabag-alternative-libre-a-pocket-creuse-petit-a-petit-son-nid.htm',
-        ];
+        $entry = new Entry($this->getLoggedInUser());
+        $entry->setUrl('http://www.nextinpact.com/news/101235-wallabag-alternative-libre-a-pocket-creuse-petit-a-petit-son-nid.htm');
+        $entry->setHttpStatus(200);
+        $this->getEntityManager()->persist($entry);
 
-        $client->submit($form, $data);
+        $this->getEntityManager()->flush();
 
         $crawler = $client->request('GET', '/all/list');
         $form = $crawler->filter('button[id=submit-filter]')->form();
@@ -1106,7 +1151,14 @@ class EntryControllerTest extends WallabagCoreTestCase
     public function testSearch()
     {
         $this->logInAs('admin');
+        $this->useTheme('baggy');
         $client = $this->getClient();
+
+        $entry = new Entry($this->getLoggedInUser());
+        $entry->setUrl($this->url);
+        $entry->setTitle('test');
+        $this->getEntityManager()->persist($entry);
+        $this->getEntityManager()->flush();
 
         // Search on unread list
         $crawler = $client->request('GET', '/unread/list');
@@ -1118,34 +1170,36 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(5, $crawler->filter('div[class=entry]'));
+        $this->assertCount(4, $crawler->filter('div[class=entry]'));
 
         // Search on starred list
         $crawler = $client->request('GET', '/starred/list');
 
+        $entry = new Entry($this->getLoggedInUser());
+        $entry->setUrl('http://localhost/foo/bar');
+        $entry->setTitle('testeur');
+        $entry->setStarred(true);
+        $this->getEntityManager()->persist($entry);
+        $this->getEntityManager()->flush();
+
         $form = $crawler->filter('form[name=search]')->form();
         $data = [
-            'search_entry[term]' => 'title',
+            'search_entry[term]' => 'testeur',
         ];
 
         $crawler = $client->submit($form, $data);
 
         $this->assertCount(1, $crawler->filter('div[class=entry]'));
 
-        // Added new article to test on archive list
-        $crawler = $client->request('GET', '/new');
-        $form = $crawler->filter('form[name=entry]')->form();
-        $data = [
-            'entry[url]' => $this->url,
-        ];
-        $client->submit($form, $data);
-        $content = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->findByUrlAndUserId($this->url, $this->getLoggedInUserId());
-        $client->request('GET', '/archive/'.$content->getId());
-
         $crawler = $client->request('GET', '/archive/list');
+
+        // Added new article to test on archive list
+        $entry = new Entry($this->getLoggedInUser());
+        $entry->setUrl('http://0.0.0.0/foo/baz/qux');
+        $entry->setTitle('Le manège');
+        $entry->setArchived(true);
+        $this->getEntityManager()->persist($entry);
+        $this->getEntityManager()->flush();
 
         $form = $crawler->filter('form[name=search]')->form();
         $data = [
@@ -1155,7 +1209,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $crawler = $client->submit($form, $data);
 
         $this->assertCount(1, $crawler->filter('div[class=entry]'));
-        $client->request('GET', '/delete/'.$content->getId());
+        $client->request('GET', '/delete/'.$entry->getId());
 
         // test on list of all articles
         $crawler = $client->request('GET', '/all/list');
@@ -1170,6 +1224,13 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertCount(0, $crawler->filter('div[class=entry]'));
 
         // test url search on list of all articles
+        $entry = new Entry($this->getLoggedInUser());
+        $entry->setUrl('http://domain/qux');
+        $entry->setTitle('Le manège');
+        $entry->setArchived(true);
+        $this->getEntityManager()->persist($entry);
+        $this->getEntityManager()->flush();
+
         $crawler = $client->request('GET', '/all/list');
 
         $form = $crawler->filter('form[name=search]')->form();

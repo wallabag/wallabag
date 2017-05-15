@@ -90,9 +90,10 @@
         "doctrine/doctrine-fixtures-bundle": "~2.2",
         "doctrine/data-fixtures": "~1.1.1",
         "sensio/generator-bundle": "^3.0",
-        "symfony/phpunit-bridge": "^3.0",
+        "symfony/phpunit-bridge": "^3.3",
         "friendsofphp/php-cs-fixer": "~1.9",
-        "m6web/redis-mock": "^2.0"
+        "m6web/redis-mock": "^2.0",
+        "dama/doctrine-test-bundle": "^1.0"
     },
     "scripts": {
         "post-cmd": [

@@ -119,9 +119,10 @@ class WallabagV2ControllerTest extends WallabagCoreTestCase
                 $this->getLoggedInUserId()
             );
 
-        $this->assertNotEmpty($content->getMimetype(), 'Mimetype for http://www.liberation.fr is ok');
-        $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for http://www.liberation.fr is ok');
-        $this->assertNotEmpty($content->getLanguage(), 'Language for http://www.liberation.fr is ok');
+        // empty because it wasn't re-imported
+        $this->assertEmpty($content->getMimetype(), 'Mimetype for http://www.liberation.fr is empty');
+        $this->assertEmpty($content->getPreviewPicture(), 'Preview picture for http://www.liberation.fr is empty');
+        $this->assertEmpty($content->getLanguage(), 'Language for http://www.liberation.fr is empty');
 
         $tags = $content->getTags();
         $this->assertContains('foot', $tags, 'It includes the "foot" tag');

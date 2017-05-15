@@ -3,8 +3,10 @@
 namespace Tests\Wallabag\ApiBundle\Controller;
 
 use Tests\Wallabag\ApiBundle\WallabagApiTestCase;
+use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Helper\ContentProxy;
+use Wallabag\UserBundle\Entity\User;
 
 class EntryRestControllerTest extends WallabagApiTestCase
 {
@@ -801,22 +803,28 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
     public function testDeleteEntriesTagsListAction()
     {
-        $entry = $this->client->getContainer()->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->findByUrlAndUserId('http://0.0.0.0/entry4', 1);
+        $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+        $entry = new Entry($em->getReference(User::class, 1));
+        $entry->setUrl('http://0.0.0.0/test-entry');
+        $entry->addTag((new Tag())->setLabel('foo-tag'));
+        $entry->addTag((new Tag())->setLabel('bar-tag'));
+        $em->persist($entry);
+        $em->flush();
 
-        $tags = $entry->getTags();
-
-        $this->assertCount(4, $tags);
+        $em->clear();
 
         $list = [
             [
-                'url' => 'http://0.0.0.0/entry4',
-                'tags' => 'new tag 1, new tag 2',
+                'url' => 'http://0.0.0.0/test-entry',
+                'tags' => 'foo-tag, bar-tag',
             ],
         ];
 
         $this->client->request('DELETE', '/api/entries/tags/list?list='.json_encode($list));
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        $entry = $em->getRepository('WallabagCoreBundle:Entry')->find($entry->getId());
+        $this->assertCount(0, $entry->getTags());
     }
 
     public function testPostEntriesListAction()
@@ -841,9 +849,14 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
     public function testDeleteEntriesListAction()
     {
+        $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+        $em->persist((new Entry($em->getReference(User::class, 1)))->setUrl('http://0.0.0.0/test-entry1'));
+
+        $em->flush();
+        $em->clear();
         $list = [
-            'http://www.lemonde.fr/musiques/article/2017/04/23/loin-de-la-politique-le-printemps-de-bourges-retombe-en-enfance_5115862_1654986.html',
-            'http://0.0.0.0/entry3',
+            'http://0.0.0.0/test-entry1',
+            'http://0.0.0.0/test-entry-not-exist',
         ];
 
         $this->client->request('DELETE', '/api/entries/list?urls='.json_encode($list));
@@ -853,10 +866,10 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->assertTrue($content[0]['entry']);
-        $this->assertEquals('http://www.lemonde.fr/musiques/article/2017/04/23/loin-de-la-politique-le-printemps-de-bourges-retombe-en-enfance_5115862_1654986.html', $content[0]['url']);
+        $this->assertEquals('http://0.0.0.0/test-entry1', $content[0]['url']);
 
         $this->assertFalse($content[1]['entry']);
-        $this->assertEquals('http://0.0.0.0/entry3', $content[1]['url']);
+        $this->assertEquals('http://0.0.0.0/test-entry-not-exist', $content[1]['url']);
     }
 
     public function testLimitBulkAction()

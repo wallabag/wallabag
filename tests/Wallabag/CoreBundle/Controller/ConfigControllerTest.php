@@ -67,7 +67,16 @@ class ConfigControllerTest extends WallabagCoreTestCase
     public function testChangeReadingSpeed()
     {
         $this->logInAs('admin');
+        $this->useTheme('baggy');
         $client = $this->getClient();
+
+        $entry = new Entry($this->getLoggedInUser());
+        $entry->setUrl('http://0.0.0.0/test-entry1')
+            ->setReadingTime(22);
+        $this->getEntityManager()->persist($entry);
+
+        $this->getEntityManager()->flush();
+        $this->getEntityManager()->clear();
 
         $crawler = $client->request('GET', '/unread/list');
         $form = $crawler->filter('button[id=submit-filter]')->form();
@@ -409,6 +418,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
     public function testTaggingRuleCreation()
     {
         $this->logInAs('admin');
+        $this->useTheme('baggy');
         $client = $this->getClient();
 
         $crawler = $client->request('GET', '/config');
@@ -939,6 +949,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
     public function testSwitchViewMode()
     {
         $this->logInAs('admin');
+        $this->useTheme('baggy');
         $client = $this->getClient();
 
         $client->request('GET', '/unread/list');

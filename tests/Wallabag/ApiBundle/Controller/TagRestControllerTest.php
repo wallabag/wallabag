@@ -22,36 +22,35 @@ class TagRestControllerTest extends WallabagApiTestCase
         return end($content);
     }
 
-    /**
-     * @depends testGetUserTags
-     */
-    public function testDeleteUserTag($tag)
+    public function testDeleteUserTag()
     {
-        $tagName = $tag['label'];
+        $tagLabel = 'tagtest';
+        $tag = new Tag();
+        $tag->setLabel($tagLabel);
 
-        $this->client->request('DELETE', '/api/tags/'.$tag['id'].'.json');
+        $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+        $em->persist($tag);
+        $em->flush();
+        $em->clear();
+
+        $this->client->request('DELETE', '/api/tags/'.$tag->getId().'.json');
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->assertArrayHasKey('label', $content);
-        $this->assertEquals($tag['label'], $content['label']);
-        $this->assertEquals($tag['slug'], $content['slug']);
+        $this->assertEquals($tag->getLabel(), $content['label']);
+        $this->assertEquals($tag->getSlug(), $content['slug']);
 
-        $entries = $this->client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->findAllByTagId($this->user->getId(), $tag['id']);
+        $entries = $em->getRepository('WallabagCoreBundle:Entry')
+            ->findAllByTagId($this->user->getId(), $tag->getId());
 
         $this->assertCount(0, $entries);
 
-        $tag = $this->client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Tag')
-            ->findOneByLabel($tagName);
+        $tag = $em->getRepository('WallabagCoreBundle:Tag')->findOneByLabel($tagLabel);
 
-        $this->assertNull($tag, $tagName.' was removed because it begun an orphan tag');
+        $this->assertNull($tag, $tagLabel.' was removed because it begun an orphan tag');
     }
 
     public function dataForDeletingTagByLabel()
