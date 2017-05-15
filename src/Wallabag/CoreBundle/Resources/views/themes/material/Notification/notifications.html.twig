@@ -7,7 +7,7 @@
         <div class="col l6 offset-l3">
             <ul class="collection">
             {% for notification in notifications | slice(0, 10) %}
-                <li class="collection-item avatar{% if not notification.read %} light-blue lighten-5{% else %} grey-text{% endif %}">
+                <li class="notification collection-item avatar{% if not notification.read %} light-blue lighten-5{% else %} grey-text{% endif %}">
                     <i class="material-icons circle">{% spaceless %}
                             {% if notification.type == constant('TYPE_ADMIN', notification) %}
                                 build
@@ -18,20 +18,23 @@
                             {% endif %}
                         {% endspaceless %}</i>
                     <span class="title">{{ notification.title }}</span>
-                    <p><em>{{ notification.timestamp | date }}</p>
+                    <p><em>{{ notification.timestamp | date }}</em></p>
                     <div class="secondary-content">
-                        {% for action in notification.actions %}
-                            <a class="btn waves-effect waves-light {% spaceless %}
-                               {% if action.type == constant('TYPE_OK', action) %}
-                               {% elseif action.type == constant('TYPE_YES', action) %}
-                                    cyan
-                               {% elseif action.type == constant('TYPE_NO', action) %}
-                                    red
-                               {% elseif action.type == constant('TYPE_INFO', action) %}
-                                    blue-grey
-                               {% endif %}
-                                {% endspaceless %}" href="{{ action.link }}">{{ action.label }}</a>
-                        {% endfor %}
+                        {% if not notification.read %}
+                            {% for action in notification.actions %}
+                                <a class="notification-action btn waves-effect waves-light {% spaceless %}
+                                   {% if action.type == constant('TYPE_OK', action) %}
+                                   {% elseif action.type == constant('TYPE_YES', action) %}
+                                        cyan
+                                   {% elseif action.type == constant('TYPE_NO', action) %}
+                                        red
+                                   {% elseif action.type == constant('TYPE_INFO', action) %}
+                                        blue-grey
+                                   {% endif %}
+                                    {% endspaceless %}" data-id="{{ notification.id }}" href="{{ action.link }}">{{ action.label }}</a>
+                            {% endfor %}
+                        <button class="notification-action waves-effect waves-teal btn-flat" data-id="{{ notification.id }}"><i data-id="{{ notification.id }}" class="material-icons">check</i></button>
+                        {% endif %}
                     </div>
                 </li>
             {% endfor %}

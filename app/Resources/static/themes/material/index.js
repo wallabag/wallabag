@@ -77,12 +77,12 @@ $(document).ready(() => {
     $('.progress .determinate').css('width', `${scrollPercent}%`);
   });
 
-  $('.notification').on('click', () => {
-    $.ajax({
-      url: Routing.generate('notification-archive-all'),
-      method: 'GET',
-    }).done(() => {
+  $('.notification .notification-action').on('click', (e) => {
+    const id = parseInt($(e.target).attr('data-id'), 10);
+    fetch(Routing.generate('notification-archive', { notification: id }), { credentials: 'same-origin' }).then(() => {
+      $(e.target).parents('.notification').removeClass('light-blue lighten-5');
       $('#notifications').sideNav('hide');
     });
+    return true;
   });
 });

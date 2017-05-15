@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Wallabag\CoreBundle\Entity\Notification;
 
 class NotificationsController extends Controller
 {
@@ -32,6 +33,24 @@ class NotificationsController extends Controller
     public function markAllNotificationsAsReadAction(Request $request)
     {
         $this->getDoctrine()->getRepository('WallabagCoreBundle:Notification')->markAllAsReadForUser($this->getUser()->getId());
+
+        return $this->redirectToRoute('notifications-all');
+    }
+
+    /**
+     * @Route("/notifications/read/{notification}", name="notification-archive")
+     *
+     * @param Notification $notification
+     * @return Response
+     */
+    public function markNotificationsAsReadAction(Notification $notification)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $notification->setRead(true);
+
+        $em->persist($notification);
+        $em->flush();
 
         return $this->redirectToRoute('notifications-all');
     }
