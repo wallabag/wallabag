@@ -2,15 +2,10 @@ Contribute to this documentation
 ================================
 
 Sources of our documentation are here
-https://github.com/wallabag/wallabag/tree/master/docs
+https://github.com/wallabag/doc/
 
-We use [ReadTheDocs](https://readthedocs.org) to generate it.
+We use [GitBook](https://www.gitbook.com/book/wallabag/documentation/details) to generate it.
 
-Pages are written in [Restructured
-Text](https://en.wikipedia.org/wiki/ReStructuredText) format. You can
-use online tools like <http://rst.aaroniles.net/> or
-<http://rst.ninjs.org/> to preview your articles.
-
-If you create a new page, don't forget to edit the
-[index.rst](https://raw.githubusercontent.com/wallabag/wallabag/master/docs/en/index.rst)
-file to add a link in the sidebar.
+Pages are written in [Markdown](https://en.wikipedia.org/wiki/Markdown) format. You can
+use online tools like http://dillinger.io or
+https://stackedit.io/ to preview your articles.
