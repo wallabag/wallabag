@@ -2,16 +2,12 @@ Wirke an dieser Dokumentation mit
 =================================
 
 Quellen der Dokumentation sind hier zu finden
-<https://github.com/wallabag/wallabag/tree/master/docs>
+https://github.com/wallabag/doc/
 
-Wir nutzen [ReadTheDocs](https://readthedocs.org), um sie zu generieren.
+Wir nutzen [GitBook](https://www.gitbook.com/book/wallabag/documentation/details), um sie zu generieren.
 
 Seiten werden in
-[reStructuredText](https://de.wikipedia.org/wiki/ReStructuredText)
-geschrieben. Du kannst Onlinetools wie <http://rst.aaroniles.net/> oder
-<http://rst.ninjs.org/> nutzen, um eine Vorschau deiner Artikel zu
+[Markdown](https://de.wikipedia.org/wiki/Markdown)
+geschrieben. Du kannst Onlinetools wie http://dillinger.io oder
+https://stackedit.io/ nutzen, um eine Vorschau deiner Artikel zu
 betrachten.
-
-Wenn du eine neue Seite erstellst, vergiss nicht die
-[index.rst](https://raw.githubusercontent.com/wallabag/wallabag/master/docs/en/index.rst)
-zu bearbeiten, um dort einen Link für die Seitenleiste hinzuzufügen.
