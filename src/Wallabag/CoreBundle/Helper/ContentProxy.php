@@ -47,24 +47,7 @@ class ContentProxy
     {
         // ensure content is a bit cleaned up
         if (!empty($content['html'])) {
-            $extractor = $this->graby->getExtractor();
-            $contentExtracted = $extractor->process($content['html'], $url);
-
-            if ($contentExtracted) {
-                $contentBlock = $extractor->getContent();
-                $contentBlock->normalize();
-
-                $content['html'] = trim($contentBlock->innerHTML);
-            }
-
-            $content['html'] = htmLawed($content['html'], [
-                'safe' => 1,
-                // which means: do not remove iframe elements
-                'elements' => '*+iframe',
-                'deny_attribute' => 'style',
-                'comment' => 1,
-                'cdata' => 1,
-            ]);
+            $content['html'] = $this->graby->cleanupHtml($content['html'], $url);
         }
 
         // do we have to fetch the content or the provided one is ok?

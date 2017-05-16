@@ -61,7 +61,6 @@
         "wallabag/tcpdf": "^6.2",
         "simplepie/simplepie": "~1.3.1",
         "willdurand/hateoas-bundle": "~1.0",
-        "htmlawed/htmlawed": "~1.1.19",
         "liip/theme-bundle": "~1.1",
         "lexik/form-filter-bundle": "~5.0",
         "j0k3r/graby": "dev-extractor",
