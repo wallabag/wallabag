@@ -9,11 +9,11 @@ Paywall-Authentifizierung aktivieren
 Setze in den internen Einstellungen im Bereich "Artikel" die Authentifizierung
 für Webseiten mit einer Paywall (mit dem Wert 1).
 
-Anmelde-Daten in wallabag konfigurieren
+Anmeldedaten in wallabag konfigurieren
 ---------------------------------
 
 Bearbeite deine `app/config/parameters.yml`-Datei, um die Daten
-für jede Webseite mit einer Paywall. Hier ist ein Beispiel für einige französische Webseiten:
+für jede Webseite mit einer Paywall zu hinterlegen. Hier ist ein Beispiel für einige französische Webseiten:
 
 ``` {.sourceCode .yaml}
 sites_credentials:
@@ -27,7 +27,7 @@ Diese Daten werden mit jedem Nutzer der wallabag-Instanz geteilt.
 
 </div>
 
-Konfigurations-Dateien parsen
+Konfigurationsdateien parsen
 -----------------------------
 
 <div class="admonition note">
@@ -37,9 +37,9 @@ um die Konfiguration zu verstehen.
 
 </div>
 
-Jede Parsing-Konfigurations-Datei muss mit den Feldern
+Jede Parsing-Konfigurationsdatei muss mit den Feldern
 `requires_login`, `login_uri`, `login_username_field`,
-`login_password_field` und `not_logged_in_xpath` erweitern.
+`login_password_field` und `not_logged_in_xpath` erweitert werden.
 
 Sei vorsichtig, das Login-Formular muss auf der Inhaltsseite sein,
 wenn wallabag diese lädt. Es ist unmöglich, auf einer Webseite angemeldet

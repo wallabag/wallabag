@@ -1,7 +1,7 @@
 Tests
 =====
 
-Um die Entwicklungs-Qualität von wallabag sicherzustellen,
+Um die Entwicklungsqualität von wallabag sicherzustellen,
 haben wir Tests mit [PHPUnit](https://phpunit.de) geschrieben.
 
 Wenn du zu dem Projekt beiträgst (indem du Bugs behebst, neue Features
