@@ -1,14 +1,15 @@
-# Restricted access articles
+# Restriktierte Artikel
 
-wallabag has a system to get articles behind a paywall, by providing your credentials when the article is fetched.
+wallabag hat ein System, um Artikel hinter einer Paywall zu verarbeiten, indem die Login-Daten zur Verfügung gestellt werden,
+wenn der Artikel geladen wird.
 
-In version 2.2, only the administrator could put his credentials in a config file, making the feature accessible to all users of the instance. With 2.3, all users have a panel to enter their own credentials.
+In Version 2.2. konnte nur der Administrator seine Daten in die Konfiguration schreiben, und hat das Feature somit für alle Nutzer der Instanz aktiviert. Ab Version 2.3 werden die Nutzer eine Seite haben, um ihre eigenen Daten zu hinterlegen.
 
-## List of compatible websites
+## Liste der kompatiblen Webseiten
 
-### French
+### Französisch
 
-| Name | Available from version |
+| Name | Verfügbar ab Version |
 | ------|-------- |
 | Arrêt sur Images | 2.2 |
 | Courrier International | 2.3 |
