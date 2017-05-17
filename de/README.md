@@ -3,15 +3,15 @@ wallabag Dokumentation
 
 ![wallabag Logo](../img/wallabag.png)
 
-**wallabag** ist eine Read-it-later Applikation: sie speichert Websites,
+**wallabag** ist eine Read-it-later Applikation: Sie speichert Websites,
 indem nur deren Inhalte behalten werden. Elemente wie die Navigation oder Werbung
 werden gelöscht.
 
-Die Hauptdokumentation für diese Applikation ist in mehreren Abschnitten
-organisiert:
+Die Hauptdokumentation für diese Applikation ist in mehrere Abschnitte
+gegliedert:
 
 -   Nutzerdokumentation
--   Applikationsdokumentation
+-   App-Dokumentation
 -   Administratordokumentation
 -   Entwicklerdokumentation
 
