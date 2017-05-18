@@ -110,7 +110,7 @@ config:
         annotations: Levar TOTAS las anotacions
         tags: Levar TOTAS las etiquetas
         entries: Levar TOTES los articles
-        # archived: Remove ALL archived entries
+        archived: Levar TOTES los articles archivats
         confirm: Sètz vertadièrament segur ? (ES IRREVERSIBLE)
     form_password:
         description: "Podètz cambiar vòstre senhal aquí. Vòstre senhal deu èsser long d'almens 8 caractèrs."
@@ -154,8 +154,8 @@ config:
                 not_equal_to: 'Diferent de…'
                 or: "Una règla O l'autra"
                 and: "Una règla E l'autra"
-                matches: 'Teste se un <i>subjècte</i> correspond a una <i>recerca</i> (non sensibla a la cassa).<br />Exemple : <code>title matches \"football\"</code>'
-                # notmatches: 'Tests that a <i>subject</i> is not matches a <i>search</i> (case-insensitive).<br />Example: <code>title notmatches "football"</code>'
+                matches: 'Teste se un <i>subjècte</i> correspond a una <i>recèrca</i> (non sensibla a la cassa).<br />Exemple : <code>title matches \"football\"</code>'
+                notmatches: 'Teste se <i>subjècte</i> correspond pas a una <i>recèrca</i> (sensibla a la cassa).<br />Example : <code>title notmatches "football"</code>'
 
 entry:
     page_titles:
@@ -185,8 +185,8 @@ entry:
         archived_label: 'Legits'
         starred_label: 'Favorits'
         unread_label: 'Pas legits'
-        preview_picture_label: 'A una fotò'
-        preview_picture_help: 'Fotò'
+        preview_picture_label: 'A un imatge'
+        preview_picture_help: 'Imatge'
         language_label: 'Lenga'
         http_status_label: 'Estatut HTTP'
         reading_time:
@@ -225,8 +225,8 @@ entry:
         original_article: 'original'
         annotations_on_the_entry: "{0} Pas cap d'anotacion|{1} Una anotacion|]1,Inf[ %count% anotacions"
         created_at: 'Data de creacion'
-        # published_at: 'Publication date'
-        # published_by: 'Published by'
+        published_at: 'Data de publicacion'
+        published_by: 'Publicat per'
     new:
         page_title: 'Enregistrar un novèl article'
         placeholder: 'http://website.com'
@@ -344,8 +344,8 @@ quickstart:
         new_user: 'Crear un novèl utilizaire'
         analytics: 'Configurar las estadisticas'
         sharing: 'Activar de paramètres de partatge'
-        export: 'Configurar los expòrt'
-        import: 'Configurar los impòrt'
+        export: 'Configurar los expòrts'
+        import: 'Configurar los impòrts'
     first_steps:
         title: 'Primièrs passes'
         description: "Ara wallabag es ben configurat, es lo moment d'archivar lo web. Podètz clicar sul signe + a man drecha amont per ajustar un ligam."
@@ -461,7 +461,7 @@ developer:
         action: 'Suprimir aqueste client'
     client:
         page_title: 'Gestion dels clients API > Novèl client'
-        page_description: "Anatz crear un novèl client. Mercés de cumplir l'url de redireccion cap a vòstra aplicacion."
+        page_description: "Anatz crear un novèl client. Mercés de garnir l'url de redireccion cap a vòstra aplicacion."
         form:
             name_label: "Nom del client"
             redirect_uris_label: 'URLs de redireccion'
@@ -472,7 +472,7 @@ developer:
         page_description: 'Vaquí los paramètres de vòstre client.'
         field_name: 'Nom del client'
         field_id: 'ID Client'
-        field_secret: 'Clau secreta'
+        field_secret: 'Clau secrèta'
         back: 'Retour'
         read_howto: 'Legir "cossí crear ma primièra aplicacion"'
     howto:
@@ -514,7 +514,7 @@ user:
         delete_confirm: 'Sètz segur ?'
         back_to_list: 'Tornar a la lista'
     search:
-        # placeholder: Filter by username or email
+        placeholder: "Filtrar per nom d'utilizaire o corrièl"
 
 error:
     page_title: Una error s'es produsida
@@ -533,7 +533,7 @@ flashes:
             annotations_reset: Anotacions levadas
             tags_reset: Etiquetas levadas
             entries_reset: Articles levats
-            # archived_reset: Archived entries deleted
+            archived_reset: Articles archivat suprimits
     entry:
         notice:
             entry_already_saved: 'Article ja salvargardat lo %date%'
