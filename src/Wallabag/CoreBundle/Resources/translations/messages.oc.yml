@@ -214,7 +214,7 @@ entry:
             share_email_label: 'Corrièl'
             public_link: 'ligam public'
             delete_public_link: 'suprimir lo ligam public'
-            download: 'Telecargar'
+            download: 'Exportar'
             print: 'Imprimir'
             problem:
                 label: 'Un problèma ?'
