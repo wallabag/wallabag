@@ -69,6 +69,15 @@ before_install:
 script:
     - travis_wait bash composer install -o  --no-interaction --no-progress --prefer-dist
     - ant prepare-$DB
+
+    - echo "travis_fold:start:migrations"
+    - php bin/console doctrine:migrations:migrate --no-interaction --env=test
+    - echo "travis_fold:end:migrations"
+
+    - echo "travis_fold:start:fixtures"
+    - php bin/console doctrine:fixtures:load --no-interaction --env=test
+    - echo "travis_fold:end:fixtures"
+
     - if [[ $VALIDATE_TRANSLATION_FILE = '' ]]; then ./bin/simple-phpunit -v ; fi;
     - if [[ $CS_FIXER = run ]]; then php bin/php-cs-fixer fix src/ --verbose --dry-run ; fi;
     - if [[ $VALIDATE_TRANSLATION_FILE = run ]]; then php bin/console lint:yaml src/Wallabag/CoreBundle/Resources/translations -v ; fi;

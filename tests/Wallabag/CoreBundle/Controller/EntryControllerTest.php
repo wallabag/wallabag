@@ -8,7 +8,23 @@ use Wallabag\CoreBundle\Entity\Entry;
 
 class EntryControllerTest extends WallabagCoreTestCase
 {
+    public $downloadImagesEnabled = false;
     public $url = 'http://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html';
+
+    /**
+     * @after
+     *
+     * Ensure download_images_enabled is disabled after each script
+     */
+    public function tearDownImagesEnabled()
+    {
+        if ($this->downloadImagesEnabled) {
+            $client = static::createClient();
+            $client->getContainer()->get('craue_config')->set('download_images_enabled', 0);
+
+            $this->downloadImagesEnabled = false;
+        }
+    }
 
     public function testLogin()
     {
@@ -905,6 +921,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
     public function testNewEntryWithDownloadImagesEnabled()
     {
+        $this->downloadImagesEnabled = true;
         $this->logInAs('admin');
         $client = $this->getClient();
 
@@ -935,7 +952,8 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $entry);
         $this->assertEquals($url, $entry->getUrl());
         $this->assertContains('Perpignan', $entry->getTitle());
-        $this->assertContains('/c4789a7f.jpeg', $entry->getContent());
+        // instead of checking for the filename (which might change) check that the image is now local
+        $this->assertContains('http://v2.wallabag.org/assets/images/', $entry->getContent());
 
         $client->getContainer()->get('craue_config')->set('download_images_enabled', 0);
     }
@@ -945,6 +963,7 @@ class EntryControllerTest extends WallabagCoreTestCase
      */
     public function testRemoveEntryWithDownloadImagesEnabled()
     {
+        $this->downloadImagesEnabled = true;
         $this->logInAs('admin');
         $client = $this->getClient();
 
