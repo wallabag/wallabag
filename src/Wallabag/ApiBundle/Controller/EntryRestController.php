@@ -297,10 +297,19 @@ class EntryRestController extends WallabagRestController
         $entry = $this->get('wallabag_core.entry_repository')->findByUrlAndUserId($url, $this->getUser()->getId());
 
         if (false === $entry) {
-            $entry = $this->get('wallabag_core.content_proxy')->updateEntry(
-                new Entry($this->getUser()),
-                $url
-            );
+            $entry = new Entry($this->getUser());
+            try {
+                $entry = $this->get('wallabag_core.content_proxy')->updateEntry(
+                    $entry,
+                    $url
+                );
+            } catch (\Exception $e) {
+                $this->get('logger')->error('Error while saving an entry', [
+                    'exception' => $e,
+                    'entry' => $entry,
+                ]);
+                $entry->setUrl($url);
+            }
         }
 
         if (!is_null($title)) {

@@ -215,7 +215,7 @@ entry:
             # share_email_label: 'Email'
             # public_link: 'public link'
             # delete_public_link: 'delete public link'
-            download: 'Download'
+            # export: 'Export'
             # print: 'Print'
             problem:
                 label: 'Problemer?'

@@ -4,6 +4,7 @@ namespace Tests\Wallabag\ApiBundle\Controller;
 
 use Tests\Wallabag\ApiBundle\WallabagApiTestCase;
 use Wallabag\CoreBundle\Entity\Tag;
+use Wallabag\CoreBundle\Helper\ContentProxy;
 
 class EntryRestControllerTest extends WallabagApiTestCase
 {
@@ -373,6 +374,39 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertEquals(true, $content['is_archived']);
         $this->assertEquals(false, $content['is_starred']);
         $this->assertCount(3, $content['tags']);
+    }
+
+    public function testPostEntryWhenFetchContentFails()
+    {
+        /** @var \Symfony\Component\DependencyInjection\Container $container */
+        $container = $this->client->getContainer();
+        $contentProxy = $this->getMockBuilder(ContentProxy::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['updateEntry'])
+            ->getMock();
+        $contentProxy->expects($this->any())
+            ->method('updateEntry')
+            ->willThrowException(new \Exception('Test Fetch content fails'));
+        $container->set('wallabag_core.content_proxy', $contentProxy);
+
+        try {
+            $this->client->request('POST', '/api/entries.json', [
+                'url' => 'http://www.example.com/',
+            ]);
+
+            $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+            $content = json_decode($this->client->getResponse()->getContent(), true);
+            $this->assertGreaterThan(0, $content['id']);
+            $this->assertEquals('http://www.example.com/', $content['url']);
+        } finally {
+            // Remove the created entry to avoid side effects on other tests
+            if (isset($content['id'])) {
+                $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+                $entry = $em->getReference('WallabagCoreBundle:Entry', $content['id']);
+                $em->remove($entry);
+                $em->flush();
+            }
+        }
     }
 
     public function testPostArchivedAndStarredEntry()

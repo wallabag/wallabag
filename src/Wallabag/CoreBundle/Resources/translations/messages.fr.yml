@@ -216,7 +216,7 @@ entry:
             share_email_label: "Courriel"
             public_link: "Lien public"
             delete_public_link: "Supprimer le lien public"
-            download: "Télécharger"
+            export: "Exporter"
             print: "Imprimer"
             problem:
                 label: "Un problème ?"
