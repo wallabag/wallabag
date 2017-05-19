@@ -62,18 +62,6 @@
             <arg value="data/sql/mysql_base.sql"/>
             <arg value="--env=test"/>
         </exec>
-        <exec executable="php">
-            <arg value="${basedir}/bin/console"/>
-            <arg value="doctrine:migrations:migrate"/>
-            <arg value="--no-interaction"/>
-            <arg value="--env=test"/>
-        </exec>
-        <exec executable="php">
-            <arg value="${basedir}/bin/console"/>
-            <arg value="doctrine:fixtures:load"/>
-            <arg value="--no-interaction"/>
-            <arg value="--env=test"/>
-        </exec>
     </target>
 
     <target name="prepare_sqlite" description="Run test for SQLite">
@@ -101,18 +89,6 @@
         <exec executable="php">
             <arg value="${basedir}/bin/console"/>
             <arg value="doctrine:schema:create"/>
-            <arg value="--env=test"/>
-        </exec>
-        <exec executable="php">
-            <arg value="${basedir}/bin/console"/>
-            <arg value="doctrine:migrations:migrate"/>
-            <arg value="--no-interaction"/>
-            <arg value="--env=test"/>
-        </exec>
-        <exec executable="php">
-            <arg value="${basedir}/bin/console"/>
-            <arg value="doctrine:fixtures:load"/>
-            <arg value="--no-interaction"/>
             <arg value="--env=test"/>
         </exec>
     </target>
@@ -148,18 +124,6 @@
             <arg value="travis"/>
             <arg value="-f"/>
             <arg value="data/sql/pgsql_base.sql"/>
-        </exec>
-        <exec executable="php">
-            <arg value="${basedir}/bin/console"/>
-            <arg value="doctrine:migrations:migrate"/>
-            <arg value="--no-interaction"/>
-            <arg value="--env=test"/>
-        </exec>
-        <exec executable="php">
-            <arg value="${basedir}/bin/console"/>
-            <arg value="doctrine:fixtures:load"/>
-            <arg value="--no-interaction"/>
-            <arg value="--env=test"/>
         </exec>
     </target>
 
