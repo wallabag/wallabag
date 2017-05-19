@@ -17,6 +17,7 @@ parameters:
     database_path: '%kernel.root_dir%/../data/db/wallabag.sqlite'
     database_table_prefix: wallabag_
     database_socket: null
+    database_charset: utf8
     mailer_transport: smtp
     mailer_host: 127.0.0.1
     mailer_user: null
