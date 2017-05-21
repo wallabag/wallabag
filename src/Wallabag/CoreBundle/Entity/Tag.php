@@ -78,7 +78,7 @@ class Tag
      */
     public function setLabel($label)
     {
-        $this->label = $label;
+        $this->label = mb_convert_case($label, MB_CASE_LOWER);
 
         return $this;
     }
