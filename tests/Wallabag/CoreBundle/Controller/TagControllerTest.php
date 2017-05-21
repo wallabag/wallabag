@@ -126,9 +126,13 @@ class TagControllerTest extends WallabagCoreTestCase
             ->getRepository('WallabagCoreBundle:Tag')
             ->findOneByEntryAndTagLabel($entry, $this->tagName);
 
+        // We make a first request to set an history and test redirection after tag deletion
+        $client->request('GET', '/view/'.$entry->getId());
+        $entryUri = $client->getRequest()->getUri();
         $client->request('GET', '/remove-tag/'.$entry->getId().'/'.$tag->getId());
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertEquals($entryUri, $client->getResponse()->getTargetUrl());
 
         $this->assertNotContains($this->tagName, $entry->getTags());
 

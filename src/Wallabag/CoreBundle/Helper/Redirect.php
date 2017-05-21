@@ -21,12 +21,13 @@ class Redirect
     }
 
     /**
-     * @param string $url      URL to redirect
-     * @param string $fallback Fallback URL if $url is null
+     * @param string $url                    URL to redirect
+     * @param string $fallback               Fallback URL if $url is null
+     * @param bool   $ignoreActionMarkAsRead Ignore configured action when mark as read
      *
      * @return string
      */
-    public function to($url, $fallback = '')
+    public function to($url, $fallback = '', $ignoreActionMarkAsRead = false)
     {
         $user = $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null;
 
@@ -34,7 +35,8 @@ class Redirect
             return $url;
         }
 
-        if (Config::REDIRECT_TO_HOMEPAGE === $user->getConfig()->getActionMarkAsRead()) {
+        if (!$ignoreActionMarkAsRead &&
+              Config::REDIRECT_TO_HOMEPAGE === $user->getConfig()->getActionMarkAsRead()) {
             return $this->router->generate('homepage');
         }
 
