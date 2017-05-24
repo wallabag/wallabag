@@ -286,7 +286,7 @@ class EntryRestController extends WallabagRestController
      *          {"name"="content", "dataType"="string", "required"=false, "description"="Content of the entry"},
      *          {"name"="language", "dataType"="string", "required"=false, "description"="Language of the entry"},
      *          {"name"="preview_picture", "dataType"="string", "required"=false, "description"="Preview picture of the entry"},
-     *          {"name"="published_at", "dataType"="datetime", "format"="YYYY-MM-DDTHH:II:SS+TZ", "required"=false, "description"="Published date of the entry"},
+     *          {"name"="published_at", "dataType"="datetime|integer", "format"="YYYY-MM-DDTHH:II:SS+TZ or a timestamp", "required"=false, "description"="Published date of the entry"},
      *          {"name"="authors", "dataType"="string", "format"="Name Firstname,author2,author3", "required"=false, "description"="Authors of the entry"},
      *       }
      * )

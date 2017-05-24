@@ -82,8 +82,15 @@ class ContentProxy
         $entry->setHttpStatus(isset($content['status']) ? $content['status'] : '');
 
         if (!empty($content['date'])) {
+            $date = $content['date'];
+
+            // is it a timestamp?
+            if (filter_var($date, FILTER_VALIDATE_INT) !== false) {
+                $date = '@'.$content['date'];
+            }
+
             try {
-                $entry->setPublishedAt(new \DateTime($content['date']));
+                $entry->setPublishedAt(new \DateTime($date));
             } catch (\Exception $e) {
                 $this->logger->warning('Error while defining date', ['e' => $e, 'url' => $url, 'date' => $content['date']]);
             }
