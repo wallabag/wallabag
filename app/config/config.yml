@@ -54,7 +54,7 @@ wallabag_core:
     action_mark_as_read: 1
     list_mode: 1
     fetching_error_message: |
-        wallabag can't retrieve contents for this article. Please <a href="http://doc.wallabag.org/en/master/user/errors_during_fetching.html#how-can-i-help-to-fix-that">troubleshoot this issue</a>.
+        wallabag can't retrieve contents for this article. Please <a href="http://doc.wallabag.org/en/user/errors_during_fetching.html#how-can-i-help-to-fix-that">troubleshoot this issue</a>.
 
 wallabag_user:
     registration_enabled: "%fosuser_registration%"
