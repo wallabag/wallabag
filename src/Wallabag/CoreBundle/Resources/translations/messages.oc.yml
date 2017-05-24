@@ -241,6 +241,9 @@ entry:
         save_label: 'Enregistrar'
     public:
         shared_by_wallabag: "Aqueste article es estat partejat per <a href='%wallabag_instance%'>wallabag</a>"
+    confirm:
+        # delete: "Are you sure you want to remove that article?"
+        # delete_tag: "Are you sure you want to remove that tag from that article?"
 
 about:
     page_title: 'A prepaus'

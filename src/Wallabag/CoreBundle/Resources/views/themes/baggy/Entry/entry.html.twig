@@ -22,7 +22,7 @@
                 <li><a title="{{ markAsReadLabel|trans }}" class="tool icon icon-check {% if entry.isArchived == 0 %}archive-off{% else %}archive{% endif %} markasread" href="{{ path('archive_entry', { 'id': entry.id }) }}"><span>{{ markAsReadLabel|trans }}</span></a></li>
                 <li><a title="{{ 'entry.view.left_menu.set_as_starred'|trans }}" class="tool icon icon-star {% if entry.isStarred == 0 %}fav-off{% else %}fav{% endif %} favorite" href="{{ path('star_entry', { 'id': entry.id }) }}"><span>{{ 'entry.view.left_menu.set_as_starred'|trans }}</span></a></li>
                 <li><a id="nav-btn-add-tag" class="tool icon icon-price-tags" title="{{ 'entry.view.left_menu.add_a_tag'|trans }}"><span>{{ 'entry.view.left_menu.add_a_tag'|trans }}</span></a></li>
-                <li><a title="{{ 'entry.view.left_menu.delete'|trans }}" class="tool delete icon icon-trash" href="{{ path('delete_entry', { 'id': entry.id }) }}"><span>{{ 'entry.view.left_menu.delete'|trans }}</span></a></li>
+                <li><a title="{{ 'entry.view.left_menu.delete'|trans }}" onclick="return confirm('{{ 'entry.confirm.delete'|trans|escape('js') }}')" class="tool delete icon icon-trash" href="{{ path('delete_entry', { 'id': entry.id }) }}"><span>{{ 'entry.view.left_menu.delete'|trans }}</span></a></li>
                 {% if craue_setting('share_public') %}
                     <li><a href="{{ path('share', {'id': entry.id }) }}" target="_blank" class="tool icon icon-eye" title="{{ 'entry.view.left_menu.public_link'|trans }}"><span>{{ 'entry.view.left_menu.public_link'|trans }}</span></a></li>
                     <li><a href="{{ path('delete_share', {'id': entry.id }) }}" class="tool icon icon-no-eye" title="{{ 'entry.view.left_menu.delete_public_link'|trans }}"><span>{{ 'entry.view.left_menu.delete_public_link'|trans }}</span></a></li>
@@ -74,7 +74,13 @@
             <aside class="tags">
                 <div class="card-entry-tags">
                 {% for tag in entry.tags %}
-                    <span class="label-outline"><i class="material-icons">label_outline</i> <a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a> <a href="{{ path('remove_tag', { 'entry': entry.id, 'tag': tag.id }) }}" class="nostyle"><i>✘</i></a></span>
+                    <span class="label-outline">
+                        <i class="material-icons">label_outline</i>
+                        <a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a>
+                        <a href="{{ path('remove_tag', { 'entry': entry.id, 'tag': tag.id }) }}" onclick="return confirm('{{ 'entry.confirm.delete_tag'|trans|escape('js') }}')" class="nostyle">
+                            <i>✘</i>
+                        </a>
+                    </span>
                 {% endfor %}
                 </div>
                 <div class="input-field baggy-add-tag" style="display: none">
