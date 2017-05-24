@@ -127,13 +127,13 @@ class FirefoxControllerTest extends WallabagCoreTestCase
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
             ->findByUrlAndUserId(
-                'http://stackoverflow.com/questions/15017163/parser-for-exported-bookmarks-html-file-of-google-chrome-and-mozilla-in-java',
+                'https://stackoverflow.com/questions/15017163/parser-for-exported-bookmarks-html-file-of-google-chrome-and-mozilla-in-java',
                 $this->getLoggedInUserId()
             );
 
-        $this->assertNotEmpty($content->getMimetype(), 'Mimetype for http://stackoverflow.com is ok');
-        $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for http://stackoverflow.com is ok');
-        $this->assertEmpty($content->getLanguage(), 'Language for http://stackoverflow.com is ok');
+        $this->assertNotEmpty($content->getMimetype(), 'Mimetype for https://stackoverflow.com is ok');
+        $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for https://stackoverflow.com is ok');
+        $this->assertEmpty($content->getLanguage(), 'Language for https://stackoverflow.com is ok');
 
         $createdAt = $content->getCreatedAt();
         $this->assertEquals('2013', $createdAt->format('Y'));
