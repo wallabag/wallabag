@@ -31,7 +31,7 @@ class ContentProxy
     }
 
     /**
-     * Fetch content using graby and hydrate given entry with results information.
+     * Fetch content using graby and hydrate given $entry with results information.
      * In case we couldn't find content, we'll try to use Open Graph data.
      *
      * We can also force the content, in case of an import from the v1 for example, so the function won't
@@ -39,7 +39,7 @@ class ContentProxy
      *
      * @param Entry  $entry   Entry to update
      * @param string $url     Url to grab content for
-     * @param array  $content An array with AT LEAST keys title, html, url, language & content_type to skip the fetchContent from the url
+     * @param array  $content An array with AT LEAST keys title, html, url to skip the fetchContent from the url
      *
      * @return Entry
      */
@@ -85,7 +85,7 @@ class ContentProxy
             try {
                 $entry->setPublishedAt(new \DateTime($content['date']));
             } catch (\Exception $e) {
-                $this->logger->warn('Error while defining date', ['e' => $e, 'url' => $url, 'date' => $content['date']]);
+                $this->logger->warning('Error while defining date', ['e' => $e, 'url' => $url, 'date' => $content['date']]);
             }
         }
 

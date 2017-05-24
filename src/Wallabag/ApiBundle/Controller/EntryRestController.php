@@ -273,6 +273,9 @@ class EntryRestController extends WallabagRestController
     /**
      * Create an entry.
      *
+     * If you want to provide the HTML content (which means wallabag won't fetch it from the url), you must provide `content`, `title` & `url` fields **non-empty**.
+     * Otherwise, content will be fetched as normal from the url and values will be overwritten.
+     *
      * @ApiDoc(
      *       parameters={
      *          {"name"="url", "dataType"="string", "required"=true, "format"="http://www.test.com/article.html", "description"="Url for the entry."},
