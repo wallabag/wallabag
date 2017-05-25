@@ -77,6 +77,7 @@ class Notification implements NotificationInterface {
     const TYPE_ADMIN = 0;
     const TYPE_USER = 1;
     const TYPE_RELEASE = 2;
+    const TYPE_SHARE = 3;
 
     public function __construct(User $user = null)
     {
