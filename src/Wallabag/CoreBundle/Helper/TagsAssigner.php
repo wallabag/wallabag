@@ -8,9 +8,8 @@ use Wallabag\CoreBundle\Repository\TagRepository;
 
 class TagsAssigner
 {
-
     /**
-     * @var TagRepository $tagRepository
+     * @var TagRepository
      */
     protected $tagRepository;
 

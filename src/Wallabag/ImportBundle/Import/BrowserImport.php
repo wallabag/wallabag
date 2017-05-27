@@ -4,7 +4,6 @@ namespace Wallabag\ImportBundle\Import;
 
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\UserBundle\Entity\User;
-use Wallabag\CoreBundle\Helper\ContentProxy;
 use Wallabag\CoreBundle\Event\EntrySavedEvent;
 
 abstract class BrowserImport extends AbstractImport

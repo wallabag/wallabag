@@ -5,7 +5,6 @@ namespace Wallabag\ImportBundle\Import;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\CoreBundle\Helper\ContentProxy;
 
 class PocketImport extends AbstractImport
 {
