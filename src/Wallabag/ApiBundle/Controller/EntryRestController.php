@@ -318,7 +318,7 @@ class EntryRestController extends WallabagRestController
 
         $tags = $request->request->get('tags', '');
         if (!empty($tags)) {
-            $this->get('wallabag_core.content_proxy')->assignTagsToEntry($entry, $tags);
+            $this->get('wallabag_core.tags_assigner')->assignTagsToEntry($entry, $tags);
         }
 
         if (!is_null($isStarred)) {
@@ -379,7 +379,7 @@ class EntryRestController extends WallabagRestController
 
         $tags = $request->request->get('tags', '');
         if (!empty($tags)) {
-            $this->get('wallabag_core.content_proxy')->assignTagsToEntry($entry, $tags);
+            $this->get('wallabag_core.tags_assigner')->assignTagsToEntry($entry, $tags);
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -497,7 +497,7 @@ class EntryRestController extends WallabagRestController
 
         $tags = $request->request->get('tags', '');
         if (!empty($tags)) {
-            $this->get('wallabag_core.content_proxy')->assignTagsToEntry($entry, $tags);
+            $this->get('wallabag_core.tags_assigner')->assignTagsToEntry($entry, $tags);
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -626,7 +626,7 @@ class EntryRestController extends WallabagRestController
             $tags = $element->tags;
 
             if (false !== $entry && !(empty($tags))) {
-                $this->get('wallabag_core.content_proxy')->assignTagsToEntry($entry, $tags);
+                $this->get('wallabag_core.tags_assigner')->assignTagsToEntry($entry, $tags);
 
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($entry);

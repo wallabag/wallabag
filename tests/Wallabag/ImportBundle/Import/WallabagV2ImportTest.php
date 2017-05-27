@@ -17,6 +17,8 @@ class WallabagV2ImportTest extends \PHPUnit_Framework_TestCase
     protected $em;
     protected $logHandler;
     protected $contentProxy;
+    protected $tagsAssigner;
+    protected $uow;
 
     private function getWallabagV2Import($unsetUser = false, $dispatched = 0)
     {
@@ -44,6 +46,10 @@ class WallabagV2ImportTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
+        $this->tagsAssigner = $this->getMockBuilder('Wallabag\CoreBundle\Helper\TagsAssigner')
+            ->disableOriginalConstructor()
+            ->getMock();
+
         $dispatcher = $this->getMockBuilder('Symfony\Component\EventDispatcher\EventDispatcher')
             ->disableOriginalConstructor()
             ->getMock();
@@ -52,7 +58,7 @@ class WallabagV2ImportTest extends \PHPUnit_Framework_TestCase
             ->expects($this->exactly($dispatched))
             ->method('dispatch');
 
-        $wallabag = new WallabagV2Import($this->em, $this->contentProxy, $dispatcher);
+        $wallabag = new WallabagV2Import($this->em, $this->contentProxy, $this->tagsAssigner, $dispatcher);
 
         $this->logHandler = new TestHandler();
         $logger = new Logger('test', [$this->logHandler]);

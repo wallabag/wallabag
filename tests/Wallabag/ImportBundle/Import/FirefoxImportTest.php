@@ -17,6 +17,7 @@ class FirefoxImportTest extends \PHPUnit_Framework_TestCase
     protected $em;
     protected $logHandler;
     protected $contentProxy;
+    protected $tagsAssigner;
 
     private function getFirefoxImport($unsetUser = false, $dispatched = 0)
     {
@@ -30,6 +31,10 @@ class FirefoxImportTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
+        $this->tagsAssigner = $this->getMockBuilder('Wallabag\CoreBundle\Helper\TagsAssigner')
+            ->disableOriginalConstructor()
+            ->getMock();
+
         $dispatcher = $this->getMockBuilder('Symfony\Component\EventDispatcher\EventDispatcher')
             ->disableOriginalConstructor()
             ->getMock();
@@ -38,7 +43,7 @@ class FirefoxImportTest extends \PHPUnit_Framework_TestCase
             ->expects($this->exactly($dispatched))
             ->method('dispatch');
 
-        $wallabag = new FirefoxImport($this->em, $this->contentProxy, $dispatcher);
+        $wallabag = new FirefoxImport($this->em, $this->contentProxy, $this->tagsAssigner, $dispatcher);
 
         $this->logHandler = new TestHandler();
         $logger = new Logger('test', [$this->logHandler]);

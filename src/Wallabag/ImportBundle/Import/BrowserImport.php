@@ -205,7 +205,7 @@ abstract class BrowserImport extends AbstractImport
         $entry = $this->fetchContent($entry, $data['url'], $data);
 
         if (array_key_exists('tags', $data)) {
-            $this->contentProxy->assignTagsToEntry(
+            $this->tagsAssigner->assignTagsToEntry(
                 $entry,
                 $data['tags']
             );
