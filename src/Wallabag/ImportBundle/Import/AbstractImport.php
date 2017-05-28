@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManager;
 use Wallabag\CoreBundle\Helper\ContentProxy;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
+use Wallabag\CoreBundle\Helper\TagsAssigner;
 use Wallabag\UserBundle\Entity\User;
 use OldSound\RabbitMqBundle\RabbitMq\ProducerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -18,6 +19,7 @@ abstract class AbstractImport implements ImportInterface
     protected $em;
     protected $logger;
     protected $contentProxy;
+    protected $tagsAssigner;
     protected $eventDispatcher;
     protected $producer;
     protected $user;
@@ -26,11 +28,12 @@ abstract class AbstractImport implements ImportInterface
     protected $importedEntries = 0;
     protected $queuedEntries = 0;
 
-    public function __construct(EntityManager $em, ContentProxy $contentProxy, EventDispatcherInterface $eventDispatcher)
+    public function __construct(EntityManager $em, ContentProxy $contentProxy, TagsAssigner $tagsAssigner, EventDispatcherInterface $eventDispatcher)
     {
         $this->em = $em;
         $this->logger = new NullLogger();
         $this->contentProxy = $contentProxy;
+        $this->tagsAssigner = $tagsAssigner;
         $this->eventDispatcher = $eventDispatcher;
     }
 

@@ -23,6 +23,8 @@ class PocketImportTest extends \PHPUnit_Framework_TestCase
     protected $em;
     protected $contentProxy;
     protected $logHandler;
+    protected $tagsAssigner;
+    protected $uow;
 
     private function getPocketImport($consumerKey = 'ConsumerKey', $dispatched = 0)
     {
@@ -34,6 +36,10 @@ class PocketImportTest extends \PHPUnit_Framework_TestCase
         $this->user->setConfig($config);
 
         $this->contentProxy = $this->getMockBuilder('Wallabag\CoreBundle\Helper\ContentProxy')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->tagsAssigner = $this->getMockBuilder('Wallabag\CoreBundle\Helper\TagsAssigner')
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -63,7 +69,7 @@ class PocketImportTest extends \PHPUnit_Framework_TestCase
             ->expects($this->exactly($dispatched))
             ->method('dispatch');
 
-        $pocket = new PocketImport($this->em, $this->contentProxy, $dispatcher);
+        $pocket = new PocketImport($this->em, $this->contentProxy, $this->tagsAssigner, $dispatcher);
         $pocket->setUser($this->user);
 
         $this->logHandler = new TestHandler();

@@ -4,7 +4,6 @@ namespace Wallabag\ImportBundle\Import;
 
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\UserBundle\Entity\User;
-use Wallabag\CoreBundle\Helper\ContentProxy;
 use Wallabag\CoreBundle\Event\EntrySavedEvent;
 
 abstract class BrowserImport extends AbstractImport
@@ -205,7 +204,7 @@ abstract class BrowserImport extends AbstractImport
         $entry = $this->fetchContent($entry, $data['url'], $data);
 
         if (array_key_exists('tags', $data)) {
-            $this->contentProxy->assignTagsToEntry(
+            $this->tagsAssigner->assignTagsToEntry(
                 $entry,
                 $data['tags']
             );

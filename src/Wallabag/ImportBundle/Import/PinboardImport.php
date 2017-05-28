@@ -112,7 +112,7 @@ class PinboardImport extends AbstractImport
         $entry = $this->fetchContent($entry, $data['url'], $data);
 
         if (!empty($data['tags'])) {
-            $this->contentProxy->assignTagsToEntry(
+            $this->tagsAssigner->assignTagsToEntry(
                 $entry,
                 $data['tags'],
                 $this->em->getUnitOfWork()->getScheduledEntityInsertions()

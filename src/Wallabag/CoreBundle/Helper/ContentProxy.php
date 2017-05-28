@@ -5,9 +5,7 @@ namespace Wallabag\CoreBundle\Helper;
 use Graby\Graby;
 use Psr\Log\LoggerInterface;
 use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Tools\Utils;
-use Wallabag\CoreBundle\Repository\TagRepository;
 use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeExtensionGuesser;
 
 /**
@@ -19,16 +17,15 @@ class ContentProxy
     protected $graby;
     protected $tagger;
     protected $logger;
-    protected $tagRepository;
     protected $mimeGuesser;
     protected $fetchingErrorMessage;
+    protected $eventDispatcher;
 
-    public function __construct(Graby $graby, RuleBasedTagger $tagger, TagRepository $tagRepository, LoggerInterface $logger, $fetchingErrorMessage)
+    public function __construct(Graby $graby, RuleBasedTagger $tagger, LoggerInterface $logger, $fetchingErrorMessage)
     {
         $this->graby = $graby;
         $this->tagger = $tagger;
         $this->logger = $logger;
-        $this->tagRepository = $tagRepository;
         $this->mimeGuesser = new MimeTypeExtensionGuesser();
         $this->fetchingErrorMessage = $fetchingErrorMessage;
     }
@@ -119,54 +116,6 @@ class ContentProxy
         }
 
         return $entry;
-    }
-
-    /**
-     * Assign some tags to an entry.
-     *
-     * @param Entry        $entry
-     * @param array|string $tags          An array of tag or a string coma separated of tag
-     * @param array        $entitiesReady Entities from the EntityManager which are persisted but not yet flushed
-     *                                    It is mostly to fix duplicate tag on import @see http://stackoverflow.com/a/7879164/569101
-     */
-    public function assignTagsToEntry(Entry $entry, $tags, array $entitiesReady = [])
-    {
-        if (!is_array($tags)) {
-            $tags = explode(',', $tags);
-        }
-
-        // keeps only Tag entity from the "not yet flushed entities"
-        $tagsNotYetFlushed = [];
-        foreach ($entitiesReady as $entity) {
-            if ($entity instanceof Tag) {
-                $tagsNotYetFlushed[$entity->getLabel()] = $entity;
-            }
-        }
-
-        foreach ($tags as $label) {
-            $label = trim($label);
-
-            // avoid empty tag
-            if (0 === strlen($label)) {
-                continue;
-            }
-
-            if (isset($tagsNotYetFlushed[$label])) {
-                $tagEntity = $tagsNotYetFlushed[$label];
-            } else {
-                $tagEntity = $this->tagRepository->findOneByLabel($label);
-
-                if (is_null($tagEntity)) {
-                    $tagEntity = new Tag();
-                    $tagEntity->setLabel($label);
-                }
-            }
-
-            // only add the tag on the entry if the relation doesn't exist
-            if (false === $entry->getTags()->contains($tagEntity)) {
-                $entry->addTag($tagEntity);
-            }
-        }
     }
 
     /**

@@ -89,9 +89,13 @@ services:
         arguments:
             - "@wallabag_core.graby"
             - "@wallabag_core.rule_based_tagger"
-            - "@wallabag_core.tag_repository"
             - "@logger"
             - '%wallabag_core.fetching_error_message%'
+
+    wallabag_core.tags_assigner:
+        class: Wallabag\CoreBundle\Helper\TagsAssigner
+        arguments:
+            - "@wallabag_core.tag_repository"
 
     wallabag_core.rule_based_tagger:
         class: Wallabag\CoreBundle\Helper\RuleBasedTagger

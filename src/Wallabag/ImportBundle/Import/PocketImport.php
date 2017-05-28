@@ -5,7 +5,6 @@ namespace Wallabag\ImportBundle\Import;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\CoreBundle\Helper\ContentProxy;
 
 class PocketImport extends AbstractImport
 {
@@ -216,7 +215,7 @@ class PocketImport extends AbstractImport
         }
 
         if (isset($importedEntry['tags']) && !empty($importedEntry['tags'])) {
-            $this->contentProxy->assignTagsToEntry(
+            $this->tagsAssigner->assignTagsToEntry(
                 $entry,
                 array_keys($importedEntry['tags']),
                 $this->em->getUnitOfWork()->getScheduledEntityInsertions()
