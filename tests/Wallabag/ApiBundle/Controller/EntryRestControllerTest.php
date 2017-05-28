@@ -987,6 +987,8 @@ class EntryRestControllerTest extends WallabagApiTestCase
     {
         $this->client->request('GET', '/api/entries/exists?url=http://0.0.0.0/entry2');
 
+        $this->client->request('GET', '/api/entries/exists?hashedurl=' . hash('md5', 'http://0.0.0.0/entry2'));
+
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
@@ -994,10 +996,22 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertTrue($content['exists']);
     }
 
+    public function testGetEntriesExistsWithHash()
+    {
+        $this->client->request('GET', '/api/entries/exists?hashedurl=' . hash('md5', 'http://0.0.0.0/entry2'));
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertSame(2, $content['exists']);
+    }
+
     public function testGetEntriesExistsWithManyUrls()
     {
         $url1 = 'http://0.0.0.0/entry2';
         $url2 = 'http://0.0.0.0/entry10';
+
         $this->client->request('GET', '/api/entries/exists?urls[]=' . $url1 . '&urls[]=' . $url2 . '&return_id=1');
 
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
@@ -1027,9 +1041,46 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertFalse($content[$url2]);
     }
 
+    public function testGetEntriesExistsWithManyUrlsHashed()
+    {
+        $url1 = 'http://0.0.0.0/entry2';
+        $url2 = 'http://0.0.0.0/entry10';
+        $this->client->request('GET', '/api/entries/exists?hashedurls[]='.hash('md5',$url1).'&hashedurls[]='.hash('md5',$url2) . '&return_id=1');
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertArrayHasKey($url1, $content);
+        $this->assertArrayHasKey($url2, $content);
+        $this->assertSame(2, $content[$url1]);
+        $this->assertNull($content[$url2]);
+
+        $this->assertArrayHasKey(hash('md5', $url1), $content);
+        $this->assertArrayHasKey(hash('md5', $url2), $content);
+        $this->assertEquals(2, $content[hash('md5', $url1)]);
+        $this->assertEquals(false, $content[hash('md5', $url2)]);
+    }
+
+    public function testGetEntriesExistsWithManyUrlsHashedReturnBool()
+    {
+        $url1 = 'http://0.0.0.0/entry2';
+        $url2 = 'http://0.0.0.0/entry10';
+        $this->client->request('GET', '/api/entries/exists?hashedurls[]='.hash('md5',$url1).'&hashedurls[]='.hash('md5',$url2));
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertArrayHasKey($url1, $content);
+        $this->assertArrayHasKey($url2, $content);
+        $this->assertTrue($content[$url1]);
+        $this->assertFalse($content[$url2]);
+    }
+
     public function testGetEntriesExistsWhichDoesNotExists()
     {
-        $this->client->request('GET', '/api/entries/exists?url=http://google.com/entry2');
+        $this->client->request('GET', '/api/entries/exists?hashedurl='.hash('md5','http://google.com/entry2'));
 
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
 
@@ -1040,7 +1091,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
     public function testGetEntriesExistsWithNoUrl()
     {
-        $this->client->request('GET', '/api/entries/exists?url=');
+        $this->client->request('GET', '/api/entries/exists?hashedurl=');
 
         $this->assertSame(403, $this->client->getResponse()->getStatusCode());
     }

@@ -29,6 +29,8 @@ class EntryRestController extends WallabagRestController
      *          {"name"="return_id", "dataType"="string", "required"=false, "format"="1 or 0", "description"="Set 1 if you want to retrieve ID in case entry(ies) exists, 0 by default"},
      *          {"name"="url", "dataType"="string", "required"=true, "format"="An url", "description"="Url to check if it exists"},
      *          {"name"="urls", "dataType"="string", "required"=false, "format"="An array of urls (?urls[]=http...&urls[]=http...)", "description"="Urls (as an array) to check if it exists"}
+     *          {"name"="hashedurl", "dataType"="string", "required"=true, "format"="An url", "description"="Md5 url to check if it exists"},
+     *          {"name"="hashedurls", "dataType"="string", "required"=false, "format"="An array of urls (?urls[]=http...&urls[]=http...)", "description"="Md5 urls (as an array) to check if it exists"}
      *       }
      * )
      *
@@ -41,34 +43,46 @@ class EntryRestController extends WallabagRestController
         $returnId = (null === $request->query->get('return_id')) ? false : (bool) $request->query->get('return_id');
         $urls = $request->query->get('urls', []);
 
+        $hashedUrls = $request->query->get('hashedurls', []);
+
         // handle multiple urls first
-        if (!empty($urls)) {
+        if (!empty($hashedUrls)) {
             $results = [];
-            foreach ($urls as $url) {
+            foreach ($hashedUrls as $hashedUrl) {
                 $res = $this->getDoctrine()
                     ->getRepository('WallabagCoreBundle:Entry')
-                    ->findByUrlAndUserId($url, $this->getUser()->getId());
+                    ->findOneBy([
+                        'hashedUrl' => $hashedUrl,
+                        'user' => $this->getUser()->getId(),
+                    ]);
 
-                $results[$url] = $this->returnExistInformation($res, $returnId);
+                // $results[$url] = $this->returnExistInformation($res, $returnId);
+                $results[$hashedUrl] = $this->returnExistInformation($res, $returnId);
             }
 
             return $this->sendResponse($results);
         }
 
         // let's see if it is a simple url?
-        $url = $request->query->get('url', '');
+        $hashedUrl = $request->query->get('hashedurl', '');
 
-        if (empty($url)) {
-            throw $this->createAccessDeniedException('URL is empty?, logged user id: ' . $this->getUser()->getId());
+        // if (empty($url)) {
+        //     throw $this->createAccessDeniedException('URL is empty?, logged user id: ' . $this->getUser()->getId());
+        // }
+
+        if (empty($hashedUrl)) {
+            throw $this->createAccessDeniedException('URL is empty?, logged user id: '.$this->getUser()->getId());
         }
 
         $res = $this->getDoctrine()
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findByUrlAndUserId($url, $this->getUser()->getId());
+            // ->findByUrlAndUserId($url, $this->getUser()->getId());
+            ->findOneBy([
+                'hashedUrl' => $hashedUrl,
+                'user' => $this->getUser()->getId(),
+            ]);
 
-        $exists = $this->returnExistInformation($res, $returnId);
-
-        return $this->sendResponse(['exists' => $exists]);
+        return $this->sendResponse(['exists' => $this->returnExistInformation($res, $returnId)]);
     }
 
     /**
