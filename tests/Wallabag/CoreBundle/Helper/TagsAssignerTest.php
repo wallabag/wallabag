@@ -2,21 +2,16 @@
 
 namespace Tests\Wallabag\CoreBundle\Helper;
 
-use Psr\Log\NullLogger;
-use Wallabag\CoreBundle\Helper\ContentProxy;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Helper\TagsAssigner;
 use Wallabag\UserBundle\Entity\User;
 use Wallabag\CoreBundle\Repository\TagRepository;
-use Wallabag\CoreBundle\Helper\RuleBasedTagger;
 
 class TagsAssignerTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testAssignTagsWithArrayAndExtraSpaces()
     {
-
         $tagRepo = $this->getTagRepositoryMock();
         $tagsAssigner = new TagsAssigner($tagRepo);
 
@@ -87,7 +82,6 @@ class TagsAssignerTest extends \PHPUnit_Framework_TestCase
 
     public function testAssignTagsNotFlushed()
     {
-
         $tagRepo = $this->getTagRepositoryMock();
         $tagRepo->expects($this->never())
             ->method('__call');
