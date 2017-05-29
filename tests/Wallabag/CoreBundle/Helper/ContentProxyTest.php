@@ -226,7 +226,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
                 'authors' => ['Jeremy', 'Nico', 'Thomas'],
                 'all_headers' => [
                     'Cache-Control' => 'no-cache',
-                ]
+                ],
             ]
         );
 
@@ -342,11 +342,11 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
         return [
             'script and comment' => [
                 '<strong>Script inside:</strong> <!--[if gte IE 4]><script>alert(\'lol\');</script><![endif]--><br />',
-                'lol'
+                'lol',
             ],
             'script' => [
                 '<strong>Script inside:</strong><script>alert(\'lol\');</script>',
-                'script'
+                'script',
             ],
         ];
     }
