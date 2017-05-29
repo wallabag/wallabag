@@ -182,6 +182,23 @@ a.original:not(.waves-effect) {
   ul.tools-list {
     display: none;
   }
+
+  .preview {
+    float: left;
+    width: 90px;
+    height: 50px;
+
+    img {
+      max-height: 50px;
+      padding-right: 10px;
+      width: 80px;
+    }
+  }
+
+  .domain,
+  .footer {
+    font-size: 12px;
+  }
 }
 
 .quickstart .card .card-action a,

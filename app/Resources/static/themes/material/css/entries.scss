@@ -2,6 +2,15 @@
  * Entries
  * ========================================================================== */
 
+.collection {
+  margin: 15px 15px 0;
+
+  .collection-item {
+    padding: 7px;
+    height: 65px;
+  }
+}
+
 .results {
   height: 1em;
 
