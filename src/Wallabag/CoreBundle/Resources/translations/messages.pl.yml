@@ -110,7 +110,7 @@ config:
         annotations: Usuń WSZYSTKIE adnotacje
         tags: Usuń WSZYSTKIE tagi
         entries: usuń WSZYTSTKIE wpisy
-        # archived: Remove ALL archived entries
+        archived: usuń WSZYSTKIE zarchiwizowane wpisy
         confirm: Jesteś pewien? (tej operacji NIE MOŻNA cofnąć)
     form_password:
         description: "Tutaj możesz zmienić swoje hasło. Twoje nowe hasło powinno mieć conajmniej 8 znaków."
@@ -155,7 +155,7 @@ config:
                 or: 'Jedna reguła LUB inna'
                 and: 'Jedna reguła I inna'
                 matches: 'Sprawdź czy <i>temat</i> pasuje <i>szukaj</i> (duże lub małe litery).<br />Przykład: <code>tytuł zawiera "piłka nożna"</code>'
-                # notmatches: 'Tests that a <i>subject</i> is not matches a <i>search</i> (case-insensitive).<br />Example: <code>title notmatches "football"</code>'
+                notmatches: 'Sprawdź czy <i>temat</i> nie zawiera <i>szukaj</i> (duże lub małe litery).<br />Przykład: <code>tytuł nie zawiera "piłka nożna"</code>'
 
 entry:
     page_titles:
@@ -225,8 +225,8 @@ entry:
         original_article: 'oryginalny'
         annotations_on_the_entry: '{0} Nie ma adnotacji |{1} Jedna adnotacja |]1,Inf[ %count% adnotacji'
         created_at: 'Czas stworzenia'
-        # published_at: 'Publication date'
-        # published_by: 'Published by'
+        published_at: 'Data publikacji'
+        published_by: 'Opublikowane przez'
     new:
         page_title: 'Zapisz nowy wpis'
         placeholder: 'http://website.com'
@@ -242,8 +242,8 @@ entry:
     public:
         shared_by_wallabag: "Ten artykuł został udostępniony przez <a href='%wallabag_instance%'>wallabag</a>"
     confirm:
-        # delete: "Are you sure you want to remove that article?"
-        # delete_tag: "Are you sure you want to remove that tag from that article?"
+        delete: "Czy jesteś pewien, że chcesz usunąć ten artykuł?"
+        delete_tag: "Czy jesteś pewien, że chcesz usunąć ten tag, z tego artykułu?"
 
 about:
     page_title: 'O nas'
@@ -517,7 +517,7 @@ user:
         delete_confirm: Jesteś pewien?
         back_to_list: Powrót do listy
     search:
-        # placeholder: Filter by username or email
+        placeholder: Filtruj po nazwie użytkownika lub adresie e-mail
 
 error:
     page_title: Wystąpił błąd
@@ -536,7 +536,7 @@ flashes:
             annotations_reset: Zresetuj adnotacje
             tags_reset: Zresetuj tagi
             entries_reset: Zresetuj wpisy
-            # archived_reset: Archived entries deleted
+            archived_reset: Zarchiwizowane wpisy usunięte
     entry:
         notice:
             entry_already_saved: 'Wpis już został dodany %date%'
