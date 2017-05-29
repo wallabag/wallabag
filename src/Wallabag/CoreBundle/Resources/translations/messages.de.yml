@@ -110,7 +110,7 @@ config:
         annotations: Entferne ALLE Annotationen
         tags: Entferne ALLE Tags
         entries: Entferne ALLE Einträge
-        # archived: Remove ALL archived entries
+        archived: Entferne ALLE archivierten Einträge
         confirm: Bist du wirklich sicher? (DIES KANN NICHT RÜCKGÄNGIG GEMACHT WERDEN)
     form_password:
         description: "Hier kannst du dein Kennwort ändern. Dieses sollte mindestens acht Zeichen enthalten."
@@ -155,7 +155,7 @@ config:
                 or: 'Eine Regel ODER die andere'
                 and: 'Eine Regel UND eine andere'
                 matches: 'Testet, ob eine <i>Variable</i> auf eine <i>Suche</i> zutrifft (Groß- und Kleinschreibung wird nicht berücksichtigt).<br />Beispiel: <code>title matches "Fußball"</code>'
-                # notmatches: 'Tests that a <i>subject</i> is not matches a <i>search</i> (case-insensitive).<br />Example: <code>title notmatches "football"</code>'
+                notmatches: 'Testet, ob ein <i>Titel</i> nicht auf eine <i>Suche</i> zutrifft (Groß- und Kleinschreibung wird nicht berücksichtigt).<br />Beispiel: <code>title notmatches "Fußball"</code>'
 
 entry:
     page_titles:
@@ -225,8 +225,8 @@ entry:
         original_article: 'original'
         annotations_on_the_entry: '{0} Keine Anmerkungen|{1} Eine Anmerkung|]1,Inf[ %count% Anmerkungen'
         created_at: 'Erstellungsdatum'
-        # published_at: 'Publication date'
-        # published_by: 'Published by'
+        published_at: 'Erscheinungsdatum'
+        published_by: 'Veröffentlicht von'
     new:
         page_title: 'Neuen Artikel speichern'
         placeholder: 'https://website.de'
@@ -242,8 +242,8 @@ entry:
     public:
         shared_by_wallabag: "Dieser Artikel wurde mittels <a href='%wallabag_instance%'>wallabag</a> geteilt"
     confirm:
-        # delete: "Are you sure you want to remove that article?"
-        # delete_tag: "Are you sure you want to remove that tag from that article?"
+        delete: "Bist du sicher, dass du diesen Artikel löschen möchtest?"
+        delete_tag: "Bist du sicher, dass du diesen Tag vom Artikel entfernen möchtest?"
 
 about:
     page_title: 'Über'
@@ -517,7 +517,7 @@ user:
         delete_confirm: Bist du sicher?
         back_to_list: Zurück zur Liste
     search:
-        # placeholder: Filter by username or email
+        placeholder: Filtere nach Benutzer oder E-Mail-Adresse
 
 error:
     page_title: Ein Fehler ist aufgetreten
@@ -536,7 +536,7 @@ flashes:
             annotations_reset: Anmerkungen zurücksetzen
             tags_reset: Tags zurücksetzen
             entries_reset: Einträge zurücksetzen
-            # archived_reset: Archived entries deleted
+            archived_reset: Archiverte Einträge zurücksetzen
     entry:
         notice:
             entry_already_saved: 'Eintrag bereits am %date% gespeichert'
