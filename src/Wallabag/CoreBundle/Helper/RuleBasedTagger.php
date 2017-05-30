@@ -15,6 +15,7 @@ class RuleBasedTagger
     private $rulerz;
     private $tagRepository;
     private $entryRepository;
+    private $logger;
 
     public function __construct(RulerZ $rulerz, TagRepository $tagRepository, EntryRepository $entryRepository, LoggerInterface $logger)
     {

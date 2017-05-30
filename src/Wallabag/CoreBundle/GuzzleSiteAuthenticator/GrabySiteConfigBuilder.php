@@ -38,13 +38,7 @@ class GrabySiteConfigBuilder implements SiteConfigBuilder
     }
 
     /**
-     * Builds the SiteConfig for a host.
-     *
-     * @param string $host The "www." prefix is ignored
-     *
-     * @return SiteConfig
-     *
-     * @throws OutOfRangeException If there is no config for $host
+     * {@inheritdoc}
      */
     public function buildForHost($host)
     {
