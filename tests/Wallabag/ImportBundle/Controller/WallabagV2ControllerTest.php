@@ -138,6 +138,7 @@ class WallabagV2ControllerTest extends WallabagCoreTestCase
         $this->assertEquals(3, count($content->getTags()));
         $this->assertInstanceOf(\DateTime::class, $content->getCreatedAt());
         $this->assertEquals('2016-09-08', $content->getCreatedAt()->format('Y-m-d'));
+        $this->assertTrue($content->isStarred(), 'Entry is starred');
     }
 
     public function testImportWallabagWithEmptyFile()
