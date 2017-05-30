@@ -7,12 +7,12 @@ class WallabagV1Import extends WallabagImport
     protected $fetchingErrorMessage;
     protected $fetchingErrorMessageTitle;
 
-    public function __construct($em, $contentProxy, $eventDispatcher, $fetchingErrorMessageTitle, $fetchingErrorMessage)
+    public function __construct($em, $contentProxy, $tagsAssigner, $eventDispatcher, $fetchingErrorMessageTitle, $fetchingErrorMessage)
     {
         $this->fetchingErrorMessageTitle = $fetchingErrorMessageTitle;
         $this->fetchingErrorMessage = $fetchingErrorMessage;
 
-        parent::__construct($em, $contentProxy, $eventDispatcher);
+        parent::__construct($em, $contentProxy, $tagsAssigner, $eventDispatcher);
     }
 
     /**

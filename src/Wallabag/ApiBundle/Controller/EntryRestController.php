@@ -231,7 +231,6 @@ class EntryRestController extends WallabagRestController
         $this->validateAuthentication();
 
         $urls = json_decode($request->query->get('urls', []));
-        $results = [];
 
         $limit = $this->container->getParameter('wallabag_core.api_limit_mass_actions');
 
@@ -239,32 +238,34 @@ class EntryRestController extends WallabagRestController
             throw new HttpException(400, 'API limit reached');
         }
 
+        $results = [];
+        if (empty($urls)) {
+            return $this->sendResponse($results);
+        }
+
         // handle multiple urls
-        if (!empty($urls)) {
-            foreach ($urls as $key => $url) {
-                $entry = $this->get('wallabag_core.entry_repository')->findByUrlAndUserId(
-                    $url,
-                    $this->getUser()->getId()
-                );
+        foreach ($urls as $key => $url) {
+            $entry = $this->get('wallabag_core.entry_repository')->findByUrlAndUserId(
+                $url,
+                $this->getUser()->getId()
+            );
 
-                $results[$key]['url'] = $url;
+            $results[$key]['url'] = $url;
 
-                if (false === $entry) {
-                    $entry = $this->get('wallabag_core.content_proxy')->updateEntry(
-                        new Entry($this->getUser()),
-                        $url
-                    );
-                }
+            if (false === $entry) {
+                $entry = new Entry($this->getUser());
 
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($entry);
-                $em->flush();
-
-                $results[$key]['entry'] = $entry instanceof Entry ? $entry->getId() : false;
-
-                // entry saved, dispatch event about it!
-                $this->get('event_dispatcher')->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
+                $this->get('wallabag_core.content_proxy')->updateEntry($entry, $url);
             }
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($entry);
+            $em->flush();
+
+            $results[$key]['entry'] = $entry instanceof Entry ? $entry->getId() : false;
+
+            // entry saved, dispatch event about it!
+            $this->get('event_dispatcher')->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
         }
 
         return $this->sendResponse($results);

@@ -24,7 +24,7 @@ abstract class AbstractImport implements ImportInterface
     protected $producer;
     protected $user;
     protected $markAsRead;
-    protected $disableContentUpdate;
+    protected $disableContentUpdate = false;
     protected $skippedEntries = 0;
     protected $importedEntries = 0;
     protected $queuedEntries = 0;
@@ -115,6 +115,9 @@ abstract class AbstractImport implements ImportInterface
      */
     protected function fetchContent(Entry $entry, $url, array $content = [])
     {
+        // be sure to set at least the given url
+        $content['url'] = isset($content['url']) ? $content['url'] : $url;
+
         try {
             $this->contentProxy->importEntry($entry, $content, $this->disableContentUpdate);
         } catch (\Exception $e) {

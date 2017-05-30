@@ -3,6 +3,8 @@
 namespace Tests\Wallabag\CoreBundle\Helper;
 
 use Psr\Log\NullLogger;
+use Monolog\Logger;
+use Monolog\Handler\TestHandler;
 use Wallabag\CoreBundle\Helper\ContentProxy;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
@@ -197,7 +199,8 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
             ]);
 
         $proxy = new ContentProxy($graby, $tagger, $this->getLogger(), $this->fetchingErrorMessage);
-        $entry = $proxy->updateEntry(new Entry(new User()), 'http://0.0.0.0');
+        $entry = new Entry(new User());
+        $proxy->updateEntry($entry, 'http://0.0.0.0');
 
         $this->assertEquals('http://1.1.1.1', $entry->getUrl());
         $this->assertEquals('this is my title', $entry->getTitle());
@@ -255,7 +258,10 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
         $tagger->expects($this->once())
             ->method('tag');
 
-        $proxy = new ContentProxy((new Graby()), $tagger, $this->getLogger(), $this->fetchingErrorMessage);
+        $logHandler = new TestHandler();
+        $logger = new Logger('test', array($logHandler));
+
+        $proxy = new ContentProxy((new Graby()), $tagger, $logger, $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->importEntry(
             $entry,

@@ -34,12 +34,16 @@ class ContentProxy
     /**
      * Update existing entry by fetching from URL using Graby.
      *
-     * @param Entry  $entry   Entry to update
-     * @param string $url     Url to grab content for
+     * @param Entry  $entry Entry to update
+     * @param string $url   Url to grab content for
      */
     public function updateEntry(Entry $entry, $url)
     {
         $content = $this->graby->fetchContent($url);
+
+        // be sure to keep the url in case of error
+        // so we'll be able to refetch it in the future
+        $content['url'] = $content['url'] ?: $url;
 
         $this->stockEntry($entry, $content);
     }
@@ -53,7 +57,14 @@ class ContentProxy
      */
     public function importEntry(Entry $entry, array $content, $disableContentUpdate = false)
     {
-        $this->validateContent($content);
+        try {
+            $this->validateContent($content);
+        } catch (\Exception $e) {
+            // validation failed but do we want to disable updating content?
+            if (true === $disableContentUpdate) {
+                throw $e;
+            }
+        }
 
         if (false === $disableContentUpdate) {
             try {
@@ -79,8 +90,8 @@ class ContentProxy
      * Stock entry with fetched or imported content.
      * Will fall back to OpenGraph data if available.
      *
-     * @param Entry  $entry   Entry to stock
-     * @param array  $content Array with at least title and URL
+     * @param Entry $entry   Entry to stock
+     * @param array $content Array with at least title and URL
      */
     private function stockEntry(Entry $entry, array $content)
     {
@@ -162,15 +173,15 @@ class ContentProxy
      */
     private function validateContent(array $content)
     {
-        if (!empty($content['title']))) {
+        if (empty($content['title'])) {
             throw new Exception('Missing title from imported entry!');
         }
 
-        if (!empty($content['url']))) {
+        if (empty($content['url'])) {
             throw new Exception('Missing URL from imported entry!');
         }
 
-        if (!empty($content['html']))) {
+        if (empty($content['html'])) {
             throw new Exception('Missing html from imported entry!');
         }
     }
