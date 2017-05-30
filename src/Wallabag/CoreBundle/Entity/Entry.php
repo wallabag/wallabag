@@ -550,7 +550,7 @@ class Entry
     }
 
     /**
-     * @return array<Tag>
+     * @return ArrayCollection
      */
     public function getTags()
     {
