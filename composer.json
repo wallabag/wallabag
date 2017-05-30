@@ -63,7 +63,7 @@
         "willdurand/hateoas-bundle": "~1.0",
         "liip/theme-bundle": "~1.1",
         "lexik/form-filter-bundle": "~5.0",
-        "j0k3r/graby": "dev-extractor",
+        "j0k3r/graby": "^1.0",
         "friendsofsymfony/user-bundle": "^2.0",
         "friendsofsymfony/oauth-server-bundle": "^1.5",
         "stof/doctrine-extensions-bundle": "^1.2",
