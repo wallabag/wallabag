@@ -49,12 +49,24 @@ class UserRestControllerTest extends WallabagApiTestCase
         $this->assertEquals('google', $content['username']);
 
         $this->assertEquals('application/json', $this->client->getResponse()->headers->get('Content-Type'));
+
+        // remove the created user to avoid side effect on other tests
+        // @todo remove these lines when test will be isolated
+        $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+
+        $query = $em->createQuery('DELETE FROM Wallabag\CoreBundle\Entity\Config c WHERE c.user = :user_id');
+        $query->setParameter('user_id', $content['id']);
+        $query->execute();
+
+        $query = $em->createQuery('DELETE FROM Wallabag\UserBundle\Entity\User u WHERE u.id = :id');
+        $query->setParameter('id', $content['id']);
+        $query->execute();
     }
 
     public function testCreateNewUserWithExistingEmail()
     {
         $this->client->request('PUT', '/api/user.json', [
-            'username' => 'google',
+            'username' => 'admin',
             'password' => 'googlegoogle',
             'email' => 'bigboss@wallabag.org',
         ]);
