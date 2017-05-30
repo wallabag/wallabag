@@ -88,7 +88,7 @@ abstract class AbstractImport implements ImportInterface
     /**
      * Set whether articles should be fetched for updated content.
      *
-     * @param bool $markAsRead
+     * @param bool $disableContentUpdate
      */
     public function setDisableContentUpdate($disableContentUpdate)
     {
@@ -104,7 +104,6 @@ abstract class AbstractImport implements ImportInterface
     {
         return $this->disableContentUpdate;
     }
-
 
     /**
      * Fetch content from the ContentProxy (using graby).
