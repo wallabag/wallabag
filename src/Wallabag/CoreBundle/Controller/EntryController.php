@@ -15,6 +15,7 @@ use Wallabag\CoreBundle\Form\Type\EditEntryType;
 use Wallabag\CoreBundle\Form\Type\NewEntryType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Wallabag\CoreBundle\Event\EntrySavedEvent;
+use Wallabag\CoreBundle\Event\EntryDeletedEvent;
 use Wallabag\CoreBundle\Form\Type\SearchEntryType;
 
 class EntryController extends Controller
@@ -485,6 +486,9 @@ class EntryController extends Controller
             ['id' => $entry->getId()],
             UrlGeneratorInterface::ABSOLUTE_PATH
         );
+
+        // entry deleted, dispatch event about it!
+        $this->get('event_dispatcher')->dispatch(EntryDeletedEvent::NAME, new EntryDeletedEvent($entry));
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($entry);

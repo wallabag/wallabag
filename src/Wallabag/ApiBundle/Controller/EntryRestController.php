@@ -14,6 +14,7 @@ use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Event\EntrySavedEvent;
 use Wallabag\CoreBundle\Event\EntryTaggedEvent;
 use Wallabag\CoreBundle\Event\EntryUpdatedEvent;
+use Wallabag\CoreBundle\Event\EntryDeletedEvent;
 
 class EntryRestController extends WallabagRestController
 {
