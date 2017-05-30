@@ -242,8 +242,8 @@ entry:
     public:
         # shared_by_wallabag: "This article has been shared by <a href='%wallabag_instance%'>wallabag</a>"
     confirm:
-        # delete: "Are you sure you want to remove that article?"
-        # delete_tag: "Are you sure you want to remove that tag from that article?"
+        delete: "Vuoi veramente rimuovere quell'articolo?"
+        delete_tag: "Vuoi veramente rimuovere quell'etichetta da quell'articolo?"
 
 about:
     page_title: 'About'
