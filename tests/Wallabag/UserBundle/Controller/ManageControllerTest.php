@@ -30,8 +30,8 @@ class ManageControllerTest extends WallabagCoreTestCase
         $form = $crawler->selectButton('user.form.save')->form(array(
             'new_user[username]' => 'test_user',
             'new_user[email]' => 'test@test.io',
-            'new_user[plainPassword][first]' => 'test',
-            'new_user[plainPassword][second]' => 'test',
+            'new_user[plainPassword][first]' => 'testtest',
+            'new_user[plainPassword][second]' => 'testtest',
         ));
 
         $client->submit($form);
