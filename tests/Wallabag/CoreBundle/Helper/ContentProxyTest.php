@@ -250,7 +250,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
         $tagger->expects($this->once())
             ->method('tag');
 
-        $proxy = new ContentProxy((new Graby()), $tagger, $this->getTagRepositoryMock(), $this->getLogger(), $this->fetchingErrorMessage);
+        $proxy = new ContentProxy((new Graby()), $tagger, $this->getLogger(), $this->fetchingErrorMessage);
         $entry = $proxy->updateEntry(
             new Entry(new User()),
             'http://0.0.0.0',
@@ -284,7 +284,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
         $handler = new TestHandler();
         $logger->pushHandler($handler);
 
-        $proxy = new ContentProxy((new Graby()), $tagger, $this->getTagRepositoryMock(), $logger, $this->fetchingErrorMessage);
+        $proxy = new ContentProxy((new Graby()), $tagger, $logger, $this->fetchingErrorMessage);
         $entry = $proxy->updateEntry(
             new Entry(new User()),
             'http://0.0.0.0',
