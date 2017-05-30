@@ -33,9 +33,7 @@ class ManageController extends Controller
         // enable created user by default
         $user->setEnabled(true);
 
-        $form = $this->createForm('Wallabag\UserBundle\Form\NewUserType', $user, [
-            'validation_groups' => ['Profile'],
-        ]);
+        $form = $this->createForm('Wallabag\UserBundle\Form\NewUserType', $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
