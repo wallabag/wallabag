@@ -5,7 +5,6 @@ namespace Wallabag\CoreBundle\GuzzleSiteAuthenticator;
 use BD\GuzzleSiteAuthenticator\SiteConfig\SiteConfig;
 use BD\GuzzleSiteAuthenticator\SiteConfig\SiteConfigBuilder;
 use Graby\SiteConfig\ConfigBuilder;
-use OutOfRangeException;
 use Psr\Log\LoggerInterface;
 
 class GrabySiteConfigBuilder implements SiteConfigBuilder
