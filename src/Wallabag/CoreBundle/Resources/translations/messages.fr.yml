@@ -204,7 +204,7 @@ entry:
             back_to_top: "Revenir en haut"
             back_to_homepage: "Retour"
             set_as_read: "Marquer comme lu"
-            set_as_unread: "Marquer comme non lu"
+            set_as_unread: "Marq. comme non lu"
             set_as_starred: "Mettre en favori"
             view_original_article: "Article original"
             re_fetch_content: "Recharger le contenu"
