@@ -24,9 +24,9 @@
     </div>
 
     <br />
-    <ul class="row data">
+    <ul class="{% if listMode == 1 %}collection{% else %}row data{% endif %}">
         {% for entry in entries %}
-            <li id="entry-{{ entry.id|e }}" class="col {% if listMode == 0 %}l3 m6{% endif %} s12">
+            <li id="entry-{{ entry.id|e }}" class="col {% if listMode == 0 %}l3 m6{% else %}collection-item{% endif %} s12">
                 {% if listMode == 1 %}
                     {% include "@WallabagCore/themes/material/Entry/_card_list.html.twig" with {'entry': entry} only %}
                 {% elseif entry.previewPicture is null %}

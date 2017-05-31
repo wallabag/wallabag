@@ -175,13 +175,64 @@ a.original:not(.waves-effect) {
 }
 
 .card-stacked {
+  display: flex;
+  flex-flow: row wrap;
+
   &:hover ul.tools-list {
-    display: block;
+    display: inline;
+    text-align: right;
+  }
+
+  .preview {
+    max-width: 100px;
+    height: auto;
+    margin-right: 10px;
+    flex: 1;
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+  }
+
+  div.metadata {
+    .chip {
+      background-color: $blueAccentColor;
+      padding: 0 15px 0 10px;
+      margin: auto 2px;
+      border-radius: 6px;
+
+      a,
+      i {
+        color: #fff;
+      }
+
+      i.material-icons {
+        float: right;
+        font-size: 20px;
+        line-height: 32px;
+        padding-left: 8px;
+      }
+    }
+  }
+
+  div.card-content {
+    flex: 4;
   }
 
   ul.tools-list {
+    flex: 1;
     display: none;
+    flex-basis: 5em;
+    align-self: flex-end;
+    float: right;
+    max-width: 6em;
   }
+}
+
+#content .collection .collection-item {
+  min-height: 65px;
+  height: auto;
 }
 
 .quickstart .card .card-action a,
