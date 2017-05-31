@@ -3,6 +3,9 @@
 namespace Wallabag\ImportBundle\Import;
 
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\CoreBundle\Entity\Tag;
+
+ini_set("memory_limit", "-1");//Let's home god will forgive
 
 class InstapaperImport extends AbstractImport
 {
@@ -75,6 +78,7 @@ class InstapaperImport extends AbstractImport
                 'is_archived' => $data[3] === 'Archive' || $data[3] === 'Starred',
                 'is_starred' => $data[3] === 'Starred',
                 'html' => false,
+                'tags' => $data[4],
             ];
         }
         fclose($handle);
@@ -114,6 +118,24 @@ class InstapaperImport extends AbstractImport
         $entry = new Entry($this->user);
         $entry->setUrl($importedEntry['url']);
         $entry->setTitle($importedEntry['title']);
+
+        if ($importedEntry['tags']) {
+            foreach (explode(',', $importedEntry['tags']) as $tag) {
+                if (strlen($tag) === 0) {
+                    continue;
+                }
+                $existingTag = $this->em
+                    ->getRepository('WallabagCoreBundle:Tag')
+                    ->findOneByLabel($tag);
+
+                if ($existingTag === null) {
+                    $existingTag = new Tag();
+                    $existingTag->setLabel($tag);
+                }
+
+                $entry->addTag($existingTag);
+            }
+        }
 
         // update entry with content (in case fetching failed, the given entry will be return)
         $entry = $this->fetchContent($entry, $importedEntry['url'], $importedEntry);
