@@ -70,7 +70,7 @@ class TagController extends Controller
             $em->flush();
         }
 
-        $redirectUrl = $this->get('wallabag_core.helper.redirect')->to($request->headers->get('referer'));
+        $redirectUrl = $this->get('wallabag_core.helper.redirect')->to($request->headers->get('referer'), '', true);
 
         return $this->redirect($redirectUrl);
     }

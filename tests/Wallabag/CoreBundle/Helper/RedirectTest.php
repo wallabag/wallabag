@@ -89,4 +89,22 @@ class RedirectTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($this->routerMock->generate('homepage'), $redirectUrl);
     }
+
+    public function testUserForRedirectWithIgnoreActionMarkAsRead()
+    {
+        $this->token->getUser()->getConfig()->setActionMarkAsRead(Config::REDIRECT_TO_HOMEPAGE);
+
+        $redirectUrl = $this->redirect->to('/unread/list', '', true);
+
+        $this->assertEquals('/unread/list', $redirectUrl);
+    }
+
+    public function testUserForRedirectNullWithFallbackWithIgnoreActionMarkAsRead()
+    {
+        $this->token->getUser()->getConfig()->setActionMarkAsRead(Config::REDIRECT_TO_HOMEPAGE);
+
+        $redirectUrl = $this->redirect->to(null, 'fallback', true);
+
+        $this->assertEquals('fallback', $redirectUrl);
+    }
 }
