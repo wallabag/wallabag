@@ -134,6 +134,12 @@ class TagControllerTest extends WallabagCoreTestCase
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $this->assertEquals($entryUri, $client->getResponse()->getTargetUrl());
 
+        // re-retrieve the entry to be sure to get fresh data from database (mostly for tags)
+        $entry = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findByUrlAndUserId('http://0.0.0.0/entry1', $this->getLoggedInUserId());
+
         $this->assertNotContains($this->tagName, $entry->getTags());
 
         $client->request('GET', '/remove-tag/'.$entry->getId().'/'.$tag->getId());
