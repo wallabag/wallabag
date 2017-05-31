@@ -67,18 +67,14 @@ class InstallCommandTest extends WallabagCoreTestCase
 
         $command = $application->find('wallabag:install');
 
-        // We mock the QuestionHelper
-        $question = $this->getMockBuilder('Symfony\Component\Console\Helper\QuestionHelper')
-            ->disableOriginalConstructor()
-            ->getMock();
-        $question->expects($this->any())
-            ->method('ask')
-            ->will($this->returnValue('yes_'.uniqid('', true)));
-
-        // We override the standard helper with our mock
-        $command->getHelperSet()->set($question, 'question');
-
         $tester = new CommandTester($command);
+        $tester->setInputs([
+            'y', // dropping database
+            'y', // create super admin
+            'username_'.uniqid('', true), // username
+            'password_'.uniqid('', true), // password
+            'email_'.uniqid('', true).'@wallabag.it', // email
+        ]);
         $tester->execute([
             'command' => $command->getName(),
         ]);
@@ -97,18 +93,13 @@ class InstallCommandTest extends WallabagCoreTestCase
 
         $command = $application->find('wallabag:install');
 
-        // We mock the QuestionHelper
-        $question = $this->getMockBuilder('Symfony\Component\Console\Helper\QuestionHelper')
-            ->disableOriginalConstructor()
-            ->getMock();
-        $question->expects($this->any())
-            ->method('ask')
-            ->will($this->returnValue('yes_'.uniqid('', true)));
-
-        // We override the standard helper with our mock
-        $command->getHelperSet()->set($question, 'question');
-
         $tester = new CommandTester($command);
+        $tester->setInputs([
+            'y', // create super admin
+            'username_'.uniqid('', true), // username
+            'password_'.uniqid('', true), // password
+            'email_'.uniqid('', true).'@wallabag.it', // email
+        ]);
         $tester->execute([
             'command' => $command->getName(),
             '--reset' => true,
@@ -150,18 +141,13 @@ class InstallCommandTest extends WallabagCoreTestCase
 
         $command = $application->find('wallabag:install');
 
-        // We mock the QuestionHelper
-        $question = $this->getMockBuilder('Symfony\Component\Console\Helper\QuestionHelper')
-            ->disableOriginalConstructor()
-            ->getMock();
-        $question->expects($this->any())
-            ->method('ask')
-            ->will($this->returnValue('yes_'.uniqid('', true)));
-
-        // We override the standard helper with our mock
-        $command->getHelperSet()->set($question, 'question');
-
         $tester = new CommandTester($command);
+        $tester->setInputs([
+            'y', // create super admin
+            'username_'.uniqid('', true), // username
+            'password_'.uniqid('', true), // password
+            'email_'.uniqid('', true).'@wallabag.it', // email
+        ]);
         $tester->execute([
             'command' => $command->getName(),
         ]);
@@ -183,23 +169,12 @@ class InstallCommandTest extends WallabagCoreTestCase
 
         $command = $application->find('wallabag:install');
 
-        // We mock the QuestionHelper
-        $question = $this->getMockBuilder('Symfony\Component\Console\Helper\QuestionHelper')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $question->expects($this->exactly(3))
-            ->method('ask')
-            ->will($this->onConsecutiveCalls(
-                false, // don't want to reset the entire database
-                true, // do want to reset the schema
-                false // don't want to create a new user
-            ));
-
-        // We override the standard helper with our mock
-        $command->getHelperSet()->set($question, 'question');
-
         $tester = new CommandTester($command);
+        $tester->setInputs([
+            'n', // don't want to reset the entire database
+            'y', // do want to reset the schema
+            'n', // don't want to create a new user
+        ]);
         $tester->execute([
             'command' => $command->getName(),
         ]);
@@ -239,22 +214,11 @@ class InstallCommandTest extends WallabagCoreTestCase
 
         $command = $application->find('wallabag:install');
 
-        // We mock the QuestionHelper
-        $question = $this->getMockBuilder('Symfony\Component\Console\Helper\QuestionHelper')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $question->expects($this->exactly(2))
-            ->method('ask')
-            ->will($this->onConsecutiveCalls(
-                false, // don't want to reset the entire database
-                false // don't want to create a new user
-            ));
-
-        // We override the standard helper with our mock
-        $command->getHelperSet()->set($question, 'question');
-
         $tester = new CommandTester($command);
+        $tester->setInputs([
+            'n', // don't want to reset the entire database
+            'n', // don't want to create a new user
+        ]);
         $tester->execute([
             'command' => $command->getName(),
         ]);
@@ -275,21 +239,11 @@ class InstallCommandTest extends WallabagCoreTestCase
 
         $command = $application->find('wallabag:install');
 
-        // We mock the QuestionHelper
-        $question = $this->getMockBuilder('Symfony\Component\Console\Helper\QuestionHelper')
-            ->disableOriginalConstructor()
-            ->getMock();
-        $question->expects($this->any())
-            ->method('ask')
-            ->will($this->returnValue('yes_'.uniqid('', true)));
-
-        // We override the standard helper with our mock
-        $command->getHelperSet()->set($question, 'question');
-
         $tester = new CommandTester($command);
         $tester->execute([
             'command' => $command->getName(),
-            '--no-interaction' => true,
+        ], [
+            'interactive' => false,
         ]);
 
         $this->assertContains('Checking system requirements.', $tester->getDisplay());

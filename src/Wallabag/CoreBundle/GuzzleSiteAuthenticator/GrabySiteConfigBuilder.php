@@ -5,7 +5,6 @@ namespace Wallabag\CoreBundle\GuzzleSiteAuthenticator;
 use BD\GuzzleSiteAuthenticator\SiteConfig\SiteConfig;
 use BD\GuzzleSiteAuthenticator\SiteConfig\SiteConfigBuilder;
 use Graby\SiteConfig\ConfigBuilder;
-use OutOfRangeException;
 use Psr\Log\LoggerInterface;
 
 class GrabySiteConfigBuilder implements SiteConfigBuilder
@@ -38,13 +37,7 @@ class GrabySiteConfigBuilder implements SiteConfigBuilder
     }
 
     /**
-     * Builds the SiteConfig for a host.
-     *
-     * @param string $host The "www." prefix is ignored
-     *
-     * @return SiteConfig
-     *
-     * @throws OutOfRangeException If there is no config for $host
+     * {@inheritdoc}
      */
     public function buildForHost($host)
     {
