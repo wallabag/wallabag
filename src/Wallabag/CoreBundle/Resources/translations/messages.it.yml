@@ -24,7 +24,7 @@ menu:
         tags: 'Tags'
         internal_settings: 'Strumenti'
         import: 'Importa'
-        howto: 'How to'
+        howto: 'Come fare'
         # developer: 'API clients management'
         logout: 'Logout'
         about: 'About'
@@ -44,8 +44,8 @@ footer:
     wallabag:
         elsewhere: 'Porta wallabag con te'
         social: 'Social'
-        powered_by: 'powered by'
-        about: 'About'
+        powered_by: 'Offerto da'
+        about: 'A proposito'
     # stats: Since %user_creation% you read %nb_archives% articles. That is about %per_day% a day!
 
 config:
@@ -55,7 +55,7 @@ config:
         rss: 'RSS'
         user_info: 'Informazioni utente'
         password: 'Password'
-        rules: 'Regole di tagging'
+        rules: 'Regole di etichettatura'
         new_user: 'Aggiungi utente'
     form:
         save: 'Salva'
@@ -83,7 +83,7 @@ config:
         # help_pocket_consumer_key: "Required for Pocket import. You can create it in your Pocket account."
     form_rss:
         description: 'I feed RSS generati da wallabag ti permettono di leggere i tuoi contenuti salvati con il tuo lettore di RSS preferito. Prima, devi generare un token.'
-        token_label: 'RSS token'
+        token_label: 'Token RSS'
         no_token: 'Nessun token'
         token_create: 'Crea il tuo token'
         token_reset: 'Rigenera il tuo token'
@@ -94,10 +94,10 @@ config:
             archive: 'archiviati'
         rss_limit: 'Numero di elementi nel feed'
     form_user:
-        two_factor_description: "Abilitando la two factor authentication riceverai una e-mail con un codice per ogni nuova connesione non verificata"
+        two_factor_description: "Abilitando l'\autenticazione a due fattori riceverai una e-mail con un codice per ogni nuova connesione non verificata"
         name_label: 'Nome'
         email_label: 'E-mail'
-        twoFactorAuthentication_label: 'Two factor authentication'
+        twoFactorAuthentication_label: 'Autenticazione a due fattori'
         # help_twoFactorAuthentication: "If you enable 2FA, each time you want to login to wallabag, you'll receive a code by email."
         delete:
             # title: Delete my account (a.k.a danger zone)
@@ -119,19 +119,19 @@ config:
         repeat_new_password_label: 'Ripeti la nuova password'
     form_rules:
         if_label: 'se'
-        then_tag_as_label: 'allora tagga come'
+        then_tag_as_label: 'allora etichetta come'
         delete_rule_label: 'elimina'
         # edit_rule_label: 'edit'
         rule_label: 'Regola'
-        tags_label: 'Tag'
+        tags_label: 'Etichetta'
         faq:
             title: 'FAQ'
-            tagging_rules_definition_title: 'Cosa significa « regole di tagging » ?'
-            tagging_rules_definition_description: 'Sono regole utilizzate da wallabag per taggare automaticamente i contenuti.<br />Ogni volta che viene aggiunto un contenuto, tutte le regole di tagging rules vengono utilizzate per aggiungere i tag configurati, risparmiandoti il lavoro di classificare i contenuti manualmente.'
+            tagging_rules_definition_title: 'Cosa significa « regole di etichettatura» ?'
+            tagging_rules_definition_description: 'Sono regole utilizzate da wallabag per etichettare automaticamente i contenuti.<br />Ogni volta che viene aggiunto un contenuto, tutte le regole di etichettatura vengono utilizzate per aggiungere le etichette configurate, risparmiandoti il lavoro di classificare i contenuti manualmente.'
             how_to_use_them_title: 'Come si usano?'
-            how_to_use_them_description: 'Diciamo che vuoi taggare un contenuto come « <i>lettura veloce</i> » quando il tempo di lettura è inferiore ai 3 minuti.<br />In questo case, devi mettere « readingTime &lt;= 3 » nel campo <i>Regola</i> e « <i>lettura veloce</i> » nel campo <i>Tag</i>.<br />Molti tag si possono aggiungere contemporanemente separandoli con una virgola: « <i>lettura veloce, da leggere</i> »<br />Regole complesse possono essere scritte utilizzando gli operatori predefiniti: se « <i>readingTime &gt;= 5 AND domainName = "github.com"</i> » allora tagga « <i>lettura lunga, github </i> »'
+            how_to_use_them_description: 'Diciamo che vuoi etichettare un contenuto come « <i>lettura veloce</i> » quando il tempo di lettura è inferiore ai 3 minuti.<br />In questo case, devi mettere « readingTime &lt;= 3 » nel campo <i>Regola</i> e « <i>lettura veloce</i> » nel campo <i>Etichette</i>.<br />Molte etichette si possono aggiungere contemporanemente separandole con una virgola: « <i>lettura veloce, da leggere</i> »<br />Regole complesse possono essere scritte utilizzando gli operatori predefiniti: se « <i>readingTime &gt;= 5 AND domainName = "github.com"</i> » allora etichetta « <i>lettura lunga, github </i> »'
             variables_available_title: 'Quali operatori e variabili posso utilizzare per scrivere delle regole?'
-            variables_available_description: 'I seguenti operatori e variabili posso essere utilizzati per scrivere regole di tagging:'
+            variables_available_description: 'I seguenti operatori e variabili posso essere utilizzati per scrivere regole di etichettatura:'
             meaning: 'Significato'
             variable_description:
                 label: 'Variabile'
