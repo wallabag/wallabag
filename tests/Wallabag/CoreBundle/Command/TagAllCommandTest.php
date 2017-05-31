@@ -10,7 +10,7 @@ use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 class TagAllCommandTest extends WallabagCoreTestCase
 {
     /**
-     * @expectedException Symfony\Component\Console\Exception\RuntimeException
+     * @expectedException \Symfony\Component\Console\Exception\RuntimeException
      * @expectedExceptionMessage Not enough arguments (missing: "username")
      */
     public function testRunTagAllCommandWithoutUsername()

@@ -18,6 +18,7 @@ class InstapaperImportTest extends \PHPUnit_Framework_TestCase
     protected $logHandler;
     protected $contentProxy;
     protected $tagsAssigner;
+    protected $uow;
 
     private function getInstapaperImport($unsetUser = false, $dispatched = 0)
     {
@@ -26,6 +27,20 @@ class InstapaperImportTest extends \PHPUnit_Framework_TestCase
         $this->em = $this->getMockBuilder('Doctrine\ORM\EntityManager')
             ->disableOriginalConstructor()
             ->getMock();
+
+        $this->uow = $this->getMockBuilder('Doctrine\ORM\UnitOfWork')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->em
+            ->expects($this->any())
+            ->method('getUnitOfWork')
+            ->willReturn($this->uow);
+
+        $this->uow
+            ->expects($this->any())
+            ->method('getScheduledEntityInsertions')
+            ->willReturn([]);
 
         $this->contentProxy = $this->getMockBuilder('Wallabag\CoreBundle\Helper\ContentProxy')
             ->disableOriginalConstructor()
@@ -67,14 +82,14 @@ class InstapaperImportTest extends \PHPUnit_Framework_TestCase
 
     public function testImport()
     {
-        $instapaperImport = $this->getInstapaperImport(false, 3);
+        $instapaperImport = $this->getInstapaperImport(false, 4);
         $instapaperImport->setFilepath(__DIR__.'/../fixtures/instapaper-export.csv');
 
         $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $entryRepo->expects($this->exactly(3))
+        $entryRepo->expects($this->exactly(4))
             ->method('findByUrlAndUserId')
             ->willReturn(false);
 
@@ -88,14 +103,14 @@ class InstapaperImportTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $this->contentProxy
-            ->expects($this->exactly(3))
+            ->expects($this->exactly(4))
             ->method('updateEntry')
             ->willReturn($entry);
 
         $res = $instapaperImport->import();
 
         $this->assertTrue($res);
-        $this->assertEquals(['skipped' => 0, 'imported' => 3, 'queued' => 0], $instapaperImport->getSummary());
+        $this->assertEquals(['skipped' => 0, 'imported' => 4, 'queued' => 0], $instapaperImport->getSummary());
     }
 
     public function testImportAndMarkAllAsRead()
@@ -107,9 +122,9 @@ class InstapaperImportTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $entryRepo->expects($this->exactly(3))
+        $entryRepo->expects($this->exactly(4))
             ->method('findByUrlAndUserId')
-            ->will($this->onConsecutiveCalls(false, true, true));
+            ->will($this->onConsecutiveCalls(false, true, true, true));
 
         $this->em
             ->expects($this->any())
@@ -133,7 +148,7 @@ class InstapaperImportTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($res);
 
-        $this->assertEquals(['skipped' => 2, 'imported' => 1, 'queued' => 0], $instapaperImport->getSummary());
+        $this->assertEquals(['skipped' => 3, 'imported' => 1, 'queued' => 0], $instapaperImport->getSummary());
     }
 
     public function testImportWithRabbit()
@@ -165,7 +180,7 @@ class InstapaperImportTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $producer
-            ->expects($this->exactly(3))
+            ->expects($this->exactly(4))
             ->method('publish');
 
         $instapaperImport->setProducer($producer);
@@ -173,7 +188,7 @@ class InstapaperImportTest extends \PHPUnit_Framework_TestCase
         $res = $instapaperImport->setMarkAsRead(true)->import();
 
         $this->assertTrue($res);
-        $this->assertEquals(['skipped' => 0, 'imported' => 0, 'queued' => 3], $instapaperImport->getSummary());
+        $this->assertEquals(['skipped' => 0, 'imported' => 0, 'queued' => 4], $instapaperImport->getSummary());
     }
 
     public function testImportWithRedis()
@@ -211,7 +226,7 @@ class InstapaperImportTest extends \PHPUnit_Framework_TestCase
         $res = $instapaperImport->setMarkAsRead(true)->import();
 
         $this->assertTrue($res);
-        $this->assertEquals(['skipped' => 0, 'imported' => 0, 'queued' => 3], $instapaperImport->getSummary());
+        $this->assertEquals(['skipped' => 0, 'imported' => 0, 'queued' => 4], $instapaperImport->getSummary());
 
         $this->assertNotEmpty($redisMock->lpop('instapaper'));
     }

@@ -107,6 +107,9 @@ class InstapaperControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->followRedirect();
 
+        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
+        $this->assertContains('flashes.import.notice.summary', $body[0]);
+
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
@@ -115,14 +118,25 @@ class InstapaperControllerTest extends WallabagCoreTestCase
                 $this->getLoggedInUserId()
             );
 
-        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
-        $this->assertContains('flashes.import.notice.summary', $body[0]);
-
         $this->assertNotEmpty($content->getMimetype(), 'Mimetype for http://www.liberation.fr is ok');
         $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for http://www.liberation.fr is ok');
         $this->assertNotEmpty($content->getLanguage(), 'Language for http://www.liberation.fr is ok');
+        $this->assertContains('foot', $content->getTags(), 'It includes the "foot" tag');
         $this->assertEquals(1, count($content->getTags()));
         $this->assertInstanceOf(\DateTime::class, $content->getCreatedAt());
+
+        $content = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findByUrlAndUserId(
+                'http://www.20minutes.fr/high-tech/2077615-20170531-dis-donc-donald-trump-quoi-exactement-covfefe',
+                $this->getLoggedInUserId()
+            );
+
+        $this->assertContains('foot', $content->getTags());
+        $this->assertContains('test_tag', $content->getTags());
+
+        $this->assertEquals(2, count($content->getTags()));
     }
 
     public function testImportInstapaperWithFileAndMarkAllAsRead()
