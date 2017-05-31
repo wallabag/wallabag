@@ -108,6 +108,11 @@ config:
             description: "Si vous confirmez la suppression de votre compte, TOUS les articles, TOUS les tags, TOUTES les annotations et votre compte seront DÉFINITIVEMENT supprimé (c’est IRRÉVERSIBLE). Vous serez ensuite déconnecté."
             confirm: "Vous êtes vraiment sûr ? (C’EST IRRÉVERSIBLE)"
             button: "Supprimer mon compte"
+    form_account:
+        title: "Profil"
+        description_label: "Description de votre compte. Ce texte sera affiché sur votre page de profil."
+        avatar_label: "Avatar"
+        banner_label: "Bannière"
     reset:
         title: "Réinitialisation (attention danger !)"
         description: "En cliquant sur les boutons ci-dessous vous avez la possibilité de supprimer certaines informations de votre compte. Attention, ces actions sont IRRÉVERSIBLES !"

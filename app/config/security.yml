@@ -66,4 +66,5 @@ security:
         - { path: ^/settings, roles: ROLE_SUPER_ADMIN }
         - { path: ^/annotations, roles: ROLE_USER }
         - { path: ^/users, roles: ROLE_SUPER_ADMIN }
+        - { path: ^/profile, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/, roles: ROLE_USER }

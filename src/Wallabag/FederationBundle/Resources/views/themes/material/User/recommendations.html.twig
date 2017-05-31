@@ -1,0 +1,4 @@
+{{ dump(recommendations) }}
+{% for entry in recommendations %}
+{{ include('@WallabagCore/themes/material/Entry/_card_list.html.twig') }}
+{% endfor %}

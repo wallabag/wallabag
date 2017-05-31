@@ -15,6 +15,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Wallabag\ApiBundle\Entity\Client;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\FederationBundle\Entity\Account;
 
 /**
  * User.
@@ -129,6 +130,14 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
      */
     protected $default_client;
 
+    /**
+     * @ORM\OneToOne(targetEntity="Wallabag\FederationBundle\Entity\Account", mappedBy="user", cascade={"remove"})
+     */
+    protected $account;
+
+    /**
+     * User constructor.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -332,5 +341,23 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
     public function setNotifications($notifications)
     {
         $this->notifications = $notifications;
+    }
+
+    /**
+     * @return Account
+     */
+    public function getAccount()
+    {
+        return $this->account;
+    }
+
+    /**
+     * @param mixed $account
+     * @return User
+     */
+    public function setAccount(Account $account)
+    {
+        $this->account = $account;
+        return $this;
     }
 }

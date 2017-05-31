@@ -25,6 +25,9 @@ parameters:
 
     domain_name: https://your-wallabag-url-instance.com
 
+    # Instance URL
+    domain_name: wallabag.tld
+
     mailer_transport: smtp
     mailer_host: 127.0.0.1
     mailer_user: ~

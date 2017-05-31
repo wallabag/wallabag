@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Wallabag\UserBundle\Entity\User;
 
 /**
- * Config.
+ * config.
  *
  * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\ConfigRepository")
  * @ORM\Table(name="`config`")

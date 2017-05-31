@@ -9,12 +9,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\CoreBundle\Event\Activity\Actions\Entry\EntryEditedEvent;
+use Wallabag\CoreBundle\Event\Activity\Actions\Entry\EntryFavouriteEvent;
+use Wallabag\CoreBundle\Event\Activity\Actions\Entry\EntryReadEvent;
+use Wallabag\CoreBundle\Event\Activity\Actions\Entry\EntrySavedEvent;
 use Wallabag\CoreBundle\Form\Type\EntryFilterType;
 use Wallabag\CoreBundle\Form\Type\EditEntryType;
 use Wallabag\CoreBundle\Form\Type\NewEntryType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
-use Wallabag\CoreBundle\Event\EntrySavedEvent;
-use Wallabag\CoreBundle\Event\EntryDeletedEvent;
 use Wallabag\CoreBundle\Form\Type\SearchEntryType;
 
 class EntryController extends Controller
@@ -405,6 +407,8 @@ class EntryController extends Controller
         $entry->toggleArchive();
         $this->getDoctrine()->getManager()->flush();
 
+        $this->get('event_dispatcher')->dispatch(EntryReadEvent::NAME, new EntryReadEvent($entry));
+
         $message = 'flashes.entry.notice.entry_unarchived';
         if ($entry->isArchived()) {
             $message = 'flashes.entry.notice.entry_archived';
@@ -436,6 +440,8 @@ class EntryController extends Controller
 
         $entry->toggleStar();
         $this->getDoctrine()->getManager()->flush();
+
+        $this->get('event_dispatcher')->dispatch(EntryFavouriteEvent::NAME, new EntryFavouriteEvent($entry));
 
         $message = 'flashes.entry.notice.entry_unstarred';
         if ($entry->isStarred()) {
@@ -472,9 +478,6 @@ class EntryController extends Controller
             ['id' => $entry->getId()],
             UrlGeneratorInterface::ABSOLUTE_PATH
         );
-
-        // entry deleted, dispatch event about it!
-        $this->get('event_dispatcher')->dispatch(EntryDeletedEvent::NAME, new EntryDeletedEvent($entry));
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($entry);

@@ -1,0 +1,8 @@
+services:
+    wallabag_federation.listener.create_accounts:
+        class: Wallabag\FederationBundle\EventListener\CreateAccountListener
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "%domain_name%"
+        tags:
+            - { name: kernel.event_subscriber }

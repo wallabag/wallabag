@@ -233,13 +233,21 @@ class Entry
      */
     private $tags;
 
-    /*
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="recommended", type="boolean", nullable=true)
+     */
+    private $recommended;
+
+    /**
      * @param User     $user
      */
     public function __construct(User $user)
     {
         $this->user = $user;
         $this->tags = new ArrayCollection();
+        $this->changes = new ArrayCollection();
     }
 
     /**
@@ -777,5 +785,21 @@ class Entry
         $this->headers = $headers;
 
         return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isRecommended()
+    {
+        return $this->recommended;
+    }
+
+    /**
+     * @param bool $recommended
+     */
+    public function setRecommended($recommended)
+    {
+        $this->recommended = $recommended;
     }
 }

@@ -222,3 +222,11 @@ services:
         arguments:
             - "%wallabag_core.site_credentials.encryption_key_path%"
             - "@logger"
+
+    wallabag_core.activity.subscriber:
+        class: Wallabag\CoreBundle\Event\Activity\ActivitySubscriber
+        arguments:
+            - "@doctrine.orm.default_entity_manager"
+            - "@logger"
+        tags:
+            - { name: kernel.event_subscriber }

@@ -1,0 +1,77 @@
+{% extends "WallabagCoreBundle::base.html.twig" %}
+
+{% block css %}
+    {{ parent() }}
+    {% if not app.debug %}
+        <link rel="stylesheet" href="{{ asset('bundles/wallabagcore/material.css') }}">
+    {% endif %}
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/wallabagcore/material' ~ (app.debug ? '.dev' : '') ~ '.js') }}"></script>
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block body_class %}reset-left{% endblock %}
+
+{% block messages %}
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <script>
+            Materialize.toast('{{ flashMessage|trans }}', 4000);
+        </script>
+    {% endfor %}
+{% endblock %}
+
+{% block menu %}
+<nav class="cyan darken-1">
+    <div class="nav-wrapper nav-panels">
+        <a href="#" data-activates="slide-out" class="nav-panel-menu button-collapse"><i class="material-icons">menu</i></a>
+        <div class="left action">
+            <a href="{{ path('homepage') }}">wallabag</a>
+        </div>
+        <ul class="input-field nav-panel-buttom">
+            {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                <li>
+                    <a href="{{ path('fos_user_security_login') }}">Login</a>
+                </li>
+                {% if registration_enabled %}
+                    <li>
+                        <a href="{{ path('fos_user_registration_register') }}">Register</a>
+                    </li>
+                {% endif %}
+            {% else %}
+                <li>
+                    <a href="{{ path('fos_user_security_logout') }}">Logout</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col offset-l2 l8">
+                {{ include('@WallabagFederation/themes/material/User/profile_header.html.twig') }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <footer class="page-footer cyan darken-2">
+        <div class="footer-copyright">
+            <div class="container">
+                <div class="row right">
+                    <p>
+                        {{ 'footer.wallabag.powered_by'|trans }} <a target="_blank" href="https://wallabag.org" class="grey-text text-lighten-4">wallabag</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+{% endblock %}

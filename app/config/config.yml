@@ -6,8 +6,9 @@ imports:
 
 parameters:
     # Allows to use the live reload feature for changes in assets
-    use_webpack_dev_server: false
+    use_webpack_dev_server: true
     craue_config.cache_adapter.class: Craue\ConfigBundle\CacheAdapter\SymfonyCacheComponentAdapter
+    media_directory: '%kernel.root_dir%/../web/uploads/media'
 
 framework:
     #esi:             ~

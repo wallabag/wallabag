@@ -17,6 +17,11 @@ wallabag_api:
     type: annotation
     prefix: /
 
+wallabag_federation:
+    resource: "@WallabagFederationBundle/Controller/"
+    type: annotation
+    prefix: /
+
 app:
     resource: "@WallabagCoreBundle/Controller/"
     type: annotation

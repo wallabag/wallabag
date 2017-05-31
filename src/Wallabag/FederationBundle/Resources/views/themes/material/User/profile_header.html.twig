@@ -1,0 +1,35 @@
+{% set usershow = user.username %}
+{% if user.user.name is not null %}
+    {% set usershow = user.user.name %}
+{% endif %}
+
+<p>
+    {{ usershow }} utilise wallabag pour lire et archiver son contenu. Vous pouvez le/la suivre et interagir si vous possédez un compte quelque part dans le "fediverse". Si ce n'est pas le cas, vous pouvez en créer un ici.
+</p>
+<div class="card grey lighten-5 z-depth-1 profile">
+    <div class="card-content">
+        <img src="{{ asset('uploads/media/avatar/') ~ user.avatar }}" alt="" class="circle responsive-img center-block avatar">
+        <h3 class="center-align">{{ usershow }}</h3>
+        <h6 class="center-align">@{{ user.username }}</h6>
+        <a class="btn-floating btn-large halfway-fab waves-effect waves-light red" href="{{ path('follow-user', {'userToFollow': user.username}) }}"><i class="material-icons">person_add</i></a>
+        <div class="details">
+            <div class="bio">
+                <p>{{ user.description }}</p>
+            </div>
+            <div class="details-counters">
+                <div class="counter">
+                    <a href="{{ path('followers', {'user': user.username}) }}">
+                        <span class="counter-label">Followers</span>
+                        <span class="counter-number">{{ user.followers | length }}</span>
+                    </a>
+                </div>
+                <div class="counter">
+                    <a href="{{ path('following', {'user': user.username}) }}">
+                        <span class="counter-label">Following</span>
+                        <span class="counter-number">{{ user.following | length }}</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

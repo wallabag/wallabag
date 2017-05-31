@@ -220,6 +220,51 @@
                         </form>
 
                         <br /><hr /><br />
+                        <h5>{{ 'config.form_account.title'|trans }}</h5>
+
+                        {{ form_start(form.account) }}
+                        {{ form_errors(form.account) }}
+
+                        <div class="row">
+                            <div class="input-field col s12">
+                                {{ form_errors(form.account.description) }}
+                                {{ form_widget(form.account.description, {'attr': {'class': 'materialize-textarea'}}) }}
+                                {{ form_label(form.account.description) }}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="file-field input-field col s12">
+                                {{ form_errors(form.account.avatar) }}
+                                <div class="btn">
+                                    <span>{{ 'config.form_account.avatar_label'|trans }}</span>
+                                    {{ form_widget(form.account.avatar) }}
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="file-field input-field col s12">
+                                {{ form_errors(form.account.banner) }}
+                                <div class="btn">
+                                    <span>{{ 'config.form_account.banner_label'|trans }}</span>
+                                    {{ form_widget(form.account.banner) }}
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text">
+                                </div>
+                            </div>
+                        </div>
+
+                        {{ form_widget(form.account.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
+                        <a href="{{ path('user-profile', {'user': app.user.account.username}) }}" class="btn">{{ 'config.form_account.view_profile' | trans }}</a>
+                        {{ form_widget(form.account._token) }}
+                        </form>
+
+                        <br /><hr /><br />
 
                         <div class="row">
                             <h5>{{ 'config.reset.title'|trans }}</h5>

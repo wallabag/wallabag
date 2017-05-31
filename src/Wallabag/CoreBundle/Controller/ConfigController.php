@@ -10,12 +10,16 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\TaggingRule;
+use Wallabag\CoreBundle\Event\Activity\Actions\User\UserDeletedEvent;
+use Wallabag\CoreBundle\Event\Activity\Actions\User\UserEditedEvent;
 use Wallabag\CoreBundle\Form\Type\ConfigType;
 use Wallabag\CoreBundle\Form\Type\ChangePasswordType;
 use Wallabag\CoreBundle\Form\Type\RssType;
 use Wallabag\CoreBundle\Form\Type\TaggingRuleType;
 use Wallabag\CoreBundle\Form\Type\UserInformationType;
 use Wallabag\CoreBundle\Tools\Utils;
+use Wallabag\FederationBundle\Form\Type\AccountType;
+use Wallabag\UserBundle\Entity\User;
 
 class ConfigController extends Controller
 {
@@ -82,6 +86,50 @@ class ConfigController extends Controller
         if ($userForm->isSubmitted() && $userForm->isValid()) {
             $userManager->updateUser($user, true);
 
+            $this->get('event_dispatcher')->dispatch(UserEditedEvent::NAME, new UserEditedEvent($user->getAccount()));
+
+            $this->get('session')->getFlashBag()->add(
+                'notice',
+                'flashes.config.notice.user_updated'
+            );
+
+            return $this->redirect($this->generateUrl('config').'#set3');
+        }
+
+        // handle account information
+        $account = $user->getAccount();
+        $accountForm = $this->createForm(AccountType::class, $account, [
+            'action' => $this->generateUrl('config').'#set3',
+        ]);
+        $accountForm->handleRequest($request);
+
+        if ($accountForm->isSubmitted() && $accountForm->isValid()) {
+
+            $avatar = $account->getAvatar();
+            $banner = $account->getBanner();
+
+            if (null !== $avatar) {
+                $avatarFileName = md5(uniqid('', true)) . '.' . $avatar->guessExtension();
+
+                $avatar->move(
+                    $this->getParameter('media_directory') . '/avatar',
+                    $avatarFileName
+                );
+                $account->setAvatar($avatarFileName);
+            }
+
+            if (null != $banner) {
+                $bannerFileName = md5(uniqid('', true)) . '.' . $banner->guessExtension();
+
+                $banner->move(
+                    $this->get('media_directory') . '/banner',
+                    $bannerFileName
+                );
+                $account->setBanner($bannerFileName);
+            }
+
+            $this->get('event_dispatcher')->dispatch(UserEditedEvent::NAME, new UserEditedEvent($user));
+
             $this->get('session')->getFlashBag()->add(
                 'notice',
                 'flashes.config.notice.user_updated'
@@ -145,6 +193,7 @@ class ConfigController extends Controller
                 'pwd' => $pwdForm->createView(),
                 'user' => $userForm->createView(),
                 'new_tagging_rule' => $newTaggingRule->createView(),
+                'account' => $accountForm->createView(),
             ],
             'rss' => [
                 'username' => $user->getUsername(),
@@ -400,8 +449,12 @@ class ConfigController extends Controller
         $this->get('security.token_storage')->setToken(null);
         $request->getSession()->invalidate();
 
+        $account = $user->getAccount();
+
         $em = $this->get('fos_user.user_manager');
         $em->deleteUser($user);
+
+        $this->get('event_dispatcher')->dispatch(UserDeletedEvent::NAME, new UserDeletedEvent($account));
 
         return $this->redirect($this->generateUrl('fos_user_security_login'));
     }

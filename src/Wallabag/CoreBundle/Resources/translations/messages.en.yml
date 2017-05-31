@@ -20,7 +20,7 @@ menu:
         starred: 'Starred'
         archive: 'Archive'
         all_articles: 'All entries'
-        config: 'Config'
+        config: 'config'
         tags: 'Tags'
         internal_settings: 'Internal Settings'
         import: 'Import'
@@ -51,7 +51,7 @@ footer:
     stats: Since %user_creation% you read %nb_archives% articles. That is about %per_day% a day!
 
 config:
-    page_title: 'Config'
+    page_title: 'config'
     tab_menu:
         settings: 'Settings'
         rss: 'RSS'
@@ -108,6 +108,11 @@ config:
             description: If you remove your account, ALL your articles, ALL your tags, ALL your annotations and your account will be PERMANENTLY removed (it can't be UNDONE). You'll then be logged out.
             confirm: Are you really sure? (THIS CAN'T BE UNDONE)
             button: Delete my account
+    form_account:
+        title: "Profile"
+        description_label: "Description de votre compte. Ce texte sera affiché sur votre page de profil."
+        avatar_label: "Avatar"
+        banner_label: "Bannière"
     reset:
         title: Reset area (a.k.a danger zone)
         description: By hitting buttons below you'll have ability to remove some information from your account. Be aware that these actions are IRREVERSIBLE.
@@ -562,7 +567,7 @@ error:
 flashes:
     config:
         notice:
-            config_saved: 'Config saved.'
+            config_saved: 'config saved.'
             password_updated: 'Password updated'
             password_not_updated_demo: "In demonstration mode, you can't change password for this user."
             user_updated: 'Information updated'

@@ -286,7 +286,7 @@ class InstallCommand extends ContainerAwareCommand
 
     protected function setupConfig()
     {
-        $this->defaultOutput->writeln('<info><comment>Step 4 of 5.</comment> Config setup.</info>');
+        $this->defaultOutput->writeln('<info><comment>Step 4 of 5.</comment> config setup.</info>');
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
 
         // cleanup before insert new stuff

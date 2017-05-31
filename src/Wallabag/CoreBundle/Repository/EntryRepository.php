@@ -4,6 +4,7 @@ namespace Wallabag\CoreBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
+use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 use Wallabag\CoreBundle\Entity\Tag;
@@ -89,7 +90,7 @@ class EntryRepository extends EntityRepository
      *
      * @param int    $userId
      * @param string $term
-     * @param strint $currentRoute
+     * @param string $currentRoute
      *
      * @return QueryBuilder
      */
@@ -413,5 +414,16 @@ class EntryRepository extends EntityRepository
             ->andWhere('e.user = :user_id')->setParameter('user_id', $userId)
             ->getQuery()
             ->getResult();
+    }
+
+    /**
+     * @param $userId
+     * @return QueryBuilder
+     */
+    public function getBuilderForRecommendationsByUser($userId)
+    {
+        return $this->getBuilderByUser($userId)
+            ->andWhere('e.recommended = true')
+            ;
     }
 }

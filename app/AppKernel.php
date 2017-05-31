@@ -32,6 +32,7 @@ class AppKernel extends Kernel
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new BD\GuzzleSiteAuthenticatorBundle\BDGuzzleSiteAuthenticatorBundle(),
+            new OldSound\RabbitMqBundle\OldSoundRabbitMqBundle(),
 
             // wallabag bundles
             new Wallabag\CoreBundle\WallabagCoreBundle(),
@@ -39,7 +40,7 @@ class AppKernel extends Kernel
             new Wallabag\UserBundle\WallabagUserBundle(),
             new Wallabag\ImportBundle\WallabagImportBundle(),
             new Wallabag\AnnotationBundle\WallabagAnnotationBundle(),
-            new OldSound\RabbitMqBundle\OldSoundRabbitMqBundle(),
+            new Wallabag\FederationBundle\WallabagFederationBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

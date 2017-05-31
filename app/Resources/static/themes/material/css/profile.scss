@@ -1,0 +1,54 @@
+.profile {
+  .details {
+    display: flex;
+    flex-direction: row;
+
+    .bio {
+      flex: 1;
+      font-size: 14px;
+      line-height: 18px;
+      padding: 5px 10px;
+      order: 1;
+
+      p {
+        font-size: 14px;
+        font-weight: 400;
+        overflow: hidden;
+        word-break: normal;
+        word-wrap: break-word;
+      }
+    }
+
+    .details-counters {
+      order: 0;
+      display: flex;
+      flex-direction: row;
+    }
+
+    .counter {
+      width: 80px;
+      color: #9baec8;
+      padding: 5px 10px 0;
+      margin-bottom: 10px;
+      border-right: 1px solid #9baec8;
+      cursor: default;
+      position: relative;
+
+      .counter-label {
+        font-size: 12px;
+        text-transform: uppercase;
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      .counter-number {
+        font-weight: 500;
+        font-size: 18px;
+        color: #00bcd4;
+      }
+    }
+  }
+  img.avatar {
+    width: 10em;
+  }
+}

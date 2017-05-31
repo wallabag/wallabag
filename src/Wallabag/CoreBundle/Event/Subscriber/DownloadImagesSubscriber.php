@@ -4,10 +4,10 @@ namespace Wallabag\CoreBundle\Event\Subscriber;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Psr\Log\LoggerInterface;
+use Wallabag\CoreBundle\Event\Activity\Actions\Entry\EntryDeletedEvent;
+use Wallabag\CoreBundle\Event\Activity\Actions\Entry\EntrySavedEvent;
 use Wallabag\CoreBundle\Helper\DownloadImages;
 use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\CoreBundle\Event\EntrySavedEvent;
-use Wallabag\CoreBundle\Event\EntryDeletedEvent;
 use Doctrine\ORM\EntityManager;
 
 class DownloadImagesSubscriber implements EventSubscriberInterface

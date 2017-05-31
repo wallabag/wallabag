@@ -51,7 +51,7 @@ footer:
     stats: 'Desde %user_creation% você leu %nb_archives% artigos. Isso é %per_day% por dia!'
 
 config:
-    page_title: 'Config'
+    page_title: 'config'
     tab_menu:
         settings: 'Configurações'
         rss: 'RSS'
