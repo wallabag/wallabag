@@ -175,30 +175,63 @@ a.original:not(.waves-effect) {
 }
 
 .card-stacked {
-  &:hover ul.tools-list {
-    display: block;
-  }
+  display: flex;
+  flex-flow: row wrap;
 
-  ul.tools-list {
-    display: none;
+  &:hover ul.tools-list {
+    display: inline;
+    text-align: right;
   }
 
   .preview {
-    float: left;
-    width: 90px;
-    height: 50px;
+    max-width: 100px;
+    height: auto;
+    margin-right: 10px;
+    flex: 1;
 
     img {
-      max-height: 50px;
-      padding-right: 10px;
-      width: 80px;
+      max-width: 100%;
+      max-height: 100%;
     }
   }
 
-  .domain,
-  .footer {
-    font-size: 12px;
+  div.metadata {
+    .chip {
+      background-color: $blueAccentColor;
+      padding: 0 15px 0 10px;
+      margin: auto 2px;
+
+      a,
+      i {
+        color: #fff;
+      }
+
+      i.material-icons {
+        float: right;
+        font-size: 20px;
+        line-height: 32px;
+        padding-left: 8px;
+      }
+    }
   }
+
+  div.card-content {
+    flex: 4;
+  }
+
+  ul.tools-list {
+    flex: 1;
+    display: none;
+    flex-basis: 5em;
+    align-self: flex-end;
+    float: right;
+    max-width: 6em;
+  }
+}
+
+#content .collection .collection-item {
+  min-height: 65px;
+  height: auto;
 }
 
 .quickstart .card .card-action a,

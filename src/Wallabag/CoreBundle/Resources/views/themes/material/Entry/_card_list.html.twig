@@ -1,30 +1,28 @@
 <div class="card-stacked">
+    <div class="preview">{% if entry.previewPicture is not null %}<img src="{{ entry.previewPicture }}" />{% endif %}</div>
     <div class="card-content">
-        <div class="preview"><img src="{{ entry.previewPicture }}" /></div>
         <span class="card-title dot-ellipsis dot-resize-update">
             <a href="{{ path('view', { 'id': entry.id }) }}" title="{{ entry.title | striptags | e('html_attr') }}">
                 {{ entry.title| striptags | truncate(120, true, '…') | raw }}
             </a>
+        </span>
+
+        <div class="metadata">
             <a href="{{ entry.url|e }}" class="grey-text domain" target="_blank" title="{{ entry.domainName|removeWww }}">
                 <span>{{ entry.domainName|removeWww }}</span>
             </a>
-        </span>
-
-        <div class="footer">
-        {% for tag in entry.tags | slice(0, 3) %}
-            <span class="chip hide-on-med-and-down">
-                <a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a>
-            </span>
-        {% endfor %}
-
-        <ul class="tools-list right">
-            <li>
-                <a title="{{ 'entry.list.toogle_as_read'|trans }}" class="tool grey-text" href="{{ path('archive_entry', { 'id': entry.id }) }}"><i class="material-icons">{% if entry.isArchived == 0 %}done{% else %}redo{% endif %}</i></a>
-                <a title="{{ 'entry.list.toogle_as_star'|trans }}" class="tool grey-text" href="{{ path('star_entry', { 'id': entry.id }) }}"><i class="material-icons">{% if entry.isStarred == 0 %}star_border{% else %}star{% endif %}</i></a>
-                <a title="{{ 'entry.list.delete'|trans }}" onclick="return confirm('{{ 'entry.confirm.delete'|trans|escape('js') }}')" class="tool grey-text delete" href="{{ path('delete_entry', { 'id': entry.id }) }}"><i class="material-icons">delete</i></a>
-            </li>
-        </ul>
-
+            {% for tag in entry.tags | slice(0, 3) %}
+                <span class="chip hide-on-med-and-down">
+                    <a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a>
+                </span>
+            {% endfor %}
         </div>
     </div>
+    <ul class="tools-list hide-on-small-only">
+        <li>
+            <a title="{{ 'entry.list.toogle_as_read'|trans }}" class="tool grey-text" href="{{ path('archive_entry', { 'id': entry.id }) }}"><i class="material-icons">{% if entry.isArchived == 0 %}done{% else %}redo{% endif %}</i></a>
+            <a title="{{ 'entry.list.toogle_as_star'|trans }}" class="tool grey-text" href="{{ path('star_entry', { 'id': entry.id }) }}"><i class="material-icons">{% if entry.isStarred == 0 %}star_border{% else %}star{% endif %}</i></a>
+            <a title="{{ 'entry.list.delete'|trans }}" onclick="return confirm('{{ 'entry.confirm.delete'|trans|escape('js') }}')" class="tool grey-text delete" href="{{ path('delete_entry', { 'id': entry.id }) }}"><i class="material-icons">delete</i></a>
+        </li>
+    </ul>
 </div>
