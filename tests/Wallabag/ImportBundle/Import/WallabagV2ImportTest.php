@@ -89,7 +89,7 @@ class WallabagV2ImportTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $entryRepo->expects($this->exactly(24))
+        $entryRepo->expects($this->exactly(6))
             ->method('findByUrlAndUserId')
             ->will($this->onConsecutiveCalls(false, true, false));
 
@@ -106,7 +106,7 @@ class WallabagV2ImportTest extends \PHPUnit_Framework_TestCase
         $res = $wallabagV2Import->import();
 
         $this->assertTrue($res);
-        $this->assertEquals(['skipped' => 22, 'imported' => 2, 'queued' => 0], $wallabagV2Import->getSummary());
+        $this->assertEquals(['skipped' => 4, 'imported' => 2, 'queued' => 0], $wallabagV2Import->getSummary());
     }
 
     public function testImportAndMarkAllAsRead()
@@ -172,7 +172,7 @@ class WallabagV2ImportTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $producer
-            ->expects($this->exactly(24))
+            ->expects($this->exactly(6))
             ->method('publish');
 
         $wallabagV2Import->setProducer($producer);
@@ -180,7 +180,7 @@ class WallabagV2ImportTest extends \PHPUnit_Framework_TestCase
         $res = $wallabagV2Import->setMarkAsRead(true)->import();
 
         $this->assertTrue($res);
-        $this->assertEquals(['skipped' => 0, 'imported' => 0, 'queued' => 24], $wallabagV2Import->getSummary());
+        $this->assertEquals(['skipped' => 0, 'imported' => 0, 'queued' => 6], $wallabagV2Import->getSummary());
     }
 
     public function testImportWithRedis()
@@ -214,7 +214,7 @@ class WallabagV2ImportTest extends \PHPUnit_Framework_TestCase
         $res = $wallabagV2Import->setMarkAsRead(true)->import();
 
         $this->assertTrue($res);
-        $this->assertEquals(['skipped' => 0, 'imported' => 0, 'queued' => 24], $wallabagV2Import->getSummary());
+        $this->assertEquals(['skipped' => 0, 'imported' => 0, 'queued' => 6], $wallabagV2Import->getSummary());
 
         $this->assertNotEmpty($redisMock->lpop('wallabag_v2'));
     }
@@ -267,7 +267,7 @@ class WallabagV2ImportTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $entryRepo->expects($this->exactly(24))
+        $entryRepo->expects($this->exactly(6))
             ->method('findByUrlAndUserId')
             ->will($this->onConsecutiveCalls(false, true, false));
 
@@ -284,6 +284,6 @@ class WallabagV2ImportTest extends \PHPUnit_Framework_TestCase
         $res = $wallabagV2Import->import();
 
         $this->assertTrue($res);
-        $this->assertEquals(['skipped' => 22, 'imported' => 2, 'queued' => 0], $wallabagV2Import->getSummary());
+        $this->assertEquals(['skipped' => 4, 'imported' => 2, 'queued' => 0], $wallabagV2Import->getSummary());
     }
 }

@@ -31,7 +31,7 @@ class ContentProxy
     }
 
     /**
-     * Fetch content using graby and hydrate given entry with results information.
+     * Fetch content using graby and hydrate given $entry with results information.
      * In case we couldn't find content, we'll try to use Open Graph data.
      *
      * We can also force the content, in case of an import from the v1 for example, so the function won't
@@ -39,12 +39,17 @@ class ContentProxy
      *
      * @param Entry  $entry   Entry to update
      * @param string $url     Url to grab content for
-     * @param array  $content An array with AT LEAST keys title, html, url, language & content_type to skip the fetchContent from the url
+     * @param array  $content An array with AT LEAST keys title, html, url to skip the fetchContent from the url
      *
      * @return Entry
      */
     public function updateEntry(Entry $entry, $url, array $content = [])
     {
+        // ensure content is a bit cleaned up
+        if (!empty($content['html'])) {
+            $content['html'] = $this->graby->cleanupHtml($content['html'], $url);
+        }
+
         // do we have to fetch the content or the provided one is ok?
         if (empty($content) || false === $this->validateContent($content)) {
             $fetchedContent = $this->graby->fetchContent($url);
@@ -57,7 +62,7 @@ class ContentProxy
         }
 
         $title = $content['title'];
-        if (!$title && isset($content['open_graph']['og_title'])) {
+        if (!$title && !empty($content['open_graph']['og_title'])) {
             $title = $content['open_graph']['og_title'];
         }
 
@@ -65,7 +70,7 @@ class ContentProxy
         if (false === $html) {
             $html = $this->fetchingErrorMessage;
 
-            if (isset($content['open_graph']['og_description'])) {
+            if (!empty($content['open_graph']['og_description'])) {
                 $html .= '<p><i>But we found a short description: </i></p>';
                 $html .= $content['open_graph']['og_description'];
             }
@@ -76,8 +81,19 @@ class ContentProxy
         $entry->setContent($html);
         $entry->setHttpStatus(isset($content['status']) ? $content['status'] : '');
 
-        if (isset($content['date']) && null !== $content['date'] && '' !== $content['date']) {
-            $entry->setPublishedAt(new \DateTime($content['date']));
+        if (!empty($content['date'])) {
+            $date = $content['date'];
+
+            // is it a timestamp?
+            if (filter_var($date, FILTER_VALIDATE_INT) !== false) {
+                $date = '@'.$content['date'];
+            }
+
+            try {
+                $entry->setPublishedAt(new \DateTime($date));
+            } catch (\Exception $e) {
+                $this->logger->warning('Error while defining date', ['e' => $e, 'url' => $url, 'date' => $content['date']]);
+            }
         }
 
         if (!empty($content['authors'])) {
@@ -97,12 +113,12 @@ class ContentProxy
             $entry->setDomainName($domainName);
         }
 
-        if (isset($content['open_graph']['og_image']) && $content['open_graph']['og_image']) {
+        if (!empty($content['open_graph']['og_image'])) {
             $entry->setPreviewPicture($content['open_graph']['og_image']);
         }
 
         // if content is an image define as a preview too
-        if (isset($content['content_type']) && in_array($this->mimeGuesser->guess($content['content_type']), ['jpeg', 'jpg', 'gif', 'png'], true)) {
+        if (!empty($content['content_type']) && in_array($this->mimeGuesser->guess($content['content_type']), ['jpeg', 'jpg', 'gif', 'png'], true)) {
             $entry->setPreviewPicture($content['url']);
         }
 
@@ -128,6 +144,6 @@ class ContentProxy
      */
     private function validateContent(array $content)
     {
-        return isset($content['title']) && isset($content['html']) && isset($content['url']) && isset($content['language']) && isset($content['content_type']);
+        return !empty($content['title']) && !empty($content['html']) && !empty($content['url']);
     }
 }

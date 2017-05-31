@@ -342,6 +342,10 @@ class EntryRestControllerTest extends WallabagApiTestCase
             'url' => 'http://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html',
             'tags' => 'google',
             'title' => 'New title for my article',
+            'content' => 'my content',
+            'language' => 'de_DE',
+            'published_at' => '2016-09-08T11:55:58+0200',
+            'authors' => 'bob,helen',
         ]);
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
@@ -355,6 +359,12 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertEquals('New title for my article', $content['title']);
         $this->assertEquals(1, $content['user_id']);
         $this->assertCount(2, $content['tags']);
+        $this->assertSame('my content', $content['content']);
+        $this->assertSame('de_DE', $content['language']);
+        $this->assertSame('2016-09-08T11:55:58+0200', $content['published_at']);
+        $this->assertCount(2, $content['published_by']);
+        $this->assertContains('bob', $content['published_by']);
+        $this->assertContains('helen', $content['published_by']);
     }
 
     public function testPostSameEntry()

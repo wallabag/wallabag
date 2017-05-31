@@ -67,14 +67,14 @@ class ReadabilityImportTest extends \PHPUnit_Framework_TestCase
 
     public function testImport()
     {
-        $readabilityImport = $this->getReadabilityImport(false, 24);
+        $readabilityImport = $this->getReadabilityImport(false, 3);
         $readabilityImport->setFilepath(__DIR__.'/../fixtures/readability.json');
 
         $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $entryRepo->expects($this->exactly(24))
+        $entryRepo->expects($this->exactly(3))
             ->method('findByUrlAndUserId')
             ->willReturn(false);
 
@@ -88,14 +88,14 @@ class ReadabilityImportTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $this->contentProxy
-            ->expects($this->exactly(24))
+            ->expects($this->exactly(3))
             ->method('updateEntry')
             ->willReturn($entry);
 
         $res = $readabilityImport->import();
 
         $this->assertTrue($res);
-        $this->assertEquals(['skipped' => 0, 'imported' => 24, 'queued' => 0], $readabilityImport->getSummary());
+        $this->assertEquals(['skipped' => 0, 'imported' => 3, 'queued' => 0], $readabilityImport->getSummary());
     }
 
     public function testImportAndMarkAllAsRead()
@@ -165,7 +165,7 @@ class ReadabilityImportTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $producer
-            ->expects($this->exactly(24))
+            ->expects($this->exactly(3))
             ->method('publish');
 
         $readabilityImport->setProducer($producer);
@@ -173,7 +173,7 @@ class ReadabilityImportTest extends \PHPUnit_Framework_TestCase
         $res = $readabilityImport->setMarkAsRead(true)->import();
 
         $this->assertTrue($res);
-        $this->assertEquals(['skipped' => 0, 'imported' => 0, 'queued' => 24], $readabilityImport->getSummary());
+        $this->assertEquals(['skipped' => 0, 'imported' => 0, 'queued' => 3], $readabilityImport->getSummary());
     }
 
     public function testImportWithRedis()
@@ -211,7 +211,7 @@ class ReadabilityImportTest extends \PHPUnit_Framework_TestCase
         $res = $readabilityImport->setMarkAsRead(true)->import();
 
         $this->assertTrue($res);
-        $this->assertEquals(['skipped' => 0, 'imported' => 0, 'queued' => 24], $readabilityImport->getSummary());
+        $this->assertEquals(['skipped' => 0, 'imported' => 0, 'queued' => 3], $readabilityImport->getSummary());
 
         $this->assertNotEmpty($redisMock->lpop('readability'));
     }
