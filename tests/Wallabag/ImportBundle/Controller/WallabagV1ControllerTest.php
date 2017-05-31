@@ -116,20 +116,18 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
                 $this->getLoggedInUserId()
             );
 
-        $tag = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Tag')
-            ->findOneByLabel('Framabag');
-
-        $this->assertTrue($content->getTags()->contains($tag));
-
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertContains('flashes.import.notice.summary', $body[0]);
 
         $this->assertNotEmpty($content->getMimetype(), 'Mimetype for http://www.framablog.org is ok');
         $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for http://www.framablog.org is ok');
         $this->assertNotEmpty($content->getLanguage(), 'Language for http://www.framablog.org is ok');
-        $this->assertEquals(2, count($content->getTags()));
+
+        $tags = $content->getTags();
+        $this->assertContains('foot', $tags, 'It includes the "foot" tag');
+        $this->assertContains('Framabag', $tags, 'It includes the "Framabag" tag');
+        $this->assertEquals(2, count($tags));
+
         $this->assertInstanceOf(\DateTime::class, $content->getCreatedAt());
     }
 

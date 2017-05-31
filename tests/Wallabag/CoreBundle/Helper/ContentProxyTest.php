@@ -7,7 +7,6 @@ use Wallabag\CoreBundle\Helper\ContentProxy;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\UserBundle\Entity\User;
-use Wallabag\CoreBundle\Repository\TagRepository;
 use Wallabag\CoreBundle\Helper\RuleBasedTagger;
 
 class ContentProxyTest extends \PHPUnit_Framework_TestCase
