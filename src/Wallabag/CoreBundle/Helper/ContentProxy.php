@@ -51,9 +51,9 @@ class ContentProxy
     /**
      * Import entry using either fetched or provided content.
      *
-     * @param Entry  $entry                Entry to update
-     * @param array  $content              Array with content provided for import with AT LEAST keys title, html, url to skip the fetchContent from the url
-     * @param bool   $disableContentUpdate Whether to skip trying to fetch content using Graby
+     * @param Entry $entry                Entry to update
+     * @param array $content              Array with content provided for import with AT LEAST keys title, html, url to skip the fetchContent from the url
+     * @param bool  $disableContentUpdate Whether to skip trying to fetch content using Graby
      */
     public function importEntry(Entry $entry, array $content, $disableContentUpdate = false)
     {
