@@ -18,9 +18,9 @@ class ImportCommand extends ContainerAwareCommand
             ->setDescription('Import entries from a JSON export')
             ->addArgument('username', InputArgument::REQUIRED, 'User to populate')
             ->addArgument('filepath', InputArgument::REQUIRED, 'Path to the JSON file')
-            ->addOption('importer', null, InputArgument::OPTIONAL, 'The importer to use: v1, v2, instapaper, pinboard, readability, firefox or chrome', 'v1')
-            ->addOption('markAsRead', null, InputArgument::OPTIONAL, 'Mark all entries as read', false)
-            ->addOption('useUserId', null, InputArgument::OPTIONAL, 'Use user id instead of username to find account', false)
+            ->addOption('importer', null, InputOption::VALUE_OPTIONAL, 'The importer to use: v1, v2, instapaper, pinboard, readability, firefox or chrome', 'v1')
+            ->addOption('markAsRead', null, InputOption::VALUE_OPTIONAL, 'Mark all entries as read', false)
+            ->addOption('useUserId', null, InputOption::VALUE_NONE, 'Use user id instead of username to find account')
             ->addOption('disableContentUpdate', null, InputOption::VALUE_NONE, 'Disable fetching updated content from URL')
         ;
     }
