@@ -45,14 +45,7 @@ class ContentProxy
         }
 
         if ((empty($content) || false === $this->validateContent($content)) && false === $disableContentUpdate) {
-            try {
-                $fetchedContent = $this->graby->fetchContent($url);
-            } catch (\Exception $e) {
-                $this->logger->error('Error while trying to fetch content from URL.', [
-                    'entry_url' => $url,
-                    'error_msg' => $e->getMessage(),
-                ]);
-            }
+            $fetchedContent = $this->graby->fetchContent($url);
 
             // when content is imported, we have information in $content
             // in case fetching content goes bad, we'll keep the imported information instead of overriding them
@@ -73,7 +66,7 @@ class ContentProxy
      * Will fall back to OpenGraph data if available.
      *
      * @param Entry $entry   Entry to stock
-     * @param array $content Array with at least title and URL
+     * @param array $content Array with at least title, url & html
      */
     private function stockEntry(Entry $entry, array $content)
     {
