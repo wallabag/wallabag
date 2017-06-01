@@ -10,16 +10,16 @@ parametro dovete impostare, si prega di lasciare quello di default.
 
 ```yaml
 parameters:
-    database_driver: pdo_sqlite
+    database_driver: pdo_mysql
     database_host: 127.0.0.1
     database_port: null
-    database_name: symfony
+    database_name: wallabag
     database_user: root
     database_password: null
-    database_path: '%kernel.root_dir%/../data/db/wallabag.sqlite'
+    database_path: null
     database_table_prefix: wallabag_
     database_socket: null
-    database_charset: utf8
+    database_charset: utf8mb4
     mailer_transport: smtp
     mailer_host: 127.0.0.1
     mailer_user: null
