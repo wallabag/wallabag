@@ -250,7 +250,7 @@ class ConfigController extends Controller
             case 'entries':
                 // SQLite doesn't care about cascading remove, so we need to manually remove associated stuff
                 // otherwise they won't be removed ...
-                if ($this->get('doctrine')->getConnection()->getDriver() instanceof \Doctrine\DBAL\Driver\PDOSqlite\Driver) {
+                if ($this->get('doctrine')->getConnection()->getDatabasePlatform() instanceof \Doctrine\DBAL\Platforms\SqlitePlatform) {
                     $this->getDoctrine()->getRepository('WallabagAnnotationBundle:Annotation')->removeAllByUserId($this->getUser()->getId());
                 }
 
@@ -262,7 +262,7 @@ class ConfigController extends Controller
                     ->removeAllByUserId($this->getUser()->getId());
                 break;
             case 'archived':
-                if ($this->get('doctrine')->getConnection()->getDriver() instanceof \Doctrine\DBAL\Driver\PDOSqlite\Driver) {
+                if ($this->get('doctrine')->getConnection()->getDatabasePlatform() instanceof \Doctrine\DBAL\Platforms\SqlitePlatform) {
                     $this->removeAnnotationsForArchivedByUserId($this->getUser()->getId());
                 }
 

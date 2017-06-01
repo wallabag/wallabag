@@ -95,6 +95,7 @@ class ImportCommandTest extends WallabagCoreTestCase
             'username' => 1,
             'filepath' => $application->getKernel()->getContainer()->getParameter('kernel.root_dir').'/../tests/Wallabag/ImportBundle/fixtures/wallabag-v2-read.json',
             '--useUserId' => true,
+            '--importer' => 'v2',
         ]);
     }
 }

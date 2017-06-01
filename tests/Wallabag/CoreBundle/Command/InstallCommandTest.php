@@ -2,8 +2,11 @@
 
 namespace Tests\Wallabag\CoreBundle\Command;
 
+use DAMA\DoctrineTestBundle\Doctrine\DBAL\StaticDriver;
 use Doctrine\Bundle\DoctrineBundle\Command\CreateDatabaseDoctrineCommand;
 use Doctrine\Bundle\DoctrineBundle\Command\DropDatabaseDoctrineCommand;
+use Doctrine\DBAL\Platforms\PostgreSqlPlatform;
+use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
@@ -18,7 +21,9 @@ class InstallCommandTest extends WallabagCoreTestCase
     {
         parent::setUp();
 
-        if ($this->getClient()->getContainer()->get('doctrine')->getConnection()->getDriver() instanceof \Doctrine\DBAL\Driver\PDOPgSql\Driver) {
+        /** @var \Doctrine\DBAL\Connection $connection */
+        $connection = $this->getClient()->getContainer()->get('doctrine')->getConnection();
+        if ($connection->getDatabasePlatform() instanceof PostgreSqlPlatform) {
             /*
              * LOG:  statement: CREATE DATABASE "wallabag"
              * ERROR:  source database "template1" is being accessed by other users
@@ -30,34 +35,44 @@ class InstallCommandTest extends WallabagCoreTestCase
              */
             $this->markTestSkipped('PostgreSQL spotted: can\'t find a good way to drop current database, skipping.');
         }
+
+        if ($connection->getDatabasePlatform() instanceof SqlitePlatform) {
+            // Environnement variable useful only for sqlite to avoid the error "attempt to write a readonly database"
+            // We can't define always this environnement variable because pdo_mysql seems to use it
+            // and we have the error:
+            // SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax;
+            // check the manual that corresponds to your MariaDB server version for the right syntax to use
+            // near '/tmp/wallabag_testTYj1kp' at line 1
+            $databasePath = tempnam(sys_get_temp_dir(), 'wallabag_test');
+            putenv("TEST_DATABASE_PATH=$databasePath");
+
+            // The environnement has been changed, recreate the client in order to update connection
+            parent::setUp();
+        }
+
+        // disable doctrine-test-bundle
+        StaticDriver::setKeepStaticConnections(false);
+
+        $this->resetDatabase($this->getClient());
     }
 
-    /**
-     * Ensure next tests will have a clean database.
-     */
-    public static function tearDownAfterClass()
+    public function tearDown()
     {
-        $application = new Application(static::$kernel);
-        $application->setAutoExit(false);
+        $databasePath = getenv('TEST_DATABASE_PATH');
+        // Remove variable environnement
+        putenv('TEST_DATABASE_PATH');
+        if ($databasePath && file_exists($databasePath)) {
+            unlink($databasePath);
+        } else {
+            // Create a new client to avoid the error:
+            // Transaction commit failed because the transaction has been marked for rollback only.
+            $client = static::createClient();
+            $this->resetDatabase($client);
+        }
 
-        $application->run(new ArrayInput([
-            'command' => 'doctrine:schema:drop',
-            '--no-interaction' => true,
-            '--force' => true,
-            '--env' => 'test',
-        ]), new NullOutput());
-
-        $application->run(new ArrayInput([
-            'command' => 'doctrine:schema:create',
-            '--no-interaction' => true,
-            '--env' => 'test',
-        ]), new NullOutput());
-
-        $application->run(new ArrayInput([
-            'command' => 'doctrine:fixtures:load',
-            '--no-interaction' => true,
-            '--env' => 'test',
-        ]), new NullOutput());
+        // enable doctrine-test-bundle
+        StaticDriver::setKeepStaticConnections(true);
+        parent::tearDown();
     }
 
     public function testRunInstallCommand()
@@ -120,7 +135,7 @@ class InstallCommandTest extends WallabagCoreTestCase
     {
         // skipped SQLite check when database is removed because while testing for the connection,
         // the driver will create the file (so the database) before testing if database exist
-        if ($this->getClient()->getContainer()->get('doctrine')->getConnection()->getDriver() instanceof \Doctrine\DBAL\Driver\PDOSqlite\Driver) {
+        if ($this->getClient()->getContainer()->get('doctrine')->getConnection()->getDatabasePlatform() instanceof \Doctrine\DBAL\Platforms\SqlitePlatform) {
             $this->markTestSkipped('SQLite spotted: can\'t test with database removed.');
         }
 

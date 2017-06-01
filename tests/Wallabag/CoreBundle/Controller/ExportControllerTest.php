@@ -239,7 +239,7 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertEquals($contentInDB->getLanguage(), $content[0]['language']);
         $this->assertEquals($contentInDB->getReadingtime(), $content[0]['reading_time']);
         $this->assertEquals($contentInDB->getDomainname(), $content[0]['domain_name']);
-        $this->assertEquals(['foo bar', 'baz', 'foot'], $content[0]['tags']);
+        $this->assertEquals(['foo bar', 'baz'], $content[0]['tags']);
     }
 
     public function testXmlExport()

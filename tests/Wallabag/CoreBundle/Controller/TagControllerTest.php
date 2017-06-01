@@ -3,6 +3,7 @@
 namespace Tests\Wallabag\CoreBundle\Controller;
 
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
+use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 
 class TagControllerTest extends WallabagCoreTestCase
@@ -24,10 +25,11 @@ class TagControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $entry = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->findByUrlAndUserId('http://0.0.0.0/entry1', $this->getLoggedInUserId());
+        $entry = new Entry($this->getLoggedInUser());
+        $entry->setUrl('http://0.0.0.0/foo');
+        $this->getEntityManager()->persist($entry);
+        $this->getEntityManager()->flush();
+        $this->getEntityManager()->clear();
 
         $crawler = $client->request('GET', '/view/'.$entry->getId());
 
@@ -41,23 +43,15 @@ class TagControllerTest extends WallabagCoreTestCase
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
 
         // be sure to reload the entry
-        $entry = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->findByUrlAndUserId('http://0.0.0.0/entry1', $this->getLoggedInUserId());
-
-        $this->assertEquals(4, count($entry->getTags()));
+        $entry = $this->getEntityManager()->getRepository(Entry::class)->find($entry->getId());
+        $this->assertCount(1, $entry->getTags());
 
         // tag already exists and already assigned
         $client->submit($form, $data);
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
 
-        $newEntry = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->find($entry->getId());
-
-        $this->assertEquals(4, count($newEntry->getTags()));
+        $entry = $this->getEntityManager()->getRepository(Entry::class)->find($entry->getId());
+        $this->assertCount(1, $entry->getTags());
 
         // tag already exists but still not assigned to this entry
         $data = [
@@ -67,12 +61,8 @@ class TagControllerTest extends WallabagCoreTestCase
         $client->submit($form, $data);
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
 
-        $newEntry = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->find($entry->getId());
-
-        $this->assertEquals(4, count($newEntry->getTags()));
+        $entry = $this->getEntityManager()->getRepository(Entry::class)->find($entry->getId());
+        $this->assertCount(2, $entry->getTags());
     }
 
     public function testAddMultipleTagToEntry()
@@ -116,15 +106,14 @@ class TagControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $entry = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->findByUrlAndUserId('http://0.0.0.0/entry1', $this->getLoggedInUserId());
-
-        $tag = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Tag')
-            ->findOneByEntryAndTagLabel($entry, $this->tagName);
+        $tag = new Tag();
+        $tag->setLabel($this->tagName);
+        $entry = new Entry($this->getLoggedInUser());
+        $entry->setUrl('http://0.0.0.0/foo');
+        $entry->addTag($tag);
+        $this->getEntityManager()->persist($entry);
+        $this->getEntityManager()->flush();
+        $this->getEntityManager()->clear();
 
         // We make a first request to set an history and test redirection after tag deletion
         $client->request('GET', '/view/'.$entry->getId());
@@ -134,12 +123,8 @@ class TagControllerTest extends WallabagCoreTestCase
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $this->assertEquals($entryUri, $client->getResponse()->getTargetUrl());
 
-        // re-retrieve the entry to be sure to get fresh data from database (mostly for tags)
-        $entry = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->findByUrlAndUserId('http://0.0.0.0/entry1', $this->getLoggedInUserId());
-
+	// re-retrieve the entry to be sure to get fresh data from database (mostly for tags)
+        $entry = $this->getEntityManager()->getRepository(Entry::class)->find($entry->getId());
         $this->assertNotContains($this->tagName, $entry->getTags());
 
         $client->request('GET', '/remove-tag/'.$entry->getId().'/'.$tag->getId());

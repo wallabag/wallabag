@@ -499,19 +499,17 @@ class InstallCommand extends ContainerAwareCommand
         $output = new BufferedOutput();
         $exitCode = $this->getApplication()->run(new ArrayInput($parameters), $output);
 
-        if (0 !== $exitCode) {
-            $this->getApplication()->setAutoExit(true);
-
-            $this->defaultOutput->writeln('');
-            $this->defaultOutput->writeln('<error>The command "'.$command.'" generates some errors: </error>');
-            $this->defaultOutput->writeln($output->fetch());
-
-            die();
-        }
-
         // PDO does not always close the connection after Doctrine commands.
         // See https://github.com/symfony/symfony/issues/11750.
         $this->getContainer()->get('doctrine')->getManager()->getConnection()->close();
+
+        if (0 !== $exitCode) {
+            $this->getApplication()->setAutoExit(true);
+
+            throw new \RuntimeException(
+                'The command "'.$command."\" generates some errors: \n\n"
+                .$output->fetch());
+        }
 
         return $this;
     }

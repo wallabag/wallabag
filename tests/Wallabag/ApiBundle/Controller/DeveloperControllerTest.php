@@ -3,6 +3,7 @@
 namespace Tests\Wallabag\ApiBundle\Controller;
 
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
+use Wallabag\ApiBundle\Entity\Client;
 
 class DeveloperControllerTest extends WallabagCoreTestCase
 {
@@ -33,14 +34,10 @@ class DeveloperControllerTest extends WallabagCoreTestCase
         $this->assertContains('My app', $alert[0]);
     }
 
-    /**
-     * @depends testCreateClient
-     */
     public function testCreateToken()
     {
         $client = $this->getClient();
-        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
-        $apiClient = $em->getRepository('WallabagApiBundle:Client')->findOneByName('My app');
+        $apiClient = $this->createApiClientForUser('admin');
 
         $client->request('POST', '/oauth/v2/token', [
             'grant_type' => 'password',
@@ -83,6 +80,7 @@ class DeveloperControllerTest extends WallabagCoreTestCase
     public function testRemoveClient()
     {
         $client = $this->getClient();
+        $adminApiClient = $this->createApiClientForUser('admin');
         $em = $client->getContainer()->get('doctrine.orm.entity_manager');
 
         // Try to remove an admin's client with a wrong user
@@ -90,12 +88,8 @@ class DeveloperControllerTest extends WallabagCoreTestCase
         $client->request('GET', '/developer');
         $this->assertContains('no_client', $client->getResponse()->getContent());
 
-        // get an ID of a admin's client
-        $this->logInAs('admin');
-        $nbClients = $em->getRepository('WallabagApiBundle:Client')->findByUser($this->getLoggedInUserId());
-
         $this->logInAs('bob');
-        $client->request('GET', '/developer/client/delete/'.$nbClients[0]->getId());
+        $client->request('GET', '/developer/client/delete/'.$adminApiClient->getId());
         $this->assertEquals(403, $client->getResponse()->getStatusCode());
 
         // Try to remove the admin's client with the good user
@@ -111,7 +105,29 @@ class DeveloperControllerTest extends WallabagCoreTestCase
         $client->click($link);
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
 
-        $newNbClients = $em->getRepository('WallabagApiBundle:Client')->findByUser($this->getLoggedInUserId());
-        $this->assertGreaterThan(count($newNbClients), count($nbClients));
+        $this->assertNull(
+            $em->getRepository('WallabagApiBundle:Client')->find($adminApiClient->getId()),
+            'The client should have been removed'
+        );
+    }
+
+    /**
+     * @param string $username
+     *
+     * @return Client
+     */
+    private function createApiClientForUser($username)
+    {
+        $client = $this->getClient();
+        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+        $userManager = $client->getContainer()->get('fos_user.user_manager');
+        $user = $userManager->findUserBy(array('username' => $username));
+        $apiClient = new Client($user);
+        $apiClient->setName('My app');
+        $apiClient->setAllowedGrantTypes(['password']);
+        $em->persist($apiClient);
+        $em->flush();
+
+        return $apiClient;
     }
 }
