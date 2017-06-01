@@ -20,16 +20,15 @@ class PreparePagerForEntries
 
     /**
      * @param AdapterInterface $adapter
-     * @param int              $page
      *
      * @return null|Pagerfanta
      */
-    public function prepare(AdapterInterface $adapter, $page = 1)
+    public function prepare(AdapterInterface $adapter)
     {
         $user = $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null;
 
         if (null === $user || !is_object($user)) {
-            return null;
+            return;
         }
 
         $entries = new Pagerfanta($adapter);

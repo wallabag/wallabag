@@ -321,8 +321,7 @@ class EntryController extends Controller
 
         $pagerAdapter = new DoctrineORMAdapter($qb->getQuery(), true, false);
 
-        $entries = $this->get('wallabag_core.helper.prepare_pager_for_entries')
-            ->prepare($pagerAdapter, $page);
+        $entries = $this->get('wallabag_core.helper.prepare_pager_for_entries')->prepare($pagerAdapter);
 
         try {
             $entries->setCurrentPage($page);
