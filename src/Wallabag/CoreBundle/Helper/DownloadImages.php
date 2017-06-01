@@ -54,7 +54,7 @@ class DownloadImages
         $crawler = new Crawler($html);
         $result = $crawler
             ->filterXpath('//img')
-            ->extract(array('src'));
+            ->extract(['src']);
 
         $relativePath = $this->getRelativePath($entryId);
 
@@ -66,8 +66,7 @@ class DownloadImages
                 continue;
             }
 
-            // if image contains "&"" and we can't find it in the html
-            // it might be because it's encoded as &amp;
+            // if image contains "&" and we can't find it in the html it might be because it's encoded as &amp;
             if (false !== stripos($image, '&') && false === stripos($html, $image)) {
                 $image = str_replace('&', '&amp;', $image);
             }
