@@ -282,7 +282,7 @@ class PocketImportTest extends \PHPUnit_Framework_TestCase
 
         $this->contentProxy
             ->expects($this->once())
-            ->method('importEntry')
+            ->method('updateEntry')
             ->willReturn($entry);
 
         $pocketImport->setClient($client);
@@ -377,7 +377,7 @@ class PocketImportTest extends \PHPUnit_Framework_TestCase
 
         $this->contentProxy
             ->expects($this->exactly(2))
-            ->method('importEntry')
+            ->method('updateEntry')
             ->willReturn($entry);
 
         $pocketImport->setClient($client);
@@ -450,7 +450,7 @@ JSON;
 
         $this->contentProxy
             ->expects($this->never())
-            ->method('importEntry');
+            ->method('updateEntry');
 
         $producer = $this->getMockBuilder('OldSound\RabbitMqBundle\RabbitMq\Producer')
             ->disableOriginalConstructor()
@@ -536,7 +536,7 @@ JSON;
 
         $this->contentProxy
             ->expects($this->never())
-            ->method('ImportEntry');
+            ->method('updateEntry');
 
         $factory = new RedisMockFactory();
         $redisMock = $factory->getAdapter('Predis\Client', true);
@@ -621,7 +621,7 @@ JSON;
 
         $this->contentProxy
             ->expects($this->once())
-            ->method('importEntry')
+            ->method('updateEntry')
             ->will($this->throwException(new \Exception()));
 
         $pocketImport->setClient($client);

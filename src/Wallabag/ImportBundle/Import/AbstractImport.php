@@ -115,14 +115,11 @@ abstract class AbstractImport implements ImportInterface
      */
     protected function fetchContent(Entry $entry, $url, array $content = [])
     {
-        // be sure to set at least the given url
-        $content['url'] = isset($content['url']) ? $content['url'] : $url;
-
         try {
-            $this->contentProxy->importEntry($entry, $content, $this->disableContentUpdate);
+            $this->contentProxy->updateEntry($entry, $url, $content, $this->disableContentUpdate);
         } catch (\Exception $e) {
             $this->logger->error('Error trying to import an entry.', [
-                'entry_url' => $content['url'],
+                'entry_url' => $url,
                 'error_msg' => $e->getMessage(),
             ]);
         }

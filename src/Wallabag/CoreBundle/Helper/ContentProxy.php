@@ -7,7 +7,6 @@ use Psr\Log\LoggerInterface;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Tools\Utils;
 use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeExtensionGuesser;
-use Symfony\Component\Config\Definition\Exception\Exception;
 
 /**
  * This kind of proxy class take care of getting the content from an url
@@ -32,56 +31,39 @@ class ContentProxy
     }
 
     /**
-     * Update existing entry by fetching from URL using Graby.
+     * Update entry using either fetched or provided content.
      *
-     * @param Entry  $entry Entry to update
-     * @param string $url   Url to grab content for
+     * @param Entry  $entry                Entry to update
+     * @param string $url                  Url of the content
+     * @param array  $content              Array with content provided for import with AT LEAST keys title, html, url to skip the fetchContent from the url
+     * @param bool   $disableContentUpdate Whether to skip trying to fetch content using Graby
      */
-    public function updateEntry(Entry $entry, $url)
+    public function updateEntry(Entry $entry, $url, array $content = [], $disableContentUpdate = false)
     {
-        $content = $this->graby->fetchContent($url);
-
-        // be sure to keep the url in case of error
-        // so we'll be able to refetch it in the future
-        $content['url'] = $content['url'] ?: $url;
-
-        $this->stockEntry($entry, $content);
-    }
-
-    /**
-     * Import entry using either fetched or provided content.
-     *
-     * @param Entry $entry                Entry to update
-     * @param array $content              Array with content provided for import with AT LEAST keys title, html, url to skip the fetchContent from the url
-     * @param bool  $disableContentUpdate Whether to skip trying to fetch content using Graby
-     */
-    public function importEntry(Entry $entry, array $content, $disableContentUpdate = false)
-    {
-        try {
-            $this->validateContent($content);
-        } catch (\Exception $e) {
-            // validation failed but do we want to disable updating content?
-            if (true === $disableContentUpdate) {
-                throw $e;
-            }
+        if (!empty($content['html'])) {
+            $content['html'] = $this->graby->cleanupHtml($content['html'], $url);
         }
 
-        if (false === $disableContentUpdate) {
+        if ((empty($content) || false === $this->validateContent($content)) && false === $disableContentUpdate) {
             try {
-                $fetchedContent = $this->graby->fetchContent($content['url']);
+                $fetchedContent = $this->graby->fetchContent($url);
             } catch (\Exception $e) {
                 $this->logger->error('Error while trying to fetch content from URL.', [
-                    'entry_url' => $content['url'],
+                    'entry_url' => $url,
                     'error_msg' => $e->getMessage(),
                 ]);
             }
 
             // when content is imported, we have information in $content
             // in case fetching content goes bad, we'll keep the imported information instead of overriding them
-            if ($fetchedContent['html'] !== $this->fetchingErrorMessage) {
+            if (empty($content) || $fetchedContent['html'] !== $this->fetchingErrorMessage) {
                 $content = $fetchedContent;
             }
         }
+
+        // be sure to keep the url in case of error
+        // so we'll be able to refetch it in the future
+        $content['url'] = !empty($content['url']) ? $content['url'] : $url;
 
         $this->stockEntry($entry, $content);
     }
@@ -126,7 +108,7 @@ class ContentProxy
             try {
                 $entry->setPublishedAt(new \DateTime($date));
             } catch (\Exception $e) {
-                $this->logger->warning('Error while defining date', ['e' => $e, 'url' => $url, 'date' => $content['date']]);
+                $this->logger->warning('Error while defining date', ['e' => $e, 'url' => $content['url'], 'date' => $content['date']]);
             }
         }
 
@@ -170,19 +152,11 @@ class ContentProxy
      * Validate that the given content has at least a title, an html and a url.
      *
      * @param array $content
+     *
+     * @return bool true if valid otherwise false
      */
     private function validateContent(array $content)
     {
-        if (empty($content['title'])) {
-            throw new Exception('Missing title from imported entry!');
-        }
-
-        if (empty($content['url'])) {
-            throw new Exception('Missing URL from imported entry!');
-        }
-
-        if (empty($content['html'])) {
-            throw new Exception('Missing html from imported entry!');
-        }
+        return !empty($content['title']) && !empty($content['html']) && !empty($content['url']);
     }
 }

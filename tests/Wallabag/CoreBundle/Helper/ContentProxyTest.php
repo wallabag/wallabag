@@ -11,8 +11,6 @@ use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\UserBundle\Entity\User;
 use Wallabag\CoreBundle\Helper\RuleBasedTagger;
 use Graby\Graby;
-use Monolog\Handler\TestHandler;
-use Monolog\Logger;
 
 class ContentProxyTest extends \PHPUnit_Framework_TestCase
 {
@@ -259,12 +257,13 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
             ->method('tag');
 
         $logHandler = new TestHandler();
-        $logger = new Logger('test', array($logHandler));
+        $logger = new Logger('test', [$logHandler]);
 
         $proxy = new ContentProxy((new Graby()), $tagger, $logger, $this->fetchingErrorMessage);
         $entry = new Entry(new User());
-        $proxy->importEntry(
+        $proxy->updateEntry(
             $entry,
+            'http://1.1.1.1',
             [
                 'html' => str_repeat('this is my content', 325),
                 'title' => 'this is my title',
@@ -299,6 +298,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
         $entry = new Entry(new User());
         $proxy->updateEntry(
             $entry,
+            'http://1.1.1.1',
             [
                 'html' => str_repeat('this is my content', 325),
                 'title' => 'this is my title',
@@ -326,26 +326,24 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
 
     public function testTaggerThrowException()
     {
-        $graby = $this->getMockBuilder('Graby\Graby')
-            ->disableOriginalConstructor()
-            ->getMock();
-
         $tagger = $this->getTaggerMock();
         $tagger->expects($this->once())
             ->method('tag')
             ->will($this->throwException(new \Exception()));
 
-        $proxy = new ContentProxy($graby, $tagger, $this->getLogger(), $this->fetchingErrorMessage);
-
+        $proxy = new ContentProxy((new Graby()), $tagger, $this->getLogger(), $this->fetchingErrorMessage);
         $entry = new Entry(new User());
-        $content = array(
-            'html' => str_repeat('this is my content', 325),
-            'title' => 'this is my title',
-            'url' => 'http://1.1.1.1',
-            'content_type' => 'text/html',
-            'language' => 'fr',
+        $proxy->updateEntry(
+            $entry,
+            'http://1.1.1.1',
+            [
+                'html' => str_repeat('this is my content', 325),
+                'title' => 'this is my title',
+                'url' => 'http://1.1.1.1',
+                'content_type' => 'text/html',
+                'language' => 'fr',
+            ]
         );
-        $proxy->importEntry($entry, $content, true);
 
         $this->assertCount(0, $entry->getTags());
     }
@@ -374,8 +372,9 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
             ->method('tag');
 
         $proxy = new ContentProxy((new Graby()), $tagger, $this->getLogger(), $this->fetchingErrorMessage);
-        $entry = $proxy->updateEntry(
-            new Entry(new User()),
+        $entry = new Entry(new User());
+        $proxy->updateEntry(
+            $entry,
             'http://1.1.1.1',
             [
                 'html' => $html,

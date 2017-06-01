@@ -89,7 +89,7 @@ class FirefoxImportTest extends \PHPUnit_Framework_TestCase
 
         $this->contentProxy
             ->expects($this->exactly(2))
-            ->method('importEntry')
+            ->method('updateEntry')
             ->willReturn($entry);
 
         $res = $firefoxImport->import();
@@ -118,7 +118,7 @@ class FirefoxImportTest extends \PHPUnit_Framework_TestCase
 
         $this->contentProxy
             ->expects($this->exactly(1))
-            ->method('importEntry')
+            ->method('updateEntry')
             ->willReturn(new Entry($this->user));
 
         // check that every entry persisted are archived
@@ -158,7 +158,7 @@ class FirefoxImportTest extends \PHPUnit_Framework_TestCase
 
         $this->contentProxy
             ->expects($this->never())
-            ->method('importEntry');
+            ->method('updateEntry');
 
         $producer = $this->getMockBuilder('OldSound\RabbitMqBundle\RabbitMq\Producer')
             ->disableOriginalConstructor()
@@ -198,7 +198,7 @@ class FirefoxImportTest extends \PHPUnit_Framework_TestCase
 
         $this->contentProxy
             ->expects($this->never())
-            ->method('importEntry');
+            ->method('updateEntry');
 
         $factory = new RedisMockFactory();
         $redisMock = $factory->getAdapter('Predis\Client', true);

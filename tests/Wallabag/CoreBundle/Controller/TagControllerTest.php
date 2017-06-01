@@ -123,7 +123,7 @@ class TagControllerTest extends WallabagCoreTestCase
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $this->assertEquals($entryUri, $client->getResponse()->getTargetUrl());
 
-	// re-retrieve the entry to be sure to get fresh data from database (mostly for tags)
+        // re-retrieve the entry to be sure to get fresh data from database (mostly for tags)
         $entry = $this->getEntityManager()->getRepository(Entry::class)->find($entry->getId());
         $this->assertNotContains($this->tagName, $entry->getTags());
 
