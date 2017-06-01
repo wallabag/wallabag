@@ -98,14 +98,6 @@ abstract class AbstractImport implements ImportInterface
     }
 
     /**
-     * Get whether articles should be fetched for updated content.
-     */
-    public function getDisableContentUpdate()
-    {
-        return $this->disableContentUpdate;
-    }
-
-    /**
      * Fetch content from the ContentProxy (using graby).
      * If it fails return the given entry to be saved in all case (to avoid user to loose the content).
      *
