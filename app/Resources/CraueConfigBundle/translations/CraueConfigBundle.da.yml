@@ -20,7 +20,6 @@ share_twitter: Aktiver deling gennem Twitter
 share_unmark: Aktiver deling gennem Unmark.it
 show_printlink: Vis et link til print-indhold
 wallabag_support_url: Support-URL for wallabag
-wallabag_url: URL for *sin* wallabag-installation
 entry: "artikel"
 export: "eksport"
 import: "import"

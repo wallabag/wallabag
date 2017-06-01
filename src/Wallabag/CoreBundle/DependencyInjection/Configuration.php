@@ -62,6 +62,7 @@ class Configuration implements ConfigurationInterface
                             ->end()
                         ->end()
                     ->end()
+                ->scalarNode('domain_name')
                 ->end()
             ->end()
         ;

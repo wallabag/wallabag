@@ -20,7 +20,6 @@ share_twitter: Abilita la condivisione con Twitter
 share_unmark: Abilita la condivisione con Unmark.it
 show_printlink: Mostra un collegamento per stampare il contenuto
 wallabag_support_url: URL di supporto per wallabag
-wallabag_url: URL della *tua* installazione di wallabag
 entry: "contenuto"
 export: "esporta"
 import: "importa"
