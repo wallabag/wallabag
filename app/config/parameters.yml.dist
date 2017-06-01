@@ -13,7 +13,7 @@ parameters:
     database_driver: pdo_mysql
     database_host: 127.0.0.1
     database_port: ~
-    database_name: symfony
+    database_name: wallabag
     database_user: root
     database_password: ~
     # For SQLite, database_path should be "%kernel.root_dir%/../data/db/wallabag.sqlite"
