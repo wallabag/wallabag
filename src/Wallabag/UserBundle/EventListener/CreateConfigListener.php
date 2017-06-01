@@ -5,7 +5,6 @@ namespace Wallabag\UserBundle\EventListener;
 use Doctrine\ORM\EntityManager;
 use FOS\UserBundle\Event\UserEvent;
 use FOS\UserBundle\FOSUserEvents;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Wallabag\CoreBundle\Entity\Config;
 
@@ -47,7 +46,7 @@ class CreateConfigListener implements EventSubscriberInterface
         ];
     }
 
-    public function createConfig(UserEvent $event, $eventName = null, EventDispatcherInterface $eventDispatcher = null)
+    public function createConfig(UserEvent $event)
     {
         $config = new Config($event->getUser());
         $config->setTheme($this->theme);
