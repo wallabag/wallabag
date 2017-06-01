@@ -64,7 +64,7 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
     protected $email;
 
     /**
-     * @var date
+     * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime")
      *
@@ -73,7 +73,7 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
     protected $createdAt;
 
     /**
-     * @var date
+     * @var \DateTime
      *
      * @ORM\Column(name="updated_at", type="datetime")
      *
