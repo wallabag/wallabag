@@ -66,6 +66,12 @@ class DownloadImages
                 continue;
             }
 
+            // if image contains "&"" and we can't find it in the html
+            // it might be because it's encoded as &amp;
+            if (false !== stripos($image, '&') && false === stripos($html, $image)) {
+                $image = str_replace('&', '&amp;', $image);
+            }
+
             $html = str_replace($image, $imagePath, $html);
         }
 
@@ -114,7 +120,7 @@ class DownloadImages
         $ext = $this->mimeGuesser->guess($res->getHeader('content-type'));
         $this->logger->debug('DownloadImages: Checking extension', ['ext' => $ext, 'header' => $res->getHeader('content-type')]);
         if (!in_array($ext, ['jpeg', 'jpg', 'gif', 'png'], true)) {
-            $this->logger->error('DownloadImages: Processed image with not allowed extension. Skipping '.$imagePath);
+            $this->logger->error('DownloadImages: Processed image with not allowed extension. Skipping: '.$imagePath);
 
             return false;
         }
