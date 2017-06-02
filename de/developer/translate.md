@@ -31,7 +31,7 @@ Du musst die `THE_TRANSLATION_FILE.CODE.yml` Dateien erstellen.
 ### Konfigurationsdatei
 
 Du musst die
-[app/config/config.yml](https://github.com/wallabag/wallabag/blob/master/app/config/config.yml)
+[app/config/wallabag.yml](https://github.com/wallabag/wallabag/blob/master/app/config/wallabag.yml)
 bearbeiten, um deine Sprache auf der Konfigurationsseite in wallabag
 anzuzeigen (um Nutzern zu erlauben zu dieser neuen Übersetzung zu
 wechseln).

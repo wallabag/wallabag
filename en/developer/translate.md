@@ -25,7 +25,7 @@ You have to create `THE_TRANSLATION_FILE.CODE.yml` files.
 ### Configuration file
 
 You have to edit
-[app/config/config.yml](https://github.com/wallabag/wallabag/blob/master/app/config/config.yml)
+[app/config/wallabag.yml](https://github.com/wallabag/wallabag/blob/master/app/config/wallabag.yml)
 to display your language on Configuration page of wallabag (to allow
 users to switch to this new translation).
 

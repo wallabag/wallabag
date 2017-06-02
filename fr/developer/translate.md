@@ -32,7 +32,7 @@ Vous devez créer les fichiers `LE_FICHIER_DE_TRADUCTION.CODE.yml`.
 ### Fichier de configuration
 
 Vous devez éditer
-[app/config/config.yml](https://github.com/wallabag/wallabag/blob/master/app/config/config.yml)
+[app/config/wallabag.yml](https://github.com/wallabag/wallabag/blob/master/app/config/wallabag.yml)
 pour afficher votre langue dans la page Configuration de wallabag (pour
 permettre aux utilisateurs de choisir cette nouvelle traduction).
 
