@@ -13,27 +13,127 @@ command.
 Notable commands
 ----------------
 
--   `assets:install`: May be helpful if assets are missing.
--   `cache:clear`: should be run after each update (included in
-    make update).
--   `doctrine:migrations:status`: Output the status of your database
-    migrations.
--   `fos:user:activate`: Manually activate an user.
--   `fos:user:change-password`: Change a password for an user.
--   `fos:user:create`: Create an user.
--   `fos:user:deactivate`: Deactivate an user (not deleted).
--   `fos:user:demote`: Removes a role from an user, typically admin
-    rights.
--   `fos:user:promote`: Adds a role to an user, typically admin
-    rights.
--   `rabbitmq:*`: May be useful if you're using RabbitMQ.
--   `wallabag:clean-duplicates`: Removes all entry duplicates for one
-    user or all users
--   `wallabag:export`: Exports all entries for an user. You can choose
-    the output path of the file.
--   `wallabag:import`: Import entries to different formats to an user
-    account.
--   `wallabag:import:redis-worker`: Useful if you use Redis.
--   `wallabag:install`: (re)Install wallabag
--   `wallabag:<tag:all>`: Tag all entries for an user using his/her
-    tagging rules.
+From Symfony:
+
+ - `assets:install`: May be helpful if assets are missing.
+ - `cache:clear`: should be run after each update (included in make update).
+ - `doctrine:migrations:status`: Output the status of your database migrations.
+ - `fos:user:activate`: Manually activate an user.
+ - `fos:user:change-password`: Change a password for an user.
+ - `fos:user:create`: Create an user.
+ - `fos:user:deactivate`: Deactivate an user (not deleted).
+ - `fos:user:demote`: Removes a role from an user, typically admin rights.
+ - `fos:user:promote`: Adds a role to an user, typically admin rights.
+ - `rabbitmq:*`: May be useful if you're using RabbitMQ.
+
+Custom to wallabag:
+
+ - `wallabag:clean-duplicates`: Removes all entry duplicates for one user or all users
+ - `wallabag:export`: Exports all entries for an user. You can choose the output path of the file.
+ - `wallabag:import`: Import entries to different formats to an user account.
+ - `wallabag:import:redis-worker`: Useful if you use Redis.
+ - `wallabag:install`: (re)Install wallabag
+ - `wallabag:tag:all`: Tag all entries for an user using his/her tagging rules.
+
+wallabag:clean-duplicates
+-------------------------
+
+This command helps you to clean your articles list in case of duplicates.
+
+Usage:
+
+```
+wallabag:clean-duplicates [<username>]
+```
+
+Arguments:
+
+ - username: User to clean
+
+
+wallabag:export
+---------------
+
+This command helps you to export all entries for an user.
+
+Usage:
+
+```
+wallabag:export <username> [<filepath>]
+```
+
+Arguments:
+
+ - username: User from which to export entries
+ - filepath: Path of the exported file
+
+
+wallabag:import
+---------------
+
+This command helps you to import entries from a JSON export.
+
+Usage:
+
+```
+wallabag:import [--] <username> <filepath>
+```
+
+Arguments:
+
+ - username: User to populate
+ - filepath: Path to the JSON file
+
+Options:
+
+ - `--importer=IMPORTER`: The importer to use: v1, v2, instapaper, pinboard, readability, firefox or chrome [default: "v1"]
+ - `--markAsRead=MARKASREAD`: Mark all entries as read [default: false]
+ - `--useUserId`: Use user id instead of username to find account
+ - `--disableContentUpdate`: Disable fetching updated content from URL
+
+
+wallabag:import:redis-worker
+----------------------------
+
+This command helps you to launch Redis worker.
+
+Usage:
+
+```
+wallabag:import:redis-worker [--] <serviceName>
+```
+
+Arguments:
+
+ - serviceName: Service to use: wallabag_v1, wallabag_v2, pocket, readability, pinboard, firefox, chrome or instapaper
+
+Options:
+
+ - `--maxIterations[=MAXITERATIONS]`: Number of iterations before stoping [default: false]
+
+
+wallabag:install
+----------------
+
+This command helps you to install or re-install wallabag.
+
+Usage:
+
+```
+wallabag:install
+```
+
+
+wallabag:tag:all
+----------------
+
+This command helps you to tag all entries using tagging rules.
+
+Usage:
+
+```
+wallabag:tag:all <username>
+```
+
+Arguments:
+ - username: User to tag entries for.
