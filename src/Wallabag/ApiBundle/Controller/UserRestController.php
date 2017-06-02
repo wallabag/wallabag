@@ -51,7 +51,7 @@ class UserRestController extends WallabagRestController
 
         $userManager = $this->get('fos_user.user_manager');
         $user = $userManager->createUser();
-        // user will be disabled BY DEFAULT to avoid spamming account to be created
+        // user will be disabled BY DEFAULT to avoid spamming account to be enabled
         $user->setEnabled(false);
 
         $form = $this->createForm('Wallabag\UserBundle\Form\NewUserType', $user, [

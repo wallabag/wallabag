@@ -34,3 +34,4 @@ demo_mode_username: "Utente Demo"
 # share_public: Allow public url for entries
 # download_images_enabled: Download images locally
 # restricted_access: Enable authentication for websites with paywall
+# api_user_registration: Enable user to be registered using the API
