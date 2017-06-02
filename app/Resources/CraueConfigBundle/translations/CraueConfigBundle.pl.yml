@@ -34,4 +34,4 @@ demo_mode_username: "Użytkownik Demonstracyjny"
 share_public: Zezwalaj na publiczny adres url dla wpisow
 download_images_enabled: Pobierz obrazy lokalnie
 restricted_access: Włącz autoryzację dla stron z paywallem
-# api_user_registration: Enable user to be registered using the API
+api_user_registration: Włącz rejestrację użytkownika przy użyciu API
