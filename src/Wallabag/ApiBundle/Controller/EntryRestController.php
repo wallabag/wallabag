@@ -374,6 +374,11 @@ class EntryRestController extends WallabagRestController
      *          {"name"="tags", "dataType"="string", "required"=false, "format"="tag1,tag2,tag3", "description"="a comma-separated list of tags."},
      *          {"name"="archive", "dataType"="integer", "required"=false, "format"="1 or 0", "description"="archived the entry."},
      *          {"name"="starred", "dataType"="integer", "required"=false, "format"="1 or 0", "description"="starred the entry."},
+     *          {"name"="content", "dataType"="string", "required"=false, "description"="Content of the entry"},
+     *          {"name"="language", "dataType"="string", "required"=false, "description"="Language of the entry"},
+     *          {"name"="preview_picture", "dataType"="string", "required"=false, "description"="Preview picture of the entry"},
+     *          {"name"="published_at", "dataType"="datetime|integer", "format"="YYYY-MM-DDTHH:II:SS+TZ or a timestamp", "required"=false, "description"="Published date of the entry"},
+     *          {"name"="authors", "dataType"="string", "format"="Name Firstname,author2,author3", "required"=false, "description"="Authors of the entry"},
      *      }
      * )
      *
@@ -385,11 +390,39 @@ class EntryRestController extends WallabagRestController
         $this->validateUserAccess($entry->getUser()->getId());
 
         $title = $request->request->get('title');
+        $tags = $request->request->get('tags', '');
         $isArchived = $request->request->get('archive');
         $isStarred = $request->request->get('starred');
+        $content = $request->request->get('content');
+        $language = $request->request->get('language');
+        $picture = $request->request->get('preview_picture');
+        $publishedAt = $request->request->get('published_at');
+        $authors = $request->request->get('authors', '');
 
-        if (!is_null($title)) {
-            $entry->setTitle($title);
+        try {
+            $this->get('wallabag_core.content_proxy')->updateEntry(
+                $entry,
+                $entry->getUrl(),
+                [
+                    'title' => !empty($title) ? $title : $entry->getTitle(),
+                    'html' => !empty($content) ? $content : $entry->getContent(),
+                    'url' => $entry->getUrl(),
+                    'language' => $language,
+                    'date' => $publishedAt,
+                    // faking the preview picture
+                    'open_graph' => [
+                        'og_image' => $picture,
+                    ],
+                    'authors' => is_string($authors) ? explode(',', $authors) : [],
+                ],
+                // we don't want the content to be update by fetching the url
+                true
+            );
+        } catch (\Exception $e) {
+            $this->get('logger')->error('Error while saving an entry', [
+                'exception' => $e,
+                'entry' => $entry,
+            ]);
         }
 
         if (!is_null($isArchived)) {
@@ -400,7 +433,6 @@ class EntryRestController extends WallabagRestController
             $entry->setStarred((bool) $isStarred);
         }
 
-        $tags = $request->request->get('tags', '');
         if (!empty($tags)) {
             $this->get('wallabag_core.tags_assigner')->assignTagsToEntry($entry, $tags);
         }

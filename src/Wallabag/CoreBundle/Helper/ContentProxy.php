@@ -105,7 +105,7 @@ class ContentProxy
             }
         }
 
-        if (!empty($content['authors'])) {
+        if (!empty($content['authors']) && is_array($content['authors'])) {
             $entry->setPublishedBy($content['authors']);
         }
 

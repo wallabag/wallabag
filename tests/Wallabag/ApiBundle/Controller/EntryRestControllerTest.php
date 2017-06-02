@@ -477,6 +477,10 @@ class EntryRestControllerTest extends WallabagApiTestCase
             'tags' => 'new tag '.uniqid(),
             'starred' => '1',
             'archive' => '0',
+            'language' => 'de_DE',
+            'preview_picture' => 'http://preview.io/picture.jpg',
+            'authors' => 'bob,sponge',
+            'content' => 'awesome',
         ]);
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
@@ -488,6 +492,11 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertEquals('New awesome title', $content['title']);
         $this->assertGreaterThan($nbTags, count($content['tags']));
         $this->assertEquals(1, $content['user_id']);
+        $this->assertEquals('de_DE', $content['language']);
+        $this->assertEquals('http://preview.io/picture.jpg', $content['preview_picture']);
+        $this->assertContains('sponge', $content['published_by']);
+        $this->assertContains('bob', $content['published_by']);
+        $this->assertEquals('awesome', $content['content']);
     }
 
     public function testPatchEntryWithoutQuotes()
@@ -509,6 +518,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
             'tags' => 'new tag '.uniqid(),
             'starred' => 1,
             'archive' => 0,
+            'authors' => ['bob', 'sponge'],
         ]);
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
@@ -519,6 +529,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertEquals($entry->getUrl(), $content['url']);
         $this->assertEquals('New awesome title', $content['title']);
         $this->assertGreaterThan($nbTags, count($content['tags']));
+        $this->assertTrue(empty($content['published_by']), 'Authors were not saved because of an array instead of a string');
     }
 
     public function testGetTagsEntry()
