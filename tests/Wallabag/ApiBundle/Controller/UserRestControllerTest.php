@@ -52,7 +52,7 @@ class UserRestControllerTest extends WallabagApiTestCase
             'email' => 'wallabag@google.com',
         ]);
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(201, $this->client->getResponse()->getStatusCode());
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
@@ -81,7 +81,7 @@ class UserRestControllerTest extends WallabagApiTestCase
             'email' => 'wallabag@google.com',
         ]);
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertEquals(201, $client->getResponse()->getStatusCode());
 
         $content = json_decode($client->getResponse()->getContent(), true);
 

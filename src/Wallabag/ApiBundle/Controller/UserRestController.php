@@ -46,7 +46,9 @@ class UserRestController extends WallabagRestController
         if (!$this->getParameter('fosuser_registration') || !$this->get('craue_config')->get('api_user_registration')) {
             $json = $this->get('serializer')->serialize(['error' => "Server doesn't allow registrations"], 'json');
 
-            return (new JsonResponse())->setJson($json)->setStatusCode(403);
+            return (new JsonResponse())
+                ->setJson($json)
+                ->setStatusCode(JsonResponse::HTTP_FORBIDDEN);
         }
 
         $userManager = $this->get('fos_user.user_manager');
@@ -90,7 +92,9 @@ class UserRestController extends WallabagRestController
 
             $json = $this->get('serializer')->serialize(['error' => $errors], 'json');
 
-            return (new JsonResponse())->setJson($json)->setStatusCode(400);
+            return (new JsonResponse())
+                ->setJson($json)
+                ->setStatusCode(JsonResponse::HTTP_BAD_REQUEST);
         }
 
         $userManager->updateUser($user);
@@ -99,17 +103,18 @@ class UserRestController extends WallabagRestController
         $event = new UserEvent($user, $request);
         $this->get('event_dispatcher')->dispatch(FOSUserEvents::USER_CREATED, $event);
 
-        return $this->sendUser($user);
+        return $this->sendUser($user, JsonResponse::HTTP_CREATED);
     }
 
     /**
      * Send user response.
      *
      * @param User $user
+     * @param int  $status HTTP Status code to send
      *
      * @return JsonResponse
      */
-    private function sendUser(User $user)
+    private function sendUser(User $user, $status = JsonResponse::HTTP_OK)
     {
         $json = $this->get('serializer')->serialize(
             $user,
@@ -117,7 +122,9 @@ class UserRestController extends WallabagRestController
             SerializationContext::create()->setGroups(['user_api'])
         );
 
-        return (new JsonResponse())->setJson($json);
+        return (new JsonResponse())
+            ->setJson($json)
+            ->setStatusCode($status);
     }
 
     /**
