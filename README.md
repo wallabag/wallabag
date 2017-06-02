@@ -2,7 +2,7 @@
 
 - [Documentation en français](/fr/index.md)
 - [Documentation in english](/en/index.md)
-- [Dokumentation in Deutsch](/de/index.md)
+- [Dokumentation auf Deutsch](/de/index.md)
 - [Italian Documentation](/it/index.md)
 
 # Install it locally

@@ -1,13 +1,13 @@
-Testsuite
-=========
+Tests
+=====
 
-To ensure wallabag development quality, we wrote tests with
-[PHPUnit](https://phpunit.de).
+Um die Entwicklungsqualität von wallabag sicherzustellen,
+haben wir Tests mit [PHPUnit](https://phpunit.de) geschrieben.
 
-If you contribute to the project (by translating the application, by
-fixing bugs or by adding a new feature), please write your own tests.
+Wenn du zu dem Projekt beiträgst (indem du Bugs behebst, neue Features
+hinzufügst oder übersetzt), schreibe bitte deine eigenen Tests.
 
-To launch wallabag testsuite, you need to install
-[ant](http://ant.apache.org).
+Um die Test-Suite von wallabag zu starten, muss
+[ant](http://ant.apache.org) installiert werden.
 
-Then, execute this command `make test`.
+Dann führe folgendes Kommando aus: `make test`.
