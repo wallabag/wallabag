@@ -1,19 +1,19 @@
-Articles behind a paywall
-=========================
+Artikel hinter einer Paywall
+============================
 
-wallabag can fetch articles from websites which use a paywall system.
+wallabag kann auch Artikel von Webseiten auslesen, welche eine Paywall (dt. Bezahlschranke) verwenden.
 
-Enable paywall authentication
------------------------------
+Paywall-Authentifizierung aktivieren
+------------------------------------
 
-In internal settings, in the **Article** section, enable authentication
-for websites with paywall (with the value 1).
+Setze in den internen Einstellungen im Bereich "Artikel" die Authentifizierung
+für Webseiten mit einer Paywall (mit dem Wert 1).
 
-Configure credentials in wallabag
+Anmeldedaten in wallabag konfigurieren
 ---------------------------------
 
-Edit your `app/config/parameters.yml` file to edit credentials for each
-website with paywall. Here is an example for some french websites:
+Bearbeite deine `app/config/parameters.yml`-Datei, um die Daten
+für jede Webseite mit einer Paywall zu hinterlegen. Hier ist ein Beispiel für einige französische Webseiten:
 
 ``` {.sourceCode .yaml}
 sites_credentials:
@@ -23,36 +23,34 @@ sites_credentials:
 
 <div class="admonition note">
 
-These credentials will be shared between each user of your wallabag
-instance.
+Diese Daten werden mit jedem Nutzer der wallabag-Instanz geteilt.
 
 </div>
 
-Parsing configuration files
----------------------------
+Konfigurationsdateien parsen
+-----------------------------
 
 <div class="admonition note">
 
-Read [this part of the
-documentation](http://doc.wallabag.org/en/master/user/errors_during_fetching.html)
-to understand the configuration files.
+Lese [diesen Teil der Dokumentation](http://doc.wallabag.org/de/master/user/errors_during_fetching.html),
+um die Konfiguration zu verstehen.
 
 </div>
 
-Each parsing configuration file needs to be improved by adding
+Jede Parsing-Konfigurationsdatei muss mit den Feldern
 `requires_login`, `login_uri`, `login_username_field`,
-`login_password_field` and `not_logged_in_xpath`.
+`login_password_field` und `not_logged_in_xpath` erweitert werden.
 
-Be careful, the login form must be in the page content when wallabag
-loads it. It's impossible for wallabag to be authenticated on a website
-where the login form is loaded after the page (by ajax for example).
+Sei vorsichtig, das Login-Formular muss auf der Inhaltsseite sein,
+wenn wallabag diese lädt. Es ist unmöglich, auf einer Webseite angemeldet
+zu werden, bei welcher das Login-Formular erst im Nachhinein (etwa durch
+AJAX) geladen wird.
 
-`login_uri` is the action URL of the form (`action` attribute in the
-form). `login_username_field` is the `name` attribute of the login
-field. `login_password_field` is the `name` attribute of the password
-field.
+`login_uri` ist die Aktions-URL des Formulars (`action`-Attribut).
+`login_username_field` ist das `name`-Attribut von dem Login-Feld. 
+`login_password_field` ist das `name`-Attribut von dem Password-Feld.
 
-For example:
+Beispiel:
 
 ``` {.sourceCode .}
 title://div[@id="titrage-contenu"]/h1[@class="title"]

@@ -1,16 +1,16 @@
 # Actions en ligne de commande
 
 wallabag a un certain nombre de commandes CLI pour effectuer des tâches.
-Vous pouvez lister toutes les commandes en exécutant bin/console dans le
+Vous pouvez lister toutes les commandes en exécutant `bin/console` dans le
 dossier d'installation de wallabag.
 
 Chaque commande a une aide correspondante accessible via
-bin/console help %command%.
+`bin/console help %command%`.
 
 <div class="admonition note">
 
 Si vous êtes dans un environnement de production, souvenez-vous
-d'ajouter -e prod à chaque commande.
+d'ajouter `-e prod` à chaque commande.
 
 </div>
 

@@ -2,12 +2,12 @@ Console Commands
 ================
 
 wallabag has a number of CLI commands to manage a number of tasks. You
-can list all the commands by executing bin/console in the wallabag
+can list all the commands by executing `bin/console` in the wallabag
 folder.
 
 Each command has a help accessible through `bin/console help %command%`.
 
-> If you're in a production environment, remember to add -e prod to each
+> If you're in a production environment, remember to add `-e prod` to each
 command.
 
 Notable commands
