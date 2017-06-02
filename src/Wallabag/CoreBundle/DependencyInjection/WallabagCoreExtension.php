@@ -28,6 +28,7 @@ class WallabagCoreExtension extends Extension
         $container->setParameter('wallabag_core.fetching_error_message', $config['fetching_error_message']);
         $container->setParameter('wallabag_core.fetching_error_message_title', $config['fetching_error_message_title']);
         $container->setParameter('wallabag_core.api_limit_mass_actions', $config['api_limit_mass_actions']);
+        $container->setParameter('wallabag_core.default_internal_settings', $config['default_internal_settings']);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');

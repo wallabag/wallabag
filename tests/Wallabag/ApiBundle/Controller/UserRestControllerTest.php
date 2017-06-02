@@ -27,8 +27,25 @@ class UserRestControllerTest extends WallabagApiTestCase
         $this->assertEquals('application/json', $this->client->getResponse()->headers->get('Content-Type'));
     }
 
+    public function testGetUserWithoutAuthentication()
+    {
+        $client = static::createClient();
+        $client->request('GET', '/api/user.json');
+        $this->assertEquals(401, $client->getResponse()->getStatusCode());
+
+        $content = json_decode($client->getResponse()->getContent(), true);
+
+        $this->assertArrayHasKey('error', $content);
+        $this->assertArrayHasKey('error_description', $content);
+
+        $this->assertEquals('access_denied', $content['error']);
+
+        $this->assertEquals('application/json', $client->getResponse()->headers->get('Content-Type'));
+    }
+
     public function testCreateNewUser()
     {
+        $this->client->getContainer()->get('craue_config')->set('api_user_registration', 1);
         $this->client->request('PUT', '/api/user.json', [
             'username' => 'google',
             'password' => 'googlegoogle',
@@ -50,30 +67,51 @@ class UserRestControllerTest extends WallabagApiTestCase
 
         $this->assertEquals('application/json', $this->client->getResponse()->headers->get('Content-Type'));
 
-        // remove the created user to avoid side effect on other tests
-        // @todo remove these lines when test will be isolated
-        $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+        $this->client->getContainer()->get('craue_config')->set('api_user_registration', 0);
+    }
 
-        $query = $em->createQuery('DELETE FROM Wallabag\CoreBundle\Entity\Config c WHERE c.user = :user_id');
-        $query->setParameter('user_id', $content['id']);
-        $query->execute();
+    public function testCreateNewUserWithoutAuthentication()
+    {
+        // create a new client instead of using $this->client to be sure client isn't authenticated
+        $client = static::createClient();
+        $client->getContainer()->get('craue_config')->set('api_user_registration', 1);
+        $client->request('PUT', '/api/user.json', [
+            'username' => 'google',
+            'password' => 'googlegoogle',
+            'email' => 'wallabag@google.com',
+        ]);
 
-        $query = $em->createQuery('DELETE FROM Wallabag\UserBundle\Entity\User u WHERE u.id = :id');
-        $query->setParameter('id', $content['id']);
-        $query->execute();
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $content = json_decode($client->getResponse()->getContent(), true);
+
+        $this->assertArrayHasKey('id', $content);
+        $this->assertArrayHasKey('email', $content);
+        $this->assertArrayHasKey('username', $content);
+        $this->assertArrayHasKey('created_at', $content);
+        $this->assertArrayHasKey('updated_at', $content);
+
+        $this->assertEquals('wallabag@google.com', $content['email']);
+        $this->assertEquals('google', $content['username']);
+
+        $this->assertEquals('application/json', $client->getResponse()->headers->get('Content-Type'));
+
+        $client->getContainer()->get('craue_config')->set('api_user_registration', 0);
     }
 
     public function testCreateNewUserWithExistingEmail()
     {
-        $this->client->request('PUT', '/api/user.json', [
+        $client = static::createClient();
+        $client->getContainer()->get('craue_config')->set('api_user_registration', 1);
+        $client->request('PUT', '/api/user.json', [
             'username' => 'admin',
             'password' => 'googlegoogle',
             'email' => 'bigboss@wallabag.org',
         ]);
 
-        $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(400, $client->getResponse()->getStatusCode());
 
-        $content = json_decode($this->client->getResponse()->getContent(), true);
+        $content = json_decode($client->getResponse()->getContent(), true);
 
         $this->assertArrayHasKey('error', $content);
         $this->assertArrayHasKey('username', $content['error']);
@@ -85,26 +123,50 @@ class UserRestControllerTest extends WallabagApiTestCase
         $this->assertEquals('This value is already used.', $content['error']['username'][0]);
         $this->assertEquals('This value is already used.', $content['error']['email'][0]);
 
-        $this->assertEquals('application/json', $this->client->getResponse()->headers->get('Content-Type'));
+        $this->assertEquals('application/json', $client->getResponse()->headers->get('Content-Type'));
+
+        $client->getContainer()->get('craue_config')->set('api_user_registration', 0);
     }
 
     public function testCreateNewUserWithTooShortPassword()
     {
-        $this->client->request('PUT', '/api/user.json', [
+        $client = static::createClient();
+        $client->getContainer()->get('craue_config')->set('api_user_registration', 1);
+        $client->request('PUT', '/api/user.json', [
             'username' => 'facebook',
             'password' => 'face',
             'email' => 'facebook@wallabag.org',
         ]);
 
-        $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(400, $client->getResponse()->getStatusCode());
 
-        $content = json_decode($this->client->getResponse()->getContent(), true);
+        $content = json_decode($client->getResponse()->getContent(), true);
 
         $this->assertArrayHasKey('error', $content);
         $this->assertArrayHasKey('password', $content['error']);
 
         $this->assertEquals('validator.password_too_short', $content['error']['password'][0]);
 
-        $this->assertEquals('application/json', $this->client->getResponse()->headers->get('Content-Type'));
+        $this->assertEquals('application/json', $client->getResponse()->headers->get('Content-Type'));
+
+        $client->getContainer()->get('craue_config')->set('api_user_registration', 0);
+    }
+
+    public function testCreateNewUserWhenRegistrationIsDisabled()
+    {
+        $client = static::createClient();
+        $client->request('PUT', '/api/user.json', [
+            'username' => 'facebook',
+            'password' => 'face',
+            'email' => 'facebook@wallabag.org',
+        ]);
+
+        $this->assertEquals(403, $client->getResponse()->getStatusCode());
+
+        $content = json_decode($client->getResponse()->getContent(), true);
+
+        $this->assertArrayHasKey('error', $content);
+
+        $this->assertEquals('application/json', $client->getResponse()->headers->get('Content-Type'));
     }
 }

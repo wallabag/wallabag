@@ -43,7 +43,7 @@ class UserRestController extends WallabagRestController
      */
     public function putUserAction(Request $request)
     {
-        if (!$this->container->getParameter('fosuser_registration')) {
+        if (!$this->getParameter('fosuser_registration') || !$this->get('craue_config')->get('api_user_registration')) {
             $json = $this->get('serializer')->serialize(['error' => "Server doesn't allow registrations"], 'json');
 
             return (new JsonResponse())->setJson($json)->setStatusCode(403);
@@ -51,8 +51,8 @@ class UserRestController extends WallabagRestController
 
         $userManager = $this->get('fos_user.user_manager');
         $user = $userManager->createUser();
-        // enable created user by default
-        $user->setEnabled(true);
+        // user will be disabled BY DEFAULT to avoid spamming account to be created
+        $user->setEnabled(false);
 
         $form = $this->createForm('Wallabag\UserBundle\Form\NewUserType', $user, [
             'csrf_protection' => false,

@@ -62,6 +62,135 @@ wallabag_core:
     fetching_error_message: |
         wallabag can't retrieve contents for this article. Please <a href="http://doc.wallabag.org/en/user/errors_during_fetching.html#how-can-i-help-to-fix-that">troubleshoot this issue</a>.
     api_limit_mass_actions: 10
+    default_internal_settings:
+        -
+            name: share_public
+            value: 1
+            section: entry
+        -
+            name: carrot
+            value: 1
+            section: entry
+        -
+            name: share_diaspora
+            value: 1
+            section: entry
+        -
+            name: diaspora_url
+            value: http://diasporapod.com
+            section: entry
+        -
+            name: share_unmark
+            value: 1
+            section: entry
+        -
+            name: unmark_url
+            value: https://unmark.it
+            section: entry
+        -
+            name: share_shaarli
+            value: 1
+            section: entry
+        -
+            name: share_scuttle
+            value: 1
+            section: entry
+        -
+            name: shaarli_url
+            value: http://myshaarli.com
+            section: entry
+        -
+            name: scuttle_url
+            value: http://scuttle.org
+            section: entry
+        -
+            name: share_mail
+            value: 1
+            section: entry
+        -
+            name: share_twitter
+            value: 1
+            section: entry
+        -
+            name: show_printlink
+            value: 1
+            section: entry
+        -
+            name: restricted_access
+            value: 0
+            section: entry
+        -
+            name: export_epub
+            value: 1
+            section: export
+        -
+            name: export_mobi
+            value: 1
+            section: export
+        -
+            name: export_pdf
+            value: 1
+            section: export
+        -
+            name: export_csv
+            value: 1
+            section: export
+        -
+            name: export_json
+            value: 1
+            section: export
+        -
+            name: export_txt
+            value: 1
+            section: export
+        -
+            name: export_xml
+            value: 1
+            section: export
+        -
+            name: import_with_redis
+            value: 0
+            section: import
+        -
+            name: import_with_rabbitmq
+            value: 0
+            section: import
+        -
+            name: piwik_enabled
+            value: 0
+            section: analytics
+        -
+            name: piwik_host
+            value: v2.wallabag.org
+            section: analytics
+        -
+            name: piwik_site_id
+            value: 1
+            section: analytics
+        -
+            name: demo_mode_enabled
+            value: 0
+            section: misc
+        -
+            name: demo_mode_username
+            value: wallabag
+            section: misc
+        -
+            name: download_images_enabled
+            value: 0
+            section: misc
+        -
+            name: wallabag_support_url
+            value: https://www.wallabag.org/pages/support.html
+            section: misc
+        -
+            name: wallabag_url
+            value: http://v2.wallabag.org
+            section: misc
+        -
+            name: api_user_registration
+            value: 0
+            section: api
 
 wallabag_user:
     registration_enabled: "%fosuser_registration%"
