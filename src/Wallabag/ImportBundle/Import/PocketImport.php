@@ -192,7 +192,7 @@ class PocketImport extends AbstractImport
         $entry->setUrl($url);
 
         // update entry with content (in case fetching failed, the given entry will be return)
-        $entry = $this->fetchContent($entry, $url);
+        $this->fetchContent($entry, $url);
 
         // 0, 1, 2 - 1 if the item is archived - 2 if the item should be deleted
         $entry->setArchived($importedEntry['status'] == 1 || $this->markAsRead);

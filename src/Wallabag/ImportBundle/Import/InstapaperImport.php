@@ -125,7 +125,7 @@ class InstapaperImport extends AbstractImport
         $entry->setTitle($importedEntry['title']);
 
         // update entry with content (in case fetching failed, the given entry will be return)
-        $entry = $this->fetchContent($entry, $importedEntry['url'], $importedEntry);
+        $this->fetchContent($entry, $importedEntry['url'], $importedEntry);
 
         if (!empty($importedEntry['tags'])) {
             $this->tagsAssigner->assignTagsToEntry(

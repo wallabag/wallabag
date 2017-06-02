@@ -31,27 +31,20 @@ class ContentProxy
     }
 
     /**
-     * Fetch content using graby and hydrate given $entry with results information.
-     * In case we couldn't find content, we'll try to use Open Graph data.
+     * Update entry using either fetched or provided content.
      *
-     * We can also force the content, in case of an import from the v1 for example, so the function won't
-     * fetch the content from the website but rather use information given with the $content parameter.
-     *
-     * @param Entry  $entry   Entry to update
-     * @param string $url     Url to grab content for
-     * @param array  $content An array with AT LEAST keys title, html, url to skip the fetchContent from the url
-     *
-     * @return Entry
+     * @param Entry  $entry                Entry to update
+     * @param string $url                  Url of the content
+     * @param array  $content              Array with content provided for import with AT LEAST keys title, html, url to skip the fetchContent from the url
+     * @param bool   $disableContentUpdate Whether to skip trying to fetch content using Graby
      */
-    public function updateEntry(Entry $entry, $url, array $content = [])
+    public function updateEntry(Entry $entry, $url, array $content = [], $disableContentUpdate = false)
     {
-        // ensure content is a bit cleaned up
         if (!empty($content['html'])) {
             $content['html'] = $this->graby->cleanupHtml($content['html'], $url);
         }
 
-        // do we have to fetch the content or the provided one is ok?
-        if (empty($content) || false === $this->validateContent($content)) {
+        if ((empty($content) || false === $this->validateContent($content)) && false === $disableContentUpdate) {
             $fetchedContent = $this->graby->fetchContent($url);
 
             // when content is imported, we have information in $content
@@ -61,6 +54,22 @@ class ContentProxy
             }
         }
 
+        // be sure to keep the url in case of error
+        // so we'll be able to refetch it in the future
+        $content['url'] = !empty($content['url']) ? $content['url'] : $url;
+
+        $this->stockEntry($entry, $content);
+    }
+
+    /**
+     * Stock entry with fetched or imported content.
+     * Will fall back to OpenGraph data if available.
+     *
+     * @param Entry $entry   Entry to stock
+     * @param array $content Array with at least title, url & html
+     */
+    private function stockEntry(Entry $entry, array $content)
+    {
         $title = $content['title'];
         if (!$title && !empty($content['open_graph']['og_title'])) {
             $title = $content['open_graph']['og_title'];
@@ -76,7 +85,7 @@ class ContentProxy
             }
         }
 
-        $entry->setUrl($content['url'] ?: $url);
+        $entry->setUrl($content['url']);
         $entry->setTitle($title);
         $entry->setContent($html);
         $entry->setHttpStatus(isset($content['status']) ? $content['status'] : '');
@@ -92,7 +101,7 @@ class ContentProxy
             try {
                 $entry->setPublishedAt(new \DateTime($date));
             } catch (\Exception $e) {
-                $this->logger->warning('Error while defining date', ['e' => $e, 'url' => $url, 'date' => $content['date']]);
+                $this->logger->warning('Error while defining date', ['e' => $e, 'url' => $content['url'], 'date' => $content['date']]);
             }
         }
 
@@ -126,17 +135,14 @@ class ContentProxy
             $this->tagger->tag($entry);
         } catch (\Exception $e) {
             $this->logger->error('Error while trying to automatically tag an entry.', [
-                'entry_url' => $url,
+                'entry_url' => $content['url'],
                 'error_msg' => $e->getMessage(),
             ]);
         }
-
-        return $entry;
     }
 
     /**
-     * Validate that the given content as enough value to be used
-     * instead of fetch the content from the url.
+     * Validate that the given content has at least a title, an html and a url.
      *
      * @param array $content
      *

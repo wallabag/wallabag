@@ -24,6 +24,7 @@ abstract class AbstractImport implements ImportInterface
     protected $producer;
     protected $user;
     protected $markAsRead;
+    protected $disableContentUpdate = false;
     protected $skippedEntries = 0;
     protected $importedEntries = 0;
     protected $queuedEntries = 0;
@@ -85,21 +86,34 @@ abstract class AbstractImport implements ImportInterface
     }
 
     /**
+     * Set whether articles should be fetched for updated content.
+     *
+     * @param bool $disableContentUpdate
+     */
+    public function setDisableContentUpdate($disableContentUpdate)
+    {
+        $this->disableContentUpdate = $disableContentUpdate;
+
+        return $this;
+    }
+
+    /**
      * Fetch content from the ContentProxy (using graby).
      * If it fails return the given entry to be saved in all case (to avoid user to loose the content).
      *
      * @param Entry  $entry   Entry to update
      * @param string $url     Url to grab content for
      * @param array  $content An array with AT LEAST keys title, html, url, language & content_type to skip the fetchContent from the url
-     *
-     * @return Entry
      */
     protected function fetchContent(Entry $entry, $url, array $content = [])
     {
         try {
-            return $this->contentProxy->updateEntry($entry, $url, $content);
+            $this->contentProxy->updateEntry($entry, $url, $content, $this->disableContentUpdate);
         } catch (\Exception $e) {
-            return $entry;
+            $this->logger->error('Error trying to import an entry.', [
+                'entry_url' => $url,
+                'error_msg' => $e->getMessage(),
+            ]);
         }
     }
 

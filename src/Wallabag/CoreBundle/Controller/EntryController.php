@@ -53,22 +53,17 @@ class EntryController extends Controller
 
     /**
      * Fetch content and update entry.
-     * In case it fails, entry will return to avod loosing the data.
+     * In case it fails, $entry->getContent will return an error message.
      *
      * @param Entry  $entry
      * @param string $prefixMessage Should be the translation key: entry_saved or entry_reloaded
-     *
-     * @return Entry
      */
     private function updateEntry(Entry $entry, $prefixMessage = 'entry_saved')
     {
-        // put default title in case of fetching content failed
-        $entry->setTitle('No title found');
-
         $message = 'flashes.entry.notice.'.$prefixMessage;
 
         try {
-            $entry = $this->get('wallabag_core.content_proxy')->updateEntry($entry, $entry->getUrl());
+            $this->get('wallabag_core.content_proxy')->updateEntry($entry, $entry->getUrl());
         } catch (\Exception $e) {
             $this->get('logger')->error('Error while saving an entry', [
                 'exception' => $e,
@@ -79,8 +74,6 @@ class EntryController extends Controller
         }
 
         $this->get('session')->getFlashBag()->add('notice', $message);
-
-        return $entry;
     }
 
     /**

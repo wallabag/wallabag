@@ -35,6 +35,8 @@ services:
             - "@wallabag_core.content_proxy"
             - "@wallabag_core.tags_assigner"
             - "@event_dispatcher"
+            - "%wallabag_core.fetching_error_message_title%"
+            - "%wallabag_core.fetching_error_message%"
         calls:
             - [ setLogger, [ "@logger" ]]
         tags:
