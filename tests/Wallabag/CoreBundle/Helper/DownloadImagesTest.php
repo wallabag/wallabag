@@ -12,7 +12,24 @@ use GuzzleHttp\Stream\Stream;
 
 class DownloadImagesTest extends \PHPUnit_Framework_TestCase
 {
-    public function testProcessHtml()
+    public function dataForSuccessImage()
+    {
+        return [
+            'imgur' => [
+                '<div><img src="http://i.imgur.com/T9qgcHc.jpg" /></div>',
+                'http://imgur.com/gallery/WxtWY',
+            ],
+            'image with &' => [
+                '<div><img src="https://i2.wp.com/www.tvaddons.ag/wp-content/uploads/2017/01/Screen-Shot-2017-01-07-at-10.17.40-PM.jpg?w=640&amp;ssl=1" /></div>',
+                'https://www.tvaddons.ag/realdebrid-kodi-jarvis/',
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider dataForSuccessImage
+     */
+    public function testProcessHtml($html, $url)
     {
         $client = new Client();
 
@@ -27,9 +44,10 @@ class DownloadImagesTest extends \PHPUnit_Framework_TestCase
 
         $download = new DownloadImages($client, sys_get_temp_dir().'/wallabag_test', 'http://wallabag.io/', $logger);
 
-        $res = $download->processHtml(123, '<div><img src="http://i.imgur.com/T9qgcHc.jpg" /></div>', 'http://imgur.com/gallery/WxtWY');
+        $res = $download->processHtml(123, $html, $url);
 
-        $this->assertContains('http://wallabag.io/assets/images/9/b/9b0ead26/c638b4c2.png', $res);
+        // this the base path of all image (since it's calculated using the entry id: 123)
+        $this->assertContains('http://wallabag.io/assets/images/9/b/9b0ead26/', $res);
     }
 
     public function testProcessHtmlWithBadImage()
