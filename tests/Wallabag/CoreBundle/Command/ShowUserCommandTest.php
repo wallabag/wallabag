@@ -61,7 +61,7 @@ class ShowUserCommandTest extends WallabagCoreTestCase
         $this->assertContains('Username : admin', $tester->getDisplay());
         $this->assertContains('Email : bigboss@wallabag.org', $tester->getDisplay());
         $this->assertContains('Display name : Big boss', $tester->getDisplay());
-        $this->assertContains('2FA activated: false', $tester->getDisplay());
+        $this->assertContains('2FA activated: no', $tester->getDisplay());
     }
 
     public function testShowUser()

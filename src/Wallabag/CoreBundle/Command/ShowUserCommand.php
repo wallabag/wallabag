@@ -53,9 +53,9 @@ class ShowUserCommand extends ContainerAwareCommand
         $this->output->writeln(sprintf('Username : %s', $user->getUsername()));
         $this->output->writeln(sprintf('Email : %s', $user->getEmail()));
         $this->output->writeln(sprintf('Display name : %s', $user->getName()));
-        $this->output->writeln(sprintf('Creation date : %s', $user->getCreatedAt() !== null ? $user->getCreatedAt()->format('Y-m-d H:i:s') : 'false'));
-        $this->output->writeln(sprintf('Last login : %s', $user->getLastLogin() !== null ? $user->getLastLogin()->format('Y-m-d H:i:s') : 'false'));
-        $this->output->writeln(sprintf('2FA activated: %s', $user->isTwoFactorAuthentication() ? 'true' : 'false'));
+        $this->output->writeln(sprintf('Creation date : %s', $user->getCreatedAt()->format('Y-m-d H:i:s')));
+        $this->output->writeln(sprintf('Last login : %s', $user->getLastLogin() !== null ? $user->getLastLogin()->format('Y-m-d H:i:s') : 'never'));
+        $this->output->writeln(sprintf('2FA activated: %s', $user->isTwoFactorAuthentication() ? 'yes' : 'no'));
     }
 
     /**
