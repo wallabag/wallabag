@@ -157,4 +157,29 @@ class DownloadImagesTest extends \PHPUnit_Framework_TestCase
 
         $this->assertFalse($res, 'Absolute image can not be determined, so it will not be replaced');
     }
+
+    public function testProcessRealImage()
+    {
+        $client = new Client();
+
+        $mock = new Mock([
+            new Response(200, ['content-type' => null], Stream::factory(file_get_contents(__DIR__.'/../fixtures/image-no-content-type.jpg'))),
+        ]);
+
+        $client->getEmitter()->attach($mock);
+
+        $logHandler = new TestHandler();
+        $logger = new Logger('test', array($logHandler));
+
+        $download = new DownloadImages($client, sys_get_temp_dir().'/wallabag_test', 'http://wallabag.io/', $logger);
+
+        $res = $download->processSingleImage(
+            123,
+            'https://cdn.theconversation.com/files/157200/article/width926/gsj2rjp2-1487348607.jpg',
+            'https://theconversation.com/conversation-avec-gerald-bronner-ce-nest-pas-la-post-verite-qui-nous-menace-mais-lextension-de-notre-credulite-73089'
+        );
+
+        $this->assertContains('http://wallabag.io/assets/images/9/b/9b0ead26/', $res, 'Content-Type was empty but data is ok for an image');
+        $this->assertContains('DownloadImages: Checking extension (alternative)', $logHandler->getRecords()[3]['message']);
+    }
 }

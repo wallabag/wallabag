@@ -5,6 +5,7 @@ namespace Wallabag\CoreBundle\Helper;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DomCrawler\Crawler;
 use GuzzleHttp\Client;
+use GuzzleHttp\Message\Response;
 use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeExtensionGuesser;
 use Symfony\Component\Finder\Finder;
 
@@ -116,13 +117,11 @@ class DownloadImages
             return false;
         }
 
-        $ext = $this->mimeGuesser->guess($res->getHeader('content-type'));
-        $this->logger->debug('DownloadImages: Checking extension', ['ext' => $ext, 'header' => $res->getHeader('content-type')]);
-        if (!in_array($ext, ['jpeg', 'jpg', 'gif', 'png'], true)) {
-            $this->logger->error('DownloadImages: Processed image with not allowed extension. Skipping: '.$imagePath);
-
+        $ext = $this->getExtensionFromResponse($res, $imagePath);
+        if (false === $res) {
             return false;
         }
+
         $hashImage = hash('crc32', $absolutePath);
         $localPath = $folderPath.'/'.$hashImage.'.'.$ext;
 
@@ -236,5 +235,46 @@ class DownloadImages
         $this->logger->error('DownloadImages: Can not make an absolute link', ['base' => $base, 'url' => $url]);
 
         return false;
+    }
+
+    /**
+     * Retrieve and validate the extension from the response of the url of the image.
+     *
+     * @param Response $res       Guzzle Response
+     * @param string   $imagePath Path from the src image from the content (used for log only)
+     *
+     * @return string|false Extension name or false if validation failed
+     */
+    private function getExtensionFromResponse(Response $res, $imagePath)
+    {
+        $ext = $this->mimeGuesser->guess($res->getHeader('content-type'));
+        $this->logger->debug('DownloadImages: Checking extension', ['ext' => $ext, 'header' => $res->getHeader('content-type')]);
+
+        // ok header doesn't have the extension, try a different way
+        if (empty($ext)) {
+            $types = [
+                'jpeg' => "\xFF\xD8\xFF",
+                'gif' => 'GIF',
+                'png' => "\x89\x50\x4e\x47\x0d\x0a",
+            ];
+            $bytes = substr((string) $res->getBody(), 0, 8);
+
+            foreach ($types as $type => $header) {
+                if (0 === strpos($bytes, $header)) {
+                    $ext = $type;
+                    break;
+                }
+            }
+
+            $this->logger->debug('DownloadImages: Checking extension (alternative)', ['ext' => $ext]);
+        }
+
+        if (!in_array($ext, ['jpeg', 'jpg', 'gif', 'png'], true)) {
+            $this->logger->error('DownloadImages: Processed image with not allowed extension. Skipping: '.$imagePath);
+
+            return false;
+        }
+
+        return $ext;
     }
 }
