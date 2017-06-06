@@ -1,4 +1,4 @@
-:warning: If your issue is about an error during fetching a link, please read: http://doc.wallabag.org/en/master/user/errors_during_fetching.html#how-can-i-help-to-fix-that
+:warning: If your issue is about an error during fetching a link, please read: http://doc.wallabag.org/en/user/errors_during_fetching.html#how-can-i-help-to-fix-that
 
 ### Issue details
 
