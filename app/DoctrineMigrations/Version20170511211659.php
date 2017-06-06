@@ -74,7 +74,7 @@ EOD
                 break;
 
             case 'postgresql':
-                $this->addSql('ALTER TABLE '.$tableName.' ALTER COLUMN quote TYPE TEXT NOT NULL ');
+                $this->addSql('ALTER TABLE '.$tableName.' ALTER COLUMN quote TYPE TEXT');
                 break;
         }
     }
@@ -93,7 +93,7 @@ EOD
                 break;
 
             case 'postgresql':
-                $this->addSql('ALTER TABLE '.$tableName.' ALTER COLUMN quote TYPE VARCHAR(255) NOT NULL ');
+                $this->addSql('ALTER TABLE '.$tableName.' ALTER COLUMN quote TYPE VARCHAR(255)');
                 break;
         }
     }
