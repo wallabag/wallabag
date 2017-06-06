@@ -34,6 +34,7 @@ Custom to wallabag:
  - `wallabag:import:redis-worker`: Useful if you use Redis.
  - `wallabag:install`: (re)Install wallabag
  - `wallabag:tag:all`: Tag all entries for an user using his/her tagging rules.
+ - `wallabag:user:show`: Shows the details for an user.
 
 wallabag:clean-duplicates
 -------------------------
@@ -137,3 +138,18 @@ wallabag:tag:all <username>
 
 Arguments:
  - username: User to tag entries for.
+
+
+wallabag:user:show
+------------------
+
+This command shows the details for an user.
+
+Usage:
+
+```
+wallabag:user:show <username>
+```
+
+Arguments:
+ - username: User to show details for.

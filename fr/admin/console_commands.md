@@ -141,3 +141,18 @@ wallabag:tag:all <username>
 
 Arguments:
  - username: Utilisateur sur lequel travailler.
+
+
+wallabag:user:show
+------------------
+
+Cette commande vous permet d'afficher les détails d'un utilisateur.
+
+Utilisation:
+
+```
+wallabag:user:show <username>
+```
+
+Arguments:
+ - username: Utilisateur sur lequel travailler.
