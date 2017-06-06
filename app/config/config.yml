@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: wallabag.yml }
 
 parameters:
     # Allows to use the live reload feature for changes in assets
@@ -33,42 +34,6 @@ framework:
     fragments: ~
     http_method_override: true
     assets: ~
-
-wallabag_core:
-    version: 2.2.3
-    paypal_url: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9UBA65LG3FX9Y&lc=gb"
-    languages:
-        en: 'English'
-        fr: 'Français'
-        de: 'Deutsch'
-        tr: 'Türkçe'
-        fa: 'فارسی'
-        ro: 'Română'
-        pl: 'Polish'
-        da: 'Dansk'
-        es: 'Español'
-        oc: 'Occitan'
-        it: 'Italiano'
-        pt: 'Português'
-    items_on_page: 12
-    theme: material
-    language: '%locale%'
-    rss_limit: 50
-    reading_speed: 1
-    cache_lifetime: 10
-    action_mark_as_read: 1
-    list_mode: 0
-    fetching_error_message_title: 'No title found'
-    fetching_error_message: |
-        wallabag can't retrieve contents for this article. Please <a href="http://doc.wallabag.org/en/user/errors_during_fetching.html#how-can-i-help-to-fix-that">troubleshoot this issue</a>.
-    api_limit_mass_actions: 10
-
-wallabag_user:
-    registration_enabled: "%fosuser_registration%"
-
-wallabag_import:
-    allow_mimetypes: ['application/octet-stream', 'application/json', 'text/plain', 'text/csv']
-    resource_dir: "%kernel.root_dir%/../web/uploads/import"
 
 # Twig Configuration
 twig:

@@ -34,3 +34,4 @@ demo_mode_username: "Nombre de usuario demo"
 share_public: Permitir URL pública para los artículos
 download_images_enabled: Descargar imágenes localmente
 restricted_access: Activar autenticación para websites con paywall
+# api_user_registration: Enable user to be registered using the API

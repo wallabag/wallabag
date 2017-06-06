@@ -52,6 +52,17 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('api_limit_mass_actions')
                     ->defaultValue(10)
                 ->end()
+                ->arrayNode('default_internal_settings')
+                    ->prototype('array')
+                        ->children()
+                            ->scalarNode('name')->end()
+                            ->scalarNode('value')->end()
+                            ->enumNode('section')
+                                ->values(['entry', 'misc', 'api', 'analytics', 'export', 'import'])
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
             ->end()
         ;
 
