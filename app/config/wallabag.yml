@@ -149,10 +149,6 @@ wallabag_core:
             value: https://www.wallabag.org/pages/support.html
             section: misc
         -
-            name: wallabag_url
-            value: http://v2.wallabag.org
-            section: misc
-        -
             name: api_user_registration
             value: 0
             section: api
