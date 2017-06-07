@@ -32,12 +32,13 @@ De Symfony:
 
 Spécifique à wallabag:
 
--   `wallabag:clean-duplicates`: Supprime tous les articles dupliqués pour un utilisateur ou bien tous.
--   `wallabag:export`: Exporte tous les articles pour un utilisateur. Vous pouvez choisir le chemin du fichier exporté.
--   `wallabag:import`: Importe les articles en différents formats dans un compte utilisateur.
--   `wallabag:import:redis-worker`: Utile si vous utilisez Redis.
--   `wallabag:install`: (ré)Installer wallabag
--   `wallabag:tag:all`: Tagger tous les articles pour un utilisateur ou une utilisatrice en utilisant ses règles de tags automatiques.
+- `wallabag:clean-duplicates`: Supprime tous les articles dupliqués pour un utilisateur ou bien tous.
+- `wallabag:export`: Exporte tous les articles pour un utilisateur. Vous pouvez choisir le chemin du fichier exporté.
+- `wallabag:import`: Importe les articles en différents formats dans un compte utilisateur.
+- `wallabag:import:redis-worker`: Utile si vous utilisez Redis.
+- `wallabag:install`: (ré)Installer wallabag
+- `wallabag:tag:all`: Tagger tous les articles pour un utilisateur ou une utilisatrice en utilisant ses règles de tags automatiques.
+- `wallabag:user:show`: Affiche les détails d'un utilisateur.
 
 wallabag:clean-duplicates
 -------------------------
@@ -141,3 +142,18 @@ wallabag:tag:all <username>
 
 Arguments:
  - username: Utilisateur sur lequel travailler.
+
+
+wallabag:user:show
+------------------
+
+Cette commande vous permet d'afficher les détails d'un utilisateur.
+
+Utilisation:
+
+```
+wallabag:user:show <username>
+```
+
+Arguments:
+ - username: Utilisateur à afficher.
