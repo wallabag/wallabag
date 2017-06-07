@@ -299,65 +299,18 @@ class EntryRestController extends WallabagRestController
         $this->validateAuthentication();
 
         $url = $request->request->get('url');
-        $title = $request->request->get('title');
-        $tags = $request->request->get('tags', []);
-        $isArchived = $request->request->get('archive');
-        $isStarred = $request->request->get('starred');
-        $content = $request->request->get('content');
-        $language = $request->request->get('language');
-        $picture = $request->request->get('preview_picture');
-        $publishedAt = $request->request->get('published_at');
-        $authors = $request->request->get('authors', '');
 
-        $entry = $this->get('wallabag_core.entry_repository')->findByUrlAndUserId($url, $this->getUser()->getId());
+        $entry = $this->get('wallabag_core.entry_repository')->findByUrlAndUserId(
+            $url,
+            $this->getUser()->getId()
+        );
 
         if (false === $entry) {
             $entry = new Entry($this->getUser());
-        }
-
-        try {
-            $this->get('wallabag_core.content_proxy')->updateEntry(
-                $entry,
-                $url,
-                [
-                    'title' => $title,
-                    'html' => $content,
-                    'url' => $url,
-                    'language' => $language,
-                    'date' => $publishedAt,
-                    // faking the preview picture
-                    'open_graph' => [
-                        'og_image' => $picture,
-                    ],
-                    'authors' => explode(',', $authors),
-                ]
-            );
-        } catch (\Exception $e) {
-            $this->get('logger')->error('Error while saving an entry', [
-                'exception' => $e,
-                'entry' => $entry,
-            ]);
             $entry->setUrl($url);
         }
 
-        if (!empty($tags)) {
-            $this->get('wallabag_core.tags_assigner')->assignTagsToEntry($entry, $tags);
-        }
-
-        if (!is_null($isStarred)) {
-            $entry->setStarred((bool) $isStarred);
-        }
-
-        if (!is_null($isArchived)) {
-            $entry->setArchived((bool) $isArchived);
-        }
-
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($entry);
-        $em->flush();
-
-        // entry saved, dispatch event about it!
-        $this->get('event_dispatcher')->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
+        $this->upsertEntry($entry, $request);
 
         return $this->sendResponse($entry);
     }
@@ -389,56 +342,7 @@ class EntryRestController extends WallabagRestController
         $this->validateAuthentication();
         $this->validateUserAccess($entry->getUser()->getId());
 
-        $title = $request->request->get('title');
-        $tags = $request->request->get('tags', '');
-        $isArchived = $request->request->get('archive');
-        $isStarred = $request->request->get('starred');
-        $content = $request->request->get('content');
-        $language = $request->request->get('language');
-        $picture = $request->request->get('preview_picture');
-        $publishedAt = $request->request->get('published_at');
-        $authors = $request->request->get('authors', '');
-
-        try {
-            $this->get('wallabag_core.content_proxy')->updateEntry(
-                $entry,
-                $entry->getUrl(),
-                [
-                    'title' => !empty($title) ? $title : $entry->getTitle(),
-                    'html' => !empty($content) ? $content : $entry->getContent(),
-                    'url' => $entry->getUrl(),
-                    'language' => $language,
-                    'date' => $publishedAt,
-                    // faking the preview picture
-                    'open_graph' => [
-                        'og_image' => $picture,
-                    ],
-                    'authors' => is_string($authors) ? explode(',', $authors) : [],
-                ],
-                // we don't want the content to be update by fetching the url
-                true
-            );
-        } catch (\Exception $e) {
-            $this->get('logger')->error('Error while saving an entry', [
-                'exception' => $e,
-                'entry' => $entry,
-            ]);
-        }
-
-        if (!is_null($isArchived)) {
-            $entry->setArchived((bool) $isArchived);
-        }
-
-        if (!is_null($isStarred)) {
-            $entry->setStarred((bool) $isStarred);
-        }
-
-        if (!empty($tags)) {
-            $this->get('wallabag_core.tags_assigner')->assignTagsToEntry($entry, $tags);
-        }
-
-        $em = $this->getDoctrine()->getManager();
-        $em->flush();
+        $this->upsertEntry($entry, $request, true);
 
         return $this->sendResponse($entry);
     }
@@ -704,5 +608,69 @@ class EntryRestController extends WallabagRestController
         $json = $this->get('serializer')->serialize($data, 'json');
 
         return (new JsonResponse())->setJson($json);
+    }
+
+    /**
+     * Update or Insert a new entry.
+     *
+     * @param Entry   $entry
+     * @param Request $request
+     * @param bool    $disableContentUpdate If we don't want the content to be update by fetching the url (used when patching instead of posting)
+     */
+    private function upsertEntry(Entry $entry, Request $request, $disableContentUpdate = false)
+    {
+        $title = $request->request->get('title');
+        $tags = $request->request->get('tags', []);
+        $isArchived = $request->request->get('archive');
+        $isStarred = $request->request->get('starred');
+        $content = $request->request->get('content');
+        $language = $request->request->get('language');
+        $picture = $request->request->get('preview_picture');
+        $publishedAt = $request->request->get('published_at');
+        $authors = $request->request->get('authors', '');
+
+        try {
+            $this->get('wallabag_core.content_proxy')->updateEntry(
+                $entry,
+                $entry->getUrl(),
+                [
+                    'title' => !empty($title) ? $title : $entry->getTitle(),
+                    'html' => !empty($content) ? $content : $entry->getContent(),
+                    'url' => $entry->getUrl(),
+                    'language' => !empty($language) ? $language : $entry->getLanguage(),
+                    'date' => !empty($publishedAt) ? $publishedAt : $entry->getPublishedAt(),
+                    // faking the open graph preview picture
+                    'open_graph' => [
+                        'og_image' => !empty($picture) ? $picture : $entry->getPreviewPicture(),
+                    ],
+                    'authors' => is_string($authors) ? explode(',', $authors) : $entry->getPublishedBy(),
+                ],
+                $disableContentUpdate
+            );
+        } catch (\Exception $e) {
+            $this->get('logger')->error('Error while saving an entry', [
+                'exception' => $e,
+                'entry' => $entry,
+            ]);
+        }
+
+        if (!is_null($isArchived)) {
+            $entry->setArchived((bool) $isArchived);
+        }
+
+        if (!is_null($isStarred)) {
+            $entry->setStarred((bool) $isStarred);
+        }
+
+        if (!empty($tags)) {
+            $this->get('wallabag_core.tags_assigner')->assignTagsToEntry($entry, $tags);
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($entry);
+        $em->flush();
+
+        // entry saved, dispatch event about it!
+        $this->get('event_dispatcher')->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
     }
 }
