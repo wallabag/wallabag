@@ -34,7 +34,21 @@ $(document).ready(() => {
     app.registry.registerUtility(authorization, 'authorizationPolicy');
 
     const x = JSON.parse($('#annotationroutes').html());
-    app.include(annotator.storage.http, x);
+    app.include(annotator.storage.http, $.extend({}, x, {
+      onError(msg, xhr) {
+        if (!Object.prototype.hasOwnProperty.call(xhr, 'responseJSON')) {
+          annotator.notification.banner('An error occurred', 'error');
+          return;
+        }
+        $.each(xhr.responseJSON.children, (k, v) => {
+          if (v.errors) {
+            $.each(v.errors, (n, errorText) => {
+              annotator.notification.banner(errorText, 'error');
+            });
+          }
+        });
+      },
+    }));
 
     app.start().then(() => {
       app.annotations.load({ entry: x.entryId });
