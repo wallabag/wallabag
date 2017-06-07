@@ -85,7 +85,7 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
             'text' => 'my annotation',
             'quote' => 'my quote',
             'ranges' => [
-                ['start' => '', 'startOffset' => 24, 'end' => '', 'endOffset' => 31]
+                ['start' => '', 'startOffset' => 24, 'end' => '', 'endOffset' => 31],
             ],
         ]);
         $this->client->request('POST', $prefixUrl.'/'.$entry->getId().'.json', [], [], $headers, $content);
@@ -130,7 +130,7 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
             'text' => 'my annotation',
             'quote' => $longQuote,
             'ranges' => [
-                ['start' => '', 'startOffset' => 24, 'end' => '', 'endOffset' => 31]
+                ['start' => '', 'startOffset' => 24, 'end' => '', 'endOffset' => 31],
             ],
         ]);
         $this->client->request('POST', $prefixUrl.'/'.$entry->getId().'.json', [], [], $headers, $content);

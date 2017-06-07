@@ -110,6 +110,8 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
     private $trusted;
 
     /**
+     * @var ArrayCollection
+     *
      * @ORM\OneToMany(targetEntity="Wallabag\ApiBundle\Entity\Client", mappedBy="user", cascade={"remove"})
      */
     protected $clients;
@@ -306,10 +308,8 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
      */
     public function getFirstClient()
     {
-        if (empty($this->clients)) {
-            return $this->clients;
+        if (!empty($this->clients)) {
+            return $this->clients->first();
         }
-
-        return $this->clients->first();
     }
 }
