@@ -18,23 +18,23 @@ From Symfony:
  - `assets:install`: May be helpful if assets are missing.
  - `cache:clear`: should be run after each update (included in make update).
  - `doctrine:migrations:status`: Output the status of your database migrations.
- - `fos:user:activate`: Manually activate an user.
- - `fos:user:change-password`: Change a password for an user.
- - `fos:user:create`: Create an user.
- - `fos:user:deactivate`: Deactivate an user (not deleted).
- - `fos:user:demote`: Removes a role from an user, typically admin rights.
- - `fos:user:promote`: Adds a role to an user, typically admin rights.
+ - `fos:user:activate`: Manually activate a user.
+ - `fos:user:change-password`: Change a password for a user.
+ - `fos:user:create`: Create a user.
+ - `fos:user:deactivate`: Deactivate a user (not deleted).
+ - `fos:user:demote`: Removes a role from a user, typically admin rights.
+ - `fos:user:promote`: Adds a role to a user, typically admin rights.
  - `rabbitmq:*`: May be useful if you're using RabbitMQ.
 
 Custom to wallabag:
 
  - `wallabag:clean-duplicates`: Removes all entry duplicates for one user or all users
- - `wallabag:export`: Exports all entries for an user. You can choose the output path of the file.
- - `wallabag:import`: Import entries to different formats to an user account.
+ - `wallabag:export`: Exports all entries for a user. You can choose the output path of the file.
+ - `wallabag:import`: Import entries to different formats to a user account.
  - `wallabag:import:redis-worker`: Useful if you use Redis.
  - `wallabag:install`: (re)Install wallabag
- - `wallabag:tag:all`: Tag all entries for an user using his/her tagging rules.
- - `wallabag:user:show`: Shows the details for an user.
+ - `wallabag:tag:all`: Tag all entries for a user using his/her tagging rules.
+ - `wallabag:user:show`: Shows the details for a user.
 
 wallabag:clean-duplicates
 -------------------------
@@ -55,7 +55,7 @@ Arguments:
 wallabag:export
 ---------------
 
-This command helps you to export all entries for an user.
+This command helps you to export all entries for a user.
 
 Usage:
 
@@ -143,7 +143,7 @@ Arguments:
 wallabag:user:show
 ------------------
 
-This command shows the details for an user.
+This command shows the details for a user.
 
 Usage:
 
