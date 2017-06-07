@@ -9,6 +9,7 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Wallabag\UserBundle\Entity\User;
+use Wallabag\ApiBundle\Entity\Client;
 
 class UserRestController extends WallabagRestController
 {
@@ -97,29 +98,38 @@ class UserRestController extends WallabagRestController
                 ->setStatusCode(JsonResponse::HTTP_BAD_REQUEST);
         }
 
+        // create a default client
+        $client = new Client($user);
+        $client->setName('Default client');
+
+        $this->getDoctrine()->getManager()->persist($client);
+
+        $user->addClient($client);
+
         $userManager->updateUser($user);
 
         // dispatch a created event so the associated config will be created
         $event = new UserEvent($user, $request);
         $this->get('event_dispatcher')->dispatch(FOSUserEvents::USER_CREATED, $event);
 
-        return $this->sendUser($user, JsonResponse::HTTP_CREATED);
+        return $this->sendUser($user, 'user_api_with_client', JsonResponse::HTTP_CREATED);
     }
 
     /**
      * Send user response.
      *
-     * @param User $user
-     * @param int  $status HTTP Status code to send
+     * @param User   $user
+     * @param string $group  Used to define with serialized group might be used
+     * @param int    $status HTTP Status code to send
      *
      * @return JsonResponse
      */
-    private function sendUser(User $user, $status = JsonResponse::HTTP_OK)
+    private function sendUser(User $user, $group = 'user_api', $status = JsonResponse::HTTP_OK)
     {
         $json = $this->get('serializer')->serialize(
             $user,
             'json',
-            SerializationContext::create()->setGroups(['user_api'])
+            SerializationContext::create()->setGroups([$group])
         );
 
         return (new JsonResponse())
