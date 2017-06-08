@@ -78,8 +78,11 @@ class ConfigController extends Controller
             'action' => $this->generateUrl('config').'#set3',
         ]);
         $userForm->handleRequest($request);
+        $twoAuthMethod = $request->request->get('2auth_method');
 
         if ($userForm->isSubmitted() && $userForm->isValid()) {
+            $this->handleTwoAuthMethod($twoAuthMethod);
+
             $userManager->updateUser($user, true);
 
             $this->get('session')->getFlashBag()->add(
@@ -138,6 +141,8 @@ class ConfigController extends Controller
             return $this->redirect($this->generateUrl('config').'#set5');
         }
 
+        $qrContent = $this->get('scheb_two_factor.security.google_authenticator')->getQRContent($user);
+
         return $this->render('WallabagCoreBundle:Config:index.html.twig', [
             'form' => [
                 'config' => $configForm->createView(),
@@ -151,11 +156,53 @@ class ConfigController extends Controller
                 'token' => $config->getRssToken(),
             ],
             'twofactor_auth' => $this->getParameter('twofactor_auth'),
+            'google_auth_url' => $qrContent,
             'wallabag_url' => $this->get('craue_config')->get('wallabag_url'),
             'enabled_users' => $this->getDoctrine()
                 ->getRepository('WallabagUserBundle:User')
                 ->getSumEnabledUsers(),
+            'twoAuthMethod' => $this->getCurrentTwoAuthMethod(),
         ]);
+    }
+
+    protected function getCurrentTwoAuthMethod()
+    {
+        /** @var \Wallabag\UserBundle\Entity\User $user */
+        $user = $this->getUser();
+
+        if (null === $user->getGoogleAuthenticatorSecret()
+            && true === $user->isTwoFactorAuthentication()) {
+            return 'mail';
+        }
+
+        if (null !== $user->getGoogleAuthenticatorSecret()
+            && false === $user->isTwoFactorAuthentication()) {
+            return 'application';
+        }
+
+        return null;
+    }
+
+    protected function handleTwoAuthMethod($twoAuthMethod)
+    {
+        /** @var \Wallabag\UserBundle\Entity\User $user */
+        $user = $this->getUser();
+
+        $em = $this->get('doctrine')->getManager();
+
+        if ('application' === $twoAuthMethod) {
+            $user->setTwoFactorAuthentication(false);
+            $user->setGoogleAuthenticatorSecret($this->get('scheb_two_factor.security.google_authenticator')->generateSecret());
+        } elseif ('mail' === $twoAuthMethod) {
+            $user->setTwoFactorAuthentication(true);
+            $user->setGoogleAuthenticatorSecret(null);
+        } else {
+            $user->setTwoFactorAuthentication(false);
+            $user->setGoogleAuthenticatorSecret(null);
+        }
+
+        $em->persist($user);
+        $em->flush();
     }
 
     /**
@@ -426,6 +473,27 @@ class ConfigController extends Controller
     {
         $user = $this->getUser();
         $user->getConfig()->setListMode(!$user->getConfig()->getListMode());
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($user);
+        $em->flush();
+
+        return $this->redirect($request->headers->get('referer'));
+    }
+
+    /**
+     * Enable Google Authentication.
+     *
+     * @Route("/config/google-auth", name="google_auth")
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function enableGoogleAuthAction(Request $request)
+    {
+        $user = $this->getUser();
+        $user->setGoogleAuthenticatorSecret($this->get('scheb_two_factor.security.google_authenticator')->generateSecret());
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($user);

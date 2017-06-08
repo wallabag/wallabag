@@ -203,11 +203,17 @@ scheb_two_factor:
         cookie_lifetime: 2592000
 
     email:
-        enabled: "%twofactor_auth%"
+        enabled: false
         sender_email: "%twofactor_sender%"
         digits: 6
         template: WallabagUserBundle:Authentication:form.html.twig
         mailer: wallabag_user.auth_code_mailer
+
+    google:
+        enabled: true
+        server_name: wallabag
+        issuer: wallabag
+        template: WallabagUserBundle:Authentication:form.html.twig
 
 kphoen_rulerz:
     targets:
