@@ -51,9 +51,9 @@ class CustomAuthenticationFailureHandler extends DefaultAuthenticationFailureHan
     }
 
     /**
-     * Log error information about fialure
+     * Log error information about fialure.
      *
-     * @param  Request $request
+     * @param Request $request
      */
     private function logError(Request $request)
     {
