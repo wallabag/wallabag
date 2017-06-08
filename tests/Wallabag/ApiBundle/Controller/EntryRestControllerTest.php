@@ -345,7 +345,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
             'tags' => 'google',
             'title' => 'New title for my article',
             'content' => 'my content',
-            'language' => 'de_DE',
+            'language' => 'de',
             'published_at' => '2016-09-08T11:55:58+0200',
             'authors' => 'bob,helen',
         ]);
@@ -362,7 +362,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertEquals(1, $content['user_id']);
         $this->assertCount(2, $content['tags']);
         $this->assertSame('my content', $content['content']);
-        $this->assertSame('de_DE', $content['language']);
+        $this->assertSame('de', $content['language']);
         $this->assertSame('2016-09-08T11:55:58+0200', $content['published_at']);
         $this->assertCount(2, $content['published_by']);
         $this->assertContains('bob', $content['published_by']);
@@ -477,7 +477,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
             'tags' => 'new tag '.uniqid(),
             'starred' => '1',
             'archive' => '0',
-            'language' => 'de_DE',
+            'language' => 'de_AT',
             'preview_picture' => 'http://preview.io/picture.jpg',
             'authors' => 'bob,sponge',
             'content' => 'awesome',
@@ -492,7 +492,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertEquals('New awesome title', $content['title']);
         $this->assertGreaterThan($nbTags, count($content['tags']));
         $this->assertEquals(1, $content['user_id']);
-        $this->assertEquals('de_DE', $content['language']);
+        $this->assertEquals('de_AT', $content['language']);
         $this->assertEquals('http://preview.io/picture.jpg', $content['preview_picture']);
         $this->assertContains('sponge', $content['published_by']);
         $this->assertContains('bob', $content['published_by']);
