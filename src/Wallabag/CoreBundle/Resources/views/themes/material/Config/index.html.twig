@@ -105,6 +105,19 @@
                             </div>
 
                             <div class="row">
+                                <div class="input-field col s11">
+                                    {{ form_label(form.config.new_article_hook) }}
+                                    {{ form_errors(form.config.new_article_hook) }}
+                                    {{ form_widget(form.config.new_article_hook) }}
+                                </div>
+                                <div class="input-field col s1">
+                                    <a href="#" class="tooltipped" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_new_article_hook'|trans }}">
+                                        <i class="material-icons">live_help</i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="row">
                                 <div class="input-field col s12">
                                     <h5>{{ 'config.form_settings.android_configuration'|trans }}</h5>
                                     <a href="wallabag://{{ app.user.username }}@{{ wallabag_url }}" class="waves-effect waves-light btn hide-on-large-only">Touch here to prefill your Android application</a>

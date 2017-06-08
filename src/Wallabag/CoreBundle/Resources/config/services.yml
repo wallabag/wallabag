@@ -198,5 +198,12 @@ services:
             - '@=service(''craue_config'').get(''wallabag_url'')'
             - "@logger"
 
+    wallabag_core.subscriber.new_article_hook:
+        class: Wallabag\CoreBundle\Event\Subscriber\NewArticleHookSubscriber
+        arguments:
+            - "@logger"
+        tags:
+            - { name: kernel.event_subscriber }
+
     wallabag_core.entry.download_images.client:
         class: GuzzleHttp\Client
