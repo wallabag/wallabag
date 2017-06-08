@@ -28,13 +28,14 @@ class UserRestController extends WallabagRestController
     }
 
     /**
-     * Register an user.
+     * Register an user and create a client.
      *
      * @ApiDoc(
      *      requirements={
      *          {"name"="username", "dataType"="string", "required"=true, "description"="The user's username"},
      *          {"name"="password", "dataType"="string", "required"=true, "description"="The user's password"},
-     *          {"name"="email", "dataType"="string", "required"=true, "description"="The user's email"}
+     *          {"name"="email", "dataType"="string", "required"=true, "description"="The user's email"},
+     *          {"name"="client_name", "dataType"="string", "required"=true, "description"="The client name (to be used by your app)"}
      *      }
      * )
      *
@@ -100,7 +101,7 @@ class UserRestController extends WallabagRestController
 
         // create a default client
         $client = new Client($user);
-        $client->setName('Default client');
+        $client->setName($request->request->get('client_name', 'Default client'));
 
         $this->getDoctrine()->getManager()->persist($client);
 

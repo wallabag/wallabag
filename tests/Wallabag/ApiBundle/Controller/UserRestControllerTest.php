@@ -85,6 +85,7 @@ class UserRestControllerTest extends WallabagApiTestCase
             'username' => 'google',
             'password' => 'googlegoogle',
             'email' => 'wallabag@google.com',
+            'client_name' => 'My client name !!',
         ]);
 
         $this->assertEquals(201, $client->getResponse()->getStatusCode());
@@ -104,7 +105,7 @@ class UserRestControllerTest extends WallabagApiTestCase
         $this->assertArrayHasKey('client_secret', $content['default_client']);
         $this->assertArrayHasKey('client_id', $content['default_client']);
 
-        $this->assertEquals('Default client', $content['default_client']['name']);
+        $this->assertEquals('My client name !!', $content['default_client']['name']);
 
         $this->assertEquals('application/json', $client->getResponse()->headers->get('Content-Type'));
 
