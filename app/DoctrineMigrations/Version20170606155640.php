@@ -8,7 +8,8 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Add api_user_registration in craue_config_setting.
+ * Remove wallabag_url from craue_config_setting.
+ * It has been moved into the parameters.yml
  */
 class Version20170606155640 extends AbstractMigration implements ContainerAwareInterface
 {

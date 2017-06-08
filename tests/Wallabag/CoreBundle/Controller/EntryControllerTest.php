@@ -1000,7 +1000,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertEquals($url, $entry->getUrl());
         $this->assertContains('Perpignan', $entry->getTitle());
         // instead of checking for the filename (which might change) check that the image is now local
-        $this->assertContains('http://v2.wallabag.org/assets/images/', $entry->getContent());
+        $this->assertContains('http://your-wallabag-url-instance.com/assets/images/', $entry->getContent());
 
         $client->getContainer()->get('craue_config')->set('download_images_enabled', 0);
     }

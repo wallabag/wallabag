@@ -195,7 +195,7 @@ services:
         arguments:
             - "@wallabag_core.entry.download_images.client"
             - "%kernel.root_dir%/../web/assets/images"
-            - '%wallabag_core.domain_name%'
+            - '%domain_name%'
             - "@logger"
 
     wallabag_core.entry.download_images.client:
