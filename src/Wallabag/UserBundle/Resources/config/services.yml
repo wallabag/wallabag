@@ -35,3 +35,11 @@ services:
             - "%wallabag_core.list_mode%"
         tags:
             - { name: kernel.event_subscriber }
+
+    wallabag_user.security.custom_auth_failure_handler:
+        class: Wallabag\UserBundle\Security\CustomAuthenticationFailureHandler
+        arguments:
+            - "@http_kernel"
+            - "@security.http_utils"
+            - {  }
+            - "@logger"
