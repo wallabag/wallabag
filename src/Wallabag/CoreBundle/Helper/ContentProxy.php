@@ -7,6 +7,9 @@ use Psr\Log\LoggerInterface;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Tools\Utils;
 use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeExtensionGuesser;
+use Symfony\Component\Validator\Constraints\Language as LanguageConstraint;
+use Symfony\Component\Validator\Constraints\Url as UrlConstraint;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * This kind of proxy class take care of getting the content from an url
@@ -21,10 +24,11 @@ class ContentProxy
     protected $fetchingErrorMessage;
     protected $eventDispatcher;
 
-    public function __construct(Graby $graby, RuleBasedTagger $tagger, LoggerInterface $logger, $fetchingErrorMessage)
+    public function __construct(Graby $graby, RuleBasedTagger $tagger, ValidatorInterface $validator, LoggerInterface $logger, $fetchingErrorMessage)
     {
         $this->graby = $graby;
         $this->tagger = $tagger;
+        $this->validator = $validator;
         $this->logger = $logger;
         $this->mimeGuesser = new MimeTypeExtensionGuesser();
         $this->fetchingErrorMessage = $fetchingErrorMessage;
@@ -113,22 +117,30 @@ class ContentProxy
             $entry->setHeaders($content['all_headers']);
         }
 
-        $entry->setLanguage(isset($content['language']) ? $content['language'] : '');
+        $this->validateAndSetLanguage(
+            $entry,
+            isset($content['language']) ? $content['language'] : ''
+        );
+
+        $this->validateAndSetPreviewPicture(
+            $entry,
+            isset($content['open_graph']['og_image']) ? $content['open_graph']['og_image'] : ''
+        );
+
+        // if content is an image define as a preview too
+        if (!empty($content['content_type']) && in_array($this->mimeGuesser->guess($content['content_type']), ['jpeg', 'jpg', 'gif', 'png'], true)) {
+            $this->validateAndSetPreviewPicture(
+                $entry,
+                $content['url']
+            );
+        }
+
         $entry->setMimetype(isset($content['content_type']) ? $content['content_type'] : '');
         $entry->setReadingTime(Utils::getReadingTime($html));
 
         $domainName = parse_url($entry->getUrl(), PHP_URL_HOST);
         if (false !== $domainName) {
             $entry->setDomainName($domainName);
-        }
-
-        if (!empty($content['open_graph']['og_image'])) {
-            $entry->setPreviewPicture($content['open_graph']['og_image']);
-        }
-
-        // if content is an image define as a preview too
-        if (!empty($content['content_type']) && in_array($this->mimeGuesser->guess($content['content_type']), ['jpeg', 'jpg', 'gif', 'png'], true)) {
-            $entry->setPreviewPicture($content['url']);
         }
 
         try {
@@ -151,5 +163,49 @@ class ContentProxy
     private function validateContent(array $content)
     {
         return !empty($content['title']) && !empty($content['html']) && !empty($content['url']);
+    }
+
+    /**
+     * Use a Symfony validator to ensure the language is well formatted.
+     *
+     * @param Entry  $entry
+     * @param string $value Language to validate
+     */
+    private function validateAndSetLanguage($entry, $value)
+    {
+        $errors = $this->validator->validate(
+            $value,
+            (new LanguageConstraint())
+        );
+
+        if (0 === count($errors)) {
+            $entry->setLanguage($value);
+
+            return;
+        }
+
+        $this->logger->warning('Language validation failed. '.(string) $errors);
+    }
+
+    /**
+     * Use a Symfony validator to ensure the preview picture is a real url.
+     *
+     * @param Entry  $entry
+     * @param string $value URL to validate
+     */
+    private function validateAndSetPreviewPicture($entry, $value)
+    {
+        $errors = $this->validator->validate(
+            $value,
+            (new UrlConstraint())
+        );
+
+        if (0 === count($errors)) {
+            $entry->setPreviewPicture($value);
+
+            return;
+        }
+
+        $this->logger->warning('PreviewPicture validation failed. '.(string) $errors);
     }
 }
