@@ -5,6 +5,9 @@ namespace Wallabag\ApiBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\OAuthServerBundle\Entity\Client as BaseClient;
 use Wallabag\UserBundle\Entity\User;
+use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\SerializedName;
+use JMS\Serializer\Annotation\VirtualProperty;
 
 /**
  * @ORM\Table("oauth2_clients")
@@ -23,6 +26,8 @@ class Client extends BaseClient
      * @var string
      *
      * @ORM\Column(name="name", type="text", nullable=false)
+     *
+     * @Groups({"user_api_with_client"})
      */
     protected $name;
 
@@ -35,6 +40,14 @@ class Client extends BaseClient
      * @ORM\OneToMany(targetEntity="AccessToken", mappedBy="client", cascade={"remove"})
      */
     protected $accessTokens;
+
+    /**
+     * @var string
+     *
+     * @SerializedName("client_secret")
+     * @Groups({"user_api_with_client"})
+     */
+    protected $secret;
 
     /**
      * @ORM\ManyToOne(targetEntity="Wallabag\UserBundle\Entity\User", inversedBy="clients")
@@ -77,5 +90,15 @@ class Client extends BaseClient
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * @VirtualProperty
+     * @SerializedName("client_id")
+     * @Groups({"user_api_with_client"})
+     */
+    public function getClientId()
+    {
+        return $this->getId().'_'.$this->getRandomId();
     }
 }

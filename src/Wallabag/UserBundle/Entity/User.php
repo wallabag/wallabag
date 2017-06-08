@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\XmlRoot;
+use JMS\Serializer\Annotation\Accessor;
 use Scheb\TwoFactorBundle\Model\Email\TwoFactorInterface;
 use Scheb\TwoFactorBundle\Model\TrustedComputerInterface;
 use FOS\UserBundle\Model\User as BaseUser;
@@ -36,7 +37,7 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      *
-     * @Groups({"user_api"})
+     * @Groups({"user_api", "user_api_with_client"})
      */
     protected $id;
 
@@ -45,21 +46,21 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
      *
      * @ORM\Column(name="name", type="text", nullable=true)
      *
-     * @Groups({"user_api"})
+     * @Groups({"user_api", "user_api_with_client"})
      */
     protected $name;
 
     /**
      * @var string
      *
-     * @Groups({"user_api"})
+     * @Groups({"user_api", "user_api_with_client"})
      */
     protected $username;
 
     /**
      * @var string
      *
-     * @Groups({"user_api"})
+     * @Groups({"user_api", "user_api_with_client"})
      */
     protected $email;
 
@@ -68,7 +69,7 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
      *
      * @ORM\Column(name="created_at", type="datetime")
      *
-     * @Groups({"user_api"})
+     * @Groups({"user_api", "user_api_with_client"})
      */
     protected $createdAt;
 
@@ -77,7 +78,7 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
      *
      * @ORM\Column(name="updated_at", type="datetime")
      *
-     * @Groups({"user_api"})
+     * @Groups({"user_api", "user_api_with_client"})
      */
     protected $updatedAt;
 
@@ -97,7 +98,8 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
     private $authCode;
 
     /**
-     * @var bool Enabled yes/no
+     * @var bool
+     *
      * @ORM\Column(type="boolean")
      */
     private $twoFactorAuthentication = false;
@@ -108,9 +110,19 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
     private $trusted;
 
     /**
+     * @var ArrayCollection
+     *
      * @ORM\OneToMany(targetEntity="Wallabag\ApiBundle\Entity\Client", mappedBy="user", cascade={"remove"})
      */
     protected $clients;
+
+    /**
+     * @see getFirstClient() below
+     *
+     * @Groups({"user_api_with_client"})
+     * @Accessor(getter="getFirstClient")
+     */
+    protected $default_client;
 
     public function __construct()
     {
@@ -287,5 +299,17 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
     public function getClients()
     {
         return $this->clients;
+    }
+
+    /**
+     * Only used by the API when creating a new user it'll also return the first client (which was also created at the same time).
+     *
+     * @return Client
+     */
+    public function getFirstClient()
+    {
+        if (!empty($this->clients)) {
+            return $this->clients->first();
+        }
     }
 }
