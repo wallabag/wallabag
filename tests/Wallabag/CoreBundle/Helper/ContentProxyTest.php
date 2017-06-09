@@ -11,6 +11,9 @@ use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\UserBundle\Entity\User;
 use Wallabag\CoreBundle\Helper\RuleBasedTagger;
 use Graby\Graby;
+use Symfony\Component\Validator\Validator\RecursiveValidator;
+use Symfony\Component\Validator\ConstraintViolationList;
+use Symfony\Component\Validator\ConstraintViolation;
 
 class ContentProxyTest extends \PHPUnit_Framework_TestCase
 {
@@ -37,7 +40,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
                 'language' => '',
             ]);
 
-        $proxy = new ContentProxy($graby, $tagger, $this->getLogger(), $this->fetchingErrorMessage);
+        $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry($entry, 'http://user@:80');
 
@@ -72,7 +75,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
                 'language' => '',
             ]);
 
-        $proxy = new ContentProxy($graby, $tagger, $this->getLogger(), $this->fetchingErrorMessage);
+        $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry($entry, 'http://0.0.0.0');
 
@@ -112,7 +115,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
                 ],
             ]);
 
-        $proxy = new ContentProxy($graby, $tagger, $this->getLogger(), $this->fetchingErrorMessage);
+        $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry($entry, 'http://domain.io');
 
@@ -154,7 +157,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
                 ],
             ]);
 
-        $proxy = new ContentProxy($graby, $tagger, $this->getLogger(), $this->fetchingErrorMessage);
+        $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry($entry, 'http://0.0.0.0');
 
@@ -192,18 +195,112 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
                 'open_graph' => [
                     'og_title' => 'my OG title',
                     'og_description' => 'OG desc',
-                    'og_image' => false,
+                    'og_image' => null,
                 ],
             ]);
 
-        $proxy = new ContentProxy($graby, $tagger, $this->getLogger(), $this->fetchingErrorMessage);
+        $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry($entry, 'http://0.0.0.0');
 
         $this->assertEquals('http://1.1.1.1', $entry->getUrl());
         $this->assertEquals('this is my title', $entry->getTitle());
         $this->assertContains('this is my content', $entry->getContent());
-        $this->assertNull($entry->getPreviewPicture());
+        $this->assertEmpty($entry->getPreviewPicture());
+        $this->assertEquals('text/html', $entry->getMimetype());
+        $this->assertEquals('fr', $entry->getLanguage());
+        $this->assertEquals('200', $entry->getHttpStatus());
+        $this->assertEquals(4.0, $entry->getReadingTime());
+        $this->assertEquals('1.1.1.1', $entry->getDomainName());
+    }
+
+    public function testWithContentAndBadLanguage()
+    {
+        $tagger = $this->getTaggerMock();
+        $tagger->expects($this->once())
+            ->method('tag');
+
+        $validator = $this->getValidator();
+        $validator->expects($this->exactly(2))
+            ->method('validate')
+            ->will($this->onConsecutiveCalls(
+                new ConstraintViolationList([new ConstraintViolation('oops', 'oops', [], 'oops', 'language', 'dontexist')]),
+                new ConstraintViolationList()
+            ));
+
+        $graby = $this->getMockBuilder('Graby\Graby')
+            ->setMethods(['fetchContent'])
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $graby->expects($this->any())
+            ->method('fetchContent')
+            ->willReturn([
+                'html' => str_repeat('this is my content', 325),
+                'title' => 'this is my title',
+                'url' => 'http://1.1.1.1',
+                'content_type' => 'text/html',
+                'language' => 'dontexist',
+                'status' => '200',
+            ]);
+
+        $proxy = new ContentProxy($graby, $tagger, $validator, $this->getLogger(), $this->fetchingErrorMessage);
+        $entry = new Entry(new User());
+        $proxy->updateEntry($entry, 'http://0.0.0.0');
+
+        $this->assertEquals('http://1.1.1.1', $entry->getUrl());
+        $this->assertEquals('this is my title', $entry->getTitle());
+        $this->assertContains('this is my content', $entry->getContent());
+        $this->assertEquals('text/html', $entry->getMimetype());
+        $this->assertEmpty($entry->getLanguage());
+        $this->assertEquals('200', $entry->getHttpStatus());
+        $this->assertEquals(4.0, $entry->getReadingTime());
+        $this->assertEquals('1.1.1.1', $entry->getDomainName());
+    }
+
+    public function testWithContentAndBadOgImage()
+    {
+        $tagger = $this->getTaggerMock();
+        $tagger->expects($this->once())
+            ->method('tag');
+
+        $validator = $this->getValidator();
+        $validator->expects($this->exactly(2))
+            ->method('validate')
+            ->will($this->onConsecutiveCalls(
+                new ConstraintViolationList(),
+                new ConstraintViolationList([new ConstraintViolation('oops', 'oops', [], 'oops', 'url', 'https://')])
+            ));
+
+        $graby = $this->getMockBuilder('Graby\Graby')
+            ->setMethods(['fetchContent'])
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $graby->expects($this->any())
+            ->method('fetchContent')
+            ->willReturn([
+                'html' => str_repeat('this is my content', 325),
+                'title' => 'this is my title',
+                'url' => 'http://1.1.1.1',
+                'content_type' => 'text/html',
+                'language' => 'fr',
+                'status' => '200',
+                'open_graph' => [
+                    'og_title' => 'my OG title',
+                    'og_description' => 'OG desc',
+                    'og_image' => 'https://',
+                ],
+            ]);
+
+        $proxy = new ContentProxy($graby, $tagger, $validator, $this->getLogger(), $this->fetchingErrorMessage);
+        $entry = new Entry(new User());
+        $proxy->updateEntry($entry, 'http://0.0.0.0');
+
+        $this->assertEquals('http://1.1.1.1', $entry->getUrl());
+        $this->assertEquals('this is my title', $entry->getTitle());
+        $this->assertContains('this is my content', $entry->getContent());
+        $this->assertEmpty($entry->getPreviewPicture());
         $this->assertEquals('text/html', $entry->getMimetype());
         $this->assertEquals('fr', $entry->getLanguage());
         $this->assertEquals('200', $entry->getHttpStatus());
@@ -217,7 +314,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
         $tagger->expects($this->once())
             ->method('tag');
 
-        $proxy = new ContentProxy((new Graby()), $tagger, $this->getLogger(), $this->fetchingErrorMessage);
+        $proxy = new ContentProxy((new Graby()), $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry(
             $entry,
@@ -259,7 +356,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
         $logHandler = new TestHandler();
         $logger = new Logger('test', [$logHandler]);
 
-        $proxy = new ContentProxy((new Graby()), $tagger, $logger, $this->fetchingErrorMessage);
+        $proxy = new ContentProxy((new Graby()), $tagger, $this->getValidator(), $logger, $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry(
             $entry,
@@ -294,7 +391,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
         $handler = new TestHandler();
         $logger->pushHandler($handler);
 
-        $proxy = new ContentProxy((new Graby()), $tagger, $logger, $this->fetchingErrorMessage);
+        $proxy = new ContentProxy((new Graby()), $tagger, $this->getValidator(), $logger, $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry(
             $entry,
@@ -331,7 +428,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
             ->method('tag')
             ->will($this->throwException(new \Exception()));
 
-        $proxy = new ContentProxy((new Graby()), $tagger, $this->getLogger(), $this->fetchingErrorMessage);
+        $proxy = new ContentProxy((new Graby()), $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry(
             $entry,
@@ -371,7 +468,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
         $tagger->expects($this->once())
             ->method('tag');
 
-        $proxy = new ContentProxy((new Graby()), $tagger, $this->getLogger(), $this->fetchingErrorMessage);
+        $proxy = new ContentProxy((new Graby()), $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry(
             $entry,
@@ -412,5 +509,13 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
     private function getLogger()
     {
         return new NullLogger();
+    }
+
+    private function getValidator()
+    {
+        return $this->getMockBuilder(RecursiveValidator::class)
+            ->setMethods(['validate'])
+            ->disableOriginalConstructor()
+            ->getMock();
     }
 }

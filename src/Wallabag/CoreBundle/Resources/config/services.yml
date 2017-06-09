@@ -90,6 +90,7 @@ services:
         arguments:
             - "@wallabag_core.graby"
             - "@wallabag_core.rule_based_tagger"
+            - "@validator"
             - "@logger"
             - '%wallabag_core.fetching_error_message%'
 
