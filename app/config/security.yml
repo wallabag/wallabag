@@ -41,7 +41,6 @@ security:
             form_login:
                 provider: fos_userbundle
                 csrf_token_generator: security.csrf.token_manager
-                failure_handler: wallabag_user.security.custom_auth_failure_handler
 
             anonymous: true
             remember_me:

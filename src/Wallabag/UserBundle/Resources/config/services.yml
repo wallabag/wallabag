@@ -36,10 +36,10 @@ services:
         tags:
             - { name: kernel.event_subscriber }
 
-    wallabag_user.security.custom_auth_failure_handler:
-        class: Wallabag\UserBundle\Security\CustomAuthenticationFailureHandler
+    wallabag_user.listener.authentication_failure_event_listener:
+        class: Wallabag\UserBundle\EventListener\AuthenticationFailureListener
         arguments:
-            - "@http_kernel"
-            - "@security.http_utils"
-            - {  }
+            - "@request_stack"
             - "@logger"
+        tags:
+            - { name: kernel.event_listener, event: security.authentication.failure, method: onAuthenticationFailure }
