@@ -35,3 +35,11 @@ services:
             - "%wallabag_core.list_mode%"
         tags:
             - { name: kernel.event_subscriber }
+
+    wallabag_user.listener.authentication_failure_event_listener:
+        class: Wallabag\UserBundle\EventListener\AuthenticationFailureListener
+        arguments:
+            - "@request_stack"
+            - "@logger"
+        tags:
+            - { name: kernel.event_listener, event: security.authentication.failure, method: onAuthenticationFailure }
