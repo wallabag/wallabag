@@ -7,7 +7,7 @@ use Psr\Log\LoggerInterface;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Tools\Utils;
 use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeExtensionGuesser;
-use Symfony\Component\Validator\Constraints\Language as LanguageConstraint;
+use Symfony\Component\Validator\Constraints\Locale as LocaleConstraint;
 use Symfony\Component\Validator\Constraints\Url as UrlConstraint;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -176,7 +176,7 @@ class ContentProxy
     {
         $errors = $this->validator->validate(
             $value,
-            (new LanguageConstraint())
+            (new LocaleConstraint())
         );
 
         if (0 === count($errors)) {

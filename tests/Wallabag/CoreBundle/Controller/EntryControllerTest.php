@@ -158,6 +158,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
         $this->assertEquals($this->url, $content->getUrl());
         $this->assertContains('Google', $content->getTitle());
+        $this->assertEquals('fr', $content->getLanguage());
         $this->assertEquals('2015-03-28 15:37:39', $content->getPublishedAt()->format('Y-m-d H:i:s'));
         $this->assertEquals('Morgane Tual', $author[0]);
         $this->assertArrayHasKey('x-varnish1', $content->getHeaders());
@@ -190,6 +191,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $authors = $content->getPublishedBy();
         $this->assertEquals('2017-04-05 19:26:13', $content->getPublishedAt()->format('Y-m-d H:i:s'));
+        $this->assertEquals('fr', $content->getLanguage());
         $this->assertEquals('Raphaël Balenieri, correspondant à Pékin', $authors[0]);
         $this->assertEquals('Frédéric Autran, correspondant à New York', $authors[1]);
     }
@@ -254,15 +256,6 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $this->assertContains('/view/', $client->getResponse()->getTargetUrl());
-
-        $em = $client->getContainer()
-            ->get('doctrine.orm.entity_manager');
-        $entry = $em
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneByUrl(urldecode($url));
-
-        $em->remove($entry);
-        $em->flush();
     }
 
     /**
@@ -297,6 +290,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $this->assertCount(2, $tags);
         $this->assertContains('wallabag', $tags);
+        $this->assertEquals('en', $entry->getLanguage());
 
         $em->remove($entry);
         $em->flush();
@@ -392,8 +386,6 @@ class EntryControllerTest extends WallabagCoreTestCase
     }
 
     /**
-     * @depends testPostNewOk
-     *
      * This test will require an internet connection.
      */
     public function testReload()
@@ -420,9 +412,6 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertNotEmpty($entry->getContent());
     }
 
-    /**
-     * @depends testPostNewOk
-     */
     public function testReloadWithFetchingFailed()
     {
         $this->logInAs('admin');
@@ -1001,6 +990,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertContains('Perpignan', $entry->getTitle());
         // instead of checking for the filename (which might change) check that the image is now local
         $this->assertContains('http://v2.wallabag.org/assets/images/', $entry->getContent());
+        $this->assertEquals('fr', $entry->getLanguage());
 
         $client->getContainer()->get('craue_config')->set('download_images_enabled', 0);
     }
@@ -1253,5 +1243,79 @@ class EntryControllerTest extends WallabagCoreTestCase
         $crawler = $client->submit($form, $data);
 
         $this->assertCount(1, $crawler->filter('div[class=entry]'));
+    }
+
+    public function dataForLanguage()
+    {
+        return [
+            'ru' => [
+                'https://www.pravda.ru/world/09-06-2017/1337283-qatar-0/',
+                'ru',
+            ],
+            'wrong fr-FR' => [
+                'http://www.zataz.com/fff-darknet/axzz4jUg2QJjH',
+                '',
+            ],
+            'de' => [
+                'http://www.bild.de/politik/ausland/theresa-may/wahlbeben-grossbritannien-analyse-52108924.bild.html',
+                'de',
+            ],
+            'it' => [
+                'http://www.ansa.it/sito/notizie/mondo/europa/2017/06/08/voto-gb-seggi-aperti-misure-sicurezza-rafforzate_0cb71f7f-e23b-4d5f-95ca-bc12296419f0.html',
+                'it',
+            ],
+            'zh_CN' => [
+                'http://www.hao123.com/shequ?__noscript__-=1',
+                'zh_CN',
+            ],
+            'de_AT' => [
+                'https://buy.garmin.com/de-AT/AT/catalog/product/compareResult.ep?compareProduct=112885&compareProduct=36728',
+                'de_AT',
+            ],
+            'ru_RU' => [
+                'http://netler.ru/ikt/windows-error-reporting.htm',
+                'ru_RU',
+            ],
+            'pt_BR' => [
+                'http://precodoscombustiveis.com.br/postos/cidade/4121/pr/maringa',
+                'pt_BR',
+            ],
+            'fucked list of languages' => [
+                'http://geocatalog.webservice-energy.org/geonetwork/srv/eng/main.home',
+                '',
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider dataForLanguage
+     */
+    public function testLanguageValidation($url, $expectedLanguage)
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/new');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $form = $crawler->filter('form[name=entry]')->form();
+
+        $data = [
+            'entry[url]' => $url,
+        ];
+
+        $client->submit($form, $data);
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+
+        $content = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findByUrlAndUserId($url, $this->getLoggedInUserId());
+
+        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
+        $this->assertEquals($url, $content->getUrl());
+        $this->assertEquals($expectedLanguage, $content->getLanguage());
     }
 }
