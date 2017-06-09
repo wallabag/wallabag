@@ -71,7 +71,7 @@ parameters:
 ## Andere wallabag Optionen
 
 | Name  | Beschreibung | Standardwert |
-| -----|-------------|-------- |
+| ------|-------------|-------------- |
 | locale | Standardsprache deiner wallabag Instanz (wie z.B. en, fr, es, etc.) | en |
 | secret | Dieser String sollte einzigartig für deine Applikation sein und er wird genutzt, um sicherheitsrelevanten Operationen mehr Entropie hinzuzufügen. | ovmpmAWXRCabNlMgzlzFXDYmCFfzGv |
 | twofactor_auth | true, um Zwei-Faktor-Authentifizierung zu aktivieren | true |
@@ -80,6 +80,7 @@ parameters:
 | fosuser_confirmation | true, um eine Bestätigungsmail für jede Registrierung zu senden | true |
 | from_email | E-Mail-Adresse, die im Absenderfeld jeder Mail genutzt wird | no-reply@wallabag.org |
 | rss_limit | Artikellimit für RSS Feeds | 50 |
+| domain_name | Komplette URL deiner wallabag-Instanz (ohne Slash am Ende) | https://deine-wallabag-instanz.de | 
 
 ## RabbitMQ Konfiguration
 
