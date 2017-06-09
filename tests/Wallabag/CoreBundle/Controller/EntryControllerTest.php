@@ -1252,9 +1252,9 @@ class EntryControllerTest extends WallabagCoreTestCase
                 'https://www.pravda.ru/world/09-06-2017/1337283-qatar-0/',
                 'ru',
             ],
-            'wrong fr-FR' => [
-                'http://www.zataz.com/fff-darknet/axzz4jUg2QJjH',
-                '',
+            'fr-FR' => [
+                'http://www.zataz.com/90-des-dossiers-medicaux-des-coreens-du-sud-vendus-a-des-entreprises-privees/',
+                'fr_FR',
             ],
             'de' => [
                 'http://www.bild.de/politik/ausland/theresa-may/wahlbeben-grossbritannien-analyse-52108924.bild.html',
@@ -1280,9 +1280,13 @@ class EntryControllerTest extends WallabagCoreTestCase
                 'http://precodoscombustiveis.com.br/postos/cidade/4121/pr/maringa',
                 'pt_BR',
             ],
-            'fucked list of languages' => [
+            'fucked_list_of_languages' => [
                 'http://geocatalog.webservice-energy.org/geonetwork/srv/eng/main.home',
                 '',
+            ],
+            'es-ES' => [
+                'http://www.muylinux.com/2015/04/17/odf-reino-unido-microsoft-google',
+                'es_ES',
             ],
         ];
     }

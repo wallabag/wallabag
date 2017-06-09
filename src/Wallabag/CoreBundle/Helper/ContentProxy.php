@@ -174,6 +174,10 @@ class ContentProxy
      */
     private function validateAndSetLanguage($entry, $value)
     {
+        // some lang are defined as fr-FR, es-ES.
+        // replacing - by _ might increase language support
+        $value = str_replace('-', '_', $value);
+
         $errors = $this->validator->validate(
             $value,
             (new LocaleConstraint())
