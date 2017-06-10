@@ -680,10 +680,10 @@ class EntryRestController extends WallabagRestController
         }
 
         if (!is_null($isPublic)) {
-            $entry->cleanUid();
-
             if (true === (bool) $isPublic && null === $entry->getUid()) {
                 $entry->generateUid();
+            } else if (false === (bool) $isPublic) {
+                $entry->cleanUid();
             }
         }
 

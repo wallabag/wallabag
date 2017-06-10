@@ -187,7 +187,7 @@ entry:
         unread_label: "Non lus"
         preview_picture_label: "A une photo"
         preview_picture_help: "Photo"
-        is_public_label: 'A une lien public'
+        is_public_label: 'A un lien public'
         is_public_help: 'Lien public'
         language_label: "Langue"
         http_status_label: "Statut HTTP"
