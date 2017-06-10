@@ -40,6 +40,7 @@ parameters:
     redis_port: 6379
     redis_path: null
     redis_password: null
+    domain_name: https://your-wallabag-url-instance.com
 ```
 
 ## Signification de chaque paramètre
@@ -80,6 +81,7 @@ parameters:
 | fosuser_confirmation | true pour envoyer un email de confirmation pour chaque création de compte | true |
 | from_email | Email de l'expéditeur pour chaque email envoyé | no-reply@wallabag.org |
 | rss_limit | Limite pour les flux RSS | 50 |
+| domain_name | URL complète de votre instance wallabag (sans le / de fin) | https://your-wallabag-url-instance.com |
 
 ## Options de RabbitMQ
 
