@@ -9,7 +9,7 @@
 
     <ul>
     {% for tag in tags %}
-        <li id="tag-{{ tag.id|e }}"><a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{tag.label}} ({{ tag.nbEntries | length }})</a></li>
+        <li id="tag-{{ tag.id|e }}"><a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{tag.label}} ({{ tag.nbEntries }})</a></li>
     {% endfor %}
     </ul>
 
