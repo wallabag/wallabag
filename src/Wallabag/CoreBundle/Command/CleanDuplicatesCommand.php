@@ -46,7 +46,7 @@ class CleanDuplicatesCommand extends ContainerAwareCommand
                 return 1;
             }
         } else {
-            $users = $this->get('wallabag_user.user_repository')->findAll();
+            $users = $this->getContainer()->get('wallabag_user.user_repository')->findAll();
 
             $output->writeln(sprintf('Cleaning through %d user accounts', count($users)));
 
@@ -66,7 +66,7 @@ class CleanDuplicatesCommand extends ContainerAwareCommand
     private function cleanDuplicates(User $user)
     {
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
-        $repo = $this->get('wallabag_core.entry_repository');
+        $repo = $this->getContainer()->get('wallabag_core.entry_repository');
 
         $entries = $repo->getAllEntriesIdAndUrl($user->getId());
 
@@ -109,7 +109,7 @@ class CleanDuplicatesCommand extends ContainerAwareCommand
      */
     private function getUser($username)
     {
-        return $this->get('wallabag_user.user_repository')->findOneByUserName($username);
+        return $this->getContainer()->get('wallabag_user.user_repository')->findOneByUserName($username);
     }
 
     private function getDoctrine()

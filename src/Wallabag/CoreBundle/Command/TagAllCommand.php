@@ -59,7 +59,7 @@ class TagAllCommand extends ContainerAwareCommand
      */
     private function getUser($username)
     {
-        return $this->get('wallabag_user.user_repository')->findOneByUserName($username);
+        return $this->getContainer()->get('wallabag_user.user_repository')->findOneByUserName($username);
     }
 
     private function getDoctrine()
