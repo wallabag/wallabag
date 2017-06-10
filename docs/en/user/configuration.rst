@@ -26,7 +26,7 @@ Reading speed
 wallabag calculates a reading time for each article. You can define here, thanks to this list, if you are
 a fast or a slow reader. wallabag will recalculate the reading time for each article.
 
-Where do you want to be redirected to after marking an article as read?
+Where do you want to be redirected after mark an article as read?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Each time you'll do some actions (after marking an article as read/favorite,
