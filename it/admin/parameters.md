@@ -40,6 +40,7 @@ parameters:
     redis_host: localhost
     redis_port: 6379
     redis_path: null
+    domain_name: https://your-wallabag-url-instance.com
 ```
 
 Significato di ogni parametro
