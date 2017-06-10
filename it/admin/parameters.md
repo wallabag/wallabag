@@ -58,16 +58,16 @@ Significato di ogni parametro
 | database_path | Solo per SQLite, definite dove mettere il file del database. Lasciatelo vuoto se usate un altro database | `%kernel.root_dir%/ ../data/db/wallabag.sqlite` |
 | database_table_prefix | Tutte le tavole di wallabag avranno quella stringa come prefisso. Potete includere un _ per maggior chiarezza | wallabag_ |
 | database_socket | Se il vostro database usa un socket al posto di tcp, inserite il percorso del socket (altri parametri di connessione saranno ignorati) | null |
-| database_charset | For PostgreSQL & SQLite you should use utf8, for MySQL use utf8mb4 to handle emoji and other special characters | utf8mb4 |
+| database_charset | Per PostgreSQL & SQLite dovreste usare utf8, per MySQL usate utf8mb4 per gestire emoji ed altri caratteri speciali | utf8mb4 |
 
 ## Configurazione per inviare email
 
 | Nome  | Descrizione | Default |
 | -----|-------------|-------- |
-| mailer_transport | The exact transport method to use to deliver emails. Valid values are: smtp, gmail, mail, sendmail, null (which will disable the mailer) | smtp |
-| mailer_host | The host to connect to when using smtp as the transport.| 127.0.0.1 |
-| mailer_user | The username when using smtp as the transport. | ~ |
-| mailer_password | The password when using smtp as the transport. | ~ |
+| mailer_transport | L\'esatto metodo di trasporto usato per inviare email. Valori validi sono: smtp, gmail, mail, sendmail, null (il quale disabilita il mailer) | smtp |
+| mailer_host | L\'host a cui connettersi quando si us smtp come metodo di trasporto.| 127.0.0.1 |
+| mailer_user | Il nome utente quando si usa smtp come metodo di trasporto. | ~ |
+| mailer_password | La password quando si usa smtp come metodo di trasporto. | ~ |
 
 ## Altre opzioni di wallabag
 
@@ -81,6 +81,7 @@ Significato di ogni parametro
 | fosuser_confirmation | true per inviare una mail di conferma per ogni registrazione | true |
 | from_email | Indirizzo email usato nel campo Da: in ogni email | no-reply@wallabag.org |
 | rss_limit | Limite per i feed RSS | 50 |
+| domain_name | URL completo della vostra istanza di wallabag (senza la barra alla fine) | https://la-vostra-istanza-di-wallabag.it |
 
 ## Configurazione di RabbitMQ
 
