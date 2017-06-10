@@ -685,6 +685,16 @@ class Entry
     }
 
     /**
+     * Used in the entries filter so it's more explicit for the end user than the uid.
+     *
+     * @return bool
+     */
+    public function isPublic()
+    {
+        return null !== $this->uid;
+    }
+
+    /**
      * @return string
      */
     public function getHttpStatus()

@@ -187,6 +187,8 @@ entry:
         unread_label: 'Pas legits'
         preview_picture_label: 'A un imatge'
         preview_picture_help: 'Imatge'
+        # is_public_label: 'Has a public link'
+        # is_public_help: 'Public link'
         language_label: 'Lenga'
         http_status_label: 'Estatut HTTP'
         reading_time:

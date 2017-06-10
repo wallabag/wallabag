@@ -187,6 +187,8 @@ entry:
         unread_label: 'Necitite'
         preview_picture_label: 'Are o imagine de previzualizare'
         preview_picture_help: 'Previzualizare imagine'
+        # is_public_label: 'Has a public link'
+        # is_public_help: 'Public link'
         language_label: 'Limbă'
         # http_status_label: 'HTTP status'
         reading_time:

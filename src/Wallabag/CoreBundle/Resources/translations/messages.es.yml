@@ -187,6 +187,8 @@ entry:
         unread_label: 'Sin leer'
         preview_picture_label: 'Tiene imagen de previsualización'
         preview_picture_help: 'Imagen de previsualización'
+        # is_public_label: 'Has a public link'
+        # is_public_help: 'Public link'
         language_label: 'Idioma'
         http_status_label: 'Código de estado HTTP'
         reading_time:

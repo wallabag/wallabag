@@ -187,6 +187,8 @@ entry:
         unread_label: 'خوانده‌نشده'
         preview_picture_label: 'دارای عکس پیش‌نمایش'
         preview_picture_help: 'پیش‌نمایش عکس'
+        # is_public_label: 'Has a public link'
+        # is_public_help: 'Public link'
         language_label: 'زبان'
         # http_status_label: 'HTTP status'
         reading_time:
