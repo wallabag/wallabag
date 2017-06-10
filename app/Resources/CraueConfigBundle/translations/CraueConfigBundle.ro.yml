@@ -20,7 +20,6 @@ share_twitter: Permite share către Twitter
 share_unmark: Permite share către Unmark.it
 show_printlink: Afișează un link pentru a printa content-ul
 wallabag_support_url: URL-ul de suport pentru wallabag
-wallabag_url: URL-ul instanței tale wallabag
 entry: "alticol"
 export: "exportă"
 import: "importă"

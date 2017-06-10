@@ -20,7 +20,6 @@ share_twitter: Włącz udostępnianie dla Twitter
 share_unmark: Włącz udostępnianie dla Unmark.it
 show_printlink: Pokaż link do wydrukowania zawartości
 wallabag_support_url: Adres URL wsparcia dla wallabag
-wallabag_url: Adres *twojej* instacji wallabag
 entry: "artykuł"
 export: "eksport"
 import: "import"

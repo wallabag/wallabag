@@ -123,7 +123,7 @@ services:
     wallabag_core.helper.entries_export:
         class: Wallabag\CoreBundle\Helper\EntriesExport
         arguments:
-            - '@=service(''craue_config'').get(''wallabag_url'')'
+            - '%domain_name%'
             - src/Wallabag/CoreBundle/Resources/public/themes/_global/img/appicon/apple-touch-icon-152.png
 
     wallabag.operator.array.matches:
@@ -196,7 +196,7 @@ services:
         arguments:
             - "@wallabag_core.entry.download_images.client"
             - "%kernel.root_dir%/../web/assets/images"
-            - '@=service(''craue_config'').get(''wallabag_url'')'
+            - '%domain_name%'
             - "@logger"
 
     wallabag_core.entry.download_images.client:

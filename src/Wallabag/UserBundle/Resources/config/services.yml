@@ -7,7 +7,7 @@ services:
             - "%scheb_two_factor.email.sender_email%"
             - "%scheb_two_factor.email.sender_name%"
             - '@=service(''craue_config'').get(''wallabag_support_url'')'
-            - '@=service(''craue_config'').get(''wallabag_url'')'
+            - '%domain_name%'
 
     wallabag_user.password_resetting:
         class: Wallabag\UserBundle\EventListener\PasswordResettingListener
