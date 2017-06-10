@@ -57,16 +57,17 @@ class ExportController extends Controller
     {
         $method = ucfirst($category);
         $methodBuilder = 'getBuilderFor'.$method.'ByUser';
+        $epository = $this->get('wallabag_core.entry_repository');
 
         if ($category == 'tag_entries') {
-            $tag = $this->getDoctrine()->getRepository('WallabagCoreBundle:Tag')->findOneBySlug($request->query->get('tag'));
+            $tag = $this->get('wallabag_core.tag_repository')->findOneBySlug($request->query->get('tag'));
 
-            $entries = $this->getDoctrine()
-                ->getRepository('WallabagCoreBundle:Entry')
-                ->findAllByTagId($this->getUser()->getId(), $tag->getId());
+            $entries = $epository->findAllByTagId(
+                $this->getUser()->getId(),
+                $tag->getId()
+            );
         } else {
-            $entries = $this->getDoctrine()
-                ->getRepository('WallabagCoreBundle:Entry')
+            $entries = $epository
                 ->$methodBuilder($this->getUser()->getId())
                 ->getQuery()
                 ->getResult();

@@ -32,15 +32,14 @@ class ExportCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         try {
-            $user = $this->getDoctrine()->getRepository('WallabagUserBundle:User')->findOneByUserName($input->getArgument('username'));
+            $user = $this->get('wallabag_user.user_repository')->findOneByUserName($input->getArgument('username'));
         } catch (NoResultException $e) {
             $output->writeln(sprintf('<error>User "%s" not found.</error>', $input->getArgument('username')));
 
             return 1;
         }
 
-        $entries = $this->getDoctrine()
-            ->getRepository('WallabagCoreBundle:Entry')
+        $entries = $this->get('wallabag_core.entry_repository')
             ->getBuilderForAllByUser($user->getId())
             ->getQuery()
             ->getResult();

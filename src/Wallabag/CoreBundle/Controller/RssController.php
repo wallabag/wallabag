@@ -66,7 +66,7 @@ class RssController extends Controller
      */
     private function showEntries($type, User $user, $page = 1)
     {
-        $repository = $this->getDoctrine()->getRepository('WallabagCoreBundle:Entry');
+        $repository = $this->get('wallabag_core.entry_repository');
 
         switch ($type) {
             case 'starred':

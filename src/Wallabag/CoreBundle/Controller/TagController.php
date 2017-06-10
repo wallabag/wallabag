@@ -84,16 +84,17 @@ class TagController extends Controller
      */
     public function showTagAction()
     {
-        $tags = $this->getDoctrine()
-            ->getRepository('WallabagCoreBundle:Tag')
+        $repository = $this->get('wallabag_core.entry_repository');
+        $tags = $this->get('wallabag_core.tag_repository')
             ->findAllTags($this->getUser()->getId());
 
         $flatTags = [];
 
         foreach ($tags as $tag) {
-            $nbEntries = $this->getDoctrine()
-                ->getRepository('WallabagCoreBundle:Entry')
-                ->countAllEntriesByUserIdAndTagId($this->getUser()->getId(), $tag->getId());
+            $nbEntries = $repository->countAllEntriesByUserIdAndTagId(
+                $this->getUser()->getId(),
+                $tag->getId()
+            );
 
             $flatTags[] = [
                 'id' => $tag->getId(),
@@ -119,9 +120,10 @@ class TagController extends Controller
      */
     public function showEntriesForTagAction(Tag $tag, $page, Request $request)
     {
-        $entriesByTag = $this->getDoctrine()
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->findAllByTagId($this->getUser()->getId(), $tag->getId());
+        $entriesByTag = $this->get('wallabag_core.entry_repository')->findAllByTagId(
+            $this->getUser()->getId(),
+            $tag->getId()
+        );
 
         $pagerAdapter = new ArrayAdapter($entriesByTag);
 
