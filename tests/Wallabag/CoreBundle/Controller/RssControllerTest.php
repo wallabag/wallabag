@@ -23,7 +23,7 @@ class RssControllerTest extends WallabagCoreTestCase
         $this->assertEquals(1, $xpath->query('/rss/channel')->length);
 
         $this->assertEquals(1, $xpath->query('/rss/channel/title')->length);
-        $this->assertEquals('wallabag — '.$type.' feed', $xpath->query('/rss/channel/title')->item(0)->nodeValue);
+        $this->assertEquals('wallabag - '.$type.' feed', $xpath->query('/rss/channel/title')->item(0)->nodeValue);
 
         $this->assertEquals(1, $xpath->query('/rss/channel/pubDate')->length);
 
