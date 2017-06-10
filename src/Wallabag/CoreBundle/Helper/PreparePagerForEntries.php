@@ -4,6 +4,7 @@ namespace Wallabag\CoreBundle\Helper;
 
 use Pagerfanta\Adapter\AdapterInterface;
 use Pagerfanta\Pagerfanta;
+use Wallabag\UserBundle\Entity\User;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
@@ -20,12 +21,15 @@ class PreparePagerForEntries
 
     /**
      * @param AdapterInterface $adapter
+     * @param User             $user    If user isn't logged in, we can force it (like for rss)
      *
      * @return null|Pagerfanta
      */
-    public function prepare(AdapterInterface $adapter)
+    public function prepare(AdapterInterface $adapter, User $user = null)
     {
-        $user = $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null;
+        if (null === $user) {
+            $user = $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null;
+        }
 
         if (null === $user || !is_object($user)) {
             return;

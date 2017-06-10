@@ -3,13 +3,16 @@
 namespace Wallabag\CoreBundle\Controller;
 
 use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
 use Pagerfanta\Pagerfanta;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\UserBundle\Entity\User;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -31,7 +34,7 @@ class RssController extends Controller
     /**
      * Shows read entries for current user.
      *
-     * @Route("/{username}/{token}/archive.xml", name="archive_rss")
+     * @Route("/{username}/{token}/archive.xml", name="archive_rss", defaults={"_format"="xml"})
      * @ParamConverter("user", class="WallabagUserBundle:User", converter="username_rsstoken_converter")
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -44,7 +47,7 @@ class RssController extends Controller
     /**
      * Shows starred entries for current user.
      *
-     * @Route("/{username}/{token}/starred.xml", name="starred_rss")
+     * @Route("/{username}/{token}/starred.xml", name="starred_rss", defaults={"_format"="xml"})
      * @ParamConverter("user", class="WallabagUserBundle:User", converter="username_rsstoken_converter")
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -52,6 +55,65 @@ class RssController extends Controller
     public function showStarredAction(Request $request, User $user)
     {
         return $this->showEntries('starred', $user, $request->query->get('page', 1));
+    }
+
+    /**
+     * Shows entries associated to a tag for current user.
+     *
+     * @Route("/{username}/{token}/tags/{slug}.xml", name="tag_rss", defaults={"_format"="xml"})
+     * @ParamConverter("user", class="WallabagUserBundle:User", converter="username_rsstoken_converter")
+     * @ParamConverter("tag", options={"mapping": {"slug": "slug"}})
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function showTagsAction(Request $request, User $user, Tag $tag)
+    {
+        $page = $request->query->get('page', 1);
+
+        $url = $this->generateUrl(
+            'tag_rss',
+            [
+                'username' => $user->getUsername(),
+                'token' => $user->getConfig()->getRssToken(),
+                'slug' => $tag->getSlug(),
+            ],
+            UrlGeneratorInterface::ABSOLUTE_URL
+        );
+
+        $entriesByTag = $this->get('wallabag_core.entry_repository')->findAllByTagId(
+            $user->getId(),
+            $tag->getId()
+        );
+
+        $pagerAdapter = new ArrayAdapter($entriesByTag);
+
+        $entries = $this->get('wallabag_core.helper.prepare_pager_for_entries')->prepare(
+            $pagerAdapter,
+            $user
+        );
+
+        if (null === $entries) {
+            throw $this->createNotFoundException('No entries found?');
+        }
+
+        try {
+            $entries->setCurrentPage($page);
+        } catch (OutOfRangeCurrentPageException $e) {
+            if ($page > 1) {
+                return $this->redirect($url.'?page='.$entries->getNbPages(), 302);
+            }
+        }
+
+        return $this->render(
+            '@WallabagCore/themes/common/Entry/entries.xml.twig',
+            [
+                'url_html' => $this->generateUrl('tag_entries', ['slug' => $tag->getSlug()], UrlGeneratorInterface::ABSOLUTE_URL),
+                'type' => 'tag ('.$tag->getLabel().')',
+                'url' => $url,
+                'entries' => $entries,
+            ],
+            new Response('', 200, ['Content-Type' => 'application/rss+xml'])
+        );
     }
 
     /**
@@ -108,10 +170,15 @@ class RssController extends Controller
             }
         }
 
-        return $this->render('@WallabagCore/themes/common/Entry/entries.xml.twig', [
-            'type' => $type,
-            'url' => $url,
-            'entries' => $entries,
-        ]);
+        return $this->render(
+            '@WallabagCore/themes/common/Entry/entries.xml.twig',
+            [
+                'url_html' => $this->generateUrl($type, [], UrlGeneratorInterface::ABSOLUTE_URL),
+                'type' => $type,
+                'url' => $url,
+                'entries' => $entries,
+            ],
+            new Response('', 200, ['Content-Type' => 'application/rss+xml'])
+        );
     }
 }

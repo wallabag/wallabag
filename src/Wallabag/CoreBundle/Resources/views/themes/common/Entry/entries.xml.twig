@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/">
     <channel>
-        <title>wallabag — {{type}} feed</title>
-        <link>{{ url(type) }}</link>
+        <title>wallabag - {{ type }} feed</title>
+        <link>{{ url_html }}</link>
         <link rel="self" href="{{ app.request.uri }}"/>
         {% if entries.hasPreviousPage -%}
             <link rel="previous" href="{{ url }}?page={{ entries.previousPage }}"/>
@@ -13,7 +13,7 @@
         <link rel="last" href="{{ url }}?page={{ entries.nbPages }}"/>
         <pubDate>{{ "now"|date('D, d M Y H:i:s') }}</pubDate>
         <generator>wallabag</generator>
-        <description>wallabag {{type}} elements</description>
+        <description>wallabag {{ type }} elements</description>
 
         {% for entry in entries %}
 
