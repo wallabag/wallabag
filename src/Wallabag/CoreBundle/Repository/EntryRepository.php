@@ -135,6 +135,7 @@ class EntryRepository extends EntityRepository
      * @param int    $userId
      * @param bool   $isArchived
      * @param bool   $isStarred
+     * @param bool   $isPublic
      * @param string $sort
      * @param string $order
      * @param int    $since
@@ -142,18 +143,22 @@ class EntryRepository extends EntityRepository
      *
      * @return array
      */
-    public function findEntries($userId, $isArchived = null, $isStarred = null, $sort = 'created', $order = 'ASC', $since = 0, $tags = '')
+    public function findEntries($userId, $isArchived = null, $isStarred = null, $isPublic = null, $sort = 'created', $order = 'ASC', $since = 0, $tags = '')
     {
         $qb = $this->createQueryBuilder('e')
             ->leftJoin('e.tags', 't')
             ->where('e.user =:userId')->setParameter('userId', $userId);
 
         if (null !== $isArchived) {
-            $qb->andWhere('e.isArchived =:isArchived')->setParameter('isArchived', (bool) $isArchived);
+            $qb->andWhere('e.isArchived = :isArchived')->setParameter('isArchived', (bool) $isArchived);
         }
 
         if (null !== $isStarred) {
-            $qb->andWhere('e.isStarred =:isStarred')->setParameter('isStarred', (bool) $isStarred);
+            $qb->andWhere('e.isStarred = :isStarred')->setParameter('isStarred', (bool) $isStarred);
+        }
+
+        if (null !== $isPublic) {
+            $qb->andWhere('e.uid IS '.(true === $isPublic ? 'NOT' : '').' NULL');
         }
 
         if ($since > 0) {

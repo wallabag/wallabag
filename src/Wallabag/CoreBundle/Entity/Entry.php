@@ -687,6 +687,10 @@ class Entry
     /**
      * Used in the entries filter so it's more explicit for the end user than the uid.
      *
+     * @VirtualProperty
+     * @SerializedName("is_public")
+     * @Groups({"entries_for_user"})
+     *
      * @return bool
      */
     public function isPublic()
