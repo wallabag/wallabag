@@ -24,7 +24,7 @@
 
             article {
                 margin: 0 auto;
-                width: 600px;
+                width: 900px;
             }
         </style>
         <meta property="og:title" content="{{ entry.title|e|raw }}" />
@@ -45,7 +45,11 @@
         <header>
             <h1>{{ entry.title|e|raw }}</h1>
             <div><a href="{{ entry.url|e }}" target="_blank" title="{{ 'entry.view.original_article'|trans }} : {{ entry.title|e|raw }}" class="tool">{{ entry.domainName|removeWww }}</a></div>
-            <div>{{ "entry.public.shared_by_wallabag"|trans({'%wallabag_instance%': url('homepage')})|raw }}</div>
+            <div>{{ "entry.public.shared_by_wallabag"|trans({'%wallabag_instance%': url('homepage'), '%username%': entry.user.username})|raw }}.</div>
+
+            {% if entry.previewPicture is not null %}
+                <div><img class="preview" src="{{ entry.previewPicture }}" alt="{{ entry.title|striptags|e('html_attr') }}" /></div>
+            {% endif %}
         </header>
         <article>
             {{ entry.content | raw }}

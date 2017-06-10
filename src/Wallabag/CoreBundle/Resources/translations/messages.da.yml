@@ -159,6 +159,7 @@ config:
         #         and: 'One rule AND another'
         #         matches: 'Tests that a <i>subject</i> is matches a <i>search</i> (case-insensitive).<br />Example: <code>title matches "football"</code>'
         #         notmatches: 'Tests that a <i>subject</i> is not matches a <i>search</i> (case-insensitive).<br />Example: <code>title notmatches "football"</code>'
+
 entry:
     page_titles:
         # unread: 'Unread entries'
@@ -244,7 +245,7 @@ entry:
         url_label: 'Url'
         save_label: 'Gem'
     public:
-        # shared_by_wallabag: "This article has been shared by <a href=%wallabag_instance%'>wallabag</a>"
+        # shared_by_wallabag: "This article has been shared by %username% with <a href='%wallabag_instance%'>wallabag</a>"
     confirm:
         # delete: "Are you sure you want to remove that article?"
         # delete_tag: "Are you sure you want to remove that tag from that article?"
