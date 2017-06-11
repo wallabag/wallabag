@@ -313,6 +313,8 @@ class InstallCommand extends ContainerAwareCommand
 
         $this
             ->runCommand('doctrine:migrations:migrate', ['--no-interaction' => true]);
+
+        return $this;
     }
 
     /**

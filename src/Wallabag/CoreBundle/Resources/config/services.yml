@@ -126,6 +126,8 @@ services:
         factory: [ "@doctrine.orm.default_entity_manager", getRepository ]
         arguments:
             - WallabagCoreBundle:SiteCredential
+        calls:
+            - [ setCrypto, [ "@wallabag_core.helper.crypto_proxy" ] ]
 
     wallabag_core.helper.entries_export:
         class: Wallabag\CoreBundle\Helper\EntriesExport
@@ -208,3 +210,9 @@ services:
 
     wallabag_core.entry.download_images.client:
         class: GuzzleHttp\Client
+
+    wallabag_core.helper.crypto_proxy:
+        class: Wallabag\CoreBundle\Helper\CryptoProxy
+        arguments:
+            - "%wallabag_core.site_credentials.encryption_key_path%"
+            - "@logger"

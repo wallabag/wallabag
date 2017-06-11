@@ -6,12 +6,11 @@ use Monolog\Handler\TestHandler;
 use Monolog\Logger;
 use BD\GuzzleSiteAuthenticator\SiteConfig\SiteConfig;
 use Graby\SiteConfig\SiteConfig as GrabySiteConfig;
-use PHPUnit_Framework_TestCase;
 use Wallabag\CoreBundle\GuzzleSiteAuthenticator\GrabySiteConfigBuilder;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
-class GrabySiteConfigBuilderTest extends PHPUnit_Framework_TestCase
+class GrabySiteConfigBuilderTest extends \PHPUnit_Framework_TestCase
 {
     /** @var \Wallabag\CoreBundle\GuzzleSiteAuthenticator\GrabySiteConfigBuilder */
     protected $builder;

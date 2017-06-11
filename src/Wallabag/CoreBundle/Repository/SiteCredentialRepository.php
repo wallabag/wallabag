@@ -2,11 +2,20 @@
 
 namespace Wallabag\CoreBundle\Repository;
 
+use Wallabag\CoreBundle\Helper\CryptoProxy;
+
 /**
  * SiteCredentialRepository.
  */
 class SiteCredentialRepository extends \Doctrine\ORM\EntityRepository
 {
+    private $cryptoProxy;
+
+    public function setCrypto(CryptoProxy $cryptoProxy)
+    {
+        $this->cryptoProxy = $cryptoProxy;
+    }
+
     /**
      * Retrieve one username/password for the given host and userId.
      *
@@ -17,12 +26,21 @@ class SiteCredentialRepository extends \Doctrine\ORM\EntityRepository
      */
     public function findOneByHostAndUser($host, $userId)
     {
-        return $this->createQueryBuilder('s')
+        $res = $this->createQueryBuilder('s')
             ->select('s.username', 's.password')
             ->where('s.host = :hostname')->setParameter('hostname', $host)
             ->andWhere('s.user = :userId')->setParameter('userId', $userId)
             ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult();
+
+        if (null === $res) {
+            return;
+        }
+
+        // decrypt password before returning it
+        $res['password'] = $this->cryptoProxy->decrypt($res['password']);
+
+        return $res;
     }
 }

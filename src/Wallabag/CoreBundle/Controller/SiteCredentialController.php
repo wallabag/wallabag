@@ -45,6 +45,8 @@ class SiteCredentialController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $credential->setPassword($this->get('wallabag_core.helper.crypto_proxy')->crypt($credential->getPassword()));
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($credential);
             $em->flush($credential);
