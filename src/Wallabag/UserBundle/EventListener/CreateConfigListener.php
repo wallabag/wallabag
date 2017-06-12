@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use FOS\UserBundle\Event\UserEvent;
 use FOS\UserBundle\FOSUserEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Wallabag\CoreBundle\Entity\Config;
 
 /**
@@ -22,8 +23,9 @@ class CreateConfigListener implements EventSubscriberInterface
     private $readingSpeed;
     private $actionMarkAsRead;
     private $listMode;
+    private $session;
 
-    public function __construct(EntityManager $em, $theme, $itemsOnPage, $rssLimit, $language, $readingSpeed, $actionMarkAsRead, $listMode)
+    public function __construct(EntityManager $em, $theme, $itemsOnPage, $rssLimit, $language, $readingSpeed, $actionMarkAsRead, $listMode, Session $session)
     {
         $this->em = $em;
         $this->theme = $theme;
@@ -33,6 +35,7 @@ class CreateConfigListener implements EventSubscriberInterface
         $this->readingSpeed = $readingSpeed;
         $this->actionMarkAsRead = $actionMarkAsRead;
         $this->listMode = $listMode;
+        $this->session = $session;
     }
 
     public static function getSubscribedEvents()
@@ -52,7 +55,7 @@ class CreateConfigListener implements EventSubscriberInterface
         $config->setTheme($this->theme);
         $config->setItemsPerPage($this->itemsOnPage);
         $config->setRssLimit($this->rssLimit);
-        $config->setLanguage($this->language);
+        $config->setLanguage($this->session->get('_locale', $this->language));
         $config->setReadingSpeed($this->readingSpeed);
         $config->setActionMarkAsRead($this->actionMarkAsRead);
         $config->setListMode($this->listMode);

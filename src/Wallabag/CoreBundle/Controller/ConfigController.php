@@ -330,6 +330,25 @@ class ConfigController extends Controller
     }
 
     /**
+     * Change the locale for the current user.
+     *
+     * @param Request $request
+     * @param string  $language
+     *
+     * @Route("/locale/{language}", name="changeLocale")
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function setLocaleAction(Request $request, $language = null)
+    {
+        if (null !== $language) {
+            $this->get('session')->set('_locale', $language);
+        }
+
+        return $this->redirect($request->headers->get('referer'));
+    }
+
+    /**
      * Remove all tags for given tags and a given user and cleanup orphan tags.
      *
      * @param array $tags
