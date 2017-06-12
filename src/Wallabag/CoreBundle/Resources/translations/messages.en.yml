@@ -187,6 +187,8 @@ entry:
         unread_label: 'Unread'
         preview_picture_label: 'Has a preview picture'
         preview_picture_help: 'Preview picture'
+        is_public_label: 'Has a public link'
+        is_public_help: 'Public link'
         language_label: 'Language'
         http_status_label: 'HTTP status'
         reading_time:

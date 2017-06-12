@@ -103,6 +103,15 @@
                 </div>
 
                 <div class="col s12">
+                    <label>{{ 'entry.filters.is_public_help'|trans }}</label>
+                </div>
+
+                <div class="input-field col s12 with-checkbox">
+                    {{ form_widget(form.isPublic) }}
+                    {{ form_label(form.isPublic) }}
+                </div>
+
+                <div class="col s12">
                     {{ form_label(form.language) }}
                 </div>
 
@@ -121,10 +130,12 @@
                 <div class="col s12">
                     {{ form_label(form.readingTime) }}
                 </div>
+
                 <div class="input-field col s6">
                     {{ form_widget(form.readingTime.left_number, {'type': 'number'}) }}
                     <label for="entry_filter_readingTime_left_number">{{ 'entry.filters.reading_time.from'|trans }}</label>
                 </div>
+
                 <div class="input-field col s6">
                     {{ form_widget(form.readingTime.right_number, {'type': 'number'}) }}
                     <label for="entry_filter_readingTime_right_number">{{ 'entry.filters.reading_time.to'|trans }}</label>

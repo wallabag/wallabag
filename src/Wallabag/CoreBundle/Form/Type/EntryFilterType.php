@@ -150,6 +150,20 @@ class EntryFilterType extends AbstractType
                 },
                 'label' => 'entry.filters.preview_picture_label',
             ])
+            ->add('isPublic', CheckboxFilterType::class, [
+                'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
+                    if (false === $values['value']) {
+                        return;
+                    }
+
+                    // is_public isn't a real field
+                    // we should use the "uid" field to determine if the entry has been made public
+                    $expression = $filterQuery->getExpr()->isNotNull($values['alias'].'.uid');
+
+                    return $filterQuery->createCondition($expression);
+                },
+                'label' => 'entry.filters.is_public_label',
+            ])
             ->add('language', ChoiceFilterType::class, [
                 'choices' => array_flip($this->repository->findDistinctLanguageByUser($this->user->getId())),
                 'label' => 'entry.filters.language_label',

@@ -187,6 +187,8 @@ entry:
         unread_label: 'Nieprzeczytane'
         preview_picture_label: 'Posiada podgląd obrazu'
         preview_picture_help: 'Podgląd obrazu'
+        # is_public_label: 'Has a public link'
+        # is_public_help: 'Public link'
         language_label: 'Język'
         http_status_label: 'Status HTTP'
         reading_time:

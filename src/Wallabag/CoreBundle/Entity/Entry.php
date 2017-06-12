@@ -685,6 +685,21 @@ class Entry
     }
 
     /**
+     * Used in the entries filter so it's more explicit for the end user than the uid.
+     * Also used in the API.
+     *
+     * @VirtualProperty
+     * @SerializedName("is_public")
+     * @Groups({"entries_for_user"})
+     *
+     * @return bool
+     */
+    public function isPublic()
+    {
+        return null !== $this->uid;
+    }
+
+    /**
      * @return string
      */
     public function getHttpStatus()

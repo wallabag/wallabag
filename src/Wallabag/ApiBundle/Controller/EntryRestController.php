@@ -77,6 +77,7 @@ class EntryRestController extends WallabagRestController
      *          {"name"="perPage", "dataType"="integer", "required"=false, "format"="default'30'", "description"="results per page."},
      *          {"name"="tags", "dataType"="string", "required"=false, "format"="api,rest", "description"="a list of tags url encoded. Will returns entries that matches ALL tags."},
      *          {"name"="since", "dataType"="integer", "required"=false, "format"="default '0'", "description"="The timestamp since when you want entries updated."},
+     *          {"name"="public", "dataType"="integer", "required"=false, "format"="1 or 0, all entries by default", "description"="filter by entries with a public link"},
      *       }
      * )
      *
@@ -88,6 +89,7 @@ class EntryRestController extends WallabagRestController
 
         $isArchived = (null === $request->query->get('archive')) ? null : (bool) $request->query->get('archive');
         $isStarred = (null === $request->query->get('starred')) ? null : (bool) $request->query->get('starred');
+        $isPublic = (null === $request->query->get('public')) ? null : (bool) $request->query->get('public');
         $sort = $request->query->get('sort', 'created');
         $order = $request->query->get('order', 'desc');
         $page = (int) $request->query->get('page', 1);
@@ -96,9 +98,16 @@ class EntryRestController extends WallabagRestController
         $since = $request->query->get('since', 0);
 
         /** @var \Pagerfanta\Pagerfanta $pager */
-        $pager = $this->getDoctrine()
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->findEntries($this->getUser()->getId(), $isArchived, $isStarred, $sort, $order, $since, $tags);
+        $pager = $this->get('wallabag_core.entry_repository')->findEntries(
+            $this->getUser()->getId(),
+            $isArchived,
+            $isStarred,
+            $isPublic,
+            $sort,
+            $order,
+            $since,
+            $tags
+        );
 
         $pager->setMaxPerPage($perPage);
         $pager->setCurrentPage($page);
@@ -111,6 +120,7 @@ class EntryRestController extends WallabagRestController
                 [
                     'archive' => $isArchived,
                     'starred' => $isStarred,
+                    'public' => $isPublic,
                     'sort' => $sort,
                     'order' => $order,
                     'page' => $page,
@@ -289,6 +299,7 @@ class EntryRestController extends WallabagRestController
      *          {"name"="preview_picture", "dataType"="string", "required"=false, "description"="Preview picture of the entry"},
      *          {"name"="published_at", "dataType"="datetime|integer", "format"="YYYY-MM-DDTHH:II:SS+TZ or a timestamp", "required"=false, "description"="Published date of the entry"},
      *          {"name"="authors", "dataType"="string", "format"="Name Firstname,author2,author3", "required"=false, "description"="Authors of the entry"},
+     *          {"name"="public", "dataType"="integer", "required"=false, "format"="1 or 0", "description"="will generate a public link for the entry"},
      *       }
      * )
      *
@@ -332,6 +343,7 @@ class EntryRestController extends WallabagRestController
      *          {"name"="preview_picture", "dataType"="string", "required"=false, "description"="Preview picture of the entry"},
      *          {"name"="published_at", "dataType"="datetime|integer", "format"="YYYY-MM-DDTHH:II:SS+TZ or a timestamp", "required"=false, "description"="Published date of the entry"},
      *          {"name"="authors", "dataType"="string", "format"="Name Firstname,author2,author3", "required"=false, "description"="Authors of the entry"},
+     *          {"name"="public", "dataType"="integer", "required"=false, "format"="1 or 0", "description"="will generate a public link for the entry"},
      *      }
      * )
      *
@@ -623,6 +635,7 @@ class EntryRestController extends WallabagRestController
         $tags = $request->request->get('tags', []);
         $isArchived = $request->request->get('archive');
         $isStarred = $request->request->get('starred');
+        $isPublic = $request->request->get('public');
         $content = $request->request->get('content');
         $language = $request->request->get('language');
         $picture = $request->request->get('preview_picture');
@@ -664,6 +677,14 @@ class EntryRestController extends WallabagRestController
 
         if (!empty($tags)) {
             $this->get('wallabag_core.tags_assigner')->assignTagsToEntry($entry, $tags);
+        }
+
+        if (!is_null($isPublic)) {
+            if (true === (bool) $isPublic && null === $entry->getUid()) {
+                $entry->generateUid();
+            } elseif (false === (bool) $isPublic) {
+                $entry->cleanUid();
+            }
         }
 
         $em = $this->getDoctrine()->getManager();

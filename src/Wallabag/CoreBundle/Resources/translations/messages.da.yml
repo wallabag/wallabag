@@ -186,6 +186,8 @@ entry:
         unread_label: 'Ulæst'
         preview_picture_label: 'Har et vist billede'
         preview_picture_help: 'Forhåndsvis billede'
+        # is_public_label: 'Has a public link'
+        # is_public_help: 'Public link'
         language_label: 'Sprog'
         # http_status_label: 'HTTP status'
         reading_time:

@@ -128,6 +128,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
             'perPage' => 2,
             'tags' => 'foo',
             'since' => 1443274283,
+            'public' => 0,
         ]);
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
@@ -154,6 +155,53 @@ class EntryRestControllerTest extends WallabagApiTestCase
             $this->assertContains('order=asc', $content['_links'][$link]['href']);
             $this->assertContains('tags=foo', $content['_links'][$link]['href']);
             $this->assertContains('since=1443274283', $content['_links'][$link]['href']);
+            $this->assertContains('public=0', $content['_links'][$link]['href']);
+        }
+
+        $this->assertEquals('application/json', $this->client->getResponse()->headers->get('Content-Type'));
+    }
+
+    public function testGetEntriesPublicOnly()
+    {
+        $entry = $this->client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneByUser(1);
+
+        if (!$entry) {
+            $this->markTestSkipped('No content found in db.');
+        }
+
+        // generate at least one public entry
+        $entry->generateUid();
+
+        $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+        $em->persist($entry);
+        $em->flush();
+
+        $this->client->request('GET', '/api/entries', [
+            'public' => 1,
+        ]);
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertGreaterThanOrEqual(1, count($content));
+        $this->assertArrayHasKey('items', $content['_embedded']);
+        $this->assertGreaterThanOrEqual(1, $content['total']);
+        $this->assertEquals(1, $content['page']);
+        $this->assertEquals(30, $content['limit']);
+        $this->assertGreaterThanOrEqual(1, $content['pages']);
+
+        $this->assertArrayHasKey('_links', $content);
+        $this->assertArrayHasKey('self', $content['_links']);
+        $this->assertArrayHasKey('first', $content['_links']);
+        $this->assertArrayHasKey('last', $content['_links']);
+
+        foreach (['self', 'first', 'last'] as $link) {
+            $this->assertArrayHasKey('href', $content['_links'][$link]);
+            $this->assertContains('public=1', $content['_links'][$link]['href']);
         }
 
         $this->assertEquals('application/json', $this->client->getResponse()->headers->get('Content-Type'));
@@ -348,6 +396,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
             'language' => 'de',
             'published_at' => '2016-09-08T11:55:58+0200',
             'authors' => 'bob,helen',
+            'public' => 1,
         ]);
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
@@ -367,6 +416,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertCount(2, $content['published_by']);
         $this->assertContains('bob', $content['published_by']);
         $this->assertContains('helen', $content['published_by']);
+        $this->assertTrue($content['is_public'], 'A public link has been generated for that entry');
     }
 
     public function testPostSameEntry()
@@ -481,6 +531,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
             'preview_picture' => 'http://preview.io/picture.jpg',
             'authors' => 'bob,sponge',
             'content' => 'awesome',
+            'public' => 0,
         ]);
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
@@ -497,6 +548,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertContains('sponge', $content['published_by']);
         $this->assertContains('bob', $content['published_by']);
         $this->assertEquals('awesome', $content['content']);
+        $this->assertFalse($content['is_public'], 'Entry is no more shared');
     }
 
     public function testPatchEntryWithoutQuotes()
