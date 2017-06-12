@@ -35,6 +35,7 @@ Speziell für wallabag:
  - `wallabag:import:redis-worker`: Ist hilfreich, wenn du Redis benutzt.
  - `wallabag:install`: (Neu)installierung von wallabag
  - `wallabag:tag:all`: Taggt alle Einträge für einen Benutzer entsprechend seiner/ihrer Tagging-Regeln.
+ - `wallabag:user:show`: Zeigt die Details eines Benutzers.
 
 wallabag:clean-duplicates
 -------------------------
@@ -136,5 +137,20 @@ Benutzung:
 wallabag:tag:all <benutzer>
 ```
 
-Arguments:
+Argumente:
  - benutzer: Benutzer, dessen Einträge mit Tags versehen werden sollen.
+
+
+wallabag:user:show
+------------------
+
+Dieser Befehl zeigt dir die Details eines Benutzers.
+
+Benutzung:
+
+```
+wallabag:user:show <benutzer>
+```
+
+Argumente:
+ - benutzer: Benutzer, dessen Details angezeigt werden sollen.
