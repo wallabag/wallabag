@@ -120,12 +120,12 @@ class ContentProxy
 
         $this->validateAndSetLanguage(
             $entry,
-            isset($content['language']) ? $content['language'] : ''
+            isset($content['language']) ? $content['language'] : null
         );
 
         $this->validateAndSetPreviewPicture(
             $entry,
-            isset($content['open_graph']['og_image']) ? $content['open_graph']['og_image'] : ''
+            isset($content['open_graph']['og_image']) ? $content['open_graph']['og_image'] : null
         );
 
         // if content is an image, define it as a preview too
