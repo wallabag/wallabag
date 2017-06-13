@@ -7,6 +7,10 @@ app/config/parameters.yml-Datei. Stelle sicher, dass sich deine mit
 dieser ähnelt. Wenn du nicht weißt, welchen Wert du setzen sollst,
 belasse es bei dem Standardwert.
 
+{% hint style='danger' %}
+To apply changes to `parameters.yml`, you have to clear your cache by deleting everything in `var/cache` with this command: `bin/console cache:clear -e=prod`.
+{% endhint %}
+
 ```yaml
 parameters:
     database_driver: pdo_mysql
