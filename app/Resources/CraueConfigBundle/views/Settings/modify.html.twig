@@ -33,8 +33,7 @@
                     {{ 'modify_settings' | trans({}, 'CraueConfigBundle') }}
                 </button>
 
-                {{ form_rest(form) }}
-                {{ form_end(form) }}
+                {{ form_widget(form._token) }}
             </div>
         </div>
     </div>
