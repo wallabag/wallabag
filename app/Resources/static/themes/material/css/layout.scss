@@ -19,7 +19,7 @@ body {
 }
 
 nav,
-main,
+body:not(.entry) main,
 footer {
   padding-left: 240px;
 }
