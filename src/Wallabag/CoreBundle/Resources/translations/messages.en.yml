@@ -162,7 +162,7 @@ entry:
         unread: 'Unread entries'
         starred: 'Starred entries'
         archived: 'Archived entries'
-        filtered: 'Filtered entries'
+        filtered: 'All entries'
         filtered_tags: 'Filtered by tags:'
         filtered_search: 'Filtered by search:'
         untagged: 'Untagged entries'

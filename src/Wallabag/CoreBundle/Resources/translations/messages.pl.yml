@@ -162,7 +162,7 @@ entry:
         unread: 'Nieprzeczytane wpisy'
         starred: 'Wpisy oznaczone gwiazdką'
         archived: 'Zarchiwizowane wpisy'
-        filtered: 'Odfiltrowane wpisy'
+        # filtered: 'All entries'
         filtered_tags: 'Filtrowane po tagach:'
         filtered_search: 'Filtrowanie po wyszukiwaniu:'
         untagged: 'Odtaguj wpisy'

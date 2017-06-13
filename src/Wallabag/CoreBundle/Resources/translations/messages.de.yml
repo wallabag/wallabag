@@ -162,7 +162,7 @@ entry:
         unread: 'Ungelesene Einträge'
         starred: 'Favorisierte Einträge'
         archived: 'Archivierte Einträge'
-        filtered: 'Gefilterte Einträge'
+        # filtered: 'All entries'
         filtered_tags: 'Gefiltert nach Tags:'
         filtered_search: 'Gefiltert nach Suche:'
         untagged: 'Nicht getaggte Einträge'

@@ -162,7 +162,7 @@ entry:
         unread: 'Entradas não lidas'
         starred: 'Entradas destacadas'
         archived: 'Entradas arquivadas'
-        filtered: 'Entradas filtradas'
+        # filtered: 'All entries'
         filtered_tags: 'Filtrar por tags:'
         # filtered_search: 'Filtered by search:'
         untagged: 'Entradas sem tags'
