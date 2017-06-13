@@ -18,7 +18,7 @@ ID of your website inside Piwik, available in `Paramètres` -> `Sites web` -> `G
 
 For instance:
 
-![ID de votre site dans Piiwk](../../img/admin/id_piwik.png)
+![ID of your website in Piwik](../../img/admin/id_piwik.png)
 
 ## Article
 

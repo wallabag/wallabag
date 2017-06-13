@@ -19,7 +19,7 @@ Identifiant de votre site dans Piwik, disponible dans `Paramètres` -> `Sites we
 
 Par exemple :
 
-![ID de votre site dans Piiwk](../../img/admin/id_piwik.png)
+![ID de votre site dans Piwik](../../img/admin/id_piwik.png)
 
 ## Article
 
@@ -130,7 +130,3 @@ Une fois cette fonctionnalité activée, les images des articles seront téléch
 ### URL de support de wallabag
 
 URL utilisée dans les emails envoyés par wallabag pour toute demande d'aide.
-
-### URL de *votre* instance de wallabag
-
-URL de votre instance de wallabag, utilisée pour le chemin des images, lorsque la fonctionnalité de téléchargement des images est active.
