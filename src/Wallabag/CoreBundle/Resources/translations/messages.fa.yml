@@ -54,7 +54,7 @@ config:
     page_title: 'پیکربندی'
     tab_menu:
         settings: 'تنظیمات'
-        rss: 'آر-اس-اس'
+        feed: 'آر-اس-اس'
         user_info: 'اطلاعات کاربر'
         password: 'رمز'
         rules: 'برچسب‌گذاری خودکار'
@@ -85,19 +85,19 @@ config:
         # help_reading_speed: "wallabag calculates a reading time for each article. You can define here, thanks to this list, if you are a fast or a slow reader. wallabag will recalculate the reading time for each article."
         # help_language: "You can change the language of wallabag interface."
         # help_pocket_consumer_key: "Required for Pocket import. You can create it in your Pocket account."
-    form_rss:
+    form_feed:
         description: 'با خوراک آر-اس-اس که wallabag در اختیارتان می‌گذارد، می‌توانید مقاله‌های ذخیره‌شده را در نرم‌افزار آر-اس-اس دلخواه خود بخوانید. برای این کار نخست باید یک کد بسازید.'
         token_label: 'کد آر-اس-اس'
         no_token: 'بدون کد'
         token_create: 'کد خود را بسازید'
         token_reset: 'بازنشانی کد'
-        rss_links: 'پیوند آر-اس-اس'
-        rss_link:
+        feed_links: 'پیوند آر-اس-اس'
+        feed_link:
             unread: 'خوانده‌نشده'
             starred: 'برگزیده'
             archive: 'بایگانی'
             # all: 'All'
-        rss_limit: 'محدودیت آر-اس-اس'
+        feed_limit: 'محدودیت آر-اس-اس'
     form_user:
         # two_factor_description: "Enabling two factor authentication means you'll receive an email with a code OR need to use an OTP app (like Google Authenticator, Authy or FreeOTP) to get a one time code on every new untrusted connection. You can't choose both option."
         name_label: 'نام'
@@ -372,7 +372,7 @@ quickstart:
         title: 'برنامه را تنظیم کنید'
         # description: 'In order to have an application which suits you, have a look into the configuration of wallabag.'
         language: 'زبان و نمای برنامه را تغییر دهید'
-        rss: 'خوراک آر-اس-اس را فعال کنید'
+        feed: 'خوراک آر-اس-اس را فعال کنید'
         tagging_rules: 'قانون‌های برچسب‌گذاری خودکار مقاله‌هایتان را تعریف کنید'
     admin:
         title: 'مدیریت'
@@ -589,10 +589,10 @@ flashes:
             password_updated: 'رمز به‌روز شد'
             password_not_updated_demo: "در حالت نمایشی نمی‌توانید رمز کاربر را عوض کنید."
             user_updated: 'اطلاعات به‌روز شد'
-            rss_updated: 'اطلاعات آر-اس-اس به‌روز شد'
+            feed_updated: 'اطلاعات آر-اس-اس به‌روز شد'
             tagging_rules_updated: 'برچسب‌گذاری خودکار به‌روز شد'
             tagging_rules_deleted: 'قانون برچسب‌گذاری پاک شد'
-            rss_token_updated: 'کد آر-اس-اس به‌روز شد'
+            feed_token_updated: 'کد آر-اس-اس به‌روز شد'
             # annotations_reset: Annotations reset
             # tags_reset: Tags reset
             # entries_reset: Entries reset

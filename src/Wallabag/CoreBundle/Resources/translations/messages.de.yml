@@ -54,7 +54,7 @@ config:
     page_title: 'Einstellungen'
     tab_menu:
         settings: 'Einstellungen'
-        rss: 'RSS'
+        feed: 'RSS'
         user_info: 'Benutzerinformation'
         password: 'Kennwort'
         rules: 'Tagging-Regeln'
@@ -85,19 +85,19 @@ config:
         help_reading_speed: "wallabag berechnet eine Lesezeit pro Artikel. Hier kannst du definieren, ob du ein schneller oder langsamer Leser bist. wallabag wird die Lesezeiten danach neu berechnen."
         help_language: "Du kannst die Sprache der wallabag-Oberfläche ändern."
         help_pocket_consumer_key: "Nötig für den Pocket-Import. Du kannst ihn in deinem Pocket account einrichten."
-    form_rss:
+    form_feed:
         description: 'Die RSS-Feeds von wallabag erlauben es dir, deine gespeicherten Artikel mit deinem bevorzugten RSS-Reader zu lesen. Vorher musst du jedoch einen Token erstellen.'
         token_label: 'RSS-Token'
         no_token: 'Kein Token'
         token_create: 'Token erstellen'
         token_reset: 'Token zurücksetzen'
-        rss_links: 'RSS-Links'
-        rss_link:
+        feed_links: 'RSS-Links'
+        feed_link:
             unread: 'Ungelesene'
             starred: 'Favoriten'
             archive: 'Archivierte'
             all: 'Alle'
-        rss_limit: 'Anzahl der Einträge pro Feed'
+        feed_limit: 'Anzahl der Einträge pro Feed'
     form_user:
         # two_factor_description: "Enabling two factor authentication means you'll receive an email with a code OR need to use an OTP app (like Google Authenticator, Authy or FreeOTP) to get a one time code on every new untrusted connection. You can't choose both option."
         name_label: 'Name'
@@ -363,7 +363,7 @@ quickstart:
         title: 'Anwendung konfigurieren'
         description: 'Um die Applikation für dich anzupassen, schau in die Konfiguration von wallabag.'
         language: 'Sprache und Design ändern'
-        rss: 'RSS-Feeds aktivieren'
+        feed: 'RSS-Feeds aktivieren'
         tagging_rules: 'Schreibe Regeln, um deine Beiträge automatisch zu taggen (verschlagworten)'
     admin:
         title: 'Administration'
@@ -580,14 +580,14 @@ flashes:
             password_updated: 'Kennwort aktualisiert'
             password_not_updated_demo: 'Im Testmodus kannst du das Kennwort nicht ändern.'
             user_updated: 'Information aktualisiert'
-            rss_updated: 'RSS-Informationen aktualisiert'
+            feed_updated: 'RSS-Informationen aktualisiert'
             tagging_rules_updated: 'Tagging-Regeln aktualisiert'
             tagging_rules_deleted: 'Tagging-Regel gelöscht'
-            rss_token_updated: 'RSS-Token aktualisiert'
-            annotations_reset: 'Anmerkungen zurücksetzen'
-            tags_reset: 'Tags zurücksetzen'
-            entries_reset: 'Einträge zurücksetzen'
-            archived_reset: 'Archiverte Einträge zurücksetzen'
+            feed_token_updated: 'RSS-Token aktualisiert'
+            annotations_reset: Anmerkungen zurücksetzen
+            tags_reset: Tags zurücksetzen
+            entries_reset: Einträge zurücksetzen
+            archived_reset: Archiverte Einträge zurücksetzen
     entry:
         notice:
             entry_already_saved: 'Eintrag bereits am %date% gespeichert'

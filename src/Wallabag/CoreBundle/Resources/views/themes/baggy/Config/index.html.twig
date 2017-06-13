@@ -94,43 +94,43 @@
         {{ form_rest(form.config) }}
     </form>
 
-    <h2>{{ 'config.tab_menu.rss'|trans }}</h2>
+    <h2>{{ 'config.tab_menu.feed'|trans }}</h2>
 
-        {{ form_start(form.rss) }}
-        {{ form_errors(form.rss) }}
+        {{ form_start(form.feed) }}
+        {{ form_errors(form.feed) }}
 
         <div class="row">
-            {{ 'config.form_rss.description'|trans }}
+            {{ 'config.form_feed.description'|trans }}
         </div>
 
         <fieldset class="w500p inline">
             <div class="row">
-                <label>{{ 'config.form_rss.token_label'|trans }}</label>
-                {% if rss.token %}
-                    {{ rss.token }}
+                <label>{{ 'config.form_feed.token_label'|trans }}</label>
+                {% if feed.token %}
+                    {{ feed.token }}
                 {% else %}
-                    <em>{{ 'config.form_rss.no_token'|trans }}</em>
+                    <em>{{ 'config.form_feed.no_token'|trans }}</em>
                 {% endif %}
                 –
                 <a href="{{ path('generate_token') }}">
-                    {% if rss.token %}
-                        {{ 'config.form_rss.token_reset'|trans }}
+                    {% if feed.token %}
+                        {{ 'config.form_feed.token_reset'|trans }}
                     {% else %}
-                        {{ 'config.form_rss.token_create'|trans }}
+                        {{ 'config.form_feed.token_create'|trans }}
                     {% endif %}
                 </a>
             </div>
         </fieldset>
 
-        {% if rss.token %}
+        {% if feed.token %}
         <fieldset class="w500p inline">
             <div class="row">
-                <label>{{ 'config.form_rss.rss_links'|trans }}</label>
+                <label>{{ 'config.form_feed.feed_links'|trans }}</label>
                 <ul>
-                    <li><a href="{{ path('unread_rss', {'username': rss.username, 'token': rss.token}) }}">{{ 'config.form_rss.rss_link.unread'|trans }}</a></li>
-                    <li><a href="{{ path('starred_rss', {'username': rss.username, 'token': rss.token}) }}">{{ 'config.form_rss.rss_link.starred'|trans }}</a></li>
-                    <li><a href="{{ path('archive_rss', {'username': rss.username, 'token': rss.token}) }}">{{ 'config.form_rss.rss_link.archive'|trans }}</a></li>
-                    <li><a href="{{ path('all_rss', {'username': rss.username, 'token': rss.token}) }}">{{ 'config.form_rss.rss_link.all'|trans }}</a></li>
+                    <li><a href="{{ path('unread_feed', {'username': feed.username, 'token': feed.token}) }}">{{ 'config.form_feed.feed_link.unread'|trans }}</a></li>
+                    <li><a href="{{ path('starred_feed', {'username': feed.username, 'token': feed.token}) }}">{{ 'config.form_feed.feed_link.starred'|trans }}</a></li>
+                    <li><a href="{{ path('archive_feed', {'username': feed.username, 'token': feed.token}) }}">{{ 'config.form_feed.feed_link.archive'|trans }}</a></li>
+                    <li><a href="{{ path('all_feed', {'username': feed.username, 'token': feed.token}) }}">{{ 'config.form_feed.feed_link.all'|trans }}</a></li>
                 </ul>
             </div>
         </fieldset>
@@ -138,13 +138,13 @@
 
         <fieldset class="w500p inline">
             <div class="row">
-                {{ form_label(form.rss.rss_limit) }}
-                {{ form_errors(form.rss.rss_limit) }}
-                {{ form_widget(form.rss.rss_limit) }}
+                {{ form_label(form.feed.feed_limit) }}
+                {{ form_errors(form.feed.feed_limit) }}
+                {{ form_widget(form.feed.feed_limit) }}
             </div>
         </fieldset>
 
-        {{ form_rest(form.rss) }}
+        {{ form_rest(form.feed) }}
     </form>
 
     <h2>{{ 'config.tab_menu.user_info'|trans }}</h2>

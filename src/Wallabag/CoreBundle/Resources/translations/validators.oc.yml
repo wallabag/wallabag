@@ -3,5 +3,5 @@ validator:
     password_too_short: 'Lo senhal deu aver almens 8 caractèrs'
     password_wrong_value: 'Vòstre senhal actual es pas bon'
     item_per_page_too_high: "Aquò li agradarà pas a l'aplicacion"
-    rss_limit_too_high: "Aquò li agradarà pas a l'aplicacion"
+    feed_limit_too_high: "Aquò li agradarà pas a l'aplicacion"
     quote_length_too_high: 'Aquesta citacion es tròpa longa. Cal que faga {{ limit }} caractèrs o mens.'

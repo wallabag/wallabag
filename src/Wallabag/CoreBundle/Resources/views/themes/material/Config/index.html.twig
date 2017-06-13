@@ -12,7 +12,7 @@
                     <div class="div_tabs col s12">
                         <ul class="tabs">
                             <li class="tab col s12 m6 l3"><a class="active" href="#set1">{{ 'config.tab_menu.settings'|trans }}</a></li>
-                            <li class="tab col s12 m6 l3"><a href="#set2">{{ 'config.tab_menu.rss'|trans }}</a></li>
+                            <li class="tab col s12 m6 l3"><a href="#set2">{{ 'config.tab_menu.feed'|trans }}</a></li>
                             <li class="tab col s12 m6 l3"><a href="#set3">{{ 'config.tab_menu.user_info'|trans }}</a></li>
                             <li class="tab col s12 m6 l3"><a href="#set4">{{ 'config.tab_menu.password'|trans }}</a></li>
                             <li class="tab col s12 m6 l3"><a href="#set5">{{ 'config.tab_menu.rules'|trans }}</a></li>
@@ -122,42 +122,42 @@
                     </div>
 
                     <div id="set2" class="col s12">
-                        {{ form_start(form.rss) }}
-                            {{ form_errors(form.rss) }}
+                        {{ form_start(form.feed) }}
+                            {{ form_errors(form.feed) }}
 
                             <div class="row">
                                 <div class="input-field col s12">
-                                    {{ 'config.form_rss.description'|trans }}
+                                    {{ 'config.form_feed.description'|trans }}
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col s12">
-                                    <h6 class="grey-text">{{ 'config.form_rss.token_label'|trans }}</h6>
+                                    <h6 class="grey-text">{{ 'config.form_feed.token_label'|trans }}</h6>
                                     <div>
-                                        {% if rss.token %}
-                                            {{ rss.token }}
+                                        {% if feed.token %}
+                                            {{ feed.token }}
                                         {% else %}
-                                            <em>{{ 'config.form_rss.no_token'|trans }}</em>
+                                            <em>{{ 'config.form_feed.no_token'|trans }}</em>
                                         {% endif %}
                                         – <a href="{{ path('generate_token') }}">
-                                        {% if rss.token %}
-                                            {{ 'config.form_rss.token_reset'|trans }}
+                                        {% if feed.token %}
+                                            {{ 'config.form_feed.token_reset'|trans }}
                                         {% else %}
-                                            {{ 'config.form_rss.token_create'|trans }}
+                                            {{ 'config.form_feed.token_create'|trans }}
                                         {% endif %}</a>
                                     </div>
                                 </div>
                             </div>
-                            {% if rss.token %}
+                            {% if feed.token %}
                             <div class="row">
                                 <div class="col s12">
-                                    <h6 class="grey-text">{{ 'config.form_rss.rss_links'|trans }}</h6>
+                                    <h6 class="grey-text">{{ 'config.form_feed.feed_links'|trans }}</h6>
                                     <ul>
-                                        <li><a href="{{ path('unread_rss', {'username': rss.username, 'token': rss.token}) }}">{{ 'config.form_rss.rss_link.unread'|trans }}</a></li>
-                                        <li><a href="{{ path('starred_rss', {'username': rss.username, 'token': rss.token}) }}">{{ 'config.form_rss.rss_link.starred'|trans }}</a></li>
-                                        <li><a href="{{ path('archive_rss', {'username': rss.username, 'token': rss.token}) }}">{{ 'config.form_rss.rss_link.archive'|trans }}</a></li>
-                                        <li><a href="{{ path('all_rss', {'username': rss.username, 'token': rss.token}) }}">{{ 'config.form_rss.rss_link.all'|trans }}</a></li>
+                                        <li><a href="{{ path('unread_feed', {'username': feed.username, 'token': feed.token}) }}">{{ 'config.form_feed.feed_link.unread'|trans }}</a></li>
+                                        <li><a href="{{ path('starred_feed', {'username': feed.username, 'token': feed.token}) }}">{{ 'config.form_feed.feed_link.starred'|trans }}</a></li>
+                                        <li><a href="{{ path('archive_feed', {'username': feed.username, 'token': feed.token}) }}">{{ 'config.form_feed.feed_link.archive'|trans }}</a></li>
+                                        <li><a href="{{ path('all_feed', {'username': feed.username, 'token': feed.token}) }}">{{ 'config.form_feed.feed_link.all'|trans }}</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -165,14 +165,14 @@
 
                             <div class="row">
                                 <div class="input-field col s12">
-                                    {{ form_label(form.rss.rss_limit) }}
-                                    {{ form_errors(form.rss.rss_limit) }}
-                                    {{ form_widget(form.rss.rss_limit) }}
+                                    {{ form_label(form.feed.feed_limit) }}
+                                    {{ form_errors(form.feed.feed_limit) }}
+                                    {{ form_widget(form.feed.feed_limit) }}
                                 </div>
                             </div>
 
-                            {{ form_widget(form.rss.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
-                            {{ form_rest(form.rss) }}
+                            {{ form_widget(form.feed.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
+                            {{ form_rest(form.feed) }}
                         </form>
                     </div>
 

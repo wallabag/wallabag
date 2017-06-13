@@ -14,7 +14,7 @@ use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\TaggingRule;
 use Wallabag\CoreBundle\Form\Type\ChangePasswordType;
 use Wallabag\CoreBundle\Form\Type\ConfigType;
-use Wallabag\CoreBundle\Form\Type\RssType;
+use Wallabag\CoreBundle\Form\Type\FeedType;
 use Wallabag\CoreBundle\Form\Type\TaggingRuleType;
 use Wallabag\CoreBundle\Form\Type\UserInformationType;
 use Wallabag\CoreBundle\Tools\Utils;
@@ -92,17 +92,17 @@ class ConfigController extends Controller
             return $this->redirect($this->generateUrl('config') . '#set3');
         }
 
-        // handle rss information
-        $rssForm = $this->createForm(RssType::class, $config, ['action' => $this->generateUrl('config') . '#set2']);
-        $rssForm->handleRequest($request);
+        // handle feed information
+        $feedForm = $this->createForm(FeedType::class, $config, ['action' => $this->generateUrl('config') . '#set2']);
+        $feedForm->handleRequest($request);
 
-        if ($rssForm->isSubmitted() && $rssForm->isValid()) {
+        if ($feedForm->isSubmitted() && $feedForm->isValid()) {
             $em->persist($config);
             $em->flush();
 
             $this->addFlash(
                 'notice',
-                'flashes.config.notice.rss_updated'
+                'flashes.config.notice.feed_updated'
             );
 
             return $this->redirect($this->generateUrl('config') . '#set2');
@@ -143,14 +143,14 @@ class ConfigController extends Controller
         return $this->render('WallabagCoreBundle:Config:index.html.twig', [
             'form' => [
                 'config' => $configForm->createView(),
-                'rss' => $rssForm->createView(),
+                'feed' => $feedForm->createView(),
                 'pwd' => $pwdForm->createView(),
                 'user' => $userForm->createView(),
                 'new_tagging_rule' => $newTaggingRule->createView(),
             ],
-            'rss' => [
+            'feed' => [
                 'username' => $user->getUsername(),
-                'token' => $config->getRssToken(),
+                'token' => $config->getFeedToken(),
             ],
             'twofactor_auth' => $this->getParameter('twofactor_auth'),
             'wallabag_url' => $this->getParameter('domain_name'),
@@ -281,19 +281,19 @@ class ConfigController extends Controller
     public function generateTokenAction(Request $request)
     {
         $config = $this->getConfig();
-        $config->setRssToken(Utils::generateToken());
+        $config->setFeedToken(Utils::generateToken());
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($config);
         $em->flush();
 
         if ($request->isXmlHttpRequest()) {
-            return new JsonResponse(['token' => $config->getRssToken()]);
+            return new JsonResponse(['token' => $config->getFeedToken()]);
         }
 
         $this->addFlash(
             'notice',
-            'flashes.config.notice.rss_token_updated'
+            'flashes.config.notice.feed_token_updated'
         );
 
         return $this->redirect($this->generateUrl('config') . '#set2');

@@ -54,7 +54,7 @@ config:
     page_title: 'Yapılandırma'
     tab_menu:
         settings: 'Ayarlar'
-        rss: 'RSS'
+        feed: 'RSS'
         user_info: 'Kullanıcı bilgileri'
         password: 'Şifre'
         rules: 'Etiketleme kuralları'
@@ -85,19 +85,19 @@ config:
         # help_reading_speed: "wallabag calculates a reading time for each article. You can define here, thanks to this list, if you are a fast or a slow reader. wallabag will recalculate the reading time for each article."
         # help_language: "You can change the language of wallabag interface."
         # help_pocket_consumer_key: "Required for Pocket import. You can create it in your Pocket account."
-    form_rss:
+    form_feed:
         description: 'wallabag RSS akışı kaydetmiş olduğunuz makalelerini favori RSS okuyucunuzda görüntülemenizi sağlar. Bunu yapabilmek için öncelikle belirteç (token) oluşturmalısınız.'
         token_label: 'RSS belirteci (token)'
         no_token: 'Belirteç (token) yok'
         token_create: 'Yeni belirteç (token) oluştur'
         token_reset: 'Belirteci (token) sıfırla'
-        rss_links: 'RSS akış bağlantıları'
-        rss_link:
+        feed_links: 'RSS akış bağlantıları'
+        feed_link:
             unread: 'Okunmayan'
             starred: 'Favoriler'
             archive: 'Arşiv'
             # all: 'All'
-        rss_limit: 'RSS içeriğinden talep edilecek makale limiti'
+        feed_limit: 'RSS içeriğinden talep edilecek makale limiti'
     form_user:
         # two_factor_description: "Enabling two factor authentication means you'll receive an email with a code OR need to use an OTP app (like Google Authenticator, Authy or FreeOTP) to get a one time code on every new untrusted connection. You can't choose both option."
         name_label: 'İsim'
@@ -369,7 +369,7 @@ quickstart:
         title: 'Uygulamayı Yapılandırma'
         # description: 'In order to have an application which suits you, have a look into the configuration of wallabag.'
         language: 'Dili ve tasarımı değiştirme'
-        rss: 'RSS akışını aktifleştirme'
+        feed: 'RSS akışını aktifleştirme'
         # tagging_rules: 'Write rules to automatically tag your articles'
     admin:
         # title: 'Administration'
@@ -566,10 +566,10 @@ flashes:
             password_updated: 'Şifre güncellendi'
             password_not_updated_demo: "In demonstration mode, you can't change password for this user."
             user_updated: 'Bilgiler güncellendi'
-            rss_updated: 'RSS bilgiler güncellendi'
+            feed_updated: 'RSS bilgiler güncellendi'
             tagging_rules_updated: 'Tagging rules updated'
             tagging_rules_deleted: 'Tagging rule deleted'
-            rss_token_updated: 'RSS token updated'
+            feed_token_updated: 'RSS token updated'
             # annotations_reset: Annotations reset
             # tags_reset: Tags reset
             # entries_reset: Entries reset

@@ -54,7 +54,7 @@ config:
     page_title: 'Config'
     tab_menu:
         settings: 'Configurações'
-        rss: 'RSS'
+        feed: 'RSS'
         user_info: 'Informação do Usuário'
         password: 'Senha'
         rules: 'Regras de tags'
@@ -85,19 +85,19 @@ config:
         # help_reading_speed: "wallabag calculates a reading time for each article. You can define here, thanks to this list, if you are a fast or a slow reader. wallabag will recalculate the reading time for each article."
         # help_language: "You can change the language of wallabag interface."
         # help_pocket_consumer_key: "Required for Pocket import. You can create it in your Pocket account."
-    form_rss:
+    form_feed:
         description: 'Feeds RSS providos pelo wallabag permitem que você leia seus artigos salvos em seu leitor de RSS favorito. Você precisa gerar um token primeiro.'
         token_label: 'Token RSS'
         no_token: 'Nenhum Token'
         token_create: 'Criar seu token'
         token_reset: 'Gerar novamente seu token'
-        rss_links: 'Links RSS'
-        rss_link:
+        feed_links: 'Links RSS'
+        feed_link:
             unread: 'Não lido'
             starred: 'Destacado'
             archive: 'Arquivado'
             # all: 'All'
-        rss_limit: 'Número de itens no feed'
+        feed_limit: 'Número de itens no feed'
     form_user:
         # two_factor_description: "Enabling two factor authentication means you'll receive an email with a code OR need to use an OTP app (like Google Authenticator, Authy or FreeOTP) to get a one time code on every new untrusted connection. You can't choose both option."
         name_label: 'Nome'
@@ -371,7 +371,7 @@ quickstart:
         title: 'Configurar a aplicação'
         description: 'Para ter uma aplicação que atende você, dê uma olhada na configuração do wallabag.'
         language: 'Alterar idioma e design'
-        rss: 'Habilitar feeds RSS'
+        feed: 'Habilitar feeds RSS'
         tagging_rules: 'Escrever regras para acrescentar tags automaticamente em seus artigos'
     admin:
         title: 'Administração'
@@ -588,10 +588,10 @@ flashes:
             password_updated: 'Senha atualizada'
             password_not_updated_demo: 'Em modo de demonstração, você não pode alterar a senha deste usuário.'
             # user_updated: 'Information updated'
-            rss_updated: 'Informação de RSS atualizada'
+            feed_updated: 'Informação de RSS atualizada'
             tagging_rules_updated: 'Regras de tags atualizadas'
             tagging_rules_deleted: 'Regra de tag apagada'
-            rss_token_updated: 'Token RSS atualizado'
+            feed_token_updated: 'Token RSS atualizado'
             # annotations_reset: Annotations reset
             # tags_reset: Tags reset
             # entries_reset: Entries reset

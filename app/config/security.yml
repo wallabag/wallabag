@@ -72,6 +72,8 @@ security:
         - { path: /(unread|starred|archive|all).xml$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/locale, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: /tags/(.*).xml$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/feed, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: /(unread|starred|archive).xml$, roles: IS_AUTHENTICATED_ANONYMOUSLY } # For backwards compatibility
         - { path: ^/share, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/settings, roles: ROLE_SUPER_ADMIN }
         - { path: ^/annotations, roles: ROLE_USER }
