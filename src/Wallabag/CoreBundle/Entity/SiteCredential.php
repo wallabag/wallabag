@@ -37,8 +37,7 @@ class SiteCredential
      * @var string
      *
      * @Assert\NotBlank()
-     * @Assert\Length(max=255)
-     * @ORM\Column(name="username", type="string", length=255)
+     * @ORM\Column(name="username", type="text")
      */
     private $username;
 

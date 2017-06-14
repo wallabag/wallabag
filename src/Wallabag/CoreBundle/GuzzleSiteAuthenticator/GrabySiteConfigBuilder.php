@@ -87,7 +87,8 @@ class GrabySiteConfigBuilder implements SiteConfigBuilder
 
         $config = new SiteConfig($parameters);
 
-        // do not leak password in log
+        // do not leak usernames and passwords in log
+        $parameters['username'] = '**masked**';
         $parameters['password'] = '**masked**';
 
         $this->logger->debug('Auth: add parameters.', ['host' => $host, 'parameters' => $parameters]);

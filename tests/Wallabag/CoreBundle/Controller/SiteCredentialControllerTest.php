@@ -85,7 +85,6 @@ class SiteCredentialControllerTest extends WallabagCoreTestCase
         $crawler = $client->followRedirect();
 
         $this->assertContains('flashes.site_credential.notice.updated', $crawler->filter('body')->extract(['_text'])[0]);
-        $this->assertContains('larry', $crawler->filter('input[id=site_credential_username]')->attr('value'));
     }
 
     public function testEditFromADifferentUserSiteCredential()

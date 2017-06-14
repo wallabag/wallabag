@@ -38,7 +38,7 @@ class Version20170501115751 extends AbstractMigration implements ContainerAwareI
         $table->addColumn('id', 'integer', ['autoincrement' => true]);
         $table->addColumn('user_id', 'integer');
         $table->addColumn('host', 'string', ['length' => 255]);
-        $table->addColumn('username', 'string', ['length' => 255]);
+        $table->addColumn('username', 'text');
         $table->addColumn('password', 'text');
         $table->addColumn('createdAt', 'datetime');
         $table->addIndex(['user_id'], 'idx_user');

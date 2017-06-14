@@ -19,6 +19,7 @@ class SiteCredentialType extends AbstractType
             ])
             ->add('username', TextType::class, [
                 'label' => 'site_credential.form.username_label',
+                'data' => '',
             ])
             ->add('password', PasswordType::class, [
                 'label' => 'site_credential.form.password_label',

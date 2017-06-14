@@ -65,7 +65,7 @@ class CryptoProxy
     /**
      * Load the private key.
      *
-     * @return string
+     * @return Key
      */
     private function loadKey()
     {
@@ -81,6 +81,6 @@ class CryptoProxy
      */
     private function mask($value)
     {
-        return $value[0].'*****'.$value[strlen($value) - 1];
+        return strlen($value) > 0 ? $value[0].'*****'.$value[strlen($value) - 1] : 'Empty value';
     }
 }

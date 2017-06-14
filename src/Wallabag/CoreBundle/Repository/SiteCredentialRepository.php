@@ -38,7 +38,8 @@ class SiteCredentialRepository extends \Doctrine\ORM\EntityRepository
             return;
         }
 
-        // decrypt password before returning it
+        // decrypt user & password before returning them
+        $res['username'] = $this->cryptoProxy->decrypt($res['username']);
         $res['password'] = $this->cryptoProxy->decrypt($res['password']);
 
         return $res;

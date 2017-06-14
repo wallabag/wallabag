@@ -1340,7 +1340,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $user = $client->getContainer()->get('security.token_storage')->getToken()->getUser();
         $credential = new SiteCredential($user);
         $credential->setHost('monde-diplomatique.fr');
-        $credential->setUsername('foo');
+        $credential->setUsername($client->getContainer()->get('wallabag_core.helper.crypto_proxy')->crypt('foo'));
         $credential->setPassword($client->getContainer()->get('wallabag_core.helper.crypto_proxy')->crypt('bar'));
 
         $em->persist($credential);
