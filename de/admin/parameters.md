@@ -8,7 +8,7 @@ dieser ähnelt. Wenn du nicht weißt, welchen Wert du setzen sollst,
 belasse es bei dem Standardwert.
 
 {% hint style='danger' %}
-To apply changes to `parameters.yml`, you have to clear your cache by deleting everything in `var/cache` with this command: `bin/console cache:clear -e=prod`.
+Um die Änderungen an der `parameters.yml` wirksam zu machen, musst du den Cache leeren, in dem du alles in `var/cache` mit diesem Kommando `bin/console cache:clear -e=prod` löschst.
 {% endhint %}
 
 ```yaml
