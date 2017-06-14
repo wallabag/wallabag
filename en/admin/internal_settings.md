@@ -14,7 +14,7 @@ URL for your Piwik server.
 
 ### ID of your website in Piwik
 
-ID of your website inside Piwik, available in `Paramètres` -> `Sites web` -> `Gérer`.
+ID of your website inside Piwik, available in `Settings` -> `Websites` -> `Manage`.
 
 For instance:
 
@@ -60,7 +60,7 @@ URL Shaarli instance.
 
 ### Enable share to Unmark.it
 
-`1` pour activer le partage vers [Unmark.it](https://unmark.it/), `0` to deactivate.
+`1` to show the share button for [Unmark.it](https://unmark.it/), `0` to deactivate.
 
 ### Display a link to print content
 

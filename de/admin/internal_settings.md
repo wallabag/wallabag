@@ -14,8 +14,7 @@ URL für deinen Piwik Server.
 
 ### ID deiner Website in Piwik
 
-TODO
-ID deiner Website in Piwik, verfügbar in `Parameter` -> `Sites web` -> `Gérer`.
+ID deiner Website in Piwik, verfügbar in `Einstellungen` -> `Websites` -> `Verwalten`.
 
 Zum Beispiel:
 
