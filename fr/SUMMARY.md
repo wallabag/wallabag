@@ -44,6 +44,7 @@
 * [Commandes en terminal](admin/console_commands.md)
 * [Tâches asynchrones](admin/asynchronous.md)
 * [Paramètres](admin/parameters.md)
+* [Configuration interne](admin/internal_settings.md)
 * [Mise à jour](admin/upgrade.md)
     * [Mise à jour de 2.1 à 2.2](admin/query-upgrade-21-22.md)
 
