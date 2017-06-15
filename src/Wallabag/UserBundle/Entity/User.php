@@ -88,6 +88,11 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
     protected $entries;
 
     /**
+     * @ORM\OneToMany(targetEntity="Wallabag\CoreBundle\Entity\Notification", mappedBy="user", cascade={"remove"})
+     */
+    protected $notifications;
+
+    /**
      * @ORM\OneToOne(targetEntity="Wallabag\CoreBundle\Entity\Config", mappedBy="user", cascade={"remove"})
      */
     protected $config;
@@ -311,5 +316,21 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
         if (!empty($this->clients)) {
             return $this->clients->first();
         }
+    }
+
+    /**
+     * @return ArrayCollection<NotificationInterface>
+     */
+    public function getNotifications()
+    {
+        return $this->notifications;
+    }
+
+    /**
+     * @param ArrayCollection<NotificationInterface> $notifications
+     */
+    public function setNotifications($notifications)
+    {
+        $this->notifications = $notifications;
     }
 }

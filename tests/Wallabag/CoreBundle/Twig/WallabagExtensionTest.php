@@ -16,6 +16,10 @@ class WallabagExtensionTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
+        $notificationRepository = $this->getMockBuilder('Wallabag\CoreBundle\Repository\NotificationRepository')
+            ->disableOriginalConstructor()
+            ->getMock();
+
         $tokenStorage = $this->getMockBuilder('Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface')
             ->disableOriginalConstructor()
             ->getMock();
@@ -24,7 +28,7 @@ class WallabagExtensionTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $extension = new WallabagExtension($entryRepository, $tagRepository, $tokenStorage, 0, $translator);
+        $extension = new WallabagExtension($entryRepository, $tagRepository, $notificationRepository, $tokenStorage, 0, 5, $translator);
 
         $this->assertEquals('lemonde.fr', $extension->removeWww('www.lemonde.fr'));
         $this->assertEquals('lemonde.fr', $extension->removeWww('lemonde.fr'));

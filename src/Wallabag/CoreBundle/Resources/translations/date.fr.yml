@@ -1,0 +1,9 @@
+diff:
+    ago:
+        empty: 'Maintenant'
+        second: 'Il y a une seconde|il y a %count% secondes'
+        minute: 'Il y a une minute|il y a %count% minutes'
+        hour: 'Il y a une heure|il y a %count% heures'
+        day: 'Il y a un jour|Il y a %count% jours'
+        month: 'Il y a un mois|il y a %count% mois'
+        year: 'Il y a un an|il y a %count% ans'

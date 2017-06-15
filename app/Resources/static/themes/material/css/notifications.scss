@@ -1,0 +1,38 @@
+@mixin notification {
+  .notifications-area {
+    flex-grow: 1;
+
+    .collection {
+      margin: auto;
+    }
+  }
+
+  .no-notifications {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-40%, -50%);
+  }
+
+  .view-more {
+    display: block;
+    margin: auto 5px 10px;
+    flex: 0 1 2.5em;
+  }
+
+  .btn.notification-action-button {
+    display: block;
+    line-height: 25px;
+    height: auto;
+  }
+}
+
+.notifications-page {
+  @include notification;
+
+  .pagination {
+    float: none;
+    text-align: center;
+    margin-top: 30px;
+  }
+}

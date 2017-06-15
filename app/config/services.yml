@@ -13,14 +13,23 @@ services:
         tags:
             - { name: twig.extension }
 
+    twig.extension.date:
+        class: Twig_Extensions_Extension_Date
+        arguments:
+            - "@translator"
+        tags:
+            - { name: twig.extension }
+
     wallabag.twig_extension:
         class: Wallabag\CoreBundle\Twig\WallabagExtension
         public: false
         arguments:
             - "@wallabag_core.entry_repository"
             - "@wallabag_core.tag_repository"
+            - "@wallabag_core.notification_repository"
             - "@security.token_storage"
             - "%wallabag_core.cache_lifetime%"
+            - "%wallabag_core.notifications_nb%"
             - "@translator"
         tags:
             - { name: twig.extension }

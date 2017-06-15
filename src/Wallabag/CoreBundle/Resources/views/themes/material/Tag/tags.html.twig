@@ -3,6 +3,7 @@
 {% block title %}{{ 'tag.page_title'|trans }}{% endblock %}
 
 {% block content %}
+    {{ parent() }}
     <div class="results clearfix">
         <div class="nb-results left">{{ 'tag.list.number_on_the_page'|transchoice(tags|length) }}</div>
     </div>
