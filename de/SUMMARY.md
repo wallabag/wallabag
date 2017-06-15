@@ -44,6 +44,7 @@
 * [Kommandozeilenbefehle](admin/console_commands.md)
 * [Asynchrone Aufgaben](admin/asynchronous.md)
 * [Parameter](admin/parameters.md)
+* [Interne Einstellungen](admin/internal_settings.md)
 * [Aktualisieren](admin/upgrade.md)
     * [Aktualisierung von 2.1 auf 2.2](admin/query-upgrade-21-22.md)
 

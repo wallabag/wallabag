@@ -42,6 +42,7 @@
 * [Console commands](admin/console_commands.md)
 * [Asynchronous](admin/asynchronous.md)
 * [Parameters](admin/parameters.md)
+* [Internal settings](admin/internal_settings.md)
 * [Upgrade](admin/upgrade.md)
     * [Upgrade from 2.1 to 2.2](admin/query-upgrade-21-22.md)
 
