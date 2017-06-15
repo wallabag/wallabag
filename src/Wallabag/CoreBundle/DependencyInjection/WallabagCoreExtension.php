@@ -25,6 +25,7 @@ class WallabagCoreExtension extends Extension
         $container->setParameter('wallabag_core.cache_lifetime', $config['cache_lifetime']);
         $container->setParameter('wallabag_core.action_mark_as_read', $config['action_mark_as_read']);
         $container->setParameter('wallabag_core.list_mode', $config['list_mode']);
+        $container->setParameter('wallabag_core.notifications_nb', $config['notifications_nb']);
         $container->setParameter('wallabag_core.fetching_error_message', $config['fetching_error_message']);
         $container->setParameter('wallabag_core.fetching_error_message_title', $config['fetching_error_message_title']);
         $container->setParameter('wallabag_core.api_limit_mass_actions', $config['api_limit_mass_actions']);

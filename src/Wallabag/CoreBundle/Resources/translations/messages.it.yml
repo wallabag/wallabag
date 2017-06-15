@@ -38,6 +38,7 @@ menu:
         search: 'Cerca'
         filter_entries: 'Filtra contenuti'
         export: 'Esporta'
+        # notifications: 'Notifications'
     search_form:
         input_label: 'Inserisci qui la tua ricerca'
 
@@ -250,6 +251,16 @@ entry:
         delete: "Vuoi veramente rimuovere quell'articolo?"
         delete_tag: "Vuoi veramente rimuovere quell'etichetta da quell'articolo?"
 
+# notifications:
+#     sidebar:
+#         view_more: 'View more'
+#     list:
+#         page_title: 'Notifications'
+#         mark_all_as_read: 'Mark all as read'
+#         none: "No notifications yet :'("
+#     release:
+#         title: "wallabag has been updated to version %version%"
+#         details: "View update's details"
 about:
     page_title: 'A proposito'
     top_menu:

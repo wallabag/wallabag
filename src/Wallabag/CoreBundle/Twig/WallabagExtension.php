@@ -4,7 +4,9 @@ namespace Wallabag\CoreBundle\Twig;
 
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Translation\TranslatorInterface;
+use Wallabag\CoreBundle\Notifications\NotificationInterface;
 use Wallabag\CoreBundle\Repository\EntryRepository;
+use Wallabag\CoreBundle\Repository\NotificationRepository;
 use Wallabag\CoreBundle\Repository\TagRepository;
 
 class WallabagExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
@@ -12,15 +14,19 @@ class WallabagExtension extends \Twig_Extension implements \Twig_Extension_Globa
     private $tokenStorage;
     private $entryRepository;
     private $tagRepository;
+    private $notificationRepository;
     private $lifeTime;
+    private $nbNotifications;
     private $translator;
 
-    public function __construct(EntryRepository $entryRepository, TagRepository $tagRepository, TokenStorageInterface $tokenStorage, $lifeTime, TranslatorInterface $translator)
+    public function __construct(EntryRepository $entryRepository, TagRepository $tagRepository, NotificationRepository $notificationRepository, TokenStorageInterface $tokenStorage, $lifeTime, $nbNotifications, TranslatorInterface $translator)
     {
         $this->entryRepository = $entryRepository;
         $this->tagRepository = $tagRepository;
+        $this->notificationRepository = $notificationRepository;
         $this->tokenStorage = $tokenStorage;
         $this->lifeTime = $lifeTime;
+        $this->nbNotifications = $nbNotifications;
         $this->translator = $translator;
     }
 
@@ -28,6 +34,7 @@ class WallabagExtension extends \Twig_Extension implements \Twig_Extension_Globa
     {
         return [
             new \Twig_SimpleFilter('removeWww', [$this, 'removeWww']),
+            new \Twig_SimpleFilter('unread_notif', [$this, 'unreadNotif']),
         ];
     }
 
@@ -37,12 +44,24 @@ class WallabagExtension extends \Twig_Extension implements \Twig_Extension_Globa
             new \Twig_SimpleFunction('count_entries', [$this, 'countEntries']),
             new \Twig_SimpleFunction('count_tags', [$this, 'countTags']),
             new \Twig_SimpleFunction('display_stats', [$this, 'displayStats']),
+            new \Twig_SimpleFunction('get_notifications', [$this, 'getNotifications']),
         ];
     }
 
     public function removeWww($url)
     {
         return preg_replace('/^www\./i', '', $url);
+    }
+
+    /**
+     * @param $notifs
+     * @return array
+     */
+    public function unreadNotif($notifs)
+    {
+        return array_filter($notifs, function (NotificationInterface $notif) {
+            return !$notif->isRead();
+        });
     }
 
     /**
@@ -107,6 +126,21 @@ class WallabagExtension extends \Twig_Extension implements \Twig_Extension_Globa
         return $this->tagRepository->countAllTags($user->getId());
     }
 
+    public function getNotifications()
+    {
+        $user = $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null;
+
+        if (null === $user || !is_object($user)) {
+            return 0;
+        }
+
+        return $this->notificationRepository->findBy(
+            ['user' => $user->getId()],
+            ['timestamp' => 'DESC'],
+            $this->nbNotifications
+        );
+    }
+
     /**
      * Display a single line about reading stats.
      *
@@ -142,10 +176,5 @@ class WallabagExtension extends \Twig_Extension implements \Twig_Extension_Globa
             '%nb_archives%' => $nbArchives,
             '%per_day%' => round($nbArchives / $nbDays, 2),
         ]);
-    }
-
-    public function getName()
-    {
-        return 'wallabag_extension';
     }
 }

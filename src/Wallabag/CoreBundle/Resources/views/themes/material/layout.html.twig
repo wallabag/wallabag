@@ -110,6 +110,13 @@
                         <i class="material-icons">search</i>
                     </a>
                 </li>
+                <li id="button_notifications">
+                    {% set unreadNotifs = get_notifications() | unread_notif | length %}
+                    <a class="nav-panel-menu button-collapse-right tooltipped js-notifications-action" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.notifications' | trans }}" href="#" data-activates="notifications">
+                        <i class="material-icons">notifications{% if unreadNotifs == 0 %}_none{% endif %}</i>
+                        {% if unreadNotifs > 0 %}<span id="notifications-count" class="red-text text-accent-2">{{ unreadNotifs }}</span>{% endif %}
+                    </a>
+                </li>
                 <li id="button_filters">
                     <a class="nav-panel-menu button-collapse-right tooltipped js-filters-action" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.filter_entries'|trans }}" href="#" data-activates="filters">
                         <i class="material-icons">filter_list</i>
@@ -133,6 +140,53 @@
             </div>
         </div>
     </nav>
+{% endblock %}
+
+{% block content %}
+
+    <div id="notifications" class="side-nav">
+        {% if app.user.notifications is not empty %}
+        <div class="notifications-area">
+            <ul class="collection">
+                {% for notification in get_notifications() | slice(0, 10) %}
+                <li class="notification collection-item avatar{% if not notification.read %} light-blue lighten-5{% else %} grey-text{% endif %}">
+                    <i class="material-icons circle">{% spaceless %}
+                        {% if notification.type == constant('TYPE_ADMIN', notification) %}
+                            build
+                        {% elseif notification.type == constant('TYPE_USER', notification) %}
+                            person
+                        {% elseif notification.type == constant('TYPE_RELEASE', notification) %}
+                            new_releases
+                        {% endif %}
+                        {% endspaceless %}</i>
+                    <span class="title">{{ notification.title | trans(notification.parameters) }}</span>
+                    <p>{{ notification.description | trans(notification.parameters) }}</p>
+                    <time datetime="{{ notification.timestamp | date }}">{{ notification.timestamp | time_diff }}</time>
+                    <div>
+                        {% for action in notification.actions %}
+                            <a class="notification-action-button btn waves-effect waves-light {% spaceless %}
+                                   {% if action.type == constant('TYPE_OK', action) %}
+                                   {% elseif action.type == constant('TYPE_YES', action) %}
+                                        cyan
+                                   {% elseif action.type == constant('TYPE_NO', action) %}
+                                        red
+                                   {% elseif action.type == constant('TYPE_INFO', action) %}
+                                        blue-grey
+                                   {% endif %}
+                                   {% if notification.read %}lighten-3{% endif %}
+                                    {% endspaceless %}" href="{{ path('notification-archive-redirect', {'redirection': action.link, 'notification': notification.id}) }}">{{ action.label | trans(notification.parameters) }}</a>
+                        {% endfor %}
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <a href="{{ path('notification-archive-all') }}" class="btn-light waves-effect waves-light right"><i class="material-icons">done_all</i> {{ 'notifications.list.mark_all_as_read' | trans }}</a>
+        <a class="waves-effect waves-light btn view-more" href="{{ path('notifications-all') }}">{{ 'notifications.sidebar.view_more' | trans }}</a>
+        {% else %}
+            <div class="no-notifications grey-text">{{ 'notifications.list.none' | trans }}</div>
+        {% endif %}
+    </div>
 {% endblock %}
 
 {% block footer %}

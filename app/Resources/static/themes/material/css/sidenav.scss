@@ -2,6 +2,8 @@
    Side-nav
    ========================================================================== */
 
+@import 'notifications';
+
 .side-nav {
   width: 240px;
 
@@ -34,6 +36,15 @@
     line-height: 0;
     text-align: center;
   }
+}
+
+#notifications {
+  width: 300px;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+
+  @include notification;
 }
 
 .bold > a {

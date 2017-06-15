@@ -1,0 +1,9 @@
+diff:
+    ago:
+        # empty: 'Now'
+        # second: 'One second ago|%count% seconds ago'
+        # minute: 'One minute ago|%count% minutes ago'
+        # hour: 'One hour ago|%count% hours ago'
+        # day: 'One day ago|%count% days ago'
+        # month: 'One month ago|%count% months ago'
+        # year: 'One year ago|%count% years ago'

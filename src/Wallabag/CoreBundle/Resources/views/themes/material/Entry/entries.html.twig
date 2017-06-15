@@ -19,6 +19,7 @@
 {% endblock %}
 
 {% block content %}
+    {{ parent() }}
     {% set listMode = app.user.config.listMode %}
     {% set currentRoute = app.request.attributes.get('_route') %}
     <div class="results clearfix">
