@@ -256,8 +256,7 @@ $(document).ready(() => {
    ========================================================================== */
 
   $('article a[href^="http"]').after(
-      () => `<a href="${$(this).attr('href')}" class="add-to-wallabag-link-after" ` +
-      'title="add to wallabag"></a>',
+    () => `<a href="${$(this).attr('href')}" class="add-to-wallabag-link-after" title="add to wallabag"></a>`,
   );
 
   $('.add-to-wallabag-link-after').click((event) => {

@@ -2,16 +2,19 @@
    Media queries
    ========================================================================== */
 
+@media only screen and (min-width: 992px) {
+  nav,
+  body:not(.entry) main,
+  footer {
+    padding-left: 240px;
+  }
+}
+
 @media only screen and (max-width: 992px) {
   header,
   main,
-  footer {
-    padding-left: 0;
-  }
-
-  nav,
-  main,
-  footer {
+  footer,
+  nav {
     padding-left: 0;
   }
 
