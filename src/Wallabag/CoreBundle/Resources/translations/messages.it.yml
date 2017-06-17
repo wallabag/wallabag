@@ -101,13 +101,13 @@ config:
         help_twoFactorAuthentication: "Se abiliti l'autenticazione a due fattori, ogni volta che vorrai connetterti a wallabag, riceverai un codice via E-mail."
         delete:
             title: Cancella il mio account (zona pericolosa)
-            description: Rimuovendo il tuo account, TUTTI i tuoi articoli, TUTTE le tue etichette, TUTTE le tue note ed il tuo account verranno rimossi PERMANENTEMENTE (impossibile da ANNULLARE). Verrai poi disconnesso.
+            description: Rimuovendo il tuo account, TUTTI i tuoi articoli, TUTTE le tue etichette, TUTTE le tue annotazioni ed il tuo account verranno rimossi PERMANENTEMENTE (impossibile da ANNULLARE). Verrai poi disconnesso.
             confirm: Sei veramente sicuro? (NON PUOI TORNARE INDIETRO)
             button: Cancella il mio account
     reset:
         title: Area di reset (zona pericolosa)
         description: Premendo i tasti sottostanti potrai rimuovere delle informazioni dal tuo account. Ricorda che queste azioni sono IRREVERSIBILI.
-        annotations: Rimuovi TUTTE le note
+        annotations: Rimuovi TUTTE le annotazioni
         tags: Rimuovi TUTTE le etichette
         entries: Rimuovi TUTTI gli articoli
         confirm: Sei veramente sicuro? (NON PUOI TORNARE INDIETRO)
@@ -161,18 +161,18 @@ entry:
         starred: 'Contenuti preferiti'
         archived: 'Contenuti archiviati'
         filtered: 'Contenuti filtrati'
-        # filtered_tags: 'Filtered by tags:'
-        # filtered_search: 'Filtered by search:'
-        # untagged: 'Untagged entries'
+        filtered_tags: 'Filtrati per etichetta:'
+        filtered_search: 'Filtrati per ricerca:'
+        untagged: 'Articoli non etichettati'
     list:
         number_on_the_page: "{0} Non ci sono contenuti.|{1} C'è un contenuto.|]1,Inf[ Ci sono %count% contenuti."
         reading_time: 'tempo di lettura stimato'
         reading_time_minutes: 'tempo di lettura stimato: %readingTime% min'
         reading_time_less_one_minute: 'tempo di lettura stimato: &lt; 1 min'
-        # number_of_tags: '{1}and one other tag|]1,Inf[and %count% other tags'
+        number_of_tags: "{1}ed un'altra etichetta|]1,Inf[e %count% altre etichette"
         reading_time_minutes_short: '%readingTime% min'
         reading_time_less_one_minute_short: '&lt; 1 min'
-        original_article: 'originale'
+        original_article: 'Originale'
         toogle_as_read: 'Segna come da leggere'
         toogle_as_star: 'Segna come non preferito'
         delete: 'Elimina'
@@ -182,11 +182,11 @@ entry:
         status_label: 'Stato'
         archived_label: 'Archiviati'
         starred_label: 'Preferiti'
-        # unread_label: 'Unread'
+        unread_label: 'Non letti'
         preview_picture_label: "Ha un'immagine di anteprima"
         preview_picture_help: 'Immagine di anteprima'
         language_label: 'Lingua'
-        # http_status_label: 'HTTP status'
+        http_status_label: 'StatoHTTP'
         reading_time:
             label: 'Tempo di lettura in minuti'
             from: 'da'
@@ -212,8 +212,8 @@ entry:
             add_a_tag: 'Aggiungi un tag'
             share_content: 'Condividi'
             share_email_label: 'E-mail'
-            # public_link: 'public link'
-            # delete_public_link: 'delete public link'
+            public_link: 'Link pubblico'
+            delete_public_link: 'Elimina link pubblico'
             export: 'Esporta'
             print: 'Stampa'
             problem:
@@ -223,13 +223,15 @@ entry:
         original_article: 'originale'
         annotations_on_the_entry: '{0} Nessuna annotazione|{1} Una annotazione|]1,Inf[ %count% annotazioni'
         created_at: 'Data di creazione'
+        published_at: 'Data di pubblicazione'
+        published_by: 'Pubblicato da'
     new:
         page_title: 'Salva un nuovo contenuto'
         placeholder: 'http://website.com'
         form_new:
             url_label: Url
     search:
-        # placeholder: 'What are you looking for?'
+        placeholder: 'Cosa stai cercando?'
     edit:
         page_title: 'Modifica voce'
         title_label: 'Titolo'
@@ -237,7 +239,7 @@ entry:
         is_public_label: 'Pubblico'
         save_label: 'Salva'
     public:
-        # shared_by_wallabag: "This article has been shared by <a href='%wallabag_instance%'>wallabag</a>"
+        shared_by_wallabag: "Questo articolo è stato condiviso da %username% con <a href='%wallabag_instance%'>wallabag</a>"
 
 about:
     page_title: 'About'
@@ -271,11 +273,11 @@ about:
         license: 'Licenza'
 
 howto:
-    page_title: 'How to'
+    page_title: 'Come fare'
     page_description: 'Ci sono diversi modi per salvare un contenuto:'
     tab_menu:
-        # add_link: "Add a link"
-        # shortcuts: "Use shortcuts"
+        add_link: "Aggiungi un link"
+        shortcuts: "Usa le scorciatoie"
     top_menu:
         browser_addons: 'tramite addons del Browser'
         mobile_apps: 'tramite app Mobile'
@@ -295,43 +297,43 @@ howto:
     bookmarklet:
         description: 'Trascinando e rilasciando questo link sulla barra dei bookmark del tuo browser:'
     shortcuts:
-        # page_description: Here are the shortcuts available in wallabag.
-        # shortcut: Shortcut
-        # action: Action
-        # all_pages_title: Shortcuts available in all pages
-        # go_unread: Go to unread
-        # go_starred: Go to starred
-        # go_archive: Go to archive
-        # go_all: Go to all entries
-        # go_tags: Go to tags
-        # go_config: Go to config
-        # go_import: Go to import
-        # go_developers: Go to developers
-        # go_howto: Go to howto (this page!)
-        # go_logout: Logout
-        # list_title: Shortcuts available in listing pages
-        # search: Display the search form
-        # article_title: Shortcuts available in entry view
-        # open_original: Open original URL of the entry
-        # toggle_favorite: Toggle star status for the entry
-        # toggle_archive: Toggle read status for the entry
-        # delete: Delete the entry
-        # material_title: Shortcuts available with Material theme only
-        # add_link: Add a new link
-        # hide_form: Hide the current form (search or new link)
-        # arrows_navigation: Navigate through articles
-        # open_article: Display the selected entry
+        page_description: Ecco le scorciatoie disponibili su wallabag.
+        shortcut: Scorciatoia
+        action: Azione
+        all_pages_title: Scorciatoie disponibili in tutte le pagine
+        go_unread: Vai ai non letti
+        go_starred: Vai ai preferiti
+        go_archive: Vai in archivio
+        go_all: Vai a tutti gli articoli
+        go_tags: Vai alle etichette
+        go_config: Vai su configurazione
+        go_import: Vai su importazione
+        go_developers: Vai su sviluppatori
+        go_howto: Vai su Come fare (questa pagina!)
+        go_logout: Disconnetti
+        list_title: Scorciatoie disponibili quando si elencano le pagine
+        search: Mostra il modulo di ricerca
+        article_title: Scorciatoie disponibili in vista articoli
+        open_original: Apri URL originale dell'articolo
+        toggle_favorite: Cambia stato Preferito dell'articolo
+        toggle_archive: Cambia stato Letto dell'articolo in letto
+        delete: Cancella l'articolo
+        material_title: Scorciatoie disponibili solo con il tema Material
+        add_link: Aggiungi un nuovo link
+        hide_form: Nascondi il modulo corrente (ricerca o nuovo link)
+        arrows_navigation: Naviga tra gli articoli
+        open_article: Mostra l'articolo selezionato
 
 quickstart:
     page_title: 'Introduzione'
-    # more: 'More…'
+    more: 'Più…'
     intro:
         title: 'Benvenuto su wallabag!'
         paragraph_1: "Un tour in cui ti guideremo per scoprire e che ti mostrerà delle funzionalità che potrebbero interessarti."
         paragraph_2: 'Seguici!'
     configure:
         title: "Configura l'applicazione"
-        # description: 'In order to have an application which suits you, have a look into the configuration of wallabag.'
+        description: 'Per avere un'applicazione che ti soddisfi, dai un'occhiata alla configurazione di wallabag.'
         language: 'Cambia lingua e design'
         rss: 'Abilita i feed RSS'
         tagging_rules: 'Scrivi delle regole per taggare automaticamente i contenuti'
@@ -345,7 +347,7 @@ quickstart:
         import: "Configura l'importazione"
     first_steps:
         title: 'Primi passi'
-        # description: "Now wallabag is well configured, it's time to archive the web. You can click on the top right sign + to add a link."
+        description: "Ora wallabag è ben configurata, è ora di archiviare il web. Puoi cliccare sul segno + in alto per aggiungere un link."
         new_article: 'Salva il tuo primo contenuto'
         unread_articles: 'E classificalo!'
     migrate:
@@ -358,9 +360,9 @@ quickstart:
         instapaper: 'Trasferisci da Instapaper'
     developer:
         title: 'Sviluppatori'
-        # description: 'We also thought to the developers: Docker, API, translations, etc.'
+        description: 'Abbiamo pensato anche agli sviluppatori: Docker, API, traduzioni, etc.'
         create_application: 'Crea la tua applicazione'
-        # use_docker: 'Use Docker to install wallabag'
+        use_docker: 'Usa Docker per installare wallabag'
     docs:
         title: 'Documentazione completa'
         # description: "There are so much features in wallabag. Don't hesitate to read the manual to know them and to learn how to use them."
