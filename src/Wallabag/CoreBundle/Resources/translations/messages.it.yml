@@ -423,11 +423,11 @@ import:
     firefox:
        page_title: 'Importa da > Firefox'
        description: "Questo importatore copierà tutti i tuoi preferiti di Firefox. Vai sui tuoi preferiti (Ctrl+Maj+O), poi su \"Import and backup\", scegli \"Backup...\". Otterrai un file .json."
-       how_to: "Scegli il file di backup dei preferiti e clicca sul bottone sottostante per importarlo. Tieni presente che questo processo potrebbe richiedere molto tempo poiché tutti gli articoli devono essere trovati."
+       how_to: "Scegli il file di backup dei preferiti e clicca sul bottone sottostante per importarlo. Tieni presente che questo processo potrebbe richiedere molto tempo poiché tutti gli articoli devono essere recuperati."
     chrome:
        page_title: 'Importa da > Chrome'
        description: "Questo importatore copierà tutti i tuoi preferiti di Chrome. L'ubicazione del file dipende dal sistema operativo: <ul><li>Su Linux, vai nella cartella <code>~/.config/chromium/Default/</code></li><li>Su Windows, dovrebbe essere in <code>%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default</code></li><li>Su OS X, dovrebbe essere su <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>Una volta arrivato lì, copia il file dei preferiti dove puoi trovarlo.<em><br>Se hai Chromium invece che Chrome, dovrai di conseguenza modificare i percorsi.</em></p>"
-       how_to: "Scegli il file di backup dei preferiti e clicca sul bottone sottostante per importarlo. Tieni presente che questo processo potrebbe richiedere molto tempo poiché tutti gli articoli devono essere trovati."
+       how_to: "Scegli il file di backup dei preferiti e clicca sul bottone sottostante per importarlo. Tieni presente che questo processo potrebbe richiedere molto tempo poiché tutti gli articoli devono essere recuperati."
     instapaper:
         page_title: 'Importa da > Instapaper'
         description: 'Questo importatore copierà tutti i tuoi articoli da Instapaper. Nella pagina delle impostazioni (https://www.instapaper.com/user), clicca su "Download .CSV file" nella sezione "Export". Sarà scaricato un file CSV (come "instapaper-export.csv").'
@@ -449,33 +449,33 @@ developer:
         create_new: 'Crea un nuovo client'
     existing_clients:
         title: 'Client esistenti'
-        field_id: 'Client ID'
-        field_secret: 'Client secret'
-        field_uris: 'Redirect URI'
-        field_grant_types: 'Tipi di grant permessi'
+        field_id: 'ID Client'
+        field_secret: 'Chiave segreta'
+        field_uris: 'URI di reindirizzamento'
+        field_grant_types: 'Tipi di permessi concessi'
         no_client: 'Ancora nessun client.'
     remove:
         warn_message_1: "Hai la possibilità di rimuovere questo client.L'operazione è IRREVERSIBILE!"
         warn_message_2: "Se lo rimuovi, ogni app configurata con questo client non sarà più in grado di autenticarsi."
         action: 'Rimuovi questo client'
     client:
-        # page_title: 'API clients management > Nuovo client'
+        page_title: 'Gestione client API > Nuovo client'
         page_description: 'Stai per creare un nuovo client. Compila i campi sottostanti per il redirect URI della tua applicazione.'
         form:
-            # name_label: 'Name of the client'
+            name_label: 'Nome del client'
             redirect_uris_label: 'Redirect URI'
             save_label: 'Crea un nuovo client'
         action_back: 'Indietro'
     client_parameter:
-        # page_title: 'API clients management > parametri Client'
+        page_title: 'Gestione client API > Parametri Client'
         page_description: 'Questi sono i tuoi parametri del client.'
-        # field_name: 'Client name'
-        field_id: 'Client ID'
-        field_secret: 'Client secret'
+        field_name: 'Nome del Client'
+        field_id: 'ID Client'
+        field_secret: 'Chiave segreta'
         back: 'Indietro'
-        read_howto: 'Leggi howto "Come creare la mia prima applicazione"'
+        read_howto: 'Leggi Come fare "Come creare la mia prima applicazione"'
     howto:
-        # page_title: 'API clients management > Come creare la mia prima applicazione'
+        page_title: 'Gestione client API > Come creare la mia prima applicazione'
         description:
             paragraph_1: 'I seguenti comandi fanno uso della <a href="https://github.com/jkbrzt/httpie">libreria HTTPie</a>. Verifica che sia installata sul tuo sistema prima di utilizzarli.'
             paragraph_2: 'Hai bisogno di un token per far comunicare la tua applicazione di terze parti e le API di wallabag.'
@@ -488,33 +488,33 @@ developer:
         back: 'Indietro'
 
 user:
-    # page_title: Users management
-    # new_user: Create a new user
-    # edit_user: Edit an existing user
-    # description: "Here you can manage all users (create, edit and delete)"
-    # list:
-    #     actions: Actions
-    #     edit_action: Edit
-    #     yes: Yes
-    #     no: No
-    #     create_new_one: Create a new user
+    page_title: Gestione utenti
+    new_user: Crea un nuovo utente
+    edit_user: Modifica un utente esistente
+    description: "Qui puoi gestire tutti gli utenti (crea, modifica ed elimina)"
+    list:
+        actions: Azioni
+        edit_action: Modifica
+        yes: Sì
+        no: "No"
+        create_new_one: Crea un nuovo utente
     form:
-        username_label: 'Username'
-        # name_label: 'Name'
+        username_label: 'Nome utente'
+        name_label: 'Nome'
         password_label: 'Password'
         repeat_new_password_label: 'Ripeti password'
         plain_password_label: '????'
         email_label: 'E-mail'
-        # enabled_label: 'Enabled'
-        # last_login_label: 'Last login'
-        # twofactor_label: Two factor authentication
-        # save: Save
-        # delete: Delete
-        # delete_confirm: Are you sure?
-        # back_to_list: Back to list
+        enabled_label: 'Abilitato'
+        last_login_label: 'Ultima connessione'
+        twofactor_label: Autenticazione a due fattori
+        save: Salva
+        delete: Cancella
+        delete_confirm: Sei sicuro?
+        back_to_list: Torna alla lista
 
 error:
-    # page_title: An error occurred
+    page_title: Si è verificato un errore
 
 flashes:
     config:
@@ -524,20 +524,20 @@ flashes:
             password_not_updated_demo: "In modalità demo, non puoi cambiare la password dell'utente."
             user_updated: 'Informazioni aggiornate'
             rss_updated: 'Informazioni RSS aggiornate'
-            tagging_rules_updated: 'Regole di tagging aggiornate'
-            tagging_rules_deleted: 'Regola di tagging aggiornate'
+            tagging_rules_updated: 'Regole di etichettatura aggiornate'
+            tagging_rules_deleted: 'Regola di etichettatura eliminate'
             rss_token_updated: 'RSS token aggiornato'
-            # annotations_reset: Annotations reset
-            # tags_reset: Tags reset
-            # entries_reset: Entries reset
+            annotations_reset: Reset annotazioni
+            tags_reset: Reset etichette
+            entries_reset: Reset articoli
     entry:
         notice:
             entry_already_saved: 'Contenuto già salvato in data %date%'
             entry_saved: 'Contenuto salvato'
-            # entry_saved_failed: 'Entry saved but fetching content failed'
+            entry_saved_failed: 'Articolo salvato ma il recupero del contenuto è fallito'
             entry_updated: 'Contenuto aggiornato'
             entry_reloaded: 'Contenuto ricaricato'
-            # entry_reloaded_failed: 'Entry reloaded but fetching content failed'
+            entry_reloaded_failed: 'Articolo ricaricato ma il recupero del contenuto è fallito'
             entry_archived: 'Contenuto archiviato'
             entry_unarchived: 'Contenuto dis-archiviato'
             entry_starred: 'Contenuto segnato come preferito'
@@ -545,22 +545,22 @@ flashes:
             entry_deleted: 'Contenuto eliminato'
     tag:
         notice:
-            tag_added: 'Tag aggiunto'
+            tag_added: 'Etichetta aggiunta'
     import:
         notice:
             failed: 'Importazione fallita, riprova.'
             failed_on_file: 'Errore durante la processazione dei dati da importare. Verifica il tuo file di import.'
             summary: 'Sommario di importazione: %imported% importati, %skipped% già salvati.'
-            # summary_with_queue: 'Import summary: %queued% queued.'
+            summary_with_queue: 'Riassunto dell'importazione: %queued% messo in coda.'
         error:
-            # redis_enabled_not_installed: Redis is enabled for handle asynchronous import but it looks like <u>we can't connect to it</u>. Please check Redis configuration.
-            # rabbit_enabled_not_installed: RabbitMQ is enabled for handle asynchronous import but it looks like <u>we can't connect to it</u>. Please check RabbitMQ configuration.
+            redis_enabled_not_installed: Redis è abilitato per gestire l'importazione asincrona, ma sembra che  <u>non possiamo connetterci ad esso</u>. Controlla la tua configurazione di Redis.
+            rabbit_enabled_not_installed: RabbitMQ è abilitato per gestire l'importazione asincrona, ma sembra che  <u>non possiamo connetterci ad esso</u>. Controlla la tua configurazione di RabbitMQ.
     developer:
         notice:
             client_created: 'Nuovo client creato.'
             client_deleted: 'Client eliminato'
     user:
         notice:
-            # added: 'User "%username%" added'
-            # updated: 'User "%username%" updated'
-            # deleted: 'User "%username%" deleted'
+            added: 'Utente "%username%" aggiunto'
+            updated: 'Utente "%username%" aggiornato'
+            deleted: 'Utente "%username%" eliminato'
