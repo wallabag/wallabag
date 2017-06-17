@@ -365,7 +365,7 @@ quickstart:
         use_docker: 'Usa Docker per installare wallabag'
     docs:
         title: 'Documentazione completa'
-        # description: "There are so much features in wallabag. Don't hesitate to read the manual to know them and to learn how to use them."
+        description: "wallabag ha tantissime funzionalità. Non esitare a leggere il manuale per conoscerle ed imparare ad usarle."
         annotate: 'Annota il tuo contenuto'
         export: 'Converti i tuoi contenuti in EPUB o PDF'
         search_filters: 'Impara come puoi recuperare un contenuto tramite la ricerca e i filtri'
@@ -375,17 +375,17 @@ quickstart:
         title: 'Supporto'
         description: 'Se hai bisogno di aiuto, siamo qui per te.'
         github: 'Su GitHub'
-        email: 'Per email'
+        email: 'Per E-mail'
         gitter: 'Su Gitter'
 
 tag:
-    page_title: 'Tags'
+    page_title: 'Etichette'
     list:
-        number_on_the_page: "{0} Non ci sono tag.|{1} C'è un tag.|]1,Inf[ ci sono %count% tag."
-        # see_untagged_entries: 'See untagged entries'
+        number_on_the_page: "{0} Non ci sono etichette.|{1} C'è un'etichetta.|]1,Inf[ ci sono %count% etichette."
+        see_untagged_entries: 'Vedi articoli non etichettati'
     new:
-        # add: 'Add'
-        # placeholder: 'You can add several tags, separated by a comma.'
+        add: 'Aggiungi'
+        placeholder: 'Puoi aggiungere varie etichette, separate da una virgola.'
 
 import:
     page_title: 'Importa'
@@ -415,30 +415,30 @@ import:
         description: 'Questo importatore copierà tutti i tuoi dati da un wallabag v2. Vai in "Tutti i contenuti", e, nella sidebar di esportazione, clicca su "JSON". Otterrai un file "Tutti i contenuti.json".'
     readability:
         page_title: 'Importa da > Readability'
-        # description: 'This importer will import all your Readability articles. On the tools (https://www.readability.com/tools/) page, click on "Export your data" in the "Data Export" section. You will received an email to download a json (which does not end with .json in fact).'
-        # how_to: 'Please select your Readability export and click on the below button to upload and import it.'
+        description: 'Questo importatore copierà tutti i tuoi articoli da Readability. Nella pagina strumenti (https://www.readability.com/tools/), clicca su "Export your data" nella sezione "Data Export". Riceverai una E-mail per scaricare un file json (che tuttavia non termina con .json).'
+        how_to: 'Seleziona la tua esportazione da Readability e clicca sul bottone sottostante per caricarla ed importarla.'
     worker:
-        # enabled: "Import is made asynchronously. Once the import task is started, an external worker will handle jobs one at a time. The current service is:"
-        # download_images_warning: "You enabled downloading images for your articles. Combined with classic import it can take ages to proceed (or maybe failed). We <strong>strongly recommend</strong> to enable asynchronous import to avoid errors."
+        enabled: "L'importazione è asincrona. Una volta iniziata l'importazione, un worker esterno gestirà i compiti uno alla volta. Il servizio corrente è:"
+        download_images_warning: "Hai abilitato il download delle immagini per i tuoi articoli. Insieme all'importazione classica potrebbe volerci molto tempo per procedere (oppure potrebbe fallire). <strong>Raccomandiamo fortemente</strong> di abilitare l'importazione asincrona per evitare errori."
     firefox:
        page_title: 'Importa da > Firefox'
-       # description: "This importer will import all your Firefox bookmarks. Just go to your bookmarks (Ctrl+Maj+O), then into \"Import and backup\", choose \"Backup...\". You will obtain a .json file."
-       # how_to: "Please choose the bookmark backup file and click on the button below to import it. Note that the process may take a long time since all articles have to be fetched."
+       description: "Questo importatore copierà tutti i tuoi preferiti di Firefox. Vai sui tuoi preferiti (Ctrl+Maj+O), poi su \"Import and backup\", scegli \"Backup...\". Otterrai un file .json."
+       how_to: "Scegli il file di backup dei preferiti e clicca sul bottone sottostante per importarlo. Tieni presente che questo processo potrebbe richiedere molto tempo poiché tutti gli articoli devono essere trovati."
     chrome:
        page_title: 'Importa da > Chrome'
-       # description: "This importer will import all your Chrome bookmarks. The location of the file depends on your operating system : <ul><li>On Linux, go into the <code>~/.config/chromium/Default/</code> directory</li><li>On Windows, it should be at <code>%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default</code></li><li>On OS X, it should be at <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>Once you got there, copy the Bookmarks file someplace you'll find.<em><br>Note that if you have Chromium instead of Chrome, you'll have to correct paths accordingly.</em></p>"
-       # how_to: "Please choose the bookmark backup file and click on the button below to import it. Note that the process may take a long time since all articles have to be fetched."
+       description: "Questo importatore copierà tutti i tuoi preferiti di Chrome. L'ubicazione del file dipende dal sistema operativo: <ul><li>Su Linux, vai nella cartella <code>~/.config/chromium/Default/</code></li><li>Su Windows, dovrebbe essere in <code>%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default</code></li><li>Su OS X, dovrebbe essere su <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>Una volta arrivato lì, copia il file dei preferiti dove puoi trovarlo.<em><br>Se hai Chromium invece che Chrome, dovrai di conseguenza modificare i percorsi.</em></p>"
+       how_to: "Scegli il file di backup dei preferiti e clicca sul bottone sottostante per importarlo. Tieni presente che questo processo potrebbe richiedere molto tempo poiché tutti gli articoli devono essere trovati."
     instapaper:
         page_title: 'Importa da > Instapaper'
-        # description: 'This importer will import all your Instapaper articles. On the settings (https://www.instapaper.com/user) page, click on "Download .CSV file" in the "Export" section. A CSV file will be downloaded (like "instapaper-export.csv").'
-        # how_to: 'Please select your Instapaper export and click on the below button to upload and import it.'
+        description: 'Questo importatore copierà tutti i tuoi articoli da Instapaper. Nella pagina delle impostazioni (https://www.instapaper.com/user), clicca su "Download .CSV file" nella sezione "Export". Sarà scaricato un file CSV (come "instapaper-export.csv").'
+        how_to: 'Scegli la tua esportazione da Instapaper e clicca sul bottone sottostante per caricarla ed importarla.'
     pinboard:
         page_title: "Importa da > Pinboard"
-        # description: 'This importer will import all your Instapaper articles. On the backup (https://pinboard.in/settings/backup) page, click on "JSON" in the "Bookmarks" section. A JSON file will be downloaded (like "pinboard_export").'
-        # how_to: 'Please select your Pinboard export and click on the below button to upload and import it.'
+        description: 'Questo importatore copierà tutti i tuoi articoli da Pinboard. Sulla pagina di backup (https://pinboard.in/settings/backup), clicca su "JSON" nella sezione "Bookmarks". Sarà scaricato un file JSON (come "pinboard_export").'
+        how_to: 'Scegli la tua esportazione da Pinboard e clicca sul bottone sottostante per caricarla ed importarla.'
 
 developer:
-    # page_title: 'API clients management'
+    page_title: 'Gestione client API'
     welcome_message: 'Benvenuto nelle API di wallabag'
     documentation: 'Documentazione'
     how_to_first_app: 'Come creare la mia prima applicazione'
@@ -455,7 +455,7 @@ developer:
         field_grant_types: 'Tipi di grant permessi'
         no_client: 'Ancora nessun client.'
     remove:
-        warn_message_1: "Hai la possibilitò di rimuovere questo client.L'operazione è IRREVERSIBILE!"
+        warn_message_1: "Hai la possibilità di rimuovere questo client.L'operazione è IRREVERSIBILE!"
         warn_message_2: "Se lo rimuovi, ogni app configurata con questo client non sarà più in grado di autenticarsi."
         action: 'Rimuovi questo client'
     client:
