@@ -15,7 +15,6 @@
                             <thead>
                                 <tr>
                                     <th>{{ 'site_credential.form.host_label'|trans }}</th>
-                                    <th>{{ 'site_credential.form.username_label'|trans }}</th>
                                     <th>{{ 'site_credential.list.actions'|trans }}</th>
                                 </tr>
                             </thead>
@@ -23,7 +22,6 @@
                             {% for credential in credentials %}
                                 <tr>
                                     <td>{{ credential.host }}</td>
-                                    <td>{{ credential.username }}</td>
                                     <td>
                                         <a href="{{ path('site_credentials_edit', { 'id': credential.id }) }}">{{ 'site_credential.list.edit_action'|trans }}</a>
                                     </td>
