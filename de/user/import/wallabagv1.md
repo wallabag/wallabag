@@ -17,7 +17,7 @@ kontaktieren](http://gitter.im/wallabag/wallabag).
 
 Wenn du dann die JSON-Datei mit deinen Einträgen heruntergeladen hast,
 kannst du [wallabag 2 über die Standard-Prozedur
-installieren](http://doc.wallabag.org/en/master/user/installation.html).
+installieren](../../admin/installation/).
 
 Nach dem Erstellen des Benutzeraccounts auf deiner neuen "wallabag
 2.x"-Instanz, navigiere auf den Import-Bereich und wähle

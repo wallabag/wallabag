@@ -51,7 +51,7 @@ Contrary to the web application, the main language for documentation is
 english.
 
 Documentation files are stored here:
-https://github.com/wallabag/wallabag/tree/master/docs
+<https://github.com/wallabag/doc>
 
 You need to respect the `en` folder structure when you create your own
 translation.

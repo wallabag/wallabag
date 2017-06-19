@@ -79,7 +79,7 @@ Extrahiere das Archiv in deinen wallabag-Ordner und ersetze die
 
 Bitte überprüfe, dass deine `app/config/parameters.yml` alle notwendigen
 Parameter enthält. Eine Dokumentation darüber [findest du
-hier](http://doc.wallabag.org/de/master/user/parameters.html).
+hier](./parameters.md).
 
 Falls du SQLite nutzt, musst du außerdem deinen `data/`-Ordner in die
 neue Installation kopieren.
@@ -91,7 +91,7 @@ aktualisieren. Wir gehen in diesem Fall davon aus, dass das
 Tabellenpräfix `wallabag_` ist.
 
 [You can find all the queries
-here](http://doc.wallabag.org/en/master/user/query-upgrade-21-22.html).
+here](./query-upgrade-21-22.md).
 
 Upgrade von 2.0.x zu 2.1.1
 --------------------------
@@ -128,7 +128,7 @@ Extrahiere das Archiv in deinen wallabag-Ordner und ersetze die
 
 Bitte überprüfe, dass deine `app/config/parameters.yml` alle notwendigen
 Parameter enthält. Eine Dokumentation darüber [findest du
-hier](http://doc.wallabag.org/de/master/user/parameters.html).
+hier](./parameters.md).
 
 Falls du SQLite nutzt, musst du außerdem deinen `data/`-Ordner in die
 neue Installation kopieren.
@@ -156,9 +156,5 @@ Es gibt kein automatisiertes Skript, um wallabag 1.x auf wallabag 2.x zu
 aktualisieren. Du musst:
 
 -   deine Daten exportieren
--   wallabag 2.x installieren (Dokumentation
-    &lt;<http://doc.wallabag.org/en/master/user/installation.html>&gt;\`\_
-    )
--   die Daten in die neue Installation importieren
-    ([Dokumentation](http://doc.wallabag.org/en/master/user/import.html)
-    )
+-   wallabag 2.x installieren ([Dokumentation](./installation/))
+-   die Daten in die neue Installation importieren ([Dokumentation](../user/import/))

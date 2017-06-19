@@ -63,7 +63,7 @@ est l'anglais
 </div>
 
 Les fichiers de documentation se trouvent ici :
-<https://github.com/wallabag/wallabag/tree/master/docs>
+<https://github.com/wallabag/doc>
 
 Vous devez respecter la structure du dossier `en` quand vous crééz votre
 traduction.
