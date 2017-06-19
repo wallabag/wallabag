@@ -83,7 +83,7 @@ le fichier `app/config/parameters.yml` avec le votre.
 Merci de vérifier que votre fichier `app/config/parameters.yml` contient
 tous les paramètres requis. Vous trouverez [ici une documentation
 détaillée concernant les
-paramètres](http://doc.wallabag.org/fr/master/user/parameters.html).
+paramètres](https://doc.wallabag.org/fr/admin/parameters.html).
 
 Si vous utilisez SQLite, vous devez également conserver le contenu du
 répertoire `data/`.
@@ -135,7 +135,7 @@ le fichier `app/config/parameters.yml` avec le votre.
 Merci de vérifier que votre fichier `app/config/parameters.yml` contient
 tous les paramètres requis. Vous trouverez [ici une documentation
 détaillée concernant les
-paramètres](http://doc.wallabag.org/fr/master/user/parameters.html).
+paramètres](https://doc.wallabag.org/fr/admin/parameters.html).
 
 Si vous utilisez SQLite, vous devez également conserver le contenu du
 répertoire `data/`.
@@ -164,8 +164,8 @@ wallabag 2.x. Vous devez :
 
 -   exportez vos données
 -   installer wallabag 2.x ([lisez la documentation
-    d'installation](http://doc.wallabag.org/fr/master/user/installation.html)
+    d'installation](https://doc.wallabag.org/fr/admin/installation/readme.html)
     )
 -   importer vos données dans votre installation toute propre ([lisez la
     documentation
-    d'import](http://doc.wallabag.org/fr/master/user/import.html) )
+    d'import](https://doc.wallabag.org/fr/user/import/) )

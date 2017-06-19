@@ -13,7 +13,7 @@ interface](#import-via-command-line-interface-cli).
 
 Because imports can take ages, we developed an asynchronous tasks
 system. [You can read the documentation
-here](http://doc.wallabag.org/fr/master/developer/asynchronous.html)
+here](https://doc.wallabag.org/en/admin/asynchronous.html)
 (for experts).
 
 # Import via command-line interface (CLI)

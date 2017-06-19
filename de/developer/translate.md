@@ -61,7 +61,7 @@ Dokumentation Englisch.
 </div>
 
 Documentationsdateien sind hier gespeichert:
-<https://github.com/wallabag/wallabag/tree/master/docs>
+<https://github.com/wallabag/doc>
 
 Du musst die Ordnerstruktur des Ordners `en` beachten, wenn du deine
 eigene Übersetzung startest.

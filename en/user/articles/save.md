@@ -3,7 +3,7 @@
 The main purpose of wallabag is to save web articles. You have many ways
 to do it. If you think that the article is wrong displayed, [you can
 read this
-documentation](http://doc.wallabag.org/en/master/user/errors_during_fetching.html).
+documentation](https://doc.wallabag.org/en/user/errors_during_fetching.html).
 
 ## By using a bookmarklet
 

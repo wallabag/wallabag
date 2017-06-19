@@ -13,7 +13,7 @@ la ligne de commande](#import-via-la-ligne-de-commande-cli).
 
 Puisque les imports peuvent gourmands en ressource, nous avons mis en
 place un système de tâche asynchrone. [Vous trouverez la documentation
-ici](http://doc.wallabag.org/fr/master/developer/asynchronous.html)
+ici](https://doc.wallabag.org/fr/admin/asynchronous.html)
 (niveau expert).
 
 ## Import via la ligne de commande (CLI)
