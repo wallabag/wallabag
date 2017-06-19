@@ -36,7 +36,7 @@ Click on it to go to the management of your site credentials. You'll be able to 
 
 ## Security
 
-Login and password you'll set will be encrypted in the database which means the database administrator (and/or the admin of your wallabag instance) won't be able to read your credentials.
+Login and password you'll set will be encrypted in the database which means the database administrator won't be able to read your credentials. _However_, the server administrator might have access (if it retrieves the encryption key and then manually decode your credentials).
 
 If you need more technical information, we are using [that scenario](https://github.com/defuse/php-encryption/blob/master/docs/Tutorial.md#scenario-1-keep-data-secret-from-the-database-administrator) to protect your information.
 
