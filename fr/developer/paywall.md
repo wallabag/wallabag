@@ -41,7 +41,7 @@ Fichiers de configuration pour parser les articles
 <div class="admonition note">
 
 Lisez [cette
-documentation](http://doc.wallabag.org/fr/master/user/errors_during_fetching.html)
+documentation](../user/errors_during_fetching.md)
 pour en savoir plus sur ces fichiers de configuration, qui se trouvent
 dans le répertoire `vendor/j0k3r/graby-site-config/`. Pour la majorité
 des sites, ce fichier est déjà configuré : les instructions qui suivent

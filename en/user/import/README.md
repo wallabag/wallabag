@@ -12,8 +12,7 @@ We also developed [a script to execute migrations via command-line
 interface](#import-via-command-line-interface-cli).
 
 Because imports can take ages, we developed an asynchronous tasks
-system. [You can read the documentation
-here](http://doc.wallabag.org/fr/master/developer/asynchronous.html)
+system. [You can read the documentation here](../../admin/asynchronous.md)
 (for experts).
 
 # Import via command-line interface (CLI)
