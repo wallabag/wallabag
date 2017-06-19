@@ -13,8 +13,7 @@ Wir haben zusätzlich [ein Skript für die Migration per
 Kommandozeile](#import-via-command-line-interface-cli) geschrieben.
 
 Da Importe eine Menge Zeit in Anspruch nehmen können, haben wir auch ein
-asynchrones Aufgabensystem entwickelt. [Du kannst die Dokumentation hier
-lesen](https://doc.wallabag.org/de/admin/asynchronous.html)
+asynchrones Aufgabensystem entwickelt. [Du kannst die Dokumentation hier lesen](../../admin/asynchronous.md)
 (für Experten).
 
 Import über die Kommandozeile (CLI)

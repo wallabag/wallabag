@@ -12,8 +12,7 @@ Nous avons aussi développé [un script pour exécuter des migrations via
 la ligne de commande](#import-via-la-ligne-de-commande-cli).
 
 Puisque les imports peuvent gourmands en ressource, nous avons mis en
-place un système de tâche asynchrone. [Vous trouverez la documentation
-ici](https://doc.wallabag.org/fr/admin/asynchronous.html)
+place un système de tâche asynchrone. [Vous trouverez la documentation ici](../../admin/asynchronous.md)
 (niveau expert).
 
 ## Import via la ligne de commande (CLI)

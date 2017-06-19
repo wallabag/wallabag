@@ -32,7 +32,7 @@ Konfigurationsdateien parsen
 
 <div class="admonition note">
 
-Lese [diesen Teil der Dokumentation](https://doc.wallabag.org/de/user/errors_during_fetching.html),
+Lese [diesen Teil der Dokumentation](../user/errors_during_fetching.md),
 um die Konfiguration zu verstehen.
 
 </div>

@@ -1,9 +1,8 @@
 # Save articles
 
 The main purpose of wallabag is to save web articles. You have many ways
-to do it. If you think that the article is wrong displayed, [you can
-read this
-documentation](https://doc.wallabag.org/en/user/errors_during_fetching.html).
+to do it. If you think that the article is wrong displayed,
+[you can read this documentation](../errors_during_fetching.md).
 
 ## By using a bookmarklet
 

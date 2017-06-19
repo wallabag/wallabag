@@ -16,7 +16,7 @@ to [ask for support](https://gitter.im/wallabag/wallabag).
 
 When you have retrieved the json file containing your entries, you can
 install wallabag v2 if needed by following [the standard
-procedure](https://doc.wallabag.org/en/admin/installation/readme.html).
+procedure](../../admin/installation/).
 
 After creating an user account on your new wallabag v2 instance, you
 must head over to the Import section and select Import from wallabag v1.
