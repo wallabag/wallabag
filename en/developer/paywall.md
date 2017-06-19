@@ -40,7 +40,7 @@ Parsing configuration files
 <div class="admonition note">
 
 Read [this part of the
-documentation](http://doc.wallabag.org/en/master/user/errors_during_fetching.html)
+documentation](https://doc.wallabag.org/en/user/errors_during_fetching.html)
 to understand the configuration files, which are located under
 `vendor/j0k3r/graby-site-config/`. For most of the websites, this file
 is already configured: the following instructions are only for the

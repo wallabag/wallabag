@@ -32,7 +32,7 @@ Konfigurationsdateien parsen
 
 <div class="admonition note">
 
-Lese [diesen Teil der Dokumentation](http://doc.wallabag.org/de/master/user/errors_during_fetching.html),
+Lese [diesen Teil der Dokumentation](https://doc.wallabag.org/de/user/errors_during_fetching.html),
 um die Konfiguration zu verstehen.
 
 </div>
@@ -47,7 +47,7 @@ zu werden, bei welcher das Login-Formular erst im Nachhinein (etwa durch
 AJAX) geladen wird.
 
 `login_uri` ist die Aktions-URL des Formulars (`action`-Attribut).
-`login_username_field` ist das `name`-Attribut von dem Login-Feld. 
+`login_username_field` ist das `name`-Attribut von dem Login-Feld.
 `login_password_field` ist das `name`-Attribut von dem Password-Feld.
 
 Beispiel:

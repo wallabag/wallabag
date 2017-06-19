@@ -79,7 +79,7 @@ Extract the archive in your wallabag folder and replace
 
 Please check that your `app/config/parameters.yml` contains all the
 required parameters. You can find [here a documentation about
-parameters](http://doc.wallabag.org/en/master/user/parameters.html).
+parameters](https://doc.wallabag.org/en/admin/parameters.html).
 
 If you use SQLite, you must also copy your `data/` folder inside the new
 installation.
@@ -125,7 +125,7 @@ Extract the archive in your wallabag folder and replace
 
 Please check that your `app/config/parameters.yml` contains all the
 required parameters. You can find [here a documentation about
-parameters](http://doc.wallabag.org/en/master/user/parameters.html).
+parameters](https://doc.wallabag.org/en/admin/parameters.html).
 
 If you use SQLite, you must also copy your `data/` folder inside the new
 installation.
@@ -153,7 +153,7 @@ There is no automatic script to update from wallabag 1.x to wallabag
 
 -   export your data
 -   install wallabag 2.x ([read the installation
-    documentation](http://doc.wallabag.org/en/master/user/installation.html)
+    documentation](https://doc.wallabag.org/en/admin/installation/readme.html)
     )
 -   import data in this fresh installation ([read the import
-    documentation](http://doc.wallabag.org/en/master/user/import.html) )
+    documentation](https://doc.wallabag.org/en/user/import/) )

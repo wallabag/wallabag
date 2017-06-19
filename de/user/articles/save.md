@@ -4,7 +4,7 @@ Speichere deinen ersten Artikel
 Die Hauptzweck von wallabag ist es, Artikel aus dem Web zu speichern. Es
 gibt viele Wege, dieses Ziel zu erreichen. Wenn du denkst, dass ein
 Artikel falsch angezeigt wird, kannst du [diese Dokumentation
-lesen](http://doc.wallabag.org/de/master/user/errors_during_fetching.html).
+lesen](https://doc.wallabag.org/de/user/errors_during_fetching.html).
 
 ### Über ein Bookmarklet
 

@@ -55,7 +55,7 @@ Contrariamente alla web app, il linguaggio principale per la
 documentazione é l'inglese.
 
 I file della documentazione sono memorizzati qui:
-<https://github.com/wallabag/wallabag/tree/master/docs>
+<https://github.com/wallabag/doc>
 
 Dovete rispettare la struttura della cartella `en` quando create la
 vostra traduzione.
