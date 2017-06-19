@@ -37,9 +37,9 @@ Cliquez sur le lien pour aller à la gestion de vos accès aux sites. Vous pourr
 
 ## Sécurité
 
-Les logins et mots de passe que vous allez définir seront encodés dans la base de donnée. Cela veut dire que l'administrateur de la base de donnée (et/ou l'administrateur de l'instance wallabag) ne pourront pas lire ces informations.
+Les logins et mots de passe que vous allez définir seront encodés dans la base de donnée. Cela veut dire que l'administrateur de la base de donnée ne pourra pas lire ces informations. _Par contre_, l'administrateur de wallabag pourra les lire (s'il récupère la clé d'encodage et qu'il décode vos identifiants manuellement).
 
-Si vous souhaitez plus de détail technique, vous pouvez lire [ces informations (en anglais)](https://github.com/defuse/php-encryption/blob/master/docs/Tutorial.md#scenario-1-keep-data-secret-from-the-database-administrator).
+Si vous souhaitez plus de détails technique, vous pouvez lire [ces informations (en anglais)](https://github.com/defuse/php-encryption/blob/master/docs/Tutorial.md#scenario-1-keep-data-secret-from-the-database-administrator).
 
 ## Disponiblité du paywall d'un site
 
