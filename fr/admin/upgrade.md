@@ -83,7 +83,7 @@ le fichier `app/config/parameters.yml` avec le votre.
 Merci de vérifier que votre fichier `app/config/parameters.yml` contient
 tous les paramètres requis. Vous trouverez [ici une documentation
 détaillée concernant les
-paramètres](https://doc.wallabag.org/fr/admin/parameters.html).
+paramètres](./parameters.md).
 
 Si vous utilisez SQLite, vous devez également conserver le contenu du
 répertoire `data/`.
@@ -135,7 +135,7 @@ le fichier `app/config/parameters.yml` avec le votre.
 Merci de vérifier que votre fichier `app/config/parameters.yml` contient
 tous les paramètres requis. Vous trouverez [ici une documentation
 détaillée concernant les
-paramètres](https://doc.wallabag.org/fr/admin/parameters.html).
+paramètres](./parameters.md).
 
 Si vous utilisez SQLite, vous devez également conserver le contenu du
 répertoire `data/`.
@@ -163,9 +163,5 @@ Il n'y a pas de script automatique pour mettre à jour wallabag 1.x en
 wallabag 2.x. Vous devez :
 
 -   exportez vos données
--   installer wallabag 2.x ([lisez la documentation
-    d'installation](https://doc.wallabag.org/fr/admin/installation/readme.html)
-    )
--   importer vos données dans votre installation toute propre ([lisez la
-    documentation
-    d'import](https://doc.wallabag.org/fr/user/import/) )
+-   installer wallabag 2.x ([lisez la documentation d'installation](./installation/))
+-   importer vos données dans votre installation toute propre ([lisez la documentation d'import](../user/import/) )

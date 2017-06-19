@@ -18,7 +18,7 @@ pas à [demander de l'aide](http://gitter.im/wallabag/wallabag).
 Une fois que vous avez récupéré le fichier json contenant vos données,
 vous pouvez installer wallabag v2 si c'est nécessaire en suivant [la
 procédure
-standard](https://doc.wallabag.org/fr/admin/installation/readme.html).
+standard](../../admin/installation/).
 
 Une fois que vous avez créé un compte utilisateur sur votre nouvelle
 instance de wallabag v2, rendez-vous dans la section Import. Vous devez
