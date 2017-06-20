@@ -66,13 +66,13 @@
                                 </div>
                             </div>
 
-                        <div class="row">
-                            <div class="input-field col s12">
-                                {{ form_errors(form.config.action_mark_as_read) }}
-                                {{ form_widget(form.config.action_mark_as_read) }}
-                                {{ form_label(form.config.action_mark_as_read) }}
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form_label(form.config.action_mark_as_read) }}
+                                    {{ form_errors(form.config.action_mark_as_read) }}
+                                    {{ form_widget(form.config.action_mark_as_read) }}
+                                </div>
                             </div>
-                        </div>
 
                             <div class="row">
                                 <div class="input-field col s11">
@@ -254,11 +254,11 @@
                         {{ form_start(form.pwd) }}
                             {{ form_errors(form.pwd) }}
 
-                        <div class="row">
-                            <div class="input-field col s12">
-                                {{ 'config.form_password.description'|trans }}
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ 'config.form_password.description'|trans }}
+                                </div>
                             </div>
-                        </div>
 
                             <div class="row">
                                 <div class="input-field col s12">

@@ -32,6 +32,7 @@ menu:
         save_link: "Sauvegarder un nouvel article"
         back_to_unread: "Retour aux articles non lus"
         users_management: "Gestion des utilisateurs"
+        site_credentials: 'Accès aux sites'
     top:
         add_new_entry: "Sauvegarder un nouvel article"
         search: "Rechercher"
@@ -516,10 +517,30 @@ user:
         twofactor_label: "Double authentification"
         save: "Sauvegarder"
         delete: "Supprimer"
-        delete_confirm: "Voulez-vous vraiment ?"
+        delete_confirm: "Êtes-vous sûr ?"
         back_to_list: "Revenir à la liste"
     search:
         placeholder: "Filtrer par nom d’utilisateur ou email"
+
+site_credential:
+    page_title: Gestion des accès aux sites
+    new_site_credential: Créer un accès à un site
+    edit_site_credential: Éditer l'accès d'un site
+    description: "Ici vous pouvez gérer les accès aux différents sites. Ces accès permettent de récupérer des contenus sur des sites qui requièrent une authentification ou un paywall"
+    list:
+        actions: Actions
+        edit_action: Éditer
+        yes: Oui
+        no: Non
+        create_new_one: Créer un nouvel accès à un site
+    form:
+        username_label: 'Identifiant'
+        host_label: 'Domaine'
+        password_label: 'Mot de passe'
+        save: "Sauvegarder"
+        delete: "Supprimer"
+        delete_confirm: "Êtes-vous sûr ?"
+        back_to_list: "Revenir à la liste"
 
 error:
     page_title: "Une erreur est survenue"
@@ -570,6 +591,11 @@ flashes:
             client_deleted: "Client %name% supprimé"
     user:
         notice:
-            added: "Utilisateur \"%username%\" ajouté"
-            updated: "Utilisateur \"%username%\" mis à jour"
-            deleted: "Utilisateur \"%username%\" supprimé"
+            added: 'Utilisateur "%username%" ajouté'
+            updated: 'Utilisateur "%username%" mis à jour'
+            deleted: 'Utilisateur "%username%" supprimé'
+    site_credential:
+        notice:
+            added: 'Accès au site "%host%" ajouté'
+            updated: 'Accès au site "%host%" mis à jour'
+            deleted: 'Accès au site "%host%" supprimé'

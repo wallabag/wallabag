@@ -6,6 +6,8 @@ use BD\GuzzleSiteAuthenticator\SiteConfig\SiteConfig;
 use BD\GuzzleSiteAuthenticator\SiteConfig\SiteConfigBuilder;
 use Graby\SiteConfig\ConfigBuilder;
 use Psr\Log\LoggerInterface;
+use Wallabag\CoreBundle\Repository\SiteCredentialRepository;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 class GrabySiteConfigBuilder implements SiteConfigBuilder
 {
@@ -13,27 +15,39 @@ class GrabySiteConfigBuilder implements SiteConfigBuilder
      * @var ConfigBuilder
      */
     private $grabyConfigBuilder;
+
     /**
-     * @var array
+     * @var SiteCredentialRepository
      */
-    private $credentials;
+    private $credentialRepository;
+
     /**
      * @var LoggerInterface
      */
     private $logger;
 
     /**
+     * @var Wallabag\UserBundle\Entity\User|null
+     */
+    private $currentUser;
+
+    /**
      * GrabySiteConfigBuilder constructor.
      *
-     * @param ConfigBuilder   $grabyConfigBuilder
-     * @param array           $credentials
-     * @param LoggerInterface $logger
+     * @param ConfigBuilder            $grabyConfigBuilder
+     * @param TokenStorage             $token
+     * @param SiteCredentialRepository $credentialRepository
+     * @param LoggerInterface          $logger
      */
-    public function __construct(ConfigBuilder $grabyConfigBuilder, array $credentials, LoggerInterface $logger)
+    public function __construct(ConfigBuilder $grabyConfigBuilder, TokenStorage $token, SiteCredentialRepository $credentialRepository, LoggerInterface $logger)
     {
         $this->grabyConfigBuilder = $grabyConfigBuilder;
-        $this->credentials = $credentials;
+        $this->credentialRepository = $credentialRepository;
         $this->logger = $logger;
+
+        if ($token->getToken()) {
+            $this->currentUser = $token->getToken()->getUser();
+        }
     }
 
     /**
@@ -47,7 +61,12 @@ class GrabySiteConfigBuilder implements SiteConfigBuilder
             $host = substr($host, 4);
         }
 
-        if (empty($this->credentials[$host])) {
+        $credentials = null;
+        if ($this->currentUser) {
+            $credentials = $this->credentialRepository->findOneByHostAndUser($host, $this->currentUser->getId());
+        }
+
+        if (null === $credentials) {
             $this->logger->debug('Auth: no credentials available for host.', ['host' => $host]);
 
             return false;
@@ -62,13 +81,14 @@ class GrabySiteConfigBuilder implements SiteConfigBuilder
             'passwordField' => $config->login_password_field ?: null,
             'extraFields' => $this->processExtraFields($config->login_extra_fields),
             'notLoggedInXpath' => $config->not_logged_in_xpath ?: null,
-            'username' => $this->credentials[$host]['username'],
-            'password' => $this->credentials[$host]['password'],
+            'username' => $credentials['username'],
+            'password' => $credentials['password'],
         ];
 
         $config = new SiteConfig($parameters);
 
-        // do not leak password in log
+        // do not leak usernames and passwords in log
+        $parameters['username'] = '**masked**';
         $parameters['password'] = '**masked**';
 
         $this->logger->debug('Auth: add parameters.', ['host' => $host, 'parameters' => $parameters]);

@@ -60,6 +60,3 @@ parameters:
     redis_port: 6379
     redis_path: null
     redis_password: null
-
-    # sites credentials
-    sites_credentials: {}

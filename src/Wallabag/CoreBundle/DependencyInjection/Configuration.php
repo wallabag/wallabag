@@ -63,6 +63,8 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
+                ->scalarNode('encryption_key_path')
+                ->end()
             ->end()
         ;
 

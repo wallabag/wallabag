@@ -73,7 +73,7 @@
         "kphoen/rulerz-bundle": "~0.13",
         "guzzlehttp/guzzle": "^5.3.1",
         "doctrine/doctrine-migrations-bundle": "^1.0",
-        "paragonie/random_compat": "~1.0",
+        "paragonie/random_compat": "~2.0",
         "craue/config-bundle": "~2.0",
         "mnapoli/piwik-twig-extension": "^1.0",
         "ocramius/proxy-manager": "1.*",
@@ -83,7 +83,8 @@
         "javibravo/simpleue": "^1.0",
         "symfony/dom-crawler": "^3.1",
         "friendsofsymfony/jsrouting-bundle": "^1.6",
-        "bdunogier/guzzle-site-authenticator": "^1.0.0@dev"
+        "bdunogier/guzzle-site-authenticator": "^1.0.0@dev",
+        "defuse/php-encryption": "^2.1"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "~2.2",

@@ -38,6 +38,9 @@
                 {{ render(controller("WallabagCoreBundle:Entry:searchForm", {'currentRoute': app.request.attributes.get('_route')})) }}
             </div>
         </li>
+        {% if craue_setting('restricted_access') %}
+        <li class="menu site_credentials"><a href="{{ path('site_credentials_index') }}">{{ 'menu.left.site_credentials'|trans }}</a></li>
+        {% endif %}
         <li class="menu config"><a href="{{ path('config') }}">{{ 'menu.left.config'|trans }}</a></li>
         {% if is_granted('ROLE_SUPER_ADMIN') %}
             <li class="menu users"><a href="{{ path('user_index') }}">{{ 'menu.left.users_management'|trans }}</a></li>

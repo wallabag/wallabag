@@ -6,10 +6,11 @@ use Monolog\Handler\TestHandler;
 use Monolog\Logger;
 use BD\GuzzleSiteAuthenticator\SiteConfig\SiteConfig;
 use Graby\SiteConfig\SiteConfig as GrabySiteConfig;
-use PHPUnit_Framework_TestCase;
 use Wallabag\CoreBundle\GuzzleSiteAuthenticator\GrabySiteConfigBuilder;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
-class GrabySiteConfigBuilderTest extends PHPUnit_Framework_TestCase
+class GrabySiteConfigBuilderTest extends \PHPUnit_Framework_TestCase
 {
     /** @var \Wallabag\CoreBundle\GuzzleSiteAuthenticator\GrabySiteConfigBuilder */
     protected $builder;
@@ -17,13 +18,13 @@ class GrabySiteConfigBuilderTest extends PHPUnit_Framework_TestCase
     public function testBuildConfigExists()
     {
         /* @var \Graby\SiteConfig\ConfigBuilder|\PHPUnit_Framework_MockObject_MockObject */
-        $grabyConfigBuilderMock = $this->getMockBuilder('\Graby\SiteConfig\ConfigBuilder')
+        $grabyConfigBuilderMock = $this->getMockBuilder('Graby\SiteConfig\ConfigBuilder')
             ->disableOriginalConstructor()
             ->getMock();
 
         $grabySiteConfig = new GrabySiteConfig();
         $grabySiteConfig->requires_login = true;
-        $grabySiteConfig->login_uri = 'http://example.com/login';
+        $grabySiteConfig->login_uri = 'http://www.example.com/login';
         $grabySiteConfig->login_username_field = 'login';
         $grabySiteConfig->login_password_field = 'password';
         $grabySiteConfig->login_extra_fields = ['field=value'];
@@ -38,19 +39,40 @@ class GrabySiteConfigBuilderTest extends PHPUnit_Framework_TestCase
         $handler = new TestHandler();
         $logger->pushHandler($handler);
 
+        $siteCrentialRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\SiteCredentialRepository')
+            ->disableOriginalConstructor()
+            ->getMock();
+        $siteCrentialRepo->expects($this->once())
+            ->method('findOneByHostAndUser')
+            ->with('example.com', 1)
+            ->willReturn(['username' => 'foo', 'password' => 'bar']);
+
+        $user = $this->getMockBuilder('Wallabag\UserBundle\Entity\User')
+            ->disableOriginalConstructor()
+            ->getMock();
+        $user->expects($this->once())
+            ->method('getId')
+            ->willReturn(1);
+
+        $token = new UsernamePasswordToken($user, 'pass', 'provider');
+
+        $tokenStorage = new TokenStorage();
+        $tokenStorage->setToken($token);
+
         $this->builder = new GrabySiteConfigBuilder(
             $grabyConfigBuilderMock,
-            ['example.com' => ['username' => 'foo', 'password' => 'bar']],
+            $tokenStorage,
+            $siteCrentialRepo,
             $logger
         );
 
-        $config = $this->builder->buildForHost('example.com');
+        $config = $this->builder->buildForHost('www.example.com');
 
         $this->assertEquals(
             new SiteConfig([
                 'host' => 'example.com',
                 'requiresLogin' => true,
-                'loginUri' => 'http://example.com/login',
+                'loginUri' => 'http://www.example.com/login',
                 'usernameField' => 'login',
                 'passwordField' => 'password',
                 'extraFields' => ['field' => 'value'],
@@ -82,9 +104,30 @@ class GrabySiteConfigBuilderTest extends PHPUnit_Framework_TestCase
         $handler = new TestHandler();
         $logger->pushHandler($handler);
 
+        $siteCrentialRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\SiteCredentialRepository')
+            ->disableOriginalConstructor()
+            ->getMock();
+        $siteCrentialRepo->expects($this->once())
+            ->method('findOneByHostAndUser')
+            ->with('unknown.com', 1)
+            ->willReturn(null);
+
+        $user = $this->getMockBuilder('Wallabag\UserBundle\Entity\User')
+            ->disableOriginalConstructor()
+            ->getMock();
+        $user->expects($this->once())
+            ->method('getId')
+            ->willReturn(1);
+
+        $token = new UsernamePasswordToken($user, 'pass', 'provider');
+
+        $tokenStorage = new TokenStorage();
+        $tokenStorage->setToken($token);
+
         $this->builder = new GrabySiteConfigBuilder(
             $grabyConfigBuilderMock,
-            [],
+            $tokenStorage,
+            $siteCrentialRepo,
             $logger
         );
 

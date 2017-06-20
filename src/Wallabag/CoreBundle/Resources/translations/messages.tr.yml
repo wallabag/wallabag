@@ -32,6 +32,7 @@ menu:
         # save_link: 'Save a link'
         back_to_unread: 'Okunmayan makalelere geri dön'
         # users_management: 'Users management'
+        # site_credentials: 'Site credentials'
     top:
         add_new_entry: 'Yeni bir makale ekle'
         search: 'Ara'
@@ -571,3 +572,8 @@ flashes:
             # added: 'User "%username%" added'
             # updated: 'User "%username%" updated'
             # deleted: 'User "%username%" deleted'
+    site_credential:
+        notice:
+            # added: 'Site credential for "%host%" added'
+            # updated: 'Site credential for "%host%" updated'
+            # deleted: 'Site credential for "%host%" deleted'
