@@ -4,13 +4,12 @@ const StyleLintPlugin = require('stylelint-webpack-plugin');
 
 const rootDir = path.resolve(__dirname, '../../../');
 
-module.exports = function() {
+module.exports = function () {
   return {
     entry: {
       material: path.join(rootDir, './app/Resources/static/themes/material/index.js'),
       baggy: path.join(rootDir, './app/Resources/static/themes/baggy/index.js'),
     },
-
     output: {
       filename: '[name].js',
       path: path.resolve(rootDir, 'web/bundles/wallabagcore'),
@@ -21,7 +20,7 @@ module.exports = function() {
         $: 'jquery',
         jQuery: 'jquery',
         'window.$': 'jquery',
-        'window.jQuery': 'jquery'
+        'window.jQuery': 'jquery',
       }),
       new StyleLintPlugin({
         configFile: '.stylelintrc',
@@ -33,8 +32,8 @@ module.exports = function() {
     ],
     resolve: {
       alias: {
-        jquery: path.join(rootDir, 'node_modules/jquery/dist/jquery.js')
-      }
+        jquery: path.join(rootDir, 'node_modules/jquery/dist/jquery.js'),
+      },
     },
   };
 };
