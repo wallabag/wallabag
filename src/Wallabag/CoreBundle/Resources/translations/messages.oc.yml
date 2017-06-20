@@ -77,6 +77,7 @@ config:
             redirect_current_page: 'A la pagina actuala'
         pocket_consumer_key_label: Clau d'autentificacion Pocket per importar las donadas
         android_configuration: Configuratz vòstra aplicacion Android
+        # android_instruction: "Touch here to prefill your Android application"
         help_theme: "wallabag es personalizable. Podètz causir vòstre tèma preferit aquí."
         help_items_per_page: "Podètz cambiar lo nombre d'articles afichats per pagina."
         help_reading_speed: "wallabag calcula lo temps de lectura per cada article. Podètz lo definir aquí, gràcias a aquesta lista, se sètz un legeire rapid o lent. wallabag tornarà calcular lo temps de lectura per cada article."
