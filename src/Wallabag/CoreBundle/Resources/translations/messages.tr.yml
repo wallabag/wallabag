@@ -90,9 +90,10 @@ config:
         token_reset: 'Belirteci (token) sıfırla'
         rss_links: 'RSS akış bağlantıları'
         rss_link:
-            unread: 'okunmayan'
-            starred: 'favoriler'
-            archive: 'arşiv'
+            unread: 'Okunmayan'
+            starred: 'Favoriler'
+            archive: 'Arşiv'
+            # all: 'All'
         rss_limit: 'RSS içeriğinden talep edilecek makale limiti'
     form_user:
         two_factor_description: "İki adımlı doğrulamayı aktifleştirdiğinizde, her yeni güvenilmeyen bağlantılarda size e-posta ile bir kod alacaksınız."

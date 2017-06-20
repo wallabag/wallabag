@@ -26,7 +26,7 @@ class RssController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showUnreadAction(Request $request, User $user)
+    public function showUnreadRSSAction(Request $request, User $user)
     {
         return $this->showEntries('unread', $user, $request->query->get('page', 1));
     }
@@ -39,7 +39,7 @@ class RssController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showArchiveAction(Request $request, User $user)
+    public function showArchiveRSSAction(Request $request, User $user)
     {
         return $this->showEntries('archive', $user, $request->query->get('page', 1));
     }
@@ -52,9 +52,22 @@ class RssController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showStarredAction(Request $request, User $user)
+    public function showStarredRSSAction(Request $request, User $user)
     {
         return $this->showEntries('starred', $user, $request->query->get('page', 1));
+    }
+
+    /**
+     * Shows all entries for current user.
+     *
+     * @Route("/{username}/{token}/all.xml", name="all_rss", defaults={"_format"="xml"})
+     * @ParamConverter("user", class="WallabagUserBundle:User", converter="username_rsstoken_converter")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function showAllRSSAction(Request $request, User $user)
+    {
+        return $this->showEntries('all', $user, $request->query->get('page', 1));
     }
 
     /**
@@ -141,6 +154,10 @@ class RssController extends Controller
 
             case 'unread':
                 $qb = $repository->getBuilderForUnreadByUser($user->getId());
+                break;
+
+            case 'all':
+                $qb = $repository->getBuilderForAllByUser($user->getId());
                 break;
 
             default:

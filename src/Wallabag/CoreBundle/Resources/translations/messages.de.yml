@@ -93,6 +93,7 @@ config:
             unread: 'Ungelesene'
             starred: 'Favoriten'
             archive: 'Archivierte'
+            # all: 'All'
         rss_limit: 'Anzahl der Einträge pro Feed'
     form_user:
         two_factor_description: "Wenn du die Zwei-Faktor-Authentifizierung aktivierst, erhältst du eine E-Mail mit einem Code bei jeder nicht vertrauenswürdigen Verbindung"

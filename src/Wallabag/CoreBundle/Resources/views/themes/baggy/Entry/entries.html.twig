@@ -1,5 +1,12 @@
 {% extends "WallabagCoreBundle::layout.html.twig" %}
 
+{% block head %}
+    {{ parent() }}
+    {% if tag is defined and app.user.config.rssToken %}
+        <link rel="alternate" type="application/rss+xml" href="{{ path('tag_rss', {'username': app.user.username, 'token': app.user.config.rssToken, 'slug': tag.slug}) }}" />
+    {% endif %}
+{% endblock %}
+
 {% block title %}
     {% set filter = '' %}
     {% if tag is defined %}
@@ -12,12 +19,15 @@
 {% endblock %}
 
 {% block content %}
-
+    {% set currentRoute = app.request.attributes.get('_route') %}
     {% set listMode = app.user.config.listMode %}
     <div class="results">
         <div class="nb-results">{{ 'entry.list.number_on_the_page'|transchoice(entries.count) }}</div>
         <div class="pagination">
             <a href="{{ path('switch_view_mode') }}"><i class="listMode-btn material-icons md-24">{% if listMode == 0 %}list{% else %}view_module{% endif %}</i></a>
+            {% if app.user.config.rssToken %}
+                {% include "@WallabagCore/themes/common/Entry/_rss_link.html.twig" %}
+            {% endif %}
             <i class="btn-clickable download-btn material-icons md-24 js-export-action">file_download</i>
             <i class="btn-clickable filter-btn material-icons md-24 js-filters-action">filter_list</i>
             {% if entries.getNbPages > 1 %}
@@ -76,7 +86,6 @@
 
     <!-- Export -->
     <aside id="download-form">
-    {% set currentRoute = app.request.attributes.get('_route') %}
     {% set currentTag = '' %}
     {% if tag is defined %}
         {% set currentTag = tag %}

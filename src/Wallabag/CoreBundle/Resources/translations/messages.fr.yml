@@ -88,11 +88,12 @@ config:
         no_token: "Aucun jeton généré"
         token_create: "Créez votre jeton"
         token_reset: "Réinitialisez votre jeton"
-        rss_links: "Adresse de vos flux RSS"
+        rss_links: "Adresses de vos flux RSS"
         rss_link:
-            unread: "non lus"
-            starred: "favoris"
-            archive: "lus"
+            unread: "Non lus"
+            starred: "Favoris"
+            archive: "Lus"
+            all: "Tous"
         rss_limit: "Nombre d’articles dans le flux"
     form_user:
         two_factor_description: "Activer l’authentification double-facteur veut dire que vous allez recevoir un code par courriel à chaque nouvelle connexion non approuvée."

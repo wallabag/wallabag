@@ -88,11 +88,12 @@ config:
         no_token: 'Pas cap de geton generat'
         token_create: 'Creatz vòstre geton'
         token_reset: 'Reïnicializatz vòstre geton'
-        rss_links: 'URL de vòstres fluxes RSS'
+        rss_links: 'URLs de vòstres fluxes RSS'
         rss_link:
-            unread: 'pas legits'
-            starred: 'favorits'
-            archive: 'legits'
+            unread: 'Pas legits'
+            starred: 'Favorits'
+            archive: 'Legits'
+            # all: 'All'
         rss_limit: "Nombre d'articles dins un flux RSS"
     form_user:
         two_factor_description: "Activar l'autentificacion doble-factor vòl dire que recebretz un còdi per corrièl per cada novèla connexion pas aprovada."

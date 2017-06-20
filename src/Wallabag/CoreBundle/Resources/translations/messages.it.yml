@@ -90,9 +90,10 @@ config:
         token_reset: 'Rigenera il tuo token'
         rss_links: 'Collegamenti RSS'
         rss_link:
-            unread: 'non letti'
-            starred: 'preferiti'
-            archive: 'archiviati'
+            unread: 'Non letti'
+            starred: 'Preferiti'
+            archive: 'Archiviati'
+            # all: 'All'
         rss_limit: 'Numero di elementi nel feed'
     form_user:
         two_factor_description: "Abilitando l'\autenticazione a due fattori riceverai una e-mail con un codice per ogni nuova connesione non verificata"

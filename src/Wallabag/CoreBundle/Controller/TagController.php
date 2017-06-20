@@ -144,7 +144,7 @@ class TagController extends Controller
             'form' => null,
             'entries' => $entries,
             'currentPage' => $page,
-            'tag' => $tag->getSlug(),
+            'tag' => $tag,
         ]);
     }
 }

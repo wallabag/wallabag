@@ -90,9 +90,10 @@ config:
         token_reset: 'Resetează-ți token-ul'
         rss_links: 'Link-uri RSS'
         rss_link:
-            unread: 'unread'
-            starred: 'starred'
-            archive: 'archived'
+            unread: 'Unread'
+            starred: 'Starred'
+            archive: 'Archived'
+            # all: 'All'
         rss_limit: 'Limită RSS'
     form_user:
         # two_factor_description: "Enabling two factor authentication means you'll receive an email with a code on every new untrusted connexion"

@@ -1,9 +1,16 @@
 {% extends "WallabagCoreBundle::layout.html.twig" %}
 
+{% block head %}
+    {{ parent() }}
+    {% if tag is defined and app.user.config.rssToken %}
+        <link rel="alternate" type="application/rss+xml" href="{{ path('tag_rss', {'username': app.user.username, 'token': app.user.config.rssToken, 'slug': tag.slug}) }}" />
+    {% endif %}
+{% endblock %}
+
 {% block title %}
     {% set filter = '' %}
     {% if tag is defined %}
-        {% set filter = tag %}
+        {% set filter = tag.slug %}
     {% endif %}
     {% if searchTerm is defined and searchTerm is not empty %}
         {% set filter = searchTerm %}
@@ -13,10 +20,14 @@
 
 {% block content %}
     {% set listMode = app.user.config.listMode %}
+    {% set currentRoute = app.request.attributes.get('_route') %}
     <div class="results clearfix">
         <div class="nb-results left">
             {{ 'entry.list.number_on_the_page'|transchoice(entries.count) }}
             <a href="{{ path('switch_view_mode') }}"><i class="material-icons">{% if listMode == 0 %}view_list{% else %}view_module{% endif %}</i></a>
+            {% if app.user.config.rssToken %}
+                {% include "@WallabagCore/themes/common/Entry/_rss_link.html.twig" %}
+            {% endif %}
         </div>
         {% if entries.getNbPages > 1 %}
             {{ pagerfanta(entries, 'twitter_bootstrap_translated', {'proximity': 1}) }}
@@ -46,10 +57,9 @@
 
     <!-- Export -->
     <div id="export" class="side-nav right-aligned">
-    {% set currentRoute = app.request.attributes.get('_route') %}
     {% set currentTag = '' %}
     {% if tag is defined %}
-        {% set currentTag = tag %}
+        {% set currentTag = tag.slug %}
     {% endif %}
     {% if currentRoute == 'homepage' %}
         {% set currentRoute = 'unread' %}
