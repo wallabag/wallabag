@@ -76,6 +76,7 @@ config:
             redirect_current_page: 'Zur aktuellen Seite'
         pocket_consumer_key_label: Consumer-Key für Pocket, um Inhalte zu importieren
         android_configuration: Konfiguriere deine Android Application
+        # android_instruction: "Touch here to prefill your Android application"
         help_theme: "wallabag ist anpassbar. Du kannst dein bevorzugtes Theme hier auswählen."
         help_items_per_page: "Du kannst die Nummer von Artikeln pro Seite anpassen."
         help_reading_speed: "wallabag berechnet eine Lesezeit pro Artikel. Hier kannst du definieren, ob du ein schneller oder langsamer Leser bist. wallabag wird die Lesezeiten danach neu berechnen."

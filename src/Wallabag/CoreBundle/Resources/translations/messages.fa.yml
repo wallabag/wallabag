@@ -77,6 +77,7 @@ config:
         pocket_consumer_key_label: کلید کاربری Pocket برای درون‌ریزی مطالب
         # android_configuration: Configure your Android application
         # help_theme: "wallabag is customizable. You can choose your prefered theme here."
+        # android_instruction: "Touch here to prefill your Android application"
         # help_items_per_page: "You can change the number of articles displayed on each page."
         # help_reading_speed: "wallabag calculates a reading time for each article. You can define here, thanks to this list, if you are a fast or a slow reader. wallabag will recalculate the reading time for each article."
         # help_language: "You can change the language of wallabag interface."
