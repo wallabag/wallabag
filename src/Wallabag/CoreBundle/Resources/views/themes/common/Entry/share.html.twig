@@ -1,32 +1,6 @@
 <html>
     <head>
         <title>{{ entry.title|e|raw }}</title>
-        <style>
-            body {
-                margin: 10px;
-                font-family: 'Roboto',Verdana,Geneva,sans-serif;
-                font-size: 16px;
-                color: #000;
-            }
-            header {
-                text-align: center;
-            }
-
-            header h1 {
-                font-size: 1.3em;
-            }
-
-            a,
-            a:hover,
-            a:visited {
-                color: #000;
-            }
-
-            article {
-                margin: 0 auto;
-                width: 900px;
-            }
-        </style>
         <meta property="og:title" content="{{ entry.title|e|raw }}" />
         <meta property="og:type" content="article" />
         <meta property="og:url" content="{{ app.request.uri }}" />
