@@ -206,7 +206,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('http://1.1.1.1', $entry->getUrl());
         $this->assertEquals('this is my title', $entry->getTitle());
         $this->assertContains('this is my content', $entry->getContent());
-        $this->assertEmpty($entry->getPreviewPicture());
+        $this->assertNull($entry->getPreviewPicture());
         $this->assertEquals('text/html', $entry->getMimetype());
         $this->assertEquals('fr', $entry->getLanguage());
         $this->assertEquals('200', $entry->getHttpStatus());
@@ -252,7 +252,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('this is my title', $entry->getTitle());
         $this->assertContains('this is my content', $entry->getContent());
         $this->assertEquals('text/html', $entry->getMimetype());
-        $this->assertEmpty($entry->getLanguage());
+        $this->assertNull($entry->getLanguage());
         $this->assertEquals('200', $entry->getHttpStatus());
         $this->assertEquals(4.0, $entry->getReadingTime());
         $this->assertEquals('1.1.1.1', $entry->getDomainName());
@@ -300,7 +300,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('http://1.1.1.1', $entry->getUrl());
         $this->assertEquals('this is my title', $entry->getTitle());
         $this->assertContains('this is my content', $entry->getContent());
-        $this->assertEmpty($entry->getPreviewPicture());
+        $this->assertNull($entry->getPreviewPicture());
         $this->assertEquals('text/html', $entry->getMimetype());
         $this->assertEquals('fr', $entry->getLanguage());
         $this->assertEquals('200', $entry->getHttpStatus());
