@@ -77,7 +77,7 @@ config:
             redirect_current_page: 'do bieżącej strony'
         pocket_consumer_key_label: 'Klucz klienta Pocket do importu zawartości'
         android_configuration: Skonfiguruj swoją androidową aplikację
-        # android_instruction: "Touch here to prefill your Android application"
+        android_instruction: "Dotknij tutaj, aby wstępnie uzupełnij androidową aplikację"
         help_theme: "Dopasuj wallabag do swoich potrzeb. Tutaj możesz wybrać preferowany przez ciebie motyw."
         help_items_per_page: "Możesz zmienić ilość artykułów wyświetlanych na każdej stronie."
         help_reading_speed: "wallabag oblicza czas czytania każdego artykułu. Dzięki tej liście możesz określić swoje tempo. Wallabag przeliczy ponownie czas potrzebny, na przeczytanie każdego z artykułów."
@@ -190,8 +190,8 @@ entry:
         unread_label: 'Nieprzeczytane'
         preview_picture_label: 'Posiada podgląd obrazu'
         preview_picture_help: 'Podgląd obrazu'
-        # is_public_label: 'Has a public link'
-        # is_public_help: 'Public link'
+        is_public_label: 'Posiada publiczny link'
+        is_public_help: 'Publiczny link'
         language_label: 'Język'
         http_status_label: 'Status HTTP'
         reading_time:
