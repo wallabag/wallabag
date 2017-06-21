@@ -17,3 +17,31 @@ In version 2.2, only the administrator could put his credentials in a config fil
 | Le Monde Diplomatique | 2.3 |
 | Mediapart | 2.2 |
 | Next INpact | 2.2 |
+
+## Enable paywall authentication
+
+In internal settings, as a wallabag administrator, in the **Article** section, enable authentication for websites with paywall (with the value `1`).
+
+![Enable paywall authentication](../../../img/user/paywall_auth.png)
+
+## Manage your site credentials
+
+Once enable, you'll see a new item in the left menu: **Site Credentials**.
+
+Click on it to go to the management of your site credentials. You'll be able to add many login / password.
+
+> **[info] Information**
+>
+> These information will only be accessible by **YOU** and no other users on the wallabag instance.
+
+## Security
+
+Login and password you'll set will be encrypted in the database which means the database administrator won't be able to read your credentials. _However_, the server administrator might have access (if it retrieves the encryption key and then manually decode your credentials).
+
+If you need more technical information, we are using [that scenario](https://github.com/defuse/php-encryption/blob/master/docs/Tutorial.md#scenario-1-keep-data-secret-from-the-database-administrator) to protect your information.
+
+## Paywall availability
+
+If a website with a paywall isn't available you can try to build a config for it.
+
+See the [developer section](../../developer/paywall.md) about that.

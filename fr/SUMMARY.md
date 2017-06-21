@@ -59,3 +59,4 @@
 * [Front-End](developer/front-end.md)
 * [Suite de tests](developer/testsuite.md)
 * [Traduire](developer/translate.md)
+* [Paywall](developer/paywall.md)

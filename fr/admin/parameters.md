@@ -7,9 +7,9 @@ app/config/parameters.yml. Soyez sur que le votre respecte celui-ci. Si
 vous ne savez pas quelle valeur vous devez mettre, laissez celle par
 défaut.
 
-{% hint style='danger' %}
-Pour appliquer les changements dans `parameters.yml`, vous devez vider le cache en supprimant tout ce qui se trouve dans `var/cache` avec cette commande : `bin/console cache:clear -e=prod`.
-{% endhint %}
+> **[danger] Information**
+>
+> Pour appliquer les changements dans `parameters.yml`, vous devez vider le cache en supprimant tout ce qui se trouve dans `var/cache` avec cette commande : `bin/console cache:clear -e=prod`.
 
 ```yml
 parameters:

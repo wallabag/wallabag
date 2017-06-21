@@ -4,8 +4,8 @@
       "toggle-chapters",
       "page-toc",
       "-sharing",
-      "hints",
-      "versions"
+      "versions",
+      "alerts"
     ],
     "pluginsConfig": {
         "edit-link": {
