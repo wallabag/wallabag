@@ -6,7 +6,7 @@ use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 
 class RssControllerTest extends WallabagCoreTestCase
 {
-    public function validateDom($xml, $type, $nb = null)
+    public function validateDom($xml, $type, $urlPagination, $nb = null)
     {
         $doc = new \DOMDocument();
         $doc->loadXML($xml);
@@ -23,7 +23,7 @@ class RssControllerTest extends WallabagCoreTestCase
         $this->assertEquals(1, $xpath->query('/rss/channel')->length);
 
         $this->assertEquals(1, $xpath->query('/rss/channel/title')->length);
-        $this->assertEquals('wallabag — '.$type.' feed', $xpath->query('/rss/channel/title')->item(0)->nodeValue);
+        $this->assertEquals('wallabag - '.$type.' feed', $xpath->query('/rss/channel/title')->item(0)->nodeValue);
 
         $this->assertEquals(1, $xpath->query('/rss/channel/pubDate')->length);
 
@@ -34,10 +34,10 @@ class RssControllerTest extends WallabagCoreTestCase
         $this->assertEquals('wallabag '.$type.' elements', $xpath->query('/rss/channel/description')->item(0)->nodeValue);
 
         $this->assertEquals(1, $xpath->query('/rss/channel/link[@rel="self"]')->length);
-        $this->assertContains($type.'.xml', $xpath->query('/rss/channel/link[@rel="self"]')->item(0)->getAttribute('href'));
+        $this->assertContains($urlPagination.'.xml', $xpath->query('/rss/channel/link[@rel="self"]')->item(0)->getAttribute('href'));
 
         $this->assertEquals(1, $xpath->query('/rss/channel/link[@rel="last"]')->length);
-        $this->assertContains($type.'.xml?page=', $xpath->query('/rss/channel/link[@rel="last"]')->item(0)->getAttribute('href'));
+        $this->assertContains($urlPagination.'.xml?page=', $xpath->query('/rss/channel/link[@rel="last"]')->item(0)->getAttribute('href'));
 
         foreach ($xpath->query('//item') as $item) {
             $this->assertEquals(1, $xpath->query('title', $item)->length);
@@ -94,7 +94,7 @@ class RssControllerTest extends WallabagCoreTestCase
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
-        $this->validateDom($client->getResponse()->getContent(), 'unread', 2);
+        $this->validateDom($client->getResponse()->getContent(), 'unread', 'unread', 2);
     }
 
     public function testStarred()
@@ -116,7 +116,7 @@ class RssControllerTest extends WallabagCoreTestCase
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode(), 1);
 
-        $this->validateDom($client->getResponse()->getContent(), 'starred');
+        $this->validateDom($client->getResponse()->getContent(), 'starred', 'starred');
     }
 
     public function testArchives()
@@ -138,7 +138,7 @@ class RssControllerTest extends WallabagCoreTestCase
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
-        $this->validateDom($client->getResponse()->getContent(), 'archive');
+        $this->validateDom($client->getResponse()->getContent(), 'archive', 'archive');
     }
 
     public function testPagination()
@@ -159,13 +159,38 @@ class RssControllerTest extends WallabagCoreTestCase
 
         $client->request('GET', '/admin/SUPERTOKEN/unread.xml');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->validateDom($client->getResponse()->getContent(), 'unread');
+        $this->validateDom($client->getResponse()->getContent(), 'unread', 'unread');
 
         $client->request('GET', '/admin/SUPERTOKEN/unread.xml?page=2');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->validateDom($client->getResponse()->getContent(), 'unread');
+        $this->validateDom($client->getResponse()->getContent(), 'unread', 'unread');
 
         $client->request('GET', '/admin/SUPERTOKEN/unread.xml?page=3000');
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+    }
+
+    public function testTags()
+    {
+        $client = $this->getClient();
+        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+        $user = $em
+            ->getRepository('WallabagUserBundle:User')
+            ->findOneByUsername('admin');
+
+        $config = $user->getConfig();
+        $config->setRssToken('SUPERTOKEN');
+        $config->setRssLimit(null);
+        $em->persist($config);
+        $em->flush();
+
+        $client = $this->getClient();
+        $client->request('GET', '/admin/SUPERTOKEN/tags/foo-bar.xml');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $this->validateDom($client->getResponse()->getContent(), 'tag (foo bar)', 'tags/foo-bar');
+
+        $client->request('GET', '/admin/SUPERTOKEN/tags/foo-bar.xml?page=3000');
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }
 }

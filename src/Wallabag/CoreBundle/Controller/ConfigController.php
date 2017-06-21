@@ -152,8 +152,7 @@ class ConfigController extends Controller
             ],
             'twofactor_auth' => $this->getParameter('twofactor_auth'),
             'wallabag_url' => $this->getParameter('domain_name'),
-            'enabled_users' => $this->getDoctrine()
-                ->getRepository('WallabagUserBundle:User')
+            'enabled_users' => $this->get('wallabag_user.user_repository')
                 ->getSumEnabledUsers(),
         ]);
     }
@@ -257,9 +256,7 @@ class ConfigController extends Controller
                 // manually remove tags to avoid orphan tag
                 $this->removeAllTagsByUserId($this->getUser()->getId());
 
-                $this->getDoctrine()
-                    ->getRepository('WallabagCoreBundle:Entry')
-                    ->removeAllByUserId($this->getUser()->getId());
+                $this->get('wallabag_core.entry_repository')->removeAllByUserId($this->getUser()->getId());
                 break;
             case 'archived':
                 if ($this->get('doctrine')->getConnection()->getDatabasePlatform() instanceof \Doctrine\DBAL\Platforms\SqlitePlatform) {
@@ -269,9 +266,7 @@ class ConfigController extends Controller
                 // manually remove tags to avoid orphan tag
                 $this->removeTagsForArchivedByUserId($this->getUser()->getId());
 
-                $this->getDoctrine()
-                    ->getRepository('WallabagCoreBundle:Entry')
-                    ->removeArchivedByUserId($this->getUser()->getId());
+                $this->get('wallabag_core.entry_repository')->removeArchivedByUserId($this->getUser()->getId());
                 break;
         }
 
@@ -295,8 +290,7 @@ class ConfigController extends Controller
             return;
         }
 
-        $this->getDoctrine()
-            ->getRepository('WallabagCoreBundle:Entry')
+        $this->get('wallabag_core.entry_repository')
             ->removeTags($userId, $tags);
 
         // cleanup orphan tags
@@ -318,7 +312,7 @@ class ConfigController extends Controller
      */
     private function removeAllTagsByUserId($userId)
     {
-        $tags = $this->getDoctrine()->getRepository('WallabagCoreBundle:Tag')->findAllTags($userId);
+        $tags = $this->get('wallabag_core.tag_repository')->findAllTags($userId);
         $this->removeAllTagsByStatusAndUserId($tags, $userId);
     }
 
@@ -329,7 +323,7 @@ class ConfigController extends Controller
      */
     private function removeTagsForArchivedByUserId($userId)
     {
-        $tags = $this->getDoctrine()->getRepository('WallabagCoreBundle:Tag')->findForArchivedArticlesByUser($userId);
+        $tags = $this->get('wallabag_core.tag_repository')->findForArchivedArticlesByUser($userId);
         $this->removeAllTagsByStatusAndUserId($tags, $userId);
     }
 
@@ -393,8 +387,7 @@ class ConfigController extends Controller
      */
     public function deleteAccountAction(Request $request)
     {
-        $enabledUsers = $this->getDoctrine()
-            ->getRepository('WallabagUserBundle:User')
+        $enabledUsers = $this->get('wallabag_user.user_repository')
             ->getSumEnabledUsers();
 
         if ($enabledUsers <= 1) {

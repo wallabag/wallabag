@@ -61,6 +61,7 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: /(unread|starred|archive).xml$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: /tags/(.*).xml$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/share, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/settings, roles: ROLE_SUPER_ADMIN }
         - { path: ^/annotations, roles: ROLE_USER }

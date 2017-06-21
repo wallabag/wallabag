@@ -93,6 +93,7 @@ config:
             unread: 'sin leer'
             starred: 'favoritos'
             archive: 'archivados'
+            # all: 'All'
         rss_limit: 'Límite de artículos en feed RSS'
     form_user:
         two_factor_description: "Con la autenticación en dos pasos recibirá código por e-mail en cada nueva conexión que no sea de confianza."

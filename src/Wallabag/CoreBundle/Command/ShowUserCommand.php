@@ -67,7 +67,7 @@ class ShowUserCommand extends ContainerAwareCommand
      */
     private function getUser($username)
     {
-        return $this->getDoctrine()->getRepository('WallabagUserBundle:User')->findOneByUserName($username);
+        return $this->getContainer()->get('wallabag_user.user_repository')->findOneByUserName($username);
     }
 
     private function getDoctrine()

@@ -90,9 +90,10 @@ config:
         token_reset: 'Zresetuj swojego tokena'
         rss_links: 'RSS links'
         rss_link:
-            unread: 'nieprzeczytane'
-            starred: 'oznaczone gwiazdką'
-            archive: 'archiwum'
+            unread: 'Nieprzeczytane'
+            starred: 'Oznaczone gwiazdką'
+            archive: 'Archiwum'
+            # all: 'All'
         rss_limit: 'Link do RSS'
     form_user:
         two_factor_description: "Włączenie autoryzacji dwuetapowej oznacza, że będziesz otrzymywał maile z kodem przy każdym nowym, niezaufanym połączeniu"

@@ -90,9 +90,10 @@ config:
         token_reset: 'Gerar novamente seu token'
         rss_links: 'Links RSS'
         rss_link:
-            unread: 'não lido'
-            starred: 'destacado'
-            archive: 'arquivado'
+            unread: 'Não lido'
+            starred: 'Destacado'
+            archive: 'Arquivado'
+            # all: 'All'
         rss_limit: 'Número de itens no feed'
     form_user:
         two_factor_description: 'Habilitar autenticação de dois passos significa que você receberá um e-mail com um código a cada nova conexão desconhecida.'
