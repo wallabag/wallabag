@@ -14,11 +14,12 @@
         <meta name="twitter:site" content="@wallabagapp" />
         <meta name="twitter:title" content="{{ entry.title|e|raw }}" />
         <meta name="twitter:description" content="{{ entry.content|striptags|slice(0, 300)|raw }}&hellip;" />
-        {% if not app.debug %}
+        {% if app.debug %}
+            <script src="{{ asset('bundles/wallabagcore/public.dev.js') }}"></script>
+        {% else %}
             <link rel="stylesheet" href="{{ asset('bundles/wallabagcore/public.css') }}">
         {% endif %}
 
-        <script src="{{ asset('bundles/wallabagcore/public' ~ (app.debug ? '.dev' : '') ~ '.js') }}"></script>
     </head>
     <body>
         <header>
