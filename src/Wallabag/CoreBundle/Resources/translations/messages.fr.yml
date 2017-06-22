@@ -165,7 +165,7 @@ entry:
         unread: "Articles non lus"
         starred: "Articles favoris"
         archived: "Articles lus"
-        filtered: "Articles filtrés"
+        filtered: "Tous les articles"
         filtered_tags: "Articles filtrés par tags :"
         filtered_search: "Articles filtrés par recherche :"
         untagged: "Article sans tag"

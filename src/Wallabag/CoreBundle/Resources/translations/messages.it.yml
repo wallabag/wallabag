@@ -165,7 +165,7 @@ entry:
         unread: 'Contenuti non letti'
         starred: 'Contenuti preferiti'
         archived: 'Contenuti archiviati'
-        filtered: 'Contenuti filtrati'
+        # filtered: 'All entries'
         # filtered_tags: 'Filtered by tags:'
         # filtered_search: 'Filtered by search:'
         # untagged: 'Untagged entries'

@@ -165,7 +165,7 @@ entry:
         unread: 'Artículos no leídos'
         starred: 'Artículos favoritos'
         archived: 'Artículos archivados'
-        filtered: 'Artículos filtrados'
+        # filtered: 'All entries'
         filtered_tags: 'Filtrado por etiquetas:'
         filtered_search: 'Filtrado por búsqueda:'
         untagged: 'Artículos sin etiquetas'

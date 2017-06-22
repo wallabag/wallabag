@@ -165,7 +165,7 @@ entry:
         unread: 'مقاله‌های خوانده‌نشده'
         starred: 'مقاله‌های برگزیده'
         archived: 'مقاله‌های بایگانی‌شده'
-        filtered: 'مقاله‌های فیلترشده'
+        # filtered: 'All entries'
         # filtered_tags: 'Filtered by tags:'
         # filtered_search: 'Filtered by search:'
         # untagged: 'Untagged entries'

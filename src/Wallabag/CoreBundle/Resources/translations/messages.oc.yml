@@ -165,7 +165,7 @@ entry:
         unread: 'Articles pas legits'
         starred: 'Articles favorits'
         archived: 'Articles legits'
-        filtered: 'Articles filtrats'
+        # filtered: 'All entries'
         filtered_tags: 'Articles filtrats per etiquetas :'
         filtered_search: 'Articles filtrats per recèrca :'
         untagged: 'Articles sens etiqueta'
