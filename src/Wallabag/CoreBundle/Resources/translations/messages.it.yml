@@ -245,7 +245,7 @@ entry:
         url_label: 'Url'
         save_label: 'Salva'
     public:
-        # shared_by_wallabag: "This article has been shared by <a href='%wallabag_instance%'>wallabag</a>"
+        shared_by_wallabag: "Questo articolo è stato condiviso da %username% con <a href='%wallabag_instance%'>wallabag</a>"
     confirm:
         delete: "Vuoi veramente rimuovere quell'articolo?"
         delete_tag: "Vuoi veramente rimuovere quell'etichetta da quell'articolo?"

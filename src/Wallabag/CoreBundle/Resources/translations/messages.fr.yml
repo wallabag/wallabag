@@ -245,7 +245,7 @@ entry:
         url_label: "Adresse"
         save_label: "Enregistrer"
     public:
-        shared_by_wallabag: "Cet article a été partagé par <a href=\"%wallabag_instance%\">wallabag</a>"
+        shared_by_wallabag: "Cet article a été partagé par %username% avec <a href=\"%wallabag_instance%\">wallabag</a>"
     confirm:
         delete: "Voulez-vous vraiment supprimer cet article ?"
         delete_tag: "Voulez-vous vraiment supprimer ce tag de cet article ?"

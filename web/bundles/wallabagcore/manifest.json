@@ -67,5 +67,8 @@
   "img/unmark-icon--black.png": "img/unmark-icon--black.png",
   "material.css": "material.css",
   "material.css.map": "material.css.map",
-  "material.js": "material.js"
+  "material.js": "material.js",
+  "public.css": "public.css",
+  "public.css.map": "public.css.map",
+  "public.js": "public.js"
 }

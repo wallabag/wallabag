@@ -1,13 +1,12 @@
 const webpackMerge = require('webpack-merge');
 const webpack = require('webpack');
-const path = require('path');
 const commonConfig = require('./common.js');
 
 module.exports = function () {
   return webpackMerge(commonConfig(), {
     devtool: 'eval-source-map',
     output: {
-      filename: '[name].dev.js'
+      filename: '[name].dev.js',
     },
 
     devServer: {
@@ -34,9 +33,9 @@ module.exports = function () {
           use: {
             loader: 'babel-loader',
             options: {
-              presets: ['env']
-            }
-          }
+              presets: ['env'],
+            },
+          },
         },
         {
           test: /\.(s)?css$/,
@@ -46,17 +45,17 @@ module.exports = function () {
               loader: 'css-loader',
               options: {
                 importLoaders: 1,
-              }
+              },
             },
-          'postcss-loader',
-          'sass-loader'
-          ]
+            'postcss-loader',
+            'sass-loader',
+          ],
         },
         {
           test: /\.(jpg|png|gif|svg|eot|ttf|woff|woff2)$/,
-          use: 'url-loader'
+          use: 'url-loader',
         },
-      ]
+      ],
     },
-  })
+  });
 };

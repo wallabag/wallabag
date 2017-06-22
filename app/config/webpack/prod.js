@@ -5,34 +5,34 @@ const ManifestPlugin = require('webpack-manifest-plugin');
 
 const commonConfig = require('./common.js');
 
-module.exports = function() {
+module.exports = function () {
   return webpackMerge(commonConfig(), {
     output: {
-      filename: '[name].js'
+      filename: '[name].js',
     },
     devtool: 'source-map',
     plugins: [
       new webpack.DefinePlugin({
         'process.env': {
-          'NODE_ENV': JSON.stringify('production')
-        }
+          'NODE_ENV': JSON.stringify('production'),
+        },
       }),
       new webpack.optimize.UglifyJsPlugin({
         beautify: false,
         mangle: {
           screw_ie8: true,
-          keep_fnames: true
+          keep_fnames: true,
         },
         compress: {
           screw_ie8: true,
-          warnings: false
+          warnings: false,
         },
-        comments: false
+        comments: false,
       }),
       new ExtractTextPlugin('[name].css'),
       new ManifestPlugin({
         fileName: 'manifest.json',
-      })
+      }),
     ],
     module: {
       rules: [
@@ -48,9 +48,9 @@ module.exports = function() {
           use: {
             loader: 'babel-loader',
             options: {
-              presets: ['env']
-            }
-          }
+              presets: ['env'],
+            },
+          },
         },
         {
           test: /\.(s)?css$/,
@@ -63,17 +63,17 @@ module.exports = function() {
                   importLoaders: 1,
                   minimize: {
                     discardComments: {
-                      removeAll: true
+                      removeAll: true,
                     },
                     core: true,
-                    minifyFontValues: true
-                  }
-                }
+                    minifyFontValues: true,
+                  },
+                },
               },
               'postcss-loader',
-              'sass-loader'
-            ]
-          })
+              'sass-loader',
+            ],
+          }),
         },
         {
           test: /\.(jpg|png|gif|svg)$/,
@@ -81,8 +81,8 @@ module.exports = function() {
             loader: 'file-loader',
             options: {
               name: 'img/[name].[ext]',
-            }
-          }
+            },
+          },
         },
         {
           test: /\.(eot|ttf|woff|woff2)$/,
@@ -90,10 +90,10 @@ module.exports = function() {
             loader: 'file-loader',
             options: {
               name: 'fonts/[name].[ext]',
-            }
-          }
-        }
-      ]
+            },
+          },
+        },
+      ],
     },
-  })
+  });
 };
