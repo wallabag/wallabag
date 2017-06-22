@@ -34,7 +34,7 @@ class DeveloperControllerTest extends WallabagCoreTestCase
         $this->assertContains('My app', $alert[0]);
     }
 
-    public function testCreateToken()
+    public function testCreateTokenFromPasswords()
     {
         $client = $this->getClient();
         $apiClient = $this->createApiClientForUser('admin');
@@ -54,6 +54,26 @@ class DeveloperControllerTest extends WallabagCoreTestCase
         $this->assertArrayHasKey('expires_in', $data);
         $this->assertArrayHasKey('token_type', $data);
         $this->assertArrayHasKey('refresh_token', $data);
+    }
+
+    public function testCreateTokenFromClientCredentialsOnly()
+    {
+        $client = $this->getClient();
+        $apiClient = $this->createApiClientForUser('admin', ['client_credentials']);
+
+        $client->request('POST', '/oauth/v2/token', [
+            'grant_type' => 'client_credentials',
+            'client_id' => $apiClient->getPublicId(),
+            'client_secret' => $apiClient->getSecret(),
+        ]);
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $data = json_decode($client->getResponse()->getContent(), true);
+        $this->assertArrayHasKey('access_token', $data);
+        $this->assertArrayHasKey('expires_in', $data);
+        $this->assertArrayHasKey('token_type', $data);
+        // Client Credentials created-clients have no refresh tokens
     }
 
     public function testListingClient()
@@ -114,9 +134,10 @@ class DeveloperControllerTest extends WallabagCoreTestCase
     /**
      * @param string $username
      *
+     * @param array $grantTypes
      * @return Client
      */
-    private function createApiClientForUser($username)
+    private function createApiClientForUser($username, $grantTypes = ['password'])
     {
         $client = $this->getClient();
         $em = $client->getContainer()->get('doctrine.orm.entity_manager');
@@ -124,7 +145,7 @@ class DeveloperControllerTest extends WallabagCoreTestCase
         $user = $userManager->findUserBy(array('username' => $username));
         $apiClient = new Client($user);
         $apiClient->setName('My app');
-        $apiClient->setAllowedGrantTypes(['password']);
+        $apiClient->setAllowedGrantTypes($grantTypes);
         $em->persist($apiClient);
         $em->flush();
 
