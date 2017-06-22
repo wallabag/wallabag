@@ -44,16 +44,12 @@ Content-Type: application/json
 Date: Tue, 05 Apr 2016 08:44:33 GMT
 Host: localhost:8000
 Pragma: no-cache
-X-Debug-Token: 19c8e0
-X-Debug-Token-Link: /_profiler/19c8e0
-X-Powered-By: PHP/7.0.4
 
 {
-    "access_token": "ZGJmNTA2MDdmYTdmNWFiZjcxOWY3MWYyYzkyZDdlNWIzOTU4NWY3NTU1MDFjOTdhMTk2MGI3YjY1ZmI2NzM5MA",
+    "access_token": "YjM4ZWVmNDJiNmIxNTEzOTU5ZGFhNjU0NjMyOGZmOTdhOTgxZTM1NDFkZTQzY2FhM2Q3MjhlYmU5Y2YwZDFjMw",
     "expires_in": 3600,
-    "refresh_token": "OTNlZGE5OTJjNWQwYzc2NDI5ZGE5MDg3ZTNjNmNkYTY0ZWZhZDVhNDBkZTc1ZTNiMmQ0MjQ0OThlNTFjNTQyMQ",
-    "scope": null,
-    "token_type": "bearer"
+    "token_type": "bearer",
+    "scope": null
 }
 ```
 
@@ -86,9 +82,6 @@ Content-Type: application/json
 Date: Tue, 05 Apr 2016 08:44:33 GMT
 Host: localhost:8000
 Pragma: no-cache
-X-Debug-Token: 19c8e0
-X-Debug-Token-Link: /_profiler/19c8e0
-X-Powered-By: PHP/7.0.4
 
 {
     "access_token": "ZGJmNTA2MDdmYTdmNWFiZjcxOWY3MWYyYzkyZDdlNWIzOTU4NWY3NTU1MDFjOTdhMTk2MGI3YjY1ZmI2NzM5MA",

@@ -46,11 +46,10 @@ Host: localhost:8000
 Pragma: no-cache
 
 {
-    "access_token": "ZGJmNTA2MDdmYTdmNWFiZjcxOWY3MWYyYzkyZDdlNWIzOTU4NWY3NTU1MDFjOTdhMTk2MGI3YjY1ZmI2NzM5MA",
+    "access_token": "YjM4ZWVmNDJiNmIxNTEzOTU5ZGFhNjU0NjMyOGZmOTdhOTgxZTM1NDFkZTQzY2FhM2Q3MjhlYmU5Y2YwZDFjMw",
     "expires_in": 3600,
-    "refresh_token": "OTNlZGE5OTJjNWQwYzc2NDI5ZGE5MDg3ZTNjNmNkYTY0ZWZhZDVhNDBkZTc1ZTNiMmQ0MjQ0OThlNTFjNTQyMQ",
-    "scope": null,
-    "token_type": "bearer"
+    "token_type": "bearer",
+    "scope": null
 }
 ```
 
