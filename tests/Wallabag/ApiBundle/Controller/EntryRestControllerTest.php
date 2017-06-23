@@ -759,18 +759,51 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertEquals(true, $content['is_starred']);
     }
 
-    public function testGetEntriesExists()
+    public function dataForEntriesExistWithUrl()
     {
-        $this->client->request('GET', '/api/entries/exists?url=http://0.0.0.0/entry2');
+        return [
+            'with_id' => [
+                'url' => '/api/entries/exists?url=http://0.0.0.0/entry2&return_id=1',
+                'expectedValue' => 2,
+            ],
+            'without_id' => [
+                'url' => '/api/entries/exists?url=http://0.0.0.0/entry2',
+                'expectedValue' => true,
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider dataForEntriesExistWithUrl
+     */
+    public function testGetEntriesExists($url, $expectedValue)
+    {
+        $this->client->request('GET', $url);
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
-        $this->assertEquals(2, $content['exists']);
+        $this->assertSame($expectedValue, $content['exists']);
     }
 
     public function testGetEntriesExistsWithManyUrls()
+    {
+        $url1 = 'http://0.0.0.0/entry2';
+        $url2 = 'http://0.0.0.0/entry10';
+        $this->client->request('GET', '/api/entries/exists?urls[]='.$url1.'&urls[]='.$url2.'&return_id=1');
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertArrayHasKey($url1, $content);
+        $this->assertArrayHasKey($url2, $content);
+        $this->assertSame(2, $content[$url1]);
+        $this->assertSame(false, $content[$url2]);
+    }
+
+    public function testGetEntriesExistsWithManyUrlsReturnBool()
     {
         $url1 = 'http://0.0.0.0/entry2';
         $url2 = 'http://0.0.0.0/entry10';
@@ -782,7 +815,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         $this->assertArrayHasKey($url1, $content);
         $this->assertArrayHasKey($url2, $content);
-        $this->assertEquals(2, $content[$url1]);
+        $this->assertEquals(true, $content[$url1]);
         $this->assertEquals(false, $content[$url2]);
     }
 

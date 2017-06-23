@@ -18,9 +18,12 @@ class EntryRestController extends WallabagRestController
 {
     /**
      * Check if an entry exist by url.
+     * Return ID if entry(ies) exist (and if you give the return_id parameter).
+     * Otherwise it returns false.
      *
      * @ApiDoc(
      *       parameters={
+     *          {"name"="return_id", "dataType"="string", "required"=false, "format"="1 or 0", "description"="Set 1 if you want to retrieve ID in case entry(ies) exists, 0 by default"},
      *          {"name"="url", "dataType"="string", "required"=true, "format"="An url", "description"="Url to check if it exists"},
      *          {"name"="urls", "dataType"="string", "required"=false, "format"="An array of urls (?urls[]=http...&urls[]=http...)", "description"="Urls (as an array) to check if it exists"}
      *       }
@@ -32,6 +35,7 @@ class EntryRestController extends WallabagRestController
     {
         $this->validateAuthentication();
 
+        $returnId = (null === $request->query->get('return_id')) ? 0 : (bool) $request->query->get('return_id');
         $urls = $request->query->get('urls', []);
 
         // handle multiple urls first
@@ -42,7 +46,7 @@ class EntryRestController extends WallabagRestController
                     ->getRepository('WallabagCoreBundle:Entry')
                     ->findByUrlAndUserId($url, $this->getUser()->getId());
 
-                $results[$url] = $res instanceof Entry ? $res->getId() : false;
+                $results[$url] = $res instanceof Entry ? ($returnId ? $res->getId() : true) : false;
             }
 
             return $this->sendResponse($results);
@@ -59,7 +63,7 @@ class EntryRestController extends WallabagRestController
             ->getRepository('WallabagCoreBundle:Entry')
             ->findByUrlAndUserId($url, $this->getUser()->getId());
 
-        $exists = $res instanceof Entry ? $res->getId() : false;
+        $exists = $res instanceof Entry ? ($returnId ? $res->getId() : true) : false;
 
         return $this->sendResponse(['exists' => $exists]);
     }
