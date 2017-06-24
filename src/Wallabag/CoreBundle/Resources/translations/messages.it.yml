@@ -32,6 +32,7 @@ menu:
         save_link: 'Salva collegamento'
         back_to_unread: 'Torna ai contenuti non letti'
         users_management: 'Gestione utenti'
+        site_credentials: 'Credenziali sito'
     top:
         add_new_entry: 'Aggiungi un nuovo contenuto'
         search: 'Cerca'
@@ -76,6 +77,7 @@ config:
             redirect_current_page: 'Alla pagina corrente'
         pocket_consumer_key_label: Consumer key per Pocket usata per per importare i contenuti
         android_configuration: Configura la tua applicazione Android
+        android_instruction: "Tocca qui per preriempire la tua applicazione Android"
         help_theme: "wallabag è personalizzabile. Qui puoi scegliere il tuo tema preferito."
         help_items_per_page: "Puoi cambiare il numero di articoli mostrati su ogni pagina."
         help_reading_speed: "wallabag calcola un tempo di lettura per ogni articolo. Puoi definire qui, grazie a questa lista, se sei un lettore lento o veloce. wallabag ricalcolerà la velocità di lettura per ogni articolo."
@@ -186,7 +188,7 @@ entry:
         preview_picture_label: "Ha un'immagine di anteprima"
         preview_picture_help: 'Immagine di anteprima'
         language_label: 'Lingua'
-        http_status_label: 'StatoHTTP'
+        http_status_label: 'Stato HTTP'
         reading_time:
             label: 'Tempo di lettura in minuti'
             from: 'da'
@@ -269,7 +271,7 @@ about:
         description: 'Un grazie ai collaboratori di wallabag web application'
     third_party:
         description: 'Ecco un elenco delle librerie di terze parti utilizzate in wallabag (con le rispettive licenze):'
-        package: 'Package'
+        package: 'Pacchetto'
         license: 'Licenza'
 
 howto:
@@ -295,7 +297,7 @@ howto:
         ios: 'sullo store di iTunes'
         windows: 'sullo store di Microsoft'
     bookmarklet:
-        description: 'Trascinando e rilasciando questo link sulla barra dei bookmark del tuo browser:'
+        description: 'Trascinando e rilasciando questo link sulla barra dei preferiti del tuo browser:'
     shortcuts:
         page_description: Ecco le scorciatoie disponibili su wallabag.
         shortcut: Scorciatoia
@@ -333,7 +335,7 @@ quickstart:
         paragraph_2: 'Seguici!'
     configure:
         title: "Configura l'applicazione"
-        description: 'Per avere un'applicazione che ti soddisfi, dai un'occhiata alla configurazione di wallabag.'
+        description: "Per avere un'applicazione che ti soddisfi, dai un'occhiata alla configurazione di wallabag."
         language: 'Cambia lingua e design'
         rss: 'Abilita i feed RSS'
         tagging_rules: 'Scrivi delle regole per taggare automaticamente i contenuti'
@@ -551,7 +553,7 @@ flashes:
             failed: 'Importazione fallita, riprova.'
             failed_on_file: 'Errore durante la processazione dei dati da importare. Verifica il tuo file di import.'
             summary: 'Sommario di importazione: %imported% importati, %skipped% già salvati.'
-            summary_with_queue: 'Riassunto dell'importazione: %queued% messo in coda.'
+            summary_with_queue: "Riassunto dell'importazione: %queued% messo in coda."
         error:
             redis_enabled_not_installed: Redis è abilitato per gestire l'importazione asincrona, ma sembra che  <u>non possiamo connetterci ad esso</u>. Controlla la tua configurazione di Redis.
             rabbit_enabled_not_installed: RabbitMQ è abilitato per gestire l'importazione asincrona, ma sembra che  <u>non possiamo connetterci ad esso</u>. Controlla la tua configurazione di RabbitMQ.
