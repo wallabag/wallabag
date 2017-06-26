@@ -62,7 +62,7 @@ Allow from All
 by
 
 ```apache
-Require All granted
+Require all granted
 ```
 
 After reloading or restarting Apache, you should now be able to access
