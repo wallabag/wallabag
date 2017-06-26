@@ -69,7 +69,7 @@ server {
         try_files $uri /app.php$is_args$args;
     }
     location ~ ^/app\.php(/|$) {
-        fastcgi_pass unix:/var/run/php5-fpm.sock;
+        fastcgi_pass unix:/run/php/php7.0-fpm.sock;
         fastcgi_split_path_info ^(.+\.php)(/.*)$;
         include fastcgi_params;
         # When you are using symlinks to link the document root to the
