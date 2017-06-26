@@ -62,7 +62,7 @@ Allow from All
 par
 
 ```apache
-Require All granted
+Require all granted
 ```
 
 Après que vous ayez rechargé/redémarré Apache, vous devriez pouvoir
