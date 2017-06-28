@@ -38,7 +38,7 @@ class EntryRestController extends WallabagRestController
     {
         $this->validateAuthentication();
 
-        $returnId = (null === $request->query->get('return_id')) ? 0 : (bool) $request->query->get('return_id');
+        $returnId = (null === $request->query->get('return_id')) ? false : (bool) $request->query->get('return_id');
         $urls = $request->query->get('urls', []);
 
         // handle multiple urls first
@@ -720,6 +720,6 @@ class EntryRestController extends WallabagRestController
             return $entry instanceof Entry ? $entry->getId() : null;
         }
 
-        return $entry instanceof Entry ? true : false;
+        return $entry instanceof Entry;
     }
 }
