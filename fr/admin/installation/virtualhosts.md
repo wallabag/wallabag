@@ -84,9 +84,9 @@ server {
         try_files $uri /app.php$is_args$args;
     }
     location ~ ^/app\.php(/|$) {
+        # Si vous utilisez PHP 5 remplacez
+        # /run/php/php7.0 par /var/run/php5
         fastcgi_pass unix:/run/php/php7.0-fpm.sock;
-        # Si vous avez php6, pour quelque raison, remplacez
-        # /run/php/php7.0-fpm.sock par /var/run/php5-fpm.sock
         fastcgi_split_path_info ^(.+\.php)(/.*)$;
         include fastcgi_params;
         # When you are using symlinks to link the document root to the
