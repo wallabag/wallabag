@@ -4,6 +4,7 @@ namespace Wallabag\ApiBundle\Controller;
 
 use Hateoas\Configuration\Route;
 use Hateoas\Representation\Factory\PagerfantaFactory;
+use JMS\Serializer\SerializationContext;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,6 +21,8 @@ class EntryRestController extends WallabagRestController
      * Check if an entry exist by url.
      * Return ID if entry(ies) exist (and if you give the return_id parameter).
      * Otherwise it returns false.
+     *
+     * @todo Remove that `return_id` in the next major release
      *
      * @ApiDoc(
      *       parameters={
@@ -46,7 +49,7 @@ class EntryRestController extends WallabagRestController
                     ->getRepository('WallabagCoreBundle:Entry')
                     ->findByUrlAndUserId($url, $this->getUser()->getId());
 
-                $results[$url] = $res instanceof Entry ? ($returnId ? $res->getId() : true) : false;
+                $results[$url] = $this->returnExistInformation($res, $returnId);
             }
 
             return $this->sendResponse($results);
@@ -63,7 +66,7 @@ class EntryRestController extends WallabagRestController
             ->getRepository('WallabagCoreBundle:Entry')
             ->findByUrlAndUserId($url, $this->getUser()->getId());
 
-        $exists = $res instanceof Entry ? ($returnId ? $res->getId() : true) : false;
+        $exists = $this->returnExistInformation($res, $returnId);
 
         return $this->sendResponse(['exists' => $exists]);
     }
@@ -621,7 +624,11 @@ class EntryRestController extends WallabagRestController
      */
     private function sendResponse($data)
     {
-        $json = $this->get('serializer')->serialize($data, 'json');
+        // https://github.com/schmittjoh/JMSSerializerBundle/issues/293
+        $context = new SerializationContext();
+        $context->setSerializeNull(true);
+
+        $json = $this->get('serializer')->serialize($data, 'json', $context);
 
         return (new JsonResponse())->setJson($json);
     }
@@ -697,5 +704,22 @@ class EntryRestController extends WallabagRestController
 
         // entry saved, dispatch event about it!
         $this->get('event_dispatcher')->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
+    }
+
+    /**
+     * Return information about the entry if it exist and depending on the id or not.
+     *
+     * @param Entry|null $entry
+     * @param bool       $returnId
+     *
+     * @return bool|int
+     */
+    private function returnExistInformation($entry, $returnId)
+    {
+        if ($returnId) {
+            return $entry instanceof Entry ? $entry->getId() : null;
+        }
+
+        return $entry instanceof Entry ? true : false;
     }
 }

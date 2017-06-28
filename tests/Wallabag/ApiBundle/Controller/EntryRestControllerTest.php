@@ -800,7 +800,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertArrayHasKey($url1, $content);
         $this->assertArrayHasKey($url2, $content);
         $this->assertSame(2, $content[$url1]);
-        $this->assertSame(false, $content[$url2]);
+        $this->assertNull($content[$url2]);
     }
 
     public function testGetEntriesExistsWithManyUrlsReturnBool()
@@ -815,8 +815,8 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         $this->assertArrayHasKey($url1, $content);
         $this->assertArrayHasKey($url2, $content);
-        $this->assertEquals(true, $content[$url1]);
-        $this->assertEquals(false, $content[$url2]);
+        $this->assertTrue($content[$url1]);
+        $this->assertFalse($content[$url2]);
     }
 
     public function testGetEntriesExistsWhichDoesNotExists()
