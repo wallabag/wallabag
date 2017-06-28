@@ -35,7 +35,8 @@ Repeat until you have something ok.
 Then you can submit a pull request to
 [<https://github.com/fivefilters/ftr-site-config>](https://github.com/fivefilters/ftr-site-config)
 which is the global repo for siteconfig files.
-If you can't wait for update from fivefilters - you can place your config file into directory `wallabag/vendor/j0k3r/graby-site-config`.
+If you can't wait for update from fivefilters - you can place your config file into directory 
+`vendor/j0k3r/graby-site-config` in your wallabag main directory.
 
 ## How can I try to re-fetch this article?
 
