@@ -37,6 +37,7 @@ Then you can submit a pull request to
 which is the global repo for siteconfig files.
 If you can't wait for update from fivefilters - you can place your config file into directory 
 `vendor/j0k3r/graby-site-config` in your wallabag main directory.
+Keep in mind these changes will be erased if you update your wallabag.
 
 ## How can I try to re-fetch this article?
 
