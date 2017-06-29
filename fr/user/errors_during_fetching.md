@@ -42,6 +42,9 @@ Répétez cette opération jusqu'à avoir quelque chose qui vous convienne.
 Ensuite, vous pouvez créer une pull request ici
 [<https://github.com/fivefilters/ftr-site-config>](https://github.com/fivefilters/ftr-site-config),
 qui est le projet principal pour stocker les fichiers de configuration.
+Si vous ne voulez pas attendre que votre PR soit mergée, vous pouvez mettre vos fichiers de config dans le répertoire `vendor/j0k3r/graby-site-config` de votre wallabag. Mais ces modifications seront supprimées quand vous mettez à jour wallabag.
+
+
 
 Comment puis-je réessayer de récupérer le contenu ?
 ---------------------------------------------------
