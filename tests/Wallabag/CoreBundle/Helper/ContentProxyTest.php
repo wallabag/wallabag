@@ -221,12 +221,9 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
             ->method('tag');
 
         $validator = $this->getValidator();
-        $validator->expects($this->exactly(2))
+        $validator->expects($this->once())
             ->method('validate')
-            ->will($this->onConsecutiveCalls(
-                new ConstraintViolationList([new ConstraintViolation('oops', 'oops', [], 'oops', 'language', 'dontexist')]),
-                new ConstraintViolationList()
-            ));
+            ->willReturn(new ConstraintViolationList([new ConstraintViolation('oops', 'oops', [], 'oops', 'language', 'dontexist')]));
 
         $graby = $this->getMockBuilder('Graby\Graby')
             ->setMethods(['fetchContent'])

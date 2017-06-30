@@ -593,6 +593,11 @@ class Entry
         $tag->addEntry($this);
     }
 
+    /**
+     * Remove the given tag from the entry (if the tag is associated).
+     *
+     * @param Tag $tag
+     */
     public function removeTag(Tag $tag)
     {
         if (!$this->tags->contains($tag)) {
@@ -601,6 +606,17 @@ class Entry
 
         $this->tags->removeElement($tag);
         $tag->removeEntry($this);
+    }
+
+    /**
+     * Remove all assigned tags from the entry.
+     */
+    public function removeAllTags()
+    {
+        foreach ($this->tags as $tag) {
+            $this->tags->removeElement($tag);
+            $tag->removeEntry($this);
+        }
     }
 
     /**
