@@ -127,10 +127,7 @@ class ContentProxy
 
         // if content is an image, define it as a preview too
         if (!empty($content['content_type']) && in_array($this->mimeGuesser->guess($content['content_type']), ['jpeg', 'jpg', 'gif', 'png'], true)) {
-            $this->validateAndSetPreviewPicture(
-                $entry,
-                $content['url']
-            );
+            $this->updatePreviewPicture($entry, $content['url']);
         }
 
         if (!empty($content['content_type'])) {

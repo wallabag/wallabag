@@ -495,6 +495,41 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('1.1.1.1', $entry->getDomainName());
     }
 
+    public function testWithImageAsContent()
+    {
+        $tagger = $this->getTaggerMock();
+        $tagger->expects($this->once())
+            ->method('tag');
+
+        $graby = $this->getMockBuilder('Graby\Graby')
+            ->setMethods(['fetchContent'])
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $graby->expects($this->any())
+            ->method('fetchContent')
+            ->willReturn([
+                'html' => '<p><img src="http://1.1.1.1/image.jpg" /></p>',
+                'title' => 'this is my title',
+                'url' => 'http://1.1.1.1/image.jpg',
+                'content_type' => 'image/jpeg',
+                'status' => '200',
+                'open_graph' => [],
+            ]);
+
+        $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $entry = new Entry(new User());
+        $proxy->updateEntry($entry, 'http://0.0.0.0');
+
+        $this->assertEquals('http://1.1.1.1/image.jpg', $entry->getUrl());
+        $this->assertEquals('this is my title', $entry->getTitle());
+        $this->assertContains('http://1.1.1.1/image.jpg', $entry->getContent());
+        $this->assertSame('http://1.1.1.1/image.jpg', $entry->getPreviewPicture());
+        $this->assertEquals('image/jpeg', $entry->getMimetype());
+        $this->assertEquals('200', $entry->getHttpStatus());
+        $this->assertEquals('1.1.1.1', $entry->getDomainName());
+    }
+
     private function getTaggerMock()
     {
         return $this->getMockBuilder(RuleBasedTagger::class)
