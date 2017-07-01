@@ -2,17 +2,17 @@
 
 namespace Wallabag\ImportBundle\Import;
 
+use Doctrine\ORM\EntityManager;
+use OldSound\RabbitMqBundle\RabbitMq\ProducerInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
-use Doctrine\ORM\EntityManager;
-use Wallabag\CoreBundle\Helper\ContentProxy;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
+use Wallabag\CoreBundle\Event\EntrySavedEvent;
+use Wallabag\CoreBundle\Helper\ContentProxy;
 use Wallabag\CoreBundle\Helper\TagsAssigner;
 use Wallabag\UserBundle\Entity\User;
-use OldSound\RabbitMqBundle\RabbitMq\ProducerInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Wallabag\CoreBundle\Event\EntrySavedEvent;
 
 abstract class AbstractImport implements ImportInterface
 {
@@ -96,6 +96,27 @@ abstract class AbstractImport implements ImportInterface
 
         return $this;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSummary()
+    {
+        return [
+            'skipped' => $this->skippedEntries,
+            'imported' => $this->importedEntries,
+            'queued' => $this->queuedEntries,
+        ];
+    }
+
+    /**
+     * Parse one entry.
+     *
+     * @param array $importedEntry
+     *
+     * @return Entry
+     */
+    abstract public function parseEntry(array $importedEntry);
 
     /**
      * Fetch content from the ContentProxy (using graby).
@@ -194,27 +215,6 @@ abstract class AbstractImport implements ImportInterface
             $this->producer->publish(json_encode($importedEntry));
         }
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getSummary()
-    {
-        return [
-            'skipped' => $this->skippedEntries,
-            'imported' => $this->importedEntries,
-            'queued' => $this->queuedEntries,
-        ];
-    }
-
-    /**
-     * Parse one entry.
-     *
-     * @param array $importedEntry
-     *
-     * @return Entry
-     */
-    abstract public function parseEntry(array $importedEntry);
 
     /**
      * Set current imported entry to archived / read.

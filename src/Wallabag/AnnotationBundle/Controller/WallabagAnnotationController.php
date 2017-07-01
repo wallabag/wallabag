@@ -3,9 +3,9 @@
 namespace Wallabag\AnnotationBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Wallabag\AnnotationBundle\Entity\Annotation;
 use Wallabag\AnnotationBundle\Form\EditAnnotationType;
 use Wallabag\AnnotationBundle\Form\NewAnnotationType;

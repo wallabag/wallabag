@@ -12,10 +12,10 @@ class WallabagRestControllerTest extends WallabagApiTestCase
         $client = static::createClient();
         $client->request('GET', '/api/version');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
 
         $content = json_decode($client->getResponse()->getContent(), true);
 
-        $this->assertEquals($client->getContainer()->getParameter('wallabag_core.version'), $content);
+        $this->assertSame($client->getContainer()->getParameter('wallabag_core.version'), $content);
     }
 }

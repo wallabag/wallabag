@@ -2,10 +2,10 @@
 
 namespace Wallabag\CoreBundle\Helper;
 
-use Psr\Log\LoggerInterface;
-use Defuse\Crypto\Key;
 use Defuse\Crypto\Crypto;
 use Defuse\Crypto\Exception\WrongKeyOrModifiedCiphertextException;
+use Defuse\Crypto\Key;
+use Psr\Log\LoggerInterface;
 
 /**
  * This is a proxy to crypt and decrypt password used by SiteCredential entity.
@@ -39,7 +39,7 @@ class CryptoProxy
      */
     public function crypt($secretValue)
     {
-        $this->logger->debug('Crypto: crypting value: '.$this->mask($secretValue));
+        $this->logger->debug('Crypto: crypting value: ' . $this->mask($secretValue));
 
         return Crypto::encrypt($secretValue, $this->loadKey());
     }
@@ -53,12 +53,12 @@ class CryptoProxy
      */
     public function decrypt($cryptedValue)
     {
-        $this->logger->debug('Crypto: decrypting value: '.$this->mask($cryptedValue));
+        $this->logger->debug('Crypto: decrypting value: ' . $this->mask($cryptedValue));
 
         try {
             return Crypto::decrypt($cryptedValue, $this->loadKey());
         } catch (WrongKeyOrModifiedCiphertextException $e) {
-            throw new \RuntimeException('Decrypt fail: '.$e->getMessage());
+            throw new \RuntimeException('Decrypt fail: ' . $e->getMessage());
         }
     }
 
@@ -81,6 +81,6 @@ class CryptoProxy
      */
     private function mask($value)
     {
-        return strlen($value) > 0 ? $value[0].'*****'.$value[strlen($value) - 1] : 'Empty value';
+        return strlen($value) > 0 ? $value[0] . '*****' . $value[strlen($value) - 1] : 'Empty value';
     }
 }

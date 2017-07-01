@@ -29,7 +29,7 @@ class Producer implements ProducerInterface
      * @param string $routingKey           NOT USED
      * @param array  $additionalProperties NOT USED
      */
-    public function publish($msgBody, $routingKey = '', $additionalProperties = array())
+    public function publish($msgBody, $routingKey = '', $additionalProperties = [])
     {
         $this->queue->sendJob($msgBody);
     }

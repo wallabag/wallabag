@@ -22,11 +22,6 @@ class Version20161128084725 extends AbstractMigration implements ContainerAwareI
         $this->container = $container;
     }
 
-    private function getTable($tableName)
-    {
-        return $this->container->getParameter('database_table_prefix').$tableName;
-    }
-
     /**
      * @param Schema $schema
      */
@@ -45,5 +40,10 @@ class Version20161128084725 extends AbstractMigration implements ContainerAwareI
     {
         $configTable = $schema->getTable($this->getTable('config'));
         $configTable->dropColumn('list_mode');
+    }
+
+    private function getTable($tableName)
+    {
+        return $this->container->getParameter('database_table_prefix') . $tableName;
     }
 }

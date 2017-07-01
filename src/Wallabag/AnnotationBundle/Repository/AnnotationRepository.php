@@ -10,22 +10,6 @@ use Doctrine\ORM\EntityRepository;
 class AnnotationRepository extends EntityRepository
 {
     /**
-     * Return a query builder to used by other getBuilderFor* method.
-     *
-     * @param int $userId
-     *
-     * @return QueryBuilder
-     */
-    private function getBuilderByUser($userId)
-    {
-        return $this->createQueryBuilder('a')
-            ->leftJoin('a.user', 'u')
-            ->andWhere('u.id = :userId')->setParameter('userId', $userId)
-            ->orderBy('a.id', 'desc')
-        ;
-    }
-
-    /**
      * Retrieves all annotations for a user.
      *
      * @param int $userId
@@ -138,5 +122,21 @@ class AnnotationRepository extends EntityRepository
             ->andWhere('e.isArchived = true')
             ->getQuery()
             ->getResult();
+    }
+
+    /**
+     * Return a query builder to used by other getBuilderFor* method.
+     *
+     * @param int $userId
+     *
+     * @return QueryBuilder
+     */
+    private function getBuilderByUser($userId)
+    {
+        return $this->createQueryBuilder('a')
+            ->leftJoin('a.user', 'u')
+            ->andWhere('u.id = :userId')->setParameter('userId', $userId)
+            ->orderBy('a.id', 'desc')
+        ;
     }
 }

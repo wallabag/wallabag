@@ -6,10 +6,10 @@ use FOS\UserBundle\Event\UserEvent;
 use FOS\UserBundle\FOSUserEvents;
 use JMS\Serializer\SerializationContext;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Wallabag\UserBundle\Entity\User;
+use Symfony\Component\HttpFoundation\Request;
 use Wallabag\ApiBundle\Entity\Client;
+use Wallabag\UserBundle\Entity\User;
 
 class UserRestController extends WallabagRestController
 {

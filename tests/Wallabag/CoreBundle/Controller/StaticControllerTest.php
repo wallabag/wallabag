@@ -13,7 +13,7 @@ class StaticControllerTest extends WallabagCoreTestCase
 
         $client->request('GET', '/about');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
     public function testHowto()
@@ -23,6 +23,6 @@ class StaticControllerTest extends WallabagCoreTestCase
 
         $client->request('GET', '/howto');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 }

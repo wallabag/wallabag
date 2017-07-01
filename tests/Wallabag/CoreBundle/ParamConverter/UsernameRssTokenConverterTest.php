@@ -212,6 +212,6 @@ class UsernameRssTokenConverterTest extends \PHPUnit_Framework_TestCase
 
         $converter->apply($request, $params);
 
-        $this->assertEquals($user, $request->attributes->get('user'));
+        $this->assertSame($user, $request->attributes->get('user'));
     }
 }

@@ -55,10 +55,10 @@ class ExportController extends Controller
     public function downloadEntriesAction(Request $request, $format, $category)
     {
         $method = ucfirst($category);
-        $methodBuilder = 'getBuilderFor'.$method.'ByUser';
+        $methodBuilder = 'getBuilderFor' . $method . 'ByUser';
         $repository = $this->get('wallabag_core.entry_repository');
 
-        if ($category == 'tag_entries') {
+        if ($category === 'tag_entries') {
             $tag = $this->get('wallabag_core.tag_repository')->findOneBySlug($request->query->get('tag'));
 
             $entries = $repository->findAllByTagId(

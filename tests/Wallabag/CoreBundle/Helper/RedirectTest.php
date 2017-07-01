@@ -2,11 +2,11 @@
 
 namespace Tests\Wallabag\CoreBundle\Helper;
 
-use Wallabag\CoreBundle\Entity\Config;
-use Wallabag\UserBundle\Entity\User;
-use Wallabag\CoreBundle\Helper\Redirect;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Wallabag\CoreBundle\Entity\Config;
+use Wallabag\CoreBundle\Helper\Redirect;
+use Wallabag\UserBundle\Entity\User;
 
 class RedirectTest extends \PHPUnit_Framework_TestCase
 {
@@ -56,21 +56,21 @@ class RedirectTest extends \PHPUnit_Framework_TestCase
     {
         $redirectUrl = $this->redirect->to(null, 'fallback');
 
-        $this->assertEquals('fallback', $redirectUrl);
+        $this->assertSame('fallback', $redirectUrl);
     }
 
     public function testRedirectToNullWithoutFallback()
     {
         $redirectUrl = $this->redirect->to(null);
 
-        $this->assertEquals($this->routerMock->generate('homepage'), $redirectUrl);
+        $this->assertSame($this->routerMock->generate('homepage'), $redirectUrl);
     }
 
     public function testRedirectToValidUrl()
     {
         $redirectUrl = $this->redirect->to('/unread/list');
 
-        $this->assertEquals('/unread/list', $redirectUrl);
+        $this->assertSame('/unread/list', $redirectUrl);
     }
 
     public function testWithNotLoggedUser()
@@ -78,7 +78,7 @@ class RedirectTest extends \PHPUnit_Framework_TestCase
         $redirect = new Redirect($this->routerMock, new TokenStorage());
         $redirectUrl = $redirect->to('/unread/list');
 
-        $this->assertEquals('/unread/list', $redirectUrl);
+        $this->assertSame('/unread/list', $redirectUrl);
     }
 
     public function testUserForRedirectToHomepage()
@@ -87,7 +87,7 @@ class RedirectTest extends \PHPUnit_Framework_TestCase
 
         $redirectUrl = $this->redirect->to('/unread/list');
 
-        $this->assertEquals($this->routerMock->generate('homepage'), $redirectUrl);
+        $this->assertSame($this->routerMock->generate('homepage'), $redirectUrl);
     }
 
     public function testUserForRedirectWithIgnoreActionMarkAsRead()
@@ -96,7 +96,7 @@ class RedirectTest extends \PHPUnit_Framework_TestCase
 
         $redirectUrl = $this->redirect->to('/unread/list', '', true);
 
-        $this->assertEquals('/unread/list', $redirectUrl);
+        $this->assertSame('/unread/list', $redirectUrl);
     }
 
     public function testUserForRedirectNullWithFallbackWithIgnoreActionMarkAsRead()
@@ -105,6 +105,6 @@ class RedirectTest extends \PHPUnit_Framework_TestCase
 
         $redirectUrl = $this->redirect->to(null, 'fallback', true);
 
-        $this->assertEquals('fallback', $redirectUrl);
+        $this->assertSame('fallback', $redirectUrl);
     }
 }

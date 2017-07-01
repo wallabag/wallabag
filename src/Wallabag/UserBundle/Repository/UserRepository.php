@@ -63,6 +63,6 @@ class UserRepository extends EntityRepository
     public function getQueryBuilderForSearch($term)
     {
         return $this->createQueryBuilder('u')
-            ->andWhere('lower(u.username) LIKE lower(:term) OR lower(u.email) LIKE lower(:term) OR lower(u.name) LIKE lower(:term)')->setParameter('term', '%'.$term.'%');
+            ->andWhere('lower(u.username) LIKE lower(:term) OR lower(u.email) LIKE lower(:term) OR lower(u.name) LIKE lower(:term)')->setParameter('term', '%' . $term . '%');
     }
 }

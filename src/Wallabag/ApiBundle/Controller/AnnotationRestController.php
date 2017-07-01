@@ -4,10 +4,10 @@ namespace Wallabag\ApiBundle\Controller;
 
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Wallabag\CoreBundle\Entity\Entry;
+use Symfony\Component\HttpFoundation\Request;
 use Wallabag\AnnotationBundle\Entity\Annotation;
+use Wallabag\CoreBundle\Entity\Entry;
 
 class AnnotationRestController extends WallabagRestController
 {

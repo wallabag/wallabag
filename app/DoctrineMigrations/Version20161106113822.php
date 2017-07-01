@@ -22,11 +22,6 @@ class Version20161106113822 extends AbstractMigration implements ContainerAwareI
         $this->container = $container;
     }
 
-    private function getTable($tableName)
-    {
-        return $this->container->getParameter('database_table_prefix').$tableName;
-    }
-
     /**
      * @param Schema $schema
      */
@@ -52,5 +47,10 @@ class Version20161106113822 extends AbstractMigration implements ContainerAwareI
         $this->skipIf(!$configTable->hasColumn('action_mark_as_read'), 'It seems that you already played this migration.');
 
         $configTable->dropColumn('action_mark_as_read');
+    }
+
+    private function getTable($tableName)
+    {
+        return $this->container->getParameter('database_table_prefix') . $tableName;
     }
 }

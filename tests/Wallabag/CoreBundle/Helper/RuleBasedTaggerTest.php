@@ -182,7 +182,7 @@ class RuleBasedTaggerTest extends \PHPUnit_Framework_TestCase
             $tags = $entry->getTags();
 
             $this->assertCount(1, $tags);
-            $this->assertEquals('hey', $tags[0]->getLabel());
+            $this->assertSame('hey', $tags[0]->getLabel());
         }
     }
 

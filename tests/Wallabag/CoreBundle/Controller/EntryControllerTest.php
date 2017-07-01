@@ -33,7 +33,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $client->request('GET', '/new');
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertContains('login', $client->getResponse()->headers->get('location'));
     }
 
@@ -45,14 +45,14 @@ class EntryControllerTest extends WallabagCoreTestCase
         $client->request('GET', '/unread/list');
         $crawler = $client->followRedirect();
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertContains('quickstart.intro.title', $body[0]);
 
         // Test if quickstart is disabled when user has 1 entry
         $crawler = $client->request('GET', '/new');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
 
         $form = $crawler->filter('form[name=entry]')->form();
 
@@ -61,7 +61,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         ];
 
         $client->submit($form, $data);
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
         $client->followRedirect();
 
         $crawler = $client->request('GET', '/unread/list');
@@ -77,7 +77,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/new');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
 
         $this->assertCount(1, $crawler->filter('input[type=url]'));
         $this->assertCount(1, $crawler->filter('form[name=entry]'));
@@ -95,7 +95,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         // Good URL
         $client->request('GET', '/bookmarklet', ['url' => $this->url]);
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
         $client->followRedirect();
         $crawler = $client->request('GET', '/');
         $this->assertCount(5, $crawler->filter('div[class=entry]'));
@@ -116,15 +116,15 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/new');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
 
         $form = $crawler->filter('form[name=entry]')->form();
 
         $crawler = $client->submit($form);
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertCount(1, $alert = $crawler->filter('form ul li')->extract(['_text']));
-        $this->assertEquals('This value should not be blank.', $alert[0]);
+        $this->assertSame('This value should not be blank.', $alert[0]);
     }
 
     /**
@@ -137,7 +137,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/new');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
 
         $form = $crawler->filter('form[name=entry]')->form();
 
@@ -147,7 +147,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $client->submit($form, $data);
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
@@ -157,11 +157,11 @@ class EntryControllerTest extends WallabagCoreTestCase
         $author = $content->getPublishedBy();
 
         $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
-        $this->assertEquals($this->url, $content->getUrl());
+        $this->assertSame($this->url, $content->getUrl());
         $this->assertContains('Google', $content->getTitle());
-        $this->assertEquals('fr', $content->getLanguage());
-        $this->assertEquals('2015-03-28 15:37:39', $content->getPublishedAt()->format('Y-m-d H:i:s'));
-        $this->assertEquals('Morgane Tual', $author[0]);
+        $this->assertSame('fr', $content->getLanguage());
+        $this->assertSame('2015-03-28 15:37:39', $content->getPublishedAt()->format('Y-m-d H:i:s'));
+        $this->assertSame('Morgane Tual', $author[0]);
         $this->assertArrayHasKey('x-varnish1', $content->getHeaders());
     }
 
@@ -173,7 +173,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/new');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
 
         $form = $crawler->filter('form[name=entry]')->form();
 
@@ -183,7 +183,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $client->submit($form, $data);
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
@@ -191,10 +191,10 @@ class EntryControllerTest extends WallabagCoreTestCase
             ->findByUrlAndUserId($url, $this->getLoggedInUserId());
 
         $authors = $content->getPublishedBy();
-        $this->assertEquals('2017-04-05 19:26:13', $content->getPublishedAt()->format('Y-m-d H:i:s'));
-        $this->assertEquals('fr', $content->getLanguage());
-        $this->assertEquals('Raphaël Balenieri, correspondant à Pékin', $authors[0]);
-        $this->assertEquals('Frédéric Autran, correspondant à New York', $authors[1]);
+        $this->assertSame('2017-04-05 19:26:13', $content->getPublishedAt()->format('Y-m-d H:i:s'));
+        $this->assertSame('fr', $content->getLanguage());
+        $this->assertSame('Raphaël Balenieri, correspondant à Pékin', $authors[0]);
+        $this->assertSame('Frédéric Autran, correspondant à New York', $authors[1]);
     }
 
     public function testPostNewOkUrlExist()
@@ -210,7 +210,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/new');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
 
         $form = $crawler->filter('form[name=entry]')->form();
 
@@ -220,7 +220,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $client->submit($form, $data);
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertContains('/view/', $client->getResponse()->getTargetUrl());
     }
 
@@ -233,7 +233,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/new');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
 
         $form = $crawler->filter('form[name=entry]')->form();
 
@@ -245,7 +245,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/new');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
 
         $form = $crawler->filter('form[name=entry]')->form();
 
@@ -255,7 +255,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $client->submit($form, $data);
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertContains('/view/', $client->getResponse()->getTargetUrl());
     }
 
@@ -269,7 +269,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/new');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
 
         $form = $crawler->filter('form[name=entry]')->form();
 
@@ -279,7 +279,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $client->submit($form, $data);
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertContains('/', $client->getResponse()->getTargetUrl());
 
         $em = $client->getContainer()
@@ -291,7 +291,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $this->assertCount(2, $tags);
         $this->assertContains('wallabag', $tags);
-        $this->assertEquals('en', $entry->getLanguage());
+        $this->assertSame('en', $entry->getLanguage());
 
         $em->remove($entry);
         $em->flush();
@@ -300,7 +300,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         // related https://github.com/wallabag/wallabag/issues/2121
         $crawler = $client->request('GET', '/new');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
 
         $form = $crawler->filter('form[name=entry]')->form();
 
@@ -310,7 +310,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $client->submit($form, $data);
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertContains('/', $client->getResponse()->getTargetUrl());
 
         $entry = $em
@@ -333,7 +333,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $client->request('GET', '/archive/list');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
     public function testUntagged()
@@ -343,7 +343,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $client->request('GET', '/untagged/list');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
     public function testStarred()
@@ -353,7 +353,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $client->request('GET', '/starred/list');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
     public function testRangeException()
@@ -363,8 +363,8 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $client->request('GET', '/all/list/900');
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
-        $this->assertEquals('/all/list', $client->getResponse()->getTargetUrl());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+        $this->assertSame('/all/list', $client->getResponse()->getTargetUrl());
     }
 
     public function testView()
@@ -379,9 +379,9 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->getEntityManager()->persist($entry);
         $this->getEntityManager()->flush();
 
-        $crawler = $client->request('GET', '/view/'.$entry->getId());
+        $crawler = $client->request('GET', '/view/' . $entry->getId());
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertContains($entry->getTitle(), $body[0]);
     }
@@ -402,9 +402,9 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->getEntityManager()->flush();
         $this->getEntityManager()->clear();
 
-        $client->request('GET', '/reload/'.$entry->getId());
+        $client->request('GET', '/reload/' . $entry->getId());
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $entry = $this->getEntityManager()
             ->getRepository('WallabagCoreBundle:Entry')
@@ -423,9 +423,9 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->getEntityManager()->persist($entry);
         $this->getEntityManager()->flush();
 
-        $client->request('GET', '/reload/'.$entry->getId());
+        $client->request('GET', '/reload/' . $entry->getId());
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         // force EntityManager to clear previous entity
         // otherwise, retrieve the same entity will retrieve change from the previous request :0
@@ -434,7 +434,7 @@ class EntryControllerTest extends WallabagCoreTestCase
             ->getRepository('WallabagCoreBundle:Entry')
             ->find($entry->getId());
 
-        $this->assertNotEquals($client->getContainer()->getParameter('wallabag_core.fetching_error_message'), $newContent->getContent());
+        $this->assertNotSame($client->getContainer()->getParameter('wallabag_core.fetching_error_message'), $newContent->getContent());
     }
 
     public function testEdit()
@@ -447,9 +447,9 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->getEntityManager()->persist($entry);
         $this->getEntityManager()->flush();
 
-        $crawler = $client->request('GET', '/edit/'.$entry->getId());
+        $crawler = $client->request('GET', '/edit/' . $entry->getId());
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
 
         $this->assertCount(1, $crawler->filter('input[id=entry_title]'));
         $this->assertCount(1, $crawler->filter('button[id=entry_save]'));
@@ -465,9 +465,9 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->getEntityManager()->persist($entry);
         $this->getEntityManager()->flush();
 
-        $crawler = $client->request('GET', '/edit/'.$entry->getId());
+        $crawler = $client->request('GET', '/edit/' . $entry->getId());
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
 
         $form = $crawler->filter('button[type=submit]')->form();
 
@@ -477,7 +477,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $client->submit($form, $data);
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $crawler = $client->followRedirect();
 
@@ -496,16 +496,16 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->getEntityManager()->flush();
         $this->getEntityManager()->clear();
 
-        $client->request('GET', '/archive/'.$entry->getId());
+        $client->request('GET', '/archive/' . $entry->getId());
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $res = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
             ->find($entry->getId());
 
-        $this->assertEquals($res->isArchived(), true);
+        $this->assertSame($res->isArchived(), true);
     }
 
     public function testToggleStar()
@@ -519,16 +519,16 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->getEntityManager()->flush();
         $this->getEntityManager()->clear();
 
-        $client->request('GET', '/star/'.$entry->getId());
+        $client->request('GET', '/star/' . $entry->getId());
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $res = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
             ->findOneById($entry->getId());
 
-        $this->assertEquals($res->isStarred(), true);
+        $this->assertSame($res->isStarred(), true);
     }
 
     public function testDelete()
@@ -541,13 +541,13 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->getEntityManager()->persist($entry);
         $this->getEntityManager()->flush();
 
-        $client->request('GET', '/delete/'.$entry->getId());
+        $client->request('GET', '/delete/' . $entry->getId());
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
 
-        $client->request('GET', '/delete/'.$entry->getId());
+        $client->request('GET', '/delete/' . $entry->getId());
 
-        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
     }
 
     /**
@@ -583,14 +583,14 @@ class EntryControllerTest extends WallabagCoreTestCase
         $em->persist($content);
         $em->flush();
 
-        $client->request('GET', '/view/'.$content->getId());
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $client->request('GET', '/view/' . $content->getId());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
 
-        $client->request('GET', '/delete/'.$content->getId());
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $client->request('GET', '/delete/' . $content->getId());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $client->followRedirect();
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
     public function testViewOtherUserEntry()
@@ -603,9 +603,9 @@ class EntryControllerTest extends WallabagCoreTestCase
             ->getRepository('WallabagCoreBundle:Entry')
             ->findOneByUsernameAndNotArchived('bob');
 
-        $client->request('GET', '/view/'.$content->getId());
+        $client->request('GET', '/view/' . $content->getId());
 
-        $this->assertEquals(403, $client->getResponse()->getStatusCode());
+        $this->assertSame(403, $client->getResponse()->getStatusCode());
     }
 
     public function testFilterOnReadingTime()
@@ -793,7 +793,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $parameters = '?entry_filter%5BreadingTime%5D%5Bleft_number%5D=&entry_filter%5BreadingTime%5D%5Bright_number%5D=';
 
-        $client->request('GET', 'unread/list'.$parameters);
+        $client->request('GET', 'unread/list' . $parameters);
 
         $this->assertContains($parameters, $client->getResponse()->getContent());
 
@@ -934,16 +934,16 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->getEntityManager()->clear();
 
         // no uid
-        $client->request('GET', '/share/'.$content->getUid());
-        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+        $client->request('GET', '/share/' . $content->getUid());
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
 
         // generating the uid
-        $client->request('GET', '/share/'.$content->getId());
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $client->request('GET', '/share/' . $content->getId());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         // follow link with uid
         $crawler = $client->followRedirect();
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertContains('max-age=25200', $client->getResponse()->headers->get('cache-control'));
         $this->assertContains('public', $client->getResponse()->headers->get('cache-control'));
         $this->assertContains('s-maxage=25200', $client->getResponse()->headers->get('cache-control'));
@@ -955,19 +955,19 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         // sharing is now disabled
         $client->getContainer()->get('craue_config')->set('share_public', 0);
-        $client->request('GET', '/share/'.$content->getUid());
-        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+        $client->request('GET', '/share/' . $content->getUid());
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
 
-        $client->request('GET', '/view/'.$content->getId());
+        $client->request('GET', '/view/' . $content->getId());
         $this->assertContains('no-cache', $client->getResponse()->headers->get('cache-control'));
 
         // removing the share
-        $client->request('GET', '/share/delete/'.$content->getId());
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $client->request('GET', '/share/delete/' . $content->getId());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         // share is now disable
-        $client->request('GET', '/share/'.$content->getUid());
-        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+        $client->request('GET', '/share/' . $content->getUid());
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
     }
 
     public function testNewEntryWithDownloadImagesEnabled()
@@ -981,7 +981,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/new');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
 
         $form = $crawler->filter('form[name=entry]')->form();
 
@@ -991,7 +991,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $client->submit($form, $data);
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $em = $client->getContainer()
             ->get('doctrine.orm.entity_manager');
@@ -1001,7 +1001,7 @@ class EntryControllerTest extends WallabagCoreTestCase
             ->findByUrlAndUserId($url, $this->getLoggedInUserId());
 
         $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $entry);
-        $this->assertEquals($url, $entry->getUrl());
+        $this->assertSame($url, $entry->getUrl());
         $this->assertContains('Perpignan', $entry->getTitle());
         // instead of checking for the filename (which might change) check that the image is now local
         $this->assertContains('https://your-wallabag-url-instance.com/assets/images/', $entry->getContent());
@@ -1023,7 +1023,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/new');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
 
         $form = $crawler->filter('form[name=entry]')->form();
 
@@ -1033,16 +1033,16 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $client->submit($form, $data);
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
             ->findByUrlAndUserId($url, $this->getLoggedInUserId());
 
-        $client->request('GET', '/delete/'.$content->getId());
+        $client->request('GET', '/delete/' . $content->getId());
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $client->getContainer()->get('craue_config')->set('download_images_enabled', 0);
     }
@@ -1063,11 +1063,11 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $this->getEntityManager()->flush();
 
-        $client->request('GET', '/view/'.$entry->getId());
-        $client->request('GET', '/archive/'.$entry->getId());
+        $client->request('GET', '/view/' . $entry->getId());
+        $client->request('GET', '/archive/' . $entry->getId());
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
-        $this->assertEquals('/', $client->getResponse()->headers->get('location'));
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+        $this->assertSame('/', $client->getResponse()->headers->get('location'));
     }
 
     public function testRedirectToCurrentPage()
@@ -1086,11 +1086,11 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $this->getEntityManager()->flush();
 
-        $client->request('GET', '/view/'.$entry->getId());
-        $client->request('GET', '/archive/'.$entry->getId());
+        $client->request('GET', '/view/' . $entry->getId());
+        $client->request('GET', '/archive/' . $entry->getId());
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
-        $this->assertContains('/view/'.$entry->getId(), $client->getResponse()->headers->get('location'));
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+        $this->assertContains('/view/' . $entry->getId(), $client->getResponse()->headers->get('location'));
     }
 
     public function testFilterOnHttpStatus()
@@ -1213,7 +1213,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $crawler = $client->submit($form, $data);
 
         $this->assertCount(1, $crawler->filter('div[class=entry]'));
-        $client->request('GET', '/delete/'.$entry->getId());
+        $client->request('GET', '/delete/' . $entry->getId());
 
         // test on list of all articles
         $crawler = $client->request('GET', '/all/list');
@@ -1315,7 +1315,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/new');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
 
         $form = $crawler->filter('form[name=entry]')->form();
 
@@ -1325,7 +1325,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $client->submit($form, $data);
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
@@ -1333,8 +1333,8 @@ class EntryControllerTest extends WallabagCoreTestCase
             ->findByUrlAndUserId($url, $this->getLoggedInUserId());
 
         $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
-        $this->assertEquals($url, $content->getUrl());
-        $this->assertEquals($expectedLanguage, $content->getLanguage());
+        $this->assertSame($url, $content->getUrl());
+        $this->assertSame($expectedLanguage, $content->getLanguage());
     }
 
     /**
@@ -1362,7 +1362,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/new');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
 
         $form = $crawler->filter('form[name=entry]')->form();
 
@@ -1372,11 +1372,11 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $client->submit($form, $data);
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $crawler = $client->followRedirect();
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertContains('flashes.entry.notice.entry_saved', $crawler->filter('body')->extract(['_text'])[0]);
 
         $content = $em

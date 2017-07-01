@@ -25,11 +25,6 @@ class Version20170127093841 extends AbstractMigration implements ContainerAwareI
         $this->container = $container;
     }
 
-    private function getTable($tableName)
-    {
-        return $this->container->getParameter('database_table_prefix').$tableName;
-    }
-
     /**
      * @param Schema $schema
      */
@@ -52,5 +47,10 @@ class Version20170127093841 extends AbstractMigration implements ContainerAwareI
 
         $entryTable->dropIndex($this->indexStarredName);
         $entryTable->dropIndex($this->indexArchivedName);
+    }
+
+    private function getTable($tableName)
+    {
+        return $this->container->getParameter('database_table_prefix') . $tableName;
     }
 }

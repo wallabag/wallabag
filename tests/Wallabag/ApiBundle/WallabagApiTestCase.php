@@ -40,7 +40,7 @@ abstract class WallabagApiTestCase extends WebTestCase
         $loginManager->logInUser($firewallName, $this->user);
 
         // save the login token into the session and put it in a cookie
-        $container->get('session')->set('_security_'.$firewallName, serialize($container->get('security.token_storage')->getToken()));
+        $container->get('session')->set('_security_' . $firewallName, serialize($container->get('security.token_storage')->getToken()));
         $container->get('session')->save();
 
         $session = $container->get('session');

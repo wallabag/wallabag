@@ -2,6 +2,7 @@
 
 namespace Wallabag\CoreBundle\Command;
 
+use Craue\ConfigBundle\Entity\Setting;
 use FOS\UserBundle\Event\UserEvent;
 use FOS\UserBundle\FOSUserEvents;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -14,7 +15,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 use Wallabag\CoreBundle\Entity\Config;
-use Craue\ConfigBundle\Entity\Setting;
 
 class InstallCommand extends ContainerAwareCommand
 {
@@ -86,7 +86,7 @@ class InstallCommand extends ContainerAwareCommand
         if (!extension_loaded($this->getContainer()->getParameter('database_driver'))) {
             $fulfilled = false;
             $status = '<error>ERROR!</error>';
-            $help = 'Database driver "'.$this->getContainer()->getParameter('database_driver').'" is not installed.';
+            $help = 'Database driver "' . $this->getContainer()->getParameter('database_driver') . '" is not installed.';
         }
 
         $rows[] = [sprintf($label, $this->getContainer()->getParameter('database_driver')), $status, $help];
@@ -101,10 +101,10 @@ class InstallCommand extends ContainerAwareCommand
             $conn->connect();
         } catch (\Exception $e) {
             if (false === strpos($e->getMessage(), 'Unknown database')
-                && false === strpos($e->getMessage(), 'database "'.$this->getContainer()->getParameter('database_name').'" does not exist')) {
+                && false === strpos($e->getMessage(), 'database "' . $this->getContainer()->getParameter('database_name') . '" does not exist')) {
                 $fulfilled = false;
                 $status = '<error>ERROR!</error>';
-                $help = 'Can\'t connect to the database: '.$e->getMessage();
+                $help = 'Can\'t connect to the database: ' . $e->getMessage();
             }
         }
 
@@ -123,7 +123,7 @@ class InstallCommand extends ContainerAwareCommand
             if (false === version_compare($version, $minimalVersion, '>')) {
                 $fulfilled = false;
                 $status = '<error>ERROR!</error>';
-                $help = 'Your MySQL version ('.$version.') is too old, consider upgrading ('.$minimalVersion.'+).';
+                $help = 'Your MySQL version (' . $version . ') is too old, consider upgrading (' . $minimalVersion . '+).';
             }
         }
 
@@ -137,21 +137,21 @@ class InstallCommand extends ContainerAwareCommand
             if (isset($matches[1]) & version_compare($matches[1], '9.2.0', '<')) {
                 $fulfilled = false;
                 $status = '<error>ERROR!</error>';
-                $help = 'PostgreSQL should be greater than 9.1 (actual version: '.$matches[1].')';
+                $help = 'PostgreSQL should be greater than 9.1 (actual version: ' . $matches[1] . ')';
             }
         }
 
         $rows[] = [$label, $status, $help];
 
         foreach ($this->functionExists as $functionRequired) {
-            $label = '<comment>'.$functionRequired.'</comment>';
+            $label = '<comment>' . $functionRequired . '</comment>';
             $status = '<info>OK!</info>';
             $help = '';
 
             if (!function_exists($functionRequired)) {
                 $fulfilled = false;
                 $status = '<error>ERROR!</error>';
-                $help = 'You need the '.$functionRequired.' function activated';
+                $help = 'You need the ' . $functionRequired . ' function activated';
             }
 
             $rows[] = [$label, $status, $help];
@@ -351,8 +351,8 @@ class InstallCommand extends ContainerAwareCommand
             $this->getApplication()->setAutoExit(true);
 
             throw new \RuntimeException(
-                'The command "'.$command."\" generates some errors: \n\n"
-                .$output->fetch());
+                'The command "' . $command . "\" generates some errors: \n\n"
+                . $output->fetch());
         }
 
         return $this;
@@ -396,7 +396,7 @@ class InstallCommand extends ContainerAwareCommand
         }
 
         try {
-            return in_array($databaseName, $schemaManager->listDatabases());
+            return in_array($databaseName, $schemaManager->listDatabases(), true);
         } catch (\Doctrine\DBAL\Exception\DriverException $e) {
             // it means we weren't able to get database list, assume the database doesn't exist
 

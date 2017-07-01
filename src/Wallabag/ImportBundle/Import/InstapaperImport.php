@@ -72,7 +72,7 @@ class InstapaperImport extends AbstractImport
             // BUT it can also be the status (since status = folder in Instapaper)
             // and we don't want archive, unread & starred to become a tag
             $tags = null;
-            if (false === in_array($data[3], ['Archive', 'Unread', 'Starred'])) {
+            if (false === in_array($data[3], ['Archive', 'Unread', 'Starred'], true)) {
                 $tags = [$data[3]];
             }
 

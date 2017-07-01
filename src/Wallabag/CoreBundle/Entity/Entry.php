@@ -5,14 +5,14 @@ namespace Wallabag\CoreBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Hateoas\Configuration\Annotation as Hateoas;
-use JMS\Serializer\Annotation\Groups;
-use JMS\Serializer\Annotation\XmlRoot;
 use JMS\Serializer\Annotation\Exclude;
-use JMS\Serializer\Annotation\VirtualProperty;
+use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\SerializedName;
+use JMS\Serializer\Annotation\VirtualProperty;
+use JMS\Serializer\Annotation\XmlRoot;
 use Symfony\Component\Validator\Constraints as Assert;
-use Wallabag\UserBundle\Entity\User;
 use Wallabag\AnnotationBundle\Entity\Annotation;
+use Wallabag\UserBundle\Entity\User;
 
 /**
  * Entry.
@@ -478,7 +478,7 @@ class Entry
      */
     public function timestamps()
     {
-        if (is_null($this->createdAt)) {
+        if (null === $this->createdAt) {
             $this->createdAt = new \DateTime();
         }
 

@@ -2,19 +2,19 @@
 
 namespace Wallabag\CoreBundle\Controller;
 
-use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Adapter\ArrayAdapter;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
 use Pagerfanta\Pagerfanta;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\UserBundle\Entity\User;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class RssController extends Controller
 {
@@ -113,7 +113,7 @@ class RssController extends Controller
             $entries->setCurrentPage($page);
         } catch (OutOfRangeCurrentPageException $e) {
             if ($page > 1) {
-                return $this->redirect($url.'?page='.$entries->getNbPages(), 302);
+                return $this->redirect($url . '?page=' . $entries->getNbPages(), 302);
             }
         }
 
@@ -121,7 +121,7 @@ class RssController extends Controller
             '@WallabagCore/themes/common/Entry/entries.xml.twig',
             [
                 'url_html' => $this->generateUrl('tag_entries', ['slug' => $tag->getSlug()], UrlGeneratorInterface::ABSOLUTE_URL),
-                'type' => 'tag ('.$tag->getLabel().')',
+                'type' => 'tag (' . $tag->getLabel() . ')',
                 'url' => $url,
                 'entries' => $entries,
             ],
@@ -147,19 +147,15 @@ class RssController extends Controller
             case 'starred':
                 $qb = $repository->getBuilderForStarredByUser($user->getId());
                 break;
-
             case 'archive':
                 $qb = $repository->getBuilderForArchiveByUser($user->getId());
                 break;
-
             case 'unread':
                 $qb = $repository->getBuilderForUnreadByUser($user->getId());
                 break;
-
             case 'all':
                 $qb = $repository->getBuilderForAllByUser($user->getId());
                 break;
-
             default:
                 throw new \InvalidArgumentException(sprintf('Type "%s" is not implemented.', $type));
         }
@@ -171,7 +167,7 @@ class RssController extends Controller
         $entries->setMaxPerPage($perPage);
 
         $url = $this->generateUrl(
-            $type.'_rss',
+            $type . '_rss',
             [
                 'username' => $user->getUsername(),
                 'token' => $user->getConfig()->getRssToken(),
@@ -183,7 +179,7 @@ class RssController extends Controller
             $entries->setCurrentPage((int) $page);
         } catch (OutOfRangeCurrentPageException $e) {
             if ($page > 1) {
-                return $this->redirect($url.'?page='.$entries->getNbPages(), 302);
+                return $this->redirect($url . '?page=' . $entries->getNbPages(), 302);
             }
         }
 

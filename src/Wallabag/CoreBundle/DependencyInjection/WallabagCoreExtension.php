@@ -31,7 +31,7 @@ class WallabagCoreExtension extends Extension
         $container->setParameter('wallabag_core.default_internal_settings', $config['default_internal_settings']);
         $container->setParameter('wallabag_core.site_credentials.encryption_key_path', $config['encryption_key_path']);
 
-        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
         $loader->load('parameters.yml');
     }

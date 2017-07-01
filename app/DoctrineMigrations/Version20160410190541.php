@@ -22,11 +22,6 @@ class Version20160410190541 extends AbstractMigration implements ContainerAwareI
         $this->container = $container;
     }
 
-    private function getTable($tableName)
-    {
-        return $this->container->getParameter('database_table_prefix').$tableName;
-    }
-
     /**
      * @param Schema $schema
      */
@@ -44,10 +39,10 @@ class Version20160410190541 extends AbstractMigration implements ContainerAwareI
         $sharePublic = $this->container
             ->get('doctrine.orm.default_entity_manager')
             ->getConnection()
-            ->fetchArray('SELECT * FROM '.$this->getTable('craue_config_setting')." WHERE name = 'share_public'");
+            ->fetchArray('SELECT * FROM ' . $this->getTable('craue_config_setting') . " WHERE name = 'share_public'");
 
         if (false === $sharePublic) {
-            $this->addSql('INSERT INTO '.$this->getTable('craue_config_setting')." (name, value, section) VALUES ('share_public', '1', 'entry')");
+            $this->addSql('INSERT INTO ' . $this->getTable('craue_config_setting') . " (name, value, section) VALUES ('share_public', '1', 'entry')");
         }
     }
 
@@ -59,6 +54,11 @@ class Version20160410190541 extends AbstractMigration implements ContainerAwareI
         $entryTable = $schema->getTable($this->getTable('entry'));
         $entryTable->dropColumn('uid');
 
-        $this->addSql('DELETE FROM '.$this->getTable('craue_config_setting')." WHERE name = 'share_public'");
+        $this->addSql('DELETE FROM ' . $this->getTable('craue_config_setting') . " WHERE name = 'share_public'");
+    }
+
+    private function getTable($tableName)
+    {
+        return $this->container->getParameter('database_table_prefix') . $tableName;
     }
 }

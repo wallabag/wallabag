@@ -2,13 +2,13 @@
 
 namespace Wallabag\CoreBundle\Helper;
 
+use Psr\Log\LoggerInterface;
 use RulerZ\RulerZ;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Repository\EntryRepository;
 use Wallabag\CoreBundle\Repository\TagRepository;
 use Wallabag\UserBundle\Entity\User;
-use Psr\Log\LoggerInterface;
 
 class RuleBasedTagger
 {

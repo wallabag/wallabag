@@ -4,8 +4,8 @@ namespace Tests\Wallabag\CoreBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
-use Wallabag\CoreBundle\Command\CleanDuplicatesCommand;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
+use Wallabag\CoreBundle\Command\CleanDuplicatesCommand;
 use Wallabag\CoreBundle\Entity\Entry;
 
 class CleanDuplicatesCommandTest extends WallabagCoreTestCase

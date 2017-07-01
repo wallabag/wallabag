@@ -2,18 +2,18 @@
 
 namespace Tests\Wallabag\CoreBundle\Helper;
 
-use Psr\Log\NullLogger;
-use Monolog\Logger;
+use Graby\Graby;
 use Monolog\Handler\TestHandler;
-use Wallabag\CoreBundle\Helper\ContentProxy;
+use Monolog\Logger;
+use Psr\Log\NullLogger;
+use Symfony\Component\Validator\ConstraintViolation;
+use Symfony\Component\Validator\ConstraintViolationList;
+use Symfony\Component\Validator\Validator\RecursiveValidator;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
-use Wallabag\UserBundle\Entity\User;
+use Wallabag\CoreBundle\Helper\ContentProxy;
 use Wallabag\CoreBundle\Helper\RuleBasedTagger;
-use Graby\Graby;
-use Symfony\Component\Validator\Validator\RecursiveValidator;
-use Symfony\Component\Validator\ConstraintViolationList;
-use Symfony\Component\Validator\ConstraintViolation;
+use Wallabag\UserBundle\Entity\User;
 
 class ContentProxyTest extends \PHPUnit_Framework_TestCase
 {
@@ -44,14 +44,14 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
         $entry = new Entry(new User());
         $proxy->updateEntry($entry, 'http://user@:80');
 
-        $this->assertEquals('http://user@:80', $entry->getUrl());
+        $this->assertSame('http://user@:80', $entry->getUrl());
         $this->assertEmpty($entry->getTitle());
-        $this->assertEquals($this->fetchingErrorMessage, $entry->getContent());
+        $this->assertSame($this->fetchingErrorMessage, $entry->getContent());
         $this->assertEmpty($entry->getPreviewPicture());
         $this->assertEmpty($entry->getMimetype());
         $this->assertEmpty($entry->getLanguage());
-        $this->assertEquals(0.0, $entry->getReadingTime());
-        $this->assertEquals(false, $entry->getDomainName());
+        $this->assertSame(0.0, $entry->getReadingTime());
+        $this->assertSame(false, $entry->getDomainName());
     }
 
     public function testWithEmptyContent()
@@ -79,14 +79,14 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
         $entry = new Entry(new User());
         $proxy->updateEntry($entry, 'http://0.0.0.0');
 
-        $this->assertEquals('http://0.0.0.0', $entry->getUrl());
+        $this->assertSame('http://0.0.0.0', $entry->getUrl());
         $this->assertEmpty($entry->getTitle());
-        $this->assertEquals($this->fetchingErrorMessage, $entry->getContent());
+        $this->assertSame($this->fetchingErrorMessage, $entry->getContent());
         $this->assertEmpty($entry->getPreviewPicture());
         $this->assertEmpty($entry->getMimetype());
         $this->assertEmpty($entry->getLanguage());
-        $this->assertEquals(0.0, $entry->getReadingTime());
-        $this->assertEquals('0.0.0.0', $entry->getDomainName());
+        $this->assertSame(0.0, $entry->getReadingTime());
+        $this->assertSame('0.0.0.0', $entry->getDomainName());
     }
 
     public function testWithEmptyContentButOG()
@@ -119,15 +119,15 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
         $entry = new Entry(new User());
         $proxy->updateEntry($entry, 'http://domain.io');
 
-        $this->assertEquals('http://domain.io', $entry->getUrl());
-        $this->assertEquals('my title', $entry->getTitle());
-        $this->assertEquals($this->fetchingErrorMessage.'<p><i>But we found a short description: </i></p>desc', $entry->getContent());
+        $this->assertSame('http://domain.io', $entry->getUrl());
+        $this->assertSame('my title', $entry->getTitle());
+        $this->assertSame($this->fetchingErrorMessage . '<p><i>But we found a short description: </i></p>desc', $entry->getContent());
         $this->assertEmpty($entry->getPreviewPicture());
         $this->assertEmpty($entry->getLanguage());
         $this->assertEmpty($entry->getHttpStatus());
         $this->assertEmpty($entry->getMimetype());
-        $this->assertEquals(0.0, $entry->getReadingTime());
-        $this->assertEquals('domain.io', $entry->getDomainName());
+        $this->assertSame(0.0, $entry->getReadingTime());
+        $this->assertSame('domain.io', $entry->getDomainName());
     }
 
     public function testWithContent()
@@ -161,15 +161,15 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
         $entry = new Entry(new User());
         $proxy->updateEntry($entry, 'http://0.0.0.0');
 
-        $this->assertEquals('http://1.1.1.1', $entry->getUrl());
-        $this->assertEquals('this is my title', $entry->getTitle());
+        $this->assertSame('http://1.1.1.1', $entry->getUrl());
+        $this->assertSame('this is my title', $entry->getTitle());
         $this->assertContains('this is my content', $entry->getContent());
-        $this->assertEquals('http://3.3.3.3/cover.jpg', $entry->getPreviewPicture());
-        $this->assertEquals('text/html', $entry->getMimetype());
-        $this->assertEquals('fr', $entry->getLanguage());
-        $this->assertEquals('200', $entry->getHttpStatus());
-        $this->assertEquals(4.0, $entry->getReadingTime());
-        $this->assertEquals('1.1.1.1', $entry->getDomainName());
+        $this->assertSame('http://3.3.3.3/cover.jpg', $entry->getPreviewPicture());
+        $this->assertSame('text/html', $entry->getMimetype());
+        $this->assertSame('fr', $entry->getLanguage());
+        $this->assertSame('200', $entry->getHttpStatus());
+        $this->assertSame(4.0, $entry->getReadingTime());
+        $this->assertSame('1.1.1.1', $entry->getDomainName());
     }
 
     public function testWithContentAndNoOgImage()
@@ -203,15 +203,15 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
         $entry = new Entry(new User());
         $proxy->updateEntry($entry, 'http://0.0.0.0');
 
-        $this->assertEquals('http://1.1.1.1', $entry->getUrl());
-        $this->assertEquals('this is my title', $entry->getTitle());
+        $this->assertSame('http://1.1.1.1', $entry->getUrl());
+        $this->assertSame('this is my title', $entry->getTitle());
         $this->assertContains('this is my content', $entry->getContent());
         $this->assertNull($entry->getPreviewPicture());
-        $this->assertEquals('text/html', $entry->getMimetype());
-        $this->assertEquals('fr', $entry->getLanguage());
-        $this->assertEquals('200', $entry->getHttpStatus());
-        $this->assertEquals(4.0, $entry->getReadingTime());
-        $this->assertEquals('1.1.1.1', $entry->getDomainName());
+        $this->assertSame('text/html', $entry->getMimetype());
+        $this->assertSame('fr', $entry->getLanguage());
+        $this->assertSame('200', $entry->getHttpStatus());
+        $this->assertSame(4.0, $entry->getReadingTime());
+        $this->assertSame('1.1.1.1', $entry->getDomainName());
     }
 
     public function testWithContentAndBadLanguage()
@@ -248,14 +248,14 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
         $entry = new Entry(new User());
         $proxy->updateEntry($entry, 'http://0.0.0.0');
 
-        $this->assertEquals('http://1.1.1.1', $entry->getUrl());
-        $this->assertEquals('this is my title', $entry->getTitle());
+        $this->assertSame('http://1.1.1.1', $entry->getUrl());
+        $this->assertSame('this is my title', $entry->getTitle());
         $this->assertContains('this is my content', $entry->getContent());
-        $this->assertEquals('text/html', $entry->getMimetype());
+        $this->assertSame('text/html', $entry->getMimetype());
         $this->assertNull($entry->getLanguage());
-        $this->assertEquals('200', $entry->getHttpStatus());
-        $this->assertEquals(4.0, $entry->getReadingTime());
-        $this->assertEquals('1.1.1.1', $entry->getDomainName());
+        $this->assertSame('200', $entry->getHttpStatus());
+        $this->assertSame(4.0, $entry->getReadingTime());
+        $this->assertSame('1.1.1.1', $entry->getDomainName());
     }
 
     public function testWithContentAndBadOgImage()
@@ -297,15 +297,15 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
         $entry = new Entry(new User());
         $proxy->updateEntry($entry, 'http://0.0.0.0');
 
-        $this->assertEquals('http://1.1.1.1', $entry->getUrl());
-        $this->assertEquals('this is my title', $entry->getTitle());
+        $this->assertSame('http://1.1.1.1', $entry->getUrl());
+        $this->assertSame('this is my title', $entry->getTitle());
         $this->assertContains('this is my content', $entry->getContent());
         $this->assertNull($entry->getPreviewPicture());
-        $this->assertEquals('text/html', $entry->getMimetype());
-        $this->assertEquals('fr', $entry->getLanguage());
-        $this->assertEquals('200', $entry->getHttpStatus());
-        $this->assertEquals(4.0, $entry->getReadingTime());
-        $this->assertEquals('1.1.1.1', $entry->getDomainName());
+        $this->assertSame('text/html', $entry->getMimetype());
+        $this->assertSame('fr', $entry->getLanguage());
+        $this->assertSame('200', $entry->getHttpStatus());
+        $this->assertSame(4.0, $entry->getReadingTime());
+        $this->assertSame('1.1.1.1', $entry->getDomainName());
     }
 
     public function testWithForcedContent()
@@ -333,14 +333,14 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
             ]
         );
 
-        $this->assertEquals('http://1.1.1.1', $entry->getUrl());
-        $this->assertEquals('this is my title', $entry->getTitle());
+        $this->assertSame('http://1.1.1.1', $entry->getUrl());
+        $this->assertSame('this is my title', $entry->getTitle());
         $this->assertContains('this is my content', $entry->getContent());
-        $this->assertEquals('text/html', $entry->getMimetype());
-        $this->assertEquals('fr', $entry->getLanguage());
-        $this->assertEquals(4.0, $entry->getReadingTime());
-        $this->assertEquals('1.1.1.1', $entry->getDomainName());
-        $this->assertEquals('24/03/2014', $entry->getPublishedAt()->format('d/m/Y'));
+        $this->assertSame('text/html', $entry->getMimetype());
+        $this->assertSame('fr', $entry->getLanguage());
+        $this->assertSame(4.0, $entry->getReadingTime());
+        $this->assertSame('1.1.1.1', $entry->getDomainName());
+        $this->assertSame('24/03/2014', $entry->getPublishedAt()->format('d/m/Y'));
         $this->assertContains('Jeremy', $entry->getPublishedBy());
         $this->assertContains('Nico', $entry->getPublishedBy());
         $this->assertContains('Thomas', $entry->getPublishedBy());
@@ -371,14 +371,14 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
             ]
         );
 
-        $this->assertEquals('http://1.1.1.1', $entry->getUrl());
-        $this->assertEquals('this is my title', $entry->getTitle());
+        $this->assertSame('http://1.1.1.1', $entry->getUrl());
+        $this->assertSame('this is my title', $entry->getTitle());
         $this->assertContains('this is my content', $entry->getContent());
-        $this->assertEquals('text/html', $entry->getMimetype());
-        $this->assertEquals('fr', $entry->getLanguage());
-        $this->assertEquals(4.0, $entry->getReadingTime());
-        $this->assertEquals('1.1.1.1', $entry->getDomainName());
-        $this->assertEquals('08/09/2016', $entry->getPublishedAt()->format('d/m/Y'));
+        $this->assertSame('text/html', $entry->getMimetype());
+        $this->assertSame('fr', $entry->getLanguage());
+        $this->assertSame(4.0, $entry->getReadingTime());
+        $this->assertSame('1.1.1.1', $entry->getDomainName());
+        $this->assertSame('08/09/2016', $entry->getPublishedAt()->format('d/m/Y'));
     }
 
     public function testWithForcedContentAndBadDate()
@@ -406,13 +406,13 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
             ]
         );
 
-        $this->assertEquals('http://1.1.1.1', $entry->getUrl());
-        $this->assertEquals('this is my title', $entry->getTitle());
+        $this->assertSame('http://1.1.1.1', $entry->getUrl());
+        $this->assertSame('this is my title', $entry->getTitle());
         $this->assertContains('this is my content', $entry->getContent());
-        $this->assertEquals('text/html', $entry->getMimetype());
-        $this->assertEquals('fr', $entry->getLanguage());
-        $this->assertEquals(4.0, $entry->getReadingTime());
-        $this->assertEquals('1.1.1.1', $entry->getDomainName());
+        $this->assertSame('text/html', $entry->getMimetype());
+        $this->assertSame('fr', $entry->getLanguage());
+        $this->assertSame(4.0, $entry->getReadingTime());
+        $this->assertSame('1.1.1.1', $entry->getDomainName());
         $this->assertNull($entry->getPublishedAt());
 
         $records = $handler->getRecords();
@@ -488,14 +488,14 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
             ]
         );
 
-        $this->assertEquals('http://1.1.1.1', $entry->getUrl());
-        $this->assertEquals('this is my title', $entry->getTitle());
+        $this->assertSame('http://1.1.1.1', $entry->getUrl());
+        $this->assertSame('this is my title', $entry->getTitle());
         $this->assertNotContains($escapedString, $entry->getContent());
-        $this->assertEquals('http://3.3.3.3/cover.jpg', $entry->getPreviewPicture());
-        $this->assertEquals('text/html', $entry->getMimetype());
-        $this->assertEquals('fr', $entry->getLanguage());
-        $this->assertEquals('200', $entry->getHttpStatus());
-        $this->assertEquals('1.1.1.1', $entry->getDomainName());
+        $this->assertSame('http://3.3.3.3/cover.jpg', $entry->getPreviewPicture());
+        $this->assertSame('text/html', $entry->getMimetype());
+        $this->assertSame('fr', $entry->getLanguage());
+        $this->assertSame('200', $entry->getHttpStatus());
+        $this->assertSame('1.1.1.1', $entry->getDomainName());
     }
 
     private function getTaggerMock()

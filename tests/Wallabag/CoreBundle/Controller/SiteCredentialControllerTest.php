@@ -15,7 +15,7 @@ class SiteCredentialControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/site-credentials/');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
 
         $body = $crawler->filter('body')->extract(['_text'])[0];
 
@@ -30,7 +30,7 @@ class SiteCredentialControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/site-credentials/new');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
 
         $body = $crawler->filter('body')->extract(['_text'])[0];
 
@@ -47,7 +47,7 @@ class SiteCredentialControllerTest extends WallabagCoreTestCase
 
         $client->submit($form, $data);
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $crawler = $client->followRedirect();
 
@@ -61,9 +61,9 @@ class SiteCredentialControllerTest extends WallabagCoreTestCase
 
         $credential = $this->createSiteCredential($client);
 
-        $crawler = $client->request('GET', '/site-credentials/'.$credential->getId().'/edit');
+        $crawler = $client->request('GET', '/site-credentials/' . $credential->getId() . '/edit');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
 
         $body = $crawler->filter('body')->extract(['_text'])[0];
 
@@ -80,7 +80,7 @@ class SiteCredentialControllerTest extends WallabagCoreTestCase
 
         $client->submit($form, $data);
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $crawler = $client->followRedirect();
 
@@ -96,9 +96,9 @@ class SiteCredentialControllerTest extends WallabagCoreTestCase
 
         $this->logInAs('bob');
 
-        $client->request('GET', '/site-credentials/'.$credential->getId().'/edit');
+        $client->request('GET', '/site-credentials/' . $credential->getId() . '/edit');
 
-        $this->assertEquals(403, $client->getResponse()->getStatusCode());
+        $this->assertSame(403, $client->getResponse()->getStatusCode());
     }
 
     public function testDeleteSiteCredential()
@@ -108,15 +108,15 @@ class SiteCredentialControllerTest extends WallabagCoreTestCase
 
         $credential = $this->createSiteCredential($client);
 
-        $crawler = $client->request('GET', '/site-credentials/'.$credential->getId().'/edit');
+        $crawler = $client->request('GET', '/site-credentials/' . $credential->getId() . '/edit');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
 
         $deleteForm = $crawler->filter('body')->selectButton('site_credential.form.delete')->form();
 
         $client->submit($deleteForm, []);
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $crawler = $client->followRedirect();
 

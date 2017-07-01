@@ -3,14 +3,14 @@
 namespace Wallabag\AnnotationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Exclude;
-use JMS\Serializer\Annotation\VirtualProperty;
-use JMS\Serializer\Annotation\SerializedName;
+use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\SerializedName;
+use JMS\Serializer\Annotation\VirtualProperty;
 use Symfony\Component\Validator\Constraints as Assert;
-use Wallabag\UserBundle\Entity\User;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\UserBundle\Entity\User;
 
 /**
  * Annotation.
@@ -139,7 +139,7 @@ class Annotation
      */
     public function timestamps()
     {
-        if (is_null($this->createdAt)) {
+        if (null === $this->createdAt) {
             $this->createdAt = new \DateTime();
         }
         $this->updatedAt = new \DateTime();

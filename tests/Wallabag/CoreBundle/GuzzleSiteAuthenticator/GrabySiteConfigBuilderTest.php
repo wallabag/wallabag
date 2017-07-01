@@ -2,13 +2,13 @@
 
 namespace Tests\Wallabag\CoreBundle\GuzzleSiteAuthenticator;
 
-use Monolog\Handler\TestHandler;
-use Monolog\Logger;
 use BD\GuzzleSiteAuthenticator\SiteConfig\SiteConfig;
 use Graby\SiteConfig\SiteConfig as GrabySiteConfig;
-use Wallabag\CoreBundle\GuzzleSiteAuthenticator\GrabySiteConfigBuilder;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Monolog\Handler\TestHandler;
+use Monolog\Logger;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Wallabag\CoreBundle\GuzzleSiteAuthenticator\GrabySiteConfigBuilder;
 
 class GrabySiteConfigBuilderTest extends \PHPUnit_Framework_TestCase
 {
@@ -68,7 +68,7 @@ class GrabySiteConfigBuilderTest extends \PHPUnit_Framework_TestCase
 
         $config = $this->builder->buildForHost('www.example.com');
 
-        $this->assertEquals(
+        $this->assertSame(
             new SiteConfig([
                 'host' => 'example.com',
                 'requiresLogin' => true,

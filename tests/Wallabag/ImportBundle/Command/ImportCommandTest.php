@@ -4,8 +4,8 @@ namespace Tests\Wallabag\ImportBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
-use Wallabag\ImportBundle\Command\ImportCommand;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
+use Wallabag\ImportBundle\Command\ImportCommand;
 
 class ImportCommandTest extends WallabagCoreTestCase
 {
@@ -74,7 +74,7 @@ class ImportCommandTest extends WallabagCoreTestCase
         $tester->execute([
             'command' => $command->getName(),
             'username' => 'admin',
-            'filepath' => $application->getKernel()->getContainer()->getParameter('kernel.root_dir').'/../tests/Wallabag/ImportBundle/fixtures/wallabag-v2-read.json',
+            'filepath' => $application->getKernel()->getContainer()->getParameter('kernel.root_dir') . '/../tests/Wallabag/ImportBundle/fixtures/wallabag-v2-read.json',
             '--importer' => 'v2',
         ]);
 
@@ -93,7 +93,7 @@ class ImportCommandTest extends WallabagCoreTestCase
         $tester->execute([
             'command' => $command->getName(),
             'username' => 1,
-            'filepath' => $application->getKernel()->getContainer()->getParameter('kernel.root_dir').'/../tests/Wallabag/ImportBundle/fixtures/wallabag-v2-read.json',
+            'filepath' => $application->getKernel()->getContainer()->getParameter('kernel.root_dir') . '/../tests/Wallabag/ImportBundle/fixtures/wallabag-v2-read.json',
             '--useUserId' => true,
             '--importer' => 'v2',
         ]);

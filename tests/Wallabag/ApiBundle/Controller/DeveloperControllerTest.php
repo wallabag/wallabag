@@ -15,7 +15,7 @@ class DeveloperControllerTest extends WallabagCoreTestCase
         $nbClients = $em->getRepository('WallabagApiBundle:Client')->findAll();
 
         $crawler = $client->request('GET', '/developer/client/create');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
 
         $form = $crawler->filter('button[type=submit]')->form();
 
@@ -25,7 +25,7 @@ class DeveloperControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
 
         $newNbClients = $em->getRepository('WallabagApiBundle:Client')->findAll();
         $this->assertGreaterThan(count($nbClients), count($newNbClients));
@@ -47,7 +47,7 @@ class DeveloperControllerTest extends WallabagCoreTestCase
             'password' => 'mypassword',
         ]);
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
 
         $data = json_decode($client->getResponse()->getContent(), true);
         $this->assertArrayHasKey('access_token', $data);
@@ -67,7 +67,7 @@ class DeveloperControllerTest extends WallabagCoreTestCase
             'client_secret' => $apiClient->getSecret(),
         ]);
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
 
         $data = json_decode($client->getResponse()->getContent(), true);
         $this->assertArrayHasKey('access_token', $data);
@@ -84,8 +84,8 @@ class DeveloperControllerTest extends WallabagCoreTestCase
         $nbClients = $em->getRepository('WallabagApiBundle:Client')->findAll();
 
         $crawler = $client->request('GET', '/developer');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertEquals(count($nbClients), $crawler->filter('ul[class=collapsible] li')->count());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(count($nbClients), $crawler->filter('ul[class=collapsible] li')->count());
     }
 
     public function testDeveloperHowto()
@@ -94,7 +94,7 @@ class DeveloperControllerTest extends WallabagCoreTestCase
         $client = $this->getClient();
 
         $crawler = $client->request('GET', '/developer/howto/first-app');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
     public function testRemoveClient()
@@ -109,8 +109,8 @@ class DeveloperControllerTest extends WallabagCoreTestCase
         $this->assertContains('no_client', $client->getResponse()->getContent());
 
         $this->logInAs('bob');
-        $client->request('GET', '/developer/client/delete/'.$adminApiClient->getId());
-        $this->assertEquals(403, $client->getResponse()->getStatusCode());
+        $client->request('GET', '/developer/client/delete/' . $adminApiClient->getId());
+        $this->assertSame(403, $client->getResponse()->getStatusCode());
 
         // Try to remove the admin's client with the good user
         $this->logInAs('admin');
@@ -123,7 +123,7 @@ class DeveloperControllerTest extends WallabagCoreTestCase
         ;
 
         $client->click($link);
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $this->assertNull(
             $em->getRepository('WallabagApiBundle:Client')->find($adminApiClient->getId()),
@@ -133,8 +133,8 @@ class DeveloperControllerTest extends WallabagCoreTestCase
 
     /**
      * @param string $username
+     * @param array  $grantTypes
      *
-     * @param array $grantTypes
      * @return Client
      */
     private function createApiClientForUser($username, $grantTypes = ['password'])
@@ -142,7 +142,7 @@ class DeveloperControllerTest extends WallabagCoreTestCase
         $client = $this->getClient();
         $em = $client->getContainer()->get('doctrine.orm.entity_manager');
         $userManager = $client->getContainer()->get('fos_user.user_manager');
-        $user = $userManager->findUserBy(array('username' => $username));
+        $user = $userManager->findUserBy(['username' => $username]);
         $apiClient = new Client($user);
         $apiClient->setName('My app');
         $apiClient->setAllowedGrantTypes($grantTypes);

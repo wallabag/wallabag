@@ -2,12 +2,12 @@
 
 namespace Wallabag\CoreBundle\Helper;
 
-use Psr\Log\LoggerInterface;
-use Symfony\Component\DomCrawler\Crawler;
 use GuzzleHttp\Client;
 use GuzzleHttp\Message\Response;
-use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeExtensionGuesser;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeExtensionGuesser;
 
 class DownloadImages
 {
@@ -28,17 +28,6 @@ class DownloadImages
         $this->mimeGuesser = new MimeTypeExtensionGuesser();
 
         $this->setFolder();
-    }
-
-    /**
-     * Setup base folder where all images are going to be saved.
-     */
-    private function setFolder()
-    {
-        // if folder doesn't exist, attempt to create one and store the folder name in property $folder
-        if (!file_exists($this->baseFolder)) {
-            mkdir($this->baseFolder, 0755, true);
-        }
     }
 
     /**
@@ -97,9 +86,9 @@ class DownloadImages
             $relativePath = $this->getRelativePath($entryId);
         }
 
-        $this->logger->debug('DownloadImages: working on image: '.$imagePath);
+        $this->logger->debug('DownloadImages: working on image: ' . $imagePath);
 
-        $folderPath = $this->baseFolder.'/'.$relativePath;
+        $folderPath = $this->baseFolder . '/' . $relativePath;
 
         // build image path
         $absolutePath = $this->getAbsoluteLink($url, $imagePath);
@@ -123,7 +112,7 @@ class DownloadImages
         }
 
         $hashImage = hash('crc32', $absolutePath);
-        $localPath = $folderPath.'/'.$hashImage.'.'.$ext;
+        $localPath = $folderPath . '/' . $hashImage . '.' . $ext;
 
         try {
             $im = imagecreatefromstring($res->getBody());
@@ -156,7 +145,7 @@ class DownloadImages
 
         imagedestroy($im);
 
-        return $this->wallabagUrl.'/assets/images/'.$relativePath.'/'.$hashImage.'.'.$ext;
+        return $this->wallabagUrl . '/assets/images/' . $relativePath . '/' . $hashImage . '.' . $ext;
     }
 
     /**
@@ -167,7 +156,7 @@ class DownloadImages
     public function removeImages($entryId)
     {
         $relativePath = $this->getRelativePath($entryId);
-        $folderPath = $this->baseFolder.'/'.$relativePath;
+        $folderPath = $this->baseFolder . '/' . $relativePath;
 
         $finder = new Finder();
         $finder
@@ -183,6 +172,17 @@ class DownloadImages
     }
 
     /**
+     * Setup base folder where all images are going to be saved.
+     */
+    private function setFolder()
+    {
+        // if folder doesn't exist, attempt to create one and store the folder name in property $folder
+        if (!file_exists($this->baseFolder)) {
+            mkdir($this->baseFolder, 0755, true);
+        }
+    }
+
+    /**
      * Generate the folder where we are going to save images based on the entry url.
      *
      * @param int $entryId ID of the entry
@@ -192,8 +192,8 @@ class DownloadImages
     private function getRelativePath($entryId)
     {
         $hashId = hash('crc32', $entryId);
-        $relativePath = $hashId[0].'/'.$hashId[1].'/'.$hashId;
-        $folderPath = $this->baseFolder.'/'.$relativePath;
+        $relativePath = $hashId[0] . '/' . $hashId[1] . '/' . $hashId;
+        $folderPath = $this->baseFolder . '/' . $relativePath;
 
         if (!file_exists($folderPath)) {
             mkdir($folderPath, 0777, true);
@@ -270,7 +270,7 @@ class DownloadImages
         }
 
         if (!in_array($ext, ['jpeg', 'jpg', 'gif', 'png'], true)) {
-            $this->logger->error('DownloadImages: Processed image with not allowed extension. Skipping: '.$imagePath);
+            $this->logger->error('DownloadImages: Processed image with not allowed extension. Skipping: ' . $imagePath);
 
             return false;
         }

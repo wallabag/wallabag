@@ -2,8 +2,8 @@
 
 namespace Wallabag\ImportBundle\Import;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
 class ImportCompilerPass implements CompilerPassInterface

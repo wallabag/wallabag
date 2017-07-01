@@ -44,7 +44,7 @@ class DetectActiveTheme implements DeviceDetectionInterface
     {
         $token = $this->tokenStorage->getToken();
 
-        if (is_null($token)) {
+        if (null === $token) {
             return $this->defaultTheme;
         }
 

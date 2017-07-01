@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Add site credential table to store username & password for some website (behind authentication or paywall)
+ * Add site credential table to store username & password for some website (behind authentication or paywall).
  */
 class Version20170501115751 extends AbstractMigration implements ContainerAwareInterface
 {
@@ -20,11 +20,6 @@ class Version20170501115751 extends AbstractMigration implements ContainerAwareI
     public function setContainer(ContainerInterface $container = null)
     {
         $this->container = $container;
-    }
-
-    private function getTable($tableName)
-    {
-        return $this->container->getParameter('database_table_prefix').$tableName;
     }
 
     /**
@@ -57,5 +52,10 @@ class Version20170501115751 extends AbstractMigration implements ContainerAwareI
     public function down(Schema $schema)
     {
         $schema->dropTable($this->getTable('site_credential'));
+    }
+
+    private function getTable($tableName)
+    {
+        return $this->container->getParameter('database_table_prefix') . $tableName;
     }
 }

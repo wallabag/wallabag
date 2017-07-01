@@ -6,14 +6,14 @@ use Hateoas\Configuration\Route;
 use Hateoas\Representation\Factory\PagerfantaFactory;
 use JMS\Serializer\SerializationContext;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
-use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
-use Wallabag\CoreBundle\Event\EntrySavedEvent;
 use Wallabag\CoreBundle\Event\EntryDeletedEvent;
+use Wallabag\CoreBundle\Event\EntrySavedEvent;
 
 class EntryRestController extends WallabagRestController
 {
@@ -59,7 +59,7 @@ class EntryRestController extends WallabagRestController
         $url = $request->query->get('url', '');
 
         if (empty($url)) {
-            throw $this->createAccessDeniedException('URL is empty?, logged user id: '.$this->getUser()->getId());
+            throw $this->createAccessDeniedException('URL is empty?, logged user id: ' . $this->getUser()->getId());
         }
 
         $res = $this->getDoctrine()
@@ -239,9 +239,9 @@ class EntryRestController extends WallabagRestController
      *       }
      * )
      *
-     * @return JsonResponse
-     *
      * @throws HttpException When limit is reached
+     *
+     * @return JsonResponse
      */
     public function postEntriesListAction(Request $request)
     {
@@ -678,11 +678,11 @@ class EntryRestController extends WallabagRestController
             ]);
         }
 
-        if (!is_null($isArchived)) {
+        if (null !== $isArchived) {
             $entry->setArchived((bool) $isArchived);
         }
 
-        if (!is_null($isStarred)) {
+        if (null !== $isStarred) {
             $entry->setStarred((bool) $isStarred);
         }
 
@@ -690,7 +690,7 @@ class EntryRestController extends WallabagRestController
             $this->get('wallabag_core.tags_assigner')->assignTagsToEntry($entry, $tags);
         }
 
-        if (!is_null($isPublic)) {
+        if (null !== $isPublic) {
             if (true === (bool) $isPublic && null === $entry->getUid()) {
                 $entry->generateUid();
             } elseif (false === (bool) $isPublic) {

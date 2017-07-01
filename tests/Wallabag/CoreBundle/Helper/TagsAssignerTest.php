@@ -5,8 +5,8 @@ namespace Tests\Wallabag\CoreBundle\Helper;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Helper\TagsAssigner;
-use Wallabag\UserBundle\Entity\User;
 use Wallabag\CoreBundle\Repository\TagRepository;
+use Wallabag\UserBundle\Entity\User;
 
 class TagsAssignerTest extends \PHPUnit_Framework_TestCase
 {
@@ -20,8 +20,8 @@ class TagsAssignerTest extends \PHPUnit_Framework_TestCase
         $tagsAssigner->assignTagsToEntry($entry, ['   tag1', 'tag2   ']);
 
         $this->assertCount(2, $entry->getTags());
-        $this->assertEquals('tag1', $entry->getTags()[0]->getLabel());
-        $this->assertEquals('tag2', $entry->getTags()[1]->getLabel());
+        $this->assertSame('tag1', $entry->getTags()[0]->getLabel());
+        $this->assertSame('tag2', $entry->getTags()[1]->getLabel());
     }
 
     public function testAssignTagsWithString()
@@ -34,8 +34,8 @@ class TagsAssignerTest extends \PHPUnit_Framework_TestCase
         $tagsAssigner->assignTagsToEntry($entry, 'tag1, tag2');
 
         $this->assertCount(2, $entry->getTags());
-        $this->assertEquals('tag1', $entry->getTags()[0]->getLabel());
-        $this->assertEquals('tag2', $entry->getTags()[1]->getLabel());
+        $this->assertSame('tag1', $entry->getTags()[0]->getLabel());
+        $this->assertSame('tag2', $entry->getTags()[1]->getLabel());
     }
 
     public function testAssignTagsWithEmptyArray()
@@ -76,8 +76,8 @@ class TagsAssignerTest extends \PHPUnit_Framework_TestCase
         $tagsAssigner->assignTagsToEntry($entry, 'tag1, tag2');
 
         $this->assertCount(2, $entry->getTags());
-        $this->assertEquals('tag1', $entry->getTags()[0]->getLabel());
-        $this->assertEquals('tag2', $entry->getTags()[1]->getLabel());
+        $this->assertSame('tag1', $entry->getTags()[0]->getLabel());
+        $this->assertSame('tag2', $entry->getTags()[1]->getLabel());
     }
 
     public function testAssignTagsNotFlushed()
@@ -96,7 +96,7 @@ class TagsAssignerTest extends \PHPUnit_Framework_TestCase
         $tagsAssigner->assignTagsToEntry($entry, 'tag1', [$tagEntity]);
 
         $this->assertCount(1, $entry->getTags());
-        $this->assertEquals('tag1', $entry->getTags()[0]->getLabel());
+        $this->assertSame('tag1', $entry->getTags()[0]->getLabel());
     }
 
     private function getTagRepositoryMock()
