@@ -51,7 +51,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty($entry->getMimetype());
         $this->assertEmpty($entry->getLanguage());
         $this->assertSame(0.0, $entry->getReadingTime());
-        $this->assertSame(false, $entry->getDomainName());
+        $this->assertSame(null, $entry->getDomainName());
     }
 
     public function testWithEmptyContent()

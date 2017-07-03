@@ -230,8 +230,8 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertArrayHasKey('created_at', $content[0]);
         $this->assertArrayHasKey('updated_at', $content[0]);
 
-        $this->assertSame($contentInDB->isArchived(), $content[0]['is_archived']);
-        $this->assertSame($contentInDB->isStarred(), $content[0]['is_starred']);
+        $this->assertSame((int) $contentInDB->isArchived(), $content[0]['is_archived']);
+        $this->assertSame((int) $contentInDB->isStarred(), $content[0]['is_starred']);
         $this->assertSame($contentInDB->getTitle(), $content[0]['title']);
         $this->assertSame($contentInDB->getUrl(), $content[0]['url']);
         $this->assertSame([['text' => 'This is my annotation /o/', 'quote' => 'content']], $content[0]['annotations']);

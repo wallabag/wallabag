@@ -43,6 +43,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $client = $this->getClient();
 
         $client->request('GET', '/unread/list');
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
         $crawler = $client->followRedirect();
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
@@ -505,7 +506,7 @@ class EntryControllerTest extends WallabagCoreTestCase
             ->getRepository('WallabagCoreBundle:Entry')
             ->find($entry->getId());
 
-        $this->assertSame($res->isArchived(), true);
+        $this->assertSame(1, $res->isArchived());
     }
 
     public function testToggleStar()
@@ -528,7 +529,7 @@ class EntryControllerTest extends WallabagCoreTestCase
             ->getRepository('WallabagCoreBundle:Entry')
             ->findOneById($entry->getId());
 
-        $this->assertSame($res->isStarred(), true);
+        $this->assertSame(1, $res->isStarred());
     }
 
     public function testDelete()
@@ -1004,7 +1005,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertSame($url, $entry->getUrl());
         $this->assertContains('Perpignan', $entry->getTitle());
         // instead of checking for the filename (which might change) check that the image is now local
-        $this->assertContains('https://your-wallabag-url-instance.com/assets/images/', $entry->getContent());
+        $this->assertContains($client->getContainer()->getParameter('domain_name') . '/assets/images/', $entry->getContent());
 
         $client->getContainer()->get('craue_config')->set('download_images_enabled', 0);
     }
@@ -1296,7 +1297,7 @@ class EntryControllerTest extends WallabagCoreTestCase
             ],
             'fucked_list_of_languages' => [
                 'http://geocatalog.webservice-energy.org/geonetwork/srv/eng/main.home',
-                '',
+                null,
             ],
             'es-ES' => [
                 'http://www.muylinux.com/2015/04/17/odf-reino-unido-microsoft-google',

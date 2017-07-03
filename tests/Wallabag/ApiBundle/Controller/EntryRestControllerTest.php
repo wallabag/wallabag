@@ -405,8 +405,8 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         $this->assertGreaterThan(0, $content['id']);
         $this->assertSame('http://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html', $content['url']);
-        $this->assertSame(false, $content['is_archived']);
-        $this->assertSame(false, $content['is_starred']);
+        $this->assertSame(0, $content['is_archived']);
+        $this->assertSame(0, $content['is_starred']);
         $this->assertSame('New title for my article', $content['title']);
         $this->assertSame(1, $content['user_id']);
         $this->assertCount(2, $content['tags']);
@@ -433,8 +433,8 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         $this->assertGreaterThan(0, $content['id']);
         $this->assertSame('http://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html', $content['url']);
-        $this->assertSame(true, $content['is_archived']);
-        $this->assertSame(false, $content['is_starred']);
+        $this->assertSame(1, $content['is_archived']);
+        $this->assertSame(0, $content['is_starred']);
         $this->assertCount(3, $content['tags']);
     }
 
@@ -485,8 +485,8 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         $this->assertGreaterThan(0, $content['id']);
         $this->assertSame('http://www.lemonde.fr/idees/article/2016/02/08/preserver-la-liberte-d-expression-sur-les-reseaux-sociaux_4861503_3232.html', $content['url']);
-        $this->assertSame(true, $content['is_archived']);
-        $this->assertSame(true, $content['is_starred']);
+        $this->assertSame(1, $content['is_archived']);
+        $this->assertSame(1, $content['is_starred']);
         $this->assertSame(1, $content['user_id']);
     }
 
@@ -504,8 +504,8 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         $this->assertGreaterThan(0, $content['id']);
         $this->assertSame('http://www.lemonde.fr/idees/article/2016/02/08/preserver-la-liberte-d-expression-sur-les-reseaux-sociaux_4861503_3232.html', $content['url']);
-        $this->assertSame(false, $content['is_archived']);
-        $this->assertSame(true, $content['is_starred']);
+        $this->assertSame(0, $content['is_archived']);
+        $this->assertSame(1, $content['is_starred']);
     }
 
     public function testPatchEntry()
@@ -691,7 +691,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
-        $this->assertSame(true, $content['is_archived']);
+        $this->assertSame(1, $content['is_archived']);
     }
 
     public function testSaveIsStarredAfterPost()
@@ -713,7 +713,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
-        $this->assertSame(true, $content['is_starred']);
+        $this->assertSame(1, $content['is_starred']);
     }
 
     public function testSaveIsArchivedAfterPatch()
@@ -735,7 +735,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
-        $this->assertSame(true, $content['is_archived']);
+        $this->assertSame(1, $content['is_archived']);
     }
 
     public function testSaveIsStarredAfterPatch()
@@ -756,7 +756,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
-        $this->assertSame(true, $content['is_starred']);
+        $this->assertSame(1, $content['is_starred']);
     }
 
     public function dataForEntriesExistWithUrl()

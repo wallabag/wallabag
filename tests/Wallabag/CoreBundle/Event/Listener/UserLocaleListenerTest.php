@@ -53,6 +53,6 @@ class UserLocaleListenerTest extends \PHPUnit_Framework_TestCase
 
         $listener->onInteractiveLogin($event);
 
-        $this->assertSame('', $session->get('_locale'));
+        $this->assertNull($session->get('_locale'));
     }
 }

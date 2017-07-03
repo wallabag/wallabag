@@ -325,7 +325,7 @@ class EntryRepository extends EntityRepository
             ->where('e.user=:userId')->setParameter('userId', $userId)
         ;
 
-        return $qb->getQuery()->getSingleScalarResult();
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
     /**
@@ -345,7 +345,7 @@ class EntryRepository extends EntityRepository
             ->andWhere('t.id=:tagId')->setParameter('tagId', $tagId)
         ;
 
-        return $qb->getQuery()->getSingleScalarResult();
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
     /**
